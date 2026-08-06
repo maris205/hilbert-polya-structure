@@ -1,0 +1,99 @@
+\section{Computer-assisted proof details}
+\label{app:cap}
+
+The accepted branch archive composes a validated ODE layer with a finite
+interval-operator layer.  The distinction is important for interpreting the
+independent checker.
+
+\subsection{Validated flow and variational equations}
+
+The normalized Hamiltonian equations are integrated together with the first
+variational system
+\begin{equation}
+ \dot z=X_{K_\epsilon}(z),
+ \qquad
+ \dot Y=DX_{K_\epsilon}(z)Y,
+ \qquad Y(0)=I.
+ \label{eq:variational-system}
+\end{equation}
+The parameter \(\epsilon\) is enclosed over each slab.  A validated
+\(C^1\)-Lohner set controls both the image of the initial root box and the
+derivative needed for \(D_xF\)
+\citep{Lohner1987,NedialkovJacksonCorliss1999,Zgliczynski2002,
+KapelaMrozekWilczakZgliczynski2021}.  This layer
+provides interval enclosures.  It does not, by itself, assert a periodic
+shooting root.
+
+The source is pinned to CAPD commit
+\texttt{731079217a9254ea2948d742df2b170895effe7f}, whose
+\texttt{CAPDVersion.txt} reports 6.1.0.  MPFR/GMP and compiler details are
+bound into the release manifest.  The accepted producer runs the identical
+logical matrix at 128 and 256 MPFR bits.
+
+\subsection{Parameterized root inclusion}
+
+For each fixed \(\epsilon\) in a slab, the interval object
+\(D_xF(X,E_\epsilon)\) encloses every point Jacobian.  The strict inclusion
+and contraction in \cref{eq:krawczyk-gates} imply existence and uniqueness
+of a zero within the declared box.  The full-box energy derivative in
+\cref{eq:energy-jacobian-row} is a mathematical requirement, not a numerical
+refinement.  A midpoint derivative would fail to enclose the family of
+Jacobians and cannot license the Krawczyk theorem.
+
+The 51 primary slabs cover \([0,0.101]\) exactly.  The 50 bridge parameter
+intervals are the adjacent overlaps, while each state-space bridge is the
+pre-frozen padded hull \cref{eq:bridge-hull}.  The checker verifies literal
+containment using the actual printed endpoints.  Since the bridge has one
+root, the two primary roots agree throughout the overlap.
+
+\subsection{Full-return recovery}
+
+At a zero of \cref{eq:validated-residual}, the initial and terminal values
+agree in \(Q_-\), \(P_-\), and \(P_+\).  Both endpoints lie on the same
+energy.  On the validated interval \(Q_+\in[0.10,0.18]\), the archive proves
+\begin{equation}
+ \partial_{Q_+}K_\epsilon\ge
+ 8.955040964476345874>0.
+ \label{eq:phase-slope-min}
+\end{equation}
+For fixed values of the other three coordinates, energy is strictly
+increasing in \(Q_+\).  Equal energies therefore force equal \(Q_+\),
+recovering the omitted equation.  Hamiltonian energy conservation is exact
+at the mathematical level; the validated integrator supplies the endpoint
+enclosures needed to place both values in the monotonicity interval.
+
+\subsection{Exact-rational proof-object replay}
+
+Every outward decimal endpoint is parsed by the checker as a rational
+number.  The checker reconstructs the preconditioner \(C\), the interval
+matrix \(I-CJ\), the Krawczyk image, the contraction bound, bridge
+containment, and cross-precision intersections.  A second checker reconstructs
+the phase-slope and \(4-\operatorname{tr}M\) intervals.  These scripts do not
+import the production analyzers.
+
+The replay begins from stored interval endpoints.  It does not regenerate
+the CAPD flow or prove that arbitrary decimals are outward enclosures; that
+obligation belongs to the pinned producer and interval library.  Conversely,
+the two producer precisions do not replace strict inclusion.  The theorem is
+the composition of valid interval generation, strict interval gates, and
+the analytic branch/full-return arguments.
+
+\subsection{Failure-preserving audit trail}
+
+The archive preserves two non-licensing predecessors.  The first used the
+midpoint energy gradient in the Krawczyk Jacobian.  The second used bridge
+hulls formed independently from rounded decimal displays and failed exact
+containment at one final decimal unit.  In the accepted run, bridge padding
+was frozen as an exact rational construction before any production job.
+Preserving these attempts prevents a successful status from obscuring why a
+seemingly small implementation detail was mathematically material.
+
+\subsection{Local versus global uniqueness}
+
+The union of accepted root boxes is not the full four-dimensional local
+search box.  The certificate establishes one branch in that union; a second
+root outside it is not excluded.  An all-roots claim would require an
+exhaustive interval search of a declared complement.  Likewise, phase
+alignment and the global energy-shell cover are separate from the local
+shooting certificate.  These open domains are why the A4.12 release carries
+\texttt{PASS\_CONTIGUOUS\_LOCAL\_BRANCH}, not a global or final status.

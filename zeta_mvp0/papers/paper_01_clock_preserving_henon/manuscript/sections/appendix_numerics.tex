@@ -1,0 +1,259 @@
+\section{Numerical protocols and reproducibility}
+\label{app:numerics}
+
+This appendix records the numerical definitions and the order in which the
+tests were frozen.  Its purpose is to make later refinements distinguishable
+from the evidence frozen at each stage.  Each run's archived metadata or
+summary records \texttt{zero\_data\_loaded=false} and
+\texttt{prime\_data\_loaded=false}: these fields are in the R000--R001
+metadata and in the R100--R107A summaries.  None of the calculations in
+\cref{sec:classical,sec:quantum-spectra} used zeta ordinates, prime
+tables, or a fitted spectral target.
+
+\subsection{Classical initial states and tangent dynamics}
+
+Let \(L=\log(E/2\pi)\), \(R=\sqrt{L/\pi}\), and let
+\((s_0,s_1,s_2)\) be the fixed unscrambled Sobol point associated with an
+integer seed.  The R000--R001 initial state was
+\begin{align}
+ \rho&=0.88R\sqrt{s_0},
+ &\theta&=2\pi s_1,
+ &u&=\rho(\cos\theta,\sin\theta),\\
+ q&=\Psi_{a,n}^{-1}(u),
+ &\varphi&=2\pi s_2,
+ &p&=\sqrt{2(E-V_{a,n}(q))}(\cos\varphi,\sin\varphi).
+ \label{eq:classical-seed-map}
+\end{align}
+The configuration transform has unit determinant, so this samples uniform
+area within the truncated \(u\)-disk.  The radial truncation was fixed before
+the production run; it avoids launching directly against the exponential
+wall and is not a posteriori rejection.
+
+For \(B=0\), velocity Verlet advances both the orbit and two copies of the
+linearized system.  If \(D^2V(q)\) is the analytic Hessian, the tangent
+half-kick, drift, and second half-kick use the same Hessians as the orbit.
+Tangent norms are evaluated after scaling both configuration coordinates by
+\(q_{\mathrm{scale}}\) and both momentum coordinates by
+\(p_{\mathrm{scale}}=\sqrt{2E}\).  The first tangent vector starts along a
+scaled configuration direction and the second along a scaled momentum
+direction; both are renormalized eight times per natural-time unit.  Energy
+drift is evaluated at the same blocks.  The implementation also records the
+initial state, step size, angular-momentum range, Poincar\'e crossings, and a
+coarse section occupancy, although the final decision uses only completion,
+energy drift, FTLE, and SALI.
+
+\begin{table}[p]
+ \centering
+ \caption{R000 primary groups.  Every entry is a median over eight frozen
+ states; ``flags'' uses \(\lambda_{80}>0.05\) and
+ \(\mathrm{SALI}_{80}<10^{-4}\).}
+ \label{tab:r000-full}
+ \small
+ \begin{tabular}{@{}rrrrrr@{}}
+ \toprule
+ \(a\) & \(n\) & \(E\) & median \(\lambda_{80}\) & median SALI & flags \\
+ \midrule
+ 0    & 1 & 100  & 0.0558 & 0.842 & 0/8 \\
+ 0    & 1 & 1000 & 0.0592 & 0.951 & 0/8 \\
+ 1.02 & 1 & 100  & 0.5088 & \(2.46\times10^{-15}\) & 8/8 \\
+ 1.02 & 1 & 1000 & 0.7116 & \(1.17\times10^{-15}\) & 8/8 \\
+ 1.02 & 2 & 100  & 0.7326 & \(1.09\times10^{-15}\) & 8/8 \\
+ 1.02 & 2 & 1000 & 1.0842 & \(5.12\times10^{-15}\) & 8/8 \\
+ 6    & 1 & 100  & 0.7914 & \(4.40\times10^{-15}\) & 8/8 \\
+ 6    & 1 & 1000 & 0.7304 & \(1.88\times10^{-14}\) & 8/8 \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+R000 contained 64 primary and 16 refinement records.  An independent checker
+that did not import the production package reconstructed every group summary,
+verified all 80 initial energy identities to maximum relative error
+\(2.84\times10^{-16}\), found 15 stable and one unstable resolution pair,
+and confirmed the absence of prime and zero inputs.  The unstable pair was
+the retained \(a=6,n=1,E=1000\), seed-1 record described in the main text.
+
+R106 used the same frozen initial \((q,v)\) values but independently
+reimplemented the potential gradient and Hessian.  It integrated
+\cref{eq:magnetic-velocity-flow} and its full variational equation in segments
+of \(0.5t_{\mathrm{nat}}\) with DOP853.  The reported drift maximum is over
+segment endpoints, not every internal Runge--Kutta stage.  Only \(B=0,1\),
+four states per group, one energy, one tolerance pair, and 80 natural-time
+units were audited.  A magnetic time-convergence series, QR computation of
+the full Lyapunov spectrum, and a broad microcanonical census remain open.
+
+\subsection{Second-order covariant lattice operator}
+
+For an interior grid point \(i\), the primary kinetic discretization is
+\begin{equation}
+ (K_h\psi)_i
+ =\sum_{\alpha\in\{x,y\}}
+ \left[
+ \frac{1}{h_\alpha^2}\psi_i
+ -\frac{1}{2h_\alpha^2}
+ \left(U_{i,i+e_\alpha}\psi_{i+e_\alpha}
+      +U_{i,i-e_\alpha}\psi_{i-e_\alpha}\right)
+ \right].
+ \label{eq:fd2-covariant}
+\end{equation}
+Missing neighbors are assigned the Dirichlet value zero.  In symmetric gauge,
+the positive-link phases are
+\begin{equation}
+ U_x=\exp(\ii Byh_x/2),
+ \qquad
+ U_y=\exp(-\ii Bxh_y/2),
+ \label{eq:symmetric-link-phases}
+\end{equation}
+with conjugates on reversed links.  In Landau gauge \(A=(0,Bx)\), they are
+\(U_x=1\) and \(U_y=\exp(-\ii Bxh_y)\).  These choices implement the link
+definition in \cref{eq:peierls-link} and give a Hermitian matrix.
+
+The contour \(V=45000\) was pulled back by the centered H\'enon inverse.  Its
+boundary was sampled at 8192 angles to form an adapted rectangle, which was
+then padded by three nominal grid steps.  The potential was point-sampled;
+an overflow guard clipped only values far beyond the nominal wall.  The
+retained eigenvalues lie well below the wall energy.  For each 180-mode solve,
+the deterministic Lanczos starting vector was built from fixed sine and
+cosine sequences and normalized before shift-invert iteration.
+
+The mode window was never adjusted by inspecting the spacing data.  Sorting
+the spectrum and discarding 25 low and 15 upper modes leaves the 140 levels
+used throughout.  The CDF comparison contains 138 ratios, and all reported
+CDF distances are sup norms between deterministic empirical and reference
+curves.  No standard error, confidence interval, or \(p\)-value based on an
+i.i.d. spacing assumption is reported.
+
+\subsection{Failure-first quantum protocol chain}
+
+\Cref{tab:quantum-protocol-chain} separates the initial questions, repairs,
+and post-hoc diagnostics.  R101 was authorized only after R100 failed; R102
+was frozen only after the R101 spacing-stability comparison separated the
+\(a=1.02\) and \(a=6\) branches.  The latter comparison is labeled post hoc
+rather than retrospectively promoted to an R100 gate.
+
+\begin{table}[p]
+ \centering
+ \caption{Chronological quantum audit.  ``FD2'' and ``FD4'' denote the
+ second- and fourth-order gauge-covariant finite-difference stencils.}
+ \label{tab:quantum-protocol-chain}
+ \small
+ \begin{tabular}{@{}p{0.08\textwidth}p{0.25\textwidth}p{0.56\textwidth}@{}}
+ \toprule
+ Run & Frozen change & Recorded decision \\
+ \midrule
+ R100 & FD2, \(h=0.04,0.03\); five physical cells & Every cell failed the
+ 1\% median level-change gate (1.20--1.67\%); no class conclusion. \\
+ R101 & Add \(h=0.0225\) after R100 failure & All level gates passed
+ (0.66--0.93\%).  Post-hoc fine/extrapolated ratio stability passed for
+ \(a=1.02\) and failed for both \(a=6\) cells. \\
+ R102 & Add \(h=0.0175\) only for the surviving \(a=1.02,B=0,1\) core &
+ Both frozen level and ratio gates passed on the common 140-level window. \\
+ R103 & Freeze \(B=0,0.25,0.5,1,2,4\) at \(h=0.0225\) & All five nonzero
+ fields exceeded the scalar baseline; no field was optimized or selected. \\
+ R104 & Add \(h=0.03\) for the four new R103 fields & All level and
+ coarse/fine ratio gates passed. \\
+ R105 & Deterministic rerun, two gauges, and \(B\leftrightarrow-B\) & All
+ residual, orthogonality, gauge, sign, and reproducibility gates passed. \\
+ R107 & FD4 at \(h=0.03,0.0225\), compared with archived FD2 extrapolation &
+ All physical cross-stencil gates passed, but the formal maximum Ritz-
+ residual gate failed; the run is retained as a failure. \\
+ R107A & After R107 only: request 200 Ritz pairs, tighten tolerance, retain
+ lowest 180 & The residual gate and every unchanged original gate passed.
+ This is a solver-guard remediation only. \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+The original run summaries retained a historical edge-aggregation mismatch
+for the level-change fields.  The versioned audit
+\path{results/QUANTUM_WINDOW_AUDIT.json} recomputes every comparison directly
+from the archived NPZ arrays on the same 25--164 window used for spacing
+statistics; the raw spectra and original summaries remain unchanged.  On
+that authoritative window, the R100 median level changes are \(1.195\%\)
+for the radial cell, \(1.233\%\) and \(1.215\%\) for \(a=1.02,B=0,1\),
+and \(1.667\%\) and \(1.655\%\) for \(a=6,B=0,1\).  After R101, the
+corresponding changes are \(0.661\%\), \(0.681\%\), \(0.677\%\),
+\(0.930\%\), and \(0.926\%\).  All original pass/fail decisions are
+unchanged.  Passing this level-position gate did not
+rescue the \(a=6\) spacing result: its fine/extrapolated mean-ratio changes
+remained \(0.0404\) and \(0.0347\), so that branch is inconclusive rather
+than a positive or negative RMT control.
+
+The radial spectrum is likewise not interpreted through the usual Poisson
+mean.  Its unresolved \(m/-m\) doublets and Cartesian \(D_4\) remnants yield
+a mean ratio near \(0.045\) and approximately 39\% near-degenerate gaps on
+the fine grid.  Desymmetrization by angular-momentum sectors is necessary
+before it can be used as an integrable spacing baseline.
+
+\subsection{Fourth-order independent-order check}
+
+R107 replaces \cref{eq:fd2-covariant} by the one-dimensional stencil,
+summed over both axes,
+\begin{equation}
+ -\frac12D_h^2\psi_i
+ =\frac{5}{4h^2}\psi_i
+ -\frac{2}{3h^2}
+  \left(U_{i,i+1}\psi_{i+1}+U_{i,i-1}\psi_{i-1}\right)
+ +\frac{1}{24h^2}
+  \left(U_{i,i+2}\psi_{i+2}+U_{i,i-2}\psi_{i-2}\right).
+ \label{eq:fd4-covariant}
+\end{equation}
+Links over two grid spacings use the exact straight-line integral of the same
+linear gauge.  Zero extension supplies the remote Dirichlet closure.  The
+frozen reference was the already archived R102 second-order \(h^2\)
+extrapolation, not a reference recomputed after seeing R107.
+
+The first R107 solve requested exactly 180 pairs at tolerance
+\(2\times10^{-10}\).  Its median relative residuals were about
+\(5\times10^{-12}\), but a few retained edge pairs gave maxima
+\(1.88\times10^{-6}\) and \(4.97\times10^{-6}\) on the two fine cells.
+The recorded global decision was therefore failure even though all level and
+spacing comparisons passed.  R107A's sole allowed change was to compute 200
+pairs at tolerance \(10^{-12}\), sort, and keep the lowest 180.  It did not
+change the four spectra's physical definitions or the 25--164 window.  The
+remediated fine maxima are \(4.65\times10^{-10}\) and
+\(6.86\times10^{-11}\), below the unchanged \(10^{-8}\) gate.
+
+Both kinetic schemes remain members of the same broad numerical family.
+They share Cartesian grids, Peierls phases, sampled potentials, adapted
+rectangular walls, Dirichlet closure, and ARPACK.  R107A is therefore called
+an independent-order finite-difference check.  It is not described as a
+finite-element replication, a spectral-method replication, or a second
+fully independent discretization family.
+
+\subsection{Numerical integrity and execution environment}
+
+\begin{table}[t]
+ \centering
+ \caption{Numerical-integrity checks.  Relative spectral differences use
+ like-indexed sorted eigenvalues.}
+ \label{tab:quantum-integrity}
+ \small
+ \begin{tabular}{@{}lr@{}}
+ \toprule
+ Check & Maximum or difference \\
+ \midrule
+ R105 maximum relative eigen-residual & \(5.99\times10^{-10}\) \\
+ R105 maximum orthogonality defect & \(8.04\times10^{-13}\) \\
+ symmetric vs. Landau gauge, \(B=1\) & \(2.51\times10^{-14}\) \\
+ \(B=1\) vs. \(B=-1\) & 0 at stored precision \\
+ deterministic rerun vs. R100 archive & \(3.64\times10^{-14}\) \\
+ R107A FD4 fine residual, \(B=0\) & \(4.65\times10^{-10}\) \\
+ R107A FD4 fine residual, \(B=1\) & \(6.86\times10^{-11}\) \\
+ R107A FD4 fine orthogonality defect & \(6.95\times10^{-13}\) \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+The recorded production environment used Python 3.12.3, NumPy 2.4.4, SciPy
+1.16.1, and Linux 5.4.0 on a 32-vCPU AMD EPYC 9654 allocation with 60~GB of
+memory.  R105 stored SHA-256 hashes for the second-order operator and its
+audit script, and every solver audit stored its deterministic-initial-vector
+flag.  Machine-readable per-run JSON/NPZ/CSV files accompany the protocols;
+failed gates and remediation records are kept beside successful runs.
+
+The remaining numerical requirements are substantive rather than cosmetic:
+a genuinely different fixed-domain discretization, 500--1000 eigenvalues
+with multiple disjoint windows, a desymmetrized radial comparison, and a
+broader magnetic classical census.  Until those checks are available, the
+quantum conclusion remains explicitly finite-window and the arithmetic
+P gate remains open, while Z remains untested and unauthorized before P.

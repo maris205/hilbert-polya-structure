@@ -1,0 +1,102 @@
+\section{The spectral coefficient and a frozen numerical diagnostic}
+\label{sec:spectral-diagnostic}
+
+Inside the analytic domain of \cref{thm:relative-gutzwiller}, define the
+predicted positive-time coefficient
+\begin{equation}
+ \rho_{\rm pred}(\h;E)
+ =i\widehat g(T_+(E))
+ \frac{T_+(E)}{2\pi\sqrt{|\det(I-P_+(E))|}}
+ e^{iS_+(E)/\h}.
+ \label{eq:rho-pred-general}
+\end{equation}
+The asymptotic statement is
+\(\rho_{\mathrm{rel},\h}/\rho_{\rm pred}=1+O(\h)\) for fixed admissible
+data, provided the leading coefficient is nonzero.  Classical orbit
+quantities occur on the right, while the left is evaluated from the two
+energy-localized eigenvalue lists.  The relation is therefore a spectral
+recovery statement, not an equality between a classical orbit census and a
+separately fitted signal.
+
+The frozen R401-SC computation tests this normalization at
+\(\delta=0.01\).  Its immutable classical inputs are
+\begin{equation}
+ T=0.6635697917937936,
+ \qquad
+ S=0.006637068399523644,
+ \qquad
+ D=3.863271395157721,
+ \label{eq:r401-inputs}
+\end{equation}
+and the test function is normalized so that
+\(\widehat g(T)=1\).  Thus
+\begin{equation}
+ \rho_{\rm pred}(\h)=i\frac{T}{2\pi\sqrt D}e^{iS/\h}.
+ \label{eq:r401-oracle}
+\end{equation}
+The energy cutoff, time cutoff, phase, scale, and eight-point \(\h\) ladder
+were fixed before the production archive.  No prime, zero, peak time, phase
+offset, or amplitude was fitted.
+
+\begin{table}[t]
+\centering
+\caption{Frozen R401-SC normalized coefficient
+\(Z_\h=\rho_{\mathrm{rel},\h}/\rho_{\rm pred}(\h)\) at
+\(\delta=0.01\).  The nonmonotone early values are retained.  This table is
+an A4.10-guided numerical diagnostic, not a validation that
+\(0.01<\delta_{\rm tr}\).}
+\label{tab:r401-ladder}
+\small
+\begin{tabular}{@{}rrr@{}}
+\toprule
+\(\h\) & \(Z_\h\) & \(|Z_\h-1|\)\\
+\midrule
+\(4.0\times10^{-4}\) & \(0.344728+0.367872i\) & 0.7515\\
+\(3.0\times10^{-4}\) & \(1.448682+0.095288i\) & 0.4587\\
+\(2.0\times10^{-4}\) & \(0.317529+0.242788i\) & 0.7244\\
+\(1.5\times10^{-4}\) & \(1.403014-0.489353i\) & 0.6339\\
+\(1.0\times10^{-4}\) & \(0.843838-0.354104i\) & 0.3870\\
+\(7.5\times10^{-5}\) & \(0.785322+0.054500i\) & 0.2215\\
+\(5.0\times10^{-5}\) & \(1.047705+0.011489i\) & 0.0491\\
+\(4.0\times10^{-5}\) & \(1.006523+0.013300i\) & 0.0148\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The warped calculation is performed after the exact unitary coordinate
+change \(u=\Psi_a(q)\).  In those coordinates, the potential has radial
+quadratic-exponential tails and the kinetic energy becomes a polynomial
+divergence-form operator.  This choice is essential: original-coordinate
+Hermite functions have tails incompatible with the warped
+\(e^{c x^4}\) direction and were rejected at the protocol stage.  The radial
+reference is checked by an independent angular-momentum Laguerre
+decomposition.
+
+The archive contains nested-basis checks, phase-budget checks, quadrature
+checks, a radial oracle, a guard mode, internal residuals, and an independent
+recomputation that does not import the production trace code.  The latter
+passes 58 checks.  At the finest point,
+\begin{equation}
+ Z_{4\times10^{-5}}
+ =1.0065230645+0.0133004473i,
+ \qquad
+ |Z_{4\times10^{-5}}-1|\approx0.0148.
+ \label{eq:finest-z}
+\end{equation}
+The corresponding exactly soluble harmonic calculation, under the same
+finite windows, exhibits comparable pre-asymptotic oscillations; at the
+finest point the nonlinear and harmonic normalized values differ by
+\(0.002051\).
+
+The final two points are consistent with the amplitude and phase in
+\cref{eq:main-trace-formula}.  They do not estimate an \(O(\h)\) constant:
+eight nonmonotone values over one short ladder cannot support that inference.
+More fundamentally, the computation does not close the theorem-domain gap.
+The analytic result provides an unknown positive \(\delta_{\rm tr}\), and
+the local-box certificate controls one branch but not every possible return.
+Consequently, the correct logical statement is
+\begin{equation}
+ \boxed{\text{R401-SC tests the A4.10 coefficient at }\delta=0.01;
+ \quad \text{it does not prove }0.01<\delta_{\rm tr}.}
+ \label{eq:diagnostic-boundary}
+\end{equation}

@@ -1,0 +1,253 @@
+\section{Finite-window quantum spectra and magnetic crossover}
+\label{sec:quantum-spectra}
+
+The Weyl theorem fixes the smooth count but says nothing about local spectral
+fluctuations.  We therefore performed a zero-input finite-window screen of the
+centered \(a=1.02,n=1\) operator and its magnetic deformation.  The outcome
+is a convergence-supported orthogonal-like to unitary-like response in the
+available window.  It is not a proof of random-matrix universality, an
+arithmetic selection of \(B\), or evidence for any individual Riemann zero.
+
+\subsection{Discretization and frozen observables}
+
+The primary discretization uses a Cartesian Dirichlet grid and Peierls links
+\begin{equation}
+ U_{ij}=\exp\!\left(-\ii\int_{q_i}^{q_j}A_B\cdot\dd q\right)
+ \label{eq:peierls-link}
+\end{equation}
+on each nearest-neighbor edge.  Straight-link integration is exact for the
+linear symmetric and Landau gauges used here.  The rectangle encloses the
+preimage of the contour \(V=100E_{\mathrm{target}}\), with three nominal mesh
+steps of padding; \(E_{\mathrm{target}}=450\), so the nominal wall energy is
+\(45000\).  We computed 180 low eigenvalues by deterministic shift-invert
+Hermitian Lanczos.  Every reported local statistic uses sorted modes
+25--164 inclusive: 140 levels, 139 gaps, and 138 adjacent-gap ratios.
+
+For consecutive gaps \(s_j=E_{j+1}-E_j\), the unfolding-free observable is
+\begin{equation}
+ \widetilde r_j=
+ \frac{\min(s_j,s_{j+1})}{\max(s_j,s_{j+1})},
+ \qquad
+ \meanratio=\frac{1}{138}\sum_j\widetilde r_j.
+ \label{eq:adjacent-ratio}
+\end{equation}
+The reference means used descriptively are \(0.38629\) for Poisson,
+\(0.53590\) for GOE, and \(0.60266\) for GUE
+\citep{AtasEtAl2013}.  We also unfolded with the
+analytic clock
+\begin{equation}
+ \xi_j=\Ncl(E_j)
+ =\frac{E_j}{2\pi}\log\frac{E_j}{2\pi}
+  -\frac{E_j}{2\pi}+1.
+ \label{eq:exact-clock-unfolding}
+\end{equation}
+No fit is involved in this transformation.  Because adjacent ratios from one
+spectrum are dependent and the 140-level window was not sampled as an
+i.i.d. ensemble, empirical CDF sup distances below are deterministic
+discrepancy measures; we assign no \(p\)-values.
+
+\subsection{The failed first grid comparison}
+
+The first production run, R100, compared nominal spacings \(h=0.04\) and
+\(0.03\).  It failed the frozen one-percent median level-change gate in every
+cell: on the unified 25--164 window the changes ranged from \(1.20\%\) for
+the radial control to \(1.67\%\) for the \(a=6\) cells, with the
+\(a=1.02\) scalar and magnetic cells at \(1.23\%\) and \(1.21\%\).
+Consequently, R100 alone supports no
+random-matrix-class interpretation.
+
+R101 was specified after that failure and added \(h=0.0225\).  Relative to
+\(h=0.03\), all five cells then passed the original level gate, with median
+changes between \(0.66\%\) and \(0.93\%\).  A post-hoc check compared each
+fine-grid mean ratio with a two-grid \(h^2\) extrapolation.  The differences
+were \(0.0120\) and \(0.0045\) for \(a=1.02\) at \(B=0\) and \(1\), but
+\(0.0404\) and \(0.0347\) for \(a=6\).  Thus the high-distortion
+\(a=6\) branch remains inconclusive and is assigned no spectral symmetry
+class.  R102 froze a fourth grid, \(h=0.0175\), only for the surviving
+\(a=1.02\) core.  The full failure-first sequence is shown in
+\cref{fig:quantum-convergence}.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{fig4_quantum_convergence.pdf}
+  \caption{Failure-first quantum convergence audit.  The core
+  \(a=1.02\) adjacent ratios stabilize across four meshes and
+  \(h^2\) extrapolation, whereas the \(a=6\) branches remain sensitive at
+  the available resolutions.  The first \(0.04\to0.03\) comparison failed
+  the original one-percent level gate; later refinements are shown rather
+  than substituted for it.}
+  \label{fig:quantum-convergence}
+\end{figure*}
+
+\subsection{Converged core window}
+
+On the unified 25--164 window, the R102 \(0.0225\to0.0175\) audit gave
+median relative level changes of \(0.347\%\) and \(0.346\%\) for
+\(B=0\) and \(1\).  The fine-grid and new \(h^2\)-extrapolated mean ratios
+are listed in \cref{tab:core-quantum-window}.  Fine-to-extrapolated ratio
+differences are \(0.00242\) at \(B=0\) and \(0.00035\) at \(B=1\); the
+correlations between the two pointwise ratio arrays are \(0.960\) and
+\(0.974\).  The exact-clock extrapolated mean spacings are \(0.99915\) and
+\(0.99903\), providing a finite-window check of the analytic mean density.
+
+\begin{table}[t]
+ \centering
+ \caption{R102 core results over 140 interior levels.  CDF entries are sup
+ distances to the ratio surmises and are descriptive; no \(p\)-values are
+ attached.}
+ \label{tab:core-quantum-window}
+ \small
+ \begin{tabular}{@{}lrr@{}}
+ \toprule
+ Diagnostic & \(B=0\) & \(B=1\) \\
+ \midrule
+ median level change, \(0.0225\to0.0175\) & 0.347\% & 0.346\% \\
+ fine-grid \(\meanratio\) & 0.532251 & 0.587617 \\
+ \(h^2\)-extrapolated \(\meanratio\) & 0.529831 & 0.587270 \\
+ extrapolated mean unfolded spacing & 0.999151 & 0.999027 \\
+ fine CDF distance to GOE & 0.0448 & 0.1140 \\
+ fine CDF distance to GUE & 0.1526 & 0.0614 \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+The scalar ratio is close to the GOE reference, consistent with the
+\(T^2=+1\) symmetry identified in \cref{sec:active}.  At \(B=1\), the mean
+and the empirical CDF move toward the GUE reference.  We call these spectra
+\emph{GOE-like} and \emph{unitary-leaning} only at this finite-window,
+descriptive level.  The 138-ratio CDFs are displayed in
+\cref{fig:ratio-cdfs}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.72\textwidth]{fig5_ratio_cdfs.pdf}
+  \caption{Empirical adjacent-ratio distributions over the frozen 138-ratio
+  interior window.  The scalar spectrum is closer to the GOE surmise, while
+  \(B=1\) moves toward the GUE surmise.  Sup distances are deterministic
+  descriptive diagnostics, not i.i.d. goodness-of-fit tests.}
+  \label{fig:ratio-cdfs}
+\end{figure}
+
+The radial member cannot serve as an untreated Poisson baseline.  On the
+R101 fine grid its mean ratio is \(0.045\), and approximately \(39\%\) of
+the retained gaps are near-degenerate.  These values reflect the continuum
+\(m/-m\) angular-momentum doublets and their finite-grid \(D_4\) remnants.
+A symmetry-sector decomposition would be required for a meaningful
+integrable-spacing comparison.  Here the radial member is used only as a
+degeneracy and classical-integrability control.
+
+\subsection{Frozen magnetic response}
+
+R103 fixed \(B\in\{0,0.25,0.5,1,2,4\}\) before execution and evaluated all
+fields on the same \(h=0.0225\) grid and interior window.  The mean-ratio
+sequence was
+\begin{equation}
+ 0.5292,\quad0.5439,\quad0.5768,\quad0.5874,\quad0.6229,
+ \quad0.5980.
+ \label{eq:magnetic-ratio-sequence}
+\end{equation}
+Every nonzero field lies above the scalar baseline, so the preregistered
+retention gate passed.  The response is not monotone.  In particular, the
+largest value at \(B=2\) is not promoted as an optimum or assigned arithmetic
+meaning.  R104 recomputed the four new fields on the \(h=0.03\) grid; median
+level changes were \(0.677\)--\(0.685\%\), and coarse/fine mean-ratio
+differences were \(0.0022\)--\(0.0079\), passing both frozen gates.  The
+scan therefore supports a resolved field response rather than a single
+fortuitous value at \(B=1\), while remaining a low-window crossover rather
+than an asymptotic universality result.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.94\textwidth]{fig6_magnetic_crossover.pdf}
+  \caption{Magnetic response on the field grid frozen before execution; the
+  uneven field values are placed at categorical horizontal positions for
+  readability.  Every nonzero field lies above the scalar baseline, but the
+  response is not monotone and no field is selected as an arithmetic optimum.
+  Independent coarse/fine pairs for the four new fields retain the direction
+  of the response.}
+  \label{fig:magnetic-crossover}
+\end{figure*}
+
+\subsection{Gauge, solver, and independent-order checks}
+
+R105 repeated the \(a=1.02,h=0.03\) calculation with a deterministic Lanczos
+initial vector.  The maximum relative eigen-residual was
+\(5.99\times10^{-10}\), and the maximum orthogonality defect was
+\(8.04\times10^{-13}\).  The \(B=1\) spectra in symmetric and Landau gauges
+agreed to relative \(2.51\times10^{-14}\); the \(B=1\) and \(-1\) spectra
+were identical at stored precision; and reruns agreed with the archived R100
+arrays within \(3.64\times10^{-14}\).  Matrix-level tests also checked
+Hermiticity, Peierls plaquette flux, zero-field reality, and lattice gauge
+covariance.
+
+R107 then changed the leading kinetic truncation error by using nearest- and
+next-nearest-neighbor Peierls links in a fourth-order covariant finite-
+difference stencil.  Its initial run passed every cross-stencil level and
+ratio gate but failed the preregistered maximum-residual gate: median Ritz
+residuals were already near \(5\times10^{-12}\), while a few edge pairs
+reached \(1.9\times10^{-6}\) at \(B=0\) and \(5.0\times10^{-6}\) at
+\(B=1\).  The failure remains part of the audit record.
+
+R107A was frozen only after that failure and changed one eigensolver guard:
+it requested 200 instead of 180 Ritz pairs, tightened the ARPACK tolerance
+from \(2\times10^{-10}\) to \(10^{-12}\), sorted them, and retained the
+lowest 180.  No physical parameter, grid, box, field, analysis window,
+statistic, or threshold changed.  The retained fine-grid maximum residuals
+fell to \(4.65\times10^{-10}\) and \(6.86\times10^{-11}\).  All original
+R107 gates then passed, with the quantitative comparison in
+\cref{tab:fourth-order-check}.
+
+\begin{table}[t]
+ \centering
+ \caption{R107A fourth-order finite-difference check.  The reference is the
+ archived R102 second-order \(h^2\) extrapolation.}
+ \label{tab:fourth-order-check}
+ \small
+ \begin{tabular}{@{}lrr@{}}
+ \toprule
+ Diagnostic & \(B=0\) & \(B=1\) \\
+ \midrule
+ fourth-order coarse/fine median level change & 0.04072\% & 0.04029\% \\
+ fourth-order fine vs. second-order extrap. median & 0.01943\% & 0.01894\% \\
+ fourth-order fine \(\meanratio\) & 0.534773 & 0.590890 \\
+ second-order extrapolated \(\meanratio\) & 0.529831 & 0.587270 \\
+ mean-ratio difference & 0.004942 & 0.003620 \\
+ pointwise ratio correlation & 0.997432 & 0.995218 \\
+ fourth-order mean unfolded spacing & 0.998484 & 0.998364 \\
+ max. retained fine residual & \(4.65\times10^{-10}\) & \(6.86\times10^{-11}\) \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+R107A is an \emph{independent-order finite-difference check}, not a second
+independent discretization family.  Both stencils use a Cartesian grid,
+Peierls links, a point-sampled potential, an adapted rectangular wall, and
+the ARPACK eigensolver.  Their physical rectangles also differ slightly with
+nominal spacing because the geometry includes three mesh steps of padding.
+The agreement rules out the simplest explanation based on second-order
+kinetic dispersion, but a fixed-domain magnetic finite-element or sine-
+Galerkin calculation remains open.
+
+Finally, \cref{fig:smooth-clock} shows the exact-clock unfolding.  Its near-
+unit mean spacing checks only the smooth density already proved in
+\cref{thm:magnetic-weyl}; the residual staircase fluctuations are not
+compared with zeta ordinates.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.94\textwidth]{fig7_smooth_clock.pdf}
+  \caption{Exact-clock unfolding of the extrapolated \(a=1.02\) spectra.
+  The cumulative unfolded index follows unit mean spacing for both fields;
+  the residual panel displays finite-window fluctuations only.  No Riemann
+  ordinate enters this diagnostic.}
+  \label{fig:smooth-clock}
+\end{figure*}
+
+Across R100--R107A, the defensible conclusion is limited: within 140
+interior levels, the centered scalar spectrum is GOE-like and the fixed-field
+family exhibits a converged response toward the unitary class.  The data do
+not establish GOE/GUE universality, high-energy window stability, or an
+endogenous prime-power trace
+\citep{BohigasGiannoniSchmit1984,Haake2010,PandeyMehta1983,SaitoEtAl2009}.
+No prime or zero arrays were loaded in R100--R107A; the inherited,
+zero-exposed parameter lineage is disclosed in \cref{sec:introduction}.

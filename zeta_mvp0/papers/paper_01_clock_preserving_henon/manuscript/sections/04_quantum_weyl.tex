@@ -1,0 +1,184 @@
+\section{Quantum two-term Weyl law at fixed magnetic field}
+\label{sec:quantum-weyl}
+
+The identity in \cref{thm:classical-clock} is a phase-volume statement, not
+a quantum asymptotic.  We now show that it survives quantization at the two
+growing orders of the Riemann--von Mangoldt clock.  Throughout this section,
+the H\'enon parameter \(a\), the iterate \(n\), and the magnetic field \(B\)
+are fixed while \(E\to\infty\).
+
+\subsection{The confining magnetic operator}
+
+On \(C_c^\infty(\R^2)\), consider
+\begin{equation}
+ \mathfrak h_{a,n,B}[u]
+ =\frac12\|(-\ii\nabla-A_B)u\|_2^2
+  +\int_{\R^2}V_{a,n}(q)|u(q)|^2\dd q .
+ \label{eq:magnetic-form}
+\end{equation}
+The form is closable; we use its closure and denote the corresponding
+Friedrichs operator by
+\(\HH_{a,n,B}\).
+
+\begin{proposition}[Self-adjointness and discreteness]
+\label{prop:compact-resolvent}
+For every fixed \(a>-1\), \(n\geq1\), and \(B\in\R\), the form in
+\cref{eq:magnetic-form} is densely defined, closable, and lower
+semibounded.  Its closure is a closed form, and the associated Friedrichs
+realization is self-adjoint and has compact resolvent.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The polynomial automorphism \(\Psi_{a,n}\) is proper, so
+\(V_{a,n}(q)\to\infty\) as \(|q|\to\infty\).  On a fixed compact set the
+linear vector potential \(A_B\) is bounded; hence a form-norm bounded family
+is bounded in the ordinary local \(H^1\) norm.  Rellich compactness controls
+the family on that compact set, whereas
+\begin{equation}
+ \int_{\{V_{a,n}>M\}}|u|^2
+ \leq M^{-1}\int_{\R^2}V_{a,n}|u|^2
+ \label{eq:potential-tail}
+\end{equation}
+controls the tail uniformly as \(M\to\infty\).  The full argument is given in
+\cref{app:compactness}; see also the standard magnetic-form framework in
+\citep{Kato1995,LeinfelderSimader1981,BravermanMilatovicShubin2002,MazyaShubin2005}.
+\end{proof}
+
+Let
+\begin{equation}
+ N_{a,n,B}(E)=\#\{k:\lambda_k(\HH_{a,n,B})\leq E\},
+ \label{eq:quantum-count-definition}
+\end{equation}
+with multiplicity.
+
+\begin{theorem}[Fixed-iterate magnetic Weyl law]
+\label{thm:magnetic-weyl}
+Let \(a>-1\), \(a\neq0\), and let \(n\geq1\) and \(B\in\R\) be fixed.  Put
+\(D=2^n\).  Then
+\begin{equation}
+ \boxed{
+ N_{a,n,B}(E)
+ =\frac{E}{2\pi}\log\frac{E}{2\pi}
+  -\frac{E}{2\pi}
+  +\order{E^{3/4}(\log E)^{1+D/2}} }
+ \label{eq:quantum-weyl}
+\end{equation}
+as \(E\to\infty\).  The implied constant may depend on \(a,n,B\).  In
+particular,
+\begin{equation}
+ N_{a,n,B}(E)
+ =\frac{E}{2\pi}\log\frac{E}{2\pi}
+  -\frac{E}{2\pi}+o(E).
+ \label{eq:two-growing-terms}
+\end{equation}
+\end{theorem}
+
+For the radial control \(a=0\), the map \(\Psi_{0,n}\) is orthogonal and the
+same argument applies with effective degree one; for example, it gives the
+safe bound
+\begin{equation}
+ N_{0,n,B}(E)
+ =\frac{E}{2\pi}\log\frac{E}{2\pi}
+  -\frac{E}{2\pi}
+  +\order{E^{3/4}(\log E)^{3/2}}.
+ \label{eq:radial-magnetic-weyl}
+\end{equation}
+No optimality is asserted for either remainder.
+
+\subsection{Proof architecture}
+
+We record the estimates that determine the stated error and defer their
+proofs to \cref{app:poly-geometry,app:magnetic-count,app:weyl-assembly}.
+Write
+\begin{equation}
+ L=\log(E/2\pi),\qquad R=\sqrt{L/\pi},\qquad
+ \Omega_E=\{q:|\Psi_{a,n}(q)|<R\}.
+ \label{eq:allowed-domain}
+\end{equation}
+Area preservation gives \(|\Omega_E|=L\).  Because both
+\(\Psi_{a,n}\) and its inverse are degree-\(D\) polynomial maps,
+\begin{equation}
+ \operatorname{length}(\partial\Omega_E)
+ =O_{a,n}(L^{D/2}),
+ \qquad
+ \sup_{\Psi_{a,n}^{-1}(B_{R+1})}|\nabla\Phi_{a,n}|
+ =O_{a,n}(L^{D/2}),
+ \label{eq:allowed-geometry}
+\end{equation}
+where \(\Phi_{a,n}=\pi|\Psi_{a,n}|^2\).
+
+Tile \(\R^2\) by squares \(Q\) of side
+\begin{equation}
+ \ell=E^{-1/4}.
+ \label{eq:square-scale}
+\end{equation}
+For strict local counts, with the count set equal to zero at nonpositive
+energy, Dirichlet--Neumann bracketing gives
+\begin{equation}
+ \sum_Q n_{B,D,Q}(E-V_Q^+)
+ \leq N_{<}(E)
+ \leq\sum_Q n_{B,N,Q}(E-V_Q^-).
+ \label{eq:dn-bracketing}
+\end{equation}
+Here \(V_Q^-\) and \(V_Q^+\) are the extrema of \(V_{a,n}\) on \(Q\), and
+the Neumann operator uses the covariant boundary condition
+\(\nu\cdot(-\ii\nabla-A_B)u=0\).
+
+The magnetic field does not change the leading local count.  On a square
+centered at \(c_Q\), a local gauge removes \(A_B(c_Q)\), leaving a residual
+of norm \(O_B(\ell)\).  Min--max comparison with the free square therefore
+gives, uniformly for \(0\leq A\leq E\),
+\begin{equation}
+ n_{B,D/N,Q}(A)
+ =\frac{\ell^2 A}{2\pi}+O_B(\ell\sqrt E+1).
+ \label{eq:local-magnetic-count}
+\end{equation}
+The number of squares entering the upper sum is
+\begin{equation}
+ M(E)=O_{a,n}\!\left(
+ \frac{L}{\ell^2}+\frac{L^{D/2}}{\ell}+1\right).
+ \label{eq:relevant-squares}
+\end{equation}
+Consequently, the accumulated local lattice error is contained in
+\(O_{a,n,B}(E^{3/4}L^{1+D/2})\).
+
+The remaining issue is the potential variation on a boundary square.  A
+first-exit bootstrap shows that every square meeting \(\Omega_E\) is mapped
+into \(B_{R+1}\) for sufficiently large \(E\).  The second estimate in
+\cref{eq:allowed-geometry} then yields
+\begin{equation}
+ V_Q^+-V_Q^-=O_{a,n}(E\ell L^{D/2}).
+ \label{eq:potential-oscillation}
+\end{equation}
+The relevant-square union has area \(O_{a,n}(L)\), so the gap between the
+upper and lower principal Riemann sums is
+\begin{equation}
+ O_{a,n}(E\ell L^{1+D/2})
+ =O_{a,n}(E^{3/4}L^{1+D/2}).
+ \label{eq:riemann-sum-error}
+\end{equation}
+The common principal integral is precisely the classical quantity in
+\cref{thm:classical-clock}.  Finally,
+\(N_{<}(E)\leq N_{\leq}(E)\leq N_{<}(E+1)\); the change of the comparison
+function over this unit interval is \(O(\log E)\).  This proves
+\cref{thm:magnetic-weyl}.  General Weyl results for confining and magnetic
+Schr\"odinger operators provide context, but the explicit remainder here
+comes from the preceding bracketing estimates
+\citep{Rozenblum1974,HelfferRobert1982,Tachizawa1992,Ivrii2016}.
+
+\begin{remark}[Exactly what the theorem resolves]
+\label{rem:mean-resolution}
+Equation \eqref{eq:quantum-weyl} resolves the coefficients of \(E\log E\)
+and \(E\).  The exact classical comparison function in
+\cref{eq:exact-classical-clock} contains \(+1\), but it is intentionally not
+displayed as a quantum term because the quantum error is much larger than a
+constant.  The theorem therefore determines neither the Riemann counting
+constant \(7/8\) nor an analogue of the oscillatory term \(S(E)\)
+\citep{TitchmarshHeathBrown1986}.  It also gives no uniform result when
+\(a=a(E)\), \(n=n(E)\), or \(B=B(E)\).
+\end{remark}
+
+Identical growing counting terms do not imply identical spectra.  The next
+section proves this distinction for the centered one-step scalar pair: its
+ground state is strictly displaced and its relative heat trace has a nonzero
+uniform asymptotic.

@@ -1,0 +1,82 @@
+# Decision log
+
+## 2026-08-06 — repository split
+
+- Adopted one paper per subdirectory under `zeta_mvp0/papers/`.
+- Preserved the analytic-v3 manuscript as Paper 01 rather than mislabelling
+  its historical Round-2 baseline as a second paper.
+- Separated the post-freeze Route A4/R400/R401 validated wave-trace story as
+  Paper 02.
+- Excluded caches, rebuildable native binaries, and large unrelated failed
+  FEM/relative-trace arrays from the main Git history.
+
+## 2026-08-06 — A4.13 accepted
+
+- Accepted `R401-VAL-L1-MG-V2 / PASS_LOCAL_MONODROMY_GAP`.
+- Replaced unsafe nearest-float bound displays with exact fractions and
+  directed decimal floor/ceil payloads.
+- Retained V1 as superseded rather than erasing its audit history; its exact
+  fraction core remains true, but its human-readable bound labels are
+  non-licensing.
+- Kept the independent event-projected determinant, Taylor residual, root
+  complement, phase cover, global cover, \(\delta_{\rm tr}\), and \(P_0\)
+  explicitly open.
+
+## 2026-08-06 — repository organization audit
+
+- Confirmed `zeta_mvp0/papers/` as the only paper-package namespace, with one
+  research paper per named subdirectory.
+- Confirmed Paper 01 as the sole fully mirrored evidence package at this
+  stage.
+- Kept Paper 02 as a metadata/manuscript placeholder and deliberately did not
+  copy its source, frozen L2 work, or result archives in this step.
+- Split mathematical status from repository availability so that a
+  source-workspace theorem cannot be mistaken for a result reproducible from
+  the present Git repository.
+- Required the root README, programme README, and global claim ledger to move
+  together when a paper is imported or an evidence boundary changes.
+
+## 2026-08-06 — controlled Paper 02 import
+
+- Imported the Paper 02 source, theorem/protocol records, relevant tests, and
+  release-bound A4.12/A4.13 proof objects into its own paper directory.
+- Added a read-only release audit that verifies the authoritative provenance
+  chains while refusing to treat the superseded monodromy V1 archive as
+  licensing evidence.
+- Verified 27 Paper 02 package tests and the authoritative release hashes in
+  the repository copy.
+- Mirrored only the exact executable bound by the authoritative A4.12
+  manifest; kept invalid/superseded executables and caches untracked.
+- Updated repository availability from `placeholder / transfer pending` to
+  `mirrored` without enlarging any mathematical claim.
+
+## 2026-08-06 — L2 complement staging
+
+- Froze `R401-VAL-L2-S0` as a representative six-tree implementation smoke,
+  not an all-slab theorem.
+- Restricted the smoke to S000, S025, and S050 at 128 and 256 bits; producer
+  output has no milestone authority before independent checking and release
+  sealing.
+- Rejected the first prospective all-slab design for freeze until exact
+  scheduling, transactional recovery, 102-tree matrix, raw-proof replay,
+  path-safety, and authority contracts are executable and adversarially
+  tested.
+
+## 2026-08-06 — A4.14 representative complement accepted
+
+- Accepted `R401-VAL-L2-S0 / PASS_IMPLEMENTATION_SMOKE` after all six frozen
+  trees closed at 128 and 256 MPFR bits.
+- Recorded 3,016 evaluated nodes, 183 energy-exclusion leaves, 1,349
+  return-exclusion leaves, and zero root-candidate, invalid, or unresolved
+  leaves.
+- Accepted the independent exact-decimal replay after 89,962 checks with
+  zero failures and sealed an 18-object release-provenance chain.
+- Kept `final_status` null and explicitly refused promotion to the 51-slab
+  local-complement theorem, phase/global cover, quantitative trace radius,
+  arithmetic trace, Hilbert--Pólya claim, or RH.
+- Sent the prospective 102-tree scheduler/checker through a formal-release
+  revision.  Its 68 passing synthetic contracts now cover actual evaluator
+  binary/CAPD identity, three-layer argv binding, generation-bound
+  provenance, write-once authority, and pre-resolution symlink checks.
+  Complete crash/quarantine/race/end-to-end tests and a second freeze review
+  remain required; held-out slabs remain unread and unexecuted.

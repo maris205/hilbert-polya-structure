@@ -1,0 +1,91 @@
+\section{Protocols, provenance, and reproduction}
+\label{app:reproducibility}
+
+The source, frozen inputs, accepted proof objects, invalidated attempts, and
+independent checkers are distributed with the paper package.  The following
+paths are relative to the Paper 02 project root.
+
+\begin{table}[h]
+\centering
+\caption{Principal citable proof records.}
+\label{tab:proof-records}
+\small
+\begin{tabular}{@{}p{0.24\textwidth}p{0.34\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Claim & Human-readable authority & Result archive\\
+\midrule
+Whole-shell small-energy uniqueness &
+\path{research/route_a_wave_trace/A408_WHOLE_SHELL_UNIQUENESS_PROOF.md} &
+analytic proof; no production archive required\\
+Contiguous local branch &
+\path{research/route_a_wave_trace/A412_CONTIGUOUS_FAST_BRANCH_CERTIFICATE.md} &
+\path{results/r401_val_l1_branch/}\\
+Local monodromy gap &
+\path{research/route_a_wave_trace/A413_LOCAL_MONODROMY_GAP_CERTIFICATE.md} &
+\path{results/r401_val_l1_monodromy_gap/}\\
+Representative local complement &
+\path{research/route_a_wave_trace/A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md} &
+\path{results/r401_val_l2_s0_local_complement/}\\
+Spectral diagnostic &
+\path{research/route_a_wave_trace/THEOREM_ENGINEERING_PACKAGE.md}, Section 9 &
+\path{results/r401_fixed_energy_trace_smoke/}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The L1 branch release-provenance file has SHA-256
+\begin{center}\small\ttfamily
+14113191\allowbreak{}6c3a23e3\allowbreak{}8bf2bd3b\allowbreak{}66a152c1\allowbreak{}
+dc659088\allowbreak{}1bc52baf\allowbreak{}51818fd9\allowbreak{}88d3200b
+\end{center}
+and the monodromy-gap release-provenance file has SHA-256
+\begin{center}\small\ttfamily
+c7ab2ba0\allowbreak{}935f275e\allowbreak{}8810804b\allowbreak{}f8acff44\allowbreak{}
+ac76a7bc\allowbreak{}01a7ddab\allowbreak{}b6367e16\allowbreak{}3bea10df
+\end{center}
+These identifiers bind the release records; the manifests inside those
+records bind the detailed source and result objects.
+
+The representative-complement release-provenance file has SHA-256
+\begin{center}\small\ttfamily
+5b7397ba\allowbreak{}c1d57701\allowbreak{}4551e6c0\allowbreak{}3f708b1a\allowbreak{}
+729146b8\allowbreak{}cbe306f3\allowbreak{}756fafdb\allowbreak{}fedd5ad0
+\end{center}
+and binds the six frozen trees, their exact transcripts, the release-bound
+CAPD executable, the independent checker, and the A4.14 scope certificate.
+The six trees contain 3,016 evaluated nodes and 1,532 terminal leaves; all
+leaves are energy or necessary-return exclusions.  The independent replay
+performed 89,962 exact-decimal checks with zero failures.  This is an
+implementation certificate on three parameter slabs, not an all-slab
+theorem.
+
+From the Paper 02 project root, the accepted release hashes can be audited
+without rewriting the archives by running
+\begin{verbatim}
+python scripts/audit_release_hashes.py
+\end{verbatim}
+The focused contract tests can be run with
+\begin{verbatim}
+PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider \
+  tests/test_r401_val_l1_contract.py \
+  tests/test_r401_val_l2_s0_contract.py
+\end{verbatim}
+The L2 contract test alone does not promote an implementation run.  The
+separately sealed A4.14 release now licenses the stated three-slab smoke;
+the accepted mathematical theorem chain in the main text still ends with
+the local A4.12 and A4.13 releases.
+
+Rebuilding the validated executable requires the separately pinned CAPD,
+MPFR, GMP, compiler, and flag configuration under \texttt{validated/}.  The
+official CAPD source is identified by a commit.  Exact executables bound by
+authoritative release manifests are mirrored for fresh-clone hash replay;
+binaries from invalid or superseded attempts and LaTeX auxiliary files are
+excluded from version control.
+
+For audit transparency, failed and superseded attempts remain in
+\texttt{results/} with explicit non-licensing markers.  They must not be
+cited as proof objects.  A release status of
+\path{PASS_CONTIGUOUS_LOCAL_BRANCH} or
+\path{PASS_LOCAL_MONODROMY_GAP} carries \path{final_status: null};
+neither token means that the global R401-VAL theorem-domain programme is
+complete.

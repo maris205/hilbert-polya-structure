@@ -1,0 +1,196 @@
+\section{Bottom normal form and the fast Lyapunov oracle}
+\label{sec:normal-form}
+
+The unique equilibrium in \cref{prop:regular-shells} is elliptic.  Its exact
+linear structure both selects the orbit used in the trace and supplies
+analytic limits against which the validated computation can be audited.
+
+\subsection{Singular values, frequencies, and periods}
+
+At the origin,
+\begin{equation}
+ A_a=D\Psi_a(0)=
+ \begin{pmatrix}-c_a&-1\\1&0\end{pmatrix},
+ \qquad
+ D^2V_a(0)=4\pi^2A_a^TA_a.
+ \label{eq:bottom-hessian}
+\end{equation}
+Let \(0<s_-<s_+\) be the singular values of \(A_a\).  Since
+\(\det A_a=1\), direct diagonalization gives
+\begin{equation}
+ s_+s_-=1,
+ \qquad
+ s_\pm=\frac{\sqrt{c_a^2+4}\pm|c_a|}{2}.
+ \label{eq:singular-values}
+\end{equation}
+In orthonormal configuration coordinates \((Q_-,Q_+)\) aligned with the
+eigenvectors of \(A_a^TA_a\), the quadratic Hamiltonian is
+\begin{equation}
+ K_0=\frac12\left(P_-^2+\omega_-^2Q_-^2
+                      +P_+^2+\omega_+^2Q_+^2\right),
+ \qquad \omega_\pm=2\pi s_\pm.
+ \label{eq:harmonic-normal-form}
+\end{equation}
+We use the signs to label frequency, so the fast mode is \(+\).  Its period
+and the slow period are
+\begin{equation}
+ T_+^0=s_+^{-1}=s_-,
+ \qquad
+ T_-^0=s_-^{-1}=s_+.
+ \label{eq:linear-periods}
+\end{equation}
+Set
+\begin{equation}
+ \rho_a=\frac{\omega_+}{\omega_-}=\frac{s_+}{s_-}=s_+^2>1.
+ \label{eq:frequency-ratio}
+\end{equation}
+
+\begin{proposition}[Fast Lyapunov branch]
+\label{prop:lyapunov-branch}
+For every \(a>-1\), \(a\ne0\), a periodic family
+\(\gamma_+(E)\) emanates from the fast normal mode as \(E\downarrow2\pi\).
+It can be parameterized by every sufficiently small positive energy excess,
+and
+\begin{equation}
+ T_+(E)\longrightarrow T_+^0.
+ \label{eq:period-limit}
+\end{equation}
+The reduced transverse multipliers tend to
+\(e^{\pm2\pi i/\rho_a}\), so the family is transversally nondegenerate for
+all sufficiently small positive excesses.  Moreover,
+\begin{align}
+ D_+^0
+ &:=\lim_{E\downarrow2\pi}|\det(I-P_+(E))|
+ =4\sin^2\frac{\pi}{\rho_a},
+ \label{eq:det-limit}\\
+ S_+(E)
+ &:=\oint_{\gamma_+(E)}p\dd q
+ =T_+^0(E-2\pi)+o(E-2\pi).
+ \label{eq:action-limit}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+The linearized Hamiltonian vector field has the two simple pairs
+\(\pm i\omega_-\) and \(\pm i\omega_+\).  For the fast pair, the other
+frequency ratios are
+\(\pm\omega_-/\omega_+=\pm1/\rho_a\notin\mathbb Z\).  The
+Lyapunov-centre theorem therefore produces a one-parameter family
+\citep{AlligoodYorke1986,Weinstein1973}.  If \(A\) is the fast
+normal-coordinate amplitude, then
+\(E(A)-2\pi=\tfrac12\omega_+^2A^2+O(A^3)>0\) for small \(A>0\), so energy
+indexes the positive branch.  The multiplier and determinant limits follow
+from the slow rotation during one fast period.  Finally, the standard action
+identity \(\dd S_+/\dd E=T_+\), with \(S_+(2\pi)=0\), gives
+\cref{eq:action-limit}.
+\end{proof}
+
+\subsection{First nonlinear period coefficient}
+
+The leading harmonic limits are insufficient to audit a finite positive
+energy.  Let
+\begin{equation}
+ C_{ijk}=\partial_{Q_iQ_jQ_k}V_a(0),
+ \qquad
+ D_{ijkl}=\partial_{Q_iQ_jQ_kQ_l}V_a(0)
+ \label{eq:tensors}
+\end{equation}
+in the fixed orthonormal normal-coordinate convention.  Define, for
+\(j\in\{-,+\}\),
+\begin{equation}
+ b_{j0}=-\frac{C_{++j}}{4\omega_j^2},
+ \qquad
+ b_{j2}=-\frac{C_{++j}}{4(\omega_j^2-4\omega_+^2)},
+ \label{eq:b-coefficients}
+\end{equation}
+and
+\begin{equation}
+ \nu_+=\frac{1}{2\omega_+}
+ \left[
+ \frac{D_{++++}}{8}
+ +\sum_{j\in\{-,+\}}C_{++j}
+ \left(b_{j0}+\frac12b_{j2}\right)
+ \right].
+ \label{eq:nu-plus}
+\end{equation}
+
+\begin{proposition}[Nonlinear period slope]
+\label{prop:period-slope}
+With the tensors and coordinates above,
+\begin{equation}
+ \left.\frac{\dd T_+}{\dd E}\right|_{2\pi+}
+ =-\frac{2T_+^0\nu_+}{\omega_+^3}.
+ \label{eq:period-slope}
+\end{equation}
+For \(a=1.02\), the deterministic coordinate convention gives
+\(\nu_+=17.52709598189346\) and hence
+\begin{align}
+ T_+(2\pi+\delta)
+ &=0.6638439766792985
+   -0.0274450756283701\,\delta+o(\delta),
+ \label{eq:period-expansion}\\
+ \frac{S_+(2\pi+\delta)}{\delta}
+ &=0.6638439766792985
+   -0.0137225378141851\,\delta+o(\delta).
+ \label{eq:action-expansion}
+\end{align}
+\end{proposition}
+
+The proof is a Poincar\'e--Lindstedt solvability calculation.  Its key point
+is that the constant and second harmonics induced at order \(A^2\) feed the
+resonant \(A^3\cos\tau\) equation.  Omitting that feedback changes the
+period slope.  We give the calculation in \cref{app:nonlinear-period}.
+
+\subsection{Numerical specialization at \texorpdfstring{\(a=1.02\)}{a=1.02}}
+
+The exact formulas give
+\begin{equation}
+ T_+^0=0.6638439766792985,
+ \qquad
+ T_-^0=1.5063780573896775,
+ \qquad
+ D_+^0=3.8627220445155035.
+ \label{eq:oracle-numbers}
+\end{equation}
+In particular,
+\begin{equation}
+ T_+^0<0.75<\min(2T_+^0,T_-^0).
+ \label{eq:window-separation}
+\end{equation}
+This strict ordering is the limiting return classification behind the
+whole-shell theorem in \cref{sec:analytic-trace}.  The limiting geometric
+amplitude is
+\begin{equation}
+ \frac{T_+^0}{\sqrt{D_+^0}}=0.3377686126427769,
+ \qquad
+ \frac{T_+^0}{2\pi\sqrt{D_+^0}}=0.0537575443233896,
+ \label{eq:limiting-amplitudes}
+\end{equation}
+where the second value matches the Fourier normalization in
+\cref{eq:fourier-convention}.
+
+A nonvalidated continuation run at six positive excesses served as a
+formula and convention audit.  The extrapolated values and analytic oracles
+are shown in \cref{tab:r400-oracle}.  These comparisons do not prove the
+branch or the trace theorem; those statements come from the analytic and
+validated arguments below.
+
+\begin{table}[t]
+\centering
+\caption{Small-energy continuation audit.  ``Fitted'' means a deterministic
+extrapolation of the archived nonvalidated orbit data; the analytic column
+is independent of the fit.}
+\label{tab:r400-oracle}
+\small
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Quantity & Fitted & Analytic & Absolute difference\\
+\midrule
+\(T_+^0\) & 0.663843973386761 & 0.663843976679299 & \(3.29\times10^{-9}\)\\
+\(\dd T_+/\dd E\) & -0.0274445154485 & -0.0274450756284 & \(5.60\times10^{-7}\)\\
+\(\lim S/\delta\) & 0.663843975854219 & 0.663843976679299 & \(8.25\times10^{-10}\)\\
+\(\dd(S/\delta)/\dd\delta\) & -0.0137223974763 & -0.0137225378142 & \(1.40\times10^{-7}\)\\
+\(D_+^0\) & 3.86272204305148 & 3.86272204451550 & \(1.46\times10^{-9}\)\\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,263 @@
+\section{Certified local branch and transverse stability}
+\label{sec:certified-branch}
+
+The analytic theorem supplies a positive but unspecified energy interval.
+This section asks a separate quantitative question: can the distinguished
+fast branch itself be enclosed over a visible range of the blow-up parameter?
+The answer is yes, locally in frozen root boxes.  The certificate does not
+exclude other returns elsewhere on the energy shell, so it cannot replace
+\cref{thm:whole-shell} on an explicit interval.
+
+\subsection{Reduced return equations}
+
+Fix
+\begin{equation}
+ a=\frac{51}{50},
+ \qquad 0\le\epsilon\le0.101,
+ \qquad \delta=\epsilon^2,
+ \label{eq:validated-domain}
+\end{equation}
+and use the normalized Hamiltonian \cref{eq:normalized-k}.  After the fixed
+orthogonal normal-coordinate change, take
+\begin{equation}
+ x=(Q_-,Q_+,P_-,T),
+ \qquad
+ z_0(x)=(Q_-,Q_+,P_-,0).
+ \label{eq:shooting-unknowns}
+\end{equation}
+The validated residual is
+\begin{equation}
+ F(x,\epsilon)=
+ \begin{pmatrix}
+ K_\epsilon(z_0)-1\\
+ Q_-(T)-Q_-\\
+ P_-(T)-P_-\\
+ P_+(T)
+ \end{pmatrix}.
+ \label{eq:validated-residual}
+\end{equation}
+The first row fixes energy and the last row imposes the return to the event
+hyperplane \(P_+=0\).  The equation \(Q_+(T)=Q_+(0)\) is recovered
+analytically below rather than added as a fifth equation.
+
+For a root box \(X\), parameter interval \(E_\epsilon\), center \(\bar x\),
+and numerical preconditioner \(C\), define the parameterized Krawczyk image
+\begin{equation}
+ \cK(X,E_\epsilon)=
+ \bar x-CF(\bar x,E_\epsilon)
+ +\bigl(I-C[D_xF(X,E_\epsilon)]\bigr)(X-\bar x).
+ \label{eq:krawczyk-operator}
+\end{equation}
+Every accepted job proves both
+\begin{equation}
+ \cK(X,E_\epsilon)\Subset X,
+ \qquad
+ \|I-C[D_xF(X,E_\epsilon)]\|_\infty<1.
+ \label{eq:krawczyk-gates}
+\end{equation}
+Under the validated residual and full-box Jacobian enclosures, these gates
+give one zero in \(X\) for every fixed parameter in the slab
+\citep{Krawczyk1969,MooreKearfottCloud2009}.  The energy row is evaluated on
+the complete root box; in particular,
+\begin{equation}
+ [D_xF(X,E_\epsilon)]_{0,2}=X_{P_-},
+ \label{eq:energy-jacobian-row}
+\end{equation}
+not the zero derivative obtained from the midpoint \(P_-=0\).
+
+\subsection{Branch theorem}
+
+\begin{theorem}[Validated contiguous fast branch]
+\label{thm:validated-branch}
+For the parameter range \cref{eq:validated-domain}, there is a real-analytic
+family of nonconstant primitive periodic orbits
+\begin{equation}
+ \epsilon\longmapsto
+ \gamma_\epsilon=
+ (Q_-(\epsilon),Q_+(\epsilon),P_-(\epsilon),0;T(\epsilon))
+ \label{eq:validated-family}
+\end{equation}
+on \(K_\epsilon=1\), with
+\begin{equation}
+ 0.66<T(\epsilon)<0.67.
+ \label{eq:validated-period-box}
+\end{equation}
+For each of the 51 primary parameter slabs, this branch is the unique zero
+inside the corresponding frozen root box.  The 50 guarded bridge hulls
+identify adjacent representatives as one branch.  At \(\epsilon=0\), it is
+anchored to the exact fast harmonic orbit.
+\end{theorem}
+
+\begin{proof}
+Validated \(C^1\) flow integration encloses the residual and the full
+Jacobian in \cref{eq:validated-residual}; each primary and bridge job passes
+\cref{eq:krawczyk-gates}.  For adjacent primary slabs with overlap \(B_i\),
+the guarded bridge box is the rationally padded hull
+\begin{equation}
+ Y_i=\operatorname{hull}(X_i\cup X_{i+1})
+       +[-10^{-18},10^{-18}]^4.
+ \label{eq:bridge-hull}
+\end{equation}
+Both primary zeros lie in \(Y_i\), and its Krawczyk certificate gives only
+one zero for each parameter in \(B_i\).  Induction over the 50 overlaps
+identifies all 51 pieces.
+
+At every root, the archived enclosures prove
+\(Q_+(0),Q_+(T)\in[0.10,0.18]\) and
+\(\partial_{Q_+}K_\epsilon>0\) on the connecting phase interval.  The other
+position, both momenta, and the energy agree at the two endpoints.  Exact
+energy conservation and strict monotonicity in \(Q_+\) force
+\(Q_+(T)=Q_+(0)\), so the reduced root is a full-state return.
+
+The first root box contains the exact harmonic fast orbit.  Analyticity of
+\(F\) through \(\epsilon=0\), nonsingularity of \(D_xF\), and the analytic
+implicit-function theorem make the glued family real analytic and identify
+it with the fast continuation.  For \(\epsilon>0\), a proper repetition
+would have primitive period below \(0.335\), contradicting the full-shell
+period floor \cref{eq:warped-period-floor}; primitivity at
+\(\epsilon=0\) is exact harmonic dynamics.
+\end{proof}
+
+The word ``unique'' in \cref{thm:validated-branch} is always qualified by
+the frozen boxes and bridge hulls.  No branch-and-bound proof currently
+excludes zeros in their local complement.
+
+\subsection{Invariant quotient and determinant gap}
+
+Let
+\begin{equation}
+ M_\epsilon=D_z\Phi_\epsilon^{T(\epsilon)}(z_\epsilon)
+ \label{eq:monodromy}
+\end{equation}
+be the four-dimensional fixed-time monodromy matrix, and let
+\(D\Pi_\epsilon\) denote the return derivative on the two-dimensional
+intersection of \(K_\epsilon=1\) with \(P_+=0\).  The certified positive
+phase slope makes this section regular and transverse.
+
+\begin{proposition}[Exact invariant-quotient identity]
+\label{prop:quotient-identity}
+Along the full-return branch,
+\begin{equation}
+ \chi_{M_\epsilon}(t)=(t-1)^2\chi_{D\Pi_\epsilon}(t),
+ \qquad
+ \det(I-D\Pi_\epsilon)=4-\operatorname{tr}M_\epsilon.
+ \label{eq:quotient-identity}
+\end{equation}
+No semisimplicity assumption on the two unit multipliers is required.
+\end{proposition}
+
+\begin{proof}
+At a periodic point, set
+\(\alpha=dK_\epsilon\), \(v=X_{K_\epsilon}\), and
+\(L=\Span\{v\}\).  Flow covariance gives \(M_\epsilon v=v\), while
+differentiated energy conservation gives
+\(\alpha\circ M_\epsilon=\alpha\).  Hence
+\begin{equation}
+ 0\subset L\subset\ker\alpha\subset T_z\R^4
+ \label{eq:invariant-flag}
+\end{equation}
+is an invariant flag.  The first quotient \(L\) and the last quotient
+\(T_z\R^4/\ker\alpha\) both carry the identity.  The middle quotient
+\(\ker\alpha/L\) is canonically conjugate to the energy-section return
+derivative.  Characteristic polynomials therefore factor as in the first
+identity even if a unit Jordan block is present.
+
+The symplectic form descends to a nondegenerate form on
+\(\ker\alpha/L\), and the Hamiltonian flow preserves it.  Thus
+\(\det D\Pi_\epsilon=1\).  For a two-by-two matrix \(A\),
+\(\det(I-A)=1-\operatorname{tr}A+\det A\).  Combining this with
+\(\operatorname{tr}M_\epsilon=2+\operatorname{tr}D\Pi_\epsilon\) proves
+the second identity.
+\end{proof}
+
+\begin{theorem}[Certified local monodromy gap]
+\label{thm:monodromy-gap}
+On the branch in \cref{thm:validated-branch},
+\begin{equation}
+ \boxed{
+ \det(I-D\Pi_\epsilon)
+ =4-\operatorname{tr}M_\epsilon>3,
+ \qquad 0\le\epsilon\le0.101.}
+ \label{eq:gap-theorem}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For each accepted transcript, outward exact-rational evaluation gives
+\[
+ [D_M]=\left[4-\sum_{j=0}^3M_{jj}^{+},
+              4-\sum_{j=0}^3M_{jj}^{-}\right].
+\]
+All 101 intervals at each precision have lower endpoint above three.  The
+rigorous directional minima are
+\begin{equation}
+ 3.835992606647717183\quad(128\text{ bits}),
+ \qquad
+ 3.850741968945794693\quad(256\text{ bits}).
+ \label{eq:gap-minima}
+\end{equation}
+The primary slabs cover the complete parameter interval, while the bridges
+identify all local representatives.  \Cref{prop:quotient-identity} turns
+the validated trace inequality into \cref{eq:gap-theorem}.
+\end{proof}
+
+\subsection{Certificate accounting}
+
+\Cref{tab:certificate-accounting} separates producer work, proof-object
+replay, and mathematical post-processing.  CAPD is pinned at official
+commit \texttt{731079217a92\ldots895effe7f}; the full identifier is recorded
+in \cref{app:reproducibility}.  The file \texttt{CAPDVersion.txt} at that
+commit reports 6.1.0.  We do not call this a
+``6.1.0 release,'' because no such official tag is part of the audited
+provenance.
+
+\begin{table}[t]
+\centering
+\caption{Accepted A4.12--A4.13 proof-object accounting.  The precision
+columns are producer replicas; the independent scripts replay stored
+finite-dimensional inequalities but do not rerun the ODE integrator.}
+\label{tab:certificate-accounting}
+\small
+\begin{tabular}{@{}p{0.37\textwidth}rrp{0.22\textwidth}@{}}
+\toprule
+Gate & 128 bit & 256 bit & Result\\
+\midrule
+Primary slabs & 51 & 51 & all pass\\
+Guarded bridges & 50 & 50 & all pass\\
+Validated flow/Krawczyk jobs & 101 & 101 & 202/202 pass\\
+Exact-rational Krawczyk replays & 101 & 101 & 202/202 pass\\
+Determinant replays & 101 & 101 & 202/202 pass\\
+Phase-slope replays & 101 & 101 & 202/202 pass\\
+Aggregate branch checks & \multicolumn{2}{c}{3973} & zero failures\\
+Aggregate monodromy checks & \multicolumn{2}{c}{8302} & zero failures\\
+Directed-decimal payloads & \multicolumn{2}{c}{815} & all pass\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The smallest strict Krawczyk margins are
+\(9.323437289176983\times10^{-6}\) and
+\(9.328825112522987\times10^{-6}\) at 128 and 256 bits.  The maximum
+contraction bounds are \(0.033989409766443\) and
+\(0.029013314518191\).  The smallest certified phase-slope lower endpoint is
+\(8.955040964476345874\).  These are directed enclosures, not confidence
+intervals.
+
+Two failed predecessors are retained in the archive.  One evaluated the
+energy-gradient row only at a midpoint and therefore did not enclose the
+full Jacobian.  A later run passed its local inclusions but constructed
+unpadded bridge hulls whose separately rounded decimal endpoints missed
+literal containment by one final printed decimal unit.  The accepted version
+froze the rational \(10^{-18}\) padding before production and reran both
+precisions.  No post-hoc tolerance promoted either predecessor.
+
+\begin{remark}[Non-promotion clause]
+\label{rem:nonpromotion}
+\Cref{thm:validated-branch,thm:monodromy-gap} prove a primitive branch and a
+determinant gap only within the accepted local boxes.  The root complement,
+phase cover, full shell cover over \([0.60,0.75]\), independent
+event-projected return derivative, and a separate Taylor-residual gate remain
+open.  Consequently, these theorems do not prove
+\(\delta_{\rm tr}\ge0.010201\) and do not license
+\cref{eq:main-trace-formula} at \(\delta=0.01\).
+\end{remark}

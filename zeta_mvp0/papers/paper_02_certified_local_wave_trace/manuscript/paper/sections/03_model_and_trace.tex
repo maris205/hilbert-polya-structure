@@ -1,0 +1,212 @@
+\section{The model and the exact relative spectral object}
+\label{sec:model-trace}
+
+\subsection{Centered H\'enon geometry}
+
+For \(a>-1\), let
+\begin{equation}
+ r_a=\frac{1}{1+\sqrt{1+a}},
+ \qquad
+ c_a=2ar_a=2(\sqrt{1+a}-1).
+ \label{eq:ra-ca}
+\end{equation}
+Translating the positive fixed point \((r_a,r_a)\) of the area-preserving
+H\'enon map gives the centered polynomial automorphism
+\begin{equation}
+ \Psi_a(x,y)=(-c_ax-ax^2-y,x).
+ \label{eq:centered-henon}
+\end{equation}
+Its inverse and derivative are
+\begin{equation}
+ \Psi_a^{-1}(u,v)=(v,-c_av-av^2-u),
+ \qquad
+ D\Psi_a(x,y)=
+ \begin{pmatrix}-c_a-2ax&-1\\1&0\end{pmatrix}.
+ \label{eq:henon-inverse-jac}
+\end{equation}
+In particular, \(\det D\Psi_a=1\).  At \(a=0\),
+\(\Psi_0(x,y)=(-y,x)\), so \(|\Psi_0(q)|=|q|\).
+
+Define
+\begin{equation}
+ V_a(q)=2\pi\exp\!\left(\pi|\Psi_a(q)|^2\right),
+ \qquad
+ h_a(q,p)=\frac{|p|^2}{2}+V_a(q),
+ \label{eq:potential-hamiltonian}
+\end{equation}
+and let \(P_{a,\h}\) be the Friedrichs realization on \(L^2(\R^2)\) of
+\begin{equation}
+ P_{a,\h}=-\frac{\h^2}{2}\Delta+V_a.
+ \label{eq:semiclassical-operator}
+\end{equation}
+Properness of the polynomial automorphism implies
+\(V_a(q)\to\infty\) as \(|q|\to\infty\).  The quadratic form is therefore
+closed below after completion, and its Friedrichs operator has compact
+resolvent.  We write its eigenvalues, repeated with multiplicity, as
+\(\lambda_{a,k}(\h)\).
+
+\begin{proposition}[Regular compact energy surfaces]
+\label{prop:regular-shells}
+For every \(a>-1\), the Hamiltonian \(h_a\) has one critical point,
+\((q,p)=(0,0)\), at energy \(2\pi\).  Every \(E>2\pi\) is a regular value,
+the surface \(h_a^{-1}(E)\) is compact, and the flow is complete on compact
+energy bands.
+\end{proposition}
+
+\begin{proof}
+Differentiation gives
+\[
+ \nabla V_a(q)=2\pi V_a(q)D\Psi_a(q)^T\Psi_a(q).
+\]
+The derivative of \(\Psi_a\) is invertible, and \(\Psi_a(q)=0\) only for
+\(q=0\).  Thus \(V_a\) has one critical point.  The momentum derivative of
+\(h_a\) is \(p\), proving the critical-point assertion.  Properness gives
+compact sublevels, and a smooth vector field confined to a compact energy
+band is complete.
+\end{proof}
+
+\subsection{The exact common classical clock}
+
+At a fixed configuration point, the momentum disk below energy \(E\) has
+area \(2\pi(E-V_a(q))_+\).  The determinant-one change
+\(u=\Psi_a(q)\) then gives the following exact identity.
+
+\begin{proposition}[Equimeasurable phase volume]
+\label{prop:shell-volume}
+For \(E\ge2\pi\),
+\begin{align}
+ \vol\{h_a<E\}
+ &=2\pi E\log\frac{E}{2\pi}-2\pi E+4\pi^2,
+ \label{eq:phase-volume}\\
+ \int_{h_a=E}\frac{\dd\Sigma}{|\nabla h_a|}
+ &=2\pi\log\frac{E}{2\pi}.
+ \label{eq:shell-measure}
+\end{align}
+Both quantities are independent of \(a\).
+\end{proposition}
+
+\begin{proof}
+Using \(u=\Psi_a(q)\), polar coordinates, and
+\(R(E)^2=\pi^{-1}\log(E/2\pi)\), one obtains
+\begin{align*}
+ \vol\{h_a<E\}
+ &=2\pi\int_{|u|<R(E)}(E-2\pi e^{\pi|u|^2})\dd u\\
+ &=4\pi^2\int_0^{R(E)}(E-2\pi e^{\pi r^2})r\dd r,
+\end{align*}
+which evaluates to \cref{eq:phase-volume}.  Differentiating with respect to
+the regular energy gives \cref{eq:shell-measure} by the coarea formula.
+\end{proof}
+
+The adjective \emph{clock-preserving} refers only to
+\cref{eq:phase-volume,eq:shell-measure} and the associated mean Weyl terms.
+It does not assert a unitary equivalence.  The configuration change does not
+preserve the Euclidean kinetic energy, and the two quantum spectra need not
+agree.
+
+\subsection{Finite-rank relative wave trace}
+
+Let \(N_{a,\h}(E)\) and \(N_{0,\h}(E)\) be the two counting functions and
+fix the sign convention
+\begin{equation}
+ \xi_\h(E)=N_{0,\h}(E)-N_{a,\h}(E).
+ \label{eq:relative-staircase}
+\end{equation}
+Choose \(\chi\in C_c^\infty((2\pi,\infty);\R)\).  Since both operators have
+compact resolvent, \(\chi(P_{j,\h})\) has finite rank.  Thus
+\begin{equation}
+ W_{\mathrm{rel},\h}^{\chi}(t)
+ =\Tr\!\left[
+ \chi(P_{a,\h})^2e^{-itP_{a,\h}/\h}
+ -\chi(P_{0,\h})^2e^{-itP_{0,\h}/\h}
+ \right]
+ \label{eq:relative-wave}
+\end{equation}
+is an ordinary finite sum for every \(t\), rather than a regularized
+difference of two divergent traces.
+
+\begin{proposition}[Exact staircase representation]
+\label{prop:staircase-identity}
+The finite-rank trace satisfies
+\begin{equation}
+ \boxed{
+ W_{\mathrm{rel},\h}^{\chi}(t)
+ =\int_\R
+ \left[(\chi^2)'(E)-\frac{it}{\h}\chi(E)^2\right]
+ e^{-itE/\h}\xi_\h(E)\dd E.}
+ \label{eq:staircase-wave}
+\end{equation}
+In particular, it is determined by the two eigenvalue lists.
+\end{proposition}
+
+\begin{proof}
+For \(f_t(E)=\chi(E)^2e^{-itE/\h}\), spectral calculus gives
+\(W_{\mathrm{rel},\h}^{\chi}(t)=\int f_t\dd(N_{a,\h}-N_{0,\h})\).
+Since \(f_t\) is compactly supported, Stieltjes integration by parts and
+\(N_a-N_0=-\xi_\h\) give \(\int f_t'(E)\xi_\h(E)\dd E\), which is exactly
+\cref{eq:staircase-wave}.
+\end{proof}
+
+We freeze the Fourier convention
+\begin{equation}
+ \widehat g(t)=\int_\R e^{-its}g(s)\dd s,
+ \qquad
+ g(s)=\frac{1}{2\pi}\int_\R e^{its}\widehat g(t)\dd t.
+ \label{eq:fourier-convention}
+\end{equation}
+For \(g\in\cS(\R)\), define the energy-localized relative density
+\begin{align}
+ \rho_{\mathrm{rel},\h}(E;g)
+ =\Tr\!\bigg[&\chi(P_{a,\h})^2
+ g\!\left(\frac{E-P_{a,\h}}{\h}\right)\notag\\
+ &-\chi(P_{0,\h})^2
+ g\!\left(\frac{E-P_{0,\h}}{\h}\right)\bigg].
+ \label{eq:relative-density}
+\end{align}
+Fourier inversion yields the exact relation
+\begin{equation}
+ \boxed{
+ \rho_{\mathrm{rel},\h}(E;g)
+ =\frac{1}{2\pi}\int_\R
+ \widehat g(t)e^{itE/\h}W_{\mathrm{rel},\h}^{\chi}(t)\dd t.}
+ \label{eq:density-wave}
+\end{equation}
+If \(0\notin\supp\widehat g\), every distribution supported only at zero
+time is removed exactly.  This support condition is stronger than seeking a
+numerical cancellation of the two large zero-time contributions.
+
+\subsection{Hypotheses still needed for a one-orbit formula}
+
+For a fixed regular energy, the periodic-orbit trace theorem requires a
+compact energy band, a finite collection of geometric periodic orbits modulo
+time translation over the Fourier time support, transverse nondegeneracy of
+each orbit, and a convention for action and Maslov phase
+\citep{CombescureRalstonRobert1999}.  \Cref{tab:trace-hypotheses} records how
+the later sections discharge these assumptions.  The table also shows why
+the quantitative branch certificate is not, by itself, the trace theorem:
+local existence inside selected boxes does not exclude other roots in their
+complement.
+
+\begin{table}[t]
+\centering
+\caption{Hypotheses for the eigenvalue-only fixed-energy trace and their
+authorized domains.}
+\label{tab:trace-hypotheses}
+\small
+\begin{tabular}{@{}p{0.24\textwidth}p{0.39\textwidth}p{0.27\textwidth}@{}}
+\toprule
+Requirement & Model-specific discharge & Domain/status\\
+\midrule
+Compact regular band & \Cref{prop:regular-shells} & Every fixed \(E>2\pi\)\\
+No radial return & Radial blow-up and period bound & Small \(\delta\); one
+component explicit through \(0.010201\)\\
+Complete warped return census & Whole-shell blow-up, limiting return
+classification, and Poincar\'e uniqueness &
+\(0<\delta<\delta_*\), \(\delta_*>0\) nonquantitative\\
+Transverse nondegeneracy & Harmonic limit and continuation &
+\(0<\delta<\delta_{\rm nd}\), threshold nonquantitative\\
+No zero-time term & \(0\notin\supp\widehat g\) & Exact support statement\\
+Observable-free spectral side & Set the symbol equal to one after the
+complete short-time census & Eigenvalue-only finite-rank trace\\
+\bottomrule
+\end{tabular}
+\end{table}

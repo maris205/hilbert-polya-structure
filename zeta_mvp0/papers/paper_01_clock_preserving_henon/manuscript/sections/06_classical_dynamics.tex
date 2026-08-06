@@ -1,0 +1,182 @@
+\section{Zero-input classical diagnostics}
+\label{sec:classical-dynamics}
+\label{sec:classical}
+
+The clock theorem does not imply that the Hamiltonian flow is chaotic: an
+area-preserving warp can preserve phase volume while changing the force field
+in many dynamically inequivalent ways.  We therefore screened the classical
+flow directly, without loading a prime table, a Riemann-zero ordinate, or a
+spectral fitting target.  The experiments in this section test only whether
+the centered nonlinear members display stable chaotic diagnostics at the
+sampled states and energies.  They do not test ergodicity, mixing, or the
+measure of a chaotic component.
+
+\subsection{Frozen sampling and diagnostics}
+
+For the nonmagnetic flow, the natural time used throughout the numerical
+study is
+\begin{equation}
+ t_{\mathrm{nat}}(E)
+ =\sqrt{\frac{\log(E/2\pi)}{E}}.
+ \label{eq:natural-time}
+\end{equation}
+This scale balances a typical speed of order \(E^{1/2}\) against the radial
+size \(\log(E/2\pi)^{1/2}\) of the allowed domain in
+\(u=\Psi_{a,n}(q)\) coordinates.  Dimensionless integration time is
+\(\tau=t/t_{\mathrm{nat}}\), and all finite-time Lyapunov exponents below are
+reported per unit \(\tau\).
+
+Initial conditions were generated from an unscrambled three-dimensional
+Sobol sequence.  The first two coordinates were mapped to uniform area in
+the disk in \(u\)-space, with radius truncated to \(0.88\) of the allowed
+radius; the third fixed the momentum angle.  The inverse H\'enon iterate then
+gave \(q=\Psi_{a,n}^{-1}(u)\), and the momentum magnitude was chosen from the
+microcanonical constraint.  This construction is deterministic and gives
+uniform configuration density in the truncated region, but the small frozen
+seed sets used here are not a phase-space census.
+
+The primary integrator was velocity Verlet together with its analytic tangent
+map.  Two tangent vectors were normalized in coordinates scaled by the
+configuration and momentum extents.  If \(w_1,w_2\) denote the normalized
+vectors, we recorded
+\begin{equation}
+ \lambda_T=\frac{1}{T}\log\frac{\|w_1(T)\|}{\|w_1(0)\|},
+ \qquad
+ \mathrm{SALI}(T)=
+ \min\{\|\widehat w_1+\widehat w_2\|,
+        \|\widehat w_1-\widehat w_2\|\}.
+ \label{eq:ftle-sali}
+\end{equation}
+R000 used the frozen joint flag
+\(\lambda_T>0.05\) and \(\mathrm{SALI}<10^{-4}\).  The longer R001 and
+independent R106 audits used the stricter SALI threshold \(10^{-8}\).  A
+positive finite-time exponent by itself was never counted as a chaotic flag;
+this matters for the radial control, where finite-time shear produces a small
+positive exponent while SALI remains of order one.
+
+\subsection{Failure-first calibration and the R000 screen}
+
+The initial common-resolution smoke run was not numerically adequate for the
+whole parameter grid.  In particular, \(a=6\) with \(n=2,3\) produced extreme
+preimage anisotropy and nonfinite trajectories at the smoke resolution.  We
+retain those cases as failed high-distortion branches.  The calibrated R000
+production cells were
+\((a,n)=(0,1),(1.02,1),(1.02,2),(6,1)\), at
+\(E=100\) and \(1000\), with eight primary Sobol states per cell and 80
+natural-time units.  The primary resolutions were respectively
+2048, 4096, 8192, and 8192 steps per natural-time unit; the first two seeds in
+every cell were recomputed at twice that resolution.
+
+All 80 primary and refinement records completed with relative energy drift
+below \(10^{-4}\).  At each energy the radial control had zero joint flags,
+whereas all eight primary states in each of the three nonlinear production
+families were flagged.  For example, at \(E=1000\) the median dimensionless
+FTLE/SALI pairs were \(0.0592/0.951\) for the radial control,
+\(0.7116/1.17\times10^{-15}\) for \((1.02,1)\),
+\(1.0842/5.12\times10^{-15}\) for \((1.02,2)\), and
+\(0.7304/1.88\times10^{-14}\) for \((6,1)\).
+
+Fifteen of the sixteen primary/refined FTLE pairs met the frozen resolution
+rule.  The exception was \(a=6,n=1,E=1000\), seed 1, whose exponent changed
+from \(0.6515\) to \(1.0661\).  This failure, together with the smoke-run
+stiffness at larger iterates, prevents a blanket numerical-convergence claim
+for the \(a=6\) branch.  It does not affect the separately refined
+\(a=1.02\) core.
+
+\subsection{Time-length convergence}
+
+R001 followed four frozen states in every production family to 160 natural
+units at \(E=1000\), using a resolution equal to or finer than the R000
+refinement.  The median checkpoints are reported in
+\cref{tab:classical-time-convergence}.  The radial FTLE decreases from
+\(0.1777\) at \(\tau=20\) to \(0.0355\) at \(\tau=160\), while its final
+median SALI is \(0.768\).  The nonlinear medians remain of order one and all
+twelve nonlinear trajectories satisfy the joint flag at \(\tau=160\).
+Their frozen plateau ratios \(\lambda_{160}/\lambda_{80}\) are
+\(0.991\), \(1.007\), and \(0.890\), inside the acceptance interval
+\([0.6,1.4]\).  All sixteen trajectories completed; the largest relative
+energy drift was \(4.17\times10^{-6}\).
+
+\begin{table}[t]
+ \centering
+ \caption{R001 time-length convergence at \(E=1000\).  Entries are medians
+ over four frozen Sobol states.  A joint flag at \(\tau=160\) requires
+ \(\lambda_{160}>0.05\) and \(\mathrm{SALI}_{160}<10^{-8}\).}
+ \label{tab:classical-time-convergence}
+ \small
+ \begin{tabular}{@{}lrrrrrr@{}}
+ \toprule
+ \((a,n)\) & \(\lambda_{20}\) & \(\lambda_{40}\) &
+ \(\lambda_{80}\) & \(\lambda_{160}\) & SALI\(_{160}\) & flags \\
+ \midrule
+ \((0,1)\)    & 0.1777 & 0.0942 & 0.0569 & 0.0355 & 0.768 & 0/4 \\
+ \((1.02,1)\) & 0.7568 & 0.7609 & 0.7560 & 0.7489 & \(3.52\times10^{-16}\) & 4/4 \\
+ \((1.02,2)\) & 1.2902 & 1.1069 & 1.2178 & 1.2262 & \(4.34\times10^{-15}\) & 4/4 \\
+ \((6,1)\)    & 1.1846 & 1.1087 & 1.1073 & 0.9860 & \(5.45\times10^{-15}\) & 4/4 \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\subsection{Independent adaptive audit and the magnetic branch}
+
+R106 addressed two narrower concerns: dependence on the original Verlet
+implementation and survival of the classical signal at the field \(B=1\)
+used in the core quantum comparison.  It read the exact four R001 initial
+states for \(a=0\) and \(a=1.02,n=1\) at \(E=1000\), then independently
+reimplemented the potential jet and integrated the physical-velocity system
+\begin{equation}
+ \dot q=v,
+ \qquad
+ \dot v=
+ \begin{pmatrix}0&B\\-B&0\end{pmatrix}v-\nabla V_{a,1}(q)
+ \label{eq:magnetic-velocity-flow}
+\end{equation}
+with DOP853, relative tolerance \(10^{-10}\), absolute tolerance
+\(10^{-12}\), and tangent renormalization every \(0.5\) natural unit.  The
+audit covered 80 natural units and did not import the Verlet stepper.
+
+\begin{table}[t]
+ \centering
+ \caption{R106 independent adaptive audit at \(E=1000\) and
+ \(\tau=80\).  Values are medians over the four frozen R001 states; the
+ drift column is the maximum within each group.}
+ \label{tab:adaptive-magnetic-classical}
+ \small
+ \begin{tabular}{@{}rrrrrr@{}}
+ \toprule
+ \(a\) & \(B\) & \(\lambda_{80}\) & SALI & flags & max. drift \\
+ \midrule
+ 0    & 0 & 0.056855 & 1.15149 & 0/4 & \(1.37\times10^{-10}\) \\
+ 0    & 1 & 0.056616 & 1.18108 & 0/4 & \(4.95\times10^{-11}\) \\
+ 1.02 & 0 & 0.751261 & \(2.11\times10^{-15}\) & 4/4 & \(9.12\times10^{-11}\) \\
+ 1.02 & 1 & 0.613215 & \(6.15\times10^{-15}\) & 4/4 & \(1.97\times10^{-9}\) \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+Every R106 gate passed.  For the nonlinear nonmagnetic cell, the ratio of the
+DOP853 median FTLE to the R001 Verlet median at the same duration is
+\(0.9937\).  The magnetic force lowers the sampled nonlinear median FTLE from
+\(0.7513\) to \(0.6132\), but all four states remain jointly flagged.  Both
+radial groups remain unflagged.  Thus the classical signal supporting the
+\(B=1\) spectral branch is neither an artifact of the original integrator nor
+erased by that field.  Four trajectories at one energy still do not establish
+a positive-measure chaotic sea, a Lyapunov spectrum, or asymptotic
+hyperbolicity.
+
+\Cref{fig:classical-convergence} summarizes the time-length and independent-
+solver checks.  The distinction visible there is the one used in the rest of
+the paper: sampled active nonlinear dynamics versus an integrable radial
+control, not a global theorem about the flow.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.98\textwidth]{fig3_classical_convergence.pdf}
+  \caption{Classical diagnostics at \(E=1000\).  The radial finite-time
+  exponent decays while its SALI remains of order one; the centered nonlinear
+  models retain order-one FTLE and roundoff-scale SALI.  An independently
+  implemented DOP853 calculation reproduces the \(a=1.02\) signal at
+  \(B=0\) and retains it at \(B=1\), while the radial control has no joint
+  flags.}
+  \label{fig:classical-convergence}
+\end{figure*}

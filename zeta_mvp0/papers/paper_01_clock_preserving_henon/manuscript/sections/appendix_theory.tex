@@ -1,0 +1,448 @@
+\section{Theory details for the clock-preserving family}
+\label{app:theory}
+
+This appendix proves the geometric, magnetic-bracketing, symmetry, and
+relative-spectrum statements used in \cref{sec:quantum-weyl,sec:active}.
+All constants below may depend on fixed \(a,n,B\), but never on \(E\).
+
+\subsection{Polynomial geometry of a fixed H\'enon iterate}
+\label{app:poly-geometry}
+
+Recall
+\begin{equation}
+ \widetilde H_a(x,y)=(-c_ax-ax^2-y,x),
+ \qquad c_a=2(\sqrt{1+a}-1).
+ \label{eq:app-centered-map}
+\end{equation}
+Its Jacobian and inverse are
+\begin{equation}
+ D\widetilde H_a(x,y)=
+ \begin{pmatrix}-c_a-2ax&-1\\1&0\end{pmatrix},
+ \qquad
+ \widetilde H_a^{-1}(u,v)=(v,-c_av-av^2-u).
+ \label{eq:app-centered-inverse}
+\end{equation}
+Hence every fixed iterate
+\(\Psi=\widetilde H_a^n\) is a proper polynomial automorphism with
+\(\det D\Psi=1\).  For \(a\neq0\), both \(\Psi\) and \(\Psi^{-1}\) have
+degree \(D=2^n\).
+
+\begin{lemma}[Allowed-domain geometry]
+\label{lem:allowed-domain-geometry}
+Let \(a\neq0\) and \(n\) be fixed.  For \(R\geq1\), set
+\(\Omega_R=\Psi^{-1}(B_R)\) and
+\(\Phi(q)=\pi|\Psi(q)|^2\).  Then
+\begin{align}
+ |\Omega_R|&=\pi R^2, \\
+ \operatorname{length}(\partial\Omega_R)&=O_{a,n}(R^D),
+ \label{eq:app-boundary-length}\\
+ \sup_{\Psi^{-1}(B_{R+1})}|\nabla\Phi|&=O_{a,n}(R^D).
+ \label{eq:app-gradient-bound}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The area identity follows from \(\det D\Psi=1\).  Parametrize the boundary
+by
+\begin{equation}
+ q(\theta)=\Psi^{-1}(R\cos\theta,R\sin\theta).
+\end{equation}
+The derivative of the degree-\(D\) polynomial \(\Psi^{-1}\) is bounded by
+\(C_{a,n}(1+R)^{D-1}\) on \(B_R\).  Since the circle velocity has norm
+\(R\), integration over \(0\leq\theta\leq2\pi\) proves
+\cref{eq:app-boundary-length}.
+
+For \(q=\Psi^{-1}(u)\),
+\begin{equation}
+ \nabla\Phi(q)=2\pi D\Psi(q)^Tu.
+ \label{eq:app-phi-chain}
+\end{equation}
+Moreover, \(D\Psi(q)=D\Psi^{-1}(u)^{-1}\).  A \(2\times2\) matrix of
+determinant one has inverse norm bounded by a fixed multiple of its norm,
+and \(D\Psi^{-1}(u)=O_{a,n}((1+|u|)^{D-1})\).  Multiplication by
+\(|u|\leq R+1\) proves \cref{eq:app-gradient-bound}.
+\end{proof}
+
+\begin{lemma}[First-exit control]
+\label{lem:first-exit-control}
+Let \(L=\log(E/2\pi)\), \(R=\sqrt{L/\pi}\), and
+\(\ell=E^{-1/4}\).  If a lattice square \(Q\) of side \(\ell\) meets
+\(\Omega_E=\Psi^{-1}(B_R)\), then, for all sufficiently large \(E\),
+\begin{equation}
+ \Psi(Q)\subset B_{R+1}
+ \quad\text{and}\quad
+ \operatorname{osc}_Q V_{a,n}
+ =O_{a,n}(E\ell L^{D/2}).
+ \label{eq:app-first-exit-conclusion}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Choose \(q_0\in Q\cap\Omega_E\), \(q\in Q\), and let
+\(q_t=q_0+t(q-q_0)\).  Suppose that
+\(u_t=\Psi(q_t)\) first reaches \(\partial B_{R+1}\).  Up to that time,
+the inverse-polynomial estimate used in the preceding proof, together with
+\(\det D\Psi=1\), gives
+\begin{equation}
+ \|D\Psi(q_t)\|\leq C_{a,n}(1+R)^{D-1}.
+\end{equation}
+Consequently,
+\begin{equation}
+ |u_t-u_0|
+ \leq C_{a,n}\ell(1+R)^{D-1}=o(1).
+ \label{eq:app-first-exit-small}
+\end{equation}
+Reaching \(\partial B_{R+1}\) from \(B_R\) requires displacement at least
+one, contradicting \cref{eq:app-first-exit-small}.  The conclusion uses that
+\(D\), and therefore \(n\), is fixed.
+
+On \(Q\), \cref{lem:allowed-domain-geometry} gives
+\(|\nabla\Phi|=O_{a,n}(L^{D/2})\).  In addition,
+\(\ell L^{D/2}\to0\).  Choose \(q_0\in Q\cap\Omega_E\).  Integrating the
+gradient bound along the segment from \(q_0\) to any \(q\in Q\) gives
+\[
+ \Phi(q)\leq \Phi(q_0)+O_{a,n}(\ell L^{D/2})
+ <L+o(1).
+\]
+Thus \(V(q)\leq E e^{o(1)}=O(E)\) throughout the square.  The mean-value
+theorem now gives the oscillation estimate in
+\cref{eq:app-first-exit-conclusion}.
+\end{proof}
+
+The preimage \(\Omega_E\) is a smooth Jordan domain of area \(L\) and
+perimeter \(O_{a,n}(L^{D/2})\).  The elementary square-cover estimate for a
+rectifiable Jordan domain therefore gives
+\begin{equation}
+ \#\{Q:Q\cap\Omega_E\neq\varnothing\}
+ =O_{a,n}\!\left(
+ \frac{L}{\ell^2}+\frac{L^{D/2}}{\ell}+1\right).
+ \label{eq:app-square-cover}
+\end{equation}
+
+\subsection{Friedrichs realization and compact resolvent}
+\label{app:compactness}
+
+The form in \cref{eq:magnetic-form} is initially defined on
+\(C_c^\infty(\R^2)\), where it is finite because \(A_B\) and \(V_{a,n}\)
+are smooth.  It is closable: if \(u_k\to0\) in \(L^2\) while
+\[
+ \bigl((-\ii\nabla-A_B)u_k,V_{a,n}^{1/2}u_k\bigr)\to(F,G)
+\]
+in \(L^2(\R^2;\C^2)\oplus L^2(\R^2)\), distributional testing on compact
+sets gives \(F=0\), while closedness of the multiplication operator
+\(V_{a,n}^{1/2}\) gives \(G=0\).  Its nonnegative closure therefore defines
+the Friedrichs realization.
+To prove compactness of the form-domain embedding, let \((u_j)\) be bounded
+in the form norm.  Properness of \(\Psi\) makes
+\(K_M=\{q:V_{a,n}(q)\leq M\}\) compact.  Since \(A_B\) is bounded on a
+neighborhood of \(K_M\),
+\begin{equation}
+ \|\nabla u_j\|_{L^2(K_M)}
+ \leq C_{M,B}\bigl(
+ \|(-\ii\nabla-A_B)u_j\|_{L^2(K_M)}+
+ \|u_j\|_{L^2(K_M)}\bigr).
+\end{equation}
+Rellich's theorem therefore yields an \(L^2(K_M)\)-convergent subsequence.
+Outside \(K_M\), \cref{eq:potential-tail} makes the \(L^2\) norm uniformly
+small as \(M\to\infty\).  A diagonal subsequence is Cauchy in
+\(L^2(\R^2)\), proving compact embedding and hence compact resolvent.
+
+\subsection{Local magnetic square counts}
+\label{app:magnetic-count}
+
+Let \(Q\) be a square of side \(\ell\) and center \(c_Q\).  Multiplication
+by
+\begin{equation}
+ \exp\!\bigl(\ii A_B(c_Q)\cdot q\bigr)
+\end{equation}
+removes the constant vector potential on \(Q\).  The residual
+\begin{equation}
+ a_Q(q)=A_B(q)-A_B(c_Q)
+\end{equation}
+satisfies
+\begin{equation}
+ \alpha_Q:=\|a_Q\|_{L^\infty(Q)}
+ \leq \frac{|B|}{2\sqrt2}\ell.
+ \label{eq:app-residual-gauge}
+\end{equation}
+
+\begin{lemma}[Uniform local count]
+\label{lem:local-magnetic-count}
+For either the Dirichlet realization or the covariant Neumann realization of
+\(\frac12(-\ii\nabla-A_B)^2\) on \(Q\), the strict counting function,
+defined to vanish for nonpositive arguments, obeys
+\begin{equation}
+ n_{B,D/N,Q}(A)
+ =\frac{\ell^2A}{2\pi}+O_B(\ell\sqrt E+1),
+ \qquad 0\leq A\leq E,
+ \label{eq:app-uniform-local-count}
+\end{equation}
+when \(\ell=E^{-1/4}\).
+\end{lemma}
+
+\begin{proof}
+After the preceding gauge, let \(k_{B,Q}\) and \(k_{0,Q}\) denote the
+magnetic and free kinetic forms on the common Dirichlet form domain
+\(H_0^1(Q)\), or on the common covariant-Neumann form domain \(H^1(Q)\).
+For \(0<\varepsilon<1\), Cauchy's inequality gives
+\begin{align}
+ (1-\varepsilon)k_{0,Q}[u]
+ -\frac{\alpha_Q^2}{2\varepsilon}\|u\|^2
+ &\leq k_{B,Q}[u],
+ \label{eq:app-form-lower}\\
+ k_{B,Q}[u]
+ &\leq(1+\varepsilon)k_{0,Q}[u]
+ +\frac{1+\varepsilon^{-1}}{2}\alpha_Q^2\|u\|^2.
+ \label{eq:app-form-upper}
+\end{align}
+The min--max principle compares the magnetic eigenvalues with scaled and
+shifted free-square eigenvalues.  The strict free Dirichlet and Neumann
+counts satisfy the uniform lattice estimate
+\begin{equation}
+ n_{0,D/N,Q}(A)
+ =\frac{\ell^2A}{2\pi}+O(\ell\sqrt A+1),
+ \qquad A\geq0.
+ \label{eq:app-free-square-count}
+\end{equation}
+Choose \(\varepsilon=\ell\).  By
+\cref{eq:app-residual-gauge}, the induced energy shift is
+\(O_B(\ell A+\ell)\).  Its contribution to the area term in
+\cref{eq:app-free-square-count} is \(O_B(\ell^3A+\ell^3)\), which is
+\(O_B(\ell\sqrt E+1)\) for \(A\leq E\) and
+\(\ell=E^{-1/4}\).  The boundary lattice error has the same bound.  This
+proves \cref{eq:app-uniform-local-count}.  Using strict counts and setting
+them to zero at \(A\leq0\) prevents the Neumann zero mode from entering a
+forbidden square.
+\end{proof}
+
+\subsection{Assembly of the Weyl estimate}
+\label{app:weyl-assembly}
+
+We now complete the proof of \cref{thm:magnetic-weyl}.  Dirichlet--Neumann
+form bracketing with potential extrema yields
+\begin{equation}
+ \sum_Q n_{B,D,Q}(E-V_Q^+)
+ \leq N_{<}(E)
+ \leq\sum_Q n_{B,N,Q}(E-V_Q^-).
+ \label{eq:app-bracket}
+\end{equation}
+Only squares meeting \(\Omega_E\) enter the upper sum.  Combining
+\cref{eq:app-square-cover,eq:app-uniform-local-count}, the sum of the local
+lattice errors is
+\begin{align}
+ O_{a,n,B}\!\bigg[&
+ \left(\frac{L}{\ell^2}+\frac{L^{D/2}}{\ell}+1\right)
+ (\ell\sqrt E+1)\bigg]
+ \notag\\
+ &=O_{a,n,B}(E^{3/4}L^{1+D/2}).
+ \label{eq:app-total-lattice-error}
+\end{align}
+This envelope is deliberately safe; several displayed contributions are
+smaller.
+
+The principal parts of the two sums in \cref{eq:app-bracket} are lower and
+upper Darboux sums for
+\begin{equation}
+ \frac1{2\pi}\int_{\R^2}(E-V_{a,n}(q))_+\dd q.
+ \label{eq:app-phase-integral}
+\end{equation}
+By \cref{lem:first-exit-control}, their difference is bounded by the area of
+the relevant-square union times the maximal potential oscillation.  The
+union has area
+\begin{equation}
+ O_{a,n}(L+\ell L^{D/2})=O_{a,n}(L),
+\end{equation}
+because \(D\) is fixed.  Hence the Darboux-sum gap is
+\begin{equation}
+ O_{a,n}(E\ell L^{1+D/2})
+ =O_{a,n}(E^{3/4}L^{1+D/2}).
+ \label{eq:app-darboux-gap}
+\end{equation}
+The integral in \cref{eq:app-phase-integral} equals the exact classical
+clock by \cref{thm:classical-clock}.  Equations
+\eqref{eq:app-total-lattice-error} and \eqref{eq:app-darboux-gap} prove the
+theorem for \(N_{<}(E)\).  The exact classical integral contains the
+constant \(+1\); it is absorbed into the displayed quantum remainder and is
+not asserted as a resolved quantum constant.  Finally,
+\begin{equation}
+ N_{<}(E)\leq N_{\leq}(E)\leq N_{<}(E+1),
+\end{equation}
+and the classical comparison function changes by \(O(\log E)\) between
+\(E\) and \(E+1\).  This cost is absorbed by the stated remainder.
+
+For \(a=0\), \(\widetilde H_0(x,y)=(-y,x)\), so every iterate is an
+orthogonal linear map.  Repeating the proof with \(D=1\) gives
+\cref{eq:radial-magnetic-weyl}.
+
+\subsection{Coordinate metric and centered reflection audit}
+\label{app:metric-symmetry}
+
+For \(g=U_\Psi f\), one has \(f(q)=g(\Psi(q))\), and therefore
+\begin{equation}
+ \nabla_q f(q)=D\Psi(q)^T\nabla_u g(\Psi(q)).
+\end{equation}
+Changing variables \(u=\Psi(q)\) proves
+\cref{eq:metric-form,eq:metric-tensor}.  The associated divergence-form
+operator is \cref{eq:unitary-metric}.  If \(G_\Psi=I\), then \(D\Psi(q)\)
+is orthogonal at every point.  A local Euclidean isometry of the connected,
+complete plane is the restriction of an affine Euclidean isometry, which
+proves the rigidity statement used in the main text.
+
+\subsubsection{Proof of the no-reflection lemma}
+\label{app:reflection-proof}
+
+Set \(F_n(q)=|\widetilde H_a^n(q)|^2\).  Since
+\(\widetilde H_a^n\) is bijective and fixes the origin, \(F_n\) has the
+unique zero \(q=0\).  A Euclidean isometry preserving \(F_n\) must therefore
+fix the origin and is represented by an orthogonal matrix \(S\).
+
+For \(n=1,2\), the highest homogeneous part of \(F_n\) is a nonzero multiple
+of \(x^{2^{n+1}}\).  Preservation of that term forces the first row of \(S\)
+to be \((s,0)\), \(s=\pm1\).  If \(S\) reverses orientation, it must have
+the form
+\begin{equation}
+ S=\operatorname{diag}(s,-s).
+ \label{eq:app-diagonal-reflection}
+\end{equation}
+Let
+\begin{equation}
+ A=D\widetilde H_a(0)=
+ \begin{pmatrix}-c_a&-1\\1&0\end{pmatrix}.
+\end{equation}
+The quadratic Taylor form of \(F_n\) at zero is
+\(q^T(A^n)^TA^nq\).  The off-diagonal entries of \(A^TA\) and
+\((A^2)^TA^2\) are, respectively,
+\begin{equation}
+ c_a\quad\text{and}\quad c_a^3.
+\end{equation}
+Conjugation of either quadratic form by the diagonal reflection in
+\cref{eq:app-diagonal-reflection} changes the sign of its off-diagonal
+entry.  Since \(a\neq0\) implies
+\(c_a=2(\sqrt{1+a}-1)\neq0\), the Taylor form cannot be invariant.  This
+contradiction proves the lemma.
+
+For completeness, in symmetric gauge an orientation-reversing orthogonal
+map reverses the constant magnetic two-form.  Thus, if such an \(S\)
+preserved the potential, \(U_S\mathcal C\) would intertwine the two sign
+changes and restore a standard geometric antiunitary.  The lemma excludes
+exactly this repair for the stated \(a,n\); it says nothing about a nonlocal
+antiunitary unrelated to a Euclidean isometry.
+
+\subsection{Relative spectral objects and the first-resolvent boundary}
+\label{app:relative-container}
+
+We prove \cref{prop:relative-container}.  From
+\cref{eq:quantum-weyl,eq:radial-magnetic-weyl},
+\begin{equation}
+ N_j(E)\asymp E\log E,
+ \qquad
+ \lambda_{j,k}\asymp\frac{k}{\log k}.
+ \label{eq:app-eigenvalue-growth}
+\end{equation}
+For \(z\notin\R\), the singular values of the resolvent therefore satisfy
+\begin{equation}
+ s_k(R_j(z))\asymp\frac{\log k}{k}.
+ \label{eq:app-resolvent-singular-values}
+\end{equation}
+It follows that
+\begin{equation}
+ R_j(z)\in\Schatten_p\quad\Longleftrightarrow\quad p>1.
+ \label{eq:app-resolvent-threshold}
+\end{equation}
+Since \(\Schatten_p\) is a linear ideal,
+\(R_1(z)-R_0(z)\in\Schatten_p\) for \(p>1\).  No conclusion at \(p=1\)
+follows from this subtraction.  For an integer \(m\geq2\), however,
+\begin{equation}
+ R_j(z)^m\in\Schatten_1,
+\end{equation}
+so \(R_1(z)^m-R_0(z)^m\) is trace class without invoking cancellation.
+For every nonreal \(z\), the odd case \(m=3\) meets the hypothesis of the
+resolvent-power invariance-principle construction in \citet{Yafaev2005}.
+The resulting abstract weighted spectral-shift function is determined up to
+an additive constant.  The staircase below satisfies the compact-test trace
+identity and, by \cref{eq:relative-staircase-bound}, for example
+\[
+ \int_\R \frac{|\xi(E)|}{(1+|E|)^4}\dd E<\infty.
+\]
+Thus it has the required \(m=3\) weighted integrability.  In this pure-point
+setting it may therefore be taken as the normalized representative, with the
+additive constant fixed by requiring it to vanish below both spectra.
+
+Because each spectrum is discrete and bounded below, for
+\(f\in C_c^\infty(\R)\) both \(f(H_j)\) have finite rank.  Stieltjes
+integration and integration by parts give
+\begin{align}
+ \Tr(f(H_1)-f(H_0))
+ &=\int f(E)\dd\bigl(N_1(E)-N_0(E)\bigr)\\
+ &=\int f'(E)\bigl(N_0(E)-N_1(E)\bigr)\dd E,
+\end{align}
+which is \cref{eq:relative-trace-compact}.  The Weyl remainders yield
+\cref{eq:relative-staircase-bound}.
+
+Each heat semigroup is trace class for \(t>0\), and
+\begin{equation}
+ \Theta_{\mathrm{rel}}(t)
+ :=\Tr(e^{-tH_1}-e^{-tH_0})
+ =-t\int_0^\infty e^{-tE}\xi(E)\dd E.
+ \label{eq:app-relative-heat}
+\end{equation}
+In particular, the available bound on \(\xi\) gives the safe estimate
+\begin{equation}
+ \Theta_{\mathrm{rel}}(t)
+ =O_{a,n,B}\!\left(
+ t^{-3/4}(\log(1/t))^{1+2^{n-1}}\right),
+ \qquad t\downarrow0.
+ \label{eq:app-relative-heat-bound}
+\end{equation}
+The unitary propagators themselves are not trace class.  Their spectral
+propagator traces are nevertheless tempered distributions: for
+\(\varphi\in\mathcal S(\R)\), define
+\begin{equation}
+ \langle W_j,\varphi\rangle
+ =\sum_k\widehat\varphi(\lambda_{j,k}).
+ \label{eq:app-wave-distribution}
+\end{equation}
+The series converges absolutely by
+\cref{eq:app-eigenvalue-growth}, and
+\(W_{\mathrm{rel}}=W_1-W_0\in\mathcal S'(\R)\).  Equivalently, it is the
+distributional boundary value as \(\varepsilon\downarrow0\) of the ordinary
+trace
+\begin{equation}
+ \Tr\!\left(e^{-(\varepsilon+\ii t)H_1}
+             -e^{-(\varepsilon+\ii t)H_0}\right).
+ \label{eq:app-damped-wave}
+\end{equation}
+We call this the relative wave trace in the manuscript; this convention means
+the spectral-propagator trace of \(e^{-\ii tH}\), not the alternative
+\(e^{-\ii t\sqrt H}\) convention used in parts of spectral geometry.
+
+We finish by recording why none of these statements proves ordinary Krein
+comparability.  At \(B=0\), the principal resolvent symbols at a negative
+spectral parameter \(-c\), \(c>0\), are
+\begin{equation}
+ r_j(q,p)=\frac{1}{|p|^2/2+V_j(q)+c}.
+\end{equation}
+The momentum integral of their absolute difference is
+\begin{equation}
+ \int_{\R^2}|r_1(q,p)-r_0(q,p)|\dd p
+ =2\pi\left|\log\frac{V_1(q)+c}{V_0(q)+c}\right|.
+ \label{eq:app-symbol-diagnostic}
+\end{equation}
+For a non-isometric H\'enon polynomial warp, the spatial integral of the
+right-hand side diverges.  Indeed,
+\[
+ \log\frac{V_1(q)+c}{V_0(q)+c}
+ =\pi\bigl(|\Psi(q)|^2-|q|^2\bigr)+O(1).
+\]
+For a non-isometric H\'enon warp the polynomial in parentheses is nonzero,
+and the absolute value of a nonzero polynomial is not integrable over
+\(\R^2\).  The same diagnostic is unchanged at fixed \(B\),
+because \(p\mapsto p-A_B(q)\) is a fiber translation.  Equation
+\eqref{eq:app-symbol-diagnostic} is an obstruction diagnostic, not an
+operator-theoretic lower bound; it does \emph{not} prove
+\(R_1(z)-R_0(z)\notin\Schatten_1\).  Accordingly, first-resolvent trace
+class remains unproved, while the \(m=3\) resolvent-power framework is
+rigorous.  An eventual periodic-orbit interpretation would additionally
+require an energy-localized trace theorem and control of the continuous
+orbit families in the radial reference
+\citep{DuistermaatGuillemin1975,CombescureRalstonRobert1999}.

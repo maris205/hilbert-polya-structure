@@ -1,0 +1,137 @@
+\section{Centered H\'enon warps and the exact classical clock}
+\label{sec:model-clock}
+
+The construction begins with a radial potential whose classical phase volume
+can be evaluated exactly.  A determinant-one configuration map then changes
+the force field without changing configuration volume.  This section isolates
+that elementary invariant before any quantum or statistical interpretation is
+introduced.
+
+\subsection{The operator family}
+
+For \(a>-1\), define the positive fixed point
+\begin{equation}
+ r_a=\frac{1}{1+\sqrt{1+a}}
+\end{equation}
+of the area-preserving H\'enon map
+\begin{equation}
+ H_a(x,y)=(1-ax^2-y,x).
+\end{equation}
+Translation by \((r_a,r_a)\) gives the centered conjugate
+\begin{equation}
+ \widetilde H_a(x,y)=(-c_ax-ax^2-y,x),
+ \qquad c_a=2ar_a=2(\sqrt{1+a}-1).
+ \label{eq:centered-henon}
+\end{equation}
+Its inverse and Jacobian are
+\begin{equation}
+ \widetilde H_a^{-1}(u,v)=(v,-c_av-av^2-u),
+ \qquad
+ D\widetilde H_a(x,y)=
+ \begin{pmatrix}-c_a-2ax&-1\\1&0\end{pmatrix},
+\end{equation}
+so \(\det D\widetilde H_a=1\).  Both the map and its inverse are
+polynomial.  Every fixed iterate
+\(\Psi_{a,n}=\widetilde H_a^n\) is therefore a proper, area-preserving
+polynomial automorphism.  When \(a\ne0\), its degree and the degree of its
+inverse are \(D=2^n\).
+
+Let
+\begin{equation}
+ V_{a,n}(q)=2\pi\exp\!\left(\pi|\Psi_{a,n}(q)|^2\right),
+ \qquad
+ A_B(x,y)=\frac{B}{2}(-y,x),
+ \label{eq:potential-vector}
+\end{equation}
+and consider the Friedrichs realization on \(L^2(\R^2)\) of
+\begin{equation}
+ \boxed{
+ \HH_{a,n,B}
+ =\frac12(-\ii\nabla-A_B)^2+V_{a,n}.}
+ \label{eq:main-operator}
+\end{equation}
+The parameter \(B\in\R\) is fixed.  Three values of \(a\) have distinct
+roles.  The limit \(a=0\) gives
+\(\widetilde H_0(x,y)=(-y,x)\), hence the exactly radial integrable control
+\(V_{0,n}(q)=2\pi e^{\pi|q|^2}\).  The value \(a=1.02\) was fixed by an
+earlier H\'enon study before the present operator was proposed; it is the
+primary nonlinear test case, not a parameter selected by the theorem below.
+The value \(a=6\) is retained as a high-distortion and independently motivated
+hyperbolic control.
+
+\subsection{A general clock-invariance theorem}
+
+The H\'enon formula is not needed for the classical identity.  The invariant
+is the pushforward of configuration area.
+
+\begin{theorem}[Exact clock under area-preserving warps]
+\label{thm:classical-clock}
+Let \(\Psi:\R^2\to\R^2\) be a proper \(C^1\) diffeomorphism with
+\(|\det D\Psi|=1\), and set
+\(V_\Psi(q)=2\pi e^{\pi|\Psi(q)|^2}\).  For any vector potential \(A(q)\),
+assumed measurable,
+the classical symbol
+\begin{equation}
+ h_{\Psi,A}(q,p)=\frac12|p-A(q)|^2+V_\Psi(q)
+\end{equation}
+has normalized phase volume
+\begin{equation}
+ \Ncl(E)
+ :=\frac{1}{(2\pi)^2}
+ \operatorname{vol}\{(q,p):h_{\Psi,A}(q,p)<E\}
+ =\rvmlaw+1
+ \label{eq:exact-classical-clock}
+\end{equation}
+for \(E\ge2\pi\).  For \(E<2\pi\), the phase volume is zero.
+\end{theorem}
+
+\begin{proof}
+At fixed \(q\), the momentum translation \(p'=p-A(q)\) preserves Lebesgue
+measure.  The momentum disk has area \(2\pi(E-V_\Psi(q))_+\), so
+\begin{equation}
+ \Ncl(E)=\frac{1}{2\pi}\int_{\R^2}(E-V_\Psi(q))_+\dd q.
+ \label{eq:momentum-reduction}
+\end{equation}
+The change \(u=\Psi(q)\) preserves configuration measure.  Writing
+\(L(E)=\log(E/2\pi)\) and \(R(E)=\sqrt{L(E)/\pi}\), polar integration gives
+\begin{align}
+ \Ncl(E)
+ &=\frac{1}{2\pi}\int_{|u|<R(E)}
+       \left(E-2\pi e^{\pi|u|^2}\right)\dd u \\
+ &=\int_0^{R(E)}\left(E-2\pi e^{\pi r^2}\right)r\dd r
+ =\frac{E}{2\pi}L(E)-\frac{E}{2\pi}+1.
+\end{align}
+\end{proof}
+
+Equivalently, if \(\Phi_\Psi(q)=\pi|\Psi(q)|^2\), then for \(t\geq0\),
+\begin{equation}
+ A_{\Phi_\Psi}(t)
+ :=|\{q:\Phi_\Psi(q)<t\}|=t.
+ \label{eq:sublevel-invariant}
+\end{equation}
+For \(t<0\), the sublevel area is zero.
+The exact identity is independent of the geometry of individual level sets.
+It also does not require the momentum translation to be a global canonical
+transformation.  For a magnetic vector potential with nonzero curl, it
+generally is not; only the fiberwise measure statement is used.
+
+\begin{remark}[What the constant means]
+The \(+1\) in \cref{eq:exact-classical-clock} belongs to the exact classical
+comparison function.  The quantum remainder proved in \cref{sec:quantum-weyl}
+is much larger than a constant.  No quantum \(7/8\) term, and no analogue of
+the oscillatory \(S(T)\) term, is inferred from this identity.
+\end{remark}
+
+\Cref{fig:equal-area-geometry} displays the preimages of two radial circles.
+The domains differ sharply in shape while their area remains exactly
+\(L(E)\), as required by \cref{eq:sublevel-invariant}.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.96\textwidth]{fig2_equal_area_geometry.pdf}
+  \caption{Configuration boundaries for two common energy levels.  The radial,
+  centered \(a=1.02\), and high-distortion \(a=6\) domains have different
+  geometry but exactly the same area at each energy by the determinant-one
+  H\'enon change of variables.}
+  \label{fig:equal-area-geometry}
+\end{figure*}
