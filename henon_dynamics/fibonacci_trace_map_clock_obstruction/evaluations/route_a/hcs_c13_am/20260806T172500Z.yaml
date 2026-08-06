@@ -1,0 +1,210 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C13-AM
+candidate_definition: >-
+  Z_AM(z)=exp(sum_{n>=1} #Fix(T^n|Omega_16) z^n/n)
+  =det(I-z A_10)^(-1), tested only under the literal coefficient claim
+  tr(A_10^k)=d_k(E) in C[E] for every k>=1 at lambda=16.
+family: Fibonacci trace map in Casdagli's source-proven large-coupling regime
+phase_space: the hyperbolic nonwandering set Omega_16 on the invariant surface I=64
+dynamics: "T(x,y,z)=(2xy-z,x,y) restricted to Omega_16"
+parameters:
+  lambda: 16
+  casdagli_coupling_V_C: 8
+  target_identity: "tr(A_10^k)=d_k(E) for every k>=1"
+parameter_provenance: >-
+  lambda=16 is the boundary V_C=8 of Casdagli's cited regime under
+  V_C=lambda/2. The coefficient identity is frozen before evaluation and has
+  no scale, shift, unfolding, fitted prefactor, or variable map.
+clock: primitive trace-map return period n; physical length q_k is separate
+normalization: Z_AM(0)=1; the target logarithmic series is sum_k d_k(E)z^k/k
+determinant_convention: the target object is Z_AM(z)=det(I-z A_10)^(-1)
+orbit_cutoff: none; the full exact ten-state determinant is used
+precision: exact integer and rational symbolic algebra
+training_data: none; no parameters are fitted
+forbidden_data: Riemann prime/zero tables, target fitting, cross-regime evidence, and post-hoc changes of the coefficient identity
+code_commit: NOT_TESTABLE
+artifact_paths:
+  - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+  - fibonacci_trace_map_clock_obstruction/paper/sections/2_fibonacci_setup.tex
+  - fibonacci_trace_map_clock_obstruction/paper/sections/5_scope_route_a.tex
+source_commit: NOT_TESTABLE
+evaluation_date: "2026-08-06T09:25:00Z"
+supersedes: ../hcs_c13/20260806T170000Z.yaml
+record_status: AUTHORITATIVE
+input_gate: TESTABLE_AS_UNWEIGHTED_DYNAMICAL_ZETA
+
+source_lock:
+  object: >-
+    The unweighted Artin-Mazur/Bowen-Lanford zeta of Casdagli's
+    source-faithful ten-state presentation of the Fibonacci trace-map
+    nonwandering set at lambda=16, tested only as a literal logarithmic-
+    coefficient proposal. It is not an energy-weighted transfer operator.
+  candidate_definition: >-
+    Z_AM(z)=exp(sum_{n>=1} #Fix(T^n|Omega_16) z^n/n)
+    =det(I-z A_10)^(-1), with the target equality
+    log Z_AM(z)=sum_{k>=1} d_k(E)z^k/k in C[E][[z]], equivalently
+    tr(A_10^k)=d_k(E) for every k>=1.
+  family: Fibonacci trace map in Casdagli's source-proven large-coupling regime
+  phase_space: >-
+    Omega_16 contained in the invariant cubic surface S_16 with
+    I(x,y,z)=x^2+y^2+z^2-2xyz-1=lambda^2/4=64
+  dynamics: "T(x,y,z)=(2xy-z,x,y) restricted to Omega_16"
+  parameters:
+    lambda: 16
+    casdagli_coupling_V_C: 8
+    orbit_variable: z
+    spectral_parameter: E
+    target_identity: "tr(A_10^k)=d_k(E) for every k>=1"
+  parameter_provenance: >-
+    lambda=16 is the minimal value in the audited source regime V_C>=8 under
+    V_C=lambda/2. The coefficient identity was fixed before evaluation; no
+    prime values, Riemann zeros, spectral roots, scale, shift, unfolding,
+    prefactor, or variable map was used to choose it.
+  symbolic_partition: >-
+    Primary object: Casdagli's ten-state directed graph A_10. The unweighted
+    six-state graph is only a quotient with a decorated initial lift and is
+    not substituted for A_10 in this candidate.
+  transfer_operator: >-
+    The fixed unweighted adjacency matrix A_10; no energy-dependent weights,
+    roof function, potential, or boundary functional enter Z_AM.
+  clock: >-
+    Primitive return period n, measured in one trace-map iterate. The physical
+    approximant length q_k=F_{k+2} is recorded as a distinct clock and is not
+    averaged, rescaled, or substituted for n.
+  normalization: >-
+    Z_AM(0)=1. The target is the formal logarithmic series
+    sum_{k>=1} d_k(E)z^k/k, with no fitted affine change, unfolding, entire
+    prefactor, or post-validation renormalization.
+  determinant_convention: >-
+    The object under test is Z_AM(z)=det(I-z A_10)^(-1), not 1/Z_AM,
+    Z_AM'/Z_AM, a boundary resolvent, or det(I-L_E) for an energy-dependent
+    Fredholm operator.
+  cutoff: >-
+    Full ten-state graph and its exact rational determinant; no orbit cutoff.
+  precision: exact integer and rational symbolic algebra
+  training_data: none; this is an exact structural test with no fitted parameters
+  validation_data: none; parameters and the coefficient identity are frozen analytically
+  sealed_test_data: none; no numerical target data are consulted
+  allowed_data: >-
+    Casdagli's source graph and coupling convention, chronological Fibonacci
+    transfer matrices for interpretation, exact symbolic matrix algebra, and
+    primary-source theorems cited in SOURCE_AUDIT.md
+  forbidden_data: >-
+    Riemann prime tables, Riemann zero tables, target-root fitting, mixing the
+    lambda=16 coding with lambda=1 experiments, and post-hoc clock,
+    coefficient, normalization, or target changes
+  code_commit: NOT_TESTABLE
+  workspace_provenance: >-
+    The workspace is not a Git worktree, so no commit hash can be recorded.
+    Provenance is therefore frozen by the immutable evaluation path and the
+    explicit artifact paths below.
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The source-faithful finite directed graph gives intrinsic closed symbolic
+    paths, exact fixed-point counts tr(A_10^n), and a reproducible primitive-
+    versus-repeat decomposition by Mobius inversion without reading arithmetic
+    target tables.
+  strongest_failure: >-
+    No canonical prime correspondence, logarithmic-prime clock, arithmetic
+    repetition weight, orbit phase, or complete geometric multiplier catalogue
+    has been supplied for this candidate.
+  metrics:
+    primary_graph_states: 10
+    chronological_dynamics_preserved: true
+    primitive_repeat_rule: exact_symbolic_Mobius_decomposition_available
+    geometric_multiplier_enumeration: not_run
+    prime_clock_correspondence: not_defined
+    shuffled_period_control: not_run_no_matching_claim
+    random_weight_control: not_run_unweighted_exact_object
+    random_phase_control: not_run_no_phase_claim
+    neighboring_parameter_control: not_run_source_lock_is_lambda_16
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+    - fibonacci_trace_map_clock_obstruction/paper/sections/3_incidence_return.tex
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: >-
+    Exact finite-state algebra gives a well-defined rational closed-orbit zeta
+    Z_AM(z)=1/((1+z)^2(1-z+z^2)(1-z-z^2)).
+  strongest_failure: >-
+    The frozen coefficient identity fails exactly: tr(A_10^k) is an
+    energy-independent integer, whereas d_k(E) is monic of degree F_{k+2}.
+    Thus the direct unweighted logarithmic-coefficient identification defined
+    in the source lock is false.
+  metrics:
+    zero_error_train: not_applicable_exact_coefficient_identity
+    zero_error_validation: not_applicable_exact_coefficient_identity
+    zero_error_test: not_applicable_exact_coefficient_identity
+    extra_zero_count: not_applicable_exact_coefficient_identity
+    missing_zero_count: not_applicable_exact_coefficient_identity
+    root_count_discrepancy: not_applicable_exact_coefficient_identity
+    cutoff_drift: not_applicable_full_finite_graph
+    precision_drift: not_applicable_exact_symbolic_algebra
+    control_margin: exact_constant_coefficient_versus_positive_energy_degree
+    determinant_degree: 6
+    primary_graph_states: 10
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+    - fibonacci_trace_map_clock_obstruction/paper/sections/2_fibonacci_setup.tex
+    - fibonacci_trace_map_clock_obstruction/paper/sections/5_scope_route_a.tex
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: >-
+    The finite-state zeta has an exact rational continuation and conjugation
+    symmetry because A_10 is a real integer matrix.
+  strongest_failure: >-
+    No xi normalization, functional equation, Gamma factor, trivial-zero and
+    pole treatment, Riemann-von Mangoldt law, Euler weights, or target divisor
+    is defined by this unweighted object.
+  metrics:
+    conjugation_symmetry: exact_for_the_rational_zeta
+    functional_equation: not_defined
+    gamma_factor: not_defined
+    target_root_count: not_defined
+    analytic_continuation: rational_meromorphic_only
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    A canonical self-adjoint Fibonacci Schrodinger Hamiltonian exists on the
+    physical lattice, so the surrounding model has a non-post-hoc operator.
+  strongest_failure: >-
+    That Hamiltonian uses the physical lattice clock, has no point spectrum in
+    the Fibonacci hull, and is not a quantization of det(I-z A_10)^(-1) with
+    the same clock, phases, weights, Hilbert space, and operator domain.
+  metrics:
+    natural_background_operator: true
+    same_clock_as_candidate: false
+    discrete_eigenvalue_divisor: false
+    quantization_of_A_10_zeta: not_defined
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  This record rejects only HCS-C13-AM: the lambda=16 unweighted ten-state
+  Artin-Mazur zeta under the literal identity tr(A_10^k)=d_k(E) for every k.
+  It is not a universal no-go theorem for energy-dependent, infinite-
+  dimensional Fredholm families, and it does not import conclusions from
+  separately scoped polynomial-degree, value-growth, or boundary-repair
+  candidates.
+blocking_conditions:
+  - its logarithmic coefficients are energy-independent integers, not d_k(E)
+  - no alternative energy-dependent target or divisor map is defined
+  - the natural self-adjoint Hamiltonian does not quantize this zeta or supply a discrete divisor
+next_smallest_test: >-
+  Do not tune this fixed zeta. Any energy-dependent or boundary-conditioned
+  repair must be registered as a new candidate with its own function space,
+  operator, clock, determinant convention, source lock, and data split.
+route_b_invocation_allowed: false

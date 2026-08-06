@@ -1,0 +1,87 @@
+\section{Proof details and reproducibility}
+
+\subsection{The low-period normalized Jacobian norms}
+
+For $n=1$, set $f=ax^2+2x-1$ and $j=2ax+2$.  Taking the norm of $j$ in
+$\Q(a)[x]/(f)$ gives
+\[
+ \operatorname{Norm}(j)=-4(a+1).
+\]
+For $n=2$, the cyclic Jacobian determinant is
+\[
+ j_2=4a^2x_0x_1-4.
+\]
+Multiplication by $j_2$ on the standard basis
+$1,x_0,x_1,x_0x_1$ has determinant
+\[
+ 2^8(a+1)(a-3)^3.
+\]
+These $D_{a,n}$ are normalized transversality resultants/Jacobian norms, not
+ordinary polynomial discriminants (the ordinary $n=1$ quadratic
+discriminant is $4(a+1)$).  The factorization
+\[
+ f_0-f_1=(x_0-x_1)(a(x_0+x_1)-2)
+\]
+separates the fixed branch from the primitive period-two branch.  With
+$u=ax+1$ and $v=ax_0-1$ the two quadratic relations are
+\[
+ u^2=a+1,\qquad v^2=a-3.
+\]
+The branch ideals are comaximal over $\Q(a)$, so this gives the
+scheme-theoretic product there.  At $a=3$ the primitive branch collides with
+the fixed branch; the splitting is not asserted at that specialization.
+
+\subsection{The generic reversor-line marker}\label{app:marker}
+
+The exact period-five marker before specialization is
+\begin{align*}
+G_a(q)={}&a^6q^6+2a^5q^5+(-3a^5+2a^4)q^4
+ +(-4a^4+2a^3)q^3\\
+&+(3a^4-4a^3+a^2)q^2+(2a^3-2a^2)q
+ -a^3+2a^2-a-1.
+\end{align*}
+It is obtained as the greatest common divisor of the two equations defining
+$\Fix(H_a^5)$ after setting $p=q$, divided by the fixed-point factor
+$aq^2+2q-1$.  The producer derives this expression; it is not inserted as a
+fit.
+
+\subsection{Reproducibility ledger}\label{app:repro}
+
+From the repository root, run
+\begin{verbatim}
+python henon_frobenius_scheme_obstruction/code/test_c12a.py
+python henon_frobenius_scheme_obstruction/code/c12a_producer.py
+python henon_frobenius_scheme_obstruction/code/c12a_checker.py
+\end{verbatim}
+
+The frozen artifacts have SHA-256 values
+\begin{center}
+{\scriptsize
+\begin{tabular}{ll}
+\toprule
+artifact & SHA-256\\
+\midrule
+certificate JSON & \texttt{851ca31f62fb508ad806c26084eab9fe092d5ee037bf99f0cb811cbccf7f8eb8}\\
+count CSV & \texttt{d07d9558dd9036507b89699452edc1494bea2faca8344d5ce6cf2d031f9bc480}\\
+independent check & \texttt{4784e8b2fbf98ad835a5f1c0ef9217de14537adcff486046e74a6b0f47e93778}\\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+The checker does not import the producer.  It constructs each frozen finite
+field as an explicit polynomial quotient, verifies directly that every
+nonzero element is a unit, and enumerates the cyclic equations.  The
+period-five checker starts instead from the scalar recurrence on the reversor
+line.  It also enumerates all states of the reversible joint-action control
+and verifies $RHR=H^{-1}$ and both commutation relations.  The v2 amendment
+that introduced this control is recorded in \texttt{AMENDMENT\_LOG.md}.
+
+\subsection{Limitations}
+
+We do not prove that $X_{a,n}$ is reduced in characteristic zero for every
+fixed $a$ and $n$.  Scheme-level formal period requires extra care when the
+characteristic divides $n$.  The global Dedekind factors discussed in the main
+text can have nontrivial zeros and may contain $\zeta(s)$; what they do not
+provide is a new H\'enon-specific gamma factor, exact Riemann divisor, or
+self-adjoint realization required by Hilbert--P\'olya.

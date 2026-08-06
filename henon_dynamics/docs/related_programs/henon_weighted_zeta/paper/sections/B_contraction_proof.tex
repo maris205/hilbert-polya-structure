@@ -1,0 +1,389 @@
+\section{Proof of the explicit state-rectangle theorem}
+\label{app:contraction-proof}
+
+This appendix gives the proof used by Theorem~\ref{thm:contraction}.  It is
+included to make the logical dependency of the numerical ledgers explicit.
+Starting from the exact rational state-rectangle intervals in
+\eqref{eq:hset-bounds} and
+the matrix $A$ in \eqref{eq:adjacency}, we prove the one-step exclusion,
+signed-recurrence contraction, conjugacy, period preservation, entropy identity,
+and two-sided cone bounds.  No finite period catalogue or finite-volume matrix
+enters the proof.
+
+\subsection{State paths and the signed recurrence}
+
+Let $\Sigma_A$ be the space of bi-infinite state sequences
+$\omega=(w_i)_{i\in\mathbb Z}$ with $A_{w_iw_{i+1}}=1$, equipped with the
+product topology, and let $\sigma$ denote the left shift.  Write
+$w_i=(s_i,t_i)$ with $s_i,t_i\in\{-,+\}$.  The nonzero entries of $A$ imply
+
+\begin{equation}
+ t_i=s_{i-1}\qquad (i\in\mathbb Z).
+ \label{eq:proof-state-overlap}
+\end{equation}
+
+We henceforth identify the symbols $+$ and $-$ with the numbers $+1$ and
+$-1$, respectively.  Thus an admissible state path has a unique scalar sign
+sequence $\varepsilon_i=s_i\in\{-1,+1\}$ and
+$w_i=(\varepsilon_i,\varepsilon_{i-1})$.  The only additional restriction is
+that the two neighbors of a central symbol are not both positive:
+
+\begin{lemma}[Exact rectangle separation and one-step exclusion]
+\label{lem:proof-exclusion}
+The four rectangles are pairwise disjoint, $X_s$ lies strictly inside $Y_s$
+for each sign, and every orbit in $\Lam_*$ has an $A$-admissible state
+itinerary.
+\end{lemma}
+
+\begin{proof}
+The endpoint ordering
+\[
+ \frac5{16}<\frac13<\frac58<\frac{81}{128}
+\]
+and its reflection prove separation and the strict inclusions
+$X_s\subset\operatorname{int}Y_s$.  If $(x,y)\in N_{st}$ and
+$H_6(x,y)\in N_{s't'}$, then the second image coordinate is $x$; hence
+$t'=s$.  This excludes eight of the ten zero entries of $A$.  For the two
+remaining structural pairs, the source has $y\in Y_+$ and the target has
+$x$-sign positive.  On either such source,
+\[
+ 1-6x^2-y
+ \leq 1-6\left(\frac13\right)^2-\frac5{16}
+ =\frac1{48}<\frac13=\inf X_+.
+\]
+Thus these two transitions are also impossible, leaving exactly the six
+nonzero entries of $A$.
+\end{proof}
+
+\begin{lemma}[Graph/sign equivalence]
+\label{lem:proof-graph}
+For a cyclic or bi-infinite path, an edge
+$(\varepsilon_i,\varepsilon_{i-1})\to
+(\varepsilon_{i+1},\varepsilon_i)$ is $A$-allowed if and only if
+$\varepsilon_{i-1}$ and $\varepsilon_{i+1}$ are not both $+$.
+\end{lemma}
+
+\begin{proof}
+The overlap condition \eqref{eq:proof-state-overlap} leaves two possible
+targets for each source state.  In the state order $(--,-+,+-,++)$ these
+structural possibilities are
+\[
+--\to --,+-,\qquad -+\to --,+-,\qquad
++-\to -+,++,\qquad ++\to -+,++.
+\]
+The matrix $A$ deletes exactly $-+\to +-$ and $++\to ++$.  These are precisely
+the two cases in which the predecessor and successor signs are both positive;
+all other structural edges are retained.
+\end{proof}
+
+For a sign sequence $\varepsilon$, define the closed sign box
+\[
+ K_\varepsilon=\prod_{i\in I}X_{\varepsilon_i},
+\]
+where $I=\mathbb Z$ for a bi-infinite path and $I=\mathbb Z/n\mathbb Z$ for
+a cyclic word.  On this box consider
+\begin{equation}
+ (T_\varepsilon q)_i
+ =\varepsilon_i\sqrt{\frac{1-q_{i-1}-q_{i+1}}{6}}.
+ \label{eq:proof-signed-map}
+\end{equation}
+
+\begin{lemma}[Rational radicand bounds]
+\label{lem:proof-radicand}
+If $q_{i-1},q_{i+1}$ lie in their prescribed sign intervals and are not both
+positive, then
+\[
+ \frac{1-q_{i-1}-q_{i+1}}6
+ \in \left[\frac5{18},\frac38\right]
+ \quad\text{or}\quad
+ \left[\frac{17}{144},\frac{31}{144}\right].
+\]
+In either case its positive square root lies strictly between $1/3$ and
+$5/8$.
+\end{lemma}
+
+\begin{proof}
+If both neighbors are negative, their sum belongs to
+$[-5/4,-2/3]$, giving $[5/18,3/8]$ after the affine rescaling.  If one is
+positive and one negative, their sum belongs to
+$[-7/24,7/24]$, giving $[17/144,31/144]$.  Finally,
+\[
+ 5/18>1/9,\quad 3/8<25/64,\quad
+ 17/144>1/9,\quad 31/144<25/64,
+\]
+so taking positive square roots gives the claimed strict bounds.
+\end{proof}
+
+\begin{lemma}[Strict self-mapping]
+\label{lem:proof-self-map}
+For every admissible sign sequence, $T_\varepsilon$ maps
+$K_\varepsilon$ into its coordinatewise interior.
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{lem:proof-graph} excludes the only case in which both neighbors
+are positive.  Lemma~\ref{lem:proof-radicand} then gives
+$1/3<\sqrt{(1-q_{i-1}-q_{i+1})/6}<5/8$.  Multiplication by
+$\varepsilon_i$ places the result in the interior of $X_{\varepsilon_i}$ at
+every coordinate.
+\end{proof}
+
+\begin{lemma}[Uniform contraction]
+\label{lem:proof-contraction}
+On every admissible sign box,
+\[
+ \norm{T_\varepsilon q-T_\varepsilon q'}_\infty
+ \leq \frac2{\sqrt{17}}\norm{q-q'}_\infty
+ <\norm{q-q'}_\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+For $f(u,v)=\sqrt{(1-u-v)/6}$, the derivative bound on the intervals of
+Lemma~\ref{lem:proof-radicand} is
+\[
+ \left|\frac{\partial f}{\partial u}\right|
+ =\frac1{12\sqrt{(1-u-v)/6}}
+ \leq \frac1{\sqrt{17}},
+\]
+and the same holds for $v$.  The mean-value theorem therefore gives
+\[
+ |(T_\varepsilon q)_i-(T_\varepsilon q')_i|
+ \leq \frac1{\sqrt{17}}
+ \bigl(|q_{i-1}-q'_{i-1}|+|q_{i+1}-q'_{i+1}|\bigr)
+ \leq \frac2{\sqrt{17}}\norm{q-q'}_\infty.
+\]
+For cyclic words of length one or two, the two neighbor occurrences may refer
+to the same coordinate; their derivative contributions add and still give the
+same coefficient $2/\sqrt{17}$.  Since $4<17$, this coefficient is strictly
+less than one.
+\end{proof}
+
+\begin{lemma}[One fixed sequence per admissible itinerary]
+\label{lem:proof-fixed}
+Every finite cyclic or bi-infinite admissible sign sequence has exactly one
+fixed point of $T_\varepsilon$ in $K_\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+For a cyclic word, $K_\varepsilon$ is a finite product of closed intervals and
+is therefore complete.  For a bi-infinite word, it is a closed subset of
+$\ell^\infty(\mathbb Z)$ and is complete in the sup norm.  This norm topology
+on each fixed sign box is distinct from the product topology used on the
+symbolic space $\Sigma_A$ below.  Lemma~\ref{lem:proof-self-map} gives
+self-mapping, and Lemma~\ref{lem:proof-contraction} gives a contraction with
+constant less than one.  Banach's fixed-point theorem applies.
+\end{proof}
+
+\subsection{Orbit correspondence and conjugacy}
+
+\begin{lemma}[Fixed sequences are H\'enon orbits]
+\label{lem:proof-orbit}
+If $q=T_\varepsilon q$, then
+\[
+ q_{i+1}=1-6q_i^2-q_{i-1},\qquad
+ z_i=(q_i,q_{i-1})\in N_{\varepsilon_i,\varepsilon_{i-1}},
+\]
+and $H_6(z_i)=z_{i+1}$.
+\end{lemma}
+
+\begin{proof}
+Squaring the fixed-point equation gives
+$6q_i^2=1-q_{i-1}-q_{i+1}$, which is the recurrence.  The strict
+self-mapping places $q_i$ in $X_{\varepsilon_i}$, while
+$X_{\varepsilon_{i-1}}$ lies in the interior of
+$Y_{\varepsilon_{i-1}}$.  Substitution into the definition of $H_6$ gives the
+map identity.
+\end{proof}
+
+\begin{lemma}[Conjugacy on the full state-rectangle survivor]
+\label{lem:proof-conjugacy}
+The itinerary map $\pi:\Lam_*\to\Sigma_A$ is a homeomorphism and
+\[
+ \pi\circ H_6=\sigma\circ\pi.
+\]
+\end{lemma}
+
+\begin{proof}
+Every set $H_6^{-k}(\mathcal N)$ is closed, and the intersection in
+\eqref{eq:survivor} is contained in the compact set $\mathcal N$ supplied by
+the $k=0$ term.  Hence $\Lam_*$ is compact.  Shifting the integer index in
+\eqref{eq:survivor} proves invariance.  The constant $--$ itinerary is
+admissible, so Lemmas~\ref{lem:proof-fixed} and \ref{lem:proof-orbit} show that
+$\Lam_*$ is nonempty.
+
+For $\omega\in\Sigma_A$, let $q(\omega)$ be the unique fixed sequence from
+Lemma~\ref{lem:proof-fixed}, and define
+\[
+ \Phi(\omega)=\bigl(q_0(\omega),q_{-1}(\omega)\bigr).
+\]
+Lemma~\ref{lem:proof-orbit} places the full orbit of this point in
+$\mathcal N$, so $\Phi(\omega)\in\Lam_*$.  We next prove that $\Phi$ is
+continuous without comparing two different branch maps globally.  Suppose
+that two sign sequences agree on $[j-m,j+m]$, and let $q,q'$ be their fixed
+sequences.  For $0\leq r\leq m$, set
+\[
+ D_r=\max_{|i-j|\leq m-r}|q_i-q'_i|.
+\]
+The common sign at every coordinate in the initial window gives
+$D_0\leq 7/24$, the diameter of either interval $X_s$.  At each coordinate in
+the smaller window defining $D_{r+1}$, both neighboring coordinates lie in
+the window defining $D_r$, and the two fixed-point equations use the same
+central sign.  The derivative estimate from
+Lemma~\ref{lem:proof-contraction} therefore gives
+\[
+ D_{r+1}\leq \frac2{\sqrt{17}}D_r,
+ \qquad
+ |q_j-q'_j|\leq \frac7{24}
+ \left(\frac2{\sqrt{17}}\right)^m.
+\]
+If two itineraries agree on $[-m,m]$, this bound applies at $j=0$ with depth
+$m$ and at $j=-1$ with depth $m-1$.  Thus both coordinates of $\Phi$ vary
+continuously in the product topology.
+
+Conversely, every $z\in\Lam_*$ has a unique state at every iterate because
+the four state rectangles are pairwise disjoint.
+Lemma~\ref{lem:proof-exclusion} makes
+this itinerary $A$-admissible and defines $\pi(z)\in\Sigma_A$.  Writing
+$H_6^i(z)=(q_i,q_{i-1})$, the H\'enon recurrence and the sign of $q_i$ recover
+the signed square-root equation $q=T_\varepsilon q$.  Uniqueness in
+Lemma~\ref{lem:proof-fixed} then gives
+$\Phi\circ\pi=\operatorname{id}_{\Lam_*}$, while construction gives
+$\pi\circ\Phi=\operatorname{id}_{\Sigma_A}$.  The subshift $\Sigma_A$ is
+compact in the product topology and $\Lam_*$ is Hausdorff, so the continuous
+bijection $\Phi$ is a homeomorphism.  Finally,
+$\Phi\circ\sigma=H_6\circ\Phi$, equivalently
+$\pi\circ H_6=\sigma\circ\pi$.
+\end{proof}
+
+Call the shift orbit of a periodic $A$-admissible state sequence a
+\emph{symbolic necklace}; it is primitive when its least shift period equals
+its length.  Thus rotations of a based cyclic word represent the same
+necklace.
+
+\begin{lemma}[Period preservation and orbit bijection]
+\label{lem:proof-period}
+The conjugacy induces a bijection between primitive symbolic necklaces of
+length $n$ and primitive $H_6$-orbits in $\Lam_*$ of period $n$.
+\end{lemma}
+
+\begin{proof}
+For a based cyclic word of least period $n$, the corresponding scalar sequence
+cannot have a smaller period $d<n$, because its signs would then also have
+period $d$.  The state itinerary has the same least period because its second
+sign is the previous first sign.  Rotating the based word shifts the fixed
+sequence and hence selects another point on the same $H_6$-orbit.  Conversely,
+the itinerary of every periodic orbit is periodic, and the conjugacy preserves
+least periods.  Quotienting both sides by these shifts gives the stated
+bijection.
+\end{proof}
+
+\subsection{Entropy and scope}
+
+Lemma~\ref{lem:proof-conjugacy} proves the conjugacy and
+Lemma~\ref{lem:proof-period} gives the primitive periodic-orbit bijection.  The
+entropy of a finite-type subshift is the logarithm of the spectral radius of
+its adjacency matrix.  Direct calculation gives
+\[
+ \det(\lambda I-A)=(\lambda^2-\lambda-1)(\lambda^2+1),
+\]
+so $\rho(A)=(1+\sqrt5)/2$ and
+$h_{\rm top}(H_6|_{\Lam_*})=\log\rho(A)$.
+
+\subsection{Two-sided cone certificate}
+
+For completeness, we record the exact hyperbolicity bounds on the same four
+state rectangles.  Their common horizontal and vertical half-widths are
+\[
+ \alpha=\frac7{48},\qquad \beta=\frac{41}{256},\qquad
+ r=\frac\beta\alpha=\frac{123}{112}.
+\]
+In normalized tangent coordinates
+$(u,v)=(\delta x/\alpha,\delta y/\beta)$, define
+\[
+ \mathcal C^u=\{(u,v):|v|\leq |u|/2\},\qquad
+ \mathcal C^s=\{(u,v):|u|\leq |v|/2\}.
+\]
+For $z=(x,y)$ in the state-rectangle union,
+\[
+ \widehat{DH_6}_z=
+ \begin{pmatrix}-12x&-r\\r^{-1}&0\end{pmatrix}.
+\]
+If $(u,v)\in\mathcal C^u$, then $|x|\geq1/3$ and
+\[
+ |u'|\geq\left(4-\frac{123}{224}\right)|u|
+ =\frac{773}{224}|u|,
+ \qquad
+ \frac{|v'|}{|u'|}
+ \leq\frac{25088}{95079}<\frac12.
+\]
+Thus the unstable cone is mapped strictly into itself and expands by at least
+$773/224$ in the normalized max norm.  Since
+$H_6^{-1}(X,Y)=(Y,1-6Y^2-X)$,
+\[
+ \widehat{DH_6^{-1}}_Z=
+ \begin{pmatrix}0&r\\-r^{-1}&-12Y\end{pmatrix}.
+\]
+For $(u,v)\in\mathcal C^s$ and $|Y|\geq5/16$,
+\[
+ |v'|\geq\left(\frac{15}{4}-\frac{56}{123}\right)|v|
+ =\frac{1621}{492}|v|,
+ \qquad
+ \frac{|u'|}{|v'|}
+ \leq\frac{15129}{45388}<\frac12.
+\]
+Hence the stable cone is strictly invariant under $DH_6^{-1}$ with backward
+expansion at least $1621/492$.
+
+To see that these pointwise inequalities yield invariant lines, write an
+unstable slope as $m=v/u$.  Its projective map is
+\[
+ T_x(m)=\frac{r^{-1}}{-12x-rm},
+ \qquad
+ |T_x'(m)|\leq\left(\frac{224}{773}\right)^2<1.
+\]
+The corresponding stable slope $n=u/v$ under $DH_6^{-1}$ satisfies
+\[
+ S_Y(n)=\frac{r}{-r^{-1}n-12Y},
+ \qquad
+ |S_Y'(n)|\leq\left(\frac{492}{1621}\right)^2<1.
+\]
+We spell out the graph-transform limit.  Write
+$z_k=H_6^k(z)=(x_k,y_k)$ and let $I=[-1/2,1/2]$.  For the unstable direction,
+define
+\[
+ F^u_{n,z}=T_{x_{-1}}\circ T_{x_{-2}}\circ\cdots\circ T_{x_{-n}}.
+\]
+Every factor maps $I$ strictly into $I$ and has Lipschitz constant at most
+$\kappa_u=(224/773)^2$.  Hence $F^u_{n,z}(0)$ is uniformly Cauchy: after one
+more factor is appended in the remote past, the change at time zero is at most
+$\kappa_u^n\operatorname{diam}(I)$.  The limit is independent of the initial
+slope for the same reason.  Each finite composition depends continuously on
+$z$, and uniform convergence makes the limiting slope $m^u(z)$ continuous.
+Removing the most recent factor gives
+\[
+ m^u(H_6z)=T_{x_0}\bigl(m^u(z)\bigr),
+\]
+which is precisely invariance of the line $E^u_z$ under $DH_6$.
+
+For the stable direction, use the future orbit and
+\[
+ F^s_{n,z}=S_{y_1}\circ S_{y_2}\circ\cdots\circ S_{y_n}.
+\]
+The identical argument with $\kappa_s=(492/1621)^2$ gives a continuous limit
+$n^s(z)$, independent of its terminal slope.  Shifting the future composition
+shows that $DH_6^{-1}$ maps the resulting line at $z_k$ to the line at
+$z_{k-1}$, equivalently $DH_6 E^s_{z_{k-1}}=E^s_{z_k}$.  We have therefore
+constructed continuous invariant lines
+$E^u_z\subset\mathcal C^u$ and $E^s_z\subset\mathcal C^s$.
+
+The cones intersect only at zero, so
+$T_z\mathbb R^2=E^u_z\oplus E^s_z$; the expansion bounds above give uniform
+forward expansion on $E^u$ and uniform forward contraction on $E^s$.  Thus
+$\Lam_*$ is uniformly hyperbolic.  Together with the preceding lemmas, this
+completes the proof of Theorem~\ref{thm:contraction}.
+
+The result is deliberately local.  It does not certify the whole H\'enon
+non-wandering set, a global Markov partition, or a finite-grid strongly
+connected component, and it does not identify the restricted continuous
+operator with any finite-volume matrix or with a global H\'enon zeta.

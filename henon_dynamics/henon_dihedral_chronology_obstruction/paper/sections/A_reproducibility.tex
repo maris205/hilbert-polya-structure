@@ -1,0 +1,26 @@
+\section{Exact computation and source-table check}
+
+The accompanying script uses integer M\"obius inversion and SymPy polynomial
+arithmetic.  From the project root, run
+\begin{verbatim}
+python code/c12c_audit.py --max-period 35 --out-dir results
+python code/test_c12c_audit.py
+\end{verbatim}
+No floating-point calculation occurs.  The JSON certificate contains the
+factorization \eqref{eq:disc}, the conic parametrization, the low-period count
+ledger, and the invariant-projector statement.  The CSV file lists all counts
+through the requested cutoff.
+
+The code also detects a small internal typo in the displayed period-14 row of
+\citet{gallas2007}.  The paper's own formulas give
+\begin{equation}
+M_{14}=1161,\quad D_{14}=56,\quad N_{14}=119,
+\end{equation}
+so there are
+\begin{equation}
+(1161-56-119)/2=493
+\end{equation}
+chiral doublets.  The displayed value 500 would imply
+$2(500)+56+119=1175$ cyclic orbits.  This tabular inconsistency does not alter
+the prior-art boundary because the all-period formulas are explicit.
+

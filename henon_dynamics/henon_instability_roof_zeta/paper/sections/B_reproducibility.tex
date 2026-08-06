@@ -1,0 +1,41 @@
+\section{Reproducibility and artifact audit}
+\label{app:reproducibility}
+
+All newly generated code and data live under the project directory
+\path{henon_instability_roof_zeta/}.  Three repository-local inputs outside it
+are hash-locked below: two proof premises and the required period-12 comparison
+bridge.  The standalone checker audits all three.  From the repository root,
+the complete pipeline is
+\begin{verbatim}
+bash henon_instability_roof_zeta/code/run_all.sh
+\end{verbatim}
+The period-20 root and randomized-control stages dominate runtime.  No GPU or
+external dataset is used.
+
+The exact theorem inherits the following repository-local premises; full
+paths, roles, and SHA-256 digests are generated from
+\path{refine-logs/INHERITED_DEPENDENCIES.json}:
+\input{figures/inherited_dependencies}
+
+\input{figures/artifact_hashes}
+
+The independent checker does not import the producer module.  It reconstructs
+primitive counts, recurrence and monodromy diagnostics, parameter-dependent
+neighbor contraction bounds, trace and product coefficients, and all
+16,384-point contour values from the persisted catalogue.  It then obtains the
+coarser winding grids by exact subsampling.  The final audit passes 38 of 38
+checks, and the unit-test suite passes seven of seven tests.
+
+The software environment used for the recorded run is Python 3.12 with NumPy
+2.4.4, SciPy 1.16.1, SymPy 1.14.0, mpmath 1.3.0, Matplotlib 3.10.5, PyYAML
+6.0.2, and pytest 9.0.3.  Exact versions are recorded in
+\path{requirements.txt}.
+
+Generated JSON timestamps are pinned to the frozen protocol epoch, Matplotlib
+PDF metadata are normalized, and the complete script exports
+\texttt{SOURCE\_DATE\_EPOCH}; scientifically identical reruns therefore do not
+acquire fresh wall-clock bytes.
+
+The enclosing workspace is not a Git worktree, so no commit identifier is
+available.  The repository handoff therefore uses file hashes and a generated
+manifest rather than inventing source-control provenance.

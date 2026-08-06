@@ -1,0 +1,51 @@
+\section{Reproducibility certificate}
+
+All calculations use exact integer, rational, symbolic, or finite-field
+arithmetic.  No Riemann prime or zero data are read.  From the project root,
+run
+\begin{verbatim}
+python code/trace_map_audit.py --out-dir results --max-k 8 --prime 1000003
+python code/coding_boundary_audit.py --out-dir results --max-k 15
+python code/degree_clock_audit.py --out-dir results --max-k 30 \
+  --max-symbolic-k 10
+python code/value_growth_audit.py --out-dir results --through-k 18
+python code/independent_check.py
+python code/test_trace_map_audit.py
+python code/test_coding_boundary_audit.py
+python code/test_degree_clock_audit.py
+python code/test_value_growth_audit.py
+\end{verbatim}
+
+The principal artifacts are listed in Table~\ref{tab:artifacts}.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.35\linewidth}
+                >{\raggedright\arraybackslash}p{0.56\linewidth}}
+\toprule
+Artifact & Exact content \\
+\midrule
+\path{results/certificate.json} & recurrence, invariant, chronological products,
+and two rational escape witnesses \\
+\path{results/modular_gcd_audit.csv} & 48 producer-prime section/return gcds \\
+\path{results/independent_check.json} & 48 persisted-prime, 48 second-prime, and
+30 rational gcd checks, plus schema and direct matrix checks \\
+\path{results/symbolic_boundary_certificate.json} & source-faithful ten-state
+determinant and boundary series, plus the decorated six-state quotient \\
+\path{results/degree_clock_certificate.json} & dimension-independent theorem
+scope, symbolic degrees through \(k=10\), and explicit escape routes \\
+\path{results/degree_growth.csv} & integer lower bound
+\(\lceil F_{k+2}/k\rceil\) through \(k=30\) \\
+\path{results/value_growth_certificate.json} & exact rational escape triples,
+propagated product inequalities, and the zero-radius theorem scope \\
+\bottomrule
+\end{tabular}
+\caption{Machine-readable exact artifacts.}
+\label{tab:artifacts}
+\end{table}
+
+The independent checker does not import the producer.  It uses a separate
+coefficient-array polynomial implementation, direct \(2\times2\)
+chronological matrix multiplication, a second prime \(1000033\), and direct
+rational gcds through \(k=5\).  The ordinary unit tests are labeled regression
+tests and are not presented as independent evidence.

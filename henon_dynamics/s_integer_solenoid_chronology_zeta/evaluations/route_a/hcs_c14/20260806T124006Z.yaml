@@ -1,0 +1,195 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C14
+source_commit: NOT_A_GIT_WORKTREE
+evaluation_date: "2026-08-06T12:40:06Z"
+
+registered_input:
+  candidate_definition: >-
+    The autonomous skew product F(omega,x)=(sigma omega,
+    alpha_{M_{omega_0}}x) on the two-sided full two-shift times
+    dual(Z[1/2]^2), where alpha_M=dual(M^T),
+    A=[[3,1],[1,3]], and B=[[3,2],[2,4]].
+  family: chronological noncommuting S-integer solenoid cocycle
+  phase_space: "Sigma_2 x dual(Z[1/2]^2)"
+  dynamics: >-
+    One shift step followed by the symbol-selected compact-group
+    automorphism; later symbols multiply on the left.
+  parameters:
+    S: [2]
+    A: [[3, 1], [1, 3]]
+    B: [[3, 2], [2, 4]]
+  parameter_provenance: >-
+    Target-blind exact integer pair selected after a uniform-sign collapse
+    control; both determinants equal the S-unit 8 and both matrices are
+    symmetric positive definite with minimum singular value greater than one.
+  clock: one chronological base-shift step
+  normalization: "Z_F(0)=1; no rescaling, unfolding, or spectral offset"
+  determinant_convention: >-
+    Z_F(z)=exp(sum_{n>=1} N_n z^n/n), where
+    N_n=sum_{|w|=n} #Fix(alpha_{M_w}) and
+    M_w=M_{w_{n-1}}...M_{w_0}.
+  orbit_cutoff: exact based words through period 20
+  precision: exact integers
+  training_data: none
+  forbidden_data:
+    - prime tables
+    - Riemann-zero tables
+    - xi evaluations
+    - post-hoc clock fitting
+    - averaged transition matrices replacing ordered products
+  code_commit: NOT_A_GIT_WORKTREE
+  artifact_paths:
+    - results/certificate.json
+    - results/periodic_counts.csv
+    - results/valuation_distribution.csv
+    - results/congruence_tower.csv
+    - results/chronology_witnesses.json
+    - results/independent_check.json
+    - DERIVATION_PACKAGE.md
+
+source_lock:
+  object: >-
+    HCS-C14 chronological dyadic-solenoid skew product with the frozen
+    determinant-8 matrix pair.
+  clock: one chronological base-shift step
+  normalization: "Z_F(0)=1"
+  determinant_convention: "Artin-Mazur fixed-point exponential"
+  cutoff: exact based words through period 20; theorems are all-period
+  precision: exact integer arithmetic
+  allowed_data:
+    - ordered word products
+    - S-local fixed-point indices
+    - primary-source solenoid theorems
+    - target-blind symbolic and congruence controls
+  forbidden_data:
+    - primes
+    - Riemann zeros
+    - xi values
+    - fitted spectral maps
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Primitive base necklaces are intrinsic and complete; repetitions use
+    #Fix(alpha_{M_w}^r), and the exact formal product is
+    prod_[w primitive] zeta_{alpha_{M_w}}(z^|w|). Same-Parikh primitive
+    period-five returns have rational versus natural-boundary fibre zetas.
+  strongest_failure: >-
+    The primitive clock is integral word length. No non-accidental
+    p <-> orbit correspondence, log-prime period law, von Mangoldt amplitude,
+    or prime-power phase structure is present.
+  metrics:
+    based_words_exactly_enumerated_through_20: 2097150
+    exhaustive_parity_gate_through: 12
+    independent_exact_count_check_through: 12
+    tests_passed: 10
+    period_five_fixed_counts: [30035, 15021]
+    period_five_analytic_types: [rational, natural_boundary]
+    dold_integrality_through: 20
+  artifacts:
+    - results/periodic_counts.csv
+    - results/chronology_witnesses.json
+    - results/independent_check.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The candidate zeta is exact. Its archimedean control is
+    (1-13z+33z^2)/((1-2z)(1-16z)); the S-local zeta has a simple pole at
+    1/16, no zeros for |z|<(8 phi)^(-1), and a proved meromorphic
+    continuation through the first circle.
+  strongest_failure: >-
+    No frozen map from z to the Riemann spectral parameter and no xi divisor
+    identity exists. The proved divisor is a transparent branching/fibre pole,
+    not a Riemann-zero signal. Root-error metrics are therefore inapplicable,
+    not silently passed.
+  metrics:
+    zeta_coefficients_exact_through: 20
+    primary_taylor_radius: "1/16"
+    proved_continuation_radius: "1/(8*phi)"
+    zero_count_in_proved_continuation_disk: 0
+    pole_count_in_proved_continuation_disk: 1
+    pole_location: "1/16"
+    target_zero_error_train: NOT_TESTABLE
+    target_zero_error_validation: NOT_TESTABLE
+    target_zero_error_test: NOT_TESTABLE
+    extra_zero_count_against_xi: NOT_TESTABLE
+    missing_zero_count_against_xi: NOT_TESTABLE
+    root_count_discrepancy_against_xi: NOT_TESTABLE
+    finite_prefix_bm_orders_over_three_primes:
+      solenoid: 10
+      archimedean_control: 4
+    bm_scope: NUMERICAL_OBSERVATION_ONLY
+  artifacts:
+    - results/certificate.json
+    - results/recurrence_screen.json
+    - DERIVATION_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The candidate's own analytic structure is controlled: the correction has
+    exact exponential scale 8 phi, individual primitive factors have a
+    parity-classified rational/natural-boundary dichotomy, and the full first
+    circle is not a natural boundary.
+  strongest_failure: >-
+    There is no s <-> 1-s functional equation, Gamma factor, trivial-zero
+    structure, Riemann-von Mangoldt law, entire completion, or xi-compatible
+    zero divisor. The intrinsic exponential lattice scales 16, 8 phi, and 8
+    are visibly non-Riemannian.
+  metrics:
+    conjugation_symmetry_in_z: true
+    xi_functional_equation: false
+    gamma_factor: absent
+    riemann_von_mangoldt_counting: false
+    correction_growth_theorem: "lim Delta_n^(1/n)=8*phi"
+    later_boundary_at_1_over_8phi: OPEN
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The compact-group skew product preserves Bernoulli-Haar measure and has a
+    natural unitary Koopman operator. Each congruence level also supplies a
+    finite chronological transfer recurrence.
+  strongest_failure: >-
+    The Koopman operator is not shown to have the required discrete spectrum,
+    compact resolvent, trace-class determinant, prime trace formula, or
+    self-adjoint Hilbert-Polya interpretation. No quantization preserving the
+    S-local orbit weights is defined.
+  metrics:
+    natural_hilbert_space: "L^2(Sigma_2 x X_2, Bernoulli x Haar)"
+    natural_operator: unitary Koopman operator
+    compact_resolvent: false
+    trace_class_hp_determinant: absent
+    route_b_input_complete: false
+  artifacts:
+    - README.md
+    - DERIVATION_PACKAGE.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  HCS-C14 proves arithmetic and analytic structure for a chronological
+  S-integer skew product. Bell-Miles-Ward is used only on individual return
+  automorphisms. Individual natural-boundary factors do not prove a natural
+  boundary for the full product, and no Hilbert-Polya or Riemann-zero claim is
+  made.
+blocking_conditions:
+  - no prime-like primitive clock or amplitude
+  - no xi-compatible determinant convention
+  - no global functional equation or Riemann counting law
+  - no discrete self-adjoint operator
+next_smallest_test: >-
+  Treat the secondary circle |z|=(8 phi)^(-1) as one theorem-sized gate:
+  derive a nonremovable singularity/natural-boundary theorem from the
+  congruence tower or stop and switch to HCS-C15, a nonabelian congruence
+  voltage-graph/Ihara tower with the trivial sector removed.
+route_b_invocation_allowed: false
+

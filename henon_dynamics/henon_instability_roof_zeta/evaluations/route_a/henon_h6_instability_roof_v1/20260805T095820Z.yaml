@@ -1,0 +1,405 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: henon_h6_instability_roof_v1
+source_commit: NOT_TESTABLE
+evaluation_date: "2026-08-05T10:27:29Z"
+
+source_lock:
+  object:
+    candidate_definition: >-
+      The area-preserving Hénon map H_6(x,y)=(1-6*x^2-y,x), restricted to
+      the explicit local survivor Lambda_* conjugate to the frozen four-state
+      subshift; this is not the full Hénon nonwandering set.
+    family: >-
+      reversible area-preserving Hénon map with intrinsic periodic
+      instability lengths
+    phase_space: >-
+      The compact local hyperbolic survivor Lambda_* contained in the four
+      certified rational h-sets, together with its four-state symbolic coding.
+    dynamics: "H_6 restricted to Lambda_*"
+    parameters:
+      a: 6
+      orientation_sectors: [0, 1]
+    parameter_provenance: >-
+      a=6 is the pre-existing target-free hyperbolic control for which the
+      local survivor and symbolic conjugacy were established; it was not
+      selected using primes, Riemann zeros, or spectral fitting.
+    symbolic_partition:
+      state_order: ["--", "-+", "+-", "++"]
+      adjacency_matrix:
+        - [1, 0, 1, 0]
+        - [1, 0, 0, 0]
+        - [0, 1, 0, 1]
+        - [0, 1, 0, 0]
+    roof_function: >-
+      The intrinsic periodic data are T_p=log(abs(Lambda_u,p)). A pointwise
+      symbolic unstable-Jacobian roof representative is understood only up to
+      a Livsic coboundary; all determinant inputs here use the invariant
+      periodic sums T_p.
+    potential_function: "sigma_p^kappa with sigma_p=sign(Lambda_u,p) and kappa in {0,1}"
+    transfer_operator: NOT_TESTABLE
+    workspace_provenance:
+      git_commit: NOT_TESTABLE
+      reason: >-
+        The repository root is not a Git worktree, so no code commit can be
+        supplied. Provenance is bound instead by the frozen protocol and
+        regenerated artifact hashes.
+      reconciled_utc: "2026-08-05T11:12:29Z"
+      sha256:
+        frozen_protocol: 0c284a1b3610a3d772aa00c6a8b33161a8bc6814957a9968d5c80fb618eec399
+        catalog_robustness: ba2a885957c46e2d12cfa98d046ccb6e457bb4596ba8db28d6ccace8ad99392d
+        roots_robustness: 86944a9c5abfc2b94ff68316a8a5c2d6cb461c9c0d137ff12b9a0a08e51f8001
+        controls: d6a02ec72b137bfe6ba1f8c5b574780e3e03ce180265c3af2b854ee2674ab70c
+        analysis_summary: a555a6e5f54011f56550265e8fbd3808c886cfe7521a62a644b81b316157de8f
+        analysis_markdown: 397a79d3c47c5720efbce75a980f3089dd3617338934a3b03ccb88da9be2ad2b
+  clock:
+    definition: "T_p=log(abs(Lambda_u,p))"
+    affine_rescaling: none
+    unfolding: none
+    positivity: >-
+      PROVED: the intrinsic periodic lengths are positive. In the normalized
+      adapted representative used by the exact audit, unstable expansion is
+      at least 773/224 > 1; changing representative by a coboundary does not
+      change periodic sums.
+    non_lattice: >-
+      PROVED: the fixed-orbit multiplier has algebraic degree four, the
+      explicit period-four multiplier has degree two, and no positive powers
+      can coincide; therefore the two intrinsic instability periods have
+      irrational ratio. This non-arithmetic periodic-data statement is
+      invariant under a coboundary change of roof representative.
+    unit_clock_control: >-
+      PROVED: the unit-clock parent determinant is
+      1-exp(-s)-exp(-3*s)-exp(-4*s) and is 2*pi*i-periodic.
+  normalization:
+    spectral_parameter: s
+    cycle_marker: "truncate in z by degree, then evaluate at z=1"
+    orientation_character: "sigma_p^kappa, evaluated separately for kappa=0 and kappa=1"
+    scale: 1
+    offset: 0
+    post_validation_changes: none
+  determinant_convention: >-
+    D_{kappa,N}(s) is the degree-at-most-N part in z of
+    product_p(1-sigma_p^kappa*exp(-s*T_p)*z^n_p), evaluated at z=1.
+    It is a finite cycle-section ledger, not the untruncated Euler product,
+    a smooth Perron flat determinant, an Ulam determinant, a transfer-operator
+    Fredholm determinant, or a completed-xi function.
+  cutoff:
+    development_periods: [1, 8]
+    validation_periods: [9, 12]
+    sealed_test_periods: [13, 16]
+    post_test_robustness_periods: [17, 20]
+    evaluated_section_cutoffs: [7, 8, 10, 12, 14, 16, 18, 20]
+    root_rectangle:
+      real: [-0.25, 0.30]
+      imaginary: [-20.0, 20.0]
+    root_match_tolerance: 0.02
+  precision:
+    orbit_dps: 80
+    root_check_dps: 80
+    float64_role: independent discovery and implementation check only
+    contour_samples: [4096, 8192, 16384]
+    maximum_allowed_high_precision_root_residual: "1e-30"
+    maximum_allowed_high_precision_implementation_discrepancy: "1e-30"
+  allowed_data:
+    training_data: "primitive periods 1 through 8 on the frozen symbolic survivor"
+    validation_data: "primitive periods 9 through 12"
+    sealed_test_data: "primitive periods 13 through 16"
+    robustness_data: "primitive periods 17 through 20, used only after the sealed test"
+    prior_bridge: >-
+      The repository period-12 certified H6 catalogue was permitted only for
+      development/validation cross-checking.
+  forbidden_data:
+    - prime tables or primality labels
+    - Riemann-zero tables
+    - Riemann zeta or xi evaluations
+    - target spectral fitting
+    - post-validation clock rescaling or unfolding
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The symbolic conjugacy makes primitive necklaces intrinsic and complete at
+    each frozen cutoff. All 2170 primitive cycles through period 20 were
+    enumerated once up to cyclic rotation, lifted by the proved contraction,
+    and supplied with canonical phase, orientation, monodromy, multiplier,
+      action, and intrinsic instability length. The periodic instability
+      lengths are positive and non-arithmetic by an exact algebraic argument;
+      a pointwise roof representative is used only up to coboundary. No prime
+      or zero data were used.
+  strongest_failure: >-
+    OPEN: no prime-like correspondence, log-prime length law, von-Mangoldt
+    repetition amplitude, or natural arithmetic labeling of primitive cycles
+    has been established or tested.
+  metrics:
+    total_primitive_orbits_through_period_20: 2170
+    symbolic_count_match: true
+    primitive_repeated_separation: PROVED
+    canonical_cyclic_phase_recorded: true
+    orientation_recorded: true
+    multiplicity_convention: "one record per primitive cyclic necklace"
+    repetition_law: "PROVED: repetitions enter the trace/cumulant recursion at multiples of primitive period"
+    maximum_recurrence_residual: "1.93501255746679e-65"
+    maximum_contraction_error_bound: "1.93909849542905e-65"
+    maximum_monodromy_determinant_error: "1.96363738611909e-90"
+    monodromy_determinant_error_method: >-
+      guard-precision recomputation from persisted coordinates; this is the
+      metric used by the determinant-error gate
+    maximum_serialized_monodromy_determinant_error: "4.27642353614751e-50"
+    minimum_hyperbolicity_margin: "5.29150262212918"
+    completeness_scope: >-
+      PROVED for all primitive symbolic cycles with period at most 20 on
+      Lambda_*; cycles above the frozen cutoff are omitted and no global Hénon
+      completeness claim is made.
+    prime_table_used: false
+    zero_table_used: false
+    prime_like_information: NOT_TESTABLE
+    mandatory_controls_present:
+      shuffled_periods: true
+      random_weights: true
+      random_phases: true
+      same_density_random_lengths: true
+      neighboring_parameters: true
+      simpler_parent: true
+  artifacts:
+    - henon_instability_roof_zeta/refine-logs/R000_FROZEN_PROTOCOL.json
+    - henon_instability_roof_zeta/code/henon_roof.py
+    - henon_instability_roof_zeta/code/generate_catalog.py
+    - henon_instability_roof_zeta/results/catalog_robustness.json
+    - docs/related_programs/henon_weighted_zeta/results/symbolic_contraction_r059.json
+
+a2:
+  verdict: A2_FROZEN_VALIDATION_PASS
+  evidence_status: NUMERICAL_OBSERVATION
+  strongest_evidence: >-
+    The frozen development, validation, and sealed-test protocol was kept
+    unchanged. In both orientation sectors every tracked root was retained on
+    validation and sealed test. At every candidate cutoff, three sampled
+    numerical winding estimates agree with the numerical root locator; these
+    are consistency diagnostics, not certified argument-principle counts.
+    Independent primitive-product and trace-recursion coefficients agree far
+    beyond the frozen precision gate.
+  strongest_failure: >-
+    OPEN: these are roots of finite degree-in-z cycle sections only. There is
+    no uniform cycle-tail or Rouché bound, no proved N-to-infinity determinant,
+    and no transfer-operator Fredholm identity. The sampled winding counts are
+    not certified, two shuffled controls remain unresolved by the frozen
+    contour sampler, the exact constant-roof parent is even more stable, and
+    no external target divisor was tested.
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count:
+      against_external_target: NOT_TESTABLE
+      finite_section_tracking:
+        untwisted_validation_8_to_12: 4
+        untwisted_sealed_12_to_16: 4
+        twisted_validation_8_to_12: 0
+        twisted_sealed_12_to_16: 0
+    missing_zero_count:
+      against_external_target: NOT_TESTABLE
+      finite_section_tracking:
+        untwisted_validation_8_to_12: 0
+        untwisted_sealed_12_to_16: 0
+        twisted_validation_8_to_12: 0
+        twisted_sealed_12_to_16: 0
+    root_count_discrepancy:
+      maximum_candidate_discrepancy: 0
+      numerical_winding_samples_agree: true
+      winding_count_certification: NOT_TESTABLE
+      untwisted_counts_cutoffs_7_to_20: [43, 43, 43, 43, 43, 43, 43, 43]
+      twisted_counts_cutoffs_7_to_20: [45, 45, 43, 43, 43, 43, 43, 43]
+    cutoff_drift:
+      untwisted_validation:
+        retained_fraction: 1.0
+        median: 0.00018727690200779227
+        p90: 0.0025350728235187412
+        maximum: 0.00702857135090362
+      untwisted_sealed_test:
+        retained_fraction: 1.0
+        median: 0.0000017594702310608038
+        p90: 0.00003112594606036347
+        maximum: 0.00039024673216425426
+      untwisted_robustness_16_to_20:
+        retained_fraction: 1.0
+        median: 0.000000008115714372734676
+        p90: 0.000001927634215975866
+        maximum: 0.00001606060606743355
+      twisted_validation:
+        retained_fraction: 1.0
+        median: 0.00011659544114948694
+        p90: 0.0024806723654036494
+        maximum: 0.004421100228210345
+      twisted_sealed_test:
+        retained_fraction: 1.0
+        median: 0.0000008096949289510882
+        p90: 0.00003674042766978818
+        maximum: 0.00007587420762696458
+      twisted_robustness_16_to_20:
+        retained_fraction: 1.0
+        median: 0.000000006349320301759745
+        p90: 0.0000007382453739188273
+        maximum: 0.0000012698909183229825
+      untwisted_positive_real_finite_section_zero:
+        cutoff_20: "0.27798298167618902348832311683180466042471613147972330864936381175446226192981557"
+        validation_drift_10_to_12: 0.000000006859996515284905
+        sealed_drift_12_to_16: 0.00000000005742778474981946
+    precision_drift:
+      maximum_float_to_80dps_shift_through_cutoff_20_untwisted: 0.00000000016753735551566463
+      maximum_float_to_80dps_shift_through_cutoff_20_twisted: 0.0000000001439491196048172
+      maximum_high_precision_root_residual_untwisted: "4.873943458465488e-74"
+      maximum_high_precision_root_residual_twisted: "1.4415418415005507e-74"
+      maximum_high_precision_implementation_discrepancy_untwisted: "1.2841582624228682e-75"
+      maximum_high_precision_implementation_discrepancy_twisted: "7.454683425144138e-75"
+    control_margin:
+      henon_retention_8_to_16: 1.0
+      henon_median_drift_8_to_16: 0.0001890962245835218
+      henon_degree_9_to_16_tail_l1: 0.0000006865600651537185
+      positive_random_weights_retention_mean: 0.08406819517930629
+      random_phases_retention_mean: 0.027826713014523077
+      same_density_random_lengths_retention_mean: 0.04184875161060703
+      valid_random_control_tail_ratio_range_vs_henon: [28576.471304747225, 320042.91389446706]
+      constant_roof_parent_retention: 1.0
+      constant_roof_parent_median_drift: 0.0
+      constant_roof_parent_tail_ratio_vs_henon: 0.00000000017228857753572456
+      shuffled_periods_root_count: NOT_TESTABLE
+      shuffled_lengths_root_count: NOT_TESTABLE
+      neighbor_a5p9_self_retention: 1.0
+      neighbor_a6p1_self_retention: 1.0
+      neighbor_contraction_bound_method: >-
+        NUMERICAL_OBSERVATION: each neighbor catalogue was regenerated using
+        its parameter-dependent contraction bound; no common-survivor theorem
+        is claimed.
+      interpretation: >-
+        NUMERICAL_OBSERVATION: Hénon cancellation is strongly separated from
+        the valid randomized controls, but cutoff stability is not unique to
+        the candidate and is not an arithmetic discriminator.
+  artifacts:
+    - henon_instability_roof_zeta/refine-logs/R000_FROZEN_PROTOCOL.json
+    - henon_instability_roof_zeta/code/analyze_roots.py
+    - henon_instability_roof_zeta/code/run_controls.py
+    - henon_instability_roof_zeta/results/roots_robustness.json
+    - henon_instability_roof_zeta/results/controls.json
+    - henon_instability_roof_zeta/results/analysis_summary.json
+    - henon_instability_roof_zeta/results/ANALYSIS.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: OPEN
+  strongest_evidence: >-
+    PROVED for each fixed cutoff: D_{kappa,N} is an explicitly defined entire
+    exponential polynomial with real orbit data, exact conjugation symmetry,
+    no hidden prefactor, and non-arithmetic intrinsic periodic lengths. The
+    numerical root locator and sampled winding estimates agree reproducibly in
+    the frozen rectangle, but this is not a certified zero census.
+  strongest_failure: >-
+    No limiting determinant, analytic continuation theorem, functional
+    equation, Gamma factor, trivial-zero treatment, pole-removal identity,
+    Riemann--von Mangoldt counting law, moving-order remainder, or global
+    divisor comparison is available. The proved lattice-periodicity
+    obstruction is specifically the unit-clock parent. Each preregistered
+    instability-clock section is only a finite exponential polynomial, and
+    changing cutoff with height would be an inadmissible moving-order fit
+    without a uniform theorem; no limiting zero-count law follows.
+  metrics:
+    conjugation_symmetry:
+      finite_sections: PROVED
+      limiting_object: NOT_TESTABLE
+    functional_equation: NOT_TESTABLE
+    gamma_factor: NOT_TESTABLE
+    trivial_zeros: NOT_TESTABLE
+    pole_removal: NOT_TESTABLE
+    entire_prefactor:
+      finite_sections: "none"
+      limiting_object: NOT_TESTABLE
+    riemann_von_mangoldt_counting_law: NOT_TESTABLE
+    analytic_continuation:
+      fixed_sections: "PROVED: entire exponential polynomials"
+      limiting_object: OPEN
+    truncation_error: OPEN
+    moving_order_control: OPEN
+    unit_clock_lattice_obstruction: >-
+      PROVED: the unit-clock parent is vertically periodic and has linear
+      zero-count growth in height
+    finite_section_zero_count_scope: >-
+      Each preregistered instability-clock section is a finite exponential
+      polynomial; this is not a divisor prefix and supplies no limiting
+      zero-count law.
+    nuclear_or_trace_class_operator: NOT_TESTABLE
+    fredholm_determinant_theorem: NOT_TESTABLE
+    exact_all_order_trace_identity: NOT_TESTABLE
+  artifacts:
+    - henon_instability_roof_zeta/results/ANALYSIS.md
+    - henon_instability_roof_zeta/results/analysis_summary.json
+    - henon_instability_roof_zeta/refine-logs/EXPERIMENT_PLAN.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: >-
+    PROVED structural facts inherited by the candidate are that H_6 acts on a
+    coherent two-dimensional area-preserving, reversible phase space and that
+    the retained instability clock and orientation character are intrinsic to
+    its classical periodic orbits.
+  strongest_failure: >-
+    No quantization, unitary or scattering construction, Hilbert space,
+    operator domain, self-adjointness path, antiunitary-sector audit, or
+    same-clock quantum trace formula has been defined.
+  metrics:
+    coherent_phase_space: PROVED
+    area_preservation: PROVED
+    classical_reversibility: PROVED
+    intrinsic_orbit_orientation: PROVED
+    quantization: NOT_TESTABLE
+    hilbert_space: NOT_TESTABLE
+    operator_domain: NOT_TESTABLE
+    self_adjointness_path: NOT_TESTABLE
+    antiunitary_symmetry_audit: NOT_TESTABLE
+    same_clock_quantum_lift: NOT_TESTABLE
+  artifacts:
+    - docs/related_programs/henon_weighted_zeta/README.md
+    - docs/related_programs/henon_weighted_zeta/results/symbolic_contraction_r059.json
+    - henon_instability_roof_zeta/results/catalog_robustness.json
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary:
+  established:
+    - >-
+      PROVED: the local certified H6 survivor has a complete intrinsic
+      primitive-orbit ledger at each finite cutoff and positive,
+      non-arithmetic intrinsic periodic instability lengths. Consequently the
+      specific unit-clock lattice-periodicity obstruction does not apply; no
+      broader analytic obstruction is thereby removed.
+    - >-
+      NUMERICAL_OBSERVATION: the preregistered finite-section family has stable
+      tracked zeros through validation, sealed test, and period-20 robustness,
+      with mutually consistent sampled numerical winding counts and
+      high-precision residuals. The winding counts are not certified.
+  not_established:
+    - any prime-orbit or Riemann-zero correspondence
+    - a limiting dynamical or Fredholm determinant
+    - analytic continuation or a controlled divisor
+    - a functional equation, Gamma factor, or trivial-zero structure
+    - Riemann--von Mangoldt counting
+    - a global Hénon result
+    - a quantization, self-adjoint operator, Hilbert--Pólya realization, or RH claim
+blocking_conditions:
+  - >-
+    OPEN: no uniform cycle-tail estimate or Rouché theorem promotes any
+    finite-section root to a zero of a limiting determinant.
+  - >-
+    NOT_TESTABLE: no transfer operator or function space has been defined for
+    which the cycle sections are proved Fredholm approximants.
+  - >-
+    NOT_TESTABLE: the candidate has not been compared with a target divisor,
+    so train/validation/test zero errors, missing target zeros, and extra target
+    zeros cannot be reported.
+  - >-
+    OPEN: no global analytic structure or natural operator lift is available.
+next_smallest_test: >-
+  Prove a uniform cycle-tail bound on one pre-frozen disk around the untwisted
+  positive real finite-section zero, strong enough for Rouché's theorem to
+  show that a zero persists for all larger cutoffs; do not build or invoke
+  Route B unless that same-object limiting step is first established.
+route_b_invocation_allowed: false

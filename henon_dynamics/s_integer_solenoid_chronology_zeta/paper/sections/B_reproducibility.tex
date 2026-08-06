@@ -1,0 +1,43 @@
+\section{Exact computation and reproducibility}
+\label{app:repro}
+
+All reported computations use Python's exact integers and the standard
+library.  No primes, Riemann-zero tables, \(\xi\)-function evaluations, or
+post-hoc spectral rescalings enter the producer.  From the project directory,
+the frozen run is
+\begin{verbatim}
+python code/solenoid_zeta.py --max-period 20 \
+  --parity-period 12 --tower-level 8
+python code/independent_check.py --max-period 12
+python code/test_solenoid_zeta.py -v
+\end{verbatim}
+
+The producer enumerates all
+\(\sum_{n=1}^{20}2^n=2{,}097{,}150\) based words.  It computes the ordered
+matrix, \(D_w\), its dyadic valuation, and the odd-part fixed count.  The
+period sums are checked against Proposition~\ref{prop:arch}; the parity gate
+is exhausted through period 12; and the finite monoid construction is checked
+against direct enumeration for every \(1\le k\le8\) and
+\(1\le n\le12\).
+
+The second program does not import the producer.  It uses nested matrices and
+the characteristic-trace recurrence to recompute all counts through period
+12 and the witness repetitions through \(r=20\).  Ten deterministic unit
+tests cover the frozen matrices, product order, index formula, mod-2 language,
+period-five analytic split, repetition valuation, archimedean closed form,
+Dold integrality, integral zeta coefficients, and a rational-collapse control.
+
+If \(P_n\) denotes the number of primitive \(F\)-orbits of total period
+\(n\), the Dold inversion
+\[
+ P_n=\frac1n\sum_{d\mid n}\mu(d)\Nsol_{n/d}
+\]
+is a nonnegative integer for every \(n\le20\).  This ledger checks the total
+periodic counts; it is distinct from the primitive base-sector decomposition
+in \eqref{5.1}.
+
+The result directory contains the frozen certificate, periodic counts,
+valuation distributions, congruence layers, witness matrices, the independent
+report, and SHA-256 hashes.  A Berlekamp--Massey screen of the first 20
+coefficients is also persisted, but no theorem uses that finite-prefix
+experiment.

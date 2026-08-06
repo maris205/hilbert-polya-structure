@@ -1,0 +1,254 @@
+\section{Two renormalization-clock obstructions}
+
+We now freeze the natural short-clock class suggested by
+\eqref{eq:closed-zeta}--\eqref{eq:boundary-series}.  Energy is a passive
+parameter under ordinary matrix multiplication, and each local transition
+has uniformly bounded polynomial energy complexity.  We allow the finite
+state dimension to vary arbitrarily with the level.
+
+\begin{definition}[Uniform polynomial passive-parameter family]
+At level \(k\), let
+\begin{equation}
+B_k(E)=\sum_{j=0}^{D}E^jB_{k,j}
+\in\operatorname{Mat}_{N_k}(\C[E]),
+\label{eq:polynomial-matrix}
+\end{equation}
+where \(N_k<\infty\) is arbitrary and \(D\) is independent of \(k\).  The
+power \(B_k(E)^k\) uses ordinary matrix multiplication: it does not substitute
+a new function of \(E\).  For a boundary observable, let
+\(u_k(E),v_k(E)\in\C[E]^{N_k}\) have entry-degrees bounded uniformly by
+\(D_u,D_v\).
+\end{definition}
+
+This includes, as a special case, a fixed finite directed graph with
+polynomial edge weights of degree at most \(D\): summing parallel edges gives
+\eqref{eq:polynomial-matrix}.  It also includes finite-dimensional matrix
+weights on edges after enlarging the state space.  Such finite linear
+representations are the standard algebraic form of recognizable weighted
+path series \citep{schutzenberger1961}.
+
+\begin{theorem}[Dimension-independent linear energy-degree bound]
+For every \(k\ge0\),
+\begin{equation}
+\deg_E\Tr B_k(E)^k\le kD,
+\qquad
+\deg_E\bigl(u_k(E)^\top B_k(E)^kv_k(E)\bigr)
+\le D_u+kD+D_v.
+\label{eq:linear-degree}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Every entry of \(B_k(E)^k\) is a sum of products of \(k\) entries of
+\(B_k(E)\).  Each product has degree at most \(kD\), and addition cannot
+increase the maximum degree.  The trace obeys the same bound.  Multiplication
+by the uniformly degree-bounded vectors adds at most \(D_u+D_v\).
+The number \(N_k\) changes only the number of summands.
+\end{proof}
+
+\begin{corollary}[Closed and boundary no-go]
+No uniform polynomial passive-parameter family satisfies either
+\begin{equation}
+\Tr B_k(E)^k=d_k(E)
+\quad\text{for all sufficiently large }k,
+\label{eq:trace-no-go}
+\end{equation}
+or
+\begin{equation}
+u_k(E)^\top B_k(E)^kv_k(E)=d_k(E)
+\quad\text{for all sufficiently large }k.
+\label{eq:boundary-no-go}
+\end{equation}
+The same conclusion holds with \(d_k(E)-2\cos\theta\) for fixed
+\(\theta\).
+\end{corollary}
+
+\begin{proof}
+The right-hand side is monic of degree \(F_{k+2}\) by
+\eqref{eq:physical-degree}; subtracting a constant does not change that
+degree.  The left-hand sides have degree at most affine in \(k\) by
+\eqref{eq:linear-degree}.  Since \(F_{k+2}/k\to\infty\), the bounds are
+eventually incompatible.
+\end{proof}
+
+The same argument reaches formal determinant coefficients, not merely traces.
+
+\begin{lemma}[Formal determinant coefficient bound]
+Suppose polynomials \(a_j(E)\) satisfy
+\(\deg_Ea_j\le jD\), and set
+\begin{equation}
+\mathcal D_\pm(z,E)=
+\exp\left(\pm\sum_{j\ge1}\frac{a_j(E)}{j}z^j\right)
+=\sum_{n\ge0}c_n^\pm(E)z^n.
+\label{eq:formal-determinant}
+\end{equation}
+Then \(\deg_Ec_n^\pm\le nD\).
+\end{lemma}
+
+\begin{proof}
+The coefficient of \(z^n\) is a finite sum indexed by partitions
+\(n=\sum_{j=1}^n jm_j\).  Every corresponding product contains
+\(a_j^{m_j}\) and has energy degree at most
+\(D\sum jm_j=Dn\).  Summation cannot increase the bound.
+\end{proof}
+
+For the traces \(a_j=\Tr B_k(E)^j\) of a fixed level-\(k\) matrix, the minus
+sign in \eqref{eq:formal-determinant} gives
+\(\det(I-zB_k(E))\), while the plus sign gives its reciprocal as a formal
+series.  The determinant has \(z\)-degree at most \(N_k\); its principal-minor
+coefficient of order \(n\) has energy degree at most \(nD\), and vanishes for
+\(n>N_k\).
+
+\begin{corollary}[Coefficientwise determinant no-go]
+No uniform polynomial passive-parameter family can satisfy
+\[
+[z^k]\det(I-zB_k(E))^{\pm1}=d_k(E)
+\]
+for all sufficiently large \(k\).
+\end{corollary}
+
+\subsection{A zero-radius obstruction beyond polynomial weights}
+
+The degree theorem uses polynomial dependence on energy.  At the two exact
+finite-approximant section witnesses, a value-growth argument removes that
+hypothesis and even
+removes finite dimensionality from the scalar conclusion.
+
+\begin{theorem}[Zero-radius discriminant series]
+Fix \(\lambda=1\) and let \(E_*\in\{0,-1\}\).  Then
+\begin{equation}
+\lim_{k\to\infty}|d_k(E_*)|^{1/k}=\infty.
+\label{eq:superexponential-values}
+\end{equation}
+Consequently both series
+\begin{equation}
+\sum_{k\ge0}d_k(E_*)z^k,
+\qquad
+\sum_{k\ge1}\frac{d_k(E_*)}{k}z^k
+\label{eq:zero-radius-series}
+\end{equation}
+have radius of convergence zero.
+\end{theorem}
+
+\begin{proof}
+For \(E_*=0\), the strict escape triple
+\((|x_3|,|x_4|,|x_5|)=(3/2,2,5)\) occurs; for \(E_*=-1\), the same triple
+occurs at indices \(5,6,7\).  The escape lemma gives, for a suitable starting
+index \(n\),
+\[
+\log|x_{n+r}(E_*)|\ge cF_{r+2}
+\]
+with \(c>0\).  Since \(d_k=2x_k\) and
+\(F_r/r\to\infty\), taking the \(k\)-th root proves
+\eqref{eq:superexponential-values}.  Division by \(k\) does not change the
+root growth.  The Cauchy--Hadamard formula then gives radius zero for both
+series in \eqref{eq:zero-radius-series}.
+\end{proof}
+
+\begin{corollary}[Analytic-germ no-go]
+At either witness energy there is no scalar germ
+\(G(z)=\sum_{k\ge0}g_kz^k\), analytic near \(z=0\), for which
+\(g_k=d_k(E_*)\) for all sufficiently large \(k\).  Nor is there a normalized
+analytic germ \(\Delta\), with \(\Delta(0)=1\), satisfying
+\begin{equation}
+d_k(E_*)=-k[z^k]\log\Delta(z)
+\label{eq:logdet-no-go}
+\end{equation}
+for all sufficiently large \(k\); the same holds with the opposite sign.
+\end{corollary}
+
+\begin{proof}
+Cauchy estimates on any sufficiently small circle give an exponential bound
+on the Taylor coefficients of an analytic germ, contradicting
+\eqref{eq:superexponential-values}.  Because \(\Delta(0)=1\), it is nonzero in
+some disk about the origin and has an analytic logarithm there.  Its
+coefficients again obey a Cauchy bound, and the additional factor \(k\) in
+\eqref{eq:logdet-no-go} does not alter exponential root growth.
+\end{proof}
+
+Thus a fixed bounded-operator resolvent matrix element
+\(\langle u,(I-zL)^{-1}v\rangle\), and any normalized Fredholm determinant
+that is analytic at the origin, cannot realize the frozen discriminant values
+in either literal coefficientwise sense.  Finite weighted matrices with
+arbitrary entries finite at \(E_*\) are special cases.  The conclusion is
+about renormalization-clock coefficients and logarithmic traces; it is not a
+no-go for every possible energy-to-divisor map.
+
+\subsection{Quantitative target-injection bound and a positive control}
+
+If the uniform local degree bound is relaxed to \(D_k\), representing
+\(d_k(E)\) by the \(k\)-step closed trace forces
+\begin{equation}
+D_k\ge \frac{F_{k+2}}{k}.
+\label{eq:injection-bound}
+\end{equation}
+Thus a short-clock model can evade the degree theorem by inserting
+exponentially growing energy complexity into its local weights, but not with a
+uniform local rule.  At \(k=30\), the exact integer bound is
+\(D_{30}\ge\lceil2178309/30\rceil=72611\).
+
+The obstruction survives fixed higher-block recoding.  Such a recoding may
+change the constants \(D,D_u,D_v\), but cannot turn the affine bound
+\eqref{eq:linear-degree} into Fibonacci growth.  Likewise, multiplying by a
+fixed polynomial prefactor, making a fixed-degree change of the energy
+variable, or applying an \(E\)-independent scalar normalization preserves an
+\(O(k)\) bound.  Increasing \(N_k\) alone never raises these energy degrees.
+
+There is an exact physical-clock determinant, which is a useful positive
+control.  If \(H_{k,\theta}\) is the \(q_k\)-site periodic approximant with
+total Floquet phase \(\theta\), then for \(q_k\ge3\), in the monic convention,
+\begin{equation}
+\det(EI-H_{k,\theta})=d_k(E)-2\cos\theta.
+\label{eq:physical-characteristic}
+\end{equation}
+Indeed, both sides are monic of degree \(q_k\), and their zeros are the same
+Floquet energies with multiplicity.  This construction uses a determinant
+whose order grows with the physical length; it is not the order-\(k\)
+coefficient of a trace-map dynamical determinant.
+
+\subsection{Escape routes beyond the frozen claims}
+
+The hypotheses deliberately leave several routes open.
+
+\begin{enumerate}
+\item A physical-time model may use \(q_k\) site steps or the full
+characteristic determinant \eqref{eq:physical-characteristic}.  The ordinary
+Schr{\"o}dinger monodromy does exactly this.
+
+\item A level-dependent family may inject the local degree required by
+\eqref{eq:injection-bound}, change its operator space with \(k\), or otherwise
+fail to define one fixed analytic germ in the variable \(z\).
+
+\item A composition operator can increase polynomial degree exponentially.
+For example,
+\[
+(Cf)(E)=f(E^2),\qquad C^k(E)=E^{2^k}.
+\]
+This is linear on a function space but is not a passive-parameter family of the form
+\eqref{eq:polynomial-matrix}.  If its proposed scalar generating series has
+the coefficients in \eqref{eq:zero-radius-series}, that series is necessarily
+nonanalytic at the origin.
+
+\item The trace-map Koopman operator also evades the degree theorem:
+\[
+(\delta_{\ell_\lambda(E)}\circ U_T^k)(\pi_x)
+=\pi_x(T^k\ell_\lambda(E))=x_k(E).
+\]
+Here the moving evaluation functional carries unbounded energy information;
+the associated scalar series at the escape witnesses has radius zero.
+
+\item A formal zero-radius series, an unbounded operator whose relevant
+matrix element is not analytic at \(z=0\), or another non-Fredholm
+construction is outside the analytic-germ corollary.
+
+\item An indirect divisor correspondence may use a separately defined map
+between \(z\), energy, and spectral phase instead of equating \(d_k\) with
+trace-map coefficients.  Such a candidate must freeze that map before it can
+be tested.
+\end{enumerate}
+
+These are genuine changes of class or observable.  The degree theorem applies
+exactly to ordinary passive-parameter products with uniformly bounded local
+polynomial degree; the zero-radius theorem applies exactly to literal
+renormalization-clock coefficient and logarithmic-trace realizations by an
+analytic germ.

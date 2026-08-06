@@ -1,0 +1,307 @@
+\section{Operator cross-check and sensitivity}
+\label{sec:operator}
+
+This section treats the finite-volume matrices as estimators, not as an already
+identified limiting operator.  We report three layers of evidence: matrix
+integrity, direct/projected spectral comparison, and a rowwise mechanism test.
+Protocol identifiers and artifact hashes are deferred to
+Appendix~\ref{app:audit}.
+
+\subsection{Fine-grid parents and common-cloud projection}
+\label{sec:r061}
+
+The projection reuses matrices at $M=96$ and $M=128$ as fixed parents.  Its
+fine-to-coarse direction is
+\begin{equation}
+  96\longrightarrow48\longrightarrow24,
+  \qquad
+  128\longrightarrow64\longrightarrow32.
+  \label{eq:chains}
+\end{equation}
+Let $\mathcal B_M(I)$ be the block of fine-cell indices contained in coarse
+cell $I$, and define $\mathcal B_M(J)$ analogously for a coarse target cell.
+With $r=M/m$, the common-cloud matrix is
+\begin{equation}
+ C_{m\leftarrow M}(I,J)=
+ \frac{1}{r^2}\sum_{i\in \mathcal B_M(I)}
+ \sum_{j\in \mathcal B_M(J)}P_M(i,j)
+ =R_{m\leftarrow M}P_ME_{M\to m}.
+ \label{eq:common-cloud}
+\end{equation}
+Here
+\begin{equation}
+ (R_{m\leftarrow M})_{Ii}=r^{-2}\mathbf 1\{i\in \mathcal B_M(I)\},
+ \qquad
+ (E_{M\to m})_{jJ}=\mathbf 1\{j\in \mathcal B_M(J)\},
+ \label{eq:restriction-extension}
+\end{equation}
+with
+$R_{m\leftarrow M}\in\mathbb R^{4m^2\times4M^2}$ and
+$E_{M\to m}\in\mathbb R^{4M^2\times4m^2}$.  Thus $R$ averages the $r^2$
+fine source rows in a coarse source block, while $E$ sums fine target columns
+into their coarse target block.  The producer stores the parent, direct-control,
+block-map, schema, and derived-matrix hashes.  For a Sobol parent with $s$
+samples per fine cell, one projected coarse source row inherits $sr^2$ fine
+samples.  Consequently, a direct/projected comparison changes both the sample
+layout and the effective finite estimator; it is not a matched-budget variance
+comparison.
+Below, ``common-cloud'' and ``projected'' refer to this same matrix $C$.
+
+\subsection{Direct/projected spectral gaps}
+
+For each projected matrix we compare the leading modulus $\lambda_c$ with the
+corresponding direct-control modulus $\lambda_d$ using
+\begin{equation}
+ g=\frac{|\lambda_c-\lambda_d|}{\max(|\lambda_c|,|\lambda_d|)}.
+ \label{eq:gap}
+\end{equation}
+Table~\ref{tab:r061-gaps} reports group medians over the 16 scramble seeds in
+each Sobol group.  All eight medians are below the preregistered 2\%
+descriptive threshold, and the pooled median over all 128 seed-level gaps is
+$0.0057803$ ($0.5780\%$), also below 2\%.  Thus the complete frozen gap
+component---at least six of eight group medians and the pooled median below
+2\%---passes.  The seed distributions are heterogeneous, however:
+the largest gaps are $3.65\%$ and $4.94\%$ in two 64-sample coarse groups.
+In total, 11 of the 128 seed-level gaps exceed 2\%.  Thus the result supports a
+shared group-level finite-resolution window, not a uniform per-seed bound.
+Because the projection also changes effective budget and aggregation geometry,
+it does not isolate a sampling-layout effect.
+
+\begin{table}[H]
+\centering
+\caption{Median direct/projected leading-modulus relative gaps ($n=16$ seeds
+per group).  Parent matrices are projected right-to-left, from $M=96$ or 128
+to the displayed targets; the chain label is written left-to-right only as the
+coarse-to-fine diagnostic reading order.  Every group passes the 2\%
+group-median threshold; individual seed values need not do so.  Entries are
+fractions, so $0.007381=0.7381\%$.}
+\label{tab:r061-gaps}
+\small
+\begin{tabular}{llrr}
+\toprule
+Coarse-to-fine diagnostic chain & $s$ & target $m$ & median $g$\\
+\midrule
+$24\to48\to96$ & 64  & 48 & 0.007381\\
+$24\to48\to96$ & 64  & 24 & 0.015194\\
+$24\to48\to96$ & 256 & 48 & 0.003279\\
+$24\to48\to96$ & 256 & 24 & 0.003265\\
+$32\to64\to128$ & 64  & 64 & 0.008301\\
+$32\to64\to128$ & 64  & 32 & 0.012702\\
+$32\to64\to128$ & 256 & 64 & 0.002620\\
+$32\to64\to128$ & 256 & 32 & 0.002257\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Means, maxima, seed fractions, and mean intervals are retained in
+Table~\ref{tab:r061-gap-full}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{r061_gaps.pdf}
+\caption{Direct/projected leading-modulus gaps for the eight Sobol groups.
+Points are the 16 scramble seeds; the summary marks the median and interquartile
+range.  The dashed line is the 2\% group-median decision threshold.  All
+observations are retained, including the 11 of 128 values above the line.}
+\label{fig:r061-gaps}
+\end{figure}
+
+\subsection{Absolute dyadic-contrast compression}
+
+The matrices are projected from fine to coarse as in \eqref{eq:chains}, but a
+three-level diagnostic trajectory is read in the opposite, coarse-to-fine
+direction.  For
+$(\lambda_{\rm coarse},\lambda_{\rm middle},\lambda_{\rm fine})$, define
+\begin{equation}
+ \Delta_i=g(\lambda_{\rm coarse},\lambda_{\rm middle}),\qquad
+ \Delta_f=g(\lambda_{\rm middle},\lambda_{\rm fine}),\qquad
+ D=\Delta_f-\Delta_i.
+ \label{eq:dyadic-D}
+\end{equation}
+Here $g$ is the relative gap in \eqref{eq:gap}.  Negative $D$ means that the
+final relative change is smaller than the initial one, but the preregistered
+criterion concerns absolute contrast.  With direct and projected values
+$D_d,D_c$ over the 16 seeds, support requires both
+\begin{equation}
+ \operatorname{median}|D_c|\leq\operatorname{median}|D_d|,
+ \qquad
+ \operatorname{median}\!\left(\frac{|D_c|}{|D_d|}\right)\leq0.8.
+ \label{eq:dyadic-compression-gate}
+\end{equation}
+The bootstrap unit is the scramble seed.  Both budgets on the
+$24\to48\to96$ chain pass this absolute-contrast criterion, but only $s=256$
+has a negative projected mean $D_c$ with its 95\% interval below zero.  Neither
+budget on the $32\to64\to128$ chain passes both inequalities.
+The frozen aggregate rule requires at least three of the four chain-by-budget
+groups to satisfy both inequalities in \eqref{eq:dyadic-compression-gate}.
+Only two of four pass, so the aggregate dyadic component and the overall
+common-projection gate G1 both fail.
+The negative-$D$ fractions and paired direct/projected differences are given in
+Table~\ref{tab:r061-dyadic-full}.
+
+\begin{table}[H]
+\centering
+\caption{Dyadic contrast $D$ ($n=16$).  Table entries are fractions; multiplying
+by 100 gives the percentage-point units used in Figure~\ref{fig:r061-dyadic}.
+Chains are labeled in the
+coarse-to-fine diagnostic reading order; physical projection is from the
+rightmost parent to the left.  Brackets give 95\% seed-bootstrap intervals for
+the mean over 20,000 resamples.  ``Pass'' refers exactly to
+\eqref{eq:dyadic-compression-gate}, not to signed monotonicity.}
+\label{tab:r061-dyadic}
+\scriptsize
+\begin{tabular}{llccll}
+\toprule
+Diagnostic chain & $s$ & direct mean [CI] & projected mean [CI] & median ratio & gate\\
+\midrule
+$24\to48\to96$ & 64  & $-.00325\;[-.01113,.00497]$ & $+.00007\;[-.00363,.00459]$ & 0.5630 & pass\\
+$24\to48\to96$ & 256 & $-.00423\;[-.00758,-.00067]$ & $-.00294\;[-.00407,-.00167]$ & 0.4616 & pass\\
+$32\to64\to128$ & 64  & $-.00718\;[-.01411,-.00110]$ & $+.00477\;[.00236,.00730]$ & 1.0521 & fail\\
+$32\to64\to128$ & 256 & $-.00119\;[-.00359,.00095]$ & $+.00154\;[.00044,.00269]$ & 0.8915 & fail\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{r061_dyadic.pdf}
+\caption{Seed-paired dyadic diagnostics.  The left panel connects direct and
+projected signed contrasts $D=\Delta_f-\Delta_i$ for each of the 16 seeds.  The
+right panel shows $|D_c|-|D_d|$, where negative values indicate absolute
+contrast compression; annotations give
+$\widetilde r=\operatorname{median}(|D_c|/|D_d|)$.  Only the two
+$24\to48\to96$ groups satisfy the complete criterion
+\eqref{eq:dyadic-compression-gate}.}
+\label{fig:r061-dyadic}
+\end{figure}
+
+The chain dependence prevents a universal compression claim.  Because the
+projected rows also inherit larger effective budgets, even the positive first
+chain does not identify common sampling as the cause.  The earlier negative
+dyadic records are retained as historical controls; no old decision is
+reopened.
+
+\subsection{Row support and a degenerate localization metric}
+
+For a direct row $D_i$ and projected row $C_i$ at the same target grid, define
+the row discrepancy energy
+\begin{equation}
+ E_i=\frac12\norm{D_i-C_i}_1.
+ \label{eq:row-energy}
+\end{equation}
+The preregistered producer converts normalized sample distances into row-level
+exposure fractions at thresholds
+$\tau\in\{0.125,0.25,0.5,1\}$.  For samples inside a target state rectangle,
+the stored cell distance is
+\begin{equation}
+ d_{\rm cell}=\min(f_x,1-f_x,f_y,1-f_y),
+ \qquad 0\leq d_{\rm cell}\leq\frac12,
+ \label{eq:cell-distance}
+\end{equation}
+where $f_x,f_y$ are fractional target-cell coordinates.  More precisely, let
+$\mathcal C_i$ be the inherited parent sample cloud for coarse source row $i$,
+let $w_\ell$ be its quadrature or equal Sobol weight, and let $I_\ell$ indicate
+that the image lies inside a target state rectangle.  The persisted statistic
+is
+\begin{equation}
+ e^{(\tau)}_{\rm cell}(i)=
+ \begin{cases}
+ \displaystyle
+ \frac{\sum_{\ell\in\mathcal C_i}w_\ell I_\ell
+       \mathbf 1\{d_{{\rm cell},\ell}\leq\tau\}}
+      {\sum_{\ell\in\mathcal C_i}w_\ell I_\ell},
+ & \displaystyle\sum_{\ell\in\mathcal C_i}w_\ell I_\ell>0,\\[2ex]
+ 0, & \text{otherwise}.
+ \end{cases}
+ \label{eq:cell-exposure}
+\end{equation}
+Thus the denominator is the inside-target weight, not the total parent-cloud
+weight, and a row with no inside target sample is assigned zero cell exposure.
+
+At the preregistered $\tau=1$ threshold, and also at $\tau=0.5$, the
+bound $d_{\rm cell}\leq1/2$ makes the cell-exposure array exactly
+\begin{equation}
+ e^{(\tau)}_{\rm cell}(i)
+ =\mathbf 1\{\text{inside fraction of row }i>0\}
+ \label{eq:occupancy-indicator}
+\end{equation}
+in all 136 persisted arrays.  The preregistered localization variable therefore
+degenerates to occupancy: it is not an internal-cell boundary-phase test.
+Almost all discrepancy energy lies on occupancy-positive rows, with fraction
+$0.999864$--$1.000000$ and mean $0.999987$, but this support restriction is
+largely structural because a row with no target transition has little
+opportunity to differ.
+
+To test whether any stronger signal survives, we condition on
+occupancy-positive Sobol rows and recompute lower-threshold associations.
+Every $\rho$ is a rowwise Spearman correlation.  Table~\ref{tab:r061-localization}
+reports the mean of the 16 seed-level statistics in each group.  Superscript
+$+$ denotes this conditioning, and
+$Q^+_{\tau}$ is the energy fraction carried by the rank-defined top quartile of
+the conditional exposure array.
+
+\begin{table}[H]
+\centering
+\caption{Interpretation check for the cell-exposure metric.
+$24\to48\to96$ and $32\to64\to128$ are coarse-to-fine diagnostic labels;
+the parent grids are 96 and 128.
+$\rho_{\rm occ}$ is the formal $\tau=1$ support-indicator correlation;
+lower-threshold columns condition on occupancy-positive rows.  The
+rank-defined $Q^+_\tau$ values are tie-sensitive descriptive diagnostics, not
+inferential tests.}
+\label{tab:r061-localization}
+\scriptsize
+\begin{tabular}{llrrrrrr}
+\toprule
+Diagnostic chain & $s$ & $m$ & $\rho_{\rm occ}$ & $\rho^+_{.125}$ & $\rho^+_{.25}$ & $Q^+_{.125}$ & $Q^+_{.25}$\\
+\midrule
+$24\to48\to96$ & 64  & 48 & .9743 & +.0889 & +.0292 & .2362 & .2266\\
+$24\to48\to96$ & 64  & 24 & .9693 & -.1990 & -.3312 & .1548 & .1343\\
+$24\to48\to96$ & 256 & 48 & .9748 & +.0922 & +.0354 & .2336 & .2253\\
+$24\to48\to96$ & 256 & 24 & .9690 & -.2067 & -.3328 & .1482 & .1320\\
+$32\to64\to128$ & 64  & 64 & .9766 & +.0875 & +.0199 & .2411 & .2313\\
+$32\to64\to128$ & 64  & 32 & .9726 & +.0829 & -.0034 & .2200 & .2055\\
+$32\to64\to128$ & 256 & 64 & .9768 & +.0922 & +.0199 & .2394 & .2295\\
+$32\to64\to128$ & 256 & 32 & .9722 & +.1000 & +.0065 & .2203 & .2051\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{r061_localization.pdf}
+\caption{Localization-metric diagnosis.  The formal $\tau=1$ statistic is a binary
+target-support indicator.  Axis labels give parent grid $M$, sample budget $s$,
+and target grid $m$; bars summarize the 16 seed-level statistics per group.
+After conditioning on support-positive rows, the
+$\tau=0.125$ and $0.25$ cell-boundary correlations are small or negative, and
+the corresponding top-quartile energy fractions lie near or below the 25\%
+row-share reference.}
+\label{fig:r061-localization}
+\end{figure}
+
+The conditional correlations range from $-0.333$ to $0.100$ across the eight
+groups and provide no robust positive boundary-phase association.  Thus the
+metric fails as a mechanism variable: the only surviving statement is a
+finite-row support restriction, while internal target-cell phase remains
+unresolved.  This reinterpretation changes no persisted array or recorded gate
+value.
+
+\subsection{Quadrature control and scope}
+
+On the projected Gauss matrices, the $q=8$ versus $q=12$ leading-modulus gaps
+are $0.1054\%$, $0.0680\%$, $0.0712\%$, and $0.0881\%$ for target grids 24,
+32, 48, and 64.  Thus all four are below the 1\% control threshold.  This
+controls quadrature-order sensitivity for these finite matrices; it neither
+repairs the failed localization metric nor proves an $m\to\infty$ operator
+limit.  Exact commands, parent hashes, independent checkers, and collection
+digests are recorded in Appendix~\ref{app:audit}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.58\textwidth]{r061_quadrature.pdf}
+\caption{Projected Gauss $q=8$ versus $q=12$ leading-modulus gaps at the four
+target grids.  A logarithmic vertical scale displays both the observed
+$0.068\%$--$0.105\%$ range and the 1\% decision line.}
+\label{fig:r061-quadrature}
+\end{figure}

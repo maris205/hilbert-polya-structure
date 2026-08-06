@@ -1,0 +1,81 @@
+\section{Introduction}
+
+Periodic orbits and transfer-operator resonances describe the same open chaotic
+system from two different computational directions.  In one direction, an
+orbit catalogue supports Artin--Mazur or thermodynamic zeta functions
+\citep{ArtinMazur1965,Ruelle1976Zeta,Ruelle1978Thermodynamic}.  In the other,
+finite-volume or Ulam matrices approximate the action of a Perron--Frobenius
+operator and expose escape rates and isolated resonances
+\citep{Ulam1960,Keller1982,Froyland2007,Froyland1995}.  Agreement between the
+two routes is useful only when the domain, the hole, the orbit inclusion rule,
+and the finite-resolution error are held fixed.  This requirement is
+especially important for reversible two-dimensional maps, where a visually
+stable leading eigenvalue can coexist with grid-phase oscillations.
+
+We make this issue concrete for the area-preserving H\'enon form
+\begin{equation}
+  H_a(x,y)=(1-a x^2-y,x), \qquad a>0,
+  \label{eq:intro-map}
+\end{equation}
+which is conjugate to the usual $b=-1$ H\'enon convention
+\citep{Henon1976,Wiggins1990}.  The map has an exact reversor, reciprocal
+multiplier pairs, and an escape mechanism once a bounded open domain is fixed.
+Those structural facts are mathematically clean, but they do not make the
+whole plane uniformly hyperbolic: elliptic and escaping trajectories coexist
+with hyperbolic orbit families.  We therefore separate exact statements on a
+certified survivor from numerical statements about a finite open operator.
+
+The paper places exact symbolic structure, weighted periodic data, and
+finite-matrix spectral checks in one chain without assigning a
+continuous-operator meaning to finite-grid agreement.  To separate direct
+coarse discretization from aggregation of a fixed fine estimator, we also use
+a paired algebraic projection.  If $P_M$ is a state-major matrix on a fine
+grid $M$ and $m$ divides $M$, the projected matrix is
+\begin{equation}
+ C_{m\leftarrow M}(I,J)
+ =r^{-2}\sum_{i\in B(I)}\sum_{j\in B(J)}P_M(i,j),
+ \qquad r=M/m.
+ \label{eq:intro-coarsen}
+\end{equation}
+This creates a paired comparison with a direct coarse estimator.  It changes
+both grid-specific sampling/layout and effective budget: a common row inherits
+$s r^2$ fine samples, whereas its direct control uses $s$.  The comparison can
+therefore reveal sensitivity, but it cannot by itself identify a causal
+coupling contribution.
+
+The main contributions are:
+\begin{enumerate}[leftmargin=1.6em]
+  \item We prove that an explicit four-state-rectangle survivor at $a=6$ is a
+  locally maximal uniformly hyperbolic basic set conjugate to a mixing
+  four-state subshift.  This gives exact symbolic entropy and a
+  primitive-necklace/orbit bijection on the local survivor.
+  \item We report the restricted weighted-cycle calculation through period
+  twelve.
+  The symbolic theorem makes the 79 primitive-orbit count and the $\beta=0$
+  determinant identity exact; high-precision refinement supplies multipliers.
+  We derive the dependence between the $\beta=1$ Euler determinant and the
+  periodic-point flat determinant, so their near-coincident finite-cutoff roots
+  are used only as an implementation and truncation check.
+  \item We compare the period-twelve cycle reference with independently
+  assembled open finite-volume matrices and report the leading values,
+  eigenpair residuals, and returned spectral separation explicitly.
+  \item We test paired fine-to-coarse projection against direct coarse
+  construction.  The leading-modulus gaps are small at the tested resolutions,
+  but dyadic-contrast compression is chain dependent.  A proposed rowwise
+  mechanism variable reduces to occupancy and supplies no robust internal-cell
+  phase association after conditioning.
+\end{enumerate}
+
+At the tested grids and sample budgets, the paired projection produces modest
+direct/projected leading-modulus gaps and compresses absolute dyadic contrast
+on one refinement chain.  The inherited effective budget and the negative
+second chain prevent a causal or universal conclusion.  The persisted row
+arrays likewise support only a target-occupancy restriction, not an
+internal-cell boundary-phase mechanism.  These finite-resolution observations
+are kept separate from the exact survivor theorem: they do not identify a
+global H\'enon zeta spectrum or establish a continuous-operator limit.
+
+The remainder of the paper first defines the certified geometric object and
+the conditional zeta language, then describes the orbit and operator ledgers,
+and finally reports the direct and projected finite-resolution tests together
+with their limitations and reproducibility records.

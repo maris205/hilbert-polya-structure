@@ -1,0 +1,93 @@
+\section{Frozen computational experiment}
+\label{sec:experiment}
+
+\subsection{Source lock and splits}
+
+The protocol was serialized before the sealed periods were generated.  Its
+SHA-256 digest is
+\begin{center}
+\small\texttt{0c284a1b3610a3d772aa00c6a8b33161a8bc6814957a9968d5c80fb618eec399}.
+\end{center}
+The object is \(H_6|_{\Lam}\); the clock, scale, and offset are fixed as
+\(T_p=\log\abs{\Lambda_{u,p}}\), scale one, offset zero.  The complex
+rectangle is
+\[
+ \cR=\{s\in\C:-0.25\le\Re s\le0.30,\ \abs{\Im s}\le20\}.
+\]
+Periods 1--8 form development, 9--12 validation, 13--16 the sealed test, and
+17--20 post-test robustness.  The matching tolerance is \(0.02\).  The
+training family contains cutoff-8 zeros that match cutoff 7 within this
+tolerance and lie at least \(0.01\) from the contour.
+
+Prime tables, primality labels, Riemann-zero tables, evaluations of zeta or xi,
+target spectral fitting, and post-validation rescaling were forbidden.  This
+firewall makes the experiment a self-consistency test of one dynamical
+candidate, not a goodness-of-fit exercise.
+
+\subsection{Complete orbit ledger}
+
+Every primitive closed \(A\)-word is enumerated exactly up to cyclic rotation.
+Equation \eqref{eq:sqrt-recurrence} then lifts it at 80 decimal digits.  For
+each orbit, the ledger stores its canonical state and sign words, coordinates,
+recurrence residual, a posteriori contraction bound, monodromy, unstable
+multiplier, orientation, instability length, and generating-function action.
+The catalogue is complete within the symbolic survivor at every stated
+cutoff.
+
+The two neighboring catalogues \(a=5.9,6.1\) reuse the same words as numerical
+continuations only.  On the common boxes, their contraction diagnostic uses
+\[
+ \kappa(a)=\frac{2}{\sqrt{17}}\sqrt{\frac6a}.
+\]
+No common-survivor theorem is inferred from their convergence.
+
+\subsection{Two coefficient constructions}
+
+Primitive-factor multiplication gives the coefficients of
+\eqref{eq:section} directly.  An independent trace recursion uses
+\begin{equation}
+ F_j^{(\kappa)}(s)=
+ \sum_{\substack{p\in\cP\\n_p\mid j}}
+ n_p\,\sigma_p^{\kappa j/n_p}\e^{-s(j/n_p)T_p},
+ \label{eq:traces}
+\end{equation}
+followed by
+\begin{equation}
+ d_0(s)=1,\qquad
+ d_n(s)=-\frac1n\sum_{j=1}^nF_j^{(\kappa)}(s)d_{n-j}(s),
+ \qquad
+ D_{\kappa,N}(s)=\sum_{n=0}^N d_n(s).
+ \label{eq:cumulant}
+\end{equation}
+Both constructions use the same complete orbit ledger but independent
+algebraic paths.  Agreement is tested at fixed complex probes and at every
+reported zero.
+
+\subsection{Zeros and numerical winding audit}
+
+Float64 discovery combines grid-cell phase windings and local modulus minima,
+then applies bounded Newton refinement.  Each located zero is refined at 80
+decimal digits and checked with both coefficient constructions.  The sampled
+argument change around \(\partial\cR\) is evaluated at 4,096, 8,192, and
+16,384 contour points.  We record agreement across resolutions, the minimum
+sampled boundary modulus, and the maximum phase step.
+
+These winding counts are numerical diagnostics, not interval certificates.
+Even when all three grids agree and every sampled phase step is below \(\pi\),
+an analytic derivative bound or interval enclosure would be required to rule
+out unresolved behavior between samples.
+
+\subsection{Controls}
+
+The frozen control panel contains global period and length shuffles,
+same-density random lengths, positive random factor weights, random phases, an
+exact constant-roof parent, and numerical continuations at \(a=5.9,6.1\).
+For the exact parent, every step has length
+\(\ell_*=\log L_1\simeq1.96734662909421\), the negative fixed-orbit length,
+so \(T_p=n_p\ell_*\) and its determinant is
+\(\det(I-z\e^{-s\ell_*}A)\); coefficients above degree four vanish exactly.
+Random controls use seeds 20260805--20260807.  Root retention is measured from
+cutoff 8 to 16.  A second statistic is the degree-9--16 coefficient
+\(\ell^1\) tail at the common H\'enon cutoff-16 positive zero.  Since the
+randomized orbit data need not define H\"older potentials, this panel diagnoses
+non-generic cancellation but cannot alone identify its mechanism.

@@ -1,0 +1,148 @@
+\section{Geometry, reversibility, and the certified survivor}
+\label{sec:geometry}
+
+\subsection{The reversible area-preserving map}
+
+We use the polynomial map
+\begin{equation}
+ H_a(x,y)=(1-a x^2-y,x).
+ \label{eq:map}
+\end{equation}
+Its derivative and inverse are
+\begin{equation}
+ DH_a(x,y)=
+ \begin{pmatrix}-2ax&-1\\1&0\end{pmatrix},
+ \qquad
+ H_a^{-1}(X,Y)=(Y,1-aY^2-X).
+ \label{eq:derivative-inverse}
+\end{equation}
+Thus $\det DH_a=1$.  If $R(x,y)=(y,x)$, direct substitution gives
+\begin{equation}
+ R\circ H_a\circ R=H_a^{-1}.
+ \label{eq:reversor}
+\end{equation}
+For a periodic point $z_p$ of primitive period $n_p$, the monodromy matrix
+$M_p=DH_a^{n_p}(z_p)$ lies in $\mathrm{SL}(2,\R)$.  A hyperbolic orbit
+therefore has eigenvalues $(\Lambda_{u,p},\Lambda_{u,p}^{-1})$ up to ordering,
+and the reversor maps it to an orbit with the same multiplier modulus.  These
+are exact algebraic identities, not numerical observations.
+
+The second-order recurrence associated with \eqref{eq:map} is
+\begin{equation}
+ x_{k+1}=1-a x_k^2-x_{k-1}.
+ \label{eq:recurrence}
+\end{equation}
+
+\subsection{Closed state rectangles and the open numerical domain}
+
+The choice $a=6$ is proof driven.  Rearranging \eqref{eq:recurrence} gives two
+signed square-root branches, and the rational intervals below are mapped
+strictly into themselves on the six allowed neighbor patterns with the uniform
+contraction factor $2/\sqrt{17}$.  They provide a simple explicit margin for a
+local symbolic model; no optimality in parameter or domain size is claimed.
+The rectangles were fixed before the matrix sensitivity comparisons reported
+below.
+
+The exact survivor is defined with four closed state rectangles
+\begin{equation}
+ N_{st}=X_s\times Y_t, \qquad s,t\in\{-,+\},
+ \label{eq:hsets}
+\end{equation}
+with
+\begin{equation}
+ X_-= [-5/8,-1/3],\quad X_+=[1/3,5/8],\qquad
+ Y_-=[-81/128,-5/16],\quad Y_+=[5/16,81/128].
+ \label{eq:hset-bounds}
+\end{equation}
+We write $\mathcal{N}=\bigcup_{s,t}N_{st}$ and define the two-sided survivor
+\begin{equation}
+ \Lam_* = \bigcap_{k\in\Z}H_6^{-k}(\mathcal{N}).
+ \label{eq:survivor}
+\end{equation}
+The numerical operator instead uses the strict interior
+$\mathcal N^\circ=\bigcup_{s,t}\operatorname{int}N_{st}$ as its open domain:
+samples that hit a state-rectangle or local-cell boundary exactly are counted
+and discarded, and samples outside $\mathcal N^\circ$ contribute to escape.
+Historical filenames use the label ``h-set,'' but the present argument invokes
+neither the coordinate-chart structure of a topological h-set nor a covering
+relation in that technical sense.
+
+The transition-exclusion and branch-contraction argument gives the state
+adjacency matrix, in the order $(--,-+,+-,++)$,
+\begin{equation}
+ A=\begin{pmatrix}
+ 1&0&1&0\\
+ 1&0&0&0\\
+ 0&1&0&1\\
+ 0&1&0&0
+ \end{pmatrix},
+ \qquad
+ \rho(A)=\varphi=\frac{1+\sqrt5}{2}.
+ \label{eq:adjacency}
+\end{equation}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.96\textwidth]{r059_geometry_adjacency.pdf}
+\caption{Geometry and symbolic coding.  The left panel shows the four exact
+rational state rectangles in the $(x,y)$ plane.  The right panel shows the six
+allowed transitions in the order $(--,-+,+-,++)$:
+$--\to--,+-$, $-+\to--$, $+-\to-+,++$, and $++\to-+$.}
+\label{fig:geometry-adjacency}
+\end{figure}
+The following local statement is the theoretical anchor for the numerical
+ledgers.
+
+\begin{theorem}[Explicit hyperbolic state-rectangle survivor]
+\label{thm:contraction}
+The maximal invariant set $\Lam_*$ is nonempty, compact, invariant, and
+uniformly hyperbolic.  For every bi-infinite itinerary admissible for $A$, the
+signed square-root recurrence induced by \eqref{eq:recurrence} has a unique
+orbit in the corresponding state rectangles.  The survivor is conjugate to
+the four-state subshift defined by $A$, and
+\begin{equation}
+ h_{\mathrm{top}}(H_6|_{\Lam_*})=\log\varphi.
+ \label{eq:entropy}
+\end{equation}
+\end{theorem}
+
+\begin{corollary}[A mixing hyperbolic basic set]
+\label{cor:basic-set}
+The survivor $\Lam_*$ lies a positive distance inside $\mathcal N$, is locally
+maximal, and $H_6|_{\Lam_*}$ is topologically mixing.  In particular,
+$\Lam_*$ is a hyperbolic basic set.
+\end{corollary}
+
+\begin{proof}
+The strict self-mapping bounds proved in
+Lemma~\ref{lem:proof-self-map}, together with compactness, put $\Lam_*$ a
+positive distance from $\partial\mathcal N$.  Choose an open neighborhood
+$U$ with $\Lam_*\subset U\subset\mathcal N$.  Invariance gives
+$\Lam_*\subset\bigcap_{k\in\mathbb Z}H_6^{-k}(U)$, while $U\subset\mathcal N$
+gives the reverse inclusion by \eqref{eq:survivor}; hence $\Lam_*$ is locally
+maximal.  Direct multiplication gives $A^4>0$, so the associated subshift of
+finite type is mixing.  The conjugacy in Theorem~\ref{thm:contraction}
+transfers mixing to $H_6|_{\Lam_*}$.
+\end{proof}
+
+The theorem is local to the explicitly defined survivor.  It does not identify
+the whole H\'enon non-wandering set, certify a global Markov partition, or
+identify a finite-grid SCC with $\Lam_*$.  The exact signed-square-root map has
+Lipschitz constant at most $2/\sqrt{17}<1$ on each admissible branch.  The
+radicand bounds in the proof also give, uniformly along every survivor orbit,
+\begin{equation}
+ \frac{\sqrt{17}}{12}\leq |q_i|\leq\sqrt{\frac38}.
+ \label{eq:survivor-interior-bound}
+\end{equation}
+Both endpoints lie strictly between $1/3$ and $5/8$, and also strictly inside
+the corresponding $y$-interval magnitudes in \eqref{eq:hset-bounds}; hence the
+positive rectangle margin used in Corollary~\ref{cor:basic-set} is explicit.
+The complete contraction, transition-exclusion, and cone proof is given in
+Appendix~\ref{app:contraction-proof}; it uses neither the finite period-12
+catalogue nor any finite-volume matrix.
+
+\begin{remark}
+The certified survivor and the finite-volume matrices answer different
+questions.  The former is an exact local dynamical object.  The latter are
+finite estimators with an absorbing escape rule.  Comparing them is informative
+only after the domain and the estimator are explicitly recorded.
+\end{remark}

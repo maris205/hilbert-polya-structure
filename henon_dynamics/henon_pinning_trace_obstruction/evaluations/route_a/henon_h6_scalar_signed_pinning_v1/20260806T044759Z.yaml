@@ -1,0 +1,194 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: henon_h6_scalar_signed_pinning_v1
+source_commit: NOT_TESTABLE
+evaluation_date: "2026-08-06T04:47:59Z"
+
+source_lock:
+  object:
+    candidate_definition: >-
+      The standard pure-hyperbolic BPS graph-directed mixed Cauchy pinning
+      kernel specialized to the certified local survivor of
+      H_6(q,p)=(1-6q^2-p,q), with the proposed ordinary orbitwise scalar
+      edge-cocycle correction intended to produce positive signed flat traces.
+    family: reversible area-preserving Henon map with holomorphic pinning kernels
+    phase_space: >-
+      The certified four-state local survivor Lambda_* only, using exterior
+      disks Y_t and interior disks X_s; no claim is made about the full
+      nonwandering set.
+    dynamics: "one chronological H_6 iterate restricted to Lambda_*"
+    parameters:
+      a: 6
+      x_center_abs: "23/48"
+      x_radius: "7/48"
+      y_center_abs: "121/256"
+      y_radius: "41/256"
+    parameter_provenance: >-
+      a=6 and the X disks were inherited from the target-free certified
+      hyperbolic control. The Y disks were derived by exact domain inclusion,
+      without prime, Riemann-zero, or spectral target data.
+    symbolic_partition:
+      state_order: ["--", "-+", "+-", "++"]
+      edge_ids: ["--->--", "--->+-", "-+->--", "+-->-+", "+-->++", "++->-+"]
+    transfer_operator: >-
+      Direct sum of the four BPS mixed exterior/interior Banach spaces, with
+      elementary double-Cauchy kernels built from
+      P_s(w,z)=s*sqrt((1-w-z)/6). The tested candidate is the raw kernel plus
+      an ordinary multiplicative orbitwise scalar edge-cocycle repair.
+    roof_function: "unit dynamical clock; no suspension roof"
+    potential_function: "g=1, apart from the refuted orbitwise scalar sign correction"
+    workspace_provenance:
+      git_commit: NOT_TESTABLE
+      reason: "The workspace is not a Git worktree."
+      payload_sha256: e38faddf55a913ef089e059f1bbb3994631f1b9ba1a1bd0a379b6b9cd391f5fa
+  clock:
+    definition: "one chronological H_6 iterate"
+    affine_rescaling: none
+    unfolding: none
+    finite_window_rule: >-
+      C02C length-N endpoints are iterated pinning data for word summands of
+      L^N on the common domain, not a same-clock finite-memory approximation.
+  normalization:
+    spectral_parameter: z
+    scale: 1
+    offset: 0
+    post_validation_changes: none
+  determinant_convention: >-
+    The requested object is an ordinary scalar Fredholm determinant whose
+    trace coefficients are T_n=sum_x 1/det(I-DH_6^n(x)). Under the frozen BPS
+    contour convention the raw kernel has trace -T_n; its reciprocal
+    determinant or odd superdeterminant is a different convention.
+  cutoff:
+    orbit_cutoff: NOT_APPLICABLE
+    graph_scope: "all four states and all six edges"
+    rational_test_basis: 3
+    spectral_cutoff: NOT_USED
+  precision:
+    arithmetic: "exact Python Fraction arithmetic"
+    floating_point_role: none
+    independent_implementations: 2
+  allowed_data:
+    - repository Paper 5 recurrence and map structure
+    - certified C02C local survivor and endpoint identities
+    - primary-source analytic-hyperbolic operator theory
+  forbidden_data:
+    - prime tables or primality labels
+    - Riemann-zero tables or xi evaluations
+    - target spectral fitting
+    - averaged transition matrices
+    - post-hoc clock or determinant changes
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The inherited symbolic conjugacy supplies intrinsic primitive and repeated
+    periodic orbits on the local survivor, with chronological multiplicity
+    preserved by the six-edge graph. No arithmetic target data were used.
+  strongest_failure: >-
+    No prime-like labeling, log-prime clock, von-Mangoldt repetition weight,
+    or other arithmetic periodic-orbit structure is present.
+  metrics:
+    state_count: 4
+    edge_count: 6
+    primitive_repeat_distinction: PROVED
+    prime_like_information: NOT_TESTABLE
+    complete_global_henon_orbit_set: false
+  artifacts:
+    - henon_pinning_trace_obstruction/DERIVATION_PACKAGE.md
+    - henon_pinning_trace_obstruction/results/certificate.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: >-
+    The exact mixed-domain lemma freezes a legitimate BPS one-step kernel,
+    and symbolic determinant expansion proves its raw trace has the constant
+    negative of the requested signed coefficient. Three independent rational
+    residue checks confirm the algebra but are not themselves the proof.
+  strongest_failure: >-
+    A primitive cycle requires orbitwise scalar correction -1, while its
+    double repeat receives correction +1. Thus no ordinary multiplicative
+    scalar edge cocycle realizes the frozen orbitwise convention. This does
+    not exclude accidental equality of aggregate trace sums through
+    cancellations among distinct orbits. Independently, the
+    C02C windows are L^N word data or exact recodings, not the pre-registered
+    same-clock approximants.
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: NOT_TESTABLE
+    precision_drift: "exact rational checks; no roots computed"
+    control_margin: >-
+      forbidden radicand, missing-edge, wrong-clearance, false-sign-repair,
+      and payload-hash controls were rejected
+    payload_sha256: e38faddf55a913ef089e059f1bbb3994631f1b9ba1a1bd0a379b6b9cd391f5fa
+  artifacts:
+    - henon_pinning_trace_obstruction/code/certify_pinning_obstruction.py
+    - henon_pinning_trace_obstruction/code/check_pinning_obstruction.py
+    - henon_pinning_trace_obstruction/results/independent_check.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: OPEN
+  strongest_evidence: >-
+    Classical nuclear pinning and graded determinant theories explain the
+    exact local trace alternatives, and the project preserves their signed
+    conventions instead of taking absolute values after computation.
+  strongest_failure: >-
+    There is no new entire limiting determinant, analytic continuation,
+    functional equation, Gamma factor, trivial-zero treatment,
+    Riemann--von Mangoldt law, moving-order error theorem, or xi divisor
+    comparison. The natural reciprocal determinant is generally meromorphic.
+  metrics:
+    conjugation_symmetry: NOT_TESTABLE
+    functional_equation: NOT_TESTABLE
+    gamma_factor: NOT_TESTABLE
+    analytic_continuation: NOT_TESTABLE
+    counting_law: NOT_TESTABLE
+  artifacts:
+    - henon_pinning_trace_obstruction/SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: >-
+    The mother map is exactly area-preserving and reversible, so a classical
+    symplectic/antiunitary analogy exists independently of any zero fitting.
+  strongest_failure: >-
+    No self-adjoint, unitary, or scattering operator with the same trace
+    weights, clock, normalization, and domain is constructed. The tested
+    orbitwise scalar transfer-operator candidate is already refuted at A2.
+  metrics:
+    symplectic_map: true
+    reversible_map: true
+    hilbert_space_operator: NOT_TESTABLE
+    self_adjointness: NOT_TESTABLE
+    same_clock_quantization: NOT_TESTABLE
+  artifacts:
+    - henon_pinning_trace_obstruction/README.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  This evaluation rejects only the frozen standard BPS raw-kernel plus
+  ordinary orbitwise scalar-cocycle repair and the frozen finite-memory
+  semantics. Aggregate-only accidental cancellation among distinct orbits is
+  not ruled out. It
+  does not refute every alternative history lift, holomorphic representation,
+  or quantum Henon construction. The explicit mixed-domain lemma survives as
+  analytic infrastructure.
+blocking_conditions:
+  - C02C windows do not truncate an infinite-memory coefficient of the exact one-step kernel
+  - ordinary orbitwise scalar edge-cocycle sign repair contradicts repetition
+  - graded and signed holomorphic trace mechanisms are classical prior art
+  - no arithmetic or completed analytic structure is present
+next_smallest_test: >-
+  Return to breadth-first, Paper-5-rooted candidate generation. Do not enlarge
+  a finite section. A new candidate must freeze a genuinely different
+  invariant object before computation and survive the existing signed,
+  recoding, gauge, and counting-law obstructions.
+route_b_invocation_allowed: false

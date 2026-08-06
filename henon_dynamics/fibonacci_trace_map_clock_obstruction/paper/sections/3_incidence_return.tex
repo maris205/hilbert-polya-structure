@@ -1,0 +1,162 @@
+\section{Marked spectral incidence and closed return}
+
+The length-\(q_k\) Floquet discriminant is \(d_k(E)\).  Let \(\theta\) denote
+the total Floquet phase across the entire \(q_k\)-site cell, so that a Bloch
+solution satisfies \(M_k(E)\psi=e^{i\theta}\psi\).  Since
+\(\det M_k=1\), its spectral equation is
+\(d_k(E)=2\cos\theta\).  Band edges have \(\theta=0,\pi\), while
+\(\theta=\pi/2\) gives the discriminant-zero condition \(d_k(E)=0\).
+By \eqref{eq:iterate-line}, these are one-coordinate section
+incidences:
+\begin{equation}
+T^k\ell_\lambda(E)\in\{x=-1,0,1\}.
+\label{eq:section}
+\end{equation}
+A return after \(m\) trace-map steps instead requires all three equations
+\begin{equation}
+d_m=d_0,\qquad d_{m-1}=d_{-1},\qquad d_{m-2}=2.
+\label{eq:return}
+\end{equation}
+Neither \(m=k\) nor \(m=q_k\) turns \eqref{eq:section} into
+\eqref{eq:return}.
+
+\begin{lemma}[Escape region]
+If three consecutive half traces satisfy
+\begin{equation}
+1<|x_{n-2}|<|x_{n-1}|<|x_n|,
+\label{eq:escape-region}
+\end{equation}
+then
+\[
+|x_{j+1}|>|x_j||x_{j-1}|
+\]
+for every \(j\ge n\).  In particular, there is \(c>0\) such that
+\(\log|x_{n+r}|\ge cF_{r+2}\) for all \(r\ge0\); the orbit grows
+super-exponentially in trace-map time.
+\end{lemma}
+
+\begin{proof}
+The reverse triangle inequality and the trace recursion give
+\[
+|x_{n+1}|\ge2|x_n||x_{n-1}|-|x_{n-2}|
+>|x_n||x_{n-1}|.
+\]
+The last inequality follows from
+\(|x_n||x_{n-1}|>|x_{n-2}|\).  It implies the strict ordering needed to
+propagate \eqref{eq:escape-region}.  Set
+\(a_r=\log|x_{n+r}|\).  Then \(a_{r+1}>a_r+a_{r-1}\).  Taking
+\(c=\min(a_{-1},a_0)>0\), induction gives
+\(a_r\ge cF_{r+2}\).
+\end{proof}
+
+\begin{proposition}[Two exact nonreturns]
+At \(\lambda=1\), the first nontrivial discriminant is
+\begin{equation}
+d_1(E)=E(E-1)-2.
+\end{equation}
+The band edge \(E=0\), for which \(d_1=-2\), and the discriminant-zero root
+\(E=-1\),
+for which \(d_1=0\), have unbounded trace-map orbits.  In particular, neither
+point satisfies \eqref{eq:return} for any \(m\ge1\).
+\end{proposition}
+
+\begin{proof}
+Starting at index \(-2\), the two half-trace sequences are respectively
+\[
+1,0,-\tfrac12,-1,1,-\tfrac32,-2,5,-\tfrac{37}{2},-183,\ldots
+\]
+and
+\[
+1,-\tfrac12,-1,0,\tfrac12,1,1,\tfrac32,2,5,\ldots.
+\]
+Each contains the strict escape triple
+\((3/2,2,5)\) in absolute value.  The escape lemma applies.
+\end{proof}
+
+These are exact spectral-section energies of the first finite approximant.
+Their escaping orbits mean, in particular, that they are not being asserted
+to lie in the spectrum of the infinite Fibonacci Hamiltonian.
+
+\subsection{Exact factor audit}
+
+For \(c\in\{0,2,-2\}\), define \(f_{k,c}=d_k-c\).  At coupling one the
+registered calculation forms
+\begin{equation}
+\gcd\bigl(f_{k,c},d_m-d_0,d_{m-1}-d_{-1},d_{m-2}-2\bigr)
+\label{eq:simultaneous-gcd}
+\end{equation}
+in \(\F_{1000003}[E]\), for \(1\le k\le8\) and
+\(m\in\{k,q_k\}\).  All \(8\cdot3\cdot2=48\) gcds have degree zero.
+
+Because \(f_{k,c}\) is monic, any common factor over \(\Q[E]\) can be chosen
+monic in \(\Z[E]\).  Division of the other integral polynomials by this monic
+factor stays integral, and reduction modulo a prime preserves its positive
+degree.  Hence gcd one in \eqref{eq:simultaneous-gcd} excludes every common
+root over \(\overline{\Q}\) for the frozen four equations.  A separate
+implementation, using a different polynomial representation, verifies all 48
+rows at \(p=1000033\) and 30 systems directly in \(\Q[E]\) for \(k\le5\).
+
+This certificate concerns the return equations \eqref{eq:return}.  It cannot
+exclude a zero of a different energy-dependent Fredholm determinant arising
+from cancellations among global trace coefficients.
+
+\subsection{An explicit boundary/closed comparison}
+
+Casdagli proves a Markov coding in his \(V_{\rm C}\ge8\) convention
+\citep[Secs.~2--3]{casdagli1986}.  Centering the potential gives
+\(E_{\rm C}=E-\lambda/2\), \(V_{\rm C}=\lambda/2\), with an exchange of the
+first two seed coordinates; hence this source regime corresponds to
+\(\lambda\ge16\) for positive coupling.  Its spectral-band language uses the
+source-faithful ten-state graph.  With rows as current states and columns as
+next states, define \(A_{10}\) by
+\begin{align}
+1&\to\{3,7,10\},&2&\to\{4,8,9\},&
+3&\to6,&4&\to5,\nonumber\\
+5&\to1,&6&\to2,&7&\to1,&8&\to1,&
+9&\to2,&10&\to2.
+\label{eq:casdagli-data}
+\end{align}
+The endpoint vectors obtained from Casdagli's equation~(3.1) are
+\[
+u_{10}=e_1+e_6,\qquad v_{10}=e_1+e_2+e_3+e_4.
+\]
+Casdagli uses the convention \(F_0=F_1=1\).  Translated to our standard
+convention, the endpoint-constrained band words of \(n\) symbols (thus
+\(n-1\) edges) selected by \(u_{10},v_{10}\) have count \(F_{n+1}\).
+Setting \(n=k+1\) gives the project convention
+\(q_k=F_{k+2}\), and exact algebra gives
+\begin{equation}
+u_{10}^\top A_{10}^kv_{10}=F_{k+2},\qquad
+u_{10}^\top(I-zA_{10})^{-1}v_{10}=\frac{1+z}{1-z-z^2}.
+\label{eq:boundary-series}
+\end{equation}
+The closed paths instead give the Bowen--Lanford zeta
+\begin{align}
+Z_{\AM}(z)
+&=\exp\left(\sum_{n\ge1}\frac{z^n}{n}\Tr A_{10}^n\right)
+=\frac1{\det(I-zA_{10})},\\
+\det(I-zA_{10})
+&=(1+z)^2(1-z+z^2)(1-z-z^2).
+\label{eq:closed-zeta}
+\end{align}
+Thus the marked spectral-band path count in this large-coupling coding and
+the closed-return zeta share the Fibonacci
+factor \(1-z-z^2\), but they carry different boundary information.  After
+rational continuation to \(z=-1\), the boundary function has a simple zero
+whereas \(Z_{\AM}\) has a double pole.
+
+Casdagli also gives a six-symbol quotient.  The certificate constructs its
+class-incidence matrix \(Q\) and verifies
+\[
+A_{10}Q=QA_6,\qquad u_{10}^\top Q=u_6^\top,\qquad Qv_6=v_{10}.
+\]
+For the marked language the initial quotient symbol \(6\) must be decorated
+with its lift to the old geometric state \(R_6\), rather than \(R_9\) or
+\(R_{10}\).  Arbitrary energy-dependent weights need not descend: the full
+operator-quotient argument is valid when
+\(L_{10}(E)Q=QL_6(E)\).  We therefore keep the ten-state presentation as the
+primary spectral object.
+
+Equation \eqref{eq:boundary-series} counts marked admissible paths; it is not
+an identity for the energy polynomial \(d_k(E)\).  This distinction motivates,
+rather than proves, an energy-dependent boundary operator.

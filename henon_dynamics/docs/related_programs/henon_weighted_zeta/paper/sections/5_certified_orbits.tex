@@ -1,0 +1,171 @@
+\section{Periodic-orbit catalogue and restricted operator construction}
+\label{sec:orbits}
+
+\subsection{Catalogue bridge}
+
+The cycle ledger starts from the $a=6$ periodic catalogue through period twelve.
+Each candidate was refined at high precision and classified relative to the
+four state rectangles in \eqref{eq:hsets}.  The final classification contains
+79 records inside the selected domain and 668 outside, with no unresolved or
+root-failed record.  Theorem~\ref{thm:contraction} and
+Lemma~\ref{lem:proof-period} make the admissible symbolic-necklace count exact
+on $\Lam_*$.  In particular, M\"obius inversion gives
+\begin{equation}
+ p_n=\frac1n\sum_{d\mid n}\mu(d)\operatorname{tr}\!\left(A^{n/d}\right),
+ \qquad
+ (p_1,\ldots,p_{12})=(1,0,1,2,2,2,4,5,8,11,18,25),
+ \label{eq:primitive-counts}
+\end{equation}
+whose entries sum to 79.  An
+independent checker re-enumerates the primitive words, reclassifies the
+persisted high-precision sequences, and verifies the trace/primitive-count
+identity.  The numerical inside records agree period by period with the exact
+symbolic necklaces.  The numerical catalogue therefore confirms the exact
+count while supplying coordinates and multipliers not contained in the
+symbolic enumeration.
+
+For a periodic point $z_p$, the code stores the monodromy matrix $M_p$, its
+determinant residual, the unstable multiplier modulus, and the time-reversal
+partner when one exists.  The reciprocal relation is checked numerically as a
+diagnostic of implementation quality; the exact determinant-one identity comes
+from \eqref{eq:derivative-inverse}.
+
+\subsection{Restricted weighted-cycle algebra and cutoff stability}
+
+On the certified symbolic survivor, the full unweighted Euler determinant is
+the exact finite-state identity
+\begin{equation}
+ D_{E,0}(z)=Z_0(z)^{-1}
+ =\prod_p(1-z^{n_p})
+ =\det(I-zA)=1-z-z^3-z^4,
+ \label{eq:beta-zero-determinant}
+\end{equation}
+where the product is over primitive symbolic necklaces.  The stored degree-12
+coefficient section reproduces this polynomial through degree twelve with zero
+error at the stored precision.  For positive weights we
+form the truncated Euler and periodic-point flat polynomials from the same
+restricted orbit catalogue.  For either polynomial, the reported leading
+modulus is $|z_*|^{-1}$, where $z_*$ is its smallest-modulus nonzero root.  The
+period-cutoff sequence in Table~\ref{tab:r059-cycle-cutoff} shows stabilization of
+the $\beta=1$ Euler and flat values near $0.29162845$.  The $\beta=1/2$
+Euler value near $0.68284718$ is included only as a weight-sensitivity
+diagnostic; it is not the target of the finite-volume comparison.
+
+\begin{table}[H]
+\centering
+\caption{Restricted weighted-cycle cutoff sequence.  The orbit count is cumulative
+through primitive period $N$.}
+\label{tab:r059-cycle-cutoff}
+\small
+\begin{tabular}{rrrrr}
+\toprule
+$N$ & primitive orbits & $\lambda_{E,1/2}$ & $\lambda_{E,1}$ & $\lambda_F$\\
+\midrule
+8  & 17 & 0.682846853 & 0.291628304 & 0.291624276\\
+9  & 25 & 0.682847077 & 0.291628328 & 0.291628474\\
+10 & 36 & 0.682847204 & 0.291628476 & 0.291628512\\
+11 & 54 & 0.682847184 & 0.291628450 & 0.291628441\\
+12 & 79 & 0.682847185 & 0.291628451 & 0.291628452\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.84\textwidth]{r059_cycle_convergence.pdf}
+\caption{Restricted cycle-polynomial leading moduli versus period cutoff.  The
+right panel resolves the agreement of the $\beta=1$ Euler and periodic-point
+flat sections at the final cutoffs.  Because the flat determinant contains the
+Euler determinant as its leading factor, this is a finite-section consistency
+check rather than independent dynamical evidence.}
+\label{fig:r059-cycle-convergence}
+\end{figure}
+
+At $N=12$, the two $\beta=1$ diagnostics differ by
+$1.85\times10^{-10}$ in leading modulus.  In view of
+\eqref{eq:flat-factorization}, their formal dependence motivates this empirical
+finite-truncation and implementation check.  It neither implies equality of
+the degree-12 zero sets nor bounds their root discrepancy.  The finite-volume
+comparison below uses their common displayed $\beta=1$ value as a fixed cycle
+reference; it does not identify the finite matrix with a continuous
+thermodynamic operator.
+
+\subsection{Absorbing finite-volume matrices}
+
+Partition each state rectangle into an $m\times m$ array of cells $B_I$ and
+write $\mu$ for planar Lebesgue measure.  The ideal open finite-volume matrix is
+\begin{equation}
+ (P_m)_{IJ}
+ =\frac{\mu\!\left(B_I\cap H_6^{-1}(B_J)\right)}{\mu(B_I)},
+ \qquad P_m\in\mathbb R^{4m^2\times4m^2}.
+ \label{eq:ulam-definition}
+\end{equation}
+Rows index source cells and columns index target cells.  State-major ordering
+is followed by local $y$ and local $x$ indices.  The implemented estimators
+replace the normalized cell integral in \eqref{eq:ulam-definition} by either
+tensor Gauss--Legendre weights, normalized to sum to one in each source cell,
+or equal-weight scrambled Sobol samples.  A mapped point in $B_J$ contributes
+to column $J$; a point outside $\mathcal N^\circ$, or exactly on a discarded
+state-rectangle or local-cell boundary, contributes to escape.  The resulting
+CSR matrices are nonnegative and substochastic up to the recorded
+$10^{-12}$ audit tolerance.
+
+The production panel uses
+$m\in\{24,32,48,64,96,128\}$, Gauss--Legendre order eight, and two scrambled
+Sobol estimators with 64 points per cell.  The independent schema checker
+verifies matrix hashes, indexing, selected source rows, zero exact boundary
+hits, and returned eigenpair residuals.  Table~\ref{tab:r059-cycle-operator}
+shows the six finest-grid comparisons with the period-12 cycle reference
+$\lambda_{\rm cyc}=0.29162845164474605$.
+
+\begin{table}[H]
+\centering
+\caption{Finest-grid finite-volume comparison.  The relative gap is
+$|\lambda_m-\lambda_{\rm cyc}|/|\lambda_{\rm cyc}|$.}
+\label{tab:r059-cycle-operator}
+\small
+\begin{tabular}{lrrr}
+\toprule
+Estimator & $m$ & leading modulus $\lambda_m$ & relative gap\\
+\midrule
+Gauss $q=8$ & 96  & 0.291998537 & 0.1269\%\\
+Gauss $q=8$ & 128 & 0.288096349 & 1.2112\%\\
+Sobol 20260801 & 96  & 0.291078899 & 0.1884\%\\
+Sobol 20260801 & 128 & 0.292758121 & 0.3874\%\\
+Sobol 20260802 & 96  & 0.292764254 & 0.3895\%\\
+Sobol 20260802 & 128 & 0.290990842 & 0.2186\%\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The median relative gap is $0.3030\%$.  The code applies ARPACK to the density
+transpose $P_m^\top$, normalizes each returned Ritz vector, and records
+\begin{equation}
+ \eta_j=\norm{P_m^\top v_j-\lambda_jv_j}_2,
+ \qquad \norm{v_j}_2=1.
+ \label{eq:arpack-residual}
+\end{equation}
+Across these six records, all returned pairs have
+$\eta_j\leq1.66\times10^{-11}$, verifying small algebraic residuals for those
+Ritz pairs.  The first/second modulus separation is $22.8\%$--$29.2\%$ of the
+first modulus, but only among the returned eigenvalues.  Here ``leading'' means
+the largest modulus among the converged ARPACK eigenpairs requested with
+\texttt{which=LM}.  For these nonnormal finite matrices, neither a small
+residual nor separation within the returned set proves proximity to a true
+eigenvalue or encloses the spectral radius.  The historical dyadic stability
+gate remains negative because two Sobol trajectories are nonmonotone, so the
+table records a common finite-resolution window rather than convergence.
+
+\subsection{Variance and quadrature sensitivity}
+
+An extended panel adds sixteen Sobol seeds and paired budgets 64 and 256 on all
+six grids, together with Gauss orders 4, 8, and 12.  Increasing the budget reduces
+cross-seed standard deviation at every grid; the six SD(256)/SD(64) ratios lie
+between 0.250 and 0.512, with median 0.3207.  The strict paired-shift gate
+still fails at $m=24$ and $m=32$, and the q=8/q=12 comparison is not stable on
+all grids.  Thus sampling variance is material but does not explain the whole
+historical failure.
+
+The next section holds a finest-grid cloud fixed while changing the coarse
+representation.  This supplies a paired sensitivity experiment rather than a
+replacement of the preceding estimators.

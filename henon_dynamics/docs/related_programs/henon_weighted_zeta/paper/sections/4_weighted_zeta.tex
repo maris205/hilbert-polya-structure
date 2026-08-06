@@ -1,0 +1,155 @@
+\section{Weighted cycle expansions and error language}
+\label{sec:zeta}
+
+\subsection{Definitions}
+
+Let $\cP_*$ denote the primitive periodic orbits in the certified survivor
+$\Lam_*$.  For $p\in\cP_*$, write $n_p$ for its primitive period and
+$\Lambda_{u,p}=\sigma_pL_p$ for its unstable multiplier, where
+$\sigma_p\in\{-1,+1\}$ and $L_p=|\Lambda_{u,p}|>1$.  For $\beta\geq0$ define
+the formal weighted dynamical zeta function and its Euler determinant by
+\begin{equation}
+ Z_\beta(z)=
+ \prod_{p\in\cP_*}\left(1-z^{n_p}L_p^{-\beta}\right)^{-1},
+ \qquad
+ D_{E,\beta}(z)=Z_\beta(z)^{-1}.
+ \label{eq:zeta}
+\end{equation}
+Two different truncations occur and must be distinguished.  The
+primitive-period cutoff retains all repetitions of orbits with $n_p\leq N$:
+\begin{equation}
+ \log Z_\beta^{(\mathrm{prim}\leq N)}(z)=
+ \sum_{\substack{p\in\cP_*\\n_p\leq N}}
+ \sum_{r\geq1}
+ \frac{z^{r n_p}}{rL_p^{\beta r}}.
+ \label{eq:log-zeta}
+\end{equation}
+The root calculations instead use the degree-$N$ coefficient section
+\begin{equation}
+ D_{E,\beta}^{[N]}(z)=
+ \left[\prod_{\substack{p\in\cP_*\\n_p\leq N}}
+ \left(1-z^{n_p}L_p^{-\beta}\right)\right]_{\leq N},
+ \label{eq:euler-coefficient-section}
+\end{equation}
+where $[\cdot]_{\leq N}$ discards powers above $z^N$.  Orbits of primitive
+period greater than $N$ cannot affect these first $N$ coefficients, but the
+polynomial in \eqref{eq:euler-coefficient-section} is not the same object as
+the all-repetition expression in \eqref{eq:log-zeta}.
+At $\beta=0$ this is the topological periodic-point zeta on the selected
+symbolic system; positive $\beta$ weights unstable expansion.  The notation
+does not imply that the finite catalogue is globally complete.
+
+\subsection{Periodic-point flat determinant and algebraic dependence}
+
+The second cycle polynomial is built from smooth fixed-point traces.  If
+$M_p=DH_6^{n_p}(z_p)$, define
+\begin{equation}
+ T_n=\sum_{x\in\operatorname{Fix}(H_6^n|_{\Lam_*})}
+ \frac{1}{|\det(I-DH_6^n(x))|}
+ =\sum_{\substack{p\in\cP_*\\n_p\mid n}}
+ \frac{n_p}{|\det(I-M_p^{n/n_p})|}.
+ \label{eq:flat-traces}
+\end{equation}
+The associated periodic-point flat determinant is the formal power series
+\begin{equation}
+ D_F(z)=\exp\left(-\sum_{n\geq1}\frac{T_nz^n}{n}\right).
+ \label{eq:flat-determinant}
+\end{equation}
+Its degree-$N$ coefficient section is computed from $f_0=1$ and
+\begin{equation}
+ f_n=-\frac1n\sum_{j=1}^nT_jf_{n-j},
+ \qquad D_F^{[N]}(z)=\sum_{n=0}^Nf_nz^n.
+ \label{eq:flat-recurrence}
+\end{equation}
+This definition is called ``Fredholm'' in the historical result fields, but no
+specific continuous operator or Banach space is inferred from that name here.
+
+The Euler and flat determinants are not algebraically independent.  Since the
+eigenvalues of $M_p$ are $\sigma_pL_p$ and $\sigma_pL_p^{-1}$,
+\begin{equation}
+ \frac1{|\det(I-M_p^r)|}
+ =\sum_{k\geq0}(k+1)
+ \left(\sigma_p^kL_p^{-(k+1)}\right)^r.
+ \label{eq:flat-factor-expansion}
+\end{equation}
+Substitution into \eqref{eq:flat-determinant} gives the formal factorization
+\begin{equation}
+ D_F(z)=\prod_{p\in\cP_*}\prod_{k\geq0}
+ \left(1-\sigma_p^kL_p^{-(k+1)}z^{n_p}\right)^{k+1}.
+ \label{eq:flat-factorization}
+\end{equation}
+The $k=0$ factor is exactly $D_{E,1}$.  This formal algebraic dependence
+motivates comparing the leading roots of $D_{E,1}^{[N]}$ and $D_F^{[N]}$ as an
+empirical finite-section and implementation consistency check, not as
+independent cycle evidence.  Degree truncation does not preserve the zero set
+of the full product, however, and the factorization supplies no bound on the
+finite-section root discrepancy.
+
+\subsection{Conditional operator statement}
+
+For a compact locally maximal uniformly hyperbolic basic set with a compatible
+Markov coding, standard thermodynamic formalism associates a weighted Ruelle
+operator to the potential
+\begin{equation}
+ \phi_\beta=-\beta\log \norm{DH_a|_{E^u}}.
+ \label{eq:potential}
+\end{equation}
+Corollary~\ref{cor:basic-set} supplies the basic-set properties for $\Lam_*$.  Under
+the regularity assumptions of thermodynamic formalism, the corresponding
+dynamical determinant is related to the weighted periodic expansion
+\citep{Ruelle1976Zeta,Ruelle1978Thermodynamic,Bowen1975Equilibrium,
+Baladi2000,BlankKellerLiverani2002,BaladiTsujii2016}.  We use this statement
+only conditionally.  The absorbing finite-volume matrix in Sections
+\ref{sec:operator}--\ref{sec:r061} is not identified with that symbolic
+operator by numerical proximity.
+
+\subsection{A finite-period tail bound}
+
+The following elementary bound records what can and cannot be inferred from a
+finite orbit table.
+
+\begin{lemma}[Conditional truncation bound]
+\label{lem:tail}
+Assume that the number of primitive orbits of period $n$ is at most
+$C e^{hn}$ with $h\geq0$, and that $L_p\geq e^{\chi n_p}$ for all included
+orbits, with $\chi>0$.  If
+\[
+ t=|z|e^{-\beta\chi}<1,\qquad q=e^h t<1,
+\]
+then
+\begin{equation}
+ \left|\log Z_\beta(z)-
+ \log Z_\beta^{(\mathrm{prim}\leq N)}(z)\right|
+ \leq
+ \frac{Cq^{N+1}}{(1-q)(1-t^{N+1})}.
+ \label{eq:tail-bound}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For a primitive orbit of period $n$, the geometric series in
+\eqref{eq:log-zeta} is bounded by $t^n/(1-t^n)$.  Summing over the omitted
+periods and using the assumed orbit count gives
+\[
+ \sum_{n>N} C e^{hn}\frac{t^n}{1-t^n}
+ \leq \frac{C}{1-t^{N+1}}
+ \sum_{n>N}q^n,
+\]
+which is \eqref{eq:tail-bound}.  The assumptions, rather than the finite table,
+are what make the estimate valid.
+\end{proof}
+
+The lemma is useful as an accounting device for an absolutely convergent branch
+of the logarithm.  It does not control a zero of a degree-$N$ determinant
+section.  In fact, the explicit bounds $h=\log\varphi$ and
+$\chi=\log(773/224)$ give the $\beta=1$ domain
+$|z|<(773/224)/\varphi\approx2.133$, while the reported reciprocal root is
+$z_*\approx3.429$.  The period-8--12 root behavior below is therefore empirical
+finite-section stabilization, not a consequence of Lemma~\ref{lem:tail}.
+
+\subsection{What the zeta language excludes}
+
+The determinants above belong to the certified local survivor.  The finite
+matrices below remain separately defined estimators; numerical proximity does
+not identify them with a continuous Ruelle operator or extend the determinant
+to the full H\'enon plane.

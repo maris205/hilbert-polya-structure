@@ -1,0 +1,140 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Orbit and numerical gates}
+
+The primitive catalogue sizes are
+\[
+\begin{array}{c|rrrr}
+\text{maximum period}&8&12&16&20\\\hline
+\text{primitive cycles}&17&79&402&2170.
+\end{array}
+\]
+Every count agrees with the exact symbolic enumeration.  At period 20, the
+largest recurrence residual is \(1.94\times10^{-65}\), the largest
+a posteriori contraction bound is \(1.94\times10^{-65}\), and the smallest
+hyperbolicity margin \(\abs{\tr M_p}-2\) is \(5.29\).  A 120-digit
+reconstruction from persisted coordinates gives determinant error below
+\(2.0\times10^{-90}\) in the producer audit.  An independent implementation
+gives \(5.8\times10^{-70}\).  The raw 80-digit hyperbolic matrix product loses
+digits through cancellation and has maximum displayed error
+\(4.28\times10^{-50}\); it is reported rather than rounded to zero.
+
+All 79 period-at-most-12 words match the companion catalogue.  The largest
+relative multiplier difference is \(4.44\times10^{-65}\).
+
+\subsection{Finite-section zeros}
+
+Table~\ref{tab:counts} gives the located-root and sampled-winding census for
+both orientation sectors.
+\begin{table}[t]
+\centering
+\caption{Numerical zero census in the frozen rectangle.  Each sampled winding
+count agrees at 4,096, 8,192, and 16,384 contour points and equals the located
+root count.  The equality is a numerical consistency result, not an interval
+certificate.}
+\label{tab:counts}
+\begin{tabular}{c@{\quad}rrrrrrrr}
+\toprule
+\(\kappa\backslash N\)&7&8&10&12&14&16&18&20\\
+\midrule
+0&43&43&43&43&43&43&43&43\\
+1&45&45&43&43&43&43&43&43\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The largest high-precision determinant residual over all reported roots in
+Table~\ref{tab:counts} is
+\(8.35\times10^{-65}\), and the largest high-precision coefficient
+discrepancy is \(7.46\times10^{-75}\).  The largest float-to-80-digit root
+shift is \(1.68\times10^{-10}\).
+
+Table~\ref{tab:stability} reports the frozen one-to-one retention tests.
+\begin{table}[t]
+\centering
+\caption{Preregistered root retention.  Drifts are complex distances under
+one-to-one matching with tolerance \(0.02\).}
+\label{tab:stability}
+\begin{tabular}{clrrrr}
+\toprule
+\(\kappa\)&stage&retained&fraction&median drift&90th percentile\\
+\midrule
+0&validation \(8\to12\)&39/39&1.000&\(1.873\times10^{-4}\)&\(2.535\times10^{-3}\)\\
+0&sealed \(12\to16\)&39/39&1.000&\(1.759\times10^{-6}\)&\(3.113\times10^{-5}\)\\
+0&robustness \(16\to20\)&43/43&1.000&\(8.116\times10^{-9}\)&\(1.928\times10^{-6}\)\\
+\addlinespace
+1&validation \(8\to12\)&43/43&1.000&\(1.166\times10^{-4}\)&\(2.481\times10^{-3}\)\\
+1&sealed \(12\to16\)&43/43&1.000&\(8.097\times10^{-7}\)&\(3.674\times10^{-5}\)\\
+1&robustness \(16\to20\)&43/43&1.000&\(6.349\times10^{-9}\)&\(7.382\times10^{-7}\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Four untwisted zeros are outside the boundary-filtered training family but are
+present in the complete census; they are reported as extras relative to the
+tracked set, not as missing roots.  The twisted family includes the exact root
+\(s=0\), where all length weights disappear, plus 42 nonzero tracked zeros;
+the sign-cocycle derivation is in
+Appendix~\ref{app:orientation-control}.
+
+Let \(h_N\) denote the positive real zero of \(D_{0,N}\).  The values
+\[
+\begin{aligned}
+h_{10}&=0.27798298859371395,\\
+h_{12}&=0.27798298173371744,\\
+h_{16}&=0.27798298167628965,\\
+h_{20}&=0.2779829816761890234883231168318\ldots
+\end{aligned}
+\]
+have \(h_{16}-h_{20}\simeq1.01\times10^{-13}\); thus their first 12 decimal
+places agree.  Later digits displayed for \(h_{20}\) are high-precision digits
+of the cutoff-20 section, not evidence of cutoff convergence.  We do not call
+\(h_N\) a pressure root: no convergence to
+the pressure zero of a limiting transfer operator has been proved.
+
+Figure~\ref{fig:stability-controls} places that cutoff comparison beside the
+coefficient-tail controls.
+\input{figures/latex_includes}
+
+\subsection{Controls and mechanism boundary}
+
+The valid root-retention controls and their tail ratios are collected in
+Table~\ref{tab:controls}.
+\begin{table}[t]
+\centering
+\caption{Cutoff-8-to-16 controls at the common H\'enon probe.  Random rows are
+mean values over three frozen seeds.  The constant-roof tail is a numerical
+floor; its exact coefficients vanish beyond the finite parent determinant.}
+\label{tab:controls}
+\begin{tabular}{lrrr}
+\toprule
+control&retained fraction&median drift&tail / H\'enon\\
+\midrule
+H\'enon instability roof&1.000&\(1.891\times10^{-4}\)&1\\
+constant roof (exact)&1.000&0&\(1.72\times10^{-10}\)\\
+positive random weights&0.084&\(1.348\times10^{-2}\)&\(1.14\times10^5\)\\
+random phases&0.028&\(1.215\times10^{-2}\)&\(3.20\times10^5\)\\
+same-density random lengths&0.042&\(1.073\times10^{-2}\)&\(2.86\times10^4\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At the common probe, the true cycle tail is \(6.866\times10^{-7}\).  The
+valid orbit-level randomizations have tails between \(2.86\times10^4\) and
+\(3.20\times10^5\) times larger and retain few cutoff-8 zeros.  The data show
+structured cancellation.  They do not prove that symbolic shadowing is the
+unique cause, because the random controls have different natural spectral
+scales and need not come from local potentials.
+
+The global period and length shuffles are retained as failed numerical
+controls.  Their high-frequency exponential terms make the three frozen
+contour resolutions disagree, so the sampler does not resolve their root
+counts.  The functions themselves are not mathematically \emph{untestable}.
+
+Finally, the \(a=5.9\) and \(a=6.1\) continuations each retain all cutoff-8
+zeros at cutoff 16, with median self-drifts \(3.75\times10^{-4}\) and
+\(4.08\times10^{-4}\).  Only \(5/39\) H\'enon training zeros match either
+neighbor within the frozen tolerance.  Internal stability is therefore not
+specific to \(a=6\), although no common hyperbolic parameter interval has been
+certified.

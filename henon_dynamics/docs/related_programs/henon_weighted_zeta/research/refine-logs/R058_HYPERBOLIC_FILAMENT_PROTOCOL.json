@@ -1,0 +1,353 @@
+{
+  "run_id": "R058_HYPERBOLIC_FILAMENT",
+  "frozen_date": "2026-08-02",
+  "status": "FROZEN_BEFORE_R058_PRODUCTION",
+  "parent_runs": [
+    "R056_TRUE_IMAGE_REFINEMENT",
+    "R057_MUTUAL_SEPARATION"
+  ],
+  "parent_artifacts": [
+    {
+      "role": "r056_protocol",
+      "path": "research/refine-logs/R056_TRUE_IMAGE_REFINEMENT_PROTOCOL.json",
+      "sha256": "d9b1cca1d7847080b9ecbca8e10e107a642ef39ad272cd18805c1f2886bf055d"
+    },
+    {
+      "role": "r056_analysis",
+      "path": "results/true_image_refinement_analysis_r056.json",
+      "sha256": "6e7572c0224beb2a50f5aef98698f642fe5caba07470a8d07ba454b450a4eef2"
+    },
+    {
+      "role": "r056_independent_checker",
+      "path": "results/true_image_refinement_independent_check_r056.json",
+      "sha256": "fa49d10f38a069f02b8e11adc1986b76cd89944060e476a0e8cfc49f23218cdb"
+    },
+    {
+      "role": "r057_proof_package",
+      "path": "PROOF_PACKAGE.md",
+      "sha256": "4ea5f7d09ecead93aa03b4c621626e38cc2d376d44429a03100bb90e33371b14"
+    },
+    {
+      "role": "r057_protocol",
+      "path": "research/refine-logs/R057_MUTUAL_SEPARATION_PROTOCOL.json",
+      "sha256": "4eb540372ad29568054cdaa05b7c3f605913dfcf358855c98f45594c78af0a91"
+    }
+  ],
+  "map": {
+    "formula": "H(x,y)=(1-6*x^2-y,x)",
+    "a": "6",
+    "c": "1",
+    "ambient_radius": "3190032397181517/5000000000000000"
+  },
+  "h_sets": {
+    "exit_coordinate": "x",
+    "entry_coordinate": "y",
+    "x_negative": [
+      "-5/8",
+      "-1/3"
+    ],
+    "x_positive": [
+      "1/3",
+      "5/8"
+    ],
+    "y_negative": [
+      "-81/128",
+      "-5/16"
+    ],
+    "y_positive": [
+      "5/16",
+      "81/128"
+    ],
+    "state_order": [
+      "--",
+      "-+",
+      "+-",
+      "++"
+    ],
+    "state_definition": "N_st = X_s x Y_t",
+    "pairwise_disjoint_required": true,
+    "x_strictly_inside_y_same_sign_required": true
+  },
+  "symbolic_graph": {
+    "adjacency_matrix": [
+      [
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "allowed_edges": [
+      [
+        "--",
+        "--"
+      ],
+      [
+        "--",
+        "+-"
+      ],
+      [
+        "-+",
+        "--"
+      ],
+      [
+        "+-",
+        "-+"
+      ],
+      [
+        "+-",
+        "++"
+      ],
+      [
+        "++",
+        "-+"
+      ]
+    ],
+    "characteristic_polynomial": "(lambda^2-lambda-1)*(lambda^2+1)",
+    "spectral_radius": "(1+sqrt(5))/2"
+  },
+  "cone": {
+    "coordinate_system": "affinely normalized h-set coordinates",
+    "kappa": "1/2",
+    "x_half_width": "7/48",
+    "y_half_width": "41/256",
+    "forward_unstable_slope_upper_bound": "25088/95079",
+    "backward_stable_slope_upper_bound": "15129/45388",
+    "both_strictly_less_than_kappa_required": true,
+    "strict_expansion_greater_than_one_required": true
+  },
+  "claims": {
+    "primary": "The six exact h-set coverings and two-sided cone bounds certify a nonempty compact uniformly hyperbolic invariant survivor subset with a continuous surjective itinerary map onto the four-state subshift.",
+    "entropy": "The certified survivor satisfies h_top(H restricted to Lambda) >= log((1+sqrt(5))/2).",
+    "supporting": "Three locked true-positive 4x refinement lineages replicate or falsify the R056 filament-compatible scaling and descendant-persistence signature.",
+    "anti_claims": [
+      "Finite true-image incidence paths alone do not provide a common orbit witness.",
+      "The whole R056 recurrent filament is not identified with the certified survivor.",
+      "No topological conjugacy, entropy equality, or Markov partition is claimed.",
+      "No graph-limit, transfer-operator convergence, zeta identity, Riemann-zero relation, RH, or Hilbert-Polya consequence is claimed."
+    ]
+  },
+  "theory_gates": {
+    "b0_integrity": {
+      "all_parent_sha256_required": true,
+      "protocol_schema_required": true,
+      "all_constants_exact_rational_required": true,
+      "adjacency_and_characteristic_polynomial_exact_required": true
+    },
+    "b1_covering": {
+      "all_six_allowed_coverings_required": true,
+      "all_ten_forbidden_transitions_exactly_excluded_required": true,
+      "strict_exit_crossing_required": true,
+      "entry_coordinate_strictly_inside_target_required": true,
+      "nonzero_covering_degree_required": true,
+      "minimum_exit_crossing_margin": "1/48",
+      "minimum_entry_interior_margin": "1/128"
+    },
+    "b2_cone_and_realization": {
+      "forward_unstable_cone_required": true,
+      "backward_stable_cone_required": true,
+      "uniform_expansion_required": true,
+      "bi_infinite_itinerary_realization_theorem_audit_required": true,
+      "surjective_coding_required_for_entropy_claim": true,
+      "failure_action": "Remove invariant-set and entropy wording; retain exact local covering/cone diagnostics only."
+    }
+  },
+  "graph_constants": {
+    "eta": "1/4",
+    "maximum_subdivisions": 64,
+    "source_target_semantics": "exact analytic true-positive incidence on rational clipped grids",
+    "node_ids": "row-major: node_id = y_index * grid + x_index",
+    "canonical_component_rule": "largest node count first; ties use lexicographically smallest sorted node-ID tuple",
+    "branch_rule": "parent canonical largest multi-node true-positive SCC, then matched-support largest multi-node child descendant; ties lexicographic",
+    "closed_graph_may_replace_positive_graph": false
+  },
+  "development_anchor": {
+    "parent_configuration_id": "n160_d0",
+    "child_configuration_id": "n320_d0",
+    "role": "positive-lineage regression only"
+  },
+  "heldout_configurations": [
+    {
+      "configuration_id": "n112_d0",
+      "grid": 112,
+      "grid_offset": "0",
+      "chain": "centered",
+      "level": 0,
+      "pre_freeze_uncapped_k_max": 31
+    },
+    {
+      "configuration_id": "n224_d0",
+      "grid": 224,
+      "grid_offset": "0",
+      "chain": "centered",
+      "level": 1,
+      "pre_freeze_uncapped_k_max": 31
+    },
+    {
+      "configuration_id": "n448_d0",
+      "grid": 448,
+      "grid_offset": "0",
+      "chain": "centered",
+      "level": 2,
+      "pre_freeze_uncapped_k_max": 31
+    },
+    {
+      "configuration_id": "n113_dp1_12",
+      "grid": 113,
+      "grid_offset": "1/12",
+      "chain": "positive_phase",
+      "level": 0,
+      "pre_freeze_uncapped_k_max": 37
+    },
+    {
+      "configuration_id": "n226_dp1_6",
+      "grid": 226,
+      "grid_offset": "1/6",
+      "chain": "positive_phase",
+      "level": 1,
+      "pre_freeze_uncapped_k_max": 43
+    },
+    {
+      "configuration_id": "n452_dp1_3",
+      "grid": 452,
+      "grid_offset": "1/3",
+      "chain": "positive_phase",
+      "level": 2,
+      "pre_freeze_uncapped_k_max": 62
+    },
+    {
+      "configuration_id": "n113_dm1_12",
+      "grid": 113,
+      "grid_offset": "-1/12",
+      "chain": "negative_phase",
+      "level": 0,
+      "pre_freeze_uncapped_k_max": 37
+    },
+    {
+      "configuration_id": "n226_dm1_6",
+      "grid": 226,
+      "grid_offset": "-1/6",
+      "chain": "negative_phase",
+      "level": 1,
+      "pre_freeze_uncapped_k_max": 43
+    },
+    {
+      "configuration_id": "n452_dm1_3",
+      "grid": 452,
+      "grid_offset": "-1/3",
+      "chain": "negative_phase",
+      "level": 2,
+      "pre_freeze_uncapped_k_max": 62
+    }
+  ],
+  "nested_refinements": [
+    [
+      "n112_d0",
+      "n224_d0"
+    ],
+    [
+      "n224_d0",
+      "n448_d0"
+    ],
+    [
+      "n113_dp1_12",
+      "n226_dp1_6"
+    ],
+    [
+      "n226_dp1_6",
+      "n452_dp1_3"
+    ],
+    [
+      "n113_dm1_12",
+      "n226_dm1_6"
+    ],
+    [
+      "n226_dm1_6",
+      "n452_dm1_3"
+    ]
+  ],
+  "filament_gates": {
+    "all_nine_locked_batch_required": true,
+    "cap_active_count_required": 0,
+    "all_pre_freeze_k_values_must_match": true,
+    "all_six_exact_nested_edge_vectors_required": true,
+    "all_nine_canonical_multi_node_positive_scc_required": true,
+    "all_six_exact_positive_projection_and_active_lift_required": true,
+    "all_six_nontrivial_lineage_descendants_required": true,
+    "each_chain_lineage_size_strictly_increasing": true,
+    "each_chain_lineage_area_strictly_decreasing": true,
+    "each_chain_four_x_size_exponent_interval": [
+      0.85,
+      1.2
+    ],
+    "each_level_descendant_lifted_area_coverage_interval": [
+      0.35,
+      0.65
+    ],
+    "jaccard_is_descriptive_not_a_gate": true,
+    "r057_margin_is_sidecar_not_a_selection_or_success_gate": true
+  },
+  "symbolic_bridge": {
+    "finest_configurations": [
+      "n448_d0",
+      "n452_dp1_3",
+      "n452_dm1_3"
+    ],
+    "restricted_object": "canonical true-positive lineage cells intersecting the union of the four frozen h-sets",
+    "all_four_states_nonempty_required": true,
+    "all_six_allowed_state_transitions_required": true,
+    "all_forbidden_state_transitions_absent_required": true,
+    "scope": "finite-grid bridge diagnostic only; it is not used to prove the covering theorem"
+  },
+  "anti_leakage": {
+    "all_nine_graphs_one_locked_batch": true,
+    "no_grid_phase_threshold_or_branch_rule_changes": true,
+    "no_failed_chain_replacement": true,
+    "closed_results_cannot_rescue_positive_failure": true,
+    "all_cap_activity_branch_switching_and_failures_reported": true
+  },
+  "independent_checker": {
+    "may_import_producer_incidence_covering_or_cone_helpers": false,
+    "full_microgrids": [
+      {
+        "grid": 7,
+        "grid_offset": "0"
+      },
+      {
+        "grid": 8,
+        "grid_offset": "1/3"
+      }
+    ],
+    "frozen_sources_per_heldout": 32,
+    "serial_parallel_replay_configuration": "n113_dp1_12",
+    "must_recompute_all_six_refinement_projections": true,
+    "must_recompute_exact_covering_and_cone_bounds": true
+  },
+  "primary_outputs": {
+    "theory_json": "results/hyperbolic_covering_r058.json",
+    "graph_json": "results/hyperbolic_filament_r058.json",
+    "graph_csv": "results/hyperbolic_filament_r058.csv",
+    "edge_directory": "results/hyperbolic_filament_r058_edges",
+    "independent_check_json": "results/hyperbolic_filament_independent_check_r058.json",
+    "analysis_json": "results/hyperbolic_filament_analysis_r058.json",
+    "analysis_markdown": "research/refine-logs/R058_HYPERBOLIC_FILAMENT_ANALYSIS.md"
+  }
+}

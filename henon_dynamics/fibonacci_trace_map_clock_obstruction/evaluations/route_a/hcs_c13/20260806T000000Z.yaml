@@ -1,0 +1,67 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C13
+source_commit: workspace_without_git_metadata
+evaluation_date: 2026-08-06
+
+source_lock:
+  object: direct identification of ordinary Fibonacci trace-map Ruelle determinant with periodic-approximant or infinite-Hamiltonian spectral determinant
+  clock: "trace-map renormalization k; proposed alternatives k and q_k=F_{k+2} tested separately"
+  normalization: "d_k(E)=tr M(w_k;E), band edges d_k=+/-2, central section d_k=0"
+  determinant_convention: ordinary closed-periodic-orbit Artin-Mazur/Ruelle/Fredholm determinant
+  cutoff: exact k=1..8 for the polynomial factor gate
+  precision: exact rational and GF(1000003) polynomial arithmetic
+  allowed_data: Fibonacci words and primary-source formulas
+  forbidden_data: Riemann primes and zeros
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: intrinsic primitive periodic orbits on a hyperbolic trace-map set with reproducible symbolic coding
+  strongest_failure: no canonical prime correspondence, log-prime clock, or arithmetic repetition weights
+  metrics:
+    chronological_product_checks: passed_symbolically_through_k5
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/results/certificate.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED_SCOPED_OBSTRUCTION
+  strongest_evidence: ordinary dynamical determinant exists for the closed-orbit coding
+  strongest_failure: spectral approximants are finite-time marked section hits; minimal exact counterexamples escape and all 48 registered section-hit/return gcds are 1
+  metrics:
+    exact_counterexamples: 2
+    modular_factor_tests: 48
+    nontrivial_gcds: 0
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/results/modular_gcd_audit.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE_FOR_XI
+  strongest_evidence: exact integer recursion and established thermodynamic formalism
+  strongest_failure: no xi functional equation, gamma factor, Riemann-von-Mangoldt law, Euler structure, or target divisor
+  metrics: {}
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED_MISMATCH
+  strongest_evidence: canonical self-adjoint Fibonacci Schrödinger operator exists
+  strongest_failure: it uses the physical lattice clock, has no point spectrum in the Fibonacci hull, and is not the trace-map Ruelle operator
+  metrics:
+    point_spectrum: empty_all_phases
+    spectral_type: singular_continuous_cantor
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/DERIVATION_PACKAGE.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: rejects the direct ordinary-zeta/spectral-determinant identification and the two naive clock identifications; does not reject a newly defined boundary Fredholm minor
+blocking_conditions:
+  - open spectral paths are not closed trace-map orbits
+  - renormalization time k is not physical length q_k
+  - the natural self-adjoint operator has no discrete eigenvalue divisor
+next_smallest_test: prove or refute an exact all-level boundary Fredholm-minor identity before any numerical spectrum calculation
+route_b_invocation_allowed: false
+

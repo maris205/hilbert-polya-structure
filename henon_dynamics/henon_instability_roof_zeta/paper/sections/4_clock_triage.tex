@@ -1,0 +1,96 @@
+\section{Clock triage}
+\label{sec:clock}
+
+\begin{theorem}[Clock triage on \(\Lam\)]
+\label{thm:clock}
+The certified H\'enon survivor has the following three clock properties.
+\begin{enumerate}
+  \item The unit-clock determinant is \(2\pi\iu\)-periodic in \(s\) and has
+  \(O(T)\) zeros in every bounded real strip up to height \(T\).
+  \item The stored generating-function action is not a strictly positive roof.
+  \item The instability roof in \eqref{eq:roof} is positive, its periodic sums
+  obey \(T_{p^r}=rT_p\), and it is non-lattice.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For unit time, direct calculation from \eqref{eq:adjacency} gives
+\begin{equation}
+ \det(I-zA)=1-z-z^3-z^4.
+ \label{eq:unit-z}
+\end{equation}
+Thus
+\[
+ D_{\rm unit}(s)=1-\e^{-s}-\e^{-3s}-\e^{-4s}
+\]
+is invariant under \(s\mapsto s+2\pi\iu\).  A nonzero exponential polynomial
+has finitely many zeros in a compact fundamental rectangle.  Translating that
+rectangle proves the \(O(T)\) bound.  In fact,
+\[
+ 1-z-z^3-z^4=-(z^2+1)(z^2+z-1),
+\]
+so the vertical towers can be written explicitly.
+
+For the action clock, put \(q=1/\sqrt6\) and consider
+\[
+ (q_0,q_1,q_2,q_3)=(-q,-q,q,q).
+\]
+It satisfies the H\'enon recurrence and is an admissible primitive period-four
+orbit inside the certified rectangles.  For the generating function
+\[
+ S_6(q_i,q_{i+1})=q_iq_{i+1}-q_i+2q_i^3,
+\]
+each of
+\(\sum_iq_iq_{i+1}\), \(\sum_iq_i\), and \(\sum_iq_i^3\) vanishes.  Its
+total action is therefore zero, excluding strict positivity.
+
+On \(\Lam\), the certificate gives \(\abs{x}\ge1/3\) and
+\(\abs{m^u}\le1/2\).  Hence
+\begin{equation}
+ J^u(z)\ge12\abs{x}-r\abs{m^u(z)}
+ \ge4-\frac{123}{224}=\frac{773}{224}>1.
+ \label{eq:positive}
+\end{equation}
+The roof is positive.  Invariance of the unstable graph gives
+\(u_{j+1}=a_ju_j\), where \(a_j=-12x_j-rm^u(z_j)\).  Around a periodic orbit,
+\[
+ \prod_{j=0}^{n_p-1}a_j=\Lambda_{u,p}.
+\]
+Taking logarithms of absolute values proves the periodic-sum identity and the
+repetition law.
+
+A H\"older roof is called \emph{lattice} if it is H\"older-cohomologous to
+\(c k\) for some \(c>0\) and integer-valued \(k\); in particular, every
+periodic sum then lies in \(c\mathbb Z\).  It remains to rule this out.  The
+negative fixed point
+\[
+ q_*=-\frac{1+\sqrt7}{6}
+\]
+has unstable multiplier \(L_1>1\) with minimal polynomial
+\begin{equation}
+ P_1(X)=X^4-4X^3-22X^2-4X+1.
+ \label{eq:p1}
+\end{equation}
+The explicit period-four orbit has trace \(578\) and multiplier
+\[
+ L_4=289+24\sqrt{145},
+ \qquad
+ P_4(X)=X^2-578X+1.
+ \]
+The four conjugates of \(L_1\) have distinct absolute values.  Consequently,
+the four conjugates of \(L_1^m\) remain distinct for every \(m\ge1\), and
+\([\Q(L_1^m):\Q]=4\).  Every \(L_4^n\) lies in
+\(\Q(\sqrt{145})\) and has degree at most two.  An equality
+\(\log L_4/\log L_1=m/n\in\Q\) would imply \(L_1^m=L_4^n\), a contradiction.
+Two periodic lengths therefore have irrational ratio, which rules out a
+common lattice.
+The exact algebra and power-degree argument are expanded in
+Appendix~\ref{app:algebra}.
+\end{proof}
+
+\begin{remark}[Scope of the theorem]
+Non-lattice time removes the exact vertical periodicity forced by unit map
+time.  It does not imply a meromorphic continuation, a functional equation, a
+Riemann--von Mangoldt law, or an operator spectrum.  Those are separate
+Route-A obligations.
+\end{remark}

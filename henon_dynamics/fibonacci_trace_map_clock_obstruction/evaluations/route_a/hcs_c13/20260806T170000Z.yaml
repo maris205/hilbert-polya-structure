@@ -1,0 +1,81 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C13-AM
+source_commit: workspace_without_git_metadata
+evaluation_date: 2026-08-06
+supersedes: 20260806T000000Z.yaml
+input_gate: TESTABLE_AS_UNWEIGHTED_DYNAMICAL_ZETA
+
+source_lock:
+  object: unweighted Artin-Mazur zeta of trace-map periodic returns on a fixed invariant hyperbolic set, proposed as a direct source of Fibonacci spectral divisors
+  clock: primitive trace-map return period n; physical approximant length q_k=F_{k+2} is recorded separately
+  normalization: Z_AM(0)=1; z counts one trace-map iterate
+  determinant_convention: "Z_AM(z)=exp(sum_{n>=1} #Fix(T^n) z^n/n); target is Z, not 1/Z or a Fredholm family in E"
+  cutoff: analytic object definition; exact incidence audit k=1..8 is supporting falsification only
+  precision: exact rational, integer, and finite-field polynomial arithmetic
+  allowed_data: Fibonacci words, chronological transfer matrices, and primary-source trace-map formulas
+  forbidden_data: Riemann prime tables, Riemann zero tables, and post-validation parameter fitting
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: primitive periodic returns and symbolic coding are intrinsic to the hyperbolic trace-map dynamics
+  strongest_failure: no canonical prime correspondence, logarithmic prime clock, or arithmetic repetition weights
+  metrics:
+    chronology_preserved_in_spectral_cocycle: true
+    exact_periodic_orbit_enumeration_in_project: false
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: the unweighted Artin-Mazur zeta is an explicit closed-return function of z
+  strongest_failure: it contains neither the marked energy-line incidence nor a frozen type-correct map to the family d_k(E); fixed finite-state bounded-polynomial repairs are excluded by the degree-clock theorem
+  metrics:
+    zero_error_train: not_run_type_mismatch
+    zero_error_validation: not_run_type_mismatch
+    zero_error_test: not_run_type_mismatch
+    extra_zero_count: not_defined
+    missing_zero_count: not_defined
+    root_count_discrepancy: not_defined
+    cutoff_drift: not_applicable_exact_structural_gate
+    precision_drift: zero_exact_arithmetic
+    control_margin: unweighted_object_has_no_energy_divisor
+    incidence_gcd_tests: 48
+    nontrivial_incidence_gcds: 0
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/results/modular_gcd_audit.csv
+    - fibonacci_trace_map_clock_obstruction/results/degree_clock_certificate.json
+    - fibonacci_trace_map_clock_obstruction/results/independent_check.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: standard dynamical zeta structure exists for the closed symbolic dynamics
+  strongest_failure: no xi normalization, functional equation, gamma factor, Riemann-von-Mangoldt law, Euler weights, or target divisor has been defined
+  metrics:
+    functional_equation: not_defined
+    target_root_count: not_defined
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: the Fibonacci Schrödinger Hamiltonian is canonical and self-adjoint
+  strongest_failure: it uses the physical lattice clock, has no point spectrum in the Fibonacci hull, and is not a quantization of the unweighted trace-map zeta
+  metrics:
+    point_spectrum: empty_all_phases
+    spectral_type: singular_continuous_cantor
+  artifacts:
+    - fibonacci_trace_map_clock_obstruction/DERIVATION_PACKAGE.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: rejects the unweighted direct identification and proves a no-go for fixed finite-state uniformly bounded polynomial-energy weights; it does not reject every energy-dependent Fredholm family
+blocking_conditions:
+  - marked finite-time spectral incidence is not a trace-map periodic return
+  - energy degree grows as q_k=F_{k+2}, not linearly in trace-map time k
+  - the natural self-adjoint Hamiltonian has no discrete eigenvalue divisor
+next_smallest_test: no local Fibonacci scan; define a genuinely infinite-dimensional operator with an explicit determinant convention or switch dynamical system
+route_b_invocation_allowed: false

@@ -1,0 +1,89 @@
+\section{Exact certificate and prior-work collision}\label{sec:certificate}
+
+All computations use exact integers, rational functions, and explicit finite
+fields.  No target zeros, prime tables, or floating-point roots enter the
+protocol.
+
+\subsection{The first two periods at parameter six}
+
+At $a=6$ the characteristic-zero algebras split as
+\[
+ X_{6,1}=\Spec\Q(\sqrt7),\qquad
+ X_{6,2}=\Spec\bigl(\Q(\sqrt7)\times\Q(\sqrt3)\bigr).
+\]
+The second factor is the primitive period-two pair.  At primes outside
+$\{2,3,7\}$,
+\begin{align}
+ N_{6,p}(r,1)&=1+\left(\frac7p\right)^r,\label{eq:n1}\\
+ N_{6,p}(r,2)&=2+\left(\frac7p\right)^r
+                  +\left(\frac3p\right)^r.\label{eq:n2}
+\end{align}
+
+Table~\ref{tab:counts} reports the complete frozen support-count rows.  An
+independent polynomial-quotient implementation of every $\F_{p^r}$ enumerates
+solutions directly.
+
+\begin{table}[ht]
+\centering
+\caption{Ordinary support counts for $r=1,2,3,4$.  Weighted counts are kept in
+a separate ledger and coincide only in the \`etale rows.}\label{tab:counts}
+\begin{tabular}{rlll}
+\toprule
+$p$ & status & $N(r,1)$ & $N(r,2)$\\
+\midrule
+5  & \`etale-good & $0,2,0,2$ & $0,4,0,4$\\
+11 & \`etale-good & $0,2,0,2$ & $2,4,2,4$\\
+7  & nonreduced   & $1,1,1,1$ & $1,3,1,3$\\
+3  & degree-drop  & $1,1,1,1$ & $1,1,1,1$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At $p=7$, the local-length-weighted rows are $(2,2,2,2)$ and $(2,4,2,4)$;
+ordinary counts discard the double fixed-point length.  At $p=3$, direct
+reduction of the original uninverted family gives $H_0^4=I$, so the $n=4$
+counts are $9,81,729,6561$.  This is not a fiber of the finite-flat family
+over $\Z[A,A^{-1}]$; mixing it into the uniform quadratic family would create
+a spurious large signal.
+
+\subsection{A tempting period-five signal}
+
+Restricting $\Fix(H_a^5)$ to the reversor line $q=p$ and removing the fixed
+branch gives a generic sextic $G_a(q)$ recorded in Appendix~\ref{app:marker}.
+At $a=6$ it is
+\begin{equation}\label{eq:g6}
+ 46656q^6+15552q^5-20736q^4-4752q^3+3060q^2+360q-151.
+\end{equation}
+Its discriminant is
+$2^{36}3^{30}\cdot31\cdot241\cdot389$.  The modular factor degrees at the
+unramified primes $37$, $5$, and $157$ are
+\[
+ [6],\qquad [5,1],\qquad [2,1,1,1,1].
+\]
+They give a transitive subgroup of $S_6$ containing a 5-cycle and a
+transposition.  A 5-cycle excludes nontrivial blocks in degree six; conjugates
+of the transposition then generate $S_6$.
+
+This exact result initially looks like a useful Galois-theoretic refinement.
+The rescaling $x=6q$, however, turns \eqref{eq:g6} into
+\[
+ x^6+2x^5-16x^4-22x^3+85x^2+60x-151.
+\]
+Endler--Gallas already publish precisely this period-five $Z$ polynomial, its
+discriminant $2^6\cdot31\cdot241\cdot389$, and its symmetric Galois group
+\citep{endler2006}.  The scaling law
+\[
+ \operatorname{Disc}(Z(6q))=6^{30}\operatorname{Disc}(Z)
+\]
+explains our powers $2^{36}3^{30}$.  Brison--Gallas later republish the
+polynomial and supply companion sextics and polynomial bridges
+\citep{brison2018}.  Equality holds in all seven coefficients.  We therefore
+classify the calculation as a successful reproduction and a failed novelty
+gate no later than 2006.
+
+\subsection{Reproducibility summary}
+
+Eight unit tests pass.  The independent checker verifies all 36 data cells,
+all 16 frozen field constructions, the period-five recurrence derivation, and
+the expected-fail joint-action control.  Exact artifact hashes and commands
+appear in Appendix~\ref{app:repro}.

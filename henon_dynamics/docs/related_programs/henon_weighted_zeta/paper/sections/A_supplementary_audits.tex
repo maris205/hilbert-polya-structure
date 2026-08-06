@@ -1,0 +1,153 @@
+\section{Supplementary audit ledger}
+\label{app:audit}
+
+\subsection{R059--R061 gate summary}
+
+\begin{table}[H]
+\centering
+\caption{Recorded gate decisions preserved with the artifact ledger.}
+\label{tab:gate-ledger}
+\small
+\begin{tabular}{lll}
+\toprule
+Run & Gate & Decision\\
+\midrule
+R059 & matrix integrity and cross-method controls & pass\\
+R059 & dyadic stability G4 & \textbf{fail; retained}\\
+R060 & matrix integrity G0 & pass\\
+R060 & Sobol paired-shift G1 & fail\\
+R060 & Gauss-order G2 & fail\\
+R060 & ensemble-mean G3 & pass\\
+R061 & integrity G0 & pass\\
+R061 & common/direct gap component & pass\\
+R061 & absolute dyadic-contrast component & \textbf{fail; mixed}\\
+R061 & common-projection G1 overall & \textbf{fail; mixed}\\
+R061 & row localization G2 & formal pass; interpretation downgraded\\
+R061 & q=8/q=12 leading-modulus control G3 & pass\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{R060 frozen-count text inconsistency}
+
+The frozen R060 G0 prose says ``162 configurations,'' but the same protocol's
+Cartesian product is
+$6[2\times16+3]=210$.  The producer and independent checker use the
+design-derived 210 configurations (192 Sobol and 18 Gauss) and record the text
+inconsistency explicitly.  The protocol was not edited after freezing.
+
+\subsection{R061 protocol counts and hashes}
+
+The frozen R061 protocol has SHA-256:
+\begin{center}
+\ttfamily\small
+64c48efb34f4fbf82164148a8b10b4d9\\
+66f6f01a3d8a6fa7fb57cccffa647178
+\end{center}
+The production contains 68 read-only R060 parent references, 136 derived CSR
+matrices, and 136 direct-control links.  The two independent checkers return
+\texttt{all\_checks\_pass=true}.  The matrix collection contains 272 files
+(136 NPZ files and 136 schema files), and the row-localization collection
+contains 136 NPZ files.  Exact file hashes and collection digests are recorded
+in the manifest cited in Section~\ref{sec:discussion}.
+
+\subsection{Effective sample accounting}
+
+If the fine grid is $M$ and the target grid is $m$, then $r=M/m$ and a coarse
+source row aggregates $r^2$ fine source cells.  The common-cloud estimator thus
+inherits $s r^2$ fine samples per coarse source cell.  This accounting is
+important for interpreting the direct/common comparison:
+\begin{equation}
+ s_{\mathrm{eff}}=s r^2,
+ \qquad
+ (s,M,m)\in\{(64,96,48),(64,96,24),(64,128,64),(64,128,32),\ldots\}.
+\end{equation}
+For $r=2$ and $r=4$, the effective budgets are therefore four and sixteen times
+the direct budget.  No common-cloud record is pooled with a direct record as if
+both had the same sampling budget, and no causal coupling effect is estimated
+from this confounded comparison.
+
+\subsection{Seed-level direct/projected gap summaries}
+
+Table~\ref{tab:r061-gap-full} retains the heterogeneity hidden by a
+median-only summary.  Chain A denotes $24\to48\to96$ and chain B denotes
+$32\to64\to128$ in coarse-to-fine diagnostic order; their physical parent
+grids are $M=96$ and $M=128$, respectively, and projection runs fine to coarse.
+The interval is the conventional 95\% Student-$t$ interval
+for the seed mean; it is a read-only descriptive summary of the 16 persisted
+seed values.  The final column is the fraction of individual seeds with
+$g\leq2\%$; the preregistered group decision itself used only the median.
+
+\begin{table}[H]
+\centering
+\caption{Full direct/projected relative-gap summaries, in percent.}
+\label{tab:r061-gap-full}
+\scriptsize
+\begin{tabular}{crrrrrrr}
+\toprule
+Chain & $s$ & $m$ & $n$ & mean [95\% CI] & median & maximum & seed fraction $\leq2\%$\\
+\midrule
+A & 64  & 48 & 16 & $0.8247\ [0.4255,1.2239]$ & 0.7381 & 2.3335 & 0.9375\\
+A & 64  & 24 & 16 & $1.5765\ [0.9658,2.1872]$ & 1.5194 & 3.6527 & 0.6250\\
+A & 256 & 48 & 16 & $0.5009\ [0.3031,0.6987]$ & 0.3279 & 1.2644 & 1.0000\\
+A & 256 & 24 & 16 & $0.4328\ [0.2446,0.6209]$ & 0.3265 & 0.9896 & 1.0000\\
+B & 64  & 64 & 16 & $0.8425\ [0.5945,1.0906]$ & 0.8301 & 1.8035 & 1.0000\\
+B & 64  & 32 & 16 & $1.4447\ [0.8103,2.0792]$ & 1.2702 & 4.9438 & 0.7500\\
+B & 256 & 64 & 16 & $0.3114\ [0.1927,0.4302]$ & 0.2620 & 0.7823 & 1.0000\\
+B & 256 & 32 & 16 & $0.3736\ [0.1678,0.5794]$ & 0.2257 & 1.2134 & 1.0000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Full dyadic-contrast decision fields}
+
+The direct/projected negative fractions in
+Table~\ref{tab:r061-dyadic-full} are the proportions of seeds with $D\leq0$.
+The paired-difference interval is a descriptive Student-$t$ interval for
+$D_c-D_d$ and was not part of the frozen decision rule.  Chain labels retain
+the same coarse-to-fine diagnostic convention as in
+Table~\ref{tab:r061-gap-full}.
+
+\begin{table}[H]
+\centering
+\caption{Seed-level dyadic decision fields ($n=16$ in every row).}
+\label{tab:r061-dyadic-full}
+\scriptsize
+\begin{tabular}{crrrrrl}
+\toprule
+Chain & $s$ & $\Pr(D_d\leq0)$ & $\Pr(D_c\leq0)$
+& median $|D_c|/|D_d|$ & mean $D_c-D_d$ [95\% CI] & absolute gate\\
+\midrule
+A & 64  & 0.5625 & 0.5625 & 0.5630 & $0.00333\ [-0.00453,0.01118]$ & pass\\
+A & 256 & 0.7500 & 0.8750 & 0.4616 & $0.00129\ [-0.00160,0.00418]$ & pass\\
+B & 64  & 0.6875 & 0.1875 & 1.0521 & $0.01195\ [0.00484,0.01906]$ & fail\\
+B & 256 & 0.6250 & 0.3125 & 0.8915 & $0.00273\ [0.00032,0.00514]$ & fail\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Localization interpretation check}
+
+The read-only check
+\texttt{results/localization\_interpretation\_audit\_r061.json} has SHA-256
+\begin{center}
+\ttfamily\small
+bd7c4b9fb8d737783ef95aa5054fa9c6\
+7d7f7d011a33f442a4f331aefea09ea3.
+\end{center}
+All 136 persisted array hashes match.  Because the stored internal-cell
+distance is at most one half of a cell width, the $\tau=1$ and $\tau=0.5$
+cell-exposure arrays exactly equal the indicator that a row has nonzero target
+occupancy.  The formal G2 pass is therefore retained only as an
+occupancy/support association.  Conditional on occupancy-positive rows, the
+eight Sobol-group mean correlations range from $-0.207$ to $0.100$ at
+$\tau=0.125$ and from $-0.333$ to $0.035$ at $\tau=0.25$; no robust positive
+internal-cell phase conclusion is made.
+
+\subsection{Scope boundary}
+
+The manuscript uses ``finite-resolution evidence'' for all R060/R061
+operator statements.  It does not assert an $m\to\infty$ limit, continuous
+transfer-operator convergence, a global H\'enon zeta, a Riemann-zero
+correspondence, a Hilbert--P\'olya construction, or evidence for the Riemann
+hypothesis.
