@@ -1,0 +1,194 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C16
+source_commit: 24553c8
+release_tag: hcs-c16-v1
+evaluation_date: 2026-08-07T04:19:43Z
+
+# The source-commit fields are updated by the release workflow after the
+# hardened code and high-precision artifacts are committed together.
+candidate_definition:
+  family: compact quaternionic S-arithmetic dynamics
+  phase_space: "P(O[1/13]^times)\\(H x T_13), with B=(-1,3)_Q and O=Z[1,i,j,ij]"
+  dynamics: "NOT_SPECIFIED: a rank-two real/tree Cartan action and one S-unit centralizer are described, but no intrinsic one-parameter flow is frozen"
+  parameters: []
+  parameter_provenance: exact arithmetic choices; no fitted quantities
+  symbolic_partition: null
+  transfer_operator: null
+  intrinsic_one_parameter_flow: null
+  stability_or_monodromy_data: null
+  orbit_phase_convention: null
+  clock:
+    joint: "(m,n) -> (m*A+n*C,n) on the displayed centralizer"
+    lengths: "(abs(m*A+n*C),abs(n))"
+    canonical_scalar: "H=ell_infinity+log(13)*ell_13=2*h(eigenvalue ratio)"
+  normalization:
+    tree_edge: 1
+    real_geodesic: logarithm of eigenvalue ratio
+  determinant_convention: "one-flat primitive class Euler product used only as a falsification object; it is not an intrinsic global dynamical determinant"
+  intrinsic_candidate_determinant: null
+  orbit_cutoff: "near-wall denominator 1000; joint boxes through 320; height balls through 640"
+  precision: "exact Fraction arithmetic for algebraic invariants; 80-digit Decimal producer decisions; binary floats only for serialization; independent 120-digit Decimal recount"
+  training_data: none
+  forbidden_data:
+    - Riemann zero tables
+    - prime tables
+    - fitted scale or offset
+  code_commit: 24553c8
+  artifact_paths:
+    - results/exact_certificates.json
+    - results/near_wall.csv
+    - results/primitive_box_counts.csv
+    - results/primitive_height_counts.csv
+    - results/independent_check.json
+    - results/release_manifest.json
+    - paper/main.pdf
+    - AUTO_REVIEW.md
+
+source_lock:
+  object: "Gamma=P(O[1/13]^times) acting on H x T_13, with detailed claims restricted to one explicit S-unit centralizer"
+  clock: "joint Cartan vector and absolute Weil-height scalarization on that centralizer"
+  normalization: "A=2*log(2+sqrt(3)); C=log((4+sqrt(3))/(4-sqrt(3))); tree edge=1"
+  determinant_convention: "primitive one-flat class product, modulo inversion, used only to falsify its real-only specialization"
+  cutoff: "1000 / 320 / 640 as stated above"
+  precision: "exact rational core; 80-digit Decimal Archimedean evaluation and boundary decisions; independent 120-digit Decimal recount; positive cutoff margins"
+  allowed_data: "algebraic generators, local valuations, primary literature"
+  forbidden_data: "prime/zero lists and all fit-driven normalization"
+  unresolved_source_lock_items:
+    - intrinsic one-parameter flow
+    - global dynamical determinant or Fredholm operator
+    - global conjugacy-class completeness
+    - stability multipliers and orbit phases
+
+prior_work_risk:
+  - work: "Nguyen-Thi Dang and Jialun Li, Equidistribution and counting of periodic tori in the space of Weyl chambers"
+    identifier: "DOI 10.4171/CMH/594; arXiv:2305.17070; related predecessor arXiv:2202.08323"
+    relevance: "periodic flat tori and a higher-rank prime-geodesic theorem directly narrow the novelty of the flat-counting architecture"
+    status: published direct prior work (Comment. Math. Helv. 101 (2026), DOI 10.4171/CMH/594); the explicit HCS-C16 specialization remains only a worked example
+  - work: "Yanli Song, Hecke Operator and Ruelle Dynamical Zeta Function"
+    identifier: "June 2026 public talk abstract"
+    relevance: "announced Hecke-return lengths and multiplicities overlap the proposed Hecke--Ruelle direction"
+    status: announced collision risk; not treated as a published theorem
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: STOP_SCOPED
+  strongest_evidence: "The displayed S-unit centralizer has a proved Z^2 lattice, gcd(m,n)=1 repetition rule, inversion convention, and rank-two joint clock."
+  strongest_failure: "No intrinsic one-parameter dynamics has been specified, and a bi-hyperbolic class labels a clean periodic-flat family rather than an isolated orbit."
+  proved_claims:
+    - "centralizer-lattice and repetition statements for the displayed S-unit family"
+    - "joint-clock rank and the periodic-flat clean-family obstruction"
+  numerical_illustrations:
+    - "finite near-wall records and lattice-count tables at the frozen cutoffs"
+  metrics:
+    joint_clock_rank: 2
+    basis_determinant_binary64: 2.633915793849633
+    hardened_checker_report: "16/16 grouped checker assertions pass with errors=[]; this is software validation, not full Route-A certification"
+    prime_or_zero_data_used: false
+    intrinsic_primitive_orbit_definition: NOT_ESTABLISHED_FOR_A_ONE_PARAMETER_FLOW
+    global_conjugacy_class_completeness: NOT_ESTABLISHED
+    stability_multipliers: NOT_COMPUTED
+    orbit_phases: NOT_COMPUTED
+    clean_family_multiplicity: DESCRIBED_GEOMETRICALLY_NOT_ENCODED_IN_A_DETERMINANT
+    missed_orbit_risk: "unquantified outside the displayed S-unit centralizer"
+    mandatory_controls:
+      shuffled_periods: NOT_RUN
+      random_weights: NOT_RUN
+      random_phases: NOT_RUN
+      same_density_random_lengths: NOT_RUN
+      neighboring_candidate_parameters: NOT_RUN
+      simpler_parent_candidate: DESCRIBED_BUT_NOT_RUN_AS_A_ROUTE_A_CONTROL
+    completeness_scope: "exact only for the displayed S-unit centralizer; not an enumeration of all global conjugacy classes or periodic objects"
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/exact_certificates.json
+    - results/independent_check.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: "For the explicitly defined one-flat class product, the w=0 specialization is rigorously refuted by primitive classes with ell_infinity tending to zero; for real s,w>0 the same one-flat product converges and is genuinely coupled."
+  strongest_failure: "No intrinsic global dynamical zeta, transfer operator, regulator-weighted determinant, or divisor-matching target is constructed."
+  proved_claims:
+    - "failure of ordinary infinite-product convergence for the real-only one-flat specialization"
+    - "absolute convergence and nonfactorization of the two-variable one-flat product for real s,w>0"
+  numerical_illustrations:
+    - "80-digit Decimal near-wall lengths and finite height/box counts, serialized as binary floats"
+    - "the reported count 36857 at H<=640, independently recounted at 120 digits with positive boundary margin"
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    argument_principle_check: NOT_RUN
+    cutoff_drift: "finite count ratios are illustrations of a separately proved lattice asymptotic, not determinant validation"
+    precision_drift: "80-digit producer and independent 120-digit checker agree on every released record, count, prediction, ratio, and positive cutoff margin"
+    control_margin: "the inert p=5 and split p=13 comparisons are structural arithmetic checks, not substitutes for the mandatory A1/A2 randomized controls"
+    analytic_continuation: NOT_ESTABLISHED
+    divisor_theorem: NOT_ESTABLISHED
+    fredholm_or_trace_class_operator: NOT_CONSTRUCTED
+    global_regulator_weights: NOT_CONSTRUCTED
+    final_near_wall_real_length_serialized: 0.002122487722055267
+    final_near_wall_tree_length: 321
+    height_count_at_640: 36857
+    minimum_box_boundary_gap: 0.0008618569569
+    minimum_height_boundary_gap: 0.003746872002
+    high_precision_enumeration_status: PASSED_80_VS_120_DIGIT_RECOUNT
+  artifacts:
+    - results/near_wall.csv
+    - results/primitive_height_counts.csv
+    - DERIVATION_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: "A proved min--max argument shows that the narrowly defined bounded perturbations sqrt(Delta_M+1)+b*f(T_13) retain T^2 Weyl order."
+  strongest_failure: "This bounded-perturbation baseline is not generated by the height clock, and no candidate determinant has a continuation, completed divisor, functional equation, Gamma factor, or hidden-prefactor exclusion theorem."
+  proved_claims:
+    - "T^2 counting for the stated bounded fixed-Hecke perturbation class"
+    - "incompatibility of that narrow class with T*log(T) under a fixed affine spectral rescaling"
+  metrics:
+    bounded_baseline_spectral_count_order: "T^2"
+    target_spectral_count_order: "T log T"
+    height_clock_operator_identified: false
+    global_analytic_continuation: false
+    completed_xi_normalization: false
+    functional_equation: NOT_ESTABLISHED
+    gamma_factor_and_trivial_zeros: NOT_TREATED
+    zero_producing_hidden_prefactor_excluded: NOT_TESTABLE
+    truncation_or_moving_order_control: NOT_ESTABLISHED
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "A compact automorphic Hilbert space, hyperbolic Laplacian, and bounded self-adjoint 13-Hecke correspondence provide only an adjacent spectral baseline."
+  strongest_failure: "No operator or quantization is derived from the joint or Weil-height clock; the baseline does not preserve the required clock and has the wrong counting law."
+  metrics:
+    natural_hilbert_space_named: true
+    operator_domain_for_height_clock: NOT_SPECIFIED
+    same_clock_operator: false
+    orbit_phases_and_weights_preserved: NOT_ESTABLISHED
+    time_reversal_or_antiunitary_symmetry_tested: false
+    coherent_one_parameter_classical_dynamics: false
+    route_b_ready: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - PAPER_PLAN.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "Rejects the isolated rank-one orbit interpretation for the displayed periodic flat, the real-only specialization of its one-flat class product, and the stated bounded fixed-Hecke perturbation baseline. It does not reject regulator-weighted higher-rank Lefschetz zetas, a yet-undefined global determinant, conductor-growing sectors, scattering systems, canonical sparse projections, or unbounded height operators."
+blocking_conditions:
+  - "intrinsic one-parameter flow and primitive-orbit data are not specified"
+  - "global orbit completeness, stability multipliers, phases, multiplicities, and missed-orbit risk are not established"
+  - "periodic objects in the displayed family are rank-two clean flat families"
+  - "real-only primitive Euler factors on that flat fail to approach one"
+  - "a global regulator-weighted determinant, continuation, divisor theorem, and clock-compatible operator are absent"
+  - "the stated bounded compact spectral baseline has T^2 rather than T log T counting"
+  - "mandatory Route-A randomized and neighboring-candidate controls were not run"
+next_smallest_test: "Stop this compact baseline. Before any renewed Route-A claim, freeze an intrinsic one-parameter flow and determinant with clean fixed-set weights; otherwise switch to a noncompact scattering/countable-return system after a fresh novelty audit."
+route_b_invocation_allowed: false

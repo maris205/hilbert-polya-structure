@@ -1,0 +1,46 @@
+\section{Reproducibility certificate}
+
+The repository contains a standard-library Python implementation.  Exact
+\texttt{Fraction} arithmetic is used for multiplication in $\Q(\sqrt3)$,
+reduced trace, norm, discriminant, matrix determinant, and $13$-adic
+valuations.  The producer uses 80-digit \texttt{Decimal} arithmetic for real
+logarithms, near-wall selection, finite boundary decisions, and asymptotic
+predictions; binary floats are used only to serialize compact diagnostics.
+The code reads neither prime tables nor Riemann zeros.
+
+The producer creates:
+\begin{itemize}
+\item \texttt{exact\_certificates.json}, containing the arithmetic host,
+generators, joint clock, exact sample invariants and all compact tables;
+\item \texttt{near\_wall.csv}, the continued-fraction record sequence;
+\item \texttt{primitive\_box\_counts.csv} and
+\texttt{primitive\_height\_counts.csv};
+\item a four-artifact internal-consistency hash manifest.
+\end{itemize}
+
+The checker imports no producer code.  It enforces exact schemas and required
+row sets, rederives every released arithmetic and numerical field, uses a
+separate 120-digit brute-force enumeration and an independent computation of
+$\pi$, and compares embedded JSON tables with CSV output.  Sixteen grouped
+assertions pass with an empty error list.  The eleven-test suite includes a
+fresh temporary-directory reproduction and mutations for missing, empty,
+duplicated, and altered artifacts.  Agreement at 80 and 120 digits together
+with positive boundary margins makes the finite tables robust; it is not a
+directed-interval or transcendence proof.
+
+From the project directory, run
+\begin{verbatim}
+python code/s_arithmetic_clock.py --output results
+python code/independent_check.py --results results \
+  --output results/independent_check.json
+(cd code && python -m unittest -v test_s_arithmetic_clock.py)
+python code/release_manifest.py --verify
+\end{verbatim}
+
+The hardened computation source and generated results are frozen at commit
+\texttt{24553c8}.  The complete documentation, evaluation, manuscript, PDF,
+and independent-check output are covered by the repository release manifest
+and Git tag \texttt{hcs-c16-v1}.  The
+mathematical arguments proving flat non-isolation, near-wall divergence,
+height properness and the bounded-Hecke Weyl law do not depend on the finite
+enumeration cutoffs.

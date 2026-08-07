@@ -131,3 +131,44 @@ proved fixed infinite determinant of non-finite exponential type. The next
 system-level candidate is a compact quaternionic \(S\)-arithmetic
 real--\(p\)-adic product flow with a source-locked joint length and joint
 self-adjoint spectrum.
+
+## HCS-C16 closure (2026-08-07)
+
+Candidate **HCS-C16** is closed as a positive compact \(S\)-arithmetic
+Hilbert--Pólya route and retained as an explicit arithmetic-clock example with
+scoped obstructions; see `../s_arithmetic_height_clock_obstruction/`. Its Route-A tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)** with overall
+**ROUTE_A_REJECTED**. Route B is not authorized.
+
+The positive result is an explicit rank-two clock. For
+\(B=(-1,3)_{\mathbb Q}\), \(p=13\),
+\(\varepsilon=2+\sqrt3\), and \(\pi=4+\sqrt3\), the projective classes
+\(\gamma_{m,n}=[\varepsilon^m\pi^n]\) satisfy
+
+\[
+\ell_\infty(\gamma_{m,n})=|mA+nC|,
+\qquad
+\ell_{13}(\gamma_{m,n})=|n|,
+\]
+
+with joint-clock determinant \(A=2\log(2+\sqrt3)\ne0\).  Primitive classes
+are the coprime pairs modulo simultaneous sign.  Continued fractions give
+primitive near-wall classes with real length tending to zero and tree length
+tending to infinity, so the real-only class Euler product has no ordinary
+right half-plane even on this single periodic flat.  The product formula
+instead supplies the canonical proper scalarization
+
+\[
+H=\ell_\infty+(\log13)\ell_{13}=2h(r),
+\]
+
+whose primitive directions on the flat have a proved quadratic count.
+
+The construction is not promoted: regular classes occur in compact flat
+tori and require centralizer/regulator clean-fixed-set weights, while every
+direct bounded self-adjoint Hecke perturbation of the compact surface
+Laplace parameter retains the \(T^2\) Weyl order rather than \(T\log T\).
+Higher-rank and Hecke--Ruelle architectures also have substantial prior art
+and an announced 2026 priority collision.  The next system switch should
+change the spectral mechanism to a noncompact scattering/countable-return
+model rather than vary the quaternion algebra or prime.

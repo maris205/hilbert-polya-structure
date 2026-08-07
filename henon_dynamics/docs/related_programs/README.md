@@ -229,6 +229,37 @@ nonamenable property-\(\tau\) towers.
 
 ---
 
+## 9. s_arithmetic_height_clock_obstruction
+
+### Topic
+
+A compact quaternionic \(S\)-arithmetic quotient with a real geodesic clock,
+a Bruhat--Tits tree clock, periodic flat tori, and a canonical Weil-height
+scalarization.
+
+### Main results
+
+- an explicit projective \(S\)-unit centralizer has signed clock lattice
+  \((m,n)\mapsto(mA+nC,n)\) with nonzero determinant;
+- primitive directions approach the real Weyl wall while escaping in tree
+  length, forcing failure of the real-only Euler-product specialization;
+- the absolute Weil height gives the exact proper roof
+  \(H=\ell_\infty+\log13\,\ell_{13}\), with a quadratic primitive-direction
+  count on the flat;
+- the geometric periodic objects are non-isolated flat families requiring
+  centralizer/regulator weights;
+- direct bounded self-adjoint Hecke perturbations retain the compact-surface
+  \(T^2\) Weyl law.
+
+### Relation to HP search
+
+This is an explicit arithmetic-clock calculation and scoped Route-A
+rejection, not a new general higher-rank zeta or Hilbert--Pólya operator. It leaves open
+proper regulator-weighted Lefschetz zetas, conductor-growing sectors,
+scattering and a separately derived unbounded Weil-height operator.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

@@ -50,30 +50,38 @@ The foundational local source is
 | [`fibonacci_trace_map_clock_obstruction/`](fibonacci_trace_map_clock_obstruction/) | Trace-map clock and analytic-germ obstructions | Route-A rejected |
 | [`s_integer_solenoid_chronology_zeta/`](s_integer_solenoid_chronology_zeta/) | Same-Parikh returns with rational versus natural-boundary zeta; full-zeta continuation | Structural theorem; Route-A rejected |
 | [`nonabelian_voltage_zeta_obstruction/`](nonabelian_voltage_zeta_obstruction/) | Order collapse, finite-roof zero density, and exact-conductor branch return | Scoped obstruction; Route-A rejected |
+| [`s_arithmetic_height_clock_obstruction/`](s_arithmetic_height_clock_obstruction/) | Explicit real/tree clock, near-wall divergence, canonical Weil height, and bounded-Hecke Weyl obstruction | Worked arithmetic example; Route-A rejected |
 
-## Latest result: HCS-C15
+## Latest result: HCS-C16
 
-The latest paper tests nonabelian voltage covers with the trivial Artin sector
-removed. It proves a three-way obstruction: canonical aggregation coarsens
-holonomy conjugacy class to element order, every fixed finite-memory resolved
-determinant has only \(O(T)\) divisor growth, and primitive
-exact-conductor Schrödinger sectors in the natural Heisenberg tower return to
-the branching spectral edge.
+The latest paper tests a compact quaternionic real--\(p\)-adic system.  It
+proves that the arithmetic clock is genuinely rank two, but primitive
+\(S\)-unit directions can approach the real Weyl wall while escaping in the
+tree direction.  This destroys the real-only Euler product.  The absolute
+Weil height repairs properness canonically,
 
-- [Project overview](nonabelian_voltage_zeta_obstruction/README.md)
-- [Compiled paper](nonabelian_voltage_zeta_obstruction/paper/main.pdf)
-- [Derivation package](nonabelian_voltage_zeta_obstruction/DERIVATION_PACKAGE.md)
-- [Exact producer](nonabelian_voltage_zeta_obstruction/code/voltage_zeta.py)
-- [Independent checker](nonabelian_voltage_zeta_obstruction/code/independent_check.py)
-- [Route-A record](nonabelian_voltage_zeta_obstruction/evaluations/route_a/hcs_c15/20260807T032927Z.yaml)
+\[
+H=\ell_\infty+(\log13)\ell_{13}=2h(r),
+\]
+
+but the periodic objects remain flat families with regulator weights, and
+the direct bounded-Hecke compact spectral lift retains \(T^2\) Weyl growth.
+
+- [Project overview](s_arithmetic_height_clock_obstruction/README.md)
+- [Compiled paper](s_arithmetic_height_clock_obstruction/paper/main.pdf)
+- [Derivation package](s_arithmetic_height_clock_obstruction/DERIVATION_PACKAGE.md)
+- [Certificate producer](s_arithmetic_height_clock_obstruction/code/s_arithmetic_clock.py)
+- [Independent checker](s_arithmetic_height_clock_obstruction/code/independent_check.py)
+- [Route-A record](s_arithmetic_height_clock_obstruction/evaluations/route_a/hcs_c16/20260807T041943Z.yaml)
 
 Reproduce its frozen artifacts with:
 
 ```bash
-cd nonabelian_voltage_zeta_obstruction
-python code/voltage_zeta.py --output results
-python code/independent_check.py --output results/independent_check.json
-cd code && python -m unittest -v test_voltage_zeta.py
+cd s_arithmetic_height_clock_obstruction
+python code/s_arithmetic_clock.py --output results
+python code/independent_check.py --results results \
+  --output results/independent_check.json
+cd code && python -m unittest -v test_s_arithmetic_clock.py
 ```
 
 ## Mirrored-data boundary
