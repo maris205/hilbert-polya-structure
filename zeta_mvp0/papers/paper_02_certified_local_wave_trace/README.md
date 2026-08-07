@@ -49,6 +49,13 @@ read-only replay of all 3,016 public S0 nodes.  `initialize-only` sealed
 `f2d3eef4a76f18246c15789e32fe597266e3fe855c5e9a8bd2b5c3e67dfdf70d`;
 no A1 evaluator node was dispatched during initialization.
 
+Formal execution began at `2026-08-07T06:23:25Z` in detached screen session
+`r401_a1`, after the frozen package was synchronized to `origin/main` over
+SSH.  The first operational checkpoint observed 48 durable node records and
+an active 24-worker barrier batch.  The external screen log is
+`/root/autodl-tmp/zeta/a1_logs/r401_val_l2_a1_production.log`; it is
+operational telemetry and is not part of the authoritative archive.
+
 The A1 producer keeps `milestone_status`, `theorem_status`, and `final_status`
 null.  Only a completed archive that passes the independent exact-rational
 checker and final release contract can promote the bounded status
