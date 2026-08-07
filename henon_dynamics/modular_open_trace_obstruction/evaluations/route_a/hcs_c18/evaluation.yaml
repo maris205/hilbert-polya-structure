@@ -1,0 +1,247 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C18
+evaluation_date: "2026-08-07"
+source_commit: PENDING_SOURCE_COMMIT
+release_tag: hcs-c18-v1
+
+candidate_definition: >-
+  A compatibility test for two standard attempts to close modular open
+  scattering data: section-induced automorphy periods on rational or real
+  endpoint action groupoids, and bare products of width-normalized squarefree
+  Gamma_0(N) scattering matrices. Rank-one cusp projectors are retained only
+  as an explicitly separate finite scope control.
+family: modular cusp scattering and endpoint action groupoids
+phase_space: >-
+  PSL_2(Z) acting on P^1(Q) or P^1(R), together with divisor-labelled cusp
+  channels of squarefree Gamma_0(N)
+dynamics: >-
+  The endpoint action groupoid is genuine composition. Bare Phi_N(s_j)
+  multiplication is only a frozen modeling diagnostic: s_j is a spectral
+  parameter and is not identified with dynamical time.
+parameters:
+  arithmetic_denominator_max: 2000
+  squarefree_levels: [2, 6, 30, 210]
+  physical_line_points: ["0.5+0.7i", "0.5+1.3i", "0.5+2.1i"]
+  off_line_points: ["1.2+0.4i", "0.83+1.7i"]
+  analytic_series_normalization_T0: 1
+parameter_provenance: >-
+  Open counts and sojourn times are source-derived from modular scattering
+  geodesics. The squarefree matrix formula is frozen in the Huxley-Hejhal
+  width/Atkin-Lehner cusp normalization. No parameter is fitted to zeros.
+clock: >-
+  The positive open sojourn 2 log(q T0) and the signed projective automorphy
+  cocycle are kept distinct. On rational endpoints the latter is only an
+  algebraic/set-theoretic coboundary; its transfer function is not continuous
+  or bounded in the inherited real-boundary topology.
+normalization: >-
+  Lambda(w)=pi^(-w/2) Gamma(w/2) zeta(w). Squarefree cusps are ordered by
+  divisors and identified with prime-incidence bits in one fixed
+  width/Atkin-Lehner basis. No invariance under s-dependent cusp
+  renormalization is claimed.
+determinant_convention: >-
+  No new Fredholm determinant is defined. The endpoint result classifies
+  section-induced loop periods only. The finite scattering determinant and
+  projected three-step traces are diagnostics, not orbit determinants.
+orbit_cutoff:
+  open_denominator_max: 2000
+  endpoint_ledger_rows: 30
+  endpoint_composition_checks: 147
+  double_coset_witnesses: 3
+  squarefree_cusp_dimension_max: 16
+precision:
+  producer_decimal_digits: 80
+  independent_checker_decimal_digits: 110
+  exact_arithmetic: integers and rationals
+training_data: none
+forbidden_data:
+  - prime tables
+  - Riemann-zero tables
+  - fitted scales or offsets
+  - averaged transition matrices
+code_commit: PENDING_SOURCE_COMMIT
+artifact_paths:
+  - results/arithmetic_counts.csv
+  - results/open_series.csv
+  - results/endpoint_ledger.csv
+  - results/exact_certificates.json
+  - results/scattering_checks.json
+  - results/summary.json
+  - results/independent_check.json
+
+source_lock:
+  open_object: >-
+    Unoriented modular scattering geodesics with n_q=(phi(q)+s_q)/2 and
+    geometric T0 sufficiently large. T0=1 in code is only an analytic
+    coefficient normalization.
+  endpoint_object: >-
+    Section-induced absolute projective automorphy cocycles on the specified
+    action groupoids; general groupoid cocycles are outside scope.
+  scattering_object: >-
+    Standard trivial-nebentypus squarefree scattering matrices in the frozen
+    Huxley-Hejhal width/Atkin-Lehner cusp basis.
+  projector_object: >-
+    Finite traces tr(P_a Phi(s1) P_b Phi(s2) P_c Phi(s3)); no sourced time
+    interpretation, primitive law, or Fredholm kernel is supplied.
+
+object_evaluations:
+  rational_endpoint_ordinary_trace:
+    a1:
+      verdict: A1_FAIL
+      evidence_status: REFUTED
+      reason: >-
+        Every displayed section-induced rational loop period is zero; the
+        positive open geodesics have no intrinsic primitive-power monoid.
+    a2:
+      verdict: A2_FAIL
+      evidence_status: REFUTED
+      reason: >-
+        An ordinary diagonal endpoint trace has no nonzero target periods and
+        no compatible primitive repetition law.
+    a3:
+      verdict: A3_FAIL
+      evidence_status: PROVED
+      reason: >-
+        The open series is an exact shifted zeta/L quotient, not one entire
+        completed-zeta divisor.
+    a4:
+      verdict: A4_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no same-object Hilbert space, domain, or operator is defined
+  full_real_boundary:
+    a1:
+      verdict: A1_PASS_ANALYTIC
+      evidence_status: PROVED
+      reason: >-
+        Primitive hyperbolic conjugacy classes exist, but this is the
+        classical closed-geodesic object rather than a new open primitive law.
+    a2:
+      verdict: A2_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: >-
+        Only the signed Selberg automorphy-period set is proved. Coding
+        multiplicity, fixed-point weights, nuclearity, and a determinant are
+        not constructed.
+    a3:
+      verdict: A3_FAIL
+      evidence_status: REFUTED
+      reason: >-
+        The recovered periods are classical Selberg length data and do not
+        provide the required new xi divisor.
+    a4:
+      verdict: A4_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no new same-clock Hilbert-Polya operator is defined
+  bare_squarefree_spectral_parameter_products:
+    a1:
+      verdict: A1_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: >-
+        No source-derived evolution, primitive object, or repetition law
+        interprets distinct spectral parameters as time steps.
+    a2:
+      verdict: A2_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: >-
+        Matrix commutativity does not forbid determinants; the actual failure
+        is that no orbit kernel or Fredholm expansion is defined.
+    a3:
+      verdict: A3_FAIL
+      evidence_status: PROVED
+      reason: >-
+        Every standard eigenchannel and the determinant retain the transported
+        Lambda(2s-1)/Lambda(2s) quotient divisor.
+    a4:
+      verdict: A4_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no lift from a sourced evolution is available
+  projector_resolved_paths:
+    a1:
+      verdict: A1_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no sourced primitive path and repetition law is defined
+    a2:
+      verdict: A2_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no nuclear projected-path operator or Fredholm determinant exists
+    a3:
+      verdict: A3_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no global meromorphic continuation or divisor has been derived
+    a4:
+      verdict: A4_FAIL
+      evidence_status: NOT_TESTABLE
+      reason: no self-adjoint or unitary same-path lift has been constructed
+    positive_scope_signal:
+      evidence_status: NUMERICALLY_CERTIFIED
+      statement: >-
+        The level-six finite trace changes under a frozen parameter-to-edge
+        reassignment and under a changed endpoint path. This leaves the bare
+        commutative algebra but is not intrinsic chronology.
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: >-
+    Rational section-induced loop periods vanish algebraically; the only
+    nonzero full-boundary periods are classical hyperbolic lengths.
+  strongest_failure: >-
+    No new source-derived primitive open object with a repetition law survives
+    ordinary diagonal closure.
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: >-
+    Three exact double-coset witnesses and the endpoint period theorem close
+    the ordinary rational trace clock.
+  strongest_failure: >-
+    No new trace-class kernel, primitive Euler law, or Fredholm determinant is
+    defined. Matrix commutativity is not used as a determinant no-go.
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The open series and every standard squarefree eigenchannel retain shifted
+    completed-zeta quotient divisors; finite local factors are nonzero at the
+    transported nontrivial-zeta divisors.
+  strongest_failure: >-
+    No same-object entire determinant with exactly the xi divisor is obtained.
+a4:
+  verdict: A4_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: >-
+    Physical-line scattering is unitary in the classical framework.
+  strongest_failure: >-
+    No source-derived Hilbert space, operator domain, or discrete
+    self-adjoint point spectrum preserving the proposed object is defined.
+
+metrics:
+  arithmetic_rows: 2000
+  open_series_rows: 12
+  endpoint_rows: 30
+  endpoint_composition_checks: 147
+  double_coset_witnesses: 3
+  squarefree_levels_checked: 4
+  spectral_points_per_level: 5
+  global_max_pure_scattering_residual: "4.117197337177387731205744580077986367548460064869557573537255066548619e-80"
+  projector_assignment_difference: "0.02431737255937384431649490564709948700647818961801442252477989640660281"
+  projector_path_difference: "0.02831192434582128380650936129577588976164322261581624075577911406480142"
+  independent_checker: PASS
+  independent_of_producer_import: true
+  independent_test_suite: "8/8 PASS, including schema and tamper rejection"
+  zero_or_prime_tables_used: false
+
+overall_tuple: [A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL]
+overall_verdict: ROUTE_A_REJECTED
+obstruction_project_status: READY_AS_SCOPED_OBSTRUCTION
+novelty_ruling: >-
+  External theorem novelty is low. The defensible contribution is a moderate
+  compatibility synthesis with exact reproducibility: it separates genuinely
+  open arithmetic, algebraic endpoint gauge, classical loop periods, a
+  commuting normalized scattering algebra, and the projector-resolved scope
+  boundary without promoting any one of them to Hilbert-Polya.
+route_b_invocation_allowed: false
+next_major_test: >-
+  Switch systems. Test the two-axis Frobenius-iterate Henon count while
+  preserving arithmetic extension degree and dynamical iterate as distinct
+  axes; do not tune another small modular level.

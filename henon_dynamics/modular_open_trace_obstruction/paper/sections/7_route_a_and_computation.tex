@@ -1,0 +1,84 @@
+\section{Route-A evaluation and reproducibility}
+
+The evaluation separates exact arithmetic from the stronger dynamical and
+operator claims required by Hilbert--P\'olya.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Object-wise Route-A ruling.  ``Fail'' concerns the proposed
+Hilbert--P\'olya route; ``NT'' means that the required object is not defined.}
+\begin{tabular}{@{}
+>{\raggedright\arraybackslash}p{0.17\textwidth}
+>{\raggedright\arraybackslash}p{0.16\textwidth}
+>{\raggedright\arraybackslash}p{0.18\textwidth}
+>{\raggedright\arraybackslash}p{0.17\textwidth}
+>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
+\toprule
+object & A1: primitive & A2: determinant & A3: divisor & A4: operator \\
+\midrule
+rational cusp & fail: zero loop clock & fail: no periodic trace & fail: shifted quotient & NT \\
+full boundary & pass: classical classes & NT: period set only & fail as new RH route & NT \\
+bare products & NT: no sourced dynamics & NT: no orbit determinant & fail: shifted quotient & NT \\
+projected paths & NT: no primitive law & NT: no Fredholm kernel & NT: no global divisor & NT \\
+\bottomrule
+\end{tabular}
+\label{tab:route-a}
+\end{table}
+
+For the rational-endpoint branch, the open arrows are geometric but the
+section-induced loop clock is zero and the open set has no canonical
+primitive-power monoid.  The full-boundary enlargement passes A1 only by
+recovering classical hyperbolic conjugacy classes.  We prove that its
+automorphy periods are signed Selberg lengths; we do not infer a determinant
+from that period set.
+
+For bare squarefree scattering products, commutativity does not by itself
+forbid a finite or Fredholm determinant.  The A1/A2 defects are instead that
+no source-derived evolution, primitive repetition law, or transfer kernel has
+been defined.  Conditional on encoding steps by \(\Phi_N(s_j)\), the frozen
+matrix product is permutation-invariant.  The projector-resolved witness
+escapes that algebra but remains not testable at every Route-A gate beyond its
+finite assignment/path-sensitivity check.
+
+\paragraph{A3: arithmetic divisor.}
+The open coefficients and scattering matrices contain exact zeta arithmetic.
+Each standard eigenchannel still contains
+\(\Lambda(2s-1)/\Lambda(2s)\), multiplied by local factors whose zeros and
+poles lie on \(\Re s=1\) and \(\Re s=0\).  It therefore retains transported
+poles at \(\rho/2\) and zeros at \((1+\rho)/2\), not one entire completed-zeta
+divisor.
+
+\paragraph{Operator boundary.}
+The hyperbolic Laplacian is self-adjoint and physical-line scattering is
+unitary.  Those classical facts do not turn scattering resonances into a
+discrete point spectrum with ordinates of the Riemann zeros.  The project
+defines no new Hilbert space, operator domain, or same-clock quantization.
+
+\subsection{Computational audit}
+
+The producer and checker implement three independent ledgers.
+
+\begin{enumerate}
+\item For every \(q\le2000\), exact integer arithmetic computes
+\(\varphi(q)\), all roots of \(-1\), and
+\(n_q=(\varphi(q)+s_q)/2\).  High-precision partial sums are compared with
+\cref{eq:open-zeta} in its half-plane of convergence.
+\item Exact \(\SL\) arithmetic checks the failed double-coset composition and
+the primitive/affine rational-section identities and their cocycle
+composition laws.
+\item At levels \(2,6,30,210\), direct Kronecker matrices are compared with
+Walsh reconstruction, functional equations, physical-line unitarity,
+determinants, spectral-parameter product permutations, and the projected
+level-six witness.  Three physical-line and two off-line points are used;
+calculations use 80 decimal digits.
+\end{enumerate}
+
+The independent checker imports no producer code and recomputes the compact
+results at higher precision.  The unit suite includes schema validation and
+tamper rejection.  No Riemann-zero table, fitted spectral scale, or learned
+transition matrix is used.
+
+The computational statements are regression certificates, not proofs of the
+universal theorems.  All universal conclusions follow from the elementary
+arguments in the preceding sections.

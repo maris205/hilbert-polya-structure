@@ -293,6 +293,42 @@ scattering remain separate future candidates.
 
 ---
 
+## 11. modular_open_trace_obstruction
+
+### Topic
+
+Endpoint-retained modular scattering, section-induced action-groupoid
+cocycles, full-real-boundary period support, and the standard squarefree
+multi-cusp scattering algebra.
+
+### Main results
+
+- the unoriented open-scattering Laplace series is an exact sum of a totient
+  zeta quotient and a \(\chi_{-4}\) Euler product;
+- rational endpoint retention makes the denominator clock an
+  algebraic/set-theoretic coboundary, not an intrinsic loop period;
+- nonzero full-boundary automorphy periods are exactly signed Selberg
+  translation lengths, without a claimed determinant identity;
+- in the frozen Huxley--Hejhal width normalization, all standard squarefree
+  scattering matrices share a Walsh basis and bare spectral-parameter
+  products are permutation-invariant;
+- rank-one cusp projectors restore parameter-to-edge assignment and
+  endpoint-path sensitivity, but no intrinsic time law, primitive path
+  semantics, or Fredholm kernel is yet defined;
+- every standard eigenchannel and the scattering determinant retain the
+  shifted completed-zeta quotient divisor.
+
+### Relation to HP search
+
+This is a low-theorem-novelty, moderate-synthesis-value obstruction package,
+not a new scattering formula or Hilbert--Pólya construction.  It closes the
+rational ordinary-loop repair, conditionally rejects bare scattering-matrix
+products as chronology encoders, and sharply records the projector-resolved
+scope boundary.  The next breadth-first switch is the two-axis
+Frobenius--iterate Hénon count.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

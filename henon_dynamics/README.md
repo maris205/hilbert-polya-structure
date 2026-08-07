@@ -52,42 +52,46 @@ The foundational local source is
 | [`nonabelian_voltage_zeta_obstruction/`](nonabelian_voltage_zeta_obstruction/) | Order collapse, finite-roof zero density, and exact-conductor branch return | Scoped obstruction; Route-A rejected |
 | [`s_arithmetic_height_clock_obstruction/`](s_arithmetic_height_clock_obstruction/) | Explicit real/tree clock, near-wall divergence, canonical Weil height, and bounded-Hecke Weyl obstruction | Worked arithmetic example; Route-A rejected |
 | [`modular_scattering_clock_obstruction/`](modular_scattering_clock_obstruction/) | Modular open-channel zeta arithmetic, denominator-only repetition no-go, and stable Selberg closure | Scoped obstruction; Route-A rejected |
+| [`modular_open_trace_obstruction/`](modular_open_trace_obstruction/) | Algebraic endpoint coboundary, full-boundary Selberg periods, commuting squarefree scattering channels, and projector scope boundary | Scoped obstruction; Route-A rejected |
 
-## Latest result: HCS-C17
+## Latest result: HCS-C18
 
-The latest paper switches to noncompact modular scattering. Oriented cusp
-double cosets have the genuine arithmetic ledger
-
-\[
-\sum_{c\ge1}\frac{\varphi(c)}{c^{2s}}
-=\frac{\zeta(2s-1)}{\zeta(2s)},
-\]
-
-but this is an open-channel clock. For every fixed scale \(\alpha>0\), any
-total closed clock of the form \(F(\alpha|c(g)|)\) that satisfies even the
-square repetition law for all hyperbolic modular matrices with strictly
-positive entries is identically zero. Its canonical stable homogenization is
-instead
+The latest paper tests the two standard escapes left open by HCS-C17:
+retaining rational endpoints and retaining all squarefree congruence cusp
+channels. Unoriented open scattering geodesics retain the exact positive
+control
 
 \[
-\lim_{n\to\infty}\frac{2\log|c(g^n)|}{n}=\ell(g),
+Z_{\rm sc}(s;T_0)=\frac{T_0^{-2s}}2\left[
+\frac{\zeta(2s-1)}{\zeta(2s)}
++\frac{\zeta(2s)L(2s,\chi_{-4})}{\zeta(4s)}\right],
 \]
 
-the classical Selberg translation length. This gives a sharp open/closed
-category obstruction rather than a positive Hilbert--Pólya construction.
+but the section-induced endpoint clock is an algebraic/set-theoretic
+coboundary on \(\mathbb P^1(\mathbb Q)\). On the full real boundary, its
+nonzero loop periods are exactly the signed hyperbolic translation lengths;
+this classifies period support and does not by itself construct a determinant.
 
-- [Project overview](modular_scattering_clock_obstruction/README.md)
-- [Compiled paper](modular_scattering_clock_obstruction/paper/main.pdf)
-- [Derivation package](modular_scattering_clock_obstruction/DERIVATION_PACKAGE.md)
-- [Certificate producer](modular_scattering_clock_obstruction/code/modular_clock.py)
-- [Independent checker](modular_scattering_clock_obstruction/code/independent_check.py)
-- [Route-A record](modular_scattering_clock_obstruction/evaluations/route_a/hcs_c17/evaluation.yaml)
+Independently, the standard squarefree \(\Gamma_0(N)\) scattering family has
+a fixed Walsh basis in the frozen Huxley--Hejhal width normalization. Bare
+products at distinct spectral parameters are therefore permutation-invariant.
+This is a conditional matrix-product diagnostic, not an identification of the
+spectral parameter with time. Rank-one cusp projectors leave the commutative
+algebra and give certified parameter-to-edge assignment and path sensitivity;
+no primitive path law or Fredholm determinant is inferred.
+
+- [Project overview](modular_open_trace_obstruction/README.md)
+- [Compiled paper](modular_open_trace_obstruction/paper/main.pdf)
+- [Derivation package](modular_open_trace_obstruction/DERIVATION_PACKAGE.md)
+- [Certificate producer](modular_open_trace_obstruction/code/open_trace.py)
+- [Independent checker](modular_open_trace_obstruction/code/independent_check.py)
+- [Route-A record](modular_open_trace_obstruction/evaluations/route_a/hcs_c18/evaluation.yaml)
 
 Reproduce its frozen artifacts with:
 
 ```bash
-cd modular_scattering_clock_obstruction
-python code/modular_clock.py --output results
+cd modular_open_trace_obstruction
+python code/open_trace.py --output results
 python code/independent_check.py --results results \
   --output results/independent_check.json
 python -m unittest discover -s code -p 'test_*.py' -v

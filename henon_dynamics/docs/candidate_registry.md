@@ -226,3 +226,37 @@ does not cover local denominator cocycles, endpoint or word extensions,
 cohomological corrections, open groupoid traces, multi-cusp scattering, or
 divisor-carrying compensators. Any such successor is a new candidate and must
 preserve its genuine open/chronological data.
+
+## HCS-C18 closure (2026-08-07)
+
+Candidate **HCS-C18** is rejected as a positive Hilbert--Pólya route and
+retained as a scoped compatibility/trace-closure obstruction; see
+../modular_open_trace_obstruction/.  The overall Route-A tuple is
+**(A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL)**, interpreted object by object rather
+than as one mixed construction.  Route B is not authorized.
+
+The open positive control is exact:
+
+\[
+Z_{\rm sc}(s;T_0)=\frac{T_0^{-2s}}2\left[
+\frac{\zeta(2s-1)}{\zeta(2s)}
++\frac{\zeta(2s)L(2s,\chi_{-4})}{\zeta(4s)}\right].
+\]
+
+On \(\mathrm{PSL}_2(\mathbb Z)\ltimes\mathbb P^1(\mathbb Q)\), every
+section-induced absolute projective cocycle of the frozen form is an
+algebraic/set-theoretic coboundary; the denominator transfer function is
+discontinuous and unbounded, so no analytic transfer-operator conjugacy is
+claimed.  On the full real boundary, nonzero automorphy periods are exactly
+signed hyperbolic translation lengths.  This identifies period support only,
+not a determinant.
+
+For squarefree \(\Gamma_0(N)\) in the frozen Huxley--Hejhal
+width/Atkin--Lehner normalization, one Walsh basis diagonalizes every
+\(\Phi_N(s)\).  Bare products at different spectral parameters are
+permutation-invariant, but \(s\) is not interpreted as time.  Rank-one cusp
+projectors produce certified parameter-to-edge assignment and endpoint-path
+sensitivity; this is a positive scope boundary, not yet intrinsic chronology
+or a Fredholm construction.  The next major round should switch to the
+two-axis Frobenius--iterate Hénon object rather than tune another modular
+level.
