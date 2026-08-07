@@ -3,7 +3,7 @@
 Candidate HCS-C18 is prepared for release as a modular open-scattering
 trace-closure obstruction with a projector-resolved scope boundary.
 
-- Computation/source commit: `PENDING_SOURCE_COMMIT`.
+- Computation/source commit: `0be4b276fbeffa21385aea1ec1a59dfef01da90b`.
 - Complete release tag: `hcs-c18-v1`.
 - Target branch: `main`.
 - Remote: `git@github.com:maris205/hilbert-polya-structure.git`.
