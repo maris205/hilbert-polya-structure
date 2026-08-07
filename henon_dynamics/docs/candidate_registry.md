@@ -172,3 +172,57 @@ Higher-rank and Hecke--Ruelle architectures also have substantial prior art
 and an announced 2026 priority collision.  The next system switch should
 change the spectral mechanism to a noncompact scattering/countable-return
 model rather than vary the quaternion algebra or prime.
+
+## HCS-C17 closure (2026-08-07)
+
+Candidate **HCS-C17** is closed as a final-denominator-only modular
+Hilbert--Pólya route and retained as a sharp open/closed clock obstruction; see
+`../modular_scattering_clock_obstruction/`. Its Route-A tuple is
+**(A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL)** with overall
+**ROUTE_A_REJECTED**. The project itself is
+**READY_AS_SCOPED_OBSTRUCTION**; Route B is not authorized.
+
+The positive classical input is exact. Oriented nonidentity cusp double
+cosets in the big Bruhat cell have labels
+
+\[
+(c,d\bmod c),\qquad (c,d)=1,
+\]
+
+and multiplicity \(\varphi(c)\), giving
+
+\[
+\sum_{c\ge1}\varphi(c)c^{-2s}
+=\frac{\zeta(2s-1)}{\zeta(2s)},
+\qquad
+\Phi(s)=\frac{\Lambda(2s-1)}{\Lambda(2s)}.
+\]
+
+This arithmetic belongs to oriented open scattering channels. It does not
+descend unchanged to closed hyperbolic periods. For every fixed
+\(\alpha>0\), any function
+\(F:\alpha\mathbb N_{>0}\to\mathbb R\) satisfying
+
+\[
+F(\alpha|c(g^2)|)=2F(\alpha|c(g)|)
+\]
+
+for every hyperbolic \(g\in\mathrm{SL}_2(\mathbb Z)\) with four strictly
+positive entries is identically zero. The proof uses the family
+\(\left(\begin{smallmatrix}1&m\\n&1+mn\end{smallmatrix}\right)\) and requires no
+regularity assumption on \(F\).
+
+The canonical stable power limit is positive but classical:
+
+\[
+\lim_{k\to\infty}\frac{2\log|c(g^k)|}{k}=\ell(g).
+\]
+
+Thus stabilizing the denominator height returns to the Selberg--Mayer
+translation-length clock. An affine reparametrization and entire zero-free
+normalization also cannot turn the scattering quotient into one entire
+\(\xi\), because its nontrivial poles and shifted zeros persist. The result
+does not cover local denominator cocycles, endpoint or word extensions,
+cohomological corrections, open groupoid traces, multi-cusp scattering, or
+divisor-carrying compensators. Any such successor is a new candidate and must
+preserve its genuine open/chronological data.

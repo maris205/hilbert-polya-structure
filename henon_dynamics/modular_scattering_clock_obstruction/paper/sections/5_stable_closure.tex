@@ -1,0 +1,74 @@
+\section{Stable closure returns to Selberg length}
+
+The literal denominator height fails exact repetition, but its growth under
+powers has a canonical linear part.  Cayley--Hamilton identifies it without a
+fit.
+
+\begin{proposition}[Chebyshev power identity]\label{prop:chebyshev}
+For $g\in\GammaSL$, $t=\tr g$, and $n\geq1$,
+\[
+ g^n=U_{n-1}(t/2)g-U_{n-2}(t/2)I,
+\]
+where $U_{-1}=0$, $U_0=1$, and
+$U_{k+1}(x)=2xU_k(x)-U_{k-1}(x)$.  In particular,
+\begin{equation}\label{eq:c-cheb}
+ c(g^n)=c(g)U_{n-1}(t/2).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The characteristic polynomial of $g$ is $x^2-tx+1$, so
+$g^2=tg-I$.  The claimed formula holds at $n=1,2$.  Multiplication by $g$
+and substitution of $g^2=tg-I$ turns the step from $n$ to $n+1$ into the
+defining recurrence for $U_n$.  Taking lower-left entries proves
+\eqref{eq:c-cheb}.
+\end{proof}
+
+Choose the lift of a hyperbolic class with $t>2$, and define
+\[
+ \lambda=\frac{t+\sqrt{t^2-4}}2,\qquad
+ \Length(g)=2\log\lambda,\qquad
+ H_\alpha(g)=2\log(\alpha|c(g)|).
+\]
+Hyperbolicity forces $c(g)\ne0$.
+
+\begin{theorem}[Exact defect and stable homogenization]\label{thm:stable}
+For every $n\geq1$,
+\begin{equation}\label{eq:defect}
+ H_\alpha(g^n)
+ =n\Length(g)
+ +2\log\frac{\alpha|c(g)|}{\sqrt{t^2-4}}
+ +2\log(1-\lambda^{-2n}).
+\end{equation}
+Consequently,
+\[
+ \lim_{n\to\infty}\frac{H_\alpha(g^n)}n=\Length(g).
+\]
+\end{theorem}
+
+\begin{proof}
+The eigenvalues are $\lambda$ and $\lambda^{-1}$, and
+\[
+ U_{n-1}(t/2)
+ =\frac{\lambda^n-\lambda^{-n}}{\lambda-\lambda^{-1}}
+ =\frac{\lambda^n(1-\lambda^{-2n})}{\sqrt{t^2-4}}.
+\]
+Combine this identity with \eqref{eq:c-cheb}, multiply by $\alpha$, and take
+$2\log$.  This proves \eqref{eq:defect}.  After division by $n$, both defect
+terms tend to zero.
+\end{proof}
+
+The limiting clock is exactly the translation length used in the
+Selberg--Mayer closed-geodesic determinant~\cite{Selberg1956,Mayer1991}.  This
+positive closure explains why enforcing power stability removes the endpoint
+denominator information and returns to eigenvalue growth.
+
+The conclusion is not a universal uniqueness theorem.  It concerns the
+canonical limit of the specific sequence $H_\alpha(g^n)/n$.  A useful scoped
+rigidity statement does follow: if a homogeneous closed clock $L$ satisfies
+\[
+ L([g^n])-H_\alpha(g^n)=o(n)
+\]
+along the powers of a fixed $g$, then division by $n$ and
+\cref{thm:stable} give $L([g])=\Length(g)$.  Homogeneous class functions
+outside this asymptotic class remain unrestricted.

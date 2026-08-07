@@ -51,37 +51,46 @@ The foundational local source is
 | [`s_integer_solenoid_chronology_zeta/`](s_integer_solenoid_chronology_zeta/) | Same-Parikh returns with rational versus natural-boundary zeta; full-zeta continuation | Structural theorem; Route-A rejected |
 | [`nonabelian_voltage_zeta_obstruction/`](nonabelian_voltage_zeta_obstruction/) | Order collapse, finite-roof zero density, and exact-conductor branch return | Scoped obstruction; Route-A rejected |
 | [`s_arithmetic_height_clock_obstruction/`](s_arithmetic_height_clock_obstruction/) | Explicit real/tree clock, near-wall divergence, canonical Weil height, and bounded-Hecke Weyl obstruction | Worked arithmetic example; Route-A rejected |
+| [`modular_scattering_clock_obstruction/`](modular_scattering_clock_obstruction/) | Modular open-channel zeta arithmetic, denominator-only repetition no-go, and stable Selberg closure | Scoped obstruction; Route-A rejected |
 
-## Latest result: HCS-C16
+## Latest result: HCS-C17
 
-The latest paper tests a compact quaternionic real--\(p\)-adic system.  It
-proves that the arithmetic clock is genuinely rank two, but primitive
-\(S\)-unit directions can approach the real Weyl wall while escaping in the
-tree direction.  This destroys the real-only Euler product.  The absolute
-Weil height repairs properness canonically,
+The latest paper switches to noncompact modular scattering. Oriented cusp
+double cosets have the genuine arithmetic ledger
 
 \[
-H=\ell_\infty+(\log13)\ell_{13}=2h(r),
+\sum_{c\ge1}\frac{\varphi(c)}{c^{2s}}
+=\frac{\zeta(2s-1)}{\zeta(2s)},
 \]
 
-but the periodic objects remain flat families with regulator weights, and
-the direct bounded-Hecke compact spectral lift retains \(T^2\) Weyl growth.
+but this is an open-channel clock. For every fixed scale \(\alpha>0\), any
+total closed clock of the form \(F(\alpha|c(g)|)\) that satisfies even the
+square repetition law for all hyperbolic modular matrices with strictly
+positive entries is identically zero. Its canonical stable homogenization is
+instead
 
-- [Project overview](s_arithmetic_height_clock_obstruction/README.md)
-- [Compiled paper](s_arithmetic_height_clock_obstruction/paper/main.pdf)
-- [Derivation package](s_arithmetic_height_clock_obstruction/DERIVATION_PACKAGE.md)
-- [Certificate producer](s_arithmetic_height_clock_obstruction/code/s_arithmetic_clock.py)
-- [Independent checker](s_arithmetic_height_clock_obstruction/code/independent_check.py)
-- [Route-A record](s_arithmetic_height_clock_obstruction/evaluations/route_a/hcs_c16/20260807T041943Z.yaml)
+\[
+\lim_{n\to\infty}\frac{2\log|c(g^n)|}{n}=\ell(g),
+\]
+
+the classical Selberg translation length. This gives a sharp open/closed
+category obstruction rather than a positive Hilbert--Pólya construction.
+
+- [Project overview](modular_scattering_clock_obstruction/README.md)
+- [Compiled paper](modular_scattering_clock_obstruction/paper/main.pdf)
+- [Derivation package](modular_scattering_clock_obstruction/DERIVATION_PACKAGE.md)
+- [Certificate producer](modular_scattering_clock_obstruction/code/modular_clock.py)
+- [Independent checker](modular_scattering_clock_obstruction/code/independent_check.py)
+- [Route-A record](modular_scattering_clock_obstruction/evaluations/route_a/hcs_c17/evaluation.yaml)
 
 Reproduce its frozen artifacts with:
 
 ```bash
-cd s_arithmetic_height_clock_obstruction
-python code/s_arithmetic_clock.py --output results
+cd modular_scattering_clock_obstruction
+python code/modular_clock.py --output results
 python code/independent_check.py --results results \
   --output results/independent_check.json
-cd code && python -m unittest -v test_s_arithmetic_clock.py
+python -m unittest discover -s code -p 'test_*.py' -v
 ```
 
 ## Mirrored-data boundary

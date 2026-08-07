@@ -1,0 +1,34 @@
+\section{Reproducibility protocol}\label{app:reproducibility}
+
+Run the following commands from the project directory:
+\begin{verbatim}
+python code/modular_clock.py --output results
+python code/independent_check.py --results results \
+  --output results/independent_check.json
+python -m unittest discover -s code -p 'test_*.py' -v
+\end{verbatim}
+
+The default source lock is: double-coset cutoff $80$, rigidity-family cutoff
+$20$ in each parameter, Gauss digits $1$ through $3$ and even word lengths
+through $6$, powers through $24$, Dirichlet cutoff $50{,}000$, and producer
+precision $80$ decimal digits.  The independent checker uses $110$ digits.
+The 274-word census discards proper powers, then retains the lexicographically
+least representative of each even-cyclic-rotation class.  This even rotation
+convention keeps the associated conjugators in $\GammaSL$.  The stable-formula
+CSV fixes $\alpha=1$.
+
+The primary machine-readable files are:
+\begin{verbatim}
+exact_certificates.json
+double_coset_counts.csv
+gauss_word_clock_audit.csv
+homogenization.csv
+dirichlet_convergence.csv
+summary.json
+independent_check.json
+\end{verbatim}
+
+Integer fields are exact.  Decimal strings store high-precision evaluations;
+they are not rounded binary floats.  The producer's elementary Dirichlet tail
+bound uses $\varphi(c)\leq c$, and the independent checker recomputes both the
+partial sums and the stated bound.  The code reads no external data file.

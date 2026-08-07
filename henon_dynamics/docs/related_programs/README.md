@@ -260,6 +260,39 @@ scattering and a separately derived unbounded Weil-height operator.
 
 ---
 
+## 10. modular_scattering_clock_obstruction
+
+### Topic
+
+The one-cusp modular surface, oriented cusp double cosets, denominator sojourn
+times, the completed scattering coefficient, and the attempted descent from
+open arithmetic channels to closed hyperbolic periods.
+
+### Main results
+
+- oriented big-cell double cosets at denominator \(c\) have multiplicity
+  \(\varphi(c)\) and recover the arithmetic factor
+  \(\zeta(2s-1)/\zeta(2s)\);
+- the final lower-left denominator is not a hyperbolic conjugacy/cyclic
+  invariant;
+- every scaled denominator-only function satisfying universal square
+  repetition is identically zero, without a regularity assumption;
+- the canonical stable homogenization of \(2\log|c(g^n)|\) is precisely the
+  Selberg translation length;
+- the completed scattering quotient retains two shifted nontrivial divisors
+  under affine reparametrization and zero-free normalization.
+
+### Relation to HP search
+
+This is a noncompact scattering positive control and a scoped Route-A
+rejection, not a new modular transfer operator or Hilbert--Pólya construction.
+It identifies why genuine open-channel zeta arithmetic cannot be copied
+unchanged into a final-denominator primitive closed-orbit determinant. Local
+chronological cocycles, endpoint-extended groupoids and multi-cusp matrix
+scattering remain separate future candidates.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

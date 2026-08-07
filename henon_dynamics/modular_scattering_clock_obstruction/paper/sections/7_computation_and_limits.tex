@@ -1,0 +1,53 @@
+\section{Exact audit, reproducibility, and limits}
+
+The computational layer is designed to catch convention and implementation
+errors, not to infer the universal theorems from a census.  The producer uses
+exact integer matrix arithmetic for double cosets, conjugacy witnesses, the
+positive rigidity family, and Chebyshev identities.  The library
+\texttt{mpmath} is used only for frozen high-precision evaluations of formulas
+proved above.
+
+\begin{center}
+\begin{tabular}{@{}lrl@{}}
+\toprule
+Audit block & Size & Result \\
+\midrule
+Double-coset levels & 80 & all counts equal $\varphi(c)$ \\
+Positive rigidity family & 400 & all square identities exact \\
+Chebyshev power rows & 48 & all identities exact \\
+Primitive even Gauss words & 274 & 259 cyclic variations \\
+Literal denominator square law & 274 & 0 passes \\
+Stable-formula rows ($\alpha=1$) & 96 & maximum residual $<2.70\cdot10^{-79}$ \\
+Dirichlet control rows & 12 & all inside elementary tail bounds \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+At $s=1/2+it$ for $t=0.7,2,7$, the producer checks
+$|\PhiSc(s)|=1$ and $\PhiSc(s)\PhiSc(1-s)=1$ with maximum reported residual
+$2.11\cdot10^{-81}$.  These are normalization regressions, not evidence about
+unlisted zeta zeros.
+
+A second checker does not import the producer.  At 110 decimal digits it
+reimplements matrix multiplication, totients, double-coset representatives,
+Gauss-word enumeration, Chebyshev powers, translation length, the Dirichlet
+series, and the scattering coefficient.  It verifies every row in the six
+producer artifacts.  Regression tests also mutate a certificate and require
+the checker to reject it.  No prime table, Riemann-zero table, fitted scale, or
+target-derived weight is read.
+
+The numerical defect audit fixes $\alpha=1$; general $\alpha$ adds the constant
+$2\log\alpha$ in \cref{eq:defect} and does not alter the analytic limit.  The
+audit has three further limitations.  First, the 274-word count is a
+finite illustration; \cref{thm:rigidity} carries the universal quantifier.
+Second, high-precision residuals check an implementation of
+\cref{eq:defect,eq:scattering}; they do not prove those identities.  Third, a
+self-issued artifact report is not a cryptographic signature.  Git provenance
+and a release manifest provide the external reproducibility anchor.
+
+The mathematical scope is equally narrow.  The no-go theorem does not cover
+local denominator cocycles, cyclic sums, cohomological corrections,
+trace-dependent or complete-word clocks, endpoint-extended transfer
+operators, matrix cocycles, subadditive pressure, open groupoid traces,
+multi-cusp scattering, or divisor-carrying compensators.  Each escape changes
+the source-locked object and requires a separate Route-A evaluation.
