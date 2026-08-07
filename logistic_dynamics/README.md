@@ -36,6 +36,7 @@ not receive a manuscript that would overstate the mathematics.
 | Stage | Route-A tuple | Status | Paper |
 |---|---|---|---|
 | [`legacy_annular_residual_001`](projects/legacy_annular_residual_001/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `NOT_TESTABLE` | Not opened; no new theorem edge |
+| [`polar_partition_trace`](projects/polar_partition_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `REVISE` / `NOT_TESTABLE` for analytic trace | Reserved; local endpoint trace theorem still open |
 
 ## Provenance
 
