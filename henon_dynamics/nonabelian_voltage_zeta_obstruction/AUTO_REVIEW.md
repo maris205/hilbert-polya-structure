@@ -150,3 +150,156 @@ Remaining major issue: Route-A provenance is still incomplete: source_commit and
 
 No remaining major mathematical, novelty, citation, proof, or reproducibility defects were found. All nine tests pass, generated artifacts reproduce exactly, and the 13-page paper compiles cleanly.
 ~~~
+
+## Verbatim payload archive
+
+The following payloads preserve the reviewers' wording verbatim. Sender and
+message-routing metadata added by the orchestration layer are omitted.
+
+### Proof audit, round one
+
+~~~text
+Verdict: all six core mathematical claims are correct; I found no counterexample or false theorem. The six regression tests pass. The needed corrections are mostly proof-completeness and certificate-scope issues.
+
+- Schrödinger irreducibility is omitted from the paper. [5_tower.tex](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/paper/sections/5_tower.tex:59) defines the Weyl pair and proves only non-descent via the central character. To justify “primitive nonabelian sector,” add the argument already present in `DERIVATION_PACKAGE.md`: \(V_m\) has \(q_m\) distinct eigenspaces and \(U_m\) permutes them transitively, so any \(U_m,V_m\)-invariant subspace is \(0\) or the whole space. Also explicitly state the map \(x\mapsto U_m,\ y\mapsto V_m,\ z\mapsto e^{-2\pi i/q_m}I\). This agrees with the standard finite Schrödinger/Stone–von Neumann model; see [Digernes–Varadarajan](https://arxiv.org/abs/math/0409299).
+
+- Strictness at finite level is asserted but not proved. [5_tower.tex](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/paper/sections/5_tower.tex:112) uses \(\lambda_{\max}(H_m)<4\) to exclude equality with the trivial Bass roots. Add: equality in
+  \[
+  \langle f,H_mf\rangle\le 4\|f\|^2
+  \]
+  forces \(U_mf=f=V_mf\), impossible under \(U_mV_m=\zeta V_mU_m\) with \(\zeta\ne1\). Equivalently, connectedness/Perron–Frobenius makes eigenvalue \(4\) occur only in the trivial representation.
+
+- The claimed “independent” certification of the full H7 proposition is overstated. [independent_check.py](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/code/independent_check.py:116) independently checks bigrams, holonomies/conjugacy classes, and regular-cycle lengths, but not cyclic reduction, primitivity, non-dihedrality, or noninverse holonomy. Those are checked only by the producer/importing tests. Either extend the independent checker or narrow [the introduction’s claim](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/paper/sections/1_introduction.tex:74).
+
+- One code comment is literally false: [voltage_zeta.py](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/code/voltage_zeta.py:258) says the two holonomies act by “opposite” roots of unity. Their exponents are \(-3k\) and \(-2k\), which are distinct, not opposite. The generated phase ledger is correct; replace “opposite” by “distinct.”
+
+- The rational \(q=243\) certificate is mathematically correct but not machine-certified. Explicitly,
+  \[
+  \frac{60}{31}+2-\frac{1000}{6561}
+  =\frac{769442}{203391},\qquad
+  \frac{769442}{203391}-\frac72
+  =\frac{115147}{406782}>0,
+  \]
+  and \(7/2>2\sqrt3\). The code stores only a floating cosine lower bound and tests merely `>3.7`; consider an exact `Fraction` assertion. Likewise, result-field `bass_roots` belongs to the abelian branch, not the Schrödinger \(\lambda_{\max}\).
+
+- Minor regular-representation convention issue: [3_aggregation.tex](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/paper/sections/3_aggregation.tex:28) writes the usual left-regular irrep decomposition but then invokes right multiplication. The determinant formula remains correct because either multiplication has \(|G|/o\) \(o\)-cycles and dual irreps merely reindex the product. Say “left multiplication,” or explicitly mention the dual/reindexing convention.
+
+- Minor Jensen hygiene: [4_zero_density.tex](/root/autodl-tmp/henon_zeta/nonabelian_voltage_zeta_obstruction/paper/sections/4_zero_density.tex:8) is correct, including finite meromorphic quotients, provided every entry uses finitely many positive real exponents with \(s\)-independent coefficients. State that explicitly in the generalized-entry clause, handle possible zeros on the Jensen outer circle by a limiting radius, and define quotient divisor count after cancellation. Also clarify that the displayed Riemann–von Mangoldt normalization counts positive-height zeros; the manuscript’s symmetric strip count is twice this up to \(O(1)\), which does not affect the \(\Theta(T\log T)\) contradiction.
+
+Confirmed without correction: the regular-minus-trivial factor, both H7 holonomies and complete bigram ledger, non-dihedral/primitivity claims, the Jensen \(O(T)\) conclusion for finite products/quotients, the \(q=243\) Rayleigh inequality, and Bass-root convergence to \(1/3\) and \(1\).
+~~~
+
+### Hostile senior review, round one
+
+~~~text
+Verdict: **ALMOST — reject in the present form, invite a focused major revision.**
+Score: **6.8/10**.
+
+I found no false main theorem. The obstruction package is mathematically sound in outline, the chronology certificate is correct, the Jensen argument works, and the Bass-root calculation is correct. However, the manuscript is not yet ready to present as a completed paper because its most “new” theorem skips a necessary representation-theoretic step and the novelty audit omits the closest prior work.
+
+### Critical issues
+
+1. **The primitive exact-conductor Schrödinger sector is asserted, not established.**
+
+   Section 5 jumps from a Weyl pair \(U_m,V_m\) to “the corresponding primitive central-character adjacency block.” For the theorem to concern a genuine nonabelian Artin/Fourier sector, the paper must explicitly:
+
+   - put \(\omega_m=e^{-2\pi i/q_m}\);
+   - define
+     \[
+     \rho_m(a,b,c)=\omega_m^cV_m^bU_m^a;
+     \]
+   - verify the Heisenberg group law using \(U_mV_m=\omega_mV_mU_m\);
+   - prove irreducibility. Since \(V_m\) has simple spectrum and \(U_m\) cyclically permutes its eigenspaces, the commutant is scalar;
+   - prove exact conductor using
+     \[
+     \rho_m(z^{q_m/3})=e^{-2\pi i/3}I\ne I;
+     \]
+   - explain why this full-group Fourier block is an Artin sector for the cover of the two-loop bouquet, and why non-factor-through blocks remain in the level-new quotient after the old blocks cancel.
+
+   Without this lemma, “exact-conductor irreducible nonabelian sector” is not proved inside the manuscript, even though the claim is true.
+
+2. **The novelty audit misses the closest prior source.**
+
+   The exact irreducible representations of \(H(\mathbb Z/p^n\mathbb Z)\), their \(p^n\)-dimensional blocks, and the associated Harper matrices are already written down in DeDeo et al., [“Spectra of Heisenberg graphs over finite rings”](https://doi.org/10.3934/proc.2003.2003.213), especially its representation proposition and Hofstadter-block discussion. The manuscript cites only the later zeta chapter.
+
+   It should also acknowledge Béguin–Valette–Żuk, [“On the spectrum of a random walk on the discrete Heisenberg group and the norm of Harper’s operator”](https://doi.org/10.1016/S0393-0440(96)00024-1).
+
+   The defensible novelty claim is therefore:
+
+   > an explicit conductor-resolved Rayleigh certificate and its use as a frozen Hilbert–Pólya/new-sector-gap obstruction,
+
+   not a new discovery of the primitive Schrödinger block or of its near-zero-flux spectral-edge behavior.
+
+3. **“Closing the Heisenberg tower” is too strong.**
+
+   The theorem proves failure of the uniform Ramanujan/new-sector-gap rescue under the registered normalization: exact-conductor poles leave the graph critical circle and approach \(1/3\) and \(1\). It does **not** prove that no renormalized infinite determinant, subtraction scheme, or other tower limit can exist.
+
+   Replace claims such as “the tower does not provide the missing limit” or “closes the natural Heisenberg tower” by:
+
+   > rules out the uniform Ramanujan/new-sector-gap version of the frozen regular-minus-trivial Heisenberg-tower proposal.
+
+### Major process issue
+
+The Route-A verdict is substantively correct:
+
+\[
+(\mathrm{A1\_WEAK}, \mathrm{A2\_FAIL},
+\mathrm{A3\_FAIL}, \mathrm{A4\_FORMAL\_HINT}).
+\]
+
+But the YAML omits all nine mandatory A2 metric names:
+
+- `zero_error_train`
+- `zero_error_validation`
+- `zero_error_test`
+- `extra_zero_count`
+- `missing_zero_count`
+- `root_count_discrepancy`
+- `cutoff_drift`
+- `precision_drift`
+- `control_margin`
+
+They may be recorded as `NOT_APPLICABLE_ANALYTIC_REJECTION`, but the exact schema names should be present. `source_commit` and `code_commit` must also be replaced with real commit hashes when synchronized; `NOT_A_GIT_WORKTREE` is not adequate final provenance.
+
+### Minor mathematical and exposition fixes
+
+- The Jensen proof is correct. For full rigor, avoid the possibility of zeros on the radius-\(2R\) boundary by choosing an outer radius in \([2R,3R]\) avoiding zeros, or invoke the limiting form of Jensen’s formula.
+- State whether an affine spectral identification is restricted to real affine maps. Alternatively use the already-proved disk count \(n_D(R)=O(R)\), which handles a general nonzero complex affine map.
+- Add the short proof that \(\lambda_{\max}(H_m)<4\) at every finite level: equality would force a common \(+1\) eigenvector of \(U_m\) and \(V_m\), contradicting their primitive Weyl commutation relation.
+- In the chronology section, identify \(x\) as the common unit-roof weight \(u^{10}\), or as a weight depending only on the matched letter/bigram ledger. Arbitrary higher-memory weights need not be equal for the two words.
+- Distinguish clearly between the Artin decomposition for the bouquet cover with deck group \(H(q_m)\) and the level-to-level cover \(X_m\to X_{m-1}\), whose deck group is different.
+- Pin the tested environment, currently Python 3.12.3 and SymPy 1.14.0.
+- Add one direct small-\(q\) test constructing \(U,V\), checking the Weyl/group relations and scalar commutant, rather than testing only the abelian character.
+
+### Checks that passed
+
+- The regular-minus-trivial local formula is correct.
+- The two length-ten words have the stated bigram ledgers, are primitive and non-dihedrally equivalent, and have holonomies \(z^3,z^2\).
+- The Jensen zero-density argument gives \(O(T)\) as claimed.
+- The \(q=243,L=15\) rational bound is valid and exceeds \(7/2>2\sqrt3\).
+- The Bass roots do converge to \(1/3\) and \(1\).
+- All six tests pass.
+- Regenerated JSON/CSV artifacts are byte-for-byte identical to the committed results.
+- The 12-page paper compiles cleanly with no citation, reference, or layout warnings.
+
+After the representation lemma, closest-prior-art correction, scope tightening, and Route-A schema repair, I would raise this to roughly **8/10 and READY as a rigorous negative research note/internal project paper**.
+~~~
+
+### Proof audit, round two
+
+~~~text
+FINAL ACCEPT
+~~~
+
+### Hostile senior review, round two
+
+~~~text
+**Score:** 8.7/10  
+**Verdict:** **ALMOST — mathematically ready; repository release still conditional.**
+
+**Remaining critical issues:** None.
+
+**Remaining major issue:** Route-A provenance is still incomplete: `source_commit` and `code_commit` remain `NOT_A_GIT_WORKTREE`. Also, the revised evidence appears to have overwritten the original timestamped YAML instead of creating a new evaluation version, contrary to the Route-A accumulation protocol. Create a newly timestamped evaluation after committing, record the real commit hash, and preserve the previous evaluation if recoverable.
+
+No remaining major mathematical, novelty, citation, proof, or reproducibility defects were found. All nine tests pass, generated artifacts reproduce exactly, and the 13-page paper compiles cleanly.
+~~~
