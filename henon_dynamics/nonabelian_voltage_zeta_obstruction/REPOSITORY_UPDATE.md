@@ -2,6 +2,9 @@
 
 Date: 2026-08-07
 
+Frozen source/code commit:
+f519609e32362a4113d84a8e55772c38c53c84da
+
 ## Added project
 
 nonabelian_voltage_zeta_obstruction/ is a complete theorem-led package for
@@ -15,6 +18,10 @@ candidate HCS-C15:
 - the primitive nonabelian Heisenberg branch-return theorem;
 - a primary-source and novelty audit;
 - a formal Route-A rejection record.
+
+The original pre-review evaluation is preserved. The final append-only
+evaluation is evaluations/route_a/hcs_c15/20260807T032927Z.yaml and records
+the frozen source/code commit above.
 
 ## Registry changes
 

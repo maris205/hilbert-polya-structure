@@ -65,7 +65,7 @@ the branching spectral edge.
 - [Derivation package](nonabelian_voltage_zeta_obstruction/DERIVATION_PACKAGE.md)
 - [Exact producer](nonabelian_voltage_zeta_obstruction/code/voltage_zeta.py)
 - [Independent checker](nonabelian_voltage_zeta_obstruction/code/independent_check.py)
-- [Route-A record](nonabelian_voltage_zeta_obstruction/evaluations/route_a/hcs_c15/20260807T025623Z.yaml)
+- [Route-A record](nonabelian_voltage_zeta_obstruction/evaluations/route_a/hcs_c15/20260807T032927Z.yaml)
 
 Reproduce its frozen artifacts with:
 

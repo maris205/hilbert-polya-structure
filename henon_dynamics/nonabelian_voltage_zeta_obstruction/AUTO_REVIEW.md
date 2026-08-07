@@ -16,8 +16,9 @@ After revision:
 - remaining release action at review time: append a new Route-A evaluation
   with real Git provenance while preserving the original record.
 
-The provenance action is completed in the repository release commit that
-contains the final timestamped Route-A file.
+The provenance action is completed in the append-only Route-A record
+evaluations/route_a/hcs_c15/20260807T032927Z.yaml, which cites frozen
+source/code commit f519609e32362a4113d84a8e55772c38c53c84da.
 
 ## Changes made between rounds
 

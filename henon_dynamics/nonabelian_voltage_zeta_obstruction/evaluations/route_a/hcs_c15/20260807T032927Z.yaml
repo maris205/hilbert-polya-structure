@@ -1,0 +1,214 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C15
+source_commit: f519609e32362a4113d84a8e55772c38c53c84da
+evaluation_date: "2026-08-07T03:29:27Z"
+
+registered_input:
+  candidate_definition: >-
+    A finite nonbacktracking Markov system with a finite-group voltage
+    assignment, a constant finite-dimensional unitary representation, and a
+    fixed finite-memory positive locally constant roof; the canonical
+    aggregate is the regular-cover zeta divided by the base zeta. The
+    registered growing control is the congruence tower
+    Cay(H(Z/3^m Z), {x^+-, y^+-}).
+  family: nonabelian voltage-cover Artin-Ihara dynamics
+  phase_space: directed edges of a finite graph, with finite deck fibre
+  dynamics: >-
+    Chronological nonbacktracking edge shift; voltage matrices multiply in
+    orbit order before traces, determinants, or representation aggregation.
+  parameters:
+    chronology_witness_group: H(F_7)
+    tower_prime: 3
+    tower_generators: [x, x_inverse, y, y_inverse]
+    d4_control_group_order: 8
+  parameter_provenance: >-
+    H(F_7) is the smallest audited prime supporting the non-dihedral,
+    noninverse same-bigram witness. The 3-power tower is the smallest natural
+    odd Heisenberg congruence family and is target-blind.
+  clock: finite word length or a fixed finite positive locally constant roof
+  normalization: >-
+    D_rho(s)=det(I-B_rho(s)); Z_new=Z_cover/Z_base with regular
+    representation multiplicities; no fitted spectral scale.
+  determinant_convention: >-
+    B_rho(s)=sum_j exp(-s tau_j) B_{rho,j}, with fixed finite matrices and
+    fixed positive roofs. Tower Bass factors use 1-lambda*u+3*u^2.
+  orbit_cutoff: exact finite identities; all asymptotic claims are proved
+  precision: exact symbolic/group arithmetic; floats only in labeled illustrations
+  training_data: none
+  forbidden_data:
+    - prime tables
+    - Riemann-zero tables
+    - xi evaluations
+    - post-hoc spectral fitting
+    - averaged transition matrices replacing ordered voltage products
+  code_commit: f519609e32362a4113d84a8e55772c38c53c84da
+  artifact_paths:
+    - results/exact_certificates.json
+    - results/independent_check.json
+    - results/unit_roof_density.csv
+    - DERIVATION_PACKAGE.md
+    - SOURCE_AUDIT.md
+    - paper/main.pdf
+
+source_lock:
+  object: >-
+    Canonical regular-minus-trivial finite voltage-cover zeta, its fixed
+    representation-resolved finite-memory repairs, and the explicit
+    Heisenberg 3-power congruence-tower control.
+  clock: word/roof length fixed before evaluation
+  normalization: no unfolding, offset, or target-dependent reparameterization
+  determinant_convention: finite twisted Hashimoto/Bass determinant
+  cutoff: no theorem inferred from a cutoff
+  precision: exact where claims depend on equality
+  allowed_data:
+    - chronological voltage products
+    - finite-group representations
+    - exact determinant identities
+    - primary-source graph-covering and exponential-sum theorems
+  forbidden_data:
+    - target zeros or xi values
+    - fitted roof values
+    - moving truncation presented as one fixed determinant
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Primitive reduced graph cycles are exact. The p=7 witness consists of two
+    cyclically reduced primitive non-dihedral length-ten words with identical
+    complete cyclic directed-bigram counts but chronological holonomies z^3
+    and z^2. A resolved central character distinguishes them.
+  strongest_failure: >-
+    The intrinsic clock is finite word or roof length. No non-accidental
+    prime correspondence, log-prime period law, von Mangoldt amplitude, or
+    canonical selection of one central character is present.
+  orientation_phase_multiplicity:
+    orientation: oriented reduced cycles; reversal is not quotiented
+    cyclic_equivalence: rotations only
+    word_order: group generators multiply chronologically
+    repetition: holonomy of P^r is g_P^r
+    regular_multiplicity: each irrep appears with exponent dim(rho)
+  metrics:
+    witness_length: 10
+    common_parikh: [3, 3, 2, 2]
+    common_cyclic_bigram_total: 10
+    witness_holonomies: [z^3, z^2]
+    witness_order: 7
+    d4_regular_cover_dimension: 32
+    exact_tests_passed: 9
+  mandatory_controls:
+    chronology_preserved: true
+    time_reversal_excluded: true
+    full_regular_cover_factorization: PASSED
+    independent_group_implementation: PASSED
+    target_randomization_controls: NOT_APPLICABLE_NO_TARGET_FIT
+  artifacts:
+    - results/exact_certificates.json
+    - results/independent_check.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Every fixed finite-state finite-memory determinant in the registered class
+    is a nonzero entire exponential polynomial. Jensen gives O(T) zeros in a
+    fixed vertical strip, including for finitely many incommensurable roofs.
+  strongest_failure: >-
+    Riemann-von Mangoldt requires Theta(T log T). No fixed determinant, finite
+    product/quotient, zero-free completion, or fixed affine spectral map in
+    the registered class can have the xi divisor.
+  metrics:
+    registered_divisor_growth: O(T)
+    target_divisor_growth: Theta(T log T)
+    zero_error_train: NOT_APPLICABLE_ANALYTIC_REJECTION
+    zero_error_validation: NOT_APPLICABLE_ANALYTIC_REJECTION
+    zero_error_test: NOT_APPLICABLE_ANALYTIC_REJECTION
+    extra_zero_count: NOT_APPLICABLE_ANALYTIC_REJECTION
+    missing_zero_count: NOT_APPLICABLE_ANALYTIC_REJECTION
+    root_count_discrepancy: NOT_APPLICABLE_ANALYTIC_REJECTION
+    cutoff_drift: NOT_APPLICABLE_FIXED_EXACT_OBJECT
+    precision_drift: NOT_APPLICABLE_EXACT_PROOF
+    control_margin: >-
+      proved O(T) disk count versus Theta(T log T) target count; no fitted
+      roots or finite-cutoff margin
+    unit_roof_d4_degree: 8
+    unit_roof_positive_zero_count_T_1000000: 1273238
+    rvm_main_T_1000000: 1747145.508632109
+    tower_abelian_ramanujan_failure_from_level: 2
+    primitive_schrodinger_rational_failure_level: 5
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/unit_roof_density.csv
+    - results/exact_certificates.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The finite determinant class and the registered Heisenberg tower have
+    explicit analytic structure. The primitive Schrodinger block has a proved
+    top eigenvalue limit 4 and its Bass roots tend to 1/3 and 1.
+  strongest_failure: >-
+    Canonical aggregation is conjugacy-to-order coarse, fixed resolution has
+    the wrong divisor count, and the amenable tower returns to branching
+    poles. There is no xi functional equation, Gamma completion, trivial-zero
+    structure, or one convergent infinite determinant.
+  metrics:
+    xi_functional_equation: false
+    gamma_factor: absent
+    riemann_von_mangoldt_counting: false
+    canonical_aggregate_conjugacy_resolution: false
+    fixed_resolved_zero_density_compatible: false
+    heisenberg_tower_uniform_new_gap: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Every primitive Schrodinger block H_m=U_m+U_m^*+V_m+V_m^* is a natural
+    finite-dimensional self-adjoint operator, and the twisted Hashimoto
+    determinants are exact finite operators.
+  strongest_failure: >-
+    The blocks do not define one compact-resolvent Hilbert-Polya operator.
+    Their nontrivial top eigenvalues return to 4, and their Bass poles approach
+    the trivial branching locations. Generic twisted nonbacktracking matrices
+    are nonnormal. No trace-class infinite determinant or prime trace formula
+    is constructed.
+  metrics:
+    natural_finite_self_adjoint_blocks: true
+    one_fixed_infinite_operator: absent
+    compact_resolvent: false
+    trace_class_hp_determinant: absent
+    primitive_schrodinger_limit: 4
+    limiting_bass_roots: [0.3333333333333333, 1.0]
+    route_b_input_complete: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/exact_certificates.json
+
+overall_verdict: ROUTE_A_REJECTED
+research_outcome: PROVED_SCOPED_OBSTRUCTION
+claim_boundary: >-
+  The regular-minus-trivial local order formula is standard graph-covering
+  theory; exponential-sum zero estimates are classical. The project-specific
+  contribution is the Hilbert-Polya obstruction synthesis, the same-bigram
+  non-dihedral Heisenberg witness, and the conductor-resolved Rayleigh
+  certificate used against the frozen uniform-new-sector-gap proposal.
+  Infinite-rank determinants, separately renormalized tower limits,
+  infinitely many roofs, and nonamenable property-tau towers remain outside
+  scope.
+blocking_conditions:
+  - canonical aggregation loses conjugacy-level holonomy
+  - every fixed finite-memory resolved determinant has O(T) divisor growth
+  - natural Heisenberg exact-conductor sectors return to branching poles
+  - no intrinsic logarithmic prime clock
+  - no one fixed discrete self-adjoint operator with xi divisor
+next_smallest_test: >-
+  Switch dynamical form. Audit a compact quaternionic S-arithmetic
+  real-p-adic product flow for a canonical two-place primitive length,
+  nonfactorizing joint zeta, and commuting self-adjoint joint spectrum.
+route_b_invocation_allowed: false
