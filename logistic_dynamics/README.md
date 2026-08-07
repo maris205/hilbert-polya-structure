@@ -37,10 +37,11 @@ not receive a manuscript that would overstate the mathematics.
 |---|---|---|---|
 | [`legacy_annular_residual_001`](projects/legacy_annular_residual_001/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `NOT_TESTABLE` | Not opened; no new theorem edge |
 | [`polar_partition_trace`](projects/polar_partition_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `REVISE` / `NOT_TESTABLE` for analytic trace | Reserved; local endpoint trace theorem still open |
+| [`polar_boundary_trace`](projects/polar_boundary_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `GO_WITH_LIMITATIONS` / `REVISE` | Reserved; local theorem proved, full nuclearity open |
 
 ## Provenance
 
-- HP-Dynamics source checkpoint: `1f236c404e3a549dc639cf4d616cc8dfae846c67`
+- HP-Dynamics source checkpoint: `5642bd7`
 - HP-Dynamics integration commit: `223ba99`
 - Legacy prime-dynamics source checkpoint: `2d01633de0bcf0ecd1310291e2547cff417e13a0` (RH-371)
 - Canonical transport: SSH remote `git@github.com:maris205/hilbert-polya-structure.git`

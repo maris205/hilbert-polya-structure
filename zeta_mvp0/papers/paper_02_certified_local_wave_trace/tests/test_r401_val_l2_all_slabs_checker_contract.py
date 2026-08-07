@@ -203,9 +203,39 @@ def make_formal_context_fixture(
         path.parent.mkdir(parents=True, exist_ok=True)
         if relative == "scripts/check_r401_val_l2_all_slabs_independent.py":
             path.write_bytes(SCRIPT.read_bytes())
+        elif relative == MODULE.MACHINE_FREEZE_RELATIVE:
+            dump_json(
+                path,
+                {
+                    "schema_version": 1,
+                    "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
+                    "status": "FROZEN_FOR_PRODUCTION",
+                    "scientific_licensing_enabled": True,
+                    "machine_requirements": dict(
+                        MODULE.EXPECTED_MACHINE_REQUIREMENTS
+                    ),
+                },
+            )
+        elif relative == MODULE.PREFREEZE_REVIEW_RELATIVE:
+            path.write_text(
+                "# Independent prefreeze review\n\n"
+                f"{MODULE.PREFREEZE_ACCEPT_LINE}\n",
+                encoding="utf-8",
+            )
+        elif relative in {MODULE.S0_REPLAY_RELATIVE, MODULE.S0_ADAPTER_RELATIVE}:
+            path.write_bytes((ROOT / relative).read_bytes())
         else:
             path.write_text(f"synthetic frozen input {index}\n", encoding="utf-8")
         input_hashes[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+
+    for relative in (
+        f"{MODULE.S0_RESULT_RELATIVE}/RELEASE_PROVENANCE.json",
+        f"{MODULE.S0_RESULT_RELATIVE}/manifest.json",
+        f"{MODULE.S0_RESULT_RELATIVE}/POSTCHECK_STATUS.json",
+    ):
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes((ROOT / relative).read_bytes())
 
     binary = root / "validated/capd_r401_local_complement_mp.synthetic"
     binary.write_bytes(b"synthetic evaluator binary\n")
@@ -215,6 +245,7 @@ def make_formal_context_fixture(
         "workers": 24,
         "node_timeout_seconds": 7200,
         "global_scientific_budget": None,
+        "max_inflight_per_tree": 1,
     }
     evaluator = {
         "source_file": source_file,
@@ -241,6 +272,7 @@ def make_formal_context_fixture(
         "matrix": [tree.payload() for tree in MODULE.exact_matrix()],
         "per_tree_limits": limits,
         "scheduler": scheduler,
+        "machine_requirements": dict(MODULE.EXPECTED_MACHINE_REQUIREMENTS),
         "logical_thresholds": dict(MODULE.EXPECTED_LOGICAL_THRESHOLDS),
         "evaluator": evaluator,
         "input_hashes": input_hashes,
@@ -259,6 +291,8 @@ def make_formal_context_fixture(
             "matrix": [tree.payload() for tree in MODULE.exact_matrix()],
             "per_tree_limits": limits,
             "scheduler": scheduler,
+            "machine_requirements": dict(MODULE.EXPECTED_MACHINE_REQUIREMENTS),
+            "machine_freeze_sha256": input_hashes[MODULE.MACHINE_FREEZE_RELATIVE],
             "evaluator": evaluator,
             "logical_thresholds": dict(MODULE.EXPECTED_LOGICAL_THRESHOLDS),
             "input_hashes": input_hashes,
@@ -267,6 +301,7 @@ def make_formal_context_fixture(
             "schema_version": 1,
             "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
             "licensing": "FROZEN_PRODUCTION",
+            "scientific_licensing_enabled": True,
             "producer_state": "FROZEN_GENERATION_INITIALIZED",
             "milestone_status": None,
             "theorem_status": None,
@@ -288,7 +323,100 @@ def test_checker_is_source_independent_of_scheduler_and_producer() -> None:
     }
     assert not any("run_r401_val_l2_all_slabs" in name for name in imported)
     assert not any("producer" in name or "scheduler" in name for name in imported)
-    assert MODULE.CHECKER_MODE == "DRAFT_NON_LICENSING"
+    assert MODULE.CHECKER_MODE == "INDEPENDENT_EXACT_RATIONAL_REPLAY"
+
+
+def test_mandatory_hash_dag_covers_formal_machine_review_and_upstream_l1() -> None:
+    assert set(MODULE.MANDATORY_FROZEN_INPUTS).issuperset(
+        {
+            "scripts/check_r401_val_l2_all_slabs_independent.py",
+            "scripts/run_r401_val_l2_all_slabs.py",
+            "validated/capd_r401_local_complement_mp.cpp",
+            "validated/CAPD_DEPENDENCY.md",
+            "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json",
+            "research/route_a_wave_trace/R401_VAL_L2_A1_PROTOCOL.md",
+            MODULE.MACHINE_FREEZE_RELATIVE,
+            "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md",
+            "results/r401_val_l1_branch/RELEASE_PROVENANCE.json",
+            "results/r401_val_l1_branch/summary.json",
+            "results/r401_val_l1_branch/manifest.json",
+            "results/r401_val_l1_branch/independent_checker.json",
+            "results/r401_val_l1_branch/POSTCHECK_STATUS.json",
+        }
+    )
+
+
+def test_prefreeze_review_gate_accepts_one_exact_declaration(tmp_path: Path) -> None:
+    path = tmp_path / MODULE.PREFREEZE_REVIEW_RELATIVE
+    path.parent.mkdir(parents=True)
+    path.write_text(
+        "# Independent review\n\n"
+        f"{MODULE.PREFREEZE_ACCEPT_LINE}\n\n"
+        "The remainder is explanatory text.\n",
+        encoding="utf-8",
+    )
+    hashes = {MODULE.PREFREEZE_REVIEW_RELATIVE: MODULE.sha256(path)}
+    assert MODULE.validate_prefreeze_review(tmp_path, hashes) == MODULE.sha256(path)
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        "Verdict: PENDING\n",
+        "No verdict declaration is present.\n",
+        "Verdict: ACCEPT_FOR_FREEZE\nVerdict: ACCEPT_FOR_FREEZE\n",
+        "Verdict: ACCEPT_FOR_FREEZE\nVerdict: PENDING\n",
+        "Verdict: ACCEPT_FOR_FREEZE \n",
+        " Verdict: ACCEPT_FOR_FREEZE\n",
+        "verdict: ACCEPT_FOR_FREEZE\n",
+        "Verdict : ACCEPT_FOR_FREEZE\n",
+        "Verdict=ACCEPT_FOR_FREEZE\n",
+        "Verdict - ACCEPT_FOR_FREEZE\n",
+        "Verdict: ACCEPT FOR FREEZE\n",
+        "Verdict: ACCEPT_FOR_FREEZE\nVerdict=PENDING\n",
+        "Verdict: ACCEPT_FOR_FREEZE\n- Verdict: REJECT_FOR_FREEZE\n",
+        "Verdict: ACCEPT_FOR_FREEZE\n> Verdict: PENDING\n",
+        "Verdict: ACCEPT_FOR_FREEZE\n**Verdict:** REJECT_FOR_FREEZE\n",
+        "Verdict: ACCEPT_FOR_FREEZE\n| Verdict | REJECT_FOR_FREEZE |\n",
+        "Verdict: ACCEPT_FOR_FREEZE\nVerdict - REJECT_FOR_FREEZE\n",
+        "Verdict: ACCEPT_FOR_FREEZE\nVerdict：PENDING\n",
+    ],
+)
+def test_prefreeze_review_gate_rejects_pending_missing_duplicate_or_near_match(
+    tmp_path: Path,
+    content: str,
+) -> None:
+    path = tmp_path / MODULE.PREFREEZE_REVIEW_RELATIVE
+    path.parent.mkdir(parents=True)
+    path.write_text(content, encoding="utf-8")
+    hashes = {MODULE.PREFREEZE_REVIEW_RELATIVE: MODULE.sha256(path)}
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="PREFREEZE_REVIEW_NOT_EXACTLY_ACCEPTED",
+    ):
+        MODULE.validate_prefreeze_review(tmp_path, hashes)
+
+
+def test_prefreeze_review_gate_rejects_missing_file(tmp_path: Path) -> None:
+    with pytest.raises(MODULE.PathContractError, match="MISSING_REGULAR_FILE"):
+        MODULE.validate_prefreeze_review(
+            tmp_path,
+            {MODULE.PREFREEZE_REVIEW_RELATIVE: "0" * 64},
+        )
+
+
+def test_prefreeze_review_gate_replays_actual_file_hash(tmp_path: Path) -> None:
+    path = tmp_path / MODULE.PREFREEZE_REVIEW_RELATIVE
+    path.parent.mkdir(parents=True)
+    path.write_text(f"{MODULE.PREFREEZE_ACCEPT_LINE}\n", encoding="utf-8")
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="PREFREEZE_REVIEW_INPUT_HASH_MISMATCH",
+    ):
+        MODULE.validate_prefreeze_review(
+            tmp_path,
+            {MODULE.PREFREEZE_REVIEW_RELATIVE: "0" * 64},
+        )
 
 
 def test_strict_json_rejects_duplicate_keys_and_nonfinite_values() -> None:
@@ -296,11 +424,22 @@ def test_strict_json_rejects_duplicate_keys_and_nonfinite_values() -> None:
         MODULE.strict_json_loads('{"tree": 1, "tree": 2}')
     with pytest.raises(MODULE.StrictJSONError, match="NONFINITE_JSON_CONSTANT"):
         MODULE.strict_json_loads('{"x": NaN}')
+    with pytest.raises(MODULE.StrictJSONError, match="NONFINITE_JSON_NUMBER"):
+        MODULE.strict_json_loads('{"x": 1e400}')
 
 
 @pytest.mark.parametrize(
     "unsafe",
-    ["../escape.json", "/absolute.json", "a/../../escape", "a\\b.json", ".hidden/x"],
+    [
+        "../escape.json",
+        "/absolute.json",
+        "a/../../escape",
+        "a\\b.json",
+        ".hidden/x",
+        "./a.json",
+        "a//b.json",
+        "a/",
+    ],
 )
 def test_path_traversal_and_noncanonical_paths_are_hard_rejected(unsafe: str) -> None:
     with pytest.raises(MODULE.PathContractError):
@@ -313,7 +452,9 @@ def test_formal_gate_rejects_missing_freeze_before_any_promotion(tmp_path: Path)
         project_root=tmp_path,
         freeze_path=tmp_path / "missing-freeze.json",
     )
-    assert payload["checker_status"] == "REJECT_DRAFT_NON_LICENSING"
+    assert payload["checker_status"] == "REJECT_FORMAL_PRECONDITION"
+    assert type(payload["schema_version"]) is int
+    assert payload["schema_version"] == MODULE.SCHEMA_VERSION
     assert payload["milestone_status"] is None
     assert payload["theorem_status"] is None
     assert payload["final_status"] is None
@@ -322,19 +463,108 @@ def test_formal_gate_rejects_missing_freeze_before_any_promotion(tmp_path: Path)
     assert payload["provenance_bindings"] is None
 
 
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [("precision_bits", 128.0), ("precision_bits", True), ("slab_id", 0)],
+)
+def test_exact_matrix_rejects_coercible_identity_types(
+    field: str,
+    value: object,
+) -> None:
+    matrix = [tree.payload() for tree in MODULE.exact_matrix()]
+    matrix[0][field] = value
+    with pytest.raises(MODULE.MatrixContractError, match="MALFORMED_FREEZE_MATRIX_ENTRY"):
+        MODULE._matrix_payload(matrix, "FREEZE")
+
+
 def test_draft_or_incomplete_freeze_cannot_unlock_formal_gate(tmp_path: Path) -> None:
     freeze = tmp_path / "freeze.json"
     dump_json(
         freeze,
         {
             "schema_version": 1,
-            "protocol_id": MODULE.DRAFT_PROTOCOL_ID,
+            "protocol_id": "R401-VAL-L2-A1-DRAFT",
             "status": "DRAFT",
             "scientific_licensing_enabled": False,
         },
     )
     with pytest.raises(MODULE.CheckerContractError, match="FORMAL_FREEZE"):
         MODULE.load_formal_context(tmp_path / "archive", freeze)
+
+
+def test_checker_mandatory_frozen_input_tuple_is_exact_complete_17_chain() -> None:
+    expected = (
+        "scripts/check_r401_val_l2_all_slabs_independent.py",
+        "scripts/run_r401_val_l2_all_slabs.py",
+        "validated/capd_r401_local_complement_mp.cpp",
+        "validated/CAPD_DEPENDENCY.md",
+        "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json",
+        "research/route_a_wave_trace/R401_VAL_L2_A1_PROTOCOL.md",
+        "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json",
+        "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md",
+        "research/route_a_wave_trace/R401_VAL_L2_A1_S0_COMPATIBILITY_REPLAY.json",
+        "scripts/replay_r401_val_l2_s0_through_a1_checker.py",
+        "scripts/build_r401_val_l2_a1_release_provenance.py",
+        "research/route_a_wave_trace/R401_VAL_L2_A1_RELEASE_PROVENANCE_CONTRACT.md",
+        "results/r401_val_l1_branch/RELEASE_PROVENANCE.json",
+        "results/r401_val_l1_branch/summary.json",
+        "results/r401_val_l1_branch/manifest.json",
+        "results/r401_val_l1_branch/independent_checker.json",
+        "results/r401_val_l1_branch/POSTCHECK_STATUS.json",
+    )
+    assert MODULE.MANDATORY_FROZEN_INPUTS == expected
+
+
+@pytest.mark.parametrize("missing", MODULE.MANDATORY_FROZEN_INPUTS)
+def test_checker_rejects_each_missing_mandatory_input_hash(
+    tmp_path: Path,
+    missing: str,
+) -> None:
+    output, freeze, _binary, payload, _evaluator = make_formal_context_fixture(
+        tmp_path
+    )
+    del payload["input_hashes"][missing]
+    dump_json(freeze, payload)
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="MISSING_MANDATORY_INPUT_HASHES",
+    ):
+        MODULE.load_formal_context(output, freeze, tmp_path)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ("checker_hash", "manifest_checks", "status_counts", "tree_counts", "s0_hash"),
+)
+def test_checker_rejects_forged_public_s0_replay_semantics(
+    tmp_path: Path,
+    mutation: str,
+) -> None:
+    output, freeze, _binary, payload, _evaluator = make_formal_context_fixture(
+        tmp_path
+    )
+    replay_path = tmp_path / MODULE.S0_REPLAY_RELATIVE
+    replay = MODULE.strict_json_load(replay_path)
+    if mutation == "checker_hash":
+        replay["checker_source_sha256"] = "0" * 64
+    elif mutation == "manifest_checks":
+        replay["manifest_hash_checks"] = 1
+    elif mutation == "status_counts":
+        replay["status_counts"] = {"UNKNOWN": 3016}
+    elif mutation == "tree_counts":
+        replay["tree_counts"][0]["node_count"] = 485
+    elif mutation == "s0_hash":
+        replay["s0_release_provenance_sha256"] = "0" * 64
+    else:  # pragma: no cover - closed parametrization
+        raise AssertionError(mutation)
+    dump_json(replay_path, replay)
+    payload["input_hashes"][MODULE.S0_REPLAY_RELATIVE] = MODULE.sha256(replay_path)
+    dump_json(freeze, payload)
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="PUBLIC_S0_COMPATIBILITY_REPLAY",
+    ):
+        MODULE.load_formal_context(output, freeze, tmp_path)
 
 
 def test_formal_freeze_still_hard_rejects_missing_run_config(tmp_path: Path) -> None:
@@ -356,7 +586,106 @@ def test_formal_context_binds_binary_capd_scheduler_timeout_and_thresholds(
     assert context.evaluator_capd_commit == MODULE.EXPECTED_CAPD_COMMIT
     assert context.scheduler["workers"] == 24
     assert context.scheduler["node_timeout_seconds"] == 7200
+    assert context.scheduler["max_inflight_per_tree"] == 1
     assert context.logical_thresholds == MODULE.EXPECTED_LOGICAL_THRESHOLDS
+    assert context.machine_requirements == MODULE.EXPECTED_MACHINE_REQUIREMENTS
+    assert context.machine_freeze_sha256 == MODULE.sha256(
+        tmp_path / MODULE.MACHINE_FREEZE_RELATIVE
+    )
+    assert context.prefreeze_review_sha256 == MODULE.sha256(
+        tmp_path / MODULE.PREFREEZE_REVIEW_RELATIVE
+    )
+
+
+@pytest.mark.parametrize(
+    ("key", "value"),
+    [
+        ("cpu_logical", 31),
+        ("memory_limit_bytes", 64_424_509_439),
+        ("min_launch_free_bytes", 107_374_182_399),
+        ("operational_pause_below_free_bytes", 107_374_182_400),
+    ],
+)
+def test_machine_freeze_requires_exact_resource_contract(
+    tmp_path: Path,
+    key: str,
+    value: int,
+) -> None:
+    _output, _freeze, _binary, freeze_payload, _evaluator = (
+        make_formal_context_fixture(tmp_path)
+    )
+    path = tmp_path / MODULE.MACHINE_FREEZE_RELATIVE
+    machine = MODULE.strict_json_load(path)
+    machine["machine_requirements"][key] = value
+    dump_json(path, machine)
+    hashes = dict(freeze_payload["input_hashes"])
+    hashes[MODULE.MACHINE_FREEZE_RELATIVE] = MODULE.sha256(path)
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="MACHINE_FREEZE_NAMESPACE_OR_RESOURCE_MISMATCH",
+    ):
+        MODULE.validate_machine_freeze(
+            tmp_path,
+            hashes,
+            MODULE.EXPECTED_MACHINE_REQUIREMENTS,
+        )
+
+
+def test_machine_freeze_hash_is_replayed_from_actual_bytes(tmp_path: Path) -> None:
+    _output, _freeze, _binary, freeze_payload, _evaluator = (
+        make_formal_context_fixture(tmp_path)
+    )
+    path = tmp_path / MODULE.MACHINE_FREEZE_RELATIVE
+    path.write_bytes(path.read_bytes() + b"\n")
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="MACHINE_FREEZE_INPUT_HASH_MISMATCH",
+    ):
+        MODULE.validate_machine_freeze(
+            tmp_path,
+            freeze_payload["input_hashes"],
+            MODULE.EXPECTED_MACHINE_REQUIREMENTS,
+        )
+
+
+def test_freeze_rejects_more_than_one_inflight_node_per_tree(tmp_path: Path) -> None:
+    output, freeze, _binary, freeze_payload, _evaluator = (
+        make_formal_context_fixture(tmp_path)
+    )
+    freeze_payload["scheduler"]["max_inflight_per_tree"] = 2
+    dump_json(freeze, freeze_payload)
+    with pytest.raises(
+        MODULE.CheckerContractError,
+        match="INVALID_FROZEN_SCHEDULER_CONTRACT",
+    ):
+        MODULE.load_formal_context(output, freeze, tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("machine_requirements", {}, "MACHINE_REQUIREMENTS_DIFFER"),
+        ("machine_freeze_sha256", "0" * 64, "MACHINE_FREEZE_HASH_MISMATCH"),
+    ],
+)
+def test_run_config_directly_binds_machine_contract(
+    tmp_path: Path,
+    field: str,
+    value: object,
+    message: str,
+) -> None:
+    output, freeze, _binary, _freeze_payload, _evaluator = (
+        make_formal_context_fixture(tmp_path)
+    )
+    path = output / "run_config.json"
+    config = MODULE.strict_json_load(path)
+    config["binding"][field] = value
+    config["binding_sha256"] = MODULE.sha256_bytes(
+        MODULE.canonical_json_bytes(config["binding"])
+    )
+    dump_json(path, config)
+    with pytest.raises(MODULE.CheckerContractError, match=message):
+        MODULE.load_formal_context(output, freeze, tmp_path)
 
 
 @pytest.mark.parametrize(
@@ -602,6 +931,14 @@ def make_shell_tree(*, split_first: bool = False) -> dict[str, object]:
     nodes.sort(key=lambda node: (node["task"]["depth"], node["task"]["node_id"]))
     terminal_count = 9 if split_first else 8
     return {
+        "schema_version": 1,
+        "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": MODULE.EXPECTED_PRODUCER_STATES["tree"],
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
         "tree": {"precision_bits": 128, "slab_id": "S000"},
         "epsilon": ["0", "0.0021"],
         "domain": {
@@ -641,7 +978,63 @@ def test_tree_producer_cannot_preassign_milestone() -> None:
     tree = MODULE.TreeKey(128, "S000")
     payload = make_shell_tree()
     payload["milestone_status"] = "PASS_LOCAL_COMPLEMENT_ALL_SLABS"
-    with pytest.raises(MODULE.ProofObjectError, match="PRODUCER_TREE_ASSIGNED"):
+    with pytest.raises(MODULE.ProofObjectError, match="PRODUCER_TREE.*ASSIGNED"):
+        MODULE.verify_tree_structure(
+            tree,
+            payload,
+            synthetic_plan_record(),
+            max_depth=40,
+            max_nodes=20_000,
+        )
+
+
+def test_tree_terminal_counts_reject_integral_float_alias() -> None:
+    tree = MODULE.TreeKey(128, "S000")
+    payload = make_shell_tree()
+    payload["terminal_counts"]["RETURN_EXCLUDED"] = 8.0
+    with pytest.raises(MODULE.ProofObjectError, match="TERMINAL_COUNT_MISMATCH"):
+        MODULE.verify_tree_structure(
+            tree,
+            payload,
+            synthetic_plan_record(),
+            max_depth=40,
+            max_nodes=20_000,
+        )
+
+
+@pytest.mark.parametrize(
+    ("field", "value", "message"),
+    [
+        ("protocol_id", "R401-VAL-L2-A1-DRAFT", "NAMESPACE_OR_LICENSE"),
+        ("licensing", "DRAFT_NONE", "NAMESPACE_OR_LICENSE"),
+        ("scientific_licensing_enabled", False, "NAMESPACE_OR_LICENSE"),
+        ("producer_state", "DRAFT_TREE_COMMITTED", "PRODUCER_STATE"),
+        ("theorem_status", "PASS_LOCAL_COMPLEMENT_ALL_SLABS", "ASSIGNED_SCIENTIFIC"),
+    ],
+)
+def test_formal_tree_namespace_license_state_and_authority_are_closed(
+    field: str,
+    value: object,
+    message: str,
+) -> None:
+    tree = MODULE.TreeKey(128, "S000")
+    payload = make_shell_tree()
+    payload[field] = value
+    with pytest.raises(MODULE.ProofObjectError, match=message):
+        MODULE.verify_tree_structure(
+            tree,
+            payload,
+            synthetic_plan_record(),
+            max_depth=40,
+            max_nodes=20_000,
+        )
+
+
+def test_formal_tree_must_explicitly_carry_all_three_null_statuses() -> None:
+    tree = MODULE.TreeKey(128, "S000")
+    payload = make_shell_tree()
+    del payload["final_status"]
+    with pytest.raises(MODULE.ProofObjectError, match="ASSIGNED_SCIENTIFIC"):
         MODULE.verify_tree_structure(
             tree,
             payload,
@@ -674,8 +1067,12 @@ def synthetic_context() -> object:
             "workers": 24,
             "node_timeout_seconds": 7200,
             "global_scientific_budget": None,
+            "max_inflight_per_tree": 1,
         },
         logical_thresholds=dict(MODULE.EXPECTED_LOGICAL_THRESHOLDS),
+        machine_requirements=dict(MODULE.EXPECTED_MACHINE_REQUIREMENTS),
+        machine_freeze_sha256="d" * 64,
+        prefreeze_review_sha256="e" * 64,
     )
 
 
@@ -703,6 +1100,7 @@ def test_node_record_requires_exact_argv_proof_object_and_hash(tmp_path: Path) -
         "schema_version": 1,
         "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
         "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -765,6 +1163,11 @@ def test_tree_record_manifest_argv_binding_is_three_way_and_fail_closed(
     tree_path = MODULE.expected_tree_path(tmp_path, tree)
     dump_json(tree_path, tree_payload)
     manifest = {
+        "schema_version": 1,
+        "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": MODULE.EXPECTED_PRODUCER_STATES["tree_manifest"],
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -788,6 +1191,29 @@ def test_tree_record_manifest_argv_binding_is_three_way_and_fail_closed(
         {"C0L": node},
         synthetic_context(),
     )
+    manifest["producer_state"] = "DRAFT_TREE_COMMITTED"
+    with pytest.raises(MODULE.ProofObjectError, match="PRODUCER_STATE_MISMATCH"):
+        MODULE.verify_tree_manifest(
+            tmp_path,
+            tree,
+            tree_payload,
+            manifest,
+            {"C0L": node},
+            synthetic_context(),
+        )
+    manifest["producer_state"] = MODULE.EXPECTED_PRODUCER_STATES["tree_manifest"]
+    saved_node_files = manifest["node_files"]
+    manifest["node_files"] = {}
+    with pytest.raises(MODULE.ProofObjectError, match="NODE_SET_MISMATCH"):
+        MODULE.verify_tree_manifest(
+            tmp_path,
+            tree,
+            tree_payload,
+            manifest,
+            {"C0L": node},
+            synthetic_context(),
+        )
+    manifest["node_files"] = saved_node_files
     manifest["node_files"]["C0L"]["argv_sha256"] = "0" * 64
     with pytest.raises(MODULE.ProofObjectError, match="ARGV_BINDING_MISMATCH"):
         MODULE.verify_tree_manifest(
@@ -818,6 +1244,42 @@ def test_raw_matrix_rejects_extra_node_summary_and_symlink(tmp_path: Path) -> No
         MODULE.validate_raw_file_set(tmp_path, {tree: {"C0L"}})
 
 
+def test_raw_matrix_ignores_only_canonical_interrupted_node_staging(
+    tmp_path: Path,
+) -> None:
+    tree = MODULE.TreeKey(128, "S000")
+    paths = MODULE.expected_raw_paths(tmp_path, tree, "C0L")
+    for key, path in paths.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("{}\n" if key in {"record", "telemetry"} else "", encoding="utf-8")
+
+    interrupted = tmp_path / "raw/128/S000/.C0L0.tmp-1234-deadbeef"
+    interrupted.mkdir()
+    (interrupted / "record.json").write_text('{"partial":true}\n', encoding="utf-8")
+    (interrupted / "stdout.txt").write_text("partial", encoding="utf-8")
+    MODULE.validate_raw_file_set(tmp_path, {tree: {"C0L"}})
+
+    malformed = tmp_path / "raw/128/S000/.not-a-node.tmp-deadbeef"
+    malformed.mkdir()
+    with pytest.raises(MODULE.PathContractError, match="HIDDEN_AUTHORITATIVE_PATH"):
+        MODULE.validate_raw_file_set(tmp_path, {tree: {"C0L"}})
+
+
+def test_exact_matrix_scan_ignores_only_canonical_interrupted_file_staging(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "trees"
+    staging = root / "128/.S000.json.tmp-1234-deadbeef"
+    staging.parent.mkdir(parents=True)
+    staging.write_text("partial", encoding="utf-8")
+    MODULE.scan_exact_json_paths(root, ())
+
+    malformed = root / "128/.S000.copy.json.tmp-1234-deadbeef"
+    malformed.write_text("partial", encoding="utf-8")
+    with pytest.raises(MODULE.PathContractError, match="HIDDEN_AUTHORITATIVE_PATH"):
+        MODULE.scan_exact_json_paths(root, ())
+
+
 def test_aggregate_manifest_hash_dag_binds_exact_102_entries(tmp_path: Path) -> None:
     matrix = MODULE.exact_matrix()
     entries: list[dict[str, object]] = []
@@ -837,6 +1299,8 @@ def test_aggregate_manifest_hash_dag_binds_exact_102_entries(tmp_path: Path) -> 
         "schema_version": 1,
         "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
         "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": MODULE.EXPECTED_PRODUCER_STATES["aggregate_summary"],
         "run_config_sha256": "a" * 64,
         "milestone_status": None,
         "theorem_status": None,
@@ -850,6 +1314,8 @@ def test_aggregate_manifest_hash_dag_binds_exact_102_entries(tmp_path: Path) -> 
         "schema_version": 1,
         "protocol_id": MODULE.FORMAL_PROTOCOL_ID,
         "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": MODULE.EXPECTED_PRODUCER_STATES["aggregate_manifest"],
         "run_config_sha256": "a" * 64,
         "milestone_status": None,
         "theorem_status": None,
@@ -865,6 +1331,24 @@ def test_aggregate_manifest_hash_dag_binds_exact_102_entries(tmp_path: Path) -> 
         manifests,
         synthetic_context(),
     )
+    summary["tree_count"] = 102.0
+    dump_json(summary_path, summary)
+    aggregate["aggregate_summary_sha256"] = MODULE.sha256(summary_path)
+    dump_json(tmp_path / "aggregate_manifest.json", aggregate)
+    with pytest.raises(
+        MODULE.MatrixContractError,
+        match="AGGREGATE_SUMMARY_TREE_COUNT_MISMATCH",
+    ):
+        MODULE.verify_aggregate_hash_dag(
+            tmp_path,
+            matrix,
+            manifests,
+            synthetic_context(),
+        )
+    summary["tree_count"] = 102
+    dump_json(summary_path, summary)
+    aggregate["aggregate_summary_sha256"] = MODULE.sha256(summary_path)
+    dump_json(tmp_path / "aggregate_manifest.json", aggregate)
     dump_json(tmp_path / "run_config.json", {"synthetic": True})
     bindings = MODULE.build_archive_provenance_bindings(
         tmp_path,
@@ -916,3 +1400,67 @@ def test_authoritative_checker_outputs_are_write_once_per_generation(
     with pytest.raises(MODULE.PathContractError, match="DIFFERENT_GENERATION"):
         MODULE.write_once_or_verify_json(target, changed)
     assert target.read_bytes() == original
+
+
+def test_write_once_publication_cannot_overwrite_a_racing_generation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "POSTCHECK_STATUS.json"
+    requested = {"archive_generation_sha256": "a" * 64}
+    competing = {"archive_generation_sha256": "b" * 64}
+
+    def racing_link(
+        _source: str,
+        _destination: str,
+        *args: object,
+        **kwargs: object,
+    ) -> None:
+        target.write_bytes(MODULE.canonical_json_bytes(competing))
+        raise FileExistsError
+
+    monkeypatch.setattr(MODULE.os, "link", racing_link)
+    with pytest.raises(MODULE.PathContractError, match="DIFFERENT_GENERATION"):
+        MODULE.write_once_or_verify_json(target, requested)
+    assert target.read_bytes() == MODULE.canonical_json_bytes(competing)
+    assert not list(tmp_path.glob(".*.seal-*"))
+
+
+def test_write_once_rejects_preexisting_hardlink_alias(tmp_path: Path) -> None:
+    target = tmp_path / "independent_checker.json"
+    payload = {"archive_generation_sha256": "a" * 64}
+    MODULE.write_once_or_verify_json(target, payload)
+    alias = tmp_path / "checker-alias.json"
+    alias.hardlink_to(target)
+    with pytest.raises(MODULE.PathContractError, match="HARDLINK_ALIAS"):
+        MODULE.write_once_or_verify_json(target, payload)
+
+
+def test_write_once_links_open_inode_not_replaced_temp_name(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "independent_checker.json"
+    requested = {"archive_generation_sha256": "a" * 64}
+    real_link = MODULE.os.link
+    attacked = False
+
+    def racing_link(
+        source: str,
+        destination: str,
+        *args: object,
+        **kwargs: object,
+    ) -> None:
+        nonlocal attacked
+        temporary = list(tmp_path.glob(".independent_checker.json.seal-*"))
+        assert len(temporary) == 1
+        temporary[0].unlink()
+        temporary[0].write_bytes(b"ATTACKER BYTES")
+        attacked = True
+        real_link(source, destination, *args, **kwargs)
+
+    monkeypatch.setattr(MODULE.os, "link", racing_link)
+    with pytest.raises(MODULE.PathContractError, match="PUBLICATION_LINK_FAILURE"):
+        MODULE.write_once_or_verify_json(target, requested)
+    assert attacked
+    assert not target.exists()
