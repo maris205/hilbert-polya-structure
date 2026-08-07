@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Exact certificates for the HCS-C16 quaternionic S-arithmetic clock.
 
-The arithmetic is exact in Q(sqrt(3)).  Floating point is used only for
-Archimedean logarithms and the lattice-point illustrations.  No zero or
-prime data are read by this program.
+The arithmetic is exact in Q(sqrt(3)).  Archimedean logarithms and all
+boundary decisions use high-precision Decimal arithmetic; binary floats are
+used only when serializing compact diagnostics.  No zero or prime data are
+read by this program.
 """
 
 from __future__ import annotations
@@ -14,12 +15,66 @@ import hashlib
 import json
 import math
 from dataclasses import dataclass
+from decimal import Decimal, ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_EVEN, localcontext
 from fractions import Fraction
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable, TypeVar
 
 
 P = 13
+DECIMAL_PRECISION = 80
+T = TypeVar("T")
+
+
+def at_decimal_precision(function: Callable[..., T]) -> Callable[..., T]:
+    """Run a numeric helper under the producer's private Decimal context."""
+    def wrapped(*args: object, **kwargs: object) -> T:
+        with localcontext() as context:
+            context.prec = DECIMAL_PRECISION
+            return function(*args, **kwargs)
+
+    return wrapped
+
+
+def decimal_pi(precision: int = DECIMAL_PRECISION) -> Decimal:
+    """Compute pi with Gauss--Legendre iteration at the requested precision."""
+    with localcontext() as context:
+        context.prec = precision + 12
+        one = Decimal(1)
+        a = one
+        b = one / Decimal(2).sqrt()
+        t = Decimal(1) / 4
+        multiplier = one
+        for _ in range(max(6, math.ceil(math.log2(precision)) + 1)):
+            next_a = (a + b) / 2
+            b = (a * b).sqrt()
+            t -= multiplier * (a - next_a) ** 2
+            a = next_a
+            multiplier *= 2
+        value = (a + b) ** 2 / (4 * t)
+        context.prec = precision
+        return +value
+
+
+def decimal_clock_constants(
+    precision: int = DECIMAL_PRECISION,
+) -> tuple[Decimal, Decimal, Decimal]:
+    """Return A, C, and log(13) using deterministic Decimal arithmetic."""
+    with localcontext() as context:
+        context.prec = precision
+        root3 = Decimal(3).sqrt()
+        real_unit = Decimal(2) * (Decimal(2) + root3).ln()
+        split_unit = ((Decimal(4) + root3) / (Decimal(4) - root3)).ln()
+        log_p = Decimal(P).ln()
+        return +real_unit, +split_unit, +log_p
+
+
+def decimal_ceil(value: Decimal) -> int:
+    return int(value.to_integral_value(rounding=ROUND_CEILING))
+
+
+def decimal_floor(value: Decimal) -> int:
+    return int(value.to_integral_value(rounding=ROUND_FLOOR))
 
 
 def qstr(value: Fraction) -> str:
@@ -138,10 +193,8 @@ PI = Quad3(4, 1)
 
 
 def clock_constants() -> tuple[float, float]:
-    root3 = math.sqrt(3.0)
-    real_unit = 2.0 * math.log(2.0 + root3)
-    split_unit = math.log((4.0 + root3) / (4.0 - root3))
-    return real_unit, split_unit
+    real_unit, split_unit, _ = decimal_clock_constants()
+    return float(real_unit), float(split_unit)
 
 
 def element(m: int, n: int) -> Quad3:
@@ -149,8 +202,11 @@ def element(m: int, n: int) -> Quad3:
 
 
 def joint_clock(m: int, n: int) -> tuple[float, int]:
-    real_unit, split_unit = clock_constants()
-    return m * real_unit + n * split_unit, n
+    with localcontext() as context:
+        context.prec = DECIMAL_PRECISION
+        real_unit, split_unit, _ = decimal_clock_constants()
+        signed = Decimal(m) * real_unit + Decimal(n) * split_unit
+        return float(signed), n
 
 
 def element_certificate(m: int, n: int) -> dict[str, object]:
@@ -195,94 +251,153 @@ def canonical_primitive(m: int, n: int) -> bool:
     return n > 0 or (n == 0 and m > 0)
 
 
+@at_decimal_precision
 def record_near_wall(limit: int) -> list[dict[str, object]]:
     """Primitive record approximants to the real Weyl wall."""
-    real_unit, split_unit = clock_constants()
-    best = math.inf
+    if limit < 1:
+        raise ValueError("near-wall limit must be positive")
+    real_unit, split_unit, log_p = decimal_clock_constants()
+    best = Decimal("Infinity")
     records: list[dict[str, object]] = []
     for n in range(1, limit + 1):
-        m = round(-n * split_unit / real_unit)
+        m = int(
+            (-Decimal(n) * split_unit / real_unit).to_integral_value(
+                rounding=ROUND_HALF_EVEN
+            )
+        )
         if math.gcd(abs(m), n) != 1:
             continue
-        signed = m * real_unit + n * split_unit
+        signed = Decimal(m) * real_unit + Decimal(n) * split_unit
         length = abs(signed)
         if length < best:
             best = length
-            unweighted_log_factor = -math.log(-math.expm1(-length))
-            height = length + math.log(P) * n
+            unweighted_log_factor = -(Decimal(1) - (-length).exp()).ln()
+            height = length + log_p * n
             records.append(
                 {
                     "m": m,
                     "n": n,
-                    "real_signed": signed,
-                    "real_length": length,
+                    "real_signed": float(signed),
+                    "real_length": float(length),
                     "tree_length": n,
-                    "height": height,
-                    "unweighted_log_local_factor_s1": unweighted_log_factor,
-                    "height_weight_log10_s1": -height / math.log(10.0),
+                    "height": float(height),
+                    "unweighted_log_local_factor_s1": float(unweighted_log_factor),
+                    "height_weight_log10_s1": float(-height / Decimal(10).ln()),
                 }
             )
     return records
 
 
-def primitive_box_count(real_bound: int, tree_bound: int) -> int:
-    """Count primitive directions modulo +/- in a joint length rectangle."""
-    real_unit, split_unit = clock_constants()
+@at_decimal_precision
+def primitive_box_count_details(
+    real_bound: int, tree_bound: int
+) -> tuple[int, Decimal]:
+    """Count a box and return a conservative Decimal cutoff margin."""
+    if real_bound < 0 or tree_bound < 0:
+        raise ValueError("box bounds must be nonnegative")
+    real_unit, split_unit, _ = decimal_clock_constants()
+    bound = Decimal(real_bound)
     answer = 0
+    minimum_gap = Decimal("Infinity")
     for n in range(tree_bound + 1):
-        lower = math.ceil((-real_bound - split_unit * n) / real_unit - 1e-12)
-        upper = math.floor((real_bound - split_unit * n) / real_unit + 1e-12)
+        shift = split_unit * n
+        lower_value = (-bound - shift) / real_unit
+        upper_value = (bound - shift) / real_unit
+        lower = decimal_ceil(lower_value)
+        upper = decimal_floor(upper_value)
         for m in range(lower, upper + 1):
             if canonical_primitive(m, n):
                 answer += 1
-    return answer
+        # Include nonprimitive lattice points to make the reported separation
+        # a conservative lower bound for every counted primitive direction.
+        candidates = set(range(lower - 2, lower + 3)) | set(
+            range(upper - 2, upper + 3)
+        )
+        for m in candidates:
+            if m == 0 and n == 0:
+                continue
+            gap = abs(abs(Decimal(m) * real_unit + shift) - bound)
+            minimum_gap = min(minimum_gap, gap)
+    return answer, minimum_gap
 
 
+def primitive_box_count(real_bound: int, tree_bound: int) -> int:
+    """Count primitive directions modulo +/- in a joint length rectangle."""
+    return primitive_box_count_details(real_bound, tree_bound)[0]
+
+
+@at_decimal_precision
 def box_count_rows(bounds: Iterable[int]) -> list[dict[str, object]]:
-    real_unit, _ = clock_constants()
+    real_unit, _, _ = decimal_clock_constants()
+    pi = decimal_pi()
     rows = []
     for bound in bounds:
-        observed = primitive_box_count(bound, bound)
-        predicted = 12.0 * bound * bound / (math.pi**2 * real_unit)
+        observed, minimum_gap = primitive_box_count_details(bound, bound)
+        predicted = Decimal(12) * bound * bound / (pi**2 * real_unit)
         rows.append(
             {
                 "real_bound": bound,
                 "tree_bound": bound,
                 "count_mod_inverse": observed,
-                "primitive_lattice_prediction": predicted,
-                "observed_over_prediction": observed / predicted,
+                "primitive_lattice_prediction": float(predicted),
+                "observed_over_prediction": float(Decimal(observed) / predicted),
+                "minimum_boundary_gap": float(minimum_gap),
+                "decimal_precision_digits": DECIMAL_PRECISION,
             }
         )
     return rows
 
 
-def primitive_height_count(height_bound: int) -> int:
-    """Count primitive directions for H=ell_infinity+log(13)*ell_13."""
-    real_unit, split_unit = clock_constants()
-    log_p = math.log(P)
+@at_decimal_precision
+def primitive_height_count_details(height_bound: int) -> tuple[int, Decimal]:
+    """Count a height ball and return a conservative Decimal cutoff margin."""
+    if height_bound < 0:
+        raise ValueError("height bound must be nonnegative")
+    real_unit, split_unit, log_p = decimal_clock_constants()
+    bound = Decimal(height_bound)
     answer = 0
-    for n in range(math.floor(height_bound / log_p) + 1):
-        remaining = height_bound - log_p * n
-        lower = math.ceil((-remaining - split_unit * n) / real_unit - 1e-12)
-        upper = math.floor((remaining - split_unit * n) / real_unit + 1e-12)
+    minimum_gap = Decimal("Infinity")
+    max_n = decimal_floor(bound / log_p)
+    for n in range(max_n + 1):
+        remaining = bound - log_p * n
+        shift = split_unit * n
+        lower = decimal_ceil((-remaining - shift) / real_unit)
+        upper = decimal_floor((remaining - shift) / real_unit)
         for m in range(lower, upper + 1):
             if canonical_primitive(m, n):
                 answer += 1
-    return answer
+        candidates = set(range(lower - 2, lower + 3)) | set(
+            range(upper - 2, upper + 3)
+        )
+        for m in candidates:
+            if m == 0 and n == 0:
+                continue
+            value = abs(Decimal(m) * real_unit + shift) + log_p * n
+            minimum_gap = min(minimum_gap, abs(value - bound))
+    return answer, minimum_gap
 
 
+def primitive_height_count(height_bound: int) -> int:
+    """Count primitive directions for H=ell_infinity+log(13)*ell_13."""
+    return primitive_height_count_details(height_bound)[0]
+
+
+@at_decimal_precision
 def height_count_rows(bounds: Iterable[int]) -> list[dict[str, object]]:
-    real_unit, _ = clock_constants()
+    real_unit, _, log_p = decimal_clock_constants()
+    pi = decimal_pi()
     rows = []
     for bound in bounds:
-        observed = primitive_height_count(bound)
-        predicted = 6.0 * bound * bound / (math.pi**2 * real_unit * math.log(P))
+        observed, minimum_gap = primitive_height_count_details(bound)
+        predicted = Decimal(6) * bound * bound / (pi**2 * real_unit * log_p)
         rows.append(
             {
                 "height_bound": bound,
                 "count_mod_inverse": observed,
-                "primitive_height_prediction": predicted,
-                "observed_over_prediction": observed / predicted,
+                "primitive_height_prediction": float(predicted),
+                "observed_over_prediction": float(Decimal(observed) / predicted),
+                "minimum_boundary_gap": float(minimum_gap),
+                "decimal_precision_digits": DECIMAL_PRECISION,
             }
         )
     return rows
@@ -292,7 +407,7 @@ def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
     if not rows:
         raise ValueError("cannot write an empty table")
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -363,7 +478,10 @@ def produce(output: Path, near_wall_limit: int) -> None:
             "prime_table_used": False,
             "zero_table_used": False,
             "fitted_parameters": [],
-            "floating_point_scope": "real logarithms and illustrative counts only",
+            "floating_point_scope": "serialization of Decimal logarithms and count diagnostics only",
+            "decimal_precision_digits": DECIMAL_PRECISION,
+            "boundary_method": "Decimal comparisons without epsilon; positive cutoff margins recorded",
+            "near_wall_limit": near_wall_limit,
         },
     }
 
