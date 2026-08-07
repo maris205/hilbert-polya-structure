@@ -288,3 +288,20 @@ The formal corrected evaluation is
 `../s_integer_solenoid_chronology_zeta/evaluations/route_a/hcs_c14/20260806T130222Z.yaml`.
 The compiled paper and exact audit are under
 `../s_integer_solenoid_chronology_zeta/`.
+
+## HCS-C15 append-only decision record
+
+| Candidate | Evidence state | Formal tuple | Overall | Route B |
+|---|---|---|---|---|
+| HCS-C15 | exact nonabelian chronology witness, fixed-roof zero-density theorem, and conductor-resolved Heisenberg branch-return certificate | (A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT) | ROUTE_A_REJECTED; PROVED_SCOPED_OBSTRUCTION | not authorized |
+
+HCS-C15 tests the regular-minus-trivial Artin--Ihara proposal without
+averaging chronological voltage products. Canonical aggregation coarsens a
+primitive holonomy to its element order; fixed finite-memory representation
+resolution has only \(O(T)\) divisor growth; and the registered amenable
+Heisenberg tower has exact-conductor nonabelian blocks whose top eigenvalues
+tend to four. The last theorem rules out the frozen uniform
+Ramanujan/new-sector-gap rescue, not every renormalized tower determinant.
+
+The formal evaluation and complete paper package are under
+../nonabelian_voltage_zeta_obstruction/.

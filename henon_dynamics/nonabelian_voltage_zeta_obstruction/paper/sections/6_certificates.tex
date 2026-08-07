@@ -1,0 +1,93 @@
+\section{Exact computational certificates}
+\label{sec:certificates}
+
+The computations test conventions and finite identities; none is used to
+infer an asymptotic theorem. All group products and determinants are exact.
+Floating-point numbers appear only in illustrative tables.
+
+\subsection{D4 representation-factorization control}
+
+Take the two-generator bouquet with directed edges
+\((a,A,b,B)\), inverse pairs \((a,A)\), \((b,B)\), and deck group
+\[
+D_4=\langle r,s:r^4=s^2=1,\ srs=r^{-1}\rangle,
+\]
+with voltages \(r,r^{-1},s,s\). For the two-dimensional representation
+\[
+\rho(r)=
+\begin{pmatrix}0&-1\\1&0\end{pmatrix},
+\qquad
+\rho(s)=
+\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+the exact two-roof twisted Hashimoto determinant is
+\[
+\begin{split}
+D_2(x,y)
+={}&(y-1)(y+1)\\
+&\times(3x^2y-x^2-y-1)
+\times(3x^2y+x^2-y+1).
+\end{split}
+\]
+Here \(x\) weights \(a,A\) and \(y\) weights \(b,B\). At \(x=y=u\),
+\[
+D_2(u)=
+(u-1)^2(u+1)^2
+\times(3u^2-2u+1)(3u^2+2u+1).
+\]
+
+The direct \(32\times32\) regular-cover determinant equals the product of the
+four one-dimensional factors and \(D_2(u)^2\):
+\[
+\begin{split}
+D_{\rm cover}(u)
+={}&(u-1)^9(u+1)^9(3u-1)(3u+1)(3u^2+1)^2\\
+&\times(3u^2-2u+1)^2(3u^2+2u+1)^2.
+\end{split}
+\]
+This exact equality checks orientation, inverse edges, and the required
+regular multiplicities.
+
+\subsection{Heisenberg chronology and aggregation}
+
+The producer verifies all statements in Proposition~\ref{prop:witness}. An
+independent implementation does not import the producer. It enumerates all
+343 elements of \(H_7\), finds that right multiplication by either
+\(z^3\) or \(z^2\) has exactly 49 cycles of length seven, and hence recovers
+\[
+\det(I-q\Reg(z^3))
+=\det(I-q\Reg(z^2))
+=(1-q^7)^{49}.
+\]
+The resolved phase ledgers differ, as predicted.
+
+\subsection{Illustrative counts}
+
+For the degree-eight unit-roof D4 block, each nonzero polynomial root produces
+one vertical arithmetic sequence under \(u=e^{-s}\). Table
+\ref{tab:density} shows the resulting positive-height count and the main
+Riemann--von Mangoldt term. The first column grows with a constant
+coefficient; the second eventually has a logarithmically growing coefficient.
+The table illustrates Corollary~\ref{cor:rvm}; it is not its proof.
+
+\begin{table}[ht]
+\centering
+\caption{Unit-roof D4 zero count versus the Riemann--von Mangoldt main term.}
+\label{tab:density}
+\begin{tabular}{r@{\qquad}r@{\qquad}r}
+\toprule
+\(T\) & D4 block count & Riemann--von Mangoldt main term\\
+\midrule
+\(10^2\) & 126 & 29.0\\
+\(10^3\) & 1,273 & 648.6\\
+\(10^4\) & 12,732 & 10,143.0\\
+\(10^5\) & 127,322 & 138,068.6\\
+\(10^6\) & 1,273,238 & 1,747,145.5\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The independent checker also applies adjacency directly to the
+frequency-one character on all 729 vertices of \(H(\Z/9\Z)\). The maximum
+eigenvector residual is \(9.2\times10^{-16}\), consistent with binary
+roundoff; the eigenvalue formula itself is exact.

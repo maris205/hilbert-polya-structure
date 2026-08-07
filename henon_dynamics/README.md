@@ -49,30 +49,31 @@ The foundational local source is
 | [`henon_dihedral_chronology_obstruction/`](henon_dihedral_chronology_obstruction/) | Loss of chronology under coarse dihedral quotienting | Scoped obstruction |
 | [`fibonacci_trace_map_clock_obstruction/`](fibonacci_trace_map_clock_obstruction/) | Trace-map clock and analytic-germ obstructions | Route-A rejected |
 | [`s_integer_solenoid_chronology_zeta/`](s_integer_solenoid_chronology_zeta/) | Same-Parikh returns with rational versus natural-boundary zeta; full-zeta continuation | Structural theorem; Route-A rejected |
+| [`nonabelian_voltage_zeta_obstruction/`](nonabelian_voltage_zeta_obstruction/) | Order collapse, finite-roof zero density, and exact-conductor branch return | Scoped obstruction; Route-A rejected |
 
-## Latest result: HCS-C14
+## Latest result: HCS-C15
 
-The latest paper changes dynamical category from a smooth Hénon map to an
-autonomous skew product of noncommuting automorphisms of the dyadic
-two-solenoid.  It retains a genuine shift clock and proves that changing only
-the chronological order of an equal-incidence period-five word changes the
-analytic type of its return zeta function.
+The latest paper tests nonabelian voltage covers with the trivial Artin sector
+removed. It proves a three-way obstruction: canonical aggregation coarsens
+holonomy conjugacy class to element order, every fixed finite-memory resolved
+determinant has only \(O(T)\) divisor growth, and primitive
+exact-conductor Schrödinger sectors in the natural Heisenberg tower return to
+the branching spectral edge.
 
-- [Project overview](s_integer_solenoid_chronology_zeta/README.md)
-- [Compiled paper](s_integer_solenoid_chronology_zeta/paper/main.pdf)
-- [Derivation package](s_integer_solenoid_chronology_zeta/DERIVATION_PACKAGE.md)
-- [Exact producer](s_integer_solenoid_chronology_zeta/code/solenoid_zeta.py)
-- [Independent checker](s_integer_solenoid_chronology_zeta/code/independent_check.py)
-- [Corrected Route-A record](s_integer_solenoid_chronology_zeta/evaluations/route_a/hcs_c14/20260806T130222Z.yaml)
+- [Project overview](nonabelian_voltage_zeta_obstruction/README.md)
+- [Compiled paper](nonabelian_voltage_zeta_obstruction/paper/main.pdf)
+- [Derivation package](nonabelian_voltage_zeta_obstruction/DERIVATION_PACKAGE.md)
+- [Exact producer](nonabelian_voltage_zeta_obstruction/code/voltage_zeta.py)
+- [Independent checker](nonabelian_voltage_zeta_obstruction/code/independent_check.py)
+- [Route-A record](nonabelian_voltage_zeta_obstruction/evaluations/route_a/hcs_c15/20260807T025623Z.yaml)
 
 Reproduce its frozen artifacts with:
 
 ```bash
-cd s_integer_solenoid_chronology_zeta
-python code/solenoid_zeta.py --max-period 20 --parity-period 12 --tower-level 8
-python code/independent_check.py --max-period 12
-python -m unittest discover -s code -p 'test_*.py' -v
-cd results && sha256sum -c ARTIFACT_HASHES.sha256
+cd nonabelian_voltage_zeta_obstruction
+python code/voltage_zeta.py --output results
+python code/independent_check.py --output results/independent_check.json
+cd code && python -m unittest -v test_voltage_zeta.py
 ```
 
 ## Mirrored-data boundary
@@ -109,4 +110,4 @@ Regenerable caches, nested Git metadata, TeX auxiliary files, and bulky raw
 array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
-Last synchronized research snapshot: **2026-08-06**.
+Last synchronized research snapshot: **2026-08-07**.

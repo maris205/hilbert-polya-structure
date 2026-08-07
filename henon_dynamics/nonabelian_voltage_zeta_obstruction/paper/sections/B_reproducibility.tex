@@ -1,0 +1,51 @@
+\section{Reproducibility}
+\label{app:reproducibility}
+
+\paragraph{Software.}
+The tested environment is Python 3.12.3 with SymPy 1.14.0, pinned in
+\path{requirements.txt}. The three executable entries are:
+\begin{itemize}[nosep]
+\item producer: \path{code/voltage_zeta.py};
+\item independent checker: \path{code/independent_check.py};
+\item regression suite: \path{code/test_voltage_zeta.py}.
+\end{itemize}
+No prime table, Riemann-zero table, or evaluation of \(\xi\) is read.
+
+\paragraph{Exact arithmetic.}
+The D4 matrices have integer entries, so all determinant identities are
+computed over \(\Z\). Heisenberg multiplication is modular integer
+arithmetic. The independent order-collapse check constructs the full
+right-regular permutations as explicit arrays and computes their cycle
+decompositions. It does not import the producer.
+
+\paragraph{Illustrative floating-point output.}
+Root arguments of the factored degree-eight polynomial, cosine values in the
+tower table, and the direct level-nine eigenvector residual use floating
+arithmetic. No theorem depends on those approximations. The nonabelian
+Ramanujan violation at modulus 243 has the rational lower certificate in
+Section~\ref{sec:tower}.
+
+\paragraph{Commands.}
+From the project directory, run
+\begin{verbatim}
+python code/voltage_zeta.py --output results
+python code/independent_check.py \
+  --output results/independent_check.json
+cd code
+python -m unittest -v test_voltage_zeta.py
+\end{verbatim}
+The expected test result is nine passing tests. The generated artifacts are:
+\begin{itemize}[nosep]
+\item \path{results/exact_certificates.json};
+\item \path{results/independent_check.json};
+\item \path{results/unit_roof_density.csv}.
+\end{itemize}
+
+\paragraph{Claim-to-artifact map.}
+The D4 factorization and all representation factors are stored under
+\path{d4_artin_factorization}. The word, bigram, holonomy, and central
+phase ledgers are under \path{heisenberg_order_collapse}. The abelian and
+Schrödinger tower rows are under
+\path{heisenberg_congruence_tower}. Each JSON object includes a
+claim-boundary string distinguishing exact certificates from numerical
+illustrations.

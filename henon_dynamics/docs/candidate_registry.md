@@ -104,3 +104,30 @@ elementary pole is removed, the full zeta is holomorphic and zero-free in
 The secondary circle, global nonrationality, and an infinite congruence
 transfer operator remain open.  The natural Koopman operator contains a
 Bernoulli continuous spectral component and is not a discrete HP realization.
+
+## HCS-C15 closure (2026-08-07)
+
+Candidate **HCS-C15** is closed as a Hilbert--Pólya graph-cover candidate and
+retained as a scoped obstruction package; see
+../nonabelian_voltage_zeta_obstruction/. Its Route-A tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**. Route B is not authorized.
+
+Three gates close the intended form. First, the canonical
+regular-minus-trivial local factor depends on a primitive holonomy only
+through its order. A non-dihedral length-ten \(H_7\) pair has identical
+cyclic directed-bigram counts but distinct central holonomies \(z^3,z^2\);
+the aggregate merges them while a resolved central character separates them.
+Second, every fixed finite-state, finite-memory determinant with constant
+finite-dimensional twist and finitely many positive roof values has only
+\(O(T)\) zeros in a fixed strip, not the \(\Theta(T\log T)\) Riemann count.
+Third, the natural Heisenberg \(3\)-power tower recreates branching poles in
+exact-conductor sectors: even primitive Schrödinger blocks have top
+eigenvalue tending to four.
+
+The result does not cover infinite-rank nuclear transfer operators,
+nonamenable property-\(\tau\) towers, infinitely many intrinsic roofs, or a
+proved fixed infinite determinant of non-finite exponential type. The next
+system-level candidate is a compact quaternionic \(S\)-arithmetic
+real--\(p\)-adic product flow with a source-locked joint length and joint
+self-adjoint spectrum.

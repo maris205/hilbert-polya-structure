@@ -200,6 +200,35 @@ to the full dynamical zeta.
 
 ---
 
+## 8. nonabelian_voltage_zeta_obstruction
+
+### Topic
+
+Chronology-preserving nonabelian voltage covers, representation-resolved
+Artin--Ihara factors, finite-memory roof determinants, and conductor-new
+Heisenberg congruence sectors.
+
+### Main results
+
+- the canonical regular-minus-trivial local factor depends on holonomy only
+  through element order;
+- a primitive non-dihedral \(H(\mathbb F_7)\) word pair has identical full
+  cyclic bigram counts but distinct same-order central holonomies;
+- every fixed finite-state, finite-memory, finite-roof twisted determinant
+  has only \(O(T)\) zeros in a disk or fixed strip;
+- a conductor-new irreducible Schrödinger sector in
+  \(H(\mathbb Z/3^m\mathbb Z)\) has top eigenvalue tending to four, so the
+  frozen uniform Ramanujan/new-sector-gap rescue fails.
+
+### Relation to HP search
+
+This is a scoped Route-A obstruction package, not a new Artin factorization,
+Harper operator, or Hilbert--Pólya construction. It leaves open nuclear
+infinite-rank determinants, separately renormalized tower limits, and
+nonamenable property-\(\tau\) towers.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:
