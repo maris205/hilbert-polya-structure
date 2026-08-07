@@ -120,7 +120,8 @@ This negative tuple is exactly the intended output of an obstruction project. â€
 
 There is **no hard mathematical blocker and no remaining computational-validation debt inside the stated final-denominator-only scope**. The promised independent checker has passed with a stronger precision margin than requested and with adversarial tamper rejection.
 
-Two release-provenance values remain intentionally unresolved: `source_commit: PENDING_RELEASE` and `release_tag: PENDING_RELEASE`. They must be replaced when the final release snapshot is frozen. This is metadata finalization, not a mathematical or validation issue.
+Release provenance is now frozen at source commit
+`54839370e988dd419baafd9fcf8945e7c31d7ea6` and tag `hcs-c17-v1`.
 
 The following are not unresolved defects because they are explicitly outside the theoremâ€™s quantifier:
 
@@ -140,4 +141,4 @@ Proceed as a narrowly framed obstruction/synthesis note, a rigorous negative-res
 
 For a major standalone novelty claim, the current package is likely insufficient without either a demonstrably new broader rigidity theorem, a nontrivial extension beyond final-denominator functions, or a new operator/determinant construction. Do not add zero fitting or larger finite censuses to manufacture novelty; they would not address that gap.
 
-**Final recommendation:** accept the project as **READY_AS_SCOPED_OBSTRUCTION**, archive the Route-A decision as **ROUTE_A_REJECTED**, keep `route_b_invocation_allowed: false`, and replace the two `PENDING_RELEASE` provenance placeholders when freezing the release.
+**Final recommendation:** accept the project as **READY_AS_SCOPED_OBSTRUCTION**, archive the Route-A decision as **ROUTE_A_REJECTED**, and keep `route_b_invocation_allowed: false`.

@@ -3,7 +3,7 @@
 Candidate HCS-C17 is prepared for release as a modular scattering
 open/closed-clock obstruction with stable Selberg closure.
 
-- Computation/source commit: `PENDING_RELEASE`.
+- Computation/source commit: `54839370e988dd419baafd9fcf8945e7c31d7ea6`.
 - Complete release tag: `hcs-c17-v1`.
 - Target branch: `main`.
 - Remote: `git@github.com:maris205/hilbert-polya-structure.git`.
