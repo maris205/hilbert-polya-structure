@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "protocol_id": "R401-VAL-L2-A1-PREFREEZE-TESTS",
+  "status": "PASS_PENDING_INDEPENDENT_PREFREEZE_REVIEW",
+  "recorded_utc": "2026-08-07T05:56:13Z",
+  "held_out_policy": {
+    "held_out_a1_slabs_read": false,
+    "held_out_a1_evaluator_dispatched": false,
+    "mock_only_new_archives": true,
+    "s0_archive_access": "read_only_public_six_tree_release"
+  },
+  "environment": {
+    "logical_cpus": 32,
+    "memory_limit_bytes": 64424509440,
+    "filesystem_total_bytes": 375809638400,
+    "filesystem_available_before_tests_bytes": 373412601856
+  },
+  "test_results": [
+    {
+      "name": "scheduler_formal_contract",
+      "command": "pytest -q tests/test_r401_val_l2_all_slabs_scheduler.py",
+      "passed": 92,
+      "failed": 0,
+      "wall_seconds": 1.46
+    },
+    {
+      "name": "independent_checker_formal_contract",
+      "command": "pytest -q tests/test_r401_val_l2_all_slabs_checker_contract.py",
+      "passed": 111,
+      "failed": 0,
+      "wall_seconds": 1.16
+    },
+    {
+      "name": "formal_scheduler_checker_combined",
+      "command": "pytest -q tests/test_r401_val_l2_all_slabs_scheduler.py tests/test_r401_val_l2_all_slabs_checker_contract.py",
+      "passed": 203,
+      "failed": 0,
+      "wall_seconds": 2.75
+    },
+    {
+      "name": "adversarial_102_tree_end_to_end",
+      "command": "pytest -q tests/test_r401_val_l2_all_slabs_adversarial_e2e.py",
+      "passed": 5,
+      "failed": 0,
+      "wall_seconds": 52.58,
+      "mock_tree_count_per_full_generation": 102,
+      "mock_node_count_per_full_generation": 816,
+      "full_generations_compared": 2
+    },
+    {
+      "name": "release_provenance_contract",
+      "command": "pytest -q tests/test_r401_val_l2_a1_release_provenance.py",
+      "passed": 118,
+      "failed": 0,
+      "wall_seconds": 19.95
+    },
+    {
+      "name": "paper02_complete_suite",
+      "command": "pytest -q",
+      "passed": 353,
+      "failed": 0,
+      "wall_seconds": 77.11
+    },
+    {
+      "name": "public_s0_a1_compatibility_replay",
+      "command": "python scripts/replay_r401_val_l2_s0_through_a1_checker.py",
+      "passed": 1,
+      "failed": 0,
+      "tree_count": 6,
+      "node_count": 3016,
+      "manifest_hash_checks": 6055,
+      "energy_excluded": 183,
+      "return_excluded": 1349,
+      "split_unknown": 1484,
+      "wall_seconds": 25.59
+    }
+  ],
+  "covered_gates": [
+    "formal freeze and run-config handshake",
+    "exact ordered 102-tree matrix",
+    "one in-flight node per tree",
+    "per-tree budget race",
+    "transactional crash and resume",
+    "whole-generation quarantine without mixing",
+    "random completion-order canonical hash invariance",
+    "independent exact-rational checker promotion",
+    "public S0 3016-node algebra and split-DAG replay",
+    "closed S0 semantic gate before first held-out dispatch",
+    "SIGKILL residual node/tree staging is non-authoritative but namespace-strict",
+    "final release exact hash DAG and write-once publication"
+  ],
+  "frozen_implementation_hashes": {
+    "scripts/build_r401_val_l2_a1_release_provenance.py": "17d345ed663d1650fa7973681a468f297d120602bca6cfbc9630235c71e6a1e6",
+    "scripts/check_r401_val_l2_all_slabs_independent.py": "a03ba2e352e28db434b036f70c9d78a2f04852104a4247393315d28e06775c66",
+    "scripts/replay_r401_val_l2_s0_through_a1_checker.py": "32844ebb999461d09a2106e6ddd0008d030af505551b2ff6554b37f1c4ad7383",
+    "scripts/run_r401_val_l2_all_slabs.py": "ac8d64b8f14e4938de5566c1a8517223dea74c603d2ccc1456317c1b02bf08e7",
+    "tests/test_r401_val_l2_a1_release_provenance.py": "c1e3931bf129a741fcb96f2f5b213a92530664504cb153c96238c330f94ed308",
+    "tests/test_r401_val_l2_all_slabs_adversarial_e2e.py": "3a4e5374787144605679a1f24a89fd36595d467267a2630bb14e9d6e25bf1980",
+    "tests/test_r401_val_l2_all_slabs_checker_contract.py": "36cae4c132c915e4d2e4d3229f7acb0972d135c683e14cfb5a8803e320c61be3",
+    "tests/test_r401_val_l2_all_slabs_scheduler.py": "d111d7912b7fbaa221965d4d1ae93383ab34198ea7d3115946c51b7dae65dfe2"
+  },
+  "evidence_hashes": {
+    "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json": "b9291716b859da9651a2549832581cf85b1852b725bcf285539dea47eb7cbef4",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_PROTOCOL.md": "817b8005591f87a89b839d1be01f5629789ff60be5e443614f3eb3365ccd0ea5",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_RELEASE_PROVENANCE_CONTRACT.md": "161bee7cd80ffa739335d59d5a43cd275cc585375d52cf3e92d7f3db9ab3e172",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_S0_COMPATIBILITY_REPLAY.json": "959aa94e155cb88a1ad4727dfe5938b92cb3a161f648cbe78ae27ce8aa36e506",
+    "validated/bin/capd_r401_local_complement_mp_a1": "b768de84247cd847a3c1b518ec08a7bcfc766e31c20c01bcdd0c75b06d319d53",
+    "validated/capd_r401_local_complement_mp.cpp": "8eabb022f92c712805c401fb07e2b741e4af4e927bc43702c95125b2a4338bd2"
+  },
+  "scientific_status": {
+    "milestone_status": null,
+    "theorem_status": null,
+    "final_status": null
+  },
+  "claim_boundary": "pre-freeze implementation evidence only; no held-out all-slab result, no global uniqueness, no trace formula, no Hilbert-Polya or RH claim"
+}

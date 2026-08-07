@@ -33,6 +33,29 @@ root-candidate, invalid, or unresolved leaves.  A producer-independent
 exact-decimal checker passed 89,962 checks with zero failures.  This proves a
 finite three-slab statement and does not interpolate to the other 48 slabs.
 
+## Formal all-slab production (A1)
+
+The prospective all-slab complement run is now sealed under
+`R401-VAL-L2-A1`.  Its main freeze has SHA-256
+`c64d7b3cb7d6cfef403edfe35b7459ba5291608104aea4653ae8c0feec710cf2`
+and binds the exact ordered 102-tree matrix, 23 source/evidence inputs, the
+CAPD commit and full ordered build flags, the evaluator binary, 32 logical
+CPUs, the 60-GiB memory limit, and the storage admission watermarks.
+
+Pre-freeze verification passed 353 tests, two independent reviews, a pair of
+102-tree synthetic generations, crash/resume and quarantine tests, and a
+read-only replay of all 3,016 public S0 nodes.  `initialize-only` sealed
+`results/r401_val_l2_all_slabs/run_config.json` with SHA-256
+`f2d3eef4a76f18246c15789e32fe597266e3fe855c5e9a8bd2b5c3e67dfdf70d`;
+no A1 evaluator node was dispatched during initialization.
+
+The A1 producer keeps `milestone_status`, `theorem_status`, and `final_status`
+null.  Only a completed archive that passes the independent exact-rational
+checker and final release contract can promote the bounded status
+`PASS_LOCAL_COMPLEMENT_ALL_SLABS`.  Even that status concerns only the frozen
+local reduced chart; it is not global energy-shell uniqueness, a trace
+formula, a Hilbert--Pólya construction, a zeta-zero reconstruction, or RH.
+
 ## Open bridges
 
 - exclusion of reduced roots outside the accepted local boxes on all 51
@@ -84,6 +107,6 @@ writes into a result directory should be done only in a disposable clone.
 
 The accepted A4.14 proof objects are under
 `results/r401_val_l2_s0_local_complement/`; its release provenance also binds
-the exact CAPD-linked executable mirrored in that directory.  The future
-102-tree scheduler/checker remains explicitly non-licensing until its
-release and recovery contracts pass a separate formal-freeze review.
+the exact CAPD-linked executable mirrored in that directory.  The 102-tree A1
+generation is separately machine-frozen and remains scientifically
+non-promoting until its complete independent checker and release chain pass.

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Prospective R401-VAL-L2-A1 cross-tree scheduler.
+"""Fail-closed R401-VAL-L2-A1 cross-tree producer.
 
-This file is deliberately DRAFT and non-licensing.  It implements the
-storage, resume, and scheduling mechanics proposed for the 51-slab by
-two-precision local-complement run.  It does not assign a theorem or
-milestone status, and it must not be used for production until an audited
-L2-A1 freeze file exists.
+This producer can initialize or execute only when a complete machine-readable
+L2-A1 freeze validates against the exact bytes in its mandatory input hash
+DAG.  ``FROZEN_PRODUCTION`` identifies the archive namespace; the producer
+never assigns a theorem, milestone, or final scientific status.  Those three
+fields remain null until the independent exact-rational checker has replayed
+the complete archive.
 
 The proof semantics of each node remain those of
 ``capd_r401_local_complement_mp.cpp``.  This scheduler only dispatches exact
@@ -18,6 +19,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import re
 import shlex
@@ -39,11 +41,11 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNNER = Path(__file__).resolve()
 SOURCE = ROOT / "validated/capd_r401_local_complement_mp.cpp"
 PLAN = ROOT / "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json"
-DRAFT = ROOT / "research/route_a_wave_trace/R401_VAL_L2_ALL_SLABS_DRAFT.md"
-S0_PROTOCOL = (
-    ROOT / "research/route_a_wave_trace/R401_VAL_L2_S0_LOCAL_COMPLEMENT_PROTOCOL.md"
-)
-S0_FREEZE = ROOT / "research/route_a_wave_trace/R401_VAL_L2_S0_FREEZE.md"
+CHECKER = ROOT / "scripts/check_r401_val_l2_all_slabs_independent.py"
+FORMAL_PROTOCOL = ROOT / "research/route_a_wave_trace/R401_VAL_L2_A1_PROTOCOL.md"
+FORMAL_FREEZE = ROOT / "research/route_a_wave_trace/R401_VAL_L2_A1_FREEZE.json"
+MACHINE_FREEZE = ROOT / "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json"
+PREFREEZE_REVIEW = ROOT / "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md"
 DEPENDENCY = ROOT / "validated/CAPD_DEPENDENCY.md"
 L1_RESULT = ROOT / "results/r401_val_l1_branch"
 L1_RELEASE = L1_RESULT / "RELEASE_PROVENANCE.json"
@@ -52,9 +54,55 @@ L1_MANIFEST = L1_RESULT / "manifest.json"
 L1_CHECKER = L1_RESULT / "independent_checker.json"
 L1_POSTCHECK = L1_RESULT / "POSTCHECK_STATUS.json"
 
-PROTOCOL_ID = "R401-VAL-L2-A1-DRAFT"
+PROTOCOL_ID = "R401-VAL-L2-A1"
 SCHEMA_VERSION = 1
 EXPECTED_CAPD_COMMIT = "731079217a9254ea2948d742df2b170895effe7f"
+EXPECTED_CHECKER_MODE = "INDEPENDENT_EXACT_RATIONAL_REPLAY"
+EXPECTED_FREEZE_STATUS = "FROZEN_FOR_PRODUCTION"
+EXPECTED_SCHEDULER_POLICY = "deterministic_round_robin_barrier_batches_v1"
+REQUIRED_CAPD_FLAGS = frozenset(
+    {"-D__HAVE_MPFR__", "-lmpfr", "-lgmp", "-frounding-math"}
+)
+EXPECTED_LOGICAL_THRESHOLDS = {
+    "logical_margin_128": "1e-30",
+    "logical_margin_256": "1e-60",
+    "newton_guard_128": "1e-40",
+    "newton_guard_256": "1e-75",
+}
+MANDATORY_FROZEN_INPUTS = (
+    "scripts/check_r401_val_l2_all_slabs_independent.py",
+    "scripts/run_r401_val_l2_all_slabs.py",
+    "validated/capd_r401_local_complement_mp.cpp",
+    "validated/CAPD_DEPENDENCY.md",
+    "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_PROTOCOL.md",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_S0_COMPATIBILITY_REPLAY.json",
+    "scripts/replay_r401_val_l2_s0_through_a1_checker.py",
+    "scripts/build_r401_val_l2_a1_release_provenance.py",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_RELEASE_PROVENANCE_CONTRACT.md",
+    "results/r401_val_l1_branch/RELEASE_PROVENANCE.json",
+    "results/r401_val_l1_branch/summary.json",
+    "results/r401_val_l1_branch/manifest.json",
+    "results/r401_val_l1_branch/independent_checker.json",
+    "results/r401_val_l1_branch/POSTCHECK_STATUS.json",
+)
+PREFREEZE_REVIEW_RELATIVE = (
+    "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md"
+)
+S0_REPLAY_RELATIVE = (
+    "research/route_a_wave_trace/R401_VAL_L2_A1_S0_COMPATIBILITY_REPLAY.json"
+)
+S0_ADAPTER_RELATIVE = "scripts/replay_r401_val_l2_s0_through_a1_checker.py"
+S0_RESULT_RELATIVE = "results/r401_val_l2_s0_local_complement"
+PREFREEZE_ACCEPT_MARKER = "Verdict: ACCEPT_FOR_FREEZE"
+EXPECTED_MACHINE_REQUIREMENTS = {
+    "cpu_logical": 32,
+    "memory_limit_bytes": 64_424_509_440,
+    "min_launch_free_bytes": 107_374_182_400,
+    "operational_pause_below_free_bytes": 161_061_273_600,
+}
 PRECISIONS = (128, 256)
 SLAB_IDS = tuple(f"S{index:03d}" for index in range(51))
 COORDINATES = ("q_slow", "q_fast", "p_slow", "period")
@@ -69,6 +117,7 @@ FULL_WIDTHS = {
     for coordinate, (lower, upper) in BIG_BOX.items()
 }
 NODE_ID_PATTERN = re.compile(r"^C[0-3][LU][01]*$")
+HEX_SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 # The evaluator status/return-code relation is a closed whitelist.  In
 # particular, malformed output, signals, timeouts, and unknown codes are
@@ -118,11 +167,18 @@ def strict_json_loads(raw: str) -> Any:
     def reject_constant(value: str) -> None:
         raise CorruptShardError(f"non-finite JSON constant: {value}")
 
+    def parse_finite_float(value: str) -> float:
+        parsed = float(value)
+        if not math.isfinite(parsed):
+            raise CorruptShardError(f"non-finite JSON number: {value}")
+        return parsed
+
     try:
         return json.loads(
             raw,
             object_pairs_hook=_reject_duplicate_keys,
             parse_constant=reject_constant,
+            parse_float=parse_finite_float,
         )
     except CorruptShardError:
         raise
@@ -149,6 +205,28 @@ def canonical_json_bytes(payload: Any) -> bytes:
         )
         + "\n"
     ).encode("utf-8")
+
+
+def exact_json_equal(actual: Any, expected: Any) -> bool:
+    """Compare JSON values without bool/int/float equality coercion."""
+
+    try:
+        return canonical_json_bytes(actual) == canonical_json_bytes(expected)
+    except (TypeError, ValueError):
+        return False
+
+
+def markdown_has_verdict_declaration(line: str) -> bool:
+    """Fail closed on any standalone ``Verdict`` token in a review line.
+
+    The exact accepted byte line is checked separately.  Treating every token
+    as a declaration candidate closes Markdown tables, list/quote decoration,
+    Unicode punctuation, and dash-separated near-marker aliases.
+    """
+
+    return re.search(
+        r"(?<![A-Za-z0-9_])Verdict(?![A-Za-z0-9_])", line, re.IGNORECASE
+    ) is not None
 
 
 def sha256_bytes(payload: bytes) -> str:
@@ -204,11 +282,39 @@ def write_once_or_verify(path: Path, payload: Any) -> None:
 
 
 def safe_relative_path(value: str) -> PurePosixPath:
+    if not isinstance(value, str) or not value or "\x00" in value:
+        raise CorruptShardError(f"unsafe relative path: {value!r}")
     candidate = PurePosixPath(value)
-    if candidate.is_absolute() or not candidate.parts or ".." in candidate.parts:
+    if (
+        candidate.is_absolute()
+        or not candidate.parts
+        or "\\" in value
+        or ".." in candidate.parts
+        or any(part.startswith(".") for part in candidate.parts)
+        or candidate.as_posix() != value
+    ):
         raise CorruptShardError(f"unsafe relative path: {value!r}")
     if any(part in {"", "."} for part in candidate.parts):
         raise CorruptShardError(f"non-canonical relative path: {value!r}")
+    return candidate
+
+
+def resolve_project_input(project_root: Path, value: str) -> Path:
+    """Resolve one frozen project-relative file without following symlinks."""
+
+    relative = safe_relative_path(value)
+    candidate = checked_lexical_path(
+        project_root / Path(*relative.parts),
+        label=f"frozen input {value}",
+        require_file=True,
+    )
+    lexical_root = Path(os.path.abspath(os.fspath(project_root)))
+    try:
+        candidate.relative_to(lexical_root)
+    except ValueError as error:
+        raise SchedulerContractError(
+            f"frozen input escapes project root: {value}"
+        ) from error
     return candidate
 
 
@@ -348,8 +454,22 @@ class ReconstructedTree:
     blocking_classifications: list[str]
 
     @property
-    def draft_complete(self) -> bool:
+    def complete(self) -> bool:
         return bool(self.records) and not self.pending and not self.blocking_classifications
+
+
+@dataclass(frozen=True)
+class FormalFreezeContext:
+    """Validated immutable inputs that authorize one formal generation."""
+
+    freeze: Mapping[str, Any]
+    freeze_path: Path
+    freeze_sha256: str
+    input_hashes: Mapping[str, str]
+    per_tree_limits: Mapping[str, int]
+    scheduler: Mapping[str, Any]
+    evaluator: Mapping[str, Any]
+    logical_thresholds: Mapping[str, str]
 
 
 def load_plan_records(path: Path = PLAN) -> OrderedDict[str, dict[str, Any]]:
@@ -359,7 +479,9 @@ def load_plan_records(path: Path = PLAN) -> OrderedDict[str, dict[str, Any]]:
         raise MatrixContractError("L1 plan has no slab list")
     records: OrderedDict[str, dict[str, Any]] = OrderedDict()
     for record in slabs:
-        slab_id = str(record.get("slab_id"))
+        slab_id = record.get("slab_id")
+        if not isinstance(slab_id, str):
+            raise MatrixContractError("plan slab_id is not an exact string")
         if slab_id in records:
             raise MatrixContractError(f"duplicate plan slab: {slab_id}")
         records[slab_id] = record
@@ -581,27 +703,30 @@ class FairNodeQueue:
         if limit < 0:
             raise ValueError("negative batch limit")
         accepted: list[NodeTask] = []
-        inspected_without_accept = 0
-        while self._active and len(accepted) < limit:
+        # Inspect each currently active tree at most once.  Re-appending a
+        # nonempty queue makes it eligible for the *next* barrier, never for a
+        # second in-flight node in this barrier.  This remains true when the
+        # worker count exceeds the number of active trees.
+        active_at_barrier = len(self._active)
+        for _ in range(active_at_barrier):
+            if not self._active or len(accepted) >= limit:
+                break
             tree = self._active.popleft()
             self._active_set.remove(tree)
             queue = self._queues[tree]
             if admissible is not None and not admissible(tree):
-                # Keep the pending frontier intact but stop cycling on a
-                # resource-blocked tree during this admission call.
+                # Keep the pending frontier intact for a later session.
                 self._active.append(tree)
                 self._active_set.add(tree)
-                inspected_without_accept += 1
-                if inspected_without_accept >= len(self._active):
-                    break
                 continue
-            inspected_without_accept = 0
             accepted.append(queue.popleft())
             if on_accept is not None:
                 on_accept(tree)
             if queue:
                 self._active.append(tree)
                 self._active_set.add(tree)
+        if len({task.tree for task in accepted}) != len(accepted):
+            raise AssertionError("barrier admitted more than one node from one tree")
         return accepted
 
     def pending_counts(self) -> dict[TreeKey, int]:
@@ -687,7 +812,8 @@ def build_node_record(
     record = {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -808,13 +934,15 @@ def validate_committed_node(
         record.get("final_status") is None,
     )
     if (
-        record.get("schema_version") != SCHEMA_VERSION
+        type(record.get("schema_version")) is not int
+        or record.get("schema_version") != SCHEMA_VERSION
         or record.get("protocol_id") != PROTOCOL_ID
-        or record.get("licensing") != "DRAFT_NONE"
+        or record.get("licensing") != "FROZEN_PRODUCTION"
+        or record.get("scientific_licensing_enabled") is not True
         or not all(expected_status_nulls)
     ):
-        raise CorruptShardError("node record draft/status namespace mismatch")
-    if _record_task_payload(record) != task.payload():
+        raise CorruptShardError("node record frozen/status namespace mismatch")
+    if not exact_json_equal(_record_task_payload(record), task.payload()):
         raise ResumeBindingError(
             f"node task binding mismatch: {task.tree.label}/{task.node_id}"
         )
@@ -1041,8 +1169,9 @@ def build_tree_payload(
     return {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "producer_state": "DRAFT_TREE_ARCHIVED",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": "FROZEN_TREE_ARCHIVED",
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -1123,8 +1252,9 @@ def finalize_tree_transaction(
     manifest = {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "producer_state": "DRAFT_TREE_COMMITTED",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": "FROZEN_TREE_COMMITTED",
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -1199,12 +1329,11 @@ def validate_tree_commit_matrix(
         expected_tree = expected_manifests[path]
         manifest = strict_json_load(path)
         internal = manifest.get("tree", {})
-        try:
-            internal_tree = TreeKey(
-                int(internal.get("precision_bits")), str(internal.get("slab_id"))
-            )
-        except (TypeError, ValueError) as error:
-            raise MatrixContractError(f"invalid internal tree identity: {path}") from error
+        if not isinstance(internal, Mapping) or not exact_json_equal(
+            internal, expected_tree.payload()
+        ):
+            raise MatrixContractError(f"invalid internal tree identity: {path}")
+        internal_tree = expected_tree
         if internal_tree != expected_tree:
             raise MatrixContractError(f"tree manifest path/identity mismatch: {path}")
         if internal_tree in seen_pairs:
@@ -1217,20 +1346,38 @@ def validate_tree_commit_matrix(
         if sha256(target) != manifest.get("tree_sha256"):
             raise MatrixContractError(f"tree hash mismatch: {expected_tree.label}")
         if (
-            manifest.get("milestone_status") is not None
+            type(manifest.get("schema_version")) is not int
+            or manifest.get("schema_version") != SCHEMA_VERSION
+            or manifest.get("protocol_id") != PROTOCOL_ID
+            or manifest.get("licensing") != "FROZEN_PRODUCTION"
+            or manifest.get("scientific_licensing_enabled") is not True
+            or manifest.get("producer_state") != "FROZEN_TREE_COMMITTED"
+            or manifest.get("milestone_status") is not None
             or manifest.get("theorem_status") is not None
             or manifest.get("final_status") is not None
         ):
-            raise MatrixContractError("producer tree manifest assigned a scientific status")
+            raise MatrixContractError("producer tree manifest namespace/status mismatch")
         tree_payload = strict_json_load(target)
+        if (
+            type(tree_payload.get("schema_version")) is not int
+            or tree_payload.get("schema_version") != SCHEMA_VERSION
+            or tree_payload.get("protocol_id") != PROTOCOL_ID
+            or tree_payload.get("licensing") != "FROZEN_PRODUCTION"
+            or tree_payload.get("scientific_licensing_enabled") is not True
+            or tree_payload.get("producer_state") != "FROZEN_TREE_ARCHIVED"
+            or any(
+                tree_payload.get(key) is not None
+                for key in ("milestone_status", "theorem_status", "final_status")
+            )
+        ):
+            raise MatrixContractError("producer tree namespace/status mismatch")
         tree_internal = tree_payload.get("tree", {})
-        if tree_internal != expected_tree.payload():
+        if not exact_json_equal(tree_internal, expected_tree.payload()):
             raise MatrixContractError(f"tree file path/identity mismatch: {target}")
         node_files = manifest.get("node_files")
-        # Minimal synthetic matrix tests may omit node_files, but every actual
-        # DRAFT_TREE_COMMITTED manifest emitted by this scheduler must bind the
-        # exact committed-node set and all three authoritative files.
-        if manifest.get("producer_state") == "DRAFT_TREE_COMMITTED":
+        # Every formal manifest binds the exact committed-node set and all
+        # authoritative files.  Synthetic tests construct the same namespace.
+        if manifest.get("producer_state") == "FROZEN_TREE_COMMITTED":
             if not isinstance(node_files, dict):
                 raise MatrixContractError(f"tree manifest has no node file map: {path}")
             tree_nodes = tree_payload.get("nodes")
@@ -1306,12 +1453,13 @@ def validate_summary_matrix(
 ) -> None:
     internal: list[TreeKey] = []
     for entry in entries:
-        try:
-            internal.append(
-                TreeKey(int(entry["precision_bits"]), str(entry["slab_id"]))
-            )
-        except (KeyError, TypeError, ValueError) as error:
-            raise MatrixContractError("malformed aggregate tree entry") from error
+        if not isinstance(entry, Mapping):
+            raise MatrixContractError("malformed aggregate tree entry")
+        bits = entry.get("precision_bits")
+        slab_id = entry.get("slab_id")
+        if type(bits) is not int or not isinstance(slab_id, str):
+            raise MatrixContractError("malformed aggregate tree entry")
+        internal.append(TreeKey(bits, slab_id))
     if len(internal) != len(matrix) or len(set(internal)) != len(internal):
         raise MatrixContractError("duplicate or missing aggregate summary entry")
     if tuple(internal) != tuple(matrix):
@@ -1328,7 +1476,12 @@ def build_aggregate_payloads(
     by_tree: dict[TreeKey, Mapping[str, Any]] = {}
     for manifest in manifests:
         internal = manifest["tree"]
-        key = TreeKey(int(internal["precision_bits"]), str(internal["slab_id"]))
+        matches = [
+            tree for tree in matrix if exact_json_equal(internal, tree.payload())
+        ]
+        if len(matches) != 1:
+            raise MatrixContractError("malformed aggregate manifest identity")
+        key = matches[0]
         if key in by_tree:
             raise MatrixContractError(f"duplicate aggregate manifest: {key.label}")
         by_tree[key] = manifest
@@ -1346,8 +1499,9 @@ def build_aggregate_payloads(
     summary = {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "producer_state": "DRAFT_ALL_TREES_ARCHIVED",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": "FROZEN_ALL_TREES_ARCHIVED",
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -1355,8 +1509,8 @@ def build_aggregate_payloads(
         "tree_count": len(entries),
         "trees": entries,
         "claim_boundary": (
-            "scheduler archive only; independent proof replay and an audited freeze "
-            "are absent from this producer status"
+            "frozen producer archive only; independent exact-rational replay "
+            "has not assigned any scientific status"
         ),
     }
     summary_path = output / "aggregate_summary.json"
@@ -1364,8 +1518,9 @@ def build_aggregate_payloads(
     aggregate_manifest = {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "producer_state": "DRAFT_AGGREGATE_COMMITTED",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": "FROZEN_AGGREGATE_COMMITTED",
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -1381,78 +1536,365 @@ def command_output(command: list[str]) -> str:
     return subprocess.run(command, check=True, text=True, capture_output=True).stdout.strip()
 
 
-def immutable_input_hashes(freeze: Path | None) -> dict[str, str | None]:
-    paths = (
-        SOURCE,
-        PLAN,
-        DRAFT,
-        S0_PROTOCOL,
-        S0_FREEZE,
-        DEPENDENCY,
-        RUNNER,
-        L1_RELEASE,
-        L1_SUMMARY,
-        L1_MANIFEST,
-        L1_CHECKER,
-        L1_POSTCHECK,
-    )
-    result: dict[str, str | None] = {
-        path.relative_to(ROOT).as_posix(): sha256(path) for path in paths
+def formal_status_whitelist() -> dict[str, list[list[Any]]]:
+    return {
+        "excluded": sorted([list(item) for item in EXCLUDED_RESULTS]),
+        "splittable": sorted([list(item) for item in SPLITTABLE_RESULTS]),
+        "scientific_stop": sorted([list(item) for item in SCIENTIFIC_STOP_RESULTS]),
+        "invalid": sorted([list(item) for item in INVALID_RESULTS]),
     }
-    result["prospective_l2_a1_freeze"] = None if freeze is None else sha256(freeze)
-    return result
+
+
+def validate_s0_compatibility_replay(project_root: Path) -> None:
+    """Replay the exact public-S0 evidence gate before held-out dispatch."""
+
+    checker_relative = "scripts/check_r401_val_l2_all_slabs_independent.py"
+    expected = {
+        "adapter_source_sha256": sha256(
+            resolve_project_input(project_root, S0_ADAPTER_RELATIVE)
+        ),
+        "checker_source_sha256": sha256(
+            resolve_project_input(project_root, checker_relative)
+        ),
+        "claim_boundary": (
+            "public S0 compatibility replay only; no held-out A1 slab was read or evaluated"
+        ),
+        "manifest_hash_checks": 6055,
+        "node_count": 3016,
+        "protocol_id": "R401-VAL-L2-A1-PREFREEZE-S0-REPLAY",
+        "s0_manifest_sha256": sha256(
+            resolve_project_input(project_root, f"{S0_RESULT_RELATIVE}/manifest.json")
+        ),
+        "s0_postcheck_sha256": sha256(
+            resolve_project_input(
+                project_root, f"{S0_RESULT_RELATIVE}/POSTCHECK_STATUS.json"
+            )
+        ),
+        "s0_release_provenance_sha256": sha256(
+            resolve_project_input(
+                project_root, f"{S0_RESULT_RELATIVE}/RELEASE_PROVENANCE.json"
+            )
+        ),
+        "source_release": "R401-VAL-L2-S0",
+        "status": "PASS_S0_READ_ONLY_COMPATIBILITY_REPLAY",
+        "status_counts": {
+            "ENERGY_EXCLUDED": 183,
+            "RETURN_EXCLUDED": 1349,
+            "UNKNOWN": 1484,
+        },
+        "tree_count": 6,
+        "tree_counts": [
+            {"node_count": 486, "precision_bits": 128, "slab_id": "S000", "status_counts": {"ENERGY_EXCLUDED": 18, "RETURN_EXCLUDED": 229, "UNKNOWN": 239}},
+            {"node_count": 546, "precision_bits": 128, "slab_id": "S025", "status_counts": {"ENERGY_EXCLUDED": 31, "RETURN_EXCLUDED": 246, "UNKNOWN": 269}},
+            {"node_count": 574, "precision_bits": 128, "slab_id": "S050", "status_counts": {"ENERGY_EXCLUDED": 44, "RETURN_EXCLUDED": 247, "UNKNOWN": 283}},
+            {"node_count": 436, "precision_bits": 256, "slab_id": "S000", "status_counts": {"ENERGY_EXCLUDED": 18, "RETURN_EXCLUDED": 204, "UNKNOWN": 214}},
+            {"node_count": 488, "precision_bits": 256, "slab_id": "S025", "status_counts": {"ENERGY_EXCLUDED": 31, "RETURN_EXCLUDED": 217, "UNKNOWN": 240}},
+            {"node_count": 486, "precision_bits": 256, "slab_id": "S050", "status_counts": {"ENERGY_EXCLUDED": 41, "RETURN_EXCLUDED": 206, "UNKNOWN": 239}},
+        ],
+    }
+    replay = strict_json_load(resolve_project_input(project_root, S0_REPLAY_RELATIVE))
+    if not exact_json_equal(replay, expected):
+        raise SchedulerContractError("public S0 compatibility replay evidence mismatch")
+
+
+def validate_formal_freeze(
+    freeze_path: Path = FORMAL_FREEZE,
+    *,
+    project_root: Path = ROOT,
+) -> FormalFreezeContext:
+    """Validate the complete formal gate before initialization or execution.
+
+    The freeze is not trusted because it has a plausible namespace.  Every
+    mandatory source byte, the evaluator binary, the exact matrix, scheduler
+    resources, proof thresholds, and evaluator ABI are checked before a run
+    binding can be constructed.
+    """
+
+    freeze_path = checked_lexical_path(
+        freeze_path,
+        label="formal L2-A1 freeze",
+        require_file=True,
+    )
+    project_root = checked_lexical_path(
+        project_root,
+        label="project root",
+        require_directory=True,
+    )
+    freeze = strict_json_load(freeze_path)
+    if not isinstance(freeze, Mapping):
+        raise SchedulerContractError("malformed formal freeze")
+    if not (
+        type(freeze.get("schema_version")) is int
+        and freeze.get("schema_version") == SCHEMA_VERSION
+        and freeze.get("protocol_id") == PROTOCOL_ID
+        and freeze.get("status") == EXPECTED_FREEZE_STATUS
+        and freeze.get("scientific_licensing_enabled") is True
+        and freeze.get("checker_mode") == EXPECTED_CHECKER_MODE
+    ):
+        raise SchedulerContractError("formal freeze status or namespace mismatch")
+
+    expected_matrix = [
+        TreeKey(bits, slab_id).payload()
+        for bits in PRECISIONS
+        for slab_id in SLAB_IDS
+    ]
+    if not exact_json_equal(freeze.get("matrix"), expected_matrix):
+        raise MatrixContractError("formal freeze does not contain the exact ordered 102 matrix")
+
+    input_hashes = freeze.get("input_hashes")
+    if not isinstance(input_hashes, Mapping) or not set(MANDATORY_FROZEN_INPUTS).issubset(
+        input_hashes
+    ):
+        raise SchedulerContractError("formal freeze misses mandatory input hashes")
+    validated_hashes: dict[str, str] = {}
+    for relative, expected in input_hashes.items():
+        if not isinstance(relative, str) or not isinstance(expected, str):
+            raise SchedulerContractError("formal input hash DAG is not string-to-string")
+        if not HEX_SHA256.fullmatch(expected):
+            raise SchedulerContractError(f"invalid frozen input hash: {relative}")
+        candidate = resolve_project_input(project_root, relative)
+        if sha256(candidate) != expected:
+            raise SchedulerContractError(f"frozen input hash mismatch: {relative}")
+        validated_hashes[relative] = expected
+
+    checker_relative = "scripts/check_r401_val_l2_all_slabs_independent.py"
+    runner_relative = "scripts/run_r401_val_l2_all_slabs.py"
+    checker_hash = validated_hashes[checker_relative]
+    if freeze.get("checker_source_sha256") != checker_hash:
+        raise SchedulerContractError("formal checker hash DAG mismatch")
+    # State this edge explicitly: the producer may not authorize a freeze that
+    # binds a different producer source under a misleading path.
+    if validated_hashes[runner_relative] != sha256(
+        resolve_project_input(project_root, runner_relative)
+    ):
+        raise SchedulerContractError("formal producer hash DAG mismatch")
+    validate_s0_compatibility_replay(project_root)
+
+    review_path = resolve_project_input(project_root, PREFREEZE_REVIEW_RELATIVE)
+    try:
+        review_lines = review_path.read_text(encoding="utf-8").splitlines()
+    except UnicodeDecodeError as error:
+        raise SchedulerContractError("pre-freeze review is not UTF-8 text") from error
+    review_declarations = [
+        line
+        for line in review_lines
+        if markdown_has_verdict_declaration(line)
+    ]
+    if review_declarations != [PREFREEZE_ACCEPT_MARKER]:
+        raise SchedulerContractError(
+            "pre-freeze review must contain exactly one exact ACCEPT_FOR_FREEZE verdict"
+        )
+
+    machine_relative = (
+        "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json"
+    )
+    machine_freeze = strict_json_load(
+        resolve_project_input(project_root, machine_relative)
+    )
+    if not isinstance(machine_freeze, Mapping) or not (
+        type(machine_freeze.get("schema_version")) is int
+        and machine_freeze.get("schema_version") == SCHEMA_VERSION
+        and machine_freeze.get("protocol_id") == PROTOCOL_ID
+        and machine_freeze.get("status") == EXPECTED_FREEZE_STATUS
+        and machine_freeze.get("scientific_licensing_enabled") is True
+        and exact_json_equal(
+            machine_freeze.get("machine_requirements"),
+            EXPECTED_MACHINE_REQUIREMENTS,
+        )
+    ):
+        raise SchedulerContractError("machine freeze status or requirements mismatch")
+    if not exact_json_equal(
+        freeze.get("machine_requirements"), EXPECTED_MACHINE_REQUIREMENTS
+    ):
+        raise SchedulerContractError("formal freeze machine requirements mismatch")
+
+    limits = freeze.get("per_tree_limits")
+    if not isinstance(limits, Mapping) or set(limits) != {"max_depth", "max_nodes"}:
+        raise SchedulerContractError("invalid frozen per-tree limit object")
+    max_depth, max_nodes = limits.get("max_depth"), limits.get("max_nodes")
+    if (
+        not isinstance(max_depth, int)
+        or isinstance(max_depth, bool)
+        or max_depth < 0
+        or not isinstance(max_nodes, int)
+        or isinstance(max_nodes, bool)
+        or max_nodes <= 0
+    ):
+        raise SchedulerContractError("invalid frozen per-tree limits")
+
+    scheduler = freeze.get("scheduler")
+    if not isinstance(scheduler, Mapping):
+        raise SchedulerContractError("formal freeze has no scheduler contract")
+    workers = scheduler.get("workers")
+    timeout = scheduler.get("node_timeout_seconds")
+    if not (
+        set(scheduler)
+        == {
+            "policy",
+            "workers",
+            "node_timeout_seconds",
+            "global_scientific_budget",
+            "max_inflight_per_tree",
+        }
+        and scheduler.get("policy") == EXPECTED_SCHEDULER_POLICY
+        and isinstance(workers, int)
+        and not isinstance(workers, bool)
+        and 0 < workers <= EXPECTED_MACHINE_REQUIREMENTS["cpu_logical"]
+        and (
+            timeout is None
+            or (
+                isinstance(timeout, int)
+                and not isinstance(timeout, bool)
+                and timeout > 0
+            )
+        )
+        and scheduler.get("global_scientific_budget") is None
+        and type(scheduler.get("max_inflight_per_tree")) is int
+        and scheduler.get("max_inflight_per_tree") == 1
+    ):
+        raise SchedulerContractError("invalid frozen scheduler contract")
+
+    thresholds = freeze.get("logical_thresholds")
+    if not exact_json_equal(thresholds, EXPECTED_LOGICAL_THRESHOLDS):
+        raise SchedulerContractError("invalid frozen logical thresholds")
+
+    evaluator = freeze.get("evaluator")
+    if not isinstance(evaluator, Mapping):
+        raise SchedulerContractError("formal freeze has no evaluator contract")
+    source_file = evaluator.get("source_file")
+    source_hash = evaluator.get("source_sha256")
+    binary_file = evaluator.get("binary_file")
+    binary_hash = evaluator.get("binary_sha256")
+    capd_flags = evaluator.get("capd_flags")
+    if source_file != SOURCE.relative_to(ROOT).as_posix():
+        raise SchedulerContractError("frozen evaluator source path mismatch")
+    if (
+        not isinstance(source_hash, str)
+        or not HEX_SHA256.fullmatch(source_hash)
+        or validated_hashes.get(str(source_file)) != source_hash
+    ):
+        raise SchedulerContractError("frozen evaluator source hash DAG mismatch")
+    if sha256(resolve_project_input(project_root, str(source_file))) != source_hash:
+        raise SchedulerContractError("frozen evaluator source bytes mismatch")
+    if not isinstance(binary_file, str) or not Path(binary_file).is_absolute():
+        raise SchedulerContractError("frozen evaluator binary path is not absolute")
+    binary = checked_lexical_path(
+        Path(binary_file),
+        label="frozen evaluator binary",
+        require_file=True,
+    )
+    if str(binary) != binary_file:
+        raise SchedulerContractError("frozen evaluator binary path is not canonical")
+    if (
+        not isinstance(binary_hash, str)
+        or not HEX_SHA256.fullmatch(binary_hash)
+        or sha256(binary) != binary_hash
+    ):
+        raise SchedulerContractError("frozen evaluator binary hash mismatch")
+    if evaluator.get("capd_commit") != EXPECTED_CAPD_COMMIT:
+        raise SchedulerContractError("frozen CAPD commit mismatch")
+    if (
+        not isinstance(capd_flags, list)
+        or not all(isinstance(flag, str) for flag in capd_flags)
+        or not REQUIRED_CAPD_FLAGS.issubset(capd_flags)
+    ):
+        raise SchedulerContractError("invalid frozen CAPD flags")
+    if not exact_json_equal(
+        evaluator.get("status_returncode_whitelist"), formal_status_whitelist()
+    ):
+        raise SchedulerContractError("frozen evaluator status whitelist mismatch")
+
+    return FormalFreezeContext(
+        freeze=dict(freeze),
+        freeze_path=freeze_path,
+        freeze_sha256=sha256(freeze_path),
+        input_hashes=validated_hashes,
+        per_tree_limits={"max_depth": max_depth, "max_nodes": max_nodes},
+        scheduler=dict(scheduler),
+        evaluator=dict(evaluator),
+        logical_thresholds=dict(thresholds),
+    )
+
+
+def detected_logical_cpus() -> int:
+    if hasattr(os, "sched_getaffinity"):
+        return len(os.sched_getaffinity(0))
+    return os.cpu_count() or 0
+
+
+def detected_memory_limit_bytes() -> int:
+    """Return the enforced cgroup limit, falling back to physical memory."""
+
+    candidates = (
+        Path("/sys/fs/cgroup/memory.max"),
+        Path("/sys/fs/cgroup/memory/memory.limit_in_bytes"),
+    )
+    for candidate in candidates:
+        try:
+            raw = candidate.read_text(encoding="utf-8").strip()
+        except OSError:
+            continue
+        if raw and raw != "max":
+            try:
+                value = int(raw)
+            except ValueError:
+                continue
+            if 0 < value < 2**60:
+                return value
+    for line in Path("/proc/meminfo").read_text(encoding="utf-8").splitlines():
+        if line.startswith("MemTotal:"):
+            return int(line.split()[1]) * 1024
+    raise SchedulerContractError("cannot determine runtime memory limit")
+
+
+def free_bytes(path: Path) -> int:
+    return os.statvfs(path).f_bavail * os.statvfs(path).f_frsize
+
+
+def validate_runtime_machine(
+    formal: FormalFreezeContext,
+    *,
+    storage_path: Path,
+    require_launch_storage: bool,
+) -> int:
+    requirements = formal.freeze.get("machine_requirements")
+    if not exact_json_equal(requirements, EXPECTED_MACHINE_REQUIREMENTS):
+        raise SchedulerContractError("runtime machine contract is not frozen")
+    if detected_logical_cpus() != requirements["cpu_logical"]:
+        raise SchedulerContractError("runtime logical CPU count differs from freeze")
+    if detected_memory_limit_bytes() != requirements["memory_limit_bytes"]:
+        raise SchedulerContractError("runtime memory limit differs from freeze")
+    probe = storage_path if storage_path.exists() else storage_path.parent
+    available = free_bytes(probe)
+    if require_launch_storage and available < requirements["min_launch_free_bytes"]:
+        raise SchedulerContractError(
+            "runtime free storage is below the frozen 100 GiB launch gate"
+        )
+    return available
 
 
 def build_run_binding(
     *,
     plan_records: Mapping[str, Mapping[str, Any]],
-    evaluator: Path,
-    freeze: Path | None,
-    capd_commit: str,
-    capd_flags: Sequence[str],
-    workers: int,
-    max_depth: int,
-    max_nodes: int,
-    node_timeout_seconds: int | None,
+    formal: FormalFreezeContext,
 ) -> dict[str, Any]:
-    if workers <= 0 or max_depth < 0 or max_nodes <= 0:
-        raise SchedulerContractError("invalid worker/depth/node resource setting")
     matrix = exact_production_matrix(plan_records)
     return {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "scientific_licensing_enabled": False,
-        "prospective_l2_a1_freeze_sha256": None if freeze is None else sha256(freeze),
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "l2_a1_freeze_sha256": formal.freeze_sha256,
+        "machine_freeze_sha256": formal.input_hashes[
+            "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json"
+        ],
+        "machine_requirements": dict(formal.freeze["machine_requirements"]),
         "matrix": [tree.payload() for tree in matrix],
-        "per_tree_limits": {"max_depth": max_depth, "max_nodes": max_nodes},
-        "scheduler": {
-            "policy": "deterministic_round_robin_barrier_batches_v1",
-            "workers": workers,
-            "node_timeout_seconds": node_timeout_seconds,
-            "global_scientific_budget": None,
-        },
-        "evaluator": {
-            "source_file": SOURCE.relative_to(ROOT).as_posix(),
-            "source_sha256": sha256(SOURCE),
-            "binary_file": str(evaluator.resolve()),
-            "binary_sha256": sha256(evaluator.resolve()),
-            "capd_commit": capd_commit,
-            "capd_flags": list(capd_flags),
-            "status_returncode_whitelist": {
-                "excluded": sorted([list(item) for item in EXCLUDED_RESULTS]),
-                "splittable": sorted([list(item) for item in SPLITTABLE_RESULTS]),
-                "scientific_stop": sorted([list(item) for item in SCIENTIFIC_STOP_RESULTS]),
-                "invalid": sorted([list(item) for item in INVALID_RESULTS]),
-            },
-        },
-        "logical_thresholds": {
-            "logical_margin_128": "1e-30",
-            "logical_margin_256": "1e-60",
-            "newton_guard_128": "1e-40",
-            "newton_guard_256": "1e-75",
-        },
-        "input_hashes": immutable_input_hashes(freeze),
+        "per_tree_limits": dict(formal.per_tree_limits),
+        "scheduler": dict(formal.scheduler),
+        "evaluator": dict(formal.evaluator),
+        "logical_thresholds": dict(formal.logical_thresholds),
+        "input_hashes": dict(formal.input_hashes),
     }
 
 
@@ -1470,16 +1912,25 @@ def ensure_run_config(
                 f"output generation already exists; use --resume only with exact binding: {output}"
             )
         config = strict_json_load(path)
-        if config.get("binding") != binding or config.get("binding_sha256") != binding_sha:
+        if (
+            not exact_json_equal(config.get("binding"), binding)
+            or config.get("binding_sha256") != binding_sha
+        ):
             raise ResumeBindingError(
                 "run-config binding mismatch; preserve this generation and use a new output directory"
             )
         if (
-            config.get("milestone_status") is not None
+            type(config.get("schema_version")) is not int
+            or config.get("schema_version") != SCHEMA_VERSION
+            or config.get("protocol_id") != PROTOCOL_ID
+            or config.get("licensing") != "FROZEN_PRODUCTION"
+            or config.get("scientific_licensing_enabled") is not True
+            or config.get("producer_state") != "FROZEN_GENERATION_INITIALIZED"
+            or config.get("milestone_status") is not None
             or config.get("theorem_status") is not None
             or config.get("final_status") is not None
         ):
-            raise ResumeBindingError("producer run config contains a scientific status")
+            raise ResumeBindingError("producer run config namespace/status mismatch")
         return config, sha256(path)
     if resume:
         raise ResumeBindingError(f"cannot resume missing run config: {path}")
@@ -1491,8 +1942,9 @@ def ensure_run_config(
     config = {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "producer_state": "DRAFT_GENERATION_INITIALIZED",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": "FROZEN_GENERATION_INITIALIZED",
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
@@ -1501,6 +1953,70 @@ def ensure_run_config(
     }
     atomic_write_json(path, config)
     return config, sha256(path)
+
+
+def quarantine_incompatible_generation(
+    output: Path,
+    expected_binding: Mapping[str, Any],
+) -> Path:
+    """Atomically preserve a whole incompatible generation for recovery.
+
+    This operation is deliberately narrow: it is permitted only when an
+    existing, parseable run config binds different immutable inputs.  It never
+    deletes or merges files.  The caller may initialize a fresh generation at
+    the original path only after this rename succeeds.
+    """
+
+    if output.is_symlink() or not output.is_dir():
+        raise ResumeBindingError("quarantine target is not a regular generation directory")
+    run_config_path = output / "run_config.json"
+    if run_config_path.is_symlink() or not run_config_path.is_file():
+        raise ResumeBindingError("quarantine requires an existing regular run config")
+    old_config = strict_json_load(run_config_path)
+    if not isinstance(old_config, Mapping) or not isinstance(
+        old_config.get("binding"), Mapping
+    ):
+        raise ResumeBindingError("quarantine requires a parseable run-config binding")
+    old_binding = old_config["binding"]
+    # JSON bindings are type-strict.  In particular, ``1``, ``1.0``, and
+    # ``true`` are three different frozen values even though Python's normal
+    # equality relation aliases them.  Use the same canonical-byte comparison
+    # as the resume gate so quarantine can always recover a generation that
+    # resume correctly rejects.
+    if exact_json_equal(old_binding, expected_binding):
+        raise ResumeBindingError("refusing to quarantine a binding-compatible generation")
+
+    index = 1
+    while True:
+        quarantine = output.parent / f"{output.name}.quarantine-{index:04d}"
+        if not quarantine.exists() and not quarantine.is_symlink():
+            break
+        index += 1
+    os.rename(output, quarantine)
+    fsync_directory(output.parent)
+    record = {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "licensing": "OPERATIONAL_RECOVERY_ONLY",
+        "scientific_licensing_enabled": False,
+        "producer_state": "QUARANTINED_INCOMPATIBLE_GENERATION",
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+        "original_generation_path": str(output),
+        "quarantine_path": str(quarantine),
+        "reason": "RUN_CONFIG_BINDING_MISMATCH",
+        "old_run_config_sha256": sha256(quarantine / "run_config.json"),
+        "old_binding_sha256_recomputed": sha256_bytes(
+            canonical_json_bytes(old_binding)
+        ),
+        "old_binding_sha256_stored": old_config.get("binding_sha256"),
+        "expected_binding_sha256": sha256_bytes(
+            canonical_json_bytes(expected_binding)
+        ),
+    }
+    write_once_or_verify(quarantine / "QUARANTINE_RECORD.json", record)
+    return quarantine
 
 
 def invoke_evaluator(
@@ -1547,6 +2063,17 @@ def task_order_key(
     return matrix_index[task.tree], task.depth, task.node_id
 
 
+def write_operational_live_status(
+    output: Path,
+    payload: Mapping[str, Any],
+) -> Path:
+    """Write mutable telemetry outside the authoritative generation root."""
+
+    status_path = output.parent / ".operational" / output.name / "live_status.json"
+    atomic_write_json(status_path, dict(payload))
+    return status_path
+
+
 def run_scheduler_session(
     *,
     output: Path,
@@ -1561,9 +2088,10 @@ def run_scheduler_session(
     max_nodes: int,
     node_timeout_seconds: int | None,
     dispatch_limit: int | None,
+    operational_pause_below_free_bytes: int | None = None,
     evaluator_function: Callable[..., EvaluatorOutcome] = invoke_evaluator,
 ) -> dict[str, Any]:
-    """Run deterministic barrier batches; intended for a future frozen run."""
+    """Run formal deterministic barrier batches without assigning a theorem."""
 
     evaluator_path = str(evaluator.resolve())
     # A committed tree is immutable.  Validate every existing tree commit
@@ -1590,9 +2118,33 @@ def run_scheduler_session(
             queue.extend(tree, states[tree].pending)
     matrix_index = {tree: index for index, tree in enumerate(matrix)}
     dispatched = 0
+    operational_pause = False
+    pause_free_bytes: int | None = None
     while queue:
         if dispatch_limit is not None and dispatched >= dispatch_limit:
             break
+        if operational_pause_below_free_bytes is not None:
+            pause_free_bytes = free_bytes(output)
+            if pause_free_bytes < operational_pause_below_free_bytes:
+                operational_pause = True
+                write_operational_live_status(
+                    output,
+                    {
+                        "schema_version": SCHEMA_VERSION,
+                        "protocol_id": PROTOCOL_ID,
+                        "producer_state": "OPERATIONAL_STORAGE_PAUSE",
+                        "milestone_status": None,
+                        "theorem_status": None,
+                        "final_status": None,
+                        "generation_path": str(output),
+                        "free_bytes": pause_free_bytes,
+                        "resume_when_free_bytes_at_least": (
+                            operational_pause_below_free_bytes
+                        ),
+                        "note": "operational pause only; no scientific failure assigned",
+                    },
+                )
+                break
         capacity = workers
         if dispatch_limit is not None:
             capacity = min(capacity, dispatch_limit - dispatched)
@@ -1659,7 +2211,7 @@ def run_scheduler_session(
     )
     for tree in matrix:
         state = final_states[tree]
-        if state.draft_complete:
+        if state.complete:
             finalize_tree_transaction(
                 output,
                 tree,
@@ -1675,13 +2227,17 @@ def run_scheduler_session(
     scheduler_state = {
         "schema_version": SCHEMA_VERSION,
         "protocol_id": PROTOCOL_ID,
-        "licensing": "DRAFT_NONE",
-        "producer_state": "DRAFT_SESSION_ARCHIVED",
+        "licensing": "FROZEN_PRODUCTION",
+        "scientific_licensing_enabled": True,
+        "producer_state": "FROZEN_SESSION_ARCHIVED",
         "milestone_status": None,
         "theorem_status": None,
         "final_status": None,
         "run_config_sha256": run_config_sha256,
         "session_dispatch_count": dispatched,
+        "max_inflight_per_tree": 1,
+        "operational_pause": operational_pause,
+        "operational_pause_free_bytes": pause_free_bytes if operational_pause else None,
         "committed_tree_count": len(partial_manifests),
         "tree_states": [
             {
@@ -1710,58 +2266,93 @@ def run_scheduler_session(
     return scheduler_state
 
 
-def parse_args() -> argparse.Namespace:
+def validate_cli_contract(
+    formal: FormalFreezeContext,
+    *,
+    evaluator: Path,
+    capd_commit: str,
+    capd_flags: Sequence[str],
+    workers: int,
+    max_depth: int,
+    max_nodes: int,
+    node_timeout_seconds: int | None,
+) -> None:
+    frozen_evaluator = formal.evaluator
+    frozen_scheduler = formal.scheduler
+    frozen_limits = formal.per_tree_limits
+    if str(evaluator) != frozen_evaluator.get("binary_file"):
+        raise SchedulerContractError("CLI evaluator path differs from freeze")
+    if sha256(evaluator) != frozen_evaluator.get("binary_sha256"):
+        raise SchedulerContractError("CLI evaluator bytes differ from freeze")
+    if capd_commit != frozen_evaluator.get("capd_commit"):
+        raise SchedulerContractError("runtime CAPD commit differs from freeze")
+    if list(capd_flags) != frozen_evaluator.get("capd_flags"):
+        raise SchedulerContractError("runtime CAPD flags differ from frozen ordered flags")
+    if workers != frozen_scheduler.get("workers"):
+        raise SchedulerContractError("CLI worker count differs from freeze")
+    if node_timeout_seconds != frozen_scheduler.get("node_timeout_seconds"):
+        raise SchedulerContractError("CLI node timeout differs from freeze")
+    if frozen_scheduler.get("max_inflight_per_tree") != 1:
+        raise SchedulerContractError("freeze does not enforce one in-flight node per tree")
+    if max_depth != frozen_limits.get("max_depth"):
+        raise SchedulerContractError("CLI max depth differs from freeze")
+    if max_nodes != frozen_limits.get("max_nodes"):
+        raise SchedulerContractError("CLI max nodes differs from freeze")
+
+
+def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "DRAFT/non-licensing cross-tree scheduler; production is disabled "
-            "without an explicit audited freeze file"
+            "Fail-closed formal R401-VAL-L2-A1 producer; all scientific "
+            "statuses remain null pending independent replay"
         )
     )
     parser.add_argument(
         "--output",
         type=Path,
-        default=ROOT / "results/r401_val_l2_all_slabs.draft",
+        default=ROOT / "results/r401_val_l2_all_slabs",
     )
     parser.add_argument("--evaluator", type=Path, required=True)
     parser.add_argument("--capd-source", type=Path, required=True)
     parser.add_argument("--capd-config", type=Path, required=True)
-    parser.add_argument("--freeze", type=Path)
-    parser.add_argument("--workers", type=int, default=min(24, os.cpu_count() or 1))
-    # No defaults: L2-A1 per-tree limits are not frozen in the current draft.
+    parser.add_argument("--freeze", type=Path, default=FORMAL_FREEZE)
+    parser.add_argument("--workers", type=int, required=True)
     parser.add_argument("--max-depth", type=int, required=True)
     parser.add_argument("--max-nodes", type=int, required=True)
     parser.add_argument("--node-timeout-seconds", type=int)
     parser.add_argument("--dispatch-limit", type=int)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--quarantine-incompatible", action="store_true")
     parser.add_argument("--initialize-only", action="store_true")
-    parser.add_argument("--execute-draft", action="store_true")
-    return parser.parse_args()
+    parser.add_argument("--execute", action="store_true")
+    return parser.parse_args(argv)
 
 
 def main() -> int:
     args = parse_args()
-    if args.initialize_only == args.execute_draft:
+    if args.initialize_only == args.execute:
         raise SchedulerContractError(
-            "choose exactly one of --initialize-only or --execute-draft"
+            "choose exactly one of --initialize-only or --execute"
+        )
+    if args.resume and args.quarantine_incompatible:
+        raise SchedulerContractError(
+            "--resume and --quarantine-incompatible are mutually exclusive"
         )
     evaluator = checked_lexical_path(
         args.evaluator,
         label="evaluator",
         require_file=True,
     )
-    freeze = (
-        None
-        if args.freeze is None
-        else checked_lexical_path(
-            args.freeze,
-            label="prospective freeze",
-            require_file=True,
-        )
+    freeze = checked_lexical_path(
+        args.freeze,
+        label="formal freeze",
+        require_file=True,
     )
-    if args.execute_draft and freeze is None:
+    if freeze != Path(os.path.abspath(os.fspath(FORMAL_FREEZE))):
         raise SchedulerContractError(
-            "all-slab execution is disabled until an audited L2-A1 freeze is supplied"
+            "formal production accepts only the canonical L2-A1 freeze path"
         )
+    formal = validate_formal_freeze(freeze)
     plan_records = load_plan_records()
     matrix = exact_production_matrix(plan_records)
     capd_source = checked_lexical_path(
@@ -1777,20 +2368,12 @@ def main() -> int:
     capd_commit = command_output(
         ["git", "-C", str(capd_source), "rev-parse", "HEAD"]
     )
-    if capd_commit != EXPECTED_CAPD_COMMIT:
-        raise SchedulerContractError(f"unexpected CAPD commit: {capd_commit}")
     capd_flags = shlex.split(
         command_output([str(capd_config), "--cflags", "--libs"])
     )
-    required_flags = {"-D__HAVE_MPFR__", "-lmpfr", "-lgmp", "-frounding-math"}
-    if not required_flags.issubset(capd_flags):
-        raise SchedulerContractError(
-            f"CAPD flags omit required values: {required_flags - set(capd_flags)}"
-        )
-    binding = build_run_binding(
-        plan_records=plan_records,
+    validate_cli_contract(
+        formal,
         evaluator=evaluator,
-        freeze=freeze,
         capd_commit=capd_commit,
         capd_flags=capd_flags,
         workers=args.workers,
@@ -1798,11 +2381,22 @@ def main() -> int:
         max_nodes=args.max_nodes,
         node_timeout_seconds=args.node_timeout_seconds,
     )
+    binding = build_run_binding(
+        plan_records=plan_records,
+        formal=formal,
+    )
     output = checked_lexical_path(
         args.output,
         label="output generation",
         allow_missing_leaf=True,
     )
+    validate_runtime_machine(
+        formal,
+        storage_path=output,
+        require_launch_storage=args.execute,
+    )
+    if args.quarantine_incompatible:
+        quarantine_incompatible_generation(output, binding)
     _config, run_config_sha = ensure_run_config(
         output,
         binding,
@@ -1810,8 +2404,11 @@ def main() -> int:
     )
     if args.initialize_only:
         state = {
+            "schema_version": SCHEMA_VERSION,
             "protocol_id": PROTOCOL_ID,
-            "producer_state": "DRAFT_MATRIX_INITIALIZED_ONLY",
+            "licensing": "FROZEN_PRODUCTION",
+            "scientific_licensing_enabled": True,
+            "producer_state": "FROZEN_MATRIX_INITIALIZED_ONLY",
             "milestone_status": None,
             "theorem_status": None,
             "final_status": None,
@@ -1835,6 +2432,9 @@ def main() -> int:
         max_nodes=args.max_nodes,
         node_timeout_seconds=args.node_timeout_seconds,
         dispatch_limit=args.dispatch_limit,
+        operational_pause_below_free_bytes=formal.freeze["machine_requirements"][
+            "operational_pause_below_free_bytes"
+        ],
     )
     print(json.dumps(state, indent=2, sort_keys=True))
     return 0

@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Independent prospective checker for R401-VAL-L2-A1.
+"""Independent exact-rational checker for formal R401-VAL-L2-A1 archives.
 
-This module is intentionally ``DRAFT_NON_LICENSING``.  It does not import
-the producer, scheduler, or their helpers.  All constants, path rules,
-exact-rational interval operations, tree reconstruction, and status rules
-below are independently stated.
+This module does not import the producer, scheduler, or their helpers.  All
+constants, path rules, exact-rational interval operations, tree
+reconstruction, and status rules below are independently stated.  It is a
+formal checker, but it remains fail-closed until an exact audited freeze and
+sealed run configuration are supplied.
 
 The checker has two jobs:
 
 * make the future all-51-slab proof archive mechanically checkable; and
-* fail closed while the formal freeze and its sealed run configuration do
-  not exist.
+* fail closed unless the formal freeze, machine freeze, mandatory hash DAG,
+  and sealed run configuration all validate exactly.
 
 It never reruns the ODE integration.  Instead, it replays the proof objects
 printed by the interval evaluator.  In particular, it reconstructs every
@@ -23,8 +24,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 import re
+import secrets
+import stat
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path, PurePosixPath
@@ -38,6 +42,7 @@ FORMAL_FREEZE = ROOT / "research/route_a_wave_trace/R401_VAL_L2_A1_FREEZE.json"
 L1_RESULT = ROOT / "results/r401_val_l1_branch"
 L1_RELEASE = L1_RESULT / "RELEASE_PROVENANCE.json"
 L1_SUMMARY = L1_RESULT / "summary.json"
+L1_MANIFEST = L1_RESULT / "manifest.json"
 L1_CHECKER = L1_RESULT / "independent_checker.json"
 L1_POSTCHECK = L1_RESULT / "POSTCHECK_STATUS.json"
 
@@ -48,14 +53,49 @@ MANDATORY_FROZEN_INPUTS = (
     "validated/CAPD_DEPENDENCY.md",
     "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json",
     "research/route_a_wave_trace/R401_VAL_L2_A1_PROTOCOL.md",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_S0_COMPATIBILITY_REPLAY.json",
+    "scripts/replay_r401_val_l2_s0_through_a1_checker.py",
+    "scripts/build_r401_val_l2_a1_release_provenance.py",
+    "research/route_a_wave_trace/R401_VAL_L2_A1_RELEASE_PROVENANCE_CONTRACT.md",
+    "results/r401_val_l1_branch/RELEASE_PROVENANCE.json",
+    "results/r401_val_l1_branch/summary.json",
+    "results/r401_val_l1_branch/manifest.json",
+    "results/r401_val_l1_branch/independent_checker.json",
+    "results/r401_val_l1_branch/POSTCHECK_STATUS.json",
 )
 
 FORMAL_PROTOCOL_ID = "R401-VAL-L2-A1"
-DRAFT_PROTOCOL_ID = "R401-VAL-L2-A1-DRAFT"
-CHECKER_MODE = "DRAFT_NON_LICENSING"
+CHECKER_MODE = "INDEPENDENT_EXACT_RATIONAL_REPLAY"
 SCHEMA_VERSION = 1
 EXPECTED_CAPD_COMMIT = "731079217a9254ea2948d742df2b170895effe7f"
 EXPECTED_SCHEDULER_POLICY = "deterministic_round_robin_barrier_batches_v1"
+MACHINE_FREEZE_RELATIVE = (
+    "research/route_a_wave_trace/R401_VAL_L2_A1_MACHINE_FREEZE.json"
+)
+PREFREEZE_REVIEW_RELATIVE = (
+    "research/route_a_wave_trace/R401_VAL_L2_A1_PREFREEZE_REVIEW.md"
+)
+S0_REPLAY_RELATIVE = (
+    "research/route_a_wave_trace/R401_VAL_L2_A1_S0_COMPATIBILITY_REPLAY.json"
+)
+S0_ADAPTER_RELATIVE = "scripts/replay_r401_val_l2_s0_through_a1_checker.py"
+S0_RESULT_RELATIVE = "results/r401_val_l2_s0_local_complement"
+PREFREEZE_ACCEPT_LINE = "Verdict: ACCEPT_FOR_FREEZE"
+EXPECTED_MACHINE_REQUIREMENTS = {
+    "cpu_logical": 32,
+    "memory_limit_bytes": 64_424_509_440,
+    "min_launch_free_bytes": 107_374_182_400,
+    "operational_pause_below_free_bytes": 161_061_273_600,
+}
+EXPECTED_PRODUCER_STATES = {
+    "run_config": "FROZEN_GENERATION_INITIALIZED",
+    "tree": "FROZEN_TREE_ARCHIVED",
+    "tree_manifest": "FROZEN_TREE_COMMITTED",
+    "aggregate_summary": "FROZEN_ALL_TREES_ARCHIVED",
+    "aggregate_manifest": "FROZEN_AGGREGATE_COMMITTED",
+}
 REQUIRED_CAPD_FLAGS = frozenset(
     {"-D__HAVE_MPFR__", "-lmpfr", "-lgmp", "-frounding-math"}
 )
@@ -149,6 +189,9 @@ class FormalContext:
     evaluator_capd_flags: tuple[str, ...]
     scheduler: Mapping[str, Any]
     logical_thresholds: Mapping[str, Any]
+    machine_requirements: Mapping[str, int]
+    machine_freeze_sha256: str
+    prefreeze_review_sha256: str
 
 
 def exact_matrix() -> tuple[TreeKey, ...]:
@@ -172,11 +215,18 @@ def strict_json_loads(raw: str) -> Any:
     def reject_constant(value: str) -> None:
         raise StrictJSONError(f"NONFINITE_JSON_CONSTANT: {value}")
 
+    def parse_finite_float(value: str) -> float:
+        parsed = float(value)
+        if not math.isfinite(parsed):
+            raise StrictJSONError(f"NONFINITE_JSON_NUMBER: {value}")
+        return parsed
+
     try:
         return json.loads(
             raw,
             object_pairs_hook=_reject_duplicate_keys,
             parse_constant=reject_constant,
+            parse_float=parse_finite_float,
         )
     except StrictJSONError:
         raise
@@ -200,6 +250,28 @@ def canonical_json_bytes(payload: Any) -> bytes:
         )
         + "\n"
     ).encode("utf-8")
+
+
+def exact_json_equal(actual: Any, expected: Any) -> bool:
+    """Compare JSON values without bool/int/float equality coercion."""
+
+    try:
+        return canonical_json_bytes(actual) == canonical_json_bytes(expected)
+    except (TypeError, ValueError):
+        return False
+
+
+def markdown_has_verdict_declaration(line: str) -> bool:
+    """Fail closed on any standalone ``Verdict`` token in a review line.
+
+    The exact accepted byte line is checked separately.  Treating every token
+    as a declaration candidate closes Markdown tables, list/quote decoration,
+    Unicode punctuation, and dash-separated near-marker aliases.
+    """
+
+    return re.search(
+        r"(?<![A-Za-z0-9_])Verdict(?![A-Za-z0-9_])", line, re.IGNORECASE
+    ) is not None
 
 
 def sha256_bytes(payload: bytes) -> str:
@@ -247,12 +319,14 @@ def checked_lexical_path(
 
 
 def safe_relative_path(value: str) -> PurePosixPath:
-    if not isinstance(value, str) or not value or "\\" in value:
+    if not isinstance(value, str) or not value or "\\" in value or "\x00" in value:
         raise PathContractError(f"UNSAFE_PATH: {value!r}")
     candidate = PurePosixPath(value)
     if candidate.is_absolute() or ".." in candidate.parts:
         raise PathContractError(f"PATH_TRAVERSAL: {value!r}")
-    if any(part in {"", "."} or part.startswith(".") for part in candidate.parts):
+    if candidate.as_posix() != value or any(
+        part in {"", "."} or part.startswith(".") for part in candidate.parts
+    ):
         raise PathContractError(f"NONCANONICAL_PATH: {value!r}")
     return candidate
 
@@ -286,10 +360,30 @@ def scan_exact_json_paths(root: Path, expected: Iterable[Path]) -> None:
     actual: set[Path] = set()
     for path in root.rglob("*"):
         relative = path.relative_to(root)
-        if any(part.startswith(".") for part in relative.parts):
-            raise PathContractError(f"HIDDEN_AUTHORITATIVE_PATH: {path}")
         if path.is_symlink():
             raise PathContractError(f"SYMLINK_REJECTED: {path}")
+        # ``write_once_or_verify`` uses this exact hidden regular-file
+        # namespace before the atomic rename of a tree or tree manifest.  A
+        # SIGKILL can preserve it.  Like an interrupted node directory it is
+        # non-authoritative, but no other hidden path is accepted.
+        if len(relative.parts) == 2 and path.is_file():
+            bits_text, staging_name = relative.parts
+            try:
+                bits = int(bits_text)
+            except ValueError:
+                bits = -1
+            match = re.fullmatch(
+                r"\.(S[0-9]{3})\.json\.tmp-([A-Za-z0-9][A-Za-z0-9._-]*)",
+                staging_name,
+            )
+            if (
+                bits in PRECISIONS
+                and match is not None
+                and match.group(1) in SLAB_IDS
+            ):
+                continue
+        if any(part.startswith(".") for part in relative.parts):
+            raise PathContractError(f"HIDDEN_AUTHORITATIVE_PATH: {path}")
         if path.is_file():
             if path.suffix != ".json":
                 raise PathContractError(f"EXTRA_NON_JSON_SHARD: {path}")
@@ -883,7 +977,9 @@ def load_plan(path: Path = PLAN) -> dict[str, Mapping[str, Any]]:
     for record in slabs:
         if not isinstance(record, Mapping):
             raise MatrixContractError("MALFORMED_PLAN_RECORD")
-        slab_id = str(record.get("slab_id"))
+        slab_id = record.get("slab_id")
+        if not isinstance(slab_id, str):
+            raise MatrixContractError("PLAN_SLAB_ID_NOT_EXACT_STRING")
         if slab_id in result:
             raise MatrixContractError(f"DUPLICATE_PLAN_SLAB: {slab_id}")
         result[slab_id] = record
@@ -893,17 +989,29 @@ def load_plan(path: Path = PLAN) -> dict[str, Mapping[str, Any]]:
     return result
 
 
-def _matrix_payload(entries: Any, label: str) -> tuple[TreeKey, ...]:
+def _matrix_payload(
+    entries: Any,
+    label: str,
+    *,
+    allow_metadata: bool = False,
+) -> tuple[TreeKey, ...]:
     if not isinstance(entries, list):
         raise MatrixContractError(f"{label}_MATRIX_NOT_A_LIST")
     parsed: list[TreeKey] = []
     for item in entries:
         if not isinstance(item, Mapping):
             raise MatrixContractError(f"MALFORMED_{label}_MATRIX_ENTRY")
-        try:
-            parsed.append(TreeKey(int(item["precision_bits"]), str(item["slab_id"])))
-        except (KeyError, TypeError, ValueError) as error:
-            raise MatrixContractError(f"MALFORMED_{label}_MATRIX_ENTRY") from error
+        identity_keys = {"precision_bits", "slab_id"}
+        if (
+            not identity_keys.issubset(item)
+            or (not allow_metadata and set(item) != identity_keys)
+        ):
+            raise MatrixContractError(f"MALFORMED_{label}_MATRIX_ENTRY")
+        bits = item.get("precision_bits")
+        slab_id = item.get("slab_id")
+        if type(bits) is not int or not isinstance(slab_id, str):
+            raise MatrixContractError(f"MALFORMED_{label}_MATRIX_ENTRY")
+        parsed.append(TreeKey(bits, slab_id))
     if len(parsed) != len(set(parsed)):
         raise MatrixContractError(f"DUPLICATE_{label}_MATRIX_ENTRY")
     if tuple(parsed) != exact_matrix():
@@ -911,16 +1019,179 @@ def _matrix_payload(entries: Any, label: str) -> tuple[TreeKey, ...]:
     return tuple(parsed)
 
 
+def require_formal_producer_namespace(
+    payload: Mapping[str, Any],
+    *,
+    label: str,
+    producer_state: str | None = None,
+) -> None:
+    """Reject draft, foreign, or scientifically pre-promoted producer bytes."""
+
+    if not (
+        type(payload.get("schema_version")) is int
+        and payload.get("schema_version") == SCHEMA_VERSION
+        and payload.get("protocol_id") == FORMAL_PROTOCOL_ID
+        and payload.get("licensing") == "FROZEN_PRODUCTION"
+        and payload.get("scientific_licensing_enabled") is True
+    ):
+        raise ProofObjectError(f"{label}_FORMAL_NAMESPACE_OR_LICENSE_MISMATCH")
+    if producer_state is not None and payload.get("producer_state") != producer_state:
+        raise ProofObjectError(f"{label}_PRODUCER_STATE_MISMATCH")
+    status_fields = {"milestone_status", "theorem_status", "final_status"}
+    if not status_fields.issubset(payload) or any(
+        payload[key] is not None for key in status_fields
+    ):
+        raise ProofObjectError(f"PRODUCER_{label}_ASSIGNED_SCIENTIFIC_STATUS")
+
+
+def validate_machine_freeze(
+    project_root: Path,
+    frozen_inputs: Mapping[str, Any],
+    frozen_requirements: Any,
+) -> tuple[dict[str, int], str]:
+    """Replay the separately hashed resource envelope used at launch.
+
+    This validates the *contract* recorded before production.  The checker is
+    deliberately not a live resource monitor; operational launch checks stay
+    with the producer.  The exact machine-freeze bytes are nevertheless part
+    of the scientific provenance DAG.
+    """
+
+    if not exact_json_equal(frozen_requirements, EXPECTED_MACHINE_REQUIREMENTS):
+        raise CheckerContractError("INVALID_FROZEN_MACHINE_REQUIREMENTS")
+    machine_path = resolve_bound_path(
+        project_root,
+        MACHINE_FREEZE_RELATIVE,
+        expected=MACHINE_FREEZE_RELATIVE,
+    )
+    machine_hash = sha256(machine_path)
+    if frozen_inputs.get(MACHINE_FREEZE_RELATIVE) != machine_hash:
+        raise CheckerContractError("MACHINE_FREEZE_INPUT_HASH_MISMATCH")
+    machine = strict_json_load(machine_path)
+    if not isinstance(machine, Mapping):
+        raise CheckerContractError("MALFORMED_MACHINE_FREEZE")
+    if not (
+        type(machine.get("schema_version")) is int
+        and machine.get("schema_version") == SCHEMA_VERSION
+        and machine.get("protocol_id") == FORMAL_PROTOCOL_ID
+        and machine.get("status") == "FROZEN_FOR_PRODUCTION"
+        and machine.get("scientific_licensing_enabled") is True
+        and exact_json_equal(
+            machine.get("machine_requirements"), EXPECTED_MACHINE_REQUIREMENTS
+        )
+    ):
+        raise CheckerContractError("MACHINE_FREEZE_NAMESPACE_OR_RESOURCE_MISMATCH")
+    requirements = machine.get("machine_requirements")
+    if not isinstance(requirements, Mapping) or set(requirements) != set(
+        EXPECTED_MACHINE_REQUIREMENTS
+    ):
+        raise CheckerContractError("MALFORMED_MACHINE_REQUIREMENTS")
+    if not all(
+        isinstance(value, int) and not isinstance(value, bool) and value > 0
+        for value in requirements.values()
+    ):
+        raise CheckerContractError("NONPOSITIVE_OR_NONINTEGER_MACHINE_REQUIREMENT")
+    if requirements["operational_pause_below_free_bytes"] <= requirements[
+        "min_launch_free_bytes"
+    ]:
+        raise CheckerContractError("INVALID_MACHINE_STORAGE_WATERMARK_ORDER")
+    return dict(requirements), machine_hash
+
+
+def validate_prefreeze_review(
+    project_root: Path,
+    frozen_inputs: Mapping[str, Any],
+) -> str:
+    """Require one exact independent-review acceptance declaration.
+
+    Hash binding alone cannot distinguish a pending or rejecting review from
+    an acceptance.  A declaration candidate is any line containing the
+    case-insensitive standalone word ``Verdict``.  The sole
+    candidate must then match the frozen acceptance line byte-for-byte after
+    newline removal; leading/trailing whitespace, alternate punctuation, and
+    near matches fail.
+    """
+
+    review_path = resolve_bound_path(
+        project_root,
+        PREFREEZE_REVIEW_RELATIVE,
+        expected=PREFREEZE_REVIEW_RELATIVE,
+    )
+    review_hash = sha256(review_path)
+    if frozen_inputs.get(PREFREEZE_REVIEW_RELATIVE) != review_hash:
+        raise CheckerContractError("PREFREEZE_REVIEW_INPUT_HASH_MISMATCH")
+    try:
+        lines = review_path.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as error:
+        raise CheckerContractError("PREFREEZE_REVIEW_NOT_UTF8_TEXT") from error
+    declarations = [
+        line
+        for line in lines
+        if markdown_has_verdict_declaration(line)
+    ]
+    if declarations != [PREFREEZE_ACCEPT_LINE]:
+        raise CheckerContractError("PREFREEZE_REVIEW_NOT_EXACTLY_ACCEPTED")
+    return review_hash
+
+
+def validate_s0_compatibility_replay(project_root: Path) -> None:
+    """Independently require the exact public-S0 compatibility evidence."""
+
+    checker_relative = "scripts/check_r401_val_l2_all_slabs_independent.py"
+    expected = {
+        "adapter_source_sha256": sha256(
+            resolve_bound_path(project_root, S0_ADAPTER_RELATIVE)
+        ),
+        "checker_source_sha256": sha256(
+            resolve_bound_path(project_root, checker_relative)
+        ),
+        "claim_boundary": (
+            "public S0 compatibility replay only; no held-out A1 slab was read or evaluated"
+        ),
+        "manifest_hash_checks": 6055,
+        "node_count": 3016,
+        "protocol_id": "R401-VAL-L2-A1-PREFREEZE-S0-REPLAY",
+        "s0_manifest_sha256": sha256(
+            resolve_bound_path(project_root, f"{S0_RESULT_RELATIVE}/manifest.json")
+        ),
+        "s0_postcheck_sha256": sha256(
+            resolve_bound_path(
+                project_root, f"{S0_RESULT_RELATIVE}/POSTCHECK_STATUS.json"
+            )
+        ),
+        "s0_release_provenance_sha256": sha256(
+            resolve_bound_path(
+                project_root, f"{S0_RESULT_RELATIVE}/RELEASE_PROVENANCE.json"
+            )
+        ),
+        "source_release": "R401-VAL-L2-S0",
+        "status": "PASS_S0_READ_ONLY_COMPATIBILITY_REPLAY",
+        "status_counts": {
+            "ENERGY_EXCLUDED": 183,
+            "RETURN_EXCLUDED": 1349,
+            "UNKNOWN": 1484,
+        },
+        "tree_count": 6,
+        "tree_counts": [
+            {"node_count": 486, "precision_bits": 128, "slab_id": "S000", "status_counts": {"ENERGY_EXCLUDED": 18, "RETURN_EXCLUDED": 229, "UNKNOWN": 239}},
+            {"node_count": 546, "precision_bits": 128, "slab_id": "S025", "status_counts": {"ENERGY_EXCLUDED": 31, "RETURN_EXCLUDED": 246, "UNKNOWN": 269}},
+            {"node_count": 574, "precision_bits": 128, "slab_id": "S050", "status_counts": {"ENERGY_EXCLUDED": 44, "RETURN_EXCLUDED": 247, "UNKNOWN": 283}},
+            {"node_count": 436, "precision_bits": 256, "slab_id": "S000", "status_counts": {"ENERGY_EXCLUDED": 18, "RETURN_EXCLUDED": 204, "UNKNOWN": 214}},
+            {"node_count": 488, "precision_bits": 256, "slab_id": "S025", "status_counts": {"ENERGY_EXCLUDED": 31, "RETURN_EXCLUDED": 217, "UNKNOWN": 240}},
+            {"node_count": 486, "precision_bits": 256, "slab_id": "S050", "status_counts": {"ENERGY_EXCLUDED": 41, "RETURN_EXCLUDED": 206, "UNKNOWN": 239}},
+        ],
+    }
+    replay = strict_json_load(resolve_bound_path(project_root, S0_REPLAY_RELATIVE))
+    if not exact_json_equal(replay, expected):
+        raise CheckerContractError("PUBLIC_S0_COMPATIBILITY_REPLAY_EVIDENCE_MISMATCH")
+
+
 def load_formal_context(
     output: Path,
     freeze_path: Path = FORMAL_FREEZE,
     project_root: Path = ROOT,
 ) -> FormalContext:
-    """Load the machine-readable freeze and sealed run configuration.
-
-    The current repository deliberately lacks ``R401_VAL_L2_A1_FREEZE.json``;
-    consequently this gate currently rejects every promotion attempt.
-    """
+    """Load and independently replay the freeze and sealed run configuration."""
 
     if freeze_path.is_symlink() or not freeze_path.is_file():
         raise CheckerContractError("MISSING_FORMAL_FREEZE")
@@ -928,7 +1199,8 @@ def load_formal_context(
     if not isinstance(freeze, Mapping):
         raise CheckerContractError("MALFORMED_FORMAL_FREEZE")
     required_freeze = (
-        freeze.get("schema_version") == SCHEMA_VERSION,
+        type(freeze.get("schema_version")) is int
+        and freeze.get("schema_version") == SCHEMA_VERSION,
         freeze.get("protocol_id") == FORMAL_PROTOCOL_ID,
         freeze.get("status") == "FROZEN_FOR_PRODUCTION",
         freeze.get("scientific_licensing_enabled") is True,
@@ -946,6 +1218,8 @@ def load_formal_context(
     ):
         raise CheckerContractError("FORMAL_FREEZE_MISSING_MANDATORY_INPUT_HASHES")
     for relative, expected_hash in frozen_inputs.items():
+        if not isinstance(relative, str) or not isinstance(expected_hash, str):
+            raise CheckerContractError("FROZEN_INPUT_HASH_DAG_NOT_STRING_TO_STRING")
         if not HEX_SHA256.fullmatch(str(expected_hash)):
             raise CheckerContractError(f"INVALID_FROZEN_INPUT_HASH: {relative}")
         input_path = resolve_bound_path(project_root, str(relative))
@@ -954,6 +1228,13 @@ def load_formal_context(
     checker_relative = "scripts/check_r401_val_l2_all_slabs_independent.py"
     if frozen_inputs.get(checker_relative) != frozen_checker_hash:
         raise CheckerContractError("FORMAL_FREEZE_CHECKER_HASH_DAG_MISMATCH")
+    validate_s0_compatibility_replay(project_root)
+    prefreeze_review_hash = validate_prefreeze_review(project_root, frozen_inputs)
+    machine_requirements, machine_freeze_hash = validate_machine_freeze(
+        project_root,
+        frozen_inputs,
+        freeze.get("machine_requirements"),
+    )
 
     expected_whitelist = {
         "excluded": [
@@ -975,10 +1256,19 @@ def load_formal_context(
     workers = frozen_scheduler.get("workers")
     timeout = frozen_scheduler.get("node_timeout_seconds")
     if not (
+        set(frozen_scheduler)
+        == {
+            "policy",
+            "workers",
+            "node_timeout_seconds",
+            "global_scientific_budget",
+            "max_inflight_per_tree",
+        }
+        and
         frozen_scheduler.get("policy") == EXPECTED_SCHEDULER_POLICY
         and isinstance(workers, int)
         and not isinstance(workers, bool)
-        and workers > 0
+        and 0 < workers <= machine_requirements["cpu_logical"]
         and (
             timeout is None
             or (
@@ -988,10 +1278,12 @@ def load_formal_context(
             )
         )
         and frozen_scheduler.get("global_scientific_budget") is None
+        and type(frozen_scheduler.get("max_inflight_per_tree")) is int
+        and frozen_scheduler.get("max_inflight_per_tree") == 1
     ):
         raise CheckerContractError("INVALID_FROZEN_SCHEDULER_CONTRACT")
     frozen_thresholds = freeze.get("logical_thresholds")
-    if frozen_thresholds != EXPECTED_LOGICAL_THRESHOLDS:
+    if not exact_json_equal(frozen_thresholds, EXPECTED_LOGICAL_THRESHOLDS):
         raise CheckerContractError("INVALID_FROZEN_LOGICAL_THRESHOLDS")
     frozen_evaluator = freeze.get("evaluator")
     if not isinstance(frozen_evaluator, Mapping):
@@ -1011,7 +1303,9 @@ def load_formal_context(
         or not REQUIRED_CAPD_FLAGS.issubset(capd_flags)
     ):
         raise CheckerContractError("INVALID_FROZEN_CAPD_FLAGS")
-    if frozen_evaluator.get("status_returncode_whitelist") != expected_whitelist:
+    if not exact_json_equal(
+        frozen_evaluator.get("status_returncode_whitelist"), expected_whitelist
+    ):
         raise CheckerContractError("INVALID_FROZEN_STATUS_WHITELIST")
     source_path = resolve_bound_path(project_root, source_file)
     if sha256(source_path) != source_hash or frozen_inputs.get(source_file) != source_hash:
@@ -1039,32 +1333,39 @@ def load_formal_context(
     binding_sha = sha256_bytes(canonical_json_bytes(binding))
     if run_config.get("binding_sha256") != binding_sha:
         raise CheckerContractError("RUN_CONFIG_BINDING_HASH_MISMATCH")
-    status_null = all(
-        run_config.get(key) is None
-        for key in ("milestone_status", "theorem_status", "final_status")
-    )
+    try:
+        require_formal_producer_namespace(
+            run_config,
+            label="RUN_CONFIG",
+            producer_state=EXPECTED_PRODUCER_STATES["run_config"],
+        )
+    except ProofObjectError as error:
+        raise CheckerContractError(str(error)) from error
     if not (
-        run_config.get("schema_version") == SCHEMA_VERSION
-        and run_config.get("protocol_id") == FORMAL_PROTOCOL_ID
-        and run_config.get("licensing") == "FROZEN_PRODUCTION"
-        and status_null
+        type(binding.get("schema_version")) is int
+        and binding.get("schema_version") == SCHEMA_VERSION
         and binding.get("protocol_id") == FORMAL_PROTOCOL_ID
+        and binding.get("licensing") == "FROZEN_PRODUCTION"
         and binding.get("scientific_licensing_enabled") is True
     ):
-        raise CheckerContractError("RUN_CONFIG_DRAFT_OR_PRODUCER_STATUS_PRESENT")
+        raise CheckerContractError("RUN_CONFIG_BINDING_NAMESPACE_OR_LICENSE_MISMATCH")
     _matrix_payload(binding.get("matrix"), "RUN_CONFIG")
     freeze_hash = sha256(freeze_path)
     if binding.get("l2_a1_freeze_sha256") != freeze_hash:
         raise CheckerContractError("RUN_CONFIG_FREEZE_HASH_MISMATCH")
-    if binding.get("input_hashes") != frozen_inputs:
+    if not exact_json_equal(binding.get("input_hashes"), frozen_inputs):
         raise CheckerContractError("RUN_CONFIG_INPUT_HASH_DAG_MISMATCH")
-    if binding.get("scheduler") != frozen_scheduler:
+    if not exact_json_equal(binding.get("machine_requirements"), machine_requirements):
+        raise CheckerContractError("RUN_CONFIG_MACHINE_REQUIREMENTS_DIFFER_FROM_FREEZE")
+    if binding.get("machine_freeze_sha256") != machine_freeze_hash:
+        raise CheckerContractError("RUN_CONFIG_MACHINE_FREEZE_HASH_MISMATCH")
+    if not exact_json_equal(binding.get("scheduler"), frozen_scheduler):
         raise CheckerContractError("RUN_CONFIG_SCHEDULER_DIFFERS_FROM_FREEZE")
-    if binding.get("logical_thresholds") != frozen_thresholds:
+    if not exact_json_equal(binding.get("logical_thresholds"), frozen_thresholds):
         raise CheckerContractError("RUN_CONFIG_THRESHOLDS_DIFFER_FROM_FREEZE")
     limits = binding.get("per_tree_limits")
     frozen_limits = freeze.get("per_tree_limits")
-    if not isinstance(limits, Mapping) or limits != frozen_limits:
+    if not isinstance(limits, Mapping) or not exact_json_equal(limits, frozen_limits):
         raise CheckerContractError("RUN_CONFIG_LIMITS_DIFFER_FROM_FREEZE")
     max_depth, max_nodes = limits.get("max_depth"), limits.get("max_nodes")
     if (
@@ -1079,7 +1380,7 @@ def load_formal_context(
     evaluator = binding.get("evaluator")
     if not isinstance(evaluator, Mapping):
         raise CheckerContractError("RUN_CONFIG_HAS_NO_EVALUATOR_BINDING")
-    if evaluator != frozen_evaluator:
+    if not exact_json_equal(evaluator, frozen_evaluator):
         raise CheckerContractError("RUN_CONFIG_EVALUATOR_DIFFERS_FROM_FREEZE")
     # Recheck the actual bytes after comparing the complete frozen object so a
     # run config cannot merely repeat a plausible-looking digest string.
@@ -1101,6 +1402,9 @@ def load_formal_context(
         evaluator_capd_flags=tuple(capd_flags),
         scheduler=dict(frozen_scheduler),
         logical_thresholds=dict(frozen_thresholds),
+        machine_requirements=machine_requirements,
+        machine_freeze_sha256=machine_freeze_hash,
+        prefreeze_review_sha256=prefreeze_review_hash,
     )
 
 
@@ -1137,12 +1441,15 @@ def validate_exact_pair_paths(
             (manifest, seen_manifest_identities, "TREE_MANIFEST"),
         ):
             identity = payload.get("tree")
-            try:
-                internal = TreeKey(
-                    int(identity["precision_bits"]), str(identity["slab_id"])
+            if not isinstance(identity, Mapping):
+                raise MatrixContractError(
+                    f"MALFORMED_{label}_IDENTITY: {tree.label}"
                 )
-            except (KeyError, TypeError, ValueError) as error:
-                raise MatrixContractError(f"MALFORMED_{label}_IDENTITY: {tree.label}") from error
+            if not exact_json_equal(identity, tree.payload()):
+                raise MatrixContractError(
+                    f"{label}_PATH_IDENTITY_MISMATCH: {tree.label}"
+                )
+            internal = tree
             if internal != tree:
                 raise MatrixContractError(f"{label}_PATH_IDENTITY_MISMATCH: {tree.label}")
             if internal in seen:
@@ -1165,6 +1472,36 @@ def expected_raw_paths(output: Path, tree: TreeKey, node_id: str) -> dict[str, P
     }
 
 
+def is_non_authoritative_node_staging_path(raw_root: Path, path: Path) -> bool:
+    """Recognize only the producer's canonical interrupted-node namespace.
+
+    A SIGKILL may leave ``raw/<bits>/<slab>/.<node>.tmp-<token>`` and any
+    partially written children below it.  Protocol section 7 declares that
+    whole subtree non-authoritative.  Other hidden paths remain errors: this
+    deliberately does not provide a general-purpose hiding mechanism.
+    """
+
+    try:
+        relative = path.relative_to(raw_root)
+    except ValueError:
+        return False
+    if len(relative.parts) < 3:
+        return False
+    bits_text, slab_id, staging_name = relative.parts[:3]
+    try:
+        bits = int(bits_text)
+    except ValueError:
+        return False
+    if bits not in PRECISIONS or slab_id not in SLAB_IDS:
+        return False
+    match = re.fullmatch(r"\.([A-Za-z0-9]+)\.tmp-([A-Za-z0-9][A-Za-z0-9._-]*)", staging_name)
+    if match is None or NODE_ID_PATTERN.fullmatch(match.group(1)) is None:
+        return False
+    # A second hidden component is not emitted by the producer and therefore
+    # cannot be smuggled into the ignored namespace.
+    return not any(part.startswith(".") for part in relative.parts[3:])
+
+
 def validate_raw_file_set(output: Path, expected_nodes: Mapping[TreeKey, set[str]]) -> None:
     raw_root = output / "raw"
     if raw_root.is_symlink() or not raw_root.is_dir():
@@ -1184,6 +1521,8 @@ def validate_raw_file_set(output: Path, expected_nodes: Mapping[TreeKey, set[str
     for path in raw_root.rglob("*"):
         if path.is_symlink():
             raise PathContractError(f"SYMLINK_REJECTED: {path}")
+        if is_non_authoritative_node_staging_path(raw_root, path):
+            continue
         if any(part.startswith(".") for part in path.relative_to(raw_root).parts):
             raise PathContractError(f"HIDDEN_AUTHORITATIVE_PATH: {path}")
         if path.is_dir():
@@ -1207,7 +1546,12 @@ def verify_transcript_identity(
     task: Mapping[str, Any],
 ) -> None:
     bits = int(transcript.scalar("precision_bits"))
-    if bits != int(task["tree"]["precision_bits"]):
+    tree = task.get("tree")
+    if (
+        not isinstance(tree, Mapping)
+        or type(tree.get("precision_bits")) is not int
+        or bits != tree.get("precision_bits")
+    ):
         raise ProofObjectError("RAW_TASK_PRECISION_MISMATCH")
     requested_epsilon = interval(task["epsilon"])
     if not subset(requested_epsilon, transcript.intervals("epsilon", 1)[0]):
@@ -1232,8 +1576,8 @@ def verify_node_record(
     task = node.get("task")
     if not isinstance(task, Mapping):
         raise ProofObjectError("MISSING_PROOF_OBJECT: node.task")
-    node_id = str(task.get("node_id"))
-    if not NODE_ID_PATTERN.fullmatch(node_id):
+    node_id = task.get("node_id")
+    if not isinstance(node_id, str) or not NODE_ID_PATTERN.fullmatch(node_id):
         raise ProofObjectError(f"INVALID_NODE_ID: {node_id}")
     paths = expected_raw_paths(output, tree, node_id)
     record = strict_json_load(paths["record"])
@@ -1242,15 +1586,13 @@ def verify_node_record(
     _stderr = paths["stderr"].read_text(encoding="utf-8")
     if not isinstance(record, Mapping):
         raise ProofObjectError("NODE_RECORD_NOT_AN_OBJECT")
-    if not (
-        record.get("schema_version") == SCHEMA_VERSION
-        and record.get("protocol_id") == FORMAL_PROTOCOL_ID
-        and record.get("licensing") == "FROZEN_PRODUCTION"
+    require_formal_producer_namespace(record, label="NODE_RECORD")
+    if "producer_state" in record:
+        raise ProofObjectError("NODE_RECORD_UNEXPECTED_PRODUCER_STATE")
+    if (
+        not exact_json_equal(record.get("task"), task)
+        or record.get("task_binding_sha256") != canonical_task_binding(task)
     ):
-        raise ProofObjectError("NODE_RECORD_DRAFT_OR_NAMESPACE_MISMATCH")
-    if any(record.get(key) is not None for key in ("milestone_status", "theorem_status", "final_status")):
-        raise ProofObjectError("PRODUCER_NODE_ASSIGNED_SCIENTIFIC_STATUS")
-    if record.get("task") != task or record.get("task_binding_sha256") != canonical_task_binding(task):
         raise ProofObjectError("NODE_RECORD_TASK_BINDING_MISMATCH")
     if node.get("task_binding_sha256") != record.get("task_binding_sha256"):
         raise ProofObjectError("TREE_NODE_TASK_BINDING_MISMATCH")
@@ -1269,7 +1611,7 @@ def verify_node_record(
         raise ProofObjectError("NODE_EXACT_ARGV_MISMATCH")
     if invocation.get("argv_sha256") != sha256_bytes(canonical_json_bytes(expected_argv)):
         raise ProofObjectError("NODE_ARGV_HASH_MISMATCH")
-    if node.get("invocation") != invocation:
+    if not exact_json_equal(node.get("invocation"), invocation):
         raise ProofObjectError("TREE_RECORD_INVOCATION_BINDING_MISMATCH")
 
     raw_binding = record.get("raw")
@@ -1285,11 +1627,13 @@ def verify_node_record(
         raise ProofObjectError("NODE_STDOUT_HASH_MISMATCH")
     if raw_binding.get("stderr_sha256") != sha256(paths["stderr"]):
         raise ProofObjectError("NODE_STDERR_HASH_MISMATCH")
-    if node.get("raw") != raw_binding:
+    if not exact_json_equal(node.get("raw"), raw_binding):
         raise ProofObjectError("TREE_NODE_RAW_BINDING_MISMATCH")
 
     evaluator_result = record.get("evaluator_result")
-    if not isinstance(evaluator_result, Mapping) or node.get("evaluator_result") != evaluator_result:
+    if not isinstance(evaluator_result, Mapping) or not exact_json_equal(
+        node.get("evaluator_result"), evaluator_result
+    ):
         raise ProofObjectError("TREE_RECORD_EVALUATOR_RESULT_MISMATCH")
     transcript = Transcript(stdout)
     status = transcript.scalar("status")
@@ -1338,8 +1682,11 @@ def verify_tree_structure(
     max_depth: int,
     max_nodes: int,
 ) -> dict[str, dict[str, Any]]:
-    if any(payload.get(key) is not None for key in ("milestone_status", "theorem_status", "final_status")):
-        raise ProofObjectError(f"PRODUCER_TREE_ASSIGNED_SCIENTIFIC_STATUS: {tree.label}")
+    require_formal_producer_namespace(
+        payload,
+        label=f"TREE_{tree.label}",
+        producer_state=EXPECTED_PRODUCER_STATES["tree"],
+    )
     protected = plan_root_box(plan_record)
     shells = expected_shells(protected)
     expected_epsilon = (
@@ -1356,12 +1703,18 @@ def verify_tree_structure(
     if box_from_json(domain.get("protected_exact_plan_box")) != protected:
         raise ProofObjectError(f"TREE_PROTECTED_BOX_MISMATCH: {tree.label}")
     limits = payload.get("per_tree_limits")
-    if limits != {"max_depth": max_depth, "max_nodes": max_nodes}:
+    if not exact_json_equal(
+        limits, {"max_depth": max_depth, "max_nodes": max_nodes}
+    ):
         raise ProofObjectError(f"TREE_LIMITS_MISMATCH: {tree.label}")
     nodes = payload.get("nodes")
     if not isinstance(nodes, list) or not nodes:
         raise ProofObjectError(f"MISSING_TREE_NODES: {tree.label}")
-    if len(nodes) > max_nodes or payload.get("evaluated_node_count") != len(nodes):
+    if (
+        len(nodes) > max_nodes
+        or type(payload.get("evaluated_node_count")) is not int
+        or payload.get("evaluated_node_count") != len(nodes)
+    ):
         raise ProofObjectError(f"TREE_NODE_BUDGET_OR_COUNT_MISMATCH: {tree.label}")
     by_id: dict[str, dict[str, Any]] = {}
     order: list[tuple[int, str]] = []
@@ -1369,8 +1722,10 @@ def verify_tree_structure(
         if not isinstance(node, dict) or not isinstance(node.get("task"), Mapping):
             raise ProofObjectError(f"MALFORMED_TREE_NODE: {tree.label}")
         task = node["task"]
-        node_id = str(task.get("node_id"))
+        node_id = task.get("node_id")
         depth = task.get("depth")
+        if not isinstance(node_id, str) or not NODE_ID_PATTERN.fullmatch(node_id):
+            raise ProofObjectError(f"INVALID_TREE_NODE_ID: {tree.label}/{node_id}")
         if node_id in by_id:
             raise ProofObjectError(f"DUPLICATE_TREE_NODE_ID: {tree.label}/{node_id}")
         if not isinstance(depth, int) or isinstance(depth, bool):
@@ -1397,7 +1752,7 @@ def verify_tree_structure(
         task = node["task"]
         parent_id, depth, box = expected[node_id]
         if (
-            task.get("tree") != tree.payload()
+            not exact_json_equal(task.get("tree"), tree.payload())
             or task.get("parent_id") != parent_id
             or task.get("depth") != depth
             or interval(task.get("epsilon")) != expected_epsilon
@@ -1435,7 +1790,7 @@ def verify_tree_structure(
         raise ProofObjectError(
             f"ORPHAN_OR_UNREACHABLE_TREE_NODES: {tree.label}/{sorted(set(by_id) - visited)}"
         )
-    if payload.get("terminal_counts") != terminal_counts:
+    if not exact_json_equal(payload.get("terminal_counts"), terminal_counts):
         raise ProofObjectError(f"TREE_TERMINAL_COUNT_MISMATCH: {tree.label}")
     return by_id
 
@@ -1471,8 +1826,11 @@ def verify_tree_manifest(
     nodes: Mapping[str, Mapping[str, Any]],
     context: FormalContext,
 ) -> None:
-    if any(manifest.get(key) is not None for key in ("milestone_status", "theorem_status", "final_status")):
-        raise ProofObjectError(f"PRODUCER_MANIFEST_ASSIGNED_SCIENTIFIC_STATUS: {tree.label}")
+    require_formal_producer_namespace(
+        manifest,
+        label=f"TREE_MANIFEST_{tree.label}",
+        producer_state=EXPECTED_PRODUCER_STATES["tree_manifest"],
+    )
     if manifest.get("run_config_sha256") != context.run_config_sha256:
         raise ProofObjectError(f"TREE_MANIFEST_RUN_CONFIG_HASH_MISMATCH: {tree.label}")
     expected_tree_file = expected_tree_path(output, tree).relative_to(output).as_posix()
@@ -1533,24 +1891,27 @@ def verify_aggregate_hash_dag(
     aggregate = strict_json_load(aggregate_path)
     if not isinstance(summary, Mapping) or not isinstance(aggregate, Mapping):
         raise ProofObjectError("AGGREGATE_OBJECT_NOT_A_MAPPING")
-    for payload, label in ((summary, "SUMMARY"), (aggregate, "AGGREGATE_MANIFEST")):
-        if not (
-            payload.get("schema_version") == SCHEMA_VERSION
-            and payload.get("protocol_id") == FORMAL_PROTOCOL_ID
-            and payload.get("licensing") == "FROZEN_PRODUCTION"
-        ):
-            raise ProofObjectError(f"{label}_DRAFT_OR_NAMESPACE_MISMATCH")
-        if any(payload.get(key) is not None for key in ("milestone_status", "theorem_status", "final_status")):
-            raise ProofObjectError(f"PRODUCER_{label}_ASSIGNED_SCIENTIFIC_STATUS")
+    for payload, label, state_key in (
+        (summary, "SUMMARY", "aggregate_summary"),
+        (aggregate, "AGGREGATE_MANIFEST", "aggregate_manifest"),
+    ):
+        require_formal_producer_namespace(
+            payload,
+            label=label,
+            producer_state=EXPECTED_PRODUCER_STATES[state_key],
+        )
         if payload.get("run_config_sha256") != context.run_config_sha256:
             raise ProofObjectError(f"{label}_RUN_CONFIG_HASH_MISMATCH")
-    if summary.get("tree_count") != len(matrix):
+    if (
+        type(summary.get("tree_count")) is not int
+        or summary.get("tree_count") != len(matrix)
+    ):
         raise MatrixContractError("AGGREGATE_SUMMARY_TREE_COUNT_MISMATCH")
     summary_entries = summary.get("trees")
     aggregate_entries = aggregate.get("tree_manifests")
-    _matrix_payload(summary_entries, "AGGREGATE_SUMMARY")
-    _matrix_payload(aggregate_entries, "AGGREGATE_MANIFEST")
-    if summary_entries != aggregate_entries:
+    _matrix_payload(summary_entries, "AGGREGATE_SUMMARY", allow_metadata=True)
+    _matrix_payload(aggregate_entries, "AGGREGATE_MANIFEST", allow_metadata=True)
+    if not exact_json_equal(summary_entries, aggregate_entries):
         raise ProofObjectError("AGGREGATE_TREE_MANIFEST_LIST_MISMATCH")
     for tree, entry in zip(matrix, summary_entries, strict=True):
         expected_file = expected_tree_manifest_path(output, tree).relative_to(output).as_posix()
@@ -1600,6 +1961,11 @@ def build_archive_provenance_bindings(
         "capd_flags": list(context.evaluator_capd_flags),
         "scheduler": dict(context.scheduler),
         "logical_thresholds": dict(context.logical_thresholds),
+        "machine_freeze_file": MACHINE_FREEZE_RELATIVE,
+        "machine_freeze_sha256": context.machine_freeze_sha256,
+        "machine_requirements": dict(context.machine_requirements),
+        "prefreeze_review_file": PREFREEZE_REVIEW_RELATIVE,
+        "prefreeze_review_sha256": context.prefreeze_review_sha256,
         "tree_manifest_root": {
             "algorithm": "sha256_canonical_json_ordered_manifest_entries_v1",
             "entry_count": len(manifest_entries),
@@ -1618,12 +1984,15 @@ def verify_l1_authority(
 ) -> dict[str, Any]:
     release = strict_json_load(project_root / L1_RELEASE.relative_to(ROOT))
     summary = strict_json_load(project_root / L1_SUMMARY.relative_to(ROOT))
+    manifest = strict_json_load(project_root / L1_MANIFEST.relative_to(ROOT))
     checker = strict_json_load(project_root / L1_CHECKER.relative_to(ROOT))
     postcheck = strict_json_load(project_root / L1_POSTCHECK.relative_to(ROOT))
     if not (
         release.get("release_status") == "PASS_CONTIGUOUS_LOCAL_BRANCH"
         and release.get("final_status") is None
         and summary.get("milestone_status") == "PASS_CONTIGUOUS_LOCAL_BRANCH"
+        and manifest.get("milestone_status") == "PASS_CONTIGUOUS_LOCAL_BRANCH"
+        and manifest.get("final_status") is None
         and checker.get("checker_status") == "PASS"
         and postcheck.get("checker_status") == "PASS"
         and postcheck.get("milestone_status") == "PASS_CONTIGUOUS_LOCAL_BRANCH"
@@ -1640,7 +2009,11 @@ def verify_l1_authority(
     for record in summary.get("records", []):
         if record.get("job_type") != "primary":
             continue
-        key = TreeKey(int(record["precision_bits"]), str(record["job_id"]))
+        bits = record.get("precision_bits")
+        slab_id = record.get("job_id")
+        if type(bits) is not int or not isinstance(slab_id, str):
+            raise ProofObjectError("MALFORMED_UPSTREAM_L1_PRIMARY_IDENTITY")
+        key = TreeKey(bits, slab_id)
         if key in records:
             raise ProofObjectError(f"DUPLICATE_UPSTREAM_L1_PRIMARY: {key.label}")
         records[key] = record
@@ -1666,6 +2039,10 @@ def verify_l1_authority(
             minimum_margin = margin if minimum_margin is None else min(minimum_margin, margin)
     return {
         "release_sha256": sha256(project_root / L1_RELEASE.relative_to(ROOT)),
+        "summary_sha256": sha256(project_root / L1_SUMMARY.relative_to(ROOT)),
+        "manifest_sha256": sha256(project_root / L1_MANIFEST.relative_to(ROOT)),
+        "checker_sha256": sha256(project_root / L1_CHECKER.relative_to(ROOT)),
+        "postcheck_sha256": sha256(project_root / L1_POSTCHECK.relative_to(ROOT)),
         "minimum_krawczyk_to_plan_boundary_margin": (
             None if minimum_margin is None else fraction_payload(minimum_margin)
         ),
@@ -1688,9 +2065,10 @@ def audit_archive(
         context = load_formal_context(output, freeze_path, project_root)
     except CheckerContractError as error:
         return {
+            "schema_version": SCHEMA_VERSION,
             "protocol_id": FORMAL_PROTOCOL_ID,
             "checker_mode": CHECKER_MODE,
-            "checker_status": "REJECT_DRAFT_NON_LICENSING",
+            "checker_status": "REJECT_FORMAL_PRECONDITION",
             "milestone_status": None,
             "theorem_status": None,
             "final_status": None,
@@ -1716,13 +2094,6 @@ def audit_archive(
         for tree in matrix:
             payload = trees[tree]
             manifest = manifests[tree]
-            if not (
-                payload.get("protocol_id") == FORMAL_PROTOCOL_ID
-                and manifest.get("protocol_id") == FORMAL_PROTOCOL_ID
-                and payload.get("licensing") == "FROZEN_PRODUCTION"
-                and manifest.get("licensing") == "FROZEN_PRODUCTION"
-            ):
-                raise ProofObjectError(f"DRAFT_TREE_NAMESPACE: {tree.label}")
             node_map = verify_tree_structure(
                 tree,
                 payload,
@@ -1776,6 +2147,7 @@ def audit_archive(
 
     passed = not failures
     return {
+        "schema_version": SCHEMA_VERSION,
         "protocol_id": FORMAL_PROTOCOL_ID,
         "checker_mode": CHECKER_MODE,
         "checker_status": "PASS_INDEPENDENT_CHECKER" if passed else "FAIL_INDEPENDENT_CHECKER",
@@ -1820,19 +2192,133 @@ def write_once_or_verify_json(path: Path, payload: Any) -> None:
     """Seal an authoritative result without permitting generation overwrite."""
 
     expected = canonical_json_bytes(payload)
-    if path.exists() or path.is_symlink():
-        require_regular_file(path)
-        if path.read_bytes() != expected:
-            raise PathContractError(
-                f"AUTHORITATIVE_RESULT_ALREADY_BOUND_TO_DIFFERENT_GENERATION: {path}"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    parent = checked_lexical_path(
+        path.parent,
+        label="AUTHORITATIVE_RESULT_PARENT",
+        require_directory=True,
+    )
+    nofollow = getattr(os, "O_NOFOLLOW", 0)
+    cloexec = getattr(os, "O_CLOEXEC", 0)
+    directory_fd = os.open(parent, os.O_RDONLY | os.O_DIRECTORY | nofollow | cloexec)
+
+    def read_descriptor(descriptor: int) -> bytes:
+        os.lseek(descriptor, 0, os.SEEK_SET)
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                return b"".join(chunks)
+            chunks.append(chunk)
+
+    def open_existing() -> int | None:
+        try:
+            descriptor = os.open(
+                path.name,
+                os.O_RDONLY | nofollow | cloexec,
+                dir_fd=directory_fd,
             )
-        return
-    atomic_write_json(path, payload)
+        except FileNotFoundError:
+            return None
+        except OSError as error:
+            raise PathContractError(
+                f"UNSAFE_AUTHORITATIVE_RESULT: {path}: {error}"
+            ) from error
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            os.close(descriptor)
+            raise PathContractError(f"AUTHORITATIVE_RESULT_NOT_REGULAR: {path}")
+        return descriptor
+
+    try:
+        existing_fd = open_existing()
+    except Exception:
+        os.close(directory_fd)
+        raise
+    if existing_fd is not None:
+        try:
+            if os.fstat(existing_fd).st_nlink != 1:
+                raise PathContractError("AUTHORITATIVE_RESULT_HAS_HARDLINK_ALIAS")
+            if read_descriptor(existing_fd) != expected:
+                raise PathContractError(
+                    f"AUTHORITATIVE_RESULT_ALREADY_BOUND_TO_DIFFERENT_GENERATION: {path}"
+                )
+            return
+        finally:
+            os.close(existing_fd)
+            os.close(directory_fd)
+
+    temporary_name = f".{path.name}.seal-{os.getpid()}-{secrets.token_hex(16)}"
+    temporary_fd: int | None = None
+    temporary_unlinked = False
+    try:
+        temporary_fd = os.open(
+            temporary_name,
+            os.O_RDWR | os.O_CREAT | os.O_EXCL | nofollow | cloexec,
+            0o600,
+            dir_fd=directory_fd,
+        )
+        view = memoryview(expected)
+        while view:
+            written = os.write(temporary_fd, view)
+            if written <= 0:
+                raise OSError("short write sealing authoritative checker output")
+            view = view[written:]
+        os.fsync(temporary_fd)
+        source_stat = os.fstat(temporary_fd)
+        created = False
+        try:
+            os.link(
+                f"/proc/self/fd/{temporary_fd}",
+                path.name,
+                dst_dir_fd=directory_fd,
+                follow_symlinks=True,
+            )
+            created = True
+        except FileExistsError:
+            created = False
+        except OSError as error:
+            raise PathContractError(
+                f"AUTHORITATIVE_RESULT_PUBLICATION_LINK_FAILURE: {error}"
+            ) from error
+
+        published_fd = open_existing()
+        if published_fd is None:
+            raise PathContractError("AUTHORITATIVE_RESULT_PUBLICATION_DISAPPEARED")
+        try:
+            published_stat = os.fstat(published_fd)
+            if created and (
+                published_stat.st_dev != source_stat.st_dev
+                or published_stat.st_ino != source_stat.st_ino
+            ):
+                raise PathContractError("AUTHORITATIVE_RESULT_PUBLICATION_INODE_MISMATCH")
+            if read_descriptor(published_fd) != expected:
+                raise PathContractError(
+                    "AUTHORITATIVE_RESULT_ALREADY_BOUND_TO_DIFFERENT_GENERATION: "
+                    f"{path}"
+                )
+            os.unlink(temporary_name, dir_fd=directory_fd)
+            temporary_unlinked = True
+            if os.fstat(published_fd).st_nlink != 1:
+                raise PathContractError(
+                    "AUTHORITATIVE_RESULT_PUBLICATION_LINK_COUNT_MISMATCH"
+                )
+        finally:
+            os.close(published_fd)
+        os.fsync(directory_fd)
+    finally:
+        if temporary_fd is not None:
+            os.close(temporary_fd)
+        if not temporary_unlinked:
+            try:
+                os.unlink(temporary_name, dir_fd=directory_fd)
+            except FileNotFoundError:
+                pass
+        os.close(directory_fd)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="DRAFT_NON_LICENSING independent R401-VAL-L2-A1 checker"
+        description="formal independent exact-rational R401-VAL-L2-A1 checker"
     )
     parser.add_argument(
         "--input",
@@ -1844,18 +2330,19 @@ def main() -> int:
     output = checked_lexical_path(args.input, label="ARCHIVE_INPUT")
     freeze_path = checked_lexical_path(args.freeze, label="FORMAL_FREEZE")
     payload = audit_archive(output, freeze_path=freeze_path)
-    # A rejected draft writes only draft-named diagnostics.  It cannot
-    # accidentally occupy the authoritative postcheck namespace.
+    # A rejected precondition or failed replay writes only rejection-named
+    # diagnostics.  It cannot occupy the authoritative checker namespace.
     if payload["promotion_authorized"]:
         checker_path = output / "independent_checker.json"
         postcheck_path = output / "POSTCHECK_STATUS.json"
     else:
-        checker_path = output / "independent_checker.draft.json"
-        postcheck_path = output / "DRAFT_POSTCHECK_STATUS.json"
+        checker_path = output / "independent_checker.rejected.json"
+        postcheck_path = output / "REJECTED_POSTCHECK_STATUS.json"
     writer = write_once_or_verify_json if payload["promotion_authorized"] else atomic_write_json
     writer(checker_path, payload)
     provenance = payload.get("provenance_bindings")
     postcheck = {
+        "schema_version": SCHEMA_VERSION,
         "protocol_id": FORMAL_PROTOCOL_ID,
         "checker_mode": CHECKER_MODE,
         "checker_status": payload["checker_status"],
