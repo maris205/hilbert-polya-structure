@@ -4,7 +4,7 @@ Candidate HCS-C19 is prepared for release as a generic exact-period-seven
 Hénon carrier with a genus-three scalar quotient and degree-14 oriented time
 lift.
 
-- Computation/source commit: `PENDING_RELEASE_COMMIT`.
+- Computation/source commit: `60e68293ea04f3d5e3fc061fe6ec94937aef86e8`.
 - Complete release tag: `hcs-c19-v1`.
 - Target branch: `main`.
 - Remote: `git@github.com:maris205/hilbert-polya-structure.git`.
