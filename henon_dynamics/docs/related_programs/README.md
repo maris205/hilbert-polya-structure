@@ -406,6 +406,49 @@ period while keeping Frobenius degree and chronological character distinct.
 
 ---
 
+## 14. henon_chiral_chronology_threshold
+
+### Topic
+
+The full twelve-state ordered-edge normalization of the published period-six
+chiral Hénon doublet, its chronological cohomology, a scoped comparison with
+the certified period-seven cover, and a test of an apparent cross-period
+quadratic marker relation.
+
+### Main results
+
+- the ordered-edge object is a geometrically connected genus-one
+  \(D_6\simeq S_3\times C_2\) splitting curve, with \(D_6\) of order twelve;
+- an ordered orbit intrinsically recovers the radical
+  \(\eta^2=A-3\), so the cover is not produced by attaching an external
+  chiral label;
+- the exact rotation quotient is
+  \[
+  v^2=(A-3)(16A^2-8A+5),
+  \]
+  also of genus one;
+- the order-six time automorphism is a torsion translation and acts
+  trivially on \(H^1\);
+- the certified HCS-C20 component has a twelve-dimensional nontrivial time
+  sector, giving an existential \(n=7\) threshold among the selected chiral
+  ordered components through period seven;
+- the period-six reversible and period-seven chiral marker fields both
+  descend from the period-one fixed-point marker; and
+- a dominant faithful clock-equivariant map between exact-period covers must
+  satisfy the period-divisibility condition \(n\mid m\).
+
+### Relation to HP search
+
+This is an exact negative/threshold result, not a Hilbert--Pólya
+construction.  It demonstrates that genuine point chronology can disappear
+entirely on weight-one cohomology and that a common coarse arithmetic field
+can be only a lower-period alias.  No varying-period repetition law,
+equivariant Fredholm determinant, Riemann divisor, or operator realization is
+defined.  The Route-A tuple remains
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

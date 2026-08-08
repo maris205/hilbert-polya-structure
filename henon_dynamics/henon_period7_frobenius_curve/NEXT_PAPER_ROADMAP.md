@@ -1,5 +1,42 @@
 # Next paper roadmap: geometry and equivariant Frobenius of the oriented cover
 
+## Cross-period successor resolution (HCS-C21)
+
+HCS-C21 carried out the repository's first varying-period comparison without averaging
+chronology.  It constructed the published period-six chiral doublet's full
+ordered-edge normalization and proved
+
+\[
+g(E_6)=1,
+\qquad
+\tau^*|_{H^1(E_6)}=1.
+\]
+
+Thus genuine order-six point dynamics survives upstairs but disappears
+entirely from ordinary weight-one cohomology.  In contrast, the HCS-C20
+period-seven component has a twelve-dimensional nontrivial time sector.
+This locates an existential \(n=7\) chronology--cohomology threshold among
+the source-identified and repository-certified chiral components through
+period seven.
+
+The first apparent cross-period marker field also failed its primitive test:
+
+\[
+D_6^{\mathrm{mark}}(s_6)=4D_1(s_6/2),
+\qquad
+C_7^{\mathrm{mark}}(s_7)=D_1(s_7-2).
+\]
+
+It is a period-one shadow, not a map between the full ordered covers.  A
+dominant faithful clock-equivariant map between distinct exact periods
+\(5,6,7\) is independently excluded by the period-divisibility theorem.
+
+The next paper should not refine this same scalar marker coincidence.  It
+must either construct a single connected varying-period marked tower with an
+intrinsic repetition law and nontrivial cohomological time sectors at more
+than one period, or switch dynamical form.  No determinant should be written
+before that gate is met.
+
 ## Successor status (HCS-C20)
 
 HCS-C20 has resolved Stage I completely: the ordered-edge object is the

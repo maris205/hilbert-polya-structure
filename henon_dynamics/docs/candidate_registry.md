@@ -360,3 +360,55 @@ scalar copies.  Equivariant \(\tau\)-characters retain phase labels, but no
 new ordinary eigenvalues.  The next breadth-first move is a varying-period
 marked scheme, with Frobenius degree, Hénon period, and time character kept as
 distinct axes.
+
+## HCS-C21 result (2026-08-08)
+
+Candidate **HCS-C21** is retained as an exact chronology--cohomology
+threshold and lower-period marker obstruction; see
+[henon_chiral_chronology_threshold](../henon_chiral_chronology_threshold/).
+Its Route-A tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall status
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.
+
+The published period-six chiral doublet has a connected twelve-state
+ordered-edge splitting curve
+
+\[
+\operatorname{Gal}(E_6/\mathbb P^1_A)
+\simeq D_6\simeq S_3\times C_2,
+\qquad
+g(E_6)=1,
+\]
+
+where \(D_6\) has order twelve.  Its exact order-six time subgroup has fixed
+field
+
+\[
+\mathbb Q(E_6)^{\langle\tau\rangle}
+=\mathbb Q(A,v),
+\qquad
+v^2=(A-3)(16A^2-8A+5).
+\]
+
+The quotient also has genus one, so \(\tau\) is a six-torsion translation and
+\(\tau^*=1\) on \(H^1(E_6)\).  The period-six nontrivial time dimension is
+therefore zero, while the byte-locked HCS-C20 period-seven component has
+dimension twelve.  The resulting \(n=7\) threshold is existential and
+restricted to source-identified and repository-certified chiral ordered
+components through period seven; no full saturated \(P_7\) classification is
+claimed.
+
+The separate reversible marker \(D_6^{\mathrm{mark}}\) and the period-seven
+chiral marker \(C_7^{\mathrm{mark}}\) share
+\(\mathbb Q(A,\sqrt{A+1})\), but both factor through the period-one marker
+\(D_1\).  Their fiber product normalizes to two graphs and gives no map
+between the full chiral ordered covers.  A dominant clock-equivariant map
+between integral exact-period covers must satisfy \(n\mid km\), so a faithful
+target clock also rules out pairwise maps among distinct periods \(5,6,7\).
+Non-dominant boundary maps, clock-forgetting maps, and multivalued
+correspondences remain outside this obstruction.
+
+No varying-period repetition law, trace-class determinant, Riemann divisor,
+or Hilbert--Pólya operator follows.  The next breadth-first candidate should
+change dynamical form unless it supplies a single connected varying-period
+tower with an intrinsic cohomological clock.

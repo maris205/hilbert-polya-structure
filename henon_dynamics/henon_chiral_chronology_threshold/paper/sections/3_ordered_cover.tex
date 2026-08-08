@@ -1,0 +1,138 @@
+\section{The intrinsic period-six ordered cover}\label{sec:ordered}
+
+Set
+\begin{equation}\label{eq:matching-map}
+ m_\eta(X)=X^2+1-A-\eta.
+\end{equation}
+The first step is to turn the source instruction to select proper in-phase
+roots into an algebraic map.
+
+\begin{lemma}[Exact root matching]\label{lem:matching}
+After $A=\eta^2+3$, the following identities hold in $\Q[\eta,X]$:
+\begin{align}
+ f_{-\eta}(m_\eta(X))&=-f_\eta(X)f_\eta(-X),
+ \label{eq:matching-identity}\\
+ m_{-\eta}(m_\eta(X))-X&=(X+\eta+1)f_\eta(X).
+ \label{eq:inverse-identity}
+\end{align}
+Consequently, on the separable locus, $m_\eta$ is a bijection from the roots
+of $f_\eta$ to the roots of $f_{-\eta}$, with inverse $m_{-\eta}$.
+\end{lemma}
+
+\begin{proof}
+Substitution and collection of powers of $X$ give
+\eqref{eq:matching-identity} and \eqref{eq:inverse-identity}.  If
+$f_\eta(\alpha)=0$, the first identity gives
+$f_{-\eta}(m_\eta(\alpha))=0$; the second sends it back to $\alpha$.
+Thus the induced map between the two three-element root sets is bijective.
+\end{proof}
+
+Let $\alpha,\beta,\gamma$ be the roots of $f_\eta$, with
+$\alpha\ne\beta$.  Vieta's formulas give
+\begin{equation}\label{eq:vieta}
+ \alpha+\beta+\gamma=1+\eta,\qquad
+ \alpha\beta+\alpha\gamma+\beta\gamma=-A,\qquad
+ \alpha\beta\gamma=1-A(1+\eta).
+\end{equation}
+
+\begin{proposition}[The twelve directed phases]\label{prop:twelve-states}
+For an ordered pair $(\alpha,\beta)$ of distinct roots, the cyclic sequence
+\begin{equation}\label{eq:orbit-sequence}
+ \mathcal O(\alpha,\beta)=
+ \bigl(\alpha,m_\eta(\beta),\gamma,m_\eta(\alpha),
+       \beta,m_\eta(\gamma)\bigr)
+\end{equation}
+satisfies $x_{i+1}=A-x_i^2-x_{i-1}$ for every $i\pmod6$.
+For each of the two signs of $\eta$ there are $3\cdot2=6$ distinct generic
+choices.  These twelve states exhaust the directed phases of the source
+chiral doublet over $U$.
+\end{proposition}
+
+\begin{proof}
+Insert \eqref{eq:matching-map} into the recurrence and reduce using
+\eqref{eq:vieta}; all six differences
+$x_{i+1}+x_{i-1}+x_i^2-A$ vanish.  A representative calculation is
+\[
+ m_\eta(\beta)+m_\eta(\alpha)+\gamma^2-A=0,
+\]
+which follows after replacing $\alpha+\beta$ by $1+\eta-\gamma$ and using
+$f_\eta(\gamma)=0$.  The remaining five identities are its cyclic and
+sheet-conjugate reductions; their exact remainder ledger is recorded in
+Appendix~\ref{app:ledgers} and recomputed independently by the released
+checker.
+
+Separability makes the six ordered choices distinct on each sheet, while
+\begin{equation}\label{eq:sheet-resultant}
+ \operatorname{Res}_X(f_\eta,f_{-\eta})=8\eta^3
+\end{equation}
+shows that the two coordinate carriers are disjoint over $U$.  Hence all
+twelve constructed states are distinct.  Endler--Gallas identify one
+generic period-six chiral doublet, namely two reversal-related six-cycles
+\cite[p.~3, discussion following Eq.~(15)]{endlergallas2006chiral}; choosing
+a starting point on each cycle gives twelve directed phases, consistently
+with the class count~\cite[Eqs.~(2)--(7) and Table~1]{gallas2007}.  The
+parameter-varying normalization of those phases is the object defined here.
+Thus the twelve valid states exhaust that source component.  Equivalently,
+their bipartite neighbor graph is $K_{3,3}$ with the matching
+$\alpha\leftrightarrow m_\eta(\alpha)$ removed.
+\end{proof}
+
+The central point is that the radical is recovered from the dynamics rather
+than attached to it.
+
+\begin{proposition}[Intrinsic splitting-field recovery]\label{prop:recovery}
+For the orbit \eqref{eq:orbit-sequence},
+\begin{equation}\label{eq:even-odd-sums}
+ x_0+x_2+x_4=1+\eta,
+ \qquad
+ x_1+x_3+x_5=1-\eta.
+\end{equation}
+Hence
+\begin{equation}\label{eq:eta-recovery}
+ \boxed{
+ \eta=\frac{x_0-x_1+x_2-x_3+x_4-x_5}{2}.}
+\end{equation}
+One valid ordered edge determines the complete orbit, the radical, and all
+three roots of $f_\eta$.  Its function field is $L$.
+\end{proposition}
+
+\begin{proof}
+The first equality in \eqref{eq:even-odd-sums} is Vieta's first relation.
+For the second, sum $m_\eta(\alpha_i)$ over the three roots and use
+$\sum\alpha_i^2=(1+\eta)^2+2A$ together with $A=\eta^2+3$.  Subtraction
+gives \eqref{eq:eta-recovery}.  Starting from an edge, recurrence
+\eqref{eq:ham-recurrence} gives all six coordinates.  Their alternating sum
+gives $\eta$, while the even positions give the complete root set of
+$f_\eta$.  Thus the edge field contains $L$; the reverse inclusion follows
+from the explicit construction \eqref{eq:orbit-sequence}.
+\end{proof}
+
+\begin{lemma}[Geometric irreducibility]\label{lem:absolute-irreducible}
+The cubic $f_\eta(X)$ is irreducible in $\Qbar(\eta)[X]$.
+\end{lemma}
+
+\begin{proof}
+After substituting $A=\eta^2+3$, regard $f_\eta$ as
+\begin{equation}\label{eq:F-plane}
+ F(\eta,X)=
+ \eta^3-\eta^2X+\eta^2-\eta X^2+3\eta
+ +X^3-X^2-3X+2.
+\end{equation}
+If this monic cubic were reducible over $\Qbar(\eta)$, it would have a root
+integral over the integrally closed ring $\Qbar[\eta]$, hence a polynomial
+root $q(\eta)$.  If $\deg q>1$, the term $q^3$ has strictly larger
+$\eta$-degree than every other term.  Thus $q=c\eta+d$.
+
+The coefficients of $F(\eta,c\eta+d)$, from degree three to degree zero,
+are
+\begin{align*}
+ &(c-1)^2(c+1),\\
+ &3c^2d-c^2-2cd-d+1,\\
+ &3cd^2-2cd-3c-d^2+3,\\
+ &d^3-d^2-3d+2.
+\end{align*}
+The leading coefficient forces $c=1$ or $c=-1$.  For $c=1$, the
+$\eta$-coefficient is $2d(d-1)$; $d=0,1$ give constants $2,-1$.
+For $c=-1$, the $\eta^2$-coefficient gives $d=0$, after which the
+$\eta$-coefficient is $6$.  Every case is impossible.
+\end{proof}

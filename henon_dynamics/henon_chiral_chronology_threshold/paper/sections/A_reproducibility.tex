@@ -1,0 +1,78 @@
+\section{Reproducibility and integrity}\label{app:reproducibility}
+
+\subsection{Exact computation}
+
+The producer uses exact rational and symbolic algebra.  From the project
+directory, regenerate and verify the frozen artifacts with
+\begin{verbatim}
+python -m pip install -r requirements.txt
+python code/c21_producer.py --output results/c21_certificate.json
+python code/c21_independent_check.py \
+  --certificate results/c21_certificate.json \
+  --output results/c21_independent_check.json
+python -m unittest discover -s code -p 'test_c21.py' -v
+sha256sum -c results/ARTIFACT_HASHES.sha256
+\end{verbatim}
+The independent checker imports neither the producer nor predecessor
+implementations.  It reconstructs the source polynomial, matching map,
+irreducibility ledger, group action, branch and genus ledger, fixed field,
+marker shadow, and clock-divisibility fields.  The fourteen-test suite
+includes ten mutation tests.  These alter the candidate identity, source
+coefficients, cover relations, genus, sheet-separation resultant, fixed-field
+equation, time character, threshold scope, marker factorization, or
+clock-averaging flag; each mutation must be rejected.
+
+The frozen producer certificate has SHA-256
+\begin{verbatim}
+5386c95cbc65e6a4323cfcf230de6b41f353be909d197818f9c4fbf0a75a96fc
+\end{verbatim}
+and the independent report has SHA-256
+\begin{verbatim}
+0f14332f36f2f7df0ab238954c5a8531bcb9d759f8feeac60bc7bcc197452985.
+\end{verbatim}
+The checker reports \texttt{PASS} with 133 named checks.
+
+\subsection{Source locks}
+
+The exact run fails closed if any dependency in
+Table~\ref{tab:source-locks} changes.
+\begin{table}[htbp]
+\centering
+\begin{tabular}{p{0.24\linewidth}p{0.67\linewidth}}
+\toprule
+Dependency & Frozen SHA-256 \\
+\midrule
+Paper-5 local PDF
+ & {\small\texttt{23dad812162728316f633081e1a1995d4}\newline
+    \texttt{c00614a70d0f5877d425c68d0c726b9}} \\
+HCS-C12C certificate
+ & {\small\texttt{964b8c98abc850493529b8e939a9c8ff}\newline
+    \texttt{96c832300ad2b1629b1cff807f0e8020}} \\
+HCS-C20 certificate
+ & {\small\texttt{7ee43e3253aff15ec00d78b9633c3d33}\newline
+    \texttt{62e71cd5a880cd3e928e7f322abb2681}} \\
+\bottomrule
+\end{tabular}
+\caption{Frozen source dependencies for the HCS-C21 exact run.}
+\label{tab:source-locks}
+\end{table}
+The local Paper-5 bytes are frozen, but no page-specific assertion in this
+paper depends on an unavailable local PDF text-extraction preflight.  The
+decisive period-six formulas were separately checked in the primary
+Endler--Gallas article~\cite[Eq.~(15)]{endlergallas2006chiral}.
+
+\subsection{Manuscript build}
+
+The bilingual manuscript uses LuaLaTeX because the host has no XeLaTeX or
+CJKutf8 package.  It requires \texttt{latexmk}, \texttt{fontspec}, Babel's
+Traditional-Chinese locale, and the \texttt{Droid Sans Fallback} font.
+Before building, check the engine and font from the \texttt{paper/}
+directory, then run
+\begin{verbatim}
+lualatex --version
+fc-match "Droid Sans Fallback"
+latexmk -lualatex -interaction=nonstopmode -halt-on-error main.tex
+\end{verbatim}
+The font preflight must resolve to an installed CJK-capable font under that
+name.  The Traditional-Chinese abstract uses it; the rest of the manuscript
+uses the default Latin Modern family.

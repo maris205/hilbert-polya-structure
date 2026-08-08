@@ -55,8 +55,66 @@ The foundational local source is
 | [`modular_open_trace_obstruction/`](modular_open_trace_obstruction/) | Algebraic endpoint coboundary, full-boundary Selberg periods, commuting squarefree scattering channels, and projector scope boundary | Scoped obstruction; Route-A rejected |
 | [`henon_period7_frobenius_curve/`](henon_period7_frobenius_curve/) | Generic Hénon seven-cycle, degree-14 oriented time lift, genus-three scalar quotient, and finite-prime candidates | Route-A exploratory |
 | [`henon_period7_dihedral_cover/`](henon_period7_dihedral_cover/) | Genus-eight \(D_7\) closure, chronology-induced real multiplication, and selected-prime local factors | Route-A exploratory |
+| [`henon_chiral_chronology_threshold/`](henon_chiral_chronology_threshold/) | Genus-one period-six \(D_6\) cover, \(H^1\)-chronology collapse, scoped \(n=7\) threshold, and lower-period marker shadow | Route-A exploratory |
 
-## Latest result: HCS-C20
+## Latest result: HCS-C21
+
+The published period-six chiral doublet now has a fully certified ordered
+geometry.  Its twelve-state ordered-edge normalization is a connected
+genus-one $D_6$ splitting curve, with $D_6$ of order twelve.  Point-level
+Hénon time has exact order six, yet its action on weight-one cohomology is
+completely trivial:
+
+\[
+g(E_6)=1,
+\qquad
+\tau^*|_{H^1(E_6)}=1.
+\]
+
+By contrast, the byte-locked HCS-C20 period-seven component has genus eight
+and a twelve-dimensional nontrivial time sector.  Thus, among
+source-identified and repository-certified chiral ordered components through
+period seven, the first period at which at least one certified component has
+nontrivial weight-one chronology is seven.  This is an existential scoped
+threshold, not a classification of the saturated period-seven scheme.
+
+A tempting period-six/period-seven arithmetic coincidence also collapses.
+The period-six reversible marker and period-seven chiral marker both descend
+from the fixed-point marker:
+
+\[
+D^{\mathrm{mark}}_6(s_6)=4D_1(s_6/2),
+\qquad
+C^{\mathrm{mark}}_7(s_7)=D_1(s_7-2).
+\]
+
+Their common field $\mathbb Q(A,\sqrt{A+1})$ is therefore a period-one
+shadow, not a primitive chronology-preserving Hecke bridge.  The Route-A
+tuple remains
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**: no all-period repetition
+law, Fredholm determinant, Riemann divisor, or Hilbert--Pólya operator has
+been constructed.
+
+- [Project overview](henon_chiral_chronology_threshold/README.md)
+- [Derivation package](henon_chiral_chronology_threshold/DERIVATION_PACKAGE.md)
+- [Source audit](henon_chiral_chronology_threshold/SOURCE_AUDIT.md)
+- [Research synthesis](henon_chiral_chronology_threshold/RESEARCH_SYNTHESIS.md)
+- [Exact certificate](henon_chiral_chronology_threshold/results/c21_certificate.json)
+- [Independent check](henon_chiral_chronology_threshold/results/c21_independent_check.json)
+- [Route-A record](henon_chiral_chronology_threshold/evaluations/route_a/hcs_c21/20260808T134051Z.yaml)
+
+Reproduce the compact artifacts with:
+
+~~~bash
+cd henon_chiral_chronology_threshold
+python code/c21_producer.py --output results/c21_certificate.json
+python code/c21_independent_check.py \
+  --certificate results/c21_certificate.json \
+  --output results/c21_independent_check.json
+python -m unittest discover -s code -p 'test_c21.py' -v
+~~~
+
+## Predecessor result: HCS-C20
 
 The ordered-edge lift of the adopted period-seven septic is now proved to be
 the connected genus-eight \(D_7\) splitting curve.  Its rotation quotient is
