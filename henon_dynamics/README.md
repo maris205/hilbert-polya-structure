@@ -53,48 +53,78 @@ The foundational local source is
 | [`s_arithmetic_height_clock_obstruction/`](s_arithmetic_height_clock_obstruction/) | Explicit real/tree clock, near-wall divergence, canonical Weil height, and bounded-Hecke Weyl obstruction | Worked arithmetic example; Route-A rejected |
 | [`modular_scattering_clock_obstruction/`](modular_scattering_clock_obstruction/) | Modular open-channel zeta arithmetic, denominator-only repetition no-go, and stable Selberg closure | Scoped obstruction; Route-A rejected |
 | [`modular_open_trace_obstruction/`](modular_open_trace_obstruction/) | Algebraic endpoint coboundary, full-boundary Selberg periods, commuting squarefree scattering channels, and projector scope boundary | Scoped obstruction; Route-A rejected |
+| [`henon_period7_frobenius_curve/`](henon_period7_frobenius_curve/) | Generic Hénon seven-cycle, degree-14 oriented time lift, genus-three scalar quotient, and finite-prime candidates | Route-A exploratory |
 
-## Latest result: HCS-C18
+## Latest result: HCS-C19
 
-The latest paper tests the two standard escapes left open by HCS-C17:
-retaining rational endpoints and retaining all squarefree congruence cusp
-channels. Unoriented open scattering geodesics retain the exact positive
-control
+The latest paper returns to the original area-preserving Hénon program and
+studies a corrected period-seven chiral coordinate equation.  An exact
+\(\mathbb F_{103}\) orbit witness shows that the literal constant term in
+Endler--Gallas Eq. (16) is inconsistent with the stated dynamics; the project
+therefore records an adopted placement of the constant that passes that
+fibre.  No official publisher erratum is claimed.
 
 \[
-Z_{\rm sc}(s;T_0)=\frac{T_0^{-2s}}2\left[
-\frac{\zeta(2s-1)}{\zeta(2s)}
-+\frac{\zeta(2s)L(2s,\chi_{-4})}{\zeta(4s)}\right],
+\operatorname{Disc}_xP=(4\sigma-9)^2Q_6(\sigma)^3.
 \]
 
-but the section-induced endpoint clock is an algebraic/set-theoretic
-coboundary on \(\mathbb P^1(\mathbb Q)\). On the full real boundary, its
-nonzero loop periods are exactly the signed hyperbolic translation lengths;
-this classifies period support and does not by itself construct a determinant.
+The six roots of the irreducible sextic \(Q_6\) each support three simple
+ramification points.  The remaining finite discriminant point is an ordinary
+node and infinity splits into seven unramified normalization branches.
+Riemann--Hurwitz and an independent plane-septic delta calculation both give
+\(g=3\) for the explicit characteristic-zero septic.  Exact affine counts and
+a frozen branch correction at \(p=5,11,13\) produce three reciprocal
+degree-six candidate numerators; a second implementation reproduces all
+counts and a sealed \(p=5,r=4\) prediction.  Simultaneous normalization and
+good reduction at these primes remain open.
 
-Independently, the standard squarefree \(\Gamma_0(N)\) scattering family has
-a fixed Walsh basis in the frozen Huxley--Hejhal width normalization. Bare
-products at distinct spectral parameters are therefore permutation-invariant.
-This is a conditional matrix-product diagnostic, not an identification of the
-spectral parameter with time. Rank-one cusp projectors leave the commutative
-algebra and give certified parameter-to-edge assignment and path sensitivity;
-no primitive path law or Fredholm determinant is inferred.
+The decisive generic calculation takes the gcd in \(y\) of
+\(P(\sigma,y)\) and \(P(\sigma,a-y^2-x)\) over
+\(\mathbb Q(\sigma)[x]/(P)\).  It has degree two, and its neighbor roots sum
+to \(a-x^2\).  Exact nondegeneracy plus prime-degree monodromy force one
+seven-cycle.  The 14 ordered edges therefore carry
 
-- [Project overview](modular_open_trace_obstruction/README.md)
-- [Compiled paper](modular_open_trace_obstruction/paper/main.pdf)
-- [Derivation package](modular_open_trace_obstruction/DERIVATION_PACKAGE.md)
-- [Certificate producer](modular_open_trace_obstruction/code/open_trace.py)
-- [Independent checker](modular_open_trace_obstruction/code/independent_check.py)
-- [Route-A record](modular_open_trace_obstruction/evaluations/route_a/hcs_c18/evaluation.yaml)
+\[
+\tau(x,y)=(a-x^2-y,x),\qquad \tau^7=1,
+\]
+
+together with time reversal.  This generically certifies the adopted septic
+as a true Hénon period-seven carrier and restores the orientation lost on the
+scalar genus-three quotient.
+
+The Hilbert--Pólya verdict is exploratory but still far from positive:
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**.  Hénon time is now genuine,
+but period remains fixed at seven and the scalar candidate Frobenius rows are
+not time sectors upstairs.  The next large step is the geometry of the
+ordered-edge cover and joint
+\(\#\operatorname{Fix}(\operatorname{Frob}_p^r\tau^s)\) data without
+orientation averaging.
+
+- [Project overview](henon_period7_frobenius_curve/README.md)
+- [Compiled paper](henon_period7_frobenius_curve/paper/main.pdf)
+- [Derivation package](henon_period7_frobenius_curve/DERIVATION_PACKAGE.md)
+- [Source audit](henon_period7_frobenius_curve/SOURCE_AUDIT.md)
+- [Neighbor correspondence](henon_period7_frobenius_curve/NEIGHBOR_CORRESPONDENCE.md)
+- [Certificate producer](henon_period7_frobenius_curve/code/c19_producer.py)
+- [Independent checker](henon_period7_frobenius_curve/code/c19_independent_check.py)
+- [Latest Route-A record](henon_period7_frobenius_curve/evaluations/route_a/hcs_c19/20260808T060207Z.yaml)
+- [Historical pre-lift Route-A record](henon_period7_frobenius_curve/evaluations/route_a/hcs_c19/20260808T051445Z.yaml)
 
 Reproduce its frozen artifacts with:
 
 ```bash
-cd modular_open_trace_obstruction
-python code/open_trace.py --output results
-python code/independent_check.py --results results \
-  --output results/independent_check.json
-python -m unittest discover -s code -p 'test_*.py' -v
+cd henon_period7_frobenius_curve
+python -m pip install -r requirements.txt
+python code/c19_producer.py --output results
+python code/c19_independent_check.py \
+  --certificate results/c19_certificate.json \
+  --output results/c19_independent_check.json
+python code/c19_neighbor_correspondence.py \
+  --output results/c19_neighbor_correspondence.json
+python code/c19_neighbor_independent_check.py \
+  --certificate results/c19_neighbor_correspondence.json \
+  --output results/c19_neighbor_independent_check.json
+python -m unittest discover -s code -p 'test_c19.py' -v
 ```
 
 ## Mirrored-data boundary
@@ -131,4 +161,4 @@ Regenerable caches, nested Git metadata, TeX auxiliary files, and bulky raw
 array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
-Last synchronized research snapshot: **2026-08-07**.
+Last synchronized research snapshot: **2026-08-08**.

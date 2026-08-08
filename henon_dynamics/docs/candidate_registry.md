@@ -260,3 +260,54 @@ sensitivity; this is a positive scope boundary, not yet intrinsic chronology
 or a Fredholm construction.  The next major round should switch to the
 two-axis Frobenius--iterate Hénon object rather than tune another modular
 level.
+
+## HCS-C19 closure (2026-08-08)
+
+Candidate **HCS-C19** is retained as an exact genus-three Hénon control with a
+generic ordered-edge time lift; see
+[`../henon_period7_frobenius_curve/`](../henon_period7_frobenius_curve/).
+After the neighbor-correspondence upgrade, the Route-A tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall status
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.  The earlier all-fail
+record is retained as the pre-lift audit.
+
+The candidate starts from the period-seven chiral relation
+\(a=\sigma^2-2\sigma\).  An exact \(\mathbb F_{103}\) specialization shows
+that the literal constant term printed in Endler--Gallas Eq. (16) does not
+contain the corresponding Hénon coordinates, while an adopted candidate
+placement of the constant \(3\) contains exactly the seven coordinates of two
+reversed cycles.  This is an apparent print-error diagnosis and one-fibre
+validation, not an official erratum.  An independent generic subresultant
+then proves that the adopted roots form an exact Hénon seven-cycle; exhaustion
+of the full saturated period-seven scheme is not asserted.
+
+For the explicitly frozen candidate septic,
+
+\[
+\operatorname{Disc}_xP=(4\sigma-9)^2Q_6(\sigma)^3,
+\]
+
+with irreducible sextic \(Q_6\).  Its smooth projective normalization has
+genus three: the six roots of \(Q_6\) each support three simple ramification
+points, the finite double-discriminant point is an ordinary unramified node
+after normalization, and the two plane points at infinity split into seven
+unramified normalization branches.  Exact affine counts and a frozen branch
+correction at \(p=5,11,13\) yield independently reproduced reciprocal
+candidate numerators.  Simultaneous normalization and good reduction are not
+proved, so these are not asserted local factors of the characteristic-zero
+curve.
+
+The generic neighbor gcd is quadratic and its two roots sum to \(a-x^2\).
+Nonzero discriminant and diagonal remainders give a simple two-regular graph;
+prime-degree geometric monodromy forces one seven-cycle.  Its ordered edges
+form a degree-14 cover \(\widetilde C\) with exact order-seven time \(\tau\)
+and reversal.  The scalar genus-three curve is the quotient control that
+forgets the previous-neighbor choice.
+
+The remaining failure is cross-period and operator-theoretic.  Frobenius
+degree \(r\), Hénon time exponent \(s\), and fixed period \(n=7\) are
+distinct.  No chronological determinant, Riemann divisor, or Hilbert--Pólya
+operator follows.  The next major experiment is the geometry of
+\(\widetilde C\) and joint
+\(\#\operatorname{Fix}(\operatorname{Frob}_p^r\tau^s)\), without averaging
+over \(s\).

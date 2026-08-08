@@ -1,0 +1,57 @@
+\section{Polynomial and reproducibility}
+
+\subsection{Expanded adopted candidate septic}\label{app:poly}
+
+After $a=\sigma^2-2\sigma$, the adopted candidate polynomial is
+\begin{align*}
+P={}&x^7-\sigma x^6+(-3\sigma^2+8\sigma)x^5
+ +(3\sigma^3-8\sigma^2+4)x^4\\
+&+(3\sigma^4-16\sigma^3+20\sigma^2+2\sigma+1)x^3\\
+&+(-3\sigma^5+16\sigma^4-20\sigma^3-10\sigma^2+19\sigma-2)x^2\\
+&+(-\sigma^6+8\sigma^5-20\sigma^4+14\sigma^3+3\sigma^2+2\sigma+2)x\\
+&+\sigma^7-8\sigma^6+20\sigma^5-10\sigma^4-23\sigma^3
+ +24\sigma^2-6\sigma+3.
+\end{align*}
+
+\subsection{Infinity charts}\label{app:infinity}
+
+For $F(t,y)=t^7P(1/t,y/t)$, the first weighted forms are
+\begin{align*}
+y=1+z &: 8z(t+z)^2(2t+z),\\
+y=-1+z &:16(z-2t)(z-t)^2,\\
+y=1-t+w &: -4t^2w(t^2+2w),\\
+y=-1+t+w &: -8t(t^2-2w)(t^2-w).
+\end{align*}
+The remaining $w=0$ branch above $y=1$ has next initial equation
+$t^4(t^3-4w)$.  Together with the branch of valuation two from the first
+chart, these equations yield four distinct $t$-parameterized branches above
+$y=1$ and three above $y=-1$.
+
+\subsection{Neighbor certificate}\label{app:neighbor}
+
+The neighbor producer stores the complete subresultant degree/vanishing
+ledger, SHA-256 hashes of the exact reduced coefficients, the zero neighbor
+sum remainder, and nonzero discriminant and loop remainders.  The checker
+reconstructs $P$ without importing the producer and repeats the quotient-field
+calculation.  It also verifies the regular split control
+$(p,\sigma,a)=(43,7,35)$, including all seven recurrence equations and the
+exact order of $\tau$.
+
+\subsection{Commands}
+
+From the project directory run
+\begin{verbatim}
+python code/c19_producer.py --output results
+python code/c19_independent_check.py \
+  --certificate results/c19_certificate.json \
+  --output results/c19_independent_check.json
+python code/c19_neighbor_correspondence.py \
+  --output results/c19_neighbor_correspondence.json
+python code/c19_neighbor_independent_check.py \
+  --certificate results/c19_neighbor_correspondence.json \
+  --output results/c19_neighbor_independent_check.json
+python -m unittest discover -s code -p 'test_c19.py' -v
+\end{verbatim}
+The checker does not import the producer or the \texttt{galois} package.  It
+uses explicit polynomial quotient fields and stores every modulus in the
+independent JSON artifact.

@@ -329,6 +329,44 @@ Frobenius--iterate Hénon count.
 
 ---
 
+## 12. henon_period7_frobenius_curve
+
+### Topic
+
+A corrected period-seven chiral coordinate equation, its generic Hénon
+neighbor graph and oriented edge lift, the genus of its scalar quotient, and
+branch-corrected finite-prime candidate numerators.
+
+### Main results
+
+- an exact \(\mathbb F_{103}\) orbit witness diagnoses an apparent placement
+  error in the constant term printed in Endler--Gallas Eq. (16);
+- after the chiral substitution \(a=\sigma^2-2\sigma\), the adopted septic
+  has discriminant \((4\sigma-9)^2Q_6(\sigma)^3\) with irreducible sextic
+  \(Q_6\);
+- ramification and normalization calculations prove that the smooth
+  projective curve has genus three, independently checked by plane-septic
+  delta invariants;
+- exact affine counts and a frozen branch correction over \(\mathbb F_{p^r}\)
+  for \(p=5,11,13\), \(r\leq3\), give reciprocal degree-six candidate
+  numerators, and an independent field implementation verifies the counts
+  plus a sealed \(p=5,r=4\) prediction;
+- an exact quotient-field subresultant gives two neighbors with sum
+  \(a-x^2\); nondegeneracy and monodromy force one generic seven-cycle;
+- the 14 ordered edges carry an exact order-seven Hénon time action and
+  reversal, while the scalar genus-three curve is the neighbor-flip quotient;
+- selected-prime simultaneous normalization remains explicitly open.
+
+### Relation to HP search
+
+This is an exact positive Hénon chronology and genus theorem, with Route A
+upgraded to exploratory rather than accepted.  The finite-prime rows remain
+scalar candidates, Frobenius degree is not Hénon period, and they are not time
+characters of the ordered-edge cover.  The next nonlocal step is the geometry
+and good reduction of that cover and its joint Frobenius--Hénon fixed traces.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

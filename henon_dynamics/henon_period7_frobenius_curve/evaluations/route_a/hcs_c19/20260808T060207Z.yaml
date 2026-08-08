@@ -1,0 +1,111 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C19
+source_commit: PENDING_RELEASE_COMMIT
+evaluation_date: 2026-08-08
+
+candidate_definition:
+  family: area-preserving Paper-5 Henon family in Hamiltonian coordinates
+  phase_space: generic degree-fourteen cover E of the sigma-line, with a generic degree-two projection E to the genus-three scalar coordinate curve C
+  dynamics: tau(x,y) = (a - x^2 - y, x), with tau of exact order seven and reversal R(x,y) = (y,x)
+  parameters: a = sigma^2 - 2*sigma on the published period-seven chiral relation
+  parameter_provenance: adopted Eq. 16 correction selected by an exact F_103 orbit and generically certified by a quotient-field neighbor correspondence
+  training_data: none
+  forbidden_data: Riemann zero tables and target prime tables
+  code_commit: PENDING_RELEASE_COMMIT
+  artifact_paths:
+    - NEIGHBOR_CORRESPONDENCE.md
+    - results/c19_neighbor_correspondence.json
+    - results/c19_neighbor_independent_check.json
+    - results/c19_certificate.json
+    - results/frobenius_counts.csv
+
+input_gate:
+  status: TESTABLE_AS_SCOPED_PERIOD_SEVEN_DYNAMICAL_OBJECT
+  reason: E, tau, reversal, the quotient E to C, and the fixed period-seven clock are exact; no cross-period determinant is defined
+
+source_lock:
+  object: ordered-edge cover E with tau; scalar genus-three curve C is the quotient control obtained by forgetting the previous-neighbor choice
+  clock: Henon time exponent s modulo seven on E; fixed period label n=7 and Frobenius extension degree r are separate variables
+  normalization: generic characteristic-zero finite-etale edge cover; compactification, genus of E, and selected-prime good reduction remain open
+  determinant_convention: none for E; branch-corrected candidate numerators of C are explicitly a different object
+  cutoff: exact generic period seven; finite controls F_43 and F_103; scalar count screen p in {5,11,13}
+  precision: exact symbolic and finite-field arithmetic; complex-root modulus used only for scalar candidate regression
+  allowed_data: Paper 5 recurrence, Endler-Gallas primary source, exact subresultants, finite-field controls
+  forbidden_data: Riemann primes, zeros, fitted scales, averaged orientation matrices, and diagonal identifications r=s=n
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: the generic root graph is a simple connected seven-cycle; its fourteen ordered edges split into two reversed tau-orbits of exact length seven
+  strongest_failure: only n=7 is constructed; there is no cross-period primitive enumeration, stability-multiplier ledger, completeness theorem, or prime-like clock
+  metrics:
+    generic_vertices: 7
+    generic_ordered_edges: 14
+    tau_order: 7
+    orientations_retained: 2
+    exact_regular_controls: 2
+  artifacts:
+    - NEIGHBOR_CORRESPONDENCE.md
+    - results/c19_neighbor_correspondence.json
+    - results/c19_neighbor_independent_check.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: E and tau now define exact chronological data suitable for future equivariant traces
+  strongest_failure: no weighted cross-period zeta or Fredholm determinant is defined from E; the branch-corrected scalar numerators belong to C and cannot substitute for E time sectors
+  metrics:
+    dynamical_determinant_defined: false
+    joint_frobenius_tau_traces_computed: false
+    missing_zero_count: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: NOT_TESTABLE
+    precision_drift: NOT_TESTABLE
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the scalar curve has exact genus three and its candidate finite-prime numerators obey reciprocal circle regressions
+  strongest_failure: no determinant of E, Riemann divisor, gamma factor, global continuation, Riemann functional equation, or Riemann-von-Mangoldt law exists
+  metrics:
+    riemann_divisor_map: absent
+    global_euler_product: absent
+    cross_period_counting_law: absent
+  artifacts:
+    - results/c19_certificate.json
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: tau and reversal are source-derived from the area-preserving Henon recurrence and satisfy R tau R = tau^-1 on the exact oriented cover
+  strongest_failure: no quantization preserving the same clock, Hilbert space, operator domain, or unitary/scattering construction is defined
+  metrics:
+    source_derived_time_action: true
+    time_reversal_action: true
+    hilbert_space_defined: false
+    operator_domain_defined: false
+  artifacts:
+    - NEIGHBOR_CORRESPONDENCE.md
+
+overall_tuple: (A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)
+overall_verdict: ROUTE_A_EXPLORATORY
+research_value: RETAIN_EXACT_PERIOD_SEVEN_ORIENTED_HENON_COVER_AND_GENUS_THREE_QUOTIENT
+claim_boundary:
+  - the adopted septic is generically one exact-period-seven Henon component; exhaustion of the full saturated period-seven scheme is not claimed
+  - E has generic degree fourteen and tau order seven on a characteristic-zero open locus; degeneration fibres and the compactified genus of E are open
+  - C is generically E modulo the neighbor-flip involution J, while tau acts only on E
+  - scalar finite-prime rows are branch-corrected candidates and are not local factors or joint traces of E
+  - r, s, and n are distinct; no Riemann divisor, global dynamical determinant, or Hilbert-Polya operator is claimed
+blocking_conditions:
+  - normalize and determine the connected components and genus of E
+  - prove selected-prime good reduction for E and C
+  - compute joint fixed traces of Frob_p^r tau^s without averaging over s
+  - extend the construction across periods and define an intrinsic repetition law
+  - define a trace-class or Fredholm determinant before any divisor comparison
+next_smallest_test: compute the function-field discriminant and normalization of the quadratic edge extension E over C, then derive its equivariant Frobenius character table at one proved-good prime
+route_b_invocation_allowed: false

@@ -1,0 +1,67 @@
+\section{Finite-field counts and candidate Frobenius certificates}\label{sec:frobenius}
+
+For the selected primes $p=5,11,13$, direct modular gcd checks leave only the
+expected affine node, keep $Q_6$ squarefree and disjoint from that node, and
+preserve the displayed leading infinity charts.  These checks support the
+expected normalization pattern at the three reductions.  They do not
+construct a smooth proper simultaneous normalization over $\mathbb Z_p$, prove that
+normalization commutes with reduction, or classify all bad primes.
+
+Let $A_{p,r}$ count affine solutions of $P=0$ over $\F_{p^r}$.  Applying the
+characteristic-zero branch ledger formally adds seven rational branches at
+infinity.  At the rational plane node, the two tangent directions are
+rational exactly when $-7$ is a square in $\F_{p^r}$.  We therefore define
+the explicitly reproducible \emph{branch-corrected count}
+\begin{equation}\label{eq:countcorrection}
+ \widehat N_{p,r}=A_{p,r}+7+\epsilon_{p,r},\qquad
+ \epsilon_{p,r}=\begin{cases}+1,&-7\text{ is a square},\\-1,&\text{otherwise}.
+ \end{cases}
+\end{equation}
+A simultaneous-normalization proof would promote $\widehat N_{p,r}$ to the
+point count of the good reduction of $\Ccurve$; absent that proof, the hat is
+part of the claim boundary.
+
+\begin{table}[ht]
+\centering
+\caption{Exact affine and branch-corrected counts.}
+\begin{tabular}{c@{\qquad}c@{\qquad}c}
+\toprule
+$p$ & $(A_{p,1},A_{p,2},A_{p,3})$ & $(\widehat N_{p,1},\widehat N_{p,2},\widehat N_{p,3})$\\
+\midrule
+5  & $(3,31,141)$    & $(9,39,147)$\\
+11 & $(11,159,1163)$ & $(19,167,1171)$\\
+13 & $(10,234,2125)$ & $(16,242,2131)$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Set $\widehat S_r=p^r+1-\widehat N_{p,r}$.  Newton identities and the
+genus-three reciprocal completion define the candidate numerator
+\begin{equation}\label{eq:localnumerator}
+\begin{split}
+\widehat L_p(T)={}&1-\widehat S_1T+
+\frac{\widehat S_1^2-\widehat S_2}{2}T^2
+-\frac{\widehat S_1^3-3\widehat S_1\widehat S_2+2\widehat S_3}{6}T^3\\
+&+p\frac{\widehat S_1^2-\widehat S_2}{2}T^4
+-p^2\widehat S_1T^5+p^3T^6.
+\end{split}
+\end{equation}
+The three candidates are
+\begin{align*}
+\widehat L_5(T)&=1+3T+11T^2+31T^3+55T^4+75T^5+125T^6,\\
+\widehat L_{11}(T)&=1+7T+47T^2+161T^3+517T^4+847T^5+1331T^6,\\
+\widehat L_{13}(T)&=1+2T+38T^2+51T^3+494T^4+338T^5+2197T^6.
+\end{align*}
+Each is irreducible over $\Q$, satisfies
+$[T^{6-i}]\widehat L_p=p^{3-i}[T^i]\widehat L_p$, and has
+reciprocal-root modulus residual below $2.2\cdot10^{-15}$ from $p^{-1/2}$.
+This circle check is a regression property of the candidates, not a proof of
+good reduction and not evidence for the Riemann hypothesis.
+
+The producer uses the Python \texttt{galois} package.  The checker instead
+constructs $\F_{p^r}$ as an explicit polynomial quotient, builds its own
+addition and multiplication tables, and imports no producer code.  It repeats
+all nine frozen affine counts and every branch correction.  The recurrence
+from Eq.~\eqref{eq:localnumerator} predicts $\widehat N_{5,4}=547$; a sealed
+direct count gives $A_{5,4}=539$ and Eq.~\eqref{eq:countcorrection} gives
+exactly 547.

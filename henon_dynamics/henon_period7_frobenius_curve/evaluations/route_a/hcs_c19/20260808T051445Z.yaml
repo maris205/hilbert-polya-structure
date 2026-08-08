@@ -1,0 +1,112 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C19
+source_commit: PENDING_RELEASE_COMMIT
+evaluation_date: 2026-08-08
+
+candidate_definition:
+  family: area-preserving Paper-5 Henon family in Hamiltonian coordinates
+  phase_space: smooth projective normalization of an explicitly frozen candidate septic
+  dynamics: no Henon time map is defined; finite-field rows use a branch-corrected Frobenius point-count protocol
+  parameters: a = sigma^2 - 2*sigma on the published chiral parameter relation
+  parameter_provenance: Endler-Gallas C7 relation plus one exact F_103 witness supporting the candidate placement of the constant in Eq. 16
+  training_data: none
+  forbidden_data: Riemann zero tables and target prime tables
+  code_commit: PENDING_RELEASE_COMMIT
+  artifact_paths:
+    - results/c19_certificate.json
+    - results/frobenius_counts.csv
+    - results/c19_independent_check.json
+
+input_gate:
+  status: TESTABLE_AS_SCOPED_ALGEBRAIC_OBJECT
+  reason: the frozen septic and finite-field counting protocol are explicit; generic Henon elimination, simultaneous normalization, and a global dynamical determinant are not defined
+
+source_lock:
+  object: frozen candidate septic, not a proved generic Henon eliminant, reversal quotient, rational chiral parameter line, or marked chronological cover
+  clock: Frobenius extension degree r in the finite-field protocol; Henon period n is frozen at seven and is not identified with r
+  normalization: characteristic-zero smooth projective normalization; selected-prime counts use an explicit branch correction without a simultaneous-normalization theorem
+  determinant_convention: candidate reciprocal numerator reconstructed from corrected counts; no certified local factor of the characteristic-zero curve, cross-period Euler product, or Riemann determinant
+  cutoff: p in {5,11,13}, r in {1,2,3}; direct sealed check p=5,r=4
+  precision: exact symbolic and finite-field arithmetic; complex-root modulus used only as a double-precision regression check
+  allowed_data: Paper 5 recurrence, Endler-Gallas primary source, exact algebra and finite-field counts
+  forbidden_data: Riemann primes, zeros, fitted scales, and diagonal r=n substitutions
+
+source_correction:
+  evidence_status: EXACT_SPECIALIZATION
+  strongest_evidence: two exact reversed period-seven cycles over F_103 have the seven adopted roots while the literal printed equation has roots 55 and 60
+  scope: the literal formula fails and the candidate passes at one exact fibre; no official journal erratum or generic saturated elimination is claimed
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: an exact primitive period-seven reversal pair and the source relation C7 are recorded without prime or zero fitting
+  strongest_failure: generic Henon provenance, marked phase, and a source-derived time map on the septic are absent; n is fixed rather than a cross-period primitive clock
+  metrics:
+    exact_period_witness: 7
+    ordered_states_in_witness_pair: 14
+    frozen_septic_degree: 7
+    source_correction_field: 103
+  artifacts:
+    - results/c19_certificate.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: three exact branch-corrected reciprocal numerators are independently reproduced, with a sealed p=5,r=4 corrected count
+  strongest_failure: simultaneous normalization and good reduction are unproved, and even a certified fixed-period local factor would not be a weighted cross-period dynamical zeta or Fredholm determinant with a Riemann target divisor
+  metrics:
+    candidate_numerators: 3
+    independently_recomputed_affine_counts_r1_r3: 9
+    sealed_branch_corrected_count_p5_r4: 547
+    missing_zero_count: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: NOT_TESTABLE
+    precision_drift: NOT_TESTABLE
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - results/frobenius_counts.csv
+    - results/c19_independent_check.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: each recorded candidate numerator satisfies the genus-three reciprocal relation and numerical circle regression check
+  strongest_failure: candidate local reciprocity supplies neither good reduction nor the completed Riemann functional equation, a Riemann-von-Mangoldt law, global continuation, gamma factor, or exact divisor map
+  metrics:
+    maximum_reciprocal_root_modulus_error: 2.2e-15
+    riemann_divisor_map: absent
+    global_euler_product: absent
+  artifacts:
+    - results/c19_certificate.json
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the parent recurrence is area-preserving and reversible at the exact source witness
+  strongest_failure: no joint operator is constructed by or follows from the adopted septic; no marked oriented object, Hilbert space, or operator domain is defined
+  metrics:
+    source_derived_time_automorphism_on_curve: false
+    hilbert_space_defined: false
+    operator_domain_defined: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+overall_tuple: (A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)
+overall_verdict: ROUTE_A_REJECTED
+research_value: RETAIN_EXACT_GENUS_THREE_ALGEBRAIC_CONTROL_SOURCE_DIAGNOSIS_AND_FINITE_FIELD_CANDIDATES
+claim_boundary:
+  - the printed Eq. 16 is refuted only through one exact specialization and is labelled an apparent print error, not an official erratum
+  - genus three belongs exactly to the frozen candidate septic, whose generic Henon elimination provenance is unproved
+  - selected-prime rows use a branch-correction protocol and are not certified good-reduction local factors of the characteristic-zero curve
+  - no generic reversal quotient, marked chronological cover, or Henon time automorphism has been constructed
+  - Frobenius extension degree is not Henon time; no Riemann divisor, global dynamical determinant, complete bad-prime classification, or Hilbert-Polya operator is claimed
+blocking_conditions:
+  - derive the candidate septic from the saturated exact-period-seven Henon ideal or reject it
+  - construct the marked component, determine its actual generic degree and reversal quotient, and define tau
+  - prove selected-prime simultaneous normalization or replace the corrected-count protocol
+  - compute joint fixed traces of Frob_p^r tau^s without averaging over s
+  - define a cross-period repetition law and global determinant before any new Route-A evaluation
+next_smallest_test: factor the exact neighbor correspondence suggested by Res_y(P(y),P(a-y^2-x)) being divisible by P(x)^2, then test closure and order seven on the saturated marked scheme
+route_b_invocation_allowed: false
