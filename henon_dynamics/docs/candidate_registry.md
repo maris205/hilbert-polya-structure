@@ -311,3 +311,52 @@ operator follows.  The next major experiment is the geometry of
 \(\widetilde C\) and joint
 \(\#\operatorname{Fix}(\operatorname{Frob}_p^r\tau^s)\), without averaging
 over \(s\).
+
+## HCS-C20 result (2026-08-08)
+
+Candidate **HCS-C20** is retained as an exact dihedral Hénon closure,
+selected-prime arithmetic theorem, and fixed-period spectral-collapse result;
+see [`../henon_period7_dihedral_cover/`](../henon_period7_dihedral_cover/).
+Its Route-A tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall status
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.
+
+The ordered-edge curve is the geometrically connected \(D_7\) splitting
+curve of the adopted Hénon septic.  Its genus is eight, its rotation quotient
+is
+\[
+B:w^2=Q_6(\sigma),\qquad g(B)=2,
+\]
+and its scalar reflection quotient has genus three.  The cyclic map
+\(E\to B\) is unramified of degree seven, while
+\(\mathbb Q(E)=\mathbb Q(C)(\sqrt{Q_6})\) has a single explicit
+degree-six branch divisor.
+
+The Hénon step gives a Rosati-self-adjoint push--pull correspondence on
+\(\operatorname{Jac}(C)\) with exact minimal polynomial
+\[
+T^3+T^2-2T-1.
+\]
+Thus the scalar Jacobian has real multiplication by
+\(\mathbb Q(\zeta_7+\zeta_7^{-1})\), and
+\[
+\operatorname{Jac}(E)\sim_{\mathbb Q}
+\operatorname{Jac}(B)\times\operatorname{Jac}(C)^2.
+\]
+The general dihedral, Prym, and real-multiplication mechanisms are classical;
+the contribution is their source-locked realization on this Hénon curve.
+
+At \(p=5,11,13\), a tame vertical-inertia exclusion, branch-locus purity,
+and two-chart normalization comparison prove good reduction of \(B,E,C\).
+Two implementations independently recompute the scalar counts through
+extension degree three.  The resulting \(L_C\) factors are genuine
+Hasse--Weil numerators and exact norms of real-cubic quadratics; the genuine
+genus-eight factors satisfy \(L_E=L_B L_C^2\).  No other prime is covered.
+
+This is not a positive Hilbert--Pólya construction.  Period remains frozen at
+seven, no cross-period primitive determinant exists, and ordinary
+cohomology of the oriented lift contains only the sign quotient plus two
+scalar copies.  Equivariant \(\tau\)-characters retain phase labels, but no
+new ordinary eigenvalues.  The next breadth-first move is a varying-period
+marked scheme, with Frobenius degree, Hénon period, and time character kept as
+distinct axes.

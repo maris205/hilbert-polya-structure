@@ -1,5 +1,26 @@
 # Next paper roadmap: geometry and equivariant Frobenius of the oriented cover
 
+## Successor status (HCS-C20)
+
+HCS-C20 has resolved Stage I completely: the ordered-edge object is the
+connected genus-eight \(D_7\) splitting curve, its quotient diagram is
+explicit, and chronology induces real cubic multiplication on the scalar
+Jacobian.  It also proves good reduction at \(p=5,11,13\) and certifies the
+ordinary local-factor identity
+\[
+L_E=L_B L_C^2.
+\]
+This triggers the intended collapse branch of Gate 2: after forgetting the
+\(\tau\)-labels, the oriented cover supplies only the sign quotient and two
+scalar copies.  The fixed-period geometry is retained as HCS-C20, but another
+round of scalar or unlabelled period-seven refinement is closed.
+
+The active successor is now cross-period.  It should construct marked
+primitive schemes for at least two distinct periods and keep Hénon period
+\(n\), Frobenius degree \(r\), and time character \(s\) as three separate
+indices.  A determinant is attempted only after an intrinsic repetition law
+is proved.
+
 ## Central question
 
 Let \(C\) be the normalized genus-three scalar curve and let

@@ -1,0 +1,41 @@
+\section{Reproducibility ledger}\label{app:reproduce}
+
+The frozen input polynomial is
+\begin{align*}
+P(\sigma,x)={}&x^7-\sigma x^6+(-3\sigma^2+8\sigma)x^5
+ +(3\sigma^3-8\sigma^2+4)x^4\\
+&+(3\sigma^4-16\sigma^3+20\sigma^2+2\sigma+1)x^3\\
+&+(-3\sigma^5+16\sigma^4-20\sigma^3-10\sigma^2+19\sigma-2)x^2\\
+&+(-\sigma^6+8\sigma^5-20\sigma^4+14\sigma^3+3\sigma^2+2\sigma+2)x\\
+&+\sigma^7-8\sigma^6+20\sigma^5-10\sigma^4-23\sigma^3
+ +24\sigma^2-6\sigma+3.
+\end{align*}
+This is algebraically identical to the expanded certificate input.
+
+From the project directory, run
+\begin{verbatim}
+python code/c20_producer.py --output results/c20_certificate.json
+python code/c20_independent_check.py \
+  --certificate results/c20_certificate.json \
+  --output results/c20_independent_check.json
+python -m unittest discover -s code -p 'test_c20.py' -v
+\end{verbatim}
+
+The producer certifies the discriminant and branch inputs, quotient/genus
+ledger, $D_7$ character identities, and real-cubic norm identities.  At the
+three selected primes it also records the vertical-inertia and purity
+hypotheses, irreducible specialization witnesses, residual-node gcds, and
+seven separated infinity branches.  It directly counts the plane septic over
+$\F_{p^r}$ for $r=1,2,3$, applies the proved normalization correction, and
+reconstructs $L_{C,p}$ by Newton identities.
+
+The checker imports neither the producer nor any HCS-C19 code or artifact.
+It validates source hashes and schema before independently repeating the
+symbolic, finite-field, normalization, and local-factor calculations.  Stored
+finite-prime rows use no Riemann zeros, prime targets, fitted scales, or
+averaged chronological matrices.
+
+The theorem depends on the exact HCS-C19 generic-neighbor certificate.  The
+source-correction caveat remains inherited: the adopted septic is one proved
+generic period-seven H\'enon component, but exhaustion of the full saturated
+period-seven scheme and a publisher-issued erratum are not claimed.

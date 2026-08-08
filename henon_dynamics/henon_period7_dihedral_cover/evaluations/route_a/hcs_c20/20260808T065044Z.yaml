@@ -1,0 +1,110 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C20
+source_commit: PENDING_RELEASE_COMMIT
+evaluation_date: 2026-08-08
+
+candidate_definition:
+  family: area-preserving Paper-5 Henon family in Hamiltonian coordinates
+  phase_space: connected genus-eight D7 ordered-edge splitting curve E over the sigma-line, with genus-three reflection quotient C and genus-two rotation quotient B
+  dynamics: exact order-seven tau on E; unnormalized symmetric push-pull A = q_* tau^* q^* on Jac(C)
+  parameters: a = sigma^2 - 2*sigma on the adopted period-seven chiral component
+  parameter_provenance: HCS-C19 exact neighbor theorem and source-locked adopted septic; no Riemann or fitted arithmetic data
+  training_data: none
+  forbidden_data: Riemann zero tables, target prime fitting, averaged orientation matrices, and identification of r with n or s
+  code_commit: PENDING_RELEASE_COMMIT
+  artifact_paths:
+    - DERIVATION_PACKAGE.md
+    - SELECTED_PRIME_GOOD_REDUCTION.md
+    - results/c20_certificate.json
+    - results/c20_independent_check.json
+    - paper/main.pdf
+
+input_gate:
+  status: TESTABLE_AS_SCOPED_FIXED_PERIOD_ARITHMETIC_DYNAMICAL_OBJECT
+  reason: E, tau, D7 quotients, Jacobian decomposition, and the RM correspondence are exact; no cross-period determinant exists
+
+source_lock:
+  object: E is the dynamical ordered-edge curve; C is the scalar reflection quotient; B is the orientation-sign quotient
+  clock: Henon time exponent s modulo seven on E; fixed period n=7 and Frobenius degree r remain distinct
+  normalization: smooth characteristic-zero projective curves; selected-prime good reduction and plane-normalization comparison are proved for B, C, and E at p in {5,11,13}
+  determinant_convention: no dynamical determinant; certified local factors remain fixed-period Hasse-Weil data
+  cutoff: exact fixed period seven; arithmetic controls p in {5,11,13}
+  precision: exact rational, algebraic-number-field, and finite-field arithmetic
+  allowed_data: Paper 5 recurrence, HCS-C19 exact certificates, primary D7/RM theory, and frozen candidate numerator rows
+  forbidden_data: Riemann primes or zeros, fitted scales, scalar/time averaging, and diagonal clock identifications
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: E is the connected D7 splitting curve and tau gives six nontrivial two-dimensional time-character sectors paired by reversal
+  strongest_failure: only n=7 is present; there is no cross-period primitive enumeration, repetition law, stability ledger, or prime-like clock
+  metrics:
+    fixed_period: 7
+    genus_E: 8
+    genus_C: 3
+    genus_B: 2
+    nontrivial_tau_characters: 6
+    character_dimension_each: 2
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - SELECTED_PRIME_GOOD_REDUCTION.md
+    - results/c20_certificate.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the RM correspondence gives exact fixed-period character-factor structure and the Jacobian isogeny gives the ordinary local-factor law at common good primes
+  strongest_failure: no cross-period weighted zeta, trace-class kernel, Fredholm determinant, or divisor comparison is defined
+  metrics:
+    rm_field_degree: 3
+    fixed_period_norm_law_proved: true
+    dynamical_determinant_defined: false
+    joint_cross_period_traces_computed: false
+    missing_zero_count: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+  artifacts:
+    - results/c20_certificate.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the real cubic norm law is an exact arithmetic constraint and B, C, E have certified Hasse-Weil local factors at p=5,11,13
+  strongest_failure: there is no Riemann divisor, global Euler product attached to varying Henon periods, gamma factor, functional equation bridge, or Riemann-von-Mangoldt law
+  metrics:
+    riemann_divisor_map: absent
+    global_henon_euler_product: absent
+    cross_period_counting_law: absent
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - SELECTED_PRIME_GOOD_REDUCTION.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: the source-derived unnormalized chronology correspondence A is Rosati self-adjoint with exact irreducible cubic minimal polynomial and totally real endomorphism field
+  strongest_failure: A acts on a finite-dimensional fixed-period Jacobian; no Hilbert space completion, unbounded operator domain, quantization, or Riemann spectral map exists
+  metrics:
+    source_derived_time_action: true
+    rosati_self_adjoint_correspondence: true
+    rm_field: Q(zeta_7 + zeta_7^-1)
+    hilbert_polya_operator_defined: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+overall_tuple: (A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)
+overall_verdict: ROUTE_A_EXPLORATORY
+research_value: RETAIN_D7_HENON_CLOSURE_RM_AND_FIXED_PERIOD_SPECTRAL_COLLAPSE
+claim_boundary:
+  - general D7, Prym, and RM mechanisms are classical; novelty is their exact realization on the adopted Henon septic
+  - Jac(E) is Q-isogenous to Jac(B) times Jac(C)^2; no polarized product isomorphism is claimed
+  - the RM field embeds in End_Q^0(Jac(C)); equality of the full endomorphism algebra and absolute simplicity are open
+  - B, C, and E local factors at 5, 11, and 13 are certified by a tame-cover, purity, and simultaneous-normalization theorem; no other prime is covered
+  - ordinary orientation-lift cohomology contains no eigenvalues beyond B and two copies of C, but equivariant tau sectors retain phase labels
+  - n, r, and s are distinct and no Riemann divisor or Hilbert-Polya operator is claimed
+blocking_conditions:
+  - vary the primitive Henon period n and prove an intrinsic repetition law
+  - compute joint Frobenius-Henon traces only on marked cross-period schemes
+  - define a trace-class or Fredholm determinant before any divisor comparison
+next_smallest_test: construct marked primitive period schemes for at least two distinct n and keep Frobenius degree r separate from Henon period n
+route_b_invocation_allowed: false

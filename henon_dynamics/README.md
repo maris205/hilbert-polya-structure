@@ -54,8 +54,66 @@ The foundational local source is
 | [`modular_scattering_clock_obstruction/`](modular_scattering_clock_obstruction/) | Modular open-channel zeta arithmetic, denominator-only repetition no-go, and stable Selberg closure | Scoped obstruction; Route-A rejected |
 | [`modular_open_trace_obstruction/`](modular_open_trace_obstruction/) | Algebraic endpoint coboundary, full-boundary Selberg periods, commuting squarefree scattering channels, and projector scope boundary | Scoped obstruction; Route-A rejected |
 | [`henon_period7_frobenius_curve/`](henon_period7_frobenius_curve/) | Generic Hénon seven-cycle, degree-14 oriented time lift, genus-three scalar quotient, and finite-prime candidates | Route-A exploratory |
+| [`henon_period7_dihedral_cover/`](henon_period7_dihedral_cover/) | Genus-eight \(D_7\) closure, chronology-induced real multiplication, and selected-prime local factors | Route-A exploratory |
 
-## Latest result: HCS-C19
+## Latest result: HCS-C20
+
+The ordered-edge lift of the adopted period-seven septic is now proved to be
+the connected genus-eight \(D_7\) splitting curve.  Its rotation quotient is
+the genus-two discriminant curve
+\[
+B:w^2=Q_6(\sigma),
+\]
+its scalar reflection quotient is the genus-three HCS-C19 curve, and the
+cyclic map \(E\to B\) is unramified of degree seven.
+
+Hénon chronology induces a Rosati-self-adjoint correspondence on
+\(\operatorname{Jac}(C)\) with exact minimal polynomial
+\[
+T^3+T^2-2T-1,
+\]
+so \(\mathbb Q(\zeta_7+\zeta_7^{-1})\) embeds in its rational endomorphism
+algebra.  The quotient-character identity gives
+\[
+\operatorname{Jac}(E)\sim_{\mathbb Q}
+\operatorname{Jac}(B)\times\operatorname{Jac}(C)^2.
+\]
+
+A selected-prime theorem closes HCS-C19's arithmetic caveat at
+\(p=5,11,13\).  Nontrivial vertical \(C_7\) inertia would force
+\(\mu_7\subset\mathbb F_p\), purity extends the cover finite étale, and a
+two-chart normalization plus irreducible specializations identifies the
+smooth quotient with the normalization of the plane septic after reduction.
+Independent extension-field enumeration then certifies the displayed
+\(L_C\) and \(L_E=L_B L_C^2\) as genuine local Hasse--Weil factors at exactly
+those primes.
+
+The Route-A verdict remains
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**.  The result supplies real
+arithmetic and self-adjoint structure, but it is locked to \(n=7\);
+ordinary cohomology adds no eigenvalues beyond \(B\) and two copies of \(C\),
+and no cross-period Fredholm determinant or Riemann divisor exists.
+
+- [Project overview](henon_period7_dihedral_cover/README.md)
+- [Compiled paper](henon_period7_dihedral_cover/paper/main.pdf)
+- [Good-reduction theorem](henon_period7_dihedral_cover/SELECTED_PRIME_GOOD_REDUCTION.md)
+- [Derivation package](henon_period7_dihedral_cover/DERIVATION_PACKAGE.md)
+- [Exact certificate](henon_period7_dihedral_cover/results/c20_certificate.json)
+- [Independent check](henon_period7_dihedral_cover/results/c20_independent_check.json)
+- [Route-A record](henon_period7_dihedral_cover/evaluations/route_a/hcs_c20/20260808T065044Z.yaml)
+
+Reproduce the compact release artifacts with:
+
+```bash
+cd henon_period7_dihedral_cover
+python code/c20_producer.py --output results/c20_certificate.json
+python code/c20_independent_check.py \
+  --certificate results/c20_certificate.json \
+  --output results/c20_independent_check.json
+python -m unittest discover -s code -p 'test_c20.py' -v
+```
+
+## Predecessor result: HCS-C19
 
 The latest paper returns to the original area-preserving Hénon program and
 studies a corrected period-seven chiral coordinate equation.  An exact
@@ -76,7 +134,8 @@ Riemann--Hurwitz and an independent plane-septic delta calculation both give
 a frozen branch correction at \(p=5,11,13\) produce three reciprocal
 degree-six candidate numerators; a second implementation reproduces all
 counts and a sealed \(p=5,r=4\) prediction.  Simultaneous normalization and
-good reduction at these primes remain open.
+good reduction at these primes were left open in HCS-C19 and are closed by
+HCS-C20 above.
 
 The decisive generic calculation takes the gcd in \(y\) of
 \(P(\sigma,y)\) and \(P(\sigma,a-y^2-x)\) over

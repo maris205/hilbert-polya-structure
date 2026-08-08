@@ -360,10 +360,49 @@ branch-corrected finite-prime candidate numerators.
 ### Relation to HP search
 
 This is an exact positive Hénon chronology and genus theorem, with Route A
-upgraded to exploratory rather than accepted.  The finite-prime rows remain
-scalar candidates, Frobenius degree is not Hénon period, and they are not time
-characters of the ordered-edge cover.  The next nonlocal step is the geometry
-and good reduction of that cover and its joint Frobenius--Hénon fixed traces.
+upgraded to exploratory rather than accepted.  Within HCS-C19 the finite-prime
+rows remained scalar candidates; HCS-C20 below subsequently proves good
+reduction and promotes them at exactly \(p=5,11,13\).  Frobenius degree is not
+Hénon period, and the scalar rows are not time characters of the ordered-edge
+cover.  HCS-C20 resolves the cover geometry and ordinary local factors while
+leaving joint, varying-period Frobenius--Hénon traces as the next nonlocal
+step.
+
+---
+
+## 13. henon_period7_dihedral_cover
+
+### Topic
+
+The connected ordered-edge \(D_7\) closure of the adopted period-seven
+Hénon septic, its quotient curves, chronology-induced real multiplication,
+and selected-prime good reduction.
+
+### Main results
+
+- the ordered-edge curve is the genus-eight \(D_7\) splitting curve, not two
+  disconnected orientations;
+- its genus-two rotation quotient is \(w^2=Q_6(\sigma)\), its scalar
+  reflection quotient has genus three, and \(E\to B\) is unramified cyclic
+  of degree seven;
+- the scalar Jacobian has a Rosati-self-adjoint Hénon correspondence
+  generating \(\mathbb Q(\zeta_7+\zeta_7^{-1})\);
+- \(\operatorname{Jac}(E)\sim\operatorname{Jac}(B)\times
+  \operatorname{Jac}(C)^2\);
+- at \(p=5,11,13\), vertical tame-inertia exclusion, purity, and
+  simultaneous normalization prove good reduction and certify the previously
+  branch-corrected scalar counts as genuine local Hasse--Weil data; and
+- the certified local factors obey both the real-cubic norm law and
+  \(L_E=L_B L_C^2\).
+
+### Relation to HP search
+
+This is a positive fixed-period arithmetic-dynamics theorem and a scoped
+ordinary-spectrum collapse, not a Hilbert--Pólya realization.  The
+finite-dimensional RM correspondence is genuinely self-adjoint, but no
+cross-period primitive product, Fredholm determinant, global Riemann divisor,
+or spectral counting bridge is defined.  The next program must vary Hénon
+period while keeping Frobenius degree and chronological character distinct.
 
 ---
 
