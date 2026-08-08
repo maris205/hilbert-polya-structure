@@ -35,17 +35,21 @@ not receive a manuscript that would overstate the mathematics.
 
 | Stage | Route-A tuple | Status | Paper |
 |---|---|---|---|
+| [`exact_uc_polar_growth_order`](projects/exact_uc_polar_growth_order/README.md) | Analytic `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Order-at-most-two and zero-free-half-plane manuscript; compiled PDF |
 | [`exact_uc_polar_nuclear_fredholm`](projects/exact_uc_polar_nuclear_fredholm/README.md) | Analytic `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Complete modular LaTeX manuscript and compiled PDF |
 | [`legacy_annular_residual_001`](projects/legacy_annular_residual_001/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `NOT_TESTABLE` | Not opened; no new theorem edge |
 | [`polar_partition_trace`](projects/polar_partition_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical prerequisite | Incorporated into the LOG-0001 theorem chain |
 | [`polar_boundary_trace`](projects/polar_boundary_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical local theorem | Incorporated into the LOG-0001 manuscript |
 
-The current smallest target-free task is an intrinsic growth-order bound or
-high-imaginary-height divisor-count regime for `D_pol(s)`. Target-zero
-comparison and Route B remain closed.
+The growth stage proves classical order at most two, an `O(T^2)` fixed-strip
+divisor upper bound, and an explicit zero-free right half-plane. The current
+smallest target-free task is to certify numerical upper bounds for the
+normalized conformal restriction ratios `r_L,r_R`. Target-zero comparison
+and Route B remain closed.
 
 ## Provenance
 
+- HP-Dynamics LOG-0001 growth-order research commit: `ec00bcb`
 - HP-Dynamics LOG-0001 research commit: `e3358c3a90ec67c2f1cf8b883107ad0fcf3cc64a`
 - Previous HP-Dynamics integration checkpoint: `223ba99`
 - Legacy prime-dynamics source checkpoint: `2d01633de0bcf0ecd1310291e2547cff417e13a0` (RH-371)
