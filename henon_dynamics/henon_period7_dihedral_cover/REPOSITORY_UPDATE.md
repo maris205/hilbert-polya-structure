@@ -1,6 +1,7 @@
 # HCS-C20 repository update
 
-**Release state:** verified; pending source commit and provenance binding
+**Release state:** verified and provenance-bound; SSH publication follows the
+provenance commit
 
 ## Added project
 
@@ -34,9 +35,10 @@ python code/c20_independent_check.py \
 python -m unittest discover -s code -p 'test_c20.py' -v
 ```
 
-The final source commit will be written into this record and the Route-A YAML
-in a follow-up provenance commit, then both commits and the annotated release
-tag will be pushed by SSH.
+The frozen source-and-code commit is
+`ae3635f191c9a6c4445d2bd3f539eba0ec12352e`.  That identifier is also bound
+in the Route-A YAML.  The source commit, this provenance follow-up, and the
+annotated release tag are published together by SSH.
 
 Final pre-commit verification on 2026-08-08:
 
