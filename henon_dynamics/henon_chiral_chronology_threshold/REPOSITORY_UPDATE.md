@@ -70,11 +70,10 @@ Expected PDF:
 
 ## Release state
 
-Before release, the Route-A record deliberately uses
-`PENDING_RELEASE_COMMIT`.  The release sequence is:
-
-1. commit the complete HCS-C21 source package;
-2. replace pending provenance fields with the source commit;
-3. create a provenance-only release commit;
-4. create annotated tag hcs-c21-v1; and
-5. push main and the tag through the configured SSH remote.
+The complete HCS-C21 source package is frozen at commit
+`da2d73edd4c976996ae9136c0a70c5b6fe8c4367`.  The Route-A record binds both
+its source and code fields to that immutable commit.  A separate
+provenance-only commit records this binding, and the annotated tag
+`hcs-c21-v1` is assigned to that provenance commit.  Thus the release tag
+contains its own source binding without requiring a self-referential commit
+hash inside the package.
