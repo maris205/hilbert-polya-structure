@@ -58,6 +58,9 @@ pivot. Target-zero comparison and Route B remain closed.
 - HP-Dynamics LOG-0001 growth-order research commit: `ec00bcb`
 - HP-Dynamics LOG-0001 conformal-ratio research commit: `80107bc8ec2bcb4b5d0dd7a30447c5bc2d075320`
 - HP-Dynamics LOG-0001 conformal-ratio evaluation source: `dbb78f10bb3299415e022ecadb20d65e0aac5436`
+- HP-Dynamics LOG-0001 lower-growth evaluation source: `8cabec587cf0a796f4f004bf5b1b0611de3305f3`
+- HP-Dynamics LOG-0001 lower-growth research commit: `726e42a93a9fabcf07c4c543c1c5962aa0fa1569`
+- Shared lower-growth stage commit: `0a64c01d3185826558d434f91ba55f1c66117d1d`
 - HP-Dynamics LOG-0001 research commit: `e3358c3a90ec67c2f1cf8b883107ad0fcf3cc64a`
 - Previous HP-Dynamics integration checkpoint: `223ba99`
 - Legacy prime-dynamics source checkpoint: `2d01633de0bcf0ecd1310291e2547cff417e13a0` (RH-371)
