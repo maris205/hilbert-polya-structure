@@ -14,6 +14,69 @@ from the formal Route-A A2 verdict. At the C02C handoff no candidate had
 reached BF3 and no formal Route-A YAML yet existed; the later C02D closure
 below adds a schema-complete rejection record for its now-frozen object.
 
+## HCS-C22G and HCS-C23 closures (2026-08-09)
+
+Candidate **HCS-C22G** is closed as a conditional analytic blueprint; see
+`../henon_graded_ruelle_complex/`. Standard BPS pinning fixes input
+contracting and output expanding data, removing the apparent slope-zero
+pole. With one expanding complex coordinate, the exact block-residue algebra
+has a raw minus and requires candidate parity \(k+1\). However, the release
+does not prove the all-word vector-kernel trace, enlarged output domain,
+order-zero nuclear factorization, approximation property, or locally uniform
+nuclear holomorphy. Thus
+
+\[
+D_{\rm inst}=D_1D_3/(D_0D_2)
+\]
+
+is conditional, not an established meromorphic continuation. Since the
+remaining work is substantial and the eventual mechanism is classical
+Ruelle--Rugh/Lefschetz machinery with no arithmetic primitive law, the C22
+lineage closes. Its formal tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED** for the frozen operator claim.
+
+Candidate **HCS-C23** is also closed; see
+`../henon_adelic_lefschetz_ramification/`. Its canonical finite-free fixed
+algebra has rank \(2^n\), and the packet norm of \(\det(I-M_w^r)\) retains
+prime, residue-degree, word/period, and repetition axes. The finite
+chronology certificate is exact: the period-seven same-bigram pair separates
+at \(\ell=11\), and the period-eight same-trigram pair separates at
+\(\ell=3\), with rational witnesses and full-algebra nonexistence checks on
+the paired sides.
+
+The novelty gate nevertheless fails because
+
+\[
+\Delta_{w,r}=\operatorname{Res}_X(P_w(X),X^r-1).
+\]
+
+For fixed \(w\), the entire repetition tower is a classical cyclic-resultant
+sequence of the packet multiplier polynomial. No falsifiable all-period
+cross-word relation was frozen before the proposed extended ledger, so the
+broad scan is cancelled. The formal tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)** with overall
+**ROUTE_A_REJECTED**. Reopening requires an explicit cross-word theorem that
+is not forced by matched reciprocal-polynomial or reversible-map controls;
+otherwise the next round changes dynamical form.
+
+## HCS-C24 preactivation (2026-08-09)
+
+The proposed next large system switch is
+[`hcs_c24_system_switch.md`](hcs_c24_system_switch.md): a source-locked
+Rauzy--Veech--Zorich return system with chronological absolute-homology
+monodromy and a metaplectic unitary fibre. Status is
+`PREACTIVE_SOURCE_LOCK`; no formal Route-A tuple is assigned before the
+literal Rauzy class, roof, graph-directed space, and metaplectic lift are
+reconstructed.
+
+The one-round kill is operator-level. A nonzero compact/nuclear base branch
+tensored with an infinite-dimensional unitary is noncompact. C24 must prove
+that a genuine branch compression of the full operator has this form, or
+exhibit a geometry-forced trace object that evades it. No heat cutoff,
+oscillator truncation, averaged cocycle, or finite-section determinant is an
+authorized rescue.
+
 ## C02D closure (2026-08-06)
 
 The conditional C02D operator gate is now closed **NO_GO**; see

@@ -3,8 +3,41 @@
 **Date:** 2026-08-09
 **Candidate ID:** HCS-C22G
 **Parent/closed form:** HCS-C22 orbitwise geometric scalar T5
-**Status:** source-locked changed form; geometric foundation certified; no
-graded operator theorem yet
+**Status:** **CLOSED AS AN AUDITED CONDITIONAL BLUEPRINT**; see
+`../henon_graded_ruelle_complex/`
+
+## 2026-08-09 closure amendment
+
+The literal roadmap contained two convention errors that have now been
+corrected and independently mutation-tested.
+
+1. Standard BPS pinning fixes the input contracting coordinates and output
+   expanding coordinate.  For the lift these are
+   \(c=(p,m)\) and \(z=1-aq^2-p\), and the input expanding coordinate is
+   \(q=P(p,z)\).  One does not prescribe an arbitrary slope output and invert
+   the raw stable block.  The apparent slope-zero pole and singular stable
+   block therefore solve the wrong cross problem and are not a G1 no-go.
+2. With one expanding coordinate, the exact block identity gives the
+   candidate raw residue \(-1/\det(I-DF^n)\) once an all-word trace theorem
+   has been established. Its required exterior parity is \(k+1\), so the
+   determinant exponents would be \((-1)^{k+1}\), not the provisional
+   \((-1)^k\).
+
+With these changes, the one-step domains and finite block/exterior algebra
+pass. The formula
+
+\[
+D_{\rm inst}(z,s)
+=\frac{D_1(z,s)D_3(z,s)}{D_0(z,s)D_2(z,s)}
+\]
+
+would follow conditionally from an all-word vector-kernel trace theorem and
+an order-zero nuclear factorization. Those analytic gates remain open: in
+particular, the third image ratio is not an output-\(z\) restriction ratio,
+and the relevant approximation property has not been proved. Since the
+remaining theorem is substantial while the mechanism is classical and has
+no arithmetic primitive law, no further C22 finite-section, contour-sign, or
+small analytic variants are authorized.
 
 ## Decision
 
@@ -65,7 +98,7 @@ branches such that
 
 \[
 \operatorname{tr}\mathcal L_{s,k}^n
-=\sum_{x\in\operatorname{Fix}\widetilde{\mathcal F}^n}
+=-\sum_{x\in\operatorname{Fix}\widetilde{\mathcal F}^n}
 \frac{g_s^{(n)}(x)
 \operatorname{tr}(\wedge^kD\widetilde{\mathcal F}^n_x)}
 {\det(I-D\widetilde{\mathcal F}^n_x)}
@@ -77,7 +110,7 @@ letter order?
 If so, the Lefschetz identity would give
 
 \[
-\sum_{k=0}^3(-1)^k
+\sum_{k=0}^3(-1)^{k+1}
 \operatorname{tr}\mathcal L_{s,k}^n=B_n(s)
 \]
 
@@ -86,7 +119,7 @@ and, initially in the T4 convergence domain,
 \[
 D_{\mathrm{inst}}(z,s)
 =\prod_{k=0}^3
-\det(I-z\mathcal L_{s,k})^{(-1)^k}.
+\det(I-z\mathcal L_{s,k})^{(-1)^{k+1}}.
 \]
 
 ## One-round large gates
@@ -112,9 +145,11 @@ pinning theorem on connected compact polydiscs with strict enlarged/nested
 domains and specified contours.  Every half-map must send the relevant
 closure compactly into an interior.  Prove that the relevant partial inverses
 are holomorphic and injective and that the lifted Jacobian never vanishes.
-Freeze the split \((u;s_1,s_2)=(u;\text{base stable},m)\), prove the stable
-block Jacobian is invertible, and construct the unique multidimensional
-stable half-inverse.  Prove that every periodic word has only the declared
+Freeze the split
+\((c_1,c_2;u)=(\text{base stable},m;\text{base unstable})\).  Fix input
+contracting data and output expanding data, solve the scalar input expanding
+coordinate, and prove that both the expanding implicit block and the pinning
+Schur complement are invertible.  Prove that every periodic word has only the declared
 nondegenerate lifted fixed points, none on a contour or Markov boundary and
 none elsewhere in the chosen complex branch domains, with
 \(\det(I-D\widetilde{\mathcal F}^n)\ne0\).

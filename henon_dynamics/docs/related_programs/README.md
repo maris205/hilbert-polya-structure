@@ -495,10 +495,82 @@ self-adjoint operator has been constructed.  Its formal status is
 
 ---
 
+## 16. henon_graded_ruelle_complex
+
+### Topic
+
+A corrected three-complex-dimensional projective Hénon cross-map complex
+with four tangent exterior degrees.
+
+### Exact results and open gates
+
+- the BPS convention fixes contracting input and expanding output data,
+  removing a spurious stable-block/slope-pole no-go;
+- three exact strict-restriction ratios and two Jacobian lower bounds give
+  one common two-letter domain;
+- the exact block determinant identity gives a candidate raw
+  \(-1/\det(I-DF)\) residue and hence parity \(k+1\), once the word trace is
+  constructed; but
+- all-word vector-kernel composition, enlarged output domains, order-zero
+  nuclearity, the approximation property, and locally uniform nuclear
+  holomorphy remain open.
+
+### Relation to HP search
+
+The alternating quotient \(D_1D_3/(D_0D_2)\) is therefore conditional, not a
+proved meromorphic continuation. The exact domain and residue algebra are
+retained as a corrected blueprint. Since completing the analytic gates would
+still yield a classical Ruelle--Rugh/BPS mechanism with no Riemann divisor or
+arithmetic primitive law, the frozen operator claim is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** and
+`ROUTE_A_REJECTED`.
+
+---
+
+## 17. henon_adelic_lefschetz_ramification
+
+### Topic
+
+Canonical prime ramification of the full fixed algebra of chronological
+Hénon compositions, measured by packet norms of
+\(\det(I-M_w^r)\).
+
+### Main first-gate results
+
+- every word fixed algebra is finite free of rank \(2^n\) over the canonical
+  localization;
+- packet-norm divisibility is exactly the existence of a geometric
+  multiplier-one fixed point modulo the prime;
+- the period-seven same-bigram controls separate at \(\ell=11\); and
+- the period-eight same-trigram controls separate at \(\ell=3\), with
+  explicit residue-degree-one witnesses and an independent rank backend; and
+- for the packet multiplier polynomial \(P_w\),
+  \(\Delta_{w,r}=\operatorname{Res}(P_w,X^r-1)\), so every fixed-word tower
+  is a classical cyclic-resultant sequence.
+
+### Relation to HP search
+
+Galois packetization does not erase chronology, but the proposed fixed-word
+strong-divisibility/Zsigmondy tower is classical baseline. No exact
+all-period cross-word law was frozen before the proposed extended ledger, so
+the broad scan is cancelled and C23 closes with status
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)** and `ROUTE_A_REJECTED`.
+
+Primary novelty controls include classical cyclic-resultant rigidity and
+recurrences, multiplier-polynomial elimination, dynatomic discriminants,
+Cantat--Dujardin's 2026 multiplier-rigidity preprint, and arithmetic-dynamical
+primitive-divisor work. Reopening requires a pre-registered cross-word,
+cross-period theorem not forced by matched reciprocal-polynomial or
+reversible-map controls.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:
 
+- the preactive HCS-C24 Rauzy--Veech--Zorich/metaplectic compactness gate,
+  source-locked in `../hcs_c24_system_switch.md`;
 - non-autonomous dynamical systems
 - coupled map lattices
 - cocycle systems

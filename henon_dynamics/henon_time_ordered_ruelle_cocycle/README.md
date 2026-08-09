@@ -1,12 +1,21 @@
 # HCS-C22: chronology separation and signed-trace collapse in a two-letter Hénon skew product
 
 **Date:** 2026-08-09
-**Status:** T1--T4 complete; T5 base/projective domains pass; orbitwise
-geometric scalar gate closed; graded pivot source-locked
-**Candidate:** HCS-C22, promoted from HCS-C01; next form HCS-C22G
+**Status:** **lineage closed** after the audited conditional C22G blueprint
+**Candidate:** HCS-C22, promoted from HCS-C01; final continuation HCS-C22G
 **Parent candidates:** HCS-C01 and `henon_h6_instability_roof_v1`
 **Evidence ceiling:** exact theorem plus computer-assisted interval theorem;
 Route-A exploratory
+
+> **Final lineage update.** The graded continuation is audited and closed in
+> [`../henon_graded_ruelle_complex/`](../henon_graded_ruelle_complex/).
+> After correcting the BPS mixed-pinning direction and odd-unstable residue
+> parity, the one-step domains and finite residue/exterior algebra are exact.
+> The all-word vector-kernel trace, order-zero nuclearity, approximation
+> property, and joint meromorphic continuation remain open, so
+> \(D_{\rm inst}=D_1D_3/(D_0D_2)\) is conditional. The blueprint is retained
+> as classical analytic infrastructure, not promoted as a new
+> Hilbert--Pólya mechanism.
 
 ## Certified outcome
 
@@ -215,8 +224,8 @@ Route B is not authorized by this project.
 - [`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md): T1--T3 theorem proofs.
 - [`T4_T5_DERIVATION.md`](T4_T5_DERIVATION.md): T4 convergence theorem,
   complex/projective certificates, and orbitwise scalar T5 no-go theorem.
-- [`GRADED_PIVOT_ROADMAP.md`](GRADED_PIVOT_ROADMAP.md): the only authorized
-  next dynamical form and its nuclear/supertrace kill gates.
+- [`GRADED_PIVOT_ROADMAP.md`](GRADED_PIVOT_ROADMAP.md): audited graded-form
+  closure and its unresolved nuclear/supertrace gates.
 - [`RESEARCH_SYNTHESIS.md`](RESEARCH_SYNTHESIS.md): interpretation and pivot
   decision.
 - [`evaluations/route_a/hcs_c22/20260809T081750Z.yaml`](evaluations/route_a/hcs_c22/20260809T081750Z.yaml):
@@ -235,8 +244,8 @@ Route B is not authorized by this project.
 
 The orbitwise geometric scalar project has stopped at its predeclared T5 kill
 rule.
-The graded pivot does not spend a long round polishing finite sections.  It
-stops as soon as one of the following is certified:
+The graded pivot did not spend a long round polishing finite sections. Its
+predeclared stop conditions included:
 
 - no common real survivor for the frozen parameter interval;
 - no non-dihedral difference after complete local orbit aggregation;
@@ -248,7 +257,9 @@ stops as soon as one of the following is certified:
 - the only surviving claim is already a standard consequence of an existing
   nonautonomous horseshoe theorem.
 
-The present scalar no-go states its exact orbitwise scope and leaves
-aggregate scalar representations unexcluded.  Any graded failure will close
-the authorized C22G operator lineage rather than silently changing its
-determinant or returning to Ulam/cycle-section numerics.
+The theorem audit found that the all-word and nuclear gates had not actually
+been proved, and the eventual mechanism was in any case classical. The C22G
+operator lineage is therefore closed rather than silently changing its
+determinant or returning to Ulam/cycle-section numerics. The scalar no-go
+retains its exact orbitwise scope and still leaves aggregate scalar
+representations unexcluded.

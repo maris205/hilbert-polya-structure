@@ -57,8 +57,108 @@ The foundational local source is
 | [`henon_period7_dihedral_cover/`](henon_period7_dihedral_cover/) | Genus-eight \(D_7\) closure, chronology-induced real multiplication, and selected-prime local factors | Route-A exploratory |
 | [`henon_chiral_chronology_threshold/`](henon_chiral_chronology_threshold/) | Genus-one period-six \(D_6\) cover, \(H^1\)-chronology collapse, scoped \(n=7\) threshold, and lower-period marker shadow | Route-A exploratory |
 | [`henon_time_ordered_ruelle_cocycle/`](henon_time_ordered_ruelle_cocycle/) | Common switched survivor; convergent instability Euler product; common complex/projective domains; orbitwise scalar-denominator no-go | Route-A exploratory |
+| [`henon_graded_ruelle_complex/`](henon_graded_ruelle_complex/) | Corrected \(\mathbb C^3\) cross map, exact residue parity, and explicit unresolved nuclear/all-word gates | Conditional blueprint; C22 closed |
+| [`henon_adelic_lefschetz_ramification/`](henon_adelic_lefschetz_ramification/) | Exact fixed-algebra chronology certificates and cyclic-resultant collapse of every fixed-word tower | Scoped negative result; C23 closed |
 
-## Latest result: HCS-C22
+## Latest large-gate closures: HCS-C22G and HCS-C23
+
+The C22 operator lineage is closed honestly at a conditional blueprint. Its
+corrected three-dimensional cross map proves the one-step domain constants,
+the block-residue identity, and the required parity shift \(k+1\). It does
+**not** yet prove the all-word vector-kernel trace or an order-zero nuclear
+factorization. Consequently
+
+\[
+D_{\rm inst}(z,s)
+=\frac{D_1(z,s)D_3(z,s)}{D_0(z,s)D_2(z,s)}
+\]
+
+is a conditional consequence, not a theorem of this release. Filling the
+remaining functional-analysis gates would be substantial, while the
+mechanism itself is classical Ruelle--Rugh/Lefschetz machinery and supplies
+no arithmetic primitive law, so the lineage is not pursued through smaller
+operator variants.
+
+HCS-C23 then treated the Lefschetz denominator as arithmetic ramification
+data. For each chronological word \(w\), its fixed algebra is
+canonically finite free of rank \(2^{|w|}\), and
+
+\[
+\Delta_{w,r}
+=\operatorname{Norm}_{A_w/R}\det(I-D F_w^r)
+\]
+
+detects multiplier-one packets modulo degree-good primes. Finite
+chronology separation passes twice:
+
+\[
+11\mid\Delta_{0000101,1},
+\qquad
+11\nmid\Delta_{0001001,1},
+\]
+
+for the certified same-bigram period-seven pair, while
+
+\[
+3\nmid\Delta_{00101011,1},
+\qquad
+3\mid\Delta_{00101101,1},
+\]
+
+for the same-trigram period-eight pair.  Explicit residue-degree-one
+nontransverse fixed points witness the event sides; full quotient-algebra
+rank proves the paired non-events over the algebraic closure. Thus Galois
+packet norm does not erase chronological information.
+
+The decisive negative is the exact identity
+
+\[
+\Delta_{w,r}
+=\operatorname{Res}_X\!\left(P_w(X),X^r-1\right),
+\qquad
+P_w(X)=\operatorname{Norm}_{A_w/R}(X^2-t_wX+1).
+\]
+
+For every fixed word, the full repetition tower is therefore a classical
+cyclic-resultant sequence. No exact cross-word, cross-period theorem was
+available before opening the proposed broad ledger, so the
+\(n\le10,r\le12,\ell\le251\) scan is cancelled and C23 closes. The finite
+chronology theorem and exact code remain reusable infrastructure; no Euler
+product is authorized.
+
+- [C23 project overview](henon_adelic_lefschetz_ramification/README.md)
+- [C23 derivation package](henon_adelic_lefschetz_ramification/DERIVATION_PACKAGE.md)
+- [C23 closure/reopening criteria](henon_adelic_lefschetz_ramification/EXPERIMENT_PLAN.md)
+- [C23 exact certificate](henon_adelic_lefschetz_ramification/results/c23_first_gate_certificate.json)
+- [C23 independent check](henon_adelic_lefschetz_ramification/results/c23_first_gate_independent_check.json)
+- [C22G audited conditional blueprint](henon_graded_ruelle_complex/THEOREM_PACKAGE.md)
+- [C22G compiled note](henon_graded_ruelle_complex/paper/main.pdf)
+
+Reproduce both exact regression packages with:
+
+```bash
+cd henon_graded_ruelle_complex && ./code/run_c22g.sh
+cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
+```
+
+## Next big system switch: HCS-C24 source lock
+
+No further Hénon ledger is active. The proposed next one-round gate changes
+the dynamical form to a Rauzy--Veech--Zorich return system with the
+chronological Kontsevich--Zorich homology cocycle and its metaplectic unitary
+fibre. Its first target is an all-period compactness obstruction, not a
+low-period spectral fit: if one nonzero branch compression is
+\(K_h\otimes U_h\) with \(U_h\) infinite-dimensional unitary, the ordinary
+Fredholm route is noncompact and closes immediately.
+
+The exact Rauzy component, homology convention, acceleration, roof, and
+metaplectic lift must pass the primary-source lock before HCS-C24 becomes a
+testable candidate. Heat regularization and finite oscillator truncations are
+forbidden repairs.
+
+- [HCS-C24 source-lock roadmap](docs/hcs_c24_system_switch.md)
+
+## Predecessor result: HCS-C22
 
 The Paper-5-coordinate maps
 
