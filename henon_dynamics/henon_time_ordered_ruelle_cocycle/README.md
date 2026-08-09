@@ -219,8 +219,9 @@ Route B is not authorized by this project.
   next dynamical form and its nuclear/supertrace kill gates.
 - [`RESEARCH_SYNTHESIS.md`](RESEARCH_SYNTHESIS.md): interpretation and pivot
   decision.
-- [`evaluations/route_a/hcs_c22/20260809T050207Z.yaml`](evaluations/route_a/hcs_c22/20260809T050207Z.yaml):
-  formal conservative Route-A record.
+- [`evaluations/route_a/hcs_c22/20260809T081750Z.yaml`](evaluations/route_a/hcs_c22/20260809T081750Z.yaml):
+  current post-T4 conservative Route-A record; the earlier YAML remains a
+  historical pre-T4 evaluation.
 - [`REPOSITORY_UPDATE.md`](REPOSITORY_UPDATE.md): source commit, release tag,
   and verification handoff.
 - [`results/RESULTS.md`](results/RESULTS.md): compact T1--T3 statement.

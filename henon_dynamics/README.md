@@ -149,7 +149,7 @@ is the next and final authorized continuation of this lineage.
 - [Independent check](henon_time_ordered_ruelle_cocycle/results/c22_independent_check.json)
 - [T4/orbitwise-scalar certificate](henon_time_ordered_ruelle_cocycle/results/c22_t4_certificate.json)
 - [T4/orbitwise-scalar independent check](henon_time_ordered_ruelle_cocycle/results/c22_t4_independent_check.json)
-- [Route-A record](henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml)
+- [Current Route-A record](henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T081750Z.yaml)
 
 Reproduce the frozen result with:
 

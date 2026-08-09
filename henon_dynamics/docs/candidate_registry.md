@@ -465,8 +465,10 @@ scoped theorem/obstruction package.  No target divisor, arithmetic primitive
 mechanism, continuation across the pressure boundary, or Hilbert--Pólya
 operator has been constructed.
 
-The original formal evaluation is
+The original pre-T4 formal evaluation is
 [`20260809T050207Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml).
+The current post-T4 evaluation is
+[`20260809T081750Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T081750Z.yaml).
 
 ## HCS-C22G source lock (2026-08-09)
 

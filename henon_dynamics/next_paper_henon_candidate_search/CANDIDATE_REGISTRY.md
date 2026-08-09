@@ -354,5 +354,5 @@ and exact chronology-preserving supertrace, not a finite section.
 
 The source package is
 [`../henon_time_ordered_ruelle_cocycle/`](../henon_time_ordered_ruelle_cocycle/),
-and the formal evaluation is
-[`20260809T050207Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml).
+and the current post-T4 formal evaluation is
+[`20260809T081750Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T081750Z.yaml).
