@@ -412,3 +412,44 @@ No varying-period repetition law, trace-class determinant, Riemann divisor,
 or Hilbert--Pólya operator follows.  The next breadth-first candidate should
 change dynamical form unless it supplies a single connected varying-period
 tower with an intrinsic cohomological clock.
+
+## HCS-C22 result (2026-08-09)
+
+Candidate **HCS-C22** is the formal theorem-stage promotion of HCS-C01; see
+[`../henon_time_ordered_ruelle_cocycle/`](../henon_time_ordered_ruelle_cocycle/).
+Its Route-A tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall status
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.
+
+For the two Paper-5-coordinate letters at \(a=59/10,61/10\), exact rational
+covering, contraction, and cone estimates give one common local survivor.
+Every admissible binary joint parameter--state itinerary has one orbit, and
+the frozen skew product is conjugate to \(\Sigma_2\times\Sigma_A\).  Joint
+primitive combinatorics are reconstructed through period ten without
+separately canonicalizing the base and state words.
+
+The certified conditional coefficient
+
+\[
+Q_w(1)=\sum_{\varepsilon}|\Lambda_u(w,\varepsilon)|^{-1}
+\]
+
+distinguishes the minimal tested non-dihedral same-bigram pair at period
+seven and same-trigram pair at period eight after complete aggregation over
+all 29 and 49 state branches.  Cyclic rotations and reversals remain exact
+equality controls.  The conclusion concerns parameter-word statistics
+through trigram order; it does not prove infinite memory or exclude every
+joint finite-memory cohomology.
+
+The global all-complex control collapses.  For every nonzero protocol, the
+cyclic fixed scheme has length \(2^n\); the unit-numerator signed residue
+determinant is one and the formal bare scheme zeta is \((1-4z)^{-1}\).
+Ordinary pointwise flat equality additionally requires all-repetition
+nondegeneracy.  No all-period local instability determinant, target divisor,
+arithmetic primitive mechanism, or Hilbert--Pólya operator has been
+constructed.
+
+T4 now precedes T5: establish the repetition law and a nonzero convergence
+domain before attempting a common complex nuclear operator.  The formal
+evaluation is
+[`20260809T050207Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml).

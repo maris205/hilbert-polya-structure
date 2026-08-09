@@ -449,6 +449,44 @@ defined.  The Route-A tuple remains
 
 ---
 
+## 15. henon_time_ordered_ruelle_cocycle
+
+### Topic
+
+The autonomous full-shift extension of two Paper-5-coordinate
+area-preserving Hénon letters, with chronological parameter--state primitive
+orbits, complete local instability sectors, and exact global residue
+controls.
+
+### Main results
+
+- exact rational windows certify a common four-box survivor and uniform
+  fibre hyperbolicity for every binary schedule at \(a=59/10,61/10\);
+- the binary survivor is conjugate to \(\Sigma_2\times\Sigma_A\), while joint
+  primitive necklaces are enumerated without separately quotienting the two
+  components;
+- complete local coefficients \(Q_w(1)\) distinguish certified same-bigram
+  and same-trigram protocol pairs after all 29 and 49 state branches are
+  summed;
+- cyclic phase and reversal are exact equality controls, so the result is
+  order memory modulo forced symmetry rather than a time arrow;
+- every nonzero protocol has all-complex cyclic scheme length \(2^n\); and
+- the unit-numerator signed residue determinant is one, while the formal bare
+  global scheme zeta is \((1-4z)^{-1}\).
+
+### Relation to HP search
+
+This is a rigorous dynamical split result, not a Hilbert--Pólya
+construction.  It preserves genuine chronological dynamics and shows that
+local real instability can retain order even when the simplest global
+all-complex signed residue object collapses.  No convergent all-period local
+instability determinant, arithmetic divisor, or self-adjoint operator has
+yet been constructed.  Its formal status is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** and
+`ROUTE_A_EXPLORATORY`.
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

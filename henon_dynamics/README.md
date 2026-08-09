@@ -56,8 +56,73 @@ The foundational local source is
 | [`henon_period7_frobenius_curve/`](henon_period7_frobenius_curve/) | Generic Hénon seven-cycle, degree-14 oriented time lift, genus-three scalar quotient, and finite-prime candidates | Route-A exploratory |
 | [`henon_period7_dihedral_cover/`](henon_period7_dihedral_cover/) | Genus-eight \(D_7\) closure, chronology-induced real multiplication, and selected-prime local factors | Route-A exploratory |
 | [`henon_chiral_chronology_threshold/`](henon_chiral_chronology_threshold/) | Genus-one period-six \(D_6\) cover, \(H^1\)-chronology collapse, scoped \(n=7\) threshold, and lower-period marker shadow | Route-A exploratory |
+| [`henon_time_ordered_ruelle_cocycle/`](henon_time_ordered_ruelle_cocycle/) | Common two-letter survivor, complete tested local chronology separation, and unit-numerator global residue collapse | Route-A exploratory |
 
-## Latest result: HCS-C21
+## Latest result: HCS-C22
+
+The Paper-5-coordinate maps
+
+\[
+H_a(q,p)=(1-aq^2-p,q),
+\qquad a\in\{59/10,61/10\},
+\]
+
+now have one exact common four-box survivor for every chronological binary
+schedule.  The signed-root contraction satisfies
+\(\theta=\sqrt{240/1003}<0.49\), the common covering margin is \(7/720\),
+and the binary skew product is conjugate to
+\(\Sigma_2\times\Sigma_A\) with entropy \(\log(2\varphi)\).
+
+Complete local instability-sector coefficients distinguish the minimal
+tested non-dihedral parameter words with identical cyclic bigram and trigram
+ledgers:
+
+\[
+Q_{0000101}(1)-Q_{0001001}(1)
+\approx-1.37085831069617\times10^{-8},
+\]
+
+\[
+Q_{00101011}(1)-Q_{00101101}(1)
+\approx 1.70852115874693\times10^{-9}.
+\]
+
+All 29 and 49 state branches per sector are included in exact-rational
+interval certificates.  The result is finite and scoped: it defeats
+parameter-only cyclic statistics through trigram order, not every
+finite-memory potential.
+
+The complementary global theorem is negative.  Every nonzero length-\(n\)
+protocol has cyclic fixed-scheme length \(2^n\), and a Hill identity plus
+global residues makes the unit-numerator all-complex signed residue
+determinant exactly one.  The formal bare global scheme zeta is
+\((1-4z)^{-1}\).  Ordinary pointwise flat-determinant equality additionally
+requires all-repetition nondegeneracy; local real absolute/instability weights
+are not killed by this residue theorem.
+
+The formal verdict is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall status
+**ROUTE_A_EXPLORATORY**.  T4 must first establish a convergent local
+instability cycle expansion; only then may T5 attempt a common nuclear
+ordered operator.  Failure triggers the predeclared dynamical-form pivot.
+
+- [Project overview](henon_time_ordered_ruelle_cocycle/README.md)
+- [Derivation package](henon_time_ordered_ruelle_cocycle/DERIVATION_PACKAGE.md)
+- [Research synthesis](henon_time_ordered_ruelle_cocycle/RESEARCH_SYNTHESIS.md)
+- [Exact certificate](henon_time_ordered_ruelle_cocycle/results/c22_certificate.json)
+- [Independent check](henon_time_ordered_ruelle_cocycle/results/c22_independent_check.json)
+- [Route-A record](henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml)
+
+Reproduce the frozen result with:
+
+```bash
+cd henon_time_ordered_ruelle_cocycle
+python -m pip install -r requirements.txt
+./code/run_c22.sh
+sha256sum -c results/ARTIFACT_HASHES.sha256
+```
+
+## Predecessor result: HCS-C21
 
 The published period-six chiral doublet now has a fully certified ordered
 geometry.  Its twelve-state ordered-edge normalization is a connected
@@ -278,4 +343,4 @@ Regenerable caches, nested Git metadata, TeX auxiliary files, and bulky raw
 array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
-Last synchronized research snapshot: **2026-08-08**.
+Last synchronized research snapshot: **2026-08-09**.

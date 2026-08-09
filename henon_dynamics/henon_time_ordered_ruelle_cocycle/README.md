@@ -190,6 +190,10 @@ Route B is not authorized by this project.
 - [`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md): T1--T3 theorem proofs.
 - [`RESEARCH_SYNTHESIS.md`](RESEARCH_SYNTHESIS.md): interpretation and pivot
   decision.
+- [`evaluations/route_a/hcs_c22/20260809T050207Z.yaml`](evaluations/route_a/hcs_c22/20260809T050207Z.yaml):
+  formal conservative Route-A record.
+- [`REPOSITORY_UPDATE.md`](REPOSITORY_UPDATE.md): source commit, release tag,
+  and verification handoff.
 - [`results/RESULTS.md`](results/RESULTS.md): compact numerical statement and
   artifact map.
 - [`code/README.md`](code/README.md), [`results/README.md`](results/README.md),

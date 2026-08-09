@@ -18,6 +18,7 @@ Route-A rejection record under
 |---|---|---|---|---|
 | HCS-C00 | Certified Ruelle pressure/dimension | baseline, control, fallback | BASELINE | external theorem-delta gate |
 | HCS-C01 | Ordered two-letter Hénon skew product/cocycle | discovery | IDEA | common hyperbolicity and chronology control |
+| HCS-C22 | Paper-5-coordinate two-letter Hénon skew product with intrinsic local instability sectors | promoted child of C01 / discovery plus collapse control | ROUTE_A_CANDIDATE | T4 convergence before T5 common nuclear operator |
 | HCS-C02 | Derivative-projective Schottky/holomorphic strictification | high-risk discovery | ANALYTIC_CANDIDATE | finite-window endpoint lemma plus crossed/pinning-map composition |
 | HCS-C02B | Signed-root complex sequence-polydisc bridge | child of C02 | ANALYTIC_CANDIDATE | proved self-map; no finite analytic branch/operator yet |
 | HCS-C03 | Finite-field local zeta and global Euler product | discovery/negative control | OBSTRUCTION | naive global product rejected; two-axis Frobenius/iterate mechanism required for revival |
@@ -305,3 +306,43 @@ Ramanujan/new-sector-gap rescue, not every renormalized tower determinant.
 
 The formal evaluation and complete paper package are under
 ../nonabelian_voltage_zeta_obstruction/.
+
+## HCS-C22 append-only decision record
+
+| Candidate | Evidence state | Formal tuple | Overall | Route B |
+|---|---|---|---|---|
+| HCS-C22 | T1 exact common survivor; T2 complete 29/49-branch rational interval separations; T3 exact unit-numerator global residue collapse | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)` | `ROUTE_A_EXPLORATORY`; one staged T4--T5 kill round authorized | not authorized |
+
+HCS-C22 is the theorem-stage promotion of HCS-C01, not a separately invented
+skew product.  It freezes
+
+\[
+F(\omega,z)=(\sigma\omega,H_{a_{\omega_0}}z),
+\qquad
+(a_0,a_1)=(59/10,61/10),
+\]
+
+in the physical Paper-5 coordinate convention.  Every admissible binary
+joint parameter--state itinerary has exactly one orbit in a common uniformly
+fibre-hyperbolic local survivor.  Complete conditional coefficients
+\(Q_w(1)\) distinguish the certified same-bigram period-seven pair and
+same-trigram period-eight pair after all 29 and 49 state branches are summed.
+This is not an infinite-memory theorem.
+
+The all-complex control is sharply negative: the cyclic scheme has length
+\(2^n\), the unit-numerator signed scheme-residue determinant is one, and the
+bare global scheme zeta is \((1-4z)^{-1}\).  Pointwise flat equality requires
+all-repetition nondegeneracy.  Local absolute/instability data remain outside
+that residue cancellation.
+
+The next test is T4, not another short-orbit sweep: prove a fixed repetition
+law and nonzero convergence domain for the local instability cycle
+expansion.  Only a T4 pass authorizes the T5 common-complex-domain and nuclear
+trace construction.  Failure closes this positive operator lane under the
+work budget and triggers a dynamical-form pivot; it is not a universal
+operator nonexistence theorem.
+
+The source package is
+[`../henon_time_ordered_ruelle_cocycle/`](../henon_time_ordered_ruelle_cocycle/),
+and the formal evaluation is
+[`20260809T050207Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml).
