@@ -18,7 +18,9 @@ not yet been declared.
   its bounded manuscript integration.
 
 The citable mathematical record remains the certificate/release chain in
-`../research/` and `../results/`, especially A4.12--A4.14.  A4.14 is a
-three-slab implementation certificate, not an all-slab theorem.  The draft
-should be cited as a working manuscript until venue formatting and a final
-submission freeze are declared.
+`../research/` and `../results/`, especially A4.12--A4.15.  A4.14 is the
+three-slab implementation certificate; A4.15 is the accepted 102-tree local
+complement theorem on all 51 frozen slabs.  Its scope is still the local
+reduced chart, not a phase/global cover.  The draft should be cited as a
+working manuscript until venue formatting and a final submission freeze are
+declared.

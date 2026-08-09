@@ -8,7 +8,7 @@ paper directory.
 | Directory | Paper | Repository state | Entry point |
 |---|---|---|---|
 | `paper_01_clock_preserving_henon/` | Clock-preserving Hénon operators | mirrored frozen manuscript/evidence package | [README](paper_01_clock_preserving_henon/README.md) |
-| `paper_02_certified_local_wave_trace/` | Certified local relative wave trace | manuscript and A4.12--A4.14 evidence mirrored; L2-S0 accepted as a bounded implementation smoke | [README](paper_02_certified_local_wave_trace/README.md) |
+| `paper_02_certified_local_wave_trace/` | Certified local relative wave trace | compact A4.12--A4.15 release chains mirrored; bulk A1 tree/raw archive transferred separately | [README](paper_02_certified_local_wave_trace/README.md) |
 
 Future papers are created here only after their thesis, claim ledger, and
 evidence plan exist.  A roadmap entry by itself is not a paper package.

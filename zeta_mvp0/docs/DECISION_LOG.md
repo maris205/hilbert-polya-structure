@@ -80,3 +80,26 @@
   provenance, write-once authority, and pre-resolution symlink checks.
   Complete crash/quarantine/race/end-to-end tests and a second freeze review
   remain required; held-out slabs remain unread and unexecuted.
+
+## 2026-08-09 — A4.15 all-slab local complement accepted
+
+- Accepted `R401-VAL-L2-A1 / PASS_LOCAL_COMPLEMENT_ALL_SLABS` after all 102
+  prospectively frozen trees closed on S000--S050 at 128 and 256 MPFR bits.
+- Recorded 52,790 evaluated nodes: 3,368 energy exclusions, 23,435 necessary
+  return exclusions, and 25,987 internal splits, with empty frontiers and no
+  root candidate, invalid result, timeout, depth exhaustion, node-budget
+  exhaustion, or precision-domain disagreement.
+- Accepted the independent exact-rational replay after 158,782 checks with
+  zero failures and sealed a write-once 19-role release-provenance chain.
+- Combined the A1 complement exclusion with the already accepted L1
+  existence-and-uniqueness certificate to obtain pointwise reduced-root
+  uniqueness in the frozen local box for all 51 slabs.
+- Retained `final_status = null` and confined the theorem to the frozen local
+  `P_+=0` reduced chart.  The phase/flow-box cover, global return cover,
+  independent event-projected determinant/Taylor-width gate, quantitative
+  trace radius, endogenous prime trace, Hilbert--Pólya synthesis, zeta-zero
+  correspondence, and RH remain open or unauthorized as before.
+- Mirrored the compact certificate, aggregate, checker, postcheck, and release
+  objects in Git.  Kept the 1.2-GiB raw archive and bulk tree/manifests outside
+  ordinary Git; complete raw replay requires a separately transferred
+  immutable archive.

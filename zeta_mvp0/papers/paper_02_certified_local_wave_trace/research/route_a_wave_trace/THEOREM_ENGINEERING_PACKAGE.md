@@ -1173,10 +1173,11 @@ The accepted status is `PASS_CONTIGUOUS_LOCAL_BRANCH` with
 `PASS_LOCAL_MONODROMY_GAP`, also with `final_status: null`; neither is
 `PASS_ENDPOINT` or `PASS_FULL`.  Uniqueness and the \(D>3\) inequality hold
 only on the branch inside the displayed primary boxes and bridge hulls.  The
-local root-box complement, global phase-space cover, independent
-event-projected \(D\Pi\) computation, and full Taylor-model identity
-residual remain open; consequently neither \(\delta_{\rm tr}\) nor
-\(\delta_{\rm nd}\) is promoted.
+local root-box complement is addressed separately by A4.15 below.  The
+phase/flow-box and global phase-space covers, independent event-projected
+\(D\Pi\) computation, and full Taylor-model identity residual remain open;
+consequently neither \(\delta_{\rm tr}\) nor \(\delta_{\rm nd}\) is
+promoted.
 
 The subsequent representative L2-S0 calculation is recorded in
 [A4.14](A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md).  It decomposes the
@@ -1192,6 +1193,23 @@ This finite result proves the local-complement statement only on the three
 selected parameter slabs.  It does not interpolate across the remaining 48
 slabs and therefore does not change the all-slab, phase-cover, global-cover,
 or trace-domain status above.
+
+The later all-slab A1 calculation is recorded in
+[A4.15](A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md).  Its 102 canonical
+trees cover the eight-shell complements of every protected L1 box on all 51
+slabs at 128 and 256 MPFR bits.  The archive contains 52,790 nodes, with
+3,368 energy exclusions, 23,435 necessary-return exclusions, and 25,987
+internal splits.  Every frontier closes.  The independent exact-rational
+checker passes 158,782 checks with zero failures, and the write-once 19-role
+release passes its deep read-only replay.
+
+Combining the A1 exclusion with the accepted L1 existence-and-uniqueness
+certificate yields one reduced return root in the declared local box for
+every frozen slab and parameter value.  The accepted label is
+`PASS_LOCAL_COMPLEMENT_ALL_SLABS`, with `final_status: null`.  This theorem
+does not supply a phase/flow-box cover, global return cover, trace-domain
+promotion, arithmetic-prime mechanism, Hilbert--Pólya operator, zeta-zero
+correspondence, or RH implication.
 
 ## 11. Why this still does not pass the arithmetic P gate
 
@@ -1262,12 +1280,12 @@ Therefore the honest gate ledger is
    full-return branch in its frozen local boxes for
    \(\epsilon\in[0,0.101]\).  [A4.13](A413_LOCAL_MONODROMY_GAP_CERTIFICATE.md)
    now proves \(\det(I-D\Pi)>3\) uniformly on that branch using the invariant
-   quotient and 202/202 exact-rational monodromy enclosures.  Next exclude
-   the local root-box complement on all 51 slabs (A4.14 currently closes
-   only the frozen three-slab implementation smoke), build the phase and global covers, and
-   complete the independent event-projected \(D\Pi\) and Taylor-model
-   identity-residual gates.  The local branch and gap certificates do not by
-   themselves promote \(\delta_{\rm tr}\).
+   quotient and 202/202 exact-rational monodromy enclosures.  A4.15 now closes
+   the local root-box complement on all 51 slabs.  Next build the phase and
+   global covers and complete the independent event-projected \(D\Pi\) and
+   Taylor-model identity-residual gates.  The local branch, gap, and
+   complement certificates do not by themselves promote
+   \(\delta_{\rm tr}\).
 2. Only after that certification, optionally extend the fixed-energy audit
    through R401-FC (finer \(\hbar\)) and R401-ID (an independent warped
    spatial discretization), without refitting phase or amplitude.

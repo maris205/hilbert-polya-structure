@@ -118,9 +118,55 @@ period floor \cref{eq:warped-period-floor}; primitivity at
 \(\epsilon=0\) is exact harmonic dynamics.
 \end{proof}
 
-The word ``unique'' in \cref{thm:validated-branch} is always qualified by
-the frozen boxes and bridge hulls.  No branch-and-bound proof currently
-excludes zeros in their local complement.
+The word ``unique'' in \cref{thm:validated-branch} is qualified by the frozen
+boxes and bridge hulls.  The next certificate extends that uniqueness to the
+declared local box, but not to the full energy shell.
+
+\subsection{All-slab local-complement certificate}
+
+Let
+\begin{equation}
+ B_{\rm loc}=[-0.02,0.02]\times[0.12,0.17]\times[-0.08,0.08]
+ \times[0.64,0.69]
+ \label{eq:local-complement-box}
+\end{equation}
+in the ordered reduced coordinates
+\((Q_-,Q_+,P_-,T)\).  For each primary slab \(E_j\), let \(P_j\) be the
+protected L1 root box from \cref{thm:validated-branch}.
+
+\begin{theorem}[Certified all-slab local complement]
+\label{thm:all-slab-complement}
+For every \(j=0,\ldots,50\) and every \(\epsilon\in E_j\),
+\begin{equation}
+ Z(F(\,\cdot\,,\epsilon))\cap
+ \bigl(B_{\rm loc}\setminus\operatorname{int}P_j\bigr)=\varnothing.
+ \label{eq:all-slab-complement}
+\end{equation}
+Consequently, when combined with the L1 existence-and-uniqueness certificate,
+\begin{equation}
+ Z(F(\,\cdot\,,\epsilon))\cap B_{\rm loc}
+ =\{x_j(\epsilon)\}.
+ \label{eq:all-slab-uniqueness}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The frozen scheduler decomposes
+\(B_{\rm loc}\setminus\operatorname{int}P_j\) into eight exact closed
+coordinate shells.  It bisects every nonterminal box at an exact rational
+midpoint.  Across 51 slabs and two MPFR precisions, all 102 resulting trees
+close: every one of the 26,803 terminal leaves is either an energy exclusion
+or a necessary-return exclusion, and no unresolved or root-candidate leaf
+remains.  The archive contains 52,790 evaluated nodes, of which 25,987 are
+internal splits.
+
+The independent checker reconstructs every shell and parent--child relation
+with exact rational arithmetic, replays every archived exclusion, and checks
+the canonical 102-entry manifest root.  Its 158,782 checks have zero
+failures, and the 128- and 256-bit domain decisions agree.  This proves
+\cref{eq:all-slab-complement}.  The unique L1 zero in \(P_j\) then gives
+\cref{eq:all-slab-uniqueness}.
+\end{proof}
 
 \subsection{Invariant quotient and determinant gap}
 
@@ -213,7 +259,7 @@ provenance.
 
 \begin{table}[t]
 \centering
-\caption{Accepted A4.12--A4.13 proof-object accounting.  The precision
+\caption{Accepted A4.12--A4.15 proof-object accounting.  The precision
 columns are producer replicas; the independent scripts replay stored
 finite-dimensional inequalities but do not rerun the ODE integrator.}
 \label{tab:certificate-accounting}
@@ -231,6 +277,11 @@ Phase-slope replays & 101 & 101 & 202/202 pass\\
 Aggregate branch checks & \multicolumn{2}{c}{3973} & zero failures\\
 Aggregate monodromy checks & \multicolumn{2}{c}{8302} & zero failures\\
 Directed-decimal payloads & \multicolumn{2}{c}{815} & all pass\\
+Local-complement trees & 51 & 51 & 102/102 close\\
+Evaluated complement nodes & 28,054 & 24,736 & 52,790 total\\
+Energy-exclusion leaves & 1,731 & 1,637 & 3,368 total\\
+Return-exclusion leaves & 12,500 & 10,935 & 23,435 total\\
+Independent complement checks & \multicolumn{2}{c}{158,782} & zero failures\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -253,9 +304,10 @@ precisions.  No post-hoc tolerance promoted either predecessor.
 
 \begin{remark}[Non-promotion clause]
 \label{rem:nonpromotion}
-\Cref{thm:validated-branch,thm:monodromy-gap} prove a primitive branch and a
-determinant gap only within the accepted local boxes.  The root complement,
-phase cover, full shell cover over \([0.60,0.75]\), independent
+\Cref{thm:validated-branch,thm:monodromy-gap,thm:all-slab-complement} prove a
+primitive branch, determinant gap, and pointwise root uniqueness only in the
+frozen local reduced chart.  The phase cover, full shell cover over
+\([0.60,0.75]\), independent
 event-projected return derivative, and a separate Taylor-residual gate remain
 open.  Consequently, these theorems do not prove
 \(\delta_{\rm tr}\ge0.010201\) and do not license

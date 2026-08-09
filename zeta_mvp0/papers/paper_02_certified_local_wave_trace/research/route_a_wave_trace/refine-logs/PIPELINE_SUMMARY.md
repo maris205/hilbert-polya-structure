@@ -117,8 +117,20 @@ unit-multiplier Jordan blocks, while the R401-VAL-L1-MG-V2 checker passes 202
 determinant replays, 202 phase-slope replays, all 815 directed-decimal
 payloads, and 8302 aggregate checks.  This is
 `PASS_LOCAL_MONODROMY_GAP` with `final_status: null`: the independent
-event-projected \(D\Pi\) computation, Taylor-model identity residual, local
-complement, phase/global covers, \(\delta_{\rm tr}\), and P0 remain open.
+event-projected \(D\Pi\) computation, Taylor-model identity residual,
+phase/global covers, \(\delta_{\rm tr}\), and P0 remain open.  A4.15
+separately closes the local complement described next.
+
+[A4.15](../A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md) closes all 102
+frozen local-complement trees on the 51 slabs at 128 and 256 MPFR bits.  The
+archive contains 52,790 evaluated nodes and 26,803 certified terminal
+exclusions; its independent exact-rational checker passes 158,782 checks
+with zero failures.  Combined with A4.12, this gives pointwise reduced-root
+uniqueness throughout the declared \(B_{\mathrm{loc}}\), but only in the
+frozen \(P_+=0\) reduced chart.  It does not provide the missing phase or
+flow-box cover, a full energy-shell/global theorem, a quantitative
+\(\delta_{\rm tr}\), P0, a Hilbert--P\'olya operator, zeta-zero
+reconstruction, or RH.
 
 Optional finer and independent-discretization audits are R401-FC and
 R401-ID; R402 remains reserved for the fixed-\(\hbar=1\) high-energy route.

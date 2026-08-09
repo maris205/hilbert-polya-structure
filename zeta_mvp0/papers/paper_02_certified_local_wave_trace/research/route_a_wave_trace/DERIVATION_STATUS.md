@@ -40,9 +40,10 @@ semiclassical limit.
 | D15d | positive-time CRR phase \(e^{i\pi\sigma/2}=i\) | Proved proposition | Exact anisotropic-oscillator trace selects \(\sigma=1\bmod4\); nondegenerate continuation preserves it |
 | D15e | quantitative radial short-period exclusion through \(\delta=0.010201\) | Proved proposition A4.11a | Vector Wirtinger inequality and exact radial Hessian bound give \(T>0.99\), hence \(\bar\delta(0.75)\ge0.010201\) |
 | D15f | quantitative warped short-period floor through \(\delta=0.010201\) | Proved proposition A4.11b | Convex configuration enclosure and outward rational Hessian bound \(\|\nabla^2V_a\|<103\) give \(T>0.60\); full-shell validation remains on \([0.60,0.75]\) |
-| D15g | one connected primitive full-return fast branch on \(\epsilon\in[0,0.101]\) | Local-box computer-assisted theorem [A4.12](A412_CONTIGUOUS_FAST_BRANCH_CERTIFICATE.md), backed by `PASS_CONTIGUOUS_LOCAL_BRANCH` | R401-VAL-L1-V2 passes 51 primary plus 50 bridge jobs at each of 128/256 MPFR bits (202 total); 202 exact-rational Krawczyk replays and 3973 aggregate checker gates pass; the analytic \(\epsilon=0\) fast anchor identifies the branch, energy monotonicity recovers the full-state return, A4.11b proves primitivity for \(\epsilon>0\), and exact harmonic dynamics handles \(\epsilon=0\); uniqueness is only inside the frozen boxes, with complement/global coverage still open |
-| D15h | uniform transverse gap \(\det(I-D\Pi_\epsilon)=4-\operatorname{tr}M_\epsilon>3\) on the A4.12 branch | Local-branch computer-assisted theorem [A4.13](A413_LOCAL_MONODROMY_GAP_CERTIFICATE.md), backed by `PASS_LOCAL_MONODROMY_GAP` | Positive phase slope gives shell regularity and event transversality; the invariant quotient \(\ker(dK)/\operatorname{span}(X_K)\) proves the exact trace/determinant identity without semisimplicity; 202 determinant plus 202 phase-slope replays, 815 directed-decimal payloads, and 8302 aggregate checker gates pass; rigorous minimum lower endpoints are 3.835992606647717183/3.850741968945794693 at 128/256 bits; independent event-projected \(D\Pi\), Taylor residual, complement/global cover, \(\delta_{\rm tr}\), and P0 remain open |
+| D15g | one connected primitive full-return fast branch on \(\epsilon\in[0,0.101]\) | Local-box computer-assisted theorem [A4.12](A412_CONTIGUOUS_FAST_BRANCH_CERTIFICATE.md), backed by `PASS_CONTIGUOUS_LOCAL_BRANCH` | R401-VAL-L1-V2 passes 51 primary plus 50 bridge jobs at each of 128/256 MPFR bits (202 total); 202 exact-rational Krawczyk replays and 3973 aggregate checker gates pass; the analytic \(\epsilon=0\) fast anchor identifies the branch, energy monotonicity recovers the full-state return, A4.11b proves primitivity for \(\epsilon>0\), and exact harmonic dynamics handles \(\epsilon=0\); A4.12 alone gives uniqueness only inside the frozen boxes, while A4.15 separately closes their local complement |
+| D15h | uniform transverse gap \(\det(I-D\Pi_\epsilon)=4-\operatorname{tr}M_\epsilon>3\) on the A4.12 branch | Local-branch computer-assisted theorem [A4.13](A413_LOCAL_MONODROMY_GAP_CERTIFICATE.md), backed by `PASS_LOCAL_MONODROMY_GAP` | Positive phase slope gives shell regularity and event transversality; the invariant quotient \(\ker(dK)/\operatorname{span}(X_K)\) proves the exact trace/determinant identity without semisimplicity; 202 determinant plus 202 phase-slope replays, 815 directed-decimal payloads, and 8302 aggregate checker gates pass; rigorous minimum lower endpoints are 3.835992606647717183/3.850741968945794693 at 128/256 bits; independent event-projected \(D\Pi\), Taylor residual, phase/global cover, \(\delta_{\rm tr}\), and P0 remain open |
 | D15i | no reduced return root in the frozen local-box complement on representative slabs S000, S025, and S050 | Representative computer-assisted certificate [A4.14](A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md), backed by `PASS_IMPLEMENTATION_SMOKE` | Six 128/256-bit trees cover the exact eight-shell complements with 3,016 evaluated nodes; all 1,532 leaves are energy or return exclusions; an independent exact-decimal checker passes 89,962 checks with zero failures. This licenses exactly three parameter slabs, not the other 48, an all-slab complement theorem, a phase/global cover, or any promotion of \(\delta_{\rm tr}\) or P0 |
+| D15j | pointwise reduced-root uniqueness in the frozen local box on all 51 slabs | All-slab computer-assisted theorem [A4.15](A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md), backed by `PASS_LOCAL_COMPLEMENT_ALL_SLABS` and the accepted L1 release | The 102 trees contain 52,790 nodes and close every frontier at 128/256 bits; all 26,803 leaves are energy or necessary-return exclusions; the independent exact-rational checker passes 158,782 checks with zero failures. This closes the local complement only; phase/global covers, event-projected \(D\Pi\), the Taylor residual, \(\delta_{\rm tr}\), P0, zeta-zero, and RH claims remain open or unauthorized |
 | D16 | radial high-energy characteristic time is \(\tau_E\asymp\sqrt{\log E/E}\) | Exact radial scaling interpretation | Does not establish the period law for warped fixed-complexity orbits |
 | D17 | radial fixed prime times require scaled time \(\asymp\sqrt{E/\log E}\) | Scaling interpretation | Warped extension is an open heuristic, not a no-go theorem |
 
@@ -51,13 +52,14 @@ midpoint energy gradient in the first Krawczyk Jacobian row and is retained
 only as `r401_val_local_slab_smoke.attempt0-invalid-energy-jacobian`.  The
 first L1 archive is likewise non-licensing because separately rounded
 unpadded bridge hulls failed literal containment.  Only the prospectively
-frozen and rerun L1-V2 archive supports D15g.  D15h now certifies the strict
+frozen and rerun L1-V2 archive supports D15g.  D15h certifies the strict
 uniform transverse determinant inequality on that branch, but it does not
 independently construct the event-projected return derivative or close the
-frozen Taylor-model identity residual.  D15i excludes the local-box
-complement only on three representative slabs.  D15g--D15i do not establish
-the all-slab complement or global phase-space cover and do not promote
-\(\delta_{\rm tr}\); hence they do not close \(P_0\).
+frozen Taylor-model identity residual.  D15i validates the complement engine
+on three representative slabs, and D15j closes the local-box complement on
+all 51 slabs.  D15g--D15j do not establish the phase/flow-box or global
+phase-space covers and do not promote \(\delta_{\rm tr}\); hence they do not
+close \(P_0\).
 
 ## Nonlinear coefficient derivation
 

@@ -3,7 +3,7 @@
 | Stage | Working paper | Objective | Promotion gate |
 |---:|---|---|---|
 | 01 | Clock-preserving Hénon operators | construct a fixed self-adjoint family with exact counting clock and nontrivial operator structure | Q/W/\(S_{\rm op}\) |
-| 02 | Certified local relative wave trace | make a nonzero-time orbit term rigorous and quantitative on an explicit energy band | complete local complement, phase and global covers |
+| 02 | Certified local relative wave trace | make a nonzero-time orbit term rigorous and quantitative on an explicit energy band | local complement complete; phase and global covers remain |
 | 03 | Endogenous prime trace | obtain rational-prime periods \(r\log p\) and correct signed weights without importing prime data | \(P_0\) |
 | 04 | Explicit-formula bridge | connect an already certified prime carrier to a signed explicit-formula object | Paper 03 must pass |
 | 05 | Hilbert--Pólya synthesis | test whether one fixed self-adjoint operator closes Q--Z coherently | all preceding gates |
@@ -13,18 +13,16 @@ candidate is a useful result when the violated gate is explicit.
 
 ## Immediate Paper 02 promotion path
 
-The next local-complement theorem is deliberately split into two stages.
-`R401-VAL-L2-S0` is a six-tree representative implementation smoke on slabs
-S000, S025, and S050 at 128 and 256 bits.  It is now accepted as
-`PASS_IMPLEMENTATION_SMOKE`: all 3,016 evaluated nodes and 1,532 leaves are
-accounted for, and 89,962 independent checks pass with zero failures.  The
-prospective all-slab stage
-requires 102 canonical trees, transactional crash-safe evidence, exact
-per-tree budgets, deterministic fair scheduling, and an independent checker
-that reconstructs the archive from the frozen plan.  Its design is not yet
-frozen and therefore cannot authorize production on the held-out slabs.
+The local-complement programme has completed both prospective stages.
+`R401-VAL-L2-S0` first accepted the six-tree implementation smoke on S000,
+S025, and S050.  `R401-VAL-L2-A1` then closed all 102 canonical trees on the
+51 slabs at 128 and 256 bits: 52,790 nodes were archived, 158,782 independent
+checks passed with zero failures, and the 19-role release was sealed under
+`PASS_LOCAL_COMPLEMENT_ALL_SLABS`.
 
-Even a complete all-slab local complement would leave the phase/flow-box
-cover, the global return cover, and an independently event-projected
-determinant/Taylor-width gate open before any quantitative promotion of
-\(\delta_{\rm tr}\).
+The immediate Paper 02 promotion path now begins with the phase/flow-box
+cover needed to make the local section complete modulo time translation.
+The global return cover and independently event-projected
+determinant/Taylor-width gate remain open after that.  A4.15 by itself does
+not quantitatively promote \(\delta_{\rm tr}\), and it does not cross the
+arithmetic-prime gate.

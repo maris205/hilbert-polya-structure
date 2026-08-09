@@ -55,7 +55,7 @@ proves on that entire branch that
  \det(I-D\Pi_\epsilon)=4-\operatorname{tr}M_\epsilon>3.
 \]
 
-The root-complement and global phase-space covers, the independent
+The phase/flow-box and global phase-space covers, the independent
 event-projected \(D\Pi\) computation, and the frozen Taylor-model identity
 residual remain open, so \(\delta_{\rm tr}\) is not promoted.
 
@@ -65,7 +65,15 @@ local-complement trees on the representative slabs `S000`, `S025`, and
 no root candidate, invalid leaf, or unresolved leaf, and the independent
 exact-decimal checker passes 89,962 checks with zero failures.  This is
 `PASS_IMPLEMENTATION_SMOKE`, not an all-51-slab complement theorem; the
-other 48 slabs and every phase/global-cover gate remain open.
+other 48 slabs were left to the separately frozen A1 production.
+
+A4.15 now records the accepted `R401-VAL-L2-A1` production.  All 102
+canonical trees close on S000--S050 at 128 and 256 bits.  The archive contains
+52,790 nodes, every one of its 26,803 terminal leaves is an energy or
+necessary-return exclusion, and the independent exact-rational checker
+passes 158,782 checks with zero failures.  The resulting
+`PASS_LOCAL_COMPLEMENT_ALL_SLABS` theorem is confined to the frozen local
+`P_+=0` reduced chart; every phase/global-cover gate remains open.
 
 ## Files
 
@@ -83,6 +91,9 @@ other 48 slabs and every phase/global-cover gate remain open.
 - [A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md](A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md):
   bounded six-tree local-complement implementation certificate on three
   representative slabs, with explicit non-promotion boundary;
+- [A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md](A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md):
+  102-tree all-slab local-complement certificate with the exact local-chart
+  boundary and release hashes;
 - CRR_HYPOTHESIS_CHECK.md: finite-time trace-theorem assumption map;
 - CRR_PHASE_INDEX.md: exact positive/negative-time phase convention;
 - INDEPENDENT_REVIEW_ROUND1.md: independent revise--accept audit trail;
@@ -215,7 +226,21 @@ nodes, with maximum depths 27, 31, and 31.  Every terminal leaf is an
 energy or necessary-return exclusion.  The release status is
 `PASS_IMPLEMENTATION_SMOKE` and `final_status` remains null.  This result
 licenses only the exact three-slab domains; it supplies implementation and
-budget evidence for a future prospectively frozen 102-tree run.
+budget evidence that was used before freezing the later 102-tree run.
+
+The accepted all-slab L2-A1 release lives at:
+
+- `scripts/run_r401_val_l2_all_slabs.py`;
+- `scripts/check_r401_val_l2_all_slabs_independent.py`;
+- `research/route_a_wave_trace/R401_VAL_L2_A1_FREEZE.json`;
+- `results/r401_val_l2_all_slabs/`.
+
+Its 51 trees at 128 bits contain 28,054 nodes and reach maximum depth 38;
+the 51 trees at 256 bits contain 24,736 nodes and reach maximum depth 32.
+All 26,803 terminal leaves are exclusions, all 102 frontiers close, and the
+independent checker passes 158,782 checks with zero failures.  The compact
+19-role release is mirrored in Git.  The ignored bulk tree/raw archive is
+required separately for a complete node-level replay.
 
 ## Gate status
 
@@ -234,8 +259,9 @@ spectrum with zeta zeros.  The full analytic threshold \(\delta_{\rm tr}\)
 is not yet quantitative: A4.11a--A4.11b close the radial and warped
 short-time components, R401-VAL-L1-V2 validates the fast branch in its frozen
 local boxes, and A4.13 proves the strict transverse determinant gap on that
-branch.  A4.14 additionally excludes the local complement on three
-representative slabs only.  All-slab complement exclusion, the global cover, the independent
-event-projected \(D\Pi\) calculation, and the Taylor-model identity residual
-remain open.  Thus neither the R401 trace pass nor the local branch/gap
-passes are used to infer that \(0.01<\delta_{\rm tr}\).
+branch.  A4.14 first validates the complement engine on three representative
+slabs, and A4.15 closes the local complement on all 51 slabs.  The
+phase/flow-box cover, global cover, independent event-projected \(D\Pi\)
+calculation, and Taylor-model identity residual remain open.  Thus neither
+the R401 trace pass nor the local branch/gap/complement passes are used to
+infer that \(0.01<\delta_{\rm tr}\).

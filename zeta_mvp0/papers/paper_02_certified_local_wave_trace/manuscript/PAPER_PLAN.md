@@ -7,14 +7,15 @@ Branch for a Clock-Preserving Hénon Schrödinger Pair
 Schrödinger pair, we prove an eigenvalue-only one-orbit relative trace for
 each sufficiently small fixed energy excess and, as a separate quantitative
 result, certify the orbit's connected local branch and a uniform transverse
-determinant gap on an explicit interval.
+determinant gap on an explicit interval, and exclude every other reduced root
+from one declared local box over that interval.
 
 **Paper type:** mathematical physics; analysis plus computer-assisted proof.  
 **Author:** Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Wuhan 430074, P. R. China.  
 **Target format:** full journal article, approximately 28--34 pages of main
 text plus proof and reproducibility appendices.  
-**Date:** 2026-08-06.
+**Date:** 2026-08-09.
 
 The paper tells one technical story: a clock-preserving operator family from
 Paper 01 has a model-specific, eigenvalue-only local wave-trace term that can
@@ -34,12 +35,15 @@ does not turn the local term into an arithmetic prime trace.
 | C4 | One primitive fast branch is real analytic and locally unique in explicitly displayed boxes for (0\leq\epsilon\leq0.101), where (\delta=\epsilon^2). | A4.12 / `R401-VAL-L1-V2`: 202 CAPD/MPFR jobs, 202 exact-rational Krawczyk replays, 3973 aggregate checks. | Computer-assisted theorem local to the frozen boxes; no complement exclusion | Section 6 |
 | C5 | On that certified local branch, (\det(I-D\Pi_\epsilon)>3) uniformly. | A4.13 / `R401-VAL-L1-MG-V2`: invariant quotient identity, positive event slope, 202 determinant and 202 phase-slope replays, 8302 checks. | Analytic identity plus validated local-branch theorem; no promotion of (\delta_{\rm tr}) | Section 6 |
 | C6 | At (\delta=0.01), the frozen eigenvalue-only statistic is numerically consistent with the A4.10 coefficient, with finest normalized value (1.0065230645+0.0133004473i). | `R401-SC`: preregistered eight-point (\hbar) ladder, integrity gates, and independent recomputation. | Numerical diagnostic; not evidence that (0.01<\delta_{\rm tr}) | Section 7 |
-| C7 | The representative complement-tree implementation excludes three selected local complements at both precisions. | Accepted `R401-VAL-L2-S0`: 6/6 trees, 3,016 nodes, 89,962 independent exact-decimal checks, sealed postcheck/provenance. | `PASS_IMPLEMENTATION_SMOKE`, not a theorem over all slabs | Reproducibility appendix |
-| C8 | None of C1--C7 supplies prime times, von-Mangoldt weights, a zeta-zero spectrum, or RH. | Explicit Q/W/(S_{\rm op})/(P^*_{\rm loc})/(P_0)/Z/RH ledger. | Scope theorem / non-implication statement | Introduction and Section 8 |
+| C7 | The representative complement-tree implementation excludes three selected local complements at both precisions. | Accepted `R401-VAL-L2-S0`: 6/6 trees, 3,016 nodes, 89,962 independent exact-decimal checks, sealed postcheck/provenance. | Historical `PASS_IMPLEMENTATION_SMOKE`; superseded in coverage, not invalidated, by C8 | Reproducibility appendix |
+| C8 | For every frozen slab and parameter value, the A4.12 root is the only reduced root in the declared local box. | Accepted `R401-VAL-L2-A1`: 102/102 trees, 52,790 nodes, 158,782 independent checks, sealed 19-role release. | `PASS_LOCAL_COMPLEMENT_ALL_SLABS`; local \(P_+=0\) reduced chart only | Sections 6 and 8; reproducibility appendix |
+| C9 | None of C1--C8 supplies prime times, von-Mangoldt weights, a zeta-zero spectrum, or RH. | Explicit Q/W/(S_{\rm op})/(P^*_{\rm loc})/(P_0)/Z/RH ledger. | Scope theorem / non-implication statement | Introduction and Section 8 |
 
-`R401-VAL-L2-S0` passed without weakening its frozen gates.  C7 nevertheless
-remains outside the main theorem chain and licenses only the three selected
-slabs.
+`R401-VAL-L2-S0` passed without weakening its frozen gates and remains the
+representative implementation certificate.  The later `R401-VAL-L2-A1`
+production closes the same complement problem on all 51 slabs at both
+precisions.  C8 enters the local theorem chain only when combined with the
+accepted A4.12 protected-box existence-and-uniqueness result.
 
 ## Front matter
 
@@ -53,10 +57,11 @@ Target: 190--230 words.
    their use requires a complete, nondegenerate model-specific return audit.
 3. Describe the analytic normal form, radial-free time window, and
    CAPD/MPFR branch certification.
-4. Give the quantitative branch result:
+4. Give the quantitative branch and local-complement results:
    (0\leq\epsilon\leq0.101), 202 validated jobs across two precisions, and
-   (\det(I-D\Pi)>3), explicitly without assigning this whole interval to the
-   analytic trace theorem.
+   (\det(I-D\Pi)>3), followed by the A4.15 total of 102 closed trees, 52,790
+   nodes, and 158,782 zero-failure checks.  Do not assign this whole interval
+   to the analytic trace theorem.
 5. End with the exact boundary: (\delta_{\rm tr}>0) is not yet quantitative,
    the (\delta=0.01) spectral computation is a diagnostic, and an endogenous
    rational-prime trace remains open.
@@ -76,7 +81,7 @@ quantitative sidecar:
 4. below blocks 2--3, the certified local branch and determinant gap for
    (0\leq\epsilon\leq0.101), followed separately by the R401-SC diagnostic.
 
-Place the open complement/phase/global-cover gates between block 4 and any
+Place the open phase/flow-box/global-cover gates between block 4 and any
 claim of an explicit trace-theorem interval.  In particular, draw no closed
 arrow that licenses the coefficient at (\delta=0.01).  Place the separate
 (P_0) arithmetic gate below block 3.  Use different line styles for analytic
@@ -102,8 +107,9 @@ global and arithmetic routes; it is not merely a workflow illustration.
   
   together with its radial reference.
 - State the one-sentence contribution before the end of page 1.
-- Give five falsifiable theorem/certificate bullets corresponding to C1--C5,
-  then label C6 as a numerical diagnostic rather than a sixth theorem.
+- Give six falsifiable theorem/certificate bullets corresponding to C1--C5
+  and C8, then label C6 as a numerical diagnostic and C7 as the predecessor
+  implementation smoke.
 - Preview the strongest certified numbers and the exact local-box boundary;
   do not present (\delta=0.01) as lying in the trace-theorem domain.
 - Show Figure 1 and the gate ledger early.
@@ -210,9 +216,10 @@ compactness details in Appendix A.
 - State the uniform lower bound (>3), including the directed endpoints and
   the fact that no semisimplicity assumption is used.
 - Separate theorem statements from implementation tables.
-- End the section with a formal non-promotion clause: the local complement,
-  phase/global cover, and an independent event-projected determinant check
-  remain open, so this section does not license A4.9 at (\delta=0.01).
+- End the section with a formal non-promotion clause: A4.15 closes the local
+  reduced-box complement, while the phase/flow-box and global covers and an
+  independent event-projected determinant check remain open.  Thus this
+  section does not license A4.9 at (\delta=0.01).
 
 ### 7. Spectral coefficient and frozen numerical diagnostic — 3 pages
 
@@ -238,11 +245,12 @@ compactness details in Appendix A.
   (P_0), Z, and RH open or unauthorized.
 - Explain why an isolated Gutzwiller orbit does not supply periods
   (r\log p), von-Mangoldt amplitudes, an Euler product, or zeta zeros.
-- List the remaining analytic work: all-slab root complement, local phase
-  cover, global shell cover, independent event-projected determinant, and a
-  quantitative (delta_{\rm tr}).
-- Present the complement-tree engine, if accepted, only as evidence that the
-  next proof stage is computationally feasible.
+- Record the accepted all-slab reduced-root complement, then list the
+  remaining analytic work: local phase/flow-box cover, global shell cover,
+  independent event-projected determinant, and a quantitative
+  (delta_{\rm tr}).
+- Present the complement-tree engine as a completed local certificate, not as
+  evidence for a phase or global theorem.
 
 ### 9. Conclusion — 1 page
 
@@ -272,18 +280,19 @@ sketches in the main text.
 - **F.** Invariant-quotient monodromy proof, including possible Jordan cases.
 - **G.** Frozen protocols, failed/superseded attempts, dependency hashes, and
   complete reproduction commands.
-- **H.** Representative L2 complement smoke, only if independently accepted.
+- **H.** L2 complement evidence: representative A4.14 smoke followed by the
+  independently accepted A4.15 all-slab production.
 
 ## Figure and table plan
 
 | ID | Type | Content | Data source | Priority |
 |---|---|---|---|---|
-| Fig. 1 | Proof architecture | Nonquantitative analytic trace spine, quantitative local-branch sidecar, and open complement/global/arithmetic gates | Manual vector source | High |
+| Fig. 1 | Proof architecture | Nonquantitative analytic trace spine, quantitative local-branch/complement sidecar, and open phase/global/arithmetic gates | Manual vector source | High |
 | Fig. 2 | Geometry/phase portrait | Radial family, fast Hénon orbit, section, and the radial-free time window | R400 orbit data plus analytic annotations | High |
 | Fig. 3 | Branch enclosure | Period and selected state coordinates across 51 slabs; show 128/256 outward enclosures without implying statistical error bars | L1 `summary.json` | High |
 | Fig. 4 | Stability bounds | Directed lower/upper envelopes for (4-\operatorname{tr}M), with the line (D=3) | MG-V2 `summary.json` | High |
 | Fig. 5 | Semiclassical diagnostic | Real/imaginary normalized coefficient across the frozen (hbar) ladder; label (\delta=0.01) as outside the presently quantified theorem domain | R401 fixed-energy result | Medium |
-| Fig. 6 | Complement tree | Representative shell/tree structure and terminal-exclusion mix, only after L2-S0 acceptance | L2-S0 result | Appendix |
+| Fig. 6 | Complement tree | Representative shell/tree structure and all-slab terminal-exclusion mix | L2-S0 and L2-A1 results | Appendix |
 | Table 1 | Theorem hypotheses | Standard fixed-energy trace assumption, model-specific discharge, evidence location, and authorized energy domain | Theorem package | High |
 | Table 2 | Certificate matrix | 51 slabs, 50 bridges, two precisions, checks and minimum margins | L1 release/checker | High |
 | Table 3 | Claim boundary | Proved, certified, smoke-only, and open statements | Global claim ledger | High |
@@ -328,6 +337,8 @@ outline.
 - [x] Import the complete Paper 02 source/results package into this directory.
 - [x] Require `R401-VAL-L2-S0` producer, independent checker, postcheck, and
       release provenance to agree before including C7/Fig. 6/Appendix H.
+- [x] Require `R401-VAL-L2-A1` producer, independent checker, postcheck, and
+      19-role release provenance to agree before promoting C8.
 - [x] Freeze a manuscript-level claim ledger separating local theorem,
       representative smoke, and open global cover.
 - [ ] Generate Figures 1--5 from archived sources and proof objects.
@@ -345,12 +356,15 @@ no numerical score was assigned.  The viable single story is the analytic
 near-bottom one-orbit trace, strengthened by a separate quantitative
 certificate for its distinguished local branch.
 
-The review corrected the only material claim--evidence mismatch: A4.9 has a
+The 2026-08-06 review corrected the only material claim--evidence mismatch
+present at that time: A4.9 has a
 positive but nonquantitative (\delta_{\rm tr}), whereas A4.12--A4.13 certify
 only the selected branch on (\delta=\epsilon^2\leq0.010201).  R401-SC at
-(\delta=0.01) and any L2 complement tree are therefore diagnostic/smoke
-layers, not theorem-domain promotion.  The hero figure, claims matrix, and
-Sections 5--8 now preserve this separation.
+(\delta=0.01) and the then-available L2 complement trees were therefore
+diagnostic/smoke layers, not theorem-domain promotion.  The subsequent A4.15
+production promotes the reduced-box complement alone to an all-slab local
+computer-assisted theorem; it does not quantify the A4.9 trace domain.  The
+hero figure, claims matrix, and Sections 5--8 preserve this separation.
 
 The proof architecture is adequate provided the manuscript includes the
 main-text A4.8 and invariant-quotient proof sketches, a justified finite-time

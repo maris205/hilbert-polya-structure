@@ -26,6 +26,9 @@ Local monodromy gap &
 Representative local complement &
 \path{research/route_a_wave_trace/A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md} &
 \path{results/r401_val_l2_s0_local_complement/}\\
+All-slab local complement &
+\path{research/route_a_wave_trace/A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md} &
+\path{results/r401_val_l2_all_slabs/}\\
 Spectral diagnostic &
 \path{research/route_a_wave_trace/THEOREM_ENGINEERING_PACKAGE.md}, Section 9 &
 \path{results/r401_fixed_energy_trace_smoke/}\\
@@ -59,21 +62,42 @@ performed 89,962 exact-decimal checks with zero failures.  This is an
 implementation certificate on three parameter slabs, not an all-slab
 theorem.
 
+The all-slab release-provenance file has SHA-256
+\begin{center}\small\ttfamily
+9d496564\allowbreak{}5c717735\allowbreak{}d18286e7\allowbreak{}66103676\allowbreak{}
+8038cbd4\allowbreak{}2596f04b\allowbreak{}8a2b08bc\allowbreak{}1925c4c1
+\end{center}
+and binds 19 compact roles, including the A4.15 certificate, formal freezes,
+aggregate objects, independent checker, and postcheck.  The accepted archive
+contains 102 trees and 52,790 evaluated nodes.  Its 3,368 energy-exclusion
+leaves and 23,435 necessary-return-exclusion leaves exhaust the complement,
+and 158,782 independent checks pass with zero failures.  The canonical
+archive-generation digest is
+\path{a658e754000ea29aa0f2289aa03f45b565e216c96584fb3de6d494f9c27c95e0}.
+
 From the Paper 02 project root, the accepted release hashes can be audited
 without rewriting the archives by running
 \begin{verbatim}
 python scripts/audit_release_hashes.py
 \end{verbatim}
+When the bulk A1 tree archive is available locally, the complete release DAG
+can be replayed without writing by running
+\begin{verbatim}
+PYTHONDONTWRITEBYTECODE=1 python \
+  scripts/build_r401_val_l2_a1_release_provenance.py \
+  --project-root "$PWD" --verify-only
+\end{verbatim}
 The focused contract tests can be run with
 \begin{verbatim}
 PYTHONDONTWRITEBYTECODE=1 pytest -q -p no:cacheprovider \
   tests/test_r401_val_l1_contract.py \
-  tests/test_r401_val_l2_s0_contract.py
+  tests/test_r401_val_l2_s0_contract.py \
+  tests/test_r401_val_l2_a1_release_provenance.py
 \end{verbatim}
-The L2 contract test alone does not promote an implementation run.  The
-separately sealed A4.14 release now licenses the stated three-slab smoke;
-the accepted mathematical theorem chain in the main text still ends with
-the local A4.12 and A4.13 releases.
+The L2 contract tests alone do not promote an implementation run.  The
+separately sealed A4.14 release licenses the stated three-slab smoke, while
+the A4.15 release extends only the local reduced-root certificate to all 51
+slabs.
 
 Rebuilding the validated executable requires the separately pinned CAPD,
 MPFR, GMP, compiler, and flag configuration under \texttt{validated/}.  The
@@ -82,10 +106,18 @@ authoritative release manifests are mirrored for fresh-clone hash replay;
 binaries from invalid or superseded attempts and LaTeX auxiliary files are
 excluded from version control.
 
+The compact A4.15 certificate, aggregate, checker, postcheck, and release
+objects are mirrored in Git.  Its 1.2-GiB raw-node directory and bulk tree
+payloads/manifests are intentionally excluded from ordinary Git.  A fresh
+clone can audit the compact 19-role release, but complete raw-node replay and
+the deep A1 command above require a separately transferred immutable bulk
+archive.
+
 For audit transparency, failed and superseded attempts remain in
 \texttt{results/} with explicit non-licensing markers.  They must not be
-cited as proof objects.  A release status of
-\path{PASS_CONTIGUOUS_LOCAL_BRANCH} or
-\path{PASS_LOCAL_MONODROMY_GAP} carries \path{final_status: null};
-neither token means that the global R401-VAL theorem-domain programme is
-complete.
+cited as proof objects.  The release labels
+\path{PASS_CONTIGUOUS_LOCAL_BRANCH},
+\path{PASS_LOCAL_MONODROMY_GAP}, and
+\path{PASS_LOCAL_COMPLEMENT_ALL_SLABS} all carry
+\path{final_status: null}; none of them means that the global R401-VAL
+theorem-domain programme is complete.
