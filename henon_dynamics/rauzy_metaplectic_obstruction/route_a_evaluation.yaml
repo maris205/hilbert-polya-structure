@@ -1,0 +1,79 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C24
+source_commit: PENDING_FIRST_RELEASE_COMMIT
+evaluation_date: 2026-08-09
+
+source_lock:
+  object: "literal labeled Rauzy class of (1234)/(4321), with chronological KZ cocycle and unsmoothed oscillator fiber"
+  clock: "log Perron eigenvalue of an eventually-positive primitive closed Rauzy path"
+  normalization: "none fitted; elementary edges, cyclic Zorich runs, and central returns are all retained"
+  determinant_convention: "proposed det(I-z L_s^Mp); ordinary Fredholm form is the evaluated target"
+  cutoff: "exact elementary lengths 1..12; repetitions 1..6"
+  precision: "integer/rational exact; decimal PF logs are diagnostic"
+  allowed_data: "literal Rauzy combinatorics, KZ matrices, metaplectic representation theory"
+  forbidden_data: "prime tables, Riemann zeros, fitted clocks, unfolding, averaging, heat factors, oscillator truncation"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: NUMERICALLY_CERTIFIED
+  strongest_evidence: "828 primitive labeled directed free cycles exactly counted; 146 phase-invariant eventual-positive admissible labeled cycles with intrinsic log-PF clock"
+  strongest_failure: "no prime-like law, amplitude law, or all-period arithmetic structure"
+  metrics:
+    primitive_cycles_through_12: 828
+    eventually_positive_cycles: 146
+    missed_orbit_risk_within_cutoff: 0
+    completeness_beyond_cutoff: OPEN
+  artifacts:
+    - results/c24_certificate.json
+    - results/c24_independent_check.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "ordinary unsmoothed discrete metaplectic operator is noncompact under the branch-compressible Banach or norm-summable Hilbert-space realization hypothesis"
+  strongest_failure: "21 selected eventually-positive labeled cycles lie on det(I-M)=0, so the regular pointwise Weil-character weight is undefined on the full selected return coding; no ordinary Fredholm determinant has been established"
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: NOT_TESTABLE
+    precision_drift: 0
+    control_margin: "exact obstruction"
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/RESULTS.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: "reciprocal symplectic characteristic polynomials and exact repetition clock"
+  strongest_failure: "no Riemann divisor, functional equation, gamma factor, continuation theorem, or Riemann-von Mangoldt law"
+  metrics:
+    functional_equation: NOT_TESTABLE
+    analytic_continuation: NOT_TESTABLE
+    counting_law: NOT_TESTABLE
+  artifacts:
+    - SOURCE_AUDIT.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: CONDITIONAL_THEOREM
+  strongest_evidence: "the KZ cocycle is intrinsically symplectic and has a non-post-hoc oscillator representation on L2(R^2)"
+  strongest_failure: "the central lift is not uniquely fixed by endpoint matrices, and neither noncompactness application hypothesis is verified on one canonical analytic Zorich space"
+  metrics:
+    natural_phase_space: true
+    natural_unitary_fiber: true
+    canonical_edge_lift: OPEN
+    route_b_ready: false
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall:
+  tuple: "(A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)"
+  status: ROUTE_A_REJECTED
+  route_b_authorized: false
+  next_action: "test one canonical analytic Zorich space against norm summability/noncancellation or modulo-compact branch compression; if either passes, close that realization and pivot to a geometry-forced generalized trace"
