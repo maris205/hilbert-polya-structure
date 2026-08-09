@@ -1,12 +1,41 @@
-# HCS-C22: time-ordered Ruelle cocycle for a two-letter Hénon skew product
+# HCS-C22: chronology separation and signed-trace collapse in a two-letter Hénon skew product
 
-**Date:** 2026-08-08
-**Status:** Stage 1 design freeze; formal certification has not started
+**Date:** 2026-08-09
+**Status:** T1--T3 complete and independently verified; T4--T5 operator gate next
 **Candidate:** HCS-C22, promoted from HCS-C01
 **Parent candidates:** HCS-C01 and `henon_h6_instability_roof_v1`
-**Evidence ceiling:** pilot evidence only; no Route-A verdict yet
+**Evidence ceiling:** exact theorem plus computer-assisted interval theorem;
+Route-A exploratory
 
-## Outcome of the design round
+## Certified outcome
+
+This round produced a split positive/negative result.
+
+1. The two rational Hénon letters share one exactly certified local four-box
+   survivor.  Every admissible bi-infinite joint parameter--state itinerary
+   has exactly one complete orbit in the survivor, with uniform contraction
+   and fibre hyperbolicity.
+2. For the certified period-seven and period-eight protocol pairs, the
+   complete local coefficient \(Q_w(1)\) distinguishes schedules having,
+   respectively, identical cyclic parameter-bigram and parameter-trigram
+   ledgers.  All 29 and 49 marked state branches are included.  This proves
+   that parameter-only cyclic statistics through word length three do not
+   determine these tested coefficients; it does not prove infinite memory
+   or exclude every higher finite-memory cohomology.
+3. With scheme multiplicity and the stated local-residue convention, the
+   unit-numerator all-complex signed construction collapses to one, while the
+   formal bare scheme zeta is \((1-4z)^{-1}\).
+
+Thus the only live continuation is to test whether the certified **local
+absolute/instability cycle data** admit a convergent determinant and a
+trace-compatible nuclear realization.  The unit-numerator global signed
+route is closed.
+
+The main proofs and exact numbers are in
+[`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md) and
+[`results/RESULTS.md`](results/RESULTS.md).
+
+## Frozen object
 
 This project asks a deliberately narrower question than a general
 nonautonomous-Hénon or random-zeta program.  It fixes the Paper-5 convention
@@ -60,7 +89,7 @@ Three dynamical forms were screened.
    schedule word as an actual base periodic orbit.  This is the selected
    form.
 
-This is the first-theorem/operator-gate continuation of the already
+This is the theorem-stage/operator-gate continuation of the already
 registered HCS-C01 idea.  It is not a new claim that nonautonomous Hénon maps
 can be chaotic; that question already has direct prior art.
 
@@ -89,9 +118,10 @@ The project advances only through the following large gates.
 No numerical Ulam matrix, finite-memory truncation, or visually stable root
 is allowed to substitute for T5.
 
-## Exact and numerical pilot signals
+## Stage-1 pilot signals, now superseded
 
-These observations select the next proof target; they are not final results.
+These observations selected the formal targets.  Their current certified
+status is recorded above and in the result artifacts.
 
 - The signed-root recurrence
 
@@ -102,9 +132,9 @@ These observations select the next proof target; they are not final results.
   \]
 
   is uniformly contractive on the inherited real sequence box with the
-  candidate bound
+  now-proved bound
   \(\theta=\sqrt{240/1003}<0.49\).
-- A direct exact margin calculation suggests that the inherited four-box
+- Exact rational covering arithmetic proves that the inherited four-box
   covering graph persists on
   \(289/50<a<99/16\), which contains both frozen parameters.  The tight
   candidate margins at the frozen endpoints are \(7/720\) and \(3/64\).
@@ -114,15 +144,17 @@ These observations select the next proof target; they are not final results.
   0000101,\qquad 0001001.
   \]
 
-  For the admissible sign word \(++--+--\), a high-precision pilot gives
-  instability lengths differing by approximately
-  \(1.7210945\times10^{-2}\).  A rigorous interval enclosure is required.
+  The originally selected branch \(++--+--\) remains a numerical pilot and
+  is not used as the theorem.  The released theorem instead certifies the
+  complete 29-branch aggregate by rational intervals.  Its branch-level
+  instability-length difference, approximately
+  \(1.7210945\times10^{-2}\), is retained only as the historical target
+  selection; no separate branch-level theorem is claimed.
 - At the actual rational parameters, reduction modulo \(43\) gives an exact
   chronology witness: one fixed point of the first protocol has monodromy
   trace \(15\), while one fixed point of the second has trace \(18\).
-  This proves that ordered full-map data need not collapse to bigram counts;
-  it does not yet certify a real local survivor or a difference of aggregate
-  zeta coefficients.
+  The finite-field witness remains a control; the real local survivor and
+  aggregate zeta-coefficient difference are now independently certified.
 
 All pilot labels and their limitations are recorded in
 [`notes/PILOT_LEDGER.md`](notes/PILOT_LEDGER.md).
@@ -151,10 +183,18 @@ Route B is not authorized by this project.
   boundary, and external prior art.
 - [`DEVILS_ADVOCATE_CHECKPOINT1.md`](DEVILS_ADVOCATE_CHECKPOINT1.md): first
   adversarial review.
+- [`DEVILS_ADVOCATE_CHECKPOINT2.md`](DEVILS_ADVOCATE_CHECKPOINT2.md):
+  post-certificate adversarial decision.
 - [`notes/PILOT_LEDGER.md`](notes/PILOT_LEDGER.md): exact and numerical pilot
   evidence with explicit status labels.
+- [`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md): T1--T3 theorem proofs.
+- [`RESEARCH_SYNTHESIS.md`](RESEARCH_SYNTHESIS.md): interpretation and pivot
+  decision.
+- [`results/RESULTS.md`](results/RESULTS.md): compact numerical statement and
+  artifact map.
 - [`code/README.md`](code/README.md), [`results/README.md`](results/README.md),
-  and [`paper/README.md`](paper/README.md): Stage-2 artifact contracts.
+  and [`paper/README.md`](paper/README.md): implementation, evidence, and
+  manuscript contracts.
 
 ## Stop/pivot rule
 

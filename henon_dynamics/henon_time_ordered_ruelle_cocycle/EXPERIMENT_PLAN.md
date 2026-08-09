@@ -1,6 +1,6 @@
 # Claim-driven experiment and theorem plan
 
-**Status:** Stage 1 design freeze; do not treat listed pilots as certified
+**Status:** T1--T3 complete; T4--T5 pending
 **Primary mode:** exact theorem development plus computer-assisted proof
 **Fallback mode:** scoped obstruction paper, followed by a dynamical-form
 pivot
@@ -18,7 +18,7 @@ The positive claim is intentionally conditional:
 The project is successful as a negative result if it rigorously identifies
 the first false clause and proves the corresponding collapse or obstruction.
 
-## Gate T1 -- common real survivor
+## Gate T1 -- common real survivor: PASS
 
 ### Goal
 
@@ -64,7 +64,7 @@ the closed frozen interval, with nonzero exact margins.
 Any missing common edge/cone or nonunique branch closes this local form.  Do
 not repair it by changing parameters after seeing weighted-zeta results.
 
-## Gate T2 -- joint chronology and exact witnesses
+## Gate T2 -- joint chronology and exact witnesses: PASS
 
 ### Goal
 
@@ -78,7 +78,7 @@ quotient before looking for an anomaly.
 2. Determine primitivity under the simultaneous microstep shift.
 3. Canonicalize only under the joint cyclic action; store the reversal orbit
    separately as a mandatory equality control.
-4. Compute each real orbit with interval Newton/Krawczyk certification.
+4. Compute each real orbit with a rational Banach a-posteriori enclosure.
 5. Enclose the ordered derivative product, trace, unstable multiplier,
    instability length, signed flat weight, and absolute flat weight.
 6. Aggregate over **all** local state cycles above each parameter necklace.
@@ -115,8 +115,9 @@ and must be recorded as such.
 ### Pass condition
 
 At least one interval-certified, completely aggregated pair outside the
-dihedral class differs in an intrinsic weight.  The minimal memory order
-needed to distinguish it is stated exactly.
+dihedral class differs in an intrinsic weight.  The strongest tested
+parameter-word memory obstruction is stated exactly, without extrapolating
+to all finite-memory potentials on the joint symbolic system.
 
 ### Kill/pivot condition
 
@@ -125,23 +126,23 @@ cohomologous to a bounded-memory potential already captured by a static SFT,
 the proposed chronology mechanism closes.  A single branch-level difference
 does not pass.
 
-## Gate T3 -- universal collapse controls
+## Gate T3 -- universal collapse controls: PASS
 
 ### Goal
 
 Prove which apparently rich trace data are forced by polynomial geometry and
 therefore nondiagnostic.
 
-### Theorem candidates
+### Proved theorem controls
 
 For a fixed length-\(n\) protocol, the periodic equations form a complete
-intersection with generic scheme length \(2^n\), independent of the order of
-the protocol.  Over the full binary base, the corresponding bare global
-scheme count is therefore expected to be \(4^n\), with formal bare zeta
+intersection of scheme length \(2^n\) whenever every letter is nonzero,
+independent of protocol order.  Over the full binary base, the corresponding
+bare global scheme count is \(4^n\), with formal bare zeta
 \((1-4z)^{-1}\).
 
-Under an explicit nondegeneracy hypothesis, test and prove the global residue
-identities
+Under the explicit reduced/nondegenerate hypothesis, the pointwise forms of
+the global residue identities are
 
 \[
 \sum_{F_wx=x}\frac{1}{\det(I-DF_w(x))}=0,
@@ -150,10 +151,11 @@ identities
  {\det(I-DF_w(x))}=-2^n.
 \]
 
-These are theorem candidates, not certified statements.  They require an
-independent symbolic derivation and exact small-period checks.  If true, bare
-and signed global traces become negative controls; only local/absolute or
-nonpolynomial intrinsic weights remain candidates.
+These identities are now proved using the cyclic fixed scheme, a Hill
+identity, and global residues.  At multiple roots they are residue, not
+pointwise-quotient, identities.  Bare counts and the unit-numerator signed
+global residue trace are negative controls; local absolute/nonpolynomial
+intrinsic weights and nontrivial insertions are outside this collapse theorem.
 
 ### Pass condition
 
@@ -165,7 +167,7 @@ proof.  Degenerate parameters and points at infinity are treated explicitly.
 A failed identity is reported rather than numerically patched.  The weighted
 program may continue only with the corrected exact control.
 
-## Gate T4 -- intrinsic determinant
+## Gate T4 -- intrinsic determinant: OPEN
 
 ### Frozen candidate
 
@@ -198,7 +200,7 @@ determinants may not be conflated.
 There is a nonzero, theorem-backed convergence domain and an exact trace
 identity at the level claimed.
 
-## Gate T5 -- common complex operator
+## Gate T5 -- common complex operator: OPEN
 
 ### Goal
 
@@ -245,16 +247,20 @@ and C22 closes.
 
 ## Reproducibility and artifact contract
 
-Stage 2 must produce:
+The T1--T3 release must contain:
 
 - a deterministic CLI with all parameters and conventions serialized;
 - exact-rational producer and nonimporting checker programs;
 - interval certificates with precision, rounding mode, and package versions;
 - unit, property, chronology-mutation, and regression tests;
-- JSON/CSV ledgers for boxes, joint necklaces, witnesses, and determinant
+- a JSON ledger for boxes, joint necklaces, witnesses, and determinant
   coefficients;
 - an artifact hash manifest and a one-command clean rerun;
-- a paper whose theorem labels exactly match the certificate labels.
+- theorem documentation whose labels exactly match the certificate labels.
+
+All of these items are present in the T1--T3 release.  A T4--T5 continuation
+must append the complex-domain, operator, trace, and convergence artifacts;
+it may not mutate the frozen T1--T3 certificate.
 
 The code may reuse formulas but must not import result artifacts from C19--C21
 as proof.  Those projects are source/control inputs only.
@@ -275,7 +281,7 @@ identification.  Route B remains closed.
 
 ## Work budget
 
-After Stage-1 confirmation, the plan uses two large research rounds:
+After the design freeze, the plan uses two large research rounds:
 
 1. T1--T3 formal producer/checker, certified witnesses, and the go/no-go
    decision for T4--T5;

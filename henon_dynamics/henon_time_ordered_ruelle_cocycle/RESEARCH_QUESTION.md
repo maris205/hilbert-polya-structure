@@ -1,6 +1,6 @@
 # Research question and frozen scope
 
-**Stage:** 1, design freeze pending confirmation
+**Stage:** T1--T3 certified; T4--T5 operator gate pending
 **Candidate ID:** HCS-C22
 **Primary object:** deterministic autonomous skew product, not a quenched
 random system
@@ -112,8 +112,10 @@ discovery.
 | Ethical | 5 | No human, animal, clinical, or sensitive data are involved. |
 | Relevant | 5 | The question directly tests periodic orbits, symbolic dynamics, weighted zeta functions, transfer spectra, and the limits of Hilbert--Pólya interpretation. |
 
-Mean design score: \(4.6/5\).  Novelty remains provisional until the theorem
-statement has survived the Stage-2 literature audit.
+Mean design score: \(4.6/5\).  The theorem delta has now survived the
+repository and literature boundary audit: the scoped novelty is the explicit
+local/global split proved in `DERIVATION_PACKAGE.md`, not the existence of a
+nonautonomous Hénon system or an ordered transfer cocycle.
 
 ## Subquestions
 

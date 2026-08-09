@@ -1,9 +1,16 @@
 # Devil's advocate checkpoint 1
 
+> **Historical preregistration.** This checkpoint records the objections and
+> pass conditions before formal computation.  T1--T3 have since been
+> completed; current conclusions and remaining objections are in
+> [`DEVILS_ADVOCATE_CHECKPOINT2.md`](DEVILS_ADVOCATE_CHECKPOINT2.md) and
+> [`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md).  Status phrases below are
+> intentionally preserved as of the checkpoint date.
+
 **Decision:** PASS TO FORMAL TESTING AFTER REFRAME
 **Critical flaws:** none at the design level
 **Major risks:** five
-**Current status:** Stage 1 only; this document does not validate any theorem
+**Status at writing:** Stage 1 only; this historical document validates no theorem
 
 ## Strongest criticism
 

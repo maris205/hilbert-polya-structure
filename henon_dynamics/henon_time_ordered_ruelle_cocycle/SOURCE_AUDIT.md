@@ -1,12 +1,12 @@
 # Source and novelty audit
 
-**Audit date:** 2026-08-08
-**Status:** Stage-1 source lock; theorem-level novelty remains provisional
+**Audit date:** 2026-08-09
+**Status:** scoped T1--T3 theorem delta audited; T4--T5 operator novelty open
 
 ## Paper-5 source lock
 
 The foundational source is the repository copy
-`docs/prior_work/papers/5-An Area-Preserving Henon-Map Model.pdf`.
+[`5-An Area-Preserving Henon-Map Model.pdf`](../docs/prior_work/papers/5-An%20Area-Preserving%20Henon-Map%20Model.pdf).
 The present project preserves its physical coordinate convention
 
 \[
@@ -37,7 +37,8 @@ two conventions.
 ### Direct parent
 
 HCS-C01 in
-`next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md` already defines the
+[`CANDIDATE_REGISTRY.md`](../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md)
+already defines the
 two-letter chronological skew product at \(5.9\) and \(6.1\).  HCS-C22 is a
 promotion of that registered idea to its first common-hyperbolicity,
 chronology-classification, and operator theorem gates.  Novelty may not be
@@ -60,9 +61,14 @@ claimed for merely writing down the skew product.
   conjugacy/parameter mixing, branch-to-aggregate overclaim, finite-memory
   substitution, and chronology erasure are all live risks.
 
-No repository project was found that proves the complete C22 chain:
-common switched-family survivor, joint chronology quotient, certified
-non-dihedral intrinsic-weight witness, and common nuclear ordered operator.
+No audited repository project or cited external source was found to prove
+the achieved T1--T3 conjunction for this explicit rational two-letter
+Paper-5-coordinate family: a common switched-family local survivor, a joint
+rather than separately canonicalized primitive-orbit ledger, complete
+state-sector instability separation for the matched protocol pairs, and the
+complementary all-complex signed-residue collapse.  The nuclear
+ordered-operator extension remains open and is not part of the present
+novelty claim.
 
 ## External prior art
 
@@ -117,23 +123,26 @@ determinant framework is a baseline reference.
 
 - DOI: <https://doi.org/10.1016/S0001-8708(77)80044-3>
 
-## Provisional novelty claim
+## Post-T1--T3 scoped novelty verdict
 
-The only defensible Stage-1 novelty claim is a question:
+Within the audited repository and cited primary literature, the defensible
+project-specific theorem delta is the conjunction of:
 
-> Can the explicit Paper-5-coordinate family at the rational window
-> \([59/10,61/10]\) support a single certified local symbolic/holomorphic
-> model in which the intrinsic instability determinant distinguishes
-> protocols beyond dihedral and finite-memory controls?
+1. an explicit common local four-state survivor, uniform over all binary
+   schedules in the frozen rational two-letter window;
+2. an exact joint parameter--state primitive-orbit and reversal ledger;
+3. exact-rational complete-state separations of \(Q_w(1)\) for the minimal
+   tested non-dihedral same-bigram and same-trigram protocol classes; and
+4. the complementary unit-numerator all-complex signed-residue collapse
+   under the stated scheme convention.
 
-The following are explicitly **not** novelty claims:
+The novelty status is `SCOPED_PASS` for this achieved T1--T3 conjunction and
+remains `OPEN` for T4--T5.  This is a scoped "not found in the audited
+sources" statement, not a universal priority claim.
 
-- discovery of a nonautonomous Hénon map;
-- noncommutativity of two Hénon maps;
-- existence of a periodic-word monodromy;
-- a finite block determinant identity;
-- a random/ordered transfer operator cocycle;
-- numerical separation of two selected branches.
-
-The novelty status changes to `PASS` only after T1--T3 produce a theorem
-delta not already implied by the cited frameworks.
+The project does not claim novelty for introducing a nonautonomous Hénon
+map, noncommutativity, periodic monodromy, a block determinant, a random or
+ordered transfer cocycle, or a selected-branch numerical separation.  It
+also does not yet claim a convergent instability determinant, a nuclear
+Ruelle operator, an infinite-memory potential, an arithmetic correspondence,
+or a Hilbert--Pólya realization.

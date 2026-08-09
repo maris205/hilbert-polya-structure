@@ -1,8 +1,15 @@
 # Pilot ledger
 
+> **Historical target-selection record.** Labels and future-tense statements
+> below are frozen as of 2026-08-08.  T1 and T3 are now proved, while T2 is an
+> independently checked exact-rational computer-assisted result.  See
+> [`../DERIVATION_PACKAGE.md`](../DERIVATION_PACKAGE.md) and
+> [`../results/RESULTS.md`](../results/RESULTS.md) for current status.  Pilot
+> values are not used as release evidence.
+
 **Purpose:** target selection only
 **Freeze date:** 2026-08-08
-**Certification status:** no entry below is a released C22 theorem
+**Certification status at freeze:** no entry below was then a released C22 theorem
 
 ## Evidence labels
 

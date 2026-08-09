@@ -1,20 +1,25 @@
-# Results contract
+# Results and evidence levels
 
-No released C22 result exists at Stage 1.  Pilot values are isolated in
-[`../notes/PILOT_LEDGER.md`](../notes/PILOT_LEDGER.md) and may not be cited as
-certified theorems.
+T1--T3 are released in this directory.
 
-Stage 2 will place here:
+- [`RESULTS.md`](RESULTS.md) gives the concise mathematical result.
+- `c22_certificate.json` is the deterministic exact-rational producer
+  artifact.  It contains all 78 matched branch comparisons (156 local orbit
+  enclosures), joint combinatorics through period ten, symmetry controls,
+  and symbolic T3 checks.
+- `c22_independent_check.json` is the hash-bound checker artifact.  Its checker
+  imports no producer code.
+- [`TEST_REPORT.md`](TEST_REPORT.md) records the clean commands and outcomes.
+- [`ARTIFACT_HASHES.sha256`](ARTIFACT_HASHES.sha256) freezes the released
+  producer, checker, tests, and result bytes.
 
-- exact common-window and cone certificates;
-- independent-check output;
-- joint primitive-orbit and symmetry ledgers;
-- interval-certified non-dihedral witnesses or a complete collapse record;
-- global bare/signed control identities and tests;
-- weighted determinant coefficient tables only inside a proved convergence
-  domain;
-- operator nuclearity/tail certificates or the exact obstruction;
-- test reports and artifact hashes.
+Evidence labels:
 
-Every artifact must label its scope as local real survivor, global complex
-scheme, signed, absolute, or instability weighted.
+- T1 common survivor: `PROVED`;
+- T2 aggregate separation: `NUMERICALLY_CERTIFIED` by exact rational interval
+  arithmetic and an independent implementation;
+- T3 unit-numerator global residue collapse: `PROVED`;
+- T4/T5 analytic operator: `OPEN`.
+
+Every artifact distinguishes the local real survivor from the global complex
+scheme and distinguishes signed, absolute, and instability weights.
