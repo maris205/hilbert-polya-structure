@@ -35,4 +35,3 @@ standard complex analysis.  The numerical certificate evaluates the frozen
 algebraic constant and scalar elementary functions with outward Arb
 intervals.  It does not evaluate the Fredholm determinant, search for its
 zeros, or read prime, Riemann-zero, zeta, xi, or USTC data.
-
