@@ -294,6 +294,9 @@ def minimum_period(values: Sequence[object]) -> int:
 def check_joint_combinatorics(payload: dict[str, object]) -> dict[str, bool]:
     checks = {}
     rows = payload["period_rows"]
+    checks["period_coverage"] = [int(row["period"]) for row in rows] == list(
+        range(1, 11)
+    )
     matrix = sp.Matrix(GRAPH)
     for row in rows:
         n = int(row["period"])
@@ -459,6 +462,8 @@ def check_sectors(payload: dict[str, object], digits: int) -> dict[str, object]:
     branch_failures: list[str] = []
     aggregate_checks: dict[str, bool] = {}
     sectors = payload["sectors"]
+    expected_sectors = {"0000101", "0001001", "00101011", "00101101"}
+    aggregate_checks["sector_coverage"] = set(sectors) == expected_sectors
     for word, sector in sectors.items():
         if len(sector["branches"]) != int(sp.trace(sp.Matrix(GRAPH) ** len(word))):
             branch_failures.append(f"{word}:branch_count")
@@ -473,6 +478,15 @@ def check_sectors(payload: dict[str, object], digits: int) -> dict[str, object]:
             aggregate_checks[f"{word}:{key}"] = reconstructed == declared
 
     comparison_checks = {}
+    expected_comparisons = {
+        ("bigram", "0000101", "0001001"),
+        ("trigram", "00101011", "00101101"),
+    }
+    actual_comparisons = {
+        (str(item["label"]), str(item["left"]), str(item["right"]))
+        for item in payload["comparisons"]
+    }
+    comparison_checks["comparison_coverage"] = actual_comparisons == expected_comparisons
     for comparison in payload["comparisons"]:
         left = sectors[comparison["left"]]
         right = sectors[comparison["right"]]
@@ -587,6 +601,9 @@ def check_symmetry_exact(payload: dict[str, object]) -> dict[str, bool]:
 
 def check_t3(payload: dict[str, object]) -> dict[str, bool]:
     checks = {}
+    checks["hill_period_coverage"] = [
+        int(row["period"]) for row in payload["hill_rows"]
+    ] == list(range(1, 9))
     for row in payload["hill_rows"]:
         n = int(row["period"])
         b = sp.symbols(f"b0:{n}")

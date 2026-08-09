@@ -79,8 +79,10 @@ quotient before looking for an anomaly.
 3. Canonicalize only under the joint cyclic action; store the reversal orbit
    separately as a mandatory equality control.
 4. Compute each real orbit with a rational Banach a-posteriori enclosure.
-5. Enclose the ordered derivative product, trace, unstable multiplier,
-   instability length, signed flat weight, and absolute flat weight.
+5. Enclose the ordered derivative product, trace, unstable multiplier and its
+   inverse, signed flat weight, and absolute flat weight.  The logarithmic
+   instability length is deferred to T4, where its outward-rounded analytic
+   convention and repetition law must be frozen together.
 6. Aggregate over **all** local state cycles above each parameter necklace.
 
 ### Predeclared short-word comparisons

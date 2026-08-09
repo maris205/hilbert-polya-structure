@@ -154,3 +154,27 @@ def test_chronology_index_mutation_fails_interval_checker() -> None:
     )
     assert checks["pass"] is False
     assert checks["branch_failure_count"] > 0
+
+
+def test_deleted_certificate_coverage_fails_closed() -> None:
+    certificate = json.loads(
+        (PROJECT_ROOT / "results" / "c22_certificate.json").read_text(encoding="utf-8")
+    )
+
+    combinatorics = deepcopy(certificate["t2_joint_chronology"]["combinatorics"])
+    combinatorics["period_rows"].pop()
+    assert checker.check_joint_combinatorics(combinatorics)["period_coverage"] is False
+
+    chronology = deepcopy(certificate["t2_joint_chronology"])
+    chronology["comparisons"].pop()
+    sector_checks = checker.check_sectors(
+        chronology,
+        int(certificate["numerical_policy"]["sqrt_enclosure_decimal_digits"]),
+    )
+    assert sector_checks["comparison_checks"]["comparison_coverage"] is False
+    assert sector_checks["pass"] is False
+
+    collapse = deepcopy(certificate["t3_global_collapse"])
+    collapse["hill_rows"].pop()
+    assert checker.check_t3(collapse)["hill_period_coverage"] is False
+    assert not all(checker.check_t3(collapse).values())

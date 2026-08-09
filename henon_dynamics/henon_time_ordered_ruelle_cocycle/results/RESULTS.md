@@ -1,7 +1,7 @@
 # HCS-C22 T1--T3 results
 
 **Verification status:** exact-rational producer PASS; nonimporting checker
-PASS; 10/10 regression tests PASS
+PASS; 11/11 regression tests PASS
 
 ## Gate summary
 
