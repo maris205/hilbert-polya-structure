@@ -8,7 +8,7 @@ School of Artificial Intelligence and Automation, Huazhong University of
 Science and Technology, Wuhan 430074, P. R. China.
 
 Paper 02 is the active theorem-engineering continuation of Paper 01.  Its
-strongest accepted statements are:
+strongest accepted statements and latest bounded implementation evidence are:
 
 1. a fixed-energy, eigenvalue-only local relative trace formula for the fast
    Lyapunov orbit, subject to a sufficiently small energy band;
@@ -23,6 +23,10 @@ strongest accepted statements are:
 5. `A4.15 / R401-VAL-L2-A1`: all 102 frozen complement trees close on the
    51-slab interval \(0\le\epsilon\le0.101\) at both precisions, yielding
    `PASS_LOCAL_COMPLEMENT_ALL_SLABS` after independent exact-rational replay.
+6. `A4.16 / R401-VAL-L3-S0-COMPOSITE-DRAFT`: the exact representative
+   `S000/S025/S050 x 128/256` phase-anchor and branch-tube matrix passes as
+   `DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`.  This is implementation
+   evidence only, not an accepted 51-slab A4.16 theorem.
 
 The local determinant result was independently replayed from exact rational
 decimal payloads: 202 determinant enclosures, 202 phase-slope enclosures, 815
@@ -78,21 +82,45 @@ and the production report and release are under
 reduced chart; it is not global energy-shell uniqueness, a trace formula, a
 Hilbert--Pólya construction, a zeta-zero reconstruction, or RH.
 
+## Representative phase-tube implementation smoke (A4.16)
+
+The non-licensing A4.16 S0 composite binds the exact three-slab by
+two-precision matrix shared by two independently checked components.  The
+static phase-anchor archive contains 84,172 nodes, zero unresolved leaves,
+and 122,300 independent interval checks.  The CAPD branch-tube archive
+contains six complete-period `SolutionCurve` records; its largest certified
+\(r_-^2\) upper endpoint is
+`0.0001124580903773778485... < 0.0016`.
+
+The separate composite checker passes all six cells, verifies 18 manifest
+and component-control bindings, and records zero failures.  Its summary and
+checker SHA-256 values are respectively
+`ab0d7921623a5d4ba61d148ce833d22e14da75c77385897c328b20e41d64257f`
+and
+`197a087ecc75c95f186764f5365d3fc6769cb4cfe99793bfc1abc61afc037470`.
+The bounded record is
+[`A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md`](research/route_a_wave_trace/A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md).
+
+This representative smoke does not assign a milestone, theorem, or final
+programme value.  It does not cover the other 48 slabs and does not prove
+that arbitrary energy-shell candidates remain in the local tube.
+
 ## Open bridges
 
-- the local phase/flow-box cover that makes the section complete modulo time
-  translation;
+- an independently reviewed and prospectively frozen 51-slab A4.16
+  phase-tube production; the current A4.16 evidence is representative only;
 - the full global shell return-exclusion tree on \(0.60<T<0.75\);
+- global tube routing for candidates outside the local full-period tube;
 - the frozen independent event-projected determinant/Taylor-width
   cross-check;
 - an explicit theorem-domain bound \(\delta_{\rm tr}>0.01\);
 - every endogenous prime-time, von-Mangoldt, Hilbert--Pólya, zeta-zero, and RH
   claim.
 
-The next theorem-engineering stage attacks the phase/flow-box bridge while
-preserving the A4.15 local-chart boundary.  A4.14 remains the representative
-implementation certificate; A4.15 is the accepted all-parameter local
-complement theorem.
+The representative A4.16 engine is now checked; the next theorem-engineering
+stage is its independent pre-freeze review and formal all-slab production,
+while preserving the A4.15 local-chart boundary.  A4.15 remains the highest
+accepted theorem in this chain.  Global routing is a separate later bridge.
 
 ## Layout
 

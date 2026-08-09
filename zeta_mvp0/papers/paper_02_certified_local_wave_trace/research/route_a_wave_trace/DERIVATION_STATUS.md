@@ -44,6 +44,7 @@ semiclassical limit.
 | D15h | uniform transverse gap \(\det(I-D\Pi_\epsilon)=4-\operatorname{tr}M_\epsilon>3\) on the A4.12 branch | Local-branch computer-assisted theorem [A4.13](A413_LOCAL_MONODROMY_GAP_CERTIFICATE.md), backed by `PASS_LOCAL_MONODROMY_GAP` | Positive phase slope gives shell regularity and event transversality; the invariant quotient \(\ker(dK)/\operatorname{span}(X_K)\) proves the exact trace/determinant identity without semisimplicity; 202 determinant plus 202 phase-slope replays, 815 directed-decimal payloads, and 8302 aggregate checker gates pass; rigorous minimum lower endpoints are 3.835992606647717183/3.850741968945794693 at 128/256 bits; independent event-projected \(D\Pi\), Taylor residual, phase/global cover, \(\delta_{\rm tr}\), and P0 remain open |
 | D15i | no reduced return root in the frozen local-box complement on representative slabs S000, S025, and S050 | Representative computer-assisted certificate [A4.14](A414_REPRESENTATIVE_LOCAL_COMPLEMENT_SMOKE.md), backed by `PASS_IMPLEMENTATION_SMOKE` | Six 128/256-bit trees cover the exact eight-shell complements with 3,016 evaluated nodes; all 1,532 leaves are energy or return exclusions; an independent exact-decimal checker passes 89,962 checks with zero failures. This licenses exactly three parameter slabs, not the other 48, an all-slab complement theorem, a phase/global cover, or any promotion of \(\delta_{\rm tr}\) or P0 |
 | D15j | pointwise reduced-root uniqueness in the frozen local box on all 51 slabs | All-slab computer-assisted theorem [A4.15](A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md), backed by `PASS_LOCAL_COMPLEMENT_ALL_SLABS` and the accepted L1 release | The 102 trees contain 52,790 nodes and close every frontier at 128/256 bits; all 26,803 leaves are energy or necessary-return exclusions; the independent exact-rational checker passes 158,782 checks with zero failures. This closes the local complement only; phase/global covers, event-projected \(D\Pi\), the Taylor residual, \(\delta_{\rm tr}\), P0, zeta-zero, and RH claims remain open or unauthorized |
+| D15k | representative phase anchor and accepted-branch full-period tube on S000, S025, and S050 | Representative non-licensing implementation smoke [A4.16](A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md), backed by `DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE` | The exact 3-slab by 2-precision composite binds a static archive of 84,172 nodes, zero unresolved leaves, and 122,300 independent interval checks to six independently replayed CAPD branch-tube records; the composite checker passes 6 cells and 18 bindings with zero failures. This does not license A4.16 on the other 48 slabs, arbitrary-candidate tube routing, a global cover, or any trace, Hilbert--Pólya, zeta-zero, or RH promotion |
 | D16 | radial high-energy characteristic time is \(\tau_E\asymp\sqrt{\log E/E}\) | Exact radial scaling interpretation | Does not establish the period law for warped fixed-complexity orbits |
 | D17 | radial fixed prime times require scaled time \(\asymp\sqrt{E/\log E}\) | Scaling interpretation | Warped extension is an open heuristic, not a no-go theorem |
 
@@ -57,9 +58,11 @@ uniform transverse determinant inequality on that branch, but it does not
 independently construct the event-projected return derivative or close the
 frozen Taylor-model identity residual.  D15i validates the complement engine
 on three representative slabs, and D15j closes the local-box complement on
-all 51 slabs.  D15g--D15j do not establish the phase/flow-box or global
-phase-space covers and do not promote \(\delta_{\rm tr}\); hence they do not
-close \(P_0\).
+all 51 slabs.  D15k records only representative implementation evidence for
+the next phase-tube bridge; it does not extend the accepted theorem chain.
+D15g--D15k do not establish a formal all-slab phase/flow-box theorem or the
+global phase-space cover and do not promote \(\delta_{\rm tr}\); hence they
+do not close \(P_0\).
 
 ## Nonlinear coefficient derivation
 

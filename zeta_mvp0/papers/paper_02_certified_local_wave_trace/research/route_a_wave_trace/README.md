@@ -75,6 +75,14 @@ passes 158,782 checks with zero failures.  The resulting
 `PASS_LOCAL_COMPLEMENT_ALL_SLABS` theorem is confined to the frozen local
 `P_+=0` reduced chart; every phase/global-cover gate remains open.
 
+A4.16 now records a separate representative implementation smoke.  The exact
+`S000/S025/S050 x 128/256` matrix binds an 84,172-node static phase-anchor
+archive and six complete-period CAPD branch-tube records.  A separate
+composite checker passes all six cells, verifies 18 bindings, and reports zero
+failures under `DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`.  This does
+not license A4.16 on the other 48 slabs and does not change any phase/global,
+trace, Hilbert--Pólya, zeta-zero, or RH gate.
+
 ## Files
 
 - A408_WHOLE_SHELL_UNIQUENESS_PROOF.md: standalone global uniqueness proof;
@@ -94,6 +102,12 @@ passes 158,782 checks with zero failures.  The resulting
 - [A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md](A415_ALL_SLAB_LOCAL_COMPLEMENT_CERTIFICATE.md):
   102-tree all-slab local-complement certificate with the exact local-chart
   boundary and release hashes;
+- [A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md](A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md):
+  bounded six-cell phase-anchor and whole-period branch-tube implementation
+  smoke; representative and non-licensing only;
+- `A416_PHASE_FLOWBOX_DERIVATION.md` and
+  `R401_VAL_L3_PHASE_TUBE_PROTOCOL_DRAFT.md`: analytic reduction and the
+  non-licensing representative protocol used by the A4.16 smoke;
 - CRR_HYPOTHESIS_CHECK.md: finite-time trace-theorem assumption map;
 - CRR_PHASE_INDEX.md: exact positive/negative-time phase convention;
 - INDEPENDENT_REVIEW_ROUND1.md: independent revise--accept audit trail;
@@ -242,6 +256,25 @@ independent checker passes 158,782 checks with zero failures.  The compact
 19-role release is mirrored in Git.  The ignored bulk tree/raw archive is
 required separately for a complete node-level replay.
 
+The representative L3-S0 phase-tube evidence lives at:
+
+- `scripts/run_r401_val_l3_phase_tube_smoke.py` and
+  `scripts/check_r401_val_l3_phase_tube_independent.py`;
+- `scripts/run_r401_val_l3_branch_tube_smoke.py` and
+  `scripts/check_r401_val_l3_branch_tube_smoke_independent.py`;
+- `scripts/build_r401_val_l3_s0_composite.py` and
+  `scripts/check_r401_val_l3_s0_composite_independent.py`;
+- `results/r401_val_l3_phase_tube_smoke/`;
+- `results/r401_val_l3_branch_tube_smoke/`;
+- `results/r401_val_l3_s0_composite/`.
+
+The static component closes 84,172 proof-tree nodes with zero unresolved
+leaves and passes 122,300 independent interval checks.  The branch component
+closes six full-period `SolutionCurve` records.  The canonical composite
+binds the common representative matrix and passes six cell replays and 18
+manifest/control bindings with an empty failure list.  All three layers are
+explicitly non-licensing for a theorem.
+
 ## Gate status
 
 \[
@@ -265,3 +298,9 @@ phase/flow-box cover, global cover, independent event-projected \(D\Pi\)
 calculation, and Taylor-model identity residual remain open.  Thus neither
 the R401 trace pass nor the local branch/gap/complement passes are used to
 infer that \(0.01<\delta_{\rm tr}\).
+
+The A4.16 representative composite establishes implementation feasibility
+for the phase-anchor and branch-tube engines only.  A prospectively frozen
+51-slab by two-precision production and its independent review are still
+required before any local phase-tube theorem; global tube routing remains a
+separate obligation after that.

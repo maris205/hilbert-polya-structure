@@ -42,6 +42,10 @@ formula.
   exact-rational proof-object checker;
 - A4.13 invariant-quotient certificate and the R401-VAL-L1-MG-V2 derived
   archive, with 202 determinant and 202 phase-slope replays.
+- A4.14 representative local-complement smoke and A4.15 accepted all-slab
+  local-complement release;
+- A4.16 representative phase-anchor/branch-tube component archives and their
+  independently checked six-cell non-licensing composite.
 
 ## Current gate ledger
 
@@ -71,9 +75,9 @@ R401-SC has now passed from \(\hbar=4\times10^{-4}\) down to
 
 while its separation from the exact harmonic finite-window baseline is only
 \(0.002051\).  All integrity gates, the independent 58-check recomputation,
-and all 74 current regression tests passed.  The next strict gate within
-A4.11/R401-VAL is the local-complement/global cover together with the
-independent event-projected/Taylor-identity cross-check needed
+and all 74 current regression tests passed.  The next strict gates within
+A4.11/R401-VAL are the formal all-slab phase-tube and global covers together
+with the independent event-projected/Taylor-identity cross-check needed
 for a quantitative lower bound for
 \(\delta_{\rm tr}\), targeting
 \(\delta_{\rm tr}\ge0.010201>0.01\), without inferring it
@@ -131,6 +135,18 @@ frozen \(P_+=0\) reduced chart.  It does not provide the missing phase or
 flow-box cover, a full energy-shell/global theorem, a quantitative
 \(\delta_{\rm tr}\), P0, a Hilbert--P\'olya operator, zeta-zero
 reconstruction, or RH.
+
+[A4.16](../A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md) now records the exact
+`S000/S025/S050 x 128/256` implementation composite.  Its static component
+contains 84,172 nodes, zero unresolved leaves, and 122,300 independently
+replayed interval checks; its CAPD component closes six complete-period
+branch-tube records.  The separate checker passes all six composite cells,
+verifies 18 bindings, and reports zero failures.  This remains
+`DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`, not a 51-slab theorem.
+
+The next formal Route A step is an independent pre-freeze review followed by
+a prospectively frozen all-slab A4.16 production.  Global tube routing and
+the event-projected/Taylor-width gates remain separate later obligations.
 
 Optional finer and independent-discretization audits are R401-FC and
 R401-ID; R402 remains reserved for the fixed-\(\hbar=1\) high-energy route.

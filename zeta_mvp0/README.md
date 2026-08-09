@@ -73,6 +73,14 @@ independent exact-decimal checks with zero failures.  This remains a
 three-slab implementation certificate, not the all-51-slab complement
 theorem, and it does not promote the analytic trace threshold.
 
+Paper 02 also records the representative A4.16 composite under
+`R401-VAL-L3-S0-COMPOSITE-DRAFT`.  The exact
+`S000/S025/S050 x 128/256` matrix binds 84,172 static proof-tree nodes and
+six full-period CAPD branch-tube records.  Its independent checker passes all
+six cells and 18 manifest/control bindings with zero failures.  The value is
+`DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`: it is not an accepted
+51-slab A4.16 theorem, and A4.15 remains Paper 02's highest accepted theorem.
+
 The compact A4.15 certificate, aggregate, checker, postcheck, and 19-role
 release chain are mirrored here.  The 1.2-GiB raw node archive and the bulk
 tree payloads/manifests remain outside ordinary Git and require a separate
@@ -80,6 +88,11 @@ immutable transfer for full raw replay.  Mathematically, A4.15 remains a
 local reduced-chart theorem.  The phase/flow-box cover, global return cover,
 independent event-projected determinant/Taylor-width gate,
 \(\delta_{\rm tr}\), and \(P_0\) remain open.
+
+The representative A4.16 smoke establishes implementation feasibility for
+the phase anchor and accepted-branch tube only.  A prospectively frozen
+51-slab production and arbitrary-candidate global tube routing remain open;
+the smoke does not promote any trace, Hilbert--Pólya, zeta-zero, or RH claim.
 
 ## Current claim boundary
 

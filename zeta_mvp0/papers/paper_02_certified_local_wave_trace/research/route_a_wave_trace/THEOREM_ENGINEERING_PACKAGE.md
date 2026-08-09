@@ -1069,8 +1069,9 @@ remaining computer-assisted proof into a global/local no-gap cover on
 \([0.60,0.75]\), a validated fast-branch root tube, and a uniform transverse
 determinant.  R401-VAL-L1-V2 below closes the connected local root-tube
 component, and A4.13 closes the strict determinant inequality on that local
-branch.  The root complement, global cover, independent event-projected
-return derivative, and Taylor-model identity residual remain open.
+branch.  A4.15 below closes the local root complement.  A formal all-slab
+phase-tube theorem, the global cover, independent event-projected return
+derivative, and Taylor-model identity residual remain open.
 
 The first non-claiming implementation smoke is complete.  At both 128 and
 256 Arb bits, zero-safe `exprel`/`log1prel`, exact normal coordinates,
@@ -1211,6 +1212,27 @@ does not supply a phase/flow-box cover, global return cover, trace-domain
 promotion, arithmetic-prime mechanism, Hilbert--Pólya operator, zeta-zero
 correspondence, or RH implication.
 
+The subsequent representative A4.16 S0 calculation is recorded in
+[A4.16](A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md).  Its static component
+certifies the outer-domain, fast-angle, and positive-section landing engines
+on `S000`, `S025`, and `S050` at 128 and 256 bits.  The six proof objects
+contain 84,172 nodes, no unresolved leaves, and pass 122,300 independent
+interval checks.  A separate CAPD component encloses the accepted branch for
+its complete period in all six cells and proves
+
+\[
+ \max r_-^2
+ <0.000112458090377377849<0.04^2.
+\]
+
+The no-import composite checker binds the two independently checked
+components on the exact common matrix, passes six cell replays and 18
+manifest/control bindings, and records zero failures.  Its value is only
+`DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`: it does not establish the
+A4.16 quotient theorem on the other 48 slabs, nor does it prove that every
+global candidate remains in the local tube.  A4.15 therefore remains the
+highest accepted theorem in this chain.
+
 ## 11. Why this still does not pass the arithmetic P gate
 
 The result is in the limit
@@ -1281,11 +1303,14 @@ Therefore the honest gate ledger is
    \(\epsilon\in[0,0.101]\).  [A4.13](A413_LOCAL_MONODROMY_GAP_CERTIFICATE.md)
    now proves \(\det(I-D\Pi)>3\) uniformly on that branch using the invariant
    quotient and 202/202 exact-rational monodromy enclosures.  A4.15 now closes
-   the local root-box complement on all 51 slabs.  Next build the phase and
-   global covers and complete the independent event-projected \(D\Pi\) and
-   Taylor-model identity-residual gates.  The local branch, gap, and
-   complement certificates do not by themselves promote
-   \(\delta_{\rm tr}\).
+   the local root-box complement on all 51 slabs.  The representative A4.16
+   composite now validates the phase-anchor and branch-tube implementation on
+   three slabs, without theorem authority.  Next subject the 51-slab A4.16
+   design to independent pre-freeze review and a prospective formal run, then
+   build the separate global tube-routing cover and complete the independent
+   event-projected \(D\Pi\) and Taylor-model identity-residual gates.  The
+   local branch, gap, complement, and representative phase-tube records do
+   not by themselves promote \(\delta_{\rm tr}\).
 2. Only after that certification, optionally extend the fixed-energy audit
    through R401-FC (finer \(\hbar\)) and R401-ID (an independent warped
    spatial discretization), without refitting phase or amplitude.

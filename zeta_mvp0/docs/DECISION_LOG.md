@@ -103,3 +103,22 @@
   objects in Git.  Kept the 1.2-GiB raw archive and bulk tree/manifests outside
   ordinary Git; complete raw replay requires a separately transferred
   immutable archive.
+
+## 2026-08-09 — A4.16 representative phase-tube smoke recorded
+
+- Recorded `R401-VAL-L3-S0-COMPOSITE-DRAFT` only as representative
+  implementation evidence under `DRAFT_NON_LICENSING`.
+- Bound the exact `S000/S025/S050 x 128/256` matrix across two independently
+  checked components: 84,172 static phase-anchor nodes with zero unresolved
+  leaves and six complete-period CAPD branch-tube records.
+- Recorded that the independent composite replay passed all six cells and 18
+  manifest/control bindings with zero failures under
+  `PASS_IMPLEMENTATION_SMOKE`.
+- Retained null milestone, theorem, and final programme values.  A4.15
+  remains the highest accepted theorem; the other 48 slabs, arbitrary-orbit
+  tube routing, global cover, trace threshold, arithmetic trace,
+  Hilbert--Pólya synthesis, zeta-zero correspondence, and RH remain open or
+  unauthorized.
+- Required independent pre-freeze review and a new prospectively frozen
+  51-slab by two-precision production before any A4.16 theorem can be
+  considered.

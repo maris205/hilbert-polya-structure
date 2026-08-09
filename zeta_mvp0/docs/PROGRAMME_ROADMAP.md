@@ -20,9 +20,16 @@ S025, and S050.  `R401-VAL-L2-A1` then closed all 102 canonical trees on the
 checks passed with zero failures, and the 19-role release was sealed under
 `PASS_LOCAL_COMPLEMENT_ALL_SLABS`.
 
-The immediate Paper 02 promotion path now begins with the phase/flow-box
-cover needed to make the local section complete modulo time translation.
-The global return cover and independently event-projected
-determinant/Taylor-width gate remain open after that.  A4.15 by itself does
-not quantitatively promote \(\delta_{\rm tr}\), and it does not cross the
-arithmetic-prime gate.
+`R401-VAL-L3-S0-COMPOSITE-DRAFT` now records representative implementation
+feasibility for the next phase-tube bridge.  The exact
+`S000/S025/S050 x 128/256` matrix passes both independently checked
+components and the separate six-cell composite under
+`DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`.  This is not an A4.16
+theorem and does not cover the other 48 slabs.
+
+The immediate Paper 02 path is now: independent pre-freeze review,
+prospectively frozen 51-slab by two-precision A4.16 production, and then the
+separate global tube-routing complement.  The independently event-projected
+determinant/Taylor-width gate remains open after those steps.  Neither A4.15
+nor the representative A4.16 smoke quantitatively promotes
+\(\delta_{\rm tr}\), and neither crosses the arithmetic-prime gate.
