@@ -1,5 +1,7 @@
 # Repository update: HCS-C24
 
+**Source commit:** `0cbd599dcf6d52190b5ac2fb7d68807f1e25fbaa`
+
 This project records the first completed round after the C23 system switch.
 It adds:
 
@@ -7,6 +9,7 @@ It adds:
 - exact chronological KZ matrices and changing-form transport;
 - a complete primitive labeled-cycle ledger through elementary length 12;
 - a phase-invariant eventual-positivity/central-return ledger;
+- the 146-code/41-reciprocal-polynomial collision ledger without spectral quotienting;
 - the 21-cycle fixed-vector singular-locus obstruction;
 - tensor-compression and discrete-metaplectic-atom noncompactness theorems;
 - an independent Möbius--trace checker and adversarial mutation suite;
@@ -22,6 +25,6 @@ pointwise regular Weil-character Euler product: REFUTED
 generalized/distributional trace lane: not opened without a new canonical object
 ```
 
-The root `henon_dynamics/README.md`, candidate registry, and obstruction
-registry are updated in the release metadata commit after the first project
-commit supplies a stable source hash.
+The root `henon_dynamics/README.md`, candidate registry, obstruction registry,
+and source-lock roadmap are updated in the release metadata commit following
+the stable source commit above.

@@ -2,11 +2,41 @@
 
 **Date:** 2026-08-09
 
-**Status:** `PREACTIVE_SOURCE_LOCK; ONE LARGE KILL ROUND PROPOSED`
+**Status:** `COMPLETED_SCOPED_OBSTRUCTION; CANONICAL_ANALYTIC_APPLICATION_OPEN`
 
 **Reason for switch:** C22G closes with open nuclear/all-word gates and C23
 closes at a fixed-word cyclic-resultant baseline. No larger Hénon ledger is
 authorized.
+
+## Completed outcome
+
+The round is released in
+[`../rauzy_metaplectic_obstruction/`](../rauzy_metaplectic_obstruction/).
+The literal permutation passed source lock: the fixed-label Rauzy class has
+seven states and fourteen edges, its crossing form has rank four and
+determinant one, and the stratum is \(\mathcal H(2)\).  Exact enumeration
+through elementary length 12 gives 828 primitive fixed-label cycle codes, of
+which 146 are eventually positive in every cyclic phase.  Twenty-one selected
+codes lie on \(\det(I-M)=0\), so the regular point formula for the Weil
+distribution character cannot define a finite weight on the full selected
+labeled-cycle set.  The 146 selected codes realize 41 reciprocal
+characteristic polynomials, but cycles are not quotiented by this spectral
+coincidence.
+
+The operator gate closed two broad realization classes.  A nonzero
+exact/modulo-compact branch compression has positive essential norm, and an
+absolutely norm-summable discrete metaplectic atomic sum on Hilbert base
+spaces is noncompact whenever one central-sign-aware aggregate is nonzero.
+No particular canonical analytic Zorich space has yet been shown to satisfy
+either application hypothesis.  Thus the unrestricted operator proposal is
+not declared globally dead; the formal result is
+
+```text
+(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)
+ROUTE_A_REJECTED
+```
+
+The text below is retained as the original pre-registered roadmap.
 
 ## Big-door question
 
@@ -19,9 +49,9 @@ single question is:
 > Rauzy--Veech--Zorich transfer operator possess an ordinary nuclear Fredholm
 > determinant, or does its unsmoothed unitary fibre force noncompactness?
 
-This is deliberately one large operator gate. A negative theorem closes the
-whole ordinary-metaplectic-Fredholm form; finite oscillator truncations are
-not a fallback.
+This is deliberately one large operator gate. A negative theorem closes each
+realization class only after its stated application hypotheses are verified;
+finite oscillator truncations are not a fallback.
 
 ## Proposed frozen object
 
@@ -185,9 +215,10 @@ The release must reject:
 
 ## Pass, kill, and Route-A boundary
 
-**Kill:** prove that the unsmoothed chronological operator is not compact, or
-fail to define one canonical branch-resolved operator and lift. Record a
-`PROVED_SCOPED_OBSTRUCTION` and close the ordinary metaplectic Fredholm form.
+**Kill:** prove that the unsmoothed chronological operator is not compact
+under explicit realization hypotheses, or fail to define one canonical
+branch-resolved operator and lift. Record a `PROVED_SCOPED_OBSTRUCTION` and
+close only the realization class covered by the proof.
 
 **Pass:** only a trace-class compression, semifinite determinant, or other
 trace object forced uniquely by Rauzy/KZ geometry can survive. It must be

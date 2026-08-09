@@ -59,6 +59,7 @@ The foundational local source is
 | [`henon_time_ordered_ruelle_cocycle/`](henon_time_ordered_ruelle_cocycle/) | Common switched survivor; convergent instability Euler product; common complex/projective domains; orbitwise scalar-denominator no-go | Route-A exploratory |
 | [`henon_graded_ruelle_complex/`](henon_graded_ruelle_complex/) | Corrected \(\mathbb C^3\) cross map, exact residue parity, and explicit unresolved nuclear/all-word gates | Conditional blueprint; C22 closed |
 | [`henon_adelic_lefschetz_ramification/`](henon_adelic_lefschetz_ramification/) | Exact fixed-algebra chronology certificates and cyclic-resultant collapse of every fixed-word tower | Scoped negative result; C23 closed |
+| [`rauzy_metaplectic_obstruction/`](rauzy_metaplectic_obstruction/) | Exact genus-two Rauzy chronology, fixed-vector character obstruction, and two metaplectic noncompactness theorems | Two realization classes closed; canonical analytic application open |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -141,22 +142,62 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Next big system switch: HCS-C24 source lock
+## Latest big-door result: HCS-C24 Rauzy--metaplectic obstruction
 
-No further Hénon ledger is active. The proposed next one-round gate changes
-the dynamical form to a Rauzy--Veech--Zorich return system with the
-chronological Kontsevich--Zorich homology cocycle and its metaplectic unitary
-fibre. Its first target is an all-period compactness obstruction, not a
-low-period spectral fit: if one nonzero branch compression is
-\(K_h\otimes U_h\) with \(U_h\) infinite-dimensional unitary, the ordinary
-Fredholm route is noncompact and closes immediately.
+HCS-C24 made the planned change of dynamical form.  The literal reversal
+permutation \((1234)/(4321)\) passes source lock as a seven-state,
+fourteen-edge labeled Rauzy class in \(\mathcal H(2)\).  Open edges transport
+their changing crossing forms and later edges multiply on the left; no
+averaged cocycle replaces the chronology.
 
-The exact Rauzy component, homology convention, acceleration, roof, and
-metaplectic lift must pass the primary-source lock before HCS-C24 becomes a
-testable candidate. Heat regularization and finite oscillator truncations are
-forbidden repairs.
+The exact ledger through elementary length 12 contains 828 primitive
+fixed-label directed cycle codes.  Exactly 146 are eventually positive in
+every cyclic phase, but 21 of these have
 
-- [HCS-C24 source-lock roadmap](docs/hcs_c24_system_switch.md)
+\[
+\det(I-M)=0
+\]
+
+and characteristic polynomial divisible by \((x-1)^2\).  Hence the same
+singularity persists for every repetition.  The regular point formula for
+the Weil distribution character therefore cannot be used as a finite
+pointwise weight on the full selected labeled-cycle set.  These are coded
+orbit counts; no claim is made that all 146 codes give distinct primitive
+unmarked Teichmüller geodesics.  The 146 selected codes realize only 41
+distinct reciprocal characteristic polynomials, and no cycles are quotiented
+by this homological spectral coincidence.
+
+Two operator classes close exactly.  First,
+
+\[
+\|K\otimes U\|_{\rm ess}=\|K\|
+\]
+
+for an infinite-dimensional unitary fibre, so any nonzero
+exact/modulo-compact branch compression obstructs compactness.  Second, an
+absolutely norm-summable discrete metaplectic atomic sum on Hilbert base
+spaces is noncompact whenever one aggregate over equal projected matrices is
+nonzero after retaining the true central signs.  A particular canonical
+analytic Zorich space has not yet been shown to satisfy either application
+hypothesis, so this is a scoped two-class obstruction rather than a global
+no-go theorem.
+
+The formal verdict is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**; Route B is not authorized.
+
+- [C24 project overview](rauzy_metaplectic_obstruction/README.md)
+- [C24 theorem package](rauzy_metaplectic_obstruction/THEOREM_PACKAGE.md)
+- [C24 exact certificate](rauzy_metaplectic_obstruction/results/c24_certificate.json)
+- [C24 independent check](rauzy_metaplectic_obstruction/results/c24_independent_check.json)
+- [C24 compiled note](rauzy_metaplectic_obstruction/paper/main.pdf)
+- [C24 original source-lock roadmap](docs/hcs_c24_system_switch.md)
+
+Reproduce the round with:
+
+```bash
+cd rauzy_metaplectic_obstruction && ./code/run_c24.sh
+```
 
 ## Predecessor result: HCS-C22
 

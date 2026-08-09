@@ -60,22 +60,45 @@ broad scan is cancelled. The formal tuple is
 is not forced by matched reciprocal-polynomial or reversible-map controls;
 otherwise the next round changes dynamical form.
 
-## HCS-C24 preactivation (2026-08-09)
+## HCS-C24 scoped closure (2026-08-09)
 
-The proposed next large system switch is
-[`hcs_c24_system_switch.md`](hcs_c24_system_switch.md): a source-locked
-Rauzy--Veech--Zorich return system with chronological absolute-homology
-monodromy and a metaplectic unitary fibre. Status is
-`PREACTIVE_SOURCE_LOCK`; no formal Route-A tuple is assigned before the
-literal Rauzy class, roof, graph-directed space, and metaplectic lift are
-reconstructed.
+Candidate **HCS-C24** completed the large system switch; see
+[`../rauzy_metaplectic_obstruction/`](../rauzy_metaplectic_obstruction/).
+The literal fixed-label permutation \((1234)/(4321)\) passes source lock as a
+seven-state, fourteen-edge Rauzy class in \(\mathcal H(2)\).  The release
+retains elementary chronology, changing-form transport, cyclic phase,
+same-type/Zorich-run metadata, and central returns without replacing them by
+an averaged transition matrix.
 
-The one-round kill is operator-level. A nonzero compact/nuclear base branch
-tensored with an infinite-dimensional unitary is noncompact. C24 must prove
-that a genuine branch compression of the full operator has this form, or
-exhibit a geometry-forced trace object that evades it. No heat cutoff,
-oscillator truncation, averaged cocycle, or finite-section determinant is an
-authorized rescue.
+Exact enumeration through elementary length 12 gives 828 primitive labeled
+cycle codes.  Of these, 146 are eventually positive in every cyclic phase,
+and 21 lie on \(\det(I-M)=0\); their characteristic polynomials contain
+\((x-1)^2\), so every repetition remains singular.  This refutes use of the
+regular Weil-character point formula as a finite weight on the full selected
+labeled return coding.  The 146 selected codes realize 41 distinct reciprocal
+characteristic polynomials and are not quotiented by spectral coincidence.
+It does not identify the 146 codes with pairwise
+distinct primitive unmarked Teichmüller geodesics and does not exclude a
+genuine distributional trace.
+
+The operator result closes two stated realization classes:
+
+1. any bounded realization admitting a nonzero exact/modulo-compact branch
+   compression to \(aK\otimes U\);
+2. any absolutely norm-summable discrete metaplectic atomic realization on
+   Hilbert base spaces with a nonzero central-sign-aware aggregate.
+
+No particular canonical analytic Zorich space has yet been proved to satisfy
+either application hypothesis, and the coherent edge lift remains required
+unresolved data rather than something silently quotiented.  The formal tuple
+is **(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**; Route B is not authorized.
+
+The only direct reopening gate is to choose one canonical analytic Zorich
+space and prove or refute absolute branch-norm summability plus noncancellation,
+or a nonzero branch compression modulo compact operators.  A geometry-forced
+flat, distributional, or semifinite trace would be a separately source-locked
+candidate, not a regularization of C24.
 
 ## C02D closure (2026-08-06)
 
