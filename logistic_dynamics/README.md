@@ -23,7 +23,8 @@ projects/<stage_slug>/
 ├── paper/                 # created only after a genuine result edge
 ├── src/                   # stage-specific implementation, when needed
 ├── tests/                 # exact reproduction and regression tests
-└── results/               # machine-readable artifacts
+├── artifacts/             # machine-readable certificates
+└── results/               # formal stage result
 ```
 
 A stage is promoted to a paper subproject only when it yields a theorem,
@@ -35,6 +36,7 @@ not receive a manuscript that would overstate the mathematics.
 
 | Stage | Route-A tuple | Status | Paper |
 |---|---|---|---|
+| [`exact_uc_polar_lower_growth`](projects/exact_uc_polar_lower_growth/README.md) | Analytic `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Cancellation-safe derivative lower bound, explicit linear maximum-modulus lower bound, and transcendental-entire manuscript; compiled PDF |
 | [`exact_uc_polar_conformal_ratio`](projects/exact_uc_polar_conformal_ratio/README.md) | Analytic `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Explicit conformal-ratio and numerical-growth-constant manuscript; compiled PDF |
 | [`exact_uc_polar_growth_order`](projects/exact_uc_polar_growth_order/README.md) | Analytic `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Order-at-most-two and zero-free-half-plane manuscript; compiled PDF |
 | [`exact_uc_polar_nuclear_fredholm`](projects/exact_uc_polar_nuclear_fredholm/README.md) | Analytic `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Complete modular LaTeX manuscript and compiled PDF |
@@ -42,12 +44,14 @@ not receive a manuscript that would overstate the mathematics.
 | [`polar_partition_trace`](projects/polar_partition_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical prerequisite | Incorporated into the LOG-0001 theorem chain |
 | [`polar_boundary_trace`](projects/polar_boundary_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical local theorem | Incorporated into the LOG-0001 manuscript |
 
-The conformal-ratio stage proves
-`r_L=r_R<=tanh((500*pi+log(4))/2)<1`, resolves the gap below one at 4096-bit
-outward precision, and makes the existing quadratic determinant envelope
-fully numerical.  The current smallest target-free task is a
-cancellation-safe lower-growth precheck from one explicit coefficient or
-signed trace term. Target-zero comparison and Route B remain closed.
+The lower-growth stage proves `D_pol'(2)>0.0213` from the complete signed
+trace ledger, hence `M_D(R)>0.0213*(R-2)` for `R>2`, and shows that the same
+entire determinant is nonconstant and transcendental.  Its self-contained
+1024-bit certificate freezes the exact 100-decimal-place rational bracket for
+`U_c` and imports no legacy support module.  A separately locked bounded
+order-lower audit may test whether Phragmen--Lindelof forces
+`ord(D_pol)>=1`; after that narrow audit the breadth-first search should
+pivot. Target-zero comparison and Route B remain closed.
 
 ## Provenance
 
