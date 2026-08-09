@@ -56,7 +56,7 @@ The foundational local source is
 | [`henon_period7_frobenius_curve/`](henon_period7_frobenius_curve/) | Generic Hénon seven-cycle, degree-14 oriented time lift, genus-three scalar quotient, and finite-prime candidates | Route-A exploratory |
 | [`henon_period7_dihedral_cover/`](henon_period7_dihedral_cover/) | Genus-eight \(D_7\) closure, chronology-induced real multiplication, and selected-prime local factors | Route-A exploratory |
 | [`henon_chiral_chronology_threshold/`](henon_chiral_chronology_threshold/) | Genus-one period-six \(D_6\) cover, \(H^1\)-chronology collapse, scoped \(n=7\) threshold, and lower-period marker shadow | Route-A exploratory |
-| [`henon_time_ordered_ruelle_cocycle/`](henon_time_ordered_ruelle_cocycle/) | Common two-letter survivor, complete tested local chronology separation, and unit-numerator global residue collapse | Route-A exploratory |
+| [`henon_time_ordered_ruelle_cocycle/`](henon_time_ordered_ruelle_cocycle/) | Common switched survivor; convergent instability Euler product; common complex/projective domains; orbitwise scalar-denominator no-go | Route-A exploratory |
 
 ## Latest result: HCS-C22
 
@@ -100,17 +100,55 @@ determinant exactly one.  The formal bare global scheme zeta is
 requires all-repetition nondegeneracy; local real absolute/instability weights
 are not killed by this residue theorem.
 
+The intrinsic instability determinant is now rigorous in a nonzero domain.
+The all-period multiplier bounds are
+
+\[
+E^2=\frac{129299641}{14112000},
+\qquad
+U^2=\frac{11420060341}{189778176},
+\]
+
+and normal convergence holds whenever
+
+\[
+2\varphi|z|\chi(\Re s)<1.
+\]
+
+At \(s=1\), this gives \(|z|<0.9353771139\ldots\).  Both Hénon letters
+also share strict complex base-pinning and projective slope domains.  The
+oriented instability factor has a common principal logarithm, and every base
+periodic orbit has exactly one lifted unstable periodic point in the slope
+domain.
+
+The natural orbitwise scalar geometric route nevertheless closes exactly.  A
+scalar pinning trace carries a fixed-point denominator, and termwise
+primitive/double compatibility would require
+
+\[
+|\det(I-M^2)|=|\det(I-M)|^2,
+\]
+
+which fails for every area-preserving saddle.  This leaves aggregate
+same-period compensation unexcluded.  The authorized large-step continuation
+is a different dynamical form: a projective, exterior-degree
+Ruelle--Lefschetz complex with an alternating supertrace.
+
 The formal verdict is
 **(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall status
-**ROUTE_A_EXPLORATORY**.  T4 must first establish a convergent local
-instability cycle expansion; only then may T5 attempt a common nuclear
-ordered operator.  Failure triggers the predeclared dynamical-form pivot.
+**ROUTE_A_EXPLORATORY**.  T4 and the complex/projective geometry now pass;
+the orbitwise scalar T5 route is refuted.  The graded nuclear/supertrace gate
+is the next and final authorized continuation of this lineage.
 
 - [Project overview](henon_time_ordered_ruelle_cocycle/README.md)
 - [Derivation package](henon_time_ordered_ruelle_cocycle/DERIVATION_PACKAGE.md)
+- [T4 and orbitwise scalar-T5 derivation](henon_time_ordered_ruelle_cocycle/T4_T5_DERIVATION.md)
+- [Graded pivot roadmap](henon_time_ordered_ruelle_cocycle/GRADED_PIVOT_ROADMAP.md)
 - [Research synthesis](henon_time_ordered_ruelle_cocycle/RESEARCH_SYNTHESIS.md)
 - [Exact certificate](henon_time_ordered_ruelle_cocycle/results/c22_certificate.json)
 - [Independent check](henon_time_ordered_ruelle_cocycle/results/c22_independent_check.json)
+- [T4/orbitwise-scalar certificate](henon_time_ordered_ruelle_cocycle/results/c22_t4_certificate.json)
+- [T4/orbitwise-scalar independent check](henon_time_ordered_ruelle_cocycle/results/c22_t4_independent_check.json)
 - [Route-A record](henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml)
 
 Reproduce the frozen result with:
@@ -119,6 +157,7 @@ Reproduce the frozen result with:
 cd henon_time_ordered_ruelle_cocycle
 python -m pip install -r requirements.txt
 ./code/run_c22.sh
+./code/run_c22_t4.sh
 sha256sum -c results/ARTIFACT_HASHES.sha256
 ```
 

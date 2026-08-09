@@ -18,7 +18,8 @@ Route-A rejection record under
 |---|---|---|---|---|
 | HCS-C00 | Certified Ruelle pressure/dimension | baseline, control, fallback | BASELINE | external theorem-delta gate |
 | HCS-C01 | Ordered two-letter Hénon skew product/cocycle | discovery | IDEA | common hyperbolicity and chronology control |
-| HCS-C22 | Paper-5-coordinate two-letter Hénon skew product with intrinsic local instability sectors | promoted child of C01 / discovery plus collapse control | ROUTE_A_CANDIDATE | T4 convergence before T5 common nuclear operator |
+| HCS-C22 | Paper-5-coordinate two-letter Hénon skew product with intrinsic local instability sectors | promoted child of C01 / theorem plus obstruction | OBSTRUCTION | closed orbitwise scalar cancellation; graded child authorized |
+| HCS-C22G | Projectivized two-letter Hénon skew product with exterior-degree Ruelle--Lefschetz complex | child of C22 / changed operator form | SOURCE_LOCKED | common nuclear branch factorization and exact low-period supertrace |
 | HCS-C02 | Derivative-projective Schottky/holomorphic strictification | high-risk discovery | ANALYTIC_CANDIDATE | finite-window endpoint lemma plus crossed/pinning-map composition |
 | HCS-C02B | Signed-root complex sequence-polydisc bridge | child of C02 | ANALYTIC_CANDIDATE | proved self-map; no finite analytic branch/operator yet |
 | HCS-C03 | Finite-field local zeta and global Euler product | discovery/negative control | OBSTRUCTION | naive global product rejected; two-axis Frobenius/iterate mechanism required for revival |
@@ -312,6 +313,8 @@ The formal evaluation and complete paper package are under
 | Candidate | Evidence state | Formal tuple | Overall | Route B |
 |---|---|---|---|---|
 | HCS-C22 | T1 exact common survivor; T2 complete 29/49-branch rational interval separations; T3 exact unit-numerator global residue collapse | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)` | `ROUTE_A_EXPLORATORY`; one staged T4--T5 kill round authorized | not authorized |
+| HCS-C22 | T4 exact instability Euler product in a nonzero domain; common base/projective/log domains; orbitwise scalar denominator cancellation refuted by double repetition | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)` | `ROUTE_A_EXPLORATORY`; frozen termwise scalar lane closed; aggregate scalar nonexistence not claimed | not authorized |
+| HCS-C22G | inherited certified projective/log geometry; four-degree nuclear exterior complex and supertrace still open | not yet formally evaluated | `SOURCE_LOCKED`; one large nuclear/supertrace kill round authorized | not authorized |
 
 HCS-C22 is the theorem-stage promotion of HCS-C01, not a separately invented
 skew product.  It freezes
@@ -335,12 +338,19 @@ bare global scheme zeta is \((1-4z)^{-1}\).  Pointwise flat equality requires
 all-repetition nondegeneracy.  Local absolute/instability data remain outside
 that residue cancellation.
 
-The next test is T4, not another short-orbit sweep: prove a fixed repetition
-law and nonzero convergence domain for the local instability cycle
-expansion.  Only a T4 pass authorizes the T5 common-complex-domain and nuclear
-trace construction.  Failure closes this positive operator lane under the
-work budget and triggers a dynamical-form pivot; it is not a universal
-operator nonexistence theorem.
+T4 now passes with exact multiplier bounds and a nonzero normal-convergence
+domain.  The common two-letter base-pinning and projective/logarithm domains
+also pass.  Orbitwise scalar denominator cancellation fails before spectrum
+computation: its fixed-point correction cannot be multiplied consistently
+on a primitive saddle and its double repetition.  This closes HCS-C22 under
+its frozen termwise geometric convention, while leaving unmarked aggregate
+scalar compensation unexcluded.
+
+HCS-C22G is the authorized changed form.  It uses the unique unstable
+projective lift and four exterior degrees so that a Lefschetz supertrace can
+cancel the denominator.  Projective lifting and exterior cancellation are
+prior art; promotion requires a common quantitative nuclear factorization
+and exact chronology-preserving supertrace, not a finite section.
 
 The source package is
 [`../henon_time_ordered_ruelle_cocycle/`](../henon_time_ordered_ruelle_cocycle/),

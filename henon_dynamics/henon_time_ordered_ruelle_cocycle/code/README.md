@@ -1,6 +1,6 @@
 # Code and reproducibility
 
-The T1--T3 implementation is deterministic.  All pass/fail decisions in the
+The T1--T4/orbitwise-scalar-T5 implementation is deterministic.  All pass/fail decisions in the
 producer use exact `Fraction` arithmetic; irrational square roots are bounded
 by integer-square-root enclosures at a frozen decimal scale.
 
@@ -13,6 +13,14 @@ by integer-square-root enclosures at a frozen decimal scale.
   project.  It reconstructs every gate from the serialized artifact.
 - `test_c22.py` contains regression and mutation tests, including the failure
   of separate parameter/state canonicalization.
+- `c22_t4_producer.py` certifies the all-period instability bounds and
+  convergence domain, exact primitive/repetition bookkeeping, common
+  two-letter base and projective complex domains, and orbitwise scalar trace
+  obstruction.
+- `c22_t4_independent_check.py` reconstructs those results without importing
+  the producer.
+- `test_c22_t4.py` contains domain, chronology, multiplicity, trace, and scope
+  mutation tests.
 
 ## Clean run
 
@@ -22,7 +30,7 @@ From the project root, prepare the locked environment once:
 python -m pip install -r requirements.txt
 ```
 
-Then run the complete producer/checker/test chain:
+Then run the complete T1--T3 producer/checker/test chain:
 
 ```bash
 ./code/run_c22.sh
@@ -36,6 +44,28 @@ python code/c22_independent_check.py
 pytest -q code/test_c22.py
 ```
 
+Run the T4/orbitwise-scalar-T5 chain separately with
+
+```bash
+./code/run_c22_t4.sh
+```
+
+which executes
+
+```bash
+python code/c22_t4_producer.py
+python code/c22_t4_independent_check.py
+pytest -q code/test_c22_t4.py
+```
+
+The complete released verification is therefore
+
+```bash
+./code/run_c22.sh
+./code/run_c22_t4.sh
+sha256sum -c results/ARTIFACT_HASHES.sha256
+```
+
 The producer uses the physical convention
 
 \[
@@ -47,6 +77,8 @@ frequency-averaged Hénon map or separately canonicalizes parameter and state
 necklaces.  Reversal remains equality metadata and is not quotiented out of
 the Euler orbit set.
 
-The released JSON artifacts are hash-bound by the independent checker.  A
-finite operator section is deliberately absent at T1--T3; the complex/nuclear
-operator is the next hard gate.
+The released JSON artifacts are hash-bound by their independent checkers.  A
+finite operator section is deliberately absent.  Orbitwise scalar
+denominator cancellation is exactly obstructed; aggregate scalar
+representations remain unexcluded, and the authorized graded exterior
+nuclear complex remains open.

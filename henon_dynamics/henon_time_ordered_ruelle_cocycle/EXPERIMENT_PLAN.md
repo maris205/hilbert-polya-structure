@@ -1,6 +1,7 @@
 # Claim-driven experiment and theorem plan
 
-**Status:** T1--T3 complete; T4--T5 pending
+**Status:** T1--T4 complete; T5 common base/projective domains pass and the
+orbitwise scalar denominator-cancellation gate closes; graded pivot pending
 **Primary mode:** exact theorem development plus computer-assisted proof
 **Fallback mode:** scoped obstruction paper, followed by a dynamical-form
 pivot
@@ -169,7 +170,7 @@ proof.  Degenerate parameters and points at infinity are treated explicitly.
 A failed identity is reported rather than numerically patched.  The weighted
 program may continue only with the corrected exact control.
 
-## Gate T4 -- intrinsic determinant: OPEN
+## Gate T4 -- intrinsic determinant: PASS
 
 ### Frozen candidate
 
@@ -202,7 +203,24 @@ determinants may not be conflated.
 There is a nonzero, theorem-backed convergence domain and an exact trace
 identity at the level claimed.
 
-## Gate T5 -- common complex operator: OPEN
+### Certified outcome
+
+The exact repetition law and primitive-to-fixed-point identity hold.  With
+
+\[
+E^2=129299641/14112000,
+\qquad U^2=11420060341/189778176,
+\]
+
+the product converges normally on
+
+\[
+2\varphi|z|\chi(\Re s)<1.
+\]
+
+The T4 producer/checker and fail-closed tests pass.
+
+## Gate T5 -- common complex operator: SPLIT/CLOSED FOR ORBITWISE SCALAR CANCELLATION
 
 ### Goal
 
@@ -247,9 +265,30 @@ finite-rank Ulam approximation, fitted kernel, or chronology-averaged matrix
 is accepted as a replacement.  The output becomes an operator obstruction
 and C22 closes.
 
+### Certified outcome
+
+The common base-pinning subgate passes for both letters, with minimum
+coordinate clearance \(7/5490\).  The common normalized projective disk
+\(|m|\le1/2\) and oriented principal-log sector also pass: there is one
+unstable lifted periodic point per base orbit and the local holomorphic weight
+has periodic product \(|\Lambda_u|^{-s}\).
+
+The frozen orbitwise scalar trace formula fails.  A scalar cocycle cancelling
+the primitive fixed-point denominator term by term would require
+
+\[
+|\det(I-M^2)|=|\det(I-M)|^2
+\]
+
+on the double repetition, which is impossible for an area-preserving saddle.
+This does not exclude aggregate cancellation between distinct same-period
+orbits; it does make a scalar finite-section computation irrelevant to the
+frozen orbitwise claim.  A graded exterior Ruelle--Lefschetz complex is a new
+dynamical form with a separate source lock and roadmap.
+
 ## Reproducibility and artifact contract
 
-The T1--T3 release must contain:
+The T1--T4/orbitwise-scalar-T5 release must contain:
 
 - a deterministic CLI with all parameters and conventions serialized;
 - exact-rational producer and nonimporting checker programs;
@@ -260,9 +299,11 @@ The T1--T3 release must contain:
 - an artifact hash manifest and a one-command clean rerun;
 - theorem documentation whose labels exactly match the certificate labels.
 
-All of these items are present in the T1--T3 release.  A T4--T5 continuation
-must append the complex-domain, operator, trace, and convergence artifacts;
-it may not mutate the frozen T1--T3 certificate.
+All T1--T3 items remain frozen.  The T4/orbitwise-scalar-T5 continuation adds a separate
+hash-bound producer/checker, exact complex/projective domain ledgers, and
+trace-scope mutation tests.  The graded continuation must add its own kernel,
+Banach-space, nuclear-norm, and supertrace data; it may not mutate either
+earlier certificate.
 
 The code may reuse formulas but must not import result artifacts from C19--C21
 as proof.  Those projects are source/control inputs only.
@@ -283,12 +324,16 @@ identification.  Route B remains closed.
 
 ## Work budget
 
-After the design freeze, the plan uses two large research rounds:
+The original two-round work budget is complete:
 
 1. T1--T3 formal producer/checker, certified witnesses, and the go/no-go
    decision for T4--T5;
-2. either T4--T5 plus manuscript, or an obstruction manuscript followed by a
-   new dynamical-form proposal.
+2. T4 plus common complex/projective domains, followed by the orbitwise
+   scalar-denominator T5 obstruction and a new graded dynamical-form proposal.
+
+The graded pivot receives one additional large gate round: either a common
+nuclear exterior complex with exact supertrace, or closure of the full C22
+operator lineage.
 
 At most two adversarial revision loops are allowed before release.  Repeated
 micro-optimization of a failed finite section is outside budget.

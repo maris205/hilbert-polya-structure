@@ -1,6 +1,7 @@
 # Research question and frozen scope
 
-**Stage:** T1--T3 certified; T4--T5 operator gate pending
+**Stage:** T1--T4 certified; common complex/projective T5 geometry certified;
+orbitwise geometric scalar T5 refuted; graded pivot frozen
 **Candidate ID:** HCS-C22
 **Primary object:** deterministic autonomous skew product, not a quenched
 random system
@@ -126,7 +127,15 @@ nonautonomous Hénon system or an ordered transfer cocycle.
    reversal, local-word, or global algebraic identities; and what is the
    smallest rigorously certified non-dihedral witness?
 3. Do the exact inverse branches share a complex pinning domain supporting a
-   nuclear ordered transfer operator and a proved Fredholm trace identity?
+   holomorphic instability weight?  **Yes**, on the certified base and
+   projective domains.
+4. Can a standard scalar pinning cocycle have the pure-instability trace
+   **orbit by orbit**?  **No** under the frozen
+   pinning/weighted-composition convention; the primitive and double-return
+   denominators are incompatible.  This does not exclude aggregate
+   compensation among distinct same-period orbits.  Can a graded exterior
+   complex realize the required supertrace?  This is the authorized open
+   continuation.
 
 ## In scope
 
@@ -135,8 +144,9 @@ nonautonomous Hénon system or an ordered transfer cocycle.
 - exact rational arithmetic, interval certificates, and independent checkers;
 - cyclic/reversal controls and complete aggregation at the tested period;
 - intrinsic instability, signed flat trace, and bare-count controls;
-- a common holomorphic branch space and nuclearity/trace formula, if it
-  exists;
+- the certified common holomorphic base/projective branch spaces and
+  instability logarithm;
+- a graded exterior nuclearity/supertrace formula, if it exists;
 - an explicit negative theorem if the operator gate fails.
 
 ## Out of scope
@@ -152,10 +162,12 @@ nonautonomous Hénon system or an ordered transfer cocycle.
 
 ## Predeclared interpretation boundary
 
-A successful T1--T5 package would be a rigorous dynamical-systems result and
-an operator-theoretic candidate mechanism.  It would not establish an
-arithmetic spectral correspondence.  Without a target divisor and a natural
-self-adjoint spectral realization, formal Route-A labels remain at most
+The achieved T1--T4/orbitwise-scalar-T5 package is a rigorous
+dynamical-systems and operator-obstruction result.  A successful graded
+continuation would add an
+operator-theoretic candidate mechanism, but would not establish an arithmetic
+spectral correspondence.  Without a target divisor and a natural self-adjoint
+spectral realization, formal Route-A labels remain at most
 
 \[
 (\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},

@@ -1,15 +1,17 @@
 # HCS-C22: chronology separation and signed-trace collapse in a two-letter Hénon skew product
 
 **Date:** 2026-08-09
-**Status:** T1--T3 complete and independently verified; T4--T5 operator gate next
-**Candidate:** HCS-C22, promoted from HCS-C01
+**Status:** T1--T4 complete; T5 base/projective domains pass; orbitwise
+geometric scalar gate closed; graded pivot source-locked
+**Candidate:** HCS-C22, promoted from HCS-C01; next form HCS-C22G
 **Parent candidates:** HCS-C01 and `henon_h6_instability_roof_v1`
 **Evidence ceiling:** exact theorem plus computer-assisted interval theorem;
 Route-A exploratory
 
 ## Certified outcome
 
-This round produced a split positive/negative result.
+The completed C22 program produced five positive items and two exact
+collapse/obstruction layers.
 
 1. The two rational Hénon letters share one exactly certified local four-box
    survivor.  Every admissible bi-infinite joint parameter--state itinerary
@@ -25,15 +27,34 @@ This round produced a split positive/negative result.
 3. With scheme multiplicity and the stated local-residue convention, the
    unit-numerator all-complex signed construction collapses to one, while the
    formal bare scheme zeta is \((1-4z)^{-1}\).
+4. The pure instability Euler determinant has the exact repetition law,
+   fixed-point logarithmic trace identity, and an explicit nonzero normal-
+   convergence domain.  Its certified multiplier bases are
+   \(E=3.0269439\ldots\) and \(U=7.7573085\ldots\); at \(s=1\) the theorem
+   guarantees \(|z|<0.9353771\ldots\).
+5. Both parameter letters share the same strict complex pinning disks, with
+   minimum coordinate clearance \(7/5490\).
+6. The normalized projective lift shares the disk \(|m|\le1/2\), maps it
+   into \(|m|<125440/466211\), and admits one common right-half-plane
+   logarithm for the oriented instability factor.  Each periodic base orbit
+   has exactly one lifted unstable orbit in this domain.
+7. A standard scalar pinning cocycle cannot reproduce the pure instability
+   trace **orbit by orbit**: cancelling its fixed-point denominator on a
+   primitive orbit is incompatible with its double repetition because
+   \(|\det(I-M^2)|\ne|\det(I-M)|^2\) for every area-preserving saddle.
 
-Thus the only live continuation is to test whether the certified **local
-absolute/instability cycle data** admit a convergent determinant and a
-trace-compatible nuclear realization.  The unit-numerator global signed
-route is closed.
+Thus the local instability determinant itself is now rigorous in its
+pressure-side domain, but the frozen orbitwise geometric scalar construction
+is closed.  This does not exclude an aggregate scalar trace identity based
+on cancellations among different same-period orbits.  The authorized
+large-step continuation is a genuinely different projective,
+exterior-degree Ruelle--Lefschetz complex.  No scalar finite section or
+longer orbit catalogue is authorized.
 
-The main proofs and exact numbers are in
-[`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md) and
-[`results/RESULTS.md`](results/RESULTS.md).
+The T1--T3 proofs are in [`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md).
+The T4 theorem, common complex/projective domains, and orbitwise scalar T5 obstruction
+are in [`T4_T5_DERIVATION.md`](T4_T5_DERIVATION.md).  The next-form gate is
+frozen in [`GRADED_PIVOT_ROADMAP.md`](GRADED_PIVOT_ROADMAP.md).
 
 ## Frozen object
 
@@ -107,13 +128,15 @@ The project advances only through the following large gates.
 - **T3 -- collapse controls:** prove the bare and signed/global trace
   identities that are independent of protocol chronology.  These controls
   must be removed before interpreting any signal.
-- **T4 -- intrinsic weighted determinant:** define the instability-weighted
+- **T4 -- intrinsic weighted determinant: PASS.** Define the instability-weighted
   cycle expansion with a fixed repetition rule and show convergence in a
   nonzero domain.
-- **T5 -- analytic operator gate:** construct a common complex pinning domain
+- **T5 -- analytic operator gate: SPLIT.** Construct a common complex pinning domain
   and a nuclear/trace-class ordered branch operator with a proved trace
-  formula.  If this fails, C22 becomes a scoped obstruction paper and the
-  search changes dynamical form.
+  formula.  The common base and projective/log domains pass.  The ordinary
+  orbitwise scalar denominator cancellation fails by an exact repetition
+  obstruction.  C22 is now a scoped theorem/obstruction project and the
+  authorized search has changed to a graded operator complex.
 
 No numerical Ulam matrix, finite-memory truncation, or visually stable root
 is allowed to substitute for T5.
@@ -185,34 +208,46 @@ Route B is not authorized by this project.
   adversarial review.
 - [`DEVILS_ADVOCATE_CHECKPOINT2.md`](DEVILS_ADVOCATE_CHECKPOINT2.md):
   post-certificate adversarial decision.
+- [`DEVILS_ADVOCATE_CHECKPOINT3.md`](DEVILS_ADVOCATE_CHECKPOINT3.md):
+  post-T4/orbitwise-scalar-T5 closure and final graded kill rule.
 - [`notes/PILOT_LEDGER.md`](notes/PILOT_LEDGER.md): exact and numerical pilot
   evidence with explicit status labels.
 - [`DERIVATION_PACKAGE.md`](DERIVATION_PACKAGE.md): T1--T3 theorem proofs.
+- [`T4_T5_DERIVATION.md`](T4_T5_DERIVATION.md): T4 convergence theorem,
+  complex/projective certificates, and orbitwise scalar T5 no-go theorem.
+- [`GRADED_PIVOT_ROADMAP.md`](GRADED_PIVOT_ROADMAP.md): the only authorized
+  next dynamical form and its nuclear/supertrace kill gates.
 - [`RESEARCH_SYNTHESIS.md`](RESEARCH_SYNTHESIS.md): interpretation and pivot
   decision.
 - [`evaluations/route_a/hcs_c22/20260809T050207Z.yaml`](evaluations/route_a/hcs_c22/20260809T050207Z.yaml):
   formal conservative Route-A record.
 - [`REPOSITORY_UPDATE.md`](REPOSITORY_UPDATE.md): source commit, release tag,
   and verification handoff.
-- [`results/RESULTS.md`](results/RESULTS.md): compact numerical statement and
-  artifact map.
+- [`results/RESULTS.md`](results/RESULTS.md): compact T1--T3 statement.
+- [`results/T4_T5_RESULTS.md`](results/T4_T5_RESULTS.md): compact T4/T5 gate
+  result and artifact map.
 - [`code/README.md`](code/README.md), [`results/README.md`](results/README.md),
   and [`paper/README.md`](paper/README.md): implementation, evidence, and
   manuscript contracts.
 
 ## Stop/pivot rule
 
-The project does not spend a long round polishing finite sections.  It stops
-or pivots as soon as one of the following is certified:
+The orbitwise geometric scalar project has stopped at its predeclared T5 kill
+rule.
+The graded pivot does not spend a long round polishing finite sections.  It
+stops as soon as one of the following is certified:
 
 - no common real survivor for the frozen parameter interval;
 - no non-dihedral difference after complete local orbit aggregation;
-- the intrinsic instability weight is cohomologous to a finite-memory
-  potential that destroys the proposed novelty;
-- no common complex branch domain or no trace-compatible nuclear operator;
+- no common lifted branch domain or no trace-compatible graded nuclear
+  operator;
+- an extra stable projective fixed point enters the certified slope domain;
+- the alternating construction is only a routine, non-effective
+  specialization of the primary literature;
 - the only surviving claim is already a standard consequence of an existing
   nonautonomous horseshoe theorem.
 
-The preferred negative paper would state the exact obstruction and identify
-which chronological information is necessarily lost.  It would then close
-C22 rather than silently changing its determinant.
+The present scalar no-go states its exact orbitwise scope and leaves
+aggregate scalar representations unexcluded.  Any graded failure will close
+the authorized C22G operator lineage rather than silently changing its
+determinant or returning to Ulam/cycle-section numerics.

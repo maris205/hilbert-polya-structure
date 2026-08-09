@@ -445,11 +445,46 @@ The global all-complex control collapses.  For every nonzero protocol, the
 cyclic fixed scheme has length \(2^n\); the unit-numerator signed residue
 determinant is one and the formal bare scheme zeta is \((1-4z)^{-1}\).
 Ordinary pointwise flat equality additionally requires all-repetition
-nondegeneracy.  No all-period local instability determinant, target divisor,
-arithmetic primitive mechanism, or Hilbert--Pólya operator has been
-constructed.
+nondegeneracy.
 
-T4 now precedes T5: establish the repetition law and a nonzero convergence
-domain before attempting a common complex nuclear operator.  The formal
-evaluation is
+The continuation now proves the exact instability repetition law,
+fixed-point log-trace identity, and normal convergence on
+
+\[
+2\varphi|z|\chi(\Re s)<1.
+\]
+
+Both letters share strict complex base-pinning and unstable-projective
+domains; the oriented instability factor has one common logarithm branch and
+one lifted unstable periodic point per base orbit.  Orbitwise scalar
+denominator cancellation is nevertheless refuted: its primitive fixed-point
+correction is incompatible with scalar multiplication under a double
+repetition.  Aggregate compensation among distinct same-period orbits is not
+excluded.  Thus HCS-C22 is complete under its frozen termwise convention as a
+scoped theorem/obstruction package.  No target divisor, arithmetic primitive
+mechanism, continuation across the pressure boundary, or Hilbert--Pólya
+operator has been constructed.
+
+The original formal evaluation is
 [`20260809T050207Z.yaml`](../henon_time_ordered_ruelle_cocycle/evaluations/route_a/hcs_c22/20260809T050207Z.yaml).
+
+## HCS-C22G source lock (2026-08-09)
+
+Candidate **HCS-C22G** changes operator form to the projectivized two-letter
+Hénon skew product with four exterior degrees.  Its proposed supertrace uses
+
+\[
+\sum_{k=0}^3(-1)^k\operatorname{tr}(\wedge^kD\widetilde F^n)
+=\det(I-D\widetilde F^n)
+\]
+
+to cancel the flat fixed-point denominator.  The base/projective geometry,
+unique unstable lift, and holomorphic periodic weight are inherited from an
+exact certificate.  The nuclear branch spaces and exact supertrace remain
+open.
+
+Status: **SOURCE_LOCKED; ONE LARGE KILL ROUND AUTHORIZED**.  Promotion
+requires a common quantitative nuclear factorization and chronological
+low-period/general trace theorem.  General pinning, Grassmann lifting, and
+exterior cancellation are prior art.  Failure closes the full C22 operator
+lineage; finite sections and Ulam matrices are not fallback evidence.

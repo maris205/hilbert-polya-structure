@@ -5,6 +5,12 @@
 nonimporting checker, and complete period-seven/eight sector artifacts
 **Decision:** PASS exactly one T4--T5 operator kill round
 
+**Resolution:** that round is complete.  T4 and the common base/projective
+domains pass; the frozen orbitwise scalar denominator-cancellation gate
+fails by the exact theorem in `T4_T5_DERIVATION.md`.  The project has
+therefore followed this checkpoint's instruction and changed to the graded
+operator form in `GRADED_PIVOT_ROADMAP.md`.
+
 ## Strongest surviving result
 
 The result is not merely that two noncommuting Hénon products have different

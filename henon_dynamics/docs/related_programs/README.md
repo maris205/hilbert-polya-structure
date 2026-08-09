@@ -472,16 +472,24 @@ controls.
   order memory modulo forced symmetry rather than a time arrow;
 - every nonzero protocol has all-complex cyclic scheme length \(2^n\); and
 - the unit-numerator signed residue determinant is one, while the formal bare
-  global scheme zeta is \((1-4z)^{-1}\).
+  global scheme zeta is \((1-4z)^{-1}\);
+- the intrinsic instability Euler product has an exact repetition/log-trace
+  identity and converges normally without zeros on
+  \(2\varphi|z|\chi(\Re s)<1\); and
+- common base/projective/logarithm domains are certified, while orbitwise
+  scalar denominator cancellation is obstructed by primitive/double
+  repetition.  This last no-go does not exclude compensation among distinct
+  same-period orbits in an unmarked aggregate scalar trace.
 
 ### Relation to HP search
 
 This is a rigorous dynamical split result, not a Hilbert--Pólya
 construction.  It preserves genuine chronological dynamics and shows that
 local real instability can retain order even when the simplest global
-all-complex signed residue object collapses.  No convergent all-period local
-instability determinant, arithmetic divisor, or self-adjoint operator has
-yet been constructed.  Its formal status is
+all-complex signed residue object collapses.  The all-period local
+instability determinant is now rigorous only in its explicit pressure-side
+domain; no continuation across that boundary, arithmetic divisor, or
+self-adjoint operator has been constructed.  Its formal status is
 **(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** and
 `ROUTE_A_EXPLORATORY`.
 

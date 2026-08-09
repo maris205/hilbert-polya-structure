@@ -1,5 +1,9 @@
 # HCS-C22 T1--T3 results
 
+> This file is the frozen T1--T3 result record.  T4 and the orbitwise scalar-T5 gate are
+> completed in [`T4_T5_RESULTS.md`](T4_T5_RESULTS.md); the `OPEN` rows below
+> describe only the earlier artifact's stage.
+
 **Verification status:** exact-rational producer PASS; nonimporting checker
 PASS; 11/11 regression tests PASS
 
