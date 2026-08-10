@@ -45,6 +45,7 @@ not receive a manuscript that would overstate the mathematics.
 | [`polar_boundary_trace`](projects/polar_boundary_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical local theorem | Incorporated into the LOG-0001 manuscript |
 | [`coprime_0001_countable_trace`](projects/coprime_0001_countable_trace/README.md) | `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)` | `ANALYTIC_REVIEW` / `GO_WITH_LIMITATIONS` | Countable trace-class and exact cycle-ledger manuscript; compiled PDF |
 | [`coprime_0001_scalar_boundary`](projects/coprime_0001_scalar_boundary/README.md) | `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_CONTROLLED_CONTINUATION, A4_FAIL)` | `STOP_SCOPED` | Punctured scalar continuation and endpoint zero-accumulation obstruction; compiled PDF |
+| [`th_0001_phase_caustic_real`](projects/th_0001_phase_caustic_real/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_NATURAL_QUANTIZATION)`; Riemann target `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `ROUTE_A_EXPLORATORY` / `GO_WITH_LIMITATIONS` | Exact on-shell caustic incidence and rank-one witness; compiled PDF |
 
 The lower-growth stage proves `D_pol'(2)>0.0213` from the complete signed
 trace ledger, hence `M_D(R)>0.0213*(R-2)` for `R>2`, and shows that the same
@@ -70,6 +71,8 @@ pivot. Target-zero comparison and Route B remain closed.
 - HP-Dynamics COPRIME-0001 countable-trace source commit: `a1d4550`
 - HP-Dynamics COPRIME-0001 scalar-boundary source commit: `c7d50f9`
 - HP-Dynamics scalar-boundary documentation checkpoint: `686c2bc`
+- HP-Dynamics TH-0001 on-shell caustic source commit: `1b8cc8e`
+- TH-0001 mirror stage: `projects/th_0001_phase_caustic_real/`
 
 This README is updated whenever a stage changes state or a new paper
 subproject is opened.

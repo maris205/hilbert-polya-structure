@@ -1,0 +1,25 @@
+\section{Reproducibility}
+
+All identities in this stage use exact SymPy rational polynomial arithmetic.
+The generator is copied byte-for-byte under `experiments/` and `src/`; the
+test suite checks the source-lock and parent-evaluation hashes, rebuilds the
+certificate in a temporary directory, and compares it byte-for-byte with the
+canonical JSON artifact.  No training, validation, or test target data exist.
+
+From the project root, the complete check is:
+\begin{verbatim}
+PYTHONPATH=. python3 experiments/th_0001_phase_caustic_real.py --quiet \
+  --output artifacts/th_0001/phase_caustic_real_audit.json
+PYTHONPATH=. python3 -m unittest -v tests/test_th_0001_phase_caustic_real.py
+sha256sum -c results/ARTIFACT_HASHES.sha256
+\end{verbatim}
+
+The paper itself is built by two `pdflatex` passes from `paper/`.  The hash
+manifest records the source lock, Route-A evaluation, generator, formal
+result, test, artifact, and manuscript source/PDF.  Rebuildable auxiliary
+LaTeX files are ignored by the mirror repository.
+
+The next smallest verifiable task is not another computation on this object.
+Reopening would require a new source lock for a multi-chart phase/Maslov
+transition ledger; otherwise the breadth-first search should pivot to a new
+candidate.
