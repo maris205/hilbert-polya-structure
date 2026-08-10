@@ -208,4 +208,7 @@ checker, executes mutation tests, and refreshes the artifact hash manifest.
 - [`code/`](code/) -- independent exact implementations and runner;
 - [`results/`](results/) -- certificates, tests, validation, and hashes;
 - [`route_a_evaluation.yaml`](route_a_evaluation.yaml) -- formal Route-A
-  decision.
+  decision;
+- [`evaluations/route_a/HCS-C26/20260810T044618Z.yaml`](evaluations/route_a/HCS-C26/20260810T044618Z.yaml)
+  -- immutable Route-A evaluation record tied to implementation commit
+  `6d8c40eed90fc6bd0cf5349069756c0045fb11bd`.

@@ -67,6 +67,10 @@ reusable positive infrastructure.  They do not establish a self-adjoint
 Hilbert--Polya operator, a prime law, a functional equation, or a Riemann
 divisor.
 
+The immutable evaluation record is
+`evaluations/route_a/HCS-C26/20260810T044618Z.yaml`; it evaluates exact
+implementation commit `6d8c40eed90fc6bd0cf5349069756c0045fb11bd`.
+
 ## Authorized next large door
 
 The next experiment should reduce the exact chronological genus-two cocycle

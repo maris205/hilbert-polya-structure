@@ -222,6 +222,7 @@ representations over odd finite fields, rather than trying more base norms.
 - [C26 exact certificate](agy_holomorphic_slice_obstruction/results/c26_certificate.json)
 - [C26 independent check](agy_holomorphic_slice_obstruction/results/c26_independent_check.json)
 - [C26 compiled note](agy_holomorphic_slice_obstruction/paper/main.pdf)
+- [C26 Route-A record](agy_holomorphic_slice_obstruction/evaluations/route_a/HCS-C26/20260810T044618Z.yaml)
 
 Reproduce the round with:
 

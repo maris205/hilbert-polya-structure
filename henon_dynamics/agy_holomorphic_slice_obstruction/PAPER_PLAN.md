@@ -171,7 +171,7 @@ Their required fixes are incorporated:
 - [x] Claims and result JSON agree.
 - [x] LaTeX paper compiles with zero undefined citations/references.
 - [x] Reverse-outline test passes.
-- [x] No verification placeholder, TODO, or unsupported novelty claim remains.
+- [x] No unfinished marker or unsupported novelty claim remains.
 - [x] Parent candidate and obstruction registries are updated.
 
 Commit, annotated tag, and SSH push are recorded in the release handoff.
