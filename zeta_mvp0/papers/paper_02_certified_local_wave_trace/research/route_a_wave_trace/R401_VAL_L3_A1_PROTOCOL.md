@@ -100,6 +100,15 @@ implementation-design review, static evaluator test, branch runtime, and
 S0-compatibility test are direct inputs rather than unbound helpers.  These
 candidate counts create neither a main freeze nor dispatch authority.
 
+Role 19 is both the machine-capture implementation and the fixed-destination
+role-10 publisher.  Therefore a publishable machine candidate must be
+captured only after stable current live on-disk role-19 source bytes exist and
+must bind that exact source digest.  Role 24 independently verifies the
+temporary candidate and, after any separately authorized publication,
+independently reopens role 10.
+The main freeze remains downstream role 54 rather than a member of, or an
+input to, this machine-publication edge.
+
 ## 4. Exact model and local domains
 
 The evaluator and every scientific checker reconstruct outward from
@@ -327,6 +336,7 @@ and manuscripts.
 protocol_status = PROSPECTIVE_NON_LICENSING
 machine_capture_temp_only_implemented = true
 machine_verify_only_implemented = true
+machine_publisher_implemented = true
 machine_freeze_exists = false
 main_freeze_exists = false
 independent_prefreeze_accept = false
@@ -375,10 +385,11 @@ direct-child `/tmp` output, and `transfer_evidence` proving byte equality with
 the persistent role-17 binary without overwriting or changing that binary's
 identity.  The recipe uses `@STAGING_BINARY@` instead of a canonical target.
 Role 19 alone owns the fresh build and records `shell_used=false`; the role-24
-independent verifier performs no write and spawns no subprocess.  The current
-capture and verify-only CLIs operate only on a temporary candidate and grant
-no role-10 publication, role-54 construction, production authorization, or
-scientific status.
+independent verifier performs no write and spawns no subprocess.  The capture
+and verify-only CLIs grant no role-10 publication, role-54 construction,
+production authorization, or scientific status.  A distinct role-19
+fixed-destination publisher is now implemented but has not been executed in
+the repository.  Its existence likewise grants no scientific authority.
 
 The exact static timeout is `1800000` ms.  Exact branch timeout and grace
 fields are `600000`, `2000`, and `1000` ms.  The formal branch runtime and
@@ -387,3 +398,44 @@ independent checker now preserve those exact integer fields, so
 not execution authority: all production/scientific execution remains
 unconditionally rejected pending the accepted freeze chain and a separate
 execution decision.
+
+## 14. Role-10 publisher boundary
+
+The machine-publication mode is exact-exclusive and accepts only:
+
+```text
+--publish-machine-freeze
+--candidate ABSOLUTE_TMP_CANDIDATE_PATH
+--expected-sha256 EXACT_64_LOWERHEX
+--authority-root EXACT_PAPER02_ROOT
+```
+
+It accepts no destination flag.  Role 19 derives exactly
+`research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json`, requires it
+to be absent even if a pre-existing file has identical bytes, repeats the
+complete live machine and source-candidate replay immediately before the
+publication edge, writes a new same-parent staging inode, flushes and reopens
+it, and uses `renameat2(RENAME_NOREPLACE)`.  It then flushes the pinned parent
+directory and reopens the canonical inode for exact
+raw/hash/size/mode/link/inode replay.  The source candidate remains unchanged
+at its supplied path.
+
+Candidate, staging, and canonical replay use the same exact bounded file
+reader.  Before open it performs a no-follow stat through the pinned parent
+and requires regular type, `0644`, one link, and integer byte size in
+`1..1048576`; only then may `O_NONBLOCK|O_NOFOLLOW` open and full identity/raw
+replay proceed.  This prevents a caller-controlled device, FIFO, empty,
+oversized, or sparse candidate from entering an unbounded read.
+
+Role 19 neither imports nor runs role 24.  Its success is the transient
+non-scientific status
+`PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY` under
+`ROLE19_PUBLICATION_ONLY`; independent verification is false in that receipt.
+The operator must subsequently invoke role 24 separately on the canonical
+path.  A postpublication local or independent failure never authorizes
+rollback, deletion, repair, overwrite, or idempotent success; it leaves the
+write-once evidence in place and blocks all downstream work.
+
+No publication command has been run for this implementation increment.
+Consequently role 10 and role 54 remain absent, all result statuses remain
+null, and every scientific dispatcher remains rejected.

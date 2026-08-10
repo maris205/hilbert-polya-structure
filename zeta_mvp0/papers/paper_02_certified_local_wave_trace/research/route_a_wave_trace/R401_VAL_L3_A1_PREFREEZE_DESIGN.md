@@ -162,11 +162,12 @@ research/route_a_wave_trace/R401_VAL_L3_A1_FREEZE.json
 ```
 
 `R401_VAL_L3_A1_MACHINE_FREEZE.json` is candidate input role 10.  It is not
-created by the current temp-only capture increment.  Only after all 53 ordered
-input roles have their final bytes may `R401_VAL_L3_A1_FREEZE.json` be created
-as downstream release role 54; it contains no self-hash.  This pre-freeze
-design and its tracker are planning inputs only; the later protocol must state
-explicitly whether it binds them.
+created by the temp-only capture increment or by the current publisher-
+implementation increment: the publisher exists but has not been run.  Only
+after all 53 ordered input roles have their final bytes may
+`R401_VAL_L3_A1_FREEZE.json` be created as downstream release role 54; it
+contains no self-hash.  This pre-freeze design and its tracker are planning
+inputs only; the later protocol must state explicitly whether it binds them.
 
 ### 4.2 Evaluators, schedulers, checkers, and release builder
 
@@ -645,7 +646,13 @@ exact L1 plan + CAPD dependency lock
 final L3-A1 protocol/scheduler/checker/release contracts
 final evaluators/scheduler/checkers/release builder/tests
                  |
-                 +--> role-10 machine freeze (Python/Arb + CAPD + persistent binary)
+                 +--> stable live on-disk role-19 source bytes
+                 |          |
+                 |          v
+                 |    temp candidate + role-24 preverification
+                 |          |
+                 |          v
+                 +--> role-10 machine freeze + role-24 postverification
                  +--> exact S0-to-A1 compatibility replay
                  +--> pre-freeze test record
                               |
@@ -685,6 +692,15 @@ on the same captured bytes.  Original lexical paths are checked for symlink
 components before resolution.  Publication must link or rename a pinned open
 inode and then verify the published inode and exact bytes, following the
 accepted L2-A1 release discipline.
+
+The numbered 53-role array is an authority order, not the construction
+topology shown above.  Role 10 binds the stable current live on-disk role-19
+capture/publisher source hash,
+but role 19 contains no role-10 hash, so no cycle is present.  After role 10
+is published, roles 10 and 19 are immutable; final role 24 performs the
+canonical read-only replay and then also remains immutable.  The main freeze
+is not “last among” those inputs: it is external downstream role 54 and
+follows all 53 final input bytes.
 
 ## 10. Candidate scientific and operational budgets
 
@@ -774,6 +790,7 @@ scientific status.  There is no global scientific wall-clock budget.
 | resource pause | memory and disk thresholds at barrier boundaries | admission pauses without scientific failure |
 | compatibility | all six accepted S0 cells replayed through prospective schema adapters | exact S0 facts and null final value preserved |
 | machine capture/verify | temp-path exclusivity, fresh-build staging, no-overwrite persistent binding, compiler-subobject mutations, path/link/TOCTOU attacks, and read-only independent replay | only one compact temporary candidate passes; no role-10 publication or evaluator dispatch |
+| machine publication | fixed role-10 destination, expected-hash pin, `1..1048576` pre-open type/size cap, stale role-19 binding, candidate/namespace TOCTOU, same-parent staging, explicit mode, `renameat2(RENAME_NOREPLACE)`, identical-existing refusal, crash residue, post-rename ambiguity, source preservation, and exact receipt | publisher implementation passes only in isolated temporary project fixtures; repository role 10 remains absent; role 24 must replay canonical bytes separately |
 | synthetic E2E | mocked 102-cell static and 102-cell branch archives through composite and release | exact DAG closes with no evaluator dispatch |
 | release | write-once, verify-only, same-byte snapshot, TOCTOU, self-hash, extra role, altered report status | only one exact acyclic release is accepted |
 
@@ -791,9 +808,11 @@ All gates below must close before the first evaluator dispatch for any of the
 2. **Implementation freeze candidate:** final cell evaluators, transactional
    scheduler, three no-import checkers, S0 adapter, release builder, and all
    focused tests.
-3. **Persistent environment:** clean CAPD checkout and build, persistent L3
-   branch binary, Python/Arb dependency hashes, runtime-library hashes, and
-   live machine/storage admission record.
+3. **Persistent environment and role 10:** clean CAPD checkout and build,
+   persistent L3 branch binary, Python/Arb dependency hashes, runtime-library
+   hashes, and live machine/storage admission record; then a fresh candidate
+   bound to stable role-19 source bytes, role-24 temporary replay, one
+   separately authorized no-replace publication, and role-24 canonical replay.
 4. **Non-held-out validation:** complete mocked 102-cell end-to-end run,
    adversarial fault suite, and read-only six-cell S0 compatibility replay.
 5. **Resource admission:** representative-only memory calibration, candidate
@@ -923,11 +942,23 @@ The temporary capture/verify surface writes no canonical role-10 path, no main
 freeze, and no result.  A successful verify-only line is non-authoritative and
 cannot promote the candidate.
 
+Role 19 now also implements a separate exact-exclusive publisher.  It accepts
+one temporary candidate and expected digest but no destination override,
+derives the fixed role-10 path, uses an explicit-`0644` same-parent staging
+inode and `renameat2(RENAME_NOREPLACE)`, and refuses every pre-existing
+canonical entry, including identical bytes.  Its success remains
+`PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY`; role 24 must be invoked
+separately after publication.  Role 19 does not call role 24 or an evaluator.
+The publisher has not been executed in the repository, so role 10 remains
+absent.
+
 The remaining smallest blockers are now explicit:
 
-1. under separate authorization, publish byte-identical independently
-   verified candidate bytes once as canonical input role 10; the current
-   increment does not do so;
+1. after final publisher bytes are stable, capture a fresh role-19-bound
+   candidate, verify it through role 24, and under separate authorization
+   publish the expected byte image once as canonical input role 10; then run
+   role 24 separately on the canonical path; the current increment implements
+   but does not execute this operation;
 2. complete the remaining canonical inputs, freeze final code/test/document
    hashes, and obtain the sole strict-ASCII independent pre-freeze ACCEPT
    review; only after all 53 inputs are final may role 54 be constructed; and

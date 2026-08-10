@@ -387,3 +387,20 @@ including roles 11--13; obtain the sole exact independent line
 `Verdict: ACCEPT_FOR_FREEZE`; and only then generate the main freeze as role
 54.  Initialize-only and every scientific dispatch remain prohibited until
 their own later authorization gates close.
+
+## Subsequent publisher-ordering note
+
+The later
+`A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md` implements, but does not run, a
+fixed-destination role-19 publisher.  Because the machine object binds the
+exact role-19 capture-tool digest, adding that publisher changes role-19 bytes
+and makes the temporary candidate cited above historical rather than
+publishable.  The role numbering is not a construction topology: final role
+19 must precede fresh capture, role-24 temporary verification, role-10
+publication, and role-24 canonical verification.  Role 19 contains no role-10
+hash, so this ordering introduces no cycle.
+
+No canonical role 10 was created by either implementation increment.  The
+main freeze is not among the 53 inputs; it remains downstream role 54 and may
+be generated only after all 53 inputs, including roles 10--13, have stable
+final bytes and the required independent review.

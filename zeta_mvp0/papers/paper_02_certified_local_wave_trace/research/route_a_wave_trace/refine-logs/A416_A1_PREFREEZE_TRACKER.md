@@ -4,7 +4,7 @@ Updated: 2026-08-10 UTC
 
 Design baseline: `529697ce3feccf11d16f739d0e07d27a2d1c4d16`
 
-Implementation baseline before this working-tree increment: `e010200`
+Implementation baseline before this working-tree increment: `b1f4a36`
 
 Authority: **engineering implementation increment only / NON_LICENSING / no
 machine freeze / no main freeze / no dispatch / no canonical results**
@@ -19,6 +19,13 @@ exist.  Role 19 now also has a temp-only capture candidate and role 24 has a
 zero-write, zero-subprocess independent verify-only path, but no canonical
 role-10 machine freeze, role-54 main freeze, or independent pre-freeze
 scientific authorization exists.
+
+Role 19 now additionally implements a fixed-destination, same-parent,
+atomic-no-replace role-10 publisher.  This increment records and tests that
+engineering surface only.  It has not executed the publisher, has not reused
+the historical candidate bound to earlier role-19 bytes, and has not created
+role 10.  A fresh candidate and separate role-24 verification are required
+after the publisher bytes stabilize.
 
 The temp-capture and independent-verifier evidence is stable after the
 subreaper/group-wait repair: the two focused modules pass `201/201`, the
@@ -46,12 +53,13 @@ files.
 | A1-I08 | S0-to-A1 compatibility replay | COMPLETE / NON_LICENSING_COMPATIBILITY | exact six accepted cells, 26 branch roles, 18 composite bindings, and nine sealed controls replay read-only; 31 focused tests pass | canonical replay object intentionally absent; no S0 bytes or authority changed |
 | A1-I09 | release-provenance builder and independent machine validator | COMPLETE FOR MOCK + EXACT FORMAL VALIDATION CANDIDATE / NON_LICENSING | mock 53-input release replay plus producer-independent exact machine validation of live Python/Conda/Arb, CAPD/compiler/ELF/runtime, embedded resource bytes, admission arithmetic, and filesystem bindings | no canonical machine receipt or release; formal publication remains fail-closed |
 | A1-I10 | deterministic temp-only machine capture + independent verify-only CLI | COMPLETE AS NON-AUTHORITATIVE ENGINEERING SURFACE / CANONICAL PROHIBITED / NON_LICENSING | role 19 can capture a compact candidate at a new `/tmp` path, perform one owned fresh argv-list build with `shell=false`, and prove no-overwrite equality to role 17; role 24 replays exact bytes and live bindings with zero writes and zero subprocesses | no canonical role 10, role 54, run config, result, publication, promotion, or scientific dispatch |
+| A1-I11 | fixed-destination role-10 write-once publisher | COMPLETE AS IMPLEMENTATION SURFACE / NOT EXECUTED / NON_LICENSING | role 19 accepts a `1..1048576`-byte temp candidate plus expected digest, pre-stats exact regular/`0644`/one-link type before nonblocking no-follow open, repeats complete live/capture-tool replay, and uses same-parent staging plus `renameat2(RENAME_NOREPLACE)` at the fixed role-10 path; source bytes remain unchanged; role 24 is separate | no destination override, unbounded/device/FIFO input, identical-existing idempotence, role-24 subprocess, rollback, role 54, result, or dispatch; canonical role 10 remains absent |
 | A1-T01 | full mocked 204-cell E2E | COMPLETE / MOCK_ONLY_NON_LICENSING | 102 static cells, static checker/postcheck, 102 branch cells, branch checker/postcheck, composite controls/checker/postcheck, and exact 68-role mock release close in a temporary project | no canonical result root or scientific artifact was published |
 | A1-T02 | crash/resume/quarantine suite | COMPLETE FOR MOCK ENGINEERING SCOPE | static/branch transaction boundaries, signal/lock faults, partial-to-full resume, whole-generation quarantine, post-release scheduler refusal, and write-once release recovery have adversarial coverage | formal production recovery remains subject to a future freeze and machine binding |
 | A1-T03 | strict schema/path/TOCTOU suite | COMPLETE FOR CURRENT MOCK SURFACES | static, branch, composite, and release paths reject duplicate/type/nonfinite/path/link/inode/snapshot, coherent rebind, nested-authority, and claim-boundary mutations | this does not validate absent formal production artifacts |
 | A1-R01 | public-only peak-RSS calibrations | COMPLETE AS TEMPORARY RESOURCE EVIDENCE / NON_LICENSING | final static payload `8afc8a0a...22de92`: 14/14 exact 26-string runs and eight-worker inequality `33960800256 < 51539607552`; branch payload `2cd38931...af99a`: 6/6 exact 12-string runs and persistent-binary transfer | public `S000/S025/S050 x 128/256` only; final static payload remains in `/tmp`; no canonical calibration object |
 | A1-P01 | formal L3-A1 protocol/contracts | COMPLETE AS EXACT IMPLEMENTATION CONTRACT SET / NON_LICENSING | exact machine/main/run/cell/aggregate/checker/release schemas, serializer definitions, candidate 53-input/68-release role maps, and fail-closed execution policy exist | not a freeze review and not dispatch authority; do not edit S0-bound protocol |
-| A1-F01 | canonical L3 machine input | PARTIAL / CANONICAL ROLE 10 PROHIBITED | under separate authorization, publish byte-identical independently verified candidate bytes once as role 10 and complete the final input audit | temp capture/verify exists, but no canonical machine object exists; old L2 freeze is template only |
+| A1-F01 | canonical L3 machine input | PARTIAL / PUBLISHER IMPLEMENTED / CANONICAL ROLE 10 ABSENT | after stable current live on-disk role-19 source bytes, capture and role-24-verify a fresh candidate; under separate authorization publish the expected bytes once, then separately role-24-verify the canonical inode and complete the final input audit | publisher implementation is not publication; the preceding candidate binds stale role-19 bytes; old L2 freeze is template only |
 | A1-P02 | independent pre-freeze review | TODO / BLOCKED | sole exact line `Verdict: ACCEPT_FOR_FREEZE` | reviewer must be independent of final producer/checker authorship |
 | A1-F02 | main L3-A1 freeze | PROHIBITED | all 53 ordered inputs are final; main freeze is then generated as downstream role 54 | current repository has no dispatch authority |
 | A1-L00 | initialize-only run config | COMPLETE AS TEMPORARY IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | a disposable authority fixture passes the exact ordered 53-role same-byte handshake and atomically publishes one nonresumable, nonpromotable `run_config.json` outside every canonical namespace | not the future production run config; canonical initialize-only remains prohibited until the deterministic machine freeze and independent review chain exist |
@@ -89,10 +97,12 @@ None of these values is frozen.
   exists only as an engineering implementation and temporary test replay.  It
   is not a formal scientific generation and does not license one.
 - Exact schemas, the persistent CAPD binary, both public-only resource
-  payloads, the role-19 temp-only capture path, and role-24 read-only verifier
-  now exist as engineering inputs.  A temporary candidate is not input role
-  10; separately authorized canonical no-replace publication and the rest of
-  the 53-input freeze chain remain absent.
+  payloads, the role-19 temp-only capture path, fixed-destination publisher,
+  and role-24 read-only verifier now exist as engineering inputs.  The
+  publisher has not been run.  A fresh stable-role-19-source-bound candidate,
+  prepublication role-24 replay, separately authorized canonical no-replace
+  operation, postpublication role-24 replay, and the rest of the 53-input
+  freeze chain remain absent.
 - The canonical compatibility replay, production result root, production
   report, formal release, and all formal component/composite statuses remain
   absent; the implemented formal entry paths fail closed.
@@ -191,7 +201,7 @@ The exact source/test ledger and serializer boundary are recorded in
 | Gate | Result | Boundary |
 |---|---:|---|
 | role-19 capture-producer module | 107/107 pass in 26.62 s | temp-only capture and process control; no scientific dispatch |
-| role-24 independent-verifier module on final role-19 bytes | 94/94 pass in 35.20 s | zero-write, zero-subprocess verification only |
+| role-24 independent-verifier module on locked role-19 source bytes | 94/94 pass in 35.20 s | zero-write, zero-subprocess verification only |
 | current two-module focused replay | 201/201 pass in 61.89 s | independently reproduced after the repair |
 | nine-module regression | 457/457 pass in 152.37 s | no canonical publication or scientific dispatch |
 | complete Paper 02 regression | 852/852 pass in 207.85 s | current machine-capture code/documentation set; no scientific dispatch |
@@ -218,10 +228,42 @@ the receipt records `shell_used=false`, byte equality, unchanged persistent
 identity, and no persistent overwrite.  The pre-repair `456` pass, `1` fail
 run and all of its candidate bytes remain withdrawn.
 
+## Machine-publication implementation boundary
+
+The role-19 publisher has one fixed destination and no output override.  It
+accepts `--candidate` plus `--expected-sha256`, repeats the complete live
+machine/capture-tool/source snapshot immediately before publication, freezes
+the `1..1048576`-byte pre-open type/size gate, uses a new explicit-`0644`
+same-parent staging inode and
+`renameat2(RENAME_NOREPLACE)`, preserves the candidate, and emits only
+`PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY / ROLE19_PUBLICATION_ONLY`.
+Every pre-existing role-10 entry is fatal, including identical bytes.
+
+Role 19 never invokes role 24.  The required role-24 canonical verification
+is a later, separate, zero-write operator step.  Any failure after the rename
+edge leaves immutable evidence for manual/read-only audit and cannot trigger
+rollback or idempotent republish.  The publisher has not been executed in the
+repository.
+
+| Gate | Result | Boundary |
+|---|---:|---|
+| publisher-focused suite | 23/23 pass; 107 deselected; 13.70 s | isolated temporary authority fixtures; no scientific evaluator |
+| complete role-26 module | 130/130 pass in 40.35 s | capture/publisher/scheduler engineering surface |
+| final nine-module L3-A1 regression | 480/480 pass in 164.03 s | locked publisher bytes; no canonical publication or scientific dispatch |
+| complete Paper 02 regression | 875/875 pass in 218.37 s | role 10 and role 54 remain absent |
+| Python compile / diff check | PASS / PASS | zero output; canonical role 10 remains absent |
+
+Stable current publisher hashes are:
+
+```text
+machine_publication_scheduler_sha256 = 262985fcb1fc82890501b635bfce163712f1821e2d92276aee9f363ee0473a82
+machine_publication_test_sha256 = d5a4a018547e3f80f2f1a5375e530eb39120e686cc489925a1cf049a5e3dbf5f
+```
+
 ## Current decision
 
 ```text
-next_authorized_action = SEPARATELY_AUTHORIZE_CANONICAL_ROLE10_AND_COMPLETE_ALL_53_INPUTS_BEFORE_ROLE54
+next_authorized_action = STABILIZE_PUBLISHER_THEN_FRESH_CAPTURE_PREVERIFY_SEPARATELY_AUTHORIZE_ROLE10_AND_POSTVERIFY
 independent_design_review_complete = true
 static_implementation_increment_review = ACCEPT_P0_0_P1_0
 branch_runtime_increment_review = ACCEPT_P0_0_P1_0
@@ -246,6 +288,17 @@ final_public_static_calibration_sha256 = 8afc8a0a0929da077a1a1ad19ddc0c19e754c49
 machine_binding_formal_schema_review = ACCEPT_P0_0_P1_0_P2_0
 temp_only_machine_capture_implemented = true
 machine_verify_only_implemented = true
+machine_publisher_implemented = true
+machine_publisher_executed = false
+machine_publisher_destination_override = false
+machine_publisher_calls_role24 = false
+machine_publication_scheduler_sha256 = 262985fcb1fc82890501b635bfce163712f1821e2d92276aee9f363ee0473a82
+machine_publication_test_sha256 = d5a4a018547e3f80f2f1a5375e530eb39120e686cc489925a1cf049a5e3dbf5f
+machine_publication_focused_tests = 23/23
+machine_publication_static_scheduler_tests = 130/130
+machine_publication_broad_regression = 480/480
+paper02_regression_at_machine_publication_bytes = 875/875
+paper02_regression_at_machine_publication_seconds = 218.37
 machine_verify_only_zero_write = true
 machine_verify_only_zero_subprocess = true
 canonical_machine_role10_exists = false
@@ -264,6 +317,7 @@ machine_capture_parallel_timeout_replays = 24/24
 subreaper_enabled_after_return = false
 temporary_machine_candidate_sha256 = eb3395cb3de902685da62b9d18b74e0ba2109d2cce08da2e29a48f966ca7b0e7
 temporary_machine_candidate_size_bytes = 54526
+temporary_machine_candidate_publishable_after_role19_change = false
 pre_subreaper_regression = WITHDRAWN_FAIL_456_PASS_1
 core_tests_pre_final_branch_resource_binary_binding = 419/419
 paper02_regression_at_machine_binding_bytes = 814/814

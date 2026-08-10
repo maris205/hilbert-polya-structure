@@ -13,9 +13,10 @@ Status: **PROSPECTIVE_NON_LICENSING / REJECT_FOR_DISPATCH**
 This contract defines the exact candidate role maps and acyclic publication
 rules for a future L3-A1 production release.  A mock-only builder and complete
 temporary 68-role replay now exist, together with the three mock checker and
-postcheck chains.  This does not assert that a production machine freeze,
-main freeze, pre-freeze review, scientific result, formal checker status, or
-canonical release exists.
+postcheck chains.  A fixed-destination write-once role-19 machine publisher is
+also implemented but has not been executed.  This does not assert that a
+production machine freeze, main freeze, pre-freeze review, scientific result,
+formal checker status, or canonical release exists.
 
 The future release builder never runs an evaluator and never creates
 scientific authority.  It may publish only after reopening and independently
@@ -132,6 +133,16 @@ Verdict: ACCEPT_FOR_FREEZE
 Near matches, duplicate verdicts, decorated substitutes, a pending verdict,
 or author self-approval are rejected.  This candidate neither creates that
 review nor creates the main freeze.
+
+The numeric role order is authority-bearing array order, not construction
+topology.  In particular, stable current live on-disk role-19 source bytes
+must exist before a fresh machine candidate can bind them and become role 10.
+Role 19 contains
+no role-10 digest, so this is acyclic.  After one canonical role-10
+publication, role 19 and the published role-10 bytes must remain immutable.
+Final role-24 bytes then independently verify the canonical bytes and remain
+immutable.  Roles 11--13 and every other input must also become final before
+the external downstream role 54 may be generated.
 
 ## 4. Exact 68-role release map candidate
 
@@ -281,6 +292,12 @@ return it without changing bytes.  A different pre-existing release is never
 overwritten.  `--verify-only` performs no write and reconstructs the complete
 68-role DAG from current source bytes.
 
+That identical-release behavior applies only to the final
+`RELEASE_PROVENANCE.json` builder.  It does not apply to canonical machine
+input role 10.  The role-19 machine publisher treats every pre-existing
+canonical role-10 entry as fatal, including a byte-identical regular file;
+there is no idempotent machine-publication success.
+
 No object includes its own hash.  The main freeze is upstream of the run
 config; cell manifests are upstream of aggregates; component checkers and
 postchecks are upstream of composite controls; the composite checker and
@@ -362,6 +379,15 @@ recipe/receipt/transfer mutation, direct-to-persistent build attempts,
 `shell_used` aliases, and proof of zero writes and zero subprocesses.  This is
 not the release `--verify-only` mode and cannot create a release.
 
+The role-19 publisher suite must separately cover fixed-destination
+derivation; candidate/expected-digest mismatch; stale role-19 capture-tool
+binding; same-parent exclusive staging; explicit `0644` mode; staging
+collision and residue isolation; atomic `renameat2(RENAME_NOREPLACE)`;
+identical and different canonical-entry refusal; candidate, namespace, and
+destination TOCTOU; fsync/reopen failures before and after rename; no rollback
+after the rename edge; exact compact stdout receipt; empty failure stdout;
+and proof of no role-24, evaluator, or other subprocess invocation.
+
 The exact test file and its final hash are role 33 of the main-freeze input
 map.  Passing mock tests do not authorize production.
 
@@ -386,6 +412,7 @@ mock_l3_a1_implementation_tests = 280/280
 paper02_regression = 675/675
 formal_release_builder_implemented = false
 machine_verify_only_implemented = true
+machine_publisher_implemented = true
 canonical_machine_role10_exists = false
 main_freeze_exists = false
 canonical_release_exists = false
@@ -473,9 +500,10 @@ The exact environment has only `PATH=/usr/bin:/bin`, `LANG=C.UTF-8`,
 `LC_ALL=C.UTF-8`, `TZ=UTC`, `PYTHONHASHSEED=0`, `PYTHONNOUSERSITE=1`, and
 `PYTHONDONTWRITEBYTECODE=1`; the exact umask is `0022`.
 
-The implemented producer may capture and self-validate a candidate only at
-a new temporary path; it does not publish
-`R401_VAL_L3_A1_MACHINE_FREEZE.json`.  The separate command
+The implemented capture mode may capture and self-validate a candidate only
+at a new temporary path; that mode does not publish
+`R401_VAL_L3_A1_MACHINE_FREEZE.json`.  The distinct publisher described in
+section 15 is implemented but has not been executed.  The separate command
 `--verify-machine-freeze ABSOLUTE_JSON_PATH` is mutually exclusive with
 release `--verify-only`, replays one compact canonical candidate against the
 current Paper 02 root, and emits only
@@ -517,3 +545,71 @@ millisecond runtime/checker migration is complete and its gate is true, but
 that representation fact gives no execution authority: scientific execution
 and canonical release remain rejected until the separate accepted freeze and
 authorization chain exists.
+
+## 15. Canonical machine-input publication amendment
+
+Role 19 exposes the exact-exclusive CLI:
+
+```text
+--publish-machine-freeze
+--candidate ABSOLUTE_TMP_CANDIDATE_PATH
+--expected-sha256 EXACT_64_LOWERHEX
+--authority-root EXACT_PAPER02_ROOT
+```
+
+There is no destination option.  The only role-10 destination is derived as
+`research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json` below the
+exact authority root.  The supplied digest expresses byte intent and must
+equal the digest from the separate role-24 temporary-candidate replay; role
+19 independently recomputes it from the same pinned raw candidate snapshot.
+Immediately before publication it replays the full closed machine schema and
+all live bindings, including the current boot and the stable current live
+on-disk role-19 capture-tool path, hash, and file identity.
+
+The publisher creates only a fresh hidden same-parent staging inode with a
+basename matching
+`.R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-[0-9a-f]{32}`.  It never adopts
+or overwrites a collision or crash residue and exhausts after 32 failed fresh
+name attempts.  It writes the exact candidate
+bytes, explicitly fixes mode `0644`, flushes and verifies them, and uses
+`renameat2(RENAME_NOREPLACE)` relative to the pinned canonical parent.  It
+then reopens the published inode without following symlinks, rechecks exact
+raw bytes, digest, size, mode, link count, and inode identity, flushes the
+published file and parent directory, and terminally proves that the source
+candidate and lexical namespace signatures are unchanged.  The candidate is
+neither moved nor deleted.
+
+The shared candidate/stage/canonical reader freezes the exact range
+`1..1048576` bytes.  Relative to each pinned parent it no-follow stats regular
+type, `0644`, link count one, and bounded size before any open; it then uses
+`O_NONBLOCK|O_NOFOLLOW` and requires full pre-open/open/post-read identity.
+This type-and-cap gate precedes allocation and rejects empty, oversized,
+oversized-sparse, FIFO, device, socket, symlink, or hard-linked inputs.
+
+Before rename, failure is `NOT_PUBLISHED` and cleanup may remove only an
+inode-matched staging leaf owned by that invocation.  A hidden residue is
+`NONCANONICAL_STAGING_RESIDUE_ONLY` and has no role-10 authority.  A process
+or power failure at the rename edge, or any local check/flush failure after a
+successful rename, is a fail-closed ambiguous outcome requiring manual
+read-only audit.  It never permits rollback, unlink, repair, overwrite, or a
+second idempotent publication.  A completely successful local transaction
+emits one compact receipt with
+`artifact_role=MACHINE_FREEZE_PUBLICATION_RECEIPT`,
+`artifact_status=PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY`,
+`authority=ROLE19_PUBLICATION_ONLY`,
+`publication_method=SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1`,
+`serializer=CJ_COMPACT_V1`, `mode="0644"`, `nlink=1`, independent
+verification, scientific licensing, production authorization, and dispatch
+Booleans false, and all scientific result statuses null.
+
+Role 19 imports, invokes, and spawns neither role 24 nor any evaluator.  The
+operator must next call role 24 separately on the fixed canonical path.  Its
+unchanged success line is
+`PASS_MACHINE_FREEZE_VERIFY_ONLY / NON_AUTHORITATIVE_VERIFY_ONLY` with the
+same independently recomputed digest and size and
+`promotion_authorized=false`.  Failure preserves the write-once evidence and
+blocks roles 11--13, independent freeze review, role 54, initialization, and
+all dispatch.
+
+This amendment records publisher implementation only.  No command has
+published role 10, and no role-54 main freeze or scientific artifact exists.

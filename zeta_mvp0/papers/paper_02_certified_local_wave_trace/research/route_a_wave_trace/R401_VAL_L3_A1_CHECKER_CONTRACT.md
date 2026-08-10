@@ -34,7 +34,9 @@ status.  The formal scientific checker path described below remains
 unimplemented and unfrozen.
 
 A separate producer-independent machine verifier is also implemented, but it
-is not one of these three scientific checkers or postchecks.  Its
+is not one of these three scientific checkers or postchecks.  It is used
+first on a temporary candidate and, after a separately authorized role-19
+no-replace publication, again on the fixed canonical role-10 path.  Its
 `--verify-machine-freeze ABSOLUTE_JSON_PATH` mode replays one compact
 canonical machine candidate and current live role bindings without importing
 the capture producer, without depending on role 54, and without writing any
@@ -44,6 +46,9 @@ byte, spawning any subprocess, or invoking an evaluator.  Success is exactly
 candidate SHA-256 and byte size and `promotion_authorized=false`.  Those two
 values are transient receipt metadata, not a self-hash; the verifier assigns
 no component, milestone, theorem, final, release, or dispatch authority.
+Role 19 neither imports nor invokes this verifier.  Postpublication replay is
+a separate operator action; a failure preserves the write-once role-10 bytes
+for audit and blocks all downstream freeze construction.
 
 ## 2. Candidate exact result schemas
 
@@ -468,12 +473,23 @@ or verdict.  Tests must also cover strict JSON types, nonfinite values,
 symlinks, hard links, TOCTOU snapshots, missing/extra authoritative paths,
 checker/postcheck overwrite, and a full mocked 102-by-two-component chain.
 
-Machine-specific tests separately require temporary-candidate acceptance;
-exact absolute path and single-link replay; read-only and zero-subprocess
+Machine-specific tests separately require temporary-candidate and
+postpublication canonical-role-10 acceptance; exact absolute path and
+single-link replay; read-only and zero-subprocess
 behavior; build-recipe, fresh-rebuild-receipt, and transfer-evidence
 mutations; direct-to-canonical build rejection; staging/persistent mismatch
 rejection; and proof that the verifier neither imports nor dispatches a
 scientific evaluator.
+
+For the postpublication invocation, role 24 must independently derive the
+fixed role-10 path from the current Paper 02 root, capture that canonical
+single-link inode without following symlinks, and recompute the same digest
+and size reported by the prepublication candidate verification and the
+role-19 publication receipt.  It emits no sidecar and never edits the
+publisher's pending receipt.  `PASS_MACHINE_FREEZE_VERIFY_ONLY` remains
+`NON_AUTHORITATIVE_VERIFY_ONLY` with `promotion_authorized=false`; it is the
+mandatory read-only gate after publication, not a publication status or a
+scientific pass.
 
 The test suite and recorded hashes are mandatory main-freeze inputs.  A mock
 pass has no scientific status.
@@ -494,6 +510,7 @@ formal_scientific_checker_implementation_stable = false
 formal_component_postchecks_exist = false
 formal_composite_postcheck_exists = false
 machine_verify_only_implemented = true
+machine_publisher_implemented = true
 canonical_machine_freeze_exists = false
 main_freeze_exists = false
 dispatch_authorized = false

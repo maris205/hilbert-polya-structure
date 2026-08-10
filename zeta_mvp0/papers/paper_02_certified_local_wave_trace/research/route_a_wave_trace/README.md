@@ -105,6 +105,11 @@ trace, Hilbert--Pólya, zeta-zero, or RH gate.
 - [A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md](A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md):
   bounded six-cell phase-anchor and whole-period branch-tube implementation
   smoke; representative and non-licensing only;
+- [A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md](A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md):
+  fixed-destination role-10 publisher implementation boundary, including
+  same-parent atomic no-replace publication, source-candidate preservation,
+  and mandatory separate role-24 postpublication replay; the publisher has
+  not been executed and no canonical role 10 exists;
 - `A416_PHASE_FLOWBOX_DERIVATION.md` and
   `R401_VAL_L3_PHASE_TUBE_PROTOCOL_DRAFT.md`: analytic reduction and the
   non-licensing representative protocol used by the A4.16 smoke;

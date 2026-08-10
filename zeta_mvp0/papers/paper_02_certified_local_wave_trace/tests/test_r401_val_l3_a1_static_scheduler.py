@@ -943,6 +943,26 @@ def pure_machine_candidate(machine: dict[str, object]) -> dict[str, object]:
     )
 
 
+def machine_publication_fixture(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> tuple[Path, Path, Path, bytes, str]:
+    """Prepare a complete temp authority with role 10 deliberately absent."""
+
+    authority = formal_authority_fixture(tmp_path)
+    relative = dict(MODULE.FORMAL_INPUT_ROLES)["machine_freeze"]
+    canonical = authority / relative
+    candidate = (tmp_path / "machine-freeze-candidate.json").absolute()
+    shutil.copy2(canonical, candidate)
+    canonical.unlink()
+    raw = candidate.read_bytes()
+    digest = MODULE.sha256_bytes(raw)
+    monkeypatch.setattr(MODULE, "ROOT", authority)
+    assert not canonical.exists()
+    assert candidate.parts[:2] == ("/", "tmp")
+    return authority, candidate, canonical, raw, digest
+
+
 def synthetic_formal_static_pass_proof(
     transaction: object,
 ) -> dict[str, object]:
@@ -1794,6 +1814,791 @@ def test_machine_capture_cli_is_exact_exclusive_and_never_dispatches(
     error = capsys.readouterr().err
     assert "exact-exclusive" in error
     assert len(calls) == 1
+
+
+def test_machine_publication_success_is_fixed_write_once_and_non_authorizing(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    candidate_before = candidate.stat()
+
+    def forbidden_subprocess(*args: object, **kwargs: object) -> object:
+        raise AssertionError("machine publication must not start a subprocess")
+
+    for name in ("Popen", "run", "call", "check_call", "check_output"):
+        monkeypatch.setattr(MODULE.subprocess, name, forbidden_subprocess)
+    for name in (
+        "execl", "execle", "execlp", "execlpe", "execv", "execve",
+        "execvp", "execvpe",
+    ):
+        monkeypatch.setattr(MODULE.os, name, forbidden_subprocess)
+    monkeypatch.setattr(MODULE, "_capture_command", forbidden_subprocess)
+    monkeypatch.setattr(
+        MODULE, "dispatch_formal_static_transaction", forbidden_subprocess
+    )
+    monkeypatch.setattr(
+        MODULE, "dispatch_formal_branch_transaction", forbidden_subprocess
+    )
+    old_umask = os.umask(0o077)
+    try:
+        receipt = MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    finally:
+        os.umask(old_umask)
+
+    expected_keys = {
+        "schema_version", "protocol_id", "artifact_role", "artifact_status",
+        "authority", "candidate_path", "canonical_path",
+        "machine_freeze_sha256", "size_bytes", "mode", "nlink",
+        "serializer", "publication_method",
+        "independent_verification_performed",
+        "scientific_licensing_enabled", "production_authorized",
+        "scientific_dispatch_performed", "component_status",
+        "milestone_status", "theorem_status", "final_status",
+    }
+    assert set(receipt) == expected_keys
+    assert len(receipt) == 21
+    assert receipt == {
+        "schema_version": 1,
+        "protocol_id": MODULE.PROTOCOL_ID,
+        "artifact_role": "MACHINE_FREEZE_PUBLICATION_RECEIPT",
+        "artifact_status": "PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY",
+        "authority": "ROLE19_PUBLICATION_ONLY",
+        "candidate_path": str(candidate),
+        "canonical_path": str(canonical),
+        "machine_freeze_sha256": digest,
+        "size_bytes": len(raw),
+        "mode": "0644",
+        "nlink": 1,
+        "serializer": "CJ_COMPACT_V1",
+        "publication_method": "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1",
+        "independent_verification_performed": False,
+        "scientific_licensing_enabled": False,
+        "production_authorized": False,
+        "scientific_dispatch_performed": False,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    published = canonical.stat()
+    candidate_after = candidate.stat()
+    assert canonical.read_bytes() == candidate.read_bytes() == raw
+    assert MODULE.sha256(canonical) == digest
+    assert published.st_mode & 0o777 == 0o644
+    assert published.st_nlink == 1
+    assert MODULE._machine_publication_file_identity(candidate_after) == (
+        MODULE._machine_publication_file_identity(candidate_before)
+    )
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+    with pytest.raises(MODULE.CorruptGeneration, match="already exists"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert canonical.read_bytes() == raw
+
+
+def test_machine_publication_rejects_path_alias_hash_mode_link_and_live_drift(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    publish = MODULE.publish_formal_machine_freeze
+
+    with pytest.raises(MODULE.PathContractError, match="absolute POSIX"):
+        publish(
+            candidate_value="relative.json",
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    with pytest.raises(MODULE.PathContractError, match="unsafe"):
+        publish(
+            candidate_value=str(candidate.parent / "nested/../machine.json"),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    with pytest.raises(MODULE.PathContractError, match="exact live Paper02"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority.parent),
+        )
+    with pytest.raises(MODULE.ProductionAuthorityError, match="lowercase"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=digest.upper(),
+            authority_root_value=str(authority),
+        )
+    with pytest.raises(MODULE.ProductionAuthorityError, match="lowercase"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=123,  # type: ignore[arg-type]
+            authority_root_value=str(authority),
+        )
+    with pytest.raises(MODULE.ProductionAuthorityError, match="expected intent"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256="0" * 64,
+            authority_root_value=str(authority),
+        )
+
+    candidate.chmod(0o600)
+    with pytest.raises(MODULE.PathContractError, match="0644"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    candidate.chmod(0o644)
+    alias = candidate.with_name("candidate-hardlink.json")
+    os.link(candidate, alias)
+    with pytest.raises(MODULE.PathContractError, match="hard-link"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    alias.unlink()
+
+    scheduler = authority / dict(MODULE.FORMAL_INPUT_ROLES)["scheduler"]
+    scheduler_raw = scheduler.read_bytes()
+    scheduler.write_bytes(scheduler_raw + b"\n# stale role 19\n")
+    with pytest.raises(MODULE.ProductionAuthorityError, match="live hash"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    scheduler.write_bytes(scheduler_raw)
+
+    machine = MODULE.strict_json_load(candidate, require_canonical=True)
+    machine["capture"]["boot_id_sha256"] = "0" * 64
+    candidate.write_bytes(MODULE.canonical_json_bytes(machine))
+    wrong_boot_digest = MODULE.sha256(candidate)
+    with pytest.raises(MODULE.ProductionAuthorityError, match="boot ID"):
+        publish(
+            candidate_value=str(candidate),
+            expected_sha256=wrong_boot_digest,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+@pytest.mark.parametrize("destination_kind", ["identical", "symlink", "hardlink", "directory"])
+def test_machine_publication_rejects_every_existing_destination_type(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    destination_kind: str,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    if destination_kind == "identical":
+        canonical.write_bytes(raw)
+    elif destination_kind == "symlink":
+        canonical.symlink_to(candidate)
+    elif destination_kind == "hardlink":
+        unrelated = canonical.with_name("unrelated-machine.json")
+        unrelated.write_bytes(b"unrelated\n")
+        os.link(unrelated, canonical)
+    else:
+        canonical.mkdir()
+    with pytest.raises(MODULE.CorruptGeneration, match="already exists"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert candidate.read_bytes() == raw
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+def test_machine_publication_rejects_symlink_candidate(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    target = candidate.with_name("candidate-target.json")
+    candidate.rename(target)
+    candidate.symlink_to(target)
+    with pytest.raises(MODULE.PathContractError):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert target.read_bytes() == raw
+    assert not canonical.exists()
+
+    candidate.unlink()
+    os.mkfifo(candidate, 0o644)
+    started = time.monotonic()
+    with pytest.raises(MODULE.PathContractError, match="not a regular file"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert time.monotonic() - started < 1.0
+    assert not canonical.exists()
+
+    candidate.unlink()
+    candidate.write_bytes(b"")
+    with pytest.raises(MODULE.PathContractError, match=r"outside 1\.\.1048576"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    with candidate.open("wb") as stream:
+        stream.truncate(MODULE.MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES + 1)
+    started = time.monotonic()
+    with pytest.raises(MODULE.PathContractError, match=r"outside 1\.\.1048576"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert time.monotonic() - started < 1.0
+    assert not canonical.exists()
+
+
+def test_machine_publication_parent_swap_is_detected_before_rename(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    parent = canonical.parent
+    backup = parent.with_name(parent.name + ".swapped")
+    original_hook = MODULE._machine_publication_crash_hook
+
+    def swap_parent(phase: str) -> None:
+        original_hook(phase)
+        if phase == "BEFORE_TERMINAL_REPLAY":
+            parent.rename(backup)
+            parent.mkdir()
+
+    monkeypatch.setattr(MODULE, "_machine_publication_crash_hook", swap_parent)
+    with pytest.raises(MODULE.PathContractError, match="namespace changed"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert not list(
+        backup.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+    assert candidate.read_bytes() == raw
+
+
+def test_machine_publication_rename_collision_never_replaces_racer(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    original_rename = MODULE._rename_machine_publication_noreplace
+    racer_raw = b"racing canonical entry\n"
+
+    def collide(parent_fd: int, source_name: str, destination_name: str) -> None:
+        descriptor = os.open(
+            destination_name,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL,
+            0o644,
+            dir_fd=parent_fd,
+        )
+        try:
+            os.write(descriptor, racer_raw)
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+        original_rename(parent_fd, source_name, destination_name)
+
+    monkeypatch.setattr(MODULE, "_rename_machine_publication_noreplace", collide)
+    with pytest.raises(MODULE.CorruptGeneration, match="collided"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert canonical.read_bytes() == racer_raw
+    assert candidate.read_bytes() == raw
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+def test_machine_publication_stage_name_collision_skips_foreign_entry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    first = ".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-" + "0" * 32
+    second = ".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-" + "1" * 32
+    foreign = canonical.parent / first
+    foreign_raw = b"foreign staging collision\n"
+    foreign.write_bytes(foreign_raw)
+    foreign_before = foreign.stat()
+    names = iter((first, second))
+    monkeypatch.setattr(
+        MODULE, "_machine_publication_stage_basename", lambda: next(names)
+    )
+
+    receipt = MODULE.publish_formal_machine_freeze(
+        candidate_value=str(candidate),
+        expected_sha256=digest,
+        authority_root_value=str(authority),
+    )
+    foreign_after = foreign.stat()
+    assert receipt["machine_freeze_sha256"] == digest
+    assert canonical.read_bytes() == raw
+    assert foreign.read_bytes() == foreign_raw
+    assert (foreign_after.st_dev, foreign_after.st_ino) == (
+        foreign_before.st_dev,
+        foreign_before.st_ino,
+    )
+    assert not (canonical.parent / second).exists()
+
+
+def test_machine_publication_cleanup_inode_guard_never_unlinks_replacement(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    original_hook = MODULE._machine_publication_crash_hook
+    replacement_raw = b"attacker replacement must survive\n"
+    replacement: list[Path] = []
+
+    def replace_stage(phase: str) -> None:
+        original_hook(phase)
+        if phase != "AFTER_STAGE_WRITE":
+            return
+        stages = list(
+            canonical.parent.glob(
+                ".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*"
+            )
+        )
+        assert len(stages) == 1
+        stage = stages[0]
+        stage.unlink()
+        stage.write_bytes(replacement_raw)
+        replacement.append(stage)
+        raise RuntimeError("force guarded cleanup")
+
+    monkeypatch.setattr(MODULE, "_machine_publication_crash_hook", replace_stage)
+    with pytest.raises(MODULE.PathContractError, match="replaced staging inode"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert len(replacement) == 1
+    assert replacement[0].read_bytes() == replacement_raw
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+
+
+def test_two_process_machine_publication_has_exactly_one_winner(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    start_read, start_write = os.pipe()
+    children: list[tuple[int, int]] = []
+    try:
+        for _index in range(2):
+            result_read, result_write = os.pipe()
+            pid = os.fork()
+            if pid == 0:
+                try:
+                    os.close(result_read)
+                    os.close(start_write)
+                    if os.read(start_read, 1) != b"x":
+                        os._exit(91)
+                    try:
+                        MODULE.publish_formal_machine_freeze(
+                            candidate_value=str(candidate),
+                            expected_sha256=digest,
+                            authority_root_value=str(authority),
+                        )
+                    except BaseException as error:
+                        outcome = f"ERR:{type(error).__name__}".encode("ascii")
+                    else:
+                        outcome = b"OK"
+                    os.write(result_write, outcome)
+                    os._exit(0)
+                finally:
+                    os._exit(92)
+            os.close(result_write)
+            children.append((pid, result_read))
+        os.close(start_read)
+        start_read = -1
+        os.write(start_write, b"xx")
+        os.close(start_write)
+        start_write = -1
+        outcomes = []
+        for pid, result_read in children:
+            outcomes.append(os.read(result_read, 4096).decode("ascii"))
+            os.close(result_read)
+            waited, status = os.waitpid(pid, 0)
+            assert waited == pid
+            assert os.waitstatus_to_exitcode(status) == 0
+        children.clear()
+    finally:
+        if start_read >= 0:
+            os.close(start_read)
+        if start_write >= 0:
+            os.close(start_write)
+        for pid, result_read in children:
+            try:
+                os.close(result_read)
+            except OSError:
+                pass
+            try:
+                os.waitpid(pid, 0)
+            except ChildProcessError:
+                pass
+    assert outcomes.count("OK") == 1
+    assert len([item for item in outcomes if item.startswith("ERR:")]) == 1
+    assert outcomes.count("ERR:CorruptGeneration") == 1
+    assert canonical.read_bytes() == raw
+    assert MODULE.sha256(canonical) == digest
+    assert canonical.stat().st_mode & 0o777 == 0o644
+    assert canonical.stat().st_nlink == 1
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+def test_machine_publication_normal_pre_rename_error_cleans_owned_stage(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    original_hook = MODULE._machine_publication_crash_hook
+
+    def ordinary_failure(phase: str) -> None:
+        original_hook(phase)
+        if phase == "AFTER_STAGE_WRITE":
+            raise RuntimeError("ordinary injected write failure")
+
+    monkeypatch.setattr(MODULE, "_machine_publication_crash_hook", ordinary_failure)
+    with pytest.raises(RuntimeError, match="ordinary injected"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+def test_machine_publication_partial_write_and_fsync_errors_clean_stage(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    def partial_write(descriptor: int, payload: bytes) -> None:
+        assert os.write(descriptor, payload[:17]) == 17
+        raise OSError("injected partial write")
+
+    with monkeypatch.context() as write_patch:
+        write_patch.setattr(
+            MODULE, "_write_machine_publication_bytes", partial_write
+        )
+        with pytest.raises(OSError, match="partial write"):
+            MODULE.publish_formal_machine_freeze(
+                candidate_value=str(candidate),
+                expected_sha256=digest,
+                authority_root_value=str(authority),
+            )
+    assert not canonical.exists()
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+    original_fsync = MODULE.os.fsync
+    failed = False
+
+    def fail_first_fsync(descriptor: int) -> None:
+        nonlocal failed
+        if not failed:
+            failed = True
+            raise OSError("injected staging fsync")
+        original_fsync(descriptor)
+
+    with monkeypatch.context() as fsync_patch:
+        fsync_patch.setattr(MODULE.os, "fsync", fail_first_fsync)
+        with pytest.raises(OSError, match="staging fsync"):
+            MODULE.publish_formal_machine_freeze(
+                candidate_value=str(candidate),
+                expected_sha256=digest,
+                authority_root_value=str(authority),
+            )
+    assert failed is True
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+@pytest.mark.parametrize(
+    "phase",
+    ["AFTER_STAGE_WRITE", "AFTER_STAGE_FILE_FSYNC", "AFTER_STAGING_PARENT_FSYNC"],
+)
+def test_machine_publication_pre_rename_crash_residue_is_harmless(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    phase: str,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    original_hook = MODULE._machine_publication_crash_hook
+
+    def crash_hook(current: str) -> None:
+        original_hook(current)
+        if current == phase:
+            raise MODULE.SyntheticMachinePublicationCrash(phase)
+
+    with monkeypatch.context() as crash_patch:
+        crash_patch.setattr(MODULE, "_machine_publication_crash_hook", crash_hook)
+        with pytest.raises(MODULE.SyntheticMachinePublicationCrash, match=phase):
+            MODULE.publish_formal_machine_freeze(
+                candidate_value=str(candidate),
+                expected_sha256=digest,
+                authority_root_value=str(authority),
+            )
+    residues = list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+    assert len(residues) == 1
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+
+    receipt = MODULE.publish_formal_machine_freeze(
+        candidate_value=str(candidate),
+        expected_sha256=digest,
+        authority_root_value=str(authority),
+    )
+    assert receipt["machine_freeze_sha256"] == digest
+    assert canonical.read_bytes() == raw
+    assert residues[0].exists()
+
+
+@pytest.mark.parametrize(
+    "phase",
+    ["AFTER_RENAME", "AFTER_DESTINATION_FSYNC", "AFTER_PUBLICATION_PARENT_FSYNC"],
+)
+def test_machine_publication_post_rename_failure_never_rolls_back(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    phase: str,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    original_hook = MODULE._machine_publication_crash_hook
+
+    def crash_hook(current: str) -> None:
+        original_hook(current)
+        if current == phase:
+            raise MODULE.SyntheticMachinePublicationCrash(phase)
+
+    monkeypatch.setattr(MODULE, "_machine_publication_crash_hook", crash_hook)
+    with pytest.raises(MODULE.SyntheticMachinePublicationCrash, match=phase):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert canonical.read_bytes() == raw
+    assert MODULE.sha256(canonical) == digest
+    assert canonical.stat().st_mode & 0o777 == 0o644
+    assert canonical.stat().st_nlink == 1
+    assert candidate.read_bytes() == raw
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+def test_machine_publication_parent_swap_at_rename_is_fail_closed_no_rollback(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    parent = canonical.parent
+    backup = parent.with_name(parent.name + ".postrename")
+    original_rename = MODULE._rename_machine_publication_noreplace
+
+    def swap_then_rename(
+        parent_fd: int, source_name: str, destination_name: str
+    ) -> None:
+        parent.rename(backup)
+        parent.mkdir()
+        original_rename(parent_fd, source_name, destination_name)
+
+    monkeypatch.setattr(
+        MODULE, "_rename_machine_publication_noreplace", swap_then_rename
+    )
+    with pytest.raises(MODULE.PathContractError, match="namespace changed"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    moved_canonical = backup / canonical.name
+    assert moved_canonical.read_bytes() == raw
+    assert MODULE.sha256(moved_canonical) == digest
+    assert moved_canonical.stat().st_nlink == 1
+    assert candidate.read_bytes() == raw
+
+
+def test_machine_publication_terminal_candidate_and_scheduler_drift_fail_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    original_hook = MODULE._machine_publication_crash_hook
+
+    def swap_candidate_inode(phase: str) -> None:
+        original_hook(phase)
+        if phase == "BEFORE_RENAME":
+            replacement = candidate.with_name("same-byte-new-inode.json")
+            replacement.write_bytes(raw)
+            replacement.chmod(0o644)
+            os.replace(replacement, candidate)
+
+    monkeypatch.setattr(
+        MODULE, "_machine_publication_crash_hook", swap_candidate_inode
+    )
+    with pytest.raises(MODULE.PathContractError, match="candidate changed"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+    scheduler = authority / dict(MODULE.FORMAL_INPUT_ROLES)["scheduler"]
+
+    def mutate_scheduler(phase: str) -> None:
+        original_hook(phase)
+        if phase == "BEFORE_RENAME":
+            with scheduler.open("ab") as stream:
+                stream.write(b"\n# pre-rename scheduler drift\n")
+
+    monkeypatch.setattr(MODULE, "_machine_publication_crash_hook", mutate_scheduler)
+    with pytest.raises(MODULE.ProductionAuthorityError, match="stale relative"):
+        MODULE.publish_formal_machine_freeze(
+            candidate_value=str(candidate),
+            expected_sha256=digest,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert not list(
+        canonical.parent.glob(".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-*")
+    )
+
+
+def test_machine_publication_cli_exact_stdout_stderr_and_xor(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    authority, candidate, canonical, raw, digest = machine_publication_fixture(
+        tmp_path, monkeypatch
+    )
+    arguments = [
+        "--publish-machine-freeze",
+        "--candidate", str(candidate),
+        "--expected-sha256", digest,
+        "--authority-root", str(authority),
+    ]
+    assert MODULE.main(arguments) == 0
+    captured = capsys.readouterr()
+    receipt = MODULE.strict_json_loads(captured.out)
+    assert captured.err == ""
+    assert captured.out.encode("utf-8") == MODULE.canonical_json_bytes(receipt)
+    assert receipt["canonical_path"] == str(canonical)
+    assert receipt["production_authorized"] is False
+    assert canonical.read_bytes() == raw
+
+    for conflict in (
+        ["--capture-machine-freeze"],
+        ["--initialize-only"],
+        ["--output", str(tmp_path / "caller-destination.json")],
+        ["--static-calibration", str(tmp_path / "static.json")],
+        ["--branch-calibration", str(tmp_path / "branch.json")],
+        ["--capd-checkout", str(tmp_path / "capd")],
+        ["--compiler", "/usr/bin/g++"],
+        ["--mock-only"],
+        ["--mock-static-cells", "1"],
+        ["--mock-branch-cells", "1"],
+        ["--mock-branch-evaluator", str(tmp_path / "mock")],
+        ["--finalize-mock-composite"],
+        ["--resume"],
+        ["--production"],
+        ["--execute-scientific-dispatch"],
+    ):
+        assert MODULE.main([*arguments, *conflict]) == 1
+        rejected = capsys.readouterr()
+        assert rejected.out == ""
+        assert rejected.err.startswith("ERROR: SchedulerContractError:")
+        assert "exact-exclusive" in rejected.err
+
+    assert MODULE.main(
+        ["--candidate", str(candidate), "--expected-sha256", digest]
+    ) == 1
+    rejected = capsys.readouterr()
+    assert rejected.out == ""
+    assert "require --publish-machine-freeze" in rejected.err
 
 
 def test_capture_command_timeout_kills_the_whole_process_group(

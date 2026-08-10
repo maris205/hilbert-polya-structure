@@ -30,11 +30,11 @@ strongest accepted statements and latest bounded implementation evidence are:
 7. `A4.16 / R401-VAL-L3-A1` machine-binding and exact-schema implementation:
    the ordered 53-role same-byte handshake, closed formal schemas, strict
    static/branch serializers, persistent CAPD binary, temp-only role-19
-   machine capture, and zero-write role-24 independent verifier exist as
-   engineering surfaces.  The final static and branch resource calibrations
-   use public S0 inputs only.  This is `NON_LICENSING`: no canonical role-10
-   machine freeze, role-54 main freeze, scientific dispatch, or canonical
-   A4.16 result exists.
+   machine capture, zero-write role-24 independent verifier, and unexecuted
+   fixed-destination role-19 publisher exist as engineering surfaces.  The
+   final static and branch resource calibrations use public S0 inputs only.
+   This is `NON_LICENSING`: no canonical role-10 machine freeze, role-54 main
+   freeze, scientific dispatch, or canonical A4.16 result exists.
 
 The local determinant result was independently replayed from exact rational
 decimal payloads: 202 determinant enclosures, 202 phase-slope enclosures, 815
@@ -113,7 +113,7 @@ This representative smoke does not assign a milestone, theorem, or final
 programme value.  It does not cover the other 48 slabs and does not prove
 that arbitrary energy-shell candidates remain in the local tube.
 
-## Formal machine-binding, capture, and exact-schema increments (non-licensing)
+## Formal machine-binding, capture, publication, and exact-schema increments (non-licensing)
 
 The current L3-A1 engineering surface now closes the prospective machine,
 main-freeze, run-config, static/branch cell, aggregate, checker/postcheck, and
@@ -136,6 +136,22 @@ overwriting or changing it.  It may write a compact candidate only to a new
 temporary path.  Role 24 independently replays that candidate with zero
 writes and zero subprocesses; its verify-only success is explicitly
 `NON_AUTHORITATIVE_VERIFY_ONLY` and cannot publish or promote role 10.
+
+The publication implementation increment adds a distinct role-19 publisher
+without running it.  It accepts a temporary candidate and expected digest but
+no destination override, derives only the fixed role-10 path, replays the full
+live machine and stable current on-disk role-19 source path/hash/identity
+binding, enforces a pre-open regular/`0644`/one-link
+`1..1048576`-byte cap, and uses an explicit-`0644` same-parent staging inode
+plus `renameat2(RENAME_NOREPLACE)`.  Every existing
+canonical entry is fatal, including byte-identical content.  The source
+candidate remains unchanged.  Role 19 emits only
+`PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY` and never invokes role 24;
+its transient receipt has `scientific_licensing_enabled=false`,
+`production_authorized=false`, and null scientific result statuses.  The
+operator must run role 24 separately on the canonical inode.  A failure
+after rename preserves the write-once evidence for read-only/manual audit and
+never authorizes rollback, overwrite, repair, or idempotent republish.
 
 Static cells now have an exact four-file surface (`proof.json`, `stdout.txt`,
 `stderr.txt`, `record.json`) with a strict 26-string ABI and
@@ -177,13 +193,13 @@ role-19 module now passes `107/107`, the complete nine-module set passes
 focused modules total `201/201`; 24 parallel timeout-cleanup replays pass and
 the temporary subreaper state is restored on return.  Separately, the complete
 Paper 02 regression passes `852/852` in `207.85 s` on the locked
-machine-capture code and documentation set.  The final role-19 and role-24
-SHA-256 values are respectively
+machine-capture code and documentation set.  At that capture-increment
+boundary, the locked role-19 and role-24 SHA-256 values were respectively
 `48e6fba9a7c567faddc15c49f7e0d3a3b7a0ff77afae6d80e87d0b1b101638ad`
 and
 `e1ab0e0f23fdf73406425243cc2203c02cae69cd382dd84e76631a0b63b9a0e7`.
 
-The final live candidate is
+The preceding capture increment's live temporary candidate is
 `/tmp/a416-machine-capture-subreaper-final.UF30tt/machine-candidate.json`,
 SHA-256
 `eb3395cb3de902685da62b9d18b74e0ba2109d2cce08da2e29a48f966ca7b0e7`,
@@ -191,24 +207,49 @@ size `54526`, mode `0644`, and link count `1`.  Role 24 independently
 reproduces the digest and size under `NON_AUTHORITATIVE_VERIFY_ONLY`; the
 fresh-build staging directory is absent and the persistent role-17 binary was
 not overwritten.  Both known pre-fix candidates now reject against the final
-role-19 bytes.
+capture-increment role-19 source bytes.
+
+Adding the publisher changes role-19 bytes, so the preceding temporary
+candidate is historical publication evidence only and cannot be used as the
+future role-10 input.  After the publisher bytes stabilize, role 19 must
+capture a fresh candidate, role 24 must replay it, and only then may a
+separately authorized one-shot publication be considered.
+
+The stable publisher source and role-26 test SHA-256 values are respectively
+`262985fcb1fc82890501b635bfce163712f1821e2d92276aee9f363ee0473a82`
+and
+`d5a4a018547e3f80f2f1a5375e530eb39120e686cc489925a1cf049a5e3dbf5f`.
+The publisher-focused suite passes `23/23` tests with `107` deselected in
+`13.70 s`, the complete static-scheduler module passes `130/130` in
+`40.35 s`, and Python compilation plus `git diff --check` pass.  These are
+isolated engineering tests; no publisher invocation targeted the repository
+role-10 path and no scientific evaluator ran.
+
+On the same locked publisher bytes, the final nine-module L3-A1 regression
+passes `480/480` tests in `164.03 s`, and the complete Paper 02 regression
+passes `875/875` in `218.37 s`.  Neither broader run published role 10 or
+role 54, created a production result, or dispatched a scientific evaluator.
 
 No canonical role-10 machine freeze, role-54 main freeze, S0 compatibility
 replay, production run config, scientific dispatch, or A4.16 all-slab result
 exists.  The final static payload and every capture candidate remain
-temporary; the implemented capture/verify modes perform no canonical
+temporary; the publisher is implemented but has not performed canonical
 publication.  Full current hashes,
 resource evidence, and claim boundaries are recorded in
 [`A416_L3_A1_MACHINE_BINDING_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_MACHINE_BINDING_INCREMENT.md);
 the separate capture/verify milestone is recorded in
 [`A416_L3_A1_MACHINE_CAPTURE_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_MACHINE_CAPTURE_INCREMENT.md);
+the unexecuted fixed-destination publisher boundary is recorded in
+[`A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md);
 the preceding control-plane increment remains recorded in
 [`A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md).
 
 ## Open bridges
 
-- separately authorized no-replace publication of independently verified
-  bytes as canonical input role 10, the remaining final 53-input chain and
+- a fresh candidate bound to stable role-19 publisher bytes, role-24
+  preverification, separately authorized no-replace publication of those
+  expected bytes as canonical input role 10, mandatory separate role-24
+  postverification, the remaining final 53-input chain and
   independent `ACCEPT_FOR_FREEZE` review, role-54 main freeze generated only
   after all 53 inputs, canonical S0 compatibility replay, and only then a
   separately authorized 51-slab A4.16 phase-tube production; the current
@@ -222,10 +263,12 @@ the preceding control-plane increment remains recorded in
   claim.
 
 The representative A4.16 engine and the non-dispatching L3-A1 exact-schema,
-temp-capture, and machine-verification candidates are now implemented and
-focused-tested.  The next authority stage is separate publication of a
-verified candidate as role 10, completion of all 53 final inputs and their
-pre-freeze review, and only then generation of role 54.
+temp-capture, machine-verification, and fixed-destination publisher candidates
+are implemented.  The publisher itself remains unexecuted.  The next
+authority stage is fresh capture on stable role-19 bytes, preverification,
+separately authorized role-10 publication, postverification, completion of
+all 53 final inputs and their pre-freeze review, and only then generation of
+role 54.
 A4.15 remains the highest accepted theorem in this chain.  Global routing is
 a separate later bridge.
 

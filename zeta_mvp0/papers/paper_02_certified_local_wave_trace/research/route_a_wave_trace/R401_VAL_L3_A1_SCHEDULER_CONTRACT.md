@@ -14,11 +14,12 @@ commits raw and canonical bytes, resumes an identical generation, and builds
 producer aggregates.  It never evaluates scientific truth and never assigns
 a component, milestone, theorem, or final pass.
 
-Partial mock/static/branch implementation candidates and a non-scientific
-temporary machine-capture mode now exist, but the complete production
-scheduler, canonical role-10 machine freeze, role-54 main freeze, and accepted
-independent pre-freeze review do not.  Therefore no CLI execution mode may
-dispatch an evaluator in the current repository state.
+Partial mock/static/branch implementation candidates, a non-scientific
+temporary machine-capture mode, and a fixed-destination write-once role-10
+publisher now exist.  The publisher has not been executed: the complete
+production scheduler, canonical role-10 machine freeze, role-54 main freeze,
+and accepted independent pre-freeze review do not.  Therefore no CLI
+execution mode may dispatch an evaluator in the current repository state.
 
 ## 2. Canonical task identities and stages
 
@@ -376,6 +377,7 @@ Current exact state:
 contract_status = PROSPECTIVE_NON_LICENSING
 implementation_stable = false
 machine_capture_temp_only_implemented = true
+machine_publisher_implemented = true
 canonical_machine_role10_exists = false
 machine_freeze_exists = false
 main_freeze_exists = false
@@ -410,6 +412,92 @@ Its one-line sorted-key JSON summary has exactly the keys `artifact_role`,
 `machine_status=FROZEN_FOR_PRODUCTION`, and `serializer=CJ_COMPACT_V1`;
 both Boolean fields are false and all four scientific status fields are null.
 The summary is stdout only and is not a sidecar artifact.
+
+The distinct machine-publication CLI is:
+
+```text
+python scripts/run_r401_val_l3_a1_all_slabs.py \
+  --publish-machine-freeze \
+  --candidate ABSOLUTE_TMP_CANDIDATE_PATH \
+  --expected-sha256 EXACT_64_LOWERHEX \
+  --authority-root EXACT_PAPER02_ROOT
+```
+
+It is exact-exclusive from capture, initialization, mock, resume,
+production, and scientific-execution modes and accepts no output/destination
+flag.  The authority root must be the exact Paper 02 root.  The only derived
+destination is
+`research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json`.
+
+The expected digest carries exact byte intent and must be the digest returned
+by a preceding separate role-24 replay of the temporary candidate.  Role 19
+does not claim that it can reconstruct that invocation history; it instead
+rehashes and fully validates the captured candidate, its fixed role-19
+capture-tool binding, and every live machine field, and repeats that complete
+gate immediately before publication.  The source candidate must remain a
+single-link `0644` regular file at the supplied absolute temporary path with
+unchanged parent and leaf identities, raw bytes, digest, size, mode,
+timestamps, and link count.
+
+The private publication reader has the exact cap
+`MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES=1048576`.  Candidate, staging, and
+canonical files must have integer size in `1..1048576`.  Before open, a
+no-follow stat relative to the pinned parent must prove regular type, exact
+`0644`, one link, and the bounded size.  Only then may an
+`O_NONBLOCK|O_NOFOLLOW` descriptor be opened and required to match the
+pre-open identity before bounded raw replay.  The exact out-of-range error is
+`<context> size is outside 1..1048576 bytes`.
+
+Role 19 writes the captured raw bytes to a new same-parent hidden staging
+name matching
+`.R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-[0-9a-f]{32}`, using exclusive
+creation relative to a pinned canonical-parent descriptor.  A bounded name
+collision causes selection of another new owned name, for at most 32 attempts;
+an existing residue is never opened, adopted, overwritten, or treated as
+canonical.  After exact staging fsync/reopen replay, publication uses
+`renameat2(RENAME_NOREPLACE)` to the fixed basename, then fsyncs the pinned
+parent and reopens the canonical leaf without following symlinks.  Any
+pre-existing canonical entry is fatal, even if it is a byte-identical regular
+file.  There is no machine-publication idempotent-success path.
+
+The compact one-line stdout receipt has the exact fields
+`schema_version`, `protocol_id`, `artifact_role`, `artifact_status`,
+`authority`, `candidate_path`, `canonical_path`, `machine_freeze_sha256`,
+`size_bytes`, `mode`, `nlink`, `serializer`, `publication_method`,
+`independent_verification_performed`, `scientific_licensing_enabled`,
+`production_authorized`,
+`scientific_dispatch_performed`, `component_status`, `milestone_status`,
+`theorem_status`, and `final_status`.  Its exact literals are
+`artifact_role=MACHINE_FREEZE_PUBLICATION_RECEIPT`,
+`artifact_status=PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY`,
+`authority=ROLE19_PUBLICATION_ONLY`, `mode=0644` as a string, `nlink=1` as an
+integer, `serializer=CJ_COMPACT_V1`, and
+`publication_method=SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1`.  All four
+independent-verification/licensing/production/dispatch Booleans are false and
+all four result statuses are null.
+
+Success exits zero with exactly the compact receipt line on stdout and empty
+stderr.  Every handled CLI failure exits one with empty stdout and exactly
+`ERROR: <ExceptionType>: <message>` plus LF on stderr.
+
+Role 19 imports, invokes, and spawns neither role 24 nor an evaluator; this
+mode uses no subprocess.  After a successful rename, any local reopen,
+identity, byte, hook, or fsync failure is fail-closed ambiguous evidence:
+role 19 reports failure but never rolls back, unlinks, overwrites, repairs,
+or republishes the canonical leaf.  Operator recovery is read-only manual
+audit followed by the separate role-24 canonical verify-only command.  A
+crash before rename may leave only noncanonical hidden staging residue; only
+an inode-matched stage owned by the current invocation may be cleaned.  A
+crash at the rename edge is treated as ambiguous, and a later publisher call
+must reject any canonical entry rather than infer idempotent success.
+
+The 53-role array number is authority-bearing order, not a construction
+topology.  Role 10 binds stable current live on-disk role-19 source bytes,
+while role 19 contains no role-10 hash.  Once role 10 is published, role 19
+must remain immutable.  The independent role-24 replay must then pass on the
+canonical bytes before any remaining input finalization, and role 24 must
+then remain immutable; role 54
+remains outside and downstream of all 53 inputs.
 
 ## 13. Exact control-plane schema amendment
 

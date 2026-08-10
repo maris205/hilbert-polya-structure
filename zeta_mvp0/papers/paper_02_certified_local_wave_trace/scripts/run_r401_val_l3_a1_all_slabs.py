@@ -11,9 +11,13 @@ in an explicit noncanonical temporary root.  A separate exact-exclusive mode
 can capture a temp-only machine-freeze candidate: it performs metadata probes
 and one truthful fresh /tmp compiler rebuild, never executes either scientific
 evaluator, never overwrites the persistent binary, and can publish only to a
-missing caller-supplied /tmp file.  Neither candidate authorizes dispatch or
-canonical publication.  Production dispatch remains unconditionally disabled
-pending the later 53-input freeze/review/release sequence.
+missing caller-supplied /tmp file.  A distinct exact-exclusive publisher can
+copy a previously verified candidate into the fixed role-10 path through a
+same-parent, no-replace, durable transaction; it has not been invoked here and
+its receipt remains pending an independent role-24 post-publication
+verification.  Neither the candidate nor the publication receipt authorizes
+dispatch.  Production dispatch remains unconditionally disabled pending the
+later 53-input freeze/review/release sequence.
 """
 
 from __future__ import annotations
@@ -89,6 +93,24 @@ DEFAULT_CAPD_CHECKOUT = (
 )
 DEFAULT_COMPILER = Path("/usr/bin/g++")
 DEFAULT_SYSTEM_LIBRARY_ROOT = Path("/usr/lib/x86_64-linux-gnu")
+
+MACHINE_PUBLICATION_METHOD = "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1"
+MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES = 1024 * 1024
+MACHINE_PUBLICATION_STAGE_PATTERN = re.compile(
+    r"^\.R401_VAL_L3_A1_MACHINE_FREEZE\.json\.publish-[0-9a-f]{32}$"
+)
+MACHINE_PUBLICATION_HOOK_PHASES = frozenset(
+    {
+        "AFTER_STAGE_WRITE",
+        "AFTER_STAGE_FILE_FSYNC",
+        "AFTER_STAGING_PARENT_FSYNC",
+        "BEFORE_TERMINAL_REPLAY",
+        "BEFORE_RENAME",
+        "AFTER_RENAME",
+        "AFTER_DESTINATION_FSYNC",
+        "AFTER_PUBLICATION_PARENT_FSYNC",
+    }
+)
 
 PROTOCOL_ID = "R401-VAL-L3-A1"
 SCHEMA_VERSION = 1
@@ -717,6 +739,10 @@ class SyntheticCrash(RuntimeError):
 
 class SyntheticQuarantineCrash(RuntimeError):
     """Test-only crash injected at a durable quarantine boundary."""
+
+
+class SyntheticMachinePublicationCrash(RuntimeError):
+    """Test-only process-crash boundary in machine-freeze publication."""
 
 
 @dataclass(frozen=True)
@@ -5560,6 +5586,730 @@ def capture_and_publish_formal_machine_freeze(
     return candidate, sha256_bytes(raw)
 
 
+def _machine_publication_crash_hook(phase: str) -> None:
+    """No-op production hook used only to inject exact crash boundaries."""
+
+    if phase not in MACHINE_PUBLICATION_HOOK_PHASES:
+        raise AssertionError(f"unknown machine publication hook phase: {phase}")
+
+
+def _machine_publication_stage_basename() -> str:
+    """Return one collision-resistant, contract-shaped same-parent name."""
+
+    name = (
+        ".R401_VAL_L3_A1_MACHINE_FREEZE.json.publish-"
+        f"{os.urandom(16).hex()}"
+    )
+    if MACHINE_PUBLICATION_STAGE_PATTERN.fullmatch(name) is None:
+        raise AssertionError("machine publication staging name is malformed")
+    return name
+
+
+def _machine_publication_file_identity(
+    info: os.stat_result,
+) -> tuple[int, int, int, int, int, int, int]:
+    """Return the mutation-sensitive identity pinned by publication."""
+
+    return (
+        info.st_dev,
+        info.st_ino,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+        stat.S_IMODE(info.st_mode),
+        info.st_nlink,
+    )
+
+
+def _machine_publication_directory_chain(
+    path: Path,
+) -> tuple[tuple[str, int, int, int], ...]:
+    """Capture every exact lexical directory component without symlinks."""
+
+    canonical = safe_absolute_path(os.fspath(path), "publication directory")
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+    nofollow = getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open("/", flags)
+    current = Path("/")
+    signatures: list[tuple[str, int, int, int]] = []
+    try:
+        root_info = os.fstat(descriptor)
+        if not stat.S_ISDIR(root_info.st_mode):
+            raise PathContractError("filesystem root is not a directory")
+        signatures.append(
+            ("/", root_info.st_dev, root_info.st_ino, stat.S_IFMT(root_info.st_mode))
+        )
+        for component in canonical.parts[1:]:
+            next_fd = os.open(
+                component,
+                flags | nofollow,
+                dir_fd=descriptor,
+            )
+            os.close(descriptor)
+            descriptor = next_fd
+            current /= component
+            info = os.fstat(descriptor)
+            if not stat.S_ISDIR(info.st_mode):
+                raise PathContractError(
+                    f"publication namespace component is not a directory: {current}"
+                )
+            signatures.append(
+                (
+                    os.fspath(current),
+                    info.st_dev,
+                    info.st_ino,
+                    stat.S_IFMT(info.st_mode),
+                )
+            )
+        return tuple(signatures)
+    except OSError as error:
+        raise PathContractError(
+            f"publication directory chain is unsafe: {canonical}: {error}"
+        ) from error
+    finally:
+        os.close(descriptor)
+
+
+def _replay_machine_publication_directory(
+    path: Path,
+    pinned_fd: int,
+    expected_chain: tuple[tuple[str, int, int, int], ...],
+    context: str,
+) -> None:
+    """Prove both the pinned terminal inode and its full lexical chain."""
+
+    pinned = os.fstat(pinned_fd)
+    if (
+        not stat.S_ISDIR(pinned.st_mode)
+        or not expected_chain
+        or (pinned.st_dev, pinned.st_ino)
+        != (expected_chain[-1][1], expected_chain[-1][2])
+        or _machine_publication_directory_chain(path) != expected_chain
+    ):
+        raise PathContractError(f"{context} directory namespace changed")
+
+
+def _read_machine_publication_file_at(
+    parent_fd: int,
+    name: str,
+    context: str,
+    *,
+    fsync_file: bool = False,
+) -> tuple[bytes, os.stat_result]:
+    """Read one exact 0644, single-link regular file through a pinned parent."""
+
+    if type(name) is not str or not name or "/" in name or name in {".", ".."}:
+        raise PathContractError(f"{context} basename is malformed")
+    descriptor: int | None = None
+    try:
+        entry_before = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        if not stat.S_ISREG(entry_before.st_mode):
+            raise PathContractError(f"{context} is not a regular file")
+        if stat.S_IMODE(entry_before.st_mode) != 0o644:
+            raise PathContractError(f"{context} mode is not exact 0644")
+        if entry_before.st_nlink != 1:
+            raise PathContractError(f"{context} hard-link alias rejected")
+        if (
+            entry_before.st_size <= 0
+            or entry_before.st_size > MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES
+        ):
+            raise PathContractError(
+                f"{context} size is outside 1.."
+                f"{MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES} bytes"
+            )
+        descriptor = os.open(
+            name,
+            os.O_RDONLY
+            | getattr(os, "O_NOFOLLOW", 0)
+            | getattr(os, "O_NONBLOCK", 0),
+            dir_fd=parent_fd,
+        )
+        before = os.fstat(descriptor)
+        if not stat.S_ISREG(before.st_mode):
+            raise PathContractError(f"{context} is not a regular file")
+        if stat.S_IMODE(before.st_mode) != 0o644:
+            raise PathContractError(f"{context} mode is not exact 0644")
+        if before.st_nlink != 1:
+            raise PathContractError(f"{context} hard-link alias rejected")
+        if (
+            _machine_publication_file_identity(before)
+            != _machine_publication_file_identity(entry_before)
+        ):
+            raise PathContractError(f"{context} changed before pinned open")
+        chunks: list[bytes] = []
+        total_bytes = 0
+        while True:
+            chunk = os.read(
+                descriptor,
+                min(
+                    1024 * 1024,
+                    MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES
+                    - total_bytes
+                    + 1,
+                ),
+            )
+            if not chunk:
+                break
+            chunks.append(chunk)
+            total_bytes += len(chunk)
+            if total_bytes > MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES:
+                raise PathContractError(
+                    f"{context} exceeded the pinned publication size cap"
+                )
+        if fsync_file:
+            os.fsync(descriptor)
+        after = os.fstat(descriptor)
+        entry = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        identity = _machine_publication_file_identity(before)
+        if (
+            identity != _machine_publication_file_identity(after)
+            or identity != _machine_publication_file_identity(entry)
+            or (entry.st_dev, entry.st_ino) != (before.st_dev, before.st_ino)
+        ):
+            raise PathContractError(f"{context} changed during pinned replay")
+        raw = b"".join(chunks)
+        if len(raw) != before.st_size:
+            raise PathContractError(f"{context} pinned read was short")
+        return raw, before
+    except OSError as error:
+        raise PathContractError(f"{context} secure replay failed: {error}") from error
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+
+
+def _replay_machine_publication_candidate(
+    *,
+    path: Path,
+    parent_fd: int,
+    parent_chain: tuple[tuple[str, int, int, int], ...],
+    expected_raw: bytes,
+    expected_identity: tuple[int, int, int, int, int, int, int],
+) -> None:
+    """Terminally prove that the caller's candidate namespace is unchanged."""
+
+    _replay_machine_publication_directory(
+        path.parent,
+        parent_fd,
+        parent_chain,
+        "machine candidate parent",
+    )
+    raw, info = _read_machine_publication_file_at(
+        parent_fd,
+        path.name,
+        "machine publication candidate",
+    )
+    if (
+        raw != expected_raw
+        or _machine_publication_file_identity(info) != expected_identity
+    ):
+        raise PathContractError("machine publication candidate changed")
+
+
+def _write_machine_publication_bytes(descriptor: int, raw: bytes) -> None:
+    """Write all staging bytes; split out for deterministic fault injection."""
+
+    view = memoryview(raw)
+    while view:
+        written = os.write(descriptor, view)
+        if written <= 0:
+            raise OSError("short machine publication staging write")
+        view = view[written:]
+
+
+def _rename_machine_publication_noreplace(
+    parent_fd: int,
+    source_name: str,
+    destination_name: str,
+) -> None:
+    """Atomically publish one regular file with no fallback or replacement."""
+
+    libc = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(libc, "renameat2", None)
+    if renameat2 is None:
+        raise PathContractError("renameat2(RENAME_NOREPLACE) is unavailable")
+    renameat2.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    renameat2.restype = ctypes.c_int
+    ctypes.set_errno(0)
+    result = renameat2(
+        parent_fd,
+        os.fsencode(source_name),
+        parent_fd,
+        os.fsencode(destination_name),
+        1,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number in {errno.EEXIST, errno.ENOTEMPTY}:
+        raise CorruptGeneration(
+            "canonical machine freeze destination already exists or collided"
+        )
+    raise PathContractError(
+        "machine publication renameat2(RENAME_NOREPLACE) failed: "
+        f"{os.strerror(error_number)}"
+    )
+
+
+def _cleanup_machine_publication_stage(
+    parent_fd: int,
+    name: str,
+    owned_inode: tuple[int, int],
+) -> None:
+    """Remove only this invocation's exact pre-rename inode, then sync."""
+
+    try:
+        entry = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+    except FileNotFoundError:
+        return
+    except OSError as error:
+        raise PathContractError(
+            f"machine publication staging cleanup stat failed: {error}"
+        ) from error
+    if (entry.st_dev, entry.st_ino) != owned_inode:
+        raise PathContractError(
+            "machine publication refused to unlink a replaced staging inode"
+        )
+    try:
+        os.unlink(name, dir_fd=parent_fd)
+        os.fsync(parent_fd)
+    except OSError as error:
+        raise PathContractError(
+            f"machine publication staging cleanup failed: {error}"
+        ) from error
+
+
+def _machine_publication_scheduler_snapshot(
+    root: Path,
+    machine: Mapping[str, Any],
+) -> tuple[bytes, tuple[int, int, int, int, int, int, int]]:
+    """Bind the candidate to the exact role-19 file in this authority root."""
+
+    scheduler_relative = dict(FORMAL_INPUT_ROLES)["scheduler"]
+    capture = machine.get("capture")
+    if type(capture) is not dict:
+        raise ProductionAuthorityError("machine publication capture record malformed")
+    if capture.get("capture_tool_path") != scheduler_relative:
+        raise ProductionAuthorityError("machine publication capture tool is not role 19")
+    scheduler_path = authority_project_file(root, scheduler_relative)
+    raw, info = read_pinned_regular_file(scheduler_path)
+    if sha256_bytes(raw) != capture.get("capture_tool_sha256"):
+        raise ProductionAuthorityError(
+            "machine publication candidate is stale relative to live role 19"
+        )
+    return raw, _machine_publication_file_identity(info)
+
+
+def publish_formal_machine_freeze(
+    *,
+    candidate_value: str,
+    expected_sha256: str,
+    authority_root_value: str,
+) -> dict[str, Any]:
+    """Publish role 10 once, without dispatch or independent-review claims.
+
+    The destination is derived only from the exact Paper02 authority root and
+    the frozen role-10 path.  A successful ``renameat2`` is never rolled back:
+    any later error is deliberately fail-closed and leaves the write-once
+    canonical inode for a separate role-24 verification.
+    """
+
+    expected_sha256 = _exact_sha(
+        expected_sha256, "expected machine publication SHA-256"
+    )
+    root = safe_absolute_path(authority_root_value, "publication authority root")
+    live_root = safe_absolute_path(os.fspath(ROOT), "live Paper02 root")
+    if root != live_root:
+        raise PathContractError(
+            "machine publication authority root must equal the exact live Paper02 root"
+        )
+    candidate_path = safe_absolute_path(candidate_value, "machine candidate path")
+    if candidate_path.parts[:2] != ("/", "tmp") or len(candidate_path.parts) < 3:
+        raise PathContractError("machine publication candidate must be an absolute /tmp file")
+    destination = authority_project_file(
+        root, dict(FORMAL_INPUT_ROLES)["machine_freeze"]
+    )
+    if candidate_path == destination:
+        raise PathContractError("machine publication candidate aliases role 10")
+
+    candidate_parent_fd: int | None = None
+    root_fd: int | None = None
+    publication_parent_fd: int | None = None
+    stage_fd: int | None = None
+    stage_name: str | None = None
+    stage_inode: tuple[int, int] | None = None
+    renamed = False
+    preserve_crash_residue = False
+    try:
+        candidate_parent_fd = _open_directory_fd(candidate_path.parent)
+        candidate_parent_chain = _machine_publication_directory_chain(
+            candidate_path.parent
+        )
+        _replay_machine_publication_directory(
+            candidate_path.parent,
+            candidate_parent_fd,
+            candidate_parent_chain,
+            "machine candidate parent",
+        )
+        candidate_raw, candidate_info = _read_machine_publication_file_at(
+            candidate_parent_fd,
+            candidate_path.name,
+            "machine publication candidate",
+        )
+        candidate_identity = _machine_publication_file_identity(candidate_info)
+        if sha256_bytes(candidate_raw) != expected_sha256:
+            raise ProductionAuthorityError(
+                "machine publication candidate SHA-256 differs from expected intent"
+            )
+        try:
+            candidate_text = candidate_raw.decode("utf-8")
+        except UnicodeError as error:
+            raise StrictJSONError(
+                "machine publication candidate is not UTF-8"
+            ) from error
+        machine = strict_json_loads(candidate_text)
+        if candidate_raw != canonical_json_bytes(machine):
+            raise StrictJSONError(
+                "machine publication candidate is not CJ_COMPACT_V1"
+            )
+        if (
+            type(machine) is not dict
+            or type(machine.get("filesystem")) is not dict
+            or machine["filesystem"].get("project_root") != os.fspath(root)
+        ):
+            raise ProductionAuthorityError(
+                "machine publication candidate authority root mismatch"
+            )
+        _validate_formal_machine_envelope(machine)
+        scheduler_raw, scheduler_identity = (
+            _machine_publication_scheduler_snapshot(root, machine)
+        )
+        _replay_machine_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+
+        root_fd = _open_directory_fd(root)
+        root_chain = _machine_publication_directory_chain(root)
+        _replay_machine_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        publication_parent_fd = _open_directory_fd(destination.parent)
+        publication_parent_chain = _machine_publication_directory_chain(
+            destination.parent
+        )
+        _replay_machine_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "machine publication parent",
+        )
+        try:
+            os.stat(
+                destination.name,
+                dir_fd=publication_parent_fd,
+                follow_symlinks=False,
+            )
+        except FileNotFoundError:
+            pass
+        else:
+            raise CorruptGeneration(
+                "canonical machine freeze destination already exists"
+            )
+
+        for _attempt in range(32):
+            proposed_name = _machine_publication_stage_basename()
+            if MACHINE_PUBLICATION_STAGE_PATTERN.fullmatch(proposed_name) is None:
+                raise PathContractError(
+                    "machine publication staging basename violates the contract"
+                )
+            try:
+                stage_fd = os.open(
+                    proposed_name,
+                    os.O_WRONLY
+                    | os.O_CREAT
+                    | os.O_EXCL
+                    | getattr(os, "O_NOFOLLOW", 0),
+                    0o600,
+                    dir_fd=publication_parent_fd,
+                )
+            except FileExistsError:
+                continue
+            except OSError as error:
+                raise PathContractError(
+                    f"machine publication staging create failed: {error}"
+                ) from error
+            stage_name = proposed_name
+            initial_stage = os.fstat(stage_fd)
+            if not stat.S_ISREG(initial_stage.st_mode) or initial_stage.st_nlink != 1:
+                raise PathContractError(
+                    "machine publication staging inode is not exclusive regular file"
+                )
+            stage_inode = (initial_stage.st_dev, initial_stage.st_ino)
+            break
+        else:
+            raise PathContractError(
+                "machine publication exhausted collision-safe staging names"
+            )
+        assert stage_fd is not None and stage_name is not None and stage_inode is not None
+        os.fchmod(stage_fd, 0o644)
+        _write_machine_publication_bytes(stage_fd, candidate_raw)
+        try:
+            _machine_publication_crash_hook("AFTER_STAGE_WRITE")
+        except SyntheticMachinePublicationCrash:
+            preserve_crash_residue = True
+            raise
+        os.fsync(stage_fd)
+        try:
+            _machine_publication_crash_hook("AFTER_STAGE_FILE_FSYNC")
+        except SyntheticMachinePublicationCrash:
+            preserve_crash_residue = True
+            raise
+        staged_raw, staged_info = _read_machine_publication_file_at(
+            publication_parent_fd,
+            stage_name,
+            "machine publication staging file",
+            fsync_file=True,
+        )
+        if (
+            staged_raw != candidate_raw
+            or (staged_info.st_dev, staged_info.st_ino) != stage_inode
+            or staged_info.st_size != len(candidate_raw)
+        ):
+            raise CorruptGeneration("machine publication staging replay mismatch")
+        os.fsync(publication_parent_fd)
+        try:
+            _machine_publication_crash_hook("AFTER_STAGING_PARENT_FSYNC")
+        except SyntheticMachinePublicationCrash:
+            preserve_crash_residue = True
+            raise
+
+        _machine_publication_crash_hook("BEFORE_TERMINAL_REPLAY")
+        _replay_machine_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+        _replay_machine_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_machine_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "machine publication parent",
+        )
+        _validate_formal_machine_envelope(machine)
+        replay_scheduler_raw, replay_scheduler_identity = (
+            _machine_publication_scheduler_snapshot(root, machine)
+        )
+        if (
+            replay_scheduler_raw != scheduler_raw
+            or replay_scheduler_identity != scheduler_identity
+        ):
+            raise PathContractError("live role-19 scheduler changed before publication")
+
+        _machine_publication_crash_hook("BEFORE_RENAME")
+        _replay_machine_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+        _replay_machine_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_machine_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "machine publication parent",
+        )
+        if sha256_bytes(_live_boot_id_bytes()) != machine["capture"]["boot_id_sha256"]:
+            raise ProductionAuthorityError(
+                "machine boot ID changed immediately before publication"
+            )
+        replay_scheduler_raw, replay_scheduler_identity = (
+            _machine_publication_scheduler_snapshot(root, machine)
+        )
+        if (
+            replay_scheduler_raw != scheduler_raw
+            or replay_scheduler_identity != scheduler_identity
+        ):
+            raise PathContractError("live role-19 scheduler changed at publication")
+        staged_raw, staged_info = _read_machine_publication_file_at(
+            publication_parent_fd,
+            stage_name,
+            "machine publication staging file",
+        )
+        if (
+            staged_raw != candidate_raw
+            or (staged_info.st_dev, staged_info.st_ino) != stage_inode
+        ):
+            raise CorruptGeneration("machine publication staging inode changed")
+
+        _rename_machine_publication_noreplace(
+            publication_parent_fd, stage_name, destination.name
+        )
+        renamed = True
+        _machine_publication_crash_hook("AFTER_RENAME")
+
+        try:
+            os.stat(stage_name, dir_fd=publication_parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            pass
+        else:
+            raise CorruptGeneration(
+                "machine publication rename left the staging entry present"
+            )
+        open_stage = os.fstat(stage_fd)
+        if (
+            (open_stage.st_dev, open_stage.st_ino) != stage_inode
+            or stat.S_IMODE(open_stage.st_mode) != 0o644
+            or open_stage.st_nlink != 1
+            or open_stage.st_size != len(candidate_raw)
+        ):
+            raise CorruptGeneration(
+                "machine publication open staging inode changed after rename"
+            )
+        published_raw, published_info = _read_machine_publication_file_at(
+            publication_parent_fd,
+            destination.name,
+            "canonical machine freeze",
+            fsync_file=True,
+        )
+        if (
+            published_raw != candidate_raw
+            or sha256_bytes(published_raw) != expected_sha256
+            or (published_info.st_dev, published_info.st_ino) != stage_inode
+            or published_info.st_size != len(candidate_raw)
+        ):
+            raise CorruptGeneration(
+                "canonical machine freeze post-publication replay mismatch"
+            )
+        _machine_publication_crash_hook("AFTER_DESTINATION_FSYNC")
+        os.fsync(publication_parent_fd)
+        _machine_publication_crash_hook("AFTER_PUBLICATION_PARENT_FSYNC")
+
+        _replay_machine_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_machine_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "machine publication parent",
+        )
+        lexical_raw, lexical_info = read_pinned_regular_file(destination)
+        if (
+            lexical_raw != candidate_raw
+            or _machine_publication_file_identity(lexical_info)
+            != _machine_publication_file_identity(published_info)
+        ):
+            raise CorruptGeneration(
+                "canonical machine freeze lexical terminal replay mismatch"
+            )
+        _replay_machine_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+        _validate_formal_machine_envelope(machine)
+        terminal_scheduler_raw, terminal_scheduler_identity = (
+            _machine_publication_scheduler_snapshot(root, machine)
+        )
+        if (
+            terminal_scheduler_raw != scheduler_raw
+            or terminal_scheduler_identity != scheduler_identity
+        ):
+            raise PathContractError("live role-19 scheduler changed after publication")
+
+        receipt = {
+            "schema_version": SCHEMA_VERSION,
+            "protocol_id": PROTOCOL_ID,
+            "artifact_role": "MACHINE_FREEZE_PUBLICATION_RECEIPT",
+            "artifact_status": "PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY",
+            "authority": "ROLE19_PUBLICATION_ONLY",
+            "candidate_path": os.fspath(candidate_path),
+            "canonical_path": os.fspath(destination),
+            "machine_freeze_sha256": expected_sha256,
+            "size_bytes": len(candidate_raw),
+            "mode": "0644",
+            "nlink": 1,
+            "serializer": "CJ_COMPACT_V1",
+            "publication_method": MACHINE_PUBLICATION_METHOD,
+            "independent_verification_performed": False,
+            "scientific_licensing_enabled": False,
+            "production_authorized": False,
+            "scientific_dispatch_performed": False,
+            "component_status": None,
+            "milestone_status": None,
+            "theorem_status": None,
+            "final_status": None,
+        }
+        if canonical_json_bytes(receipt).decode("utf-8") != (
+            json.dumps(
+                receipt,
+                sort_keys=True,
+                separators=(",", ":"),
+                ensure_ascii=False,
+                allow_nan=False,
+            )
+            + "\n"
+        ):
+            raise StrictJSONError("machine publication receipt is not CJ_COMPACT_V1")
+        return receipt
+    finally:
+        cleanup_error: BaseException | None = None
+        if (
+            publication_parent_fd is not None
+            and stage_name is not None
+            and stage_inode is not None
+            and not renamed
+            and not preserve_crash_residue
+        ):
+            try:
+                _cleanup_machine_publication_stage(
+                    publication_parent_fd, stage_name, stage_inode
+                )
+            except BaseException as error:
+                cleanup_error = error
+        close_error: OSError | None = None
+        for descriptor in (
+            stage_fd,
+            publication_parent_fd,
+            root_fd,
+            candidate_parent_fd,
+        ):
+            if descriptor is None:
+                continue
+            try:
+                os.close(descriptor)
+            except OSError as error:
+                if close_error is None:
+                    close_error = error
+        if cleanup_error is not None:
+            raise cleanup_error
+        if close_error is not None:
+            raise PathContractError(
+                f"machine publication descriptor close failed: {close_error}"
+            ) from close_error
+
+
 def _validate_formal_main_envelope(
     main: Any,
     input_roles: Sequence[FormalRoleRecord],
@@ -8762,20 +9512,22 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     # Path/absolute first would erase relative, '..', repeated-separator, and
     # trailing-slash provenance that must fail closed.
     parser.add_argument("--output")
-    parser.add_argument("--authority-root", default=str(ROOT))
+    parser.add_argument("--authority-root")
     parser.add_argument("--initialize-only", action="store_true")
     parser.add_argument("--capture-machine-freeze", action="store_true")
+    parser.add_argument("--publish-machine-freeze", action="store_true")
+    parser.add_argument("--candidate")
+    parser.add_argument("--expected-sha256")
     parser.add_argument("--static-calibration")
     parser.add_argument("--branch-calibration")
-    parser.add_argument("--capd-checkout", default=str(DEFAULT_CAPD_CHECKOUT))
-    parser.add_argument("--compiler", default=str(DEFAULT_COMPILER))
+    parser.add_argument("--capd-checkout")
+    parser.add_argument("--compiler")
     parser.add_argument("--mock-only", action="store_true")
     parser.add_argument("--mock-static-cells", type=int, default=0)
     parser.add_argument("--mock-branch-cells", type=int, default=0)
     parser.add_argument(
         "--mock-branch-evaluator",
         type=Path,
-        default=MOCK_BRANCH_EVALUATOR,
     )
     parser.add_argument("--finalize-mock-composite", action="store_true")
     parser.add_argument("--resume", action="store_true")
@@ -8787,6 +9539,53 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = parse_args(argv)
     try:
+        if not arguments.publish_machine_freeze and (
+            arguments.candidate is not None
+            or arguments.expected_sha256 is not None
+        ):
+            raise SchedulerContractError(
+                "machine publication arguments require --publish-machine-freeze"
+            )
+
+        if arguments.publish_machine_freeze:
+            if (
+                arguments.capture_machine_freeze
+                or arguments.initialize_only
+                or arguments.output is not None
+                or arguments.static_calibration is not None
+                or arguments.branch_calibration is not None
+                or arguments.capd_checkout is not None
+                or arguments.compiler is not None
+                or arguments.mock_only
+                or arguments.mock_static_cells
+                or arguments.mock_branch_cells
+                or arguments.mock_branch_evaluator is not None
+                or arguments.finalize_mock_composite
+                or arguments.resume
+                or arguments.production
+                or arguments.execute_scientific_dispatch
+            ):
+                raise SchedulerContractError(
+                    "machine publication is exact-exclusive from capture, "
+                    "initialize, mock, output, resume, and scientific execution modes"
+                )
+            if (
+                arguments.candidate is None
+                or arguments.expected_sha256 is None
+                or arguments.authority_root is None
+            ):
+                raise SchedulerContractError(
+                    "machine publication requires --candidate, "
+                    "--expected-sha256, and --authority-root"
+                )
+            receipt = publish_formal_machine_freeze(
+                candidate_value=arguments.candidate,
+                expected_sha256=arguments.expected_sha256,
+                authority_root_value=arguments.authority_root,
+            )
+            print(canonical_json_bytes(receipt).decode("utf-8"), end="")
+            return 0
+
         if arguments.capture_machine_freeze:
             if (
                 arguments.initialize_only
@@ -8814,11 +9613,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             candidate, candidate_sha256 = (
                 capture_and_publish_formal_machine_freeze(
                     output_value=arguments.output,
-                    project_root_value=arguments.authority_root,
+                    project_root_value=arguments.authority_root or str(ROOT),
                     static_calibration_value=arguments.static_calibration,
                     branch_calibration_value=arguments.branch_calibration,
-                    capd_checkout_value=arguments.capd_checkout,
-                    compiler_value=arguments.compiler,
+                    capd_checkout_value=(
+                        arguments.capd_checkout or str(DEFAULT_CAPD_CHECKOUT)
+                    ),
+                    compiler_value=arguments.compiler or str(DEFAULT_COMPILER),
                 )
             )
             print(
@@ -8877,7 +9678,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                     )
                 branch_result = run_mock_branch(
                     output,
-                    arguments.mock_branch_evaluator.absolute(),
+                    (
+                        arguments.mock_branch_evaluator
+                        or MOCK_BRANCH_EVALUATOR
+                    ).absolute(),
                     arguments.mock_branch_cells,
                     resume=arguments.resume,
                 )
@@ -8936,7 +9740,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             # Authority is captured before inspecting or creating the output.
             try:
-                snapshot = load_formal_authority(arguments.authority_root)
+                snapshot = load_formal_authority(arguments.authority_root or ROOT)
             except (FileNotFoundError, PathContractError) as error:
                 raise ProductionAuthorityError(
                     f"formal authority absent or unsafe; production rejected: {error}"
