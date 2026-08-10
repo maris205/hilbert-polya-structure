@@ -43,6 +43,7 @@ not receive a manuscript that would overstate the mathematics.
 | [`legacy_annular_residual_001`](projects/legacy_annular_residual_001/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | `NOT_TESTABLE` | Not opened; no new theorem edge |
 | [`polar_partition_trace`](projects/polar_partition_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical prerequisite | Incorporated into the LOG-0001 theorem chain |
 | [`polar_boundary_trace`](projects/polar_boundary_trace/README.md) | `(A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL)` | Historical local theorem | Incorporated into the LOG-0001 manuscript |
+| [`coprime_0001_countable_trace`](projects/coprime_0001_countable_trace/README.md) | `(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)` | `ANALYTIC_REVIEW` / `GO_WITH_LIMITATIONS` | Countable trace-class and exact cycle-ledger manuscript; compiled PDF |
 
 The lower-growth stage proves `D_pol'(2)>0.0213` from the complete signed
 trace ledger, hence `M_D(R)>0.0213*(R-2)` for `R>2`, and shows that the same
@@ -65,6 +66,7 @@ pivot. Target-zero comparison and Route B remain closed.
 - Previous HP-Dynamics integration checkpoint: `223ba99`
 - Legacy prime-dynamics source checkpoint: `2d01633de0bcf0ecd1310291e2547cff417e13a0` (RH-371)
 - Canonical transport: SSH remote `git@github.com:maris205/hilbert-polya-structure.git`
+- HP-Dynamics COPRIME-0001 source commit: `a1d4550`
 
 This README is updated whenever a stage changes state or a new paper
 subproject is opened.
