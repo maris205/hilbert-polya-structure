@@ -1,0 +1,171 @@
+\section{Exact finite-field results}
+\label{sec:results}
+
+\subsection{Reproducible protocol}
+
+The producer reads cryptographically frozen C24, C25, and C26 certificates.
+It forms each integral chronological product before reducing modulo \(p\),
+computes a quotient basis for \(V/\ker(g-I)\), evaluates
+\cref{eq:character-table}, and stores the result as an integer pair in the
+basis \((1,G_p)\).  No floating-point character value enters a decision.
+An independent checker does not import the producer; it uses a separate
+tuple-matrix implementation, Bareiss determinants, and independent modular
+elimination.
+
+Mutation tests reject forward/reverse substitution, \(B^T\) in place of the
+homology cocycle, chronological averaging, products of branch characters,
+\(\Theta(g)^r\) in place of \(\Theta(g^r)\), inclusion of \(p=2\), and
+promotion of a finite window to an all-power theorem.
+
+\subsection{Small-prime chronology and complete fibre polynomials}
+
+Let \(g_{\rm fwd}\) and \(g_{\rm rev}\) be the frozen C26 three-return
+forward and noncyclic reverse matrices.  The exact first characters are:
+
+\begin{table}[ht]
+\centering
+\caption{The three-return chronology is distinguished at all three small
+primes.  The basis satisfies \(G_p^2=\eta_p(-1)p\).}
+\label{tab:smallchars}
+\begin{tabular}{ccll}
+\toprule
+\(p\) & fibre dimension & \(\Theta_p(g_{\rm fwd})\) &
+\(\Theta_p(g_{\rm rev})\)\\
+\midrule
+3 & 9  & \(1\)  & \(G_3\)\\
+5 & 25 & \(-1\) & \(1\)\\
+7 & 49 & \(-1\) & \(-G_7\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Newton reconstruction uses all \(p^2\) power traces.  The two fibre
+polynomials differ for each of \(p=3,5,7\); their coefficient hashes are
+listed in \cref{tab:polyhash}.  The leading coefficient is \(-1\), and every
+polynomial passes conjugate reciprocity.
+
+\begin{table}[ht]
+\centering
+\caption{SHA-256 prefixes of exact ascending coefficient arrays in the
+\((1,G_p)\) basis.  Different hashes certify different full fibre
+polynomials; the JSON artifact contains every coefficient.}
+\label{tab:polyhash}
+\begin{tabular}{ccc}
+\toprule
+\(p\) & forward & noncyclic reverse\\
+\midrule
+3 & \texttt{77c8f89433b015e7} & \texttt{1565b7a342d05194}\\
+5 & \texttt{26a11d78dd2e464a} & \texttt{05d24ca6db4eebc2}\\
+7 & \texttt{087b3cdec27e34e6} & \texttt{1d86d5bce7c3caa7}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two-return \(AB/BA\) matrices remain a null control.  They differ over
+\(\Z\), but
+\(\tr\rho_{p,J_0}(AB)=\tr\rho_{p,J_0}(BA)\) for every \(p\).  A program that
+reports sensitivity on this pair has manufactured a phase or order error.
+
+\subsection{Power scan and a complete \(p=43\) fibre collision}
+
+For every odd prime \(p\le97\) and \(1\le r\le24\), we compare
+\(\Theta_p(g_{\rm fwd}^r)\) and \(\Theta_p(g_{\rm rev}^r)\).  Among 576
+comparisons, 328 differ and 248 agree.  The patterns are structured rather
+than monotone; \cref{tab:patterns} compresses the exact census.
+
+\begin{table}[ht]
+\centering
+\caption{Power-character patterns in the range \(1\le r\le24\).}
+\label{tab:patterns}
+\begin{tabular}{ll}
+\toprule
+Distinguished powers & primes\\
+\midrule
+all \(1,\ldots,24\) & 5, 7, 31, 53, 61, 73, 97\\
+all except 18 & 3\\
+odd powers & 11, 67, 79\\
+even powers & 13, 19, 29, 41, 59, 71\\
+9 and 18 only & 17\\
+24 only & 23\\
+none in the window & 43, 83, 89\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The last row cannot be interpreted from a cutoff.  Extending the exact scan
+finds the first differences at \(r=41\) for \(p=83\) and \(r=30\) for
+\(p=89\).  Prime 43 behaves differently.
+
+\begin{proposition}[Complete \(p=43\) finite-fibre collision]
+\label{prop:p43}
+Modulo 43, both \(g_{\rm fwd}\) and \(g_{\rm rev}\) have order 925.  Their
+Weil characters agree for every \(1\le r\le925\).  Consequently
+\[
+P_{43,g_{\rm fwd}}(T)=P_{43,g_{\rm rev}}(T),
+\]
+even though the characteristic polynomials of the two base symplectic
+matrices are different modulo 43.
+\end{proposition}
+
+\begin{proof}
+Exact modular multiplication returns both powers to the identity first at
+925.  Thomas's formula gives equal character pairs at every preceding power.
+The two sequences are therefore equal for all \(r\ge1\) by periodicity, and
+\cref{eq:local-log} identifies the fibre polynomials.  Direct reduction gives
+base characteristic coefficients
+\[
+(1,33,9,33,1)\quad\text{and}\quad(1,11,13,11,1)
+\pmod{43},
+\]
+so the base matrices are spectrally distinct.
+\end{proof}
+
+The scalar Perron atoms remain different in \cref{prop:p43}; hence the full
+twisted AGY orbit contributions need not collide.  The proposition proves
+only, and exactly, that a complete finite Weil fibre is not a separating
+invariant.
+
+\subsection{Singular-prime refinement}
+
+The C24 controls P014 and P016 share
+\[
+\chi(t)=t^4-9t^3+19t^2-9t+1,
+\qquad \det(I-g)=3.
+\]
+At the singular prime 3, both fixed spaces have dimension one, but their
+quotient discriminants have opposite Legendre signs.  In the frozen
+normalization,
+\[
+\Theta_3(g_{014})=-G_3,
+\qquad
+\Theta_3(g_{016})=+G_3.
+\]
+This is information beyond the common characteristic polynomial.  Away from
+3, \cref{prop:goodprime} forces both traces to the same Legendre symbol.
+
+\subsection{Arithmetic fragmentation in 150 branches}
+
+We enumerate every first-return bridge to the AGY base of length at most 12,
+with no internal base visit.  For each bridge \(v\), the tested branch is
+\[
+\gamma_*\,v\,\gamma_*,
+\qquad
+\gamma_*=t^{64}(tbttbtbb)^8.
+\]
+There are 150 such bridges.  The exact scan finds
+\[
+\begin{aligned}
+&150\text{ distinct }D_v=\det(I-g_v),\\
+&150\text{ distinct characteristic polynomials},\\
+&150\text{ distinct Legendre signatures}
+\end{aligned}
+\]
+over the 24 odd primes from 3 through 97.  Four released reference orbits
+also have four different squarefree kernels; the forward and reverse
+three-return discriminants have disjoint-looking large factor patterns.
+
+This census is finite and does not prove all-length conductor fragmentation.
+It does falsify the first, strongest version of the arithmetic hypothesis:
+the tested branches do not concentrate into a small set of quadratic
+characters.  Extending the bridge cutoff would add data but would not repair
+the missing mechanism that should force a common conductor.

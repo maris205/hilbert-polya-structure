@@ -1,0 +1,166 @@
+\section{The finite Weil character}
+\label{sec:weil}
+
+\subsection{Convention and honest representation}
+
+Fix an odd prime \(p\).  In standard coordinates let
+\[
+V=\F_p^2\oplus(\F_p^2)^\vee,
+\qquad
+J=\begin{pmatrix}0&I_2\\-I_2&0\end{pmatrix},
+\qquad
+\psi_p(a)=e^{2\pi i\widetilde a/p}.
+\]
+For \(v=(x,\xi)\), use the Weyl operator
+\[
+[\pi(x,\xi)f](t)
+=\psi_p\!\left(\xi^T(t+x/2)\right)f(t+x)
+\quad\text{on }\C^{\F_p^2}.
+\]
+The canonical intertwining construction gives an honest representation
+\[
+\rho_p:\Sp(4,\F_p)\longrightarrow U(p^2)
+\]
+satisfying
+\[
+\rho_p(g)\pi(v)\rho_p(g)^{-1}=\pi(gv).
+\]
+This is a representation of \(\Sp(4,\F_p)\), not a choice of signs on a
+double cover \citep{gurevich2009}.  The central element \(-I\) acts by
+parity and cannot be discarded by passing to the projective symplectic group.
+
+More generally, let \(J_*\) be any frozen unimodular alternating form and
+choose an integral Darboux matrix \(T_*\) satisfying
+\(T_*^T J_*T_*=J\).  We pull the representation back by
+\begin{equation}
+\rho_{p,J_*}(g):=\rho_p(T_*^{-1}gT_*),
+\qquad g\in\Sp(J_*,\F_p).
+\label{eq:rho-pullback}
+\end{equation}
+Changing the Darboux basis conjugates all fibre operators and leaves their
+characters and fibre polynomials unchanged.  For the C25/C26 cocycle we take
+\(J_*=J_0\) and the fixed matrix \(T\) from \cref{sec:source}; the C24
+controls use their displayed form \(J_{24}\).  Whenever the source frame is
+clear, we abbreviate
+\[
+\Theta_p(g):=\tr\rho_{p,J_*}(g).
+\]
+
+\subsection{Thomas's quotient discriminant}
+
+Let \(g\in\Sp(J_*,\F_p)\), set \(H_g=g-I\), and write
+\[
+k_g=\dim\ker H_g.
+\]
+On \(V/\ker H_g\), define
+\[
+\sigma_g(\bar v,\bar w)
+=\langle H_gv,w\rangle_{J_*}.
+\]
+If the columns of \(C\) represent a basis of the quotient, then
+\[
+d_g=\det(C^TH_g^TJ_*C)\in\F_p^\times
+\]
+is defined up to a square.  Let \(\eta_p\) be the Legendre character and
+\[
+G_p=\sum_{x\in\F_p}\psi_p(x^2/2),
+\qquad G_p^2=\eta_p(-1)p.
+\]
+
+\begin{theorem}[Thomas character formula \citealp{thomas2008}]
+\label{thm:thomas}
+With the preceding convention,
+\[
+\Theta_p(g):=\tr\rho_{p,J_*}(g)
+=p^{k_g/2}\gamma_p(1)^{4-k_g}\eta_p(d_g),
+\qquad
+\gamma_p(1)=p^{-1/2}G_p.
+\]
+Equivalently, every character lies in the exact quadratic span
+\(\Z+\Z G_p\) and is given by
+\begin{equation}
+\Theta_p(g)=
+\begin{cases}
+\eta_p(d_g),&k_g=0,\\
+\eta_p(d_g)\eta_p(-1)G_p,&k_g=1,\\
+\eta_p(d_g)\eta_p(-1)p,&k_g=2,\\
+\eta_p(d_g)pG_p,&k_g=3,\\
+p^2,&k_g=4.
+\end{cases}
+\label{eq:character-table}
+\end{equation}
+\end{theorem}
+
+The table yields three strong implementation identities:
+\begin{equation}
+\Theta_p(I)=p^2,
+\qquad
+|\Theta_p(g)|^2=p^{k_g}=|\ker(g-I)|,
+\qquad
+\Theta_p(g^{-1})=\overline{\Theta_p(g)}.
+\label{eq:character-checks}
+\end{equation}
+In particular, the full Weil character never vanishes.  Character values are
+conjugacy invariant but not multiplicative.  An orbit weight must therefore
+be \(\Theta_p(g_w)\), never a product of edge or branch characters.
+
+\subsection{Good primes and quadratic fields}
+
+The character simplifies strongly away from the fixed-vector locus.
+
+\begin{proposition}[Good-prime quadratic law]
+\label{prop:goodprime}
+Let \(J_*\) be a unimodular integral alternating form, let
+\(g\in\Sp(J_*,\Z)\), and let
+\(D_g=\det(g-I)\ne0\).  For every odd prime \(p\nmid D_g\),
+\[
+\boxed{\Theta_p(g\bmod p)=\Leg{D_g}p.}
+\]
+The same statement holds for \(g^r\) whenever
+\(p\nmid\det(g^r-I)\).
+\end{proposition}
+
+\begin{proof}
+The condition \(p\nmid D_g\) gives \(k_g=0\).  In full quotient coordinates,
+the determinant of \(\sigma_g\) differs from \(\det(g-I)\) by the determinant
+of the unimodular alternating form, which is a square.  The \(k=0\) line of
+\cref{eq:character-table} gives the claim.
+\end{proof}
+
+Thus a fixed orbit determines a genuine quadratic character through the
+squarefree part of \(D_g\).  The primes dividing \(D_g\) are precisely where
+the fixed-space dimension and quotient discriminant can add Gauss-sum data.
+The simplicity is also a warning: at every good prime a
+\(p^2\)-dimensional character has collapsed to one bit, \(+1\) or \(-1\).
+
+\subsection{Complete finite-fibre polynomial}
+
+The first character alone does not encode repetitions.  Define
+\[
+P_{p,g}(T)=\det(I-T\rho_{p,J_*}(g)).
+\]
+Then
+\begin{equation}
+-\log P_{p,g}(T)
+=\sum_{r\ge1}\frac{\Theta_p(g^r)}rT^r.
+\label{eq:local-log}
+\end{equation}
+Because the degree is \(p^2\), the first \(p^2\) traces determine the
+polynomial.  Writing \(P_{p,g}(T)=\sum_{m=0}^{p^2}c_mT^m\), Newton's recursion
+is
+\begin{equation}
+c_0=1,
+\qquad
+c_m=-\frac1m\sum_{j=1}^m c_{m-j}\Theta_p(g^j).
+\label{eq:newton}
+\end{equation}
+All computations can be performed exactly in \(\Q(G_p)\).  The determinant
+character of \(\rho_p\) is trivial in genus two, so \(c_{p^2}=-1\); unitarity
+also gives
+\[
+c_m=-\overline{c_{p^2-m}}.
+\]
+These identities are used as release tests.  The polynomial
+\(P_{p,g}\) is the complete local invariant of the finite fibre.  It is not,
+by itself, the full AGY orbit factor, which also contains the scalar Perron
+and stability terms in \cref{eq:scalaratom}.

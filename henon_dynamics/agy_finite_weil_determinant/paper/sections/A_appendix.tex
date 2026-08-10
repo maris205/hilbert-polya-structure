@@ -1,0 +1,99 @@
+\section{Exact quotient computation}
+\label{app:quotient}
+
+Let \(H=g-I\) over \(\F_p\), and choose pivot columns
+\(i_1,\ldots,i_r\) of \(H\).  The corresponding standard vectors
+\(e_{i_1},\ldots,e_{i_r}\) project to a basis of
+\(V/\ker H\): a linear combination lies in \(\ker H\) exactly when the same
+combination of the independent columns of \(H\) vanishes.  If
+\(C=(e_{i_1},\ldots,e_{i_r})\), the quotient matrix is
+\[
+Q_g=C^TH^TJC.
+\]
+Thomas's form is nondegenerate, so \(\det Q_g\ne0\).  Replacing \(C\) by
+another quotient basis sends \(Q_g\) to \(R^TQ_gR\), multiplying the
+determinant by \((\det R)^2\).  Its Legendre sign is therefore well defined.
+
+The independent checker reimplements the pivot-column quotient construction
+with immutable tuple matrices and its own modular elimination.  Independence
+here means a separate arithmetic engine and source replay, not a claim that a
+different quotient-basis theorem is being used.
+
+\section{Arithmetic in the \((1,G_p)\) basis}
+
+Write an exact value as \(a+bG_p\), where
+\(G_p^2=\eta_p(-1)p\).  Multiplication and complex conjugation are
+\[
+(a,b)(c,d)
+=(ac+bd\,\eta_p(-1)p,\ ad+bc),
+\]
+\[
+\overline{(a,b)}=(a,\eta_p(-1)b).
+\]
+Newton's recursion \cref{eq:newton} may introduce rational pairs in this
+basis even though the resulting coefficients are algebraic integers; the
+quadratic basis need not be an integral basis.  The release therefore stores
+reduced rational numerators and denominators rather than coercing each
+coefficient to an integer.
+
+\section{Frozen chronology witnesses}
+
+The positive prefix is
+\[
+\gamma_*=t^{64}(tbttbtbb)^8,
+\qquad |\gamma_*|=128.
+\]
+Let \(\gamma_2=\gamma_*\,bttbtbb\,\gamma_*\) and
+\(\gamma_3=\gamma_*\,bbb\,\gamma_*\).  The forward three-return product is
+\[
+g_{\rm fwd}=g_{\gamma_3}g_{\gamma_2}g_{\gamma_*},
+\]
+whereas the tested noncyclic reverse is
+\[
+g_{\rm rev}=g_{\gamma_*}g_{\gamma_2}g_{\gamma_3}.
+\]
+The two-return products
+\(g_{\gamma_2}g_{\gamma_*}\) and
+\(g_{\gamma_*}g_{\gamma_2}\) are the mandatory trace-cyclicity control.
+All matrices are reconstructed from labeled Rauzy edges; the release does not
+hand-enter the large three-return matrices.
+
+\section{Complete-period logic}
+
+Suppose \(a,b\) in a finite group both satisfy \(a^N=b^N=I\).  If
+\(\Theta(a^r)=\Theta(b^r)\) for \(1\le r\le N\), then equality holds for
+all integer \(r\) by reduction modulo \(N\).  At \(p=43\), exact modular
+multiplication gives \(N=925\) and no character difference in the full
+period.  This converts a finite computation into an all-power theorem.  By
+contrast, the absence of a difference for \(p=83\) and \(p=89\) through
+\(r=24\) has no such status; differences appear later at 41 and 30.
+
+\section{Independent replay and release artifacts}
+
+From the project directory, the complete replay command is
+\begin{verbatim}
+bash code/run_c27.sh
+\end{verbatim}
+It performs the following steps:
+\begin{enumerate}
+\item regenerate the exact certificate from the C24--C26 source locks;
+\item run the independent checker;
+\item execute chronology and scope mutation tests;
+\item verify the regenerated artifacts against the frozen SHA-256 release
+manifest.
+\end{enumerate}
+
+The primary certificate contains all local-polynomial coefficients, every
+power-pattern class for odd \(p\le97\), the complete \(p=43\) period record,
+the integral symplectic conjugator, and all 150 arithmetic-scan rows.  Finite
+enumerations carry explicit flags preventing their promotion to all-length
+theorems.
+
+\section{Claim firewall}
+
+The release excludes \(p=2\), edgewise metaplectic signs over finite fields,
+branchwise products of characters, absolute-value replacements, parity-sector
+substitution for the full fibre, chronological averaging, and use of
+\(B^T\) as the forward homology cocycle.  It also excludes an unproved direct
+sum or product over primes.  No Riemann zeros or prime tables are read,
+trained on, or scored.
