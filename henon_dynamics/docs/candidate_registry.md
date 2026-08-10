@@ -151,6 +151,69 @@ source-locked holomorphic/no-localizer space or a geometrically forced
 generalized trace.  Quasi-H\"older cylinder localization remains conditional,
 and longer elementary-period ledgers are not authorized.
 
+## HCS-C26 holomorphic closure and scalar determinant (2026-08-10)
+
+Candidate **HCS-C26** executes the C25 holomorphic reopening gate; see
+[`../agy_holomorphic_slice_obstruction/`](../agy_holomorphic_slice_obstruction/).
+It proves a sharp same-domain separation rather than testing another finite
+period window.
+
+The published AGY return grammar, combined with chronological Rauzy
+multiplication and transposition, gives every inverse-branch matrix a common
+strictly positive left factor,
+
+\[
+B_\gamma^T=P C_\gamma,
+\qquad P>0,\quad C_\gamma\ge0.
+\]
+
+The nonnegative remainder preserves the canonical complex positive cone,
+while the fixed prefix maps its closure to the interior.  This yields one
+bounded complex threefold domain \(\Omega\) with a common compact branch
+image.  The raw scalar weights are holomorphic and summable throughout
+`Re(s)>-sigma_0`; the scalar Bergman transfer operator belongs to exponential
+class `E(c,1/3)` and is trace class.
+
+For every ordered return word,
+
+\[
+A_w=A_{\gamma_n}\cdots A_{\gamma_1}
+\]
+
+is the true later-on-left raw integer matrix.  If \(\lambda_w\) is its
+Perron root and \(\chi_w\) its characteristic polynomial, exact
+normalizer telescoping and the projective quotient derivative give
+
+\[
+\operatorname{tr}T_{s,w}
+=\frac{\lambda_w^{-(s+1)}}{\chi_w'(\lambda_w)}.
+\]
+
+Thus the scalar determinant retains chronological algebraic-unit data.
+Words with equal characteristic data are still counted with their actual
+multiplicity; no spectral quotient or transition average is introduced.
+
+The literal unsmoothed oscillator twist is nevertheless noncompact on
+`A^2(Omega;L^2(R^2))`.  The full operator is bounded there, but constants and
+one point evaluation expose an `ell^1` sum of distinct metaplectic atoms.
+This closes every bounded point-evaluative holomorphic realization satisfying
+the stated constant/evaluation assumptions.  It does not close non-tensor
+anisotropic spaces without a bounded fibre slice or a separately defined
+flat/distributional determinant.
+
+The exact certificate passes 14 independent gates and 21 mutation tests.
+It records a positive-prefix Birkhoff bound below `0.001734`, exact rational
+essential-norm floors, three Perron trace identities, and a three-return
+noncyclic reversal whose characteristic polynomial detects order.  The
+two-return AB/BA pair is retained only as a contravariant matrix-order
+sentinel because its characteristic polynomial is cyclically invariant.
+The formal target tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**.  The common complex domain and scalar Perron trace are
+retained as positive infrastructure.  The authorized next large candidate
+uses finite Weil fibres over odd finite fields; further ordinary holomorphic
+base norms are not a reopening.
+
 ## C02D closure (2026-08-06)
 
 The conditional C02D operator gate is now closed **NO_GO**; see

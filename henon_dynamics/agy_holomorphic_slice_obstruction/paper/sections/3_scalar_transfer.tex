@@ -1,0 +1,160 @@
+\section{The scalar holomorphic transfer operator}
+\label{sec:scalar-transfer}
+
+The raw scalar weight is
+\[
+ w_{s,\gamma}(x)
+ =e^{-sr_\gamma(x)}j_\gamma(x)
+ =q_\gamma(x)^{-(s+d)}.
+\]
+We next verify the two countable hypotheses that cannot be inferred from
+compact containment alone: one logarithm for all branches and an
+\(\ell^1\) weight bound.
+
+\begin{lemma}[Common logarithm and complex branch sum]
+\label{lem:complex-weight-sum}
+For every \(s\in\halfplane\), all weights extend holomorphically to
+\(\Omega\) by
+\begin{equation}
+ w_{s,\gamma}(z)
+ =\exp\!\left(-(s+d)\Logp\ell(A_\gamma z)\right),
+ \label{eq:complex-weight}
+\end{equation}
+where \(\Logp\) is the principal logarithm.  Moreover,
+\begin{equation}
+ \sum_{\gamma\in\Gamma}
+ \|w_{s,\gamma}\|_{H^\infty(\Omega)}<\infty.
+ \label{eq:complex-l1}
+\end{equation}
+The convergence is uniform when \(s\) ranges over a compact subset of
+\(\halfplane\).
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+ q_\gamma(z)=\ell(A_\gamma z)=c_\gamma\cdot z,
+ \qquad c_{\gamma,j}=\sum_i(A_\gamma)_{ij}>0.
+\]
+Because \(\overline\Omega\Subset\cD\), there are constants
+\[
+ \delta_\Omega=\min_{z\in\overline\Omega,i}\Re z_i>0,
+ \qquad
+ M_\Omega=\max_{z\in\overline\Omega,i}|z_i|<\infty.
+\]
+It follows that
+\[
+ \Re q_\gamma(z)
+ \geq\delta_\Omega\sum_jc_{\gamma,j}>0.
+\]
+Thus every denominator lies in the same right half-plane and
+\eqref{eq:complex-weight} is unambiguous.
+
+ Fix a comparison point
+ \(x_0\in\Delta\subset p_P(\cD)\subset\Omega\) and put
+\(m_0=\min_i(x_0)_i\), \(M_0=\max_i(x_0)_i\).  Uniformly in \(z\) and
+\(\gamma\),
+\begin{equation}
+ \frac{\delta_\Omega}{M_0}
+ \leq\frac{|q_\gamma(z)|}{q_\gamma(x_0)}
+ \leq\frac{M_\Omega}{m_0},
+ \qquad |\arg q_\gamma(z)|<\frac{\pi}{2}.
+ \label{eq:normalizer-comparison}
+\end{equation}
+For fixed \(s\), taking moduli in \eqref{eq:complex-weight} and using both
+sides of \eqref{eq:normalizer-comparison} gives
+\[
+ \|w_{s,\gamma}\|_\infty
+ \leq C_{\Omega,s}
+ q_\gamma(x_0)^{-(d+\Re s)}.
+\]
+The AGY exponential-tail and bounded-distortion estimates imply the real
+branch sum
+\begin{equation}
+ \sum_\gamma\sup_{x\in\Delta}
+ q_\gamma(x)^{-(d+\Re s)}<\infty,
+ \qquad \Re s> -\sigma_0;
+ \label{eq:real-branch-sum}
+\end{equation}
+see the source construction in \citet{agy2006}.  This proves
+\eqref{eq:complex-l1}.  For local uniformity, let
+\(K\Subset\halfplane\) and choose
+\(-\sigma_0<a_0<\min_{s\in K}\Re s\).  The inherited return-time convention
+gives \(q_\gamma(x_0)=e^{r_\gamma(x_0)}\geq2\).  The sector factor
+\(e^{|\Im s|\pi/2}\) and the comparison powers in
+\eqref{eq:normalizer-comparison} are bounded on \(K\), and the inequality
+\(q_\gamma(x_0)\geq2\) therefore gives the single majorant
+\[
+ \sup_{s\in K}\|w_{s,\gamma}\|_\infty
+ \leq C_K q_\gamma(x_0)^{-(d+a_0)}.
+\]
+Its sum converges by \eqref{eq:real-branch-sum} at \(a_0\).  This proves
+local uniformity; no bound uniform as \(|\Im s|\to\infty\) is asserted.
+\end{proof}
+
+Let \(A^2(\Omega)\) denote the Bergman space with respect to
+six-dimensional Euclidean volume on \(H_\C\simeq\C^3\).  Define
+\begin{equation}
+ (L_sf)(z)=\sum_{\gamma\in\Gamma}
+ w_{s,\gamma}(z)f(h_\gamma z).
+ \label{eq:scalar-transfer}
+\end{equation}
+
+\begin{theorem}[Scalar Bergman trace class]
+\label{thm:scalar-trace-class}
+For every \(s\in\halfplane\), the operator \(L_s\) belongs to an
+exponential singular-value class \(E(c,1/3)\), for a domain-dependent
+\(c>0\).  In particular, \(L_s\) is trace class and
+\begin{equation}
+ D(s,u)=\det_{A^2(\Omega)}(I-uL_s)
+ \label{eq:scalar-determinant}
+\end{equation}
+is entire in \(u\).  The map
+\(s\mapsto L_s\) is locally holomorphic in trace norm on
+\(\halfplane\), so \(D\) is jointly holomorphic on
+\(\halfplane\times\C\).
+\end{theorem}
+
+\begin{proof}
+By \Cref{thm:common-domain,lem:complex-weight-sum}, the pairs
+\((h_\gamma,w_{s,\gamma})\) form a countable holomorphic map-weight system
+with one common compact image and a summable weight majorant.  The Bergman
+embedding theorem of \citet{bandtlow2008explicit} places the associated
+transfer operator in \(E(c,1/q)\), here \(q=3\).  Stretched-exponential
+singular-value decay implies trace class.
+
+For the parameter statement, choose an intermediate domain
+\begin{equation}
+ \overline{\bigcup_\gamma h_\gamma(\Omega)}
+ \subset\widetilde\Omega\Subset\Omega.
+ \label{eq:intermediate-domain}
+\end{equation}
+Restriction
+\(J_\Omega:A^2(\Omega)\to A^2(\widetilde\Omega)\) is trace class.  Each
+branch factors as
+\[
+ T_{s,\gamma}=\widetilde T_{s,\gamma}J_\Omega,
+ \qquad
+ \|\widetilde T_{s,\gamma}\|
+ \leq C_\Omega\|w_{s,\gamma}\|_\infty.
+\]
+Consequently
+\begin{equation}
+ \sum_\gamma\|T_{s,\gamma}\|_1
+ \leq C_\Omega\|J_\Omega\|_1
+ \sum_\gamma\|w_{s,\gamma}\|_\infty<\infty,
+ \label{eq:branch-trace-norm}
+\end{equation}
+locally uniformly in \(s\).  The Weierstrass theorem for Banach-valued
+holomorphic series gives trace-norm holomorphy, and the standard Fredholm
+determinant then gives the joint conclusion.  These conclusions also follow
+from the favorable-space nuclear framework of
+\citet{bandtlow2008ruelle}.
+\end{proof}
+
+The theorem concerns the raw transfer operator in
+\eqref{eq:scalar-transfer}.  AGY prove that the invariant density is bounded
+and \(C^1\), but not that it extends holomorphically to \(\Omega\).  We do
+not insert that density into the holomorphic operator.  At this point the
+scalar determinant is legal; the infinite oscillator fibre has not yet been
+added.

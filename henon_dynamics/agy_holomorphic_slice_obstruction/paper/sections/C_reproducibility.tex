@@ -1,0 +1,70 @@
+\section{Reproducibility and disclosure}
+\label{app:reproducibility}
+
+\subsection{Reproduction contract}
+
+From the repository root, regenerate and validate the exact certificate by
+running
+\begin{verbatim}
+cd henon_dynamics/agy_holomorphic_slice_obstruction
+./code/run_c26.sh
+\end{verbatim}
+The runner executes the exact producer, an independent checker, the
+regression and mutation suite, and artifact-hash verification.  The released
+run used Python 3.12.3 and SymPy 1.14.0.  It reports seven Rauzy states,
+fourteen directed edges, a length-128 source word, fourteen independent
+checks, and twenty-one tests.  The checker imports neither producer functions nor
+producer constants.  It reconstructs every elementary Rauzy move and uses a
+centered finite difference rather than the producer's analytic projective
+derivative.
+
+The two principal JSON artifacts have the recorded SHA-256 digests
+\begin{align*}
+ \texttt{c26\_certificate.json}:\quad&
+ \texttt{1c0289b9b47e65e0603ea001be7cce263}\ldots,\\
+ \texttt{c26\_independent\_check.json}:\quad&
+ \texttt{20cddc20923184de687b8e70ee3bf7b4d}\ldots.
+\end{align*}
+The complete values are stored in
+\texttt{results/ARTIFACT\_HASHES.sha256}; abbreviated hashes above are for
+readability, not for verification.
+
+The mutation suite rejects reversed chronology, \(B\)/\(B^T\) confusion,
+Jacobian exponents three or five, complex dimension four, a zero entry in
+the positive prefix, a branchwise fitted logarithm, the two-return
+contravariant matrix order, and the three-return noncyclic spectral order.
+It also rejects barycentric substitution for \(x_0\), omission of either
+bounded slice, and cancellation errors among equal projected atoms.  The
+finite length-20 decoder replay is registered explicitly as a non-proof
+sentinel.
+
+Compile this article with
+\begin{verbatim}
+cd paper
+latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+\end{verbatim}
+The source is modular: every main section and appendix is a separate file,
+and the bibliography contains only cited, DOI-verified references.
+
+\subsection{Evidence levels}
+
+The common-domain, scalar trace-class, Perron trace, and evaluation-slice
+arguments are mathematical proofs.  The exact scripts verify the selected
+section word and three Perron specializations; they do not enumerate the countable
+AGY family or prove a theorem by finite search.  The all-length decoder and
+discrete-atom theorem are inherited mathematical inputs, restated in
+\Cref{app:operator-proofs}.  The finite-Weil direction in
+\Cref{sec:route-a} is a proposed experiment, not a result.
+
+\subsection{AI-assistance disclosure}
+
+AI systems assisted with symbolic exploration, source organization,
+independent code generation, theorem auditing, and preparation of the
+manuscript.  Every cited bibliographic record was checked against a DOI,
+article record, or publisher catalog.  Exact producer outputs were replayed
+by separately written checker code, and claims were assigned explicit
+evidence levels before inclusion.  AI assistance does not replace the
+mathematical arguments: the paper states all hypotheses used by the
+infinite-family theorems, distinguishes inherited results from present
+deductions, and records negative conclusions and open boundaries without
+upgrading them to proofs.

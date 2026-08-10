@@ -1,0 +1,160 @@
+\section{Perron arithmetic of chronological trace atoms}
+\label{sec:perron-trace}
+
+The order convention matters before any spectral reduction.  Let
+\(\boldsymbol\beta=(\beta_1,\ldots,\beta_n)\) list AGY returns in forward
+time, from earliest to latest.  Rauzy matrices multiply later on the left:
+\begin{equation}
+ B_{\boldsymbol\beta}
+ =B_{\beta_n}\cdots B_{\beta_1},
+ \qquad
+ A_{\boldsymbol\beta}=B_{\boldsymbol\beta}^T
+ =A_{\beta_1}\cdots A_{\beta_n}.
+ \label{eq:chronological-matrices}
+\end{equation}
+The inverse projective map and the corresponding term in \(L_s^n\) are
+\begin{equation}
+ h_{\boldsymbol\beta}
+ =h_{\beta_1}\circ\cdots\circ h_{\beta_n}
+ =p_{A_{\boldsymbol\beta}},
+ \qquad
+ T_{s,\beta_n}\cdots T_{s,\beta_1}.
+ \label{eq:chronological-operators}
+\end{equation}
+Equivalently, if \((\gamma_1,\ldots,\gamma_n)\) indexes the operator product
+\(T_{s,\gamma_1}\cdots T_{s,\gamma_n}\), then
+\(A=A_{\gamma_n}\cdots A_{\gamma_1}\).  This equivalence prevents a
+transpose from silently reversing time.
+
+Every \(A_{\boldsymbol\beta}\) is a strictly positive matrix in
+\(\SL(d,\mathbb Z)\).  Let \(\lambda_{\boldsymbol\beta}>0\) be its Perron
+root and put
+\begin{equation}
+ \chi_{\boldsymbol\beta}(t)
+ =\det(tI-A_{\boldsymbol\beta})\in\mathbb Z[t].
+ \label{eq:word-characteristic}
+\end{equation}
+
+\begin{theorem}[Perron--characteristic trace formula]
+\label{thm:perron-trace}
+The map \(h_{\boldsymbol\beta}\) has one fixed point in \(\Omega\), the
+normalized positive Perron vector of \(A_{\boldsymbol\beta}\), and
+\begin{equation}
+ \boxed{
+ \tr\bigl(T_{s,\beta_n}\cdots T_{s,\beta_1}\bigr)
+ =\frac{\lambda_{\boldsymbol\beta}^{-(s+1)}}
+ {\chi_{\boldsymbol\beta}'(\lambda_{\boldsymbol\beta})}.}
+ \label{eq:perron-atom}
+\end{equation}
+For every fixed \(n\),
+\begin{equation}
+ \boxed{
+ \tr L_s^n
+ =\sum_{\boldsymbol\beta\in\Gamma^n}
+ \frac{\lambda_{\boldsymbol\beta}^{-(s+1)}}
+ {\chi_{\boldsymbol\beta}'(\lambda_{\boldsymbol\beta})},}
+ \label{eq:word-trace-sum}
+\end{equation}
+and the sum converges absolutely and locally uniformly for
+\(s\in\halfplane\).
+\end{theorem}
+
+\begin{proof}
+Strict positivity gives a simple Perron root and a positive eigenvector.
+The corresponding normalized vector belongs to the real AGY base because
+\(A_{\boldsymbol\beta}\) retains the fixed positive left factor after the
+projective composition.  Compact containment gives uniqueness of the fixed
+point in \(\Omega\).
+
+Let \(x_0\) denote that fixed point and follow the inverse periodic history
+in the order in which the maps in \eqref{eq:chronological-operators} act.
+At each step write
+\[
+ A_{\gamma_k}x_{k-1}=q_kx_k,
+ \qquad q_k=\ell(A_{\gamma_k}x_{k-1})>0.
+\]
+Multiplication around the closed history gives
+\[
+ A_{\boldsymbol\beta}x_0
+ =\left(\prod_{k=1}^nq_k\right)x_0,
+ \qquad
+ \prod_{k=1}^nq_k=\lambda_{\boldsymbol\beta}.
+\]
+All intermediate normalizers are positive real numbers, so no principal-log
+winding occurs.  The product of the scalar weights is therefore
+\begin{equation}
+ W_{s,\boldsymbol\beta}(x_0)
+ =\lambda_{\boldsymbol\beta}^{-(s+d)}.
+ \label{eq:telescoped-weight}
+\end{equation}
+
+Let \(V=\ker\ell\), the tangent space of \(H_\C\).  At a normalized Perron
+vector \(x\), direct differentiation gives
+\begin{equation}
+ Dp_A(x)v
+ =\lambda^{-1}\bigl(Av-x\ell(Av)\bigr),
+ \qquad v\in V.
+ \label{eq:projective-derivative}
+\end{equation}
+The map \(V\to\C^d/\C x\), \(v\mapsto[v]\), is an isomorphism.  Under this
+isomorphism \eqref{eq:projective-derivative} is the quotient action of
+\(A/\lambda\).  Hence, without assuming diagonalizability of the other
+eigenvalues,
+\begin{equation}
+ \det_{\C}(I-Dp_A(x))
+ =\frac{\chi_A'(\lambda)}{\lambda^{d-1}}.
+ \label{eq:projective-denominator}
+\end{equation}
+The fixed-point trace formula for holomorphic weighted composition
+operators~\citep{bandtlow2008ruelle,bandtlow2008explicit} divides
+\eqref{eq:telescoped-weight} by
+\eqref{eq:projective-denominator}.  Since the Jacobian exponent is \(d=4\)
+and the projective dimension is \(d-1=3\), the quotient is
+\(\lambda^{-(s+1)}/\chi_A'(\lambda)\).
+
+It remains to justify the countable trace interchange.  The branch series
+converges absolutely in trace norm by \eqref{eq:branch-trace-norm}; therefore
+\[
+ \sum_{(\gamma_1,\ldots,\gamma_n)\in\Gamma^n}
+ \|T_{s,\gamma_1}\cdots T_{s,\gamma_n}\|_1
+ \leq
+ \left(\sum_\gamma\|T_{s,\gamma}\|_1\right)^n<\infty.
+\]
+Taking the continuous Hilbert-space trace term by term proves
+\eqref{eq:word-trace-sum}.  Local uniformity follows from the compact
+\(s\)-set bound in \Cref{lem:complex-weight-sum}.
+\end{proof}
+
+The monic polynomial \(\chi_{\boldsymbol\beta}\) has constant term one,
+so its Perron root is an algebraic unit.  The denominator
+\(\chi'(\lambda)\) records separation from the other eigenvalues, but it is
+not automatically a number-field discriminant: the characteristic
+polynomial may be reducible or nonminimal.  For nonintegral complex \(s\),
+the value \(\lambda^{-(s+1)}\) is likewise not asserted to be algebraic.
+
+In the present full-rank four-dimensional model, the word matrix is
+conjugate to a symplectic matrix, so
+\begin{equation}
+ \chi_{\boldsymbol\beta}(t)
+ =t^4-a_{\boldsymbol\beta}t^3+b_{\boldsymbol\beta}t^2
+ -a_{\boldsymbol\beta}t+1,
+ \qquad a_{\boldsymbol\beta},b_{\boldsymbol\beta}\in\mathbb Z.
+ \label{eq:reciprocal-polynomial}
+\end{equation}
+The atom depends on this polynomial and its Perron root, but
+\eqref{eq:word-trace-sum} still counts every marked word.  Spectral
+collisions do not quotient the symbolic dynamics.
+
+Finally, the trace-class determinant identity gives
+\begin{equation}
+ -\log D(s,u)
+ =\sum_{n\geq1}\frac{u^n}{n}
+ \sum_{\boldsymbol\beta\in\Gamma^n}
+ \frac{\lambda_{\boldsymbol\beta}^{-(s+1)}}
+ {\chi_{\boldsymbol\beta}'(\lambda_{\boldsymbol\beta})}
+ \label{eq:orbit-log}
+\end{equation}
+for sufficiently small \(|u|\), locally uniformly on compact subsets of
+\(\halfplane\).  The Fredholm determinant, not the orbit-log series, gives
+the entire continuation in \(u\).  In particular, evaluation of
+\eqref{eq:orbit-log} at \(u=1\) requires an additional convergence argument.

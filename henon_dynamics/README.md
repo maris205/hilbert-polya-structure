@@ -61,6 +61,7 @@ The foundational local source is
 | [`henon_adelic_lefschetz_ramification/`](henon_adelic_lefschetz_ramification/) | Exact fixed-algebra chronology certificates and cyclic-resultant collapse of every fixed-word tower | Scoped negative result; C23 closed |
 | [`rauzy_metaplectic_obstruction/`](rauzy_metaplectic_obstruction/) | Exact genus-two Rauzy chronology, fixed-vector character obstruction, and two metaplectic noncompactness theorems | Two realization classes closed; canonical analytic application open |
 | [`agy_metaplectic_transfer_obstruction/`](agy_metaplectic_transfer_obstruction/) | All-length Rauzy matrix decoder and exact noncompactness on source-standard AGY vector-valued `C_b^1` and normalized `L^2` spaces | Ordinary determinant rejected; holomorphic/generalized trace open |
+| [`agy_holomorphic_slice_obstruction/`](agy_holomorphic_slice_obstruction/) | Common complex AGY domain, scalar trace-class determinant with Perron-characteristic trace atoms, and same-domain oscillator noncompactness | Scalar determinant proved; literal infinite oscillator Route-A rejected |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -143,7 +144,92 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C25 AGY transfer obstruction
+## Latest big-door result: HCS-C26 scalar/twisted AGY dichotomy
+
+HCS-C26 closes the holomorphic/no-localizer escape left open by C25 and
+simultaneously extracts a positive scalar determinant.  Every AGY return
+matrix factors as
+
+\[
+B_\gamma^T=P C_\gamma,
+\qquad P=B_{\gamma_*}^T>0,
+\qquad C_\gamma\ge0.
+\]
+
+Nonnegative projective maps preserve a canonical complex positive cone, and
+the fixed positive prefix maps its closure strictly inside.  Consequently
+there is one bounded domain \(\Omega\subset\mathbb C^3\) whose compact core
+contains every countable inverse-branch image.  The raw weights
+
+\[
+w_{s,\gamma}(z)
+=\bigl(\mathbf1^TB_\gamma^Tz\bigr)^{-(s+4)}
+\]
+
+share a principal logarithm and have summable sup norms for every
+\(\Re s> -\sigma_0\).  The scalar operator on \(A^2(\Omega)\) is therefore
+trace class.
+
+For a literal operator-expansion word, later branches multiply on the left:
+
+\[
+A_{\boldsymbol\gamma}
+=A_{\gamma_n}\cdots A_{\gamma_1}
+=(B_{\gamma_1}\cdots B_{\gamma_n})^T.
+\]
+
+If \(\lambda_{\boldsymbol\gamma}\) is its Perron root and
+\(\chi_{\boldsymbol\gamma}\) its characteristic polynomial, the ordinary
+scalar trace atom is exactly
+
+\[
+\operatorname{tr}T_{s,\boldsymbol\gamma}
+=\frac{\lambda_{\boldsymbol\gamma}^{-(s+1)}}
+       {\chi_{\boldsymbol\gamma}'(\lambda_{\boldsymbol\gamma})}.
+\]
+
+The raw integer word matrix lies in \(SL(4,\mathbb Z)\), so its Perron root
+is an algebraic unit.  This provides a genuine arithmetic and chronological
+trace structure, but no prime law or Riemann-divisor identification.
+
+On the same domain, the literal vector-valued series on
+\(A^2(\Omega;L^2(\mathbb R^2))\) is bounded.  Constants followed by one
+interior evaluation compress the full countable operator to an `ell^1` sum
+of distinct metaplectic atoms.  C24's atomic theorem and C25's all-length
+decoder give
+
+\[
+\|\mathcal L_s^{\rm Mp}\|_{\rm ess}
+\ge
+\frac{\bigl(\sum_\gamma|w_{s,\gamma}(x_0)|^2\bigr)^{1/2}}
+     {\|E_{x_0}\|\,\|J\|}>0.
+\]
+
+Thus scalar holomorphic nuclearity survives, but the unsmoothed infinite
+oscillator twist is noncompact on that very space.  The exact suite passes
+14 independent checks and 21 registered mutations; it reconstructs the
+length-128 rational lower bound, the positive-prefix cone constants, three
+Perron trace examples, a two-return contravariant-order sentinel, and a
+three-return noncyclic reversal whose characteristic polynomial changes.
+
+The formal target verdict remains
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**.  The next large door changes the fibre to finite Weil
+representations over odd finite fields, rather than trying more base norms.
+
+- [C26 project overview](agy_holomorphic_slice_obstruction/README.md)
+- [C26 theorem package](agy_holomorphic_slice_obstruction/THEOREM_PACKAGE.md)
+- [C26 exact certificate](agy_holomorphic_slice_obstruction/results/c26_certificate.json)
+- [C26 independent check](agy_holomorphic_slice_obstruction/results/c26_independent_check.json)
+- [C26 compiled note](agy_holomorphic_slice_obstruction/paper/main.pdf)
+
+Reproduce the round with:
+
+```bash
+cd agy_holomorphic_slice_obstruction && ./code/run_c26.sh
+```
+
+## Predecessor big-door result: HCS-C25 AGY transfer obstruction
 
 HCS-C25 closes the concrete application gate left open by C24.  It freezes
 one explicit Avila--Gou\"ezel--Yoccoz precompact Rauzy first-return section
