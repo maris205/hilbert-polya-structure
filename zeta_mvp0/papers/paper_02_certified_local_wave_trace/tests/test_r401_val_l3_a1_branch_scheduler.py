@@ -17,6 +17,11 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / "scripts/r401_val_l3_a1_branch_runtime.py"
+SCHEDULER = ROOT / "scripts/run_r401_val_l3_a1_all_slabs.py"
+MOCK_EVALUATOR = ROOT / "scripts/mock_r401_val_l3_a1_branch_evaluator.py"
+STATIC_CHECKER = ROOT / "scripts/check_r401_val_l3_a1_static_independent.py"
+BRANCH_CHECKER = ROOT / "scripts/check_r401_val_l3_a1_branch_independent.py"
+COMPOSITE_CHECKER = ROOT / "scripts/check_r401_val_l3_a1_composite_independent.py"
 FORMAL_SOURCE = ROOT / "validated/capd_r401_phase_branch_tube_mp_a1.cpp"
 
 
@@ -31,6 +36,19 @@ def load_runtime():
 
 
 R = load_runtime()
+
+
+def load_scheduler():
+    name = "r401_val_l3_a1_all_slabs_branch_archive_test"
+    spec = importlib.util.spec_from_file_location(name, SCHEDULER)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+S = load_scheduler()
 
 
 class SyntheticSchedulerAbort(BaseException):
@@ -1933,3 +1951,249 @@ def test_record_and_manifest_are_canonical_json_without_authority_widening(
         assert pin["descriptor_identity_matches_after"] is True
         assert pin["path_identity_matches_after"] is True
     assert json.loads(record_path.read_text(encoding="utf-8")) == result.record
+
+
+def _branch_archive_bytes(output: Path) -> dict[str, bytes]:
+    branch = output / "branch"
+    return {
+        path.relative_to(branch).as_posix(): path.read_bytes()
+        for path in sorted(branch.rglob("*"))
+        if path.is_file()
+    }
+
+
+def _run_mock_checker(source: Path, output: Path, *, postcheck: bool) -> None:
+    command = [
+        sys.executable,
+        str(source),
+        "--input-dir",
+        str(output),
+    ]
+    if postcheck:
+        command.append("--postcheck")
+    completed = subprocess.run(
+        command,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+
+
+def test_mock_task_builder_binds_exact_l1_records_and_cross_precision_domains() -> None:
+    tasks = S.build_mock_branch_tasks(MOCK_EVALUATOR.resolve())
+    assert len(tasks) == 102
+    assert [(task.precision_bits, task.slab_id) for task in tasks] == [
+        (cell.precision_bits, cell.slab_id) for cell in S.exact_matrix()
+    ]
+    assert tasks[0].accepted_l1_primary_record_id == "128/S000/primary"
+    assert tasks[51].accepted_l1_primary_record_id == "256/S000/primary"
+    assert tasks[0].epsilon == ("0.0000", "0.0021")
+    assert tasks[0].root_box == (
+        ("-0.0000621099303404812157", "0.0000178900696595187843"),
+        ("0.149388644835276716", "0.149428644835276716"),
+        ("-0.00008", "0.00008"),
+        ("0.663823949234225406", "0.663863949234225406"),
+    )
+    for index in range(51):
+        assert tasks[index].epsilon == tasks[51 + index].epsilon
+        assert tasks[index].root_box == tasks[51 + index].root_box
+        assert tasks[index].accepted_l1_primary_record_sha256 != (
+            tasks[51 + index].accepted_l1_primary_record_sha256
+        )
+    assert S.canonical_decimal_token("0.0000") == "0"
+    assert S.canonical_decimal_token("-0.000") == "0"
+
+
+def test_complete_102_mock_branch_archive_partial_resume_and_aggregate(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "archive"
+    static = S.run_mock_static(output, 102, resume=False)
+    assert static["aggregate_finalized"] is True
+    _run_mock_checker(STATIC_CHECKER, output, postcheck=False)
+    _run_mock_checker(STATIC_CHECKER, output, postcheck=True)
+
+    partial = S.run_mock_branch(
+        output,
+        MOCK_EVALUATOR,
+        18,
+        resume=False,
+        completion_delays={
+            f"128:S{index:03d}": (5 - index % 6) * 0.002
+            for index in range(18)
+        },
+    )
+    assert partial["completed_cells"] == 18
+    assert partial["barrier_count"] == 3
+    assert partial["promotion_blocked"] is False
+    assert partial["aggregate_finalized"] is False
+    assert not S.branch_aggregate_summary_path(output).exists()
+    assert not S.branch_aggregate_manifest_path(output).exists()
+
+    completed = S.run_mock_branch(
+        output,
+        MOCK_EVALUATOR,
+        102,
+        resume=True,
+    )
+    assert completed["completed_cells"] == 102
+    assert completed["barrier_count"] == 17
+    assert completed["promotion_blocked"] is False
+    assert completed["aggregate_finalized"] is True
+    assert sum(
+        state["state"] == "RESUMED_COMMITTED"
+        for state in completed["states"]
+    ) == 18
+    summary_path = S.branch_aggregate_summary_path(output)
+    manifest_path = S.branch_aggregate_manifest_path(output)
+    summary_before = summary_path.read_bytes()
+    manifest_before = manifest_path.read_bytes()
+    summary = S.strict_json_load(summary_path, require_canonical=True)
+    manifest = S.strict_json_load(manifest_path, require_canonical=True)
+    assert summary["cell_count"] == 102
+    assert summary["matrix"] == S.matrix_payload()
+    assert summary["status_counts"] == {"BRANCH_CELL_CERTIFIED": 102}
+    assert summary["scheduler_classification_counts"] == {
+        "COMMITTED_EVALUATOR_RESULT": 102
+    }
+    assert summary["mock_only"] is True
+    assert summary["scientific_licensing_enabled"] is False
+    assert summary["component_status"] is None
+    assert summary["milestone_status"] is None
+    assert summary["theorem_status"] is None
+    assert summary["final_status"] is None
+    assert len(manifest["cell_manifests"]) == 102
+    assert manifest["cell_manifests"][0]["path"] == (
+        "branch/cell_manifests/128/S000.json"
+    )
+    assert manifest["cell_manifests"][-1]["path"] == (
+        "branch/cell_manifests/256/S050.json"
+    )
+    assert manifest["ordered_cell_manifest_root"] == S.sha256_bytes(
+        S.canonical_json_bytes(manifest["cell_manifests"])
+    )
+    assert manifest["summary"] == {
+        "path": "branch/aggregate_summary.json",
+        "sha256": S.sha256(summary_path),
+        "size_bytes": summary_path.stat().st_size,
+    }
+
+    resumed = S.run_mock_branch(
+        output,
+        MOCK_EVALUATOR,
+        102,
+        resume=True,
+    )
+    assert resumed["aggregate"]["state"] == "RESUMED_COMMITTED"
+    assert all(
+        state["state"] == "RESUMED_COMMITTED" for state in resumed["states"]
+    )
+    assert summary_path.read_bytes() == summary_before
+    assert manifest_path.read_bytes() == manifest_before
+
+    _run_mock_checker(BRANCH_CHECKER, output, postcheck=False)
+    _run_mock_checker(BRANCH_CHECKER, output, postcheck=True)
+    composite_state, composite_summary, composite_manifest = (
+        S.finalize_mock_composite_controls(output)
+    )
+    assert composite_state == "COMMITTED"
+    assert composite_summary["cell_count_per_component"] == 102
+    assert composite_summary["component_status"] is None
+    assert composite_summary["milestone_status"] is None
+    assert composite_summary["theorem_status"] is None
+    assert composite_summary["final_status"] is None
+    assert composite_manifest["archive_generation_sha256"] == (
+        composite_summary["archive_generation_sha256"]
+    )
+    _run_mock_checker(COMPOSITE_CHECKER, output, postcheck=False)
+    _run_mock_checker(COMPOSITE_CHECKER, output, postcheck=True)
+    downstream_before = {
+        name: (output / name).read_bytes()
+        for name in (
+            "composite_summary.json",
+            "composite_manifest.json",
+            "independent_checker.json",
+            "POSTCHECK_STATUS.json",
+        )
+    }
+    composite_resume, _, _ = S.finalize_mock_composite_controls(output)
+    assert composite_resume == "RESUMED_COMMITTED"
+    assert {
+        name: (output / name).read_bytes() for name in downstream_before
+    } == downstream_before
+
+
+def test_mock_barrier_completion_order_does_not_change_canonical_branch_bytes(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "stable-path"
+    S.run_mock_static(output, 102, resume=False)
+    first = S.run_mock_branch(
+        output,
+        MOCK_EVALUATOR,
+        12,
+        resume=False,
+        completion_delays={
+            f"128:S{index:03d}": (index % 6) * 0.05
+            for index in range(12)
+        },
+    )
+    assert first["completed_cells"] == 12
+    first_bytes = _branch_archive_bytes(output)
+    first_completion = first["barrier_completion_order"]
+
+    quarantined, quarantined_operational = S.quarantine_incompatible_generation(
+        output, "MOCK_COMPLETION_ORDER_REPLAY"
+    )
+    assert quarantined.is_dir()
+    assert quarantined_operational is not None
+    assert quarantined_operational.is_dir()
+    assert not output.exists()
+    S.run_mock_static(output, 102, resume=False)
+    second = S.run_mock_branch(
+        output,
+        MOCK_EVALUATOR,
+        12,
+        resume=False,
+        completion_delays={
+            f"128:S{index:03d}": (5 - index % 6) * 0.05
+            for index in range(12)
+        },
+    )
+    assert second["completed_cells"] == 12
+    assert second["barrier_completion_order"] != first_completion
+    assert _branch_archive_bytes(output) == first_bytes
+
+
+def test_branch_aggregate_rejects_extra_namespace_and_live_stage(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "archive"
+    S.run_mock_static(output, 102, resume=False)
+    S.run_mock_branch(output, MOCK_EVALUATOR, 102, resume=False)
+    run_config_sha256 = S.sha256(S.run_config_path(output))
+    stage = (
+        S.operational_root_for(output)
+        / "staging"
+        / "branch"
+        / "128"
+        / f".S000.tmp-{run_config_sha256[:16]}-0"
+    )
+    stage.mkdir()
+    run_config = S.strict_json_load(
+        S.run_config_path(output), require_canonical=True
+    )
+    mock_evaluator = S.validate_mock_branch_evaluator(output, MOCK_EVALUATOR)
+    tasks = S.build_mock_branch_tasks(MOCK_EVALUATOR)
+    bindings = S.mock_branch_bindings(
+        run_config["matrix_id"], run_config_sha256, mock_evaluator
+    )
+    with pytest.raises(S.CorruptGeneration, match="live staging owners"):
+        S.validate_branch_mock_aggregate(
+            output,
+            tasks,
+            bindings,
+            R.BranchBudgets(),
+            mock_evaluator,
+        )

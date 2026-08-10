@@ -8,16 +8,34 @@ Prepared: 2026-08-09 UTC
 
 Status: **PROSPECTIVE_NON_LICENSING / REJECT_FOR_DISPATCH**
 
-## 1. Purpose and non-implementation boundary
+## 1. Purpose and implementation boundary
 
 This contract defines the exact candidate role maps and acyclic publication
-rules for a future L3-A1 production release.  It does not assert that any
-listed implementation candidate, machine freeze, main freeze, pre-freeze
-review, production result, checker, postcheck, or release currently exists.
+rules for a future L3-A1 production release.  A mock-only builder and complete
+temporary 68-role replay now exist, together with the three mock checker and
+postcheck chains.  This does not assert that a production machine freeze,
+main freeze, pre-freeze review, scientific result, formal checker status, or
+canonical release exists.
 
 The future release builder never runs an evaluator and never creates
 scientific authority.  It may publish only after reopening and independently
 reproducing an already passing three-checker plus three-postcheck chain.
+
+### 1.1 Present mock specialization
+
+The implemented builder accepts only an exact `MOCK_MAIN_FREEZE` in a
+synthetic project.  It replays a 53-input plus 15-publication-object DAG and
+emits an exact 68-role `PASS_MOCK_PROVENANCE_REPLAY` envelope.  Every
+scientific status remains null and `scientific_licensing_enabled=false`.
+Nominally formal freezes and production statuses are rejected before any
+publication.
+
+The mock implementation deep-checks run-config, aggregate, per-cell payload,
+component checker/postcheck, composite checker/postcheck, report, source, and
+role semantics rather than accepting a coherently rebound hash graph.  It
+also rejects nested authority fields, changed claim boundaries, hidden
+authoritative files, and executing source bytes that differ from the frozen
+mock input role.  These are engineering provenance gates only.
 
 ## 2. Exact 53-role main-freeze input map candidate
 
@@ -187,6 +205,19 @@ The release merely reproduces the composite checker and postcheck.  If either
 does not already carry the exact passing value, no passing release can be
 built.
 
+The present mock release uses the same top-level schema with:
+
+```text
+release_status = PASS_MOCK_PROVENANCE_REPLAY
+authority = RELEASE_BINDING_ONLY
+scientific_licensing_enabled = false
+milestone_status = null
+theorem_status = null
+final_status = null.
+```
+
+This mock value is not an alias for `PASS_LOCAL_PHASE_TUBE_ALL_SLABS`.
+
 ## 6. Independent generation recomputation
 
 Before publication, the builder independently:
@@ -209,6 +240,13 @@ No quoted hash is accepted without reopening its source object.  Per-cell
 scientific replay remains the checker responsibility, but the builder
 requires checker/postcheck hashes and directly recomputes archive structure
 and provenance.
+
+For the current mock path, this structural traversal includes all 102 static
+and 102 branch manifests and their bound proof/raw/record payloads, exact
+producer and checker claim boundaries, null-status enforcement, nested
+authority rejection, and equality between executing critical source bytes
+and their mock-freeze roles.  It still performs no scientific proof or ODE
+replay.
 
 ## 7. Same-byte and path safety
 
@@ -266,6 +304,12 @@ composite postcheck = PASS_WRITE_ONCE_POSTCHECK.
 Any discrepancy, extra authority field, subset status, or non-null final value
 blocks release.
 
+The implemented mock gate instead requires all three checker statuses to be
+`PASS_MOCK_INDEPENDENT_REPLAY`, all three postchecks to be
+`PASS_MOCK_WRITE_ONCE_POSTCHECK`, licensing false, and every component,
+milestone, theorem, and final status null.  It cannot produce any of the
+formal statuses listed above.
+
 ## 10. Report contract
 
 The production report must contain one exact authority block:
@@ -322,8 +366,16 @@ Current exact state:
 ```text
 contract_status = PROSPECTIVE_NON_LICENSING
 role_map_status = IMPLEMENTATION_CANDIDATE
+mock_release_builder_implemented = true
+mock_68_role_replay_implemented = true
+mock_release_status = PASS_MOCK_PROVENANCE_REPLAY
+mock_scientific_licensing_enabled = false
+mock_final_independent_review = ACCEPT_P0_0_P1_0
+mock_l3_a1_implementation_tests = 280/280
+paper02_regression = 675/675
+formal_release_builder_implemented = false
 main_freeze_exists = false
-release_exists = false
+canonical_release_exists = false
 dispatch_authorized = false
 milestone_status = null
 theorem_status = null

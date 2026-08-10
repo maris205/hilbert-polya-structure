@@ -2,11 +2,13 @@
 """Independently replay formal R401-VAL-L3-A1 static proof objects.
 
 The checker deliberately duplicates the exact model reconstruction, Arb
-interval formulas, terminal predicates, and rational bisection rules.  It
-does not import the static evaluator or scheduler.  A successful full-matrix
-replay may assign only the component value
+interval formulas, terminal predicates, rational bisection rules, and mock
+archive/hash-DAG replay.  It does not import the static evaluator or
+scheduler.  The currently callable aggregate path accepts only the explicit
+non-licensing mock generation and leaves every scientific status null.  A
+future frozen formal full-matrix replay may assign only the component value
 ``PASS_STATIC_PHASE_ANCHOR_ALL_SLABS``; all programme-level fields remain
-null, and the composite checker must independently bind this result.
+null, and the composite checker must independently bind that result.
 """
 
 from __future__ import annotations
@@ -140,6 +142,55 @@ CELL_CLAIM_BOUNDARY = (
     "producer-only static phase-anchor cell conditional on K=1 and "
     "whole-orbit residence in r_minus<0.06; no component, composite, "
     "global-orbit, trace-formula, Hilbert-Polya, zeta-zero, or RH authority"
+)
+
+# The mock chain is deliberately a separate engineering namespace.  These
+# values cannot be confused with the future scientific component pass in the
+# checker contract.
+MOCK_ARTIFACT_STATUS = "MOCK_ONLY_NON_LICENSING"
+MOCK_CHECKER_STATUS = "PASS_MOCK_INDEPENDENT_REPLAY"
+MOCK_POSTCHECK_STATUS = "PASS_MOCK_WRITE_ONCE_POSTCHECK"
+MOCK_CLAIM_BOUNDARY = (
+    "deterministic 102-cell static archive and hash-DAG engineering replay "
+    "only; synthetic proofs receive no static component, local theorem, "
+    "global-orbit, trace-formula, Hilbert-Polya, zeta-zero, or RH authority"
+)
+MOCK_POSTCHECK_CLAIM_BOUNDARY = (
+    "write-once reproduction of the non-licensing 102-cell static mock "
+    "checker chain only; no scientific component or programme authority"
+)
+MOCK_PRODUCER_CLAIM_BOUNDARY = (
+    "synthetic static/branch scheduler transaction only; no Arb/CAPD "
+    "scientific evaluation, no component or local theorem, no global "
+    "routing, trace, Hilbert-Polya, zeta-zero, or RH claim"
+)
+
+SCHEDULER_SOURCE = ROOT / "scripts/run_r401_val_l3_a1_all_slabs.py"
+BRANCH_RUNTIME_SOURCE = ROOT / "scripts/r401_val_l3_a1_branch_runtime.py"
+MOCK_BRANCH_EVALUATOR_SOURCE = (
+    ROOT / "scripts/mock_r401_val_l3_a1_branch_evaluator.py"
+)
+PROTOCOL = ROOT / "research/route_a_wave_trace/R401_VAL_L3_A1_PROTOCOL.md"
+SCHEDULER_CONTRACT = (
+    ROOT
+    / "research/route_a_wave_trace/R401_VAL_L3_A1_SCHEDULER_CONTRACT.md"
+)
+CHECKER_CONTRACT = (
+    ROOT / "research/route_a_wave_trace/R401_VAL_L3_A1_CHECKER_CONTRACT.md"
+)
+RELEASE_CONTRACT = (
+    ROOT
+    / "research/route_a_wave_trace/R401_VAL_L3_A1_RELEASE_PROVENANCE_CONTRACT.md"
+)
+MOCK_SOURCE_PATHS = (
+    SCHEDULER_SOURCE,
+    BRANCH_RUNTIME_SOURCE,
+    MOCK_BRANCH_EVALUATOR_SOURCE,
+    PLAN,
+    PROTOCOL,
+    SCHEDULER_CONTRACT,
+    CHECKER_CONTRACT,
+    RELEASE_CONTRACT,
 )
 
 
@@ -1515,18 +1566,697 @@ def verify_proof(
     }
 
 
-def run_checker(_input_dir: Path) -> dict[str, Any]:
-    """Fail closed until the formal aggregate and run-config replay is complete."""
-
-    raise CheckError(
-        "formal 102-cell static aggregate replay is not yet implemented; "
-        "this implementation-design checker core cannot issue component authority"
+def exact_sha256(value: Any, context: str) -> str:
+    require(
+        type(value) is str
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value),
+        f"{context}: lower-case SHA-256 required",
     )
+    return value
+
+
+def exact_bool(value: Any, context: str, expected: bool) -> None:
+    require(type(value) is bool and value is expected, f"{context}: expected {expected}")
+
+
+def directory_names(path: Path, context: str) -> set[str]:
+    """List one directory through a no-follow descriptor and pin its identity."""
+
+    path = require_canonical_absolute_path(path, context)
+    try:
+        descriptor = _open_directory_fd(path)
+    except OSError as error:
+        raise CheckError(f"{context}: cannot open directory: {error}") from error
+    try:
+        before = os.fstat(descriptor)
+        require(stat.S_ISDIR(before.st_mode), f"{context}: not a directory")
+        names = os.listdir(descriptor)
+        after = os.fstat(descriptor)
+        require(
+            (
+                before.st_dev,
+                before.st_ino,
+                before.st_mode,
+                before.st_mtime_ns,
+                before.st_ctime_ns,
+            )
+            == (
+                after.st_dev,
+                after.st_ino,
+                after.st_mode,
+                after.st_mtime_ns,
+                after.st_ctime_ns,
+            ),
+            f"{context}: directory changed during scan",
+        )
+        require(len(names) == len(set(names)), f"{context}: duplicate directory entry")
+        for name in names:
+            require(
+                name not in ("", ".", "..")
+                and "/" not in name
+                and "\\" not in name
+                and "\x00" not in name,
+                f"{context}: unsafe directory entry",
+            )
+        return set(names)
+    finally:
+        os.close(descriptor)
+
+
+def require_exact_directory_names(path: Path, expected: set[str], context: str) -> None:
+    actual = directory_names(path, context)
+    require(
+        actual == expected,
+        f"{context}: namespace differs; missing={sorted(expected-actual)}, "
+        f"extra={sorted(actual-expected)}",
+    )
+
+
+def project_relative_path(path: Path) -> str:
+    try:
+        return path.relative_to(ROOT).as_posix()
+    except ValueError as error:
+        raise CheckError(f"{path}: path is outside project root") from error
+
+
+def mock_matrix_payload() -> list[dict[str, Any]]:
+    return [
+        {"precision_bits": bits, "slab_id": slab_id}
+        for bits in PRECISIONS
+        for slab_id in SLABS
+    ]
+
+
+def mock_matrix_id() -> str:
+    return sha256_bytes(canonical_json_bytes(mock_matrix_payload()))
+
+
+def mock_candidate_limits() -> dict[str, Any]:
+    return {
+        "branch": {
+            "record_bytes": 4 * 1024 * 1024,
+            "stderr_bytes": 1 * 1024 * 1024,
+            "stdout_bytes": 16 * 1024 * 1024,
+            "timeout_seconds": 600,
+            "total_cell_bytes": 32 * 1024 * 1024,
+            "workers": 6,
+        },
+        "global_scientific_budget": None,
+        "max_inflight_per_component_cell": 1,
+        "static": {
+            "max_depth_per_tree": 24,
+            "max_nodes_per_cell": 1_000_000,
+            "max_nodes_per_tree": 250_000,
+            "timeout_seconds": 1800,
+            "total_cell_bytes": 512 * 1024 * 1024,
+            "workers": 8,
+        },
+    }
+
+
+MOCK_RUN_CONFIG_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "mock_only",
+    "production_authorized",
+    "scientific_licensing_enabled",
+    "matrix",
+    "matrix_id",
+    "scheduler_policy",
+    "limits",
+    "paths",
+    "main_freeze",
+    "machine_freeze",
+    "prefreeze_review",
+    "source_bindings",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+
+
+def validate_mock_source_bindings(payload: Any, context: str) -> dict[str, str]:
+    require(isinstance(payload, dict), f"{context}: not an object")
+    expected_paths = {project_relative_path(path) for path in MOCK_SOURCE_PATHS}
+    exact_keys(payload, expected_paths, context)
+    answer: dict[str, str] = {}
+    for path in MOCK_SOURCE_PATHS:
+        relative = project_relative_path(path)
+        expected = exact_sha256(payload[relative], f"{context}.{relative}")
+        actual = sha256_file(path)
+        require(actual == expected, f"{context}.{relative}: live source hash mismatch")
+        answer[relative] = actual
+    return answer
+
+
+def validate_quiescent_mock_operational(path: Path) -> None:
+    """Reject retained task owners while allowing the two empty stage trees."""
+
+    if not os.path.lexists(path):
+        return
+    require_exact_directory_names(path, {"staging"}, "mock operational root")
+    staging = path / "staging"
+    components = directory_names(staging, "mock operational staging")
+    require(
+        components <= {"static", "branch"} and "static" in components,
+        "mock operational staging: unexpected component namespace",
+    )
+    for component in sorted(components):
+        component_root = staging / component
+        require_exact_directory_names(
+            component_root,
+            {str(bits) for bits in PRECISIONS},
+            f"mock {component} staging root",
+        )
+        for bits in PRECISIONS:
+            require_exact_directory_names(
+                component_root / str(bits),
+                set(),
+                f"mock {component} staging {bits}",
+            )
+
+
+def validate_mock_run_config(
+    input_dir: Path,
+) -> tuple[dict[str, Any], bytes, str, dict[str, str]]:
+    payload, raw = load_canonical_json_with_raw(input_dir / "run_config.json")
+    exact_keys(payload, MOCK_RUN_CONFIG_KEYS, "mock run config")
+    require_exact_int(payload["schema_version"], "mock run config.schema_version", expected=1)
+    require(payload["protocol_id"] == PROTOCOL_ID, "mock run config: protocol")
+    require(payload["artifact_role"] == "RUN_CONFIG", "mock run config: role")
+    require(payload["artifact_status"] == MOCK_ARTIFACT_STATUS, "mock run config: status")
+    require(payload["authority"] == "PRODUCER_ONLY", "mock run config: authority")
+    exact_bool(payload["mock_only"], "mock run config.mock_only", True)
+    exact_bool(payload["production_authorized"], "mock run config.production_authorized", False)
+    exact_bool(
+        payload["scientific_licensing_enabled"],
+        "mock run config.scientific_licensing_enabled",
+        False,
+    )
+    require_json_exact(payload["matrix"], mock_matrix_payload(), "mock run config.matrix")
+    matrix_id = mock_matrix_id()
+    require(payload["matrix_id"] == matrix_id, "mock run config: matrix digest")
+    require(
+        payload["scheduler_policy"] == "deterministic_component_barrier_batches_v1",
+        "mock run config: scheduler policy",
+    )
+    require_json_exact(payload["limits"], mock_candidate_limits(), "mock run config.limits")
+    require_json_exact(
+        payload["main_freeze"],
+        {"path": None, "sha256": None},
+        "mock run config.main_freeze",
+    )
+    require_json_exact(
+        payload["machine_freeze"],
+        {"path": None, "sha256": None},
+        "mock run config.machine_freeze",
+    )
+    require_json_exact(
+        payload["prefreeze_review"],
+        {"path": None, "sha256": None, "accepted": False},
+        "mock run config.prefreeze_review",
+    )
+    require(payload["claim_boundary"] == MOCK_PRODUCER_CLAIM_BOUNDARY, "mock run config: claim boundary")
+    for key in ("component_status", "milestone_status", "theorem_status", "final_status"):
+        require(payload[key] is None, f"mock run config: unauthorized {key}")
+    paths = payload["paths"]
+    require(isinstance(paths, dict), "mock run config.paths: not an object")
+    exact_keys(paths, {"authoritative_root", "operational_root"}, "mock run config.paths")
+    authoritative = require_canonical_absolute_path(
+        paths["authoritative_root"], "mock run config authoritative root"
+    )
+    operational = require_canonical_absolute_path(
+        paths["operational_root"], "mock run config operational root"
+    )
+    require(authoritative == input_dir, "mock run config: authoritative root mismatch")
+    require(
+        operational == input_dir.with_name(input_dir.name + ".operational"),
+        "mock run config: operational sibling mismatch",
+    )
+    bindings = validate_mock_source_bindings(
+        payload["source_bindings"], "mock run config.source_bindings"
+    )
+    validate_quiescent_mock_operational(operational)
+    return payload, raw, sha256_bytes(raw), bindings
+
+
+def validate_cell_identity(payload: Any, bits: int, slab_id: str, context: str) -> None:
+    require(isinstance(payload, dict), f"{context}: not an object")
+    exact_keys(payload, {"precision_bits", "slab_id"}, context)
+    require_exact_int(payload["precision_bits"], f"{context}.precision_bits", expected=bits)
+    require(payload["slab_id"] == slab_id, f"{context}: slab id")
+
+
+def require_mock_null_authority(payload: Mapping[str, Any], context: str) -> None:
+    require(payload["artifact_status"] == MOCK_ARTIFACT_STATUS, f"{context}: artifact status")
+    require(payload["authority"] == "PRODUCER_ONLY", f"{context}: authority")
+    exact_bool(payload["mock_only"], f"{context}.mock_only", True)
+    exact_bool(
+        payload["scientific_licensing_enabled"],
+        f"{context}.scientific_licensing_enabled",
+        False,
+    )
+    require(payload["claim_boundary"] == MOCK_PRODUCER_CLAIM_BOUNDARY, f"{context}: claim boundary")
+    for key in ("component_status", "milestone_status", "theorem_status", "final_status"):
+        require(payload[key] is None, f"{context}: unauthorized {key}")
+
+
+MOCK_PROOF_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "mock_only",
+    "cell",
+    "matrix_id",
+    "run_config_sha256",
+    "synthetic_trees",
+    "evaluator_status",
+    "scientific_licensing_enabled",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+MOCK_RECORD_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "mock_only",
+    "cell",
+    "matrix_id",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "scheduler_classification",
+    "evaluator_status",
+    "returncode",
+    "evaluator_payload",
+    "scientific_licensing_enabled",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+MOCK_CELL_MANIFEST_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "mock_only",
+    "cell",
+    "matrix_id",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "scheduler_classification",
+    "evaluator_status",
+    "files",
+    "scientific_licensing_enabled",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+
+
+def validate_file_binding(
+    payload: Any,
+    raw: bytes,
+    context: str,
+) -> None:
+    require(isinstance(payload, dict), f"{context}: not an object")
+    exact_keys(payload, {"sha256", "size_bytes"}, context)
+    require(exact_sha256(payload["sha256"], f"{context}.sha256") == sha256_bytes(raw), f"{context}: hash mismatch")
+    require_exact_int(payload["size_bytes"], f"{context}.size_bytes", expected=len(raw))
+
+
+def validate_mock_static_cell(
+    input_dir: Path,
+    bits: int,
+    slab_id: str,
+    matrix_id: str,
+    run_config_sha256: str,
+) -> dict[str, Any]:
+    cell_dir = input_dir / "static" / "cells" / str(bits) / slab_id
+    require_exact_directory_names(
+        cell_dir, {"proof.json", "record.json"}, f"static cell {bits}:{slab_id}"
+    )
+    proof, proof_raw = load_canonical_json_with_raw(cell_dir / "proof.json")
+    record, record_raw = load_canonical_json_with_raw(cell_dir / "record.json")
+    exact_keys(proof, MOCK_PROOF_KEYS, f"proof {bits}:{slab_id}")
+    require_exact_int(proof["schema_version"], f"proof {bits}:{slab_id}.schema_version", expected=1)
+    require(proof["protocol_id"] == PROTOCOL_ID, f"proof {bits}:{slab_id}: protocol")
+    require(proof["artifact_role"] == "MOCK_STATIC_PROOF", f"proof {bits}:{slab_id}: role")
+    require_mock_null_authority(proof, f"proof {bits}:{slab_id}")
+    validate_cell_identity(proof["cell"], bits, slab_id, f"proof {bits}:{slab_id}.cell")
+    require(proof["matrix_id"] == matrix_id, f"proof {bits}:{slab_id}: matrix")
+    require(proof["run_config_sha256"] == run_config_sha256, f"proof {bits}:{slab_id}: run config")
+    require_json_exact(
+        proof["synthetic_trees"],
+        ["ANGLE", "SECTION_LOW", "SECTION_HIGH", "SECTION_WINDOW"],
+        f"proof {bits}:{slab_id}.synthetic_trees",
+    )
+    require(proof["evaluator_status"] == CELL_PASS_STATUS, f"proof {bits}:{slab_id}: evaluator status")
+
+    exact_keys(record, MOCK_RECORD_KEYS, f"record {bits}:{slab_id}")
+    require_exact_int(record["schema_version"], f"record {bits}:{slab_id}.schema_version", expected=1)
+    require(record["protocol_id"] == PROTOCOL_ID, f"record {bits}:{slab_id}: protocol")
+    require(record["artifact_role"] == "MOCK_STATIC_CELL_RECORD", f"record {bits}:{slab_id}: role")
+    require_mock_null_authority(record, f"record {bits}:{slab_id}")
+    validate_cell_identity(record["cell"], bits, slab_id, f"record {bits}:{slab_id}.cell")
+    require(record["matrix_id"] == matrix_id, f"record {bits}:{slab_id}: matrix")
+    require(record["main_freeze_sha256"] is None, f"record {bits}:{slab_id}: main freeze")
+    require(record["run_config_sha256"] == run_config_sha256, f"record {bits}:{slab_id}: run config")
+    require(record["scheduler_classification"] == "COMMITTED_EVALUATOR_RESULT", f"record {bits}:{slab_id}: classification")
+    require(record["evaluator_status"] == CELL_PASS_STATUS, f"record {bits}:{slab_id}: evaluator status")
+    require_exact_int(record["returncode"], f"record {bits}:{slab_id}.returncode", expected=0)
+    evaluator_payload = record["evaluator_payload"]
+    require(isinstance(evaluator_payload, dict), f"record {bits}:{slab_id}.evaluator_payload")
+    exact_keys(evaluator_payload, {"path", "sha256", "size_bytes"}, f"record {bits}:{slab_id}.evaluator_payload")
+    require(evaluator_payload["path"] == "proof.json", f"record {bits}:{slab_id}: proof path")
+    validate_file_binding(
+        {"sha256": evaluator_payload["sha256"], "size_bytes": evaluator_payload["size_bytes"]},
+        proof_raw,
+        f"record {bits}:{slab_id}.evaluator_payload",
+    )
+
+    manifest_path = input_dir / "static" / "cell_manifests" / str(bits) / f"{slab_id}.json"
+    manifest, manifest_raw = load_canonical_json_with_raw(manifest_path)
+    exact_keys(manifest, MOCK_CELL_MANIFEST_KEYS, f"manifest {bits}:{slab_id}")
+    require_exact_int(manifest["schema_version"], f"manifest {bits}:{slab_id}.schema_version", expected=1)
+    require(manifest["protocol_id"] == PROTOCOL_ID, f"manifest {bits}:{slab_id}: protocol")
+    require(manifest["artifact_role"] == "MOCK_STATIC_CELL_MANIFEST", f"manifest {bits}:{slab_id}: role")
+    require_mock_null_authority(manifest, f"manifest {bits}:{slab_id}")
+    validate_cell_identity(manifest["cell"], bits, slab_id, f"manifest {bits}:{slab_id}.cell")
+    require(manifest["matrix_id"] == matrix_id, f"manifest {bits}:{slab_id}: matrix")
+    require(manifest["main_freeze_sha256"] is None, f"manifest {bits}:{slab_id}: main freeze")
+    require(manifest["run_config_sha256"] == run_config_sha256, f"manifest {bits}:{slab_id}: run config")
+    require(manifest["scheduler_classification"] == "COMMITTED_EVALUATOR_RESULT", f"manifest {bits}:{slab_id}: classification")
+    require(manifest["evaluator_status"] == CELL_PASS_STATUS, f"manifest {bits}:{slab_id}: evaluator status")
+    files = manifest["files"]
+    require(isinstance(files, dict), f"manifest {bits}:{slab_id}.files")
+    exact_keys(files, {"proof.json", "record.json"}, f"manifest {bits}:{slab_id}.files")
+    validate_file_binding(files["proof.json"], proof_raw, f"manifest {bits}:{slab_id}.files.proof")
+    validate_file_binding(files["record.json"], record_raw, f"manifest {bits}:{slab_id}.files.record")
+    return {
+        "cell": {"precision_bits": bits, "slab_id": slab_id},
+        "path": f"static/cell_manifests/{bits}/{slab_id}.json",
+        "sha256": sha256_bytes(manifest_raw),
+        "size_bytes": len(manifest_raw),
+        "evaluator_status": proof["evaluator_status"],
+    }
+
+
+MOCK_AGGREGATE_SUMMARY_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "mock_only",
+    "matrix_id",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "matrix",
+    "cell_count",
+    "ordered_cell_manifest_root",
+    "status_counts",
+    "scheduler_classification_counts",
+    "scientific_licensing_enabled",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+MOCK_AGGREGATE_MANIFEST_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "mock_only",
+    "matrix_id",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "ordered_cell_manifest_root",
+    "cell_manifests",
+    "summary",
+    "scientific_licensing_enabled",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+
+
+def validate_static_namespace(input_dir: Path, *, allow_checker: bool) -> None:
+    root_names = directory_names(input_dir, "mock authoritative root")
+    required = {"run_config.json", "static"}
+    permitted = required | {"branch"}
+    if allow_checker:
+        required.add("independent_static_checker.json")
+        permitted.add("independent_static_checker.json")
+    require(required <= root_names, "mock authoritative root: required static objects missing")
+    require(root_names <= permitted, f"mock authoritative root: extra paths {sorted(root_names-permitted)}")
+    if "branch" in root_names:
+        directory_names(input_dir / "branch", "mock branch sibling")
+    static_root = input_dir / "static"
+    require_exact_directory_names(
+        static_root,
+        {"cells", "cell_manifests", "aggregate_summary.json", "aggregate_manifest.json"},
+        "mock static root",
+    )
+    for namespace, suffix in (("cells", ""), ("cell_manifests", ".json")):
+        component_root = static_root / namespace
+        require_exact_directory_names(
+            component_root, {str(bits) for bits in PRECISIONS}, f"mock static {namespace}"
+        )
+        for bits in PRECISIONS:
+            expected = {slab_id + suffix for slab_id in SLABS}
+            require_exact_directory_names(
+                component_root / str(bits), expected, f"mock static {namespace} {bits}"
+            )
+
+
+def validate_mock_static_aggregate(
+    input_dir: Path,
+    matrix_id: str,
+    run_config_sha256: str,
+    entries: list[dict[str, Any]],
+) -> tuple[dict[str, Any], bytes, dict[str, Any], bytes]:
+    summary, summary_raw = load_canonical_json_with_raw(
+        input_dir / "static" / "aggregate_summary.json"
+    )
+    manifest, manifest_raw = load_canonical_json_with_raw(
+        input_dir / "static" / "aggregate_manifest.json"
+    )
+    exact_keys(summary, MOCK_AGGREGATE_SUMMARY_KEYS, "mock static aggregate summary")
+    require_exact_int(summary["schema_version"], "mock static aggregate summary.schema_version", expected=1)
+    require(summary["protocol_id"] == PROTOCOL_ID, "mock static aggregate summary: protocol")
+    require(summary["artifact_role"] == "MOCK_STATIC_AGGREGATE_SUMMARY", "mock static aggregate summary: role")
+    require_mock_null_authority(summary, "mock static aggregate summary")
+    require(summary["matrix_id"] == matrix_id, "mock static aggregate summary: matrix")
+    require(summary["main_freeze_sha256"] is None, "mock static aggregate summary: main freeze")
+    require(summary["run_config_sha256"] == run_config_sha256, "mock static aggregate summary: run config")
+    require_json_exact(summary["matrix"], mock_matrix_payload(), "mock static aggregate summary.matrix")
+    require_exact_int(summary["cell_count"], "mock static aggregate summary.cell_count", expected=102)
+    root = sha256_bytes(canonical_json_bytes([
+        {key: entry[key] for key in ("cell", "path", "sha256", "size_bytes")}
+        for entry in entries
+    ]))
+    require(summary["ordered_cell_manifest_root"] == root, "mock static aggregate summary: ordered root")
+    require_json_exact(summary["status_counts"], {CELL_PASS_STATUS: 102}, "mock static aggregate summary.status_counts")
+    require_json_exact(
+        summary["scheduler_classification_counts"],
+        {"COMMITTED_EVALUATOR_RESULT": 102},
+        "mock static aggregate summary.scheduler_classification_counts",
+    )
+
+    exact_keys(manifest, MOCK_AGGREGATE_MANIFEST_KEYS, "mock static aggregate manifest")
+    require_exact_int(manifest["schema_version"], "mock static aggregate manifest.schema_version", expected=1)
+    require(manifest["protocol_id"] == PROTOCOL_ID, "mock static aggregate manifest: protocol")
+    require(manifest["artifact_role"] == "MOCK_STATIC_AGGREGATE_MANIFEST", "mock static aggregate manifest: role")
+    require_mock_null_authority(manifest, "mock static aggregate manifest")
+    require(manifest["matrix_id"] == matrix_id, "mock static aggregate manifest: matrix")
+    require(manifest["main_freeze_sha256"] is None, "mock static aggregate manifest: main freeze")
+    require(manifest["run_config_sha256"] == run_config_sha256, "mock static aggregate manifest: run config")
+    require(manifest["ordered_cell_manifest_root"] == root, "mock static aggregate manifest: ordered root")
+    expected_entries = [
+        {key: entry[key] for key in ("cell", "path", "sha256", "size_bytes")}
+        for entry in entries
+    ]
+    require_json_exact(manifest["cell_manifests"], expected_entries, "mock static aggregate manifest.cell_manifests")
+    require(isinstance(manifest["summary"], dict), "mock static aggregate manifest.summary")
+    exact_keys(manifest["summary"], {"path", "sha256", "size_bytes"}, "mock static aggregate manifest.summary")
+    require(manifest["summary"]["path"] == "static/aggregate_summary.json", "mock static aggregate manifest: summary path")
+    validate_file_binding(
+        {"sha256": manifest["summary"]["sha256"], "size_bytes": manifest["summary"]["size_bytes"]},
+        summary_raw,
+        "mock static aggregate manifest.summary",
+    )
+    return summary, summary_raw, manifest, manifest_raw
+
+
+def replay_mock_static_archive(input_dir: Path, *, allow_checker: bool) -> dict[str, Any]:
+    input_dir = require_canonical_absolute_path(input_dir, "static checker input directory")
+    validate_static_namespace(input_dir, allow_checker=allow_checker)
+    run_config, run_config_raw, run_config_sha256, producer_bindings = validate_mock_run_config(input_dir)
+    entries: list[dict[str, Any]] = []
+    status_pairs: dict[str, dict[int, str]] = {slab_id: {} for slab_id in SLABS}
+    for bits in PRECISIONS:
+        for slab_id in SLABS:
+            entry = validate_mock_static_cell(
+                input_dir, bits, slab_id, run_config["matrix_id"], run_config_sha256
+            )
+            entries.append(entry)
+            status_pairs[slab_id][bits] = entry["evaluator_status"]
+    summary, summary_raw, manifest, manifest_raw = validate_mock_static_aggregate(
+        input_dir, run_config["matrix_id"], run_config_sha256, entries
+    )
+    agreement = sum(
+        1
+        for slab_id in SLABS
+        if status_pairs[slab_id] == {128: CELL_PASS_STATUS, 256: CELL_PASS_STATUS}
+    )
+    require(agreement == 51, "mock static cross-precision status disagreement")
+    return {
+        "run_config_sha256": run_config_sha256,
+        "matrix_id": run_config["matrix_id"],
+        "aggregate_summary_sha256": sha256_bytes(summary_raw),
+        "aggregate_manifest_sha256": sha256_bytes(manifest_raw),
+        "ordered_cell_manifest_root": manifest["ordered_cell_manifest_root"],
+        "producer_source_bindings": producer_bindings,
+        "replay_counts": {
+            "aggregate_objects": 2,
+            "cell_directories": 102,
+            "cell_manifests": 102,
+            "hash_bound_payloads": 306,
+            "proof_objects": 102,
+            "record_objects": 102,
+        },
+        "cross_precision": {
+            "all_agree": True,
+            "mock_only": True,
+            "scientific_domain_replay_performed": False,
+            "slab_pairs": 51,
+            "status_pairs_agree": agreement,
+        },
+        "summary": summary,
+    }
+
+
+def build_mock_checker_result(replay: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "artifact_role": CHECKER_ROLE,
+        "authority": "INDEPENDENT_CHECKER",
+        "checker_status": MOCK_CHECKER_STATUS,
+        "component_status": None,
+        "scientific_licensing_enabled": False,
+        "passed": True,
+        "matrix_id": replay["matrix_id"],
+        "main_freeze_sha256": None,
+        "run_config_sha256": replay["run_config_sha256"],
+        "component_aggregate_summary_sha256": replay["aggregate_summary_sha256"],
+        "component_aggregate_manifest_sha256": replay["aggregate_manifest_sha256"],
+        "replay_counts": replay["replay_counts"],
+        "cross_precision": replay["cross_precision"],
+        "diagnostics": {
+            "artifact_status": MOCK_ARTIFACT_STATUS,
+            "mock_only": True,
+            "ordered_cell_manifest_root": replay["ordered_cell_manifest_root"],
+            "production_dispatch_observed": False,
+            "scientific_proof_replay_performed": False,
+        },
+        "failures": [],
+        "source_bindings": {
+            "checker_sha256": sha256_file(CHECKER),
+            "producer_source_bindings": replay["producer_source_bindings"],
+        },
+        "claim_boundary": MOCK_CLAIM_BOUNDARY,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+
+
+def run_checker(input_dir: Path) -> dict[str, Any]:
+    """Independently close the full mock static archive, without authority.
+
+    A future production run config is intentionally rejected here.  Formal
+    proof replay remains available through :func:`verify_proof`, but a
+    scientific 102-cell aggregate cannot be promoted before a main freeze.
+    """
+
+    replay = replay_mock_static_archive(input_dir, allow_checker=False)
+    return build_mock_checker_result(replay)
+
+
+def run_postcheck(input_dir: Path) -> dict[str, Any]:
+    input_dir = require_canonical_absolute_path(input_dir, "static postcheck input directory")
+    checker_path = input_dir / "independent_static_checker.json"
+    replay = replay_mock_static_archive(input_dir, allow_checker=True)
+    expected_checker = build_mock_checker_result(replay)
+    checker_payload, checker_raw = load_canonical_json_with_raw(checker_path)
+    require_json_exact(checker_payload, expected_checker, "published mock static checker")
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "artifact_role": "STATIC_POSTCHECK",
+        "authority": "POSTCHECK_ONLY",
+        "postcheck_status": MOCK_POSTCHECK_STATUS,
+        "passed": True,
+        "checker_path": "independent_static_checker.json",
+        "checker_sha256": sha256_bytes(checker_raw),
+        "main_freeze_sha256": None,
+        "run_config_sha256": replay["run_config_sha256"],
+        "bound_artifacts": {
+            "aggregate_manifest": {
+                "path": "static/aggregate_manifest.json",
+                "sha256": replay["aggregate_manifest_sha256"],
+            },
+            "aggregate_summary": {
+                "path": "static/aggregate_summary.json",
+                "sha256": replay["aggregate_summary_sha256"],
+            },
+            "checker_source": {
+                "path": project_relative_path(CHECKER),
+                "sha256": sha256_file(CHECKER),
+            },
+        },
+        "replay_counts": replay["replay_counts"],
+        "failures": [],
+        "claim_boundary": MOCK_POSTCHECK_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-dir", type=canonical_absolute_argument, required=True)
+    parser.add_argument(
+        "--postcheck",
+        action="store_true",
+        help="replay a published mock checker and write the static postcheck",
+    )
     parser.add_argument(
         "--output",
         type=canonical_absolute_argument,
@@ -1544,20 +2274,29 @@ def main(argv: list[str] | None = None) -> int:
         if arguments.output is not None and arguments.output.is_symlink():
             raise CheckError("checker output must not be a symlink")
         input_dir = arguments.input_dir
-        output = (
-            arguments.output
-            if arguments.output is not None
-            else input_dir / "independent_static_checker.json"
+        expected_output = input_dir / (
+            "STATIC_POSTCHECK_STATUS.json"
+            if arguments.postcheck
+            else "independent_static_checker.json"
         )
-        result = run_checker(input_dir)
+        if arguments.output is not None and arguments.output != expected_output:
+            raise CheckError("checker output must use the canonical archive path")
+        output = expected_output
+        result = run_postcheck(input_dir) if arguments.postcheck else run_checker(input_dir)
         write_once(output, canonical_json_bytes(result))
     except Exception as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print(
-        f"checker_status={result['checker_status']} "
-        f"component_status={result['component_status']}"
-    )
+    if arguments.postcheck:
+        print(
+            f"postcheck_status={result['postcheck_status']} "
+            f"component_status={result['component_status']}"
+        )
+    else:
+        print(
+            f"checker_status={result['checker_status']} "
+            f"component_status={result['component_status']}"
+        )
     return 0
 
 

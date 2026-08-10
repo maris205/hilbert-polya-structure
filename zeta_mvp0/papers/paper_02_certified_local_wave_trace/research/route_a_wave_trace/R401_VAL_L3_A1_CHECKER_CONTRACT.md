@@ -26,9 +26,12 @@ and final fields remain null.  Only the composite checker can assign the local
 theorem status.  Postchecks copy and bind an existing checker result but never
 create or widen authority.
 
-Only partial checker implementation candidates exist.  The complete
-three-checker/three-postcheck chain is neither implemented nor frozen and
-authorizes no evaluator.
+The complete three-checker/three-postcheck chain is now implemented for a
+strict synthetic 102-static plus 102-branch mock archive.  That path is
+explicitly `MOCK_ONLY_NON_LICENSING`: it accepts no main freeze, invokes no
+scientific evaluator, and assigns no component, milestone, theorem, or final
+status.  The formal scientific checker path described below remains
+unimplemented and unfrozen.
 
 ## 2. Candidate exact result schemas
 
@@ -166,6 +169,26 @@ postchecks copy their checker component status while retaining null
 milestone/theorem/final values.  The composite postcheck copies the exact
 composite milestone/theorem and retains `final_status=null`.
 
+### 2.4 Present mock status specialization
+
+The implemented mock path retains the exact top-level schemas above but uses
+the following closed non-scientific statuses:
+
+```text
+checker_status = PASS_MOCK_INDEPENDENT_REPLAY
+postcheck_status = PASS_MOCK_WRITE_ONCE_POSTCHECK
+scientific_licensing_enabled = false
+component_status = null
+milestone_status = null
+theorem_status = null
+final_status = null.
+```
+
+This specialization applies to both component checkers, the composite
+checker, and all three postchecks.  It cannot be promoted by renaming the
+mock statuses, adding nested authority fields, coherently rebinding hashes,
+or supplying a nominally formal run config; all such inputs fail closed.
+
 ## 3. Strict data and path rules
 
 All JSON is strict and canonical:
@@ -211,6 +234,10 @@ from the 102 cell manifests.  Every cell manifest is opened, strictly parsed,
 and used to rehash every cell byte.  A digest quoted by another object is not
 trusted without direct recomputation.
 
+In the present mock implementation, `main_freeze_sha256=null` throughout.
+The matrix, run-config, cell, aggregate, checker, and postcheck edges are
+replayed, but no absent formal freeze or machine binding is synthesized.
+
 ## 5. Static scientific replay
 
 The static checker reconstructs the model from exact algebraic definitions,
@@ -234,6 +261,11 @@ not producer constants or rounded eigenvectors.  It independently verifies:
 The checker does not accept an `angle_passed` Boolean in place of endpoints.
 A static scientific-stop status is absent because interval permission of a
 bad gate is not a constrained existence witness.
+
+The current 102-cell mock path exercises the exact archive, proof-tree,
+aggregate, path, and cross-precision machinery using synthetic producer
+objects.  Its diagnostics state that scientific proof replay was not
+performed, so a mock pass is not `PASS_STATIC_PHASE_ANCHOR_ALL_SLABS`.
 
 ## 6. Branch scientific replay
 
@@ -269,6 +301,13 @@ fields are telemetry and must enclose, but cannot replace, recomputation.
 This replay is not a second ODE integration.  The frozen CAPD source, binary,
 dependency, and machine chain supply the flow enclosure; the checker proves
 that archived state enclosures imply the tube inequality.
+
+The current mock branch producer emits the full 64-phase transcript ABI with
+synthetic zero slow coordinates.  The independent checker still parses every
+endpoint, reconstructs `omega_minus`, and replays the rational tube
+implication, but explicitly records that no scientific CAPD flow replay was
+performed.  The result is engineering evidence only, not
+`PASS_BRANCH_TUBE_ALL_SLABS`.
 
 ## 7. Cross-precision semantics
 
@@ -353,6 +392,11 @@ After a component checker publishes once, its frozen postcheck mode:
 A component postcheck is required even though the composite checker later
 replays both component chains.
 
+The implemented mock postchecks perform the same write-once reopening and
+reproduction discipline against mock aggregates and checker bytes.  They use
+`PASS_MOCK_WRITE_ONCE_POSTCHECK`, copy no scientific component status, and
+do not satisfy the future formal postcheck gate.
+
 ## 10. Composite replay and authority
 
 The composite checker requires exact passing static and branch checker plus
@@ -369,6 +413,12 @@ aggregate roots.  It independently replays:
 Only then may it assign `PASS_LOCAL_PHASE_TUBE_ALL_SLABS`.  Its postcheck
 reopens and reproduces the complete composite chain and binds the exact 68-
 role release map candidate.  `final_status` remains null.
+
+The present composite implementation instead closes only the two mock
+component chains and their 204 ordered cell identities.  It recomputes the
+archive-generation binding and rejects nested or top-level authority
+smuggling, but leaves `s0_compatibility=null`, marks upstream scientific
+replay false, and retains every programme status as null.
 
 ## 11. Failure policy
 
@@ -413,9 +463,17 @@ pass has no scientific status.
 
 ```text
 contract_status = PROSPECTIVE_NON_LICENSING
-checker_implementation_stable = false
-component_postchecks_exist = false
-composite_postcheck_exists = false
+mock_checker_pipeline_implemented = true
+mock_component_postchecks_exist = true
+mock_composite_postcheck_exists = true
+mock_archive_matrix = 102_static_plus_102_branch
+mock_scientific_licensing_enabled = false
+mock_final_independent_review = ACCEPT_P0_0_P1_0
+mock_l3_a1_implementation_tests = 280/280
+paper02_regression = 675/675
+formal_scientific_checker_implementation_stable = false
+formal_component_postchecks_exist = false
+formal_composite_postcheck_exists = false
 main_freeze_exists = false
 dispatch_authorized = false
 milestone_status = null

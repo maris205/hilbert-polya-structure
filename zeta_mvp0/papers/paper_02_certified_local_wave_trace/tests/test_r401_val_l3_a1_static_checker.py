@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import importlib.util
 import json
 import sys
@@ -10,12 +11,23 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKER_SOURCE = ROOT / "scripts/check_r401_val_l3_a1_static_independent.py"
+SCHEDULER_SOURCE = ROOT / "scripts/run_r401_val_l3_a1_all_slabs.py"
 S0_PROOF = ROOT / "results/r401_val_l3_phase_tube_smoke/proof_128_S000.json"
 
 
 def load_checker():
     name = "check_r401_val_l3_a1_static_independent_tested"
     spec = importlib.util.spec_from_file_location(name, CHECKER_SOURCE)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_scheduler():
+    name = "r401_val_l3_a1_scheduler_for_static_checker_test"
+    spec = importlib.util.spec_from_file_location(name, SCHEDULER_SOURCE)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules[name] = module
@@ -38,6 +50,15 @@ def formal_context(checker):
         max_nodes_per_tree=250000,
         max_nodes_per_cell=1000000,
     )
+
+
+@pytest.fixture()
+def full_mock_archive(checker, tmp_path: Path):
+    scheduler = load_scheduler()
+    output = tmp_path / "full-static-mock"
+    result = scheduler.run_mock_static(output, 102, resume=False)
+    assert result["aggregate_finalized"] is True
+    return output, scheduler
 
 
 def build_formal_s0_adapter_proof(checker, context) -> dict:
@@ -107,6 +128,18 @@ def test_checker_source_is_independent() -> None:
     assert "import evaluate_r401_val_l3_a1_static_cell" not in source
     assert "import run_r401_val_l3_a1_all_slabs" not in source
     assert "run_r401_val_l3_phase_tube_smoke" not in source
+    imported: set[str] = set()
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Import):
+            imported.update(alias.name for alias in node.names)
+        elif isinstance(node, ast.ImportFrom) and node.module is not None:
+            imported.add(node.module)
+    assert not imported & {
+        "evaluate_r401_val_l3_a1_static_cell",
+        "run_r401_val_l3_a1_all_slabs",
+        "check_r401_val_l3_a1_branch_independent",
+        "check_r401_val_l3_a1_composite_independent",
+    }
 
 
 def test_checker_role_and_tree_order_match_formal_contract(checker) -> None:
@@ -359,3 +392,153 @@ def test_write_once_rejects_existing_checker(checker, tmp_path: Path) -> None:
     checker.write_once(output, b"{}\n")
     with pytest.raises(FileExistsError):
         checker.write_once(output, b"different\n")
+
+
+def test_full_102_cell_mock_checker_and_postcheck_are_nonlicensing(
+    checker, full_mock_archive
+) -> None:
+    output, _scheduler = full_mock_archive
+    result = checker.run_checker(output)
+    assert set(result) == {
+        "schema_version",
+        "protocol_id",
+        "artifact_role",
+        "authority",
+        "checker_status",
+        "component_status",
+        "scientific_licensing_enabled",
+        "passed",
+        "matrix_id",
+        "main_freeze_sha256",
+        "run_config_sha256",
+        "component_aggregate_summary_sha256",
+        "component_aggregate_manifest_sha256",
+        "replay_counts",
+        "cross_precision",
+        "diagnostics",
+        "failures",
+        "source_bindings",
+        "claim_boundary",
+        "milestone_status",
+        "theorem_status",
+        "final_status",
+    }
+    assert result["checker_status"] == "PASS_MOCK_INDEPENDENT_REPLAY"
+    assert result["replay_counts"]["cell_directories"] == 102
+    assert result["replay_counts"]["cell_manifests"] == 102
+    assert result["cross_precision"] == {
+        "all_agree": True,
+        "mock_only": True,
+        "scientific_domain_replay_performed": False,
+        "slab_pairs": 51,
+        "status_pairs_agree": 51,
+    }
+    assert result["scientific_licensing_enabled"] is False
+    assert result["component_status"] is None
+    assert result["milestone_status"] is None
+    assert result["theorem_status"] is None
+    assert result["final_status"] is None
+
+    checker_path = output / "independent_static_checker.json"
+    checker.write_once(checker_path, checker.canonical_json_bytes(result))
+    postcheck = checker.run_postcheck(output)
+    assert set(postcheck) == {
+        "schema_version",
+        "protocol_id",
+        "artifact_role",
+        "authority",
+        "postcheck_status",
+        "passed",
+        "checker_path",
+        "checker_sha256",
+        "main_freeze_sha256",
+        "run_config_sha256",
+        "bound_artifacts",
+        "replay_counts",
+        "failures",
+        "claim_boundary",
+        "component_status",
+        "milestone_status",
+        "theorem_status",
+        "final_status",
+    }
+    assert postcheck["postcheck_status"] == "PASS_MOCK_WRITE_ONCE_POSTCHECK"
+    assert postcheck["component_status"] is None
+    assert postcheck["milestone_status"] is None
+    assert postcheck["theorem_status"] is None
+    assert postcheck["final_status"] is None
+    checker.write_once(
+        output / "STATIC_POSTCHECK_STATUS.json",
+        checker.canonical_json_bytes(postcheck),
+    )
+    with pytest.raises(FileExistsError):
+        checker.write_once(
+            output / "STATIC_POSTCHECK_STATUS.json",
+            checker.canonical_json_bytes(postcheck),
+        )
+
+
+def test_full_mock_checker_rejects_manifest_root_and_type_mutations(
+    checker, full_mock_archive
+) -> None:
+    output, _scheduler = full_mock_archive
+    summary_path = output / "static/aggregate_summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["ordered_cell_manifest_root"] = "0" * 64
+    summary_path.write_bytes(checker.canonical_json_bytes(summary))
+    with pytest.raises(checker.CheckError, match="ordered root"):
+        checker.run_checker(output)
+
+
+def test_full_mock_checker_rejects_extra_path_and_live_stage(
+    checker, full_mock_archive
+) -> None:
+    output, scheduler = full_mock_archive
+    extra = output / "static/cells/128/S000/hidden.json"
+    extra.write_text("{}\n", encoding="utf-8")
+    with pytest.raises(checker.CheckError, match="namespace differs"):
+        checker.run_checker(output)
+    extra.unlink()
+
+    run_config_sha256 = checker.sha256_file(output / "run_config.json")
+    stage = (
+        output.with_name(output.name + ".operational")
+        / "staging/static/128"
+        / scheduler.staging_basename(scheduler.CellKey(128, "S000"), run_config_sha256)
+    )
+    stage.mkdir()
+    with pytest.raises(checker.CheckError, match="namespace differs"):
+        checker.run_checker(output)
+
+
+def test_postcheck_rejects_changed_published_checker(
+    checker, full_mock_archive
+) -> None:
+    output, _scheduler = full_mock_archive
+    result = checker.run_checker(output)
+    result["passed"] = False
+    checker.write_once(
+        output / "independent_static_checker.json",
+        checker.canonical_json_bytes(result),
+    )
+    with pytest.raises(checker.CheckError, match="published mock static checker"):
+        checker.run_postcheck(output)
+
+
+def test_mock_checker_cli_publication_is_write_once(
+    checker, full_mock_archive, tmp_path: Path
+) -> None:
+    output, _scheduler = full_mock_archive
+    outside = tmp_path / "outside-checker.json"
+    assert checker.main(
+        ["--input-dir", str(output), "--output", str(outside)]
+    ) == 1
+    assert not outside.exists()
+    assert checker.main(["--input-dir", str(output)]) == 0
+    checker_bytes = (output / "independent_static_checker.json").read_bytes()
+    assert checker.main(["--input-dir", str(output)]) == 1
+    assert (output / "independent_static_checker.json").read_bytes() == checker_bytes
+    assert checker.main(["--input-dir", str(output), "--postcheck"]) == 0
+    postcheck_bytes = (output / "STATIC_POSTCHECK_STATUS.json").read_bytes()
+    assert checker.main(["--input-dir", str(output), "--postcheck"]) == 1
+    assert (output / "STATIC_POSTCHECK_STATUS.json").read_bytes() == postcheck_bytes
