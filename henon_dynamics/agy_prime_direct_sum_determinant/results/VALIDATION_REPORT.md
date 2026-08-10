@@ -9,6 +9,11 @@ with list arithmetic, uses a Bareiss determinant and explicit minors for the
 C24 fixed-plane proof, trial factorization for the discriminant sentinel,
 and a separate Jacobi/Kronecker implementation for the quadratic controls.
 
+Release totals are **32/32 independent decisive fields**, **21/21
+regression and rehashed-mutation tests**, and a passing canonical payload
+digest.  A separate audit compared the Bareiss backend with SymPy on 12,000
+random integer matrices without a discrepancy.
+
 ## Independent gates
 
 The release checker verifies:

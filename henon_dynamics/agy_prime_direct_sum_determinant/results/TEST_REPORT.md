@@ -42,5 +42,11 @@ bash code/run_c28.sh
   digest;
 - payload SHA and all four upstream source hashes: pass.
 
-The final manifest entry count and release artifact digests are recorded by
-the frozen release replay after the manuscript and Route-A record are added.
+Final deterministic artifact digests before the frozen manifest are:
+
+- paper PDF: `93593889bd04bbdaa62741f90d03f6005bba5d1f9ebdf9dd77058167244580a1`;
+- producer certificate: `98b9ed10433f5cc7eb56aa04f397caa1ebfbc03acc904552618bd06f30370a1e`;
+- independent replay: `cbda105cfdac815d66e5cccc7e6558bbd12f0bc10cdb1e5ebd12b1ff0670e3e8`.
+
+The final frozen manifest contains **39 artifacts** and verifies unchanged
+under the default read-only release runner.

@@ -40,3 +40,12 @@ open.
 4. create the annotated tag
    `hcs-c28-agy-prime-direct-sum-determinant-v1`;
 5. push the branch and tag over SSH and verify their remote identities.
+
+## Release provenance
+
+- implementation commit:
+  `2ca01cf244dd55ebc0b9965a82c238509fcd3b6c`;
+- append-only Route-A record:
+  `evaluations/route_a/HCS-C28/20260810T115502Z.yaml`;
+- release tag:
+  `hcs-c28-agy-prime-direct-sum-determinant-v1`.

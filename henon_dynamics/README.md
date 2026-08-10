@@ -63,6 +63,7 @@ The foundational local source is
 | [`agy_metaplectic_transfer_obstruction/`](agy_metaplectic_transfer_obstruction/) | All-length Rauzy matrix decoder and exact noncompactness on source-standard AGY vector-valued `C_b^1` and normalized `L^2` spaces | Ordinary determinant rejected; holomorphic/generalized trace open |
 | [`agy_holomorphic_slice_obstruction/`](agy_holomorphic_slice_obstruction/) | Common complex AGY domain, scalar trace-class determinant with Perron-characteristic trace atoms, and same-domain oscillator noncompactness | Scalar determinant proved; literal infinite oscillator Route-A rejected |
 | [`agy_finite_weil_determinant/`](agy_finite_weil_determinant/) | Fixed-prime finite-Weil Fredholm determinants, exact Legendre--Gauss traces, and class-function chronology collapse | Route-A exploratory; natural fixed-prime quantization, no global prime assembly |
+| [`agy_prime_direct_sum_determinant/`](agy_prime_direct_sum_determinant/) | Sharp prime-Schatten phase diagram, ordinary Dirichlet-damped all-prime Fredholm determinant, and canonicality trilemma | Route-A exploratory; exact global determinant with an external second clock |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -145,7 +146,72 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C27 finite-Weil determinant and collapse
+## Latest big-door result: HCS-C28 sharp all-prime threshold
+
+HCS-C28 resolves the global assembly question left by C27 without extending
+the small-prime scan.  For the full \(p^2\)-dimensional finite-Weil twist,
+the local Schatten norms have the exact large-prime order
+
+\[
+\|\mathcal L_{s,p}\|_{S_q}\asymp p^{2/q}.
+\]
+
+It follows that
+
+\[
+\bigoplus_p c_p\mathcal L_{s,p}\in S_q
+\iff \sum_p p^2|c_p|^q<\infty,
+\]
+
+and the undamped direct sum is not compact.  The Dirichlet-damped family
+
+\[
+\mathfrak L_{s,z}=\bigoplus_{p\ {\rm odd}}p^{-z}\mathcal L_{s,p}
+\]
+
+is trace class exactly when \(\Re z>3\).  On this sharp half-plane it has an
+ordinary prime-order-independent determinant
+
+\[
+\det(I-u\mathfrak L_{s,z})
+=\prod_{p\ {\rm odd}}D_p(s,u p^{-z}),
+\]
+
+and its trace keeps the unreordered chronological matrix of every AGY word.
+
+The theorem also closes the two canonical-looking alternatives.  Normalized
+finite-Weil characters converge to the regular character, but the positive
+AGY return monoid is free, so every nonempty normalized moment vanishes and
+the determinant germ becomes one.  In the ambient C24 full-Rauzy ledger,
+P073 has a two-dimensional fixed plane and exact character \(\Theta_p=p\)
+for every odd prime, making its dimension-normalized marked sum the divergent
+prime harmonic series.  P073 is not claimed to be a C26 induced branch.
+
+Thus the positive object is a prime-graded Dirichlet--Fredholm determinant,
+not an adelic Weil representation.  Its \(z\log p\) clock is external to the
+AGY roof, and orbit conductors fragment.  The conservative tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**. Route B is not authorized.
+
+- [C28 project overview](agy_prime_direct_sum_determinant/README.md)
+- [C28 theorem package](agy_prime_direct_sum_determinant/THEOREM_PACKAGE.md)
+- [C28 exact certificate](agy_prime_direct_sum_determinant/results/c28_certificate.json)
+- [C28 independent check](agy_prime_direct_sum_determinant/results/c28_independent_check.json)
+- [C28 compiled paper](agy_prime_direct_sum_determinant/paper/main.pdf)
+
+Reproduce the round with:
+
+```bash
+cd agy_prime_direct_sum_determinant && ./code/run_c28.sh
+```
+
+The next big door is a two-sided based/path-groupoid trace with genuine
+identity-holonomy loops, or a new local \(p\)-adic oscillator and automorphic
+theta architecture.  More finite-field prime scans cannot alter the sharp
+C28 threshold.
+
+## Predecessor big-door result: HCS-C27 finite-Weil determinant and collapse
 
 HCS-C27 executes the finite-fibre gate left by C26. For every fixed odd
 prime \(p\), the C25 chronological symplectic cocycle reduces to

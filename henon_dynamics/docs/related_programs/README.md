@@ -594,6 +594,40 @@ Project: [`../../agy_finite_weil_determinant/`](../../agy_finite_weil_determinan
 
 ---
 
+## Prime-graded finite-Weil AGY assembly (HCS-C28)
+
+C28 replaces the open request for an unspecified “adelic product” by a sharp
+operator theorem.  The local finite-Weil AGY operators have
+\(S_q\)-norms comparable to \(p^{2/q}\), so every scalar-weighted prime
+direct sum is classified exactly.  The Dirichlet choice \(p^{-z}\) gives an
+ordinary Fredholm determinant if and only if \(\Re z>3\), with a locally
+normal product of the C27 fixed-prime determinants and the original
+chronological word trace intact.
+
+The related-program lesson is a canonicality trilemma:
+
+- counting trace makes the undamped sum noncompact;
+- dimension-normalized trace converges to the regular group trace, which
+  erases every nonempty word in the one-sided free AGY monoid; and
+- prime damping is nontrivial and analytic but adds the external clock
+  \(z\log p\).
+
+The C24-P073 control makes the marked normalization obstruction concrete:
+its exact Weil character is \(p\) at every odd prime, leaving the divergent
+series \(\sum_p1/p\) after division by \(p^2\).  This is a full-Rauzy
+control, not a C26 induced-branch claim.
+
+The valid object is therefore called a prime-graded Dirichlet--Fredholm
+determinant, not an adelic Weil representation.  Genuine adelic promotion
+would require local \(p\)-adic oscillator representations, adelic Schwartz
+space, compatible splittings and reference vectors, plus an automorphic/theta
+trace mechanism.  Alternatively, a two-sided based path groupoid could make
+identity-holonomy loops visible to the regular trace.
+
+Project: [`../../agy_prime_direct_sum_determinant/`](../../agy_prime_direct_sum_determinant/)
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

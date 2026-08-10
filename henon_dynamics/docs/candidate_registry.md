@@ -214,6 +214,49 @@ retained as positive infrastructure.  The authorized next large candidate
 uses finite Weil fibres over odd finite fields; further ordinary holomorphic
 base norms are not a reopening.
 
+## HCS-C28 prime-direct-sum determinant (2026-08-10)
+
+Candidate **HCS-C28** resolves the all-prime assembly gate left by C27; see
+[`../agy_prime_direct_sum_determinant/`](../agy_prime_direct_sum_determinant/).
+
+For every Schatten index \(1\le q\le\infty\), the fixed-prime operators obey
+
+\[
+\|\mathcal L_{s,p}\|_{S_q}\asymp p^{2/q}
+\]
+
+locally uniformly in \(s\).  Hence the weighted block sum belongs to
+\(S_q\) exactly when \(\sum_p p^2|c_p|^q<\infty\), and for
+\(c_p=p^{-z}\) the sharp condition is \(q\Re z>3\).  In particular, the
+ordinary all-prime Fredholm determinant exists exactly for \(\Re z>3\),
+where it factors locally normally as
+
+\[
+\det(I-u\mathfrak L_{s,z})
+=\prod_{p\ {\rm odd}}D_p(s,u p^{-z}).
+\]
+
+The word trace preserves the full chronological cocycle and the exact
+repetition law \(\Theta_p(g_w^r)\).  The arithmetic coefficients are
+orbit-dependent quadratic prime Dirichlet series for regular words, with
+finite singular-prime corrections and no common conductor.
+
+The global construction is not intrinsic to the original clock.  The
+undamped direct sum is noncompact; the normalized regular-character limit
+exists but makes the one-sided free-monoid determinant germ one; and the
+nontrivial repair inserts the external clock \(z\log p\).  C24-P073 supplies
+an exact full-Rauzy marked obstruction: \(\Theta_p=p\) for every odd prime,
+so dimension normalization leaves \(\sum_p1/p\).  It is not asserted to be a
+C26 induced branch.
+
+The formal tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  The object is prime-graded, not an adelic Weil
+representation; there is no continuation to \(z=0\), functional equation,
+Riemann divisor, or self-adjoint Hilbert--Pólya operator.  Route B remains
+unauthorized.
+
 ## HCS-C27 finite-Weil determinant family (2026-08-10)
 
 Candidate **HCS-C27** executes the finite-Weil gate frozen by C26; see
