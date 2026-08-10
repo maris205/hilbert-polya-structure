@@ -29,10 +29,11 @@ strongest accepted statements and latest bounded implementation evidence are:
    evidence only, not an accepted 51-slab A4.16 theorem.
 7. `A4.16 / R401-VAL-L3-A1` machine-binding and exact-schema implementation:
    the ordered 53-role same-byte handshake, closed formal schemas, strict
-   static/branch serializers, persistent CAPD binary, and independent live
-   machine validator pass engineering cross-review with P0=P1=P2=0.  The final
-   static and branch resource calibrations use public S0 inputs only.  This is
-   `NON_LICENSING`: no machine/main freeze, scientific dispatch, or canonical
+   static/branch serializers, persistent CAPD binary, temp-only role-19
+   machine capture, and zero-write role-24 independent verifier exist as
+   engineering surfaces.  The final static and branch resource calibrations
+   use public S0 inputs only.  This is `NON_LICENSING`: no canonical role-10
+   machine freeze, role-54 main freeze, scientific dispatch, or canonical
    A4.16 result exists.
 
 The local determinant result was independently replayed from exact rational
@@ -112,7 +113,7 @@ This representative smoke does not assign a milestone, theorem, or final
 programme value.  It does not cover the other 48 slabs and does not prove
 that arbitrary energy-shell candidates remain in the local tube.
 
-## Formal machine-binding and exact-schema increment (non-licensing)
+## Formal machine-binding, capture, and exact-schema increments (non-licensing)
 
 The current L3-A1 engineering surface now closes the prospective machine,
 main-freeze, run-config, static/branch cell, aggregate, checker/postcheck, and
@@ -125,6 +126,16 @@ and null scientific statuses.  It does not itself authorize production or
 assign any scientific result.  The
 existing 53-role same-byte handshake and every formal dispatcher remain
 fail-closed while the canonical authority chain is absent.
+
+The subsequent capture increment splits compiler evidence into a declarative
+`build_recipe`, an executed `fresh_rebuild_receipt`, and
+`transfer_evidence`.  Role 19 performs one owned argv-list rebuild with
+`shell=false` under a fresh direct-child `/tmp` directory, checks exact ELF
+identity, and proves byte equality to the persistent role-17 binary without
+overwriting or changing it.  It may write a compact candidate only to a new
+temporary path.  Role 24 independently replays that candidate with zero
+writes and zero subprocesses; its verify-only success is explicitly
+`NON_AUTHORITATIVE_VERIFY_ONLY` and cannot publish or promote role 10.
 
 Static cells now have an exact four-file surface (`proof.json`, `stdout.txt`,
 `stderr.txt`, `record.json`) with a strict 26-string ABI and
@@ -156,28 +167,52 @@ SHA-256
 and transfers exactly to the persistent binary by SHA-256.  Neither
 calibration selected a held-out or all-slab cell.
 
-The core regression immediately before the final embedded branch resource
-binary-digest/persistent-binary binding passed `419/419`.  After that binding
-and all documentation corrections, the complete latest-byte Paper 02
-regression passed `814/814`.
+The preceding machine-binding increment recorded a `419/419` core regression
+immediately before its final embedded branch-resource binding and an
+`814/814` Paper 02 regression on those historical bytes.  During subsequent
+machine-capture hardening, a pre-final broader run exposed delayed descendant
+cleanup (`456` pass, `1` fail), so that receipt was withdrawn.  The repaired
+role-19 module now passes `107/107`, the complete nine-module set passes
+`457/457`, and role 24 passes `94/94` on the final scheduler bytes.  The two
+focused modules total `201/201`; 24 parallel timeout-cleanup replays pass and
+the temporary subreaper state is restored on return.  Separately, the complete
+Paper 02 regression passes `852/852` in `207.85 s` on the locked
+machine-capture code and documentation set.  The final role-19 and role-24
+SHA-256 values are respectively
+`48e6fba9a7c567faddc15c49f7e0d3a3b7a0ff77afae6d80e87d0b1b101638ad`
+and
+`e1ab0e0f23fdf73406425243cc2203c02cae69cd382dd84e76631a0b63b9a0e7`.
 
-No canonical machine freeze, main freeze, S0 compatibility replay, production
-run config, scientific dispatch, or A4.16 all-slab result exists.  The final
-static payload remains under `/tmp` until the deterministic canonical machine
-receipt capture/builder is implemented.  Full current hashes, resource
-evidence, and claim boundaries are recorded in
+The final live candidate is
+`/tmp/a416-machine-capture-subreaper-final.UF30tt/machine-candidate.json`,
+SHA-256
+`eb3395cb3de902685da62b9d18b74e0ba2109d2cce08da2e29a48f966ca7b0e7`,
+size `54526`, mode `0644`, and link count `1`.  Role 24 independently
+reproduces the digest and size under `NON_AUTHORITATIVE_VERIFY_ONLY`; the
+fresh-build staging directory is absent and the persistent role-17 binary was
+not overwritten.  Both known pre-fix candidates now reject against the final
+role-19 bytes.
+
+No canonical role-10 machine freeze, role-54 main freeze, S0 compatibility
+replay, production run config, scientific dispatch, or A4.16 all-slab result
+exists.  The final static payload and every capture candidate remain
+temporary; the implemented capture/verify modes perform no canonical
+publication.  Full current hashes,
+resource evidence, and claim boundaries are recorded in
 [`A416_L3_A1_MACHINE_BINDING_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_MACHINE_BINDING_INCREMENT.md);
+the separate capture/verify milestone is recorded in
+[`A416_L3_A1_MACHINE_CAPTURE_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_MACHINE_CAPTURE_INCREMENT.md);
 the preceding control-plane increment remains recorded in
 [`A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md).
 
 ## Open bridges
 
-- a deterministic machine-freeze capture/builder, producer-independent
-  machine verification, the complete pre-freeze chain and independent
-  `ACCEPT_FOR_FREEZE` review, main freeze generated last, canonical S0
-  compatibility replay, and only then a separately authorized 51-slab A4.16
-  phase-tube production; the current scientific evidence remains
-  representative only;
+- separately authorized no-replace publication of independently verified
+  bytes as canonical input role 10, the remaining final 53-input chain and
+  independent `ACCEPT_FOR_FREEZE` review, role-54 main freeze generated only
+  after all 53 inputs, canonical S0 compatibility replay, and only then a
+  separately authorized 51-slab A4.16 phase-tube production; the current
+  scientific evidence remains representative only;
 - the full global shell return-exclusion tree on \(0.60<T<0.75\);
 - global tube routing for candidates outside the local full-period tube;
 - the frozen independent event-projected determinant/Taylor-width
@@ -186,10 +221,11 @@ the preceding control-plane increment remains recorded in
 - every endogenous prime-time, von-Mangoldt, Hilbert--Pólya, zeta-zero, and RH
   claim.
 
-The representative A4.16 engine and the non-dispatching L3-A1 exact-schema and
-machine-validation candidate are now checked.  The next engineering stage is
-to build and independently verify the deterministic machine receipt, then
-complete the pre-freeze review chain before generating the main freeze last.
+The representative A4.16 engine and the non-dispatching L3-A1 exact-schema,
+temp-capture, and machine-verification candidates are now implemented and
+focused-tested.  The next authority stage is separate publication of a
+verified candidate as role 10, completion of all 53 final inputs and their
+pre-freeze review, and only then generation of role 54.
 A4.15 remains the highest accepted theorem in this chain.  Global routing is
 a separate later bridge.
 

@@ -9,6 +9,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+import time
 import types
 from dataclasses import FrozenInstanceError
 from datetime import datetime, timezone
@@ -37,6 +38,7 @@ RELEASE_CONTRACT = (
     / "research/route_a_wave_trace/R401_VAL_L3_A1_RELEASE_PROVENANCE_CONTRACT.md"
 )
 STATIC_CHECKER = ROOT / "scripts/check_r401_val_l3_a1_static_independent.py"
+RELEASE_BUILDER = ROOT / "scripts/build_r401_val_l3_a1_release_provenance.py"
 SPEC = importlib.util.spec_from_file_location("r401_val_l3_a1_scheduler", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
 MODULE = importlib.util.module_from_spec(SPEC)
@@ -65,6 +67,16 @@ def cleanup_formal_authority_roots() -> object:
 def load_static_checker() -> object:
     name = "r401_val_l3_a1_static_checker_scheduler_e2e"
     spec = importlib.util.spec_from_file_location(name, STATIC_CHECKER)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_release_builder() -> object:
+    name = "r401_val_l3_a1_release_builder_machine_capture_roundtrip"
+    spec = importlib.util.spec_from_file_location(name, RELEASE_BUILDER)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules[name] = module
@@ -645,12 +657,17 @@ def formal_authority_fixture(tmp_path: Path) -> Path:
     compiler_executable.write_bytes(b"fixture g++ 11.4.0\n")
     compiler_executable.chmod(0o755)
     machine_project_root = authority
-    build_argv = [
+    build_argv_template = [
         str(compiler_executable), "-Wall", "-Wextra", "-Wpedantic", "-Werror",
         str(machine_project_root / role_paths["branch_evaluator_source"]),
         *capd_flag_tokens, "-o",
-        str(machine_project_root / role_paths["branch_evaluator_binary"]),
+        "@STAGING_BINARY@",
     ]
+    staging_directory = "/tmp/a416-l3a1-fixture-build"
+    staging_output = (
+        f"{staging_directory}/capd_r401_phase_branch_tube_mp_a1"
+    )
+    build_argv = [*build_argv_template[:-1], staging_output]
     requirements = MODULE.formal_machine_requirements()
     filesystem_stats = os.statvfs(machine_project_root / "results")
     live_free_bytes = filesystem_stats.f_bavail * filesystem_stats.f_frsize
@@ -743,14 +760,54 @@ def formal_authority_fixture(tmp_path: Path) -> Path:
             "executable_path": str(compiler_executable),
             "executable_sha256": MODULE.sha256(compiler_executable),
             "version": MODULE.MACHINE_COMPILER_VERSION,
-            "build_record": {
+            "build_recipe": {
                 "cwd": str(machine_project_root),
                 "environment": MODULE.formal_build_environment(),
-                "umask": "0022", "argv": build_argv,
-                "argv_sha256": MODULE.sha256_bytes(MODULE.canonical_json_bytes(build_argv)),
+                "umask": "0022", "staging_output_token": "@STAGING_BINARY@",
+                "argv_template": build_argv_template,
+                "argv_template_sha256": MODULE.sha256_bytes(
+                    MODULE.canonical_json_bytes(build_argv_template)
+                ),
+            },
+            "fresh_rebuild_receipt": {
+                "cwd": str(machine_project_root),
+                "environment": MODULE.formal_build_environment(),
+                "umask": "0022", "staging_directory": staging_directory,
+                "staging_output_path": staging_output, "argv": build_argv,
+                "argv_sha256": MODULE.sha256_bytes(
+                    MODULE.canonical_json_bytes(build_argv)
+                ),
                 "stdout": "", "stderr": "",
                 "stdout_sha256": MODULE.sha256_bytes(b""),
                 "stderr_sha256": MODULE.sha256_bytes(b""), "return_code": 0,
+                "output_sha256": binary_sha,
+                "output_size_bytes": binary.stat().st_size,
+                "output_mode": binary.stat().st_mode & 0o777,
+                "output_build_id": branch_build_id,
+                "output_dt_needed": branch_dt_needed,
+                "output_dt_needed_sha256": MODULE.sha256_bytes(
+                    MODULE.canonical_json_bytes(branch_dt_needed)
+                ),
+                "output_soname": None, "shell_used": False,
+            },
+            "transfer_evidence": {
+                "branch_calibration_binary_sha256": binary_sha,
+                "staging_output_sha256": binary_sha,
+                "staging_output_size_bytes": binary.stat().st_size,
+                "staging_output_mode": binary.stat().st_mode & 0o777,
+                "persistent_before_sha256": binary_sha,
+                "persistent_before_size_bytes": binary.stat().st_size,
+                "persistent_before_mode": binary.stat().st_mode & 0o777,
+                "persistent_before_device_id": binary.stat().st_dev,
+                "persistent_before_inode": binary.stat().st_ino,
+                "persistent_after_sha256": binary_sha,
+                "persistent_after_size_bytes": binary.stat().st_size,
+                "persistent_after_mode": binary.stat().st_mode & 0o777,
+                "persistent_after_device_id": binary.stat().st_dev,
+                "persistent_after_inode": binary.stat().st_ino,
+                "byte_for_byte_equal": True,
+                "persistent_identity_unchanged": True,
+                "persistent_overwrite_performed": False,
             },
         },
         "branch_binary": {
@@ -863,6 +920,27 @@ def formal_authority_fixture(tmp_path: Path) -> Path:
         freeze,
     )
     return authority
+
+
+def pure_machine_candidate(machine: dict[str, object]) -> dict[str, object]:
+    resource = machine["resource_evidence"]
+    assert isinstance(resource, dict)
+    capture = machine["capture"]
+    assert isinstance(capture, dict)
+    return MODULE.build_formal_machine_freeze_candidate(
+        captured_at_utc=capture["captured_at_utc"],
+        capture_tool_sha256=capture["capture_tool_sha256"],
+        boot_id_sha256=capture["boot_id_sha256"],
+        machine_observations=machine["machine_observations"],
+        python_arb=machine["python_arb"],
+        capd=machine["capd"],
+        compiler=machine["compiler"],
+        branch_binary=machine["branch_binary"],
+        runtime_libraries=machine["runtime_libraries"],
+        static_payload_raw=resource["static_payload_raw_utf8"].encode("utf-8"),
+        branch_payload_raw=resource["branch_payload_raw_utf8"].encode("utf-8"),
+        filesystem=machine["filesystem"],
+    )
 
 
 def synthetic_formal_static_pass_proof(
@@ -1533,13 +1611,15 @@ def test_exact_machine_schema_raw_calibration_and_build_receipt_fail_closed(
         MODULE._validate_formal_machine_envelope(forged)
 
     forged = json.loads(json.dumps(machine))
-    forged["compiler"]["build_record"]["argv"][1:3] = list(
-        reversed(forged["compiler"]["build_record"]["argv"][1:3])
+    forged["compiler"]["fresh_rebuild_receipt"]["argv"][1:3] = list(
+        reversed(forged["compiler"]["fresh_rebuild_receipt"]["argv"][1:3])
     )
-    forged["compiler"]["build_record"]["argv_sha256"] = MODULE.sha256_bytes(
-        MODULE.canonical_json_bytes(forged["compiler"]["build_record"]["argv"])
+    forged["compiler"]["fresh_rebuild_receipt"]["argv_sha256"] = MODULE.sha256_bytes(
+        MODULE.canonical_json_bytes(
+            forged["compiler"]["fresh_rebuild_receipt"]["argv"]
+        )
     )
-    with pytest.raises(MODULE.ProductionAuthorityError, match="argv/cwd"):
+    with pytest.raises(MODULE.ProductionAuthorityError, match="actual argv"):
         MODULE._validate_formal_machine_envelope(forged)
 
     forged = json.loads(json.dumps(machine))
@@ -1568,6 +1648,201 @@ def test_exact_machine_schema_raw_calibration_and_build_receipt_fail_closed(
     )
     with pytest.raises(MODULE.ProductionAuthorityError, match="site-packages"):
         MODULE._validate_formal_machine_envelope(forged)
+
+
+def test_pure_machine_builder_success_and_deterministic_serializer(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    machine = MODULE.strict_json_load(
+        authority / dict(MODULE.FORMAL_INPUT_ROLES)["machine_freeze"],
+        require_canonical=True,
+    )
+    first = pure_machine_candidate(machine)
+    second = pure_machine_candidate(machine)
+    assert first == second == machine
+    assert len(first) == len(MODULE.MACHINE_FREEZE_KEYS) == 23
+    assert MODULE.canonical_json_bytes(first) == MODULE.canonical_json_bytes(second)
+    assert MODULE.strict_json_loads(
+        MODULE.canonical_json_bytes(first).decode("utf-8")
+    ) == first
+    assert first["production_authorized"] is False
+    assert first["compiler"]["fresh_rebuild_receipt"]["shell_used"] is False
+
+
+def test_pure_machine_builder_rejects_stale_calibration_and_build_mismatch(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    machine = MODULE.strict_json_load(
+        authority / dict(MODULE.FORMAL_INPUT_ROLES)["machine_freeze"],
+        require_canonical=True,
+    )
+    stale = json.loads(json.dumps(machine))
+    branch = MODULE.strict_json_loads(
+        stale["resource_evidence"]["branch_payload_raw_utf8"]
+    )
+    branch["binary_sha256"] = "0" * 64
+    stale["resource_evidence"]["branch_payload_raw_utf8"] = (
+        MODULE.pretty_json_bytes(branch).decode("utf-8")
+    )
+    with pytest.raises(MODULE.ProductionAuthorityError, match="stale"):
+        pure_machine_candidate(stale)
+
+    mismatch = json.loads(json.dumps(machine))
+    mismatch["compiler"]["fresh_rebuild_receipt"]["output_sha256"] = "0" * 64
+    with pytest.raises(
+        MODULE.ProductionAuthorityError,
+        match="recipe/receipt differs",
+    ):
+        MODULE._validate_formal_machine_envelope(mismatch)
+
+    forged_dispatch = [
+        str(ROOT / dict(MODULE.FORMAL_INPUT_ROLES)["static_evaluator"]),
+        "--slab-id", "S000",
+    ]
+    with pytest.raises(
+        MODULE.ProductionAuthorityError, match="scientific dispatch"
+    ):
+        MODULE._capture_command(
+            forged_dispatch,
+            cwd=ROOT,
+            environment=MODULE.formal_build_environment(),
+            timeout_seconds=1,
+        )
+
+
+def test_machine_capture_paths_are_tmp_only_write_once_and_unaliased(
+    tmp_path: Path,
+) -> None:
+    target = tmp_path / "machine-candidate.json"
+    assert MODULE.machine_capture_output_path(str(target)) == target
+    for invalid in (
+        "relative.json",
+        "/var/tmp/machine-candidate.json",
+        str(ROOT / "research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json"),
+        str(tmp_path / "nested/../machine.json"),
+    ):
+        with pytest.raises(MODULE.PathContractError):
+            MODULE.machine_capture_output_path(invalid)
+
+    target.write_bytes(b"existing\n")
+    with pytest.raises(MODULE.PathContractError, match="already exists"):
+        MODULE.machine_capture_output_path(str(target))
+    target.unlink()
+    target.symlink_to(tmp_path / "missing-target")
+    with pytest.raises(MODULE.PathContractError, match="already exists"):
+        MODULE.machine_capture_output_path(str(target))
+
+    calibration = tmp_path / "calibration.json"
+    calibration.write_bytes(MODULE.canonical_json_bytes({"fixture": True}))
+    alias = tmp_path / "calibration-alias.json"
+    os.link(calibration, alias)
+    with pytest.raises(MODULE.PathContractError, match="hard-link"):
+        MODULE._machine_tmp_file(
+            str(calibration), "fixture calibration", serializer="CJ_COMPACT_V1"
+        )
+
+
+def test_machine_capture_cli_is_exact_exclusive_and_never_dispatches(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    machine = MODULE.strict_json_load(
+        authority / dict(MODULE.FORMAL_INPUT_ROLES)["machine_freeze"],
+        require_canonical=True,
+    )
+    calls: list[dict[str, object]] = []
+
+    def fake_capture(**kwargs: object) -> tuple[dict[str, object], str]:
+        calls.append(dict(kwargs))
+        return machine, "a" * 64
+
+    monkeypatch.setattr(
+        MODULE, "capture_and_publish_formal_machine_freeze", fake_capture
+    )
+    arguments = [
+        "--capture-machine-freeze",
+        "--authority-root", str(ROOT),
+        "--static-calibration", str(tmp_path / "static.json"),
+        "--branch-calibration", str(tmp_path / "branch.json"),
+        "--output", str(tmp_path / "candidate.json"),
+    ]
+    assert MODULE.main(arguments) == 0
+    summary = json.loads(capsys.readouterr().out)
+    assert summary == {
+        "artifact_role": "TEMP_MACHINE_FREEZE_CANDIDATE",
+        "artifact_status": "CAPTURED_VALIDATED_TEMP_ONLY",
+        "authority": "MACHINE_ADMISSION_ONLY",
+        "candidate_sha256": "a" * 64,
+        "machine_artifact_role": "MACHINE_FREEZE",
+        "machine_status": "FROZEN_FOR_PRODUCTION",
+        "output_path": str(tmp_path / "candidate.json"),
+        "serializer": "CJ_COMPACT_V1",
+        "production_authorized": False,
+        "scientific_dispatch_performed": False,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    assert len(calls) == 1
+
+    assert MODULE.main([*arguments, "--production"]) == 1
+    error = capsys.readouterr().err
+    assert "exact-exclusive" in error
+    assert len(calls) == 1
+
+
+def test_capture_command_timeout_kills_the_whole_process_group(
+    tmp_path: Path,
+) -> None:
+    original_subreaper_state = MODULE._capture_child_subreaper_state()
+    child_pid_path = tmp_path / "descendant.pid"
+    source = (
+        "import pathlib,subprocess,sys,time;"
+        "p=subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)']);"
+        f"pathlib.Path({str(child_pid_path)!r}).write_text(str(p.pid));"
+        "time.sleep(30)"
+    )
+    with pytest.raises(MODULE.ProductionAuthorityError, match="timed out"):
+        MODULE._capture_command(
+            [sys.executable, "-I", "-c", source],
+            cwd=ROOT,
+            environment=MODULE.formal_build_environment(),
+            timeout_seconds=1,
+        )
+    assert MODULE._capture_child_subreaper_state() is original_subreaper_state
+    assert child_pid_path.is_file()
+    descendant = int(child_pid_path.read_text(encoding="ascii"))
+    for _ in range(100):
+        if not Path(f"/proc/{descendant}").exists():
+            break
+        time.sleep(0.02)
+    assert not Path(f"/proc/{descendant}").exists()
+
+
+def test_machine_candidate_roundtrips_independent_release_validator(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    machine_path = authority / dict(MODULE.FORMAL_INPUT_ROLES)["machine_freeze"]
+    machine = MODULE.strict_json_load(machine_path, require_canonical=True)
+    assert pure_machine_candidate(machine) == machine
+    expected_role_hashes = {
+        role: MODULE.sha256(authority / relative)
+        for role, relative in MODULE.FORMAL_INPUT_ROLES
+    }
+    release = load_release_builder()
+    validated = release.validate_formal_machine_freeze(
+        authority,
+        machine_path=machine_path,
+        expected_role_hashes=expected_role_hashes,
+    )
+    assert validated["artifact_role"] == "MACHINE_FREEZE"
+    assert validated["production_authorized"] is False
 
 
 def test_capd_index_must_equal_detached_head_tree(tmp_path: Path) -> None:
@@ -1620,18 +1895,18 @@ def test_machine_live_toolchain_rejects_coherent_self_rebinding(
         MODULE._validate_formal_machine_envelope(forged)
 
     forged = json.loads(json.dumps(machine))
-    forged["compiler"]["build_record"]["return_code"] = 0.0
+    forged["compiler"]["fresh_rebuild_receipt"]["return_code"] = 0.0
     with pytest.raises(MODULE.ProductionAuthorityError, match="receipt"):
         MODULE._validate_formal_machine_envelope(forged)
 
     forged = json.loads(json.dumps(machine))
-    forged["compiler"]["build_record"]["umask"] = "0002"
+    forged["compiler"]["fresh_rebuild_receipt"]["umask"] = "0002"
     with pytest.raises(MODULE.ProductionAuthorityError, match="umask"):
         MODULE._validate_formal_machine_envelope(forged)
 
     forged = json.loads(json.dumps(machine))
-    forged["compiler"]["build_record"]["stdout"] = "forged\n"
-    forged["compiler"]["build_record"]["stdout_sha256"] = MODULE.sha256_bytes(
+    forged["compiler"]["fresh_rebuild_receipt"]["stdout"] = "forged\n"
+    forged["compiler"]["fresh_rebuild_receipt"]["stdout_sha256"] = MODULE.sha256_bytes(
         b"forged\n"
     )
     with pytest.raises(MODULE.ProductionAuthorityError, match="receipt"):

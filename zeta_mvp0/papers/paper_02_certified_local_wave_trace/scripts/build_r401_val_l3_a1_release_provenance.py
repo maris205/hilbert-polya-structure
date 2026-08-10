@@ -841,11 +841,30 @@ FORMAL_MACHINE_CAPD_KEYS = {
     "raw_flags_sha256", "libcapd", "libfilib",
 }
 FORMAL_MACHINE_COMPILER_KEYS = {
-    "executable_path", "executable_sha256", "version", "build_record",
+    "executable_path", "executable_sha256", "version", "build_recipe",
+    "fresh_rebuild_receipt", "transfer_evidence",
 }
-FORMAL_MACHINE_BUILD_RECORD_KEYS = {
-    "cwd", "environment", "umask", "argv", "argv_sha256", "stdout_sha256",
-    "stderr_sha256", "stdout", "stderr", "return_code",
+FORMAL_MACHINE_BUILD_RECIPE_KEYS = {
+    "cwd", "environment", "umask", "staging_output_token", "argv_template",
+    "argv_template_sha256",
+}
+FORMAL_MACHINE_FRESH_REBUILD_RECEIPT_KEYS = {
+    "cwd", "environment", "umask", "staging_directory",
+    "staging_output_path", "argv", "argv_sha256", "stdout", "stderr",
+    "stdout_sha256", "stderr_sha256", "return_code", "output_sha256",
+    "output_size_bytes", "output_mode", "output_build_id", "output_dt_needed",
+    "output_dt_needed_sha256", "output_soname", "shell_used",
+}
+FORMAL_MACHINE_TRANSFER_EVIDENCE_KEYS = {
+    "staging_output_sha256", "staging_output_size_bytes",
+    "staging_output_mode", "branch_calibration_binary_sha256",
+    "persistent_before_sha256",
+    "persistent_before_size_bytes", "persistent_before_mode",
+    "persistent_before_device_id", "persistent_before_inode",
+    "persistent_after_sha256", "persistent_after_size_bytes",
+    "persistent_after_mode", "persistent_after_device_id",
+    "persistent_after_inode", "byte_for_byte_equal",
+    "persistent_identity_unchanged", "persistent_overwrite_performed",
 }
 FORMAL_MACHINE_BRANCH_BINARY_KEYS = {
     "path", "sha256", "size_bytes", "executable_mode", "build_id", "source_path",
@@ -933,6 +952,30 @@ FORMAL_MACHINE_PYTHON_FLINT_INSTALLED_MANIFEST_ROOT_SHA256 = (
     "32a2b16585f81fe5cd4a4c3b7d0d70e0f867f1a032db4b9c3b0f414cf991c870"
 )
 FORMAL_MACHINE_CAPD_TREE_ALGORITHM = "GIT_INDEX_LIVE_TREE_CJ_COMPACT_V1"
+FORMAL_MACHINE_BUILD_ENVIRONMENT = {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "TZ": "UTC",
+    "PYTHONHASHSEED": "0",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+}
+FORMAL_MACHINE_STAGING_OUTPUT_TOKEN = "@STAGING_BINARY@"
+FORMAL_MACHINE_VERIFY_STATUS = "PASS_MACHINE_FREEZE_VERIFY_ONLY"
+FORMAL_MACHINE_VERIFY_AUTHORITY = "NON_AUTHORITATIVE_VERIFY_ONLY"
+FORMAL_MACHINE_VERIFY_CLAIM_BOUNDARY = (
+    "read-only machine-freeze schema and live-binding replay only; no freeze "
+    "publication, evaluator dispatch, production authorization, scientific "
+    "component, theorem, or release authority"
+)
+FORMAL_MACHINE_VERIFY_ROLES: tuple[tuple[str, str], ...] = (
+    ("scheduler", FORMAL_MACHINE_CAPTURE_TOOL),
+    ("static_evaluator", FORMAL_MACHINE_STATIC_EVALUATOR),
+    ("branch_evaluator_source", FORMAL_MACHINE_BRANCH_SOURCE),
+    ("branch_evaluator_binary", FORMAL_MACHINE_BRANCH_BINARY),
+    ("l1_final_plan", "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json"),
+)
 FORMAL_MACHINE_PYTHON_VERSION = (
     "3.12.3 | packaged by Anaconda, Inc. | (main, Apr 19 2024, 16:50:38) "
     "[GCC 11.2.0]"
@@ -2519,36 +2562,135 @@ def _machine_validate_compiler_and_binary(
         ) != require_sha256(branch["dt_needed_sha256"], "machine DT_NEEDED hash")
     ):
         raise ReleaseError("machine persistent branch DT_NEEDED mismatch")
-    build = exact_keys(
-        compiler["build_record"], FORMAL_MACHINE_BUILD_RECORD_KEYS,
-        "machine compiler build record",
+    recipe = exact_keys(
+        compiler["build_recipe"], FORMAL_MACHINE_BUILD_RECIPE_KEYS,
+        "machine compiler build recipe",
     )
-    if build["cwd"] != str(project_root) or build["umask"] != "0022":
-        raise ReleaseError("machine build working-directory/umask mismatch")
-    environment = build["environment"]
-    expected_environment = {"LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
-    if not exact_json_equal(environment, expected_environment):
-        raise ReleaseError("machine build environment is not exact and pinned")
-    argv = build["argv"]
-    expected_argv = [
+    if (
+        recipe["cwd"] != str(project_root)
+        or recipe["umask"] != "0022"
+        or not exact_json_equal(
+            recipe["environment"], FORMAL_MACHINE_BUILD_ENVIRONMENT
+        )
+        or recipe["staging_output_token"] != FORMAL_MACHINE_STAGING_OUTPUT_TOKEN
+    ):
+        raise ReleaseError("machine build recipe environment/identity mismatch")
+    expected_template = [
         compiler["executable_path"], "-Wall", "-Wextra", "-Wpedantic", "-Werror",
         str(project_file(project_root, FORMAL_MACHINE_BRANCH_SOURCE)),
         *capd_tokens, "-o",
-        str(project_file(project_root, FORMAL_MACHINE_BRANCH_BINARY)),
+        FORMAL_MACHINE_STAGING_OUTPUT_TOKEN,
     ]
-    if argv != expected_argv or sha256_bytes(canonical_json_bytes(argv)) != require_sha256(
-        build["argv_sha256"], "machine build argv hash"
-    ):
-        raise ReleaseError("machine exact build argv mismatch")
     if (
-        type(build["return_code"]) is not int
-        or build["return_code"] != 0
-        or build["stdout"] != ""
-        or build["stderr"] != ""
-        or build["stdout_sha256"] != FORMAL_MACHINE_EMPTY_SHA256
-        or build["stderr_sha256"] != FORMAL_MACHINE_EMPTY_SHA256
+        not exact_json_equal(recipe["argv_template"], expected_template)
+        or sha256_bytes(canonical_json_bytes(recipe["argv_template"]))
+        != require_sha256(
+            recipe["argv_template_sha256"], "machine build template hash"
+        )
     ):
-        raise ReleaseError("machine compiler transcript mismatch")
+        raise ReleaseError("machine semantic build-recipe template mismatch")
+
+    receipt = exact_keys(
+        compiler["fresh_rebuild_receipt"],
+        FORMAL_MACHINE_FRESH_REBUILD_RECEIPT_KEYS,
+        "machine fresh-rebuild receipt",
+    )
+    if (
+        receipt["cwd"] != recipe["cwd"]
+        or receipt["umask"] != recipe["umask"]
+        or not exact_json_equal(receipt["environment"], recipe["environment"])
+    ):
+        raise ReleaseError("machine fresh-rebuild execution context mismatch")
+    staging_directory = _exact_machine_verify_path(
+        _machine_nonempty_string(
+            receipt["staging_directory"], "machine fresh staging directory"
+        )
+    )
+    staging_output = _exact_machine_verify_path(
+        _machine_nonempty_string(
+            receipt["staging_output_path"], "machine fresh staging output"
+        )
+    )
+    persistent_path = project_file(project_root, FORMAL_MACHINE_BRANCH_BINARY)
+    if (
+        staging_directory.parent != Path("/tmp")
+        or staging_directory == project_root
+        or staging_output.parent != staging_directory
+        or staging_output.name != persistent_path.name
+        or staging_output == persistent_path
+    ):
+        raise PathContractError("machine fresh rebuild is not a private /tmp staging build")
+    expected_receipt_argv = [*expected_template[:-1], str(staging_output)]
+    if (
+        not exact_json_equal(receipt["argv"], expected_receipt_argv)
+        or sha256_bytes(canonical_json_bytes(receipt["argv"]))
+        != require_sha256(receipt["argv_sha256"], "machine fresh argv hash")
+    ):
+        raise ReleaseError("machine fresh-rebuild argv/template substitution mismatch")
+    if (
+        type(receipt["return_code"]) is not int
+        or receipt["return_code"] != 0
+        or receipt["stdout"] != ""
+        or receipt["stderr"] != ""
+        or receipt["stdout_sha256"] != FORMAL_MACHINE_EMPTY_SHA256
+        or receipt["stderr_sha256"] != FORMAL_MACHINE_EMPTY_SHA256
+        or receipt["shell_used"] is not False
+        or receipt["output_sha256"] != branch["sha256"]
+        or type(receipt["output_size_bytes"]) is not int
+        or receipt["output_size_bytes"] != len(binary_raw)
+        or type(receipt["output_mode"]) is not int
+        or receipt["output_mode"] != 0o755
+        or receipt["output_build_id"] != live_build_id
+        or not exact_json_equal(receipt["output_dt_needed"], live_needed)
+        or sha256_bytes(canonical_json_bytes(receipt["output_dt_needed"]))
+        != require_sha256(
+            receipt["output_dt_needed_sha256"],
+            "machine fresh DT_NEEDED hash",
+        )
+        or receipt["output_soname"] is not None
+    ):
+        raise ReleaseError("machine fresh-rebuild transcript/output mismatch")
+
+    transfer = exact_keys(
+        compiler["transfer_evidence"], FORMAL_MACHINE_TRANSFER_EVIDENCE_KEYS,
+        "machine build transfer evidence",
+    )
+    hash_keys = (
+        "staging_output_sha256", "branch_calibration_binary_sha256",
+        "persistent_before_sha256", "persistent_after_sha256",
+    )
+    for key in hash_keys:
+        if require_sha256(transfer[key], f"machine transfer {key}") != branch["sha256"]:
+            raise ReleaseError("machine staging/calibration/persistent hash mismatch")
+    for key in (
+        "staging_output_size_bytes", "persistent_before_size_bytes",
+        "persistent_after_size_bytes",
+    ):
+        if _machine_positive_int(transfer[key], f"machine transfer {key}") != len(binary_raw):
+            raise ReleaseError("machine staging/persistent size mismatch")
+    for key in (
+        "staging_output_mode", "persistent_before_mode", "persistent_after_mode",
+    ):
+        if type(transfer[key]) is not int or transfer[key] != 0o755:
+            raise ReleaseError("machine staging/persistent mode mismatch")
+    for key in (
+        "persistent_before_device_id", "persistent_before_inode",
+        "persistent_after_device_id", "persistent_after_inode",
+    ):
+        _machine_positive_int(transfer[key], f"machine transfer {key}")
+    if (
+        transfer["staging_output_sha256"] != receipt["output_sha256"]
+        or transfer["staging_output_size_bytes"] != receipt["output_size_bytes"]
+        or transfer["staging_output_mode"] != receipt["output_mode"]
+        or transfer["persistent_before_device_id"] != binary_info.st_dev
+        or transfer["persistent_after_device_id"] != binary_info.st_dev
+        or transfer["persistent_before_inode"] != binary_info.st_ino
+        or transfer["persistent_after_inode"] != binary_info.st_ino
+        or transfer["byte_for_byte_equal"] is not True
+        or transfer["persistent_identity_unchanged"] is not True
+        or transfer["persistent_overwrite_performed"] is not False
+    ):
+        raise ReleaseError("machine no-overwrite transfer evidence mismatch")
     return binary_raw, branch
 
 
@@ -2816,6 +2958,151 @@ def validate_formal_machine_freeze(
         return _validate_formal_machine_freeze(
             root, payload, expected_role_hashes=expected_role_hashes
         )
+
+
+def _exact_machine_verify_path(value: Any) -> Path:
+    """Preserve and enforce the lexical path supplied to the verify-only API."""
+
+    if type(value) is str:
+        text = value
+    elif isinstance(value, Path):
+        text = os.fspath(value)
+    else:
+        raise PathContractError(
+            "machine-freeze verify path must be an exact string or pathlib.Path"
+        )
+    if not text or "\x00" in text:
+        raise PathContractError("machine-freeze verify path is empty or contains NUL")
+    if (
+        not text.startswith("/")
+        or text.startswith("//")
+        or "//" in text[1:]
+        or "\\" in text
+        or text.endswith("/")
+    ):
+        raise PathContractError(f"noncanonical absolute machine-freeze path: {text}")
+    pure = PurePosixPath(text)
+    if (
+        any(part in {"", ".", ".."} for part in pure.parts[1:])
+        or pure.as_posix() != text
+    ):
+        raise PathContractError(f"unsafe absolute machine-freeze path: {text}")
+    return lexical_absolute(Path(text))
+
+
+def _machine_verify_namespace_signature(
+    path: Path,
+) -> tuple[tuple[str, int, int, int], ...]:
+    """Bind every lexical namespace entry from ``/`` through ``path``.
+
+    File bytes and the terminal file fingerprint are replayed separately by
+    :func:`capture_input_generation`.  This signature additionally prevents a
+    parent-directory substitution from preserving the final file inode while
+    changing the lexical namespace used to reach it.  Directory timestamps are
+    deliberately excluded so unrelated entries in a shared temporary parent do
+    not make a read-only verification spuriously fail.
+    """
+
+    canonical = lexical_absolute(path)
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+    nofollow = getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open("/", flags)
+    rows: list[tuple[str, int, int, int]] = []
+    try:
+        root_info = os.fstat(descriptor)
+        rows.append(
+            ("/", root_info.st_dev, root_info.st_ino, stat.S_IFMT(root_info.st_mode))
+        )
+        components = canonical.parts[1:]
+        for index, part in enumerate(components):
+            entry = os.stat(part, dir_fd=descriptor, follow_symlinks=False)
+            kind = stat.S_IFMT(entry.st_mode)
+            rows.append((part, entry.st_dev, entry.st_ino, kind))
+            terminal = index == len(components) - 1
+            if terminal:
+                if not stat.S_ISREG(entry.st_mode):
+                    raise PathContractError(
+                        f"machine-freeze verify target is not a regular file: {canonical}"
+                    )
+                break
+            if not stat.S_ISDIR(entry.st_mode):
+                raise PathContractError(
+                    f"machine-freeze verify namespace is not a directory: {canonical}"
+                )
+            next_descriptor = os.open(part, flags | nofollow, dir_fd=descriptor)
+            opened = os.fstat(next_descriptor)
+            if (opened.st_dev, opened.st_ino) != (entry.st_dev, entry.st_ino):
+                os.close(next_descriptor)
+                raise PathContractError(
+                    f"machine-freeze verify namespace changed during traversal: {canonical}"
+                )
+            os.close(descriptor)
+            descriptor = next_descriptor
+    finally:
+        os.close(descriptor)
+    return tuple(rows)
+
+
+def _current_formal_machine_role_hashes(project_root: Path) -> dict[str, str]:
+    """Capture the exact current machine-relevant subset of the 53-role map."""
+
+    declared_roles = dict(INPUT_ROLES)
+    if len(INPUT_ROLES) != 53 or len(declared_roles) != 53:
+        raise ReleaseError("machine verifier input map is not exactly 53 unique roles")
+    if (
+        len(FORMAL_MACHINE_VERIFY_ROLES) != 5
+        or len({role for role, _ in FORMAL_MACHINE_VERIFY_ROLES}) != 5
+    ):
+        raise ReleaseError("machine verifier cross-binding map is not exactly five roles")
+    expected: dict[str, str] = {}
+    for role, relative in FORMAL_MACHINE_VERIFY_ROLES:
+        if declared_roles.get(role) != relative:
+            raise ReleaseError(f"machine verifier role-map invariant mismatch: {role}")
+        raw, _ = read_snapshot(project_file(project_root, relative))
+        expected[role] = sha256_bytes(raw)
+    return expected
+
+
+def verify_formal_machine_freeze_path(
+    machine_path: str | Path,
+) -> dict[str, Any]:
+    """Verify one prospective machine freeze without publishing any artifact.
+
+    ``machine_path`` may be a canonical repository location or a write-once
+    candidate under a temporary directory.  The project being bound is always
+    this script's resolved paper root; it is not selected by the candidate.
+    The returned object is transient verification metadata.  Its candidate
+    digest is computed only from the bytes captured by this verifier, is never
+    accepted from a caller or inserted into the machine freeze, and grants no
+    release or scientific authority.
+    """
+
+    path = _exact_machine_verify_path(machine_path)
+    root = lexical_absolute(ROOT)
+    with capture_input_generation():
+        namespace = _machine_verify_namespace_signature(path)
+        payload, raw = strict_json_image(path, canonical=True)
+        role_hashes = _current_formal_machine_role_hashes(root)
+        validated = _validate_formal_machine_freeze(
+            root, payload, expected_role_hashes=role_hashes
+        )
+        if _machine_verify_namespace_signature(path) != namespace:
+            raise PathContractError(
+                "machine-freeze verify namespace changed during validation"
+            )
+        if validated["production_authorized"] is not False:
+            raise ReleaseError(
+                "machine-freeze verification unexpectedly authorizes production"
+            )
+    return {
+        "verification_status": FORMAL_MACHINE_VERIFY_STATUS,
+        "authority": FORMAL_MACHINE_VERIFY_AUTHORITY,
+        "claim_boundary": FORMAL_MACHINE_VERIFY_CLAIM_BOUNDARY,
+        "candidate_sha256": sha256_bytes(raw),
+        "size_bytes": len(raw),
+        "promotion_authorized": False,
+        "release_artifacts_written": False,
+    }
 
 
 def validate_mock_freeze(project_root: Path) -> tuple[Mapping[str, Any], bytes, list[dict[str, Any]]]:
@@ -3668,13 +3955,38 @@ def verify_release(project_root: Path) -> dict[str, Any]:
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", type=Path, default=ROOT)
-    parser.add_argument("--verify-only", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--verify-only", action="store_true")
+    mode.add_argument(
+        "--verify-machine-freeze",
+        metavar="ABSOLUTE_JSON_PATH",
+        help=(
+            "independently validate one prospective formal machine freeze; "
+            "never build or verify a release artifact"
+        ),
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     arguments = parse_args(argv)
     try:
+        if arguments.verify_machine_freeze is not None:
+            if lexical_absolute(arguments.project_root) != lexical_absolute(ROOT):
+                raise PathContractError(
+                    "--project-root cannot redirect machine-freeze verification"
+                )
+            verification = verify_formal_machine_freeze_path(
+                arguments.verify_machine_freeze
+            )
+            print(
+                f"machine_freeze_verification={verification['verification_status']} "
+                f"authority={verification['authority']} "
+                f"candidate_sha256={verification['candidate_sha256']} "
+                f"size_bytes={verification['size_bytes']} "
+                "promotion_authorized=false"
+            )
+            return 0
         root = lexical_absolute(arguments.project_root)
         payload = verify_release(root) if arguments.verify_only else build_release(root)
     except Exception as error:

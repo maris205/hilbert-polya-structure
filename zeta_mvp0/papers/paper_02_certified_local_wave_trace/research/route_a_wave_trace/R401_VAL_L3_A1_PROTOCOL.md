@@ -90,8 +90,11 @@ box.  L3-A1 supplies only the phase-anchor and complete-period branch-tube
 bridges described below.
 
 The prospective provenance DAG has exactly 53 ordered main-freeze input
-roles and 68 ordered release roles: those 53 inputs, the main freeze, and 14
-downstream result/control roles.  The exhaustive path map is owned by
+roles and 68 ordered release roles: those 53 inputs, the downstream role-54
+main freeze generated only after all 53 input bytes are final, and 14
+downstream result/control roles.  Role 10 among the 53 inputs is the machine
+freeze; the main freeze is not itself one of those inputs.  The exhaustive
+path map is owned by
 `R401_VAL_L3_A1_RELEASE_PROVENANCE_CONTRACT.md`.  In particular, the
 implementation-design review, static evaluator test, branch runtime, and
 S0-compatibility test are direct inputs rather than unbound helpers.  These
@@ -322,6 +325,8 @@ and manuscripts.
 
 ```text
 protocol_status = PROSPECTIVE_NON_LICENSING
+machine_capture_temp_only_implemented = true
+machine_verify_only_implemented = true
 machine_freeze_exists = false
 main_freeze_exists = false
 independent_prefreeze_accept = false
@@ -363,6 +368,17 @@ separately hashes the live ordered tracked-byte rows.  The persistent branch
 ELF binds its one 20-byte GNU build-id, exact sorted `DT_NEEDED`, and absence
 of `DT_SONAME`; python-flint module/`RECORD`/Arb/fmpq paths share one exact
 site-packages root.
+
+The compiler binding is not one ambiguous build record.  It separates a
+declarative `build_recipe`, an executed `fresh_rebuild_receipt` for a private
+direct-child `/tmp` output, and `transfer_evidence` proving byte equality with
+the persistent role-17 binary without overwriting or changing that binary's
+identity.  The recipe uses `@STAGING_BINARY@` instead of a canonical target.
+Role 19 alone owns the fresh build and records `shell_used=false`; the role-24
+independent verifier performs no write and spawns no subprocess.  The current
+capture and verify-only CLIs operate only on a temporary candidate and grant
+no role-10 publication, role-54 construction, production authorization, or
+scientific status.
 
 The exact static timeout is `1800000` ms.  Exact branch timeout and grace
 fields are `600000`, `2000`, and `1000` ms.  The formal branch runtime and

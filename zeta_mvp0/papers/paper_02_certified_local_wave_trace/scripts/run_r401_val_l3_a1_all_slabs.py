@@ -7,10 +7,13 @@ explicit synthetic executable outside either result root; it reuses the
 hardened bounded-process and branch-cell transaction runtime.  It also has a
 formal *preflight* handshake which can snapshot the prospective 53 input
 roles and write one visibly non-licensing, non-promotable run-config candidate
-in an explicit noncanonical temporary root.  That handshake is not the future
-production run config and cannot dispatch either evaluator.  Production
-dispatch remains unconditionally disabled until the formal freeze schemas and
-a separate execution-authorization contract are finalized.
+in an explicit noncanonical temporary root.  A separate exact-exclusive mode
+can capture a temp-only machine-freeze candidate: it performs metadata probes
+and one truthful fresh /tmp compiler rebuild, never executes either scientific
+evaluator, never overwrites the persistent binary, and can publish only to a
+missing caller-supplied /tmp file.  Neither candidate authorizes dispatch or
+canonical publication.  Production dispatch remains unconditionally disabled
+pending the later 53-input freeze/review/release sequence.
 """
 
 from __future__ import annotations
@@ -27,10 +30,14 @@ import json
 import math
 import os
 import re
+import signal
 import shlex
 import stat
 import struct
+import subprocess
 import sys
+import tempfile
+import threading
 import time
 import types
 import zlib
@@ -77,6 +84,11 @@ PREFREEZE_REVIEW = (
 )
 CANONICAL_RESULT = ROOT / "results/r401_val_l3_all_slabs"
 CANONICAL_OPERATIONAL = ROOT / "results/r401_val_l3_all_slabs.operational"
+DEFAULT_CAPD_CHECKOUT = (
+    ROOT.parents[3] / "dependencies/capd-r401-a1"
+)
+DEFAULT_COMPILER = Path("/usr/bin/g++")
+DEFAULT_SYSTEM_LIBRARY_ROOT = Path("/usr/lib/x86_64-linux-gnu")
 
 PROTOCOL_ID = "R401-VAL-L3-A1"
 SCHEMA_VERSION = 1
@@ -240,11 +252,31 @@ MACHINE_CAPD_KEYS = {
     "raw_flags_sha256", "libcapd", "libfilib",
 }
 MACHINE_COMPILER_KEYS = {
-    "executable_path", "executable_sha256", "version", "build_record",
+    "executable_path", "executable_sha256", "version", "build_recipe",
+    "fresh_rebuild_receipt", "transfer_evidence",
 }
-MACHINE_BUILD_RECORD_KEYS = {
-    "cwd", "environment", "umask", "argv", "argv_sha256", "stdout_sha256",
-    "stderr_sha256", "stdout", "stderr", "return_code",
+MACHINE_BUILD_RECIPE_KEYS = {
+    "cwd", "environment", "umask", "staging_output_token",
+    "argv_template", "argv_template_sha256",
+}
+MACHINE_FRESH_REBUILD_RECEIPT_KEYS = {
+    "cwd", "environment", "umask", "staging_directory",
+    "staging_output_path", "argv", "argv_sha256", "stdout", "stderr",
+    "stdout_sha256", "stderr_sha256", "return_code", "output_sha256",
+    "output_size_bytes", "output_mode", "output_build_id",
+    "output_dt_needed", "output_dt_needed_sha256", "output_soname",
+    "shell_used",
+}
+MACHINE_TRANSFER_EVIDENCE_KEYS = {
+    "branch_calibration_binary_sha256", "staging_output_sha256",
+    "staging_output_size_bytes",
+    "staging_output_mode", "persistent_before_sha256",
+    "persistent_before_size_bytes", "persistent_before_mode",
+    "persistent_before_device_id", "persistent_before_inode",
+    "persistent_after_sha256", "persistent_after_size_bytes",
+    "persistent_after_mode", "persistent_after_device_id",
+    "persistent_after_inode", "byte_for_byte_equal",
+    "persistent_identity_unchanged", "persistent_overwrite_performed",
 }
 MACHINE_BRANCH_BINARY_KEYS = {
     "path", "sha256", "size_bytes", "executable_mode", "build_id", "source_path",
@@ -597,6 +629,7 @@ _ACTIVE_FORMAL_MACHINE_EXTERNAL_PATHS: dict[
         tuple[int, int, int, int, int],
     ],
 ] | None = None
+_CAPTURE_SUBREAPER_LOCK = threading.RLock()
 
 
 def _branch_runtime() -> Any:
@@ -2142,7 +2175,32 @@ def formal_machine_requirements() -> dict[str, int]:
 
 
 def formal_build_environment() -> dict[str, str]:
-    return {"LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"}
+    """Return the complete environment used by the fresh deterministic build."""
+
+    return {
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "PATH": "/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "PYTHONNOUSERSITE": "1",
+        "TZ": "UTC",
+    }
+
+
+def formal_capd_flag_tokens(checkout_path: str) -> list[str]:
+    """Return the exact ordered 20-token CAPD compile/link ABI."""
+
+    checkout = str(safe_absolute_path(checkout_path, "CAPD checkout"))
+    return [
+        "-std=c++17", "-O2", "-frounding-math", "-D__USE_FILIB__",
+        "-D__HAVE_MPFR__", "-O2", "-frounding-math", "-DFILIB_EXTENDED",
+        "-DFILIB_HAVE_SSE", f"-I{checkout}/capdDynSys/include",
+        f"-I{checkout}/capdAlg/include", f"-I{checkout}/capdAux/include",
+        f"-I{checkout}/capdExt/include", f"-I{checkout}/capdExt/filibsrc",
+        f"-L{checkout}/build-mp", f"-L{checkout}/build-mp/capdExt/filibsrc",
+        "-lcapd", "-lfilib", "-lmpfr", "-lgmp",
+    ]
 
 
 def _validate_extension_binding(
@@ -3760,28 +3818,122 @@ def _validate_formal_machine_envelope_once(machine: Any) -> dict[str, Any]:
         raise ProductionAuthorityError("compiler executable live hash mismatch")
     if compiler["version"] != MACHINE_COMPILER_VERSION:
         raise ProductionAuthorityError("compiler version mismatch")
-    exact_keys(compiler["build_record"], MACHINE_BUILD_RECORD_KEYS, "machine build record")
-    build_record = compiler["build_record"]
-    safe_absolute_path(build_record["cwd"], "build cwd")
-    if type(build_record["argv"]) is not list or not build_record["argv"] or not all(type(item) is str for item in build_record["argv"]):
-        raise ProductionAuthorityError("machine build argv is malformed")
-    if not exact_json_equal(build_record["environment"], formal_build_environment()):
-        raise ProductionAuthorityError("machine build environment mismatch")
-    if build_record["umask"] != "0022":
-        raise ProductionAuthorityError("machine build umask mismatch")
-    for key in ("stdout", "stderr"):
-        if type(build_record[key]) is not str:
-            raise ProductionAuthorityError(f"build_record.{key} must be exact UTF-8 text")
-    if (
-        build_record["argv_sha256"] != sha256_bytes(canonical_json_bytes(build_record["argv"]))
-        or build_record["stdout_sha256"] != sha256_bytes(build_record["stdout"].encode("utf-8"))
-        or build_record["stderr_sha256"] != sha256_bytes(build_record["stderr"].encode("utf-8"))
-        or build_record["stdout"] != ""
-        or build_record["stderr"] != ""
-        or type(build_record["return_code"]) is not int
-        or build_record["return_code"] != 0
+    exact_keys(
+        compiler["build_recipe"], MACHINE_BUILD_RECIPE_KEYS,
+        "machine build recipe",
+    )
+    exact_keys(
+        compiler["fresh_rebuild_receipt"],
+        MACHINE_FRESH_REBUILD_RECEIPT_KEYS,
+        "machine fresh rebuild receipt",
+    )
+    exact_keys(
+        compiler["transfer_evidence"], MACHINE_TRANSFER_EVIDENCE_KEYS,
+        "machine build transfer evidence",
+    )
+    build_recipe = compiler["build_recipe"]
+    fresh_receipt = compiler["fresh_rebuild_receipt"]
+    transfer = compiler["transfer_evidence"]
+    for context, record in (
+        ("machine build recipe", build_recipe),
+        ("machine fresh rebuild receipt", fresh_receipt),
     ):
-        raise ProductionAuthorityError("machine build receipt hash/status mismatch")
+        safe_absolute_path(record["cwd"], f"{context} cwd")
+        if not exact_json_equal(record["environment"], formal_build_environment()):
+            raise ProductionAuthorityError(f"{context} environment mismatch")
+        if record["umask"] != "0022":
+            raise ProductionAuthorityError(f"{context} umask mismatch")
+    if build_recipe["staging_output_token"] != "@STAGING_BINARY@":
+        raise ProductionAuthorityError("machine build recipe staging token mismatch")
+    argv_template = build_recipe["argv_template"]
+    if (
+        type(argv_template) is not list
+        or not argv_template
+        or not all(type(item) is str and item for item in argv_template)
+        or argv_template[-1] != build_recipe["staging_output_token"]
+        or argv_template.count(build_recipe["staging_output_token"]) != 1
+        or build_recipe["argv_template_sha256"]
+        != sha256_bytes(canonical_json_bytes(argv_template))
+    ):
+        raise ProductionAuthorityError("machine build recipe template is malformed")
+    staging_directory = safe_absolute_path(
+        fresh_receipt["staging_directory"], "fresh build staging directory"
+    )
+    staging_output = safe_absolute_path(
+        fresh_receipt["staging_output_path"], "fresh build staging output"
+    )
+    if (
+        staging_directory.parts[:2] != ("/", "tmp")
+        or staging_directory.parent != Path("/tmp")
+        or staging_output.parent != staging_directory
+        or staging_output.name != "capd_r401_phase_branch_tube_mp_a1"
+        or is_within(staging_directory, project_root_for_capture)
+    ):
+        raise ProductionAuthorityError("fresh build staging namespace mismatch")
+    actual_argv = fresh_receipt["argv"]
+    if (
+        type(actual_argv) is not list
+        or not all(type(item) is str and item for item in actual_argv)
+        or actual_argv != [*argv_template[:-1], str(staging_output)]
+        or fresh_receipt["argv_sha256"]
+        != sha256_bytes(canonical_json_bytes(actual_argv))
+    ):
+        raise ProductionAuthorityError("fresh build actual argv mismatch")
+    for key in ("stdout", "stderr"):
+        if type(fresh_receipt[key]) is not str:
+            raise ProductionAuthorityError(
+                f"fresh_rebuild_receipt.{key} must be exact UTF-8 text"
+            )
+    for key in (
+        "output_size_bytes", "output_mode",
+    ):
+        exact_int(fresh_receipt[key], f"fresh_rebuild_receipt.{key}", minimum=1)
+    for key in (
+        "output_sha256", "output_dt_needed_sha256", "argv_sha256",
+        "stdout_sha256", "stderr_sha256",
+    ):
+        _exact_sha(fresh_receipt[key], f"fresh_rebuild_receipt.{key}")
+    if (
+        fresh_receipt["stdout_sha256"]
+        != sha256_bytes(fresh_receipt["stdout"].encode("utf-8"))
+        or fresh_receipt["stderr_sha256"]
+        != sha256_bytes(fresh_receipt["stderr"].encode("utf-8"))
+        or fresh_receipt["stdout"] != ""
+        or fresh_receipt["stderr"] != ""
+        or type(fresh_receipt["return_code"]) is not int
+        or fresh_receipt["return_code"] != 0
+        or fresh_receipt["output_mode"] != 0o755
+        or type(fresh_receipt["output_build_id"]) is not str
+        or re.fullmatch(r"[0-9a-f]{40}", fresh_receipt["output_build_id"])
+        is None
+        or fresh_receipt["output_soname"] is not None
+        or fresh_receipt["shell_used"] is not False
+        or type(fresh_receipt["output_dt_needed"]) is not list
+        or fresh_receipt["output_dt_needed"]
+        != sorted(set(fresh_receipt["output_dt_needed"]))
+        or fresh_receipt["output_dt_needed_sha256"]
+        != sha256_bytes(canonical_json_bytes(fresh_receipt["output_dt_needed"]))
+    ):
+        raise ProductionAuthorityError("machine fresh rebuild receipt mismatch")
+    for key in (
+        "staging_output_size_bytes", "staging_output_mode",
+        "persistent_before_size_bytes", "persistent_before_mode",
+        "persistent_before_device_id", "persistent_before_inode",
+        "persistent_after_size_bytes", "persistent_after_mode",
+        "persistent_after_device_id", "persistent_after_inode",
+    ):
+        exact_int(transfer[key], f"transfer_evidence.{key}", minimum=1)
+    for key in (
+        "branch_calibration_binary_sha256", "staging_output_sha256",
+        "persistent_before_sha256", "persistent_after_sha256",
+    ):
+        _exact_sha(transfer[key], f"transfer_evidence.{key}")
+    for key in (
+        "byte_for_byte_equal", "persistent_identity_unchanged",
+        "persistent_overwrite_performed",
+    ):
+        if type(transfer[key]) is not bool:
+            raise ProductionAuthorityError(f"transfer_evidence.{key} must be Boolean")
     python = machine["python_arb"]
     safe_absolute_path(python["executable_path"], "Python executable")
     _exact_sha(python["executable_sha256"], "Python executable hash")
@@ -3971,15 +4123,7 @@ def _validate_formal_machine_envelope_once(machine: Any) -> dict[str, Any]:
     except ValueError as error:
         raise ProductionAuthorityError("CAPD raw flags cannot be tokenized") from error
     checkout = capd["checkout_path"]
-    expected_capd_tokens = [
-        "-std=c++17", "-O2", "-frounding-math", "-D__USE_FILIB__",
-        "-D__HAVE_MPFR__", "-O2", "-frounding-math", "-DFILIB_EXTENDED",
-        "-DFILIB_HAVE_SSE", f"-I{checkout}/capdDynSys/include",
-        f"-I{checkout}/capdAlg/include", f"-I{checkout}/capdAux/include",
-        f"-I{checkout}/capdExt/include", f"-I{checkout}/capdExt/filibsrc",
-        f"-L{checkout}/build-mp", f"-L{checkout}/build-mp/capdExt/filibsrc",
-        "-lcapd", "-lfilib", "-lmpfr", "-lgmp",
-    ]
+    expected_capd_tokens = formal_capd_flag_tokens(checkout)
     if capd_tokens != expected_capd_tokens:
         raise ProductionAuthorityError("CAPD ordered raw-flag contract mismatch")
     project_root = machine["filesystem"]["project_root"]
@@ -4005,13 +4149,58 @@ def _validate_formal_machine_envelope_once(machine: Any) -> dict[str, Any]:
         raise ProductionAuthorityError(
             "persistent branch binary/source live replay mismatch"
         )
-    expected_build_argv = [
+    expected_build_template = [
         compiler["executable_path"], "-Wall", "-Wextra", "-Wpedantic", "-Werror",
         str(Path(project_root) / binary["source_path"]), *capd_tokens,
-        "-o", str(Path(project_root) / binary["path"]),
+        "-o", "@STAGING_BINARY@",
     ]
-    if build_record["cwd"] != project_root or not exact_json_equal(build_record["argv"], expected_build_argv):
-        raise ProductionAuthorityError("machine build argv/cwd mismatch")
+    if (
+        build_recipe["cwd"] != project_root
+        or fresh_receipt["cwd"] != project_root
+        or not exact_json_equal(
+            build_recipe["argv_template"], expected_build_template
+        )
+        or not exact_json_equal(
+            fresh_receipt["argv"],
+            [*expected_build_template[:-1], fresh_receipt["staging_output_path"]],
+        )
+        or fresh_receipt["output_sha256"] != binary["sha256"]
+        or fresh_receipt["output_size_bytes"] != binary["size_bytes"]
+        or fresh_receipt["output_mode"] != binary["executable_mode"]
+        or fresh_receipt["output_build_id"] != binary["build_id"]
+        or fresh_receipt["output_dt_needed"] != binary["dt_needed"]
+    ):
+        raise ProductionAuthorityError(
+            "machine fresh build recipe/receipt differs from branch binary"
+        )
+    persistent_identity = (live_binary_info.st_dev, live_binary_info.st_ino)
+    if (
+        transfer["staging_output_sha256"] != binary["sha256"]
+        or transfer["staging_output_size_bytes"] != binary["size_bytes"]
+        or transfer["staging_output_mode"] != binary["executable_mode"]
+        or transfer["persistent_before_sha256"] != binary["sha256"]
+        or transfer["persistent_before_size_bytes"] != binary["size_bytes"]
+        or transfer["persistent_before_mode"] != binary["executable_mode"]
+        or (
+            transfer["persistent_before_device_id"],
+            transfer["persistent_before_inode"],
+        )
+        != persistent_identity
+        or transfer["persistent_after_sha256"] != binary["sha256"]
+        or transfer["persistent_after_size_bytes"] != binary["size_bytes"]
+        or transfer["persistent_after_mode"] != binary["executable_mode"]
+        or (
+            transfer["persistent_after_device_id"],
+            transfer["persistent_after_inode"],
+        )
+        != persistent_identity
+        or transfer["byte_for_byte_equal"] is not True
+        or transfer["persistent_identity_unchanged"] is not True
+        or transfer["persistent_overwrite_performed"] is not False
+    ):
+        raise ProductionAuthorityError(
+            "fresh staging/persistent byte-transfer evidence mismatch"
+        )
     evidence = machine["resource_evidence"]
     static_raw_text = evidence["static_payload_raw_utf8"]
     branch_raw_text = evidence["branch_payload_raw_utf8"]
@@ -4040,6 +4229,14 @@ def _validate_formal_machine_envelope_once(machine: Any) -> dict[str, Any]:
         project_root_for_capture,
         binary["sha256"],
     )
+    if (
+        transfer["branch_calibration_binary_sha256"]
+        != branch_payload["binary_sha256"]
+        or transfer["branch_calibration_binary_sha256"] != binary["sha256"]
+    ):
+        raise ProductionAuthorityError(
+            "branch calibration/fresh build/persistent transfer mismatch"
+        )
     static_bindings = static_payload["bindings"]
     flint_binding = static_bindings["python_flint"]
     module_raw, _, module_resolved = _read_external_pinned_path(
@@ -4191,6 +4388,1176 @@ def _validate_formal_machine_envelope(machine: Any) -> dict[str, Any]:
         return validated
     finally:
         _ACTIVE_FORMAL_MACHINE_EXTERNAL_PATHS = None
+
+
+def _exact_json_clone(payload: Any) -> Any:
+    """Clone one exact JSON value without consulting filesystem state."""
+
+    return strict_json_loads(canonical_json_bytes(payload).decode("utf-8"))
+
+
+def build_formal_machine_freeze_candidate(
+    *,
+    captured_at_utc: str,
+    capture_tool_sha256: str,
+    boot_id_sha256: str,
+    machine_observations: Mapping[str, Any],
+    python_arb: Mapping[str, Any],
+    capd: Mapping[str, Any],
+    compiler: Mapping[str, Any],
+    branch_binary: Mapping[str, Any],
+    runtime_libraries: Mapping[str, Any],
+    static_payload_raw: bytes,
+    branch_payload_raw: bytes,
+    filesystem: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Purely assemble one exact, non-self-authorizing machine candidate.
+
+    This function performs no reads, writes, subprocess execution, clock access,
+    or scientific dispatch.  Its inputs are already-captured observations.  The
+    live capture wrapper below separately validates every byte image and only
+    then publishes the returned CJ_COMPACT_V1 image to a noncanonical /tmp
+    target.
+    """
+
+    if type(static_payload_raw) is not bytes or type(branch_payload_raw) is not bytes:
+        raise StrictJSONError("machine resource evidence must be exact byte images")
+    try:
+        static_text = static_payload_raw.decode("utf-8")
+        branch_text = branch_payload_raw.decode("utf-8")
+    except UnicodeError as error:
+        raise StrictJSONError("machine resource evidence is not UTF-8") from error
+    static_payload = strict_json_loads(static_text)
+    branch_payload = strict_json_loads(branch_text)
+    if static_payload_raw != canonical_json_bytes(static_payload):
+        raise StrictJSONError("static calibration is not CJ_COMPACT_V1")
+    if branch_payload_raw != pretty_json_bytes(branch_payload):
+        raise StrictJSONError("branch calibration is not CJ_PRETTY_2_V1")
+    exact_keys(static_payload, STATIC_RESOURCE_PAYLOAD_KEYS, "static calibration")
+    exact_keys(branch_payload, BRANCH_RESOURCE_PAYLOAD_KEYS, "branch calibration")
+
+    _exact_utc_timestamp(captured_at_utc, "machine capture timestamp")
+    _exact_sha(capture_tool_sha256, "machine capture tool hash")
+    _exact_sha(boot_id_sha256, "machine boot ID hash")
+    exact_keys(dict(machine_observations), MACHINE_OBSERVATION_KEYS, "machine observations")
+    _exact_positive_ints(machine_observations, "machine observations")
+    exact_keys(dict(python_arb), MACHINE_PYTHON_ARB_KEYS, "machine python_arb")
+    exact_keys(dict(capd), MACHINE_CAPD_KEYS, "machine CAPD")
+    exact_keys(dict(compiler), MACHINE_COMPILER_KEYS, "machine compiler")
+    exact_keys(dict(branch_binary), MACHINE_BRANCH_BINARY_KEYS, "machine branch binary")
+    exact_keys(dict(runtime_libraries), MACHINE_RUNTIME_LIBRARIES_KEYS, "machine runtime libraries")
+    exact_keys(dict(filesystem), MACHINE_FILESYSTEM_KEYS, "machine filesystem")
+
+    requirements = formal_machine_requirements()
+    observations = _exact_json_clone(dict(machine_observations))
+    static_baseline = static_payload["admission"]["idle_baseline_bytes"]
+    branch_baseline = branch_payload["admission"]["baseline_bytes"]
+    static_peak = static_payload["admission"]["representative_peak_rss_bytes"]
+    branch_peak = branch_payload["admission"]["peak_rss_bytes"]
+    if (
+        type(static_baseline) is not int
+        or type(branch_baseline) is not int
+        or type(static_peak) is not int
+        or type(branch_peak) is not int
+        or min(static_baseline, branch_baseline, static_peak, branch_peak) <= 0
+    ):
+        raise ProductionAuthorityError("resource calibration metrics are malformed")
+    if (
+        observations["idle_baseline_rss_bytes"]
+        != max(static_baseline, branch_baseline)
+        or observations["representative_static_peak_rss_bytes"] != static_peak
+        or observations["representative_branch_peak_rss_bytes"] != branch_peak
+        or observations["logical_cpu_count"] != requirements["logical_cpu_count"]
+        or observations["memory_limit_bytes"] != requirements["memory_limit_bytes"]
+    ):
+        raise ProductionAuthorityError(
+            "machine observations do not exactly transfer calibration/live policy"
+        )
+    static_required = (
+        observations["idle_baseline_rss_bytes"]
+        + requirements["static_workers"] * static_peak
+        + requirements["reserve_bytes"]
+    )
+    branch_required = (
+        observations["idle_baseline_rss_bytes"]
+        + requirements["branch_workers"] * branch_peak
+        + requirements["reserve_bytes"]
+    )
+    admission_limit = requirements["memory_admission_limit_bytes"]
+    resource_admission = {
+        "static_required_bytes": static_required,
+        "branch_required_bytes": branch_required,
+        "admitted_required_bytes": max(static_required, branch_required),
+        "admission_limit_bytes": admission_limit,
+        "static_inequality_passed": static_required <= admission_limit,
+        "branch_inequality_passed": branch_required <= admission_limit,
+        "storage_launch_passed": (
+            observations["result_parent_free_bytes"]
+            >= requirements["launch_free_bytes"]
+        ),
+    }
+    if not all(
+        resource_admission[key]
+        for key in (
+            "static_inequality_passed",
+            "branch_inequality_passed",
+            "storage_launch_passed",
+        )
+    ):
+        raise ProductionAuthorityError("machine candidate failed resource admission")
+
+    branch_sha = branch_binary["sha256"]
+    _exact_sha(branch_sha, "machine branch binary hash")
+    if branch_payload["binary_sha256"] != branch_sha:
+        raise ProductionAuthorityError(
+            "branch calibration is stale relative to the persistent binary"
+        )
+    candidate = {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "artifact_role": "MACHINE_FREEZE",
+        "status": "FROZEN_FOR_PRODUCTION",
+        "authority": "MACHINE_ADMISSION_ONLY",
+        "scientific_licensing_enabled": True,
+        "production_authorized": False,
+        "capture": {
+            "captured_at_utc": captured_at_utc,
+            "capture_tool_path": dict(FORMAL_INPUT_ROLES)["scheduler"],
+            "capture_tool_sha256": capture_tool_sha256,
+            "boot_id_sha256": boot_id_sha256,
+        },
+        "machine_requirements": requirements,
+        "machine_observations": observations,
+        "python_arb": _exact_json_clone(dict(python_arb)),
+        "capd": _exact_json_clone(dict(capd)),
+        "compiler": _exact_json_clone(dict(compiler)),
+        "branch_binary": _exact_json_clone(dict(branch_binary)),
+        "runtime_libraries": _exact_json_clone(dict(runtime_libraries)),
+        "resource_evidence": {
+            "static_payload_raw_utf8": static_text,
+            "static_payload_sha256": sha256_bytes(static_payload_raw),
+            "branch_payload_raw_utf8": branch_text,
+            "branch_payload_sha256": sha256_bytes(branch_payload_raw),
+            "persistent_binary_sha256": branch_sha,
+        },
+        "resource_admission": resource_admission,
+        "filesystem": _exact_json_clone(dict(filesystem)),
+        "claim_boundary": MACHINE_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    exact_keys(candidate, MACHINE_FREEZE_KEYS, "machine candidate")
+    cloned = _exact_json_clone(candidate)
+    if not exact_json_equal(cloned, candidate):
+        raise StrictJSONError("machine candidate is not stable under CJ_COMPACT_V1")
+    return cloned
+
+
+def _machine_tmp_file(
+    value: str, context: str, *, serializer: str
+) -> tuple[Any, bytes, os.stat_result]:
+    """Capture one hardlink-free calibration image from an exact /tmp path."""
+
+    path = safe_absolute_path(value, f"{context} path")
+    if path.parts[:2] != ("/", "tmp") or len(path.parts) < 3:
+        raise PathContractError(f"{context} must be an absolute /tmp file")
+    raw, info = read_pinned_regular_file(path)
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeError as error:
+        raise StrictJSONError(f"{context} is not UTF-8") from error
+    payload = strict_json_loads(text)
+    expected = (
+        canonical_json_bytes(payload)
+        if serializer == "CJ_COMPACT_V1"
+        else pretty_json_bytes(payload)
+    )
+    if raw != expected:
+        raise StrictJSONError(f"{context} is not {serializer}")
+    return payload, raw, info
+
+
+def machine_capture_output_path(value: str) -> Path:
+    """Validate the exact, missing, noncanonical /tmp capture destination."""
+
+    target = safe_absolute_path(value, "machine capture output")
+    if target.parts[:2] != ("/", "tmp") or len(target.parts) < 3:
+        raise PathContractError("machine capture output must be below /tmp")
+    if target == MACHINE_FREEZE or is_within(target, ROOT):
+        raise PathContractError("machine capture cannot publish in the project tree")
+    try:
+        parent_fd = _open_directory_fd(target.parent)
+    except OSError as error:
+        raise PathContractError(
+            f"machine capture output parent is unsafe or absent: {error}"
+        ) from error
+    try:
+        parent_info = os.fstat(parent_fd)
+        if not stat.S_ISDIR(parent_info.st_mode):
+            raise PathContractError("machine capture output parent is not a directory")
+        try:
+            os.stat(target.name, dir_fd=parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            pass
+        else:
+            raise PathContractError("machine capture output already exists")
+    finally:
+        os.close(parent_fd)
+    return target
+
+
+def _capture_child_subreaper_state() -> bool:
+    """Read this process's exact Linux child-subreaper state."""
+
+    if not sys.platform.startswith("linux"):
+        raise ProductionAuthorityError(
+            "capture child-subreaper semantics require Linux"
+        )
+    libc = ctypes.CDLL(None, use_errno=True)
+    prctl = getattr(libc, "prctl", None)
+    if prctl is None:
+        raise ProductionAuthorityError(
+            "prctl(PR_GET_CHILD_SUBREAPER) is unavailable"
+        )
+    prctl.restype = ctypes.c_int
+    state = ctypes.c_int(-1)
+    ctypes.set_errno(0)
+    result = prctl(
+        ctypes.c_int(37),
+        ctypes.byref(state),
+        ctypes.c_ulong(0),
+        ctypes.c_ulong(0),
+        ctypes.c_ulong(0),
+    )
+    if result != 0 or state.value not in (0, 1):
+        error_number = ctypes.get_errno()
+        raise ProductionAuthorityError(
+            "cannot read capture child-subreaper state "
+            f"(errno {error_number})"
+        )
+    return bool(state.value)
+
+
+def _set_capture_child_subreaper(enabled: bool) -> None:
+    """Set and verify this process's Linux child-subreaper state."""
+
+    if type(enabled) is not bool:
+        raise ProductionAuthorityError(
+            "capture child-subreaper state must be Boolean"
+        )
+    if not sys.platform.startswith("linux"):
+        raise ProductionAuthorityError(
+            "capture child-subreaper semantics require Linux"
+        )
+    libc = ctypes.CDLL(None, use_errno=True)
+    prctl = getattr(libc, "prctl", None)
+    if prctl is None:
+        raise ProductionAuthorityError(
+            "prctl(PR_SET_CHILD_SUBREAPER) is unavailable"
+        )
+    prctl.restype = ctypes.c_int
+    ctypes.set_errno(0)
+    result = prctl(
+        ctypes.c_int(36),
+        ctypes.c_ulong(int(enabled)),
+        ctypes.c_ulong(0),
+        ctypes.c_ulong(0),
+        ctypes.c_ulong(0),
+    )
+    if result != 0:
+        error_number = ctypes.get_errno()
+        raise ProductionAuthorityError(
+            "cannot set capture child-subreaper state "
+            f"(errno {error_number})"
+        )
+    if _capture_child_subreaper_state() is not enabled:
+        raise ProductionAuthorityError(
+            "capture child-subreaper state did not take effect"
+        )
+
+
+def _capture_process_group_exists(process_group: int) -> bool:
+    """Return whether this exact capture process group still has members."""
+
+    try:
+        os.killpg(process_group, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _reap_capture_process_group_children(process_group: int) -> None:
+    """Reap only adopted descendants belonging to one owned process group."""
+
+    while True:
+        try:
+            child, _status = os.waitpid(-process_group, os.WNOHANG)
+        except ChildProcessError:
+            return
+        if child == 0:
+            return
+
+
+def _finish_capture_process_group(
+    process_group: int, *, deadline_seconds: float
+) -> None:
+    """SIGKILL and reap one owned group within a hard monotonic deadline."""
+
+    if deadline_seconds <= 0:
+        raise ProductionAuthorityError(
+            "capture process-group cleanup deadline must be positive"
+        )
+    deadline = time.monotonic() + deadline_seconds
+    while True:
+        _reap_capture_process_group_children(process_group)
+        if not _capture_process_group_exists(process_group):
+            return
+        try:
+            os.killpg(process_group, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        if time.monotonic() >= deadline:
+            break
+        time.sleep(0.005)
+    _reap_capture_process_group_children(process_group)
+    if _capture_process_group_exists(process_group):
+        raise ProductionAuthorityError(
+            "capture process group survived bounded SIGKILL/reap cleanup"
+        )
+
+
+def _capture_command(
+    argv: Sequence[str],
+    *,
+    cwd: Path,
+    environment: Mapping[str, str],
+    timeout_seconds: int,
+    umask: int = -1,
+) -> subprocess.CompletedProcess[bytes]:
+    """Run and fully reap one bounded non-scientific command without a shell."""
+
+    if (
+        type(argv) not in (list, tuple)
+        or not argv
+        or not all(type(item) is str and item and "\x00" not in item for item in argv)
+    ):
+        raise ProductionAuthorityError("capture command argv is malformed")
+    forbidden_executables = {
+        str(ROOT / dict(FORMAL_INPUT_ROLES)["static_evaluator"]),
+        str(ROOT / dict(FORMAL_INPUT_ROLES)["branch_evaluator_binary"]),
+    }
+    if argv[0] in forbidden_executables or "--slab-id" in argv:
+        raise ProductionAuthorityError(
+            "machine capture command attempted scientific dispatch"
+        )
+    with _CAPTURE_SUBREAPER_LOCK:
+        original_subreaper_state = _capture_child_subreaper_state()
+        changed_subreaper_state = not original_subreaper_state
+        process: subprocess.Popen[bytes] | None = None
+        if changed_subreaper_state:
+            _set_capture_child_subreaper(True)
+        try:
+            process = subprocess.Popen(
+                list(argv),
+                cwd=cwd,
+                env=dict(environment),
+                stdin=subprocess.DEVNULL,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                close_fds=True,
+                shell=False,
+                start_new_session=True,
+                umask=umask,
+            )
+            try:
+                stdout, stderr = process.communicate(timeout=timeout_seconds)
+            except subprocess.TimeoutExpired as error:
+                try:
+                    os.killpg(process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+                try:
+                    process.communicate(timeout=2)
+                except subprocess.TimeoutExpired:
+                    try:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    try:
+                        process.communicate(timeout=2)
+                    except subprocess.TimeoutExpired as cleanup_error:
+                        raise ProductionAuthorityError(
+                            "capture command leader or pipes survived SIGKILL"
+                        ) from cleanup_error
+                _finish_capture_process_group(
+                    process.pid, deadline_seconds=2.0
+                )
+                raise ProductionAuthorityError(
+                    f"capture command timed out after {timeout_seconds}s"
+                ) from error
+            except BaseException:
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                try:
+                    process.communicate(timeout=2)
+                except subprocess.TimeoutExpired:
+                    pass
+                _finish_capture_process_group(
+                    process.pid, deadline_seconds=2.0
+                )
+                raise
+
+            _reap_capture_process_group_children(process.pid)
+            if _capture_process_group_exists(process.pid):
+                _finish_capture_process_group(
+                    process.pid, deadline_seconds=2.0
+                )
+                raise ProductionAuthorityError(
+                    "capture command left a live descendant process"
+                )
+            completed = subprocess.CompletedProcess(
+                list(argv), process.returncode, stdout, stderr
+            )
+        finally:
+            try:
+                if process is not None:
+                    _finish_capture_process_group(
+                        process.pid, deadline_seconds=2.0
+                    )
+            finally:
+                if changed_subreaper_state:
+                    _set_capture_child_subreaper(False)
+                if (
+                    _capture_child_subreaper_state()
+                    is not original_subreaper_state
+                ):
+                    raise ProductionAuthorityError(
+                        "capture child-subreaper state was not restored"
+                    )
+    if len(stdout) > 1024 * 1024 or len(stderr) > 1024 * 1024:
+        raise ProductionAuthorityError("capture command exceeded transcript budget")
+    return completed
+
+
+def _capture_external_binding(
+    path: Path,
+    context: str,
+    *,
+    expected_soname: str | None,
+) -> dict[str, Any]:
+    raw, info, _ = _read_external_pinned_path(str(path), context)
+    build_id, _needed, soname = _elf_metadata(raw, context)
+    if expected_soname is not None and soname != expected_soname:
+        raise ProductionAuthorityError(f"{context} DT_SONAME mismatch")
+    return {
+        "path": str(path),
+        "mode": stat.S_IMODE(info.st_mode),
+        "size_bytes": len(raw),
+        "sha256": sha256_bytes(raw),
+        "build_id": build_id,
+    }
+
+
+def _capture_runtime_binding(
+    path: Path, soname: str, context: str
+) -> dict[str, Any]:
+    return {
+        "soname": soname,
+        **_capture_external_binding(
+            path, context, expected_soname=soname
+        ),
+    }
+
+
+def _capture_regular_archive_binding(path: Path, context: str) -> dict[str, Any]:
+    raw, info = read_pinned_regular_file(path)
+    return {
+        "path": str(path),
+        "mode": stat.S_IMODE(info.st_mode),
+        "size_bytes": len(raw),
+        "sha256": sha256_bytes(raw),
+        "build_id": None,
+    }
+
+
+def _capture_python_arb_chain(
+    project_root: Path,
+    static_payload: Mapping[str, Any],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Capture the live Python/Arb identity and its bundled ELF closure."""
+
+    bindings = static_payload["bindings"]
+    interpreter_binding = bindings["interpreter"]
+    flint_binding = bindings["python_flint"]
+    interpreter = safe_absolute_path(
+        interpreter_binding["invocation_path"], "capture Python executable"
+    )
+    executable_raw, _executable_info, executable_resolved = (
+        _read_external_pinned_path(str(interpreter), "capture Python executable")
+    )
+    introspection_source = (
+        "import importlib,json,platform,sys,flint\n"
+        "arb=importlib.import_module('flint.types.arb')\n"
+        "fmpq=importlib.import_module('flint.types.fmpq')\n"
+        "payload={'python_version':sys.version,'implementation':platform.python_implementation(),"
+        "'python_flint_version':flint.__version__,'flint_version':flint.__FLINT_VERSION__,"
+        "'arb_version':'FLINT-'+flint.__FLINT_VERSION__,'module_path':flint.__file__,"
+        "'arb_extension_path':arb.__file__,'fmpq_extension_path':fmpq.__file__}\n"
+        "print(json.dumps(payload,sort_keys=True,separators=(',',':'),ensure_ascii=False))\n"
+    )
+    completed = _capture_command(
+        [str(interpreter), "-I", "-c", introspection_source],
+        cwd=project_root,
+        environment=formal_build_environment(),
+        timeout_seconds=60,
+    )
+    if completed.returncode != 0 or completed.stderr:
+        raise ProductionAuthorityError("Python/Arb live introspection failed")
+    try:
+        introspection_text = completed.stdout.decode("utf-8")
+    except UnicodeError as error:
+        raise ProductionAuthorityError(
+            "Python/Arb introspection output is not UTF-8"
+        ) from error
+    introspection = strict_json_loads(introspection_text)
+    introspection_keys = {
+        "python_version", "implementation", "python_flint_version",
+        "flint_version", "arb_version", "module_path", "arb_extension_path",
+        "fmpq_extension_path",
+    }
+    exact_keys(introspection, introspection_keys, "Python/Arb introspection")
+    if completed.stdout != canonical_json_bytes(introspection):
+        raise ProductionAuthorityError(
+            "Python/Arb introspection is not canonical JSON"
+        )
+    for key in introspection_keys:
+        _exact_nonempty_string(introspection[key], f"Python introspection {key}")
+    if (
+        introspection["python_version"] != MACHINE_PYTHON_VERSION
+        or introspection["implementation"] != "CPython"
+        or introspection["python_flint_version"] != "0.9.0"
+        or introspection["flint_version"] != "3.6.0"
+        or introspection["arb_version"] != "FLINT-3.6.0"
+        or str(executable_resolved) != interpreter_binding["resolved_path"]
+        or sha256_bytes(executable_raw) != interpreter_binding["sha256"]
+        or len(executable_raw) != interpreter_binding["size_bytes"]
+        or introspection["python_version"] != interpreter_binding["version"]
+        or introspection["module_path"] != flint_binding["module_path"]
+        or introspection["arb_extension_path"]
+        != flint_binding["arb_extension_path"]
+    ):
+        raise ProductionAuthorityError(
+            "Python/Arb live introspection differs from static calibration"
+        )
+
+    record_path = safe_absolute_path(
+        flint_binding["record_path"], "python-flint RECORD"
+    )
+    record_raw, _record_info, record_resolved = _read_external_pinned_path(
+        str(record_path), "python-flint RECORD"
+    )
+    installed_count, installed_root = recompute_python_flint_manifest(
+        str(record_resolved), record_raw
+    )
+    if (
+        sha256_bytes(record_raw) != flint_binding["record_sha256"]
+        or installed_count != flint_binding["installed_record_file_count"]
+        or installed_root != flint_binding["installed_manifest_sha256"]
+    ):
+        raise ProductionAuthorityError(
+            "python-flint live RECORD/installed manifest is stale"
+        )
+    conda_algorithm, conda_count, conda_root = recompute_conda_python_manifest(
+        str(interpreter)
+    )
+    arb_path = safe_absolute_path(
+        introspection["arb_extension_path"], "Arb extension"
+    )
+    fmpq_path = safe_absolute_path(
+        introspection["fmpq_extension_path"], "fmpq extension"
+    )
+    arb_binding = _capture_external_binding(
+        arb_path, "Arb extension", expected_soname=None
+    )
+    fmpq_binding = _capture_external_binding(
+        fmpq_path, "fmpq extension", expected_soname=None
+    )
+    if arb_binding["sha256"] != flint_binding["arb_extension_sha256"]:
+        raise ProductionAuthorityError("Arb extension is stale relative to calibration")
+    site_packages = record_resolved.parent.parent
+    bundled_root = site_packages / "python_flint.libs"
+    bundled_libraries = [
+        _capture_runtime_binding(
+            bundled_root / soname,
+            soname,
+            f"Python bundled runtime {soname}",
+        )
+        for soname in MACHINE_PYTHON_BUNDLED_SONAMES
+    ]
+    python_arb = {
+        "executable_path": str(interpreter),
+        "executable_sha256": sha256_bytes(executable_raw),
+        "python_version": introspection["python_version"],
+        "implementation": introspection["implementation"],
+        "python_flint_version": introspection["python_flint_version"],
+        "flint_version": introspection["flint_version"],
+        "arb_version": introspection["arb_version"],
+        "conda_manifest_algorithm": conda_algorithm,
+        "conda_manifest_file_count": conda_count,
+        "conda_installed_manifest_root_sha256": conda_root,
+        "python_flint_record_sha256": sha256_bytes(record_raw),
+        "python_flint_installed_manifest_root_sha256": installed_root,
+        "arb_extension": arb_binding,
+        "fmpq_extension": fmpq_binding,
+        "bundled_libraries": bundled_libraries,
+    }
+    exact_keys(python_arb, MACHINE_PYTHON_ARB_KEYS, "captured Python/Arb")
+    return python_arb, bundled_libraries
+
+
+def _capture_capd_chain(
+    project_root: Path, checkout_value: str
+) -> tuple[dict[str, Any], list[str]]:
+    """Capture the clean CAPD checkout/build products and exact flag output."""
+
+    checkout = safe_absolute_path(checkout_value, "capture CAPD checkout")
+    algorithm, commit, tree_root = recompute_capd_git_index_tree(str(checkout))
+    cache_path = checkout / "build-mp/CMakeCache.txt"
+    config_path = checkout / "build-mp/bin/capd-config"
+    libcapd_path = checkout / "build-mp/libcapd.a"
+    libfilib_path = checkout / "build-mp/capdExt/filibsrc/libfilib.a"
+    cache_raw, _ = read_pinned_regular_file(cache_path)
+    config_raw, config_info = read_pinned_regular_file(config_path)
+    completed = _capture_command(
+        [str(config_path), "--cflags", "--libs"],
+        cwd=project_root,
+        environment=formal_build_environment(),
+        timeout_seconds=60,
+    )
+    replay_config, replay_info = read_pinned_regular_file(config_path)
+    if (
+        completed.returncode != 0
+        or completed.stderr
+        or not completed.stdout
+        or replay_config != config_raw
+        or _stat_identity(replay_info) != _stat_identity(config_info)
+    ):
+        raise ProductionAuthorityError("CAPD config capture failed or changed")
+    try:
+        raw_flags = completed.stdout.decode("utf-8")
+        tokens = shlex.split(raw_flags, posix=True)
+    except (UnicodeError, ValueError) as error:
+        raise ProductionAuthorityError("CAPD raw flags are malformed") from error
+    if (
+        not raw_flags.endswith("\n")
+        or tokens != formal_capd_flag_tokens(str(checkout))
+    ):
+        raise ProductionAuthorityError("CAPD ordered flag output mismatch")
+    capd = {
+        "checkout_path": str(checkout),
+        "commit": commit,
+        "tree_algorithm": algorithm,
+        "tree_sha256": tree_root,
+        "clean": True,
+        "cmake_cache_path": str(cache_path),
+        "cmake_cache_sha256": sha256_bytes(cache_raw),
+        "config_path": str(config_path),
+        "config_sha256": sha256_bytes(config_raw),
+        "raw_flags": raw_flags,
+        "raw_flags_sha256": sha256_bytes(completed.stdout),
+        "libcapd": _capture_regular_archive_binding(
+            libcapd_path, "CAPD libcapd archive"
+        ),
+        "libfilib": _capture_regular_archive_binding(
+            libfilib_path, "CAPD libfilib archive"
+        ),
+    }
+    exact_keys(capd, MACHINE_CAPD_KEYS, "captured CAPD")
+    return capd, tokens
+
+
+def _capture_system_runtime_libraries() -> list[dict[str, Any]]:
+    return [
+        _capture_runtime_binding(
+            DEFAULT_SYSTEM_LIBRARY_ROOT / soname,
+            soname,
+            f"CAPD system runtime {soname}",
+        )
+        for soname in MACHINE_CAPD_SYSTEM_SONAMES
+    ]
+
+
+def _replay_capd_after_fresh_build(
+    project_root: Path, capd: Mapping[str, Any]
+) -> None:
+    """Terminally replay every CAPD build input after the compiler exits."""
+
+    checkout = safe_absolute_path(capd["checkout_path"], "CAPD replay checkout")
+    algorithm, commit, tree_root = recompute_capd_git_index_tree(str(checkout))
+    if (
+        algorithm != capd["tree_algorithm"]
+        or commit != capd["commit"]
+        or tree_root != capd["tree_sha256"]
+    ):
+        raise PathContractError("CAPD tracked generation changed during fresh build")
+    for path_key, hash_key in (
+        ("cmake_cache_path", "cmake_cache_sha256"),
+        ("config_path", "config_sha256"),
+    ):
+        raw, _ = read_pinned_regular_file(Path(capd[path_key]))
+        if sha256_bytes(raw) != capd[hash_key]:
+            raise PathContractError(f"CAPD {path_key} changed during fresh build")
+    for key in ("libcapd", "libfilib"):
+        binding = capd[key]
+        raw, info = read_pinned_regular_file(Path(binding["path"]))
+        if (
+            sha256_bytes(raw) != binding["sha256"]
+            or len(raw) != binding["size_bytes"]
+            or stat.S_IMODE(info.st_mode) != binding["mode"]
+        ):
+            raise PathContractError(f"CAPD {key} changed during fresh build")
+    flags_run = _capture_command(
+        [capd["config_path"], "--cflags", "--libs"],
+        cwd=project_root,
+        environment=formal_build_environment(),
+        timeout_seconds=60,
+    )
+    if (
+        flags_run.returncode != 0
+        or flags_run.stderr
+        or flags_run.stdout != capd["raw_flags"].encode("utf-8")
+    ):
+        raise PathContractError("CAPD config output changed during fresh build")
+
+
+def _capture_compiler_and_fresh_rebuild(
+    *,
+    project_root: Path,
+    compiler_value: str,
+    capd_tokens: Sequence[str],
+    runtime_libraries: Mapping[str, Any],
+    branch_calibration_binary_sha256: str,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Perform the one truthful fresh /tmp rebuild without touching role 17."""
+
+    compiler_path = safe_absolute_path(compiler_value, "capture compiler")
+    compiler_lexical_before = os.lstat(compiler_path)
+    compiler_raw, compiler_info, compiler_resolved = _read_external_pinned_path(
+        str(compiler_path), "capture compiler"
+    )
+    version_run = _capture_command(
+        [str(compiler_path), "--version"],
+        cwd=project_root,
+        environment=formal_build_environment(),
+        timeout_seconds=60,
+    )
+    if version_run.returncode != 0 or version_run.stderr:
+        raise ProductionAuthorityError("compiler version capture failed")
+    try:
+        version_lines = version_run.stdout.decode("utf-8").splitlines()
+    except UnicodeError as error:
+        raise ProductionAuthorityError("compiler version is not UTF-8") from error
+    if not version_lines or version_lines[0] != MACHINE_COMPILER_VERSION:
+        raise ProductionAuthorityError("compiler version differs from frozen ABI")
+
+    role_paths = dict(FORMAL_INPUT_ROLES)
+    source_relative = role_paths["branch_evaluator_source"]
+    binary_relative = role_paths["branch_evaluator_binary"]
+    source_path = project_root.joinpath(*safe_relative_path(source_relative).parts)
+    persistent_path = project_root.joinpath(*safe_relative_path(binary_relative).parts)
+    source_raw, source_before = read_pinned_regular_file(source_path)
+    persistent_before_raw, persistent_before = read_pinned_regular_file(
+        persistent_path
+    )
+    if (
+        stat.S_IMODE(persistent_before.st_mode) != 0o755
+        or sha256_bytes(persistent_before_raw)
+        != branch_calibration_binary_sha256
+    ):
+        raise ProductionAuthorityError(
+            "persistent branch binary is stale relative to branch calibration"
+        )
+    persistent_build_id, persistent_needed, persistent_soname = _elf_metadata(
+        persistent_before_raw, "persistent branch binary before rebuild"
+    )
+    if (
+        persistent_needed != MACHINE_BRANCH_DT_NEEDED
+        or persistent_soname is not None
+    ):
+        raise ProductionAuthorityError("persistent branch ELF closure mismatch")
+
+    environment = formal_build_environment()
+    argv_template = [
+        str(compiler_path),
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        str(source_path),
+        *capd_tokens,
+        "-o",
+        "@STAGING_BINARY@",
+    ]
+    build_recipe = {
+        "cwd": str(project_root),
+        "environment": environment,
+        "umask": "0022",
+        "staging_output_token": "@STAGING_BINARY@",
+        "argv_template": argv_template,
+        "argv_template_sha256": sha256_bytes(
+            canonical_json_bytes(argv_template)
+        ),
+    }
+
+    with tempfile.TemporaryDirectory(
+        prefix="a416-l3a1-machine-build.", dir="/tmp"
+    ) as staging_text:
+        staging_directory = safe_absolute_path(
+            staging_text, "fresh build staging directory"
+        )
+        if staging_directory.parent != Path("/tmp"):
+            raise PathContractError("fresh build directory is not a direct /tmp child")
+        staging_output = staging_directory / "capd_r401_phase_branch_tube_mp_a1"
+        actual_argv = [*argv_template[:-1], str(staging_output)]
+        completed = _capture_command(
+            actual_argv,
+            cwd=project_root,
+            environment=environment,
+            timeout_seconds=600,
+            umask=0o022,
+        )
+        if completed.returncode != 0:
+            raise ProductionAuthorityError(
+                f"fresh deterministic branch rebuild failed with rc={completed.returncode}"
+            )
+        if completed.stdout or completed.stderr:
+            raise ProductionAuthorityError(
+                "fresh deterministic branch rebuild produced a transcript"
+            )
+        staged_raw, staged_info = read_pinned_regular_file(staging_output)
+        staged_mode = stat.S_IMODE(staged_info.st_mode)
+        staged_build_id, staged_needed, staged_soname = _elf_metadata(
+            staged_raw, "fresh staging branch binary"
+        )
+        fresh_receipt = {
+            "cwd": str(project_root),
+            "environment": environment,
+            "umask": "0022",
+            "staging_directory": str(staging_directory),
+            "staging_output_path": str(staging_output),
+            "argv": actual_argv,
+            "argv_sha256": sha256_bytes(canonical_json_bytes(actual_argv)),
+            "stdout": completed.stdout.decode("utf-8"),
+            "stderr": completed.stderr.decode("utf-8"),
+            "stdout_sha256": sha256_bytes(completed.stdout),
+            "stderr_sha256": sha256_bytes(completed.stderr),
+            "return_code": completed.returncode,
+            "output_sha256": sha256_bytes(staged_raw),
+            "output_size_bytes": len(staged_raw),
+            "output_mode": staged_mode,
+            "output_build_id": staged_build_id,
+            "output_dt_needed": staged_needed,
+            "output_dt_needed_sha256": sha256_bytes(
+                canonical_json_bytes(staged_needed)
+            ),
+            "output_soname": staged_soname,
+            "shell_used": False,
+        }
+        persistent_after_raw, persistent_after = read_pinned_regular_file(
+            persistent_path
+        )
+        source_after_raw, source_after = read_pinned_regular_file(source_path)
+        compiler_after_raw, compiler_after_info, compiler_after_resolved = (
+            _read_external_pinned_path(str(compiler_path), "capture compiler replay")
+        )
+        compiler_lexical_after = os.lstat(compiler_path)
+
+    before_identity = (persistent_before.st_dev, persistent_before.st_ino)
+    after_identity = (persistent_after.st_dev, persistent_after.st_ino)
+    byte_equal = staged_raw == persistent_before_raw == persistent_after_raw
+    identity_unchanged = (
+        _stat_identity(persistent_after) == _stat_identity(persistent_before)
+    )
+    if (
+        not byte_equal
+        or not identity_unchanged
+        or staged_mode != 0o755
+        or staged_build_id != persistent_build_id
+        or staged_needed != persistent_needed
+        or staged_soname is not None
+        or source_after_raw != source_raw
+        or _stat_identity(source_after) != _stat_identity(source_before)
+        or compiler_after_raw != compiler_raw
+        or _stat_identity(compiler_after_info) != _stat_identity(compiler_info)
+        or compiler_after_resolved != compiler_resolved
+        or _stat_identity(compiler_lexical_after)
+        != _stat_identity(compiler_lexical_before)
+    ):
+        raise ProductionAuthorityError(
+            "fresh rebuild is not byte-identical or persistent role 17 changed"
+        )
+    persistent_sha = sha256_bytes(persistent_before_raw)
+    transfer = {
+        "branch_calibration_binary_sha256": branch_calibration_binary_sha256,
+        "staging_output_sha256": sha256_bytes(staged_raw),
+        "staging_output_size_bytes": len(staged_raw),
+        "staging_output_mode": staged_mode,
+        "persistent_before_sha256": persistent_sha,
+        "persistent_before_size_bytes": len(persistent_before_raw),
+        "persistent_before_mode": stat.S_IMODE(persistent_before.st_mode),
+        "persistent_before_device_id": before_identity[0],
+        "persistent_before_inode": before_identity[1],
+        "persistent_after_sha256": sha256_bytes(persistent_after_raw),
+        "persistent_after_size_bytes": len(persistent_after_raw),
+        "persistent_after_mode": stat.S_IMODE(persistent_after.st_mode),
+        "persistent_after_device_id": after_identity[0],
+        "persistent_after_inode": after_identity[1],
+        "byte_for_byte_equal": byte_equal,
+        "persistent_identity_unchanged": identity_unchanged,
+        "persistent_overwrite_performed": False,
+    }
+    branch_binary = {
+        "path": binary_relative,
+        "sha256": persistent_sha,
+        "size_bytes": len(persistent_before_raw),
+        "executable_mode": stat.S_IMODE(persistent_before.st_mode),
+        "build_id": persistent_build_id,
+        "source_path": source_relative,
+        "source_sha256": sha256_bytes(source_raw),
+        "elf_sha256": persistent_sha,
+        "dt_needed": persistent_needed,
+        "dt_needed_sha256": sha256_bytes(
+            canonical_json_bytes(persistent_needed)
+        ),
+        "runtime_libraries_sha256": sha256_bytes(
+            canonical_json_bytes(dict(runtime_libraries))
+        ),
+    }
+    compiler = {
+        "executable_path": str(compiler_path),
+        "executable_sha256": sha256_bytes(compiler_raw),
+        "version": version_lines[0],
+        "build_recipe": build_recipe,
+        "fresh_rebuild_receipt": fresh_receipt,
+        "transfer_evidence": transfer,
+    }
+    exact_keys(compiler, MACHINE_COMPILER_KEYS, "captured compiler")
+    exact_keys(branch_binary, MACHINE_BRANCH_BINARY_KEYS, "captured branch binary")
+    return compiler, branch_binary
+
+
+def _capture_machine_filesystem(project_root: Path) -> tuple[dict[str, Any], int]:
+    """Capture the exact project/results device identity and current free bytes."""
+
+    project = safe_absolute_path(str(project_root), "capture project root")
+    result_parent = project / "results"
+    descriptors: list[int] = []
+    devices: list[int] = []
+    try:
+        for path in (project, result_parent, result_parent):
+            descriptor = _open_directory_fd(path)
+            descriptors.append(descriptor)
+            devices.append(os.fstat(descriptor).st_dev)
+    finally:
+        for descriptor in descriptors:
+            os.close(descriptor)
+    if len(set(devices)) != 1:
+        raise PathContractError("machine capture project/results filesystems differ")
+    stats = os.statvfs(result_parent)
+    free_bytes = stats.f_bavail * stats.f_frsize
+    filesystem = {
+        "project_root": str(project),
+        "result_parent": str(result_parent),
+        "operational_parent": str(result_parent),
+        "project_device_id": devices[0],
+        "result_device_id": devices[1],
+        "operational_device_id": devices[2],
+        "same_filesystem": True,
+    }
+    exact_keys(filesystem, MACHINE_FILESYSTEM_KEYS, "captured filesystem")
+    return filesystem, free_bytes
+
+
+def capture_live_formal_machine_freeze_candidate(
+    *,
+    project_root_value: str,
+    static_calibration_value: str,
+    branch_calibration_value: str,
+    capd_checkout_value: str,
+    compiler_value: str,
+) -> dict[str, Any]:
+    """Capture and live-validate one temp-only machine-freeze candidate.
+
+    The only child processes are Python metadata introspection, capd-config,
+    compiler version reporting, and one fresh compiler invocation.  Neither
+    scientific evaluator nor the persistent branch binary is ever executed.
+    """
+
+    project_root = safe_absolute_path(project_root_value, "capture project root")
+    if project_root != ROOT:
+        raise PathContractError(
+            "machine capture is bound to the live Paper02 project root"
+        )
+    static_payload, static_raw, static_info = _machine_tmp_file(
+        static_calibration_value,
+        "static calibration",
+        serializer="CJ_COMPACT_V1",
+    )
+    branch_payload, branch_raw, branch_info = _machine_tmp_file(
+        branch_calibration_value,
+        "branch calibration",
+        serializer="CJ_PRETTY_2_V1",
+    )
+    capture_tool_relative = dict(FORMAL_INPUT_ROLES)["scheduler"]
+    capture_tool_path = project_root.joinpath(
+        *safe_relative_path(capture_tool_relative).parts
+    )
+    capture_tool_raw, capture_tool_info = read_pinned_regular_file(
+        capture_tool_path
+    )
+    boot_raw = _live_boot_id_bytes()
+    requirements = formal_machine_requirements()
+    try:
+        memory_limit = int(
+            Path("/sys/fs/cgroup/memory/memory.limit_in_bytes")
+            .read_text(encoding="ascii")
+            .strip()
+        )
+    except (OSError, UnicodeError, ValueError) as error:
+        raise ProductionAuthorityError(
+            "live cgroup memory limit is unavailable or malformed"
+        ) from error
+    logical_cpu_count = len(os.sched_getaffinity(0))
+    filesystem, result_free_bytes = _capture_machine_filesystem(project_root)
+    observations = {
+        "logical_cpu_count": logical_cpu_count,
+        "memory_limit_bytes": memory_limit,
+        "result_parent_free_bytes": result_free_bytes,
+        "idle_baseline_rss_bytes": max(
+            static_payload["admission"]["idle_baseline_bytes"],
+            branch_payload["admission"]["baseline_bytes"],
+        ),
+        "representative_static_peak_rss_bytes": static_payload["admission"][
+            "representative_peak_rss_bytes"
+        ],
+        "representative_branch_peak_rss_bytes": branch_payload["admission"][
+            "peak_rss_bytes"
+        ],
+    }
+    if (
+        logical_cpu_count != requirements["logical_cpu_count"]
+        or memory_limit != requirements["memory_limit_bytes"]
+    ):
+        raise ProductionAuthorityError("live CPU/cgroup requirements are not met")
+
+    role_binary = project_root.joinpath(
+        *safe_relative_path(
+            dict(FORMAL_INPUT_ROLES)["branch_evaluator_binary"]
+        ).parts
+    )
+    persistent_raw, _ = read_pinned_regular_file(role_binary)
+    persistent_sha = sha256_bytes(persistent_raw)
+    _validate_static_resource_payload(
+        static_payload, requirements, observations, project_root
+    )
+    _validate_branch_resource_payload(
+        branch_payload, requirements, observations, project_root, persistent_sha
+    )
+
+    python_arb, python_libraries = _capture_python_arb_chain(
+        project_root, static_payload
+    )
+    capd, capd_tokens = _capture_capd_chain(
+        project_root, capd_checkout_value
+    )
+    capd_libraries = _capture_system_runtime_libraries()
+    runtime_libraries = {
+        "python_bundled": python_libraries,
+        "capd_system": capd_libraries,
+    }
+    compiler, branch_binary = _capture_compiler_and_fresh_rebuild(
+        project_root=project_root,
+        compiler_value=compiler_value,
+        capd_tokens=capd_tokens,
+        runtime_libraries=runtime_libraries,
+        branch_calibration_binary_sha256=branch_payload["binary_sha256"],
+    )
+    _replay_capd_after_fresh_build(project_root, capd)
+    candidate = build_formal_machine_freeze_candidate(
+        captured_at_utc=datetime.now(timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        ),
+        capture_tool_sha256=sha256_bytes(capture_tool_raw),
+        boot_id_sha256=sha256_bytes(boot_raw),
+        machine_observations=observations,
+        python_arb=python_arb,
+        capd=capd,
+        compiler=compiler,
+        branch_binary=branch_binary,
+        runtime_libraries=runtime_libraries,
+        static_payload_raw=static_raw,
+        branch_payload_raw=branch_raw,
+        filesystem=filesystem,
+    )
+    _validate_formal_machine_envelope(candidate)
+
+    replay_static, replay_static_info = read_pinned_regular_file(
+        safe_absolute_path(static_calibration_value, "static calibration path")
+    )
+    replay_branch, replay_branch_info = read_pinned_regular_file(
+        safe_absolute_path(branch_calibration_value, "branch calibration path")
+    )
+    replay_tool, replay_tool_info = read_pinned_regular_file(capture_tool_path)
+    if (
+        replay_static != static_raw
+        or _stat_identity(replay_static_info) != _stat_identity(static_info)
+        or replay_branch != branch_raw
+        or _stat_identity(replay_branch_info) != _stat_identity(branch_info)
+        or replay_tool != capture_tool_raw
+        or _stat_identity(replay_tool_info) != _stat_identity(capture_tool_info)
+    ):
+        raise PathContractError("machine capture input changed before publication")
+    return candidate
+
+
+def capture_and_publish_formal_machine_freeze(
+    *,
+    output_value: str,
+    project_root_value: str,
+    static_calibration_value: str,
+    branch_calibration_value: str,
+    capd_checkout_value: str,
+    compiler_value: str,
+) -> tuple[dict[str, Any], str]:
+    """Write one validated candidate exactly once to a noncanonical /tmp file."""
+
+    target = machine_capture_output_path(output_value)
+    candidate = capture_live_formal_machine_freeze_candidate(
+        project_root_value=project_root_value,
+        static_calibration_value=static_calibration_value,
+        branch_calibration_value=branch_calibration_value,
+        capd_checkout_value=capd_checkout_value,
+        compiler_value=compiler_value,
+    )
+    raw = canonical_json_bytes(candidate)
+    exclusive_write_bytes(target, raw)
+    replay, replay_info = read_pinned_regular_file(target)
+    if (
+        replay != raw
+        or stat.S_IMODE(replay_info.st_mode) != 0o644
+        or replay_info.st_nlink != 1
+    ):
+        raise CorruptGeneration("published machine candidate replay mismatch")
+    # The candidate remains temp-only, but success is reported only after a
+    # second independent live terminal replay closes the validation/write gap.
+    _validate_formal_machine_envelope(candidate)
+    return candidate, sha256_bytes(raw)
 
 
 def _validate_formal_main_envelope(
@@ -7397,6 +8764,11 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--output")
     parser.add_argument("--authority-root", default=str(ROOT))
     parser.add_argument("--initialize-only", action="store_true")
+    parser.add_argument("--capture-machine-freeze", action="store_true")
+    parser.add_argument("--static-calibration")
+    parser.add_argument("--branch-calibration")
+    parser.add_argument("--capd-checkout", default=str(DEFAULT_CAPD_CHECKOUT))
+    parser.add_argument("--compiler", default=str(DEFAULT_COMPILER))
     parser.add_argument("--mock-only", action="store_true")
     parser.add_argument("--mock-static-cells", type=int, default=0)
     parser.add_argument("--mock-branch-cells", type=int, default=0)
@@ -7415,6 +8787,63 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = parse_args(argv)
     try:
+        if arguments.capture_machine_freeze:
+            if (
+                arguments.initialize_only
+                or arguments.mock_only
+                or arguments.mock_static_cells
+                or arguments.mock_branch_cells
+                or arguments.finalize_mock_composite
+                or arguments.resume
+                or arguments.production
+                or arguments.execute_scientific_dispatch
+            ):
+                raise SchedulerContractError(
+                    "machine capture is exact-exclusive from initialize, mock, "
+                    "resume, and scientific execution modes"
+                )
+            if (
+                arguments.output is None
+                or arguments.static_calibration is None
+                or arguments.branch_calibration is None
+            ):
+                raise SchedulerContractError(
+                    "machine capture requires --output, --static-calibration, "
+                    "and --branch-calibration"
+                )
+            candidate, candidate_sha256 = (
+                capture_and_publish_formal_machine_freeze(
+                    output_value=arguments.output,
+                    project_root_value=arguments.authority_root,
+                    static_calibration_value=arguments.static_calibration,
+                    branch_calibration_value=arguments.branch_calibration,
+                    capd_checkout_value=arguments.capd_checkout,
+                    compiler_value=arguments.compiler,
+                )
+            )
+            print(
+                json.dumps(
+                    {
+                        "artifact_role": "TEMP_MACHINE_FREEZE_CANDIDATE",
+                        "artifact_status": "CAPTURED_VALIDATED_TEMP_ONLY",
+                        "authority": candidate["authority"],
+                        "candidate_sha256": candidate_sha256,
+                        "machine_artifact_role": candidate["artifact_role"],
+                        "machine_status": candidate["status"],
+                        "output_path": arguments.output,
+                        "serializer": "CJ_COMPACT_V1",
+                        "production_authorized": False,
+                        "scientific_dispatch_performed": False,
+                        "component_status": None,
+                        "milestone_status": None,
+                        "theorem_status": None,
+                        "final_status": None,
+                    },
+                    sort_keys=True,
+                )
+            )
+            return 0
+
         if arguments.mock_only:
             if arguments.production or arguments.execute_scientific_dispatch:
                 raise SchedulerContractError("mock and production modes are exclusive")

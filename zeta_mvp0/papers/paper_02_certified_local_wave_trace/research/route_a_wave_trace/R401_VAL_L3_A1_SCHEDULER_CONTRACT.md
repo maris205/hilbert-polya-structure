@@ -14,8 +14,9 @@ commits raw and canonical bytes, resumes an identical generation, and builds
 producer aggregates.  It never evaluates scientific truth and never assigns
 a component, milestone, theorem, or final pass.
 
-Partial mock/static/branch implementation candidates now exist, but the
-complete production scheduler, machine freeze, main freeze, and accepted
+Partial mock/static/branch implementation candidates and a non-scientific
+temporary machine-capture mode now exist, but the complete production
+scheduler, canonical role-10 machine freeze, role-54 main freeze, and accepted
 independent pre-freeze review do not.  Therefore no CLI execution mode may
 dispatch an evaluator in the current repository state.
 
@@ -374,6 +375,8 @@ Current exact state:
 ```text
 contract_status = PROSPECTIVE_NON_LICENSING
 implementation_stable = false
+machine_capture_temp_only_implemented = true
+canonical_machine_role10_exists = false
 machine_freeze_exists = false
 main_freeze_exists = false
 dispatch_authorized = false
@@ -387,6 +390,26 @@ the execution flags, while the execution spelling requires all of
 `--production --execute-scientific-dispatch --resume`.  The latter remains an
 unconditional rejection.  This contract records no executable production
 command.
+
+The machine-capture CLI is a separate exact-exclusive, non-dispatch mode.  It
+accepts the two already-public calibration byte images and a missing absolute
+temporary output path, performs one fresh argv-list build with `shell=false`
+only in an owned direct-child `/tmp` directory, treats the persistent role-17
+binary as read-only, and may write only a temporary compact-canonical
+candidate.  It refuses the canonical role-10 path and every result namespace.
+Successful capture does not create a main freeze or run config and cannot be
+combined with mock, initialize, resume, or production/execution flags.
+Its one-line sorted-key JSON summary has exactly the keys `artifact_role`,
+`artifact_status`, `authority`, `candidate_sha256`, `component_status`,
+`final_status`, `machine_artifact_role`, `machine_status`, `milestone_status`,
+`output_path`, `production_authorized`, `scientific_dispatch_performed`,
+`serializer`, and `theorem_status`.  It has
+`artifact_role=TEMP_MACHINE_FREEZE_CANDIDATE`,
+`artifact_status=CAPTURED_VALIDATED_TEMP_ONLY`,
+`authority=MACHINE_ADMISSION_ONLY`, `machine_artifact_role=MACHINE_FREEZE`,
+`machine_status=FROZEN_FOR_PRODUCTION`, and `serializer=CJ_COMPACT_V1`;
+both Boolean fields are false and all four scientific status fields are null.
+The summary is stdout only and is not a sidecar artifact.
 
 ## 13. Exact control-plane schema amendment
 
@@ -434,6 +457,53 @@ one exact 20-byte GNU `build_id`, the frozen sorted `DT_NEEDED` closure, no
 `DT_SONAME`, source/binary hashes, and the runtime-library root.  The
 python-flint module, `RECORD`, Arb extension, and fmpq extension must occupy
 their exact common site-packages layout.
+
+The compiler object separates `build_recipe`, `fresh_rebuild_receipt`, and
+`transfer_evidence`.  The recipe contains the immutable argv template ending
+in `@STAGING_BINARY@`; the receipt binds the actual fresh `/tmp` substitution,
+`shell_used=false`, empty build streams, successful return, and exact rebuilt
+ELF; the transfer object proves equality with the public calibration and
+persistent role-17 bytes while requiring the persistent device/inode pair to
+be unchanged and `persistent_overwrite_performed=false`.  Fresh staging is
+removed after capture, so its receipt paths are inert evidence and are never
+later reopened.
+
+The exact closed compiler key sets are:
+
+```text
+compiler = {
+  executable_path, executable_sha256, version,
+  build_recipe, fresh_rebuild_receipt, transfer_evidence
+}
+build_recipe = {
+  cwd, environment, umask, staging_output_token,
+  argv_template, argv_template_sha256
+}
+fresh_rebuild_receipt = {
+  cwd, environment, umask, staging_directory, staging_output_path,
+  argv, argv_sha256, shell_used, stdout, stderr,
+  stdout_sha256, stderr_sha256, return_code,
+  output_sha256, output_size_bytes, output_mode, output_build_id,
+  output_dt_needed, output_dt_needed_sha256, output_soname
+}
+transfer_evidence = {
+  staging_output_sha256, staging_output_size_bytes, staging_output_mode,
+  branch_calibration_binary_sha256,
+  persistent_before_sha256, persistent_before_size_bytes,
+  persistent_before_mode, persistent_before_device_id,
+  persistent_before_inode,
+  persistent_after_sha256, persistent_after_size_bytes,
+  persistent_after_mode, persistent_after_device_id,
+  persistent_after_inode,
+  byte_for_byte_equal, persistent_identity_unchanged,
+  persistent_overwrite_performed
+}
+```
+
+The recipe and receipt environment is exactly the seven-string map with
+`PATH=/usr/bin:/bin`, `LANG=C.UTF-8`, `LC_ALL=C.UTF-8`, `TZ=UTC`,
+`PYTHONHASHSEED=0`, `PYTHONNOUSERSITE=1`, and
+`PYTHONDONTWRITEBYTECODE=1`; `umask=0022` and `shell_used=false`.
 
 The final-shaped run config has the exact top-level keys implemented by
 `FINAL_RUN_CONFIG_KEYS`; in particular it carries

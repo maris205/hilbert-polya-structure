@@ -55,7 +55,7 @@ recomputes and cross-binds:
   manifest, the raw `python-flint` RECORD, the installed `python-flint`
   manifest, Arb/FLINT extension images, and bundled runtime libraries;
 - the CAPD checkout/commit/tree, cache, `capd-config`, raw ordered flags,
-  `libcapd.a`, `libfilib.a`, compiler, deterministic build receipt, source,
+  `libcapd.a`, `libfilib.a`, compiler/build evidence, source,
   persistent ELF, build ID, direct `DT_NEEDED` set, and resolved runtime
   libraries; and
 - embedded byte-exact public-only static and branch resource payloads, their
@@ -151,9 +151,10 @@ idle baseline 24891273216
 headroom = 17578807296 bytes
 ```
 
-The payload remains under `/tmp` until the deterministic canonical machine
-receipt capture/builder exists.  It is not a repository result, freeze, run
-config, or scientific certificate.
+At the close of this increment the payload remained under `/tmp` because the
+deterministic machine-receipt capture/builder did not yet exist.  It was not a
+repository result, freeze, run config, or scientific certificate; the later
+temp-only capture implementation likewise does not canonically publish it.
 
 ### Branch calibration and persistent-byte transfer
 
@@ -236,7 +237,7 @@ milestone, theorem, or final status.  This increment asserts no A4.16 all-slab
 theorem, global tube routing, trace formula, Hilbert--Polya operator, zeta-zero
 reconstruction, or RH conclusion.
 
-## Next blocker
+## Next blocker at the close of this increment
 
 The next authorized engineering unit is a deterministic machine-freeze
 capture/builder that embeds the final static and branch payload bytes and
@@ -245,6 +246,17 @@ binding.  Its candidate output must then pass the producer-independent machine
 verifier, the complete pre-freeze regression chain, and a separate independent
 review whose sole authorizing line is exactly `Verdict: ACCEPT_FOR_FREEZE`.
 
-Only after that chain may the main freeze be generated last.  Scientific
-initialize-only and every representative, held-out, or all-slab dispatch remain
-prohibited until separately authorized.
+Only after that chain may the main freeze be generated downstream of its final
+input set.  Scientific initialize-only and every representative, held-out, or
+all-slab dispatch remain prohibited until separately authorized.
+
+## Subsequent temp-only capture/verify milestone
+
+The next engineering unit is now implemented separately and recorded in
+`A416_L3_A1_MACHINE_CAPTURE_INCREMENT.md`.  It refines the compiler object
+into `build_recipe`, `fresh_rebuild_receipt`, and `transfer_evidence`; role 19
+alone performs one owned fresh `/tmp` rebuild, while role 24 verifies with
+zero writes and zero subprocesses.  This later implementation does not revise
+the verdict or byte ledger above and has not published canonical input role
+10.  The main freeze remains absent and, as release role 54, may be generated
+only after all 53 ordered inputs have final bytes.

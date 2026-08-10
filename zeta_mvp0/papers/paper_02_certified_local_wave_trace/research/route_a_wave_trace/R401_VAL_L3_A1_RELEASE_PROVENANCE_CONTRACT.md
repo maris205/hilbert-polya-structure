@@ -114,8 +114,11 @@ to its role before its digest is accepted.
 
 ## 3. Main freeze edge
 
-`R401_VAL_L3_A1_FREEZE.json` is generated last among the 53 inputs and does
-not contain its own hash.  It must have exact status
+`R401_VAL_L3_A1_FREEZE.json` is not one of the 53 inputs.  The machine freeze
+is input role 10; only after all 53 ordered input roles, including role 10,
+have their final bytes may the main freeze be generated as downstream role
+54 of the 68-role release map.  The main freeze does not contain its own
+hash.  It must have exact status
 `FROZEN_FOR_PRODUCTION`, bind the exact 102-cell matrix, both ABIs, scheduler
 policy, resource limits, machine requirements, archive layout, closed status
 tables, checker hashes, ordered 53-role array, and claim boundary.
@@ -352,6 +355,13 @@ report boundary mutation, strict JSON/type/nonfinite failures, symlink/hard-
 link/path aliases, same-byte TOCTOU, publication inode swap, overwrite refusal,
 idempotent identical verification, and read-only `--verify-only` behavior.
 
+The distinct machine `--verify-machine-freeze` suite must additionally cover
+temporary and later role-10 paths, exact absolute single-link path rules,
+duplicate/noncanonical JSON, path/inode/namespace TOCTOU, every compiler
+recipe/receipt/transfer mutation, direct-to-persistent build attempts,
+`shell_used` aliases, and proof of zero writes and zero subprocesses.  This is
+not the release `--verify-only` mode and cannot create a release.
+
 The exact test file and its final hash are role 33 of the main-freeze input
 map.  Passing mock tests do not authorize production.
 
@@ -375,6 +385,8 @@ mock_final_independent_review = ACCEPT_P0_0_P1_0
 mock_l3_a1_implementation_tests = 280/280
 paper02_regression = 675/675
 formal_release_builder_implemented = false
+machine_verify_only_implemented = true
+canonical_machine_role10_exists = false
 main_freeze_exists = false
 canonical_release_exists = false
 dispatch_authorized = false
@@ -391,8 +403,10 @@ The machine freeze is compact canonical JSON with the exact closed key sets
 implemented in the scheduler and independently mirrored by the release
 builder.  It has `authority=MACHINE_ADMISSION_ONLY`,
 `scientific_licensing_enabled=true`, and `production_authorized=false`.
-Its capture tool is exactly role 19.  The persistent source/binary/build
-receipt and runtime library closure are cross-bound to roles 16 and 17.
+Its `artifact_role` is `MACHINE_FREEZE`; this schema/status envelope does not
+by itself make temporary bytes the canonical role-10 input.  Its capture tool
+is exactly role 19.  The persistent source/binary/build evidence and runtime
+library closure are cross-bound to roles 16 and 17.
 The Python receipt separately binds the Python Conda-package live root, raw
 python-flint `RECORD` digest, and python-flint installed-file root; those
 three hashes are never aliases.
@@ -411,6 +425,69 @@ separate `tree_sha256` remains the compact SHA-256 root over live tracked
 byte rows and the namespace must be clean outside `.git` and `build-mp`.
 The persistent branch ELF carries an exact 40-hex `build_id` matching its
 single 20-byte GNU note, the exact sorted `DT_NEEDED` set, and no `DT_SONAME`.
+
+The compiler object is split into a declarative `build_recipe`, an executed
+`fresh_rebuild_receipt`, and `transfer_evidence`.  The recipe targets only the
+token `@STAGING_BINARY@`; the receipt substitutes a direct child of a fresh
+`/tmp` directory with argv-list `shell_used=false` and records the rebuilt ELF
+facts; and the transfer evidence requires byte equality with the
+already-persistent role-17 binary while
+proving that its device/inode identity was unchanged and that no overwrite
+occurred.  Neither the recipe nor the receipt may target the canonical
+persistent path directly.
+
+The scheduler and the independent release-side mirror use these identical
+closed sets:
+
+```text
+compiler = {
+  executable_path, executable_sha256, version,
+  build_recipe, fresh_rebuild_receipt, transfer_evidence
+}
+build_recipe = {
+  cwd, environment, umask, staging_output_token,
+  argv_template, argv_template_sha256
+}
+fresh_rebuild_receipt = {
+  cwd, environment, umask, staging_directory, staging_output_path,
+  argv, argv_sha256, shell_used, stdout, stderr,
+  stdout_sha256, stderr_sha256, return_code,
+  output_sha256, output_size_bytes, output_mode, output_build_id,
+  output_dt_needed, output_dt_needed_sha256, output_soname
+}
+transfer_evidence = {
+  staging_output_sha256, staging_output_size_bytes, staging_output_mode,
+  branch_calibration_binary_sha256,
+  persistent_before_sha256, persistent_before_size_bytes,
+  persistent_before_mode, persistent_before_device_id,
+  persistent_before_inode,
+  persistent_after_sha256, persistent_after_size_bytes,
+  persistent_after_mode, persistent_after_device_id,
+  persistent_after_inode,
+  byte_for_byte_equal, persistent_identity_unchanged,
+  persistent_overwrite_performed
+}
+```
+
+The exact environment has only `PATH=/usr/bin:/bin`, `LANG=C.UTF-8`,
+`LC_ALL=C.UTF-8`, `TZ=UTC`, `PYTHONHASHSEED=0`, `PYTHONNOUSERSITE=1`, and
+`PYTHONDONTWRITEBYTECODE=1`; the exact umask is `0022`.
+
+The implemented producer may capture and self-validate a candidate only at
+a new temporary path; it does not publish
+`R401_VAL_L3_A1_MACHINE_FREEZE.json`.  The separate command
+`--verify-machine-freeze ABSOLUTE_JSON_PATH` is mutually exclusive with
+release `--verify-only`, replays one compact canonical candidate against the
+current Paper 02 root, and emits only
+`PASS_MACHINE_FREEZE_VERIFY_ONLY / NON_AUTHORITATIVE_VERIFY_ONLY`, its
+independently recomputed candidate SHA-256 and byte size, and
+`promotion_authorized=false`.  The digest is transient metadata, not a
+self-hash.  The verifier writes no output, depends on no role-54 main freeze,
+spawns no subprocess, invokes no evaluator, and grants no release or
+scientific authority.  A second independent rebuild, if required, belongs to
+future role-11 pre-freeze testing and is not part of role-24 verify-only.
+The same read-only verifier can later check byte-identical canonical role-10
+bytes, but it cannot publish or promote them.
 
 Resource evidence is exactly
 `{static_payload_raw_utf8,static_payload_sha256,branch_payload_raw_utf8,

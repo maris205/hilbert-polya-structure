@@ -923,13 +923,24 @@ def formal_machine_fixture(tmp_path: Path) -> dict[str, Any]:
     }
     branch_raw = R.branch_transaction_json_bytes(branch_payload)
 
-    build_argv = [
+    build_template = [
         str(compiler_executable),
         "-Wall", "-Wextra", "-Wpedantic", "-Werror",
         str(source),
         *capd_tokens,
-        "-o", str(binary),
+        "-o", R.FORMAL_MACHINE_STAGING_OUTPUT_TOKEN,
     ]
+    staging_directory = Path("/tmp") / (
+        "r401-val-l3-a1-fresh-fixture-"
+        + sha(str(tmp_path).encode("utf-8"))[:16]
+    )
+    staging_output = staging_directory / binary.name
+    fresh_argv = [*build_template[:-1], str(staging_output)]
+    binary_info = binary.stat()
+    binary_sha = sha(binary.read_bytes())
+    binary_build_id, binary_dt_needed, binary_soname = R._machine_elf_metadata(
+        binary.read_bytes(), "fixture branch binary"
+    )
     runtime_root = sha(R.canonical_json_bytes(runtime_libraries))
     free_bytes = 300 * 1024**3
     baseline = max(static_baseline, branch_baseline)
@@ -1019,30 +1030,69 @@ def formal_machine_fixture(tmp_path: Path) -> dict[str, Any]:
             "executable_path": str(compiler_executable),
             "executable_sha256": sha(compiler_executable.read_bytes()),
             "version": R.FORMAL_MACHINE_COMPILER_VERSION,
-            "build_record": {
+            "build_recipe": {
                 "cwd": str(project),
-                "environment": {"LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"},
+                "environment": copy.deepcopy(R.FORMAL_MACHINE_BUILD_ENVIRONMENT),
                 "umask": "0022",
-                "argv": build_argv,
-                "argv_sha256": sha(R.canonical_json_bytes(build_argv)),
+                "staging_output_token": R.FORMAL_MACHINE_STAGING_OUTPUT_TOKEN,
+                "argv_template": build_template,
+                "argv_template_sha256": sha(
+                    R.canonical_json_bytes(build_template)
+                ),
+            },
+            "fresh_rebuild_receipt": {
+                "cwd": str(project),
+                "environment": copy.deepcopy(R.FORMAL_MACHINE_BUILD_ENVIRONMENT),
+                "umask": "0022",
+                "staging_directory": str(staging_directory),
+                "staging_output_path": str(staging_output),
+                "argv": fresh_argv,
+                "argv_sha256": sha(R.canonical_json_bytes(fresh_argv)),
                 "stdout_sha256": sha(b""),
                 "stderr_sha256": sha(b""),
                 "stdout": "",
                 "stderr": "",
                 "return_code": 0,
+                "shell_used": False,
+                "output_sha256": binary_sha,
+                "output_size_bytes": binary_info.st_size,
+                "output_mode": stat.S_IMODE(binary_info.st_mode),
+                "output_build_id": binary_build_id,
+                "output_dt_needed": binary_dt_needed,
+                "output_dt_needed_sha256": sha(
+                    R.canonical_json_bytes(binary_dt_needed)
+                ),
+                "output_soname": binary_soname,
+            },
+            "transfer_evidence": {
+                "staging_output_sha256": binary_sha,
+                "staging_output_size_bytes": binary_info.st_size,
+                "staging_output_mode": stat.S_IMODE(binary_info.st_mode),
+                "branch_calibration_binary_sha256": binary_sha,
+                "persistent_before_sha256": binary_sha,
+                "persistent_before_size_bytes": binary_info.st_size,
+                "persistent_before_mode": stat.S_IMODE(binary_info.st_mode),
+                "persistent_before_device_id": binary_info.st_dev,
+                "persistent_before_inode": binary_info.st_ino,
+                "persistent_after_sha256": binary_sha,
+                "persistent_after_size_bytes": binary_info.st_size,
+                "persistent_after_mode": stat.S_IMODE(binary_info.st_mode),
+                "persistent_after_device_id": binary_info.st_dev,
+                "persistent_after_inode": binary_info.st_ino,
+                "byte_for_byte_equal": True,
+                "persistent_identity_unchanged": True,
+                "persistent_overwrite_performed": False,
             },
         },
         "branch_binary": {
             "path": R.FORMAL_MACHINE_BRANCH_BINARY,
-            "sha256": sha(binary.read_bytes()),
-            "size_bytes": binary.stat().st_size,
+            "sha256": binary_sha,
+            "size_bytes": binary_info.st_size,
             "executable_mode": 0o755,
-            "build_id": R._machine_elf_metadata(
-                binary.read_bytes(), "fixture branch binary"
-            )[0],
+            "build_id": binary_build_id,
             "source_path": R.FORMAL_MACHINE_BRANCH_SOURCE,
             "source_sha256": sha(source.read_bytes()),
-            "elf_sha256": sha(binary.read_bytes()),
+            "elf_sha256": binary_sha,
             "dt_needed": list(R.FORMAL_MACHINE_DT_NEEDED),
             "dt_needed_sha256": sha(
                 R.canonical_json_bytes(list(R.FORMAL_MACHINE_DT_NEEDED))
@@ -1161,6 +1211,337 @@ def _validate_machine_fixture(
         R.os.statvfs = original_statvfs
 
 
+def _patch_machine_verify_environment(
+    fixture: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Point the one-argument verifier at a complete temporary paper root."""
+
+    original_statvfs = R.os.statvfs
+
+    def fixture_statvfs(path: Any):
+        observed = original_statvfs(path)
+        values = list(observed)
+        values[4] = max(values[4], (300 * 1024**3) // observed.f_frsize)
+        return os.statvfs_result(values)
+
+    monkeypatch.setattr(R, "ROOT", fixture["project"])
+    monkeypatch.setattr(R.os, "statvfs", fixture_statvfs)
+
+
+def _read_only_tree_snapshot(root: Path) -> list[tuple[Any, ...]]:
+    rows: list[tuple[Any, ...]] = []
+    for path in sorted(root.rglob("*"), key=lambda item: item.as_posix()):
+        info = path.lstat()
+        relative = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            content: Any = ("symlink", os.readlink(path))
+        elif path.is_file():
+            content = ("file", sha(path.read_bytes()))
+        else:
+            content = ("directory", None)
+        rows.append(
+            (
+                relative,
+                stat.S_IFMT(info.st_mode),
+                stat.S_IMODE(info.st_mode),
+                info.st_dev,
+                info.st_ino,
+                info.st_nlink,
+                info.st_size,
+                info.st_mtime_ns,
+                info.st_ctime_ns,
+                content,
+            )
+        )
+    return rows
+
+
+def test_verify_machine_path_accepts_temp_candidate_without_authority(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    candidate = tmp_path / "prospective-machine-freeze.json"
+    fixture["machine_path"].rename(candidate)
+    fixture["machine_path"] = candidate
+    _patch_machine_verify_environment(fixture, monkeypatch)
+
+    before = (
+        candidate.read_bytes(),
+        candidate.stat().st_ino,
+        candidate.stat().st_mtime_ns,
+    )
+    result = R.verify_formal_machine_freeze_path(str(candidate))
+
+    assert result == {
+        "verification_status": R.FORMAL_MACHINE_VERIFY_STATUS,
+        "authority": R.FORMAL_MACHINE_VERIFY_AUTHORITY,
+        "claim_boundary": R.FORMAL_MACHINE_VERIFY_CLAIM_BOUNDARY,
+        "candidate_sha256": sha(before[0]),
+        "size_bytes": len(before[0]),
+        "promotion_authorized": False,
+        "release_artifacts_written": False,
+    }
+    assert "machine_freeze_sha256" not in fixture["machine"]
+    assert "machine_freeze_sha256" not in result
+    assert (
+        candidate.read_bytes(),
+        candidate.stat().st_ino,
+        candidate.stat().st_mtime_ns,
+    ) == before
+    assert list((fixture["project"] / "results").iterdir()) == []
+
+
+def test_verify_machine_cli_emits_one_non_authoritative_line(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    _patch_machine_verify_environment(fixture, monkeypatch)
+    raw = fixture["machine_path"].read_bytes()
+
+    assert R.main(["--verify-machine-freeze", str(fixture["machine_path"])]) == 0
+    captured = capsys.readouterr()
+    assert captured.err == ""
+    assert captured.out == (
+        "machine_freeze_verification=PASS_MACHINE_FREEZE_VERIFY_ONLY "
+        "authority=NON_AUTHORITATIVE_VERIFY_ONLY "
+        f"candidate_sha256={sha(raw)} size_bytes={len(raw)} "
+        "promotion_authorized=false\n"
+    )
+    assert list((fixture["project"] / "results").iterdir()) == []
+
+
+def test_verify_machine_cli_does_not_change_mock_verify_only_behavior(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    project = release_fixture(tmp_path)
+    released = R.build_release(project)
+    release = project / R.RESULT_RELATIVE / R.RELEASE_NAME
+    before = (release.read_bytes(), release.stat().st_ino, release.stat().st_mtime_ns)
+
+    assert R.main(["--project-root", str(project), "--verify-only"]) == 0
+    captured = capsys.readouterr()
+    assert captured.err == ""
+    assert captured.out == (
+        f"release_status={released['release_status']} roles=68 "
+        "scientific_licensing_enabled=false\n"
+    )
+    assert (
+        release.read_bytes(),
+        release.stat().st_ino,
+        release.stat().st_mtime_ns,
+    ) == before
+
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        "candidate.json",
+        "",
+        "//tmp/candidate.json",
+        "/tmp//candidate.json",
+        "/tmp/./candidate.json",
+        "/tmp/../candidate.json",
+        "/tmp/candidate.json/",
+        "/tmp/candidate\\name.json",
+    ],
+)
+def test_verify_machine_path_rejects_relative_or_noncanonical_text(value: str) -> None:
+    with pytest.raises(R.PathContractError, match="path|absolute|unsafe|noncanonical"):
+        R.verify_formal_machine_freeze_path(value)
+
+
+@pytest.mark.parametrize("value", [None, 7, b"/tmp/candidate.json", [], {}])
+def test_verify_machine_path_rejects_non_path_types(value: Any) -> None:
+    with pytest.raises(R.PathContractError, match="string or pathlib.Path"):
+        R.verify_formal_machine_freeze_path(value)
+
+
+def test_verify_machine_path_never_accepts_a_caller_supplied_digest() -> None:
+    with pytest.raises(TypeError, match="unexpected keyword"):
+        R.verify_formal_machine_freeze_path(
+            "/tmp/prospective-machine-freeze.json",
+            expected_sha256="0" * 64,
+        )
+
+
+@pytest.mark.parametrize("variant", ["duplicate", "noncanonical"])
+def test_verify_machine_path_rejects_duplicate_or_noncanonical_json(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    variant: str,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    if variant == "duplicate":
+        fixture["machine_path"].write_bytes(
+            b'{"schema_version":1,"schema_version":1}\n'
+        )
+        expected = "duplicate"
+    else:
+        fixture["machine_path"].write_text(
+            json.dumps(fixture["machine"], indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        expected = "not canonical"
+    _patch_machine_verify_environment(fixture, monkeypatch)
+    with pytest.raises(R.StrictJSONError, match=expected):
+        R.verify_formal_machine_freeze_path(fixture["machine_path"])
+
+
+@pytest.mark.parametrize("alias_kind", ["symlink", "hardlink"])
+def test_verify_machine_path_rejects_symlink_and_hardlink_aliases(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    alias_kind: str,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    path = fixture["machine_path"]
+    saved = path.with_name("saved-machine-freeze.json")
+    path.rename(saved)
+    if alias_kind == "symlink":
+        path.symlink_to(saved)
+    else:
+        os.link(saved, path)
+    _patch_machine_verify_environment(fixture, monkeypatch)
+    with pytest.raises((R.PathContractError, OSError), match="regular|link|alias|loop"):
+        R.verify_formal_machine_freeze_path(path)
+
+
+def test_verify_machine_path_rejects_terminal_inode_toctou(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    path = fixture["machine_path"]
+    _patch_machine_verify_environment(fixture, monkeypatch)
+    original = R._validate_formal_machine_freeze
+
+    def validate_then_replace(*args: Any, **kwargs: Any):
+        result = original(*args, **kwargs)
+        saved = path.with_name("validated-but-replaced-machine-freeze.json")
+        path.rename(saved)
+        write_json(path, fixture["machine"])
+        return result
+
+    monkeypatch.setattr(R, "_validate_formal_machine_freeze", validate_then_replace)
+    with pytest.raises(R.PathContractError, match="namespace changed|input changed"):
+        R.verify_formal_machine_freeze_path(path)
+
+
+def test_verify_machine_path_rejects_parent_namespace_toctou(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    parent = tmp_path / "prospective-parent"
+    parent.mkdir()
+    path = parent / "machine-freeze.json"
+    fixture["machine_path"].rename(path)
+    fixture["machine_path"] = path
+    _patch_machine_verify_environment(fixture, monkeypatch)
+    original = R._validate_formal_machine_freeze
+
+    def validate_then_replace_parent(*args: Any, **kwargs: Any):
+        result = original(*args, **kwargs)
+        saved_parent = tmp_path / "replaced-prospective-parent"
+        parent.rename(saved_parent)
+        parent.mkdir()
+        (saved_parent / path.name).rename(path)
+        return result
+
+    monkeypatch.setattr(
+        R, "_validate_formal_machine_freeze", validate_then_replace_parent
+    )
+    with pytest.raises(R.PathContractError, match="namespace changed"):
+        R.verify_formal_machine_freeze_path(path)
+
+
+def test_verify_machine_path_has_no_write_side_effects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    _patch_machine_verify_environment(fixture, monkeypatch)
+    project_before = _read_only_tree_snapshot(fixture["project"])
+    external_before = _read_only_tree_snapshot(fixture["external"])
+    freeze_before = fixture["machine_path"].read_bytes()
+    original_open = R.os.open
+    write_flags = (
+        os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND
+    )
+
+    def reject_write_open(path: Any, flags: int, *args: Any, **kwargs: Any):
+        if flags & write_flags:
+            raise AssertionError(f"verify-only attempted writable os.open: {path}")
+        return original_open(path, flags, *args, **kwargs)
+
+    def reject_release_write(*args: Any, **kwargs: Any) -> None:
+        raise AssertionError("verify-only called release publication")
+
+    monkeypatch.setattr(R.os, "open", reject_write_open)
+    monkeypatch.setattr(R, "write_once", reject_release_write)
+    result = R.verify_formal_machine_freeze_path(fixture["machine_path"])
+
+    assert result["release_artifacts_written"] is False
+    assert fixture["machine_path"].read_bytes() == freeze_before
+    assert _read_only_tree_snapshot(fixture["project"]) == project_before
+    assert _read_only_tree_snapshot(fixture["external"]) == external_before
+    assert list((fixture["project"] / "results").iterdir()) == []
+
+
+@pytest.mark.parametrize(
+    "attack",
+    (
+        "recipe-direct-to-canonical",
+        "receipt-direct-to-canonical",
+        "staging-persistent-mismatch",
+        "shell-enabled-receipt",
+        "shell-integer-alias",
+        "missing-recipe-environment",
+        "missing-receipt-environment",
+        "missing-receipt",
+    ),
+)
+def test_verify_machine_path_rejects_false_fresh_build_receipts(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    attack: str,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    compiler = fixture["machine"]["compiler"]
+    persistent = fixture["binary"]
+    if attack == "recipe-direct-to-canonical":
+        recipe = compiler["build_recipe"]
+        recipe["staging_output_token"] = str(persistent)
+        recipe["argv_template"][-1] = str(persistent)
+        recipe["argv_template_sha256"] = sha(
+            R.canonical_json_bytes(recipe["argv_template"])
+        )
+    elif attack == "receipt-direct-to-canonical":
+        receipt = compiler["fresh_rebuild_receipt"]
+        receipt["staging_directory"] = str(persistent.parent)
+        receipt["staging_output_path"] = str(persistent)
+        receipt["argv"][-1] = str(persistent)
+        receipt["argv_sha256"] = sha(R.canonical_json_bytes(receipt["argv"]))
+    elif attack == "staging-persistent-mismatch":
+        forged = "f" * 64
+        compiler["fresh_rebuild_receipt"]["output_sha256"] = forged
+        compiler["transfer_evidence"]["staging_output_sha256"] = forged
+    elif attack == "shell-enabled-receipt":
+        compiler["fresh_rebuild_receipt"]["shell_used"] = True
+    elif attack == "shell-integer-alias":
+        compiler["fresh_rebuild_receipt"]["shell_used"] = 0
+    elif attack == "missing-recipe-environment":
+        del compiler["build_recipe"]["environment"]["PYTHONHASHSEED"]
+    elif attack == "missing-receipt-environment":
+        del compiler["fresh_rebuild_receipt"]["environment"]["PATH"]
+    else:
+        del compiler["fresh_rebuild_receipt"]
+    _publish_formal_machine(fixture)
+    _patch_machine_verify_environment(fixture, monkeypatch)
+
+    with pytest.raises((R.ReleaseError, R.StrictJSONError, R.PathContractError)):
+        R.verify_formal_machine_freeze_path(fixture["machine_path"])
+
+
 def test_independent_formal_machine_validator_accepts_exact_temp_fixture(
     tmp_path: Path,
 ) -> None:
@@ -1204,7 +1585,7 @@ def test_formal_machine_rejects_nested_schema_authority_and_type_attacks(
     elif domain == "extra-key":
         machine["resource_evidence"]["evidence_path"] = "/tmp/forged.json"
     else:
-        machine["compiler"]["build_record"]["return_code"] = False
+        machine["compiler"]["fresh_rebuild_receipt"]["return_code"] = False
     _publish_formal_machine(fixture)
     with pytest.raises((R.ReleaseError, R.StrictJSONError)):
         _validate_machine_fixture(fixture)

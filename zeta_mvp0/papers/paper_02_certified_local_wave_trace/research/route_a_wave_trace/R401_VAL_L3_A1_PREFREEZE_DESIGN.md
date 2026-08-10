@@ -121,9 +121,11 @@ The following C++ S0 core may be retained after independent source review:
 
 The production binary must be built once before the main freeze and placed at
 a persistent, non-symlinked path.  Production may not compile into its result
-directory.  The formal machine record must bind the C++ source, exact compile
-argument vector, CAPD commit, CAPD libraries, runtime libraries, binary mode,
-size, and SHA-256 digest.
+directory.  The formal machine record must bind the C++ source, a declarative
+compile template targeting `@STAGING_BINARY@`, an actual argv-list rebuild
+with `shell=false` in an owned direct-child `/tmp` directory, no-overwrite
+transfer evidence for the persistent role-17 binary, the CAPD commit and
+libraries, runtime libraries, binary mode, size, and SHA-256 digest.
 
 The current S0 runner's direct concurrent writes, runtime compilation,
 absolute-path manifest, wall-time fields, and fixed representative matrix
@@ -159,9 +161,12 @@ research/route_a_wave_trace/R401_VAL_L3_A1_PREFREEZE_REVIEW.md
 research/route_a_wave_trace/R401_VAL_L3_A1_FREEZE.json
 ```
 
-`R401_VAL_L3_A1_FREEZE.json` is created last among its inputs and contains no
-self-hash.  This pre-freeze design and its tracker are planning inputs only;
-the later protocol must state explicitly whether it binds them.
+`R401_VAL_L3_A1_MACHINE_FREEZE.json` is candidate input role 10.  It is not
+created by the current temp-only capture increment.  Only after all 53 ordered
+input roles have their final bytes may `R401_VAL_L3_A1_FREEZE.json` be created
+as downstream release role 54; it contains no self-hash.  This pre-freeze
+design and its tracker are planning inputs only; the later protocol must state
+explicitly whether it binds them.
 
 ### 4.2 Evaluators, schedulers, checkers, and release builder
 
@@ -640,7 +645,7 @@ exact L1 plan + CAPD dependency lock
 final L3-A1 protocol/scheduler/checker/release contracts
 final evaluators/scheduler/checkers/release builder/tests
                  |
-                 +--> machine freeze (Python/Arb + CAPD + persistent binary)
+                 +--> role-10 machine freeze (Python/Arb + CAPD + persistent binary)
                  +--> exact S0-to-A1 compatibility replay
                  +--> pre-freeze test record
                               |
@@ -648,7 +653,7 @@ final evaluators/scheduler/checkers/release builder/tests
 independent pre-freeze review: exact `Verdict: ACCEPT_FOR_FREEZE`
                               |
                               v
-main L3-A1 freeze, generated last among inputs; no self-hash
+role-54 main L3-A1 freeze, generated after all 53 inputs; no self-hash
                               |
                               v
 sealed run_config binding the main-freeze hash and complete input map
@@ -768,6 +773,7 @@ scientific status.  There is no global scientific wall-clock budget.
 | process control | timeout, SIGTERM, SIGKILL escalation, descendant process, missing status | no orphan; non-pass classification is exact |
 | resource pause | memory and disk thresholds at barrier boundaries | admission pauses without scientific failure |
 | compatibility | all six accepted S0 cells replayed through prospective schema adapters | exact S0 facts and null final value preserved |
+| machine capture/verify | temp-path exclusivity, fresh-build staging, no-overwrite persistent binding, compiler-subobject mutations, path/link/TOCTOU attacks, and read-only independent replay | only one compact temporary candidate passes; no role-10 publication or evaluator dispatch |
 | synthetic E2E | mocked 102-cell static and 102-cell branch archives through composite and release | exact DAG closes with no evaluator dispatch |
 | release | write-once, verify-only, same-byte snapshot, TOCTOU, self-hash, extra role, altered report status | only one exact acyclic release is accepted |
 
@@ -795,8 +801,9 @@ All gates below must close before the first evaluator dispatch for any of the
    separate instruction before running even representative evaluators.
 6. **Independent review:** a reviewer who did not author the final producer
    or checker issues the sole exact verdict `Verdict: ACCEPT_FOR_FREEZE`.
-7. **Main freeze:** generated last, strict-parsed, hash-audited, and committed
-   in a clean repository state.
+7. **Main freeze:** generated as role 54 only after all 53 ordered input roles,
+   including canonical machine role 10, are final, strict-parsed, and
+   hash-audited in a clean repository state.
 8. **Initialize only:** the scheduler creates and independently verifies the
    sealed run configuration without dispatching an evaluator.
 9. **Explicit production authorization:** only a later, explicit instruction
@@ -873,8 +880,9 @@ remains explicitly prohibited.
 
 The control plane now has independent closed validators for the exact machine,
 main-freeze, and final-shaped run-config schemas; a pinned ordered 53-role
-capture/replay handshake; write-once noncanonical initialization; pure formal
-static and branch transaction plans; exact static four-file packaging; and a
+capture/replay handshake; temp-only machine capture plus producer-independent
+verify-only replay; write-once noncanonical initialization; pure formal static
+and branch transaction plans; exact static four-file packaging; and a
 102-certified-only aggregate builder.  Formal initialization produces only
 `run_config.json`, cannot resume or be upgraded in place, and the execution
 mode remains an unconditional rejection.
@@ -884,8 +892,10 @@ resource-calibration images as raw UTF-8 strings plus hashes.  Those images
 are strict-parsed and replayed without reopening historical `/tmp` proof,
 stdout, or stderr paths.  Current evaluator, interpreter, plan, module,
 `RECORD`, binary, and library bindings are live-opened and terminally
-replayed.  The machine receipt separately binds the Python/Arb and CAPD chains, exact
-build cwd/environment/umask/argv/stdout/stderr, ELF and `DT_NEEDED`, separated
+replayed.  The machine receipt separately binds the Python/Arb and CAPD chains,
+the declarative build recipe, private fresh-rebuild receipt with
+`shell_used=false`, no-overwrite transfer evidence, exact
+cwd/environment/umask/argv/stdout/stderr, ELF and `DT_NEEDED`, separated
 Python-bundled and CAPD-system runtime libraries, filesystem identities, and
 the conservative resource inequalities.  `production_authorized` remains
 false.
@@ -906,15 +916,21 @@ The branch formal runtime and independent checker now share exact integer
 millisecond budgets (`600000`, `2000`, `1000`), so the migration gate is true.
 The production/scientific dispatch gate remains unconditionally closed.
 
+The role-19 capture surface owns and removes its fresh-build `/tmp` staging.
+The role-24 verifier performs no write and spawns no subprocess; any second
+fresh rebuild belongs to a future role-11 pre-freeze test, not to verify-only.
+The temporary capture/verify surface writes no canonical role-10 path, no main
+freeze, and no result.  A successful verify-only line is non-authoritative and
+cannot promote the candidate.
+
 The remaining smallest blockers are now explicit:
 
-1. embed the completed final role-15 public calibration raw image
-   (`8afc8a0a...5522de92`, 14/14, dual-validator ACCEPT) in a real machine
-   freeze captured from the final live toolchain and persistent
-   binary, then run an independent no-import schema audit;
-2. freeze final code/test/document hashes, obtain the sole strict-ASCII
-   independent pre-freeze ACCEPT review, and only then construct the main
-   freeze; and
+1. under separate authorization, publish byte-identical independently
+   verified candidate bytes once as canonical input role 10; the current
+   increment does not do so;
+2. complete the remaining canonical inputs, freeze final code/test/document
+   hashes, and obtain the sole strict-ASCII independent pre-freeze ACCEPT
+   review; only after all 53 inputs are final may role 54 be constructed; and
 3. independently validate the initialized run binding before any separate
    decision about execution authority.
 

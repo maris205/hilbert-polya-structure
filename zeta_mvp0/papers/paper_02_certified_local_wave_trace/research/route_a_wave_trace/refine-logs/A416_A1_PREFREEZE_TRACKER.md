@@ -15,8 +15,17 @@ machine freeze / no main freeze / no dispatch / no canonical results**
 Latest machine-binding and formal-schema engineering cross-review: **ACCEPT;
 P0=0, P1=0, P2=0**.  This is an implementation verdict only, not
 `ACCEPT_FOR_FREEZE`.  Exact candidate schemas and independent validators now
-exist, but the deterministic canonical machine receipt, machine freeze, main
-freeze, and independent pre-freeze scientific authorization do not.
+exist.  Role 19 now also has a temp-only capture candidate and role 24 has a
+zero-write, zero-subprocess independent verify-only path, but no canonical
+role-10 machine freeze, role-54 main freeze, or independent pre-freeze
+scientific authorization exists.
+
+The temp-capture and independent-verifier evidence is stable after the
+subreaper/group-wait repair: the two focused modules pass `201/201`, the
+nine-module regression passes `457/457`, and `24/24` parallel timeout replays
+pass with the caller's subreaper state restored.  The pre-repair `456` pass,
+`1` fail run and its candidates are withdrawn.  This remains engineering
+evidence only and grants no role-10 publication or dispatch authority.
 
 This tracker is independent of the S0 experiment plan and tracker already
 bound by the accepted representative composite.  It does not amend those
@@ -36,14 +45,15 @@ files.
 | A1-I07 | composite checker + postcheck | COMPLETE FOR MOCK + FORMAL-SHAPED REPLAY / NON_LICENSING | both 102-cell component chains, exact aggregate roots, millisecond branch limits, strict serializer bindings, composite controls, generation binding, checker, and postcheck replayed | component/milestone/theorem/final remain null; formal scientific promotion absent |
 | A1-I08 | S0-to-A1 compatibility replay | COMPLETE / NON_LICENSING_COMPATIBILITY | exact six accepted cells, 26 branch roles, 18 composite bindings, and nine sealed controls replay read-only; 31 focused tests pass | canonical replay object intentionally absent; no S0 bytes or authority changed |
 | A1-I09 | release-provenance builder and independent machine validator | COMPLETE FOR MOCK + EXACT FORMAL VALIDATION CANDIDATE / NON_LICENSING | mock 53-input release replay plus producer-independent exact machine validation of live Python/Conda/Arb, CAPD/compiler/ELF/runtime, embedded resource bytes, admission arithmetic, and filesystem bindings | no canonical machine receipt or release; formal publication remains fail-closed |
+| A1-I10 | deterministic temp-only machine capture + independent verify-only CLI | COMPLETE AS NON-AUTHORITATIVE ENGINEERING SURFACE / CANONICAL PROHIBITED / NON_LICENSING | role 19 can capture a compact candidate at a new `/tmp` path, perform one owned fresh argv-list build with `shell=false`, and prove no-overwrite equality to role 17; role 24 replays exact bytes and live bindings with zero writes and zero subprocesses | no canonical role 10, role 54, run config, result, publication, promotion, or scientific dispatch |
 | A1-T01 | full mocked 204-cell E2E | COMPLETE / MOCK_ONLY_NON_LICENSING | 102 static cells, static checker/postcheck, 102 branch cells, branch checker/postcheck, composite controls/checker/postcheck, and exact 68-role mock release close in a temporary project | no canonical result root or scientific artifact was published |
 | A1-T02 | crash/resume/quarantine suite | COMPLETE FOR MOCK ENGINEERING SCOPE | static/branch transaction boundaries, signal/lock faults, partial-to-full resume, whole-generation quarantine, post-release scheduler refusal, and write-once release recovery have adversarial coverage | formal production recovery remains subject to a future freeze and machine binding |
 | A1-T03 | strict schema/path/TOCTOU suite | COMPLETE FOR CURRENT MOCK SURFACES | static, branch, composite, and release paths reject duplicate/type/nonfinite/path/link/inode/snapshot, coherent rebind, nested-authority, and claim-boundary mutations | this does not validate absent formal production artifacts |
 | A1-R01 | public-only peak-RSS calibrations | COMPLETE AS TEMPORARY RESOURCE EVIDENCE / NON_LICENSING | final static payload `8afc8a0a...22de92`: 14/14 exact 26-string runs and eight-worker inequality `33960800256 < 51539607552`; branch payload `2cd38931...af99a`: 6/6 exact 12-string runs and persistent-binary transfer | public `S000/S025/S050 x 128/256` only; final static payload remains in `/tmp`; no canonical calibration object |
 | A1-P01 | formal L3-A1 protocol/contracts | COMPLETE AS EXACT IMPLEMENTATION CONTRACT SET / NON_LICENSING | exact machine/main/run/cell/aggregate/checker/release schemas, serializer definitions, candidate 53-input/68-release role maps, and fail-closed execution policy exist | not a freeze review and not dispatch authority; do not edit S0-bound protocol |
-| A1-F01 | deterministic L3 machine receipt and machine freeze | TODO / BLOCKED | capture/builder embeds raw public evidence and recomputes Python/Arb, CAPD, compiler, persistent ELF/runtime, host, resources, and storage; independent verifier accepts exact bytes | validation surfaces exist, but no canonical machine object exists; old L2 freeze is template only |
+| A1-F01 | canonical L3 machine input | PARTIAL / CANONICAL ROLE 10 PROHIBITED | under separate authorization, publish byte-identical independently verified candidate bytes once as role 10 and complete the final input audit | temp capture/verify exists, but no canonical machine object exists; old L2 freeze is template only |
 | A1-P02 | independent pre-freeze review | TODO / BLOCKED | sole exact line `Verdict: ACCEPT_FOR_FREEZE` | reviewer must be independent of final producer/checker authorship |
-| A1-F02 | main L3-A1 freeze | PROHIBITED | all prior rows through A1-P02 complete; freeze generated last | current repository has no dispatch authority |
+| A1-F02 | main L3-A1 freeze | PROHIBITED | all 53 ordered inputs are final; main freeze is then generated as downstream role 54 | current repository has no dispatch authority |
 | A1-L00 | initialize-only run config | COMPLETE AS TEMPORARY IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | a disposable authority fixture passes the exact ordered 53-role same-byte handshake and atomically publishes one nonresumable, nonpromotable `run_config.json` outside every canonical namespace | not the future production run config; canonical initialize-only remains prohibited until the deterministic machine freeze and independent review chain exist |
 | A1-L01 | held-out/all-slab production | PROHIBITED | explicit later authorization after initialize-only audit | do not dispatch now |
 | A1-G01 | global tube routing | OPEN / SEPARATE | independent global complement theorem | not part of L3-A1 production |
@@ -78,10 +88,11 @@ None of these values is frozen.
 - The full 204-cell mock transaction/checker/composite/release chain now
   exists only as an engineering implementation and temporary test replay.  It
   is not a formal scientific generation and does not license one.
-- Exact schemas, the persistent CAPD binary, live machine-validation logic,
-  and both public-only resource payloads now exist as engineering inputs.  The
-  deterministic machine-receipt capture/builder and canonical L3-specific
-  machine freeze remain absent.
+- Exact schemas, the persistent CAPD binary, both public-only resource
+  payloads, the role-19 temp-only capture path, and role-24 read-only verifier
+  now exist as engineering inputs.  A temporary candidate is not input role
+  10; separately authorized canonical no-replace publication and the rest of
+  the 53-input freeze chain remain absent.
 - The canonical compatibility replay, production result root, production
   report, formal release, and all formal component/composite statuses remain
   absent; the implemented formal entry paths fail closed.
@@ -147,7 +158,7 @@ preflight implementation record is
 | final public-only static calibration | 14/14 pass | six sequential plus eight concurrent public S0 cells; exact 26-string ABI; no held-out input |
 | persistent branch binary transfer | exact SHA-256 match | public branch calibration binary and installed persistent binary both `25aec3d7...25e521` |
 | core regression immediately before final embedded branch resource binary-digest/persistent-binary binding | 419/419 pass | precise pre-binding evidence |
-| complete latest-byte Paper 02 regression after that binding | 814/814 pass | final integration evidence; no scientific dispatch |
+| complete Paper 02 regression at the machine-binding increment bytes | 814/814 pass | historical machine-binding integration evidence; no scientific dispatch |
 | independent machine/schema cross-review | ACCEPT; P0=0, P1=0, P2=0 | engineering correctness only; not `ACCEPT_FOR_FREEZE` |
 
 The final static resource byte image is
@@ -156,8 +167,9 @@ bytes, SHA-256
 `8afc8a0a0929da077a1a1ad19ddc0c19e754c49646c4b3d806f3f4cf5522de92`.
 Its exact candidate arithmetic is
 `24891273216 + 8 x 59949056 + 8589934592 = 33960800256 < 51539607552`
-bytes with `17578807296` bytes headroom.  It remains under `/tmp` until the
-deterministic canonical machine receipt capture/builder exists.
+bytes with `17578807296` bytes headroom.  It remains a temporary input image;
+the capture implementation does not move it, or any resulting candidate, to
+the canonical role-10 path.
 
 The public-only branch resource byte image remains
 `/tmp/a416-l3a1-rss.jzXoy2/calibration.json`, size `7402` bytes, SHA-256
@@ -174,10 +186,42 @@ The exact source/test ledger and serializer boundary are recorded in
 `CJ_COMPACT_V1`; branch task/argument/record/manifest bindings use
 `CJ_PRETTY_2_V1` and exact `600000/2000/1000` millisecond limits.
 
+## Temp-only machine-capture and independent-verify evidence
+
+| Gate | Result | Boundary |
+|---|---:|---|
+| role-19 capture-producer module | 107/107 pass in 26.62 s | temp-only capture and process control; no scientific dispatch |
+| role-24 independent-verifier module on final role-19 bytes | 94/94 pass in 35.20 s | zero-write, zero-subprocess verification only |
+| current two-module focused replay | 201/201 pass in 61.89 s | independently reproduced after the repair |
+| nine-module regression | 457/457 pass in 152.37 s | no canonical publication or scientific dispatch |
+| complete Paper 02 regression | 852/852 pass in 207.85 s | current machine-capture code/documentation set; no scientific dispatch |
+| parallel timeout replay | 24/24 pass | descendant cleanup; subreaper enabled state restored to `false` after return |
+| live temp candidate | capture + independent verify pass | `/tmp` only; role 10 remains absent |
+
+Stable implementation hashes are:
+
+```text
+role19_scheduler_sha256 = 48e6fba9a7c567faddc15c49f7e0d3a3b7a0ff77afae6d80e87d0b1b101638ad
+role19_test_sha256 = 6d8f8cd2d73ab8e6e003b7f1763a88fed917ba4863ad55b24f91ae8a7f28681f
+role24_builder_sha256 = e1ab0e0f23fdf73406425243cc2203c02cae69cd382dd84e76631a0b63b9a0e7
+role24_test_sha256 = a4b0e1c3aa514c01e10ee14c63db7973237e245da74c70643e6e33639c663c40
+```
+
+The final temporary candidate is
+`/tmp/a416-machine-capture-subreaper-final.UF30tt/machine-candidate.json`,
+SHA-256
+`eb3395cb3de902685da62b9d18b74e0ba2109d2cce08da2e29a48f966ca7b0e7`,
+size `54526`, mode `0644`, and link count `1`.  Role 24 recomputed that digest
+and size and returned `PASS_MACHINE_FREEZE_VERIFY_ONLY` with
+`promotion_authorized=false`.  The owned fresh-build directory is absent;
+the receipt records `shell_used=false`, byte equality, unchanged persistent
+identity, and no persistent overwrite.  The pre-repair `456` pass, `1` fail
+run and all of its candidate bytes remain withdrawn.
+
 ## Current decision
 
 ```text
-next_authorized_action = BUILD_DETERMINISTIC_MACHINE_FREEZE_CAPTURE_AND_INDEPENDENT_VERIFY_THEN_PREFREEZE_REVIEW
+next_authorized_action = SEPARATELY_AUTHORIZE_CANONICAL_ROLE10_AND_COMPLETE_ALL_53_INPUTS_BEFORE_ROLE54
 independent_design_review_complete = true
 static_implementation_increment_review = ACCEPT_P0_0_P1_0
 branch_runtime_increment_review = ACCEPT_P0_0_P1_0
@@ -200,8 +244,29 @@ branch_budget_ms = 600000_2000_1000
 final_public_static_calibration = PASS_14_OF_14_PUBLIC_S0_ONLY
 final_public_static_calibration_sha256 = 8afc8a0a0929da077a1a1ad19ddc0c19e754c49646c4b3d806f3f4cf5522de92
 machine_binding_formal_schema_review = ACCEPT_P0_0_P1_0_P2_0
+temp_only_machine_capture_implemented = true
+machine_verify_only_implemented = true
+machine_verify_only_zero_write = true
+machine_verify_only_zero_subprocess = true
+canonical_machine_role10_exists = false
+main_freeze_role54_exists = false
+machine_capture_scheduler_sha256 = 48e6fba9a7c567faddc15c49f7e0d3a3b7a0ff77afae6d80e87d0b1b101638ad
+machine_capture_test_sha256 = 6d8f8cd2d73ab8e6e003b7f1763a88fed917ba4863ad55b24f91ae8a7f28681f
+machine_capture_focused_tests = 107/107
+machine_verify_builder_sha256 = e1ab0e0f23fdf73406425243cc2203c02cae69cd382dd84e76631a0b63b9a0e7
+machine_verify_test_sha256 = a4b0e1c3aa514c01e10ee14c63db7973237e245da74c70643e6e33639c663c40
+machine_verify_focused_tests = 94/94
+machine_capture_verify_focused_tests = 201/201
+machine_capture_broad_regression = 457/457
+paper02_regression_at_machine_capture_bytes = 852/852
+paper02_regression_at_machine_capture_seconds = 207.85
+machine_capture_parallel_timeout_replays = 24/24
+subreaper_enabled_after_return = false
+temporary_machine_candidate_sha256 = eb3395cb3de902685da62b9d18b74e0ba2109d2cce08da2e29a48f966ca7b0e7
+temporary_machine_candidate_size_bytes = 54526
+pre_subreaper_regression = WITHDRAWN_FAIL_456_PASS_1
 core_tests_pre_final_branch_resource_binary_binding = 419/419
-paper02_regression_latest_bytes = 814/814
+paper02_regression_at_machine_binding_bytes = 814/814
 canonical_initialize_only = false
 formal_pipeline_complete = false
 accept_for_freeze = false

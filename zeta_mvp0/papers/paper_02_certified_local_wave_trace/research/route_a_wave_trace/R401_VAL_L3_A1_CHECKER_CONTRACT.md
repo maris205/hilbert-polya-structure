@@ -33,6 +33,18 @@ scientific evaluator, and assigns no component, milestone, theorem, or final
 status.  The formal scientific checker path described below remains
 unimplemented and unfrozen.
 
+A separate producer-independent machine verifier is also implemented, but it
+is not one of these three scientific checkers or postchecks.  Its
+`--verify-machine-freeze ABSOLUTE_JSON_PATH` mode replays one compact
+canonical machine candidate and current live role bindings without importing
+the capture producer, without depending on role 54, and without writing any
+byte, spawning any subprocess, or invoking an evaluator.  Success is exactly
+`PASS_MACHINE_FREEZE_VERIFY_ONLY` under
+`NON_AUTHORITATIVE_VERIFY_ONLY`, together with the independently recomputed
+candidate SHA-256 and byte size and `promotion_authorized=false`.  Those two
+values are transient receipt metadata, not a self-hash; the verifier assigns
+no component, milestone, theorem, final, release, or dispatch authority.
+
 ## 2. Candidate exact result schemas
 
 Final implementations may tighten nested diagnostics before freeze.  They may
@@ -456,6 +468,13 @@ or verdict.  Tests must also cover strict JSON types, nonfinite values,
 symlinks, hard links, TOCTOU snapshots, missing/extra authoritative paths,
 checker/postcheck overwrite, and a full mocked 102-by-two-component chain.
 
+Machine-specific tests separately require temporary-candidate acceptance;
+exact absolute path and single-link replay; read-only and zero-subprocess
+behavior; build-recipe, fresh-rebuild-receipt, and transfer-evidence
+mutations; direct-to-canonical build rejection; staging/persistent mismatch
+rejection; and proof that the verifier neither imports nor dispatches a
+scientific evaluator.
+
 The test suite and recorded hashes are mandatory main-freeze inputs.  A mock
 pass has no scientific status.
 
@@ -474,6 +493,8 @@ paper02_regression = 675/675
 formal_scientific_checker_implementation_stable = false
 formal_component_postchecks_exist = false
 formal_composite_postcheck_exists = false
+machine_verify_only_implemented = true
+canonical_machine_freeze_exists = false
 main_freeze_exists = false
 dispatch_authorized = false
 milestone_status = null
