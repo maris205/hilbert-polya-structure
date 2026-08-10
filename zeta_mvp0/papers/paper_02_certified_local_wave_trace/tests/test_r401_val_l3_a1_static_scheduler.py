@@ -4,8 +4,11 @@ import importlib.util
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import types
+from dataclasses import FrozenInstanceError
 from pathlib import Path
 
 import pytest
@@ -46,6 +49,81 @@ def initialize(tmp_path: Path) -> tuple[Path, Path, dict[str, object], str]:
     _, config_hash = MODULE.ensure_run_config(output, binding, resume=False)
     operational.mkdir()
     return output, operational, binding, config_hash
+
+
+def write_canonical_json(path: Path, payload: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(MODULE.canonical_json_bytes(payload))
+
+
+def formal_authority_fixture(tmp_path: Path) -> Path:
+    authority = (tmp_path / "formal-authority").absolute()
+    authority.mkdir(parents=True)
+    for role, relative in MODULE.FORMAL_INPUT_ROLES:
+        target = authority / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        source = ROOT / relative
+        if source.is_file():
+            shutil.copy2(source, target)
+        elif relative.endswith(".json"):
+            write_canonical_json(target, {"fixture_role": role})
+        else:
+            target.write_text(f"formal fixture role: {role}\n", encoding="utf-8")
+
+    machine = authority / dict(MODULE.FORMAL_INPUT_ROLES)["machine_freeze"]
+    write_canonical_json(
+        machine,
+        {
+            "schema_version": 1,
+            "protocol_id": MODULE.PROTOCOL_ID,
+            "artifact_role": "MACHINE_FREEZE",
+            "status": "FROZEN_FOR_PRODUCTION",
+            "scientific_licensing_enabled": True,
+            "component_status": None,
+            "milestone_status": None,
+            "theorem_status": None,
+            "final_status": None,
+        },
+    )
+    review = authority / dict(MODULE.FORMAL_INPUT_ROLES)["prefreeze_review"]
+    review.write_text(
+        "Independent implementation fixture review\n"
+        f"{MODULE.PREFREEZE_ACCEPT_LINE}\n",
+        encoding="utf-8",
+    )
+    binary = authority / dict(MODULE.FORMAL_INPUT_ROLES)["branch_evaluator_binary"]
+    binary.chmod(binary.stat().st_mode | 0o755)
+
+    role_records = [
+        MODULE.formal_role_binding(authority, role, relative)[0]
+        for role, relative in MODULE.FORMAL_INPUT_ROLES
+    ]
+    roles = [item.payload() for item in role_records]
+    machine_hash = next(
+        item.sha256 for item in role_records if item.role == "machine_freeze"
+    )
+    freeze = {
+        "schema_version": 1,
+        "protocol_id": MODULE.PROTOCOL_ID,
+        "artifact_role": "MAIN_FREEZE",
+        "status": "FROZEN_FOR_PRODUCTION",
+        "authority": "INDEPENDENT_PREFREEZE_REVIEW",
+        "scientific_licensing_enabled": True,
+        "matrix": MODULE.matrix_payload(),
+        "matrix_id": MODULE.canonical_matrix_id(),
+        "machine_freeze_sha256": machine_hash,
+        "input_roles": roles,
+        "claim_boundary": "formal fixture envelope; no evaluator dispatch",
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    write_canonical_json(
+        authority / "research/route_a_wave_trace/R401_VAL_L3_A1_FREEZE.json",
+        freeze,
+    )
+    return authority
 
 
 def test_exact_matrix_and_matrix_id_are_canonical() -> None:
@@ -572,6 +650,426 @@ def test_production_and_initialize_only_fail_before_output_creation(tmp_path: Pa
         assert completed.returncode == 1
         assert "production rejected" in completed.stderr
         assert not output.exists()
+
+
+def test_formal_authority_exact_53_role_handshake_and_initialize_only(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "formal-preflight-output").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    assert len(snapshot.input_roles) == 53
+    assert tuple(item.role for item in snapshot.input_roles) == tuple(
+        role for role, _ in MODULE.FORMAL_INPUT_ROLES
+    )
+    assert snapshot.main_freeze_sha256 == MODULE.sha256(snapshot.main_freeze_path)
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--initialize-only",
+            "--authority-root",
+            str(authority),
+            "--output",
+            str(output),
+        ],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["artifact_status"] == "FORMAL_PREFLIGHT_ONLY"
+    assert result["input_role_count"] == 53
+    assert result["freeze_sha256"] == result["main_freeze_sha256"]
+    assert result["production_authorized"] is False
+    assert result["scientific_licensing_enabled"] is False
+    assert {path.name for path in output.iterdir()} == {"run_config.json"}
+    config = MODULE.strict_json_load(output / "run_config.json", require_canonical=True)
+    assert config["preflight_only"] is True
+    assert config["promotable"] is False
+    assert config["production_authorized"] is False
+    assert config["scientific_licensing_enabled"] is False
+    assert config["freeze_sha256"] == config["main_freeze_sha256"]
+    assert config["component_status"] is None
+    assert not MODULE.operational_root_for(output).exists()
+
+
+def test_formal_preflight_cannot_resume_promote_or_use_canonical_root(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "formal-preflight-once").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    config, _ = MODULE.initialize_formal_preflight(snapshot, output)
+    before = (output / "run_config.json").read_bytes()
+    with pytest.raises(MODULE.RunBindingMismatch, match="cannot be resumed or promoted"):
+        MODULE.initialize_formal_preflight(snapshot, output)
+    assert (output / "run_config.json").read_bytes() == before
+    promoted = dict(config)
+    promoted["production_authorized"] = True
+    with pytest.raises(MODULE.ProductionAuthorityError):
+        MODULE.validate_formal_preflight_binding(promoted, snapshot, output)
+    with pytest.raises(MODULE.PathContractError, match="canonical production"):
+        MODULE.initialize_formal_preflight(snapshot, MODULE.CANONICAL_RESULT)
+
+    rejected = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--production",
+            "--execute-scientific-dispatch",
+            "--authority-root",
+            str(authority),
+            "--output",
+            str(output),
+        ],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert rejected.returncode == 1
+    assert "unconditionally disabled" in rejected.stderr
+    assert (output / "run_config.json").read_bytes() == before
+
+
+def test_formal_authority_rejects_role_reorder_and_decorated_review(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    freeze_path = authority / "research/route_a_wave_trace/R401_VAL_L3_A1_FREEZE.json"
+    freeze = MODULE.strict_json_load(freeze_path, require_canonical=True)
+    freeze["input_roles"][0], freeze["input_roles"][1] = (
+        freeze["input_roles"][1], freeze["input_roles"][0]
+    )
+    write_canonical_json(freeze_path, freeze)
+    with pytest.raises(MODULE.ProductionAuthorityError, match="53-role"):
+        MODULE.load_formal_authority(authority)
+
+    authority = formal_authority_fixture(tmp_path / "second")
+    review = authority / dict(MODULE.FORMAL_INPUT_ROLES)["prefreeze_review"]
+    review.write_text(" Verdict: ACCEPT_FOR_FREEZE\n", encoding="utf-8")
+    with pytest.raises(MODULE.ProductionAuthorityError):
+        MODULE.load_formal_authority(authority)
+
+
+@pytest.mark.parametrize(
+    "extra",
+    [
+        "- Verdict: REJECT_FOR_FREEZE",
+        "> Verdict: PENDING",
+        "| Verdict | REJECT_FOR_FREEZE |",
+        "**Verdict:** REJECT_FOR_FREEZE",
+        "Verdict：PENDING",
+        r"\Verdict: PENDING",
+        "Verdict&#58; PENDING",
+        "V&#101;rdict: PENDING",
+        "V&#x65;rdict: PENDING",
+        "Ver\u200bdict: PENDING",
+        "Ver\ufe0fdict: PENDING",
+        "Ver\u034fdict: PENDING",
+        "V&#xFE0F;erdict: PENDING",
+        "V&amp;#101;rdict: PENDING",
+        "V&#101rdict: PENDING",
+        "V&#x65rdict: PENDING",
+        "V&#00101rdict: PENDING",
+        "V&#x0065rdict: PENDING",
+        "verdict = PENDING",
+    ],
+)
+def test_formal_review_rejects_every_standalone_decorated_verdict(
+    tmp_path: Path, extra: str
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    review = authority / dict(MODULE.FORMAL_INPUT_ROLES)["prefreeze_review"]
+    review.write_text(
+        f"{MODULE.PREFREEZE_ACCEPT_LINE}\n{extra}\n", encoding="utf-8"
+    )
+    with pytest.raises(MODULE.ProductionAuthorityError):
+        MODULE.load_formal_authority(authority)
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "relative/output",
+        "/tmp/formal/../output",
+        "//tmp/formal-output",
+        "/tmp/formal-output/",
+    ],
+)
+def test_formal_paths_reject_noncanonical_raw_spelling(raw: str) -> None:
+    with pytest.raises(MODULE.PathContractError):
+        MODULE.ensure_formal_preflight_output_allowed(raw, str(ROOT))
+
+
+def test_formal_paths_reject_parent_symlinks(tmp_path: Path) -> None:
+    real = tmp_path / "real"
+    real.mkdir()
+    alias = tmp_path / "alias"
+    alias.symlink_to(real, target_is_directory=True)
+    with pytest.raises(MODULE.PathContractError, match="symlink"):
+        MODULE.ensure_formal_preflight_output_allowed(
+            str(alias / "output"), str(ROOT)
+        )
+    authority = formal_authority_fixture(tmp_path / "fixture")
+    authority_alias = tmp_path / "authority-alias"
+    authority_alias.symlink_to(authority, target_is_directory=True)
+    with pytest.raises(MODULE.PathContractError, match="symlink"):
+        MODULE.load_formal_authority(str(authority_alias))
+
+
+def test_formal_transaction_plans_are_exact_and_dispatch_stays_locked(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "formal-transaction-output").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    binding, run_hash = MODULE.initialize_formal_preflight(snapshot, output)
+    cell = MODULE.CellKey(128, "S000")
+    static_plan = MODULE.build_formal_static_transaction_plan(
+        snapshot, binding, run_hash, output, cell
+    )
+    assert len(static_plan.argv) == len(static_plan.semantic_argv) == 26
+    assert static_plan.argv[-2] == "--output"
+    assert static_plan.semantic_argv[-1] == "<STAGING_PROOF_PATH>"
+    assert tuple(
+        path.name
+        for path in (
+            static_plan.proof_path,
+            static_plan.stdout_path,
+            static_plan.stderr_path,
+            static_plan.record_path,
+        )
+    ) == ("proof.json", "stdout.txt", "stderr.txt", "record.json")
+    called: list[str] = []
+    with pytest.raises(MODULE.ProductionAuthorityError, match="unconditionally"):
+        MODULE.dispatch_formal_static_transaction(
+            static_plan, executor=lambda *_: called.append("static")
+        )
+    assert called == []
+
+    branch_plan = MODULE.build_formal_branch_transaction_plan(
+        snapshot, binding, run_hash, output, cell
+    )
+    assert branch_plan.task.argv()[0] == str(branch_plan.evaluator_binary_path)
+    assert branch_plan.freeze_sha256 == branch_plan.main_freeze_sha256
+    with pytest.raises(MODULE.ProductionAuthorityError, match="unconditionally"):
+        MODULE.dispatch_formal_branch_transaction(
+            branch_plan, transaction_runner=lambda *_: called.append("branch")
+        )
+    assert called == []
+
+
+def test_formal_aggregate_candidates_are_null_authority_and_complete_only(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    snapshot = MODULE.load_formal_authority(authority)
+    entries = [
+        {
+            "cell": cell.payload(),
+            "path": f"static/cell_manifests/{cell.precision_bits}/{cell.slab_id}.json",
+            "sha256": MODULE.sha256_bytes(cell.label.encode("ascii")),
+            "size_bytes": 1,
+        }
+        for cell in MODULE.exact_matrix()
+    ]
+    run_hash = "a" * 64
+    summary, manifest = MODULE.build_formal_component_aggregate_candidates(
+        "STATIC", snapshot, run_hash, entries
+    )
+    assert summary["status_counts"] == {"STATIC_CELL_CERTIFIED": 102}
+    assert summary["scheduler_classification_counts"] == {
+        "COMMITTED_EVALUATOR_RESULT": 102
+    }
+    assert summary["authority"] == manifest["authority"] == "PRODUCER_ONLY"
+    assert summary["scientific_licensing_enabled"] is False
+    assert summary["component_status"] is None
+    assert summary["freeze_sha256"] == summary["main_freeze_sha256"]
+    assert manifest["summary"]["sha256"] == MODULE.sha256_bytes(
+        MODULE.canonical_json_bytes(summary)
+    )
+    with pytest.raises(MODULE.CorruptGeneration, match="102"):
+        MODULE.build_formal_component_aggregate_candidates(
+            "STATIC", snapshot, run_hash, entries[:-1]
+        )
+
+    wrong = [dict(item) for item in entries]
+    wrong[1]["path"] = wrong[0]["path"]
+    with pytest.raises(MODULE.CorruptGeneration, match="path/order"):
+        MODULE.build_formal_component_aggregate_candidates(
+            "STATIC", snapshot, run_hash, wrong
+        )
+    wrong = [dict(item) for item in entries]
+    wrong[0]["path"] = "branch/cell_manifests/128/S000.json"
+    with pytest.raises(MODULE.CorruptGeneration, match="path/order"):
+        MODULE.build_formal_component_aggregate_candidates(
+            "STATIC", snapshot, run_hash, wrong
+        )
+
+
+def replace_with_same_bytes(path: Path) -> None:
+    replacement = path.with_name(path.name + ".replacement")
+    replacement.write_bytes(path.read_bytes())
+    replacement.chmod(path.stat().st_mode)
+    os.replace(replacement, path)
+
+
+def test_formal_snapshot_is_deeply_immutable_and_detects_same_byte_inode_swap(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    snapshot = MODULE.load_formal_authority(authority)
+    with pytest.raises(FrozenInstanceError):
+        snapshot.input_roles[0].role = "forged"  # type: ignore[misc]
+    assert isinstance(snapshot.main_freeze_raw, bytes)
+    plan = authority / dict(MODULE.FORMAL_INPUT_ROLES)["l1_final_plan"]
+    replace_with_same_bytes(plan)
+    with pytest.raises(MODULE.ProductionAuthorityError, match="inode/image"):
+        MODULE.revalidate_formal_snapshot(snapshot, ("l1_final_plan",))
+
+    authority = formal_authority_fixture(tmp_path / "main")
+    snapshot = MODULE.load_formal_authority(authority)
+    replace_with_same_bytes(snapshot.main_freeze_path)
+    with pytest.raises(MODULE.ProductionAuthorityError, match="main freeze inode"):
+        MODULE.revalidate_formal_snapshot(snapshot, ("l1_final_plan",))
+
+
+def test_formal_initialize_atomic_staging_failure_leaves_no_output(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    snapshot = MODULE.load_formal_authority(authority)
+    for index, boundary in enumerate(
+        ("AFTER_STAGE_DIR", "AFTER_CONFIG_FSYNC", "BEFORE_RENAME")
+    ):
+        output = (tmp_path / f"atomic-preflight-{index}").absolute()
+        with pytest.raises(MODULE.SyntheticCrash):
+            MODULE.initialize_formal_preflight(
+                snapshot, output, _fail_at=boundary
+            )
+        assert not output.exists()
+        assert not list(tmp_path.glob(f".{output.name}.formal-preflight-*"))
+
+
+def test_formal_builders_reject_swapped_l1_images_before_parse_or_runtime_load(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "formal-swap-output").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    binding, run_hash = MODULE.initialize_formal_preflight(snapshot, output)
+    cell = MODULE.CellKey(128, "S000")
+
+    plan_path = authority / dict(MODULE.FORMAL_INPUT_ROLES)["l1_final_plan"]
+    replace_with_same_bytes(plan_path)
+    with pytest.raises(MODULE.ProductionAuthorityError, match="l1_final_plan"):
+        MODULE.build_formal_static_transaction_plan(
+            snapshot, binding, run_hash, output, cell
+        )
+
+    authority = formal_authority_fixture(tmp_path / "branch")
+    output = (tmp_path / "formal-branch-swap-output").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    binding, run_hash = MODULE.initialize_formal_preflight(snapshot, output)
+    summary = authority / dict(MODULE.FORMAL_INPUT_ROLES)["l1_summary"]
+    replace_with_same_bytes(summary)
+    MODULE._BRANCH_RUNTIME_MODULE = None
+    with pytest.raises(MODULE.ProductionAuthorityError, match="l1_summary"):
+        MODULE.build_formal_branch_transaction_plan(
+            snapshot, binding, run_hash, output, cell
+        )
+    assert MODULE._BRANCH_RUNTIME_MODULE is None
+
+
+def test_formal_static_dispatch_rehashes_evaluator_and_never_calls_executor(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "formal-evaluator-rehash").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    binding, run_hash = MODULE.initialize_formal_preflight(snapshot, output)
+    plan = MODULE.build_formal_static_transaction_plan(
+        snapshot, binding, run_hash, output, MODULE.CellKey(128, "S000")
+    )
+    plan.evaluator_path.write_text("changed after plan\n", encoding="utf-8")
+    called: list[bool] = []
+    with pytest.raises(MODULE.ProductionAuthorityError, match="changed after plan"):
+        MODULE.dispatch_formal_static_transaction(
+            plan, executor=lambda *_: called.append(True)
+        )
+    assert called == []
+
+
+def test_formal_branch_executes_captured_runtime_not_reopened_live_path(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "captured-runtime-output").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    binding, run_hash = MODULE.initialize_formal_preflight(snapshot, output)
+    runtime_role = next(
+        item for item in snapshot.input_roles if item.role == "branch_runtime"
+    )
+    module_name = MODULE._formal_runtime_module_name(runtime_role.sha256)
+    MODULE._FORMAL_BRANCH_RUNTIME_MODULES.pop(runtime_role.sha256, None)
+    sys.modules.pop(module_name, None)
+    marker = tmp_path / "runtime-side-effect"
+    trap = tmp_path / "live-runtime-trap.py"
+    trap.write_text(
+        f"from pathlib import Path\nPath({str(marker)!r}).write_text('opened')\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(MODULE, "BRANCH_RUNTIME_PATH", trap)
+    monkeypatch.setattr(
+        MODULE,
+        "_load_branch_runtime",
+        lambda: (_ for _ in ()).throw(AssertionError("mock loader called")),
+    )
+    plan = MODULE.build_formal_branch_transaction_plan(
+        snapshot,
+        binding,
+        run_hash,
+        output,
+        MODULE.CellKey(128, "S000"),
+    )
+    assert plan.task.argv()[0] == str(plan.evaluator_binary_path)
+    loaded = sys.modules[module_name]
+    assert loaded.__formal_runtime_sha256__ == runtime_role.sha256
+    assert loaded.__file__ == str(trap)
+    assert not marker.exists()
+
+
+def test_formal_branch_rejects_unbound_precached_runtime(
+    tmp_path: Path,
+) -> None:
+    authority = formal_authority_fixture(tmp_path)
+    output = (tmp_path / "precache-runtime-output").absolute()
+    snapshot = MODULE.load_formal_authority(authority)
+    binding, run_hash = MODULE.initialize_formal_preflight(snapshot, output)
+    runtime_role = next(
+        item for item in snapshot.input_roles if item.role == "branch_runtime"
+    )
+    name = MODULE._formal_runtime_module_name(runtime_role.sha256)
+    MODULE._FORMAL_BRANCH_RUNTIME_MODULES.pop(runtime_role.sha256, None)
+    previous = sys.modules.get(name)
+    sys.modules[name] = types.ModuleType(name)
+    try:
+        with pytest.raises(MODULE.ProductionAuthorityError, match="pre-cached"):
+            MODULE.build_formal_branch_transaction_plan(
+                snapshot,
+                binding,
+                run_hash,
+                output,
+                MODULE.CellKey(128, "S000"),
+            )
+    finally:
+        if previous is None:
+            sys.modules.pop(name, None)
+        else:
+            sys.modules[name] = previous
 
 
 def test_explicit_mock_initialize_and_cells_never_gain_authority(tmp_path: Path) -> None:

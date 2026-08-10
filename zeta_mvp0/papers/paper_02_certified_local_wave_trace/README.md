@@ -27,6 +27,12 @@ strongest accepted statements and latest bounded implementation evidence are:
    `S000/S025/S050 x 128/256` phase-anchor and branch-tube matrix passes as
    `DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`.  This is implementation
    evidence only, not an accepted 51-slab A4.16 theorem.
+7. `A4.16 / R401-VAL-L3-A1` formal control-plane preflight: the exact
+   prospective 53-role same-byte handshake, temporary nonpromotable
+   initialize-only path, pure static/branch transaction plans, atomic
+   publication, and unconditional dispatch rejection pass independent
+   implementation review with P0=P1=P2=0.  No canonical production object or
+   new scientific result is created.
 
 The local determinant result was independently replayed from exact rational
 decimal payloads: 202 determinant enclosures, 202 phase-slope enclosures, 815
@@ -105,10 +111,51 @@ This representative smoke does not assign a milestone, theorem, or final
 programme value.  It does not cover the other 48 slabs and does not prove
 that arbitrary energy-shell candidates remain in the local tube.
 
+## Formal all-slab control-plane preflight (non-licensing)
+
+The current L3-A1 increment implements a formal control-plane candidate but
+does not open scientific execution.  It replays an exact ordered 53-role
+same-byte handshake, atomically writes one temporary initialize-only
+`run_config.json` outside every canonical namespace, constructs exact pure
+static and branch transaction plans, and rejects both dispatch paths
+unconditionally.  The candidate is nonresumable, nonpromotable, assigns no
+component or theorem status, and cannot become the future production run
+config.
+
+Independent adversarial review accepted this implementation surface with
+P0=0, P1=0, and P2=0.  The scheduler and focused-test SHA-256 values are
+`e39caaed78468be1dc7791efde5b85f97668e07ef7117a7c2560decfea7d06bf`
+and
+`41655000a7904547f80aadf1726c01f1392239c1e1dea94394df6931e41ad508`.
+The focused scheduler suite passed 79/79 tests, the owned L3-A1 suite passed
+194/194, and the complete Paper 02 regression passed 710/710 without a
+scientific evaluator dispatch.
+
+A separate resource calibration ran the formal A1 source against only the six
+already-public S0 branch inputs.  The source and temporary-binary SHA-256
+values were
+`66588bf25ae777c854f60a747af4299e3166efdd51db2659e33a28194abc59c5`
+and
+`25aec3d7d68883c2a97f765682a40cabc3feb91f159f67ac2910b6f82025e521`;
+the complete CAPD/toolchain ledger is in the linked increment record.  The
+worst peak RSS was `202428 KiB`, and the exact candidate calculation was
+baseline `14505582592` + `6 x 207286272` + reserve `8589934592` =
+`24339234816 < 51539607552` bytes, with `27200372736` bytes headroom.  No
+held-out or all-slab input was selected.  The temporary binary was not
+installed, the canonical calibration object remains absent, and this result
+neither freezes the worker count nor adds scientific evidence.
+
+The canonical L3 machine freeze, main freeze, S0 compatibility replay, A1
+persistent CAPD binary, result root, and operational root remain absent.  The
+full boundary and evidence record is
+[`A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md).
+
 ## Open bridges
 
-- an independently reviewed and prospectively frozen 51-slab A4.16
-  phase-tube production; the current A4.16 evidence is representative only;
+- exact final L3-A1 schemas/contracts, the persistent A1 CAPD binary, machine
+  freeze, canonical S0 compatibility replay, independent pre-freeze review,
+  and only then a separately authorized 51-slab A4.16 phase-tube production;
+  the current scientific evidence remains representative only;
 - the full global shell return-exclusion tree on \(0.60<T<0.75\);
 - global tube routing for candidates outside the local full-period tube;
 - the frozen independent event-projected determinant/Taylor-width
@@ -117,10 +164,12 @@ that arbitrary energy-shell candidates remain in the local tube.
 - every endogenous prime-time, von-Mangoldt, Hilbert--Pólya, zeta-zero, and RH
   claim.
 
-The representative A4.16 engine is now checked; the next theorem-engineering
-stage is its independent pre-freeze review and formal all-slab production,
-while preserving the A4.15 local-chart boundary.  A4.15 remains the highest
-accepted theorem in this chain.  Global routing is a separate later bridge.
+The representative A4.16 engine and the non-dispatching L3-A1 control-plane
+candidate are now checked.  The next engineering stage is to finalize the
+exact schemas/contracts, persistent binary, and machine freeze before any
+independent pre-freeze review or formal all-slab production can be considered.
+A4.15 remains the highest accepted theorem in this chain.  Global routing is
+a separate later bridge.
 
 ## Layout
 

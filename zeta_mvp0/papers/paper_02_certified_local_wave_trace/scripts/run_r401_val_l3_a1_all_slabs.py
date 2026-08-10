@@ -4,10 +4,13 @@
 This module implements strict matrix/run-binding plus complete mock-only
 static and branch archive transactions.  The branch path can execute only an
 explicit synthetic executable outside either result root; it reuses the
-hardened bounded-process and branch-cell transaction runtime.  It deliberately
-contains no production evaluator dispatcher.  Production and non-mock
-initialize modes fail closed until the separately accepted machine/main
-freezes and pre-freeze review exist.
+hardened bounded-process and branch-cell transaction runtime.  It also has a
+formal *preflight* handshake which can snapshot the prospective 53 input
+roles and write one visibly non-licensing, non-promotable run-config candidate
+in an explicit noncanonical temporary root.  That handshake is not the future
+production run config and cannot dispatch either evaluator.  Production
+dispatch remains unconditionally disabled until the formal freeze schemas and
+a separate execution-authorization contract are finalized.
 """
 
 from __future__ import annotations
@@ -24,6 +27,7 @@ import re
 import stat
 import sys
 import time
+import types
 from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation, localcontext
@@ -93,6 +97,92 @@ COMPOSITE_MOCK_CLAIM_BOUNDARY = (
 MOCK_CHECKER_STATUS = "PASS_MOCK_INDEPENDENT_REPLAY"
 MOCK_POSTCHECK_STATUS = "PASS_MOCK_WRITE_ONCE_POSTCHECK"
 
+FORMAL_PREFLIGHT_CLAIM_BOUNDARY = (
+    "formal-control-plane implementation preflight only; exact prospective "
+    "53-role hash handshake with no evaluator dispatch, no reusable production "
+    "run configuration, no component or theorem status, and no Hilbert-Polya, "
+    "zeta-zero, or RH claim"
+)
+
+# This order is the prospective 53-role order already frozen by the release
+# contract.  It is duplicated deliberately: the scheduler must not import a
+# release builder or checker in order to decide what it is allowed to bind.
+FORMAL_INPUT_ROLES: tuple[tuple[str, str], ...] = (
+    ("a416_derivation", "research/route_a_wave_trace/A416_PHASE_FLOWBOX_DERIVATION.md"),
+    ("s0_protocol", "research/route_a_wave_trace/R401_VAL_L3_PHASE_TUBE_PROTOCOL_DRAFT.md"),
+    ("s0_report", "research/route_a_wave_trace/A416_REPRESENTATIVE_PHASE_TUBE_SMOKE.md"),
+    ("prefreeze_design", "research/route_a_wave_trace/R401_VAL_L3_A1_PREFREEZE_DESIGN.md"),
+    ("implementation_design_review", "research/route_a_wave_trace/R401_VAL_L3_A1_DESIGN_REVIEW.md"),
+    ("formal_protocol", "research/route_a_wave_trace/R401_VAL_L3_A1_PROTOCOL.md"),
+    ("scheduler_contract", "research/route_a_wave_trace/R401_VAL_L3_A1_SCHEDULER_CONTRACT.md"),
+    ("checker_contract", "research/route_a_wave_trace/R401_VAL_L3_A1_CHECKER_CONTRACT.md"),
+    ("release_contract", "research/route_a_wave_trace/R401_VAL_L3_A1_RELEASE_PROVENANCE_CONTRACT.md"),
+    ("machine_freeze", "research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json"),
+    ("prefreeze_tests", "research/route_a_wave_trace/R401_VAL_L3_A1_PREFREEZE_TESTS.json"),
+    ("prefreeze_review", "research/route_a_wave_trace/R401_VAL_L3_A1_PREFREEZE_REVIEW.md"),
+    ("s0_compatibility", "research/route_a_wave_trace/R401_VAL_L3_A1_S0_COMPATIBILITY_REPLAY.json"),
+    ("capd_dependency", "validated/CAPD_DEPENDENCY.md"),
+    ("static_evaluator", "scripts/evaluate_r401_val_l3_a1_static_cell.py"),
+    ("branch_evaluator_source", "validated/capd_r401_phase_branch_tube_mp_a1.cpp"),
+    ("branch_evaluator_binary", "validated/bin/capd_r401_phase_branch_tube_mp_a1"),
+    ("branch_runtime", "scripts/r401_val_l3_a1_branch_runtime.py"),
+    ("scheduler", "scripts/run_r401_val_l3_a1_all_slabs.py"),
+    ("static_checker_source", "scripts/check_r401_val_l3_a1_static_independent.py"),
+    ("branch_checker_source", "scripts/check_r401_val_l3_a1_branch_independent.py"),
+    ("composite_checker_source", "scripts/check_r401_val_l3_a1_composite_independent.py"),
+    ("s0_adapter", "scripts/replay_r401_val_l3_s0_through_a1_checkers.py"),
+    ("release_builder", "scripts/build_r401_val_l3_a1_release_provenance.py"),
+    ("test_static_evaluator", "tests/test_r401_val_l3_a1_static_cell.py"),
+    ("test_static_scheduler", "tests/test_r401_val_l3_a1_static_scheduler.py"),
+    ("test_static_checker", "tests/test_r401_val_l3_a1_static_checker.py"),
+    ("test_branch_scheduler", "tests/test_r401_val_l3_a1_branch_scheduler.py"),
+    ("test_branch_checker", "tests/test_r401_val_l3_a1_branch_checker.py"),
+    ("test_s0_compatibility", "tests/test_r401_val_l3_a1_s0_compatibility.py"),
+    ("test_composite", "tests/test_r401_val_l3_a1_composite_contract.py"),
+    ("test_adversarial", "tests/test_r401_val_l3_a1_adversarial_e2e.py"),
+    ("test_release", "tests/test_r401_val_l3_a1_release_provenance.py"),
+    ("l1_final_plan", "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json"),
+    ("l1_summary", "results/r401_val_l1_branch/summary.json"),
+    ("l1_manifest", "results/r401_val_l1_branch/manifest.json"),
+    ("l1_checker", "results/r401_val_l1_branch/independent_checker.json"),
+    ("l1_postcheck", "results/r401_val_l1_branch/POSTCHECK_STATUS.json"),
+    ("l1_release", "results/r401_val_l1_branch/RELEASE_PROVENANCE.json"),
+    ("a415_summary", "results/r401_val_l2_all_slabs/aggregate_summary.json"),
+    ("a415_manifest", "results/r401_val_l2_all_slabs/aggregate_manifest.json"),
+    ("a415_checker", "results/r401_val_l2_all_slabs/independent_checker.json"),
+    ("a415_postcheck", "results/r401_val_l2_all_slabs/POSTCHECK_STATUS.json"),
+    ("a415_release", "results/r401_val_l2_all_slabs/RELEASE_PROVENANCE.json"),
+    ("s0_static_summary", "results/r401_val_l3_phase_tube_smoke/summary.json"),
+    ("s0_static_manifest", "results/r401_val_l3_phase_tube_smoke/manifest.json"),
+    ("s0_static_checker", "results/r401_val_l3_phase_tube_smoke/independent_checker.json"),
+    ("s0_branch_summary", "results/r401_val_l3_branch_tube_smoke/summary.json"),
+    ("s0_branch_manifest", "results/r401_val_l3_branch_tube_smoke/manifest.json"),
+    ("s0_branch_checker", "results/r401_val_l3_branch_tube_smoke/independent_checker.json"),
+    ("s0_composite_summary", "results/r401_val_l3_s0_composite/summary.json"),
+    ("s0_composite_manifest", "results/r401_val_l3_s0_composite/manifest.json"),
+    ("s0_composite_checker", "results/r401_val_l3_s0_composite/independent_checker.json"),
+)
+
+FORMAL_MAIN_FREEZE_REQUIRED_KEYS = frozenset(
+    {
+        "schema_version",
+        "protocol_id",
+        "artifact_role",
+        "status",
+        "authority",
+        "scientific_licensing_enabled",
+        "matrix",
+        "matrix_id",
+        "machine_freeze_sha256",
+        "input_roles",
+        "claim_boundary",
+        "component_status",
+        "milestone_status",
+        "theorem_status",
+        "final_status",
+    }
+)
+
 
 def _load_branch_runtime() -> Any:
     """Load the import-only runtime under one stable module identity."""
@@ -110,7 +200,63 @@ def _load_branch_runtime() -> Any:
     return module
 
 
-BRANCH_RUNTIME = _load_branch_runtime()
+_BRANCH_RUNTIME_MODULE: Any | None = None
+_FORMAL_BRANCH_RUNTIME_MODULES: dict[str, Any] = {}
+
+
+def _branch_runtime() -> Any:
+    global _BRANCH_RUNTIME_MODULE
+    if _BRANCH_RUNTIME_MODULE is None:
+        _BRANCH_RUNTIME_MODULE = _load_branch_runtime()
+    return _BRANCH_RUNTIME_MODULE
+
+
+def _formal_runtime_module_name(raw_sha256: str) -> str:
+    if type(raw_sha256) is not str or HEX_SHA256.fullmatch(raw_sha256) is None:
+        raise ProductionAuthorityError("formal runtime SHA-256 is malformed")
+    return f"r401_val_l3_a1_branch_runtime_formal_{raw_sha256}"
+
+
+def _load_formal_branch_runtime(record: "FormalRoleRecord") -> Any:
+    """Compile the cross-bound captured runtime bytes without reopening a path."""
+
+    if record.role != "branch_runtime" or sha256_bytes(record.raw) != record.sha256:
+        raise ProductionAuthorityError("captured formal runtime hash binding mismatch")
+    name = _formal_runtime_module_name(record.sha256)
+    existing = sys.modules.get(name)
+    if existing is not None:
+        if getattr(existing, "__formal_runtime_sha256__", None) != record.sha256:
+            raise ProductionAuthorityError("pre-cached formal runtime lacks exact SHA binding")
+        cached = _FORMAL_BRANCH_RUNTIME_MODULES.get(record.sha256)
+        if cached is not existing:
+            raise ProductionAuthorityError("formal runtime cache identity mismatch")
+        return existing
+    if record.sha256 in _FORMAL_BRANCH_RUNTIME_MODULES:
+        raise ProductionAuthorityError("formal runtime cache lost its module identity")
+    try:
+        source = record.raw.decode("utf-8")
+    except UnicodeError as error:
+        raise ProductionAuthorityError("captured formal runtime is not UTF-8") from error
+    origin = str(BRANCH_RUNTIME_PATH)
+    module = types.ModuleType(name)
+    module.__file__ = origin
+    module.__package__ = ""
+    module.__loader__ = None
+    module.__spec__ = importlib.util.spec_from_loader(name, loader=None, origin=origin)
+    module.__formal_runtime_sha256__ = record.sha256
+    sys.modules[name] = module
+    try:
+        exec(compile(source, origin, "exec", dont_inherit=True), module.__dict__)
+    except BaseException:
+        if sys.modules.get(name) is module:
+            del sys.modules[name]
+        raise
+    if module.__file__ != origin or getattr(module, "__formal_runtime_sha256__", None) != record.sha256:
+        if sys.modules.get(name) is module:
+            del sys.modules[name]
+        raise ProductionAuthorityError("formal runtime mutated fixed origin/hash metadata")
+    _FORMAL_BRANCH_RUNTIME_MODULES[record.sha256] = module
+    return module
 
 
 class SchedulerContractError(RuntimeError):
@@ -143,6 +289,130 @@ class SyntheticCrash(RuntimeError):
 
 class SyntheticQuarantineCrash(RuntimeError):
     """Test-only crash injected at a durable quarantine boundary."""
+
+
+@dataclass(frozen=True)
+class FormalRoleRecord:
+    role: str
+    path: str
+    sha256: str
+    raw: bytes
+    stat_identity: tuple[int, int, int, int, int]
+
+    def payload(self) -> dict[str, str]:
+        return {"role": self.role, "path": self.path, "sha256": self.sha256}
+
+
+@dataclass(frozen=True)
+class FormalAuthoritySnapshot:
+    """One pinned, non-dispatching image of the prospective formal authority.
+
+    The exact schemas of the future machine and main freezes are not yet
+    contractual.  Consequently this object proves only the required semantic
+    envelope and exact ordered 53-role hash handshake.  It never represents
+    execution authorization.
+    """
+
+    authority_root: Path
+    main_freeze_path: Path
+    main_freeze_sha256: str
+    machine_freeze_path: Path
+    machine_freeze_sha256: str
+    prefreeze_review_path: Path
+    prefreeze_review_sha256: str
+    input_roles: tuple[FormalRoleRecord, ...]
+    main_freeze_raw: bytes
+    main_freeze_stat_identity: tuple[int, int, int, int, int]
+    machine_freeze_raw: bytes
+
+
+@dataclass(frozen=True)
+class FormalStaticTransactionPlan:
+    """Pure formal static transaction description; it cannot execute."""
+
+    cell: "CellKey"
+    evaluator_path: Path
+    evaluator_sha256: str
+    proof_path: Path
+    stdout_path: Path
+    stderr_path: Path
+    record_path: Path
+    argv: tuple[str, ...]
+    semantic_argv: tuple[str, ...]
+    semantic_argv_sha256: str
+    freeze_sha256: str
+    main_freeze_sha256: str
+    run_config_sha256: str
+
+    def validate(self) -> None:
+        if self.freeze_sha256 != self.main_freeze_sha256:
+            raise ProductionAuthorityError(
+                "static freeze_sha256/main_freeze_sha256 mismatch"
+            )
+        for value in (
+            self.evaluator_sha256,
+            self.freeze_sha256,
+            self.main_freeze_sha256,
+            self.run_config_sha256,
+        ):
+            if type(value) is not str or HEX_SHA256.fullmatch(value) is None:
+                raise ProductionAuthorityError("static transaction hash is malformed")
+        if len(self.argv) != 26 or not all(type(item) is str for item in self.argv):
+            raise SchedulerContractError("static process argv must be exactly 26 strings")
+        if self.argv[0] != sys.executable or self.argv[1] != str(self.evaluator_path):
+            raise SchedulerContractError("static interpreter/evaluator argv binding mismatch")
+        evaluator_raw, _ = read_pinned_regular_file(self.evaluator_path)
+        if sha256_bytes(evaluator_raw) != self.evaluator_sha256:
+            raise ProductionAuthorityError("static evaluator changed after plan construction")
+        if len(self.semantic_argv) != 26 or not all(
+            type(item) is str for item in self.semantic_argv
+        ):
+            raise SchedulerContractError("static semantic argv must be exactly 26 strings")
+        if self.argv[-1] != str(self.proof_path):
+            raise SchedulerContractError("static evaluator output is not the planned proof")
+        if (
+            self.argv[:-1] != self.semantic_argv[:-1]
+            or self.semantic_argv[-1] != "<STAGING_PROOF_PATH>"
+            or self.semantic_argv_sha256
+            != sha256_bytes(canonical_json_bytes(list(self.semantic_argv)))
+        ):
+            raise SchedulerContractError("static semantic invocation binding mismatch")
+        if tuple(path.name for path in (
+            self.proof_path, self.stdout_path, self.stderr_path, self.record_path
+        )) != ("proof.json", "stdout.txt", "stderr.txt", "record.json"):
+            raise SchedulerContractError("formal static provisional archive shape mismatch")
+
+
+@dataclass(frozen=True)
+class FormalBranchTransactionPlan:
+    """Pure formal branch transaction description; it cannot execute."""
+
+    task: Any
+    evaluator_source_path: Path
+    evaluator_source_sha256: str
+    evaluator_binary_path: Path
+    evaluator_binary_sha256: str
+    freeze_sha256: str
+    main_freeze_sha256: str
+    run_config_sha256: str
+
+    def validate(self) -> None:
+        if self.freeze_sha256 != self.main_freeze_sha256:
+            raise ProductionAuthorityError(
+                "branch freeze_sha256/main_freeze_sha256 mismatch"
+            )
+        for value in (
+            self.evaluator_source_sha256,
+            self.evaluator_binary_sha256,
+            self.freeze_sha256,
+            self.main_freeze_sha256,
+            self.run_config_sha256,
+        ):
+            if type(value) is not str or HEX_SHA256.fullmatch(value) is None:
+                raise ProductionAuthorityError("branch transaction hash is malformed")
+        self.task.validate()
+        if self.task.evaluator_binary_path != str(self.evaluator_binary_path):
+            raise ProductionAuthorityError("branch task binary path is not frozen")
 
 
 @dataclass(frozen=True, order=True)
@@ -642,6 +912,10 @@ def exclusive_write_json(path: Path, payload: Any) -> None:
 
 def load_plan(path: Path = PLAN) -> dict[str, Mapping[str, Any]]:
     payload = strict_json_load(path, reject_hardlink=False)
+    return validate_plan_payload(payload)
+
+
+def validate_plan_payload(payload: Any) -> dict[str, Mapping[str, Any]]:
     if type(payload) is not dict or type(payload.get("slabs")) is not list:
         raise StrictJSONError("L1 plan must contain a slabs array")
     if payload.get("slab_count") != 51 or type(payload.get("slab_count")) is not int:
@@ -852,37 +1126,552 @@ def ensure_run_config(
     return dict(stored), sha256_bytes(raw)
 
 
-def validate_prefreeze_review(path: Path) -> None:
-    require_regular_file(path)
-    declarations = [
-        line.strip()
-        for line in path.read_text(encoding="utf-8").splitlines()
-        if line.strip().startswith("Verdict:")
-    ]
-    if declarations != [PREFREEZE_ACCEPT_LINE]:
-        raise ProductionAuthorityError("pre-freeze review is not the sole exact ACCEPT verdict")
+FORMAL_PREFLIGHT_RUN_CONFIG_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "artifact_status",
+    "authority",
+    "preflight_only",
+    "promotable",
+    "mock_only",
+    "production_authorized",
+    "scientific_licensing_enabled",
+    "matrix",
+    "matrix_id",
+    "paths",
+    "filesystem",
+    "freeze_sha256",
+    "main_freeze_sha256",
+    "main_freeze",
+    "machine_freeze",
+    "prefreeze_review",
+    "input_roles",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
 
 
-def validate_production_authority() -> None:
-    # Fail before touching any output path.  A future implementation will
-    # tighten the complete 53-role freeze schema; this framework cannot turn a
-    # nominal file into dispatch authority.
-    for path, label in (
-        (MACHINE_FREEZE, "machine freeze"),
-        (MAIN_FREEZE, "main freeze"),
-        (PREFREEZE_REVIEW, "pre-freeze review"),
+def ensure_formal_preflight_output_allowed(
+    output: Path | str, authority_root: Path | str
+) -> Path:
+    candidate = safe_absolute_path(os.fspath(output), "preflight output")
+    root = safe_absolute_path(os.fspath(authority_root), "authority root")
+    reject_symlink_components(candidate, allow_missing_leaf=True)
+    if (
+        is_within(candidate, CANONICAL_RESULT)
+        or is_within(candidate, CANONICAL_OPERATIONAL)
+        or candidate in {CANONICAL_RESULT.absolute(), CANONICAL_OPERATIONAL.absolute()}
     ):
-        if not path.exists():
-            raise ProductionAuthorityError(f"{label} is absent; production rejected")
-        require_regular_file(path)
-    main = strict_json_load(MAIN_FREEZE)
-    if type(main) is not dict or main.get("status") != "FROZEN_FOR_PRODUCTION":
-        raise ProductionAuthorityError("main freeze status is not accepted")
-    if main.get("scientific_licensing_enabled") is not True:
-        raise ProductionAuthorityError("main freeze does not enable licensing")
-    validate_prefreeze_review(PREFREEZE_REVIEW)
+        raise PathContractError("formal preflight cannot use canonical production namespace")
+    authority_canonical = root / "results/r401_val_l3_all_slabs"
+    authority_operational = root / "results/r401_val_l3_all_slabs.operational"
+    if is_within(candidate, authority_canonical) or is_within(
+        candidate, authority_operational
+    ):
+        raise PathContractError("formal preflight cannot use authority production namespace")
+    if is_within(candidate, root) or is_within(root, candidate):
+        raise PathContractError("formal preflight output must not overlap authority inputs")
+    return candidate
+
+
+def build_formal_preflight_binding(
+    snapshot: FormalAuthoritySnapshot, output: Path | str
+) -> dict[str, Any]:
+    _validate_formal_main_envelope(
+        strict_json_loads(snapshot.main_freeze_raw.decode("utf-8")),
+        snapshot.input_roles,
+        snapshot.machine_freeze_sha256,
+    )
+    output = ensure_formal_preflight_output_allowed(output, snapshot.authority_root)
+    device_id = nearest_existing_parent(output).stat().st_dev
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "artifact_role": "FORMAL_PREFLIGHT_RUN_CONFIG_CANDIDATE",
+        "artifact_status": "FORMAL_PREFLIGHT_ONLY",
+        "authority": "IMPLEMENTATION_PREFLIGHT_ONLY",
+        "preflight_only": True,
+        "promotable": False,
+        "mock_only": False,
+        "production_authorized": False,
+        "scientific_licensing_enabled": False,
+        "matrix": matrix_payload(),
+        "matrix_id": canonical_matrix_id(),
+        "paths": {
+            "authority_root": str(snapshot.authority_root),
+            "authoritative_root": str(output),
+            "operational_root": None,
+        },
+        "filesystem": {"authoritative_parent_device_id": device_id},
+        "freeze_sha256": snapshot.main_freeze_sha256,
+        "main_freeze_sha256": snapshot.main_freeze_sha256,
+        "main_freeze": {
+            "path": str(snapshot.main_freeze_path),
+            "sha256": snapshot.main_freeze_sha256,
+        },
+        "machine_freeze": {
+            "path": str(snapshot.machine_freeze_path),
+            "sha256": snapshot.machine_freeze_sha256,
+        },
+        "prefreeze_review": {
+            "path": str(snapshot.prefreeze_review_path),
+            "sha256": snapshot.prefreeze_review_sha256,
+            "accepted": True,
+        },
+        "input_roles": [item.payload() for item in snapshot.input_roles],
+        "claim_boundary": FORMAL_PREFLIGHT_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+
+
+def validate_formal_preflight_binding(
+    binding: Any,
+    snapshot: FormalAuthoritySnapshot,
+    output: Path,
+) -> dict[str, Any]:
+    exact_keys(binding, FORMAL_PREFLIGHT_RUN_CONFIG_KEYS, "formal preflight binding")
+    exact_int(binding["schema_version"], "preflight schema", minimum=1)
+    if binding["schema_version"] != SCHEMA_VERSION or binding["protocol_id"] != PROTOCOL_ID:
+        raise StrictJSONError("formal preflight identity mismatch")
+    if (
+        binding["artifact_role"] != "FORMAL_PREFLIGHT_RUN_CONFIG_CANDIDATE"
+        or binding["artifact_status"] != "FORMAL_PREFLIGHT_ONLY"
+        or binding["authority"] != "IMPLEMENTATION_PREFLIGHT_ONLY"
+    ):
+        raise ProductionAuthorityError("formal preflight status mismatch")
+    for key, expected in {
+        "preflight_only": True,
+        "promotable": False,
+        "mock_only": False,
+        "production_authorized": False,
+        "scientific_licensing_enabled": False,
+    }.items():
+        if binding[key] is not expected:
+            raise ProductionAuthorityError(f"formal preflight {key} mismatch")
+    if binding["freeze_sha256"] != binding["main_freeze_sha256"]:
+        raise ProductionAuthorityError("freeze_sha256/main_freeze_sha256 mismatch")
+    if binding["main_freeze_sha256"] != snapshot.main_freeze_sha256:
+        raise ProductionAuthorityError("preflight/main-freeze hash mismatch")
+    if not exact_json_equal(binding["matrix"], matrix_payload()) or binding[
+        "matrix_id"
+    ] != canonical_matrix_id():
+        raise ProductionAuthorityError("preflight matrix mismatch")
+    expected = build_formal_preflight_binding(snapshot, output)
+    if not exact_json_equal(binding, expected):
+        raise RunBindingMismatch("formal preflight binding differs from authority snapshot")
+    for key in ("component_status", "milestone_status", "theorem_status", "final_status"):
+        if binding[key] is not None:
+            raise ProductionAuthorityError(f"formal preflight overclaims {key}")
+    return dict(binding)
+
+
+def initialize_formal_preflight(
+    snapshot: FormalAuthoritySnapshot,
+    output: Path | str,
+    *,
+    _fail_at: str | None = None,
+) -> tuple[dict[str, Any], str]:
+    """Write one non-resumable preflight candidate and nothing else."""
+
+    revalidate_formal_snapshot(snapshot)
+    output = ensure_formal_preflight_output_allowed(output, snapshot.authority_root)
+    if output.exists():
+        raise RunBindingMismatch(
+            "formal preflight output already exists and cannot be resumed or promoted"
+        )
+    binding = build_formal_preflight_binding(snapshot, output)
+    validate_formal_preflight_binding(binding, snapshot, output)
+    raw = canonical_json_bytes(binding)
+    ensure_real_directory_tree(output.parent)
+    parent_fd = _open_directory_fd(output.parent)
+    temp_fd: int | None = None
+    temp_name: str | None = None
+    temp_identity: tuple[int, int] | None = None
+    published = False
+    try:
+        for attempt in range(64):
+            candidate = (
+                f".{output.name}.formal-preflight-"
+                f"{sha256_bytes(raw)[:16]}-{attempt}"
+            )
+            try:
+                os.mkdir(candidate, 0o755, dir_fd=parent_fd)
+            except FileExistsError:
+                continue
+            temp_name = candidate
+            break
+        if temp_name is None:
+            raise PathContractError("formal preflight staging namespace exhausted")
+        temp_fd = os.open(
+            temp_name,
+            os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0),
+            dir_fd=parent_fd,
+        )
+        temp_info = os.fstat(temp_fd)
+        temp_identity = (temp_info.st_dev, temp_info.st_ino)
+        if _fail_at == "AFTER_STAGE_DIR":
+            raise SyntheticCrash("formal preflight crash after staging directory")
+        config_fd = os.open(
+            "run_config.json",
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0),
+            0o644,
+            dir_fd=temp_fd,
+        )
+        try:
+            view = memoryview(raw)
+            while view:
+                written = os.write(config_fd, view)
+                if written <= 0:
+                    raise OSError("short formal preflight write")
+                view = view[written:]
+            os.fsync(config_fd)
+            info = os.fstat(config_fd)
+            if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size != len(raw):
+                raise PathContractError("formal preflight staged config mismatch")
+        finally:
+            os.close(config_fd)
+        os.fsync(temp_fd)
+        if _fail_at in {"AFTER_CONFIG_FSYNC", "BEFORE_RENAME"}:
+            raise SyntheticCrash("formal preflight crash before publication")
+        libc = ctypes.CDLL(None, use_errno=True)
+        renameat2 = getattr(libc, "renameat2", None)
+        if renameat2 is None:
+            raise PathContractError("renameat2(RENAME_NOREPLACE) is unavailable")
+        renameat2.argtypes = [
+            ctypes.c_int,
+            ctypes.c_char_p,
+            ctypes.c_int,
+            ctypes.c_char_p,
+            ctypes.c_uint,
+        ]
+        renameat2.restype = ctypes.c_int
+        if renameat2(
+            parent_fd,
+            os.fsencode(temp_name),
+            parent_fd,
+            os.fsencode(output.name),
+            1,
+        ) != 0:
+            number = ctypes.get_errno()
+            if number == errno.EEXIST:
+                raise RunBindingMismatch("formal preflight output appeared before publication")
+            raise PathContractError(
+                f"formal preflight no-replace publication failed: {os.strerror(number)}"
+            )
+        destination = os.stat(output.name, dir_fd=parent_fd, follow_symlinks=False)
+        if not stat.S_ISDIR(destination.st_mode) or (
+            destination.st_dev,
+            destination.st_ino,
+        ) != temp_identity:
+            raise PathContractError("formal preflight published inode mismatch")
+        os.fsync(parent_fd)
+        published = True
+        return dict(binding), sha256_bytes(raw)
+    finally:
+        if temp_fd is not None:
+            if not published and temp_name is not None and temp_identity is not None:
+                try:
+                    current = os.stat(temp_name, dir_fd=parent_fd, follow_symlinks=False)
+                    if (current.st_dev, current.st_ino) == temp_identity:
+                        try:
+                            os.unlink("run_config.json", dir_fd=temp_fd)
+                        except FileNotFoundError:
+                            pass
+                        os.fsync(temp_fd)
+                        os.rmdir(temp_name, dir_fd=parent_fd)
+                        os.fsync(parent_fd)
+                except FileNotFoundError:
+                    pass
+            os.close(temp_fd)
+        elif not published and temp_name is not None:
+            try:
+                current = os.stat(temp_name, dir_fd=parent_fd, follow_symlinks=False)
+                if temp_identity is None or (
+                    current.st_dev,
+                    current.st_ino,
+                ) == temp_identity:
+                    os.rmdir(temp_name, dir_fd=parent_fd)
+                    os.fsync(parent_fd)
+            except FileNotFoundError:
+                pass
+        os.close(parent_fd)
+
+
+def authority_project_file(authority_root: Path | str, relative: str) -> Path:
+    """Return one lexical project file without resolving path aliases."""
+
+    root = safe_absolute_path(os.fspath(authority_root), "authority root")
+    relative_path = safe_relative_path(relative)
+    candidate = root.joinpath(*relative_path.parts)
+    if not is_within(candidate, root):
+        raise PathContractError("formal role escapes the authority root")
+    return candidate
+
+
+def formal_role_binding(
+    authority_root: Path, role: str, relative: str
+) -> tuple[FormalRoleRecord, bytes]:
+    if type(role) is not str or not role:
+        raise ProductionAuthorityError("formal input role name is malformed")
+    path = authority_project_file(authority_root, relative)
+    raw, info = read_pinned_regular_file(path)
+    if relative.endswith(".json"):
+        try:
+            strict_json_loads(raw.decode("utf-8"))
+        except UnicodeError as error:
+            raise StrictJSONError(f"non-UTF8 formal JSON input: {relative}") from error
+    return FormalRoleRecord(
+        role=role,
+        path=relative,
+        sha256=sha256_bytes(raw),
+        raw=raw,
+        stat_identity=(
+            info.st_dev,
+            info.st_ino,
+            info.st_size,
+            info.st_mtime_ns,
+            info.st_ctime_ns,
+        ),
+    ), raw
+
+
+def capture_formal_input_roles(
+    authority_root: Path,
+) -> tuple[tuple[FormalRoleRecord, ...], dict[str, bytes]]:
+    root = safe_absolute_path(os.fspath(authority_root), "authority root")
+    require_directory(root)
+    if len(FORMAL_INPUT_ROLES) != 53:
+        raise ProductionAuthorityError("formal input role table is not exactly 53 roles")
+    if len({role for role, _ in FORMAL_INPUT_ROLES}) != 53:
+        raise ProductionAuthorityError("duplicate formal input role")
+    if len({relative for _, relative in FORMAL_INPUT_ROLES}) != 53:
+        raise ProductionAuthorityError("duplicate formal input path")
+    bindings: list[FormalRoleRecord] = []
+    images: dict[str, bytes] = {}
+    for role, relative in FORMAL_INPUT_ROLES:
+        binding, raw = formal_role_binding(root, role, relative)
+        bindings.append(binding)
+        images[role] = raw
+    return tuple(bindings), images
+
+
+def markdown_has_verdict_declaration(line: str) -> bool:
+    """Detect any case-insensitive standalone Verdict token in one line."""
+
+    return re.search(
+        r"(?<![A-Za-z0-9_])Verdict(?![A-Za-z0-9_])", line, re.IGNORECASE
+    ) is not None
+
+
+def validate_prefreeze_review(path: Path) -> str:
+    """Require one lexical, undecorated ACCEPT declaration in pinned bytes."""
+
+    raw, _ = read_pinned_regular_file(path)
+    try:
+        text = raw.decode("ascii")
+    except UnicodeError as error:
+        raise ProductionAuthorityError("pre-freeze review must be strict ASCII") from error
+    # In an authority-bearing review there is no need for entity syntax.
+    # Reject the introducer itself, rather than attempting to emulate every
+    # browser rule for optional semicolons, leading zeroes, nested decoding,
+    # or ambiguous hexadecimal termination.
+    if "&" in text:
+        raise ProductionAuthorityError("pre-freeze review contains forbidden entity syntax")
+    lines = text.splitlines()
+    declarations = [line for line in lines if markdown_has_verdict_declaration(line)]
+    if declarations != [PREFREEZE_ACCEPT_LINE]:
+        raise ProductionAuthorityError(
+            "pre-freeze review is not the sole exact ACCEPT verdict"
+        )
+    return sha256_bytes(raw)
+
+
+def _validate_formal_machine_envelope(machine: Any) -> dict[str, Any]:
+    """Validate only fields whose formal meaning is already unambiguous."""
+
+    if type(machine) is not dict:
+        raise ProductionAuthorityError("machine freeze must be a JSON object")
+    exact_int(machine.get("schema_version"), "machine-freeze schema", minimum=1)
+    if machine["schema_version"] != SCHEMA_VERSION:
+        raise ProductionAuthorityError("machine-freeze schema version mismatch")
+    if machine.get("protocol_id") != PROTOCOL_ID:
+        raise ProductionAuthorityError("machine-freeze protocol mismatch")
+    if machine.get("artifact_role") != "MACHINE_FREEZE":
+        raise ProductionAuthorityError("machine-freeze role mismatch")
+    if machine.get("status") != "FROZEN_FOR_PRODUCTION":
+        raise ProductionAuthorityError("machine-freeze status is not accepted")
+    if machine.get("scientific_licensing_enabled") is not True:
+        raise ProductionAuthorityError("machine freeze does not enable licensing")
+    for key in ("component_status", "milestone_status", "theorem_status", "final_status"):
+        if key in machine and machine[key] is not None:
+            raise ProductionAuthorityError(f"machine freeze overclaims {key}")
+    return dict(machine)
+
+
+def _validate_formal_main_envelope(
+    main: Any,
+    input_roles: Sequence[FormalRoleRecord],
+    machine_sha256: str,
+) -> dict[str, Any]:
+    """Validate the provisional required main-freeze semantic envelope.
+
+    The formal contracts currently say "at least" and do not freeze the full
+    top-level key set.  Unknown keys therefore cannot be licensed here; they
+    are retained but provide no authority.  Required keys and all nested role
+    objects are type-strict.
+    """
+
+    if type(main) is not dict or not FORMAL_MAIN_FREEZE_REQUIRED_KEYS.issubset(main):
+        raise ProductionAuthorityError("main freeze required-key envelope mismatch")
+    for forbidden in ("sha256", "freeze_sha256", "main_freeze_sha256"):
+        if forbidden in main:
+            raise ProductionAuthorityError("main freeze must not contain a self hash")
+    exact_int(main["schema_version"], "main-freeze schema", minimum=1)
+    if main["schema_version"] != SCHEMA_VERSION:
+        raise ProductionAuthorityError("main-freeze schema version mismatch")
+    if main["protocol_id"] != PROTOCOL_ID or main["artifact_role"] != "MAIN_FREEZE":
+        raise ProductionAuthorityError("main-freeze identity mismatch")
+    if (
+        main["status"] != "FROZEN_FOR_PRODUCTION"
+        or main["authority"] != "INDEPENDENT_PREFREEZE_REVIEW"
+        or main["scientific_licensing_enabled"] is not True
+    ):
+        raise ProductionAuthorityError("main freeze has no accepted formal authority")
+    if main["matrix_id"] != canonical_matrix_id() or not exact_json_equal(
+        main["matrix"], matrix_payload()
+    ):
+        raise ProductionAuthorityError("main-freeze matrix mismatch")
+    if main["machine_freeze_sha256"] != machine_sha256:
+        raise ProductionAuthorityError("main/machine freeze hash mismatch")
+    expected_roles = [item.payload() for item in input_roles]
+    if not exact_json_equal(main["input_roles"], expected_roles):
+        raise ProductionAuthorityError("main freeze ordered 53-role handshake mismatch")
+    for item in main["input_roles"]:
+        exact_keys(item, {"role", "path", "sha256"}, "formal input role")
+        safe_relative_path(item["path"])
+        if type(item["role"]) is not str or not item["role"]:
+            raise ProductionAuthorityError("formal input role name is malformed")
+        if type(item["sha256"]) is not str or HEX_SHA256.fullmatch(item["sha256"]) is None:
+            raise ProductionAuthorityError("formal input role hash is malformed")
+    for key in ("component_status", "milestone_status", "theorem_status", "final_status"):
+        if main[key] is not None:
+            raise ProductionAuthorityError(f"main freeze overclaims {key}")
+    return dict(main)
+
+
+def load_formal_authority(
+    authority_root: Path | str = ROOT,
+) -> FormalAuthoritySnapshot:
+    """Capture and replay a prospective authority without authorizing dispatch."""
+
+    root = safe_absolute_path(os.fspath(authority_root), "authority root")
+    require_directory(root)
+    bindings, images = capture_formal_input_roles(root)
+    roles = {item.role: item for item in bindings}
+
+    # Executable code cannot validate a different frozen scheduler/runtime than
+    # the bytes it is actually using, even in a preflight-only handshake.
+    live_bindings = {
+        "scheduler": SCRIPT,
+        "branch_runtime": BRANCH_RUNTIME_PATH,
+    }
+    for role, live_path in live_bindings.items():
+        if roles[role].sha256 != sha256(live_path):
+            raise ProductionAuthorityError(f"live {role} bytes differ from frozen role")
+
+    machine_binding = roles["machine_freeze"]
+    try:
+        machine_payload = strict_json_loads(images["machine_freeze"].decode("utf-8"))
+    except UnicodeError as error:
+        raise StrictJSONError("machine freeze is not UTF-8") from error
+    if images["machine_freeze"] != canonical_json_bytes(machine_payload):
+        raise StrictJSONError("machine freeze is not canonical JSON")
+    machine = _validate_formal_machine_envelope(machine_payload)
+
+    review_path = authority_project_file(root, dict(FORMAL_INPUT_ROLES)["prefreeze_review"])
+    review_sha256 = validate_prefreeze_review(review_path)
+    if review_sha256 != roles["prefreeze_review"].sha256:
+        raise ProductionAuthorityError("pre-freeze review changed during authority capture")
+
+    main_path = authority_project_file(
+        root, "research/route_a_wave_trace/R401_VAL_L3_A1_FREEZE.json"
+    )
+    main_payload, main_raw, main_info = strict_json_image(
+        main_path, require_canonical=True
+    )
+    main = _validate_formal_main_envelope(
+        main_payload, bindings, machine_binding.sha256
+    )
+    main_sha256 = sha256_bytes(main_raw)
+
+    # End-of-handshake replay closes the interval in which any role or main
+    # freeze could otherwise be swapped after its semantic parse.
+    replay_bindings, _ = capture_formal_input_roles(root)
+    if replay_bindings != bindings:
+        raise ProductionAuthorityError("formal input changed during authority handshake")
+    replay_main, replay_raw, replay_info = strict_json_image(
+        main_path, require_canonical=True
+    )
+    if (
+        not exact_json_equal(replay_main, main)
+        or replay_raw != main_raw
+        or (
+            replay_info.st_dev,
+            replay_info.st_ino,
+            replay_info.st_size,
+            replay_info.st_mtime_ns,
+            replay_info.st_ctime_ns,
+        )
+        != (
+            main_info.st_dev,
+            main_info.st_ino,
+            main_info.st_size,
+            main_info.st_mtime_ns,
+            main_info.st_ctime_ns,
+        )
+    ):
+        raise ProductionAuthorityError("main freeze changed during authority handshake")
+    return FormalAuthoritySnapshot(
+        authority_root=root,
+        main_freeze_path=main_path,
+        main_freeze_sha256=main_sha256,
+        machine_freeze_path=authority_project_file(
+            root, dict(FORMAL_INPUT_ROLES)["machine_freeze"]
+        ),
+        machine_freeze_sha256=machine_binding.sha256,
+        prefreeze_review_path=review_path,
+        prefreeze_review_sha256=review_sha256,
+        input_roles=bindings,
+        main_freeze_raw=main_raw,
+        main_freeze_stat_identity=(
+            main_info.st_dev,
+            main_info.st_ino,
+            main_info.st_size,
+            main_info.st_mtime_ns,
+            main_info.st_ctime_ns,
+        ),
+        machine_freeze_raw=images["machine_freeze"],
+    )
+
+
+def validate_production_authority(authority_root: Path = ROOT) -> None:
+    """Compatibility gate: validate if possible, then always reject execution."""
+
+    try:
+        load_formal_authority(authority_root)
+    except (FileNotFoundError, PathContractError) as error:
+        raise ProductionAuthorityError(
+            f"formal authority is absent or unsafe; production rejected: {error}"
+        ) from error
     raise ProductionAuthorityError(
-        "production dispatcher is intentionally unimplemented in this framework"
+        "formal scientific dispatch is unconditionally disabled pending finalized contracts"
     )
 
 
@@ -1552,10 +2341,18 @@ def exact_primary_root_box(plan_record: Mapping[str, Any]) -> tuple[tuple[str, s
     return tuple(box)
 
 
-def accepted_l1_primary_records() -> dict[tuple[int, str], Mapping[str, Any]]:
+def accepted_l1_primary_records(
+    path: Path = L1_ACCEPTED_SUMMARY,
+) -> dict[tuple[int, str], Mapping[str, Any]]:
     """Index the exact accepted L1 summary primary records."""
 
-    payload = strict_json_load(L1_ACCEPTED_SUMMARY, reject_hardlink=False)
+    payload = strict_json_load(path, reject_hardlink=False)
+    return accepted_l1_primary_records_payload(payload)
+
+
+def accepted_l1_primary_records_payload(
+    payload: Any,
+) -> dict[tuple[int, str], Mapping[str, Any]]:
     if type(payload) is not dict or type(payload.get("records")) is not list:
         raise StrictJSONError("accepted L1 summary lacks a records array")
     if payload.get("milestone_status") != "PASS_CONTIGUOUS_LOCAL_BRANCH":
@@ -1655,7 +2452,7 @@ def mock_branch_bindings(
     """Construct a visibly synthetic binding accepted by the hardened runtime."""
 
     exact_keys(mock_evaluator, {"path", "sha256"}, "mock evaluator binding")
-    return BRANCH_RUNTIME.BranchBindings(
+    return _branch_runtime().BranchBindings(
         matrix_id=matrix_id,
         freeze_sha256=sha256_bytes(
             b"R401-VAL-L3-A1 mock freeze absent sentinel\n"
@@ -1674,12 +2471,32 @@ def mock_branch_bindings(
     )
 
 
-def build_mock_branch_tasks(evaluator: Path) -> tuple[Any, ...]:
+def build_branch_tasks(
+    evaluator: Path,
+    *,
+    plan_path: Path = PLAN,
+    l1_summary_path: Path = L1_ACCEPTED_SUMMARY,
+) -> tuple[Any, ...]:
     """Build the exact 102 pre-outward branch tasks in protocol order."""
 
+    return build_branch_tasks_from_payloads(
+        evaluator,
+        strict_json_load(plan_path, reject_hardlink=False),
+        strict_json_load(l1_summary_path, reject_hardlink=False),
+    )
+
+
+def build_branch_tasks_from_payloads(
+    evaluator: Path,
+    plan_payload: Any,
+    l1_summary_payload: Any,
+    *,
+    runtime: Any | None = None,
+) -> tuple[Any, ...]:
     evaluator_path = str(evaluator.absolute())
-    plan = load_plan()
-    accepted = accepted_l1_primary_records()
+    plan = validate_plan_payload(plan_payload)
+    accepted = accepted_l1_primary_records_payload(l1_summary_payload)
+    runtime = _branch_runtime() if runtime is None else runtime
     tasks: list[Any] = []
     for cell in exact_matrix():
         plan_record = plan[cell.slab_id]
@@ -1691,7 +2508,7 @@ def build_mock_branch_tasks(evaluator: Path) -> tuple[Any, ...]:
         )
         if not all(type(value) is str for value in epsilon):
             raise StrictJSONError(f"plan epsilon is not lexical: {cell.label}")
-        task = BRANCH_RUNTIME.BranchCellTask(
+        task = runtime.BranchCellTask(
             precision_bits=cell.precision_bits,
             slab_id=cell.slab_id,
             epsilon=epsilon,
@@ -1714,6 +2531,330 @@ def build_mock_branch_tasks(evaluator: Path) -> tuple[Any, ...]:
                 f"cross-precision pre-outward domain mismatch: {slab_id}"
             )
     return tuple(tasks)
+
+
+def build_mock_branch_tasks(evaluator: Path) -> tuple[Any, ...]:
+    """Build the mock-bound task matrix without changing its accepted ABI."""
+
+    return build_branch_tasks(evaluator)
+
+
+def _formal_role(snapshot: FormalAuthoritySnapshot, role: str) -> FormalRoleRecord:
+    matches = [item for item in snapshot.input_roles if item.role == role]
+    if len(matches) != 1:
+        raise ProductionAuthorityError(f"formal role is not unique: {role}")
+    return matches[0]
+
+
+def _stat_identity(info: os.stat_result) -> tuple[int, int, int, int, int]:
+    return (
+        info.st_dev,
+        info.st_ino,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+    )
+
+
+def revalidate_formal_snapshot(
+    snapshot: FormalAuthoritySnapshot, roles: Sequence[str] = ()
+) -> None:
+    """Replay immutable main bytes and selected role inode identities."""
+
+    main = strict_json_loads(snapshot.main_freeze_raw.decode("utf-8"))
+    _validate_formal_main_envelope(
+        main, snapshot.input_roles, snapshot.machine_freeze_sha256
+    )
+    raw, info = read_pinned_regular_file(snapshot.main_freeze_path)
+    if raw != snapshot.main_freeze_raw or _stat_identity(info) != snapshot.main_freeze_stat_identity:
+        raise ProductionAuthorityError("main freeze inode/image changed after snapshot")
+    selected = tuple(roles) if roles else tuple(item.role for item in snapshot.input_roles)
+    if len(set(selected)) != len(selected):
+        raise ProductionAuthorityError("duplicate role in snapshot replay")
+    for role in selected:
+        record = _formal_role(snapshot, role)
+        path = authority_project_file(snapshot.authority_root, record.path)
+        current, current_info = read_pinned_regular_file(path)
+        if current != record.raw or _stat_identity(current_info) != record.stat_identity:
+            raise ProductionAuthorityError(f"formal role inode/image changed: {role}")
+
+
+def _validate_preflight_for_transaction(
+    snapshot: FormalAuthoritySnapshot,
+    binding: Mapping[str, Any],
+    run_config_sha256: str,
+    output: Path,
+) -> None:
+    validate_formal_preflight_binding(binding, snapshot, output)
+    expected_hash = sha256_bytes(canonical_json_bytes(binding))
+    if run_config_sha256 != expected_hash:
+        raise ProductionAuthorityError("formal transaction run-config hash mismatch")
+    if binding["freeze_sha256"] != snapshot.main_freeze_sha256:
+        raise ProductionAuthorityError("formal transaction freeze hash mismatch")
+
+
+def build_formal_static_transaction_plan(
+    snapshot: FormalAuthoritySnapshot,
+    binding: Mapping[str, Any],
+    run_config_sha256: str,
+    output: Path,
+    cell: CellKey,
+) -> FormalStaticTransactionPlan:
+    """Construct, but never execute, one provisional static transaction."""
+
+    output = ensure_formal_preflight_output_allowed(output, snapshot.authority_root)
+    _validate_preflight_for_transaction(snapshot, binding, run_config_sha256, output)
+    evaluator_role = _formal_role(snapshot, "static_evaluator")
+    plan_role = _formal_role(snapshot, "l1_final_plan")
+    revalidate_formal_snapshot(
+        snapshot, ("static_evaluator", "l1_final_plan")
+    )
+    evaluator_path = authority_project_file(snapshot.authority_root, evaluator_role.path)
+    if not evaluator_role.raw:
+        raise ProductionAuthorityError("formal static evaluator is empty")
+    try:
+        plan_payload = strict_json_loads(plan_role.raw.decode("utf-8"))
+    except UnicodeError as error:
+        raise StrictJSONError("captured L1 plan is not UTF-8") from error
+    plan_record = validate_plan_payload(plan_payload)[cell.slab_id]
+    plan_record_sha256 = sha256_bytes(canonical_json_bytes(plan_record))
+    stage = (
+        operational_root_for(output)
+        / "staging"
+        / "static"
+        / str(cell.precision_bits)
+        / staging_basename(cell, run_config_sha256)
+    )
+    proof_path = stage / "proof.json"
+    execution_argv = (
+        sys.executable,
+        str(evaluator_path),
+        "--slab-id",
+        cell.slab_id,
+        "--precision-bits",
+        str(cell.precision_bits),
+        "--epsilon-lower",
+        plan_record["epsilon_lower"],
+        "--epsilon-upper",
+        plan_record["epsilon_upper"],
+        "--matrix-id",
+        canonical_matrix_id(),
+        "--freeze-sha256",
+        snapshot.main_freeze_sha256,
+        "--run-config-sha256",
+        run_config_sha256,
+        "--plan-record-sha256",
+        plan_record_sha256,
+        "--max-depth",
+        str(candidate_limits()["static"]["max_depth_per_tree"]),
+        "--max-nodes-per-tree",
+        str(candidate_limits()["static"]["max_nodes_per_tree"]),
+        "--max-nodes-per-cell",
+        str(candidate_limits()["static"]["max_nodes_per_cell"]),
+        "--output",
+        str(proof_path),
+    )
+    semantic_argv = (*execution_argv[:-1], "<STAGING_PROOF_PATH>")
+    plan = FormalStaticTransactionPlan(
+        cell=cell,
+        evaluator_path=evaluator_path,
+        evaluator_sha256=evaluator_role.sha256,
+        proof_path=proof_path,
+        stdout_path=stage / "stdout.txt",
+        stderr_path=stage / "stderr.txt",
+        record_path=stage / "record.json",
+        argv=execution_argv,
+        semantic_argv=semantic_argv,
+        semantic_argv_sha256=sha256_bytes(canonical_json_bytes(list(semantic_argv))),
+        freeze_sha256=snapshot.main_freeze_sha256,
+        main_freeze_sha256=snapshot.main_freeze_sha256,
+        run_config_sha256=run_config_sha256,
+    )
+    plan.validate()
+    return plan
+
+
+def build_formal_branch_transaction_plan(
+    snapshot: FormalAuthoritySnapshot,
+    binding: Mapping[str, Any],
+    run_config_sha256: str,
+    output: Path,
+    cell: CellKey,
+) -> FormalBranchTransactionPlan:
+    """Construct, but never execute, one persistent-binary branch task."""
+
+    output = ensure_formal_preflight_output_allowed(output, snapshot.authority_root)
+    _validate_preflight_for_transaction(snapshot, binding, run_config_sha256, output)
+    source_role = _formal_role(snapshot, "branch_evaluator_source")
+    binary_role = _formal_role(snapshot, "branch_evaluator_binary")
+    plan_role = _formal_role(snapshot, "l1_final_plan")
+    summary_role = _formal_role(snapshot, "l1_summary")
+    runtime_role = _formal_role(snapshot, "branch_runtime")
+    revalidate_formal_snapshot(
+        snapshot,
+        (
+            "branch_runtime",
+            "branch_evaluator_source",
+            "branch_evaluator_binary",
+            "l1_final_plan",
+            "l1_summary",
+        ),
+    )
+    formal_runtime = _load_formal_branch_runtime(runtime_role)
+    source_path = authority_project_file(snapshot.authority_root, source_role.path)
+    binary_path = authority_project_file(snapshot.authority_root, binary_role.path)
+    binary_info = binary_path.stat()
+    if binary_info.st_mode & 0o111 == 0:
+        raise ProductionAuthorityError("formal branch persistent binary is not executable")
+    try:
+        plan_payload = strict_json_loads(plan_role.raw.decode("utf-8"))
+        summary_payload = strict_json_loads(summary_role.raw.decode("utf-8"))
+    except UnicodeError as error:
+        raise StrictJSONError("captured L1 plan/summary is not UTF-8") from error
+    tasks = build_branch_tasks_from_payloads(
+        binary_path,
+        plan_payload,
+        summary_payload,
+        runtime=formal_runtime,
+    )
+    task = tasks[exact_matrix().index(cell)]
+    plan = FormalBranchTransactionPlan(
+        task=task,
+        evaluator_source_path=source_path,
+        evaluator_source_sha256=source_role.sha256,
+        evaluator_binary_path=binary_path,
+        evaluator_binary_sha256=binary_role.sha256,
+        freeze_sha256=snapshot.main_freeze_sha256,
+        main_freeze_sha256=snapshot.main_freeze_sha256,
+        run_config_sha256=run_config_sha256,
+    )
+    plan.validate()
+    return plan
+
+
+def dispatch_formal_static_transaction(
+    plan: FormalStaticTransactionPlan, *, executor: Any = None
+) -> None:
+    plan.validate()
+    raise ProductionAuthorityError(
+        "formal static execution is unconditionally disabled; executor was not called"
+    )
+
+
+def dispatch_formal_branch_transaction(
+    plan: FormalBranchTransactionPlan, *, transaction_runner: Any = None
+) -> None:
+    plan.validate()
+    raise ProductionAuthorityError(
+        "formal branch execution is unconditionally disabled; transaction runner was not called"
+    )
+
+
+def build_formal_component_aggregate_candidates(
+    component: str,
+    snapshot: FormalAuthoritySnapshot,
+    run_config_sha256: str,
+    entries: Sequence[Mapping[str, Any]],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Build non-publishable formal aggregate schema candidates.
+
+    This is intentionally a pure function.  A candidate exists only for an
+    exact 102-entry certified frontier; a nonpass/resource/invalid frontier
+    has no aggregate.  The future contracts must replace the explicit
+    preflight-only status before any publication API can be added.
+    """
+
+    if component not in COMPONENTS:
+        raise SchedulerContractError("formal aggregate component is invalid")
+    revalidate_formal_snapshot(
+        snapshot,
+        ("static_evaluator",)
+        if component == "STATIC"
+        else ("branch_evaluator_source", "branch_evaluator_binary"),
+    )
+    if type(entries) not in (list, tuple) or len(entries) != 102:
+        raise CorruptGeneration("formal aggregate requires exactly 102 entries")
+    normalized: list[dict[str, Any]] = []
+    seen_paths: set[str] = set()
+    for cell, entry in zip(exact_matrix(), entries):
+        exact_keys(entry, {"cell", "path", "sha256", "size_bytes"}, "formal manifest entry")
+        if not exact_json_equal(entry["cell"], cell.payload()):
+            raise CorruptGeneration("formal aggregate cell order mismatch")
+        safe_relative_path(entry["path"])
+        expected_path = (
+            f"{component.lower()}/cell_manifests/"
+            f"{cell.precision_bits}/{cell.slab_id}.json"
+        )
+        if entry["path"] != expected_path or entry["path"] in seen_paths:
+            raise CorruptGeneration("formal aggregate entry path/order mismatch")
+        seen_paths.add(entry["path"])
+        if type(entry["sha256"]) is not str or HEX_SHA256.fullmatch(entry["sha256"]) is None:
+            raise CorruptGeneration("formal aggregate entry hash is malformed")
+        exact_int(entry["size_bytes"], "formal aggregate entry size", minimum=1)
+        normalized.append(dict(entry))
+    if type(run_config_sha256) is not str or HEX_SHA256.fullmatch(run_config_sha256) is None:
+        raise CorruptGeneration("formal aggregate run-config hash is malformed")
+    prefix = component.upper()
+    certified = f"{prefix}_CELL_CERTIFIED"
+    evaluator_roles = (
+        {"static_evaluator": _formal_role(snapshot, "static_evaluator").payload()}
+        if component == "STATIC"
+        else {
+            "branch_evaluator_source": _formal_role(snapshot, "branch_evaluator_source").payload(),
+            "branch_evaluator_binary": _formal_role(snapshot, "branch_evaluator_binary").payload(),
+        }
+    )
+    root_hash = sha256_bytes(canonical_json_bytes(normalized))
+    common = {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "artifact_status": "FORMAL_PREFLIGHT_SCHEMA_ONLY",
+        "authority": "PRODUCER_ONLY",
+        "preflight_only": True,
+        "promotable": False,
+        "mock_only": False,
+        "matrix_id": canonical_matrix_id(),
+        "freeze_sha256": snapshot.main_freeze_sha256,
+        "main_freeze_sha256": snapshot.main_freeze_sha256,
+        "run_config_sha256": run_config_sha256,
+        "ordered_cell_manifest_root": root_hash,
+        "evaluator_roles": evaluator_roles,
+        "scientific_licensing_enabled": False,
+        "claim_boundary": FORMAL_PREFLIGHT_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    summary = {
+        **common,
+        "artifact_role": f"FORMAL_{prefix}_AGGREGATE_SUMMARY_CANDIDATE",
+        "matrix": matrix_payload(),
+        "cell_count": 102,
+        "status_counts": {certified: 102},
+        "scheduler_classification_counts": {"COMMITTED_EVALUATOR_RESULT": 102},
+    }
+    relative_summary = (
+        "static/aggregate_summary.json"
+        if component == "STATIC"
+        else "branch/aggregate_summary.json"
+    )
+    summary_raw = canonical_json_bytes(summary)
+    manifest = {
+        **common,
+        "artifact_role": f"FORMAL_{prefix}_AGGREGATE_MANIFEST_CANDIDATE",
+        "cell_manifests": normalized,
+        "summary": {
+            "path": relative_summary,
+            "sha256": sha256_bytes(summary_raw),
+            "size_bytes": len(summary_raw),
+        },
+    }
+    if summary["freeze_sha256"] != summary["main_freeze_sha256"] or manifest[
+        "freeze_sha256"
+    ] != manifest["main_freeze_sha256"]:
+        raise ProductionAuthorityError("formal aggregate freeze hash mismatch")
+    return summary, manifest
 
 
 def branch_cell_path(output: Path, cell: CellKey) -> Path:
@@ -1811,7 +2952,7 @@ def validate_mock_branch_namespace(output: Path) -> None:
 def validate_branch_operational_quiescent(
     operational: Path, run_config_sha256: str
 ) -> None:
-    active = BRANCH_RUNTIME._scan_exact_staging_namespace(
+    active = _branch_runtime()._scan_exact_staging_namespace(
         operational, run_config_sha256[:16]
     )
     if active:
@@ -1820,7 +2961,7 @@ def validate_branch_operational_quiescent(
             "branch aggregate cannot coexist with live staging owners: "
             + ",".join(labels)
         )
-    BRANCH_RUNTIME._reject_withdrawn_interrupted_staging_namespace(operational)
+    _branch_runtime()._reject_withdrawn_interrupted_staging_namespace(operational)
     locks = operational / "locks" / "branch"
     if path_lexists(locks):
         require_directory(locks)
@@ -1831,7 +2972,7 @@ def validate_branch_operational_quiescent(
             require_directory(precision_root)
             if any(precision_root.iterdir()):
                 raise CorruptGeneration("live branch lock blocks aggregate publication")
-    BRANCH_RUNTIME._scan_interrupted_lock_namespaces(
+    _branch_runtime()._scan_interrupted_lock_namespaces(
         operational, run_config_sha256[:16]
     )
 
@@ -1850,7 +2991,7 @@ def ordered_branch_manifest_entries(
     validate_mock_branch_namespace(output)
     entries: list[dict[str, Any]] = []
     for cell, task in zip(exact_matrix(), tasks):
-        record, _manifest = BRANCH_RUNTIME.validate_committed_branch_cell(
+        record, _manifest = _branch_runtime().validate_committed_branch_cell(
             output, task, bindings, budgets
         )
         scheduler = record["scheduler_result"]
@@ -2456,9 +3597,10 @@ def _run_one_mock_branch_cell(
         "cannot snapshot live owner for another branch staging cell",
         "branch staging object is not a directory",
     )
+    runtime = _branch_runtime()
     for retry_index in range(65):
         try:
-            return BRANCH_RUNTIME.run_branch_cell_transaction(
+            return runtime.run_branch_cell_transaction(
                 output_root=output,
                 operational_root=operational,
                 task=task,
@@ -2466,7 +3608,7 @@ def _run_one_mock_branch_cell(
                 budgets=budgets,
                 attempt=0,
             )
-        except BRANCH_RUNTIME.BranchProvenanceError as error:
+        except runtime.BranchProvenanceError as error:
             if not any(phrase in str(error) for phrase in transient_phrases):
                 raise
             own_cell = (
@@ -2565,7 +3707,7 @@ def run_mock_branch(
         binding["matrix_id"], config_hash, mock_evaluator
     )
     bindings.validate()
-    budgets = BRANCH_RUNTIME.BranchBudgets()
+    budgets = _branch_runtime().BranchBudgets()
     budgets.validate()
     delays = _validate_mock_delay_map(completion_delays)
 
@@ -2857,7 +3999,7 @@ def validated_mock_component_chains(
         output,
         tasks,
         branch_bindings,
-        BRANCH_RUNTIME.BranchBudgets(),
+        _branch_runtime().BranchBudgets(),
         mock_evaluator,
     )
     static_chain = _validated_component_control_chain(
@@ -2988,7 +4130,11 @@ def finalize_mock_composite_controls(
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=CANONICAL_RESULT)
+    # Keep the raw lexical spelling for the formal path gate.  Converting to
+    # Path/absolute first would erase relative, '..', repeated-separator, and
+    # trailing-slash provenance that must fail closed.
+    parser.add_argument("--output")
+    parser.add_argument("--authority-root", default=str(ROOT))
     parser.add_argument("--initialize-only", action="store_true")
     parser.add_argument("--mock-only", action="store_true")
     parser.add_argument("--mock-static-cells", type=int, default=0)
@@ -3001,6 +4147,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--finalize-mock-composite", action="store_true")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--production", action="store_true")
+    parser.add_argument("--execute-scientific-dispatch", action="store_true")
     return parser.parse_args(argv)
 
 
@@ -3008,7 +4155,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     arguments = parse_args(argv)
     try:
         if arguments.mock_only:
-            if arguments.production:
+            if arguments.production or arguments.execute_scientific_dispatch:
                 raise SchedulerContractError("mock and production modes are exclusive")
             if (
                 not arguments.initialize_only
@@ -3019,7 +4166,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 raise SchedulerContractError(
                     "mock-only requires initialize, static cells, or branch cells"
                 )
-            output = arguments.output.absolute()
+            output = Path(arguments.output or CANONICAL_RESULT).absolute()
             static_result: dict[str, Any] | None = None
             branch_result: dict[str, Any] | None = None
             composite_result: dict[str, Any] | None = None
@@ -3082,10 +4229,68 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(json.dumps(result, sort_keys=True))
             return 0
 
-        # Both initialize and production modes require real authority.  This
-        # happens before any output directory is inspected or created.
-        validate_production_authority()
-        raise ProductionAuthorityError("unreachable production authority path")
+        if arguments.production or arguments.execute_scientific_dispatch:
+            # This rejection is unconditional, including when a syntactically
+            # accepted preflight fixture exists.  There is no execution-
+            # authorization object or finalized formal freeze schema yet.
+            raise ProductionAuthorityError(
+                "production rejected: formal scientific dispatch is "
+                "unconditionally disabled pending finalized contracts"
+            )
+
+        if arguments.initialize_only:
+            if arguments.resume:
+                raise RunBindingMismatch(
+                    "formal preflight is never resumable or promotable"
+                )
+            if (
+                arguments.mock_static_cells
+                or arguments.mock_branch_cells
+                or arguments.finalize_mock_composite
+            ):
+                raise SchedulerContractError(
+                    "formal initialize-only cannot request component work"
+                )
+            if arguments.output is None:
+                raise PathContractError(
+                    "formal initialize-only requires an explicit noncanonical --output"
+                )
+            # Authority is captured before inspecting or creating the output.
+            try:
+                snapshot = load_formal_authority(arguments.authority_root)
+            except (FileNotFoundError, PathContractError) as error:
+                raise ProductionAuthorityError(
+                    f"formal authority absent or unsafe; production rejected: {error}"
+                ) from error
+            binding, run_config_sha256 = initialize_formal_preflight(
+                snapshot, arguments.output
+            )
+            print(
+                json.dumps(
+                    {
+                        "artifact_status": binding["artifact_status"],
+                        "preflight_only": True,
+                        "promotable": False,
+                        "production_authorized": False,
+                        "scientific_licensing_enabled": False,
+                        "input_role_count": len(binding["input_roles"]),
+                        "freeze_sha256": binding["freeze_sha256"],
+                        "main_freeze_sha256": binding["main_freeze_sha256"],
+                        "run_config_sha256": run_config_sha256,
+                        "component_status": None,
+                        "milestone_status": None,
+                        "theorem_status": None,
+                        "final_status": None,
+                    },
+                    sort_keys=True,
+                )
+            )
+            return 0
+
+        raise ProductionAuthorityError(
+            "production rejected: choose mock-only or formal initialize-only; "
+            "scientific dispatch is disabled"
+        )
     except Exception as error:
         print(f"ERROR: {type(error).__name__}: {error}", file=sys.stderr)
         return 1
