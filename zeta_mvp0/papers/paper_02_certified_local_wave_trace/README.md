@@ -27,12 +27,13 @@ strongest accepted statements and latest bounded implementation evidence are:
    `S000/S025/S050 x 128/256` phase-anchor and branch-tube matrix passes as
    `DRAFT_NON_LICENSING / PASS_IMPLEMENTATION_SMOKE`.  This is implementation
    evidence only, not an accepted 51-slab A4.16 theorem.
-7. `A4.16 / R401-VAL-L3-A1` formal control-plane preflight: the exact
-   prospective 53-role same-byte handshake, temporary nonpromotable
-   initialize-only path, pure static/branch transaction plans, atomic
-   publication, and unconditional dispatch rejection pass independent
-   implementation review with P0=P1=P2=0.  No canonical production object or
-   new scientific result is created.
+7. `A4.16 / R401-VAL-L3-A1` machine-binding and exact-schema implementation:
+   the ordered 53-role same-byte handshake, closed formal schemas, strict
+   static/branch serializers, persistent CAPD binary, and independent live
+   machine validator pass engineering cross-review with P0=P1=P2=0.  The final
+   static and branch resource calibrations use public S0 inputs only.  This is
+   `NON_LICENSING`: no machine/main freeze, scientific dispatch, or canonical
+   A4.16 result exists.
 
 The local determinant result was independently replayed from exact rational
 decimal payloads: 202 determinant enclosures, 202 phase-slope enclosures, 815
@@ -111,51 +112,72 @@ This representative smoke does not assign a milestone, theorem, or final
 programme value.  It does not cover the other 48 slabs and does not prove
 that arbitrary energy-shell candidates remain in the local tube.
 
-## Formal all-slab control-plane preflight (non-licensing)
+## Formal machine-binding and exact-schema increment (non-licensing)
 
-The current L3-A1 increment implements a formal control-plane candidate but
-does not open scientific execution.  It replays an exact ordered 53-role
-same-byte handshake, atomically writes one temporary initialize-only
-`run_config.json` outside every canonical namespace, constructs exact pure
-static and branch transaction plans, and rejects both dispatch paths
-unconditionally.  The candidate is nonresumable, nonpromotable, assigns no
-component or theorem status, and cannot become the future production run
-config.
+The current L3-A1 engineering surface now closes the prospective machine,
+main-freeze, run-config, static/branch cell, aggregate, checker/postcheck, and
+release schemas without opening scientific execution.  The machine validator
+uses the exact authority `MACHINE_ADMISSION_ONLY`, recomputes live Python/Arb,
+Conda, CAPD, compiler, ELF/runtime-library, resource, and filesystem bindings,
+and requires `production_authorized=false`,
+`scientific_licensing_enabled=true` only as a machine-admission capability,
+and null scientific statuses.  It does not itself authorize production or
+assign any scientific result.  The
+existing 53-role same-byte handshake and every formal dispatcher remain
+fail-closed while the canonical authority chain is absent.
 
-Independent adversarial review accepted this implementation surface with
-P0=0, P1=0, and P2=0.  The scheduler and focused-test SHA-256 values are
-`e39caaed78468be1dc7791efde5b85f97668e07ef7117a7c2560decfea7d06bf`
-and
-`41655000a7904547f80aadf1726c01f1392239c1e1dea94394df6931e41ad508`.
-The focused scheduler suite passed 79/79 tests, the owned L3-A1 suite passed
-194/194, and the complete Paper 02 regression passed 710/710 without a
-scientific evaluator dispatch.
+Static cells now have an exact four-file surface (`proof.json`, `stdout.txt`,
+`stderr.txt`, `record.json`) with a strict 26-string ABI and
+`CJ_COMPACT_V1`.  Branch runtime/checker limits are expressed consistently as
+`timeout_ms=600000`, `term_grace_ms=2000`, and
+`pipe_close_grace_ms=1000`; branch task, argument, record, and manifest hashes
+use the strict sorted indent-2 `CJ_PRETTY_2_V1` bytes.  The independent
+machine-binding/formal-schema cross-review returned `ACCEPT` with P0=0, P1=0,
+and P2=0.  This is an implementation verdict, not `ACCEPT_FOR_FREEZE`.
 
-A separate resource calibration ran the formal A1 source against only the six
-already-public S0 branch inputs.  The source and temporary-binary SHA-256
-values were
-`66588bf25ae777c854f60a747af4299e3166efdd51db2659e33a28194abc59c5`
-and
-`25aec3d7d68883c2a97f765682a40cabc3feb91f159f67ac2910b6f82025e521`;
-the complete CAPD/toolchain ledger is in the linked increment record.  The
-worst peak RSS was `202428 KiB`, and the exact candidate calculation was
-baseline `14505582592` + `6 x 207286272` + reserve `8589934592` =
-`24339234816 < 51539607552` bytes, with `27200372736` bytes headroom.  No
-held-out or all-slab input was selected.  The temporary binary was not
-installed, the canonical calibration object remains absent, and this result
-neither freezes the worker count nor adds scientific evidence.
+The deterministic persistent evaluator now exists at
+`validated/bin/capd_r401_phase_branch_tube_mp_a1`: SHA-256
+`25aec3d7d68883c2a97f765682a40cabc3feb91f159f67ac2910b6f82025e521`,
+size `2419064` bytes, mode `0755`, and GNU build ID
+`3cff449e0a265fe63d1fa1d1350ea48f324ba386`.  It is byte-identical to the
+temporary binary used by the already-public branch calibration.  The binary
+is an implementation input only; it is not a machine freeze or result.
 
-The canonical L3 machine freeze, main freeze, S0 compatibility replay, A1
-persistent CAPD binary, result root, and operational root remain absent.  The
-full boundary and evidence record is
+The final public-only static calibration ran six sequential jobs and an
+eight-worker public S0 stress schedule.  All `14/14` invocations had exactly
+26 strings, returned the certified status, and had empty stderr.  Its compact
+payload has SHA-256
+`8afc8a0a0929da077a1a1ad19ddc0c19e754c49646c4b3d806f3f4cf5522de92`
+and size `30030` bytes.  The exact candidate arithmetic is
+`24891273216 + 8 x 59949056 + 8589934592 = 33960800256 < 51539607552`
+bytes, leaving `17578807296` bytes headroom.  The branch public payload remains
+SHA-256
+`2cd389315867cff7598c2977543a8e1f3d0a3dc60d99b51f1e7826f9f95af99a`
+and transfers exactly to the persistent binary by SHA-256.  Neither
+calibration selected a held-out or all-slab cell.
+
+The core regression immediately before the final embedded branch resource
+binary-digest/persistent-binary binding passed `419/419`.  After that binding
+and all documentation corrections, the complete latest-byte Paper 02
+regression passed `814/814`.
+
+No canonical machine freeze, main freeze, S0 compatibility replay, production
+run config, scientific dispatch, or A4.16 all-slab result exists.  The final
+static payload remains under `/tmp` until the deterministic canonical machine
+receipt capture/builder is implemented.  Full current hashes, resource
+evidence, and claim boundaries are recorded in
+[`A416_L3_A1_MACHINE_BINDING_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_MACHINE_BINDING_INCREMENT.md);
+the preceding control-plane increment remains recorded in
 [`A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md`](research/route_a_wave_trace/A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md).
 
 ## Open bridges
 
-- exact final L3-A1 schemas/contracts, the persistent A1 CAPD binary, machine
-  freeze, canonical S0 compatibility replay, independent pre-freeze review,
-  and only then a separately authorized 51-slab A4.16 phase-tube production;
-  the current scientific evidence remains representative only;
+- a deterministic machine-freeze capture/builder, producer-independent
+  machine verification, the complete pre-freeze chain and independent
+  `ACCEPT_FOR_FREEZE` review, main freeze generated last, canonical S0
+  compatibility replay, and only then a separately authorized 51-slab A4.16
+  phase-tube production; the current scientific evidence remains
+  representative only;
 - the full global shell return-exclusion tree on \(0.60<T<0.75\);
 - global tube routing for candidates outside the local full-period tube;
 - the frozen independent event-projected determinant/Taylor-width
@@ -164,10 +186,10 @@ full boundary and evidence record is
 - every endogenous prime-time, von-Mangoldt, Hilbert--Pólya, zeta-zero, and RH
   claim.
 
-The representative A4.16 engine and the non-dispatching L3-A1 control-plane
-candidate are now checked.  The next engineering stage is to finalize the
-exact schemas/contracts, persistent binary, and machine freeze before any
-independent pre-freeze review or formal all-slab production can be considered.
+The representative A4.16 engine and the non-dispatching L3-A1 exact-schema and
+machine-validation candidate are now checked.  The next engineering stage is
+to build and independently verify the deterministic machine receipt, then
+complete the pre-freeze review chain before generating the main freeze last.
 A4.15 remains the highest accepted theorem in this chain.  Global routing is
 a separate later bridge.
 

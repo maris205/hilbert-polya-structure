@@ -24,6 +24,7 @@ import ctypes
 import errno
 import fcntl
 import json
+import math
 import os
 import re
 import secrets
@@ -114,9 +115,9 @@ class _SchedulerTerminationSignal(BaseException):
 class BranchBudgets:
     """Candidate A4.16 branch limits from the reviewed pre-freeze design."""
 
-    timeout_seconds: float = 600.0
-    term_grace_seconds: float = 2.0
-    pipe_close_grace_seconds: float = 1.0
+    timeout_ms: int = 600_000
+    term_grace_ms: int = 2_000
+    pipe_close_grace_ms: int = 1_000
     stdout_bytes: int = 16 * 1024 * 1024
     stderr_bytes: int = 1 * 1024 * 1024
     record_bytes: int = 4 * 1024 * 1024
@@ -124,15 +125,13 @@ class BranchBudgets:
 
     def validate(self) -> None:
         for name in (
-            "timeout_seconds",
-            "term_grace_seconds",
-            "pipe_close_grace_seconds",
+            "timeout_ms",
+            "term_grace_ms",
+            "pipe_close_grace_ms",
         ):
             value = getattr(self, name)
-            if type(value) not in (int, float) or isinstance(value, bool) or value <= 0:
-                raise BranchContractError(f"{name} must be a positive finite scalar")
-            if value != value or value in (float("inf"), float("-inf")):
-                raise BranchContractError(f"{name} must be finite")
+            if type(value) is not int or value <= 0:
+                raise BranchContractError(f"{name} must be a positive exact integer")
         for name in (
             "stdout_bytes",
             "stderr_bytes",
@@ -153,15 +152,15 @@ class BranchBudgets:
                 "total cell cap must dominate stdout + stderr + record caps"
             )
 
-    def payload(self) -> dict[str, int | float]:
+    def payload(self) -> dict[str, int]:
         self.validate()
         return {
-            "pipe_close_grace_seconds": self.pipe_close_grace_seconds,
+            "pipe_close_grace_ms": self.pipe_close_grace_ms,
             "record_bytes": self.record_bytes,
             "stderr_bytes": self.stderr_bytes,
             "stdout_bytes": self.stdout_bytes,
-            "term_grace_seconds": self.term_grace_seconds,
-            "timeout_seconds": self.timeout_seconds,
+            "term_grace_ms": self.term_grace_ms,
+            "timeout_ms": self.timeout_ms,
             "total_cell_bytes": self.total_cell_bytes,
         }
 
@@ -554,7 +553,46 @@ def _strict_relative(value: str) -> PurePosixPath:
     return path
 
 
+def _require_plain_json(
+    value: Any,
+    context: str = "$",
+    ancestors: set[int] | None = None,
+) -> None:
+    """Reject Python aliases that JSON would silently coerce."""
+
+    if value is None or type(value) in (str, bool, int):
+        return
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise BranchContractError(f"nonfinite JSON number at {context}")
+        return
+    if type(value) not in (dict, list):
+        raise BranchContractError(
+            f"non-plain JSON value at {context}: {type(value).__name__}"
+        )
+    active = ancestors if ancestors is not None else set()
+    identity = id(value)
+    if identity in active:
+        raise BranchContractError(f"cyclic JSON container at {context}")
+    active.add(identity)
+    try:
+        if type(value) is dict:
+            for key, item in value.items():
+                if type(key) is not str:
+                    raise BranchContractError(
+                        f"non-string JSON object key at {context}: "
+                        f"{type(key).__name__}"
+                    )
+                _require_plain_json(item, f"{context}.{key}", active)
+        else:
+            for index, item in enumerate(value):
+                _require_plain_json(item, f"{context}[{index}]", active)
+    finally:
+        active.remove(identity)
+
+
 def canonical_json_bytes(payload: Any) -> bytes:
+    _require_plain_json(payload)
     return (
         json.dumps(
             payload,
@@ -930,9 +968,18 @@ def _spawn_pinned_process(
                     pass
 
 
+def _wait_seconds(milliseconds: int) -> float:
+    """Convert a frozen integer-millisecond budget at an OS wait boundary."""
+
+    if type(milliseconds) is not int or milliseconds <= 0:
+        raise BranchContractError("OS wait budget must be a positive exact integer")
+    return milliseconds / 1_000.0
+
+
 def _terminate_process_group(
-    process: _SpawnedProcess, grace_seconds: float
+    process: _SpawnedProcess, grace_ms: int
 ) -> tuple[bool, bool, bool]:
+    grace_seconds = _wait_seconds(grace_ms)
     term_sent = False
     kill_sent = False
     process_group = process.pid
@@ -982,7 +1029,7 @@ def _cleanup_process_group_after_scheduler_failure(
 
     try:
         _term, _kill, residual = _terminate_process_group(
-            process, float(budgets.term_grace_seconds)
+            process, budgets.term_grace_ms
         )
     except BaseException:
         residual = True
@@ -992,7 +1039,7 @@ def _cleanup_process_group_after_scheduler_failure(
         except (ProcessLookupError, PermissionError):
             pass
         try:
-            process.wait(timeout=max(0.1, float(budgets.term_grace_seconds)))
+            process.wait(timeout=max(0.1, _wait_seconds(budgets.term_grace_ms)))
         except (subprocess.TimeoutExpired, ChildProcessError):
             pass
         for _index in range(200):
@@ -1001,7 +1048,8 @@ def _cleanup_process_group_after_scheduler_failure(
                 break
             time.sleep(0.005)
 
-    close_deadline = time.monotonic() + float(budgets.pipe_close_grace_seconds)
+    pipe_close_grace_seconds = _wait_seconds(budgets.pipe_close_grace_ms)
+    close_deadline = time.monotonic() + pipe_close_grace_seconds
     process_sources = (process.stdout, process.stderr)
     for source in process_sources[len(threads) :]:
         if source is not None:
@@ -1026,7 +1074,7 @@ def _cleanup_process_group_after_scheduler_failure(
                     pass
         for thread in threads:
             if thread.ident is not None:
-                thread.join(timeout=float(budgets.pipe_close_grace_seconds))
+                thread.join(timeout=pipe_close_grace_seconds)
     _reap_process_group_children(process.pid)
 
 
@@ -1185,7 +1233,7 @@ def run_bounded_process(
         for thread in threads:
             thread.start()
 
-        deadline = time.monotonic() + float(budgets.timeout_seconds)
+        deadline = time.monotonic() + _wait_seconds(budgets.timeout_ms)
         timed_out = False
         output_exhausted = False
         term_sent = False
@@ -1195,20 +1243,20 @@ def run_bounded_process(
             if budget_event.wait(timeout=0.005):
                 output_exhausted = True
                 term_sent, kill_sent, process_group_residual = _terminate_process_group(
-                    process, float(budgets.term_grace_seconds)
+                    process, budgets.term_grace_ms
                 )
                 break
             if time.monotonic() >= deadline:
                 timed_out = True
                 term_sent, kill_sent, process_group_residual = _terminate_process_group(
-                    process, float(budgets.term_grace_seconds)
+                    process, budgets.term_grace_ms
                 )
                 break
 
         if process.poll() is None:
             # Defensive fallback if the process-group helper could not reap.
             more_term, more_kill, more_residual = _terminate_process_group(
-                process, float(budgets.term_grace_seconds)
+                process, budgets.term_grace_ms
             )
             term_sent = term_sent or more_term
             kill_sent = kill_sent or more_kill
@@ -1220,9 +1268,8 @@ def run_bounded_process(
         # reach EOF.  Threads still blocked after this grace period, while the
         # process group remains live, are evidence that a descendant retained
         # a copied pipe descriptor rather than a scheduler-thread race.
-        pipe_close_deadline = time.monotonic() + float(
-            budgets.pipe_close_grace_seconds
-        )
+        pipe_close_grace_seconds = _wait_seconds(budgets.pipe_close_grace_ms)
+        pipe_close_deadline = time.monotonic() + pipe_close_grace_seconds
         for thread in threads:
             thread.join(timeout=max(0.0, pipe_close_deadline - time.monotonic()))
 
@@ -1233,15 +1280,13 @@ def run_bounded_process(
         )
         if descendant_group_survived_parent:
             more_term, more_kill, more_residual = _terminate_process_group(
-                process, float(budgets.term_grace_seconds)
+                process, budgets.term_grace_ms
             )
             term_sent = term_sent or more_term
             kill_sent = kill_sent or more_kill
             process_group_residual = process_group_residual or more_residual
 
-        pipe_close_deadline = time.monotonic() + float(
-            budgets.pipe_close_grace_seconds
-        )
+        pipe_close_deadline = time.monotonic() + pipe_close_grace_seconds
         for thread in threads:
             thread.join(timeout=max(0.0, pipe_close_deadline - time.monotonic()))
         output_exhausted = output_exhausted or (
@@ -1252,13 +1297,13 @@ def run_bounded_process(
         )
         if descendant_leak:
             more_term, more_kill, more_residual = _terminate_process_group(
-                process, float(budgets.term_grace_seconds)
+                process, budgets.term_grace_ms
             )
             term_sent = term_sent or more_term
             kill_sent = kill_sent or more_kill
             process_group_residual = process_group_residual or more_residual
             for thread in threads:
-                thread.join(timeout=float(budgets.pipe_close_grace_seconds))
+                thread.join(timeout=pipe_close_grace_seconds)
             if any(thread.is_alive() for thread in threads):
                 process_group_residual = True
 

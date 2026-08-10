@@ -157,12 +157,46 @@ class StaticCellLimit(RuntimeError):
         self.details = details
 
 
+def _require_exact_json_value(value: Any, context: str = "$") -> None:
+    """Reject Python aliases that have no frozen JSON data-model meaning.
+
+    In particular, ``json.dumps`` otherwise accepts tuples, non-string object
+    keys, integer subclasses, and non-finite floats.  The formal compact
+    serializer is intentionally defined only on exact JSON values so that its
+    byte image is reproducible outside this producer.
+    """
+
+    if value is None or type(value) in (bool, str, int):
+        return
+    if type(value) is float:
+        if not math.isfinite(value):
+            raise StaticCellContractError(f"{context}: non-finite JSON number")
+        return
+    if type(value) is list:
+        for index, item in enumerate(value):
+            _require_exact_json_value(item, f"{context}[{index}]")
+        return
+    if type(value) is dict:
+        for key, item in value.items():
+            if type(key) is not str:
+                raise StaticCellContractError(f"{context}: JSON object key is not an exact string")
+            _require_exact_json_value(item, f"{context}.{key}")
+        return
+    raise StaticCellContractError(
+        f"{context}: unsupported exact JSON value type {type(value).__name__}"
+    )
+
+
 def canonical_json_bytes(payload: Any) -> bytes:
+    """Serialize the frozen ``CJ_COMPACT_V1`` byte image."""
+
+    _require_exact_json_value(payload)
     return (
         json.dumps(
             payload,
             sort_keys=True,
             ensure_ascii=False,
+            allow_nan=False,
             separators=(",", ":"),
         ).encode("utf-8")
         + b"\n"
@@ -1132,7 +1166,9 @@ class FrozenStaticInput:
 
 
 def plan_record_sha256(record: dict[str, Any]) -> str:
-    return sha256_bytes(canonical_json_bytes(record))
+    # ``ValidatedPlanRecord`` carries an out-of-band pinned provenance
+    # attribute; only its exact JSON object image participates in this digest.
+    return sha256_bytes(canonical_json_bytes(dict(record)))
 
 
 def validate_frozen_input(arguments: argparse.Namespace) -> tuple[FrozenStaticInput, dict[str, Any]]:

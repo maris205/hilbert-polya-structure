@@ -190,6 +190,7 @@ def require_json_exact(actual: Any, expected: Any, context: str) -> None:
 
 
 def canonical_json_bytes(payload: Any) -> bytes:
+    _require_plain_runtime_json(payload, context="$compact")
     return (
         json.dumps(
             payload,
@@ -202,7 +203,45 @@ def canonical_json_bytes(payload: Any) -> bytes:
     )
 
 
+def _require_plain_runtime_json(
+    value: Any,
+    context: str = "$",
+    ancestors: set[int] | None = None,
+) -> None:
+    """Reject non-plain Python values before branch-byte serialization."""
+
+    if value is None or type(value) in (str, bool, int):
+        return
+    if type(value) is float:
+        require(math.isfinite(value), f"nonfinite runtime JSON number at {context}")
+        return
+    if type(value) not in (dict, list):
+        raise BranchCheckError(
+            f"non-plain runtime JSON value at {context}: {type(value).__name__}"
+        )
+    active = ancestors if ancestors is not None else set()
+    identity = id(value)
+    if identity in active:
+        raise BranchCheckError(f"cyclic runtime JSON container at {context}")
+    active.add(identity)
+    try:
+        if type(value) is dict:
+            for key, item in value.items():
+                if type(key) is not str:
+                    raise BranchCheckError(
+                        f"non-string runtime JSON object key at {context}: "
+                        f"{type(key).__name__}"
+                    )
+                _require_plain_runtime_json(item, f"{context}.{key}", active)
+        else:
+            for index, item in enumerate(value):
+                _require_plain_runtime_json(item, f"{context}[{index}]", active)
+    finally:
+        active.remove(identity)
+
+
 def runtime_json_bytes(payload: Any) -> bytes:
+    _require_plain_runtime_json(payload)
     return (
         json.dumps(
             payload,
@@ -965,12 +1004,12 @@ RECORD_KEYS = RUNTIME_COMMON_KEYS | {
 }
 MANIFEST_KEYS = RUNTIME_COMMON_KEYS | {"budgets", "cell_identity", "files", "task_binding_sha256"}
 RUNTIME_BUDGET = {
-    "pipe_close_grace_seconds": 1.0,
+    "pipe_close_grace_ms": 1_000,
     "record_bytes": 4 * 1024 * 1024,
     "stderr_bytes": 1024 * 1024,
     "stdout_bytes": 16 * 1024 * 1024,
-    "term_grace_seconds": 2.0,
-    "timeout_seconds": 600.0,
+    "term_grace_ms": 2_000,
+    "timeout_ms": 600_000,
     "total_cell_bytes": 32 * 1024 * 1024,
 }
 

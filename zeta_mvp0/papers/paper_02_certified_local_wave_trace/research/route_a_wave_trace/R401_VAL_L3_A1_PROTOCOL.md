@@ -225,10 +225,10 @@ count, outward endpoints, proof bytes, or content hashes.  It requires:
 
 One precision cannot repair or substitute for the other.
 
-## 8. Candidate limits
+## 8. Exact control-plane limits, not yet a production freeze
 
-The following values are implementation candidates and are not frozen by
-this document:
+The following values are exact in the implemented schema.  They do not gain
+production authority until accepted machine/main freezes bind the same values:
 
 | item | candidate |
 |---|---:|
@@ -332,3 +332,42 @@ final_status = null
 ```
 
 No evaluator command is licensed by this protocol candidate.
+
+## 13. Exact-schema and serializer boundary
+
+The prospective main freeze uses a closed schema and an ordered 53-element
+`input_roles` array of exact `{role,path,sha256}` objects.  The run config is
+downstream of the raw main-freeze hash, repeats that ordered array and all
+frozen policy objects, and has producer-only authority with
+`dispatch_authorized_by_artifact=false`.  No object contains its own hash.
+
+`CJ_COMPACT_V1` applies to the machine/main/run-config, static proof/record/
+manifest, and aggregate domains.  Branch task, argv, record, and manifest
+hashes retain `CJ_PRETTY_2_V1`.  The machine freeze stores the original static
+compact and branch pretty calibration byte images as UTF-8 strings and hashes
+those raw strings before strict parsing and semantic replay.
+
+Every static authoritative cell has exactly four files:
+`proof.json`, `stdout.txt`, `stderr.txt`, and `record.json`.  Truly absent
+proof bytes are represented by the closed compact `STATIC_PROOF_ABSENT`
+sentinel; malformed bytes are retained as raw bytes.  The manifest binds all
+four files, while the record binds proof/stdout/stderr.  All bindings are
+exact `{path,sha256,size_bytes,serializer,truncated}` objects.
+
+Machine admission binds three pairwise-distinct Python identity roots.  The
+Conda root uses `CONDA_META_LIVE_FILES_CJ_COMPACT_V1` plus an exact file
+count and terminal live replay.  CAPD uses
+`GIT_INDEX_LIVE_TREE_CJ_COMPACT_V1`: its checksum-covered v2 index must
+reconstruct the authenticated detached-HEAD Git tree, while `tree_sha256`
+separately hashes the live ordered tracked-byte rows.  The persistent branch
+ELF binds its one 20-byte GNU build-id, exact sorted `DT_NEEDED`, and absence
+of `DT_SONAME`; python-flint module/`RECORD`/Arb/fmpq paths share one exact
+site-packages root.
+
+The exact static timeout is `1800000` ms.  Exact branch timeout and grace
+fields are `600000`, `2000`, and `1000` ms.  The formal branch runtime and
+independent checker now preserve those exact integer fields, so
+`branch_millisecond_migration_complete=true`.  This representation gate is
+not execution authority: all production/scientific execution remains
+unconditionally rejected pending the accepted freeze chain and a separate
+execution decision.

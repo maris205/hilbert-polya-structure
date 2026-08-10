@@ -42,6 +42,39 @@ def digest(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+@pytest.mark.parametrize(
+    "payload",
+    [
+        (1, 2),
+        {1: "coerced-key"},
+        {"value": float("nan")},
+        {"value": float("inf")},
+    ],
+)
+@pytest.mark.parametrize(
+    "serializer_name",
+    ["canonical_json_bytes", "branch_transaction_json_bytes"],
+)
+def test_serializers_reject_non_plain_json_aliases(
+    payload: Any, serializer_name: str
+) -> None:
+    serializer = getattr(M, serializer_name)
+    with pytest.raises(M.StrictJSONError):
+        serializer(payload)
+
+
+@pytest.mark.parametrize(
+    "serializer_name",
+    ["canonical_json_bytes", "branch_transaction_json_bytes"],
+)
+def test_serializers_reject_cycles(serializer_name: str) -> None:
+    payload: list[Any] = []
+    payload.append(payload)
+    serializer = getattr(M, serializer_name)
+    with pytest.raises(M.StrictJSONError, match="cyclic"):
+        serializer(payload)
+
+
 def mock_run_config(result: Path) -> tuple[dict[str, Any], bytes]:
     payload = {
         "schema_version": 1,

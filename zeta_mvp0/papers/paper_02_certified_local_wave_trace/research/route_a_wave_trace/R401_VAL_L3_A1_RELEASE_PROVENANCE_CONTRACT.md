@@ -106,7 +106,8 @@ the static evaluator test, the branch runtime module, and the
 S0-compatibility test.  They affect implementation authority or replay
 semantics and therefore cannot be hidden behind another role's hash.
 
-The map is a strict ordered role-to-`{path,sha256}` object.  A path cannot
+The JSON representation is a strict ordered array of 53 objects, each exactly
+`{role,path,sha256}`.  It is never represented as a JSON object/map.  A path cannot
 serve two roles, a role cannot have two paths, and no extra hash is accepted.
 Every listed byte sequence is strict-parsed or semantically audited according
 to its role before its digest is accepted.
@@ -117,7 +118,7 @@ to its role before its digest is accepted.
 not contain its own hash.  It must have exact status
 `FROZEN_FOR_PRODUCTION`, bind the exact 102-cell matrix, both ABIs, scheduler
 policy, resource limits, machine requirements, archive layout, closed status
-tables, checker hashes, 53-role map, and claim boundary.
+tables, checker hashes, ordered 53-role array, and claim boundary.
 
 Its pre-freeze review input must contain exactly one authority declaration:
 
@@ -383,3 +384,59 @@ final_status = null
 ```
 
 This contract creates neither a freeze nor a release and invokes no evaluator.
+
+## 14. Exact machine/main/run-config amendment
+
+The machine freeze is compact canonical JSON with the exact closed key sets
+implemented in the scheduler and independently mirrored by the release
+builder.  It has `authority=MACHINE_ADMISSION_ONLY`,
+`scientific_licensing_enabled=true`, and `production_authorized=false`.
+Its capture tool is exactly role 19.  The persistent source/binary/build
+receipt and runtime library closure are cross-bound to roles 16 and 17.
+The Python receipt separately binds the Python Conda-package live root, raw
+python-flint `RECORD` digest, and python-flint installed-file root; those
+three hashes are never aliases.
+The first is more precisely the complete live file set declared by the unique
+Python 3.12.3 Conda metadata record, with exact algorithm literal
+`CONDA_META_LIVE_FILES_CJ_COMPACT_V1`, file count, regular-file/symlink byte
+rows, UTF-8 path ordering, and a terminal live replay.  The python-flint
+module is exactly `<site>/flint/__init__.py`; its `RECORD`, Arb, and fmpq
+images occupy the corresponding exact common site-packages tree.
+
+CAPD records `tree_algorithm=GIT_INDEX_LIVE_TREE_CJ_COMPACT_V1`.  Independent
+validation checksum-parses the ordered v2 index, derives its recursive Git
+tree OID, authenticates the detached HEAD commit object from a loose object
+or checksum-verified pack, and requires the two tree OIDs to agree.  The
+separate `tree_sha256` remains the compact SHA-256 root over live tracked
+byte rows and the namespace must be clean outside `.git` and `build-mp`.
+The persistent branch ELF carries an exact 40-hex `build_id` matching its
+single 20-byte GNU note, the exact sorted `DT_NEEDED` set, and no `DT_SONAME`.
+
+Resource evidence is exactly
+`{static_payload_raw_utf8,static_payload_sha256,branch_payload_raw_utf8,
+branch_payload_sha256,persistent_binary_sha256}`.  Hashes are over the encoded
+raw strings.  Static evidence replays with compact serialization and branch
+evidence with sorted indent-2 serialization.  Historical `/tmp` proof,
+stdout, and stderr paths embedded in those immutable images are not
+live-opened; current evaluator, interpreter, plan, module, `RECORD`, binary,
+and library bindings are live-opened and terminally replayed.  The static evaluator and L1
+plan hashes are cross-bound to roles 15 and 34; the branch binary hash is
+cross-bound to role 17.  A stale calibration therefore blocks construction
+rather than being normalized or rebound.
+
+The main freeze has the closed `MAIN_FREEZE_KEYS` schema, contains no self
+hash, and carries the ordered 53-role array byte-for-byte.  Its exact accepted
+review binding is `{path,sha256,verdict=ACCEPT_FOR_FREEZE}`.  The final-shaped
+run config has closed `FINAL_RUN_CONFIG_KEYS`, repeats the raw main-freeze
+digest in both `freeze_sha256` and `main_freeze_sha256`, and remains
+`PRODUCER_ONLY` with `dispatch_authorized_by_artifact=false`.
+
+Serializer domains are part of the hash DAG: compact machine/main/run/static/
+aggregate objects and pretty branch task/argv/record/manifest objects.  Static
+cell manifests bind exactly four authoritative files.  Component aggregate
+entries use their unique component-derived paths in exact matrix order, and
+aggregates exist only for 102 certified committed cells.  The branch integer-
+millisecond runtime/checker migration is complete and its gate is true, but
+that representation fact gives no execution authority: scientific execution
+and canonical release remain rejected until the separate accepted freeze and
+authorization chain exists.

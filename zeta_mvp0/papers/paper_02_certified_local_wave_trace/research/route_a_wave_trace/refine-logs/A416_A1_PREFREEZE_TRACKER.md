@@ -6,15 +6,17 @@ Design baseline: `529697ce3feccf11d16f739d0e07d27a2d1c4d16`
 
 Implementation baseline before this working-tree increment: `e010200`
 
-Authority: **engineering implementation increment only / non-licensing / no dispatch**
+Authority: **engineering implementation increment only / NON_LICENSING / no
+machine freeze / no main freeze / no dispatch / no canonical results**
 
 `scientific_licensing_enabled = false`; `milestone_status`,
 `theorem_status`, and `final_status` remain null.
 
-Latest formal-control-plane implementation review: **ACCEPT; P0=0, P1=0,
-P2=0**.  This is an implementation verdict only.  The exact machine/main
-freeze schemas and the independent pre-freeze scientific authorization have
-not been completed.
+Latest machine-binding and formal-schema engineering cross-review: **ACCEPT;
+P0=0, P1=0, P2=0**.  This is an implementation verdict only, not
+`ACCEPT_FOR_FREEZE`.  Exact candidate schemas and independent validators now
+exist, but the deterministic canonical machine receipt, machine freeze, main
+freeze, and independent pre-freeze scientific authorization do not.
 
 This tracker is independent of the S0 experiment plan and tracker already
 bound by the accepted representative composite.  It does not amend those
@@ -25,24 +27,24 @@ files.
 | A1-D00 | read-only L2/S0 architecture audit | COMPLETE | reuse/rewrite ledger and blocker list recorded | no evaluator dispatched |
 | A1-D01 | prospective 102-cell design | COMPLETE / NON_LICENSING | exact two-component matrix, status contract, DAG, budgets, tests, and launch gates documented | `R401_VAL_L3_A1_PREFREEZE_DESIGN.md` |
 | A1-D02 | independent implementation-design review | COMPLETE / NON_LICENSING | `ACCEPT_FOR_IMPLEMENTATION_DESIGN`; P0=0 and P1=0 | not `ACCEPT_FOR_FREEZE`; no evaluator dispatch authority |
-| A1-I01 | formal static one-cell evaluator | COMPLETE / IMPLEMENTATION CANDIDATE / NON_LICENSING | exact candidate ABI, four-tree order, single-snapshot L1 binding, closed status table, tree/cell budgets, no canonical telemetry, and write-once proof implemented | independent implementation review: P0=0, P1=0; no scientific dispatch |
-| A1-I02 | formal static transaction scheduler | COMPLETE FOR MOCK + FORMAL PREFLIGHT IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | exact 102-cell mock path plus a 53-role same-byte formal handshake, temporary initialize-only binding, exact 26-string static pure plan, atomic no-replace preflight publication, and 102-only nonpromotable aggregate candidates implemented | no formal cell or aggregate publication; production dispatch remains unconditionally fail-closed |
-| A1-I03 | no-import static checker + postcheck | COMPLETE FOR MOCK / NON_LICENSING | full 102-cell proof/record/manifest replay, aggregate-root closure, cross-precision mock gates, write-once checker, and `STATIC_POSTCHECK_STATUS.json` implemented | mock pass assigns no component, milestone, theorem, or final status |
-| A1-I04 | persistent formal CAPD evaluator | PARTIAL / IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | closed branch evaluator ABI and formal C++ source implemented; pinned CAPD compile/link passes with warnings as errors; formal-source RSS calibration on six public S0 inputs is complete | calibration binary was temporary and uninstalled; canonical A1 persistent binary, exact production build record, and machine/runtime binding remain absent |
-| A1-I05 | formal branch transaction scheduler | COMPLETE FOR MOCK + FORMAL PURE-PLAN CANDIDATE / CANONICAL PROHIBITED / NON_LICENSING | reviewed bounded one-cell runtime, exact 102-cell L1-derived mock matrix, six-cell barriers, resume, mock aggregate publication, and a persistent-binary-bound formal pure plan implemented | the formal runner is never called; canonical A1 persistent binary and machine binding remain absent |
-| A1-I06 | no-import branch checker + postcheck | COMPLETE FOR MOCK / NON_LICENSING | exact L1 chain, raw/record/manifest, 64-phase, rational tube-implication, aggregate-root, and cross-precision replay plus write-once `BRANCH_POSTCHECK_STATUS.json` implemented | synthetic transcript replay is not a second ODE integration and licenses no tube theorem |
-| A1-I07 | composite checker + postcheck | COMPLETE FOR MOCK / NON_LICENSING | both 102-cell component checker/postcheck chains, exact aggregate roots, composite controls, generation binding, write-once checker, and `POSTCHECK_STATUS.json` replayed | mock composite keeps component/milestone/theorem/final null; formal scientific promotion remains absent |
+| A1-I01 | formal static one-cell evaluator | COMPLETE / IMPLEMENTATION CANDIDATE / NON_LICENSING | exact 26-string ABI, four-tree order, single-snapshot L1 binding, closed status table, strict `CJ_COMPACT_V1`, tree/cell budgets, and write-once proof implemented | no scientific dispatch |
+| A1-I02 | formal static transaction scheduler | COMPLETE AS EXACT-SCHEMA IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | exact 102-cell mock path plus 53-role same-byte formal handshake, closed machine/main/run/cell/aggregate schemas, exact static plan, atomic no-replace preflight publication, and nonpromotable aggregate candidates implemented | no formal cell or aggregate publication; production dispatch remains fail-closed |
+| A1-I03 | no-import static checker + postcheck | COMPLETE FOR MOCK + FORMAL FOUR-FILE REPLAY CANDIDATE / NON_LICENSING | exact `proof.json`, `stdout.txt`, `stderr.txt`, `record.json` replay; strict proof/record/manifest bindings; `STATIC_PROOF_ABSENT`; aggregate-root closure; cross-precision gates; and postcheck implemented | nonpass is never component-eligible; no formal promotion |
+| A1-I04 | persistent formal CAPD evaluator | COMPLETE AS PERSISTENT IMPLEMENTATION INPUT / NON_LICENSING | deterministic rebuild and install at `validated/bin/capd_r401_phase_branch_tube_mp_a1`; SHA-256 `25aec3d7...25e521`, size `2419064`, mode `0755`, build ID `3cff449e...ba386`; exact public-calibration byte transfer | binary existence is not a machine freeze, result, or dispatch authority |
+| A1-I05 | formal branch transaction scheduler | COMPLETE FOR MOCK + FORMAL PURE-PLAN CANDIDATE / CANONICAL PROHIBITED / NON_LICENSING | reviewed bounded runtime, exact 102-cell L1-derived matrix, six-cell barriers, resume, aggregate publication, persistent-binary-bound pure plan, and exact millisecond budgets implemented | `600000/2000/1000` ms; formal dispatcher remains fail-closed |
+| A1-I06 | no-import branch checker + postcheck | COMPLETE FOR MOCK + STRICT-SERIALIZER CANDIDATE / NON_LICENSING | exact L1 chain, pretty-byte task/argv/record/manifest digest replay, 64-phase rational tube implication, aggregate root, cross-precision replay, and postcheck implemented | `CJ_PRETTY_2_V1`; synthetic transcript replay is not a second ODE integration and licenses no tube theorem |
+| A1-I07 | composite checker + postcheck | COMPLETE FOR MOCK + FORMAL-SHAPED REPLAY / NON_LICENSING | both 102-cell component chains, exact aggregate roots, millisecond branch limits, strict serializer bindings, composite controls, generation binding, checker, and postcheck replayed | component/milestone/theorem/final remain null; formal scientific promotion absent |
 | A1-I08 | S0-to-A1 compatibility replay | COMPLETE / NON_LICENSING_COMPATIBILITY | exact six accepted cells, 26 branch roles, 18 composite bindings, and nine sealed controls replay read-only; 31 focused tests pass | canonical replay object intentionally absent; no S0 bytes or authority changed |
-| A1-I09 | release-provenance builder | COMPLETE FOR MOCK / FORMAL BLOCKED / NON_LICENSING | exact mock 53-input plus 15-publication-object DAG, deep payload/status/claim/source replay, write-once build, idempotent identical build, and verify-only path implemented | accepts only `MOCK_MAIN_FREEZE`; canonical production release remains unimplemented and fail-closed |
+| A1-I09 | release-provenance builder and independent machine validator | COMPLETE FOR MOCK + EXACT FORMAL VALIDATION CANDIDATE / NON_LICENSING | mock 53-input release replay plus producer-independent exact machine validation of live Python/Conda/Arb, CAPD/compiler/ELF/runtime, embedded resource bytes, admission arithmetic, and filesystem bindings | no canonical machine receipt or release; formal publication remains fail-closed |
 | A1-T01 | full mocked 204-cell E2E | COMPLETE / MOCK_ONLY_NON_LICENSING | 102 static cells, static checker/postcheck, 102 branch cells, branch checker/postcheck, composite controls/checker/postcheck, and exact 68-role mock release close in a temporary project | no canonical result root or scientific artifact was published |
 | A1-T02 | crash/resume/quarantine suite | COMPLETE FOR MOCK ENGINEERING SCOPE | static/branch transaction boundaries, signal/lock faults, partial-to-full resume, whole-generation quarantine, post-release scheduler refusal, and write-once release recovery have adversarial coverage | formal production recovery remains subject to a future freeze and machine binding |
 | A1-T03 | strict schema/path/TOCTOU suite | COMPLETE FOR CURRENT MOCK SURFACES | static, branch, composite, and release paths reject duplicate/type/nonfinite/path/link/inode/snapshot, coherent rebind, nested-authority, and claim-boundary mutations | this does not validate absent formal production artifacts |
-| A1-R01 | representative-only peak-RSS calibration | COMPLETE / FORMAL SOURCE ON PUBLIC S0 INPUTS ONLY / NON_LICENSING | six public S0 jobs ran through a temporary binary compiled from the formal A1 source with exact source/binary/CAPD toolchain hashes; worst peak RSS `202428 KiB`; six-worker candidate inequality `24339234816 < 51539607552` bytes | no held-out or all-slab input was used; temporary binary was not installed and the canonical calibration object is absent |
-| A1-P01 | formal L3-A1 protocol/contracts | COMPLETE AS PROSPECTIVE CONTRACT SET / NON_LICENSING | four prospective contracts and exact candidate 53-input/68-release role maps exist | not a freeze review and not dispatch authority; do not edit S0-bound protocol |
-| A1-F01 | L3 machine freeze | TODO / BLOCKED | Python/Arb, CAPD, persistent binary, runtime, host, storage all bound | old L2 machine freeze is template only |
+| A1-R01 | public-only peak-RSS calibrations | COMPLETE AS TEMPORARY RESOURCE EVIDENCE / NON_LICENSING | final static payload `8afc8a0a...22de92`: 14/14 exact 26-string runs and eight-worker inequality `33960800256 < 51539607552`; branch payload `2cd38931...af99a`: 6/6 exact 12-string runs and persistent-binary transfer | public `S000/S025/S050 x 128/256` only; final static payload remains in `/tmp`; no canonical calibration object |
+| A1-P01 | formal L3-A1 protocol/contracts | COMPLETE AS EXACT IMPLEMENTATION CONTRACT SET / NON_LICENSING | exact machine/main/run/cell/aggregate/checker/release schemas, serializer definitions, candidate 53-input/68-release role maps, and fail-closed execution policy exist | not a freeze review and not dispatch authority; do not edit S0-bound protocol |
+| A1-F01 | deterministic L3 machine receipt and machine freeze | TODO / BLOCKED | capture/builder embeds raw public evidence and recomputes Python/Arb, CAPD, compiler, persistent ELF/runtime, host, resources, and storage; independent verifier accepts exact bytes | validation surfaces exist, but no canonical machine object exists; old L2 freeze is template only |
 | A1-P02 | independent pre-freeze review | TODO / BLOCKED | sole exact line `Verdict: ACCEPT_FOR_FREEZE` | reviewer must be independent of final producer/checker authorship |
 | A1-F02 | main L3-A1 freeze | PROHIBITED | all prior rows through A1-P02 complete; freeze generated last | current repository has no dispatch authority |
-| A1-L00 | initialize-only run config | COMPLETE AS TEMPORARY IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | a disposable authority fixture passes the exact ordered 53-role same-byte handshake and atomically publishes one nonresumable, nonpromotable `run_config.json` outside every canonical namespace | not the future production run config; canonical initialize-only remains prohibited until exact schemas/contracts, persistent binary, machine freeze, and independent review exist |
+| A1-L00 | initialize-only run config | COMPLETE AS TEMPORARY IMPLEMENTATION CANDIDATE / CANONICAL PROHIBITED | a disposable authority fixture passes the exact ordered 53-role same-byte handshake and atomically publishes one nonresumable, nonpromotable `run_config.json` outside every canonical namespace | not the future production run config; canonical initialize-only remains prohibited until the deterministic machine freeze and independent review chain exist |
 | A1-L01 | held-out/all-slab production | PROHIBITED | explicit later authorization after initialize-only audit | do not dispatch now |
 | A1-G01 | global tube routing | OPEN / SEPARATE | independent global complement theorem | not part of L3-A1 production |
 | A1-HP | trace / Hilbert--Polya / zeta / RH promotion | UNAUTHORIZED | separate later theorems | `final_status` remains null |
@@ -57,15 +59,15 @@ None of these values is frozen.
 | static maximum nodes per tree | 250,000 | S0 implementation value |
 | static maximum nodes per cell | 1,000,000 | explicit in the prospective protocol and implementation; focused limit tests pass; not frozen |
 | static cell timeout | 1,800 s | operational headroom only |
-| static workers | 8 | separate processes; mock and memory gates pending |
+| static workers | 8 | final public-only stress calibration complete; still a candidate until machine freeze |
 | branch phase cells | 64 | exact S0 phase cover |
 | branch Taylor order | 24 | exact S0 evaluator value |
-| branch tolerance 128/256 | `1e-30` / `1e-60` | stated exactly in the prospective protocol; persistent binary and machine binding pending |
-| branch cell timeout | 600 s | exact S0 runner value |
+| branch tolerance 128/256 | `1e-30` / `1e-60` | stated exactly in the protocol; persistent binary exists, machine freeze pending |
+| branch cell timeout | `600000 ms` | exact millisecond schema; runtime converts only at the wait boundary |
 | branch workers | 6 | formal-source calibration on six public S0 inputs complete; no held-out work; still a candidate until machine freeze |
 | branch stdout / stderr cap | 16 MiB / 1 MiB | bounded streaming required; process group terminated on exhaustion |
 | branch record / total-cell cap | 4 MiB / 32 MiB | authoritative record and complete cell remain separately bounded |
-| memory admission pause | 48 GiB | exact candidate arithmetic passes: baseline `14505582592` + `6 x 207286272` + reserve `8589934592` = `24339234816 < 51539607552` bytes, leaving `27200372736` bytes headroom; worst public-S0 input job `202428 KiB`; not frozen |
+| memory admission pause | 48 GiB | final static candidate: `24891273216 + 8 x 59949056 + 8589934592 = 33960800256 < 51539607552`, headroom `17578807296`; branch public evidence separately records `14505582592 + 6 x 207286272 + 8589934592 = 24339234816`; future machine receipt must recompute both from one conservative observed baseline; not frozen |
 | memory reserve | 8 GiB | required in the pre-freeze worker-admission inequality |
 | launch free storage | 200 GiB | about 347 GiB observed during design audit |
 | storage warning / pause / recovery | 180 / 150 / 120 GiB | operational only |
@@ -76,9 +78,10 @@ None of these values is frozen.
 - The full 204-cell mock transaction/checker/composite/release chain now
   exists only as an engineering implementation and temporary test replay.  It
   is not a formal scientific generation and does not license one.
-- Representative-only RSS calibration is complete, but the canonical A1
-  persistent CAPD binary, complete Python/Arb/CAPD runtime binding, exact
-  production schemas/contracts, and L3-specific machine freeze are absent.
+- Exact schemas, the persistent CAPD binary, live machine-validation logic,
+  and both public-only resource payloads now exist as engineering inputs.  The
+  deterministic machine-receipt capture/builder and canonical L3-specific
+  machine freeze remain absent.
 - The canonical compatibility replay, production result root, production
   report, formal release, and all formal component/composite statuses remain
   absent; the implemented formal entry paths fail closed.
@@ -132,15 +135,49 @@ The temporary calibration JSON had SHA-256
 `2cd389315867cff7598c2977543a8e1f3d0a3dc60d99b51f1e7826f9f95af99a`.
 Neither it nor the temporary binary was installed as a canonical object.
 
-The canonical machine freeze, main freeze, S0 compatibility replay, A1
-persistent binary, production result root, and operational root remain
-absent.  The exact implementation record is
+The canonical machine freeze, main freeze, S0 compatibility replay,
+production result root, and operational root remain absent.  The exact
+preflight implementation record is
 `../A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md`.
+
+## Machine-binding and exact-schema increment evidence
+
+| Gate | Result | Boundary |
+|---|---:|---|
+| final public-only static calibration | 14/14 pass | six sequential plus eight concurrent public S0 cells; exact 26-string ABI; no held-out input |
+| persistent branch binary transfer | exact SHA-256 match | public branch calibration binary and installed persistent binary both `25aec3d7...25e521` |
+| core regression immediately before final embedded branch resource binary-digest/persistent-binary binding | 419/419 pass | precise pre-binding evidence |
+| complete latest-byte Paper 02 regression after that binding | 814/814 pass | final integration evidence; no scientific dispatch |
+| independent machine/schema cross-review | ACCEPT; P0=0, P1=0, P2=0 | engineering correctness only; not `ACCEPT_FOR_FREEZE` |
+
+The final static resource byte image is
+`/tmp/a416-l3a1-static-rss-final.4CBiaA/static_calibration.json`, size `30030`
+bytes, SHA-256
+`8afc8a0a0929da077a1a1ad19ddc0c19e754c49646c4b3d806f3f4cf5522de92`.
+Its exact candidate arithmetic is
+`24891273216 + 8 x 59949056 + 8589934592 = 33960800256 < 51539607552`
+bytes with `17578807296` bytes headroom.  It remains under `/tmp` until the
+deterministic canonical machine receipt capture/builder exists.
+
+The public-only branch resource byte image remains
+`/tmp/a416-l3a1-rss.jzXoy2/calibration.json`, size `7402` bytes, SHA-256
+`2cd389315867cff7598c2977543a8e1f3d0a3dc60d99b51f1e7826f9f95af99a`.
+The installed persistent binary has SHA-256
+`25aec3d7d68883c2a97f765682a40cabc3feb91f159f67ac2910b6f82025e521`,
+size `2419064`, mode `0755`, and build ID
+`3cff449e0a265fe63d1fa1d1350ea48f324ba386`.  These are implementation and
+resource bindings only.
+
+The exact source/test ledger and serializer boundary are recorded in
+`../A416_L3_A1_MACHINE_BINDING_INCREMENT.md`.  Static formal cells use exactly
+`proof.json`, `stdout.txt`, `stderr.txt`, and `record.json` under
+`CJ_COMPACT_V1`; branch task/argument/record/manifest bindings use
+`CJ_PRETTY_2_V1` and exact `600000/2000/1000` millisecond limits.
 
 ## Current decision
 
 ```text
-next_authorized_action = FINALIZE_EXACT_SCHEMAS_AND_CONTRACTS_THEN_BUILD_PERSISTENT_BINARY_AND_MACHINE_FREEZE
+next_authorized_action = BUILD_DETERMINISTIC_MACHINE_FREEZE_CAPTURE_AND_INDEPENDENT_VERIFY_THEN_PREFREEZE_REVIEW
 independent_design_review_complete = true
 static_implementation_increment_review = ACCEPT_P0_0_P1_0
 branch_runtime_increment_review = ACCEPT_P0_0_P1_0
@@ -154,6 +191,17 @@ formal_scheduler_focused_tests = 79/79
 formal_preflight_owned_tests = 194/194
 paper02_regression = 710/710
 representative_rss_calibration = COMPLETE_FORMAL_SOURCE_ON_PUBLIC_S0_INPUTS_6_JOBS
+formal_exact_schemas_implemented = true
+persistent_a1_binary_installed = true
+persistent_a1_binary_sha256 = 25aec3d7d68883c2a97f765682a40cabc3feb91f159f67ac2910b6f82025e521
+static_four_file_surface = CJ_COMPACT_V1
+branch_pretty_serializer = CJ_PRETTY_2_V1
+branch_budget_ms = 600000_2000_1000
+final_public_static_calibration = PASS_14_OF_14_PUBLIC_S0_ONLY
+final_public_static_calibration_sha256 = 8afc8a0a0929da077a1a1ad19ddc0c19e754c49646c4b3d806f3f4cf5522de92
+machine_binding_formal_schema_review = ACCEPT_P0_0_P1_0_P2_0
+core_tests_pre_final_branch_resource_binary_binding = 419/419
+paper02_regression_latest_bytes = 814/814
 canonical_initialize_only = false
 formal_pipeline_complete = false
 accept_for_freeze = false

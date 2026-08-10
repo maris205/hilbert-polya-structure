@@ -203,6 +203,8 @@ results/r401_val_l3_all_slabs/
 ├── static/
 │   ├── cells/{128,256}/Sxxx/
 │   │   ├── proof.json
+│   │   ├── stdout.txt
+│   │   ├── stderr.txt
 │   │   └── record.json
 │   ├── cell_manifests/{128,256}/Sxxx.json
 │   ├── aggregate_summary.json
@@ -272,8 +274,8 @@ fatal provenance defects.
 
 ### 6.2 Prospective main-freeze and run-config schemas
 
-The future strict main freeze has exactly one noncircular input-hash map and
-must include at least:
+The strict main-freeze schema has exactly one noncircular ordered input-role
+array and includes exactly:
 
 ```text
 schema_version = exact integer
@@ -287,7 +289,7 @@ composite checker and release-builder identities
 scheduler policy and maximum inflight counts
 machine requirements and machine-freeze hash
 archive layout and failure policy
-complete mandatory input_hashes map
+complete ordered 53-element input_roles array of {role,path,sha256}
 claim boundary
 ```
 
@@ -866,3 +868,56 @@ The next safe implementation step is to build and mock-test the static
 one-cell transaction and its no-import production checker, followed by the
 persistent CAPD branch transaction.  Held-out/all-slab evaluator execution
 remains explicitly prohibited.
+
+## 16. Implemented exact-schema increment and remaining freeze blockers
+
+The control plane now has independent closed validators for the exact machine,
+main-freeze, and final-shaped run-config schemas; a pinned ordered 53-role
+capture/replay handshake; write-once noncanonical initialization; pure formal
+static and branch transaction plans; exact static four-file packaging; and a
+102-certified-only aggregate builder.  Formal initialization produces only
+`run_config.json`, cannot resume or be upgraded in place, and the execution
+mode remains an unconditional rejection.
+
+The machine freeze stores the original static compact and branch pretty
+resource-calibration images as raw UTF-8 strings plus hashes.  Those images
+are strict-parsed and replayed without reopening historical `/tmp` proof,
+stdout, or stderr paths.  Current evaluator, interpreter, plan, module,
+`RECORD`, binary, and library bindings are live-opened and terminally
+replayed.  The machine receipt separately binds the Python/Arb and CAPD chains, exact
+build cwd/environment/umask/argv/stdout/stderr, ELF and `DT_NEEDED`, separated
+Python-bundled and CAPD-system runtime libraries, filesystem identities, and
+the conservative resource inequalities.  `production_authorized` remains
+false.
+The Python Conda-package live root, raw python-flint `RECORD` hash, and
+python-flint installed-file root are pairwise-distinct exact fields.  The
+Conda root is recomputed from its unique Python 3.12.3 metadata record and a
+terminal replay of every declared file/link.  CAPD validation independently
+proves that the checksum-covered v2 index reconstructs the detached HEAD tree
+OID, then derives a separate live tracked-row SHA-256 root under
+`GIT_INDEX_LIVE_TREE_CJ_COMPACT_V1`.  The persistent ELF build-id and dynamic
+`DT_NEEDED` entries are parsed directly from the pinned binary rather than
+trusted from an external inspection command.  Frozen runtime-library rows are
+then live-opened and checked for exact bytes, build-id, and SONAME; they are
+not presented as a parser-derived transitive closure.  The python-flint module, `RECORD`, Arb, and
+fmpq images are confined to one exact site-packages layout.
+
+The branch formal runtime and independent checker now share exact integer
+millisecond budgets (`600000`, `2000`, `1000`), so the migration gate is true.
+The production/scientific dispatch gate remains unconditionally closed.
+
+The remaining smallest blockers are now explicit:
+
+1. embed the completed final role-15 public calibration raw image
+   (`8afc8a0a...5522de92`, 14/14, dual-validator ACCEPT) in a real machine
+   freeze captured from the final live toolchain and persistent
+   binary, then run an independent no-import schema audit;
+2. freeze final code/test/document hashes, obtain the sole strict-ASCII
+   independent pre-freeze ACCEPT review, and only then construct the main
+   freeze; and
+3. independently validate the initialized run binding before any separate
+   decision about execution authority.
+
+None of these steps licenses a scientific evaluator.  No canonical machine
+freeze, main freeze, result archive, or release is created by this design
+increment.

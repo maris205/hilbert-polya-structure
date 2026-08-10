@@ -247,12 +247,38 @@ def require_json_exact(actual: Any, expected: Any, context: str) -> None:
     require(json_exact_equal(actual, expected), f"{context}: exact JSON value mismatch")
 
 
+def _require_exact_json_value(value: Any, context: str = "$") -> None:
+    """Restrict ``CJ_COMPACT_V1`` to exact JSON data-model values."""
+
+    if value is None or type(value) in (bool, str, int):
+        return
+    if type(value) is float:
+        require(math.isfinite(value), f"{context}: non-finite JSON number")
+        return
+    if type(value) is list:
+        for index, item in enumerate(value):
+            _require_exact_json_value(item, f"{context}[{index}]")
+        return
+    if type(value) is dict:
+        for key, item in value.items():
+            require(type(key) is str, f"{context}: JSON object key is not an exact string")
+            _require_exact_json_value(item, f"{context}.{key}")
+        return
+    raise CheckError(
+        f"{context}: unsupported exact JSON value type {type(value).__name__}"
+    )
+
+
 def canonical_json_bytes(payload: Any) -> bytes:
+    """Serialize the frozen ``CJ_COMPACT_V1`` byte image."""
+
+    _require_exact_json_value(payload)
     return (
         json.dumps(
             payload,
             sort_keys=True,
             ensure_ascii=False,
+            allow_nan=False,
             separators=(",", ":"),
         ).encode("utf-8")
         + b"\n"
@@ -329,6 +355,10 @@ def read_pinned_regular_bytes(path: Path) -> bytes:
         before = os.fstat(descriptor)
         require(stat.S_ISREG(before.st_mode), f"{path}: not a regular file")
         require(before.st_nlink == 1, f"{path}: hard-link alias rejected")
+        require(
+            before.st_size <= 512 * 1024 * 1024,
+            f"{path}: input exceeds the formal static per-file safety cap",
+        )
         chunks: list[bytes] = []
         while True:
             chunk = os.read(descriptor, 1024 * 1024)
@@ -1326,7 +1356,8 @@ def plan_epsilon(plan: dict[str, dict[str, Any]], slab_id: str) -> tuple[Fractio
 
 
 def plan_record_sha256(record: dict[str, Any]) -> str:
-    return sha256_bytes(canonical_json_bytes(record))
+    # The validated wrapper has provenance state outside the JSON data model.
+    return sha256_bytes(canonical_json_bytes(dict(record)))
 
 
 @dataclass(frozen=True)
@@ -1811,6 +1842,763 @@ def validate_cell_identity(payload: Any, bits: int, slab_id: str, context: str) 
     exact_keys(payload, {"precision_bits", "slab_id"}, context)
     require_exact_int(payload["precision_bits"], f"{context}.precision_bits", expected=bits)
     require(payload["slab_id"] == slab_id, f"{context}: slab id")
+
+
+FORMAL_STATIC_RECORD_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "authority",
+    "scientific_licensing_enabled",
+    "matrix_id",
+    "freeze_sha256",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "cell",
+    "task",
+    "semantic_invocation",
+    "scheduler_result",
+    "evaluator_result",
+    "files",
+    "limits",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+FORMAL_STATIC_MANIFEST_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "authority",
+    "scientific_licensing_enabled",
+    "matrix_id",
+    "freeze_sha256",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "cell",
+    "semantic_invocation_sha256",
+    "scheduler_classification",
+    "evaluator_status",
+    "record",
+    "files",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+STATIC_PROOF_SENTINEL_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "authority",
+    "scientific_licensing_enabled",
+    "matrix_id",
+    "freeze_sha256",
+    "main_freeze_sha256",
+    "run_config_sha256",
+    "cell",
+    "scheduler_classification",
+    "evaluator_status",
+    "reason_code",
+    "claim_boundary",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+}
+FORMAL_STATIC_TASK_KEYS = {
+    "epsilon_lower",
+    "epsilon_upper",
+    "plan_record_sha256",
+}
+FORMAL_STATIC_INVOCATION_KEYS = {
+    "argv",
+    "argv_sha256",
+    "exact_string_count",
+    "output_token",
+}
+FORMAL_STATIC_SCHEDULER_RESULT_KEYS = {
+    "classification",
+    "evaluator_status",
+    "return_code",
+    "proof_kind",
+    "reason_code",
+}
+FORMAL_STATIC_EVALUATOR_RESULT_KEYS = {
+    "status",
+    "return_code",
+    "status_line_count",
+}
+FORMAL_STATIC_FILE_BINDING_KEYS = {
+    "path",
+    "sha256",
+    "size_bytes",
+    "serializer",
+    "truncated",
+}
+FORMAL_STATIC_LIMIT_KEYS = {
+    "max_depth_per_tree",
+    "max_nodes_per_tree",
+    "max_nodes_per_cell",
+    "timeout_ms",
+    "total_cell_bytes",
+}
+FORMAL_STATIC_FILE_NAMES = {
+    "proof.json",
+    "stdout.txt",
+    "stderr.txt",
+    "record.json",
+}
+FORMAL_STATIC_PROOF_KINDS = {
+    "EVALUATOR_PROOF",
+    "INVALID_EVALUATOR_PROOF",
+    "SCHEDULER_NO_PROOF_SENTINEL",
+}
+FORMAL_STATIC_STATUS_CODES = {
+    "STATIC_CELL_CERTIFIED": 0,
+    "STATIC_UNRESOLVED_DEPTH": 2,
+    "STATIC_UNRESOLVED_NODE_BUDGET": 2,
+    "STATIC_INTERVAL_FAIL": 3,
+    "INVALID_STATIC_PROOF_CONTRACT": 5,
+}
+FORMAL_STATIC_CLASSIFICATIONS = {
+    "COMMITTED_EVALUATOR_RESULT",
+    "CELL_TIMEOUT",
+    "CELL_SIGNAL",
+    "CELL_OUTPUT_BUDGET_EXHAUSTED",
+    "MALFORMED_EVALUATOR_OUTPUT",
+    "PROVENANCE_INVALID",
+}
+FORMAL_STATIC_SENTINEL_REASONS = {
+    "CELL_TIMEOUT": "TIMEOUT",
+    "CELL_SIGNAL": "SIGNAL",
+    "CELL_OUTPUT_BUDGET_EXHAUSTED": "OUTPUT_BUDGET",
+    "PROVENANCE_INVALID": "PROVENANCE",
+    "MALFORMED_EVALUATOR_OUTPUT": "NO_EVALUATOR_PROOF",
+}
+FORMAL_STATIC_NONPASS_PROOF_KEYS = {
+    "schema_version",
+    "protocol_id",
+    "artifact_role",
+    "authority",
+    "scientific_licensing_enabled",
+    "matrix_id",
+    "freeze_sha256",
+    "run_config_sha256",
+    "component_status",
+    "milestone_status",
+    "theorem_status",
+    "final_status",
+    "evaluator_status",
+    "slab_id",
+    "precision_bits",
+    "epsilon",
+    "period_window",
+    "input_echo",
+    "claim_boundary",
+    "proof_complete",
+    "failure",
+    "trees",
+    "counts",
+    "proof_content_hash_definition",
+    "proof_content_sha256",
+}
+
+
+def _require_formal_static_null_authority(
+    payload: Mapping[str, Any], context: str
+) -> None:
+    require(payload["authority"] == "PRODUCER_ONLY", f"{context}: authority")
+    exact_bool(
+        payload["scientific_licensing_enabled"],
+        f"{context}.scientific_licensing_enabled",
+        False,
+    )
+    require(payload["claim_boundary"] == CELL_CLAIM_BOUNDARY, f"{context}: claim boundary")
+    for key in ("component_status", "milestone_status", "theorem_status", "final_status"):
+        require(payload[key] is None, f"{context}: unauthorized {key}")
+
+
+def _canonical_object_from_image(raw: bytes, path: Path) -> dict[str, Any]:
+    payload = load_strict_json_object_from_bytes(raw, path)
+    require(raw == canonical_json_bytes(payload), f"{path.name}: JSON is not CJ_COMPACT_V1")
+    return payload
+
+
+def _validate_formal_static_binding(
+    payload: Any,
+    raw: bytes,
+    *,
+    expected_path: str,
+    expected_serializer: str,
+    context: str,
+    expected_truncated: bool | None = None,
+) -> dict[str, Any]:
+    require(type(payload) is dict, f"{context}: not an object")
+    exact_keys(payload, FORMAL_STATIC_FILE_BINDING_KEYS, context)
+    require(payload["path"] == expected_path, f"{context}: path")
+    require(
+        exact_sha256(payload["sha256"], f"{context}.sha256") == sha256_bytes(raw),
+        f"{context}: byte hash mismatch",
+    )
+    require_exact_int(payload["size_bytes"], f"{context}.size_bytes", expected=len(raw))
+    require(payload["serializer"] == expected_serializer, f"{context}: serializer")
+    require(type(payload["truncated"]) is bool, f"{context}.truncated: exact Boolean required")
+    if expected_truncated is not None:
+        require(
+            payload["truncated"] is expected_truncated,
+            f"{context}.truncated: expected {expected_truncated}",
+        )
+    return dict(payload)
+
+
+def _validate_static_proof_identity(
+    payload: Mapping[str, Any],
+    *,
+    expected_bits: int,
+    expected_slab: str,
+    plan: dict[str, dict[str, Any]],
+    context: FormalStaticContext,
+    expected_status: str,
+    proof_context: str,
+) -> None:
+    require_exact_int(payload["schema_version"], f"{proof_context}.schema_version", expected=1)
+    require(payload["protocol_id"] == PROTOCOL_ID, f"{proof_context}: protocol")
+    require(payload["artifact_role"] == CELL_ROLE, f"{proof_context}: role")
+    _require_formal_static_null_authority(payload, proof_context)
+    require(payload["matrix_id"] == context.matrix_id, f"{proof_context}: matrix")
+    require(payload["freeze_sha256"] == context.freeze_sha256, f"{proof_context}: freeze")
+    require(payload["run_config_sha256"] == context.run_config_sha256, f"{proof_context}: run config")
+    require(payload["evaluator_status"] == expected_status, f"{proof_context}: evaluator status")
+    require(payload["slab_id"] == expected_slab, f"{proof_context}: slab")
+    require_exact_int(payload["precision_bits"], f"{proof_context}.precision_bits", expected=expected_bits)
+    record = plan[expected_slab]
+    require(
+        parse_interval_record(payload["epsilon"], f"{proof_context}.epsilon")
+        == plan_epsilon(plan, expected_slab),
+        f"{proof_context}: epsilon",
+    )
+    require(
+        parse_interval_record(payload["period_window"], f"{proof_context}.period_window")
+        == (Fraction(64, 100), PERIOD_MAX),
+        f"{proof_context}: period window",
+    )
+    require_json_exact(
+        payload["input_echo"],
+        {
+            "slab_id": expected_slab,
+            "precision_bits": expected_bits,
+            "epsilon_lower": record["epsilon_lower"],
+            "epsilon_upper": record["epsilon_upper"],
+            "matrix_id": context.matrix_id,
+            "freeze_sha256": context.freeze_sha256,
+            "run_config_sha256": context.run_config_sha256,
+            "plan_record_sha256": plan_record_sha256(record),
+            "max_depth": context.max_depth,
+            "max_nodes_per_tree": context.max_nodes_per_tree,
+            "max_nodes_per_cell": context.max_nodes_per_cell,
+        },
+        f"{proof_context}.input_echo",
+    )
+
+
+def _validate_formal_nonpass_proof(
+    payload: dict[str, Any],
+    *,
+    expected_bits: int,
+    expected_slab: str,
+    plan: dict[str, dict[str, Any]],
+    context: FormalStaticContext,
+    expected_status: str,
+) -> None:
+    proof_context = f"formal proof {expected_bits}:{expected_slab}"
+    exact_keys(payload, FORMAL_STATIC_NONPASS_PROOF_KEYS, proof_context)
+    _validate_static_proof_identity(
+        payload,
+        expected_bits=expected_bits,
+        expected_slab=expected_slab,
+        plan=plan,
+        context=context,
+        expected_status=expected_status,
+        proof_context=proof_context,
+    )
+    require(payload["proof_complete"] is False, f"{proof_context}: nonpass completeness")
+    require_json_exact(payload["trees"], [], f"{proof_context}.trees")
+    require_json_exact(
+        payload["counts"],
+        {
+            "tree_count": 0,
+            "node_count": 0,
+            "internal_count": 0,
+            "terminal_count": 0,
+            "unresolved_count": 1,
+            "maximum_depth": None,
+        },
+        f"{proof_context}.counts",
+    )
+    failure = payload["failure"]
+    require(type(failure) is dict, f"{proof_context}.failure: not an exact object")
+    if expected_status == "STATIC_UNRESOLVED_NODE_BUDGET":
+        exact_keys(
+            failure,
+            {"scope", "tree_id", "limit", "consumed_before_node"},
+            f"{proof_context}.failure",
+        )
+        require(
+            type(failure["scope"]) is str and failure["scope"] in {"tree", "cell"},
+            f"{proof_context}: failure scope",
+        )
+        require(type(failure["tree_id"]) is str, f"{proof_context}: failure tree")
+        require_exact_int(failure["limit"], f"{proof_context}.failure.limit", minimum=1)
+        require_exact_int(
+            failure["consumed_before_node"],
+            f"{proof_context}.failure.consumed_before_node",
+            minimum=0,
+        )
+    elif expected_status == "STATIC_UNRESOLVED_DEPTH":
+        require(
+            set(failure) in (
+                {"tree_id", "limit", "unresolved_depth"},
+                {"tree_id", "limit", "unresolved_depth", "node_id"},
+            ),
+            f"{proof_context}.failure: depth schema",
+        )
+        require(type(failure["tree_id"]) is str, f"{proof_context}: failure tree")
+        if "node_id" in failure:
+            require(type(failure["node_id"]) is str, f"{proof_context}: failure node")
+        require_exact_int(failure["limit"], f"{proof_context}.failure.limit", minimum=1)
+        require_exact_int(
+            failure["unresolved_depth"],
+            f"{proof_context}.failure.unresolved_depth",
+            minimum=0,
+        )
+    elif expected_status == "INVALID_STATIC_PROOF_CONTRACT":
+        exact_keys(failure, {"reason"}, f"{proof_context}.failure")
+        require(type(failure["reason"]) is str, f"{proof_context}: failure reason")
+    elif expected_status == "STATIC_INTERVAL_FAIL":
+        exact_keys(failure, {"error_type", "reason"}, f"{proof_context}.failure")
+        require(
+            type(failure["error_type"]) is str and type(failure["reason"]) is str,
+            f"{proof_context}: interval failure strings",
+        )
+    else:
+        raise CheckError(f"{proof_context}: unsupported nonpass status")
+    require(
+        payload["proof_content_hash_definition"]
+        == "sha256(canonical_json(proof_without_proof_content_sha256))",
+        f"{proof_context}: content-hash definition",
+    )
+    without_hash = dict(payload)
+    stored_hash = without_hash.pop("proof_content_sha256")
+    require(
+        exact_sha256(stored_hash, f"{proof_context}.proof_content_sha256")
+        == sha256_bytes(canonical_json_bytes(without_hash)),
+        f"{proof_context}: content hash",
+    )
+
+
+def _validate_static_absent_sentinel(
+    payload: dict[str, Any],
+    *,
+    expected_bits: int,
+    expected_slab: str,
+    context: FormalStaticContext,
+    classification: str,
+    reason_code: str,
+) -> None:
+    sentinel_context = f"STATIC_PROOF_ABSENT {expected_bits}:{expected_slab}"
+    exact_keys(payload, STATIC_PROOF_SENTINEL_KEYS, sentinel_context)
+    require_exact_int(payload["schema_version"], f"{sentinel_context}.schema_version", expected=1)
+    require(payload["protocol_id"] == PROTOCOL_ID, f"{sentinel_context}: protocol")
+    require(payload["artifact_role"] == "STATIC_PROOF_ABSENT", f"{sentinel_context}: role")
+    _require_formal_static_null_authority(payload, sentinel_context)
+    require(payload["matrix_id"] == context.matrix_id, f"{sentinel_context}: matrix")
+    require(payload["freeze_sha256"] == context.freeze_sha256, f"{sentinel_context}: freeze")
+    require(payload["main_freeze_sha256"] == context.freeze_sha256, f"{sentinel_context}: main freeze")
+    require(payload["run_config_sha256"] == context.run_config_sha256, f"{sentinel_context}: run config")
+    validate_cell_identity(payload["cell"], expected_bits, expected_slab, f"{sentinel_context}.cell")
+    require(payload["scheduler_classification"] == classification, f"{sentinel_context}: classification")
+    require(payload["evaluator_status"] is None, f"{sentinel_context}: evaluator status")
+    require(payload["reason_code"] == reason_code, f"{sentinel_context}: reason")
+
+
+def validate_formal_static_cell(
+    cell_dir: Path,
+    manifest_path: Path,
+    *,
+    expected_bits: int,
+    expected_slab: str,
+    plan: dict[str, dict[str, Any]],
+    context: FormalStaticContext,
+    expected_semantic_argv: list[str] | tuple[str, ...],
+    expected_limits: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate one formal four-file static transaction without promoting it.
+
+    This leaf API deliberately returns only a structural/scientific
+    eligibility Boolean.  It does not implement a formal aggregate or checker
+    publication entry point, and it never dispatches an evaluator.
+    """
+
+    validate_formal_context(context)
+    require(expected_bits in PRECISIONS, "formal static cell: unsupported precision")
+    require(expected_slab in SLABS, "formal static cell: unsupported slab")
+    cell_dir = require_canonical_absolute_path(cell_dir, "formal static cell directory")
+    manifest_path = require_canonical_absolute_path(
+        manifest_path, "formal static cell manifest"
+    )
+    require(
+        cell_dir.name == expected_slab
+        and cell_dir.parent.name == str(expected_bits)
+        and cell_dir.parent.parent.name == "cells"
+        and cell_dir.parent.parent.parent.name == "static",
+        "formal static cell: canonical hierarchy mismatch",
+    )
+    require(
+        manifest_path.name == f"{expected_slab}.json"
+        and manifest_path.parent.name == str(expected_bits)
+        and manifest_path.parent.parent.name == "cell_manifests"
+        and manifest_path.parent.parent.parent == cell_dir.parent.parent.parent,
+        "formal static manifest: canonical hierarchy mismatch",
+    )
+    require_exact_directory_names(
+        cell_dir, FORMAL_STATIC_FILE_NAMES, f"formal static cell {expected_bits}:{expected_slab}"
+    )
+    paths = {name: cell_dir / name for name in sorted(FORMAL_STATIC_FILE_NAMES)}
+    images = {name: read_pinned_regular_bytes(path) for name, path in paths.items()}
+    record = _canonical_object_from_image(images["record.json"], paths["record.json"])
+    manifest_raw = read_pinned_regular_bytes(manifest_path)
+    manifest = _canonical_object_from_image(manifest_raw, manifest_path)
+
+    record_context = f"formal static record {expected_bits}:{expected_slab}"
+    exact_keys(record, FORMAL_STATIC_RECORD_KEYS, record_context)
+    require_exact_int(record["schema_version"], f"{record_context}.schema_version", expected=1)
+    require(record["protocol_id"] == PROTOCOL_ID, f"{record_context}: protocol")
+    require(record["artifact_role"] == "STATIC_CELL_RECORD", f"{record_context}: role")
+    _require_formal_static_null_authority(record, record_context)
+    require(record["matrix_id"] == context.matrix_id, f"{record_context}: matrix")
+    require(record["freeze_sha256"] == context.freeze_sha256, f"{record_context}: freeze")
+    require(record["main_freeze_sha256"] == context.freeze_sha256, f"{record_context}: main freeze")
+    require(record["run_config_sha256"] == context.run_config_sha256, f"{record_context}: run config")
+    validate_cell_identity(record["cell"], expected_bits, expected_slab, f"{record_context}.cell")
+
+    plan_record = plan[expected_slab]
+    require(type(record["task"]) is dict, f"{record_context}.task: not an object")
+    exact_keys(record["task"], FORMAL_STATIC_TASK_KEYS, f"{record_context}.task")
+    require_json_exact(
+        record["task"],
+        {
+            "epsilon_lower": plan_record["epsilon_lower"],
+            "epsilon_upper": plan_record["epsilon_upper"],
+            "plan_record_sha256": plan_record_sha256(plan_record),
+        },
+        f"{record_context}.task",
+    )
+
+    require(type(expected_semantic_argv) in (list, tuple), "expected semantic argv type")
+    expected_argv = list(expected_semantic_argv)
+    require(
+        len(expected_argv) == 26 and all(type(item) is str for item in expected_argv),
+        "expected semantic argv must be exactly 26 strings",
+    )
+    require(expected_argv[-1] == "<STAGING_PROOF_PATH>", "expected semantic output token")
+    invocation = record["semantic_invocation"]
+    require(type(invocation) is dict, f"{record_context}.semantic_invocation: not an object")
+    exact_keys(invocation, FORMAL_STATIC_INVOCATION_KEYS, f"{record_context}.semantic_invocation")
+    require_json_exact(invocation["argv"], expected_argv, f"{record_context}.semantic_invocation.argv")
+    invocation_sha256 = sha256_bytes(canonical_json_bytes(expected_argv))
+    require(
+        exact_sha256(invocation["argv_sha256"], f"{record_context}.semantic_invocation.argv_sha256")
+        == invocation_sha256,
+        f"{record_context}: invocation hash",
+    )
+    require_exact_int(
+        invocation["exact_string_count"],
+        f"{record_context}.semantic_invocation.exact_string_count",
+        expected=26,
+    )
+    require(
+        invocation["output_token"] == "<STAGING_PROOF_PATH>",
+        f"{record_context}: output token",
+    )
+
+    require(type(expected_limits) is dict, "expected formal static limits must be exact object")
+    exact_keys(dict(expected_limits), FORMAL_STATIC_LIMIT_KEYS, "expected formal static limits")
+    for key, value in expected_limits.items():
+        require_exact_int(value, f"expected formal static limits.{key}", minimum=1)
+    require_json_exact(record["limits"], dict(expected_limits), f"{record_context}.limits")
+    require_exact_int(
+        expected_limits["max_depth_per_tree"],
+        "formal static limits.max_depth_per_tree",
+        expected=context.max_depth,
+    )
+    require_exact_int(
+        expected_limits["max_nodes_per_tree"],
+        "formal static limits.max_nodes_per_tree",
+        expected=context.max_nodes_per_tree,
+    )
+    require_exact_int(
+        expected_limits["max_nodes_per_cell"],
+        "formal static limits.max_nodes_per_cell",
+        expected=context.max_nodes_per_cell,
+    )
+
+    scheduler_result = record["scheduler_result"]
+    evaluator_result = record["evaluator_result"]
+    require(type(scheduler_result) is dict, f"{record_context}.scheduler_result: not an object")
+    require(type(evaluator_result) is dict, f"{record_context}.evaluator_result: not an object")
+    exact_keys(
+        scheduler_result,
+        FORMAL_STATIC_SCHEDULER_RESULT_KEYS,
+        f"{record_context}.scheduler_result",
+    )
+    exact_keys(
+        evaluator_result,
+        FORMAL_STATIC_EVALUATOR_RESULT_KEYS,
+        f"{record_context}.evaluator_result",
+    )
+    classification = scheduler_result["classification"]
+    evaluator_status = scheduler_result["evaluator_status"]
+    return_code = scheduler_result["return_code"]
+    proof_kind = scheduler_result["proof_kind"]
+    reason_code = scheduler_result["reason_code"]
+    require(
+        type(classification) is str and classification in FORMAL_STATIC_CLASSIFICATIONS,
+        f"{record_context}: classification",
+    )
+    require(
+        type(proof_kind) is str and proof_kind in FORMAL_STATIC_PROOF_KINDS,
+        f"{record_context}: proof kind",
+    )
+    require(return_code is None or type(return_code) is int, f"{record_context}: return-code type")
+    require(type(evaluator_result["status_line_count"]) is int, f"{record_context}: status-line count type")
+
+    file_bindings = record["files"]
+    require(type(file_bindings) is dict, f"{record_context}.files: not an object")
+    exact_keys(file_bindings, {"proof.json", "stdout.txt", "stderr.txt"}, f"{record_context}.files")
+    proof_serializer = "CJ_COMPACT_V1" if proof_kind != "INVALID_EVALUATOR_PROOF" else "RAW_BYTES"
+    validated_bindings = {
+        "proof.json": _validate_formal_static_binding(
+            file_bindings["proof.json"],
+            images["proof.json"],
+            expected_path="proof.json",
+            expected_serializer=proof_serializer,
+            context=f"{record_context}.files.proof.json",
+        ),
+        "stdout.txt": _validate_formal_static_binding(
+            file_bindings["stdout.txt"],
+            images["stdout.txt"],
+            expected_path="stdout.txt",
+            expected_serializer="RAW_BYTES",
+            context=f"{record_context}.files.stdout.txt",
+        ),
+        "stderr.txt": _validate_formal_static_binding(
+            file_bindings["stderr.txt"],
+            images["stderr.txt"],
+            expected_path="stderr.txt",
+            expected_serializer="RAW_BYTES",
+            context=f"{record_context}.files.stderr.txt",
+        ),
+    }
+    require(
+        sum(len(images[name]) for name in FORMAL_STATIC_FILE_NAMES)
+        <= expected_limits["total_cell_bytes"],
+        f"{record_context}: total byte cap exceeded",
+    )
+
+    manifest_context = f"formal static manifest {expected_bits}:{expected_slab}"
+    exact_keys(manifest, FORMAL_STATIC_MANIFEST_KEYS, manifest_context)
+    require_exact_int(manifest["schema_version"], f"{manifest_context}.schema_version", expected=1)
+    require(manifest["protocol_id"] == PROTOCOL_ID, f"{manifest_context}: protocol")
+    require(manifest["artifact_role"] == "STATIC_CELL_MANIFEST", f"{manifest_context}: role")
+    _require_formal_static_null_authority(manifest, manifest_context)
+    require(manifest["matrix_id"] == context.matrix_id, f"{manifest_context}: matrix")
+    require(manifest["freeze_sha256"] == context.freeze_sha256, f"{manifest_context}: freeze")
+    require(manifest["main_freeze_sha256"] == context.freeze_sha256, f"{manifest_context}: main freeze")
+    require(manifest["run_config_sha256"] == context.run_config_sha256, f"{manifest_context}: run config")
+    validate_cell_identity(manifest["cell"], expected_bits, expected_slab, f"{manifest_context}.cell")
+    require(manifest["semantic_invocation_sha256"] == invocation_sha256, f"{manifest_context}: invocation")
+    require(manifest["scheduler_classification"] == classification, f"{manifest_context}: classification")
+    require_json_exact(manifest["evaluator_status"], evaluator_status, f"{manifest_context}.evaluator_status")
+    manifest_files = manifest["files"]
+    require(type(manifest_files) is dict, f"{manifest_context}.files: not an object")
+    exact_keys(manifest_files, FORMAL_STATIC_FILE_NAMES, f"{manifest_context}.files")
+    for name in ("proof.json", "stdout.txt", "stderr.txt"):
+        require_json_exact(
+            manifest_files[name], validated_bindings[name], f"{manifest_context}.files.{name}"
+        )
+    record_binding = _validate_formal_static_binding(
+        manifest_files["record.json"],
+        images["record.json"],
+        expected_path="record.json",
+        expected_serializer="CJ_COMPACT_V1",
+        expected_truncated=False,
+        context=f"{manifest_context}.files.record.json",
+    )
+    require_json_exact(manifest["record"], record_binding, f"{manifest_context}.record")
+
+    component_eligible = False
+    proof_replay: dict[str, Any] | None = None
+    if classification == "COMMITTED_EVALUATOR_RESULT":
+        require(proof_kind == "EVALUATOR_PROOF", f"{record_context}: committed proof kind")
+        require(evaluator_status in FORMAL_STATIC_STATUS_CODES, f"{record_context}: evaluator status")
+        expected_code = FORMAL_STATIC_STATUS_CODES[evaluator_status]
+        require_exact_int(return_code, f"{record_context}.return_code", expected=expected_code)
+        require(reason_code is None, f"{record_context}: committed reason must be null")
+        require_json_exact(
+            evaluator_result,
+            {"status": evaluator_status, "return_code": expected_code, "status_line_count": 1},
+            f"{record_context}.evaluator_result",
+        )
+        require(
+            images["stdout.txt"] == f"evaluator_status={evaluator_status}\n".encode("ascii"),
+            f"{record_context}: exact evaluator stdout",
+        )
+        require(images["stderr.txt"] == b"", f"{record_context}: committed stderr is nonempty")
+        require(
+            all(not binding["truncated"] for binding in validated_bindings.values()),
+            f"{record_context}: committed file is truncated",
+        )
+        proof_payload = _canonical_object_from_image(images["proof.json"], paths["proof.json"])
+        if evaluator_status == CELL_PASS_STATUS:
+            proof_replay = verify_proof(
+                paths["proof.json"],
+                expected_bits=expected_bits,
+                expected_slab=expected_slab,
+                plan=plan,
+                context=context,
+            )
+            require(
+                proof_replay["sha256"] == sha256_bytes(images["proof.json"]),
+                f"{record_context}: proof changed before scientific replay",
+            )
+            component_eligible = True
+        else:
+            _validate_formal_nonpass_proof(
+                proof_payload,
+                expected_bits=expected_bits,
+                expected_slab=expected_slab,
+                plan=plan,
+                context=context,
+                expected_status=evaluator_status,
+            )
+    else:
+        require(evaluator_status is None, f"{record_context}: noncommitted evaluator status")
+        require_json_exact(
+            evaluator_result,
+            {"status": None, "return_code": None, "status_line_count": 0},
+            f"{record_context}.evaluator_result",
+        )
+        if proof_kind == "SCHEDULER_NO_PROOF_SENTINEL":
+            expected_reason = FORMAL_STATIC_SENTINEL_REASONS.get(classification)
+            require(expected_reason is not None, f"{record_context}: sentinel classification")
+            require(reason_code == expected_reason, f"{record_context}: sentinel reason")
+            require(return_code is None, f"{record_context}: sentinel return code")
+            require(
+                validated_bindings["proof.json"]["truncated"] is False,
+                f"{record_context}: sentinel cannot be truncated",
+            )
+            sentinel = _canonical_object_from_image(images["proof.json"], paths["proof.json"])
+            _validate_static_absent_sentinel(
+                sentinel,
+                expected_bits=expected_bits,
+                expected_slab=expected_slab,
+                context=context,
+                classification=classification,
+                reason_code=reason_code,
+            )
+            if classification == "CELL_OUTPUT_BUDGET_EXHAUSTED":
+                require(
+                    any(binding["truncated"] for binding in validated_bindings.values()),
+                    f"{record_context}: budget exhaustion without truncation",
+                )
+        elif proof_kind == "INVALID_EVALUATOR_PROOF":
+            require(
+                classification
+                in {"MALFORMED_EVALUATOR_OUTPUT", "CELL_OUTPUT_BUDGET_EXHAUSTED"},
+                f"{record_context}: invalid proof classification",
+            )
+            expected_reason = (
+                "MALFORMED_OR_NONCANONICAL_PROOF"
+                if classification == "MALFORMED_EVALUATOR_OUTPUT"
+                else "OUTPUT_BUDGET"
+            )
+            require(reason_code == expected_reason, f"{record_context}: invalid proof reason")
+            require(len(images["proof.json"]) > 0, f"{record_context}: absent proof requires sentinel")
+            if classification == "CELL_OUTPUT_BUDGET_EXHAUSTED":
+                require(
+                    any(binding["truncated"] for binding in validated_bindings.values()),
+                    f"{record_context}: budget exhaustion without truncation",
+                )
+        else:
+            require(
+                classification == "MALFORMED_EVALUATOR_OUTPUT"
+                and reason_code == "STATUS_OR_RETURN_CODE_MISMATCH",
+                f"{record_context}: canonical noncommitted proof reason",
+            )
+            proof_payload = _canonical_object_from_image(
+                images["proof.json"], paths["proof.json"]
+            )
+            proof_status = proof_payload.get("evaluator_status")
+            require(
+                type(proof_status) is str
+                and proof_status in FORMAL_STATIC_STATUS_CODES,
+                f"{record_context}: canonical proof has no closed evaluator status",
+            )
+            if proof_status == CELL_PASS_STATUS:
+                rejected_replay = verify_proof(
+                    paths["proof.json"],
+                    expected_bits=expected_bits,
+                    expected_slab=expected_slab,
+                    plan=plan,
+                    context=context,
+                )
+                require(
+                    rejected_replay["sha256"] == sha256_bytes(images["proof.json"]),
+                    f"{record_context}: malformed-status proof changed during replay",
+                )
+            else:
+                _validate_formal_nonpass_proof(
+                    proof_payload,
+                    expected_bits=expected_bits,
+                    expected_slab=expected_slab,
+                    plan=plan,
+                    context=context,
+                    expected_status=proof_status,
+                )
+
+    require(
+        manifest["evaluator_status"] == (evaluator_status if classification == "COMMITTED_EVALUATOR_RESULT" else None),
+        f"{manifest_context}: evaluator status authority",
+    )
+    # Detect cross-file replacement after all semantic checks.  The manifest
+    # itself is immutable evidence but does not make mutable lexical paths safe.
+    require_exact_directory_names(
+        cell_dir, FORMAL_STATIC_FILE_NAMES, f"formal static cell {expected_bits}:{expected_slab} final scan"
+    )
+    for name, raw in images.items():
+        require(
+            read_pinned_regular_bytes(paths[name]) == raw,
+            f"formal static cell {expected_bits}:{expected_slab}: {name} changed during replay",
+        )
+    require(
+        read_pinned_regular_bytes(manifest_path) == manifest_raw,
+        f"formal static manifest {expected_bits}:{expected_slab}: changed during replay",
+    )
+    return {
+        "cell": {"precision_bits": expected_bits, "slab_id": expected_slab},
+        "manifest_path": manifest_path.name,
+        "manifest_sha256": sha256_bytes(manifest_raw),
+        "manifest_size_bytes": len(manifest_raw),
+        "scheduler_classification": classification,
+        "evaluator_status": evaluator_status,
+        "proof_kind": proof_kind,
+        "component_eligible": component_eligible,
+        "proof_replay": proof_replay,
+    }
 
 
 def require_mock_null_authority(payload: Mapping[str, Any], context: str) -> None:

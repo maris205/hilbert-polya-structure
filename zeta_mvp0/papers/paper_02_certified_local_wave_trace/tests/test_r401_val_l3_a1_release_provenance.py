@@ -1,9 +1,16 @@
 from __future__ import annotations
 
+import copy
+from datetime import datetime, timezone
+from decimal import Decimal
 import hashlib
 import importlib.util
 import json
+import os
 import shutil
+import stat
+import struct
+import zlib
 from pathlib import Path
 from typing import Any
 
@@ -308,3 +315,1305 @@ def test_release_source_has_no_component_imports() -> None:
     assert "import run_r401" not in text
     assert "import check_r401" not in text
     assert "subprocess" not in text
+
+
+def _fixture_file(path: Path, raw: bytes, mode: int = 0o644) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(raw)
+    path.chmod(mode)
+    return path
+
+
+def _copy_fixture_file(source: Path, target: Path, mode: int) -> Path:
+    return _fixture_file(target, source.read_bytes(), mode)
+
+
+def _live_binding(path: Path, build_id: str | None) -> dict[str, Any]:
+    raw = path.read_bytes()
+    return {
+        "path": str(path),
+        "mode": stat.S_IMODE(path.stat().st_mode),
+        "size_bytes": len(raw),
+        "sha256": sha(raw),
+        "build_id": build_id,
+    }
+
+
+def _runtime_binding(path: Path, soname: str, marker: str) -> dict[str, Any]:
+    binding = _live_binding(path, (marker * 40)[:40])
+    return {"soname": soname, **binding}
+
+
+def _fixture_elf(
+    build_id: str,
+    *,
+    soname: str | None = None,
+    needed: tuple[str, ...] = (),
+) -> bytes:
+    """Construct the smallest section-table ELF needed by the live parser."""
+
+    assert len(build_id) == 40 and all(character in "0123456789abcdef" for character in build_id)
+    dynamic_strings = bytearray(b"\x00")
+
+    def add_string(value: str) -> int:
+        offset = len(dynamic_strings)
+        dynamic_strings.extend(value.encode("ascii") + b"\x00")
+        return offset
+
+    dynamic_entries = [(1, add_string(value)) for value in needed]
+    if soname is not None:
+        dynamic_entries.append((14, add_string(soname)))
+    dynamic_entries.append((0, 0))
+    dynamic = b"".join(struct.pack("<qQ", *entry) for entry in dynamic_entries)
+    note = struct.pack("<III", 4, 20, 3) + b"GNU\x00" + bytes.fromhex(build_id)
+    shstr = b"\x00.dynstr\x00.dynamic\x00.note.gnu.build-id\x00.shstrtab\x00"
+    names = {
+        ".dynstr": shstr.index(b".dynstr"),
+        ".dynamic": shstr.index(b".dynamic"),
+        ".note.gnu.build-id": shstr.index(b".note.gnu.build-id"),
+        ".shstrtab": shstr.index(b".shstrtab"),
+    }
+    image = bytearray(b"\x00" * 64)
+
+    def append_section(raw: bytes, alignment: int) -> tuple[int, int]:
+        while len(image) % alignment:
+            image.append(0)
+        offset = len(image)
+        image.extend(raw)
+        return offset, len(raw)
+
+    dynstr_offset, dynstr_size = append_section(bytes(dynamic_strings), 1)
+    dynamic_offset, dynamic_size = append_section(dynamic, 8)
+    note_offset, note_size = append_section(note, 4)
+    shstr_offset, shstr_size = append_section(shstr, 1)
+    while len(image) % 8:
+        image.append(0)
+    section_offset = len(image)
+    section_format = "<IIQQQQIIQQ"
+    sections = [struct.pack(section_format, *([0] * 10))]
+    sections.append(struct.pack(
+        section_format, names[".dynstr"], 3, 0, 0, dynstr_offset,
+        dynstr_size, 0, 0, 1, 0,
+    ))
+    sections.append(struct.pack(
+        section_format, names[".dynamic"], 6, 0, 0, dynamic_offset,
+        dynamic_size, 1, 0, 8, 16,
+    ))
+    sections.append(struct.pack(
+        section_format, names[".note.gnu.build-id"], 7, 0, 0, note_offset,
+        note_size, 0, 0, 4, 0,
+    ))
+    sections.append(struct.pack(
+        section_format, names[".shstrtab"], 3, 0, 0, shstr_offset,
+        shstr_size, 0, 0, 1, 0,
+    ))
+    image.extend(b"".join(sections))
+    ident = b"\x7fELF" + bytes((2, 1, 1, 0)) + b"\x00" * 8
+    header = struct.pack(
+        "<16sHHIQQQIHHHHHH",
+        ident, 3, 62, 1, 0, 0, section_offset, 0, 64, 0, 0, 64,
+        len(sections), 4,
+    )
+    image[:64] = header
+    return bytes(image)
+
+
+def _fixture_conda_manifest(prefix: Path, files: list[str]) -> tuple[int, str]:
+    rows: list[dict[str, Any]] = []
+    for relative in files:
+        path = prefix / relative
+        info = os.lstat(path)
+        if stat.S_ISLNK(info.st_mode):
+            raw = os.fsencode(os.readlink(path))
+            kind = "SYMLINK"
+        else:
+            raw = path.read_bytes()
+            kind = "REGULAR"
+        rows.append({
+            "kind": kind,
+            "mode": f"{stat.S_IMODE(info.st_mode):04o}",
+            "path": relative,
+            "sha256": sha(raw),
+            "size_bytes": len(raw),
+        })
+    rows.sort(key=lambda row: row["path"].encode("utf-8"))
+    return len(rows), sha(R.canonical_json_bytes(rows))
+
+
+def _fixture_git_index(
+    checkout: Path,
+    tracked: dict[str, tuple[int, bytes]],
+    *,
+    update_head: bool = True,
+) -> tuple[str, str]:
+    git_dir = checkout / ".git"
+    git_dir.mkdir(parents=True, exist_ok=True)
+    entries = bytearray()
+    rows: list[dict[str, Any]] = []
+    tree_entries: list[tuple[bytes, bytes]] = []
+    for relative in sorted(tracked, key=lambda item: item.encode("utf-8")):
+        mode, raw = tracked[relative]
+        object_id = hashlib.sha1(
+            b"blob " + str(len(raw)).encode("ascii") + b"\x00" + raw,
+            usedforsecurity=False,
+        ).digest()
+        path_raw = relative.encode("utf-8")
+        entry = bytearray(struct.pack(
+            ">LLLLLLLLLL20sH",
+            0, 0, 0, 0, 0, 0, mode, 0, 0, len(raw), object_id,
+            min(len(path_raw), 0xFFF),
+        ))
+        entry.extend(path_raw + b"\x00")
+        while len(entry) % 8:
+            entry.append(0)
+        entries.extend(entry)
+        rows.append({
+            "git_blob_sha1": object_id.hex(),
+            "mode": f"{mode:06o}",
+            "path": relative,
+            "sha256": sha(raw),
+            "size_bytes": len(raw),
+        })
+        tree_entries.append((
+            path_raw,
+            f"{mode:06o}".encode("ascii")
+            + b" " + path_raw + b"\x00" + object_id,
+        ))
+    body = b"DIRC" + struct.pack(">II", 2, len(tracked)) + bytes(entries)
+    checksum = hashlib.sha1(body, usedforsecurity=False).digest()
+    (git_dir / "index").write_bytes(body + checksum)
+    tree_payload = b"".join(payload for _, payload in sorted(tree_entries))
+    tree_framed = (
+        b"tree " + str(len(tree_payload)).encode("ascii") + b"\x00" + tree_payload
+    )
+    tree_oid = hashlib.sha1(tree_framed, usedforsecurity=False).hexdigest()
+    commit_payload = (
+        f"tree {tree_oid}\n"
+        "author Fixture <fixture@example.test> 0 +0000\n"
+        "committer Fixture <fixture@example.test> 0 +0000\n"
+        "\nfixture\n"
+    ).encode("ascii")
+    commit_framed = (
+        b"commit " + str(len(commit_payload)).encode("ascii")
+        + b"\x00" + commit_payload
+    )
+    commit = hashlib.sha1(commit_framed, usedforsecurity=False).hexdigest()
+    loose = git_dir / "objects" / commit[:2] / commit[2:]
+    loose.parent.mkdir(parents=True)
+    loose.write_bytes(zlib.compress(commit_framed))
+    if update_head:
+        (git_dir / "HEAD").write_bytes((commit + "\n").encode("ascii"))
+    return commit, sha(R.canonical_json_bytes(rows))
+
+
+def _fixture_static_argv(
+    row: dict[str, Any], bindings: dict[str, Any], plan_record: dict[str, Any]
+) -> list[str]:
+    return [
+        bindings["interpreter"]["invocation_path"],
+        bindings["evaluator"]["path"],
+        "--slab-id", row["slab_id"],
+        "--precision-bits", str(row["precision_bits"]),
+        "--epsilon-lower", plan_record["epsilon_lower"],
+        "--epsilon-upper", plan_record["epsilon_upper"],
+        "--matrix-id", bindings["calibration_binding"]["matrix_id"],
+        "--freeze-sha256", bindings["calibration_binding"]["nonfreeze_sha256"],
+        "--run-config-sha256",
+        bindings["calibration_binding"]["nonrunconfig_sha256"],
+        "--plan-record-sha256", sha(R.canonical_json_bytes(plan_record)),
+        "--max-depth", "24",
+        "--max-nodes-per-tree", "250000",
+        "--max-nodes-per-cell", "1000000",
+        "--output", row["output"],
+    ]
+
+
+def _fixture_branch_argv(
+    binary: str, bits: int, record: dict[str, Any]
+) -> list[str]:
+    center = record["center"]
+    radii = record["root_radii"]
+
+    def endpoint(name: str, sign: int) -> str:
+        return format(Decimal(center[name]) + sign * Decimal(radii[name]), "f")
+
+    return [
+        binary,
+        str(bits),
+        record["epsilon_lower"],
+        record["epsilon_upper"],
+        endpoint("q_slow", -1),
+        endpoint("q_slow", 1),
+        endpoint("q_fast", -1),
+        endpoint("q_fast", 1),
+        endpoint("p_slow", -1),
+        endpoint("p_slow", 1),
+        endpoint("period", -1),
+        endpoint("period", 1),
+    ]
+
+
+def formal_machine_fixture(tmp_path: Path) -> dict[str, Any]:
+    project = tmp_path / "formal-project"
+    results = project / "results"
+    results.mkdir(parents=True)
+    scheduler = _copy_fixture_file(
+        ROOT / R.FORMAL_MACHINE_CAPTURE_TOOL,
+        project / R.FORMAL_MACHINE_CAPTURE_TOOL,
+        0o644,
+    )
+    evaluator = _copy_fixture_file(
+        ROOT / R.FORMAL_MACHINE_STATIC_EVALUATOR,
+        project / R.FORMAL_MACHINE_STATIC_EVALUATOR,
+        0o644,
+    )
+    source = _copy_fixture_file(
+        ROOT / R.FORMAL_MACHINE_BRANCH_SOURCE,
+        project / R.FORMAL_MACHINE_BRANCH_SOURCE,
+        0o644,
+    )
+    binary = _copy_fixture_file(
+        ROOT / R.FORMAL_MACHINE_BRANCH_BINARY,
+        project / R.FORMAL_MACHINE_BRANCH_BINARY,
+        0o755,
+    )
+    plan_path = _copy_fixture_file(
+        ROOT / "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json",
+        project / "research/route_a_wave_trace/R401_VAL_L1_FINAL_PLAN_V2.json",
+        0o644,
+    )
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    plan_records = {record["slab_id"]: record for record in plan["slabs"]}
+
+    external = tmp_path / "external"
+    python_executable = _fixture_file(
+        external / "python/bin/python3", b"fixture CPython 3.12.3\n", 0o755
+    )
+    conda_extra = _fixture_file(
+        external / "python/lib/python3.12/fixture.py", b"# conda fixture\n", 0o644
+    )
+    conda_link = external / "python/bin/python-link"
+    conda_link.symlink_to("python3")
+    conda_files = [
+        "bin/python3", "lib/python3.12/fixture.py", "bin/python-link",
+    ]
+    write_json(
+        external / "python/conda-meta/python-3.12.3-fixture.json",
+        {
+            "name": "python",
+            "version": "3.12.3",
+            "files": conda_files,
+            "paths_data": {"paths": [{"_path": path} for path in conda_files]},
+        },
+    )
+    conda_count, conda_root = _fixture_conda_manifest(
+        external / "python", conda_files
+    )
+    compiler_executable = _fixture_file(
+        external / "compiler/bin/g++", b"fixture g++ 11.4.0\n", 0o755
+    )
+    live_site_packages = Path("/root/miniconda3/lib/python3.12/site-packages")
+    arb_extension = live_site_packages / "flint/types/arb.abi3.so"
+    fmpq_extension = live_site_packages / "flint/types/fmpq.abi3.so"
+    flint_module = live_site_packages / "flint/__init__.py"
+    flint_record = live_site_packages / "python_flint-0.9.0.dist-info/RECORD"
+    assert all(
+        path.is_file()
+        for path in (arb_extension, fmpq_extension, flint_module, flint_record)
+    )
+
+    python_runtime: list[dict[str, Any]] = []
+    for index, soname in enumerate(R.FORMAL_MACHINE_PYTHON_BUNDLED_SONAMES):
+        path = _fixture_file(
+            external / "python/runtime" / soname,
+            _fixture_elf((f"{index + 1:x}" * 40)[:40], soname=soname),
+            0o755,
+        )
+        python_runtime.append(_runtime_binding(path, soname, f"{index + 1:x}"))
+    capd_runtime: list[dict[str, Any]] = []
+    for index, soname in enumerate(R.FORMAL_MACHINE_CAPD_SYSTEM_SONAMES):
+        path = _fixture_file(
+            external / "system/runtime" / soname,
+            _fixture_elf((f"{index + 8:x}" * 40)[:40], soname=soname),
+            0o755,
+        )
+        capd_runtime.append(_runtime_binding(path, soname, f"{index + 8:x}"))
+    runtime_libraries = {
+        "python_bundled": python_runtime,
+        "capd_system": capd_runtime,
+    }
+
+    checkout = external / "capd"
+    checkout.mkdir(parents=True)
+    capd_readme = _fixture_file(checkout / "README.md", b"fixture CAPD source\n")
+    capd_link = checkout / "README-link"
+    capd_link.symlink_to("README.md")
+    capd_commit, capd_tree_root = _fixture_git_index(
+        checkout,
+        {
+            "README-link": (0o120000, b"README.md"),
+            "README.md": (0o100644, capd_readme.read_bytes()),
+        },
+    )
+    cache = _fixture_file(
+        checkout / "build-mp/CMakeCache.txt", b"fixture CMake cache\n"
+    )
+    config = _fixture_file(
+        checkout / "build-mp/bin/capd-config", b"fixture capd-config\n", 0o755
+    )
+    libcapd = _fixture_file(
+        checkout / "build-mp/libcapd.a", b"fixture libcapd archive\n"
+    )
+    libfilib = _fixture_file(
+        checkout / "build-mp/capdExt/filibsrc/libfilib.a",
+        b"fixture libfilib archive\n",
+    )
+    capd_tokens = [
+        "-std=c++17", "-O2", "-frounding-math", "-D__USE_FILIB__",
+        "-D__HAVE_MPFR__", "-O2", "-frounding-math", "-DFILIB_EXTENDED",
+        "-DFILIB_HAVE_SSE",
+        f"-I{checkout}/capdDynSys/include",
+        f"-I{checkout}/capdAlg/include",
+        f"-I{checkout}/capdAux/include",
+        f"-I{checkout}/capdExt/include",
+        f"-I{checkout}/capdExt/filibsrc",
+        f"-L{checkout}/build-mp",
+        f"-L{checkout}/build-mp/capdExt/filibsrc",
+        "-lcapd", "-lfilib", "-lmpfr", "-lgmp",
+    ]
+    raw_flags = " ".join(capd_tokens) + "\n"
+
+    python_version = R.FORMAL_MACHINE_PYTHON_VERSION
+    temporary_root = tmp_path / "resource-evidence"
+    static_bindings = {
+        "calibration_binding": {
+            "matrix_id": R.matrix_id(),
+            "nonfreeze_sha256": sha(b"nonfreeze calibration fixture"),
+            "nonrunconfig_sha256": sha(b"nonrunconfig calibration fixture"),
+        },
+        "evaluator": {
+            "path": str(evaluator),
+            "sha256": sha(evaluator.read_bytes()),
+            "size_bytes": evaluator.stat().st_size,
+            "mode": "0644",
+        },
+        "interpreter": {
+            "invocation_path": str(python_executable),
+            "resolved_path": str(python_executable),
+            "sha256": sha(python_executable.read_bytes()),
+            "size_bytes": python_executable.stat().st_size,
+            "version": python_version,
+        },
+        "python_flint": {
+            "version": "0.9.0",
+            "flint_version": "3.6.0",
+            "module_path": str(flint_module),
+            "record_path": str(flint_record),
+            "record_sha256": sha(flint_record.read_bytes()),
+            "installed_record_file_count": 139,
+            "installed_manifest_sha256": (
+                R.FORMAL_MACHINE_PYTHON_FLINT_INSTALLED_MANIFEST_ROOT_SHA256
+            ),
+            "arb_extension_path": str(arb_extension),
+            "arb_extension_sha256": sha(arb_extension.read_bytes()),
+        },
+        "plan": {
+            "path": str(plan_path),
+            "sha256": sha(plan_path.read_bytes()),
+            "public_slab_ids": list(R.FORMAL_MACHINE_PUBLIC_SLABS),
+        },
+    }
+
+    def static_row(
+        bits: int, slab: str, replica: int, label: str, peak_kib: int
+    ) -> dict[str, Any]:
+        base = temporary_root / label
+        row = {
+            "label": label,
+            "precision_bits": bits,
+            "slab_id": slab,
+            "replica": replica,
+            "argv": [],
+            "returncode": 0,
+            "elapsed_seconds": 0.1,
+            "peak_rss_kib": peak_kib,
+            "user_cpu_seconds": 0.05,
+            "system_cpu_seconds": 0.01,
+            "output": str(base / "proof.json"),
+            "output_bytes": 6,
+            "output_sha256": sha(b"proof\n"),
+            "stdout": str(base / "stdout.txt"),
+            "stdout_bytes": len(b"evaluator_status=STATIC_CELL_CERTIFIED\n"),
+            "stdout_sha256": sha(b"evaluator_status=STATIC_CELL_CERTIFIED\n"),
+            "stdout_exact_status_line": "evaluator_status=STATIC_CELL_CERTIFIED",
+            "stderr": str(base / "stderr.txt"),
+            "stderr_bytes": 0,
+            "stderr_sha256": sha(b""),
+            "stderr_empty": True,
+            "evaluator_status": "STATIC_CELL_CERTIFIED",
+            "scientific_status": None,
+            "component_status": None,
+            "milestone_status": None,
+            "theorem_status": None,
+            "final_status": None,
+        }
+        row["argv"] = _fixture_static_argv(
+            row, static_bindings, plan_records[slab]
+        )
+        return row
+
+    public = [
+        (bits, slab)
+        for bits in R.PRECISIONS
+        for slab in R.FORMAL_MACHINE_PUBLIC_SLABS
+    ]
+    sequential = [
+        static_row(bits, slab, 0, f"{bits}_{slab}", 1_000 + index)
+        for index, (bits, slab) in enumerate(public)
+    ]
+    stress = [*public, (256, "S025"), (256, "S050")]
+    seen: dict[tuple[int, str], int] = {}
+    concurrent = []
+    for index, (bits, slab) in enumerate(stress):
+        replica = seen.get((bits, slab), 0)
+        seen[(bits, slab)] = replica + 1
+        concurrent.append(
+            static_row(
+                bits,
+                slab,
+                replica,
+                f"{index:02d}_{bits}_{slab}_r{replica}",
+                1_100 + index,
+            )
+        )
+    static_peak = max(
+        row["peak_rss_kib"] * 1024 for row in [*sequential, *concurrent]
+    )
+    static_baseline_samples = [1_000_000 + index for index in range(21)]
+    static_baseline = max(static_baseline_samples)
+    static_concurrent_samples = [1_100_000 + index for index in range(21)]
+    static_lhs = (
+        static_baseline
+        + R.FORMAL_MACHINE_REQUIREMENTS["static_workers"] * static_peak
+        + R.FORMAL_MACHINE_REQUIREMENTS["reserve_bytes"]
+    )
+    static_payload = {
+        "schema_version": 1,
+        "protocol_id": R.PROTOCOL_ID,
+        "artifact_role": "TEMP_PUBLIC_STATIC_RSS_CALIBRATION",
+        "scope": "PUBLIC_S0_RESOURCE_CALIBRATION_ONLY",
+        "production_authorized": False,
+        "scientific_licensing_enabled": False,
+        "claim_boundary": (
+            "resource telemetry on already-public S000/S025/S050 at 128/256 only; "
+            "no held-out/all-slab evaluation, no freeze, no scientific promotion"
+        ),
+        "project_root": str(project),
+        "temporary_root": str(temporary_root),
+        "execution_environment": {
+            "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC",
+            "PYTHONHASHSEED": "0", "PYTHONNOUSERSITE": "1",
+            "PYTHONDONTWRITEBYTECODE": "1", "OMP_NUM_THREADS": "1",
+            "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
+            "NUMEXPR_NUM_THREADS": "1",
+        },
+        "bindings": static_bindings,
+        "measurement": {
+            "method": "os.wait4(pid,0/WNOHANG).rusage.ru_maxrss on Linux",
+            "ru_maxrss_unit": "KiB",
+            "bytes_per_kib": 1024,
+            "cgroup_usage_path": "/sys/fs/cgroup/memory/memory.usage_in_bytes",
+            "cgroup_limit_path": "/sys/fs/cgroup/memory/memory.limit_in_bytes",
+            "cgroup_limit_bytes": R.FORMAL_MACHINE_REQUIREMENTS["memory_limit_bytes"],
+            "baseline_samples_bytes": static_baseline_samples,
+            "baseline_conservative_bytes": static_baseline,
+            "concurrent_samples_bytes": static_concurrent_samples,
+            "concurrent_peak_bytes": max(static_concurrent_samples),
+            "sample_interval_seconds": 0.05,
+        },
+        "sequential_runs": sequential,
+        "concurrent_schedule": [
+            {"precision_bits": bits, "slab_id": slab} for bits, slab in stress
+        ],
+        "concurrent_runs": concurrent,
+        "admission": {
+            "workers": 8,
+            "representative_peak_rss_bytes": static_peak,
+            "idle_baseline_bytes": static_baseline,
+            "reserve_bytes": R.FORMAL_MACHINE_REQUIREMENTS["reserve_bytes"],
+            "admission_limit_bytes": R.FORMAL_MACHINE_REQUIREMENTS[
+                "memory_admission_limit_bytes"
+            ],
+            "lhs_bytes": static_lhs,
+            "headroom_bytes": R.FORMAL_MACHINE_REQUIREMENTS[
+                "memory_admission_limit_bytes"
+            ] - static_lhs,
+            "formula": "idle_baseline_bytes + workers * representative_peak_rss_bytes + reserve_bytes <= admission_limit_bytes",
+            "passes": True,
+        },
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    static_raw = R.canonical_json_bytes(static_payload)
+
+    discarded_binary = str(temporary_root / "branch-calibration-binary")
+    branch_results = []
+    for index, (bits, slab) in enumerate(public):
+        argv = _fixture_branch_argv(discarded_binary, bits, plan_records[slab])
+        branch_results.append({
+            "precision_bits": bits,
+            "slab_id": slab,
+            "argv": argv,
+            "argv_count": 12,
+            "returncode": 0,
+            "elapsed_seconds": 0.2,
+            "peak_rss_kib": 2_000 + index,
+            "user_cpu_seconds": 0.1,
+            "system_cpu_seconds": 0.02,
+            "stdout_bytes": 10,
+            "stdout_sha256": sha(f"stdout-{index}".encode("ascii")),
+            "stderr_bytes": 0,
+            "stderr_sha256": sha(b""),
+            "abi_verified": True,
+            "terminal_abi_value": "BRANCH_CELL_CERTIFIED",
+        })
+    branch_peak = max(row["peak_rss_kib"] * 1024 for row in branch_results)
+    branch_baseline_samples = [1_200_000 + index for index in range(21)]
+    branch_baseline = max(branch_baseline_samples)
+    branch_post_samples = [1_100_000 + index for index in range(21)]
+    branch_lhs = (
+        branch_baseline
+        + R.FORMAL_MACHINE_REQUIREMENTS["branch_workers"] * branch_peak
+        + R.FORMAL_MACHINE_REQUIREMENTS["reserve_bytes"]
+    )
+    branch_payload = {
+        "scope": "REPRESENTATIVE_S0_CALIBRATION_ONLY",
+        "binary": discarded_binary,
+        "binary_sha256": sha(binary.read_bytes()),
+        "cgroup_limit_bytes": R.FORMAL_MACHINE_REQUIREMENTS["memory_limit_bytes"],
+        "baseline_samples_bytes": branch_baseline_samples,
+        "baseline_conservative_bytes": branch_baseline,
+        "post_samples_bytes": branch_post_samples,
+        "results": branch_results,
+        "task_count": 6,
+        "per_process_peak_rss_max_kib": branch_peak // 1024,
+        "sampled_concurrent_peak_bytes": branch_baseline + 5_000_000,
+        "sampled_concurrent_increment_bytes": 5_000_000,
+        "admission": {
+            "baseline_bytes": branch_baseline,
+            "peak_rss_bytes": branch_peak,
+            "workers": 6,
+            "reserve_bytes": R.FORMAL_MACHINE_REQUIREMENTS["reserve_bytes"],
+            "limit_bytes": R.FORMAL_MACHINE_REQUIREMENTS[
+                "memory_admission_limit_bytes"
+            ],
+            "lhs_bytes": branch_lhs,
+            "headroom_bytes": R.FORMAL_MACHINE_REQUIREMENTS[
+                "memory_admission_limit_bytes"
+            ] - branch_lhs,
+            "formula": "baseline + 6*peak_rss + 8GiB <= 48GiB",
+            "passes": True,
+        },
+        "scientific_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    branch_raw = R.branch_transaction_json_bytes(branch_payload)
+
+    build_argv = [
+        str(compiler_executable),
+        "-Wall", "-Wextra", "-Wpedantic", "-Werror",
+        str(source),
+        *capd_tokens,
+        "-o", str(binary),
+    ]
+    runtime_root = sha(R.canonical_json_bytes(runtime_libraries))
+    free_bytes = 300 * 1024**3
+    baseline = max(static_baseline, branch_baseline)
+    static_required = (
+        baseline
+        + R.FORMAL_MACHINE_REQUIREMENTS["static_workers"] * static_peak
+        + R.FORMAL_MACHINE_REQUIREMENTS["reserve_bytes"]
+    )
+    branch_required = (
+        baseline
+        + R.FORMAL_MACHINE_REQUIREMENTS["branch_workers"] * branch_peak
+        + R.FORMAL_MACHINE_REQUIREMENTS["reserve_bytes"]
+    )
+    device_id = project.stat().st_dev
+    machine = {
+        "schema_version": 1,
+        "protocol_id": R.PROTOCOL_ID,
+        "artifact_role": "MACHINE_FREEZE",
+        "status": "FROZEN_FOR_PRODUCTION",
+        "authority": "MACHINE_ADMISSION_ONLY",
+        "scientific_licensing_enabled": True,
+        "production_authorized": False,
+        "capture": {
+            "captured_at_utc": datetime.now(timezone.utc).strftime(
+                "%Y-%m-%dT%H:%M:%SZ"
+            ),
+            "capture_tool_path": R.FORMAL_MACHINE_CAPTURE_TOOL,
+            "capture_tool_sha256": sha(scheduler.read_bytes()),
+            "boot_id_sha256": sha(Path("/proc/sys/kernel/random/boot_id").read_bytes()),
+        },
+        "machine_requirements": copy.deepcopy(R.FORMAL_MACHINE_REQUIREMENTS),
+        "machine_observations": {
+            "logical_cpu_count": R.FORMAL_MACHINE_REQUIREMENTS["logical_cpu_count"],
+            "memory_limit_bytes": R.FORMAL_MACHINE_REQUIREMENTS["memory_limit_bytes"],
+            "result_parent_free_bytes": free_bytes,
+            "idle_baseline_rss_bytes": baseline,
+            "representative_static_peak_rss_bytes": static_peak,
+            "representative_branch_peak_rss_bytes": branch_peak,
+        },
+        "python_arb": {
+            "executable_path": str(python_executable),
+            "executable_sha256": sha(python_executable.read_bytes()),
+            "python_version": python_version,
+            "implementation": "CPython",
+            "python_flint_version": "0.9.0",
+            "flint_version": "3.6.0",
+            "arb_version": "FLINT-3.6.0",
+            "conda_manifest_algorithm": R.FORMAL_MACHINE_CONDA_MANIFEST_ALGORITHM,
+            "conda_manifest_file_count": conda_count,
+            "conda_installed_manifest_root_sha256": conda_root,
+            "python_flint_record_sha256": (
+                R.FORMAL_MACHINE_PYTHON_FLINT_RECORD_SHA256
+            ),
+            "python_flint_installed_manifest_root_sha256": (
+                R.FORMAL_MACHINE_PYTHON_FLINT_INSTALLED_MANIFEST_ROOT_SHA256
+            ),
+            "arb_extension": _live_binding(
+                arb_extension,
+                R._machine_elf_metadata(
+                    arb_extension.read_bytes(), "fixture Arb extension"
+                )[0],
+            ),
+            "fmpq_extension": _live_binding(
+                fmpq_extension,
+                R._machine_elf_metadata(
+                    fmpq_extension.read_bytes(), "fixture fmpq extension"
+                )[0],
+            ),
+            "bundled_libraries": copy.deepcopy(python_runtime),
+        },
+        "capd": {
+            "checkout_path": str(checkout),
+            "commit": capd_commit,
+            "tree_algorithm": R.FORMAL_MACHINE_CAPD_TREE_ALGORITHM,
+            "tree_sha256": capd_tree_root,
+            "clean": True,
+            "cmake_cache_path": str(cache),
+            "cmake_cache_sha256": sha(cache.read_bytes()),
+            "config_path": str(config),
+            "config_sha256": sha(config.read_bytes()),
+            "raw_flags": raw_flags,
+            "raw_flags_sha256": sha(raw_flags.encode("utf-8")),
+            "libcapd": _live_binding(libcapd, None),
+            "libfilib": _live_binding(libfilib, None),
+        },
+        "compiler": {
+            "executable_path": str(compiler_executable),
+            "executable_sha256": sha(compiler_executable.read_bytes()),
+            "version": R.FORMAL_MACHINE_COMPILER_VERSION,
+            "build_record": {
+                "cwd": str(project),
+                "environment": {"LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "TZ": "UTC"},
+                "umask": "0022",
+                "argv": build_argv,
+                "argv_sha256": sha(R.canonical_json_bytes(build_argv)),
+                "stdout_sha256": sha(b""),
+                "stderr_sha256": sha(b""),
+                "stdout": "",
+                "stderr": "",
+                "return_code": 0,
+            },
+        },
+        "branch_binary": {
+            "path": R.FORMAL_MACHINE_BRANCH_BINARY,
+            "sha256": sha(binary.read_bytes()),
+            "size_bytes": binary.stat().st_size,
+            "executable_mode": 0o755,
+            "build_id": R._machine_elf_metadata(
+                binary.read_bytes(), "fixture branch binary"
+            )[0],
+            "source_path": R.FORMAL_MACHINE_BRANCH_SOURCE,
+            "source_sha256": sha(source.read_bytes()),
+            "elf_sha256": sha(binary.read_bytes()),
+            "dt_needed": list(R.FORMAL_MACHINE_DT_NEEDED),
+            "dt_needed_sha256": sha(
+                R.canonical_json_bytes(list(R.FORMAL_MACHINE_DT_NEEDED))
+            ),
+            "runtime_libraries_sha256": runtime_root,
+        },
+        "runtime_libraries": runtime_libraries,
+        "resource_evidence": {
+            "static_payload_raw_utf8": static_raw.decode("utf-8"),
+            "static_payload_sha256": sha(static_raw),
+            "branch_payload_raw_utf8": branch_raw.decode("utf-8"),
+            "branch_payload_sha256": sha(branch_raw),
+            "persistent_binary_sha256": sha(binary.read_bytes()),
+        },
+        "resource_admission": {
+            "static_required_bytes": static_required,
+            "branch_required_bytes": branch_required,
+            "admitted_required_bytes": max(static_required, branch_required),
+            "admission_limit_bytes": R.FORMAL_MACHINE_REQUIREMENTS[
+                "memory_admission_limit_bytes"
+            ],
+            "static_inequality_passed": True,
+            "branch_inequality_passed": True,
+            "storage_launch_passed": free_bytes
+            >= R.FORMAL_MACHINE_REQUIREMENTS["launch_free_bytes"],
+        },
+        "filesystem": {
+            "project_root": str(project),
+            "result_parent": str(results),
+            "operational_parent": str(results),
+            "project_device_id": device_id,
+            "result_device_id": device_id,
+            "operational_device_id": device_id,
+            "same_filesystem": True,
+        },
+        "claim_boundary": R.FORMAL_MACHINE_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    machine_path = project / "research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json"
+    write_json(machine_path, machine)
+    role_hashes = {
+        "scheduler": sha(scheduler.read_bytes()),
+        "static_evaluator": sha(evaluator.read_bytes()),
+        "branch_evaluator_source": sha(source.read_bytes()),
+        "branch_evaluator_binary": sha(binary.read_bytes()),
+        "l1_final_plan": sha(plan_path.read_bytes()),
+    }
+    return {
+        "project": project,
+        "machine": machine,
+        "machine_path": machine_path,
+        "roles": role_hashes,
+        "external": external,
+        "binary": binary,
+        "source": source,
+        "python_executable": python_executable,
+    }
+
+
+def _publish_formal_machine(fixture: dict[str, Any]) -> None:
+    write_json(fixture["machine_path"], fixture["machine"])
+
+
+def _replace_static_resource(
+    fixture: dict[str, Any], payload: dict[str, Any], *, pretty: bool = False
+) -> None:
+    raw = (
+        R.branch_transaction_json_bytes(payload)
+        if pretty
+        else R.canonical_json_bytes(payload)
+    )
+    evidence = fixture["machine"]["resource_evidence"]
+    evidence["static_payload_raw_utf8"] = raw.decode("utf-8")
+    evidence["static_payload_sha256"] = sha(raw)
+    _publish_formal_machine(fixture)
+
+
+def _replace_branch_resource(
+    fixture: dict[str, Any], payload: dict[str, Any], *, compact: bool = False
+) -> None:
+    raw = R.canonical_json_bytes(payload) if compact else R.branch_transaction_json_bytes(payload)
+    evidence = fixture["machine"]["resource_evidence"]
+    evidence["branch_payload_raw_utf8"] = raw.decode("utf-8")
+    evidence["branch_payload_sha256"] = sha(raw)
+    _publish_formal_machine(fixture)
+
+
+_DEFAULT_ROLES = object()
+
+
+def _validate_machine_fixture(
+    fixture: dict[str, Any], role_hashes: Any = _DEFAULT_ROLES
+) -> Any:
+    """Replay the 300-GiB machine gate although pytest's /tmp is an overlay."""
+
+    original_statvfs = R.os.statvfs
+
+    def fixture_statvfs(path: Any):
+        observed = original_statvfs(path)
+        values = list(observed)
+        values[4] = max(values[4], (300 * 1024**3) // observed.f_frsize)
+        return os.statvfs_result(values)
+
+    R.os.statvfs = fixture_statvfs
+    try:
+        roles = fixture["roles"] if role_hashes is _DEFAULT_ROLES else role_hashes
+        return R.validate_formal_machine_freeze(
+            fixture["project"],
+            machine_path=fixture["machine_path"],
+            expected_role_hashes=roles,
+        )
+    finally:
+        R.os.statvfs = original_statvfs
+
+
+def test_independent_formal_machine_validator_accepts_exact_temp_fixture(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    before = fixture["machine_path"].read_bytes()
+    validated = _validate_machine_fixture(fixture)
+    assert validated["authority"] == "MACHINE_ADMISSION_ONLY"
+    assert validated["production_authorized"] is False
+    assert all(
+        validated[key] is None
+        for key in ("component_status", "milestone_status", "theorem_status", "final_status")
+    )
+    assert fixture["machine_path"].read_bytes() == before
+    assert list((fixture["project"] / "results").iterdir()) == []
+
+
+def test_formal_machine_requires_all_frozen_cross_bindings(tmp_path: Path) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    with pytest.raises(R.ReleaseError, match="requires frozen role hashes"):
+        _validate_machine_fixture(fixture, None)
+    fixture["roles"]["l1_final_plan"] = "0" * 64
+    with pytest.raises(R.ReleaseError, match="l1_final_plan.*cross-binding"):
+        _validate_machine_fixture(fixture)
+
+
+@pytest.mark.parametrize(
+    "domain",
+    ("arithmetic", "mode-alias", "status", "extra-key", "build-bool"),
+)
+def test_formal_machine_rejects_nested_schema_authority_and_type_attacks(
+    tmp_path: Path, domain: str
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    machine = fixture["machine"]
+    if domain == "arithmetic":
+        machine["resource_admission"]["static_required_bytes"] += 1
+    elif domain == "mode-alias":
+        machine["python_arb"]["arb_extension"]["mode"] = "0755"
+    elif domain == "status":
+        machine["theorem_status"] = "RH_PROVED"
+    elif domain == "extra-key":
+        machine["resource_evidence"]["evidence_path"] = "/tmp/forged.json"
+    else:
+        machine["compiler"]["build_record"]["return_code"] = False
+    _publish_formal_machine(fixture)
+    with pytest.raises((R.ReleaseError, R.StrictJSONError)):
+        _validate_machine_fixture(fixture)
+
+
+@pytest.mark.parametrize(
+    "domain",
+    (
+        "binary-size",
+        "static-evaluator-size",
+        "static-interpreter-size",
+        "static-flint-count",
+        "static-measurement",
+        "static-admission",
+        "branch-top",
+        "branch-admission",
+    ),
+)
+def test_formal_machine_rejects_coherent_integral_float_aliases(
+    tmp_path: Path, domain: str
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    if domain == "binary-size":
+        binding = fixture["machine"]["branch_binary"]
+        binding["size_bytes"] = float(binding["size_bytes"])
+        _publish_formal_machine(fixture)
+    elif domain.startswith("static-"):
+        payload = json.loads(
+            fixture["machine"]["resource_evidence"]["static_payload_raw_utf8"]
+        )
+        if domain == "static-evaluator-size":
+            target = payload["bindings"]["evaluator"]
+            key = "size_bytes"
+        elif domain == "static-interpreter-size":
+            target = payload["bindings"]["interpreter"]
+            key = "size_bytes"
+        elif domain == "static-flint-count":
+            target = payload["bindings"]["python_flint"]
+            key = "installed_record_file_count"
+        elif domain == "static-measurement":
+            target = payload["measurement"]
+            key = "cgroup_limit_bytes"
+        else:
+            target = payload["admission"]
+            key = "lhs_bytes"
+        target[key] = float(target[key])
+        _replace_static_resource(fixture, payload)
+    else:
+        payload = json.loads(
+            fixture["machine"]["resource_evidence"]["branch_payload_raw_utf8"]
+        )
+        target = payload if domain == "branch-top" else payload["admission"]
+        key = "task_count" if domain == "branch-top" else "lhs_bytes"
+        target[key] = float(target[key])
+        _replace_branch_resource(fixture, payload)
+    with pytest.raises(R.ReleaseError, match="exact integer"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_static_noncanonical_and_heldout_receipts(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    static = json.loads(
+        fixture["machine"]["resource_evidence"]["static_payload_raw_utf8"]
+    )
+    _replace_static_resource(fixture, static, pretty=True)
+    with pytest.raises(R.StrictJSONError, match="not canonical"):
+        _validate_machine_fixture(fixture)
+
+    fixture = formal_machine_fixture(tmp_path / "heldout")
+    static = json.loads(
+        fixture["machine"]["resource_evidence"]["static_payload_raw_utf8"]
+    )
+    static["sequential_runs"][0]["slab_id"] = "S051"
+    _replace_static_resource(fixture, static)
+    with pytest.raises(R.ReleaseError, match="identity/order|public"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_branch_nonpretty_and_abi_receipts(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    branch = json.loads(
+        fixture["machine"]["resource_evidence"]["branch_payload_raw_utf8"]
+    )
+    _replace_branch_resource(fixture, branch, compact=True)
+    with pytest.raises(R.StrictJSONError, match="pretty"):
+        _validate_machine_fixture(fixture)
+
+    fixture = formal_machine_fixture(tmp_path / "abi")
+    branch = json.loads(
+        fixture["machine"]["resource_evidence"]["branch_payload_raw_utf8"]
+    )
+    branch["results"][0]["terminal_abi_value"] = "FORGED"
+    _replace_branch_resource(fixture, branch)
+    with pytest.raises(R.ReleaseError, match="ABI"):
+        _validate_machine_fixture(fixture)
+
+
+@pytest.mark.parametrize("target", ("binary", "source", "runtime"))
+def test_formal_machine_rejects_live_bound_byte_mutation(
+    tmp_path: Path, target: str
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    if target == "binary":
+        path = fixture["binary"]
+    elif target == "source":
+        path = fixture["source"]
+    else:
+        path = Path(
+            fixture["machine"]["runtime_libraries"]["capd_system"][0]["path"]
+        )
+    path.write_bytes(path.read_bytes() + b"late mutation\n")
+    if target == "binary":
+        path.chmod(0o755)
+    with pytest.raises(R.ReleaseError, match="live bytes|metadata|size"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_project_symlink_and_hardlink_aliases(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    saved_source = fixture["source"].with_name("saved-source.cpp")
+    fixture["source"].rename(saved_source)
+    fixture["source"].symlink_to(saved_source)
+    with pytest.raises((R.PathContractError, OSError)):
+        _validate_machine_fixture(fixture)
+
+    fixture = formal_machine_fixture(tmp_path / "hardlink")
+    os.link(fixture["binary"], fixture["binary"].with_name("binary-alias"))
+    with pytest.raises(R.PathContractError, match="hard-link"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_replays_external_symlink_at_transaction_end(
+    tmp_path: Path, monkeypatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    old_compiler = fixture["python_executable"]
+    first = old_compiler.with_name("python-target-a")
+    second = old_compiler.with_name("python-target-b")
+    raw = old_compiler.read_bytes()
+    old_compiler.rename(first)
+    _fixture_file(second, raw, 0o755)
+    old_compiler.symlink_to(first)
+    machine = fixture["machine"]
+    machine["python_arb"]["executable_path"] = str(old_compiler)
+    conda_count, conda_root = R._machine_recompute_conda_manifest(str(old_compiler))
+    machine["python_arb"]["conda_manifest_file_count"] = conda_count
+    machine["python_arb"]["conda_installed_manifest_root_sha256"] = conda_root
+    static = json.loads(machine["resource_evidence"]["static_payload_raw_utf8"])
+    static["bindings"]["interpreter"]["invocation_path"] = str(old_compiler)
+    static["bindings"]["interpreter"]["resolved_path"] = str(first)
+    for row in [*static["sequential_runs"], *static["concurrent_runs"]]:
+        row["argv"][0] = str(old_compiler)
+    _replace_static_resource(fixture, static)
+
+    original = R._machine_validate_filesystem
+
+    def validate_then_swap(project: Path, payload: dict[str, Any]) -> None:
+        original(project, payload)
+        old_compiler.unlink()
+        old_compiler.symlink_to(second)
+
+    monkeypatch.setattr(R, "_machine_validate_filesystem", validate_then_swap)
+    with pytest.raises(R.PathContractError, match="external machine path changed"):
+        _validate_machine_fixture(fixture)
+
+
+@pytest.mark.parametrize(
+    "payload",
+    (
+        ("tuple",),
+        {1: "non-string-key"},
+    ),
+)
+def test_canonical_serializers_reject_non_plain_python_aliases(payload: Any) -> None:
+    with pytest.raises(R.StrictJSONError, match="non-plain|non-string"):
+        R.canonical_json_bytes(payload)
+    with pytest.raises(R.StrictJSONError, match="non-plain|non-string"):
+        R.branch_transaction_json_bytes(payload)
+
+
+def test_canonical_serializers_reject_subclasses_nonfinite_and_cycles() -> None:
+    class DictAlias(dict):
+        pass
+
+    class ListAlias(list):
+        pass
+
+    cycle: list[Any] = []
+    cycle.append(cycle)
+    attacks: list[Any] = [
+        DictAlias({"key": "value"}),
+        ListAlias([1]),
+        {"nested": [float("nan")]},
+        {"nested": [float("inf")]},
+        cycle,
+    ]
+    for payload in attacks:
+        with pytest.raises(R.StrictJSONError):
+            R.canonical_json_bytes(payload)
+        with pytest.raises(R.StrictJSONError):
+            R.branch_transaction_json_bytes(payload)
+
+
+@pytest.mark.parametrize("attack", ("alias", "count", "file"))
+def test_formal_machine_live_conda_manifest_and_distinct_roots(
+    tmp_path: Path, attack: str
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    python = fixture["machine"]["python_arb"]
+    if attack == "alias":
+        forged = "f" * 64
+        python["conda_installed_manifest_root_sha256"] = forged
+        python["python_flint_record_sha256"] = forged
+        python["python_flint_installed_manifest_root_sha256"] = forged
+        expected = "pairwise distinct"
+    elif attack == "count":
+        python["conda_manifest_file_count"] += 1
+        expected = "conda manifest live replay"
+    else:
+        path = Path(python["executable_path"]).parents[1] / "lib/python3.12/fixture.py"
+        path.write_bytes(b"# forged conda bytes\n")
+        expected = "conda manifest live replay"
+    _publish_formal_machine(fixture)
+    with pytest.raises(R.ReleaseError, match=expected):
+        _validate_machine_fixture(fixture)
+
+
+@pytest.mark.parametrize(
+    "attack", ("branch-build-id", "branch-needed", "runtime-build-id", "runtime-soname")
+)
+def test_formal_machine_rejects_forged_live_elf_metadata(
+    tmp_path: Path, attack: str
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    machine = fixture["machine"]
+    if attack == "branch-build-id":
+        machine["branch_binary"]["build_id"] = "f" * 40
+    elif attack == "branch-needed":
+        machine["branch_binary"]["dt_needed"] = [*R.FORMAL_MACHINE_DT_NEEDED, "libforged.so"]
+        machine["branch_binary"]["dt_needed_sha256"] = sha(
+            R.canonical_json_bytes(machine["branch_binary"]["dt_needed"])
+        )
+    elif attack == "runtime-build-id":
+        machine["runtime_libraries"]["capd_system"][0]["build_id"] = "f" * 40
+        machine["branch_binary"]["runtime_libraries_sha256"] = sha(
+            R.canonical_json_bytes(machine["runtime_libraries"])
+        )
+    else:
+        row = machine["runtime_libraries"]["capd_system"][0]
+        path = Path(row["path"])
+        raw = _fixture_elf(row["build_id"], soname="libforged.so")
+        path.write_bytes(raw)
+        path.chmod(row["mode"])
+        row["size_bytes"] = len(raw)
+        row["sha256"] = sha(raw)
+        machine["branch_binary"]["runtime_libraries_sha256"] = sha(
+            R.canonical_json_bytes(machine["runtime_libraries"])
+        )
+    _publish_formal_machine(fixture)
+    with pytest.raises(R.ReleaseError, match="ELF|DT_NEEDED|build-id|SONAME"):
+        _validate_machine_fixture(fixture)
+
+
+@pytest.mark.parametrize("attack", ("head", "tracked", "untracked", "staged"))
+def test_formal_machine_replays_live_capd_commit_tree_and_clean_namespace(
+    tmp_path: Path, attack: str
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    checkout = Path(fixture["machine"]["capd"]["checkout_path"])
+    if attack == "head":
+        (checkout / ".git/HEAD").write_text("d" * 40 + "\n", encoding="ascii")
+        expected = "HEAD commit|commit/tree"
+    elif attack == "tracked":
+        (checkout / "README.md").write_text("forged tracked source\n", encoding="utf-8")
+        expected = "Git index object ID"
+    elif attack == "untracked":
+        (checkout / "untracked.txt").write_text("untracked\n", encoding="utf-8")
+        expected = "namespace drift"
+    else:
+        readme = checkout / "README.md"
+        readme.write_text("coherent staged source\n", encoding="utf-8")
+        _, staged_root = _fixture_git_index(
+            checkout,
+            {
+                "README-link": (0o120000, b"README.md"),
+                "README.md": (0o100644, readme.read_bytes()),
+            },
+            update_head=False,
+        )
+        fixture["machine"]["capd"]["tree_sha256"] = staged_root
+        _publish_formal_machine(fixture)
+        expected = "index tree differs"
+    with pytest.raises((R.ReleaseError, R.PathContractError), match=expected):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_unrelated_python_flint_module_path(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    unrelated = _fixture_file(tmp_path / "unrelated.py", b"# unrelated\n")
+    static = json.loads(
+        fixture["machine"]["resource_evidence"]["static_payload_raw_utf8"]
+    )
+    static["bindings"]["python_flint"]["module_path"] = str(unrelated)
+    _replace_static_resource(fixture, static)
+    with pytest.raises(R.PathContractError, match="installation paths are incoherent"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_coherent_forged_python_version(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    forged_version = "3.12.3 | forged distribution [GCC 11.2.0]"
+    fixture["machine"]["python_arb"]["python_version"] = forged_version
+    static = json.loads(
+        fixture["machine"]["resource_evidence"]["static_payload_raw_utf8"]
+    )
+    static["bindings"]["interpreter"]["version"] = forged_version
+    _replace_static_resource(fixture, static)
+    with pytest.raises(R.ReleaseError, match="Python-Arb identity"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_forged_compiler_version(tmp_path: Path) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    fixture["machine"]["compiler"]["version"] = "attacker 11.4.0"
+    _publish_formal_machine(fixture)
+    with pytest.raises(R.ReleaseError, match="compiler version mismatch"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_rejects_capture_from_another_boot(tmp_path: Path) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    fixture["machine"]["capture"]["captured_at_utc"] = "2000-01-01T00:00:00Z"
+    _publish_formal_machine(fixture)
+    with pytest.raises(R.ReleaseError, match="live boot window"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_replays_manifest_inode_at_transaction_end(
+    tmp_path: Path, monkeypatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    python = fixture["machine"]["python_arb"]
+    target = Path(python["executable_path"]).parents[1] / "lib/python3.12/fixture.py"
+    original = R._machine_validate_filesystem
+
+    def validate_then_swap(project: Path, payload: dict[str, Any]) -> None:
+        original(project, payload)
+        replacement = target.with_name("fixture-replacement.py")
+        replacement.write_bytes(target.read_bytes())
+        replacement.chmod(stat.S_IMODE(target.stat().st_mode))
+        os.replace(replacement, target)
+
+    monkeypatch.setattr(R, "_machine_validate_filesystem", validate_then_swap)
+    with pytest.raises(R.PathContractError, match="machine manifest file changed"):
+        _validate_machine_fixture(fixture)
+
+
+def test_formal_machine_replays_conda_metadata_namespace_at_transaction_end(
+    tmp_path: Path, monkeypatch
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    prefix = Path(fixture["machine"]["python_arb"]["executable_path"]).parents[1]
+    original = R._machine_validate_filesystem
+
+    def validate_then_add_metadata(project: Path, payload: dict[str, Any]) -> None:
+        original(project, payload)
+        write_json(
+            prefix / "conda-meta/unrelated-late.json",
+            {"name": "python", "version": "3.12.3", "files": [], "paths_data": {"paths": []}},
+        )
+
+    monkeypatch.setattr(R, "_machine_validate_filesystem", validate_then_add_metadata)
+    with pytest.raises(R.PathContractError, match="metadata namespace changed"):
+        _validate_machine_fixture(fixture)
+
+
+def test_conda_manifest_requires_exact_python3_and_utf8_symlink(
+    tmp_path: Path,
+) -> None:
+    fixture = formal_machine_fixture(tmp_path)
+    executable = Path(fixture["machine"]["python_arb"]["executable_path"])
+    alias = _fixture_file(executable.with_name("python-alias"), executable.read_bytes(), 0o755)
+    with pytest.raises(R.PathContractError, match="conda bin layout"):
+        R._machine_recompute_conda_manifest(str(alias))
+
+    invalid_link = tmp_path / "invalid-target-link"
+    os.symlink(b"\xff", os.fsencode(invalid_link))
+    with pytest.raises(R.PathContractError, match="strict UTF-8"):
+        R._machine_manifest_symlink_snapshot(invalid_link, "invalid fixture link")
+
+
+def test_release_branch_budget_uses_exact_integer_milliseconds() -> None:
+    assert R.BRANCH_CELL_BUDGETS == {
+        "pipe_close_grace_ms": 1000,
+        "record_bytes": 4 * 1024 * 1024,
+        "stderr_bytes": 1 * 1024 * 1024,
+        "stdout_bytes": 16 * 1024 * 1024,
+        "term_grace_ms": 2000,
+        "timeout_ms": 600000,
+        "total_cell_bytes": 32 * 1024 * 1024,
+    }
+    assert all(type(value) is int for value in R.BRANCH_CELL_BUDGETS.values())

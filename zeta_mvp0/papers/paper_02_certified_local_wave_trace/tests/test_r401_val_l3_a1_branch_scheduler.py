@@ -376,13 +376,88 @@ def test_nonempty_stderr_on_nominal_pass_is_malformed(tmp_path: Path) -> None:
     assert scheduler["failure_reason"] == "NONEMPTY_STDERR_ON_CERTIFIED_RESULT"
 
 
-def test_default_stream_and_cell_caps_are_exact_16_1_4_32_mib() -> None:
+def test_default_branch_budgets_use_exact_integer_milliseconds_and_byte_caps() -> None:
     budgets = R.BranchBudgets()
+    assert budgets.timeout_ms == 600_000
+    assert budgets.term_grace_ms == 2_000
+    assert budgets.pipe_close_grace_ms == 1_000
     assert budgets.stdout_bytes == 16 * 1024 * 1024
     assert budgets.stderr_bytes == 1 * 1024 * 1024
     assert budgets.record_bytes == 4 * 1024 * 1024
     assert budgets.total_cell_bytes == 32 * 1024 * 1024
+    assert budgets.payload() == {
+        "pipe_close_grace_ms": 1_000,
+        "record_bytes": 4 * 1024 * 1024,
+        "stderr_bytes": 1 * 1024 * 1024,
+        "stdout_bytes": 16 * 1024 * 1024,
+        "term_grace_ms": 2_000,
+        "timeout_ms": 600_000,
+        "total_cell_bytes": 32 * 1024 * 1024,
+    }
+    assert all(type(value) is int for value in budgets.payload().values())
     budgets.validate()
+
+
+@pytest.mark.parametrize(
+    ("field", "bad_value"),
+    [
+        ("timeout_ms", 600_000.0),
+        ("timeout_ms", True),
+        ("timeout_ms", 0),
+        ("term_grace_ms", 2_000.0),
+        ("term_grace_ms", False),
+        ("term_grace_ms", -1),
+        ("pipe_close_grace_ms", 1_000.0),
+        ("pipe_close_grace_ms", True),
+        ("pipe_close_grace_ms", 0),
+    ],
+)
+def test_frozen_millisecond_budgets_reject_noninteger_or_nonpositive_aliases(
+    field: str, bad_value: object
+) -> None:
+    with pytest.raises(R.BranchContractError, match="positive exact integer"):
+        R.BranchBudgets(**{field: bad_value}).validate()
+
+
+def test_branch_runtime_pretty_serializer_requires_exact_plain_json() -> None:
+    class DictAlias(dict):
+        pass
+
+    class ListAlias(list):
+        pass
+
+    class StringAlias(str):
+        pass
+
+    cycle = []
+    cycle.append(cycle)
+    attacks = [
+        ("tuple",),
+        {1: "non-string-key"},
+        {StringAlias("alias-key"): "value"},
+        DictAlias({"key": "value"}),
+        ListAlias([1]),
+        {"nested": [StringAlias("value")]},
+        {"nested": [float("nan")]},
+        {"nested": [float("inf")]},
+        {"nested": [float("-inf")]},
+        cycle,
+    ]
+    for payload in attacks:
+        with pytest.raises(R.BranchContractError):
+            R.canonical_json_bytes(payload)
+
+    assert R.canonical_json_bytes(
+        {"finite": 1.25, "items": [True, None, 3]}
+    ) == (
+        b'{\n  "finite": 1.25,\n  "items": [\n'
+        b"    true,\n    null,\n    3\n  ]\n}\n"
+    )
+    shared = [1]
+    assert R.canonical_json_bytes({"left": shared, "right": shared}) == (
+        b'{\n  "left": [\n    1\n  ],\n'
+        b'  "right": [\n    1\n  ]\n}\n'
+    )
 
 
 def test_stdout_is_streamed_to_exact_16_mib_cap_and_group_is_stopped(tmp_path: Path) -> None:
@@ -441,9 +516,9 @@ time.sleep(60)
         _abi_python("BRANCH_CELL_CERTIFIED", 0, extra),
     )
     budgets = R.BranchBudgets(
-        timeout_seconds=0.25,
-        term_grace_seconds=0.1,
-        pipe_close_grace_seconds=0.2,
+        timeout_ms=250,
+        term_grace_ms=100,
+        pipe_close_grace_ms=200,
     )
     result = _run(tmp_path, binary, budgets=budgets)
     scheduler = result.record["scheduler_result"]
@@ -474,9 +549,9 @@ os.kill(os.getpid(), signal.SIGKILL)
         _abi_python("BRANCH_TUBE_UNRESOLVED", 2, extra),
     )
     budgets = R.BranchBudgets(
-        timeout_seconds=2.0,
-        term_grace_seconds=0.1,
-        pipe_close_grace_seconds=0.05,
+        timeout_ms=2_000,
+        term_grace_ms=100,
+        pipe_close_grace_ms=50,
     )
     result = _run(tmp_path, binary, budgets=budgets)
     scheduler = result.record["scheduler_result"]
@@ -507,9 +582,9 @@ os.kill(os.getpid(), signal.SIGKILL)
         _abi_python("BRANCH_TUBE_UNRESOLVED", 2, extra),
     )
     budgets = R.BranchBudgets(
-        timeout_seconds=2.0,
-        term_grace_seconds=0.1,
-        pipe_close_grace_seconds=0.05,
+        timeout_ms=2_000,
+        term_grace_ms=100,
+        pipe_close_grace_ms=50,
     )
     result = _run(tmp_path, binary, budgets=budgets)
     scheduler = result.record["scheduler_result"]
@@ -535,9 +610,9 @@ time.sleep(60)
         _abi_python("BRANCH_CELL_CERTIFIED", 0, extra),
     )
     budgets = R.BranchBudgets(
-        timeout_seconds=0.2,
-        term_grace_seconds=0.5,
-        pipe_close_grace_seconds=0.2,
+        timeout_ms=200,
+        term_grace_ms=500,
+        pipe_close_grace_ms=200,
     )
     result = _run(tmp_path, binary, budgets=budgets)
     scheduler = result.record["scheduler_result"]
@@ -609,9 +684,9 @@ time.sleep(60)
 
     monkeypatch.setattr(R.threading, "Event", budget_event_factory)
     budgets = R.BranchBudgets(
-        timeout_seconds=5.0,
-        term_grace_seconds=0.1,
-        pipe_close_grace_seconds=0.1,
+        timeout_ms=5_000,
+        term_grace_ms=100,
+        pipe_close_grace_ms=100,
     )
     with pytest.raises(abort_type):
         _run(tmp_path, binary, budgets=budgets)
@@ -670,9 +745,9 @@ try:
         raw_root / "stdout.txt",
         raw_root / "stderr.txt",
         module.BranchBudgets(
-            timeout_seconds=30.0,
-            term_grace_seconds=0.1,
-            pipe_close_grace_seconds=0.1,
+            timeout_ms=30_000,
+            term_grace_ms=100,
+            pipe_close_grace_ms=100,
         ),
         executable_descriptor=descriptor,
     )
@@ -745,18 +820,18 @@ time.sleep(60)
                 spawned,
                 (),
                 R.BranchBudgets(
-                    timeout_seconds=5.0,
-                    term_grace_seconds=0.1,
-                    pipe_close_grace_seconds=0.1,
+                    timeout_ms=5_000,
+                    term_grace_ms=100,
+                    pipe_close_grace_ms=100,
                 ),
             )
             raise
 
     monkeypatch.setattr(R, "_spawn_pinned_process", spawn_then_queue_signal)
     budgets = R.BranchBudgets(
-        timeout_seconds=5.0,
-        term_grace_seconds=0.1,
-        pipe_close_grace_seconds=0.1,
+        timeout_ms=5_000,
+        term_grace_ms=100,
+        pipe_close_grace_ms=100,
     )
     with pytest.raises(R._SchedulerTerminationSignal):
         _run(tmp_path, binary, budgets=budgets)
@@ -805,9 +880,9 @@ time.sleep(60)
         tmp_path,
         binary,
         budgets=R.BranchBudgets(
-            timeout_seconds=5.0,
-            term_grace_seconds=0.1,
-            pipe_close_grace_seconds=0.1,
+            timeout_ms=5_000,
+            term_grace_ms=100,
+            pipe_close_grace_ms=100,
         ),
     )
     scheduler = result.record["scheduler_result"]
@@ -848,9 +923,9 @@ def test_partial_signal_handler_install_is_restored_on_pending_sigint(
                 tmp_path / "handler-stdout.txt",
                 tmp_path / "handler-stderr.txt",
                 R.BranchBudgets(
-                    timeout_seconds=1.0,
-                    term_grace_seconds=0.1,
-                    pipe_close_grace_seconds=0.1,
+                    timeout_ms=1_000,
+                    term_grace_ms=100,
+                    pipe_close_grace_ms=100,
                 ),
                 executable_descriptor=descriptor,
             )
@@ -1789,7 +1864,7 @@ with counter.open("a", encoding="utf-8") as stream:
         _abi_python("BRANCH_CELL_CERTIFIED", 0, counter_code),
     )
     _run(tmp_path, binary)
-    changed = R.BranchBudgets(timeout_seconds=601.0)
+    changed = R.BranchBudgets(timeout_ms=601_000)
     with pytest.raises(R.BranchProvenanceError, match="budget binding"):
         _run(tmp_path, binary, budgets=changed)
     assert (tmp_path / "mock_eval.count").read_text(encoding="utf-8").splitlines() == ["dispatch"]

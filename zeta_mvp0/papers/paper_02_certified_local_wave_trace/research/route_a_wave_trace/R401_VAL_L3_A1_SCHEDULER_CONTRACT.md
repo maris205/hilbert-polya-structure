@@ -237,7 +237,11 @@ One component cell is one same-filesystem transaction:
 8. write and flush the cell manifest with exclusive creation; and
 9. flush the manifest parent directory.
 
-Static authoritative cells contain exactly `proof.json` and `record.json`.
+Static authoritative cells contain exactly `proof.json`, `stdout.txt`,
+`stderr.txt`, and `record.json`.  `proof.json` is either the exact evaluator
+image, retained malformed raw bytes, or a canonical `STATIC_PROOF_ABSENT`
+sentinel when no evaluator proof bytes existed.  Raw stdout/stderr are never
+discarded.
 Branch authoritative cells contain exactly `stdout.txt`, `stderr.txt`, and
 `record.json`.  Telemetry is operational and absent from both.
 
@@ -269,7 +273,7 @@ These operations never alter an authoritative cell.
 
 ## 9. Run binding and whole-generation quarantine
 
-The write-once `run_config.json` binds at least:
+The write-once `run_config.json` binds exactly:
 
 - formal protocol, scheduler/checker/release contracts, machine freeze, and
   main-freeze hash;
@@ -320,7 +324,8 @@ self-hash.
 Aggregate construction and resume exact-scan the component namespace before
 accepting any digest.  The cell root contains exactly precision directories
 `128` and `256`; each contains exactly `S000` through `S050`; and each static
-cell contains exactly `proof.json` and `record.json` while each branch cell
+cell contains exactly `proof.json`, `stdout.txt`, `stderr.txt`, and
+`record.json` while each branch cell
 contains exactly `stdout.txt`, `stderr.txt`, and `record.json`.  The parallel
 manifest hierarchy is equally exact.  An extra cell subtree, ordinary file,
 hidden entry, linked alias, or aggregate/control name blocks publication even
@@ -357,8 +362,8 @@ The future focused suite must cover:
 
 ## 12. CLI and present rejection gate
 
-A future scheduler may offer `--initialize-only`, `--resume`, and explicit
-production modes.  `--initialize-only` validates a real accepted main freeze
+A scheduler offers `--initialize-only`, `--resume`, and explicit production
+modes.  `--initialize-only` validates a real accepted main freeze
 and writes only the run config.  Production mode must fail closed unless the
 exact main freeze has status `FROZEN_FOR_PRODUCTION`, its sole independent
 pre-freeze verdict is `Verdict: ACCEPT_FOR_FREEZE`, live machine admission
@@ -377,4 +382,90 @@ theorem_status = null
 final_status = null
 ```
 
-This contract records no executable production command.
+The implemented formal CLI is an exact XOR: initialization accepts none of
+the execution flags, while the execution spelling requires all of
+`--production --execute-scientific-dispatch --resume`.  The latter remains an
+unconditional rejection.  This contract records no executable production
+command.
+
+## 13. Exact control-plane schema amendment
+
+The machine freeze, main freeze, and run config are strict closed-key JSON
+objects serialized with `CJ_COMPACT_V1` (sorted keys, UTF-8,
+`separators=(",", ":")`, no NaN, one final LF).  The main freeze contains
+`input_roles` as an ordered array of exactly 53 objects, each exactly
+`{role,path,sha256}`.  It is not a JSON map and order is authority-bearing.
+
+The machine freeze embeds the original resource-calibration byte images as
+`static_payload_raw_utf8` and `branch_payload_raw_utf8`.  Their hashes are
+over the encoded raw strings.  The static image must independently replay as
+`CJ_COMPACT_V1`; the branch image must independently replay as
+`CJ_PRETTY_2_V1` (sorted keys, indent 2, final LF).  Historical `/tmp` strings
+inside those byte images are inert evidence and are never reopened.  Static
+calibration is cross-bound to role 15, and branch calibration is cross-bound
+to the persistent role-17 binary.  The final role-15 public-only calibration
+has been rerun as 14 jobs and independently accepted by both validators
+(`8afc8a0a0929da077a1a1ad19ddc0c19e754c49646c4b3d806f3f4cf5522de92`).
+It remains a noncanonical `/tmp` image until an exact machine-freeze capture
+embeds those raw bytes.
+
+The Python environment receipt keeps three pairwise-distinct roots:
+`conda_installed_manifest_root_sha256` for the live Python-package Conda
+manifest,
+`python_flint_record_sha256` for raw `RECORD` bytes, and
+`python_flint_installed_manifest_root_sha256` for the installed python-flint
+file-set root.  The static calibration's installed-manifest and record fields
+cross-bind only the latter two respectively.
+The Conda root additionally binds
+`conda_manifest_algorithm=CONDA_META_LIVE_FILES_CJ_COMPACT_V1` and an exact
+file count.  Its unique Python 3.12.3 conda-meta record must have identical
+`files` and `paths_data.paths._path` sets; the validator terminally replays
+every regular-file byte image or symlink-target UTF-8 image and hashes the
+UTF-8-path-sorted compact row array.
+
+The CAPD receipt binds
+`tree_algorithm=GIT_INDEX_LIVE_TREE_CJ_COMPACT_V1`.  The validator parses the
+checksum-covered ordered v2 index, recursively derives its Git tree SHA-1,
+resolves and authenticates the detached HEAD commit object (loose or packed),
+and requires equal tree OIDs.  It then replays every tracked file/symlink and
+the exact clean namespace (excluding only `.git` and `build-mp`) to derive the
+separate 64-hex `tree_sha256` row root.  The persistent branch binary binds
+one exact 20-byte GNU `build_id`, the frozen sorted `DT_NEEDED` closure, no
+`DT_SONAME`, source/binary hashes, and the runtime-library root.  The
+python-flint module, `RECORD`, Arb extension, and fmpq extension must occupy
+their exact common site-packages layout.
+
+The final-shaped run config has the exact top-level keys implemented by
+`FINAL_RUN_CONFIG_KEYS`; in particular it carries
+`artifact_role=RUN_CONFIG`,
+`artifact_status=SEALED_CONTROL_PLANE_BINDING`,
+`authority=PRODUCER_ONLY`, `scientific_licensing_enabled=false`, and
+`dispatch_authorized_by_artifact=false`.  It copies the exact serializer,
+scheduler, limit, status-table, evaluator, checker, archive, machine, and
+execution-policy objects from the accepted main-freeze image.  Both
+`freeze_sha256` and `main_freeze_sha256` equal the SHA-256 of the raw main
+freeze bytes.
+
+Static records and manifests use the closed key sets
+`FORMAL_STATIC_RECORD_KEYS` and `FORMAL_STATIC_MANIFEST_KEYS`.  File bindings
+are exactly `{path,sha256,size_bytes,serializer,truncated}`.  A record binds
+the proof/stdout/stderr images; the manifest binds those three images plus
+the record.  `STATIC_PROOF_ABSENT` is compact JSON and may represent only a
+truly absent proof under the closed classification-to-reason table.  A
+canonical evaluator proof with a status/code/stream disagreement remains an
+`EVALUATOR_PROOF` but is classified
+`MALFORMED_EVALUATOR_OUTPUT/STATUS_OR_RETURN_CODE_MISMATCH`; it is never
+component-eligible.
+
+Formal component aggregates exist only after all 102 cells are producer-
+certified.  Their only admitted counts are `{*_CELL_CERTIFIED:102}` and
+`{COMMITTED_EVALUATOR_RESULT:102}`.  Any committed nonpass, timeout, resource,
+malformed, or provenance result terminates that component after its current
+deterministic barrier and produces no aggregate.
+
+Branch budgets in the exact schema, formal runtime, and independent checker
+are the same exact integer milliseconds: `600000`, `2000`, and `1000` for
+timeout, termination grace, and pipe-close grace.  Accordingly
+`branch_millisecond_migration_complete=true`.  This closes only a serializer
+and runtime-replay migration; it does not relax the unconditional scientific
+dispatch rejection.

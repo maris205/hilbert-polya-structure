@@ -442,7 +442,7 @@ aliased, or reordered roles are rejected.  Per-cell files are transitively
 bound by the independently recomputed component aggregate manifests rather
 than assigned 204 top-level release roles.
 
-The 53-role map explicitly binds the implementation-design review, static
+The ordered 53-role array explicitly binds the implementation-design review, static
 evaluator test, branch runtime module, and S0-compatibility test.  None may be
 treated as an unbound transitive helper.  This count supersedes the earlier
 incomplete 49-role implementation candidate; it does not create a freeze.
@@ -482,3 +482,42 @@ final_status = null
 ```
 
 This checker contract invokes no evaluator and accepts no current theorem.
+
+## 15. Exact formal static archive replay amendment
+
+The independent static leaf API accepts only the authoritative four-file
+set `proof.json`, `stdout.txt`, `stderr.txt`, `record.json` and the unique
+parallel cell manifest.  It does not import the producer, scheduler, branch
+runtime, or another checker.  Record and manifest key sets are closed; file
+bindings are exactly `{path,sha256,size_bytes,serializer,truncated}` and all
+component/milestone/theorem/final statuses remain null.
+
+The checker distinguishes three byte facts without relabeling them:
+
+- `EVALUATOR_PROOF` for canonical evaluator JSON, including a canonical proof
+  rejected for a status/code/stream mismatch;
+- `INVALID_EVALUATOR_PROOF` for retained malformed or noncanonical bytes; and
+- `SCHEDULER_NO_PROOF_SENTINEL` only when no proof bytes existed.
+
+A committed evaluator result requires the closed status/code pair, exactly
+one stdout line `evaluator_status=<status>\n`, empty stderr, no truncation,
+and the matching canonical proof.  Noncommitted results have null evaluator
+authority.  The classification, proof kind, reason, return-code, stream, and
+truncation combinations are a closed table; aliases and unlisted
+combinations reject.
+
+The manifest's `files` object binds all four images and its `record` member
+must exactly duplicate the `record.json` binding.  The checker reopens no
+historical calibration path.  Serializer domains are independently enforced:
+compact static JSON and aggregate JSON, but pretty-indent-2 branch runtime
+objects.  A component aggregate is eligible for checking only with exactly
+102 ordered, uniquely derived manifest paths and certified/committed counts
+of 102; otherwise the aggregate must be absent.
+
+The formal branch checker binds integer millisecond budget fields exactly:
+`timeout_ms=600000`, `term_grace_ms=2000`, and
+`pipe_close_grace_ms=1000`; float-second aliases reject.  Machine/release
+replay separately authenticates the Conda and python-flint roots, CAPD v2
+index-to-detached-HEAD tree equality plus the live tracked-row root, and the
+persistent ELF GNU build-id/`DT_NEEDED` closure.  Leaf checkers never invent
+or weaken those upstream identities.

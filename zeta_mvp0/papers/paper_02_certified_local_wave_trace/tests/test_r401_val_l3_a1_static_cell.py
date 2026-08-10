@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import math
 import sys
 from argparse import Namespace
 from pathlib import Path
@@ -81,6 +82,21 @@ def test_source_is_one_cell_producer_without_s0_import_or_telemetry() -> None:
     assert "time.monotonic" not in source
     assert 'PROTOCOL_ID = "R401-VAL-L3-A1"' in source
     assert "scientific_licensing_enabled" in source
+
+
+def test_compact_serializer_known_answer_and_exact_type_domain(module) -> None:
+    payload = {"z": "λ", "a": [1, True, None, {"x": "y"}]}
+    assert module.canonical_json_bytes(payload) == (
+        b'{"a":[1,true,null,{"x":"y"}],"z":"\xce\xbb"}\n'
+    )
+    for rejected in (
+        {"x": (1, 2)},
+        {1: "non-string-key"},
+        {"x": math.nan},
+        {"x": math.inf},
+    ):
+        with pytest.raises(module.StaticCellContractError):
+            module.canonical_json_bytes(rejected)
 
 
 @pytest.mark.parametrize(

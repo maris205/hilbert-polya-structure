@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import importlib.util
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -123,6 +124,282 @@ def write_payload(checker, path: Path, payload: dict) -> None:
     path.write_bytes(checker.canonical_json_bytes(payload))
 
 
+def formal_binding(
+    checker,
+    name: str,
+    raw: bytes,
+    serializer: str,
+    *,
+    truncated: bool = False,
+) -> dict:
+    return {
+        "path": name,
+        "sha256": checker.sha256_bytes(raw),
+        "size_bytes": len(raw),
+        "serializer": serializer,
+        "truncated": truncated,
+    }
+
+
+def build_formal_static_archive(
+    checker,
+    context,
+    tmp_path: Path,
+    *,
+    outcome: str = "pass",
+) -> tuple[Path, Path, list[str], dict]:
+    root = tmp_path / f"formal-{outcome}"
+    cell_dir = root / "static/cells/128/S000"
+    manifest_path = root / "static/cell_manifests/128/S000.json"
+    cell_dir.mkdir(parents=True)
+    manifest_path.parent.mkdir(parents=True)
+    plan = checker.load_plan()
+    plan_record = plan["S000"]
+    pass_proof = build_formal_s0_adapter_proof(checker, context)
+    evaluator_status: str | None
+    return_code: int | None
+    classification: str
+    proof_kind: str
+    reason_code: str | None
+    proof_serializer: str
+    stdout_raw = b""
+    stderr_raw = b""
+    proof_truncated = False
+    stdout_truncated = False
+    stderr_truncated = False
+
+    if outcome == "pass":
+        proof_raw = checker.canonical_json_bytes(pass_proof)
+        evaluator_status = "STATIC_CELL_CERTIFIED"
+        return_code = 0
+        classification = "COMMITTED_EVALUATOR_RESULT"
+        proof_kind = "EVALUATOR_PROOF"
+        reason_code = None
+        proof_serializer = "CJ_COMPACT_V1"
+        stdout_raw = b"evaluator_status=STATIC_CELL_CERTIFIED\n"
+    elif outcome == "nonzero":
+        proof = {
+            key: value
+            for key, value in pass_proof.items()
+            if key
+            not in {
+                "outer_containment",
+                "source_bindings",
+                "proof_content_sha256",
+            }
+        }
+        proof["evaluator_status"] = "STATIC_UNRESOLVED_DEPTH"
+        proof["proof_complete"] = False
+        proof["failure"] = {
+            "tree_id": "ANGLE",
+            "limit": context.max_depth,
+            "unresolved_depth": context.max_depth,
+            "node_id": "ANGLE0",
+        }
+        proof["trees"] = []
+        proof["counts"] = {
+            "tree_count": 0,
+            "node_count": 0,
+            "internal_count": 0,
+            "terminal_count": 0,
+            "unresolved_count": 1,
+            "maximum_depth": None,
+        }
+        proof["proof_content_sha256"] = checker.sha256_bytes(
+            checker.canonical_json_bytes(proof)
+        )
+        proof_raw = checker.canonical_json_bytes(proof)
+        evaluator_status = "STATIC_UNRESOLVED_DEPTH"
+        return_code = 2
+        classification = "COMMITTED_EVALUATOR_RESULT"
+        proof_kind = "EVALUATOR_PROOF"
+        reason_code = None
+        proof_serializer = "CJ_COMPACT_V1"
+        stdout_raw = b"evaluator_status=STATIC_UNRESOLVED_DEPTH\n"
+    elif outcome == "status_mismatch":
+        proof_raw = checker.canonical_json_bytes(pass_proof)
+        evaluator_status = None
+        return_code = 9
+        classification = "MALFORMED_EVALUATOR_OUTPUT"
+        proof_kind = "EVALUATOR_PROOF"
+        reason_code = "STATUS_OR_RETURN_CODE_MISMATCH"
+        proof_serializer = "CJ_COMPACT_V1"
+        stdout_raw = b"evaluator_status=STATIC_CELL_CERTIFIED\nextra\n"
+    elif outcome == "invalid_proof":
+        proof_raw = b'{"not":"closed"}\ntrailing'
+        evaluator_status = None
+        return_code = 0
+        classification = "MALFORMED_EVALUATOR_OUTPUT"
+        proof_kind = "INVALID_EVALUATOR_PROOF"
+        reason_code = "MALFORMED_OR_NONCANONICAL_PROOF"
+        proof_serializer = "RAW_BYTES"
+        stdout_raw = b"evaluator_status=STATIC_CELL_CERTIFIED\n"
+    elif outcome in {"sentinel", "cap"}:
+        classification = (
+            "CELL_TIMEOUT" if outcome == "sentinel" else "CELL_OUTPUT_BUDGET_EXHAUSTED"
+        )
+        reason_code = "TIMEOUT" if outcome == "sentinel" else "OUTPUT_BUDGET"
+        sentinel = {
+            "schema_version": 1,
+            "protocol_id": "R401-VAL-L3-A1",
+            "artifact_role": "STATIC_PROOF_ABSENT",
+            "authority": "PRODUCER_ONLY",
+            "scientific_licensing_enabled": False,
+            "matrix_id": context.matrix_id,
+            "freeze_sha256": context.freeze_sha256,
+            "main_freeze_sha256": context.freeze_sha256,
+            "run_config_sha256": context.run_config_sha256,
+            "cell": {"precision_bits": 128, "slab_id": "S000"},
+            "scheduler_classification": classification,
+            "evaluator_status": None,
+            "reason_code": reason_code,
+            "claim_boundary": checker.CELL_CLAIM_BOUNDARY,
+            "component_status": None,
+            "milestone_status": None,
+            "theorem_status": None,
+            "final_status": None,
+        }
+        proof_raw = checker.canonical_json_bytes(sentinel)
+        evaluator_status = None
+        return_code = None
+        proof_kind = "SCHEDULER_NO_PROOF_SENTINEL"
+        proof_serializer = "CJ_COMPACT_V1"
+        if outcome == "cap":
+            stdout_raw = b"captured-prefix"
+            stdout_truncated = True
+    else:
+        raise AssertionError(outcome)
+
+    (cell_dir / "proof.json").write_bytes(proof_raw)
+    (cell_dir / "stdout.txt").write_bytes(stdout_raw)
+    (cell_dir / "stderr.txt").write_bytes(stderr_raw)
+    semantic_argv = [f"arg-{index}" for index in range(25)] + ["<STAGING_PROOF_PATH>"]
+    invocation_sha256 = checker.sha256_bytes(
+        checker.canonical_json_bytes(semantic_argv)
+    )
+    evaluator_result = (
+        {
+            "status": evaluator_status,
+            "return_code": return_code,
+            "status_line_count": 1,
+        }
+        if classification == "COMMITTED_EVALUATOR_RESULT"
+        else {"status": None, "return_code": None, "status_line_count": 0}
+    )
+    limits = {
+        "max_depth_per_tree": context.max_depth,
+        "max_nodes_per_tree": context.max_nodes_per_tree,
+        "max_nodes_per_cell": context.max_nodes_per_cell,
+        "timeout_ms": 1_800_000,
+        "total_cell_bytes": 512 * 1024 * 1024,
+    }
+    files = {
+        "proof.json": formal_binding(
+            checker,
+            "proof.json",
+            proof_raw,
+            proof_serializer,
+            truncated=proof_truncated,
+        ),
+        "stdout.txt": formal_binding(
+            checker,
+            "stdout.txt",
+            stdout_raw,
+            "RAW_BYTES",
+            truncated=stdout_truncated,
+        ),
+        "stderr.txt": formal_binding(
+            checker,
+            "stderr.txt",
+            stderr_raw,
+            "RAW_BYTES",
+            truncated=stderr_truncated,
+        ),
+    }
+    record = {
+        "schema_version": 1,
+        "protocol_id": "R401-VAL-L3-A1",
+        "artifact_role": "STATIC_CELL_RECORD",
+        "authority": "PRODUCER_ONLY",
+        "scientific_licensing_enabled": False,
+        "matrix_id": context.matrix_id,
+        "freeze_sha256": context.freeze_sha256,
+        "main_freeze_sha256": context.freeze_sha256,
+        "run_config_sha256": context.run_config_sha256,
+        "cell": {"precision_bits": 128, "slab_id": "S000"},
+        "task": {
+            "epsilon_lower": plan_record["epsilon_lower"],
+            "epsilon_upper": plan_record["epsilon_upper"],
+            "plan_record_sha256": checker.plan_record_sha256(plan_record),
+        },
+        "semantic_invocation": {
+            "argv": semantic_argv,
+            "argv_sha256": invocation_sha256,
+            "exact_string_count": 26,
+            "output_token": "<STAGING_PROOF_PATH>",
+        },
+        "scheduler_result": {
+            "classification": classification,
+            "evaluator_status": evaluator_status,
+            "return_code": return_code,
+            "proof_kind": proof_kind,
+            "reason_code": reason_code,
+        },
+        "evaluator_result": evaluator_result,
+        "files": files,
+        "limits": limits,
+        "claim_boundary": checker.CELL_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    record_raw = checker.canonical_json_bytes(record)
+    (cell_dir / "record.json").write_bytes(record_raw)
+    manifest_files = {
+        **files,
+        "record.json": formal_binding(
+            checker, "record.json", record_raw, "CJ_COMPACT_V1"
+        ),
+    }
+    manifest = {
+        "schema_version": 1,
+        "protocol_id": "R401-VAL-L3-A1",
+        "artifact_role": "STATIC_CELL_MANIFEST",
+        "authority": "PRODUCER_ONLY",
+        "scientific_licensing_enabled": False,
+        "matrix_id": context.matrix_id,
+        "freeze_sha256": context.freeze_sha256,
+        "main_freeze_sha256": context.freeze_sha256,
+        "run_config_sha256": context.run_config_sha256,
+        "cell": {"precision_bits": 128, "slab_id": "S000"},
+        "semantic_invocation_sha256": invocation_sha256,
+        "scheduler_classification": classification,
+        "evaluator_status": evaluator_status,
+        "record": manifest_files["record.json"],
+        "files": manifest_files,
+        "claim_boundary": checker.CELL_CLAIM_BOUNDARY,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    manifest_path.write_bytes(checker.canonical_json_bytes(manifest))
+    return cell_dir, manifest_path, semantic_argv, limits
+
+
+def rebind_formal_record(checker, cell_dir: Path, manifest_path: Path, record: dict) -> None:
+    record_raw = checker.canonical_json_bytes(record)
+    (cell_dir / "record.json").write_bytes(record_raw)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for name in ("proof.json", "stdout.txt", "stderr.txt"):
+        manifest["files"][name] = record["files"][name]
+    binding = formal_binding(checker, "record.json", record_raw, "CJ_COMPACT_V1")
+    manifest["record"] = binding
+    manifest["files"]["record.json"] = binding
+    manifest_path.write_bytes(checker.canonical_json_bytes(manifest))
+
+
 def test_checker_source_is_independent() -> None:
     source = CHECKER_SOURCE.read_text(encoding="utf-8")
     assert "import evaluate_r401_val_l3_a1_static_cell" not in source
@@ -149,6 +426,185 @@ def test_checker_role_and_tree_order_match_formal_contract(checker) -> None:
         "SECTION_HIGH",
         "SECTION_WINDOW",
     )
+
+
+def test_checker_compact_serializer_known_answer_and_exact_type_domain(checker) -> None:
+    payload = {"z": "λ", "a": [1, True, None, {"x": "y"}]}
+    assert checker.canonical_json_bytes(payload) == (
+        b'{"a":[1,true,null,{"x":"y"}],"z":"\xce\xbb"}\n'
+    )
+    for rejected in (
+        {"x": (1, 2)},
+        {1: "non-string-key"},
+        {"x": math.nan},
+        {"x": -math.inf},
+    ):
+        with pytest.raises(checker.CheckError):
+            checker.canonical_json_bytes(rejected)
+
+
+def test_formal_four_file_cell_replays_and_is_only_leaf_eligible(
+    checker, formal_context, tmp_path: Path
+) -> None:
+    cell_dir, manifest_path, argv, limits = build_formal_static_archive(
+        checker, formal_context, tmp_path
+    )
+    result = checker.validate_formal_static_cell(
+        cell_dir,
+        manifest_path,
+        expected_bits=128,
+        expected_slab="S000",
+        plan=checker.load_plan(),
+        context=formal_context,
+        expected_semantic_argv=argv,
+        expected_limits=limits,
+    )
+    assert result["component_eligible"] is True
+    assert result["scheduler_classification"] == "COMMITTED_EVALUATOR_RESULT"
+    assert result["evaluator_status"] == "STATIC_CELL_CERTIFIED"
+    assert result["proof_kind"] == "EVALUATOR_PROOF"
+    assert result["proof_replay"]["unresolved_count"] == 0
+
+
+@pytest.mark.parametrize(
+    ("outcome", "classification", "proof_kind"),
+    [
+        ("nonzero", "COMMITTED_EVALUATOR_RESULT", "EVALUATOR_PROOF"),
+        ("status_mismatch", "MALFORMED_EVALUATOR_OUTPUT", "EVALUATOR_PROOF"),
+        ("invalid_proof", "MALFORMED_EVALUATOR_OUTPUT", "INVALID_EVALUATOR_PROOF"),
+        ("sentinel", "CELL_TIMEOUT", "SCHEDULER_NO_PROOF_SENTINEL"),
+        ("cap", "CELL_OUTPUT_BUDGET_EXHAUSTED", "SCHEDULER_NO_PROOF_SENTINEL"),
+    ],
+)
+def test_formal_nonpass_status_sentinel_cap_and_malformed_never_promote(
+    checker,
+    formal_context,
+    tmp_path: Path,
+    outcome: str,
+    classification: str,
+    proof_kind: str,
+) -> None:
+    cell_dir, manifest_path, argv, limits = build_formal_static_archive(
+        checker, formal_context, tmp_path, outcome=outcome
+    )
+    result = checker.validate_formal_static_cell(
+        cell_dir,
+        manifest_path,
+        expected_bits=128,
+        expected_slab="S000",
+        plan=checker.load_plan(),
+        context=formal_context,
+        expected_semantic_argv=argv,
+        expected_limits=limits,
+    )
+    assert result["component_eligible"] is False
+    assert result["scheduler_classification"] == classification
+    assert result["proof_kind"] == proof_kind
+    assert result["proof_replay"] is None
+
+
+@pytest.mark.parametrize(
+    ("mutation", "match"),
+    [
+        ("authority", "authority"),
+        ("path", "path"),
+        ("hash", "hash"),
+        ("size", "size"),
+        ("serializer", "serializer"),
+        ("truncated", "truncated"),
+    ],
+)
+def test_formal_record_nested_authority_and_file_bindings_fail_closed(
+    checker,
+    formal_context,
+    tmp_path: Path,
+    mutation: str,
+    match: str,
+) -> None:
+    cell_dir, manifest_path, argv, limits = build_formal_static_archive(
+        checker, formal_context, tmp_path
+    )
+    record = json.loads((cell_dir / "record.json").read_text(encoding="utf-8"))
+    if mutation == "authority":
+        record["authority"] = "INDEPENDENT_CHECKER"
+    elif mutation == "path":
+        record["files"]["proof.json"]["path"] = "../proof.json"
+    elif mutation == "hash":
+        record["files"]["proof.json"]["sha256"] = "0" * 64
+    elif mutation == "size":
+        record["files"]["proof.json"]["size_bytes"] += 1
+    elif mutation == "serializer":
+        record["files"]["proof.json"]["serializer"] = "RAW_BYTES"
+    elif mutation == "truncated":
+        record["files"]["proof.json"]["truncated"] = True
+    else:
+        raise AssertionError(mutation)
+    rebind_formal_record(checker, cell_dir, manifest_path, record)
+    with pytest.raises(checker.CheckError, match=match):
+        checker.validate_formal_static_cell(
+            cell_dir,
+            manifest_path,
+            expected_bits=128,
+            expected_slab="S000",
+            plan=checker.load_plan(),
+            context=formal_context,
+            expected_semantic_argv=argv,
+            expected_limits=limits,
+        )
+
+
+def test_formal_manifest_authority_and_leaf_symlink_fail_closed(
+    checker, formal_context, tmp_path: Path
+) -> None:
+    cell_dir, manifest_path, argv, limits = build_formal_static_archive(
+        checker, formal_context, tmp_path
+    )
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["theorem_status"] = "FORGED"
+    manifest_path.write_bytes(checker.canonical_json_bytes(manifest))
+    with pytest.raises(checker.CheckError, match="theorem_status"):
+        checker.validate_formal_static_cell(
+            cell_dir,
+            manifest_path,
+            expected_bits=128,
+            expected_slab="S000",
+            plan=checker.load_plan(),
+            context=formal_context,
+            expected_semantic_argv=argv,
+            expected_limits=limits,
+        )
+
+    cell_dir, manifest_path, argv, limits = build_formal_static_archive(
+        checker, formal_context, tmp_path, outcome="sentinel"
+    )
+    stdout = cell_dir / "stdout.txt"
+    raw = stdout.read_bytes()
+    stdout.unlink()
+    target = tmp_path / "stdout-target.txt"
+    target.write_bytes(raw)
+    stdout.symlink_to(target)
+    with pytest.raises(checker.CheckError):
+        checker.validate_formal_static_cell(
+            cell_dir,
+            manifest_path,
+            expected_bits=128,
+            expected_slab="S000",
+            plan=checker.load_plan(),
+            context=formal_context,
+            expected_semantic_argv=argv,
+            expected_limits=limits,
+        )
+
+
+def test_formal_archive_cannot_enter_current_aggregate_checker(
+    checker, formal_context, tmp_path: Path
+) -> None:
+    cell_dir, _manifest_path, _argv, _limits = build_formal_static_archive(
+        checker, formal_context, tmp_path
+    )
+    formal_root = cell_dir.parents[3]
+    with pytest.raises(checker.CheckError):
+        checker.run_checker(formal_root)
 
 
 def test_checker_plan_semantics_and_binding_share_one_pinned_snapshot(

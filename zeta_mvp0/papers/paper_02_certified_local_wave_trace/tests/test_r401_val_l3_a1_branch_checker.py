@@ -320,6 +320,48 @@ def test_strict_json_rejects_duplicate_and_nonfinite(checker, raw: bytes) -> Non
         checker.strict_json_from_bytes(raw, "adversarial JSON")
 
 
+def test_independent_runtime_serializer_requires_exact_plain_json(checker) -> None:
+    class DictAlias(dict):
+        pass
+
+    class ListAlias(list):
+        pass
+
+    class StringAlias(str):
+        pass
+
+    cycle = []
+    cycle.append(cycle)
+    attacks = [
+        ("tuple",),
+        {1: "non-string-key"},
+        {StringAlias("alias-key"): "value"},
+        DictAlias({"key": "value"}),
+        ListAlias([1]),
+        {"nested": [StringAlias("value")]},
+        {"nested": [float("nan")]},
+        {"nested": [float("inf")]},
+        {"nested": [float("-inf")]},
+        cycle,
+    ]
+    for serializer in (checker.runtime_json_bytes, checker.canonical_json_bytes):
+        for payload in attacks:
+            with pytest.raises(checker.BranchCheckError):
+                serializer(payload)
+
+    assert checker.runtime_json_bytes(
+        {"finite": 1.25, "items": [True, None, 3]}
+    ) == (
+        b'{\n  "finite": 1.25,\n  "items": [\n'
+        b"    true,\n    null,\n    3\n  ]\n}\n"
+    )
+    shared = [1]
+    assert checker.runtime_json_bytes({"left": shared, "right": shared}) == (
+        b'{\n  "left": [\n    1\n  ],\n'
+        b'  "right": [\n    1\n  ]\n}\n'
+    )
+
+
 @pytest.mark.parametrize("bad_count", [True, 102.0])
 def test_exact_count_rejects_boolean_and_integral_float_alias(
     checker, full_mock_archive, bad_count
@@ -463,6 +505,31 @@ def test_record_task_path_and_binding_mutations_are_rejected(
         paths[3].write_bytes(runtime_bytes(manifest))
         rebind_cell_archive(full_mock_archive, update_raw_bindings=False)
         with pytest.raises(checker.BranchCheckError, match="manifest.files"):
+            checker.run_checker(full_mock_archive)
+
+
+def test_rehashed_legacy_second_budget_abi_is_rejected(
+    checker, full_mock_archive
+) -> None:
+    paths = cell_paths(full_mock_archive)
+    with restore_files(paths):
+        legacy_budget = {
+            "pipe_close_grace_seconds": 1.0,
+            "record_bytes": 4 * 1024 * 1024,
+            "stderr_bytes": 1 * 1024 * 1024,
+            "stdout_bytes": 16 * 1024 * 1024,
+            "term_grace_seconds": 2.0,
+            "timeout_seconds": 600.0,
+            "total_cell_bytes": 32 * 1024 * 1024,
+        }
+        record = json.loads(paths[2].read_text(encoding="utf-8"))
+        record["budgets"] = legacy_budget
+        paths[2].write_bytes(runtime_bytes(record))
+        manifest = json.loads(paths[3].read_text(encoding="utf-8"))
+        manifest["budgets"] = legacy_budget
+        paths[3].write_bytes(runtime_bytes(manifest))
+        rebind_cell_archive(full_mock_archive, update_raw_bindings=False)
+        with pytest.raises(checker.BranchCheckError, match="budgets"):
             checker.run_checker(full_mock_archive)
 
 
