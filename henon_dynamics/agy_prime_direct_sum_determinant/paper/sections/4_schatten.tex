@@ -1,0 +1,241 @@
+\section{Sharp local Schatten growth}
+\label{sec:schatten}
+
+We now prove the estimate that controls every global construction.  Schatten
+norms and their duality are used in the standard sense of
+\citet{simon2005}.
+
+\begin{theorem}[Sharp finite-Weil multiplicity]
+\label{thm:sharp-local}
+Let \(K\Subset\halfplane\) be compact.  For every
+\(1\le q<\infty\), there are constants
+\(0<c_{q,K}\le C_{q,K}<\infty\) and a prime threshold \(p_K\) such that
+
+\begin{equation}
+ c_{q,K}p^{2/q}
+ \le \Norm{\cL_{s,p}}_{\Schatten q}
+ \le C_{q,K}p^{2/q}
+ \label{eq:sharp-local}
+\end{equation}
+
+for every odd \(p\ge p_K\) and every \(s\in K\).  There are likewise
+constants, uniform on \(K\), such that
+
+\begin{equation}
+ 0<c_{\infty,K}
+ \le \Norm{\cL_{s,p}}
+ \le C_{\infty,K}.
+ \label{eq:sharp-op}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We separate the upper estimate from the branch-isolating lower estimate.
+
+\emph{Upper bound.}
+If \(T\) is compact and \(U\) is unitary on an \(N\)-dimensional space,
+the singular values of \(T\otimes U\) are those of \(T\), each repeated
+\(N\) times.  Since \(N=p^2\),
+
+\begin{equation}
+ \Norm{K_{s,\gamma}\otimes\rho_p(g_\gamma)}_{\Schatten q}
+ =p^{2/q}\Norm{K_{s,\gamma}}_{\Schatten q}.
+ \label{eq:tensor-schatten}
+\end{equation}
+
+The triangle inequality, \(\Norm{T}_{\Schatten q}\le
+\Norm{T}_{\Schatten 1}\), and \cref{eq:nuclear-majorant} imply
+
+\[
+ \Norm{\cL_{s,p}}_{\Schatten q}
+ \le p^{2/q}\sum_\gamma\Norm{K_{s,\gamma}}_{\Schatten q}
+ \le C_{1,K}p^{2/q}.
+\]
+
+The same calculation in operator norm, without the multiplicity factor,
+gives the upper bound in \cref{eq:sharp-op}.
+
+\emph{Compression and locally uniform isolation.}
+Tensor \(E_0\) and \(\iota_0\) with the identity on \(\C^{p^2}\), obtaining
+\(E_p\) and \(\iota_p\).  Their norms do not depend on \(p\).  By
+\cref{eq:a-gamma},
+
+\begin{equation}
+ B_{s,p}:=E_p\cL_{s,p}\iota_p
+ =\sum_{\gamma\in\Gamma}a_\gamma(s)\rho_p(g_\gamma).
+ \label{eq:compressed-B}
+\end{equation}
+
+Fix one branch \(\delta\in\Gamma\) once and for all, and put
+\(\tau_p=p^{-2}\Tr\).  The exact normalized pairing is
+
+\begin{equation}
+ \tau_p\!\left(B_{s,p}\rho_p(g_\delta)^{-1}\right)
+ =a_\delta(s)+R_p(s),
+ \qquad
+ R_p(s)=\sum_{\gamma\ne\delta}a_\gamma(s)
+ \frac{\Theta_p(g_\gamma g_\delta^{-1})}{p^2}.
+ \label{eq:isolation}
+\end{equation}
+
+Every matrix in the remainder is nonidentity by
+\cref{eq:decoder-consequences}, so each normalized character tends to zero
+by \cref{cor:regular-character}.  Moreover,
+
+\[
+ \left|p^{-2}\Theta_p(h)\right|\le1
+\]
+
+because it is the normalized trace of a unitary.  We claim that
+\(R_p\to0\) uniformly on \(K\).  Given \(\varepsilon>0\), choose a finite
+set \(F\subset\Gamma\), containing \(\delta\), for which
+
+\[
+ \sup_{s\in K}\sum_{\gamma\notin F}|a_\gamma(s)|<\varepsilon;
+\]
+
+this is possible by \cref{eq:a-l1}.  The tail of \(R_p\) is then at most
+\(\varepsilon\), uniformly in \(s\) and \(p\).  On the finite head
+\(F\setminus\{\delta\}\), every normalized character tends to zero and the
+coefficient sum is bounded on \(K\).  Hence the head is uniformly small for
+all sufficiently large \(p\).  This finite-head/uniform-tail argument proves
+
+\begin{equation}
+ \tau_p\!\left(B_{s,p}\rho_p(g_\delta)^{-1}\right)
+ \longrightarrow a_\delta(s)
+ \quad\text{uniformly for }s\in K.
+ \label{eq:isolation-uniform}
+\end{equation}
+
+Since \(a_\delta\) is continuous and nowhere zero,
+
+\begin{equation}
+ m_{\delta,K}:=\min_{s\in K}|a_\delta(s)|>0.
+ \label{eq:m-delta}
+\end{equation}
+
+Consequently the modulus of the normalized pairing in
+\cref{eq:isolation-uniform} is at least \(m_{\delta,K}/2\), simultaneously
+for \(s\in K\), once \(p\) is large enough.
+
+\emph{Schatten duality.}
+Let \(q'\) be conjugate to \(q\), with \(q'=\infty\) when \(q=1\).
+The trace pairing and the unitary singular values give
+
+\begin{align}
+ \frac{m_{\delta,K}}2p^2
+ &\le
+ \left|\Tr\!\left(B_{s,p}\rho_p(g_\delta)^{-1}\right)\right| \\
+ &\le
+ \Norm{B_{s,p}}_{\Schatten q}
+ \Norm{\rho_p(g_\delta)^{-1}}_{\Schatten {q'}}
+ =\Norm{B_{s,p}}_{\Schatten q}p^{2/q'}.
+ \label{eq:duality-lower}
+\end{align}
+
+Thus \(\Norm{B_{s,p}}_{\Schatten q}\ge
+(m_{\delta,K}/2)p^{2/q}\).  The ideal inequality
+
+\[
+ \Norm{B_{s,p}}_{\Schatten q}
+ \le\Norm{E_p}\,\Norm{\cL_{s,p}}_{\Schatten q}\,\Norm{\iota_p}
+\]
+
+transfers this lower bound to \(\cL_{s,p}\).  For the operator norm, use
+the trace pairing with the trace norm of the unitary, equal to \(p^2\), and
+apply the same ideal inequality.  This proves both statements.
+\end{proof}
+
+The proof uses the all-length matrix decoder, not injectivity of a coarser
+spectral signature.  It also controls the entire countable induced alphabet:
+the summable tail is removed before the prime limit is applied.
+
+\subsection{Exact block-sum classification}
+
+Let \(c=(c_p)_{p\ \odd}\) be complex scalars.  On the algebraic direct sum
+inside
+
+\[
+ \cH_\oplus=\bigoplus_{p\ \odd}\cH_p,
+\]
+
+consider the block-diagonal family
+
+\begin{equation}
+ \mathbb L_s(c)=\bigoplus_{p\ \odd}c_p\cL_{s,p}.
+ \label{eq:general-block}
+\end{equation}
+
+\begin{theorem}[Prime--Schatten criterion]
+\label{thm:block-iff}
+For every fixed \(s\in\halfplane\) and \(1\le q<\infty\),
+
+\begin{equation}
+ \mathbb L_s(c)\in\Schatten q
+ \quad\Longleftrightarrow\quad
+ \sum_{p\ \odd}p^2|c_p|^q<\infty.
+ \label{eq:block-iff}
+\end{equation}
+
+The block family extends to a compact operator if and only if
+\(c_p\to0\).  Whenever \cref{eq:block-iff} holds, its convergence in
+\(\Schatten q\) is locally uniform in \(s\).
+\end{theorem}
+
+\begin{proof}
+For a block-diagonal compact operator, the singular-value multiset is the
+disjoint union of the block singular-value multisets.  Hence
+
+\begin{equation}
+ \Norm{\mathbb L_s(c)}_{\Schatten q}^q
+ =\sum_{p\ \odd}|c_p|^q\Norm{\cL_{s,p}}_{\Schatten q}^q.
+ \label{eq:block-norm-exact}
+\end{equation}
+
+The two sides of \cref{eq:sharp-local}, outside finitely many primes, compare
+the summand in \cref{eq:block-norm-exact} with \(p^2|c_p|^q\).  This proves
+the equivalence.  The upper constant in \cref{thm:sharp-local}, uniform on
+compact \(s\)-sets, also makes the tails locally uniform.
+
+Every local block is compact.  A block-diagonal family of compact operators
+is compact precisely when its block norms tend to zero.  By
+\cref{eq:sharp-op}, this condition is equivalent to \(c_p\to0\).
+\end{proof}
+
+\begin{corollary}[Sharp Dirichlet phase diagram]
+\label{cor:phase-diagram}
+For
+
+\begin{equation}
+ \fL_{s,z}=\bigoplus_{p\ \odd}p^{-z}\cL_{s,p},
+ \qquad p^{-z}:=e^{-z\log p},
+ \label{eq:dirichlet-block}
+\end{equation}
+
+one has
+
+\begin{equation}
+ \fL_{s,z}\in\Schatten q
+ \quad\Longleftrightarrow\quad
+ q\operatorname{Re}z>3,
+ \qquad 1\le q<\infty.
+ \label{eq:phase-diagram}
+\end{equation}
+
+It is compact exactly when \(\operatorname{Re}z>0\).
+\end{corollary}
+
+\begin{proof}
+Write \(\sigma=\operatorname{Re}z\).  The series in
+\cref{eq:block-iff} becomes
+
+\[
+ \sum_{p\ \odd}p^{2-q\sigma}.
+\]
+
+The prime series \(\sum_p p^{-\beta}\) converges exactly for
+\(\beta>1\), and diverges at \(\beta=1\)~\citep{apostol1976}.  Thus
+\(q\sigma>3\) is necessary and sufficient, including strict exclusion of
+the boundary.  Compactness follows from
+\(|p^{-z}|=p^{-\sigma}\) and \cref{thm:block-iff}.
+\end{proof}

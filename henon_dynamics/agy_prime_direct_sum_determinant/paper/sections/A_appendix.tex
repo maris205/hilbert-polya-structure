@@ -1,0 +1,110 @@
+\section{Proof details and reproducibility passport}
+\label{app:details}
+
+\subsection{Direct-sum compactness and determinant order}
+\label{app:direct-sum}
+
+For completeness, suppose \(T_p\) is compact on \(H_p\) and
+\(T=\bigoplus_pT_p\).  If \(T\) is compact, choose unit vectors \(v_p\in H_p\)
+with \(\Norm{T_pv_p}\ge\Norm{T_p}-p^{-1}\).  The vectors occupy mutually
+orthogonal blocks.  Compactness of \(T\) forces \(\Norm{T_pv_p}\to0\), hence
+\(\Norm{T_p}\to0\).  Conversely, if the block norms tend to zero, finite
+block truncations converge to \(T\) in operator norm and are compact.  This
+proves the compactness assertion used in \cref{thm:block-iff} without a
+convention at \(q=\infty\).
+
+For trace-class blocks, finite direct sums satisfy
+
+\[
+ \det\!\left(I-u\bigoplus_{p\le P}T_p\right)
+ =\prod_{p\le P}\det(I-uT_p).
+\]
+
+If \(\sum_p\Norm{T_p}_{\Schatten1}<\infty\), finite block truncations
+converge in trace norm.  Continuity of the Fredholm determinant then proves
+the infinite product and removes the prime-order choice.  This is stronger
+than conditionally converging a scalar logarithmic Euler product.
+
+For \(m\ge2\), the convention used in \cref{eq:regularized-region} is
+
+\[
+ \det_m(I-T)=\det\!\left((I-T)
+ \exp\!\left(\sum_{j=1}^{m-1}\frac{T^j}{j}\right)\right),
+ \qquad T\in\Schatten m.
+\]
+
+It deletes the first \(m-1\) trace terms near the origin and does not restore
+the missing ordinary trace.
+
+\subsection{Source-lock dependency graph}
+\label{app:source-lock}
+
+The sharp theorem uses only the following implications:
+
+\begin{center}
+\begin{tabular}{@{}p{0.26\linewidth}p{0.65\linewidth}@{}}
+\toprule
+Frozen stage & Imported statement \\
+\midrule
+C25
+& Theorem E.1: starting labeled state plus full Rauzy matrix decodes the
+  entire edge word.  Corollary E.2: based first-return matrices are distinct
+  and their positive concatenations form a free monoid. \\
+C26
+& Common Bergman domain, locally uniform trace-norm branch sum, bounded
+  constants/evaluation, nowhere-zero slice coefficients, and absolute scalar
+  word trace. \\
+C27
+& Full \(p^2\)-dimensional finite Weil fibre, fixed-prime trace-class
+  determinant, exact Thomas character magnitude, and chronological word
+  trace. \\
+C24
+& P073 and the 146-cycle full-Rauzy control census only. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In particular, C24-P073 is not used in the proof of
+\cref{thm:sharp-local,thm:block-iff,thm:global-det}.  It tests only the
+full-C24 dimension-normalized MARKED assembly.
+
+\subsection{Reproducibility passport}
+\label{app:reproducibility}
+
+The C28 checker freezes the following SHA-256 source hashes:
+
+\begin{center}
+\begin{tabular}{@{}cl@{}}
+\toprule
+Stage & SHA-256 \\
+\midrule
+C24 & \texttt{4b4fe5943262137eeeb3eda4de887725a0663402a1f39f8cc43e089bcc91e778} \\
+C25 & \texttt{a35cee22714abbb9dc9aadcc165720d1ff77aff3b7f29071f53a1b451760bd12} \\
+C26 & \texttt{1c0289b9b47e65e0603ea001be7cce263aea13d58c66e4609eac88edf8f7ce4a} \\
+C27 & \texttt{8676d17c5a0e4444dded88b5a76f5ea1fa974275528aa0a51400730759d8b029} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The executable producer records theorem parameters and exact algebraic
+sentinels; an independent checker imports no producer module and verifies
+the hashes before evaluating the certificate.  The operator-theoretic
+lower bound and its finite-head/uniform-tail limit remain proofs, not fields
+read from a certificate.
+
+To reproduce the computational audit from the project directory, run the
+documented producer and independent checker commands in the project
+\texttt{README.md}; to rebuild this article, run
+\texttt{latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex} in
+\texttt{paper/}.  The compilation report records tool versions, page count,
+font embedding, unresolved references, and warnings.
+
+\subsection{Claim-status firewall}
+
+The sharp Schatten bounds, weighted direct-sum equivalence, ordinary
+determinant for \(\operatorname{Re}z>3\), regular-character limit, and
+normalized positive-monoid collapse are theorem-level deductions.  The
+P073 identities and 146-cycle census are exact finite controls.  The
+150-signature conductor census is finite evidence only.  Exclusion of fixed
+planes from every word of the C26 induced language, continuation toward
+\(z=0\), and any nontrivial groupoid trace remain open.

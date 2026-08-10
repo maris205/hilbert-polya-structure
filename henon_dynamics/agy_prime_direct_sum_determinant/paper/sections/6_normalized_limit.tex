@@ -1,0 +1,109 @@
+\section{Normalized-trace collapse on the positive monoid}
+\label{sec:normalized}
+
+The direct sum uses counting trace on every \(p^2\)-dimensional fibre.  A
+natural alternative is to normalize that trace by \(p^{-2}\).  The limit
+exists, but freeness makes it dynamically trivial on the one-sided positive
+language.
+
+\begin{theorem}[Vanishing normalized moments and determinant germ]
+\label{thm:normalized-collapse}
+For every fixed \(n\ge1\),
+
+\begin{equation}
+ \frac1{p^2}\Tr\cL_{s,p}^n\longrightarrow0
+ \label{eq:moment-collapse}
+\end{equation}
+
+locally uniformly for \(s\in\halfplane\).  More precisely, for every compact
+\(K\Subset\halfplane\), define
+
+\begin{equation}
+ M_K=\sup_{s\in K,\ p\ \odd}\Norm{\cL_{s,p}}<\infty.
+ \label{eq:MK}
+\end{equation}
+
+Choose any \(r_K>0\) with \(r_K<M_K^{-1}\).  On
+\(K\times\{|u|\le r_K\}\), let \(\Log_0\cD_p(s,u)\) be the Fredholm
+logarithm whose value at \(u=0\) is zero.  Then, uniformly on this set,
+
+\begin{equation}
+ \frac1{p^2}\Log_0\cD_p(s,u)\longrightarrow0,
+ \qquad
+ \exp\!\left[p^{-2}\Log_0\cD_p(s,u)\right]\longrightarrow1.
+ \label{eq:det-collapse}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Divide the absolute word trace \cref{eq:local-word-trace} by \(p^2\):
+
+\begin{equation}
+ \frac1{p^2}\Tr\cL_{s,p}^n
+ =\sum_{w\in\Gamma^n}A_{s,w}
+   \frac{\Theta_p(g_w)}{p^2}.
+ \label{eq:normalized-word-sum}
+\end{equation}
+
+Every word in this sum is nonempty.  Freeness in
+\cref{eq:decoder-consequences} gives \(g_w\ne I\), so each normalized
+character tends to zero by \cref{cor:regular-character}.  Its modulus is at
+most one.  The inherited absolute word majorant permits dominated
+convergence.  Local uniformity follows by the same finite-head/uniform-tail
+argument used in \cref{thm:sharp-local}: choose a finite word head whose
+scalar tail is uniformly small on \(K\), and then use pointwise convergence
+on that finite head.  This proves \cref{eq:moment-collapse}.
+
+The operator-norm upper bound in \cref{thm:sharp-local} proves
+\(M_K<\infty\), and the trace-norm branch estimate gives a constant \(C_K\)
+such that
+
+\begin{equation}
+ \Norm{\cL_{s,p}}_{\Schatten1}\le C_Kp^2.
+ \label{eq:local-S1-CK}
+\end{equation}
+
+Therefore
+
+\begin{equation}
+ \frac1{p^2}|\Tr\cL_{s,p}^n|
+ \le \frac1{p^2}\Norm{\cL_{s,p}}_{\Schatten1}
+       \Norm{\cL_{s,p}}^{n-1}
+ \le C_KM_K^{n-1}.
+ \label{eq:moment-domination}
+\end{equation}
+
+Because \(r_KM_K<1\), the Fredholm series
+
+\begin{equation}
+ \frac1{p^2}\Log_0\cD_p(s,u)
+ =-\sum_{n\ge1}\frac{u^n}{n p^2}\Tr\cL_{s,p}^n
+ \label{eq:normalized-log-series}
+\end{equation}
+
+converges on the indicated disc and is dominated, independently of \(p\) and
+\(s\), by the summable series
+\[
+ C_K\sum_{n\ge1}\frac{r_K^nM_K^{n-1}}{n}.
+\]
+Apply \cref{eq:moment-collapse} term by term and then exponentiate.
+\end{proof}
+
+\begin{remark}[Exact source lock]
+\label{rem:normalized-scope}
+The character limit is pointwise for each fixed integral matrix.  Its use in
+\cref{thm:normalized-collapse} is rigorous for the positive C26 AGY monoid
+because the fixed-start decoder proves that every nonempty positive word is
+nonidentity, while the local trace theorem supplies the absolute word
+majorant.  It is not automatically valid for a two-sided language, where
+nonempty identity-holonomy words may occur.  Nor does
+\cref{eq:det-collapse} assert convergence on the full \(u\)-plane or define
+a product over primes.
+\end{remark}
+
+The exponential in \cref{eq:det-collapse} is the only normalized-root
+notation used here.  A symbol such as \(\cD_p^{1/p^2}\) would require a
+global branch choice and is deliberately avoided.  Also, normalized trace
+\(p^{-2}\Tr\) is not operator scaling \(p^{-2}\cL_{s,p}\); after prime
+summation the latter yields an \(\Schatten2\) but non-trace-class direct sum
+and a \(\det_2\), hence a different object.

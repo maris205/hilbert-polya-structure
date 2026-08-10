@@ -1,0 +1,159 @@
+\section{Source-locked dynamical and analytic setting}
+\label{sec:setting}
+
+We isolate the precise inherited inputs so that every new implication can be
+checked without appealing to a finite prime window.  Let
+
+\[
+ \halfplane=\{s\in\C:\operatorname{Re}s>-\sigma_0\},
+ \qquad \cH_0=A^2(\Omega),
+\]
+
+where \(\Omega\Subset\C^3\) is a bounded domain.  The countable alphabet
+\(\Gamma\) consists of first-return branches based at one labeled Rauzy
+state.  The scalar branch operator is the holomorphic weighted composition
+operator \(K_{s,\gamma}\) on \(\cH_0\).
+
+\begin{hypothesis}[Nuclear branch majorant]
+\label{hyp:nuclear}
+For every compact \(K\Subset\halfplane\),
+\begin{equation}
+ C_{1,K}:=
+ \sup_{s\in K}\sum_{\gamma\in\Gamma}
+ \Norm{K_{s,\gamma}}_{\Schatten 1}<\infty.
+ \label{eq:nuclear-majorant}
+\end{equation}
+The sum has locally uniform tails: for every \(\varepsilon>0\) there is a
+finite \(F\subset\Gamma\) such that
+\begin{equation}
+ \sup_{s\in K}\sum_{\gamma\notin F}
+ \Norm{K_{s,\gamma}}_{\Schatten 1}<\varepsilon.
+ \label{eq:nuclear-uniform-tail}
+\end{equation}
+The branches depend holomorphically on \(s\) in trace norm.
+\end{hypothesis}
+
+\begin{hypothesis}[A nonvanishing scalar slice]
+\label{hyp:slice}
+There is a real interior point \(x_0\in\Omega\) such that constant embedding
+\(\iota_0:\C\to\cH_0\) and evaluation \(E_0:\cH_0\to\C\) are bounded.  Put
+\begin{equation}
+ a_\gamma(s)=E_0K_{s,\gamma}\iota_0.
+ \label{eq:a-gamma}
+\end{equation}
+Every \(a_\gamma\) is holomorphic and nowhere zero on \(\halfplane\), and
+for compact \(K\Subset\halfplane\),
+\begin{equation}
+ \sup_{s\in K}\sum_{\gamma\in\Gamma}|a_\gamma(s)|<\infty.
+ \label{eq:a-l1}
+\end{equation}
+For every \(\varepsilon>0\), after enlarging a finite
+\(F\subset\Gamma\) if necessary,
+\begin{equation}
+ \sup_{s\in K}\sum_{\gamma\notin F}|a_\gamma(s)|<\varepsilon.
+ \label{eq:slice-uniform-tail}
+\end{equation}
+\end{hypothesis}
+
+\begin{hypothesis}[Fixed-start full-matrix decoder]
+\label{hyp:decoder}
+Every branch carries a matrix
+\(g_\gamma\in\Sp(J_0,\Z)\), where \(J_0\) is the fixed integral symplectic
+form of rank four.  For the frozen starting labeled permutation, the full
+nonnegative Rauzy matrix and the start state recover the complete directed
+edge word.  Distinct first returns therefore have distinct matrices.
+Moreover, concatenations split uniquely at visits to the base state, so the
+positive first-return matrix monoid is free.
+\end{hypothesis}
+
+This is the exact content used from the predecessor decoder theorem
+(C25, Theorem~E.1 and Corollary~E.2).  Its peeling algorithm detects the
+unique final winner--loser pair by row domination, subtracts the loser row
+from the winner row, and strictly decreases the total matrix-entry sum.
+Iteration reaches the identity and recovers the labeled edge word.  Unique
+splitting at base-state returns then gives
+
+\begin{equation}
+ \gamma\ne\delta\Longrightarrow g_\gamma g_\delta^{-1}\ne I,
+ \qquad
+ w\ne\varnothing\Longrightarrow g_w\ne I.
+ \label{eq:decoder-consequences}
+\end{equation}
+
+The statement concerns full matrices, not characteristic polynomials,
+spectra, conjugacy classes, or characters.  It is also an all-length theorem,
+not a collision search up to a cutoff.
+
+\begin{hypothesis}[Full finite-Weil fibres]
+\label{hyp:weil}
+For every odd prime \(p\), let \(\rho_p\) be the full genuine finite Weil
+representation of the rank-four symplectic space in the source frame.  It is
+unitary on \(\C^{p^2}\).  For
+
+\begin{equation}
+ \Theta_p(h)=\Tr\rho_p(h\bmod p),
+ \label{eq:theta-def}
+\end{equation}
+
+the character magnitude is
+
+\begin{equation}
+ |\Theta_p(h)|^2
+ =|\ker_{\F_p}(h-I)|.
+ \label{eq:thomas-magnitude}
+\end{equation}
+\end{hypothesis}
+
+Equation~\eqref{eq:thomas-magnitude} is the specialization of the exact Weil
+character formula~\citep{thomas2008}; finite-field constructions and
+normalizations are discussed in~\citet{gurevich2009}.  We use the full
+\(p^2\)-dimensional representation, not an irreducible parity summand.
+
+Under \cref{hyp:nuclear,hyp:weil}, the local operator
+
+\begin{equation}
+ \cL_{s,p}
+ =\sum_{\gamma\in\Gamma}K_{s,\gamma}\otimes\rho_p(g_\gamma)
+ \label{eq:local-operator}
+\end{equation}
+
+converges in trace norm on
+\(\cH_p=\cH_0\wt\C^{p^2}\) and is holomorphic in \(s\).  Its ordinary local
+determinant is
+
+\begin{equation}
+ \cD_p(s,u)=\det_{\cH_p}(I-u\cL_{s,p}).
+ \label{eq:local-det}
+\end{equation}
+
+\subsection{Chronology convention}
+
+If \(w=(\gamma_1,\ldots,\gamma_n)\), the operator product in
+\(\cL_{s,p}^n\) fixes the ordered cocycle product \(g_w\).  Later forward
+returns multiply on the left, according to the frozen convention.  The
+scalar fixed-point trace atom is denoted
+
+\begin{equation}
+ A_{s,w}=\frac{\lambda_w^{-(s+1)}}{\chi_w'(\lambda_w)}.
+ \label{eq:word-atom}
+\end{equation}
+
+The inherited absolute word trace formula is
+
+\begin{equation}
+ \Tr\cL_{s,p}^n
+ =\sum_{w\in\Gamma^n}A_{s,w}\Theta_p(g_w),
+ \label{eq:local-word-trace}
+\end{equation}
+
+with a locally uniform absolute majorant after division by \(p^2\).
+Explicitly, for every fixed \(n\), compact \(K\Subset\halfplane\), and
+\(\varepsilon>0\), there is a finite \(W\subset\Gamma^n\) such that
+\begin{equation}
+ \sup_{s\in K}\sum_{w\in\Gamma^n\setminus W}|A_{s,w}|<\varepsilon.
+ \label{eq:word-uniform-tail}
+\end{equation}
+A
+primitive word repeated \(r\) times has fibre factor
+\(\Theta_p(g_w^r)\), never \(\Theta_p(g_w)^r\).  These conventions preserve
+genuine noncommutative chronology throughout the prime assembly.
