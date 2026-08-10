@@ -1,0 +1,105 @@
+\section{An all-length Rauzy matrix decoder}
+\label{sec:decoder}
+
+The main operator proof can isolate a branch by support and therefore does
+not require matrix injectivity.  The next theorem nevertheless closes a
+second proposed alternative: different chronological branches cannot project to
+the same full matrix and cancel through opposite metaplectic signs in the
+present full-rank four-letter model.
+
+The geometric antecedent is the standard simplicial-cylinder coding of
+Rauzy induction: finite words determine nested projective cones, with the
+two first-level cone interiors separated by the comparison hyperplane
+\citep{kerckhoff1985}.  We do not claim novelty for that coding geometry.
+The statement below is a self-contained algorithmic form of it, tailored to
+the later-on-the-left matrix convention: a single cumulative matrix is
+inverted by a deterministic row-dominance subtraction.
+
+\begin{theorem}[Fixed-start path decoding]
+\label{thm:decoder}
+Fix an irreducible labeled Rauzy permutation \(\pi\).  For every finite path
+\(\gamma\) starting at \(\pi\), the pair \((\pi,B_\gamma)\), with the
+conventions \eqref{eq:edge-matrix}--\eqref{eq:chronology}, uniquely
+determines every directed arrow of \(\gamma\).
+\end{theorem}
+
+\begin{proof}
+Let \(\gamma=e_1\cdots e_n\) and put \(R=B_\gamma^T\).  If the first edge
+has winner \(w\) and loser \(\ell\), then
+\begin{equation}
+ R=(I+E_{w,\ell})R',
+ \qquad R'=B_{e_2\cdots e_n}^T.
+ \label{eq:first-factor}
+\end{equation}
+Consequently
+\begin{equation}
+ \operatorname{row}_w(R)
+ =\operatorname{row}_w(R')+\operatorname{row}_\ell(R'),
+ \qquad
+ \operatorname{row}_\ell(R)=\operatorname{row}_\ell(R').
+ \label{eq:row-dominance}
+\end{equation}
+Every path matrix is nonnegative and unimodular.  The true first edge
+therefore satisfies componentwise winner-row dominance
+\begin{equation}
+ \operatorname{row}_w(R)\ge\operatorname{row}_\ell(R),
+ \label{eq:dominance}
+\end{equation}
+with at least one strict coordinate.
+
+At a fixed irreducible state, the two outgoing arrows exchange the same
+rightmost top and bottom labels, so the other candidate requires the reverse
+dominance.  If both candidates passed, the two rows would be equal.  That is
+impossible because \(R\) is invertible.  Thus exactly one candidate identifies
+the true first edge.
+
+Peeling that edge is exact:
+\begin{equation}
+ R'=(I-E_{w,\ell})R.
+ \label{eq:row-peel}
+\end{equation}
+The operation replaces the winner row by winner minus loser, leaves a
+nonnegative integral matrix, and decreases the sum of all entries by the
+strictly positive loser-row sum.  We update the labeled permutation and
+repeat.  The entry sum cannot decrease indefinitely, and a valid path ends
+at the identity.  Induction recovers the unique full word.
+\end{proof}
+
+The proof yields a reproducible decoder.
+
+\begin{quote}
+\textbf{Decoder.} Start with the labeled state \(\pi\) and
+\(R=B_\gamma^T\).  Until \(R=I\): (i) test the two outgoing winner/loser
+row dominances; (ii) select the unique passing edge; (iii) replace its winner
+row by winner minus loser; (iv) advance the labeled state.  Reject an input
+matrix if neither or both candidates pass, the subtraction becomes negative,
+or the terminal matrix is not \(I\).
+\end{quote}
+
+\begin{corollary}[Return-matrix freeness]
+\label{cor:freeness}
+Return paths based at a fixed labeled state have distinct full Rauzy
+matrices.  Concatenations of first-return paths form a free monoid on the
+countable first-return generators.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:decoder} recovers the complete edge word.  Visits to the
+fixed state then give its unique decomposition into first returns.
+\end{proof}
+
+The word ``full'' matters.  A characteristic polynomial, spectrum, or
+conjugacy class does not carry the row data required by
+\eqref{eq:dominance}.  In a general stratum, restriction from relative to
+absolute homology can also discard information.  For the present
+four-letter \(\mathcal H(2)\) model, \(\det\Omega_\pi=1\), so no relative
+kernel is present.  Matrix decoding recovers the path; the central
+metaplectic sign is then recovered by multiplying the declared edge lifts.
+We do not claim that an endpoint matrix without this lift convention already
+contains that sign.
+
+The decoder also explains why retaining genuine chronology is practical.
+The ordered integer product is not merely a coarse endpoint statistic in
+this fixed-start coding: it admits a deterministic inverse.  Replacing it by
+an averaged transition matrix, a spectrum, or a Parikh count destroys that
+inverse.

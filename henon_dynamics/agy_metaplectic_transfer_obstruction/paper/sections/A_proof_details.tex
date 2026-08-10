@@ -1,0 +1,63 @@
+\section{Auxiliary operator facts and reproducibility details}
+\label{app:details}
+
+\begin{lemma}[Tensor essential norm]
+\label{lem:tensor-essential}
+Let \(K:H_0\to H_1\) be bounded between Hilbert spaces and let \(U\) be
+unitary on an infinite-dimensional Hilbert space \(F\).  Then
+\[
+ \|K\otimes U\|_{\ess}=\|K\|.
+\]
+\end{lemma}
+
+\begin{proof}
+For a unit vector \(x\in H_0\) and an orthonormal sequence \((e_n)\) in
+\(F\), the vectors \(x\otimes e_n\) converge weakly to zero.  Every compact
+operator \(C\) sends them to zero in norm, whereas
+\[
+ \|(K\otimes U)(x\otimes e_n)\|=\|Kx\|.
+\]
+Thus \(\|K\otimes U-C\|\ge\|Kx\|\).  Taking the supremum over \(x\) proves
+the lower bound; the operator norm gives the reverse bound.
+\end{proof}
+
+\subsection{Why the branch norm contains a square root}
+
+The normalized scalar branch is
+\(K_{s,\gamma}f=p_\gamma e^{-sr_\gamma}f\circ h_\gamma\).  Applying
+\eqref{eq:disintegration} once removes one of the two factors of
+\(p_\gamma\):
+\[
+ \|K_{s,\gamma}f\|^2
+ =\int_{D_\gamma}p_\gamma(Ty)e^{-2\Re(s)r(y)}|f(y)|^2\,d\mu(y).
+\]
+Hence the norm is the essential supremum of
+\(\sqrt{p_\gamma(Ty)}e^{-\Re(s)r(y)}\), not of
+\(p_\gamma(Ty)e^{-\Re(s)r(y)}\).  This factor is responsible for the
+absolute-atom threshold \(\Re s\ge d/2\).
+
+\subsection{Decoder invariants}
+
+At every decoder step, the two outgoing edges exchange winner and loser.
+For a valid image matrix, exactly one row difference is componentwise
+nonnegative.  The checker records both differences, the selected edge, the
+matrix before and after subtraction, and
+\[
+ \sum_{i,j}R_{ij}-\sum_{i,j}R'_{ij}
+ =\sum_jR_{\ell j}>0.
+\]
+This trace detects three common bugs independently: using
+\(B_1\cdots B_n\) instead of later-on-left chronology, peeling columns
+instead of rows, and advancing the state before selecting the edge.
+
+\subsection{Reproduction contract}
+
+The producer and checker are separate Python programs.  The checker imports
+neither producer functions nor producer constants.  Both reconstruct the
+graph from the literal seed, while their move, multiplication, crossing-form,
+decoder, and projective-derivative routines are separately written.  The
+certificate stores a Material Passport, runtime versions, source hashes,
+and exact JSON values.  The repository runner executes the producer,
+checker, unit tests, mutation tests, and artifact-hash generation and
+verification.  The paper has a separate clean-build command and compilation
+report.

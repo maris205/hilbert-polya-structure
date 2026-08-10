@@ -1,0 +1,111 @@
+\section{The raw vector-valued \texorpdfstring{\(C_b^1\)}{C1} obstruction}
+\label{sec:c1}
+
+Let
+\[
+ \cB_\cF=C_b^1(\Delta;\cF),
+ \qquad
+ \|F\|_{\cB}=\sup_x\|F(x)\|_\cF+\sup_x\|DF(x)\|.
+\]
+The direct unsmoothed extension of \eqref{eq:agy-transfer} is
+\begin{equation}
+ (\cL_sF)(x)=\sum_\gamma
+ w_{s,\gamma}(x)U_\gamma F(h_\gamma x),
+ \qquad
+ w_{s,\gamma}=e^{-sr_\gamma}j_\gamma.
+ \label{eq:twisted-c1}
+\end{equation}
+We first prove that this is a genuine bounded branch sum, not a formal
+expression.
+
+\begin{proposition}[Absolute branch convergence]
+\label{prop:c1-sum}
+For every fixed \(s\) with \(\Re s>-\sigma _0\), the series in
+\eqref{eq:twisted-c1} converges absolutely in
+\(\mathcal B(\cB_\cF)\).
+\end{proposition}
+
+\begin{proof}
+Set \(a=\Re s\) and
+\(v_{a,\gamma}=e^{-a r_\gamma}j_\gamma\).  By
+\eqref{eq:agy-bounds}, the logarithmic derivative of this positive weight is
+bounded by \(C_J+|a|C_r\), uniformly in \(\gamma\).  Since \(\Delta\) has
+finite diameter in the AGY Finsler metric, bounded distortion compares its
+supremum with its mean by a branch-independent constant.  Change variables
+with \(h_\gamma\) and use
+the branch partition:
+\begin{align}
+ \sum_\gamma\|v_{a,\gamma}\|_\infty
+ &\le C_a\sum_\gamma\int_\Delta
+   e^{-a r_\gamma(x)}j_\gamma(x)\,dm(x)\\
+ &=C_a\int_\Delta e^{-ar(y)}\,dm(y)<\infty.
+ \label{eq:weighted-sum}
+\end{align}
+The last inequality follows from \eqref{eq:tails} and
+\(a>-\sigma _0\).
+
+Differentiation gives
+\[
+ Dw_{s,\gamma}
+ =w_{s,\gamma}(D\log j_\gamma-sDr_\gamma).
+\]
+The product rule, \(\|Dh_\gamma\|\le\kappa\), and unitarity of
+\(U_\gamma\) imply
+\[
+ \|w_{s,\gamma}U_\gamma(\,\cdot\,\circ h_\gamma)\|_{\cB\to\cB}
+ \le C(1+|s|)\|v_{a,\gamma}\|_\infty.
+\]
+Summing with \eqref{eq:weighted-sum} proves the claim.  The same estimates
+hold for Bochner-valued derivatives because each \(U_\gamma\) is constant in
+the base coordinate.
+\end{proof}
+
+The next compression is the decisive step.  It uses a smooth localizer, not
+the discontinuous indicator of a branch cylinder.
+
+\begin{theorem}[Exact branch compression]
+\label{thm:c1-noncompact}
+For every \(s\) with \(\Re s>-\sigma _0\), the operator \(\cL_s\) in
+\eqref{eq:twisted-c1} is noncompact on \(\cB_\cF\).  In particular it is not
+a Banach nuclear operator.
+\end{theorem}
+
+\begin{proof}
+Fix a branch \(\gamma_0\) and \(x_0\in\Delta\).  Its preimage
+\(y_0=h_{\gamma_0}x_0\) lies in the open set \(D_{\gamma_0}\).  AGY's bump
+lemma supplies \(\psi\in C_c^1(D_{\gamma_0})\) with \(\psi(y_0)=1\).
+Define bounded maps
+\[
+ J_\psi:\cF\to\cB_\cF,
+ \quad J_\psi v=\psi v,
+ \qquad
+ R_{x_0}:\cB_\cF\to\cF,
+ \quad R_{x_0}F=F(x_0).
+\]
+For \(\gamma\ne\gamma_0\), the point \(h_\gamma x_0\) belongs to the
+disjoint branch image \(D_\gamma\) and is outside the support of \(\psi\).
+Absolute convergence from Proposition~\ref{prop:c1-sum} permits evaluation
+of the full sum and gives the exact identity
+\begin{equation}
+ R_{x_0}\cL_sJ_\psi
+ =e^{-sr_{\gamma_0}(x_0)}j_{\gamma_0}(x_0)U_{\gamma_0}.
+ \label{eq:c1-compression}
+\end{equation}
+The scalar is nonzero.  A nonzero multiple of a unitary on the
+infinite-dimensional space \(\cF\) is not compact.  If \(\cL_s\) were
+compact, its bounded compression \eqref{eq:c1-compression} would be compact,
+a contradiction.  Nuclear operators between Banach spaces are compact, so
+\(\cL_s\) is not nuclear.
+\end{proof}
+
+The proof also gives a quantitative lower bound
+\begin{equation}
+ \|\cL_s\|_{\ess}
+ \ge
+ \frac{|e^{-sr_{\gamma_0}(x_0)}j_{\gamma_0}(x_0)|}
+      {\|R_{x_0}\|\,\|J_\psi\|}>0.
+ \label{eq:c1-essential}
+\end{equation}
+No conclusion is drawn from a single noncompact summand.  Equation
+\eqref{eq:c1-compression} isolates one branch in the already convergent full
+operator, so cancellation elsewhere is impossible.

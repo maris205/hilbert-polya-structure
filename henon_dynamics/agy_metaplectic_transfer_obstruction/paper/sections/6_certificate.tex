@@ -1,0 +1,93 @@
+\section{Exact certificate and independent checks}
+\label{sec:certificate}
+
+The functional-analytic obstruction is a theorem and does not rest on a
+finite numerical pattern.  Exact computation has two narrower roles: it
+specifies one project-chosen AGY-admissible section in the selected
+four-letter class and tests the decoder implementation against mutations.
+
+The producer starts from \((1234)/(4321)\), reconstructs all seven labeled
+states and fourteen arrows, and verifies
+\eqref{eq:form-transport} on every edge.  It then follows every one of the
+128 arrows of \eqref{eq:gamma-star}, records winner and loser labels, builds
+\eqref{eq:gamma-matrix} with later edges on the left, and checks the eight
+complete blocks.  It computes the maximal initial constant-type run rather
+than trusting the compressed notation: the run has length 65 because
+\(\eta\) begins with \(t\).
+
+For a rational interior witness, the code puts
+\begin{equation}
+ x_0=\frac{B_{\gamma_*}^T\mathbf1}
+          {\mathbf1^TB_{\gamma_*}^T\mathbf1},
+ \qquad
+ y_0=\frac{B_{\gamma_*}^Tx_0}
+          {\mathbf1^TB_{\gamma_*}^Tx_0}.
+ \label{eq:rational-points}
+\end{equation}
+It differentiates the projective map in three independent simplex
+coordinates and verifies exactly
+\begin{equation}
+ \det Dh_{\gamma_*}(x_0)
+ =\bigl(\mathbf1^TB_{\gamma_*}^Tx_0\bigr)^{-4}
+ =e^{-4r_{\gamma_*}(x_0)}.
+ \label{eq:jacobian-check}
+\end{equation}
+
+The independent checker does not import the producer.  It has separate
+implementations of the Rauzy move, crossing form, matrix multiplication,
+spanning-tree frames, fixed-fibre edge matrices, row decoder, projective
+derivative, and first-return enumeration.  The
+recorded checks are summarized in \Cref{tab:certificate}.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.34\linewidth}
+                >{\raggedright\arraybackslash}p{0.31\linewidth}
+                >{\raggedright\arraybackslash}p{0.25\linewidth}}
+\toprule
+Object & Exact result & Logical role\\
+\midrule
+Rauzy graph & 7 states, 14 transported edges & Source lock\\
+State trivialization & 7 integral frames; 14 fixed-fibre edges (6 identity, 8 nonidentity) & Coherent pathwise lift\\
+Section word & length 128, 8 complete blocks & Strong positivity\\
+Neatness & initial run 65; no proper border & Return-model lock\\
+Section matrix & positive, determinant 1, symplectic & Fibre applicability\\
+Decoder replay & all 128 section arrows recovered & Literal chronology check\\
+First-return stress & 35,420 words through length 22 & Non-proof regression sentinel\\
+Matrix collisions in stress window & 0 & Diagnostic only\\
+Projective derivative & exponent exactly 4 & Jacobian convention lock\\
+\bottomrule
+\end{tabular}
+\caption{Exact certificate claims.  The all-length no-collision statement is
+Theorem~\ref{thm:decoder}; the finite stress window is not substituted for
+that proof.}
+\label{tab:certificate}
+\end{table}
+
+All eleven independent validation gates and all fourteen registered
+regression/mutation tests pass.  No numerical metaplectic central sign is
+selected: the frame certificate proves that edge lifts can be chosen and
+composed coherently, while both possible signs remain in scope.
+
+The stress language is based at the central seed
+\[
+\pi_c=(1234)/(4321),
+\]
+which is distinct from the AGY section base
+\(\pi_*=(1342)/(4321)\).  State elimination at \(\pi_c\) gives the
+central first-return generating function
+\begin{equation}
+ F(z)=\frac{2z^3}{1-z-z^2},
+ \label{eq:return-generating}
+\end{equation}
+so the number of first returns of elementary length \(n\ge3\) is
+\(2F_{n-2}\), with \(F_1=F_2=1\).  This exact rational language is useful
+for checking enumeration completeness.  It is not an arithmetic prime law
+and does not improve the Route-A orbit verdict.
+
+The checker also registers negative tests for transposed chronology,
+winner/loser reversal, the wrong Jacobian exponent, a mutated section word,
+an incorrect initial-run count, lost labeled state, and confusion between a
+short central return and the AGY \(\gamma_*\)-section.  All released
+equalities use integers or rationals; no floating tolerance is needed.

@@ -60,6 +60,7 @@ The foundational local source is
 | [`henon_graded_ruelle_complex/`](henon_graded_ruelle_complex/) | Corrected \(\mathbb C^3\) cross map, exact residue parity, and explicit unresolved nuclear/all-word gates | Conditional blueprint; C22 closed |
 | [`henon_adelic_lefschetz_ramification/`](henon_adelic_lefschetz_ramification/) | Exact fixed-algebra chronology certificates and cyclic-resultant collapse of every fixed-word tower | Scoped negative result; C23 closed |
 | [`rauzy_metaplectic_obstruction/`](rauzy_metaplectic_obstruction/) | Exact genus-two Rauzy chronology, fixed-vector character obstruction, and two metaplectic noncompactness theorems | Two realization classes closed; canonical analytic application open |
+| [`agy_metaplectic_transfer_obstruction/`](agy_metaplectic_transfer_obstruction/) | All-length Rauzy matrix decoder and exact noncompactness on source-standard AGY vector-valued `C_b^1` and normalized `L^2` spaces | Ordinary determinant rejected; holomorphic/generalized trace open |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -142,7 +143,84 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C24 Rauzy--metaplectic obstruction
+## Latest big-door result: HCS-C25 AGY transfer obstruction
+
+HCS-C25 closes the concrete application gate left open by C24.  It freezes
+one explicit Avila--Gou\"ezel--Yoccoz precompact Rauzy first-return section
+and applies the infinite-fibre obstruction to the actual published
+bounded-derivative transfer regularity, rather than another finite periodic
+ledger.
+
+For the state `(1342)/(4321)`, put
+
+\[
+\eta=\texttt{tbttbtbb},
+\qquad
+\gamma_*=t^{64}\eta^8.
+\]
+
+The length-128 word is eight-complete, meeting the exact AGY threshold
+`3d-4=8`.  Its maximal initial top run has length 65, it ends bottom, and it
+has no nonempty proper border.  The independently verified chronological
+matrix is positive, determinant one, and preserves the full-rank crossing
+form.  The exact projective inverse branch satisfies
+
+\[
+j_{\gamma_*}=e^{-4r_{\gamma_*}}.
+\]
+
+There is also an all-length structural theorem.  For a path from a fixed
+labeled state, the true first Rauzy edge is the unique candidate whose winner
+row dominates its loser row in \(B_\gamma^T\).  Subtracting those rows peels
+the edge and strictly lowers the matrix-entry sum.  Hence the full matrix
+uniquely determines the complete path.  In this four-letter
+\(\mathcal H(2)\) class the crossing form is nondegenerate, so distinct AGY
+return branches cannot collide after passage to absolute homology.  The
+declared edge lifts then recover the true metaplectic central sign.
+
+On
+
+\[
+C_b^1(\Delta;L^2(\mathbb R^2)),
+\]
+
+the raw twisted branch series converges in operator norm throughout the AGY
+half-plane \(\Re s>-\sigma_0\).  A branch-supported source-provided bump and
+point evaluation compress the full operator exactly to a nonzero scalar
+multiple of one infinite-dimensional metaplectic unitary.  The operator is
+therefore noncompact and nonnuclear.  The invariant-density normalized
+operator on \(L^2(\mu;L^2(\mathbb R^2))\) is contractive but noncompact for
+\(\Re s\ge0\); on \(s=it\) it is a coisometry with essential norm one.
+The normalized \(L^2\) failure is already present for the scalar fibre on
+the whole half-plane, so it is a generic Hilbert-space control; the
+oscillator-specific result is the raw \(C_b^1\) multi-branch compression.
+
+The independent checker passes eleven registered gates and fourteen mutation
+tests.  A finite non-proof sentinel decodes all 35,420 central first returns
+through elementary length 22 with zero collision; the theorem, not that
+window, proves the all-length claim.
+
+The formal verdict remains
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**.  The two tested ordinary Fredholm realizations are
+closed.  Holomorphic/no-localizer spaces, flat or distributional traces,
+semifinite determinants, and geometrically forced continuous smoothing are
+different candidates and remain open.  The next large step must enter one of
+those spaces rather than extend the elementary period cutoff.
+
+- [C25 project overview](agy_metaplectic_transfer_obstruction/README.md)
+- [C25 theorem package](agy_metaplectic_transfer_obstruction/THEOREM_PACKAGE.md)
+- [C25 exact certificate](agy_metaplectic_transfer_obstruction/results/c25_certificate.json)
+- [C25 independent check](agy_metaplectic_transfer_obstruction/results/c25_independent_check.json)
+- [C25 compiled note](agy_metaplectic_transfer_obstruction/paper/main.pdf)
+
+Reproduce the round with:
+
+```bash
+cd agy_metaplectic_transfer_obstruction && ./code/run_c25.sh
+```
+
+## Predecessor big-door result: HCS-C24 Rauzy--metaplectic obstruction
 
 HCS-C24 made the planned change of dynamical form.  The literal reversal
 permutation \((1234)/(4321)\) passes source lock as a seven-state,

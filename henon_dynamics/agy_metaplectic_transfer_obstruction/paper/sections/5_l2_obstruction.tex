@@ -1,0 +1,193 @@
+\section{The normalized Hilbert companion}
+\label{sec:l2}
+
+The invariant density in \eqref{eq:density} defines conditional
+inverse-branch probabilities
+\begin{equation}
+ p_\gamma(x)=j_\gamma(x)\frac{\rho(h_\gamma x)}{\rho(x)},
+ \qquad
+ \sum_\gamma p_\gamma(x)=1
+ \quad\hbox{a.e.}
+ \label{eq:branch-probabilities}
+\end{equation}
+Let \(\cH=L^2(\Delta,\mu;\cF)\) and define
+\begin{equation}
+ (\cP_sF)(x)=\sum_\gamma p_\gamma(x)e^{-sr_\gamma(x)}
+ U_\gamma F(h_\gamma x).
+ \label{eq:normalized-transfer}
+\end{equation}
+This Hilbert companion is not AGY's claimed scalar spectral-gap space.  It
+is a natural invariant-measure normalization used here as an independent
+robustness test.
+
+The countable Bochner sum in \eqref{eq:normalized-transfer} is well defined.
+Indeed, for \(a=\Re s\ge0\), Cauchy--Schwarz gives
+\begin{equation}
+ \sum_\gamma p_\gamma e^{-ar_\gamma}\|F(h_\gamma x)\|
+ \le
+ \left(\sum_\gamma p_\gamma\right)^{1/2}
+ \left(\sum_\gamma p_\gamma\|F(h_\gamma x)\|^2\right)^{1/2}.
+ \label{eq:bochner-bound}
+\end{equation}
+The square of the second factor has integral \(\|F\|_{\cH}^2\) by branch
+disintegration, so the sum is absolutely convergent almost everywhere.
+For any tail \(A\) of an enumeration, the same inequality yields
+\[
+ \left\|\sum_{\gamma\in A}p_\gamma e^{-sr_\gamma}
+ U_\gamma F\circ h_\gamma\right\|_{\cH}^2
+ \le \int_{\bigcup_{\gamma\in A}D_\gamma}\|F(y)\|^2\,d\mu(y),
+\]
+which tends to zero.  Hence the series converges unconditionally in
+\(\cH\), independently of its enumeration.
+
+\begin{theorem}[Contraction and branch norm]
+\label{thm:l2-branch}
+For \(\Re s\ge0\), \(\cP_s\) is a contraction on \(\cH\).  For one branch,
+let
+\[
+ (K_{s,\gamma}f)(x)
+ =p_\gamma(x)e^{-sr_\gamma(x)}f(h_\gamma x),
+ \quad
+ K_{s,\gamma}:L^2(D_\gamma,\mu)\to L^2(\Delta,\mu).
+\]
+Then
+\begin{equation}
+ \|K_{s,\gamma}\|
+ =\esssup_{x\in\Delta}
+  \sqrt{p_\gamma(x)}e^{-\Re(s)r_\gamma(x)}>0.
+ \label{eq:branch-norm}
+\end{equation}
+Because \(\mu\) is nonatomic,
+\begin{equation}
+ \|K_{s,\gamma}\|_{\ess}=\|K_{s,\gamma}\|.
+ \label{eq:scalar-branch-essential}
+\end{equation}
+Moreover,
+\begin{equation}
+ \|\cP_s\|_{\ess}\ge\|K_{s,\gamma}\|>0,
+ \label{eq:l2-essential}
+\end{equation}
+so \(\cP_s\) is noncompact.
+\end{theorem}
+
+\begin{proof}
+Convexity of the squared Hilbert norm and
+\eqref{eq:branch-probabilities} give, for \(a=\Re s\ge0\),
+\[
+ \|\cP_sF(x)\|^2
+ \le\sum_\gamma p_\gamma(x)e^{-2ar_\gamma(x)}
+     \|F(h_\gamma x)\|^2
+ \le\sum_\gamma p_\gamma(x)\|F(h_\gamma x)\|^2.
+\]
+The branch disintegration identity
+\begin{equation}
+ \int_{D_\gamma}q(y)\,d\mu(y)
+ =\int_\Delta p_\gamma(x)q(h_\gamma x)\,d\mu(x)
+ \label{eq:disintegration}
+\end{equation}
+then proves \(\|\cP_sF\|\le\|F\|\).
+
+Applying \eqref{eq:disintegration} to one scalar branch yields
+\[
+ \|K_{s,\gamma}f\|^2
+ =\int_{D_\gamma}p_\gamma(Ty)e^{-2ar(y)}|f(y)|^2\,d\mu(y),
+\]
+which gives \eqref{eq:branch-norm}.  Extension by zero from
+\(L^2(D_\gamma,\mu)\) isolates this branch even for the scalar normalized
+operator.
+
+To prove \eqref{eq:scalar-branch-essential}, write
+\[
+ m(y)=\sqrt{p_\gamma(Ty)}e^{-ar(y)},\qquad
+ M=\esssup_{D_\gamma}m=\|K_{s,\gamma}\|.
+\]
+For every \(\varepsilon>0\), the set
+\(\{m>M-\varepsilon\}\) has positive measure.  Nonatomicity lets us split
+it into pairwise disjoint positive-measure sets \(E_n\).  The normalized
+indicators \(f_n=1_{E_n}/\sqrt{\mu(E_n)}\) are orthonormal, hence weakly
+null, while \(\|K_{s,\gamma}f_n\|\ge M-\varepsilon\).  Every compact
+operator sends \(f_n\) to zero in norm.  Thus
+\(\|K_{s,\gamma}\|_{\ess}\ge M-\varepsilon\); let
+\(\varepsilon\downarrow0\).  The reverse inequality is automatic.
+
+Extension by zero from
+\(L^2(D_\gamma,\mu;\cF)\) isolates the branch exactly:
+\begin{equation}
+ \cP_sJ_\gamma=K_{s,\gamma}\otimes U_\gamma.
+ \label{eq:l2-compression}
+\end{equation}
+For a bounded scalar operator \(K\) and an infinite-dimensional unitary
+\(U\), \(\|K\otimes U\|_{\ess}=\|K\|\).  Applying this identity to
+\eqref{eq:l2-compression} proves \eqref{eq:l2-essential}.
+With scalar fibre \(U_\gamma=1\), the same compression and
+\eqref{eq:scalar-branch-essential} prove noncompactness throughout
+\(\Re s\ge0\) as well.
+\end{proof}
+
+On the imaginary axis the obstruction is sharp.
+
+\begin{theorem}[Coisometry]
+\label{thm:coisometry}
+For every \(t\in\R\),
+\begin{equation}
+ \cP_{it}\cP_{it}^*=I,
+ \qquad
+ \|\cP_{it}\|_{\ess}=1.
+ \label{eq:coisometry}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Take inner products linear in the first argument.  On \(y\in D_\gamma\),
+define
+\[
+ (\mathcal U_tG)(y)=e^{itr(y)}U_\gamma^*G(Ty).
+\]
+Invariance of \(\mu\) and unitarity make \(\mathcal U_t\) an isometry.
+Equations \eqref{eq:normalized-transfer} and \eqref{eq:disintegration} give
+\(\cP_{it}=\mathcal U_t^*\), hence the first identity in
+\eqref{eq:coisometry}.  In the Calkin algebra,
+\([\cP_{it}][\cP_{it}]^*=[I]\), so
+\(\|\cP_{it}\|_{\ess}\ge1\).  Contractivity gives the reverse inequality.
+\end{proof}
+
+The normalized \(L^2\) obstruction is not caused specifically by the
+oscillator fibre: the scalar operator is noncompact throughout
+\(\Re s\ge0\), and the Koopman-adjoint argument makes it a coisometry with
+essential norm one on the imaginary axis.  This section therefore closes a
+proposed Hilbert realization as a space-level robustness test; the
+oscillator-specific multi-branch obstruction is
+\Cref{thm:c1-noncompact}.
+
+\subsection{The absolute atomic half-plane}
+
+Let \(q_\gamma=\mu(D_\gamma)\) and
+\(R_\gamma=\inf r_\gamma\).  Uniform distortion,
+\eqref{eq:branch-formula}, and \eqref{eq:density} imply
+\begin{equation}
+ p_\gamma(x)\asymp e^{-d r_\gamma(x)},
+ \qquad
+ q_\gamma\asymp e^{-dR_\gamma}.
+ \label{eq:q-comparison}
+\end{equation}
+Thus the branch operator extended by zero satisfies
+\begin{equation}
+ \|K_{s,\gamma}\|
+ \le Cq_\gamma^{1/2+\Re(s)/d}.
+ \label{eq:atomic-bound}
+\end{equation}
+When \(\Re s\ge d/2\), the exponent is at least one and
+\(\sum_\gamma q_\gamma=1\), so
+\begin{equation}
+ \sum_\gamma\|K_{s,\gamma}\|<\infty.
+ \label{eq:atomic-sum}
+\end{equation}
+For four labels the threshold is \(\Re s\ge2\).
+
+Even if branch terms are grouped by their projected symplectic matrix, no
+signed aggregate can vanish.  Choose an input supported in one
+\(D_{\gamma_0}\).  Every other branch evaluates that input outside its
+support, while the \(\gamma_0\) term remains nonzero.  This proof retains the
+central sign rather than replacing it by an absolute value.  The decoder in
+\Cref{sec:decoder} independently shows that distinct fixed-start branches
+have distinct full matrices in the current full-rank model.

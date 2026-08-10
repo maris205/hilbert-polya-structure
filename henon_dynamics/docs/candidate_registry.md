@@ -100,6 +100,57 @@ or a nonzero branch compression modulo compact operators.  A geometry-forced
 flat, distributional, or semifinite trace would be a separately source-locked
 candidate, not a regularization of C24.
 
+## HCS-C25 source-standard AGY closure (2026-08-10)
+
+Candidate **HCS-C25** executes the C24 reopening gate; see
+[`../agy_metaplectic_transfer_obstruction/`](../agy_metaplectic_transfer_obstruction/).
+It freezes the AGY section word
+
+\[
+\gamma_*=t^{64}(tbttbtbb)^8
+\]
+
+at the four-letter state `(1342)/(4321)`.  Exact reconstruction proves eight
+complete blocks, the AGY `3d-4=8` strong-positivity criterion, a maximal
+initial top run of 65, no proper border, positive determinant-one monodromy,
+full-rank symplectic preservation, and the projective identity
+`J=exp(-4r)`.  Seven integral state frames trivialize all fourteen
+fixed-fibre edges symplectically, making chronological edge lifts well
+defined without selecting a central sign.  A separate implementation
+verifies every one of the 128 arrows and all registered mutations.
+
+The fixed-start full Rauzy matrix map is injective at every length.  In
+`R=B^T`, the true first edge is selected by componentwise winner-row
+dominance; winner-minus-loser row subtraction peels it and strictly decreases
+the total entry sum.  This proves the theorem without a cutoff.  The finite
+35,420-word replay through elementary length 22 is retained only as a
+mutation sentinel.  Promotion of this injectivity to absolute homology is
+scoped to the current `H(2)` class, where every crossing form has determinant
+one.
+
+On the vector-valued source-standard AGY space
+
+\[
+C_b^1(\Delta;L^2(\mathbb R^2)),
+\]
+
+the raw metaplectic branch sum is bounded but noncompact throughout
+`Re(s)>-sigma_0`; an exact bump/evaluation compression isolates one nonzero
+infinite-dimensional unitary.  The normalized invariant-measure `L^2`
+operator is contractive but noncompact for `Re(s)>=0`, and is a coisometry
+with essential norm one on `s=it`.  The scalar normalized operator is
+already noncompact on the whole half-plane, so this is a generic
+Hilbert-space control; the fibre-driven result is the raw `C_b^1`
+compression.  Thus the ordinary nuclear/trace-class
+Fredholm realization is closed on both declared spaces.
+
+The formal tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**; Route B is not authorized.  Reopening requires a
+source-locked holomorphic/no-localizer space or a geometrically forced
+generalized trace.  Quasi-H\"older cylinder localization remains conditional,
+and longer elementary-period ledgers are not authorized.
+
 ## C02D closure (2026-08-06)
 
 The conditional C02D operator gate is now closed **NO_GO**; see
