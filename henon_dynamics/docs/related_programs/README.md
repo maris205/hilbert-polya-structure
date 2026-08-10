@@ -565,6 +565,35 @@ reversible-map controls.
 
 ---
 
+## Finite-Weil AGY determinant family (HCS-C27)
+
+The C27 project turns the C26 finite-fibre suggestion into an exact target
+operator. For each fixed odd prime, the genuine finite Weil representation
+has dimension p², so tensoring preserves the scalar AGY trace-class theorem
+and gives an ordinary Fredholm determinant. Thomas's character formula adds
+exact Legendre/Gauss orbit weights without averaging chronology.
+
+The related-program lesson is mixed:
+
+- complete fibre polynomials distinguish the frozen three-return chronology
+  at p=3,5,7;
+- at p=43, a complete period proves that the same finite fibre is blind even
+  though the base matrices have different characteristic polynomials;
+- an integral symplectic conjugacy makes every class-function fibre blind to
+  a distinct C24 symbolic pair for every prime and repetition; and
+- 150 bounded-length AGY branches produce 150 different quadratic
+  signatures, with no observed small common conductor.
+
+This retains the finite-Weil implementation and fixed-prime determinant as a
+positive reusable pattern. It blocks treating one character, one prime, or
+an ad hoc product over primes as a Hilbert--Pólya construction. Reopening the
+global route requires a canonical adelic measure/trace derived from the
+dynamics.
+
+Project: [`../../agy_finite_weil_determinant/`](../../agy_finite_weil_determinant/)
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

@@ -36,6 +36,13 @@ The p=43 equality concerns only `det(I-T rho_43(g))`; the scalar AGY atoms
 remain distinct. The P076/P082 cycles are C24 controls and are not relabeled
 as branches of the C26 accelerated operator.
 
+## Release provenance
+
+- implementation commit: `fbddcd5ca5489aaf8e1a0ae3817cdf5c9c2759b5`;
+- append-only Route-A record:
+  `evaluations/route_a/HCS-C27/20260810T074125Z.yaml`;
+- intended release tag: `hcs-c27-agy-finite-weil-determinant-v1`.
+
 ## Release command
 
 ```bash
@@ -43,5 +50,6 @@ cd henon_dynamics/agy_finite_weil_determinant
 bash code/run_c27.sh
 ```
 
-The intended release sequence is implementation commit, exact replay,
-Route-A provenance update, tag, and SSH push.
+The release sequence uses the implementation commit above as the immutable
+`code_commit`, then freezes the Route-A provenance and repository registries
+in a second commit before tagging and SSH push.

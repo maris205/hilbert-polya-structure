@@ -62,6 +62,7 @@ The foundational local source is
 | [`rauzy_metaplectic_obstruction/`](rauzy_metaplectic_obstruction/) | Exact genus-two Rauzy chronology, fixed-vector character obstruction, and two metaplectic noncompactness theorems | Two realization classes closed; canonical analytic application open |
 | [`agy_metaplectic_transfer_obstruction/`](agy_metaplectic_transfer_obstruction/) | All-length Rauzy matrix decoder and exact noncompactness on source-standard AGY vector-valued `C_b^1` and normalized `L^2` spaces | Ordinary determinant rejected; holomorphic/generalized trace open |
 | [`agy_holomorphic_slice_obstruction/`](agy_holomorphic_slice_obstruction/) | Common complex AGY domain, scalar trace-class determinant with Perron-characteristic trace atoms, and same-domain oscillator noncompactness | Scalar determinant proved; literal infinite oscillator Route-A rejected |
+| [`agy_finite_weil_determinant/`](agy_finite_weil_determinant/) | Fixed-prime finite-Weil Fredholm determinants, exact Legendre--Gauss traces, and class-function chronology collapse | Route-A exploratory; natural fixed-prime quantization, no global prime assembly |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -144,7 +145,71 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C26 scalar/twisted AGY dichotomy
+## Latest big-door result: HCS-C27 finite-Weil determinant and collapse
+
+HCS-C27 executes the finite-fibre gate left by C26. For every fixed odd
+prime \(p\), the C25 chronological symplectic cocycle reduces to
+\(\operatorname{Sp}(4,\mathbb F_p)\) and acts through the genuine
+\(p^2\)-dimensional Weil representation. Finite tensoring preserves the C26
+trace-class Bergman theorem, so the target operator has an ordinary jointly
+holomorphic determinant
+
+\[
+D_p(s,u)=\det(I-u\mathcal L_{s,p}),
+\qquad \Re s>-\sigma_0.
+\]
+
+A forward periodic word contributes its scalar Perron atom multiplied by
+\(\Theta_p(g_w)\). Thomas's exact character formula gives the quadratic law
+
+\[
+\Theta_p(g)=\left(\frac{\det(g-I)}p\right)
+\]
+
+whenever \(p\) does not divide \(\det(g-I)\).
+
+The finite fibre detects the frozen C26 three-return noncyclic order at
+\(p=3,5,7\), and the complete degree-\(p^2\) fibre polynomials differ at all
+three primes. Across odd \(p\le97\) and \(1\le r\le24\), 328 of 576 exact
+power characters differ.
+
+Two exact collapses show that the present class-function fibre does not by
+itself justify promotion to a global Hilbert--Pólya object. At
+\(p=43\), the C26 forward and reverse matrices both have order 925 and their
+Weil characters agree over the complete period, so their degree-1849
+finite-fibre polynomials coincide even though the base characteristic
+polynomials differ. Their scalar Perron atoms remain different. More
+strongly, C24-P076/P082 are distinct primitive symbolic cycles but are
+explicitly conjugate in \(\operatorname{Sp}(J_{24},\mathbb Z)\), where
+\(J_{24}\) is the frozen C24 symplectic form. Every
+class-function fibre collapses their entire repetition towers over every
+prime.
+
+The bounded arithmetic census also fragments: all 150 positive-prefix AGY
+branches through bridge length 12 have different discriminants,
+characteristic polynomials, and Legendre signatures over the odd primes below
+100. This is finite evidence, not an all-length theorem.
+
+The conservative verdict is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**. Route B is not authorized. A continuation must derive
+an intrinsic adelic measure/trace and convergent same-clock prime assembly;
+otherwise this fibre route should stop rather than add smaller prime scans.
+
+- [C27 project overview](agy_finite_weil_determinant/README.md)
+- [C27 theorem package](agy_finite_weil_determinant/THEOREM_PACKAGE.md)
+- [C27 exact certificate](agy_finite_weil_determinant/results/c27_certificate.json)
+- [C27 independent check](agy_finite_weil_determinant/results/c27_independent_check.json)
+- [C27 compiled paper](agy_finite_weil_determinant/paper/main.pdf)
+
+Reproduce the round with:
+
+```bash
+cd agy_finite_weil_determinant && ./code/run_c27.sh
+```
+
+## Predecessor big-door result: HCS-C26 scalar/twisted AGY dichotomy
 
 HCS-C26 closes the holomorphic/no-localizer escape left open by C25 and
 simultaneously extracts a positive scalar determinant.  Every AGY return
@@ -688,4 +753,4 @@ Regenerable caches, nested Git metadata, TeX auxiliary files, and bulky raw
 array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
-Last synchronized research snapshot: **2026-08-09**.
+Last synchronized research snapshot: **2026-08-10**.

@@ -214,6 +214,41 @@ retained as positive infrastructure.  The authorized next large candidate
 uses finite Weil fibres over odd finite fields; further ordinary holomorphic
 base norms are not a reopening.
 
+## HCS-C27 finite-Weil determinant family (2026-08-10)
+
+Candidate **HCS-C27** executes the finite-Weil gate frozen by C26; see
+[`../agy_finite_weil_determinant/`](../agy_finite_weil_determinant/).
+
+For every fixed odd prime p, the full p²-dimensional genuine Weil
+representation twists the C26 scalar Bergman operator on the same common
+domain. Finite tensoring preserves trace class, yielding the ordinary
+Fredholm determinant `D_p(s,u) = det(I - u L_(s,p))` throughout the source
+half-plane. A periodic word has the exact fibre-scalar atom
+`Theta_p(g_w) lambda_w^(-(s+1)) / chi'_w(lambda_w)`.
+
+At good primes, `Theta_p(g)` is the Legendre symbol of `det(g-I)` modulo p,
+while singular primes retain fixed-space and quotient-discriminant data.
+Complete finite-fibre polynomials distinguish the C26 three-return
+forward/noncyclic reverse pair at p=3,5,7.
+
+The family is not separating. At p=43, both C26 matrices have order 925
+and equal Weil characters through the complete period, so their finite-fibre
+polynomials coincide even though their scalar characteristic/Perron data
+remain different. C24-P076/P082 give a stronger control: distinct symbolic
+cycles are explicitly conjugate in `Sp(J24,Z)`, for the frozen C24 form, so
+every class-function fibre collapses all their reductions and repetitions.
+
+The bounded arithmetic scan also finds 150 different Legendre signatures in
+150 source-locked branches. This is finite evidence for orbit-dependent
+quadratic fields, not an all-length theorem.
+
+The formal tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**. The modulus is still external; no canonical adelic
+assembly, xi divisor, functional equation, or self-adjoint Hilbert--Pólya
+operator is available. Route B remains unauthorized.
+
 ## C02D closure (2026-08-06)
 
 The conditional C02D operator gate is now closed **NO_GO**; see
