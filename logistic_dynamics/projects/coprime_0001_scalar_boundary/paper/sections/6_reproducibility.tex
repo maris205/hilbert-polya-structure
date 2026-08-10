@@ -1,0 +1,19 @@
+\section{Reproducibility and data firewall}
+
+The project source lock fixes the object, clock, normalization, determinant
+conventions, and stopping conditions.  The generator emits a deterministic
+JSON certificate containing the local-factor, Sylvester, and endpoint logic.
+The certificate uses no prime enumeration, zero table, determinant value, or
+floating-point root calculation.
+
+From the project directory:
+\begin{verbatim}
+PYTHONPATH=. python3 experiments/coprime_0001_scalar_boundary.py --quiet \
+  --output artifacts/coprime_0001/scalar_boundary_certificate.json
+PYTHONPATH=. python3 -m unittest -v tests/test_coprime_0001_scalar_boundary.py
+sha256sum -c results/ARTIFACT_HASHES.sha256
+\end{verbatim}
+
+The focused test suite checks source-lock/evaluation parity, the symbolic
+Euler-factor identities, the continuation domain, the endpoint barrier, the
+data firewall, and byte-identical certificate regeneration.
