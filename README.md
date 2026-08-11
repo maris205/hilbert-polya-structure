@@ -10,7 +10,7 @@ a candidate is deliberately conservative.
 | Stream | Scope | Entry point |
 |---|---|---|
 | Hénon dynamics | Arithmetic and symbolic obstructions, transfer operators, and candidate searches | [`henon_dynamics/`](henon_dynamics/README.md) |
-| Logistic dynamics | Logistic-map research projects and their reproducible records | [`logistic_dynamics/`](logistic_dynamics/README.md) |
+| Logistic-origin HP-Dynamics | Logistic-map foundations plus synchronized symbolic, renewal, quantum-graph, and Hénon/FIO Route-A breadth pivots | [`logistic_dynamics/`](logistic_dynamics/README.md) |
 | `zeta_mvp0` | A staged operator programme with one independently auditable directory per paper | [`zeta_mvp0/`](zeta_mvp0/README.md) |
 
 Within `zeta_mvp0`, each paper has its own manuscript, protocols, executable

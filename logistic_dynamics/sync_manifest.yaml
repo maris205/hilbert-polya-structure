@@ -1,0 +1,978 @@
+schema_version: 1
+sync_id: HPD-MIRROR-20260811-A2E021F
+sync_timestamp: "2026-08-11T21:30:00Z"
+source_repository: git@github.com:maris205/riemann_dyna.git
+source_commit: a2e021f989bf922c174282609928137dc931ff74
+mirror_repository: git@github.com:maris205/hilbert-polya-structure.git
+destination: logistic_dynamics
+
+stages:
+  - stage_id: LEGACY-LOGISTIC-NUMERIC-BASELINES
+    project: projects/legacy_logistic_numeric_baselines
+    group: Logistic baseline
+    title: Legacy Logistic numerical baselines and leakage audit
+    candidate_id: null
+    formal_candidate: false
+    status: ARCHIVED
+    paper_status: not_opened
+    documentation: generated
+    summary: >-
+      Preserves the legacy non-autonomous Logistic notebooks, deterministic
+      eigensolver smoke test, and physical-epsilon robustness audit as historical
+      evidence, including their explicit fitting and data-leakage boundaries.
+    failure: >-
+      The legacy construction used fitted zero targets, USTC data, partition and
+      smoothing choices, and no frozen primitive-orbit/Fredholm determinant
+      object; it is not a Route-A candidate.
+    next_task: >-
+      Keep as an archive and regression baseline only; do not reopen target-zero
+      fitting or promote saved numerical matches.
+    source_locks:
+      - configs/source_locks/P4-LOGISTIC-LEGACY-AUDIT.yaml
+      - configs/source_locks/P4-LOGISTIC-DETERMINISTIC-SMOKE.yaml
+      - configs/source_locks/P4-LOGISTIC-MEDIUM-PHYSICAL-EPSILON.yaml
+    evaluations: []
+    experiments:
+      - experiments/p4_logistic_legacy_audit.py
+      - experiments/p4_logistic_deterministic_smoke.py
+      - experiments/p4_logistic_medium_branch_audit.py
+      - experiments/__init__.py
+    tests:
+      - tests/test_p4_logistic_legacy_audit.py
+      - tests/test_p4_logistic_deterministic_smoke.py
+      - tests/test_p4_logistic_medium_branch_audit.py
+    artifacts:
+      - artifacts/p4_logistic_legacy
+      - artifacts/p4_logistic_medium
+    extra_files:
+      - docs/prior_work/legacy/4-riemann_logistic/ablation_test.ipynb
+      - docs/prior_work/legacy/4-riemann_logistic/micro_ustc_data_match.ipynb
+      - docs/prior_work/legacy/4-riemann_logistic/micro_find_best_eps_detail.ipynb
+      - docs/prior_work/legacy/4-riemann_logistic/macro_100_scale_find_1d.ipynb
+
+  - stage_id: P4-LOGISTIC-MONOTONE-CLOCK-LIFT
+    project: projects/logistic_monotone_clock_lift
+    group: Logistic structure
+    title: Strict-monotone autonomous Logistic clock-lift obstruction
+    candidate_id: P4-LOGISTIC-MONOTONE-CLOCK-LIFT
+    formal_candidate: false
+    status: STOP_SCOPED
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Proves that the exact autonomous lift of the frozen logarithmic aging
+      schedule has all full-state periodic orbits on the static U_c boundary.
+    failure: >-
+      The strict Lyapunov clock creates no recurrent aging orbits and adds a
+      neutral clock multiplier, so occupation-matrix cycles cannot be used as
+      chronological UPOs.
+    next_task: >-
+      Reopen only with an intrinsically recurrent base and a source-locked
+      same-object determinant; otherwise keep this subclass closed.
+    source_locks: configs/source_locks/P4-LOGISTIC-MONOTONE-CLOCK-LIFT.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-MONOTONE-CLOCK-LIFT/20260804T025047Z.yaml
+    obstructions: formal/obstructions/strict_monotone_clock_orbit_collapse.md
+    experiments:
+      - experiments/p4_logistic_monotone_clock_lift.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_monotone_clock_lift.py
+    artifacts: artifacts/p4_logistic_monotone_clock_lift
+
+  - stage_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    project: projects/recurrent_uc_anchored_clock
+    group: Logistic structure
+    title: Recurrent exact-U_c anchored Logistic clock audit
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: REVISE
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Defines a recurrent all-even tower anchored exactly at U_c and certifies
+      its finite combinatorics without reading prime or zero tables.
+    failure: >-
+      The recurrent tower is modeled rather than derived from the physical
+      Logistic map, and its unit-lattice clock forces a vertically periodic
+      divisor incompatible with completed xi.
+    next_task: >-
+      Use only as a structural parent; the physical first-return and polar
+      branches supersede further tuning of the modeled tower.
+    source_locks: configs/source_locks/P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK/20260804T080528Z.yaml
+    obstructions: formal/obstructions/unit_lattice_clock_vertical_periodicity.md
+    experiments:
+      - experiments/p4_logistic_recurrent_uc_anchored_clock.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_recurrent_uc_anchored_clock.py
+    artifacts: artifacts/p4_logistic_recurrent_uc_anchored_clock
+
+  - stage_id: P4-LOGISTIC-UC-FIRST-RETURN-SUPPORT
+    project: projects/exact_uc_first_return_support
+    group: Logistic structure
+    title: Exact-U_c Logistic first-return support theorem
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Proves the finite-word physical first-return grammar at the exact
+      band-merging parameter, with one nonempty interval branch for every even
+      return label and no odd physical branch.
+    failure: >-
+      The branches are not uniformly expanding, and finite-word support does
+      not prove realization of every infinite modeled renewal sequence or a
+      Fredholm determinant.
+    next_task: >-
+      Retain as the physical symbolic foundation for the ACIP and polar
+      analyses; do not infer a prime-orbit law.
+    source_locks: configs/source_locks/P4-LOGISTIC-UC-FIRST-RETURN-SUPPORT.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK/20260804T105010Z.yaml
+    results: formal/results/exact_uc_first_return_support.md
+    obstructions: formal/obstructions/exact_uc_first_return_nonuniform_expansion.md
+    experiments:
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_first_return_support.py
+    artifacts: artifacts/p4_logistic_uc_first_return_support
+
+  - stage_id: P4-LOGISTIC-UC-ACIP-ENDPOINT-DENSITY
+    project: projects/exact_uc_acip_endpoint_density
+    group: Logistic structure
+    title: Exact-U_c physical ACIP endpoint-density theorem
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Identifies the exact endpoint density relation and the physical branch-mass
+      ratio for the U_c absolutely continuous invariant probability measure.
+    failure: >-
+      The theorem fixes a physical normalization but supplies neither an
+      arithmetic primitive-orbit law nor a dynamical determinant.
+    next_task: >-
+      Use the endpoint identity only inside the validated cone and polar
+      constructions with the same physical measure.
+    source_locks: configs/source_locks/P4-LOGISTIC-UC-ACIP-ENDPOINT-DENSITY.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK/20260804T162511Z.yaml
+    results: formal/results/exact_uc_acip_endpoint_density.md
+    experiments:
+      - experiments/p4_logistic_uc_acip_endpoint_density.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_acip_endpoint_density.py
+    artifacts: artifacts/p4_logistic_uc_acip_endpoint_density
+
+  - stage_id: P4-LOGISTIC-UC-ACIP-CONE-ENCLOSURE
+    project: projects/exact_uc_acip_cone_enclosure
+    reproduction_mode: source_bound
+    group: Logistic structure
+    title: Certified exact-U_c ACIP cone enclosure
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Gives a certified coarse polar-cone enclosure for the exact-U_c physical
+      invariant density and its endpoint ratio.
+    failure: >-
+      The coarse cone is a physical-density theorem only and does not establish
+      a nuclear transfer determinant or target divisor.
+    next_task: >-
+      Treat the sharp validated cone as the superseding quantitative stage.
+    source_locks: configs/source_locks/P4-LOGISTIC-UC-ACIP-CONE-ENCLOSURE.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-UC-ACIP-CONE-ENCLOSURE/20260804T233200Z.yaml
+    results: formal/results/exact_uc_acip_cone_enclosure.md
+    experiments:
+      - experiments/p4_logistic_uc_acip_cone_enclosure.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_acip_cone_enclosure.py
+    artifacts: artifacts/p4_logistic_uc_acip_cone_enclosure
+
+  - stage_id: P4-LOGISTIC-UC-ACIP-SHARP-CONE-ENCLOSURE
+    project: projects/exact_uc_acip_sharp_cone_enclosure
+    reproduction_mode: source_bound
+    group: Logistic structure
+    title: Validated sharp exact-U_c polar-cone enclosure
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Sharpens the physical ACIP cone using interval validation and freezes a
+      reproducible endpoint/branch-mass certificate.
+    failure: >-
+      Sharp physical weights still do not generate log-prime periods,
+      von-Mangoldt amplitudes, analytic continuation, or quantization.
+    next_task: >-
+      Use only as an input to the quantitative branch-mass and polar-roof
+      theorem chain.
+    source_locks: configs/source_locks/P4-LOGISTIC-UC-ACIP-SHARP-CONE-ENCLOSURE.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-UC-ACIP-SHARP-CONE-ENCLOSURE/20260805T012200Z.yaml
+    results: formal/results/exact_uc_acip_sharp_cone_enclosure.md
+    experiments:
+      - experiments/p4_logistic_uc_acip_sharp_cone_enclosure.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_acip_sharp_cone_enclosure.py
+    artifacts: artifacts/p4_logistic_uc_acip_sharp_cone_enclosure
+
+  - stage_id: P4-LOGISTIC-UC-BRANCH-MASS-RATE
+    project: projects/exact_uc_branch_mass_rate
+    reproduction_mode: source_bound
+    group: Logistic structure
+    title: Quantitative exact-U_c branch-mass-ratio rate
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Converts the sharp ACIP cone into a certified quantitative convergence
+      rate for the exact-U_c physical branch-mass ratio.
+    failure: >-
+      The rate concerns physical return masses, not a prime-weighted orbit
+      trace or completed-xi determinant.
+    next_task: >-
+      Keep as a completed physical-measure lemma; no further fixed-point
+      sharpening is a project-level priority.
+    source_locks: configs/source_locks/P4-LOGISTIC-UC-BRANCH-MASS-RATE.yaml
+    evaluations:
+      - evaluations/route_a/P4-LOGISTIC-UC-BRANCH-MASS-RATE/20260805T035348Z.yaml
+      - evaluations/route_a/P4-LOGISTIC-UC-BRANCH-MASS-RATE/20260805T083731Z.yaml
+    results: formal/results/exact_uc_branch_mass_rate.md
+    experiments:
+      - experiments/p4_logistic_uc_branch_mass_rate.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_branch_mass_rate.py
+    artifacts: artifacts/p4_logistic_uc_branch_mass_rate
+
+  - stage_id: P4-LOGISTIC-UC-POLAR-NONLATTICE
+    project: projects/exact_uc_polar_nonlattice
+    reproduction_mode: source_bound
+    group: Logistic polar
+    title: Exact non-lattice theorem for the intrinsic U_c polar roof
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Freezes the intrinsic roof tau=log|G'| of the exact-U_c polar return map
+      and proves that its primitive periods are not contained in one lattice.
+    failure: >-
+      Non-lattice timing alone supplies no prime correspondence, determinant,
+      functional equation, or global divisor law.
+    next_task: >-
+      Use the theorem as the timing prerequisite for the complex-branch and
+      nuclear Fredholm stages; do not treat it as target matching.
+    source_locks:
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-INTRINSIC-ROOF.yaml
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-NONLATTICE.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-UC-POLAR-NONLATTICE/20260805T110654Z.yaml
+    results: formal/results/exact_uc_polar_nonlattice.md
+    experiments:
+      - experiments/p4_logistic_uc_polar_nonlattice.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests:
+      - tests/test_p4_logistic_uc_polar_nonlattice.py
+      - tests/test_p4_logistic_uc_polar_intrinsic_roof_lock.py
+    artifacts: artifacts/p4_logistic_uc_polar_nonlattice
+
+  - stage_id: P4-LOGISTIC-UC-POLAR-COMPLEX-BRANCH
+    project: projects/exact_uc_polar_complex_branch
+    reproduction_mode: source_bound
+    group: Logistic polar
+    title: Frozen complex inverse branches for the exact-U_c polar roof
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Certifies common complex stadiums for the two exact-U_c inverse branches
+      and freezes the analytic domain later used by LOG-0001.
+    failure: >-
+      The complex branches are a local analytic prerequisite; they do not by
+      themselves prove nuclearity, a determinant, or Riemann divisor behavior.
+    next_task: >-
+      Treat the LOG-0001 nuclear Fredholm theorem as the superseding operator
+      stage on this frozen domain.
+    source_locks: configs/source_locks/P4-LOGISTIC-UC-POLAR-COMPLEX-BRANCH.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-UC-POLAR-COMPLEX-BRANCH/20260805T125236Z.yaml
+    results: formal/results/exact_uc_polar_complex_branch.md
+    experiments:
+      - experiments/p4_logistic_uc_polar_complex_branch.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_polar_complex_branch.py
+    artifacts: artifacts/p4_logistic_uc_polar_complex_branch
+
+  - stage_id: P4-LOGISTIC-UC-POLAR-PARTITION-TRACE
+    project: projects/polar_partition_trace
+    group: Logistic polar
+    title: Exact-U_c half-open polar partition trace ledger
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: HISTORICAL_PREREQUISITE
+    paper_status: integrated_into_LOG-0001
+    documentation: preserve
+    summary: >-
+      Freezes the half-open partition and exact local trace ledger used by the
+      later polar Fredholm determinant.
+    failure: >-
+      This local trace stage is not independently a global determinant or
+      completed-xi result.
+    next_task: >-
+      Read through LOG-0001; do not reopen as an independent candidate.
+    source_locks:
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-COMPLEX-BRANCH.yaml
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-PARTITION-TRACE.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-UC-POLAR-PARTITION-TRACE/20260807T032000Z.yaml
+    results: formal/results/exact_uc_polar_partition_trace.md
+    experiments:
+      - experiments/p4_logistic_uc_polar_partition_trace.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_polar_partition_trace.py
+    artifacts: artifacts/p4_logistic_uc_polar_partition_trace
+
+  - stage_id: P4-LOGISTIC-UC-POLAR-BOUNDARY-TRACE
+    project: projects/polar_boundary_trace
+    group: Logistic polar
+    title: Exact local boundary trace for the U_c polar branch
+    candidate_id: P4-LOGISTIC-RECURRENT-UC-ANCHORED-CLOCK
+    formal_candidate: false
+    status: HISTORICAL_PREREQUISITE
+    paper_status: integrated_into_LOG-0001
+    documentation: preserve
+    summary: >-
+      Proves the exact local boundary trace identity required to restrict the
+      polar transfer family to the matching subspace.
+    failure: >-
+      It remains a local operator lemma and has no standalone target divisor.
+    next_task: >-
+      Read through the LOG-0001 theorem chain; no separate candidate work.
+    source_locks:
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-PARTITION-TRACE.yaml
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-BOUNDARY-TRACE.yaml
+    evaluations: evaluations/route_a/P4-LOGISTIC-UC-POLAR-BOUNDARY-TRACE/20260807T071000Z.yaml
+    results: formal/results/exact_uc_polar_boundary_trace.md
+    experiments:
+      - experiments/p4_logistic_uc_polar_boundary_trace.py
+      - experiments/p4_logistic_uc_polar_partition_trace.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_p4_logistic_uc_polar_boundary_trace.py
+    artifacts: artifacts/p4_logistic_uc_polar_boundary_trace
+
+  - stage_id: LOG-0001-NUCLEAR-FREDHOLM
+    project: projects/exact_uc_polar_nuclear_fredholm
+    group: Logistic determinant
+    title: Exact-U_c polar nuclear Fredholm determinant
+    candidate_id: LOG-0001
+    formal_candidate: true
+    status: ANALYTIC_REVIEW
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Proves order-zero nuclearity, the canonical entire Fredholm determinant,
+      and the signed based-orbit trace formula for the frozen polar transfer
+      family.
+    failure: >-
+      No prime/von-Mangoldt orbit law, completed-xi divisor, or natural
+      quantization is obtained.
+    next_task: >-
+      Continue only through the already versioned growth and order stages.
+    source_locks:
+      - configs/source_locks/P4-LOGISTIC-UC-POLAR-COMPLEX-BRANCH.yaml
+      - configs/source_locks/LOG-0001-NUCLEAR-FREDHOLM.yaml
+    evaluations: evaluations/route_a/LOG-0001/20260808T051519Z.yaml
+    results:
+      - formal/results/exact_uc_polar_nonlattice.md
+      - formal/results/exact_uc_polar_complex_branch.md
+      - formal/results/exact_uc_polar_boundary_trace.md
+      - formal/results/log_0001_nuclear_fredholm.md
+    experiments:
+      - experiments/log_0001_nuclear_fredholm.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/p4_logistic_uc_polar_complex_branch.py
+      - experiments/__init__.py
+    tests: tests/test_log_0001_nuclear_fredholm.py
+    artifacts:
+      - artifacts/log_0001_nuclear_fredholm
+      - artifacts/p4_logistic_uc_polar_complex_branch
+
+  - stage_id: LOG-0001-GROWTH-ORDER
+    project: projects/exact_uc_polar_growth_order
+    group: Logistic determinant
+    title: LOG-0001 quadratic growth and zero-free half-plane
+    candidate_id: LOG-0001
+    formal_candidate: true
+    status: ANALYTIC_REVIEW
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Proves an order-at-most-two Fredholm growth bound, O(T^2) fixed-strip
+      divisor upper bound, and a zero-free right half-plane for the same
+      determinant.
+    failure: >-
+      The theorem gives no exact order, lower divisor asymptotic, prime orbit
+      law, or completed-xi identity.
+    next_task: >-
+      Use the conformal-ratio and lower-growth stages as the superseding
+      quantitative refinements.
+    source_locks:
+      - configs/source_locks/LOG-0001-NUCLEAR-FREDHOLM.yaml
+      - configs/source_locks/LOG-0001-GROWTH-ORDER.yaml
+    evaluations: evaluations/route_a/LOG-0001/20260808T104049Z.yaml
+    results:
+      - formal/results/log_0001_nuclear_fredholm.md
+      - formal/results/log_0001_growth_order.md
+    experiments:
+      - experiments/log_0001_growth_order.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_log_0001_growth_order.py
+    artifacts:
+      - artifacts/log_0001_growth_order
+      - artifacts/p4_logistic_uc_polar_complex_branch
+
+  - stage_id: LOG-0001-CONFORMAL-RATIO
+    project: projects/exact_uc_polar_conformal_ratio
+    group: Logistic determinant
+    title: Explicit LOG-0001 conformal restriction ratios
+    candidate_id: LOG-0001
+    formal_candidate: true
+    status: ANALYTIC_REVIEW
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Converts the parameterized growth theorem into explicit certified
+      conformal restriction ratios and a numerical quadratic envelope.
+    failure: >-
+      The explicit constant does not determine exact order, type, zeros, or
+      arithmetic orbit weights.
+    next_task: >-
+      Read with the lower-growth and order-lower stages; no target-zero search.
+    source_locks:
+      - configs/source_locks/LOG-0001-GROWTH-ORDER.yaml
+      - configs/source_locks/LOG-0001-CONFORMAL-RATIO.yaml
+    evaluations: evaluations/route_a/LOG-0001/20260808T151232Z.yaml
+    results:
+      - formal/results/log_0001_growth_order.md
+      - formal/results/log_0001_conformal_ratio.md
+    experiments:
+      - experiments/log_0001_conformal_ratio.py
+      - experiments/__init__.py
+    tests: tests/test_log_0001_conformal_ratio.py
+    artifacts:
+      - artifacts/log_0001_growth_order
+      - artifacts/log_0001_conformal_ratio
+
+  - stage_id: LOG-0001-LOWER-GROWTH
+    project: projects/exact_uc_polar_lower_growth
+    group: Logistic determinant
+    title: Cancellation-safe lower growth for LOG-0001
+    candidate_id: LOG-0001
+    formal_candidate: true
+    status: ANALYTIC_REVIEW
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Certifies D_pol'(2)>0.0213 from the complete signed trace ledger and
+      derives explicit linear maximum-modulus lower bounds.
+    failure: >-
+      Nonconstancy and transcendental-entire growth do not identify exact order,
+      divisor asymptotics, completed xi, or quantization.
+    next_task: >-
+      The order-lower theorem is the final scoped analytic refinement; then
+      apply the breadth pivot.
+    source_locks:
+      - configs/source_locks/LOG-0001-GROWTH-ORDER.yaml
+      - configs/source_locks/LOG-0001-CONFORMAL-RATIO.yaml
+      - configs/source_locks/LOG-0001-LOWER-GROWTH.yaml
+    evaluations: evaluations/route_a/LOG-0001/20260809T073000Z.yaml
+    results:
+      - formal/results/exact_uc_polar_boundary_trace.md
+      - formal/results/log_0001_growth_order.md
+      - formal/results/log_0001_conformal_ratio.md
+      - formal/results/log_0001_lower_growth.md
+    experiments:
+      - experiments/log_0001_lower_growth.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_log_0001_lower_growth.py
+    artifacts:
+      - artifacts/log_0001_growth_order
+      - artifacts/log_0001_conformal_ratio
+      - artifacts/log_0001_lower_growth
+
+  - stage_id: LOG-0001-ORDER-LOWER
+    project: projects/exact_uc_polar_order_lower
+    group: Logistic determinant
+    title: Phragmen-Lindelof lower bound for the LOG-0001 order
+    candidate_id: LOG-0001
+    formal_candidate: true
+    status: ANALYTIC_REVIEW
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Combines the same-determinant half-plane bound and nonconstancy witness to
+      prove the sharp interval 1<=ord(D_pol)<=2.
+    failure: >-
+      The interval does not distinguish order one from two and gives no target
+      divisor asymptotic, prime weights, or quantization.
+    next_task: >-
+      Park LOG-0001 at this theorem boundary and pursue structurally different
+      candidates rather than additional local estimates.
+    source_locks:
+      - configs/source_locks/LOG-0001-GROWTH-ORDER.yaml
+      - configs/source_locks/LOG-0001-LOWER-GROWTH.yaml
+      - configs/source_locks/LOG-0001-ORDER-LOWER.yaml
+    evaluations: evaluations/route_a/LOG-0001/20260809T110000Z.yaml
+    results:
+      - formal/results/log_0001_growth_order.md
+      - formal/results/log_0001_lower_growth.md
+      - formal/results/log_0001_order_lower.md
+    experiments:
+      - experiments/log_0001_order_lower.py
+      - experiments/p4_logistic_uc_first_return_support.py
+      - experiments/__init__.py
+    tests: tests/test_log_0001_order_lower.py
+    artifacts:
+      - artifacts/log_0001_growth_order
+      - artifacts/log_0001_lower_growth
+      - artifacts/log_0001_order_lower
+
+  - stage_id: CTRL-0001-QPOCHHAMMER
+    project: projects/ctrl_0001_qpochhammer
+    group: Evaluator control
+    title: Four-channel q-Pochhammer Fredholm evaluator control
+    candidate_id: null
+    formal_candidate: false
+    status: STOP_SCOPED_CONTROL
+    paper_status: not_opened
+    documentation: generated
+    summary: >-
+      Provides a deterministic positive control for signed complex Fredholm
+      ledgers, winding counts, cutoff drift, missing/extra roots, and balanced
+      corruption tests.
+    failure: >-
+      The four channels are engineered evaluator infrastructure with no natural
+      primitive dynamics, prime law, completed-xi structure, or quantization.
+    next_task: >-
+      Reuse as a regression control for new determinants; never promote it to a
+      Riemann candidate.
+    source_locks: configs/source_locks/CTRL-0001.yaml
+    evaluations: evaluations/route_a/CTRL-0001/20260803T171847Z.yaml
+    experiments:
+      - experiments/ctrl_0001_qpochhammer.py
+      - experiments/__init__.py
+    tests: tests/test_ctrl_0001_qpochhammer.py
+    artifacts: artifacts/ctrl_0001
+
+  - stage_id: SS-0001-MOD6-CAYLEY
+    project: projects/ss_0001_mod6_cayley
+    group: Symbolic suspension
+    title: SS-0001 finite-state mod-6 Cayley suspension
+    candidate_id: SS-0001
+    formal_candidate: true
+    status: STOP_SCOPED
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Gives an exact residue-memory symbolic suspension with nontrivial mod-3
+      modes, complete primitive-cycle census, and a closed determinant.
+    failure: >-
+      Every finite-state finite-roof determinant has only O(T) zeros in a fixed
+      vertical strip, not the completed-xi Theta(T log T) divisor.
+    next_task: >-
+      Keep under OBR-005; finite residue decoration cannot reopen this class.
+    source_locks: configs/source_locks/SS-0001.yaml
+    evaluations:
+      - evaluations/route_a/SS-0001/20260802T160435Z.yaml
+      - evaluations/route_a/SS-0001/20260802T163302Z.yaml
+    obstructions: formal/obstructions/finite_state_finite_roof_zero_count.md
+    experiments:
+      - experiments/ss_0001_mod6_cayley.py
+      - experiments/__init__.py
+    tests: tests/test_ss_0001_mod6_cayley.py
+    artifacts: artifacts/ss_0001
+
+  - stage_id: SS-0002-COMMUTATOR-MAYER
+    project: projects/ss_0002_commutator_mayer
+    group: Symbolic suspension
+    title: SS-0002 commutator-cover Mayer operator
+    candidate_id: SS-0002
+    formal_candidate: true
+    status: STOP_SCOPED
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Constructs a genuine countable-branch nuclear Mayer operator with
+      intrinsic C6 holonomy and a natural modular Laplacian quantization.
+    failure: >-
+      Its same-object Selberg divisor contains Omega(T^2) spectral zeros, so it
+      cannot equal the completed-xi Theta(T log T) divisor.
+    next_task: >-
+      Keep under OBR-006; do not glue the separate scattering determinant.
+    source_locks: configs/source_locks/SS-0002.yaml
+    evaluations: evaluations/route_a/SS-0002/20260803T012711Z.yaml
+    obstructions: formal/obstructions/finite_area_selberg_weyl_mismatch.md
+    experiments:
+      - experiments/ss_0002_commutator_mayer.py
+      - experiments/__init__.py
+    tests: tests/test_ss_0002_commutator_mayer.py
+    artifacts: artifacts/ss_0002
+    literature: docs/literature/ss_0002_gauss_mayer_sources.md
+
+  - stage_id: SS-PREFILTER-IRRATIONAL-BOUQUET
+    project: projects/ss_prefilter_irrational_bouquet
+    group: Symbolic suspension
+    title: Irrational-roof countable bouquet prefilter
+    candidate_id: null
+    formal_candidate: false
+    status: STOP_SCOPED
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Gives an explicit entire countable Fredholm product with incommensurate
+      primitive lengths and a closed-form divisor.
+    failure: >-
+      The disconnected cycle actions escape every bounded real strip, leaving
+      only O(T) zeros in each fixed vertical strip despite countability and
+      non-lattice periods.
+    next_task: >-
+      Keep under OBR-016; connectivity and a new divisor mechanism are required.
+    source_locks: configs/source_locks/SS-PREFILTER-IRRATIONAL-BOUQUET.yaml
+    evaluations: evaluations/route_a/SS-PREFILTER-IRRATIONAL-BOUQUET/20260810T162243Z.yaml
+    results: formal/results/ss_prefilter_irrational_bouquet.md
+    obstructions: formal/obstructions/countable_irrational_bouquet_linear_divisor.md
+    experiments:
+      - experiments/ss_prefilter_irrational_bouquet.py
+      - experiments/__init__.py
+    tests: tests/test_ss_prefilter_irrational_bouquet.py
+    artifacts: artifacts/ss_prefilter_irrational_bouquet
+
+  - stage_id: SS-0003-CONNECTED-RENEWAL
+    project: projects/ss_0003_connected_renewal
+    group: Symbolic suspension
+    title: SS-0003 connected integer-renewal Dirichlet transfer
+    candidate_id: SS-0003
+    formal_candidate: true
+    status: STOP_SCOPED
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Constructs a connected countable renewal graph whose rank-two Fredholm
+      determinant is exactly 2-zeta(s) on Re(s)>1 and whose scalar a-points have
+      the correct Theta(T log T) fixed-strip order.
+    failure: >-
+      Positivity forces a unique forbidden real determinant zero in (1,2), and
+      the all-integer primitive alphabet has no prime/von-Mangoldt law.
+    next_task: >-
+      Keep under OBR-017; only a structurally new intrinsic signed/complex
+      grammar can reopen the clue.
+    source_locks: configs/source_locks/SS-0003-CONNECTED-RENEWAL.yaml
+    evaluations: evaluations/route_a/SS-0003/20260811T112250Z.yaml
+    results: formal/results/ss_0003_connected_renewal.md
+    obstructions: formal/obstructions/positive_renewal_right_half_plane_zero.md
+    experiments:
+      - experiments/ss_0003_connected_renewal.py
+      - experiments/__init__.py
+    tests: tests/test_ss_0003_connected_renewal.py
+    artifacts: artifacts/ss_0003
+    literature: docs/literature/ss_0003_a_points_sources.md
+
+  - stage_id: QG-0001-HARMONIC-MAGNETIC-TOWER
+    project: projects/qg_0001_harmonic_magnetic_tower
+    group: Quantum graph
+    title: QG-0001 harmonic magnetic graph-tower prefilter
+    candidate_id: QG-0001
+    formal_candidate: true
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Freezes a low-complexity magnetic lollipop-theta graph tower with exact
+      orbit/scattering data and a natural magnetic-Laplacian lift.
+    failure: >-
+      The naive infinite product is not an ordinary determinant, and no
+      arithmetic primitive-orbit or completed-xi trace law is present.
+    next_task: >-
+      Read through the base-characteristic and relative-Fredholm repairs; do not
+      use the naive determinant.
+    source_locks: configs/source_locks/QG-0001.yaml
+    evaluations: evaluations/route_a/QG-0001/20260806T090351Z.yaml
+    results: formal/results/qg_0001_harmonic_magnetic_tower.md
+    obstructions: formal/obstructions/harmonic_graph_tower_naive_determinant.md
+    experiments:
+      - experiments/qg_0001_harmonic_magnetic_tower.py
+      - experiments/__init__.py
+    tests: tests/test_qg_0001_harmonic_magnetic_tower.py
+    artifacts: artifacts/qg_0001/route_a_prefilter.json
+
+  - stage_id: QG-0001-BASE-CHARACTERISTIC
+    project: projects/qg_0001_base_characteristic
+    group: Quantum graph
+    title: QG-0001 exact base characteristic
+    candidate_id: QG-0001
+    formal_candidate: true
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Proves the exact pole-free base matching characteristic and its relation
+      to the directed-bond secular determinant.
+    failure: >-
+      This is a single-component local theorem and does not define the infinite
+      tower determinant or target divisor.
+    next_task: >-
+      Use only as the normalized base factor for the relative-Fredholm stage.
+    source_locks:
+      - configs/source_locks/QG-0001.yaml
+      - configs/source_locks/QG-0001-BASE-CHARACTERISTIC.yaml
+    evaluations: evaluations/route_a/QG-0001/20260806T111927Z.yaml
+    results: formal/results/qg_0001_base_characteristic_zero.md
+    experiments:
+      - experiments/qg_0001_base_characteristic.py
+      - experiments/__init__.py
+    tests: tests/test_qg_0001_base_characteristic.py
+    artifacts: artifacts/qg_0001/base_characteristic_zero.json
+
+  - stage_id: QG-0001-RELATIVE-FREDHOLM
+    project: projects/qg_0001_relative_fredholm
+    group: Quantum graph
+    title: QG-0001 same-operator relative Fredholm determinant
+    candidate_id: QG-0001
+    formal_candidate: true
+    status: STOP_SCOPED
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Proves that the inverse tower operator is trace class and identifies the
+      exact relative Fredholm product and divisor with multiplicity.
+    failure: >-
+      The immutable total-length coefficient is about 12.7647 times the target
+      coefficient, so the frozen divisor has the wrong asymptotic density.
+    next_task: >-
+      Keep under OBR-013; reopen only with a new intrinsic tower law and source
+      lock, not a post-hoc scaling.
+    source_locks:
+      - configs/source_locks/QG-0001.yaml
+      - configs/source_locks/QG-0001-BASE-CHARACTERISTIC.yaml
+      - configs/source_locks/QG-0001-RELATIVE-FREDHOLM.yaml
+    evaluations: evaluations/route_a/QG-0001/20260806T123946Z.yaml
+    results:
+      - formal/results/qg_0001_base_characteristic_zero.md
+      - formal/results/qg_0001_relative_fredholm.md
+    obstructions: formal/obstructions/harmonic_graph_tower_divisor_coefficient.md
+    experiments:
+      - experiments/qg_0001_relative_fredholm.py
+      - experiments/qg_0001_base_characteristic.py
+      - experiments/__init__.py
+    tests: tests/test_qg_0001_relative_fredholm.py
+    artifacts:
+      - artifacts/qg_0001/base_characteristic_zero.json
+      - artifacts/qg_0001/relative_fredholm.json
+
+  - stage_id: TH-0001-THREE-KICK-PREFILTER
+    project: projects/th_0001_three_kick_prefilter
+    group: Hénon breadth pivot
+    title: TH-0001 exact three-kick Hénon prefilter
+    candidate_id: TH-0001
+    formal_candidate: true
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Freezes a target-free non-palindromic three-kick symplectic map and gives
+      exact low-period UPO, reversibility, and algebraic completeness audits.
+    failure: >-
+      The period prefix has no arithmetic orbit law, determinant, global
+      analytic structure, or proved higher-period completeness.
+    next_task: >-
+      Treat the same-order FIO as the only authorized A4 continuation; no
+      spectral-zero computation.
+    source_locks: configs/source_locks/TH-0001.yaml
+    evaluations: evaluations/route_a/TH-0001/20260806T024238Z.yaml
+    results: formal/results/th_0001_three_kick_prefilter.md
+    obstructions: formal/obstructions/low_depth_henon_reversibility.md
+    experiments:
+      - experiments/th_0001_three_kick_henon.py
+      - experiments/__init__.py
+    tests: tests/test_th_0001_three_kick_henon.py
+    artifacts: artifacts/th_0001/route_a_prefilter.json
+
+  - stage_id: TH-0001-FIO-QUANTIZATION
+    project: projects/th_0001_fio_quantization
+    group: Hénon breadth pivot
+    title: TH-0001 same-order Fourier-integral quantization
+    candidate_id: TH-0001
+    formal_candidate: true
+    status: GO_WITH_LIMITATIONS
+    paper_status: planned
+    documentation: generated
+    summary: >-
+      Constructs the natural same-order unitary FIO on L2(R), proves the exact
+      generating-function relation, and audits the inherited antiunitary class.
+    failure: >-
+      A natural unitary lift does not supply a determinant, discrete target
+      spectrum, self-adjoint generator, or prime-power trace formula.
+    next_task: >-
+      The single-phase caustic audit is the only scoped continuation; Route B
+      remains closed.
+    source_locks:
+      - configs/source_locks/TH-0001.yaml
+      - configs/source_locks/TH-0001-FIO.yaml
+    evaluations:
+      - evaluations/route_a/TH-0001/20260806T024238Z.yaml
+      - evaluations/route_a/TH-0001/20260806T045554Z.yaml
+    results:
+      - formal/results/th_0001_three_kick_prefilter.md
+      - formal/results/th_0001_fio_quantization.md
+    experiments:
+      - experiments/th_0001_fio_quantization.py
+      - experiments/__init__.py
+    tests: tests/test_th_0001_fio_quantization.py
+    artifacts:
+      - artifacts/th_0001/route_a_prefilter.json
+      - artifacts/th_0001/fio_quantization_audit.json
+
+  - stage_id: TH-0001-PHASE-CAUSTIC-REAL
+    project: projects/th_0001_phase_caustic_real
+    group: Hénon breadth pivot
+    title: TH-0001 on-shell real caustic obstruction
+    candidate_id: TH-0001
+    formal_candidate: true
+    status: GO_WITH_LIMITATIONS
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Proves that the internal rank-one caustic lies on every real nonzero
+      stationary branch and supplies an exact rational canonical witness.
+    failure: >-
+      A global single nondegenerate phase chart is impossible; no multi-chart
+      Maslov ledger, determinant, spectrum, or Route-B operator is defined.
+    next_task: >-
+      Reopen only with an explicit source-locked multi-chart phase and Maslov
+      transition construction.
+    source_locks:
+      - configs/source_locks/TH-0001-FIO.yaml
+      - configs/source_locks/TH-0001-PHASE-CAUSTIC-REAL.yaml
+    evaluations:
+      - evaluations/route_a/TH-0001/20260806T024238Z.yaml
+      - evaluations/route_a/TH-0001/20260806T045554Z.yaml
+      - evaluations/route_a/TH-0001/20260806T053410Z.yaml
+      - evaluations/route_a/TH-0001/20260810T074238Z.yaml
+    results:
+      - formal/results/th_0001_fio_quantization.md
+      - formal/results/th_0001_phase_caustic_real.md
+    obstructions: formal/obstructions/th_0001_single_phase_caustic.md
+    experiments:
+      - experiments/th_0001_phase_caustic_audit.py
+      - experiments/th_0001_phase_caustic_real.py
+      - experiments/__init__.py
+    tests:
+      - tests/test_th_0001_phase_caustic_audit.py
+      - tests/test_th_0001_phase_caustic_real.py
+    artifacts:
+      - artifacts/th_0001/phase_caustic_audit.json
+      - artifacts/th_0001/phase_caustic_real_audit.json
+
+  - stage_id: COPRIME-0001-COUNTABLE-TRACE
+    project: projects/coprime_0001_countable_trace
+    group: Renewal breadth pivot
+    title: COPRIME-0001 exact countable trace and primitive ledger
+    candidate_id: COPRIME-0001
+    formal_candidate: true
+    status: ANALYTIC_REVIEW
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Proves trace class on Re(s)>1, an exact Möbius rank-one expansion, and the
+      primitive/repetition ledger for the countable coprime shift.
+    failure: >-
+      The frozen ell2 operator is unbounded for Re(s)<=1 and has no proved
+      rational-prime or von-Mangoldt orbit law.
+    next_task: >-
+      Read with the scalar-boundary stage, which supplies the final scoped
+      obstruction.
+    source_locks: configs/source_locks/COPRIME-0001-COUNTABLE-TRACE.yaml
+    evaluations: evaluations/route_a/COPRIME-0001/20260809T134933Z.yaml
+    results: formal/results/coprime_0001_countable_trace.md
+    obstructions: formal/obstructions/coprime_ell2_operator_boundary.md
+    experiments:
+      - experiments/coprime_0001_countable_trace.py
+      - experiments/__init__.py
+    tests: tests/test_coprime_0001_countable_trace.py
+    artifacts: artifacts/coprime_0001/countable_trace_certificate.json
+    no_follow_files: docs/obstruction_registry.md
+
+  - stage_id: COPRIME-0001-SCALAR-BOUNDARY
+    project: projects/coprime_0001_scalar_boundary
+    group: Renewal breadth pivot
+    title: COPRIME-0001 scalar continuation and endpoint barrier
+    candidate_id: COPRIME-0001
+    formal_candidate: true
+    status: STOP_SCOPED
+    paper_status: published
+    documentation: preserve
+    summary: >-
+      Gives a det_2 scalar continuation on Re(s)>1/2 away from s=1 and proves
+      infinitely many positive real determinant zeros accumulate at the
+      endpoint.
+    failure: >-
+      No holomorphic or meromorphic germ crosses s=1; the scalar representation
+      is not the original bounded ell2 operator below Re(s)=1.
+    next_task: >-
+      Keep under OBR-015 and do not locate roots or retune the frozen kernel.
+    source_locks:
+      - configs/source_locks/COPRIME-0001-COUNTABLE-TRACE.yaml
+      - configs/source_locks/COPRIME-0001-SCALAR-BOUNDARY.yaml
+    evaluations:
+      - evaluations/route_a/COPRIME-0001/20260809T134933Z.yaml
+      - evaluations/route_a/COPRIME-0001/20260810T034453Z.yaml
+    results:
+      - formal/results/coprime_0001_countable_trace.md
+      - formal/results/coprime_0001_scalar_boundary.md
+    obstructions:
+      - formal/obstructions/coprime_ell2_operator_boundary.md
+      - formal/obstructions/coprime_scalar_endpoint_accumulation.md
+    experiments:
+      - experiments/coprime_0001_countable_trace.py
+      - experiments/coprime_0001_scalar_boundary.py
+      - experiments/__init__.py
+    tests:
+      - tests/test_coprime_0001_countable_trace.py
+      - tests/test_coprime_0001_scalar_boundary.py
+    artifacts: artifacts/coprime_0001
+    no_follow_files: docs/obstruction_registry.md
+
+  - stage_id: LEGACY-ANNULAR-RESIDUAL-001
+    project: projects/legacy_annular_residual_001
+    group: Analytic diagnostic
+    title: Legacy same-ledger annular residual audit
+    candidate_id: null
+    formal_candidate: false
+    status: NOT_TESTABLE
+    paper_status: not_opened
+    documentation: preserve
+    summary: >-
+      Freezes one annular determinant-ratio diagnostic inherited from the
+      independent legacy RH programme and records why it is not yet a physical
+      Route-A object.
+    failure: >-
+      The physical complement and same-clock moving head remain undefined; the
+      copied evaluation depends on a separate ignored Git repository.
+    next_task: >-
+      Keep archived until an explicit same-ledger physical residual is defined
+      without importing incompatible legacy determinant pieces.
+    source_locks: configs/source_locks/LEGACY-ANNULAR-RESIDUAL-001.yaml
+    evaluations: evaluations/route_a/LEGACY-ANNULAR-RESIDUAL-001/20260806T140210Z.yaml
+    external_dependencies:
+      - git@github.com:maris205/prime_dynamics_theory.git at the RH-371 checkpoint
+      - docs/related_programs/prime_dynamics_theory is intentionally not mirrored
