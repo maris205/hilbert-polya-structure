@@ -628,6 +628,35 @@ Project: [`../../agy_prime_direct_sum_determinant/`](../../agy_prime_direct_sum_
 
 ---
 
+## Certified H6 Bowen-pressure gate (HCS-C31)
+
+C31 places the main positive real signal left by the instability-roof
+program inside a certified pressure bracket without extending the
+periodic-orbit cutoff.  It uses all
+chronological length-13 cylinders of the exact R058/R059 four-state survivor,
+producing a 714-vertex, 1,156-edge higher-block pressure enclosure.  Exact
+rational Collatz signs prove
+
+\[
+0.277980<h_*<0.277987.
+\]
+
+The adapted instability roof is explicitly cohomologous to the Euclidean
+unstable geometric potential.  Local dimension theorems therefore identify
+\(h_*\) with the unstable-slice Hausdorff dimension, and area preservation
+gives \(\dim_H\Lambda_*=2h_*\).  The prior finite-section value lies inside the
+certified interval; equality and cutoff convergence are not claimed.
+
+The reusable lesson is a mandatory pressure control: a stable positive real
+zero of an instability-weighted cycle expansion may simply be the Bowen root.
+Once that identification is certified, larger cutoffs do not strengthen an
+arithmetic claim.  A new Route-A attempt must add an intrinsic arithmetic
+fibre, amplitude, or trace mechanism over the same chronology.
+
+Project: [`../../henon_bowen_pressure_gate/`](../../henon_bowen_pressure_gate/)
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

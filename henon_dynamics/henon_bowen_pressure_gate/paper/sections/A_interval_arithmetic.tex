@@ -1,0 +1,54 @@
+\section{Proof arithmetic}
+\label{app:arithmetic}
+
+This appendix records why the certificate does not depend on floating-point
+rounding.
+
+\paragraph{Square roots.}
+For a nonnegative rational \(x=a/b\) and \(B=10^{50}\), compute
+\[
+ k=\left\lfloor\sqrt{aB^2/b}\right\rfloor
+\]
+by integer square root.  Then
+\(k/B\le\sqrt{x}\le(k+1)/B\), with equality detected exactly.  All interval
+additions, multiplications, intersections, and reciprocal operations use
+rational arithmetic and explicit sign checks.
+
+\paragraph{Logarithms.}
+After writing \(x=2^m y\), \(1\le y<2\), use
+\[
+ t=\frac{y-1}{y+1},\qquad
+ \log y=2\sum_{k=0}^{K}\frac{t^{2k+1}}{2k+1}+R_K.
+\]
+Since \(0\le t\le1/3\),
+\[
+ 0\le R_K
+ \le\frac{2t^{2K+3}}{(2K+3)(1-t^2)}.
+\]
+The same formula encloses \(\log2\).  Every elementary operation is rounded
+outward to the common rational grid.
+
+\paragraph{Exponentials.}
+All proof inputs have \(0<x<1\).  The alternating series for \(e^{-x}\)
+has decreasing terms, so an odd partial sum is a lower bound and the following
+even partial sum is an upper bound.  The release uses order 61/62 before the
+final outward grid projection.
+
+\paragraph{Collatz inequalities.}
+For any nonnegative matrix \(M\) and positive vector \(v\),
+\[
+ \min_i\frac{(Mv)_i}{v_i}
+ \le\rad(M)\le
+ \max_i\frac{(Mv)_i}{v_i}.
+\]
+The producer may construct \(v\) by floating-point power iteration.  It then
+quantizes \(v\) to positive integers.  The checker reconstructs every interval
+and evaluates the final ratios as rational numbers.  Thus an inaccurate
+floating-point vector can only make a proof fail; it cannot create a false
+strict inequality.
+
+\paragraph{Chronology.}
+Rows of \(A\) are sources and columns are targets.  A length-13 word is an
+edge from its length-12 prefix to its length-12 suffix.  The time-zero roof is
+attached before any matrix aggregation.  No averaged transition matrix or
+unordered word statistic enters the proof.

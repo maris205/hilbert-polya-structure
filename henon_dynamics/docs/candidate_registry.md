@@ -849,3 +849,38 @@ system.  The scoped tuple is
 The next large move is a new all-word/tail theorem on the already certified
 hyperbolic Hénon pinning infrastructure, not a longer inverse-word or prime
 scan.
+
+## HCS-C31 Bowen-pressure closure (2026-08-11)
+
+Candidate **HCS-C31** executes the H\'enon all-word pressure gate; see
+[`../henon_bowen_pressure_gate/`](../henon_bowen_pressure_gate/).  It retains
+the exact R058/R059 four-state survivor and the intrinsic adapted unstable
+roof rather than enumerating a longer periodic window.
+
+Every admissible length-13 state word is a chronological edge from its
+length-12 prefix to suffix.  The complete graph has 714 vertices and 1,156
+edges.  Finite outward interval intersections enclose the coordinate and
+unstable slope on every bi-infinite extension of every cylinder.  Two exact
+rational Collatz inequalities then prove
+
+\[
+0.277980<h_*<0.277987,
+\qquad P_{\Sigma_A}(-h_*\tau_{\rm ad})=0.
+\]
+
+The prior period-20 value \(0.277982981676189\ldots\) is strictly contained.
+The adapted roof is explicitly cohomologous to the Euclidean unstable
+potential, and the survivor is locally maximal and mixing.  Hence \(h_*\) is
+the unstable-slice Hausdorff dimension; area preservation and the local
+surface product theorem give
+\(0.555960<\dim_H\Lambda_*<0.555974\).
+
+This explains the positive finite-section value by a geometric pressure
+benchmark to the certified resolution, while making no equality or
+finite-section convergence claim.  It does not provide a prime law, completed
+determinant, functional equation, global
+Riemann divisor, or self-adjoint lift.  The formal tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED** for the arithmetic interpretation.  The next authorized
+large move is a canonical arithmetic fibre or twist over the proven H6 base;
+refining the same positive pressure root is not a reopening.

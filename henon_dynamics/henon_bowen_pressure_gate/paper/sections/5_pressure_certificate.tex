@@ -1,0 +1,97 @@
+\section{A finite certificate for the infinite pressure root}
+\label{sec:certificate}
+
+The pressure computation uses no periodic-orbit truncation.  Fix a centered
+state word
+\[
+ w=(x_{-6},\ldots,x_6)
+\]
+of length 13.  It determines the signs
+\(\varepsilon_{-7},\ldots,\varepsilon_6\).  Initialize every coordinate by
+its exact sign box.  Hold the two exterior coordinates fixed at those boxes
+and repeatedly intersect the twelve interior intervals with the image of
+the signed recurrence~\eqref{eq:recurrence}.  Every finite intersection remains an
+outer enclosure; convergence of the interval iteration is not an assumption.
+
+Starting at time \(-6\) with the inherited cone
+\(\mu_{-6}\in[-1/2,1/2]\), interval evaluation of
+\eqref{eq:slope-recurrence} through time
+zero gives rational numbers
+\[
+ 0<J_-(w)\le\Jad(x)\le J_+(w)
+ \quad\text{for every }x\in[w].
+ \tag{5.1}\label{eq:cylinder-j}
+\]
+Square roots are rounded outward to a fixed \(10^{-50}\) rational grid.
+
+The length-12 admissible words are the vertices of a higher-block graph, and
+the length-13 words are chronological edges from prefix to suffix.  Exact
+enumeration gives
+\[
+ \#V=714,\qquad \#E=1156.
+\]
+For real \(s\ge0\), define two nonnegative matrices by
+\[
+ (L_s^-)_{uv}
+ =\sum_{w:u\to v}J_+(w)^{-s},
+ \qquad
+ (L_s^+)_{uv}
+ =\sum_{w:u\to v}J_-(w)^{-s}.
+ \tag{5.2}\label{eq:bounding-matrices}
+\]
+The endpoint reversal is forced because \(x^{-s}\) decreases in \(x\).
+Monotonicity of pressure gives
+\[
+ \log\rad(L_s^-)
+ \le \Pad(-s\tad)
+ \le \log\rad(L_s^+).
+ \tag{5.3}\label{eq:pressure-order}
+\]
+
+\begin{theorem}[Certified pressure bracket]
+\label{thm:bracket}
+The unique positive solution of
+\[
+ \Pad(-h_*\tad)=0
+\]
+satisfies
+\[
+ \boxed{0.277980<h_*<0.277987.}
+ \tag{5.4}\label{eq:root-bracket}
+\]
+\end{theorem}
+
+\begin{proof}
+The machine certificate reconstructs all 714 vertices and 1156 edges, proves
+\eqref{eq:cylinder-j} for every edge, and encloses every matrix weight in
+\eqref{eq:bounding-matrices}.
+For \(s_L=277980/10^6\), it supplies a positive rational vector \(v^-\)
+such that
+\[
+ \min_i\frac{(\underline L_{s_L}^-v^-)_i}{v_i^-}>1,
+ \tag{5.5}\label{eq:collatz-lower}
+\]
+where \(\underline L^-\) uses lower rational enclosures of its weights.  For
+\(s_U=277987/10^6\), a second positive rational vector satisfies
+\[
+ \max_i\frac{(\overline L_{s_U}^+v^+)_i}{v_i^+}<1.
+ \tag{5.6}\label{eq:collatz-upper}
+\]
+The Collatz--Wielandt inequalities prove
+\(\rad(L_{s_L}^-)>1\) and \(\rad(L_{s_U}^+)<1\).  Equation
+\eqref{eq:pressure-order}
+therefore gives opposite signs for the true pressure at the two endpoints.
+Positivity of the roof makes the pressure strictly decreasing, proving the
+claim.
+\end{proof}
+
+The logarithm enclosure uses
+\[
+ \log y=2\sum_{k=0}^{K}\frac{t^{2k+1}}{2k+1}+R_K,
+ \qquad t=\frac{y-1}{y+1},
+\]
+after power-of-two range reduction, with an exact geometric bound on
+\(R_K\).  Since every exponent lies in \((-1,0)\), odd and even partial sums
+of the alternating exponential series enclose each weight.  Floating point
+is used only to propose \(v^\pm\); the proof trusts only the rational
+inequalities~\eqref{eq:collatz-lower}--\eqref{eq:collatz-upper}.

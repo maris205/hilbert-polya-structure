@@ -66,6 +66,7 @@ The foundational local source is
 | [`agy_prime_direct_sum_determinant/`](agy_prime_direct_sum_determinant/) | Sharp prime-Schatten phase diagram, ordinary Dirichlet-damped all-prime Fredholm determinant, and canonicality trilemma | Route-A exploratory; exact global determinant with an external second clock |
 | [`rauzy_groupoid_identity_determinant/`](rauzy_groupoid_identity_determinant/) | Natural-extension trace-log no-go; exact C25/C26 identity-holonomy relations; nonconstant normalized finite-Weil groupoid determinant germ | Phase 2 certified; Route-A exploratory, Route B closed |
 | [`rauzy_inverse_roof_trace_obstruction/`](rauzy_inverse_roof_trace_obstruction/) | All-phase positive-cone failure, inverse-time roof theorem, same-space nuclearity and isolated-flat-trace obstruction | C29-to-AGY promotion rejected; finite C29 graph germ retained |
+| [`henon_bowen_pressure_gate/`](henon_bowen_pressure_gate/) | Exact full-cylinder Bowen-pressure bracket, adapted/Euclidean coboundary, and local Hausdorff dimension theorem | Positive signal pressure-consistent at certified resolution; arithmetic interpretation rejected |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -148,7 +149,59 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C30 closes the formal-inverse AGY promotion
+## Latest big-door result: HCS-C31 identifies the H6 positive signal
+
+C31 returns to the strongest certified H\'enon base rather than opening
+another small prime or cycle scan.  The earlier instability-roof sections had
+a stable positive zero near \(0.277982981676189\), but no infinite-system
+theorem showed whether that value tracked an intrinsic quantity.
+
+The new project encloses the adapted unstable roof on every admissible
+length-13 cylinder.  The chronological higher-block graph has 714 vertices
+and 1,156 edges.  Outward rational square-root, logarithm, and exponential
+arithmetic, followed by exact Collatz--Wielandt inequalities, proves
+
+\[
+0.277980<h_*<0.277987,
+\qquad P_{\Sigma_A}(-h_*\tau_{\rm ad})=0.
+\]
+
+The old value lies strictly inside this independently certified interval.
+An explicit bounded H\"older coboundary identifies the adapted roof with the
+Euclidean unstable geometric potential.  Strict interior realization makes
+the survivor a mixing locally maximal hyperbolic set, so local Bowen theory
+gives
+
+\[
+h_*=\dim_H(\Lambda_*\cap W^u_{\rm loc}(z)),
+\qquad
+0.555960<\dim_H\Lambda_*<0.555974.
+\]
+
+Thus the certified root is geometric: it is the pressure boundary and
+unstable dimension of the local horseshoe.  The old finite-section value is
+consistent with it to the certified resolution, without any claim of equality
+or cutoff convergence, so it supplies no independent arithmetic resonance.
+Longer cutoff scans alone are no longer a large door.
+The strict Route-A tuple for that interpretation is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_REJECTED**.  A reopening must add a canonical arithmetic fibre or
+twist while preserving the proven chronology and roof.
+
+- [C31 project overview](henon_bowen_pressure_gate/README.md)
+- [C31 theorem package](henon_bowen_pressure_gate/THEOREM_PACKAGE.md)
+- [C31 exact certificate](henon_bowen_pressure_gate/results/c31_certificate.json)
+- [C31 independent check](henon_bowen_pressure_gate/results/c31_independent_check.json)
+- [C31 compiled paper](henon_bowen_pressure_gate/paper/main.pdf)
+- [C31 Route-A record](henon_bowen_pressure_gate/route_a_evaluation.yaml)
+
+Reproduce the complete gate with:
+
+```bash
+henon_bowen_pressure_gate/code/run_c31.sh
+```
+
+## Predecessor big-door result: HCS-C30 closes the formal-inverse AGY promotion
 
 C30 attacks the roof/operator gate left open by C29 without extending the
 word or prime scan.  It returns to the source raw matrices and separates three
