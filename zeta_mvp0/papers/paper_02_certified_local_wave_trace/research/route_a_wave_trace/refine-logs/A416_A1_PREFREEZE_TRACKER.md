@@ -70,7 +70,7 @@ files.
 | A1-I10 | deterministic temp-only machine capture + independent verify-only CLI | COMPLETE AS NON-AUTHORITATIVE ENGINEERING SURFACE / NON_LICENSING | role 19 captures compact candidates at new `/tmp` paths, performs one owned fresh argv-list build with `shell=false`, and proves no-overwrite equality to role 17; role 24 replays exact bytes and live bindings with zero writes and zero subprocesses | the capture surface does not publish or promote; canonical role 10 was created only by the separately authorized A1-I11 publisher |
 | A1-I11 | fixed-destination role-10 write-once publisher | COMPLETE / EXECUTED ONCE / POSTVERIFIED / NON_LICENSING | role 19 accepted the exact `54526`-byte candidate and expected digest, repeated complete live/capture-tool replay, and used same-parent staging plus `renameat2(RENAME_NOREPLACE)` at the fixed role-10 path; role 24 separately replayed the canonical inode | canonical SHA-256 `0d5c4672...f5c21e`; no destination override, overwrite, rollback, role 54, result, or dispatch |
 | A1-I12 | fixed-destination role-13 S0-compatibility publisher | COMPLETE / EXECUTED ONCE / POSTVERIFIED / NON_LICENSING | exact CLI XOR; unchanged closed 18-key artifact; new `0600` `/tmp` candidate; `1..1048576` cap; four terminally replayed source bindings; explicit-`0644` same-parent stage; `renameat2(RENAME_NOREPLACE)`; exact 21-key receipt | canonical role 13 is `d2844c9f...125f5e30`; identical existing bytes remain fatal; no rollback, republish, or scientific promotion |
-| A1-I13 | role-11 pre-freeze test-evidence producer/checker/publisher | COMPLETE AS LOCKED IMPLEMENTATION SURFACE / NOT EXECUTED / NON_LICENSING | exact closed 22-key record; ordered 51-role snapshot; seven fixed commands; raw transcript and exact-count replay; independent zero-subprocess checker; safe capture and same-parent no-replace publisher | producer `2744f044...05e4e58`, checker `7cba6a56...758c9ef`, test `f931855f...2781fcf`; canonical role 11 remains absent |
+| A1-I13 | role-11 pre-freeze test-evidence producer/checker/publisher | COMPLETE AS LOCKED IMPLEMENTATION SURFACE / NOT EXECUTED / NON_LICENSING | exact closed 22-key record; ordered 51-role snapshot; seven fixed commands; raw transcript and exact-count replay; independent zero-subprocess checker; safe capture and same-parent no-replace publisher | producer `081b39ce...6b129f9`, checker `8b710ba9...ac2621`, test `974f20e7...b471d0`; canonical role 11 remains absent |
 | A1-T01 | full mocked 204-cell E2E | COMPLETE / MOCK_ONLY_NON_LICENSING | 102 static cells, static checker/postcheck, 102 branch cells, branch checker/postcheck, composite controls/checker/postcheck, and exact 68-role mock release close in a temporary project | no canonical result root or scientific artifact was published |
 | A1-T02 | crash/resume/quarantine suite | COMPLETE FOR MOCK ENGINEERING SCOPE | static/branch transaction boundaries, signal/lock faults, partial-to-full resume, whole-generation quarantine, post-release scheduler refusal, and write-once release recovery have adversarial coverage | formal production recovery remains subject to a future freeze and machine binding |
 | A1-T03 | strict schema/path/TOCTOU suite | COMPLETE FOR CURRENT MOCK SURFACES | static, branch, composite, and release paths reject duplicate/type/nonfinite/path/link/inode/snapshot, coherent rebind, nested-authority, and claim-boundary mutations | this does not validate absent formal production artifacts |
@@ -345,10 +345,12 @@ canonical_s0_compatibility_role13_size_bytes = 8820
 canonical_s0_compatibility_role13_mode = 0644
 canonical_s0_compatibility_role13_nlink = 1
 canonical_s0_compatibility_role13_commit = be2a732625d9cab97879539873a756e1eabd366d
-prefreeze_test_producer_sha256 = 2744f044d444e1cddb472ca436afc24339a547e360631f400a8d672d105e4e58
-prefreeze_test_checker_sha256 = 7cba6a562fa398719ac833dba596b892abaf45c197d5880eb159757c5758c9ef
-prefreeze_test_focused_test_sha256 = f931855f8394f196f4080698be5f9fcc04f7a5ef7d15e139638fb95de2781fcf
+prefreeze_test_producer_sha256 = 081b39ce92dfef3cc242c159f9209372a7f471cf2eb6ab1e07683a7ea6b129f9
+prefreeze_test_checker_sha256 = 8b710ba92061396cb73381fa88f7675d7bdf229b90713e4db29b931c51ac2621
+prefreeze_test_focused_test_sha256 = 974f20e7d500a31f10a5f56ba4686426b72b297acab9f82bb59a0148cfb471d0
 prefreeze_test_expected_passed = 100_621_1016
+prefreeze_test_first_capture_attempt = FAIL_CLOSED_BEFORE_CANDIDATE_ON_OLD_PYTEST_LONG_DURATION_DOMAIN
+prefreeze_test_final_regression = 100_621_1016_PASS
 prefreeze_test_implementation_review = ACCEPT_P0_0_P1_0_P2_0
 canonical_prefreeze_test_role11_exists = false
 full_204_cell_mock_pipeline = PASS_MOCK_ONLY_NON_LICENSING

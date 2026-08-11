@@ -45,6 +45,10 @@ MAX_ROLE_BYTES = 128 * 1024 * 1024
 COMMAND_TIMEOUT_SECONDS = 600
 COMMAND_TERM_GRACE_SECONDS = 2
 COMMAND_PIPE_CLOSE_GRACE_SECONDS = 1
+MAX_COMMAND_WALL_DURATION_MS = (
+    COMMAND_TIMEOUT_SECONDS + COMMAND_TERM_GRACE_SECONDS
+    + COMMAND_PIPE_CLOSE_GRACE_SECONDS
+) * 1000
 EXPECTED_TEST_PASSED: dict[str, int] | None = {
     "prefreeze_focused": 100,
     "l3_a1_modules": 621,
@@ -1395,9 +1399,11 @@ GIT_OID = re.compile(r"^[0-9a-f]{40}$")
 UTC_SECOND = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$")
 MODE_TEXT = re.compile(r"^0[0-7]{3}$")
 PYTEST_SUMMARY = re.compile(
-    r"^(?P<counts>[0-9]+ (?:passed|failed|skipped|xfailed|xpassed)"
-    r"(?:, [0-9]+ (?:passed|failed|skipped|xfailed|xpassed))*) "
-    r"in [0-9]+(?:\.[0-9]+)?s$"
+    r"^(?P<counts>[1-9][0-9]{0,3} (?:passed|failed|skipped|xfailed|xpassed)"
+    r"(?:, [1-9][0-9]{0,3} (?:passed|failed|skipped|xfailed|xpassed))*) "
+    r"in (?P<elapsed>(?:0|[1-9][0-9]{0,2})\.[0-9]{2})s"
+    r"(?: \((?P<hours>0):(?P<minutes>[0-5][0-9]):"
+    r"(?P<seconds>[0-5][0-9])\))?$"
 )
 
 
@@ -1648,9 +1654,9 @@ def _validate_second_rebuild_receipt(
 
 def _parse_pytest_counts(stdout: str, context: str) -> dict[str, int]:
     if any(
-        (ord(character) < 32 and character != "\n")
-        or ord(character) == 127
-        or character in "\u0085\u2028\u2029"
+        (ord(character) < 0x20 and character != "\n")
+        or 0x7F <= ord(character) <= 0x9F
+        or character in "\u2028\u2029"
         for character in stdout
     ):
         raise PrefreezeEvidenceError(
@@ -1665,6 +1671,38 @@ def _parse_pytest_counts(stdout: str, context: str) -> dict[str, int]:
     matched = [match for match in matches if match is not None]
     if len(matched) != 1 or not lines or matches[-1] is None:
         raise PrefreezeEvidenceError(f"{context}: exactly one terminal pytest summary required")
+    summary = matched[0]
+    assert summary is not None
+    elapsed_whole_text, elapsed_fraction = summary.group("elapsed").split(".", 1)
+    whole_seconds = int(elapsed_whole_text)
+    elapsed_centiseconds = whole_seconds * 100 + int(elapsed_fraction)
+    if elapsed_centiseconds > COMMAND_TIMEOUT_SECONDS * 100:
+        raise PrefreezeEvidenceError(
+            f"{context}: pytest duration exceeds fixed command timeout"
+        )
+    human_parts = tuple(summary.group(name) for name in ("hours", "minutes", "seconds"))
+    if all(part is None for part in human_parts):
+        if whole_seconds > 60 or (whole_seconds == 60 and elapsed_fraction != "00"):
+            raise PrefreezeEvidenceError(
+                f"{context}: missing long-duration pytest suffix"
+            )
+    else:
+        if any(part is None for part in human_parts):
+            raise PrefreezeEvidenceError(
+                f"{context}: malformed long-duration pytest suffix"
+            )
+        hours, minutes, seconds = (int(part) for part in human_parts if part is not None)
+        human_seconds = hours * 3600 + minutes * 60 + seconds
+        allowed_human_seconds = {whole_seconds}
+        # pytest rounds the decimal to two places but truncates the parenthetic
+        # timedelta.  An X.995.. duration can therefore print (X+1).00s with
+        # a parenthetic total of X seconds.
+        if elapsed_fraction == "00" and whole_seconds > 60:
+            allowed_human_seconds.add(whole_seconds - 1)
+        if human_seconds < 60 or human_seconds not in allowed_human_seconds:
+            raise PrefreezeEvidenceError(
+                f"{context}: inconsistent long-duration pytest suffix"
+            )
     forbidden = re.search(
         r"(?i)(?<![A-Za-z0-9_])"
         r"(?:errors?|fail(?:ed|ures?)?|warnings?|deselected|"
@@ -1678,8 +1716,7 @@ def _parse_pytest_counts(stdout: str, context: str) -> dict[str, int]:
         )
     counts = {name: 0 for name in PYTEST_COUNT_KEYS}
     observed: set[str] = set()
-    assert matched[0] is not None
-    for item in matched[0].group("counts").split(", "):
+    for item in summary.group("counts").split(", "):
         count_text, name = item.split(" ", 1)
         if name in observed:
             raise PrefreezeEvidenceError(f"{context}: duplicate pytest category")
@@ -1730,7 +1767,13 @@ def _validate_command_result(
         raise PrefreezeEvidenceError(f"{context}.environment: fixed environment mismatch")
     _exact_int(result["return_code"], f"{context}.return_code", expected=0)
     _utc(result["started_at_utc"], f"{context}.started_at_utc")
-    _exact_int(result["wall_duration_ms"], f"{context}.wall_duration_ms", minimum=1)
+    wall_duration_ms = _exact_int(
+        result["wall_duration_ms"], f"{context}.wall_duration_ms", minimum=1,
+    )
+    if wall_duration_ms > MAX_COMMAND_WALL_DURATION_MS:
+        raise PrefreezeEvidenceError(
+            f"{context}.wall_duration_ms: command envelope exceeded"
+        )
     for stream_name, cap in (("stdout", MAX_STDOUT_BYTES), ("stderr", MAX_STDERR_BYTES)):
         text = result[f"{stream_name}_utf8"]
         if type(text) is not str or "\x00" in text:
@@ -1749,6 +1792,14 @@ def _validate_command_result(
     parsed_counts: dict[str, int] | None = None
     if expected_name in PYTEST_RESULT_TOTAL_NAMES:
         parsed_counts = _parse_pytest_counts(result["stdout_utf8"], context)
+        summary = PYTEST_SUMMARY.fullmatch(result["stdout_utf8"].splitlines()[-1])
+        assert summary is not None
+        elapsed_whole, elapsed_fraction = summary.group("elapsed").split(".", 1)
+        elapsed_ms = (int(elapsed_whole) * 100 + int(elapsed_fraction)) * 10
+        if elapsed_ms > wall_duration_ms + 5:
+            raise PrefreezeEvidenceError(
+                f"{context}: pytest duration exceeds outer wall duration"
+            )
         if EXPECTED_TEST_PASSED is not None:
             if not _test_totals_locked():
                 raise PrefreezeEvidenceError(

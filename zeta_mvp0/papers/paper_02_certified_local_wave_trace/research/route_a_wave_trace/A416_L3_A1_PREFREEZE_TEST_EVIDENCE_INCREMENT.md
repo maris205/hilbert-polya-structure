@@ -527,18 +527,23 @@ The implementation lock is:
 
 ```text
 producer_path = scripts/build_r401_val_l3_a1_prefreeze_tests.py
-producer_sha256 = 2744f044d444e1cddb472ca436afc24339a547e360631f400a8d672d105e4e58
+producer_sha256 = 081b39ce92dfef3cc242c159f9209372a7f471cf2eb6ab1e07683a7ea6b129f9
 independent_checker_path = scripts/check_r401_val_l3_a1_prefreeze_tests_independent.py
-independent_checker_sha256 = 7cba6a562fa398719ac833dba596b892abaf45c197d5880eb159757c5758c9ef
+independent_checker_sha256 = 8b710ba92061396cb73381fa88f7675d7bdf229b90713e4db29b931c51ac2621
 focused_test_path = tests/test_r401_val_l3_a1_prefreeze_tests.py
-focused_test_sha256 = f931855f8394f196f4080698be5f9fcc04f7a5ef7d15e139638fb95de2781fcf
+focused_test_sha256 = 974f20e7d500a31f10a5f56ba4686426b72b297acab9f82bb59a0148cfb471d0
 seven_exact_argv_arrays = LOCKED_IN_PRODUCER_AND_INDEPENDENT_CHECKER
 expected_test_passed = {prefreeze_focused:100,l3_a1_modules:621,paper02_full:1016}
-post_lock_focused = 100 passed in 6.14s
-post_lock_ten_module = 621 passed in 168.52s
-post_lock_paper02 = 1016 passed in 223.80s
+post_lock_focused = 100 passed in 6.63s
+post_lock_ten_module = 621 passed in 168.79s (0:02:48)
+post_lock_paper02 = 1016 passed in 223.98s (0:03:43)
+first_clean_capture_attempt = FAIL_CLOSED_BEFORE_CANDIDATE
+first_clean_capture_failure = PYTEST_9_LONG_DURATION_SUFFIX_NOT_YET_IN_EXACT_TRANSCRIPT_DOMAIN
+post_failure_fix = EXACT_PYTEST_9_H_MM_SS_SUFFIX_WITH_ROUNDING_TIMEOUT_C1_AND_WALL_CLOCK_BINDING
+post_failure_candidate_created = false
 publisher_concurrency_stress = 180 fork rounds, exactly one winner per round
 producer_checker_differential = 710 scalar + 210 container mutations, 0 mismatches
+transcript_domain_differential = 50026 pytest-formatter + 50000 random syntax cases, 0 mismatches
 independent_implementation_review = ACCEPT / P0=0 / P1=0 / P2=0
 ```
 

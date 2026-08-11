@@ -30,6 +30,8 @@ PROTOCOL_ID = "R401-VAL-L3-A1-PREFREEZE-TESTS"
 MAX_CANDIDATE_BYTES = 4 * 1024 * 1024
 MAX_STDOUT_BYTES = MAX_STDERR_BYTES = 1024 * 1024
 MAX_ROLE_BYTES = 128 * 1024 * 1024
+COMMAND_TIMEOUT_SECONDS = 600
+MAX_COMMAND_WALL_DURATION_MS = 603000
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 UTC = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]Z\Z")
 
@@ -258,9 +260,11 @@ PYTEST_TO_TOTAL = {
     "paper02_full_pytest": "paper02_full",
 }
 PYTEST_SUMMARY = re.compile(
-    r"(?P<counts>[0-9]+ (?:passed|failed|skipped|xfailed|xpassed)"
-    r"(?:, [0-9]+ (?:passed|failed|skipped|xfailed|xpassed))*) "
-    r"in [0-9]+(?:\.[0-9]+)?s\Z"
+    r"(?P<counts>[1-9][0-9]{0,3} (?:passed|failed|skipped|xfailed|xpassed)"
+    r"(?:, [1-9][0-9]{0,3} (?:passed|failed|skipped|xfailed|xpassed))*) "
+    r"in (?P<elapsed>(?:0|[1-9][0-9]{0,2})\.[0-9]{2})s"
+    r"(?: \((?P<hours>0):(?P<minutes>[0-5][0-9]):"
+    r"(?P<seconds>[0-5][0-9])\))?\Z"
 )
 
 
@@ -413,7 +417,8 @@ def parse_pytest(stdout: str, context: str) -> dict[str, int]:
             f"{context}: ANSI/CR/nonterminated transcript")
     require(not any(separator in stdout for separator in ("\u0085", "\u2028", "\u2029")),
             f"{context}: non-LF Unicode line separator in transcript")
-    require(all(character == "\n" or (ord(character) >= 32 and ord(character) != 127)
+    require(all(character == "\n" or (0x20 <= ord(character) < 0x7F)
+                or ord(character) > 0x9F
                 for character in stdout),
             f"{context}: control character in transcript")
     lines = stdout[:-1].split("\n")
@@ -421,6 +426,27 @@ def parse_pytest(stdout: str, context: str) -> dict[str, int]:
     matches = [(index, match) for index, match in matches if match is not None]
     require(len(matches) == 1 and matches[0][0] == len(lines) - 1,
             f"{context}: exactly one terminal summary required")
+    summary = matches[0][1]
+    assert summary is not None
+    elapsed_whole_text, elapsed_fraction = summary.group("elapsed").split(".", 1)
+    whole_seconds = int(elapsed_whole_text)
+    elapsed_centiseconds = whole_seconds * 100 + int(elapsed_fraction)
+    require(elapsed_centiseconds <= COMMAND_TIMEOUT_SECONDS * 100,
+            f"{context}: pytest duration exceeds fixed command timeout")
+    human_parts = tuple(summary.group(name) for name in ("hours", "minutes", "seconds"))
+    if all(part is None for part in human_parts):
+        require(whole_seconds < 60 or (whole_seconds == 60 and elapsed_fraction == "00"),
+                f"{context}: missing long-duration pytest suffix")
+    else:
+        require(all(part is not None for part in human_parts),
+                f"{context}: malformed long-duration pytest suffix")
+        hours, minutes, seconds = (int(part) for part in human_parts if part is not None)
+        human_seconds = hours * 3600 + minutes * 60 + seconds
+        allowed_human_seconds = {whole_seconds}
+        if elapsed_fraction == "00" and whole_seconds > 60:
+            allowed_human_seconds.add(whole_seconds - 1)
+        require(human_seconds >= 60 and human_seconds in allowed_human_seconds,
+                f"{context}: inconsistent long-duration pytest suffix")
     forbidden = re.compile(
         r"(?i)(?<![A-Za-z0-9_])(?:errors?|fail(?:ed|ures?)?|warnings?|"
         r"deselected|skipped|xfail(?:ed)?|xpass(?:ed)?)(?![A-Za-z0-9_])"
@@ -428,9 +454,7 @@ def parse_pytest(stdout: str, context: str) -> dict[str, int]:
     require(forbidden.search(stdout) is None, f"{context}: failure/unmodeled pytest token")
     counts = {key: 0 for key in PYTEST_COUNT_KEYS}
     seen: set[str] = set()
-    match = matches[0][1]
-    assert match is not None
-    for token in match.group("counts").split(", "):
+    for token in summary.group("counts").split(", "):
         number, category = token.split(" ", 1)
         require(category not in seen, f"{context}: duplicate pytest category")
         seen.add(category)
@@ -504,7 +528,9 @@ def validate_command(value: Any, index: int, roles: dict[str, dict[str, Any]]) -
     require(json_equal(result["environment"], CLEAN_ENVIRONMENT), f"{context}: environment mismatch")
     exact_int(result["return_code"], f"{context}.return_code", 0, 0)
     exact_utc(result["started_at_utc"], f"{context}.started_at_utc")
-    exact_int(result["wall_duration_ms"], f"{context}.wall_duration_ms", 1)
+    wall_duration_ms = exact_int(result["wall_duration_ms"], f"{context}.wall_duration_ms", 1)
+    require(wall_duration_ms <= MAX_COMMAND_WALL_DURATION_MS,
+            f"{context}.wall_duration_ms: command envelope exceeded")
     for stream, cap in (("stdout", MAX_STDOUT_BYTES), ("stderr", MAX_STDERR_BYTES)):
         text_value = result[f"{stream}_utf8"]
         require(type(text_value) is str and "\x00" not in text_value,
@@ -521,6 +547,12 @@ def validate_command(value: Any, index: int, roles: dict[str, dict[str, Any]]) -
 
     if name in PYTEST_TO_TOTAL:
         counts = parse_pytest(result["stdout_utf8"], context)
+        summary = PYTEST_SUMMARY.fullmatch(result["stdout_utf8"].splitlines()[-1])
+        assert summary is not None
+        elapsed_whole, elapsed_fraction = summary.group("elapsed").split(".", 1)
+        elapsed_ms = (int(elapsed_whole) * 100 + int(elapsed_fraction)) * 10
+        require(elapsed_ms <= wall_duration_ms + 5,
+                f"{context}: pytest duration exceeds outer wall duration")
         recorded = exact_dict(result["pytest_counts"], PYTEST_COUNT_KEYS,
                               f"{context}.pytest_counts")
         for category in PYTEST_COUNT_KEYS:

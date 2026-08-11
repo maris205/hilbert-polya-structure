@@ -176,7 +176,7 @@ def command_result(
         "environment": dict(P.CLEAN_ENVIRONMENT),
         "return_code": 0,
         "started_at_utc": "2026-08-11T12:00:00Z",
-        "wall_duration_ms": 1,
+        "wall_duration_ms": 100,
         "stdout_utf8": stdout,
         "stdout_sha256": sha(stdout_raw),
         "stdout_size_bytes": len(stdout_raw),
@@ -565,11 +565,62 @@ def test_covered_gates_are_ordered_and_exact() -> None:
 
 
 def test_fixed_pytest_commands_disable_cache_and_color() -> None:
+    assert P.COMMAND_TIMEOUT_SECONDS == C.COMMAND_TIMEOUT_SECONDS == 600
+    assert P.MAX_COMMAND_WALL_DURATION_MS == C.MAX_COMMAND_WALL_DURATION_MS == 603000
     for name in ("prefreeze_focused_pytest", "l3_a1_modules_pytest", "paper02_full_pytest"):
         argv = P.FIXED_COMMAND_ARGV[name]
         assert ("-p", "no:cacheprovider") == argv[4:6]
         assert "--color=no" in argv
     assert P.CLEAN_ENVIRONMENT["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] == "1"
+    long_summary = "621 passed in 170.57s (0:02:50)\n"
+    expected = {"passed": 621, "failed": 0, "skipped": 0, "xfailed": 0, "xpassed": 0}
+    assert P._parse_pytest_counts(long_summary, "long pytest summary") == expected
+    assert C.parse_pytest(long_summary, "long pytest summary") == expected
+    rounded_without_suffix = "621 passed in 60.00s\n"
+    assert P._parse_pytest_counts(rounded_without_suffix, "rounded pytest summary") == expected
+    assert C.parse_pytest(rounded_without_suffix, "rounded pytest summary") == expected
+    rounded_long_suffix = "621 passed in 171.00s (0:02:50)\n"
+    assert P._parse_pytest_counts(rounded_long_suffix, "rounded long pytest summary") == expected
+    assert C.parse_pytest(rounded_long_suffix, "rounded long pytest summary") == expected
+    for malformed in (
+        "621 passed in 170.57s\n",
+        "621 passed in 170.57s (0:02:49)\n",
+        "3 passed in 0.01s (0:00:00)\n",
+        "621 passed in 600.01s (0:10:00)\n",
+        "621 passed in 601.00s (0:10:01)\n",
+        "621 passed in 3600.00s (1:00:00)\n",
+        "0621 passed in 170.57s (0:02:50)\n",
+        "621 passed in 0170.57s (0:02:50)\n",
+        "621 passed in 170.57s (00:02:50)\n",
+        f"{'9' * 5000} passed in 0.01s\n",
+    ):
+        with pytest.raises(P.PrefreezeEvidenceError):
+            P._parse_pytest_counts(malformed, "malformed pytest summary")
+        with pytest.raises(C.PrefreezeCheckError):
+            C.parse_pytest(malformed, "malformed pytest summary")
+    for c1_control in ("\u0080", "\u009b", "\u009d", "\u009f"):
+        poisoned = c1_control + "621 passed in 0.01s\n"
+        with pytest.raises(P.PrefreezeEvidenceError):
+            P._parse_pytest_counts(poisoned, "C1 pytest summary")
+        with pytest.raises(C.PrefreezeCheckError):
+            C.parse_pytest(poisoned, "C1 pytest summary")
+    record = valid_record()
+    record["command_results"][2]["wall_duration_ms"] = 603001
+    record["test_totals"]["prefreeze_focused"]["wall_duration_ms"] = 603001
+    with pytest.raises(P.PrefreezeEvidenceError):
+        P.validate_prefreeze_test_record(record)
+    with pytest.raises(C.PrefreezeCheckError):
+        C.validate_record(record)
+    record = valid_record()
+    result = record["command_results"][2]
+    result["stdout_utf8"] = "100 passed in 0.11s\n"
+    raw = result["stdout_utf8"].encode("utf-8")
+    result["stdout_size_bytes"] = len(raw)
+    result["stdout_sha256"] = sha(raw)
+    with pytest.raises(P.PrefreezeEvidenceError):
+        P.validate_prefreeze_test_record(record)
+    with pytest.raises(C.PrefreezeCheckError):
+        C.validate_record(record)
 
 
 def test_independent_checker_source_has_no_producer_import_or_subprocess() -> None:
