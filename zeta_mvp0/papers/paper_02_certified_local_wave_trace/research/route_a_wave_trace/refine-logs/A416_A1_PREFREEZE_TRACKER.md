@@ -6,8 +6,9 @@ Design baseline: `529697ce3feccf11d16f739d0e07d27a2d1c4d16`
 
 Implementation baseline before this working-tree increment: `b1f4a36`
 
-Authority: **canonical machine-admission input present / NON_LICENSING / no
-main freeze / no dispatch / no canonical scientific results**
+Authority: **canonical machine-admission and S0-compatibility inputs present /
+NON_LICENSING / no pre-freeze review / no main freeze / no dispatch / no
+canonical scientific results**
 
 `scientific_licensing_enabled = false`; `milestone_status`,
 `theorem_status`, and `final_status` remain null.
@@ -30,9 +31,16 @@ Role 23 now implements the separate exact-exclusive temp-capture and
 fixed-destination publisher for compatibility input role 13.  It preserves
 the original closed 18-key `NON_LICENSING` artifact, uses a new one-link
 `0600` `/tmp` candidate and an explicit-`0644` same-parent no-replace stage,
-and emits at most a 21-key `ROLE23_ADAPTER_PUBLICATION_ONLY` receipt.  The
-publisher has not been executed against the repository and canonical role 13
-remains absent.
+and emits at most a 21-key `ROLE23_ADAPTER_PUBLICATION_ONLY` receipt.  After
+the implementation and four bound sources were committed and pushed, a fresh
+candidate was published once as canonical role 13 at commit `be2a732`; its
+SHA-256 is `d2844c9f...125f5e30`, size `8820`, mode `0644`, and link count `1`.
+
+The role-11 pre-freeze test-evidence producer, no-subprocess independent
+checker, and fixed-destination publisher are now implemented and independently
+cleared with P0=0, P1=0, and P2=0.  Their exact pytest totals are locked to
+`100`, `621`, and `1016` passing tests.  This implementation step has not yet
+captured a role-11 candidate or published canonical role 11.
 
 The temp-capture and independent-verifier evidence is stable after the
 subreaper/group-wait repair: the two focused modules pass `201/201`, the
@@ -57,11 +65,12 @@ files.
 | A1-I05 | formal branch transaction scheduler | COMPLETE FOR MOCK + FORMAL PURE-PLAN CANDIDATE / CANONICAL PROHIBITED / NON_LICENSING | reviewed bounded runtime, exact 102-cell L1-derived matrix, six-cell barriers, resume, aggregate publication, persistent-binary-bound pure plan, and exact millisecond budgets implemented | `600000/2000/1000` ms; formal dispatcher remains fail-closed |
 | A1-I06 | no-import branch checker + postcheck | COMPLETE FOR MOCK + STRICT-SERIALIZER CANDIDATE / NON_LICENSING | exact L1 chain, pretty-byte task/argv/record/manifest digest replay, 64-phase rational tube implication, aggregate root, cross-precision replay, and postcheck implemented | `CJ_PRETTY_2_V1`; synthetic transcript replay is not a second ODE integration and licenses no tube theorem |
 | A1-I07 | composite checker + postcheck | COMPLETE FOR MOCK + FORMAL-SHAPED REPLAY / NON_LICENSING | both 102-cell component chains, exact aggregate roots, millisecond branch limits, strict serializer bindings, composite controls, generation binding, checker, and postcheck replayed | component/milestone/theorem/final remain null; formal scientific promotion absent |
-| A1-I08 | S0-to-A1 compatibility replay | COMPLETE / NON_LICENSING_COMPATIBILITY | exact six accepted cells, 26 branch roles, 18 composite bindings, and nine sealed controls replay read-only; 31 focused tests pass | canonical replay object intentionally absent; no S0 bytes or authority changed |
+| A1-I08 | S0-to-A1 compatibility replay | COMPLETE / CANONICAL INPUT PUBLISHED / NON_LICENSING_COMPATIBILITY | exact six accepted cells, 26 branch roles, 18 composite bindings, and nine sealed controls replay read-only | canonical role 13 is commit `be2a732`, SHA-256 `d2844c9f...125f5e30`; no S0 bytes or scientific authority changed |
 | A1-I09 | release-provenance builder and independent machine validator | COMPLETE FOR MOCK + EXACT FORMAL VALIDATION CANDIDATE / NON_LICENSING | mock 53-input release replay plus producer-independent exact machine validation of live Python/Conda/Arb, CAPD/compiler/ELF/runtime, embedded resource bytes, admission arithmetic, and filesystem bindings | no canonical machine receipt or release; formal publication remains fail-closed |
 | A1-I10 | deterministic temp-only machine capture + independent verify-only CLI | COMPLETE AS NON-AUTHORITATIVE ENGINEERING SURFACE / NON_LICENSING | role 19 captures compact candidates at new `/tmp` paths, performs one owned fresh argv-list build with `shell=false`, and proves no-overwrite equality to role 17; role 24 replays exact bytes and live bindings with zero writes and zero subprocesses | the capture surface does not publish or promote; canonical role 10 was created only by the separately authorized A1-I11 publisher |
 | A1-I11 | fixed-destination role-10 write-once publisher | COMPLETE / EXECUTED ONCE / POSTVERIFIED / NON_LICENSING | role 19 accepted the exact `54526`-byte candidate and expected digest, repeated complete live/capture-tool replay, and used same-parent staging plus `renameat2(RENAME_NOREPLACE)` at the fixed role-10 path; role 24 separately replayed the canonical inode | canonical SHA-256 `0d5c4672...f5c21e`; no destination override, overwrite, rollback, role 54, result, or dispatch |
-| A1-I12 | fixed-destination role-13 S0-compatibility publisher | COMPLETE AS IMPLEMENTATION SURFACE / NOT EXECUTED / NON_LICENSING | exact CLI XOR; unchanged closed 18-key artifact; new `0600` `/tmp` candidate; `1..1048576` cap; four terminally replayed source bindings; explicit-`0644` same-parent stage; `renameat2(RENAME_NOREPLACE)`; exact 21-key receipt | identical existing bytes are fatal; no post-rename rollback or republish; canonical role 13 remains absent |
+| A1-I12 | fixed-destination role-13 S0-compatibility publisher | COMPLETE / EXECUTED ONCE / POSTVERIFIED / NON_LICENSING | exact CLI XOR; unchanged closed 18-key artifact; new `0600` `/tmp` candidate; `1..1048576` cap; four terminally replayed source bindings; explicit-`0644` same-parent stage; `renameat2(RENAME_NOREPLACE)`; exact 21-key receipt | canonical role 13 is `d2844c9f...125f5e30`; identical existing bytes remain fatal; no rollback, republish, or scientific promotion |
+| A1-I13 | role-11 pre-freeze test-evidence producer/checker/publisher | COMPLETE AS LOCKED IMPLEMENTATION SURFACE / NOT EXECUTED / NON_LICENSING | exact closed 22-key record; ordered 51-role snapshot; seven fixed commands; raw transcript and exact-count replay; independent zero-subprocess checker; safe capture and same-parent no-replace publisher | producer `2744f044...05e4e58`, checker `7cba6a56...758c9ef`, test `f931855f...2781fcf`; canonical role 11 remains absent |
 | A1-T01 | full mocked 204-cell E2E | COMPLETE / MOCK_ONLY_NON_LICENSING | 102 static cells, static checker/postcheck, 102 branch cells, branch checker/postcheck, composite controls/checker/postcheck, and exact 68-role mock release close in a temporary project | no canonical result root or scientific artifact was published |
 | A1-T02 | crash/resume/quarantine suite | COMPLETE FOR MOCK ENGINEERING SCOPE | static/branch transaction boundaries, signal/lock faults, partial-to-full resume, whole-generation quarantine, post-release scheduler refusal, and write-once release recovery have adversarial coverage | formal production recovery remains subject to a future freeze and machine binding |
 | A1-T03 | strict schema/path/TOCTOU suite | COMPLETE FOR CURRENT MOCK SURFACES | static, branch, composite, and release paths reject duplicate/type/nonfinite/path/link/inode/snapshot, coherent rebind, nested-authority, and claim-boundary mutations | this does not validate absent formal production artifacts |
@@ -105,13 +114,12 @@ None of these values is frozen.
   exists only as an engineering implementation and temporary test replay.  It
   is not a formal scientific generation and does not license one.
 - Exact schemas, the persistent CAPD binary, both public-only resource
-  payloads, role-19 capture/publisher, role-24 verifier, and canonical role 10
-  now exist.  Role-23 compatibility capture/publication is implemented but
-  unexecuted.  The remaining 53-input objects, pre-freeze test receipt,
-  independent review, and downstream role 54 remain absent.
-- The canonical compatibility replay at role 13, production result root,
-  production report, formal release, and all formal component/composite
-  statuses remain absent; the implemented formal entry paths fail closed.
+  payloads, role-19 capture/publisher, role-24 verifier, and canonical roles 10
+  and 13 now exist.  The role-11 evidence surface is implemented and reviewed,
+  but its clean-snapshot capture and canonical publication remain pending.
+- Canonical role 11, role 12, the production result root, production report,
+  formal release, and all formal component/composite statuses remain absent;
+  the implemented formal entry paths fail closed.
 - No formal pre-freeze test record or independent `ACCEPT_FOR_FREEZE` review
   exists.  Main freeze generation and every scientific dispatch remain
   prohibited.
@@ -163,8 +171,9 @@ The temporary calibration JSON had SHA-256
 Neither it nor the temporary binary was installed as a canonical object.
 
 Canonical machine role 10 now exists and has passed role-24 postverification.
-The main freeze, canonical S0 compatibility replay, production result root,
-and operational root remain absent.  The exact
+Canonical S0 compatibility role 13 also exists at commit `be2a732` and retains
+its closed `NON_LICENSING` boundary.  Canonical role 11, role 12, the main
+freeze, production result root, and operational root remain absent.  The exact
 preflight implementation record is
 `../A416_L3_A1_FORMAL_PREFLIGHT_INCREMENT.md`.
 
@@ -307,28 +316,41 @@ role13_bound_checker_contract_sha256 = c53a21f8de39940be276629cadc328ba214d5743e
 role13_bound_release_contract_sha256 = 0b03ced880be3da0b6022de83861bdfb1e4fa99df9888acbfce97cd806a0872c
 ```
 
-The publisher has not been executed against the repository.  Canonical role
-13 is absent.  The three formal documents above are source-bound by the
-future artifact and must remain stable before a fresh candidate capture.
+Those rows describe the historical prepublication test boundary.  The three
+formal documents above were then frozen, a fresh candidate was published once,
+and canonical role 13 now exists at commit
+`be2a732625d9cab97879539873a756e1eabd366d` with SHA-256
+`d2844c9fd98f76bd41dda937e8f19f978aa48468c17c5a24ebd25baf125f5e30`.
 
 ## Current decision
 
 ```text
-next_authorized_action = STABILIZE_ROLE13_BINDINGS_THEN_FRESH_CAPTURE_AND_SEPARATELY_AUTHORIZE_PUBLICATION
+next_authorized_action = COMMIT_PUSH_ROLE11_IMPLEMENTATION_THEN_FRESH_CAPTURE_VERIFY_AND_SEPARATELY_AUTHORIZE_PUBLICATION
 independent_design_review_complete = true
 static_implementation_increment_review = ACCEPT_P0_0_P1_0
 branch_runtime_increment_review = ACCEPT_P0_0_P1_0
 s0_compatibility_increment_review = ACCEPT_NON_LICENSING
 s0_compatibility_capture_implemented = true
 s0_compatibility_publisher_implemented = true
-s0_compatibility_publisher_executed = false
+s0_compatibility_publisher_executed = true
 s0_compatibility_adapter_sha256 = a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0
 s0_compatibility_test_sha256 = f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d
 s0_compatibility_focused_tests = 72/72
 s0_compatibility_nine_module_regression = 521/521
 s0_compatibility_paper02_regression = 916/916
 s0_compatibility_implementation_review = ACCEPT_P0_0_P1_0_P2_0
-canonical_s0_compatibility_role13_exists = false
+canonical_s0_compatibility_role13_exists = true
+canonical_s0_compatibility_role13_sha256 = d2844c9fd98f76bd41dda937e8f19f978aa48468c17c5a24ebd25baf125f5e30
+canonical_s0_compatibility_role13_size_bytes = 8820
+canonical_s0_compatibility_role13_mode = 0644
+canonical_s0_compatibility_role13_nlink = 1
+canonical_s0_compatibility_role13_commit = be2a732625d9cab97879539873a756e1eabd366d
+prefreeze_test_producer_sha256 = 2744f044d444e1cddb472ca436afc24339a547e360631f400a8d672d105e4e58
+prefreeze_test_checker_sha256 = 7cba6a562fa398719ac833dba596b892abaf45c197d5880eb159757c5758c9ef
+prefreeze_test_focused_test_sha256 = f931855f8394f196f4080698be5f9fcc04f7a5ef7d15e139638fb95de2781fcf
+prefreeze_test_expected_passed = 100_621_1016
+prefreeze_test_implementation_review = ACCEPT_P0_0_P1_0_P2_0
+canonical_prefreeze_test_role11_exists = false
 full_204_cell_mock_pipeline = PASS_MOCK_ONLY_NON_LICENSING
 mock_68_role_release_replay = PASS_MOCK_PROVENANCE_REPLAY
 full_mock_pipeline_review = ACCEPT_P0_0_P1_0
