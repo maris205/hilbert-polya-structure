@@ -1,0 +1,148 @@
+\section{Operator ideals and the flat-trace dichotomy}
+\label{sec:operator}
+
+The failure of a common positive cone does not by itself forbid every transfer
+operator.  Hyperbolic dynamics is routinely represented on anisotropic
+spaces, and stable and unstable branches can be treated by different
+polarizations.  The correct obstruction is narrower: faithful forward and
+inverse actions cannot both appear as compact blocks on one
+infinite-dimensional space.
+
+\subsection{A same-space nuclearity obstruction}
+
+Let $X$ be an infinite-dimensional Banach space and let $E^\pm$ be a finite
+oriented edge set with a fixed-point-free involution $e\mapsto e^{-1}$.  A
+transition $e\to f$ is legal when endpoints match and $f\neq e^{-1}$.  Assume
+each oriented edge has at least one legal predecessor.  This holds for the
+two frozen symmetric graphs.
+
+Choose bounded operators $U_e\in\mathcal B(X)$.  For nonzero transition
+weights $c_{f,e}$, define the non-backtracking block operator on
+\[
+ X^{E^\pm}=\bigoplus_{e\in E^\pm}X
+\]
+by the blocks
+\begin{equation}
+ (\mathbb B)_{f,e}=
+ \begin{cases}
+ c_{f,e}U_f,& e\to f\text{ legal},\\
+ 0,&\text{otherwise}.
+ \end{cases}
+ \label{eq:block-hashimoto}
+\end{equation}
+
+\begin{theorem}[Faithful same-space inverses obstruct compactness]
+\label{thm:same-space}
+Suppose
+\begin{equation}
+ U_{e^{-1}}U_e=I_X\qquad(e\in E^\pm).
+ \label{eq:faithful-inverses}
+\end{equation}
+Then the block operator $\mathbb B$ in \eqref{eq:block-hashimoto} is neither
+compact nor nuclear.  In a Hilbert realization it is, in particular, not
+trace class.
+\end{theorem}
+
+\begin{proof}
+Fix $f\in E^\pm$ and choose a legal predecessor $e$.  Let
+$J_e:X\to X^{E^\pm}$ be coordinate injection and
+$P_f:X^{E^\pm}\to X$ coordinate projection.  Then
+\begin{equation}
+ P_f\mathbb BJ_e=c_{f,e}U_f.
+ \label{eq:block-compression}
+\end{equation}
+Compact and nuclear operators are two-sided operator ideals.  If $\mathbb B$
+belonged to either ideal, \eqref{eq:block-compression} would put every $U_f$
+in that ideal.  Multiplying by the bounded $U_{f^{-1}}$ and using
+\eqref{eq:faithful-inverses} would put $I_X$ in the same ideal.  The identity
+on an infinite-dimensional Banach space is not compact, while every nuclear
+operator is compact.  This is a contradiction.
+\end{proof}
+
+The proof also covers two spaces $X_+,X_-$ if compact arrows in both
+directions compose to the identity on either infinite-dimensional space.  Its
+hypothesis is not satisfied by a construction in which forward and backward
+branches act between genuinely different anisotropic completions and are not
+bounded inverse operators on one common realization.  This is how the
+hyperbolic methods of \citet{GouezelLiverani2006}, the microlocal approach of
+\citet{DyatlovZworski2016}, and stable--unstable pinning constructions such as
+\citet{Fried1995,BaladiPujalsSambarino2005} escape the elementary ideal
+argument.  Their escape requires hyperbolicity or a cross-map geometry; it is
+not supplied by matrix identity alone.
+
+\subsection{Why cancellation in a sum is not a word theorem}
+
+It may be tempting to hope that noncompact blocks cancel in the unmarked sum
+$\mathbb B$.  A word-resolved determinant claim needs more.
+
+\begin{corollary}[Marked coefficient isolation]
+\label{cor:marked-isolation}
+Let $\mathbb B(\mathbf z)$ be an edge- or occurrence-marked family that is
+holomorphic in nuclear norm near $\mathbf z=0$.  Every multivariate Cauchy
+coefficient is nuclear.  If a layer marking isolates a relation-word
+coefficient equal to $I_X$, or to a boundedly invertible multiplication
+operator on an infinite-dimensional function space, then such a nuclear-norm
+holomorphic family cannot exist.
+\end{corollary}
+
+\begin{proof}
+The Cauchy coefficient is a Bochner integral of the nuclear-valued map around
+a small polytorus, hence nuclear.  Neither $I_X$ nor a boundedly invertible
+operator on an infinite-dimensional Banach space is compact.  Therefore the
+isolated coefficient cannot be nuclear.
+\end{proof}
+
+The corollary is conditional on a marking that genuinely isolates the ordered
+word.  It does not assert that every unmarked formal sum has such an
+isolation.  Its purpose is to close a specific loophole in claims that already
+require coefficientwise periodic-word semantics.
+
+\subsection{Empty source domain or neutral fixed family}
+
+Standard flat traces for hyperbolic maps and flows are built from isolated or
+cleanly controlled fixed data; the familiar local denominator contains the
+transverse factor $\det(I-Df)$
+\citep{Fried1995,GiuliettiLiveraniPollicott2013,DyatlovZworski2016}.  For the
+present identity words there is a sharp alternative.
+
+\begin{theorem}[Positive-domain/flat-trace dichotomy]
+\label{thm:flat-dichotomy}
+Let $W\in\{C_1,C_2,W_{24}\}$.
+\begin{enumerate}[label=(\roman*)]
+\item On the frozen source positive domain, no cyclic phase of $W$ defines
+  the tested complete length or transfer orbit.
+\item If the projective domain is enlarged so that every prefix is defined,
+  then $B_W=I$ implies
+  \begin{equation}
+   h_W=\operatorname{Id},\qquad
+   Dh_W=I,\qquad
+   \det(I-Dh_W)=0.
+   \label{eq:neutral-family}
+  \end{equation}
+  The fixed set is the entire enlarged domain, not an isolated hyperbolic
+  periodic point.
+\end{enumerate}
+The same conclusion holds for every power $W^m$.
+\end{theorem}
+
+\begin{proof}
+Part (i) is
+\Cref{thm:C1-all-phases,thm:C2-all-phases,thm:W24-all-phases}.  For (ii), the
+projectivization of $I$ is the identity map.  Its derivative is the identity
+on every tangent space, so the transverse determinant vanishes.  Powers
+retain both the matrix identity and the identity derivative.
+\end{proof}
+
+Thus the standard isolated fixed-point atom
+\begin{equation}
+ \frac{w_W(x_W)}{\left|\det(I-Dh_W(x_W))\right|}
+ \label{eq:flat-atom}
+\end{equation}
+is unavailable for the very words responsible for the finite group-trace
+signal.  This statement is deliberately not a universal no-go theorem for
+all distributional traces.  A clean-fixed-manifold regularization, a quotient
+that removes neutral directions, or another renormalized trace may be
+possible under additional hypotheses.  Any such construction would define a
+new zeta prescription and would require its own invariance, repetition, and
+analytic-continuation theorem; it cannot be inferred from
+\eqref{eq:flat-atom}.

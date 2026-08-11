@@ -809,3 +809,43 @@ requires a common quantitative nuclear factorization and chronological
 low-period/general trace theorem.  General pinning, Grassmann lifting, and
 exterior cancellation are prior art.  Failure closes the full C22 operator
 lineage; finite sections and Ulam matrices are not fallback evidence.
+
+## HCS-C30 inverse-roof promotion gate (2026-08-11)
+
+Candidate **HCS-C30** tests whether the exact formal inverse-symbol relations
+from HCS-C29 can be promoted to genuine positive-time Rauzy/AGY periodic
+orbits with an ordinary nuclear or standard isolated-flat-trace determinant;
+see
+[`../rauzy_inverse_roof_trace_obstruction/`](../rauzy_inverse_roof_trace_obstruction/).
+
+The promotion is rejected by exact, all-phase arithmetic.  Under the genuine
+forward length action \(B^{-\mathsf T}\), all cyclic phases of the two C25
+length-six words and the C26 length-twenty-four word are infeasible:
+
+\[
+6/6,\qquad 6/6,\qquad 24/24.
+\]
+
+The independent contravariant \(B^{\mathsf T}\) transfer action gives the
+same complete failure census.  Every phase has an integer Farkas descriptor.
+Raw covariant homology prefixes are separately controlled: C1 and C2 do have
+positive integer witnesses, demonstrating that this distinct action cannot be
+substituted for Rauzy lengths.
+
+The structural obstruction is equally decisive.  A real additive groupoid
+cocycle changes sign on inverse arrows, while the projective normalizer has
+zero total period on a matrix-identity return wherever defined.  A positive
+symmetric edge clock therefore defines a new non-backtracking graph
+suspension, not the AGY natural extension.  On one infinite-dimensional
+space, faithful bounded inverse edge operators are incompatible with compact
+or nuclear Hashimoto blocks.  Enlarging the branch domain instead yields a
+full neutral fixed family with \(\det(I-Dh_W)=0\), outside the standard
+isolated-hyperbolic trace formula.
+
+The finite C29 group-von-Neumann determinant remains valid as a different
+system.  The scoped tuple is
+**(A1_FAIL, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with decision
+**ROUTE_A_REJECTED_FOR_DYNAMICAL_PROMOTION**.  Route B is not authorized.
+The next large move is a new all-word/tail theorem on the already certified
+hyperbolic Hénon pinning infrastructure, not a longer inverse-word or prime
+scan.

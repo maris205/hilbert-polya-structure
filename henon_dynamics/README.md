@@ -65,6 +65,7 @@ The foundational local source is
 | [`agy_finite_weil_determinant/`](agy_finite_weil_determinant/) | Fixed-prime finite-Weil Fredholm determinants, exact Legendre--Gauss traces, and class-function chronology collapse | Route-A exploratory; natural fixed-prime quantization, no global prime assembly |
 | [`agy_prime_direct_sum_determinant/`](agy_prime_direct_sum_determinant/) | Sharp prime-Schatten phase diagram, ordinary Dirichlet-damped all-prime Fredholm determinant, and canonicality trilemma | Route-A exploratory; exact global determinant with an external second clock |
 | [`rauzy_groupoid_identity_determinant/`](rauzy_groupoid_identity_determinant/) | Natural-extension trace-log no-go; exact C25/C26 identity-holonomy relations; nonconstant normalized finite-Weil groupoid determinant germ | Phase 2 certified; Route-A exploratory, Route B closed |
+| [`rauzy_inverse_roof_trace_obstruction/`](rauzy_inverse_roof_trace_obstruction/) | All-phase positive-cone failure, inverse-time roof theorem, same-space nuclearity and isolated-flat-trace obstruction | C29-to-AGY promotion rejected; finite C29 graph germ retained |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -147,7 +148,61 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C29 reversible Rauzy groupoid
+## Latest big-door result: HCS-C30 closes the formal-inverse AGY promotion
+
+C30 attacks the roof/operator gate left open by C29 without extending the
+word or prime scan.  It returns to the source raw matrices and separates three
+chronological actions: genuine Rauzy lengths \(B^{-\mathsf T}\), the
+contravariant transfer action \(B^{\mathsf T}\), and the raw covariant
+homology recurrence used only as a convention control.
+
+For every cyclic phase of the two C25 length-six kernel words and the C26
+length-twenty-four kernel word, exact integer Farkas descriptors prove that
+the positive length cone is empty:
+
+\[
+6/6,\qquad 6/6,\qquad 24/24.
+\]
+
+The independent transfer replay has the same complete failure census.  By
+contrast, C1 and C2 have positive raw-homology controls, which proves that the
+negative result does not come from silently confusing \(B\) with
+\(B^{-\mathsf T}\).
+
+The theoretical gate closes as well.  A real additive groupoid cocycle changes
+sign on inverse arrows.  The projective normalizer has zero period on a
+matrix-identity return wherever defined, whereas a positive symmetric edge
+length declares a different non-backtracking graph suspension.  Faithful
+bounded inverse edge operators on one infinite-dimensional space cannot form
+a compact or nuclear Hashimoto operator.  Enlarging the branch domain instead
+makes the full return the identity with a neutral fixed continuum and
+\(\det(I-Dh_W)=0\), outside the standard isolated-hyperbolic trace formula.
+
+The distinction between a unit path and identity matrix holonomy is retained:
+an arbitrary edge cocycle need not vanish on the C25 kernel words.  General
+clean-fixed-set regularization is not ruled out.
+
+The finite C29 group-trace determinant remains valid for its explicitly new
+graph system.  Only its proposed identification with the AGY natural
+extension is rejected.  The scoped Route-A tuple is
+**(A1_FAIL, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**.  The next large move is an
+all-word composition/determinant-tail theorem or genuinely new twist on the
+already certified hyperbolic Hénon pinning infrastructure—not a longer formal
+inverse-word or small-prime scan.
+
+- [C30 project overview](rauzy_inverse_roof_trace_obstruction/README.md)
+- [C30 theorem package](rauzy_inverse_roof_trace_obstruction/THEOREM_PACKAGE.md)
+- [C30 exact certificate](rauzy_inverse_roof_trace_obstruction/results/c30_certificate.json)
+- [C30 independent check](rauzy_inverse_roof_trace_obstruction/results/c30_independent_check.json)
+- [C30 Route-A record](rauzy_inverse_roof_trace_obstruction/route_a_evaluation.yaml)
+
+Reproduce the round with:
+
+```bash
+cd rauzy_inverse_roof_trace_obstruction && ./code/run_c30.sh
+```
+
+## Previous big-door result: HCS-C29 reversible Rauzy groupoid
 
 C29 has completed its Phase-2 exact gate.  The phrase “two-sided AGY
 extension” splits into two different objects.  The genuine natural extension

@@ -1,0 +1,201 @@
+\section{Groupoid roofs, projective normalization, and repetitions}
+\label{sec:roof}
+
+The cone obstruction already rules out the proposed words on the frozen
+positive domain.  There is a second, more structural obstruction to declaring
+both orientations to have positive intrinsic time.  It follows directly from
+the cocycle axioms and is independent of the particular matrices.
+
+\subsection{Inverse arrows have opposite additive time}
+
+Let $\mathcal G\rightrightarrows X$ be a groupoid.  We write composable arrows
+as $gh$, with $h$ applied first.  A real one-cocycle is a function
+$\tau:\mathcal G\to\mathbb R$ such that
+\begin{equation}
+  \tau(gh)=\tau(g)+\tau(h)
+  \label{eq:additive-cocycle}
+\end{equation}
+whenever $gh$ is defined.
+
+\begin{theorem}[Sign obstruction for a two-sided groupoid roof]
+\label{thm:roof-sign}
+Every real additive groupoid one-cocycle satisfies
+\begin{equation}
+  \tau(1_x)=0,\qquad \tau(g^{-1})=-\tau(g).
+  \label{eq:inverse-sign}
+\end{equation}
+Consequently, if $e$ and $e^{-1}$ are categorical inverses, no such cocycle
+can obey $\tau(e)>0$ and $\tau(e^{-1})>0$.
+\end{theorem}
+
+\begin{proof}
+From $1_x1_x=1_x$ and additivity,
+$\tau(1_x)=2\tau(1_x)$, so $\tau(1_x)=0$.  Since
+$g^{-1}g=1_{s(g)}$, additivity gives
+$\tau(g^{-1})+\tau(g)=0$.
+\end{proof}
+
+Classical suspension-flow zeta functions instead begin with a positive roof
+over a chosen base transformation or subshift
+\citep[Chapter~6]{ParryPollicott1990}.  Theorem~\ref{thm:roof-sign} does not
+contradict that construction.  It says that if the base alphabet is
+simultaneously required to be a groupoid with literal cancellation, its
+additive arrow cocycle cannot be positive on both members of an inverse pair.
+
+\subsection{Three meanings of an identity word}
+
+An identity matrix product is often enough for a finite group trace, but it is
+not enough to conclude either path cancellation or vanishing of every time
+cocycle.
+
+\begin{proposition}[Identity trichotomy]
+\label{prop:identity-trichotomy}
+Let $w$ be a closed formal word.
+\begin{enumerate}[label=(\roman*)]
+\item If $w$ is the unit arrow of $\mathcal G$, then every additive cocycle on
+  $\mathcal G$ vanishes on $w$.
+\item If only the represented matrix product $B_w$ equals $I$, an arbitrary
+  antisymmetric edge-constant cocycle need not vanish on $w$.
+\item If the cocycle is the logarithmic projective normalizer of the matrix
+  action and all prefix maps are defined, then $B_w=I$ does force the signed
+  sum to telescope to zero.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part (i) is \eqref{eq:inverse-sign}.  For (ii), a matrix representation may
+have a nontrivial kernel.  An edge-constant antisymmetric cocycle factors
+through the signed abelianization of the free path groupoid, not necessarily
+through the matrix quotient.  For the present words those abelianizations are
+\begin{equation}
+ [C_1]_{\mathrm{ab}}=1b+3t,\qquad
+ [C_2]_{\mathrm{ab}}=4t+5b.
+ \label{eq:signed-abelianizations}
+\end{equation}
+Choosing a nonzero value on one surviving generator proves the assertion.
+Part (iii) is established explicitly in
+\Cref{prop:normalizer-telescoping}.
+\end{proof}
+
+The length-twenty-four word has zero signed count in each of the frozen
+$A,B,C$ generators.  Therefore every antisymmetric edge-constant cocycle in
+that three-generator alphabet vanishes on $W_{24}$.  This is a property of
+that particular signed word; it does not identify the path with the groupoid
+unit.
+
+\subsection{Conditional telescoping of the projective normalizer}
+
+Let
+\[
+ \ell(x)=x_1+x_2+x_3+x_4.
+\]
+On any cone domain where $Mx$ has positive $\ell$-mass, set
+\begin{equation}
+ h_M(x)=\frac{Mx}{\ell(Mx)},\qquad
+ r_M(x)=\log\frac{\ell(Mx)}{\ell(x)}.
+ \label{eq:projective-normalizer}
+\end{equation}
+On the normalized simplex $\ell(x)=1$, this reduces to
+$r_M(x)=\log\ell(Mx)$.  The domain qualification in
+\eqref{eq:projective-normalizer} is essential: it is precisely what fails for
+the frozen words on the positive cone.
+
+\begin{proposition}[Projective normalizer telescoping]
+\label{prop:normalizer-telescoping}
+Where the indicated maps are defined,
+\begin{align}
+ r_{MN}(x)&=r_N(x)+r_M(h_Nx),
+ \label{eq:normalizer-cocycle}\\
+ r_{M^{-1}}(h_Mx)&=-r_M(x).
+ \label{eq:normalizer-inverse}
+\end{align}
+If $w=e_1\cdots e_n$, $x_k=h_{B(e_k)}x_{k-1}$, every prefix is defined, and
+$B_w=I$, then
+\begin{equation}
+ \sum_{k=1}^{n}r_{B(e_k)}(x_{k-1})
+ =\log\frac{\ell(B_wx_0)}{\ell(x_0)}=0.
+ \label{eq:normalizer-zero}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Homogeneity of $\ell$ gives
+\[
+ \ell\bigl(Mh_N(x)\bigr)=\frac{\ell(MNx)}{\ell(Nx)}.
+\]
+Taking logarithms and accounting for the initial normalization yields
+\eqref{eq:normalizer-cocycle}.  Set $N=M^{-1}$, or evaluate at $h_Mx$, to
+obtain \eqref{eq:normalizer-inverse}.  Iterating
+\eqref{eq:normalizer-cocycle} gives the first equality in
+\eqref{eq:normalizer-zero}; $B_w=I$ gives the second.
+\end{proof}
+
+This proposition is conditional, not a repair of the cone obstruction.  For
+$C_1,C_2,W_{24}$,
+\Cref{thm:C1-all-phases,thm:C2-all-phases,thm:W24-all-phases} say that no
+positive starting point makes all source prefixes legal in any cyclic phase.
+If one enlarges the domain to force the algebraic telescoping, one has changed
+the geometric setting and must separately justify the new transfer theory.
+
+\subsection{A positive symmetric clock is a different suspension}
+
+\begin{corollary}[The graph-clock alternative]
+\label{cor:graph-clock}
+An assignment
+\begin{equation}
+ L(e)=L(e^{-1})>0
+ \label{eq:symmetric-clock}
+\end{equation}
+defines a positive roof over the finite non-backtracking edge shift.  It
+cannot at the same time be an additive cocycle on the path groupoid in which
+$ee^{-1}=1$.
+\end{corollary}
+
+\begin{proof}
+The first assertion is the standard suspension construction over a subshift:
+sum $L$ along the successive symbols.  The second follows because
+$L(e)+L(e^{-1})=2L(e)>0$, whereas an additive groupoid cocycle must take the
+unit word $ee^{-1}$ to zero by \Cref{thm:roof-sign}.
+\end{proof}
+
+Thus \eqref{eq:symmetric-clock} is mathematically legitimate, but its inverse
+label is an oriented graph symbol rather than positive-time inverse motion in
+the original AGY groupoid.  We refer to the resulting object as the
+\emph{symmetric Hashimoto suspension}.  Calling it a natural extension of the
+AGY return map would erase the distinction proved above.
+
+\subsection{Repetitions do not commute with changing clocks}
+
+Periodic-orbit zeta functions organize a primitive orbit together with all of
+its repetitions.  For a positive flow period $T_\gamma$, the logarithmic
+expansion has terms $e^{-smT_\gamma}/m$; see, for example,
+\citet[Section~2.2]{DyatlovZworski2016}.  The identity words expose a singular
+boundary.
+
+\begin{proposition}[Repetition dichotomy]
+\label{prop:repetition-dichotomy}
+Suppose a projective matrix-normalizer cocycle is defined along an
+identity-holonomy word $w$.  Then
+\[
+ T(w^m)=mT(w)=0\qquad(m\geq1).
+\]
+Consequently a flow-style Euler factor formally contains
+$(1-e^{-s\cdot0})^{-1}$, and the logarithmic repetition series contains
+$\sum_{m\geq1}1/m$.  By contrast, under unit symmetric graph length,
+\[
+ T(C_1^m)=T(C_2^m)=6m,\qquad T(W_{24}^m)=24m,
+\]
+and the corresponding small-$u$ Hashimoto trace-log is regular.
+\end{proposition}
+
+\begin{proof}
+The zero projective period is \eqref{eq:normalizer-zero}; additivity gives the
+same conclusion for powers.  Substitution into the primitive flow factor and
+its logarithm gives the divergence.  Graph periods are symbolic word lengths,
+which multiply under repetition.
+\end{proof}
+
+One may use either clock when its hypotheses are satisfied.  One may not use
+zero signed projective time to certify the primitive orbit and positive graph
+length to regularize its repetitions.  That hybrid would not be the
+trace-log of a single dynamical system.
