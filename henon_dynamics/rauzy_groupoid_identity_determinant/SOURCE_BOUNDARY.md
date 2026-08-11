@@ -1,4 +1,10 @@
-# HCS-C29 preliminary source and novelty boundary
+# HCS-C29 Phase-1 source and novelty boundary
+
+This file is retained as the Phase-1 search artifact.  The completed Phase-2
+corpus and claim-verification matrix are
+`PHASE2_ANNOTATED_BIBLIOGRAPHY.md` and
+`PHASE2_SOURCE_VERIFICATION.md`; those files supersede this one for release
+source status.
 
 ## Local-program audit
 

@@ -64,7 +64,7 @@ The foundational local source is
 | [`agy_holomorphic_slice_obstruction/`](agy_holomorphic_slice_obstruction/) | Common complex AGY domain, scalar trace-class determinant with Perron-characteristic trace atoms, and same-domain oscillator noncompactness | Scalar determinant proved; literal infinite oscillator Route-A rejected |
 | [`agy_finite_weil_determinant/`](agy_finite_weil_determinant/) | Fixed-prime finite-Weil Fredholm determinants, exact Legendre--Gauss traces, and class-function chronology collapse | Route-A exploratory; natural fixed-prime quantization, no global prime assembly |
 | [`agy_prime_direct_sum_determinant/`](agy_prime_direct_sum_determinant/) | Sharp prime-Schatten phase diagram, ordinary Dirichlet-damped all-prime Fredholm determinant, and canonicality trilemma | Route-A exploratory; exact global determinant with an external second clock |
-| [`rauzy_groupoid_identity_determinant/`](rauzy_groupoid_identity_determinant/) | Positive periodic-product trace-log closure under natural extension, plus exact primitive identity-holonomy relations in a new symmetric non-backtracking Rauzy groupoid | HCS-C29 Phase 1 passed after reframing; implementation gate pending |
+| [`rauzy_groupoid_identity_determinant/`](rauzy_groupoid_identity_determinant/) | Natural-extension trace-log no-go; exact C25/C26 identity-holonomy relations; nonconstant normalized finite-Weil groupoid determinant germ | Phase 2 certified; Route-A exploratory, Route B closed |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -147,9 +147,9 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Active big-door pivot: HCS-C29 reversible Rauzy groupoid
+## Latest big-door result: HCS-C29 reversible Rauzy groupoid
 
-C29 has completed its Phase-1 research gate.  The phrase “two-sided AGY
+C29 has completed its Phase-2 exact gate.  The phrase “two-sided AGY
 extension” splits into two different objects.  The genuine natural extension
 keeps the original positive periodic products, so the regular-group/periodic-
 product trace-log germ built from them is still exactly one; no trace-class
@@ -157,24 +157,48 @@ operator on a new two-sided space is claimed.  A declared symmetric
 non-backtracking Rauzy groupoid is a new dynamics, and it does contain
 nontrivial reduced identity-holonomy loops.
 
-At elementary-edge level, two explicit primitive length-six loops give at
-least 24 based oriented contributions to the sixth normalized moment.  More
+At elementary-edge level, exhaustive exact enumeration through length nine
+gives
+
+\[
+(N_1,\ldots,N_9)=(0,0,0,0,0,24,0,32,144).
+\]
+
+Two explicit primitive length-six loops already prove the matching lower
+bound of 24 based oriented contributions.  More
 importantly, the frozen C26 branch matrices satisfy an exact braid relation
 which expands to a primitive cyclically reduced length-24 identity word in
 the actual `gamma_star`, second and third branch alphabet.  Thus C25 positive
 monoid freeness does not extend to freeness of the inverse-completed group.
 
 The C28 normalized finite-Weil character limit then produces a nonconstant
-group-trace determinant germ.  This is an algebraic reopening only: formal
+group-trace determinant germ, locally uniformly on the common disc
+\(|u|<1/5\).  The C26 relation proves (N_{24}\ge48), not a total
+length-24 census.  This is an algebraic reopening only: formal
 inverse arrows are not forward AGY branches, no intrinsic positive reversible
 roof is known, and C26 Bergman nuclearity does not apply to expanding inverse
-maps.  Phase 2 is frozen pending confirmation and will build the independent
-exact certificate before any paper or Route-A promotion.
+maps.
 
-- [C29 Phase-1 overview](rauzy_groupoid_identity_determinant/README.md)
+The deterministic certificate passes 14 independent gates and 38
+regression/mutation tests.  The conservative tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.  The next large gate is
+an intrinsic positive reversible roof together with a genuine two-sided trace
+theorem; longer small-word or small-prime scans are not the next move.
+
+- [C29 project overview](rauzy_groupoid_identity_determinant/README.md)
 - [C29 research question](rauzy_groupoid_identity_determinant/RESEARCH_QUESTION.md)
-- [C29 derivation package](rauzy_groupoid_identity_determinant/DERIVATION_PACKAGE.md)
-- [C29 checkpoint](rauzy_groupoid_identity_determinant/PHASE1_CHECKPOINT.md)
+- [C29 theorem package](rauzy_groupoid_identity_determinant/THEOREM_PACKAGE.md)
+- [C29 Phase-2 checkpoint](rauzy_groupoid_identity_determinant/PHASE2_CHECKPOINT.md)
+- [C29 exact certificate](rauzy_groupoid_identity_determinant/results/c29_certificate.json)
+- [C29 independent check](rauzy_groupoid_identity_determinant/results/c29_independent_check.json)
+
+Reproduce the round with:
+
+```bash
+cd rauzy_groupoid_identity_determinant && ./code/run_c29.sh
+```
 
 ## Latest big-door result: HCS-C28 sharp all-prime threshold
 
@@ -849,4 +873,4 @@ Regenerable caches, nested Git metadata, TeX auxiliary files, and bulky raw
 array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
-Last synchronized research snapshot: **2026-08-10**.
+Last synchronized research snapshot: **2026-08-11**.

@@ -1,6 +1,6 @@
 # HCS-C29: Rauzy groupoid identity determinant
 
-## Phase-1 outcome
+## Phase-2 outcome
 
 This project tests the large structural escape left open by HCS-C28: replace
 the one-sided positive AGY monoid by a based, reversible path groupoid and ask
@@ -8,7 +8,7 @@ whether the normalized finite-Weil trace can see nonempty identity-holonomy
 loops.
 
 The original proposal had to be split into two mathematically different
-objects.
+objects.  Phase 2 has now certified both sides of that split.
 
 1. **The genuine two-sided natural extension does not escape C28.** It adds
    past coordinates, not inverse letters to a forward periodic product.  The
@@ -80,9 +80,39 @@ germ whose logarithm counts the genuine reduced kernel of the chronological
 symplectic cocycle.  The exact relations above prove that this limit is not
 one.
 
+## Certified Phase-2 numbers
+
+The complete C25 identity census through length nine is
+
+```text
+n:    1  2  3  4  5  6  7  8   9
+N_n:  0  0  0  0  0 24  0 32 144
+```
+
+The C26 relation proves `N_24 >= 48`; this is deliberately not called the
+total length-24 count.  The finite Hashimoto degrees are 3 for C25 and 5 for
+C26, giving a common certified `Log_0` disc `|u|<1/5`.
+
+The independent checker passes `14/14` gates and the regression/mutation suite
+passes `38/38` tests.  The exact certificate SHA-256 is
+`412840c37d2e474462b39ce7072614323023ac8e3f968bc16a9219cc3a0c0cca`.
+
+## Route-A boundary
+
+The current evaluation is
+
+```text
+(A1_WEAK,
+ A2_ANALYTIC_DETERMINANT,
+ A3_PARTIAL_ANALYTIC_STRUCTURE,
+ A4_FORMAL_HINT)
+```
+
+with overall status `ROUTE_A_EXPLORATORY`.  Route B is not authorized.
+
 ## Current boundary
 
-Phase 1 proves an algebraic reopening, not a Hilbert--Pólya construction.
+Phase 2 proves an algebraic reopening, not a Hilbert--Pólya construction.
 Three large gates remain:
 
 - derive an intrinsic positive roof for the reversible arrows;
@@ -96,17 +126,27 @@ Unit edge length is a legitimate graph clock but is not the AGY roof.  The
 inverse of a C26 contracting holomorphic branch is expanding on the C26
 Bergman domain, so the C26 nuclearity theorem cannot be imported silently.
 
-## Phase-1 files
+## Project files
 
 - `RESEARCH_QUESTION.md`: selected question, FINER scores and scope;
 - `METHODOLOGY_BLUEPRINT.md`: exact experiment and validity design;
 - `DERIVATION_PACKAGE.md`: complete two-object derivation;
 - `DEVILS_ADVOCATE_CHECKPOINT1.md`: adversarial scoping review;
 - `SOURCE_BOUNDARY.md`: local-program and primary-literature novelty boundary;
-- `results/PRELIMINARY_WITNESS.md`: exact feasibility witness and non-proof
-  exploratory census;
-- `code/README.md`: Phase-2 producer/checker contract;
-- `paper/README.md`: manuscript gate.
+- `PHASE2_CHECKPOINT.md`: formal stop/go outcome;
+- `THEOREM_PACKAGE.md`: exact Phase-2 statements and proof skeletons;
+- `PHASE2_ANNOTATED_BIBLIOGRAPHY.md`: reproducible 18-source search corpus;
+- `PHASE2_SOURCE_VERIFICATION.md`: claim-to-source and integrity audit;
+- `results/`: certificates, mathematical results, validation, tests and
+  material passports;
+- `code/`: producer, independent checker, tests, runner and manifest tool;
+- `paper/README.md`: remaining manuscript gate.
 
-The Phase-2 implementation and paper are intentionally frozen until the
-Phase-1 research checkpoint is confirmed.
+Reproduce the release from any working directory with
+
+```bash
+/absolute/path/to/rauzy_groupoid_identity_determinant/code/run_c29.sh
+```
+
+The next large move is not a longer word or prime scan.  It is the intrinsic
+roof/two-sided trace theorem gate described in `PHASE2_CHECKPOINT.md`.

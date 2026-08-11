@@ -17,7 +17,7 @@ matrices nonconstant?**
 |---|---:|---|
 | Feasible | 5/5 | C25--C28 freeze every required graph, matrix, character limit and chronology convention; all relation tests use exact integer arithmetic. |
 | Interesting | 5/5 | C28's only canonical normalized trace collapsed to one, so a nonconstant reduced groupoid germ changes the structural conclusion. |
-| Novel | provisional 4/5 | Ihara twists and group traces are standard; the defensible delta is the exact C26 relation, the natural-extension no-go, and their source-locked separation.  The score remains provisional pending the final annotated bibliography. |
+| Novel | search-bounded 4/5 | Ihara twists and group traces are standard; the defensible delta is the exact C25/C26 relations, the natural-extension no-go, the normalized finite-Weil kernel limit, and their source-locked separation.  The Phase-2 audit verified 18 primary/correction records by DOI and official metadata but did not acquire original full texts, so global novelty is not certified. |
 | Ethical | 5/5 | Pure theoretical and reproducible computation with no human or sensitive data. |
 | Relevant | 5/5 | The answer decides whether the proposed path-groupoid pivot is algebraically alive before expensive analytic or automorphic work. |
 | **Average** | **4.8/5** | **Selected.** |

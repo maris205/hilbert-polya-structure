@@ -214,6 +214,47 @@ retained as positive infrastructure.  The authorized next large candidate
 uses finite Weil fibres over odd finite fields; further ordinary holomorphic
 base norms are not a reopening.
 
+## HCS-C29 symmetric Rauzy groupoid determinant (2026-08-11)
+
+Candidate **HCS-C29** executes the path-groupoid gate left by C28; see
+[`../rauzy_groupoid_identity_determinant/`](../rauzy_groupoid_identity_determinant/).
+The gate separates a genuine natural extension from a new inverse-completed
+dynamics.
+
+The natural extension does not change positive chronological return products.
+C25 positive-monoid freeness therefore makes every nonempty regular-group
+trace moment vanish, so the corresponding periodic-product determinant germ
+remains one.
+
+The deliberately new symmetric non-backtracking groupoid is algebraically
+nontrivial.  Two exact C25 primitive length-six kernel cycles and their marked
+rotations give the exact bounded-census value (N_6=24).  At the induced
+return level, exact rank-one algebra gives (KYK=YKY); substitution into the
+frozen C26 branch matrices yields a primitive cyclically reduced length-24
+identity relation and the lower bound (N_{24}\ge48).
+
+For the finite Weil twist of either finite symmetric graph,
+
+\[
+\exp\!\left[p^{-2}\operatorname{Log}_0\det(I-uB_p)\right]
+\longrightarrow
+\exp\!\left[-\sum_{n\ge1}\frac{N_nu^n}{n}\right]
+\]
+
+locally uniformly on the appropriate Hashimoto norm disc.  The common
+certified disc is (|u|<1/5), and the explicit kernel cycles make the limit
+nonconstant.  This is an analytic germ, not an ordinary infinite-dimensional
+Fredholm determinant or a global Euler product.
+
+The exact certificate passes 14 independent gates and 38 regression,
+mutation and fuzz tests.  The formal tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.  Reopening requires an
+intrinsic positive reversible roof and a two-sided flat-trace or nuclear
+determinant theorem; formal inverse arrows are not AGY branches, and the C26
+one-sided Bergman theorem cannot be imported for their expanding inverses.
+
 ## HCS-C28 prime-direct-sum determinant (2026-08-10)
 
 Candidate **HCS-C28** resolves the all-prime assembly gate left by C27; see
