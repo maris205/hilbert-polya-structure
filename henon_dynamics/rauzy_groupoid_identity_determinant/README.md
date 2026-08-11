@@ -137,6 +137,7 @@ Bergman domain, so the C26 nuclearity theorem cannot be imported silently.
 - `THEOREM_PACKAGE.md`: exact Phase-2 statements and proof skeletons;
 - `PHASE2_ANNOTATED_BIBLIOGRAPHY.md`: reproducible 18-source search corpus;
 - `PHASE2_SOURCE_VERIFICATION.md`: claim-to-source and integrity audit;
+- `route_a_evaluation.yaml`: schema-complete frozen Route-A decision;
 - `results/`: certificates, mathematical results, validation, tests and
   material passports;
 - `code/`: producer, independent checker, tests, runner and manifest tool;

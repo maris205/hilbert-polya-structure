@@ -16,7 +16,8 @@ Before manuscript drafting:
 2. record theorem/page locators and check the Dougall--Sharp correction;
 3. decide whether the next intrinsic-roof/two-sided-trace gate succeeds or is
    a theorem-level obstruction;
-4. freeze the Route-A evaluation and code commit.
+4. preserve the frozen Route-A evaluation and implementation commit recorded
+   in `../route_a_evaluation.yaml`.
 
 The eventual paper must lead with the two-object distinction and must not
 present a formal inverse-edge graph as the AGY natural extension.  It must

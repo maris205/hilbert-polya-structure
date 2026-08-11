@@ -14,6 +14,8 @@ Human-readable result files:
 - `ARTIFACT_HASHES.sha256`: read-only release integrity manifest;
 - `PRELIMINARY_WITNESS.md`: retained Phase-1 feasibility artifact.
 
+The formal Route-A record is `../route_a_evaluation.yaml`.
+
 Run the whole release from any working directory with
 
 ```bash
@@ -22,4 +24,3 @@ Run the whole release from any working directory with
 
 The default command never refreshes the manifest.  Only an intentional release
 update may use `--refresh-manifest`.
-

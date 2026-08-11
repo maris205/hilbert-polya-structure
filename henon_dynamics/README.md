@@ -193,6 +193,7 @@ theorem; longer small-word or small-prime scans are not the next move.
 - [C29 Phase-2 checkpoint](rauzy_groupoid_identity_determinant/PHASE2_CHECKPOINT.md)
 - [C29 exact certificate](rauzy_groupoid_identity_determinant/results/c29_certificate.json)
 - [C29 independent check](rauzy_groupoid_identity_determinant/results/c29_independent_check.json)
+- [C29 Route-A record](rauzy_groupoid_identity_determinant/route_a_evaluation.yaml)
 
 Reproduce the round with:
 

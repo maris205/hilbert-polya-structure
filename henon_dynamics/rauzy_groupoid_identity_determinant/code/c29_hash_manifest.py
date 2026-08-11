@@ -49,6 +49,7 @@ REQUIRED_RELATIVE_PATHS = {
     "PHASE2_SOURCE_VERIFICATION.md",
     "PHASE2_CHECKPOINT.md",
     "THEOREM_PACKAGE.md",
+    "route_a_evaluation.yaml",
     "code/README.md",
     "code/c29_producer.py",
     "code/c29_independent_check.py",
