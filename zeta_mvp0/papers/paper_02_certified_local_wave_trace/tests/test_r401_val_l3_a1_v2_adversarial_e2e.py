@@ -31,6 +31,7 @@ def _load(name: str, path: Path):
 S = _load("r401_v2_scheduler_adversarial", SCHEDULER_SOURCE)
 C = _load("r401_v2_static_checker_adversarial", STATIC_CHECKER_SOURCE)
 R = _load("r401_v2_release_adversarial", RELEASE_SOURCE)
+REAL_FLOCK = S.fcntl.flock
 
 
 def _git(repository: Path, *argv: str) -> str:
@@ -259,6 +260,459 @@ def _role5_payload() -> dict:
     }
 
 
+def _prepare_role5_publication(
+    tmp_path: Path, monkeypatch, *, label: str = "base",
+) -> tuple[Path, Path, Path, bytes, bytes, str]:
+    """Create a tiny clean/live Git authority and two external reviewed inputs."""
+
+    repository = tmp_path / f"role5-authority-{label}"
+    repository.mkdir()
+    _git(repository, "init", "-b", "main")
+    _git(repository, "config", "user.email", "test@example.invalid")
+    _git(repository, "config", "user.name", "V2 Test")
+    _git(repository, "remote", "add", "origin", S.V2_ROLE11_ORIGIN_URL)
+    role_paths = dict(S.FORMAL_INPUT_ROLES)
+    live_raw: dict[str, bytes] = {}
+    for index, role in enumerate(S.V2_ROLE5_REVIEWED_ROLES, start=1):
+        path = repository / role_paths[role]
+        path.parent.mkdir(parents=True, exist_ok=True)
+        raw = f"reviewed-{index:02d}-{role}\n".encode("utf-8")
+        path.write_bytes(raw)
+        path.chmod(0o644)
+        live_raw[role] = raw
+    _git(repository, "add", ".")
+    _git(repository, "commit", "-m", "reviewed role-5 source image")
+    reviewed_commit = _git(repository, "rev-parse", "HEAD")
+    _git(
+        repository,
+        "update-ref",
+        "refs/remotes/origin/main",
+        reviewed_commit,
+    )
+
+    payload = _role5_payload()
+    payload["review"]["reviewed_commit"] = reviewed_commit
+    payload["reviewed_v2_inputs"] = [
+        {
+            "role": role,
+            "path": role_paths[role],
+            "sha256": hashlib.sha256(live_raw[role]).hexdigest(),
+        }
+        for role in S.V2_ROLE5_REVIEWED_ROLES
+    ]
+    candidate_raw = S.canonical_json_bytes(payload)
+    candidate_parent = Path(
+        "/tmp/a416-v2-role5-review." + os.urandom(16).hex()
+    )
+    candidate_parent.mkdir(mode=0o700)
+    candidate = candidate_parent / S.V2_ROLE5_CANDIDATE_BASENAME
+    S._v2_write_private_candidate(
+        candidate,
+        candidate_raw,
+        maximum_bytes=S.V2_ROLE5_CANDIDATE_MAX_BYTES,
+        context="synthetic external role-5 candidate",
+    )
+
+    candidate_sha256 = hashlib.sha256(candidate_raw).hexdigest()
+    input_map_sha256 = hashlib.sha256(
+        S.canonical_json_bytes(payload["reviewed_v2_inputs"])
+    ).hexdigest()
+    verify_payload = {
+        "verification_status": S.V2_ROLE5_VERIFY_STATUS,
+        "authority": S.V2_ROLE5_VERIFY_AUTHORITY,
+        "candidate_sha256": candidate_sha256,
+        "input_map_sha256": input_map_sha256,
+        "size_bytes": len(candidate_raw),
+        "promotion_authorized": False,
+        "artifacts_written": False,
+    }
+    verify_raw = S.canonical_json_bytes(verify_payload)
+    verify_parent = Path(
+        "/tmp/a416-v2-role5-verify." + os.urandom(16).hex()
+    )
+    verify_parent.mkdir(mode=0o700)
+    verify_receipt = verify_parent / S.V2_ROLE5_VERIFY_RECEIPT_BASENAME
+    S._v2_write_private_candidate(
+        verify_receipt,
+        verify_raw,
+        maximum_bytes=S.V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES,
+        context="synthetic role-24 role-5 receipt",
+    )
+
+    def validate_without_legacy_history(
+        value: dict, root: Path, records: dict[str, S.FormalRoleRecord],
+    ) -> None:
+        assert root == repository
+        S.validate_v2_role5_payload(value, records)
+
+    monkeypatch.setattr(S, "ROOT", repository)
+    monkeypatch.setattr(
+        S, "_v2_role11_live_remote_probe", lambda root: reviewed_commit
+    )
+    monkeypatch.setattr(
+        S,
+        "validate_v2_role5_repository_bindings",
+        validate_without_legacy_history,
+    )
+    return (
+        repository,
+        candidate,
+        verify_receipt,
+        candidate_raw,
+        verify_raw,
+        reviewed_commit,
+    )
+
+
+def _cleanup_role5_external(*paths: Path) -> None:
+    for path in paths:
+        try:
+            if path.is_symlink() or path.is_file() or stat.S_ISFIFO(path.lstat().st_mode):
+                path.unlink()
+        except FileNotFoundError:
+            pass
+    for parent in {path.parent for path in paths}:
+        try:
+            parent.rmdir()
+        except FileNotFoundError:
+            pass
+
+
+def _exercise_role5_prehook_attacks(tmp_path: Path, monkeypatch) -> None:
+    """Replay all five mutable inputs across the mandatory pre-rename hook."""
+
+    for attack in ("source", "git", "candidate", "receipt", "stage"):
+        with monkeypatch.context() as local:
+            (
+                repository,
+                candidate,
+                verify_receipt,
+                candidate_raw,
+                _verify_raw,
+                reviewed_commit,
+            ) = _prepare_role5_publication(
+                tmp_path, local, label=f"prehook-{attack}"
+            )
+            destination = repository / dict(S.FORMAL_INPUT_ROLES)[
+                "implementation_design_review"
+            ]
+            expected = hashlib.sha256(candidate_raw).hexdigest()
+
+            def inject(phase: str) -> None:
+                if phase != "BEFORE_RENAME":
+                    return
+                if attack == "source":
+                    source = repository / dict(S.FORMAL_INPUT_ROLES)[
+                        S.V2_ROLE5_REVIEWED_ROLES[0]
+                    ]
+                    source.write_bytes(b"drifted reviewed source\n")
+                elif attack == "git":
+                    (repository / ".git/refs/heads/main").write_text(
+                        "f" * 40 + "\n", encoding="ascii"
+                    )
+                elif attack in {"candidate", "receipt"}:
+                    target = candidate if attack == "candidate" else verify_receipt
+                    descriptor = os.open(
+                        target,
+                        os.O_RDWR | getattr(os, "O_NOFOLLOW", 0),
+                    )
+                    try:
+                        assert os.pwrite(descriptor, b"X", 0) == 1
+                        os.fsync(descriptor)
+                    finally:
+                        os.close(descriptor)
+                else:
+                    stages = tuple(destination.parent.glob(
+                        ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-*"
+                    ))
+                    assert len(stages) == 1
+                    descriptor = os.open(
+                        stages[0],
+                        os.O_RDWR | getattr(os, "O_NOFOLLOW", 0),
+                    )
+                    try:
+                        assert os.pwrite(descriptor, b"X", 0) == 1
+                        os.fsync(descriptor)
+                    finally:
+                        os.close(descriptor)
+
+            local.setattr(S, "_v2_role5_publication_fault_hook", inject)
+            try:
+                with pytest.raises((S.SchedulerContractError, OSError)):
+                    S.publish_v2_role5(
+                        os.fspath(candidate),
+                        os.fspath(verify_receipt),
+                        expected,
+                        reviewed_commit,
+                        S.V2_ROLE5_PUBLICATION_AUTHORITY,
+                        os.fspath(repository),
+                    )
+                assert not destination.exists()
+                assert not tuple(destination.parent.glob(
+                    ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-*"
+                ))
+            finally:
+                if destination.exists() or destination.is_symlink():
+                    destination.unlink()
+                _cleanup_role5_external(candidate, verify_receipt)
+
+
+def _exercise_role5_postrename_no_rollback(tmp_path: Path, monkeypatch) -> None:
+    postrename_phases = (
+        "AFTER_RENAME",
+        "AFTER_DESTINATION_FSYNC",
+        "AFTER_PUBLICATION_PARENT_FSYNC",
+        "AFTER_ULTIMATE_REPLAY",
+    )
+    for phase in postrename_phases:
+        with monkeypatch.context() as local:
+            (
+                repository,
+                candidate,
+                verify_receipt,
+                candidate_raw,
+                verify_raw,
+                reviewed_commit,
+            ) = _prepare_role5_publication(
+                tmp_path, local, label=f"postrename-{phase.lower()}"
+            )
+            destination = repository / dict(S.FORMAL_INPUT_ROLES)[
+                "implementation_design_review"
+            ]
+
+            def fail(boundary: str) -> None:
+                if boundary == phase:
+                    raise RuntimeError(f"synthetic role-5 crash at {phase}")
+
+            local.setattr(S, "_v2_role5_publication_fault_hook", fail)
+            try:
+                with pytest.raises(RuntimeError, match=phase):
+                    S.publish_v2_role5(
+                        os.fspath(candidate),
+                        os.fspath(verify_receipt),
+                        hashlib.sha256(candidate_raw).hexdigest(),
+                        reviewed_commit,
+                        S.V2_ROLE5_PUBLICATION_AUTHORITY,
+                        os.fspath(repository),
+                    )
+                assert destination.read_bytes() == candidate_raw
+                assert stat.S_IMODE(destination.stat().st_mode) == 0o644
+                assert candidate.read_bytes() == candidate_raw
+                assert verify_receipt.read_bytes() == verify_raw
+                assert not tuple(destination.parent.glob(
+                    ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-*"
+                ))
+            finally:
+                if destination.exists() or destination.is_symlink():
+                    destination.unlink()
+                _cleanup_role5_external(candidate, verify_receipt)
+
+    with monkeypatch.context() as local:
+        (
+            repository,
+            candidate,
+            verify_receipt,
+            candidate_raw,
+            _verify_raw,
+            reviewed_commit,
+        ) = _prepare_role5_publication(
+            tmp_path, local, label="postultimate-inode-replacement"
+        )
+        destination = repository / dict(S.FORMAL_INPUT_ROLES)[
+            "implementation_design_review"
+        ]
+
+        def replace(boundary: str) -> None:
+            if boundary == "AFTER_ULTIMATE_REPLAY":
+                destination.unlink()
+                destination.write_bytes(candidate_raw)
+                destination.chmod(0o644)
+
+        local.setattr(S, "_v2_role5_publication_fault_hook", replace)
+        try:
+            with pytest.raises(S.PathContractError, match="posthook canonical"):
+                S.publish_v2_role5(
+                    os.fspath(candidate),
+                    os.fspath(verify_receipt),
+                    hashlib.sha256(candidate_raw).hexdigest(),
+                    reviewed_commit,
+                    S.V2_ROLE5_PUBLICATION_AUTHORITY,
+                    os.fspath(repository),
+                )
+            assert destination.read_bytes() == candidate_raw
+        finally:
+            if destination.exists() or destination.is_symlink():
+                destination.unlink()
+            _cleanup_role5_external(candidate, verify_receipt)
+
+
+def _exercise_role5_cleanup_guard(tmp_path: Path, monkeypatch) -> None:
+    with monkeypatch.context() as local:
+        (
+            repository,
+            candidate,
+            verify_receipt,
+            candidate_raw,
+            verify_raw,
+            reviewed_commit,
+        ) = _prepare_role5_publication(tmp_path, local, label="cleanup-guard")
+        destination = repository / dict(S.FORMAL_INPUT_ROLES)[
+            "implementation_design_review"
+        ]
+        foreign_raw = b"foreign substituted role-5 stage\n"
+        substituted_stage: Path | None = None
+
+        def substitute(boundary: str) -> None:
+            nonlocal substituted_stage
+            if boundary != "BEFORE_RENAME":
+                return
+            stages = tuple(destination.parent.glob(
+                ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-*"
+            ))
+            assert len(stages) == 1
+            substituted_stage = stages[0]
+            substituted_stage.unlink()
+            substituted_stage.write_bytes(foreign_raw)
+            substituted_stage.chmod(0o644)
+
+        local.setattr(S, "_v2_role5_publication_fault_hook", substitute)
+        try:
+            with pytest.raises(
+                S.PathContractError, match="refused to unlink a replaced staging inode"
+            ) as caught:
+                S.publish_v2_role5(
+                    os.fspath(candidate),
+                    os.fspath(verify_receipt),
+                    hashlib.sha256(candidate_raw).hexdigest(),
+                    reviewed_commit,
+                    S.V2_ROLE5_PUBLICATION_AUTHORITY,
+                    os.fspath(repository),
+                )
+            assert caught.value.__cause__ is not None
+            assert substituted_stage is not None
+            assert substituted_stage.read_bytes() == foreign_raw
+            assert not destination.exists()
+            assert candidate.read_bytes() == candidate_raw
+            assert verify_receipt.read_bytes() == verify_raw
+        finally:
+            if substituted_stage is not None and substituted_stage.exists():
+                substituted_stage.unlink()
+            if destination.exists() or destination.is_symlink():
+                destination.unlink()
+            _cleanup_role5_external(candidate, verify_receipt)
+
+
+def _exercise_role5_concurrent_exact_one(tmp_path: Path, monkeypatch) -> None:
+    with monkeypatch.context() as local:
+        (
+            repository,
+            candidate,
+            verify_receipt,
+            candidate_raw,
+            _verify_raw,
+            reviewed_commit,
+        ) = _prepare_role5_publication(tmp_path, local, label="concurrent")
+        destination = repository / dict(S.FORMAL_INPUT_ROLES)[
+            "implementation_design_review"
+        ]
+        expected = hashlib.sha256(candidate_raw).hexdigest()
+        ready_r, ready_w = os.pipe()
+        go_r, go_w = os.pipe()
+        attempt_r, attempt_w = os.pipe()
+        release_r, release_w = os.pipe()
+        result_r, result_w = os.pipe()
+
+        def read_exact(descriptor: int, size: int) -> bytes:
+            chunks: list[bytes] = []
+            while sum(map(len, chunks)) < size:
+                chunk = os.read(descriptor, size - sum(map(len, chunks)))
+                assert chunk
+                chunks.append(chunk)
+            return b"".join(chunks)
+
+        def synchronized_flock(descriptor: int, operation: int) -> None:
+            if operation != S.fcntl.LOCK_EX | S.fcntl.LOCK_NB:
+                REAL_FLOCK(descriptor, operation)
+                return
+            os.write(ready_w, b"R")
+            assert os.read(go_r, 1) == b"G"
+            try:
+                REAL_FLOCK(descriptor, operation)
+            except BlockingIOError:
+                os.write(attempt_w, b"F")
+                raise
+            os.write(attempt_w, b"W")
+            assert os.read(release_r, 1) == b"C"
+
+        local.setattr(S.fcntl, "flock", synchronized_flock)
+        children: list[int] = []
+        try:
+            for _index in range(2):
+                child = os.fork()
+                if child == 0:
+                    try:
+                        receipt = S.publish_v2_role5(
+                            os.fspath(candidate),
+                            os.fspath(verify_receipt),
+                            expected,
+                            reviewed_commit,
+                            S.V2_ROLE5_PUBLICATION_AUTHORITY,
+                            os.fspath(repository),
+                        )
+                        outcome = "OK|" + receipt["design_review_sha256"]
+                    except BaseException as error:
+                        outcome = f"ERR|{type(error).__name__}|{error}"
+                    os.write(result_w, (outcome + "\n").encode("utf-8"))
+                    os._exit(0)
+                children.append(child)
+            os.close(ready_w)
+            os.close(go_r)
+            os.close(attempt_w)
+            os.close(release_r)
+            os.close(result_w)
+            assert read_exact(ready_r, 2) == b"RR"
+            os.write(go_w, b"GG")
+            attempts = read_exact(attempt_r, 2)
+            assert sorted(attempts) == [ord("F"), ord("W")]
+            os.write(release_w, b"C")
+            os.close(go_w)
+            os.close(release_w)
+            chunks: list[bytes] = []
+            while True:
+                chunk = os.read(result_r, 4096)
+                if not chunk:
+                    break
+                chunks.append(chunk)
+            outcomes = b"".join(chunks).decode("utf-8").splitlines()
+            assert sum(row == f"OK|{expected}" for row in outcomes) == 1
+            assert sum(row.startswith("ERR|PathContractError|") for row in outcomes) == 1
+            for child in children:
+                waited, status = os.waitpid(child, 0)
+                assert waited == child and os.waitstatus_to_exitcode(status) == 0
+            children.clear()
+            assert destination.read_bytes() == candidate_raw
+            assert candidate.read_bytes() == candidate_raw
+            assert verify_receipt.exists()
+        finally:
+            for child in children:
+                try:
+                    os.kill(child, 9)
+                except ProcessLookupError:
+                    pass
+                os.waitpid(child, 0)
+            for descriptor in (
+                ready_r, ready_w, go_r, go_w, attempt_r, attempt_w,
+                release_r, release_w, result_r, result_w,
+            ):
+                try:
+                    os.close(descriptor)
+                except OSError:
+                    pass
+            if destination.exists() or destination.is_symlink():
+                destination.unlink()
+            _cleanup_role5_external(candidate, verify_receipt)
+
+
 def _main_records(machine: dict) -> tuple[S.FormalRoleRecord, ...]:
     records = []
     for index, (role, path) in enumerate(S.FORMAL_INPUT_ROLES, start=1):
@@ -303,7 +757,9 @@ def test_v2_scheduler_is_self_contained_from_attempt1_scheduler() -> None:
         assert "v2" in Path(v2_roles[role]).name.lower()
 
 
-def test_role5_closed15_and_exact_literals_reject_coherent_type_forgery() -> None:
+def test_role5_closed15_and_exact_literals_reject_coherent_type_forgery(
+    tmp_path: Path, monkeypatch,
+) -> None:
     payload = _role5_payload()
     assert set(S.validate_v2_role5_payload(payload)) == S.V2_ROLE5_KEYS
     forged = copy.deepcopy(payload)
@@ -318,6 +774,211 @@ def test_role5_closed15_and_exact_literals_reject_coherent_type_forgery() -> Non
     forged["claim_boundary"] += " forged"
     with pytest.raises(S.ProductionAuthorityError, match="scalar"):
         S.validate_v2_role5_payload(forged)
+
+    (
+        repository,
+        candidate,
+        verify_receipt,
+        candidate_raw,
+        verify_raw,
+        reviewed_commit,
+    ) = _prepare_role5_publication(tmp_path, monkeypatch)
+    expected = hashlib.sha256(candidate_raw).hexdigest()
+    destination = repository / dict(S.FORMAL_INPUT_ROLES)[
+        "implementation_design_review"
+    ]
+
+    def publish(
+        *,
+        candidate_path: Path = candidate,
+        receipt_path: Path = verify_receipt,
+        expected_hash: str = expected,
+        commit: str = reviewed_commit,
+        authority: str = S.V2_ROLE5_PUBLICATION_AUTHORITY,
+    ) -> dict:
+        return S.publish_v2_role5(
+            os.fspath(candidate_path),
+            os.fspath(receipt_path),
+            expected_hash,
+            commit,
+            authority,
+            os.fspath(repository),
+        )
+
+    try:
+        for overrides in (
+            {"expected_hash": "f" * 64},
+            {"commit": "f" * 40},
+            {"authority": "ROLE24_RECEIPT_IS_NOT_PUBLICATION_AUTHORITY"},
+            {"candidate_path": verify_receipt, "receipt_path": candidate},
+        ):
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish(**overrides)
+            assert not destination.exists()
+
+        original_verify_payload = S.strict_json_loads(verify_raw.decode("utf-8"))
+        for field, forged_value in (
+            ("input_map_sha256", "f" * 64),
+            ("candidate_sha256", "e" * 64),
+            ("size_bytes", len(candidate_raw) + 1),
+            ("promotion_authorized", 0),
+        ):
+            verify_receipt.unlink()
+            forged_verify = copy.deepcopy(original_verify_payload)
+            forged_verify[field] = forged_value
+            S._v2_write_private_candidate(
+                verify_receipt,
+                S.canonical_json_bytes(forged_verify),
+                maximum_bytes=S.V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES,
+                context="forged synthetic role-24 receipt",
+            )
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish()
+            assert not destination.exists()
+        verify_receipt.unlink()
+        S._v2_write_private_candidate(
+            verify_receipt,
+            verify_raw,
+            maximum_bytes=S.V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES,
+            context="restored synthetic role-24 receipt",
+        )
+
+        for path, wrong_mode in ((candidate, 0o644), (verify_receipt, 0o644)):
+            path.chmod(wrong_mode)
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish()
+            path.chmod(0o600)
+        for path in (candidate, verify_receipt):
+            sibling = path.parent / "unexpected-sibling"
+            sibling.write_bytes(b"foreign\n")
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish()
+            sibling.unlink()
+        for path in (candidate, verify_receipt):
+            alias = Path("/tmp/role5-hardlink-" + os.urandom(8).hex())
+            os.link(path, alias)
+            try:
+                with pytest.raises((S.SchedulerContractError, OSError)):
+                    publish()
+            finally:
+                alias.unlink()
+        for path, raw, cap in (
+            (candidate, candidate_raw, S.V2_ROLE5_CANDIDATE_MAX_BYTES),
+            (verify_receipt, verify_raw, S.V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES),
+        ):
+            path.unlink()
+            path.write_bytes(b"X" * (cap + 1))
+            path.chmod(0o600)
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish()
+            path.unlink()
+            S._v2_write_private_candidate(
+                path,
+                raw,
+                maximum_bytes=cap,
+                context="restored capped role-5 external input",
+            )
+        for path, raw, cap in (
+            (candidate, candidate_raw, S.V2_ROLE5_CANDIDATE_MAX_BYTES),
+            (verify_receipt, verify_raw, S.V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES),
+        ):
+            path.unlink()
+            os.mkfifo(path, 0o600)
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish()
+            path.unlink()
+            S._v2_write_private_candidate(
+                path,
+                raw,
+                maximum_bytes=cap,
+                context="restored FIFO-tested role-5 external input",
+            )
+
+        receipt = publish()
+        assert list(receipt) == [
+            "schema_version", "protocol_id", "artifact_role",
+            "artifact_status", "authority", "candidate_path",
+            "canonical_path", "design_review_sha256", "reviewed_commit",
+            "size_bytes", "mode", "nlink", "serializer",
+            "publication_method", "verify_receipt_sha256",
+            "input_map_sha256",
+            "independent_verification_receipt_validated",
+            "scientific_licensing_enabled", "production_authorized",
+            "scientific_dispatch_performed", "component_status",
+            "milestone_status", "theorem_status", "final_status",
+        ]
+        assert receipt["design_review_sha256"] == expected
+        assert receipt["reviewed_commit"] == reviewed_commit
+        assert receipt["verify_receipt_sha256"] == hashlib.sha256(
+            verify_raw
+        ).hexdigest()
+        assert receipt["input_map_sha256"] == hashlib.sha256(
+            S.canonical_json_bytes(
+                S.strict_json_loads(candidate_raw.decode("utf-8"))[
+                    "reviewed_v2_inputs"
+                ]
+            )
+        ).hexdigest()
+        assert receipt["independent_verification_receipt_validated"] is True
+        assert receipt["scientific_licensing_enabled"] is False
+        assert receipt["production_authorized"] is False
+        assert receipt["scientific_dispatch_performed"] is False
+        assert tuple(receipt[key] for key in (
+            "component_status", "milestone_status", "theorem_status",
+            "final_status",
+        )) == (None, None, None, None)
+        assert destination.read_bytes() == candidate_raw
+        destination_info = destination.stat()
+        assert stat.S_IMODE(destination_info.st_mode) == 0o644
+        assert destination_info.st_nlink == 1
+        assert candidate.read_bytes() == candidate_raw
+        assert verify_receipt.read_bytes() == verify_raw
+        assert stat.S_IMODE(candidate.stat().st_mode) == 0o600
+        assert stat.S_IMODE(verify_receipt.stat().st_mode) == 0o600
+        assert not tuple(destination.parent.glob(
+            ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-*"
+        ))
+        with pytest.raises(
+            (S.ProductionAuthorityError, S.PathContractError),
+        ):
+            publish()
+        assert destination.read_bytes() == candidate_raw
+
+        destination.unlink()
+        for kind in ("regular", "symlink", "fifo", "directory", "hardlink"):
+            anchor: Path | None = None
+            if kind == "regular":
+                destination.write_bytes(b"foreign regular\n")
+                destination.chmod(0o644)
+            elif kind == "symlink":
+                destination.symlink_to("/tmp/role5-foreign-target")
+            elif kind == "fifo":
+                os.mkfifo(destination, 0o600)
+            elif kind == "directory":
+                destination.mkdir()
+            else:
+                anchor = destination.parent / "role5-hardlink-anchor"
+                anchor.write_bytes(b"foreign hardlink\n")
+                os.link(anchor, destination)
+            before = destination.lstat()
+            with pytest.raises((S.SchedulerContractError, OSError)):
+                publish()
+            after = destination.lstat()
+            assert (after.st_dev, after.st_ino, stat.S_IFMT(after.st_mode)) == (
+                before.st_dev, before.st_ino, stat.S_IFMT(before.st_mode)
+            )
+            if kind == "directory":
+                destination.rmdir()
+            else:
+                destination.unlink()
+            if anchor is not None:
+                anchor.unlink()
+    finally:
+        if destination.is_dir() and not destination.is_symlink():
+            destination.rmdir()
+        elif destination.exists() or destination.is_symlink():
+            destination.unlink()
+        _cleanup_role5_external(candidate, verify_receipt)
 
 
 def test_main_builder_exact26_and_order_rejection(monkeypatch) -> None:
@@ -360,7 +1021,9 @@ def test_directory_chain_detects_lexical_ancestor_replacement() -> None:
         moved.rmdir()
 
 
-def test_private_candidate_rejects_same_bytes_under_replaced_parent() -> None:
+def test_private_candidate_rejects_same_bytes_under_replaced_parent(
+    tmp_path: Path, monkeypatch,
+) -> None:
     parent = Path("/tmp/a416-v2-candidate-chain-" + os.urandom(8).hex())
     moved = Path(os.fspath(parent) + ".moved")
     parent.mkdir(mode=0o700)
@@ -386,6 +1049,7 @@ def test_private_candidate_rejects_same_bytes_under_replaced_parent() -> None:
         parent.rmdir()
         (moved / candidate.name).unlink()
         moved.rmdir()
+    _exercise_role5_cleanup_guard(tmp_path, monkeypatch)
 
 
 def test_role11_publisher_two_process_barrier_has_exactly_one_winner(
@@ -529,6 +1193,7 @@ def test_role11_publisher_two_process_barrier_has_exactly_one_winner(
             candidate.unlink()
         if candidate.parent.exists():
             candidate.parent.rmdir()
+    _exercise_role5_concurrent_exact_one(tmp_path, monkeypatch)
 
 
 def test_role11_publication_accepts_candidate_above_machine_one_mib_cap(
@@ -679,6 +1344,7 @@ def test_role11_publisher_posthook_inode_replacement_fails_without_rollback(
             candidate.unlink()
         if candidate.parent.exists():
             candidate.parent.rmdir()
+    _exercise_role5_postrename_no_rollback(tmp_path, monkeypatch)
 
 
 @pytest.mark.parametrize(
@@ -815,6 +1481,7 @@ def test_role11_publisher_rejects_untracked_inserted_by_last_input_replay(
             candidate.unlink()
         if candidate.parent.exists():
             candidate.parent.rmdir()
+    _exercise_role5_prehook_attacks(tmp_path, monkeypatch)
 
 
 def test_role11_publisher_cleanup_attempts_all_fds_and_chains_primary_error(
@@ -1080,6 +1747,86 @@ def test_repository_probe_uses_isolated_git_config_and_rejects_rewrites(
 
 
 def test_every_production_entry_remains_a_hard_stop(monkeypatch, capsys) -> None:
+    candidate = "/tmp/a416-v2-role5-review." + "1" * 32 + "/" + (
+        S.V2_ROLE5_CANDIDATE_BASENAME
+    )
+    verify_receipt = "/tmp/a416-v2-role5-verify." + "2" * 32 + "/" + (
+        S.V2_ROLE5_VERIFY_RECEIPT_BASENAME
+    )
+    expected = "3" * 64
+    commit = "4" * 40
+    raw_root = "/tmp/raw-role5-authority"
+    publication_receipt = {
+        "schema_version": 1,
+        "protocol_id": S.PROTOCOL_ID,
+        "artifact_role": "DESIGN_REVIEW_AND_WITHDRAWAL_PUBLICATION_RECEIPT",
+        "artifact_status": "PUBLISHED_WRITE_ONCE_NON_LICENSING",
+        "authority": S.V2_ROLE5_PUBLICATION_AUTHORITY,
+        "candidate_path": candidate,
+        "canonical_path": raw_root + "/research/role5.json",
+        "design_review_sha256": expected,
+        "reviewed_commit": commit,
+        "size_bytes": 1,
+        "mode": "0644",
+        "nlink": 1,
+        "serializer": "CJ_COMPACT_V1",
+        "publication_method": S.V2_ROLE5_PUBLICATION_METHOD,
+        "verify_receipt_sha256": "5" * 64,
+        "input_map_sha256": "6" * 64,
+        "independent_verification_receipt_validated": True,
+        "scientific_licensing_enabled": False,
+        "production_authorized": False,
+        "scientific_dispatch_performed": False,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    calls: list[tuple[str, ...]] = []
+
+    def fake_publish(*argv: str) -> dict:
+        calls.append(argv)
+        return publication_receipt
+
+    monkeypatch.setattr(S, "publish_v2_role5", fake_publish)
+    required = [
+        "--candidate", candidate,
+        "--role24-receipt", verify_receipt,
+        "--expected-sha256", expected,
+        "--expected-reviewed-commit", commit,
+        "--publication-authority", S.V2_ROLE5_PUBLICATION_AUTHORITY,
+        "--authority-root", raw_root,
+    ]
+    assert S.main(["--publish-role5", *required]) == 0
+    captured = capsys.readouterr()
+    assert captured.err == ""
+    assert captured.out.encode("utf-8") == S.canonical_json_bytes(
+        publication_receipt
+    )
+    assert calls == [(
+        candidate,
+        verify_receipt,
+        expected,
+        commit,
+        S.V2_ROLE5_PUBLICATION_AUTHORITY,
+        raw_root,
+    )]
+    for extra in (
+        ("--output", "/tmp/other"),
+        ("--mock-only",),
+        ("--publish-machine-freeze",),
+    ):
+        assert S.main(["--publish-role5", *required, *extra]) == 1
+        assert "exact-exclusive" in capsys.readouterr().err
+        assert len(calls) == 1
+    for missing_index in range(0, len(required), 2):
+        incomplete = required[:missing_index] + required[missing_index + 2:]
+        assert S.main(["--publish-role5", *incomplete]) == 1
+        assert "requires exactly" in capsys.readouterr().err
+        assert len(calls) == 1
+    assert S.main(["--role24-receipt", verify_receipt]) == 1
+    assert "require --publish-role5" in capsys.readouterr().err
+
     def forbidden(*_args, **_kwargs):
         raise AssertionError("scientific evaluator was dispatched")
 

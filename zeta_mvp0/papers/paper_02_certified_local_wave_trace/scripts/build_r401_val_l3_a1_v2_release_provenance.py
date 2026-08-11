@@ -180,6 +180,23 @@ ROLE5_CLAIM_BOUNDARY = (
     "V2 control implementation only; no machine, main freeze, result, theorem, "
     "release, initialization, promotion, or dispatch acceptance"
 )
+ROLE5_CANONICAL_RELATIVE = PurePosixPath(
+    "research/route_a_wave_trace/"
+    "R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json"
+)
+ROLE5_CANDIDATE_LEAF = ROLE5_CANONICAL_RELATIVE.name
+ROLE5_CANDIDATE_PARENT_PATTERN = re.compile(
+    r"a416-v2-role5-review\.[0-9a-f]{32}\Z"
+)
+ROLE5_CANDIDATE_MAX_BYTES = 1024 * 1024
+ROLE5_VERIFY_RECEIPT_ORDER = (
+    "verification_status", "authority", "candidate_sha256",
+    "input_map_sha256", "size_bytes", "promotion_authorized",
+    "artifacts_written",
+)
+ROLE5_VERIFY_RECEIPT_KEYS = set(ROLE5_VERIFY_RECEIPT_ORDER)
+ROLE5_VERIFY_STATUS = "PASS_V2_DESIGN_REVIEW_WITHDRAWAL_VERIFY_ONLY"
+ROLE5_VERIFY_AUTHORITY = "NON_AUTHORITATIVE_VERIFY_ONLY"
 PREFREEZE_TEST_CLAIM_BOUNDARY = (
     "pre-freeze engineering test evidence only; no held-out or all-slab L3 result "
     "was read and no scientific evaluator was dispatched; no L3-A1 component, "
@@ -355,6 +372,19 @@ class MainCheckerReceiptSnapshot:
     parent_identity: tuple[int, int, int, int]
     namespace: tuple[tuple[str, int, int, int], ...]
     payload: Mapping[str, Any]
+
+
+@dataclass(frozen=True)
+class Role5CandidateSnapshot:
+    """Pinned external-review candidate and its singleton /tmp namespace."""
+
+    path: Path
+    raw: bytes
+    parent_fd: int
+    candidate_fd: int
+    parent_identity: tuple[int, int, int, int, int]
+    candidate_fingerprint: tuple[int, ...]
+    parent_namespace: tuple[tuple[str, int, int, int], ...]
 
 
 _ACTIVE_SNAPSHOTS: dict[Path, Snapshot] | None = None
@@ -1906,6 +1936,357 @@ def _validate_role5(
     _git_verify_commit_bindings(
         project_root, terminal_commit, legacy_live_bindings
     )
+
+
+def _role5_verify_fault_hook(_boundary: str) -> None:
+    """No-op production boundary used only for adversarial replay tests."""
+
+    return None
+
+
+def _role5_candidate_path(path: Path | str) -> Path:
+    candidate = lexical_absolute(path)
+    if (
+        candidate.parent.parent != Path("/tmp")
+        or len(candidate.parts) != 4
+        or candidate.name != ROLE5_CANDIDATE_LEAF
+        or ROLE5_CANDIDATE_PARENT_PATTERN.fullmatch(candidate.parent.name) is None
+    ):
+        raise PathContractError(
+            "role5 candidate must be exact "
+            "/tmp/a416-v2-role5-review.<32lowerhex>/"
+            f"{ROLE5_CANDIDATE_LEAF}"
+        )
+    return candidate
+
+
+def _role5_parent_identity(info: os.stat_result) -> tuple[int, int, int, int, int]:
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_nlink, info.st_uid)
+
+
+def _role5_open_candidate(path: Path | str) -> Role5CandidateSnapshot:
+    """Pin the reviewer-owned singleton without modifying its namespace."""
+
+    candidate = _role5_candidate_path(path)
+    parent_namespace = _namespace_signature(candidate.parent)
+    parent_fd = _open_directory(candidate.parent)
+    candidate_fd: int | None = None
+    try:
+        parent_info = os.fstat(parent_fd)
+        parent_identity = _role5_parent_identity(parent_info)
+        if (
+            not stat.S_ISDIR(parent_info.st_mode)
+            or parent_info.st_uid != os.geteuid()
+            or stat.S_IMODE(parent_info.st_mode) != 0o700
+            or parent_info.st_nlink != 2
+            or tuple(sorted(os.listdir(parent_fd))) != (ROLE5_CANDIDATE_LEAF,)
+        ):
+            raise PathContractError(
+                "role5 candidate parent must be euid-owned 0700 nlink2 singleton"
+            )
+        candidate_fd = os.open(
+            ROLE5_CANDIDATE_LEAF,
+            os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+            | getattr(os, "O_NONBLOCK", 0),
+            dir_fd=parent_fd,
+        )
+        opened = os.fstat(candidate_fd)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or stat.S_IMODE(opened.st_mode) != 0o600
+            or opened.st_nlink != 1
+            or opened.st_size < 1
+            or opened.st_size > ROLE5_CANDIDATE_MAX_BYTES
+        ):
+            raise PathContractError(
+                "role5 candidate must be regular 0600 nlink1 and 1..1048576 bytes"
+            )
+        raw, after = _read_fd_all(
+            candidate_fd, ROLE5_CANDIDATE_MAX_BYTES, "role5 candidate"
+        )
+        lexical_info = os.stat(
+            ROLE5_CANDIDATE_LEAF, dir_fd=parent_fd, follow_symlinks=False
+        )
+        if (
+            _fingerprint(after) != _fingerprint(opened)
+            or _fingerprint(lexical_info) != _fingerprint(opened)
+            or _role5_parent_identity(os.fstat(parent_fd)) != parent_identity
+            or _namespace_signature(candidate.parent) != parent_namespace
+            or tuple(sorted(os.listdir(parent_fd))) != (ROLE5_CANDIDATE_LEAF,)
+        ):
+            raise PathContractError("role5 candidate changed during pinned read")
+        return Role5CandidateSnapshot(
+            path=candidate,
+            raw=raw,
+            parent_fd=parent_fd,
+            candidate_fd=candidate_fd,
+            parent_identity=parent_identity,
+            candidate_fingerprint=_fingerprint(opened),
+            parent_namespace=parent_namespace,
+        )
+    except BaseException:
+        if candidate_fd is not None:
+            os.close(candidate_fd)
+        os.close(parent_fd)
+        raise
+
+
+def _role5_close_candidate(snapshot: Role5CandidateSnapshot) -> None:
+    candidate_error: BaseException | None = None
+    try:
+        os.close(snapshot.candidate_fd)
+    except BaseException as error:
+        candidate_error = error
+    try:
+        os.close(snapshot.parent_fd)
+    except BaseException as error:
+        if candidate_error is not None:
+            raise error from candidate_error
+        raise
+    if candidate_error is not None:
+        raise candidate_error
+
+
+def _role5_replay_candidate(snapshot: Role5CandidateSnapshot) -> None:
+    """Reopen both pinned and lexical routes and require one byte generation."""
+
+    if (
+        _role5_parent_identity(os.fstat(snapshot.parent_fd))
+        != snapshot.parent_identity
+        or tuple(sorted(os.listdir(snapshot.parent_fd)))
+        != (ROLE5_CANDIDATE_LEAF,)
+        or _namespace_signature(snapshot.path.parent) != snapshot.parent_namespace
+    ):
+        raise PathContractError("role5 candidate parent/namespace changed")
+    pinned_raw, pinned_info = _read_fd_all(
+        snapshot.candidate_fd,
+        ROLE5_CANDIDATE_MAX_BYTES,
+        "pinned role5 candidate replay",
+    )
+    replay_fd = os.open(
+        ROLE5_CANDIDATE_LEAF,
+        os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+        | getattr(os, "O_NONBLOCK", 0),
+        dir_fd=snapshot.parent_fd,
+    )
+    try:
+        lexical_raw, lexical_info = _read_fd_all(
+            replay_fd,
+            ROLE5_CANDIDATE_MAX_BYTES,
+            "lexical role5 candidate replay",
+        )
+    finally:
+        os.close(replay_fd)
+    lexical_parent_fd = _open_directory(snapshot.path.parent)
+    try:
+        lexical_parent_identity = _role5_parent_identity(
+            os.fstat(lexical_parent_fd)
+        )
+    finally:
+        os.close(lexical_parent_fd)
+    if (
+        pinned_raw != snapshot.raw
+        or lexical_raw != snapshot.raw
+        or _fingerprint(pinned_info) != snapshot.candidate_fingerprint
+        or _fingerprint(lexical_info) != snapshot.candidate_fingerprint
+        or lexical_parent_identity != snapshot.parent_identity
+        or stat.S_IMODE(lexical_info.st_mode) != 0o600
+        or lexical_info.st_nlink != 1
+        or tuple(sorted(os.listdir(snapshot.parent_fd)))
+        != (ROLE5_CANDIDATE_LEAF,)
+    ):
+        raise PathContractError("role5 candidate byte/inode generation changed")
+
+
+def _capture_role5_reviewed_inputs(
+    project_root: Path,
+) -> tuple[tuple[dict[str, str], ...], tuple[dict[str, Any], ...]]:
+    table = dict(INPUT_ROLES)
+    if (
+        len(ROLE5_KEYS) != 15
+        or len(ROLE5_REVIEWED_ROLES) != 19
+        or len(set(ROLE5_REVIEWED_ROLES)) != 19
+        or table.get("implementation_design_review")
+        != ROLE5_CANONICAL_RELATIVE.as_posix()
+    ):
+        raise ReleaseError("role5 exact15/reviewed19 map contract drift")
+    records: list[dict[str, str]] = []
+    bindings: list[dict[str, Any]] = []
+    for role in ROLE5_REVIEWED_ROLES:
+        try:
+            relative = table[role]
+        except KeyError as error:
+            raise ReleaseError(f"role5 reviewed role is absent: {role}") from error
+        raw, info = read_snapshot(project_file(project_root, relative))
+        mode = stat.S_IMODE(info.st_mode)
+        if mode not in (0o644, 0o755):
+            raise PathContractError(
+                f"role5 reviewed input has unsupported live mode: {role}"
+            )
+        record = {
+            "role": role,
+            "path": relative,
+            "sha256": sha256_bytes(raw),
+        }
+        records.append(record)
+        bindings.append({
+            "path": relative,
+            "sha256": record["sha256"],
+            "size_bytes": len(raw),
+            "mode": f"{mode:04o}",
+        })
+    if (
+        len({row["path"] for row in records}) != 19
+        or len({row["sha256"] for row in records}) < 1
+    ):
+        raise ReleaseError("role5 reviewed input paths are not exact/unique")
+    return tuple(records), tuple(bindings)
+
+
+def _role5_fetch_head_main(project_root: Path) -> str:
+    _repository_root, git_dir, _prefix = _git_roots(project_root)
+    raw, _ = read_snapshot(git_dir / "FETCH_HEAD", maximum_bytes=1024 * 1024)
+    match = re.fullmatch(
+        rb"([0-9a-f]{40})\t\tbranch 'main' of [^\t\r\n]+\n", raw
+    )
+    if match is None:
+        raise ReleaseError("Git FETCH_HEAD is not one exact live main observation")
+    return match.group(1).decode("ascii")
+
+
+def _validate_role5_repository_state(
+    project_root: Path,
+    reviewed_commit: str,
+    bindings: Sequence[Mapping[str, Any]],
+) -> None:
+    if type(reviewed_commit) is not str or re.fullmatch(
+        r"[0-9a-f]{40}", reviewed_commit
+    ) is None:
+        raise ReleaseError("role5 reviewed commit is not lowercase 40-hex")
+    tree_oid = _git_commit_tree(project_root, reviewed_commit)
+    repository = {
+        "capture_commit_oid": reviewed_commit,
+        "origin_main_oid": reviewed_commit,
+        "capture_tree_oid": tree_oid,
+    }
+    _validate_current_git_snapshot(project_root, repository, bindings)
+    if _role5_fetch_head_main(project_root) != reviewed_commit:
+        raise ReleaseError("role5 reviewed commit differs from live remote main")
+
+
+def _validate_role5_prepublication_absence(project_root: Path) -> None:
+    table = dict(INPUT_ROLES)
+    relative_paths = (
+        ROLE5_CANONICAL_RELATIVE.as_posix(),
+        table["machine_freeze"],
+        table["prefreeze_tests"],
+        table["prefreeze_review"],
+        table["s0_compatibility"],
+        MAIN_FREEZE_RELATIVE.as_posix(),
+        RESULT_RELATIVE.as_posix(),
+        f"{RESULT_RELATIVE}{OPERATIONAL_SUFFIX}",
+    )
+    if len(set(relative_paths)) != len(relative_paths):
+        raise ReleaseError("role5 prepublication absence map is not unique")
+    for index, relative in enumerate(relative_paths):
+        _assert_absent_namespace(
+            project_file(project_root, relative),
+            f"role5 prepublication path {index}",
+        )
+
+
+def validate_role5_verify_receipt(
+    receipt: Any,
+    candidate_raw: bytes,
+    input_roles: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Validate the exact-seven non-authoritative role-24 receipt."""
+
+    value = exact_keys(receipt, ROLE5_VERIFY_RECEIPT_KEYS, "role5 verify receipt")
+    if (
+        tuple(value) != ROLE5_VERIFY_RECEIPT_ORDER
+        or len(input_roles) != 19
+        or tuple(row.get("role") for row in input_roles)
+        != ROLE5_REVIEWED_ROLES
+    ):
+        raise ReleaseError("role5 verify receipt/order contract mismatch")
+    for index, row in enumerate(input_roles):
+        exact_keys(row, {"role", "path", "sha256"}, f"role5 input row {index}")
+    candidate_sha256 = sha256_bytes(candidate_raw)
+    input_map_sha256 = sha256_bytes(canonical_json_bytes(list(input_roles)))
+    if (
+        value["verification_status"] != ROLE5_VERIFY_STATUS
+        or value["authority"] != ROLE5_VERIFY_AUTHORITY
+        or value["candidate_sha256"] != candidate_sha256
+        or value["input_map_sha256"] != input_map_sha256
+        or value["promotion_authorized"] is not False
+        or value["artifacts_written"] is not False
+    ):
+        raise ReleaseError("role5 verify receipt binding/authority mismatch")
+    require_sha256(value["candidate_sha256"], "role5 receipt candidate hash")
+    require_sha256(value["input_map_sha256"], "role5 receipt input-map hash")
+    exact_int(
+        value["size_bytes"], "role5 receipt candidate size",
+        expected=len(candidate_raw), minimum=1,
+    )
+    return dict(value)
+
+
+def verify_v2_role5_candidate(
+    project_root: Path | str,
+    candidate_path: Path | str,
+) -> dict[str, Any]:
+    """Verify one external-review role-5 candidate without a child or write."""
+
+    root = lexical_absolute(project_root)
+    candidate = _role5_open_candidate(candidate_path)
+    try:
+        payload = strict_json_loads(candidate.raw, canonical="compact")
+        if type(payload) is not dict:
+            raise StrictJSONError("role5 candidate root must be an object")
+        with capture_input_generation():
+            records, bindings = _capture_role5_reviewed_inputs(root)
+            _validate_role5(root, payload, records)
+            reviewed_commit = payload["review"]["reviewed_commit"]
+            _validate_role5_repository_state(root, reviewed_commit, bindings)
+            _validate_role5_prepublication_absence(root)
+            _role5_replay_candidate(candidate)
+
+            _role5_verify_fault_hook("BEFORE_TERMINAL_REPLAY")
+
+            terminal_records, terminal_bindings = (
+                _capture_role5_reviewed_inputs(root)
+            )
+            if (
+                terminal_records != records
+                or terminal_bindings != bindings
+            ):
+                raise ReleaseError("role5 reviewed generation changed")
+            _validate_role5(root, payload, terminal_records)
+            _validate_role5_repository_state(
+                root, reviewed_commit, terminal_bindings
+            )
+            _validate_role5_prepublication_absence(root)
+            _role5_replay_candidate(candidate)
+            _terminal_replay_generation()
+            _role5_replay_candidate(candidate)
+
+            receipt = {
+                "verification_status": ROLE5_VERIFY_STATUS,
+                "authority": ROLE5_VERIFY_AUTHORITY,
+                "candidate_sha256": sha256_bytes(candidate.raw),
+                "input_map_sha256": sha256_bytes(
+                    canonical_json_bytes(list(records))
+                ),
+                "size_bytes": len(candidate.raw),
+                "promotion_authorized": False,
+                "artifacts_written": False,
+            }
+            return validate_role5_verify_receipt(
+                receipt, candidate.raw, records
+            )
+    finally:
+        _role5_close_candidate(candidate)
 
 
 PREFREEZE_TEST_KEYS = {
@@ -8076,6 +8457,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     modes.add_argument("--verify-only", action="store_true")
     # Keep raw strings until ``lexical_absolute`` has rejected every spelling
     # alias.  ``argparse`` coercion to Path would erase `//`, `.` and `..`.
+    modes.add_argument("--verify-role5-candidate", metavar="ABSOLUTE_JSON_PATH")
     modes.add_argument("--build-main-freeze-candidate", metavar="ABSOLUTE_JSON_PATH")
     modes.add_argument("--verify-main-freeze", metavar="ABSOLUTE_JSON_PATH")
     modes.add_argument("--publish-main-freeze", metavar="ABSOLUTE_JSON_PATH")
@@ -8130,6 +8512,12 @@ def main(argv: list[str] | None = None) -> int:
         elif any(value is not None for value in receipt_arguments):
             raise ReleaseError("checker receipt paths are allowed only for role54 publication")
         root = lexical_absolute(ROOT)
+        if arguments.verify_role5_candidate is not None:
+            receipt = verify_v2_role5_candidate(
+                root, arguments.verify_role5_candidate
+            )
+            print(canonical_json_bytes(receipt).decode("utf-8"), end="")
+            return 0
         if arguments.build_main_freeze_candidate is not None:
             payload = build_main_freeze_candidate(root, lexical_absolute(arguments.build_main_freeze_candidate))
             print(f"main_freeze_candidate_sha256={sha256_bytes(canonical_json_bytes(payload))} roles=53")

@@ -112,6 +112,142 @@ replacement, and delete-then-readd histories are hard rejection.  All Git
 proofs use bounded pure object/index readers with no Git subprocess or
 fallback; a coherent-looking 40-hex OID alone is never evidence.
 
+<!-- BEGIN A416_L3_A1_CONTROL_V2_ROLE5_LIFECYCLE -->
+## Normative implemented V2 role-5 lifecycle
+
+The role-5 lifecycle tooling is implemented and covered by non-scientific
+tests.  The repository contains no role-5 builder: one fresh independent
+reviewer outside these tools must author the complete candidate.  Neither
+role 19 nor role 24 may synthesize, fill, repair, or infer the verdict,
+finding counts, independence gate, reviewed commit, or any of the 19
+reviewed-input rows.
+
+```text
+implementation_status = "ROLE5_LIFECYCLE_TOOLING_IMPLEMENTED_AND_NONSCIENTIFICALLY_TESTED"
+candidate.origin = "EXTERNAL_INDEPENDENT_REVIEWER_ONLY"
+candidate.repository_builder_present = false
+candidate.path = "/tmp/a416-v2-role5-review.<32lowerhex>/R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json"
+candidate.parent.basename_regex = "^a416-v2-role5-review\\.[0-9a-f]{32}$"
+candidate.parent.parent = "/tmp"
+candidate.parent.owner = "EFFECTIVE_UID"
+candidate.parent.mode = "0700"
+candidate.parent.nlink = 2
+candidate.parent.namespace = ["R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json"]
+candidate.file.type = "REGULAR"
+candidate.file.mode = "0600"
+candidate.file.nlink = 1
+candidate.file.size_bytes.range = [1,1048576]
+candidate.serializer = "CJ_COMPACT_V1"
+candidate.payload.top_level_key_count = 15
+candidate.payload.contract = "A416_L3_A1_CONTROL_V2_ROLE5_LITERALS"
+
+role24.api = "verify_v2_role5_candidate(project_root,candidate_path)"
+role24.cli = ["--verify-role5-candidate","<ABSOLUTE_CANDIDATE_PATH>"]
+role24.child_processes_started = 0
+role24.artifacts_written = false
+role24.verify_receipt.key_count = 7
+role24.verify_receipt.key_order = ["verification_status","authority","candidate_sha256","input_map_sha256","size_bytes","promotion_authorized","artifacts_written"]
+role24.verify_receipt.verification_status = "PASS_V2_DESIGN_REVIEW_WITHDRAWAL_VERIFY_ONLY"
+role24.verify_receipt.authority = "NON_AUTHORITATIVE_VERIFY_ONLY"
+role24.verify_receipt.candidate_sha256 = <SHA256_OF_EXACT_CANDIDATE_BYTES>
+role24.verify_receipt.input_map_sha256 = <SHA256_OF_CJ_COMPACT_V1_ORDERED_19_REVIEWED_ROWS>
+role24.verify_receipt.size_bytes = <EXACT_CANDIDATE_SIZE>
+role24.verify_receipt.promotion_authorized = false
+role24.verify_receipt.artifacts_written = false
+role24.input_map_sha256.domain = "SHA256(CJ_COMPACT_V1(exact ordered reviewed_v2_inputs array of 19 objects with keys role,path,sha256), including its one terminal LF)"
+role24.stdout = "CJ_COMPACT_V1(EXACT7_VERIFY_RECEIPT)_WITH_ONE_TERMINAL_LF"
+
+verify_receipt.external_capture_path = "/tmp/a416-v2-role5-verify.<32lowerhex>/ROLE24_ROLE5_VERIFY_RECEIPT.json"
+verify_receipt.parent.basename_regex = "^a416-v2-role5-verify\\.[0-9a-f]{32}$"
+verify_receipt.parent.parent = "/tmp"
+verify_receipt.parent.owner = "EFFECTIVE_UID"
+verify_receipt.parent.mode = "0700"
+verify_receipt.parent.nlink = 2
+verify_receipt.parent.namespace = ["ROLE24_ROLE5_VERIFY_RECEIPT.json"]
+verify_receipt.file.type = "REGULAR"
+verify_receipt.file.mode = "0600"
+verify_receipt.file.nlink = 1
+verify_receipt.file.size_bytes.range = [1,4096]
+verify_receipt.serializer = "CJ_COMPACT_V1"
+
+role19.api = "publish_v2_role5(candidate_value,role24_receipt_value,expected_sha256,expected_reviewed_commit,publication_authority,authority_root_value)"
+role19.cli.required_only = ["--publish-role5","--candidate","<ABSOLUTE_CANDIDATE_PATH>","--role24-receipt","<ABSOLUTE_ROLE24_RECEIPT_PATH>","--expected-sha256","<LOWERCASE_SHA256>","--expected-reviewed-commit","<LOWERCASE_GIT_COMMIT_40_HEX>","--publication-authority","ROLE19_DESIGN_REVIEW_PUBLICATION_ONLY","--authority-root","<ROLE10_FILESYSTEM_PROJECT_ROOT>"]
+publication.intent.key_order = ["reviewed_commit","candidate_sha256","canonical_path","publication_authority"]
+publication.intent.reviewed_commit = <EXPLICIT_EXPECTED_REVIEWED_COMMIT>
+publication.intent.candidate_sha256 = <EXPLICIT_EXPECTED_CANDIDATE_SHA256>
+publication.intent.canonical_path = "research/route_a_wave_trace/R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json"
+publication.intent.publication_authority = "ROLE19_DESIGN_REVIEW_PUBLICATION_ONLY"
+publication.intent.source = "FRESH_EXPLICIT_USER_AUTHORIZATION"
+publication.reviewed_commit_bindings = ["candidate.review.reviewed_commit","explicit_expected_reviewed_commit","refs/heads/main","refs/remotes/origin/main","live_remote_main"]
+publication.reviewed_tree = "EXACT_CLEAN_INDEX_AND_ORDERED_19_COMMITTED_AND_LIVE_BYTE_MODE_BINDINGS"
+publication.pre_stage_worktree = "EXACTLY_CLEAN"
+publication.pre_rename_worktree = "EXACTLY_ONE_OWNED_UNTRACKED_STAGE"
+publication.post_rename_worktree = "EXACTLY_ONE_CANONICAL_ROLE5_UNTRACKED_LEAF"
+
+publication_receipt.key_count = 24
+publication_receipt.key_order = ["schema_version","protocol_id","artifact_role","artifact_status","authority","candidate_path","canonical_path","design_review_sha256","reviewed_commit","size_bytes","mode","nlink","serializer","publication_method","verify_receipt_sha256","input_map_sha256","independent_verification_receipt_validated","scientific_licensing_enabled","production_authorized","scientific_dispatch_performed","component_status","milestone_status","theorem_status","final_status"]
+publication_receipt.schema_version = 1
+publication_receipt.protocol_id = "R401-VAL-L3-A1"
+publication_receipt.artifact_role = "DESIGN_REVIEW_AND_WITHDRAWAL_PUBLICATION_RECEIPT"
+publication_receipt.artifact_status = "PUBLISHED_WRITE_ONCE_NON_LICENSING"
+publication_receipt.authority = "ROLE19_DESIGN_REVIEW_PUBLICATION_ONLY"
+publication_receipt.candidate_path = <EXACT_ABSOLUTE_CANDIDATE_PATH>
+publication_receipt.canonical_path = "<ROLE10_FILESYSTEM_PROJECT_ROOT>/research/route_a_wave_trace/R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json"
+publication_receipt.design_review_sha256 = <EXPLICIT_EXPECTED_CANDIDATE_SHA256>
+publication_receipt.reviewed_commit = <EXPLICIT_EXPECTED_REVIEWED_COMMIT>
+publication_receipt.size_bytes = <EXACT_CANDIDATE_SIZE>
+publication_receipt.mode = "0644"
+publication_receipt.nlink = 1
+publication_receipt.serializer = "CJ_COMPACT_V1"
+publication_receipt.publication_method = "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1"
+publication_receipt.verify_receipt_sha256 = <SHA256_OF_EXACT_ROLE24_RECEIPT_BYTES_INCLUDING_ONE_TERMINAL_LF>
+publication_receipt.input_map_sha256 = <SHA256_OF_CJ_COMPACT_V1_ORDERED_19_REVIEWED_ROWS>
+publication_receipt.independent_verification_receipt_validated = true
+publication_receipt.scientific_licensing_enabled = false
+publication_receipt.production_authorized = false
+publication_receipt.scientific_dispatch_performed = false
+publication_receipt.component_status = null
+publication_receipt.milestone_status = null
+publication_receipt.theorem_status = null
+publication_receipt.final_status = null
+
+publication.phase_count = 9
+publication.phase_order = ["AFTER_STAGE_WRITE","AFTER_STAGE_FILE_FSYNC","AFTER_STAGING_PARENT_FSYNC","BEFORE_TERMINAL_REPLAY","BEFORE_RENAME","AFTER_RENAME","AFTER_DESTINATION_FSYNC","AFTER_PUBLICATION_PARENT_FSYNC","AFTER_ULTIMATE_REPLAY"]
+publication.method = "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1"
+publication.stage.basename_regex = "^\\.R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL\\.json\\.publish-[0-9a-f]{32}$"
+publication.stage.final_mode = "0644"
+publication.stage.nlink = 1
+publication.before_rename_hook_followed_by_full_replay = true
+publication.full_replay_inputs = ["candidate_bytes_inode_parent_namespace","role24_receipt_bytes_inode_parent_namespace","exact15_role5_semantics","ordered19_live_and_reviewed_tree_bindings","legacy_four_publication_histories","clean_head_origin_live_remote_and_index","canonical_absence","authority_root_and_publication_parent_chains","owned_stage_bytes_inode_and_namespace"]
+publication.rename_flags = "RENAME_NOREPLACE"
+publication.file_fsync_before_rename = true
+publication.parent_fsync_before_rename = true
+publication.destination_fsync_after_rename = true
+publication.parent_fsync_after_rename = true
+publication.existing_destination_is_success = false
+publication.portable_fallback_present = false
+publication.pre_rename_cleanup = "OWNED_STAGE_ONLY"
+publication.post_rename_rollback = false
+publication.post_rename_unlink = false
+publication.post_rename_overwrite = false
+```
+
+A role-24 `PASS` receipt proves only that the mechanical schema, live bytes,
+Git history, and closed authority boundary were replayed for the exact
+candidate.  It is not the independent review decision, is not publication
+authorization, and cannot be promoted into either.  Likewise, possession of
+the role-19 authority literal is not authorization.  Canonical publication
+still requires a fresh explicit user authorization binding the exact
+four-tuple `(reviewed_commit, candidate_sha256, fixed canonical path,
+publication authority)`.
+
+The publication receipt is transient transport evidence only.  Candidate
+verification and role-5 publication authorize no role 10, 11, 12, 13, or 54,
+no result-root initialization, evaluator dispatch, checker or postcheck
+publication, release, scientific licensing, production, component,
+milestone, theorem, final, promotion, or implication-toward-RH claim.
+<!-- END A416_L3_A1_CONTROL_V2_ROLE5_LIFECYCLE -->
+
 ## Normative V2 role-11 ownership and schema
 
 Role 11 stays inside the existing 53-role map and reuses the final attempt-1
@@ -142,18 +278,18 @@ theorem_status = null
 final_status = null
 evidence_tool_bindings.key_order = ["producer","independent_checker","focused_test"]
 evidence_tool_bindings.producer.path = "scripts/run_r401_val_l3_a1_v2_all_slabs.py"
-evidence_tool_bindings.producer.sha256 = "4b136fd171d64c259238679d59867a01e8ef2c97eef1af0ca9888f547c36604a"
-evidence_tool_bindings.producer.size_bytes = 745150
+evidence_tool_bindings.producer.sha256 = "3fbad3d7c67dafb32e27daa2c666c60ececc9494e3cff9fe5c1a951effc1757b"
+evidence_tool_bindings.producer.size_bytes = 774502
 evidence_tool_bindings.producer.mode = "0644"
 evidence_tool_bindings.producer.nlink = 1
 evidence_tool_bindings.independent_checker.path = "scripts/build_r401_val_l3_a1_v2_release_provenance.py"
-evidence_tool_bindings.independent_checker.sha256 = "0a5012789b4551c1cfaa958898922c98e2f19d6a95124c11ac2f003f5a86aa42"
-evidence_tool_bindings.independent_checker.size_bytes = 369809
+evidence_tool_bindings.independent_checker.sha256 = "9fd662d2035434263e13dc71500e7157164fa771d9b94cf2c33c9352724b2bb1"
+evidence_tool_bindings.independent_checker.size_bytes = 384529
 evidence_tool_bindings.independent_checker.mode = "0644"
 evidence_tool_bindings.independent_checker.nlink = 1
 evidence_tool_bindings.focused_test.path = "tests/test_r401_val_l3_a1_v2_adversarial_e2e.py"
-evidence_tool_bindings.focused_test.sha256 = "5f9ebd3addbd2c5fb477c6284ff6d76141016c3c42303cc51bbff0e6805fd1b3"
-evidence_tool_bindings.focused_test.size_bytes = 41231
+evidence_tool_bindings.focused_test.sha256 = "01e34e6699965335f20794a3d4fe50386f2ad5a37852c09ea4c891e5bdde1c70"
+evidence_tool_bindings.focused_test.size_bytes = 70561
 evidence_tool_bindings.focused_test.mode = "0644"
 evidence_tool_bindings.focused_test.nlink = 1
 evidence_tool_binding.keys = ["path","sha256","size_bytes","mode","nlink"]
@@ -815,17 +951,19 @@ self-excluded release object is
 
 ## Role-5 review boundary
 
-The prospective role-5 path is
+The fixed canonical role-5 path is
 `research/route_a_wave_trace/R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json`.
 Its exact 15-key top-level schema, legacy four-object manifest, ordered two P1
 codes, 19 reviewed-source bindings, and zero-finding acceptance gates are
 normatively defined by
-`R401_VAL_L3_A1_V2_PREFREEZE_DESIGN.md`.  This increment neither creates
-nor accepts that object.  The V2 design author must not self-authorize role 5.
+`R401_VAL_L3_A1_V2_PREFREEZE_DESIGN.md`.  This increment creates neither an
+external-review candidate nor the canonical object.  Its implemented tools
+only verify and transport reviewer-authored bytes under the exact lifecycle
+contract above.  The V2 design author must not self-authorize role 5.
 
-## Intended implementation increments
+## Implemented control-plane increments
 
-The control repair requires:
+The completed non-scientific control repair includes:
 
 - V2 role 19 with strict machine capture/publication, formal 53-input
   handshake, temporary main-freeze construction, exact initialization, and
@@ -838,14 +976,20 @@ The control repair requires:
 - V2 tests 26--33 covering exact schemas, every missing role, map ordering,
   old/V2 substitution, TOCTOU, namespace safety, formal checker/postcheck
   paths, and write-once refusal; and
+- the externally authored role-5 candidate gate, role-24 exact-seven
+  verify-only receipt, and role-19 exact-four-tuple write-once transport; and
 - new capture/verification evidence at V2 roles 10, 11, and 13, followed by
   an independent role-12 decision and only then a possible role-54 candidate.
 
 ## Current stop line
 
-Only documentation, source implementation, synthetic fixtures, and
-non-scientific tests are in scope.  Machine capture, role-5 creation,
-canonical V2 publication, role-54 construction/publication, canonical result
-initialization, roles 15/17 execution, held-out or all-slab computation,
-checker/postcheck publication, release publication, and scientific dispatch
-remain forbidden until their separate review and authorization edges.
+The role-5 verify-only and write-once lifecycle tooling is implemented and
+non-scientifically tested, but no repository tool may author its candidate.
+Role-5 canonical creation/publication remains forbidden pending a fresh
+independent review and fresh explicit user authorization of the exact
+`(reviewed_commit, candidate_sha256, fixed canonical path, publication
+authority)` tuple.  Machine capture, every later canonical V2 publication,
+role-54 construction/publication, result initialization, roles 15/17
+execution, held-out or all-slab computation, checker/postcheck publication,
+release publication, and scientific dispatch remain forbidden until their
+separate review and authorization edges.

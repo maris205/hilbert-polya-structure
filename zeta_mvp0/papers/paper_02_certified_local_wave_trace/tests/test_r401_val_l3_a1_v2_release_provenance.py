@@ -2638,7 +2638,8 @@ def test_four_legacy_publications_are_reachable_introductions_from_terminal() ->
 
 
 def test_role5_exact15_19_reviewed_live_blob_mode_and_legacy_introductions(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
 ) -> None:
     project = (tmp_path / "role5-project").resolve()
     objects = project / ".git/objects"
@@ -2715,10 +2716,56 @@ def test_role5_exact15_19_reviewed_live_blob_mode_and_legacy_introductions(
     parent = commit(empty, [], "empty parent")
     reviewed_tree = store_tree(root_node)
     reviewed_commit = commit(reviewed_tree, [parent], "reviewed and introduced")
+
+    def write_index() -> bytes:
+        entries: list[bytes] = []
+        for relative, (raw, mode) in sorted(
+            files.items(), key=lambda item: item[0].encode("utf-8")
+        ):
+            encoded = relative.encode("utf-8")
+            oid = store("blob", raw)
+            fixed = struct.pack(
+                ">LLLLLLLLLL20sH",
+                0, 0, 0, 0, 0, 0,
+                0o100755 if mode & 0o111 else 0o100644,
+                0, 0, len(raw), bytes.fromhex(oid), min(len(encoded), 0x0FFF),
+            )
+            entry = fixed + encoded + b"\x00"
+            entry += b"\x00" * (-len(entry) % 8)
+            entries.append(entry)
+        body = b"DIRC" + struct.pack(">II", 2, len(entries)) + b"".join(entries)
+        image = body + hashlib.sha1(body, usedforsecurity=False).digest()
+        write_raw(project / ".git/index", image)
+        return image
+
+    index_image = write_index()
+    write_raw(project / ".git/HEAD", b"ref: refs/heads/main\n")
+    write_raw(
+        project / ".git/refs/heads/main", f"{reviewed_commit}\n".encode()
+    )
+    write_raw(
+        project / ".git/refs/remotes/origin/main",
+        f"{reviewed_commit}\n".encode(),
+    )
+    fetch_head = (
+        f"{reviewed_commit}\t\tbranch 'main' of synthetic.invalid\n".encode()
+    )
+    write_raw(project / ".git/FETCH_HEAD", fetch_head)
     for artifact in synthetic_legacy:
         artifact["publication_commit"] = reviewed_commit
     monkeypatch.setattr(R, "ROLE5_LEGACY_ARTIFACTS", tuple(synthetic_legacy))
     monkeypatch.setattr(R, "ROLE5_LEGACY_TERMINAL_COMMIT", reviewed_commit)
+    reviewed_paths = {
+        row["role"]: row["path"] for row in records
+    }
+    monkeypatch.setattr(
+        R,
+        "INPUT_ROLES",
+        tuple(
+            (role, reviewed_paths.get(role, relative))
+            for role, relative in R.INPUT_ROLES
+        ),
+    )
     payload = {
         "schema_version": 1,
         "protocol_id": R.PROTOCOL_ID,
@@ -2762,6 +2809,248 @@ def test_role5_exact15_19_reviewed_live_blob_mode_and_legacy_introductions(
     extra = {**payload, "generation": "V2"}
     with pytest.raises(R.ReleaseError, match="key set"):
         R._validate_role5(project, extra, records)
+
+    # The private verifier uses only the final reviewed tree.  Canonical role
+    # 5 and every later V2 edge remain absent at this prepublication boundary.
+    (project / "research/route_a_wave_trace").mkdir(parents=True)
+    (project / "results").mkdir()
+    candidate_parent = Path("/tmp") / (
+        "a416-v2-role5-review." + os.urandom(16).hex()
+    )
+    candidate_parent.mkdir(mode=0o700)
+    candidate = candidate_parent / R.ROLE5_CANDIDATE_LEAF
+    candidate_raw = write_raw(
+        candidate, R.canonical_json_bytes(payload), mode=0o600
+    )
+    try:
+        receipt = R.verify_v2_role5_candidate(project, candidate)
+        assert tuple(receipt) == R.ROLE5_VERIFY_RECEIPT_ORDER
+        assert receipt == {
+            "verification_status": R.ROLE5_VERIFY_STATUS,
+            "authority": R.ROLE5_VERIFY_AUTHORITY,
+            "candidate_sha256": digest(candidate_raw),
+            "input_map_sha256": digest(R.canonical_json_bytes(records)),
+            "size_bytes": len(candidate_raw),
+            "promotion_authorized": False,
+            "artifacts_written": False,
+        }
+        assert R.validate_role5_verify_receipt(
+            receipt, candidate_raw, records
+        ) == receipt
+        for key, value in (
+            ("candidate_sha256", "0" * 64),
+            ("input_map_sha256", "1" * 64),
+            ("size_bytes", len(candidate_raw) + 1),
+            ("promotion_authorized", 0),
+            ("artifacts_written", 0),
+        ):
+            forged = {**receipt, key: value}
+            with pytest.raises((R.ReleaseError, R.StrictJSONError)):
+                R.validate_role5_verify_receipt(
+                    forged, candidate_raw, records
+                )
+
+        # CLI is an exact-XOR mode, fixes the authority root to role24 ROOT,
+        # and emits only the exact CJ_COMPACT_V1 receipt plus its sole LF.
+        calls: list[tuple[Path | str, Path | str]] = []
+        with monkeypatch.context() as cli_patch:
+            cli_patch.setattr(
+                R,
+                "verify_v2_role5_candidate",
+                lambda root, path: calls.append((root, path)) or receipt,
+            )
+            assert R.main(["--verify-role5-candidate", str(candidate)]) == 0
+            output = capsys.readouterr()
+            assert output.out.encode() == R.canonical_json_bytes(receipt)
+            assert output.err == ""
+            assert calls == [(R.ROOT, str(candidate))]
+            with pytest.raises(SystemExit):
+                R.parse_args([
+                    "--verify-role5-candidate", str(candidate),
+                    "--verify-only",
+                ])
+            capsys.readouterr()
+            assert R.main([
+                "--verify-role5-candidate", str(candidate),
+                "--expected-candidate-sha256", digest(candidate_raw),
+            ]) == 1
+            output = capsys.readouterr()
+            assert output.out == "" and "forbidden" in output.err
+    finally:
+        shutil.rmtree(candidate_parent)
+
+    @contextmanager
+    def role5_candidate(
+        raw: bytes = candidate_raw,
+        *,
+        mode: int = 0o600,
+        parent_stem: str = "a416-v2-role5-review.",
+        leaf: str = R.ROLE5_CANDIDATE_LEAF,
+        fifo: bool = False,
+    ) -> Iterator[Path]:
+        parent_path = Path("/tmp") / (parent_stem + os.urandom(16).hex())
+        parent_path.mkdir(mode=0o700)
+        path = parent_path / leaf
+        if fifo:
+            os.mkfifo(path, mode)
+        else:
+            write_raw(path, raw, mode=mode)
+        try:
+            yield path
+        finally:
+            shutil.rmtree(parent_path)
+
+    # The verifier itself cannot obtain a writable descriptor or call a
+    # write primitive.  This guards the implementation, not merely the final
+    # absence of a canonical artifact.
+    with role5_candidate() as guarded_candidate:
+        original_open = R.os.open
+
+        def read_only_open(path, flags, *args, **kwargs):
+            forbidden = (
+                os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC
+                | getattr(os, "O_APPEND", 0)
+            )
+            assert flags & forbidden == 0
+            return original_open(path, flags, *args, **kwargs)
+
+        with monkeypatch.context() as no_write:
+            no_write.setattr(R.os, "open", read_only_open)
+            no_write.setattr(
+                R.os,
+                "write",
+                lambda *_args, **_kwargs: (_ for _ in ()).throw(
+                    AssertionError("role5 verifier attempted a write")
+                ),
+            )
+            guarded_receipt = R.verify_v2_role5_candidate(
+                project, guarded_candidate
+            )
+        assert guarded_receipt["artifacts_written"] is False
+
+    # Lexical path, parent, inode kind/mode/link/cap, and singleton namespace
+    # attacks all fail before any semantic PASS can be emitted.
+    with role5_candidate() as path_candidate:
+        with pytest.raises(R.PathContractError, match="lexical absolute"):
+            R.verify_v2_role5_candidate(
+                project, str(path_candidate).replace("/tmp/", "//tmp/", 1)
+            )
+    with role5_candidate(
+        parent_stem="a416-v2-role5-review-WRONG."
+    ) as bad_parent:
+        with pytest.raises(R.PathContractError, match="exact /tmp"):
+            R.verify_v2_role5_candidate(project, bad_parent)
+    with role5_candidate(leaf="alias.json") as bad_leaf:
+        with pytest.raises(R.PathContractError, match="exact /tmp"):
+            R.verify_v2_role5_candidate(project, bad_leaf)
+    with role5_candidate(mode=0o644) as public_candidate:
+        with pytest.raises(R.PathContractError, match="regular 0600"):
+            R.verify_v2_role5_candidate(project, public_candidate)
+    with role5_candidate(fifo=True) as fifo_candidate:
+        with pytest.raises(R.PathContractError, match="regular 0600"):
+            R.verify_v2_role5_candidate(project, fifo_candidate)
+    with role5_candidate(b"x" * (R.ROLE5_CANDIDATE_MAX_BYTES + 1)) as oversized:
+        with pytest.raises(R.PathContractError, match=r"1\.\.1048576"):
+            R.verify_v2_role5_candidate(project, oversized)
+    with role5_candidate() as linked_candidate:
+        outside_link = Path("/tmp") / (
+            "a416-v2-role5-hardlink." + os.urandom(8).hex()
+        )
+        os.link(linked_candidate, outside_link)
+        try:
+            with pytest.raises(R.PathContractError, match="regular 0600"):
+                R.verify_v2_role5_candidate(project, linked_candidate)
+        finally:
+            outside_link.unlink()
+    with role5_candidate() as sibling_candidate:
+        write_raw(sibling_candidate.parent / "foreign", b"foreign\n")
+        with pytest.raises(R.PathContractError, match="singleton"):
+            R.verify_v2_role5_candidate(project, sibling_candidate)
+
+    # A same-byte inode replacement after semantic validation is still a new
+    # generation and is caught by the pinned descriptor/lexical replay.
+    with role5_candidate() as swap_candidate:
+        def swap_candidate_inode(boundary: str) -> None:
+            assert boundary == "BEFORE_TERMINAL_REPLAY"
+            replacement = swap_candidate.parent / "replacement"
+            write_raw(replacement, candidate_raw, mode=0o600)
+            os.replace(replacement, swap_candidate)
+
+        with monkeypatch.context() as swap_patch:
+            swap_patch.setattr(R, "_role5_verify_fault_hook", swap_candidate_inode)
+            with pytest.raises(R.PathContractError, match="generation changed"):
+                R.verify_v2_role5_candidate(project, swap_candidate)
+
+    noncanonical = R.pretty_json_bytes(payload)
+    with role5_candidate(noncanonical) as pretty_candidate:
+        with pytest.raises(R.StrictJSONError, match="not compact canonical"):
+            R.verify_v2_role5_candidate(project, pretty_candidate)
+    stale_payload = copy.deepcopy(payload)
+    stale_payload["reviewed_v2_inputs"][0]["sha256"] = "f" * 64
+    with role5_candidate(R.canonical_json_bytes(stale_payload)) as stale_candidate:
+        with pytest.raises(R.ReleaseError, match="reviewed live byte map"):
+            R.verify_v2_role5_candidate(project, stale_candidate)
+    wrong_commit_payload = copy.deepcopy(payload)
+    wrong_commit_payload["review"]["reviewed_commit"] = parent
+    with role5_candidate(
+        R.canonical_json_bytes(wrong_commit_payload)
+    ) as wrong_commit_candidate:
+        with pytest.raises(R.ReleaseError):
+            R.verify_v2_role5_candidate(project, wrong_commit_candidate)
+
+    # Live reviewed bytes, immutable legacy bytes, local refs, fetched remote
+    # evidence, and the clean index tree are each independently terminal.
+    reviewed_live = project / records[0]["path"]
+    reviewed_original = reviewed_live.read_bytes()
+    write_raw(reviewed_live, reviewed_original + b"drift", mode=0o755)
+    try:
+        with role5_candidate() as source_drift_candidate:
+            with pytest.raises(R.ReleaseError):
+                R.verify_v2_role5_candidate(project, source_drift_candidate)
+    finally:
+        write_raw(reviewed_live, reviewed_original, mode=0o755)
+
+    legacy_live = project / synthetic_legacy[0]["path"]
+    legacy_original = legacy_live.read_bytes()
+    write_raw(legacy_live, legacy_original + b"drift")
+    try:
+        with role5_candidate() as legacy_drift_candidate:
+            with pytest.raises(R.ReleaseError, match="legacy"):
+                R.verify_v2_role5_candidate(project, legacy_drift_candidate)
+    finally:
+        write_raw(legacy_live, legacy_original)
+
+    ref_attacks = (
+        (project / ".git/refs/heads/main", f"{parent}\n".encode()),
+        (project / ".git/refs/remotes/origin/main", f"{parent}\n".encode()),
+        (
+            project / ".git/FETCH_HEAD",
+            f"{parent}\t\tbranch 'main' of synthetic.invalid\n".encode(),
+        ),
+    )
+    for attacked_path, forged_raw in ref_attacks:
+        original = attacked_path.read_bytes()
+        write_raw(attacked_path, forged_raw)
+        try:
+            with role5_candidate() as ref_drift_candidate:
+                with pytest.raises(R.ReleaseError):
+                    R.verify_v2_role5_candidate(project, ref_drift_candidate)
+        finally:
+            write_raw(attacked_path, original)
+
+    corrupt_index = bytearray(index_image)
+    corrupt_index[-1] ^= 1
+    write_raw(project / ".git/index", bytes(corrupt_index))
+    try:
+        with role5_candidate() as index_drift_candidate:
+            with pytest.raises(R.ReleaseError, match="index"):
+                R.verify_v2_role5_candidate(project, index_drift_candidate)
+    finally:
+        write_raw(project / ".git/index", index_image)
+
+    assert (project / ".git/index").read_bytes() == index_image
+    assert (project / ".git/FETCH_HEAD").read_bytes() == fetch_head
+    assert not (project / R.ROLE5_CANONICAL_RELATIVE).exists()
 
 
 def test_full_live_machine_validator_and_coherent_mutations(

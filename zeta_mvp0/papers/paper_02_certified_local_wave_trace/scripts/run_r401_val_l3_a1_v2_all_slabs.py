@@ -106,6 +106,33 @@ FORMAL_COMPONENT_AGGREGATES_PUBLICATION_AUTHORITY = (
 FORMAL_COMPOSITE_PUBLICATION_AUTHORITY = (
     "ROLE19_COMPOSITE_PRODUCER_PUBLICATION_ONLY"
 )
+V2_ROLE5_PUBLICATION_AUTHORITY = "ROLE19_DESIGN_REVIEW_PUBLICATION_ONLY"
+V2_ROLE5_VERIFY_AUTHORITY = "NON_AUTHORITATIVE_VERIFY_ONLY"
+V2_ROLE5_VERIFY_STATUS = (
+    "PASS_V2_DESIGN_REVIEW_WITHDRAWAL_VERIFY_ONLY"
+)
+V2_ROLE5_PUBLICATION_METHOD = "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1"
+V2_ROLE5_CANDIDATE_MAX_BYTES = 1024 * 1024
+V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES = 4096
+V2_ROLE5_CANDIDATE_BASENAME = (
+    "R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json"
+)
+V2_ROLE5_VERIFY_RECEIPT_BASENAME = "ROLE24_ROLE5_VERIFY_RECEIPT.json"
+V2_ROLE5_CANDIDATE_PARENT_PATTERN = re.compile(
+    r"^a416-v2-role5-review\.[0-9a-f]{32}$"
+)
+V2_ROLE5_VERIFY_PARENT_PATTERN = re.compile(
+    r"^a416-v2-role5-verify\.[0-9a-f]{32}$"
+)
+V2_ROLE5_STAGE_PATTERN = re.compile(
+    r"^\.R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL\.json\.publish-"
+    r"[0-9a-f]{32}$"
+)
+V2_ROLE5_VERIFY_RECEIPT_KEYS = {
+    "verification_status", "authority", "candidate_sha256",
+    "input_map_sha256", "size_bytes", "promotion_authorized",
+    "artifacts_written",
+}
 MACHINE_PUBLICATION_MAX_CANDIDATE_BYTES = 1024 * 1024
 FORMAL_PRODUCER_CANDIDATE_MAX_BYTES = 4 * 1024 * 1024
 FORMAL_PRODUCER_PUBLICATION_METHOD = (
@@ -125,6 +152,9 @@ MACHINE_PUBLICATION_HOOK_PHASES = frozenset(
         "AFTER_DESTINATION_FSYNC",
         "AFTER_PUBLICATION_PARENT_FSYNC",
     }
+)
+V2_ROLE5_PUBLICATION_HOOK_PHASES = frozenset(
+    (*MACHINE_PUBLICATION_HOOK_PHASES, "AFTER_ULTIMATE_REPLAY")
 )
 
 PROTOCOL_ID = "R401-VAL-L3-A1"
@@ -11749,6 +11779,636 @@ def _v2_write_private_candidate(
     return image
 
 
+def _v2_role5_external_path(value: str, *, candidate: bool) -> Path:
+    """Accept only the two review-controlled, direct-/tmp namespaces."""
+
+    context = (
+        "role-5 design-review candidate"
+        if candidate
+        else "role-24 role-5 verification receipt"
+    )
+    path = safe_absolute_path(value, context)
+    expected_leaf = (
+        V2_ROLE5_CANDIDATE_BASENAME
+        if candidate
+        else V2_ROLE5_VERIFY_RECEIPT_BASENAME
+    )
+    parent_pattern = (
+        V2_ROLE5_CANDIDATE_PARENT_PATTERN
+        if candidate
+        else V2_ROLE5_VERIFY_PARENT_PATTERN
+    )
+    if (
+        path.parent.parent != Path("/tmp")
+        or path.name != expected_leaf
+        or parent_pattern.fullmatch(path.parent.name) is None
+    ):
+        raise PathContractError(f"{context} path shape mismatch")
+    return _v2_private_candidate_path(os.fspath(path), context)
+
+
+def _v2_role5_publication_fault_hook(phase: str) -> None:
+    """No-op production hook with one closed nine-phase test vocabulary."""
+
+    if phase not in V2_ROLE5_PUBLICATION_HOOK_PHASES:
+        raise AssertionError(f"unknown role-5 publication hook phase: {phase}")
+
+
+def _v2_role5_stage_basename() -> str:
+    name = (
+        ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-"
+        + os.urandom(16).hex()
+    )
+    if V2_ROLE5_STAGE_PATTERN.fullmatch(name) is None:
+        raise AssertionError("role-5 publication staging name is malformed")
+    return name
+
+
+def _v2_role5_live_records(root: Path) -> tuple[FormalRoleRecord, ...]:
+    """Capture the exact ordered 19 reviewed source images, independently."""
+
+    records: list[FormalRoleRecord] = []
+    role_paths = dict(FORMAL_INPUT_ROLES)
+    for role in V2_ROLE5_REVIEWED_ROLES:
+        record, raw = formal_role_binding(root, role, role_paths[role])
+        if raw != record.raw or sha256_bytes(raw) != record.sha256:
+            raise ProductionAuthorityError(
+                f"role-5 reviewed source capture mismatch: {role}"
+            )
+        records.append(record)
+    if tuple(record.role for record in records) != V2_ROLE5_REVIEWED_ROLES:
+        raise ProductionAuthorityError("role-5 reviewed source order mismatch")
+    return tuple(records)
+
+
+def _v2_role5_validate_verify_receipt(
+    receipt: Any,
+    *,
+    candidate_sha256: str,
+    input_map_sha256: str,
+    size_bytes: int,
+) -> dict[str, Any]:
+    exact_keys(
+        receipt,
+        V2_ROLE5_VERIFY_RECEIPT_KEYS,
+        "role-24 role-5 verification receipt",
+    )
+    expected = {
+        "verification_status": V2_ROLE5_VERIFY_STATUS,
+        "authority": V2_ROLE5_VERIFY_AUTHORITY,
+        "candidate_sha256": candidate_sha256,
+        "input_map_sha256": input_map_sha256,
+        "size_bytes": size_bytes,
+        "promotion_authorized": False,
+        "artifacts_written": False,
+    }
+    if not exact_json_equal(receipt, expected):
+        raise ProductionAuthorityError(
+            "role-24 role-5 verification receipt facts mismatch"
+        )
+    return dict(receipt)
+
+
+def _v2_role5_parse_compact_json(raw: bytes, context: str) -> Any:
+    try:
+        payload = strict_json_loads(raw.decode("utf-8", errors="strict"))
+    except UnicodeError as error:
+        raise StrictJSONError(f"{context} is not UTF-8") from error
+    if raw != canonical_json_bytes(payload):
+        raise StrictJSONError(f"{context} is not CJ_COMPACT_V1")
+    return payload
+
+
+def _v2_role5_repository_status_replay(
+    root: Path,
+    *,
+    reviewed_commit: str,
+    reviewed_tree: str,
+    reviewed_rows: Sequence[Mapping[str, Any]],
+    sole_untracked_path: Path | None,
+    sole_untracked_identity: tuple[int, int] | None,
+    context: str,
+) -> None:
+    """Replay symbolic main, both local refs, live remote, index, and status."""
+
+    if (
+        _v2_git_ref(root, "refs/heads/main") != reviewed_commit
+        or _v2_git_ref(root, "refs/remotes/origin/main") != reviewed_commit
+        or _v2_role11_live_remote_probe(root) != reviewed_commit
+    ):
+        raise ProductionAuthorityError(
+            f"{context}: HEAD/origin/live-remote commit mismatch"
+        )
+    _v2_git_validate_current_repository(
+        root,
+        capture_commit=reviewed_commit,
+        capture_tree=reviewed_tree,
+        origin_main=reviewed_commit,
+        required_bindings=reviewed_rows,
+    )
+    if _v2_git_origin_url(root) != V2_ROLE11_ORIGIN_URL:
+        raise ProductionAuthorityError(f"{context}: origin URL mismatch")
+    if sole_untracked_path is None:
+        expected_status = b""
+    else:
+        repository_root, _git_dir, _prefix = _v2_git_roots(root)
+        try:
+            relative = sole_untracked_path.relative_to(repository_root).as_posix()
+        except ValueError as error:
+            raise PathContractError(
+                f"{context}: publication leaf escapes repository"
+            ) from error
+        expected_status = f"?? {relative}\n".encode("utf-8")
+    if _v2_role11_status_probe(root) != expected_status:
+        raise ProductionAuthorityError(
+            f"{context}: worktree is not the exact expected publication state"
+        )
+    if sole_untracked_path is not None:
+        if sole_untracked_identity is None:
+            raise AssertionError("role-5 publication status identity is absent")
+        parent_fd = _open_directory_fd(sole_untracked_path.parent)
+        try:
+            entry = os.stat(
+                sole_untracked_path.name,
+                dir_fd=parent_fd,
+                follow_symlinks=False,
+            )
+            if (
+                not stat.S_ISREG(entry.st_mode)
+                or stat.S_IMODE(entry.st_mode) != 0o644
+                or entry.st_nlink != 1
+                or (entry.st_dev, entry.st_ino) != sole_untracked_identity
+            ):
+                raise PathContractError(
+                    f"{context}: publication inode/status mismatch"
+                )
+        finally:
+            os.close(parent_fd)
+
+
+def publish_v2_role5(
+    candidate_value: str,
+    role24_receipt_value: str,
+    expected_sha256: str,
+    expected_reviewed_commit: str,
+    publication_authority: str,
+    authority_root_value: str,
+) -> dict[str, Any]:
+    """Pure write-once transport for an externally reviewed role-5 object.
+
+    This entry point cannot construct, capture, or synthesize either input.  It
+    independently reopens the exact review candidate, role-24 verify-only
+    receipt, reviewed live sources, legacy evidence, and clean/live Git state.
+    The verify-only receipt is evidence, never publication authority.
+    """
+
+    if (
+        type(expected_sha256) is not str
+        or HEX_SHA256.fullmatch(expected_sha256) is None
+    ):
+        raise PathContractError("role-5 expected SHA-256 is malformed")
+    if (
+        type(expected_reviewed_commit) is not str
+        or re.fullmatch(r"[0-9a-f]{40}", expected_reviewed_commit) is None
+    ):
+        raise ProductionAuthorityError(
+            "role-5 expected reviewed commit is malformed"
+        )
+    if publication_authority != V2_ROLE5_PUBLICATION_AUTHORITY:
+        raise ProductionAuthorityError("role-5 publication authority mismatch")
+    root = safe_absolute_path(authority_root_value, "role-5 publication root")
+    live_root = safe_absolute_path(os.fspath(ROOT), "live Paper02 root")
+    if root != live_root:
+        raise PathContractError(
+            "role-5 publication root must equal the exact live Paper02 root"
+        )
+
+    candidate = _v2_role5_external_path(candidate_value, candidate=True)
+    role24_receipt = _v2_role5_external_path(
+        role24_receipt_value, candidate=False
+    )
+    try:
+        candidate_image = _v2_snapshot_private_candidate(
+            candidate,
+            maximum_bytes=V2_ROLE5_CANDIDATE_MAX_BYTES,
+            context="role-5 design-review candidate",
+        )
+        verify_image = _v2_snapshot_private_candidate(
+            role24_receipt,
+            maximum_bytes=V2_ROLE5_VERIFY_RECEIPT_MAX_BYTES,
+            context="role-24 role-5 verification receipt",
+        )
+    except OSError as error:
+        raise PathContractError(
+            f"role-5 external input open failed: {error}"
+        ) from error
+    candidate_raw = candidate_image.raw
+    verify_raw = verify_image.raw
+    if sha256_bytes(candidate_raw) != expected_sha256:
+        raise ProductionAuthorityError("role-5 candidate SHA-256 mismatch")
+    candidate_payload = _v2_role5_parse_compact_json(
+        candidate_raw, "role-5 design-review candidate"
+    )
+    validate_v2_role5_payload(candidate_payload)
+    if candidate_payload["review"]["reviewed_commit"] != expected_reviewed_commit:
+        raise ProductionAuthorityError(
+            "role-5 candidate reviewed commit differs from explicit intent"
+        )
+    reviewed_rows = candidate_payload["reviewed_v2_inputs"]
+    input_map_sha256 = sha256_bytes(canonical_json_bytes(reviewed_rows))
+    verify_payload = _v2_role5_parse_compact_json(
+        verify_raw, "role-24 role-5 verification receipt"
+    )
+    _v2_role5_validate_verify_receipt(
+        verify_payload,
+        candidate_sha256=expected_sha256,
+        input_map_sha256=input_map_sha256,
+        size_bytes=len(candidate_raw),
+    )
+
+    records = _v2_role5_live_records(root)
+    by_role = {record.role: record for record in records}
+    validate_v2_role5_repository_bindings(candidate_payload, root, by_role)
+    reviewed_tree = _v2_git_commit_tree(root, expected_reviewed_commit)
+    _v2_role5_repository_status_replay(
+        root,
+        reviewed_commit=expected_reviewed_commit,
+        reviewed_tree=reviewed_tree,
+        reviewed_rows=reviewed_rows,
+        sole_untracked_path=None,
+        sole_untracked_identity=None,
+        context="role-5 initial clean repository",
+    )
+
+    destination = authority_project_file(
+        root, dict(FORMAL_INPUT_ROLES)["implementation_design_review"]
+    )
+    publication_absence = _v2_absence_snapshot(
+        (destination,), "role-5 canonical publication absence"
+    )
+    root_chain = _machine_publication_directory_chain(root)
+    parent_chain = _machine_publication_directory_chain(destination.parent)
+    root_fd = _open_directory_fd(root)
+    try:
+        parent_fd = _open_directory_fd(destination.parent)
+    except BaseException:
+        os.close(root_fd)
+        raise
+
+    def replay_directories(context: str) -> None:
+        _replay_machine_publication_directory(
+            root, root_fd, root_chain, f"{context} authority root"
+        )
+        _replay_machine_publication_directory(
+            destination.parent,
+            parent_fd,
+            parent_chain,
+            f"{context} publication parent",
+        )
+
+    def replay_external_and_review(context: str) -> None:
+        _v2_replay_private_candidate(
+            candidate, candidate_image, context=f"{context} candidate"
+        )
+        _v2_replay_private_candidate(
+            role24_receipt,
+            verify_image,
+            context=f"{context} role-24 receipt",
+        )
+        current = _v2_role5_live_records(root)
+        if current != records:
+            raise ProductionAuthorityError(
+                f"{context}: reviewed source image changed"
+            )
+        current_by_role = {record.role: record for record in current}
+        validate_v2_role5_repository_bindings(
+            candidate_payload, root, current_by_role
+        )
+        if (
+            candidate_raw != canonical_json_bytes(candidate_payload)
+            or sha256_bytes(candidate_raw) != expected_sha256
+            or sha256_bytes(canonical_json_bytes(reviewed_rows))
+            != input_map_sha256
+        ):
+            raise ProductionAuthorityError(
+                f"{context}: candidate review envelope changed"
+            )
+        _v2_role5_validate_verify_receipt(
+            verify_payload,
+            candidate_sha256=expected_sha256,
+            input_map_sha256=input_map_sha256,
+            size_bytes=len(candidate_raw),
+        )
+
+    stage_fd: int | None = None
+    stage_name: str | None = None
+    stage_identity: tuple[int, int] | None = None
+    stage_full_identity: tuple[int, int, int, int, int, int, int] | None = None
+    locked = False
+    renamed = False
+    try:
+        try:
+            fcntl.flock(parent_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise PathContractError(
+                "role-5 publication parent transaction is already locked"
+            ) from error
+        locked = True
+        replay_directories("role-5 prestage")
+        replay_external_and_review("role-5 prestage")
+        _v2_role5_repository_status_replay(
+            root,
+            reviewed_commit=expected_reviewed_commit,
+            reviewed_tree=reviewed_tree,
+            reviewed_rows=reviewed_rows,
+            sole_untracked_path=None,
+            sole_untracked_identity=None,
+            context="role-5 prestage clean repository",
+        )
+        _v2_absence_replay(
+            publication_absence, "role-5 prestage canonical absence"
+        )
+        stage_prefix = (
+            ".R401_VAL_L3_A1_V2_DESIGN_REVIEW_AND_WITHDRAWAL.json.publish-"
+        )
+        if any(name.startswith(stage_prefix) for name in os.listdir(parent_fd)):
+            raise PathContractError("role-5 publication stage residue exists")
+        stage_name = _v2_role5_stage_basename()
+        stage_fd = os.open(
+            stage_name,
+            os.O_RDWR | os.O_CREAT | os.O_EXCL
+            | getattr(os, "O_NOFOLLOW", 0)
+            | getattr(os, "O_NONBLOCK", 0),
+            0o644,
+            dir_fd=parent_fd,
+        )
+        os.fchmod(stage_fd, 0o644)
+        opened = os.fstat(stage_fd)
+        stage_identity = (opened.st_dev, opened.st_ino)
+        if (
+            not stat.S_ISREG(opened.st_mode)
+            or stat.S_IMODE(opened.st_mode) != 0o644
+            or opened.st_nlink != 1
+            or opened.st_size != 0
+        ):
+            raise PathContractError("role-5 publication stage is not empty 0644")
+        _write_machine_publication_bytes(stage_fd, candidate_raw)
+        _v2_role5_publication_fault_hook("AFTER_STAGE_WRITE")
+        os.fsync(stage_fd)
+        _v2_role5_publication_fault_hook("AFTER_STAGE_FILE_FSYNC")
+        staged = os.fstat(stage_fd)
+        if (
+            (staged.st_dev, staged.st_ino) != stage_identity
+            or not stat.S_ISREG(staged.st_mode)
+            or stat.S_IMODE(staged.st_mode) != 0o644
+            or staged.st_nlink != 1
+            or staged.st_size != len(candidate_raw)
+        ):
+            raise PathContractError("role-5 staged inode mismatch")
+        stage_full_identity = _machine_publication_file_identity(staged)
+        os.fsync(parent_fd)
+        _v2_role5_publication_fault_hook("AFTER_STAGING_PARENT_FSYNC")
+
+        _v2_role5_publication_fault_hook("BEFORE_TERMINAL_REPLAY")
+        replay_directories("role-5 terminal prerename")
+        replay_external_and_review("role-5 terminal prerename")
+        assert stage_name is not None and stage_identity is not None
+        assert stage_full_identity is not None
+        stage_path = destination.parent / stage_name
+        _v2_role5_repository_status_replay(
+            root,
+            reviewed_commit=expected_reviewed_commit,
+            reviewed_tree=reviewed_tree,
+            reviewed_rows=reviewed_rows,
+            sole_untracked_path=stage_path,
+            sole_untracked_identity=stage_identity,
+            context="role-5 terminal prerename repository",
+        )
+        _v2_absence_replay(
+            publication_absence, "role-5 terminal prerename canonical absence"
+        )
+        staged_raw, staged_info = _read_machine_publication_file_at(
+            parent_fd,
+            stage_name,
+            "role-5 terminal staging file",
+            fsync_file=True,
+            expected_mode=0o644,
+            maximum_bytes=V2_ROLE5_CANDIDATE_MAX_BYTES,
+        )
+        if (
+            staged_raw != candidate_raw
+            or _machine_publication_file_identity(staged_info)
+            != stage_full_identity
+        ):
+            raise PathContractError("role-5 terminal staged replay mismatch")
+
+        _v2_role5_publication_fault_hook("BEFORE_RENAME")
+        # The hook is an adversarial boundary.  Reopen the complete authority
+        # envelope after it; no fact observed before the hook licenses rename.
+        replay_directories("role-5 posthook immediate prerename")
+        replay_external_and_review("role-5 posthook immediate prerename")
+        _v2_role5_repository_status_replay(
+            root,
+            reviewed_commit=expected_reviewed_commit,
+            reviewed_tree=reviewed_tree,
+            reviewed_rows=reviewed_rows,
+            sole_untracked_path=stage_path,
+            sole_untracked_identity=stage_identity,
+            context="role-5 posthook immediate prerename repository",
+        )
+        _v2_absence_replay(
+            publication_absence,
+            "role-5 posthook immediate canonical absence",
+        )
+        immediate_raw, immediate_info = _read_machine_publication_file_at(
+            parent_fd,
+            stage_name,
+            "role-5 posthook immediate staging file",
+            fsync_file=True,
+            expected_mode=0o644,
+            maximum_bytes=V2_ROLE5_CANDIDATE_MAX_BYTES,
+        )
+        if (
+            immediate_raw != candidate_raw
+            or _machine_publication_file_identity(immediate_info)
+            != stage_full_identity
+        ):
+            raise PathContractError(
+                "role-5 posthook immediate staged replay mismatch"
+            )
+        # Close the source-to-rename interval with one last byte-image capture.
+        if _v2_role5_live_records(root) != records:
+            raise ProductionAuthorityError(
+                "role-5 reviewed source changed immediately before rename"
+            )
+        _rename_machine_publication_noreplace(
+            parent_fd, stage_name, destination.name
+        )
+        renamed = True
+        _v2_role5_publication_fault_hook("AFTER_RENAME")
+
+        replay_directories("role-5 postrename")
+        try:
+            os.stat(stage_name, dir_fd=parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            pass
+        else:
+            raise PathContractError("role-5 rename left stage namespace present")
+        open_stage = os.fstat(stage_fd)
+        postrename_identity = _machine_publication_file_identity(open_stage)
+        stable_indexes = (0, 1, 2, 3, 5, 6)
+        if (
+            any(
+                postrename_identity[index] != stage_full_identity[index]
+                for index in stable_indexes
+            )
+            or postrename_identity[4] < stage_full_identity[4]
+        ):
+            raise PathContractError("role-5 open stage inode changed after rename")
+        canonical_raw, canonical_info = _read_machine_publication_file_at(
+            parent_fd,
+            destination.name,
+            "canonical role-5 design review",
+            fsync_file=True,
+            expected_mode=0o644,
+            maximum_bytes=V2_ROLE5_CANDIDATE_MAX_BYTES,
+        )
+        if (
+            canonical_raw != candidate_raw
+            or sha256_bytes(canonical_raw) != expected_sha256
+            or _machine_publication_file_identity(canonical_info)
+            != postrename_identity
+        ):
+            raise PathContractError("role-5 canonical postrename replay mismatch")
+        _v2_role5_publication_fault_hook("AFTER_DESTINATION_FSYNC")
+        os.fsync(parent_fd)
+        _v2_role5_publication_fault_hook("AFTER_PUBLICATION_PARENT_FSYNC")
+
+        replay_directories("role-5 ultimate replay")
+        replay_external_and_review("role-5 ultimate replay")
+        _v2_role5_repository_status_replay(
+            root,
+            reviewed_commit=expected_reviewed_commit,
+            reviewed_tree=reviewed_tree,
+            reviewed_rows=reviewed_rows,
+            sole_untracked_path=destination,
+            sole_untracked_identity=stage_identity,
+            context="role-5 ultimate repository",
+        )
+        ultimate_raw, ultimate_info = read_pinned_regular_file(destination)
+        if (
+            ultimate_raw != candidate_raw
+            or _machine_publication_file_identity(ultimate_info)
+            != postrename_identity
+        ):
+            raise PathContractError("role-5 ultimate canonical replay mismatch")
+        _v2_role5_publication_fault_hook("AFTER_ULTIMATE_REPLAY")
+
+        # No hook follows this final compact pass.  Reopen canonical, both
+        # external inputs, directory chains, and live Git before signing the
+        # transient transport receipt.
+        final_raw, final_info = _read_machine_publication_file_at(
+            parent_fd,
+            destination.name,
+            "role-5 posthook final canonical replay",
+            fsync_file=True,
+            expected_mode=0o644,
+            maximum_bytes=V2_ROLE5_CANDIDATE_MAX_BYTES,
+        )
+        if (
+            final_raw != candidate_raw
+            or sha256_bytes(final_raw) != expected_sha256
+            or _machine_publication_file_identity(final_info)
+            != postrename_identity
+        ):
+            raise PathContractError("role-5 posthook canonical replay mismatch")
+        replay_external_and_review("role-5 posthook final")
+        replay_directories("role-5 posthook final")
+        _v2_role5_repository_status_replay(
+            root,
+            reviewed_commit=expected_reviewed_commit,
+            reviewed_tree=reviewed_tree,
+            reviewed_rows=reviewed_rows,
+            sole_untracked_path=destination,
+            sole_untracked_identity=stage_identity,
+            context="role-5 posthook final repository",
+        )
+        verify_receipt_sha256 = sha256_bytes(verify_raw)
+        receipt = {
+            "schema_version": 1,
+            "protocol_id": PROTOCOL_ID,
+            "artifact_role": "DESIGN_REVIEW_AND_WITHDRAWAL_PUBLICATION_RECEIPT",
+            "artifact_status": "PUBLISHED_WRITE_ONCE_NON_LICENSING",
+            "authority": V2_ROLE5_PUBLICATION_AUTHORITY,
+            "candidate_path": os.fspath(candidate),
+            "canonical_path": os.fspath(destination),
+            "design_review_sha256": expected_sha256,
+            "reviewed_commit": expected_reviewed_commit,
+            "size_bytes": len(candidate_raw),
+            "mode": "0644",
+            "nlink": 1,
+            "serializer": "CJ_COMPACT_V1",
+            "publication_method": V2_ROLE5_PUBLICATION_METHOD,
+            "verify_receipt_sha256": verify_receipt_sha256,
+            "input_map_sha256": input_map_sha256,
+            "independent_verification_receipt_validated": True,
+            "scientific_licensing_enabled": False,
+            "production_authorized": False,
+            "scientific_dispatch_performed": False,
+            "component_status": None,
+            "milestone_status": None,
+            "theorem_status": None,
+            "final_status": None,
+        }
+        if len(receipt) != 24:
+            raise AssertionError("role-5 publication receipt key count mismatch")
+        canonical_json_bytes(receipt)
+        return receipt
+    finally:
+        primary_error = sys.exc_info()[1]
+        cleanup_error: BaseException | None = None
+        if (
+            not renamed
+            and stage_name is not None
+            and stage_identity is None
+            and stage_fd is not None
+        ):
+            try:
+                recovered = os.fstat(stage_fd)
+                if not stat.S_ISREG(recovered.st_mode) or recovered.st_nlink != 1:
+                    raise PathContractError(
+                        "role-5 opened stage cannot be recovered safely"
+                    )
+                stage_identity = (recovered.st_dev, recovered.st_ino)
+            except BaseException as error:
+                cleanup_error = error
+        if not renamed and stage_name is not None and stage_identity is not None:
+            try:
+                _cleanup_machine_publication_stage(
+                    parent_fd, stage_name, stage_identity
+                )
+            except BaseException as error:
+                if cleanup_error is None:
+                    cleanup_error = error
+        for cleanup in (
+            (lambda: os.close(stage_fd)) if stage_fd is not None else None,
+            (lambda: fcntl.flock(parent_fd, fcntl.LOCK_UN)) if locked else None,
+            lambda: os.close(parent_fd),
+            lambda: os.close(root_fd),
+        ):
+            if cleanup is None:
+                continue
+            try:
+                cleanup()
+            except BaseException as error:
+                if cleanup_error is None:
+                    cleanup_error = error
+        if cleanup_error is not None:
+            if primary_error is not None:
+                raise cleanup_error from primary_error
+            raise cleanup_error
+
+
 def _formal_private_pair_package_path(value: str, context: str) -> Path:
     package = safe_absolute_path(value, context)
     if (
@@ -17478,6 +18138,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--publish-machine-freeze", action="store_true")
     parser.add_argument("--capture-prefreeze-tests", action="store_true")
     parser.add_argument("--publish-prefreeze-tests", action="store_true")
+    parser.add_argument("--publish-role5", action="store_true")
     parser.add_argument("--build-main-freeze-candidate", action="store_true")
     parser.add_argument("--second-fresh-rebuild-only", action="store_true")
     parser.add_argument("--build-formal-run-config-candidate", action="store_true")
@@ -17489,7 +18150,9 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--build-formal-composite-candidates", action="store_true")
     parser.add_argument("--publish-formal-composite-candidates", action="store_true")
     parser.add_argument("--candidate")
+    parser.add_argument("--role24-receipt")
     parser.add_argument("--expected-sha256")
+    parser.add_argument("--expected-reviewed-commit")
     parser.add_argument("--expected-summary-sha256")
     parser.add_argument("--expected-manifest-sha256")
     parser.add_argument("--publication-authority")
@@ -17517,6 +18180,82 @@ def main(argv: Sequence[str] | None = None) -> int:
     mock_static_option_present = arguments.mock_static_cells is not None
     mock_branch_option_present = arguments.mock_branch_cells is not None
     try:
+        if arguments.publish_role5:
+            other_modes = (
+                arguments.initialize_only,
+                arguments.capture_machine_freeze,
+                arguments.publish_machine_freeze,
+                arguments.capture_prefreeze_tests,
+                arguments.publish_prefreeze_tests,
+                arguments.build_main_freeze_candidate,
+                arguments.second_fresh_rebuild_only,
+                arguments.build_formal_run_config_candidate,
+                arguments.publish_formal_run_config,
+                arguments.build_formal_component_aggregate_candidates,
+                arguments.publish_formal_component_aggregates,
+                arguments.build_formal_composite_candidates,
+                arguments.publish_formal_composite_candidates,
+                arguments.mock_only,
+                mock_static_option_present,
+                mock_branch_option_present,
+                arguments.finalize_mock_composite,
+                arguments.resume,
+                arguments.production,
+                arguments.execute_scientific_dispatch,
+            )
+            unrelated_values = (
+                arguments.output,
+                arguments.expected_summary_sha256,
+                arguments.expected_manifest_sha256,
+                arguments.component,
+                arguments.static_calibration,
+                arguments.branch_calibration,
+                arguments.capd_checkout,
+                arguments.compiler,
+                arguments.mock_branch_evaluator,
+            )
+            if any(other_modes) or any(
+                value is not None for value in unrelated_values
+            ):
+                raise SchedulerContractError(
+                    "role-5 publication is exact-exclusive from every other mode"
+                )
+            if any(
+                value is None
+                for value in (
+                    arguments.candidate,
+                    arguments.role24_receipt,
+                    arguments.expected_sha256,
+                    arguments.expected_reviewed_commit,
+                    arguments.publication_authority,
+                    arguments.authority_root,
+                )
+            ):
+                raise SchedulerContractError(
+                    "role-5 publication requires exactly --candidate, "
+                    "--role24-receipt, --expected-sha256, "
+                    "--expected-reviewed-commit, --publication-authority, "
+                    "and --authority-root"
+                )
+            receipt = publish_v2_role5(
+                arguments.candidate,
+                arguments.role24_receipt,
+                arguments.expected_sha256,
+                arguments.expected_reviewed_commit,
+                arguments.publication_authority,
+                arguments.authority_root,
+            )
+            print(canonical_json_bytes(receipt).decode("utf-8"), end="")
+            return 0
+
+        if (
+            arguments.role24_receipt is not None
+            or arguments.expected_reviewed_commit is not None
+        ):
+            raise SchedulerContractError(
+                "role-5 auxiliary options require --publish-role5"
+            )
+
         formal_source_modes = (
             arguments.build_formal_run_config_candidate,
             arguments.publish_formal_run_config,
