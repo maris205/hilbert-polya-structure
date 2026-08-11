@@ -6,8 +6,10 @@ from copy import deepcopy
 import hashlib
 import importlib.util
 import json
+import multiprocessing
 import os
 from pathlib import Path
+import stat
 import sys
 
 import pytest
@@ -46,13 +48,37 @@ def strict_load(path: Path) -> dict[str, object]:
     return ADAPTER.strict_json_bytes(path.read_bytes(), str(path))
 
 
+def path_preimage(path: Path) -> tuple[object, ...]:
+    try:
+        info = os.lstat(path)
+    except FileNotFoundError:
+        return ("ABSENT",)
+    raw_hash = digest(path) if stat.S_ISREG(info.st_mode) else None
+    return (
+        "PRESENT",
+        info.st_dev,
+        info.st_ino,
+        info.st_mode,
+        info.st_nlink,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+        raw_hash,
+    )
+
+
+@pytest.fixture(scope="module", autouse=True)
+def live_canonical_role13_is_never_touched():
+    before = path_preimage(CANONICAL_OUTPUT)
+    yield
+    assert path_preimage(CANONICAL_OUTPUT) == before
+
+
 @pytest.fixture(scope="module")
 def compatibility_payload() -> dict[str, object]:
-    assert not CANONICAL_OUTPUT.exists()
     before = control_digests()
     payload = ADAPTER.build_compatibility_object()
     assert control_digests() == before
-    assert not CANONICAL_OUTPUT.exists()
     return payload
 
 
@@ -144,7 +170,7 @@ def test_adapter_source_has_no_evaluator_or_checker_dispatch_path() -> None:
             "system", "popen", "spawnl", "spawnle", "spawnlp", "spawnlpe",
             "spawnv", "spawnve", "spawnvp", "spawnvpe", "execv", "execve",
             "execvp", "execvpe", "run", "Popen", "call", "check_call",
-            "check_output",
+            "check_output", "fork", "forkpty", "posix_spawn", "posix_spawnp",
         }
     }
     assert forbidden_calls == set()
@@ -157,11 +183,10 @@ def test_optional_output_is_temporary_exclusive_and_never_canonical(
     encoded = ADAPTER.canonical_json_bytes(compatibility_payload)
     ADAPTER._secure_exclusive_write(output, encoded)
     assert output.read_bytes() == encoded
+    assert stat.S_IMODE(output.stat().st_mode) == 0o600
+    assert output.stat().st_nlink == 1
     with pytest.raises(ADAPTER.CompatibilityError, match="exclusive temporary output"):
         ADAPTER._secure_exclusive_write(output, encoded)
-    with pytest.raises(ADAPTER.CompatibilityError, match="canonical compatibility"):
-        ADAPTER._secure_exclusive_write(CANONICAL_OUTPUT, encoded)
-    assert not CANONICAL_OUTPUT.exists()
 
 
 @pytest.mark.parametrize(
@@ -182,10 +207,7 @@ def test_double_root_path_object_is_rejected_before_secure_io() -> None:
         ADAPTER._canonical_absolute(Path("//root/a416.json"), "synthetic path")
 
 
-def test_double_leading_slash_cannot_alias_reserved_or_project_paths(
-    compatibility_payload: dict[str, object],
-) -> None:
-    encoded = ADAPTER.canonical_json_bytes(compatibility_payload)
+def test_double_leading_slash_cannot_alias_reserved_or_project_paths() -> None:
     doubled_canonical = Path("/" + str(CANONICAL_OUTPUT))
     doubled_input = Path("/" + str(ADAPTER.CONTROL_PATHS["static_summary"]))
 
@@ -194,8 +216,7 @@ def test_double_leading_slash_cannot_alias_reserved_or_project_paths(
     with pytest.raises(ADAPTER.CompatibilityError, match="non-canonical"):
         ADAPTER.InputSnapshot().capture(doubled_input, "double-root input")
     with pytest.raises(ADAPTER.CompatibilityError, match="non-canonical"):
-        ADAPTER._secure_exclusive_write(doubled_canonical, encoded)
-    assert not CANONICAL_OUTPUT.exists()
+        ADAPTER._canonical_absolute(doubled_canonical, "double-root canonical")
 
 
 def test_single_root_temporary_output_argument_remains_accepted(tmp_path: Path) -> None:
@@ -389,5 +410,675 @@ def test_wrong_hardcoded_control_digest_fails_before_compatibility(
         ADAPTER._capture_controls(ADAPTER.InputSnapshot())
 
 
-def test_canonical_replay_path_remains_absent_after_all_focused_checks() -> None:
-    assert not CANONICAL_OUTPUT.exists()
+def publication_fixture(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    payload: dict[str, object],
+) -> tuple[Path, Path, Path, bytes, str, list[bytes]]:
+    authority = tmp_path / "paper02-authority"
+    canonical = authority / ADAPTER.ROLE13_RELATIVE_PATH
+    canonical.parent.mkdir(parents=True)
+    candidate = tmp_path / "role13-candidate.json"
+    raw = ADAPTER.canonical_json_bytes(payload)
+    candidate.write_bytes(raw)
+    candidate.chmod(0o600)
+    digest_value = hashlib.sha256(raw).hexdigest()
+    live_values = [raw]
+
+    monkeypatch.setattr(ADAPTER, "ROOT", authority)
+    monkeypatch.setattr(ADAPTER, "CANONICAL_OUTPUT", canonical)
+
+    def synthetic_live(root: Path) -> bytes:
+        assert root == authority
+        return live_values[0]
+
+    monkeypatch.setattr(ADAPTER, "_live_compatibility_bytes", synthetic_live)
+    return authority, candidate, canonical, raw, digest_value, live_values
+
+
+def publication_worker(
+    queue, candidate: str, digest_value: str, authority: str,
+) -> None:
+    try:
+        receipt = ADAPTER.publish_compatibility_replay(
+            candidate_value=candidate,
+            expected_sha256=digest_value,
+            authority_root_value=authority,
+        )
+        queue.put(("PASS", receipt))
+    except BaseException as error:
+        queue.put(("ERROR", type(error).__name__, str(error)))
+
+
+def test_publication_constants_and_hook_vocabulary_are_frozen() -> None:
+    assert ADAPTER.CANONICAL_OUTPUT == ROOT / ADAPTER.ROLE13_RELATIVE_PATH
+    assert ADAPTER.PUBLICATION_HOOK_PHASES == {
+        "AFTER_STAGE_WRITE",
+        "AFTER_STAGE_FILE_FSYNC",
+        "AFTER_STAGING_PARENT_FSYNC",
+        "BEFORE_TERMINAL_REPLAY",
+        "BEFORE_RENAME",
+        "AFTER_RENAME",
+        "AFTER_DESTINATION_FSYNC",
+        "AFTER_PUBLICATION_PARENT_FSYNC",
+        "AFTER_POSTPUBLICATION_REPLAY",
+    }
+    with pytest.raises(ADAPTER.CompatibilityError, match="unknown.*phase"):
+        ADAPTER._publication_fault_hook("TYPO_PHASE")
+
+
+def test_capture_receipt_is_closed_compact_and_non_authorizing(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    output = tmp_path / "captured-role13.json"
+    payload = deepcopy(compatibility_payload)
+    monkeypatch.setattr(ADAPTER, "build_compatibility_object", lambda: payload)
+    receipt = ADAPTER.capture_compatibility_candidate(str(output))
+    assert set(receipt) == {
+        "schema_version", "protocol_id", "artifact_role", "artifact_status",
+        "authority", "candidate_path", "candidate_sha256", "size_bytes",
+        "mode", "nlink", "serializer", "scientific_licensing_enabled",
+        "production_authorized", "scientific_dispatch_performed",
+        "component_status", "milestone_status", "theorem_status", "final_status",
+    }
+    assert len(receipt) == 18
+    raw = ADAPTER.canonical_json_bytes(payload)
+    assert receipt == {
+        "schema_version": 1,
+        "protocol_id": ADAPTER.PROTOCOL_ID,
+        "artifact_role": "TEMP_S0_COMPATIBILITY_CANDIDATE_RECEIPT",
+        "artifact_status": "CAPTURED_VALIDATED_TEMP_ONLY",
+        "authority": "NON_AUTHORITATIVE_CAPTURE_ONLY",
+        "candidate_path": str(output),
+        "candidate_sha256": hashlib.sha256(raw).hexdigest(),
+        "size_bytes": len(raw),
+        "mode": "0600",
+        "nlink": 1,
+        "serializer": "CJ_COMPACT_V1",
+        "scientific_licensing_enabled": False,
+        "production_authorized": False,
+        "scientific_dispatch_performed": False,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    assert output.read_bytes() == raw
+    assert stat.S_IMODE(output.stat().st_mode) == 0o600
+    assert output.stat().st_nlink == 1
+    assert ADAPTER.canonical_json_bytes(receipt).endswith(b"\n")
+
+
+def test_publication_success_receipt_is_closed_write_once_and_non_authorizing(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    before = ADAPTER._publication_file_identity(candidate.stat())
+    receipt = ADAPTER.publish_compatibility_replay(
+        candidate_value=str(candidate),
+        expected_sha256=digest_value,
+        authority_root_value=str(authority),
+    )
+    assert set(receipt) == {
+        "schema_version", "protocol_id", "artifact_role", "artifact_status",
+        "authority", "candidate_path", "canonical_path",
+        "compatibility_sha256", "size_bytes", "mode", "nlink", "serializer",
+        "publication_method", "independent_verification_performed",
+        "scientific_licensing_enabled", "production_authorized",
+        "scientific_dispatch_performed", "component_status", "milestone_status",
+        "theorem_status", "final_status",
+    }
+    assert len(receipt) == 21
+    assert receipt == {
+        "schema_version": 1,
+        "protocol_id": ADAPTER.PROTOCOL_ID,
+        "artifact_role": "S0_COMPATIBILITY_PUBLICATION_RECEIPT",
+        "artifact_status": "PUBLISHED_WRITE_ONCE_NON_LICENSING",
+        "authority": "ROLE23_ADAPTER_PUBLICATION_ONLY",
+        "candidate_path": str(candidate),
+        "canonical_path": str(canonical),
+        "compatibility_sha256": digest_value,
+        "size_bytes": len(raw),
+        "mode": "0644",
+        "nlink": 1,
+        "serializer": "CJ_COMPACT_V1",
+        "publication_method": "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1",
+        "independent_verification_performed": False,
+        "scientific_licensing_enabled": False,
+        "production_authorized": False,
+        "scientific_dispatch_performed": False,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+    assert canonical.read_bytes() == candidate.read_bytes() == raw
+    assert stat.S_IMODE(canonical.stat().st_mode) == 0o644
+    assert canonical.stat().st_nlink == 1
+    assert ADAPTER._publication_file_identity(candidate.stat()) == before
+    assert not list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+    with pytest.raises(ADAPTER.CompatibilityError, match="already exists"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate),
+            expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+
+
+@pytest.mark.parametrize("kind", ("identical", "different", "directory", "symlink", "fifo"))
+def test_publication_rejects_every_existing_destination_without_blocking(
+    kind: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    if kind == "identical":
+        canonical.write_bytes(raw)
+    elif kind == "different":
+        canonical.write_bytes(b"foreign\n")
+    elif kind == "directory":
+        canonical.mkdir()
+    elif kind == "symlink":
+        canonical.symlink_to(candidate)
+    else:
+        os.mkfifo(canonical, 0o644)
+    before = os.lstat(canonical)
+    with pytest.raises(ADAPTER.CompatibilityError, match="already exists"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate),
+            expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    after = os.lstat(canonical)
+    assert (after.st_dev, after.st_ino, after.st_mode) == (
+        before.st_dev, before.st_ino, before.st_mode
+    )
+    assert candidate.read_bytes() == raw
+
+
+@pytest.mark.parametrize(
+    "raw,mode,match",
+    (
+        (b"", 0o600, "size outside"),
+        (b"x" * (1024 * 1024 + 1), 0o600, "size outside"),
+        (b"{}\n", 0o600, "missing"),
+        (b'{"x": 1}\n', 0o600, "CJ_COMPACT"),
+        (b"{}\n", 0o644, "mode 0600"),
+    ),
+)
+def test_publication_rejects_size_schema_serializer_and_candidate_mode(
+    raw: bytes,
+    mode: int,
+    match: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, _, _, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    candidate.write_bytes(raw)
+    candidate.chmod(mode)
+    with pytest.raises(ADAPTER.CompatibilityError, match=match):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate),
+            expected_sha256=hashlib.sha256(raw).hexdigest(),
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+
+
+def test_publication_rejects_symlink_hardlink_hash_path_and_authority_aliases(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    with pytest.raises(ADAPTER.CompatibilityError, match="expected.*SHA|lowercase"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256="A" * 64,
+            authority_root_value=str(authority),
+        )
+    with pytest.raises(ADAPTER.CompatibilityError, match="differs from expected"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256="0" * 64,
+            authority_root_value=str(authority),
+        )
+    with pytest.raises(ADAPTER.CompatibilityError, match="exact live"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority.parent),
+        )
+    with pytest.raises(ADAPTER.CompatibilityError, match="absolute|root slash"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value="relative.json", expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    hardlink = candidate.with_name("candidate-hardlink.json")
+    os.link(candidate, hardlink)
+    with pytest.raises(ADAPTER.CompatibilityError, match="hard-link"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    hardlink.unlink()
+    target = candidate.with_name("candidate-target.json")
+    candidate.rename(target)
+    candidate.symlink_to(target)
+    with pytest.raises(ADAPTER.CompatibilityError, match="regular file|replay failed"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert target.read_bytes() == raw
+    assert not canonical.exists()
+
+
+def test_stale_live_replay_and_same_byte_candidate_inode_swap_fail_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, live_values = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    live_values[0] = raw + b" "
+    with pytest.raises(ADAPTER.CompatibilityError, match="stale"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    live_values[0] = raw
+
+    def swap_candidate(phase: str) -> None:
+        if phase == "BEFORE_RENAME":
+            replacement = candidate.with_name("same-byte-new-inode.json")
+            replacement.write_bytes(raw)
+            replacement.chmod(0o600)
+            os.replace(replacement, candidate)
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", swap_candidate)
+    with pytest.raises(ADAPTER.CompatibilityError, match="candidate changed"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert candidate.read_bytes() == raw
+    assert not canonical.exists()
+    assert not list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+
+
+def test_terminal_source_binding_drift_is_detected_before_rename(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, live_values = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+
+    def drift_source(phase: str) -> None:
+        if phase == "BEFORE_RENAME":
+            live_values[0] = raw + b"source-doc-drift"
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", drift_source)
+    with pytest.raises(ADAPTER.CompatibilityError, match="changed at publication"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+    assert not list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+
+
+def test_stage_name_collision_skips_and_never_touches_foreign_entry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    foreign_name = ADAPTER.PUBLICATION_STAGE_PREFIX + "0" * 32
+    winner_name = ADAPTER.PUBLICATION_STAGE_PREFIX + "1" * 32
+    foreign = canonical.parent / foreign_name
+    foreign.write_bytes(b"foreign-stage\n")
+    foreign.chmod(0o644)
+    names = iter((foreign_name, winner_name))
+    monkeypatch.setattr(ADAPTER, "_publication_stage_basename", lambda: next(names))
+    receipt = ADAPTER.publish_compatibility_replay(
+        candidate_value=str(candidate), expected_sha256=digest_value,
+        authority_root_value=str(authority),
+    )
+    assert receipt["compatibility_sha256"] == digest_value
+    assert canonical.read_bytes() == raw
+    assert foreign.read_bytes() == b"foreign-stage\n"
+
+
+def test_two_process_publication_has_exactly_one_winner_and_no_owned_residue(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    context = multiprocessing.get_context("fork")
+    queue = context.Queue()
+    processes = [
+        context.Process(
+            target=publication_worker,
+            args=(queue, str(candidate), digest_value, str(authority)),
+        )
+        for _ in range(2)
+    ]
+    for process in processes:
+        process.start()
+    for process in processes:
+        process.join(15)
+        assert process.exitcode == 0
+    results = [queue.get(timeout=2) for _ in processes]
+    assert [item[0] for item in results].count("PASS") == 1
+    assert [item[0] for item in results].count("ERROR") == 1
+    error = next(item for item in results if item[0] == "ERROR")
+    assert "already exists" in error[2] or "collided" in error[2]
+    assert canonical.read_bytes() == candidate.read_bytes() == raw
+    assert not list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+
+
+def test_normal_pre_rename_error_cleans_only_owned_stage(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+
+    def ordinary_failure(phase: str) -> None:
+        if phase == "BEFORE_TERMINAL_REPLAY":
+            raise RuntimeError("ordinary injected failure")
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", ordinary_failure)
+    with pytest.raises(RuntimeError, match="ordinary injected"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+    assert not list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+
+
+def test_cleanup_inode_guard_never_unlinks_replacement_stage(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    replacement: list[Path] = []
+
+    def replace_stage(phase: str) -> None:
+        if phase == "BEFORE_TERMINAL_REPLAY":
+            stages = list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+            assert len(stages) == 1
+            stages[0].unlink()
+            stages[0].write_bytes(b"foreign-replacement\n")
+            stages[0].chmod(0o644)
+            replacement.append(stages[0])
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", replace_stage)
+    with pytest.raises(ADAPTER.CompatibilityError, match="refused to unlink"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert len(replacement) == 1
+    assert replacement[0].read_bytes() == b"foreign-replacement\n"
+    assert candidate.read_bytes() == raw
+
+
+@pytest.mark.parametrize(
+    "crash_phase",
+    (
+        "AFTER_STAGE_WRITE",
+        "AFTER_STAGE_FILE_FSYNC",
+        "AFTER_STAGING_PARENT_FSYNC",
+        "BEFORE_TERMINAL_REPLAY",
+        "BEFORE_RENAME",
+    ),
+)
+def test_pre_rename_crash_residue_is_harmless_and_retry_uses_new_stage(
+    crash_phase: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    original_hook = ADAPTER._publication_fault_hook
+
+    def crash(phase: str) -> None:
+        if phase == crash_phase:
+            raise ADAPTER.SyntheticCompatibilityPublicationCrash(phase)
+        original_hook(phase)
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", crash)
+    with pytest.raises(ADAPTER.SyntheticCompatibilityPublicationCrash):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    residue = list(canonical.parent.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+    assert len(residue) == 1
+    assert residue[0].read_bytes() == raw
+    assert stat.S_IMODE(residue[0].stat().st_mode) == 0o644
+    assert not canonical.exists()
+    assert candidate.read_bytes() == raw
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", original_hook)
+    receipt = ADAPTER.publish_compatibility_replay(
+        candidate_value=str(candidate), expected_sha256=digest_value,
+        authority_root_value=str(authority),
+    )
+    assert receipt["compatibility_sha256"] == digest_value
+    assert canonical.read_bytes() == raw
+    assert residue[0].read_bytes() == raw
+
+
+@pytest.mark.parametrize(
+    "failure_phase",
+    (
+        "AFTER_RENAME",
+        "AFTER_DESTINATION_FSYNC",
+        "AFTER_PUBLICATION_PARENT_FSYNC",
+        "AFTER_POSTPUBLICATION_REPLAY",
+    ),
+)
+def test_post_rename_failure_never_rolls_back_and_retry_rejects(
+    failure_phase: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    original_hook = ADAPTER._publication_fault_hook
+
+    def fail(phase: str) -> None:
+        if phase == failure_phase:
+            raise RuntimeError(f"post-rename failure: {phase}")
+        original_hook(phase)
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", fail)
+    with pytest.raises(RuntimeError, match="post-rename failure"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert canonical.read_bytes() == candidate.read_bytes() == raw
+    assert stat.S_IMODE(canonical.stat().st_mode) == 0o644
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", original_hook)
+    with pytest.raises(ADAPTER.CompatibilityError, match="already exists"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+
+
+def test_pre_rename_parent_swap_is_detected_and_owned_stage_is_cleaned(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    parent = canonical.parent
+    backup = parent.with_name(parent.name + ".swapped")
+
+    def swap_parent(phase: str) -> None:
+        if phase == "BEFORE_RENAME":
+            parent.rename(backup)
+            parent.mkdir()
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", swap_parent)
+    with pytest.raises(ADAPTER.CompatibilityError, match="namespace changed"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    assert not (backup / canonical.name).exists()
+    assert not list(backup.glob(ADAPTER.PUBLICATION_STAGE_PREFIX + "*"))
+    assert candidate.read_bytes() == raw
+
+
+@pytest.mark.parametrize("swap_phase", ("AFTER_RENAME", "AFTER_PUBLICATION_PARENT_FSYNC"))
+def test_post_rename_parent_swap_preserves_pinned_canonical_without_misattribution(
+    swap_phase: str,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    compatibility_payload: dict[str, object],
+) -> None:
+    authority, candidate, canonical, raw, digest_value, _ = publication_fixture(
+        tmp_path, monkeypatch, compatibility_payload
+    )
+    parent = canonical.parent
+    backup = parent.with_name(parent.name + ".postrename")
+    original_hook = ADAPTER._publication_fault_hook
+
+    def swap_parent(phase: str) -> None:
+        if phase == swap_phase:
+            parent.rename(backup)
+            parent.mkdir()
+        original_hook(phase)
+
+    monkeypatch.setattr(ADAPTER, "_publication_fault_hook", swap_parent)
+    with pytest.raises(ADAPTER.CompatibilityError, match="namespace changed"):
+        ADAPTER.publish_compatibility_replay(
+            candidate_value=str(candidate), expected_sha256=digest_value,
+            authority_root_value=str(authority),
+        )
+    assert not canonical.exists()
+    pinned_canonical = backup / canonical.name
+    assert pinned_canonical.read_bytes() == raw
+    assert stat.S_IMODE(pinned_canonical.stat().st_mode) == 0o644
+    assert candidate.read_bytes() == raw
+
+
+def test_capture_and_publication_cli_exact_compact_stdout_and_empty_stderr(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capfd: pytest.CaptureFixture[str],
+    compatibility_payload: dict[str, object],
+) -> None:
+    output = tmp_path / "cli-candidate.json"
+    payload = deepcopy(compatibility_payload)
+    monkeypatch.setattr(ADAPTER, "build_compatibility_object", lambda: payload)
+    assert ADAPTER.main([
+        "--capture-s0-compatibility", "--output", str(output)
+    ]) == 0
+    stdout, stderr = capfd.readouterr()
+    assert stderr == ""
+    capture_receipt = json.loads(stdout)
+    assert len(capture_receipt) == 18
+    assert stdout.encode("utf-8") == ADAPTER.canonical_json_bytes(capture_receipt)
+
+    raw = output.read_bytes()
+    digest_value = hashlib.sha256(raw).hexdigest()
+    authority = tmp_path / "cli-authority"
+    canonical = authority / ADAPTER.ROLE13_RELATIVE_PATH
+    canonical.parent.mkdir(parents=True)
+    monkeypatch.setattr(ADAPTER, "ROOT", authority)
+    monkeypatch.setattr(ADAPTER, "CANONICAL_OUTPUT", canonical)
+    monkeypatch.setattr(ADAPTER, "_live_compatibility_bytes", lambda root: raw)
+    assert ADAPTER.main([
+        "--publish-s0-compatibility",
+        "--candidate", str(output),
+        "--expected-sha256", digest_value,
+        "--authority-root", str(authority),
+    ]) == 0
+    stdout, stderr = capfd.readouterr()
+    assert stderr == ""
+    publish_receipt = json.loads(stdout)
+    assert len(publish_receipt) == 21
+    assert stdout.encode("utf-8") == ADAPTER.canonical_json_bytes(publish_receipt)
+    assert canonical.read_bytes() == raw
+
+
+@pytest.mark.parametrize(
+    "argv",
+    (
+        [],
+        ["--capture-s0-compatibility", "--publish-s0-compatibility"],
+        ["--capture-s0-compatibility"],
+        ["--capture-s0-compatibility", "--output", "/tmp/x.json", "--candidate", "/tmp/y.json"],
+        ["--publish-s0-compatibility"],
+        ["--publish-s0-compatibility", "--output", "/tmp/x.json"],
+    ),
+)
+def test_cli_capture_publish_exact_xor_is_fail_closed(
+    argv: list[str], capfd: pytest.CaptureFixture[str]
+) -> None:
+    assert ADAPTER.main(argv) == 1
+    stdout, stderr = capfd.readouterr()
+    assert stdout == ""
+    assert stderr.startswith("ERROR: CompatibilityError:")
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    (
+        lambda payload: payload["matrix"].__setitem__("authority", "SMUGGLED"),
+        lambda payload: payload["source_bindings"].__setitem__("authority", "0" * 64),
+        lambda payload: payload["role_sets"]["static_proof_entries"][0].__setitem__(
+            "production_authorized", True
+        ),
+    ),
+)
+def test_recursive_closed_schemas_reject_authority_smuggling(
+    compatibility_payload: dict[str, object], mutation,
+) -> None:
+    payload = deepcopy(compatibility_payload)
+    mutation(payload)
+    with pytest.raises(ADAPTER.CompatibilityError, match="mismatch|extra"):
+        ADAPTER.validate_compatibility_output(payload)

@@ -161,10 +161,16 @@ research/route_a_wave_trace/R401_VAL_L3_A1_PREFREEZE_REVIEW.md
 research/route_a_wave_trace/R401_VAL_L3_A1_FREEZE.json
 ```
 
-`R401_VAL_L3_A1_MACHINE_FREEZE.json` is candidate input role 10.  It is not
-created by the temp-only capture increment or by the current publisher-
-implementation increment: the publisher exists but has not been run.  Only
-after all 53 ordered input roles have their final bytes may
+`R401_VAL_L3_A1_MACHINE_FREEZE.json` is input role 10.  After the historical
+temp-capture and publisher-implementation increments, a separately authorized
+transaction published it once and role 24 independently postverified the
+canonical inode.  Its SHA-256 is
+`0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e`.
+At the role-13 implementation/prepublication snapshot recorded by these
+bytes, input role 13 is absent; its fixed-destination capture/publication
+surface is implemented but has not been executed against the repository at
+that snapshot.
+Only after all 53 ordered input roles have their final bytes may
 `R401_VAL_L3_A1_FREEZE.json` be created as downstream release role 54; it
 contains no self-hash.  This pre-freeze design and its tracker are planning
 inputs only; the later protocol must state explicitly whether it binds them.
@@ -567,6 +573,46 @@ values inherited from S0.  A matching digest with a changed role, count,
 status, or schema is rejected.  The resulting compatibility object has null
 scientific authority and is itself rebound by the main freeze.
 
+The implemented artifact schema remains closed at exactly 18 top-level keys:
+the fields listed in the checker contract, with
+`artifact_role=S0_TO_A1_COMPATIBILITY_REPLAY`,
+`artifact_status=NON_LICENSING`,
+`replay_status=PASS_S0_COMPATIBILITY_REPLAY`, empty failures, and null
+milestone/theorem/final statuses.  Capture and publication add no receipt,
+self-hash, or authority field to that artifact.
+
+Role 23 now implements two exact-exclusive non-dispatch modes:
+
+```text
+--capture-s0-compatibility --output /tmp/EXACT_NEW_CANDIDATE.json
+```
+
+or
+
+```text
+--publish-s0-compatibility \
+--candidate /tmp/EXACT_CANDIDATE.json \
+--expected-sha256 EXACT_64_LOWERHEX \
+--authority-root EXACT_LIVE_PAPER02_ROOT
+```
+
+Capture creates a new one-link `0600` candidate.  Publication accepts no
+destination override and derives the fixed role-13 path.  It caps the
+candidate at `1048576` bytes, requires exact compact bytes and live replay
+equality, and terminally reopens the adapter, this design, the checker
+contract, and the release contract.  Those four source bindings must be
+stable before fresh candidate capture.
+
+Publication uses an explicit-`0644` same-parent stage and only
+`renameat2(RENAME_NOREPLACE)`.  Every existing canonical entry is fatal,
+including identical bytes.  After rename, no failure permits rollback,
+deletion, repair, overwrite, or idempotent republish.  Its transient exact
+21-key receipt is limited to `ROLE23_ADAPTER_PUBLICATION_ONLY`, with
+`independent_verification_performed=false`, licensing/production/dispatch
+false, and component/milestone/theorem/final null.  At this explicit
+implementation/prepublication snapshot, the publisher has not been executed
+and canonical role 13 is absent.
+
 ## 8. Transaction, resume, and crash recovery
 
 Each component cell is committed with a same-filesystem transaction.  The
@@ -789,8 +835,9 @@ scientific status.  There is no global scientific wall-clock budget.
 | process control | timeout, SIGTERM, SIGKILL escalation, descendant process, missing status | no orphan; non-pass classification is exact |
 | resource pause | memory and disk thresholds at barrier boundaries | admission pauses without scientific failure |
 | compatibility | all six accepted S0 cells replayed through prospective schema adapters | exact S0 facts and null final value preserved |
+| compatibility capture/publication | exact mode XOR, new `0600` `/tmp` candidate, 1-MiB cap, four live source bindings, fixed destination, namespace/candidate/stage TOCTOU, explicit `0644`, `renameat2(RENAME_NOREPLACE)`, identical-existing refusal, crash residue, and post-rename ambiguity | implementation fixtures only; the prepublication snapshot has no canonical role 13 and invokes no evaluator |
 | machine capture/verify | temp-path exclusivity, fresh-build staging, no-overwrite persistent binding, compiler-subobject mutations, path/link/TOCTOU attacks, and read-only independent replay | only one compact temporary candidate passes; no role-10 publication or evaluator dispatch |
-| machine publication | fixed role-10 destination, expected-hash pin, `1..1048576` pre-open type/size cap, stale role-19 binding, candidate/namespace TOCTOU, same-parent staging, explicit mode, `renameat2(RENAME_NOREPLACE)`, identical-existing refusal, crash residue, post-rename ambiguity, source preservation, and exact receipt | publisher implementation passes only in isolated temporary project fixtures; repository role 10 remains absent; role 24 must replay canonical bytes separately |
+| machine publication | fixed role-10 destination, expected-hash pin, `1..1048576` pre-open type/size cap, stale role-19 binding, candidate/namespace TOCTOU, same-parent staging, explicit mode, `renameat2(RENAME_NOREPLACE)`, identical-existing refusal, crash residue, post-rename ambiguity, source preservation, and exact receipt | historical implementation fixtures passed first; the later authorized canonical role 10 was published once and separately replayed by role 24 |
 | synthetic E2E | mocked 102-cell static and 102-cell branch archives through composite and release | exact DAG closes with no evaluator dispatch |
 | release | write-once, verify-only, same-byte snapshot, TOCTOU, self-hash, extra role, altered report status | only one exact acyclic release is accepted |
 
@@ -808,13 +855,17 @@ All gates below must close before the first evaluator dispatch for any of the
 2. **Implementation freeze candidate:** final cell evaluators, transactional
    scheduler, three no-import checkers, S0 adapter, release builder, and all
    focused tests.
-3. **Persistent environment and role 10:** clean CAPD checkout and build,
-   persistent L3 branch binary, Python/Arb dependency hashes, runtime-library
-   hashes, and live machine/storage admission record; then a fresh candidate
-   bound to stable role-19 source bytes, role-24 temporary replay, one
-   separately authorized no-replace publication, and role-24 canonical replay.
-4. **Non-held-out validation:** complete mocked 102-cell end-to-end run,
-   adversarial fault suite, and read-only six-cell S0 compatibility replay.
+3. **Persistent environment and role 10:** completed by the canonical
+   machine-admission object with SHA-256
+   `0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e`
+   and the separate role-24 canonical replay; this completion grants no
+   scientific authority.
+4. **Non-held-out validation and role 13:** complete mocked 102-cell
+   end-to-end run and adversarial fault suite; stabilize all four compatibility
+   source bindings, capture a fresh `0600` candidate, and only under separate
+   authorization publish the exact compatibility bytes once at role 13.  At
+   this prepublication snapshot the publisher is implemented and canonical
+   role 13 is absent.
 5. **Resource admission:** representative-only memory calibration, candidate
    worker validation, and live disk/memory headroom.  This gate requires a
    separate instruction before running even representative evaluators.
@@ -879,9 +930,17 @@ Current exact decision:
 
 ```text
 internal_design_audit_complete = true
-independent_design_review_complete = false
-formal_protocol_exists = false
-formal_machine_freeze_exists = false
+independent_design_review_complete = true
+formal_protocol_exists = true
+formal_machine_freeze_exists = true
+formal_machine_freeze_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+formal_machine_freeze_role24_postverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+s0_compatibility_capture_implemented = true
+s0_compatibility_publisher_implemented = true
+s0_compatibility_adapter_sha256 = a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0
+s0_compatibility_test_sha256 = f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d
+s0_compatibility_focused_tests = 72/72
+canonical_s0_compatibility_role13_exists_at_prepublication_snapshot = false
 independent_prefreeze_accept = false
 main_freeze_exists = false
 dispatch_authorized = false
@@ -968,3 +1027,67 @@ The remaining smallest blockers are now explicit:
 None of these steps licenses a scientific evaluator.  No canonical machine
 freeze, main freeze, result archive, or release is created by this design
 increment.
+
+## 17. Subsequent canonical role-10 amendment
+
+The absence and unexecuted-publisher statements above describe the historical
+design and implementation boundaries at which they were recorded.  They are
+superseded for the current repository state by the following later, separately
+authorized event:
+
+```text
+canonical_machine_role10_exists = true
+canonical_machine_role10_path = research/route_a_wave_trace/R401_VAL_L3_A1_MACHINE_FREEZE.json
+canonical_machine_role10_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+canonical_machine_role10_size_bytes = 54526
+canonical_machine_role10_mode = 0644
+canonical_machine_role10_nlink = 1
+canonical_machine_role10_publication_commit = 5086e33c7c66f33785338e90b340347e086d9941
+canonical_machine_role10_role19_sha256 = 262985fcb1fc82890501b635bfce163712f1821e2d92276aee9f363ee0473a82
+canonical_machine_role10_role24_postverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+main_freeze_role54_exists = false
+independent_prefreeze_accept = false
+dispatch_authorized = false
+milestone_status = null
+theorem_status = null
+final_status = null
+```
+
+The role-24 replay was zero-write, zero-subprocess, and explicitly
+`NON_AUTHORITATIVE_VERIFY_ONLY`; it granted no promotion or dispatch
+authority.  At this role-10-only amendment snapshot, the next bounded inputs
+were the canonical role-13 compatibility replay and role-11 pre-freeze test
+receipt, followed by the independent role-12 review.  Role 54 remains last
+and cannot be constructed until all 53 inputs are final.
+
+## 18. Role-13 implementation/prepublication snapshot
+
+The role-23 capture/publication implementation described in section 7.4 is
+now stable as an engineering surface.  Its adapter SHA-256 is
+`a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0`;
+the focused test SHA-256 is
+`f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d`.
+The final focused replay passed `72/72` in `1.42 s`; Python compilation and
+the implementation-owner diff check passed.  Those are non-dispatching
+implementation results, not a role-13 receipt or scientific verdict.
+
+The complete transaction and exact 18-key artifact / 21-key receipt boundaries
+are recorded in
+[`A416_L3_A1_S0_COMPATIBILITY_PUBLICATION_INCREMENT.md`](A416_L3_A1_S0_COMPATIBILITY_PUBLICATION_INCREMENT.md).
+At this explicit prepublication snapshot, the implementation has not executed
+the publisher against the repository and canonical role 13 is absent.  A
+future publication receipt's independent-verification field remains false;
+role 54 and every scientific status are also absent or null at this snapshot.
+
+Because a future compatibility object binds this design, the checker
+contract, the release contract, and the adapter itself, those four roles must
+now remain stable until a fresh candidate is captured and either rejected or
+separately authorized for the one-shot fixed-destination publication edge.
+
+These design bytes are themselves one of the four role-13 source bindings.
+After a candidate is captured and especially after any successful
+publication, this bound document is intentionally frozen and must not be
+edited merely to restate later repository presence.  Postpublication current
+state belongs in the unbound compatibility-publication increment and tracker,
+and in the later role-11 pre-freeze test record.  No future role-13 candidate
+SHA-256 or publication commit belongs in this source-bound document.

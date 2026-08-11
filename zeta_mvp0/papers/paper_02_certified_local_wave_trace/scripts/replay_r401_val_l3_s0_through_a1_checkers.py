@@ -3,16 +3,18 @@
 
 This adapter validates sealed representative S0 bytes against the prospective
 L3-A1 control boundary.  It never imports or invokes an evaluator, packager,
-or component checker.  By default it writes nothing and prints the
-non-authoritative compatibility object to stdout.  ``--output`` is restricted
-to a new file outside the project tree; the canonical replay path is reserved
-for the later main-freeze transaction.
+or component checker.  Capture writes one validated temporary candidate under
+``/tmp``.  Publication is a separate, fixed-destination, write-once
+``renameat2(RENAME_NOREPLACE)`` transaction.  Neither mode authorizes a
+scientific dispatch or a main freeze.
 """
 
 from __future__ import annotations
 
 import argparse
+import ctypes
 from dataclasses import dataclass
+import errno
 import hashlib
 import json
 import math
@@ -37,6 +39,10 @@ RELEASE_CONTRACT = (
 CANONICAL_OUTPUT = (
     ROOT
     / "research/route_a_wave_trace/"
+    "R401_VAL_L3_A1_S0_COMPATIBILITY_REPLAY.json"
+)
+ROLE13_RELATIVE_PATH = Path(
+    "research/route_a_wave_trace/"
     "R401_VAL_L3_A1_S0_COMPATIBILITY_REPLAY.json"
 )
 STATIC_DIR = ROOT / "results/r401_val_l3_phase_tube_smoke"
@@ -288,6 +294,28 @@ class CompatibilityError(RuntimeError):
 
 
 MAX_INPUT_BYTES = 64 * 1024 * 1024
+PUBLICATION_MAX_CANDIDATE_BYTES = 1024 * 1024
+PUBLICATION_STAGE_PREFIX = (
+    ".R401_VAL_L3_A1_S0_COMPATIBILITY_REPLAY.json.stage."
+)
+PUBLICATION_METHOD = "SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1"
+PUBLICATION_HOOK_PHASES = frozenset(
+    {
+        "AFTER_STAGE_WRITE",
+        "AFTER_STAGE_FILE_FSYNC",
+        "AFTER_STAGING_PARENT_FSYNC",
+        "BEFORE_TERMINAL_REPLAY",
+        "BEFORE_RENAME",
+        "AFTER_RENAME",
+        "AFTER_DESTINATION_FSYNC",
+        "AFTER_PUBLICATION_PARENT_FSYNC",
+        "AFTER_POSTPUBLICATION_REPLAY",
+    }
+)
+
+
+class SyntheticCompatibilityPublicationCrash(RuntimeError):
+    """Test-only crash marker; production never raises this on its own."""
 
 
 @dataclass(frozen=True)
@@ -464,7 +492,11 @@ def strict_json_bytes(data: bytes, context: str) -> dict[str, Any]:
 def canonical_json_bytes(payload: Any) -> bytes:
     return (
         json.dumps(
-            payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")
+            payload,
+            sort_keys=True,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            allow_nan=False,
         ).encode("utf-8")
         + b"\n"
     )
@@ -1427,57 +1459,23 @@ def build_compatibility_object() -> dict[str, Any]:
     return payload
 
 
-def _secure_exclusive_write(path: Path, data: bytes) -> None:
-    path = _canonical_absolute(path, "temporary output")
-    if path == CANONICAL_OUTPUT:
-        raise CompatibilityError("canonical compatibility replay is reserved")
-    try:
-        path.relative_to(ROOT)
-    except ValueError:
-        pass
-    else:
-        raise CompatibilityError("temporary output must be outside the project tree")
-    parent = path.parent
-    directory_flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
-    nofollow = getattr(os, "O_NOFOLLOW", 0)
-    directory_fd = os.open("/", directory_flags)
-    output_fd: int | None = None
-    try:
-        for component in parent.parts[1:]:
-            next_fd = os.open(
-                component, directory_flags | nofollow, dir_fd=directory_fd
-            )
-            os.close(directory_fd)
-            directory_fd = next_fd
-        output_fd = os.open(
-            path.name,
-            os.O_WRONLY | os.O_CREAT | os.O_EXCL | nofollow,
-            0o600,
-            dir_fd=directory_fd,
-        )
-        offset = 0
-        while offset < len(data):
-            offset += os.write(output_fd, data[offset:])
-        os.fsync(output_fd)
-        output_info = os.fstat(output_fd)
-        if (
-            not stat.S_ISREG(output_info.st_mode)
-            or output_info.st_nlink != 1
-            or output_info.st_size != len(data)
-        ):
-            raise CompatibilityError("temporary output publication mismatch")
-        os.fsync(directory_fd)
-    except OSError as error:
-        raise CompatibilityError(f"exclusive temporary output failed: {error}") from error
-    finally:
-        if output_fd is not None:
-            os.close(output_fd)
-        os.close(directory_fd)
+def _publication_file_identity(
+    info: os.stat_result,
+) -> tuple[int, int, int, int, int, int, int]:
+    return (
+        info.st_dev,
+        info.st_ino,
+        info.st_mode,
+        info.st_nlink,
+        info.st_size,
+        info.st_mtime_ns,
+        info.st_ctime_ns,
+    )
 
 
-def _output_argument(value: str) -> Path:
-    if not value.startswith("/") or value.startswith("//"):
-        raise argparse.ArgumentTypeError("output must have exactly one POSIX root slash")
+def _absolute_argument(value: str, context: str) -> Path:
+    if type(value) is not str or not value.startswith("/") or value.startswith("//"):
+        raise CompatibilityError(f"{context}: exactly one POSIX root slash required")
     if (
         "\x00" in value
         or "\\" in value
@@ -1485,30 +1483,873 @@ def _output_argument(value: str) -> Path:
         or value.endswith("/")
         or any(component in ("", ".", "..") for component in value[1:].split("/"))
     ):
-        raise argparse.ArgumentTypeError("output has non-canonical path spelling")
+        raise CompatibilityError(f"{context}: non-canonical path spelling")
+    return _canonical_absolute(Path(value), context)
+
+
+def _require_tmp_candidate(path: Path, context: str) -> None:
+    if path.parts[:2] != ("/", "tmp") or len(path.parts) < 3:
+        raise CompatibilityError(f"{context}: exact absolute /tmp file required")
+
+
+def _open_publication_directory(
+    path: Path, context: str,
+) -> tuple[int, tuple[tuple[str, int, int, int], ...]]:
+    """Open a lexical directory chain with no symlink traversal and pin it."""
+
+    canonical = _canonical_absolute(path, context)
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
+    nofollow = getattr(os, "O_NOFOLLOW", 0)
+    descriptor: int | None = None
+    current = Path("/")
+    signatures: list[tuple[str, int, int, int]] = []
     try:
-        return _canonical_absolute(Path(value), "temporary output argument")
+        descriptor = os.open("/", flags)
+        root_info = os.fstat(descriptor)
+        if not stat.S_ISDIR(root_info.st_mode):
+            raise CompatibilityError(f"{context}: filesystem root is not a directory")
+        signatures.append(
+            ("/", root_info.st_dev, root_info.st_ino, stat.S_IFMT(root_info.st_mode))
+        )
+        for component in canonical.parts[1:]:
+            next_fd = os.open(
+                component, flags | nofollow, dir_fd=descriptor
+            )
+            os.close(descriptor)
+            descriptor = next_fd
+            current /= component
+            info = os.fstat(descriptor)
+            if not stat.S_ISDIR(info.st_mode):
+                raise CompatibilityError(
+                    f"{context}: namespace component is not a directory: {current}"
+                )
+            signatures.append(
+                (
+                    os.fspath(current),
+                    info.st_dev,
+                    info.st_ino,
+                    stat.S_IFMT(info.st_mode),
+                )
+            )
+        return descriptor, tuple(signatures)
+    except CompatibilityError:
+        if descriptor is not None:
+            os.close(descriptor)
+        raise
+    except OSError as error:
+        if descriptor is not None:
+            os.close(descriptor)
+        raise CompatibilityError(
+            f"{context}: unsafe directory chain: {canonical}: {error}"
+        ) from error
+
+
+def _publication_directory_chain(
+    path: Path, context: str,
+) -> tuple[tuple[str, int, int, int], ...]:
+    descriptor, signatures = _open_publication_directory(path, context)
+    os.close(descriptor)
+    return signatures
+
+
+def _replay_publication_directory(
+    path: Path,
+    pinned_fd: int,
+    expected_chain: tuple[tuple[str, int, int, int], ...],
+    context: str,
+) -> None:
+    pinned = os.fstat(pinned_fd)
+    if (
+        not stat.S_ISDIR(pinned.st_mode)
+        or not expected_chain
+        or (pinned.st_dev, pinned.st_ino)
+        != (expected_chain[-1][1], expected_chain[-1][2])
+        or _publication_directory_chain(path, context) != expected_chain
+    ):
+        raise CompatibilityError(f"{context}: directory namespace changed")
+
+
+def _read_publication_file_at(
+    parent_fd: int,
+    name: str,
+    context: str,
+    *,
+    expected_mode: int,
+    fsync_file: bool = False,
+) -> tuple[bytes, os.stat_result]:
+    """Read one pinned, single-link regular file through an exact parent fd."""
+
+    if type(name) is not str or not name or "/" in name or name in {".", ".."}:
+        raise CompatibilityError(f"{context}: malformed basename")
+    descriptor: int | None = None
+    try:
+        entry_before = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        if not stat.S_ISREG(entry_before.st_mode):
+            raise CompatibilityError(f"{context}: regular file required")
+        if stat.S_IMODE(entry_before.st_mode) != expected_mode:
+            raise CompatibilityError(
+                f"{context}: exact mode {expected_mode:04o} required"
+            )
+        if entry_before.st_nlink != 1:
+            raise CompatibilityError(f"{context}: hard-link alias rejected")
+        if (
+            entry_before.st_size <= 0
+            or entry_before.st_size > PUBLICATION_MAX_CANDIDATE_BYTES
+        ):
+            raise CompatibilityError(
+                f"{context}: size outside 1..{PUBLICATION_MAX_CANDIDATE_BYTES}"
+            )
+        descriptor = os.open(
+            name,
+            os.O_RDONLY
+            | getattr(os, "O_NOFOLLOW", 0)
+            | getattr(os, "O_NONBLOCK", 0),
+            dir_fd=parent_fd,
+        )
+        before = os.fstat(descriptor)
+        if (
+            not stat.S_ISREG(before.st_mode)
+            or stat.S_IMODE(before.st_mode) != expected_mode
+            or before.st_nlink != 1
+            or _publication_file_identity(before)
+            != _publication_file_identity(entry_before)
+        ):
+            raise CompatibilityError(f"{context}: changed before pinned open")
+        chunks: list[bytes] = []
+        total = 0
+        while True:
+            chunk = os.read(
+                descriptor,
+                min(1024 * 1024, PUBLICATION_MAX_CANDIDATE_BYTES - total + 1),
+            )
+            if not chunk:
+                break
+            chunks.append(chunk)
+            total += len(chunk)
+            if total > PUBLICATION_MAX_CANDIDATE_BYTES:
+                raise CompatibilityError(f"{context}: pinned size cap exceeded")
+        if fsync_file:
+            os.fsync(descriptor)
+        after = os.fstat(descriptor)
+        entry_after = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        identity = _publication_file_identity(before)
+        if (
+            identity != _publication_file_identity(after)
+            or identity != _publication_file_identity(entry_after)
+            or (entry_after.st_dev, entry_after.st_ino)
+            != (before.st_dev, before.st_ino)
+        ):
+            raise CompatibilityError(f"{context}: changed during pinned replay")
+        raw = b"".join(chunks)
+        if len(raw) != before.st_size:
+            raise CompatibilityError(f"{context}: short pinned read")
+        return raw, before
+    except CompatibilityError:
+        raise
+    except OSError as error:
+        raise CompatibilityError(f"{context}: secure replay failed: {error}") from error
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+
+
+def _replay_publication_candidate(
+    *,
+    path: Path,
+    parent_fd: int,
+    parent_chain: tuple[tuple[str, int, int, int], ...],
+    expected_raw: bytes,
+    expected_identity: tuple[int, int, int, int, int, int, int],
+) -> None:
+    _replay_publication_directory(
+        path.parent, parent_fd, parent_chain, "compatibility candidate parent"
+    )
+    raw, info = _read_publication_file_at(
+        parent_fd,
+        path.name,
+        "compatibility publication candidate",
+        expected_mode=0o600,
+    )
+    if raw != expected_raw or _publication_file_identity(info) != expected_identity:
+        raise CompatibilityError("compatibility publication candidate changed")
+
+
+def _write_publication_bytes(descriptor: int, raw: bytes) -> None:
+    view = memoryview(raw)
+    while view:
+        written = os.write(descriptor, view)
+        if written <= 0:
+            raise OSError("short compatibility publication staging write")
+        view = view[written:]
+
+
+def _publication_stage_basename() -> str:
+    name = PUBLICATION_STAGE_PREFIX + os.urandom(16).hex()
+    suffix = name.removeprefix(PUBLICATION_STAGE_PREFIX)
+    if (
+        len(suffix) != 32
+        or any(character not in "0123456789abcdef" for character in suffix)
+    ):
+        raise CompatibilityError("compatibility publication stage name malformed")
+    return name
+
+
+def _publication_fault_hook(phase: str) -> None:
+    """No-op production hook; tests use it to model exact crash boundaries."""
+
+    if phase not in PUBLICATION_HOOK_PHASES:
+        raise CompatibilityError(f"unknown compatibility publication phase: {phase}")
+
+
+def _rename_publication_noreplace(
+    parent_fd: int, source_name: str, destination_name: str,
+) -> None:
+    if sys.platform != "linux":
+        raise CompatibilityError("Linux renameat2(RENAME_NOREPLACE) is required")
+    libc = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(libc, "renameat2", None)
+    if renameat2 is None:
+        raise CompatibilityError("renameat2(RENAME_NOREPLACE) is unavailable")
+    renameat2.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    renameat2.restype = ctypes.c_int
+    ctypes.set_errno(0)
+    result = renameat2(
+        parent_fd,
+        os.fsencode(source_name),
+        parent_fd,
+        os.fsencode(destination_name),
+        1,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number in {errno.EEXIST, errno.ENOTEMPTY}:
+        raise CompatibilityError(
+            "canonical compatibility destination already exists or collided"
+        )
+    raise CompatibilityError(
+        "compatibility renameat2(RENAME_NOREPLACE) failed: "
+        f"{os.strerror(error_number)}"
+    )
+
+
+def _cleanup_publication_stage(
+    parent_fd: int, name: str, owned_inode: tuple[int, int],
+) -> None:
+    try:
+        entry = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+    except FileNotFoundError:
+        return
+    except OSError as error:
+        raise CompatibilityError(
+            f"compatibility staging cleanup stat failed: {error}"
+        ) from error
+    if (entry.st_dev, entry.st_ino) != owned_inode:
+        raise CompatibilityError(
+            "compatibility publication refused to unlink a replaced staging inode"
+        )
+    try:
+        os.unlink(name, dir_fd=parent_fd)
+        os.fsync(parent_fd)
+    except OSError as error:
+        raise CompatibilityError(
+            f"compatibility staging cleanup failed: {error}"
+        ) from error
+
+
+def _canonical_output_for_root(root: Path) -> Path:
+    return _canonical_absolute(
+        root / ROLE13_RELATIVE_PATH, "canonical compatibility destination"
+    )
+
+
+def _validate_candidate_bytes(raw: bytes) -> dict[str, Any]:
+    payload = strict_json_bytes(raw, "compatibility publication candidate")
+    if raw != canonical_json_bytes(payload):
+        raise CompatibilityError(
+            "compatibility publication candidate is not CJ_COMPACT_V1"
+        )
+    validate_compatibility_output(payload)
+    return payload
+
+
+def _live_compatibility_bytes(root: Path) -> bytes:
+    live_root = _canonical_absolute(ROOT, "live Paper02 root")
+    if root != live_root:
+        raise CompatibilityError(
+            "compatibility publication authority root is not live Paper02 root"
+        )
+    payload = build_compatibility_object()
+    validate_compatibility_output(payload)
+    encoded = canonical_json_bytes(payload)
+    if _validate_candidate_bytes(encoded) != payload:
+        raise CompatibilityError("live compatibility object failed exact replay")
+    return encoded
+
+
+def _secure_exclusive_write(path: Path, data: bytes) -> None:
+    """Capture exact candidate bytes at a new 0600 /tmp path."""
+
+    path = _canonical_absolute(path, "temporary output")
+    _require_tmp_candidate(path, "temporary output")
+    if path == _canonical_output_for_root(_canonical_absolute(ROOT, "Paper02 root")):
+        raise CompatibilityError("canonical compatibility replay is reserved")
+    try:
+        path.relative_to(ROOT)
+    except ValueError:
+        pass
+    else:
+        raise CompatibilityError("temporary output must be outside the project tree")
+    if not data or len(data) > PUBLICATION_MAX_CANDIDATE_BYTES:
+        raise CompatibilityError("temporary compatibility candidate size is invalid")
+
+    parent_fd: int | None = None
+    output_fd: int | None = None
+    output_inode: tuple[int, int] | None = None
+    committed = False
+    try:
+        parent_fd, parent_chain = _open_publication_directory(
+            path.parent, "temporary output parent"
+        )
+        _replay_publication_directory(
+            path.parent, parent_fd, parent_chain, "temporary output parent"
+        )
+        output_fd = os.open(
+            path.name,
+            os.O_WRONLY
+            | os.O_CREAT
+            | os.O_EXCL
+            | getattr(os, "O_NOFOLLOW", 0),
+            0o600,
+            dir_fd=parent_fd,
+        )
+        output_info = os.fstat(output_fd)
+        if (
+            not stat.S_ISREG(output_info.st_mode)
+            or output_info.st_nlink != 1
+            or stat.S_IMODE(output_info.st_mode) != 0o600
+        ):
+            raise CompatibilityError("temporary output inode contract mismatch")
+        output_inode = (output_info.st_dev, output_info.st_ino)
+        _write_publication_bytes(output_fd, data)
+        os.fsync(output_fd)
+        captured_raw, captured_info = _read_publication_file_at(
+            parent_fd,
+            path.name,
+            "temporary compatibility candidate",
+            expected_mode=0o600,
+            fsync_file=True,
+        )
+        if (
+            captured_raw != data
+            or (captured_info.st_dev, captured_info.st_ino) != output_inode
+        ):
+            raise CompatibilityError("temporary output publication mismatch")
+        os.fsync(parent_fd)
+        _replay_publication_directory(
+            path.parent, parent_fd, parent_chain, "temporary output parent"
+        )
+        committed = True
+    except CompatibilityError:
+        raise
+    except OSError as error:
+        raise CompatibilityError(f"exclusive temporary output failed: {error}") from error
+    finally:
+        cleanup_error: BaseException | None = None
+        if (
+            parent_fd is not None
+            and output_inode is not None
+            and not committed
+        ):
+            try:
+                _cleanup_publication_stage(parent_fd, path.name, output_inode)
+            except BaseException as error:
+                cleanup_error = error
+        if output_fd is not None:
+            os.close(output_fd)
+        if parent_fd is not None:
+            os.close(parent_fd)
+        if cleanup_error is not None:
+            raise cleanup_error
+
+
+def capture_compatibility_candidate(output_value: str) -> dict[str, Any]:
+    output = _absolute_argument(output_value, "temporary output argument")
+    _require_tmp_candidate(output, "temporary output argument")
+    payload = build_compatibility_object()
+    validate_compatibility_output(payload)
+    encoded = canonical_json_bytes(payload)
+    _validate_candidate_bytes(encoded)
+    _secure_exclusive_write(output, encoded)
+    captured = _secure_read(output, "captured compatibility candidate")
+    if (
+        captured.data != encoded
+        or stat.S_IMODE(captured.metadata[2]) != 0o600
+        or captured.metadata[3] != 1
+    ):
+        raise CompatibilityError("captured compatibility candidate terminal mismatch")
+    return {
+        "schema_version": SCHEMA_VERSION,
+        "protocol_id": PROTOCOL_ID,
+        "artifact_role": "TEMP_S0_COMPATIBILITY_CANDIDATE_RECEIPT",
+        "artifact_status": "CAPTURED_VALIDATED_TEMP_ONLY",
+        "authority": "NON_AUTHORITATIVE_CAPTURE_ONLY",
+        "candidate_path": os.fspath(output),
+        "candidate_sha256": hashlib.sha256(encoded).hexdigest(),
+        "size_bytes": len(encoded),
+        "mode": "0600",
+        "nlink": 1,
+        "serializer": "CJ_COMPACT_V1",
+        "scientific_licensing_enabled": False,
+        "production_authorized": False,
+        "scientific_dispatch_performed": False,
+        "component_status": None,
+        "milestone_status": None,
+        "theorem_status": None,
+        "final_status": None,
+    }
+
+
+def publish_compatibility_replay(
+    *, candidate_value: str, expected_sha256: str, authority_root_value: str,
+) -> dict[str, Any]:
+    """Publish canonical role 13 once without evaluator or freeze authority."""
+
+    expected_sha256 = hash_string(
+        expected_sha256, "expected compatibility candidate SHA-256"
+    )
+    root = _absolute_argument(authority_root_value, "publication authority root")
+    live_root = _canonical_absolute(ROOT, "live Paper02 root")
+    if root != live_root:
+        raise CompatibilityError(
+            "publication authority root must equal exact live Paper02 root"
+        )
+    candidate_path = _absolute_argument(
+        candidate_value, "compatibility publication candidate"
+    )
+    _require_tmp_candidate(candidate_path, "compatibility publication candidate")
+    destination = _canonical_output_for_root(root)
+    if candidate_path == destination:
+        raise CompatibilityError("candidate aliases canonical role 13")
+
+    candidate_parent_fd: int | None = None
+    root_fd: int | None = None
+    publication_parent_fd: int | None = None
+    stage_fd: int | None = None
+    stage_name: str | None = None
+    stage_inode: tuple[int, int] | None = None
+    renamed = False
+    preserve_crash_residue = False
+    try:
+        candidate_parent_fd, candidate_parent_chain = _open_publication_directory(
+            candidate_path.parent, "compatibility candidate parent"
+        )
+        candidate_raw, candidate_info = _read_publication_file_at(
+            candidate_parent_fd,
+            candidate_path.name,
+            "compatibility publication candidate",
+            expected_mode=0o600,
+        )
+        candidate_identity = _publication_file_identity(candidate_info)
+        if hashlib.sha256(candidate_raw).hexdigest() != expected_sha256:
+            raise CompatibilityError(
+                "compatibility candidate SHA-256 differs from expected intent"
+            )
+        _validate_candidate_bytes(candidate_raw)
+
+        root_fd, root_chain = _open_publication_directory(
+            root, "publication authority root"
+        )
+        publication_parent_fd, publication_parent_chain = (
+            _open_publication_directory(
+                destination.parent, "compatibility publication parent"
+            )
+        )
+        _replay_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "compatibility publication parent",
+        )
+        try:
+            os.stat(
+                destination.name,
+                dir_fd=publication_parent_fd,
+                follow_symlinks=False,
+            )
+        except FileNotFoundError:
+            pass
+        else:
+            raise CompatibilityError(
+                "canonical compatibility destination already exists"
+            )
+
+        live_raw = _live_compatibility_bytes(root)
+        if candidate_raw != live_raw:
+            raise CompatibilityError(
+                "compatibility candidate is stale relative to live replay bytes"
+            )
+        _replay_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+
+        for _attempt in range(32):
+            proposed_name = _publication_stage_basename()
+            suffix = proposed_name.removeprefix(PUBLICATION_STAGE_PREFIX)
+            if (
+                not proposed_name.startswith(PUBLICATION_STAGE_PREFIX)
+                or len(suffix) != 32
+                or any(character not in "0123456789abcdef" for character in suffix)
+            ):
+                raise CompatibilityError(
+                    "compatibility publication staging basename violates contract"
+                )
+            try:
+                stage_fd = os.open(
+                    proposed_name,
+                    os.O_WRONLY
+                    | os.O_CREAT
+                    | os.O_EXCL
+                    | getattr(os, "O_NOFOLLOW", 0),
+                    0o600,
+                    dir_fd=publication_parent_fd,
+                )
+            except FileExistsError:
+                continue
+            except OSError as error:
+                raise CompatibilityError(
+                    f"compatibility publication staging create failed: {error}"
+                ) from error
+            stage_name = proposed_name
+            initial_stage = os.fstat(stage_fd)
+            if not stat.S_ISREG(initial_stage.st_mode) or initial_stage.st_nlink != 1:
+                raise CompatibilityError(
+                    "compatibility staging inode is not exclusive regular file"
+                )
+            stage_inode = (initial_stage.st_dev, initial_stage.st_ino)
+            break
+        else:
+            raise CompatibilityError(
+                "compatibility publication exhausted collision-safe stage names"
+            )
+        assert stage_fd is not None and stage_name is not None and stage_inode is not None
+        os.fchmod(stage_fd, 0o644)
+        _write_publication_bytes(stage_fd, candidate_raw)
+        try:
+            _publication_fault_hook("AFTER_STAGE_WRITE")
+        except SyntheticCompatibilityPublicationCrash:
+            preserve_crash_residue = True
+            raise
+        os.fsync(stage_fd)
+        try:
+            _publication_fault_hook("AFTER_STAGE_FILE_FSYNC")
+        except SyntheticCompatibilityPublicationCrash:
+            preserve_crash_residue = True
+            raise
+        staged_raw, staged_info = _read_publication_file_at(
+            publication_parent_fd,
+            stage_name,
+            "compatibility publication staging file",
+            expected_mode=0o644,
+            fsync_file=True,
+        )
+        if (
+            staged_raw != candidate_raw
+            or (staged_info.st_dev, staged_info.st_ino) != stage_inode
+        ):
+            raise CompatibilityError("compatibility staging replay mismatch")
+        os.fsync(publication_parent_fd)
+        try:
+            _publication_fault_hook("AFTER_STAGING_PARENT_FSYNC")
+        except SyntheticCompatibilityPublicationCrash:
+            preserve_crash_residue = True
+            raise
+
+        try:
+            _publication_fault_hook("BEFORE_TERMINAL_REPLAY")
+        except SyntheticCompatibilityPublicationCrash:
+            preserve_crash_residue = True
+            raise
+        _replay_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+        _replay_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "compatibility publication parent",
+        )
+        terminal_live_raw = _live_compatibility_bytes(root)
+        if terminal_live_raw != candidate_raw or terminal_live_raw != live_raw:
+            raise CompatibilityError(
+                "live compatibility replay changed before publication"
+            )
+        staged_raw, staged_info = _read_publication_file_at(
+            publication_parent_fd,
+            stage_name,
+            "compatibility publication staging file",
+            expected_mode=0o644,
+        )
+        if (
+            staged_raw != candidate_raw
+            or (staged_info.st_dev, staged_info.st_ino) != stage_inode
+        ):
+            raise CompatibilityError("compatibility staging inode changed")
+
+        try:
+            _publication_fault_hook("BEFORE_RENAME")
+        except SyntheticCompatibilityPublicationCrash:
+            preserve_crash_residue = True
+            raise
+        _replay_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+        _replay_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "compatibility publication parent",
+        )
+        if _live_compatibility_bytes(root) != candidate_raw:
+            raise CompatibilityError(
+                "live compatibility replay changed at publication boundary"
+            )
+        staged_raw, staged_info = _read_publication_file_at(
+            publication_parent_fd,
+            stage_name,
+            "compatibility publication staging file",
+            expected_mode=0o644,
+        )
+        if (
+            staged_raw != candidate_raw
+            or (staged_info.st_dev, staged_info.st_ino) != stage_inode
+        ):
+            raise CompatibilityError(
+                "compatibility staging changed at publication boundary"
+            )
+        _rename_publication_noreplace(
+            publication_parent_fd, stage_name, destination.name
+        )
+        renamed = True
+        _publication_fault_hook("AFTER_RENAME")
+
+        try:
+            os.stat(stage_name, dir_fd=publication_parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            pass
+        else:
+            raise CompatibilityError(
+                "compatibility rename left staging entry present"
+            )
+        open_stage = os.fstat(stage_fd)
+        if (
+            (open_stage.st_dev, open_stage.st_ino) != stage_inode
+            or not stat.S_ISREG(open_stage.st_mode)
+            or stat.S_IMODE(open_stage.st_mode) != 0o644
+            or open_stage.st_nlink != 1
+            or open_stage.st_size != len(candidate_raw)
+        ):
+            raise CompatibilityError(
+                "open compatibility staging inode changed after rename"
+            )
+        published_raw, published_info = _read_publication_file_at(
+            publication_parent_fd,
+            destination.name,
+            "canonical S0 compatibility replay",
+            expected_mode=0o644,
+            fsync_file=True,
+        )
+        if (
+            published_raw != candidate_raw
+            or hashlib.sha256(published_raw).hexdigest() != expected_sha256
+            or (published_info.st_dev, published_info.st_ino) != stage_inode
+        ):
+            raise CompatibilityError(
+                "canonical compatibility post-publication replay mismatch"
+            )
+        _publication_fault_hook("AFTER_DESTINATION_FSYNC")
+        os.fsync(publication_parent_fd)
+        _publication_fault_hook("AFTER_PUBLICATION_PARENT_FSYNC")
+
+        _replay_publication_directory(
+            root, root_fd, root_chain, "publication authority root"
+        )
+        _replay_publication_directory(
+            destination.parent,
+            publication_parent_fd,
+            publication_parent_chain,
+            "compatibility publication parent",
+        )
+        lexical = _secure_read(destination, "canonical compatibility lexical replay")
+        if (
+            lexical.data != candidate_raw
+            or (lexical.metadata[0], lexical.metadata[1]) != stage_inode
+            or stat.S_IMODE(lexical.metadata[2]) != 0o644
+            or lexical.metadata[3] != 1
+        ):
+            raise CompatibilityError(
+                "canonical compatibility lexical terminal replay mismatch"
+            )
+        _replay_publication_candidate(
+            path=candidate_path,
+            parent_fd=candidate_parent_fd,
+            parent_chain=candidate_parent_chain,
+            expected_raw=candidate_raw,
+            expected_identity=candidate_identity,
+        )
+        if _live_compatibility_bytes(root) != candidate_raw:
+            raise CompatibilityError(
+                "live compatibility replay changed after publication"
+            )
+        _publication_fault_hook("AFTER_POSTPUBLICATION_REPLAY")
+
+        receipt = {
+            "schema_version": SCHEMA_VERSION,
+            "protocol_id": PROTOCOL_ID,
+            "artifact_role": "S0_COMPATIBILITY_PUBLICATION_RECEIPT",
+            "artifact_status": "PUBLISHED_WRITE_ONCE_NON_LICENSING",
+            "authority": "ROLE23_ADAPTER_PUBLICATION_ONLY",
+            "candidate_path": os.fspath(candidate_path),
+            "canonical_path": os.fspath(destination),
+            "compatibility_sha256": expected_sha256,
+            "size_bytes": len(candidate_raw),
+            "mode": "0644",
+            "nlink": 1,
+            "serializer": "CJ_COMPACT_V1",
+            "publication_method": PUBLICATION_METHOD,
+            "independent_verification_performed": False,
+            "scientific_licensing_enabled": False,
+            "production_authorized": False,
+            "scientific_dispatch_performed": False,
+            "component_status": None,
+            "milestone_status": None,
+            "theorem_status": None,
+            "final_status": None,
+        }
+        canonical_json_bytes(receipt)
+        return receipt
+    finally:
+        cleanup_error: BaseException | None = None
+        if (
+            publication_parent_fd is not None
+            and stage_name is not None
+            and stage_inode is not None
+            and not renamed
+            and not preserve_crash_residue
+        ):
+            try:
+                _cleanup_publication_stage(
+                    publication_parent_fd, stage_name, stage_inode
+                )
+            except BaseException as error:
+                cleanup_error = error
+        close_error: OSError | None = None
+        for descriptor in (
+            stage_fd,
+            publication_parent_fd,
+            root_fd,
+            candidate_parent_fd,
+        ):
+            if descriptor is None:
+                continue
+            try:
+                os.close(descriptor)
+            except OSError as error:
+                if close_error is None:
+                    close_error = error
+        if cleanup_error is not None:
+            raise cleanup_error
+        if close_error is not None:
+            raise CompatibilityError(
+                f"compatibility publication descriptor close failed: {close_error}"
+            ) from close_error
+
+
+def _output_argument(value: str) -> Path:
+    try:
+        path = _absolute_argument(value, "temporary output argument")
+        _require_tmp_candidate(path, "temporary output argument")
+        return path
     except CompatibilityError as error:
         raise argparse.ArgumentTypeError(str(error)) from error
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--capture-s0-compatibility", action="store_true")
+    parser.add_argument("--publish-s0-compatibility", action="store_true")
     parser.add_argument(
         "--output", type=_output_argument, default=None,
-        help="optional new absolute temporary JSON path outside the project tree",
+        help="new exact 0600 /tmp candidate path (capture only)",
     )
+    parser.add_argument("--candidate")
+    parser.add_argument("--expected-sha256")
+    parser.add_argument("--authority-root")
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     arguments = parse_args(argv)
     try:
-        payload = build_compatibility_object()
-        encoded = canonical_json_bytes(payload)
-        if arguments.output is not None:
-            _secure_exclusive_write(arguments.output, encoded)
-        sys.stdout.buffer.write(encoded)
+        if arguments.capture_s0_compatibility == arguments.publish_s0_compatibility:
+            raise CompatibilityError(
+                "exactly one of capture or publish compatibility mode is required"
+            )
+        if arguments.capture_s0_compatibility:
+            if (
+                arguments.output is None
+                or arguments.candidate is not None
+                or arguments.expected_sha256 is not None
+                or arguments.authority_root is not None
+            ):
+                raise CompatibilityError(
+                    "compatibility capture requires only --output"
+                )
+            receipt = capture_compatibility_candidate(os.fspath(arguments.output))
+        else:
+            if (
+                arguments.output is not None
+                or arguments.candidate is None
+                or arguments.expected_sha256 is None
+                or arguments.authority_root is None
+            ):
+                raise CompatibilityError(
+                    "compatibility publication requires --candidate, "
+                    "--expected-sha256, and --authority-root, without --output"
+                )
+            receipt = publish_compatibility_replay(
+                candidate_value=arguments.candidate,
+                expected_sha256=arguments.expected_sha256,
+                authority_root_value=arguments.authority_root,
+            )
+        sys.stdout.buffer.write(canonical_json_bytes(receipt))
         return 0
     except Exception as error:
         print(f"ERROR: {type(error).__name__}: {error}", file=sys.stderr)

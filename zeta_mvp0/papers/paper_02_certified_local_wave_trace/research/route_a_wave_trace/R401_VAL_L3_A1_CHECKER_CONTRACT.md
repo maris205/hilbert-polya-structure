@@ -388,12 +388,15 @@ theorem_status
 final_status
 ```
 
-It has `artifact_status=NON_LICENSING`,
+This remains an exact closed 18-key artifact with
+`artifact_role=S0_TO_A1_COMPATIBILITY_REPLAY` and
+`artifact_status=NON_LICENSING`.
 `replay_status=PASS_S0_COMPATIBILITY_REPLAY` only on exact replay, and null
 milestone/theorem/final values.  Its nine exact control hashes are those in
 the sealed A4.16 representative report; a matching hash with changed role,
 count, status, or schema is rejected.  The main freeze binds both this object
-and the nine controls directly.
+and the nine controls directly.  The later capture/publication implementation
+does not add receipt or authority fields to this object.
 
 ## 9. Component postchecks
 
@@ -494,7 +497,11 @@ scientific pass.
 The test suite and recorded hashes are mandatory main-freeze inputs.  A mock
 pass has no scientific status.
 
-## 14. Present rejection gate
+## 14. Role-13 implementation/prepublication rejection snapshot
+
+The state block below is explicitly the prepublication snapshot whose bytes
+may be source-bound by role 13.  It is not a promise that this document will
+be edited after a later publication edge.
 
 ```text
 contract_status = PROSPECTIVE_NON_LICENSING
@@ -511,7 +518,19 @@ formal_component_postchecks_exist = false
 formal_composite_postcheck_exists = false
 machine_verify_only_implemented = true
 machine_publisher_implemented = true
-canonical_machine_freeze_exists = false
+canonical_machine_freeze_exists = true
+canonical_machine_freeze_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+canonical_machine_freeze_size_bytes = 54526
+canonical_machine_freeze_mode = 0644
+canonical_machine_freeze_nlink = 1
+canonical_machine_freeze_publication_commit = 5086e33c7c66f33785338e90b340347e086d9941
+canonical_machine_freeze_role24_postverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+s0_compatibility_capture_implemented = true
+s0_compatibility_publisher_implemented = true
+s0_compatibility_adapter_sha256 = a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0
+s0_compatibility_test_sha256 = f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d
+s0_compatibility_focused_tests = 72/72
+canonical_s0_compatibility_role13_exists_at_prepublication_snapshot = false
 main_freeze_exists = false
 dispatch_authorized = false
 milestone_status = null
@@ -559,3 +578,54 @@ replay separately authenticates the Conda and python-flint roots, CAPD v2
 index-to-detached-HEAD tree equality plus the live tracked-row root, and the
 persistent ELF GNU build-id/`DT_NEEDED` closure.  Leaf checkers never invent
 or weaken those upstream identities.
+
+## 16. Role-13 publication replay boundary
+
+The role-23 compatibility adapter now has separate exact-exclusive capture and
+publication modes:
+
+```text
+--capture-s0-compatibility --output /tmp/EXACT_NEW_CANDIDATE.json
+```
+
+or
+
+```text
+--publish-s0-compatibility \
+--candidate /tmp/EXACT_CANDIDATE.json \
+--expected-sha256 EXACT_64_LOWERHEX \
+--authority-root EXACT_LIVE_PAPER02_ROOT
+```
+
+Capture creates a new one-link `0600` candidate.  Publication accepts no
+destination override and derives the fixed role-13 path.
+
+Publication requires a strict compact candidate in `1..1048576` bytes and
+byte identity with a fresh live compatibility replay.  The terminal replay
+reopens the exact four source bindings: the adapter, pre-freeze design,
+checker contract, and release contract.  It stages in the canonical parent,
+sets the stage explicitly to `0644`, and uses only
+`renameat2(RENAME_NOREPLACE)`.  Every existing destination is fatal, even if
+its bytes are identical.  No post-rename failure authorizes rollback,
+deletion, repair, overwrite, or idempotent republish.
+
+The adapter's local post-rename replay is not an independent checker.  Its
+exact 21-key receipt therefore has
+`authority=ROLE23_ADAPTER_PUBLICATION_ONLY`,
+`independent_verification_performed=false`, licensing/production/dispatch
+false, and component/milestone/theorem/final null.  It neither creates nor
+widens a scientific checker status.
+
+At this implementation/prepublication snapshot, the publisher has not
+published the repository role-13 artifact.  Canonical role 13, role 54, every
+formal component/composite status, and all scientific dispatch are absent at
+that snapshot.  The three bound formal documents must be stable before a fresh
+candidate can be captured.
+
+This checker-contract byte image is itself one of the four role-13 source
+bindings.  It is intentionally immutable after candidate capture and any
+successful publication; it must not be amended merely to restate later
+repository presence.  Postpublication current state belongs in the unbound
+compatibility-publication increment and tracker, and in the later role-11
+pre-freeze test record.  No future candidate digest or role-13 publication
+commit belongs in this source-bound contract.

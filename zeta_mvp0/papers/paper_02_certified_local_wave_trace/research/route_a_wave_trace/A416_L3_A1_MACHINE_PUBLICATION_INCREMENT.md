@@ -314,3 +314,55 @@ final before downstream role 54 can be constructed.
 This increment asserts no A4.16 all-slab theorem, global tube routing, trace
 formula, Hilbert--Polya operator, zeta-zero reconstruction, RH conclusion, or
 implication toward RH.
+
+## Subsequent authorized role-10 publication
+
+After this implementation increment and its independent audit were committed
+and pushed, the operator explicitly authorized the one-shot role-10 edge.  A
+fresh candidate was captured from stable role-19 bytes and independently
+preverified by role 24:
+
+```text
+candidate_path = /tmp/a416-machine-role10-authorized.cTjITj/machine-candidate.json
+candidate_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+size_bytes = 54526
+mode = 0644
+nlink = 1
+role19_sha256 = 262985fcb1fc82890501b635bfce163712f1821e2d92276aee9f363ee0473a82
+preverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+```
+
+Role 19 then executed the fixed no-replace transaction exactly once.  The
+publication receipt has SHA-256
+`58c052eb61d1a3acf4e16d8ed1f3bb1d52e224c507889675b3b6c46e2f473e11`,
+status `PUBLISHED_WRITE_ONCE_PENDING_INDEPENDENT_VERIFY`, and empty stderr.
+Role 24 subsequently replayed the canonical bytes with the exact result:
+
+```text
+machine_freeze_verification=PASS_MACHINE_FREEZE_VERIFY_ONLY authority=NON_AUTHORITATIVE_VERIFY_ONLY candidate_sha256=0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e size_bytes=54526 promotion_authorized=false
+```
+
+The canonical file is byte-identical to the candidate but has a distinct
+same-parent publication inode, mode `0644`, link count `1`, and no surviving
+publication stage.  It was committed alone as
+`5086e33c7c66f33785338e90b340347e086d9941`.
+
+This later event supersedes only the current-absence statements above; the
+historical implementation boundary remains accurate.  Role 10 remains a
+machine-admission artifact only.  Role 54, scientific dispatch, and every
+component/milestone/theorem/final status remain absent or null.
+
+## Relationship to the later role-13 implementation
+
+Role-10 publication and postverification do not publish any other member of
+the 53-input array.  A distinct later implementation increment adds
+temp-capture and fixed-destination write-once publication for role 13, the
+unchanged exact 18-key `NON_LICENSING` S0-compatibility object.  That surface
+is recorded in
+[`A416_L3_A1_S0_COMPATIBILITY_PUBLICATION_INCREMENT.md`](A416_L3_A1_S0_COMPATIBILITY_PUBLICATION_INCREMENT.md).
+
+The role-13 publisher has not been executed against the repository and the
+canonical role-13 path is currently absent.  Its existence does not alter the
+historical time-bounded statements in this machine-publication increment, the
+current canonical role-10 identity above, or the continued absence of role
+54 and scientific dispatch.

@@ -14,8 +14,12 @@ This contract defines the exact candidate role maps and acyclic publication
 rules for a future L3-A1 production release.  A mock-only builder and complete
 temporary 68-role replay now exist, together with the three mock checker and
 postcheck chains.  A fixed-destination write-once role-19 machine publisher is
-also implemented but has not been executed.  This does not assert that a
-production machine freeze, main freeze, pre-freeze review, scientific result,
+also implemented; after separate authorization it published canonical input
+role 10 once, and role 24 independently postverified the inode.  Role 23 now
+also implements temp-capture and fixed-destination publication for role 13,
+but at the implementation/prepublication snapshot recorded by these bytes
+that publisher has not been executed and canonical role 13 is absent.
+This does not assert that a main freeze, pre-freeze review, scientific result,
 formal checker status, or canonical release exists.
 
 The future release builder never runs an evaluator and never creates
@@ -398,7 +402,7 @@ the formal protocol.  It does not prove global tube routing, global orbit
 uniqueness, a trace formula, a Hilbert--Polya operator, zeta-zero
 reconstruction, RH, or any implication toward RH.
 
-Current exact state:
+Exact state at the role-13 implementation/prepublication snapshot:
 
 ```text
 contract_status = PROSPECTIVE_NON_LICENSING
@@ -413,7 +417,19 @@ paper02_regression = 675/675
 formal_release_builder_implemented = false
 machine_verify_only_implemented = true
 machine_publisher_implemented = true
-canonical_machine_role10_exists = false
+canonical_machine_role10_exists = true
+canonical_machine_role10_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+canonical_machine_role10_size_bytes = 54526
+canonical_machine_role10_mode = 0644
+canonical_machine_role10_nlink = 1
+canonical_machine_role10_publication_commit = 5086e33c7c66f33785338e90b340347e086d9941
+canonical_machine_role10_role24_postverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+s0_compatibility_capture_implemented = true
+s0_compatibility_publisher_implemented = true
+s0_compatibility_adapter_sha256 = a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0
+s0_compatibility_test_sha256 = f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d
+s0_compatibility_focused_tests = 72/72
+canonical_s0_compatibility_role13_exists_at_prepublication_snapshot = false
 main_freeze_exists = false
 canonical_release_exists = false
 dispatch_authorized = false
@@ -502,8 +518,10 @@ The exact environment has only `PATH=/usr/bin:/bin`, `LANG=C.UTF-8`,
 
 The implemented capture mode may capture and self-validate a candidate only
 at a new temporary path; that mode does not publish
-`R401_VAL_L3_A1_MACHINE_FREEZE.json`.  The distinct publisher described in
-section 15 is implemented but has not been executed.  The separate command
+`R401_VAL_L3_A1_MACHINE_FREEZE.json`.  At the historical implementation
+boundary, the distinct publisher described in section 15 had not been
+executed; it was later separately authorized once and its canonical role-10
+inode passed role-24 postverification.  The separate command
 `--verify-machine-freeze ABSOLUTE_JSON_PATH` is mutually exclusive with
 release `--verify-only`, replays one compact canonical candidate against the
 current Paper 02 root, and emits only
@@ -611,5 +629,71 @@ same independently recomputed digest and size and
 blocks roles 11--13, independent freeze review, role 54, initialization, and
 all dispatch.
 
-This amendment records publisher implementation only.  No command has
-published role 10, and no role-54 main freeze or scientific artifact exists.
+This amendment records the historical role-10 publisher implementation
+boundary.  The later separately authorized publication created canonical
+role 10 with SHA-256
+`0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e`,
+size `54526`, mode `0644`, link count one, and commit
+`5086e33c7c66f33785338e90b340347e086d9941`; role 24 independently
+postverified it.  No role-54 main freeze or scientific artifact exists.
+
+## 16. Canonical S0-compatibility input publication amendment
+
+Input role 13 remains the unchanged exact 18-key compact compatibility object
+listed in the checker contract.  It has
+`artifact_role=S0_TO_A1_COMPATIBILITY_REPLAY`,
+`artifact_status=NON_LICENSING`, null milestone/theorem/final statuses, and no
+self-hash or publication authority field.  The publication implementation
+does not modify that role schema.
+
+Role 23 exposes an exact XOR between:
+
+```text
+--capture-s0-compatibility --output /tmp/EXACT_NEW_CANDIDATE.json
+```
+
+and
+
+```text
+--publish-s0-compatibility \
+--candidate /tmp/EXACT_CANDIDATE.json \
+--expected-sha256 EXACT_64_LOWERHEX \
+--authority-root EXACT_LIVE_PAPER02_ROOT
+```
+
+Capture creates only a new one-link `0600` regular file below `/tmp`.
+Publication accepts no output or destination override, derives only the exact
+role-13 path under the exact live Paper 02 root, and bounds candidate input to
+`1..1048576` bytes before open.  It checks strict compact bytes and the
+operator-supplied digest, then reproduces the compatibility object from the
+sealed S0 roles and four live source bindings: role 23 itself, the pre-freeze
+design, the checker contract, and this release contract.  Those bound source
+bytes must be stable before candidate capture.
+
+The transaction creates a new hidden same-parent stage, explicitly sets mode
+`0644`, flushes and terminally replays the stage/candidate/namespaces/live
+bindings, and uses only `renameat2(RENAME_NOREPLACE)`.  A pre-existing role-13
+entry is fatal even when byte-identical.  Before rename, only an inode-matched
+stage owned by the invocation may be cleaned.  After rename, no failure
+authorizes rollback, unlink, repair, overwrite, or idempotent republish.
+
+The compact publication receipt is an exact closed 21-key object with
+`artifact_status=PUBLISHED_WRITE_ONCE_NON_LICENSING`,
+`authority=ROLE23_ADAPTER_PUBLICATION_ONLY`,
+`publication_method=SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1`, and
+`serializer=CJ_COMPACT_V1`.  Independent verification, licensing, production,
+and dispatch are false; component, milestone, theorem, and final are null.
+The adapter's local post-rename replay is not independent verification.
+
+This is implementation only.  At this explicit prepublication snapshot, no
+repository command has executed the role-13 publisher, canonical role 13 is
+absent, role 54 is absent, and no production result, formal release, or
+scientific dispatch exists.
+
+This release-contract byte image is itself one of the four role-13 source
+bindings.  After candidate capture and any successful publication it is
+intentionally frozen and must not be edited merely to restate later repository
+presence.  Postpublication current state belongs in the unbound
+compatibility-publication increment and tracker, and in the later role-11
+pre-freeze test record.  No future role-13 candidate SHA-256 or publication
+commit belongs in this source-bound contract.

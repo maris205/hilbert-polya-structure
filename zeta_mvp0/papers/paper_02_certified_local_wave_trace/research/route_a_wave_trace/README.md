@@ -108,8 +108,16 @@ trace, Hilbert--Pólya, zeta-zero, or RH gate.
 - [A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md](A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md):
   fixed-destination role-10 publisher implementation boundary, including
   same-parent atomic no-replace publication, source-candidate preservation,
-  and mandatory separate role-24 postpublication replay; the publisher has
-  not been executed and no canonical role 10 exists;
+  and mandatory separate role-24 postpublication replay; the subsequently
+  authorized canonical role 10 is published and role-24-verified, while role
+  54 and scientific dispatch remain absent;
+- [A416_L3_A1_S0_COMPATIBILITY_PUBLICATION_INCREMENT.md](A416_L3_A1_S0_COMPATIBILITY_PUBLICATION_INCREMENT.md):
+  role-13 temp-capture and fixed-destination publication implementation
+  boundary for the unchanged exact 18-key `NON_LICENSING` compatibility
+  object; the publisher uses a one-link `0600` `/tmp` candidate, a bounded
+  explicit-`0644` same-parent stage, and
+  `renameat2(RENAME_NOREPLACE)`, but has not been executed and canonical role
+  13 remains absent;
 - `A416_PHASE_FLOWBOX_DERIVATION.md` and
   `R401_VAL_L3_PHASE_TUBE_PROTOCOL_DRAFT.md`: analytic reduction and the
   non-licensing representative protocol used by the A4.16 smoke;

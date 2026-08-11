@@ -16,10 +16,13 @@ a component, milestone, theorem, or final pass.
 
 Partial mock/static/branch implementation candidates, a non-scientific
 temporary machine-capture mode, and a fixed-destination write-once role-10
-publisher now exist.  The publisher has not been executed: the complete
-production scheduler, canonical role-10 machine freeze, role-54 main freeze,
-and accepted independent pre-freeze review do not.  Therefore no CLI
-execution mode may dispatch an evaluator in the current repository state.
+publisher now exist.  After separate authorization, role 10 was published
+once and independently postverified.  A separate role-23 capture/publisher
+surface now exists for the unchanged S0-compatibility input role 13, but that
+publisher has not been executed and canonical role 13 remains absent.  The
+complete production scheduler, role-54 main freeze, and accepted independent
+pre-freeze review do not exist.  Therefore no CLI execution mode may dispatch
+an evaluator in the current repository state.
 
 ## 2. Canonical task identities and stages
 
@@ -378,8 +381,20 @@ contract_status = PROSPECTIVE_NON_LICENSING
 implementation_stable = false
 machine_capture_temp_only_implemented = true
 machine_publisher_implemented = true
-canonical_machine_role10_exists = false
-machine_freeze_exists = false
+canonical_machine_role10_exists = true
+machine_freeze_exists = true
+machine_freeze_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+machine_freeze_size_bytes = 54526
+machine_freeze_mode = 0644
+machine_freeze_nlink = 1
+machine_freeze_publication_commit = 5086e33c7c66f33785338e90b340347e086d9941
+machine_freeze_role24_postverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+s0_compatibility_capture_implemented = true
+s0_compatibility_publisher_implemented = true
+s0_compatibility_adapter_sha256 = a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0
+s0_compatibility_test_sha256 = f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d
+s0_compatibility_focused_tests = 72/72
+canonical_s0_compatibility_role13_exists = false
 main_freeze_exists = false
 dispatch_authorized = false
 milestone_status = null
@@ -627,3 +642,52 @@ timeout, termination grace, and pipe-close grace.  Accordingly
 `branch_millisecond_migration_complete=true`.  This closes only a serializer
 and runtime-replay migration; it does not relax the unconditional scientific
 dispatch rejection.
+
+## 14. Role-13 adapter capture/publication control
+
+The role-23 adapter remains outside every scheduler scientific-dispatch mode.
+Its CLI is exact-exclusive between:
+
+```text
+--capture-s0-compatibility --output /tmp/EXACT_NEW_CANDIDATE.json
+```
+
+and
+
+```text
+--publish-s0-compatibility \
+--candidate /tmp/EXACT_CANDIDATE.json \
+--expected-sha256 EXACT_64_LOWERHEX \
+--authority-root EXACT_LIVE_PAPER02_ROOT
+```
+
+Capture requires only `--output`; publication requires the other three
+arguments without `--output`.  No destination option exists.  The only
+canonical leaf is role 13 at
+`research/route_a_wave_trace/R401_VAL_L3_A1_S0_COMPATIBILITY_REPLAY.json`.
+
+The candidate is the unchanged closed exact 18-key `NON_LICENSING`
+compatibility object serialized as `CJ_COMPACT_V1`.  Capture exclusively
+creates a one-link `0600` regular file below `/tmp`.  Publication pins and
+replays that file with a pre-open `1..1048576`-byte cap, checks the expected
+digest, and requires exact byte identity with a fresh live rebuild.  That
+rebuild terminally binds the adapter source plus the pre-freeze design,
+checker contract, and release contract; all four sources must remain stable
+from candidate capture through publication.
+
+Publication derives the fixed destination from the exact live Paper 02 root,
+refuses every existing entry including identical bytes, creates a new
+same-parent stage, explicitly sets it to `0644`, flushes and replays it, and
+uses only `renameat2(RENAME_NOREPLACE)`.  After rename, no failure permits
+rollback, unlink, repair, overwrite, or an idempotent second publication.
+
+The success receipt is a closed exact 21-key compact object under
+`ROLE23_ADAPTER_PUBLICATION_ONLY` and
+`PUBLISHED_WRITE_ONCE_NON_LICENSING`.  It records
+`independent_verification_performed=false`, all licensing/production/dispatch
+Booleans false, and component/milestone/theorem/final statuses null.  The
+adapter's own post-rename replay is not an independent checker.
+
+This is an implementation surface only.  It has not been executed against
+the repository, canonical role 13 is absent, role 54 is absent, and no
+production or scientific evaluator is authorized.

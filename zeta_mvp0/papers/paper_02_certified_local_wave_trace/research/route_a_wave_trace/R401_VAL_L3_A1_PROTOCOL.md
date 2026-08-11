@@ -109,6 +109,15 @@ independently reopens role 10.
 The main freeze remains downstream role 54 rather than a member of, or an
 input to, this machine-publication edge.
 
+Role 23 is the S0 adapter and the fixed-destination publisher implementation
+for input role 13.  It preserves the original exact 18-key compatibility
+artifact and may capture only a new temporary `0600` candidate.  Canonical
+role 13 does not yet exist: the publication mode is implemented but has not
+been executed against the repository.  The adapter binds itself plus the
+pre-freeze design, checker contract, and release contract, so those four
+source byte images must be final before a fresh publishable role-13 candidate
+is captured.
+
 ## 4. Exact model and local domains
 
 The evaluator and every scientific checker reconstruct outward from
@@ -337,7 +346,19 @@ protocol_status = PROSPECTIVE_NON_LICENSING
 machine_capture_temp_only_implemented = true
 machine_verify_only_implemented = true
 machine_publisher_implemented = true
-machine_freeze_exists = false
+machine_freeze_exists = true
+machine_freeze_sha256 = 0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e
+machine_freeze_size_bytes = 54526
+machine_freeze_mode = 0644
+machine_freeze_nlink = 1
+machine_freeze_publication_commit = 5086e33c7c66f33785338e90b340347e086d9941
+machine_freeze_role24_postverify = PASS_MACHINE_FREEZE_VERIFY_ONLY
+s0_compatibility_capture_implemented = true
+s0_compatibility_publisher_implemented = true
+s0_compatibility_adapter_sha256 = a00117303874eec16c7d116f344179c1e586856046cb725efb92c7b8c22640b0
+s0_compatibility_test_sha256 = f93832a2de731bad2972a08534adf5c8001c84805e57f01c5970a810bae2e95d
+s0_compatibility_focused_tests = 72/72
+canonical_s0_compatibility_role13_exists = false
 main_freeze_exists = false
 independent_prefreeze_accept = false
 dispatch_authorized = false
@@ -388,8 +409,11 @@ Role 19 alone owns the fresh build and records `shell_used=false`; the role-24
 independent verifier performs no write and spawns no subprocess.  The capture
 and verify-only CLIs grant no role-10 publication, role-54 construction,
 production authorization, or scientific status.  A distinct role-19
-fixed-destination publisher is now implemented but has not been executed in
-the repository.  Its existence likewise grants no scientific authority.
+fixed-destination publisher was subsequently executed once under separate
+authorization; canonical role 10 now has SHA-256
+`0d5c46726ee8142e0e53f97c904213dfc9b795ac300b423277bc27a711f5c21e`
+and passed the separate role-24 verify-only replay.  That completed
+machine-admission edge likewise grants no scientific authority.
 
 The exact static timeout is `1800000` ms.  Exact branch timeout and grace
 fields are `600000`, `2000`, and `1000` ms.  The formal branch runtime and
@@ -436,6 +460,62 @@ path.  A postpublication local or independent failure never authorizes
 rollback, deletion, repair, overwrite, or idempotent success; it leaves the
 write-once evidence in place and blocks all downstream work.
 
-No publication command has been run for this implementation increment.
-Consequently role 10 and role 54 remain absent, all result statuses remain
-null, and every scientific dispatcher remains rejected.
+At the historical implementation boundary documented by this section, no
+publication command had been run.  The later separately authorized event
+published role 10 once and role 24 independently postverified it, as recorded
+in `A416_L3_A1_MACHINE_PUBLICATION_INCREMENT.md`.  Role 54 remains absent,
+all result statuses remain null, and every scientific dispatcher remains
+rejected.
+
+## 15. Role-13 capture and publication implementation boundary
+
+The S0-compatibility adapter exposes an exact XOR:
+
+```text
+--capture-s0-compatibility --output /tmp/EXACT_NEW_CANDIDATE.json
+```
+
+or
+
+```text
+--publish-s0-compatibility \
+--candidate /tmp/EXACT_CANDIDATE.json \
+--expected-sha256 EXACT_64_LOWERHEX \
+--authority-root EXACT_LIVE_PAPER02_ROOT
+```
+
+Capture accepts no publication arguments.  Publication accepts no `--output`
+or destination override and derives only
+`research/route_a_wave_trace/R401_VAL_L3_A1_S0_COMPATIBILITY_REPLAY.json`.
+The authority root must equal the exact live Paper 02 root.
+
+The compatibility artifact itself remains the closed exact 18-key object in
+section 7.4 of the pre-freeze design, with
+`artifact_role=S0_TO_A1_COMPATIBILITY_REPLAY`,
+`artifact_status=NON_LICENSING`,
+`replay_status=PASS_S0_COMPATIBILITY_REPLAY`, an empty failure list, and null
+milestone/theorem/final statuses.  Capture writes only a new one-link `0600`
+regular file below `/tmp`.  Publication requires that candidate to be strict
+compact JSON, byte-identical to a fresh live replay, and sized in
+`1..1048576` bytes.
+
+Role 23 pins the candidate and authority namespaces, terminally rebuilds the
+artifact from the adapter, pre-freeze design, checker contract, and release
+contract source bindings, creates a new same-parent stage with explicit mode
+`0644`, and uses only Linux `renameat2(RENAME_NOREPLACE)`.  Every existing
+destination is fatal, including identical bytes.  Failure after rename never
+authorizes rollback, unlink, repair, overwrite, or idempotent republish.
+
+The transient publication receipt has exactly 21 keys and the exact ceiling
+`authority=ROLE23_ADAPTER_PUBLICATION_ONLY`,
+`artifact_status=PUBLISHED_WRITE_ONCE_NON_LICENSING`,
+`publication_method=SAME_PARENT_RENAMEAT2_NOREPLACE_FSYNC_V1`, and
+`serializer=CJ_COMPACT_V1`.  Its independent-verification, licensing,
+production, and dispatch Booleans are false; component, milestone, theorem,
+and final statuses are null.  The adapter's terminal post-rename replay is
+not independent verification.
+
+This section records implementation only.  The role-13 publisher has not
+been executed against the repository, canonical role 13 is absent, and no
+role-54 main freeze or scientific dispatcher exists.  The bound formal
+documents must stabilize before any fresh role-13 candidate capture.
