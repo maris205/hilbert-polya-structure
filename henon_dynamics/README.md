@@ -43,6 +43,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [adelic_henon_theta_route/](adelic_henon_theta_route/) | Global adelic H6 unitary, theta stabilizer, local noncompactness no-go, static rank-two range bound, and infinite scaling-orbit obstruction | Route-A exploratory; a scaling-covariant Poisson anomaly is the next big gate |
 | [`henon_instability_roof_zeta/`](henon_instability_roof_zeta/) | Certified Hénon survivor and instability-roof clock | Current HP gate negative |
 | [`henon_pinning_trace_obstruction/`](henon_pinning_trace_obstruction/) | Exact pinning-kernel and sign obstructions | Route-A rejected |
 | [`henon_frobenius_scheme_obstruction/`](henon_frobenius_scheme_obstruction/) | Fixed-period Frobenius/local-zeta collapse | Scoped obstruction |
@@ -152,7 +153,82 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C34 reaches full Maxwell--Hill wreath monodromy
+## Latest big-door result: HCS-C35 isolates the scaling-covariance gate
+
+C35 leaves the fixed-period tower and puts the original area-preserving H6
+map on one adelic Hilbert space:
+
+\[
+\mathcal U_H=\mathcal F_{\mathbb A}\mathcal M_{2q^3-q}.
+\]
+
+The restricted product is canonical because every finite spherical vacuum is
+fixed. Adelic Poisson summation and rational triviality of the global
+character give the exact nonlinear stabilizer
+
+\[
+\Theta\mathcal U_H=\Theta.
+\]
+
+On a transported Hénon-adapted domain this recovers the standard Tate/Connes
+scaling range exactly. The simpler-parent control is therefore explicit:
+the known Riemann divisor is inherited and cannot yet be credited to Hénon.
+
+Two new theorems locate the correct escape. First, for every \(p>3\) and
+\(m\ge0\),
+
+\[
+\int_{p^{-m}\mathbb Z_p}\psi_p(2x^3-x)\,dx=1.
+\]
+
+The normalized dilation tower then proves
+\(\mathcal M_{P_6}-I\) is noncompact, killing a naive same-space relative
+Fredholm determinant. Second, at one fixed phase the standard and chirped
+test spaces are two hyperplanes with a common codimension-two kernel. If
+their images extend to closed subspaces in a common Hilbert completion,
+their static range projections consequently satisfy
+
+\[
+\operatorname{rank}(P_H-P_0)\le2.
+\]
+
+This bound is not a dynamical two-channel theorem. Under dilation the cubic
+phase becomes
+
+\[
+P_a(x)=2a^3x^3-ax,
+\]
+
+and the boundary kernels attached to distinct positive \(a\) are linearly
+independent already before applying the Poisson map. The naive promotion of
+static rank two to finite-channel scattering is therefore refuted.
+
+The exact Poisson defect formula nevertheless sends every fixed-scale
+inversion defect into the same outgoing asymptotic mode \(|x|^{1/2}\). Its
+Hilbert-space membership is unproved and its coefficient functional still
+ranges over the infinite orbit, so this is a concrete compression mechanism
+rather than a bounded finite-rank operator or determinant theorem.
+
+The next RH gate is sharper and larger: construct a genuine scaling-site
+Hénon bundle or crossed-product cocycle, then prove that Poisson
+renormalization turns this infinite boundary orbit into a determinant-class
+relative anomaly \(\Delta_H(s)\). Identity gives rigidity; failure of
+determinant class closes the adelic H6 route; a nonconstant reciprocal,
+zero-free anomaly would promote the same global object toward analytic
+Route A.
+
+The strict current tuple is
+**(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_NATURAL_QUANTIZATION)** with overall **ROUTE_A_EXPLORATORY**. Route B is
+not authorized.
+
+- [C35 project overview](adelic_henon_theta_route/README.md)
+- [C35 theorem package](adelic_henon_theta_route/THEOREM_PACKAGE.md)
+- [C35 derivation package](adelic_henon_theta_route/DERIVATION_PACKAGE.md)
+- [C35 exact certificate](adelic_henon_theta_route/results/c35_certificate.json)
+- [C35 Route-A record](adelic_henon_theta_route/evaluations/route_a/HCS-C35/20260812T150757Z.yaml)
+
+## Predecessor big-door result: HCS-C34 reaches full Maxwell--Hill wreath monodromy
 
 C34 closes the principal arithmetic gate left open by C33.  Let \(L\) be
 the \(S_9\) splitting field of the period-five equal-action collision

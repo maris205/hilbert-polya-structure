@@ -657,6 +657,45 @@ Project: [`../../henon_bowen_pressure_gate/`](../../henon_bowen_pressure_gate/)
 
 ---
 
+## Adelic H6 theta and scaling-covariance gate (HCS-C35)
+
+C35 is the first Hénon round to place the source map on a single global
+adelic Hilbert space. The unitary
+
+\[
+\mathcal U_H=\mathcal F_{\mathbb A}\mathcal M_{2q^3-q}
+\]
+
+fixes all finite spherical vacua and the rational theta distribution. Its
+adapted Poisson range equals the standard Tate/Connes range, which provides a
+strong compatibility theorem and an equally strong simpler-parent warning:
+the existing Riemann divisor is inherited.
+
+The raw finite-field Euler product is rejected by zero accumulation, and the
+same-space local chirp difference is noncompact. At a fixed phase the two
+algebraic range quotients have dimension at most one on each side, giving a
+conditional static projection-rank bound of two. Dilation, however, generates
+an infinite-dimensional orbit of cubic boundary kernels before the Poisson
+map. The exact Poisson defect at each fixed scale lies in one common outgoing
+asymptotic mode, but its Hilbert-space membership is open; this gives a
+possible crossed-product anomaly but not yet determinant class. The reusable
+pattern is therefore:
+
+- do not assemble growing finite unitary fibres;
+- do not require the full local kick to be trace class;
+- distinguish static range comparison from scaling dynamics;
+- build the scaling-site bundle/cocycle before calling a vacuum decoration
+  dynamical monodromy;
+- test whether Poisson renormalization or a crossed-product quotient converts
+  the infinite boundary orbit into a determinant-class anomaly.
+
+The next gate is that anomaly determinant and its reciprocal symmetry/divisor,
+not another prime table.
+
+Project: [C35](../../adelic_henon_theta_route/)
+
+---
+
 # Future Projects
 
 Future candidate systems may include:

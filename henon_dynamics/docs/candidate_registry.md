@@ -985,3 +985,45 @@ The next authorized large gate is not another period-five refinement.  It
 must either construct a compatible period-indexed tower of Maxwell--Hill
 Kummer modules or a representation-valued chronological zeta with a proved
 all-period trace law.
+
+## HCS-C35 adelic Hénon--theta scattering gate (2026-08-12)
+
+Candidate **HCS-C35** pivots from fixed-period algebra to one global adelic
+quantization; see
+[the C35 project](../adelic_henon_theta_route/).
+
+The H6 generating phase defines
+\[
+\mathcal U_H=\mathcal F_{\mathbb A}\mathcal M_{2q^3-q}
+\]
+on \(L^2(\mathbb A_{\mathbb Q})\). Every finite spherical vacuum and the
+rational theta distribution are fixed. Pulling back the standard double-zero
+Poisson domain gives exactly the standard scaling spectral range, so the
+known Riemann divisor is currently an inherited mother-system result rather
+than a Hénon-essential theorem.
+
+The raw finite-field critical-line product is stopped by an interior
+zero-accumulation theorem. The local cubic dilation identity
+\[
+\int_{p^{-m}\mathbb Z_p}\psi_p(2x^3-x)\,dx=1
+\]
+also proves that the same-space chirp difference is noncompact. At one fixed
+phase, the standard and chirped test spaces are hyperplanes with a common
+codimension-two kernel. Their algebraic image quotients have dimension at
+most one on each side; conditionally on a common Hilbert closure, the static
+range projections differ by rank at most two. This does not imply a
+two-channel dynamics: dilation replaces the phase by
+\(P_a(x)=2a^3x^3-ax\), and the corresponding boundary kernels have
+infinite-dimensional span before the Poisson map. Exact Poisson summation
+puts every fixed-scale inversion defect into the common outgoing asymptotic
+mode \(|x|^{1/2}\), isolating a possible anomaly mechanism without proving
+that the mode lies in the scaling Hilbert completion or that the infinite
+coefficient orbit is determinant class.
+
+The current formal tuple is
+**(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_NATURAL_QUANTIZATION)** with **ROUTE_A_EXPLORATORY**. The next and only
+authorized large gate is to construct a scaling-covariant Hénon
+bundle/cocycle and decide whether a Poisson or crossed-product quotient turns
+the infinite boundary orbit into a determinant-class anomaly. Route B
+remains unauthorized.
