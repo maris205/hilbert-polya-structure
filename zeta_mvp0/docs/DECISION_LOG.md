@@ -1,5 +1,25 @@
 # Decision log
 
+## 2026-08-12 — flatten paper-package layout
+
+- Removed the redundant `zeta_mvp0/papers/` container and promoted each
+  existing paper package to an immediate `zeta_mvp0/paper_*` directory.
+- Kept every paper internally self-contained: manuscript, research records,
+  source, tests, validation assets, and result certificates move together.
+- Retained historical frozen evidence bytes unchanged.  Absolute paths stored
+  in those records describe their original capture environment and are not
+  rewritten as if the historical capture had occurred after this relocation.
+- Updated repository navigation and ignore rules to the flattened layout.
+  Historical path-bound commands, tools, and receipts remain byte-exact and
+  therefore fail closed when treated as authority for the relocated tree.
+- The published V2 role-5 object remains historical under its original
+  `C/H/D/A/P` identity.  Its relocated byte image is not a new canonical
+  publication.  Paper 02 has no active role-5 authority at the new root, so
+  roles 10 and later, initialization, and scientific dispatch remain stopped
+  until a distinct path-aware control generation receives independent review.
+- Recorded the exact mapping and control boundary in
+  [`PAPER_LAYOUT_MIGRATION_2026-08-12.md`](PAPER_LAYOUT_MIGRATION_2026-08-12.md).
+
 ## 2026-08-06 — repository split
 
 - Adopted one paper per subdirectory under `zeta_mvp0/papers/`.

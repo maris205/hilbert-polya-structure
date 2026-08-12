@@ -1,0 +1,127 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C05
+source_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+evaluation_date: 2026-08-12
+artifact_path_base: papers/01-falsification-first-audit
+
+source_lock:
+  object: "Recursive wheel-sieve residue Bratteli graph with only level-increasing edges."
+  family: "symbolic dynamics"
+  phase_space: "X=disjoint union over k>=0 of the one-sided tail-path spaces X_k through unit-residue levels R_k"
+  dynamics: "the self-map sigma:X->X deleting the first edge, with sigma(X_k) contained in X_(k+1)"
+  parameters: "W_0=1; next multiplier is the least integer above the previous multiplier coprime to W_k"
+  parameter_provenance: "elementary deterministic recursion; no external prime table"
+  arithmetic_origin: "the least-coprime-successor induction generates the rational primes and the residue levels are exactly units modulo the primorial"
+  clock: "tau_k=log(W_(k+1)/W_k)"
+  normalization: "integer level and primorial ratio"
+  determinant_convention: "formal Artin-Mazur series of the disjoint-tail self-map; its empty fixed-point ledger gives zeta_AM=D_AM=1"
+  function_space: "cylinder algebra on the disjoint union of one-sided Bratteli tail spaces"
+  roof_function: "log of the endogenous primorial multiplier"
+  potential_function: "0"
+  cocycle: "none"
+  cutoff: "levels 0 through 7"
+  precision: "exact integer graph and residue arithmetic; binary64 only for displayed logarithms/Jaccard ratios"
+  orbit_cutoff: "all paths in the finite level-7 DAG; periodic theorem holds at every level"
+  training_data: "none"
+  allowed_data: "intrinsic recursion and preregistered fixed/cyclic/random branch controls"
+  forbidden_data: "external prime table in recursion, reset edges, prime-indexed components, Riemann zeros"
+  code_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+  artifact_paths:
+    - wheel_sieve_level_shift/PROOF_PACKAGE.md
+    - wheel_sieve_level_shift/results/dag_certificate.json
+    - wheel_sieve_level_shift/results/level_table.csv
+    - wheel_sieve_level_shift/results/baseline_exact_edges.csv.gz
+
+a0:
+  verdict: A0_STRUCTURAL_ARITHMETIC_RELATION
+  evidence_status: PROVED
+  strongest_evidence: "The recursion exactly generates 2,3,5,7,11,13,17 at the frozen levels, and induction proves all later multipliers are consecutive rational primes; tau_k=log p_(k+1) is a derived primorial ratio."
+  strongest_failure: "The arithmetic lives on a nonstationary acyclic level order and does not yet index primitive periodic orbits or prime powers."
+  arithmetic_controls:
+    - "matched fixed-deleted-branch graph"
+    - "matched cyclic-deleted-branch graph"
+    - "five matched random-deleted-branch graphs, seeds 20260812-20260816"
+    - "exact comparison with unit residues modulo W_k"
+  artifacts:
+    - wheel_sieve_level_shift/results/level_table.csv
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "Every edge raises the integer level exactly once; an independent Kahn traversal processes every frozen vertex."
+  strongest_failure: "Fix(sigma^n) is empty for every n>=1, so there are no primitive cycles or repetitions."
+  metrics:
+    nodes_level_7_graph: 98460
+    edges_level_7_graph: 98459
+    directed_cycles: 0
+    level_step_failures: 0
+    kahn_processed_all_nodes: true
+  artifacts:
+    - wheel_sieve_level_shift/results/dag_certificate.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "The empty periodic ledger gives the exact formal determinant D_AM=1."
+  strongest_failure: "There is no nontrivial Euler product, Fredholm trace, or divisor to compare with xi."
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: "not applicable; acyclicity is exact"
+    precision_drift: 0
+    control_margin: "all matched controls are also acyclic; arithmetic Jaccard 1 versus level-7 controls 0.1408-0.4058"
+  artifacts:
+    - wheel_sieve_level_shift/results/dag_certificate.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "The formal Artin-Mazur series of the explicitly defined disjoint-tail self-map is identically 1."
+  strongest_failure: "It has no divisor, functional equation, gamma factor, explicit-formula trace, or natural Weil compression."
+  analytic_structure:
+    determinant: "1"
+    continuation: "entire but trivial"
+    completed_factor: false
+    divisor_growth: 0
+  weil_compression:
+    status: "not available because the same object has no periodic trace"
+    evidence_status: STOP_SCOPED
+  artifacts:
+    - docs/operator_obligations.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "The endogenous scale increment is a precise candidate return-time obligation."
+  strongest_failure: "No stationary return map, geometric carrier, Hilbert space, or same-clock operator is supplied."
+  metrics:
+    stationary_extension_known: false
+    artificial_reset_allowed: false
+    route_b_readiness: false
+  artifacts:
+    - ROUND2_CLUES.md
+
+adversarial_controls:
+  controls_used:
+    - "fixed deletion"
+    - "cyclic deletion"
+    - "five random deletion seeds"
+    - "exact unit-residue benchmark"
+  proves_too_much_risk: "the level-order DAG obstruction is generic; only the arithmetic deletion rule attains unit Jaccard 1"
+  verdict: "Controls separate the arithmetic residue rule but also confirm universal acyclicity of this architecture."
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "Strong endogenous rational-prime generator and intrinsic logarithmic scale, but no periodic dynamics; its A0 cannot be transferred to another candidate."
+blocking_conditions:
+  - "acyclic nonstationary graph"
+  - "no primitive/repetition ledger"
+  - "trivial determinant"
+next_smallest_test: "Prove or refute a stationary natural extension of comparable description complexity that retains the recursion without reset edges or prime-indexed components."
+round2_clues:
+  - "RC-03: a genuine return-time realization of the wheel scale would require a later geometric carrier"
+route_b_invocation_allowed: false

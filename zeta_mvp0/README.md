@@ -1,6 +1,6 @@
 # zeta_mvp0 — a staged Hilbert--Pólya structure programme
 
-Last updated: 2026-08-09.
+Last updated: 2026-08-12.
 
 `zeta_mvp0` is the first structured Hilbert--Polya search line in this
 repository.  Its organizing rule is:
@@ -31,8 +31,8 @@ repository.  Its organizing rule is:
 
 | Paper | Working title | Status | Strongest licensed result |
 |---|---|---|---|
-| [`paper_01_clock_preserving_henon`](papers/paper_01_clock_preserving_henon/README.md) | Clock-preserving Hénon operators | frozen manuscript package | exact clock, Q/W and operator-level \(S\); rational-prime \(P_0\) remains open |
-| [`paper_02_certified_local_wave_trace`](papers/paper_02_certified_local_wave_trace/README.md) | Certified local relative wave trace | compact release package mirrored; bulk A1 proof archive transferred separately | local relative-trace theorem; A4.12 branch; A4.13 gap; A4.15 all-slab local complement |
+| [`paper_01_clock_preserving_henon`](paper_01_clock_preserving_henon/README.md) | Clock-preserving Hénon operators | frozen manuscript package | exact clock, Q/W and operator-level \(S\); rational-prime \(P_0\) remains open |
+| [`paper_02_certified_local_wave_trace`](paper_02_certified_local_wave_trace/README.md) | Certified local relative wave trace | compact release package mirrored; bulk A1 proof archive transferred separately | local relative-trace theorem; A4.12 branch; A4.13 gap; A4.15 all-slab local complement |
 
 Each fully imported paper directory contains its manuscript,
 theorem/protocol documents, executable source, tests, and compact result
@@ -41,6 +41,17 @@ release chains; the A4.15 bulk raw archive is separately transferable and is
 not represented as present in an ordinary clone.  Failed attempts are
 retained only when they are needed for provenance and are marked
 non-licensing.
+
+The 2026-08-12 layout migration removed the redundant `papers/` container.
+Historical machine and release records retain the absolute paths at which
+they were captured.  In particular, an older path-bound control review is
+historical evidence after the move, not authority for the relocated tree;
+the next downstream control generation requires a fresh review at the new
+paths.  Until that generation is reviewed and published, Paper 02's
+path-bound control roles remain stopped even though the paper, theorem
+sources, and historical evidence are available at their new location.
+The exact relocation boundary is recorded in
+[`docs/PAPER_LAYOUT_MIGRATION_2026-08-12.md`](docs/PAPER_LAYOUT_MIGRATION_2026-08-12.md).
 
 The future roadmap is recorded in
 [`docs/PROGRAMME_ROADMAP.md`](docs/PROGRAMME_ROADMAP.md).  A planned paper is
@@ -127,9 +138,10 @@ Research governance is recorded in:
 
 All work in this programme is synchronized to
 `git@github.com:maris205/hilbert-polya-structure.git` over SSH.  A research
-stage that has become a paper receives exactly one immediate subdirectory of
-`papers/`; protocols, source, tests, proof objects, manuscript files, and
-claim boundaries remain inside that paper package.  Programme-level READMEs
+stage that has become a paper receives exactly one immediate `paper_*`
+subdirectory of `zeta_mvp0/`; protocols, source, tests, proof objects,
+manuscript files, and claim boundaries remain inside that paper package.
+Programme-level READMEs
 and ledgers are updated in the same commit whenever repository availability
 or a licensed milestone changes.
 
