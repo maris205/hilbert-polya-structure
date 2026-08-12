@@ -67,6 +67,7 @@ The foundational local source is
 | [`rauzy_groupoid_identity_determinant/`](rauzy_groupoid_identity_determinant/) | Natural-extension trace-log no-go; exact C25/C26 identity-holonomy relations; nonconstant normalized finite-Weil groupoid determinant germ | Phase 2 certified; Route-A exploratory, Route B closed |
 | [`rauzy_inverse_roof_trace_obstruction/`](rauzy_inverse_roof_trace_obstruction/) | All-phase positive-cone failure, inverse-time roof theorem, same-space nuclearity and isolated-flat-trace obstruction | C29-to-AGY promotion rejected; finite C29 graph germ retained |
 | [`henon_bowen_pressure_gate/`](henon_bowen_pressure_gate/) | Exact full-cylinder Bowen-pressure bracket, adapted/Euclidean coboundary, and local Hausdorff dimension theorem | Positive signal pressure-consistent at certified resolution; arithmetic interpretation rejected |
+| [`phase3_hcs_c32_artin_schreier_quantum_trace/`](phase3_hcs_c32_artin_schreier_quantum_trace/) | Exact Hénon Morse-germ collision with unequal Hill values and a source-certified local no-recovery theorem | Morse-local bridge stopped; global discriminant-monodromy gate open |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -149,7 +150,62 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C31 identifies the H6 positive signal
+## Latest big-door result: HCS-C32 closes Morse-local Hill recovery
+
+C32 keeps the chronological H6 dynamics and replaces the exhausted scalar
+pressure interpretation with a finite-field Artin--Schreier kernel.  Its
+global rank/purity and finite-field unitarity are mathematically valid but
+generic, so Phase 3 tested the one Hénon-specific possibility: whether an
+isolated Morse vanishing-cycle factor retains the full Hill multiplier.
+
+It does not.  Over \(\mathbb F_{61}\), the two primitive period-five cycles
+
+\[
+(12,12,40,27,40),
+\qquad
+(33,58,36,36,58)
+\]
+
+have the same action value \(45\).  Their Hessian/Hill determinants are \(44\)
+and \(7\), but \(44/7=25^2\pmod{61}\), and an explicit
+\(C\in\operatorname{GL}_5(\mathbb F_{61})\) satisfies
+
+\[
+C^{\mathsf T}B_1C=B_2.
+\]
+
+The henselian Morse lemma therefore makes the complete local function germs
+and their standard Morse-local Fourier representations isomorphic.  The
+local object sees the discriminant square class, not the chosen determinant
+representative.  An independent permutation-cycle checker passes 14/14 exact
+gates, the mutation suite passes 22/22 tests, and the full Phase-3 artifact
+manifest verifies 18 files.
+
+This is a scoped negative theorem, not a global Artin--Schreier no-go.  The
+next large door remains Hénon-specific: form the parameter-family parabolic
+discriminant
+
+\[
+\det D^2\Phi_{n,a}=\det(I-DH_a^n)=0
+\]
+
+and study its braid/Galois monodromy, where critical-point collisions can
+carry information erased by separate Morse germs.
+
+- [C32 Phase-1 question](phase1_hcs_c32_artin_schreier_quantum_trace/RESEARCH_QUESTION_BRIEF.md)
+- [C32 Phase-2 source verification](phase2_hcs_c32_artin_schreier_quantum_trace/SOURCE_VERIFICATION_REPORT.md)
+- [C32 Phase-3 theorem package](phase3_hcs_c32_artin_schreier_quantum_trace/THEOREM_PACKAGE.md)
+- [C32 exact certificate](phase3_hcs_c32_artin_schreier_quantum_trace/results/c32_morse_gate_certificate.json)
+- [C32 independent check](phase3_hcs_c32_artin_schreier_quantum_trace/results/c32_morse_gate_independent_check.json)
+- [C32 Devil's-Advocate checkpoint](phase3_hcs_c32_artin_schreier_quantum_trace/DEVILS_ADVOCATE_CHECKPOINT2.md)
+
+Reproduce the complete Phase-3 gate with:
+
+```bash
+phase3_hcs_c32_artin_schreier_quantum_trace/code/run_c32_phase3.sh
+```
+
+## Predecessor big-door result: HCS-C31 identifies the H6 positive signal
 
 C31 returns to the strongest certified H\'enon base rather than opening
 another small prime or cycle scan.  The earlier instability-roof sections had
@@ -982,4 +1038,4 @@ Regenerable caches, nested Git metadata, TeX auxiliary files, and bulky raw
 array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
-Last synchronized research snapshot: **2026-08-11**.
+Last synchronized research snapshot: **2026-08-12**.

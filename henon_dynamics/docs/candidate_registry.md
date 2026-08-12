@@ -884,3 +884,30 @@ Riemann divisor, or self-adjoint lift.  The formal tuple is
 **ROUTE_A_REJECTED** for the arithmetic interpretation.  The next authorized
 large move is a canonical arithmetic fibre or twist over the proven H6 base;
 refining the same positive pressure root is not a reopening.
+
+## HCS-C32 Artin--Schreier Morse-local gate (2026-08-12)
+
+Candidate **HCS-C32** keeps the chronological area-preserving H6 map and
+quantizes its generating function by a finite-field Artin--Schreier kernel;
+see the three staged directories
+[`../phase1_hcs_c32_artin_schreier_quantum_trace/`](../phase1_hcs_c32_artin_schreier_quantum_trace/),
+[`../phase2_hcs_c32_artin_schreier_quantum_trace/`](../phase2_hcs_c32_artin_schreier_quantum_trace/),
+and
+[`../phase3_hcs_c32_artin_schreier_quantum_trace/`](../phase3_hcs_c32_artin_schreier_quantum_trace/).
+
+The generic fixed-kernel trace, Deligne rank/purity, and finite-field
+unitarity survive source audit but are not by themselves Hénon-specific.  The
+Phase-3 exact gate therefore tested whether the good-prime Morse-local
+vanishing-cycle factor retains the complete Hill value.  It does not.
+
+Over \(\mathbb F_{61}\), two distinct primitive period-five Hénon cycles have
+the same action value, explicitly congruent nondegenerate Hessians, and
+different Hill determinants \(44\) and \(7\).  The henselian Morse lemma makes
+their complete unframed local function germs isomorphic.  This closes full
+Hill recovery from an isolated standard Morse factor while leaving global
+critical-value monodromy, infinity, and degenerate fibers open.
+
+The current formal Route-A status is `NOT_TESTABLE`; a forced ceiling is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**.  The next authorized large
+move is **HCS-C33**, the parameter-family parabolic discriminant and its
+braid/Galois monodromy.  Extending the isolated-prime scan is not a reopening.
