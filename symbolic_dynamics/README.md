@@ -15,6 +15,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [01-falsification-first-audit](papers/01-falsification-first-audit/README.md) | [PDF](papers/01-falsification-first-audit/main.pdf) · [LaTeX/实验/材料](papers/01-falsification-first-audit/) | 独立审计六个 symbolic 候选；没有一个同一对象通过 A0–A4，六项 Route B 均关闭。有限状态、有限记忆、有限维 cocycle determinant 的 divisor 计数为 $O(R)$，与完成 Riemann 函数的 $R\log R$ 量级不相容。 | **COMPLETE / FROZEN** |
 | [02-wheel-sieve-stationarization-obstructions](papers/02-wheel-sieve-stationarization-obstructions/README.md) | [PDF](papers/02-wheel-sieve-stationarization-obstructions/main.pdf) · [LaTeX/证明/材料](papers/02-wheel-sieve-stationarization-obstructions/) | 证明 strict extension 不能产生周期点；forward-well-founded strong-bisimulation quotient 仍无环；保留 state-class exact-$q$ 标签的 quotient 继承严格分层；finite-alphabet fixed-window decoder 不能恢复无界精确 prime clock。 | **THEOREM SCREENING COMPLETE** |
 | [03-wheel-sieve-periodic-clock-obstruction](papers/03-wheel-sieve-periodic-clock-obstruction/README.md) | [PDF](papers/03-wheel-sieve-periodic-clock-obstruction/main.pdf) · [LaTeX/证明/审稿](papers/03-wheel-sieve-periodic-clock-obstruction/) | 精确 autonomous clock decoder 强制 factor 纤维保持同一 level，因此 direct image 继承严格分层且无周期点；连续 closure decoder 在 lag-pair 与对角线分离时同样排除边界周期点。clock erasure 或 compactification 虽能制造周期点，却不能继承普通拓扑下的精确 $q/\log q$ clock。 | **COMPLETE / THEOREM STOP** |
+| [04-tensor-prime-symbolic-euler-product](papers/04-tensor-prime-symbolic-euler-product/README.md) | [PDF](papers/04-tensor-prime-symbolic-euler-product/main.pdf) · [LaTeX/实验/Route-A 记录](papers/04-tensor-prime-symbolic-euler-product/) | 有限 full shifts 满足 $F_m\otimes F_n\cong F_{mn}$ 且 $h(F_n)=\log n$，所以 tensor atoms 内生地等于 $F_p$。其 canonical atom-loop shift 在 $\Re s>1$ 上满足 $\det(I-\mathcal L_s)=1/\zeta(s)$，并精确给出 prime-power/$\Lambda$ ledger；这是本项目第一条同对象 A0–A2 exact chain。 | **ROUTE-A ANALYTIC CANDIDATE** |
 
 ### 论文 1 的候选分离结论
 
@@ -25,15 +26,52 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
   Fredholm ledger；Liouville sign 仍是额外 arithmetic observable。
 - 三者的优点不能 coordinatewise 拼接成一个候选。
 
-### 论文 3 的 theorem stop 与下一步
+### 论文 3 的 theorem stop
 
 对“周期 target 逐点、单值、自治地继承 levelwise wheel prime clock”这一分支，
 Paper 03 给出 `THEOREM_STOP`；继续增大 cutoff 或搜索 quotient cycle 已无意义。
 仍开放的同族方向只能是一个**不同的、target-intrinsic arithmetic invariant**，
 而不是对原 exact clock 的保真 factor。它必须重新 source-lock：冻结 phase space、
 transition rule、arithmetic decoder、clock、primitive/repetition ledger 和 function
-space，并从 A0 重新审计；不自动继承 `SD-C05` 的 arithmetic credit。当前仍不分配
-`SD-C07`，不定义 determinant，Route B 继续锁定。
+space，并从 A0 重新审计；不自动继承 `SD-C05` 的 arithmetic credit。论文 4 已按
+这一规则启用一个全新的内生不变量，而没有继承 wheel-sieve credit。
+
+### 论文 4：第一条 A0–A2 同对象链
+
+`SD-C07` 不再把素数看成 sieve level 的输出，而把它们看成有限 full shifts 在
+Cartesian tensor 下的不可分解对象。这个选择同时内生给出：
+
+- $F_p$ 作为 tensor atom；
+- $F_p^{\otimes r}=F_{p^r}$ 作为重复结构；
+- $h_{\rm top}(F_p)=\log p$ 作为 clock；
+- atom-loop suspension 的 genuine primitive orbit；
+- $\ell^2(\operatorname{At})$ 上的 trace-class transfer operator；
+- $Z_\otimes=\zeta$、$D_\otimes=1/\zeta$ 和精确 von Mangoldt ledger。
+
+有限 opaque registry 在 $N=32,64,128,256$ 全部精确通过；$N=256$ 恢复
+54/54 个 tensor atoms，并使 $\zeta$、$\mu$、$\Lambda$ 系数前缀全部为 1.000
+准确。additive、64 组 matched-random、shifted-law 与 28 组 free-mixing controls
+均按预注册逻辑失败。特别地，任何正的 cross-atom mixing 都在 $pq$ 处产生错误的
+$\Lambda(pq)>0$ 项，因此 diagonal recurrent core 是精确正权 Euler ledger 的结构
+要求，而不只是方便的建模选择。
+
+当前 tuple 为
+
+```text
+(A0_ANALYTIC_ARITHMETIC_ORIGIN,
+ A1_PASS_ANALYTIC,
+ A2_ANALYTIC_DETERMINANT,
+ A3_PARTIAL_ANALYTIC_STRUCTURE,
+ A4_FAIL)
+```
+
+A3 的缺口现在非常具体：ungraded $\mathcal L_s$ 只在 $\Re s>1$ trace class，
+没有内生 Gamma factor、函数方程或 Weil compression，而且不可能作为 holomorphic
+trace-class family 穿过 zeta 零点。下一步不再搜索另一个 prime generator，而是只在
+Symbolic Dynamics 内 source-lock 一个**内生分级的 symbolic transfer complex**，
+测试其 supertrace 是否能消掉 mixed cycles、改变 determinant orientation，并产生
+$s\leftrightarrow1-s$ duality。随机 parity、手工 Gamma factor 与跨候选拼接仍禁止；
+Route B 继续锁定。
 
 ## 目录
 
@@ -41,7 +79,7 @@ space，并从 A0 重新审计；不自动继承 `SD-C05` 的 arithmetic credit�
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三篇论文](papers/)
+- [四篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

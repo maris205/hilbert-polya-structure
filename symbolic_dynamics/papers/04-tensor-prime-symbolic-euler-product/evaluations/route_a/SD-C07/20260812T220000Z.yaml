@@ -1,0 +1,151 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C07
+source_commit: 7c3622e295f741a3afeceb6db4908d693d636bff
+evaluation_date: 2026-08-12
+artifact_path_base: papers/04-tensor-prime-symbolic-euler-product
+
+source_lock:
+  object: "Diagonal one-sided countable Markov shift on the tensor atoms of the symmetric monoidal skeleton of finite full shifts."
+  family: "symbolic dynamics"
+  phase_space: "Y_tensor={a_0 a_1 ... : a_{j+1}=a_j, a_j in At(FSh)}"
+  dynamics: "left shift with identity adjacency; suspension by the entropy roof"
+  parameters: "none; finite diagnostic cutoffs N in {32,64,128,256}"
+  parameter_provenance: "Cartesian product and topological entropy of finite full shifts"
+  arithmetic_origin: "nonunit tensor indecomposability in FSh; [F_m] tensor [F_n]=[F_mn]"
+  clock: "tau([F_p])=h_top(F_p)=log p, with no rescaling or offset"
+  normalization: "ordinary entropy and Euler variable s"
+  determinant_convention: "D_tensor(s)=det(I-L_s); Z_tensor(s)=1/D_tensor(s), initially Re(s)>1"
+  function_space: "ell^2(At(FSh))"
+  roof_function: "topological entropy of the current tensor atom"
+  potential_function: "zero"
+  cocycle: "none"
+  cutoff: "exact object registries F_1,...,F_N for N=32,64,128,256"
+  precision: "exact integers/rationals for atom and coefficient ledgers; binary64 for logarithm diagnostics"
+  orbit_cutoff: "all recovered atoms through N; infinite theorem has no cutoff"
+  training_data: "none"
+  allowed_data: "opaque object IDs, registered tensor table, entropy, fixed counts through period 4, reciprocal AM linear coefficient, frozen controls"
+  forbidden_data: "prime table in candidate recovery, Riemann zeros, hand-assigned log-prime roofs, Lambda weights, fitted signs/phases, imported Gamma factor"
+  code_commit: 7c3622e295f741a3afeceb6db4908d693d636bff
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - notes/DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_SPEC.md
+    - code/exact_tensor_atom_experiment.py
+    - results/summary.json
+    - results/coefficient_ledger_N256.json
+    - results/no_mixing_raw.csv
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "Tensor atoms are exactly [F_p], tensor powers are [F_(p^r)], and the same object's topological entropy is log p; the theorem and opaque-registry recovery use no prime table."
+  strongest_failure: "The full-shift tensor skeleton is transparently isomorphic to (N_{>=1}, multiplication), so the arithmetic emergence may be judged categorical repackaging rather than an explanation of primality."
+  arithmetic_controls:
+    - "additive alphabet law"
+    - "64 matched-cardinality random atom declarations at every cutoff"
+    - "shifted multiplication with intrinsic entropy"
+    - "shifted multiplication with deliberately post-hoc centered clock"
+    - "positive free-mixing atom grammar"
+  artifacts:
+    - results/main_raw.csv
+    - results/random_atom_raw.csv
+    - results/additive_raw.csv
+    - results/shifted_raw.csv
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "The identity-adjacency atom shift has exactly one intrinsic primitive fixed orbit per recovered tensor atom, no mixed cycles, and repeat r has suspension length r log p=log(p^r)."
+  strongest_failure: "Orbitification is a canonical but explicitly chosen reducible functor; the primitive loop is not a primitive temporal necklace inside F_p, and all shift multipliers are neutral."
+  metrics:
+    primitive_orbit_definition: "period-one constant orbit in Y_tensor"
+    completeness: "proved for the infinite atom alphabet; exact at each finite registry cutoff"
+    orientation_multiplicity: "one orientation and multiplicity one per atom"
+    stability_multiplier: "1 (neutral identity-adjacency loop)"
+    recovered_atom_counts: "11,18,31,54 at N=32,64,128,256"
+    prime_power_repetition_failures: 0
+    positive_mixed_pairs_rejected: "28/28 at every cutoff"
+  artifacts:
+    - notes/DERIVATION_PACKAGE.md
+    - results/tensor_recovery.json
+    - results/no_mixing_raw.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "For Re(s)>1 the same shift's Ruelle operator is trace class on ell^2(At), with det(I-L_s)=product_p(1-p^-s)=1/zeta(s) and Z_tensor=zeta(s)."
+  strongest_failure: "The Fredholm theorem is confined to the Euler half-plane; after scalar continuation Riemann zeros are zeros of reciprocal determinant Z, not zeros of the ordinary Fredholm determinant D."
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: "coefficient prefixes are theorem-exact through each N; zero cutoffs not evaluated"
+    precision_drift: "integer coefficient ledgers exact; maximum tensor-entropy additivity error 8.88e-16 at N=256"
+    control_margin: "at N=256 main zeta accuracy 1.0 versus random mean 0.260681 and shifted intrinsic 0.175781; free mixing fails 28/28 semiprime tests"
+  artifacts:
+    - results/summary.json
+    - results/coefficient_ledger_N256.json
+    - results/main_raw.csv
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "The half-plane zeta identity, conjugation symmetry, complete prime-power trace, and impossibility of a holomorphic ungraded trace-class continuation through a zeta zero are exact."
+  strongest_failure: "No intrinsic operator continuation, Gamma factor, pole removal, functional equation, Riemann-von Mangoldt law, completed-xi divisor, or natural Weil compression is supplied."
+  analytic_structure:
+    euler_half_plane_identity: true
+    conjugation_symmetry_in_domain: true
+    scalar_meromorphic_continuation_known: "imported from the identity with zeta, not derived dynamically"
+    trace_class_continuation_through_zeta_zero: false
+    gamma_factor: false
+    functional_equation_from_dynamics: false
+    completed_xi_determinant: false
+    zero_counting_law_from_dynamics: false
+  weil_compression:
+    status: "no target-intrinsic Hermitian compression derived from the atom-loop shift"
+    evidence_status: OPEN
+  artifacts:
+    - docs/obstruction_registry.md
+    - notes/DERIVATION_PACKAGE.md
+    - main.tex
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "The entropy suspension names a classical time variable and an ell^2 space, but no canonical unitary or self-adjoint lift follows."
+  strongest_failure: "No symplectic/contact carrier, antiunitary symmetry, self-adjoint generator, operator domain, or T log T spectral law has been derived with the same clock."
+  metrics:
+    natural_quantization: false
+    route_b_readiness: false
+    same_clock_self_adjoint_operator: false
+  artifacts:
+    - ROUND2_CLUES.md
+
+adversarial_controls:
+  controls_used:
+    - "additive operation"
+    - "matched random atoms"
+    - "shifted UFD with intrinsic and post-hoc clocks"
+    - "positive free mixing on all first-eight atom pairs"
+  proves_too_much_risk: "Generic free commutative monoids admit atom Euler products; the exact Riemann ledger becomes selective only after locking the actual full-shift tensor, entropy, AM determinant, fixed counts, and no-mixing grammar. This mitigates A0-A2 but does not select RH-like continuation."
+  verdict: "PASS_SCOPED for the Euler ledger; PROVES_TOO_MUCH remains open for any claimed critical-strip or RH mechanism."
+
+overall_verdict: ROUTE_A_ANALYTIC_CANDIDATE
+claim_boundary: "First source-locked candidate in this project with exact A0, A1, and A2 on one countable symbolic suspension; A3 is partial and obstructed for the ungraded transfer family; no RH or Route-B claim."
+blocking_conditions:
+  - "ordinary Fredholm determinant has inverse orientation and a pole, not a zero, at each zeta zero after scalar continuation"
+  - "no intrinsic trace-class or determinant-quotient continuation through the critical strip"
+  - "no symbolic Gamma factor or s-to-1-s duality"
+  - "no natural Weil compression or Riemann-von Mangoldt spectral count"
+  - "no canonical quantization or self-adjoint lift"
+next_smallest_test: "Pre-register a Z/2-graded symbolic transfer complex derived only from tensor-factorization data; test whether its supertrace cancels mixed cycles and changes determinant orientation against random parity and shifted-monoid controls."
+round2_clues:
+  - "RC-04: Bost-Connes-type arithmetic symmetry as a possible grading source"
+  - "RC-05: Deninger-style determinant/cohomology as a functional-equation clue"
+  - "RC-06: primon/Riemann-gas interpretation of the bosonic reciprocal determinant"
+route_b_invocation_allowed: false
