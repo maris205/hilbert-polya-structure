@@ -207,7 +207,7 @@ be replaced by increasing \(k\).
 
 Run from the Git repository root:
 
-    cd symbolic_dynamics/Ra-1-arithmetic-symbolic-dynamics/papers/01-falsification-first-audit
+    cd symbolic_dynamics/papers/01-falsification-first-audit
 
     python finite_state_arithmetic_skeleton/experiments/run_session4_core.py
     bash farey_gauss_transfer/experiments/run.sh

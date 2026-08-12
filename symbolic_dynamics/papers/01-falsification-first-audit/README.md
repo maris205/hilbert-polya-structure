@@ -2,11 +2,11 @@
 
 Status: **COMPLETE / FROZEN**
 
-Parent index: [Ra-1-arithmetic-symbolic-dynamics](../../README.md)
+Research index: [Ra-1: Arithmetic Symbolic Dynamics](../../README.md)
 
-Shared rules: [proposal](../../../propose-symbolic-dynamics.md),
-[Route A](../../../skills/route-a-evaluator.md), and
-[Route B](../../../skills/route-b-evaluator.md)
+Shared rules: [proposal](../../propose-symbolic-dynamics.md),
+[Route A](../../skills/route-a-evaluator.md), and
+[Route B](../../skills/route-b-evaluator.md)
 
 This paper project contains the anonymous preprint
 **Falsification-First Symbolic Dynamics for Arithmetic Determinants: Six

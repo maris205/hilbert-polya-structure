@@ -5,7 +5,7 @@ Single command:
 Run from the Git repository root:
 
 ```bash
-cd symbolic_dynamics/Ra-1-arithmetic-symbolic-dynamics/papers/01-falsification-first-audit
+cd symbolic_dynamics/papers/01-falsification-first-audit
 python finite_state_arithmetic_skeleton/experiments/run_session4_core.py
 ```
 

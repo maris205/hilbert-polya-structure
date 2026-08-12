@@ -2,7 +2,7 @@
 
 Status: **THEOREM SCREENING COMPLETE; RECODING SOURCE LOCK PENDING**
 
-Parent index: [Ra-1-arithmetic-symbolic-dynamics](../../README.md)
+Research index: [Ra-1: Arithmetic Symbolic Dynamics](../../README.md)
 
 - Primary family: **Symbolic Dynamics only**
 - Candidate ID: **not assigned**

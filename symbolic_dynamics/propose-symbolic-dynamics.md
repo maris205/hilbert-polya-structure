@@ -508,31 +508,34 @@ and return to the symbolic session.
 
 # 11. Research Output
 
-Research outputs are grouped first by roadmap project and then by shareable
-paper project.  Here `<project-name>` and `<paper-project-name>` are real,
-descriptive names rather than the literal words `project` or `paper`:
+The research root is itself the project container.  Its project name and
+roadmap phase are recorded in the root `README.md`; shareable paper projects
+sit directly under the root `papers/` directory:
 
 ```text
-Ra-1-<project-name>/
-├── README.md
-├── PROJECT_MANIFEST.sha256
-└── papers/
-    └── <paper-project-name>/
-        ├── README.md
-        ├── main.pdf
-        ├── main.tex
-        ├── sections/
-        ├── figures/
-        ├── code/
-        ├── experiments/
-        ├── results/
-        ├── evaluations/
-        ├── notes/
-        └── PAPER_MANIFEST.sha256
+README.md
+propose-symbolic-dynamics.md
+skills/
+docs/
+papers/
+└── <paper-project-name>/
+    ├── README.md
+    ├── main.pdf
+    ├── main.tex
+    ├── sections/
+    ├── figures/
+    ├── code/
+    ├── experiments/
+    ├── results/
+    ├── evaluations/
+    ├── notes/
+    └── PAPER_MANIFEST.sha256
 ```
 
 The paper-project directory is the complete unit of sharing and
-reproducibility; do not add another redundant `paper/` layer inside it.
+reproducibility.  Do not add a roadmap-project wrapper, `stages/` layer, or
+another redundant `paper/` layer inside it.  The paper-project name must be a
+real descriptive name rather than the literal word `paper`.
 
 Do not create a formal candidate only because an idea was mentioned.
 
