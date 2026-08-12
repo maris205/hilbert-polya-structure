@@ -179,7 +179,7 @@ and their standard Morse-local Fourier representations isomorphic.  The
 local object sees the discriminant square class, not the chosen determinant
 representative.  An independent permutation-cycle checker passes 14/14 exact
 gates, the mutation suite passes 22/22 tests, and the full Phase-3 artifact
-manifest verifies 18 files.
+manifest verifies 19 files.
 
 This is a scoped negative theorem, not a global Artin--Schreier no-go.  The
 next large door remains Hénon-specific: form the parameter-family parabolic

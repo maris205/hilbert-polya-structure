@@ -26,6 +26,7 @@ REQUIRED_RELATIVE_PATHS = {
     "code/c32_hash_manifest.py",
     "code/test_c32_morse_gate.py",
     "code/run_c32_phase3.sh",
+    "paper/README.md",
     "results/README.md",
     "results/RESULTS.md",
     "results/c32_morse_gate_certificate.json",
@@ -136,4 +137,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

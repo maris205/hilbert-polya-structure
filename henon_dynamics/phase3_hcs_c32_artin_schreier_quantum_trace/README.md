@@ -40,6 +40,8 @@ Checkpoint 2 are complete.
 - `results/`: machine-readable certificate and collision census;
 - `SYNTHESIS_REPORT.md`: Phase-3 evidence integration;
 - `DEVILS_ADVOCATE_CHECKPOINT2.md`: mandatory bias and logic stress test.
+- `paper/README.md`: manuscript hold and reopening rule; no draft is silently
+  promoted before the checkpoint.
 
 ## Main result
 
