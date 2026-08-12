@@ -1027,3 +1027,46 @@ authorized large gate is to construct a scaling-covariant Hénon
 bundle/cocycle and decide whether a Poisson or crossed-product quotient turns
 the infinite boundary orbit into a determinant-class anomaly. Route B
 remains unauthorized.
+
+## HCS-C36 Hénon Mellin--parity obstruction (2026-08-13)
+
+Candidate **HCS-C36** executes the scaling-covariance gate rather than
+leaving it formal; see
+[the C36 project](../henon_mellin_parity_obstruction/).
+
+The two signs of the H6 Poisson boundary give the forced Mellin matrix
+
+\[
+K(z)=
+\begin{pmatrix}\kappa_+(z)&\kappa_-(z)\\
+\kappa_-(z)&\kappa_+(z)\end{pmatrix}.
+\]
+
+In the parity basis, the formal scattering symbol
+
+\[
+S_H(z)=K(1-z)K(z)^{-1}
+\]
+
+is reciprocal and unitary on \(\operatorname{Re}z=1/2\) by exact algebra.
+Nevertheless, Arb enclosures plus an analytic Rouché bound prove that the
+zeta-even symbol has one simple zero in the radius-\(10^{-12}\) disc centered
+at
+
+\[
+0.7286922241147175+1.6054479123346985i.
+\]
+
+The mirror-even, odd, and natural linear-parent factors are certified
+nonzero on the required discs, while direct Arb evaluation proves
+\(\inf_D|\xi|>9/20\). Thus \(\det S_H\) acquires a genuinely additional
+off-critical pole--zero quartet. Mellin diagonalization also does not produce an ordinary
+Fredholm determinant: a nontrivial matrix multiplier on non-atomic
+\(L^2\) is noncompact.
+
+The strict tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_NATURAL_QUANTIZATION)** and this concrete
+candidate is **ROUTE_A_REJECTED**. The authorized pivot is the homogeneous
+map \(H_0(q,p)=(-6q^2-p,q)\), whose strip-safe gamma symbol reduces the next
+gate to a sharp dichotomy: a nontrivial Poisson-boundary index/anomaly or an
+exact coboundary closure theorem.

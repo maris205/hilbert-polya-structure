@@ -1,0 +1,83 @@
+\section{A certified off-critical divisor}
+
+Set
+\begin{equation}\label{eq:disc}
+c=0.7286922241147175+1.6054479123346985i,
+\qquad r=10^{-12},
+\qquad \Disc=\{z:|z-c|\le r\}.
+\end{equation}
+Both coordinates of $c$ and the radius are stored as exact rationals.
+
+\begin{theorem}[Certified H\'enon Mellin obstruction]\label{thm:obstruction}
+The even symbol $A$ has exactly one zero, counted with multiplicity, in
+$\Disc$. That zero is simple. The disc lies in
+$0<\RePart z<1$, is disjoint from $\RePart z=1/2$, and satisfies
+\begin{equation}\label{eq:nonzero}
+\inf_{\Disc}|A(1-z)|>3/10,
+\quad \inf_{\Disc}|B(z)|>4/5,
+\quad \inf_{\Disc}|B(1-z)|>13/10.
+\end{equation}
+For
+\begin{equation}\label{eq:xi}
+\xi(z)=\tfrac12z(z-1)\pi^{-z/2}\Gamma(z/2)\zeta(z),
+\end{equation}
+one also has \(\inf_{\Disc}|\xi(z)|>9/20\).
+Consequently $\det S_H$ has one pole in $\Disc$ and one zero in
+$1-\Disc$, plus their conjugates. All four are off the critical line in the
+open strip and are additional to the Riemann divisor.
+\end{theorem}
+
+\begin{proof}
+Certified ball evaluation gives
+\begin{equation}\label{eq:center-bounds}
+|A(c)|<10^{-16},\qquad |A'(c)|>2/5.
+\end{equation}
+The contour estimate in \cref{app:majorant} gives
+$\sup_{\Disc}|A''|<1200$. On $|z-c|=r$,
+\begin{align*}
+|A(z)-A'(c)(z-c)|
+&\le |A(c)|+\tfrac12\sup_{\Disc}|A''|r^2\\
+&<10^{-16}+600\cdot10^{-24}
+<\tfrac25\,10^{-12}
+\le |A'(c)(z-c)|.
+\end{align*}
+Rouch\'e's theorem compares $A$ with the linear function
+$A'(c)(z-c)$, proving the zero count. Count one also proves simplicity.
+Complex-ball evaluation on the full input discs proves
+\eqref{eq:nonzero}. Direct Arb evaluation of \eqref{eq:xi} on the full disc
+gives the stated \(9/20\) lower bound; no Riemann-zero table is read. The
+functional equation gives the corresponding nonvanishing on \(1-\Disc\).
+The determinant identity
+\begin{equation}\label{eq:detS}
+\det S_H(z)=\frac{A(1-z)B(1-z)}{A(z)B(z)}
+\end{equation}
+then gives the local divisor statement. Real-type symmetry gives the
+conjugates.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{Release thresholds used by the independent certificate. The
+inequalities hold on full complex balls, not only at sampled points.}
+\label{tab:bounds}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Quantity & Certified direction & Threshold \\
+\midrule
+$|A(c)|$ & upper & $10^{-16}$ \\
+$|A'(c)|$ & lower & $2/5$ \\
+$\sup_{\Disc}|A''|$ & upper & $1200$ \\
+$\inf_{\Disc}|A(1-z)|$ & lower & $3/10$ \\
+$\inf_{\Disc}|B(z)|$ & lower & $4/5$ \\
+$\inf_{\Disc}|B(1-z)|$ & lower & $13/10$ \\
+$\inf_{\Disc}|\xi(z)|$ & lower & $9/20$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The natural linear reference does not cancel the pole. Its even symbol is
+\begin{equation}\label{eq:linear}
+A_{\mathrm{lin}}(z)=2(2\pi)^{-z}\Gamma(z)\cos(\pi z/2),
+\end{equation}
+and the certificate proves $\inf_{\Disc}|A_{\mathrm{lin}}|>7/10$.
+No Riemann-zero data enter this conclusion.

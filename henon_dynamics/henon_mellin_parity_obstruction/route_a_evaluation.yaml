@@ -1,0 +1,140 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C36
+source_commit: bad92e81442e42d2b41c14a1cf1e0d27fd7280af
+evaluation_date: 2026-08-13
+
+candidate_definition: "The unrenormalized two-sign Mellin parity scattering symbol forced by the scaling orbit of the area-preserving H6 cubic Poisson boundary"
+family: "Mellin/scattering reductions of integral area-preserving Henon chirps"
+phase_space: "formal two-sign Mellin fibres over the scaling variable; no global scattering Hilbert pair is claimed"
+dynamics: "H6(q,p)=(1-6q^2-p,q), with dilation family P_a(x)=2a^3x^3-a*x and Mellin matrix K(z)"
+parameters: "the frozen H6 phase P6(x)=2x^3-x and one exact rational certification disc; no fitted spectral map"
+parameter_provenance: "P6 is source-derived; the disc was discovered numerically and then frozen before independent interval replay"
+clock: "the inherited multiplicative scaling coordinate, diagonalized by the Mellin variable z; no averaged Henon UPO clock"
+normalization: "standard global character from C35, Mellin kernel u^(z-1), forced two-sign/parity basis, and no post-hoc divisor factor"
+determinant_convention: "pointwise det S_H(z)=A(1-z)B(1-z)/(A(z)B(z)); this is explicitly not an ordinary Fredholm determinant"
+orbit_cutoff: "none; the certified theorem is local in the spectral plane rather than a finite orbit census"
+precision: "exact rational disc and thresholds; python-flint 0.9.0 with 80 decimal digits; analytic A-second majorant; independent replay"
+training_data: "numerical discovery of one candidate centre only; no Riemann zeros or primes"
+forbidden_data: "Riemann-zero tables, affine spectral fitting, post-hoc Hadamard cancellation, promotion of a fibre determinant to a Fredholm determinant, or deletion of the zeta-even channel"
+code_commit: PENDING_RELEASE_COMMIT
+artifact_paths:
+  - README.md
+  - THEOREM_PACKAGE.md
+  - DERIVATION_PACKAGE.md
+  - paper/main.pdf
+  - results/c36_certificate.json
+  - results/c36_independent_check.json
+  - results/RESULTS.md
+
+transfer_operator: "not constructed; Mellin transformation yields a matrix-valued multiplication symbol"
+potential_function: "cubic phase exp(+/-2*pi*i*(2u^3-u))"
+quantization_hint: "the phase is fixed by the H6 generating function and inherited from the C35 adelic unitary"
+prior_work_links:
+  - ../docs/prior_work/papers/5-An Area-Preserving Henon-Map Model.pdf
+  - ../adelic_henon_theta_route/
+legacy_rh_links:
+  - ../docs/prior_work/README.md
+  - ../docs/related_programs/README.md
+
+source_lock:
+  object: "K(z)=[[kappa_+(z),kappa_-(z)],[kappa_-(z),kappa_+(z)]], with kappa_sigma the Mellin transform of the H6 cubic phase"
+  clock: "the multiplicative scaling variable and its Mellin dual z"
+  normalization: "forced parity basis A=kappa_++kappa_-, B=(kappa_+-kappa_-)/i; no fitted scalar factor"
+  determinant_convention: "formal fibre determinant of S_H(z)=K(1-z)K(z)^(-1), never an ordinary global Fredholm determinant"
+  cutoff: "one registered rational disc of radius 10^(-12); no global strip census"
+  precision: "Arb complex balls at 80 decimal digits plus the exact rational Rouche inequality and analytic bound sup_D|A''|<1200"
+  allowed_data: "source-locked H6 phase, C35 Poisson boundary theorem, classical Mellin/hypergeometric identities, and interval arithmetic"
+  forbidden_data: "Riemann-zero tables, prime tables, fitted reference factors, post-hoc zero deletion, and Route-B claims"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "the scaling family P_a=P6(a*x) is intrinsic and chronological dilation covariance is exact"
+  strongest_failure: "the construction inherits the scaling clock and supplies no H6-generated primitive-prime law or periodic-orbit amplitude"
+  metrics:
+    intrinsic_scaling_family: PROVED
+    exact_dilation_covariance: PROVED
+    inherited_prime_orbit_clock: PROVED
+    henon_generated_prime_correspondence: REFUTED
+    primitive_repetition_amplitude: NOT_TESTABLE
+    direct_prime_or_zero_lookup: REFUTED
+    simpler_parent_control: "the natural linear scaling parent has no matching nonreal factor on the certified disc"
+    random_phase_control: NOT_TESTABLE
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - paper/main.pdf
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NUMERICALLY_CERTIFIED
+  strongest_evidence: "the forced pointwise determinant is explicit, reciprocal, and independently interval-replayed"
+  strongest_failure: "the even channel creates a certified off-critical pole/zero quartet, while the global Mellin multiplier is noncompact and has no ordinary Fredholm determinant"
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: "2 certified local zeros after mirror/conjugation"
+    extra_pole_count: "2 certified local poles after conjugation"
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: "at least one extra pole and one mirror zero before conjugation"
+    cutoff_drift: 0
+    precision_drift: 0
+    control_margin: "Rouche upper 500003/5000000000000000000000 is strictly below lower 1/2500000000000"
+    ordinary_Fredholm_multiplier: REFUTED
+    independent_checker_gates: "9/9 PASS"
+    completed_xi_nonvanishing_on_disc: NUMERICALLY_CERTIFIED
+    adversarial_mutations: "25/25 PASS"
+  artifacts:
+    - results/c36_certificate.json
+    - results/c36_independent_check.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "S_H(z)S_H(1-z)=I and critical-line unitarity follow exactly from the parity symbol and real-type symmetry"
+  strongest_failure: "exact symmetry coexists with a certified open-strip off-line divisor in the zeta-even channel"
+  metrics:
+    meromorphic_continuation: PROVED
+    hypergeometric_formula: PROVED
+    recurrence: PROVED
+    reciprocal_functional_equation: PROVED
+    critical_line_unitarity: PROVED
+    hidden_prefactor_control: REFUTED
+    extra_divisor_control: REFUTED
+    linear_parent_cancellation: REFUTED
+    global_strip_census: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: "the cubic phase and two-sign boundary transform are forced by the source H6 generating function and scaling covariance"
+  strongest_failure: "no wave operators, scattering Hilbert pair, trace-class resolvent difference, positive Weil form, or self-adjoint HP generator is constructed"
+  metrics:
+    canonical_classical_base: PROVED
+    source_derived_phase: PROVED
+    forced_parity_decomposition: PROVED
+    formal_scattering_symbol: PROVED
+    operator_scattering_pair: NOT_TESTABLE
+    Birman_Krein_determinant: NOT_TESTABLE
+    self_adjoint_HP_operator: NOT_TESTABLE
+    route_b_ready: false
+  artifacts:
+    - RESEARCH_QUESTION.md
+    - SOURCE_AUDIT.md
+
+overall_tuple: "(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)"
+overall_verdict: ROUTE_A_REJECTED_FOR_UNRENORMALIZED_MELLIN_PARITY_CANDIDATE
+scoped_decision: GO_HOMOGENEOUS_POISSON_BOUNDARY_INDEX_GATE
+claim_boundary: "C36 proves exact reciprocal and critical-line-unitary symmetry for the natural H6 Mellin parity symbol, then certifies a simple even-channel zero in an explicit off-line strip disc and excludes mirror, odd, and linear-parent cancellation. It rejects this unrenormalized divisor and the ordinary Fredholm-multiplier inference. It does not construct operator scattering, count all strip zeros, prove RH, or exclude homogeneous and non-polynomial Henon variants."
+blocking_conditions:
+  - "the zeta-even cubic Mellin symbol has a certified off-critical strip zero"
+  - "the natural linear parent has no matching cancellation factor"
+  - "post-hoc zero removal is forbidden"
+  - "the global Mellin multiplication operator is noncompact"
+  - "no canonical Birman-Krein or crossed-product determinant has been constructed"
+next_smallest_test: "for H0(q,p)=(-6q^2-p,q), construct the homogeneous scaling cocycle on a canonical Poisson boundary quotient and prove either a nonzero index/anomaly with an intrinsic determinant or exact coboundary trivialization"
+route_b_invocation_allowed: false

@@ -43,6 +43,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mellin_parity_obstruction/](henon_mellin_parity_obstruction/) | Reciprocal and critical-line-unitary H6 Mellin symbol with a certified off-critical strip divisor | Unrenormalized candidate Route-A rejected; homogeneous boundary-index pivot open |
 | [adelic_henon_theta_route/](adelic_henon_theta_route/) | Global adelic H6 unitary, theta stabilizer, local noncompactness no-go, static rank-two range bound, and infinite scaling-orbit obstruction | Route-A exploratory; a scaling-covariant Poisson anomaly is the next big gate |
 | [`henon_instability_roof_zeta/`](henon_instability_roof_zeta/) | Certified Hénon survivor and instability-roof clock | Current HP gate negative |
 | [`henon_pinning_trace_obstruction/`](henon_pinning_trace_obstruction/) | Exact pinning-kernel and sign obstructions | Route-A rejected |
@@ -153,7 +154,7 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C35 isolates the scaling-covariance gate
+## Predecessor big-door result: HCS-C35 isolates the scaling-covariance gate
 
 C35 leaves the fixed-period tower and puts the original area-preserving H6
 map on one adelic Hilbert space:
@@ -227,6 +228,45 @@ not authorized.
 - [C35 derivation package](adelic_henon_theta_route/DERIVATION_PACKAGE.md)
 - [C35 exact certificate](adelic_henon_theta_route/results/c35_certificate.json)
 - [C35 Route-A record](adelic_henon_theta_route/evaluations/route_a/HCS-C35/20260812T150757Z.yaml)
+
+## Latest big-door result: HCS-C36 symmetry does not control the divisor
+
+C36 executes the scaling gate by Mellin-diagonalizing the infinite H6
+boundary orbit. In the forced parity basis, the formal scattering symbol
+satisfies
+
+\[
+S_H(z)S_H(1-z)=I,
+\qquad
+S_H(1/2+it)^*S_H(1/2+it)=I
+\]
+
+exactly. The apparent Route-A symmetry is nevertheless insufficient. A
+complex-ball/Rouché certificate proves one simple zero of the zeta-even
+symbol in a radius-\(10^{-12}\) disc centered at
+
+\[
+0.7286922241147175+1.6054479123346985i.
+\]
+
+Mirror and odd factors, together with the natural linear parent, are
+certified nonzero on the required discs, and direct Arb evaluation gives
+\(\inf_D|\xi|>9/20\). Hence the unrenormalized determinant has a genuinely
+additional off-critical pole--zero quartet in the open strip. The global Mellin
+multiplier is also noncompact, so its pointwise determinant is not an
+ordinary Fredholm determinant.
+
+This closes the inhomogeneous H6 Mellin-scattering candidate and registers
+HEN-O73: reciprocity plus critical-line unitarity does not imply an
+RH-compatible divisor. The next large gate changes the dynamics to the
+homogeneous area-preserving form \(H_0(q,p)=(-6q^2-p,q)\). Its Mellin symbol
+is strip-safe; the decisive question is whether the Poisson boundary quotient
+turns its ambient scaling coboundary into a nontrivial index/anomaly or
+trivializes it exactly.
+
+- [C36 theorem package](henon_mellin_parity_obstruction/THEOREM_PACKAGE.md)
+- [C36 compiled note](henon_mellin_parity_obstruction/paper/main.pdf)
+- [C36 interval certificate](henon_mellin_parity_obstruction/results/c36_certificate.json)
 
 ## Predecessor big-door result: HCS-C34 reaches full Maxwell--Hill wreath monodromy
 
