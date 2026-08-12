@@ -1,5 +1,10 @@
 # Paper 01 — Clock-preserving Hénon operators
 
+This self-contained package now lives directly at
+`zeta_mvp0/paper_01_clock_preserving_henon/`; it was moved intact from the
+former `zeta_mvp0/papers/` container on 2026-08-12.  Relative paths inside
+the package are unchanged.
+
 Legacy project identifier: **Paper 7**.  Repository stage identifier:
 **paper_01**.
 

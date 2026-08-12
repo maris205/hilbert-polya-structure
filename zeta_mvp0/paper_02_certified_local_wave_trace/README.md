@@ -7,6 +7,27 @@ Author: **Liang Wang**
 School of Artificial Intelligence and Automation, Huazhong University of
 Science and Technology, Wuhan 430074, P. R. China.
 
+## Repository location
+
+The package now lives directly at
+`zeta_mvp0/paper_02_certified_local_wave_trace/`; its contents were promoted
+from the former `zeta_mvp0/papers/` container on 2026-08-12.  Frozen machine,
+run, release, command, and tool evidence intentionally retains its original
+bytes and capture paths.  Those objects describe the pre-migration history;
+they are not current path configuration.
+
+In particular, the published V2 role-5 record remains historical under its
+original reviewed commit, digest, destination, authority, and publication
+commit.  The same bytes at this relocated path are not a new canonical
+publication, and the new root currently has no active role-5 authority.
+Roles 10 and later, initialization, production, and scientific dispatch are
+therefore stopped until a distinct path-aware control generation is reviewed
+and authorized.  The relocation itself grants no mathematical or scientific
+claim.
+
+The exact repository-migration and stop-line record is
+[`PAPER_LAYOUT_MIGRATION_2026-08-12.md`](../docs/PAPER_LAYOUT_MIGRATION_2026-08-12.md).
+
 Paper 02 is the active theorem-engineering continuation of Paper 01.  Its
 strongest accepted statements and latest bounded implementation evidence are:
 
