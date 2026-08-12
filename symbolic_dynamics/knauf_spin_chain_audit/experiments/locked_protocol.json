@@ -1,0 +1,75 @@
+{
+  "candidate_id": "SD-C06",
+  "implementation_alias": "knauf_number_theoretic_spin_chain",
+  "identifier_normalization": "Candidate ID and directory metadata normalized before the final full rerun; all scientific fields, grids, cutoffs, seeds, controls, and claim policies are unchanged.",
+  "protocol_version": "1.0.0",
+  "lock_date_utc": "2026-08-12",
+  "purpose": "Finite-k comparison of intrinsic Knauf h_k Dirichlet polynomials against pre-specified zeta-ratio identities and signed controls.",
+  "object": {
+    "state_space": "(Z/2Z)^k in lexicographic binary-word order",
+    "h_recurrence": "h(empty)=1; h(x,0)=h(x); h(x,1)=h(x)+h(1-x)",
+    "unsigned": "Z_k(s)=sum_g h_k(g)^(-s)",
+    "liouville": "tilde_Z_k(s)=sum_g lambda(h_k(g))*h_k(g)^(-s)",
+    "clock": "H_k(g)=log h_k(g)",
+    "normalization": "none",
+    "determinant_convention": "partition function / finite Dirichlet polynomial; NOT a dynamical zeta or Fredholm determinant"
+  },
+  "cutoffs_k": [8, 10, 12, 14, 16, 18, 20, 22],
+  "grid_lock_rationale": "Simple rational real parts and integer imaginary parts, selected before execution. No point was selected from a Riemann-zero table or from observed output.",
+  "grid": [
+    {"id": "R160", "sigma": 1.6, "tau": 0.0},
+    {"id": "R175", "sigma": 1.75, "tau": 0.0},
+    {"id": "R190", "sigma": 1.9, "tau": 0.0},
+    {"id": "R200", "sigma": 2.0, "tau": 0.0},
+    {"id": "R2125", "sigma": 2.125, "tau": 0.0},
+    {"id": "R250", "sigma": 2.5, "tau": 0.0},
+    {"id": "R300", "sigma": 3.0, "tau": 0.0},
+    {"id": "R400", "sigma": 4.0, "tau": 0.0},
+    {"id": "C160_3", "sigma": 1.6, "tau": 3.0},
+    {"id": "C160_9", "sigma": 1.6, "tau": 9.0},
+    {"id": "C175_5", "sigma": 1.75, "tau": 5.0},
+    {"id": "C190_11", "sigma": 1.9, "tau": 11.0},
+    {"id": "C225_1", "sigma": 2.25, "tau": 1.0},
+    {"id": "C225_7", "sigma": 2.25, "tau": 7.0},
+    {"id": "C275_3", "sigma": 2.75, "tau": 3.0},
+    {"id": "C325_11", "sigma": 3.25, "tau": 11.0}
+  ],
+  "controls": [
+    "unsigned",
+    "liouville",
+    "mobius",
+    "symbolic_parity=(-1)^popcount(g)",
+    "random_state_sign"
+  ],
+  "random_sign_control": {
+    "algorithm": "SplitMix64 counter hash keyed by (base_seed,k,state_index); sign is determined by output bit 63",
+    "base_seeds": [2026081201, 2026081202, 2026081203],
+    "level_policy": "Each (base_seed,k) defines a distinct deterministic field; all seeds and all cutoffs are reported, with no best-seed selection."
+  },
+  "precision_audit": {
+    "primary": "NumPy complex128",
+    "independent": "mpmath direct finite sum",
+    "cutoffs_k": [18, 22],
+    "dps": [50, 100],
+    "observables": ["unsigned", "liouville"],
+    "grid": "all locked points"
+  },
+  "allowed_data": [
+    "intrinsically generated h_k values",
+    "algorithmically evaluated Euler phi, Liouville lambda, and Moebius mu",
+    "mpmath evaluations of the two pre-declared zeta ratios"
+  ],
+  "forbidden_data": [
+    "Riemann-zero tables",
+    "prime tables loaded from disk or network",
+    "post-result point selection",
+    "parameter fitting",
+    "dropping unfavorable seeds or grid points"
+  ],
+  "claim_policy": {
+    "Re_s_gt_2": "finite-k numerical approach may be compared with the proved Dirichlet-series limit",
+    "1.5_lt_Re_s_le_2": "analytic-continuation/boundary benchmark only; finite-k behavior is not a convergence or RH claim",
+    "Re_s_eq_2": "boundary benchmark only; no convergence claim",
+    "controls": "descriptive finite-seed observations only"
+  }
+}

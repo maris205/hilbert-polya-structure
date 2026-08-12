@@ -1,0 +1,57 @@
+# SD-C06 — Knauf Spin-Chain Audit
+
+## Frozen construction
+
+Knauf's binary recursion is
+
+\[
+h_0=1,\qquad
+h_{k+1}(\sigma,0)=h_k(\sigma),\qquad
+h_{k+1}(\sigma,1)=h_k(\sigma)+h_k(1-\sigma),
+\]
+
+with
+
+\[
+Z_k(s)=\sum_{\sigma\in\{0,1\}^k}h_k(\sigma)^{-s}.
+\]
+
+In the proved convergence half-plane, the primary source obtains
+
+\[
+\lim_{k\to\infty}Z_k(s)
+=Z(s)=\frac{\zeta(s-1)}{\zeta(s)}.
+\]
+
+## Findings
+
+- **PRIMARY-SOURCE THEOREM:** a low-description-complexity binary arithmetic
+  recursion produces the exact unsigned zeta quotient for
+  \(\operatorname{Re}s>2\).
+- **NUMERICAL CHECK:** finite-depth multiplicities and real-axis convergence
+  are tested without loading any Riemann zeros.
+- **MODELING_CHOICE:** the Liouville factor
+  \(\lambda(h_k(\sigma))\) is an additional arithmetic observable.  It is not
+  shown to arise as the holonomy of a pre-existing symbolic symmetry.
+- **OPEN in the cited work:** the signed convergence needed in the wider
+  half-plane is not proved; the paper links the gap to a spectral-radius /
+  Ramanujan-graph problem.
+- **A1/A2 failure for this program:** the finite partition sum and its limit
+  are not a demonstrated primitive-cycle Fredholm determinant for the same
+  binary recursion.  Nontrivial zeros appear as poles of the unsigned
+  quotient.
+
+This is the strongest direct prior-art collision found.  It remains an audit
+benchmark, not a Route-B-ready candidate.
+
+## Sources
+
+- A. Knauf, [official preprint](https://www.mis.mpg.de/publications/preprint-repository/article/1997/issue-15)
+- A. Knauf, [journal article](https://doi.org/10.1007/s002200050441)
+- [erratum](https://doi.org/10.1007/s002200050715)
+
+## Artifacts
+
+- [Derivation package](DERIVATION_PACKAGE.md)
+- exact finite-depth experiment and results under the session-level code/ and
+  results/ directories
