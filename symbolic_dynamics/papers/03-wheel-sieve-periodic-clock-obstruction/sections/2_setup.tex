@@ -1,0 +1,98 @@
+\section{The graded wheel source and exact decoding}
+\label{sec:setup}
+
+\subsection{Wheel recursion}
+
+Set $Q_0=1$ and $Q_1=q_1=2$, and recursively define
+\begin{equation}
+q_{k+1}=\min\{n>q_k:\gcd(n,Q_k)=1\},
+\qquad
+Q_{k+1}=Q_kq_{k+1}.
+\label{eq:wheel-recursion}
+\end{equation}
+This rule contains no stored prime table.
+
+\begin{lemma}[Prime enumeration]
+\label{lem:prime-enumeration}
+For every $k\ge1$, $q_k$ is the $k$th rational prime and
+$Q_k=\prod_{j=1}^kq_j$.
+\end{lemma}
+
+\begin{proof}
+The claim is true for $k=1$.  Assume it through $k$.  Every composite
+$n$ strictly between $q_k$ and the next prime has a prime divisor at most
+$q_k$, hence shares a factor with $Q_k$.  The next prime shares none.
+Therefore the minimum in \eqref{eq:wheel-recursion} is precisely the next
+prime, and multiplication gives the formula for $Q_{k+1}$.
+\end{proof}
+
+The arithmetic fact needed below is consequently modest but exact: the
+sequence $(q_k)$ is injective and unbounded.  The dynamical obstruction would
+also apply to any other nonrecurrent chronology; primality enters only
+through \cref{lem:prime-enumeration}.
+
+\subsection{Strict grading and target maps}
+
+At level $k\ge0$, let
+\[
+R_k=\{0\le r<Q_k:\gcd(r,Q_k)=1\}.
+\]
+For $r\in R_k$, join $r$ to every lift
+$r+jQ_k\in R_{k+1}$ with $0\le j<q_{k+1}$ except the unique lift divisible
+by $q_{k+1}$.  Let $X_k$ be the set of one-sided infinite paths whose first
+edge begins in $R_k$.  Deleting the first edge gives the map $\sigma$ below.
+This residue graph fixes the wheel-sieve source, although the obstruction
+will use only its grading and exact multiplier clock.
+
+Let
+\begin{equation}
+X=\bigsqcup_{k\ge0}X_k,
+\qquad
+\sigma(X_k)\subseteq X_{k+1},
+\label{eq:grading}
+\end{equation}
+be the one-sided wheel tail-path system.  Each $X_k$ is nonempty.  Write
+$\ell(x)=k$ for $x\in X_k$ and define the exact integer clock and derived
+logarithmic value
+\begin{equation}
+\kappa(x)=q_{\ell(x)+1},
+\qquad
+\tau(x)=\log\kappa(x).
+\label{eq:clock}
+\end{equation}
+Then $\ell(\sigma^n x)=\ell(x)+n$ and
+$\kappa(\sigma^n x)\ne\kappa(x)$ for every $n\ge1$.
+
+\begin{definition}[Equivariant image and exact decoder]
+\label{def:decoder}
+Let $S:Y\to Y$ be a self-map.  A source-to-target map
+$\pi:X\to Y$ is \emph{equivariant} if
+\begin{equation}
+S\circ\pi=\pi\circ\sigma.
+\label{eq:equivariance}
+\end{equation}
+An \emph{exact autonomous clock decoder} on the direct image is a
+single-valued function $d:\pi(X)\to C$ such that
+\begin{equation}
+d(\pi(x))=a_{\ell(x)}
+\label{eq:decoder}
+\end{equation}
+for a frozen clock sequence $(a_k)$ in $C$.  The wheel choices are
+$a_k=q_{k+1}$ or $a_k=\log q_{k+1}$.  If $\pi$ is onto, it is called a
+factor map in the set-theoretic category used by the direct-image theorem.
+\end{definition}
+
+The word \emph{autonomous} is substantive.  The decoder may read a state,
+edge, finite window, infinite window, or entire target configuration, but it
+must define one function of the target point.  A rule that also reads the
+absolute time, source level, chosen lift, or traversal number is not a
+function on the target phase space.  Classical sliding-block-code
+assumptions are therefore sufficient but not necessary for our theorem.
+
+For $m\ge1$, write
+\[
+\Per_m(S)=\{y\in Y:S^my=y\}.
+\]
+We distinguish the direct image $\pi(X)$ from an orbit closure
+$\cl{\pi(X)}$.  The former needs no topology; the latter requires an
+explicit topology and inheritance rule.

@@ -1,0 +1,85 @@
+\section{The direct-image obstruction}
+\label{sec:direct-image}
+
+We first state the set-theoretic result for an arbitrary injective clock.
+
+\begin{lemma}[Decoder--fiber criterion]
+\label{lem:fiber}
+For maps $\pi:X\to Y$ and $\kappa:X\to C$, a function
+$d:\pi(X)\to C$ satisfying $d\circ\pi=\kappa$ exists if and only if
+$\kappa$ is constant on every fiber of $\pi$.
+\end{lemma}
+
+\begin{proof}
+Necessity follows from
+$\pi(x)=\pi(x')\Rightarrow\kappa(x)=d(\pi(x))=d(\pi(x'))=\kappa(x')$.
+Conversely, fiber constancy makes the rule $d(\pi(x))=\kappa(x)$ independent
+of the chosen representative.
+\end{proof}
+
+\begin{theorem}[Fiber consistency and periodic-clock obstruction]
+\label{thm:direct}
+Assume \eqref{eq:grading} and let $a_k$ be pairwise distinct.  If
+$\pi:X\to Y$ is equivariant and admits an exact decoder in the sense of
+\cref{def:decoder}, then:
+\begin{enumerate}[label=(\roman*)]
+  \item no fiber of $\pi$ meets two different levels;
+  \item $\pi(X)$ has a well-defined grading $\bar\ell$ satisfying
+  $\bar\ell(Sy)=\bar\ell(y)+1$;
+  \item $\pi(X)\cap\Per_m(S)=\varnothing$ for every $m\ge1$.
+\end{enumerate}
+If $\pi$ is onto, then $Y$ has no periodic points.
+\end{theorem}
+
+\begin{proof}
+If $\pi(x)=\pi(x')$, exact decoding gives
+\[
+a_{\ell(x)}=d(\pi(x))=d(\pi(x'))=a_{\ell(x')}.
+\]
+Injectivity of the clock implies $\ell(x)=\ell(x')$.  Hence
+$\bar\ell(\pi(x))=\ell(x)$ is well defined.  Equivariance gives
+\[
+\bar\ell(S\pi(x))
+=\bar\ell(\pi(\sigma x))
+=\ell(\sigma x)
+=\ell(x)+1.
+\]
+If $S^my=y$ for $y\in\pi(X)$, iteration yields
+$\bar\ell(y)=\bar\ell(y)+m$, a contradiction.
+\end{proof}
+
+\begin{corollary}[Wheel-clock factor obstruction]
+\label{cor:wheel-direct}
+No equivariant factor of the graded wheel source can simultaneously have a
+periodic point and decode the exact pointwise clock $q_{k+1}$ or
+$\log q_{k+1}$.
+\end{corollary}
+
+\begin{proof}
+Apply \cref{thm:direct} and \cref{lem:prime-enumeration}.
+\end{proof}
+
+\begin{remark}[Assumption boundary]
+\label{rem:assumption-boundary}
+The proof does not use continuity, compactness, computability, finite
+memory, a finite alphabet, or injectivity of $\pi$.  Pairwise distinctness
+can be weakened to $a_{k+m}\ne a_k$ for the particular period $m$ being
+excluded.  Thus countable alphabets and infinite-memory decoders escape a
+finite-range theorem but do not escape \cref{thm:direct} while they remain
+single-valued target observables.
+\end{remark}
+
+The same point can be expressed with a sequence decoder.  Suppose
+$D:Y\to C^{\N}$ satisfies
+$D(Sy)=\operatorname{shift}D(y)$ and returns the full clock tail on the
+image.  If $S^my=y$, then $D(y)$ is $m$-periodic.  It cannot equal
+$(q_{k+1},q_{k+2},\ldots)$.  Dropping shift equivariance merely stores an
+external chronology in the decoder and does not define a dynamical clock.
+
+There is also a direct repetition-ledger consequence.  If a target word of
+period $m$ is traversed twice while its lift advances through source levels,
+the same target edge would receive the two values $q_{k+j}$ and
+$q_{k+m+j}$.  Either the target weight is fixed and fails exact decoding, or
+it depends on the lap number and is not autonomous.  In the latter case the
+standard repetition identity for a roof,
+$T_{\gamma^r}=rT_\gamma$, is no longer a property of the target orbit.

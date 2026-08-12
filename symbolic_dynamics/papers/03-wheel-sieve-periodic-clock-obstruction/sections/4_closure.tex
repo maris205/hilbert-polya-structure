@@ -1,0 +1,89 @@
+\section{Orbit closures and compact targets}
+\label{sec:closure}
+
+The direct image can be nonclosed.  Its closure may contain new recurrent or
+periodic points, so exactness on $\pi(X)$ alone cannot control them.  We now
+freeze the additional inheritance condition needed at the boundary.
+
+Let $Y_0=\cl{\pi(X)}$ in a topological space $Y$, assume $S:Y_0\to Y_0$ is
+continuous, and let $C$ be a topological clock space.  For $m\ge1$ define
+\begin{equation}
+P_m=\{(a_k,a_{k+m}):k\ge0\}\subset C\times C,
+\qquad
+\diag_C=\{(c,c):c\in C\}.
+\label{eq:lag-pairs}
+\end{equation}
+
+\begin{theorem}[Continuous closure-clock obstruction]
+\label{thm:closure}
+Suppose $d:Y_0\to C$ is continuous and satisfies
+$d(\pi(x))=a_{\ell(x)}$.  If
+\begin{equation}
+\cl{P_m}\cap\diag_C=\varnothing,
+\label{eq:diagonal-separation}
+\end{equation}
+then $Y_0\cap\Per_m(S)=\varnothing$.
+\end{theorem}
+
+\begin{proof}
+Define the continuous map
+\[
+F_m:Y_0\to C\times C,
+\qquad
+F_m(y)=(d(y),d(S^my)).
+\]
+Equivariance and exact decoding imply
+$F_m(\pi(X))=P_m$.  Since $\pi(X)$ is dense in $Y_0$, continuity gives
+$F_m(Y_0)\subseteq\cl{P_m}$.  If $S^my=y$, then
+$F_m(y)=(d(y),d(y))\in\diag_C$, contradicting
+\eqref{eq:diagonal-separation}.
+\end{proof}
+
+No metrizability, first countability, or continuity of $\pi$ is needed in
+this proof.  The relevant regularity is continuity of the target dynamics
+and of the inherited clock.
+
+\begin{corollary}[Exact wheel clocks]
+\label{cor:closure-wheel}
+\Cref{thm:closure} applies to each of the following:
+\begin{enumerate}[label=(\roman*)]
+  \item $C=\N$ with the discrete topology and $a_k=q_{k+1}$;
+  \item $C=\R$ with its usual topology and $a_k=q_{k+1}$;
+  \item $C=\R$ with its usual topology and $a_k=\log q_{k+1}$.
+\end{enumerate}
+Consequently a continuous exact decoder of any of these clocks excludes all
+periodic points from $Y_0$.
+\end{corollary}
+
+\begin{proof}
+In the discrete case, $P_m$ is closed and disjoint from the diagonal.  In
+the real cases, both coordinates tend to $+\infty$ with $k$, so $P_m$ is
+locally finite in $\R^2$ and has no finite accumulation point.  Hence it is
+closed in $\R^2$, and pairwise distinctness excludes its intersection with
+the diagonal.
+\end{proof}
+
+Compactness gives a separate feasibility obstruction, independent of the
+periodic-point argument.
+
+\begin{proposition}[Compact-target obstruction]
+\label{prop:compact}
+Let $Y_0$ be compact and contain $\pi(X)$.  There is no continuous total
+exact wheel-clock decoder $d:Y_0\to\N_{\mathrm{disc}}$.  There is likewise
+no continuous decoder $d:Y_0\to\R$ of all values $q_{k+1}$ or
+$\log q_{k+1}$.
+\end{proposition}
+
+\begin{proof}
+The continuous image of a compact space is compact.  A compact subset of a
+discrete space is finite, while a compact subset of $\R$ is bounded.  Exact
+decoding would place the infinite unbounded clock range in that image.
+\end{proof}
+
+This proposition uses only compactness of $Y_0$ and continuity of $d$; it
+uses neither equivariance, periodicity, nor the diagonal-separation theorem.
+
+Thus a compact finite-alphabet shift cannot continuously retain the complete
+absolute clock, regardless of decoder memory.  A compactified or transformed
+clock may have a continuous extension, but it must then be checked against
+\eqref{eq:diagonal-separation}; continuity alone is not enough.
