@@ -226,10 +226,13 @@ There is no surviving full-chain Hilbert–Pólya candidate.
 
 If “strongest” means the next same-family falsifiable research lead, it is
 `SD-C05`: it uniquely derives rational primes and \(\log p\) from a short
-symbolic recursion.  Its only legitimate next test is to construct or rule out
-a stationary natural extension of comparable description complexity, without
-prime-indexed components or post-hoc reset edges.  Until that exists, it is
-not a dynamical-zeta candidate.
+symbolic recursion.  [Stage 02](../stage_02_stationary_wheel_extension/README.md)
+has since ruled out strict semiconjugate and
+inverse-limit extensions, as well as a positive finite strong-bisimulation
+quotient test.  The remaining legitimate next step is to source-lock a
+genuinely new infinite factor or observational recoding of comparable
+description complexity, without prime-indexed components or post-hoc reset
+edges.  Until such an object exists, it is not a dynamical-zeta candidate.
 
 By other criteria, `SD-C04` is the strongest natural determinant and `SD-C06`
 is the strongest exact zeta-identity collision.  Those strengths cannot be

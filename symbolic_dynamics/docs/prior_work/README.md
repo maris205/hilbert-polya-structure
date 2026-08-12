@@ -6,7 +6,8 @@
 > sieve limit/conjugacy and twin-constant claim, the Paper-4 chronological
 > propagator interpretation, and the independent-certification status of the
 > very recent Paper-6 benchmark.  Use the
-> [Session-4 prior-work audit](../PRIOR_WORK_AUDIT.md) for claim grades.
+> [Stage-01 prior-work audit](../../stages/stage_01_scope_screening/docs/PRIOR_WORK_AUDIT.md)
+> for claim grades.
 
 This directory contains the six core papers that provide the main intellectual background for the HP-Dynamics project.
 

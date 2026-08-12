@@ -80,4 +80,4 @@ Every experiment records:
 
 The final verification commands, seed ledgers, and result paths are collected
 in [`EXPERIMENT_REPORT.md`](../EXPERIMENT_REPORT.md); repository artifact
-checksums are stored in `ARTIFACT_MANIFEST.sha256`.
+checksums are stored in `STAGE_MANIFEST.sha256` at the Stage-01 root.

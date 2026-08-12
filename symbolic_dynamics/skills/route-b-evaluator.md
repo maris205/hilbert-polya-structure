@@ -474,13 +474,17 @@ Every Route-B evaluation must answer:
 Read:
 
 ```text
-latest Route-A evaluation
+latest Route-A evaluation for the same candidate in <stage_root>
 docs/prior_work/README.md
 docs/prior_work/papers/
-docs/obstruction_registry.md
-docs/operator_obligations.md
-docs/candidate_registry.md
+<stage_root>/docs/obstruction_registry.md
+<stage_root>/docs/operator_obligations.md
+<stage_root>/docs/candidate_registry.md
 ```
+
+Freeze `<stage_root>` before the evaluation begins. Shared prior-work sources are
+resolved from the `symbolic_dynamics/` umbrella root; candidate registries,
+evaluations, and experiment artifacts are resolved from the frozen stage root.
 
 Interpretation inherited from prior work:
 
@@ -505,6 +509,7 @@ skill_version: 0.2.0
 candidate_id:
 source_commit:
 evaluation_date:
+artifact_path_base:  # stage root, relative to symbolic_dynamics/
 
 route_a_entry:
   route_a_verdict:
@@ -599,16 +604,20 @@ are all rigorously established in one compatible construction.
 Save every evaluation under:
 
 ```text
-evaluations/route_b/<candidate_id>/<timestamp>.yaml
+<stage_root>/evaluations/route_b/<candidate_id>/<timestamp>.yaml
 ```
 
 Update:
 
 ```text
-docs/operator_obligations.md
-docs/obstruction_registry.md
-docs/candidate_registry.md
+<stage_root>/docs/operator_obligations.md
+<stage_root>/docs/obstruction_registry.md
+<stage_root>/docs/candidate_registry.md
 ```
+
+Every relative path in an evaluation's `artifact_paths` or `artifacts` fields is
+resolved against `artifact_path_base`. Do not silently mix artifacts from two
+stages or candidates.
 
 Extract reusable results as:
 

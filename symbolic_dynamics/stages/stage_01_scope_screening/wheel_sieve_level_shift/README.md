@@ -50,6 +50,11 @@ Adding a reset or splitting the system into prime-indexed components would
 alter the frozen grammar precisely to manufacture cycles, so it is forbidden.
 The candidate stops before Route B.
 
+Stage 02 subsequently proves that a strict semiconjugate or inverse-limit
+extension cannot repair this failure; only a separately source-locked factor
+or observational recoding remains open.  This follow-up does not change the
+frozen `SD-C05` verdict.
+
 ## Artifacts
 
 - [Proof package](PROOF_PACKAGE.md)

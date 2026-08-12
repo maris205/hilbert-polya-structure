@@ -100,6 +100,10 @@ fixed-point coefficients zero, so \(\zeta_{\rm AM}=D_{\rm AM}=1\).
 
 ## Open Risks
 
-It is **OPEN** whether a stationary symbolic natural extension of comparable
-description complexity can retain this endogenous prime recursion and create
-canonical primitive cycles without resets or prime-indexed components.
+Stage 02 has now **resolved the strict-extension reading**: a semiconjugate
+extension still has no periodic points, and the standard inverse-limit natural
+extension is empty.  What remains **OPEN** is a genuinely new factor or
+observational recoding of comparable description complexity that retains the
+endogenous prime recursion and creates compatible primitive cycles without
+resets or prime-indexed components.  See the
+[Stage-02 theorem screen](../../stage_02_stationary_wheel_extension/README.md).

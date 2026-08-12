@@ -3,6 +3,7 @@
 Single command:
 
 ```bash
+cd symbolic_dynamics/stages/stage_01_scope_screening
 python finite_state_arithmetic_skeleton/experiments/run_session4_core.py
 ```
 

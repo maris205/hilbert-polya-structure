@@ -1,82 +1,58 @@
-# Session 4 — Symbolic Dynamics
+# Symbolic Dynamics Research Program
 
-This directory is the Session 4 research package for the Hilbert–Pólya
-structure program.  The only primary system family in this package is
-**symbolic dynamics**.
+This directory is the umbrella for the symbolic-dynamics branch of the
+Hilbert–Pólya structure program.  Research outputs are organized by stage so
+that a completed screening round remains frozen while the next deformation is
+developed independently.
 
-The research question is:
+The global scope rule remains unchanged: **Symbolic Dynamics is the only
+primary system family**.  Ideas requiring geometry, Hamiltonian dynamics,
+quantum graphs, scattering, or an external operator algebra remain
+`ROUND2_CLUE` entries until a later project explicitly changes the family.
 
-> Which parts of a Riemann-type arithmetic dynamical model can be supplied by
-> a symbolic grammar, and which parts cannot be obtained without a separate
-> geometric carrier?
+## Stage index
 
-The session is deliberately falsification-first.  A symbolic model is not
-credited for reproducing a target after primes, \(\log p\), von Mangoldt
-weights, phases, or Riemann zeros have been inserted into its definition.
-Route A begins at the arithmetic-origin gate.  Route B is unavailable unless
-one *single frozen construction* reaches `A4_ROUTE_B_READY`.
+| Stage | Status | Purpose | Entry point |
+|---|---|---|---|
+| `stage_01_scope_screening` | **COMPLETE / FROZEN** | Six-candidate Session-4 audit, proofs, literature, experiments, and Route-A evaluations | [Stage 01 README](stages/stage_01_scope_screening/README.md) |
+| `stage_02_stationary_wheel_extension` | **THEOREM SCREENING COMPLETE; SOURCE LOCK PENDING** | Determine whether the endogenous wheel-sieve clock can survive a stationary symbolic recoding with primitive cycles | [Stage 02 README](stages/stage_02_stationary_wheel_extension/README.md) |
 
-## Frozen research lines
+Stage 01 remains the evidence base.  Stage 02 does not inherit a candidate
+verdict from it and has not been assigned `SD-C07`: a new candidate ID is
+allowed only after one grammar, clock, function space, and determinant
+convention have all been frozen.
 
-| ID | Symbolic object | Purpose |
-|---|---|---|
-| `SD-C01` | full \(q\)-shift over \(\mathbb F_q\), plus the finite-memory weighted class | Exact function-field prime/repetition ledger and finite-state divisor-growth gate |
-| `SD-C02` | squarefree \(\mathscr B\)-admissible subshift | Test whether direct rational-prime arithmetic in the grammar produces periodic prime orbits |
-| `SD-C03` | weighted loop/renewal shift | Test countable-state flexibility, positivity, and inverse-design non-identifiability |
-| `SD-C04` | Gauss continued-fraction shift with the Mayer transfer operator | Strongest natural arithmetic/analytic symbolic benchmark; audit the missing rational-prime ledger and geometry interface |
-| `SD-C05` | recursive wheel-sieve level shift | Strongest endogenous rational-prime generator found in the session; test whether it has any periodic-orbit dynamics |
-| `SD-C06` | Knauf number-theoretical spin-chain recursion | Prior-art collision test for an exact zeta quotient and a proposed Liouville-signed refinement |
+## Shared inputs and rules
 
-The objects, forbidden data, controls, and stop rules are frozen in
-[`SESSION4_PREREGISTRATION.md`](SESSION4_PREREGISTRATION.md) before the
-experiments are run.
+- [Original Symbolic Dynamics proposal](propose-symbolic-dynamics.md)
+- [Route-A evaluator](skills/route-a-evaluator.md)
+- [Route-B evaluator](skills/route-b-evaluator.md)
+- [Shared prior-work guide](docs/prior_work/README.md)
+- [Stage lifecycle](stages/README.md)
 
-## Navigation
+The PDF and legacy prior-work corpus stays under `docs/prior_work/` as a
+read-only input shared by stages.  It is intentionally not duplicated inside
+the frozen Stage 01 package.
 
-- [`SESSION4_SUMMARY.md`](SESSION4_SUMMARY.md) — final ten-question synthesis,
-  Route-A matrix, strongest surviving lead, and strongest negative theorem.
-- [`SESSION4_PREREGISTRATION.md`](SESSION4_PREREGISTRATION.md) — source locks,
-  data separation, controls, and stop rules.
-- [`EXPERIMENT_REPORT.md`](EXPERIMENT_REPORT.md) — numerical results, exact
-  certificates, failures, and reproduction commands.
-- `finite_state_arithmetic_skeleton/` — `SD-C01`.
-- `squarefree_admissible_shift/` — `SD-C02`.
-- `renewal_inverse_design_obstruction/` — `SD-C03`.
-- `farey_gauss_transfer/` — `SD-C04`.
-- `wheel_sieve_level_shift/` — `SD-C05`.
-- `knauf_spin_chain_audit/` — `SD-C06`.
-- `evaluations/route_a/` — append-only Route-A records.
-- `evaluations/route_b/` — intentionally empty; no candidate passed the
-  same-object Route-B gate.
-- [`docs/candidate_registry.md`](docs/candidate_registry.md) — session candidate
-  ledger.
-- [`docs/obstruction_registry.md`](docs/obstruction_registry.md) — reusable
-  symbolic no-go results.
-- [`docs/operator_obligations.md`](docs/operator_obligations.md) — obligations
-  recorded without prematurely invoking Route B.
-- [`ROUND2_CLUES.md`](ROUND2_CLUES.md) — ideas that would leave symbolic
-  dynamics and therefore are not developed here.
+## Current decision
 
-## Claim discipline
+The next step is not to add reset edges to the wheel DAG.  Stage 02 has proved
+that a strict extension cannot create periodic points, that a strong
+bisimulation quotient of a finite DAG remains acyclic, and that preserving
+the exact multiplier as a state-class label prevents cross-level merging.
 
-Every substantive item is labelled with one of the Route-A evidence labels:
+The only live branch is therefore a genuinely new infinite factor or
+observational recoding.  Before code is run it must freeze a level-blind map,
+alphabet/memory class, exact clock decoder, cutoff-consistency rule, and
+path-lifting semantics.  The immediate task is the
+[Stage 02 source lock](stages/stage_02_stationary_wheel_extension/OBSERVATIONAL_RECODING_SOURCE_LOCK.md);
+the contingent computation roadmap is in the
+[experiment plan](stages/stage_02_stationary_wheel_extension/refine-logs/EXPERIMENT_PLAN.md).
 
-`PROVED`, `CONDITIONAL_THEOREM`, `NUMERICALLY_CERTIFIED`,
-`NUMERICAL_OBSERVATION`, `HEURISTIC`, `MODELING_CHOICE`,
-`FITTED_PARAMETER`, `OPEN`, `REFUTED`, `NOT_TESTABLE`, or `STOP_SCOPED`.
+## Integrity
 
-No Riemann-zero table is an input to this package.
-
-## Final outcome
-
-No frozen candidate passes A0 through A4 as one object, and no Route-B
-evaluation is authorized.  `SD-C05` is the strongest endogenous
-rational-prime lead but is acyclic; `SD-C04` is the strongest natural
-Fredholm determinant but has the wrong primitive arithmetic species; `SD-C06`
-is the strongest exact zeta-quotient collision but has no primitive-orbit
-Fredholm ledger.  These strengths are not combined.
-
-The most reusable result is a proved obstruction: every finite-state,
-finite-memory weighted determinant with a finite-dimensional cocycle has
-divisor count $O(R)$, incompatible with the completed Riemann
-$\Theta(R\log R)$ divisor.  Its finite-memory scope boundary is explicit.
+`ARTIFACT_MANIFEST.sha256` is the umbrella manifest and is verified from the
+repository root.  Each stage also carries a self-contained
+`STAGE_MANIFEST.sha256`, whose paths are resolved from that stage's root.
+The manifests cover the versioned, non-ignored research package; the shared
+local PDF/legacy corpus and runtime caches are intentionally excluded.

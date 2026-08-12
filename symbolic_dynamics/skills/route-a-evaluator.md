@@ -527,9 +527,13 @@ Read in this order:
 ```text
 docs/prior_work/README.md
 docs/prior_work/papers/
-docs/obstruction_registry.md
-docs/candidate_registry.md
+<stage_root>/docs/obstruction_registry.md
+<stage_root>/docs/candidate_registry.md
 ```
+
+Freeze `<stage_root>` before the evaluation begins. Shared prior-work sources are
+resolved from the `symbolic_dynamics/` umbrella root; candidate registries,
+evaluations, and experiment artifacts are resolved from the frozen stage root.
 
 Interpretation inherited from prior work:
 
@@ -554,6 +558,7 @@ skill_version: 0.2.0
 candidate_id:
 source_commit:
 evaluation_date:
+artifact_path_base:  # stage root, relative to symbolic_dynamics/
 
 source_lock:
   object:
@@ -629,15 +634,19 @@ Set `route_b_invocation_allowed: true` only after A4 reaches `A4_ROUTE_B_READY` 
 Every evaluation must be saved under:
 
 ```text
-evaluations/route_a/<candidate_id>/<timestamp>.yaml
+<stage_root>/evaluations/route_a/<candidate_id>/<timestamp>.yaml
 ```
 
 Update:
 
 ```text
-docs/candidate_registry.md
-docs/obstruction_registry.md
+<stage_root>/docs/candidate_registry.md
+<stage_root>/docs/obstruction_registry.md
 ```
+
+Every relative path in an evaluation's `artifact_paths` or `artifacts` fields is
+resolved against `artifact_path_base`. Do not silently mix artifacts from two
+stages or candidates.
 
 Do not overwrite prior evaluations. New evidence creates a new version.
 

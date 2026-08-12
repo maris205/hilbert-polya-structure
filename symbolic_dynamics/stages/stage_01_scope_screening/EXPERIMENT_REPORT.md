@@ -158,6 +158,12 @@ Next test:
 Prove or refute the existence of a stationary natural extension with the same
 recursive rule and no artificial reset.  Do not add cycles post hoc.
 
+Post-freeze Stage-02 update: the strict semiconjugate and inverse-limit
+extension readings are now **PROVED impossible**, and finite strong
+bisimulation quotients are also acyclic.  The remaining question is a
+separately source-locked infinite factor or observational recoding; see the
+[Stage-02 theorem screen](../stage_02_stationary_wheel_extension/README.md).
+
 ### SD-C06
 
 Observation:
@@ -199,6 +205,10 @@ be replaced by increasing \(k\).
 
 ## Reproducibility commands
 
+Run from the Stage-01 root:
+
+    cd symbolic_dynamics/stages/stage_01_scope_screening
+
     python finite_state_arithmetic_skeleton/experiments/run_session4_core.py
     bash farey_gauss_transfer/experiments/run.sh
     bash wheel_sieve_level_shift/experiments/run.sh
@@ -213,8 +223,8 @@ tables, seeds, cutoffs, precision audits, hashes, and claim boundaries.
 
 Only three follow-ups remain scientifically live:
 
-1. search for a stationary, low-complexity extension of the endogenous wheel
-   recursion without reset edges;
+1. source-lock a stationary, low-complexity factor or observational recoding
+   of the endogenous wheel recursion; strict extensions are already closed;
 2. test any pre-registered Gauss-word arithmetic map against its many exact
    trace collisions and neighboring-grammar controls;
 3. search for an intrinsic symmetry that produces the Knauf sign before
