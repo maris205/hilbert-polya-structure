@@ -1,0 +1,99 @@
+\section{Reproducible Finite Audits}
+\label{sec:experiments}
+
+The numerical work tests implementations, finite ledgers, and adversarial
+controls.  It is not used to infer a Riemann divisor.  Four frozen runners
+execute 29 tests in total: 12 across the three core candidates, five for the
+Gauss-word code, five for the wheel code, and seven for the Knauf recursion.
+All tests passed on fresh frozen reruns.  Exact integer arithmetic,
+rational coefficients, decimal precision, and binary floating-point fields
+are labeled separately in the artifacts.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_finite_audits.pdf}
+  \caption{Finite computations validate obligation-specific behavior rather
+  than a Riemann divisor.  (a) At the largest word cutoff, the Gauss primitive
+  ledger grows with digit cutoff, while non-reversal matrix-trace collisions
+  also grow.  (b) At the largest wheel level, the arithmetic deletion rule
+  recovers the unit residues exactly and matched controls do not, yet all
+  eight frozen ledgers are acyclic.  Random-control points show every seed and
+  the blue segment shows their mean.  (c) Knauf finite-depth benchmark errors
+  are small deep in the Dirichlet region; the shaded continuation/boundary
+  region is a benchmark only and supplies no convergence claim.  The scripts
+  read the frozen CSV files and cross-check their maxima against JSON
+  summaries.}
+  \label{fig:finite-audits}
+\end{figure}
+
+\paragraph{\candidate{01}: exact counts and a numerical theorem control.}
+For \(q=2,3,5\), formula counts through degree 12 agree with independent
+primitive-necklace and irreducible-polynomial enumeration wherever brute-force
+cutoffs overlap.  At degree 12 the formula gives \(335\), \(44{,}220\), and
+\(20{,}343{,}700\), respectively.  The finite determinant controls show
+linear, rather than \(T\log T\), root-count behavior: the commensurable
+unitary example gives counts \(7,14,28,56\) for
+\(T=10,20,40,80\), while the nonlattice example gives
+\(5,11,23,43\).  These four-point controls illustrate
+\cref{thm:finite-memory}; they are not its proof.
+
+\paragraph{\candidate{02}: finite approximants versus the infinite grammar.}
+The exact theorem gives one fixed point at every period.  At period 30, a
+finite approximation using three prime-square moduli still has \(4{,}501\)
+fixed points, while the golden-mean and full-binary controls have
+\(1{,}860{,}498\) and \(1{,}073{,}741{,}824\).  The contrast prevents a
+finite-modulus census from being mistaken for the periodic structure of the
+full exclusion.
+
+\paragraph{\candidate{03}: an adversarial identifiability check.}
+Degree-12 on-circle, off-circle, and generic rational polynomials are all
+reconstructed coefficientwise exactly by the same renewal inverse map.  The
+on-circle control has 12 of 12 numerical roots on the unit circle, whereas the
+off-circle control has six roots inside and six outside.  Maximum radius
+errors against exact factor geometry are below \(4.1\times10^{-15}\).  Good
+root reconstruction is therefore evidence for the algebraic flexibility, not
+for selective arithmetic dynamics.
+
+\paragraph{\candidate{04}: exact word bookkeeping.}
+\Cref{fig:finite-audits}(a) reads the rows with the largest frozen word cutoff,
+\(L=8\), from the 12-row cutoff table.  At \(D=5\), the code enumerates
+\(63{,}319\) primitive necklaces.  Cyclic-invariance,
+reversal-transpose, repetition-matrix, and reverse-completeness failure counts
+are all zero.  There are \(7{,}018\) non-reversal trace-collision groups.
+The latter result blocks trace as an injective label but does not challenge the
+continued-fraction orbit ledger itself.  Recomputing orbit sums at 40 and 80
+decimal digits changes them by at most \(5.28\times10^{-42}\).
+
+\paragraph{\candidate{05}: arithmetic separation and universal acyclicity.}
+The finite wheel audit reaches level 7 with multipliers
+\(2,3,5,7,11,13,17\).  It certifies \(98{,}460\) vertices and
+\(98{,}459\) edges.  The arithmetic residue set has unit-set Jaccard score one
+at every level.  At level 7, fixed, cyclic, and five random matched controls
+have the same residue count but Jaccard scores between approximately \(0.14\)
+and \(0.41\).  Kahn traversal processes every vertex for all eight ledgers and
+finds no directed cycle.  Thus the control separates the deletion rule but
+does not repair A1.
+
+\paragraph{\candidate{06}: finite-depth domain audit.}
+The largest recursion has \(2^{22}=4{,}194{,}304\) states, support size
+\(28{,}863\), and complete totient multiplicities only through \(n=23\).
+For the unsigned observable, absolute benchmark errors at \(s=3\) and \(s=4\)
+are \(4.47\times10^{-3}\) and \(6.92\times10^{-5}\); for the
+Liouville-weighted observable they are \(1.46\times10^{-4}\) and
+\(1.59\times10^{-6}\).  Near the boundary, the errors remain much larger.
+Complex double precision agrees with a 100-decimal-digit direct sum to at
+most \(7.85\times10^{-15}\).
+
+The sign controls sharpen the claim boundary.  The depth-coherent symbolic
+parity control has median successive-cutoff drift \(0.001303\), below the
+Liouville value \(0.004361\).  Small finite-depth drift is therefore not
+selective evidence for the arithmetic sign.  Random signs are keyed
+separately by depth, so their reported cross-level differences are not
+convergence diagnostics for one fixed observable.
+
+\paragraph{Figure provenance.}
+\Cref{fig:route-a-matrix} is generated from the six YAML evaluations.
+\Cref{fig:finite-audits} is generated from the Gauss cutoff table, wheel level
+table, and Knauf final-grid table; its script verifies corresponding JSON
+summary and DAG-certificate fields before plotting.  No plotted result is
+hard-coded in the generation scripts.

@@ -1,0 +1,122 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C02
+source_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+evaluation_date: 2026-08-12
+artifact_path_base: Ra-1-project/stages/stage_01_scope_screening
+
+source_lock:
+  object: "Squarefree B-admissible subshift excluding full support modulo p^2 for every rational prime p."
+  family: "symbolic dynamics"
+  phase_space: "X_sf subset {0,1}^Z"
+  dynamics: "left shift"
+  parameters: "all rational-prime-square moduli; finite controls use the first 1,2,3 squares"
+  parameter_provenance: "the standard squarefree grammar, explicitly arithmetic rather than emergent"
+  arithmetic_origin: "direct p^2 exclusions"
+  clock: "unit roof"
+  normalization: "Artin-Mazur variable z"
+  determinant_convention: "D_AM(z)=zeta_AM(z)^(-1)"
+  function_space: "locally constant cylinder algebra"
+  roof_function: "1"
+  potential_function: "0"
+  cocycle: "trivial"
+  cutoff: "exact all-period theorem; brute period <=14; finite approximants <=30"
+  precision: "exact integer arithmetic for orbit counts; IEEE-754 binary64 for shuffled-window entropy summaries"
+  orbit_cutoff: "all periods analytically; finite census through 30"
+  training_data: "none"
+  allowed_data: "the mathematical prime-square exclusions and frozen controls"
+  forbidden_data: "Riemann zeros, zero fitting, alternate post-hoc zeta conventions"
+  code_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+  artifact_paths:
+    - squarefree_admissible_shift/PROOF_PACKAGE.md
+    - squarefree_admissible_shift/results/sd_c02_results.json
+    - squarefree_admissible_shift/results/sd_c02_periodic_census.csv
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: MODELING_CHOICE
+  strongest_evidence: "The grammar has direct, classical rational-prime-square arithmetic."
+  strongest_failure: "All p^2 exclusions are inserted into the dynamics; the rational primes do not emerge from a low-complexity non-prime grammar."
+  arithmetic_controls:
+    - "full binary shift"
+    - "golden-mean shift"
+    - "finite one-, two-, and three-square approximants"
+    - "shuffled finite windows with seed 20260816"
+  artifacts:
+    - squarefree_admissible_shift/results/sd_c02_results.json
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "A Chinese-remainder argument enumerates all periodic points exactly."
+  strongest_failure: "The only periodic point is 0^Z, so there is no prime or prime-power primitive ledger."
+  metrics:
+    fixed_points_every_period: 1
+    primitive_orbits: "one period-1 zero orbit"
+    brute_period_cutoff: 14
+  artifacts:
+    - squarefree_admissible_shift/PROOF_PACKAGE.md
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "For its own trivial periodic ledger, zeta_AM(z)=1/(1-z) and D_AM(z)=1-z exactly."
+  strongest_failure: "The divisor contains no nontrivial arithmetic information and cannot match xi."
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: "finite p^2 approximants have many cycles, but the infinite-system theorem collapses them"
+    precision_drift: 0
+    control_margin: "at period 30: candidate 1, three-square approximant 4501, golden mean 1860498, full binary 1073741824"
+  artifacts:
+    - squarefree_admissible_shift/results/sd_c02_periodic_census.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "The full Artin-Mazur object is globally elementary."
+  strongest_failure: "It has the wrong divisor, no completed functional equation, no T log T count, and no natural same-ledger Weil compression."
+  analytic_structure:
+    determinant: "1-z"
+    completed_factor: false
+    divisor_growth: "constant"
+  weil_compression:
+    status: "not naturally available"
+    evidence_status: STOP_SCOPED
+  artifacts:
+    - squarefree_admissible_shift/README.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: "The symbolic shift itself is well defined."
+  strongest_failure: "There is no nontrivial arithmetic periodic ledger or determinant to preserve in an operator lift."
+  metrics:
+    hilbert_space_named: false
+    domain_named: false
+    same_clock_preserved: not_applicable
+  artifacts:
+    - docs/operator_obligations.md
+
+adversarial_controls:
+  controls_used:
+    - "finite-modulus approximants"
+    - "full binary shift"
+    - "golden-mean shift"
+    - "shuffled windows"
+  proves_too_much_risk: "low after the exact periodic-point theorem; high if word entropy were substituted for periodic-orbit evidence"
+  verdict: "Controls confirm that the infinite exclusion, not finite word richness, causes periodic collapse."
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "Natural arithmetic subshift as a negative periodic-orbit example; it fails both strict emergence A0 and primitive-orbit A1."
+blocking_conditions:
+  - "prime squares are explicit grammar inputs"
+  - "only one trivial periodic orbit"
+  - "trivial determinant divisor"
+next_smallest_test: "No further Artin-Mazur test is warranted. Any zeta based on aperiodic statistics is a different observable and requires a new source lock."
+round2_clues: []
+route_b_invocation_allowed: false

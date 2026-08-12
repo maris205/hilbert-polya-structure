@@ -1,0 +1,65 @@
+\section{Proof-Dependency and Boundary Audit}
+\label{app:audit}
+
+This appendix records exactly where each assumption enters.  It is intended
+to prevent later finite experiments or recoding proposals from silently
+enlarging the theorems.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Assumption audit for the proved statements.}
+\label{tab:assumption-audit}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth}
+  >{\raggedright\arraybackslash}p{0.34\textwidth}X@{}}
+\toprule
+Result & Assumptions actually used & Failure or escape when removed \\
+\midrule
+\Cref{lem:prime-enumeration} & Frozen recurrence, elementary prime
+factorization & A stored or altered multiplier sequence is a different source \\
+\Cref{thm:extension} & Disjoint levels, strict level growth, equivariance &
+No conclusion for a new object without a map to the frozen shift \\
+\Cref{prop:inverse-limit} & Nonnegative levels and one-level forward growth &
+A bi-infinite grading or added predecessors changes the object \\
+\Cref{thm:well-founded-bisim} & No infinite forward path and successor matching &
+The infinite ray gives a cyclic quotient; weaker images need not lift paths \\
+\Cref{cor:finite-bisim} & Finite source and source acyclicity &
+These hypotheses imply forward well-foundedness \\
+\Cref{prop:label-grading} & One-level edge growth and a class label injective in level &
+No conclusion for edge/path decoders that distinguish representatives \\
+\Cref{thm:finite-local} & Finite alphabet, fixed finite window, fixed decoder &
+An infinite alphabet, infinite memory, or unbounded input avoids the finite-domain step \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{The infinite-ray boundary in full}
+
+Let $G$ have vertices $v_n$ for $n\in\N$ and edges
+$v_n\to v_{n+1}$.  A directed cycle would require the index to return to a
+smaller value, so $G$ is acyclic.  It is not forward well-founded because the
+displayed ray is an infinite path.  Put $v_n\sim v_m$ for all $n,m$.  Given
+any related vertices, their unique successors are again related, in both
+directions required by strong forward bisimulation.  The quotient has one
+class $C$, and every source edge witnesses $C\to C$.  Thus $G/{\sim}$ has a
+self-loop.  This example shows that acyclicity alone cannot replace the
+no-infinite-forward-path hypothesis in \cref{thm:well-founded-bisim}.
+
+The counterexample does not validate an infinite wheel quotient.  Its
+one-class quotient has forgotten every level-dependent value, including the
+exact wheel multiplier.  It demonstrates a theorem boundary and nothing
+more.
+
+\subsection{Why cutoff stability is not an infinite definition}
+
+Suppose partitions are computed independently at several finite cutoffs.
+Even identical-looking class counts do not specify an infinite quotient.  A
+definition still needs restriction or extension maps that commute with the
+source and target shifts, a treatment of terminal classes, and a proof that
+interior classes are consistent as the cutoff changes.  Without those data,
+one cannot decide whether a finite closed word persists, whether it is a
+boundary artifact, or whether its edge witnesses form one compatible
+one-sided infinite lift.
+
+The preregistered cutoffs can test an already defined infinite rule.  They
+cannot supply the rule, its decoder, or its consistency theorem.
