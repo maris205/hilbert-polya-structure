@@ -221,6 +221,20 @@ The residual polynomial in the edge variable is
 which is separable. The horizontal edge accounts for the other seven roots,
 which have \(v_{19}(T)=0\).
 
+More precisely, the complete residue factorization is
+
+\[
+P_9(A)\equiv-7(A+3)^2(A^2+A-7)
+(A^5+3A^4+2A^3+A^2+4A-2)\pmod{19}.
+\]
+
+The quadratic and quintic factors are distinct and separable. Their roots
+therefore generate only unramified extensions. The two-root cluster is
+already totally ramified of degree \(2\), so the local splitting field of
+all nine roots has ramification index exactly \(2\). We henceforth use its
+integer-normalized valuation \(v\), for which \(v(19)=2\) and the two
+cluster parameters satisfy \(v(T)=5\).
+
 ### 3. Hill valuation on the two-root cluster
 
 Write
@@ -254,8 +268,8 @@ v_{19}(b_iT^i)\ge5\quad(i\ge2).
 
 The minimum \(5/2\) is unique, so there is no cancellation. The denominator
 \(4827099043\equiv7\pmod{19}\) is a unit. Thus both cluster values of
-\(\beta\) have rationally normalized valuation \(5/2\), or
-integer-normalized valuation \(5\).
+\(\beta\) have rationally normalized valuation \(5/2\), hence valuation
+\(5\) under the fixed normalization on the local splitting field.
 
 Furthermore,
 

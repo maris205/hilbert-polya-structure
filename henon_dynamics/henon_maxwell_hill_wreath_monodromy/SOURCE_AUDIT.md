@@ -32,18 +32,18 @@ if any of the five source hashes drift.
 
 ## Search record
 
-Targeted searches covered the combinations
+Search date: **2026-08-12**. Targeted searches covered the combinations
 
 - Hénon + action critical values + Maxwell set + Hill determinant;
 - Hénon + arithmetic/Galois monodromy + periodic orbit Hessian;
 - conjugate Kummer square classes + full \(C_2\wr S_n\);
 - 2024--2026 Hénon arithmetic and monodromy work.
 
-The closest recent Hénon arithmetic paper found studies many rational
-periodic points, not action-collision Hill covers. Recent Hénon-like work on
-saddle equidistribution also does not overlap this algebraic object. No
-located source proves or studies the specific period-five
-Maxwell--Hill \(C_2\wr S_9\) realization.
+The closest recent Hénon arithmetic paper found, arXiv:2412.01668, studies
+many rational periodic points, not action-collision Hill covers. Recent
+Hénon-like work on saddle equidistribution, arXiv:2502.20103, also does not
+overlap this algebraic object. No located source proves or studies the
+specific period-five Maxwell--Hill \(C_2\wr S_9\) realization.
 
 ## Novelty verdict
 

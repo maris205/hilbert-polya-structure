@@ -34,10 +34,21 @@ labeling the conjugates suitably,
 With \(A=1802+T\), the coefficient valuations of \(P_9\) are
 \((5,3,0,\ldots,0)\). The lower Newton edge from \((0,5)\) to \((2,0)\)
 has slope \(-5/2\), denominator \(2\), and horizontal length \(2\). It
-therefore gives one degree-two local cluster. The shifted numerator of
-\(\beta\) has valuations \((3,0,\ldots,0)\), so its unit linear term gives
-valuation \(5/2\) at each cluster root. In the integer normalization of
-the ramified local field this is \(5\). Finally,
+therefore gives one degree-two local cluster. The complete residue
+factorization is
+
+\[
+P_9(A)\equiv-7(A+3)^2(A^2+A-7)
+(A^5+3A^4+2A^3+A^2+4A-2)\pmod{19}.
+\]
+
+The quadratic and quintic noncluster factors are distinct and separable,
+so their splitting extensions are unramified. The cluster factor already
+has ramification index \(2\) and residual degree \(1\); consequently the
+whole local splitting field has ramification index \(2\). Normalize its
+valuation by \(v(19)=2\). The shifted numerator of \(\beta\) has valuations
+\((3,0,\ldots,0)\), so its unit linear term gives integer-normalized
+valuation \(5\) at each cluster root. Finally,
 
 \[
 \gcd(P_9,\operatorname{num}\beta)\bmod19=A+3,
