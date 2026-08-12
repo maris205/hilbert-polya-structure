@@ -49,6 +49,30 @@ def load_manifest(path: Path) -> dict[str, Any]:
     return data
 
 
+def stream_documents(manifest: dict[str, Any]) -> list[dict[str, str]]:
+    """Return explicitly configured stream-level documents.
+
+    These files summarize a research line rather than belonging to one stage.
+    They are still source-locked and are copied byte-for-byte so the mirror's
+    top-level narrative cannot drift from the primary repository.
+    """
+    value = manifest.get("stream_documents", [])
+    if value is None:
+        return []
+    if not isinstance(value, list):
+        raise TypeError("stream_documents must be a list")
+    documents: list[dict[str, str]] = []
+    for item in value:
+        if (
+            not isinstance(item, dict)
+            or not isinstance(item.get("source"), str)
+            or not isinstance(item.get("destination"), str)
+        ):
+            raise TypeError("each stream document needs source and destination strings")
+        documents.append({"source": item["source"], "destination": item["destination"]})
+    return documents
+
+
 def as_list(value: Any) -> list[str]:
     if value is None:
         return []
@@ -432,7 +456,10 @@ def sync_stage(
             raise FileNotFoundError(source)
         destination = project / relative
         if check:
-            if not destination.exists() or destination.read_bytes() != source.read_bytes():
+            if (
+                not destination.exists()
+                or destination.read_bytes() != source.read_bytes()
+            ):
                 drift.append(str(destination.relative_to(STREAM_ROOT)))
         else:
             destination.parent.mkdir(parents=True, exist_ok=True)
@@ -530,6 +557,23 @@ def generated_index(source_root: Path, manifest: dict[str, Any]) -> bytes:
     return "".join(lines).encode("utf-8")
 
 
+def sync_stream_documents(
+    manifest: dict[str, Any], source_root: Path, check: bool, drift: list[str]
+) -> None:
+    for document in stream_documents(manifest):
+        source = source_root / document["source"]
+        if not source.is_file():
+            raise FileNotFoundError(source)
+        destination = STREAM_ROOT / document["destination"]
+        if check:
+            if not destination.exists() or destination.read_bytes() != source.read_bytes():
+                drift.append(str(destination.relative_to(STREAM_ROOT)))
+        else:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if not destination.exists() or destination.read_bytes() != source.read_bytes():
+                shutil.copy2(source, destination)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", type=Path, default=DEFAULT_SOURCE_ROOT)
@@ -562,6 +606,7 @@ def main() -> int:
         sync_stage(manifest, source_root, stage, args.check, drift)
 
     if not selected:
+        sync_stream_documents(manifest, source_root, args.check, drift)
         compare_or_write(
             STREAM_ROOT / "STAGE_INDEX.md",
             generated_index(source_root, manifest),

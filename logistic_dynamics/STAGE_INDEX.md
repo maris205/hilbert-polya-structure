@@ -1,5 +1,5 @@
 # HP-Dynamics synchronized stage index
-This index is generated from `sync_manifest.yaml`. The source research repository is frozen at commit `a2e021f989bf922c174282609928137dc931ff74`.
+This index is generated from `sync_manifest.yaml`. The source research repository is frozen at commit `68a7ca23ebfede30c1a19b22c8de6d7173d99740`.
 | Group | Stage | Candidate | Status | Route-A | Paper |
 |---|---|---|---|---|---|
 | Logistic baseline | [`LEGACY-LOGISTIC-NUMERIC-BASELINES`](projects/legacy_logistic_numeric_baselines/README.md) | `audit` | `ARCHIVED` | `NOT_FORMALLY_EVALUATED` / `ARCHIVED` | `not_opened` |

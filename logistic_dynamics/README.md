@@ -17,6 +17,10 @@ to the main-repository commit by hashes.
 
 - [`STAGE_INDEX.md`](STAGE_INDEX.md): complete generated inventory of all
   synchronized stages.
+- [`LOG0001_STABLE_RESULTS.md`](LOG0001_STABLE_RESULTS.md): stable exact-`U_c`
+  Logistic / LOG-0001 result boundary.
+- [`EXPLORATION_CLOSEOUT.md`](EXPLORATION_CLOSEOUT.md): reusable clues,
+  scoped obstructions, and the next-project handoff for the breadth pivots.
 - [`sync_manifest.yaml`](sync_manifest.yaml): authoritative source paths,
   project mapping, status, paper boundary, and source commit.
 - [`SYNC_POLICY.md`](SYNC_POLICY.md): what is mirrored, what remains external,
