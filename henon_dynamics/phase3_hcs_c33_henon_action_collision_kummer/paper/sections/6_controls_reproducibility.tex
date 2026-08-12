@@ -1,0 +1,50 @@
+\section{Finite controls and reproducibility}
+
+The characteristic-zero norm \eqref{eq:norm} is the primary nonsquare proof.
+Finite reductions test the specialization and catch branch, chronology, and
+square-class errors.  We froze every prime dividing
+\[
+\PN(6)=61\cdot157\cdot3203\cdot21943
+\]
+before the Phase-3 theorem computation.  Table~\ref{tab:primes} reports the
+complete control set.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{rrrrrl}
+\toprule
+\(p\) & action & \(q_1,q_2\) & \(h_1,h_2\) & \(\chi_p(h_1h_2)\) & role \\
+\midrule
+61 & 45 & 12, 36 & 44, 7 & \(+1\) & post-hoc C32 regression \\
+157 & 76 & 58, 129 & 26, 96 & \(+1\) & square control \\
+3203 & 150 & 1805, 2375 & 1577, 2906 & \(-1\) & nonsquare control \\
+21943 & 20277 & 7923, 20203 & 4539, 16878 & \(+1\) & square control \\
+\bottomrule
+\end{tabular}
+\caption{All prime divisors of \(P_9(6)\).  The first row was discovered in
+C32 and remains explicitly post-hoc; no finite row proves
+Theorem~\ref{thm:kummer}.}
+\label{tab:primes}
+\end{table}
+
+The released producer derives all promoted polynomials from
+\eqref{eq:map}--\eqref{eq:action}.  It serializes rational polynomials and
+elements of \(\Q[A]/(P_9)\) canonically.  The checker imports no producer
+module.  It reconstructs the recurrence, action, resultants, collision
+fiber, tangents, derivative chronology, Hessian, field norm, and modular
+controls, then enforces exact key sets and type-strict JSON equality.
+
+The independent report passes 12 semantic gates.  Thirty-three adversarial and
+regression tests alter the source hash, polynomial data, discriminant
+exponent, irreducibility or Galois ledgers, collision fiber, tangent,
+\(-1\)-multiplier gate, field norm, finite controls, post-hoc disclosure,
+Route-A status, and scope.  Expected
+mathematical mismatches are distinguished from unexpected checker errors.
+The full project is frozen by a SHA-256 manifest and reproduced by a
+read-only default runner.
+
+These checks do not make two computer-algebra implementations logically
+independent proof assistants.  The explicit derivation and mutation suite
+instead provide a transparent, reproducible exact certificate whose main
+identities can be checked outside the producer.

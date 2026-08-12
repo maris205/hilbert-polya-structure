@@ -68,6 +68,7 @@ The foundational local source is
 | [`rauzy_inverse_roof_trace_obstruction/`](rauzy_inverse_roof_trace_obstruction/) | All-phase positive-cone failure, inverse-time roof theorem, same-space nuclearity and isolated-flat-trace obstruction | C29-to-AGY promotion rejected; finite C29 graph germ retained |
 | [`henon_bowen_pressure_gate/`](henon_bowen_pressure_gate/) | Exact full-cylinder Bowen-pressure bracket, adapted/Euclidean coboundary, and local Hausdorff dimension theorem | Positive signal pressure-consistent at certified resolution; arithmetic interpretation rejected |
 | [`phase3_hcs_c32_artin_schreier_quantum_trace/`](phase3_hcs_c32_artin_schreier_quantum_trace/) | Exact Hénon Morse-germ collision with unequal Hill values and a source-certified local no-recovery theorem | Morse-local bridge stopped; global discriminant-monodromy gate open |
+| [`phase3_hcs_c33_henon_action_collision_kummer/`](phase3_hcs_c33_henon_action_collision_kummer/) | Exact period-five equal-action node, \(S_9\) collision field, and nontrivial descended Hill--Kummer class | Positive fixed-period arithmetic theorem; Route-A rejected |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -150,7 +151,54 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C32 closes Morse-local Hill recovery
+## Latest big-door result: HCS-C33 lifts the C32 collision to characteristic zero
+
+C33 replaces the isolated-prime C32 event by an exact parameter-family
+theorem.  The period-five cyclic action image has discriminant
+
+\[
+\operatorname{Disc}_c W_5
+=2^{12}3^{30}A^{60}P_2^5P_5^3P_9^2,
+\]
+
+where the coprime degree-nine factor \(P_9\) has Galois group \(S_9\).  Over
+\(K_9=\mathbb Q[A]/(P_9)\), its repeated action value comes from exactly two
+distinct normalization points whose image is a transverse ordinary node.
+Both points have exact period five and neither return map has multiplier
+\(+1\) or \(-1\).
+
+The two chronological Hill determinants descend through branch exchange as
+\(N_H=h_1h_2\).  Their exact rational field norm is
+
+\[
+N_{K_9/\mathbb Q}(N_H)
+=\frac{2^6\,13\,19^5\,41\,59^5\,5653^2}{3^5},
+\]
+
+so \(N_H\) is not a square in \(K_9\).  Thus \(u^2=N_H\) is a nontrivial
+quadratic Kummer extension of the generic collision field.  The action curve
+itself is birational to the known period-five marker cover; the new
+information lies in its singular action embedding and intrinsic stability
+decoration.
+
+This is positive Hénon arithmetic structure, but it remains fixed-period.
+The formal tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with
+**ROUTE_A_REJECTED**.  No full Kummer wreath group, Picard--Lefschetz action,
+all-period zeta, or self-adjoint operator is claimed.
+
+- [C33 Phase-3 overview](phase3_hcs_c33_henon_action_collision_kummer/README.md)
+- [C33 theorem package](phase3_hcs_c33_henon_action_collision_kummer/THEOREM_PACKAGE.md)
+- [C33 exact certificate](phase3_hcs_c33_henon_action_collision_kummer/results/c33_kummer_certificate.json)
+- [C33 compiled paper](phase3_hcs_c33_henon_action_collision_kummer/paper/main.pdf)
+
+Reproduce the release with:
+
+~~~bash
+phase3_hcs_c33_henon_action_collision_kummer/code/run_c33.sh
+~~~
+
+## Predecessor big-door result: HCS-C32 closes Morse-local Hill recovery
 
 C32 keeps the chronological H6 dynamics and replaces the exhausted scalar
 pressure interpretation with a finite-field Artin--Schreier kernel.  Its
@@ -181,16 +229,10 @@ representative.  An independent permutation-cycle checker passes 14/14 exact
 gates, the mutation suite passes 22/22 tests, and the full Phase-3 artifact
 manifest verifies 19 files.
 
-This is a scoped negative theorem, not a global Artin--Schreier no-go.  The
-next large door remains Hénon-specific: form the parameter-family parabolic
-discriminant
-
-\[
-\det D^2\Phi_{n,a}=\det(I-DH_a^n)=0
-\]
-
-and study its braid/Galois monodromy, where critical-point collisions can
-carry information erased by separate Morse germs.
+This is a scoped negative theorem, not a global Artin--Schreier no-go.  C33
+subsequently opened the parameter-family equal-action discriminant rather
+than extending the isolated-prime scan, and proved the characteristic-zero
+node/Hill--Kummer theorem summarized above.
 
 - [C32 Phase-1 question](phase1_hcs_c32_artin_schreier_quantum_trace/RESEARCH_QUESTION_BRIEF.md)
 - [C32 Phase-2 source verification](phase2_hcs_c32_artin_schreier_quantum_trace/SOURCE_VERIFICATION_REPORT.md)

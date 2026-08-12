@@ -1,0 +1,68 @@
+\section{Chronological action curve}
+
+Set \((x_0,x_{-1})=(q,q)\) and iterate
+\begin{equation}
+x_{i+1}=1-Ax_i^2-x_{i-1}.                                  \label{eq:recurrence}
+\end{equation}
+The state after five steps is \((x_5,x_4)\).  Taking the gcd of
+\(x_5-q\) and \(x_4-q\) over \(\Q(A)[q]\), removing the fixed-point factor
+\(Aq^2+2q-1\), and primitive-scaling yields the sextic \(\GA(q)\) printed
+in Appendix~\ref{app:ledgers}.  Its discriminant is
+\begin{equation}
+\Disc_q\GA=2^6A^{30}P_2P_5,                                \label{eq:discG}
+\end{equation}
+where
+\[
+P_2=16A^2-28A-19,
+\quad
+P_5=16A^5-108A^4+105A^3+27A^2-97A-47.
+\]
+Because five is prime, removing the fixed-point factor leaves exact period
+five away from \(AP_2P_5=0\).
+
+The cyclic action is
+\begin{equation}
+\PhiA=\sum_{i\bmod5}
+\left(x_ix_{i+1}-x_i+\frac A3x_i^3\right).                 \label{eq:action}
+\end{equation}
+Its Euler--Lagrange equations are
+\[
+\partial_{x_i}\PhiA=x_{i-1}+x_{i+1}-1+Ax_i^2=0,
+\]
+which reproduce \eqref{eq:recurrence}.  Reducing \(3A^2\PhiA\) modulo
+\(\GA\) gives a degree-five polynomial \(R(A,q)\).  We define the primitive
+action image by
+\begin{equation}
+\WA(A,c)=A^{-30}\Res_q\bigl(\GA(q),3A^2c-R(A,q)\bigr).
+                                                                    \label{eq:W}
+\end{equation}
+
+\begin{proposition}[Birational control]\label{prop:birational}
+The plane curve \(\WA(A,c)=0\) and the normalization \(\GA(q)=0\) have the
+same function field over \(\Q\).
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+At \(A=6\), reduction modulo \(37\) preserves degree six.  The coefficient
+rows of \(\GA\) and \(\WA\), from highest to lowest degree, are
+\[
+(36,12,21,21,26,27,34),\qquad
+(26,34,7,16,19,8,4),
+\]
+and exact finite-field factorization gives profile \((6)\) for each.
+Consequently both generic sextics are irreducible over \(\Q(A)\).
+The last nonzero subresultant of \(\GA(q)\) and \(3A^2c-R(A,q)\), viewed as
+polynomials in \(q\), is linear:
+\[
+U(A,c)q+V(A,c).
+\]
+Its coefficient \(U\) is coprime to \(\WA\) over \(\Q(A)\).  Therefore
+\(q=-V/U\) on a dense open set, proving
+\(\Q(A,q)=\Q(A,c)\).  The released certificate stores and independently
+checks the complete coefficient ledgers.
+\end{proof}
+
+This proposition is a negative control with a positive consequence.  It
+rules out a new ordinary cover, but it also identifies singularities of
+\(\WA\) as failures of the action coordinate to separate points on the
+known normalization.

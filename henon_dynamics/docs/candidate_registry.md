@@ -909,5 +909,46 @@ critical-value monodromy, infinity, and degenerate fibers open.
 
 The current formal Route-A status is `NOT_TESTABLE`; a forced ceiling is
 **(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)**.  The next authorized large
-move is **HCS-C33**, the parameter-family parabolic discriminant and its
-braid/Galois monodromy.  Extending the isolated-prime scan is not a reopening.
+move is **HCS-C33**, the parameter-family equal-action discriminant and its
+Hill-decorated arithmetic monodromy.  Extending the isolated-prime scan is
+not a reopening.
+
+## HCS-C33 period-five action-node/Hill--Kummer theorem (2026-08-12)
+
+Candidate **HCS-C33** lifts the finite-field C32 collision to characteristic
+zero; see
+[the Phase-3 project](../phase3_hcs_c33_henon_action_collision_kummer/).
+
+The period-five action plane model has
+
+\[
+\operatorname{Disc}_cW_5
+=2^{12}3^{30}A^{60}P_2^5P_5^3P_9^2,
+\qquad \operatorname{Gal}(P_9/\mathbb Q)=S_9.
+\]
+
+The action model is birational to the known six-sheet normalization, so it
+is not a new permutation cover.  At the generic \(P_9\) point, however, the
+repeated action value has a separable quadratic normalization fiber and two
+distinct tangent directions.  It is therefore an ordinary transverse node
+formed by two exact-period-five points.  Separate resultants exclude both
+\(+1\) and \(-1\) multipliers.
+
+If \(h_1,h_2\) are the two intrinsic Hill determinants, their product
+\(N_H=h_1h_2\) descends under branch exchange.  Its exact rational norm is
+
+\[
+N_{K_9/\mathbb Q}(N_H)
+=\frac{2^6\,13\,19^5\,41\,59^5\,5653^2}{3^5},
+\]
+
+so \([N_H]\ne1\) in \(K_9^\times/K_9^{\times2}\).  This proves a nontrivial
+quadratic Hill--Kummer extension.  It does not prove independence of all
+\(S_9\)-conjugate classes, a full wreath group, Picard--Lefschetz monodromy,
+or an all-period determinant.
+
+The strict tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with
+**ROUTE_A_REJECTED**.  The next authorized large gate is an all-conjugate
+Kummer-rank theorem or an all-period trace-compatible assembly; another
+isolated prime or low-period scan is not enough.
