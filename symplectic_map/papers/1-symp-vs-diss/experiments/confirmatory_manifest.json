@@ -1,0 +1,54 @@
+{
+  "manifest_id": "shadow_transport_test_v2",
+  "frozen_at_utc": "2026-08-12T15:41:40Z",
+  "analysis_amended_before_test_at_utc": "2026-08-12T15:57:39Z",
+  "workspace_commit": "UNAVAILABLE_NON_GIT_WORKSPACE",
+  "test_split_seed": 20260814,
+  "single_use_commands": [
+    "python code/scripts/run_transport.py --split test --unlock-confirmatory-test --run-label transport_test_frozen_v2",
+    "python code/scripts/run_transport.py --split test --unlock-confirmatory-test --a 1.50 --run-label transport_test_neighbor_a150_v2",
+    "python code/scripts/run_transport.py --split test --unlock-confirmatory-test --a 1.52 --run-label transport_test_neighbor_a152_v2",
+    "python code/scripts/run_transport.py --split test --unlock-confirmatory-test --a 1.56 --run-label transport_test_neighbor_a156_v2",
+    "python code/scripts/run_transport.py --split test --unlock-confirmatory-test --a 1.58 --run-label transport_test_neighbor_a158_v2",
+    "python code/scripts/analyze_transport.py --split test"
+  ],
+  "source_lock_sha256": "7d81c30863c0e27ba0e5494c9ad76b148a9e0edbdc213adbc233794b713d6d0e",
+  "frozen_code_sha256": {
+    "code/symplectic_henon/symbolic.py": "140e1f3a172800694d3913aea0821d1680ca0c9f2f285cbc0f1504f94cd112b5",
+    "code/scripts/run_transport.py": "73f124d9962b6b97bfbc33539fab08209d383dba703c3c1a94dd8546bdf89f58",
+    "code/tests/test_symbolic.py": "6f00cb353c23438426fdceb4742210a980ffcd043e48df291cb24d517da838c4"
+  },
+  "frozen_figure_code_sha256": {
+    "paper/figures/gen_fig1_transport.py": "63628d1ff52056a479ae65a02d79e369fbb6d8269debc894a10d9e8e74061d7b",
+    "paper/figures/gen_fig2_ledger.py": "398f2624a5cd365c9deb193a23cd43cabd1fbc5b40002e517edf5ac1e3baf725"
+  },
+  "frozen_analysis_code_sha256": {
+    "code/symplectic_henon/analysis.py": "431ff64cd75b05b885219458de6fef115962c6d69af36e738badf36eafcd3bec",
+    "code/scripts/analyze_transport.py": "c2326640f889fb4ddd33dba63c5b17d4376e8c4e98e96c0e62cc92db813553c6",
+    "code/tests/test_analysis.py": "a93ddb7fe54667a4278f286ab85e94f46e1281a996c43bbb693035f4457596e3"
+  },
+  "recorded_nonconfirmatory_sha256": {
+    "results/transport/transport_dev_frozen_v2.json": "948353c56af636d7681583de874b2062d5adb6a74f72453cc1856c57ec4ee615",
+    "results/transport/transport_validation_frozen_v2.json": "a14614d522619ed8684a35560d970a45ba18ab019ada1150e53b7a054a09d585",
+    "results/analysis/transport_validation_analysis_v1.json": "604011e6e7fda8daa75b5347246698192dc1f514ffaad5606c14da7cf651720b"
+  },
+  "primary_endpoint": "At rho=1, P=(N_even-N_odd)/(N_even+N_odd)",
+  "gates": {
+    "finite_exposure_fraction_minimum": 0.8,
+    "return_gap_minimum": 10000,
+    "cluster_bootstrap_lower_95_percent_bound_minimum": 0.98,
+    "neighbor_specificity": "greater than every a in [1.50,1.52,1.56,1.58] after one-sided Holm family-wise correction at alpha=0.05"
+  },
+  "decision_precedence": [
+    "carrier_unavailable if either availability gate fails",
+    "parity_fail if available but the polarity gate fails",
+    "proves_too_much if neighbor specificity fails",
+    "robust_weak_shadow only if every gate passes"
+  ],
+  "forbidden_actions_after_opening": [
+    "change the primary metric, endpoint, thresholds, partition, escape box, ensemble, or bootstrap",
+    "rerun the test split under a different seed or select a favorable invocation",
+    "fit any dynamical parameter to the test outcome",
+    "open prime labels or Riemann-zero data"
+  ]
+}
