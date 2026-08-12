@@ -508,18 +508,31 @@ and return to the symbolic session.
 
 # 11. Research Output
 
-Each genuinely distinct symbolic candidate may become an independent project directory:
+Research outputs are grouped first by roadmap project and then by shareable
+paper project.  Here `<project-name>` and `<paper-project-name>` are real,
+descriptive names rather than the literal words `project` or `paper`:
 
 ```text
-project_name/
-
+Ra-1-<project-name>/
 ├── README.md
-├── paper/
-├── code/
-├── experiments/
-├── results/
-└── notes/
+├── PROJECT_MANIFEST.sha256
+└── papers/
+    └── <paper-project-name>/
+        ├── README.md
+        ├── main.pdf
+        ├── main.tex
+        ├── sections/
+        ├── figures/
+        ├── code/
+        ├── experiments/
+        ├── results/
+        ├── evaluations/
+        ├── notes/
+        └── PAPER_MANIFEST.sha256
 ```
+
+The paper-project directory is the complete unit of sharing and
+reproducibility; do not add another redundant `paper/` layer inside it.
 
 Do not create a formal candidate only because an idea was mentioned.
 

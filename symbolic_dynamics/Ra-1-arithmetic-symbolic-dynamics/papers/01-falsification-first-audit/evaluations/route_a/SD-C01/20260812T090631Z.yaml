@@ -1,0 +1,123 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C01
+source_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+evaluation_date: 2026-08-12
+artifact_path_base: Ra-1-arithmetic-symbolic-dynamics/papers/01-falsification-first-audit
+
+source_lock:
+  object: "Two-sided full q-shift over F_q, q in {2,3,5}; comparison class is a finite directed multigraph with finite-range roofs/weights and a finite-dimensional unitary cocycle."
+  family: "symbolic dynamics"
+  phase_space: "F_q^Z; comparison space is the finite edge shift"
+  dynamics: "left shift"
+  parameters: "q in {2,3,5}; frozen unitary seed 20260815; nonlattice roofs 1,sqrt(2),sqrt(3)"
+  parameter_provenance: "preregistered field sizes and control seeds; no target-zero fitting"
+  arithmetic_origin: "primitive necklaces have the exact degree counts of monic irreducible polynomials over F_q"
+  clock: "constant roof log(q) per symbol; locally constant positive edge roofs in the comparison class"
+  normalization: "u=q^(-s)"
+  determinant_convention: "D_q(s)=zeta_sigma(q^(-s))^(-1)=1-q^(1-s); comparison D_G(s)=det(I-B(s))"
+  function_space: "cylinder functions; finite comparison block C^|V| tensor C^d"
+  roof_function: "log(q), or frozen locally constant edge roofs"
+  potential_function: "unit scalar weight for the arithmetic skeleton; frozen complex edge weights only in controls"
+  cocycle: "trivial for the arithmetic skeleton; frozen finite-dimensional unitary edge cocycle in controls"
+  cutoff: "degree 12; T in {10,20,40,80}"
+  precision: "exact integers; mpmath 80 decimal digits for nonlattice winding counts; NumPy complex128 for the lattice unitary/eigenvalue control"
+  orbit_cutoff: "primitive formula degree <=12; brute necklace cutoffs q=2/3/5 through 10/8/7 and brute irreducible cutoffs through 9/7/6"
+  training_data: "none"
+  allowed_data: "finite-field arithmetic, exact necklaces, frozen symbolic controls"
+  forbidden_data: "rational-prime table in grammar, Riemann-zero table, manual von Mangoldt weights, zero-selected phases"
+  code_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+  artifact_paths:
+    - finite_state_arithmetic_skeleton/DERIVATION_PACKAGE.md
+    - finite_state_arithmetic_skeleton/PROOF_PACKAGE.md
+    - finite_state_arithmetic_skeleton/results/sd_c01_results.json
+    - finite_state_arithmetic_skeleton/results/sd_c01_exact_counts.csv
+
+a0:
+  verdict: A0_WEAK_ARITHMETIC_RELATION
+  evidence_status: PROVED
+  strongest_evidence: "Möbius inversion gives exactly the irreducible-polynomial counts and the function-field Euler/repetition ledger."
+  strongest_failure: "The construction supplies no canonical rational-prime p to orbit gamma_p map and no rational-prime von Mangoldt amplitudes."
+  arithmetic_controls:
+    - "neighboring finite fields q=2,3,5"
+    - "finite unitary-cocycle control"
+    - "nonlattice-roof control"
+    - "untwisted full-shift parent"
+  artifacts:
+    - finite_state_arithmetic_skeleton/results/sd_c01_results.json
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "Primitive necklaces, powers, multiplicities, and the exact Euler ledger are intrinsic and analytically enumerable."
+  strongest_failure: "The ledger is for function-field irreducibles, not rational primes or prime powers."
+  metrics:
+    formula_degree_cutoff: 12
+    all_necklace_irreducible_checks_pass: true
+    all_repetition_checks_pass: true
+  artifacts:
+    - finite_state_arithmetic_skeleton/results/sd_c01_exact_counts.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "The same-object determinant is exactly 1-q^(1-s), and the finite-memory comparison determinant is a finite exponential polynomial."
+  strongest_failure: "Its divisor is not the completed Riemann divisor."
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: "counts/T stayed 0.50-0.575 for the nonlattice control; lattice ratio was 0.7"
+    precision_drift: "not tested across precisions; the frozen 80-dps winding computation had minimum boundary modulus 0.35167"
+    control_margin: "lattice counts 7,14,28,56; nonlattice counts 5,11,23,43; coarse/fine boundary sampling agreed in every nonlattice rectangle"
+  artifacts:
+    - finite_state_arithmetic_skeleton/results/sd_c01_results.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "Jensen's formula gives n_D(R)=O(R) for every nonzero determinant in the frozen finite-memory class."
+  strongest_failure: "Riemann-von Mangoldt gives Theta(R log R); gamma factor, functional equation, trivial zeros, and a same-ledger Weil compression are absent."
+  analytic_structure:
+    conjugation_symmetry: "only when the frozen coefficients have the corresponding real symmetry"
+    functional_equation: false
+    completed_factor: false
+    divisor_growth: "O(R), incompatible with Theta(R log R)"
+  weil_compression:
+    status: "not naturally available"
+    evidence_status: STOP_SCOPED
+  artifacts:
+    - finite_state_arithmetic_skeleton/PROOF_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "The shift suspension is mathematically coherent."
+  strongest_failure: "No same-clock unitary/scattering/Hamiltonian lift with the rational-prime trace and completed divisor is defined."
+  metrics:
+    hilbert_space_named: false
+    domain_named: false
+    same_clock_preserved: not_applicable
+  artifacts:
+    - docs/operator_obligations.md
+
+adversarial_controls:
+  controls_used:
+    - "finite unitary twists"
+    - "commensurable and incommensurable roofs"
+    - "neighboring q values"
+  proves_too_much_risk: "low for the negative theorem; high if the function-field counting analogy were presented as a rational-prime identification"
+  verdict: "The obstruction survives all frozen controls."
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "Exact function-field arithmetic skeleton and a proved finite-memory no-go; no rational-prime or completed-xi candidate."
+blocking_conditions:
+  - "no endogenous rational-prime primitive ledger"
+  - "proved O(R) divisor-growth obstruction"
+  - "no global completed analytic structure"
+next_smallest_test: "Do not enlarge a finite matrix. Freeze a genuinely infinite-memory or infinite-dimensional symbolic model with an independent A0 source, then re-evaluate it as a new candidate."
+round2_clues: []
+route_b_invocation_allowed: false
