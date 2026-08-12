@@ -224,8 +224,9 @@ intrinsic scale increment is
 
 No prime table, prime-labelled edge, reset edge, potential, or cocycle is
 allowed.  The function space for finite checks is the cylinder algebra on the
-one-sided path/Bratteli space, and the empty periodic ledger uses the
-Artin–Mazur convention \(D_{\rm AM}=1\).  The fixed tests are: verify the recursion against independent
+disjoint union of one-sided tail/Bratteli path spaces, and the empty periodic
+ledger uses the formal Artin–Mazur convention \(D_{\rm AM}=1\).  The fixed
+tests are: verify the recursion against independent
 primality through the declared cutoff, count periodic paths exactly, and test
 whether a stationary natural extension exists without adding a reset or
 prime-indexed components.  If all edges strictly increase the level and hence
@@ -251,8 +252,9 @@ At depth \(k\), the function space is
 \(\mathbb C^{\{0,1\}^k}\), the clock is \(H_k=\log h_k\), the potential and
 cocycle are trivial for the unsigned object, and the determinant convention is
 explicitly “finite Dirichlet partition function, not a periodic-orbit
-determinant.”  The projective-limit cylinder algebra is used only as the
-symbolic state space; no limiting transfer-operator determinant is assumed.
+determinant.”  The state set is the finite-support direct union of the finite
+binary layers.  No compact one-sided shift, autonomous limit dynamics, or
+limiting transfer-operator function space is assumed.
 
 The exact unsigned limit stated in the primary source is tested in its
 convergence half-plane against
@@ -288,5 +290,16 @@ the SD-C05 run.  It uses the canonical residue-level unpacking implicit in
 \(q_{k+1}\).  This is not an added stationary reset or a second candidate; it
 makes the initially stated level-increasing wheel graph reproducible.  Every
 edge still raises the level by one, so the preregistered A1 stop rule is
-unchanged.  For the empty periodic ledger the standard Artin–Mazur convention
-is \(\zeta_{\rm AM}=D_{\rm AM}=1\).
+unchanged.  To make the shift a literal self-map, write \(X_k\) for the paths
+beginning at level \(k\), take \(X=\bigsqcup_{k\ge0}X_k\), and let deletion of
+the first edge map \(X_k\) to \(X_{k+1}\).  For this empty periodic ledger the
+formal Artin–Mazur series is \(\zeta_{\rm AM}=D_{\rm AM}=1\).
+
+### SD-C06 implementation-freeze clarification
+
+The file `knauf_spin_chain_audit/experiments/locked_protocol.json` was frozen
+before the run and extends the diagnostic grid to 16 real and complex points,
+including points with \(\operatorname{Re}s\le2\).  Only the
+\(\operatorname{Re}s>2\) subset is interpreted in the primary source's proved
+convergence domain.  All other locked points are explicitly non-theorem
+boundary/continuation benchmarks; they do not alter the stop rule.

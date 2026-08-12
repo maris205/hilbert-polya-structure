@@ -172,8 +172,12 @@ Observation:
 - complex128 differs from the 100-dps direct sum by at most
   \(7.85\times10^{-15}\); 50 dps differs from 100 dps by at most
   \(4.43\times10^{-49}\).
-- All three random-sign seeds are reported; their large final-cutoff drifts
-  (median 2.096 over locked points) show no analogous stable analytic target.
+- All three random-sign seeds are reported.  Because the protocol defines a
+  distinct field for every \((\text{seed},k)\), their median cross-level
+  difference 2.096 is a re-keyed baseline, not a cutoff-stability metric.
+- The coherent symbolic-parity control has median successive-cutoff drift
+  0.001303, below Liouville's 0.004361.  Small finite-depth drift is therefore
+  not selective for the arithmetic sign.
 
 Interpretation:
 

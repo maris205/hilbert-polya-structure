@@ -1,0 +1,125 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C03
+source_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+evaluation_date: 2026-08-12
+
+source_lock:
+  object: "Shared-base countable renewal shift with aggregate first-return weight a_n at length n."
+  family: "symbolic dynamics"
+  phase_space: "one-sided paths in the countable renewal graph"
+  dynamics: "left shift / return-word concatenation"
+  parameters: "the full coefficient sequence (a_n); frozen degree-12 synthetic controls"
+  parameter_provenance: "generic complex weights used to test inverse-design identifiability, never inferred from Riemann zeros"
+  arithmetic_origin: "none"
+  clock: "return length n"
+  normalization: "ordinary generating variable z"
+  determinant_convention: "D_ren(z)=1-F(z), F(z)=sum_n a_n z^n; zeta_ren=1/D_ren in the absolute-convergence disk"
+  function_space: "renewal-cylinder algebra within the absolute-convergence disk"
+  roof_function: "integer return length"
+  potential_function: "logarithm of the frozen aggregate complex return weight where defined"
+  cocycle: "none in the candidate; a finite-unitary twist is treated only in the no-go theorem"
+  cutoff: "degree 12 synthetic controls"
+  precision: "exact rational coefficients; NumPy complex128 for root-radius/random-phase diagnostics; 80 decimal digits for positive-root bisection"
+  orbit_cutoff: "return length <=12 for controls"
+  training_data: "none"
+  allowed_data: "frozen synthetic on-circle, off-circle, generic, positive, and random-phase controls"
+  forbidden_data: "Riemann zeros, rational-prime lookup, post-result coefficient selection"
+  code_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+  artifact_paths:
+    - renewal_inverse_design_obstruction/DERIVATION_PACKAGE.md
+    - renewal_inverse_design_obstruction/PROOF_PACKAGE.md
+    - renewal_inverse_design_obstruction/results/sd_c03_results.json
+    - renewal_inverse_design_obstruction/results/sd_c03_controls.csv
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: MODELING_CHOICE
+  strongest_evidence: "Countable returns provide a mathematically natural symbolic determinant architecture."
+  strongest_failure: "The free sequence a_n contains all analytic information; there is no endogenous rational-prime source, logarithmic prime clock, or von Mangoldt amplitude."
+  arithmetic_controls:
+    - "generic matched-degree rational polynomial"
+    - "deliberately off-circle polynomial"
+    - "random-phase coefficient control"
+    - "positive renewal control"
+  artifacts:
+    - renewal_inverse_design_obstruction/results/sd_c03_results.json
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "The renewal graph has an exact primitive-necklace and repetition expansion for its own return atoms."
+  strongest_failure: "Free concatenation creates mixed primitive words such as ab, so atoms cannot serve as independent prime Euler factors."
+  metrics:
+    mixed_coefficient_renewal: 2
+    mixed_coefficient_independent_product: 1
+    finite_unitary_erasure_possible: false
+  artifacts:
+    - renewal_inverse_design_obstruction/PROOF_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "Every holomorphic germ H(0)=1 is exactly representable coefficientwise as D_ren."
+  strongest_failure: "The identical mechanism reconstructs both desired and adversarial root geometries, so determinant agreement is non-identifying."
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: "not applicable to exact degree-12 polynomial identities"
+    precision_drift: "not tested across root-finding precisions; complex128 maximum radius error versus exact factor geometry was 4.00e-15"
+    control_margin: "negative: on-circle, off-circle, and generic synthetic coefficient reconstructions are all exact"
+  artifacts:
+    - renewal_inverse_design_obstruction/results/sd_c03_controls.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "The local determinant is analytic in its coefficient convergence disk."
+  strongest_failure: "No selective continuation, functional equation, completed factor, T log T theorem, or same-ledger Weil compression follows from inverse design."
+  analytic_structure:
+    local_holomorphy: true
+    global_continuation: false
+    functional_equation: false
+    completed_factor: false
+  weil_compression:
+    status: "would be inserted by hand"
+    evidence_status: STOP_SCOPED
+  artifacts:
+    - renewal_inverse_design_obstruction/DERIVATION_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: "A renewal suspension can be defined formally."
+  strongest_failure: "The free analytic coefficients provide no non-post-hoc unitary, scattering, or Hamiltonian lift."
+  metrics:
+    hilbert_space_named: false
+    domain_named: false
+    same_clock_preserved: not_applicable
+  artifacts:
+    - docs/operator_obligations.md
+
+adversarial_controls:
+  controls_used:
+    - "12-root unit-circle polynomial"
+    - "six-inside/six-outside polynomial"
+    - "generic rational polynomial"
+    - "positive and random-phase controls"
+  proves_too_much_risk: "demonstrated exactly"
+  verdict: "STOP_SCOPED / PROVES_TOO_MUCH"
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "A rigorous flexibility and mixed-orbit obstruction; no Riemann target was fitted after the control gate failed."
+blocking_conditions:
+  - "no arithmetic origin"
+  - "arbitrary analytic inverse design"
+  - "unwanted mixed primitive cycles"
+  - "no global determinant theorem selective for xi"
+next_smallest_test: "Only evaluate a new renewal proposal after all return weights arise from a preregistered low-description-complexity grammar and composite, pseudoprime, and matched-density controls are fixed."
+round2_clues:
+  - "RC-02: suppressing mixed words may require a quotient outside ordinary one-dimensional shifts"
+route_b_invocation_allowed: false

@@ -29,10 +29,12 @@ except for the unique branch divisible by \(q\).  Every edge goes from level
 \]
 
 No reset edge, prime-labelled component, potential, or cocycle is allowed.
-The function space used for finite checks is the cylinder algebra on this
-one-sided path space.  The periodic-point convention is Artin–Mazur:
-the proved empty fixed sets give \(\zeta_{\rm AM}=1\) and
-\(D_{\rm AM}=1\).
+For a precise self-map, let \(X_k\) be the one-sided tail paths beginning at
+level \(k\), put \(X=\bigsqcup_{k\ge0}X_k\), and let \(\sigma:X\to X\)
+delete the first edge.  Then \(\sigma(X_k)\subseteq X_{k+1}\).  The function
+space used for finite checks is the cylinder algebra on this disjoint union.
+The formal Artin–Mazur series of this self-map has empty fixed sets, hence
+\(\zeta_{\rm AM}=1\) and \(D_{\rm AM}=1\).
 
 ## Findings
 
@@ -51,4 +53,4 @@ The candidate stops before Route B.
 ## Artifacts
 
 - [Proof package](PROOF_PACKAGE.md)
-- recursion checks under the session-level code/ and results/ directories
+- recursion checks under this candidate's `code/` and `results/` directories

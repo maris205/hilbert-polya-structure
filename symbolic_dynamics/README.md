@@ -33,8 +33,12 @@ experiments are run.
 
 ## Navigation
 
+- [`SESSION4_SUMMARY.md`](SESSION4_SUMMARY.md) — final ten-question synthesis,
+  Route-A matrix, strongest surviving lead, and strongest negative theorem.
 - [`SESSION4_PREREGISTRATION.md`](SESSION4_PREREGISTRATION.md) — source locks,
   data separation, controls, and stop rules.
+- [`EXPERIMENT_REPORT.md`](EXPERIMENT_REPORT.md) — numerical results, exact
+  certificates, failures, and reproduction commands.
 - `finite_state_arithmetic_skeleton/` — `SD-C01`.
 - `squarefree_admissible_shift/` — `SD-C02`.
 - `renewal_inverse_design_obstruction/` — `SD-C03`.
@@ -42,6 +46,8 @@ experiments are run.
 - `wheel_sieve_level_shift/` — `SD-C05`.
 - `knauf_spin_chain_audit/` — `SD-C06`.
 - `evaluations/route_a/` — append-only Route-A records.
+- `evaluations/route_b/` — intentionally empty; no candidate passed the
+  same-object Route-B gate.
 - [`docs/candidate_registry.md`](docs/candidate_registry.md) — session candidate
   ledger.
 - [`docs/obstruction_registry.md`](docs/obstruction_registry.md) — reusable
@@ -60,3 +66,17 @@ Every substantive item is labelled with one of the Route-A evidence labels:
 `FITTED_PARAMETER`, `OPEN`, `REFUTED`, `NOT_TESTABLE`, or `STOP_SCOPED`.
 
 No Riemann-zero table is an input to this package.
+
+## Final outcome
+
+No frozen candidate passes A0 through A4 as one object, and no Route-B
+evaluation is authorized.  `SD-C05` is the strongest endogenous
+rational-prime lead but is acyclic; `SD-C04` is the strongest natural
+Fredholm determinant but has the wrong primitive arithmetic species; `SD-C06`
+is the strongest exact zeta-quotient collision but has no primitive-orbit
+Fredholm ledger.  These strengths are not combined.
+
+The most reusable result is a proved obstruction: every finite-state,
+finite-memory weighted determinant with a finite-dimensional cocycle has
+divisor count $O(R)$, incompatible with the completed Riemann
+$\Theta(R\log R)$ divisor.  Its finite-memory scope boundary is explicit.

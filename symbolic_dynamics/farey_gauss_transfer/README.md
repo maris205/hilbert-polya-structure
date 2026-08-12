@@ -42,7 +42,7 @@ D_{\rm MG}(s)
 - **REFUTED for the rational-prime target:** no canonical map from these
   primitive classes to rational primes or from their repetitions to the
   \(\Lambda(p^r)\) ledger is supplied by the construction.
-- **NUMERICAL OBSERVATION:** finite digit/word truncations test the exact
+- **NUMERICAL_OBSERVATION:** finite digit/word truncations test the exact
   symbolic bookkeeping only.  They are not certified analytic continuation.
 - **STOP_SCOPED:** the known modular-surface interpretation is recorded as a
   ROUND2 clue and is not used to invoke Route B.
@@ -59,5 +59,5 @@ fails the hard rational-prime A0 gate and remains Route-A exploratory.
 ## Artifacts
 
 - [Derivation package](DERIVATION_PACKAGE.md)
-- exact word-enumeration and truncation diagnostics under the session-level
-  code/, experiments/, and results/ directories
+- exact word-enumeration and truncation diagnostics under this candidate's
+  `code/`, `experiments/`, and `results/` directories

@@ -68,18 +68,26 @@ so the frozen roof equals \(\log p_{k+1}\) as a derived scale ratio.
 
 ### Step 2: absence of periodic paths
 
-After \(n\) shift steps, a path beginning at level \(k\) begins at level
-\(k+n\).  Equality with the original path would require \(k+n=k\), impossible
-for \(n\ge1\).  Thus
+For completeness, let \(X_k\) be the one-sided paths whose first edge begins
+at level \(k\), and define the phase space
+
+\[
+X=\bigsqcup_{k\ge0}X_k.
+\]
+
+Deleting the first edge defines a self-map \(\sigma:X\to X\), with
+\(\sigma(X_k)\subseteq X_{k+1}\).  After \(n\) shift steps, a path beginning
+at level \(k\) lies in the disjoint component \(X_{k+n}\).  Equality with the
+original path would require \(k+n=k\), impossible for \(n\ge1\).  Thus
 
 \[
 \operatorname{Fix}(\sigma^n)=\varnothing
 \quad(n\ge1).
 \]
 
-There is no primitive-orbit Euler ledger to evaluate.
-Equivalently, the formal Artin–Mazur series has all fixed-point coefficients
-zero, so \(\zeta_{\rm AM}=D_{\rm AM}=1\).
+There is no primitive-orbit Euler ledger to evaluate.  Equivalently, the
+formal Artin–Mazur series of this noncompact disjoint-tail self-map has all
+fixed-point coefficients zero, so \(\zeta_{\rm AM}=D_{\rm AM}=1\).
 
 ## Corrections and Edge Cases
 

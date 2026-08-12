@@ -21,7 +21,10 @@ which require an additional number-theoretic observable.
 ## 2. Assumptions and Modeling Choices
 
 1. The recurrence is used exactly as stated in the primary source.
-2. Numerical tests stay on preregistered real values \(s>2\).
+2. The numerical grid contains preregistered real and complex values on both
+   sides of \(\operatorname{Re}s=2\).  Theorem-level convergence comparisons
+   are restricted to \(\operatorname{Re}s>2\); the other locked points are
+   boundary/continuation benchmarks only.
 3. No zero table is loaded, and no parameter is fitted.
 4. The Liouville function is recorded as extra data unless it is derived from
    a frozen symbolic cocycle.
@@ -80,8 +83,9 @@ turn \(Z_k\) into a primitive-periodic-orbit determinant.
 
 ## 5. Main Result
 
-**PRIMARY-SOURCE THEOREM:** the unsigned symbolic/arithmetic recursion has the
-exact limit \(\zeta(s-1)/\zeta(s)\) in the proved half-plane.
+**PROVED (primary-source theorem):** the unsigned symbolic/arithmetic
+recursion has the exact limit \(\zeta(s-1)/\zeta(s)\) in the proved
+half-plane.
 
 **OPEN / not inherited:** the wider signed convergence and a canonical
 Fredholm periodic-orbit determinant for the same recursion.

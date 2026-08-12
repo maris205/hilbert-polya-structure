@@ -25,11 +25,14 @@ In the proved convergence half-plane, the primary source obtains
 
 ## Findings
 
-- **PRIMARY-SOURCE THEOREM:** a low-description-complexity binary arithmetic
-  recursion produces the exact unsigned zeta quotient for
+- **PROVED (primary-source theorem):** a low-description-complexity binary
+  arithmetic recursion produces the exact unsigned zeta quotient for
   \(\operatorname{Re}s>2\).
-- **NUMERICAL CHECK:** finite-depth multiplicities and real-axis convergence
-  are tested without loading any Riemann zeros.
+- **NUMERICAL_OBSERVATION:** finite-depth multiplicities and convergence on
+  the locked real/complex grid are tested without loading any Riemann zeros.
+  Only points with \(\operatorname{Re}s>2\) are compared as evidence in the
+  proved convergence domain; the remaining points are boundary/continuation
+  diagnostics only.
 - **MODELING_CHOICE:** the Liouville factor
   \(\lambda(h_k(\sigma))\) is an additional arithmetic observable.  It is not
   shown to arise as the holonomy of a pre-existing symbolic symmetry.
@@ -44,14 +47,21 @@ In the proved convergence half-plane, the primary source obtains
 This is the strongest direct prior-art collision found.  It remains an audit
 benchmark, not a Route-B-ready candidate.
 
+The random-sign protocol intentionally re-keys the field at every depth
+\((\text{seed},k)\).  Differences between adjacent depths for that control are
+therefore descriptive cross-level differences, not truncation drift of one
+fixed random observable.  The post-run semantic audit records this boundary.
+
 ## Sources
 
 - A. Knauf, [official preprint](https://www.mis.mpg.de/publications/preprint-repository/article/1997/issue-15)
 - A. Knauf, [journal article](https://doi.org/10.1007/s002200050441)
 - [erratum](https://doi.org/10.1007/s002200050715)
+- A. Knauf, [recurrence normalization used by the implementation](https://arxiv.org/abs/1305.6410)
 
 ## Artifacts
 
 - [Derivation package](DERIVATION_PACKAGE.md)
-- exact finite-depth experiment and results under the session-level code/ and
-  results/ directories
+- [Post-run semantic audit](POST_RUN_AUDIT.md)
+- exact finite-depth experiment and results under this candidate's `code/` and
+  `results/` directories

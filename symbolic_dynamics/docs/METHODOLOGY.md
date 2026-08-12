@@ -78,5 +78,6 @@ Every experiment records:
 - a claim boundary;
 - the Route-B lock.
 
-The final verification commands and artifact checksums are collected in the
-session reproducibility document.
+The final verification commands, seed ledgers, and result paths are collected
+in [`EXPERIMENT_REPORT.md`](../EXPERIMENT_REPORT.md); repository artifact
+checksums are stored in `ARTIFACT_MANIFEST.sha256`.
