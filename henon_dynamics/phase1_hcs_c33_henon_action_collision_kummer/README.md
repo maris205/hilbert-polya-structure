@@ -119,6 +119,7 @@ nontrivial Hill Kummer square class.
 ## Gate to Phase 2
 
 Phase 2 will begin only after user confirmation.  It will perform the
-primary-source novelty audit and implement a fail-closed exact certificate.
-The first stop condition is a direct prior-work collision for the specific
-degree-nine action-node/Kummer object.
+primary-source novelty audit and build a source-verified claim matrix.  The
+first stop condition is a direct prior-work collision for the specific
+degree-nine action-node/Kummer object.  Only if that gate survives will Phase
+3 implement the fail-closed exact producer/checker certificate.
