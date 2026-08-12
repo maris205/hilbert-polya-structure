@@ -191,3 +191,9 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction/correction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O68 | HCS-C33 action-coordinate cover novelty | exact birational-collapse control with surviving singular decoration | The last nonzero subresultant of the period-five marker \(G_A(q)\) and action equation \(3A^2c-R(A,q)\) is linear with generically invertible \(q\)-coefficient, so \(\mathbb Q(A,q)=\mathbb Q(A,c)\).  The degree-six action curve is therefore a birational relabelling of the known marker cover, not a new ordinary permutation cover. | This kills normalization/Galois-cover novelty only.  It does not erase the new degree-nine ordinary action node or the nontrivial branch-symmetric Hill class \([h_1h_2]\); those depend on the singular embedding and chronological return matrices. | ../phase3_hcs_c33_henon_action_collision_kummer/THEOREM_PACKAGE.md |
+
+## HCS-C34 additions
+
+| ID | Candidate | Status | Exact obstruction/correction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O69 | HCS-C33 full-wreath open obligation | positive exact correction: obligation closed | A \(19\)-adic Newton edge isolates two conjugates with odd Hill-product valuation and seven units, giving parity row \(e_1+e_2\).  Its \(S_9\)-orbit forces the relation kernel into the all-ones line; the rational norm class differs from the unique sign-field discriminant class by \(3\), so that line also fails.  The nine Hill-product classes are independent and the normal closure has group \(C_2\wr S_9\). | Exact for the nine conjugates of the branch-symmetric two-orbit Hill product on the period-five \(P_9\) Maxwell divisor.  It does not assert independence of eighteen individual branch Hill values, extend across periods, or supply a dynamical zeta or Hilbert--Pólya operator. | ../henon_maxwell_hill_wreath_monodromy/THEOREM_PACKAGE.md |

@@ -1,0 +1,96 @@
+\section{Reproducibility, novelty, and the Route-A decision}
+
+\subsection{Exact certificate contract}
+
+The computational artifact separates production from verification.  The
+producer reads the hash-locked C33 certificate and reconstructs the norm
+polynomial, rational norm, discriminant, Newton data, finite-field rows, and
+binary relation-module census.  The checker imports no producer code.  It
+reconstructs those objects from the locked \(P_9\) and \(B_8\) coefficient
+lists, enforces exact schema and types, and evaluates nine semantic gates:
+source identity, norm polynomial, rational square classes, local Newton row,
+permutation module, relation elimination, wreath order, and scope are all
+checked separately.
+
+Five input files are frozen by SHA-256: the foundational Paper-5 PDF, the
+C33 JSON certificate, the C33 theorem package, and the independent C33
+producer and checker.  In particular, the inherited statements
+\(\Gal(L/\Q)=S_9\), \eqref{eq:norm}, and the dynamical meaning of \(\beta\)
+cannot drift silently.  The local note and machine artifact are cited
+separately because the former fixes semantic scope while the latter fixes
+exact coefficients \citep{hcs2026c33note,hcs2026c33certificate}.
+
+From the C34 project directory, the core replay is
+\begin{verbatim}
+python3 code/c34_producer.py --output /tmp/c34.json
+python3 code/c34_checker.py \
+  --certificate /tmp/c34.json --output /tmp/c34-check.json
+C34_TEST_CERTIFICATE=/tmp/c34.json python3 code/test_c34.py
+\end{verbatim}
+The test suite contains six regression tests, including byte determinism
+and a batch of twenty-seven adversarial mutations.  Mutations alter source
+hashes, polynomial coefficients, Newton slopes and valuations, module ranks,
+group order, scope flags, and Route-A status.  The checker distinguishes an
+expected mathematical rejection from an unexpected execution error.
+
+The certificate is not presented as a formal proof assistant.  Its role is
+to make the large integer arithmetic replayable and to prevent a weaker
+finite computation from being substituted for the argument.  In particular:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item irreducibility of \(F_{18}\) modulo \(7\) is an independent control,
+      not the proof of rank nine;
+\item the repeated factor modulo \(19\) is not interpreted through an
+      unchecked power-basis factorization;
+\item the integer \(19\) is a local proof place, not an arithmetic label
+      assigned to a H\'enon orbit; and
+\item the \(2^9\)-case census checks the elementary module lemma but does
+      not replace it.
+\end{itemize}
+
+\subsection{What the theorem adds}
+
+The general embedding
+\(\Gal(M/\Q)\hookrightarrow C_2\wrp S_9\) is standard prior art
+\citep{barquero2023wreath}.  So are Newton polygons and the use of odd
+valuations to separate square classes.  The H\'enon-specific content is the
+simultaneous occurrence of the following exact facts for the locked
+Maxwell--Hill invariant: the slope \(-5/2\), the unique Hill linear term on
+that cluster, the weight-two support, the full \(S_9\) propagation, and the
+norm/sign-field class mismatch.  Their conjunction makes the standard
+embedding sharp.
+
+This arithmetic monodromy also remains distinct from symbolic continuation
+in the complex H\'enon horseshoe locus \citep{arai2007loops}.  No statement
+about loops in that locus, pruning automorphisms, or hyperbolic coding is
+used in Theorem~\ref{thm:wreath}.
+
+\subsection{Route-A evaluation}
+
+The Hilbert--P\'olya motivation in the foundational manuscript asks for a
+spectral structure connected to the Riemann zeros
+\citep{wang2026henonmodel}.  A maximal finite Galois group is not such a
+structure.  The formal evaluation is shown in Table~\ref{tab:route-a}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+gate & decision & reason \\
+\midrule
+A1 & \texttt{WEAK} & genuine chronological period-five H\'enon invariant \\
+A2 & \texttt{FAIL} & no all-period determinant or analytic continuation \\
+A3 & \texttt{FAIL} & no prime law, zero law, or critical-line theorem \\
+A4 & \texttt{FORMAL\_HINT} & finite signed representation, no self-adjoint operator \\
+\bottomrule
+\end{tabular}
+\caption{Route-A assessment.  The overall decision remains
+\texttt{ROUTE\_A\_REJECTED}; Route B is not invoked.}
+\label{tab:route-a}
+\end{table}
+
+An all-period advance would require compatible Maxwell divisors and Hill
+Kummer modules across infinitely many periods, together with a chronological
+trace or determinant law.  The present computation gives no such tower and
+does not imply that one exists.

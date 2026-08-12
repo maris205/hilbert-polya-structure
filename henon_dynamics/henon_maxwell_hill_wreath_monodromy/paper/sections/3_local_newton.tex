@@ -1,0 +1,118 @@
+\section{The local weight-two parity certificate}
+
+The prime \(19\) divides both the discriminant of \(P_9\) and the norm in
+\eqref{eq:norm}.  A repeated residue factor alone would be insufficient:
+the power-basis order may have nontrivial index at this prime.  We therefore
+use the roots in \(\overline{\Q}_{19}\) and the Newton polygon directly,
+without invoking Dedekind factorization.
+
+Set
+\begin{equation}
+ c=-3+5\cdot19^2=1802,
+ \qquad A=c+T.                                              \label{eq:shift}
+\end{equation}
+Write
+\[
+ P_9(c+T)=\sum_{i=0}^{9}a_iT^i,
+ \qquad B_8(c+T)=\sum_{i=0}^{8}b_iT^i.
+\]
+Exact integer division gives the data in Table~\ref{tab:newton}.  A unit
+residue means the residue after dividing the coefficient by the displayed
+power of \(19\).
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{c@{\qquad}l@{\qquad}l}
+\toprule
+polynomial & valuations, low degree to high & unit residues modulo \(19\) \\
+\midrule
+\(P_9(c+T)\) & \((5,3,0,0,0,0,0,0,0,0)\)
+ & \((18,6,5,6,13,7,15,12,5,12)\) \\
+\(B_8(c+T)\) & \((3,0,0,0,0,0,0,0,0)\)
+ & \((18,6,10,13,14,11,9,8,9)\) \\
+\bottomrule
+\end{tabular}
+\caption{Exact \(19\)-adic coefficient ledger at the translated collision
+cluster.}
+\label{tab:newton}
+\end{table}
+
+\begin{lemma}[The degree-two cluster]\label{lem:cluster}
+The polynomial \(P_9\) has a degree-two local factor whose two roots satisfy
+\(v_{19}(T)=5/2\).  Its splitting field is totally ramified of degree two.
+The other seven roots lie in unramified extensions and satisfy
+\(v_{19}(T)=0\).
+\end{lemma}
+
+\begin{proof}
+The lower Newton polygon has one negative-slope edge
+\[
+ (0,5)\longrightarrow(2,0),\qquad \text{slope}=-\frac52.
+\]
+Indeed, \((1,3)\) lies strictly above that segment; every subsequent
+coefficient is a unit.  The edge has horizontal length two and slope
+denominator two.  Its residual polynomial is
+\[
+ 18+5Y\in\F_{19}[Y],
+\]
+which is linear and separable.  The Newton polygon theorem therefore gives
+one degree-two, ramification-index-two cluster and two roots of valuation
+\(5/2\) \citep{serre1979localfields}.
+
+For completeness, exact factorization of the residue polynomial is
+\begin{align*}
+ P_9(A)\equiv -7(A+3)^2
+ &(A^2+A-7)\\
+ &\cdot(A^5+3A^4+2A^3+A^2+4A-2)\pmod {19}.
+\end{align*}
+The quadratic and quintic factors are distinct and separable.  Their roots
+therefore generate only unramified extensions.  The local splitting field
+has ramification index two, contributed by the displayed Newton cluster,
+and the remaining Newton edge is horizontal.
+\end{proof}
+
+We normalize the valuation \(v\) on this local splitting field by
+\(v(19)=2\).  Thus the two cluster parameters satisfy \(v(T)=5\).
+
+\begin{proposition}[Odd Hill valuation]\label{prop:odd-hill}
+After labelling the two cluster roots first, one valuation of \(L\) above
+\(19\) satisfies
+\begin{equation}
+ \bigl(v(\beta_1),\ldots,v(\beta_9)\bigr)\bmod2
+   =(1,1,0,0,0,0,0,0,0).                                  \label{eq:parity}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For either cluster root, Table~\ref{tab:newton} gives
+\[
+ v(b_0)=6,\qquad v(b_1T)=5,\qquad v(b_iT^i)\ge10\quad(i\ge2).
+\]
+The minimum is unique, so no cancellation is possible and
+\(v(B_8(c+T))=5\).  The denominator in \eqref{eq:beta} satisfies
+\(4827099043\equiv7\pmod {19}\), hence it is a unit.  Both cluster values
+of \(\beta\) therefore have valuation five.
+
+It remains to rule out positive valuation at another root.  Exact residue
+factorization gives
+\[
+ B_8(A)\equiv9(A+1)(A+3)
+ (A^6+4A^5-7A^4+A^3-4A^2-6A+6)\pmod {19},
+\]
+and consequently
+\begin{equation}
+ \gcd(P_9,B_8)\bmod19=A+3.                                  \label{eq:gcd19}
+\end{equation}
+Every noncluster root reduces to one of the other, coprime residue factors,
+so its \(B_8\)-value is a unit.  The valuation row is exactly
+\eqref{eq:parity}.
+\end{proof}
+
+\begin{remark}
+The translation by \(5\cdot19^2\) is not a numerical fit.  It separates
+the two-adic-depth structure of the repeated residue root sufficiently to
+exhibit the primitive edge \(-5/2\).  Every coefficient and residue in
+Table~\ref{tab:newton} is reconstructed from \eqref{eq:p9} and
+Appendix~\ref{app:ledgers} by exact integer arithmetic.
+\end{remark}

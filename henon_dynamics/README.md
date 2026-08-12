@@ -69,6 +69,7 @@ The foundational local source is
 | [`henon_bowen_pressure_gate/`](henon_bowen_pressure_gate/) | Exact full-cylinder Bowen-pressure bracket, adapted/Euclidean coboundary, and local Hausdorff dimension theorem | Positive signal pressure-consistent at certified resolution; arithmetic interpretation rejected |
 | [`phase3_hcs_c32_artin_schreier_quantum_trace/`](phase3_hcs_c32_artin_schreier_quantum_trace/) | Exact Hénon Morse-germ collision with unequal Hill values and a source-certified local no-recovery theorem | Morse-local bridge stopped; global discriminant-monodromy gate open |
 | [`phase3_hcs_c33_henon_action_collision_kummer/`](phase3_hcs_c33_henon_action_collision_kummer/) | Exact period-five equal-action node, \(S_9\) collision field, and nontrivial descended Hill--Kummer class | Positive fixed-period arithmetic theorem; Route-A rejected |
+| [`henon_maxwell_hill_wreath_monodromy/`](henon_maxwell_hill_wreath_monodromy/) | Rank-nine conjugate Hill--Kummer module and full \(C_2\wr S_9\) Maxwell monodromy | Maximal fixed-period arithmetic theorem; Route-A rejected |
 
 ## Latest large-gate closures: HCS-C22G and HCS-C23
 
@@ -151,7 +152,60 @@ cd henon_graded_ruelle_complex && ./code/run_c22g.sh
 cd ../henon_adelic_lefschetz_ramification && ./code/run_c23.sh
 ```
 
-## Latest big-door result: HCS-C33 lifts the C32 collision to characteristic zero
+## Latest big-door result: HCS-C34 reaches full Maxwell--Hill wreath monodromy
+
+C34 closes the principal arithmetic gate left open by C33.  Let \(L\) be
+the \(S_9\) splitting field of the period-five equal-action collision
+polynomial \(P_9\), and let \(\beta_1,\ldots,\beta_9\) be the conjugates of
+the intrinsic two-branch Hill product.  An exact Newton polygon at \(p=19\)
+produces a valuation parity row
+
+\[
+e_1+e_2.
+\]
+
+The full \(S_9\)-orbit of this row forces every square relation among the
+nine conjugates into the all-ones line.  That final relation is excluded by
+the exact rational square classes
+
+\[
+[N_{K/\mathbb Q}(\beta)]
+=3\cdot13\cdot19\cdot41\cdot59,
+\qquad
+[\operatorname{Disc}(P_9)]
+=13\cdot19\cdot41\cdot59.
+\]
+
+Hence the conjugate square classes have rank nine and
+
+\[
+\operatorname{Gal}\left(
+L(\sqrt{\beta_1},\ldots,\sqrt{\beta_9})/\mathbb Q
+\right)
+=C_2\wr S_9,
+\]
+
+of order \(185794560\).  The proof explicitly avoids a bad-prime Dedekind
+shortcut: it uses the \(19\)-adic Newton roots and Hill valuations directly.
+
+This is a maximal fixed-period arithmetic theorem, not an all-period zeta or
+Hilbert--Pólya construction.  The strict tuple remains
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with
+**ROUTE_A_REJECTED**.
+
+- [C34 overview](henon_maxwell_hill_wreath_monodromy/README.md)
+- [C34 theorem package](henon_maxwell_hill_wreath_monodromy/THEOREM_PACKAGE.md)
+- [C34 derivation package](henon_maxwell_hill_wreath_monodromy/DERIVATION_PACKAGE.md)
+- [C34 exact certificate](henon_maxwell_hill_wreath_monodromy/results/c34_certificate.json)
+- [C34 compiled paper](henon_maxwell_hill_wreath_monodromy/paper/main.pdf)
+
+Reproduce with:
+
+~~~bash
+henon_maxwell_hill_wreath_monodromy/code/run_c34.sh
+~~~
+
+## Predecessor big-door result: HCS-C33 lifts the C32 collision to characteristic zero
 
 C33 replaces the isolated-prime C32 event by an exact parameter-family
 theorem.  The period-five cyclic action image has discriminant

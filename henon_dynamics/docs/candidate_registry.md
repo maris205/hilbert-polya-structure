@@ -952,3 +952,36 @@ The strict tuple is
 **ROUTE_A_REJECTED**.  The next authorized large gate is an all-conjugate
 Kummer-rank theorem or an all-period trace-compatible assembly; another
 isolated prime or low-period scan is not enough.
+
+## HCS-C34 full Maxwell--Hill wreath theorem (2026-08-12)
+
+Candidate **HCS-C34** closes the all-conjugate Kummer-rank gate opened by
+C33; see
+[the C34 project](../henon_maxwell_hill_wreath_monodromy/).
+
+Over the \(S_9\) splitting field of the degree-nine period-five Maxwell
+collision polynomial, the nine conjugates of the branch-symmetric Hill
+product are independent modulo squares.  The decisive local certificate is
+a \(19\)-adic Newton edge of slope \(-5/2\) whose two-root cluster has Hill
+valuation parity \(e_1+e_2\).  Full \(S_9\) symmetry reduces every possible
+relation to the all-ones vector, which the rational norm/sign-field square
+class comparison excludes.
+
+Thus the normal closure has exact group
+
+\[
+C_2^9\rtimes S_9=C_2\wr S_9
+\]
+
+of order \(185794560\).  This is recorded as a positive structural prior:
+a natural Hénon action-collision invariant can realize maximal finite
+arithmetic monodromy.  It remains fixed-period, with no prime law,
+all-period determinant, analytic continuation, or self-adjoint lift.  The
+strict tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** and the overall verdict is
+**ROUTE_A_REJECTED**.
+
+The next authorized large gate is not another period-five refinement.  It
+must either construct a compatible period-indexed tower of Maxwell--Hill
+Kummer modules or a representation-valued chronological zeta with a proved
+all-period trace law.
