@@ -1,0 +1,93 @@
+{
+  "candidate_id": "henon_homotopy_v2_shadow_transport",
+  "lock_date_utc": "2026-08-12",
+  "lock_status": "Amended after development-only smoke tests; validation and test splits were not inspected when this version was written",
+  "map": "H_{a,rho}(x,y)=(1-a*x^2-rho*y,x)",
+  "phase_space": "R^2; standard two-form dx wedge dy at rho=1; conformally symplectic for 0<rho<1; singular at rho=0",
+  "primary_parameter": {
+    "a": 1.5436890126920763,
+    "exact_characterization": "positive real root of a^3-2*a^2+2*a-2=0",
+    "provenance": "Inherited post-critically finite Logistic parameter; frozen before inspecting orbit multipliers, prime labels, or Riemann zeros",
+    "interpretation": "attributed arithmetic seed, not an established prime-sieve isomorphism"
+  },
+  "singular_reference_rho": 0.0,
+  "primary_rho_values": [0.02, 0.05, 0.1, 0.2, 0.5, 1.0],
+  "geometry_rho_values": [0.25, 0.5, 0.75, 0.9, 0.95, 0.99, 1.0],
+  "positive_control_parameter": {
+    "a": 6.0,
+    "rho": 1.0,
+    "purpose": "binary-horseshoe periodic-orbit enumeration control; never an arithmetic control"
+  },
+  "legacy_control_parameter": {
+    "a": 1.02,
+    "status": "tainted negative control because earlier work used target-oriented heuristics"
+  },
+  "neighbor_parameters": [1.5, 1.52, 1.56, 1.58],
+  "primary_observable": {
+    "name": "left-return parity polarity",
+    "symbolization": "L iff x<0 and R otherwise",
+    "gap_definition": "iteration difference between consecutive L visits before escape",
+    "formula": "P=(N_even-N_odd)/(N_even+N_odd)",
+    "parent_prediction": "P=1 for the inherited mod-2 shadow",
+    "availability_gate": "finite exposure fraction >=0.80 and at least 10000 return gaps",
+    "confirmatory_pass_rule": "At rho=1, the cluster-bootstrap 95% lower bound for P is at least 0.98, the availability gate passes, and u_c is significantly more specific than every neighbor-a control after Holm correction",
+    "failure_interpretation": "Failure is A0-shadow failure or carrier unavailability, not evidence about Riemann zeros"
+  },
+  "trajectory_protocol": {
+    "ensemble_size": 2048,
+    "parent_burn_in": 4096,
+    "horizon": 1024,
+    "escape_bound": 100.0,
+    "initialization": "For each split, PCG64 draws x_{-burn} uniformly in [-1,1]; burn the rho=0 parent map, then initialize (x_0,x_-1) from consecutive parent states",
+    "exposure_fraction": "number of finite pre-escape iterates divided by ensemble_size*horizon",
+    "bootstrap_unit": "trajectory",
+    "bootstrap_replicates": 2000,
+    "splits": {
+      "development": 20260812,
+      "validation": 20260813,
+      "test": 20260814
+    },
+    "test_access_rule": "The test split may be executed only after code, thresholds, and plots are frozen and validation results are recorded"
+  },
+  "periodic_orbit_protocol": {
+    "max_period_primary_certification_target": 6,
+    "max_period_primary_exploratory": 8,
+    "max_period_positive_control": 10,
+    "root_tolerance": 1e-11,
+    "dedup_tolerance": 1e-8,
+    "high_precision_digits": 80,
+    "seed_methods": ["primitive binary necklaces", "deterministic multistart"],
+    "completeness_rule": "Exact binary-necklace counts are required at a=6; no completeness claim is allowed at a=u_c without validated root isolation",
+    "continuation_rule": "rho=0 is a singular endpoint. Branch continuation starts at rho>0 and must report Jacobian singular values and branch collisions; code agreement is not orbit identity after a bifurcation"
+  },
+  "orbit_clock": "ell_gamma=log(abs(Lambda_u,gamma)) for primitive hyperbolic orbits; iteration period is always reported separately",
+  "normalization": "No fitted scale, phase, unfolding, orbit reordering, or post-hoc assignment is allowed",
+  "determinant_convention": "No dynamical determinant is evaluated in Stage 1. The unstable-multiplier Ruelle product and the Gutzwiller stability denominator remain distinct deferred objects.",
+  "arithmetic_origin": "Unverified inherited Logistic symbolic seed; repository evidence supports at most a parity/mod-2 shadow and includes known kneading defects",
+  "allowed_data_during_candidate_construction": [
+    "frozen map parameters listed here",
+    "periodic-orbit coordinates",
+    "Jacobians and monodromy matrices",
+    "symbolic signs and return gaps",
+    "actions",
+    "generic Markov, shuffle, neighbor-parameter, and high-a controls"
+  ],
+  "forbidden_data": [
+    "Riemann zeros",
+    "parameters fitted to Riemann zeros",
+    "prime labels in Stage 1",
+    "parameters tuned to make multipliers close to integers or primes",
+    "von Mangoldt weights inserted into the dynamics"
+  ],
+  "stop_rules": [
+    "If the a=6 orbit finder misses the exact binary-necklace count, repair the ledger before interpreting a=u_c.",
+    "If the rho=1 availability gate fails, classify the arithmetic carrier as unavailable and do not condition only on rare survivors.",
+    "If neighbor parameters or temporal nulls reproduce the parity effect, classify it as nonspecific (PROVES_TOO_MUCH).",
+    "If branch identity is lost at a singular Jacobian or bifurcation, stop calling the endpoints the same orbit.",
+    "Do not inspect primes, construct a Riemann-targeted zeta, or quantize the map after A0-shadow failure."
+  ],
+  "forbidden_target_files": [
+    "docs/prior_work/legacy/4-riemann_logistic/python/riemann_10k_true.npy",
+    "docs/prior_work/legacy/5-riemann_henon/*zeros*"
+  ]
+}
