@@ -1,0 +1,194 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C11
+source_commit: bf6a64dc45276d34949f6cdc549307f986c7c0ba
+evaluation_date: 2026-08-13
+artifact_path_base: papers/09-holomorphic-reflection-double
+
+# The complete Paper09 source/code/results object is frozen by the immutable
+# commit recorded below. This evaluation and manifest are finalized in the
+# following metadata commit.
+
+source_lock:
+  candidate_definition: "SD-C11 is the non-adjoint holomorphic reflection double C_s=[[0,T_s^+],[T_(1-s)^-,0]] on the entropy-ordered tensor-atom recurrent chain, with identity atom pairing and disjoint directed-positive cocycle alphabets. Channel swap and alphabet exchange implement s to 1-s."
+  object: "Countable two-channel symbolic edge shift over tensor-indecomposable full shifts, with identity loops and bidirectional nearest-neighbor atom edges; every transfer step switches channel."
+  family: "symbolic dynamics"
+  phase_space: "The two-channel edge shift of the recurrent tensor-atom chain, extended by the direct product of plus and minus positive cocycle alphabets."
+  dynamics: "Symbolic left shift on alternating plus/minus channel paths. The plus block is T_s^+ and the minus block is T_(1-s)^-; the latter is holomorphic, not an adjoint."
+  parameters: "Identity atom pairing and equal endpoint average are frozen. There is no fitted phase, scale, offset, pairing, label assignment, adjacency, boundary condition, or target-root parameter."
+  parameter_provenance: "Tensor multiplication defines the atoms; topological entropy log(p) orders them and fixes the clock; reflection fixes the s and 1-s blocks, identity atom pairing, and channel swap."
+  arithmetic_origin: "The nonunit tensor indecomposable full shifts are exactly F_p, generated internally rather than loaded. Pure alternating repetitions have entropy-derived mass p^(-s)p^(-(1-s))=p^(-1)."
+  clock: "Topological entropy log(p), with the same unscaled clock in the s and 1-s channels; no offset or rescaling."
+  normalization: "C_s=[[0,T_s^+],[T_(1-s)^-,0]]. Atom loops have weights p^(-s) and p^(-(1-s)); endpoint cross weights inherit equal 1/2 averaging. Matrix entries use [target,source], and Phi_2 is channel/atom trace followed by both identity-coefficient cocycle traces."
+  determinant_convention: "On the common S_3 strip 1/3<Re(s)<2/3, det_3(I-zC_s)=det((I-zC_s) exp(zC_s+(zC_s)^2/2))=product_p(1-z^2/p) exp(z^2/p). The divergent quadratic prime-harmonic term is formal/cutoff only; retained trace terms start at fourth power. This determinant is not identified with the Euler determinant."
+  orbit_cutoff: "All-order reflection-balance theorem. Exact opaque path enumeration uses N=3 and powers 1,...,12; label controls use N=3 and lengths 1,...,10."
+  cutoff: "Schatten partial sums use 2,048 internally generated atoms and cutoffs 32,128,512,2048. det_3 prefixes are N=2,3,8,16,32. Pairings use 32 frozen seeds on eight atoms and 401 heights 0<=t<=40. DAG controls use 24 frozen seeds, N=6, and 121 heights 0<=t<=30."
+  precision: "SymPy exact polynomial and reduced-word algebra; IEEE-754 binary64 for finite matrix residuals and frozen numerical controls; random seeds 0,...,31 for pairings and 0,...,23 for DAGs."
+  training_data: "none; no fitting, validation target, target spectrum, or root census"
+  allowed_data: "Finite full-shift tensor multiplication, topological entropy, internally generated indecomposables, exact symbolic/group algebra, frozen random seeds, and finite numerical linear algebra."
+  forbidden_data: "Riemann-zero lists, target-root losses or comparisons, post-hoc scale/offset/phase/pairing fitting, hand-loaded prime tables, fitted counterterms, cross-family construction, promotion of a sign census to an argument-principle result, and Route-B promotion."
+  code_commit: bf6a64dc45276d34949f6cdc549307f986c7c0ba
+  freeze_note: "The complete Paper09 source/code/results object is frozen at commit bf6a64dc45276d34949f6cdc549307f986c7c0ba; this evaluation is finalized in the following metadata commit."
+  artifact_paths:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc11_reflection_double_experiment.py
+    - code/test_sdc11_reflection_double_experiment.py
+    - results/summary.json
+    - results/exact_trace.csv
+    - results/schatten_partial_sums.csv
+    - results/det3_reflection.csv
+    - results/pairing_controls.csv
+    - results/pairing_formula.csv
+    - results/random_dag_controls.csv
+    - results/inventory_controls.csv
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "F_m tensor F_n=F_mn makes the nonunit tensor indecomposables exactly F_p; entropy supplies log(p), atom order, and both reflected weights without a prime file or target-zero data."
+  strongest_failure: "Reflection sterility is inventory-blind. Shuffled atoms, composites, matched random integers, shared labels, and arbitrary upper DAGs reproduce it. Arithmetic credit belongs only to the tensor source, not to the reflection mechanism."
+  arithmetic_controls:
+    - "shuffled tensor atoms"
+    - "composites-only inventory"
+    - "matched-count random integers, seed 1907"
+    - "shared positive cocycle alphabet"
+    - "24 random upper-DAG radicals"
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/summary.json
+    - docs/candidate_registry.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "Every identity-visible closed word is a pure alternating atom loop. Odd traces vanish and Phi_2(C_s^(2r))=2 sum_p p^(-r) at all orders; 94,616 mixed closed paths through power 12 were killed exactly."
+  strongest_failure: "The reflected repetition has mass p^(-r), not the desired s-dependent p^(-rs). The quadratic infinite trace diverges, and the identity-visible orbit layer is vertically sterile."
+  metrics:
+    primitive_orbit_definition: "the two-step alternating plus/minus loop at a single tensor atom"
+    repetition_rule: "r reflected repetitions have mass (p^(-s)p^(-(1-s)))^r=p^(-r)"
+    exact_power_range: "N=3 and powers 1,...,12 with opaque coefficients; all-order theorem"
+    total_closed_paths: 94652
+    total_mixed_closed_paths: 94616
+    mixed_identity_survivors: 0
+    odd_trace_failures: 0
+    even_trace_failures: 0
+    quadratic_infinite_trace: "divergent/formal cutoff term 2 sum_p 1/p"
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/exact_trace.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "The exact common strip is 1/q<Re(s)<1-1/q; q=3 is the first integer. On 1/3<Re(s)<2/3, det_3(I-zC_s)=product_p(1-z^2/p)exp(z^2/p), with locally convergent product and exact reflection symmetry."
+  strongest_failure: "The determinant is independent of s and is not the Euler determinant. It has no moving vertical divisor. No root census, target comparison, analytic completion, or missing/extra-zero audit is applicable."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data forbidden"
+    extra_zero_count: "not_applicable; no target divisor claim"
+    missing_zero_count: "not_applicable; no target divisor claim"
+    root_count_discrepancy: "not_applicable; no crossing or root census performed"
+    cutoff_drift: "finite-prefix det_3 values converge as atom prefixes grow but are exactly s-independent at every cutoff"
+    precision_drift: "maximum product residual 2.36e-16, apparent vertical range 2.37e-16, eigenvalue residual 5.58e-16, and reflection residual 0 in binary64"
+    control_margin: "none as a vertical-divisor mechanism: all positive inventories and 24 random DAGs retain sterility; 32 random pairings create motion only by mixed-ledger leakage"
+    common_Sq_strip: "1/q<Re(s)<1-1/q"
+    first_integer_q: 3
+    direct_sum_common_S1_domain: "empty"
+    determinant_product_exact: true
+    determinant_s_independent: true
+    crossing_census_performed: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/det3_reflection.csv
+    - results/schatten_partial_sums.csv
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "Channel swap gives exact s-to-1-s reflection. The finite-channel exponent theorem proves a sharp dichotomy: a pure balanced word has zero critical frequency, while a moving two-step word has mixed atom support. The cross-pair coefficient is exactly 2/sqrt(pq) cosh((s-1/2)log(q/p))."
+  strongest_failure: "There is no moving pure-prime divisor, same-object Euler continuation, Gamma factor, pole/trivial-zero mechanism, Riemann-von Mangoldt law, Weil compression, or controlled target analytic continuation. Cross-atom motion and random pairings prove too much."
+  analytic_structure:
+    conjugation_reflection_symmetry: true
+    exact_reflection_relation: "J C_s J=C_(1-s), with plus/minus alphabet exchange"
+    pure_word_vertical_motion: false
+    cross_atom_cosh_motion: true
+    cross_atom_ledger_pure: false
+    random_pairing_motion_pass_count: 32
+    random_pairing_mixed_ledger_count: 32
+    random_DAG_ledger_pass_count: 24
+    random_DAG_singular_motion_count: 24
+    inverse_label_first_leakage: 2
+    finite_C5_first_leakage: 10
+    unified_euler_reflection_determinant: false
+    analytic_continuation_to_target: false
+    completed_functional_equation: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    gamma_factor: false
+    riemann_von_mangoldt_law: false
+  weil_compression:
+    status: "No same-object finite Hermitian/Weil compression is derived from SD-C11."
+    evidence_status: OPEN
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/pairing_controls.csv
+    - results/random_dag_controls.csv
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The two-channel construction has an intrinsic holomorphic reflection involution and a coherent common S_3 domain."
+  strongest_failure: "C_s is neither self-adjoint nor a fixed operator with t as spectral parameter. Its regularized determinant is vertically constant, and no natural quantization, unitary/scattering lift, domain, compact resolvent, or target counting law exists."
+  metrics:
+    holomorphic_reflection_pencil: true
+    fixed_self_adjoint_generator: false
+    natural_quantization: false
+    operator_domain: false
+    compact_resolvent: false
+    target_counting_law: false
+    moving_spectral_divisor: false
+    route_b_readiness: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "shared positive cocycle alphabet"
+    - "inverse reflected labels"
+    - "finite C5 labels"
+    - "32 frozen random cross-atom pairings"
+    - "24 frozen random complex upper-DAG radicals"
+    - "shuffled tensor atoms"
+    - "composites-only inventory"
+    - "matched-count random integer inventory"
+    - "direct sum T_s plus T_(1-s) trace-class-domain control"
+  proves_too_much_risk: "Decisive/high. Every positive inventory has the same reflection sterility; all 24 random DAGs retain the cyclic determinant while moving singular geometry; all 32 random pairings create motion only through mixed atom support. The mechanism cannot certify an RH-like divisor."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "SD-C11 proves an exact reflection-balance rigidity theorem, the common Schatten strip, and the canonical det_3 product. It also proves that the promoted pure atom determinant is s-independent, while elementary cross-atom escapes move only by contaminating the generalized ledger. The quadratic infinite trace is divergent/formal, no root census was performed, and no Euler continuation, target divisor, Riemann-zero claim, RH result, or Hilbert-Polya operator is established. Stage status: GO_REFLECTION_RIGIDITY / STOP_VERTICAL_DIVISOR / STOP_FINITE_CHANNEL_ESCAPES."
+blocking_conditions:
+  - "Every identity-visible pure balanced word has zero critical frequency."
+  - "The exact det_3 product is s-independent and is not the Euler determinant."
+  - "Every elementary moving cross-atom word has mixed generalized-ledger support."
+  - "Shared labels, arbitrary positive inventories, random pairings, and random DAGs reproduce the mechanism or its escape."
+  - "The direct sum T_s plus T_(1-s) has no common trace-class domain."
+  - "No analytic continuation, Gamma completion, pole/trivial-zero mechanism, Weil compression, target divisor, or Riemann-von Mangoldt law is derived."
+  - "The holomorphic double is not a fixed self-adjoint generator."
+next_smallest_test: "Within Symbolic Dynamics, test an infinite-memory renewal channel with a source-derived nonmonomial potential. Before any zero computation, prove nuclearity on one common domain and exhibit an identity-visible pure-prime coefficient with a nonzero critical frequency; reject it immediately if reflection balance again forces zero frequency or if motion has mixed atom support."
+round2_clues:
+  - "ROUND2_CLUE: a non-symbolic operator or scattering completion might interpret the reflection double differently; record only and do not develop in Session 4."
+route_b_invocation_allowed: false

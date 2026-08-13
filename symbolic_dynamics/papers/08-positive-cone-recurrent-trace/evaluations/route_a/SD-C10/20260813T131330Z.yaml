@@ -1,0 +1,205 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C10
+source_commit: 4e094ae14a34bc98fc8b7cf4424d2edee8d5580e
+evaluation_date: 2026-08-13
+artifact_path_base: papers/08-positive-cone-recurrent-trace
+
+# The complete source/code/results object is frozen by the immutable commit
+# recorded below.  This evaluation and its paper manifest are finalized in a
+# second metadata commit.
+
+source_lock:
+  candidate_definition: "SD-C10 is the entropy-ordered tensor-atom recurrent chain with identity loops, both nearest-neighbor directions, a positive cocycle on every directed cross edge, endpoint-averaged weights c_ij=(p_i^(-s)+p_j^(-s))/2, and invariant Tr_N tensor tau. Distinct positive free generators are the frozen universal realization, not the claimed essential mechanism."
+  object: "Finite prefixes of one recurrent symbolic graph on tensor-indecomposable full shifts; identity-labelled atom loops and bidirectional nearest-neighbor cross edges."
+  family: "symbolic dynamics"
+  phase_space: "Edge shift of the bidirectional nearest-neighbor graph on entropy-ordered tensor atoms, extended by a group/monoid cocycle."
+  dynamics: "The symbolic left shift on labelled paths. Finite prefixes are strongly connected and aperiodic because both cross directions and identity loops are present."
+  parameters: "alpha=1/2 is frozen by endpoint exchange symmetry. There is no fitted scale, phase, offset, label assignment, adjacency, boundary condition, or target-root parameter."
+  parameter_provenance: "Tensor multiplication F_m tensor F_n=F_mn defines the atoms; topological entropy log(p) orders them and fixes the clock; endpoint exchange fixes alpha=1/2; distinct directed positive generators give the universal frozen realization."
+  arithmetic_origin: "Nonunit tensor indecomposable finite full shifts are F_p, generated internally rather than loaded from a prime table. Their loop repetitions have entropy time r log(p). The positive cocycle itself is not arithmetically selective."
+  clock: "Topological entropy log(p) with repetition r log(p), no rescaling or offset; critical-height diagnostics use s=1/2+it."
+  normalization: "d_i(s)=p_i^(-s); c_ij^(alpha)(s)=alpha d_i(s)+(1-alpha)d_j(s), candidate alpha=1/2; matrix entries use [target,source]; tau extracts the identity coefficient."
+  determinant_convention: "D_tau(z)=exp(-sum_(r>=1) z^r (Tr_N tensor tau)(L_s^r)/r)=product_i(1-zp_i^(-s)) formally. The scalar trace series converges absolutely at z=1 for Re(s)>1 and directly yields the scalar Euler product there. An operator-analytic determinant interpretation is restricted to a selected small-norm/invertible logarithm branch. Word-ball ordinary determinants and rooted hermitization values are proxies, not a declared global Fuglede-Kadison or Brown determinant."
+  orbit_cutoff: "All-order positive-word theorem; opaque exact base enumeration N=3, r=1,...,10; exact chiral enumeration N=3, r=1,...,6; exact word audit N=2,3,4, r=1,...,8."
+  cutoff: "Endpoint alpha grid {0,1/8,1/4,1/2,3/4,7/8,1} on 401 heights 0<=t<=40; atom prefixes N=2,3,4,8,16,32 on 161 heights; word-ball radii 1,...,4; label controls through r=12."
+  precision: "SymPy exact polynomial/group-word algebra for ledgers; IEEE-754 binary64 for finite moment, singular-value, and hermitization proxies; frozen pseudorandom seeds 0,...,31 for positive-label controls."
+  training_data: "none; there is no fitting, validation target, or target spectrum"
+  allowed_data: "Finite full-shift tensor multiplication, topological entropy, internally generated indecomposables, exact group and symbolic path algebra, frozen random seeds, and numerical linear algebra."
+  forbidden_data: "Riemann-zero lists, target-root losses or comparisons, post-hoc scale/offset/phase fitting, hand-loaded prime tables, fitted labels or counterterms, cross-family construction, promotion of non-Folner word balls to a global FK/Brown theorem, and Route-B promotion."
+  code_commit: 4e094ae14a34bc98fc8b7cf4424d2edee8d5580e
+  freeze_note: "The complete Paper08 source/code/results object is frozen at commit 4e094ae14a34bc98fc8b7cf4424d2edee8d5580e; this evaluation is finalized in the following metadata commit."
+  artifact_paths:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc10_positive_cone_experiment.py
+    - code/test_sdc10_positive_cone_experiment.py
+    - results/summary.json
+    - results/exact_base_trace.csv
+    - results/exact_chiral_trace.csv
+    - results/exact_atom_cutoffs.csv
+    - results/alpha_motion.csv
+    - results/atom_cutoffs.csv
+    - results/inventories.csv
+    - results/finite_regular_s3.csv
+    - results/word_ball.csv
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "The monoidal relation F_m tensor F_n=F_mn makes the nonunit tensor indecomposables exactly F_p; entropy supplies log(p) and orders the internally generated atoms. No prime file or target-zero data enter the executable."
+  strongest_failure: "The cocycle cancellation is not arithmetically selective: positive abelian Z labels, repeated/random positive labels, shuffled atoms, composites, and random integers retain the mechanism. Free-group specificity is refuted."
+  arithmetic_controls:
+    - "positive abelian Z cocycle"
+    - "32 frozen random positive free-label assignments"
+    - "shuffled tensor-atom order"
+    - "composites-only inventory"
+    - "matched-count random positive integers"
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/summary.json
+    - docs/candidate_registry.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "Every mixed base closed path carries a nonempty positive word, which cannot be the identity; hence the canonical identity trace kills all mixed cycles and (Tr_N tensor tau)(L_s^r)=sum_i p_i^(-rs) for every r>=1. The finite base remains recurrent rather than deleting mixed cycles."
+  strongest_failure: "The trace sees only the identity sector of a chosen cocycle extension. It does not make the positive label system intrinsic to tensor atoms, and the same all-order proof works in an abelian positive monoid."
+  metrics:
+    primitive_orbit_definition: "the unique identity-labelled loop at each tensor atom in the identity sector"
+    repetition_rule: "r loop repetitions have entropy time r log(p)"
+    exact_base_trace_range: "N=3 and r=1,...,10 with opaque coefficients; all-order theorem"
+    exact_atom_cutoff_range: "N=2,3,4 and r=1,...,8"
+    closed_paths_base_through_r10: 11490
+    mixed_closed_paths_base_through_r10: 11460
+    mixed_identity_survivors_base_through_r10: 0
+    auxiliary_mixed_paths_checked: 6104
+    auxiliary_mixed_identity_survivors: 0
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/exact_base_trace.csv
+    - results/exact_atom_cutoffs.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "Inserting the all-order canonical trace identity into the scalar trace series gives D_tau(z)=product_i(1-zp_i^(-s)) formally and, at z=1 on Re(s)>1, by absolute convergence. An operator-analytic determinant reading is kept to a selected small-norm/invertible logarithm branch."
+  strongest_failure: "No global determinant-class theorem, analytic continuation, target divisor, missing/extra-zero audit, or argument-principle root census exists. Word-ball ordinary determinants prove too much and rooted hermitization probes do not certify a global FK determinant."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data forbidden"
+    extra_zero_count: "not_applicable; no target divisor claim"
+    missing_zero_count: "not_applicable; no target divisor claim"
+    root_count_discrepancy: "not_applicable; no target-root census"
+    cutoff_drift: "base trace is exact at every finite N by theorem; chiral B^4 motion ranges approach a numerical plateau from 3.402069 at N=2 to 7.185070 at N=32, not an infinite-cutoff theorem"
+    precision_drift: "exact ledgers use symbolic algebra; binary64 is used only for explicitly numerical finite proxies"
+    control_margin: "zero for cocycle specificity: positive abelian and random positive controls share the all-order ledger; shuffled/composite/random inventories retain ledger plus chiral motion"
+    formal_trace_log_exact: true
+    scalar_series_domain: "at z=1, absolute convergence on Re(s)>1; more generally wherever the scalar trace-log series converges"
+    operator_determinant_domain: "selected small-norm/invertible logarithm branch only"
+    global_fk_determinant: false
+    brown_measure_established: false
+    s3_regular_trace_max_residual: 0.0
+    small_z_rooted_proxy_errors_by_radius: [0.0002206, 0.000006488, 0.0000001912, 0.000000005809]
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/summary.json
+    - results/finite_regular_s3.csv
+    - results/word_ball.csv
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "The positive-cone theorem cleanly identifies the local Euler object and the exact chiral obstruction: adjointization first creates gg^-1 and g^-1g identity backtracks at r=2, with mixed term 2 sum_e |c_e(t)|^2. Endpoint alpha=0,1 are exact phase gauges and interior alpha has algebraic interference motion."
+  strongest_failure: "The chiral object does not preserve the Euler ledger and no same-object continuation, functional equation, Gamma factor, pole/trivial-zero mechanism, Riemann-von Mangoldt law, Weil compression, global FK determinant, or Brown measure is derived."
+  analytic_structure:
+    local_trace_log_product: true
+    first_chiral_mixed_identity_power: 2
+    chiral_r2_mixed_identity_paths_N3: 8
+    chiral_r2_exact_extra: "2*(y01^2+y10^2+y12^2+y21^2)"
+    endpoint_alpha_0_motion: false
+    endpoint_alpha_1_motion: false
+    symmetric_alpha_motion: true
+    positive_abelian_all_order_pass: true
+    free_group_specificity: "REFUTED"
+    actual_mechanism: "conical/positive-monoid cocycle"
+    inverse_paired_first_failure: 2
+    finite_S3_first_failure: 4
+    finite_S3_explanation: "an admissible two-step composite is a transposition of order two, so its square closes after four cross steps"
+    finite_C5_first_failure: 10
+    finite_C5_explanation: "closed chain paths have even cross count and C5 identity requires a multiple of five, hence lcm(2,5)=10"
+    unified_euler_chiral_determinant: false
+    analytic_continuation_from_symbolics: false
+    completed_functional_equation: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    gamma_factor: false
+    riemann_von_mangoldt_law: false
+  weil_compression:
+    status: "No same-object finite Hermitian/Weil compression is derived from SD-C10."
+    evidence_status: OPEN
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/exact_chiral_trace.csv
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: "For each finite prefix and real t, B_t=[[0,L_t],[L_t^*,0]] is an explicit self-adjoint chiral matrix built from the same labelled symbolic transfer; the symmetric endpoint weighting defeats the endpoint phase-gauge controls."
+  strongest_failure: "B_t is a height-dependent pencil, not one fixed self-adjoint generator. The canonical chiral trace already breaks the Euler ledger at r=2, and no domain, compact-resolvent theorem, natural quantization, scattering object, or target counting law is available."
+  metrics:
+    finite_chiral_self_adjoint: true
+    endpoint_gauges_exact: true
+    interior_moment_motion: true
+    clean_chiral_euler_ledger: false
+    fixed_self_adjoint_generator: false
+    natural_quantization: false
+    operator_domain: false
+    compact_resolvent: false
+    target_counting_law: false
+    route_b_readiness: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "positive abelian Z labels"
+    - "inverse-paired free labels"
+    - "finite S3 labels and exact six-dimensional regular representation"
+    - "finite C5 labels"
+    - "32 frozen random repeated positive-label assignments"
+    - "alpha=0 and alpha=1 endpoint phase gauges"
+    - "shuffled tensor atoms"
+    - "composites-only inventory"
+    - "matched-count random integer inventory"
+    - "free-group word-ball compressions"
+  proves_too_much_risk: "Decisive/high. Positive abelian Z and every tested random positive assignment retain the exact base ledger, proving that free-group specificity is false and that only a conical/positive-monoid property is used. All inventory controls retain exact ledger plus chiral motion. Ordinary word-ball spectra also hide arbitrary positive-radical geometry."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_ANALYTIC_CANDIDATE
+claim_boundary: "SD-C10 proves that a recurrent tensor-atom symbolic graph can retain an exact identity-sector Euler ledger through a positive-cone cocycle, and proves that canonical chiral adjointization destroys that ledger at the first nonzero moment. Free-group specificity is refuted; the actual base theorem is a general conical/positive-monoid result. No global FK/Brown determinant, analytic continuation, completed functional equation, target divisor, Riemann zero claim, RH result, or Hilbert-Polya operator is established. Stage status: GO_BASE_TAU_LEDGER / STOP_CHIRAL_UNIFICATION / PROVES_TOO_MUCH_SPECIFICITY."
+blocking_conditions:
+  - "Canonical chiral adjointization introduces gg^-1 identity backtracks and breaks the Euler ledger at r=2."
+  - "Positive abelian Z and random positive labels reproduce the all-order base theorem; free-group specificity is refuted."
+  - "Shuffled, composite, and random inventories reproduce exact ledger plus chiral motion."
+  - "Finite group relations leak into the identity trace at graph-admissible word lengths."
+  - "Word-ball compressions are non-Folner proxies and do not establish a global Fuglede-Kadison determinant or Brown measure."
+  - "No same-object analytic continuation, Gamma completion, functional equation, pole/trivial-zero mechanism, Weil compression, target divisor, or Riemann-von Mangoldt law is derived."
+  - "The chiral family is a height-dependent pencil rather than a fixed self-adjoint generator with a complete domain."
+next_smallest_test: "Within Symbolic Dynamics, prove a no-go theorem for positive/faithful graded or relative identity-sector traces that preserve every atom-loop repetition while canceling the quadratic adjoint backtracks; stop if the quotient also erases the Euler divisor. Separately, prove fixed-degree rooted hermitization convergence before any global FK/Brown terminology."
+round2_clues:
+  - "ROUND2_CLUE: a homological or geometric quotient might remove adjoint backtracks while retaining primitive loops; record only and do not develop outside Symbolic Dynamics in Session 4."
+  - "ROUND2_CLUE: an operator-algebraic determinant-class realization might control the infinite cocycle extension; record only and do not develop in Session 4."
+route_b_invocation_allowed: false

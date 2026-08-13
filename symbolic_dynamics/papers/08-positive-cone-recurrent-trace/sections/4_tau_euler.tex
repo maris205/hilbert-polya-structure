@@ -1,0 +1,91 @@
+\section{Exact traced periodic ledger and analytic determinant}
+\label{sec:tau-euler}
+
+\begin{theorem}[Recurrent-base identity-word ledger]
+\label{thm:ledger}
+For every integer $r\ge1$ and every $s$ in a noncommutative $L^r$ domain,
+\[
+ \Phi(T_s^r)=\sum_pp^{-rs}.                  \tag{4.1}
+\]
+The $\Phi$-visible primitive objects are exactly the atom loops $\gamma_p$,
+and their repetitions are $\gamma_p^r$ with length $r\log p$.
+\end{theorem}
+
+\begin{proof}
+Expanding $T_s^r$, the matrix trace keeps precisely closed base words.  A
+word using only the loop at $p$ contributes $p^{-rs}\lambda(e)$.  Every
+mixed closed base word contains at least one cross edge.  Its cocycle product
+is a nonempty word in positive free generators.  There are no inverse
+letters, so free reduction cannot make it the identity.  The canonical trace
+$\tau$ kills it.  Summation over loop vertices proves the identity and the
+primitive/repetition statement.
+\end{proof}
+
+The same proof works for the shared abelian-positive control: its mixed word
+has strictly positive exponent.  Thus exact deletion comes from the positive
+cone, not from noncommutativity alone.
+
+\begin{proposition}[Boundedness and noncommutative Schatten domains]
+\label{prop:ideals}
+Put $\sigma=\RePart s$.  For $\sigma>0$, $T_s$ is bounded and belongs to the
+$\Phi$-compact ideal.  For $q\ge1$,
+\[
+ T_s\in L^q(\cN,\Phi)\quad\Longleftrightarrow\quad q\sigma>1. \tag{4.2}
+\]
+In particular, $T_s$ is $\Phi$-trace class for $\sigma>1$, while on the
+critical line it belongs to every $L^q$, $q>2$, but not to $L^2$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+The matrix has bandwidth one and coefficient bound
+\[
+ \|T_s\|\le\sup_n
+ \bigl(|d_n(s)|+|a_{n-1}(s)|+|a_n(s)|\bigr)<\infty.
+\]
+All coefficients tend to zero, giving $\Phi$-compactness by finite atom
+cutoffs.  Decompose $T_s$ into its diagonal and two weighted shifts.  Their
+$L^q$ norms are equivalent, up to fixed finite-band constants, to
+$\sum_np_n^{-q\sigma}$.  This converges exactly when $q\sigma>1$.  Conversely,
+the trace-preserving diagonal conditional expectation sends $T_s$ to $D_s$,
+so $L^q$ membership forces the same prime sum to converge.
+\end{proof}
+
+\begin{theorem}[Analytic $\tau$-Euler determinant]
+\label{thm:det}
+For $\RePart s>1$, define the normalized trace-series dynamical determinant
+by
+\[
+ \det_\Phi(I-zT_s)
+ :=\exp\left(-\sum_{r\ge1}\frac{z^r}{r}\Phi(T_s^r)\right). \tag{4.3}
+\]
+The series converges for $|z|<2^{\RePart s}$, and
+\[
+ \det_\Phi(I-zT_s)=\prod_p(1-zp^{-s})        \tag{4.4}
+\]
+there.  Its canonical entire continuation in $z$ is the convergent product
+on the right.  In particular the $z=1$ specialization is $\zeta(s)^{-1}$ in
+its honest Euler half-plane.
+\end{theorem}
+
+\begin{proof}
+Insert \cref{thm:ledger} into \cref{eq:analytic-det}:
+\begin{equation}
+ \log\det_\Phi(I-zT_s)
+ =-\sum_{r\ge1}\frac{z^r}{r}\sum_pp^{-rs}
+ =\sum_p\log(1-zp^{-s}).
+ \label{eq:analytic-det}
+\end{equation}
+Absolute convergence holds for $|z|<2^{\RePart s}$, since the closest local
+factor is $p=2$.  The product converges locally uniformly for every finite
+$z$, giving its entire continuation.  Since $1<2^{\RePart s}$, no
+continuation is needed at $z=1$ when $\RePart s>1$.
+\end{proof}
+
+This trace-series object agrees with the local path-integral analytic
+$\Phi$-determinant wherever $I-zT_s$ stays in the small-norm invertible
+component.  Beyond that component we claim the dynamical trace-series
+continuation, not operator invertibility.  It is not an ordinary Fredholm
+determinant on
+$\ell^2(\At)\otimes\ell^2(\mathbb F_\infty)$.  Each group unitary has
+infinite ordinary multiplicity, so ordinary compactness and trace class fail.
+The trace $\Phi$ is part of the frozen dynamical data.

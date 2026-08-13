@@ -1,0 +1,28 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+ atom/.style={draw,rounded corners=2pt,minimum width=1.45cm,minimum height=.72cm,align=center},
+ arr/.style={-{Stealth[length=2mm]},thick}, every node/.style={font=\small}]
+\node[atom,fill=blue!8] (p1) {$F_{p_1}$\\$+$};
+\node[atom,fill=orange!12,right=5mm of p1] (p2) {$F_{p_2}$\\$-$};
+\node[atom,fill=blue!8,right=9mm of p2] (p3) {$F_{p_3}$\\$+$};
+\node[atom,fill=orange!12,right=5mm of p3] (p4) {$F_{p_4}$\\$-$};
+\draw[decorate,decoration={brace,amplitude=4pt,mirror},thick]
+ ([yshift=-3mm]p1.south west)--([yshift=-3mm]p2.south east)
+ node[midway,below=5mm] {$p_1^{-s}-p_2^{-s}=s\int_{p_1}^{p_2}x^{-s-1}\dd x$};
+\draw[decorate,decoration={brace,amplitude=4pt,mirror},thick]
+ ([yshift=-3mm]p3.south west)--([yshift=-3mm]p4.south east)
+ node[midway,below=5mm] {$p_3^{-s}-p_4^{-s}$};
+\node[below=18mm of p2,align=center] (r) {$R(s,z)=\displaystyle\prod_n
+\frac{1-zp_{2n-1}^{-s}}{1-zp_{2n}^{-s}}$\\relative trace class on $\RePart s>0$};
+\node[below=18mm of p3,align=center] (h) {$H(s,z)=R(s,z)R(1-s,z)$\\reflection on $0<\RePart s<1$};
+\draw[arr] (r.east)--node[above] {$s\leftrightarrow1-s$} (h.west);
+\node[draw,dashed,rounded corners,fit=(p1)(p2)(p3)(p4),inner sep=3mm,
+ label={[font=\footnotesize]above:strict entropy order}] {};
+\end{tikzpicture}
+\caption{SD-C12 pairs adjacent tensor-prime atoms by a frozen $1|1$
+grading.  Disjoint entropy intervals make the relative difference trace
+class throughout $\RePart s>0$.  Reflection produces a full critical strip,
+but the minus sector reverses every even-rank prime factor.}
+\label{fig:pairing}
+\end{figure}

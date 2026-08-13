@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\title{All-Period Integral Monodromy and Algebraic-Unit\\Multipliers for the Area-Preserving H\'enon Map}
+\author{Liang Wang$^{*1}$\\
+\small $^{1}$School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Wuhan 430074, P.R. China\\
+\small $^*$Corresponding author}
+\date{Preprint, August 2026}
+\hypersetup{pdfauthor={Liang Wang},pdftitle={All-Period Integral Monodromy for the Henon Map}}
+\begin{document}\maketitle
+\begin{abstract}
+Pressure normalization gives a prime-orbit counting law for a certified
+H\'enon suspension, leaving the arithmetic type of its orbit labels as the
+next gate.  We prove an all-period algebraic theorem for the underlying
+autonomous map $H_6(q,p)=(1-6q^2-p,q)$.  After the canonical scaling
+$x_i=6q_i$, the period-$n$ fixed algebra is defined by monic cyclic
+quadratics and is finite free over $\mathbb Z$ of rank $2^n$.  Every
+chronological derivative step lies in $SL_2$ over this integral algebra.
+Therefore every periodic monodromy trace is an algebraic integer and every
+multiplier is an algebraic unit.  A separate exact implementation verifies
+the Gr\"obner and trace ledgers through period 10 and recovers the inherited
+degree-four fixed-point multiplier polynomial.  The theorem supplies genuine
+all-period arithmetic structure, but it also rules out treating a raw
+multiplier or its field norm as a rational prime.  It does not classify the
+nonalgebraic pressure power $|\Lambda|^{h_*}$.
+\end{abstract}
+
+\section{Integral cyclic coordinates}
+The H\'enon recurrence is
+\[
+q_{i+1}=1-6q_i^2-q_{i-1}.
+\]
+Set $x_i=6q_i$.  Then
+\begin{equation}\label{eq:scaled}
+x_{i+1}=6-x_i^2-x_{i-1}.
+\end{equation}
+For period $n$, indices are read cyclically.  The neighbor multiset must be
+retained at low period, giving
+\[
+n=1:\quad x_0^2+2x_0-6=0,
+\]
+and
+\[
+n=2:\quad x_0^2+2x_1-6=x_1^2+2x_0-6=0.
+\]
+
+\section{Finite-free fixed algebra}
+Let
+\[
+\mathcal A_n=\mathbb Z[x_0,\ldots,x_{n-1}]/(f_0,\ldots,f_{n-1}),
+\quad
+f_i=x_i^2+x_{i-1}+x_{i+1}-6,
+\]
+with the exceptional neighbor multiplicities above.
+
+\begin{theorem}[Integral all-period fixed algebra]\label{thm:free}
+For every $n\ge1$, $\mathcal A_n$ is finite free over $\mathbb Z$ of rank
+$2^n$, with basis
+\[
+x_0^{\epsilon_0}\cdots x_{n-1}^{\epsilon_{n-1}},
+\qquad \epsilon_i\in\{0,1\}.
+\]
+In particular every coordinate value at every geometric periodic point is an
+algebraic integer.
+\end{theorem}
+\begin{proof}
+Under any degree-compatible monomial order, $f_i$ is monic with leading
+monomial $x_i^2$.  The leading monomials are pairwise coprime, so Buchberger's
+product criterion makes the displayed equations a monic Gr\"obner basis over
+$\mathbb Z$.  The standard monomials are exactly the square-free monomials,
+which proves finite freeness and the rank.  Specializing a finite integral
+$\mathbb Z$-algebra at a geometric point sends each $x_i$ to an algebraic
+integer.
+\end{proof}
+
+This strengthens the earlier finite-flat statement over
+$\mathbb Z[A,A^{-1}]$ at the integer specialization: the scaled $A=6$ fibre
+needs no denominator localization.
+
+\section{Chronological monodromy}
+In either the original $(q_i,q_{i-1})$ coordinates or the linearly scaled
+coordinates, the derivative step is conjugate to
+\begin{equation}\label{eq:J}
+J_i=\begin{pmatrix}-2x_i&-1\\1&0\end{pmatrix},
+\qquad \det J_i=1.
+\end{equation}
+For a period-$n$ point, let
+\[
+M_\gamma=J_{n-1}\cdots J_0,
+\qquad t_\gamma=\operatorname{tr}M_\gamma.
+\]
+Later times act on the left.
+
+\begin{theorem}[Algebraic-unit multiplier theorem]\label{thm:unit}
+For every geometric periodic point of $H_6$ at every period,
+$t_\gamma$ is an algebraic integer and both eigenvalues of $M_\gamma$ are
+algebraic units.  Their characteristic polynomial is
+\[
+X^2-t_\gamma X+1.
+\]
+\end{theorem}
+\begin{proof}
+Equation~\eqref{eq:J} and Theorem~\ref{thm:free} show that every entry of
+$M_\gamma$, hence its trace, is an algebraic integer.  An eigenvalue
+$\lambda$ is integral over the ring of algebraic integers by the displayed
+monic polynomial, hence integral over $\mathbb Z$.  Since
+$\det M_\gamma=1$, the other eigenvalue is $\lambda^{-1}$ and is also an
+algebraic integer.  Thus $\lambda$ is a unit.
+\end{proof}
+
+The theorem includes nonreal and multiple geometric points scheme by scheme;
+reducedness is not needed for the integrality statement.  On the certified
+real hyperbolic survivor, the unstable multiplier is the root of modulus
+greater than one.
+
+\section{Exact sentinels}
+The code builds the Gr\"obner basis and chronological trace independently for
+$1\le n\le10$.  The first reduced traces are
+\[
+-2x_0,
+\qquad
+4x_0x_1-2,
+\qquad
+-8x_0x_1x_2+2(x_0+x_1+x_2).
+\]
+All coefficients are integers and all monomials lie in the square-free
+basis.  At period one, $x_0=-1\pm\sqrt7$ and the two trace-conjugate
+characteristic polynomials multiply to
+\[
+X^4-4X^3-22X^2-4X+1,
+\]
+recovering the exact non-lattice witness from the instability-roof project.
+
+\section{Arithmetic consequences and boundary}
+If an algebraic unit lies in $\mathbb Q$, it is $\pm1$.  Thus no hyperbolic
+raw multiplier can itself be a rational prime.  Its field norm is also
+$\pm1$.  Trace and $\det(I-M)$ are algebraic integers but are not
+multiplicative under repetition, so they cannot simply replace the Euler
+label without a new compiler.
+
+The pressure-normalized label $|\Lambda|^{h_*}$ is deliberately outside this
+corollary.  The pressure root is a real dynamical invariant whose algebraic
+type is unknown; no valid transcendence conclusion is available here.
+
+\section{Evaluator verdict}
+The all-period unit theorem is positive arithmetic structure at A1/A3, but
+it constructs no prime correspondence or determinant.  The strict tuple is
+\[
+(A1_{\rm WEAK},A2_{\rm FAIL},A3_{\rm PARTIAL},A4_{\rm FORMAL}),
+\]
+with overall \texttt{ROUTE\_A\_EXPLORATORY}.  Route B is not testable.
+
+\section{Conclusion}
+The H\'enon instability multipliers are not arbitrary reals: after the
+correct integral scaling, they form an all-period family of algebraic units.
+This both strengthens the arithmetic content of the pressure-normalized road
+and closes its most naive raw-prime interpretation.  The next step is to
+classify which scalar functions of a unit can preserve exact repetition and
+still produce rational prime labels.
+
+\begin{thebibliography}{9}
+\bibitem{Buchberger}
+B. Buchberger, An algorithmic criterion for the solvability of algebraic
+systems of equations, \emph{Aequationes Math.} 4 (1970), 374--383.
+\bibitem{Silverman}
+J. H. Silverman, The arithmetic of dynamical systems, Springer, 2007.
+\end{thebibliography}
+\end{document}
