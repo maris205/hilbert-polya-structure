@@ -12,7 +12,7 @@
 - Cross-model upload: disabled; independent reviews use local Codex subagents
 - External prime/zero data: forbidden until a candidate passes its frozen A0/A1
   gates
-- Batch status: `COMPLETE_LOCAL_PENDING_GITHUB_SYNC`
+- Batch status: `COMPLETE_SYNCED`
 
 ## Paper Queue
 
@@ -139,3 +139,8 @@ A paper counts as complete only when all applicable items pass:
   outputs, 18 citations, and the upstream terminal bindings pass final
   integrity.  All five batch papers are now locally complete; only the
   batch-level integrity audit and configured GitHub synchronization remain.
+- 2026-08-14: Independent batch audit returned `PASS` with zero remaining
+  local-completion blocker after reconciling one Paper-1 claim-manifest
+  cross-reference.  The five safe suites pass 89, 37, 39, 82, and 51 tests.
+  The full batch was synchronized to `main` in commit `41b8701`; no nested
+  `.git` directory or gitlink was included.
