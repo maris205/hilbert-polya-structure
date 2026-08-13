@@ -1131,3 +1131,13 @@ The exact criterion is \(T_\sigma\in\mathcal S_q\) iff \(\sigma q>1\).
 The good-prime Artin conductor exponent is zero, so the required damping is
 an external second clock.  The tuple is **(A1_WEAK,
 A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FORMAL_HINT)**.
+## HCS-C41 arithmetic bridge (2026-08-13)
+
+Candidate **HCS-C41** is retained as a genuine cubic arithmetic connection,
+not as a H\'enon determinant; see
+[`../henon_cubic_cm_frobenius_bridge/`](../henon_cubic_cm_frobenius_bridge/).
+For \(E:y^2=x^3+1\), every good prime \(p\equiv2\pmod3\) has \(a_p=0\),
+while split primes have nontrivial traces and all local factors carry
+intrinsic square-root normalization.  Its tuple is **(A1_WEAK,
+A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.
+No H\'enon orbit/Frobenius correspondence or Route-B operator is known.

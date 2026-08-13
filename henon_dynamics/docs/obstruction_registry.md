@@ -233,3 +233,8 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O78 | Conductor interpretation of `p^(-sigma)` Kummer block damping | proved second-clock obstruction | The unramified three-channel representation has good-prime Artin conductor exponent zero, whereas any positive damping adds `sigma log p`; trace class occurs exactly for `sigma>1`. | Does not invalidate the resulting analytic Fredholm determinant. It rejects its promotion as source-native H\'enon evidence and leaves geometric cubic Frobenius normalization open. | ../henon_kummer_schatten_clock_obstruction/README.md |
+## HCS-C41 boundary
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O79 | Promotion of the cubic CM elliptic factor to a H\'enon/Riemann determinant | source-provenance obstruction | The j=0 curve supplies genuine degree-two Frobenius factors, but no theorem identifies its primes/repetitions with primitive H\'enon chronology; its global analytic data are elliptic, not Riemann. | Retains the CM factor as a positive arithmetic bridge. Finite cohomological supercombinations remain to be classified in C42. | ../henon_cubic_cm_frobenius_bridge/README.md |
