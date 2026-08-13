@@ -58,7 +58,7 @@ nonnormal motion is an arithmetic divisor selector.
     GO_REFLECTION_RIGIDITY / STOP_VERTICAL_DIVISOR
     route_b_invocation_allowed: false
 
-Canonical provisional evaluation:
-evaluations/route_a/SD-C11/20260813T133745Z.yaml. Commit fields remain
-WORKTREE_PENDING_FINAL_COMMIT until the root agent performs the two-stage
-freeze.
+Canonical frozen evaluation:
+`evaluations/route_a/SD-C11/20260813T133745Z.yaml`.  Its source and code
+provenance is commit `bf6a64dc45276d34949f6cdc549307f986c7c0ba`; the
+following metadata commit freezes the evaluation and paper manifest.
