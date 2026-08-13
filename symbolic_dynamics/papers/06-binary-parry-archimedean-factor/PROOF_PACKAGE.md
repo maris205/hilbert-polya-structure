@@ -150,18 +150,18 @@ Let
 G=\bigoplus_p p^{-1}I_{E_p}
 \]
 
-and let \(K=\bigoplus_pK_p\) be bounded and block preserving, so
-\([G,K]=0\). Put
+and let \(K\) be any bounded operator. Put
 
 \[
 A_t=G^{1/2+it}K,\qquad
 B_t=\begin{pmatrix}0&A_t\\A_t^*&0\end{pmatrix}.
 \]
 
-Then
+With \(A_0=G^{1/2}K\), functional calculus gives
+\(A_t=G^{it}A_0\). Hence
 
 \[
-U_t=\operatorname{diag}(G^{it/2},G^{-it/2})
+U_t=\operatorname{diag}(G^{it},I)
 \]
 
 is unitary and direct multiplication gives
@@ -170,10 +170,13 @@ is unitary and direct multiplication gives
 B_t=U_tB_0U_t^*.
 \]
 
-Hence every block-preserving completion of this form is isospectral on the
-critical axis. Spectral motion requires \([G,K]\ne0\), which means cross-atom
-mixing. Such mixing creates mixed temporal cycles unless a new intrinsic
-cancellation theorem preserves the prime-power ledger.
+Hence every bounded completion of this one-sided form is isospectral on the
+critical axis, with no hypothesis on \([G,K]\). In particular,
+mass-noncommuting cross-atom mixing cannot create spectral motion in this
+ansatz. Such mixing still creates mixed temporal cycles unless a new
+intrinsic cancellation theorem preserves the prime-power ledger. A viable
+successor must therefore change the phase architecture as well as solve the
+cycle-cancellation problem.
 
 For the frozen rank-one block, define off the axis
 

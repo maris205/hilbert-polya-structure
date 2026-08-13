@@ -1,0 +1,27 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  atom/.style={circle,draw,minimum size=10mm,inner sep=1pt},
+  note/.style={align=center,font=\small},
+  arr/.style={-{Latex[length=2.2mm]},thick},
+  every loop/.style={looseness=7}
+]
+\node[atom] (p2) {$F_2$};
+\node[atom,right=22mm of p2] (p3) {$F_3$};
+\node[atom,right=22mm of p3] (p5) {$F_5$};
+\node[right=13mm of p5] (dots) {$\cdots$};
+\draw[arr] (p2) edge[loop above] node {$2^{-s}$} (p2);
+\draw[arr] (p3) edge[loop above] node {$3^{-s}$} (p3);
+\draw[arr] (p5) edge[loop above] node {$5^{-s}$} (p5);
+\draw[arr] (p2) -- node[above,font=\scriptsize] {$\frac12(2^{-s}+3^{-s})$} (p3);
+\draw[arr] (p3) -- node[above,font=\scriptsize] {$\frac12(3^{-s}+5^{-s})$} (p5);
+\draw[arr] (p5) -- (dots);
+\node[note,below=15mm of p3] (periodic) {periodic words use loops only\\$\Rightarrow\ \Tr L_s^r=\sum_pp^{-rs}$};
+\node[note,below=15mm of p5] (motion) {successor phases interfere in $L_s^*L_s$\\$\Rightarrow$ chiral singular spectrum moves};
+\draw[arr,dashed] (p3) -- (periodic);
+\draw[arr,dashed] (p5) -- (motion);
+\end{tikzpicture}
+\caption{SD-C09 uses the entropy order already present in the tensor-prime
+source.  Successor edges mix masses but cannot enter a periodic word.}
+\label{fig:entropy-coupling}
+\end{figure}

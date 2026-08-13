@@ -3,16 +3,16 @@
 - Source: `main.tex` with nine modular section files and one pure-TikZ hero
   figure.
 - Engine: pdfLaTeX + BibTeX.
-- Output: `main.pdf`, A4, 12 pages.
-- Frozen PDF: 436700 bytes; SHA-256
-  `8fc39f7eba1ad16555f4f727faac27bfe5d9129af82774208701fabb504e6ddd`.
+- Output: `main.pdf`, A4, 13 pages.
+- Frozen PDF: 438228 bytes; SHA-256
+  `2cf6a638ef9a84cdc8efe3e4d80bfa181140279664b1292c6caeecd9a750e3a4`.
 - Final build: four-stage `pdflatex -> bibtex -> pdflatex -> pdflatex` completed
   successfully on 2026-08-13.
 - Final log audit: no undefined citations/references, LaTeX warnings,
   overfull boxes, underfull boxes, or fatal errors.
-- Visual audit: the hero figure was rasterized from page 2 and inspected;
-  boxes, arrows, formulas, caption, and STOP/GO branches are readable. Color
-  is redundant with line style and labels.
+- Visual audit: the hero figure remains readable; the corrected universal
+  no-motion theorem on page 7 and the revised multi-phase conclusion on page
+  10 were rasterized and inspected with no clipping or overlap.
 - PDF metadata: title, author, subject, and keywords are present; the PDF is
   unencrypted and contains no JavaScript.
 

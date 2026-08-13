@@ -22,7 +22,7 @@ naive route to a vertical spectrum.
 6. **Exact numerical audit:** report algebraic residuals, convergence, slow
    corners, and all proves-too-much controls.
 7. **Route-A decision:** assign SD-C08, score A0--A4, and lock Route B.
-8. **Conclusion:** isolate the required single-trace noncommuting coupling.
+8. **Conclusion:** isolate the required single-trace multi-phase architecture.
 9. **Appendix:** proofs, domains, and scope discipline.
 
 ## Claim ladder
@@ -32,8 +32,8 @@ naive route to a vertical spectrum.
   \(\Re s>0\) to the Archimedean Gamma factor.
 - Proposition: canonical \(q\)-symbol radial sectors have a shifted Gamma
   law and select \(q=2\).
-- Theorem: every mass-commuting chiral Hellinger completion is
-  critical-axis isospectral.
+- Theorem: every bounded one-sided chiral Hellinger completion is
+  critical-axis isospectral, independently of mass commutation.
 - Corollary: the natural \(\det_3\) is \(s\)-independent and loses the
   divergent quadratic trace.
 - Decision: A3 advances; global completion stops.

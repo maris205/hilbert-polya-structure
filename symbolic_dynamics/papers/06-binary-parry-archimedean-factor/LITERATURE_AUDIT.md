@@ -39,7 +39,8 @@ we did not find the specific conjunction
    \(\operatorname{tr}(e^{zQ/2}K_2e^{zQ/2})^r=(\cosh z)^r\), used at both
    \(z=0\) and \(z=iu/\sqrt r\);
 4. the resulting Euler/Gamma Mellin–Fredholm factorization; and
-5. the general mass-commuting chiral no-motion theorem.
+5. the universal one-sided chiral no-motion theorem, valid for every bounded
+   coupling without a mass-commutation assumption.
 
 This is a synthesis/selection claim, not a “first ever” priority claim.
 Absence from a finite search cannot establish universal novelty.

@@ -65,17 +65,19 @@ splicing.
 
 ### SD-O13 — chiral phase-gauge no-motion theorem
 
-For block-preserving \(K\) commuting with
-\(G=\bigoplus_p p^{-1}I\), the critical-axis chiral family
+For every bounded \(K\), with
+\(G=\bigoplus_p p^{-1}I\), the one-sided critical-axis chiral family
 
 \[
-B_t=\begin{pmatrix}0&G^{1/2+it}K\\G^{1/2-it}K&0\end{pmatrix}
+B_t=\begin{pmatrix}0&G^{1/2+it}K\\K^*G^{1/2-it}&0\end{pmatrix}
 \]
 
-is unitarily conjugate to \(B_0\). For the frozen rank-one atom block its
-active spectrum is \(\{\pm p^{-1/2}\}\), independent of \(t\). The
-Hellinger half-density centers the block but cannot generate vertical
-spectral motion.
+satisfies
+\(B_t=\operatorname{diag}(G^{it},I)B_0
+\operatorname{diag}(G^{it},I)^*\). This requires no commutation between
+\(G\) and \(K\); noncommutation alone never generates spectral motion in the
+one-sided ansatz. For the frozen rank-one atom block the active spectrum is
+\(\{\pm p^{-1/2}\}\), independent of \(t\).
 
 ### SD-O14 — chiral regularization deletes the divergent quadratic trace
 
@@ -98,8 +100,9 @@ canonical Parry kernel internal to \(F_2\).
 1. no single Mellin--Fredholm determinant;
 2. no internal meromorphic continuation or functional equation;
 3. no pole-removal or trivial-zero mechanism;
-4. no vertical spectral motion in the block-preserving chiral family;
-5. no intrinsic cancellation theorem permitting noncommuting cross-atom
-   mixing;
+4. no vertical spectral motion for any bounded coupling in the one-sided
+   chiral family;
+5. no inequivalent multi-phase architecture, and no intrinsic cancellation
+   theorem permitting ledger-preserving cross-atom mixing;
 6. no Riemann--von Mangoldt counting law or same-object Weil compression;
 7. no natural operator domain or self-adjoint Route-B realization.

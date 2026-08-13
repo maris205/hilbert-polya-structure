@@ -93,6 +93,8 @@ single determinant.
 - deleting divergent traces without naming the regularization and its loss;
 - cross-atom mixing credited without an exact cancellation theorem for mixed
   primitive cycles;
+- treating mass noncommutation as sufficient for spectral motion in the
+  one-sided ansatz \(A_t=G^{1/2+it}K\), whose phase is universally removable;
 - borrowing coordinates from a different candidate or system family;
 - Route B.
 

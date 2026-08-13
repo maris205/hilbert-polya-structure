@@ -59,13 +59,16 @@ continuation, pole removal, functional equation, or Riemann-zero divisor is
 derived. That boundary is essential: multiplying unrelated favorable
 coordinates remains forbidden.
 
-The accompanying no-motion theorem is equally decisive. Every
-block-preserving Hellinger chiral completion commuting with the tensor-mass
-operator is unitarily conjugate along \(s=1/2+it\). Its spectrum cannot move
-with \(t\). For the frozen block, the first common regularization is
+The accompanying no-motion theorem is equally decisive. For every bounded
+\(K\), the one-sided Hellinger ansatz
+\(A_t=G^{1/2+it}K=G^{it}A_0\) has
+\(B_t=\operatorname{diag}(G^{it},I)B_0
+\operatorname{diag}(G^{it},I)^*\). Its spectrum cannot move with \(t\), even
+when \([G,K]\ne0\). For the frozen block, the first common regularization is
 \(\det_3\); it deletes the divergent quadratic trace and is independent of
-\(s\). Thus a vertical divisor would require intrinsic cross-atom coupling,
-but naive coupling creates forbidden mixed primitive cycles.
+\(s\). Thus a vertical divisor requires a different, genuinely multi-phase
+architecture; any cross-atom coupling must also cancel its forbidden mixed
+primitive cycles exactly.
 
 The CPU prototype verifies the finite identities and separates the controls.
 Uniform \(K_3,K_4\) and biased rank-one kernels preserve the Euler ledger, so

@@ -83,8 +83,10 @@ nonzero eigenvalue \(\lambda\) fails the ledger through
 
 ### Active boundary
 
-The Hellinger chiral block has active eigenvalues
-\(\pm p^{-1/2}\) and all critical-axis \(t\)-dependence is a unitary gauge.
+The frozen Hellinger chiral block has active eigenvalues
+\(\pm p^{-1/2}\). More generally, every bounded one-sided ansatz
+\(A_t=G^{1/2+it}K=G^{it}A_0\) has all critical-axis \(t\)-dependence in the
+unitary gauge \(\operatorname{diag}(G^{it},I)\), even when \([G,K]\ne0\).
 No single determinant, meromorphic continuation, functional equation, pole
 removal, trivial-zero mechanism, moving zero divisor, Riemann--von Mangoldt
 law, or same-object Weil compression is proved.
