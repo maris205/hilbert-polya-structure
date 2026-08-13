@@ -1,0 +1,188 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C12
+source_commit: WORKTREE_PENDING_FINAL_COMMIT
+evaluation_date: 2026-08-13
+artifact_path_base: papers/10-entropy-paired-relative-determinant
+
+# Provisional worktree evaluation. The root agent will commit the complete
+# source/code/results object first, replace both provisional commit fields
+# with that immutable commit, and commit the final evaluation second.
+
+source_lock:
+  candidate_definition: "SD-C12 pairs adjacent entropy ranks of tensor-prime atoms. Odd ranks p_(2n-1) form the plus/super-even numerator sector and even ranks p_(2n) form the minus/super-odd denominator sector. R(s,z)=det_F((I-zD_s^+)(I-zB_s)^(-1)) and H(s,z)=R(s,z)R(1-s,z), with primary z=1."
+  object: "The atom-reduced loop symbolic grammar on entropy-ordered tensor-indecomposable full shifts, equipped with the canonical adjacent-rank 1|1 grading and pairing unitary."
+  family: "symbolic dynamics"
+  phase_space: "Disjoint union of tensor-prime atom loops, graded by adjacent entropy rank into plus/even and minus/odd sectors."
+  dynamics: "Each atom loop is primitive and its powers are repetitions. The transfer is diagonal on the atom-loop grammar; only the relative paired quotient is promoted."
+  parameters: "Adjacent pairing, odd-rank numerator orientation, and z=1 are frozen. There is no fitted phase, scale, offset, sign, pairing, cutoff correction, or target-root parameter."
+  parameter_provenance: "F_m tensor F_n=F_mn defines the atoms; entropy log(p) orders them; adjacent entropy rank defines the pairing; the least atom and writer-frozen odd-rank-plus convention orient the quotient."
+  arithmetic_origin: "The nonunit tensor indecomposable full shifts are exactly F_p and are generated internally. Entropy gives the roof log(p). No external prime table or target-zero data enter the executable."
+  clock: "The intrinsic entropy roof log(p) and repetition time r log(p), without rescaling or offset."
+  normalization: "D_s^+=diag(p_(2n-1)^(-s)), B_s=diag(p_(2n)^(-s)), R(s,z)=det_F((I-zD_s^+)(I-zB_s)^(-1)), H(s,z)=R(s,z)R(1-s,z), primary z=1."
+  determinant_convention: "R is the ordinary Fredholm determinant of one I+S_1 relative quotient on Re(s)>0 and |z|2^(-Re(s))<1. The two individual diagonal determinants are not separately asserted on that half-plane. H is the product of the same relative object at s and 1-s."
+  orbit_cutoff: "All-order trace-class and trace-log theorems. Exact opaque coefficients use three pairs and repetitions r=1,...,10."
+  cutoff: "Convergence uses N=16,64,256,1024,4096,16384 pairs and 32,769 internally generated atoms; reflection uses N=64,256,1024,4096,16384 and 0<=t<=80; controls use 4,096 pairs, 32 random bounded-block seeds, 16 orientation seeds, and block cutoffs to 4,096."
+  precision: "SymPy exact polynomial algebra for finite coefficients and parity/phase identities; IEEE-754 binary64 for partial sums, tail diagnostics, and finite reflection controls; deterministic seeds 0,...,31 and inventory seed 1907."
+  training_data: "none; no fitting, validation target, target spectrum, root list, or crossing census"
+  allowed_data: "Tensor multiplication, topological entropy, internally generated indecomposables, exact symbolic traces, fixed bounded-local pairings, matched target-free inventories, and numerical complex arithmetic."
+  forbidden_data: "Riemann-zero tables, target-root losses or comparisons, inserted von Mangoldt weights, post-hoc signs/phases/scales/offsets, unreported pairing changes, cross-family construction, and Route-B promotion."
+  code_commit: WORKTREE_PENDING_FINAL_COMMIT
+  freeze_note: "The root agent will replace source_commit and code_commit after committing the full Paper10 source/code/results object, then commit this YAML in a second stage."
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - PROOF_PACKAGE.md
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc12_relative_determinant_experiment.py
+    - code/test_sdc12_relative_determinant_experiment.py
+    - results/summary.json
+    - results/exact_coefficients.csv
+    - results/trace_class_convergence.csv
+    - results/reflection_motion.csv
+    - results/reflection_symmetry.csv
+    - results/zero_free_strips.csv
+    - results/pairing_inventory_controls.csv
+    - results/block_weight_controls.csv
+    - results/parity_phase.csv
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "Tensor multiplication makes the nonunit indecomposable full shifts exactly F_p; topological entropy intrinsically supplies log(p), atom order, adjacent pairing, and the repetition clock. No prime file or target-zero data are used."
+  strongest_failure: "The analytic cancellation and reflected motion are not arithmetic selectors. Bounded-local pairing variants, composites, consecutive integers, shuffled atoms, and random increasing inventories reproduce them."
+  arithmetic_controls:
+    - "within-block shuffled tensor atoms"
+    - "composites-only increasing inventory"
+    - "consecutive positive integers"
+    - "bounded-gap random increasing integers, seed 1907"
+    - "offset and random bounded-block pairing controls"
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+    - results/pairing_inventory_controls.csv
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The relative trace-log identity is exact at every repetition: S_r(s)=sum_n[p_(2n-1)^(-rs)-p_(2n)^(-rs)]. The code verifies opaque coefficients through r=10."
+  strongest_failure: "Even-rank atoms have coefficient -1 at every repetition, so the ledger is not the uniformly positive prime-power Euler ledger. A fixed super-parity sign is not a primitive cocycle phase: a^r-b^r differs from a^r+(-1)^r b^r at every even r."
+  metrics:
+    primitive_orbit_definition: "the unique atom loop F_p"
+    repetition_rule: "r repetitions have entropy time r log(p)"
+    exact_relative_trace_range: "three opaque pairs, r=1,...,10; all-order theorem"
+    exact_coefficient_failures: 0
+    positive_prime_orientation: false
+    fixed_negative_rank_sector: true
+    fixed_parity_equals_repetition_phase: false
+    parity_phase_first_failure_repetition: 2
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/exact_coefficients.csv
+    - results/parity_phase.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "Adjacent differences are trace class and holomorphic for Re(s)>0 with norm bound |s|2^(-sigma)/sigma. Hence R is an exact relative Fredholm determinant; H has exact reflection, and H(s,1) is zero-free throughout 0<Re(s)<1."
+  strongest_failure: "The primary determinant has no critical-strip divisor at all, so it cannot match a target divisor. It is a signed relative quotient rather than the positive Euler determinant."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data are forbidden"
+    extra_zero_count: "not_applicable; H(s,1) is analytically proved zero-free on the primary strip"
+    missing_zero_count: "not_applicable; no target divisor comparison is authorized"
+    root_count_discrepancy: "not_applicable; no root or crossing census was performed"
+    cutoff_drift: "At real sigma=0.1,0.25,0.5,1, observed l1 increments from N=4096 to 16384 are 0.023061,0.009439,0.000934,4.730e-6 and lie below rigorous infinite-tail bounds."
+    precision_drift: "exact coefficient tests use symbolic algebra; reflection residual is exactly zero in the frozen binary64 evaluation because factors are exchanged algebraically"
+    control_margin: "none: all 32 bounded-block random pairings and every nonprime inventory pass convergence and show reflected motion"
+    maximum_pair_cutoff: 16384
+    last_generated_atom: 386117
+    exact_product_coefficients: true
+    primary_z1_zero_free_strip: "0<Re(s)<1"
+    crossing_census_performed: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/trace_class_convergence.csv
+    - results/zero_free_strips.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "H(s,z)=H(1-s,z) exactly, and the positive center-curvature theorem proves nonconstant critical-line motion. At 16,384 pairs the finite curvature is 3.5275 with a rigorous alternating tail bound."
+  strongest_failure: "Reflection and motion coexist with a rigorously empty primary divisor. There is no positive Euler orientation, Gamma factor, pole/trivial-zero mechanism, Riemann-von Mangoldt law, Weil compression, or same-object arithmetic completion. The controls prove too much."
+  analytic_structure:
+    exact_reflection: true
+    critical_line_motion: true
+    finite_center_curvature_N16384: 3.5274949561368834
+    primary_strip_zero_free: true
+    positive_euler_ledger: false
+    same_object_target_divisor: false
+    completed_functional_equation: false
+    gamma_factor: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    riemann_von_mangoldt_law: false
+    analytic_target_continuation: false
+  weil_compression:
+    status: "No natural same-object Weil/Hermitian compression is derived from SD-C12."
+    evidence_status: OPEN
+  artifacts:
+    - PROOF_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/reflection_motion.csv
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The relative quotient and reflection are canonical analytic objects on paired symbolic atom spaces."
+  strongest_failure: "R and H are holomorphic determinant families, not a fixed self-adjoint, unitary, or scattering generator. No operator domain, compact-resolvent theorem, quantization, orbit-phase retention, or target counting law exists."
+  metrics:
+    fixed_self_adjoint_generator: false
+    natural_quantization: false
+    operator_domain: false
+    compact_resolvent: false
+    target_counting_law: false
+    positive_orbit_phase_retention: false
+    route_b_readiness: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "pairing offsets 1,2,3"
+    - "16 within-pair orientation seeds"
+    - "32 random perfect pairings inside fixed width-eight blocks"
+    - "within-block shuffled tensor atoms"
+    - "composites-only inventory"
+    - "consecutive integer inventory"
+    - "bounded-gap random increasing inventory"
+    - "zero-sum patterns [1,-1], [1,-2,1], [1,-1,-1,1]"
+    - "all-positive patterns [1,1] and [1,1,1]"
+    - "fixed super-parity versus primitive holonomy -1"
+  proves_too_much_risk: "Decisive. Every bounded-local random pairing passes the trace-class theorem and moves on the critical line; every tested nonprime increasing inventory does the same. The mechanism is local cancellation, while the all-positive orientation is algebraically incompatible with the required zero block sum."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "SD-C12 proves a relative trace-class theorem, exact Fredholm product, reflection, critical-line motion, and a primary zero-free strip. It fails Route A because its fixed signed rank ledger is not the positive prime-power ledger, its primary divisor is empty, and bounded-local/nonprime controls reproduce the mechanism. It establishes no target divisor, RH statement, completed arithmetic function, Weil compression, or Hilbert-Polya operator. Stage status: STOP_POSITIVE_EULER_ORIENTATION / STOP_DIVISOR / STOP_SCOPED / PROVES_TOO_MUCH."
+blocking_conditions:
+  - "Even-rank atoms have fixed coefficient -1 at every repetition."
+  - "Fixed super-parity is not a repetition-dependent cocycle phase."
+  - "H(s,1) is analytically zero-free throughout 0<Re(s)<1."
+  - "Zero-sum finite-block cancellation is incompatible with all-positive coefficients."
+  - "Bounded-local random pairings and nonprime inventories reproduce convergence and motion."
+  - "No Gamma completion, target divisor, Weil compression, or Riemann-von Mangoldt law is derived."
+  - "No fixed self-adjoint generator exists."
+next_smallest_test: "Within Symbolic Dynamics, test an entropy-rank Bloch unitary twist only if its exact repetition coefficients are computed first. Reject it before any zero experiment unless it both cancels the zero-order divergence and yields the required repetition-dependent phase without a fixed negative prime sector."
+round2_clues:
+  - "ROUND2_CLUE: an operator or scattering interpretation of the relative quotient may exist outside Symbolic Dynamics; record only and do not develop in Session 4."
+route_b_invocation_allowed: false

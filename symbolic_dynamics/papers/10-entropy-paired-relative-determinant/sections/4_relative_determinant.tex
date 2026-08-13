@@ -1,0 +1,108 @@
+\section{The relative half-plane theorem}
+\label{sec:relative}
+
+The analytic gain comes from estimating each entropy pair before summing over
+the inventory.  For $a<b$ and $\RePart s>0$,
+\[
+ a^{-s}-b^{-s}=s\int_a^b x^{-s-1}\dd x.        \tag{4.1}
+\]
+The prime intervals $[p_{2n-1},p_{2n}]$ are disjoint.  No estimate of the odd
+or even sector alone has this property.
+
+\begin{theorem}[Relative trace-class half-plane]
+\label{thm:trace-class}
+Let $\sigma=\RePart s>0$.  The map
+$s\mapsto K_s=D_s^+-B_s$ is holomorphic from the right half-plane to the trace
+class $\cS_1(\cH_+)$.  More precisely,
+\[
+ \|K_s\|_1
+ \le \frac{|s|}{\sigma}2^{-\sigma}.           \tag{4.2}
+\]
+For every integer $r\ge1$,
+\[
+ K_{r,s}=(D_s^+)^r-B_s^r\in\cS_1,
+ \qquad
+ \|K_{r,s}\|_1
+ \le \frac{|s|}{\sigma}2^{-r\sigma}.          \tag{4.3}
+ \label{eq:power-bound}
+\]
+Consequently the relative trace
+\[
+ \cS_r(s)=\Tr K_{r,s}
+ =\sum_{n\ge1}\left(p_{2n-1}^{-rs}-p_{2n}^{-rs}\right)             \tag{4.4}
+\]
+exists for every repetition $r$, including $r=1$.
+\end{theorem}
+
+\begin{proof}
+Apply \cref{eq:pair-integral} entrywise and sum absolute values:
+\begin{align}
+ \|K_s\|_1
+ &\le |s|\sum_{n\ge1}\int_{p_{2n-1}}^{p_{2n}}
+                       x^{-\sigma-1}\dd x \notag\\
+ &\le |s|\int_2^\infty x^{-\sigma-1}\dd x
+  =\frac{|s|}{\sigma}2^{-\sigma}.             \tag{4.5}
+ \label{eq:pair-integral}
+\end{align}
+The bound is locally uniform in $s$.  Uniform limits in $\cS_1$ of the finite
+diagonal analytic sums prove trace-norm holomorphy.  Since
+$(D_s^+)^r=D_{rs}^+$ and $B_s^r=B_{rs}$, applying the same calculation to
+$rs$ yields \cref{eq:power-bound}; the factor $r$ cancels in the integral.
+The trace formula follows from the diagonal entries and trace-norm convergence.
+\end{proof}
+
+Equation \eqref{eq:pair-integral} also shows why the cancellation is local.
+The proof uses the gaps inside the selected pairs but ignores every gap between
+pairs.  Primality is not needed for the estimate once an increasing inventory
+has been supplied.
+
+\begin{theorem}[Exact relative Fredholm determinant]
+\label{thm:relative-determinant}
+On $\Omega_+$, $Q(s,z)-I$ is trace class and $R$ is holomorphic and nonzero.
+It has the locally convergent product
+\[
+ R(s,z)=\prod_{n\ge1}
+ \frac{1-zp_{2n-1}^{-s}}{1-zp_{2n}^{-s}},       \tag{4.6}
+ \label{eq:relative-product}
+\]
+and the all-order trace expansion
+\[
+ \log R(s,z)=-\sum_{r\ge1}\frac{z^r}{r}\cS_r(s).                  \tag{4.7}
+ \label{eq:relative-log}
+\]
+At $z=1$, these statements hold for every $\RePart s>0$.
+\end{theorem}
+
+\begin{proof}
+The domain condition gives $\|zB_s\|<1$.  Algebraically,
+\[
+ Q(s,z)-I=-z(D_s^+-B_s)(I-zB_s)^{-1}.           \tag{4.8}
+\]
+The first factor is trace class by \cref{thm:trace-class}, and the second is
+bounded and holomorphic.  Hence $Q-I\in\cS_1$.  Both $I-zD_s^+$ and $I-zB_s$
+are invertible on $\Omega_+$, so $Q$ and its Fredholm determinant are
+nonzero.  Finite diagonal truncations give the product; the trace-norm limit
+passes their determinants to \eqref{eq:relative-product}.
+
+For the logarithm, \cref{eq:power-bound} gives
+\[
+ \sum_{r\ge1}\frac{|z|^r}{r}|\cS_r(s)|
+ \le \frac{|s|}{\sigma}
+       \sum_{r\ge1}\frac{(|z|2^{-\sigma})^r}{r}<\infty.           \tag{4.9}
+\]
+The scalar logarithm series may therefore be summed in trace norm, producing
+\eqref{eq:relative-log}.  Since $2^{-\sigma}<1$, $z=1$ is safe throughout the
+right half-plane.
+\end{proof}
+
+The logarithmic derivative displays the arithmetic ledger without changing
+clocks:
+\[
+ \partial_s\log R(s,1)
+ =\sum_{p}\eps_p\sum_{r\ge1}(\log p)p^{-rs},
+ \qquad
+ \eps_{p_k}=(-1)^{k+1}.                         \tag{4.10}
+\]
+This series is understood through the entropy pairs in the proved half-plane.
+It contains the correct primitive lengths and repetitions, but its orientation
+already differs from the positive prime-power side.
