@@ -1,0 +1,22 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+ node distance=7mm and 9mm,
+ box/.style={draw,rounded corners,align=center,inner sep=5pt,font=\small,minimum height=10mm},
+ good/.style={box,fill=blue!7}, bad/.style={box,fill=orange!11}, hide/.style={box,fill=gray!13},
+ arr/.style={-{Latex[length=2mm]},thick}]
+\node[box,fill=green!9] (source) {tensor-prime loop $F_p$\\$p^{-rs}\tau(U_p^r)$};
+\node[good,below left=of source] (exact) {positive exact ledger\\$\tau(U_p)=1\Rightarrow U_p=I$\\no Bloch motion};
+\node[bad,below=of source] (move) {visible nontrivial fiber\\wrong $p^{-rs}$ coefficient\\or surviving mixed cycle};
+\node[hide,below right=of source] (grade) {matched graded sector\\$\Str(U^r)=1$\\moving part cancels in $\Ber$};
+\draw[arr] (source)--node[left,font=\scriptsize]{exactness}(exact);
+\draw[arr] (source)--node[right,font=\scriptsize]{motion}(move);
+\draw[arr] (source)--node[right,font=\scriptsize]{virtual cancellation}(grade);
+\node[draw,dashed,fit=(exact)(move)(grade),inner sep=4pt,label={[font=\scriptsize]below:finite-fiber trilemma}] {};
+\end{tikzpicture}
+\caption{SD-C13's finite-fiber trilemma.  With a faithful positive trace,
+exactness makes the visible fiber trivial.  A nontrivial visible fiber changes
+the repetition ledger.  Grading can retain the target supertrace only by
+removing the moving sector from the superdeterminant.}
+\label{fig:rigidity-map}
+\end{figure}
