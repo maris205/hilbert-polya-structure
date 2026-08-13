@@ -1,0 +1,185 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C13
+source_commit: 2f10ee87d0361649b9da0d5cddeefd4bb6d20465
+evaluation_date: 2026-08-13
+artifact_path_base: papers/11-unitary-fiber-moment-rigidity
+
+# The complete Paper11 source/code/results object is frozen by the immutable
+# commit below. This evaluation and manifest are finalized in the following
+# metadata commit.
+
+source_lock:
+  candidate_definition: "SD-C13 attaches one frozen finite-dimensional unitary U_p to every entropy-ordered tensor-prime atom loop. Repetition r has positive normalized-trace multiplier tau_p(U_p^r). Ordinary trace, recurrent cycles, nonfaithful states, and graded fibers are controls."
+  object: "The tensor-prime atom-loop symbolic system with one finite unitary fiber at each primitive loop."
+  family: "symbolic dynamics"
+  phase_space: "Disjoint atom loops F_p with finite internal unitary fibers; finite cutoffs first and the direct-sum trace-class object on Re(s)>1."
+  dynamics: "Each atom loop is primitive and its r-th traversal is the p^r repetition. The fiber holonomy is U_p^r."
+  parameters: "Fibers are frozen before repetition audits. No phase, dimension, scale, offset, clock, adjacency, or target-root parameter is fitted."
+  parameter_provenance: "Tensor multiplication identifies F_p; entropy log(p) orders the atoms and fixes the clock. Fiber families are preregistered structural tests, not chosen from target data."
+  arithmetic_origin: "Nonunit tensor indecomposable full shifts are exactly F_p, generated internally. The primitive clock is log(p), with repetition r log(p)."
+  clock: "Topological entropy log(p), without rescaling or offset."
+  normalization: "The primary positive state is tau_p=Tr/d_p and the repetition coefficient is p^(-rs) tau_p(U_p^r). Ordinary trace is only a frozen control."
+  determinant_convention: "Finite cutoffs use ordinary determinants. On Re(s)>1, the direct-sum tracial logarithm is -sum_p sum_r z^r p^(-rs) tau_p(U_p^r)/r. Graded controls use the Berezinian of the same even/odd sectors and are not spliced into the primary determinant."
+  orbit_cutoff: "All-order rigidity theorems. Executable moments and recurrent repetitions use r=1,...,32; unitary dimensions and cycle orders are 1,...,8."
+  cutoff: "Entropy-clock controls use 48 atoms, fiber dimensions 2,3,4, 32 phase seeds, and 129 Bloch samples. Hidden-sector dimensions are 2,...,8 with four phases."
+  precision: "SymPy exact Newton and formal-variable algebra; IEEE-754 binary64 for finite unitary moments and determinant controls; deterministic seeds 0,...,31 and clock seed 1907."
+  training_data: "none; no fitting, target spectrum, root list, crossing census, or validation target"
+  allowed_data: "Tensor multiplication, topological entropy, internally generated atom clocks, exact unitary/formal algebra, fixed unitary families, and frozen random seeds."
+  forbidden_data: "Riemann-zero tables, target-root losses or comparisons, target-fitted phases, inserted von Mangoldt weights, changing fibers after viewing repetitions, cross-family repairs, and Route-B promotion."
+  code_commit: 2f10ee87d0361649b9da0d5cddeefd4bb6d20465
+  freeze_note: "The complete Paper11 source/code/results object is frozen at commit 2f10ee87d0361649b9da0d5cddeefd4bb6d20465; this evaluation and manifest are finalized in the following metadata commit."
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc13_unitary_fiber_experiment.py
+    - code/test_sdc13_unitary_fiber_experiment.py
+    - results/summary.json
+    - results/moment_families.csv
+    - results/ordinary_rigidity.csv
+    - results/positive_state_controls.csv
+    - results/hidden_graded.csv
+    - results/triangle_recurrence.csv
+    - results/parallel_paths.csv
+    - results/entropy_clock_controls.csv
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "Tensor multiplication makes the nonunit indecomposable full shifts exactly F_p; entropy supplies log(p), atom order, and repetition time without a prime file or target-zero data."
+  strongest_failure: "Fiber determinant motion is not arithmetic-specific. All 96 dimension/seed cases move for each of prime, composite, and random increasing clocks."
+  arithmetic_controls:
+    - "sorted composite clocks"
+    - "random increasing clocks, seed 1907"
+    - "fiber dimensions 2,3,4"
+    - "32 frozen phase seeds"
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+    - results/entropy_clock_controls.csv
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "For a faithful normalized trace, tau(U)=1 implies U=I by the positive Hilbert-Schmidt identity. Ordinary moments Tr(U^r)=1 for r=1,...,d force d=1,U=1 by Newton identities."
+  strongest_failure: "Every nontrivial determinant-visible fiber changes a repetition coefficient. Cyclic fibers of dimensions 2,3,4 first fail at r=2,3,4. Nonfaithful and graded substitutes either lose determinant control or cancel the moving determinant sector."
+  metrics:
+    primitive_orbit_definition: "the unique loop at each tensor-prime atom"
+    repetition_rule: "r loop traversals have time r log(p) and fiber U_p^r"
+    tested_repetition_range: "r=1,...,32"
+    cycle_orders: "m=2,...,8"
+    cycle_moment_max_residual: 0.0
+    faithful_normalized_trace_nontrivial_solution: false
+    ordinary_trace_nontrivial_solution: false
+    first_cycle_ledger_failure: "r=m"
+    exact_positive_ledger_with_visible_motion: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/moment_families.csv
+    - results/ordinary_rigidity.csv
+    - results/positive_state_controls.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "Finite fibers define exact finite-cutoff determinants, and their all-order tracial logarithm is analytic on the honest trace-class half-plane Re(s)>1. The identity fiber recovers the untwisted atom-loop determinant."
+  strongest_failure: "A nontrivial moving determinant necessarily changes the positive repetition ledger. Graded exactness cancels the moving factor from the Berezinian, while a nonfaithful state does not control the ordinary determinant."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data are forbidden"
+    extra_zero_count: "not_applicable; no target divisor is claimed"
+    missing_zero_count: "not_applicable; no target divisor comparison is authorized"
+    root_count_discrepancy: "not_applicable; no root or crossing census was performed"
+    cutoff_drift: "not_applicable; experiment tests exact moment identities and finite determinant motion, not a target root sequence"
+    precision_drift: "cycle moments are exact; positive-rigidity residual is 4.44e-16 and graded Berezinian residual is 2.22e-16"
+    control_margin: "none: 96/96 cases move for each prime, composite, and random increasing inventory"
+    hidden_sector_max_visible_det_change: 0.08882919002219944
+    graded_hidden_factor_cancelled: true
+    crossing_census_performed: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/hidden_graded.csv
+    - results/entropy_clock_controls.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The all-order positive moment theorem exactly classifies finite unitary fibers, and independent formal variables certify recurrent mixed-word leakage."
+  strongest_failure: "There is no nontrivial fiber retaining the required ledger, no target divisor, functional equation, Gamma factor, pole/trivial-zero mechanism, counting law, analytic completion, or Weil compression. Matched nonprime controls reproduce all motion."
+  analytic_structure:
+    positive_moment_rigidity: true
+    recurrent_triangle_first_leakage: "transfer power 3m for m-cycle fiber"
+    independent_parallel_path_all_order_cancellation: false
+    nonfaithful_same_object_determinant_control: false
+    graded_visible_motion_retained: false
+    target_divisor: false
+    analytic_continuation_to_target: false
+    completed_functional_equation: false
+    gamma_factor: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    riemann_von_mangoldt_law: false
+  weil_compression:
+    status: "No natural same-object Weil/Hermitian compression is derived from SD-C13."
+    evidence_status: OPEN
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/triangle_recurrence.csv
+    - results/parallel_paths.csv
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "Each frozen fiber is unitary and its holonomy is intrinsic once chosen."
+  strongest_failure: "The finite fibers do not produce one fixed self-adjoint generator with the target trace formula. Exact positive moments make them trivial, and no domain, compact-resolvent theorem, natural quantization, or target counting law exists."
+  metrics:
+    finite_unitary_fibers: true
+    fixed_self_adjoint_generator: false
+    natural_quantization: false
+    operator_domain: false
+    compact_resolvent: false
+    target_counting_law: false
+    exact_arithmetic_trace_formula: false
+    route_b_readiness: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "identity fibers in dimensions 1,2,3,4,8"
+    - "scalar and conjugate phase fibers"
+    - "cycle fibers m=2,...,8"
+    - "32 random faithful positive-state controls"
+    - "nonfaithful hidden sectors 1 direct-sum V"
+    - "graded even=1 direct-sum V and odd=V"
+    - "formal-variable triangle"
+    - "two independent return paths"
+    - "composite and random increasing clocks"
+    - "32 phase seeds for fiber dimensions 2,3,4"
+  proves_too_much_risk: "Decisive. Every tested prime, composite, and random increasing clock inventory shows generic Bloch determinant motion, while every nontrivial positive fiber fails the ledger. Hidden and graded mechanisms preserve moments only by losing determinant control or cancelling motion."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "SD-C13 proves finite positive unitary moment rigidity and exact recurrent leakage obstructions. It shows that a nontrivial positive determinant-visible fiber cannot preserve the prime/repetition ledger; nonfaithful states do not control the determinant, and graded sectors cancel the motion. It establishes no target divisor, RH statement, analytic completion, Weil compression, or Hilbert-Polya operator. Stage status: GO_POSITIVE_MOMENT_RIGIDITY / STOP_BLOCH_ESCAPE / STOP_SCOPED / PROVES_TOO_MUCH."
+blocking_conditions:
+  - "Faithful normalized-trace exactness forces U=I at the first moment."
+  - "Ordinary all-moment exactness forces a one-dimensional trivial fiber."
+  - "Nonfaithful state moments do not control the hidden ordinary determinant."
+  - "Graded cancellation removes the same determinant-visible moving sector."
+  - "Roots-of-unity phases delay recurrent leakage but do not erase it."
+  - "Composite and random increasing clocks reproduce Bloch motion."
+  - "No target divisor, analytic completion, or fixed self-adjoint generator exists."
+next_smallest_test: "Within Symbolic Dynamics, classify infinite-dimensional unitary fibers only after fixing a faithful normal trace or state and determinant class. Reject any proposal whose first positive moment equals one by the same faithfulness argument, or whose nonfaithful kernel contains determinant-visible motion."
+round2_clues:
+  - "ROUND2_CLUE: a nonpositive oscillatory distribution or scattering phase may evade faithful-state rigidity outside the present symbolic positive-ledger class; record only and do not develop in Session 4."
+route_b_invocation_allowed: false
