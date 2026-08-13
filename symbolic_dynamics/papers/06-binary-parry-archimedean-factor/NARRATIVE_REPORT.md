@@ -34,8 +34,9 @@ continuation, a functional equation, or a Riemann-zero divisor.
 
 The most tempting attempt to fuse the sectors is a Hellinger chiral double.
 It fixes the center exactly because the paired weights multiply to \(p^{-1}\).
-But every block-preserving version is unitarily gauge-equivalent along the
-critical axis. Its spectrum cannot move with height. A regularized
+But for every bounded \(K\), not merely block-preserving choices,
+\(A_t=G^{1/2+it}K=G^{it}A_0\) and the double is unitarily gauge-equivalent
+along the critical axis. Its spectrum cannot move with height. A regularized
 determinant exists only after deleting the divergent quadratic trace and is
 independent of \(s\).
 
@@ -50,8 +51,8 @@ CLT limits. This limitation is kept in the candidate rather than hidden.
 
 ## Next live theorem
 
-The next same-family target is an intrinsic noncommuting coupling between
-tensor atoms whose single trace formula contains both channels while
-cancelling all mixed primitive cycles. The chiral no-motion theorem says
-exactly why such a coupling is needed. Any geometric analogy belongs only in
+The next same-family target is a genuinely multi-phase chiral architecture
+whose single trace formula contains both channels while cancelling all mixed
+primitive cycles. Noncommutation with \(G\) alone cannot defeat the universal
+one-sided gauge theorem. Any geometric analogy belongs only in
 `ROUND2_CLUE`; no other system family is developed here.

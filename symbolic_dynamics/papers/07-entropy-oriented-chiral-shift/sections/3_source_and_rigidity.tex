@@ -1,0 +1,129 @@
+\section{Source lock and exact-ledger rigidity}
+\label{sec:rigidity}
+
+Let $\At=\{F_{p_n}:n\ge1\}$ be the tensor atoms of the full-shift monoid,
+listed by increasing topological entropy.  Unique factorization and strict
+monotonicity of $\log n$ give the same order as
+$2=p_1<p_2<p_3<\cdots$.  This is an intrinsic enumeration; no external
+prime table is part of the definition.
+
+The phase space of SD-C09 is the countable directed graph with vertex set
+$\At$.  It has a loop at every vertex and two parallel edges from $p_n$ to
+$p_{n+1}$.  The loop has roof $\log p_n$.  The two successor edges carry,
+respectively, the source roof $\log p_n$ and target roof $\log p_{n+1}$,
+each with scalar potential $-\log2$.  There are no decreasing edges.  The
+function space is $\ell^2(\At)$; its transfer is defined in
+\cref{sec:coupling}.  This freezes the object, grammar, roof, potential,
+function space, and determinant convention before any spectral comparison.
+
+\subsection{A universal one-sided gauge theorem}
+
+We first correct and strengthen the previous stage's no-motion theorem.  Let
+$G$ be any positive injective diagonal mass operator and let $K$ be bounded.
+No commutation is assumed.
+
+\begin{theorem}[Universal one-sided phase gauge]
+\label{thm:one-sided-gauge}
+For
+\[
+ A_t=G^{1/2+it}K,
+ \qquad
+ B_t=\begin{pmatrix}0&A_t\\A_t^*&0\end{pmatrix},
+\]
+one has
+\[
+ B_t=U_tB_0U_t^*,
+ \qquad U_t=\operatorname{diag}(G^{it},I).
+\]
+Thus the spectrum, singular values, and every unitarily invariant regularized
+determinant are independent of $t$, even when $[G,K]\ne0$.
+\end{theorem}
+
+\begin{proof}
+Functional calculus gives $A_t=G^{it}A_0$.  Substitution into the two chiral
+blocks yields the asserted conjugacy.
+\end{proof}
+
+Mass noncommutation is therefore necessary only after the phase has been
+placed at both endpoints in a way that cannot be factored unitarily from one
+side.
+
+\subsection{Exact Euler ledgers force directed acyclicity}
+
+The next result locates every scalar one-step escape.  For independent
+commuting variables $x=(x_1,\ldots,x_N)$ put
+$D(x)=\operatorname{diag}(x_1,\ldots,x_N)$.
+
+\begin{theorem}[Exact-ledger DAG rigidity]
+\label{thm:dag}
+Let $K\in M_N(\CC)$ and assume
+\[
+ \det(I-zD(x)K)=\prod_{j=1}^N(1-zx_j)             \tag{3.1}
+\]
+as a polynomial identity in $z,x_1,\ldots,x_N$.  Then $K=I+N_0$, and the
+directed support of $N_0$ contains no directed cycle.  Conversely, after a
+permutation of the vertices, every strictly triangular $N_0$ satisfies
+\cref{eq:dag-converse}:
+\begin{equation}
+ \det(I-zD(x)(I+N_0))=\prod_j(1-zx_j).
+ \label{eq:dag-converse}
+\end{equation}
+The conclusion also follows from equality of all Dirichlet coefficients
+after $x_j=p_j^{-s}$ for distinct tensor atoms.
+\end{theorem}
+
+\begin{proof}
+Expanding the determinant by principal minors and comparing the coefficient
+of $z^{|S|}\prod_{j\in S}x_j$ gives $\det K_{S,S}=1$ for every $S$.
+In particular $K_{jj}=1$.  Write $K=I+N_0$ with zero diagonal.  The identity
+\[
+ \det(I+(N_0)_{S,S})=
+ \sum_{T\subseteq S}\det (N_0)_{T,T}
+\]
+and induction on $|S|$ imply $\det(N_0)_{S,S}=0$ for every nonempty $S$.
+
+If the support of $N_0$ contained a directed cycle, choose one of shortest
+length with vertex set $C$.  It has no directed chord: a chord followed by
+one of the two directed portions of the cycle would produce a shorter cycle.
+The determinant of $(N_0)_{C,C}$ then contains exactly one nonzero
+permutation term, the product around the cycle, contradicting its vanishing.
+The support is a DAG and hence admits a topological ordering making $N_0$
+strictly triangular.  The converse follows from triangularity.  Finally,
+unique factorization makes distinct prime multisets linearly independent as
+Dirichlet monomials, so the same coefficient comparison applies.
+\end{proof}
+
+The theorem covers arbitrary scalar signs and complex phases: exactness
+does not leave a hidden recurrent signed solution.  A finite-dimensional
+unitary cocycle does not evade it at the primitive-factor level, because a
+mixed cycle labelled by an invertible $U$ contributes
+$\det(I-wU)$, which is nonconstant.
+
+\subsection{All-order graded cancellation is divisor-invisible}
+
+\begin{theorem}[Trace-invisible cancellation]
+\label{thm:trace-invisible}
+Let $T=T^+\oplus T^-$ be a trace-class graded operator.  If
+$\Str T^r=0$ for every $r\ge1$, then
+\[
+ \Ber(I-zT)=1
+\]
+throughout its Fredholm domain.  More generally, if $T^\pm\in S_q$ and
+$\Tr(T^+)^r=\Tr(T^-)^r$ for every $r\ge q$, their relative
+$q$-regularized determinant is one.
+\end{theorem}
+
+\begin{proof}
+Use the convergent logarithmic expansions
+\[
+ \log\Ber(I-zT)=-\sum_{r\ge1}\frac{z^r}{r}\Str T^r,
+\]
+and, after the first $q-1$ subtractions, the analogous expansion beginning at
+$r=q$.  Analytic continuation on the connected determinant domain preserves
+the identity.
+\end{proof}
+
+Thus a chain-level sector may move spectrally while exactness cancels every
+mixed trace, but that motion cannot generate zeros of the determinant whose
+logarithm uses those same traces.  This is the precise ceiling that motivates
+the acyclic rather than homological construction below.

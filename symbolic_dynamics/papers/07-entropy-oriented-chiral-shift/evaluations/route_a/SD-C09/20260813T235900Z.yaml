@@ -1,0 +1,186 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C09
+source_commit: 675548c3f040ec4d084823b301bb8e65112a7583
+evaluation_date: 2026-08-13
+artifact_path_base: papers/07-entropy-oriented-chiral-shift
+
+source_lock:
+  candidate_definition: "SD-C09 is the tensor-indecomposable atom-loop symbolic shift ordered by atom entropy, extended by the forward successor S and the endpoint-symmetric transfer L_s=D_s+(D_s S+S D_s)/2. The critical-axis finite pencil is B_t=[[0,L_(1/2+it)],[L_(1/2+it)^*,0]]."
+  object: "Countable entropy-ordered symbolic graph with one loop at each tensor atom and forward successor edges only; finite prefixes are the tested objects for chiral crossings."
+  family: "symbolic dynamics"
+  phase_space: "The directed graph on nonunit tensor-indecomposable finite full shifts F_p, ordered by increasing topological entropy, with one loop per atom and forward successor arrows."
+  dynamics: "Symbolic left shift on the edge grammar; diagonal loop transfer D_s and endpoint-averaged successor transfer L_s. No reverse successor edge belongs to SD-C09."
+  parameters: "alpha=1/2 is frozen by endpoint exchange symmetry. No fitted phase, scale, offset, adjacency, boundary condition, or target-root parameter is present."
+  parameter_provenance: "Tensor multiplication F_m tensor F_n=F_mn defines indecomposability; topological entropy h(F_n)=log(n) orders atoms and fixes the clock; endpoint exchange fixes equal coefficient 1/2."
+  arithmetic_origin: "Nonunit tensor indecomposables are exactly F_p. Their loop repetitions have entropy times r log(p)=log(p^r). The executable recovers these objects algorithmically and does not load a prime table."
+  clock: "Topological entropy log(p) and its repetition r log(p), with no rescaling or offset. Critical height is the pencil parameter s=1/2+it."
+  normalization: "D_s e_n=p_n^(-s)e_n; S is the unit successor; L_s=D_s+(D_sS+SD_s)/2. The crossing level is fixed at z=1 in det(I-L_t^*L_t)."
+  determinant_convention: "Euler object: ordinary Fredholm determinant det(I-zL_s)=product_p(1-zp^(-s)) on Re(s)>1. Critical finite object: det(I-B_t)=det(I-L_t^*L_t); finite det_3(I-B_t)=det(I-B_t) exp(Tr(B_t^2)/2), with a strictly positive multiplier. These are not declared one analytic determinant."
+  orbit_cutoff: "The primitive/repetition ledger is an all-order triangular theorem. Exact opaque-variable checks use N=4 and r=1,...,8; closed-walk census uses N=5 and lengths 1,...,8."
+  cutoff: "Chiral crossing prefixes N=2,3,4,8,16,32,64,128; height windows T=20,40,80,160,320; frozen sign-change grid 1/256 and validation grid 1/512."
+  precision: "SymPy exact polynomial algebra; IEEE-754 binary64 for dense matrices and frozen grids; 60 bisection iterations; mpmath 150 decimal digits and 520 bisection iterations for the first-root high-cutoff audit."
+  training_data: "none; there is no fitting, validation target, or target spectrum"
+  allowed_data: "Finite full-shift tensor multiplication, topological entropy, algorithmically generated indecomposables, exact symbolic algebra, frozen pseudorandom seeds, and numerical linear algebra."
+  forbidden_data: "Riemann-zero lists, target-root losses or comparisons, post-hoc scale/offset/phase fitting, prime-labelled hand-designed adjacency, fitted counterterms, cross-family construction, coordinate splicing of Euler and chiral determinants, and Route-B promotion."
+  code_commit: "WORKTREE_INTEGRATION_AT_SOURCE_COMMIT_675548c3f040ec4d084823b301bb8e65112a7583; final integration commit to be recorded by project lead"
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - PROOF_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc09_successor_experiment.py
+    - code/virtual_character_context.py
+    - code/test_sdc09_successor_experiment.py
+    - results/sdc09_results.json
+    - results/virtual_character_results.json
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "The monoidal identity F_m tensor F_n=F_mn makes the nonunit tensor indecomposables exactly F_p; entropy gives log(p) and orders them. No prime file or Riemann-zero data enters the executable."
+  strongest_failure: "Triangular ledger and chiral motion are not arithmetically selective: shuffled atoms, composites, random integers, randomized endpoint phases, and arbitrary DAGs reproduce those two formal properties. Arithmetic credit therefore comes only from the tensor source and entropy order, not from the moving chiral mechanism."
+  arithmetic_controls:
+    - "shuffled same tensor atoms"
+    - "composites-only inventory"
+    - "matched-count random positive integers, seed 1907"
+    - "randomized forward endpoint phases, seed 1907"
+    - "24 random upper-triangular DAGs"
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+    - results/sdc09_results.json
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "Every successor edge strictly increases entropy, hence cannot occur in a closed word. The only periodic words are atom loops and their repetitions; Tr(L_s^r)=sum_p p^(-rs) at every order. The length-1,...,8 census has exactly N pure loop walks and zero mixed walks."
+  strongest_failure: "The system is reducible and the forward edges are transient/radical data. Adding reverse edges produces four mixed length-two based walks already at N=3 and breaks the ledger."
+  metrics:
+    primitive_orbit_definition: "the unique period-one loop at each tensor atom"
+    repetition_rule: "r repetitions have entropy time r log(p)"
+    exact_trace_power_range: "r=1,...,8 checked symbolically; all-order theorem from triangularity"
+    exact_trace_failures: 0
+    periodic_census_max_length: 8
+    mixed_successor_closed_walks: 0
+    bidirectional_length_2_mixed_walks: 4
+    bidirectional_ledger_exact: false
+  artifacts:
+    - PROOF_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/sdc09_results.json
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "Because L_s is triangular with diagonal p^(-s), det(I-zL_s)=product_p(1-zp^(-s)) on Re(s)>1 and every finite prefix is exact. The finite chiral identity det(I-B_t)=det(I-L_t^*L_t) and the positive det_3 multiplier are also exact."
+  strongest_failure: "The Euler determinant and moving chiral determinant are different analytic objects. The frozen crossing scan is only a real-axis sign-change census; no argument-principle count, analytic continuation, missing/extra-zero audit against a target divisor, or infinite-prefix zero theorem exists."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data forbidden"
+    extra_zero_count: "not_assessed; no target divisor claim"
+    missing_zero_count: "not_assessed; no target divisor claim"
+    root_count_discrepancy: "not_certified; sign-changing roots only, hypothetical tangencies not counted"
+    cutoff_drift: "positive sign-change counts are 3,5,11,21,41 at T=20,40,80,160,320 for every N=2,3,4,8,16,32,64,128; first-root shifts decay from 3.516e-13 to 3.660e-38 to 1.734e-100 across N=8,16,32,64"
+    precision_drift: "counts unchanged when grid step halves from 1/256 to 1/512; N=2 roots match the exact family within 5.69e-14; 150-decimal audit prevents promoting binary64 plateaus to exact equality"
+    control_margin: "none for the abstract triangular mechanism: all shuffled/composite/random inventories and all 24 random DAGs retain exact ledgers and motion"
+    opaque_trace_failures: 0
+    determinant_product_exact: true
+    recurrence_dense_max_abs_error: 4.024747067890211e-16
+    grid_step_halving_count_stable_all_cutoffs: true
+    n2_positive_roots_to_320: 41
+    n128_positive_roots_to_320: 41
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - code/sdc09_successor_experiment.py
+    - results/sdc09_results.json
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "The critical pencil has exact conjugation/reflection symmetry. Endpoint alpha=0,1 controls are gauge-trivial, whereas alpha=1/2 has a nonconstant exact N=2 Schatten-fourth polynomial and strict all-prefix singular motion. Finite det_3 has the same z=1 crossings as det(I-B_t)."
+  strongest_failure: "There is no source-internal continuation connecting the Euler Fredholm product to chiral det_3, no Gamma/pole/trivial-zero completion, no T log T law, and no natural Weil compression. The two-atom exact crossings are periodic with linear count, and arbitrary forward DAG controls exhibit the same motion."
+  analytic_structure:
+    euler_half_plane: "Re(s)>1"
+    chiral_schatten_strip: "1/3<Re(s)<2/3, as proved in the manuscript proof package"
+    conjugation_symmetry: true
+    finite_reflection_scalar_max_error: 1.8274796574932395e-18
+    symmetric_alpha_schatten4_range_N8: 1.3956311352781925
+    source_endpoint_motion: false
+    target_endpoint_motion: false
+    symmetric_endpoint_motion: true
+    exact_n2_crossing: "(3-2*sqrt(6)*cos(t log(3/2)))/24"
+    unified_euler_chiral_determinant: false
+    analytic_continuation_from_symbolics: false
+    completed_functional_equation: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    gamma_factor: false
+    riemann_von_mangoldt_law: false
+  weil_compression:
+    status: "No same-object finite Hermitian/Weil compression is derived from SD-C09."
+    evidence_status: OPEN
+  artifacts:
+    - PROOF_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/sdc09_results.json
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: "For each finite prefix and each real t, B_t is an explicit finite self-adjoint chiral matrix with intrinsic entropy normalization and antiunitary t-to-minus-t symmetry. The symmetric endpoint construction defeats the one-sided gauge obstruction."
+  strongest_failure: "B_t is a height-dependent pencil, not one self-adjoint generator H with t as eigenvalue. No canonical unbounded domain, boundary condition, compact resolvent, quantization map, intrinsic target counting law, or completed spectral determinant is available."
+  metrics:
+    finite_chiral_self_adjoint: true
+    one_sided_arbitrary_K_gauge_max_error: 8.557234594074956e-16
+    non_gauge_symmetric_motion: true
+    fixed_self_adjoint_generator: false
+    natural_quantization: false
+    operator_domain: false
+    compact_resolvent: false
+    target_counting_law: false
+    route_b_readiness: false
+  artifacts:
+    - PROOF_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "alpha=0 source/target endpoint gauge and alpha=1 endpoint gauge"
+    - "arbitrary dense noncommuting one-sided K"
+    - "bidirectional positive successor with mixed two-cycles"
+    - "shuffled atom order"
+    - "composites-only and matched-count random integer inventories"
+    - "randomized forward endpoint phases"
+    - "24 random upper-triangular DAGs"
+    - "minimal projection, radical, and 4|1 virtual-character realizations"
+    - "positive connected rank-one matrices"
+    - "32 trace-normalized random signed matrix controls"
+    - "strictly upper-triangular nilpotent-only control"
+    - "truncated free-group left-regular control"
+  proves_too_much_risk: "High. Triangularity alone gives the complete trace/determinant ledger for arbitrary forward coefficients and phases, while symmetric endpoint interference generically gives singular motion. All 24 random DAG seeds, shuffled masses, composites, random integers, and random endpoint phases reproduce the mechanism. Virtual-character radicals further show that all cyclic data can stay fixed while singular spectra move."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_ANALYTIC_CANDIDATE
+claim_boundary: "SD-C09 establishes an exact entropy-sourced Euler ledger and, in a distinct critical-axis chiral pencil, genuine non-gauge singular motion and exact finite crossings. It does not establish a single continued arithmetic determinant, a target divisor, the Riemann-von Mangoldt law, RH, or a Hilbert-Polya operator. Stage status: GO_A3_CHIRAL_MOTION / STOP_UNIFIED_DIVISOR / ROUTE_B_LOCKED."
+blocking_conditions:
+  - "The Euler Fredholm determinant and moving chiral det_3 are not one analytic object."
+  - "Arbitrary forward DAGs, shuffled/nonprime inventories, and random forward endpoint phases reproduce ledger plus motion."
+  - "Reverse/recurrent positive edges create mixed cycles and fail the prime-power ledger."
+  - "The frozen root census is not an argument-principle certification and has no target-divisor comparison."
+  - "The exact two-atom crossing family has periodic linear counting, not a T log T law."
+  - "No pole removal, trivial-zero mechanism, Gamma completion, analytic continuation, or Weil compression is derived."
+  - "The chiral object is a parameterized pencil, not a fixed self-adjoint generator with a complete operator domain."
+next_smallest_test: "Within Symbolic Dynamics, prove locally uniform infinite-cutoff convergence and real-zero classification for the continuant det(I-L_t^*L_t), then prove or disprove a source-internal relative-determinant bridge to the Euler Fredholm product without fitted counterterms."
+round2_clues:
+  - "ROUND2_CLUE: a geometric return-map carrier could turn transient entropy-oriented arrows into a recurrent phase structure while supplying signs; record only and do not develop in Session 4."
+  - "ROUND2_CLUE: an operator/scattering realization might reinterpret the chiral pencil as one spectral determinant; record only and do not develop in Session 4."
+route_b_invocation_allowed: false

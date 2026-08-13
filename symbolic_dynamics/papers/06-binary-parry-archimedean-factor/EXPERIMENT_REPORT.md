@@ -170,7 +170,10 @@ The centered block has exactly \(s\)-independent eigenvalues
 unitary gauge. It therefore cannot create a vertical spectral divisor.
 
 **Diagnosis:** exact \(s\leftrightarrow1-s\) centering alone is not enough;
-the current chiral doubling is **PHASE_GAUGE_TRIVIAL**.
+the current chiral doubling is **PHASE_GAUGE_TRIVIAL**. The finite experiment
+checks the frozen block-preserving instance; the analytic identity
+\(A_t=G^{it}A_0\) proves the same no-motion result for every bounded \(K\) in
+the one-sided ansatz, including \([G,K]\ne0\).
 
 ### 3. K2 yields the real Archimedean Gamma factor on \(\Re s>0\);
 dimension controls partially select it, but scalar CLT universality remains
