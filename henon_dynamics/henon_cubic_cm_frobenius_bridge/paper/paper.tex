@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\title{From a Cubic H\'enon Channel to CM Frobenius Data:\\
+An Exact Arithmetic Bridge and Its Scope Boundary}
+\author{Liang Wang$^{*1}$\\
+\small $^{1}$School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Wuhan 430074, P.R. China\\
+\small $^*$Corresponding author}
+\date{Preprint, August 2026}
+\hypersetup{pdfauthor={Liang Wang},pdftitle={From a Cubic Henon Channel to CM Frobenius Data}}
+\begin{document}\maketitle
+\begin{abstract}
+Artificial prime damping makes a three-channel H\'enon--Kummer block
+determinant trace class but adds an external clock.  We replace that damping
+by the minimal geometric carrier of cubic symmetry, the elliptic curve
+\(E:y^2=x^3+1\).  Its order-three automorphism gives complex multiplication
+by \(\mathbb Z[\zeta_3]\), and its local polynomial is
+\(1-a_pT+pT^2\).  We prove directly that \(a_p=0\) for every good prime
+\(p\equiv2\pmod3\), because the cube map is bijective in that residue class.
+An exact certificate counts all good primes below 2,000, verifies every Hasse
+bound, and independently enumerates \(E(\mathbb F_{p^2})\) at four primes.
+This supplies a genuine arithmetic connection and intrinsic square-root
+normalization.  It does not supply a H\'enon periodic-orbit determinant: the
+resulting object is the CM elliptic \(L\)-function, with different local and
+global analytic data from the Riemann \(\xi\)-function.
+\end{abstract}
+
+\section{Introduction}
+The homogeneous area-preserving H\'enon route naturally produces a cubic
+phase.  A direct three-channel Kummer representation is gauge trivial; a
+nonfunctorial permutation survives locally but its raw prime divisor
+accumulates; and scalar damping repairs convergence only by inserting a new
+clock.  These failures suggest a change in mathematical object rather than
+another weight adjustment.
+
+The curve
+\begin{equation}\label{eq:E}
+ E:\quad y^2=x^3+1
+\end{equation}
+is the smallest smooth projective arithmetic object carrying the same cubic
+symmetry.  Over a field containing \(\zeta_3\), the map
+\((x,y)\mapsto(\zeta_3x,y)\) is an order-three endomorphism.  The curve has
+\(j=0\) and complex multiplication by \(\mathbb Z[\zeta_3]\); see
+\cite{Milne2026,Silverman2009}.  This paper asks what exact arithmetic data
+the cubic channel obtains from this completion and where the H\'enon claim
+must stop.
+
+We obtain a positive local theorem, a two-implementation numerical
+certificate, and a negative provenance conclusion.  The positive theorem is
+intrinsic arithmetic.  The negative conclusion prevents an elliptic
+\(L\)-function from being promoted coordinatewise to a Riemann or
+H\'enon determinant.
+
+\section{Local Frobenius factors}
+For a prime \(p>3\), let
+\[
+ N_p=\#E(\mathbb F_p),\qquad a_p=p+1-N_p.
+\]
+The local zeta numerator is
+\begin{equation}\label{eq:local}
+ L_p(T)=1-a_pT+pT^2.
+\end{equation}
+Its roots have absolute value \(\sqrt p\) by the elliptic-curve Riemann
+hypothesis, equivalently \(|a_p|\le2\sqrt p\).  This is intrinsic
+square-root normalization, not a fitted factor.
+
+\begin{theorem}[Inert-prime trace vanishing]\label{thm:inert}
+If \(p>3\) and \(p\equiv2\pmod3\), then \(a_p=0\) and
+\(L_p(T)=1+pT^2\).
+\end{theorem}
+\begin{proof}
+Let \(\chi\) be the quadratic character of \(\mathbb F_p\), extended by
+\(\chi(0)=0\).  Point counting gives
+\[
+ N_p=p+1+\sum_{x\in\mathbb F_p}\chi(x^3+1),
+ \quad
+ a_p=-\sum_x\chi(x^3+1).
+\]
+Because \(\gcd(3,p-1)=1\), the map \(x\mapsto x^3\) is a bijection of
+\(\mathbb F_p\).  Therefore
+\[
+ \sum_x\chi(x^3+1)=\sum_u\chi(u+1)=0,
+\]
+and the claim follows.
+\end{proof}
+
+For split primes \(p\equiv1\pmod3\), the trace need not vanish.  Direct
+counts give
+\[
+a_7=-4,\qquad a_{13}=2,\qquad a_{19}=8.
+\]
+Thus the cubic channel distinguishes the inert and split prime classes
+without a fitted classifier.
+
+\section{Quadratic-extension independent check}
+Let \(\alpha_p,\beta_p\) be the roots of \eqref{eq:local}.  Then
+\(\alpha_p+\beta_p=a_p\), \(\alpha_p\beta_p=p\), and
+\[
+ \alpha_p^2+\beta_p^2=a_p^2-2p.
+\]
+Hence
+\begin{equation}\label{eq:p2}
+ \#E(\mathbb F_{p^2})=p^2+1-(a_p^2-2p).
+\end{equation}
+
+The release code verifies \eqref{eq:p2} independently.  For each of
+\(p=5,7,11,13\), it chooses a quadratic nonsquare \(d\), represents
+\(\mathbb F_{p^2}\) as pairs in \(\mathbb F_p[u]/(u^2-d)\), and tests square
+status for every \(x\) in the extension.  This computation does not reuse
+the prime-field point list.
+
+\begin{table}[h]
+\centering
+\caption{Frozen local sentinels.}
+\begin{tabular}{rrrr}
+\toprule
+\(p\)&\(p\bmod3\)&\(a_p\)&\(L_p(T)\)\\\midrule
+5&2&0&\(1+5T^2\)\\
+7&1&-4&\(1+4T+7T^2\)\\
+11&2&0&\(1+11T^2\)\\
+13&1&2&\(1-2T+13T^2\)\\
+19&1&8&\(1-8T+19T^2\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{What the bridge proves}
+The construction solves the provenance defect of C40 at one level.  The
+factor \(p\) in \eqref{eq:local} and the size \(\sqrt p\) of Frobenius are
+forced by geometry.  The local traces are reproducible, and repetitions are
+controlled by the recurrence
+\(a_{p,r}=a_pa_{p,r-1}-pa_{p,r-2}\).
+
+It does not solve the H\'enon identification.  The curve \eqref{eq:E} is
+selected because it carries cubic symmetry, but no theorem maps primitive
+H\'enon unstable orbits to its Frobenius classes.  Its Euler product is the
+elliptic \(L\)-function of \(E\), not the Riemann zeta function.  Its degree,
+bad factors, gamma factor, and nontrivial zeros are correspondingly
+different.  This is a new arithmetic connection, not a Hilbert--P\'olya
+realization.
+
+\section{Evaluator audit}
+Route A credits reproducible Frobenius data at A1, but only weakly because
+H\'enon chronology is missing.  The classical elliptic Euler product earns
+an analytic determinant label at A2.  CM and square-root normalization give
+partial A3.  Cohomology is only an A4 formal hint relative to the H\'enon
+map.  The strict tuple is
+\[
+(A1_{\rm WEAK},A2_{\rm ANALYTIC\ DET},
+A3_{\rm PARTIAL\ ANALYTIC},A4_{\rm FORMAL\ HINT}).
+\]
+
+A limited Route-B audit stops at B1.  No H\'enon-derived Hilbert space,
+densely defined operator, domain, or spectral parameter map has been given.
+An arithmetic Euler product cannot substitute for those data.
+
+\section{Conclusion}
+The cubic H\'enon channel has a natural arithmetic completion, and that
+completion is nontrivial: the \(j=0\) CM curve supplies exact inert/split
+Frobenius behavior and intrinsic square-root normalization.  It also changes
+the target.  The next decisive question is finite and local: can any virtual
+combination of this \(H^1\) factor and Tate factors equal the Riemann local
+factor without inserting an exact negative copy?  A three-prime comparison
+will answer that question before any global operator is attempted.
+
+\bibliographystyle{plainnat}\bibliography{references}
+\end{document}

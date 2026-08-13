@@ -218,3 +218,28 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O75 | Scalar homogeneous Hénon Poisson-boundary anomaly | proved equivariant-triviality and standard-Hardy index obstruction | The homogeneous cocycle \(c(a,x)=\phi(ax)/\phi(x)\) is simultaneously trivialized on rational descent and idele scaling by \(\phi^{-1}\), so every prime-loop repetition has unit Hénon holonomy. The pre-Poisson hyperplane projections have trace-class difference and essential codimension zero. Exact shrinking intervals give cubic-chirp mean oscillation \(>51/100\), hence the physical and log-scaling symbols are not VMO and their standard Hardy commutators are noncompact. | Stops functorial scalar descendants and the standard restricted-Grassmannian determinant line. It does not infer an image index through a noninjective Poisson map, classify exotic semifinite polarizations, or obstruct nonscalar graded/projective/Kummer cocycles. | ../henon_homogeneous_boundary_index_obstruction/THEOREM_PACKAGE.md |
+## HCS-C38 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O76 | Direct finite Kummer/graded lifts of the homogeneous H\'enon coboundary | proved functorial gauge obstruction | Every representation, tensor, exterior, dual, parity, or virtual construction remains a coboundary and has identity closed holonomy at every repetition. | Stops functorial lifts only; a separately supplied monomial permutation or projective central extension is a new candidate. | ../henon_cubic_kummer_functorial_obstruction/README.md |
+## HCS-C39 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O77 | Raw three-channel Kummer prime product | proved interior-divisor accumulation | Every nonzero net virtual channel places zeros or poles at distance at most `2*pi/(3 log p)` from `s=1/2`; exact all-repetition cancellation forces the zero virtual character. | Stops fixed finite undamped channel products. Intrinsic conductor damping, infinite local complexes, and separately proved scattering ratios remain new candidates. | ../henon_kummer_character_divisor_obstruction/README.md |
+## HCS-C40 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O78 | Conductor interpretation of `p^(-sigma)` Kummer block damping | proved second-clock obstruction | The unramified three-channel representation has good-prime Artin conductor exponent zero, whereas any positive damping adds `sigma log p`; trace class occurs exactly for `sigma>1`. | Does not invalidate the resulting analytic Fredholm determinant. It rejects its promotion as source-native H\'enon evidence and leaves geometric cubic Frobenius normalization open. | ../henon_kummer_schatten_clock_obstruction/README.md |
+## HCS-C41 boundary
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O79 | Promotion of the cubic CM elliptic factor to a H\'enon/Riemann determinant | source-provenance obstruction | The j=0 curve supplies genuine degree-two Frobenius factors, but no theorem identifies its primes/repetitions with primitive H\'enon chronology; its global analytic data are elliptic, not Riemann. | Retains the CM factor as a positive arithmetic bridge. Finite cohomological supercombinations remain to be classified in C42. | ../henon_cubic_cm_frobenius_bridge/README.md |
+## HCS-C42 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O80 | Finite virtual span of H0, cubic-CM H1, and H2 Tate factors | proved three-prime local rigidity | The first logarithmic coefficients at p=5,7,11 have determinant -24 (absolute value 24) and force the unique Riemann-matching class `(1,0,0)`. Every nonzero CM exponent changes a frozen local factor. | Complete for constant rational/integral exponents in this finite Euler category. Infinite-rank, prime-dependent, and non-Euler scattering constructions are outside scope. | ../henon_cm_three_prime_supercancellation_obstruction/README.md |

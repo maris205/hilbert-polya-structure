@@ -1102,3 +1102,53 @@ trivial scalar pair. The strict tuple is
 A4_NATURAL_QUANTIZATION)** and the scalar anomaly is
 **ROUTE_A_REJECTED**. The next authorized door changes representation
 category to a nonscalar \(\mathbb Z/3\)-graded Kummer/Tate cubic lift.
+## HCS-C38 closure (2026-08-13)
+
+Candidate **HCS-C38** is rejected as a direct functorial Kummer escape and
+retained as a representation-stable gauge theorem; see
+[`../henon_cubic_kummer_functorial_obstruction/`](../henon_cubic_kummer_functorial_obstruction/).
+Its Route-A tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)**.  Every finite
+representation functor sends the scalar homogeneous coboundary to another
+coboundary, so every closed scaling-orbit holonomy is the identity.  Route B
+is not authorized.  The smallest open successor is a nonfunctorial monomial
+channel permutation.
+## HCS-C39 closure (2026-08-13)
+
+Candidate **HCS-C39** retains a nonfunctorial cubic channel permutation but
+is rejected as a raw all-prime determinant; see
+[`../henon_kummer_character_divisor_obstruction/`](../henon_kummer_character_divisor_obstruction/).
+The exact repetition characters have no nonzero common virtual kernel, and
+every surviving local channel contributes zeros or poles converging to the
+interior point \(s=1/2\).  Its tuple is **(A1_WEAK, A2_FAIL, A3_FAIL,
+A4_FORMAL_HINT)**.  A conductor-derived damping is the next open gate.
+## HCS-C40 closure (2026-08-13)
+
+Candidate **HCS-C40** supplies a genuine trace-class prime-block determinant
+for \(\sigma>1\), but is noncanonical as a H\'enon/Kummer construction; see
+[`../henon_kummer_schatten_clock_obstruction/`](../henon_kummer_schatten_clock_obstruction/).
+The exact criterion is \(T_\sigma\in\mathcal S_q\) iff \(\sigma q>1\).
+The good-prime Artin conductor exponent is zero, so the required damping is
+an external second clock.  The tuple is **(A1_WEAK,
+A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FORMAL_HINT)**.
+## HCS-C41 arithmetic bridge (2026-08-13)
+
+Candidate **HCS-C41** is retained as a genuine cubic arithmetic connection,
+not as a H\'enon determinant; see
+[`../henon_cubic_cm_frobenius_bridge/`](../henon_cubic_cm_frobenius_bridge/).
+For \(E:y^2=x^3+1\), every good prime \(p\equiv2\pmod3\) has \(a_p=0\),
+while split primes have nontrivial traces and all local factors carry
+intrinsic square-root normalization.  Its tuple is **(A1_WEAK,
+A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.
+No H\'enon orbit/Frobenius correspondence or Route-B operator is known.
+## HCS-C42 closure (2026-08-13)
+
+Candidate **HCS-C42** closes the finite Tate-plus-CM supercancellation road;
+see [`../henon_cm_three_prime_supercancellation_obstruction/`](../henon_cm_three_prime_supercancellation_obstruction/).
+At \(p=5,7,11\), first logarithmic Euler coefficients form a matrix of
+absolute determinant \(24\).  Equality with the Riemann local factor forces the unique
+virtual class \((A,B,C)=(1,0,0)\), deleting both the CM \(H^1\) and the
+degree-two Tate factor.  Its tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.  The finite cubic
+cohomology branch is scope-exhausted; broader infinite or non-Euler objects
+are not classified.
