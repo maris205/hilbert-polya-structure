@@ -61,4 +61,3 @@ not a census of hypothetical even-multiplicity tangencies.
 
 The random-DAG and randomized-forward-phase mechanisms are preregistered as
 `PROVES_TOO_MUCH` whenever they preserve the ledger and spectral motion.
-

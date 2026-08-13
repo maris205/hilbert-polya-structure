@@ -64,4 +64,3 @@ route_b_invocation_allowed: false
 
 Canonical evaluation:
 `evaluations/route_a/SD-C09/20260813T235900Z.yaml`.
-

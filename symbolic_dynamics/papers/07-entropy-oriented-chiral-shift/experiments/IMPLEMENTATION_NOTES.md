@@ -23,4 +23,3 @@ The apparent binary64 stabilization after `N=8` is not recorded as exact.
 The 150-decimal audit resolves the first-root shifts as approximately
 `3.52e-13` (`8 -> 16`), `3.66e-38` (`16 -> 32`), and `1.73e-100`
 (`32 -> 64`); the next shift is below the retained 150-digit computation.
-
