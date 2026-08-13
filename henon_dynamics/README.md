@@ -51,7 +51,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
-| [henon_mu3_augmented_euler_superproduct/](henon_mu3_augmented_euler_superproduct/) | Intrinsic order-three reversing Hénon symmetry, exact chronological augmentation Euler germ, complete split-prime coprimality controls through 73, and a first-prime conjugation obstruction | Positive A2 analytic germ; raw single-character Route-A promotion rejected; self-dual Eisenstein replacement selected |
+| [henon_mu3_augmented_euler_superproduct/](henon_mu3_augmented_euler_superproduct/) | C43: intrinsic order-three reversing Hénon symmetry, exact chronological augmentation Euler germ, complete split-prime coprimality controls through 73, and a first-prime conjugation obstruction | Positive A2 analytic germ; raw promotion rejected; finite Tate--CM repair closed; C44 fixed-field then Hankel-rank gate selected |
 | [henon_homogeneous_boundary_index_obstruction/](henon_homogeneous_boundary_index_obstruction/) | Homogeneous cubic Hénon scaling cocycle, exact equivariant trivialization, zero pre-Poisson essential codimension, and non-VMO Hardy obstruction | Scalar anomaly Route-A rejected; nonscalar cubic grading selected |
 | [henon_mellin_parity_obstruction/](henon_mellin_parity_obstruction/) | Reciprocal and critical-line-unitary H6 Mellin symbol with a certified off-critical strip divisor | Unrenormalized candidate Route-A rejected; homogeneous boundary-index pivot open |
 | [adelic_henon_theta_route/](adelic_henon_theta_route/) | Global adelic H6 unitary, theta stabilizer, local noncompactness no-go, static rank-two range bound, and infinite scaling-orbit obstruction | Route-A exploratory; a scaling-covariant Poisson anomaly is the next big gate |

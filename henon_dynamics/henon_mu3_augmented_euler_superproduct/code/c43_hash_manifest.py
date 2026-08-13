@@ -18,13 +18,13 @@ REQUIRED = {
     "README.md", "DERIVATION_PACKAGE.md", "EXPERIMENT_PLAN.md",
     "EXPERIMENT_TRACKER.md", "IMPLEMENTATION_CHECKLIST.md", "PAPER_PLAN.md",
     "NARRATIVE_REPORT.md", "SOURCE_AUDIT.md", "results/RESULTS.md",
-    "results/c38_certificate.json", "results/independent_check.json",
+    "results/c43_certificate.json", "results/independent_check.json",
     "results/TEST_REPORT.md", "paper/main.tex", "paper/main.pdf",
     "paper/references.bib", "paper/math_commands.tex",
-    "code/c38_producer.py", "code/c38_checker.py", "code/test_c38.py",
-    "code/run_c38.sh", "code/c38_hash_manifest.py",
+    "code/c43_producer.py", "code/c43_checker.py", "code/test_c43.py",
+    "code/run_c43.sh", "code/c43_hash_manifest.py",
     "route_a_evaluation.yaml", "paper/COMPILATION_REPORT.md",
-    "evaluations/route_a/HCS-C38/20260813T210000Z.yaml",
+    "evaluations/route_a/HCS-C43/20260813T210000Z.yaml",
 }
 
 

@@ -23,8 +23,16 @@ that the first augmentation coefficient is nonreal.  The raw product thus
 fails conjugation symmetry and is rejected by Route A despite its valid
 analytic germ and natural quantization.
 
-The only serious continuation is not a repair of this product.  It is a new
-self-dual object over the Eisenstein field that pairs the additive character
-with its inverse and treats split and inert places together.  Such an object
-must supply a functional equation and fixed-rank cohomological cancellation
-before any zero comparison is attempted.
+The finite-dimensional Eisenstein repair is already closed by the companion
+C41--C42 controls: a \(j=0\) CM elliptic carrier is genuine arithmetic, but a
+finite Tate--CM virtual combination matches the Riemann local factor only by
+deleting its new \(H^1\).  The remaining large door is not another local
+factor repair.  It asks whether the conjugate-paired full-kernel moments, over
+split and inert places together, form a pure self-dual compatible system over
+one fixed number field, with uniformly bounded rank and conductor.  The first
+gate is algebraic descent: a fixed coefficient field uniformly bounds the
+degrees of all paired first moments.  Only after that gate survives does a
+fixed-rank system force a uniform recurrence, equivalently bounded Hankel
+rank, for every chronological moment sequence.  Unbounded coefficient degree
+or unbounded Hankel rank closes this Eisenstein route; passing both authorizes
+the functional-equation construction.

@@ -70,9 +70,16 @@ For every frozen prime \(p\):
 `STOP_SYMMETRY_REDUCTION` if the two nontrivial sectors are not exactly paired
 or the augmentation trace is not chronological.
 
-The only permitted replacement candidate is an independently defined
-self-dual Eisenstein object.  Post hoc conjugate multiplication is a control,
-not a Route-A promotion.
+The finite Tate-plus-\(j=0\)-CM replacement is excluded by the source-locked
+C41--C42 rigidity result.  The only permitted replacement candidate is a
+pure self-dual compatible system, built from the conjugate-paired Hénon
+Fourier--Deligne moments at both split and inert places, over one fixed
+coefficient field and with rank and conductor bounded independently of the
+prime.  Its first gate is a uniform bound on the algebraic degrees of the
+paired first moments; only then is a uniform Hankel-rank theorem for all
+moments admissible.  The inert clock is \(\log N\mathfrak p\), not an averaged
+rational-prime clock.  Post hoc conjugate multiplication is a control, not a
+Route-A promotion.
 
 ## Reproducibility
 

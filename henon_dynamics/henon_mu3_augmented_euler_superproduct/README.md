@@ -1,4 +1,4 @@
-# HCS-C38 — Hénon \(\mu_3\) Augmentation Euler Superproduct
+# HCS-C43 — Hénon \(\mu_3\) Augmentation Euler Superproduct
 
 This project constructs a genuinely non-scalar order-three reversing
 symmetry of the homogeneous area-preserving Hénon generating kernel.  Its
@@ -45,17 +45,26 @@ degree.
 
 Overall: `ROUTE_A_REJECTED`.  Route B is not authorized.
 
-The only serious successor is a separately constructed self-dual Eisenstein
-object pairing \(\psi\) and \(\psi^{-1}\), with a global functional equation
-and fixed-rank cohomological cancellation.  Multiplication by the conjugate
-factor alone is not such an object.
+The companion C41--C42 controls already close the obvious repair by adjoining
+the \(j=0\) CM elliptic motive and taking a finite virtual combination with
+Tate factors: matching the Riemann local factor forces deletion of the new
+geometry.  The only serious successor is therefore source-native and
+testable: pair the full-kernel moments with their conjugates, include split
+and inert places, and ask whether they descend to a pure self-dual compatible
+system whose coefficient field, rank, and conductor are bounded independently
+of \(p\).  The first decisive gate is coefficient-field descent: a fixed
+number field would uniformly bound the algebraic degrees of the paired first
+moments.  Only if that survives should one test uniform Hankel rank for the
+full moment sequences.  The frozen local degrees already point toward rank
+growth and hence a no-go.  Post hoc multiplication by a conjugate factor is
+not such a construction.
 
 ## Reproduce
 
 From this directory:
 
 ~~~bash
-./code/run_c38.sh
+./code/run_c43.sh
 ~~~
 
 The default runner is read-only: it regenerates artifacts under a temporary

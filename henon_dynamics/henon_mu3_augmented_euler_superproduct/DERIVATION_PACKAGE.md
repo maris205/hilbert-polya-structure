@@ -585,16 +585,31 @@ Route B is not authorized.
 
 ## Decisive Next Gate
 
-The raw single-character augmentation is stopped.  There is one large
-replacement question:
+The raw single-character augmentation is stopped.  The companion C41--C42
+chain also closes the obvious finite-dimensional Eisenstein repair: the
+intrinsic \(j=0\) CM factor is arithmetic but not Hénon-native, and within
+the finite span of its \(H^1\) and the two Tate pieces, matching the Riemann
+local factor at three primes forces the CM coefficient to vanish.  There is
+one larger replacement question left:
 
-> Over the Eisenstein field, can one build a single self-dual object pairing
-> \(\psi\) with \(\psi^{-1}\), including split and inert places, whose fixed
-> cohomological rank supplies a functional equation and cancels the growing
-> local sector complexity for structural reasons?
+> After pairing \(\psi\) with \(\psi^{-1}\) and including split and inert
+> places, can the two-step Hénon Fourier--Deligne moment sequences descend to
+> a pure self-dual compatible system over a fixed coefficient field, with
+> rank and conductor bounded
+> independently of \(p\), with Frobenius power traces equal to the
+> chronological augmentation moments?
 
-A positive answer must construct that global object before inspecting its
-zeros.  Merely multiplying the raw product by its conjugate repairs real-type
-symmetry but doubles local degree and does not supply a functional equation.
-If no fixed-rank self-dual globalization exists, the \(\mu_3\) Euler route
-closes here.
+A compatible system over one number field \(E\) first forces every paired
+moment \(B_{\mathfrak p,1}=A_{\mathfrak p,1}(\psi)+
+A_{\mathfrak p,1}(\psi^{-1})\) to have degree at most \([E:\mathbb Q]\).
+Thus coefficient-field descent precedes operator rank.  If that gate
+survives, a rank-\(R\) system forces every local moment sequence to satisfy a
+recurrence of order at most \(R\), equivalently a uniform Hankel-rank bound.
+The present coprimality ledger shows reduced degrees growing through
+\(50/48\), but only at finitely many primes and before conjugate pairing.  The
+next theorem is therefore staged but decisive: prove unbounded paired trace
+degrees and stop; otherwise prove or refute uniform paired Hankel rank.
+It is not enough to package each time \(n\) separately: those phase
+cohomologies have rank \(4^n\).  Merely multiplying the raw product by its
+conjugate repairs real-type symmetry but doubles local degree and supplies no
+functional equation.

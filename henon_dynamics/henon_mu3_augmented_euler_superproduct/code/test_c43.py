@@ -9,11 +9,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-import c38_checker as checker
+import c43_checker as checker
 
 
 PROJECT = Path(__file__).resolve().parents[1]
-CERTIFICATE = PROJECT / "results" / "c38_certificate.json"
+CERTIFICATE = PROJECT / "results" / "c43_certificate.json"
 
 
 def rehash(cert: dict) -> dict:
@@ -24,7 +24,7 @@ def rehash(cert: dict) -> dict:
     return cert
 
 
-class C38Tests(unittest.TestCase):
+class C43Tests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.cert = json.loads(CERTIFICATE.read_text(encoding="utf-8"))

@@ -43,4 +43,7 @@ This is not promoted to an all-prime coprimality theorem.
 - no global continuation or functional equation is claimed;
 - no Hilbert--Pólya operator is claimed;
 - local self-inversivity is not a global Riemann functional equation;
-- conjugate completion is a new candidate and remains unevaluated.
+- post hoc conjugate completion is not accepted as a construction;
+- the finite Tate-plus-\(j=0\)-CM repair is closed by C42;
+- the only open successor is the prime-uniform compatible-system/Hankel-rank
+  gate for the conjugate-paired full-kernel moments.

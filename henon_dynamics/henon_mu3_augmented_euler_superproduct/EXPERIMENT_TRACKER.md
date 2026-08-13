@@ -1,6 +1,6 @@
 # Experiment Tracker
 
-## Run C38-0 — Discovery Pilot
+## Run C43-0 — Discovery Pilot
 
 - Status: `COMPLETED / NONRELEASE`
 - Method: floating-point sector spectra for split primes through 61.
@@ -8,7 +8,7 @@
   numerical common eigenvalue.
 - Use: discovery only.  No theorem or released result depends on this run.
 
-## Run C38-1 — Exact Modular Pilot
+## Run C43-1 — Exact Modular Pilot
 
 - Status: `COMPLETED / PRECERTIFICATE`
 - Method: FLINT characteristic polynomials over the smallest
@@ -19,7 +19,7 @@
 - Next action: replace the pilot with a frozen producer/checker and retain only
   the declared nine-prime release ledger.
 
-## Run C38-2 — Release Certificate
+## Run C43-2 — Release Certificate
 
 - Status: `PASS / PRE-COMMIT FREEZE`.
 - Exact ledger: every split prime through 73.

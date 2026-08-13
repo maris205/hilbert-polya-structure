@@ -16,17 +16,17 @@ fi
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
-"$PYTHON_BIN" "$PROJECT_DIR/code/c38_producer.py" --output "$TMP_DIR/c38_certificate.json"
-cmp "$TMP_DIR/c38_certificate.json" "$PROJECT_DIR/results/c38_certificate.json"
+"$PYTHON_BIN" "$PROJECT_DIR/code/c43_producer.py" --output "$TMP_DIR/c43_certificate.json"
+cmp "$TMP_DIR/c43_certificate.json" "$PROJECT_DIR/results/c43_certificate.json"
 
-"$PYTHON_BIN" "$PROJECT_DIR/code/c38_checker.py" \
-  "$PROJECT_DIR/results/c38_certificate.json" \
+"$PYTHON_BIN" "$PROJECT_DIR/code/c43_checker.py" \
+  "$PROJECT_DIR/results/c43_certificate.json" \
   --output "$TMP_DIR/independent_check.json"
 cmp "$TMP_DIR/independent_check.json" "$PROJECT_DIR/results/independent_check.json"
 
-"$PYTHON_BIN" -m unittest discover -s "$PROJECT_DIR/code" -p 'test_c38.py'
+"$PYTHON_BIN" -m unittest discover -s "$PROJECT_DIR/code" -p 'test_c43.py'
 if [[ "$REFRESH_MANIFEST" -eq 1 ]]; then
-  "$PYTHON_BIN" "$PROJECT_DIR/code/c38_hash_manifest.py" --write
+  "$PYTHON_BIN" "$PROJECT_DIR/code/c43_hash_manifest.py" --write
 else
-  "$PYTHON_BIN" "$PROJECT_DIR/code/c38_hash_manifest.py"
+  "$PYTHON_BIN" "$PROJECT_DIR/code/c43_hash_manifest.py"
 fi

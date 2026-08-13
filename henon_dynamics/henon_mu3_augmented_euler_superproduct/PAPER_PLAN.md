@@ -26,5 +26,5 @@ rigorously disqualified from Route A by a nonreal first prime coefficient.
 4. Chronological trace formula and Euler half-plane.
 5. Exact modular noncancellation certificate.
 6. First-prime conjugation obstruction.
-7. Route-A decision and the Eisenstein self-dual next gate.
+7. Route-A decision, the finite CM firewall, and the coefficient-field/rank gate.
 8. Appendix: determinant normalization and reproducibility details.

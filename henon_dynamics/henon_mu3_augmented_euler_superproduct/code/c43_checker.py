@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent, type-strict checker for HCS-C38.
+"""Independent, type-strict checker for HCS-C43.
 
 This checker does not import the producer and does not use FLINT.  It rebuilds
 the frozen matrices with Python integer arithmetic, computes characteristic
@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 
-SCHEMA = "hcs-c38-certificate-v1"
+SCHEMA = "hcs-c43-certificate-v1"
 CONTROL_PRIMES = (7, 13, 19, 31, 37, 43, 61, 67, 73)
 
 
@@ -313,6 +313,8 @@ def source_lock(project_root: Path) -> list[dict[str, str]]:
         "phase3_hcs_c32_artin_schreier_quantum_trace/THEOREM_PACKAGE.md",
         "phase3_hcs_c32_artin_schreier_quantum_trace/DERIVATION_PACKAGE.md",
         "henon_homogeneous_boundary_index_obstruction/DERIVATION_PACKAGE.md",
+        "henon_cubic_cm_frobenius_bridge/results/c41_certificate.json",
+        "henon_cm_three_prime_supercancellation_obstruction/results/c42_certificate.json",
         "skills/route-a-evaluator.md",
     )
     return [
@@ -325,7 +327,7 @@ def expected_payload(project_root: Path) -> dict[str, Any]:
     controls = [rebuild_control(p) for p in CONTROL_PRIMES]
     return {
         "material_passport": {
-            "candidate_id": "HCS-C38",
+            "candidate_id": "HCS-C43",
             "project": "henon_mu3_augmented_euler_superproduct",
             "ai_assistance_disclosed": True,
             "evidence_policy": "exact arithmetic and proved analytic bounds; no zero-table data",
@@ -391,9 +393,10 @@ def expected_payload(project_root: Path) -> dict[str, Any]:
             "analytic_nonzero_half_plane": "PROVED",
             "bounded_rank_local_cancellation_from_mu3_symmetry": "REFUTED_ON_FROZEN_CONTROLS",
             "raw_single_character_conjugation_symmetry": "REFUTED",
+            "finite_tate_cm_riemann_repair": "CLOSED_BY_HCS_C42_SOURCE_LOCK",
             "global_functional_equation": "OPEN",
             "global_RH_divisor_match": "NOT_TESTABLE",
-            "next_gate": "EISENSTEIN_DUAL_CHARACTER_GLOBALIZATION_OR_STOP",
+            "next_gate": "FULL_KERNEL_FIXED_COEFFICIENT_FIELD_THEN_HANKEL_RANK_OR_STOP",
         },
         "scope": {
             "rh_proved": False,
@@ -471,7 +474,7 @@ def main() -> int:
     project_root = Path(__file__).resolve().parents[1]
     gates, passed = audit_certificate(cert, project_root)
     report = {
-        "schema": "hcs-c38-independent-check-v1",
+        "schema": "hcs-c43-independent-check-v1",
         "certificate_sha256": sha256_file(cert_path),
         "gates": gates,
         "passed_gates": sum(row["status"] == "PASS" for row in gates),
