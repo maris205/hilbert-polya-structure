@@ -1,0 +1,97 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C45
+candidate_definition: "ordinary Galois norm determinant together with its field-degree-normalized logarithmic Euler root for the conjugate-paired full-kernel Henon augmentation"
+family: "homogeneous area-preserving Henon map, finite-field Fourier-cubic quantization, and Galois normalized trace"
+phase_space: "split Eisenstein finite fibres with chronological two-step Henon kernel"
+dynamics: "T_p=U_p^2 with order-three reversing symmetry and all Galois-conjugate additive characters"
+parameters: "none fitted"
+parameter_provenance: "HCS-C43 determinant and HCS-C44 trace-field theorem"
+clock: "log Norm(pfrak)=log p at split primes"
+normalization: "G_p(z)=exp(d_p^(-1) Log_0 Norm_{L_p/Q} E_p(z)), d_p=(p-1)/2"
+determinant_convention: "canonical normalized logarithmic norm on |z|<1; global product G_p(p^-s)"
+orbit_cutoff: "all-prime analytic theorem; 45 first-moment controls p<=499 and 11 exact n=2 controls p<=97"
+precision: "exact arithmetic and symbolic majorants"
+training_data: "none"
+forbidden_data: "Riemann zeros, fitted scales, branch choices away from Log_0, natural-boundary inference, averaged chronology"
+code_commit: f4d028442796e4c6cbc7ad5e4d5934943b5afdea
+artifact_paths:
+  - THEOREM_PACKAGE.md
+  - DERIVATION_PACKAGE.md
+  - results/c45_certificate.json
+  - results/independent_check.json
+  - paper/main.pdf
+
+source_lock:
+  object: "paired C43 augmentation determinant and its complete Galois norm"
+  clock: "log p at split primes"
+  normalization: "field-degree-normalized Log_0 root with value one at the origin"
+  determinant_convention: "ordinary norm N_p is a rational determinant; normalized root G_p is an analytic normalized-log Euler germ, not yet an ordinary rational or Fredholm determinant"
+  cutoff: "symbolic all-prime theorem with exact frozen controls"
+  precision: "exact integer/rational arithmetic"
+  allowed_data: "C43-C44 certificates, exact chronological phases, Deligne majorant"
+  forbidden_data: "zero tables, post-hoc rational roots, prime-dependent clock changes, claimed continuation"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "all logarithmic moments are exact chronological Henon path sums before Galois averaging"
+  strongest_failure: "primes are arithmetic fibres, not primitive cycles of a single real map"
+  metrics:
+    primitive_definition: "arithmetic twisted repetition"
+    repetition_rule: "exact trace logarithm"
+    prime_orbit_correspondence: false
+    chronology_averaged: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "the ordinary norm is a rational determinant, while normal convergence gives its normalized-log root a canonical holomorphic nonzero Euler germ on Re(s)>1/2"
+  strongest_failure: "local normalized roots are not yet ordinary determinants and no continuation is proved"
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: "none; theorem is all-prime"
+    precision_drift: "none; exact arithmetic"
+    control_margin: "first moment decays exactly as 12/(p-1), higher series starts at n=2"
+  artifacts:
+    - results/c45_certificate.json
+    - results/independent_check.json
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "the canonical p^-s germ reaches the Riemann critical abscissa from the right, has rational conjugation symmetry, and retains source-native normalization"
+  strongest_failure: "the canonical-clock local divisor line is Re(s)=0 rather than Re(s)=1/2; integral divisor, Gamma factor, functional equation, continuation, and Riemann counting law remain open"
+  metrics:
+    conjugation_symmetry: PROVED_LOCALLY
+    global_functional_equation: OPEN
+    gamma_factor: OPEN
+    meromorphic_continuation: OPEN
+    riemann_von_mangoldt_law: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: "the normalized moments arise from the same unitary two-step Henon quantization and exact Galois orbit"
+  strongest_failure: "no single global self-adjoint operator or validated normalized-trace algebra has yet been built"
+  metrics:
+    finite_place_unitarity: true
+    chronology_preserved: true
+    global_operator: false
+    route_b_ready: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+overall_status: ROUTE_A_EXPLORATORY
+route_b_invocation_allowed: false
+next_gate: "HCS-C46: exact divisor-integrality/perfect-power test for the normalized local root, beginning with p=7"

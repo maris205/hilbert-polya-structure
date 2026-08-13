@@ -27,13 +27,19 @@ henon_kummer_character_divisor_obstruction - C39 complete - Every nonzero virtua
 henon_kummer_schatten_clock_obstruction - C40 complete - Prime damping has a sharp Schatten threshold but introduces a noncanonical second clock absent from Kummer conductor data.
 henon_cubic_cm_frobenius_bridge - C41 complete - The cubic channel admits an intrinsic j=0 CM elliptic Frobenius completion, but its L-function is not a Henon/Riemann determinant.
 henon_cm_three_prime_supercancellation_obstruction - C42 complete - Three local primes force every finite Tate-plus-CM Riemann match to delete the cubic H1 factor.
-henon_entropy_von_mangoldt_bridge - C43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
-henon_instability_amplitude_overconvergence - C44 complete - Raw instability Euler factors have exact prime-power amplitudes but the full trace overconverges on the critical line.
-henon_pressure_normalized_prime_orbit_bridge - C45 complete - Bowen-pressure normalization gives the same H6 survivor entropy one and a source-backed e^T/T prime-orbit law.
-henon_integral_monodromy_units - C46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
-henon_repetition_label_classification - C47 complete - Rational repetition-compatible scalar labels are exactly monomials, so H6 algebraic units cannot become rational primes.
+henon_entropy_von_mangoldt_bridge - HCS-P43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
+henon_instability_amplitude_overconvergence - HCS-P44 complete - Raw instability Euler factors have exact prime-power amplitudes but the full trace overconverges on the critical line.
+henon_pressure_normalized_prime_orbit_bridge - HCS-P45 complete - Bowen-pressure normalization gives the same H6 survivor entropy one and a source-backed e^T/T prime-orbit law.
+henon_integral_monodromy_units - HCS-P46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
+henon_repetition_label_classification - HCS-P47 complete - Rational repetition-compatible scalar labels are exactly monomials, so H6 algebraic units cannot become rational primes.
 
-- [Batch Review C43--C47](BATCH_REVIEW_C43_C47.md) — entropy mass, raw-clock
+`P43`--`P47` are the unique registry aliases for a concurrently frozen
+pressure/orbit lane.  Those project bundles retain legacy internal
+`HCS-C43`--`HCS-C47` strings to preserve their published hashes; the
+unqualified IDs `C43`--`C48` in this repository belong to the full-kernel
+cubic lane listed in the theorem table below.
+
+- [Pressure-lane Batch Review HCS-P43--P47](BATCH_REVIEW_C43_C47.md) — entropy mass, raw-clock
   obstruction, pressure normalization, integral monodromy, and the final
   rational-label classification.
 
@@ -60,6 +66,11 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mu3_fixed_coefficient_field_obstruction/](henon_mu3_fixed_coefficient_field_obstruction/) | C44: every paired first Hénon moment generates the full real cyclotomic field, with degree \((p-1)/2\) for every split prime | Fixed-coefficient compatible-system repair rejected |
+| [henon_mu3_galois_norm_rank_obstruction/](henon_mu3_galois_norm_rank_obstruction/) | C45: ordinary Galois norm has unbounded virtual rank, while its canonical normalized logarithmic root gives a holomorphic nonzero Euler germ on \(\Re s>1/2\) | Route-A exploratory analytic germ |
+| [henon_mu3_normalized_root_branch_obstruction/](henon_mu3_normalized_root_branch_obstruction/) | C46: exact \(p=7\) norm has finite divisor orders \(\pm2\), forcing cubic branching of the normalized root | Ordinary determinant promotion rejected |
+| [henon_mu3_normalized_trace_operator_gate/](henon_mu3_normalized_trace_operator_gate/) | C47: the normalized germ is exactly a fourth-order regularized graded determinant relative to the field-normalized semifinite trace, with three chronological counterterms | Positive A2 operator-category realization on \(\Re s>1/2\); not a classical Fredholm determinant |
+| [henon_mu3_genus4_second_moment/](henon_mu3_genus4_second_moment/) | C48: the second moment is a genus-four Frobenius trace, extending the Euler germ and a sixth-order normalized-semifinite determinant to \(\Re s>1/3\) | Strongest current analytic advance; A3 still partial |
 | [henon_mu3_augmented_euler_superproduct/](henon_mu3_augmented_euler_superproduct/) | C43: intrinsic order-three reversing Hénon symmetry, exact chronological augmentation Euler germ, complete split-prime coprimality controls through 73, and a first-prime conjugation obstruction | Positive A2 analytic germ; raw promotion rejected; finite Tate--CM repair closed; C44 fixed-field then Hankel-rank gate selected |
 | [henon_homogeneous_boundary_index_obstruction/](henon_homogeneous_boundary_index_obstruction/) | Homogeneous cubic Hénon scaling cocycle, exact equivariant trivialization, zero pre-Poisson essential codimension, and non-VMO Hardy obstruction | Scalar anomaly Route-A rejected; nonscalar cubic grading selected |
 | [henon_mellin_parity_obstruction/](henon_mellin_parity_obstruction/) | Reciprocal and critical-line-unitary H6 Mellin symbol with a certified off-critical strip divisor | Unrenormalized candidate Route-A rejected; homogeneous boundary-index pivot open |
