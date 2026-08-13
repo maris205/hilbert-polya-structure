@@ -1347,6 +1347,8 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** and overall
 
 ## HCS-P48 Six-Exponentials pressure-label obstruction (2026-08-13)
 
+Unlike the immutable P43--P47 bundles, this continuation was born with its
+pressure-lane alias and makes no claim to the full-kernel `HCS-C48` key.
 Candidate **HCS-P48** audits the final scalar survivor from HCS-P47; see the
 [HCS-P48 project](../henon_pressure_label_six_exponentials_obstruction/).
 The exact primitive period \(1,3,4\) survivor multipliers have minimal
@@ -1364,5 +1366,5 @@ at least one of \(L_1^h,L_3^h,L_4^h\) to be transcendental. Thus no common
 real exponent, including the pressure root, turns every primitive H6 orbit
 label into a rational prime. The tuple for this termwise lane is
 **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with
-overall **ROUTE_A_REJECTED**. The C45 dynamical prime-orbit counting theorem
+overall **ROUTE_A_REJECTED**. The HCS-P45 dynamical prime-orbit counting theorem
 and collective packet/trace routes remain separate open objects.

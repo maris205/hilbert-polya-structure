@@ -261,8 +261,9 @@ trace and moves the Euler and sixth-order determinant domain to
 \(\Re s>1/3\). These are retained positive structures rather than added to
 the obstruction list. Their common open wall is the third chronological
 moment and the middle cohomology of its \((2,3)\) threefold.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P47`; its
-immutable bundles retain legacy internal C-series provenance strings.
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P48`; the
+immutable P43--P47 bundles retain legacy internal C-series provenance
+strings, while P48 was born namespaced.
 
 ## HCS-P44 additions (pressure-lane registry alias)
 
@@ -281,3 +282,9 @@ immutable bundles retain legacy internal C-series provenance strings.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O87 | Rational scalar transforms of H6 multipliers preserving every orbit repetition | proved functorial classification obstruction | The identity `R(X^r)=R(X)^r` forces every nonzero rational function to be the monomial `X^k`. Applied to P46's algebraic-unit multipliers, every rational scalar label is again a unit and cannot be a rational prime. | Complete only for rational identities on the multiplier torus. Continuous real powers, nonlocal orbit packets, prime ideals, cyclic resultants, and distributional traces remain outside scope. | ../henon_repetition_label_classification/README.md |
+
+## HCS-P48 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O88 | Common pressure-power labels \(P_\gamma=|\Lambda_\gamma|^h\) as rational primes for every primitive H6 orbit | proved three-orbit transcendence/unit obstruction | Exact primitive period \(1,3,4\) multipliers generate a degree-32 compositum, so their positive logarithms are \(\mathbb Q\)-linearly independent. For rational \(h>0\), no power is a rational integer greater than one because each multiplier is a unit. For irrational \(h\), Six Exponentials forces at least one of the three labels to be transcendental. | Stops the universal termwise rational-prime interpretation for every common real exponent, including the pressure root. It does not identify which label fails for transcendental \(h\), revoke the HCS-P45 prime-orbit counting law, or obstruct prime ideals, Galois packets, cyclic resultants and collective distributional/scattering traces. | ../henon_pressure_label_six_exponentials_obstruction/README.md |
