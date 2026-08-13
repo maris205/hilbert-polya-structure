@@ -1070,3 +1070,35 @@ candidate is **ROUTE_A_REJECTED**. The authorized pivot is the homogeneous
 map \(H_0(q,p)=(-6q^2-p,q)\), whose strip-safe gamma symbol reduces the next
 gate to a sharp dichotomy: a nontrivial Poisson-boundary index/anomaly or an
 exact coboundary closure theorem.
+
+## HCS-C37 homogeneous Hénon boundary-index obstruction (2026-08-13)
+
+Candidate **HCS-C37** closes the scalar anomaly fork opened by C36; see
+[the C37 project](../henon_homogeneous_boundary_index_obstruction/).
+
+For \(P_0(x)=2x^3\), the chronological scaling cocycle
+
+\[
+c(a,x)=\psi(P_0(ax))\psi(P_0(x))^{-1}
+\]
+
+is simultaneously trivialized on rational descent and on the full idele
+scaling lift by the gauge \(\psi(P_0(x))^{-1}\). Hence every scaling-site
+prime loop and repetition has scalar Hénon holonomy one. On the intrinsic
+pre-Poisson boundary pair, the hyperplane projection difference is trace
+class with essential codimension zero. Passing this conclusion through a
+noninjective Poisson map would require an additional kernel theorem and is
+not asserted.
+
+The natural anomaly escape also fails: exact shrinking intervals give a
+normalized \(L^2\) mean-oscillation lower bound \(51/100\) for the cubic
+chirp, both in physical and logarithmic scaling coordinates. The chirp is
+not VMO, its standard Hardy commutator is noncompact, and it is outside the
+restricted unitary group. Thus no standard determinant-line index exists.
+
+The homogeneous Mellin channels remain strip-safe but normalize to the
+trivial scalar pair. The strict tuple is
+**(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_NATURAL_QUANTIZATION)** and the scalar anomaly is
+**ROUTE_A_REJECTED**. The next authorized door changes representation
+category to a nonscalar \(\mathbb Z/3\)-graded Kummer/Tate cubic lift.
