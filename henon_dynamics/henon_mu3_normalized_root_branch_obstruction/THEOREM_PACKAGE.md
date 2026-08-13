@@ -92,8 +92,10 @@ algorithm gives
 \]
 
 Hence the same gcds are one over \(\mathbf Q\).  The polynomials are mutually
-coprime and squarefree.  Every zero of \(N_7\) has order \(+2\), and every
-pole has order \(-2\).
+coprime and squarefree.  Every finite zero of \(N_7\) has order \(+2\), and
+every finite pole has order \(-2\).  At infinity the valuation is \(-12\),
+consistent with the virtual degree in (7); it is divisible by three and is
+not the source of the obstruction.
 
 ## 4. Non-cube and branch theorem
 
@@ -106,12 +108,12 @@ The rational function \(N_7\) is not a cube in \(\mathbf C(z)\), hence not in
 G_7(z)=\exp\!\left(\frac13\Log_0N_7(z)\right)
 \]
 
-has local order \(+2/3\) at every zero and \(-2/3\) at every pole of
-\(N_7\).  It cannot extend through any such point as a single-valued
+has local order \(+2/3\) at every finite zero and \(-2/3\) at every finite
+pole of \(N_7\).  It cannot extend through any such point as a single-valued
 meromorphic scalar function.
 
 Proof.  Every divisor valuation of a cube is divisible by three, whereas (8)
-shows that the valuations of \(N_7\) are \(\pm2\).  A single-valued
+shows that the finite valuations of \(N_7\) are \(\pm2\).  A single-valued
 meromorphic function has integral local order.
 
 All these divisor points lie on \(|z|=1\), because the factors arise from
@@ -136,4 +138,3 @@ It does not rule out:
 - or a different Hénon dynamics.
 
 No global natural-boundary theorem is claimed.
-

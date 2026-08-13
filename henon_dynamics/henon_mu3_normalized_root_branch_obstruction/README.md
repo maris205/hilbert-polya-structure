@@ -12,8 +12,10 @@ N_7(z)=\frac{P_{18}(z)^2}{49P_{12}(z)^2},
 \]
 
 where \(P_{18}\) and \(P_{12}\) are squarefree and coprime over \(\mathbf Q\).
-Every zero and pole therefore has order \(\pm2\), not divisible by three.
-Consequently \(N_7\) is not a cube and
+Every finite zero and pole therefore has order \(\pm2\), not divisible by
+three.  (At infinity the valuation is \(-12\), which is divisible by three
+and does not affect the finite-divisor obstruction.)  Consequently \(N_7\)
+is not a cube and
 
 \[
 G_7(z)=N_7(z)^{1/3}
@@ -40,6 +42,7 @@ HCS-C47 tests that operator category directly.
  \mathrm{A4\_NATURAL\_QUANTIZATION}).
 \]
 
-The A2 label refers to the surviving C45 analytic germ; A3 fails for its
-ordinary single-valued determinant promotion.  Route B is not authorized.
-
+The A2 label is inherited from the ordinary rational norm determinant and the
+surviving C45 normalized-log Euler germ; it does not promote the root itself
+to an ordinary determinant.  A3 fails for that ordinary single-valued
+promotion.  Route B is not authorized.

@@ -17,7 +17,9 @@ N_7=P_{18}^2/(49P_{12}^2).
 \]
 
 Modular gcds certify that both polynomials are squarefree and do not share a
-root.  The norm divisor therefore has exact multiplicities \(\pm2\).
+root.  The finite norm divisor therefore has exact multiplicities \(\pm2\).
+The valuation at infinity is \(-12\), which is divisible by three; the
+non-cube theorem is forced by the finite divisor.
 
 ## Obstruction
 
@@ -28,8 +30,8 @@ determinant.  The obstruction is exact at the first split prime.
 
 ## Scientific interpretation
 
-The negative result does not destroy the critical-boundary germ.  It identifies
-its correct next category: a normalized-trace determinant, if one exists.
-Thus C46 is not a retreat from C45; it separates an analytic survivor from an
-incorrect ordinary-determinant interpretation.
-
+The negative result does not destroy the half-plane germ that reaches the
+Riemann critical abscissa from the right.  It identifies its correct next
+category: a normalized-trace determinant, if one exists.  Thus C46 is not a
+retreat from C45; it separates an analytic survivor from an incorrect
+ordinary-determinant interpretation.

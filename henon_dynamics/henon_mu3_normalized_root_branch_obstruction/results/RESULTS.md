@@ -1,6 +1,6 @@
 # HCS-C46 exact results
 
-At (p=7), with (d_7=3), exact cyclotomic reduction and real-subfield
+At \(p=7\), with \(d_7=3\), exact cyclotomic reduction and real-subfield
 resultants give
 
 \[
@@ -30,13 +30,17 @@ Modulo five, all three Euclidean gcds are one:
 \gcd(P_{18},P_{12})=gcd(P_{18},P_{18}')=gcd(P_{12},P_{12}')=1.
 \]
 
-The degrees remain (18) and (12) after reduction, so this good-prime
+The degrees remain \(18\) and \(12\) after reduction, so this good-prime
 certificate proves the same coprimality and squarefreeness over
-(mathbf Q).  Therefore the normalized root (N_7^{1/3}) has orders
-(+2/3) at every numerator zero and (-2/3) at every denominator zero.
+\(\mathbf Q\).  Therefore the normalized root \(N_7^{1/3}\) has orders
+\(+2/3\) at every numerator zero and \(-2/3\) at every denominator zero.
 It is neither rational nor single-valued meromorphic across the divisor.
 
-The C45 `Log_0` branch germ remains valid on simply connected zero-free
+These are the finite divisor orders.  At infinity, \(N_7\) has valuation
+\(-12\), so the normalized root has integral order \(-4\); the obstruction
+is supplied by the finite unit-circle divisor.
+
+The C45 \(\operatorname{Log}_0\) branch germ remains valid on simply connected zero-free
 domains.  C46 only closes its promotion to an ordinary rational or
 meromorphic Fredholm determinant.  Normalized-trace or von Neumann
 determinants are not ruled out by this certificate.
