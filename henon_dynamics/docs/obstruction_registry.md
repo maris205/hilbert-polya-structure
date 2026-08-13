@@ -255,3 +255,9 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O82 | Raw H6 multiplier or field norm as a rational-prime label | proved all-period algebraic-unit obstruction | After the canonical scaling `x_i=6q_i`, every fixed algebra is finite free over Z and every chronological derivative lies in `SL_2` over its algebraic integers. Every periodic multiplier and its inverse are algebraic integers, so a rational multiplier is only `+1` or `-1` and every field norm is a unit. | Stops raw multiplier and norm labels for every geometric H6 periodic point. It does not classify the pressure-normalized real power `|Lambda|^h_star`, trace shifts, cyclic resultants, or nonlocal packet labels. | ../henon_integral_monodromy_units/README.md |
+
+## HCS-C47 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O83 | Rational scalar transforms of H6 multipliers preserving every orbit repetition | proved functorial classification obstruction | The identity `R(X^r)=R(X)^r` forces every nonzero rational function to be the monomial `X^k`. Applied to C46's algebraic-unit multipliers, every rational scalar label is again a unit and cannot be a rational prime. | Complete only for rational identities on the multiplier torus. Continuous real powers, nonlocal orbit packets, prime ideals, cyclic resultants, and distributional traces remain outside scope. | ../henon_repetition_label_classification/README.md |

@@ -1235,3 +1235,22 @@ at all periods, while deliberately leaving
 \(|\Lambda|^{h_*}\) unclassified.  The tuple is **(A1_WEAK, A2_FAIL,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.
+
+## HCS-C47 repetition-compatible scalar classification (2026-08-13)
+
+Candidate **HCS-C47** classifies every functorial rational scalar repair of
+the C46 multiplier label; see
+[`../henon_repetition_label_classification/`](../henon_repetition_label_classification/).
+If \(R\in\mathbb C(X)^\times\) obeys
+
+\[
+R(X^r)=R(X)^r
+\]
+
+as a rational identity for every repetition, then \(R(X)=X^k\) for one
+\(k\in\mathbb Z\).  Hence the label of an H6 multiplier remains an algebraic
+unit and cannot be a rational prime.  Continuous positive labels are exactly
+\(X^c\), so the nonrational pressure label \(X^{h_*}\) survives rather than
+being silently rejected.  The rational lane has tuple **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** and overall
+**ROUTE_A_REJECTED**; the pressure-power lane remains exploratory.
