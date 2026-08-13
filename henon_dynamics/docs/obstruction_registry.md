@@ -249,3 +249,9 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O81 | Raw H6 instability roof as an all-prime von Mangoldt clock | proved critical-line overconvergence obstruction | One primitive factor has exactly the atom `ell*|Lambda|^(-rs)`, but the inherited bound `log(phi)/log(J_*)=0.35598...<1/2` makes the complete H6 logarithmic derivative absolutely convergent on the critical line. PNT gives divergence of `sum_p log(p)/sqrt(p)`, so no all-prime termwise bijection can preserve these raw atoms. | Stops only the unscaled instability roof with ordinary absolute termwise identification. A pressure-normalized roof, distributional trace, or non-termwise arithmetic compiler is a new candidate. | ../henon_instability_amplitude_overconvergence/README.md |
+
+## HCS-C46 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O82 | Raw H6 multiplier or field norm as a rational-prime label | proved all-period algebraic-unit obstruction | After the canonical scaling `x_i=6q_i`, every fixed algebra is finite free over Z and every chronological derivative lies in `SL_2` over its algebraic integers. Every periodic multiplier and its inverse are algebraic integers, so a rational multiplier is only `+1` or `-1` and every field norm is a unit. | Stops raw multiplier and norm labels for every geometric H6 periodic point. It does not classify the pressure-normalized real power `|Lambda|^h_star`, trace shifts, cyclic resultants, or nonlocal packet labels. | ../henon_integral_monodromy_units/README.md |

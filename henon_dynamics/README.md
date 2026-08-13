@@ -30,6 +30,7 @@ henon_cm_three_prime_supercancellation_obstruction - C42 complete - Three local 
 henon_entropy_von_mangoldt_bridge - C43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
 henon_instability_amplitude_overconvergence - C44 complete - Raw instability Euler factors have exact prime-power amplitudes but the full trace overconverges on the critical line.
 henon_pressure_normalized_prime_orbit_bridge - C45 complete - Bowen-pressure normalization gives the same H6 survivor entropy one and a source-backed e^T/T prime-orbit law.
+henon_integral_monodromy_units - C46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
 
 ## Entry points
 

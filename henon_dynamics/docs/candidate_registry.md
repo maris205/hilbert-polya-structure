@@ -1216,3 +1216,22 @@ label is proved to be a rational prime, and no critical-line continuation or
 operator follows.  The tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.
+
+## HCS-C46 all-period integral monodromy (2026-08-13)
+
+Candidate **HCS-C46** proves the arithmetic type of every autonomous H6
+periodic multiplier; see
+[`../henon_integral_monodromy_units/`](../henon_integral_monodromy_units/).
+With \(x_i=6q_i\), the cyclic fixed equations are monic over \(\mathbb Z\),
+the fixed algebra is finite free of rank \(2^n\), and each derivative step is
+
+\[
+\begin{pmatrix}-2x_i&-1\\1&0\end{pmatrix}\in SL_2.
+\]
+
+Every return trace is an algebraic integer and every multiplier is an
+algebraic unit.  This closes the raw multiplier and field-norm prime labels
+at all periods, while deliberately leaving
+\(|\Lambda|^{h_*}\) unclassified.  The tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.
