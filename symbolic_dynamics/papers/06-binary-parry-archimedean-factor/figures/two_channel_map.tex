@@ -1,0 +1,57 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  >=Latex,
+  box/.style={draw=black,rounded corners=2pt,align=center,inner sep=5pt,
+              font=\small,minimum height=1.05cm,text width=3.35cm},
+  source/.style={box,very thick,fill=black!7,text width=3.85cm},
+  positive/.style={box,very thick,draw=blue!55!black,fill=blue!5},
+  limit/.style={box,very thick,draw=orange!75!black,fill=orange!7},
+  stop/.style={box,very thick,dashed,draw=black,fill=black!3,text width=3.5cm},
+  arr/.style={->,thick},
+  darr/.style={->,thick,dashed}
+]
+  \node[source] (source) at (0,0)
+    {$F_2$ inside the tensor source\\[2pt]
+     $K_2=J_2/2$, \quad $Q=\mathrm{diag}(1,-1)$};
+  \node[source] (tilt) at (0,-2.45)
+    {one tilted Parry trace\\
+     $H(z)=e^{zQ/2}K_2e^{zQ/2}$\\
+     $\tr H(z)^r=(\cosh z)^r$};
+
+  \node[positive] (euler) at (-4.15,-5.15)
+    {$z=0$: stationary channel\\
+     $\tr K_2^r=1$\\
+     $\det(I-\cA_s)=\zeta(s)^{-1}$};
+  \node[limit] (gauss) at (0,-5.15)
+    {$z=iu/\sqrt r$: sign channel\\
+     $\cos(u/\sqrt r)^r\to e^{-u^2/2}$\\
+     $\xrightarrow{\ \text{Mellin}\ }\pi^{-s/2}\Gamma(s/2)$};
+  \node[stop] (chiral) at (4.15,-5.15)
+    {Hellinger chiral double\\
+     $B_t=U_tB_0U_t^*$\\
+     critical-axis spectrum is fixed};
+
+  \node[positive,text width=4.35cm] (a3) at (-2.35,-7.85)
+    {GO: same-source Mellin--Fredholm factorization\\
+     $\pi^{-s/2}\Gamma(s/2)\zeta(s)$ on $\Re s>1$};
+  \node[stop,text width=4.35cm] (global) at (2.75,-7.85)
+    {STOP: no unified determinant, continuation,\\
+     functional equation, or vertical divisor};
+
+  \draw[arr] (source) -- (tilt);
+  \draw[arr,draw=blue!55!black] (tilt.south west) -- (euler.north);
+  \draw[arr,draw=orange!75!black] (tilt) -- (gauss);
+  \draw[darr] (tilt.south east) -- (chiral.north);
+  \draw[arr,draw=blue!55!black] (euler) -- (a3);
+  \draw[arr,draw=orange!75!black] (gauss) -- (a3);
+  \draw[darr] (chiral) -- (global);
+  \draw[darr] (a3) -- (global);
+\end{tikzpicture}
+\caption{The two positive channels and the obstruction come from the same
+binary Parry source. Solid arrows are proved identities or limits; dashed
+arrows mark the chiral attempt and the global stop. Color is redundant with
+line style and labels.}
+\label{fig:two-channel}
+\end{figure}

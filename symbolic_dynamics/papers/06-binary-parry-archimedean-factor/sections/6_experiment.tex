@@ -1,0 +1,69 @@
+\section{Exact and numerical falsification audit}
+\label{sec:experiment}
+
+The CPU prototype tests algebraic identities before interpreting them. Tensor
+atoms up to $512$ are recovered as nonunit indecomposables of the finite
+multiplication table; no prime list is read. The frozen run contains $97$
+atoms, powers $r=1,\ldots,12$, odd Birkhoff lengths
+\[
+ 31,127,511,2047,8191,32767,
+\]
+and a $24$-point complex Mellin grid with
+$\RePart s\in\{0.25,0.5,1,1.5,2,3\}$ and
+$\ImPart s\in\{0,2,6,12\}$. No Riemann-zero data are loaded.
+
+\begin{center}
+\small
+\begin{tabularx}{0.97\textwidth}{L{0.31\textwidth}L{0.19\textwidth}X}
+\toprule
+Test & Frozen result & Interpretation \\
+\midrule
+$K_2$ determinant identity & $4.44\times10^{-16}$ max residual & exact Euler block confirmed \\
+Chiral square & $1.11\times10^{-16}$ & paired half-density confirmed \\
+Critical-axis gauge & $1.19\times10^{-16}$ & vertical phase is removable \\
+Chiral eigenvalues & $5.55\times10^{-16}$ & spectrum is $\{\pm p^{-1/2}\}$ \\
+Binary Mellin median error & $2.269\to0.04576$ & improves by factor $49.6$ \\
+Characteristic-function error & $5.90\times10^{-3}\to5.51\times10^{-6}$ & Gaussian channel is stable \\
+Local-CLT max relative error & $0.0342\to7.62\times10^{-5}$ & density convergence confirmed \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The slow corner is reported rather than averaged away. At
+$s=0.25+12i$, the last-cutoff Mellin relative error remains
+$1.56\times10^4$. Negative moments emphasize the shrinking lattice points
+near zero, while the high imaginary part causes severe oscillation. This is
+consistent with pointwise and locally uniform convergence at fixed compact
+sets but warns that the tested cutoff is far from asymptotic in the most
+adversarial grid corner.
+
+\subsection{Controls that prove too much}
+
+Uniform $K_3$, uniform $K_4$, and a biased rank-one binary kernel all satisfy
+$\tr K^r=1$. A reversible binary control with second eigenvalue $0.4$ instead
+has $\tr K^r=1+0.4^r$ and fails immediately. Hence the Euler ledger selects
+rank-one idempotence rather than the fair binary process.
+
+After centering and variance normalization, the biased binary process and a
+noncanonical scalar observable on $F_3$ also approach the one-dimensional
+Gamma target. All nonconstant binary relabelings and rescalings become
+identical after standardization. These are honest
+\texttt{PROVES\_TOO\_MUCH} outcomes.
+
+The canonical radial controls behave differently. At their final cutoffs,
+the $K_3$ radial statistic has median error $1.5793$ against the binary target
+but $0.00996$ against its native two-dimensional law. The corresponding
+$K_4$ errors are $2.5506$ and $0.01009$. The dimension shift predicted by
+\cref{prop:qcontrol} is therefore visible at finite cutoff.
+
+An auxiliary Parry-inventory branch was also falsified. A pressure-normalized
+Hellinger identity holds for shifted and random positive inventories, hence
+proves too much; moreover, the identity-adjacency atom source of SD-C07 has no
+native nontrivial transition probability. Adding full mixing would create the
+mixed temporal cycles excluded by the source lock. This auxiliary branch is
+not part of SD-C08.
+
+The experiment therefore supports three exact conclusions: the stationary
+binary fiber preserves the Euler trace ledger, the sign sector produces the
+Gamma skeleton, and block-preserving chiral centering is gauge-trivial. It
+does not establish a global determinant or analytic continuation.

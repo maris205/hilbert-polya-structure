@@ -16,7 +16,8 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [02-wheel-sieve-stationarization-obstructions](papers/02-wheel-sieve-stationarization-obstructions/README.md) | [PDF](papers/02-wheel-sieve-stationarization-obstructions/main.pdf) · [LaTeX/证明/材料](papers/02-wheel-sieve-stationarization-obstructions/) | 证明 strict extension 不能产生周期点；forward-well-founded strong-bisimulation quotient 仍无环；保留 state-class exact-$q$ 标签的 quotient 继承严格分层；finite-alphabet fixed-window decoder 不能恢复无界精确 prime clock。 | **THEOREM SCREENING COMPLETE** |
 | [03-wheel-sieve-periodic-clock-obstruction](papers/03-wheel-sieve-periodic-clock-obstruction/README.md) | [PDF](papers/03-wheel-sieve-periodic-clock-obstruction/main.pdf) · [LaTeX/证明/审稿](papers/03-wheel-sieve-periodic-clock-obstruction/) | 精确 autonomous clock decoder 强制 factor 纤维保持同一 level，因此 direct image 继承严格分层且无周期点；连续 closure decoder 在 lag-pair 与对角线分离时同样排除边界周期点。clock erasure 或 compactification 虽能制造周期点，却不能继承普通拓扑下的精确 $q/\log q$ clock。 | **COMPLETE / THEOREM STOP** |
 | [04-tensor-prime-symbolic-euler-product](papers/04-tensor-prime-symbolic-euler-product/README.md) | [PDF](papers/04-tensor-prime-symbolic-euler-product/main.pdf) · [LaTeX/实验/Route-A 记录](papers/04-tensor-prime-symbolic-euler-product/) | 有限 full shifts 满足 $F_m\otimes F_n\cong F_{mn}$ 且 $h(F_n)=\log n$，所以 tensor atoms 内生地等于 $F_p$。其 canonical atom-loop shift 在 $\Re s>1$ 上满足 $\det(I-\mathcal L_s)=1/\zeta(s)$，并精确给出 prime-power/$\Lambda$ ledger；这是本项目第一条同对象 A0–A2 exact chain。 | **ROUTE-A ANALYTIC CANDIDATE** |
-| [05-intrinsic-symbolic-grading-and-duality](papers/05-intrinsic-symbolic-grading-and-duality/README.md) | [PDF](papers/05-intrinsic-symbolic-grading-and-duality/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/05-intrinsic-symbolic-grading-and-duality/) | tensor-divisor homology 内生给出 $\mu(n)$ 与 odd atom degree，因此 exterior supertrace 为 $1/\zeta$、odd Berezinian 为 $\zeta$，解决 A2 determinant orientation。honest Koszul resolution 却消去到 vacuum；reversal 只给 $s\mapsto s$，group inversion 只给 $s\mapsto-s$；首个临界带 $\det_3$ 虽对称却 zero-free 且删除 $r=1,2$。 | **GO A2 / STOP A3 / NO SD-C08** |
+| [05-intrinsic-symbolic-grading-and-duality](papers/05-intrinsic-symbolic-grading-and-duality/README.md) | [PDF](papers/05-intrinsic-symbolic-grading-and-duality/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/05-intrinsic-symbolic-grading-and-duality/) | tensor-divisor homology 内生给出 $\mu(n)$ 与 odd atom degree，因此 exterior supertrace 为 $1/\zeta$、odd Berezinian 为 $\zeta$，解决 A2 determinant orientation。honest Koszul resolution 却消去到 vacuum；reversal 只给 $s\mapsto s$，group inversion 只给 $s\mapsto-s$；首个临界带 $\det_3$ 虽对称却 zero-free 且删除 $r=1,2$。 | **GO A2 / STOP A3（当阶段未新编号）** |
+| [06-binary-parry-archimedean-factor](papers/06-binary-parry-archimedean-factor/README.md) | [PDF](papers/06-binary-parry-archimedean-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/06-binary-parry-archimedean-factor/) | 唯一最小 tensor atom $F_2$ 的 Parry 核把 Euler 与 Gaussian 通道统一到 $\operatorname{tr}H(z)^r=(\cosh z)^r$：$z=0$ 保留完整 prime-power ledger，扩散尺度给自对偶 Gaussian，其 Mellin 变换为 $\pi^{-s/2}\Gamma(s/2)$。这形成同源 Mellin–Fredholm 分解；但 block-preserving chiral family 沿临界线完全等谱，仍没有单一 completed determinant。 | **GO A3 / STOP GLOBAL COMPLETION / SD-C08** |
 
 ### 论文 1 的候选分离结论
 
@@ -110,13 +111,43 @@ $$
 但它在该 strip 内 zero-free，而且 logarithm 从 $r=3$ 才开始，恰好删除 prime 和
 prime-square traces。于是阶段结论为
 **GO_A2_GRADED_ORIENTATION / STOP_A3_COMPLETION**；SD-C07 保留，不分配
-SD-C08，Route B 继续锁定。
+SD-C08（限论文 5 当阶段），Route B 继续锁定。
 
-下一步不再找新的 prime generator，而是大胆测试一个更窄的命题：能否从
-entropy-normalized symbolic Jacobian 或 stable/unstable transfer pair 中内生导出
-half-density character，使 $1/2$ center、archimedean sector 与完整 $r=1,2,\ldots$
-trace ledger 同时出现。手写 $p^{-1/2}$、复制 Gamma factor 或 fitted counterterm
-均不算通过。
+论文 6 已完成这项测试，并把 SD-C08 推进到 A3 的 Archimedean factor。下一步
+不再重复寻找 Gamma，而是直接攻击剩余的单点瓶颈：构造一个**质量不对易但
+ledger-exact** 的 symbolic coupling，使同一非渐近 trace/determinant 同时容纳
+tensor-atom repetitions 与 binary sign fluctuations。它必须内生消去所有 mixed
+$pq$ cycles，并击败 biased-binary、radial $K_3/K_4$ 和 reversible-$\lambda$
+controls；否则不进入新的候选编号。
+
+### 论文 6：同一 tilted trace 的 Euler–Gamma 双通道
+
+令 $K_2=J_2/2$、$Q=\operatorname{diag}(1,-1)$，并定义
+
+$$
+H(z)=e^{zQ/2}K_2e^{zQ/2}.
+$$
+
+则对每个 $r\ge1$，
+
+$$
+\operatorname{tr}H(z)^r=(\cosh z)^r.
+$$
+
+$z=0$ 给 $\operatorname{tr}K_2^r=1$，因而保持 Paper 04 的精确 Euler/Fredholm
+ledger；$z=iu/\sqrt r$ 则趋向 $e^{-u^2/2}$。在 Fourier 自对偶归一化下，极限
+Gaussian 的绝对 Mellin 变换精确为 $\pi^{-s/2}\Gamma(s/2)$。因此在
+$\Re s>1$ 得到同源但非单行列式的
+
+$$
+\mathfrak Z_{\rm SD}(s)=\pi^{-s/2}\Gamma(s/2)\zeta(s).
+$$
+
+同时证明了一个结构二难：只要 Hellinger chiral coupling 保持 atom blocks、与
+tensor-mass 对易，它在 $s=1/2+it$ 上就与 $t=0$ 酉共轭，谱不随高度运动；若要
+产生 spectral motion，就必须跨 atom 混合，而普通正混合会重新制造错误的 mixed
+primitive cycles。阶段结论为 **GO_A3_ARCHIMEDEAN_FACTOR /
+STOP_GLOBAL_COMPLETION**，Route B 仍锁定。
 
 ## 目录
 
@@ -124,7 +155,7 @@ trace ledger 同时出现。手写 $p^{-1/2}$、复制 Gamma factor 或 fitted c
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [五篇论文](papers/)
+- [六篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
