@@ -1113,3 +1113,12 @@ representation functor sends the scalar homogeneous coboundary to another
 coboundary, so every closed scaling-orbit holonomy is the identity.  Route B
 is not authorized.  The smallest open successor is a nonfunctorial monomial
 channel permutation.
+## HCS-C39 closure (2026-08-13)
+
+Candidate **HCS-C39** retains a nonfunctorial cubic channel permutation but
+is rejected as a raw all-prime determinant; see
+[`../henon_kummer_character_divisor_obstruction/`](../henon_kummer_character_divisor_obstruction/).
+The exact repetition characters have no nonzero common virtual kernel, and
+every surviving local channel contributes zeros or poles converging to the
+interior point \(s=1/2\).  Its tuple is **(A1_WEAK, A2_FAIL, A3_FAIL,
+A4_FORMAL_HINT)**.  A conductor-derived damping is the next open gate.

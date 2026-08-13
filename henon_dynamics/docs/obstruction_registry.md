@@ -223,3 +223,8 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O76 | Direct finite Kummer/graded lifts of the homogeneous H\'enon coboundary | proved functorial gauge obstruction | Every representation, tensor, exterior, dual, parity, or virtual construction remains a coboundary and has identity closed holonomy at every repetition. | Stops functorial lifts only; a separately supplied monomial permutation or projective central extension is a new candidate. | ../henon_cubic_kummer_functorial_obstruction/README.md |
+## HCS-C39 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O77 | Raw three-channel Kummer prime product | proved interior-divisor accumulation | Every nonzero net virtual channel places zeros or poles at distance at most `2*pi/(3 log p)` from `s=1/2`; exact all-repetition cancellation forces the zero virtual character. | Stops fixed finite undamped channel products. Intrinsic conductor damping, infinite local complexes, and separately proved scattering ratios remain new candidates. | ../henon_kummer_character_divisor_obstruction/README.md |

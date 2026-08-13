@@ -23,6 +23,7 @@ replaced by averaged transition matrices.
 ## Batch research papers
 
 henon_cubic_kummer_functorial_obstruction - C38 complete - Functorial three-channel Kummer lifts preserve the C37 gauge coboundary and have identity closed holonomy.
+henon_kummer_character_divisor_obstruction - C39 complete - Every nonzero virtual cubic channel creates an interior all-prime zero/pole accumulation at s=1/2.
 
 ## Entry points
 
