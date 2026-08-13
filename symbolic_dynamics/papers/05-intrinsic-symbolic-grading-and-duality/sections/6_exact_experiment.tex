@@ -1,0 +1,98 @@
+\section{Exact experiment and adversarial controls}
+
+The implementation constructs $\Delta_n$ from the tensor-divisibility
+relation for every $2\le n\le512$. Candidate-side code sees the registered
+full-shift objects, their tensor table, unit, and entropy norm. A separate
+factorization routine is used only after construction to score the predicted
+squarefree homology pattern. No prime or Riemann-zero table enters the
+candidate.
+
+\subsection{Exact chain and coefficient census}
+
+All $511$ augmented complexes pass the integer identity $\partial^2=0$.
+Their reduced Euler characteristics and homology supertraces equal $\mu(n)$
+without exception. The computed $\mathbb F_2$ Betti numbers match the
+integral theorem in \cref{thm:factorization-homology}: squarefree fibers have
+one generator in degree $\omega(n)-2$, and nonsquarefree fibers are reduced
+acyclic.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{rrrrrr}
+\toprule
+$N$ & objects & $\partial^2$ & Euler $=\mu$ & homology $=\mu$ & simplices \\
+\midrule
+64  & 63  & 1.000 & 1.000 & 1.000 & 440 \\
+128 & 127 & 1.000 & 1.000 & 1.000 & 1,441 \\
+256 & 255 & 1.000 & 1.000 & 1.000 & 4,742 \\
+512 & 511 & 1.000 & 1.000 & 1.000 & 15,629 \\
+\bottomrule
+\end{tabular}
+\caption{Exact factorization-complex audit. Simplices include the augmented
+empty generator.}
+\label{tab:complex-audit}
+\end{table}
+
+At $N=512$, the construction recovers $97$ tensor atoms. The largest fiber
+is $n=480$, with $976$ simplices and maximum chain dimension seven. The odd
+one-particle Berezinian and exterior-Fock series reproduce all $512$
+coefficients of $\zeta$ and $1/\zeta$, respectively.
+
+\subsection{Parity controls}
+
+The controls are designed to distinguish homological degree from a useful
+looking sign:
+
+\begin{itemize}
+  \item A global nonunit parity flip matches only $199/512$ M\"obius
+  coefficients and breaks coprime multiplicativity in $740$ of $2347$
+  cases.
+  \item Across $32$ deterministic random simplex parities, only
+  $0.500707$ of boundary incidences are odd on average; canonical chain
+  degree gives $1.000$.
+  \item Sixty-four random atom characters stay multiplicative but achieve
+  mean squarefree sign accuracy $0.492512$.
+  \item Liouville parity $(-1)^{\Omega(n)}$ leaves $198$ false nonzero
+  coefficients at nonsquarefree masses and matches only $314/512$ entries.
+  \item Sixteen simplex orientation gauges preserve every boundary rank,
+  Betti number, and supertrace. Orientation is a basis gauge, not an
+  additional selector.
+\end{itemize}
+
+\subsection{Monoid and mixing controls}
+
+Shifted multiplication preserves abstract unique factorization but disagrees
+with the intrinsic full-shift entropy clock, reaching coefficient accuracy
+$0.26953125$. Exact recovery returns only after the forbidden post-hoc clock
+$\log(n-1)$ is installed. The additive monoid has a single atom of zero
+entropy, so its Euler factor vanishes.
+
+Positive free mixing fails all $28$ pairs among the first eight atoms.
+Isolated loops give coefficient one at $pq$ in the zeta series and zero at
+$pq$ in its logarithmic derivative. Ordered mixed words give coefficient
+two and the spurious positive term $\log(pq)$. Word-length parity cannot
+cancel the two even words $pq$ and $qp$.
+
+\subsection{Finite duality diagnostics}
+
+At atom cutoffs $31,127,257,509$, the finite ratio
+\[
+ R_P(s)=\prod_{p\le P}\frac{1-p^{-(1-s)}}{1-p^{-s}}
+\]
+satisfies $R_P(1-s)R_P(s)=1$ to residual $2.70\times10^{-15}$ and has unit
+modulus on the critical line to residual $7.77\times10^{-16}$. Its maximum
+adjacent-cutoff wrapped phase drift is nevertheless $3.10576$ radians.
+Finite algebra is exact; convergence is not.
+
+The partial trace norms of the naive relative operator
+\[
+ Q_s-I=\operatorname{diag}(p^{2s-1}-1)
+\]
+grow at $s=1/2+i$ as
+\[
+ 11.3980,\quad45.6491,\quad86.2878,\quad114.2360.
+\]
+Analytically, $Q_s-I$ is noncompact on every open domain and vanishes only
+at the isolated center $s=1/2$. These diagnostics support the theorem stop
+but do not replace the proof.
