@@ -1,0 +1,190 @@
+{
+  "candidate_id": "pcf_quadratic_prime_multiplier_obstruction_v1",
+  "lock_version": 1,
+  "lock_date_utc": "2026-08-13",
+  "lock_status": "SOURCE_LOCKED_NO_CANDIDATE_EXECUTION",
+  "independence_statement": "This is a new nonlinear derivative-clock candidate. It does not reopen or tune the branch-baker candidate and consumes no sealed prime, zero, or prior experiment result.",
+  "execution_state_at_lock": {
+    "candidate_exact_runs": 0,
+    "candidate_numerical_runs": 0,
+    "candidate_multiplier_polynomials_computed": false,
+    "external_prime_tables_accessed": false,
+    "riemann_zero_data_accessed": false
+  },
+  "research_question": "Can the genuine nonlinear derivative clock of the frozen PCF quadratic have a finite periodic orbit whose raw multiplier is rational and has rational-prime absolute value?",
+  "parameter": {
+    "symbol": "u",
+    "minimal_polynomial_candidate": "U^3-2*U^2+2*U-2",
+    "root_selection": "the unique real root",
+    "root_isolation_interval": [
+      "3859/2500",
+      "15437/10000"
+    ],
+    "algebraic_integrality_reason": "the parameter polynomial is monic",
+    "provenance": "Inherited exactly from the already frozen postcritically finite relation; not selected by multiplier, prime, zeta-zero, or spectral fitting."
+  },
+  "maps": {
+    "inherited": "f_u(x)=1-u*x^2",
+    "monic_normal_form": "g(z)=z^2-u",
+    "conjugacy": "phi(x)=-u*x; phi(f_u(x))=g(phi(x))",
+    "multiplier_invariance": "exact periods and cycle multipliers agree under phi"
+  },
+  "definitions": {
+    "cycle_multiplier": "lambda=(g^n)'(z) for a point z of exact period n",
+    "raw_rational_prime_target": "lambda in Q and abs(lambda)=p for a positive rational prime p",
+    "rational_exponent_prime_target": "lambda in Q and abs(lambda)=p^n for a positive rational prime p and exact period n",
+    "complex_modulus_only_target": "abs(lambda)=p^n without lambda in Q; explicitly outside the theorem"
+  },
+  "primary_claims": [
+    "C1: If K is a number field, F in O_K[X] is monic, and F'=m*H with integer m>=2 and H in O_K[X], then every rational multiplier at a finite point fixed by F^n lies in m^n*Z.",
+    "C2: For g(z)=z^2-u, every rational period-n multiplier lies in 2^n*Z.",
+    "C3: The frozen g and f_u have no raw rational-prime multiplier at any exact period.",
+    "C4: A rational exponent-prime multiplier must use p=2; odd p is excluded, while p=2 for n>=2 remains open.",
+    "C5: On each regular real branch, the cotangent formula (q,p)->(g(q),p/g'(q)) is exact symplectic and gives return eigenvalues lambda and lambda^-1 along the zero section."
+  ],
+  "predeclared_exact_predictions": {
+    "general_divisibility": "lambda in Q implies lambda in m^n*Z",
+    "candidate_divisibility": "lambda in Q implies lambda in 2^n*Z",
+    "candidate_raw_prime_count_all_periods": 0,
+    "fixed_multiplier_plus_2_condition": "would force u=0, contradicted by P(0)=-2",
+    "fixed_multiplier_minus_2_condition": "would force u=2, contradicted by P(2)=2",
+    "odd_exponent_prime_count_all_periods": 0,
+    "two_exponent_prime_status_period_1": "excluded by the fixed-point calculation",
+    "two_exponent_prime_status_period_ge_2": "OPEN",
+    "formal_dynatomic_degrees_n_1_to_4": [
+      2,
+      2,
+      6,
+      12
+    ],
+    "generic_cycle_counts_n_1_to_4": [
+      2,
+      1,
+      2,
+      3
+    ]
+  },
+  "exact_low_period_audit": {
+    "status": "FROZEN_MUST_RUN_AFTER_SOURCE_LOCK",
+    "periods": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "coefficient_field": "Q[u]/(u^3-2*u^2+2*u-2)",
+    "primary_engine": "SymPy 1.14.0 exact polynomial arithmetic",
+    "dynatomic_definition": "Phi_n(z)=product_{d|n}(g^d(z)-z)^(mu(n/d)), simplified exactly",
+    "multiplier_resultant": "R_n(L)=Res_z(Phi_n(z), L-(g^n)'(z))",
+    "cycle_polynomial_rule": "verify exactly that the monic resultant is an n-th power after accounting for formal-period degeneracies; define the monic cycle multiplier polynomial only after that verification",
+    "rational_candidate_rule": "detect rational roots exactly by reducing every coefficient to the basis 1,u,u^2 and solving the simultaneous rational polynomial conditions; numerical near-integers are never candidates",
+    "exact_period_rule": "separate exact-period cycles from formal dynatomic roots; any root-of-unity lower-period contamination is recorded rather than silently counted",
+    "primality_rule": "apply deterministic primality testing only to exact rational integers derived internally as multiplier candidates",
+    "independent_checks": [
+      "direct chain-rule multiplier in the quotient algebra for every dynatomic factor",
+      "resultant degree and perfect-power multiplicity",
+      "candidate divisibility by 2^n before primality",
+      "same multiplier polynomial from f_u and g after exact conjugacy normalization"
+    ]
+  },
+  "controls": {
+    "c_zero": {
+      "map": "z^2",
+      "role": "power-map positive control for the p=2 exponent clock",
+      "frozen_predictions": [
+        "fixed multipliers are 0 and 2",
+        "every nonzero exact period-n cycle has multiplier 2^n"
+      ]
+    },
+    "c_minus_2": {
+      "map": "z^2-2",
+      "role": "Chebyshev boundary control and fixed raw-prime residue control",
+      "frozen_predictions": [
+        "fixed point -1 has multiplier -2",
+        "fixed point 2 has multiplier 4"
+      ]
+    },
+    "c_minus_3_over_4": {
+      "map": "z^2-3/4",
+      "role": "assumption-violation control because c is not an algebraic integer in Q",
+      "frozen_predictions": [
+        "fixed point 3/2 has multiplier 3, an odd raw prime",
+        "fixed point -1/2 has multiplier -1"
+      ]
+    },
+    "conjugacy_invariant": {
+      "maps": [
+        "f_u(x)=1-u*x^2",
+        "g(z)=z^2-u"
+      ],
+      "role": "exact implementation control",
+      "pass_rule": "period-by-period multiplier polynomials agree after exact normalization under z=-u*x"
+    }
+  },
+  "conditional_real_orbit_ledger": {
+    "status": "DISABLED_PENDING_NON_ARB_IMPLEMENTABILITY_GATE",
+    "maximum_period_if_enabled": 20,
+    "current_evidentiary_role": "none; not needed for the all-period theorem",
+    "enablement_gate": [
+      "a controls-only prototype certifies existence and uniqueness with disjoint rational intervals",
+      "completeness follows from a frozen symbolic/monotonicity count rather than from floating root search",
+      "the implementation uses exact rational/algebraic arithmetic and independently checked interval bounds without requiring Arb",
+      "the gate and implementation are reviewed before any candidate orbit is evaluated"
+    ],
+    "failure_action": "omit the high-period ledger and report the exact n<=4 audit only; do not substitute uncertified floating roots",
+    "amendment_rule": "enabling this block requires a dated pre-execution source-lock amendment; the cap may not exceed n=20"
+  },
+  "symplectic_bridge": {
+    "formula": "Ghat(q,p)=(q^2-u,p/(2*q))",
+    "domain": "two separate real branches q<0 and q>0",
+    "canonical_one_form_identity": "Ghat^*(P*dQ)=p*dq",
+    "zero_section_return_spectrum": "diag(lambda,lambda^-1) for periodic orbits avoiding q=0",
+    "status": "classical bridge only; no novelty claim",
+    "mandatory_caveats": [
+      "undefined on the critical line q=0",
+      "not globally one-to-one because the two branches have overlapping images",
+      "noncompact phase space",
+      "not a global symplectomorphism",
+      "critical cycles with multiplier zero are outside the reciprocal lift"
+    ]
+  },
+  "allowed_data": [
+    "the frozen algebraic parameter and its defining polynomial",
+    "candidate-generated exact dynatomic and multiplier polynomials after this lock",
+    "candidate-generated exact rational multiplier candidates",
+    "internally derived deterministic primality results for those exact candidates only",
+    "the three frozen controls",
+    "bibliographic metadata and literature claims used for novelty and integrity audits"
+  ],
+  "forbidden_data": [
+    "external prime tables or preselected prime labels",
+    "Riemann zeros or files containing them",
+    "fitting, unfolding, scaling, reordering, or matching against prime or zero targets",
+    "post-hoc parameter changes",
+    "post-hoc changes to raw-prime versus exponent-prime definitions",
+    "numerical near-integers promoted to exact rational candidates",
+    "uncertified high-period floating root ledgers",
+    "sealed results from earlier candidates"
+  ],
+  "stop_rules": [
+    "Any failure of the algebraic parameter identity, conjugacy, or Theorem A implementation is an implementation stop.",
+    "A low-period result inconsistent with 2^n divisibility is a code/algebra error and may not be reinterpreted as a discovery.",
+    "A formal dynatomic root is not called exact period n until lower-period contamination is excluded.",
+    "The p=2 exponent-prime residue remains OPEN unless a separate all-period proof is completed; finite cutoff absence cannot close it.",
+    "If the non-Arb certification gate for the real ledger fails, the ledger is omitted rather than weakened to floating evidence.",
+    "The cotangent bridge does not open global symplectic, compactness, quantization, prime/zero, or Route-B claims.",
+    "After the raw-prime obstruction is verified, no prime or zero matching stage is opened for this candidate."
+  ],
+  "compute_budget": {
+    "required_exact_audit": "less than 1 CPU-hour and less than 4 GiB memory",
+    "gpu": "not required",
+    "conditional_real_ledger": "no budget assigned until the non-Arb implementability gate passes"
+  },
+  "software_lock": {
+    "python": "system Python in the current workspace",
+    "sympy": "1.14.0",
+    "sage": "not available and not required",
+    "pari_cypari2": "not available and not required",
+    "arb_dependency": "not promised or required; the conditional real ledger must pass without Arb"
+  }
+}

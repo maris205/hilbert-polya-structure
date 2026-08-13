@@ -1,0 +1,755 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage{graphicx,float}
+\usepackage{xcolor}
+\usepackage[round,authoryear]{natbib}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage{url}
+
+\graphicspath{{figures/}}
+\input{figures/latex_includes.tex}
+
+\hypersetup{
+  pdftitle={Normalized Algebraic Periodic Actions versus Prime Logarithms: A Henon Design Certificate},
+  pdfauthor={Anonymous},
+  pdfsubject={Arithmetic provenance certificate for normalized periodic actions},
+  pdfkeywords={exact symplectic map, periodic action, Hermite--Lindemann, Henon map, algebraic dynamics, gauge normalization}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathbb A}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Qbar}{\overline{\mathbb Q}}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Action}{\mathcal A}
+\newcommand{\OKS}{\mathcal O_{K,S}}
+\newcommand{\ord}{\operatorname{ord}}
+
+\title{\textbf{Normalized Algebraic Periodic Actions versus Prime Logarithms:\\
+A H\'enon Design Certificate}}
+\author{Anonymous}
+\date{Pre-review manuscript, August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let an exact symplectic map, a Liouville primitive, and a single-valued
+rational exact potential be defined over $\Qbar$.  If the potential is
+regular on an algebraic period-$n$ orbit, then its one-traversal action is a
+finite sum of algebraic values and hence algebraic.  Hermite--Lindemann
+therefore prevents this normalized action from equalling any branch of
+$\log\beta$ for nonzero algebraic $\beta\ne1$, in particular the positive
+real value $\log p$ for a rational prime.  The conclusion persists under
+fixed algebraic scales, averages, repetitions, and algebraic exact gauges,
+provided the full endpoint term is retained.  It fails as a map-only
+statement: for the identity map, the constant potential $G\equiv\log 2$ is a
+symbolic exact countercontrol once transcendental normalization is allowed.
+
+For $H_a(q,p)=(q^2-a-p,q)$ we verify
+$H_a^*(p\,dq)-p\,dq=d(2q^3/3-pq)$ and show that the usual type-1 generating
+function has the opposite sign on the graph.  Every finite periodic point is
+algebraic for algebraic $a$.  If $a$ is $S$-integral in a base field, then in
+the orbit field only $3\Action$ is certified $S$-integral in general; the
+fixed-point action $-1/3$ makes this denominator sharp.  A source-locked
+eight-stage static audit and 82 passing tests verify the implementation while
+computing no candidate orbit or action.  This is a narrow normalization-aware
+design certificate, not a universal no-go theorem for symplectic clocks.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Periodic-orbit descriptions of spectral problems naturally suggest looking
+for a dynamical quantity proportional to a prime logarithm.  The
+Berry--Keating discussion is one familiar source of this heuristic scale
+\citep{berry1999riemann}.  Here we ask a strictly prior design question:
+can a closed generating-function action of an algebraic exact-symplectic map,
+with its representative fixed before any orbit is evaluated, equal $\log p$
+\emph{exactly}?  We import neither prime tables nor zero ordinates, and we do
+not attempt a trace formula or an approximate fit.
+
+This question contains a normalization trap.  If
+$F^*\theta-\theta=dG$, then $G+C$ is another exact potential for every
+constant $C$.  A period-$n$ action changes by $nC$.  Absolute action is
+therefore not a map-only invariant; one must record the primitive, potential,
+additive representative, domain, and any endpoint convention.  Exact
+symplectic literature routinely uses generating actions, action differences,
+and variational principles \citep{kook1989periodic,mackay1984transport,
+meiss1992symplectic,delshams1997melnikov}, while action and average-action
+spectra emphasize the importance of iteration conventions
+\citep{ginzburg2009action,mazzucchelli2013degenerate}.  Our contribution is
+not a new definition of action.  It is a provenance certificate for one
+frozen arithmetic representative.
+
+The certificate has four parts.
+\begin{enumerate}
+  \item Regular evaluation of a $\Qbar$-rational potential on a finite
+  algebraic orbit places the action in $\Qbar$ at every period.
+  Hermite--Lindemann then excludes every logarithm branch of every
+  nontrivial algebraic target.
+  \item A complete stepwise gauge ledger shows exactly what telescopes and
+  what remains.  Algebraic endpoint mismatches and constants alter the value
+  but not its algebraicity.  A transcendental constant defeats the conclusion
+  and is therefore an assumption boundary, not an inconvenient special case.
+  \item The quadratic H\'enon automorphism gives an explicit specialization:
+  the exact potential and type-1 generating function have opposite signs,
+  all finite periodic points are algebraic, and the justified integral
+  refinement is $3\Action\in\OKS$, not $\Action\in\OKS$.
+  \item A source-locked static program audits identities, domain gates,
+  normalization controls, and proof dependencies.  It performs no candidate
+  periodic-point solve or candidate action evaluation, so its outputs are
+  implementation evidence rather than empirical support for the theorem.
+\end{enumerate}
+
+Figure~\ref{fig:action-certificate} displays both the implication and its
+normalization boundary.  The scope is intentionally narrow.  We do not
+exclude $\log|\Action|$, multiplier or return-time clocks, multivalued
+potentials, closed non-exact changes of primitive, transcendental
+normalizations, or approximate matching.
+
+\begin{figure}[t]
+  \centering
+  \ActionCertificateFigure
+  \caption{The all-period implication is conditional on regular algebraic
+  evaluation and a frozen algebraic representative.  Algebraic gauges and
+  constants remain inside the certificate when the full endpoint ledger is
+  retained.  The symbolic identity-map control shows that a transcendental
+  additive constant can inject the target.  The right-hand box lists
+  observables and cocycles not decided here.  All categorical statuses are
+  read from the frozen static-audit package.}
+  \label{fig:action-certificate}
+\end{figure}
+
+\section{Exact action and arithmetic context}
+\label{sec:context}
+
+Let $X$ be an algebraic variety over $\Qbar$, let $U\subset X$ be an open
+set, and let $F:U\dashrightarrow X$ be a rational map.  On the associated
+complex phase space, suppose a single-valued one-form $\theta$ and a
+single-valued rational function $G\in\Qbar(X)$ satisfy
+\begin{equation}
+  F^*\theta-\theta=dG
+  \label{eq:exact-potential}
+\end{equation}
+where all terms are defined.  For an orbit
+$P_{j+1}=F(P_j)$ with $P_n=P_0$, define the one-traversal potential action
+\begin{equation}
+  \Action_G(P_0)=\sum_{j=0}^{n-1}G(P_j).
+  \label{eq:action-definition}
+\end{equation}
+The regularity clause is part of the definition used here: every map step is
+defined, every $P_j$ lies in $X(\Qbar)$, and $G$ has no pole at any $P_j$.
+
+The distinction between absolute actions and action differences is essential.
+The latter often remove additive constants and carry geometric information
+about transport \citep{mackay1984transport,meiss1992symplectic}; the present
+proposal needs an absolute value.  Likewise, a discrete type-1 generating
+function can define a variational sum \citep{kook1989periodic,
+mazzucchelli2013degenerate,bialy2023locally}, but its sign and endpoint
+convention must be matched to \eqref{eq:exact-potential} rather than assumed.
+Exact potential conventions and their additive ambiguity are standard
+\citep{delshams1997melnikov}.
+
+The arithmetic input is elementary until the last step.  Rational functions
+defined over $\Qbar$ take algebraic values at algebraic points whenever their
+denominators do not vanish; $\Qbar$ is a field; and a finite sum remains
+algebraic.  The transcendence input is the classical
+Hermite--Lindemann theorem: if $0\ne\alpha\in\Qbar$, then $e^\alpha$ is
+transcendental \citep{baker2022transcendental}.  We use this theorem, not any
+stronger result on linear forms in logarithms.
+
+The H\'enon example belongs to the standard class of polynomial plane
+automorphisms \citep{friedland1989dynamical}.  Quadratic symplectic maps and
+their normal forms have a long history \citep{moser1994quadratic}, and recent
+work continues to study arithmetic periodic points and broader open problems
+\citep{dehenon2024open,kim2024many}.  None of these sources is cited for the
+paper-specific algebraic-action certificate or the denominator-three
+calculation.
+
+\begin{table}[H]
+\centering
+\small
+\caption{The present question relative to adjacent uses of periodic action.}
+\label{tab:context}
+\begin{tabular}{@{}p{0.23\linewidth}p{0.30\linewidth}p{0.36\linewidth}@{}}
+\toprule
+Theme & Typical role & Boundary in this paper \\
+\midrule
+Generating actions & Variational characterization of periodic orbits & We freeze one algebraic exact potential and audit its absolute value. \\
+Action differences & Transport, barriers, and geometry & Constant ambiguity often cancels; our proposed clock needs an absolute normalization. \\
+Action spectra & Periodic values and behavior under iteration & We distinguish one traversal, averages, and repetitions explicitly. \\
+H\'enon dynamics & Polynomial automorphisms, symplectic normal forms, arithmetic cycles & Supplies an exact specialization, not evidence for a universal statement. \\
+Transcendence & Algebraic values versus exponentials & Hermite--Lindemann converts algebraicity into an exact exclusion of $\log\beta$. \\
+This paper & Pre-execution arithmetic provenance & Certifies one normalized algebraic action route and leaves other clocks open. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The algebraic-action certificate}
+\label{sec:certificate}
+
+We first separate finite evaluation from transcendence.
+
+\begin{theorem}[Finite algebraic evaluation]
+\label{thm:evaluation}
+Let $F$, $G$, and $(P_0,\ldots,P_{n-1})$ satisfy the hypotheses above.
+Then
+\begin{equation}
+  \Action_G(P_0)\in\Qbar.
+  \label{eq:algebraic-action}
+\end{equation}
+The conclusion holds for every finite $n$; it does not arise from a bounded
+period search.
+\end{theorem}
+
+\begin{proof}
+Because $P_j\in X(\Qbar)$ and $G\in\Qbar(X)$ is regular at $P_j$, evaluation
+gives $G(P_j)\in\Qbar$ for each $j$.  The action is a sum of exactly $n$
+such values.  Closure of $\Qbar$ under finite addition proves
+\eqref{eq:algebraic-action}.
+\end{proof}
+
+The theorem also applies to step-dependent maps and potentials: if every
+$F_j$ is defined over $\Qbar$, every step is defined at its current point,
+and every $G_j(P_j)$ is pole-free, then $\sum_jG_j(P_j)$ is algebraic.  One
+must check the terms before summation.  A formal cancellation of undefined
+expressions cannot certify an action.
+
+\begin{corollary}[Algebraic logarithmic targets]
+\label{cor:log-target}
+Under Theorem~\ref{thm:evaluation}, let
+$\beta\in\Qbar$.  If $\beta\ne0,1$, then $\Action_G(P_0)$ is not any complex
+logarithm of $\beta$.  If $\beta=0$, no complex logarithm exists.  For
+$\beta=1$, equality with a branch is possible only in the algebraic case
+$\Action_G(P_0)=0$, corresponding to the zero branch.  In particular,
+\begin{equation}
+  \Action_G(P_0)\ne\log p
+  \qquad\text{for every rational prime }p,
+  \label{eq:prime-log-exclusion}
+\end{equation}
+where $\log p$ denotes the positive real logarithm.
+\end{corollary}
+
+\begin{proof}
+If $\Action_G$ were a complex logarithm of a nonzero $\beta$, then
+$e^{\Action_G}=\beta$.  When $\Action_G\ne0$, Hermite--Lindemann says that
+the left side is transcendental, contradicting algebraicity of $\beta$.
+Thus an algebraic logarithm must be zero, forcing $\beta=1$.  The zero target
+has no logarithm in $\C$.  Equation~\eqref{eq:prime-log-exclusion} follows
+because $p\in\Qbar\setminus\{0,1\}$.
+\end{proof}
+
+The same argument closes several nearby conventions, provided every new
+coefficient is frozen and algebraic.
+
+\begin{proposition}[Algebraic post-conventions]
+\label{prop:extensions}
+Let $A=\Action_G(P_0)\in\Qbar$, let $c\in\Qbar^*$, and let
+$r,n\in\Z_{>0}$.  Then $cA$, $A/n$, and $rA$ are algebraic and cannot equal
+$\log\beta$ for $\beta\in\Qbar\setminus\{0,1\}$.  Under the standard
+embedding $\Qbar\hookrightarrow\C$, the numbers
+$\operatorname{Re}A$, $\operatorname{Im}A$, and $|A|$ are algebraic and
+obey the same exclusion.
+\end{proposition}
+
+\begin{proof}
+The scaled, averaged, and repeated values are algebraic by field closure.  If
+$A$ is algebraic, so is its complex conjugate $\bar A$; hence
+$\operatorname{Re}A=(A+\bar A)/2$ and
+$\operatorname{Im}A=(A-\bar A)/(2i)$ are algebraic.  Also
+$|A|^2=A\bar A$ is algebraic, and any square root of an algebraic number is
+algebraic.  Corollary~\ref{cor:log-target} applies to each resulting
+algebraic value.
+\end{proof}
+
+\begin{remark}[A required nonclaim]
+Proposition~\ref{prop:extensions} proves that $|A|$ cannot itself equal
+$\log p$.  It says nothing about $\log|A|$.  Indeed, an algebraic action with
+$|A|=p$ would produce $\log|A|=\log p$ by post-processing.  The argument also
+does not control $\arg A$ or approximate equality.
+\end{remark}
+
+\section{Gauge ledger and normalization countercontrols}
+\label{sec:gauge}
+
+Suppose first that $\theta'=\theta+d\chi$ for a single-valued rational
+function $\chi$.  Then
+\begin{align}
+F^*\theta'-\theta'
+ &=F^*\theta-\theta+d(\chi\circ F-\chi) \\
+ &=d\bigl(G+\chi\circ F-\chi+C\bigr)
+\end{align}
+for an arbitrary constant $C$.  Thus one may take
+\begin{equation}
+  G'=G+\chi\circ F-\chi+C.
+  \label{eq:autonomous-gauge}
+\end{equation}
+On a closed period-$n$ orbit, single-valuedness gives
+\begin{equation}
+  \Action_{G'}-\Action_G=nC.
+  \label{eq:autonomous-shift}
+\end{equation}
+Consequently $C=0$ preserves the numerical action; any algebraic $C$
+preserves its algebraicity; a transcendental $C$ may destroy the certificate.
+
+For a stepwise sequence, the general endpoint formula is more informative.
+Let $P_{j+1}=F_j(P_j)$ and take
+\begin{equation}
+ G'_j=G_j+\chi_{j+1}\circ F_j-\chi_j+C_j.
+ \label{eq:step-gauge}
+\end{equation}
+Every transition, gauge value, and potential value is assumed separately
+defined.  Direct summation telescopes to
+\begin{equation}
+ \sum_{j=0}^{n-1}G'_j(P_j)-\sum_{j=0}^{n-1}G_j(P_j)
+ =\chi_n(P_n)-\chi_0(P_0)+\sum_{j=0}^{n-1}C_j.
+ \label{eq:general-endpoint}
+\end{equation}
+Endpoint compatibility $\chi_n(P_n)=\chi_0(P_0)$ permits the shorter
+constant-sum formula.  Without compatibility the endpoint mismatch remains;
+if it and all $C_j$ are algebraic, the shifted action is still algebraic and
+the prime-log exclusion still holds.  Compatibility is a value-simplifying
+condition, not a prerequisite for algebraicity.
+
+Figure~\ref{fig:gauge-scope} summarizes exact positive, negative, and edge
+controls.  A pole or undefined step stops evaluation.  A multivalued gauge
+with untracked monodromy lies outside the formula.  The $\beta=0$ and
+$\beta=1$ rows record the two necessary logarithm edge cases.  The matrix is
+  categorical: each cell is derived from named frozen-result predicates or
+  marked as theorem-defined in an explicit scope ledger; it does not
+  numerically evaluate a logarithm.
+
+\begin{figure}[t]
+  \centering
+  \GaugeScopeFigure
+  \caption{The stepwise gauge ledger and source-locked scope matrix.
+  ``Certified'' means that the stated formula or algebraicity consequence is
+  justified under the row's assumptions; ``stop/out'' means that the action
+  certificate cannot be applied; ``edge'' marks a logarithm-domain exception
+  or a statement needing separate interpretation.  The cell provenance is
+  recorded separately as frozen-JSON-derived or theorem-defined; the latter is
+  not presented as a raw computational result.  In particular, an
+  algebraic endpoint mismatch retains the prime-log exclusion, while
+  $\log|\Action|$ remains outside the theorem.}
+  \label{fig:gauge-scope}
+\end{figure}
+
+\begin{proposition}[Sharp normalization boundary]
+\label{prop:identity-control}
+Exactness of the map alone does not force algebraicity of its absolute
+action.  On $X=\A^2$ take $F=\operatorname{id}$ and $\theta=p\,dq$.  The
+constant potential $G\equiv\log 2$ satisfies
+$F^*\theta-\theta=0=dG$, while every point is fixed and has one-step action
+$\log 2$.
+\end{proposition}
+
+The proposition is a symbolic control: ``$\log 2$'' is a formal constant
+label and no decimal logarithm or external target table is evaluated.  It
+shows why the hypothesis $G\in\Qbar(X)$, including its additive
+normalization, cannot be removed.  More generally, after an orbit and its
+action $A$ are known, the post-hoc choice
+\begin{equation}
+  C=\frac{\log p-A}{n}
+  \label{eq:target-injection}
+\end{equation}
+forces the shifted action to equal $\log p$.  This is target injection, not
+an intrinsic clock.  The source lock forbids orbit-dependent or
+target-dependent normalization.
+
+Three nearby constructions require new ledgers rather than a silent reuse of
+\eqref{eq:general-endpoint}: a multivalued $\chi$ may carry monodromy; a
+closed but non-exact change of primitive need not be $d\chi$; and a local
+potential may not extend single-valuedly around the orbit.  None is ruled out
+by the present certificate.
+
+\section{The algebraic H\'enon certificate}
+\label{sec:henon}
+
+For $a\in\Qbar$, consider
+\begin{equation}
+  H_a(q,p)=(q^2-a-p,q),
+  \qquad H_a^{-1}(q,p)=(p,p^2-a-q).
+  \label{eq:henon-map}
+\end{equation}
+Its Jacobian matrix is
+\begin{equation}
+  DH_a(q,p)=\begin{pmatrix}2q&-1\\1&0\end{pmatrix},
+  \qquad \det DH_a=1.
+\end{equation}
+With $\theta=p\,dq$, direct pullback gives
+\begin{align}
+ H_a^*\theta-
+ \theta
+ &=q\,d(q^2-a-p)-p\,dq \\
+ &=(2q^2-p)\,dq-q\,dp \\
+ &=d\left(\frac23q^3-pq\right).
+ \label{eq:henon-potential}
+\end{align}
+Thus our potential convention is
+\begin{equation}
+  G(q,p)=\frac23q^3-pq.
+  \label{eq:G}
+\end{equation}
+
+The type-1 generating function
+\begin{equation}
+  L_a(q,Q)=\frac13q^3-aq-qQ
+  \label{eq:L}
+\end{equation}
+satisfies $p=\partial_qL_a=q^2-a-Q$ and
+$P=-\partial_QL_a=q$, so its graph is precisely
+$Q=q^2-a-p$, $P=q$.  Substitution on the graph gives
+\begin{equation}
+  L_a(q,Q)=-\frac23q^3+pq=-G(q,p).
+  \label{eq:sign}
+\end{equation}
+The two conventional closed sums therefore have opposite sign.  Both remain
+algebraic and both are excluded from $\log p$ under the frozen algebraic
+normalization; nevertheless, sign must not be hidden in a comparison of
+numerical action values.
+
+Writing a periodic orbit as
+$P_j=(q_j,p_j)$ gives $p_j=q_{j-1}$ and the cyclic recurrence
+\begin{equation}
+  q_{j+1}+q_{j-1}=q_j^2-a,
+  \qquad j\in\Z/n\Z.
+  \label{eq:recurrence}
+\end{equation}
+For $n=1$ the two ordered neighbor slots both equal $q_0$; for $n=2$ they
+both equal the other coordinate.  The multiplicity is structural and must
+not be collapsed.
+
+\begin{theorem}[All-period H\'enon action]
+\label{thm:henon}
+Let $a\in\Qbar$.  Every finite periodic point of $H_a$ has coordinates in
+$\Qbar$.  For every such period-$n$ orbit,
+\begin{equation}
+  \Action_G
+  =\sum_{j=0}^{n-1}\left(\frac23q_j^3-q_{j-1}q_j\right)
+  \in\Qbar,
+  \label{eq:henon-action}
+\end{equation}
+and $\sum_jL_a(q_j,q_{j+1})=-\Action_G$.  Neither action convention equals
+$\log p$ for a rational prime.
+\end{theorem}
+
+\begin{proof}
+Homogenize the $n$ equations \eqref{eq:recurrence} in
+$[Q_0:\cdots:Q_{n-1}:Z]\in\mathbb P^n$.  At $Z=0$, every equation reduces
+to $Q_j^2=0$, hence every $Q_j=0$, which is not a projective point.  Thus the
+projective zero scheme has no point on the hyperplane at infinity.  A
+  positive-dimensional projective component would intersect the fixed
+  hyperplane $Z=0$, where we just proved that there is no point.  Hence the
+  projective scheme is zero-dimensional.  Consequently the affine cyclic
+system has finitely many points and is cut out over the number field
+$\Q(a)$; all $q_j$ are algebraic over $\Q(a)$ and hence over $\Q$.  Since
+$p_j=q_{j-1}$, all phase-space coordinates are algebraic.  Formula
+\eqref{eq:henon-action} follows from \eqref{eq:G}, and each term is
+algebraic.  The sign identity follows from \eqref{eq:sign}; the logarithmic
+exclusion follows from Corollary~\ref{cor:log-target}.
+\end{proof}
+
+The elementary argument above proves algebraicity, not a count of exact
+periodic points or a transversality statement.  Scheme multiplicities are
+irrelevant to the evaluation conclusion.
+
+\begin{corollary}[$S$-integral denominator certificate]
+\label{cor:s-integral}
+Let $K_0$ be a number field, let $S_0$ contain its archimedean places, and
+assume $a\in\mathcal O_{K_0,S_0}$.  For a finite periodic orbit choose a
+finite extension $K/K_0$ containing every orbit coordinate, and let $S$ be
+the places of $K$ above $S_0$, together with all archimedean places.  Then
+every $q_j,p_j$ lies in $\OKS$ and
+\begin{equation}
+  3\Action_G\in\OKS.
+  \label{eq:three-action}
+\end{equation}
+Equivalently, $\Action_G$ is integral away from $S$ and places above the
+rational prime $3$.
+\end{corollary}
+
+\begin{proof}
+Fix a non-Archimedean place $v\notin S$.  Then $|a|_v\le1$.  If
+$R=\max_j|q_j|_v>1$, choose $j$ with $|q_j|_v=R$.  By the ultrametric
+inequality,
+\begin{equation}
+ |q_j^2-a|_v=R^2,
+ \qquad
+ |q_{j+1}+q_{j-1}|_v\le R,
+\end{equation}
+contradicting \eqref{eq:recurrence}.  Hence every $q_j$ and thus every
+$p_j=q_{j-1}$ is $S$-integral.  Finally,
+\begin{equation}
+ 3\Action_G
+ =\sum_{j=0}^{n-1}\left(2q_j^3-3q_{j-1}q_j\right)
+\end{equation}
+is an integer-coefficient polynomial in those coordinates.
+\end{proof}
+
+The factor $3$ is necessary in general.  At $a=-1$, the point $(q,p)=(1,1)$
+is fixed because $1^2-(-1)-1=1$, and
+\begin{equation}
+  \Action_G=G(1,1)=\frac23-1=-\frac13,
+  \qquad 3\Action_G=-1.
+  \label{eq:sharp-third}
+\end{equation}
+Thus we claim only \eqref{eq:three-action}; we do not claim that
+$\Action_G$ is integral at places above $3$.
+
+Figure~\ref{fig:henon-static} records the exact identity and proof ledgers.
+The no-infinity rows at periods $1,2,3,5$ audit the generic leading-system
+construction; they are not a finite-period proof of
+Theorem~\ref{thm:henon}.  The theorem uses the displayed all-$n$ argument.
+
+\begin{figure}[t]
+  \centering
+  \HenonStaticFigure
+  \caption{The H\'enon specialization as an exact static certificate.  The
+  top panels track the one-form identity, determinant, $G/L$ sign, and
+  low-period neighbor multiplicity.  The lower panels distinguish the
+  all-period no-infinity proof ledger from the valuation refinement.  The
+  fixed point with action $-1/3$ makes the denominator-three boundary sharp.
+  No periodic equation was solved to construct the figure.}
+  \label{fig:henon-static}
+\end{figure}
+
+\section{Source-locked static implementation audit}
+\label{sec:audit}
+
+The mathematical conclusion is all-period and deductive.  The accompanying
+software has a narrower role: it checks whether the implemented formulas,
+scope stops, normalization controls, and proof dependencies match the frozen
+protocol.  Before the formal static run, a versioned source lock fixed the
+candidate ID, hypotheses, nonclaims, registered stages, forbidden data, and
+zero-candidate-execution rule.  An independent pre-run Round-3 review issued
+\texttt{DEPLOYMENT\_PASS} for that static protocol.
+
+The official registry contains eight ordered entries:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Stage & Result & Role \\
+\midrule
+R000 & PASS & source-lock hash and zero-execution provenance \\
+R001 & PASS & executable-source isolation scan \\
+R002 & PASS & structured proof-contract integrity \\
+R010--R019 & PASS & controls-first gauge, domain, target, and edge checks \\
+R020 & PASS & H\'enon inverse, Jacobian, one-form, and sign identities \\
+R021 & PASS & low-period ordered-slot multiplicity \\
+R022 & PASS & projective leading-system proof ledger \\
+R023 & PASS & orbit-field valuation and denominator-three ledger \\
+\bottomrule
+\end{tabular}
+\end{center}
+All controls ran before the H\'enon static stages.  The official safe suite
+reported 82 tests, zero failures, and zero errors.  The final result manifest
+closed exactly over 35 declared files, including seven JSON outputs, three
+human-readable reports, JUnit XML, the proof package, source lock, experiment
+documents, and executable sources.  Every registered stage passed.
+
+Most importantly, the audit records all of the following as false: candidate
+parameter substitution, candidate periodic-point computation, candidate
+action computation, external prime-table access, Riemann-zero-data access,
+network access by the executable, and floating-point equality evidence.  The
+symbolic label \texttt{LOG\_OF\_TARGET\_TWO} is used only to exercise the
+normalization boundary.  R020--R023 manipulate generic symbols and exact
+identities; they do not open a candidate search.
+
+This division of labor prevents a common category error.  The JSON outputs do
+not establish that every period has algebraic action; Theorem~\ref{thm:henon}
+does.  Conversely, the theorem does not establish that a particular software
+path honors the intended endpoints and stop rules; the static audit tests
+that implementation.  Appendix~\ref{app:reproducibility} gives hashes and
+reproduction commands.
+
+\section{Interpretation, route decision, and limitations}
+\label{sec:interpretation}
+
+The strongest justified decision is
+\begin{quote}
+\centering
+\texttt{GO\_AS\_NARROW\_DESIGN\_CERTIFICATE}: close only the frozen,
+normalized algebraic absolute action as an exact prime-logarithm clock.
+\end{quote}
+This is stronger than a finite non-observation because it holds at every
+period under stated hypotheses.  It is weaker than a map-level obstruction
+because Proposition~\ref{prop:identity-control} shows that normalization can
+change the arithmetic class.  The certificate should therefore be used as a
+pre-execution filter: before searching or fitting, ask whether the proposed
+observable is already forced into $\Qbar$.
+
+The precise surviving directions are as follows.
+\begin{itemize}
+  \item \textbf{Logarithmic post-processing.}  The theorem excludes
+  $|\Action|=\log p$, not $\log|\Action|=\log p$.
+  \item \textbf{Transcendental normalization.}  A frozen, target-independent
+  transcendental constant is outside the theorem.  Its mathematical origin
+  would need separate justification; post-hoc target injection is not
+  admissible.
+  \item \textbf{Multivalued or topological cocycles.}  Monodromy and closed
+  non-exact primitive changes require a branch or cohomology ledger.
+  \item \textbf{Different observables.}  Multiplier logs, return times,
+  energy derivatives, infinite-place or adelic quantities are not actions of
+  the form \eqref{eq:action-definition}.
+  \item \textbf{Approximation.}  Algebraicity does not prevent algebraic
+  numbers from approximating transcendental ones.  No quantitative separation
+  or fit statistic is proved here.
+\end{itemize}
+
+The H\'enon result is equally scoped.  We prove algebraicity of finite
+periodic points and $S$-integrality of $3\Action_G$ for the stated quadratic
+map.  We do not classify periodic points, periods, branches at infinity,
+multiplier clocks, or analytic continuations.  We do not assert a prime-orbit
+correspondence, a dynamical zeta identity, a spectral determinant, a trace
+formula, or a quantization.  In particular, the paper is not a universal
+no-go theorem for symplectic or arithmetic dynamics.
+
+The individual ingredients are classical or elementary.  The literature
+audit located no basis for a historical-first claim, and none is made.  The
+standalone contribution is the complete normalization-aware, source-locked
+certificate and its exact H\'enon instantiation.  If a publication venue
+requires substantially deeper standalone novelty, the planned disposition is
+\path{MERGE_IF_STANDALONE_DEPTH_IS_REQUIRED}: merge this certificate into a
+broader obstruction synthesis rather than claim greater standalone depth.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+A regular finite sum of a frozen $\Qbar$-rational exact potential on an
+algebraic periodic orbit is algebraic.  Hermite--Lindemann then rules out an
+exact equality with $\log p$ at every period.  The statement survives
+algebraic scales and algebraic exact gauges only when endpoints and constants
+are tracked; the symbolic identity-map control shows why arbitrary
+transcendental normalization cannot be ignored.  For the quadratic H\'enon
+map the exact potential is opposite in sign to the type-1 generating function,
+all finite periodic points are algebraic, and only $3\Action$ is generally
+$S$-integral, sharply.
+
+The result is best understood as an arithmetic provenance test, not as a new
+transcendence theorem and not as a universal obstruction to dynamical clocks.
+A natural next project is a separately source-locked intrinsic
+nonalgebraic or multivalued clock with a complete branch, endpoint, and target
+independence ledger.
+
+\label{page:conclusion-end}
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+
+\section{H\'enon geometry and valuation details}
+\label{app:henon-details}
+
+This appendix records the two degeneracies most likely to be lost in a
+compressed implementation.  For period one, cyclic indexing in
+\eqref{eq:recurrence} yields
+\begin{equation}
+  2q_0=q_0^2-a.
+\end{equation}
+The two neighbor \emph{slots} coincide but must both be retained.  For period
+two the system is
+\begin{equation}
+  2q_1=q_0^2-a,
+  \qquad
+  2q_0=q_1^2-a.
+\end{equation}
+At period $n\ge3$, the neighbors are written separately even if a special
+solution happens to make their values equal.
+
+For arbitrary $n$, the homogenized $j$th equation has the form
+\begin{equation}
+  Q_j^2-Q_{j+1}Z-Q_{j-1}Z-aZ^2=0.
+\end{equation}
+At $Z=0$ it becomes $Q_j^2=0$.  Hence the entire projective zero scheme is
+disjoint from infinity.  The argument uses the fact that a
+positive-dimensional projective subvariety cannot be contained in the affine
+chart $Z\ne0$.  It does not require the affine equations to be reduced, and
+therefore proves finiteness even in the presence of multiplicity.
+
+For Corollary~\ref{cor:s-integral}, the orbit field is explicit in the
+quantifiers.  Starting from $(K_0,S_0)$, one first chooses a finite extension
+$K$ containing every coordinate and then extends $S_0$ to all places of $K$
+above it.  The maximum argument is applied only at non-Archimedean
+$v\notin S$.  This ordering avoids silently treating an algebraic coordinate
+as if it belonged to the base field.  The sharp example
+\eqref{eq:sharp-third} shows that the denominator in $G$ cannot be discarded.
+
+\section{Static audit and reproducibility record}
+\label{app:reproducibility}
+
+The prospective lock is
+\texttt{experiments/source\_lock.json}, SHA-256
+\begin{center}
+\small\ttfamily
+d15f5084900aa043e80ada46d3ce22772cd10bbdb348d4fcb000aa9fa2ca49d7.
+\end{center}
+The official proof package hash is
+\begin{center}
+\small\ttfamily
+c579e2da093a8ab588a5818bab0df59a47804792fcdfa338777f48e1bd1a1214.
+\end{center}
+The independent pre-run review record used for deployment authorization has
+SHA-256
+\begin{center}
+\small\ttfamily
+629ed6bfe06f73ad387712c53f28aa73ee6c466098dd22ef502fd34f2d32ba58.
+\end{center}
+The official JUnit XML has SHA-256
+\begin{center}
+\small\ttfamily
+c29e6bc5f805f32d9a9620dfad42bfe9474973f430c857531970e0f28782fa62,
+\end{center}
+and records 82 tests, zero failures, and zero errors.  The final result
+manifest contains 35 paths and has SHA-256
+\begin{center}
+\small\ttfamily
+6b3dbfed68dbd058056c35139756d5ccbb4e9f3b9a263ccaddef64bb183326e7.
+\end{center}
+
+From the project directory, the official frozen static audit was produced by
+\begin{verbatim}
+PYTHONDONTWRITEBYTECODE=1 pytest -q --junitxml=results/pytest.xml
+PYTHONDONTWRITEBYTECODE=1 python code/scripts/run_static_audit.py \
+  --project-root .
+python code/scripts/build_result_manifest.py --project-root .
+\end{verbatim}
+Those commands are provenance only; they need not be rerun to build the paper.
+Publication figures are regenerated from the frozen JSON package by
+\begin{verbatim}
+python paper/figures/generate_all.py
+\end{verbatim}
+and the manuscript by
+\begin{verbatim}
+paper/build.sh
+\end{verbatim}
+Each figure has PDF and SVG vector masters plus a PNG review copy.  The figure
+loader verifies the source-lock hash, all eight PASS stages, controls-first
+ordering, a closed candidate gate, and zero prime/zero access before writing
+an output.  Fixed PDF/SVG metadata makes consecutive regenerations
+byte-for-byte reproducible.
+
+No candidate parameter, periodic point, or candidate action appears in the
+paper package.  The H\'enon formulas use the generic algebraic parameter
+$a$, and the only substituted values are the predeclared sharp control
+$a=-1$, $(q,p)=(1,1)$ and small rational gauge controls.  Static identities
+are implementation audits.  The all-period conclusion comes from
+Theorems~\ref{thm:evaluation} and~\ref{thm:henon}.
+
+\end{document}

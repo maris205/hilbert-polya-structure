@@ -74,3 +74,21 @@ At \((u_c,1)\), however, the period-1--8 counts
 validates the implementation in its declared regime but cannot certify
 completeness at \(u_c\). Cycle expansions and dynamical determinants are
 therefore stop-scoped for the frozen candidate.
+
+## O8 — Finite-memory locally constant prime-clock obstruction (PROVED)
+
+For a fixed finite directed graph and a finite-memory locally constant scalar
+multiplicative cocycle, every periodic instability length lies in the
+finite-dimensional rational span of the finitely many local log-multipliers.
+Distinct rational-prime logarithms are rationally linearly independent by
+unique factorization.  Hence the periodic clock can contain at most the rank
+of that span many exact prime logarithms and cannot contain all of them.
+
+For `pcf_markov_baker_v1`, every closed walk has period \(2k\) and
+\(|\Lambda_u|=2^k\), so the exact multiplier ledger meets the rational primes
+only at \(2\).  This is a termwise exact obstruction for the frozen scalar
+clock, not a no-go theorem for point-dependent roofs, countable-state systems,
+matrix spectral radii, approximate matching, or growing families.
+
+Artifacts: [proof package](../papers/2-branch-baker/PROOF_PACKAGE.md),
+[verified results](../papers/2-branch-baker/results/EXPERIMENT_RESULTS.md).

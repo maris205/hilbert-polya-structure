@@ -1,0 +1,643 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage{graphicx,float}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\hypersetup{
+  pdftitle={Raw Rational-Prime Multipliers at a Frozen PCF Quadratic: Divisibility Obstruction and Exact Audit},
+  pdfauthor={Liang Wang},
+  pdfsubject={Exact arithmetic audit of periodic multipliers and a branchwise cotangent lift},
+  pdfkeywords={quadratic dynamics, periodic multiplier, algebraic integrality, dynatomic polynomial, cotangent lift}
+}
+
+\graphicspath{{figures/}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\OK}{\mathcal O_K}
+\newcommand{\Qbar}{\overline{\mathbb Q}}
+\newcommand{\Zbar}{\overline{\mathbb Z}}
+\newcommand{\uhat}{u}
+\newcommand{\Fu}{f_u}
+\newcommand{\ghat}{\widehat g}
+
+\title{Raw Rational-Prime Multipliers at a Frozen PCF Quadratic:\\
+Divisibility Obstruction and Exact Audit}
+\author{Liang Wang}
+\date{August 13, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+An exact arithmetic clock for a periodic-orbit model must survive repetition,
+not merely reproduce a prime-like count.  We audit such a clock at a frozen
+postcritically finite quadratic.  For a monic polynomial
+\(F\in\mathcal O_K[X]\) whose derivative has coefficient content
+\(F'=mH\), every rational multiplier at a point fixed by \(F^n\) lies in
+\(m^n\mathbb Z\).  Applied to \(g(z)=z^2-u\), where \(u\) is the real root of
+\(u^3-2u^2+2u-2=0\), this divisibility and a separate fixed-point calculation
+exclude rational multipliers of raw prime modulus at every period.  The result
+does not exclude a nonrational complex multiplier having prime modulus, and it
+leaves the rational target \(|\lambda|=2^n\) open for periods \(n\ge2\).
+Exact dynatomic, resultant, quotient-ring, and coordinate-conjugacy audits
+through period four recover four multiplier polynomials with no rational
+roots.  Three adversarial controls recover allowed \(2^n\) multipliers, the
+Chebyshev boundary, an odd prime multiplier, and a formal-period collision
+that vanishes after exact saturation.  Finally, the cotangent formula carries
+regular zero-section multipliers to reciprocal symplectic pairs, but is
+singular at the quadratic critical point, noncompact, and not globally
+invertible.  The outcome is therefore an all-period candidate obstruction,
+not a prime-orbit construction.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Periodic-orbit analogies with arithmetic become restrictive once the desired
+weights are stated term by term.  In the standard prime-orbit motivation, a
+primitive label \(p\) and its \(r\)-fold repetition should supply the same
+basic clock at lengths proportional to \(\log p\) and \(r\log p\), rather
+than only a generic prime-orbit counting law
+\citep{berry1999riemann}.  This paper asks a deliberately smaller question:
+can the genuine derivative cocycle of a frozen quadratic supply exact rational
+prime multipliers without importing a prime table?
+
+The parameter and arithmetic motivation are inherited from earlier work on
+the Logistic family \(f_u(x)=1-ux^2\) \citep{wang2026prime}.  That genealogy
+does not transfer the earlier paper's prime-sieve claims into the present
+experiment.  We freeze only the autonomous algebraic map and its parameter,
+do not read any prime or Riemann-zero dataset, and treat the arithmetic clock
+as a new falsifiable obligation.
+
+A finite-state, locally constant clock can fail because its periodic lengths
+occupy a finite-dimensional rational span.  The nonlinear derivative cocycle
+is point-dependent and need not have that defect.  At the present candidate,
+however, it encounters a different obstruction: algebraic integrality forces
+every \emph{rational} period-\(n\) multiplier to contain a factor \(2^n\).
+This is an exact all-period statement, not an inference from a finite orbit
+search.
+
+Figure~\ref{fig:theorem-certificate} summarizes the certificate and its two
+boundaries.  Our contributions are:
+
+\begin{enumerate}
+\item a self-contained derivative-content divisibility lemma and its
+candidate-specific all-period exclusion of raw rational-prime multipliers;
+\item an exact period-one-through-four implementation audit with independent
+coordinate duplication and controls that detect both allowed positive cases
+and failure of a theorem assumption; and
+\item a convention-safe cotangent calculation showing exactly what the
+regular symplectic bridge transports, and why it does not produce a global
+symplectomorphism through the critical point.
+\end{enumerate}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{fig1_theorem_certificate.pdf}
+  \caption{The source-locked certificate.  (a) Monicity makes finite periodic
+  points integral, while \(F'=mH\) contributes \(m^n\); rationality then
+  forces the remaining factor into \(\mathbb Z\).  (b) The frozen quadratic
+  has no raw rational-prime multiplier at any period, whereas the rational
+  exponent-prime target with base \(2\) remains open for \(n\ge2\).  The
+  modulus of a nonrational complex multiplier is outside the theorem.
+  (c) On regular zero-section cycles only, the cotangent relation transports
+  \(\lambda\) to \((\lambda,\lambda^{-1})\); the critical line prevents a
+  global lift.}
+  \label{fig:theorem-certificate}
+\end{figure}
+
+The general lemma is elementary and receives no priority claim.  The
+defensible result is the complete, source-locked certificate chain for one
+candidate.  In particular, we do not claim absence of every rational
+multiplier, absence of \(|\lambda|=2^n\) at higher periods, a theorem about
+complex modulus without rationality of \(\lambda\), a compact global
+symplectic lift, a Riemann determinant, or a quantization.
+
+\section{Prior work and claim boundary}
+\label{sec:prior}
+
+\paragraph{Arithmetic multiplier spectra.}
+Global constraints on multiplier spectra are substantially deeper and broader
+than the sparse-value question considered here.  Huguin proves rigidity for
+unicritical maps whose multipliers are all rational
+\citep{huguin2021unicritical}, for quadratic rational maps with integer-ring
+multipliers \citep{huguin2022quadratic}, and for rational maps whose entire
+multiplier spectrum lies in a number field \citep{huguin2023rational}.
+Related integer-multiplier rigidity is treated by
+\citet{buff2022integer}.  Multiplier and length spectra also determine strong
+moduli data outside exceptional families \citep{jixie2023homoclinic}.
+These are whole-spectrum rigidity results; none is attributed the pointwise
+divisibility certificate below.
+
+For a nonexceptional rational map, the rational span of finite characteristic
+exponents is infinite-dimensional \citep{jixiezhang2026space}.  In the
+standard notation \(z^2+c\), our map has \(c=-u\ne0,-2\), so it lies on the
+nonexceptional side of that theorem.  Infinite rank is important context: it
+shows why a finite-rank clock argument cannot simply be recycled for the
+nonlinear derivative.  It neither forces nor forbids an individual multiplier
+to be a rational prime.
+
+\paragraph{Dynatomic and multiplier polynomials.}
+Formal dynatomic cycles and arithmetic periodic-point machinery are standard
+\citep{morton1994rational,silverman2007arithmetic}.  Multiplier-polynomial
+integrality is known for \(z^d+c\) and related polynomial families
+\citep{murakami2024arithmetic}; low-period multiplier data have strong moduli
+content \citep{huguin2024moduli}; and quadratic multiplier maps have been
+studied analytically in parameter space \citep{levin2009multipliers}.  Our
+period-four computation is therefore an implementation audit, not a new
+dynatomic method, an asymptotic experiment, or a moduli reconstruction.
+
+\paragraph{Symplectic extensions of one-dimensional maps.}
+Area-preserving weak-noise extensions of the Logistic map predate this work
+\citep{fogedby2005weak}.  The singular and noninvertible structures arising
+from such symplectic formulations were analyzed explicitly by
+\citet{demaeyer2009escape}.  We use the classical cotangent formula only to
+track the multiplier pair on regular branches.  Its failure at \(g'(0)=0\)
+is a limitation, not a new global construction.
+
+\section{Derivative-content divisibility}
+\label{sec:divisibility}
+
+Let \(K\) be a number field with ring of integers \(\mathcal O_K\).  All
+periodic points below are finite points in \(\Qbar\); the polynomial fixed
+point at infinity is excluded.
+
+\begin{theorem}[Derivative-content divisibility]
+\label{thm:content}
+Let \(F\in\mathcal O_K[X]\) be monic of degree at least two.  Suppose
+\begin{equation}
+ F'(X)=mH(X),\qquad m\in\mathbb Z,\quad m\ge2,
+ \quad H\in\mathcal O_K[X].
+ \label{eq:derivative-content}
+\end{equation}
+If \(F^n(\alpha)=\alpha\) and
+\(\lambda_{n,\alpha}=(F^n)'(\alpha)\in\mathbb Q\), then
+\begin{equation}
+ \lambda_{n,\alpha}\in m^n\mathbb Z.
+ \label{eq:content-conclusion}
+\end{equation}
+The integer \(n\) need not be the least period.
+\end{theorem}
+
+\begin{proof}
+Every iterate \(F^n\) is monic with coefficients in \(\mathcal O_K\).
+Consequently \(F^n(X)-X\) is monic, and a finite root \(\alpha\) is integral
+over \(\mathcal O_K\).  Since \(\mathcal O_K\) is integral over
+\(\mathbb Z\), transitivity makes \(\alpha\) an algebraic integer.  Each
+orbit point \(F^j(\alpha)\) is then an algebraic integer as well.
+
+The chain rule and \eqref{eq:derivative-content} give
+\begin{equation}
+ \lambda_{n,\alpha}
+ =\prod_{j=0}^{n-1}F'\!\left(F^j(\alpha)\right)
+ =m^n\underbrace{\prod_{j=0}^{n-1}
+ H\!\left(F^j(\alpha)\right)}_{\displaystyle\beta}.
+ \label{eq:chain-content}
+\end{equation}
+The factor \(\beta\) is an algebraic integer.  If \(\lambda_{n,\alpha}\) is
+rational, then \(\beta=\lambda_{n,\alpha}/m^n\) is both rational and an
+algebraic integer.  The identity
+\(\mathbb Q\cap\Zbar=\mathbb Z\) gives \(\beta\in\mathbb Z\), proving
+\eqref{eq:content-conclusion}.
+\end{proof}
+
+Each assumption has a distinct role.  Monicity and algebraic-integer
+coefficients control periodic-point integrality; the coefficient-wise factor
+\(m\) controls the repeated derivative content; and rationality of the final
+multiplier converts an algebraic integer to an ordinary integer.  Dropping
+any of these hypotheses changes the conclusion.  The power map \(F(z)=z^2\)
+also shows sharpness: its nonzero exact period-\(n\) cycles have multiplier
+\(2^n\), so the factor \(m^n\) cannot be improved in general.
+
+\begin{remark}[Modulus-only targets]
+Theorem~\ref{thm:content} assumes \(\lambda\in\mathbb Q\).  An equality
+\(|\lambda|=p\) with nonrational complex \(\lambda\) does not make
+\(\lambda/m^n\) rational and is not covered.  We retain this distinction in
+every result label and figure.
+\end{remark}
+
+\section{Frozen PCF specialization}
+\label{sec:frozen}
+
+Let \(u\) be the unique real root of
+\begin{equation}
+ P(U)=U^3-2U^2+2U-2.
+ \label{eq:parameter-polynomial}
+\end{equation}
+The polynomial is monic, so \(u\) is an algebraic integer.  Moreover,
+\(P'(U)=3(U-2/3)^2+2/3>0\), proving uniqueness of the real root.  The rational
+root test shows that \(P\) is irreducible, so \(1,u,u^2\) is a basis of
+\(K=\mathbb Q(u)\).
+
+The postcritical-finite label can be checked directly rather than inherited
+as an assumption.  With \(d=u-1\), the critical orbit of \(f_u\) is
+\begin{equation}
+ 0\longmapsto 1\longmapsto -d\longmapsto d\longmapsto d.
+ \label{eq:critical-orbit}
+\end{equation}
+Indeed, \(f_u(1)=1-u=-d\), while
+\(f_u(\pm d)=1-u(u-1)^2=d\) is equivalent to
+\(P(u)=0\).  This finite critical orbit supplies parameter provenance only;
+neither Theorem~\ref{thm:content} nor the two multiplier corollaries uses
+postcritical finiteness.
+
+Define
+\begin{equation}
+ g(z)=z^2-u,\qquad f_u(x)=1-ux^2,\qquad \phi(x)=-ux.
+ \label{eq:maps}
+\end{equation}
+Because \(u\ne0\), \(\phi\) is invertible, and direct substitution gives
+\begin{equation}
+ \phi\circ f_u=g\circ\phi.
+ \label{eq:conjugacy}
+\end{equation}
+Periodic multipliers are therefore identical in the two coordinates.
+
+\begin{definition}[Two exact targets]
+For an exact period-\(n\) orbit with a rational multiplier \(\lambda\):
+\begin{itemize}
+\item a \emph{raw rational-prime target} satisfies \(|\lambda|=p\) for a
+rational prime \(p\);
+\item a \emph{rational exponent-prime target} satisfies
+\(|\lambda|=p^n\).
+\end{itemize}
+These definitions do not include a nonrational complex \(\lambda\) having the
+same modulus.
+\end{definition}
+
+\begin{corollary}[All-period raw-prime obstruction]
+\label{cor:raw-prime}
+No finite periodic orbit of \(g\), and hence none of \(f_u\), has a rational
+multiplier whose absolute value is a rational prime.
+\end{corollary}
+
+\begin{proof}
+Since \(g'(z)=2z\), Theorem~\ref{thm:content} gives
+\(\lambda\in2^n\mathbb Z\) whenever a point fixed by \(g^n\) has rational
+multiplier \(\lambda\).  For \(n\ge2\), no nonzero element of
+\(2^n\mathbb Z\) has prime absolute value.
+
+At \(n=1\), the only possible prime modulus is \(2\).  If \(2z=2\), then
+\(z=1\), and the fixed-point equation \(z^2-u=z\) forces \(u=0\).  If
+\(2z=-2\), then \(z=-1\), and the same equation forces \(u=2\).  But
+\(P(0)=-2\) and \(P(2)=2\), so neither value is the frozen parameter.  The
+conjugacy \eqref{eq:conjugacy} transfers the result to \(f_u\).
+\end{proof}
+
+\begin{corollary}[Exponent-prime boundary]
+\label{cor:exponent-prime}
+If an exact period-\(n\) multiplier is rational and
+\(|\lambda|=p^n\), then \(p=2\).  At period one, \(p=2\) is absent.  For
+\(p=2\) and \(n\ge2\), existence remains open here.
+\end{corollary}
+
+\begin{proof}
+Write \(\lambda=2^n k\) with \(k\in\mathbb Z\).  If \(p\) is odd, the two
+sides of \(2^n|k|=p^n\) have incompatible 2-adic valuations.  For \(p=2\),
+the equality reduces only to \(|k|=1\), which Theorem~\ref{thm:content} does
+not exclude.  The period-one case was excluded in the proof of
+Corollary~\ref{cor:raw-prime}.
+\end{proof}
+
+No finite-period null search may replace the word ``open'' in
+Corollary~\ref{cor:exponent-prime}.  Conversely, no higher-period computation
+is needed to strengthen the all-period raw-prime conclusion.
+
+\section{Exact audit and adversarial controls}
+\label{sec:audit}
+
+The computation in this section audits formulas and software paths.  It is
+not the source of Corollaries~\ref{cor:raw-prime}--\ref{cor:exponent-prime}.
+The source lock fixes periods \(1\le n\le4\), the field
+\(\mathbb Q[u]/(P(u))\), exact arithmetic only, and a prohibition on external
+prime or zero data.  Formal dynatomic factors are repeatedly saturated by
+lower-period fixed equations; point resultants are grouped into cycles;
+multiplier polynomials are checked in the exact orbit quotient; and rational
+roots are certified by simultaneous vanishing of the \(1,u,u^2\) components.
+
+\subsection{Frozen candidate}
+
+Table~\ref{tab:candidate-ledger} gives the complete cutoff ledger.  The
+pointwise resultant is the exact \(n\)th power of the per-cycle polynomial in
+each row.  Direct chain products agree with derivatives of the complete
+iterate, quotient-ring substitution annihilates the multiplier polynomial,
+and an independently implemented \(f_u\) calculation agrees with the
+\(g\)-coordinate result after monic normalization.
+
+\begin{table}[t]
+\centering
+\caption{Exact frozen multiplier ledger.  ``Degree'' is the exact-period
+point degree; the cycle count is degree divided by \(n\).  Empty rational-root
+sets are finite-cutoff audits, not the proof of the all-period obstruction.}
+\label{tab:candidate-ledger}
+\small
+\begin{tabular}{@{}ccclc@{}}
+\toprule
+\(n\) & Degree & Cycles & Per-cycle multiplier polynomial in \(L\) &
+Rational roots \\
+\midrule
+1 & 2  & 2 & \(L^2-2L-4u\) & none \\
+2 & 2  & 1 & \(L-4+4u\) & none \\
+3 & 6  & 2 & \(L^2+(-16+8u)L-64+64u\) & none \\
+4 & 12 & 3 & \(L^3+(-48+16u^2)L^2+(256+256u^2)L+4096\) & none \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Controls}
+
+The three controls in Table~\ref{tab:controls} test different failure modes.
+The integral power map recovers the sharp \(2^n\) factor.  The Chebyshev
+boundary recovers signed rational multipliers, including the fixed raw-prime
+residue.  Finally, the nonintegral parameter \(c=-3/4\) violates the theorem's
+coefficient hypothesis and produces the odd prime multiplier \(3\).  At that
+same control, two formal period-two factors are completely removed by exact
+saturation, leaving exact period degree zero.  Thus the code detects a
+positive prime value and does not confuse formal with exact period.
+
+\begin{table}[t]
+\centering
+\caption{Matched controls.  The listed multipliers are exact rational values
+at periods 1--4.  The final row deliberately violates algebraic-integral
+coefficients.}
+\label{tab:controls}
+\small
+\begin{tabular}{@{}p{0.18\textwidth}p{0.20\textwidth}p{0.36\textwidth}p{0.18\textwidth}@{}}
+\toprule
+Map & Assumption status & Rational multipliers at \(n=1,2,3,4\) & Diagnostic \\
+\midrule
+\(z^2\) & theorem applies & \(\{0,2\};\{4\};\{8\};\{16\}\) & sharp
+\(2^n\) clock \\
+\(z^2-2\) & theorem applies & \(\{-2,4\};\{-4\};\{-8,8\};\{-16,16\}\) &
+signed boundary \\
+\(z^2-3/4\) & coefficient assumption fails & \(\{-1,3\};\varnothing;
+\varnothing;\varnothing\) & prime \(3\); formal \(n=2\) factors fully
+removed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:exact-audit-controls} separates the theorem-level decision
+from the finite implementation ledger and makes the contamination removal
+visible.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{fig2_exact_audit_controls.pdf}
+  \caption{Exact cutoff audit and controls.  Candidate periods one through
+  four have the frozen exact degrees and no rational roots in either
+  coordinate implementation.  Controls recover \(2^n\), signed Chebyshev
+  values, the odd raw prime \(3\), and complete removal of the spurious formal
+  period-two component at \(c=-3/4\).  Only the analytic divisibility chain
+  supports an all-period inference.}
+  \label{fig:exact-audit-controls}
+\end{figure}
+
+The required workflow completed in about 16.06 seconds of measured block time
+with peak resident memory 771,460 KiB.  These are engineering diagnostics,
+not evidence.  All 37 tests passed.  No random seed, fit, tolerance-based
+integer recognition, target prime list, Riemann-zero table, or conditional
+high-period real-orbit search entered the result.
+
+\section{What the symplectic bridge does---and does not do}
+\label{sec:bridge}
+
+Let \(\theta=p\,dq\) be the canonical one-form.  On the regular locus
+\(q\ne0\), the local cotangent formula for the base map \(g\) is
+\begin{equation}
+ \widehat g(q,p)=(Q,P)
+ =\left(q^2-u,\frac{p}{2q}\right).
+ \label{eq:cotangent-map}
+\end{equation}
+
+\begin{proposition}[Regular cotangent bridge]
+\label{prop:cotangent}
+On each branch \(q>0\) and \(q<0\), the map \(\widehat g\) preserves the
+canonical one-form exactly and hence is symplectic.  If a period-\(n\) base
+orbit lies on the zero section and avoids \(q=0\), then the return derivative
+has eigenvalues \((\lambda,\lambda^{-1})\), where \(\lambda=(g^n)'(q_0)\).
+\end{proposition}
+
+\begin{proof}
+Pulling back the one-form gives
+\begin{equation}
+ \widehat g^{*}(P\,dQ)
+ =\frac{p}{2q}\,d(q^2-u)=p\,dq=\theta.
+ \label{eq:one-form}
+\end{equation}
+Thus \(\widehat g^*d\theta=d\theta\), and its branch Jacobian has determinant
+one.  At \(p=0\), the one-step derivative is diagonal:
+\begin{equation}
+ D\widehat g(q,0)=
+ \begin{pmatrix}2q&0\\0&(2q)^{-1}\end{pmatrix}.
+ \label{eq:zero-section-derivative}
+\end{equation}
+Multiplication around a regular period-\(n\) orbit yields
+\begin{equation}
+ D\widehat g^n(q_0,0)=
+ \begin{pmatrix}\prod_{j=0}^{n-1}2q_j&0\\
+ 0&\left(\prod_{j=0}^{n-1}2q_j\right)^{-1}
+ \end{pmatrix},
+ \label{eq:return-pair}
+\end{equation}
+and the first entry is exactly \((g^n)'(q_0)=\lambda\).
+\end{proof}
+
+Proposition~\ref{prop:cotangent} transports the arithmetic obstruction on a
+regular orbit: a rational prime eigenvalue cannot appear there when it is
+already absent from the base multiplier.  It does not repair the geometry.
+The denominator in \eqref{eq:cotangent-map} vanishes at \(q=0\), precisely the
+critical line carrying the PCF seed.  The inputs \((a,r)\) and \((-a,-r)\)
+have the same output, the two branch images overlap, and the regular domain is
+noncompact.  A critical cycle with zero base multiplier has no reciprocal
+lift.  Figure~\ref{fig:symplectic-scope} records these limitations.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.94\textwidth]{fig3_symplectic_scope.pdf}
+  \caption{Scope of the cotangent relation.  Each regular branch preserves
+  \(p\,dq\) and carries a zero-section return multiplier to a reciprocal
+  pair.  The critical line \(q=0\), overlapping branch images, and unbounded
+  phase space rule out interpreting the formula as a global compact
+  symplectomorphism.}
+  \label{fig:symplectic-scope}
+\end{figure}
+
+\section{Discussion and stopping decision}
+\label{sec:discussion}
+
+The nonlinear derivative escapes the finite-state rank-one clock obstruction,
+but at this frozen parameter it fails the exact raw-prime gate for a separate
+arithmetic reason.  The distinction matters.  Generic orbit complexity,
+infinite-dimensional characteristic-exponent span, reciprocal symplectic
+multipliers, and a large primitive-orbit ledger do not imply exact rational
+prime values.
+
+The candidate decision is therefore negative and scoped:
+\begin{equation}
+\begin{aligned}
+&\text{raw rational-prime multiplier:}&&\text{absent by theorem},\\
+&\text{odd rational exponent-prime base:}&&\text{absent by theorem},\\
+&\text{base }2\text{ exponent-prime, }n\ge2:&&\text{open},\\
+&\text{complex modulus without rational }\lambda:&&\text{outside theorem},\\
+&\text{cotangent carrier:}&&\text{branchwise exact only}.
+\end{aligned}
+\label{eq:decision}
+\end{equation}
+For the raw-prime candidate, this is an arithmetic entry-gate failure.  We do
+not proceed to cycle-determinant fitting, Riemann-zero comparison,
+quantization, or any spectral Route-B claim.
+
+Two mathematically legitimate questions remain.  First, the rational equality
+\(|\lambda|=2^n\) could be studied by a new all-period argument; extending the
+period cutoff would not settle it.  Second, one could design a separately
+source-locked global symplectic carrier rather than forcing the singular
+cotangent relation through \(q=0\).  Neither question changes the conclusion
+for the present raw-prime clock.
+
+\section{Conclusion}
+
+At the frozen PCF quadratic, the genuine nonlinear derivative cocycle does not
+produce rational multipliers of raw prime modulus.  The proof is an all-period
+integrality and divisibility certificate; exact computations through period
+four verify its implementation and expose its boundaries.  A classical
+cotangent formula adds reciprocal symplectic geometry only off the critical
+line and does not restore the missing arithmetic clock.  The useful outcome
+is thus a precise design exclusion: replacing a locally constant clock by the
+nonlinear derivative changes the obstruction, but does not pass the exact
+arithmetic entry gate.
+
+\appendix
+
+\section{Proof dependency and scope ledger}
+\label{app:proof-ledger}
+
+Table~\ref{tab:proof-scope} separates hypotheses that are sometimes collapsed
+in informal multiplier arguments.
+
+\begin{table}[H]
+\centering
+\caption{Role of each hypothesis in Theorem~\ref{thm:content}.}
+\label{tab:proof-scope}
+\begin{tabular}{@{}p{0.25\textwidth}p{0.34\textwidth}p{0.33\textwidth}@{}}
+\toprule
+Hypothesis & Used for & If removed \\
+\midrule
+\(F\) monic over \(\mathcal O_K\) & finite periodic coordinates are algebraic
+integers & denominators can enter periodic coordinates \\
+\(F'=mH\) in \(\mathcal O_K[X]\) & one exact factor \(m\) at every iterate &
+no uniform \(m^n\) content follows \\
+\(\lambda\in\mathbb Q\) &
+\(\mathbb Q\cap\Zbar=\mathbb Z\) & rational modulus alone is insufficient \\
+finite periodic point & root of monic \(F^n-X\) & the point at infinity is a
+different fixed point \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The proof applies to a point fixed by \(F^n\), even if its least period divides
+\(n\).  Exact-period language enters only when a multiplier is assigned to a
+primitive cycle.  The zero multiplier is allowed by the theorem but is never
+a positive-prime target.
+
+\section{Exact polynomial certificates}
+\label{app:polynomials}
+
+Let \(L\) denote the cycle multiplier.  The frozen cycle polynomials are
+\begin{align}
+ M_1(L)&=L^2-2L-4u,\\
+ M_2(L)&=L-4+4u,\\
+ M_3(L)&=L^2+(-16+8u)L-64+64u,\\
+ M_4(L)&=L^3+(-48+16u^2)L^2+(256+256u^2)L+4096.
+\end{align}
+For each \(n\), the audit stores the formal dynatomic polynomial, the saturated
+exact-period polynomial, the derivative of the complete iterate, the point
+resultant, the per-cycle polynomial, its coefficients in the basis
+\(1,u,u^2\), the rational-component greatest common divisor, and a quotient
+annihilation certificate.  The point resultants have degrees \(2,2,6,12\)
+and are respectively the exact first, second, third, and fourth powers of the
+displayed cycle polynomials.  In every row, the simultaneous rational
+component gcd is one.
+
+The coordinate-duplication audit separately forms the dynatomic components
+for \(f_u\) and \(g\), transforms by \(z=-ux\), and compares monic
+normalizations.  It also checks \(\phi\circ f_u=g\circ\phi\) symbolically;
+there is no numerical orbit matching.
+
+\section{Reproducibility passport}
+\label{app:reproducibility}
+
+The project is rooted at
+\texttt{\detokenize{papers/3-prime-multiplier-obstruction}}.  From that
+directory, the required commands are
+\begin{verbatim}
+python code/scripts/run_exact_audit.py --max-period 4
+pytest -q
+\end{verbatim}
+The recorded environment is Python 3.12.3, SymPy 1.14.0, and pytest 9.0.3 on
+Linux x86-64.  No GPU is used.  The source-lock SHA-256 is
+\begin{verbatim}
+aab59e6d97e919bd9f11f74cf45d8163fc320560dfa74bee85401bd184d37842
+\end{verbatim}
+and the proof-package SHA-256 is
+\begin{verbatim}
+6d01f26b5832bd88923d4f4ba0bb5ed7010a571f17f46a0e75b6247499034e17
+\end{verbatim}
+
+The official run produces eleven machine-readable JSON artifacts, including
+its run summary; a post-validation immutable convenience manifest indexes
+those outputs and the frozen code tree.  A static protocol scan rejects
+filesystem or subprocess target access and post-hoc prime tolerances.  The
+same scan and adversarial tests confirm that no external prime or Riemann-zero
+resource is opened.  Small integer primality labels in the controls are
+derived internally from exact output values.
+
+The formal period-two contamination in the \(c=-3/4\) control is not silently
+discarded: the raw formal factor, two removed lower-period factors, zero exact
+degree, and zero resultant degree are all retained in the control audit.  The
+conditional high-period real-orbit ledger specified in the plan was disabled
+and never executed because no verified claim needs it.
+
+\section{Artifact map}
+\label{app:artifact-map}
+
+The principal machine-readable evidence is:
+\begin{itemize}
+\item \texttt{\detokenize{results/proof_audit.json}} for the twelve proof-boundary gates;
+\item \texttt{\detokenize{results/candidate_multiplier_audit.json}} and
+  \texttt{\detokenize{results/exact_polynomials.json}} for the exact cutoff ledger;
+\item \texttt{\detokenize{results/conjugacy_audit.json}} for independent coordinate duplication;
+\item \texttt{\detokenize{results/control_audit.json}} for positive and assumption-violating
+  controls;
+\item \texttt{\detokenize{results/symplectic_bridge_audit.json}} for the regular one-form,
+  determinant, reciprocal-pair, singularity, overlap, and noncompactness
+  checks;
+\item \texttt{\detokenize{results/negative_result_ledger.json}} for the all-period, open, and
+  outside-theorem classifications; and
+\item \texttt{\detokenize{results/final_result_manifest.json}} for code, source-lock, result,
+  environment, and test hashes.
+\end{itemize}
+
+All scientific values in the three figures are read from these frozen JSON
+files.  The plotting scripts assert the expected candidate ID, source-lock
+scope, open base-2 status, and negative geometry flags before rendering.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "prime-multiplier-experiment-passport/1.1-final",
+  "created_utc_date": "2026-08-14",
+  "candidate_id": "pcf_quadratic_prime_multiplier_obstruction_v1",
+  "source_lock": {
+    "path": "experiments/source_lock.json",
+    "sha256": "aab59e6d97e919bd9f11f74cf45d8163fc320560dfa74bee85401bd184d37842"
+  },
+  "forbidden_data": {
+    "external_prime_or_zero_data_accessed": false,
+    "conditional_real_orbit_ledger_executed": false,
+    "evidence": ["results/source_lock_validation.json", "results/command_environment_manifest.json"]
+  },
+  "experiments": [
+    {
+      "experiment_id": "EXP-PREFLIGHT",
+      "result": "PASS",
+      "artifact": "results/parameter_preflight.json",
+      "sha256": "a870aa03a680d739d9b1f9ef4d5b5f24228d42e3a872ba2e3fa09f6a116c70cf",
+      "scope": "unique real algebraic parameter, isolating interval, conjugacy, and derivative content before candidate polynomials"
+    },
+    {
+      "experiment_id": "EXP-PROOF",
+      "result": "PASS",
+      "artifact": "results/proof_audit.json",
+      "sha256": "38438a72b7a6adc569cde38f50b525654a595286a3fd3196d82e7b2aba3430ad",
+      "scope": "all-period logical dependency audit; no finite-cutoff inference"
+    },
+    {
+      "experiment_id": "EXP-CONTROLS",
+      "result": "PASS",
+      "artifact": "results/control_audit.json",
+      "sha256": "9bd64e9c8f109c446c1c9fbcef6f463b57a88580227311ff957eb3961f9545a4",
+      "scope": "three matched exact controls through period four"
+    },
+    {
+      "experiment_id": "EXP-CANDIDATE",
+      "result": "PASS_NEGATIVE_CERTIFICATE",
+      "artifact": "results/candidate_multiplier_audit.json",
+      "sha256": "07727b41a54a511332982fe770bcadcde50d74a1ac555af3d1acf5153b301a33",
+      "scope": "exact period-one-through-four implementation audit",
+      "negative_result": "zero rational multiplier candidates and zero raw rational-prime candidates at all audited periods"
+    },
+    {
+      "experiment_id": "EXP-CONJUGACY",
+      "result": "PASS",
+      "artifact": "results/conjugacy_audit.json",
+      "sha256": "c0edd8b509920890470c9f93f0256b0d2f2dbdd3a4f4da367c5abb128282fdb8",
+      "scope": "independent f_u and g coordinate implementations agree through period four"
+    },
+    {
+      "experiment_id": "EXP-SYMPLECTIC",
+      "result": "PASS_BRANCHWISE_EXACT_ONLY",
+      "artifact": "results/symplectic_bridge_audit.json",
+      "sha256": "9952dbc3fda66068b7e74a8175a5f2124ba820016ffb5536e8faebe209825b51",
+      "scope": "one-form, determinant, reciprocal-return, singularity, overlap, and noncompactness checks"
+    },
+    {
+      "experiment_id": "EXP-TESTS",
+      "result": "PASS",
+      "artifact": "results/pytest.xml",
+      "sha256": "6396706e6078809e12fdc06f6494250fc5bc38b33ba8a3ed5f4581e4e4dba5f9",
+      "metrics": {"tests": 37, "failures": 0, "errors": 0, "skipped": 0}
+    }
+  ],
+  "classification": {
+    "raw_rational_prime": "ABSENT_BY_THEOREM",
+    "odd_rational_exponent_prime": "ABSENT_BY_THEOREM",
+    "p2_exponent_prime_period_1": "ABSENT",
+    "p2_exponent_prime_period_ge_2": "OPEN",
+    "complex_modulus_only": "OUTSIDE_THEOREM",
+    "symplectic_bridge": "BRANCHWISE_EXACT_ONLY",
+    "route_b": "STOPPED"
+  }
+}
