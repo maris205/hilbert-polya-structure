@@ -1,0 +1,161 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\title{An Entropy--von Mangoldt Mass Bridge\\for an All-Period H\'enon Survivor}
+\author{Liang Wang$^{*1}$\\
+\small $^{1}$School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Wuhan 430074, P.R. China\\
+\small $^*$Corresponding author}
+\date{Preprint, August 2026}
+\hypersetup{pdfauthor={Liang Wang},pdftitle={An Entropy-von Mangoldt Mass Bridge for an All-Period Henon Survivor}}
+\begin{document}\maketitle
+\begin{abstract}
+We return from finite arithmetic decorations to the all-period chronology of
+the certified four-state survivor of the area-preserving H\'enon map
+$H_6(q,p)=(1-6q^2-p,q)$.  Its transition matrix has Perron root
+$\varphi=(1+\sqrt5)/2$.  We prove that, under the intrinsic entropy clock
+$X_n=\varphi^n$, the exact-period marked-point count is asymptotic to the
+cumulative von Mangoldt mass $\vartheta(X_n)$, while the primitive-orbit
+count is asymptotic to $(\log\varphi)\pi(X_n)$.  The proof combines the exact
+subshift spectrum, M\"obius inversion, and the prime number theorem.  A
+deterministic certificate independently reconstructs all orbit counts and
+finite prime comparisons through period 32.  This is a positive mass-level
+bridge requiring no fitted scale or prime lookup in the candidate.  It does
+not define an orbit--prime bijection, a Riemann determinant, or a
+Hilbert--P\'olya operator.
+\end{abstract}
+
+\section{The frozen H\'enon carrier}
+On the previously certified local survivor, $H_6$ is conjugate to the
+four-state subshift with adjacency matrix
+\[
+A=\begin{pmatrix}
+1&0&1&0\\1&0&0&0\\0&1&0&1\\0&1&0&0
+\end{pmatrix}.
+\]
+The characteristic polynomial factors as
+\[
+\det(xI-A)=x^4-x^3-x-1=(x^2-x-1)(x^2+1).
+\]
+Hence the eigenvalues are $\varphi,-\varphi^{-1},i,-i$, and the
+topological entropy is $h=\log\varphi$.  This paper uses the symbolic
+conjugacy and no additional parameter.  It concerns this certified survivor,
+not the full nonwandering set of $H_6$.
+
+Let $N_n=\operatorname{tr}(A^n)$ be the number of marked points fixed by
+the $n$th iterate.  Let $E_n$ be the number having exact period $n$, and let
+$P_n=E_n/n$ be the number of unmarked primitive cyclic orbits.
+
+\section{Exact primitive census}
+\begin{proposition}[Trace and M\"obius formulas]\label{prop:census}
+For every $n\ge1$,
+\[
+N_n=\varphi^n+(-\varphi^{-1})^n+i^n+(-i)^n,
+\]
+and
+\[
+E_n=\sum_{d\mid n}\mu(d)N_{n/d},\qquad P_n=\frac{E_n}{n}.
+\]
+In particular $E_n$ is a nonnegative integer divisible by $n$.
+\end{proposition}
+\begin{proof}
+The trace formula is the spectral decomposition of $A^n$.  Every point fixed
+by the $n$th iterate has a unique exact period dividing $n$, so
+$N_n=\sum_{d\mid n}E_d$.  M\"obius inversion gives the second formula.
+An exact-period orbit has exactly $n$ marked phases, proving divisibility.
+\end{proof}
+
+\begin{proposition}[Dominant entropy term]\label{prop:error}
+As $n\to\infty$,
+\[
+E_n=\varphi^n+O\!\left(\tau(n)\varphi^{n/2}+\tau(n)\right),
+\qquad
+P_n=\frac{\varphi^n}{n}\bigl(1+o(1)\bigr).
+\]
+\end{proposition}
+\begin{proof}
+In Proposition~\ref{prop:census}, the $d=1$ term is
+$\varphi^n+O(1)$.  For every divisor $d\ge2$, one has $n/d\le n/2$ and
+$N_{n/d}=O(\varphi^{n/2}+1)$.  Summing over at most $\tau(n)$ divisors
+proves the claim.
+\end{proof}
+
+\section{The entropy--arithmetic bridge}
+Write
+\[
+\vartheta(X)=\sum_{p\le X}\log p,
+\qquad
+\pi(X)=\#\{p\le X\}.
+\]
+The prime number theorem is equivalent to
+$\vartheta(X)\sim X$ and implies $\pi(X)\sim X/\log X$.
+
+\begin{theorem}[Entropy--von Mangoldt mass bridge]\label{thm:bridge}
+For the intrinsic scale $X_n=e^{hn}=\varphi^n$,
+\[
+\boxed{\frac{E_n}{\vartheta(X_n)}\longrightarrow1},
+\qquad
+\boxed{\frac{P_n}{\pi(X_n)}\longrightarrow h=\log\varphi}.
+\]
+\end{theorem}
+\begin{proof}
+Proposition~\ref{prop:error} gives $E_n\sim\varphi^n=X_n$ and
+$P_n\sim X_n/n$.  The prime number theorem gives
+$\vartheta(X_n)\sim X_n$ and
+$\pi(X_n)\sim X_n/(n\log\varphi)$.  Division proves both limits.
+\end{proof}
+
+The first limit is the sharper structural statement.  The explicit formula
+weights each prime by $\log p$; marked exact-period points are likewise the
+phase-resolved version of primitive orbits.  Their main terms agree without
+an adjustable scale.  The second limit records the unavoidable passage from
+marked points to unmarked cycles and exposes the fixed entropy factor.
+
+\section{Finite exact certificate}
+The companion program powers $A$ over the integers, performs M\"obius
+inversion, checks $n\mid E_n$, and builds a sieve only for a finite
+illustration.  No finite prime statistic enters the theorem or changes the
+clock.  At $n=32$, the marked ratio $E_n/\vartheta(\varphi^n)$ is already
+within $10^{-4}$ of one.  The primitive ratio approaches
+$\log\varphi$ more slowly, as expected from the prime-counting remainder.
+
+\section{What the theorem does not say}
+Theorem~\ref{thm:bridge} is a mass identity, not a matching theorem.  It
+does not choose a prime for an orbit, prove that an instability multiplier is
+an integer, derive the amplitude $\log p/p^{r/2}$, or continue a dynamical
+determinant to the critical line.  Many mixing subshifts obey analogous prime
+orbit asymptotics.  The H\'enon content is the source-locked realization of
+this particular chronology and entropy.
+
+Under the Route-A evaluator the outcome is
+\[
+(A1_{\rm WEAK},A2_{\rm FAIL},A3_{\rm PARTIAL},A4_{\rm FORMAL}).
+\]
+The positive result justifies the next gate: determine exactly what
+repetition amplitude one primitive instability Euler factor would supply if
+its intrinsic multiplier were a prime.
+
+\section{Conclusion}
+The all-period H\'enon survivor has the correct leading arithmetic mass once
+time is measured by entropy.  This reconnects the large route after the
+finite CM branch closed, while keeping the decisive missing arrow visible:
+aggregate density is not a source-native prime label.
+
+\begin{thebibliography}{9}
+\bibitem{ArtinMazur}
+M. Artin and B. Mazur, On periodic points, \emph{Ann. of Math.} 81 (1965), 82--99.
+\bibitem{Bowen}
+R. Bowen, Periodic orbits for hyperbolic flows, \emph{Amer. J. Math.} 94 (1972), 1--30.
+\bibitem{Hadamard}
+J. Hadamard, Sur la distribution des z\'eros de la fonction $\zeta(s)$, \emph{Bull. Soc. Math. France} 24 (1896), 199--220.
+\bibitem{deValllee}
+C.-J. de la Vall\'ee Poussin, Recherches analytiques sur la th\'eorie des nombres premiers, \emph{Ann. Soc. Sci. Bruxelles} 20 (1896), 183--256.
+\end{thebibliography}
+\end{document}

@@ -1152,3 +1152,106 @@ degree-two Tate factor.  Its tuple is **(A1_WEAK, A2_FAIL,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.  The finite cubic
 cohomology branch is scope-exhausted; broader infinite or non-Euler objects
 are not classified.
+
+## HCS-C43 entropy--von Mangoldt bridge (2026-08-13)
+
+Candidate **HCS-C43** returns to the autonomous all-period H\'enon survivor;
+see [`../henon_entropy_von_mangoldt_bridge/`](../henon_entropy_von_mangoldt_bridge/).
+For its exact four-state adjacency matrix, the marked fixed count is
+
+\[
+N_n=\varphi^n+(-\varphi^{-1})^n+i^n+(-i)^n.
+\]
+
+M\"obius inversion and the prime number theorem prove, with
+\(X_n=\varphi^n\),
+
+\[
+E_n/\vartheta(X_n)\to1,
+\qquad
+P_n/\pi(X_n)\to\log\varphi.
+\]
+
+This is a positive, source-native entropy/mass bridge with no fitted scale.
+It is not an orbit--prime bijection and constructs no arithmetic determinant.
+The tuple is **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  The next gate is the
+exact prime-power amplitude supplied by one instability Euler factor.
+
+## HCS-C44 raw-instability amplitude audit (2026-08-13)
+
+Candidate **HCS-C44** audits the raw instability roof; see
+[`../henon_instability_amplitude_overconvergence/`](../henon_instability_amplitude_overconvergence/).
+Each primitive Euler factor has the exact all-repetition atom
+
+\[
+\ell_\gamma|\Lambda_\gamma|^{-rs},
+\]
+
+which becomes the von Mangoldt atom if \(|\Lambda_\gamma|=p\).  Globally,
+however, the H6 logarithmic derivative converges absolutely already for
+\(\Re s>0.35598\ldots\), while the all-prime absolute series diverges at
+\(\Re s=1/2\).  The raw clock is therefore rejected despite its exact local
+syntax.  The tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_FAIL,
+A4_FORMAL_HINT)** with overall **ROUTE_A_REJECTED**.  Pressure normalization
+is retained as the next distinct candidate.
+
+## HCS-C45 pressure-normalized prime-orbit bridge (2026-08-13)
+
+Candidate **HCS-C45** applies the canonical pressure normalization to the
+same H6 instability roof; see
+[`../henon_pressure_normalized_prime_orbit_bridge/`](../henon_pressure_normalized_prime_orbit_bridge/).
+If \(P(-h_*\tau)=0\), then \(\widehat\tau=h_*\tau\) is positive, H\"older,
+non-lattice, and has suspension entropy one.  The source-standard prime orbit
+theorem therefore gives
+
+\[
+\#\{\gamma:\widehat\ell_\gamma\le T\}\sim e^T/T.
+\]
+
+The local real labels
+\(P_\gamma=|\Lambda_\gamma|^{h_*}\) retain exact all-repetition Euler
+amplitudes.  This repairs C44's global density without a fitted scale.  No
+label is proved to be a rational prime, and no critical-line continuation or
+operator follows.  The tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.
+
+## HCS-C46 all-period integral monodromy (2026-08-13)
+
+Candidate **HCS-C46** proves the arithmetic type of every autonomous H6
+periodic multiplier; see
+[`../henon_integral_monodromy_units/`](../henon_integral_monodromy_units/).
+With \(x_i=6q_i\), the cyclic fixed equations are monic over \(\mathbb Z\),
+the fixed algebra is finite free of rank \(2^n\), and each derivative step is
+
+\[
+\begin{pmatrix}-2x_i&-1\\1&0\end{pmatrix}\in SL_2.
+\]
+
+Every return trace is an algebraic integer and every multiplier is an
+algebraic unit.  This closes the raw multiplier and field-norm prime labels
+at all periods, while deliberately leaving
+\(|\Lambda|^{h_*}\) unclassified.  The tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.
+
+## HCS-C47 repetition-compatible scalar classification (2026-08-13)
+
+Candidate **HCS-C47** classifies every functorial rational scalar repair of
+the C46 multiplier label; see
+[`../henon_repetition_label_classification/`](../henon_repetition_label_classification/).
+If \(R\in\mathbb C(X)^\times\) obeys
+
+\[
+R(X^r)=R(X)^r
+\]
+
+as a rational identity for every repetition, then \(R(X)=X^k\) for one
+\(k\in\mathbb Z\).  Hence the label of an H6 multiplier remains an algebraic
+unit and cannot be a rational prime.  On the unstable ray \(X>1\), continuous
+positive repetition-compatible labels are exactly \(X^c\), so the
+nonrational pressure label \(X^{h_*}\) survives rather than being silently
+rejected.  The rational lane has tuple **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** and overall
+**ROUTE_A_REJECTED**; the pressure-power lane remains exploratory.

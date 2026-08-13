@@ -1,0 +1,41 @@
+\section{Supplementary proofs and reproducibility}
+
+\subsection{Determinant normalization}\label{app:detnorm}
+
+Write $U=FM$, where $F$ is normalized Fourier transform and
+$M(q)=e_p(2q^3)$.  On every nonzero $\mu_3$ orbit the chirp is scalar.  The
+product of these scalars is one, because the orbits are indexed by the cube
+subgroup and the sum of that subgroup vanishes.  The extra vector at zero in
+grade zero also has eigenvalue one.  Therefore
+$\det(M|\Hh_{p,k})=1$ in every grade.
+
+Furthermore $F^2=J$, where $(Jf)(x)=f(-x)$.  Since
+$p\equiv1\pmod6$, $-1$ is a cube.  Put $m=(p-1)/3$; negation pairs the $m$
+nonzero cubic orbits into $m/2$ transpositions.  The zero vector is fixed in
+grade zero.  Hence
+\[
+\det(J|\Hh_{p,k})=(-1)^{m/2}=(-1)^{(p-1)/6}
+\]
+for every $k$.  Block determinants for $U^2$ give
+\cref{prop:detnorm}.
+
+Complex conjugation gives
+\[
+\bar U=F^{-1}M^{-1}=MU^{-1}M^{-1}.
+\]
+Because $M$ commutes with $R$, conjugation sends grade $k$ to grade $-k$ and
+gives cross-grade similarity between $\overline{T_k}$ and $T_{-k}^{-1}$.
+Grade zero is self-dual.  For grades one and two, combine this statement with
+the independently proved equality $D_{p,1}=D_{p,2}$.  This proves the local
+self-inversive relations used in the text without identifying conjugate
+grades silently.
+
+\subsection{Exact arithmetic protocol}
+
+The frozen producer and checker share only scalar conventions and released
+JSON.  The producer uses Python--FLINT.  The checker does not import the
+producer or FLINT; it independently reconstructs matrices, computes
+characteristic polynomials by the Faddeev--LeVerrier recurrence, and computes
+polynomial gcds by Euclid's algorithm.  All twelve semantic blocks are compared
+recursively with type-strict JSON equality.  The release runner reproduces
+the certificate in a temporary directory before checking the frozen copy.
