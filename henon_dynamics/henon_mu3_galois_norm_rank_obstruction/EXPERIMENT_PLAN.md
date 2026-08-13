@@ -14,14 +14,17 @@
 ## Stop/go decisions
 
 - `STOP_UNIFORM_FINITE_RANK_ORDINARY_NORM` by virtual degree growth.
-- `GO_CRITICAL_BOUNDARY_NORMALIZED_GERM` by normal convergence.
-- `GO_C46_PERFECT_POWER_GATE` to decide ordinary determinant promotion.
+- `GO_RIEMANN_CRITICAL_ABSCISSA_NORMALIZED_GERM` by normal convergence on
+  \(\operatorname{Re}s>1/2\).
+- `GO_C46_PERFECT_POWER_BRANCH_GATE` to decide ordinary-determinant promotion
+  by exact norm factorization and local branch orders at \(p=7\).
 
 ## Forbidden inferences
 
 - treating first-order cancellation as a full Tate Euler factor;
 - calling the normalized root a Fredholm determinant without an operator;
 - inferring a natural boundary from local unit-circle support;
+- identifying the canonical \(p^{-s}\) convergence abscissa with the local
+  divisor line obtained only after the shifted display \(p^{1/2-s}\);
 - averaging chronological phase matrices;
 - using Riemann zeros or fitted normalizations.
-

@@ -145,7 +145,10 @@ while (11) makes the \(n\ge2\) part
 O\!\left(\sum_pp^{-2\sigma_0}\right)<\infty.
 \]
 
-Normal convergence of the canonical logarithm proves the result.
+Normal convergence of the canonical logarithm proves the result.  More
+explicitly, its normally convergent holomorphic sum \(L(s)\) defines
+\(\mathcal G(s)=\exp L(s)\).  This both fixes the branch canonically and
+proves nonvanishing; no separate infinite-product branch choice is made.
 
 ## 5. Boundary and determinant status
 
@@ -155,16 +158,24 @@ divisor valuation of \(N_p\) is divisible by \(d_p\).  Equivalently, a global
 ordinary rational root requires \(N_p\) to be a \(d_p\)-th power up to its
 fixed normalization.
 
-Thus (12) is a canonical normalized trace-determinant germ.  It is not yet:
+Thus (12) is a canonical normalized-log Euler germ.  The ordinary norm
+\(N_p\) is a rational determinant, but its normalized root is not yet:
 
 - a rational finite-dimensional determinant;
 - an ordinary Fredholm determinant;
 - a function continued across \(\operatorname{Re}s=1/2\);
 - a function satisfying the Riemann functional equation.
 
-Under the optional display \(z=p^{1/2-s}\), unit-circle local divisors lie on
-the critical line, but no natural-boundary theorem follows without controlling
-cross-prime coincidences and cancellation.
+For the canonical clock in (12), \(z=p^{-s}\), unit-circle local divisors lie
+on \(\operatorname{Re}s=0\).  Hence (13) reaches the Riemann critical
+abscissa from the right, but \(\operatorname{Re}s=1/2\) is presently an
+abscissa of proved normal convergence, not a local divisor line.  Under the
+optional display \(z=p^{1/2-s}\), the local divisors do lie on the critical
+line, but the same \(n\ge2\) majorant proves convergence of the shifted
+product only for \(\operatorname{Re}s>1\).  The shift is therefore a divisor
+display, not part of Theorem 4.1.  No natural-boundary theorem follows in
+either coordinate without controlling cross-prime coincidences and
+cancellation.
 
 ## 6. Exact second-moment control
 
@@ -191,10 +202,12 @@ Tate collapse.  This finite ledger is a control, not a boundary theorem.
 
 The normalized norm provides the strongest analytic half-plane yet obtained
 from this Hénon arithmetic kernel.  It retains chronology, improves the Euler
-domain to the open critical boundary, and uses no fitted data.  A1 remains
-weak because the primes are arithmetic fibers.  A3 remains partial because
-ordinary determinant structure, continuation, Gamma factors, and a functional
-equation are open.  The correct tuple is
+domain to the Riemann critical abscissa from the right, and uses no fitted
+data.  A1 remains weak because the primes are arithmetic fibers.  A2's
+determinant status belongs to the ordinary rational norm; the improved
+normalized root is only an analytic normalized-log Euler germ.  A3 remains
+partial because ordinary determinant structure for that root, continuation,
+Gamma factors, and a functional equation are open.  The correct tuple is
 
 \[
 (\mathrm{A1\_WEAK},
@@ -202,4 +215,3 @@ equation are open.  The correct tuple is
  \mathrm{A3\_PARTIAL\_ANALYTIC\_STRUCTURE},
  \mathrm{A4\_NATURAL\_QUANTIZATION}).
 \]
-

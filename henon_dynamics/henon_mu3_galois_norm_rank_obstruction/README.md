@@ -1,4 +1,4 @@
-# HCS-C45 — Normalized Hénon Galois Norm at the Critical Boundary
+# HCS-C45 — Normalized Hénon Galois Norm at the Riemann Critical Abscissa
 
 HCS-C44 proves that the conjugate-paired Hénon moments have unbounded
 cyclotomic trace fields.  This project applies the two minimal canonical
@@ -33,14 +33,18 @@ is canonically holomorphic and nonzero on
 
 This is a genuine analytic advance from the C43 half-plane
 \(\operatorname{Re}s>1\).  No Riemann zero data or fitted scale enters the
-proof.
+proof: the canonical Euler germ reaches the Riemann critical abscissa from
+the right.  This is an abscissa-of-convergence statement.  In the canonical
+clock \(z=p^{-s}\), the unit-circle local divisors lie on
+\(\operatorname{Re}s=0\), not on the boundary of this convergence theorem.
 
 ## Scope
 
-The normalized norm is an analytic determinant germ, not yet an ordinary
-rational or Fredholm determinant.  Its local divisor multiplicities may be
-fractional after division by \(d_p\), and no functional equation or
-continuation across the critical boundary is proved.
+The ordinary norm is a rational determinant.  Its normalized logarithmic
+root is an analytic normalized-log Euler germ, not yet an ordinary rational,
+Fredholm, or operator-algebraic determinant.  Its local divisor
+multiplicities may be fractional after division by \(d_p\), and no functional
+equation or continuation across \(\operatorname{Re}s=1/2\) is proved.
 
 ## Route-A decision
 
@@ -51,12 +55,10 @@ continuation across the critical boundary is proved.
  \mathrm{A4\_NATURAL\_QUANTIZATION}).
 \]
 
-Overall: `ROUTE_A_EXPLORATORY_CRITICAL_BOUNDARY_GERM`.  Route B is not yet
-authorized.
+Overall: `ROUTE_A_EXPLORATORY`.  Route B is not yet authorized.
 
 ## Successor
 
-HCS-C46 tests whether the normalized root is the determinant of an ordinary
-finite-dimensional local object.  An exact \(p=7\) norm factorization will
-decide this by checking whether the rational norm is a cube.
-
+HCS-C46 tests whether the normalized root is an ordinary rational determinant.
+The exact \(p=7\) norm factorization decides the gate by checking whether the
+rational norm is a cube and by computing its local branch orders.

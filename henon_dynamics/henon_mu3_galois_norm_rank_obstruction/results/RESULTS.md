@@ -40,6 +40,13 @@ This is the strongest positive analytic result of C45.  It does not by itself
 produce a rational/Fredholm determinant: divisibility of every divisor
 multiplicity of \(N_p\) by \(d_p=(p-1)/2\) is still required.
 
+This statement uses the canonical substitution \(z=p^{-s}\) and reaches the
+Riemann critical abscissa from the right.  In that coordinate the local
+unit-circle divisors lie on \(\operatorname{Re}s=0\).  The shifted display
+\(z=p^{1/2-s}\) puts them on the critical line but is not covered by the same
+\(\operatorname{Re}s>1/2\) convergence theorem; the current majorant gives
+only \(\operatorname{Re}s>1\) after that shift.
+
 ## Frozen chronological second moments
 
 | \(p\) | \(N_{p,2}(0)\) | \(C_{p,2}\) | \(c_{p,2}\) | \(C_{p,2}+6\) |
