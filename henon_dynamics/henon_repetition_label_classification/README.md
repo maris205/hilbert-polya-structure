@@ -19,9 +19,10 @@ to \(0\) and \(\infty\); the square law fixes the scalar constant.  Combined
 with C46, every rational repetition-compatible H6 label remains an algebraic
 unit and cannot be a rational prime.
 
-The continuous positive classification is \(R(X)=X^c\), \(c\in\mathbb R\).
-Therefore C45's pressure label \(X^{h_*}\) is the precise surviving scalar
-candidate and is not silently covered by the rational no-go.
+On the unstable ray \(X>1\), every continuous positive label satisfying the
+same repetition law is \(R(X)=X^c\), \(c\in\mathbb R\).  Therefore C45's
+pressure label \(X^{h_*}\) is the precise surviving scalar candidate and is
+not silently covered by the rational no-go.
 
 ## Reproduce
 

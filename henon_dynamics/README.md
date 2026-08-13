@@ -33,6 +33,10 @@ henon_pressure_normalized_prime_orbit_bridge - C45 complete - Bowen-pressure nor
 henon_integral_monodromy_units - C46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
 henon_repetition_label_classification - C47 complete - Rational repetition-compatible scalar labels are exactly monomials, so H6 algebraic units cannot become rational primes.
 
+- [Batch Review C43--C47](BATCH_REVIEW_C43_C47.md) — entropy mass, raw-clock
+  obstruction, pressure normalization, integral monodromy, and the final
+  rational-label classification.
+
 ## Entry points
 
 - [`propose.md`](propose.md) — research framework and workflow.

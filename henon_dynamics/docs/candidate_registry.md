@@ -1249,8 +1249,9 @@ R(X^r)=R(X)^r
 
 as a rational identity for every repetition, then \(R(X)=X^k\) for one
 \(k\in\mathbb Z\).  Hence the label of an H6 multiplier remains an algebraic
-unit and cannot be a rational prime.  Continuous positive labels are exactly
-\(X^c\), so the nonrational pressure label \(X^{h_*}\) survives rather than
-being silently rejected.  The rational lane has tuple **(A1_WEAK, A2_FAIL,
+unit and cannot be a rational prime.  On the unstable ray \(X>1\), continuous
+positive repetition-compatible labels are exactly \(X^c\), so the
+nonrational pressure label \(X^{h_*}\) survives rather than being silently
+rejected.  The rational lane has tuple **(A1_WEAK, A2_FAIL,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** and overall
 **ROUTE_A_REJECTED**; the pressure-power lane remains exploratory.

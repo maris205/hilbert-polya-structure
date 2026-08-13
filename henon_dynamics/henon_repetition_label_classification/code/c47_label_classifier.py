@@ -81,7 +81,7 @@ def build_certificate() -> dict[str, object]:
         "classification": {
             "rational_identity": "R(X^r)=R(X)^r for every r",
             "solutions": "R(X)=X^k, k in Z",
-            "continuous_positive_solutions": "L(X)=X^c, c in R",
+            "continuous_positive_unstable_ray_solutions": "L(X)=X^c, c in R",
             "status": "PROVED",
         },
         "finite_laurent_scan": scan,
@@ -96,7 +96,7 @@ def build_certificate() -> dict[str, object]:
         "henon_consequence": "rational repetition-compatible labels of H6 algebraic-unit multipliers remain units and cannot be rational primes",
         "survivor": "the non-rational pressure label |Lambda|^h_star",
         "status": "PROVED_RATIONAL_SCALAR_LABEL_NO_GO_WITH_PRESSURE_POWER_SURVIVOR",
-        "claim_boundary": "classification is functorial as a rational identity on G_m, not merely equality on an unproved Zariski-dense orbit set",
+        "claim_boundary": "rational classification is functorial on G_m; continuous repetition classification is restricted to the unstable ray X>1",
     }
     canonical = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
     payload["payload_sha256"] = hashlib.sha256(canonical).hexdigest()
