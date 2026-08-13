@@ -43,6 +43,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_homogeneous_boundary_index_obstruction/](henon_homogeneous_boundary_index_obstruction/) | Homogeneous cubic Hénon scaling cocycle, exact equivariant trivialization, zero pre-Poisson essential codimension, and non-VMO Hardy obstruction | Scalar anomaly Route-A rejected; nonscalar cubic grading selected |
 | [henon_mellin_parity_obstruction/](henon_mellin_parity_obstruction/) | Reciprocal and critical-line-unitary H6 Mellin symbol with a certified off-critical strip divisor | Unrenormalized candidate Route-A rejected; homogeneous boundary-index pivot open |
 | [adelic_henon_theta_route/](adelic_henon_theta_route/) | Global adelic H6 unitary, theta stabilizer, local noncompactness no-go, static rank-two range bound, and infinite scaling-orbit obstruction | Route-A exploratory; a scaling-covariant Poisson anomaly is the next big gate |
 | [`henon_instability_roof_zeta/`](henon_instability_roof_zeta/) | Certified Hénon survivor and instability-roof clock | Current HP gate negative |
