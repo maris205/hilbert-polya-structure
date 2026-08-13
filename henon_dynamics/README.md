@@ -26,6 +26,7 @@ henon_cubic_kummer_functorial_obstruction - C38 complete - Functorial three-chan
 henon_kummer_character_divisor_obstruction - C39 complete - Every nonzero virtual cubic channel creates an interior all-prime zero/pole accumulation at s=1/2.
 henon_kummer_schatten_clock_obstruction - C40 complete - Prime damping has a sharp Schatten threshold but introduces a noncanonical second clock absent from Kummer conductor data.
 henon_cubic_cm_frobenius_bridge - C41 complete - The cubic channel admits an intrinsic j=0 CM elliptic Frobenius completion, but its L-function is not a Henon/Riemann determinant.
+henon_cm_three_prime_supercancellation_obstruction - C42 complete - Three local primes force every finite Tate-plus-CM Riemann match to delete the cubic H1 factor.
 
 ## Entry points
 

@@ -1141,3 +1141,14 @@ while split primes have nontrivial traces and all local factors carry
 intrinsic square-root normalization.  Its tuple is **(A1_WEAK,
 A2_ANALYTIC_DETERMINANT, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.
 No H\'enon orbit/Frobenius correspondence or Route-B operator is known.
+## HCS-C42 closure (2026-08-13)
+
+Candidate **HCS-C42** closes the finite Tate-plus-CM supercancellation road;
+see [`../henon_cm_three_prime_supercancellation_obstruction/`](../henon_cm_three_prime_supercancellation_obstruction/).
+At \(p=5,7,11\), first logarithmic Euler coefficients form a matrix of
+absolute determinant \(24\).  Equality with the Riemann local factor forces the unique
+virtual class \((A,B,C)=(1,0,0)\), deleting both the CM \(H^1\) and the
+degree-two Tate factor.  Its tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.  The finite cubic
+cohomology branch is scope-exhausted; broader infinite or non-Euler objects
+are not classified.

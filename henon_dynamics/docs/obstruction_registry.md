@@ -238,3 +238,8 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O79 | Promotion of the cubic CM elliptic factor to a H\'enon/Riemann determinant | source-provenance obstruction | The j=0 curve supplies genuine degree-two Frobenius factors, but no theorem identifies its primes/repetitions with primitive H\'enon chronology; its global analytic data are elliptic, not Riemann. | Retains the CM factor as a positive arithmetic bridge. Finite cohomological supercombinations remain to be classified in C42. | ../henon_cubic_cm_frobenius_bridge/README.md |
+## HCS-C42 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O80 | Finite virtual span of H0, cubic-CM H1, and H2 Tate factors | proved three-prime local rigidity | The first logarithmic coefficients at p=5,7,11 have determinant -24 (absolute value 24) and force the unique Riemann-matching class `(1,0,0)`. Every nonzero CM exponent changes a frozen local factor. | Complete for constant rational/integral exponents in this finite Euler category. Infinite-rank, prime-dependent, and non-Euler scattering constructions are outside scope. | ../henon_cm_three_prime_supercancellation_obstruction/README.md |
