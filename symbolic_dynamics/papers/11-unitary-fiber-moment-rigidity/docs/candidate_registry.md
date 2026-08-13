@@ -43,5 +43,5 @@ the same Bloch response.
     STOP_SCOPED / PROVES_TOO_MUCH
     route_b_invocation_allowed: false
 
-The canonical YAML remains provisional with WORKTREE_PENDING_FINAL_COMMIT
-until the root agent performs the two-stage freeze.
+The canonical YAML records the immutable Paper11 source/code/results commit
+and is finalized with the paper manifest in the following metadata commit.
