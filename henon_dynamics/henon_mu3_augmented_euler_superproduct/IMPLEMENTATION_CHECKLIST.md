@@ -11,6 +11,6 @@
 - [x] Write results and Route-A evaluation.
 - [x] Compile and audit the paper.
 - [x] Freeze the artifact manifest.
-- [ ] Run from an unrelated working directory.
-- [ ] Commit implementation, backfill the commit hash, freeze provenance.
-- [ ] Push by SSH.
+- [x] Run from an unrelated working directory.
+- [x] Commit implementation, backfill the commit hash, freeze provenance.
+- [x] Push by SSH.
