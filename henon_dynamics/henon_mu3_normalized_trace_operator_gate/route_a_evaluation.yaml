@@ -1,0 +1,98 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C47
+candidate_definition: "field-degree-normalized graded Hénon sector operator and its fourth-order regularized determinant"
+family: "homogeneous area-preserving Hénon map, finite-field Fourier-cubic quantization, and normalized Galois trace"
+phase_space: "semifinite direct product of all split-prime Galois-sector blocks"
+dynamics: "T_p=U_p^2 with order-three reversing symmetry and exact chronological moments"
+parameters: "none fitted"
+parameter_provenance: "HCS-C43 sector blocks, HCS-C45 normalized norm germ, and HCS-C46 branch obstruction"
+clock: "log Norm(pfrak)=log p at split primes"
+normalization: "field-degree-normalized tau_p=(Tr_even+Tr_odd)/d_p and str_p=tau_p(Gamma_p .); tau_p is not a tracial state"
+determinant_convention: "ratio of the positive/negative trace-associated fourth-order determinants, with the first three local-supertrace counterterm series displayed"
+orbit_cutoff: "all-prime Schatten theorem; 45 block controls p<=499 and exact n<=3 controls at seven primes"
+precision: "exact integer/rational arithmetic and prime-series comparison"
+training_data: "none"
+forbidden_data: "Riemann zeros, fitted counterterms, hidden positive-trace cancellation, undeclared Fredholm or Fuglede--Kadison identification"
+code_commit: PENDING_RELEASE_COMMIT
+artifact_paths:
+  - THEOREM_PACKAGE.md
+  - DERIVATION_PACKAGE.md
+  - results/c47_certificate.json
+  - results/independent_check.json
+  - paper/main.pdf
+
+source_lock:
+  object: "all Galois-conjugate paired Hénon sector blocks with exact even/odd grading"
+  clock: "log p at split primes"
+  normalization: "positive field-degree-normalized trace tau_p and distinct signed supertrace str_p"
+  determinant_convention: "Det_4 on L4(M,tau) plus ell_1, ell_2, ell_3; unregularized tau-determinant only on Re(s)>2; classical Hilbert trace class begins at Re(s)>3 and gives the unnormalized norm"
+  cutoff: "symbolic all-prime theorem with exact frozen controls"
+  precision: "exact arithmetic"
+  allowed_data: "C45-C46 certificates, exact sector dimensions, chronological zero-fibre counts, prime comparison"
+  forbidden_data: "zero tables, post-hoc counterterms, positive-FK phase claims, hidden clock shifts"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "every supertrace moment is the exact Galois average of chronological two-step Hénon path sums"
+  strongest_failure: "the prime index remains an arithmetic fibre label, not a primitive orbit of one real Hénon system"
+  metrics:
+    primitive_definition: "arithmetic twisted repetition"
+    repetition_rule: "exact trace logarithm"
+    prime_orbit_correspondence: false
+    chronology_averaged: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "the C45 germ is exactly a canonical L4 fourth-order graded determinant ratio with three explicit local chronological-supertrace counterterm series on Re(s)>1/2"
+  strongest_failure: "the operator is not tau-trace-class there and the representation requires regularization; it is not a classical Fredholm determinant"
+  metrics:
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: "none; theorem is all-prime"
+    precision_drift: "none; exact arithmetic"
+    control_margin: "X_s belongs to Lq exactly when q Re(s)>2"
+  artifacts:
+    - results/c47_certificate.json
+    - results/independent_check.json
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "a canonical analytic graded determinant now realizes the normalized Euler germ throughout Re(s)>1/2"
+  strongest_failure: "no continuation, functional equation, Gamma factor, Riemann divisor, or Riemann--von Mangoldt law is proved"
+  metrics:
+    conjugation_symmetry: PROVED_ON_RE_S_GT_ONE_HALF
+    global_functional_equation: OPEN
+    gamma_factor: OPEN
+    meromorphic_continuation: OPEN
+    riemann_von_mangoldt_law: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: "the global block is assembled without fitted weights from the exact two-step unitary Hénon sectors and their full real Galois orbit"
+  strongest_failure: "it is graded and non-self-adjoint; no Hilbert--Pólya spectral generator has been constructed"
+  metrics:
+    finite_place_unitarity: true
+    chronology_preserved: true
+    global_regularized_operator: true
+    self_adjoint_global_generator: false
+    route_b_ready: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+
+overall_status: ROUTE_A_EXPLORATORY
+route_b_invocation_allowed: false
+next_gate: "HCS-C48: identify the second normalized moment with a genus-four curve trace and test Euler-germ convergence on Re(s)>1/3; the present block would then require order six, while lower order requires a new compressed operator"
