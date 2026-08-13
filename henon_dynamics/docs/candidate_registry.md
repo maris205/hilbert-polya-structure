@@ -1195,3 +1195,24 @@ however, the H6 logarithmic derivative converges absolutely already for
 syntax.  The tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_FAIL,
 A4_FORMAL_HINT)** with overall **ROUTE_A_REJECTED**.  Pressure normalization
 is retained as the next distinct candidate.
+
+## HCS-C45 pressure-normalized prime-orbit bridge (2026-08-13)
+
+Candidate **HCS-C45** applies the canonical pressure normalization to the
+same H6 instability roof; see
+[`../henon_pressure_normalized_prime_orbit_bridge/`](../henon_pressure_normalized_prime_orbit_bridge/).
+If \(P(-h_*\tau)=0\), then \(\widehat\tau=h_*\tau\) is positive, H\"older,
+non-lattice, and has suspension entropy one.  The source-standard prime orbit
+theorem therefore gives
+
+\[
+\#\{\gamma:\widehat\ell_\gamma\le T\}\sim e^T/T.
+\]
+
+The local real labels
+\(P_\gamma=|\Lambda_\gamma|^{h_*}\) retain exact all-repetition Euler
+amplitudes.  This repairs C44's global density without a fitted scale.  No
+label is proved to be a rational prime, and no critical-line continuation or
+operator follows.  The tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.
