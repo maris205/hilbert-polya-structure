@@ -51,5 +51,6 @@ reproduce convergence and motion. The mechanism is PROVES_TOO_MUCH.
     STOP_SCOPED / PROVES_TOO_MUCH
     route_b_invocation_allowed: false
 
-The provisional canonical evaluation uses WORKTREE_PENDING_FINAL_COMMIT
-until the root agent completes the two-stage freeze.
+The canonical evaluation records the immutable Paper10 source/code/results
+commit and is finalized with the paper manifest in the following metadata
+commit.
