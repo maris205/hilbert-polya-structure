@@ -28,6 +28,7 @@ henon_kummer_schatten_clock_obstruction - C40 complete - Prime damping has a sha
 henon_cubic_cm_frobenius_bridge - C41 complete - The cubic channel admits an intrinsic j=0 CM elliptic Frobenius completion, but its L-function is not a Henon/Riemann determinant.
 henon_cm_three_prime_supercancellation_obstruction - C42 complete - Three local primes force every finite Tate-plus-CM Riemann match to delete the cubic H1 factor.
 henon_entropy_von_mangoldt_bridge - C43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
+henon_instability_amplitude_overconvergence - C44 complete - Raw instability Euler factors have exact prime-power amplitudes but the full trace overconverges on the critical line.
 
 ## Entry points
 

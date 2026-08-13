@@ -1177,3 +1177,21 @@ It is not an orbit--prime bijection and constructs no arithmetic determinant.
 The tuple is **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
 A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  The next gate is the
 exact prime-power amplitude supplied by one instability Euler factor.
+
+## HCS-C44 raw-instability amplitude audit (2026-08-13)
+
+Candidate **HCS-C44** audits the raw instability roof; see
+[`../henon_instability_amplitude_overconvergence/`](../henon_instability_amplitude_overconvergence/).
+Each primitive Euler factor has the exact all-repetition atom
+
+\[
+\ell_\gamma|\Lambda_\gamma|^{-rs},
+\]
+
+which becomes the von Mangoldt atom if \(|\Lambda_\gamma|=p\).  Globally,
+however, the H6 logarithmic derivative converges absolutely already for
+\(\Re s>0.35598\ldots\), while the all-prime absolute series diverges at
+\(\Re s=1/2\).  The raw clock is therefore rejected despite its exact local
+syntax.  The tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_FAIL,
+A4_FORMAL_HINT)** with overall **ROUTE_A_REJECTED**.  Pressure normalization
+is retained as the next distinct candidate.

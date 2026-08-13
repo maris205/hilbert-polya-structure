@@ -243,3 +243,9 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O80 | Finite virtual span of H0, cubic-CM H1, and H2 Tate factors | proved three-prime local rigidity | The first logarithmic coefficients at p=5,7,11 have determinant -24 (absolute value 24) and force the unique Riemann-matching class `(1,0,0)`. Every nonzero CM exponent changes a frozen local factor. | Complete for constant rational/integral exponents in this finite Euler category. Infinite-rank, prime-dependent, and non-Euler scattering constructions are outside scope. | ../henon_cm_three_prime_supercancellation_obstruction/README.md |
+
+## HCS-C44 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O81 | Raw H6 instability roof as an all-prime von Mangoldt clock | proved critical-line overconvergence obstruction | One primitive factor has exactly the atom `ell*|Lambda|^(-rs)`, but the inherited bound `log(phi)/log(J_*)=0.35598...<1/2` makes the complete H6 logarithmic derivative absolutely convergent on the critical line. PNT gives divergence of `sum_p log(p)/sqrt(p)`, so no all-prime termwise bijection can preserve these raw atoms. | Stops only the unscaled instability roof with ordinary absolute termwise identification. A pressure-normalized roof, distributional trace, or non-termwise arithmetic compiler is a new candidate. | ../henon_instability_amplitude_overconvergence/README.md |
