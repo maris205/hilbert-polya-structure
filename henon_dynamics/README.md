@@ -20,6 +20,10 @@ Positive constructions, obstructions, and well-scoped failures are all kept.
 Chronological products are preserved in non-autonomous systems; they are not
 replaced by averaged transition matrices.
 
+## Batch research papers
+
+henon_cubic_kummer_functorial_obstruction - C38 complete - Functorial three-channel Kummer lifts preserve the C37 gauge coboundary and have identity closed holonomy.
+
 ## Entry points
 
 - [`propose.md`](propose.md) — research framework and workflow.

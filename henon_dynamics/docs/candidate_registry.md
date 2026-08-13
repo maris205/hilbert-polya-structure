@@ -1102,3 +1102,14 @@ trivial scalar pair. The strict tuple is
 A4_NATURAL_QUANTIZATION)** and the scalar anomaly is
 **ROUTE_A_REJECTED**. The next authorized door changes representation
 category to a nonscalar \(\mathbb Z/3\)-graded Kummer/Tate cubic lift.
+## HCS-C38 closure (2026-08-13)
+
+Candidate **HCS-C38** is rejected as a direct functorial Kummer escape and
+retained as a representation-stable gauge theorem; see
+[`../henon_cubic_kummer_functorial_obstruction/`](../henon_cubic_kummer_functorial_obstruction/).
+Its Route-A tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)**.  Every finite
+representation functor sends the scalar homogeneous coboundary to another
+coboundary, so every closed scaling-orbit holonomy is the identity.  Route B
+is not authorized.  The smallest open successor is a nonfunctorial monomial
+channel permutation.
