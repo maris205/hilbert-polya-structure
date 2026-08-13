@@ -1,0 +1,131 @@
+\section{Exterior transfer and the Koszul cancellation}
+
+Let
+\[
+ V=\bigoplus_{p}\mathbb C e_p,
+ \qquad
+ \cL_s e_p=p^{-s}e_p.
+\]
+The completion of $V$ is the same atom space used by SD-C07. The operator is
+trace class exactly for $\RePart s>1$.
+
+\subsection{The exterior transfer module}
+
+Place $V$ in odd degree and form the zero-differential exterior transfer
+module $\Lambda^\bullet V$. Once this functor is selected, the vacuum is even
+and tensor atoms are odd by \cref{thm:factorization-homology}.
+
+\begin{theorem}[Exterior and Berezinian orientations]
+\label{thm:exterior}
+For $\RePart s>1$,
+\begin{align}
+ \Str_{\Lambda^\bullet V}\Gamma_-(\cL_s)
+ &=\det(I-\cL_s)
+ =\prod_p(1-p^{-s})
+ =\zeta(s)^{-1}, \label{eq:exterior}\\
+ \Ber_{V_{\bar1}}(I-\cL_s)
+ &=\det(I-\cL_s)^{-1}
+ =\zeta(s). \label{eq:berezinian}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Finite exterior occupation gives a factor $1-p^{-s}$ for each atom.
+Absolute convergence in $\RePart s>1$ identifies the product with the
+Fredholm determinant. With the convention
+$\Ber(A)=\det(A_{\bar0})/\det(A_{\bar1})$, a purely odd one-particle space
+places that determinant in the denominator.
+\end{proof}
+
+Equations \eqref{eq:exterior} and \eqref{eq:berezinian} fix the orientation
+ambiguity of the ungraded object, but only after the exterior functor has been
+chosen. The bare commutative tensor monoid also admits the trivial grading;
+it does not force exteriorization. The accurate statement is therefore:
+selection of the functor is a modeling choice, while the parity inside that
+functor is canonical.
+
+\subsection{The honest Koszul resolution}
+
+The phrase \emph{Koszul determinant} can hide a different object. Let
+\[
+ A=\mathbb C[M]\cong\mathbb C[x_p:p\in\mathbb P],
+ \qquad I=(x_p),
+ \qquad V\cong I/I^2.
+\]
+The standard Koszul resolution is
+\[
+ \cK=A\otimes\Lambda^\bullet V
+\]
+with
+\[
+d(x^\alpha\otimes e_{p_1}\wedge\cdots\wedge e_{p_k})
+=\sum_{j=1}^k(-1)^{j-1}
+x^{\alpha+e_{p_j}}\otimes
+e_{p_1}\wedge\cdots\widehat e_{p_j}\cdots\wedge e_{p_k}.
+\]
+Define the total-mass transfer
+\[
+ T_s(x^\alpha\otimes e_S)
+ =\bigl(N(\alpha)N(S)\bigr)^{-s}
+   x^\alpha\otimes e_S.
+\]
+Because the differential moves one atom from the exterior factor into the
+monomial factor, it preserves total mass and commutes with $T_s$.
+
+\begin{theorem}[Lefschetz--Koszul cancellation]
+\label{thm:koszul-cancel}
+For $\RePart s>1$,
+\[
+ \Tr(T_s)
+ =\zeta(s)\prod_p(1+p^{-s})
+ =\frac{\zeta(s)^2}{\zeta(2s)},
+ \qquad
+ \Str(T_s)=1.
+\]
+Moreover $\Str(T_s^r)=1$ for every $r\ge1$, and
+\[
+ \sdet(I-zT_s)=1-z.
+\]
+\end{theorem}
+
+\begin{proof}
+The symmetric algebra contributes
+$\prod_p(1-p^{-s})^{-1}$, while the exterior supertrace contributes
+$\prod_p(1-p^{-s})$. They cancel factorwise. Replacing $s$ by $rs$ proves
+the power-supertrace identity. The logarithmic superdeterminant formula then
+reduces to $-\sum_{r\ge1}z^r/r=\log(1-z)$.
+\end{proof}
+
+The honest equivariant resolution has only vacuum homology, exactly as its
+Lefschetz supertrace predicts. The Riemann Euler factor belongs to the
+exterior transfer module or the factorization-homology direct sum; it does
+not survive the standard Koszul resolution.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{0.97\textwidth}{L{0.23\textwidth}L{0.26\textwidth}X}
+\toprule
+Object & Graded trace in $\RePart s>1$ & Meaning \\
+\midrule
+Factorization homology
+  & $\sum_n\mu(n)n^{-s}=1/\zeta(s)$
+  & Order-complex degree by tensor mass \\
+Exterior transfer module
+  & $\Str\Gamma_-(\cL_s)=1/\zeta(s)$
+  & Fermionic occupation of distinct atoms \\
+Odd one-particle space
+  & $\Ber(I-\cL_s)=\zeta(s)$
+  & A2 determinant orientation \\
+Equivariant Koszul resolution
+  & $\Str T_s=1$
+  & Bosonic/exterior cancellation to vacuum \\
+Liouville character
+  & $\sum(-1)^{\Omega(n)}n^{-s}=\zeta(2s)/\zeta(s)$
+  & Multiplicity parity, no exclusion \\
+\bottomrule
+\end{tabularx}
+\caption{Five different graded ledgers. They agree neither as chain objects
+nor as determinant conventions.}
+\label{tab:graded-objects}
+\end{table}

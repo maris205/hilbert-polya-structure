@@ -1,0 +1,174 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >={Latex[length=2.2mm,width=1.45mm]},
+  source/.style={
+    draw=blue!68!black,
+    fill=blue!7,
+    line width=0.9pt,
+    rounded corners=1.5pt,
+    text width=0.91\linewidth,
+    align=center,
+    inner xsep=6pt,
+    inner ysep=5pt
+  },
+  exact/.style={
+    draw=blue!68!black,
+    fill=blue!7,
+    line width=0.9pt,
+    rounded corners=1.5pt,
+    text width=0.272\linewidth,
+    minimum height=36mm,
+    align=left,
+    inner xsep=5pt,
+    inner ysep=5pt
+  },
+  boundary/.style={
+    draw=orange!82!black,
+    fill=orange!9,
+    line width=1.0pt,
+    densely dashed,
+    rounded corners=1.5pt,
+    text width=0.272\linewidth,
+    minimum height=36mm,
+    align=left,
+    inner xsep=5pt,
+    inner ysep=5pt
+  },
+  obstructed/.style={
+    draw=gray!80!black,
+    fill=gray!13,
+    line width=1.0pt,
+    densely dotted,
+    rounded corners=1.5pt,
+    text width=0.272\linewidth,
+    minimum height=36mm,
+    align=left,
+    inner xsep=5pt,
+    inner ysep=5pt
+  },
+  adversarial/.style={
+    draw=orange!82!black,
+    fill=orange!7,
+    line width=1.05pt,
+    densely dashed,
+    rounded corners=1.5pt,
+    text width=0.585\linewidth,
+    align=left,
+    inner xsep=6pt,
+    inner ysep=5pt
+  },
+  verdict/.style={
+    draw=black!82,
+    fill=gray!7,
+    line width=1.1pt,
+    rounded corners=1.5pt,
+    text width=0.91\linewidth,
+    align=center,
+    inner xsep=6pt,
+    inner ysep=5.5pt
+  },
+  exactFlow/.style={
+    ->,
+    draw=blue!68!black,
+    line width=0.95pt
+  },
+  boundaryFlow/.style={
+    ->,
+    draw=orange!82!black,
+    line width=0.95pt,
+    densely dashed
+  },
+  obstructionFlow/.style={
+    ->,
+    draw=gray!80!black,
+    line width=0.95pt,
+    densely dotted
+  }
+]
+
+\node[source] (sdc) {%
+  {\sffamily\scriptsize\bfseries [SD-C07: SYMBOLIC SOURCE]}\quad
+  tensor atoms $F_p$, entropy lengths $\log p$, and
+  $\mathcal L_s e_p=p^{-s}e_p$
+};
+
+\node[exact, below=8mm of sdc, xshift=-0.315\linewidth] (koszul) {%
+  {\sffamily\scriptsize\bfseries [EXACT: KOSZUL / EXTERIOR]}\\[2pt]
+  Atoms have canonical homological degree $1$ inside the Koszul functor.
+  For $\operatorname{Re}s>1$,
+  \[
+    \begin{aligned}
+      \mathrm{Ber}_{V_{\bar 1}}(I-\mathcal L_s)
+        &=\zeta(s),\\[-1pt]
+      \operatorname{Str}\Gamma(\mathcal L_s)
+        &=\det(I-\mathcal L_s),\\[-1pt]
+        &=\zeta(s)^{-1}.
+    \end{aligned}
+  \]
+  \textbf{A2 orientation is exact.}
+};
+
+\node[boundary, below=8mm of sdc] (reversal) {%
+  {\sffamily\scriptsize\bfseries [BOUNDARY: STABLE / UNSTABLE]}\\[2pt]
+  Natural symbolic reversal produces
+  \[
+    \mathcal L_s\oplus\mathcal L_s .
+  \]
+  It preserves the entropy weight:
+  \[
+    \begin{gathered}
+      s\longmapsto s,\\[-1pt]
+      \textit{not}\quad s\longmapsto1-s .
+    \end{gathered}
+  \]
+  No intrinsic Riemann duality follows.
+};
+
+\node[obstructed, below=8mm of sdc, xshift=0.315\linewidth] (group) {%
+  {\sffamily\scriptsize\bfseries [OBSTRUCTION: GROUP COMPLETION]}\\[2pt]
+  In $\mathbb Q_{+}^{\times}$, tensor inversion gives
+  \[
+    p^{-s}\longmapsto p^{s},
+    \qquad s\longmapsto -s .
+  \]
+  Every monoidal $\mathbb Z/2$-parity is inversion-even.
+  Centering at $1/2$ therefore requires extra structure.
+};
+
+\node[adversarial, below=8mm of reversal, xshift=0.1575\linewidth] (detthree) {%
+  {\sffamily\scriptsize\bfseries [ADVERSARIAL $s\leftrightarrow1-s$ CHECK]}\\[2pt]
+  Even granting the missing half-density pairing,
+  \[
+    D_3(s)=\det\nolimits_3(I-\mathcal L_s)\,
+           \det\nolimits_3(I-\mathcal L_{1-s}),
+    \qquad \frac13<\operatorname{Re}s<\frac23 .
+  \]
+  The paired determinant is symmetric but \textbf{zero-free} in this strip,
+  while
+  $\log D_3(s)=-\sum_{r\geq3}r^{-1}
+  \sum_p\!\left(p^{-rs}+p^{-r(1-s)}\right)$:
+  the decisive $r=1,2$ prime traces are deleted.
+};
+
+\node[verdict, below=8mm of detthree, xshift=-0.1575\linewidth] (verdict) {%
+  {\sffamily\bfseries
+    \textcolor{blue!68!black}{[GO A2]}
+    \quad/\quad
+    \textcolor{orange!82!black}{[STOP A3]}
+    \quad/\quad
+    \textcolor{gray!78!black}{[ROUTE B LOCKED]}}\\[2pt]
+  Exact Euler orientation survives; intrinsic completion and a
+  self-adjoint zero correspondence do not.
+};
+
+\draw[exactFlow] (sdc.south) -- (koszul.north);
+\draw[boundaryFlow] (sdc.south) -- (reversal.north);
+\draw[obstructionFlow] (sdc.south) -- (group.north);
+
+\draw[boundaryFlow] (reversal.south) -- (detthree.north west);
+\draw[obstructionFlow] (group.south) -- (detthree.north east);
+
+\draw[exactFlow] (koszul.south) |- ([xshift=-0.32\linewidth]verdict.north);
+\draw[boundaryFlow] (detthree.south) -- ([xshift=0.08\linewidth]verdict.north);
+
+\end{tikzpicture}
