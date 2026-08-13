@@ -243,3 +243,21 @@ mechanisms.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O80 | Finite virtual span of H0, cubic-CM H1, and H2 Tate factors | proved three-prime local rigidity | The first logarithmic coefficients at p=5,7,11 have determinant -24 (absolute value 24) and force the unique Riemann-matching class `(1,0,0)`. Every nonzero CM exponent changes a frozen local factor. | Complete for constant rational/integral exponents in this finite Euler category. Infinite-rank, prime-dependent, and non-Euler scattering constructions are outside scope. | ../henon_cm_three_prime_supercancellation_obstruction/README.md |
+
+## HCS-C43--C46 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O81 | Raw single-character full-kernel cubic augmentation | proved conjugation-symmetry obstruction | The exact \(p=7\) first logarithmic coefficient is nonreal, so the unpaired Euler germ does not satisfy real type identically. | Stops only the raw additive-character choice. Conjugate pairing preserves chronology and is the C44 input. | ../henon_mu3_augmented_euler_superproduct/THEOREM_PACKAGE.md |
+| HEN-O82 | Fixed-coefficient-field descent of paired Hénon moments | proved all-split-prime trace-field obstruction | For every \(p\equiv1\pmod3\), two nonzero histogram power moments force the Galois stabilizer to be exactly \(\{\pm1\}\); the first paired moment generates \(\mathbb Q(\zeta_p)^+\) of degree \((p-1)/2\). | Excludes a fixed number field containing the exact traces and hence the proposed fixed-field compatible system. It does not exclude varying fields, restriction of scalars, or normalized Galois trace. | ../henon_mu3_fixed_coefficient_field_obstruction/THEOREM_PACKAGE.md |
+| HEN-O83 | Ordinary rational Galois-norm determinant family | proved unbounded virtual-rank obstruction | The paired local factor has virtual degree four over every real Galois embedding, so its rational norm has virtual degree \(2(p-1)\). Every uniformly bounded-degree rational prefactor leaves unbounded local rank difference. | Excludes a bounded-rank ordinary rational determinant family. The field-degree-normalized logarithmic root survives and has a convergent Euler germ. | ../henon_mu3_galois_norm_rank_obstruction/THEOREM_PACKAGE.md |
+| HEN-O84 | Ordinary determinant promotion of the normalized Galois root | proved exact fractional-divisor obstruction | At \(p=7\), \(N_7=P_{18}^2/(49P_{12}^2)\) with squarefree coprime \(P_{18},P_{12}\). Every finite local order of \(N_7\) is \(\pm2\), so its normalized cubic root has nonintegral order \(\pm2/3\). | Rules out a single-valued meromorphic scalar or finite-dimensional rational determinant across those local divisors. It does not obstruct the origin Log branch, a normalized trace, or a regularized graded determinant. | ../henon_mu3_normalized_root_branch_obstruction/THEOREM_PACKAGE.md |
+
+## HCS-C47--C48 positive boundary
+
+C47 constructs a fourth-order normalized-trace graded determinant on
+\(\Re s>1/2\); C48 identifies the second moment with a genus-four Frobenius
+trace and moves the Euler and sixth-order determinant domain to
+\(\Re s>1/3\). These are retained positive structures rather than added to
+the obstruction list. Their common open wall is the third chronological
+moment and the middle cohomology of its \((2,3)\) threefold.

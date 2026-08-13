@@ -1152,3 +1152,83 @@ degree-two Tate factor.  Its tuple is **(A1_WEAK, A2_FAIL,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.  The finite cubic
 cohomology branch is scope-exhausted; broader infinite or non-Euler objects
 are not classified.
+
+## HCS-C43 full-kernel cubic augmentation (2026-08-13)
+
+Candidate **HCS-C43** leaves the functorial scalar Kummer category and uses
+the full Fourier--cubic Hénon kernel with its genuine order-three coordinate
+permutation; see
+[`../henon_mu3_augmented_euler_superproduct/`](../henon_mu3_augmented_euler_superproduct/).
+The reversing identity \(UR=R^{-1}U\), the two-step clock \(T=U^2\), exact
+sector square identity, chronological twisted traces, Deligne bound, and a
+canonical Euler germ on \(\Re s>1\) are proved.  A \(p=7\) coefficient exactly
+refutes real type for the raw single-character product.  The tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT, A3_FAIL,
+A4_NATURAL_QUANTIZATION)**.  Conjugate pairing is passed to C44.
+
+## HCS-C44 fixed-coefficient-field obstruction (2026-08-13)
+
+Candidate **HCS-C44** pairs the additive character with its inverse and tests
+descent to one fixed coefficient field; see
+[`../henon_mu3_fixed_coefficient_field_obstruction/`](../henon_mu3_fixed_coefficient_field_obstruction/).
+For every split prime, two exact finite-field power moments prove that the
+Galois stabilizer of the paired first Hénon moment is exactly
+\(\{\pm1\}\).  It therefore generates \(\mathbb Q(\zeta_p)^+\), of degree
+\((p-1)/2\), and no fixed number field can contain all such traces.  The same
+theorem gives the universal descended trace \(-6\).  The fixed-field
+compatible-system promotion is rejected; canonical Galois norm descent is
+passed to C45.
+
+## HCS-C45 normalized Galois norm germ (2026-08-13)
+
+Candidate **HCS-C45** takes the rational Galois norm and then its canonical
+field-degree-normalized logarithmic root; see
+[`../henon_mu3_galois_norm_rank_obstruction/`](../henon_mu3_galois_norm_rank_obstruction/).
+The ordinary norm has virtual degree \(2(p-1)\), excluding a uniformly
+bounded-rank rational determinant family.  Nevertheless the normalized root
+has first moment \(-12/(p-1)\), uniform higher-moment bounds, and an Euler
+product holomorphic and nonzero on \(\Re s>1/2\).  The tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with
+**ROUTE_A_EXPLORATORY**.
+
+## HCS-C46 normalized-root branch obstruction (2026-08-13)
+
+Candidate **HCS-C46** executes the local divisor-integrality gate at the first
+split prime; see
+[`../henon_mu3_normalized_root_branch_obstruction/`](../henon_mu3_normalized_root_branch_obstruction/).
+Exact cyclotomic resultants give
+\(N_7=P_{18}^2/(49P_{12}^2)\), with squarefree coprime numerator and
+denominator.  Every finite local divisor order is \(\pm2\), so the normalized
+cubic root has orders \(\pm2/3\) and cannot be an ordinary single-valued
+meromorphic or finite-dimensional rational determinant.  The C45 disk germ
+survives; a normalized-trace operator category is passed to C47.
+
+## HCS-C47 normalized-trace operator realization (2026-08-13)
+
+Candidate **HCS-C47** constructs that operator category; see
+[`../henon_mu3_normalized_trace_operator_gate/`](../henon_mu3_normalized_trace_operator_gate/).
+For the exact global graded block \(X_s\), relative to the field-normalized
+semifinite trace \(\tau\), \(X_s\in L^q(\mathcal M,\tau)\) exactly when
+\(q\Re s>2\).  Hence the C45 germ is a canonical fourth-order
+\(\tau\)-regularized graded determinant on \(\Re s>1/2\), with its first
+three chronological supertraces displayed as counterterms.  Positive trace
+and signed supertrace are kept distinct, and a positive Fuglede--Kadison
+determinant is not used to fake analytic phase.  Route A is exploratory with
+a positive A2 operator realization.  Under the canonical Hilbert trace the
+distinct criterion is \(X_s\in S^q(\mathcal H)\) iff \(q\Re s>3\); that
+classical determinant encodes the ordinary Galois norm, not the normalized
+root.
+
+## HCS-C48 genus-four second moment (2026-08-13)
+
+Candidate **HCS-C48** geometrizes the first active moment wall; see
+[`../henon_mu3_genus4_second_moment/`](../henon_mu3_genus4_second_moment/).
+The four-step chronological zero fibre reduces to a smooth \((3,3)\)
+genus-four curve \(X_\rho\subset\mathbb P^1\times\mathbb P^1\), and
+\(C_{p,2}=-14-2a_p(X_\rho)\) exactly.  The Weil bound gives a square-root
+gain after field-degree normalization, extending the Euler germ and a
+sixth-order \(\tau\)-regularized graded determinant to \(\Re s>1/3\).  The tuple
+remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)**.  The next wall is
+the middle cohomology of the \(n=3\) \((2,3)\) threefold.
