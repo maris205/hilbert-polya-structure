@@ -261,20 +261,23 @@ trace and moves the Euler and sixth-order determinant domain to
 \(\Re s>1/3\). These are retained positive structures rather than added to
 the obstruction list. Their common open wall is the third chronological
 moment and the middle cohomology of its \((2,3)\) threefold.
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P47`; its
+immutable bundles retain legacy internal C-series provenance strings.
+
 ## HCS-P44 additions (pressure-lane registry alias)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
-| HEN-P81 | Raw H6 instability roof as an all-prime von Mangoldt clock | proved critical-line overconvergence obstruction | One primitive factor has exactly the atom `ell*|Lambda|^(-rs)`, but the inherited bound `log(phi)/log(J_*)=0.35598...<1/2` makes the complete H6 logarithmic derivative absolutely convergent on the critical line. PNT gives divergence of `sum_p log(p)/sqrt(p)`, so no all-prime termwise bijection can preserve these raw atoms. | Stops only the unscaled instability roof with ordinary absolute termwise identification. A pressure-normalized roof, distributional trace, or non-termwise arithmetic compiler is a new candidate. | ../henon_instability_amplitude_overconvergence/README.md |
+| HEN-O85 | Raw H6 instability roof as an all-prime von Mangoldt clock | proved critical-line overconvergence obstruction | One primitive factor has exactly the atom `ell*|Lambda|^(-rs)`, but the inherited bound `log(phi)/log(J_*)=0.35598...<1/2` makes the complete H6 logarithmic derivative absolutely convergent on the critical line. PNT gives divergence of `sum_p log(p)/sqrt(p)`, so no all-prime termwise bijection can preserve these raw atoms. | Stops only the unscaled instability roof with ordinary absolute termwise identification. A pressure-normalized roof, distributional trace, or non-termwise arithmetic compiler is a new candidate. | ../henon_instability_amplitude_overconvergence/README.md |
 
 ## HCS-P46 additions (pressure-lane registry alias)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
-| HEN-P82 | Raw H6 multiplier or field norm as a rational-prime label | proved all-period algebraic-unit obstruction | After the canonical scaling `x_i=6q_i`, every fixed algebra is finite free over Z and every chronological derivative lies in `SL_2` over its algebraic integers. Every periodic multiplier and its inverse are algebraic integers, so a rational multiplier is only `+1` or `-1` and every field norm is a unit. | Stops raw multiplier and norm labels for every geometric H6 periodic point. It does not classify the pressure-normalized real power `|Lambda|^h_star`, trace shifts, cyclic resultants, or nonlocal packet labels. | ../henon_integral_monodromy_units/README.md |
+| HEN-O86 | Raw H6 multiplier or field norm as a rational-prime label | proved all-period algebraic-unit obstruction | After the canonical scaling `x_i=6q_i`, every fixed algebra is finite free over Z and every chronological derivative lies in `SL_2` over its algebraic integers. Every periodic multiplier and its inverse are algebraic integers, so a rational multiplier is only `+1` or `-1` and every field norm is a unit. | Stops raw multiplier and norm labels for every geometric H6 periodic point. It does not classify the pressure-normalized real power `|Lambda|^h_star`, trace shifts, cyclic resultants, or nonlocal packet labels. | ../henon_integral_monodromy_units/README.md |
 
 ## HCS-P47 additions (pressure-lane registry alias)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
-| HEN-P83 | Rational scalar transforms of H6 multipliers preserving every orbit repetition | proved functorial classification obstruction | The identity `R(X^r)=R(X)^r` forces every nonzero rational function to be the monomial `X^k`. Applied to P46's algebraic-unit multipliers, every rational scalar label is again a unit and cannot be a rational prime. | Complete only for rational identities on the multiplier torus. Continuous real powers, nonlocal orbit packets, prime ideals, cyclic resultants, and distributional traces remain outside scope. | ../henon_repetition_label_classification/README.md |
+| HEN-O87 | Rational scalar transforms of H6 multipliers preserving every orbit repetition | proved functorial classification obstruction | The identity `R(X^r)=R(X)^r` forces every nonzero rational function to be the monomial `X^k`. Applied to P46's algebraic-unit multipliers, every rational scalar label is again a unit and cannot be a rational prime. | Complete only for rational identities on the multiplier torus. Continuous real powers, nonlocal orbit packets, prime ideals, cyclic resultants, and distributional traces remain outside scope. | ../henon_repetition_label_classification/README.md |

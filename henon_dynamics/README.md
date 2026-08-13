@@ -27,11 +27,11 @@ henon_kummer_character_divisor_obstruction - C39 complete - Every nonzero virtua
 henon_kummer_schatten_clock_obstruction - C40 complete - Prime damping has a sharp Schatten threshold but introduces a noncanonical second clock absent from Kummer conductor data.
 henon_cubic_cm_frobenius_bridge - C41 complete - The cubic channel admits an intrinsic j=0 CM elliptic Frobenius completion, but its L-function is not a Henon/Riemann determinant.
 henon_cm_three_prime_supercancellation_obstruction - C42 complete - Three local primes force every finite Tate-plus-CM Riemann match to delete the cubic H1 factor.
-henon_entropy_von_mangoldt_bridge - P43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
-henon_instability_amplitude_overconvergence - P44 complete - Raw instability Euler factors have exact prime-power amplitudes but the full trace overconverges on the critical line.
-henon_pressure_normalized_prime_orbit_bridge - P45 complete - Bowen-pressure normalization gives the same H6 survivor entropy one and a source-backed e^T/T prime-orbit law.
-henon_integral_monodromy_units - P46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
-henon_repetition_label_classification - P47 complete - Rational repetition-compatible scalar labels are exactly monomials, so H6 algebraic units cannot become rational primes.
+henon_entropy_von_mangoldt_bridge - HCS-P43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
+henon_instability_amplitude_overconvergence - HCS-P44 complete - Raw instability Euler factors have exact prime-power amplitudes but the full trace overconverges on the critical line.
+henon_pressure_normalized_prime_orbit_bridge - HCS-P45 complete - Bowen-pressure normalization gives the same H6 survivor entropy one and a source-backed e^T/T prime-orbit law.
+henon_integral_monodromy_units - HCS-P46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
+henon_repetition_label_classification - HCS-P47 complete - Rational repetition-compatible scalar labels are exactly monomials, so H6 algebraic units cannot become rational primes.
 
 `P43`--`P47` are the unique registry aliases for a concurrently frozen
 pressure/orbit lane.  Those project bundles retain legacy internal
@@ -39,7 +39,7 @@ pressure/orbit lane.  Those project bundles retain legacy internal
 unqualified IDs `C43`--`C48` in this repository belong to the full-kernel
 cubic lane listed in the theorem table below.
 
-- [Pressure-lane Batch Review P43--P47](BATCH_REVIEW_C43_C47.md) — entropy mass, raw-clock
+- [Pressure-lane Batch Review HCS-P43--P47](BATCH_REVIEW_C43_C47.md) — entropy mass, raw-clock
   obstruction, pressure normalization, integral monodromy, and the final
   rational-label classification.
 
