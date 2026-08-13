@@ -1,0 +1,2806 @@
+                                             ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS
+                                                                                     FOLKMAR BORNEMANN∗
+
+                                               Abstract. Some significant quantities in mathematics and physics are most naturally expressed as the
+                                          Fredholm determinant of an integral operator, most notably many of the distribution functions in random
+                                          matrix theory. Though their numerical values are of interest, there is no systematic numerical treatment
+                                          of Fredholm determinants to be found in the literature. Instead, the few numerical evaluations that are
+                                          available rely on eigenfunction expansions of the operator, if expressible in terms of special functions, or on
+                                          alternative, numerically more straightforwardly accessible analytic expressions, e.g., in terms of Painlevé
+arXiv:0804.2543v2 [math.NA] 24 Jun 2008
+
+
+
+
+                                          transcendents, that have masterfully been derived in some cases. In this paper we close the gap in the
+                                          literature by studying projection methods and, above all, a simple, easily implementable, general method
+                                          for the numerical evaluation of Fredholm determinants that is derived from the classical Nyström method
+                                          for the solution of Fredholm equations of the second kind. Using Gauss–Legendre or Clenshaw–Curtis
+                                          as the underlying quadrature rule, we prove that the approximation error essentially behaves like the
+                                          quadrature error for the sections of the kernel. In particular, we get exponential convergence for analytic
+                                          kernels, which are typical in random matrix theory. The application of the method to the distribution
+                                          functions of the Gaussian unitary ensemble (GUE), in the bulk and the edge scaling limit, is discussed in
+                                          detail. After extending the method to systems of integral operators, we evaluate the two-point correlation
+                                          functions of the more recently studied Airy and Airy1 processes.
+
+                                              Key words. Fredholm determinant, Nyström’s method, projection method, trace class operators,
+                                          random matrix theory, Tracy–Widom distribution, Airy and Airy1 processes
+
+                                              AMS subject classifications. 65R20, 65F40, 47G10, 15A52
+
+
+                                               1. Introduction. Fredholm’s (1903) landmark paper1 on linear integral equations
+                                          is generally considered to be the forefather of those mathematical concepts that finally
+                                          led to modern functional analysis and operator theory—see the historical accounts in
+                                          Kline (1972, pp. 1058–1075) and Dieudonné (1981, Chap. V). Fredholm was interested
+                                          in the solvability of what is now called a Fredholm equation of the second kind,
+                                                                             Z b
+                                                                u( x ) + z         K ( x, y)u(y) dy = f ( x )             ( x ∈ ( a, b)),          (1.1)
+                                                                              a
+
+                                          and explicit formulas for the solution thereof, for a right hand side f and a kernel K,
+                                          both assumed to be continuous functions. He introduced his now famous determinant
+                                                                        ∞
+                                                                            zn
+                                                                                   Z b         Z b
+                                                              d(z) = ∑
+                                                                                                                      n
+                                                                                         ···         det K (t p , tq ) p,q=1 dt1 · · · dtn ,       (1.2)
+                                                                       k =0
+                                                                            n!      a           a
+
+                                          which is an entire function of z ∈ C, and succeeded in showing that the integral
+                                          equation is uniquely solvable if and only if d(z) 6= 0.
+                                              Realizing the tremendous potential of Fredholm’s theory, Hilbert started working
+                                          on integral equations in a flurry and, in a series of six papers from 1904 to 1910,2
+                                          transformed the determinantal framing to the beginnings of what later, in the hands of
+                                          Schmidt, Carleman, Riesz, and others, would become the theory of compact operators
+
+                                             ∗ Zentrum Mathematik, Technische Universität München, Boltzmannstr. 3, 85747 Garching, Germany
+
+                                          (bornemann@ma.tum.de). Manuscript as of November 26, 2024.
+                                               1 Simon (2005, p. VII) writes: “This deep paper is extremely readable and I recommend it to those
+
+                                          wishing a pleasurable afternoon.” An English translation of the paper can be found in Birkhoff (1973,
+                                          pp. 449–465).
+                                               2 Later reproduced as one of the first books on linear integral equations (Hilbert 1912).
+
+                                                                                                        1
+2                                           F. BORNEMANN
+
+
+in Hilbert spaces. Consequently, over the years Fredholm determinants have faded
+from the core of general accounts on integral equations to the historical remarks
+section—if they are mentioned at all.3
+    So, given this state of affairs, why then study the numerical evaluation of the Fred-
+holm determinant d(z)? The reason is, simply enough, that the Fredholm determinant
+and the more general notions, generalizing (1.1) and (1.2) to
+                             u + zAu = f ,          d(z) = det( I + zA),
+for certain classes of compact operators A on Hilbert spaces, have always remained
+important tools in operator theory and mathematical physics (Gohberg, Goldberg and
+Krupnik 2000, Simon 2005). In turn, they have found many significant applications:
+e.g., in atomic collision theory (Jost and Pais 1951, Moiseiwitsch 1977), inverse scatter-
+ing (Dyson 1976), in Floquet theory of periodic differential equations (Eastham 1973),
+in the infinite-dimensional method of stationary phase and Feynman path integrals
+(Albeverio and Høegh-Krohn 1977, Rezende 1994), as the two-point correlation func-
+tion of the two-dimensional Ising model (Wilkinson 1978), in renormalization in
+quantum field theory (Simon 2005), as distribution functions in random matrix theory
+(Mehta 2004, Deift 1999, Katz and Sarnak 1999) and combinatorial growth processes
+(Johansson 2000, Prähofer and Spohn 2002, Sasamoto 2005, Borodin, Ferrari, Prähofer
+and Sasamoto 2007). As Lax (2002, p. 260) puts it most aptly upon including Fred-
+holm’s theory as a chapter of its own in his recent textbook on functional analysis:
+“Since this determinant appears in some modern theories, it is time to resurrect it.”
+     In view of this renewed interest in operator determinants, what numerical meth-
+ods are available for their evaluation? Interestingly, this question has apparently
+never—at least to our knowledge—been systematically addressed in the numerical
+analysis literature.4 Even experts in the applications of Fredholm determinants com-
+monly seem to have been thinking (Spohn 2008) that an evaluation is only possible
+     3 For example, Hilbert (1912), Webster (1927), and Whittaker and Watson (1927) start with the Fredholm
+
+determinant right from the beginning; yet already Courant and Hilbert (1953, pp.142–147), the translation of
+the German edition from 1931, give it just a short mention (“since we shall not make any use of the Fredholm
+formulas later on”); while Smithies (1958, Chap. V) and Hochstadt (1973, Chap. 7), acknowledging the
+fact that “classical” Fredholm theory yields a number of results that functional analytic techniques do not,
+postpone Fredholm’s theory to a later chapter; whereas Baker (1977), Porter and Stirling (1990), Prössdorf
+and Silbermann (1991), Hackbusch (1995), and Kress (1999) ignore the Fredholm determinant altogether.
+Among the newer books on linear integral equations, the monumental four volume work of Fenyő and
+Stolle (1982–1984) is one of the few we know of that give Fredholm determinants a balanced treatment.
+     4 Though we can only speculate about the reasons, there is something like a disapproving attitude
+
+towards determinants in general that seems to be quite common among people working in “continuous”
+applied mathematics. Here are a few scattered examples: Meyer (2000) writes at the beginning of the
+chapter on determinants (p. 460): “Today matrix and linear algebra are in the main stream of applied
+mathematics, while the role of determinants has been relegated to a minor backwater position.” Axler
+(1995) has a paper with the provocative title “Down with Determinants!” and a correspondingly worked
+out textbook on linear algebra (1997). The quintessential book of Golub and Van Loan (1996) on “Matrix
+Computations” does not explicitly address the computation of determinants at all, it is only implicitly
+stated as part of Theorem 3.2.1. Higham (2002) writes at the beginning of Section 14.6: “Like the matrix
+inverse, the determinant is a quantity that rarely needs to be computed.” He then continues with the
+argument, well known to every numerical analyst, that the determinant cannot be used as a measure of ill
+conditioning since it scales as det(αA) = αm det( A) for a m × m-matrix A, α ∈ R. Certainly there is much
+truth in all of their theses, and Cramer’s rule and the characteristic polynomial, which were the most
+common reasons for a call to the numerical evaluation of determinants (Stewart 1998, p. 176), have most
+righteously been banned from the toolbox of a numerical analyst for reasons of efficiency. However, with
+respect to the infinite dimensional case, the elimination of determinants from the thinking of numerical
+analysts as a subject of computations might have been all too successful. For instance, the scaling argument
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                       3
+
+if either the eigenvalues of the integral operator are, more or less, explicitly known
+or if an alternative analytic expression has been found that is numerically more
+accessible—in each specific case anew, lacking a general procedure.
+
+     The Nyström-type method advocated in this paper. In contrast, we study a simple
+general numerical method for Fredholm determinants which is exceptionally efficient
+for smooth kernels, yielding small absolute errors (i.e., errors that are small with
+respect to the scale det( I ) = 1 inherently given by the operator determinant). To this
+end we follow the line of thought of Nyström’s (1930) classical quadrature method for
+the numerical solution of the Fredholm equation (1.1). Namely, given a quadrature
+rule
+                                            m                  Z b
+                                Q( f ) = ∑ w j f ( x j ) ≈             f ( x ) dx,
+                                            j =1                   a
+
+
+Nyström discretized (1.1) as the linear system
+                               m
+                      ui + z ∑ w j K ( xi , x j ) u j = f ( xi )        (i = 1, . . . , m),           (1.3)
+                              j =1
+
+
+which has to be solved for ui ≈ u( xi ) (i = 1, . . . , m). Nyström’s method is extremely
+simple and, yet, extremely effective for smooth kernels. So much so that Delves and
+Mohamed (1985, p. 245), in a chapter comparing different numerical methods for
+Fredholm equations of the second kind, write:
+
+          Despite the theoretical and practical care lavished on the more com-
+          plicated algorithms, the clear winner of this contest has been the
+          Nyström routine with the m-point Gauss–Legendre rule. This routine
+          is extremely simple; it includes a call to a routine which provides
+          the points and weights for the quadrature rule, about twelve lines of
+          code to set up the Nyström equations and a call to the routine which
+          solves these equations. Such results are enough to make a numerical
+          analyst weep.
+
+By keeping this conceptual and algorithmic simplicity, the method studied in this
+paper approximates the Fredholm determinant d(z) simply by the determinant of the
+m × m-matrix that is applied to the vector (ui ) in the Nyström equation (1.3):
+                                                                    m
+                              dQ (z) = det δij + z wi K ( xi , x j ) i,j=1 .                          (1.4)
+
+If the weights w j of the quadrature rule are positive (which is always the better
+choice), we will use the equivalent symmetric variant
+                                                                      m
+                         dQ (z) = det δij + z wi1/2 K ( xi , x j )w1/2
+                                                                   j                         .        (1.5)
+                                                                                     i,j=1
+
+
+does not apply in the infinite dimensional case: operator determinants det( I + A) are defined for compact
+perturbations of the identity, which perfectly determines the scaling since, for α 6= 1, α( I + A) cannot be
+written in the form I + Ã with another compact operator Ã. (This is because the identity operator is not
+compact then.)
+    ü Clenshaw-Curtis Quadrature (following J. Waldvogel, BIT 43, pp.
+      1-8, 2003)
+
+4         ClenshawCurtis@8a_, b_<, F.m_, dig_D := ModuleB
+                                      BORNEMANN
+             8c = SetPrecision@Cos@π Range@0, mD ê mD, digD, M = Range@1, m − 1, 2D,
+Using Gauss–Legendre       or Curtis–Clenshaw
+                                l = Length@MD; nquadrature
+                                                   = m − l; v = rules, the computational cost5
+             82is
+                ê Mofê HM     O(1mê )Take@M,                     8n<D<  êê Flatten,
+            l, n, v, g, w<,                                     SetPrecision@
+of the method          order        3 . The implementation
+                          − 2L,               −1D, Table@0,in      Matlab,  or Mathematica, is
+                                            8Length@vD,               g = Table@−1, 8m<D;
+                                                                                    digD;
+straightforward  and takes
+           v = −Drop@v,     −1Djust  a few lines
+                                 − Take@v,       of code.62,In−1<D;
+                                                               Matlab:
+             g@@l + 1DD += m; g@@n + 1DD += m; g ê= Im2 + Mod@m, 2DM;
+         w = Re@InverseFourier@g + v, FourierParameters → 8−1, 1<DD ê m;
+       function d = DetNyström(K,z,a,b,m)
+                                   Hb − aL
+       [w,x] = QuadratureRule(a,b,m);
+              Append@w, w@@1DDD; :
+                                              1−c    1+c
+       w w= =sqrt(w);                      w,     a+     b>F
+       [xj,xi] = meshgrid(x,x);       2        2      2
+       d = det(eye(m)+z*(w'*w).*K(xi,xj));
+InüMathematica:
+    Nyström-type Method for the Fredholm Determinant
+          DetNyström@K_, z_, a_, b_, m_D :=
+             ModuleB8w, x<, 8w, x< = QuadratureRule@a, b, mD; w =                    w;
+
+              Det@IdentityMatrix@mD + z Outer@Times, w, wD Outer@K, x, xDDF;
+
+     Strictly speaking we are not the first to suggest this simple method, though.
+Inü fact, it was Hilbert
+      Example     for the himself   (1904, pp. 52–60) in his very first paper on integral
+                           Sine-Kernel
+equations, who motivated7 the expression (1.2) of the Fredholm determinant by
+          QuadratureRule@a_,
+essentially   using this method b_,
+                                  withm_D
+                                       the:=rectangular
+                                              ClenshawCurtis@8a,    b<, m − 1,proving
+                                                        rule for quadrature,   20D    locally
+uniformK@x_,     y_D := Sinc@π Hx − yLD;
+            convergence;   see  also Hilbert   (1912, pp.  4–10)  and, for the  motivational
+
+                                       ê 10, 10D,
+argument given just heuristically, without a proof of convergence, Whittaker and
+Watson (1927,
+          N@DetNyström@K,     −1, 0, 1(1957,
+                 Sect. 11.2), Tricomi         pp. 66–68)
+                                                   16D    (who speaks of a “poetic license”
+to be applied    “without
+          0.9000272717982592too many   scruples”),  Smithies   (1958, pp. 65–68), Hochstadt
+(1973, pp. 243–239), and Fenyő and Stolle (1982–1984, Vol. II, pp. 82–84)—to name
+just a few but influential cases. Quite astonishingly, despite of all its presence as
+a motivational tool in the expositions of the classical theory, we have found just
+one example of the use of this method (with Gauss–Legendre quadrature) in an
+actual numerical calculation: a paper by the physicists Reinhardt and Szabo (1970) on
+low-energy elastic scattering of electrons from hydrogen atoms. However, the error
+estimates (Theorem 6.2) that we will give in this paper seem to be new at least; we
+will prove that the approximation error essentially behaves like the quadrature error
+for the sections x 7→ K ( x, y) and y 7→ K ( x, y) of the kernel. In particular, we will get
+exponential convergence rates for analytic kernels.
+   Examples. Perhaps the generality and efficiency offered by our direct numerical
+approach to Fredholm determinants, as compared to analytic methods if they are
+
+    5 The computational cost of O ( m3 ) for the matrix determinant using either Gaussian elimination with
+
+partial pivoting (Stewart 1998, p. 176) or Hyman’s method (Higham 2002, Sect. 14.6) clearly dominates the
+cost of O(m log m) for the weights and points of Clenshaw–Curtis quadrature using the FFT, as well as
+the cost of O(m2 ) for Gauss–Legendre quadrature using the Golub–Welsh algorithm; for implementation
+details of these quadrature rules see Waldvogel (2006), Trefethen (2008), and the appendix of this paper.
+The latter paper carefully compares Clenshaw–Curtis with Gauss–Legendre and concludes (p. 84): “Gauss
+quadrature is a beautiful and powerful idea. Yet the Clenshaw–Curtis formula has essentially the same
+performance for most integrands.”
+    6 The command [w,x] = QuadratureRule(a,b,m) is supposed to supply the weights and points of a
+
+m-point quadrature rule on the interval [ a, b] as a 1 × m vector w and a m × 1-vector x, respectively. For
+Gauss–Legendre and Clenshaw–Curtis, such a Matlab code can be found in the appendix.
+    7 Fredholm himself does not give the slightest hint of a motivation in his early papers (1900, 1903). He
+
+apparently conceived his determinant in analogy to similar expressions that his fellow countryman von
+Koch (1892) had obtained for infinite matrices a few years earlier; see Fredholm (1909, p. 95), Dieudonné
+(1981, p. 99), or Pietsch (2007, p. 409).
+             ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                  5
+
+available at all, is best appreciated by an example. The probability E2 (0; s) that an
+interval of length s does not contain, in the bulk scaling limit of level spacing 1,
+an eigenvalue of the Gaussian unitary ensemble (GUE) is given by the Fredholm
+determinant of the sine kernel,
+                                                              Z s
+                                                                  sin(π ( x − y))
+       E2 (0; s) = det I − As  L2 (0,s) ,      As u( x ) =                         u(y) dy ;
+                                                               0       π ( x − y)
+
+see Gaudin (1961) and Mehta (2004, Sect. 6.3). Gaudin has further shown that the
+eigenfunctions of this selfadjoint integral operator are exactly given by a particular
+family of special functions, namely the radial prolate spheroidal wave functions with
+certain parameters. Using tables (Stratton, Morse, Chu, Little and Corbató 1956) of
+these functions he was finally able to evaluate E2 (0; s) numerically. On the other hand,
+in an admirably intricate analytic tour de force Jimbo, Miwa, Môri and Sato (1980)
+expressed the Fredholm determinant of the sine kernel as
+                                                Z πs               
+                                                        σ( x)
+                              Es (0; s) = exp                 dx                                (1.6)
+                                                  0      x
+
+in terms of the sigma, or Hirota, representation of the fifth Painlevé equation, namely
+
+                                                                        x  x2
+      ( xσ00 )2 + 4( xσ0 − σ)( xσ0 − σ + σ02 ) = 0,       σ( x) ∼ −       − 2       ( x → 0),
+                                                                        π  π
+see also Mehta (2004, Chap. 21) and Tracy and Widom (2000, Sect. 4.1). With respect
+to the numerical evaluation, the latter two authors conclude in a footnote, most
+probably by comparing to Gaudin’s method: “Without the Painlevé representations,
+the numerical evaluation of the Fredholm determinants is quite involved.” However,
+one does not need to know more than the smooth kernel sin(π ( x − y))/(π ( x − y))
+ifself to approximate E2 (0; s) with the method of this paper. For instance, the Gauss–
+Legendre rule with just m = 5 quadrature points already gives, in 0.2 ms computing
+time, 15 accurate digits of the value
+
+                          E2 (0, 0.1) = 0.90002 72717 98259 · · · ,
+
+that is, by calculating the determinant of a 5 × 5-matrix easily built from the kernel.
+     Even though it is satisfying to have an alternative and simpler way of calculating
+already known quantities, it is far more exciting to be able to calculate quantities
+that otherwise have defeated numerical evaluations so far. For instance, the joint
+distribution functions of the Airy and the Airy1 processes are given as determinants
+of systems of integral operators, see Prähofer and Spohn (2002), Johansson (2003),
+Sasamoto (2005) and Borodin et al. (2007). Even though a nonlinear partial differential
+equation of third order in three variables has been found by Adler and van Moerbeke
+(2005, Eq. (4.12)) for the logarithm of the joint distribution function of the Airy process
+at two different times, this masterful analytic result is probably of next to no numerical
+use. And in any case, no such analytic results are yet known for the Airy1 process.
+However, the Nyström-type method studied in this paper can easily be extended
+to systems of integral operators. In this way, we have succeeded in evaluating the
+two-point correlation functions of both stochastic processes, see Section 8.
+6                                    F. BORNEMANN
+
+
+    Outline of this paper. For the proper functional analytic setting, in Section 2 we
+review some basic facts about trace class and Hilbert–Schmidt operators. In Section 3
+we review the concept of the determinant det( I + A) for trace class operators A
+and its relation to the Fredholm determinant. In Section 4 we study perturbation
+bounds implying that numerical calculations of determinants can only be expected
+to be accurate with respect to absolute errors in general. In Section 5 we use the
+functional analytic formulation of the problem to obtain convergence estimates for
+projection methods of Galerkin and Ritz–Galerkin type. The convergence rate is
+shown to depend on a proper balance between the decay of the singular values
+of the operator and the growth of bounds on the derivatives of the corresponding
+singular functions. This is in sharp contrast with Section 6, where we study the
+convergence of the Nyström-type method (1.5) by directly addressing the original
+definition of the Fredholm determinant. Here, only the smoothness properties of the
+kernel enter the convergence estimates. It turns out that, for kernels of low regularity,
+the order of convergence of the Nyström-type method can be even higher than
+that of a Ritz–Galerkin method. In Section 7 we give examples for the exponential
+convergence rates enjoyed by analytic kernels. To this end we discuss the details of the
+numerical evaluation of the determinants of the sine and Airy kernels, which express
+the probability distributions E2 (0; s) and F2 (s) (the Tracy–Widom distribution) of
+random matrix theory. Finally, after extending the Nyström-type method to systems of
+integral operators we report in Section 8 on the numerical evaluation of the two-point
+correlation functions of the Airy and Airy1 processes.
+    2. Trace Class and Hilbert–Schmidt Operators. We begin by recalling some
+basic material about the spectral theory of nonselfadjoint compact operators, which
+can be found, e.g., in Gohberg, Goldberg and Kaashoek (1990), Lax (2002) and Simon
+(2005). We consider a complex, separable Hilbert space H with an inner product h·, · i
+that is linear in the second factor and conjugate linear in the first. The set of bounded
+linear operators will be denoted by B(H), the compact operators by J∞ (H). The
+spectrum of a compact operator A ∈ J∞ (H) has no non-zero limit point; its non-zero
+points are eigenvalues of finite algebraic multiplicity. We list these eigenvalues as
+        N ( A)
+(λn ( A))n=1 , counting multiplicity, where N ( A) is either a finite non-negative integer
+or infinity, and order them by
+
+                               |λ1 ( A)| > |λ2 ( A)| > · · · .
+
+The positive eigenvalues
+
+                               s1 ( A ) > s2 ( A ) > · · · > 0
+
+of the associated positive-semidefinite, selfadjoint operator
+
+                                    | A| = ( A∗ A)1/2
+
+are called the singular values of A. Correspondingly, there is the Schmidt or singular-
+value representation of A, that is, the norm convergent expansion
+
+                                    N (| A|)
+                               A=     ∑ sn ( A)hun , · ivn ,                         (2.1)
+                                      n =1
+              ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                   7
+
+where the un and vn are certain (not necessarily complete) orthonormal sets in H.
+Note that sn ( A) = |λn ( A)| if A is selfadjoint. In general we have Weyl’s inequality
+                 N                    N
+                 ∑ |λn ( A)| p 6 ∑ sn ( A) p                 ( N 6 N ( A ), 1 6 p < ∞ ).          (2.2)
+                n =1                n =1
+
+The Schatten–von Neumann classes of compact operators are defined as
+                                               N (| A|)
+             J p (H) = { A ∈ J∞ (H) :            ∑ sn ( A) p < ∞}                  (1 6 p < ∞ )
+                                                n =1
+
+with the corresponding norm8
+                                                                        !1/p
+                                                 N (| A|)
+                                 k AkJ p =         ∑ sn ( A)        p
+                                                                               .
+                                                  n =1
+
+The operator norm on J∞ (H) perfectly fits into this setting if we realize that
+
+                         k A k = s1 ( A ) =       max            s n ( A ) = k A k J∞ .
+                                              n=1,...,N (| A|)
+
+There are the continuous embeddings J p (H) ⊂ Jq (H) for 1 6 p 6 q 6 ∞ with
+
+                                           k A k Jq 6 k A k J p .
+The classes J p (H) are two-sided operator ideals in B(H), that is, for A ∈ J p (H)
+(1 6 p 6 ∞) and B ∈ B(H) we have AB, BA ∈ J p (H) with
+
+                       k ABkJ p 6 k AkJ p k Bk,             k BAkJ p 6 k Bk k AkJ p .             (2.3)
+
+Of special interest to us are the trace class operators J1 (H) and the Hilbert–Schmidt
+operators J2 (H). The product of two Hilbert–Schmidt operators is of trace class:
+
+                         k ABkJ1 6 k AkJ2 k BkJ2                 ( A, B ∈ J2 (H)).
+The trace of a trace class operator A is defined by
+                                                    ∞
+                                      tr( A) = ∑ hun , Aun i
+                                                   n =1
+
+for any orthonormal basis (un )n . A deep theorem of Lidskii’s (Simon 2005, Chap. 3)
+tells us that
+                                                    N ( A)
+                                      tr( A) =         ∑ λ n ( A ),                               (2.4)
+                                                    n =1
+
+which implies by Weyl’s inequality (2.2) that
+                                     N ( A)
+                          |tr( A)| 6 ∑ |λn ( A)| 6 tr(| A|) = k AkJ1 .                            (2.5)
+                                      n =1
+
+    8 In matrix theory these norms are not commonly used—with the exception of p = 2: k A k
+                                                                                            J2 is then
+the Schur or Frobenius norm of the matrix A.
+8                                              F. BORNEMANN
+
+
+Likewise, for a Hilbert–Schmidt operator A ∈ J2 (H) we have
+                             N ( A)                                   N ( A)
+                tr( A2 ) =    ∑ λ n ( A )2 ,         |tr( A2 )| 6 ∑ |λn ( A)|2 6 k Ak2J2 .           (2.6)
+                             n =1                                      n =1
+
+    Integral operators with L2 -kernel. In the Hilbert space H = L2 ( a, b) of square-
+integrable functions on a finite interval ( a, b) the Hilbert–Schmidt operators are
+exactly given by the integral operators with L2 -kernel. That is, there is a one-to-one
+correspondence (Simon 2005, Thm. 2.11) between A ∈ J2 (H) and K ∈ L2 (( a, b)2 )
+mediated through
+                                                    Z b
+                                      Au( x ) =              K ( x, y)u(y) dy                        (2.7)
+                                                     a
+
+with equality of norms k AkJ2 = kK k L2 : the spaces J2 (H) and L2 (( a, b)2 ) are thus
+isometrically isomorphic. In particular, by (2.6) and a well known basic result on
+infinite products (Knopp 1964, p. 232), we get for such operators that
+    N ( A)                                                          N ( A)
+    ∏ (1 + λn ( A)) converges (absolutely) ⇔                         ∑ λn ( A) converges (absolutely).
+    n =1                                                            n =1
+
+Since the product is a natural candidate for the definition of det( I + A) it makes
+sense requiring A to be of trace class; for then, by (2.5), the absolute convergence of
+the sum can be guaranteed.
+    Integral operators with a continuous kernel. A continuous kernel K ∈ C ([ a, b]2 ) is
+certainly square-integrable. Therefore, the induced integral operator (2.7) defines a
+Hilbert–Schmidt operator A on the Hilbert space H = L2 ( a, b). Moreover, other than
+for L2 kernels in general, the integral
+                                               Z b
+                                                     K ( x, x ) dx
+                                                a
+
+over the diagonal of ( a, b)2 is now well defined and constitutes, in analogy to the
+matrix case, a “natural” candidate for the trace of the integral operator. Indeed, if an
+integral operator A with continuous kernel is of trace class, one can prove (Gohberg
+et al. 2000, Thm. 8.1)
+                                                      Z b
+                                        tr( A) =              K ( x, x ) dx.                         (2.8)
+                                                         a
+
+Unfortunately, however, just the continuity of the kernel K does not guarantee the
+induced integral operator A to be of trace class.9 Yet, there is some encouraging
+positive experience stated by Simon (2005, p. 25):
+             However, the counter-examples which prevent nice theorems from
+             holding are generally rather contrived so that I have found the
+             following to be true: If anR integral operator with kernel K occurs in
+             some ‘natural’ way and |K ( x, x )| dx < ∞, then the operator can
+             (almost always) be proven to be trace class (although sometimes only
+             after some considerable effort).
+     9 A counter-example was discovered by Carleman (1918), see also Gohberg et al. (2000, p. 71).
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                          9
+
+Nevertheless, we will state some simple criteria that often work well:
+       1. If the continuous kernel K can be represented in the form
+                                          Z d
+                            K ( x, y) =             K1 ( x, y)K2 (z, y) dz         ( x, y ∈ [ a, b])
+                                            c
+
+          with K1 ∈ L2 (( a, b) × (c, d)), K2 ∈ L2 ((c, d) × ( a, b)), then the induced integral
+          operator A is trace class on L2 ( a, b). This is, because A can then be written as
+          the product of two Hilbert–Schmidt operators.
+       2. If K ( x, y) and ∂y K ( x, y) are continuous on [ a, b]2 , then the induced integral
+          operator A is trace class on L2 ( a, b). This is, because we can write A by partial
+          integration in the form
+                                            Z b                   Z b Z b                    
+                      Au( x ) = K ( x, b)            u(y) dy −                ∂z K ( x, z) dz u(y) dy
+                                                a                  a      y
+
+          as a sum of a rank one operator and an integral operator that is trace class by
+          the first criterion. In particular, integral operators with smooth kernels are
+          trace class (Lax 2002, p. 345).
+       3. A continuous Hermitian10 kernel K ( x, y) on [ a, b] that satisfies a Hölder
+          condition in the second argument with exponent α > 1/2, namely
+
+                        |K ( x, y1 ) − K ( x, y2 )| 6 C |y1 − y2 |α            ( x, y1 , y2 ∈ [ a, b]),
+
+          induces an integral operator A that is trace class on L2 ( a, b); see Gohberg
+          et al. (2000, Thm. IV.8.2).
+       4. If the continuous kernel K induces a selfadjoint, positive-semidefinite integral
+          operator A, then A is trace class (Gohberg et al. 2000, Thm. IV.8.3). The
+          hypothesis on A is fulfilled for positive-semidefinite kernels K, that is, if
+
+                                                      n
+                                                     ∑ z j zk K ( x j , xk ) > 0                          (2.9)
+                                                    j,k =1
+
+
+          for any x1 , . . . , xn ∈ ( a, b), z ∈ Cn and any n ∈ N (Simon 2005, p. 24).
+
+    3. Definition and Properties of Fredholm and Operator Determinants. In this
+section we give a general operator theoretical definition of infinite dimensional
+determinants and study their relation to the Fredholm determinant. For a trace class
+operator A ∈ J1 (H) there are several equivalent constructions that all define one and
+the same entire function
+
+                                  d(z) = det( I + zA)                  ( z ∈ C);
+
+in fact, each construction has been chosen at least once, in different places of the
+literature, as the basic definition of the operator determinant:
+
+   10 An L2 -kernel K is Hermitian if K ( x, y ) = K ( y, x ). This property is equivalent to the fact that the
+
+induced Hilbert–Schmidt integral operator A is selfadjoint, A∗ = A.
+10                                            F. BORNEMANN
+
+
+       1. Gohberg and Kreı̆n (1969, p. 157) define the determinant by the locally
+          uniformly convergent (infinite) product
+                                                           N ( A)
+                                       det( I + zA) = ∏ (1 + zλn ( A)),                                  (3.1)
+                                                           n =1
+
+          which possesses zeros exactly at zn = −1/λn ( A), counting multiplicity.
+       2. Gohberg et al. (1990, p. 115) define the determinant as follows. Given any
+          sequence of finite rank operators An with An → A converging in trace class
+          norm, the sequence of finite dimensional determinants11
+                                                           
+                                     det I + zAn ran( An )                       (3.2)
+
+          (which are polynomials in z) converges locally uniform to det( I + zA), inde-
+          pendently of the choice of the sequence An . The existence of at least one such
+          sequence follows from the singular value representation (2.1).
+       3. Dunford and Schwartz (1963, p. 1029) define the determinant by what is
+          often called Plemelj’s formula12
+                                                              ∞
+                                                                              !
+                                                                  (−z)n
+               det( I + zA) = exp(tr log( I + zA)) = exp − ∑            trAn ,       (3.3)
+                                                             n =1
+                                                                    n
+
+          which converges for |z| < 1/|λ1 ( A)| and can analytically be continued as an
+          entire function to all z ∈ C.
+       4. Grothendieck (1956, p. 347) and Simon (1977, p. 254) define the determinant
+          most elegantly with a little exterior algebra (Greub 1967). With n ( A) ∈
+                                                                              V
+              Vn
+          J1 ( (H)) being the nth exterior product of A, the power series
+                                                              ∞        ^n
+                                         det( I + zA) = ∑ zn tr             ( A)                         (3.4)
+                                                             n =0
+
+         converges for all z ∈ C. Note that tr n ( A) = ∑i1 <···<in λi1 ( A) · · · λin ( A) is
+                                                           V
+
+         just the nth symmetric function of the eigenvalues of A.
+Proofs of the equivalence can be found in (Gohberg et al. 2000, Chap. 2) and (Simon
+2005, Chap. 3). We will make use of all of them in the course of this paper. We state
+two important properties (Simon 2005, Thm. 3.5) of the operator determinant: First
+its multiplication formula,
+            det( I + A + B + AB) = det( I + B) det( I + A)                   ( A, B ∈ J1 (H)),           (3.5)
+then the characterization of invertibility: det( I + A) 6= 0 if and only if the inverse
+operator ( I + A)−1 exists.
+
+    11 Gohberg et al. (2000) have later extended this idea to generally define traces and determinants on
+
+embedded algebras of compact operators by a continuous extension from the finite dimensional case. Even
+within this general theory the trace class operators enjoy a most unique position: it is only for them that the
+values of trace and determinant are independent of the algebra chosen for their definition. On the contrary,
+if A is Hilbert–Schmidt but not trace class, by varying the embedded algebra, the values of the trace tr( A)
+can be given any complex number and the values of the determinant det( I + A) are either always zero or
+can be made to take any value in the set C \ {0} (Gohberg et al. 2000, Chap. VII).
+    12 Plemelj (1904, Eq. (62)) had given a corresponding form of the Fredholm determinant for integral
+
+operators. However, it can already be found in Fredholm (1903, p. 384).
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                             11
+
+    The matrix case. In Section 6 we will study the convergence of finite dimensional
+determinants to operator determinants in terms of the power series (3.4). Therefore,
+we give this series a more common look and feel for the case of a matrix A ∈ Cm×m .
+By evaluating the traces with respect to a Schur basis of A one gets
+                                                                                            m
+                   ^n                                                              1
+              tr        ( A) =         ∑         det( Ai p ,iq )np,q=1 =                  ∑
+                                                                                   n! i ,...,i =1
+                                                                                                  det( Ai p ,iq )np,q=1 ,
+                                 i1 <···<in                                            1    n
+
+that is, the sum of all n × n principal minors of A. The yields the von Koch (1892)
+form of the matrix determinant
+                                           ∞           m
+                                              zn
+               det( I + zA) = ∑                      ∑ det( Ai p ,iq )np,q=1                        ( A ∈ Cm × m ).           (3.6)
+                                         n =0
+                                              n! i ,...,i =1
+                                                        1       n
+
+(In fact, the series must terminate at n = m since det( I + zA) is a polynomial of degree
+m in z.) A more elementary proof of this classical formula, by a Taylor expansion of
+the polynomial det( I + zA), can be found, e.g., in Meyer (2000, p. 495).
+    The Fredholm determinant for integral operators with continuous kernel. Suppose that
+the continuous kernel K ∈ C ([ a, b]2 ) induces an integral operator A that is trace class
+on the Hilbert space H = L2 ( a, b). Then, the traces of n ( A) evaluate to (Simon 2005,
+                                                         V
+
+Thm. 3.10)
+                            1
+              ^n                 Z
+         tr        ( A) =                      det(K (t p , tq ))np,q=1 dt1 · · · dtn                 (n = 0, 1, 2, . . .).
+                            n!       ( a,b)n
+
+The power series representation (3.4) of the operator determinant is therefore exactly
+Fredholm’s expression (1.2), that is,
+                                                 ∞
+                                                    zn
+                                                            Z
+                    det( I + zA) = ∑                                      det(K (t p , tq ))np,q=1 dt1 · · · dtn .            (3.7)
+                                               n =0
+                                                    n!          ( a,b)n
+
+The similarity with von Koch’s formula (3.6) is striking and, in fact, it was just an
+analogy in form that had led Fredholm to conceive his expression for the determinant.
+It is important to note, however, that the right hand side of (3.7) perfectly makes sense
+for any continuous kernel, independently of whether the corresponding integral
+operator is trace class or not.
+    The regularized determinant for Hilbert–Schmidt operators. For a general Hilbert–
+Schmidt operator we only know the convergence of ∑n λ( A)2 but not of ∑n λn ( A).
+Therefore, the product (3.1), which is meant to define det( I + zA), is not known to
+converge in general. Instead, Hilbert (1904) and Carleman (1921) introduced the entire
+function13
+                                               N ( A)
+                   det2 ( I + zA) = ∏ (1 + zλn ( A))e−zλn ( A)                                   ( A ∈ J2 (H)),
+                                               n =1
+
+   13 In fact, using such exponential “convergence factors” is a classical technique in complex analysis to
+
+construct, by means of infinite products, entire functions from their intended sets of zeros, see Ablowitz
+and Fokas (2003, Sect. 3.6). A famous example is
+                                                    ∞ 
+                                        1                   z  −z/n
+                                            = zeγz ∏ 1 +        e    ,
+                                       Γ(z)        n =1
+                                                            n
+which corresponds to the eigenvalues λn ( A) = 1/n of a Hilbert–Schmidt operator that is not trace class.
+12                                                    F. BORNEMANN
+
+
+which also has the property to possess zeros exactly at zn = −1/λn ( A), counting
+multiplicity. Plemelj’s formula (3.3) becomes (Gohberg et al. 2000, p. 167)
+                                                ∞
+                                                               !
+                                                    (−z)n
+                       det2 ( I + zA) = exp − ∑           trAn
+                                               n =2
+                                                      n
+
+for |z| < 1/|λ1 ( A)|, which perfectly makes sense since A2 , A3 , . . . are trace class for
+A being Hilbert–Schmidt.14 Note that for trace class operators we have
+
+                  det( I + zA) = det2 ( I + zA) exp(z · trA)                                       ( A ∈ J1 (H)).
+
+For integral operators A of the form (2.7) with a continuous kernel K on H = L2 ( a, b)
+the Fredholm determinant (1.2) is related to the Hilbert–Carleman determinant by
+the equation (Hochstadt 1973, p. 250)
+                                                                                  Z b
+                             d(z) = det2 ( I + zA) exp(z                                K ( x, x ) dx )
+                                                                                    a
+
+in general, even if A is not of trace class. It is important to note, though, that if
+                                         Rb
+A 6∈ J1 (H) with such a kernel, we have a K ( x, x ) dx 6= tr( A) simply because tr( A)
+is not well defined by (2.4) anymore then.
+    4. Perturbation Bounds. In studying the conditioning of operator and matrix
+determinants we rely on the fundamental perturbation estimate
+                                                                              
+      | det( I + A) − det( I + B)| 6 k A − BkJ1 exp 1 + max(k AkJ1 , k BkJ1 )   (4.1)
+
+for trace class operators, which can beautifully be proven by means of complex
+analysis (Simon 2005, p. 45). This estimate can be put to the form
+
+              | det( I + ( A + E)) − det( I + A)| 6 e1+k AkJ1 · k EkJ1 + O(k Ek2J1 ),                                                 (4.2)
+
+showing that the condition number κabs of the operator determinant det( I + A), with
+respect to absolute errors measured in trace class norm, is bounded by
+
+                                                      κabs 6 e1+k AkJ1 .
+
+This bound can considerably be improved for certain selfadjoint operators that will
+play an important role in Section 7.
+     14 Equivalently one can define (Simon 2005, p. 50) the regularized determinant by
+
+
+                       det2 ( I + zA) = det( I + (( I + zA)e−zA − I ))                            ( A ∈ J2 (H)).
+This is because one can then show ( I + zA)e−zA − I ∈ J1 (H). For integral operators A on L2 ( a, b) with an
+L2 kernel K, Hilbert (1904, p. 82) had found the equivalent expression
+                                                            0          K ( t1 , t2 )    ···        K ( t1 , t n )
+                                ∞                     K ( t2 , t1 )          0          ···        K ( t2 , t n )
+                                   zn
+                                        Z
+               det2 ( I + zA) = ∑                           ..               ..          ..              ..         dt1 · · · dtn ,
+                               n=0 n!       ( a,b)n
+                                                             .                .               .           .
+                                                      K ( t n , t1 )   K ( t n , t2 )   ···              0
+simply replacing the problematic “diagonal” entries K (t j , t j ) in Fredholm’s determinant (3.7) by zero.
+Simon (2005, Thm. 9.4) gives an elegant proof of Hilbert’s formula.
+             ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                            13
+
+    Lemma 4.1. Let A ∈ J1 (H) be selfadjoint, positive-semidefinite with λ1 ( A) < 1. If
+k EkJ1 < k( I − A)−1 k−1 then
+
+                        | det( I − ( A + E)) − det( I − A)| 6 k EkJ1 .                                   (4.3)
+
+That is, the condition number κabs of the determinant det( I − A), with respect to absolute
+errors measured in trace class norm, is bounded by κabs 6 1.
+     Proof. Because of 1 > λ1 ( A) > λ2 ( A) > · · · > 0 there exists the inverse operator
+( I − A)−1 . The product formula (3.1) implies det( I − A) > 0, the multiplicativity (3.5)
+of the determinant gives
+
+                  det( I − ( A + E)) = det( I − A) det( I − ( I − A)−1 E).
+
+Upon applying Plemelj’s formula (3.3) and the estimates (2.3) and (2.5) we get
+
+                                                ∞
+                                                                        !
+                                          (( I − A)−1 E)n
+  | log det( I − ( I − A)−1 E)| = tr ∑
+                                     n =1
+                                                 n
+
+                           ∞   k( I − A)−1 kn · k EkJn1
+                                                                                                        
+                                                                                        1
+                       6 ∑                              = log
+                          n =1
+                                         n                                  1 − k( I − A)−1 k · k EkJ1
+
+if k( I − A)−1 k · k EkJ1 < 1. Hence, exponentiation yields
+
+  1 − k( I − A)−1 k · k EkJ1 6 det( I − ( I − A)−1 E)
+
+                                                   1
+                                   6                              6 1 + k( I − A)−1 k · k EkJ1 ,
+                                       1 − k( I − A)−1 k · k EkJ1
+
+that is
+
+          | det( I − ( A + E)) − det( I − A)| 6 det( I − A) · k( I − A)−1 k · k EkJ1 .
+
+Now, by the spectral theorem for bounded selfadjoint operators we have
+
+                                                       N ( A)
+                                        1                   1               1
+              k( I − A)−1 k =                    6 ∏                =
+                                    1 − λ1 ( A )   n =1
+                                                        1 − λn ( A)   det( I − A)
+
+and therefore det( I − A) · k( I − A)−1 k 6 1, which finally proves the assertion.
+    Thus, for the operators that satisfy the assumptions of this lemma the determi-
+nant is a really well conditioned quantity—with respect to absolute errors, like the
+eigenvalues of a Hermitian matrix (Golub and Van Loan 1996, p. 396).
+    Implications on the accuracy of numerical methods. The Nyström-type method of
+Section 6 requires the calculation of the determinant det( I + A) of some matrix
+A ∈ Cm×m . In the presence of roundoff errors, a backward stable method like
+Gaussian elimination with partial pivoting (Higham 2002, Sect. 14.6) gives a result
+that is exact for some matrix Ã = A + E with
+
+                               | Ej,k | 6 e| A j,k |     ( j, k = 1, . . . , m)                          (4.4)
+14                                           F. BORNEMANN
+
+
+where e is a small multiple of the unit roundoff error of the floating-point arithmetic
+used. We now use the perturbation bounds of this section to estimate the resulting
+error in the value of determinant. Since the trace class norm is not a monotone matrix
+norm (Higham 2002, Def. 6.1), we cannot make direct use of the componentwise
+estimate (4.4). Instead, we majorize the trace class norm of m × m matrices A by the
+Hilbert–Schmidt (Frobenius) norm, which is monotone, using
+                                                                   !1/2
+                            √                            m
+                  k A k J1 6 m k A k J2 ,  k AkJ2 = ∑ | A j,k |  2
+                                                                        .
+                                                                  j,k =1
+
+Thus, the general perturbation bound (4.2) yields the following a priori estimate of
+the roundoff error affecting the value of the determinant:
+                                       √
+        | det( I + Ã) − det( I + A)| 6 mk AkJ2 exp 1 + k AkJ1 · e + O(e2 ).
+                                                              
+
+If the matrix A satisfies the assumptions of Lemma 4.1, the perturbation bound (4.3)
+gives the even sharper estimate
+                                                     √
+                      | det( I − Ã) − det( I − A)| 6 mk AkJ2 · e.             (4.5)
+Therefore, if det( I − A)  k AkJ2 , we have to be prepared that we probably cannot
+compute the determinant to the full precision given by the computer arithmetic used.
+Some digits will be lost. A conservative estimate stemming from (4.5) predicts the
+loss of at most
+                                        √              !
+                                          m · k A k J2
+                                log10
+                                         det( I − A)
+decimal places. For instance, this will affect the tails of the probability distributions to
+be calculated in Section 7.
+    5. Projection Methods. The general idea (3.2) of defining the infinite dimen-
+sional determinant det( I + A) for a trace class operator A by a continuous exten-
+sion from the finite dimensional case immediately leads to the concept of a projec-
+tion method of Galerkin type. We consider a sequence of m-dimensional subspaces
+Vm ⊂ H together with their corresponding orthonormal projections
+                                             Pm : H → Vm .
+The Galerkin projection Pm APm of the trace class operator A is of finite rank. Given
+an orthonormal basis φ1 , . . . , φm of Vm , its determinant can be effectively calculated
+as the finite dimensional expression
+                                                                             m
+     det( I + z Pm APm ) = det ( I + z Pm APm Vm ) = det δij + z hφi , Aφj i i,j=1   (5.1)
+
+if the matrix elements hφi , Aφj i are numerically accessible.
+     Because of k Pm k 6 1, and thus k Pm APm kJ1 6 k AkJ1 6 1, the perturbation
+bound (4.1) gives the simple error estimate
+        | det( I + z Pm APm ) − det( I + z A)| 6 k Pm APm − AkJ1 · |z| e1+|z|·k AkJ1 .                 (5.2)
+For the method to be convergent we therefore have to show that Pm APm → A in
+trace class norm. By a general result about the approximation of trace class operators
+(Gohberg et al. 1990, Thm. 4.3) all we need to know is that Pm converges pointwise15
+     15 In infinite dimensions P cannot converge in norm since the identity operator is not compact.
+                                m
+             ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                          15
+
+to the identity operator I. This pointwise convergence is obviously equivalent to the
+consistency of the family of subspaces Vm , that is,
+                                 ∞
+                                 [
+                                       Vm is a dense subspace of H.                      (5.3)
+                                m =1
+
+In summary, we have proven the following theorem.
+     Theorem 5.1. Let A be a trace class operator. If the sequence of subspaces satisfies the
+consistency condition (5.3), the corresponding Galerkin approximation (5.1) of the operator
+determinant converges,
+
+                     det( I + z Pm APm ) → det( I + z A)                ( m → ∞ ),
+
+uniformly for bounded z.
+     A quantitative estimate of the error, that is, in view of (5.2), of the projection error
+k Pm APm − AkJ1 in trace class norm, can be based on the singular value representa-
+tion (2.1) of A and its finite-rank truncation A N : (We assume that A is non-degenerate,
+that is, N (| A|) = ∞; since otherwise we could simplify the following by putting
+A N = A.)
+                          ∞                                       N
+                 A = ∑ sn ( A)hun , · ivn ,               A N = ∑ sn ( A)hun , · ivn .
+                         n =1                                    n =1
+
+We obtain, by using k Pm k 6 1 once more,
+
+  k Pm APm − AkJ1 6 k Pm APm − Pm A N Pm kJ1 + k Pm A N Pm − A N kJ1 + k A N − AkJ1
+
+             6 2k A N − AkJ1 + k Pm A N Pm − A N kJ1
+                     ∞                      N
+             62     ∑        sn ( A) + ∑ sn ( A)kh Pm un , · i Pm vn − hun , · ivn kJ1
+                  n = N +1               n =1
+                     ∞                      N
+             62     ∑        sn ( A) + ∑ sn ( A) (kun − Pm un k + kvn − Pm vn k) .       (5.4)
+                  n = N +1               n =1
+
+There are two competing effects that contribute to making this error bound small:
+First, there is the convergence of the truncated series of singular values,
+                                    ∞
+                                   ∑        sn ( A) → 0       ( N → ∞ ),
+                                 n = N +1
+
+which is independent of m. Second, there is, for fixed N, the collective approximation
+
+                          Pm un → un ,           Pm vn → vn           (m → ∞)
+
+of the first N singular functions un , vn (n = 1, . . . , N ). For instance, given e > 0,
+we can first choose N large enough to push the first error term in (5.4) below e/2.
+After fixing such an N, the second error term can be pushed below e/2 for m large
+enough. This way we have proven Theorem 5.1 once more. However, in general
+the convergence of the second term might considerably slow down for growing N.
+16                                       F. BORNEMANN
+
+
+Therefore, a good quantitative bound requires a carefully balanced choice of N
+(depending on m), which in turn requires some detailed knowledge about the decay
+of the singular values on the one hand and of the growth of the derivatives of the
+singular functions on the other hand (see the example at the end of this section).
+While some general results are available in the literature for the singular values—e.g.,
+for integral operators A induced by a kernel K ∈ C k−1,1 ([ a, b]2 ) the bound
+                                                   1
+                               sn ( A ) = O (n−k− 2 )           (n → ∞)                   (5.5)
+
+obtained by Smithies (1937, Thm. 12)—the results are sparse for the singular functions
+(Fenyő and Stolle 1982–1984, §8.10). Since the quadrature method in Section 6 does
+not require any such knowledge, we refrain from stating a general result and content
+ourselves with the case that there is no projection error in the singular functions; that
+is, we consider projection methods of Ritz–Galerkin type for selfadjoint operators.
+     Theorem 5.2. Let A be a selfadjoint integral operator that is induced by a continuous
+Hermitian kernel K and that is trace class on the Hilbert space H = L2 ( a, b). Assume that A
+is not of finite rank and let (un ) be an orthonormal basis of eigenfunctions of A. We consider
+the associated Ritz projection Pm , that is, the orthonormal projection
+
+                              Pm : H → Vm = span{u1 , . . . , um }.
+
+Note that in this case
+                                                        m
+                            det( I + z Pm APm ) = ∏ (1 + zλn ( A)).
+                                                       n =1
+
+If K ∈ C k−1,1 ([ a, b]2 ), then there holds the error estimate (5.2) with
+                                                       1
+                          k Pm APm − AkJ1 = o (m 2 −k )             ( m → ∞ ).
+
+If K is bounded analytic on Eρ × Eρ (with the ellipse Eρ defined in Theorem A.2), then the
+error estimate improves to
+
+                        k Pm APm − AkJ1 = O(ρ−m(1−e)/4 )                ( m → ∞ ),
+
+for any fixed choice of e > 0.
+     Proof. With the spectral decompositions
+                  ∞                                                     m
+           A = ∑ λn ( A)hun , · iun ,         Pm APm = Am = ∑ λn ( A)hun , · iun ,
+                 n =1                                                  n =1
+
+at hand the bound (5.4) simplifies, for N = m, to
+                                                            ∞
+                              k Pm APm − AkJ1 =            ∑      |λn ( A)|.
+                                                       n = m +1
+
+Now, by some results of Hille and Tamarkin (1931, Thm. 7.2 and 10.1), we have, for
+K ∈ C k−1,1 ([ a, b]2 ), the eigenvalue decay
+                                                  1
+                               λn ( A ) = o (n−k− 2 )           (n → ∞)                   (5.6)
+            ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                     17
+
+(which is just slightly stronger than Smithies’ singular value bound (5.5)) and, for K
+bounded analytic on Eρ × Eρ ,
+
+                          λn ( A) = O(ρ−n(1−e)/4 )              ( n → ∞ );
+which proves both assertions.
+    However, for kernels of low regularity, by taking into account the specifics of
+a particular example one often gets better results than stated in this theorem. (An
+example with an analytic kernel, enjoying the excellent convergence rates of the
+second part this theorem, can be found in Section 7.)
+    An example: Poisson’s equation. For a given f ∈ L2 (0, 1) the Poisson equation
+
+                          −u00 ( x ) = f ( x ),        u(0) = u(1) = 0,
+
+with Dirichlet boundary conditions is solved (Hochstadt 1973, p. 5) by the application
+of the integral operator A,
+                                                  Z 1
+                           u( x ) = A f ( x ) =         K ( x, y) f (y) dy,        (5.7)
+                                                   0
+
+which is induced by the Green’s kernel
+                                     (
+                                       x (1 − y )          x 6 y,
+                         K ( x, y) =                                               (5.8)
+                                       y (1 − x )          otherwise.
+
+Since K is Lipschitz continuous, Hermitian, and positive definite, we know from the
+results of Section 2 that A is a selfadjoint trace class operator on H = L2 (0, 1). The
+eigenvalues and normalized eigenfunctions of A are those of the Poisson equation
+which are known to be
+                         1                  √
+             λn ( A) = 2 2 ,      un ( x ) = 2 sin(nπx )     (n = 1, 2, . . .).
+                       π n
+Note that the actual decay of the eigenvalues is better than the general Hille–Tamarkin
+bound (5.6) which would, because of K ∈ C0,1 ([0, 1]2 ), just give λn ( A) = o (n−3/2 ).
+The trace formulas (2.4) and (2.8) reproduce a classical formula of Euler’s, namely
+               ∞                        Z 1                    Z 1
+                      1                                                       1
+               ∑ π2 n2 = tr( A) = 0 K(x, x) dx = 0 x(1 − x) dx = 6 ;
+              n =1
+
+whereas, by (3.1) and the product representation of the sine function, the Fredholm
+determinant explicitly evaluates to the entire function
+                                     ∞                     √
+                                                z      sin( z)
+                     det( I − zA) = ∏ 1 − 2 2 = √               .               (5.9)
+                                    n =1      π n           z
+
+The sharper perturbation bound of Lemma 4.1 applies and we get, for each finite
+dimensional subspace Vm ⊂ H and the corresponding orthonormal projection Pm :
+H → Vm , the error estimate
+                   | det( I − Pm APm ) − det( I − A)| 6 k Pm APm − AkJ1 .         (5.10)
+
+Now, we study two particular families of subspaces.
+18                                                                   F. BORNEMANN
+
+                                                  −2
+                                                 10
+
+
+
+
+                    |det(I−P A P ) − det(I−A)|
+                                                  −3
+                                                 10
+
+                                       m
+                                       m
+
+
+
+
+                                                  −4
+                                                 10
+                                                       1                        2                             3
+                                                      10                       10                            10
+                                                                                    m
+
+
+      Fig. 1. Convergence of Ritz–Galerkin (circles) and Galerkin (dots) for approximating the Fredholm determinant
+of the integral operator induced by Green’s kernel of Poisson’s equation. The solid line shows the upper bound 1/π 2 m
+of Ritz–Galerkin as given in (5.11).
+
+
+
+      Trigonometric polynomials. Here, we consider the subspaces
+
+              Vm = span{sin(nπ ·) : n = 1, . . . , m} = span{un : n = 1, . . . , m},
+
+which are exactly those spanned by the eigenfunctions of A. In this case, the projection
+method is of Ritz–Galerkin type; the estimates become particularly simple since we
+have the explicit spectral decomposition
+                                                                               ∞
+                                                           Pm APm − A =       ∑         λn ( A)hun , · iun
+                                                                            n = m +1
+
+of the error operator. Hence, the error bound (5.10) directly evaluates to
+
+     | det( I − Pm APm ) − det( I − A)|
+                                                                               ∞                           ∞
+                                                                                                    1            1     1
+                                                  6 k Pm APm − AkJ1 =         ∑         λn ( A) =          ∑
+                                                                                                    π 2 n = m +1 n 2
+                                                                                                                     6 2 .
+                                                                                                                      π m
+                                                                                                                             (5.11)
+                                                                            n = m +1
+
+Figure 1 shows that this upper bound overestimates the error in the Fredholm
+determinant by just about 20%.
+    Algebraic polynomials. Here, we consider the subspaces of algebraic polynomials
+of order m, that is,
+
+             Vm = {u ∈ L2 (0, 1) : u is a polynomial of degree at most m − 1}.
+
+We apply the bound given in (5.4) and obtain (keeping in mind that A is selfadjoint)
+
+                                                                    ∞                         N
+               k Pm APm − AkJ1 6 2                                 ∑        λn ( A) + 2 ∑ λn ( A) kun − Pm un k
+                                                                 n = N +1                    n =1
+
+with a truncation index N yet to be skilfully chosen. As before in (5.11), the first
+term of this error bound can be estimated by 2/π 2 N. For the second term we recall
+that the projection error kun − Pm un k is, in fact, just the error of polynomial best
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                       19
+
+approximation of the eigenfunction un with respect to the L2 -norm. A standard
+Jackson-type inequality (DeVore and Lorentz 1993, p. 219) from approximation theory
+teaches us that
+
+                                                     ck     (k)         (πn)k
+                               kun − Pm un k 6          k u n   k = c k       ,
+                                                     mk                  mk
+where ck denotes a constant that depends on the smoothness level k. A fixed eigen-
+function un (being an entire function in fact) is therefore approximated beyond every
+algebraic order in the dimension m; but with increasingly larger constants for higher
+“wave numbers” n. We thus get, with some further constant c̃k depending on k > 2,
+                                                                  !
+                                                1        N k −1
+                      k Pm APm − AkJ1 6 c̃k        +                .
+                                                N    ( k − 1) m k
+
+We now balance the two error terms by minimizing this bound: the optimal truncation
+index N turns out to be exactly N = m, which finally yields the estimate
+
+                                                                                           c̃k
+           | det( I − Pm APm ) − det( I − A)| 6 k Pm APm − AkJ1 6                                m −1 .
+                                                                                        1 − k −1
+Thus, in contrast to the approximation of a single eigenfunction, for the Fredholm
+determinant the order of the convergence estimate does finally not depend on the
+choice of k anymore; we obtain the same O(m−1 ) behavior as for the Ritz–Galerkin
+method. In fact, a concrete numerical calculation16 shows that this error estimate
+really reflects the actual order of the error decay of the Galerkin method, see Figure 1.
+    Remark. The analysis of this section has shown that the error decay of the projec-
+tion methods is essentially determined by the decay
+                                                 ∞
+                                                 ∑ sk ( A) → 0
+                                            k = m +1
+
+of the singular values of A, which in turn is related to the smoothness of the kernel
+K of the integral operator A. In the next section, the error analysis of Nyström-type
+quadrature methods will relate in a much more direct fashion to the smoothness of
+
+   16 By (5.1) all we need to know for implementing the Galerkin method are the matrix elements h φ , Aφ i
+                                                                                                   i    j
+for the normalized orthogonal polynomials φn (that is, properly rescaled Legendre polynomials) on the
+interval [0, 1]. A somewhat lengthy but straightforward calculation shows that these elements are given by
+                                                   1                       
+                                                     12 0   b0
+                                                                           
+                                                         1
+                                                   0
+                                                       60   0    b1        
+                                                                            
+                                                                 ..   .. 
+                                                                     .    .
+                                                                           
+                                (hφi , Aφj i)i,j =  b0
+                                                       0   a1              
+                                                                            
+                                                           . .. a
+                                                                            
+                                                        b1
+                                                                           
+                                                                   2       
+                                                                           
+                                                            ..         ..
+                                                               .          .
+
+with the coefficients
+                                   1                                            1
+                    an =                     ,       bn = −               p                    .
+                           2(2n + 1)(2n + 5)                  4(2n + 3)       (2n + 1)(2n + 5)
+20                                       F. BORNEMANN
+
+
+the kernel K, giving even much better error bounds, a priori and in actual numerical
+computations. For instance, the Green’s kernel (5.7) of low regularity can be treated
+by an m-dimensional approximation of the determinant with an actual convergence
+rate of O(m−2 ) instead of O(m−1 ) as for the projection methods. Moreover, these
+methods are much simpler and straightforwardly implemented.
+    6. Quadrature Methods. In this section we directly approximate the Fredholm
+determinant (1.2) using the Nyström-type method (1.4) that we have motivated at
+length in Section 1. We assume throughout that the kernel K is a continuous function
+on [ a, b]2 . The notation simplifies considerably by introducing the n-dimensional
+functions Kn defined by
+                                                                    n
+                           Kn (t1 , . . . , tn ) = det K (t p , tq ) p,q=1 .
+
+Their properties are given in Lemma A.4 of the appendix. We then write the Fredholm
+determinant shortly as
+                                ∞
+                                   zn
+                                            Z
+                  d(z) = 1 + ∑                            Kn (t1 , . . . , tn ) dt1 · · · dtn .
+                              n =1
+                                   n!           [ a,b]n
+
+For a given quadrature formula
+                                        m                          Z b
+                         Q( f ) = ∑ w j f ( x j ) ≈                      f ( x ) dx
+                                        j =1                         a
+
+
+we define the associated Nyström-type approximation of d(z) by the expression
+                                                              m
+                        dQ (z) = det δij + z wi K ( xi , x j ) i,j=1 .       (6.1)
+
+The key to error estimates and a convergence proof is the observation that we can
+rewrite dQ (z) in a form that closely resembles the Fredholm determinant. Namely, by
+using the von Koch form (3.6) of matrix determinants, the multi-linearity of minors,
+and by introducing the n-dimensional product rule (A.3) associated with Q (see the
+appendix), we get
+                          ∞            m
+                              zn                                         n
+            dQ (z) = 1 + ∑           ∑       det w j p K ( x j p , x jq )
+                         n =1
+                              n! j ,...,j =1                               p,q=1
+                                    1       n
+
+                          ∞            m
+                              zn                                                   n
+                   = 1+ ∑            ∑       w j1 · · · w jn det K ( x j p , x jq )
+                         n =1
+                              n! j ,...,j =1                                         p,q=1
+                                    1       n
+
+                          ∞            m
+                              zn
+                   = 1+ ∑            ∑      w · · · w jn Kn ( x j1 , . . . , x jn )
+                         n =1
+                              n! j ,...,j =1 j1
+                                    1       n
+
+                          ∞
+                              zn n
+                   = 1+ ∑        Q ( K n ).
+                         n =1
+                              n!
+
+Thus, alternatively to the motivation given in the introductory Section 1, we could
+have introduced the Nyström-type method by approximating each of the multi-
+dimensional integrals in the power series defining the Fredholm determinant with a
+             ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                                          21
+
+product quadrature rule. Using this form, we observe that the error is given by
+                         ∞
+                             zn
+                                            Z                                            
+        dQ (z) − d(z) = ∑          n
+                                  Q ( Kn ) −           Kn (t1 , . . . , tn ) dt1 · · · dtn , (6.2)
+                        n =1
+                             n!                [ a,b]n
+
+that is, by the exponentially generating function of the quadrature errors for the
+functions Kn . The following theorem generalizes a result that Hilbert (1904, p. 59)
+had proven for a specific class of quadrature formulae, namely, the rectangular rule.
+    Theorem 6.1. If a family Qm of quadrature rules converges for continuous functions,
+then the corresponding Nyström-type approximation of the Fredholm determinant converges,
+
+                                       d Qm ( z ) → d ( z )                     ( m → ∞ ),
+
+uniformly for bounded z.
+    Proof. Let z be bounded by M and choose any e > 0. We split the series (6.2) at
+an index N yet to be chosen, getting
+
+                             N
+                                  Mn
+                                                              Z
+  |dQm (z) − d(z)| 6 ∑               Qnm (Kn ) −                               Kn (t1 , . . . , tn ) dt1 · · · dtn
+                             n =1
+                                  n!                                [ a,b]n
+
+                                                ∞
+                                                   Mn
+                                                                                       Z
+                                      +        ∑   n!
+                                                      Qnm (Kn ) −
+                                                                                           [ a,b]n
+                                                                                                     Kn (t1 , . . . , tn ) dt1 · · · dtn
+                                          n = N +1
+
+Let Λ be the stability bound of the convergent family Qm of quadrature rules (see
+Theorem A.1 of the appendix) and put Λ1 = max(Λ, b − a). Then, by Lemma A.4,
+the second part of the splitting can be bounded by
+     ∞
+            Mn
+                                 Z
+     ∑      n!
+               Qnm (Kn ) −
+                                     [ a,b]n
+                                               Kn (t1 , . . . , tn ) dt1 · · · dtn
+   n = N +1
+
+                    ∞
+                           Mn
+                                                               Z                                                       
+              6      ∑ n!              | Qnm (Kn )| + |
+                                                                     [ a,b]n
+                                                                               Kn (t1 , . . . , tn ) dt1 · · · dtn |
+                  n = N +1
+
+                         ∞                                            ∞
+                             Mn                                             nn/2
+                6     ∑      n!
+                                ( Λ n + ( b − a ) n ) k Kn k L∞ 6 2 ∑
+                                                                             n!
+                                                                                 ( MΛ1 kK k L∞ )n .
+                    n = N +1                                       n = N +1
+
+The last series converges by Lemma A.5 and the bound can, therefore, be pushed
+below e/2 by choosing N large enough. After fixing such an N, we can certainly also
+push the first part of the splitting, that is,
+                     N
+                         Mn
+                                                      Z
+                    ∑ n! Qnm (Kn ) −                      [ a,b]n
+                                                                     Kn (t1 , . . . , tn ) dt1 · · · dtn ,
+                    n =1
+
+below e/2, now for m large enough, say m > m0 , using the convergence of the
+product rules Qnm induced by Qm (see Theorem A.3). In summary we get
+
+                                                 |dQm (z) − d(z)| 6 e
+
+for all |z| 6 M and m > m0 , which proves the asserted convergence of the Nyström-
+type method.
+22                                             F. BORNEMANN
+
+
+    If the kernel K enjoys, additionally, some smoothness, we can prove error esti-
+mates that exhibit, essentially, the same rates of convergence as for the quadrature of
+the sections x 7→ K ( x, y) and y 7→ K ( x, y).
+    Theorem 6.2. If K ∈ C k−1,1 ([ a, b]2 ), then for each quadrature rule Q of order ν > k
+with positive weights there holds the error estimate
+
+                      |dQ (z) − d(z)| 6 ck 2k (b − a)k ν−k Φ(|z|(b − a)kK kk ) ,
+where ck is the constant (depending only on k) from Theorem A.2, and kK kk and Φ are the
+norm and function defined in (A.6) and (A.10), respectively.
+     If K is bounded analytic on Eρ × Eρ (with the ellipse Eρ defined in Theorem A.2), then
+for each quadrature rule Q of order ν with positive weights there holds the error estimate
+
+                                              4 ρ−ν
+                                                      Φ |z|(b − a)kK k L∞ (Eρ ×Eρ ) .
+                                                                                   
+                      |dQ (z) − d(z)| 6
+                                             1 − ρ −1
+
+    Proof. By Theorem A.3 and Lemma A.4 we can estimate the error (6.2) in both
+cases in the form
+                                                ∞
+                                                    n(n+2)/2
+                      |dQ (z) − d(z)| 6 α ∑                  (|z| β)n = α Φ(|z| β) ;
+                                               n =1
+                                                       n!
+
+with the particular values α = ck 2k (b − a)k ν−k and β = (b − a) kK kk in the first case,
+and α = 4 ρ−ν /(1 − ρ−1 ) and β = (b − a) kK k L∞ (Eρ ×Eρ ) in the second case. This proves
+both assertions.
+    An example with an analytic kernel, enjoying the excellent convergence rates of
+the second part this theorem, can be found in Section 7.
+    Note that Theorem 6.2 is based on a general result (Theorem A.2) about quadra-
+ture errors that stems from the convergence rates of polynomial best approximation.
+There are cases (typically of low regularity), however, for which certain quadrature
+formulae enjoy convergence rates that are actually better than best approximation. The
+Nyström-type method inherits this behavior; one would just have to repeat the proof
+of Theorem 6.2 then. We refrain from stating a general theorem, since this would
+involve bounds on the highest derivatives involving weights17 that take into account
+the boundary of the interval [ a, b]. Instead, we content ourselves with the detailed
+discussion of a particular example.
+    An example: Poisson’s equation. We revisit the example of Section 5, that is the
+integral operator (5.7) belonging to the Green’s kernel K (defined in (5.8)) of Poisson’s
+equation. Recall from (5.9) that
+
+                                     d(−1) = det( I − A) = sin(1).
+
+The kernel K is just Lipschitz continuous, that is, K ∈ C0,1 ([0, 1]2 ). If we apply the
+Nyström-type method with the m-point Gauss–Legendre (order ν = 2m) or the
+Curtis–Clenshaw (order ν = m) formulae as the underlying quadrature rule Qm ,
+Theorem 6.2 proves an error bound of the form
+
+                                     dQm (−1) − d(−1) = O(m−1 ),
+
+     17 For the interval [−1, 1] this weight would be (1 − x2 )1/2 , see Davis and Rabinowitz (1984, §4.8.1).
+                ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                             23
+
+                                        −2
+                                       10
+
+
+                                        −3
+                                       10
+
+
+                                        −4
+                                       10
+
+
+
+                   (−1) − d(−1)|
+                                        −5
+                                       10
+                                   m
+                            Q
+                   |d
+
+
+                                        −6
+                                       10
+
+
+                                        −7
+                                       10
+
+
+                                        −8
+                                       10    1                2                            3
+                                            10               10                          10
+                                                                  m
+
+
+     Fig. 2. Convergence of the Nyström-type method for approximating the Fredholm determinant of the integral
+operator induced by Green’s kernel (5.8) of Poisson’s equation; the underlying quadrature rules Qm are the m-point
+Gauss–Legendre (dots) and Clenshaw–Curtis (circles) rules. Note that, in accordance with Trefethen (2008), both
+behave essentially the same. The solid line shows the function 1/25m2 , just to indicate the rate of convergence. For
+comparison we have included the results of the Ritz–Galerkin method (stars) from Figure 1.
+
+
+
+which superficially indicates the same convergence rate as for the m-dimensional
+Galerkin methods of Section 5. However, the actual numerical computation shown
+in Figure 2 exhibits the far better convergence rate of O(m−2 ). This deviation can be
+understood in detail as follows:
+     On the one hand, by inverse theorems of approximation theory (DeVore and
+Lorentz 1993, p. 220), valid for proper subintervals of [ a, b], the polynomial best
+approximation (of degree m) of sections of the Green’s kernel K cannot give a better
+rate than O(m−1 ); since otherwise those sections could not show jumps in the first
+derivative. Given the line of arguments leading from polynomial best approximation
+to Theorem 6.2, the error estimate of O(m−1 ) was therefore the best that could be
+established this way.
+     On the other hand, the sections of the Green’s kernel look like piecewise linear
+hat functions. Therefore, the coefficients am of their Chebyshev expansions decay as
+O(m−2 ) (Davis and Rabinowitz 1984, Eq. (4.8.1.3)). Given this decay rate, one can
+then prove—see, for Gauss–Legendre, Davis and Rabinowitz (1984, Eq. (4.8.1.7)) and,
+for Clenshaw–Curtis, Riess and Johnson (1972, Eq. (9))—that the quadrature error
+is of rate O(m−2 ), too. Now, one can lift this estimate to the Nyström-like method
+essentially as in Theorem 6.2; thus proving in fact that
+
+                                                 dQm (−1) − d(−1) = O(m−2 ),
+
+as numerically observed.
+     Remark. This “superconvergence” property of certain quadrature rules, as op-
+posed to best approximation, for kernels with jumps in a higher derivative is therefore
+also the deeper reason that the Nyström-type method then outperforms the projec-
+tion methods of Section 5 (see Figure 2): Best approximation, by direct (Jackson) and
+inverse (Bernstein) theorems of approximation theory, is strongly tied with the regu-
+larity of K. And this, in turn, is tied to the decay of the singular values of the induced
+integral operator A, which governs the convergence rates of projection methods.
+24                                                          F. BORNEMANN
+
+
+                              0
+                             10
+
+
+
+
+                              −5
+                             10
+
+
+
+
+                   E2(0;s)
+                              −10
+                             10
+
+
+
+
+                              −15
+                             10
+                                    0   0.5     1     1.5     2     2.5     3    3.5     4    4.5   5
+                                                                    s
+
+
+      Fig. 3. The probability E2 (0; s) that an interval of length s does not contain, in the bulk scaling limit of
+level spacing 1, an eigenvalue of the Gaussian unitary ensemble (GUE). The result shown was calculated with the
+Nyström-like method based on Gauss–Legendre with m = 30; and cross-checked against the asymptotic expansion
+log E2 (0; s) = −π 2 s2 /8 − log(s)/4 + log(2)/3 − log(π )/4 + 3ζ 0 (−1) + O(s−1 ) for s → ∞ (Deift et al. 1997).
+
+
+
+    A note on implementation. If the quadrature weights are positive (which in view
+of Theorem A.1 is anyway the better choice), as is the case for Gauss–Legendre and
+Clenshaw–Curtis, we recommend to implement the Nyström-type method (6.1) in
+the equivalent, symmetric form
+                                                                                               m
+                 dQ (z) = det( I + zAQ ),                         AQ = wi1/2 K ( xi , x j )w1/2
+                                                                                            j               .   (6.3)
+                                                                                                    i,j=1
+
+(Accordingly short Matlab and Mathematica code is given in the introductory Sec-
+tion 1.) The reason is that the m × m-matrix AQ inherits some important structural
+properties from the integral operator A:
+       • If A is selfadjoint, then AQ is Hermitian (see Footnote 10).
+       • If A is positive semidefinite, then, by (2.9), AQ is positive semidefinite, too.
+This way, for instance, the computational cost for calculating the finite-dimensional
+determinant is cut to half, if by structural inheritance I + zAQ is Hermitian positive
+definite; the Cholesky decomposition can then be employed instead of Gaussian
+elimination with partial pivoting.
+
+    7. Application to Some Entire Kernels of Random Matrix Theory. In this sec-
+tion we study two important examples, stemming from random matrix theory, with
+entire kernels. By Theorem 6.2, the Nyström-type method based on Gauss–Legendre
+or Curtis–Clenshaw quadrature has to exhibit exponential convergence.
+
+     7.1. The sine kernel. The probability E2 (0; s) (shown in Figure 3) that an interval
+of length s does not contain, in the bulk scaling limit of level spacing 1, an eigenvalue
+of the Gaussian unitary ensemble (GUE) is given (Mehta 2004, Sect. 6.3) by the
+Fredholm determinant
+
+                                                    E2 (0; s) = det ( I − As )
+
+of the integral operator As on L2 (0, s) that is induced by the sine kernel K:
+                                        Z s
+                                                                                        sin(π ( x − y))
+                  As u( x ) =                 K ( x, y)u(y) dy,           K ( x, y) =                   .
+                                          0                                                π ( x − y)
+            ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                 25
+
+Note that K ( x, y) is Hermitian and entire on C × C; thus As is a selfadjoint operator
+of trace class on L2 (0, s). (This is already much more than we would need to know
+for successfully applying and understanding the Nyström-type method. However, to
+facilitate a comparison with the Ritz–Galerkin method, we analyze the operator As in
+some more detail.) The factorization
+                                 1                                  1
+                                      Z π                               Z π
+                  K ( x, y) =                  ei( x−y)ξ dξ =                 eixξ e−iyξ dξ                (7.1)
+                                2π     −π                          2π    −π
+
+of the kernel implies that As is positive definite with maximal eigenvalue λ1 ( As ) < 1;
+since, for 0 6= u ∈ L2 (0, s), we obtain
+                                 Z s                         2
+                           1
+                    Z π
+  0 < hu, As ui =         √            e−ixξ u( x ) dx           dξ
+                     −π     2π    0
+                                         Z π                          Z ∞
+                                                         2
+                                     =           |û(ξ )| dξ <               |û(ξ )|2 dξ = kûk2L2 = kuk2L2 .
+                                            −π                          −∞
+
+Here, in stating that the inequalities are strict, we have used the fact that the Fourier
+transform û of the function u ∈ L2 (0, s), which has compact support, is an entire
+function. Therefore, the perturbation bound of Lemma 4.1 applies and we obtain, for
+Ritz–Galerkin as for any Galerkin method, like in the example of Section 5, the basic
+error estimate
+                | det( I − Pm As Pm ) − det( I − As )| 6 k Pm As Pm − As kJ1 .
+Now, Theorems 5.2 and 6.2 predict a rapid, exponentially fast convergence of the Ritz–
+Galerkin and the Nyström-type methods: In fact, an m-dimensional approximation
+will give an error that decays like O(e−cm ), for any fixed c > 0 since, for entire kernels,
+the parameter ρ > 1 can be chosen arbitrarily in these theorems.
+     Details of the implementation of the Ritz–Galerkin method. There is certainly no
+general recipe on how to actually construct the Ritz–Galerkin method for a specific
+example, since one would have to know, more or less exactly, the eigenvalues of A. In
+the case of the sine kernel, however, Gaudin (1961) had succeeded in doing so. (See
+also Katz and Sarnak (1999, p. 411) and Mehta (2004, pp. 124–126).) He had observed
+that the integral operator Ãt on L2 (−1, 1), defined by
+                                                   Z 1
+                                 Ãt u( x ) =            eiπtxy u(y) dy
+                                                    −1
+
+(which is, by (7.1), basically a rescaled “square-root” of A2t ), is commuting with the
+selfadjoint, second-order differential operator
+                                  d  2                 
+                       Lu( x ) =      ( x − 1) u 0 ( x ) + π 2 t2 x 2 u ( x )
+                                 dx
+with boundary conditions
+                     (1 − x2 )u( x )| x=±1 = (1 − x2 )u0 ( x )| x=±1 = 0.
+Thus, both operators share the same set of eigenfunctions un , namely the radial
+prolate spheroidal wave functions (using the notation of Mathematica 6.0)
+                                         (1)
+                          un ( x ) = Sn,0 (πt, x )               (n = 0, 1, 2 . . .).
+26                                                                                  F. BORNEMANN
+
+                                      0                                                                                               0
+                                     10                                                                                              10
+
+
+
+   approximation error for E2(0;1)
+
+
+
+
+                                                                                                   approximation error for E2(0;2)
+                                      −5                                                                                              −5
+                                     10                                                                                              10
+
+
+
+
+                                      −10                                                                                             −10
+                                     10                                                                                              10
+
+
+
+
+                                      −15                                                                                             −15
+                                     10                                                                                              10
+
+
+
+
+                                      −20                                                                                             −20
+                                     10                                                                                              10
+                                              5           10              15           20                                                         5         10          15         20     25
+
+                                                          dimension m                                                                                            dimension m
+
+
+
+       Fig. 4. Convergence of various m-dimensional approximations of the Fredholm determinants E2 (0; 1) (left)
+and E2 (0; 2) (right): the Nyström-type quadrature methods based on Gauss–Legendre (dots) and Curtis–Clenshaw
+(circles), as well as Gaudin’s (1961) Ritz–Galerkin method based on spheroidal wave functions (stars). The dashed
+line shows the amount, according to (4.5), of roundoff error due to the numerical evaluation of the finite-dimensional
+determinants; all calculations were done in IEEE double arithmetic with machine precision e = 2−53 .
+
+
+These special functions are even for n even, and odd for n odd. By plugging them
+into the integral operator Ãt Gaudin had obtained, after evaluating at x = 0, the
+eigenvalues
+                                                                Z 1                                                                                                 Z 1
+                                                        1                                                                                                iπt
+                                      λ2k ( Ãt ) =                     u2k (y) dy,         λ2k+1 ( Ãt ) =                                            0                     u2k+1 (y)y dy.
+                                                      u2k (0)    −1                                                                                   u2k +1 (0 )     −1
+
+Finally, we have (starting with the index n = 0 here)
+                                                                               s
+                                                            λn ( As ) =          |λn ( Ãs/2 )|2                                            (n = 0, 1, 2, . . .).
+                                                                               4
+Hence, the m-dimensional Ritz–Galerkin approximation of det( I − As ) is given by
+                                                                                                   m −1
+                                                                  det( I − Pm As Pm ) = ∏ (1 − λn ( As )).
+                                                                                                   n =0
+
+While Gaudin himself had to rely on tables of the spheroidal wave functions (Stratton
+et al. 1956), we can use the fairly recent implementation of these special functions by
+Falloon, Abbott and Wang (2003), which now comes with Mathematica 6.0. This way,
+we get the following implementation:
+                                                  u@t_, n_, x_D := SpheroidalS1@n, 0, π t, xD
+                                                                       NIntegrate@u@t, n, yD, 8y, −1, 1<D
+                                                  μ@t_, n_ ? EvenQD :=
+                                                                                  u@t, n, 0D
+                                                                                 π t NIntegrate@y u@t, n, yD, 8y, −1, 1<D
+                                                                                                   uH0,0,1L @t, n, 0D
+                                                  μ@t_, n_ ? OddQD :=
+
+                                                                                   s              s                                           2
+                                                  λ@s_, n_D := λ@s, nD =               AbsBμB               , nFF
+                                                                                   4              2
+
+                                                  DetRitzGalerkin@s_, m_D := ‰ H1 − λ@s, nDL
+                                                                                            m−1
+
+
+                                                                                            n=0
+
+Given all this, one can understand
+            DetRitzGalerkin@1,   9D that Jimbo et al.’s (1980) beautiful discovery of
+expressing E2 (0; s) by formula (1.6) in terms of the fifth Painlevé transcendent was
+            0.1702174213791839
+generally considered to be a major break-through even for its numerical evaluation
+                                                  DetRitzGalerkin@2, 11D
+
+                                                  0.00349732514916866
+                ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                            27
+
+                            0
+                           10
+
+
+
+                            −5
+                           10
+
+
+
+
+                   F (s)
+                            −10
+                           10
+
+                      2
+
+                            −15
+                           10
+
+
+
+                            −20
+                           10
+                                −8   −7   −6   −5   −4    −3    −2     −1      0      1     2
+                                                           s
+
+
+     Fig. 5. The Tracy–Widom distribution F2 (s); that is, in the edge scaling limit, the probability of the maximal
+eigenvalue of the Gaussian unitary ensemble (GUE) being not larger than s. The result shown was calculated with
+the Nyström-like method based on Gauss–Legendre with m = 50; and cross-checked against the asymptotic expansion
+log F2 (−s) = −s3 /12 − log(s)/8 + log(2)/24 + ζ 0 (−1) + O(s−3/2 ) for s → ∞ (Deift et al. 2008).
+
+
+
+(Tracy and Widom 2000, Footnote 10). However, note how much less knowledge
+suffices for the application of the far more general Nyström-type method: continuity
+of K makes it applicable, and K being entire guarantees rapid, exponentially fast
+convergence. That is all.
+     An actual numerical experiment. Figure 4 shows the convergence (in IEEE machine
+arithmetic) of an actual calculation of the numerical values E2 (0; 1) and E2 (0; 2). We
+observe that the Nyström-type method based on Gauss–Legendre has an exponen-
+tially fast convergence rate comparable to the Ritz–Galerkin method. Clenshaw–Curtis
+needs a dimension m that is about twice as large as for Gauss–Legendre to achieve
+the same accuracy. This matches the fact that Clenshaw–Curtis has the order ν = m,
+which is half the order ν = 2m of Gauss–Legendre, and shows that the bounds of
+Theorem 6.2 are rather sharp with respect to ν (there is no “kink” phenomenon here,
+cf. Trefethen (2008, p. 84)). The dashed line shows the amount, as estimated in (4.5),
+of roundoff error that stems from the numerical evaluation of the finite dimensional
+m × m-determinant itself. Note that this bound is essentially the same for all the
+three methods and can easily be calculated in course of the numerical evaluation. We
+observe that this bound is explaining the actual onset of numerical “noise” in all the
+three methods reasonably well.
+     Remark. Note that the Nyström-type method outperforms the Ritz–Galerkin me-
+thod by far. First, the Nyström-type method is general, simple, and straightforwardly
+implemented (see the code given in Section 1); in contrast, the Ritz–Galerkin depends
+on some detailed knowledge about the eigenvalues and requires numerical access
+to the spheroidal wave functions. Second, there is no substantial gain, as compared
+to the Gauss–Legendre based method, in the convergence rate from knowing the
+eigenvalues exactly. Third, and most important, the computing time for the Ritz–
+Galerkin runs well into several minutes, whereas both versions of the Nyström-type
+method require just a few milliseconds.
+
+    7.2. The Airy kernel. The Tracy–Widom distribution F2 (s) (shown in Figure 5),
+that is, in the edge scaling limit, the probability of the maximal eigenvalue of the
+Gaussian unitary ensemble (GUE) being not larger than s, is given (Mehta 2004, §24.2)
+28                                             F. BORNEMANN
+
+
+by the Fredholm determinant
+
+                                          F2 (s) = det( I − As )                                            (7.2)
+
+of the integral operator As on L2 (s, ∞) that is induced by the Airy kernel K:
+                     Z ∞
+                                                                     Ai( x )Ai0 (y) − Ai(y)Ai0 ( x )
+       As u( x ) =         K ( x, y)u(y) dy,         K ( x, y) =                                     .      (7.3)
+                     s                                                            x−y
+Note that K is Hermitian and entire on C × C; thus As is selfadjoint. (Again, this
+is already already about all we would need to know for successfully applying and
+understanding the Nyström-type method. However, we would like to show that, as
+for the sine kernel, the strong perturbation bound of Lemma 4.1 applies to the Airy
+kernel, too.) There is the factorization (Tracy and Widom 1994, Eq. (4.5))
+                                               Z ∞
+                                 K ( x, y) =         Ai( x + ξ )Ai(y + ξ ) dξ,
+                                               0
+
+which relates the Airy kernel with the Airy transform (Vallée and Soares 2004, §4.2)
+in a similar way as the sine kernel is related by (7.1) with the Fourier transform. This
+proves, because of the super-exponential decay of Ai( x ) → 0 as x → 0, that As is the
+product of two Hilbert–Schmidt operators on L2 (s, ∞) and therefore of trace class.
+Moreover, As is positive semi-definite with maximal eigenvalue λ1 ( A) 6 1; since
+by the Parseval–Plancherel equality (Vallée and Soares 2004, Eq. (4.27)) of the Airy
+transform we obtain, for u ∈ L2 (s, ∞),
+                         Z ∞ Z ∞                            2
+     0 6 hu, As ui =                Ai( x + ξ )u( x ) dx        dξ
+                           0    0
+
+                                                         Z ∞ Z ∞                              2
+                                                     6                 Ai( x + ξ )u( x ) dx       dξ = kuk2L2 .
+                                                          −∞       0
+
+More refined analytic arguments, or a carefully controlled numerical approximation,
+show the strict inequality λ1 ( A) < 1; the perturbation bound of Lemma 4.1 applies.
+    Modification of the Nyström-type method for infinite intervals. The quadrature meth-
+ods of Section 6 are not directly applicable here, since the integral operator As is
+defined by an integral over the infinite interval (s, ∞). We have the following three
+options:
+     1. Using a Gauss-type quadrature formula on (s, ∞) that is tailor-made for the
+         super-exponential decay of the Airy function. Such formulae have recently
+         been constructed by Gautschi (2002).
+        2. Truncating the integral in (7.3) at some point T > s. That is, before using
+           the Nyström-type method with a quadrature formula on the finite interval
+           [s, T ] (for which the second part of Theorem 6.2 is then applicable, showing
+           exponential convergence), we approximate the Fredholm determinant (7.2)
+           by
+                                                                          
+                               det( I − PT As PT ) = det I − As  L2 (s,T ) ,
+
+           where the orthonormal projection PT : L2 (s, ∞) → L2 (s, T ), Pu = u · χ[s,T ] ,
+           denotes the multiplication operator by the characteristic function of [s, T ].
+                ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                                                            29
+
+                                                         0
+                                                        10
+
+
+
+
+                    P A P − A in Hilbert−Schmidt norm
+                                                         −10
+                                                        10
+
+                                                         −20
+                                                        10
+
+                                                         −30
+                                                        10
+
+
+
+                                            s
+                                                         −40
+                                                        10
+                                            T
+                                                         −50
+                                            s
+
+                                                        10
+                                            T
+
+
+
+
+                                                         −60
+                                                        10
+                                                             0        2      4    6    8           10        12       14       16   18   20
+                                                                                           truncation point T
+
+
+     Fig. 6. Values of the expression k PT As PT − As kJ2 , which bounds, by (7.4), the error in F2 (s) committed by
+truncating the integral in (7.3) at a point T > s.
+
+
+           This way we commit an additional truncation error, which has, by passing
+           through the perturbation bound of Lemma 4.1, the computable bound
+
+              | det( I − PT As PT ) − det( I − As )| 6 k PT As PT − As kJ1 6
+                                                                                                             Z ∞ Z ∞                              1/2
+                                                                                                                                         2
+                                                                           k PT As PT − As kJ2 =                                |K ( x, y)| dxdy          .   (7.4)
+                                                                                                                  T        T
+
+           Figure 6 shows this bound as a function of the truncation point T. We observe
+           that, for the purpose of calculating (within IEEE machine arithmetic) F2 (s)
+           for s ∈ [−8, 2]—as shown in Figure 5—, a truncation point at T = 16 would
+           be more than sufficiently safe.
+       3. Transforming the infinite intervals to finite ones. By using a monotone and
+          smooth transformation φs : (0, 1) → (s, ∞), defining the transformed integral
+          operator Ãs on L2 (0, 1) by
+                        Z 1                                   q
+            Ãs u(ξ ) =     K̃s (ξ, η )u(η ) dη, K̃s (ξ, η ) = φs0 (ξ )φs0 (η ) K (φs (ξ ), φs (η )),
+                                                                  0
+
+           gives the identity
+                                                                                                                     
+                                                                 Fs (s) = det I − As  L2 (s,∞) = det I − Ãs  L2 (0,1) .
+
+           For the super-exponentially decaying Airy kernel K we suggest the transfor-
+           mation
+                                                                          φs (ξ ) = s + 10 tan(πξ/2)                       (ξ ∈ (0, 1)).                      (7.5)
+        Note that though K̃ (ξ, η ) is a smooth function on [0, 1] it possesses, as a
+        function on C × C, essential singularities on the lines ξ = 1 or η = 1. Hence,
+        we can only apply the first part of Theorem 6.2 here, which then shows, for
+        Gauss–Legendre and Clenshaw–Curtis, a super-algebraic convergence rate,
+        that is, O(m−k ) for arbitrarily high algebraic order k. The actual numerical
+        experiments reported in Figure 7 show, in fact, even exponential convergence.
+From the general-purpose point of view, we recommend the third option. It is
+straightforward and does not require any specific knowledge, or construction, as
+would the first and second option.
+30                                                                                         F. BORNEMANN
+
+                                     0
+                                    10                                                                                                 0
+                                                                                                                                      10
+
+
+   approximation error for F2(−2)
+
+
+
+
+                                                                                                     approximation error for F2(−4)
+                                     −5                                                                                                −5
+                                    10                                                                                                10
+
+
+
+
+                                     −10                                                                                               −10
+                                    10                                                                                                10
+
+
+
+
+                                     −15                                                                                               −15
+                                    10                                                                                                10
+
+
+
+
+                                                                                                                                       −20
+                                     −20                                                                                              10
+                                    10                                                                                                      0   5    10   15   20   25    30   35   40   45   50
+                                          0   5   10   15   20    25   30   35   40   45    50
+                                                             dimension m                                                                                        dimension m
+
+
+
+       Fig. 7. Convergence of the m-dimensional Nyström-type approximation—using the transformation (7.5)—of
+the Fredholm determinants F2 (−2) (left) and F2 (−4) (right), based on Gauss–Legendre (dots) and Curtis–Clenshaw
+(circles). The dashed line shows the amount, according to (4.5), of roundoff error due to the numerical evaluation of
+the finite-dimensional determinants; all calculations were done in IEEE double arithmetic (e = 2−53 ).
+
+
+     Remarks on other numerical methods to evaluate F2 (s). As for the sine kernel, there is
+a selfadjoint second-order ordinary differential operator commuting with As (Tracy
+and Widom 1994, p. 166). Though this has been used to derive some asymptotic
+formulas, nothing is known in terms of special functions that would enable us to
+base a Ritz–Galerkin method on it. As Mehta (2004, p. 453) puts it: “In the case of
+the Airy kernel . . . the differential equation did not receive much attention and its
+solutions are not known.”
+     Prior to our work of calculating F2 (s) directly from its determinantal expression,
+all the published numerical calculations started with Tracy and Widom’s (1994)
+remarkable discovery of expressing F2 (s) in terms of the second Painlevé transcendent;
+namely
+                                         Z ∞                  
+                          F2 (s) = exp −       (z − s)q(z)2 dz
+                                                                                                 s
+
+with q(z) being the Hastings–McLeod (1980) solution of Painlevé II,
+
+                                                        q00 (z) = 2q(z)3 + z q(z),                   q(z) ∼ Ai(z) as z → ∞.                                                                   (7.6)
+
+Initial value methods for the numerical integration of (7.6) suffer from severe stability
+problems (Prähofer and Spohn 2004). Instead, the numerically stable way of solv-
+ing (7.6) goes by considering q(z) as a connecting orbit, the other asymptotic state
+being
+                                     r
+                                       −z
+                              q(z) ∼        as z → −∞,
+                                        2
+and using numerical two-point boundary value solvers (Dieng 2005).
+      8. Extension to Systems of Integral Operators. We now consider an N × N
+system of integrals operators that is induced by continuous kernels Kij ∈ C ( Ii × Ij )
+(i, j = 1, . . . , N), where the Ii ⊂ R denote some finite intervals. The corresponding
+system of integral equations
+                                                                 N Z
+                                              ui ( x ) + z ∑           Kij ( x, y)u j (y) dy = f i ( x )                                            ( x ∈ Ii , i, j = 1, . . . , N )          (8.1)
+                                                            j =1 I j
+              ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                      31
+
+defines, with u = (u1 , . . . , u N ) and f = ( f 1 , . . . , f N ), an operator equation
+                                                            u + zAu = f
+on the Hilbert space H = L2 ( I1 ) ⊕ · · · ⊕ L2 ( IN ).
+    8.1. The Fredholm determinant for systems. Assuming A to be trace class, let
+us express det( I + zA) in terms of the system (Kij ) of kernels. To this end we show
+that the system (8.1) is equivalent to a single integral equation; an idea that, essentially,
+can already be found in the early work of Fredholm (1903, p. 388). To simplify
+notation, we assume that the Ik are disjoint (a simple transformation of the system of
+integral equations by a set of translations will arrange for this). We then have18
+                                  N
+                                            L2 ( Ik ) ∼
+                                                      = L2 ( I ),
+                                  M
+                        H=                                                        I = I1 ∪ . . . ∪ In .
+                                  k =1
+
+by means of the natural isometric isomorphism
+                                                                                   N
+                                            ( u1 , . . . , u N ) 7 → u = ∑ χ k u k
+                                                                                 k =1
+
+where χk denotes the characteristic function of the interval Ik . Given this picture, the
+operator A can be viewed being the integral operator on L2 ( I ) that is induced by the
+kernel
+                                                              N
+                                      K ( x, y) = ∑ χi ( x )Kij ( x, y)χ j (y).
+                                                           i,j=1
+
+By (3.7) we finally get (cf. Gohberg et al. (2000, Thm 6.1))
+                    ∞
+                        zn
+                             Z
+det( I + zA) = ∑
+                                                       n
+                                      det K (t p , tq ) p,q=1 dt1 · · · dtn
+                   n =0
+                        n!       In
+
+                    ∞
+                                                                                        !
+                                                N
+                       zn
+                             Z
+                = ∑                            ∑
+                                                                                                      n
+                                                           χi1 (t1 ) · · · χin (tn ) det K (t p , tq ) p,q=1 dt1 · · · dtn
+                  n =0
+                       n!        In        i1 ,...,in =1
+                                      |                           {z                    }
+                                                                  =1
+
+                    ∞            N
+                        zn
+                                               Z
+                = ∑            ∑
+                                                                                    n
+                                                                   det K (t p , tq ) p,q=1 dt1 · · · dtn
+                   n =0
+                        n! i ,...,i =1             Ii1 ×···× Iin
+                             1         n
+
+                    ∞            N
+                        zn                                                                 n
+                                               Z                      
+                = ∑            ∑                                   det Ki p iq (t p , tq )           dt1 · · · dtn .
+                   n =0
+                        n! i ,...,i =1             Ii1 ×···× Iin                             p,q=1
+                             1         n
+
+   18 The general case could be dealt with by the topological sum, or coproduct, of the intervals I ,
+                                                                                                   k
+                                                        N              N
+                                                       ä Ik =
+                                                                       [
+                                                                           Ik × {k }.
+                                                       k =1        k =1
+One would then use (Johansson 2003) the natural isometric isomorphism
+                                                              !
+                                         N                 N
+                                                     ∼ L2 ä Ik .
+                                           L2 ( Ik ) =
+                                        M
+                                  H=
+                                                       k =1                      k =1
+32                                                     F. BORNEMANN
+
+
+By eventually transforming back to the originally given, non-disjoint intervals Ik , the
+last expression is the general formula that we have sought for: det( I + zA) = d(z)
+with
+                        ∞            N
+                            zn                                                                 n
+                                             Z                            
+             d(z) = ∑              ∑                                   det Ki p iq (t p , tq )                dt1 · · · dtn .   (8.2)
+                       n =0
+                            n! i ,...,i =1       Ii1 ×···× Iin                                        p,q=1
+                                1        n
+
+
+This is a perfectly well defined entire function for any system Kij of continuous
+kernels, independently of whether A is a trace class operator or not. We call it the
+Fredholm determinant of the system.
+   The determinant of block matrices. In preparation of our discussion of Nyström-type
+methods for approximating (8.2) we shortly discuss the determinant of N × N-block
+matrices
+                           
+          A11 · · · A1N
+         .              .. 
+   A=   ..              . ∈C
+                                   M× M
+                                         ,    Aij ∈ Cmi ×m j , M = m1 + · · · + m N .
+          A N1 · · · A NN
+
+Starting with von Koch’s formula (3.6), an argument19 that is similar to the one that
+has led us to (8.2) yields
+
+                                     ∞            N                mi           m
+                                         zn                1         in                           n
+              det( I + zA) = ∑                  ∑ ∑          · · ·  ∑   det   ( A        )
+                                                                                  i p ,iq k p ,k q        .                     (8.3)
+                                    n =0
+                                         n! i ,...,i =1 k =1       k =1
+                                                                                                    p,q=1
+                                                 1          n      1            n
+
+
+    8.2. Quadrature methods for systems. Given a quadrature formula for each of
+the intervals Ii , namely
+                                                     mi                             Z
+                                 Qi ( f ) = ∑ wij f ( xij ) ≈                                f ( x ) dx,                        (8.4)
+                                                     j =1                               Ii
+
+
+we aim at generalizing the Nyström-type method of Section 6. We restrict ourselves
+to the case of positive weights, wij > 0, and generalize the method from the single
+operator case as given in (6.3) to the system case in the following form:
+                                                                                                               
+                                                                               A11                 ···     A1N
+                                                                              .                             .. 
+                    dQ (z) = det( I + zAQ ),                                  ..
+                                                                        AQ =                                 .                (8.5)
+                                                                                                                
+
+                                                                                        A N1       ···     A NN
+
+with the sub-matrices Aij defined by the entries
+
+                            1/2
+             ( Aij ) p,q = wip  Kij ( xip , x jq )w1/2
+                                                   jq                       ( p = 1, . . . , mi , q = 1, . . . , m j ).
+
+     19 Alternatively, we can use (3.4) and, recursively, the “binomial” formula (Greub 1967, p. 121)
+
+
+                                    ^k                          k ^          ^k− j 
+                                                                M    j
+                                         (V0 ⊕ V1 ) =                      V0 ⊗      V1
+                                                                j =0
+
+of exterior algebra, which is valid for general vector spaces V0 and V1 .
+              ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                                    33
+
+This can be as straightforwardly implemented as in the case of a single operator. Now,
+a convergence theory can be built on a representation of the error dQ (z) − d(z) that is
+analogous to (6.2). To this end we simplify the notation by introducing the following
+functions on Ii1 × · · · × Iin ,
+                                                                                   n
+                           Ki1 ,...,in (t1 , . . . , tn ) = det Ki p iq (t p , tq )                  ,
+                                                                                           p,q=1
+
+and by defining, for functions f on Ii1 × · · · × Iin , the product quadrature formula
+
+      n
+             !            m i1        min
+     ∏ Qik       ( f ) = ∑ · · · ∑ wi1 j1 · · · win jn f ( xi1 j1 , . . . , xin jn )
+     k =1                 j1 =1       jn =1
+                                                                           Z
+                                                                      ≈                        f (t1 , . . . , tn ) dt1 · · · dtn .
+                                                                               Ii1 ×···× Iin
+
+
+Thus, we can rewrite the Fredholm determinant (8.2) in the form
+
+                             ∞            N
+                                 zn
+                                                  Z
+            d(z) = 1 + ∑                ∑                             Ki1 ,...,in (t1 , . . . , tn ) dt1 · · · dtn .
+                            n =1
+                                 n! i ,...,i =1       Ii1 ×···× Iin
+                                        1     n
+
+
+Likewise, by observing the generalized von Koch formula (8.3), we put the defini-
+tion (8.5) of dQ (z) to the form
+
+                                              ∞
+                                                                                     !
+                                                   N                      n
+                                          zn
+                        dQ (z) = 1 + ∑           ∑                      ∏ Qik            (Ki1 ,...,in ).
+                                     n =1
+                                          n! i ,...,i =1                k =1
+                                                        1     n
+
+
+Thus, once again, the Nyström–type method amounts for approximating each mul-
+tidimensional integral of the power series of the Fredholm determinant by using a
+product quadrature rule. Given this representation, Theorem 6.2 can straightforwardly
+be generalized to the system case:
+    Theorem 8.1. If Kij ∈ C k−1,1 ( Ii × Ij ), then for each set (8.4) of quadrature formulae of
+a common order ν > k with positive weights there holds the error estimate
+
+                                  d Q (z ) − d (z ) = O (ν−k )                  ( ν → ∞ ),
+
+uniformly for bounded z.
+    If the Kij are bounded analytic on Eρ ( Ii ) × Eρ ( Ij ) (with the ellipse Eρ ( Ii ) defined, with
+respect to Ii , as in Theorem A.2), then for each set (8.4) of quadrature formulae of a common
+order ν with positive weights there holds the error estimate
+
+                                  d Q (z ) − d (z ) = O (ρ−ν )                  ( ν → ∞ ),
+
+uniformly for bounded z.
+    8.3. Examples from random matrix theory. Here, we apply the Nyström-type
+method (8.5) to two 2 × 2-systems of integral operators that have recently been studied
+in random matrix theory.
+34                                                                 F. BORNEMANN
+
+
+                                            0.8
+
+
+                                            0.7
+
+
+                                            0.6
+
+
+                                            0.5
+
+
+
+
+                         cov(A2(t),A2(0))
+                                            0.4
+
+
+                                            0.3
+
+
+                                            0.2
+
+
+                                            0.1
+
+
+                                             0
+                                              0        2            4          6       8        10      12
+                                                                               t
+
+
+
+
+     Fig. 8. Values of the two-point correlation function cov(A2 (t), A2 (0)) of the Airy process A2 (t) (solid line).
+The dashed line shows the first term of the asymptotic expansion cov(A2 (t), A2 (0)) ∼ t−2 as t → ∞.
+
+
+    Two-point correlation of the Airy process. The Airy process A2 (t) describes, in a
+properly rescaled limit of infinite dimension, the maximum eigenvalue of Hermitian
+matrix ensemble whose entries develop according to the Ornstein–Uhlenbeck process.
+This stationary stochastic process was introduced by Prähofer and Spohn (2002)
+and further studied by Johansson (2003). These authors have shown that the joint
+probability function is given by a Fredholm determinant; namely
+                                                        !                   !
+                                                A0 A t
+     P(A2 (t) 6 s1 , A2 (0) 6 s2 ) = det I −              2        2             (8.6)
+                                                A−t A0 L (s1 ,∞)⊕ L (s2 ,∞)
+
+with integral operators At that are induced by the kernel functions
+                      Z ∞
+                     
+                             e−ξt Ai( x + ξ )Ai(y + ξ ) dξ,   t > 0,
+                                                   0
+                     
+              Kt ( x, y) =                       Z 0                                                                       (8.7)
+                                                     e−ξt Ai( x + ξ )Ai(y + ξ ) dξ,
+                                              
+                                              −
+                                              
+                                                                                                       otherwise.
+                                                   −∞
+
+Of particular interest is the two-point correlation function
+
+          cov(A2 (t), A2 (0)) = E(A2 (t)A2 (0)) − E(A2 (t))E(A2 (0))                                                       (8.8)
+
+                                                                        ∂2 P(A2 (t) 6 s1 , A2 (0) 6 s2 )
+                                                       Z
+                                                   =            s1 s2                                    ds1 ds2 − c21 ,
+                                                           R2                       ∂s1 ∂s2
+where c1 denotes the expectation value of the Tracy–Widom distribution (7.2). We
+have calculated this correlation function for 0 6 t 6 100 in steps of 0.1 to an absolute
+error of ±10−10 , see Figure 8.20 Here are some details about the numerical procedure:
+
+     20 A table can be obtained from the author upon request. Sasamoto (2005, Fig. 2) shows a plot (which
+
+differs by a scaling factor of two in both the function value and the time t) of the closely related function
+                            q                           q
+                   g2 (t) = var(A2 (t) − A2 (0))/2 = var(A2 (0)) − cov(A2 (t), A2 (0))
+—without, however, commenting on either the numerical procedure used or on the accuracy obtained.
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                       35
+
+       • Infinite intervals of integration, such as in the definition (8.7) of the kernels
+         or for the domain of the integral operators (8.6) themselves, are handled by a
+         transformation to the finite interval [0, 1] as in Section 7.2.
+       • The kernels (8.7) are evaluated, after transformation, by a Gauss–Legendre
+         quadrature.
+       • The joint probability distribution (8.6) is then evaluated, after transforma-
+         tion, by the Nyström-type method of this section, based on Gauss–Legendre
+         quadrature.
+       • To avoid numerical differentiation, the expectation values defining the two-
+          point correlation (8.8) are evaluated by truncation of the integrals, partial
+          integration, and using a Gauss–Legendre quadrature once more.
+Because of analyticity, the convergence is always exponential. With parameters care-
+fully (i.e., adaptively) adjusted to deliver an absolute error of ±10−10 , the evaluation
+of the two-point correlation takes, for a single time t and using a 2 GHz PC, about 20
+minutes on average. The results were cross-checked, for small t, with the asymptotic
+expansion (Prähofer and Spohn 2002, Hägg 2007)
+
+  cov(A2 (t), A2 (0)) = var(A2 (0)) − 12 var(A2 (t) − A2 (0))
+                                                      = var(A2 (0)) − t + O(t2 )              ( t → 0),
+and, for large t, with the asymptotic expansion21 (Widom 2004, Adler and van
+Moerbeke 2005)
+                     cov(A2 (t), A2 (0)) = t−2 + ct−4 + O(t−6 )              ( t → ∞ ),
+where the constant c = −3.542 · · · can explicitly be expressed in terms of the Hastings–
+McLeod solution (7.6) of Painlevé II.
+    Two-point correlation of the Airy1 process. Sasamoto (2005) and Borodin et al. (2007)
+have introduced the Airy1 process A1 (t) for which, once again, the joint probability
+distribution can be given in terms of a Fredholm determinant; namely
+                                                            !                   !
+                                                    A0 A t
+        P(A1 (t) 6 s1 , A1 (0) 6 s2 ) = det I −                2       2
+                                                    A−t A0 L (s1 ,∞)⊕ L (s2 ,∞)
+with integral operators At that are now induced by the kernel functions
+                                                   exp(−( x − y)2 /(4t))
+                
+                Ai( x + y + t2 )et( x+y)+2t3 /3 −
+                                                         √              , t > 0,
+   Kt ( x, y) =                                             4πt
+                                             3
+                
+                  Ai( x + y + t2 )et( x+y)+2t /3 ,                         otherwise.
+                
+
+    21 Adler and van Moerbeke (2005) have derived this asymptotic expansion from the masterfully obtained
+
+result that G (t, x, y) = log P(A2 (t) 6 x, A2 (0) 6 y) satisfies the following nonlinear 3rd order PDE with
+certain (asymptotic) boundary conditions:
+         2
+                   ∂2          ∂3 G
+                                      2
+                                                ∂2 G    ∂2 G
+                                                                           
+     ∂     ∂                            ∂ G                               2
+   t          −         G  =          2     +        −       +  x − y − t
+     ∂t ∂x2       ∂y2         ∂x2 ∂y    ∂y2    ∂x∂y     ∂x2
+
+                     ∂3 G
+                            2
+                                      ∂2 G  ∂2 G
+                                                              3
+                                                                            ∂3 G ∂
+                                                                                            
+                               ∂ G                                ∂ G ∂                ∂    ∂
+                 −     2
+                             2 2 +         − 2 − x + y − t2 +        3
+                                                                           − 3           +       G.
+                    ∂y ∂x      ∂x     ∂x∂y   ∂y                    ∂x ∂y    ∂y ∂x     ∂x   ∂y
+The reader should contemplate a numerical calculation of the two-point correlation based on this PDE,
+rather than directly treating the Fredholm determinant as suggested by us.
+36                                                                 F. BORNEMANN
+
+
+                                           0.4
+
+
+                                          0.35
+
+
+                                           0.3
+
+
+                                          0.25
+
+
+
+
+                       cov(A1(t),A1(0))
+                                           0.2
+
+
+                                          0.15
+
+
+                                           0.1
+
+
+                                          0.05
+
+
+                                            0
+                                             0         0.2   0.4         0.6            0.8     1      1.2        1.4
+                                                                                   t
+
+
+
+
+       Fig. 9. Values of the two-point correlation function cov(A1 (t), A1 (0)) of the Airy1 process A1 (t).
+
+
+By basically employing the same numerical procedure as for the Airy process, we
+have succeeded in calculating the two-point correlation function cov(A1 (t), A1 (0))
+for 0 6 t 6 2.5 in steps of 0.025 to an absolute error of ±10−10 , see Figure 9.22 For a
+single time t the evaluation takes about 5 minutes on average (using a 2 GHz PC).
+This numerical result has been used by Bornemann, Ferrari and Prähofer (2008) as a
+strong evidence that the Airy1 process is, unlike previously conjectured, not the limit
+of the largest eigenvalue in GOE matrix diffusion.
+     A. Appendices.
+   A.1. Quadrature Rules. For the ease of reference, we collect in this appendix
+some classical facts about quadrature rules in one and more dimensions.
+   Quadrature rules in one dimension. We consider quadrature rules of the form
+                                                                               m
+                                                             Q( f ) = ∑ w j f ( x j )                                   (A.1)
+                                                                               j =1
+                                   Rb
+which are meant to approximate a f ( x ) dx for continuous functions f on some finite
+interval [ a, b] ⊂ R. We define the norm of a quadrature rule by
+                                                                                   m
+                                                                   k Qk = ∑ |w j |
+                                                                                 j =1
+
+Convergence of a sequence of quadrature rules is characterized by the following
+theorem of Pólya (Davis and Rabinowitz 1984, p. 130).
+    Theorem A.1. A sequence Qn of quadrature rules converges for continuous functions,
+                                                                   Z b
+                                                 lim Qn ( f ) =          f ( x ) dx           ( f ∈ C [ a, b]),
+                                             n→∞                    a
+
+    22 A table can be obtained from the author upon request. Sasamoto (2005, Fig. 2) shows a plot (which
+
+differs by a scaling factor of two in both the function value and the time t) of the closely related function
+                            q                           q
+                   g1 (t) = var(A1 (t) − A1 (0))/2 = var(A1 (0)) − cov(A1 (t), A1 (0))
+—without, however, commenting on either the numerical procedure used or on the accuracy obtained.
+             ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                                       37
+
+if and only if the sequence k Qn k of norms is bounded by some stability constant Λ and if
+                                                            Z b
+                             lim Qn ( x k ) =                      x k dx            (k = 0, 1, 2, . . .).                           (A.2)
+                            n→∞                              a
+
+If the weights are all positive, then (A.2) already implies the boundedness of k Qn k = Qn (1).
+    A quadrature rule Q is of order ν > 1, if it is exact for all polynomials of degree
+at most ν − 1. Using results from the theory polynomial best approximation one can
+prove quite strong error estimates (Davis and Rabinowitz 1984, §4.8).
+     Theorem A.2. If f ∈ C k−1,1 [ a, b], then for each quadrature rule Q of order ν > k with
+positive weights there holds the error estimate
+                                    Z b
+                      Q( f ) −            f ( x ) dx 6 ck (b − a)k+1 ν−k k f (k) k L∞ (a,b) ,
+                                      a
+
+with a constant23 ck depending only on k.
+    If f is bounded analytic in the ellipse Eρ with foci at a, b and semiaxes of lengths s > σ
+such that
+                                             r
+                                                s+σ
+                                        ρ=            ,
+                                                s−σ
+then for each quadrature rule Q of order ν with positive weights there holds the error estimate
+
+                                                                            4( b − a ) ρ − ν
+                                          Z b
+                            Q( f ) −                f ( x ) dx 6                             k f k L∞ (Eρ ) .
+                                              a                               1 − ρ −1
+
+    Quadrature rules in two and more dimensions. For the n-dimensional integral
+                                          Z
+                                                        f (t1 , . . . , tn ) dt1 · · · dtn
+                                              [ a,b]n
+
+we consider the product quadrature rule Qn that is induced by an one dimensional
+quadrature rule Q of the form (A.1), namely
+                                                        m
+                             Qn ( f ) =               ∑           w j1 · · · w jn f ( x j1 , . . . , x jn ).                         (A.3)
+                                                  j1 ,...,jn =1
+
+We introduce some further notation for two classes of functions f . First, for f ∈
+C k−1,1 ([ a, b]n ), we define the seminorm
+                                                                  n
+                                                  | f |k = ∑ k∂ik f k L∞ ((a,b)n ) .                                                 (A.4)
+                                                             i =1
+
+Second, if f ∈ C ([ a, b]n ) is sectional analytic—that is, analytic with respect to each
+variable ti while the other variables are fixed in [ a, b]—in the ellipse Eρ (defined in
+Theorem A.2), and if f is uniformly bounded there, we call f to be of class Cρ with
+norm
+                n
+     k f k Cρ = ∑                    max                              k f (t1 , . . . , ti−1 , · , ti+1 , . . . , tn )k L∞ (Eρ ) .   (A.5)
+                                                         n −1
+               i =1 (t1 ,...,ti−1 ,ti+1 ,...,tn )∈[ a,b]
+                                                                                                                   √
+  23 Taking Jackson’s inequality as given in Cheney (1998, p. 147), c                                      k
+                                                                                               k = 2( πe/4) /          2πk will do the job.
+38                                                  F. BORNEMANN
+
+
+By a straightforward reduction argument (Davis and Rabinowitz 1984, p. 361) to the
+quadrature errors of the one-dimensional coordinate sections of f , Theorems A.1
+and A.2 can now be generalized to n dimensions.
+     Theorem A.3. If a sequence of quadrature rules converges for continuous functions, then
+the same holds for the induced n-dimensional product rules.
+     If f ∈ C k−1,1 ([ a, b]n ), then for each one-dimensional quadrature rule Q of order ν > k
+with positive weights there holds the error estimate
+                          Z
+             Qn ( f ) −                  f (t1 , . . . , tn ) dt1 · · · dtn 6 ck (b − a)n+k ν−k | f |k ,
+                              [ a,b]n
+
+with the same constant ck depending only on k as in Theorem A.2.
+    If f ∈ C ([ a, b]n ) is of class Cρ , then for each one-dimensional quadrature rule Q of order
+ν with positive weights there holds the error estimate
+
+                                                                                 4( b − a ) n ρ − ν
+                           Z
+              Qn ( f ) −                  f (t1 , . . . , tn ) dt1 · · · dtn 6                      k f k Cρ .
+                               [ a,b]n                                              1 − ρ −1
+
+    Notes on Gauss–Legendre and Curtis–Clenshaw quadrature. Arguably, the most
+interesting families of quadrature rules, with positive weights, are the Clenshaw–
+Curtis and Gauss-Legendre rules. With m points, the first is of order ν = m, the
+second of order ν = 2m. Thus, Theorems A.1 and A.2 apply. The cost of computing
+the weights and points of Clenshaw–Curtis is O(m log m) using FFT, that of Gauss–
+Legendre is O(m2 ) using the Golub–Welsh algorithm; for details see (Waldvogel 2006)
+and (Trefethen 2008). The latter paper studies in depth the reasons why the Clenshaw–
+Curtis rule, despite having only half the order, performs essentially as well as Gauss–
+Legendre for most integrands. To facilitate reproducibility we offer the Matlab code
+(which is just a minor variation of the code given in the papers mentioned above)
+that has been used in our numerical experiments:
+         function [w,c] = ClenshawCurtis(a,b,m)
+         m = m-1;
+         c = cos((0:m)*pi/m);
+         M = [1:2:m-1]'; l = length(M); n = m-l;
+         v0 = [2./M./(M-2); 1/M(end); zeros(n,1)];
+         v2 = -v0(1:end-1)-v0(end:-1:2);
+         g0 = -ones(m,1); g0(1+l)=g0(1+l)+m; g0(1+n)=g0(1+n)+m;
+         g = g0/(m^2+mod(m,2));
+         w = ifft(v2+g); w(m+1) = w(1);
+         c = ((1-c)/2*a+(1+c)/2*b)';
+         w = ((b-a)*w/2)';
+for Clenshaw–Curtis; and
+         function [w,c] = GaussLegendre(a,b,m)
+         k = 1:m-1; beta = k./sqrt((2*k-1).*(2*k+1));
+         T = diag(beta,-1) + diag(beta,1);
+         [V,L] = eig(T);
+         c = (diag(L)+1)/2; c = (1-c)*a+c*b;
+         w = (b-a)*V(1,:).^2;
+                 ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                                                  39
+
+for Gauss–Legendre, respectively. Note, however, that the code for Gauss–Legendre
+is, unfortunately, suboptimal in requiring O(m3 ) rather than O(m2 ) operations, since
+it establishes the full matrix V of eigenvectors of the Jacobi matrix T instead of
+directly calculating just their first components V (1, :) as in the fully fledged Golub–
+Welsh algorithm. Even then, there may well be more accurate, and more efficient,
+alternatives of computing the points and weights of Gauss–Legendre quadrature, see
+the discussions in Laurie (2001, §2) and Swarztrauber (2002, §4) and the literature
+cited therein.
+    A.2. Determinantal bounds. In Section 6, for a continuous kernel K ∈ C ([ a, b]2 )
+of an integral operator, we need some bounds on the derivatives of the induced
+n-dimensional function
+                                                                n
+                         Kn (t1 , . . . tn ) = det K (t p , tq ) p,q=1 .
+
+To this end, if K ∈ C k−1,1 ([ a, b]2 ) we define the norm
+                                                                            j
+                                           kK kk = max k∂1i ∂2 K k L∞ .                                                         (A.6)
+                                                         i + j6k
+
+     Lemma A.4. If K ∈ C ([ a, b]2 ), then Kn ∈ C ([ a, b]n ) with
+
+                                             kKn k L∞ 6 nn/2 kK knL∞ .                                                          (A.7)
+
+If K ∈ C k−1,1 ([ a, b]2 ), then Kn ∈ C k−1,1 ([ a, b]n ) with the seminorm (defined in (A.4))
+
+                                           |Kn |k 6 2k n(n+2)/2 kK knk .                                                        (A.8)
+
+If K is bounded analytic on Eρ × Eρ (with the ellipse Eρ defined in Theorem A.2), then Kn is
+of class Cρ (defined in (A.5)) and satisfies
+
+                                      kKn kCρ 6 n(n+2)/2 kK knL∞ (Eρ ×Eρ ) .                                                    (A.9)
+
+
+     Proof. Using the multilinearity of the determinant we have
+
+              K ( t1 , s1 )    ···   K ( t1 , s j )   ···          K ( t1 , s n )
+                   ..                     ..                             ..
+                    .                      .                              .
+   ∂k ∂l
+             K ( t i , s1 )    ···   K ( ti , s j )   ···          K ( ti , s n )
+   ∂tik ∂slj
+                    ..                    ..                             ..
+                     .                     .                              .
+              K ( t n , s1 )   ···   K (tn , s j )    ···          K (tn , sn )
+
+                                                  K ( t1 , s1 )         ···          ∂2l K (t1 , s j )      ···    K ( t1 , s n )
+                                                       ..                                   ..                           ..
+                                                        .                                    .                            .
+                                          = ∂1k K (ti , s1 ) · · ·                  ∂1k ∂2l K (ti , s j )   ···   ∂1k K (ti , sn ) ,
+                                                   ..                                        ..                          ..
+                                                    .                                         .                           .
+                                                  K ( t n , s1 )        ···          ∂2l K (tn , s j )      ···    K (tn , sn )
+40                                                F. BORNEMANN
+
+
+which is, by Hadamard’s inequality (Meyer 2000, p. 469),24 bounded by the expression
+(see also Lax (2002, p. 262))
+                                                       n
+                                               j
+                              nn/2   max k∂1i ∂2 K k L∞    .
+                                                 i + j6k + l
+
+Now, with
+
+                                           k − l l K ( t1 , s1 )         ···   K ( t1 , s n )
+                                    k
+                                          k ∂        ∂          ..                     ..
+        ∂kj Kn (t1 , . . . , tn ) = ∑          k − l    l        .                      .
+                                    l =0
+                                          l ∂t       ∂s j
+                                               j
+                                                          K ( t n , s1 )   ···   K (tn , sn ) s =t ,...,s =t
+                                                                                                  1   1   n    n
+
+we thus get
+                        k                            n                            n
+                             k n/2
+      k∂kj Kn k L∞ 6 ∑
+                                               j                               j
+                                n    max k∂1i ∂2 K k L∞    = 2k nn/2 max k∂1i ∂2 K k L∞ .
+                       l =0
+                             l       i + j6k                          i + j6k
+
+This proves the asserted bounds (A.7) and (A.8) with k = 0 and k > 1, respectively.
+The class Cρ bound (A.9) follows analogously to the case k = 0.
+      A.3. Properties of a certain function used in Theorem 6.2. The power series
+                                                         ∞
+                                                            n(n+2)/2 n
+                                           Φ(z) = ∑                 z                                          (A.10)
+                                                       n =1
+                                                               n!
+defines an entire function on C (as the following lemma readily implies).
+     Lemma A.5. Let Ψ be the entire function given by the expression
+                                          √                    z 
+                                            π z2 /4 
+                           Ψ(z) = 1 +         ze      1 + erf        .
+                                           2                    2
+If x > 0, then the series Φ( x ) is enclosed by:25
+                                        √                      √
+                          r
+                              e
+                                 x Ψ( x 2e) 6 Φ( x ) 6 x Ψ( x 2e).
+                             π
+
+      Proof. For x > 0 we have
+                                                           ∞
+                                                              nn/2 n−1
+                                           Φ( x ) = x ∑            x   .
+                                                         n =1
+                                                              Γ(n)
+By Stirling’s formula and monotonicity we get for n > 1
+                                        nn/2
+                        r
+                           e
+                             6               √         6 1;
+                          π    Γ((n + 1)/2) ( 2e )n−1
+in fact, the upper bound is obtained for n = 1 and the lower bound for n → ∞. Thus,
+by observing
+              ∞                          √
+                  Γ((n + 1)/2) n−1          π z2 /4           z 
+              ∑       Γ(n)
+                              z    = 1+
+                                           2
+                                             ze       1 + erf
+                                                                2
+                                                                     = Ψ(z)
+             n =1
+we get the asserted enclosure.
+     24 This inequality, discovered by Hadamard in 1893, was already of fundamental importance to Fred-
+
+holm’s original theory (Fredholm 1900, p. 41).
+                                            √
+   25 Note the sharpness of this enclosure:   e/π = 0.93019 · · · .
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                       41
+
+      Acknowledgements. It is a pleasure to acknowledge that this work has started
+when I attended the programme on “Highly Oscillatory Problems” at the Isaac
+Newton Institute in Cambridge. It was a great opportunity meeting Percy Deift there,
+who introduced me to numerical problems related to random matrix theory (even
+though he was envisioning a general numerical treatment of Painlevé transcendents,
+but not of Fredholm determinants). I am grateful for his advice as well as for
+the communication with Herbert Spohn and Michael Prähofer who directed my
+search for an “open” numerical problem to the two-point correlation functions of
+the Airy and Airy1 processes. I thank Patrik Ferrari who pointed me to the (2005)
+paper of Sasamoto. Given the discovery that Theorem 6.1, which was pivotal to my
+study, is essentially a long forgotten (see my discussion on p. 4) result of Hilbert’s
+1904 work, I experienced much reconciliation—please allow me this very personal
+statement—from reading the poem “East Coker” (1940), in which T. S. Eliot, that
+“radical traditionalist”, described the nature of the human struggle for progress in
+life, art, or science:
+          . . . And so each venture
+          Is a new beginning . . .
+          . . . And what there is to conquer
+          By strength and submission, has already been discovered
+          Once or twice, or several times, by men whom one cannot hope
+          To emulate—but there is no competition—
+          There is only the fight to recover what has been lost
+          And found and lost again and again . . .
+
+                                               REFERENCES
+
+Ablowitz, M. J. and Fokas, A. S.: 2003, Complex variables: introduction and applications, 2nd edn, Cambridge
+            University Press, Cambridge.
+Adler, M. and van Moerbeke, P.: 2005, PDEs for the joint distributions of the Dyson, Airy and sine processes,
+            Ann. Probab. 33, 1326–1361.
+Albeverio, S. and Høegh-Krohn, R.: 1977, Oscillatory integrals and the method of stationary phase in
+            infinitely many dimensions, with applications to the classical limit of quantum mechanics. I,
+            Invent. Math. 40, 59–106.
+Axler, S.: 1995, Down with determinants!, Amer. Math. Monthly 102, 139–154.
+Axler, S.: 1997, Linear algebra done right, 2nd edn, Springer-Verlag, New York.
+Baker, C. T. H.: 1977, The numerical treatment of integral equations, Clarendon Press, Oxford.
+Birkhoff, G. (ed.): 1973, A source book in classical analysis, Harvard University Press, Cambridge.
+Bornemann, F., Ferrari, P. L. and Prähofer, M.: 2008, The Airy1 process is not the limit of the largest
+            eigenvalue in GOE matrix diffusion, arXiv:0806.3410.
+Borodin, A., Ferrari, P. L., Prähofer, M. and Sasamoto, T.: 2007, Fluctuation properties of the TASEP with
+            periodic initial configuration, J. Stat. Phys. 129, 1055–1080.
+Carleman, T.: 1918, Über die Fourierkoeffizienten einer stetigen Function, Acta Math. 41, 377–384.
+Carleman, T.: 1921, Zur Theorie der linearen Integralgleichungen, Math. Zeitschr. 9, 196–217.
+Cheney, E. W.: 1998, Introduction to approximation theory, reprint of the 2nd (1982) edn, AMS Chelsea
+            Publishing, Providence.
+Courant, R. and Hilbert, D.: 1953, Methods of mathematical physics. Vol. I, Interscience Publishers, Inc., New
+            York.
+Davis, P. J. and Rabinowitz, P.: 1984, Methods of numerical integration, 2nd edn, Academic Press, Orlando.
+Deift, P. A.: 1999, Orthogonal polynomials and random matrices: a Riemann-Hilbert approach, American Mathe-
+            matical Society, Providence.
+Deift, P. A., Its, A. R. and Zhou, X.: 1997, A Riemann-Hilbert approach to asymptotic problems arising in
+            the theory of random matrix models, and also in the theory of integrable statistical mechanics,
+            Ann. of Math. 146, 149–235.
+42                                              F. BORNEMANN
+
+
+Deift, P., Its, A. and Krasovsky, I.: 2008, Asymptotics of the Airy-kernel determinant, Comm. Math. Phys.
+             278, 643–678.
+Delves, L. M. and Mohamed, J. L.: 1985, Computational methods for integral equations, Cambridge University
+             Press, Cambridge.
+DeVore, R. A. and Lorentz, G. G.: 1993, Constructive approximation, Springer-Verlag, Berlin.
+Dieng, M.: 2005, Distribution Functions for Edge Eigenvalues in Orthogonal and Symplectic Ensembles: Painlevé
+             Representations, PhD thesis, University of Davis. arXiv:math/0506586v2.
+Dieudonné, J.: 1981, History of functional analysis, North-Holland Publishing Co., Amsterdam.
+Dunford, N. and Schwartz, J. T.: 1963, Linear operators. Part II: Spectral theory, John Wiley & Sons.
+Dyson, F. J.: 1976, Fredholm determinants and inverse scattering problems, Comm. Math. Phys. 47, 171–183.
+Eastham, M.: 1973, The spectral theory of periodic differential equations, Scottish Academic Press, Edinburgh.
+Falloon, P. E., Abbott, P. C. and Wang, J. B.: 2003, Theory and computation of spheroidal wavefunctions, J.
+             Phys. A 36, 5477–5495.
+Fenyő, S. and Stolle, H.-W.: 1982–1984, Theorie und Praxis der linearen Integralgleichungen. Vol. I–IV, Birkhäuser,
+             Basel.
+Fredholm, I.: 1900, Sur une nouvelle méthode pour la résolution du problème de Dirichlet, Öfversigt Kongl.
+             Vetenskaps-Akad. Förhandlingar 57, 39–46.
+Fredholm, I.: 1903, Sur une classe d’équations fonctionnelles, Acta Math. 27, 365–390.
+Fredholm, I.: 1909, Les équations intégrales linéaires, C. R. Congrés des Math. tenu à Stockholm 1909.
+Gaudin, M.: 1961, Sur la loi limite de l’espacement des valeurs propres d’une matrice aléatoire, Nucl. Phys.
+             25, 447–458.
+Gautschi, W.: 2002, Computation of Bessel and Airy functions and of related Gaussian quadrature formulae,
+             BIT 42, 110–118.
+Gohberg, I. C. and Kreı̆n, M. G.: 1969, Introduction to the theory of linear nonselfadjoint operators, American
+             Mathematical Society, Providence.
+Gohberg, I., Goldberg, S. and Kaashoek, M. A.: 1990, Classes of linear operators. Vol. I, Birkhäuser Verlag,
+             Basel.
+Gohberg, I., Goldberg, S. and Krupnik, N.: 2000, Traces and determinants of linear operators, Birkhäuser Verlag,
+             Basel.
+Golub, G. H. and Van Loan, C. F.: 1996, Matrix computations, 3rd edn, Johns Hopkins University Press,
+             Baltimore.
+Greub, W. H.: 1967, Multilinear algebra, Springer-Verlag, New York.
+Grothendieck, A.: 1956, La théorie de Fredholm, Bull. Soc. Math. France 84, 319–384.
+Hackbusch, W.: 1995, Integral equations: Theory and numerical treatment, Birkhäuser Verlag, Basel.
+Hadamard, J.: 1893, Résolution d’une question relative aux dérminants, Bull. Sci. Math. 17, 240–246.
+Hastings, S. P. and McLeod, J. B.: 1980, A boundary value problem associated with the second Painlevé
+             transcendent and the Korteweg-de Vries equation, Arch. Rational Mech. Anal. 73, 31–51.
+Hägg, J.: 2007, Local Gaussian fluctuations in the Airy and discrete PNG processes, arXiv:math/0701880.
+Higham, N. J.: 2002, Accuracy and stability of numerical algorithms, 2nd edn, Society for Industrial and
+             Applied Mathematics, Philadelphia.
+Hilbert, D.: 1904, Grundzüge einer allgemeinen Theorie der linearen Integralgleichungen. (Erste Mitteilung),
+             Nachr. Ges. Wiss. Göttingen 1904, 49–91.
+Hilbert, D.: 1912, Grundzüge einer allgemeinen Theorie der linearen Integralgleichungen, Teubner, Leipzig,
+             Berlin.
+Hille, E. and Tamarkin, J. D.: 1931, On the characteristic values of linear integral equations, Acta Math.
+             57, 1–76.
+Hochstadt, H.: 1973, Integral equations, John Wiley & Sons, New York.
+Jimbo, M., Miwa, T., Môri, Y. and Sato, M.: 1980, Density matrix of an impenetrable Bose gas and the fifth
+             Painlevé transcendent, Phys. D 1, 80–158.
+Johansson, K.: 2000, Shape fluctuations and random matrices, Comm. Math. Phys. 209, 437–476.
+Johansson, K.: 2003, Discrete polynuclear growth and determinantal processes, Comm. Math. Phys. 242, 277–
+             329.
+Jost, R. and Pais, A.: 1951, On the scattering of a particle by a static potential, Physical Rev. 82, 840–851.
+Katz, N. M. and Sarnak, P.: 1999, Random matrices, Frobenius eigenvalues, and monodromy, American Mathe-
+             matical Society, Providence.
+Kline, M.: 1972, Mathematical thought from ancient to modern times, Oxford University Press, New York.
+Knopp, K.: 1964, Theorie and Anwendung der unendlichen Reihen, 5th edn, Springer-Verlag, Berlin.
+Kress, R.: 1999, Linear integral equations, 2nd edn, Springer-Verlag, New York.
+Laurie, D. P.: 2001, Computation of Gauss-type quadrature formulas, J. Comput. Appl. Math. 127, 201–217.
+Lax, P. D.: 2002, Functional analysis, John Wiley & Sons, New York.
+               ON THE NUMERICAL EVALUATION OF FREDHOLM DETERMINANTS                                           43
+
+Mehta, M. L.: 2004, Random matrices, 3rd edn, Elsevier/Academic Press, Amsterdam.
+Meyer, C.: 2000, Matrix analysis and applied linear algebra, Society for Industrial and Applied Mathematics,
+            Philadelphia.
+Moiseiwitsch, B.: 1977, Recent progress in atomic collisions theory, Rep. Prog. Phys. 40, 843–904.
+Nyström, E.: 1930, Über die praktische Auflösung von Integralgleichungen mit Anwendungen auf Rand-
+            wertaufgaben, Acta Math. 54, 185–204.
+Pietsch, A.: 2007, History of Banach spaces and linear operators, Birkhäuser, Boston.
+Plemelj, J.: 1904, Zur Theorie der Fredholmschen Funktionalgleichung, Monatsh. f. Math. 15, 93–128.
+Porter, D. and Stirling, D. S. G.: 1990, Integral equations, Cambridge University Press, Cambridge.
+Prähofer, M. and Spohn, H.: 2002, Scale invariance of the PNG droplet and the Airy process, J. Statist. Phys.
+            108, 1071–1106.
+Prähofer, M. and Spohn, H.: 2004, Exact scaling functions for one-dimensional stationary KPZ growth, J.
+            Statist. Phys. 115, 255–279.
+Prössdorf, S. and Silbermann, B.: 1991, Numerical analysis for integral and related operator equations, Birkhäuser
+            Verlag, Basel.
+Reinhardt, W. P. and Szabo, A.: 1970, Fredholm method. I. A numerical procedure for elastic scattering,
+            Phys. Rev. A 1, 1162–1169.
+Rezende, J.: 1994, Feynman integrals and Fredholm determinants, J. Math. Phys. 35, 4357–4371.
+Riess, R. D. and Johnson, L. W.: 1972, Error estimates for Clenshaw-Curtis quadrature, Proc. 18, 345–353.
+Sasamoto, T.: 2005, Spatial correlations of the 1D KPZ surface on a flat substrate, J. Phys. A 38, L549–L556.
+Simon, B.: 1977, Notes on infinite determinants of Hilbert space operators, Advances in Math. 24, 244–273.
+Simon, B.: 2005, Trace ideals and their applications, 2nd edn, American Mathematical Society, Providence.
+Smithies, F.: 1937, The eigen-values and singular values of integral equations, Proc. London Math. Soc.
+            43, 255–279.
+Smithies, F.: 1958, Integral equations, Cambridge University Press, Cambridge.
+Spohn, H.: 2008, Personal communication.
+Stewart, G. W.: 1998, Matrix algorithms. Vol. I: Basic decompositions, Society for Industrial and Applied
+            Mathematics, Philadelphia.
+Stratton, J. A., Morse, P. M., Chu, L. J., Little, J. D. C. and Corbató, F. J.: 1956, Spheroidal wave functions,
+            including tables of separation constants and coefficients, John Wiley & Sons, New York.
+Swarztrauber, P. N.: 2002, On computing the points and weights for Gauss-Legendre quadrature, SIAM J.
+            Sci. Comput. 24, 945–954.
+Tracy, C. A. and Widom, H.: 1994, Level-spacing distributions and the Airy kernel, Comm. Math. Phys.
+            159, 151–174.
+Tracy, C. A. and Widom, H.: 2000, Universality of the distribution functions of random matrix theory,
+            Integrable systems: from classical to quantum (Montréal, QC, 1999), Vol. 26 of CRM Proc. Lecture
+            Notes, Amer. Math. Soc., Providence, pp. 251–264.
+Trefethen, L. N.: 2008, Is Gauss quadrature better than Clenshaw–Curtis?, SIAM Rev. 50, 67–87.
+Tricomi, F. G.: 1957, Integral equations, Interscience Publishers, Inc., New York.
+Vallée, O. and Soares, M.: 2004, Airy functions and applications to physics, Imperial College Press, London.
+von Koch, H.: 1892, Sur les déterminants infinis et les équations différentielles linéaires, Acta Math.
+            16, 217–295.
+Waldvogel, J.: 2006, Fast construction of the Fejér and Clenshaw-Curtis quadrature rules, BIT 46, 195–202.
+Webster, A. G.: 1927, Partial differential equations of mathematical physics, G. E. Stechert & Co., New York.
+Whittaker, E. T. and Watson, G. N.: 1927, A course of modern analysis, 4th edn, Cambridge University Press,
+            Cambridge.
+Widom, H.: 2004, On asymptotics for the Airy process, J. Statist. Phys. 115, 1129–1134.
+Wilkinson, D.: 1978, Continuum derivation of the Ising model two-point function, Phys. Rev. D 17, 1629–
+            1636.
+

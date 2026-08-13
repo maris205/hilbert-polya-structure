@@ -1,0 +1,102 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: FF-FROB-SUSP-P1-F2-RIEMANN
+source_commit: unavailable-no-git
+evaluation_date: 2026-08-13
+
+source_lock:
+  object: the unchanged FF-FROB-SUSP-P1-F2 flow, evaluated against the completed Riemann-zeta target
+  arithmetic_origin: P1/F2 and its characteristic-two Frobenius
+  clock: deg(x)*log(2), without rescaling or componentwise modification
+  normalization: one primitive circle per finite-field closed point
+  determinant_convention: the unchanged native unweighted primitive-orbit zeta
+  cutoff: theorem-level comparison; finite controls through degree 12
+  precision: exact arithmetic and symbolic proofs
+  allowed_data: frozen finite-field candidate and theorem sources
+  forbidden_data: Riemann zeros, hand-inserted log(p) roofs, von Mangoldt potentials, fitted factors
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the object has genuine arithmetic origin in characteristic two
+  strongest_failure: >-
+    If n*log(2^f)=r*log(p), unique factorization forces p=2; one
+    finite-field clock cannot generate rational-prime support across characteristics.
+  arithmetic_controls:
+    - every variety over the same finite field remains on the same logarithmic lattice
+    - disjoint prime circles reproduce the target only by reading it into the phase space
+    - arbitrary circle compilers reproduce randomized and composite Euler products
+  artifacts:
+    - papers/4-arith-flow/results/clock_intersection_controls.csv
+    - papers/4-arith-flow/notes/proof_audit.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: primitive cycles, circles, repetitions, lengths and completeness are exact
+  strongest_failure: the exact ledger carries finite-field closed points, not rational primes
+  metrics:
+    rational_prime_support: false
+    characteristic_supported: 2
+  artifacts:
+    - papers/4-arith-flow/results/closed_point_ledger.csv
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the native orbit product is an exact analytic determinant for its own target
+  strongest_failure: >-
+    It equals 1/((1-2^(-s))(1-2^(1-s))), not zeta(s) or xi(s), and has a
+    fixed nonzero imaginary period.
+  metrics:
+    target_divisor_match: false
+    target_euler_factors_match: false
+    cutoff_drift: not_applicable_exact_mismatch
+  artifacts:
+    - papers/4-arith-flow/results/imaginary_periodicity_controls.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the native rational continuation is globally explicit
+  strongest_failure: >-
+    The candidate has no Riemann gamma factor, completed functional equation,
+    T-log-T divisor, or same-object rational-prime Weil compression.
+  analytic_structure: exact but incompatible finite-field structure
+  weil_compression: absent for the Riemann target
+  artifacts:
+    - papers/4-arith-flow/notes/proof_audit.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: continuous-time translation is defined
+  strongest_failure: no frozen natural Hilbert/operator lift at Stage 4
+  metrics:
+    fixed_hilbert_space: false
+    natural_quantization: false
+  artifacts:
+    - papers/4-arith-flow/notes/research_protocol.md
+
+adversarial_controls:
+  controls_used:
+    - universal prescribed-circle compiler
+    - tautological prime-circle union
+    - same-cycle-type permutation
+    - fixed-clock support theorem
+  proves_too_much_risk: any prescribed Euler product can be reproduced by disjoint circles
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  The rejection concerns promotion of this fixed finite-field suspension to a
+  rational-prime Riemann candidate. Its native Hasse-Weil identity remains an exact positive control.
+blocking_conditions:
+  - rational-prime support is absent and cannot be reached by the frozen clock
+  - determinant and global analytic structure are incompatible with completed xi
+  - no same-object rational-prime operator bridge
+next_smallest_test: preserve this candidate as a positive control; do not fit or rescale it to rational primes
+round2_clues:
+  - a successful characteristic-zero object must couple residue characteristics before assigning orbit lengths
+route_b_invocation_allowed: false
+

@@ -1,0 +1,149 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: FF-FROB-SUSP-P1-F2
+source_commit: unavailable-no-git
+evaluation_date: 2026-08-13
+
+source_lock:
+  object: >-
+    The constant-roof mapping torus of square Frobenius on the discrete set
+    P1(overline(F2)), with vertical translation flow.
+  arithmetic_origin: closed points and the intrinsic Frobenius endomorphism of P1/F2
+  clock: roof tau=log(2), so the orbit indexed by x has length deg(x)*log(2)=log(N(x))
+  normalization: one primitive suspension circle per closed point; no potential, phase, half-shift, or stability factor
+  determinant_convention: unweighted primitive-orbit zeta, compared with the Artin-Mazur and native Hasse-Weil zeta
+  cutoff: no theorem cutoff; deterministic finite checks through degree 12
+  precision: exact integer and formal-series arithmetic; binary64 only for periodicity/convergence regressions
+  allowed_data: fixed scheme/Frobenius definitions, primary finite-field sources, and generated finite polynomial ledgers
+  forbidden_data: Riemann zeros, fitted scales or shifts, random seeds, network inputs to reproduction, hard-coded rational-prime tables
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Closed points of P1/F2, primitive Frobenius cycles, and primitive
+    suspension circles are canonically indexed by the same objects before any
+    target comparison.
+  strongest_failure: >-
+    The discrete topology on geometric points is a disclosed modeling choice;
+    the bare topological flow does not recover the algebraic scheme from its
+    cycle type.
+  arithmetic_controls:
+    - same-cycle-type permutations retain the bare flow but lose algebraic provenance
+    - arbitrary prescribed circle lengths compile arbitrary Euler products and prove too much
+    - inverse Frobenius reverses cycles without changing the native zeta
+    - the same construction over one fixed field cannot generate other rational-prime clocks
+  artifacts:
+    - papers/4-arith-flow/notes/source_audit.md
+    - papers/4-arith-flow/notes/proof_audit.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The mapping torus is flow-conjugate to the disjoint union over closed
+    points x of circles R/(deg(x)log(2))Z, with complete primitive and
+    repetition ledgers and local finiteness by length.
+  strongest_failure: >-
+    The flow is a countable disjoint union of neutral circles, with no
+    transverse hyperbolicity, mixing, monodromy, or orbit interaction.
+  metrics:
+    finite_degree_cutoff: 12
+    projective_closed_points_through_cutoff: 748
+    monic_polynomials_examined: 8190
+    affine_irreducibles_found: 747
+    invariant_tests_passed: 13
+  artifacts:
+    - papers/4-arith-flow/results/closed_point_ledger.csv
+    - papers/4-arith-flow/results/repetition_weight_ledger.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The Artin-Mazur, primitive-orbit, closed-point Hasse-Weil, and rational
+    expressions agree exactly:
+    Z(P1/F2,2^(-s))=1/((1-2^(-s))(1-2^(1-s))).
+  strongest_failure: >-
+    This is an exact native finite-field determinant; no transfer-operator or
+    spectral determinant of the circle-flow Koopman generator is inferred.
+  metrics:
+    zero_error_train: not_applicable_exact_identity
+    zero_error_validation: not_applicable_exact_identity
+    zero_error_test: not_applicable_exact_identity
+    extra_zero_count: not_applicable_native_rational_identity
+    missing_zero_count: not_applicable_native_rational_identity
+    root_count_discrepancy: not_applicable_native_rational_identity
+    cutoff_drift: none_exact_coefficients
+    precision_drift: none_exact_coefficients
+    control_margin: exact_identity_but_universal_compiler_control_rejects_target_encoding
+  artifacts:
+    - papers/4-arith-flow/results/zeta_formal_series_identity.csv
+    - papers/4-arith-flow/notes/proof_audit.md
+
+a3:
+  verdict: A3_CONTROLLED_CONTINUATION
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The rational expression gives global meromorphic continuation and the
+    native functional relation; Deligne's cohomological determinant explains
+    the finite-field analytic structure.
+  strongest_failure: >-
+    It has imaginary period 2*pi/log(2) and two pole lattices, not the
+    completed-Riemann analytic structure or a rational-prime Weil compression.
+  analytic_structure: exact native finite-field continuation and functional relation
+  weil_compression: native finite-dimensional Frobenius determinant only; no rational-prime Weil form
+  metrics:
+    absolute_convergence_abscissa: 1
+    imaginary_period: 2*pi/log(2)
+    pole_real_parts:
+      - 0
+      - 1
+  artifacts:
+    - papers/4-arith-flow/results/imaginary_periodicity_controls.csv
+    - papers/4-arith-flow/notes/proof_audit.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the construction is a genuine continuous-time topological flow
+  strongest_failure: >-
+    Stage 4 freezes no Hilbert space, operator domain, symplectic/contact host,
+    or same-object quantization; the cohomological determinant is not a
+    circle-flow transfer determinant.
+  metrics:
+    fixed_hilbert_space: false
+    natural_quantization: false
+  artifacts:
+    - papers/4-arith-flow/notes/source_audit.md
+
+adversarial_controls:
+  controls_used:
+    - same-cycle-type non-arithmetic permutation
+    - inverse Frobenius
+    - fixed-clock intersection with rational-prime powers
+    - arbitrary circle Euler-product compiler
+    - tautological disjoint prime circles
+  proves_too_much_risk: >-
+    Disjoint circles compile any locally finite Euler product, so exact A1--A2
+    algebra has content only when the arithmetic parent is independently fixed.
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_SUCCESS_ROUTE_B_NOT_READY
+claim_boundary: >-
+  This status applies only to the native Hasse-Weil positive control. The
+  exact finite-field orbit determinant is not a Riemann-zeta candidate and is
+  not evidence for a Hilbert-Polya operator.
+blocking_conditions:
+  - no coupled phase space across distinct residue characteristics
+  - no same-flow operator trace or transfer determinant
+  - lattice-periodic native divisor
+  - no rational-prime or archimedean analytic ledger
+next_smallest_test: >-
+  Construct and audit the natural Koopman unitary lift, including its complete
+  domain and exact spectral type, without changing the clock or adding a target-derived coupling.
+round2_clues:
+  - the native cohomological Frobenius determinant is a positive same-parent trace benchmark
+  - a useful operator-ownership audit must distinguish Koopman and cohomological actions
+route_b_invocation_allowed: false
+

@@ -1,0 +1,28 @@
+\begin{tikzpicture}[
+  node distance=7mm and 8mm,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,
+              text width=0.185\textwidth,minimum height=12mm,font=\small},
+  source/.style={box,draw=FlowBlue,fill=FlowBlue!7},
+  op/.style={box,draw=FlowTeal,fill=FlowTeal!8},
+  result/.style={box,draw=FlowOrange!90!black,fill=FlowOrange!10},
+  fail/.style={box,draw=FlowRed,fill=FlowRed!8},
+  arr/.style={-{Latex[length=2mm]},thick},
+  note/.style={font=\scriptsize,align=center,text width=0.19\textwidth}
+]
+\node[source] (degrees) {closed points in every degree\\$a_d>0$ for all $d\geq1$};
+\node[op,right=of degrees] (circles) {Frobenius circles\\$C_x=\R/(d_x\log2)\Z$};
+\node[op,right=of circles] (fourier) {periodic generator\\$-i\,d/du$ on $C_x$};
+\node[result,right=of fourier] (rational) {dense point spectrum\\$\frac{2\pi}{\log2}\Q$\\infinite multiplicity};
+\node[fail,below=12mm of rational] (b3) {$\sigma=\sigma_{\rm ess}=\R$\\no compact resolvent\\\texttt{B3\_FAIL}};
+
+\draw[arr] (degrees) -- (circles);
+\draw[arr] (circles) -- (fourier);
+\draw[arr] (fourier) -- (rational);
+\draw[arr] (rational) -- (b3);
+
+\node[note,below=12mm of circles] (weights) {Every family $0<w_x<\infty$ is intertwined by\\$W_wf=(\sqrt{w_x}f_x)_x$.};
+\draw[arr,dashed,FlowTeal] (weights) -- (circles);
+
+\node[note,below=12mm of fourier] (ledger) {The orbit product and the \(\ell\)-adic Frobenius determinant remain separate operator ledgers.};
+\draw[arr,dashed,FlowRed] (ledger) -- (b3.west);
+\end{tikzpicture}
