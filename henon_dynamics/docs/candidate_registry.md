@@ -1122,3 +1122,12 @@ The exact repetition characters have no nonzero common virtual kernel, and
 every surviving local channel contributes zeros or poles converging to the
 interior point \(s=1/2\).  Its tuple is **(A1_WEAK, A2_FAIL, A3_FAIL,
 A4_FORMAL_HINT)**.  A conductor-derived damping is the next open gate.
+## HCS-C40 closure (2026-08-13)
+
+Candidate **HCS-C40** supplies a genuine trace-class prime-block determinant
+for \(\sigma>1\), but is noncanonical as a H\'enon/Kummer construction; see
+[`../henon_kummer_schatten_clock_obstruction/`](../henon_kummer_schatten_clock_obstruction/).
+The exact criterion is \(T_\sigma\in\mathcal S_q\) iff \(\sigma q>1\).
+The good-prime Artin conductor exponent is zero, so the required damping is
+an external second clock.  The tuple is **(A1_WEAK,
+A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FORMAL_HINT)**.
