@@ -1152,3 +1152,28 @@ degree-two Tate factor.  Its tuple is **(A1_WEAK, A2_FAIL,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)**.  The finite cubic
 cohomology branch is scope-exhausted; broader infinite or non-Euler objects
 are not classified.
+
+## HCS-C43 entropy--von Mangoldt bridge (2026-08-13)
+
+Candidate **HCS-C43** returns to the autonomous all-period H\'enon survivor;
+see [`../henon_entropy_von_mangoldt_bridge/`](../henon_entropy_von_mangoldt_bridge/).
+For its exact four-state adjacency matrix, the marked fixed count is
+
+\[
+N_n=\varphi^n+(-\varphi^{-1})^n+i^n+(-i)^n.
+\]
+
+M\"obius inversion and the prime number theorem prove, with
+\(X_n=\varphi^n\),
+
+\[
+E_n/\vartheta(X_n)\to1,
+\qquad
+P_n/\pi(X_n)\to\log\varphi.
+\]
+
+This is a positive, source-native entropy/mass bridge with no fitted scale.
+It is not an orbit--prime bijection and constructs no arithmetic determinant.
+The tuple is **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  The next gate is the
+exact prime-power amplitude supplied by one instability Euler factor.

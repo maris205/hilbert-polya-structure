@@ -27,6 +27,7 @@ henon_kummer_character_divisor_obstruction - C39 complete - Every nonzero virtua
 henon_kummer_schatten_clock_obstruction - C40 complete - Prime damping has a sharp Schatten threshold but introduces a noncanonical second clock absent from Kummer conductor data.
 henon_cubic_cm_frobenius_bridge - C41 complete - The cubic channel admits an intrinsic j=0 CM elliptic Frobenius completion, but its L-function is not a Henon/Riemann determinant.
 henon_cm_three_prime_supercancellation_obstruction - C42 complete - Three local primes force every finite Tate-plus-CM Riemann match to delete the cubic H1 factor.
+henon_entropy_von_mangoldt_bridge - C43 complete - The intrinsic H6 entropy clock makes exact-period marked chronology asymptotic to cumulative von Mangoldt mass.
 
 ## Entry points
 
