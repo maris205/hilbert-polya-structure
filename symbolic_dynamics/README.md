@@ -19,6 +19,11 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [05-intrinsic-symbolic-grading-and-duality](papers/05-intrinsic-symbolic-grading-and-duality/README.md) | [PDF](papers/05-intrinsic-symbolic-grading-and-duality/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/05-intrinsic-symbolic-grading-and-duality/) | tensor-divisor homology 内生给出 $\mu(n)$ 与 odd atom degree，因此 exterior supertrace 为 $1/\zeta$、odd Berezinian 为 $\zeta$，解决 A2 determinant orientation。honest Koszul resolution 却消去到 vacuum；reversal 只给 $s\mapsto s$，group inversion 只给 $s\mapsto-s$；首个临界带 $\det_3$ 虽对称却 zero-free 且删除 $r=1,2$。 | **GO A2 / STOP A3（当阶段未新编号）** |
 | [06-binary-parry-archimedean-factor](papers/06-binary-parry-archimedean-factor/README.md) | [PDF](papers/06-binary-parry-archimedean-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/06-binary-parry-archimedean-factor/) | 唯一最小 tensor atom $F_2$ 的 Parry 核把 Euler 与 Gaussian 通道统一到 $\operatorname{tr}H(z)^r=(\cosh z)^r$：$z=0$ 保留完整 prime-power ledger，扩散尺度给自对偶 Gaussian，其 Mellin 变换为 $\pi^{-s/2}\Gamma(s/2)$。这形成同源 Mellin–Fredholm 分解；但任意单侧 phase chiral ansatz 都沿临界线 gauge-equivalent，仍没有单一 completed determinant。 | **GO A3 / STOP GLOBAL COMPLETION / SD-C08** |
 | [07-entropy-oriented-chiral-shift](papers/07-entropy-oriented-chiral-shift/README.md) | [PDF](papers/07-entropy-oriented-chiral-shift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/07-entropy-oriented-chiral-shift/) | 以 tensor-prime entropy 次序定义只向前的 successor coupling；其非对易 transfer 保留所有 $p^r$ traces 与 Euler determinant，同时 endpoint-symmetric chiral double 在临界线上产生严格、非 gauge 的谱运动和可解的两原子 crossings。运动位于 trace-invisible triangular radical，且任意 forward DAG 都能复制，尚未让同一个 determinant 的算术 divisor 运动。 | **GO A3 CHIRAL MOTION / STOP UNIFIED DIVISOR / SD-C09** |
+| [08-positive-cone-recurrent-trace](papers/08-positive-cone-recurrent-trace/README.md) | [PDF](papers/08-positive-cone-recurrent-trace/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/08-positive-cone-recurrent-trace/) | 在强连通的 tensor-prime base 上，directed-positive cocycle 用群迹精确消去全部 mixed closed words，使 recurrent base 仍给出 $1/\zeta$ 的局部解析 $\tau$-determinant；但 adjoint/chiral 反射会在二阶立即恢复 $gg^{-1}$ backtracking，而 $\det_3$ 只能通过删掉这一发散项才存在。 | **GO RECURRENT $\tau$-EULER / STOP UNIFIED DIVISOR / SD-C10** |
+| [09-holomorphic-reflection-double](papers/09-holomorphic-reflection-double/README.md) | [PDF](papers/09-holomorphic-reflection-double/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/09-holomorphic-reflection-double/) | 不取伴随的全纯反射 double 在 $1/3<\Re s<2/3$ 上有精确 $s\leftrightarrow1-s$ 对称，但 identity-visible 闭词强制 $p^{-s}p^{-(1-s)}=p^{-1}$，故整个 $\det_3$ 沿竖直方向完全不动；任何可见运动都需要 $p\ne q$ 的 mixed pairing 并破坏 Euler ledger。 | **REFLECTION RIGIDITY / STOP VERTICAL DIVISOR / SD-C11** |
+| [10-entropy-paired-relative-determinant](papers/10-entropy-paired-relative-determinant/README.md) | [PDF](papers/10-entropy-paired-relative-determinant/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/10-entropy-paired-relative-determinant/) | 相邻 entropy-rank 原子的 odd/even 配对使相对 transfer 对所有 $\Re s>0$ 都是 trace class，产生反射对称且可运动的相对行列式；但它是 zero-free 的 alternating Euler product，用符号帐本替换了目标正权 prime-power ledger，并被任意递增库存复制。 | **ROUTE-A REJECTED / PROVES TOO MUCH / SD-C12** |
+| [11-unitary-fiber-moment-rigidity](papers/11-unitary-fiber-moment-rigidity/README.md) | [PDF](papers/11-unitary-fiber-moment-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/11-unitary-fiber-moment-rigidity/) | 对有限维 unitary/Bloch fiber，faithful positive normalized trace 中 $\tau(U)=1$ 已强制 $U=I$；非忠实状态或 graded 复制可隐藏谱运动，但 ordinary determinant 会看见它，而 Berezinian 又将它完全消去，recurrent finite-path 构造则总在某个重复阶数泄漏。 | **POSITIVE-MOMENT RIGIDITY / ROUTE-A REJECTED / SD-C13** |
+| [12-fourier-null-haar-fiber](papers/12-fourier-null-haar-fiber/README.md) | [PDF](papers/12-fourier-null-haar-fiber/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/12-fourier-null-haar-fiber/) | 所有正次 Fourier moments 都等于 $1$ 的有限正圆周测度唯一形如 $\delta_1+c\,m_{\rm Haar}$；这个无限维 diffuse escape 保留 Euler ledger，却被原标量全纯 trace-log determinant 完全消去。归一化、有限近似、selfadjointization 或 inverse coupling 都会分别破坏 ledger、迟发泄漏或产生 balanced mixed words。 | **HAAR ESCAPE / DETERMINANT INVISIBILITY / SD-C14** |
 
 ### 论文 1 的候选分离结论
 
@@ -188,10 +193,28 @@ shuffled/composite/random inventories 都可保留全阶 triangular ledger 并�
 moving chiral $\det_3$ 仍是两个解析对象。故阶段结论为
 **GO_A3_CHIRAL_MOTION / STOP_UNIFIED_DIVISOR**，Route B 继续锁定。
 
-下一步仍只在 Symbolic Dynamics 内推进：测试带 canonical free-group trace 的
-recurrent symbolic extension。目标是让 mixed positive cycles 在 trace 中内生消失，
-同时检验 self-adjointization 是否因 $gg^{-1}$ backtracking 重新产生正的 mixed mass；
-若它仍只把耦合藏进 determinant-invisible sector，就形成下一条 theorem stop。
+### 论文 8–12：recurrent mixing 的三重两难
+
+第二批五篇把 Paper 07 的“trace-invisible motion”逐步压缩成一个更明确的
+Symbolic-Dynamics 障碍：
+
+- conical cocycle 或 forward radical 可以让 recurrent/mixed grammar 保留精确 Euler
+  ledger，但它们的运动被目标 holomorphic determinant 屏蔽；
+- adjoint、inverse labels 或任何真正可见的 recurrent return 会重新产生
+  $gg^{-1}$ / balanced mixed words，立即污染 prime-power ledger；
+- $s\leftrightarrow1-s$ 反射、relative pairing 或有限 unitary fibers 可以制造对称、
+  运动或延迟泄漏，但不能同时保留 all-positive ledger 和可见 divisor。
+
+当前最强的正面结论仍是 SD-C08/09/10 累积的 A0–A3 局部结构：同一
+tensor-prime 源已内生给出 Euler ledger、Gamma shadow、$1/2$ center、反射对称
+和非 gauge 谱运动；尚缺的只是一个**同一解析不变量**，能让运动 sector
+真正改变 Euler divisor，又不引入 mixed composite orbits。
+
+下一批仍只在 Symbolic Dynamics 内推进：不再先对 Haar sector 做标量平均，
+而是冻结 character-resolved / $L(\mathbb Z)$-valued symbolic determinant。其零 Fourier
+模必须保留精确 Euler ledger，非零模必须产生内生、prime-selective 的横向响应，
+且这个响应必须在 composite/random controls 上消失；否则继续按
+`PROVES_TOO_MUCH` 停止。
 
 ## 目录
 
@@ -199,7 +222,7 @@ recurrent symbolic extension。目标是让 mixed positive cycles 在 trace 中�
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [七篇论文](papers/)
+- [十二篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
