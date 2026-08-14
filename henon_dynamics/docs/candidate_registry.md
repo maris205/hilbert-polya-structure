@@ -1873,3 +1873,30 @@ The next theorem is the stable-tail asymptotic of the whole sequence
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  No full Galois-weighted determinant, rational-prime
 trace, operator or Route-B promotion is claimed.
+
+## HCS-P58 physical-tail/Galois-scale obstruction (2026-08-14)
+
+Candidate **HCS-P58** tests the stable-tail route named by P57; see the
+[HCS-P58 project](../henon_physical_tail_galois_parity_obstruction/).
+Reflection reduction gives irreducible totally real trace fields of degrees
+12 and 6 for the vertex--vertex and edge--edge period-eight closures.  The
+period-nine vertex--edge closure gives one irreducible totally real degree-28
+field whose extreme real embeddings are the physical `A9` and `B9` cycles.
+
+Exact integer products certify
+
+\[
+\Delta_6<0<\Delta_7.
+\]
+
+The negative-fixed-point branch is exponentially localized, but it controls
+one physical embedding.  Galois excess sums every nonphysical trace
+embedding.  P58 therefore proves an interface obstruction: fixed-point
+linearization alone cannot yield the ladder asymptotics.  The next theorem
+must count and control the complete primitive reflection ensemble, including
+parity type, imprimitive factors and reflection multiplicity.
+
+Route A remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical subsystem
+only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  No eventual sign law, unrestricted Hölder no-go,
+full Galois determinant, arithmetic trace or operator is claimed.
