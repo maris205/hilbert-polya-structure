@@ -271,6 +271,12 @@ The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P50`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
 strings, while P48--P50 were born namespaced.
 
+## HCS-C51 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O92 | One factorwise standard pure-motive completion of the normalized cohomological Hénon moments at the frozen prime clock | proved weight--clock and scoped direct-packet obstruction | For the exact tower \(u=ns+j\), \(j\ge1\), a pure weight-\(w\) factor has pulled-back center \(((w+1)/2-j)/n\).  The leading odd centers are zero, the leading even centers are \(-1/4,-1/6,-1/8\), and later odd centers are \(-(j-1)/n\).  Consistent Tate relabeling changes weight and argument together and leaves every center fixed.  Moreover, a semisimple direct \(K\)-packet retaining the \(E_n/O_n\) decomposition and realizing the factorwise exponent \(2/n\) would have nonintegral weightwise ranks at \(n=3,4\). | Stops a common factorwise standard pure-motive center and the stated direct source-native trace-preserving packet.  It does not exclude restriction of scalars, Galois-orbit counterpackets, nonfactorwise cancellations, a regularized infinite Gamma product with separately proved spectral-zeta continuation and branch data, or the inherited normalized-semifinite determinant.  Center zero itself is not an RH obstruction. | ../henon_mu3_weight_clock_bifurcation/THEOREM_PACKAGE.md |
+
 ## HCS-P44 additions (pressure-lane registry alias)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |

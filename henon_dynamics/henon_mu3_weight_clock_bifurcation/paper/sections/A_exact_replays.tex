@@ -1,0 +1,71 @@
+\section{Finite exact replay formulas}\label{app:replays}
+
+This appendix records the finite algebra required by the release checker.
+It does not replace the external geometric theorems cited in the text.
+
+\subsection{Rank controls}
+
+For a smooth family member, the exact rank formulas are
+\[
+\begin{array}{c|ccc}
+n&b^{\mathrm{prim}}(S_n)&b^{\mathrm{mid}}(X_n)&
+\rank(E_n\oplus O_n)\\ \hline
+2&6&8&15\\
+3&22&40&63\\
+4&86&168&255.
+\end{array}
+\]
+The general identities
+\[
+ b^{\mathrm{prim}}(S_n)=\frac{4^n+2}{3},\qquad
+ b^{\mathrm{mid}}(X_n)=\frac{2(4^n-4)}{3}
+\]
+may be checked by finite polynomial arithmetic.  Symbolic controls for
+\(n>4\) certify the formula conditional on smoothness; they do not certify
+source smoothness.
+
+\subsection{Center controls}
+
+With \(j\ge1\),
+\[
+ s_{n,j}(w)=\frac{(w+1)/2-j}{n}.
+\]
+The leading center spectrum is exactly
+\[
+ \left\{-\frac14,-\frac16,-\frac18,0\right\}.
+\]
+The mutation \(j=0\) changes the source denominator expansion and must be
+rejected.  The consistent twist mutation
+\[
+ (w,j)\mapsto(w-2k,j-k)
+\]
+must leave every center unchanged, while a fixed-clock half-weight mutation
+must change the local coefficient and be rejected.
+
+\subsection{Hodge control}
+
+Truncate
+\[
+ Q_y(x)=(1+y)+\frac{1-y}{2}x+\frac{1+y}{12}x^2
+ -\frac{1+y}{720}x^4+O(x^6)
+\]
+at degree five and evaluate
+\[
+ 6[H^5]\frac{Q_y(H)^8}{(1+y)Q_y(2H)Q_y(3H)}.
+\]
+The exact output is
+\[
+ 1-82y^2+82y^3-y^5.
+\]
+Comparing with the weak-Lefschetz template recovers
+\[
+ h^{4,1}=1,\qquad h^{3,2}=83.
+\]
+
+\subsection{Checker scope}
+
+The independent checker is required to fail closed on altered trace signs,
+rank formulas, tower indexing, center values, Tate shifts, fractional-root
+scope, Hodge coefficients, unknown schema keys, and overclaim fields.
+It does not rederive Deligne purity, weak Lefschetz, the modularity theorem,
+or an \(n=3,4\) Hasse--Weil functional equation.

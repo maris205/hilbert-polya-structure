@@ -1292,6 +1292,42 @@ Hilbert--Pólya generator is obtained.  The tuple remains
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 **ROUTE_A_EXPLORATORY**.
 
+## HCS-C51 weight--clock bifurcation (2026-08-14)
+
+Candidate **HCS-C51** asks whether the cohomological moments already
+isolated in C48--C50 admit one source-native archimedean completion without
+changing the rational-prime clock; see
+[`../henon_mu3_weight_clock_bifurcation/`](../henon_mu3_weight_clock_bifurcation/).
+At every good split prime, the normalized \(n\)-th trace for
+\(n=2,3,4\) is minus twice the sum of the traces of a pure weight-zero
+packet \(E_n\) and a pure weight-one packet \(O_n\).  Their ranks are respectively
+\((7,8)\), \((23,40)\), and \((87,168)\), with conditional smooth-family
+total rank \(4^n-1\).  The frozen normalization gives the exact extraction
+
+\[
+ F_n(s)=\exp\!\left(\frac2n\operatorname{Log}_0
+ L_K^{(S)}(E_n\oplus O_n,ns+1)\right)H_{n,S}(s),
+ \qquad \Re s>\frac1{2n},
+\]
+
+where \(H_{n,S}\) is holomorphic and nonzero on \(\Re s>0\).  The
+denominator tower \(u=ns+j\), \(j\ge1\), maps a pure weight-\(w\) factor
+to center \(((w+1)/2-j)/n\).  Thus only the leading odd rail has common
+center zero; the leading even centers are \(-1/4,-1/6,-1/8\), and the
+higher odd centers split again.  The mismatch is invariant under
+consistent Tate relabeling.  A semisimple direct source-native
+\(K\)-compatible packet that retains the \(E_n/O_n\) decomposition and
+the split-prime trace is also obstructed at \(n=3,4\) by nonintegral
+weightwise ranks.  Restriction of scalars, Galois-orbit counterpackets,
+nonfactorwise completions, and the inherited normalized-semifinite
+determinant are not excluded.  The analytic domain remains the C50 domain
+\(\Re s>1/5\); no full Hénon functional equation is claimed.  The tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C52 must construct or obstruct a
+\(K\)-rational algebraic projector separating the rank-two extreme Hodge
+piece of \(O_4\) from its rank-166 level-one piece.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy
