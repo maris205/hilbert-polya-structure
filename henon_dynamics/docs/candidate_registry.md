@@ -1962,3 +1962,35 @@ Hénon extension and its symmetry-line intersection.  Route A remains
 **ROUTE_A_EXPLORATORY** and Route B is not authorized.  The next theorem is
 an all-period transversality/intersection-multiplicity criterion, first on
 the certified physical survivor and then for the ambient closure roots.
+
+## HCS-P61 survivor reflection transversality (2026-08-14)
+
+Candidate **HCS-P61** resolves P60's effectivity question on the certified
+physical survivor; see the
+[HCS-P61 project](../henon_survivor_reflection_transversality/).  For odd
+`n=2m+1`, the pulled-back reversor
+
+\[
+K_m=H^{-(m+1)}RH^{m+1}
+\]
+
+satisfies `H^n=J K_m`.  If the mixed-axis root were multiple, the fixed
+curves of `J` and `K_m` would share a tangent, forcing multiplier `+1` for
+`DH^n`.  Uniform hyperbolicity of the frozen H6 survivor excludes this.
+Every primitive physical root is therefore transverse and simple.
+
+Odd reflection-axis uniqueness identifies the roots bijectively with P59's
+primitive reversible necklaces:
+
+\[
+P_n=\sum_{d\mid n}\mu(n/d)F_{(d+3)/2}.
+\]
+
+Each contributes coefficient `+1` to P60's formal divisor.  Nevertheless,
+`P_n/D_n=Theta((varphi/2)^(n/2))`, so physical incidence is exponentially
+sparse in formal degree.  Exact rational isolators through period 11 and an
+independent Cartesian checker reproduce all physical sign words.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized.  The
+next theorem is ambient: decide nonvanishing/factorization of
+`Res_X(F_n,F_n')` without borrowing survivor hyperbolicity.
