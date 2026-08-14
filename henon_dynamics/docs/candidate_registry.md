@@ -1328,6 +1328,40 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 \(K\)-rational algebraic projector separating the rank-two extreme Hodge
 piece of \(O_4\) from its rank-166 level-one piece.
 
+## HCS-C52 dihedral middle Chow projector (2026-08-14)
+
+Candidate **HCS-C52** answers the C51 projector gate for the explicit
+fourth-moment fivefold; see
+[`../henon_mu3_d12_calabi_yau_core_projector/`](../henon_mu3_d12_calabi_yau_core_projector/).
+Its complete projective monomial source stabilizer is
+
+\[
+G_{\rm mon}\cong\operatorname{Dih}(C_{12}),
+\qquad |G_{\rm mon}|=24.
+\]
+
+After removing the six ambient Tate projectors, the Reynolds graph average
+gives two \(K=\mathbb Q(\zeta_3)\)-rational middle Chow projectors.  Their
+ranks are \(10\) and \(158\).  The first has untwisted Hodge ledger
+\((1,4,4,1)\) across \(H^{4,1},H^{3,2},H^{2,3},H^{1,4}\), so it becomes
+Calabi--Yau-threefold Hodge type after one Tate twist.  The second becomes
+pure level one, with multiplicities \((79,79)\), after the C51 twist by
+two.  The same algebraic correspondences act in every Weil realization;
+no strict compatible local-polynomial system is claimed.
+
+Exact Cayley-ring character theory shows that the extreme line and four
+middle copies are all trivial-isotypic.  Therefore every idempotent in the
+rational graph algebra retaining the extreme line retains the full rank-10
+block.  This refutes the desired rank-two projector only inside
+\(\mathbb Q[G_{\rm mon}]\); correspondences in the full Chow ring remain
+open.  No local Frobenius polynomial, automorphy, functional equation, new
+Euler half-plane, Riemann divisor, or self-adjoint generator is obtained.
+The tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C53 must compute exact Frobenius polynomials of
+the rank-10 core and either prove an irreducibility/commutant obstruction
+or construct a correspondence beyond the graph algebra.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy
