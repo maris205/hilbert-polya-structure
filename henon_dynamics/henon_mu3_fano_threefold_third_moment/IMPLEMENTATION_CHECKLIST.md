@@ -12,5 +12,5 @@
 - [x] Chevalley--Warning divisibility separated from empirical patterns.
 - [x] \(\Re s>1/4\) and \(\tau\)-Det8 derivations written.
 - [x] Producer/checker, results, and 55-test mutation suite frozen.
-- [x] Paper and PDF built; Route-A provenance backfill and final manifest
-  synchronization remain release mechanics.
+- [x] Paper and PDF built; Route-A provenance backfilled to the implementation
+  commit; final manifest and frozen runner synchronized.

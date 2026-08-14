@@ -15,4 +15,4 @@
 | \(c_{p,3}=O(p^{-1/2})\) | PROVED modulo finite fibres | exact formula plus Deligne bound |
 | Euler germ on \(\Re s>1/4\) | PROVED | finite-prime and tail majorants replay |
 | \(\tau\)-Det8 identity | INHERITED + UPGRADED | seven counterterms and \(L^8\) replay |
-| PDF / Route-A / manifest | RELEASE CANDIDATE | final provenance backfill and frozen runner |
+| PDF / Route-A / manifest | FROZEN | implementation SHA backfilled; final frozen runner passes |
