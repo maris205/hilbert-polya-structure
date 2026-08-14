@@ -263,9 +263,9 @@ Fermat-fourfold/Fano-threefold trace cancellation and moves the Euler and
 eighth-order determinant domain to \(\Re s>1/4\). These are retained positive
 structures rather than added to the obstruction list. The first unresolved
 uniform-moment wall is now the fourth chronological moment.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P49`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P50`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P49 were born namespaced.
+strings, while P48--P50 were born namespaced.
 
 ## HCS-P44 additions (pressure-lane registry alias)
 
@@ -296,3 +296,9 @@ strings, while P48--P49 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O89 | Full multiplier-field norm scalarization of H6 cyclic determinant and primitive cyclotomic packets | proved reciprocal square-norm obstruction | In the multiplier field, $(\det(I-M_\gamma^r))\mathcal O_K=(1-\lambda_\gamma^r)^2$ and its norm is the square of the minimal trace-field norm. For every $n>2$, $\lambda_\gamma^{-\varphi(n)/2}\Phi_n(\lambda_\gamma)$ is an integer of the fixed trace field, so the full primitive norm is also a square. | Stops only promotion of the doubled full-field norm to a rational prime. The minimal trace-field Lehmer--Pierce sequence and principal ideal packets survive; the period-four sequence has eventual primitive rational divisors. No all-orbit packet trace is proved. | ../henon_cyclic_resultant_packet_obstruction/README.md |
+
+## HCS-P50 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O90 | Untagged rational-prime pushforward of signed H6 trace-field packet divisors | proved finite-source noninjectivity obstruction | The exact period \(1,3,4\), \(3\le n\le20\) tagged group has 125 orbit/index/prime-ideal atoms over 95 rational primes, so the residue-degree norm pushforward has free kernel rank 30. At \(p=109,n=11\), three distinct effective degree-one atoms map to the same \([109]\); at \(p=29\), the same rational prime carries certified multiplier orders \(7,14,15\). | Stops only a lossless source-native identification with bare rational primes. It does not rule out derived weighted scalar statistics, and it makes no asymptotic collision claim. The tagged finite ledger survives; pressure-weighted all-orbit convergence, von Mangoldt weighting, continuation, and an operator remain open. | ../henon_tagged_prime_ideal_packet_assembly/README.md |
