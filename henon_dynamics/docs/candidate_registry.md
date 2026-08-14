@@ -1368,3 +1368,32 @@ label into a rational prime. The tuple for this termwise lane is
 **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with
 overall **ROUTE_A_REJECTED**. The HCS-P45 dynamical prime-orbit counting theorem
 and collective packet/trace routes remain separate open objects.
+
+## HCS-P49 cyclic-resultant packet trilemma (2026-08-14)
+
+Candidate **HCS-P49** tests the first collective survivor from HCS-P48; see
+the [HCS-P49 project](../henon_cyclic_resultant_packet_obstruction/).  For a
+signed reciprocal multiplier $\lambda$ and its fixed trace field $K^+$, the
+principal packets
+
+\[
+\mathfrak A_r=(1-\lambda^r),
+\qquad
+\mathfrak C_n=(\Phi_n(\lambda))
+\]
+
+are canonical under inversion and obey
+$\mathfrak A_r=\prod_{n\mid r}\mathfrak C_n$.  The full multiplier-field
+norm of the cyclic determinant is a square.  For every $n>2$, the full
+primitive cyclotomic norm is also a square because
+$\lambda^{-\varphi(n)/2}\Phi_n(\lambda)$ lies in $\mathcal O_{K^+}$.
+This stops full-field norm scalarization as a rational-prime label.
+
+The minimal $K^+$-norm and principal ideals survive.  Exact signed period
+$1,3,4$ controls verify 36 resultant rows and show both prime and composite
+half norms; all three cyclic sequences fail the one-fixed-label power law.
+Flatters' quadratic theorem gives a primitive rational divisor in every
+period-four term beyond index 12.  No all-orbit packet trace, continuation,
+or operator follows.  The collective lane has tuple **(A1_WEAK, A2_FAIL,
+A3_FAIL, A4_FORMAL_HINT)** and overall **ROUTE_A_EXPLORATORY**; full-field
+norm promotion is separately `STOP_SCOPED_SQUARE_NORM`.

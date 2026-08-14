@@ -33,8 +33,9 @@ henon_pressure_normalized_prime_orbit_bridge - HCS-P45 complete - Bowen-pressure
 henon_integral_monodromy_units - HCS-P46 complete - Every all-period H6 monodromy trace is integral and every periodic multiplier is an algebraic unit.
 henon_repetition_label_classification - HCS-P47 complete - Rational repetition-compatible scalar labels are exactly monomials, so H6 algebraic units cannot become rational primes.
 henon_pressure_label_six_exponentials_obstruction - HCS-P48 complete - Three exact H6 multiplier fields and Six Exponentials rule out all-prime pressure labels for every common real exponent.
+henon_cyclic_resultant_packet_obstruction - HCS-P49 complete - Full multiplier-field cyclic norms are forced squares, while trace-field Lehmer--Pierce sequences and ideal packets survive as collective arithmetic structures.
 
-`P43`--`P48` are the unique registry aliases for the pressure/orbit lane.
+`P43`--`P49` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
 strings to preserve their published hashes; `P48` was born namespaced. The
 unqualified IDs `C43`--`C48` in this repository belong to the full-kernel
