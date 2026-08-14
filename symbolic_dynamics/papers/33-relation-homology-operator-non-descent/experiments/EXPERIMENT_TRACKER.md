@@ -12,7 +12,7 @@
 | authority unit/integration tests | complete | 1932/1932 |
 | fresh full-pipeline double run | complete | 20/20 byte-identical |
 | complete source/result SHA ledger | complete | paper-root-relative inventory |
-| zero-meta cold-start integrity | complete | 21 payloads + 0 meta -> exact 21+5 set |
+| empty-results cold-start integrity | complete | six stages -> 20 + double cert -> exact 21+5 set |
 | freeze/integrity idempotence | complete | byte-identical consecutive runs |
 | strict Route-A v0.2 | complete | exact tuple; B false; target zeros N/A |
 | paired provenance replacement | pending | root-owned corrective metadata stage |

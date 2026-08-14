@@ -49,6 +49,13 @@ Python source plus experiment controls/reports and all non-meta result
 payloads.  The final audit separately verifies Route-A v0.2 enums, paired
 pending provenance, target-zero absence, source separation, byte identity,
 cache absence, LF line endings, no trailing whitespace, and exact one-LF EOF.
-The idempotence stage also rebuilds all five meta-integrity files from a fresh
-directory containing only the 21 primary payloads, so the freeze has no hidden
-dependency on stale metadata.
+The idempotence stage begins with an empty result directory, reruns the six
+canonical stages to regenerate 20 payloads, adds the already certified 20/20
+double-run record as payload 21, and rebuilds all five meta-integrity files.
+The freeze therefore has no hidden dependency on stale metadata.  During that
+isolated audit, every Route-card `results/*` reference resolves against the
+supplied fresh result directory; the audit's own JSON is checked as an
+after-write self-output.  The five self-generated meta files are excluded from
+the canonical-text enumeration to prevent first-write self-inclusion; their
+schemas, exact set, hashes, aggregate, inventory, and idempotence semantics are
+validated directly.

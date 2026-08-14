@@ -52,7 +52,8 @@
 - `artifact_inventory.json`: typed source/control/result inventory.
 - `integrity_audit.json`: full ledger, schema, provenance, cache, LF, control,
   and EOF audit.
-- `idempotence_certificate.json`: two-run freeze/integrity idempotence.
+- `idempotence_certificate.json`: empty-results six-stage cold start plus
+  two-run freeze/integrity idempotence.
 
 The five meta-integrity files (`SHA256SUMS.txt`, `aggregate_sha256.txt`,
 `artifact_inventory.json`, and the two audit certificates) are excluded from

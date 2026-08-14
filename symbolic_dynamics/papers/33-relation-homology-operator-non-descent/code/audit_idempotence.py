@@ -44,6 +44,17 @@ META_RESULT_FILES = (
     "idempotence_certificate.json",
     "integrity_audit.json",
 )
+PIPELINE_SCRIPTS = (
+    "write_run_locks.py",
+    "source_generator.py",
+    "audit_source_separation.py",
+    "post_census_classifier.py",
+    "independent_evaluator.py",
+    "run_tests.py",
+)
+PIPELINE_PAYLOADS = tuple(
+    name for name in RESULT_PAYLOADS if name != "double_run_certificate.json"
+)
 
 
 def digest(path: Path) -> str:
@@ -262,8 +273,18 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix="paper33_integrity_cold_") as tmp:
         cold_dir = Path(tmp) / "results"
         cold_dir.mkdir(parents=True)
-        for name in RESULT_PAYLOADS:
-            shutil.copyfile(result_dir / name, cold_dir / name)
+        pipeline_stdout = {
+            script: run(code_dir / script, cold_dir)
+            for script in PIPELINE_SCRIPTS
+        }
+        pipeline_payloads_match = all(
+            digest(cold_dir / name) == digest(result_dir / name)
+            for name in PIPELINE_PAYLOADS
+        )
+        shutil.copyfile(
+            result_dir / "double_run_certificate.json",
+            cold_dir / "double_run_certificate.json",
+        )
         initial_meta = sum((cold_dir / name).exists() for name in META_RESULT_FILES)
         cold_payload = certify_directory(
             cold_dir,
@@ -272,9 +293,18 @@ def main() -> None:
         )
         final_meta = sum((cold_dir / name).exists() for name in META_RESULT_FILES)
         cold_summary = {
+            "started_with_result_files": 0,
             "started_with_meta_files": initial_meta,
             "finished_with_meta_files": final_meta,
-            "payload_files_copied": len(RESULT_PAYLOADS),
+            "pipeline_stages": list(PIPELINE_SCRIPTS),
+            "pipeline_stage_stdout_sha256": {
+                script: text_digest(stdout)
+                for script, stdout in pipeline_stdout.items()
+            },
+            "pipeline_payloads_regenerated": len(PIPELINE_PAYLOADS),
+            "pipeline_payloads_match_authority": pipeline_payloads_match,
+            "frozen_double_run_certificate_added": True,
+            "payload_files_before_freeze": len(RESULT_PAYLOADS),
             "ledger_entry_count": len(
                 (cold_dir / "SHA256SUMS.txt").read_text(
                     encoding="utf-8"
@@ -286,6 +316,7 @@ def main() -> None:
             "pass": (
                 initial_meta == 0
                 and final_meta == len(META_RESULT_FILES)
+                and pipeline_payloads_match
                 and cold_payload["pass"] is True
             ),
         }

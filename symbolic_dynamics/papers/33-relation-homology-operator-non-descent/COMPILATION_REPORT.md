@@ -13,7 +13,7 @@
 - Pages: 10
 - Page size: A4 (`595.276 x 841.89 pts`)
 - File size: 367,310 bytes
-- SHA-256: `f3d23a899a9f855285c0822dda15a7815f17eef144d1da52176e649bef34f3de`
+- SHA-256: `f8af8a6764f4f14edb882603ca46ba57d50079d22736c9a0d36d6dd7c6e16c9c`
 
 ## Checks
 

@@ -108,8 +108,9 @@ universal cusp class.
   across both runs and to the frozen authority copy.
 - `freeze_artifacts.py` and `audit_artifact_integrity.py` are byte-idempotent
   across consecutive executions.
-- A cold-start control copied only the 21 canonical payloads into a fresh
-  result directory with zero meta files, then created all five meta-integrity
+- A cold-start control began with an empty result directory, reran all six
+  canonical stages to regenerate 20 payloads, added the frozen 20/20
+  double-run certificate as payload 21, then created all five meta-integrity
   files and passed the same strict audit.
 - `results/SHA256SUMS.txt` is a paper-root-relative 40-entry ledger covering
   12 Python source files, 7 experiment-control files, and 21 generated result
@@ -117,8 +118,10 @@ universal cusp class.
 - The integrity audit verifies ledger completeness, inventory and aggregate
   agreement, strict Route-A v0.2 enums and paired pending provenance, physical
   source separation, scientific counts, double-run/idempotence semantics, and
-  canonical-text/cache hygiene.  The later paper manifest supplies the
-  external binding after the artifact commit exists.
+  canonical non-meta text/cache hygiene.  The five self-generated meta files
+  are validated structurally to avoid first-write self-inclusion.  The later
+  paper manifest supplies the external binding after the artifact commit
+  exists.
 - No target-zero data or Route-B object is present; every zero-fit field is
   `not_applicable`.
 

@@ -128,9 +128,10 @@ right-to-left operator convention the corresponding operator word is `SR`.
   7 experiment-control files, and 21 generated result payloads.  The
   double-run certificate compares 20 source-separated payloads against the
   frozen authority copy.
-- A cold-start audit begins with the 21 payloads and no meta files, creates
-  the ledger, aggregate, inventory, integrity audit, and idempotence
-  certificate, and ends with the exact 21+5 result set.
+- A cold-start audit begins with an empty result directory, reruns all six
+  canonical stages to regenerate 20 payloads, adds the frozen 20/20
+  double-run certificate as payload 21, creates all five meta-integrity files,
+  and ends with the exact 21+5 result set.
 - The five self-referential meta-integrity files are excluded from
   `SHA256SUMS.txt`; the strict audit validates their structure and agreement
   directly, and the later paper manifest binds them externally.

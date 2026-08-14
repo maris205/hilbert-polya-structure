@@ -295,17 +295,23 @@ def paired_provenance(source: object, code: object, lock: object) -> bool:
     )
 
 
-def canonical_text_paths() -> list[Path]:
-    """Audit canonical text while excluding transient TeX compiler products."""
+def canonical_text_paths(result_dir: Path) -> list[Path]:
+    """Audit source/control/payload text without self-generated meta files."""
 
     transient_suffixes = {".aux", ".blg", ".log", ".out", ".pdf"}
     paths: list[Path] = []
     for path in ROOT.rglob("*"):
+        if ROOT / "results" in path.parents:
+            continue
         if path.is_file() and path.suffix.lower() not in transient_suffixes:
             try:
                 path.read_bytes().decode("utf-8")
             except UnicodeDecodeError:
                 continue
+            paths.append(path)
+    for name in RESULT_PAYLOADS:
+        path = result_dir / name
+        if path.is_file():
             paths.append(path)
     return sorted(paths)
 
@@ -319,7 +325,10 @@ def text_hygiene(paths: Iterable[Path]) -> dict[str, list[str]]:
     }
     for path in paths:
         raw = path.read_bytes()
-        relative = path.relative_to(ROOT).as_posix()
+        try:
+            relative = path.relative_to(ROOT).as_posix()
+        except ValueError:
+            relative = f"external_results/{path.name}"
         if b"\r" in raw:
             failures["crlf_files"].append(relative)
         if any(byte < 32 and byte != 10 for byte in raw) or 127 in raw:
@@ -412,13 +421,21 @@ def main() -> int:
         *(f"results/{name}" for name in META_RESULT_FILES),
         ROUTE_RELATIVE,
     }
-    missing_listed_files = sorted(
-        path for path in listed_paths
-        if not isinstance(path, str)
-        or Path(path).is_absolute()
-        or ".." in Path(path).parts
-        or not (ROOT / path).is_file()
-    )
+    missing_listed_files: list[str] = []
+    for listed in listed_paths:
+        if (
+            not isinstance(listed, str)
+            or Path(listed).is_absolute()
+            or ".." in Path(listed).parts
+        ):
+            missing_listed_files.append(str(listed))
+            continue
+        listed_file = resolved_path(result_dir, listed)
+        if listed_file == output:
+            # The strict audit creates this self-output after all checks pass.
+            continue
+        if not listed_file.is_file():
+            missing_listed_files.append(listed)
     route_checks = {
         "required_top_level_keys": isinstance(route, Mapping)
         and not (REQUIRED_ROUTE_KEYS - set(route)),
@@ -716,7 +733,7 @@ def main() -> int:
         and summary.get("branch_action") == "CLOSE_SEMIRING_RESIDUE_FAMILY",
     }
 
-    text_paths = canonical_text_paths()
+    text_paths = canonical_text_paths(result_dir)
     hygiene_failures = text_hygiene(text_paths)
     cache_paths = sorted(
         path.relative_to(ROOT).as_posix()
