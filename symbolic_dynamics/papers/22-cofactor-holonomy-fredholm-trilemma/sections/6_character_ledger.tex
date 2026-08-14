@@ -1,0 +1,146 @@
+\section{Character-resolved connected Fredholm ledger}
+\label{sec:ledger}
+
+Character resolution is meaningful only if fixed-period group traces have
+finite support.  That follows from the inherited confinement geometry, for
+which we include the short proof.
+
+\begin{lemma}[Fixed-period confinement]
+\label{lem:confinement}
+Every length-\(r\) closed path lies in
+
+\[
+ \{2,3,\ldots,2r-1\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let \(M\) be the largest visited vertex.  The edge leaving an occurrence of
+\(M\) cannot be the successor edge, because that would visit \(M+1\).  Its
+target \(d\) is therefore a proper divisor of \(M+1\), so
+\(d\le(M+1)/2\).  Every edge increases its source by at most one.  The
+remaining \(r-1\) edges can return to \(M\) only if
+
+\[
+ M\le d+r-1\le\frac{M+1}{2}+r-1,
+\]
+
+which rearranges to \(M\le2r-1\).
+\end{proof}
+
+For a rooted length-\(r\) closed path, \cref{eq:endpoint-cycle-weight} gives
+the coefficient \(N(\gamma)^{-2s}\).  Define the finite group-algebra trace
+
+\begin{equation}
+ \cT_r(s)=
+ \sum_{\gamma\in\Fix_r}N(\gamma)^{-2s}[Q(\gamma)]
+\label{eq:group-trace}
+\end{equation}
+
+and the connected germ
+
+\begin{equation}
+ \cL_s(z)=\sum_{r\ge1}\frac{z^r}{r}\cT_r(s).
+\label{eq:connected-ledger}
+\end{equation}
+
+At every fixed \(r\), \cref{lem:confinement} makes
+\cref{eq:group-trace} an exact finite sum.
+
+\begin{theorem}[Exact holonomy coefficient]
+\label{thm:coefficient}
+For \(m\in\Gamma\), in the scalar trace-class half-plane and for sufficiently
+small \(|z|\),
+
+\begin{align}
+ \mathcal H_m(s,z)
+ &:=[m]\cL_s(z) \notag\\
+ &=\int_{\widehat\Gamma}\overline{\chi(m)}
+   [-\log D_\chi(s,z)]\,\dd\chi \notag\\
+ &=\sum_{\substack{[\gamma]\ \mathrm{primitive},\ \nu\ge1\\
+                    Q(\gamma)^\nu=m}}
+   \frac{z^{\nu\ell(\gamma)}}{\nu}
+   N(\gamma)^{-2s\nu}.
+\label{eq:coefficient-formula}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Evaluate the finite coefficient \cref{eq:group-trace} at a character.  The
+result is \(\Tr L_{s,\chi}^r\).  Insert it into the local trace logarithm
+\cref{eq:trace-log}, multiply by \(\overline{\chi(m)}\), and use Haar
+orthogonality \cref{eq:haar}.  Regrouping rooted closed paths by primitive
+rotation class and temporal repetition gives the last line.
+\end{proof}
+
+The use of \(-\log D_\chi\) is essential.  A Fourier coefficient of
+\(D_\chi\) itself can multiply holonomies from distinct primitive factors and
+would not isolate one connected orbit class.
+
+\begin{theorem}[Holonomy-two coefficient]
+\label{thm:h2}
+In the honest Fredholm half-plane,
+
+\begin{equation}
+ \boxed{
+ \mathcal H_2(s,z)=
+ \sum_{k\ge2}z^k
+ \left(\frac{(2k-1)!}{(k-1)!}\right)^{-2s}.}
+\label{eq:H2}
+\end{equation}
+
+At rooted trace level,
+
+\begin{equation}
+ [2]\cT_r(s)=
+ r\left(\frac{(2r-1)!}{(r-1)!}\right)^{-2s}.
+\label{eq:T2r}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:q2}, \(C_r\) is the unique primitive rotation class of period
+\(r\) and holonomy two.  Its \(r\) rooted rotations give
+\cref{eq:T2r}; the factor \(1/r\) in \cref{eq:connected-ledger} cancels
+them.  \Cref{cor:no-atomic-repeat} excludes repetitions.
+\end{proof}
+
+The series in \cref{eq:H2} has infinite radius in \(z\) when
+\(\Re s>0\), radius one when \(\Re s=0\), and radius zero when
+\(\Re s<0\).  Only the subdomain \(\Re s>1/2\) will arise from the whole
+Fredholm operator.  Convergence of one coefficient for
+\(0<\Re s\le1/2\) is not continuation of the determinant.
+
+\begin{corollary}[Atomic coefficient]
+\label{cor:Hp}
+For every atom \(p\),
+
+\begin{equation}
+ \boxed{
+ \mathcal H_p(s,z)=
+ \sum_{k\ge2}z^{(p-1)k}
+ \left(\frac{(pk-1)!}{(k-1)!}\right)^{-2s}.}
+\label{eq:Hp}
+\end{equation}
+
+No repetition contributes.
+\end{corollary}
+
+\begin{corollary}[Character persistence]
+\label{cor:character-persistence}
+For every unitary character \(\chi\), the primitive factor associated to
+\(C_k\) is
+
+\[
+ 1-z^kM_k^{-2s}\chi(2).
+\]
+
+It is nontrivial for every \(k\ge2\), and all canonical cycles receive the
+same holonomy phase.
+\end{corollary}
+
+The exact coefficient is therefore both the strongest positive result and a
+no-cancellation certificate.  Within the \(Q=2\) class there is one positive
+term at each length and no repeated term.  Any vanishing observed only after
+summing different \(Q\)-classes is neither orbit deletion nor a stable
+selector.

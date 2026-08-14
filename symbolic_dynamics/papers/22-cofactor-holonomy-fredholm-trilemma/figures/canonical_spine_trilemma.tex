@@ -1,0 +1,55 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >=Latex,
+  vtx/.style={circle,draw=charcoal,thick,minimum size=7.5mm,fill=white},
+  succ/.style={->,thick,draw=formalblue},
+  close/.style={->,very thick,draw=warningamber},
+  branch/.style={->,thick,draw=charcoal},
+  good/.style={draw=passgreen,rounded corners=2mm,thick,fill=passgreen!7,
+    align=center,minimum width=4.35cm,minimum height=1.55cm},
+  warn/.style={draw=warningamber,rounded corners=2mm,thick,fill=warningamber!7,
+    align=center,minimum width=4.35cm,minimum height=1.55cm},
+  stop/.style={draw=stopred,rounded corners=2mm,thick,fill=stopred!5,
+    align=center,minimum width=4.35cm,minimum height=1.55cm}
+]
+  \node[vtx] (k) at (0,1.6) {$k$};
+  \node[vtx] (k1) at (2.0,1.6) {$k+1$};
+  \node[vtx] (dots) at (4.25,1.6) {$\cdots$};
+  \node[vtx] (twok2) at (6.6,1.6) {$2k-2$};
+  \node[vtx] (twok1) at (8.8,1.6) {$2k-1$};
+  \draw[succ] (k) -- node[above] {$q=1$} (k1);
+  \draw[succ] (k1) -- node[above] {$q=1$} (dots);
+  \draw[succ] (dots) -- node[above] {$q=1$} (twok2);
+  \draw[succ] (twok2) -- node[above] {$q=1$} (twok1);
+  \draw[close,bend left=32] (twok1) to node[below] {$q=2$} (k);
+  \node[draw=charcoal,rounded corners,align=center,fill=softgray!35,
+    minimum width=4.3cm,minimum height=1.05cm] at (12.0,1.6)
+    {$\ell(C_k)=k$\qquad $Q(C_k)=2$\\
+     $M_k=(2k-1)!/(k-1)!$};
+
+  \node[draw=charcoal,rounded corners,fill=white,align=center,
+    minimum width=4.2cm,minimum height=8mm] (choice) at (6.0,-0.1)
+    {choose a same-object analytic realization};
+
+  \node[stop] (pure) at (0.9,-2.0)
+    {pure cofactor, $s=0$\\
+     weight $2^{-u}$\\
+     \textbf{noncompact if bounded}};
+  \node[good] (endpoint) at (6.0,-2.0)
+    {endpoint regularized\\
+     honest $\mathcal S_1$\\
+     \textbf{factorial $M_k^{-2s}$}};
+  \node[warn] (character) at (11.1,-2.0)
+    {unitary character\\
+     common phase $\chi(2)$\\
+     \textbf{every $C_k$ survives}};
+
+  \draw[branch] (choice.south) -- ++(0,-0.25) -| (pure.north);
+  \draw[branch] (choice.south) -- (endpoint.north);
+  \draw[branch] (choice.south) -- ++(0,-0.25) -| (character.north);
+
+  \node[draw=stopred,very thick,rounded corners,align=center,
+    minimum width=10.8cm,minimum height=8mm] at (6.0,-3.55)
+    {No branch gives both an honest whole Fredholm determinant and one
+     primitive representative per atom.};
+\end{tikzpicture}

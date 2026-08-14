@@ -33,6 +33,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [19-stationary-semiring-sieve-shift](papers/19-stationary-semiring-sieve-shift/README.md) | [PDF](papers/19-stationary-semiring-sieve-shift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/19-stationary-semiring-sieve-shift/) | full-shift alphabet-sum、tensor 与 order 可把无 factor oracle 的逐商试除编译成一个 trace-class 单边 Markov graph，并在 $\Re s>1$ 精确给出 $1/\zeta(s)$；但全部计算状态都属 transient DAG，剪枝后只剩 Paper 04 的 prime loops，而任意总可判定集合都能复制同型 Euler 子积。 | **SEMIRING VERIFIER / PRUNING EQUIVALENT / ROUTE-A REJECTED / SD-C21** |
 | [20-recurrent-verifier-clock-dilution](papers/20-recurrent-verifier-clock-dilution/README.md) | [PDF](papers/20-recurrent-verifier-clock-dilution/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/20-recurrent-verifier-clock-dilution/) | 把完整试除计算闭成 prime cycle 后，每圈仍精确携带 $\log p$，但验证长度 $\ell(p)\asymp p\log p$ 会把 clock 稀释到至少一条边权趋于 $1$；whole adjacency 因而 essential norm 为 $1$、非紧且没有 Fredholm determinant。$z=1$ 的 orbit product 虽仍是 $1/\zeta$，Poincaré return 却把系统收缩回 Paper 04 的 diagonal atom loops。 | **CLOCK DILUTION / FIRST-RETURN COLLAPSE / ROUTE-A REJECTED / SD-C22** |
 | [21-successor-divisor-cycle-flood](papers/21-successor-divisor-cycle-flood/README.md) | [PDF](papers/21-successor-divisor-cycle-flood/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/21-successor-divisor-cycle-flood/) | successor–divisor grammar $n\to d\iff d\mid n+1$ 给出强连通、mixing 的 genuine recurrent shift，且自然 whole adjacency 精确满足 $L_s\in\mathcal S_1\iff\Re s>1/2$；但它没有长度一轨道，并从每个长度 $k\ge2$ 都产生 canonical primitive cycle，所有自然 orbit norms 又是 composite squares。 | **SHARP FREDHOLM / ALL-LENGTH CYCLE FLOOD / ROUTE-A REJECTED / SD-C23** |
+| [22-cofactor-holonomy-fredholm-trilemma](papers/22-cofactor-holonomy-fredholm-trilemma/README.md) | [PDF](papers/22-cofactor-holonomy-fredholm-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/22-cofactor-holonomy-fredholm-trilemma/) | successor–divisor edge 的 intrinsic cofactor $q=(n+1)/d$ 精确分类 closed-path holonomy；$Q=2$ 当且仅当轨道是 $C_k=(k,\ldots,2k-1)$。two-parameter adjacency 的 sharp domain 为 $\Re s>1/2$ 且 $\Re(s+u)>1/2$，但 pure cofactor 非紧、endpoint regularization 阶乘衰减、unitary character 只改相位。 | **HOLONOMY RESOLUTION / FREDHOLM TRILEMMA / ROUTE-A REJECTED / SD-C24** |
 
 ### 论文 1 的候选分离结论
 
@@ -585,13 +586,72 @@ Paper 22 不再改 base graph，而把 canonical quotient word 暴露为 holonom
 分类哪些 cofactor classes 对应哪些 primitive cycles，再检验 character resolution
 能否在不牺牲 Fredholm 域的条件下隔离目标 orbit species。
 
+### 论文 22：cofactor class 可精确解析，但三种解析实现互不兼容
+
+Paper 22 在同一 successor–divisor graph 上暴露 edge factor witness
+
+$$
+q(n,d)=\frac{n+1}{d},
+$$
+
+并把闭路 holonomy 冻结为 $Q(\gamma)=\prod q$。闭路恒有
+$Q(\gamma)=\prod_{n\in\gamma}(1+1/n)>1$，所以 regular group lift 的 neutral
+sector 没有周期轨道；第一个非平凡 class 则完全可解：
+
+$$
+Q(\gamma)=2
+\quad\Longleftrightarrow\quad
+\gamma=C_k=(k,k+1,\ldots,2k-1),\qquad k\ge2,
+$$
+
+其中每个长度恰有一个 simple primitive class，且 temporal repetitions 不会污染
+atomic holonomy。相应 connected coefficient 为
+
+$$
+\mathcal H_2(s,z)=\sum_{k\ge2}z^k
+\left(\frac{(2k-1)!}{(k-1)!}\right)^{-2s}.
+$$
+
+对 two-parameter whole adjacency
+
+$$
+L_{s,u}e_n
+=\sum_{d\mid n+1,\ d\ge2}(nd)^{-s}q(n,d)^{-u}e_d,
+$$
+
+论文证明了 sharp phase diagram
+
+$$
+L_{s,u}\in\mathcal S_1
+\quad\Longleftrightarrow\quad
+\Re s>\frac12
+\quad\text{且}\quad
+\Re(s+u)>\frac12.
+$$
+
+但这同时给出 Fredholm trilemma：只保留 cofactor roof 时，$q=1$ successor spine
+使算子在有界时仍非紧；恢复 endpoint decay 虽得到 honest determinant，却给
+$C_k$ 阶乘尺度的权；unitary character 仅赋共同相位 $\chi(2)$，不能删除任何
+$C_k$。ordinary regular lift 又因无限 deck multiplicity 非紧，而独立的 semifinite
+trace 虽在 $\Re s>1/2$ 可积，其 neutral determinant 恰为 $1$。
+
+26/26 exact tests 审计了 30,626 条 source edges、164 条 $r\le8$ rooted cycles、
+120 个 atomic witnesses、80 个 atomic trace coefficients，以及六类 positive-inventory
+controls；所有 matched inventories 都保留同一个 $Q=2$ spine，selection margin 为零。
+阶段结论是 **GO_EXACT_HOLONOMY_RESOLUTION / GO_SHARP_CHARACTER_FREDHOLM_DOMAIN /
+STOP_NEUTRAL_SECTOR / STOP_PRIME_ORBIT_LEDGER / PROVES_TOO_MUCH**。
+
+Paper 23 因而保留 $C_k$ 上完整、有序的 quotient word $1^{k-1}2$，检验 fixed
+finite fiber 或 finite-dimensional recurrence 能否在不编译 prime table 的前提下选择
+prime length；Route B 继续锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十一篇论文](papers/)
+- [二十二篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

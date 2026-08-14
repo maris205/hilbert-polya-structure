@@ -1,0 +1,193 @@
+\section{Source-derived graph, cocycle, and operators}
+\label{sec:source}
+
+\subsection{Full-shift skeleton}
+
+Let \(F_n=A_n^{\mathbb Z}\) denote the full shift on an \(n\)-letter
+alphabet, up to topological conjugacy.  We freeze
+
+\[
+ F_m\boxtimesf F_n:=F_{A_m\times A_n}\cong F_{mn},
+ \qquad
+ F_m\boxplus F_n:=F_{A_m\sqcup A_n}\cong F_{m+n}.
+\]
+
+Here \(\boxplus\) means alphabet disjoint union followed by the full-shift
+functor; it is not the categorical coproduct in a category of subshifts.
+The successor and entropy are
+
+\[
+ S(F_n)=F_n\boxplus F_1\cong F_{n+1},
+ \qquad h(F_n)=\log n.
+\]
+
+The vertex set is \(V=\{2,3,\ldots\}\), with \(n\) representing \(F_n\).
+An edge is an exposed tensor factorization:
+
+\begin{equation}
+ n\to d
+ \quad\Longleftrightarrow\quad
+ d\ge2,\quad d\mid n+1
+ \quad\Longleftrightarrow\quad
+ S(F_n)\cong F_d\boxtimesf F_q.
+\label{eq:edge-rule}
+\end{equation}
+
+The factor witness is unique and defines the cofactor label
+
+\begin{equation}
+ q(n,d)=\frac{n+1}{d}\in\N_{\ge1}.
+\label{eq:cofactor}
+\end{equation}
+
+The one-sided countable Markov shift is
+
+\[
+ X_G^+=\{(n_0,n_1,\ldots)\in V^{\N}:n_j\to n_{j+1}\}.
+\]
+
+No primality predicate occurs in \cref{eq:edge-rule,eq:cofactor}.  Rational
+primes will enter only after freezing, as the atoms of the coefficient
+monoid used to evaluate the resulting ledger.
+
+\subsection{Monoid, group completion, and periodic conventions}
+
+Let
+
+\[
+ \mathsf M=(\N_{\ge1},\cdot),
+ \qquad
+ \Gamma=\gp(\mathsf M)=\Q_{>0}^{\times}.
+\]
+
+Every edge voltage \(q(n,d)\) lies in \(\mathsf M\subset\Gamma\).  For a
+rooted closed path
+\(\gamma=(n_0,\ldots,n_{r-1})\), with \(n_r=n_0\), define
+
+\[
+ Q(\gamma)=\prod_{j=0}^{r-1}q(n_j,n_{j+1}),
+ \qquad
+ N(\gamma)=\prod_{j=0}^{r-1}n_j.
+\]
+
+Directed paths are identified under cyclic rotation when called orbits;
+reflection is not quotiented.  A primitive orbit is not a positive temporal
+power of a shorter orbit.
+
+The compact dual
+
+\[
+ \widehat\Gamma\cong\prod_{p\ \mathrm{prime}}\T
+\]
+
+has normalized Haar measure \(\dd\chi\), with convention
+
+\begin{equation}
+ \int_{\widehat\Gamma}\overline{\chi(m)}\chi(g)\,\dd\chi
+ =\id_{\{g=m\}}.
+\label{eq:haar}
+\end{equation}
+
+This is coefficient extraction in a source-label group, not a spectral
+transform of the Riemann zeta function.
+
+\subsection{Roofs and scalar fibers}
+
+The endpoint and cofactor roofs are
+
+\[
+ \tau(n,d)=\log n+\log d,
+ \qquad
+ \rho(n,d)=\log q(n,d).
+\]
+
+On \(\cH=\ell^2(V)\), with standard basis \(e_n\), use the column-source
+weighted adjacency
+
+\begin{equation}
+ L_{s,u}e_n=
+ \sum_{\substack{d\ge2\\d\mid n+1}}
+ (nd)^{-s}q(n,d)^{-u}e_d.
+\label{eq:Lsu}
+\end{equation}
+
+For a unitary character \(\chi\in\widehat\Gamma\), set
+
+\begin{equation}
+ L_{s,\chi}e_n=
+ \sum_{\substack{d\ge2\\d\mid n+1}}
+ (nd)^{-s}\chi(q(n,d))e_d.
+\label{eq:Lschi}
+\end{equation}
+
+Around a closed path, endpoint weights telescope by cyclicity to
+
+\begin{equation}
+ \prod_j(n_jn_{j+1})^{-s}=N(\gamma)^{-2s}.
+\label{eq:endpoint-cycle-weight}
+\end{equation}
+
+Thus the full power-twist weight is
+
+\[
+ w_{s,u}(\gamma)=N(\gamma)^{-2s}Q(\gamma)^{-u}.
+\]
+
+The factor two in the endpoint exponent is part of the source roof and will
+not be changed after target comparison.
+
+\subsection{Scalar and lifted determinant conventions}
+
+Whenever \(L_{s,u}\in\Sone\), define
+
+\[
+ D(s,u;z)=\det_{\cH}(I-zL_{s,u}).
+\]
+
+For a character fiber, write
+
+\[
+ D_\chi(s,z)=\det_{\cH}(I-zL_{s,\chi}).
+\]
+
+These are entire in \(z\), and near \(z=0\),
+
+\begin{equation}
+ -\log D_\chi(s,z)=
+ \sum_{r\ge1}\frac{z^r}{r}\Tr L_{s,\chi}^r.
+\label{eq:trace-log}
+\end{equation}
+
+The logarithm is the normalized local germ.  No global branch through
+determinant zeros is asserted.
+
+For the regular representation \(\lambda\) of \(\Gamma\), define on
+\(\cH\otimes\ell^2(\Gamma)\)
+
+\begin{equation}
+ \mathbb L_s(e_n\otimes\delta_g)=
+ \sum_{\substack{d\ge2\\d\mid n+1}}
+ (nd)^{-s}e_d\otimes\delta_{q(n,d)g}.
+\label{eq:regular-lift}
+\end{equation}
+
+Its natural semifinite algebra and trace are
+
+\[
+ \cN=B(\cH)\bar\otimes L(\Gamma),
+ \qquad
+ \Phi=\Tr\bar\otimes\tau_\Gamma.
+\]
+
+When its trace series is defined, the normalized local semifinite determinant
+means
+
+\begin{equation}
+ \det_\Phi(I-z\mathbb L_s)=
+ \exp\left[-\sum_{r\ge1}\frac{z^r}{r}
+ \Phi(\mathbb L_s^r)\right].
+\label{eq:phi-det}
+\end{equation}
+
+It is not an ordinary Fredholm determinant of
+\(\mathbb L_s\) on the lifted Hilbert space.
