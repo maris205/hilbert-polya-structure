@@ -42,6 +42,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [28-chiral-incidence-metric-trilemma](papers/28-chiral-incidence-metric-trilemma/README.md) | [PDF](papers/28-chiral-incidence-metric-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/28-chiral-incidence-metric-trilemma/) | reflected incidence-chiral family 在临界线上紧自伴且第四矩精确随 $t$ 运动；但 $B\notin\mathcal S_2$，$\det_3$ 删去二阶项，正定 source-natural metric 会将对象正交化回独立 atoms，而原生 motion 被所有对照复制。 | **CHIRAL MOTION / METRIC TRILEMMA / SD-C30** |
 | [29-functorial-chiral-counterterm-no-go](papers/29-functorial-chiral-counterterm-no-go/README.md) | [PDF](papers/29-functorial-chiral-counterterm-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/29-functorial-chiral-counterterm-no-go/) | source-natural quadratic subtraction 能分离 $B^2$ 的 prime-harmonic divergence，但 leading-only 与 full-diagonal schemes 相差一个非零可和有限项，因而自然性不唯一固定 finite part；保留 baseline mixed residue 与消去同型 controls 分别强制 $\beta=0$ 和 $\beta=1$，排除 pair-local linear-Gram 选择器。 | **FINITE-PART CLASSIFICATION / LOCAL SELECTIVITY NO-GO / SD-C31** |
 | [30-free-monoid-incidence-indistinguishability](papers/30-free-monoid-incidence-indistinguishability/README.md) | [PDF](papers/30-free-monoid-incidence-indistinguishability/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/30-free-monoid-incidence-indistinguishability/) | 整数乘法整除 source 与形式自由交换/UFD clone 在 atoms、join/lcm、interval Möbius、cutoff、roof 与 Gram decorations 上同构；因此任意对此对象同构自然的局部或非局部 cumulant/mixed invariant 都被 clone 精确复制。有限三元统计虽分开四个 fixture，却无法给出算术选择性。 | **FREE-UFD INDISTINGUISHABILITY / BRANCH CLOSED / SD-C32** |
+| [31-wilson-semiring-verifier-trichotomy](papers/31-wilson-semiring-verifier-trichotomy/README.md) | [PDF](papers/31-wilson-semiring-verifier-trichotomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/31-wilson-semiring-verifier-trichotomy/) | alphabet sum 与 tensor product 确实击穿只保乘法的裸 UFD clone；但 matched semiring clone 精确复制全部 Wilson paths。Wilson recurrence 给每个素数一条长度 $p-1$ 的 cycle，却使 whole operator 非紧；first return 改写自由 marker，transient 版本又剪枝回 atom diagonal。 | **SEMIRING CLONE / PRUNING–DILUTION TRICOTOMY / SD-C33** |
 
 ### 论文 1 的候选分离结论
 
@@ -997,13 +998,40 @@ CLOSE_CHIRAL_INCIDENCE_COUNTERTERM_BRANCH / ROUTE_A_REJECTED**。Route B 继续�
 Paper 31 只有在先引入并证明一个不被 valuation 同构运输的 source-derived 非乘法操作
 （例如加法–乘法兼容结构）后才允许建立新候选。
 
+### 论文 31：加法击穿裸 clone，但 matched semiring、剪枝与 clock dilution 封路
+
+Paper 31 把 finite full shifts 的 alphabet sum 与 Cartesian tensor 同时纳入 source，
+从而重建 characteristic-zero semiring。这个扩展确实比 Paper 30 更强：普通 polynomial-UFD
+monomial clone 已在 $1+1$ 处失败。但只要 control 也运输完整的
+$y_m\boxplus y_n=y_{m+n}$ 与 $y_m\otimes y_n=y_{mn}$，全部 Wilson residue paths、
+周期、roof 与 marker 又逐项一致。
+
+无 primality table 的 Wilson stationary grammar 对每个素数 $p$ 产生唯一长度 $p-1$ 的
+primitive cycle，形式周期积为
+
+$$
+\prod_p\left(1-z^{p-1}p^{-s}\right).
+$$
+
+它只在 $z=1$ 退化为 $1/\zeta(s)$。更关键的是，把总 roof $\log p$ 分配到
+$p-1$ 条边会强制近单位权边，因此原始 recurrent adjacency 非紧且不属于任何有限
+Schatten 类。Poincaré first return 虽在 $\Re s>1$ trace class，却把 marker
+$z^{p-1}$ 收缩为 $z$；transient verifier 则从 power traces 中完全剪除计算状态。
+
+cutoff 4096 的 564 个素数全接收，3531 个合数和 13 个 Fermat 伪素数全拒；
+matched clone 的 169 项运算与全部 paths 精确复制。26620/26620 independent checks、
+direct 与 isolated runner 各 18/18、完整树可重复 integrity audit 和 16 个双跑工件
+均通过。阶段结论为 **GO_BARE_CLONE_SEPARATION / STOP_MATCHED_SEMIRING_SELECTIVITY /
+STOP_WHOLE_FREDHOLM / CLOSE_TERMINAL_SEMIRING_VERIFIER_BRANCH /
+ROUTE_A_REJECTED**。Paper 32 必须改用无 accept/reject terminal 的共享 recurrent grammar。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十篇论文](papers/)
+- [三十一篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

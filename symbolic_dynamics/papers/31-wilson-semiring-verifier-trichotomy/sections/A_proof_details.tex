@@ -1,0 +1,82 @@
+\section{Supplementary proof details}
+\label{app:proof-details}
+
+\subsection{Source quotient and transport}
+
+The successor relation used in \cref{sec:wilson-grammar} is
+$F_a\preceq_+F_b$ when $F_b\cong F_a\boxplus F_c$ for some $c$.  Additive
+reconstruction makes this the usual order on indices.  For $a,n\in\Nzero$
+with $n>0$, repeated successor comparison produces unique $q,r$ satisfying
+\[
+  F_a\cong(F_q\boxtimes F_n)\boxplus F_r,
+  \qquad F_0\preceq_+F_r\prec_+F_n.
+\]
+Existence is the finite subtraction algorithm; if two pairs existed, the
+semiring isomorphism of \cref{thm:additive-reconstruction} would give two
+Euclidean divisions of $a$ by $n$.  This description uses addition,
+multiplication, equality, and successor order, not factorization.
+
+Under $F_n\mapsto y_n$, the same equations and bounds have the same unique
+solutions.  Consequently each residue update and terminal equality
+transports.  Induction in $k$ gives equality of the full words
+$(r_{n,1},\ldots,r_{n,n-1})$, not merely equality of the accept/reject bit.
+This is why the matched-clone control copies paths, roofs, graph lengths, and
+free markers term by term.
+
+\subsection{Normal convergence of the marked product}
+
+Fix a compact $K\subset\C\times\{z:|z|<1\}$.  There are $M\geq0$ and
+$\rho<1$ such that $\Ree s\geq-M$ and $|z|\leq\rho$ on $K$.  Put
+$u_p(s,z)=z^{p-1}p^{-s}$.  Then
+\[
+  \sup_K|u_p|\leq\rho^{p-1}p^M,
+  \qquad
+  \sum_p\sup_K|u_p|<\infty.
+\]
+After removing finitely many factors, $|u_p|\leq1/2$ uniformly, and
+$|\log(1-u_p)|\leq2|u_p|$.  The logarithm series therefore converges uniformly
+on $K$, giving a holomorphic product there.  The same majorant justifies
+interchanging the prime and repetition sums in
+\cref{prop:marked-product}.  This argument says nothing about trace ideals of
+$\Ls$.
+
+\subsection{Compact direct sums and the Wilson obstruction}
+
+For a direct sum $A=\bigoplus_n A_n$ of operators on finite-dimensional
+mutually orthogonal blocks, $A$ is compact exactly when
+$\|A_n\|\to0$.  Sufficiency follows by truncating to finitely many blocks;
+necessity follows by choosing unit vectors realizing a fixed fraction of any
+nonvanishing subsequence of block norms.  A weighted cyclic successor has
+block norm equal to the largest edge modulus.  Thus compactness forces every
+minimum roof to diverge, and hence forces the average roof to diverge.  The
+uniform allocation proves the converse in \cref{cor:length-criterion}.
+
+For uniform Wilson blocks, the Fourier basis diagonalizes $P_{p-1}$.  Given
+$\lambda\in\C$ with $|\lambda|=1$, choose $j(p)$ so that the root of unity
+$e^{2\pi i j(p)/(p-1)}$ approaches $\lambda$.  Because
+$p^{-s/(p-1)}\to1$, the corresponding eigenvalues approach $\lambda$.
+Their block eigenvectors are orthonormal and converge weakly to zero.  This
+is the singular-sequence formulation used in
+\cref{cor:essential-circle}.
+
+\subsection{Return and transient determinant identities}
+
+For $\sigma>1$, $\Rs=\diag_p(p^{-s})$ has singular values $p^{-\sigma}$.
+The convergence of $\sum_p p^{-\sigma}$ gives trace class and the standard
+Fredholm product.  For $0<\sigma\leq1$, divergence of the prime reciprocal
+sum (and comparison for smaller $\sigma$) prevents trace class; for
+$\sigma\leq0$ the diagonal entries do not even tend to zero.  This proves the
+``exactly'' clause in \cref{thm:first-return}.
+
+For the transient comparison, $Q_s$ is trace class by the declared regulator.
+Every diagonal matrix element of $Q_s^r$ is a sum over length-$r$ closed
+walks based at that vertex, and acyclicity makes the sum empty.  Hence
+$\operatorname{Tr}(Q_s^r)=0$.  The Fredholm expansion
+\[
+  \log\det(I-zQ_s)
+  =-\sum_{r\geq1}\frac{z^r}{r}\operatorname{Tr}(Q_s^r)
+\]
+first gives $\det(I-zQ_s)=1$ near zero; both sides are entire in $z$, so the
+identity holds globally.  Applying the same expansion to the trace-class
+block-triangular $\Ts$ proves \cref{prop:transient-pruning} without assuming
+that the countable DAG direct sum is nilpotent.

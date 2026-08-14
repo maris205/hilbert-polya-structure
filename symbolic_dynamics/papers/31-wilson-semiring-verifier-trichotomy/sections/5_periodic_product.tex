@@ -1,0 +1,101 @@
+\section{The marked periodic ledger}
+\label{sec:periodic-product}
+
+Put a nonnegative roof $\tau(e)$ on each edge of $\Gamma_p$ and impose the
+source-clock identity
+\[
+  \sum_{e\in\Gamma_p}\tau(e)=h(F_p)=\log p.
+\]
+On $\ell^2(\Vrec(\GW))$, the recurrent weighted successor is defined on the
+vertex basis by
+\[
+  \Ls\delta_{s(e)}=e^{-s\tau(e)}\delta_{t(e)}.
+\]
+For $\Ree s\geq0$ this is a bounded direct sum of finite cyclic weighted
+shifts.  The uniform representative has
+\[
+  \tau_{p,k}=\frac{\log p}{p-1},\qquad
+  \Ls|_{\Gamma_p}=p^{-s/(p-1)}P_{p-1},
+\]
+where $P_{p-1}$ is the cyclic permutation matrix.
+
+The next definition records closed walks without asserting an operator trace.
+
+\begin{definition}[Periodic diagonal ledger]
+For $r\geq1$, set
+\[
+  \Trper(\Ls^r)
+  :=\sum_{v\in\Vrec(\GW)}
+  \langle\Ls^r\delta_v,\delta_v\rangle,
+\]
+whenever the displayed basis-diagonal sum has finite support.  The subscript
+``per'' distinguishes this ledger from the Hilbert-space trace.
+\end{definition}
+
+\begin{proposition}[Finite power ledger]
+\label{prop:periodic-ledger}
+For every $r\geq1$ and every exact-clock allocation,
+\[
+  \Trper(\Ls^r)
+  =\sum_{p-1\mid r}(p-1)p^{-sr/(p-1)}.
+\]
+In particular, the sum contains only finitely many terms.
+\end{proposition}
+
+\begin{proof}
+The $p$-block returns a vertex to itself after $r$ graph steps exactly when
+$p-1$ divides $r$.  Writing $r=m(p-1)$, a closed walk makes $m$ complete
+turns and has weight
+\[
+  \left(\prod_{e\in\Gamma_p}e^{-s\tau(e)}\right)^m
+  =e^{-sm\log p}=p^{-sm}.
+\]
+There are $p-1$ possible starting vertices.  Finally, $p-1\mid r$ implies
+$p\leq r+1$, proving finite support.
+\end{proof}
+
+The finiteness is combinatorial: each fixed graph power sees only cycles with
+length at most that power.  It does not imply that $\Ls^r$ is trace class.
+
+\begin{proposition}[Marked primitive product]
+\label{prop:marked-product}
+For $\Ree s\geq0$ and $|z|<1$, define from the absolutely convergent
+periodic trace-log
+\[
+  \DW(s,z):=\exp\!\left(
+    -\sum_{r\geq1}\frac{z^r}{r}\Trper(\Ls^r)\right).
+\]
+Then, as a periodic-orbit identity,
+\[
+  \DW(s,z)=\prod_p\left(1-z^{p-1}p^{-s}\right).
+\]
+The product on the right converges normally on compact subsets of
+$\C\times\{z:|z|<1\}$ and thereby extends the trace-log definition in $s$.
+At $z=1$ and $\Ree s>1$,
+\[
+  \DW(s,1)=\prod_p(1-p^{-s})=\zeta(s)^{-1}.
+\]
+\end{proposition}
+
+\begin{proof}
+For $\Ree s\geq0$ and $|z|<1$, insert
+\cref{prop:periodic-ledger}, use absolute convergence, and write
+$r=m(p-1)$.  The exponent contributed by one prime is
+\[
+ -\sum_{m\geq1}\frac{z^{m(p-1)}}{m}p^{-sm}
+ =\log\left(1-z^{p-1}p^{-s}\right).
+\]
+For the extension, let $|z|\leq\rho<1$ and let $s$ range over a compact set
+with $\Ree s\geq-M$.  The
+factor increment is bounded by $\rho^{p-1}p^M$.  The latter is summable even
+when summed over all positive integers, so the Weierstrass criterion gives
+normal convergence of the product.  Equality on $\Ree s\geq0$ and the
+identity theorem give the stated continuation.  At $z=1$, absolute
+Euler-product convergence holds in $\Ree s>1$.
+\end{proof}
+
+The factor $z^{p-1}$ is not decoration: it owns the original graph clock.
+Although the specialization at $z=1$ is the reciprocal Euler product, the
+identity in \cref{prop:marked-product} does not license the notation
+$\det(I-z\Ls)$.  The operator required by that notation fails even
+compactness, as the next section proves.
