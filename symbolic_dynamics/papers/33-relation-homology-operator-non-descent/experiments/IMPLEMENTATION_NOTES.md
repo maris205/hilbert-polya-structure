@@ -49,3 +49,6 @@ Python source plus experiment controls/reports and all non-meta result
 payloads.  The final audit separately verifies Route-A v0.2 enums, paired
 pending provenance, target-zero absence, source separation, byte identity,
 cache absence, LF line endings, no trailing whitespace, and exact one-LF EOF.
+The idempotence stage also rebuilds all five meta-integrity files from a fresh
+directory containing only the 21 primary payloads, so the freeze has no hidden
+dependency on stale metadata.

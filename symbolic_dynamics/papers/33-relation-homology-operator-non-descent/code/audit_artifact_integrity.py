@@ -285,6 +285,16 @@ def exact_not_applicable(metrics: object) -> bool:
     )
 
 
+def paired_provenance(source: object, code: object, lock: object) -> bool:
+    if (source, code, lock) == (PENDING, PENDING, PENDING):
+        return True
+    return (
+        isinstance(source, str)
+        and source == code == lock
+        and re.fullmatch(r"[0-9a-f]{40}", source) is not None
+    )
+
+
 def canonical_text_paths() -> list[Path]:
     """Audit canonical text while excluding transient TeX compiler products."""
 
@@ -424,14 +434,27 @@ def main() -> int:
         "route_b_false": route.get("route_b_invocation_allowed") is False,
         "risk_realized": route.get("adversarial_controls", {}).get("proves_too_much_risk") == "REALIZED",
         "adversarial_stop": route.get("adversarial_controls", {}).get("verdict") == "STOP_PROVES_TOO_MUCH",
-        "paired_pending_provenance": (
+        "paired_provenance": paired_provenance(
             route.get("source_commit"),
             route.get("code_commit"),
             source_lock.get("code_commit"),
-        ) == (PENDING, PENDING, PENDING),
-        "two_stage_metadata_note": all(
-            phrase in freeze_note.lower()
-            for phrase in ("stage 1", "stage 2", "metadata-only", "all three fields")
+        ),
+        "two_stage_metadata_note": (
+            all(
+                phrase in freeze_note.lower()
+                for phrase in (
+                    "stage 1",
+                    "stage 2",
+                    "metadata-only",
+                    "all three fields",
+                )
+            )
+            or (
+                "metadata-only" in freeze_note.lower()
+                and "paired commit fields" in freeze_note.lower()
+                and re.search(r"(?<![0-9a-f])[0-9a-f]{40}(?![0-9a-f])", freeze_note)
+                is not None
+            )
         ),
         "target_zero_metrics_a2_na": exact_not_applicable(route.get("a2", {}).get("metrics")),
         "target_zero_metrics_a4_na": exact_not_applicable(route.get("a4", {}).get("metrics")),
@@ -686,8 +709,11 @@ def main() -> int:
         and route.get("a2", {}).get("metrics", {}).get("primary_quotient_operator_owned") is False,
         "route_generator_word_firewall": "generator sequence R then S" in route.get("a1", {}).get("strongest_failure", "")
         and "operator word SR" in route.get("a1", {}).get("strongest_failure", ""),
-        "family_closed": "semiring-residue family" in str(route.get("next_smallest_test", "")).lower()
-        or "semiring-residue family" in str(route.get("claim_boundary", "")).lower(),
+        "family_closed": any(
+            "semiring-residue family" in str(item).lower()
+            for item in route.get("round2_clues", [])
+        )
+        and summary.get("branch_action") == "CLOSE_SEMIRING_RESIDUE_FAMILY",
     }
 
     text_paths = canonical_text_paths()

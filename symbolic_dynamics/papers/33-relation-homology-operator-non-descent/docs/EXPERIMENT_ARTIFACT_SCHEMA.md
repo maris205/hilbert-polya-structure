@@ -54,7 +54,7 @@
   and EOF audit.
 - `idempotence_certificate.json`: two-run freeze/integrity idempotence.
 
-The four meta-integrity files (`SHA256SUMS.txt`, `aggregate_sha256.txt`,
+The five meta-integrity files (`SHA256SUMS.txt`, `aggregate_sha256.txt`,
 `artifact_inventory.json`, and the two audit certificates) are excluded from
 their own ledger to avoid circular self-hashing; the integrity audit validates
 them directly.

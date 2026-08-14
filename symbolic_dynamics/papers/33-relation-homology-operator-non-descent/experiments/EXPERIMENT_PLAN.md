@@ -107,7 +107,8 @@ right-to-left operator convention the corresponding operator word is `SR`.
 
 ### M3 — independent evaluation and tests
 
-- Generator self-tests: 25/25.
+- Source-only generator self-tests: 21/21.
+- Post-classifier prototype-compatible checks: 25/25.
 - Authority unit/integration tests recompute every block/control and pass.
 - Independent evaluator checks arithmetic labels without importing candidate
   code and reports all checks passing.
@@ -127,8 +128,12 @@ right-to-left operator convention the corresponding operator word is `SR`.
   7 experiment-control files, and 21 generated result payloads.  The
   double-run certificate compares 20 source-separated payloads against the
   frozen authority copy.
-- `idempotence_certificate.json` is excluded from `SHA256SUMS.txt` to avoid a
-  self-referential checksum cycle and is covered instead by the paper manifest.
+- A cold-start audit begins with the 21 payloads and no meta files, creates
+  the ledger, aggregate, inventory, integrity audit, and idempotence
+  certificate, and ends with the exact 21+5 result set.
+- The five self-referential meta-integrity files are excluded from
+  `SHA256SUMS.txt`; the strict audit validates their structure and agreement
+  directly, and the later paper manifest binds them externally.
 
 ## 6. Strict Route-A v0.2 freeze
 
