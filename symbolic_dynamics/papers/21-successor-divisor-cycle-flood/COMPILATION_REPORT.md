@@ -58,7 +58,7 @@ The manuscript snapshot is synchronized to the final exact suite:
 - 30,626 audited source edges;
 - byte-identical double-run results ledger SHA-256:
 
-      10ed2d1409b9de69b16a3a11244660f666dfcd52207bca6b9945e4126a01cc6a
+      9467c520837374b34d4fd019a7f11b944808cf038e202cbaba07db76b5f61e8f
 
 ## Cleanup
 

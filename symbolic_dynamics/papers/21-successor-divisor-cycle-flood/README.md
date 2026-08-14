@@ -95,7 +95,7 @@ The frozen exact suite records:
 
 Two complete regeneration runs produced the identical frozen results ledger:
 
-    10ed2d1409b9de69b16a3a11244660f666dfcd52207bca6b9945e4126a01cc6a
+    9467c520837374b34d4fd019a7f11b944808cf038e202cbaba07db76b5f61e8f
 
 These artifacts are exact regressions of the analytic proofs.  Floating
 prefixes are used only as trace-class diagnostics and do not decide the
