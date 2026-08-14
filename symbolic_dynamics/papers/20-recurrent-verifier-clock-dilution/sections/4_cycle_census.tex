@@ -1,0 +1,84 @@
+\section{Exact prime-cycle census}
+\label{sec:census}
+
+The quotient states make the recurrent computation much longer than a
+trial-state count.  The exact length is the bridge from arithmetic execution
+to operator compactness.
+
+\begin{theorem}[Contracted expanded-$Q$ cycle length]
+\label{thm:length}
+Let $p$ be prime and $m=\lfloor\sqrt p\rfloor$.  The simple cycle
+$\Gamma_p$ in \cref{prop:recurrent-census} has graph length
+\begin{equation}
+\boxed{
+\ell(p)=2+\sum_{d=2}^{m}\left\lceil\frac pd\right\rceil
+=2+\sum_{d=2}^{m}\left(1+\left\lfloor\frac pd\right\rfloor\right).}
+\label{eq:exact-length}
+\end{equation}
+In particular, $\ell(5)=5$ and $\ell(4093)=15293$.
+\end{theorem}
+
+\begin{proof}
+Fix $2\le d\le m$.  Because $p$ is prime, the branch begins with
+$T_{p,d}\to Q_{p,d,2}$ and then visits the quotient values
+\[
+2,3,\ldots,\left\lfloor\frac pd\right\rfloor+1.
+\]
+At the last value $dq>p$, so the edge goes to $T_{p,d+1}$.  From
+$T_{p,d}$ through this last quotient state to $T_{p,d+1}$ there are
+\[
+1+\left\lfloor\frac pd\right\rfloor
+=\left\lceil\frac pd\right\rceil
+\]
+edges; the equality uses $d\nmid p$.  Summing these contributions and adding
+$I_p\to T_{p,2}$ plus the contracted terminal return
+$T_{p,m+1}\to I_p$ gives \eqref{eq:exact-length}.  Direct substitution gives
+the two stated values.
+\end{proof}
+
+\begin{corollary}[Bounds and asymptotic]
+\label{cor:length-asymptotic}
+With $H_m=\sum_{d=1}^m d^{-1}$,
+\begin{equation}
+p(H_m-1)+2\le\ell(p)\le p(H_m-1)+m+1.
+\label{eq:length-bounds}
+\end{equation}
+The lower inequality is strict for $p\ge5$.  Moreover,
+\begin{equation}
+\ell(p)=\frac12p\log p+(\gamma-1)p+O(\sqrt p),
+\qquad
+\frac{\ell(p)}{p\log p}\longrightarrow\frac12.
+\label{eq:length-asymptotic}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For each tested divisor,
+\[
+\frac pd\le\left\lceil\frac pd\right\rceil
+<\frac pd+1.
+\]
+There are $m-1$ terms, yielding \eqref{eq:length-bounds}; the upper strict
+bound can be weakened to the displayed integer-friendly inequality.  For a
+prime and $2\le d\le m$, $p/d$ is not integral, so the lower inequality is
+strict whenever this range is nonempty, namely $p\ge5$.
+
+Now $m=\sqrt p+O(1)$ and
+$H_m=\log m+\gamma+O(m^{-1})$.  Hence
+\[
+p(H_m-1)
+=\frac12p\log p+(\gamma-1)p+O(\sqrt p),
+\]
+while the gap in \eqref{eq:length-bounds} is $O(\sqrt p)$.  This proves
+\eqref{eq:length-asymptotic}.
+\end{proof}
+
+The key quotient is therefore
+\begin{equation}
+\frac{\log p}{\ell(p)}\sim\frac2p\longrightarrow0.
+\label{eq:mean-clock}
+\end{equation}
+It is the average edge clock forced by the arithmetic total.  No roof
+allocation can make its minimum exceed its average, so
+\eqref{eq:mean-clock} is already a warning that the expanded computation and
+a compact weighted adjacency may be incompatible.

@@ -1,0 +1,144 @@
+\section{Clock dilution and the whole-operator obstruction}
+\label{sec:dilution}
+
+Let $\Hcal_{\mathrm{acc}}$ be the closed span of vertices on the prime cycles.
+It is a reducing subspace, and
+\[
+L_s\big|_{\Hcal_{\mathrm{acc}}}=\bigoplus_p B_{p,s}.
+\]
+The next theorem uses only disjointness, nonnegative clocks, the exact total,
+and
+$\log p/\ell(p)\to0$.  It is therefore independent of all modeling choices
+about how the source clock is distributed.
+
+\begin{theorem}[Clock-dilution obstruction]
+\label{thm:noncompact}
+For every $s\in\C$ with $\sigma=\RePart s>0$ and every nonnegative exact-clock
+allocation satisfying \eqref{eq:exact-clock}, the accepted restriction of
+$L_s$ is noncompact and
+\begin{equation}
+\norm{L_s}_{\ess}=1.
+\label{eq:essential-norm}
+\end{equation}
+Consequently the whole source-weighted vertex adjacency is noncompact.
+\end{theorem}
+
+\begin{proof}
+Choose on every $\Gamma_p$ an edge $e_p$ of minimum roof.  Then
+\[
+\tau(e_p)\le\frac{\log p}{\ell(p)}.
+\]
+Let $u_p$ be its source.  Distinct prime cycles are vertex-disjoint, so
+$(\delta_{u_p})_p$ is an orthonormal, hence weakly null, sequence.  Yet
+\begin{equation}
+\norm{L_s\delta_{u_p}}
+=e^{-\sigma\tau(e_p)}
+\ge p^{-\sigma/\ell(p)}\longrightarrow1.
+\label{eq:edge-witness}
+\end{equation}
+A compact operator maps weakly null bounded sequences to norm-null
+sequences, proving noncompactness.
+
+All nonnegative-roof edge weights have modulus at most one, and the functional
+graph has at most one outgoing edge per vertex, so $\norm{L_s}\le1$.  After
+subtracting any compact operator,
+\eqref{eq:edge-witness} still supplies a tail with lower norm tending to one.
+Thus $\norm{L_s}_{\ess}\ge1$, while the operator-norm upper bound gives
+\eqref{eq:essential-norm}.
+\end{proof}
+
+\begin{theorem}[No finite Schatten repair]
+\label{thm:no-schatten}
+For every $q>0$ and $\sigma>0$, the accepted restriction of $L_s$ does not
+belong to $\Sq$.
+\end{theorem}
+
+\begin{proof}
+By
+\eqref{eq:block-singular}, its $q$th singular-value sum on the $p$-block is
+\[
+\sum_{e\in\Gamma_p}e^{-q\sigma\tau(e)}.
+\]
+The convexity of $x\mapsto e^{-q\sigma x}$ and the exact total give
+\begin{equation}
+\sum_{e\in\Gamma_p}e^{-q\sigma\tau(e)}
+\ge \ell(p)\exp\!\left(-\frac{q\sigma\log p}{\ell(p)}\right).
+\label{eq:jensen-schatten}
+\end{equation}
+The right side tends to infinity.  In particular the block contributions do
+not tend to zero, so their sum over primes diverges.  This is precisely the
+$q$th power sum of the singular values of the orthogonal direct sum.
+\end{proof}
+
+Trace class is the $q=1$ case.  Therefore the ordinary Hilbert-space Fredholm
+determinant $\det_{\Hcal}(I-zL_s)$ requested by the same-object protocol is
+not defined on any half-plane through the usual trace-class theory
+\citep{Simon1977}.  The failure is stronger than divergence of a particular
+rank-one edge expansion: the operator is not even compact.
+
+\begin{theorem}[Essential approximate unit circle]
+\label{thm:essential-circle}
+For every $s$ with $\RePart s>0$,
+\begin{equation}
+\T\subset\sigma_{\ap,\ess}(L_s).
+\label{eq:essential-circle}
+\end{equation}
+Hence $I-zL_s$ is not Fredholm whenever $|z|=1$.
+\end{theorem}
+
+\begin{proof}
+Fix $\lambda\in\T$.  By
+\cref{lem:cycle-block}, the eigenvalues of the prime block are the
+$\ell(p)$ roots of $p^{-s}$.  Their common modulus tends to one by
+\eqref{eq:block-radius}; their angular mesh is $2\pi/\ell(p)\to0$, and the
+common phase offset has size $O(\log p/\ell(p))\to0$.  Choose an exact
+block eigenvalue $\lambda_p$ tending to $\lambda$ and a normalized
+eigenvector $x_p$ supported on that block.  The vectors lie in mutually
+orthogonal finite-dimensional blocks, hence $x_p\rightharpoonup0$, while
+\[
+\norm{(L_s-\lambda I)x_p}=|\lambda_p-\lambda|\longrightarrow0.
+\]
+This singular Weyl sequence proves
+\eqref{eq:essential-circle}.  If $|z|=1$, take $\lambda=z^{-1}$; a Fredholm
+operator cannot admit such a singular sequence for its zero spectral value.
+\end{proof}
+
+The theorem does not identify a self-adjoint spectrum and does not concern
+Riemann zeros.  It says that the graph-step verifier creates essential
+spectrum at the unit circle before any critical-strip spectral mechanism is
+available.
+
+\subsection{An exact criterion behind the example}
+
+\begin{proposition}[Disjoint cycles with prescribed totals]
+\label{prop:compactness-criterion}
+Let $B=\bigoplus_a B_a$ be a weighted adjacency on pairwise disjoint finite
+cycles of lengths $\ell_a$, with nonnegative edge roofs $\tau_{a,j}$ and
+totals $T_a=\sum_j\tau_{a,j}$.  For a fixed allocation, $B$ is compact if
+and only if
+\[
+\min_j\tau_{a,j}\longrightarrow\infty.
+\]
+There exists some allocation with the prescribed totals for which $B$ is
+compact if and only if
+\begin{equation}
+\frac{T_a}{\ell_a}\longrightarrow\infty.
+\label{eq:allocation-criterion}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The singular values of each block are its edge-weight moduli.  A block direct
+sum of finite matrices is compact exactly when its largest block singular
+value tends to zero.  Since that value is
+$e^{-\sigma\min_j\tau_{a,j}}$, this gives the first equivalence.  Necessity
+of
+\eqref{eq:allocation-criterion} follows from
+$\min_j\tau_{a,j}\le T_a/\ell_a$.  For sufficiency, use the uniform
+allocation $\tau_{a,j}=T_a/\ell_a$.
+\end{proof}
+
+The prime verifier has
+$T_p/\ell(p)=\log p/\ell(p)\to0$, the opposite of the compactness regime.
+This criterion is included to expose the mechanism; we make no claim that
+its abstract weighted-shift content is novel.

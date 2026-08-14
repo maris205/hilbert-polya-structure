@@ -1,0 +1,114 @@
+\section{Introduction}
+\label{sec:introduction}
+
+An arithmetic symbolic model should make its arithmetic visible in recurrent
+dynamics.  Attaching one loop of weight $p^{-s}$ after a terminating prime
+test gives the correct Euler factor, but periodic orbits remember only the
+answer, not the computation that produced it.  The natural repair is to close
+the entire verification path.  Then every divisor trial and every exposed
+quotient-search state belongs to the primitive orbit itself.
+
+This paper carries out that repair and finds a different obstruction.  The
+source is the elementary semiring of finite full shifts.  If $F_n$ denotes
+the full shift on $n$ symbols, alphabet product and alphabet-sum realize
+$mn$ and $m+n$, while topological entropy gives $h(F_n)=\log n$.  Trial
+division can therefore be expanded into local successor, multiplication, and
+comparison transitions without a factor-existence oracle.  Successful traces
+are sent directly back to their input states; unsuccessful traces enter
+one-way cemetery rays.  The accepted primitive cycles are exactly the
+primes, with multiplicity one.
+
+The positive orbit statement is exact.  For
+$m=\lfloor\sqrt p\rfloor$, a prime input visits every quotient candidate
+$2\le q\le\lfloor p/d\rfloor+1$ for each $2\le d\le m$.  With the terminal
+accept state contracted, the cycle length is
+\begin{equation}
+\ell(p)=2+\sum_{d=2}^{m}\left\lceil\frac pd\right\rceil
+       \sim\frac12p\log p.
+\label{eq:intro-length}
+\end{equation}
+Giving the cycle exact total roof $\log p$ makes one traversal weigh $p^{-s}$
+and its $r$-fold temporal repetition weigh $p^{-rs}$.  The corresponding
+finite block factor is
+\begin{equation}
+1-z^{\ell(p)}p^{-s}.
+\label{eq:intro-factor}
+\end{equation}
+
+The same length that certifies the computation blocks the requested
+whole-space determinant.  Let $\tau(e)\ge0$ be any edge allocation with
+$\sum_{e\in\Gamma_p}\tau(e)=\log p$.  At least one of the $\ell(p)$ edges
+has
+\[
+\tau(e)\le\frac{\log p}{\ell(p)}\longrightarrow0.
+\]
+On the natural counting space $\ell^2(V)$, the associated edge image has norm
+at least $p^{-\sigma/\ell(p)}\to1$, where $\sigma=\RePart s>0$.
+Different prime cycles give orthogonal witnesses.  The source-weighted vertex
+adjacency is therefore noncompact for every exact-clock allocation.  In fact
+it has essential norm one, lies in no finite Schatten class, and has the unit
+circle in its essential approximate spectrum.
+
+This conclusion is deliberately same-object.  Countable symbolic systems
+admit local zeta functions, formal orbit products, induced maps, and transfer
+operators on other function spaces.  We do not deny any of them.  We freeze
+one graph, one edge-clock rule, the counting vertex Hilbert space, and the
+ordinary Hilbert-space Fredholm determinant.  On that object the determinant
+is unavailable because the operator is not even compact.
+
+Two weaker Euler ledgers survive.  First, the normally convergent raw orbit
+product
+\[
+D^{\mathrm{raw}}_{\mathrm{orb}}(s,z)
+=\prod_p(1-z^{\ell(p)}p^{-s})
+\]
+exists for $\RePart s>1$ and $|z|\le1$; at $z=1$ it is
+$1/\zeta(s)$.  It must not be relabeled as the Fredholm determinant of the
+whole adjacency.  Second, first return to the input states gives
+$R_s e_p=p^{-s}e_p$, whose ordinary Fredholm determinant is the Euler
+product.  That induced operator is unitarily the diagonal prime-loop model.
+Its marker $z$ counts returns, whereas \eqref{eq:intro-factor} counts original
+graph steps.  The two descriptions meet at $z=1$ only, unless the composite
+marker $z^{\ell(p)}$ is explicitly transported.
+
+Our contributions are the following.
+
+\begin{enumerate}
+\item We define an explicit one-sided countable Markov graph whose prime
+  primitive orbit contains the complete semiring quotient search, with no
+  prime table or factor-existence transition.
+\item We prove the exact contracted cycle formula \eqref{eq:intro-length},
+  elementary bounds, and its sharp first-order asymptotic.
+\item We derive the spectrum, singular values, powers, and graph-step
+  determinant of an arbitrarily weighted finite cycle.
+\item We prove allocation-independent noncompactness, essential norm one,
+  absence from every finite Schatten class, and the essential approximate
+  unit circle for the full accepted restriction.
+\item We separate the raw periodic-orbit product from the nonexistent
+  whole-vertex Fredholm determinant, and prove the first-return marker
+  firewall.
+\item We give an exact compactness criterion for disjoint cycles with
+  prescribed total clocks, then use padded total deciders and state
+  subdivision to show that the mechanism is not prime-selective.
+\item We report a deterministic source/no-oracle and finite exact certificate
+  without using target-zero data or finite numerics as proofs of infinite
+  claims.
+\end{enumerate}
+
+\begin{figure}[t]
+\centering
+\resizebox{\textwidth}{!}{\input{figures/clock_dilution_collapse}}
+\caption{Closing the expanded quotient search puts the computation on a long
+prime cycle.  An exact total clock $\log p$ is then diluted across
+$\ell(p)\asymp p\log p$ graph steps, forcing near-unit edge weights and
+noncompactness of the whole vertex adjacency.  First return restores a
+trace-class diagonal loop but contracts the verifier and changes the discrete
+step marker.}
+\label{fig:overview}
+\end{figure}
+
+The result is a negative advance rather than a Riemann-hypothesis claim.  It
+identifies a concrete incompatibility that any next Symbolic Dynamics
+candidate must evade: the arithmetic period and the operator clock cannot be
+chosen independently once a long verification computation is itself made
+recurrent.

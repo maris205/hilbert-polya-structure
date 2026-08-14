@@ -1,0 +1,98 @@
+\section{Universal deciders and subdivision instability}
+\label{sec:universal}
+
+The prime verifier is one instance of a general tension between exposed
+runtime and a short prescribed orbit clock.  This generalization is an
+adversarial control: it shows that the mechanism compiles accepted supports
+rather than isolating a prime-specific invariant.
+
+\begin{theorem}[Closed total-decider obstruction]
+\label{thm:decider}
+Let a total deterministic machine decide $S\subseteq\{2,3,\ldots\}$, and
+suppose $S$ is infinite.  Close the complete accepted computation on input
+$n\in S$ into a simple cycle of length $\ell_M(n)$ and send rejects to
+acyclic rays.  Give every accepted cycle a nonnegative exact total roof
+$\log n$.  Then:
+
+\begin{enumerate}
+\item a compact allocation on the natural vertex space can exist only if
+\begin{equation}
+\frac{\log n}{\ell_M(n)}\longrightarrow\infty
+\quad\text{along }n\in S;
+\label{eq:decider-compactness}
+\end{equation}
+\item if $\ell_M(n)/\log n\to\infty$ along an infinite accepted subsequence,
+then the associated block radii tend to one and every exact allocation is
+noncompact;
+\item the raw accepted-orbit ledger at $z=1$ is nevertheless
+$\prod_{n\in S}(1-n^{-s})$ wherever that product converges absolutely.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Apply
+\cref{prop:compactness-criterion} with $T_n=\log n$ and
+$\ell_n=\ell_M(n)$.  This proves the first assertion.  In the second regime,
+the cyclic-block radius
+$n^{-\sigma/\ell_M(n)}$ tends to one, and the minimum-roof proof of
+\cref{thm:noncompact} applies verbatim.  The finite-block determinant at
+$z=1$ is $1-n^{-s}$ independently of the subdivision, which gives the third
+assertion by absolute convergence.
+\end{proof}
+
+Every total decider can be slowed by an acceptance-independent uniformly
+prescribed delay: on input $n$, execute the original algorithm and then add,
+for example, $n$ dummy successor states before applying the already-computed
+decision.  The padding rule does not inspect acceptance.  Along any infinite
+accepted support it forces $\ell_M(n)/\log n\to\infty$.  Therefore squares,
+powers of two, Fibonacci numbers, deterministic hash predicates, and many
+other supports can be made to reproduce the same exact-ledger/noncompactness
+pattern.
+
+\begin{corollary}[Selector-tautological control]
+\label{cor:selector}
+The existence of an exact unmarked product
+$\prod_{n\in S}(1-n^{-s})$ from closed computation cycles, together with the
+clock-dilution obstruction, does not distinguish rational primes from an
+arbitrary infinite decidable support.  The wrapper is
+\texttt{SELECTOR\_TAUTOLOGICAL} and \texttt{PROVES\_TOO\_MUCH}.
+\end{corollary}
+
+The word ``arbitrary'' here concerns decidable support after a total program
+has been fixed.  It does not claim a uniform decision procedure for all
+subsets of the integers.
+
+\subsection{State-subdivision instability}
+
+The return marker reveals an even simpler presentation control.
+
+\begin{theorem}[Same unmarked ledger, opposite compactness verdicts]
+\label{thm:subdivision}
+Fix an infinite support $S$ and totals $T_n=\log n$.  There are two
+vertex-disjoint recurrent presentations with the same unmarked factors
+$1-n^{-s}$:
+
+\begin{enumerate}
+\item one loop per $n\in S$, whose diagonal adjacency is trace class for
+$\RePart s>1$;
+\item a subdivision of the $n$th loop into $\ell_n$ edges, with the same
+total roof, where $\ell_n/\log n\to\infty$; every nonnegative allocation in
+this presentation is noncompact.
+\end{enumerate}
+
+Their graph-step factors are respectively $1-zn^{-s}$ and
+$1-z^{\ell_n}n^{-s}$.
+\end{theorem}
+
+\begin{proof}
+The first operator is diagonal with trace norm
+$\sum_{n\in S}n^{-\sigma}<\infty$ for $\sigma>1$.  Both finite cycle products
+at $z=1$ equal $1-n^{-s}$.  The second presentation is noncompact by
+\cref{prop:compactness-criterion}.  The marked factors follow from
+\cref{lem:cycle-block}.
+\end{proof}
+
+Thus an Euler identity at $z=1$ is blind to graph-step subdivision, while
+compactness of the natural vertex adjacency is not.  This is why the route
+protocol requires one frozen presentation and one frozen operator before an
+analytic determinant receives credit.

@@ -1,0 +1,122 @@
+\section{The recurrent semiring verifier}
+\label{sec:verifier}
+
+\subsection{Finite-full-shift source}
+
+Let $A_n$ be an $n$-element alphabet and let
+$F_n=A_n^{\mathbb Z}$ be the two-sided full shift, considered up to
+topological conjugacy.  Define
+\[
+F_m\boxtimes F_n:=F_{A_m\times A_n}\cong F_{mn},
+\qquad
+F_m\boxplus F_n:=F_{A_m\sqcup A_n}\cong F_{m+n}.
+\]
+We call $\boxplus$ the \emph{alphabet-sum}.  It is not asserted to be a
+categorical coproduct of subshifts: the full shift on a disjoint alphabet
+allows temporal mixing between the summands.  The frozen structural rules are
+\[
+h(F_n)=\log n,
+\qquad
+S(F_d)=F_d\boxplus F_1=F_{d+1},
+\qquad
+F_d\boxtimes F_q\cong F_{dq}.
+\]
+Equality and order are comparisons of the represented finite alphabet
+cardinalities.  These are the only arithmetic instructions used below.
+
+\subsection{Expanded quotient-search graph}
+
+For every input $n\ge2$, introduce reachable states
+\[
+I_n,\qquad T_{n,d},\qquad Q_{n,d,q},\qquad R_{n,k}.
+\]
+The first is the input; $T_{n,d}$ tests the next divisor; $Q_{n,d,q}$ exposes
+successive cofactor candidates; and $R_{n,k}$ belongs to a one-way cemetery
+ray.  The directed edges are
+\begin{equation}
+I_n\longrightarrow T_{n,2},
+\label{eq:input-edge}
+\end{equation}
+\begin{equation}
+T_{n,d}\longrightarrow
+\begin{cases}
+I_n,&d^2>n,\\
+Q_{n,d,2},&d^2\le n,
+\end{cases}
+\label{eq:trial-edge}
+\end{equation}
+and
+\begin{equation}
+Q_{n,d,q}\longrightarrow
+\begin{cases}
+Q_{n,d,q+1},&dq<n,\\
+R_{n,1},&dq=n,\\
+T_{n,d+1},&dq>n.
+\end{cases}
+\label{eq:quotient-edge}
+\end{equation}
+Finally $R_{n,k}\to R_{n,k+1}$.  Distinct inputs use disjoint copies of all
+states.  The successful transition in \eqref{eq:trial-edge} returns directly
+to $I_n$: there is no separate accept vertex.  This contracted convention
+fixes every endpoint count in the sequel.
+
+The equality edge in \eqref{eq:quotient-edge} is not a divisibility oracle.
+For fixed $d$, the graph constructs $q=2,3,\ldots$ by successor until the
+product $F_d\boxtimes F_q$ equals or exceeds $F_n$.  A composite input reaches
+equality at its least divisor $d\le\sqrt n$ and then enters an acyclic ray.  A
+prime input overshoots for every $2\le d\le\lfloor\sqrt p\rfloor$ and returns
+to its input after the square test.
+
+\begin{proposition}[Recurrent census]
+\label{prop:recurrent-census}
+The graph component reachable from $I_n$ contains a closed walk if and only
+if $n$ is prime.  In that case the reachable recurrent component is one
+simple directed cycle $\Gamma_n$ containing the entire successful
+verification path.  Composite components are acyclic.
+\end{proposition}
+
+\begin{proof}
+Determinism gives a unique forward path.  If $n$ is composite, its least
+factor is at most $\sqrt n$, so an equality branch enters a one-way ray and
+never returns.  If $n=p$ is prime, no tested product equals $p$; every
+quotient search overshoots, the divisor increments, and the first state with
+$d^2>p$ returns to $I_p$.  No state repeats before that return because either
+$d$ or $q$ strictly increases.  Thus the closed path is simple.  Disjoint
+input copies exclude mixed cycles.
+\end{proof}
+
+Let $G^{\circlearrowleft}$ denote this recurrently closed graph and let
+$X^+_{G^{\circlearrowleft}}$ be its one-sided edge shift.  The graph is the
+symbolic phase-space presentation; the operator studied below acts on the
+separate vertex counting space.
+
+\subsection{Exact clock class and natural operator}
+
+For each prime component choose finite nonnegative clocks $\tau(e)$ with
+\begin{equation}
+\sum_{e\in\Gamma_p}\tau(e)=h(F_p)=\log p.
+\label{eq:exact-clock}
+\end{equation}
+Only the total is source-visible.  Its distribution over expanded machine
+states is a modeling choice.  The uniform representative
+$\tau(e)=\log p/\ell(p)$ is strictly positive; the operator theorem permits
+zero clocks as well.  Composite computation and cemetery edges may retain
+the summable source roofs of the previous transient model, but those edges do
+not affect any accepted-block obstruction.
+
+Set $\Hcal=\ell^2(V)$ with its standard vertex basis.  For
+$s\in\C$, $\sigma=\RePart s>0$, define the source-weighted vertex adjacency
+\begin{equation}
+L_s\delta_u=e^{-s\tau(u\to v)}\delta_v
+\label{eq:vertex-adjacency}
+\end{equation}
+on every functional edge $u\to v$, first on finitely supported vectors and
+then by bounded extension under the frozen roof choice.  On the accepted
+subspace it is an orthogonal direct sum of finite weighted cyclic
+permutations.  We do not call
+$L_s$ a Ruelle transfer operator.
+
+The requested determinant is the ordinary Hilbert-space Fredholm determinant
+$\det_{\Hcal}(I-zL_s)$, admitted when $L_s\in\Sone$.  This same-object lock
+prevents a formal orbit product or an induced operator from silently replacing
+the whole vertex adjacency.

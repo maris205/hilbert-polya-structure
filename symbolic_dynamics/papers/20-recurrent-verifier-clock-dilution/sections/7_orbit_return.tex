@@ -1,0 +1,117 @@
+\section{Raw orbit product and first-return collapse}
+\label{sec:return}
+
+Noncompactness does not erase the finite-block cycle census.  It changes what
+can legitimately be called an operator determinant.
+
+\begin{theorem}[Raw graph-step ledger]
+\label{thm:raw-product}
+For $\RePart s>1$ and $|z|\le1$, the product
+\begin{equation}
+D_{\mathrm{orb}}^{\mathrm{raw}}(s,z)
+:=\prod_p\left(1-z^{\ell(p)}p^{-s}\right)
+\label{eq:raw-product}
+\end{equation}
+converges normally on compact subsets of that domain.  At $z=1$,
+\begin{equation}
+D_{\mathrm{orb}}^{\mathrm{raw}}(s,1)
+=\prod_p(1-p^{-s})=\zeta(s)^{-1}.
+\label{eq:raw-zeta}
+\end{equation}
+It is not the ordinary Fredholm determinant of the whole $L_s$.
+\end{theorem}
+
+\begin{proof}
+For $|z|\le1$ and $\sigma>1$,
+\[
+\sum_p\left|z^{\ell(p)}p^{-s}\right|
+\le\sum_pp^{-\sigma}<\infty.
+\]
+The same majorant is locally uniform after fixing a compact lower bound for
+$\sigma$, so the canonical product converges normally.  Equation
+\eqref{eq:raw-zeta} is Euler's absolutely convergent product.  On every
+finite prime cutoff,
+\eqref{eq:prime-block} shows that
+\eqref{eq:raw-product} is the determinant of the finite direct sum.  But
+\cref{thm:noncompact,thm:no-schatten} show that the infinite whole adjacency
+is not trace class.  Thus no ordinary Hilbert-space Fredholm determinant of
+$L_s$ has been produced.
+\end{proof}
+
+This theorem gives full graph-step information, not merely the specialization
+$z=1$.  Formally differentiating its logarithm near $z=0$ recovers the block
+trace rule
+\eqref{eq:block-traces}; nonzero terms occur only at multiples of the
+expanding cycle lengths.
+
+\subsection{Poincar\'e section}
+
+Let
+\[
+\Sigma=\{I_p:p\text{ prime}\}
+\]
+be the section of accepted input states.  One full return from $I_p$ traverses
+$\Gamma_p$ and accumulates weight $p^{-s}$.
+
+\begin{theorem}[First-return diagonal]
+\label{thm:first-return}
+The induced weighted return operator on $\ell^2(\Sigma)$ is
+\begin{equation}
+R_s\delta_{I_p}=p^{-s}\delta_{I_p}.
+\label{eq:return-diagonal}
+\end{equation}
+For $\RePart s>1$, $R_s\in\Sone$ and
+\begin{equation}
+\det(I-zR_s)=\prod_p(1-zp^{-s}).
+\label{eq:return-det}
+\end{equation}
+As an operator, $R_s$ is unitarily equivalent to the diagonal prime-loop
+core obtained by replacing each entire verification cycle with one loop.
+\end{theorem}
+
+\begin{proof}
+The product of the edge weights around $\Gamma_p$ is $p^{-s}$, proving
+\eqref{eq:return-diagonal}.  Since
+$\sum_p|p^{-s}|<\infty$ for $\sigma>1$, the diagonal operator is trace class.
+Its Fredholm determinant is the product of its diagonal factors.  Sending
+$\delta_{I_p}$ to the standard prime basis gives the asserted unitary
+equivalence.
+\end{proof}
+
+First return is a legitimate dynamical operation; the point is that it is not
+the same discrete-time object.  The original block and its induced loop give
+the respective factors
+\begin{equation}
+\underbrace{1-z^{\ell(p)}p^{-s}}_{\text{original graph steps}}
+\qquad\text{and}\qquad
+\underbrace{1-zp^{-s}}_{\text{return steps}}.
+\label{eq:marker-firewall}
+\end{equation}
+They coincide at $z=1$.  They also agree if induction explicitly carries the
+composite marker $z^{\ell(p)}$ as part of the return weight.  Without that
+transport, equality at $z=1$ cannot be promoted to equality of marked
+determinants.  This is the marker firewall in
+\cref{fig:overview}.
+
+\subsection{The opposite roof choice}
+
+There is an instructive trace-class control.  Retain the summable source roofs
+from the transient SD-C21 verifier and redirect the old terminal successful
+edge directly to $I_p$.  In particular, retain its roof
+$\log(p(m+1))$; do not add a new $\log p$ return edge.  The edge-by-edge
+summability majorant then survives on $\RePart s>1$.  However, every verifier
+edge already carries a clock comparable to at least $\log p$, so the total
+around $\Gamma_p$ is at least $\ell(p)\log p$, not $\log p$.
+
+Thus the two natural objectives point in opposite directions:
+\begin{equation}
+\begin{array}{ccl}
+\text{exact total clock }\log p
+&\Longrightarrow&\text{noncompact whole adjacency},\\[2pt]
+\text{summable source edge clocks}
+&\Longrightarrow&\text{trace class but wrong orbit clock}.
+\end{array}
+\label{eq:clock-dichotomy}
+\end{equation}
+The source roofs are themselves a frozen modeling choice and are invisible to
+the desired Euler total once first return is imposed.

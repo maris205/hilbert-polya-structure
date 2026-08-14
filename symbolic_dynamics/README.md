@@ -31,6 +31,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [17-fiber-cocycle-artin-factor](papers/17-fiber-cocycle-artin-factor/README.md) | [PDF](papers/17-fiber-cocycle-artin-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/17-fiber-cocycle-artin-factor/) | 真正 commuting 的 $C_2$ fiber 在同一 subset shift 中给出 Artin blocks $D_+=1/\zeta(s)$、$D_-=\zeta(s)/\zeta(2s)$ 与 whole determinant $D_{\rm reg}=1/\zeta(2s)$；但 mixed primitive lifts 仍大量存在，全部 matched inventories 也精确复制该分解。 | **ARTIN FACTOR / ROUTE-A REJECTED / SD-C19** |
 | [18-incidence-transition-holonomy](papers/18-incidence-transition-holonomy/README.md) | [PDF](papers/18-incidence-transition-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/18-incidence-transition-holonomy/) | subset-incidence transition rule 产生了真正非交换、非 one-letter-coboundary 的 $S_3$ holonomy；trivial/sign blocks 仍保留标量 Euler factor，但 faithful standard block 精确泄漏 mixed primitive coefficients，且全部 matched inventories 都复制该现象。 | **GENUINE TRANSITION HOLONOMY / ROUTE-A REJECTED / SD-C20** |
 | [19-stationary-semiring-sieve-shift](papers/19-stationary-semiring-sieve-shift/README.md) | [PDF](papers/19-stationary-semiring-sieve-shift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/19-stationary-semiring-sieve-shift/) | full-shift alphabet-sum、tensor 与 order 可把无 factor oracle 的逐商试除编译成一个 trace-class 单边 Markov graph，并在 $\Re s>1$ 精确给出 $1/\zeta(s)$；但全部计算状态都属 transient DAG，剪枝后只剩 Paper 04 的 prime loops，而任意总可判定集合都能复制同型 Euler 子积。 | **SEMIRING VERIFIER / PRUNING EQUIVALENT / ROUTE-A REJECTED / SD-C21** |
+| [20-recurrent-verifier-clock-dilution](papers/20-recurrent-verifier-clock-dilution/README.md) | [PDF](papers/20-recurrent-verifier-clock-dilution/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/20-recurrent-verifier-clock-dilution/) | 把完整试除计算闭成 prime cycle 后，每圈仍精确携带 $\log p$，但验证长度 $\ell(p)\asymp p\log p$ 会把 clock 稀释到至少一条边权趋于 $1$；whole adjacency 因而 essential norm 为 $1$、非紧且没有 Fredholm determinant。$z=1$ 的 orbit product 虽仍是 $1/\zeta$，Poincaré return 却把系统收缩回 Paper 04 的 diagonal atom loops。 | **CLOCK DILUTION / FIRST-RETURN COLLAPSE / ROUTE-A REJECTED / SD-C22** |
 
 ### 论文 1 的候选分离结论
 
@@ -496,13 +497,50 @@ recurrent cycle，并检验 Euler 总 clock $\log p$ 与紧性/Fredholm 性是�
 当前最小猜想是一个 clock-dilution obstruction：当验证长度远快于 $\log p$ 增长时，
 周期上必有边权趋近 $1$，从而使 whole operator 非紧。
 
+### 论文 20：计算路径成功进入 recurrence，但 exact clock 被状态细分稀释
+
+Paper 20 把 Paper 19 的完整显式商搜索路径直接闭成 recurrent verifier cycle；不再在
+判定结束后另接一个 accept loop。对每个 prime $p$，contracted cycle 的精确长度是
+
+$$
+\ell(p)=2+\sum_{d=2}^{\lfloor\sqrt p\rfloor}\left\lceil\frac pd\right\rceil
+=\frac12p\log p+(\gamma-1)p+O(\sqrt p),
+$$
+
+且一圈的 total roof 被 source-lock 为 $\log p$。因此 raw primitive ledger 的确给出
+
+$$
+\prod_p\bigl(1-z^{\ell(p)}p^{-s}\bigr),
+$$
+
+并在 $z=1$、$\Re s>1$ 恢复 $1/\zeta(s)$。这是真正的 recurrent arithmetic
+compiler 正结果，而不是 Paper 19 的 transient pruning。
+
+但 exact total clock 与长计算路径不相容：任何非负 roof 分配都至少有一条边满足
+$\tau_e\le \log p/\ell(p)\to0$，相应权重 $e^{-s\tau_e}\to1$。自然 whole
+vertex-adjacency 的 essential norm 因而等于 $1$，算子非紧、不属于任何有限 Schatten
+类，并且单位圆进入 essential approximate spectrum；$I-zL_s$ 在 $|z|=1$ 上不是
+Fredholm。raw orbit product 不是这个 whole operator 的 Fredholm determinant。
+
+Poincaré first return 虽给出 trace-class diagonal operator
+$R_se_p=p^{-s}e_p$，却把整个验证过程收缩掉，并把 marker 从
+$z^{\ell(p)}$ 改回 $z$，与 Paper 04 同构。564/564 个 prime cycles、12/12 tests、
+1,651 个显式 quotient states 与四类 padded-decider controls 都通过，说明障碍既不是
+factor oracle 伪影，也不具 arithmetic selectivity。阶段结论是
+**GO_RECURRENT_VERIFIER_ORBIT_LEDGER / GO_CLOCK_DILUTION_THEOREM /
+STOP_WHOLE_VERTEX_FREDHOLM / FIRST_RETURN_COLLAPSE / PROVES_TOO_MUCH**。
+
+Paper 21 因而放弃“把一条越来越长的 verifier path 闭合”的方案，转向一个固定局部
+successor–divisor grammar：它先检验 whole transfer 能否在更大的半平面成为真正
+trace-class Fredholm family，再在选择 roof 之前审计其 primitive-cycle species。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十九篇论文](papers/)
+- [二十篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
