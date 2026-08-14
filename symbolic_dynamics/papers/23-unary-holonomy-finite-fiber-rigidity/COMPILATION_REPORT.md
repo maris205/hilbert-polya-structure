@@ -6,8 +6,8 @@
 **Bibliography:** BibTeX 0.99d with plainnat  
 **Paper size:** A4, \(595.276\times841.89\) pt  
 **Page count:** 21  
-**File size:** 564,454 bytes  
-**SHA-256:** ffaadbdc51038c72e44d0820374da05767e3b02f9363543b1c80cc21a7934560
+**File size:** 564,519 bytes
+**SHA-256:** 38cc9ee9bbd76fedee168caa969d076510ed22416d0c00ac8132a23c3247a765
 
 ## Clean build sequence
 

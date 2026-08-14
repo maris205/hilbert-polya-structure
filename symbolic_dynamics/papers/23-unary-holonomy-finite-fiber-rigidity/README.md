@@ -8,7 +8,7 @@ Periodicity, Recurrence Supports, and Compiler Collapse*
 **Target-zero data:** none  
 **Route B:** locked  
 **Compiled artifact:** [main.pdf](main.pdf), 21 A4 pages, SHA-256
-ffaadbdc51038c72e44d0820374da05767e3b02f9363543b1c80cc21a7934560
+38cc9ee9bbd76fedee168caa969d076510ed22416d0c00ac8132a23c3247a765
 
 ## One-paragraph result
 

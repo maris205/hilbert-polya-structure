@@ -93,9 +93,9 @@ The canonical runner performs two complete generator, 32-test, and analysis
 runs and requires byte-identical code/result snapshots. It then checks the
 Route-A schema, scientific integrity predicates, cache cleanliness, and the
 SHA-256 inventory. `source_commit`, `code_commit`, and
-`source_lock.code_commit` intentionally remain
-`PENDING_FIRST_ARTIFACT_COMMIT` under the recorded two-stage provenance
-protocol.
+`source_lock.code_commit` are sealed by the external multi-stage provenance
+protocol. The machine-readable Route-A record is authoritative for the
+immutable snapshot hash.
 
 This candidate constructs no self-adjoint carrier, critical-line mechanism,
 or Route-B object. The experiments do not claim such mechanisms impossible
