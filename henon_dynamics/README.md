@@ -80,6 +80,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mu3_universal_dihedral_denominator_rigidity/](henon_mu3_universal_dihedral_denominator_rigidity/) | C54: for every \(n\ge2\), the full projective monomial ideal stabilizer of the cubic--weighted-cycle-quadric source is \(\operatorname{Dih}(C_{3n})\) of order \(6n\), and its C53 descent is a nonconstant rank-\(6n\) rational group scheme with two rational geometric elements; on packet-admissible smooth rows, the complete good-split local exponent \(4/n\) is realized by an actual finite-rank rational compatible system exactly when \(n\mid4\), while the exact \(n=3\) character and split-invisible counterpacket gates cannot clear the denominator | All-order equation/group classification and packet-conditioned split-local rigidity; the group is not promoted to the full PGL stabilizer, rows \(n\ge5\) have no smoothness or motive theorem, and no inert/global root, automorphy, continuation, functional equation, or Hilbert--Pólya operator is obtained, Route A exploratory |
 | [henon_mu3_dihedral_core_rational_descent/](henon_mu3_dihedral_core_rational_descent/) | C53: an explicit Hilbert--90 basis descends the ordered cubic/quadric source equations to \(\mathbb Q\) for every \(n\); on the certified fourth-moment row the twisted order-24 symmetry and its rank-10 Chow core descend to \(\mathbb Q\), with degree-ten integral, weight-five, reciprocal good-prime local polynomials and exact split/inert quadratic-base-change identities | First rational compatible-system package for the rank-10 core and exact split-local half-root repair; no new Euler half-plane, global continuation, functional equation, or Hilbert--Pólya operator, Route A exploratory |
 | [henon_mu3_d12_calabi_yau_core_projector/](henon_mu3_d12_calabi_yau_core_projector/) | C52: the complete order-\(24\) projective monomial source group gives \(K\)-rational middle Chow projectors of ranks \(10\) and \(158\); the rational graph algebra cannot isolate the desired rank-two extreme Hodge pair | First algebraic splitting of the fourth-moment odd packet; A3 packet control improved, A2/A4 inherited, Route A exploratory |
 | [henon_galois_excess_five_block_obstruction/](henon_galois_excess_five_block_obstruction/) | P57: reflection reduction produces an irreducible cubic `A6` trace field and a shared totally real degree-fourteen `A7/B7` field; exact Sturm intervals and an integer-product margin prove \(\Delta_5>0\), while determinant \(\pm1\) width-six minors prove finite sharpness | Exact width-at-most-five regularity obstruction inside Route A; the whole-sequence \(\Delta_m\) asymptotics, unrestricted Hölder realization, full Galois-weighted determinant and Route B remain open |
@@ -1413,3 +1414,32 @@ global effectivity remain open.
 - [P61 paper](henon_survivor_reflection_transversality/paper/paper.pdf)
 - [P61 proof package](henon_survivor_reflection_transversality/PROOF_PACKAGE.md)
 - [P61 exact certificate](henon_survivor_reflection_transversality/results/c61_certificate.json)
+
+## HCS-P62 full-horseshoe algebraic exhaustion
+
+P62 closes the ambient half of the P60/P61 effectivity gate.  The scaling
+`S(q,p)=(6q,6p)` conjugates `H6` to the area-preserving Hénon map at
+`(a,b)=(6,-1)`.  Arai's certified hyperbolic plateau connects `a=6` to a
+Devaney--Nitecki full-two-shift anchor at `a=10`.  Hence `H6^n` has exactly
+`2^n` distinct real hyperbolic fixed points.  Friedland--Milnor's complex
+algebraic fixed-point count is also `2^n`, so the real points exhaust the
+complete complex fixed-point scheme with multiplicity one.
+
+It follows that every odd mixed-axis closure polynomial is totally real and
+squarefree.  Its Möbius primitive quotient is a reduced effective divisor of
+exact least-period roots, with actual degree
+
+\[
+D_n=\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}
+\]
+
+and entropy `(1/2)log(2)`.  Exact Sturm isolation through odd period 13 gives
+primitive counts `2,2,6,14,28,62,126`.  This is an all-period algebraic and
+dynamical Route-A theorem, not an arithmetic promotion: rational-prime
+labels, von Mangoldt amplitudes, a completed determinant, and an operator
+remain open.
+
+- [P62 overview](henon_full_horseshoe_algebraic_exhaustion/README.md)
+- [P62 paper](henon_full_horseshoe_algebraic_exhaustion/paper/paper.pdf)
+- [P62 proof package](henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
+- [P62 exact certificate](henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)
