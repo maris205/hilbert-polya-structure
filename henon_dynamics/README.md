@@ -1413,3 +1413,32 @@ global effectivity remain open.
 - [P61 paper](henon_survivor_reflection_transversality/paper/paper.pdf)
 - [P61 proof package](henon_survivor_reflection_transversality/PROOF_PACKAGE.md)
 - [P61 exact certificate](henon_survivor_reflection_transversality/results/c61_certificate.json)
+
+## HCS-P62 full-horseshoe algebraic exhaustion
+
+P62 closes the ambient half of the P60/P61 effectivity gate.  The scaling
+`S(q,p)=(6q,6p)` conjugates `H6` to the area-preserving Hénon map at
+`(a,b)=(6,-1)`.  Arai's certified hyperbolic plateau connects `a=6` to a
+Devaney--Nitecki full-two-shift anchor at `a=10`.  Hence `H6^n` has exactly
+`2^n` distinct real hyperbolic fixed points.  Friedland--Milnor's complex
+algebraic fixed-point count is also `2^n`, so the real points exhaust the
+complete complex fixed-point scheme with multiplicity one.
+
+It follows that every odd mixed-axis closure polynomial is totally real and
+squarefree.  Its Möbius primitive quotient is a reduced effective divisor of
+exact least-period roots, with actual degree
+
+\[
+D_n=\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}
+\]
+
+and entropy `(1/2)log(2)`.  Exact Sturm isolation through odd period 13 gives
+primitive counts `2,2,6,14,28,62,126`.  This is an all-period algebraic and
+dynamical Route-A theorem, not an arithmetic promotion: rational-prime
+labels, von Mangoldt amplitudes, a completed determinant, and an operator
+remain open.
+
+- [P62 overview](henon_full_horseshoe_algebraic_exhaustion/README.md)
+- [P62 paper](henon_full_horseshoe_algebraic_exhaustion/paper/paper.pdf)
+- [P62 proof package](henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
+- [P62 exact certificate](henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)

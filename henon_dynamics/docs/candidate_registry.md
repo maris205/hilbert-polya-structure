@@ -1994,3 +1994,33 @@ independent Cartesian checker reproduce all physical sign words.
 Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized.  The
 next theorem is ambient: decide nonvanishing/factorization of
 `Res_X(F_n,F_n')` without borrowing survivor hyperbolicity.
+
+## HCS-P62 full-horseshoe algebraic exhaustion (2026-08-14)
+
+Candidate **HCS-P62** resolves the P60/P61 ambient effectivity gate at the
+frozen area-preserving parameter; see the
+[HCS-P62 project](../henon_full_horseshoe_algebraic_exhaustion/).  The exact
+scaling `S(q,p)=(6q,6p)` places `H6` at `(a,b)=(6,-1)`.  Arai's connected
+hyperbolic plateau transports the Devaney--Nitecki full-two-shift anchor from
+`a=10` to `a=6`.  Thus `H6^n` has `2^n` distinct real hyperbolic fixed
+points.  Friedland--Milnor gives total complex algebraic multiplicity `2^n`,
+so these real points exhaust every complex periodic point and are all simple.
+
+For odd `n`, every root of P60's mixed-axis closure is consequently real and
+P61's tangency lemma excludes multiplicity.  The primitive quotient is a
+reduced exact-period divisor and
+
+\[
+\mathbb Q[X]/(\Psi_n)
+\]
+
+is finite étale and totally real.  The actual primitive reflection entropy is
+`(1/2)log(2)`.  Exact Sturm isolation through period 13 and an independent
+full-shift audit match.
+
+The formal Route-A tuple is **(A1_PASS_ANALYTIC for the all-period real
+periodic/reflection layer, A2_ANALYTIC_DETERMINANT for the inherited symbolic
+horseshoe, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  Route B is not authorized.  The next theorem is a
+uniform height/Galois-excess pressure for these effective totally real
+primitive divisors; no rational-prime trace follows from total reality.

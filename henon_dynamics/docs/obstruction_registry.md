@@ -379,3 +379,22 @@ strings, while P48--P57 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O103 | Certified-survivor hyperbolicity as a compiler for ambient mixed-axis dynatomic effectivity | proved physical/ambient incidence-entropy obstruction | Survivor hyperbolicity proves all primitive physical roots simple, but their exact count has entropy `(1/2)log(varphi)` while formal mixed-axis degree has entropy `(1/2)log(2)`. Thus the controlled population has density `Theta((varphi/2)^(n/2))` and is exponentially negligible in formal degree. | Stops promotion of local survivor transversality to all ambient algebraic roots. It does not obstruct a separate critical-resultant theorem, and it retains coefficient `+1` for every primitive physical root. No claim is made that formal residual degree already counts distinct roots. | ../henon_survivor_reflection_transversality/README.md |
+
+## HCS-P62 positive resolution of HEN-O102/HEN-O103
+
+HCS-P62 resolves the ambient effectivity question that HEN-O102 and HEN-O103
+correctly left open.  A source-backed full two-shift at `H6` supplies `2^n`
+distinct real hyperbolic fixed points of every iterate, while the
+Friedland--Milnor algebraic count supplies total complex multiplicity `2^n`.
+The equality exhausts the complex fixed-point scheme.  Therefore every odd
+mixed-axis closure is totally real and squarefree, and every recursive
+primitive quotient is a reduced effective exact-period divisor.
+
+This does not invalidate either historical obstruction: P60's formal degree
+alone and P61's smaller survivor alone were insufficient.  P62 adds the
+missing global full-horseshoe/algebraic-count bridge.  The surviving open
+gate is arithmetic---uniform height/Galois-excess pressure and a
+source-native prime-power trace---rather than ambient root effectivity.
+
+- [P62 proof package](../henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
+- [P62 exact certificate](../henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)
