@@ -867,13 +867,76 @@ ROUTE_A_REJECTED**。Paper 28 因而只保留同一 incidence parent 的原生 G
 检验其 chiral/adjoint completion 是否能在临界线产生非平凡、算术可选择的谱运动；
 Route B 继续锁定。
 
+### 论文 28：临界线谱确实运动，但正定自然度量与算术选择性形成三难
+
+Paper 28 对 Paper 27 的同一 Möbius-incidence compiler 作一次 source-real 的
+holomorphic reflected completion：
+
+$$
+\mathcal B_s=
+\begin{pmatrix}
+0&T_s\\
+T_{1-s}^{\sharp}&0
+\end{pmatrix}.
+$$
+
+由于 $T_s$ 与 atom diagonal 有界相似，严格的 Schatten 条件是
+
+$$
+\mathcal B_s\in\mathcal S_q
+\quad\Longleftrightarrow\quad
+\frac1q<\Re s<1-\frac1q.
+$$
+
+因此 $q=3$ 是第一个覆盖临界线的整数阶；在 $s=\tfrac12+it$ 上，
+$\mathcal B_s$ 是 compact self-adjoint，但不属于 $\mathcal S_2$。原生 oblique
+idempotents 的 mixed Gram coefficient 满足
+
+$$
+G_{pq}=C_\eta\,
+\frac{(pq)^{-2\eta}}
+{(1+p^{-2\eta})(1+q^{-2\eta})}>0,
+$$
+
+而 $\operatorname{Tr}\mathcal B_s^4$ 在频率 $2\log(q/p)$ 上有唯一正系数
+$4G_{pq}^2/(pq)$。所以临界线上的谱运动不是数值幻觉或单边 gauge；
+$\det_3(I-z\mathcal B_s)$ 的解析 germ 确实随 $t$ 变化。
+
+这条正面结果同时给出更锋利的停止定理。二阶 mixed-Gram 项在 finite cutoff 中
+已随 $t$ 运动，但 countable diagonal 部分含 $\sum_p p^{-1}$ 而发散；$\det_3$ 恰好删掉
+幂次 $1,2$，首个诚实可见项只能到幂次 $4$。更重要的是，mutated divisibility、
+composite-only atoms 与 seeded generic DAG 都复制同型运动，说明它是 generic
+oblique-incidence geometry，而非 arithmetic selector。
+
+若要求一个 bounded positive metric $G$ 使所有 active $q_p$ 自伴，则
+
+$$
+Z^*GZ
+$$
+
+必须在 active coordinates 上对角。相应 Hellinger/Löwdin 变换把整族酉化为独立
+atom blocks，并把手征 determinant 压成
+
+$$
+\prod_p\left(1-\frac{z^2}{p}\right)e^{z^2/p},
+$$
+
+完全失去 $s,t$。61/61 tests、154 条 exact/control/comparison rows 与 30 个
+fresh double-run byte-identical artifacts 验证了 Gram 公式、Schatten strip、
+finite-$B^2$ firewall、唯一四阶频率、metric rigidity、phase-free product、marker
+ownership 与三类 adversarial controls。阶段结论是 **GO_SCHATTEN3_CHIRAL_FAMILY /
+GO_EXACT_FOURTH_MOMENT_MOTION / STOP_ARITHMETIC_SELECTIVITY /
+STOP_POSITIVE_METRIC_COMPLETION / STOP_FIXED_HILBERT_POLYA_OPERATOR /
+ROUTE_A_REJECTED**。Route B 继续锁定；下一批最小义务是分类 source-natural 的
+$B^2$ counterterms，而不是再叠加任意 block completion。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十七篇论文](papers/)
+- [二十八篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

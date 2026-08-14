@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+  node distance=7mm and 11mm,
+  box/.style={draw=charcoal,rounded corners,align=center,
+    inner sep=5pt,font=\small,text width=3.3cm},
+  source/.style={box,fill=softgray,text width=4.2cm},
+  native/.style={box,fill=blue!7},
+  metric/.style={box,fill=green!8},
+  stop/.style={box,fill=red!7,draw=stopred,text width=7.2cm},
+  arr/.style={-{Stealth[length=2mm]},line width=.8pt,charcoal}
+]
+  \node[source] (src) {source incidence atoms\\$q_p=ZE_pZ^{-1}$};
+  \node[native,below left=of src] (nat) {native reflected block\\
+    mixed Gram $G_{pq}$};
+  \node[metric,below right=of src] (met) {positive common metric\\
+    $Gq_p=q_p^*G$};
+  \node[native,below=of nat] (motion) {exact fourth-moment\\
+    $t$-motion};
+  \node[metric,below=of met] (collapse) {$Z^*GZ$ atom diagonal\\
+    independent $2\times2$ blocks};
+  \node[native,below=of motion] (generic) {motion survives mutated,\\
+    composite, generic controls};
+  \node[metric,below=of collapse] (still) {spectrum $\{\pm p^{-1/2}\}$\\
+    no $t$-motion};
+  \node[stop,below=12mm of $(generic)!0.5!(still)$] (end)
+    {\textbf{STOP:} neither branch yields a fixed Hilbert--P\'olya
+     operator or an arithmetic-selective target-zero correspondence};
+  \draw[arr] (src)--(nat);
+  \draw[arr] (src)--(met);
+  \draw[arr] (nat)--(motion);
+  \draw[arr] (met)--(collapse);
+  \draw[arr] (motion)--(generic);
+  \draw[arr] (collapse)--(still);
+  \draw[arr] (generic)--(end);
+  \draw[arr] (still)--(end);
+\end{tikzpicture}
