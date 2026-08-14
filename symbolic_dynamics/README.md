@@ -24,6 +24,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [10-entropy-paired-relative-determinant](papers/10-entropy-paired-relative-determinant/README.md) | [PDF](papers/10-entropy-paired-relative-determinant/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/10-entropy-paired-relative-determinant/) | 相邻 entropy-rank 原子的 odd/even 配对使相对 transfer 对所有 $\Re s>0$ 都是 trace class，产生反射对称且可运动的相对行列式；但它是 zero-free 的 alternating Euler product，用符号帐本替换了目标正权 prime-power ledger，并被任意递增库存复制。 | **ROUTE-A REJECTED / PROVES TOO MUCH / SD-C12** |
 | [11-unitary-fiber-moment-rigidity](papers/11-unitary-fiber-moment-rigidity/README.md) | [PDF](papers/11-unitary-fiber-moment-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/11-unitary-fiber-moment-rigidity/) | 对有限维 unitary/Bloch fiber，faithful positive normalized trace 中 $\tau(U)=1$ 已强制 $U=I$；非忠实状态或 graded 复制可隐藏谱运动，但 ordinary determinant 会看见它，而 Berezinian 又将它完全消去，recurrent finite-path 构造则总在某个重复阶数泄漏。 | **POSITIVE-MOMENT RIGIDITY / ROUTE-A REJECTED / SD-C13** |
 | [12-fourier-null-haar-fiber](papers/12-fourier-null-haar-fiber/README.md) | [PDF](papers/12-fourier-null-haar-fiber/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/12-fourier-null-haar-fiber/) | 所有正次 Fourier moments 都等于 $1$ 的有限正圆周测度唯一形如 $\delta_1+c\,m_{\rm Haar}$；这个无限维 diffuse escape 保留 Euler ledger，却被原标量全纯 trace-log determinant 完全消去。归一化、有限近似、selfadjointization 或 inverse coupling 都会分别破坏 ledger、迟发泄漏或产生 balanced mixed words。 | **HAAR ESCAPE / DETERMINANT INVISIBILITY / SD-C14** |
+| [13-character-resolved-holonomy](papers/13-character-resolved-holonomy/README.md) | [PDF](papers/13-character-resolved-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/13-character-resolved-holonomy/) | positive-cone $\mathbb Z$-skew extension 把 reciprocal Euler product 精确放在 deck-neutral Fourier coefficient，并让同一 parent lift 的非零 Bloch modes 看见 recurrent mixed returns；但没有任何单独 character fiber 保持 Euler ledger，全部 nonprime/random controls 也会运动，而 inverse reversal 在二阶污染零模。 | **CHARACTER RESOLUTION / ROUTE-A REJECTED / SD-C15** |
 
 ### 论文 1 的候选分离结论
 
@@ -210,11 +211,42 @@ tensor-prime 源已内生给出 Euler ledger、Gamma shadow、$1/2$ center、反
 和非 gauge 谱运动；尚缺的只是一个**同一解析不变量**，能让运动 sector
 真正改变 Euler divisor，又不引入 mixed composite orbits。
 
-下一批仍只在 Symbolic Dynamics 内推进：不再先对 Haar sector 做标量平均，
-而是冻结 character-resolved / $L(\mathbb Z)$-valued symbolic determinant。其零 Fourier
-模必须保留精确 Euler ledger，非零模必须产生内生、prime-selective 的横向响应，
-且这个响应必须在 composite/random controls 上消失；否则继续按
-`PROVES_TOO_MUCH` 停止。
+### 论文 13：character resolution 成功，单 fiber completion 失败
+
+论文 13 已执行上述 character-resolved 测试。令 $U$ 为 deck shift，并冻结
+
+$$
+\widetilde L_s=D_s\otimes1+A_s\otimes U,
+\qquad L_s(w)=D_s+wA_s.
+$$
+
+在 $\Re s>1$，每个 Bloch fiber 都是 trace class，parent lift 对
+$\operatorname{Tr}\otimes\tau_{\mathbb Z}$ 是 semifinite trace class；而且
+
+$$
+[w^0]\det(I-zL_s(w))=\prod_p(1-zp^{-s}).
+$$
+
+这是真正的同 parent-object 推进：Paper 12 中被 Haar 平均删除的 sector 现在在
+非零 character modes 中可见。但精确 target 只属于 deck-neutral conditional
+expectation；对任何 $|w|=1$，二阶 trace 已含 mixed return。最小两原子式
+
+$$
+\det(I-zL(w))=(1-zx)(1-zy)-z^2a^2w^2
+$$
+
+同时证明了可见性和 `PROVES_TOO_MUCH`：composite、shuffled、random-increasing
+以及全部 32 个 positive-random-charge controls 都有非零响应。把反向 charge 改为
+inverse 又会把该项移回 $w^0$，在 $r=2$ 破坏 Euler ledger。因此结论是
+**GO_EQUIVARIANT_EULER_LEDGER / GO_CHARACTER_RESOLUTION / STOP_UNIFIED_BLOCH_FIBER /
+STOP_ARITHMETIC_SELECTIVITY / STOP_TIME_REVERSAL**，Route B 继续锁定。
+
+下一步仍只在 Symbolic Dynamics 内，但不再盲扫 character：应分类所有能由
+tensor multiplication、entropy grammar 与有限描述 transition rule 函子性产生的
+integer cocycles。只有当某个 cocycle 的首个非零 Fourier coefficient能在运行前证明
+对 composite/shuffled/random inventories 消失、而对 tensor-prime atoms 非零时，才值得
+建立下一候选；纯 adjacency、positive charge、rank 或 entropy coboundary 规则已经被
+Paper 13 定理级排除。
 
 ## 目录
 
@@ -222,7 +254,7 @@ tensor-prime 源已内生给出 Euler ledger、Gamma shadow、$1/2$ center、反
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十二篇论文](papers/)
+- [十三篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

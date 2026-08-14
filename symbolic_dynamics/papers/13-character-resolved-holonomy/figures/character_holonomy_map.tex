@@ -1,0 +1,28 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.88,transform shape,
+ node distance=7mm and 8mm,
+ box/.style={draw,rounded corners,align=center,inner sep=5pt,font=\small,minimum height=10mm},
+ arr/.style={-{Latex[length=2mm]},thick},
+ stop/.style={-{Latex[length=2mm]},thick,dashed,orange!80!black}]
+\node[box,fill=blue!8] (base) {recurrent tensor-prime base\\loops $+$ adjacent returns};
+\node[box,fill=blue!8,right=of base] (lift) {positive $\ZZ$-skew lift\\cross charge $+1$};
+\node[box,fill=green!10,right=of lift] (bloch) {Bloch family\\$L_s(w)=D_s+wA_s$};
+\node[box,fill=green!10,below left=of bloch] (zero) {Fourier degree $0$\\exact Euler determinant};
+\node[box,fill=orange!12,below right=of bloch] (moving) {degrees $>0$\\mixed returns move};
+\node[box,fill=gray!14,below=of lift] (tri) {inverse reversal: $r=2$ leak\\coboundary: gauge\\positive charge: generic};
+\draw[arr] (base)--(lift);
+\draw[arr] (lift)--(bloch);
+\draw[arr] (bloch)--node[left,font=\scriptsize]{Haar/constant mode}(zero);
+\draw[arr] (bloch)--node[right,font=\scriptsize]{characters}(moving);
+\draw[stop] (zero)--node[left,font=\scriptsize]{trilemma}(tri);
+\draw[stop] (moving)--node[right,font=\scriptsize]{controls}(tri);
+\end{tikzpicture}
+\caption{One lifted symbolic parent produces both the neutral Euler
+coefficient and the character-resolved recurrent sector.  These are distinct
+readouts: no individual character fiber has the Euler ledger.  Visibility is
+real, but inverse
+reversal contaminates the target mode, coboundaries are gauge, and positive
+holonomy is reproduced by nonarithmetic controls.}
+\label{fig:holonomy-map}
+\end{figure}
