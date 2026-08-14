@@ -267,9 +267,9 @@ Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
 retained positive structures rather than added to the obstruction list.
 The first untreated uniform-moment wall is now the fifth chronological
 moment; no continuation through \(\Re s=1/5\) is asserted.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P52`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P53`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P52 were born namespaced.
+strings, while P48--P53 were born namespaced.
 
 ## HCS-P44 additions (pressure-lane registry alias)
 
@@ -318,3 +318,9 @@ strings, while P48--P52 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O92 | Norm or weak boundary of the Abel-renormalized period-four tagged packet vectors | proved tagged-mass escape obstruction | For \(E_\tau=\tau^2\sum_{n\ge3}e^{-\tau n}D_n\), the exact totient law gives \(\|E_\tau\|\to3\log L/\pi^2>0\), while every fixed `(orbit,index,prime)` coordinate tends to zero. Any norm or weak limit would be zero coordinatewise, contradicting the continuous positive mass functional. No subnet can converge. | Stops boundary convergence only in the original source-tagged weighted \(\ell^1\) topology. The scalar Abel mass survives and the blown-up index distribution converges to Gamma\((2,1)\). A different distributional topology retaining prime-ideal atoms and the all-orbit pressure boundary remain open. | ../henon_totient_abel_boundary_escape/README.md |
+
+## HCS-P53 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O93 | Norm or weak boundary of the pressure-weighted all-orbit Abel-renormalized tagged packet vectors | proved all-orbit tagged-mass escape obstruction | For real \(\sigma\) in the certified P51 half-plane, the exact Mahler-height Abel law gives \(\|E_{\sigma,\tau}\|\to(3/\pi^2)\sum_\gamma e^{-\sigma\widehat\ell_\gamma}\mathcal H_\gamma>0\), while every fixed `(orbit,index,prime-ideal)` coordinate tends to zero. Coordinate functionals force any norm or weak limit to vanish, contradicting the continuous mass functional; no subnet can converge. | Stops only vector boundary convergence in the original all-orbit source-tagged weighted \(\ell^1\) topology. The scalar pressure-Abel amplitude and the pressure-height orbit law times Gamma\((2,1)\) survive. Pressure-critical continuation, a distribution retaining every prime-ideal atom, rational-prime trace, determinant and operator remain open. | ../henon_pressure_weighted_all_orbit_abel_law/README.md |

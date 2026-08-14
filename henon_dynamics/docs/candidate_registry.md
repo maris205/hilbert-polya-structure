@@ -1565,3 +1565,43 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  The one-orbit boundary is proved; pressure-uniform
 all-orbit interchange, a von-Mangoldt trace, a determinant and an operator
 remain open.
+
+## HCS-P53 pressure-weighted all-orbit Abel law (2026-08-14)
+
+Candidate **HCS-P53** closes the principal boundary theorem left by P52; see
+the [HCS-P53 project](../henon_pressure_weighted_all_orbit_abel_law/).  For
+every primitive H6 orbit, let
+
+\[
+\mathcal H_\gamma=\log M(f_{\lambda_\gamma})
+\]
+
+be the full Mahler spectral height of the signed multiplier.  Reciprocal
+embedding analysis and a two-logarithm bound for possible unit-circle
+conjugates prove
+
+\[
+\log|N\beta_{\gamma,n}|
+=\frac{\varphi(n)}2\mathcal H_\gamma
++O_\gamma(\sqrt n(1+\log n)^2).
+\]
+
+The P51 positive period envelope then justifies dominated convergence over
+all primitive orbits, locally uniformly for
+\(\Re s>\log(2\varphi)/(h_*\log J_*)\):
+
+\[
+\tau^2\sum_\gamma e^{-s\widehat\ell_\gamma}
+\sum_{n\ge3}\log|N\beta_{\gamma,n}|e^{-\tau n}
+\longrightarrow
+\frac3{\pi^2}\sum_\gamma
+e^{-s\widehat\ell_\gamma}\mathcal H_\gamma.
+\]
+
+For real \(s=\sigma\), the joint orbit/scaled-index law converges to the
+pressure-height orbit probability times Gamma\((2,1)\).  The renormalized
+tagged vectors still have no norm- or weakly-convergent subnet.  The Route-A
+tuple is **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Pressure-critical
+continuation, a rational-prime von-Mangoldt trace, a determinant and an
+operator remain open.
