@@ -1,0 +1,104 @@
+\section{Universal support and factorial-monoid compilers}
+\label{sec:compiler}
+
+The pruning theorem explains why the trial computation disappears.  A
+universal construction shows that this is not a harmless presentation
+artifact: essentially any decidable accepted inventory can be made to look
+the same to a Fredholm determinant.
+
+\begin{theorem}[Universal total-decider wrapper]
+\label{thm:universal}
+Let $S\subseteq\{2,3,\ldots\}$ be decided by a total deterministic machine
+with finite runtime $T(n)\ge1$.  There exists a one-sided countable
+functional graph and an $\Sone$-holomorphic weighted adjacency $L_{S,s}$ for
+$\RePart s>1$ such that, for every $r\ge1$ and $z\in\C$,
+\begin{equation}
+\Tr L_{S,s}^r=\sum_{n\in S}n^{-rs},
+\qquad
+\det(I-zL_{S,s})=\prod_{n\in S}(1-zn^{-s}).
+\label{eq:universal}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For each input $n$, expose the complete configuration chain
+\[
+C_{n,0}\longrightarrow C_{n,1}\longrightarrow\cdots
+\longrightarrow C_{n,T(n)}.
+\]
+Send the terminal state to a self-loop $A_n$ when $n\in S$, and otherwise to
+a one-way cemetery ray.  Give the $t$th computation or terminal edge weight
+$[n(t+2)]^{-s}$, the $k$th cemetery edge weight $[n(k+1)]^{-s}$, and the
+accepted loop weight $n^{-s}$.  With $\sigma=\RePart s>1$,
+\[
+\begin{aligned}
+\norm{L_{S,s}}_1
+&\le \sum_{n\ge2}\sum_{t=0}^{T(n)}[n(t+2)]^{-\sigma}
+ +\sum_{n\notin S}\sum_{k\ge1}[n(k+1)]^{-\sigma}
+ +\sum_{n\in S}n^{-\sigma}\\
+&\le 2\left(\sum_{n\ge2}n^{-\sigma}\right)
+       \left(\sum_{j\ge2}j^{-\sigma}\right)
+ +\sum_{n\ge2}n^{-\sigma}<\infty.
+\end{aligned}
+\]
+The bound is independent of the growth of $T(n)$ because every finite inner
+sum is dominated by the full $j$-series.  Compact lower bounds on $\sigma$
+give $\Sone$-holomorphy.  Only the accepted loops are closed walks, so the
+proof of \cref{thm:traces,thm:euler} gives \eqref{eq:universal}.
+\end{proof}
+
+The theorem is stronger than a random-support experiment.  It applies to
+squares, powers of two, Fibonacci numbers, or the output of an arbitrarily
+slow total program.  The determinant faithfully records the accepted set but
+contains no certificate of why that set was selected.
+
+\begin{theorem}[Factorial-monoid compiler]
+\label{thm:factorial}
+Let $M$ be a countable effective factorial monoid with atom set
+$\mathcal A$, a terminating atom verifier, a multiplicative norm
+$N:M\to(1,\infty)$, and source-defined transient roofs summable on a
+half-plane.  Suppose
+\[
+\sum_{a\in\mathcal A}N(a)^{-\sigma}<\infty.
+\]
+The verifier-to-loop compilation gives a trace-class weighted adjacency
+$L_{M,s}$ satisfying
+\begin{equation}
+\Tr L_{M,s}^r=\sum_{a\in\mathcal A}N(a)^{-rs},
+\qquad
+\det(I-zL_{M,s})
+=\prod_{a\in\mathcal A}(1-zN(a)^{-s}).
+\label{eq:factorial}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The terminating atom verifier supplies the configuration chain in
+\cref{thm:universal}; a summable source enumeration supplies the transient
+decay.  Correctness, summability, and the absence of reject cycles are the
+only inputs to the trace and determinant proofs.  No special property of
+rational primes is used.
+\end{proof}
+
+For a concrete control, take the monoid of monic polynomials over $\Fq$ and
+$N(f)=q^{\deg f}$.  Unique factorization gives
+\[
+\prod_{\pi\ \mathrm{monic\ irreducible}}
+(1-u^{\deg\pi})^{-1}
+=\sum_{f\ \mathrm{monic}}u^{\deg f}
+=\sum_{d\ge0}q^du^d=\frac1{1-qu}.
+\]
+Substituting $u=q^{-s}$ and inverting yields
+\begin{equation}
+\det(I-L_{M,s})
+=\prod_\pi(1-q^{-s\deg\pi})=1-q^{1-s}.
+\label{eq:poly-control}
+\end{equation}
+
+The same logic applies to free commutative monoids with arbitrary summable
+generator norms, shuffled atom inventories, and generalized-prime systems.
+Thus the exact Riemann Euler factor is a genuine success at A2 but not a
+selector theorem.  The graph has computed the predicate before it creates
+periodic support.  We call this \texttt{SELECTOR\_TAUTOLOGICAL} and
+\texttt{PROVES\_TOO\_MUCH}, not logically circular: the trial-division proof
+in \cref{thm:trial} remains a real proof.

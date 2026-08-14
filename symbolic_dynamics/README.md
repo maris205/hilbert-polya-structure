@@ -30,6 +30,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [16-equivariant-cycle-index-determinant](papers/16-equivariant-cycle-index-determinant/README.md) | [PDF](papers/16-equivariant-cycle-index-determinant/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/16-equivariant-cycle-index-determinant/) | Burnside/cycle-index ledger 精确保留 $pqr$ 的 character residual $(0,0,3)$，但算术权重 $x_p=p^{-s}$ 使固定 transfer 的置换 stabilizer 退化为恒等；等权恢复对称时非平凡 isotypes 全被 rank-one transfer 杀掉，而 diagonal equivariant lift 又引入 mixed-subset Euler factors。 | **FORMAL EQUIVARIANT LEDGER / ROUTE-A REJECTED / SD-C18** |
 | [17-fiber-cocycle-artin-factor](papers/17-fiber-cocycle-artin-factor/README.md) | [PDF](papers/17-fiber-cocycle-artin-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/17-fiber-cocycle-artin-factor/) | 真正 commuting 的 $C_2$ fiber 在同一 subset shift 中给出 Artin blocks $D_+=1/\zeta(s)$、$D_-=\zeta(s)/\zeta(2s)$ 与 whole determinant $D_{\rm reg}=1/\zeta(2s)$；但 mixed primitive lifts 仍大量存在，全部 matched inventories 也精确复制该分解。 | **ARTIN FACTOR / ROUTE-A REJECTED / SD-C19** |
 | [18-incidence-transition-holonomy](papers/18-incidence-transition-holonomy/README.md) | [PDF](papers/18-incidence-transition-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/18-incidence-transition-holonomy/) | subset-incidence transition rule 产生了真正非交换、非 one-letter-coboundary 的 $S_3$ holonomy；trivial/sign blocks 仍保留标量 Euler factor，但 faithful standard block 精确泄漏 mixed primitive coefficients，且全部 matched inventories 都复制该现象。 | **GENUINE TRANSITION HOLONOMY / ROUTE-A REJECTED / SD-C20** |
+| [19-stationary-semiring-sieve-shift](papers/19-stationary-semiring-sieve-shift/README.md) | [PDF](papers/19-stationary-semiring-sieve-shift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/19-stationary-semiring-sieve-shift/) | full-shift alphabet-sum、tensor 与 order 可把无 factor oracle 的逐商试除编译成一个 trace-class 单边 Markov graph，并在 $\Re s>1$ 精确给出 $1/\zeta(s)$；但全部计算状态都属 transient DAG，剪枝后只剩 Paper 04 的 prime loops，而任意总可判定集合都能复制同型 Euler 子积。 | **SEMIRING VERIFIER / PRUNING EQUIVALENT / ROUTE-A REJECTED / SD-C21** |
 
 ### 论文 1 的候选分离结论
 
@@ -459,13 +460,49 @@ STOP_COMPLETED_DIVISOR / PROVES_TOO_MUCH**，Route B 继续锁定。
 transitions 本身：优先研究 constrained factorization、renewal 或 countable-Markov
 grammar，并在任何解析延拓之前先证明它能区分 matched arbitrary inventories。
 
+### 论文 19：试除可以进入同一对象，但 Fredholm determinant 会剪掉全部计算
+
+Paper 19 首次把 full-shift semiring 的 alphabet-sum、Cartesian tensor 与 additive
+order 直接编译成 stationary countable Markov grammar。商搜索不是一步
+“存在 $q$”的 oracle，而是显式状态 $Q_{n,d,q}$ 逐个推进；prime 输入进入
+$A_p$ 自环，composite 输入进入单向 cemetery ray。对冻结的 entropy roofs，整个
+vertex-adjacency 在 $\Re s>1$ 为 trace-class 全纯族，并满足
+
+$$
+\operatorname{Tr}L_s^r=\sum_p p^{-rs},
+\qquad
+\det(I-zL_s)=\prod_p(1-zp^{-s}).
+$$
+
+因此这是一个合法的 same-operator A1–A2 精确链，而不是把外部 prime table 与
+determinant 拼接。13/13 exact tests 还验证了截止 512 的零支持错误、1,651 个实际
+quotient states、十二阶 power traces 与独立有理 Bareiss determinant。
+
+但正向意义被一个更强的定理关闭：所有输入、试除与 cemetery 状态都在 transient
+feeding DAG；删除它们不改变任意 power trace 或 Fredholm determinant，recurrent
+core 精确退化成 Paper 04 的独立 prime loops。更一般地，任意 total decider 都可用
+accept-loop/reject-ray 包装编译
+
+$$
+\prod_{n\in S}(1-zn^{-s}),
+$$
+
+而 squares、powers of two、Fibonacci 与 hash controls 已全部精确复现。因此结论是
+**GO_EXACT_SEMIRING_VERIFIER / STOP_RECURRENT_ARITHMETIC_ADVANCE /
+SELECTOR_TAUTOLOGICAL / PRUNING_EQUIVALENT / PROVES_TOO_MUCH**。
+
+Paper 20 不再允许完成判定后才附加 accept loop；它将直接把完整验证路径闭合为
+recurrent cycle，并检验 Euler 总 clock $\log p$ 与紧性/Fredholm 性是否能够共存。
+当前最小猜想是一个 clock-dilution obstruction：当验证长度远快于 $\log p$ 增长时，
+周期上必有边权趋近 $1$，从而使 whole operator 非紧。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十八篇论文](papers/)
+- [十九篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

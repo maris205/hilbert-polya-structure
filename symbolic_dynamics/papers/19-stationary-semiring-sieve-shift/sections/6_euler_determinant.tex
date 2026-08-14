@@ -1,0 +1,71 @@
+\section{Exact primitive ledger and Euler determinant}
+\label{sec:euler}
+
+For $\RePart s>1$, define
+\[
+D_{\SV}(s,z)=\det_{\Hcal}(I-zL_s),
+\qquad
+D_{\SV}(s)=D_{\SV}(s,1).
+\]
+The determinant exists because of \cref{thm:traceclass}.  The extra variable
+$z$ records graph-step length; it will be important when discussing cycle
+contraction.
+
+\begin{theorem}[Power traces and primitive repetitions]
+\label{thm:traces}
+For every integer $r\ge1$ and $\RePart s>1$,
+\[
+\Tr(L_s^r)=\sum_p p^{-rs}.
+\]
+The primitive periodic orbits are exactly
+$\gamma_p=[A_p]$.  Their $r$-fold temporal repetitions have total weight
+$p^{-rs}$ and multiplicity one.  There are no mixed primitive cycles.
+\end{theorem}
+
+\begin{proof}
+For any vertex $v$, the diagonal coefficient
+$\inner{L_s^r\delta_v}{\delta_v}$ is the sum of weights of length-$r$ closed
+walks rooted at $v$.  By \cref{thm:trial}, each such walk is the $r$-fold
+traversal of one accepted prime loop.  Its loop weight is $p^{-s}$.
+Trace class permits the diagonal coefficients to be summed in the standard
+basis, giving the stated formula.  The same cycle census proves the
+primitive and multiplicity claims.
+\end{proof}
+
+\begin{theorem}[One-object Fredholm--Euler identity]
+\label{thm:euler}
+For $\RePart s>1$ and every $z\in\C$,
+\begin{equation}
+D_{\SV}(s,z)=\prod_p(1-zp^{-s}).
+\label{eq:euler-two-variable}
+\end{equation}
+In particular,
+\begin{equation}
+D_{\SV}(s)=\prod_p(1-p^{-s})=\zeta(s)^{-1}.
+\label{eq:euler-zeta}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $|z|$ initially small, the trace-class determinant expansion and
+\cref{thm:traces} give
+\[
+\begin{aligned}
+\log D_{\SV}(s,z)
+&=-\sum_{r\ge1}\frac{z^r}{r}\Tr(L_s^r)\\
+&=-\sum_p\sum_{r\ge1}\frac{(zp^{-s})^r}{r}
+=\sum_p\log(1-zp^{-s}).
+\end{aligned}
+\]
+For fixed $\RePart s>1$, the Fredholm determinant is entire in $z$.  The
+product on the right of \eqref{eq:euler-two-variable} is also entire and
+normally convergent on compact $z$-sets because $\sum_pp^{-\sigma}<\infty$.
+Equality near zero extends to every $z$.  At $z=1$, Euler's product is
+absolutely convergent and gives \eqref{eq:euler-zeta}.
+\end{proof}
+
+The formula clears three bookkeeping gates simultaneously.  Primitive
+orbits have the intended support, temporal repetitions carry the exponent
+$r$ automatically, and the same parent operator produces all traces and the
+determinant.  It does not yet say that the computation producing the support
+is recurrently visible.  That question has the opposite answer.

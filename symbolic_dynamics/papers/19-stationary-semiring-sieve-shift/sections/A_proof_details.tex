@@ -1,0 +1,91 @@
+\section{Supplementary proof details}
+\label{app:proofs}
+
+\subsection{Reachable-state bounds}
+
+For fixed $n$, the divisor index reaches at most
+$\lfloor\sqrt n\rfloor+1$.  At a fixed tested divisor $d$, the quotient
+index reaches at most $\lfloor n/d\rfloor+1$.  These bounds are used only to
+confirm that each input trace is finite before acceptance or rejection.  The
+trace-class proof deliberately enlarges both ranges to infinity, producing
+the transparent product majorant
+\[
+\sum_{n,d,q\ge2}(ndq)^{-\sigma}.
+\]
+Endpoint choices change this estimate by at most a constant multiple of
+$\sum_nn^{-\sigma}$.  The source lock fixes the prototype-consistent
+$T\to Q_{n,d,2}$ roof $\log(2nd)$.
+
+\subsection{Trace class versus entrywise summability}
+
+For an arbitrary matrix, summability of entries in one basis is stronger
+than trace class and need not be necessary.  Here it is a convenient
+sufficient condition because every edge is a rank-one matrix unit.  If
+$E_0\subset E_1\subset\cdots$ exhausts the edges, then
+\[
+\norm{\sum_{e\in E_j}E_e(s)-\sum_{e\in E_i}E_e(s)}_1
+\le\sum_{e\in E_j\setminus E_i}e^{-\sigma\tau(e)}.
+\]
+The scalar tail tends to zero, so the operator series is Cauchy in
+$\Sone$.  This also avoids any conditional rearrangement of edge terms.
+
+\subsection{Why vanishing diagonal entries give zero trace}
+
+For every $r\ge1$, $Q_s^r$ is trace class because $Q_s$ is trace class and
+bounded.  The trace of a trace-class operator equals the absolutely
+convergent sum of its diagonal coefficients in every orthonormal basis.
+Those coefficients enumerate rooted length-$r$ closed walks.  Acyclicity
+makes each coefficient zero, hence $\Tr Q_s^r=0$.  No triangular-basis
+spectral theorem is required.
+
+\subsection{Entireness in the graph marker}
+
+For fixed $s$, the Fredholm determinant $z\mapsto\det(I-zL_s)$ is entire.
+The canonical product
+\[
+P_s(z)=\prod_p(1-zp^{-s})
+\]
+is normally convergent on every disk $|z|\le R$, since
+$\sum_p\sup_{|z|\le R}|zp^{-s}|\le R\sum_pp^{-\sigma}<\infty$.
+Thus equality of logarithms near zero extends to equality of entire
+functions; no choice of logarithm is needed away from zero.
+
+\subsection{Scope of the SCC connector argument}
+
+The exact-ledger theorem is stated orbitwise before arithmetic
+specialization.  This prevents two distinct cycles of coincident numerical
+weight from being identified.  The independent variables also distinguish a
+mixed cycle from a temporal repetition.  Positivity prevents cancellation in
+the trace logarithm.  If signed or matrix weights are allowed, an additional
+primitive can have zero trace under a chosen functional; the theorem does not
+exclude that possibility.
+
+\subsection{Universal wrapper with arbitrary runtime}
+
+The bound
+\[
+\sum_{t=0}^{T(n)}(t+2)^{-\sigma}
+\le\sum_{j\ge2}j^{-\sigma}
+\]
+is uniform in $T(n)$.  Consequently no polynomial, primitive-recursive, or
+computable complexity estimate is used beyond total termination.  The
+wrapper is source-effective whenever the machine is, but the determinant
+cannot recover runtime: all configuration edges lie outside closed walks.
+
+\subsection{First-return contraction}
+
+Let a simple directed cycle have edges $e_1,\ldots,e_\ell$ and weights
+$w_1,\ldots,w_\ell$.  Its weighted adjacency has nonzero trace only at powers
+divisible by $\ell$, with
+\[
+\Tr L^{m\ell}=\ell(w_1\cdots w_\ell)^m.
+\]
+Hence
+\[
+\det(I-zL)
+=\exp\left(-\sum_{m\ge1}\frac{z^{m\ell}}{m}
+(w_1\cdots w_\ell)^m\right)
+=1-z^\ell w_1\cdots w_\ell.
+\]
+This calculation is why contraction must retain $z^\ell$.  At $z=1$ it
+reduces to the usual first-return loop factor.

@@ -1,0 +1,90 @@
+\section{Entropy roofs and the whole weighted adjacency}
+\label{sec:operator}
+
+We now put computation and periodic support into one operator.  Freeze the
+edge roof
+\begin{align}
+\tau(I_n,T_{n,2})&=\log(2n),\label{eq:roof-input}\\
+\tau(T_{n,d},A_n)&=\log(nd),\label{eq:roof-accept}\\
+\tau(T_{n,d},Q_{n,d,2})&=\log(2nd),\label{eq:roof-tq}\\
+\tau(Q_{n,d,q},\mathrm{next})&=\log(ndq),\label{eq:roof-q}\\
+\tau(R_{n,k},R_{n,k+1})&=\log(n(k+1)),\label{eq:roof-r}\\
+\tau(A_n,A_n)&=\log n.\label{eq:roof-loop}
+\end{align}
+Every value is the entropy of a tensor product of source full shifts.  The
+factor $2$ in \eqref{eq:roof-tq} records entry into the first explicit
+quotient state and matches the finite implementation.
+
+There are two different naturality claims.  The accepted loop roof
+$h(F_n)=\log n$ is canonical on the chosen source skeleton, but it is
+attached only after the program accepts $n$.  By contrast, the transient
+roofs \eqref{eq:roof-input}--\eqref{eq:roof-r} are a
+\texttt{MODELING\_CHOICE}.  They are source-expressible and useful for
+summability, but trial division does not force them.  Any locally uniformly
+summable replacement on transient edges gives the same power traces and
+determinant.
+
+Let
+\[
+\Hcal=\ell^2(V(G))
+\]
+with standard basis $(\delta_v)_{v\in V(G)}$.  For $\RePart s>1$, define the
+arrival-weighted adjacency
+\begin{equation}
+L_s\delta_u=\sum_{e:u\to v}e^{-s\tau(e)}\delta_v.
+\label{eq:operator}
+\end{equation}
+The sum has one term at each source vertex because the graph is
+deterministic.  We retain the edge-sum notation to expose the nuclear
+decomposition.  No thermodynamic function space is being used, so we call
+$L_s$ a weighted vertex-adjacency or graph transfer, not a Ruelle operator.
+
+\begin{theorem}[Trace class and holomorphic family]
+\label{thm:traceclass}
+For every $s$ with $\sigma=\RePart s>1$, the operator $L_s$ is trace class.
+The map $s\mapsto L_s$ is holomorphic with values in $\Sone(\Hcal)$ on that
+half-plane.
+\end{theorem}
+
+\begin{proof}
+Each edge contributes the rank-one operator
+\[
+e^{-s\tau(e)}|\delta_{t(e)}\rangle\langle\delta_{o(e)}|
+\]
+of trace norm $e^{-\sigma\tau(e)}$.  The loop and input sums are bounded by
+\[
+\sum_p p^{-\sigma}+\sum_{n\ge2}(2n)^{-\sigma}<\infty.
+\]
+For divisor-state edges, including the unique terminal value
+$d=\lfloor\sqrt n\rfloor+1$, a fixed endpoint constant gives
+\[
+\sum_{n\ge2}n^{-\sigma}
+ \sum_{2\le d\le\sqrt n+1}d^{-\sigma}
+\le C_\sigma\sum_{n\ge2}n^{-\sigma}<\infty.
+\]
+For quotient states, enlarging every finite reachable range yields
+\[
+\sum_{n\ge2}\sum_{d\ge2}\sum_{q\ge2}(ndq)^{-\sigma}
+\le
+\left(\sum_{n\ge2}n^{-\sigma}\right)
+\left(\sum_{d\ge2}d^{-\sigma}\right)
+\left(\sum_{q\ge2}q^{-\sigma}\right)<\infty.
+\]
+Finally the cemetery contribution is bounded by
+\[
+\sum_{\substack{n\ge2\\ n\,\mathrm{composite}}}
+\sum_{k\ge1}[n(k+1)]^{-\sigma}
+\le
+\left(\sum_{n\ge2}n^{-\sigma}\right)
+\left(\sum_{j\ge2}j^{-\sigma}\right)<\infty.
+\]
+Thus the edge series converges absolutely in trace norm.  Replacing
+$\sigma$ by a compact lower bound on every compact sub-half-plane gives
+locally uniform convergence of holomorphic finite partial sums.  The
+Banach-valued Weierstrass theorem proves $\Sone$-holomorphy.
+\end{proof}
+
+The theorem concerns the raw graph, not a recurrent pruning.  This is the
+strongest analytic success of the candidate: computation edges, cemetery
+edges, and accepted loops genuinely coexist in one trace-class operator on
+the same half-plane as the Euler product.
