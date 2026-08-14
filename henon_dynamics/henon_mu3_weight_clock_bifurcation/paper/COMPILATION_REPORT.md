@@ -1,6 +1,6 @@
 # HCS-C51 paper compilation report
 
-Status: **PASS (preliminary document freeze; final machine provenance pending)**
+Status: **PASS (final audited document freeze)**
 
 ## Build
 
@@ -45,6 +45,6 @@ textual match for `Rerun` is the package-identification line for
 | `sections/9_declarations.tex` | `21f81c89ef5555aa9c988ec30b200a6c88440f2542dea3c6c6caf532504fe816` |
 | `sections/A_exact_replays.tex` | `1fbf6b47b9d99314835fa2110761563738960ba8906a5001b28aa9cf5bcbaf72` |
 
-The report intentionally does not freeze code/result hashes.  Those remain
-under the separate release-candidate promotion and must be incorporated by
-the final full-project manifest.
+This report freezes the paper and paper-source hashes.  Code, results, Route-A
+records, and the remaining project files are frozen by the separate
+full-project manifest.

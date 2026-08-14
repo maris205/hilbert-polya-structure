@@ -1,8 +1,8 @@
 # HCS-C51: weight--clock bifurcation in Hénon moments
 
-Status: **mathematical package and manuscript in preparation; release provenance pending**
+Status: **release-frozen mathematical package and manuscript**
 
-Implementation commit: PENDING_RELEASE_COMMIT.
+Implementation commit: `b1fdc7cb214406023e834f8a3ee0af09948cc7ef`.
 
 ## Main result
 
@@ -162,5 +162,5 @@ self-adjoint Hilbert--Pólya generator.  Route B is not authorized.
 - NARRATIVE_REPORT.md and PAPER_PLAN.md map results to the manuscript.
 - INTEGRITY_REPORT.md records proof, source, checker, and PDF scope.
 - route_a_evaluation.yaml and its archive copy carry the Route-A decision.
-- paper/ contains the manuscript; its PDF remains preliminary until the
-  code/results provenance freeze.
+- paper/ contains the final audited manuscript and PDF; the complete project
+  is covered by the release manifest in results/.

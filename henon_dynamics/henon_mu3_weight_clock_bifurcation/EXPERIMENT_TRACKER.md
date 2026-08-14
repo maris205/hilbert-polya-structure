@@ -1,10 +1,10 @@
 # HCS-C51 experiment tracker
 
-Status: **docs/paper integration in progress**
+Status: **release-frozen**
 
 | Gate | Status | Evidence |
 |---|---|---|
-| exact \(n=2,3,4\) moment replay | PASS, pre-freeze | code/results semantic certificate |
+| exact \(n=2,3,4\) moment replay | PASS | code/results semantic certificate |
 | four-stratum radial identity | PROVED; red-team corrected | PROOF_PACKAGE.md |
 | actual source smoothness \(n=2,3,4\) | INHERITED outside finite bad sets | C48--C50 |
 | family smoothness for \(n>4\) | NOT CLAIMED | conditional firewall |
@@ -21,9 +21,9 @@ Status: **docs/paper integration in progress**
 | \(n=3,4\) odd FE | OPEN | expected-center ledger only |
 | \(O_4\) Hodge types | PROVED | finite \(\chi_y\) expansion |
 | C52 algebraic projector | OPEN | next large gate |
-| code semantic gates | 15/15 PASS, pre-freeze snapshot | code lane report |
-| mutation tests | 43/43 PASS, pre-freeze snapshot | code lane report |
-| final manifest/PDF | PENDING | release stage |
+| code semantic gates | 15/15 PASS | final default runner |
+| mutation tests | 43/43 PASS | final default runner |
+| final manifest/PDF | PASS | full-project manifest and compilation report |
 
-Counts and hashes remain provisional until artifact promotion and the final
-default-runner freeze.
+Counts and hashes are frozen by the final full-project manifest and default
+runner replay.

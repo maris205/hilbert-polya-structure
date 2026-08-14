@@ -1,6 +1,8 @@
 # HCS-C51 integrity report
 
-Status: **document/PDF and release-candidate machine audits passed; final manifest/commit freeze pending**
+Status: **PASS; document, PDF, machine, manifest, and commit provenance frozen**
+
+Implementation commit: `b1fdc7cb214406023e834f8a3ee0af09948cc7ef`.
 
 ## Mathematical red team
 
@@ -61,7 +63,7 @@ Hirzebruch--Riemann--Roch, or the full prose proof.
 
 ## Paper/PDF audit
 
-The preliminary manuscript freeze passed.  `paper/COMPILATION_REPORT.md`
+The final manuscript freeze passed.  `paper/COMPILATION_REPORT.md`
 records:
 
 - clean rebuild exit status zero;
@@ -73,9 +75,12 @@ records:
 - visual inspection of the title/abstract, C52/Route-A, and bibliography
   pages.
 
-## Release blockers
+## Release closure
 
-1. Refresh the full-project manifest and run the default runner.
-2. Backfill the implementation commit and refreeze provenance.
+- The implementation commit is backfilled in the project README and both
+  byte-identical Route-A records.
+- The full-project manifest was regenerated after the provenance edits.
+- The final default runner passed the producer replay, all 15 semantic gates,
+  all 43 mutation/rollback tests, and the complete manifest verification.
 
-No claim of release readiness is made before these steps pass.
+No release blocker remains within the frozen C51 scope.
