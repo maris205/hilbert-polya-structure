@@ -26,6 +26,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [12-fourier-null-haar-fiber](papers/12-fourier-null-haar-fiber/README.md) | [PDF](papers/12-fourier-null-haar-fiber/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/12-fourier-null-haar-fiber/) | 所有正次 Fourier moments 都等于 $1$ 的有限正圆周测度唯一形如 $\delta_1+c\,m_{\rm Haar}$；这个无限维 diffuse escape 保留 Euler ledger，却被原标量全纯 trace-log determinant 完全消去。归一化、有限近似、selfadjointization 或 inverse coupling 都会分别破坏 ledger、迟发泄漏或产生 balanced mixed words。 | **HAAR ESCAPE / DETERMINANT INVISIBILITY / SD-C14** |
 | [13-character-resolved-holonomy](papers/13-character-resolved-holonomy/README.md) | [PDF](papers/13-character-resolved-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/13-character-resolved-holonomy/) | positive-cone $\mathbb Z$-skew extension 把 reciprocal Euler product 精确放在 deck-neutral Fourier coefficient，并让同一 parent lift 的非零 Bloch modes 看见 recurrent mixed returns；但没有任何单独 character fiber 保持 Euler ledger，全部 nonprime/random controls 也会运动，而 inverse reversal 在二阶污染零模。 | **CHARACTER RESOLUTION / ROUTE-A REJECTED / SD-C15** |
 | [14-tensor-bar-mobius-selector](papers/14-tensor-bar-mobius-selector/README.md) | [PDF](papers/14-tensor-bar-mobius-selector/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/14-tensor-bar-mobius-selector/) | 函子性 Abelian charge 被严格分类为 atom valuations，divisor-category cocycle 全为 coboundary；转向全局 tensor-bar grammar 后，同一 signed symbolic determinant 在 $\Re s>1$ 的 endpoint completion 中精确给出 $1/\zeta$ 与 $\Lambda_\otimes=\mu_\otimes*h$。但该反演对任意 weighted inventory 都成立，且 primitive cycles 是 factorization necklaces 而非 primes。 | **TENSOR-BAR DETERMINANT / ROUTE-A REJECTED / SD-C16** |
+| [15-bar-koszul-primitive-no-lift](papers/15-bar-koszul-primitive-no-lift/README.md) | [PDF](papers/15-bar-koszul-primitive-no-lift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/15-bar-koszul-primitive-no-lift/) | bar–Koszul squarefree subset shift 的标量 determinant 仍为 $\prod_p(1-x_p)$，但 $p^2q^2$ 的 primitive 账本为 $1^+$ 对 $2^-$，只能借低阶 $pq$ 轨道的二次重复抵消；$pqr$ 的残差为 $\mathbf1\oplus\mathrm{sgn}-\mathrm{Std}$，排除 $S_3$-自然的 sign involution。 | **PRIMITIVE NO-LIFT / ROUTE-A REJECTED / SD-C17** |
 
 ### 论文 1 的候选分离结论
 
@@ -290,8 +291,45 @@ $$
 $\epsilon^r$；它不是 odd supertrace parity。Euler ledger 因而可能跨 primitive 与
 repetition 层抵消，尚未形成 $p\leftrightarrow\gamma_p$ 的 orbitwise 对应。阶段结论是
 **GO_TENSOR_MOBIUS_INCIDENCE_DETERMINANT / STOP_ARITHMETIC_SELECTIVITY /
-STOP_ORBITWISE_PRIME_CORRESPONDENCE**。Paper 15 将直接审计 primitive 层的
-sign-reversing reduction，而不会重新扫描局部 character。
+STOP_ORBITWISE_PRIME_CORRESPONDENCE**。Paper 15 已直接审计 primitive 层的
+sign-reversing reduction，而没有重新扫描局部 character。
+
+### 论文 15：标量 Euler 恒等式不能提升为自然的逐 primitive 消去
+
+Paper 15 把 Paper 14 的 ordered bar code 做标准 bar–Koszul reduction。对有限
+tensor-atom 集 $P$，临界字母不是只有 atoms，而是所有非空 squarefree subsets
+$S\subseteq P$，其标量符号为 $(-1)^{|S|+1}$。因此 one-vertex signed shift 仍满足
+
+$$
+1-\sum_{\varnothing\ne S\subseteq P}(-1)^{|S|+1}x_S
+=\prod_{p\in P}(1-x_p),
+$$
+
+并在 $x_p=p^{-s}$、$\Re s>1$ 时给出 $1/\zeta(s)$。但这个标量恒等式没有
+orbitwise lift。两原子 $p,q$ 的 content $p^2q^2$ 只有一个正 primitive necklace，
+却有两个负 primitive necklaces；完整 logarithmic coefficient 之所以为零，是因为
+content $pq$ 的两个 primitive cycles 的二次重复各再贡献 $1/2$。抵消必然跨越
+primitive/repetition 层。
+
+自然性给出第二个独立障碍。content $pqr$ 的正、负 $S_3$-sets 的轨道大小分别为
+$1\sqcup2$ 与 $3$，其 virtual character 为
+
+$$
+\mathbf1\oplus\mathrm{sgn}-\mathrm{Std},
+\qquad \chi(e,(12),(123))=(0,0,3).
+$$
+
+所以不存在 $S_3$-equivariant sign-reversing involution。honest bar/Koszul
+quasi-isomorphism又必须保留 $\Lambda^{\ge2}V$ 的 mixed homology；若把额外 recurrence
+放进 equivariantly contractible pairs，其全部 power supertraces 为零、superdeterminant
+为 $1$，因而对目标 determinant 完全不可见。10/10 exact tests、112/112 随机有理
+inventory controls 均通过，进一步确认该恒等式是通用组合机制而非 arithmetic selector。
+
+阶段结论为 **GO_BAR_KOSZUL_SQUAREFREE_REDUCTION /
+STOP_PRIMITIVE_BEFORE_REPETITION / STOP_NATURAL_SIGN_INVOLUTION /
+PROVES_TOO_MUCH**。下一步 Paper 16 只追踪尚未被 scalar augmentation 看见的
+Burnside/representation-valued cycle-index residual，检验它能否成为同一算术
+Fredholm object 的 character mode；Route B 继续锁定。
 
 ## 目录
 
@@ -299,7 +337,7 @@ sign-reversing reduction，而不会重新扫描局部 character。
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十四篇论文](papers/)
+- [十五篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

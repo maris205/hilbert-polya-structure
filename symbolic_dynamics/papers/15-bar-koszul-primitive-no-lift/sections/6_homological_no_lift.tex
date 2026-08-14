@@ -1,0 +1,188 @@
+\section{Homological and cyclic no-lift}
+\label{sec:homological}
+
+The finite orbit obstructions leave an apparent escape: perhaps the scalar
+subset signs are shadows of a genuine bar-to-Koszul chain contraction, so
+one should cancel in homology rather than pair primitive cycles.  This
+section shows why that move changes the object or becomes determinant
+invisible.
+
+\subsection{Koszul reduction retains mixed exterior classes}
+
+Let
+\[
+  R_A=\K[x_a:a\in A]
+  \tag{6.1}
+\]
+over a field $\K$, augmented by $x_a\mapsto0$, and let $V_A$ have basis
+$e_a$.  The standard Koszul complex is
+\[
+  K(R_A;x_a)=R_A\otimes_\K\Lambda V_A.
+  \tag{6.2}
+\]
+
+\begin{theorem}[Mixed Koszul classes survive]
+\label{thm:tor}
+For every $i$,
+\[
+  \Tor^{R_A}_i(\K,\K)\cong\Lambda^i V_A.
+  \tag{6.3}
+\]
+In particular, $e_p\wedge e_q$ is nonzero for distinct atoms.  A chain
+reduction quasi-isomorphic to the bar resolution cannot leave only the
+degree-one atom classes.
+\end{theorem}
+
+\begin{proof}
+The Koszul complex (6.2) is a free resolution of the augmentation module.
+Tensoring it over $R_A$ with $\K$ sends each $x_a$ to zero, so its induced
+differential vanishes.  Its homology is therefore the full exterior algebra.
+Tor is invariant under chain homotopy equivalence, which proves the final
+statement.
+\end{proof}
+
+Algebraic Morse reduction can replace a large bar model by (6.2), but it
+cannot erase the mixed exterior homology without ceasing to be a
+quasi-isomorphism.  The subset basis is small, not atom-only.
+
+\subsection{Primitivity is not a bar subcomplex}
+
+A different proposal is to take primitive cyclic words before applying the
+bar or Hochschild differential.  Adjacent multiplication makes this
+impossible.
+
+\begin{proposition}[Primitive/imprimitive boundary leakage]
+\label{prop:primitive-boundary}
+In the monomial bar complex on two generators, multiplication faces can send
+a primitive cyclic word to an imprimitive one and an imprimitive cyclic word
+to a primitive one.
+\end{proposition}
+
+\begin{proof}
+The cyclic word $[a|b|ab]$ is primitive.  Merging its first two entries gives
+$[ab|ab]=[ab]^2$, which is imprimitive.  Conversely,
+$[a|b|a|b]=[a|b]^2$ is imprimitive, while the same merge gives
+$[ab|a|b]$, which has least period three and is primitive.
+\end{proof}
+
+Neither the primitive span nor the imprimitive span is a subcomplex.
+Consequently, "take primitive homology" is not a quotient operation inherited
+from the ordinary bar differential.  A new differential designed to preserve
+primitivity would define a new symbolic object and would need a new
+determinant proof.
+
+The cyclic boundary adds further faces but does not repair this local leak;
+standard cyclic and Hochschild constructions organize all cyclic words, not a
+primitive-only chain layer \citep{loday1998}.
+
+\subsection{HKR versus an atom-only commutative quotient}
+
+For the smooth polynomial algebra (6.1), HKR gives
+\[
+  \HH_i(R_A)\cong\Omega^i_{R_A/\K}
+  \cong R_A\otimes_\K\Lambda^iV_A.
+  \tag{6.4}
+\]
+Thus mixed forms persist on the Hochschild/cyclic side as well.  In
+characteristic zero, Harrison and André--Quillen theory isolate the
+indecomposable commutative direction.  For a polynomial algebra the
+cotangent complex is represented by $\Omega^1_{R_A/\K}$ in degree zero, so
+higher André--Quillen homology vanishes.
+
+That vanishing is not a contraction of (6.4).  It results from selecting a
+different Hodge component or quotient.  Already in degree two,
+$\HH_2(R_A)$ contains $dx_p\wedge dx_q$, whereas the smooth higher
+indecomposable sector vanishes.  The dimensions differ, so an atom-only
+Harrison/AQ projection cannot preserve the full Hochschild trace or the
+primitive recurrence of SD-C17.
+
+\subsection{Scalar sign versus supertrace}
+
+The most dangerous conflation is purely notational.  For a negative scalar
+edge of unsigned weight $w$, temporal repetition gives
+\[
+  (-w)^r=(-1)^rw^r.
+  \tag{6.5}
+\]
+For an odd one-dimensional chain space with even operator $w$, the
+supertrace is
+\[
+  \Str(w^r\mid C_{\mathrm{odd}})=-w^r
+  \tag{6.6}
+\]
+for every $r$.  Equations (6.5)--(6.6) agree only for odd repetitions and
+differ by $2w^r$ for every even repetition.  At $r=2$, this is exactly the
+power leak identified in \Cref{thm:p2q2}.
+
+\begin{theorem}[Acyclic sectors are graded-determinant invisible]
+\label{thm:acyclic}
+Let $(C,d)$ be a finite-dimensional $\mathbb Z/2$-graded acyclic complex and
+let $T$ be an even chain map.  Then
+\[
+  \Str(T^r\mid C)=0\quad(r\ge1),
+  \tag{6.7}
+\]
+and
+\[
+  \sdet(I-zT)
+  :=\exp\!\left(-\sum_{r\ge1}\frac{z^r}{r}\Str(T^r)\right)=1.
+  \tag{6.8}
+\]
+\end{theorem}
+
+\begin{proof}
+Choose a contracting homotopy $h$ with $dh+hd=I$.  Since $T$ commutes with
+$d$,
+\[
+  T^r=d(T^rh)+(T^rh)d.
+  \tag{6.9}
+\]
+This is a graded commutator of odd maps, whose supertrace is zero.  Equation
+(6.8) follows term by term.
+\end{proof}
+
+A true two-term contractible block therefore contributes nothing to the
+graded determinant.  By contrast, the scalar two-edge alphabet
+$\{+w,-w\}$ has a mixed length-two primitive $[+w][-w]$ of weight $-w^2$.
+It cancels the $+w^2$ sum of the two length-one second repetitions.  The two
+objects have the same aggregate trace zero but different primitive ledgers.
+
+\subsection{Combined no-lift theorem}
+
+\begin{definition}[Primitive-natural Koszul lift]
+\label{def:lift}
+A primitive-natural Koszul lift of SD-C17 is a reduction that:
+
+\begin{enumerate}
+\item cancels within primitive cyclic content classes or replaces matched
+  classes by acyclic graded sectors;
+\item commutes with cyclic rotation, temporal powers, and finite atom
+  permutations;
+\item preserves the frozen scalar trace at every repetition order;
+\item deletes all mixed subset classes while retaining nontrivial atom
+  determinant factors.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Primitive-cycle no-lift]
+\label{thm:no-lift}
+No reduction satisfying \Cref{def:lift} exists.
+\end{theorem}
+
+\begin{proof}
+A primitive sign pairing fails at $p^2q^2$ by
+\Cref{cor:no-primitive-involution} and independently fails atom-permutation
+naturality at $pqr$ by \Cref{thm:s3}.  Reinterpreting scalar signs as chain
+parities changes even-power traces by (6.5)--(6.6).  Making the proposed
+cancellation genuinely acyclic gives determinant one by \Cref{thm:acyclic},
+so it cannot retain the nontrivial scalar factor.  A quasi-isomorphic
+bar-to-Koszul reduction retains mixed classes by \Cref{thm:tor}, and cyclic
+primitivity cannot be isolated as a subcomplex by
+\Cref{prop:primitive-boundary}.  Every allowed branch violates at least one
+condition of \Cref{def:lift}.
+\end{proof}
+
+The theorem is scoped.  It does not forbid representation-valued or other
+chain-enhanced symbolic candidates with additional data frozen from the
+start.  It forbids presenting such a new object as a trace-preserving
+reinterpretation of the scalar SD-C17 shift.

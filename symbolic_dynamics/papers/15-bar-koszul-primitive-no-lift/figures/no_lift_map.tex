@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=4pt,
+              text width=42mm,minimum height=12mm},
+  src/.style={box,fill=blue!7,draw=blue!55!black},
+  result/.style={box,fill=green!8,draw=green!45!black},
+  stop/.style={box,fill=red!7,draw=red!60!black},
+  note/.style={box,fill=orange!9,draw=orange!65!black},
+  arr/.style={-{Latex[length=2mm]},thick,draw=black!65},
+  darr/.style={-{Latex[length=2mm]},thick,dashed,draw=red!65!black}
+]
+\node[src] (atoms) {tensor atoms of full shifts\\
+  $\F_m\otimes\F_n=\F_{mn}$, $h(\F_p)=\log p$};
+\node[src, right=5mm of atoms] (subset) {nonempty squarefree subsets\\
+  $w(S)=(-1)^{|S|+1}x_S$};
+\node[src, right=5mm of subset] (shift) {one-vertex scalar edge shift\\
+  primitive subset necklaces};
+
+\node[result, below=8mm of subset] (det) {valid scalar determinant\\
+  $D_A=\prod_{a\in A}(1-x_a)$\\
+  $D_\infty=1/\zeta$ for $\Ree s>1$};
+
+\node[stop, below=9mm of atoms] (power) {$p^2q^2$: primitive sum $-1$\\
+  cancellation borrows two $r=2$ powers};
+\node[stop, below=9mm of det] (equiv) {$pqr$: virtual $S_3$ character\\
+  $\one\oplus\sgnrep-\stdrep$};
+\node[stop, below=9mm of shift] (parity) {scalar $(-w)^r\ne-w^r$\\
+  acyclic supersector has $\sdet=1$};
+
+\node[note, below=9mm of equiv,text width=58mm] (decision)
+  {scalar determinant: \textsc{yes}\\
+   primitive-natural atom selector: \textsc{no}\\
+   \texttt{ROUTE\_A\_REJECTED}; Route B locked};
+
+\draw[arr] (atoms) -- (subset);
+\draw[arr] (subset) -- (shift);
+\draw[arr] (subset) -- (det);
+\draw[darr] (shift) -- (power);
+\draw[darr] (shift) -- (equiv);
+\draw[darr] (shift) -- (parity);
+\draw[arr] (power) -- (decision);
+\draw[arr] (equiv) -- (decision);
+\draw[arr] (parity) -- (decision);
+\end{tikzpicture}

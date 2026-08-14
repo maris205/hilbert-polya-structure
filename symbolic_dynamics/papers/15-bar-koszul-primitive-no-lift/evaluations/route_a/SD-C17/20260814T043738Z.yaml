@@ -1,0 +1,266 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C17
+source_commit: TO_BE_FILLED_AFTER_FIRST_STAGE_COMMIT
+code_commit: TO_BE_FILLED_AFTER_FIRST_STAGE_COMMIT
+evaluation_date: "2026-08-14"
+artifact_path_base: papers/15-bar-koszul-primitive-no-lift
+freeze_note: >-
+  Two-stage provenance: the placeholders above are patched to the first-stage
+  commit that freezes the complete paper source, code, results, PDF, and root
+  summary. This evaluation record and PAPER_MANIFEST are then sealed by the
+  following metadata-only commit.
+
+source_lock:
+  candidate_definition: >-
+    For each finite set P of tensor-indecomposable full shifts, SD-C17 is the
+    one-vertex full edge shift on all nonempty squarefree subsets S of P, with
+    ordinary scalar edge weight (-1)^(|S|+1)x_S.
+  object: >-
+    The directed family of finite squarefree-subset shifts, their primitive
+    necklaces modulo cyclic rotation, and the scalar Fredholm determinants
+    D_P(x,z)=1-z sum_(S nonempty)(-1)^(|S|+1)x_S.
+  family: symbolic_dynamics
+  phase_space: >-
+    One vertex with one loop edge for every nonempty subset of a frozen finite
+    tensor-atom inventory; temporal words form the full edge shift.
+  dynamics: >-
+    Left shift on subset-edge words. Primitive periodic objects are cyclic
+    necklaces, and repetitions use the actual scalar power of the necklace
+    weight with trace-log factor 1/r.
+  parameters: >-
+    Explicit degrees pq, p^2q^2, pqr; cyclic enumeration k=2..7; Stirling
+    cutoff k=12; repetition cutoff r=8; rational controls k=2..8 and seeds
+    15100..15115.
+  parameter_provenance: >-
+    The subset alphabet and Koszul scalar sign are fixed by the normalized
+    bar/Koszul source before orbit enumeration; every cutoff and seed is
+    preregistered and no parameter is selected from target data.
+  arithmetic_origin: >-
+    Nonunit tensor-indecomposable finite full shifts are the tensor atoms F_p,
+    and topological entropy h(F_p)=log p gives the additive specialization
+    x_p=exp(-s h(F_p)). The formal-variable determinant precedes and controls
+    this specialization.
+  clock: >-
+    T(S)=sum_(p in S)h(F_p) on an edge and additive temporal roof on words;
+    no fitted scale or offset.
+  normalization: >-
+    epsilon(S)=(-1)^(|S|+1), z is the temporal counting parameter, z=1 is the
+    canonical Koszul specialization, and scalar signs power as epsilon^r.
+  determinant_convention: >-
+    D_P(x,z)=det_C(I-z L_P)=1-z F_P(x), where L_P is scalar multiplication by
+    F_P. At z=1, D_P(x,1)=product_(p in P)(1-x_p). The evaluated object is the
+    determinant, not its inverse or a fitted logarithmic branch.
+  orbit_cutoff: >-
+    Exact pq and p^2q^2 necklace census, exact pqr S3 action, cyclic partitions
+    through k=7, and scalar/supertrace repetitions through r=8.
+  cutoff: >-
+    Formal Stirling certificate through k=12 and 112 exact rational controls
+    from seven atom cutoffs and sixteen seeds.
+  precision: exact_integer_and_Fraction_arithmetic
+  training_data: none
+  allowed_data:
+    - tensor multiplication and tensor indecomposability of finite full shifts
+    - topological entropy as the symbolic roof
+    - formal subset monomials and scalar Koszul signs
+    - cyclic words, least periods, finite permutation actions, and characters
+    - exact rational generic-inventory controls
+  forbidden_data:
+    - Riemann-zero tables or target spectra
+    - target-root searches, fitting, or best-cutoff selection
+    - inserted Mobius or von-Mangoldt transfer weights
+    - post-hoc lexicographic pairing presented as natural
+    - replacing ordinary scalar signs by chain parity
+    - discarding repetitions or changing their scalar powers
+    - cross-family geometric or operator repairs
+  code_commit: TO_BE_FILLED_AFTER_FIRST_STAGE_COMMIT
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - DERIVATION_PACKAGE.md
+    - PROOF_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/EXPERIMENT_TRACKER.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc17_bar_koszul_experiment.py
+    - code/test_sdc17_bar_koszul_experiment.py
+    - results/primitive_power_ledger.csv
+    - results/p2q2_certificate.json
+    - results/s3_character_certificate.json
+    - results/squarefree_stirling_identity.csv
+    - results/cyclic_partition_counts.csv
+    - results/scalar_supertrace_control.csv
+    - results/scalar_supertrace_certificate.json
+    - results/random_inventory_controls.csv
+    - results/summary.json
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Tensor atoms and entropy provide the source and clock without target data,
+    while the finite scalar determinant identity is exact before arithmetic
+    specialization.
+  strongest_failure: >-
+    The same determinant identity holds for every formal or rational variable
+    inventory, so the Koszul cancellation itself is not arithmetic-selective.
+  arithmetic_controls:
+    - 112 fixed-seed arbitrary rational inventories
+    - presentation permutations for every rational inventory
+    - scalar versus genuine contractible-supertrace ledger control
+    - lexicographic non-equivariant pairing control
+  artifacts:
+    - SOURCE_LOCK.md
+    - results/random_inventory_controls.csv
+    - results/summary.json
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Primitive necklaces and their repetitions are enumerated exactly with
+    orientation, scalar sign, multidegree, least period, and 1/r weight.
+  strongest_failure: >-
+    At p^2q^2 the primitive signed count is 1-2=-1 and cancellation needs two
+    lower-degree r=2 repetitions; at pqr the nonzero S3 virtual character
+    forbids an atom-equivariant sign-reversing bijection.
+  metrics:
+    primitive_definition: cyclic_necklaces_of_squarefree_subset_edges
+    reflection_quotiented: false
+    pq_positive_negative_counts: "1,1"
+    p2q2_positive_negative_primitive_counts: "1,2"
+    p2q2_primitive_sum: "-1"
+    pq_r2_repetition_sum: "1/2+1/2=1"
+    p2q2_complete_log_coefficient: "0"
+    pqr_positive_orbit_sizes: "1,2"
+    pqr_negative_orbit_sizes: "3"
+    pqr_virtual_character: "0,0,3"
+    monodromy_or_stability: not_applicable
+    completeness_risk_for_frozen_multidegrees: none_exact_exhaustion
+  artifacts:
+    - results/primitive_power_ledger.csv
+    - results/p2q2_certificate.json
+    - results/s3_character_certificate.json
+    - EXPERIMENT_REPORT.md
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Every frozen finite subset shift has the canonical scalar Fredholm
+    determinant D_P(x,z), and inclusion-exclusion gives the exact identity
+    D_P(x,1)=product_(p in P)(1-x_p).
+  strongest_failure: >-
+    This finite analytic determinant is universal, has the wrong primitive
+    ledger for an orbitwise Euler interpretation, and supplies no target
+    divisor statement.
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: not_applicable
+    precision_drift: not_applicable
+    control_margin: not_applicable
+    finite_stage_coefficient_drift: exact_zero_at_every_frozen_finite_stage
+    primitive_power_rows: 7
+    cyclic_partition_rows: 27
+    stirling_rows: 12
+    random_control_rows: 112
+    target_zero_data_used: false
+  artifacts:
+    - results/squarefree_stirling_identity.csv
+    - results/cyclic_partition_counts.csv
+    - results/random_inventory_controls.csv
+    - results/summary.json
+    - results/SHA256SUMS.txt
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: OPEN
+  strongest_evidence: >-
+    The finite formal determinant and its entropy specialization have real
+    coefficients and conjugation symmetry in the declared variables.
+  strongest_failure: >-
+    No completed functional equation, Gamma factor, pole/trivial-zero
+    treatment, Riemann-von Mangoldt law, global target divisor theorem, or
+    intrinsic Weil compression is derived.
+  analytic_structure:
+    finite_stage_conjugation_symmetry: PROVED
+    functional_equation: OPEN
+    gamma_factor: OPEN
+    pole_removal: OPEN
+    trivial_zeros: OPEN
+    target_counting_law: OPEN
+    global_target_divisor_identity: OPEN
+  weil_compression:
+    status: NOT_TESTABLE
+    reason: no_intrinsic_Hermitian_or_Weil_compression_from_SD_C17
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: >-
+    The finite scalar transfer operator and its chain-complex control are
+    fully defined within symbolic dynamics.
+  strongest_failure: >-
+    No natural quantization, unitary or scattering completion, Hamiltonian
+    phase space, self-adjoint generator, Hilbert-space domain, or target
+    counting law is supplied.
+  metrics:
+    natural_quantization: false
+    time_reversal_or_antiunitary_structure: not_applicable
+    proposed_hilbert_space: not_applicable
+    proposed_operator_domain: not_applicable
+    route_b_readiness: false
+  artifacts:
+    - SOURCE_LOCK.md
+    - results/scalar_supertrace_certificate.json
+
+adversarial_controls:
+  controls_used:
+    - 112 arbitrary exact rational inventories
+    - presentation shuffles at every inventory
+    - lexicographic pairing under all six S3 permutations
+    - scalar sign versus odd-line supertrace through r=8
+    - genuine contractible two-term block
+  proves_too_much_risk: true
+  verdict: STOP_SCOPED / PROVES_TOO_MUCH
+
+route_tuple:
+  - A0_ANALYTIC_ARITHMETIC_ORIGIN
+  - A1_FAIL
+  - A2_ANALYTIC_DETERMINANT
+  - A3_FAIL
+  - A4_FAIL
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  SD-C17 proves an exact scalar squarefree-subset determinant and exact
+  primitive/power/equivariant obstructions to promoting its cancellation to
+  a natural primitive-cycle pairing. It does not prove arithmetic
+  selectivity, an orbitwise prime correspondence, a completed-zeta divisor,
+  RH, or a Hilbert-Polya operator.
+blocking_conditions:
+  - cancellation at p^2q^2 crosses primitive and repetition layers
+  - the pqr virtual S3 character is nonzero
+  - scalar signs and chain parity disagree at even powers
+  - arbitrary rational inventories reproduce the determinant identity
+  - no global analytic completion or intrinsic Weil compression exists
+  - no natural operator lift exists
+next_smallest_test: >-
+  Within Symbolic Dynamics, freeze a genuinely pre-cyclic chain-enhanced
+  grammar whose contraction commutes with atom permutations and temporal
+  powers, then test its character-resolved primitive ledger; otherwise
+  promote the S3 obstruction to a general symmetric-function theorem.
+round2_clues: []
+route_b_invocation_allowed: false
