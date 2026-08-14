@@ -1,6 +1,6 @@
 # HCS-C56 experiment tracker
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; ALL C56 RELEASE-CANDIDATE GATES PASS.**
+Status: **DOCS_FINAL_NO_MORE_EDITS; ALL C56 RELEASE-FROZEN GATES PASS.**
 
 ## 1. Gate ledger
 
@@ -21,14 +21,15 @@ Status: **DOCS_FINAL_NO_MORE_EDITS; ALL C56 RELEASE-CANDIDATE GATES PASS.**
 | A0 | schema, all-leaf rebound, rollback, and nonmutation audits pass | PASS | 2684/2684 rebound and 15/15 tests |
 | P0 | paper sources pass an independent semantic/source audit | PASS | fresh isolated build clean; live sources unmodified |
 | P1 | one official clean paper build passes log/font/text/visual checks | PASS | 19 pages; zero warnings; fonts/text/visuals clean |
-| R0 | scoped identity, external full successor, Route, and no-commit release-candidate audit close | PASS | project `RELEASE_CANDIDATE`; 46-entry successor verified separately; commits null |
+| R0 | scoped identity, implementation commit, external full successor, Route, and frozen-release audit close | PASS | project `RELEASE_FROZEN`; implementation commit `b32402f1dd276a2684d3e849dae26150ebb595e1`; provenance commit null/external |
 
 For C0--A0, PASS means that the current exact prefreeze payload and independent
-checker certify the named instance gate.  The project release candidate adds
-official documentation-build provenance without rewriting the exact
-code/results bytes.  The scoped manifest stays the default machine identity;
-the self-excluding full-project successor is a separately verified external
-ledger, and commit identities remain null.
+checker certify the named instance gate.  The frozen project binds the exact
+implementation commit and official documentation-build provenance without
+rewriting the machine `PREFREEZE_CODE_RESULTS_PASS` bytes.  The scoped manifest
+stays the default machine identity; the self-excluding full-project successor
+is a separately verified external ledger, and the provenance commit remains
+null/external.
 
 ## 2. Current milestone
 
@@ -46,8 +47,9 @@ The completed milestone contains:
 - a complete list of prohibited arithmetic and motivic inferences.
 
 The current milestone also contains the full coefficient arrays, modular
-factors, group enumeration, and canonical prefreeze identifiers.  These are
-exact code/results evidence, not yet frozen-release provenance.
+factors, group enumeration, and canonical prefreeze identifiers.  These remain
+exact code/results evidence; the implementation commit, Routes, and external
+full-project manifest separately supply frozen-release provenance.
 
 ## 3. Certified prefreeze measurements
 
@@ -103,9 +105,9 @@ actual frozen upstream release and is itself a source-lock failure.
 ## 6. Terminal handoff
 
 The exact code/results tuple, official paper artifacts, compilation report,
-and Route record are bound for the project `RELEASE_CANDIDATE`.  No further
-C56 documentation edit or compilation is planned after this successor rebind.
-The root 46-entry self-excluding full-project successor is verified separately
-without replacing the scoped default runner identity.  A later commit/frozen
-promotion would be a separate provenance operation and is not a missing
-theorem premise.
+and Route record are bound for the project `RELEASE_FROZEN` at implementation
+commit `b32402f1dd276a2684d3e849dae26150ebb595e1`.  The root 46-entry
+self-excluding full-project manifest is verified separately without replacing
+the scoped default runner identity.  The provenance commit remains
+null/external; no further C56 documentation edit, compilation, or release
+promotion is planned.

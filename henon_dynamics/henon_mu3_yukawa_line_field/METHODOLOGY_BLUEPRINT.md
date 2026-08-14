@@ -1,7 +1,7 @@
 # HCS-C56 methodology blueprint
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; method executed and bound into the project
-RELEASE_CANDIDATE.**
+RELEASE_FROZEN.**
 
 ## 1. Research mode
 
@@ -175,8 +175,9 @@ The cwd-independent rollback-atomic runner, independent checker,
 deterministic schema, and scoped code/results manifest pass at prefreeze:
 10/10 semantic gates, 2684/2684 rebound cases, and 15/15 tests.  Their exact
 identifiers are recorded in `README.md` and `INTEGRITY_REPORT.md`.  The
-official paper compilation passes and the project is a `RELEASE_CANDIDATE`.
+official paper compilation passes and the project is `RELEASE_FROZEN` at
+implementation commit `b32402f1dd276a2684d3e849dae26150ebb595e1`.
 The scoped manifest remains the default code/results identity; a separate
-46-entry self-excluding full-project successor is verified externally for the
-release-wide tree.  Implementation/provenance commits remain unset, and no
+46-entry self-excluding full-project manifest is verified externally for the
+release-wide tree.  The provenance commit remains null/external, and no
 temporary report is promoted.

@@ -1,6 +1,6 @@
 # HCS-C56: the twenty-seven-line field of the fourth Hénon Yukawa surface
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; project RELEASE_CANDIDATE against exact
+Status: **DOCS_FINAL_NO_MORE_EDITS; project RELEASE_FROZEN against exact
 PREFREEZE_CODE_RESULTS_PASS machine evidence.**
 
 HCS-C56 starts from the fixed cubic surface over $\mathbf Q$ released by
@@ -13,9 +13,9 @@ Picard ranks $7/1$ and no $\mathbf Q$-line.
 The prefreeze producer/checker pair now certifies the large Gröbner, modular,
 and Weyl-group calculations.  The written argument supplies the global
 clopen scheme bridge, the subgroup implication, and the
-Hochschild--Serre torsion/rank bridge.  This is an exact code/results
-prefreeze evidence package underlying the current no-commit project
-RELEASE_CANDIDATE; it is not a committed or frozen project release.
+Hochschild--Serre torsion/rank bridge.  This exact code/results prefreeze
+evidence package underlies the project `RELEASE_FROZEN`, whose implementation
+commit is `b32402f1dd276a2684d3e849dae26150ebb595e1`.
 
 ## Upstream object and frozen status contract
 
@@ -69,13 +69,14 @@ replace the frozen contract by a rule that every upstream status leaf say
   phases and current gate state.
 - `IMPLEMENTATION_CHECKLIST.md` lists every source, scheme, arithmetic,
   Galois, integrity, and release obligation.
-- `INTEGRITY_REPORT.md` records the release-candidate provenance boundary.
+- `INTEGRITY_REPORT.md` records the frozen-release provenance boundary.
 - `NARRATIVE_REPORT.md` gives the research interpretation with the scope
   firewalls intact.
 - `PAPER_PLAN.md` tracks the frozen source and official build artifacts.
 - `route_a_evaluation.yaml` records the exact prefreeze machine tuple and
-  official documentation hashes.  Commit fields remain null, while the
-  release-wide full-project successor is recorded and verified externally.
+  official documentation hashes.  The implementation commit is bound exactly;
+  the provenance commit remains null/external, and the release-wide
+  full-project successor is recorded and verified externally.
 
 The full paper source and bibliography are frozen.  The fresh isolated audit,
 controlled bootstrap, official final build, log/font/text/visual audit, and
@@ -95,13 +96,14 @@ The exact scoped/code-results and release-wide integrity identities are:
 | C56 scoped 12-entry manifest SHA-256 | `20d29af97128e766bb5e59bf6f82f8401c6ed62f279371b031febcefd5d99b4a` |
 | semantic gates / rebound / tests | `10/10`; `2684/2684`; `15/15` |
 | C56 producer/checker/test direct release fields | bound by scoped manifest; otherwise `null` |
-| C56 implementation/provenance commits | `null` |
+| C56 implementation commit | `b32402f1dd276a2684d3e849dae26150ebb595e1` |
+| C56 provenance commit | `null`; external/not separately promoted |
 | paper-source SHA-256 | `b284a2f17a53b979374a5525a0642472bd7a14cb72f8260de87bea9a15628a29` |
 | paper PDF SHA-256 | `ae8f422e3183455206f3459f0952d7e5175633bc534c318bfb7326b08c6c604e` |
 | paper log SHA-256 | `afd4dc0323cc3139d6a1e8c441210d453c4c51ab4c5b14aa68d2197a7033af60` |
 | extracted-text SHA-256 | `7c1722fa8286b4dcbb03a3acbe1fcec09a3a26890638599168e8844c9c3ae718` |
 | compilation-report SHA-256 | `e0b39488e2f3f589f6332db7cd09300d10614044763b7fced6c2bd505c698cb5` |
-| project/docs status | `RELEASE_CANDIDATE`; `DOCS_FINAL_NO_MORE_EDITS` |
+| project/docs status | `RELEASE_FROZEN`; `DOCS_FINAL_NO_MORE_EDITS` |
 | full-project manifest successor | root `FULL_PROJECT_HASHES.sha256`; 46 entries, self-excluding, verified separately; digest external-only |
 
 Temporary architecture and reconnaissance files are chronology only.  No

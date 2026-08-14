@@ -1,7 +1,7 @@
 # HCS-C56 exact experiment plan
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; PHASES 0--7 PASS FOR THE NO-COMMIT PROJECT
-RELEASE_CANDIDATE.**
+Status: **DOCS_FINAL_NO_MORE_EDITS; PHASES 0--7 PASS FOR THE PROJECT
+RELEASE_FROZEN.**
 
 ## Objective
 
@@ -116,7 +116,7 @@ After the exact handoff, the documentation lane:
 5. has completed source-level semantic review and a clean fresh isolated
    compile audit;
 6. has completed the controlled bootstrap and official final build;
-7. has filled compilation and release-candidate Route records.
+7. has filled compilation and frozen-release Route/provenance records.
 
 ## Planned payload subtrees
 
@@ -154,7 +154,8 @@ These remain resource envelopes, not promoted release measurements.
 | scoped 12-entry manifest | `20d29af97128e766bb5e59bf6f82f8401c6ed62f279371b031febcefd5d99b4a` |
 | semantic gates / rebound / tests | `10/10`; `2684/2684`; `15/15` |
 | producer/checker/tests direct fields | bound by scoped manifest; otherwise `null` |
-| implementation/provenance commits | null |
+| implementation commit | `b32402f1dd276a2684d3e849dae26150ebb595e1` |
+| provenance commit | null; external/not separately promoted |
 | full-project manifest successor | root `FULL_PROJECT_HASHES.sha256`; 46 entries, self-excluding, verified separately; digest external-only |
 | paper source | `b284a2f17a53b979374a5525a0642472bd7a14cb72f8260de87bea9a15628a29` |
 | paper PDF | `ae8f422e3183455206f3459f0952d7e5175633bc534c318bfb7326b08c6c604e` |

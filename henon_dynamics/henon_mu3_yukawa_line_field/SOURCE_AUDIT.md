@@ -1,7 +1,7 @@
 # HCS-C56 primary-source audit
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; primary locators, exact instance boundary,
-and official paper citations verified for the project RELEASE_CANDIDATE.**
+and official paper citations verified for the project RELEASE_FROZEN.**
 
 Search/access date: **2026-08-15 UTC**.
 

@@ -1,11 +1,10 @@
 # HCS-C56 implementation checklist
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; FINAL READ-ONLY AUDIT PASS; project
-remains a no-commit RELEASE_CANDIDATE.**
+RELEASE_FROZEN.**
 
 Checked boxes record completed written, certified prefreeze, official-build,
-and final read-only audit work.  A committed/frozen release promotion is a
-separate optional workflow.
+final read-only audit, implementation-commit, and frozen-release work.
 
 ## A. Ownership and source identity
 
@@ -139,12 +138,13 @@ separate optional workflow.
 - [x] Run the official clean build and audit log, destinations, fonts, text,
   and page visuals.
 - [x] Generate main.txt and a compilation report.
-- [x] Backfill exact paper, report, and Route provenance; keep unavailable
-  commit fields explicitly null and bind the external self-excluding
-  full-project successor without embedding its digest.
+- [x] Backfill exact paper, report, and Route provenance; bind implementation
+  commit `b32402f1dd276a2684d3e849dae26150ebb595e1`, keep the provenance
+  commit null/external, and bind the external self-excluding full-project
+  manifest without embedding its digest.
 - [x] Run the final read-only release audit.
-- [x] Close its final-audit gate while retaining the
-  no-commit project RELEASE_CANDIDATE.  Documentation is already frozen at
-  DOCS_FINAL_NO_MORE_EDITS for this audit; any committed/frozen release
-  promotion is a separate optional workflow.  The separately verified
-  full-project successor is an integrity ledger, not such a promotion.
+- [x] Close its final-audit gate at project `RELEASE_FROZEN` while retaining
+  documentation `DOCS_FINAL_NO_MORE_EDITS` and machine evidence
+  `PREFREEZE_CODE_RESULTS_PASS`.  The separately verified full-project
+  manifest is the release-wide integrity ledger; the provenance commit remains
+  null/external.

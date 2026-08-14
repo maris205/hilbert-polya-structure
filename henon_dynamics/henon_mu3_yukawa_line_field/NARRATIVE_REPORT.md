@@ -1,7 +1,7 @@
 # HCS-C56 research narrative
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; exact narrative for the project
-RELEASE_CANDIDATE.**
+RELEASE_FROZEN.**
 
 ## From a Yukawa tensor to a new arithmetic object
 
@@ -134,7 +134,9 @@ The theorem, derivation, proof, methodology, source audit, and exact machine
 replay pass at code/results prefreeze.  The instance-specific eliminant,
 modular factors, Weyl enumeration, independent checker, 2684/2684 rebound
 suite, and 15/15 tests are part of that milestone.  The official final paper
-build and documentation audit pass, so the no-commit project is a
-`RELEASE_CANDIDATE`.  Commit provenance remains intentionally unset.  The
-46-entry self-excluding full-project successor is verified externally as a
-release-wide integrity ledger and is not a theorem premise.
+build and documentation audit pass.  The project is `RELEASE_FROZEN` at
+implementation commit `b32402f1dd276a2684d3e849dae26150ebb595e1`, while the
+machine evidence remains `PREFREEZE_CODE_RESULTS_PASS`.  The provenance commit
+remains null/external.  The 46-entry self-excluding full-project manifest is
+verified externally as a release-wide integrity ledger and is not a theorem
+premise.

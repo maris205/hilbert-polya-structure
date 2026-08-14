@@ -1,13 +1,14 @@
 # HCS-C56 integrity report
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; official documentation integrity PASS for
-the no-commit project RELEASE_CANDIDATE.**
+the project RELEASE_FROZEN.**
 
-This report describes the integrity boundary of the project release
-candidate.  It binds independently checked prefreeze code/results evidence,
-the written proof boundary, and the official documentation build without
-inventing commit provenance.  A separate self-excluding full-project successor
-provides release-wide integrity without replacing the scoped machine identity.
+This report describes the integrity boundary of the frozen project release.
+It binds independently checked prefreeze code/results evidence, the written
+proof boundary, the official documentation build, and implementation commit
+`b32402f1dd276a2684d3e849dae26150ebb595e1`.  A separate self-excluding
+full-project manifest provides release-wide integrity without replacing the
+scoped machine identity; the provenance commit remains null/external.
 
 ## 1. Owned scope
 
@@ -17,9 +18,10 @@ The documentation lane may create or edit only:
 - the paper subtree drafted after the exact handoff;
 - the root route_a_evaluation.yaml record.
 
-It does not own code, results, top-level registries, codex_prompt, commits, or
-remote publication. The existence of an unreviewed file outside the owned
-scope is not evidence for any theorem premise.
+It does not create or alter code, results, top-level registries, codex_prompt,
+commits, or remote publication.  It records the root-supplied implementation
+commit but does not invent a separate provenance commit.  The existence of an
+unreviewed file outside the owned scope is not evidence for any theorem premise.
 
 ## 2. Current integrity state
 
@@ -35,7 +37,7 @@ scope is not evidence for any theorem premise.
 | semantic mutation audit | PASS | 2684/2684 rebound cases and 15/15 tests |
 | paper source | ISOLATED PREFREEZE PASS | clean fresh-copy compile; live source bytes and mtimes unchanged |
 | official compilation | PASS | 19-page PDF; zero warnings; fonts/text/visuals clean |
-| release provenance | RELEASE_CANDIDATE | scoped identity and documentation hashes; 46-entry full successor verified separately; commits null |
+| release provenance | RELEASE_FROZEN | implementation commit bound; scoped identity and documentation hashes retained; 46-entry full manifest verified separately; provenance commit null/external |
 
 ## 3. Upstream integrity contract
 
@@ -123,8 +125,8 @@ motive, a VHS, a Calabi--Yau realization, or a generic-family theorem.
 | producer SHA-256 | null; bound by scoped manifest |
 | checker SHA-256 | null; bound by scoped manifest |
 | tests SHA-256 | null; bound by scoped manifest |
-| implementation commit | null |
-| provenance commit | null |
+| implementation commit | `b32402f1dd276a2684d3e849dae26150ebb595e1` |
+| provenance commit | null; external/not separately promoted |
 | full-project manifest successor | root `FULL_PROJECT_HASHES.sha256`; 46 entries, self-excluding, verified separately; digest external-only |
 | paper-source SHA-256 | `b284a2f17a53b979374a5525a0642472bd7a14cb72f8260de87bea9a15628a29` |
 | paper PDF SHA-256 | `ae8f422e3183455206f3459f0952d7e5175633bc534c318bfb7326b08c6c604e` |
@@ -133,11 +135,11 @@ motive, a VHS, a Calabi--Yau realization, or a generic-family theorem.
 | compilation-report SHA-256 | `e0b39488e2f3f589f6332db7cd09300d10614044763b7fced6c2bd505c698cb5` |
 | Route-record external SHA-256 | null |
 
-Null in the remaining commit and Route-self-hash rows means absent under the
-explicit no-commit or external-only policy.  The full-project successor digest
-is likewise external-only to avoid a self-reference cycle.  Neither policy
-permits a temporary calculation to replace the scoped prefreeze identity or
-official documentation artifacts.
+Null in the provenance-commit and Route-self-hash rows means not separately
+promoted under the external-only policy.  The full-project manifest digest is
+likewise external-only to avoid a self-reference cycle.  Neither policy permits
+a temporary calculation to replace the scoped prefreeze identity, the exact
+implementation commit, or official documentation artifacts.
 
 ## 8. Completed integrity audits
 
@@ -152,7 +154,8 @@ The following prefreeze integrity audits pass:
 The official paper log/reference/destination/font/text/visual review also
 passes.  Scoped provenance uses its 12-entry manifest; paper/report hashes are
 recorded above; Route and report self-digests remain external-only.  The root
-46-entry self-excluding full-project successor is verified separately, while
-implementation/provenance commits remain unset.  This closes the documentation
-lane at `DOCS_FINAL_NO_MORE_EDITS` and the project at `RELEASE_CANDIDATE`, not
-at a committed/frozen release.
+46-entry self-excluding full-project manifest is verified separately, and
+implementation commit `b32402f1dd276a2684d3e849dae26150ebb595e1` is bound.
+The provenance commit remains null/external.  This closes the documentation
+lane at `DOCS_FINAL_NO_MORE_EDITS` and the project at `RELEASE_FROZEN` while
+leaving the machine evidence at `PREFREEZE_CODE_RESULTS_PASS`.
