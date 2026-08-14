@@ -1,15 +1,15 @@
 skill: route-a-evaluator
 skill_version: 0.2.0
 candidate_id: SD-C35
-source_commit: PENDING_FIRST_ARTIFACT_COMMIT
-code_commit: PENDING_FIRST_ARTIFACT_COMMIT
+source_commit: d9f57e243b4b5f04c9e048537b7aae531e0d7dd2
+code_commit: d9f57e243b4b5f04c9e048537b7aae531e0d7dd2
 evaluation_date: "2026-08-15"
 artifact_path_base: symbolic_dynamics/papers/33-relation-homology-operator-non-descent
 freeze_note: >-
-  Research-stage provenance is frozen with the paired pending token. The
-  authority integrator must replace all three commit fields together with the
-  first immutable artifact commit and change no scientific payload in the
-  metadata-only stage.
+  Metadata-only seal after corrective artifact commit
+  d9f57e243b4b5f04c9e048537b7aae531e0d7dd2.  The route card, manifest,
+  and paired commit fields were updated together without changing the frozen
+  scientific payload.
 
 source_lock:
   candidate_definition: >-
@@ -34,6 +34,8 @@ source_lock:
     random_seed=330000+trial; matched_seed=1003003+n; multipliers=2,3;
     six honest C6 characters; fifteen zero-superdimension differences;
     cycle-word traces kept distinct from Manin norm-polynomial evaluations;
+    source_generator and post_census_classifier physically separated;
+    independent_low_level_checks=8349; authority_unit_checks=1932;
     analytic_comparison_half_plane=Re(s)>2; free_marker=z.
   parameter_provenance: >-
     Source, quotient relations, square cells, coefficient field, controls,
@@ -82,7 +84,7 @@ source_lock:
     - post-control signs cells roofs projections or embeddings
     - orthogonal compression presented as an induced quotient operator
     - scalar block determinant presented as original edge-step ownership
-  code_commit: PENDING_FIRST_ARTIFACT_COMMIT
+  code_commit: d9f57e243b4b5f04c9e048537b7aae531e0d7dd2
   artifact_paths:
     - SOURCE_LOCK.md
     - DERIVATION_PACKAGE.md
@@ -90,6 +92,18 @@ source_lock:
     - LITERATURE_AUDIT.md
     - code/cycle_quotient_core.py
     - code/generate_results.py
+    - code/write_run_locks.py
+    - code/source_generator.py
+    - code/post_census_classifier.py
+    - code/audit_source_separation.py
+    - code/freeze_artifacts.py
+    - code/audit_artifact_integrity.py
+    - code/audit_idempotence.py
+    - code/independent_evaluator.py
+    - code/run_tests.py
+    - experiments/run_exact_suite.py
+    - experiments/EXPERIMENT_PLAN.md
+    - results/modulus_source_census.csv
     - results/modulus_homology_census.csv
     - results/matched_clone.csv
     - results/random_action_controls.csv
@@ -98,7 +112,15 @@ source_lock:
     - results/source_oracle_certificate.json
     - results/summary.json
     - results/test_report.json
+    - results/source_separation_certificate.json
+    - results/classification_certificate.json
+    - results/prototype_bridge_certificate.json
+    - results/evaluation.json
+    - results/evaluation_comparison.csv
+    - results/unit_test_report.json
     - results/double_run_certificate.json
+    - results/idempotence_certificate.json
+    - results/integrity_audit.json
     - results/SHA256SUMS.txt
 
 a0:
@@ -118,10 +140,14 @@ a0:
     - 191 opaque matched relabels
     - 64 generic transitive C2*C3 actions
     - complete character and cross-square censuses
+    - physical source/classifier separation certificate
+    - independent reconstruction with 8349 low-level checks
   artifacts:
     - results/source_oracle_certificate.json
+    - results/source_separation_certificate.json
     - results/matched_clone.csv
     - results/random_action_controls.csv
+    - results/evaluation.json
 
 a1:
   verdict: A1_FAIL
@@ -132,7 +158,8 @@ a1:
     exact orbit-incidence theorem gives its complete residual block dimension;
     the twist census separately records cycle-word traces and chain norms.
   strongest_failure: >-
-    Every n at least two retains the primitive cusp word R then S. Diamond
+    Every n at least two retains the primitive generator sequence R then S
+    (operator word SR under the right-to-left convention). Diamond
     filling kills all cross-modulus H1 and leaves the direct sum of nonzero
     block Manin modules. Prime powers, mixed composites, and random actions
     all survive.
@@ -150,6 +177,8 @@ a1:
     zero_superdimension_twists_killing_identity_cycle_words: 15
     zero_superdimension_twists_killing_both_chain_norms: 2
     zero_superdimension_twists_with_cusp_survivor: 15
+    independent_low_level_checks_passed: 8349
+    independent_low_level_checks_total: 8349
   artifacts:
     - results/modulus_homology_census.csv
     - results/cross_square_complex.json
@@ -167,12 +196,12 @@ a2:
     already at n=2; the exact audit finds non-descent on all 191 tested
     blocks. Therefore there is no induced same-marker quotient operator.
   metrics:
-    zero_error_train: "not_applicable; no_target_zero_evaluation"
-    zero_error_validation: "not_applicable; no_target_zero_evaluation"
-    zero_error_test: "not_applicable; no_target_zero_evaluation"
-    extra_zero_count: "not_applicable; no_target_zero_evaluation"
-    missing_zero_count: "not_applicable; no_target_zero_evaluation"
-    root_count_discrepancy: "not_applicable; no_target_zero_evaluation"
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
     cutoff_drift: "not_applicable; exact finite certificates and direct proofs"
     precision_drift: "not_applicable; exact integer finite-field and cyclotomic arithmetic"
     control_margin: "not_applicable; exact identities"
@@ -185,6 +214,7 @@ a2:
   artifacts:
     - results/modulus_homology_census.csv
     - results/summary.json
+    - results/evaluation.json
 
 a3:
   verdict: A3_FAIL
@@ -219,6 +249,12 @@ a4:
     correspondence, and the candidate has already failed A1 and A2.
   metrics:
     target_zero_data_used: false
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
     fixed_selfadjoint_operator: false
     critical_line_mechanism: false
     zero_correspondence: false
@@ -237,11 +273,13 @@ adversarial_controls:
     - separate exact identity-cycle-word and Manin-chain-norm evaluations
     - relative and cuspidal homology ledgers
     - exact operator-descent ranks source scan tests hashes and double run
+    - 20-payload fresh canonical double run and 40-entry paper-root SHA ledger
+    - freeze and integrity byte-idempotence audit
   decisive_failures:
-    - every block retains the universal cusp R-S class
+    - every block retains the universal cusp class
     - diamond filling erases rather than selects cross-modulus recurrence
     - random actions reproduce relation cancellation and residual homology
-    - two honest and two virtual one-dimensional cases kill both chain norms but all retain cusp S-R
+    - two honest and two virtual one-dimensional cases kill both chain norms but every case retains the universal cusp class
     - cuspidal homology survives many composites and vanishes on some primes
     - original graph-step adjacency does not descend to the quotient
   proves_too_much_risk: REALIZED
@@ -276,15 +314,16 @@ blocking_conditions:
 next_smallest_test: >-
   Do not continue with Z/nZ projective residues, fixed C2*C3 presentations, or
   static field criteria. Consolidate the recognition-to-recurrence obstruction
-  and pivot to a genuinely global source whose Euler factors arise from the
-  dynamics before any block selection; first audit an ax+b/Bost-Connes-type
-  benchmark for nonterminal primitive ownership and determinant class.
+  theorem inside Symbolic Dynamics: a source must recognize the arithmetic
+  boundary before it can own a same-marker recurrence determinant. Treat
+  ax+b/Bost-Connes-type symbolic codings only as later source-locked
+  benchmarks, not as an immediate Route-B or system-family pivot.
 
 round2_clues:
   - relation homology is classical Manin-symbol machinery
   - killing universal cells is generic topology not arithmetic selectivity
   - a scalar homology determinant changes the clock and ownership
   - exact composite suppression by the field defect is still a terminal gate
-  - future work must leave the semiring-residue family
+  - future symbolic-dynamics work must leave the fixed projective/semiring-residue family
 
 route_b_invocation_allowed: false
