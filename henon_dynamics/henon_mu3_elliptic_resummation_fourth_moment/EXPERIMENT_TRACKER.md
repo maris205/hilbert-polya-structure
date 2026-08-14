@@ -18,4 +18,4 @@
 | Full continuation zero-free | REFUTED AS CLAIM | elliptic zeros allowed |
 | Full Hénon functional equation | OPEN | coherent completed global object required |
 | \(\tau\)-Det10 / classical \(S^{15}\) | INHERITED + UPGRADED | ideal and counterterm replay |
-| PDF / Route-A / manifest | PENDING RELEASE | final runner and commit backfill |
+| PDF / Route-A / manifest | RELEASE FROZEN | implementation commit backfilled; final runner and full manifest verified |

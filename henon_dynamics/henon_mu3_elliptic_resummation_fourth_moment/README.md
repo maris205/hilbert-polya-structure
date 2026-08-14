@@ -1,6 +1,8 @@
 # HCS-C50: elliptic resummation and the fourth Hénon moment
 
-Status: **theorem and paper draft; PENDING_RELEASE_COMMIT**
+Status: **theorem, paper, certificate, and provenance frozen**
+
+Implementation commit: `c5e21168576f90ad12296849c7e9817a2d608c26`.
 
 HCS-C50 removes the second-moment absolute-convergence wall of the
 Galois-normalized Fourier--cubic Hénon Euler germ and resolves the fourth

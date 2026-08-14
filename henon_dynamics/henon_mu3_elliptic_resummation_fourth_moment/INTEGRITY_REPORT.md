@@ -1,6 +1,6 @@
 # HCS-C50 integrity report
 
-Status: **release candidate; PENDING_RELEASE_COMMIT and final manifest refresh**
+Status: **PASS; implementation provenance backfilled and release frozen**
 
 This report separates mathematical proof, external source support, finite
 validation, machine-replayed certificate scope, and PDF integrity. A PASS in
@@ -153,17 +153,18 @@ hashes, citation audit, and visual-QA scope are recorded in
 
 The root and archived Route-A YAMLs are byte-identical, parse to the same
 object, and have common SHA-256
-`e103f34d7485c88b22230a57879c12d14afd71ec1202da4b274dd1ab68af742a`.
-Their implementation commit remains intentionally pending.
+`94affdaab7577f4729fe42747b62adc4a1da1dcbcb06024408f9727f8b4abed2`.
+Both record implementation commit
+`c5e21168576f90ad12296849c7e9817a2d608c26`.
 
-## 7. Remaining release operations
+## 7. Release provenance
 
 - [x] Freeze the final warning-free PDF and compilation report.
 - [x] Create and compare the byte-identical archived Route-A YAML.
 - [x] Promote the code/results artifact status and regenerate certificate
   and independent-check hashes.
-- [ ] Refresh the expanded manifest after all documentation is stable.
-- [ ] Backfill the implementation commit in both Route-A YAMLs and replace
-  PENDING_RELEASE_COMMIT.
+- [x] Refresh the expanded manifest after all documentation is stable.
+- [x] Backfill the implementation commit in both Route-A YAMLs.
 
-No commit or push is performed by this documentation lane.
+The final default runner replays the producer, independent checker, isolated
+mutations, and expanded manifest after this provenance backfill.

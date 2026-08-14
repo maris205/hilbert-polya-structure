@@ -253,16 +253,20 @@ mechanisms.
 | HEN-O83 | Ordinary rational Galois-norm determinant family | proved unbounded virtual-rank obstruction | The paired local factor has virtual degree four over every real Galois embedding, so its rational norm has virtual degree \(2(p-1)\). Every uniformly bounded-degree rational prefactor leaves unbounded local rank difference. | Excludes a bounded-rank ordinary rational determinant family. The field-degree-normalized logarithmic root survives and has a convergent Euler germ. | ../henon_mu3_galois_norm_rank_obstruction/THEOREM_PACKAGE.md |
 | HEN-O84 | Ordinary determinant promotion of the normalized Galois root | proved exact fractional-divisor obstruction | At \(p=7\), \(N_7=P_{18}^2/(49P_{12}^2)\) with squarefree coprime \(P_{18},P_{12}\). Every finite local order of \(N_7\) is \(\pm2\), so its normalized cubic root has nonintegral order \(\pm2/3\). | Rules out a single-valued meromorphic scalar or finite-dimensional rational determinant across those local divisors. It does not obstruct the origin Log branch, a normalized trace, or a regularized graded determinant. | ../henon_mu3_normalized_root_branch_obstruction/THEOREM_PACKAGE.md |
 
-## HCS-C47--C49 positive boundary
+## HCS-C47--C50 positive boundary
 
 C47 constructs a fourth-order normalized-trace graded determinant on
 \(\Re s>1/2\); C48 identifies the second moment with a genus-four Frobenius
 trace and moves the Euler and sixth-order determinant domain to
 \(\Re s>1/3\); C49 identifies the third moment with an exact
 Fermat-fourfold/Fano-threefold trace cancellation and moves the Euler and
-eighth-order determinant domain to \(\Re s>1/4\). These are retained positive
-structures rather than added to the obstruction list. The first unresolved
-uniform-moment wall is now the fourth chronological moment.
+eighth-order determinant domain to \(\Re s>1/4\); C50 extracts the inherited
+second moment as a modular elliptic factor and proves fourth-moment
+Fermat-sixfold/\((2,3)\)-fivefold cancellation, continuing the normalized
+Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
+retained positive structures rather than added to the obstruction list.
+The first untreated uniform-moment wall is now the fifth chronological
+moment; no continuation through \(\Re s=1/5\) is asserted.
 The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P50`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
 strings, while P48--P50 were born namespaced.

@@ -1257,6 +1257,41 @@ tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 **ROUTE_A_EXPLORATORY**.
 
+## HCS-C50 elliptic resummation and fourth moment (2026-08-14)
+
+Candidate **HCS-C50** removes the inherited second-moment wall and then
+resolves the fourth chronological moment; see
+[`../henon_mu3_elliptic_resummation_fourth_moment/`](../henon_mu3_elliptic_resummation_fourth_moment/).
+For \(K=\mathbb Q(\sqrt{-3})\), three explicit \(K\)-rational automorphisms
+of the genus-four C48 curve generate \(C_2\times S_3\).  Their rational
+group-algebra idempotents give
+
+\[
+\operatorname{Jac}(C)\sim_K E_+^2\times E_-^2,
+\]
+
+with elliptic curves \(E_\pm/K\).  Modularity over \(K\) then resums the
+entire second logarithmic moment into a Dedekind-zeta factor, two squared
+elliptic \(L\)-functions, and a nonvanishing remainder on \(\Re s>0\).
+Independently, the eight-step zero fibre splits into a Fermat cubic
+sixfold, a split quadric sixfold, and a \((2,3)\) fivefold.  At every good
+split prime its primitive ranks 86 and 168 give
+
+\[
+c_{p,4}=O(p^{-1/2}).
+\]
+
+The combination canonically continues the normalized Hénon Euler object
+to \(\Re s>1/5\) and realizes it by a tenth-order
+\(\tau\)-regularized graded determinant with the extracted second moment
+and the other low chronological moments displayed explicitly.  A concrete
+singular reduction at \(p=181\) prevents an all-split-prime smoothness
+overclaim.  No full functional equation, Riemann divisor, or self-adjoint
+Hilbert--Pólya generator is obtained.  The tuple remains
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy

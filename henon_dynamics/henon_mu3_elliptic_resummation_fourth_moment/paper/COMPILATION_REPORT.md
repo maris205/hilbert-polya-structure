@@ -1,6 +1,6 @@
 # HCS-C50 paper compilation report
 
-Status: **PASS; PENDING_RELEASE_COMMIT and final expanded-manifest refresh**
+Status: **PASS; implementation provenance backfilled**
 
 Compilation was performed on 14 August 2026 from `paper/` with
 
@@ -53,6 +53,6 @@ statements. It also states the finite-bad-prime scope, the normalized
 semifinite versus classical-trace firewall, and the absence of a proved full
 Hénon functional equation or self-adjoint Hilbert--Pólya generator.
 
-The PDF is frozen for the documentation lane. The release manifest and both
-Route-A `code_commit` fields remain intentionally pending until the
-implementation commit is available.
+The PDF is frozen. Both Route-A records carry implementation commit
+`c5e21168576f90ad12296849c7e9817a2d608c26`; the expanded release manifest
+is refreshed only after this report and the provenance records are stable.
