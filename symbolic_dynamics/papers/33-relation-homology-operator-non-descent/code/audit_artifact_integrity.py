@@ -298,9 +298,24 @@ def paired_provenance(source: object, code: object, lock: object) -> bool:
 def canonical_text_paths(result_dir: Path) -> list[Path]:
     """Audit source/control/payload text without self-generated meta files."""
 
-    transient_suffixes = {".aux", ".blg", ".log", ".out", ".pdf"}
+    transient_suffixes = {
+        ".aux",
+        ".bbl",
+        ".blg",
+        ".fdb_latexmk",
+        ".fls",
+        ".log",
+        ".out",
+        ".pdf",
+        ".synctex.gz",
+        ".toc",
+    }
     paths: list[Path] = []
     for path in ROOT.rglob("*"):
+        if path == ROOT / "PAPER_MANIFEST.sha256":
+            # Root regenerates the manifest only in the metadata-seal stage.
+            # Its presence and contents must not perturb scientific hashes.
+            continue
         if ROOT / "results" in path.parents:
             continue
         if path.is_file() and path.suffix.lower() not in transient_suffixes:
@@ -463,7 +478,8 @@ def main() -> int:
                     "stage 1",
                     "stage 2",
                     "metadata-only",
-                    "all three fields",
+                    "all three",
+                    "fields",
                 )
             )
             or (

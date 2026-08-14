@@ -121,7 +121,8 @@ universal cusp class.
   canonical non-meta text/cache hygiene.  The five self-generated meta files
   are validated structurally to avoid first-write self-inclusion.  The later
   paper manifest supplies the external binding after the artifact commit
-  exists.
+  exists; it is excluded from canonical-text counting so deletion,
+  regeneration, and commit rebinding do not perturb the scientific audit.
 - No target-zero data or Route-B object is present; every zero-fit field is
   `not_applicable`.
 

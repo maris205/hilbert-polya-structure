@@ -58,4 +58,6 @@ supplied fresh result directory; the audit's own JSON is checked as an
 after-write self-output.  The five self-generated meta files are excluded from
 the canonical-text enumeration to prevent first-write self-inclusion; their
 schemas, exact set, hashes, aggregate, inventory, and idempotence semantics are
-validated directly.
+validated directly.  `PAPER_MANIFEST.sha256` is also excluded because root
+creates it only during the metadata-only seal; manifest absence, regeneration,
+or commit rebinding cannot change the scientific integrity JSON.
