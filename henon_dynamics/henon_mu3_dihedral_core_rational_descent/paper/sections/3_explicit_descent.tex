@@ -1,0 +1,125 @@
+\section{The semilinear reversal and its fixed basis}
+\label{sec:explicit-descent}
+
+\subsection{The cocycle identities}
+
+\begin{proof}[Proof of the first part of
+Theorem~\ref{thm:family-descent}]
+Because \(\rho^3=1\) and \(\sigma\) is a permutation,
+\[
+C_n(M_nx)=\sum_i\rho^{3e_i}x_{\sigma(i)}^3=C_n(x).
+\]
+For the quadric, separate the edge indexed by \(i=0\), the edges
+\(1\le i\le N-2\), and the closing edge.  Reversal sends the \(i=0\)
+edge to the closing pair with phase \(1\).  Every edge indexed by
+\(1\le i\le N-2\) has exactly one nonzero even endpoint and therefore
+acquires phase \(\rho\).  The closing term in \(Q_{n,\rho}\) is sent to
+the edge \(x_0x_1\), still with coefficient \(\rho\).  Hence
+\[
+Q_{n,\rho}(M_nx)
+=x_{N-1}x_0+\rho\sum_{i=0}^{N-2}x_ix_{i+1}
+=\rho Q_{n,\rho^2}(x).
+\]
+Finally \(e_{\sigma(i)}=e_i\).  Applying the conjugate matrix after
+\(M_n\) multiplies coordinate \(i\) by
+\[
+\rho^{e_i}\tau(\rho^{e_{\sigma(i)}})
+=\rho^{e_i+2e_i}=1,
+\]
+which proves \(M_n\tau(M_n)=I\).
+\end{proof}
+
+\subsection{Fixed vectors}
+
+The relation \(\tau(\theta)=-\theta\) makes the pair in
+\eqref{eq:B-pairs} fixed:
+\[
+\rho^{e_i}\tau(x_{N-i})
+=\rho^{e_i}\rho^{2e_i}(a_i+\theta b_i)=x_i.
+\]
+The reverse identity is the same calculation.  At the central index,
+\(\sigma(n)=n\).  If \(n\) is odd, then \(e_n=0\) and \(x_n=c\) is
+fixed.  If \(n\) is even, then \(e_n=1\), and
+\[
+\rho\tau(1+\rho)=\rho(1+\rho^2)=1+\rho,
+\]
+so \(x_n=(1+\rho)c\) is fixed.
+
+\begin{lemma}[Determinant]
+\label{lem:determinant}
+In the source row order and the rational variable order of
+Theorem~\ref{thm:family-descent},
+\[
+\det B_n=(2\theta)^{n-1}
+\rho^{\lfloor(n-1)/2\rfloor}\kappa_n.
+\]
+\end{lemma}
+
+\begin{proof}
+After pairing rows \(i,N-i\), the block for \((a_i,b_i)\) is
+\[
+\begin{pmatrix}
+1&\theta\\
+\rho^{e_i}&-\rho^{e_i}\theta
+\end{pmatrix},
+\]
+with determinant \(-2\rho^{e_i}\theta\).  The permutation from the
+source row order to the paired order has sign \((-1)^{n-1}\), which
+cancels the product of the \(n-1\) block signs.  Exactly
+\(\lfloor(n-1)/2\rfloor\) indices in \(1,\ldots,n-1\) are even.
+The unpaired coordinates contribute \(1\) and \(\kappa_n\).  Multiplying
+the blocks proves the formula.
+\end{proof}
+
+The formula is nonzero in \(K\), so fixed vectors supply a full basis.
+This proves effectivity directly.  In particular, no general assertion
+about arbitrary projective descent data is needed; compare the standard
+descent cautions and the smoothness-locality statement in Stacks Project
+Tags 08KE and 02VL \cite{StacksProject}.
+
+\subsection{Expansion over the rational field}
+
+The cubic calculation uses
+\[
+(a+\theta b)^3+(a-\theta b)^3
+=2a^3+6a\theta^2b^2=2a^3-18ab^2.
+\]
+If \(n\) is odd, the central cube is \(c^3\).  If \(n\) is even, then
+\((1+\rho)^3=-1\), so the central cube is \(-c^3\).  These two cases
+give \eqref{eq:C0}.
+
+For adjacent paired coordinates, expansion and
+\(\theta^2=-3\) give
+\[
+a_ia_{i+1}+3a_ib_{i+1}+3b_ia_{i+1}-3b_ib_{i+1}
+\]
+after the common scalar \(1+\rho\) is removed.  The initial edge gives
+\(u_0(a_1+3b_1)\).  At the center, the two incident edges give
+\[
+R_n=\begin{cases}
+(a_{n-1}+3b_{n-1})c,&n\text{ odd},\\
+2a_{n-1}c,&n\text{ even}.
+\end{cases}
+\]
+This proves \eqref{eq:Q0} and completes
+Theorem~\ref{thm:family-descent}.
+
+\subsection{The fourth rational model}
+
+For \(n=4\), write
+\[
+(u_0,u_1,u_2,u_3,u_4,u_5,u_6,u_7)
+=(u_0,a_1,b_1,a_2,b_2,a_3,b_3,c).
+\]
+The rational model is
+\begin{align*}
+C_{4,0}={}&u_0^3+2u_1^3-18u_1u_2^2
++2u_3^3-18u_3u_4^2\\
+&+2u_5^3-18u_5u_6^2-u_7^3,\\
+Q_{4,0}={}&u_0u_1+3u_0u_2+u_1u_3+3u_1u_4
++3u_2u_3-3u_2u_4\\
+&+u_3u_5+3u_3u_6+3u_4u_5-3u_4u_6+2u_5u_7.
+\end{align*}
+Lemma~\ref{lem:determinant} gives \(\det B_4=24\theta\).
+Smoothness follows from the certified smooth \(K\)-model by base change;
+this implication does not certify any untested source row.

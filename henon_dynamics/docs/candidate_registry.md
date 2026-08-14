@@ -1362,6 +1362,48 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 the rank-10 core and either prove an irreducibility/commutant obstruction
 or construct a correspondence beyond the graph algebra.
 
+## HCS-C53 rational descent and compatible rank-ten core (2026-08-14)
+
+Candidate **HCS-C53** replaces the unavailable brute-force Frobenius
+polynomial by an unconditional arithmetic descent theorem; see
+[`../henon_mu3_dihedral_core_rational_descent/`](../henon_mu3_dihedral_core_rational_descent/).
+For every \(n\ge2\), an explicit Hilbert--90 basis over
+\(K=\mathbb Q(\zeta_3)\) sends the ordered Fermat-cubic/twisted-quadric
+equations to a closed pair of equations over \(\mathbb Q\).  This is an
+all-order equation theorem only: smoothness and motivic packets remain
+certified solely on the inherited rows \(n=2,3,4\).
+
+For \(n=4\), Galois conjugation transports the order-24 dihedral group by
+\(r\mapsto r^{-1}\), \(s\mapsto sr^{-1}\).  The individual automorphisms do
+not all descend, but their Reynolds graph correspondence does.  After the
+middle Chow projector, restriction/corestriction therefore gives
+\(\mathbb Q\)-rational Chow summands of ranks \(10\) and \(158\).  The raw
+rank-10 summand has weight five; outside a finite bad set its geometric
+Frobenius polynomial
+
+\[
+P_p(T)=\det(1-\operatorname{Frob}_pT\mid M_0)
+\]
+
+lies in \(\mathbb Z[T]\), has degree ten, is independent of \(\ell\), and
+satisfies the exact weight-five reciprocal coefficient law.  The twist
+\(M_0(1)\) has Calabi--Yau-threefold Hodge type \((1,4,4,1)\), while the
+source-normalized twist \(M_0(2)\) has weight one; neither phrase asserts an
+actual Calabi--Yau variety or automorphy.
+
+At good split primes the two \(K\)-local polynomials are the same
+\(\mathbb Q\)-polynomial.  Thus the fourth-moment \(K\)-half-root is exactly
+one ordinary \(\mathbb Q\)-factor locally.  At inert primes the factor obeys
+the quadratic Artin identity
+\(P_{K,v}(T^2)=P_p(T)P_p(-T)\), which is not generally a square.  Hence no
+global half-root, continuation, functional equation, Riemann divisor, or
+self-adjoint generator is claimed.  The tuple stays
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C54 classifies the full all-order monomial source
+group and asks exactly when the rationally descended local exponent is an
+ordinary compatible-system multiplicity.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy
