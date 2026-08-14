@@ -1900,3 +1900,32 @@ Route A remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical subsystem
 only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  No eventual sign law, unrestricted Hölder no-go,
 full Galois determinant, arithmetic trace or operator is claimed.
+
+## HCS-P59 primitive reflection half-entropy law (2026-08-14)
+
+Candidate **HCS-P59** executes the complete primitive reflection census named
+by P58; see the
+[HCS-P59 project](../henon_reflection_half_entropy_law/). The four-state H6
+adjacency matrix has the unique reversal involution `rho=(0)(1 2)(3)` and
+characteristic polynomial `(z^2+1)(z^2-z-1)`. Half-word transfer gives one
+odd Fibonacci fixed-word formula and distinct even edge--edge and
+vertex--vertex Fibonacci--Lucas formulas.
+
+Divisor-sensitive Möbius inversion, including the forced even multiplicity
+factor `1/2`, gives every primitive reversible necklace. Consequently,
+
+\[
+C_n\sim\frac{\varphi^n}{n},\qquad
+R_n=\Theta(\varphi^{n/2}),
+\]
+
+so the reflection entropy is exactly one half of the full survivor entropy
+and `R_n/C_n=O(n varphi^(-n/2))`. Primary adjacency-guided enumeration
+through period 16 and an independent Cartesian enumeration through period 12
+agree exactly with the all-period formulas.
+
+The theorem counts physical symbolic necklaces, not roots or embeddings of
+the algebraic reflection closures. Route A gains an analytic A1 result for
+the reflection subsystem but remains **ROUTE_A_EXPLORATORY**; Route B is not
+authorized. The next theorem is a primitive algebraic reflection dynatomic
+degree law and a comparison of its entropy with `(1/2)log(varphi)`.
