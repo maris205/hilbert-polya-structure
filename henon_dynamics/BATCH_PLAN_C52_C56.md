@@ -1,6 +1,6 @@
 # Batch plan: HCS-C52 through HCS-C56
 
-Status: **planning-only, contingent architecture**
+Status: **adaptive batch in progress; C52--C53 complete, C54 locked**
 
 Date: 2026-08-14
 
@@ -22,16 +22,16 @@ orders, and whether the resulting tower admits a nonfactorwise completion.
 Each paper below has its own theorem-sized stop/go gate.  They are not five
 installments of one proof.
 
-The dependency graph is
+The dependency graph after the first two realized gates is
 
 \[
- C52\longrightarrow C53,\qquad
- C52\longrightarrow C54\longrightarrow C55,\qquad
- (C53+C55)\longrightarrow C56.
+ C52\longrightarrow C53\longrightarrow C54\longrightarrow C55
+ \longrightarrow C56.
 \]
 
-Only C52 is locked.  C53--C56 are contingent and must be re-scoped after
-the preceding gate rather than forced to follow a failed branch.
+C52 and C53 are complete.  C54 is locked from the actual C53 rational
+descent; C55 and C56 remain contingent and must be re-scoped after the
+preceding gate rather than forced to follow a failed branch.
 
 ## HCS-C52: dihedral Chow projector and graph-algebra optimum
 
@@ -129,180 +129,160 @@ exploratory.
 The rank-10 summand, rather than the unavailable rank-two graph summand, is
 the sole C53 input.
 
-## HCS-C53: arithmetic decomposition or indecomposability of the core
+## HCS-C53: explicit rational descent and compatible rank-ten core
 
-### Dominant question
+### Realized theorem
 
-Does the rank-10 core admit a non-graph \(K\)-rational algebraic
-correspondence that isolates a lower-rank arithmetic factor?
+An explicit Hilbert--90 basis descends the ordered Fermat-cubic/twisted-
+quadric equations to \(\mathbf Q\) for every \(n\ge2\).  This is an
+all-order equation theorem only; smoothness and motivic packets remain
+certified on \(n=2,3,4\).
 
-### Positive theorem target
-
-Construct an explicit algebraic correspondence whose multiplication
-relation yields a nontrivial rational idempotent on the core, ideally a
-rank-two extreme motive.  Promotion to modular, CM, or automorphically
-induced factors requires a correspondence or compatible-system theorem;
-stable numerical factorization is insufficient.
-
-### Negative theorem target
-
-Reconstruct one exact good-prime rank-10 Frobenius polynomial and prove
-that it is irreducible over some \(\mathbf Q_\ell\).  This rules out every
-proper \(\mathbf Q_\ell\)-subrepresentation and hence every nontrivial
-rational-coefficient algebraic projector on the core.  It does not rule
-out decomposition after extending coefficients or prove full symplectic
-monodromy.
-
-### Minimal exact controls and kill gate
-
-- Equivariant Lefschetz traces or an independent exact cohomology engine
-  reconstruct all ten coefficients; five traces suffice only after
-  reciprocity is separately proved.
-- Newton identities, weight-five reciprocity, determinant, both embeddings
-  of \(K\), and a second-prime trace control must agree.
-- A positive branch needs a Chow-level correspondence identity.  A negative
-  branch needs an exact modulo-\(\ell\) irreducibility certificate.
-- **KILL:** a table of prime traces or repeated \(2+8\) numerical factors
-  without either theorem is not a paper.
-
-### Duplication firewall, Route-A impact, and handoff
-
-C52 proves only the graph-algebra block; C48--C51 never reconstruct this
-projected rank-10 local polynomial.  A positive automorphic decomposition
-would strengthen A3 for one \(n=4\) core only.  A negative theorem closes
-the low-rank modular shortcut and hands C56 a genuinely high-rank factor.
-
-## HCS-C54: all-order source smoothness or singularity spectrum
-
-### Dominant question
-
-For which \(n\) is the chronological source
-\(X_n=(2,3)\subset\mathbf P^{2n-1}\) smooth in characteristic zero?
-
-### Positive theorem target
-
-First classify the rank of the twisted cyclic quadric.  Then prove that
-the singularity equations are equivalent to a twisted periodic orbit of
+For \(n=4\), Galois conjugation transports the order-24 dihedral source
+group nontrivially, but its Reynolds graph correspondence is invariant.
+Restriction/corestriction therefore descends the C52 rank-10 and rank-158
+middle Chow projectors to \(\mathbf Q\).  The raw rank-10 summand defines,
+outside a finite bad set, an \(\ell\)-independent degree-ten polynomial
 
 \[
- (u,v)\longmapsto (v,v^2-u),
+ P_p(T)=\det(1-\operatorname{Frob}_pT\mid M_0)\in\mathbf Z[T]
 \]
 
-together with the projective quadric constraint, and derive an all-\(n\)
-smoothness theorem or an exact arithmetic classification of the singular
-indices.
+of weight five with exact reciprocal coefficients.  At good split primes
+the two \(K\)-factors coincide, so the \(n=4\) half-root is one ordinary
+\(\mathbf Q\)-factor locally.  At inert primes the quadratic Artin identity
+is generally not a square; no global root, continuation, functional equation,
+or automorphy is inferred.
 
-### Negative theorem target
+### Why the original target was changed
 
-Exhibit an exact nonzero characteristic-zero singular orbit and prove a
-twisted repetition or monodromy mechanism producing infinitely many
-singular indices.  This would kill the naive smooth all-moment tower rather
-than merely identify one failed row.
+Exact reconstruction of the full rank-ten polynomial at one prime remains
+computationally expensive and the preliminary \(p=7\) trace is retained only
+as an uncertified regression anchor.  The rational descent and compatible-
+system theorem are stronger than another finite trace table and do not depend
+on that computation.
 
-### Minimal exact controls and kill gate
+### Route-A impact and handoff
 
-- Recover the inherited smooth rows \(n=2,3,4\).
-- Separate characteristic-zero singularities from finite bad reduction.
-- Use Groebner/resultant scans only to conjecture the recurrence theorem;
-  every released singular index needs an exact algebraic witness.
-- **KILL:** bounded computation at \(n=5\) or \(n\le N\) with no uniform
-  theorem is too incremental and must not become HCS-C54.
+C53 gives the first \(\mathbf Q\)-rational compatible core and improves A3
+packet control, while A2 and A4 are inherited.  C54 now asks a genuinely
+global question suggested by the exact descent: classify the full all-order
+monomial source group and determine exactly when the descended rational local
+power is an ordinary finite-rank compatible-system multiplicity.
 
-### Duplication firewall, Route-A impact, and handoff
+## HCS-C54: universal dihedral source symmetry and denominator rigidity
 
-C48--C50 prove only fixed-row smoothness; C51's all-\(n\) rank formula is
-conditional on smoothness.  C54 is the missing genuine-dynamics theorem.
-A smooth or classified tower enables C55.  An infinite singular set sends
-C55 to intersection cohomology and vanishing cycles instead.
+### Locked positive theorem
 
-## HCS-C55: infinite archimedean regularization or exact anomaly
-
-### Dominant question
-
-Can the finite C51 Hodge/Gamma ledger be promoted to a canonical infinite
-archimedean factor determined by the chronological source tower?
-
-### Positive theorem target
-
-For the smooth indices supplied by C54, derive an all-order generating
-function for the Hodge multiplicities, meromorphically continue its
-spectral zeta to the regularization point, and prove that the chosen
-source-normalized Abel/Hadamard/zeta prescription gives a branch-defined
-meromorphic Gamma product with the required reflection law.
-
-### Negative theorem target
-
-Prove that two natural chronology-preserving regularizations differ by a
-nonconstant exponential polynomial or a nonzero reflection/branch anomaly.
-If C54 is singular, replace ordinary cohomology by a precisely declared
-intersection-cohomology or nearby-cycle object and prove either a pure
-repair or an unavoidable new-weight obstruction.
-
-### Minimal exact controls and kill gate
-
-- An exact all-\(n\) Hodge generating formula with the C51 rows as checks.
-- Pole, residue, finite-part, branch, and regulator-comparison ledgers.
-- A symbolic reflection identity or a symbolic nonzero anomaly.
-- **KILL:** another finite Gamma table, a formal infinite product, or merely
-  increasing \(\operatorname{Det}_{10}\) to a higher finite order is too
-  incremental.
-
-### Duplication firewall, Route-A impact, and handoff
-
-C51 explicitly stops at a finite expected Gamma ledger.  General
-regularized-product machinery is prior method; the new delta must be the
-exact Hénon multiplicity tower and its theorem-level regularization or
-anomaly.  This is the batch's direct A3 archimedean gate and supplies C56's
-infinite-sector input.
-
-## HCS-C56: nonfactorwise completion or scoped route closure
-
-### Dominant question
-
-After allowing algebraic projector blocks, denominator clearing, and the
-C55 regularization, can the source-native Euler germ acquire a genuine
-global reflection without changing the frozen prime clock?
-
-### Positive theorem target
-
-Construct a branch-defined completed object with meromorphic continuation
-and prove
+For every \(n\ge2\), the full projective monomial ideal stabilizer of the
+ordered source pair is
 
 \[
- \widehat{\mathcal Z}_{H}(s)
- =\varepsilon\widehat{\mathcal Z}_{H}(-s),
+ G_n\cong\operatorname{Dih}(C_{3n}),\qquad |G_n|=6n.
 \]
 
-including finite-bad factors and compatibility with the inherited
-normalized-semifinite determinant.  Expected \(n=3,4\) Hasse--Weil
-functional equations cannot be used as proved inputs.
+This is not a claim about the full PGL automorphism group.  Under the C53
+descent it becomes a generally nonconstant finite etale \(\mathbf Q\)-group
+scheme of rank \(6n\), split by \(K\), with exactly two rational points.
 
-### Negative theorem target
+For every packet-admissible smooth row, require an ordinary semisimple
+finite-rank compatible system to reproduce the complete good-split local
+factor with exponent \(4/n\) while preserving the weight-zero/weight-one
+decomposition.  Then such a system exists if and only if
 
-For a frozen class consisting of source compatible pure-motive factors,
-the clock \(u=ns+j\), consistent Tate twists, finite Artin/Tate
-corrections, and the C55 regularization, prove that the one-sided center
-tower has a nonzero reflection anomaly that cannot be cancelled across
-orders.  This must strictly extend C51's factorwise-center obstruction to
-the declared nonfactorwise class.
+\[
+ n\mid4,
+\]
 
-### Minimal exact controls and kill gate
+so for \(n\ge2\) only \(n=2,4\) survive.  The negative implication uses
+Chebotarev--Brauer--Nesbitt and the two pure ranks separately; the total rank
+alone falsely accepts \(n=3\).  The converse uses honest direct copies and
+therefore matches every local power trace, not just the first coefficient.
 
-- A complete sector-lattice involution and multiplicity ledger.
-- Exact reflected logarithmic-derivative poles/residues or a local
-  coefficient mismatch at independent good primes.
-- Full branch, finite-bad-factor, and operator-ideal audit.
-- **KILL:** a formal completed product or numerical zero plot is not a
-  theorem.  If neither a global identity nor the scoped no-go is provable,
-  stop the \(\mu_3\) full-kernel lane and switch the dynamical form.
+### Exact n=3 and counterpacket gates
 
-### Duplication firewall, Route-A impact, and handoff
+The complete \(G_3=\operatorname{Dih}(C_9)\) Cayley/Fermat character shows
+that no nonzero common central source-isotypic sector clears the \(4/3\)
+denominator on both weights.  Split-invisible virtual rational classes such
+as \(U-U\otimes\chi_{K/\mathbf Q}\) restrict to zero over \(K\), have rank
+zero, and cannot repair the obstruction.  The common character statement is
+first a \(K\)-theorem; a common rational group form requires the explicitly
+twisted Fermat descent rather than silently mixing two rational models.
 
-C51 excludes only a common factorwise standard center.  C56 must permit and
-then decide cross-order/projector/regularized combinations.  A positive
-result would be a major A3 advance, although A1 would remain weak.  A
-negative result is the formal handoff to a new two-sided or otherwise
-self-dual Hénon-type system in the next batch.
+### Scope and handoff
+
+The all-order equation and group theorem are unconditional.  For \(n\ge5\),
+smoothness, motives, and packets are not asserted; the denominator theorem is
+conditional on packet admissibility.  No fixed-prime table, global/inert root,
+automorphy, functional equation, or RH claim is part of C54.  Its next gate is
+not another denominator paper: C55 compares the parameterized Yukawa/IVHS
+invariants of the C53 rank-ten Calabi--Yau-type core with a genuine rational
+Calabi--Yau-threefold family before any motivic-identification claim.
+
+## HCS-C55: rank-ten Yukawa comparison and honest Calabi--Yau realization gate
+
+### Dominant question
+
+Is the rational rank-ten Calabi--Yau-type motive of C53 the third cohomology
+of a genuine Calabi--Yau threefold, rather than merely a Hodge-size match?
+
+### First comparison target
+
+Construct the four-parameter invariant deformation of the C53 core and
+compute its polarized infinitesimal variation of Hodge structure, especially
+the Yukawa cubic in a source-canonical tangent basis.  Independently compute
+the same invariant for an explicit rational Calabi--Yau quotient family with
+\((h^{1,1},h^{2,1})=(1,4)\).  Compare their Yukawa moduli up to the allowed
+linear change of tangent coordinates and polarization scale.
+
+### Positive and negative theorem branches
+
+- **Positive:** an exact family-level identification of the IVHS/Yukawa data
+  authorizes a search for an algebraic correspondence or a common geometric
+  construction; it does not by itself prove a motivic isomorphism.
+- **Negative:** a certified invariant mismatch rules out that entire family
+  as a realization of the Hénon core, which is substantially stronger than
+  a mismatched finite-prime trace.
+
+If the initial rational quotient family is excluded, C55 may pivot to an
+explicit \((2,2,3)\) Calabi--Yau or a quotient/resolution construction, but it
+must retain a parameterized invariant or correspondence theorem.  Merely
+sharing Betti number ten is not evidence.
+
+### Minimal controls and kill gate
+
+- Exact parameter spaces and smooth/free loci over \(\mathbf Q\).
+- Polarization-normalized IVHS and Yukawa tensors on both sides.
+- Coordinate-invariant comparison data, not fitted bases.
+- **KILL:** Hodge-number coincidence, isolated point counts, or an unnamed
+  categorical resemblance is not a paper.
+
+## HCS-C56: adaptive realization closure or nonfactorwise analytic gate
+
+### Adaptive rule
+
+C56 is deliberately not locked before C55.  It must be a theorem-sized
+consequence of the realized C55 branch, not a fifth installment of the same
+calculation.
+
+- If C55 finds a genuine geometric realization, C56 must construct and test
+  the induced compatible local factors, bad-prime data, completed functional
+  equation, and relation to the normalized-semifinite determinant.  Expected
+  Hasse--Weil continuation may not be used as a proved input without an
+  automorphy theorem.
+- If C55 proves an IVHS/Yukawa mismatch or a broader realization no-go, C56
+  may instead return to the analytic lane and decide a declared nonfactorwise
+  completion class, strictly extending C51's factorwise-center obstruction.
+- A second legitimate fallback is the exact conic-fibration/flattening gate
+  isolated during C53 reconnaissance, but only if it yields an exhaustive
+  geometric theorem rather than one plane or one prime.
+
+### Publication veto
+
+No formal Gamma product, numerical zero plot, isolated rank-ten prime table,
+or mere increase of regularized determinant order qualifies.  If none of the
+three branches yields a theorem, the \(\mu_3\) full-kernel lane must close and
+hand off to a new self-dual dynamical form.
 
 ## Batch-wide publication vetoes
 

@@ -1362,6 +1362,48 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 the rank-10 core and either prove an irreducibility/commutant obstruction
 or construct a correspondence beyond the graph algebra.
 
+## HCS-C53 rational descent and compatible rank-ten core (2026-08-14)
+
+Candidate **HCS-C53** replaces the unavailable brute-force Frobenius
+polynomial by an unconditional arithmetic descent theorem; see
+[`../henon_mu3_dihedral_core_rational_descent/`](../henon_mu3_dihedral_core_rational_descent/).
+For every \(n\ge2\), an explicit Hilbert--90 basis over
+\(K=\mathbb Q(\zeta_3)\) sends the ordered Fermat-cubic/twisted-quadric
+equations to a closed pair of equations over \(\mathbb Q\).  This is an
+all-order equation theorem only: smoothness and motivic packets remain
+certified solely on the inherited rows \(n=2,3,4\).
+
+For \(n=4\), Galois conjugation transports the order-24 dihedral group by
+\(r\mapsto r^{-1}\), \(s\mapsto sr^{-1}\).  The individual automorphisms do
+not all descend, but their Reynolds graph correspondence does.  After the
+middle Chow projector, restriction/corestriction therefore gives
+\(\mathbb Q\)-rational Chow summands of ranks \(10\) and \(158\).  The raw
+rank-10 summand has weight five; outside a finite bad set its geometric
+Frobenius polynomial
+
+\[
+P_p(T)=\det(1-\operatorname{Frob}_pT\mid M_0)
+\]
+
+lies in \(\mathbb Z[T]\), has degree ten, is independent of \(\ell\), and
+satisfies the exact weight-five reciprocal coefficient law.  The twist
+\(M_0(1)\) has Calabi--Yau-threefold Hodge type \((1,4,4,1)\), while the
+source-normalized twist \(M_0(2)\) has weight one; neither phrase asserts an
+actual Calabi--Yau variety or automorphy.
+
+At good split primes the two \(K\)-local polynomials are the same
+\(\mathbb Q\)-polynomial.  Thus the fourth-moment \(K\)-half-root is exactly
+one ordinary \(\mathbb Q\)-factor locally.  At inert primes the factor obeys
+the quadratic Artin identity
+\(P_{K,v}(T^2)=P_p(T)P_p(-T)\), which is not generally a square.  Hence no
+global half-root, continuation, functional equation, Riemann divisor, or
+self-adjoint generator is claimed.  The tuple stays
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C54 classifies the full all-order monomial source
+group and asks exactly when the rationally descended local exponent is an
+ordinary compatible-system multiplicity.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy
@@ -1831,3 +1873,59 @@ The next theorem is the stable-tail asymptotic of the whole sequence
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  No full Galois-weighted determinant, rational-prime
 trace, operator or Route-B promotion is claimed.
+
+## HCS-P58 physical-tail/Galois-scale obstruction (2026-08-14)
+
+Candidate **HCS-P58** tests the stable-tail route named by P57; see the
+[HCS-P58 project](../henon_physical_tail_galois_parity_obstruction/).
+Reflection reduction gives irreducible totally real trace fields of degrees
+12 and 6 for the vertex--vertex and edge--edge period-eight closures.  The
+period-nine vertex--edge closure gives one irreducible totally real degree-28
+field whose extreme real embeddings are the physical `A9` and `B9` cycles.
+
+Exact integer products certify
+
+\[
+\Delta_6<0<\Delta_7.
+\]
+
+The negative-fixed-point branch is exponentially localized, but it controls
+one physical embedding.  Galois excess sums every nonphysical trace
+embedding.  P58 therefore proves an interface obstruction: fixed-point
+linearization alone cannot yield the ladder asymptotics.  The next theorem
+must count and control the complete primitive reflection ensemble, including
+parity type, imprimitive factors and reflection multiplicity.
+
+Route A remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical subsystem
+only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  No eventual sign law, unrestricted Hölder no-go,
+full Galois determinant, arithmetic trace or operator is claimed.
+
+## HCS-P59 primitive reflection half-entropy law (2026-08-14)
+
+Candidate **HCS-P59** executes the complete primitive reflection census named
+by P58; see the
+[HCS-P59 project](../henon_reflection_half_entropy_law/). The four-state H6
+adjacency matrix has the unique reversal involution `rho=(0)(1 2)(3)` and
+characteristic polynomial `(z^2+1)(z^2-z-1)`. Half-word transfer gives one
+odd Fibonacci fixed-word formula and distinct even edge--edge and
+vertex--vertex Fibonacci--Lucas formulas.
+
+Divisor-sensitive Möbius inversion, including the forced even multiplicity
+factor `1/2`, gives every primitive reversible necklace. Consequently,
+
+\[
+C_n\sim\frac{\varphi^n}{n},\qquad
+R_n=\Theta(\varphi^{n/2}),
+\]
+
+so the reflection entropy is exactly one half of the full survivor entropy
+and `R_n/C_n=O(n varphi^(-n/2))`. Primary adjacency-guided enumeration
+through period 16 and an independent Cartesian enumeration through period 12
+agree exactly with the all-period formulas.
+
+The theorem counts physical symbolic necklaces, not roots or embeddings of
+the algebraic reflection closures. Route A gains an analytic A1 result for
+the reflection subsystem but remains **ROUTE_A_EXPLORATORY**; Route B is not
+authorized. The next theorem is a primitive algebraic reflection dynatomic
+degree law and a comparison of its entropy with `(1/2)log(varphi)`.

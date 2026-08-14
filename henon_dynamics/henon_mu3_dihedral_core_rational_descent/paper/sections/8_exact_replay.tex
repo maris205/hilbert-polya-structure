@@ -1,0 +1,47 @@
+\section{Exact replay and adversarial gates}
+\label{sec:replay}
+
+The accompanying certificate implements exact arithmetic in
+\(\Q[\rho]/(\rho^2+\rho+1)\).  It checks the family formulas for
+\(2\le n\le10\), including the cocycle, fixed basis, determinant, and
+rational substitutions.  These finite controls test the implementation;
+the symbolic argument in \cref{sec:explicit-descent} proves the
+all-\(n\) theorem.
+
+For the fourth row, the replay reconstructs all twenty-four group
+elements, verifies the transported group law on all \(24^2=576\) pairs,
+and partitions the elements into the two fixed points and eleven conjugate
+pairs.  Separate gates enforce the Reynolds denominator \(24\), the field
+transfer denominator \(2\), and the distinction among the raw motive
+\(\mathsf M_0\), its Calabi--Yau-type twist \(\mathsf M_0(1)\), and the
+source-normalized twist \(\mathsf M_0(2)\).
+
+The local-factor gates independently test the split exponent conversion
+and the inert identity \eqref{eq:inert-rule}.  They reject a constant
+rational dihedral group, an inert half-root, a rank-\(255/2\) compatible
+system, automatic integrality after a Tate twist, and any functional
+equation promotion.
+
+At the release-candidate stage, the independent checker passes all \(20\)
+semantic gates, and the targeted mutation suite rejects all \(63\)
+alterations.  The locked certificate, payload, independent-check, and
+code/results-manifest SHA-256 hashes are
+\[
+\begin{split}
+&\texttt{f4325a5987933e2acf81656389d46701d82d38912c546d1e5996123f617f6e79},\\
+&\texttt{8064224eda63fa9d890efd26ec9aa167c7cd9458662620be3135196a09494d41},\\
+&\texttt{0d38643ded626c2a5e1536c8a4df9c56ae98c4fda01e1d15660996ea8c495e67},\\
+&\texttt{b62f353d119d6c8565f513dad771a047a5e6343411d08ad2e91562fe84923480}.
+\end{split}
+\]
+They form the final code/results evidence tuple.  The full-project manifest
+and implementation-provenance backfill are separate release-integration
+steps.
+
+The \(p=7\) value is labeled
+\path{PRE_C53_RECONNAISSANCE_REGRESSION_ANCHOR_UNCERTIFIED}.
+It records raw core trace \(-469\), or \(-67/7\) after the second Tate
+twist.  The checker verifies the recorded arithmetic but does not
+independently reconstruct the fixed-locus counts, and no C52 provenance is
+asserted.  This paper is not a table of Frobenius traces, and the anchor is
+not used to infer irreducibility.

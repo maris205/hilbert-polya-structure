@@ -42,6 +42,8 @@ henon_mahler_pressure_pole_galois_excess_gate - HCS-P54 complete - The physical 
 henon_galois_excess_three_block_obstruction - HCS-P55 complete - Exact period-three through period-five block homology rejects every width-at-most-three Galois-excess potential, while width four interpolates the finite witness and leaves the all-period Hölder gate open.
 henon_galois_excess_four_block_incidence_ladder - HCS-P56 complete - Two primitive orbit families give an exact all-width incidence ladder; its first new period-six field proves a width-at-most-four excess obstruction, while a determinant-one width-five minor isolates the remaining Hölder-asymptotic gate.
 henon_galois_excess_five_block_obstruction - HCS-P57 complete - Exact reflection reductions give a cubic A6 trace field and one totally real degree-fourteen A7/B7 field; the certified positive Delta5 excludes every width-at-most-five excess potential, while a unimodular width-six minor preserves the genuine Hölder-asymptotic gate.
+henon_physical_tail_galois_parity_obstruction - HCS-P58 complete - Period-eight/nine trace fields and opposite exact discrepancy signs separate physical stable-tail data from all-conjugate Galois excess.
+henon_reflection_half_entropy_law - HCS-P59 complete - Exact odd/even-axis Möbius formulas give reflection entropy `(1/2)log(phi)`, half the full H6 survivor entropy.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
@@ -76,6 +78,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mu3_dihedral_core_rational_descent/](henon_mu3_dihedral_core_rational_descent/) | C53: an explicit Hilbert--90 basis descends the ordered cubic/quadric source equations to \(\mathbb Q\) for every \(n\); on the certified fourth-moment row the twisted order-24 symmetry and its rank-10 Chow core descend to \(\mathbb Q\), with degree-ten integral, weight-five, reciprocal good-prime local polynomials and exact split/inert quadratic-base-change identities | First rational compatible-system package for the rank-10 core and exact split-local half-root repair; no new Euler half-plane, global continuation, functional equation, or Hilbert--Pólya operator, Route A exploratory |
 | [henon_mu3_d12_calabi_yau_core_projector/](henon_mu3_d12_calabi_yau_core_projector/) | C52: the complete order-\(24\) projective monomial source group gives \(K\)-rational middle Chow projectors of ranks \(10\) and \(158\); the rational graph algebra cannot isolate the desired rank-two extreme Hodge pair | First algebraic splitting of the fourth-moment odd packet; A3 packet control improved, A2/A4 inherited, Route A exploratory |
 | [henon_galois_excess_five_block_obstruction/](henon_galois_excess_five_block_obstruction/) | P57: reflection reduction produces an irreducible cubic `A6` trace field and a shared totally real degree-fourteen `A7/B7` field; exact Sturm intervals and an integer-product margin prove \(\Delta_5>0\), while determinant \(\pm1\) width-six minors prove finite sharpness | Exact width-at-most-five regularity obstruction inside Route A; the whole-sequence \(\Delta_m\) asymptotics, unrestricted Hölder realization, full Galois-weighted determinant and Route B remain open |
 | [henon_galois_excess_four_block_incidence_ladder/](henon_galois_excess_four_block_incidence_ladder/) | P56: the primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy an exact incidence relation for every width; the radical period-six member makes the width-four excess identity fail exactly, while a determinant-one width-five minor proves finite sharpness | Infinite symbolic regularity gate inside Route A; the one-sided Hölder discrepancy asymptotics, full Galois-weighted determinant and Route B remain open |
@@ -1302,3 +1305,41 @@ array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
 Last synchronized research snapshot: **2026-08-14**.
+
+## HCS-P58 physical-tail/Galois-scale interface
+
+P58 derives the three period-eight/nine reflection trace fields and proves
+`Delta_6<0<Delta_7` exactly.  The negative-fixed-point tail controls one
+physical embedding, whereas Galois excess sums all nonphysical embeddings;
+the missing bridge is therefore a uniform primitive reflection-ensemble
+count/height theorem.
+
+- [P58 overview](henon_physical_tail_galois_parity_obstruction/README.md)
+- [P58 paper](henon_physical_tail_galois_parity_obstruction/paper/paper.pdf)
+- [P58 proof package](henon_physical_tail_galois_parity_obstruction/PROOF_PACKAGE.md)
+- [P58 exact certificate](henon_physical_tail_galois_parity_obstruction/results/c58_certificate.json)
+
+## HCS-P59 primitive reflection half-entropy law
+
+P59 solves the physical reflection-counting problem left by P58. The frozen
+four-state H6 survivor has the unique reversal involution
+`rho=(0)(1 2)(3)`. Half-word transfer and parity-sensitive Möbius inversion
+give exact all-period formulas for odd reflections and both even physical
+axis types. If `C_n` counts all primitive cycles and `R_n` the reversible
+cycles, then
+
+\[
+C_n\sim\frac{\varphi^n}{n},\qquad
+R_n=\Theta(\varphi^{n/2}).
+\]
+
+Thus the reflection subsystem has entropy exactly `(1/2)log(phi)` and
+exponentially vanishing density. This is a physical symbolic theorem; it
+does not count roots or embeddings of reflection closure polynomials. The
+next bridge is therefore the primitive algebraic reflection dynatomic degree
+and its comparison with the symbolic half entropy.
+
+- [P59 overview](henon_reflection_half_entropy_law/README.md)
+- [P59 paper](henon_reflection_half_entropy_law/paper/paper.pdf)
+- [P59 proof package](henon_reflection_half_entropy_law/PROOF_PACKAGE.md)
+- [P59 exact certificate](henon_reflection_half_entropy_law/results/c59_certificate.json)

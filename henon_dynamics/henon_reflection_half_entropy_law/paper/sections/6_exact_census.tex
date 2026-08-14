@@ -1,0 +1,37 @@
+\section{Exact census and axis locks}
+
+Table~\ref{tab:census} records representative exact values.  Dashes denote
+the single reflection class at odd period.
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+\toprule
+$n$ & $C_n$ & $R_n$ & $R_n^{\EE}$ & $R_n^{\VV}$\\
+\midrule
+7  & 4   & 4   & -- & --\\
+8  & 5   & 3   & 2  & 1\\
+12 & 25  & 11  & 6  & 5\\
+16 & 135 & 37  & 20 & 17\\
+20 & 750 & 102 & 55 & 47\\
+\bottomrule
+\end{tabular}
+\caption{Selected primitive-cycle counts from the exact formulas.}
+\label{tab:census}
+\end{table}
+
+The period-eight words connecting this theorem to the trace-field families
+are
+\[
+A_8=00000021,\qquad B_8=00000231.
+\]
+Direct application of \eqref{eq:Rk} gives reflection shifts $3$ and $4$,
+respectively.  The frozen physical convention therefore locks $A_8$ to the
+$\VV$ family and $B_8$ to the $\EE$ family.
+
+The primary implementation computes all formula rows through $n=32$ and
+generates primitive necklaces by adjacency-guided depth-first search through
+$n=16$.  A second implementation enumerates the Cartesian word space through
+$n=12$ and reconstructs the transfer formulas from matrix powers.  Both agree
+exactly.  These checks catch a swapped axis label, omission of the even factor
+$1/2$, deletion of odd proper divisors and replacement of the bounded
+$\pm i$ spectral contribution.
