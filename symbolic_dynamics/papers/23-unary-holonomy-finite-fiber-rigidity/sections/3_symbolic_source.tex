@@ -1,0 +1,149 @@
+\section{Frozen symbolic source and operator}
+\label{sec:source}
+
+\subsection{Full shifts and the successor--divisor graph}
+
+Let \(F_n\) denote the full shift on an \(n\)-letter alphabet, up to
+topological conjugacy.  We freeze
+\[
+ F_m\boxtimesf F_n\cong F_{mn},\qquad
+ F_m\boxplusf F_n\cong F_{m+n},\qquad
+ S(F_n)=F_n\boxplusf F_1\cong F_{n+1}.
+\]
+Here \(\boxplusf\) means alphabet disjoint union followed by the full-shift
+functor; it is not asserted to be the categorical coproduct of subshifts.
+The intrinsic entropy is \(h(F_n)=\log n\).
+
+The vertex set and edges are
+\[
+ V=\{2,3,\ldots\},\qquad
+ n\longrightarrow d
+ \iff d\ge2,\ d\mid n+1.
+\]
+An edge is equivalently the factor witness
+\[
+        S(F_n)\cong F_d\boxtimesf F_q,
+\qquad
+        q=q(n,d)=\frac{n+1}{d}.
+\]
+The resulting one-sided countable Markov shift is
+\[
+ X_G^+
+ =\{(n_0,n_1,\ldots)\in V^\N:n_j\to n_{j+1}\}.
+\]
+No prime predicate enters this definition.
+
+\subsection{Canonical holonomy-two cycles}
+
+We import the exact classification that the cofactor product \(Q=2\) occurs
+precisely on
+\[
+        C_k=(k,k+1,\ldots,2k-1),\qquad k\ge2,
+\]
+up to cyclic rotation.  Each orbit is primitive and has a unique least
+vertex.
+
+\begin{theorem}[Canonical ordered word]
+\label{thm:word}
+Mark \(C_k\) at its unique least vertex.  Then
+\[
+        \word(C_k)=1^{k-1}2.
+\]
+\end{theorem}
+
+\begin{proof}
+The first \(k-1\) edges are \(n\to n+1\), and
+\[
+        q(n,n+1)=1.
+\]
+The closing edge is \(2k-1\to k\), with
+\[
+        q(2k-1,k)=2.
+\]
+The unique least vertex fixes the displayed ordering.
+\end{proof}
+
+\begin{remark}[Marked versus cyclic response]
+The trace of a matrix product is invariant under cyclic rotation.  A
+bilinear matrix coefficient is not.  We use the unique-minimum mark for
+bilinear responses and never treat a marked coefficient as an unmarked
+orbit invariant.
+\end{remark}
+
+\subsection{Roof and graph marker}
+
+The graph-step marker is \(z\) per edge, and the frozen endpoint roof is
+\[
+        \tau(n,d)=\log(nd).
+\]
+Put
+\[
+        M_k=\prod_{n=k}^{2k-1}n
+            =\frac{(2k-1)!}{(k-1)!}.
+\]
+
+\begin{proposition}[Canonical monomial]
+\label{prop:monomial}
+The length, total roof, and scalar monomial of \(C_k\) are
+\[
+ |C_k|=k,\qquad
+ R(C_k)=2\log M_k,\qquad
+ z^{|C_k|}\e^{-sR(C_k)}=z^kM_k^{-2s}.
+\]
+\end{proposition}
+
+\begin{proof}
+Every cycle vertex occurs once as a source and once as a target.  Therefore
+\[
+ R(C_k)
+ =\sum_{(n,d)\in C_k}(\log n+\log d)
+ =2\sum_{n=k}^{2k-1}\log n.
+\]
+The word in \cref{thm:word} has \(k\) letters.
+\end{proof}
+
+\subsection{Algebraic and analytic fibers}
+
+For the algebraic recurrence theorem, \(\mathbb F\) may be any
+characteristic-zero field, with fixed
+\[
+        A,B\in M_d(\mathbb F),\qquad u,v\in\mathbb F^d.
+\]
+We study
+\[
+ x_k=u^{\mathsf T}A^{k-1}Bv,\qquad
+ y_k=\operatorname{tr}(A^{k-1}B).
+\]
+
+The analytic layer is more restrictive.  It uses
+\[
+        A,B\in M_d(\C),\qquad
+        \cH=\ell^2(V)\otimes\C^d.
+\]
+On the quotient-\(\{1,2\}\) spine, define the column-source weighted vertex
+adjacency
+\[
+\begin{aligned}
+ L_{s,A,B}(e_n\otimes\xi)
+ &=[n(n+1)]^{-s}e_{n+1}\otimes A\xi\\
+ &\quad+\id_{\{n\ {\rm odd}\}}
+ [n(n+1)/2]^{-s}e_{(n+1)/2}\otimes B\xi.
+\end{aligned}
+\]
+This is not called a Ruelle operator.  On \(\Re s>1/2\), where
+\cref{thm:traceclass} proves \(L_{s,A,B}\in\Sone\), we set
+\[
+        D_{A,B}(s,z)=\det_{\cH}(I-zL_{s,A,B}).
+\]
+The determinant is entire in \(z\).  Its trace logarithm is used only as the
+normalized germ at \(z=0\); no global logarithm through determinant zeros is
+assumed.
+
+Starting at the least vertex, column composition around \(C_k\) is
+\(BA^{k-1}\).  Cyclicity gives
+\[
+        \operatorname{tr}(BA^{k-1})
+        =\operatorname{tr}(A^{k-1}B).
+\]
+This convention will be essential when the analytic and recurrence layers
+meet in \cref{sec:fredholm}.

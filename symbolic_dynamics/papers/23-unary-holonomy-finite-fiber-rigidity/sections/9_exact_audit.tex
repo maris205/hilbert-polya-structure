@@ -1,0 +1,112 @@
+\section{Exact audit protocol}
+\label{sec:audit}
+
+The computational layer is a certificate audit of identities already stated
+in the theorem package; it is not statistical evidence for prime
+selectivity.  The candidate generator is frozen before any predicate-aware
+evaluator runs.  In particular, the source layer contains no primality,
+factorization, prime-table, or Riemann-zero call.
+
+\begin{table}[t]
+\centering
+\caption{Preregistered exact audits.  All arithmetic is integer or rational
+unless the row explicitly requests interval-certified nuclear partial
+sums.  A successful row checks an implementation consequence, not a new
+theorem.}
+\label{tab:audits}
+\small
+\begin{tabularx}{\textwidth}{L{1.0cm}L{3.6cm}Y}
+\toprule
+ID & Frozen range & Exact obligation \\
+\midrule
+E1 & $2\le k\le4096$
+& certify $C_k$, $\word(C_k)=1^{k-1}2$, $|C_k|=k$, $Q(C_k)=2$, and a clean source-oracle scan \\
+E2 & unary state sets $|Q|\le4$
+& enumerate finite transformations/relations and verify tail--period certificates \\
+E3 & post-freeze evaluator
+& construct the same-residue composite $p(1+\lambda)$ from an accepted tail prime $p$ \\
+E4 & rational matrices $1\le d\le8$
+& verify Cayley--Hamilton residuals and rational generating functions through at least $4d+16$ \\
+E5 & $N\in\{32,64,128,256\}$
+& fit prime and six matched arbitrary target families with both nilpotent memorizers \\
+E6 & periods $r\le32$
+& compare sparse graph traces, $\Tr(P_k^r)$, exterior-power coefficients, and full block determinants \\
+E7 & $\sigma\in\{.45,.49,.50,.51,.60,1\}$
+& separate successor/return nuclear partial sums, including $A=0$ and $B=0$ controls \\
+E8 & five decidable supports
+& compare full/pruned transient traces, padded recurrent clocks, and pre/post-inducing markers \\
+E9 & $2\le k\le4096$
+& verify $\prod_{(n,d)\in C_k}nd=M_k^2$ and preserve the distinct monomials $z^kM_k^{-2s}$ and $zk^{-s}$ \\
+E10 & two clean runs
+& require byte identity, environment lock, SHA-256 inventory, and candidate/evaluator provenance \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The determinant audit uses the complete hierarchy from
+\cref{prop:blockfactor,thm:exteriorlrs}: a first trace-log coefficient is
+never substituted for the full local factor.  Likewise, a marked bilinear
+coefficient and the separate one-dimensional oracle deletion control are
+recorded in distinct fields.  The trace-zero example of
+\cref{rem:tracenotfactor} is a mandatory regression case.
+
+\begin{proposition}[Audit soundness boundary]
+\label{prop:auditsoundness}
+Passing E1--E10 can falsify an implementation that disagrees with a proved
+identity, detect oracle leakage, and certify deterministic provenance.  It
+cannot prove the SML theorem, establish the sharp infinite-volume nuclear
+threshold from finite partial sums, or convert a finite prime fit into
+asymptotic evidence.
+\end{proposition}
+
+\begin{proof}
+Each positive statement in the first sentence is a finite equality or a
+finite source/integrity check.  The excluded statements contain an
+infinite quantifier or invoke an external theorem.  In particular,
+\cref{thm:bilmemorizer,thm:trmemorizer} give an exact fit for every finite
+target vector, so a finite residual cannot distinguish primes from the
+matched controls.
+\end{proof}
+
+No target-zero data enter this protocol.  Route evaluation is written in a
+separate artifact with two-stage provenance: the candidate records its
+frozen claims, while an external evaluator may later record an independent
+score without altering the candidate source.
+
+\subsection{Integrated exact outcome}
+
+The frozen implementation passed all $32$ collected tests.  E1 checked
+$4{,}095$ cycles and $8{,}390{,}655$ edges with no source-policy failure.
+E2 exhausted $288$ unary transformation maps,
+$1{,}054{,}474$ terminal/acceptance configurations, $1{,}024$ Boolean
+relation configurations, and $8{,}067{,}400$ period comparisons, with no
+failure.  E4 checked $2{,}832$ Cayley--Hamilton residuals in $48$ rational
+matrix cases; E5 checked $56$ matched memorizers; E6 checked $128$ power
+traces through period $32$ and $12$ direct-versus-Newton determinant rows.
+
+The frozen $2\times2$ regression used
+$A=I$ and $B=\operatorname{diag}(1,-1)$.  It returned
+\[
+ \Tr(BA^{k-1})=0,
+ \qquad
+ \Tr((BA^{k-1})^2)=2,
+ \qquad
+ \det(I-wBA^{k-1})=1-w^2,
+\]
+exactly, so the audit directly detects the forbidden first-trace shortcut.
+E7 produced $144$ diagnostic rows, E8 imported two licensed certificates
+and checked five transient supports plus $40$ recurrent rows, and E9
+verified all $4{,}095$ roof identities, with the first desired-monomial
+mismatch already at $k=2$.
+
+Two complete runs produced $31$ byte-identical artifacts with combined
+SHA-256
+\begin{center}\small
+\texttt{25d1dc42431693a0b380741531238b5b52bbbb62f5c9602afe13845a67ebd336}.
+\end{center}
+The integrity audit passed; its SHA ledger has digest
+\begin{center}\small
+\texttt{ee9a789051f1654bf425f53801eef06cda6c31c4f73d6a1449a40bcead0d6c7b}.
+\end{center}
+These finite results corroborate the implementation consequences listed in
+\cref{tab:audits}; they do not replace the infinite proofs.

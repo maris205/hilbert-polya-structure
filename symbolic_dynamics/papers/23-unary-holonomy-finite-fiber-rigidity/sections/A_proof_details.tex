@@ -1,0 +1,95 @@
+\section{Supplementary proof details}
+\label{app:proofs}
+
+This appendix records the algebraic and operator facts used in the main
+argument without enlarging their scope.
+
+\subsection{From finite powers to accepted residue classes}
+
+If $a^i=a^j$ with $i<j$, then
+$a^{i+r}=a^{j+r}$ for every $r\ge0$.  Hence a membership response to
+$a^{k-1}b$ is constant on sufficiently large residue classes modulo
+$\lambda=j-i$.  If such a class contains a prime $p$ in the tail, it also
+contains $p(1+\lambda)$, because
+\[
+        p(1+\lambda)\equiv p\pmod\lambda.
+\]
+This is the explicit composite witness behind
+\cref{lem:primeperiod,thm:finite-semigroup}.
+
+\subsection{Exterior powers and the complete block factor}
+
+For $X\in M_d(\C)$, the elementary symmetric coefficients of its
+eigenvalues satisfy
+\[
+ \det(I-tX)=\sum_{j=0}^d(-t)^j\Tr(\wedge^jX).
+\]
+This is a polynomial identity, so it remains valid without diagonalizability.
+With $X=BA^{k-1}$, functoriality gives
+\[
+ \wedge^j(BA^{k-1})
+ = (\wedge^jB)(\wedge^jA)^{k-1}.
+\]
+Each coefficient therefore satisfies a Cayley--Hamilton recurrence of
+dimension at most $\binom dj$.  The set where the block factor differs
+identically from $1$ is the union of the nonzero supports of these finitely
+many sequences.  SML makes that union ultimately periodic.  This argument
+does not replace the full factor by $1-w_k\Tr(BA^{k-1})$.
+
+\subsection{Trace-class lower bounds}
+
+Let $P_{\mathrm{even}}$ project onto even source vertices and let
+$Q_{\mathrm{odd}}$ project onto their odd successors.  When $A\ne0$,
+\[
+ Q_{\mathrm{odd}}L_{s,A,B}P_{\mathrm{even}}
+ =\bigoplus_{m\ge1}[(2m)(2m+1)]^{-s}A
+\]
+after identifying the orthogonal source and target blocks.  Its singular
+values are the singular values of $A$ multiplied by the scalar edge
+weights.  Thus its trace norm is
+\[
+ \|A\|_1\sum_{m\ge1}[(2m)(2m+1)]^{-\Re s}.
+\]
+Trace-class ideals are stable under compression, giving necessity of
+$\Re s>1/2$.  If $A=0$ and $B\ne0$, the injective return edges
+$2d-1\to d$ give the analogous direct sum with weights
+$[(2d-1)d]^{-s}$.  The upper edge expansion in
+\cref{thm:traceclass} gives sufficiency.
+
+\subsection{Why the transient determinant forgets the machine}
+
+In \cref{thm:transient}, every computation or cemetery vertex lies in a
+directed acyclic component before the accepted self-loop.  No positive
+power of the adjacency has a diagonal entry supported on such an edge.
+Consequently the trace logarithm sees only accepted terminal loops.  The
+double zeta majorant proves trace class independently of the runtime
+$T(n)$, because every finite runtime sum is bounded by the full convergent
+$j$-series.  This proves selector universality and simultaneously explains
+why the determinant does not certify the computation.
+
+\subsection{Clock dilution and inducing}
+
+For a cycle of length $\ell$ with nonnegative roofs totaling $\log n$,
+the smallest roof is at most $\log n/\ell$.  Choosing the corresponding
+edge on each of infinitely many disjoint cycles produces orthonormal source
+vectors whose images have orthogonal components bounded away from zero
+when $\ell/\log n\to\infty$.  This proves noncompactness, not merely failure
+of a particular trace-norm bound.
+
+First return is algebraically exact but object-changing.  Multiplication of
+the original edge weights preserves the total roof, while one return edge
+replaces $\ell$ original graph steps.  Hence
+$z^\ell\mapsto z$ even though the scalar roof product is preserved.
+
+\subsection{Factorial asymptotics}
+
+Uniform Stirling expansion gives
+\[
+\begin{aligned}
+\log M_k
+ &=\log(2k-1)!-\log(k-1)!\\
+ &=k\log k+(2\log2-1)k+O(\log k).
+\end{aligned}
+\]
+Thus the canonical total roof is $2k\log k+O(k)$, and no coefficient
+filter on the frozen cycle can turn it into $\log k$.

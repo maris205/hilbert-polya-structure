@@ -1,0 +1,157 @@
+\section{Finite-fiber periodicity}
+\label{sec:finite}
+
+\begin{definition}
+A set \(E\subseteq\N\) is \emph{ultimately periodic} if there are
+\(N,m\ge1\) such that
+\[
+        n\ge N
+        \quad\Longrightarrow\quad
+        [n\in E\Longleftrightarrow n+m\in E].
+\]
+\end{definition}
+
+\begin{lemma}[Prime-only tail classes]
+\label{lem:primeperiod}
+An ultimately periodic subset of the rational primes is finite.
+\end{lemma}
+
+\begin{proof}
+Suppose that \(E\subseteq\Pp\) is infinite, with tail threshold \(N\) and
+period \(m\).  Choose \(p\in E\), \(p\ge N\).  Repeated periodicity places
+\(p+tm\) in \(E\) for every \(t\ge0\).  Taking \(t=p\) gives
+\[
+        p+pm=p(1+m),
+\]
+which is composite.  This contradicts \(E\subseteq\Pp\).
+\end{proof}
+
+The witness in \cref{lem:primeperiod} is elementary.  It needs no prime
+number theorem and proves the stronger statement that \emph{every} infinite
+prime-only ultimately periodic support is impossible.
+
+\begin{lemma}[Finite-semigroup powers]
+\label{lem:semigrouppower}
+Let \(S\) be a finite semigroup and \(a\in S\).  There are
+\(\mu,\lambda\ge1\) such that
+\[
+        a^{n+\lambda}=a^n\qquad(n\ge\mu).
+\]
+\end{lemma}
+
+\begin{proof}
+Two terms among
+\[
+        a,a^2,\ldots,a^{|S|+1}
+\]
+agree, say \(a^i=a^j\) with \(i<j\).  Right multiplication by \(a^r\)
+gives \(a^{i+r}=a^{j+r}\) for every \(r\ge0\).  Set
+\(\mu=i\) and \(\lambda=j-i\).
+\end{proof}
+
+\begin{theorem}[Fixed finite-semigroup no-go]
+\label{thm:finite-semigroup}
+Let \(\phi:\{1,2\}^{+}\to S\) be a morphism into a fixed finite semigroup,
+and let \(H\subseteq S\).  Then
+\[
+ E_{\phi,H}
+ =\{k\ge2:\phi(1^{k-1}2)\in H\}
+\]
+is ultimately periodic.  If \(E_{\phi,H}\subseteq\Pp\), it is finite.
+Moreover, every scalar response
+\[
+        f\bigl(\phi(1^{k-1}2)\bigr)
+\]
+is eventually periodic.
+\end{theorem}
+
+\begin{proof}
+Put \(a=\phi(1)\) and \(b=\phi(2)\), with
+\(\phi(xy)=\phi(x)\phi(y)\), so multiplication follows reading order.  The
+canonical word evaluates to
+\[
+        \phi(1^{k-1}2)=a^{k-1}b.
+\]
+By \cref{lem:semigrouppower}, the power is eventually periodic; right
+multiplication by \(b\), membership in \(H\), and evaluation by \(f\)
+preserve equality.  Apply \cref{lem:primeperiod}.
+\end{proof}
+
+\begin{corollary}[Finite groups and characters]
+\label{cor:finitegroup}
+For a fixed finite group, \(a^{k-1}b\) is periodic from the start with
+period dividing \(\ord(a)\).  Membership, class functions, characters, and
+matrix coefficients of fixed representations cannot have infinite
+prime-only support.
+\end{corollary}
+
+\begin{theorem}[DFA and NFA fibers]
+\label{thm:automata}
+A fixed DFA or NFA cannot accept exactly
+\[
+        \{1^{p-1}2:p\in\Pp\},
+\]
+or any infinite prime-only sublanguage of the form
+\(\{1^{k-1}2:k\in E\}\).
+\end{theorem}
+
+\begin{proof}
+For a DFA, let \(T_1,T_2\) be the two transition maps acting on column
+states.  Function composition is right-to-left, so the final state is
+\[
+        (T_2\circ T_1^{k-1})(q_0).
+\]
+The transformations of a finite state set form a finite semigroup, so
+\cref{thm:finite-semigroup} applies.  For an NFA, either use the subset
+construction or view the letter transitions as elements of the finite
+Boolean-relation semigroup.
+\end{proof}
+
+\Cref{thm:automata} is consistent with the stronger classical
+prime-recognition boundary of \citet{HartmanisShank1968}, but its proof is
+tied directly to the word derived in \cref{thm:word}.
+
+\begin{remark}[Quantifiers]
+\label{rem:quantifiers}
+The theorem says
+\[
+ \forall\text{ fixed finite fiber}\quad
+ \exists(\mu,\lambda)\quad
+ \text{eventual periodicity}.
+\]
+The tail and period may depend sharply on the fiber.  The theorem does not
+provide one universal period and does not forbid a sequence of fibers whose
+size grows with the cutoff.  That change of quantifiers is analyzed in
+\cref{sec:growing}.
+\end{remark}
+
+\begin{table}[t]
+\centering
+\caption{Fixed finite fibers all reduce to one eventually periodic power.
+The period can grow with the chosen fiber, but remains fixed once the model
+is frozen.}
+\label{tab:finitefibers}
+\small
+\begin{tabularx}{\textwidth}{L{3.0cm}YY}
+\toprule
+Fiber & Response on \(1^{k-1}2\) & Consequence \\
+\midrule
+finite semigroup
+& \(f(a^{k-1}b)\)
+& eventually periodic \\
+finite group
+& character or matrix coefficient of \(a^{k-1}b\)
+& periodic with period dividing \(\ord(a)\) \\
+DFA
+& membership of \((T_2\circ T_1^{k-1})(q_0)\)
+& ultimately periodic language \\
+NFA
+& Boolean relation power or determinized state
+& ultimately periodic language \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The no-go concerns exact acceptance.  A finite fiber may correlate with
+prime indicators on a short prefix or accept both primes and composites.
+Neither observation contradicts \cref{thm:finite-semigroup}.
