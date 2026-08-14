@@ -1681,3 +1681,40 @@ The Route-A tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical
 subsystem only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  The full Galois-weighted candidate has no A2 pass,
 and no rational-prime trace, completed determinant or operator is claimed.
+
+## HCS-P55 three-block Galois-excess obstruction (2026-08-14)
+
+Candidate **HCS-P55** attacks the regularity gate isolated by P54; see the
+[HCS-P55 project](../henon_galois_excess_three_block_obstruction/).  Five
+exact primitive H6 cycles satisfy
+
+\[
+N_3(\gamma_3)+N_3(\gamma_5)
+=N_3(\gamma_{4a})+N_3(\gamma_{4b}),
+\]
+
+but their Galois excesses violate the forced periodic-sum identity:
+
+\[
+E_3+E_5>E_{4a}+E_{4b}.
+\]
+
+The new period-five branch is certified by a degree-six coordinate
+polynomial, derivative monotonicity, a physical sign word and six disjoint
+rational trace isolators.  Therefore no locally constant potential depending
+on at most three consecutive H6 symbols realizes all excesses.
+
+The finite witness is sharp: a selected width-four incidence minor has
+determinant \(-1\), and the five totals admit a nonnegative four-block
+interpolation.  More generally, finite periodic data can always be fitted by
+a sufficiently long cylinder function.  The paper therefore does not infer
+an unrestricted Hölder obstruction.  It proves instead that a one-sided
+Hölder realization would force every growing-block incidence relation to
+have exponentially decaying excess discrepancy.  The first width-four
+period-six relation is the next exact test.
+
+The Route-A tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical
+subsystem only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  The full Galois-weighted A2 gate, rational-prime
+trace, all-period Hölder realization and operator remain open; Route B is not
+authorized.

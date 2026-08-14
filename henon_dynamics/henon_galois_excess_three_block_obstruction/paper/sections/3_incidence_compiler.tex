@@ -1,0 +1,66 @@
+\section{The cyclic block-incidence compiler}
+
+\begin{definition}
+For an admissible cyclic word \(\gamma=(x_0,\ldots,x_{n-1})\) and an
+admissible word \(w=(w_0,\ldots,w_{r-1})\), define
+\begin{equation}\label{eq:block-count}
+ \Nblk_r(\gamma;w)
+ =\#\{0\leq j<n:(x_j,\ldots,x_{j+r-1})=w\},
+\end{equation}
+where indices are read modulo \(n\).  The vector of all these counts is
+denoted by \(\Nblk_r(\gamma)\).
+\end{definition}
+
+A width-\(r\) locally constant potential has the form
+\(\varphi(x)=v(x_0,\ldots,x_{r-1})\).  Its periodic sum is
+\begin{equation}\label{eq:pairing}
+ \Birk_\gamma\varphi
+ =\sum_{j=0}^{n-1}\varphi(\sigma^j x)
+ =\sum_w v(w)\Nblk_r(\gamma;w).
+\end{equation}
+
+\begin{lemma}[incidence obstruction]\label{lem:incidence}
+If cycles \(\gamma_i\) and integers \(c_i\) satisfy
+\begin{equation}\label{eq:incidence-relation}
+ \sum_i c_i\Nblk_r(\gamma_i)=0,
+\end{equation}
+then every width-\(r\) locally constant potential satisfies
+\begin{equation}\label{eq:sum-relation}
+ \sum_i c_i\Birk_{\gamma_i}\varphi=0.
+\end{equation}
+Conversely, on any finite list of cycles, a prescribed vector of totals is
+realized by a width-\(r\) potential precisely when it annihilates every linear
+relation among the corresponding incidence rows.
+\end{lemma}
+
+\begin{proof}
+The forward statement follows by pairing \eqref{eq:incidence-relation} with
+the coefficient vector \(v\).  For the converse, the proposed totals define
+a linear functional on the span of the incidence rows exactly when every
+row relation is annihilated.  Extend that functional to the ambient finite
+word space and read its coordinates as \(v(w)\).
+\end{proof}
+
+For widths one and two, the first nontrivial relation is already
+\begin{equation}\label{eq:edge-relation}
+ \Nblk_r(\gamma_{4a})
+ =\Nblk_r(\gamma_1)+\Nblk_r(\gamma_3),
+ \qquad r=1,2.
+\end{equation}
+At width two this simply says that the directed edges of \(\gamma_{4a}\) are
+\[
+ 00,02,21,10,
+\]
+the disjoint multiset union of the edge \(00\) from \(\gamma_1\) and the
+edges \(02,21,10\) from \(\gamma_3\).
+
+The decisive next relation occurs at width three:
+\begin{equation}\label{eq:triple-relation}
+ \Nblk_3(\gamma_3)+\Nblk_3(\gamma_5)
+ =\Nblk_3(\gamma_{4a})+\Nblk_3(\gamma_{4b}).
+\end{equation}
+Indeed the two sides are the same multiset
+\[
+ \{002,021,023,100,102,210,231,310\}.
+\]
+The relation is exact symbolic homology; no numerical orbit data enter it.
