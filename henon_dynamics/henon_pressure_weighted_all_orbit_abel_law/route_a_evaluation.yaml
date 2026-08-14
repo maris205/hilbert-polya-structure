@@ -1,0 +1,86 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-P53
+source_commit: "research baseline 39537c7e543d8e6dc7d64a618023f22d428731cb"
+evaluation_date: 2026-08-14
+candidate_definition: "pressure-weighted all-primitive-orbit Abel boundary governed by multiplier Mahler spectral heights"
+family: "area-preserving Henon dynamics"
+phase_space: "the certified four-rectangle H6 survivor"
+dynamics: "H6(q,p)=(1-6q^2-p,q)"
+parameters: "complex pressure variable s with Re(s)>sigma0, Abel parameter tau>0, and cyclotomic index n>=3"
+parameter_provenance: "HCS-P49 half packets, HCS-P51 pressure germ and HCS-P52 Abel normalization"
+clock: "primitive-orbit period m and intrinsic cyclotomic order n"
+normalization: "beta_(gamma,n)=lambda_gamma^(-phi(n)/2)Phi_n(lambda_gamma), boundary scale tau^2"
+determinant_convention: "none; scalar mass and probability profiles are not determinants"
+orbit_cutoff: "all primitive orbits in the proof; three H6 orbits plus one typed non-H6 stress polynomial in the finite certificate"
+precision: "exact trace-field resultants, 90-digit embedding checks and independent double/high-precision recomputation"
+training_data: "none"
+forbidden_data: "Riemann-zero tables, target prime tables, fitted height coefficients, post-hoc orbit deletion, or pressure-boundary promotion"
+artifact_paths:
+  - README.md
+  - PROOF_PACKAGE.md
+  - paper/paper.pdf
+  - code/c53_all_orbit_abel.py
+  - code/independent_check.py
+  - results/c53_certificate.json
+source_lock:
+  object: "all primitive H6 source-tagged half-cyclotomic packet divisors D_(gamma,n)"
+  clock: "primitive orbit gamma and cyclotomic index n with u=e^(-tau)"
+  normalization: "tau^2 mass scale, tau*n blown-up index and Mahler spectral height H_gamma"
+  determinant_convention: "no determinant"
+  cutoff: "none in the theorem; n<=72 and four tau rows per finite sentinel"
+  precision: "seven hash-locked dependencies, exact norms and independent Mahler/Abel checks"
+  allowed_data: "P49--P52 source artifacts and source-derived H6 multiplier polynomials"
+  forbidden_data: "target primes/zeros, physical-only height substitution, scalar-to-vector promotion or critical-pressure continuation"
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "every primitive H6 orbit contributes a canonical source packet whose boundary coefficient is its full Mahler spectral height"
+  strongest_failure: "the theorem concerns trace-field packet mass and does not identify the tagged atoms with all rational primes"
+  metrics:
+    primitive_orbit_scope: "all in the certified survivor"
+    cyclotomic_index_scope: "all n>=3"
+    dependency_locks: 7
+  artifacts:
+    - PROOF_PACKAGE.md
+    - results/c53_certificate.json
+a2:
+  verdict: A2_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "a locally uniform scalar pressure-Abel amplitude and a joint probability boundary"
+  strongest_failure: "no transfer-operator determinant, zero count, root divisor or trace-log identity"
+  metrics:
+    scalar_all_orbit_boundary: true
+    fredholm_determinant: false
+  artifacts:
+    - paper/paper.pdf
+    - notes/ROUTE_B_SCOPE.md
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "the all-orbit scalar boundary is holomorphic in the P51 half-plane and the orbit-index law converges to a pressure-height distribution times Gamma(2,1)"
+  strongest_failure: "no continuation to a pressure singularity, and the tagged vectors have no norm or weak boundary"
+  metrics:
+    certified_sigma_lower: 3.125206884004728
+    gamma_shape: 2
+    gamma_rate: 1
+    tagged_vector_limit: false
+  artifacts:
+    - PROOF_PACKAGE.md
+    - paper/paper.pdf
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: OPEN
+  strongest_evidence: "the boundary amplitude is an intrinsic pressure Dirichlet series of exact SL2 multiplier Mahler heights"
+  strongest_failure: "no Hilbert space, operator domain, self-adjointness, spectral type or natural quantization is constructed"
+  metrics: {}
+  artifacts:
+    - notes/ROUTE_B_SCOPE.md
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "the all-orbit scalar Abel law, pressure-height/Gamma product profile and tagged-space nonconvergence are proved only in the P51 safe half-plane; no pressure-critical continuation, rational-prime trace, determinant or operator is claimed"
+blocking_conditions:
+  - "thermodynamic control or continuation of the Mahler-height orbit series near a pressure boundary"
+  - "a topology or distribution retaining individual prime-ideal atoms"
+  - "von-Mangoldt weighting and determinant realization"
+next_smallest_test: "determine whether the Mahler spectral height is a Holder, subadditive or asymptotically additive observable on the H6 symbolic survivor"
+route_b_invocation_allowed: false

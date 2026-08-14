@@ -1292,6 +1292,42 @@ Hilbert--Pólya generator is obtained.  The tuple remains
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 **ROUTE_A_EXPLORATORY**.
 
+## HCS-C51 weight--clock bifurcation (2026-08-14)
+
+Candidate **HCS-C51** asks whether the cohomological moments already
+isolated in C48--C50 admit one source-native archimedean completion without
+changing the rational-prime clock; see
+[`../henon_mu3_weight_clock_bifurcation/`](../henon_mu3_weight_clock_bifurcation/).
+At every good split prime, the normalized \(n\)-th trace for
+\(n=2,3,4\) is minus twice the sum of the traces of a pure weight-zero
+packet \(E_n\) and a pure weight-one packet \(O_n\).  Their ranks are respectively
+\((7,8)\), \((23,40)\), and \((87,168)\), with conditional smooth-family
+total rank \(4^n-1\).  The frozen normalization gives the exact extraction
+
+\[
+ F_n(s)=\exp\!\left(\frac2n\operatorname{Log}_0
+ L_K^{(S)}(E_n\oplus O_n,ns+1)\right)H_{n,S}(s),
+ \qquad \Re s>\frac1{2n},
+\]
+
+where \(H_{n,S}\) is holomorphic and nonzero on \(\Re s>0\).  The
+denominator tower \(u=ns+j\), \(j\ge1\), maps a pure weight-\(w\) factor
+to center \(((w+1)/2-j)/n\).  Thus only the leading odd rail has common
+center zero; the leading even centers are \(-1/4,-1/6,-1/8\), and the
+higher odd centers split again.  The mismatch is invariant under
+consistent Tate relabeling.  A semisimple direct source-native
+\(K\)-compatible packet that retains the \(E_n/O_n\) decomposition and
+the split-prime trace is also obstructed at \(n=3,4\) by nonintegral
+weightwise ranks.  Restriction of scalars, Galois-orbit counterpackets,
+nonfactorwise completions, and the inherited normalized-semifinite
+determinant are not excluded.  The analytic domain remains the C50 domain
+\(\Re s>1/5\); no full Hénon functional equation is claimed.  The tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C52 must construct or obstruct a
+\(K\)-rational algebraic projector separating the rank-two extreme Hodge
+piece of \(O_4\) from its rank-166 level-one piece.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy
@@ -1565,3 +1601,43 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  The one-orbit boundary is proved; pressure-uniform
 all-orbit interchange, a von-Mangoldt trace, a determinant and an operator
 remain open.
+
+## HCS-P53 pressure-weighted all-orbit Abel law (2026-08-14)
+
+Candidate **HCS-P53** closes the principal boundary theorem left by P52; see
+the [HCS-P53 project](../henon_pressure_weighted_all_orbit_abel_law/).  For
+every primitive H6 orbit, let
+
+\[
+\mathcal H_\gamma=\log M(f_{\lambda_\gamma})
+\]
+
+be the full Mahler spectral height of the signed multiplier.  Reciprocal
+embedding analysis and a two-logarithm bound for possible unit-circle
+conjugates prove
+
+\[
+\log|N\beta_{\gamma,n}|
+=\frac{\varphi(n)}2\mathcal H_\gamma
++O_\gamma(\sqrt n(1+\log n)^2).
+\]
+
+The P51 positive period envelope then justifies dominated convergence over
+all primitive orbits, locally uniformly for
+\(\Re s>\log(2\varphi)/(h_*\log J_*)\):
+
+\[
+\tau^2\sum_\gamma e^{-s\widehat\ell_\gamma}
+\sum_{n\ge3}\log|N\beta_{\gamma,n}|e^{-\tau n}
+\longrightarrow
+\frac3{\pi^2}\sum_\gamma
+e^{-s\widehat\ell_\gamma}\mathcal H_\gamma.
+\]
+
+For real \(s=\sigma\), the joint orbit/scaled-index law converges to the
+pressure-height orbit probability times Gamma\((2,1)\).  The renormalized
+tagged vectors still have no norm- or weakly-convergent subnet.  The Route-A
+tuple is **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Pressure-critical
+continuation, a rational-prime von-Mangoldt trace, a determinant and an
+operator remain open.
