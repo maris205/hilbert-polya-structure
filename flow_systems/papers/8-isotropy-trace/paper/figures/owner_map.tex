@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  font=\scriptsize,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=4pt,minimum height=8mm},
+  source/.style={box,fill=blue!7,draw=blue!55!black},
+  local/.style={box,fill=green!7,draw=green!45!black},
+  scalar/.style={box,fill=orange!10,draw=orange!60!black},
+  blocked/.style={box,fill=red!5,draw=red!55!black,dashed},
+  flow/.style={-{Stealth[length=2mm]},thick},
+  stop/.style={-{Bar[width=5pt]},red!65!black,dashed,thick},
+  edge label/.style={font=\tiny,fill=white,inner sep=1.5pt,align=center}
+]
+\node[source,text width=2.5cm] (packet) at (0,2.2)
+  {Deninger $E_f$ packet $\Gamma_p$\\source clock $L=\log p$};
+\node[local,text width=2.2cm] (orbit) at (3.3,2.2)
+  {chosen actual orbit\\$\mathcal O\cong\R/(L\Z)$};
+\node[local,text width=2.5cm] (alg) at (6.4,2.2)
+  {$A_L=C^*(\mathcal O\rtimes\R)$\\$\cong C(\T)\otimes\K$};
+\node[local,text width=2.7cm] (reg) at (10.2,2.2)
+  {$M_L^{\mathrm{reg}}$\\$L^\infty(\T)\bar\otimes\B(H_0)$};
+
+\node[blocked,text width=2.3cm] (packetalg) at (0,0)
+  {packet completion\\and packet trace};
+\node[local,text width=2.6cm] (char) at (6.4,0)
+  {character fibre $\theta$\\$L\sum_r f(rL)\e^{\ii r\theta}$};
+\node[local,text width=2.4cm] (fns) at (10.2,0)
+  {dual-Haar FNS trace\\$Lf(0)$};
+\node[scalar,text width=2.8cm] (closed) at (3.2,-2.0)
+  {rational closed points $+$ clocks};
+\node[scalar,text width=2.5cm] (theta) at (8.0,-2.0)
+  {scalar only\\$\Theta_+$ on $(0,\infty)$};
+
+\draw[flow] (packet) -- (orbit);
+\node[edge label,text width=1.7cm] at (1.65,3.15)
+  {choose one actual orbit\\not canonical};
+\draw[flow] (orbit) -- (alg);
+\draw[flow] (alg) -- (reg);
+\node[edge label,text width=1.7cm] at (8.3,3.05)
+  {fixed regular map};
+\draw[flow] (alg) -- (char);
+\draw[flow] (reg) -- (fns);
+\draw[stop] (char.east) -- node[midway,sloped,above,edge label]
+  {no normal extension} (reg.south west);
+\draw[stop] (packet) -- node[midway,left=4pt,edge label]
+  {Hausdorff/LCH\\and bridge open} (packetalg);
+\draw[flow] (closed) -- (theta);
+\draw[stop] (theta.east) -- ++(3.4,0) -- ++(0,4.2) -- (reg.east);
+\node[edge label,text=red!65!black,text width=2.2cm] at (11.4,0.25)
+  {no packet/global\\operator promotion};
+\end{tikzpicture}
