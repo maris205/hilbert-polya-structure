@@ -36,10 +36,11 @@ henon_pressure_label_six_exponentials_obstruction - HCS-P48 complete - Three exa
 henon_cyclic_resultant_packet_obstruction - HCS-P49 complete - Full multiplier-field cyclic norms are forced squares, while trace-field Lehmer--Pierce sequences and ideal packets survive as collective arithmetic structures.
 henon_tagged_prime_ideal_packet_assembly - HCS-P50 complete - Tagged trace-field prime-ideal packets assemble exactly at finite cutoff, while rational-prime pushforward has kernel rank 30 and merges incompatible residue clocks.
 henon_abel_graded_all_orbit_packet_germ - HCS-P51 complete - The finite packet ledger extends to an all-primitive-orbit Banach-valued holomorphic germ, while one exact orbit forces radius one and divergence at the ungraded Abel boundary.
+henon_totient_abel_boundary_escape - HCS-P52 complete - The exact period-four packet has a totient-driven Abel constant and Gamma(2,1) scaled-index profile, while its renormalized tagged divisor vectors have no norm or weak boundary.
 
-`P43`--`P51` are the unique registry aliases for the pressure/orbit lane.
+`P43`--`P52` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
-strings to preserve their published hashes; `P48`--`P51` were born
+strings to preserve their published hashes; `P48`--`P52` were born
 namespaced. The unqualified IDs `C43`--`C48` in this repository belong to
 the full-kernel cubic lane listed in the theorem table below.
 
@@ -70,6 +71,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_totient_abel_boundary_escape/](henon_totient_abel_boundary_escape/) | P52: the exact period-four packet mass is \(\varphi(n)\log L/2+O_L(1)\), giving a scalar Abel constant and Gamma\((2,1)\) scaled-index escape profile; the tagged vectors have no norm or weak limit | First source-native packet boundary law; Route A exploratory, A3 partial, all-orbit boundary still open |
 | [henon_abel_graded_all_orbit_packet_germ/](henon_abel_graded_all_orbit_packet_germ/) | P51: all primitive H6 cyclotomic packet divisors form a jointly holomorphic two-variable germ in a universal tagged Banach space; the period-four orbit has exact Abel radius one | First all-orbit arithmetic packet germ; Route A exploratory, A3 partial, raw boundary refuted |
 | [henon_mu3_elliptic_resummation_fourth_moment/](henon_mu3_elliptic_resummation_fourth_moment/) | C50: explicit \(K=\mathbb Q(\sqrt{-3})\)-rational symmetries split the genus-four second-moment Jacobian as \(E_+^2\times E_-^2\) up to \(K\)-isogeny; modular resummation of that wall and a fourth-moment Fermat-sixfold/\((2,3)\)-fivefold cancellation extend the normalized Euler object and a tenth-order normalized-semifinite determinant to \(\Re s>1/5\) | Strongest current analytic continuation; Route A remains exploratory and A3 partial |
 | [henon_mu3_fano_threefold_third_moment/](henon_mu3_fano_threefold_third_moment/) | C49: the third moment is an exact Fermat-fourfold/Fano-threefold Frobenius cancellation, extending the normalized Euler germ and an eighth-order normalized-semifinite determinant to \(\Re s>1/4\) | Previous third-moment advance; analytically extended by C50 |

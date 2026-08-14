@@ -73,3 +73,5 @@ a claim without the named analytic and arithmetic gates.
 Author of the `zeta_mvp0` programme: **Liang Wang**, School of Artificial
 Intelligence and Automation, Huazhong University of Science and Technology,
 Wuhan 430074, P. R. China.
+
+henon_dynamics/henon_totient_abel_boundary_escape - HCS-P52 complete - The exact period-four Hénon packet has a proved totient Abel constant and Gamma(2,1) scaled-index profile, while its renormalized tagged divisor vectors have no norm or weak boundary.

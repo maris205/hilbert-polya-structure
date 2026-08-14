@@ -1525,3 +1525,43 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  Abel-boundary renormalization is the next open
 theorem; no determinant, continuation, von-Mangoldt law, or operator is
 claimed.
+
+## HCS-P52 totient Abel boundary and tagged-mass escape (2026-08-14)
+
+Candidate **HCS-P52** closes the first boundary theorem named by P51; see the
+[HCS-P52 project](../henon_totient_abel_boundary_escape/).  On the exact
+primitive period-four orbit,
+
+\[
+L=289+24\sqrt{145},\qquad
+\beta_n=L^{-\varphi(n)/2}\Phi_n(L),\qquad
+\|D_n\|_{\rm tag}=\log\beta_n,
+\]
+
+and cyclotomic Möbius inversion gives the uniform formula
+
+\[
+\log\beta_n=\frac{\varphi(n)}2\log L+O_L(1),
+\qquad |O_L(1)|<0.001735.
+\]
+
+The elementary totient average therefore proves
+
+\[
+\lim_{u\uparrow1}(1-u)^2
+\sum_{n\ge3}\|D_n\|_{\rm tag}u^n
+=\frac{3\log L}{\pi^2}.
+\]
+
+After scaling the index by \(\tau n\), \(u=e^{-\tau}\), normalized packet
+mass converges to Gamma\((2,1)\).  This compactification is not a lossless
+divisor boundary: the positive vectors
+\(\tau^2\sum e^{-\tau n}D_n\) have norms tending to the positive Abel
+constant while every fixed tagged coordinate tends to zero, so they have no
+norm- or weakly-convergent subnet.
+
+The Route-A tuple remains **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  The one-orbit boundary is proved; pressure-uniform
+all-orbit interchange, a von-Mangoldt trace, a determinant and an operator
+remain open.

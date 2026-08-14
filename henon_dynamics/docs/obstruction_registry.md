@@ -267,9 +267,9 @@ Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
 retained positive structures rather than added to the obstruction list.
 The first untreated uniform-moment wall is now the fifth chronological
 moment; no continuation through \(\Re s=1/5\) is asserted.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P50`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P52`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P50 were born namespaced.
+strings, while P48--P52 were born namespaced.
 
 ## HCS-P44 additions (pressure-lane registry alias)
 
@@ -312,3 +312,9 @@ strings, while P48--P50 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O91 | Direct ungraded \(u=1\) specialization of the all-orbit tagged packet germ | proved one-orbit Abel-boundary divergence | For the exact positive norm-one period-four multiplier \(L_4=289+24\sqrt{145}\), Flatters' theorem gives a primitive rational divisor in every Lehmer--Pierce term after index 12. It must lie in the \(n\)th inversion-fixed packet, so \(\|D_{\gamma_4,n}\|\ge\log2\) for all \(n>12\). The terms of the fixed-orbit series do not tend to zero at \(|u|=1\), while the all-period height bound gives \(O(n)\) and convergence for \(|u|<1\). | Proves exact \(u\)-radius one and stops only raw boundary substitution in the weighted tagged Banach topology. It does not rule out Abel/Tauberian renormalization, distributional boundary values, logarithmic derivatives, or a different source-native topology. The all-orbit germ for \(|u|<1\) survives. | ../henon_abel_graded_all_orbit_packet_germ/README.md |
+
+## HCS-P52 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O92 | Norm or weak boundary of the Abel-renormalized period-four tagged packet vectors | proved tagged-mass escape obstruction | For \(E_\tau=\tau^2\sum_{n\ge3}e^{-\tau n}D_n\), the exact totient law gives \(\|E_\tau\|\to3\log L/\pi^2>0\), while every fixed `(orbit,index,prime)` coordinate tends to zero. Any norm or weak limit would be zero coordinatewise, contradicting the continuous positive mass functional. No subnet can converge. | Stops boundary convergence only in the original source-tagged weighted \(\ell^1\) topology. The scalar Abel mass survives and the blown-up index distribution converges to Gamma\((2,1)\). A different distributional topology retaining prime-ideal atoms and the all-orbit pressure boundary remain open. | ../henon_totient_abel_boundary_escape/README.md |
