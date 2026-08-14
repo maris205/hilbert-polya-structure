@@ -1,10 +1,13 @@
-\begin{tikzpicture}[>=Latex,scale=0.85,
-  v/.style={circle,draw=charcoal,fill=softgray,minimum size=7mm,inner sep=0pt},
+\begin{tikzpicture}[>=Latex,scale=1.0,
+  v/.style={circle,draw=charcoal,fill=softgray,minimum size=8mm,inner sep=0pt,font=\scriptsize},
   e/.style={line width=0.65pt,charcoal},
   cell/.style={fill=warningamber!14,draw=warningamber,line width=0.7pt}]
+  \draw[cell] (0,0) rectangle (1.45,1.35);
+  \draw[cell] (1.45,0) rectangle (2.90,1.35);
+  \draw[cell] (0,1.35) rectangle (1.45,2.70);
   \foreach \a in {0,1,2,3} {
     \foreach \b in {0,1,2} {
-      \node[v] (n\a\b) at (1.25*\a,1.25*\b) {$m2^{\a}3^{\b}$};
+      \node[v] (n\a\b) at (1.45*\a,1.35*\b) {$\a,\b$};
     }
   }
   \foreach \a/\anext in {0/1,1/2,2/3} {
@@ -17,8 +20,6 @@
       \draw[e] (n\a\b) -- (n\a\bnext);
     }
   }
-  \draw[cell] (n00.center) rectangle (n11.center);
-  \draw[cell] (n10.center) rectangle (n21.center);
-  \draw[cell] (n01.center) rectangle (n12.center);
-  \node[align=center] at (2.0,-0.85) {\small unit diamonds fill the grid};
+  \node[align=center] at (2.2,-0.85) {\small vertex $(a,b)$ denotes $m2^a3^b$;\\[-1mm]
+  \small shaded unit squares are filled cusp diamonds};
 \end{tikzpicture}

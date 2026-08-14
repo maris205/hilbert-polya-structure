@@ -21,8 +21,9 @@ The branch now has three independent obstructions:
 
 ## Best next direction
 
-Audit a genuinely global arithmetic dynamical source whose Euler factors are
-primitive recurrent objects before block selection.  A reasonable first
-benchmark is an `ax+b`/Bost-Connes-type symbolic source, but only if the source
-lock prevents terminal support projectors and proves same-marker determinant
-ownership before any arithmetic labels are read.
+Stay inside Symbolic Dynamics and first formulate a
+recognition-to-recurrence obstruction theorem: a candidate must recognize the
+target arithmetic boundary before it can own a same-marker recurrent
+determinant.  Only after that theorem is source-locked should an
+`ax+b`/Bost-Connes-type symbolic coding be used as a benchmark, and only with
+terminal support projectors forbidden before any arithmetic labels are read.

@@ -123,6 +123,12 @@ right-to-left operator convention the corresponding operator word is `SR`.
 - Re-running classifier, evaluator, freeze, and integrity audit is idempotent.
 - `SHA256SUMS.txt`, aggregate digest, inventory, double-run certificate, and
   integrity audit agree.
+- The frozen paper-root ledger hashes 40 entries: 12 Python source files,
+  7 experiment-control files, and 21 generated result payloads.  The
+  double-run certificate compares 20 source-separated payloads against the
+  frozen authority copy.
+- `idempotence_certificate.json` is excluded from `SHA256SUMS.txt` to avoid a
+  self-referential checksum cycle and is covered instead by the paper manifest.
 
 ## 6. Strict Route-A v0.2 freeze
 
@@ -140,10 +146,11 @@ overall = ROUTE_A_REJECTED
 route_b_invocation_allowed = false
 ```
 
-All three provenance fields retain the same
-`PENDING_FIRST_ARTIFACT_COMMIT` token.  Only the later metadata-only stage may
-replace all three together after validating the first immutable artifact
-commit; this experiment integration does not commit.
+Commit metadata is intentionally outside this canonical experiment plan.  The
+Route-A card and paper manifest bind `source_commit`, `code_commit`, and the
+paper artifact commit after the corrective artifact commit exists.  This plan
+therefore carries no future commit hash and avoids a circular
+plan -> result-lock -> commit -> plan dependency.
 
 ## 7. Required reports
 

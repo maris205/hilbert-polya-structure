@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Run two isolated Paper 33 exact suites and certify byte identity."""
+"""Run two isolated canonical Paper 33 pipelines and certify byte identity."""
 
 from __future__ import annotations
 
 import hashlib
 import json
-import shutil
+import os
 import subprocess
 import tempfile
 from pathlib import Path
@@ -14,67 +14,129 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CODE = ROOT / "code"
 RESULTS = ROOT / "results"
-PAYLOADS = [
-    "cross_square_complex.json",
+PAYLOADS = (
+    "environment_lock.json",
+    "run_parameters.json",
+    "research_lock.json",
+    "modulus_source_census.csv",
     "matched_clone.csv",
-    "modulus_homology_census.csv",
     "random_action_controls.csv",
+    "twist_census.csv",
+    "cross_square_complex.json",
     "source_oracle_certificate.json",
+    "source_separation_certificate.json",
+    "source_summary.json",
+    "source_test_report.json",
+    "modulus_homology_census.csv",
     "summary.json",
     "test_report.json",
-    "twist_census.csv",
-]
+    "classification_certificate.json",
+    "prototype_bridge_certificate.json",
+    "evaluation.json",
+    "evaluation_comparison.csv",
+    "unit_test_report.json",
+)
+STAGES = (
+    ("locks", "write_run_locks.py"),
+    ("source", "source_generator.py"),
+    ("separation", "audit_source_separation.py"),
+    ("classification", "post_census_classifier.py"),
+    ("evaluation", "independent_evaluator.py"),
+    ("tests", "run_tests.py"),
+)
 
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def run_once(target: Path) -> str:
-    cmd = [
-        "python3",
-        str(CODE / "generate_results.py"),
-        "--cutoff",
-        "192",
-        "--random-trials",
-        "64",
-        "--seed",
-        "330000",
-        "--result-dir",
-        str(target),
-    ]
-    completed = subprocess.run(cmd, cwd=str(CODE), check=True, text=True, capture_output=True)
-    return completed.stdout
+def run_once(target: Path) -> dict[str, str]:
+    target.mkdir(parents=True, exist_ok=True)
+    environment = dict(os.environ)
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    environment["PYTHONHASHSEED"] = "0"
+    stdout: dict[str, str] = {}
+    for stage, script in STAGES:
+        command = [
+            "python3",
+            str(CODE / script),
+            "--result-dir",
+            str(target),
+        ]
+        completed = subprocess.run(
+            command,
+            cwd=str(CODE),
+            env=environment,
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        stdout[stage] = completed.stdout
+    return stdout
 
 
 def main() -> None:
-    tmp = Path(tempfile.mkdtemp(prefix="paper33_double_"))
-    try:
-        a = tmp / "a"
-        b = tmp / "b"
+    with tempfile.TemporaryDirectory(prefix="paper33_canonical_double_") as tmp:
+        temporary = Path(tmp)
+        a = temporary / "a"
+        b = temporary / "b"
         stdout_a = run_once(a)
         stdout_b = run_once(b)
+
         rows = []
-        equal = stdout_a == stdout_b
+        all_equal = stdout_a == stdout_b
         for name in PAYLOADS:
-            da = digest(a / name)
-            db = digest(b / name)
+            run_a = digest(a / name)
+            run_b = digest(b / name)
             frozen = digest(RESULTS / name)
-            rows.append({"path": name, "run_a": da, "run_b": db, "frozen": frozen, "byte_identical": da == db == frozen})
-            equal = equal and rows[-1]["byte_identical"]
+            identical = run_a == run_b == frozen
+            rows.append({
+                "path": name,
+                "run_a": run_a,
+                "run_b": run_b,
+                "frozen": frozen,
+                "byte_identical": identical,
+            })
+            all_equal = all_equal and identical
+
+        stdout_rows = {
+            stage: {
+                "run_a_sha256": hashlib.sha256(
+                    stdout_a[stage].encode("utf-8")
+                ).hexdigest(),
+                "run_b_sha256": hashlib.sha256(
+                    stdout_b[stage].encode("utf-8")
+                ).hexdigest(),
+                "identical": stdout_a[stage] == stdout_b[stage],
+            }
+            for stage, _ in STAGES
+        }
         payload = {
             "candidate_id": "SD-C35",
-            "command": "python3 code/generate_results.py --cutoff 192 --random-trials 64 --seed 330000",
-            "stdout_a_sha256": hashlib.sha256(stdout_a.encode("utf-8")).hexdigest(),
-            "stdout_b_sha256": hashlib.sha256(stdout_b.encode("utf-8")).hexdigest(),
+            "pipeline": [script for _, script in STAGES],
+            "parameters": {
+                "cutoff": 192,
+                "random_trials": 64,
+                "random_seed_start": 330000,
+            },
+            "stdout": stdout_rows,
             "stdout_identical": stdout_a == stdout_b,
             "payloads": rows,
-            "payloads_identical_to_frozen": equal,
+            "payload_count": len(rows),
+            "payloads_identical_to_frozen": all_equal,
+            "fresh_temporary_directories": 2,
         }
-        (RESULTS / "double_run_certificate.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        print(json.dumps({"candidate_id": "SD-C35", "payloads": len(rows), "identical": equal}))
-    finally:
-        shutil.rmtree(tmp)
+        (RESULTS / "double_run_certificate.json").write_text(
+            json.dumps(payload, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        print(json.dumps({
+            "candidate_id": "SD-C35",
+            "payloads": len(rows),
+            "identical": all_equal,
+        }, sort_keys=True))
+        if not all_equal:
+            raise SystemExit(1)
 
 
 if __name__ == "__main__":

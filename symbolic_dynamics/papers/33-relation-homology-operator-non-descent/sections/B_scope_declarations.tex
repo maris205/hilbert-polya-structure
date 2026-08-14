@@ -18,7 +18,17 @@ Hypothesis statement, or Route-B readiness.
 
 \paragraph{Reproducibility.}
 All finite data are exact JSON/CSV artifacts with SHA-256 ledgers.  The
-prototype can be rerun from \texttt{code/generate\_results.py};
-\texttt{code/run\_tests.py} performs deterministic unit checks, and
-\texttt{code/independent\_evaluator.py} verifies the frozen result ledger
-without using target-zero data.
+canonical authority pipeline is split as follows:
+\begin{quote}
+\small\ttfamily
+source\_generator.py\\
+audit\_source\_separation.py\\
+post\_census\_classifier.py\\
+independent\_evaluator.py\\
+run\_tests.py
+\end{quote}
+The retained \texttt{generate\_results.py} runner is a byte-frozen prototype
+bridge only.
+The independent evaluator reconstructs the scientific payloads without
+importing candidate or classifier modules; \texttt{audit\_artifact\_integrity.py}
+verifies the frozen SHA ledger.

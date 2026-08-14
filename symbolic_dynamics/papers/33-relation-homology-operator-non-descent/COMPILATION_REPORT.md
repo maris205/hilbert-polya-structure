@@ -5,15 +5,15 @@
 `SUCCESS`.
 
 `latexmk` was not installed in the runtime, so the equivalent manual
-`pdflatex -> bibtex -> pdflatex -> pdflatex` sequence was used.
+`pdflatex -> bibtex -> pdflatex -> pdflatex -> pdflatex` sequence was used.
 
 ## Output
 
 - PDF: `main.pdf`
 - Pages: 10
 - Page size: A4 (`595.276 x 841.89 pts`)
-- File size: 339,244 bytes
-- SHA-256: `81cf03473ac4dab28dc00d75d6f427070e7b47707a1f8cff33e833d1f36eefc1`
+- File size: 367,310 bytes
+- SHA-256: `4637a948e1ecde34304b72c7b21c47ec9172f9fae743da6ccfe279bdc587d4c0`
 
 ## Checks
 
@@ -24,10 +24,13 @@
 - Residual `??`, `[?]`, or `[VERIFY]` markers in PDF text: 0
 - Fonts: all embedded (`pdffonts`)
 - Figures: pure TikZ; no raster figures
+- Visual QA: pages 3--6 rendered to PNG and inspected; Figures 1--3 have no
+  label collisions after final layout pass
 - Route-B/RH/target-zero claims: absent
 
 ## Notes
 
-The only warning-like line remaining in `main.log` is the package banner for
-`rerunfilecheck`, not a rerun request.  Build auxiliary files were removed
-after this report was written.
+The only remaining LaTeX layout diagnostic is one underfull table-alignment
+line in the exact-audit table.  There are no overfull boxes, undefined
+references, undefined citations, or rerun requests.  Build auxiliary files are
+ignored and were removed after this report was written.

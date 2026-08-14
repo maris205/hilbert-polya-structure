@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import sys
@@ -22,6 +23,8 @@ from cycle_quotient_core import (
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
+CHECKS_TOTAL = 0
+CHECKS_PASSED = 0
 
 
 def read_csv(name: str) -> list[dict[str, str]]:
@@ -30,11 +33,20 @@ def read_csv(name: str) -> list[dict[str, str]]:
 
 
 def require(condition: bool, name: str, failures: list[str]) -> None:
+    global CHECKS_PASSED, CHECKS_TOTAL
+    CHECKS_TOTAL += 1
+    if condition:
+        CHECKS_PASSED += 1
     if not condition:
         failures.append(name)
 
 
-def main() -> int:
+def main(result_dir: str | None = None) -> int:
+    global CHECKS_PASSED, CHECKS_TOTAL, RESULTS
+    CHECKS_TOTAL = 0
+    CHECKS_PASSED = 0
+    if result_dir is not None:
+        RESULTS = Path(result_dir)
     failures: list[str] = []
     rows = read_csv("modulus_homology_census.csv")
     matched = read_csv("matched_clone.csv")
@@ -80,6 +92,7 @@ def main() -> int:
     require(len(honest) == 6, "six honest characters", failures)
     require(sum(int(row["kills_identity_cycle_words"]) for row in honest) == 0, "honest cycle words survive", failures)
     require(sum(int(row["kills_both_chain_norms"]) for row in honest) == 2, "two honest chain norm killers", failures)
+    require(all(int(row["cusp_sr_nonzero"]) == 1 for row in honest), "all honest cusp weights survive", failures)
     require(len(virtual) == 15, "fifteen virtual differences", failures)
     require(all(int(row["kills_identity_cycle_words"]) == 1 for row in virtual), "virtual identity cancellation", failures)
     require(sum(int(row["kills_both_chain_norms"]) for row in virtual) == 2, "two virtual chain norm killers", failures)
@@ -92,15 +105,30 @@ def main() -> int:
     require(summary["all_tested_adjacencies_fail_to_descend"] is True, "summary non-descent", failures)
     require(summary["route_b"] == "LOCKED", "route B locked", failures)
 
+    separation = json.loads((RESULTS / "source_separation_certificate.json").read_text(encoding="utf-8"))
+    classification = json.loads((RESULTS / "classification_certificate.json").read_text(encoding="utf-8"))
+    bridge = json.loads((RESULTS / "prototype_bridge_certificate.json").read_text(encoding="utf-8"))
+    require(separation["pass"] is True and not separation["banned_identifier_hits"], "source classifier separation", failures)
+    require(classification["pass"] is True and classification["source_columns_preserved"], "post-census classification", failures)
+    require(bridge["pass"] is True, "prototype bridge", failures)
+
     report = {
         "candidate_id": "SD-C35",
-        "test_count": 25,
-        "passes": 25 if not failures else 25 - len(failures),
+        "evaluation_type": "authority_unit_and_integration_tests",
+        "test_count": CHECKS_TOTAL,
+        "passes": CHECKS_PASSED,
         "failures": failures,
     }
+    (RESULTS / "unit_test_report.json").write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     print(json.dumps(report, sort_keys=True))
     return 0 if not failures else 1
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--result-dir", default=None)
+    arguments = parser.parse_args()
+    sys.exit(main(arguments.result_dir))

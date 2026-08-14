@@ -51,7 +51,12 @@ Key outputs:
 | matched relabel exact | 191 / 191 |
 | random controls residual nonzero | 64 / 64 |
 | cross `H1` after filling | 0 |
-| deterministic tests | 25 / 25 |
+| source-only generator checks | 21 / 21 |
+| prototype bridge checks | 25 / 25 |
+| independent low-level reconstruction | 8349 / 8349 |
+| authority unit/integration tests | 1932 / 1932 |
+| source-separated double run | 20 / 20 payloads |
+| paper-root SHA ledger | 40 entries; 21 result payloads |
 
 ## Route-A decision
 
@@ -74,12 +79,16 @@ add another static projector, Manin quotient, or character twist.
 
 ```bash
 cd symbolic_dynamics/papers/33-relation-homology-operator-non-descent
-python3 code/generate_results.py --cutoff 192 --random-trials 64 --seed 330000 --result-dir results_check
-python3 code/run_tests.py
-python3 code/independent_evaluator.py
+PYTHONDONTWRITEBYTECODE=1 python3 code/write_run_locks.py --result-dir results_check
+PYTHONDONTWRITEBYTECODE=1 python3 code/source_generator.py --result-dir results_check
+PYTHONDONTWRITEBYTECODE=1 python3 code/audit_source_separation.py --result-dir results_check
+PYTHONDONTWRITEBYTECODE=1 python3 code/post_census_classifier.py --result-dir results_check
+PYTHONDONTWRITEBYTECODE=1 python3 code/independent_evaluator.py --result-dir results_check
+PYTHONDONTWRITEBYTECODE=1 python3 code/run_tests.py --result-dir results_check
 python3 experiments/run_exact_suite.py
-python3 code/freeze_artifacts.py
-python3 code/audit_artifact_integrity.py
+python3 code/freeze_artifacts.py --result-dir results
+python3 code/audit_artifact_integrity.py --result-dir results
+python3 code/audit_idempotence.py --result-dir results
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 bibtex main
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
