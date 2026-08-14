@@ -1368,3 +1368,56 @@ nonrational pressure label \(X^{h_*}\) survives rather than being silently
 rejected.  The rational lane has tuple **(A1_WEAK, A2_FAIL,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** and overall
 **ROUTE_A_REJECTED**; the pressure-power lane remains exploratory.
+
+## HCS-P48 Six-Exponentials pressure-label obstruction (2026-08-13)
+
+Unlike the immutable P43--P47 bundles, this continuation was born with its
+pressure-lane alias and makes no claim to the full-kernel `HCS-C48` key.
+Candidate **HCS-P48** audits the final scalar survivor from HCS-P47; see the
+[HCS-P48 project](../henon_pressure_label_six_exponentials_obstruction/).
+The exact primitive period \(1,3,4\) survivor multipliers have minimal
+polynomial degrees \(4,4,2\), and ramification at \(5,11,29\) proves
+
+\[
+[\mathbb Q(L_1,L_3,L_4):\mathbb Q]=32.
+\]
+
+Independent reciprocal-root automorphisms then make
+\(\log L_1,\log L_3,\log L_4\) linearly independent over \(\mathbb Q\).
+For rational \(h>0\), algebraic-unit integrality excludes rational integers
+greater than one. For irrational \(h\), the Six Exponentials Theorem forces
+at least one of \(L_1^h,L_3^h,L_4^h\) to be transcendental. Thus no common
+real exponent, including the pressure root, turns every primitive H6 orbit
+label into a rational prime. The tuple for this termwise lane is
+**(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with
+overall **ROUTE_A_REJECTED**. The HCS-P45 dynamical prime-orbit counting theorem
+and collective packet/trace routes remain separate open objects.
+
+## HCS-P49 cyclic-resultant packet trilemma (2026-08-14)
+
+Candidate **HCS-P49** tests the first collective survivor from HCS-P48; see
+the [HCS-P49 project](../henon_cyclic_resultant_packet_obstruction/).  For a
+signed reciprocal multiplier $\lambda$ and its fixed trace field $K^+$, the
+principal packets
+
+\[
+\mathfrak A_r=(1-\lambda^r),
+\qquad
+\mathfrak C_n=(\Phi_n(\lambda))
+\]
+
+are canonical under inversion and obey
+$\mathfrak A_r=\prod_{n\mid r}\mathfrak C_n$.  The full multiplier-field
+norm of the cyclic determinant is a square.  For every $n>2$, the full
+primitive cyclotomic norm is also a square because
+$\lambda^{-\varphi(n)/2}\Phi_n(\lambda)$ lies in $\mathcal O_{K^+}$.
+This stops full-field norm scalarization as a rational-prime label.
+
+The minimal $K^+$-norm and principal ideals survive.  Exact signed period
+$1,3,4$ controls verify 36 resultant rows and show both prime and composite
+half norms; all three cyclic sequences fail the one-fixed-label power law.
+Flatters' quadratic theorem gives a primitive rational divisor in every
+period-four term beyond index 12.  No all-orbit packet trace, continuation,
+or operator follows.  The collective lane has tuple **(A1_WEAK, A2_FAIL,
+A3_FAIL, A4_FORMAL_HINT)** and overall **ROUTE_A_EXPLORATORY**; full-field
+norm promotion is separately `STOP_SCOPED_SQUARE_NORM`.

@@ -1,0 +1,315 @@
+# Experiment Plan: Algebraic Action Source-Lock Audit
+
+**Candidate ID:** `algebraic_exact_action_clock_obstruction_v1`  
+**Plan version:** 3  
+**Date:** 2026-08-14  
+**Execution state:** source lock complete; candidate execution forbidden in this
+task
+
+Version 3 mirrors source-lock v3.  It incorporates the independent
+pre-execution counterexample review: gauges are single-valued
+$\overline{\mathbb Q}$-rational functions, the general endpoint term is
+retained, the logarithm edge cases and $\log|A|$ nonclaim are explicit, the
+orbit field carries the extended set $S$, low-period neighbors retain
+multiplicity, and all evaluation gates fail closed.  Source-lock v2 had
+SHA-256 `552ec986fc35d0afb3137050ddf8dfe748647c51b8517293a0e072b9612b1497`.
+No candidate output motivated the amendment.
+
+## 1. Decision to be made
+
+Decide whether a periodic action obtained from a frozen algebraic exact
+potential can remain a viable exact prime-logarithm clock.  The decision is
+made by proof and adversarial controls, not by searching periodic orbits:
+
+$$
+\mathcal A_G(P)\in\overline{\mathbb Q}
+\quad\text{versus}\quad
+\log p\notin\overline{\mathbb Q}.
+$$
+
+The Hénon family is the concrete sign, normalization, and arithmetic-range
+audit.  A finite low-period calculation, if separately authorized later,
+would test an implementation only and would carry no all-period evidentiary
+weight.
+
+## 2. Claim map
+
+| ID | Claim | Evidence required | Falsifier | Status before execution |
+|---|---|---|---|---|
+| C1 | A rational algebraic potential evaluated on an algebraic finite periodic orbit away from poles has algebraic closed action. | Exact field-evaluation proof with every regularity assumption explicit. | A regular algebraic orbit and algebraic potential whose finite sum is transcendental. | Proven in source-lock package. |
+| C2 | Such an action cannot equal any branch of the logarithm of a nontrivial algebraic number, hence cannot equal $\log p$. | C1 plus the precise Hermite--Lindemann implication. | A nonzero algebraic $A$ with $e^A$ algebraic. | Proven modulo the named classical theorem. |
+| S1 | A single-valued exact algebraic gauge telescopes; a per-step constant shifts period-$n$ action by $nC$. | Direct pullback and cyclic-sum identities. | Any missing sign or surviving nonconstant boundary term. | Derived; static audit planned. |
+| S2 | The certificate fails if an arbitrary transcendental normalization is allowed. | One explicit exact-symplectic counterexample. | None needed: identity map with $G=\log 2$ is decisive. | Counterexample frozen. |
+| S3 | For $H_a(q,p)=(q^2-a-p,q)$, the zero-constant potential is $G=2q^3/3-pq$ and the stated type-1 function is its negative on the graph. | Independent differentiation and graph substitution. | A derivative or sign mismatch. | Derived; static audit planned. |
+| S4 | For algebraic $a$, every finite Hénon periodic coordinate and action is algebraic. | Projective no-points-at-infinity argument for the cyclic recurrence. | A positive-dimensional component contained in the affine chart or a point at infinity. | Proven; adversarial geometry audit planned. |
+| S5 | For $a\in\mathcal O_{K_0,S_0}$, after passing to an orbit field $K/K_0$ and extending $S_0$ to $S$, coordinates and $3\mathcal A_G$ are $S$-integral. | Orbit-field ledger, non-archimedean cyclic maximum proof, and denominator ledger. | A finite place outside extended $S$ with a periodic coordinate of norm greater than one, or an untracked denominator other than 3. | Proven; valuation audit planned. |
+
+Only C1 and C2 are primary.  S1--S5 close assumptions and instantiate the
+certificate; they are not independent headline theorems.
+
+## 3. Frozen method thesis
+
+The candidate is rejected as an exact prime-logarithm clock if all of the
+following survive review:
+
+1. the action representative, every single-valued rational gauge, every
+   per-step constant, endpoint value, and transition are algebraic and
+   frozen before orbit evaluation;
+2. the algebraic orbit is constructed step by step, and each datum is
+   checked separately for a pole or indeterminacy before use;
+3. the action is therefore algebraic by finite evaluation;
+4. Hermite--Lindemann separates it from every complex logarithm of a
+   nontrivial algebraic target;
+5. the Hénon formulas and the $S$-integral refinement contain no sign,
+   gauge, projective-geometry, or denominator mistake.
+
+If item 1 is dropped, the correct conclusion is not a weakened theorem but a
+counterexample: the numerical action can be shifted to a desired target.
+
+## 4. Data policy and leakage barrier
+
+### Allowed
+
+- symbolic map, primitive, potential, generating-function, and gauge
+  formulas;
+- the inherited algebraic defining polynomial of $u$ without evaluating
+  its periodic orbits;
+- exact control examples constructed before candidate execution;
+- primary-source bibliographic records and statements used for novelty and
+  integrity review;
+- exact symbolic identities generated by the static audit.
+
+### Forbidden
+
+- external prime tables or preselected prime labels;
+- Riemann-zero data or files containing zeros;
+- candidate periodic-point or action computation during this task;
+- fitting, unfolding, reordering, scaling, or matching to primes or zeros;
+- post-hoc parameter or normalization changes;
+- floating near-equalities treated as exact evidence;
+- sealed numerical results from earlier candidates.
+
+The symbol $p$ is universally quantified in the theorem.  No list of primes
+is needed or permitted.
+
+## 5. Audit sequence
+
+### A0 — Source-lock integrity
+
+**Input:** `source_lock.json` only.  
+**Procedure:** parse as JSON; record SHA-256; confirm candidate execution
+counters are zero and all forbidden-data flags are false.  
+**Pass rule:** valid JSON, stable hash, and no candidate output embedded.  
+**Failure action:** repair metadata before any other audit; do not change a
+mathematical prediction in response to output.
+
+### A1 — General algebraic-evaluation proof
+
+**Input:** Theorem A and assumptions.  
+**Procedure:** independently reconstruct the proof on affine charts;
+explicitly check number-field descent, nonvanishing denominators, finite
+summation, and complex conjugation for the real/modulus corollaries.  
+**Pass rule:** every asserted transform remains in
+$\overline{\mathbb Q}$ using only algebraic field operations.  
+**Failure action:** narrow the theorem before any candidate computation.
+
+### A2 — Transcendence implication
+
+**Input:** the exact Hermite--Lindemann statement.  
+**Procedure:** check separately the cases $A=0$, $\beta=1$, complex branches,
+algebraic scale, average action, repetition, real part, imaginary part, and
+modulus.  
+**Pass rule:** no conclusion relies on a principal-branch convention;
+$\beta=0$ is classified as having no complex logarithm, and for $\beta=1$
+the trivial case $A=0$ is retained.  
+**Failure action:** delete the affected extension while preserving only the
+proved core.
+
+### A3 — Controls-first gauge audit
+
+Run the following exact symbolic controls before touching any Hénon orbit:
+
+| Control | Frozen input | Expected result |
+|---|---|---|
+| Exact gauge | $\theta'=\theta+d\chi$ and $G'=G+\chi\circ F-\chi$ | Cyclic difference is exactly zero. |
+| Algebraic constant | $G'=G+C$, $C\in\overline{\mathbb Q}$ | Period-$n$ action shifts by $nC$ and remains algebraic. |
+| Algebraic step constants | $G'_j=G_j+\chi_{j+1}\circ F_j-\chi_j+C_j$ | General shift $\chi_n(P_n)-\chi_0(P_0)+\sum_jC_j$; matching endpoints remove only the endpoint term. |
+| Algebraic endpoint mismatch | Defined algebraic $\chi_n(P_n)\ne\chi_0(P_0)$ | Short formula stops, but the full shift and algebraicity survive. |
+| Transcendental constant | $F=\mathrm{id}$ and $G=\log 2$ | Every fixed-point action is $\log 2$; broad map-only claim is false. |
+| Target injection | $C=(\log p-A)/n$ | Shifted action is $\log p$; classify as forbidden target injection. |
+| Multivalued gauge | formal logarithmic $\chi$ | Not a single-valued $\overline{\mathbb Q}$-rational gauge; telescoping may acquire monodromy, so classify outside scope. |
+
+**Pass rule:** the report distinguishes numerical gauge invariance
+($C=0$) from invariance of algebraicity ($C$ algebraic).  
+**Failure action:** stop; normalization is the central validity gate.
+
+### A4 — Hénon static identity audit
+
+**Input:**
+
+$$
+H_a(q,p)=(q^2-a-p,q),\quad
+\theta=p\,dq,\quad
+G=\frac23q^3-pq,\quad
+L_a=\frac13q^3-aq-qQ.
+$$
+
+**Procedure:**
+
+1. compute $H_a^*\theta-\theta-dG$ symbolically;
+2. compute $\partial_qL_a-p$ and $-\partial_QL_a-P$ on the graph;
+3. substitute $Q=q^2-a-p$ into $L_a+G$;
+4. derive $p_j=q_{j-1}$ and
+   $q_{j+1}+q_{j-1}=q_j^2-a$ independently;
+5. check periods 1 and 2 only as indexing/sign controls, without solving at
+   the inherited parameter.
+
+**Pass rule:** every residual is the zero polynomial and the two action
+conventions differ by exactly one minus sign.  
+**Failure action:** correct the convention in all files and repeat A1--A4.
+
+### A5 — Hénon algebraicity and $S$-integrality audit
+
+**Geometry subtest:** homogenize the $n$ cyclic recurrence equations and
+set $Z=0$; verify that all homogeneous coordinates are forced to zero.  Then
+justify why a positive-dimensional projective component would meet the
+hyperplane at infinity.  Include the repeated-neighbor indexing in the
+special cases $n=1,2$: equal neighbors occupy two slots and are not
+deduplicated.
+
+**Valuation subtest:** start with $a\in\mathcal O_{K_0,S_0}$, pass to an
+orbit field $K/K_0$, and extend $S_0$ to the places $S$ of $K$ above it.
+At a finite place outside $S$, select a coordinate of
+maximal norm $R$.  Verify that $R>1$ forces simultaneously
+$|q_j^2-a|=R^2$ and $|q_{j+1}+q_{j-1}|\le R$.  Track the coefficient $1/3$
+in $G$ and assert only that $3\mathcal A_G$ is $S$-integral.
+
+**Pass rule:** both arguments work uniformly for every period and do not use
+candidate orbit output.  
+**Failure action:** retain the general conditional theorem C1--C2 but remove
+or narrow the Hénon automatic-coordinate or integrality specialization.
+
+### A6 — Independent counterexample audit
+
+Give a second reviewer only the frozen theorem statement, assumptions, and
+controls, not the first proof.  The reviewer must attempt to break:
+
+- algebraic evaluation at poles or indeterminacies;
+- additive normalization and target-dependent constants;
+- exact versus closed non-exact primitive changes;
+- single-valued versus multivalued potentials;
+- complex branches, real/imaginary parts, and modulus;
+- algebraic scaling, averaging, and repetition;
+- Hénon sign and cyclic indexing;
+- the projective zero-dimensional argument;
+- the $S$-integral denominator-$3$ claim;
+- post-processing such as $\log|\mathcal A_G|$.
+
+**Pass rule:** no counterexample survives all frozen hypotheses; every valid
+counterexample is converted into an explicit boundary or nonclaim.  
+**Failure action:** mark the source lock `REJECTED_OR_REQUIRES_AMENDMENT` and
+do not execute the candidate.
+
+### A7 — Novelty and positioning audit
+
+**Procedure:** compare the exact contribution against work on exact
+symplectic generating functions, periodic action spectra, Hénon maps,
+arithmetic Hénon dynamics, Hermite--Lindemann, and prime-logarithm periodic
+orbit motivation.  Use at least three query variants per core claim and
+prefer original or publisher records.  
+**Pass rule:** position the result only as a narrow design certificate; make
+no priority claim.  
+**Failure action:** merge it into a broader negative-results paper or retain
+it as an internal certificate.
+
+## 6. Optional later execution stage — not authorized now
+
+If a later session explicitly opens candidate execution, the maximum exact
+audit is periods $n=1,2,3$ for the inherited $a=u$.  It may compute cyclic
+ideals and exact actions only to check formulas and software.  It must not:
+
+- enumerate external primes;
+- compare floating values with logarithms;
+- use absence through period 3 as evidence for the all-period result;
+- tune $a$, $G$, $C$, a scale, or a branch after inspection.
+
+The expected exact outcome is simply that each computed action satisfies an
+algebraic polynomial.  The Hermite--Lindemann exclusion remains a theorem,
+not a measured statistic.
+
+## 7. Metrics and reporting schema
+
+This is a categorical proof audit; means, confidence intervals, and
+$p$-values are inapplicable.
+
+| Metric | Allowed values | Success criterion |
+|---|---|---|
+| Theorem assumption closure | PASS / FAIL | PASS |
+| Hermite--Lindemann implication | PASS / FAIL | PASS |
+| Gauge residual | zero / nonzero | zero |
+| Hénon exactness residual | zero / nonzero | zero |
+| Hénon type-1 residual | zero / nonzero | zero |
+| Point-at-infinity set | empty / nonempty | empty |
+| $S$-integral maximum contradiction | valid / invalid | valid |
+| Untracked denominator | none / present | none beyond places above 3 |
+| Counterexample within hypotheses | absent / present | absent |
+| Standalone novelty | 0--10 ordinal assessment | report honestly; no threshold inflation |
+
+Every failure must be reported by claim ID.  A control failure is an
+implementation or theorem-definition failure, never favorable evidence.
+
+## 8. Stop/go rules
+
+- **GO as certificate:** A0--A7 pass and the contribution is described as
+  an elementary all-period provenance obstruction.
+- **MERGE:** the theorem is correct but novelty remains below standalone
+  depth; integrate it into a broader negative-results or roadmap paper.
+- **NARROW:** the general conditional theorem survives but the Hénon
+  automatic algebraicity or $S$-integral specialization fails review.
+- **STOP:** a counterexample satisfies every frozen hypothesis, the
+  normalization cannot be made intrinsic, or the classical transcendence
+  implication was misstated.
+
+The following are mandatory local stops even if the core theorem has passed:
+
+- a primitive change is closed but not proved exact: stop the gauge claim and
+  open a separate period-class ledger;
+- a potential, transition, or gauge is multivalued: stop the absolute-action
+  claim until branches and monodromy are frozen and audited;
+- local/step representatives are present: use the full endpoint formula.
+  Stop the shorter $\sum_jC_j$ expression unless endpoints are compatible;
+  an incompatible but defined algebraic mismatch preserves the source lock,
+  whereas an undefined, multivalued, or transcendental mismatch stops it;
+- a complex action is postprocessed: stop at algebraicity of
+  $\operatorname{Re}A$, $\operatorname{Im}A$, and $|A|$; do not transfer the
+  theorem to $\arg A$ or $\log|A|$;
+- an $S$-integrality conclusion is reported for Hénon: stop at
+  $3\mathcal A_G$ being $S$-integral unless a separate proof removes the
+  denominator at places above 3.
+
+Passing this plan does not authorize prime/zero matching, quantization, a
+dynamical determinant, or a new candidate search.
+
+## 9. Resources
+
+- CPU: less than 10 minutes for parsing, hashing, and optional symbolic
+  residual checks.
+- Memory: less than 1 GiB.
+- GPU: none.
+- Human data: none.
+- Candidate orbit compute: zero in this task.
+
+## 10. Required artifacts
+
+- `notes/RESEARCH_QUESTION.md`
+- `notes/PROOF_PACKAGE.md`
+- `notes/DERIVATION_PACKAGE.md`
+- `notes/NOVELTY_AUDIT.md`
+- `notes/COUNTEREXAMPLE_AUDIT.md`
+- `experiments/source_lock.json`
+- `experiments/EXPERIMENT_PLAN.md`
+- `experiments/EXPERIMENT_TRACKER.md`
+
+The theory/source-lock stage is complete only when the JSON validates, the
+hash is recorded, the counterexample audit is independently cross-checked,
+and all candidate execution counters remain zero.

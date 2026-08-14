@@ -1,0 +1,382 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\Resultant}{Res}
+\DeclareMathOperator{\FieldNorm}{N}
+\title{Cyclic Resultant Packets and the Norm Trilemma\\for H\'enon Monodromy}
+\author{Liang Wang$^{*1}$\\
+\small $^{1}$School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Wuhan 430074, P.R. China\\
+\small $^*$Corresponding author}
+\date{Preprint, August 2026}
+\hypersetup{pdfauthor={Liang Wang},pdftitle={Cyclic Resultant Packets and the Norm Trilemma for Henon Monodromy}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Termwise rational-prime labels for a certified area-preserving H\'enon
+survivor are obstructed, leaving cyclic resultants and prime-ideal packets as
+the smallest collective arithmetic candidates.  We prove a norm trilemma for
+every reciprocal algebraic-unit multiplier.  The principal cyclic
+determinant ideal is an exact square, and its norm from the full multiplier
+field is an integer square.  For every cyclotomic index $n>2$, the full
+primitive norm is also a square because a unit-normalized cyclotomic value
+lies in the fixed trace field.  In contrast, the minimal trace-field norm and
+the principal-ideal packet survive; their canonical half norms can be prime
+or composite.  They form repetition-indexed sequences rather than powers of
+one Euler label.  An exact certificate uses the signed primitive H6
+multipliers of periods one, three, and four.  It verifies 36 resultant rows,
+including all 30 square-theorem rows, and detects the period-three sign,
+$n=2$ boundary, nonreciprocal mutation, and false one-scalar power law.  A
+quadratic primitive-divisor theorem gives genuine fresh divisors for the
+period-four sequence beyond index 12, but no theorem assembles these packets
+into all rational primes or a Riemann determinant.  Thus full-field
+scalarization is rejected while trace-field and ideal packets remain a
+precise open route.
+\end{abstract}
+
+\section{Introduction}
+
+The pressure-normalized instability roof of the certified H6 H\'enon
+survivor has the dynamical prime-orbit law $\Pi(T)\sim e^T/T$.  That counting
+law does not make the local orbit labels rational primes.  The preceding
+scalar audit proves more: no common real power of the intrinsic multipliers
+can turn every primitive orbit into a rational prime.  Any remaining
+arithmetic bridge must therefore carry several repetitions or several
+Galois conjugates at once.
+
+Cyclic resultants are the first natural collective object.  For a monic
+polynomial $f$, the sequence
+\[
+R_r(f)=\Resultant(f,X^r-1)
+\]
+records the interaction of its roots with all $r$-th roots of unity.  These
+sequences determine reciprocal polynomials under broad hypotheses and obey
+polynomial recurrences \cite{hillar2005cyclic,hillar2004recurrences}.  For a
+determinant-one return map with eigenvalues $\lambda,\lambda^{-1}$, the same
+sequence is generated directly by $1-\lambda^r$.  It is not fitted to prime
+data.
+
+This paper asks whether taking ideals or norms of that object repairs the
+failed scalar label.  The answer has three parts.
+\begin{enumerate}
+\item We prove that the cyclic determinant ideal and its full
+multiplier-field norm are exact squares.  The same full-field square
+obstruction holds for every primitive cyclotomic norm after level two.
+\item We isolate the canonical trace-field half norm.  It is an integer,
+can be prime, and retains nontrivial arithmetic information, but it depends
+on the repetition index and fails the one-label Euler power law in all three
+exact H6 controls.
+\item We retain the principal cyclotomic ideals as a source-native collective
+packet.  A primitive-divisor theorem applies to the period-four quadratic
+sequence, but no available result assembles the varying H6 packets into an
+all-prime von Mangoldt trace.
+\end{enumerate}
+
+The distinction between full and minimal norm is essential.  The cyclic
+determinant already belongs to the fixed trace field.  Taking its norm from
+the larger multiplier field counts the inversion pair twice and creates the
+square.  Figure~\ref{fig:trilemma} displays the three resulting lanes.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=8mm and 7mm,
+  box/.style={draw,rounded corners,align=center,inner sep=5pt,text width=0.27\textwidth},
+  arr/.style={-{Latex[length=2mm]},thick}
+]
+\node[box] (local) {$\lambda,\lambda^{-1}$\\$\mathfrak A_r=(1-\lambda^r)$};
+\node[box,below left=of local] (full) {full $K$-norm\\exact square\\\textbf{scalar stop}};
+\node[box,below=of local] (trace) {minimal $K^+$-norm\\Lehmer--Pierce sequence\\\textbf{survives}};
+\node[box,below right=of local] (ideal) {$\mathfrak C_n=(\Phi_n(\lambda))$\\prime-ideal packet\\\textbf{survives}};
+\draw[arr] (local) -- (full);
+\draw[arr] (local) -- (trace);
+\draw[arr] (local) -- (ideal);
+\end{tikzpicture}
+\caption{The norm trilemma.  Full multiplier-field scalarization pairs the
+inversion conjugates twice and is a square.  Passing to the minimal trace
+field retains the cyclic resultant sequence; retaining ideals preserves still
+more splitting data.  Neither surviving lane is yet an all-prime H\'enon
+trace.}
+\label{fig:trilemma}
+\end{figure}
+
+\section{Signed H6 monodromy and packet definitions}
+
+The map is
+\[
+H_6(q,p)=(1-6q^2-p,q),
+\qquad
+J(q)=\begin{pmatrix}-12q&-1\\1&0\end{pmatrix}.
+\]
+Every chronological return matrix belongs to $SL_2$ over the corresponding
+periodic-point ring.  If $M_\gamma$ is one such matrix, write $\lambda$ for
+its signed unstable eigenvalue.  The other eigenvalue is $\lambda^{-1}$.
+The sign matters: the exact period-three trace is negative, so the actual
+unstable eigenvalue is $-L_3$, not its positive modulus $L_3$.
+
+The three source-locked primitive examples have signed minimal polynomials
+\begin{align}
+f_1(X)&=X^4-4X^3-22X^2-4X+1,\label{eq:f1}\\
+f_3^-(X)&=X^4+76X^3-7374X^2+76X+1,\label{eq:f3}\\
+f_4(X)&=X^2-578X+1.\label{eq:f4}
+\end{align}
+They are monic reciprocal polynomials with constant term one.  Hence their
+roots are algebraic units of norm one, and the substitution
+$\iota(\lambda)=\lambda^{-1}$ defines a nontrivial automorphism of
+$K=\mathbb Q(\lambda)$.  Let $K^+=K^{\langle\iota\rangle}$ be its fixed
+trace field.
+
+\begin{definition}[Cyclic and primitive packets]
+For $r,n\ge1$, define
+\[
+\mathfrak A_r=(1-\lambda^r),
+\qquad
+\mathfrak C_n=(\Phi_n(\lambda))
+\]
+as principal ideals of $\mathcal O_K$.  Define the cyclic determinant
+\[
+D_r=\det(I-M_\gamma^r)
+=(1-\lambda^r)(1-\lambda^{-r})\in\mathcal O_{K^+}.
+\]
+Whenever $(D_r)$ is compared with $\mathfrak A_r$, its principal ideal in
+$\mathcal O_{K^+}$ is extended to $\mathcal O_K$.
+The minimal rational cyclic norm is
+\[
+a_r=\left|\FieldNorm_{K^+/\mathbb Q}(D_r)\right|.
+\]
+For $n>2$, define
+\[
+\beta_n=\lambda^{-\varphi(n)/2}\Phi_n(\lambda),
+\qquad
+b_n=\left|\FieldNorm_{K^+/\mathbb Q}(\beta_n)\right|.
+\]
+\end{definition}
+
+Because $f_\lambda$ is monic,
+\begin{equation}\label{eq:resultants}
+a_r=\left|\Resultant(f_\lambda,X^r-1)\right|,
+\qquad
+\left|\FieldNorm_{K/\mathbb Q}\Phi_n(\lambda)\right|
+=\left|\Resultant(f_\lambda,\Phi_n)\right|.
+\end{equation}
+
+\section{The norm trilemma}
+
+\begin{lemma}[Canonical ideal packets]\label{lem:canonical}
+The ideals $\mathfrak A_r$ and $\mathfrak C_n$ do not depend on choosing
+$\lambda$ or $\lambda^{-1}$.  Moreover,
+\begin{equation}\label{eq:ideal-product}
+\mathfrak A_r=\prod_{n\mid r}\mathfrak C_n.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The identity
+$1-\lambda^{-r}=-\lambda^{-r}(1-\lambda^r)$ shows that the two generators
+of $\mathfrak A_r$ are associates.  For $n>1$, cyclotomic reciprocity gives
+$\Phi_n(X)=X^{\varphi(n)}\Phi_n(X^{-1})$, so inversion changes
+$\Phi_n(\lambda)$ by a unit.  The same assertion for $n=1$ follows from
+$\Phi_1(\lambda^{-1})=-\lambda^{-1}\Phi_1(\lambda)$.  Finally,
+$1-\lambda^r=-\prod_{n\mid r}\Phi_n(\lambda)$, which proves
+\eqref{eq:ideal-product} after passing to ideals.
+\end{proof}
+
+\begin{theorem}[Full-field square norms and their minimal repair]
+\label{thm:square}
+For every $r\ge1$,
+\begin{equation}\label{eq:det-square}
+(D_r)=\mathfrak A_r^2,
+\qquad
+\left|\FieldNorm_{K/\mathbb Q}(D_r)\right|=a_r^2.
+\end{equation}
+where the ideal equality is in $\mathcal O_K$.
+For every $n>2$, $\beta_n\in\mathcal O_{K^+}$ and
+\begin{equation}\label{eq:primitive-square}
+\left|\FieldNorm_{K/\mathbb Q}\Phi_n(\lambda)\right|=b_n^2.
+\end{equation}
+In contrast, $a_r$ and $b_n$ themselves are not forced to be squares.
+\end{theorem}
+\begin{proof}
+The eigenvalue formula gives
+\[
+D_r=-\lambda^{-r}(1-\lambda^r)^2.
+\]
+The prefactor is a unit, proving the ideal identity.  Since $D_r$ is fixed by
+$\iota$, it belongs to $K^+$.  Norm transitivity gives
+\[
+\FieldNorm_{K^+/\mathbb Q}(D_r)
+=\FieldNorm_{K/\mathbb Q}(1-\lambda^r),
+\]
+while $[K:K^+]=2$ gives
+$\FieldNorm_{K/\mathbb Q}(D_r)=\FieldNorm_{K^+/\mathbb Q}(D_r)^2$.
+This proves \eqref{eq:det-square} and identifies the non-doubled norm $a_r$.
+
+For $n>2$, $\varphi(n)$ is even.  The factor
+$\lambda^{-\varphi(n)/2}$ is integral because $\lambda$ is a unit, so
+$\beta_n\in\mathcal O_K$.  Cyclotomic reciprocity gives
+\[
+\iota(\beta_n)
+=\lambda^{\varphi(n)/2}\Phi_n(\lambda^{-1})
+=\lambda^{-\varphi(n)/2}\Phi_n(\lambda)=\beta_n.
+\]
+Thus $\beta_n\in\mathcal O_{K^+}$.  Since
+$\Phi_n(\lambda)=\lambda^{\varphi(n)/2}\beta_n$ and
+$\FieldNorm_{K/\mathbb Q}(\lambda)=1$, taking norms proves
+\eqref{eq:primitive-square}.
+\end{proof}
+
+\begin{corollary}[Scoped scalar obstruction]\label{cor:obstruction}
+Neither $|\FieldNorm_{K/\mathbb Q}(D_r)|$ nor
+$|\FieldNorm_{K/\mathbb Q}\Phi_n(\lambda)|$ for $n>2$ can be a rational prime.
+This corollary does not reject $a_r$, $b_n$, or the ideals
+$\mathfrak C_n$.
+\end{corollary}
+\begin{proof}
+The displayed full-field norms are nonzero integer squares.  They are nonzero
+because $\lambda$ is not a root of unity.  A nonzero integer square is not a
+rational prime.  The final sentence follows because Theorem~\ref{thm:square}
+does not force its square roots or underlying ideals to be trivial.
+\end{proof}
+
+The three lanes are now mathematically distinct.  Full-field norm promotion
+is stopped by Corollary~\ref{cor:obstruction}.  The trace-field sequence is a
+valid collective scalar sequence, but it supplies one integer per repetition
+index.  The ideal packet retains the splitting and residue-degree data that
+both norm maps forget.
+
+\section{Exact H6 certificate}
+
+The certificate evaluates \eqref{eq:resultants} for the three signed
+polynomials \eqref{eq:f1}--\eqref{eq:f4} and indices $1\le n\le12$.  Every
+cyclic resultant equals the product of its primitive cyclotomic resultants.
+All 30 rows with $n>2$ satisfy \eqref{eq:primitive-square}.  Table
+\ref{tab:ledger} shows selected rows.
+
+The canonical core-certificate digest is
+\begin{center}
+\small\texttt{3bb27b0da0d23743e65629f5293a6e3166a8a2fe09e9822cfced763a496a05e7}.
+\end{center}
+
+\begin{table}[t]
+\centering
+\caption{Selected exact primitive norms.  The $n=2$ rows are sharp controls:
+$\varphi(2)$ is odd, so Theorem~\ref{thm:square} does not assert a half norm.
+For $n>2$, the full primitive norm is the square of the displayed integer.}
+\label{tab:ledger}
+\small
+\resizebox{\textwidth}{!}{\input{../figures/packet_ledger.tex}}
+\end{table}
+
+The half norms are not uniformly prime or composite.  For period one,
+$b_3=19$ is prime but $b_4=24$ is composite.  For the signed period-three
+orbit, $b_3=7451$ is prime; replacing the signed eigenvalue by its positive
+modulus mutates this value to $7299$.  For period four, $b_6=577$ is prime.
+Across all 30 theorem rows, six half norms are prime.
+
+Nor does the surviving cyclic sequence come from one fixed Euler label.  The
+first two values are
+\[
+\begin{array}{c|rrr}
+\text{primitive period}&1&3&4\\\hline
+a_1&28&7220&576\\
+a_2&336&54323280&334080
+\end{array}
+\]
+and $a_2\ne a_1^2$ in every column.  This finite calculation does not reject
+all generalized determinant uses of $(a_r)$; it rejects the specific repair
+that would replace one primitive-orbit Euler label $q$ by $q^r$ at every
+repetition.
+
+The theorem's range and assumptions are executable.  At $n=2$, the three
+primitive norms $12$, $7524$, and $580$ are nonsquares.  For the
+nonreciprocal polynomial $X^2-2X+2$, the primitive index-three resultant is
+$13$, also a nonsquare.  These controls prevent the proof from silently
+dropping the even-totient or reciprocal-unit hypotheses.
+
+\section{Primitive divisors: a positive boundary}
+
+Primitive-divisor theory explains why the surviving packet should not be
+discarded.  Postnikova and Schinzel developed primitive divisors for
+$a^n-b^n$ over algebraic number fields \cite{postnikova1968primitive}.
+Flatters studies the Lehmer--Pierce sequence
+\[
+\Delta_r=\FieldNorm_{K/\mathbb Q}(u^r-1)
+\]
+for a positive unit in a real quadratic field \cite{flatters2007primitive}.
+For norm-one units, his Theorem~1.4 gives a primitive rational prime divisor
+for every term beyond the twelfth.  Here a primitive divisor of $a_r$ means a
+rational prime dividing $a_r$ that divides no earlier nonzero $a_m$ with
+$1\le m<r$.
+
+This theorem applies directly to the period-four multiplier
+$L_4=289+24\sqrt{145}$: it is positive, lies in the real quadratic field
+$\mathbb Q(\sqrt{145})$, and has norm one.  Therefore the period-four
+sequence $a_r$ has a fresh rational prime divisor for every $r>12$.  This is
+a genuine source-backed arithmetic advance.  It says that new primes occur
+inside the collective packets; it does not say that $a_r$ itself is prime or
+that the packets enumerate all rational primes with von Mangoldt
+multiplicity.
+
+The two quartic H6 multiplier fields are outside Flatters' exact quadratic
+scope.  General algebraic primitive-divisor results motivate a prime-ideal
+analysis, but a usable H6 bridge would still have to control orbit-to-orbit
+variation, residue degrees, repeated factors, and the pressure clock.  We do
+not import a theorem across those missing interfaces.
+
+\section{Route-A evaluation and limitations}
+
+The collective packet candidate has exact local provenance but no global
+Riemann object.  Its strict Route-A tuple is
+\[
+(A1_{\rm WEAK},A2_{\rm FAIL},A3_{\rm FAIL},A4_{\rm FORMAL}),
+\]
+with overall status \texttt{ROUTE\_A\_EXPLORATORY}.  The full-field
+rational-prime scalarization is separately
+\texttt{STOP\_SCOPED\_SQUARE\_NORM}.  The positive coordinate is the exact
+trace-field/ideal packet, including eventual primitive divisors for the
+period-four sequence.
+
+The present paper does not construct an Euler product over all primitive H6
+orbits, a trace-class transfer operator, analytic continuation, a functional
+equation, a Riemann--von Mangoldt law, or a quantum operator.  Route B is
+therefore not authorized.  An all-prime claim would require a new packet
+assembly theorem that keeps prime ideals, residue degrees, repetition
+indices, and signed H6 orbit weights on the same ledger.
+
+\section{Conclusion}
+
+Cyclic resultants do not restore the failed one-rational-prime-per-orbit
+picture.  Full multiplier-field norms are forced squares, while the minimal
+trace-field norm and principal ideals retain genuine arithmetic information
+only as repetition-indexed packets.  The period-four sequence even contains
+eventual primitive rational divisors, so the collective lane is nonempty.
+The next natural problem is no longer to invent another scalar label.  It is
+to decide whether prime-ideal packets from many primitive H6 orbits admit a
+single signed, pressure-compatible trace with controlled multiplicities.
+
+\section*{Reproducibility and disclosure}
+
+The exact SymPy certificate, adversarial unit tests, generated table, source
+audit, and hash-locked dependencies accompany the paper.  The computations
+use integer resultants and symbolic identities; decimal root approximations
+are unnecessary.  An AI coding and writing assistant was used to help
+organize the derivation and implementation.  Every formal claim is restated
+in the proof package and independently checked by exact tests where finite
+verification is possible.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

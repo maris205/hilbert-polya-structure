@@ -1,0 +1,238 @@
+{
+  "candidate_id": "additive_finite_arithmetic_capacity_v2",
+  "lock_version": 2,
+  "lock_date_utc": "2026-08-14",
+  "lock_status": "SOURCE_LOCKED_PREEXECUTION_FORMAL_RUN_REQUIRES_INDEPENDENT_CODE_REVIEW",
+  "safe_title": "Finite Arithmetic Capacity under Additive Locally Constant, Good-Reduction Multiplier, and Algebraic-Action Readouts",
+  "paper_role": "scoped additive capacity theorem and machine-auditable architecture certificate",
+  "positioning": "moderate synthesis and certificate novelty; no component priority, universal no-go theorem, complete trichotomy, or Hilbert-Polya construction claim",
+  "version_history": {
+    "v1_candidate_id": "arithmetic_clock_escape_trichotomy_v1",
+    "v1_source_lock_sha256": "f5465d92601cf8cd179bd514a08ca991992e718508ec54bf956d36d1280b80c9",
+    "v1_disposition": "selector theorem correct but demoted to a corollary after independent review",
+    "independent_review_path": "notes/INDEPENDENT_PROOF_NOVELTY_REVIEW.md",
+    "independent_review_sha256": "4036f346b75e44ff1acc8402cc1b17f497f3510ee0f4aa6456288f9856fbb63b",
+    "independent_review_verdict": "REPAIR",
+    "independent_review_novelty_score": "5.5/10",
+    "independent_review_occurred_before_paper5_implementation": true,
+    "independent_review_occurred_before_any_candidate_execution": true,
+    "independent_review_accessed_prime_or_zero_data": false
+  },
+  "primary_theorem": {
+    "name": "additive finite arithmetic-capacity bound",
+    "hit_semantics": "P_hit is a set of distinct positive rational primes; repeated orbit hits and repeated certificates do not increase its cardinality",
+    "statement": "If every realized prime p has a representation log(p)=v_p+log(q_p)+alpha_p with v_p in one fixed finite-dimensional Q-space V, q_p a positive real algebraic number whose square is an S_Q-unit for one fixed finite rational-prime set S_Q, and alpha_p real algebraic, then cardinality(P_hit) <= dim_Q(V)+cardinality(S_Q).",
+    "certificate_selection": "choose one arbitrary valid representation for each distinct prime before examining any finite rational relation",
+    "no_prior_finiteness_assumption": true,
+    "proof_spine": [
+      "remove the at most cardinality(S_Q) hit primes inside S_Q",
+      "clear denominators in a hypothetical Q-linear relation among the selected v_p terms",
+      "substitute the certificates to obtain log(R)=beta with R positive algebraic and beta real algebraic",
+      "Hermite-Lindemann forces beta=0 and hence R=1",
+      "square the algebraic identity so that only certified q_p^2 terms occur",
+      "pass the finitely many factors to one number field and preserve unit status by extension invariance",
+      "at a place over each distinct outside prime, valuation isolation forces its integer relation coefficient to vanish",
+      "the outside v_p terms are Q-linearly independent and number at most dim_Q(V)"
+    ]
+  },
+  "canonical_additive_readout": {
+    "form": "L=v+log(q)+alpha",
+    "L_term": "v belongs to one common fixed finite-dimensional Q-vector space V contained in R",
+    "M_term": "q belongs to Qbar intersect R_{>0} and q^2 is an S_Q-unit",
+    "A_term": "alpha belongs to Qbar intersect R",
+    "real_log_only": true,
+    "target_independence": "all maps, weights, coefficients, supports, normalizations, and assembly operations are frozen independently of the target prime",
+    "allowed_operations": [
+      "finite rational sums, differences, repetitions, and rational scalings of L terms",
+      "finite rational sums of real logarithms of positive M moduli, after adjoining positive algebraic roots",
+      "negative rational multiplier powers via inversion",
+      "finite sums and algebraic scalings of safely evaluated real algebraic A terms"
+    ],
+    "excluded_operations": [
+      "algebraic irrational coefficients on multiplier logarithms",
+      "arbitrary nonlinear mixing of component outputs",
+      "orbit-indexed or prime-indexed lookup tables",
+      "a logarithm applied after an algebraic action",
+      "point-dependent roofs without a proved common finite-rank space",
+      "complex logarithm branches",
+      "approximate or tolerance-based matching"
+    ]
+  },
+  "s_unit_definition": {
+    "definition": "A nonzero algebraic x is an S_Q-unit when its additive valuation is zero at every finite place not above a rational prime in S_Q, in any number field containing x after exceptional places are saturated above S_Q.",
+    "finite_extension_invariant": true,
+    "multiplication_invariant": true,
+    "inversion_invariant": true,
+    "rational_power_rule": "after adjoining the unique positive real algebraic roots, if each q_j^2 is an S_Q-unit then q^2 for q=product(q_j^(c_j)), c_j in Q, is also an S_Q-unit",
+    "certified_object": "q^2, not necessarily q in the original field",
+    "zero_excluded": true,
+    "one_allowed": true
+  },
+  "class_L": {
+    "architecture": "finite family of finite directed graphs with fixed finite-memory locally constant readouts",
+    "higher_block_rule": "fixed finite memory is absorbed into a finite higher-block graph",
+    "combined_space": "V=span_Q of every edge readout across the finite architecture",
+    "algebraic_edge_weights_required": false,
+    "nonclaim": "general point-dependent Holder roofs and matrix-cocycle spectral radii need not have finite rational rank"
+  },
+  "class_M": {
+    "architecture": "finite family of finite compositions of monic area-preserving generalized Henon factors of degree at least two over S-integer rings",
+    "periodic_coordinate_certificate": [
+      "expand a periodic orbit into the cyclic scalar recurrence",
+      "retain cyclic neighbor multiplicities, including the doubled neighbor in a one-step cycle",
+      "homogenize each recurrence equation to its own degree",
+      "monicity removes every projective point at infinity",
+      "a projective variety contained in an affine chart is projective and affine and therefore zero-dimensional",
+      "the nonarchimedean maximum argument proves integrality outside the fixed bad places"
+    ],
+    "multiplier_certificate": [
+      "derivative factors, monodromy, and inverse monodromy are integral with determinant one outside the bad places",
+      "return eigenvalues are units outside those places",
+      "pass to a normal extension and saturate all places over S_Q before conjugation",
+      "q^2=lambda*conjugate(lambda) is an S_Q-unit for q=abs(lambda)>0"
+    ],
+    "forbidden_shortcut": "do not identify conjugate(lambda) with reciprocal(lambda)",
+    "nonclaim": "the certificate does not assert algebraicity of log(abs(lambda)), classify arbitrary irrational moduli, or treat approximate primes"
+  },
+  "class_A": {
+    "architecture": "algebraic exact-symplectic maps with single-valued Qbar-rational potentials, algebraic periodic points, regular evaluation, and target-independent algebraic normalizations",
+    "allowed_algebraic_terms": [
+      "action",
+      "algebraic scale",
+      "average",
+      "repetition",
+      "real part",
+      "imaginary part",
+      "modulus",
+      "finite algebraic endpoint, step, and gauge shifts"
+    ],
+    "gauge_distinction": "algebraic endpoint and gauge shifts preserve algebraicity whether or not they cancel; endpoint compatibility is required for canonical gauge invariance",
+    "excluded": [
+      "closed non-exact primitive changes",
+      "multivalued logarithmic gauges",
+      "poles or undefined orbit evaluations",
+      "transcendental constants or endpoint jumps",
+      "log(abs(action)) or another transcendental postprocessing"
+    ]
+  },
+  "selector_corollary": {
+    "status": "COROLLARY_NOT_MAIN_THEOREM",
+    "L_embedding": "(v,q,alpha)=(ell_L,1,0)",
+    "M_embedding": "(v,q,alpha)=(0,abs(lambda),0)",
+    "A_embedding": "(v,q,alpha)=(0,1,A)",
+    "bound": "cardinality(P_hit) <= dim_Q(V)+cardinality(S_Q)"
+  },
+  "mandatory_repair_closure": {
+    "B01_additive_main_selector_corollary": true,
+    "B02_canonical_form_allowed_excluded_operations": true,
+    "B03_uniform_extension_invariant_unit_definition": true,
+    "B04_positive_algebraic_q_and_squared_unit": true,
+    "B05_full_transcendence_squaring_valuation_proof": true,
+    "B06_class_M_dimension_homogenization_normal_saturation": true,
+    "B07_class_L_higher_block_recoding": true,
+    "B08_class_A_gauge_distinction_and_A2_control": true,
+    "B09_set_selection_power_and_real_log_edges": true,
+    "B10_escape_gates_are_scoped_necessary_failures": true
+  },
+  "boundary_controls": [
+    {
+      "control_id": "K001_formal_rank_sharpness",
+      "expected": "a formal rank-r graph with r deliberately inserted independent labels realizes r labels; no target enumeration is performed and the construction is target injection"
+    },
+    {
+      "control_id": "K002_bad_support_two",
+      "expected": "a=-15/16 and fixed point (5/4,5/4) give exact trace 5/2, determinant 1, and eigenvalues 2 and 1/2; the displayed support is already bad"
+    },
+    {
+      "control_id": "K003_positive_dimensional_transcendental_injection",
+      "expected": "the identity exact map on A^2 with symbolic constant potential LOG_2 has action LOG_2 and deliberately violates algebraic normalization; no numeric logarithm is evaluated"
+    },
+    {
+      "control_id": "K004_set_and_selection_semantics",
+      "expected": "repeated orbit certificates for one formal prime label count once, and any one valid certificate may be selected before a relation"
+    },
+    {
+      "control_id": "K005_unit_edge_cases",
+      "expected": "q=1, negative powers, and rational powers are admitted under positivity and finite-extension unit rules"
+    }
+  ],
+  "escape_certificate": {
+    "necessary_failures": [
+      "lose the common finite-rank locally constant space V",
+      "lose the fixed finite bad-prime support S_Q for squared moduli",
+      "lose real-algebraic target-independent action evaluation or normalization",
+      "leave the rational additive normal form and prove a new observable theorem"
+    ],
+    "mutually_exclusive": false,
+    "jointly_exhaustive_for_all_dynamics": false,
+    "sufficient_for_arithmetic_correspondence": false
+  },
+  "forbidden_data": [
+    "external prime tables",
+    "generated or embedded enumerated prime target arrays",
+    "Riemann-zero tables or files",
+    "orbit-indexed or prime-indexed target lookup",
+    "parameter, coefficient, support, representation rule, normalization, or architecture selection after target inspection",
+    "nearest-prime routines, floating tolerances, numerical fitting, or approximate equality promoted to exact evidence",
+    "network retrieval during the registered audit"
+  ],
+  "fixed_control_constant_exception": "the single exact rational constant 2 in K002 and the symbolic token LOG_2 in K003 are frozen boundary controls, not a prime table, target array, search, or candidate match",
+  "forbidden_claims": [
+    "a universal no-go theorem for finite-dimensional or smooth symplectic maps",
+    "a complete, mutually exclusive, or exhaustive escape trichotomy",
+    "prime clocks require infinite dimension",
+    "escape from a certificate is sufficient for arithmetic provenance",
+    "historical priority or a first theorem claim",
+    "finite rational rank for general Holder roofs",
+    "classification of arbitrary irrational multiplier moduli",
+    "algebraicity of multiplier logarithms or return times",
+    "a Riemann-zero, determinant, quantization, or Route-B result"
+  ],
+  "preexecution_permissions": {
+    "implementation_authoring": true,
+    "syntax_compilation": true,
+    "isolated_unit_tests": true,
+    "unit_test_role": "noncandidate development checks using formal labels and frozen boundary controls; they must not write official result artifacts or emit the final theorem classification",
+    "registered_exact_static_audit": false,
+    "candidate_numerical_execution": false,
+    "prime_or_zero_data_access": false
+  },
+  "formal_run_gate": {
+    "independent_code_review_required": true,
+    "review_path": "results/CODE_REVIEW.md",
+    "authority_prefix": "CAPACITY_AUDIT_CODE_REVIEW_V1 ",
+    "required_authority_fields": {
+      "candidate_id": "additive_finite_arithmetic_capacity_v2",
+      "reviewer_independent": true,
+      "verdict": "DEPLOYMENT_PASS"
+    },
+    "source_lock_sha256_must_match_runtime_constant": true,
+    "fail_closed_on_missing_duplicate_malformed_or_stale_authority": true,
+    "registered_report_path": "results/EXPERIMENT_RESULTS.json"
+  },
+  "execution_state_at_lock": {
+    "external_prime_tables_accessed": false,
+    "prime_target_arrays_generated": false,
+    "riemann_zero_data_accessed": false,
+    "candidate_numerical_runs": 0,
+    "registered_exact_static_runs": 0,
+    "target_matches_computed": 0,
+    "paper5_figures_generated": 0,
+    "paper5_manuscript_written": false
+  },
+  "required_registered_audit_gates": [
+    "immutable source-lock and provenance validation",
+    "independent code review deployment authority",
+    "structured proof-dependency audit",
+    "canonical-form closure and exclusion audit",
+    "exact frozen boundary controls",
+    "full executable isolation scan including the scanner module",
+    "upstream Paper-3 and Paper-4 final theorem/hash consistency",
+    "single registered-run and result-manifest integrity"
+  ],
+  "decision_labels": [
+    "CAPACITY_BOUND_CERTIFIED",
+    "NARROW_OR_MERGE",
+    "REJECTED_OR_REQUIRES_AMENDMENT"
+  ]
+}

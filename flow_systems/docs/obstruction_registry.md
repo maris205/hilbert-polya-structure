@@ -1,0 +1,23 @@
+# Obstruction Registry
+
+| ID | Scope | Result | Status |
+|---|---|---|---|
+| `OBS-MOD-NORM` | standard modular geodesic clock | \(N_\gamma^r\notin\mathbb Q\) for every hyperbolic \(\gamma\), \(r\ge1\); no collision with prime-power log support | `PROVED` |
+| `OBS-MOD-TRILEMMA` | trace/norm/adjoint-trace relabellings | no simple intrinsic choice simultaneously gives rational-prime coverage, correct clock and correct exponent | `PROVED` for stated three mappings |
+| `OBS-CONST-ROOF` | any constant-roof suspension | a fixed roof can match \(\log p\) exactly for at most one distinct rational prime | `PROVED` |
+| `OBS-DEN-PACKET` | Deninger finite-kernel admissible flow | rational prime corresponds to a compact packet, not a unique isolated orbit | `PROVED`; trace normalization `OPEN` |
+| `OBS-DEN-ORBIT-PRODUCT` | conventional one-factor-per-orbit product on a Deninger prime packet | one packet contains uncountably many primitive orbits of length `log p`, so length-local finiteness fails and the positive-real Euler product diverges | `PROVED` |
+| `OBS-DEN-GLOBAL-MASS` | packetwise measured replacements | normalized Haar probability fixes only a local abstract base; current homogeneous axioms do not select the packet lift or relative masses across primes | `CONDITIONAL` non-uniqueness; source bridge `NOT_TESTABLE` |
+| `OBS-DEN-SECTION11-BRIDGE` | Deninger Section-11 convolution algebra | the group convolution and Haar normalization are genuine, but no source theorem maps them to packet returns, repetition coefficients, or a Fredholm determinant | source algebra `PROVED`; bridge `OPEN / NOT_TESTABLE` |
+| `OBS-LOCAL-GERM` | inference from local periodic-orbit trace data | one full germ does not determine a global distribution; under a complete nonzero singular-support prior, all nonzero singular germs leave a difference smooth off zero, and fixing the zero germ still leaves a globally smooth ambiguity | `PROVED` |
+| `OBS-SAME-OBJECT-SPLICE` | classical/trace/operator certificate T0--T7 | a coordinatewise union of fields from distinct source locks is not one trace bridge; a new provenance requires a theorem transporting and rederiving every field | formal certificate lemma `PROVED`; existence of future bridges not excluded |
+| `OBS-FF-ONE-CLOCK` | constant-roof Frobenius suspension over one finite field (\mathbb F_{\ell^f}) | (n\log(\ell^f)=r\log p) forces (p=\ell); one characteristic cannot supply all rational-prime clocks | `PROVED` |
+| `OBS-EULER-COMPILER` | disjoint translation circles with prescribed lengths | one circle per prescribed length compiles any locally finite Euler product, including the target; exact scalar equality alone therefore proves realizability rather than arithmetic emergence | `PROVED / PROVES_TOO_MUCH` |
+| `OBS-KOOPMAN-DENSE-ESSENTIAL` | natural Koopman generator of the $\mathbb P^1/\mathbb F_2$ Frobenius suspension | $\sigma_{\rm p}=(2\pi/\log 2)\mathbb Q$, every eigenvalue has countably infinite multiplicity, and $\sigma=\sigma_{\rm ess}=\mathbb R$; resolvent is noncompact and standard heat operators are not trace class | `PROVED` |
+| `OBS-KOOPMAN-WEIGHTS` | all finite strictly positive constant component weights | diagonal square-root rescaling is a unitary intertwiner, so reweighting cannot repair multiplicity, essential spectrum, or determinant failure | `PROVED` |
+| `OBS-OPERATOR-OWNERSHIP` | orbit, Koopman, and étale-cohomological ledgers of one Frobenius parent | the exact native Hasse--Weil determinant is owned by graded Frobenius $\Phi$, while self-adjoint suspension time is owned by $A_K$; common parent provenance does not make them one operator | `PROVED` for the frozen objects/direct sums; new bridges `OPEN` |
+| `OBS-FINITE-SUM-REPAIR` | $A_K$ plus any finite-dimensional realization of cohomological Frobenius | a finite block cannot remove $\sigma_{\rm ess}(A_K)=\mathbb R$, the noncompact resolvent, or infinite heat multiplicities | `PROVED` |
+| `OBS-EXPONENTIAL-DIVISOR-LIFT` | substitution $t=2^{-s}$ in the native determinant | two Frobenius factors lift to vertical pole lattices on $\operatorname{Re}s=0,1$; the repeated preimages are a variable-change lattice, not new physical eigenvalues | `PROVED` |
+| `OBS-GENERIC-COUNT` | weak-mixing Axiom-A controls | \(e^{hT}/(hT)\) counting is generic and cannot establish rational-prime origin | `PROVED` |
+| `OBS-1D-MOD3` | prior Logistic symbolic lineage | parity can survive while mod-3/higher residue memory is lost | explicit finite defects + strong numerical negative control |
+| `OBS-NONAUTO-AVG` | prior non-autonomous transfer matrices | time averaging erases chronology and cannot substitute for an orbit-product trace | direct algebraic audit |

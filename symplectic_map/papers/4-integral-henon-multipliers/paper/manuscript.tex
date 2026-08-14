@@ -1,0 +1,648 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage{graphicx,float}
+\usepackage{xcolor}
+\usepackage[round,authoryear]{natbib}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage{url}
+
+\graphicspath{{figures/}}
+\input{figures/latex_includes.tex}
+
+\hypersetup{
+  pdftitle={Rational Periodic Multiplier Moduli under Good Reduction: A H\'enon Certificate and Exact Audit},
+  pdfauthor={Liang Wang},
+  pdfsubject={Arithmetic support obstruction for exact rational periodic multiplier moduli},
+  pdfkeywords={Henon map, periodic multiplier, good reduction, S-integral point, algebraic unit, exact arithmetic}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathbb A}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\OKS}{\mathcal O_{K,S}}
+\newcommand{\Rbar}{\overline R}
+\newcommand{\SQ}{S_{\Q}}
+\newcommand{\Hu}{H_u}
+\newcommand{\RouteA}{\textsc{Route A}}
+
+\title{\textbf{Rational Periodic Multiplier Moduli under Good Reduction:\\
+A H\'enon Certificate and Exact Audit}}
+\author{
+ Liang Wang\\
+ School of Artificial Intelligence and Automation\\
+ Huazhong University of Science and Technology (HUST)\\
+ \texttt{wangliang.f@gmail.com}
+}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Periodic multipliers of a symplectic map occur in reciprocal pairs, but
+reciprocity alone does not prevent an eigenvalue from having a prescribed
+rational modulus.  We isolate an arithmetic obstruction for monic
+area-preserving generalized H\'enon maps.  For a finite composition defined
+over an $S$-integer ring, every finite complex periodic point is
+$S$-integral, every return multiplier is an algebraic $S$-unit, and an exact
+rational modulus $q$ can involve only the rational primes declared bad by
+$S$.  The modulus statement does not assume that the multiplier is rational.
+Its proof passes to a Galois closure and all places above the rational bad
+set, so complex conjugation preserves the relevant unit group; it never
+identifies complex conjugation with reciprocal pairing.
+
+For the frozen map
+\[
+ H_u(X,Y)=(X^2-u-Y,X),\qquad u^3-2u^2+2u-2=0,
+\]
+with $u$ the unique real root, the bad set is empty.  Hence every exactly
+rational periodic multiplier modulus equals one at every period, excluding
+an exact rational-prime modulus clock.  A source-locked exact-arithmetic
+audit through periods $1,2,3$ removes lower-period branches, recovers five
+cycles, verifies determinant-one monodromy and reciprocal unit
+polynomials, and finds one unit-modulus cycle and four cycles with irrational
+algebraic-unit moduli.  This finite ledger audits the software; it is not the
+source of the all-period result.  The control $a=-15/16$ has fixed point
+$(5/4,5/4)$ and multipliers $2,1/2$, showing that the bad-prime support bound
+is sharp.  The conclusion is a narrow good-reduction certificate, not a
+universal obstruction for symplectic dynamics or for irrational instability
+rates.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Polynomial automorphisms of the affine plane provide a particularly explicit
+meeting point of complex, arithmetic, and conservative dynamics.  Generalized
+H\'enon maps form the basic nonlinear class in the structural description of
+plane polynomial automorphisms \citep{friedland_milnor_1989}.  Their arithmetic
+has been studied through periodic points, local and canonical heights, and
+reduction at non-Archimedean places
+\citep{silverman_1994,marcello_2003,kawaguchi_2006,kawaguchi_2013,ingram_2014,allen_demark_petsche_2018}.
+Recent work also emphasizes rational periodic points in families and arithmetic
+or multiplier rigidity
+\citep{hsia_kawaguchi_2018,kim_etal_2024,cantat_dujardin_2026_rigidity,cantat_dujardin_2026_multiplier}.
+
+This paper asks a deliberately narrower question.  Let $\lambda$ be an
+eigenvalue of the derivative of a return map along a finite complex periodic
+orbit.  When can its exact complex modulus be a positive rational number---and
+in particular a rational prime?  The qualifier \emph{exact} matters: a decimal
+close to an integer is not an arithmetic equality.  So does the distinction
+between $\lambda\in\Q$ and $|\lambda|\in\Q$.  An algebraic multiplier may be
+nonreal and nonrational while its modulus is rational.
+
+For determinant-one maps the two eigenvalues are reciprocal, yet this
+geometric fact alone gives no rationality obstruction: the pair $(2,1/2)$ is
+already reciprocal.  The additional input here is good reduction.  A cyclic
+non-Archimedean maximum argument makes periodic coordinates integral; integral
+special-linear monodromy then makes both multipliers units.  To pass from a
+unit statement about $\lambda$ to a support statement about $|\lambda|$, one
+must also handle complex conjugation correctly.  Figure~\ref{fig:certificate}
+summarizes this dependency chain.
+
+\begin{figure}[t]
+  \centering
+  \GoodReductionCertificateFigure
+  \caption{The all-period result is deductive.  Algebraicity, a cyclic
+  non-Archimedean maximum, integral special-linear monodromy, and a
+  conjugation-stable Galois closure yield rational bad-prime support.  The
+  frozen integral map has empty finite bad set and therefore only rational
+  modulus $1$; the planted denominator-$2$ control realizes $1/2$ and $2$.
+  All reported candidate and control values are read from the frozen audit
+  package.}
+  \label{fig:certificate}
+\end{figure}
+
+Our contribution has three parts.
+\begin{enumerate}
+  \item We prove an all-period theorem for finite compositions of monic,
+  area-preserving generalized H\'enon maps over $\OKS$: finite periodic
+  coordinates are $S$-integral, return multipliers are algebraic $S$-units,
+  and every exact rational modulus is supported on the rational primes below
+  $S$.
+  \item We specialize the theorem to one source-locked algebraic-integer
+  parameter $u$.  The resulting global polynomial symplectic automorphism has
+  no periodic multiplier of exact rational-prime modulus at any period,
+  although irrational algebraic-unit moduli larger than one remain possible.
+  \item We supply a reproducible exact-arithmetic audit through period three,
+  together with a sharp positive control and boundary controls.  The audit
+  tests the implementation of exact branches, monodromy, elimination, and
+  modulus classification; it does not extrapolate a finite search to all
+  periods.
+\end{enumerate}
+
+The result should not be read as a universal symplectic no-go theorem.
+Symplectic maps with rational multiplier moduli other than one exist, including
+the elementary control in Section~\ref{sec:audit}.  Nor do we constrain
+irrational algebraic moduli, singular values, or Lyapunov exponents.  The
+obstruction concerns one exact arithmetic target under explicitly declared
+good-reduction hypotheses.
+
+\section{Arithmetic and multiplier context}
+\label{sec:context}
+
+The literature surrounding H\'enon dynamics is much broader than the support
+certificate proved here.  The classical plane-automorphism framework supplies
+the geometric setting \citep{friedland_milnor_1989}; arithmetic studies use
+heights and local filtrations to control or organize orbits
+\citep{silverman_1994,marcello_2003,kawaguchi_2006,kawaguchi_2013,ingram_2014}.
+Non-Archimedean H\'enon systems also exhibit their own attractors and
+horseshoes \citep{allen_demark_petsche_2018}.  Family-level work studies
+periodic parameters and rational cycles
+\citep{hsia_kawaguchi_2018,kim_etal_2024}.  Separately, dynamical
+Manin--Mumford and recent multiplier-rigidity results impose powerful global
+constraints under hypotheses very different from ours
+\citep{dujardin_favre_2017,cantat_dujardin_2026_rigidity,cantat_dujardin_2026_multiplier}.
+
+Table~\ref{tab:boundary} locates the present statement.  We use a standard
+good-reduction mechanism but package it around an exact rational
+\emph{modulus}, rather than rationality of the multiplier itself.  The main
+technical caution is that the chosen complex conjugate $\bar\lambda$ need not
+equal the reciprocal return eigenvalue $\lambda^{-1}$.  Both operations occur
+in the proof, but at different stages.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Position of the present result relative to adjacent H\'enon theory.}
+\label{tab:boundary}
+\begin{tabular}{@{}p{0.24\linewidth}p{0.31\linewidth}p{0.34\linewidth}@{}}
+\toprule
+Theme & Typical object or tool & Boundary relative to this paper \\
+\midrule
+Plane automorphisms & Structural and complex dynamics of generalized H\'enon maps & Supplies the geometric class; does not by itself force rational-modulus support. \\
+Arithmetic dynamics & Heights, local filtrations, periodic points, and reduction & Supplies the natural good-reduction setting; our theorem isolates a short multiplier-support consequence. \\
+Rational periodic points & Existence and abundance in maps or families & Concerns coordinates of cycles, not the exact modulus target studied here. \\
+Multiplier rigidity & Spectra, fields of definition, or recovery of maps & Global rigidity questions use different hypotheses; we prove a local arithmetic support certificate. \\
+This paper & Cyclic integrality plus $\mathrm{SL}_2$ monodromy & If $|\lambda|\in\Q_{>0}$, only predeclared rational bad primes can occur. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A good-reduction support theorem}
+\label{sec:theorem}
+
+Let $K$ be a number field, let $S$ be a finite set of places containing the
+archimedean places, and put $R=\OKS$.  Write $\Rbar$ for the integral closure
+of $R$ in $\overline K$.  Let $\SQ$ be the finite set of rational primes below
+the finite places in $S$.  For $1\le i\le m$, take a monic polynomial
+$p_i\in R[X]$ of degree $d_i\ge2$ and define
+\begin{equation}
+ H_i(X,Y)=(p_i(X)-Y,X),
+ \qquad F=H_m\circ\cdots\circ H_1.
+ \label{eq:factors}
+\end{equation}
+Each factor has polynomial inverse
+$H_i^{-1}(X,Y)=(Y,p_i(Y)-X)$ and derivative
+\begin{equation}
+ DH_i(X,Y)=
+ \begin{pmatrix}p_i'(X)&-1\\1&0\end{pmatrix},
+ \qquad \det DH_i=1.
+ \label{eq:derivative}
+\end{equation}
+Thus $F$ is a global polynomial automorphism preserving $dX\wedge dY$.
+
+\begin{theorem}[Rational-modulus support]
+\label{thm:support}
+Every finite complex periodic point of $F$ has coordinates in $\Rbar$.  If
+$F^n(P)=P$, both eigenvalues of $D_PF^n$ are units of $\Rbar$.  Fix the given
+embedding into $\C$.  If one eigenvalue $\lambda$ satisfies
+$|\lambda|=q\in\Q_{>0}$, then
+\begin{equation}
+ q\in\Z[\SQ^{-1}]_{>0}^{\times}
+ =\left\{\prod_{p\in\SQ}p^{e_p}:e_p\in\Z\right\}.
+ \label{eq:rational-support}
+\end{equation}
+In particular, an exact rational-prime modulus forces that prime to belong to
+$\SQ$; no rationality assumption on $\lambda$ is required.
+\end{theorem}
+
+The proof is split into four lemmas to make the logical dependencies explicit.
+
+\begin{lemma}[Algebraicity]
+\label{lem:algebraicity}
+Every finite complex periodic point of $F$ is algebraic over $K$.
+\end{lemma}
+
+\begin{proof}
+Let $F^n(P)=P$ and expand the orbit through its $m$ individual factors during
+each of the $n$ returns.  The successive first coordinates form a cyclic
+sequence $(z_j)_{j\in\Z/N\Z}$, with $N=mn$, satisfying
+\begin{equation}
+ p_{i_j}(z_j)-z_{j+1}-z_{j-1}=0,
+ \label{eq:cyclic-recurrence}
+\end{equation}
+where $i_j$ is periodic modulo $m$.  Homogenize these $N$ equations with one
+coordinate $Z$.  On the hyperplane $Z=0$, monicity and $d_{i_j}\ge2$ reduce
+the $j$th equation to $Z_j^{d_{i_j}}=0$.  Hence all $Z_j$ vanish, which is
+impossible in projective space.  The projective zero set therefore misses the
+hyperplane at infinity.
+
+A positive-dimensional projective subvariety meets every hyperplane, since
+the hyperplane class is ample.  Thus the projective zero set is
+zero-dimensional, and the affine cyclic system has finitely many complex
+solutions.  Because its equations have coefficients in $K$, every coordinate
+of every solution is algebraic over $K$.
+\end{proof}
+
+\begin{lemma}[Cyclic non-Archimedean maximum]
+\label{lem:maximum}
+The coordinates of every finite periodic point belong to $\Rbar$.
+\end{lemma}
+
+\begin{proof}
+Choose a finite extension $L/K$ containing the orbit coordinates.  Fix a
+finite place $w$ of $L$ above a place outside $S$.  The coefficients of each
+$p_i$ have $w$-absolute value at most one.  Suppose
+$M=\max_j|z_j|_w>1$ and choose $j$ attaining the maximum.  Since $p_{i_j}$ is
+monic of degree at least two,
+\begin{equation}
+ |p_{i_j}(z_j)|_w=|z_j|_w^{d_{i_j}}=M^{d_{i_j}}>M.
+ \label{eq:strict-maximum}
+\end{equation}
+But the recurrence \eqref{eq:cyclic-recurrence} gives
+\[
+ |p_{i_j}(z_j)|_w
+ =|z_{j+1}+z_{j-1}|_w
+ \le\max\{|z_{j+1}|_w,|z_{j-1}|_w\}\le M,
+\]
+a contradiction.  Therefore all orbit coordinates have absolute value at
+most one at every finite place outside $S$.  Lemma~\ref{lem:algebraicity} and
+the valuation criterion for integrality imply that they lie in $\Rbar$.
+\end{proof}
+
+\begin{lemma}[Unit monodromy]
+\label{lem:monodromy}
+For every $P$ with $F^n(P)=P$, both eigenvalues of $D_PF^n$ are units of
+$\Rbar$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:maximum}, every entry $p_i'(z_j)$ in
+\eqref{eq:derivative} belongs to $\Rbar$.  The return monodromy is a product
+of these determinant-one matrices, so
+\[
+ M_P=D_PF^n\in\mathrm{SL}_2(\Rbar),\qquad
+ \chi_P(T)=T^2-\operatorname{tr}(M_P)T+1.
+\]
+Each root is integral over $\Rbar$ because $\chi_P$ is monic with coefficients
+in $\Rbar$; since $\Rbar$ is integral over $R$, transitivity of integrality
+makes each root integral over $R$, and hence an element of $\Rbar$.  The other
+root is $\lambda^{-1}$ because $\det(M_P)=1$, so the same argument applied to
+both roots gives $\lambda,\lambda^{-1}\in\Rbar$, which is exactly the required
+unit statement.
+\end{proof}
+
+\begin{lemma}[Conjugation-stable rational support]
+\label{lem:conjugation}
+If the multiplier in Lemma~\ref{lem:monodromy} satisfies
+$|\lambda|=q\in\Q_{>0}$, then \eqref{eq:rational-support} holds.
+\end{lemma}
+
+\begin{proof}
+Choose a finite Galois extension $M/\Q$ inside $\C$ that contains $K$, the
+orbit, and $\lambda$.  Let $T$ be \emph{all} finite places of $M$ above the
+rational primes in $\SQ$.  Every finite place $W$ of $M$ outside $T$ lies over
+a rational prime outside $\SQ$, so its restriction to $K$ lies outside $S$;
+applying Lemma~\ref{lem:monodromy} to both $\lambda$ and $\lambda^{-1}$ gives
+$v_W(\lambda)\geq0$ and $v_W(\lambda^{-1})\geq0$, hence
+$v_W(\lambda)=0$.  Thus $\lambda\in\mathcal O_{M,T}^{\times}$.  The set $T$
+is stable under
+$\operatorname{Gal}(M/\Q)$ because it is defined by underlying rational
+primes.  Complex conjugation therefore sends $T$-units to $T$-units, so
+$\bar\lambda\in\mathcal O_{M,T}^{\times}$ and
+\begin{equation}
+ q^2=|\lambda|^2=\lambda\bar\lambda
+ \label{eq:modulus-product}
+\end{equation}
+is a rational $T$-unit.  For every rational prime
+$\ell\notin\SQ$, valuation of \eqref{eq:modulus-product} gives
+$2v_\ell(q)=0$.  Thus $v_\ell(q)=0$, proving
+\eqref{eq:rational-support}.
+\end{proof}
+
+The four lemmas prove Theorem~\ref{thm:support}.  The passage to all places
+above $\SQ$ is essential: the original field $K$ and an arbitrary chosen set
+of its places need not be stable under complex conjugation.  Just as
+importantly, equation~\eqref{eq:modulus-product} does \emph{not} identify
+$\bar\lambda$ with the reciprocal eigenvalue.  Reciprocity proves that
+$\lambda^{-1}$ is an $S$-unit in Lemma~\ref{lem:monodromy}; conjugation proves
+that $\bar\lambda$ is a $T$-unit in Lemma~\ref{lem:conjugation}.  These are
+separate facts.
+
+\begin{corollary}[Integral case]
+\label{cor:integral}
+If $S$ has no finite places, every exact rational periodic multiplier modulus
+equals $1$.  If the multiplier itself is rational, it equals $+1$ or $-1$.
+\end{corollary}
+
+\begin{proof}
+The positive units of $\Z$ are just $1$.  The second statement follows from
+$|\lambda|=1$.
+\end{proof}
+
+\section{The frozen H\'enon certificate}
+\label{sec:frozen}
+
+Let $u$ be the unique real root of
+\begin{equation}
+ P(U)=U^3-2U^2+2U-2.
+ \label{eq:parameter-polynomial}
+\end{equation}
+The derivative $P'(U)=3U^2-4U+2$ is everywhere positive because its
+discriminant is negative, so the real root is unique.  Since $P$ is monic,
+$u$ is an algebraic integer.  We freeze
+\begin{equation}
+ \Hu(X,Y)=(X^2-u-Y,X),\qquad
+ \Hu^{-1}(X,Y)=(Y,Y^2-u-X).
+ \label{eq:frozen-map}
+\end{equation}
+The derivative has determinant one, so this is a global polynomial
+symplectic automorphism of $\A^2$.
+
+\begin{corollary}[Frozen all-period obstruction]
+\label{cor:frozen}
+For every multiplier $\lambda$ of every finite periodic orbit of $\Hu$,
+\[
+ |\lambda|\in\Q_{>0}\quad\Longrightarrow\quad |\lambda|=1.
+\]
+Consequently no positive rational prime is a periodic multiplier modulus,
+even when $\lambda$ is nonrational.
+\end{corollary}
+
+\begin{proof}
+Apply Corollary~\ref{cor:integral} over $K=\Q(u)$ to the monic polynomial
+$X^2-u$.
+\end{proof}
+
+The conclusion is an obstruction to one exact target, not to instability.
+An algebraic unit can have an irrational absolute value greater than one; for
+example, the integer matrix
+$\left(\begin{smallmatrix}2&1\\1&1\end{smallmatrix}\right)$ has determinant
+one and spectral radius $(3+\sqrt5)/2$.  Corollary~\ref{cor:frozen} also does
+not decide whether $+1$ or $-1$ occurs as a multiplier of $\Hu$.
+
+\section{Exact audit and sharp controls}
+\label{sec:audit}
+
+The theorem above supplies the all-period result.  The computation described
+here has a different role: it checks that the exact periodic-branch,
+monodromy, elimination, and modulus-classification software behaves as
+specified on the first nontrivial periods.  The parameter, cutoff, controls,
+and pass/fail rules were source-locked before candidate execution.  No
+external prime table or zero-ordinate data was accessed.
+
+\subsection{Exact-period ledger}
+
+For exact periods $n=1,2,3$, the audit builds the cyclic recurrence over
+$\Q[u]/(P)$, explicitly removes all lower-period branches, computes exact
+Gr\"obner bases and resultants, and independently evaluates the monodromy
+trace.  Table~\ref{tab:ledger} records the compact eliminants.  The symbol
+$T$ denotes trace and $L$ a multiplier.  Every multiplier polynomial is monic
+and reciprocal with constant term one.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{Source-locked exact-period ledger over $\Q[u]/(P)$.  Counts are for
+exact points and cycles after lower-period removal.}
+\label{tab:ledger}
+\begin{tabular}{@{}c c c p{0.27\linewidth} p{0.36\linewidth}@{}}
+\toprule
+$n$ & points & cycles & trace eliminant & multiplier eliminant \\
+\midrule
+1 & 2 & 2 & $T^2-4T-4u$ & $L^4-4L^3+(2-4u)L^2-4L+1$ \\
+2 & 2 & 1 & $T+4u-14$ & $L^2+(4u-14)L+1$ \\
+3 & 6 & 2 & $T^2+(16u-20)T+96u^2-164u+8$ & $L^4+(16u-20)L^3+(96u^2-164u+10)L^2+(16u-20)L+1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+After taking the norm to $\Q$, the rational-root theorem leaves only
+$L=\pm1$ as possible rational roots; exact substitution rejects both at each
+audited period.  To classify moduli without a floating-point rationality
+test, the implementation uses, for each real-hyperbolic selected cycle, the
+exact relation
+\[
+ M^2-(T^2-2)M+1=0,
+ \qquad M=\lambda\bar\lambda,
+\]
+and declares $M$ rational only when its irreducible minimal polynomial over
+$\Q$ has degree one.  A separate exact square test is then required before
+$q=\sqrt M$ is called rational.  The real-elliptic case is certified directly
+from conjugate reciprocal roots, which give $M=1$.  Display approximations
+never enter either decision.
+
+The selected real embedding contains five audited cycles: two fixed cycles,
+one $2$-cycle, and two $3$-cycles.  One elliptic fixed cycle has exact modulus
+$1$; the remaining four are hyperbolic and have irrational algebraic-unit
+moduli.  Figure~\ref{fig:finite-audit} reports these counts and the exact
+software checks.  The observed finite rational-modulus set is $\{1\}$, in
+agreement with Corollary~\ref{cor:frozen}; agreement is a consistency check,
+not an inductive proof.
+
+\begin{figure}[t]
+  \centering
+  \ExactPeriodAuditFigure
+  \caption{The finite exact implementation audit.  Lower-period branch
+  removal gives $2,1,2$ cycles at exact periods $1,2,3$.  Every audited branch
+  passes the determinant, unit-polynomial, and rational-root checks.  At the
+  selected real embedding, one of the five cycles has rational unit modulus
+  and four have irrational algebraic-unit moduli.}
+  \label{fig:finite-audit}
+\end{figure}
+
+\subsection{Sharp positive and boundary controls}
+
+The support conclusion is sharp at the level of allowed primes.  Set
+$a=-15/16$ and $r=5/4$.  The point $(r,r)$ is fixed by
+$H_a(X,Y)=(X^2-a-Y,X)$ because $a=r^2-2r$.  At that point,
+\begin{equation}
+ DH_a(r,r)=\begin{pmatrix}5/2&-1\\1&0\end{pmatrix},
+ \qquad
+ L^2-\frac52L+1=(L-2)(L-1/2).
+ \label{eq:sharp-control}
+\end{equation}
+The coefficient denominator declares bad support $\{2\}$ before multiplier
+access, and the generic exact-modulus pipeline recovers $2$ and $1/2$.
+
+Two additional controls delimit the theorem.  For
+$J_{a,\delta}(X,Y)=(X^2-a-\delta Y,X)$, the derivative determinant is
+$\delta$.  At $(a,\delta)=(0,2)$, the fixed point $(0,0)$ has characteristic
+polynomial $L^2+2$ and multipliers $\pm i\sqrt2$, which are not algebraic
+units; the unit conclusion is correctly refused unless the determinant's bad
+prime is tracked.  Conversely, the cat-map example above is integral and
+determinant one but has an irrational algebraic-unit spectral radius larger
+than one.  It confirms that the rational-support theorem does not bound all
+instability rates.
+
+The official run executed eight controls and preflight checks before opening
+the candidate gate, then seven candidate and scope checks.  All $15$ registered
+runs passed, as did $39$ unit and protocol tests.  The computation used exact
+symbolic arithmetic on a local CPU and no GPU.
+
+\section{Route decision and scope}
+\label{sec:scope}
+
+The source-locked decision separated carrier geometry from the proposed
+arithmetic target.  Geometry passed: equation~\eqref{eq:frozen-map} is a global
+polynomial symplectic automorphism.  The first arithmetic gate, A0, failed:
+Corollary~\ref{cor:frozen} excludes every exact rational-prime multiplier
+modulus at every period.  Later Route-A gates were therefore stopped by scope,
+and no alternative route was opened.  Figure~\ref{fig:route} places this
+decision beside the controls.
+
+\begin{figure}[t]
+  \centering
+  \ScopeRouteDecisionFigure
+  \caption{Boundary controls and the source-locked route decision.  The
+  frozen map passes the geometric carrier gate but fails the exact
+  rational-prime modulus gate by theorem.  The denominator-$2$ control shows
+  the good-reduction hypothesis is substantive; the nonunit-Jacobian and
+  irrational-unit controls show which nearby conclusions are outside scope.}
+  \label{fig:route}
+\end{figure}
+
+The negative result has precise boundaries.
+\begin{itemize}
+  \item It applies to finite complex periodic points of the monic generalized
+  H\'enon compositions in Theorem~\ref{thm:support}.  Monicity and degree at
+  least two are used both at infinity and in the strict maximum argument.
+  \item It controls exact rational complex moduli.  Near-rational decimal
+  values, irrational algebraic moduli, singular values, and Lyapunov exponents
+  are not classified.
+  \item It is not a universal symplectic obstruction.  Bad reduction can
+  support rational moduli such as $2$ and $1/2$, and other symplectic maps need
+  not satisfy the theorem's arithmetic hypotheses.
+  \item It does not assert a prime--orbit correspondence, a spectral
+  determinant identity, compactness, quantization, or the absence of all
+  hyperbolicity.  No target prime/zero dataset was consulted.
+\end{itemize}
+
+There is also a controlled extension boundary.  If a generalized H\'enon
+factor has determinant an $S$-unit rather than one, a related unit statement
+may be recovered by tracking the determinant in the bad set.  If its leading
+coefficient is a nonunit, its valuations must likewise be declared bad and
+the projective argument must be redone.  Neither extension is claimed here.
+
+\section{Discussion}
+\label{sec:discussion}
+
+The certificate illustrates why a modulus question can be stricter than a
+multiplier question.  Integral monodromy gives a reciprocal algebraic-unit
+pair, but an exact modulus uses the chosen Archimedean embedding.  Passing to
+a conjugation-stable Galois closure connects that Archimedean equality to
+non-Archimedean support without assuming the chosen field or place set is
+itself stable under conjugation.  This repair is small algebraically but
+decisive logically.
+
+The result is intentionally elementary.  It does not compete with the deeper
+height, equidistribution, or rigidity theories cited in
+Section~\ref{sec:context}.  Its value is as a fail-fast arithmetic certificate:
+before searching periodic orbits for a prescribed rational modulus, inspect
+the good-reduction data.  When the rational bad set is empty, the search for a
+rational-prime modulus is closed at every period.  When the bad set is
+nonempty, the theorem supplies a finite support filter rather than an
+existence theorem.
+
+The sharp control also suggests the right interpretation of ``sharp.''  The
+theorem predicts which rational primes are allowed to appear, not that every
+allowed prime is realized for every map or period.  Realization is a separate
+dynamical problem.  Likewise, the low-period audit is useful because it tests
+branch saturation, exact norm calculations, reciprocal polynomials, and
+modulus elimination; none of those finite checks strengthens the quantified
+all-period theorem.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+For monic area-preserving generalized H\'enon compositions over an
+$S$-integer ring, finite periodic coordinates are $S$-integral and return
+multipliers are algebraic $S$-units.  A conjugation-stable Galois-closure
+argument then forces every exact rational modulus to be supported on the
+predeclared rational bad primes.  At the frozen integral parameter
+$u^3-2u^2+2u-2=0$, the support is empty and the only possible rational modulus
+is one, so the exact rational-prime modulus route is ruled out at all periods.
+The exact audit through period three and the $a=-15/16$ control verify the
+implementation and the sharpness boundary.  The outcome is a reusable
+good-reduction screen, with an explicit boundary between deductive arithmetic
+obstruction and finite computational evidence.
+
+\appendix
+
+\section{Reproducibility and evidence separation}
+\label{app:reproducibility}
+
+The experiment package contains a machine-readable source lock, an exact
+period ledger, exact polynomial records, candidate and control audits, a scope
+audit, a negative-result ledger, the complete run registry, and a final hash
+manifest.  The official sequence was:
+\begin{enumerate}
+  \item validate the source lock, forbidden-data scanner, proof structure,
+  exact parameter, symplectic identity, and all controls;
+  \item open the candidate gate only after every prerequisite passed;
+  \item run the exact-period candidate audit through the locked cutoff
+  $n=3$;
+  \item run scope guards and the full $39$-test protocol suite;
+  \item close the artifact set with SHA-256 hashes.
+\end{enumerate}
+All result-bearing figures are regenerated from those frozen JSON artifacts.
+The figure loader checks the official run status, candidate identity, failure
+count, and source-lock hash before writing output.  PDF and SVG files are
+vector masters; PNG files are review renderings only.
+
+The evidence hierarchy is fixed.  Theorem~\ref{thm:support} and
+Corollary~\ref{cor:frozen} come from proof.  The $n\le3$ ledger checks an
+implementation against exact identities.  The five selected-embedding cycles
+are finite observations.  None of the experimental artifacts is cited as a
+proof of an all-period claim.
+
+\section{Exact audit identities}
+\label{app:identities}
+
+At a cyclic orbit $(x_0,\ldots,x_{n-1})$, the recurrence is
+\[
+ x_{j+1}+x_{j-1}=x_j^2-u
+ \quad(j\bmod n),
+\]
+and the monodromy is the ordered product
+\[
+ M_n=\prod_{j=n-1}^{0}
+ \begin{pmatrix}2x_j&-1\\1&0\end{pmatrix}.
+\]
+The determinant is identically one before any quotient-ring reduction.
+Consequently every orbitwise characteristic polynomial has form
+$L^2-(\operatorname{tr}M_n)L+1$.  The period-$1$ and period-$3$ eliminants in
+Table~\ref{tab:ledger} combine two cycles and hence have degree four; the
+period-$2$ eliminant represents its unique cycle and has degree two.
+
+After taking field norms from $\Q(u)$, the multiplier polynomials over $\Q$
+have degrees $12,6,12$ for $n=1,2,3$, respectively.  Each is monic,
+reciprocal, and has constant term one.  Their exact evaluations at $L=\pm1$
+are nonzero, which certifies the absence of rational multiplier roots through
+the cutoff.  This rational-root audit is strictly weaker than the
+rational-\emph{modulus} theorem: a nonrational eigenvalue can in principle
+have rational modulus, which is why the separate $M=\lambda\bar\lambda$
+elimination is required.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

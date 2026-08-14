@@ -1,0 +1,31 @@
+\begin{tikzpicture}[
+  node distance=8mm and 8mm,
+  every node/.style={font=\small,align=center},
+  box/.style={draw,rounded corners=2pt,minimum height=16mm,text width=38mm,
+              inner sep=4pt,line width=0.8pt},
+  note/.style={font=\scriptsize,text width=38mm},
+  link/.style={-{Latex[length=2.2mm]},line width=0.9pt},
+  back/.style={{Latex[length=2.2mm]}-{Latex[length=2.2mm]},line width=0.9pt}
+]
+  \node[box,draw=FlowBlue,fill=FlowBlue!7] (closed)
+    {closed point $x$\\[-1pt]
+     \scriptsize irreducible $f$ on the affine chart};
+  \node[box,draw=FlowTeal,fill=FlowTeal!7,right=of closed] (cycle)
+    {arithmetic-Frobenius cycle $C_x$\\[-1pt]
+     \scriptsize $|C_x|=\deg(x)=d$};
+  \node[box,draw=FlowOrange,fill=FlowOrange!8,right=of cycle] (circle)
+    {primitive suspension orbit $\gamma_x$\\[-1pt]
+     \scriptsize $\ell_x=d\log 2=\log N(x)$};
+
+  \draw[back,FlowBlue!85!black] (closed) -- node[above,font=\scriptsize]
+    {residue-field orbit} (cycle);
+  \draw[back,FlowTeal!85!black] (cycle) -- node[above,font=\scriptsize]
+    {constant-roof suspension} (circle);
+
+  \node[note,below=4mm of closed,text=FlowBlue!75!black]
+    {intrinsic arithmetic indexing};
+  \node[note,below=4mm of cycle,text=FlowTeal!70!black]
+    {discrete topology is a modeling choice};
+  \node[note,below=4mm of circle,text=FlowOrange!80!black]
+    {vertical time is the norm clock};
+\end{tikzpicture}

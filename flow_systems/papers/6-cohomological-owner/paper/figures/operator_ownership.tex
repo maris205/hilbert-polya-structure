@@ -1,0 +1,43 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=8mm and 11mm,
+  every node/.style={font=\small,align=center},
+  parent/.style={draw=FlowBlue,very thick,rounded corners,fill=FlowBlue!8,
+    text width=39mm,minimum height=10mm},
+  orbit/.style={draw=FlowTeal,thick,rounded corners,fill=FlowTeal!8,
+    text width=35mm,minimum height=10mm},
+  coho/.style={draw=FlowOrange,thick,rounded corners,fill=FlowOrange!12,
+    text width=35mm,minimum height=10mm},
+  result/.style={draw=black!60,rounded corners,fill=black!3,
+    text width=38mm,minimum height=12mm},
+  own/.style={-{Latex[length=2.4mm]},very thick},
+  derive/.style={-{Latex[length=2.2mm]},thick},
+  absent/.style={-{Latex[length=2.2mm]},thick,dashed,FlowRed}
+]
+\node[parent] (parent) {$X=\mathbb P^1_{\mathbb F_2}$\ with frozen Frobenius};
+\node[orbit,below left=of parent] (cycles) {closed points and\ Frobenius cycles};
+\node[coho,below right=of parent] (coho) {graded \(\ell\)-adic\ cohomology};
+\node[orbit,below=of cycles] (circles) {suspension circles\ \(\ell_x=\deg(x)\log2\)};
+\node[coho,below=of coho] (phi) {Frobenius action \(\Phi\)\ in Deligne's convention};
+\node[result,below=of circles] (koop) {Koopman owner \(A_K\)\ self-adjoint; \(\sigma_{\rm ess}=\mathbb R\)};
+\node[result,below=of phi] (det) {determinant owner \(\Phi\)\ \(Z=((1-t)(1-2t))^{-1}\)};
+
+\draw[derive] (parent) -- (cycles);
+\draw[derive] (parent) -- (coho);
+\draw[derive] (cycles) -- (circles);
+\draw[derive] (coho) -- (phi);
+\draw[own] (circles) -- (koop);
+\draw[own] (phi) -- (det);
+\draw[FlowTeal,very thick,<->] (circles.east) -- node[above,text=black,
+  fill=white,inner sep=1.5pt] {native orbit--Lefschetz identity} (phi.west);
+\draw[absent] (koop.east) -- node[above,text=FlowRed,fill=white,
+  inner sep=1pt] {no operator bridge} (det.west);
+\end{tikzpicture}
+\caption{One arithmetic parent has two different analytic operator owners.
+The solid bridge is the exact native closed-point--cohomology identity.  The
+dashed no-bridge arrow is not an impossibility claim for all future bridges; it
+records that no identification exists for the two frozen operators.}
+\label{fig:ownership}
+\end{figure}

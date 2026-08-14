@@ -1,0 +1,23 @@
+% Included from manuscript.tex; requires tikz, arrows.meta, positioning.
+\begin{tikzpicture}[
+  node distance=7mm and 6mm,
+  box/.style={draw, rounded corners, align=center, inner sep=4pt,
+              text width=0.165\textwidth, minimum height=12mm,
+              font=\footnotesize},
+  source/.style={box, draw=MidnightBlue, fill=MidnightBlue!7},
+  gate/.style={box, draw=ForestGreen, fill=ForestGreen!7},
+  stop/.style={box, draw=BrickRed, fill=BrickRed!7},
+  arr/.style={-{Latex[length=2mm]}, thick}
+]
+  \node[source] (object) {T0\\one source-locked object};
+  \node[gate, right=of object] (classical) {T1\\classical orbit ledger};
+  \node[gate, right=of classical] (trace) {T2--T6\\trace, analytic ledger, clock};
+  \node[stop, right=of trace] (arith) {T7\\arithmetic promotion};
+  \draw[arr] (object) -- (classical);
+  \draw[arr] (classical) -- (trace);
+  \draw[arr] (trace) -- (arith);
+  \node[stop, below=of trace] (splice) {DEN+MOD splice\\fails T0};
+  \draw[arr, BrickRed] (splice) -- (trace);
+  \node[stop, below=of arith] (clock) {standard-clock supports\\are disjoint};
+  \draw[arr, BrickRed] (clock) -- (arith);
+\end{tikzpicture}

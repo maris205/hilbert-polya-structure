@@ -1,0 +1,21 @@
+% Included from manuscript.tex; requires tikz and arrows.meta, positioning.
+\begin{tikzpicture}[
+  node distance=11mm and 11mm,
+  box/.style={draw, rounded corners, align=center, inner sep=5pt,
+              text width=0.20\textwidth, minimum height=13mm},
+  proved/.style={box, draw=ForestGreen, fill=ForestGreen!7},
+  missing/.style={box, draw=BrickRed, fill=BrickRed!6},
+  arr/.style={-{Latex[length=2mm]}, thick},
+  note/.style={font=\scriptsize, align=center}
+]
+  \node[proved] (packet) {source packet $\Gamma_p$\\period $\log p$};
+  \node[proved, right=of packet] (base) {abstract base $B_p$\\N1: Haar probability};
+  \node[missing, right=of base] (lift) {measured packet\\N2: canonical lift};
+  \node[missing, below=of lift] (global) {global trace\\N3: masses $m_p$};
+  \node[missing, left=of global] (operator) {return operator\\O: trace theorem};
+
+  \draw[arr] (packet) -- (base);
+  \draw[arr] (base) -- (lift);
+  \draw[arr] (lift) -- (global);
+  \draw[arr] (global) -- (operator);
+\end{tikzpicture}

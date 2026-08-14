@@ -61,7 +61,7 @@ GO_BASE_TAU_LEDGER / STOP_CHIRAL_UNIFICATION
 route_b_invocation_allowed: false
 ```
 
-Canonical provisional evaluation:
-`evaluations/route_a/SD-C10/20260813T131330Z.yaml`.  Its commit fields are
-intentionally `WORKTREE_PENDING_FINAL_COMMIT`; the root agent performs the
-two-stage source/code freeze.
+Canonical frozen evaluation:
+`evaluations/route_a/SD-C10/20260813T131330Z.yaml`.  Its source and code
+provenance is commit `4e094ae14a34bc98fc8b7cf4424d2edee8d5580e`; the
+following metadata commit freezes the evaluation and paper manifest.

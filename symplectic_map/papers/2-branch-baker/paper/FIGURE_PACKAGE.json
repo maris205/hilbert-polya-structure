@@ -1,0 +1,338 @@
+{
+  "schema_version": "branch-baker-figure-package/1.0",
+  "created_utc": "2026-08-13T14:03:01Z",
+  "audit_status": "PASS_WITH_ADVISORIES",
+  "audit_scope": "Caption atomic claims, complete source-to-transformation-to-output trace, manuscript reverse linkage, and isolated rerender.",
+  "snapshot": {
+    "manuscript": {
+      "path": "paper/manuscript.tex",
+      "sha256": "be36bf3ac1cf3e0236dcf9cc90c8f2c5dbabe12d212d0ded349ec64c247d4c78"
+    },
+    "source_lock_sha256": "20473ff34b1f9258281483f47b9db915eb2680d2a71e9e1e6e9f3cf3d6fc07c8",
+    "all_result_inputs_embed_matching_source_lock_hash": true
+  },
+  "shared_transformation_dependencies": [
+    {
+      "path": "paper/figures/generate_all.py",
+      "sha256": "3ee23485e940432e1f9b88953ab69c051bfa31fb38339eae547d864ba3a7edf2",
+      "role": "Invokes all three generators and verifies nonempty PDF and PNG outputs."
+    },
+    {
+      "path": "paper/figures/paper_plot_style.py",
+      "sha256": "03020a297b41a2cfc5308b15aa5df6bd01982457b97863fb63075c86bcc35d6b",
+      "role": "Shared Matplotlib style and PDF/PNG save routine."
+    }
+  ],
+  "isolated_rerender": {
+    "workspace_files_modified": false,
+    "png_byte_identical": true,
+    "pdf_byte_identical_before_metadata_normalization": false,
+    "pdf_equal_after_neutralizing_only_CreationDate": true,
+    "normalized_pdf_sha256": {
+      "fig1_carrier_obstruction.pdf": "7dc3ff835ce10895dff462a1538078b11da7df84f12ea99a9b7db603e3000e67",
+      "fig2_orbit_lattice.pdf": "4608200398c91d9eccf9f79fa484c224228b668fb7ff9e24b72b5ceaf3b1357c",
+      "fig3_audit_panel.pdf": "395a0044f4ce3cbee6fc315a61ecf933a0e3b89d6c79d624598870ca2b27a226"
+    },
+    "interpretation": "Scientific rendering was reproduced. Raw PDF hashes vary solely because Matplotlib writes CreationDate metadata, as disclosed in manuscript.tex."
+  },
+  "figure_table_trace": [
+    {
+      "artifact_id": "fig:carrier-obstruction",
+      "status": "PASS",
+      "source_data": [
+        {
+          "path": "experiments/source_lock.json",
+          "sha256": "20473ff34b1f9258281483f47b9db915eb2680d2a71e9e1e6e9f3cf3d6fc07c8",
+          "json_pointers": ["#/markov_factor/adjacency", "#/markov_factor/factor_orientation_weights", "#/phase_space", "#/clocks/frozen_locally_constant_prediction", "#/primary_claims/3"]
+        },
+        {
+          "path": "results/analysis_test.json",
+          "sha256": "e46eeaf6986a7ad6af58a60b5f32a4f019fee7de5fd64c87077f83f9c8ba1681",
+          "json_pointers": ["#/gates/exact_carrier", "#/gates/finite_clock_rank_one", "#/gates/termwise_exact_all_prime_clock_excluded", "#/pre_a0_status", "#/route_a_status"]
+        }
+      ],
+      "transformation": {
+        "entry_point": "paper/figures/gen_fig1_carrier_obstruction.py",
+        "sha256": "a906ad741e890c725013c820d682a2806e18cc848dd08ed082caea402a6344f5",
+        "shared_style": "paper/figures/paper_plot_style.py"
+      },
+      "outputs": [
+        {
+          "path": "paper/figures/fig1_carrier_obstruction.pdf",
+          "sha256": "576aa909cfc4bbe9650c01aba72500a726d6a5cd72904a88dd858b1420bed78b",
+          "role": "manuscript include"
+        },
+        {
+          "path": "paper/figures/fig1_carrier_obstruction.png",
+          "sha256": "46435795697f7f7fd9a94572f4488ed15d97a35657c9e24242b23f3a67b06e0d",
+          "dimensions_px": [1704, 652],
+          "role": "raster review copy"
+        }
+      ],
+      "caption_claim": {
+        "locator": "paper/manuscript.tex:169",
+        "atomic_claims": [
+          {
+            "claim": "The Markov factor has three states, four directed edges, and inherited one-dimensional factor signs.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "experiments/source_lock.json#/markov_factor"
+          },
+          {
+            "claim": "Perron-Frobenius areas form the compact labeled three-rectangle carrier.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "experiments/source_lock.json#/phase_space"
+          },
+          {
+            "claim": "Each branch Jacobian preserves the symplectic form and has determinant one.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/analysis_test.json#/gates/exact_carrier",
+            "transitive_verification": "analysis_test.json hashes exact_preflight.json, whose branch_symplecticity and branch_determinants gates are true"
+          },
+          {
+            "claim": "Every period-2k carrier instability length lies in Q log 2, while the full rational-prime logarithm family does not.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/analysis_test.json#/gates/finite_clock_rank_one"
+          },
+          {
+            "claim": "The carrier is a structural pass and the exact arithmetic clock gate fails.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/analysis_test.json#/route_a_status"
+          }
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "locator": "paper/manuscript.tex:162",
+          "claim": "Figure 1 summarizes the verified carrier geometry and rank-one clock obstruction without equating factor signs with symplectic orientation.",
+          "use_type": "substantive reverse linkage"
+        }
+      ],
+      "reverse_linkage": {
+        "include_locator": "paper/manuscript.tex:168",
+        "label_locator": "paper/manuscript.tex:177",
+        "definition_count": 1,
+        "reference_count": 1
+      },
+      "limitations": [
+        "Edge signs are inherited interval-factor orientations, not symplectic orientations or Maslov phases.",
+        "Symplecticity and exactness hold on branch interiors; the figure does not establish a global C1 symplectomorphism.",
+        "The finite shift/baker is a branch-history carrier, not a claimed homeomorphism with the full inverse-limit continuum.",
+        "The rank-one clock is the constant-slope carrier cocycle, not the nonlinear parent derivative cocycle."
+      ]
+    },
+    {
+      "artifact_id": "fig:orbit-lattice",
+      "status": "PASS_WITH_ASSERTION_COVERAGE_ADVISORY",
+      "source_data": [
+        {
+          "path": "results/ledger.json",
+          "sha256": "d6b073635b9b0a1a9dbbf9b17f246bcbf2c20f2ad72e8f14cc28b805a7797d2c",
+          "json_pointers": ["#/primitive_counts", "#/independent_direct_counts", "#/ledger_agreement", "#/primitive_total", "#/parent_boundary_quotient", "#/cycle_rows", "#/determinant_conventions"]
+        },
+        {
+          "path": "experiments/source_lock.json",
+          "sha256": "20473ff34b1f9258281483f47b9db915eb2680d2a71e9e1e6e9f3cf3d6fc07c8",
+          "json_pointers": ["#/clocks/frozen_locally_constant_prediction", "#/pretest_exact_predictions"]
+        }
+      ],
+      "transformation": {
+        "entry_point": "paper/figures/gen_fig2_orbit_lattice.py",
+        "sha256": "3e46130fc376d5936f88030504d410257f3e1f3897b8554df56c322f6c912290",
+        "shared_style": "paper/figures/paper_plot_style.py"
+      },
+      "outputs": [
+        {
+          "path": "paper/figures/fig2_orbit_lattice.pdf",
+          "sha256": "69b4420d53344058f2789a812ae960f490aa63372f3d5c6c7d3003264f2d7b53",
+          "role": "manuscript include"
+        },
+        {
+          "path": "paper/figures/fig2_orbit_lattice.png",
+          "sha256": "02efd62da132e186bc207e4e6814bd5c217561f5d6ebd03f3d4e861cbfdec824",
+          "dimensions_px": [1816, 758],
+          "role": "raster review copy"
+        }
+      ],
+      "caption_claim": {
+        "locator": "paper/manuscript.tex:650",
+        "atomic_claims": [
+          {
+            "claim": "Two independent exact enumerations agree and give 226 primitive symbolic cycles through period 20.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/ledger.json#/ledger_agreement"
+          },
+          {
+            "claim": "The parent quotient adds fixed point d at period one and removes symbolic orbit 1<->2 at period two.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/ledger.json#/parent_boundary_quotient"
+          },
+          {
+            "claim": "All displayed primitive-count differences from periods 3 through 20 vanish.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/ledger.json#/parent_boundary_quotient/primitive_count_delta"
+          },
+          {
+            "claim": "Candidate instability lengths occupy the rank-one lattice {k log 2:k>=1}.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "experiments/source_lock.json#/clocks/frozen_locally_constant_prediction"
+          },
+          {
+            "claim": "The rational-prime intersection of that lattice is only log 2.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "experiments/source_lock.json#/primary_claims/3",
+            "proof_basis": "If k log 2 = log p, then p=2^k, which is prime only for k=1."
+          }
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "locator": "paper/manuscript.tex:644",
+          "claim": "Figure 2 displays the exact primitive ledger, single boundary replacement, and rank-one length lattice.",
+          "use_type": "substantive reverse linkage"
+        }
+      ],
+      "reverse_linkage": {
+        "include_locator": "paper/manuscript.tex:649",
+        "label_locator": "paper/manuscript.tex:657",
+        "definition_count": 1,
+        "reference_count": 1
+      },
+      "limitations": [
+        "The two independent enumeration methods are verified in ledger.json but are not drawn as separate plotted series.",
+        "The count plot and computed delta vector stop at period 20.",
+        "The multiplier lattice belongs only to the unquotiented constant-slope SFT/baker, not the nonlinear parent derivative cocycle.",
+        "The sole boundary quotient is a reproduction baseline, not a new general boundary-correction theorem."
+      ],
+      "advisory": "The generator plots primitive_counts but does not itself assert primitive_total==226, ledger_agreement, or equality with independent_direct_counts. The frozen input satisfies all three and the caption was independently audited against the JSON."
+    },
+    {
+      "artifact_id": "fig:computational-audit",
+      "status": "PASS",
+      "source_data": [
+        {
+          "path": "experiments/source_lock.json",
+          "sha256": "20473ff34b1f9258281483f47b9db915eb2680d2a71e9e1e6e9f3cf3d6fc07c8",
+          "json_pointers": ["#/verification_protocol", "#/controls"]
+        },
+        {
+          "path": "results/float_stress_development.json",
+          "sha256": "d8f493078a62b533f9d8775d18bb6c8dc7020ba58c82a69e865cea9f1b62d378",
+          "json_pointers": ["#/completed_checks", "#/max_roundtrip_error", "#/edge_mismatches", "#/boundary_failures", "#/thresholds"]
+        },
+        {
+          "path": "results/float_stress_validation.json",
+          "sha256": "2e9bfb3f546b73b7e4cfbbc5d29ded1f4126f4f5127a21d198ad6bf46bbcb1c8",
+          "json_pointers": ["#/completed_checks", "#/max_roundtrip_error", "#/edge_mismatches", "#/boundary_failures", "#/thresholds"]
+        },
+        {
+          "path": "results/float_stress_test.json",
+          "sha256": "930859373c02c8f6841325739a75d2a901ef1f7f64e75587f1b5797b54b69e72",
+          "json_pointers": ["#/completed_checks", "#/max_roundtrip_error", "#/edge_mismatches", "#/boundary_failures", "#/thresholds"]
+        },
+        {
+          "path": "results/parent_audit.json",
+          "sha256": "8e5d423fedaa7887c077aa058587a39e745cef942d80e1822e19cc781b36de41",
+          "json_pointers": ["#/digits", "#/parameter/polynomial_residual", "#/postcritical/max_abs_residual", "#/periodic_factor/max_periodic_residual", "#/thresholds", "#/interpretation"]
+        },
+        {
+          "path": "results/exact_preflight.json",
+          "sha256": "07aa4a4b0a98960f4317f57a6e8032ee47d3877a9de43c7cc4fcf56084cef4a3",
+          "json_pointers": ["#/controls"]
+        }
+      ],
+      "transformation": {
+        "entry_point": "paper/figures/gen_fig3_audit_panel.py",
+        "sha256": "1a732c08b9a316b2698efb5b64f191b8e99bd2e3d6804f63c3f2c756159a1c4d",
+        "shared_style": "paper/figures/paper_plot_style.py"
+      },
+      "outputs": [
+        {
+          "path": "paper/figures/fig3_audit_panel.pdf",
+          "sha256": "4f4123c66c6ddd32aa236e3ea9f9a00f5311d2b660d65ba289dc6dc0fc3ef057",
+          "role": "manuscript include"
+        },
+        {
+          "path": "paper/figures/fig3_audit_panel.png",
+          "sha256": "1019d25c505e2b5adf58873f937bdfae60c08faf5e328a416a8ddc67ffa0a942",
+          "dimensions_px": [1908, 1250],
+          "role": "raster review copy"
+        }
+      ],
+      "caption_claim": {
+        "locator": "paper/manuscript.tex:964",
+        "atomic_claims": [
+          {
+            "claim": "Each split completed 16,777,216 identified per-step forward/inverse checks with zero boundary failures and edge mismatches.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/float_stress_{development,validation,test}.json#/completed_checks"
+          },
+          {
+            "claim": "All splits have common maximum roundtrip error 1.388e-16 below 2e-13.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/float_stress_{development,validation,test}.json#/max_roundtrip_error"
+          },
+          {
+            "claim": "The independent 100-digit parent polynomial, postcritical, and periodic residuals are below 1e-75.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/parent_audit.json#/thresholds/residual_target"
+          },
+          {
+            "claim": "The parent audit is high-precision consistency, not interval certification.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/parent_audit.json#/interpretation"
+          },
+          {
+            "claim": "Six controls pass named gates for enumeration/symplecticity, paired reversal, dissipation, label loss, anti-symplectic rejection, and factor-sign cancellation dependence.",
+            "verdict": "SUPPORTED",
+            "evidence_pointer": "results/exact_preflight.json#/controls/gates"
+          }
+        ]
+      },
+      "supported_manuscript_claims": [
+        {
+          "locator": "paper/manuscript.tex:764",
+          "claim": "Figure 3 summarizes split-scale checks, numerical tolerances, independent parent audit, and six matched-control outcomes.",
+          "use_type": "substantive reverse linkage"
+        }
+      ],
+      "reverse_linkage": {
+        "include_locator": "paper/manuscript.tex:963",
+        "label_locator": "paper/manuscript.tex:973",
+        "definition_count": 1,
+        "reference_count": 1
+      },
+      "limitations": [
+        "The floating metric is an identified one-step forward/inverse check before state advancement, not reversal of a single 256-step chaotic trajectory.",
+        "The 16,777,216 checks per split are deterministic software operations, not independent statistical observations.",
+        "No p-value, confidence interval, effect size, or binomial success inference follows.",
+        "The parent residual audit is not interval certification.",
+        "Controls validate named failure modes only and supply no A2-A4, prime/zero, or quantization evidence."
+      ]
+    }
+  ],
+  "manuscript_reverse_linkage_summary": {
+    "fig:carrier-obstruction": {"reference_count": 1, "locator": "paper/manuscript.tex:162"},
+    "fig:orbit-lattice": {"reference_count": 1, "locator": "paper/manuscript.tex:644"},
+    "fig:computational-audit": {"reference_count": 1, "locator": "paper/manuscript.tex:764"},
+    "unreferenced_figure_labels": []
+  },
+  "advisories": [
+    {
+      "code": "SYNCHRONIZED_DUPLICATE_CAPTION",
+      "path": "paper/figures/latex_includes.tex",
+      "sha256": "8937737713fa06787927791e72d16cd44ee09e2cd464ae77573c539461012e03",
+      "locator": "paper/figures/latex_includes.tex:56",
+      "detail": "The unused fallback captions are maintained separately from manuscript.tex; the current Fig. 3 fallback correctly says enumeration and symplecticity.",
+      "affects_current_manuscript": false
+    },
+    {
+      "code": "DUPLICATE_CAPTION_DRIFT_RISK",
+      "detail": "manuscript.tex and figures/latex_includes.tex maintain separate caption copies; the latter is not input by the current manuscript."
+    },
+    {
+      "code": "PDF_CREATIONDATE_NONDETERMINISM",
+      "detail": "Raw regenerated PDF hashes change with CreationDate; all three PDFs match after neutralizing that single metadata field, and all PNGs are byte-identical."
+    }
+  ],
+  "failures": []
+}

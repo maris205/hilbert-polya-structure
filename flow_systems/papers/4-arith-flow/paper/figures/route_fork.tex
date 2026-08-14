@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+  every node/.style={font=\small,align=center},
+  source/.style={draw,rounded corners=2pt,minimum height=12mm,text width=52mm,
+                 fill=FlowBlue!8,draw=FlowBlue,line width=0.9pt},
+  outcome/.style={draw,rounded corners=2pt,minimum height=21mm,text width=54mm,
+                  inner sep=4pt,line width=0.9pt},
+  control/.style={draw,dashed,rounded corners=2pt,minimum height=17mm,text width=55mm,
+                  inner sep=4pt,line width=0.9pt},
+  arr/.style={-{Latex[length=2.3mm]},line width=1pt}
+]
+  \node[source] (src) at (0,0)
+    {\texttt{FF-FROB-SUSP-P1-F2}\\[-1pt]
+     \scriptsize fixed scheme, Frobenius, and roof $\log 2$};
+  \node[outcome,draw=FlowTeal,fill=FlowTeal!7] (native) at (-3.5,-2.2)
+    {native Hasse--Weil target\\[-1pt]
+     \scriptsize exact A0--A3 calibration\\
+     \scriptsize \texttt{ROUTE\_A\_SUCCESS\_ROUTE\_B\_NOT\_READY}};
+  \node[outcome,draw=FlowOrange,fill=FlowOrange!8] (riemann) at (3.5,-2.2)
+    {Riemann rational-prime target\\[-1pt]
+     \scriptsize one-clock support obstruction at A0/A2\\
+     \scriptsize \texttt{ROUTE\_A\_REJECTED}};
+  \node[control,draw=FlowRed,fill=FlowRed!5] (compiler) at (3.5,-4.9)
+    {disjoint $\log p$ circle repair\\[-1pt]
+     \scriptsize exact product, but target encoded\\
+     \scriptsize \texttt{A0\_FAIL / PROVES\_TOO\_MUCH}};
+
+  \draw[arr,FlowTeal!85!black] (src.south west) -- node[left,font=\scriptsize]
+    {same native object} (native.north);
+  \draw[arr,FlowOrange!90!black] (src.south east) -- node[right,font=\scriptsize]
+    {change the target} (riemann.north);
+  \draw[arr,dashed,FlowRed!85!black] (riemann.south) -- node[right,font=\scriptsize]
+    {tautological repair} (compiler.north);
+\end{tikzpicture}

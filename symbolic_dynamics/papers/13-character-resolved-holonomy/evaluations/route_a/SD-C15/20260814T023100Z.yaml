@@ -1,0 +1,200 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C15
+source_commit: "aa7f35c97887fa5cfab246c3b6b2a1ea16a7e85a"
+evaluation_date: 2026-08-14
+artifact_path_base: papers/13-character-resolved-holonomy
+
+source_lock:
+  candidate_definition: "SD-C15 is the entropy-ordered adjacent recurrent tensor-prime graph with charge-zero atom loops, charge +1 on both orientations of every cross edge, equal-endpoint amplitudes, and the complete Bloch family L_s(w)=D_s+w A_s of its positive-cone directed Z-skew extension."
+  object: "The positive-cone directed Z-skew extension of the adjacent recurrent symbolic atom graph, its deck-neutral conditional expectation, and its same-parent Bloch Fredholm family."
+  family: "symbolic dynamics"
+  phase_space: "The edge shift of the bidirectional adjacent graph on entropy-ordered tensor-prime atoms, lifted by an integer coordinate k; the parent transfer lies in B(l2(N)) bar-tensor L(Z) with semifinite trace Tr tensor tau_Z."
+  dynamics: "Atom loops fix k and every cross edge sends k to k+1; the base is recurrent and aperiodic, while periodic lifted words are counted modulo deck translation and must have total charge zero."
+  parameters: "Equal-endpoint coefficient 1/2; primary charges all +1; frozen cutoffs, source points, z points, 1024 characters, inventories, and seeds from PREREGISTRATION.md."
+  parameter_provenance: "Tensor multiplication defines the atoms, topological entropy orders them and fixes the loop clock, endpoint symmetry fixes the coefficient 1/2, and the positive Z-cocycle is frozen before execution."
+  arithmetic_origin: "Nonunit tensor-indecomposable full shifts are exactly F_p; their topological entropy is log(p), and loop repetitions have time r log(p)."
+  clock: "Topological entropy log(p), without fitted scale or offset."
+  normalization: "x_n(s)=p_n^(-s), a_n(s)=(x_n(s)+x_(n+1)(s))/2, loops have charge zero, and both adjacent cross orientations have primary charge +1."
+  determinant_convention: "For Re(s)>1, each Bloch fiber has D_SD(s,z,w)=det(I-z L_s(w)); the parent lift is only Phi-trace-class. The target is the deck-neutral conditional expectation: [w^0]D_SD=product_p(1-zp^(-s)) globally in z, and [w^0]log D_SD on the trace-log germ. No unitary Bloch fiber has the Euler ledger, and global logarithm branches are not identified."
+  orbit_cutoff: "All-order positive-charge theorem; exact closed-word census N=2,3,4,5 and r=1,...,12."
+  cutoff: "N in {2,3,4,8,16,32,64,128}; s in {1.25,1.5,2,1.5+0.75i}; z in {0.15,0.35,0.6}; 1024 characters; 32 positive-charge seeds 15000,...,15031."
+  precision: "Exact integer/rational charged-path and continuant identities; IEEE-754 binary64 for the frozen matrix; one selected 80-digit continuant confirmation."
+  training_data: "none; no fitting, target spectrum, zero list, best-character selection, or validation target"
+  allowed_data: "Tensor multiplication, topological entropy, exact charged path words, finite Fredholm continuants, complete character grids, singular values, and frozen matched controls."
+  forbidden_data: "Riemann-zero tables, target crossings, fitted characters or phases, inserted von Mangoldt weights, changed determinant branches, cross-family repairs, and coordinatewise combinations with prior-paper determinants."
+  code_commit: "aa7f35c97887fa5cfab246c3b6b2a1ea16a7e85a"
+  freeze_note: "Two-stage provenance: commit aa7f35c97887fa5cfab246c3b6b2a1ea16a7e85a immutably freezes the complete Paper13 source, code, results, PDF, and root summary. This evaluation and the paper manifest are finalized in the following metadata-only commit."
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - DERIVATION_PACKAGE.md
+    - PROOF_PACKAGE.md
+    - LITERATURE_AUDIT.md
+    - main.pdf
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc15_character_holonomy_experiment.py
+    - code/test_sdc15_character_holonomy_experiment.py
+    - results/summary.json
+    - results/exact_path_census.csv
+    - results/determinant_fourier_audit.csv
+    - results/gauge_reparameterization.csv
+    - results/inventory_charge_controls.csv
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "Tensor indecomposability produces exactly the full shifts F_p, topological entropy gives log(p), and lifted loop repetitions give r log(p) without a loaded prime or zero table."
+  strongest_failure: "The transverse character mechanism is not arithmetic-selective: composite, shuffled, random-increasing, and random-positive-charge controls all have nonzero response energy."
+  arithmetic_controls:
+    - "first N composite integers"
+    - "seed-13013 shuffled tensor-prime masses"
+    - "seed-13014 random-increasing masses"
+    - "32 positive integer charge fields, seeds 15000 through 15031"
+    - "forward-DAG parent control"
+  artifacts:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - EXPERIMENT_REPORT.md
+    - results/inventory_charge_controls.csv
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "Every mixed base closed word contains at least two cross edges and therefore has strictly positive total Z-charge; modulo deck translation, the only lifted periodic words are pure atom loops and their repetitions."
+  strongest_failure: "The protection uses only positivity of the cocycle, not a prime-specific rule. Replacing reversed charge +1 by -1 makes the adjacent two-cycle charge zero and leaks at r=2."
+  metrics:
+    primitive_orbit_definition: "the deck-translation class of the charge-zero loop at each tensor-prime atom in the Z-lift"
+    repetition_rule: "r loop traversals have time r log(p), weight p^(-rs), and total charge zero"
+    exact_path_cutoffs: "N=2,3,4,5; r=1,...,12"
+    primary_charge_zero_mixed_rows: 0
+    inverse_charge_zero_mixed_rows: 144
+    inverse_first_leak_power: 2
+    positive_all_order_ledger: true
+    inverse_time_reversal_ledger: false
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - results/exact_path_census.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "For Re(s)>1, sum_n |a_n(s)| is finite, so each L_s(w) is trace class and the parent is Phi-trace-class. The continuant gives the global constant-mode identity [w^0]det(I-zL_s(w))=product_p(1-zp^(-s)), with the corresponding trace-log identity near z=0."
+  strongest_failure: "Every genuine unitary Bloch fiber already contains a mixed power-two term. The same transverse modes occur on every matched nonprime control; no target divisor, continuation, or root census is defined."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data are forbidden"
+    extra_zero_count: "not_applicable; no target divisor is claimed"
+    missing_zero_count: "not_applicable; no target divisor comparison is authorized"
+    root_count_discrepancy: "not_applicable; no argument-principle or root census was performed"
+    cutoff_drift: "not_applicable; the zero Fourier coefficient is exact at every finite cutoff and all orders"
+    precision_drift: "not_applicable for exact coefficient identities; selected binary64 versus 80-digit determinant residual is 1.3877787807814457e-16"
+    control_margin: "fails decisively; every frozen inventory and all 32 positive-charge controls have nonzero E"
+    determinant_audit_rows: 384
+    full_adversarial_control_rows: 3456
+    positive_charge_full_matrix_rows: 3072
+    character_count_per_row: 1024
+    constant_coefficient_max_residual: 0.0
+    full_matrix_E_min: 1.855046598600402e-09
+    full_matrix_E_max: 0.09081813205497141
+    selected_crosscheck_max_residual: 6.087272963323595e-16
+    global_log_branch_claimed: false
+    target_zero_data_used: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/summary.json
+    - results/determinant_fourier_audit.csv
+    - results/SHA256SUMS.txt
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The same parent Z-covariant lift canonically supplies both the deck-neutral Euler coefficient and its nonzero-character Fredholm fibers."
+  strongest_failure: "No unitary Bloch fiber owns the Euler ledger, and the preregistered selectivity condition fails: E is nonzero for primes, composites, shuffled primes, random-increasing masses, and every random-positive-charge field. No target analytic completion or same-object Weil compression exists."
+  analytic_structure:
+    same_object_character_resolution: true
+    exact_euler_zero_mode: true
+    nonzero_character_motion: true
+    unified_bloch_fiber_ledger: false
+    arithmetic_selectivity: false
+    prime_E_summary: 0.01491104027906271
+    composite_E_summary: 0.002353524613482555
+    shuffled_E_summary: 0.00005027756158583232
+    random_increasing_E_summary: 0.00003197088387131679
+    positive_charge_control_E_min: 0.011522075401440002
+    positive_charge_control_E_max: 0.014221391124950388
+    rank_coboundary_gauge: true
+    entropy_coboundary_gauge: true
+    roof_entropy_parameter_shift: true
+    forward_dag_character_energy: 0.0
+    analytic_continuation_to_target: false
+    completed_functional_equation: false
+    gamma_factor: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    riemann_von_mangoldt_law: false
+  weil_compression:
+    status: "No natural same-object Weil/Hermitian compression is derived from SD-C15."
+    evidence_status: OPEN
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/summary.json
+    - results/inventory_charge_controls.csv
+    - results/gauge_reparameterization.csv
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The Z-lift and its Bloch decomposition are canonical constructions from the same symbolic cocycle."
+  strongest_failure: "Positive charges break inverse time reversal, while inverse charges contaminate the Euler zero mode at r=2. No fixed self-adjoint generator, compact-resolvent theorem, target counting law, or Route-B-ready quantization is obtained."
+  metrics:
+    canonical_Z_lift: true
+    canonical_bloch_decomposition: true
+    positive_charge_inverse_symmetry: false
+    inverse_charge_first_ledger_leak: 2
+    fixed_self_adjoint_generator: false
+    natural_quantization: false
+    compact_resolvent: false
+    target_counting_law: false
+    route_b_readiness: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/exact_path_census.csv
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "composite-only inventories"
+    - "seed-13013 shuffled prime inventories"
+    - "seed-13014 random-increasing inventories"
+    - "32 positive-charge fields"
+    - "inverse charges (+1,-1)"
+    - "rank and entropy coboundaries"
+    - "entropy-roof parameter shift"
+    - "forward-DAG grammar"
+  proves_too_much_risk: "Decisive. Every recurrent inventory with nonzero adjacent amplitudes has a nonconstant two-atom continuant coefficient; composite, shuffled, random, and random-charge controls reproduce the response."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "SD-C15 proves that one positive-cone symbolic Z-skew extension has an exact deck-neutral reciprocal Euler coefficient and nonzero-character Fredholm motion. It also proves that no individual unitary Bloch fiber has the Euler ledger, that the transverse response is generic across frozen nonprime and random controls, and that inverse time reversal leaks into degree zero at power two. It establishes no arithmetic-selective transverse invariant, target divisor, analytic completion, Weil compression, RH statement, or Hilbert-Polya operator. Stage status: GO_EQUIVARIANT_EULER_LEDGER / GO_CHARACTER_RESOLUTION / STOP_UNIFIED_BLOCH_FIBER / STOP_ARITHMETIC_SELECTIVITY / STOP_TIME_REVERSAL / STOP_SCOPED / PROVES_TOO_MUCH."
+blocking_conditions:
+  - "Every positive adjacent charge field with nonzero cross amplitudes has a nonconstant two-atom determinant coefficient, independent of prime arithmetic."
+  - "Every genuine unitary Bloch fiber has a mixed power-two trace term; exact Euler data live only in the deck-neutral coefficient."
+  - "Composite, shuffled, random-increasing, and all 32 random-positive-charge controls have nonzero response energy."
+  - "Inverse/reversal charges move the adjacent two-cycle into Fourier degree zero at r=2."
+  - "Rank and entropy vertex-potential phases are gauge-trivial."
+  - "The entropy-roof character is only the parameter shift s to s-i theta."
+  - "The forward-DAG control recovers Euler exactness by returning to determinant-invisible acyclicity."
+  - "No target continuation, divisor, Gamma completion, Weil compression, or fixed self-adjoint generator exists."
+next_smallest_test: "Within Symbolic Dynamics, test a source-derived character observable only if its first nonzero Fourier coefficient can be proved to vanish on composite, shuffled, and random-increasing tensor inventories before any root computation; reject any charge rule determined only by adjacency, positivity, rank, or entropy coboundaries."
+round2_clues:
+  - "ROUND2_CLUE: a geometric holonomy or scattering carrier might impose arithmetic-selective phases, but this leaves the current symbolic family and is recorded without development."
+route_b_invocation_allowed: false

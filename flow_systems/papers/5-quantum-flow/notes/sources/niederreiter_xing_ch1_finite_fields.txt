@@ -1,0 +1,1513 @@
+                              Copyrighted Material
+
+
+
+
+1                 Finite Fields and Function Fields
+
+
+
+
+In the first part of this chapter, we describe the basic results on finite fields,
+which are our ground fields in the later chapters on applications. The second
+part is devoted to the study of function fields.
+    Section 1.1 presents some fundamental results on finite fields, such as the
+existence and uniqueness of finite fields and the fact that the multiplicative
+group of a finite field is cyclic. The algebraic closure of a finite field and
+its Galois group are discussed in Section 1.2. In Section 1.3, we study
+conjugates of an element and roots of irreducible polynomials and determine
+the number of monic irreducible polynomials of given degree over a finite
+field. In Section 1.4, we consider traces and norms relative to finite extensions
+of finite fields.
+    A function field governs the abstract algebraic aspects of an algebraic
+curve. Before proceeding to the geometric aspects of algebraic curves in
+the next chapters, we present the basic facts on function fields. In partic-
+ular, we concentrate on algebraic function fields of one variable and their
+extensions including constant field extensions. This material is covered in
+Sections 1.5, 1.6, and 1.7.
+    One of the features in this chapter is that we treat finite fields using the
+Galois action. This is essential because the Galois action plays a key role in
+the study of algebraic curves over finite fields. For comprehensive treatments
+of finite fields, we refer to the books by Lidl and Niederreiter [71, 72].
+
+1.1 Structure of Finite Fields
+
+For a prime number p, the residue class ring Z/pZ of the ring Z of integers
+forms a field. We also denote Z/pZ by Fp . It is a prime field in the sense
+that there are no proper subfields of Fp . There are exactly p elements in Fp .
+In general, a field is called a finite field if it contains only a finite number of
+elements.
+   Proposition 1.1.1. Let k be a finite field with q elements. Then:
+     (i) there exists a prime p such that Fp ⊆ k;
+    (ii) q = p n for some integer n ≥ 1;
+   (iii) α q = α for all α ∈ k.
+                             Copyrighted Material
+
+
+
+
+                                2       CHAPTER 1
+
+
+
+   Proof.
+     (i) Since k has only q< ∞ elements, the characteristic of k must
+         be a prime p. Thus, Fp is the prime subfield of k.
+    (ii) We consider k as a vector space over Fp . Since k is finite, the
+         dimension n := dimFp (k) is also finite. Let {α1 , . . . , αn } be a basis
+         of k over Fp . Then each element of k can be uniquely represented
+         in the form a1 α1 + · · · + an αn with a1 , . . . , an ∈ Fp . Thus, q = p n .
+   (iii) It is trivial that α q = α if α = 0. Assume that α is a nonzero
+         element of k. Since all nonzero elements of k form a multiplicative
+         group k ∗ of order q − 1, we have α q−1 = 1, and so α q = α.
+
+
+  Using the above proposition, we can show the most fundamental result
+concerning the existence and uniqueness of finite fields.
+
+   Theorem 1.1.2. For every prime p and every integer n ≥ 1, there
+   exists a finite field with p n elements. Any finite field with q = p n
+   elements is isomorphic to the splitting field of the polynomial x q − x
+   over Fp .
+
+
+   Proof. (Existence) Let Fp be an algebraic closure of Fp and let k ⊆ Fp
+                                                n
+   be the splitting field of the polynomial x p − x over Fp . Let R be the
+                           n
+   set of all roots of x p − x in k. Then R has exactly p n elements since
+   the derivative of the polynomial x p − x is p n x p −1 − 1 = −1. It is
+                                          n             n
+
+
+   easy to verify that R contains Fp and R forms a subfield of Fp (note that
+             m         m      m
+   (α + β)p = α p + β p for any α, β ∈ Fp and any integer m ≥ 1).
+   Thus, R is exactly the splitting field k, that is, k is a finite field with
+   p n elements.
+       (Uniqueness) Let k ⊆ Fp be a finite field with q elements. By Propo-
+   sition 1.1.1(iii), all elements of k are roots of the polynomial x q − x.
+   Thus, k is the splitting field of the polynomial of x q − x over Fp . This
+   proves the uniqueness.
+    The above theorem shows that for given q = p n , the finite field with q
+elements is unique in a fixed algebraic closure Fp . We denote this finite field
+by Fq and call it the finite field of order q (or with q elements). It follows from
+the proof of the above theorem that Fq is the splitting field of the polynomial
+x q −x over Fp , and so Fq /Fp is a Galois extension of degree n. The following
+result yields the structure of the Galois group Gal(Fq /Fp ).
+                             Copyrighted Material
+
+
+
+
+           FINITE FIELDS AND FUNCTION FIELDS                        3
+
+
+
+  Lemma 1.1.3. The Galois group Gal(Fq /Fp ) with q = p n is a cyclic
+  group of order n with generator σ : α → α p .
+
+  Proof. It is clear that σ is an automorphism in Gal(Fq /Fp ). Suppose
+  that σ m is the identity for some m ≥ 1. Then σ m (α) = α, that is,
+     m                                       m
+  α p − α = 0, for all α ∈ Fq . Thus, x p − x has at least q = p n
+  roots. Therefore, p m ≥ p n , that is, m ≥ n. Hence, the order of σ is
+  equal to n since |Gal(Fq /Fp )| = n.
+
+
+  Lemma 1.1.4. The field Fpm is a subfield of Fpn if and only if
+  m divides n.
+
+  Proof. If m divides n, then there exists a subgroup H of Gal(Fpn /Fp )
+  with |H | = n/m since Gal(Fpn /Fp ) is a cyclic group of order n
+  by Lemma 1.1.3. Let k be the subfield of Fpn /Fp fixed by H . Then
+  [k : Fp ] = m. Thus, k = Fpm by the uniqueness of finite fields.
+     Conversely, let Fpm be a subfield of Fpn . Then the degree m =
+  [Fpm : Fp ] divides the degree n = [Fpn : Fp ].
+
+
+  Theorem 1.1.5. Let q be a prime power. Then:
+
+    (i) Fq is a subfield of Fq n for every integer n ≥ 1.
+   (ii) Gal(Fq n /Fq ) is a cyclic group of order n with generator
+        σ : α → α q .
+  (iii) Fq m is a subfield of Fq n if and only if m divides n.
+
+  Proof.
+
+    (i) Let q = p s for some prime p and integer s ≥ 1. Then by
+        Lemma 1.1.4, Fq = Fps ⊆ Fpns = Fq n .
+   (ii) Using exactly the same arguments as in the proof of Lemma 1.1.3
+        but replacing p by q, we obtain the proof of (ii).
+  (iii) By Lemma 1.1.4, Fq m = Fpms is a subfield of Fq n = Fpns if and
+        only if ms divides ns. This is equivalent to m dividing n.
+
+    We end this section by determining the structure of the multiplicative group
+F∗q of nonzero elements of a finite field Fq .
+                           Copyrighted Material
+
+
+
+
+                              4      CHAPTER 1
+
+
+
+   Proposition 1.1.6. The multiplicative group F∗q is cyclic.
+
+   Proof. Let t ≤ q − 1 be the largest order of an element of the group
+   F∗q . By the structure theorem for finite abelian groups, the order of any
+   element of F∗q divides t. It follows that every element of F∗q is a root of
+   the polynomial x t − 1, hence, t ≥ q − 1, and so t = q − 1.
+
+   Definition 1.1.7. A generator of the cyclic group F∗q is called a primitive
+   element of Fq .
+
+  Let γ be a generator of F∗q . Then γ n is also a generator of F∗q if and only if
+gcd(n, q − 1) = 1. Thus, we have the following result.
+
+   Corollary 1.1.8. There are exactly φ(q − 1) primitive elements of Fq ,
+   where φ is the Euler totient function.
+
+
+
+1.2 Algebraic Closure of Finite Fields
+
+Let p be the characteristic of Fq . It is clear that the algebraic closure Fq
+of Fq is the same as Fp .
+
+   Theorem 1.2.1. The algebraic closure of Fq is the union ∪∞
+                                                            n=1 Fq n .
+
+
+   Proof. Put U := ∪∞      n=1 Fq n . It is clear that U is a subset of Fq since
+   Fq n is a subset of F
+                        p . It is also easy to verify that U forms a field.
+                           s
+      Let f (x) =                    i
+                           i=0 λi x be a nonconstant polynomial over U .
+   Then for 0 ≤ i ≤ s we have λi ∈ Fq mi for some mi ≥ 1.
+   Hence,by Theorem 1.1.5(iii), f (x) is a polynomial over Fq m , where
+   m = si=0 mi . Let α be a root of f (x). Then Fq m (α) is an algebraic
+   extension of Fq m and Fq m (α) is a finite-dimensional vector space over
+   Fq m . Hence, Fq m (α) is also a finite field containing Fq . Let r be the
+   degree of Fq m (α) over Fq m . Then Fq m (α) contains exactly q rm elements,
+   that is, Fq m (α) = Fq rm . So α is an element of U . This shows that U is
+   the algebraic closure Fq .
+   We are going to devote the rest of this section to the study of the Galois
+group Gal(Fq /Fq ). We start from the definition of the inverse limit for finite
+groups. For a detailed discussion of inverse limits of groups, we refer to the
+book by Wilson [130].
+                                Copyrighted Material
+
+
+
+
+          FINITE FIELDS AND FUNCTION FIELDS                              5
+
+
+
+     A directed set is a nonempty partially ordered set I such that for all
+i1 , i2 ∈ I , there is an element j ∈ I for which i1 ≤ j and i2 ≤ j .
+
+  Definition 1.2.2. An inverse system {Gi , ϕij } of finite groups indexed
+  by a directed set I consists of a family {Gi : i ∈ I } of finite groups and
+  a family {ϕij ∈ Hom(Gj , Gi ) : i, j ∈ I, i ≤ j } of maps such that ϕii is
+  the identity on Gi for each i and ϕij ◦ ϕj k = ϕik whenever i ≤ j ≤ k.
+  Here, Hom(Gj , Gi ) denotes the set of group homomorphisms from
+  Gj to Gi .
+
+    For an inverse system {Gi , ϕij } 
+                                      of finite groups indexed by a directed set
+I , we form the Cartesian
+                          product      i∈I Gi , viewed as a product group. We
+consider the subset of i∈I Gi given by
+                                                                            
+                   
+    D := (xi ) ∈          Gi : ϕij (xj ) = xi   for all i, j ∈ I   with i ≤ j .
+                    i∈I
+
+                                                    
+It is easy to check that D forms a subgroup of         i∈I Gi . We call D the inverse
+limit of {Gi , ϕij }, denoted by lim← Gi .
+
+  Example 1.2.3. Define a partial order in the set N of positive integers
+  as follows: for m, n ∈ N, let m ≤ n if and only if m divides n. For
+  each positive integer i, let Gi be the cyclic group Z/iZ, and for each
+  pair (i, j ) ∈ N2 with i|j , define ϕij : n ∈ Gj → n ∈ Gi , with the bar
+  indicating the formation of a residue class. Then it is easy to verify that
+  the family {Z/iZ, ϕij } forms an inverse system of finite groups indexed
+  by N. The inverse limit lim← Z/iZ is denoted by Ẑ.
+
+  Example 1.2.4. Now let Fq be the finite field with q elements. We
+  consider the family of Galois groups Gi := Gal(Fq i /Fq ) of Fq i over Fq
+  for each i ∈ N. We define a partial order in N as in Example 1.2.3. For
+  each pair (i, j ) ∈ N2 with i|j , define the homomorphism ϕij : σj ∈
+  Gal(Fq j /Fq ) → σj |Fq i ∈ Gal(Fq i /Fq ), where σj |Fq i stands for the
+  restriction of σj to Fq i . Then {Gal(Fq i /Fq ), ϕij } forms an inverse system
+  of finite groups indexed by N.
+
+  Theorem 1.2.5. We have
+
+                          Gal(Fq /Fq )    lim Gal(Fq i /Fq ).
+                                           ←
+                          Copyrighted Material
+
+
+
+
+                             6        CHAPTER 1
+
+
+
+  Proof. For each i ∈ N, we have a homomorphism Gal(Fq /Fq ) →
+  Gal(Fq i /Fq ) obtained by restriction. These together yield a homomor-
+  phism
+                                           
+                     θ : Gal(Fq /Fq ) →          Gal(Fq i /Fq ).
+                                           i∈N
+
+
+  It is clear that the image of θ is contained in lim← Gal(Fq i /Fq ). We show
+  in the following that θ is an isomorphism onto lim← Gal(Fq i /Fq ).
+      If σ = 1 is in Gal(Fq /Fq ), then there exists an element x ∈ Fq such
+  that σ (x) = x. By Theorem 1.2.1, x belongs to Fq n for some n ∈ N.
+  Now the image of σ in Gal(Fq n /Fq ) maps x to σ (x), and thus θ(σ ) is
+  not the identity. Hence, θ is injective.
+      Take (σi ) in lim← Gal(Fq i /Fq ). If x ∈ Fq and we set σ (x) = σi (x),
+  where x ∈ Fq i , then this is an unambiguous definition of a map
+  σ : Fq → Fq . It is easy to check that σ is an element of Gal(Fq /Fq ).
+  Since θ(σ ) = (σi ), lim← Gal(Fq i /Fq ) is the image of θ.
+
+
+  Corollary 1.2.6. We have
+
+                                 Gal(Fq /Fq )     Ẑ.
+
+  Proof. For each i ∈ N, we can identify the group Gal(Fq i /Fq )
+  with Z/iZ by Theorem 1.1.5(ii). Under this identification, the family of
+  homomorphisms in Example 1.2.4 coincides with that in Example 1.2.3.
+  Thus, the desired result follows from Theorem 1.2.5.
+   It is another direct consequence of Theorem 1.2.5 that the restrictions of all
+automorphisms in Gal(Fq /Fq ) to Fq m give all automorphisms in Gal(Fq m /Fq ),
+that is, we obtain the following result.
+
+  Corollary 1.2.7. For every integer m ≥ 1, we have
+
+                  Gal(Fq m /Fq ) = {σ |Fq m : σ ∈ Gal(Fq /Fq )}.
+
+    For each i ∈ N, let πi ∈ Gal(Fq i /Fq ) be the automorphism πi : x → x q .
+Then the element (πi ) is in lim← Gal(Fq i /Fq ). This yields an automorphism
+in Gal(Fq /Fq ). We call it the Frobenius (automorphism) of Fq /Fq , denoted
+by π. It is clear that π(x) = x q for all x ∈ Fq and that the restriction of π to
+Fq i is πi , the Frobenius (automorphism) of Fq i /Fq .
+                             Copyrighted Material
+
+
+
+
+          FINITE FIELDS AND FUNCTION FIELDS                             7
+
+
+
+1.3 Irreducible Polynomials
+
+Let α ∈ Fq and σ ∈ Gal(Fq /Fq ). The element σ (α) is called a conjugate of
+α with respect to Fq .
+
+  Lemma 1.3.1. The set of conjugates of an element α ∈ Fq with respect
+  to Fq is equal to {π i (α) : i = 0, 1, 2, . . .}, where π ∈ Gal(Fq /Fq ) is the
+  Frobenius automorphism.
+
+  Proof. Let σ ∈ Gal(Fq /Fq ). There exists an integer m ≥ 1 such that α
+  is an element of Fq m . Then the restrictions σ |Fq m and π|Fq m are both ele-
+  ments of Gal(Fq m /Fq ). Moreover, π|Fq m is a generator of Gal(Fq m /Fq ).
+  Thus, σ |Fq m = (π|Fq m )i for some i ≥ 0. Hence, σ (α) = σ |Fq m (α) =
+  (π|Fq m )i (α) = π i (α).
+
+
+  Proposition 1.3.2. All distinct conjugates of an element α ∈ Fq with
+  respect to Fq are α, π(α), . . . , π m−1 (α), where m is the least positive
+  integer such that Fq m contains α, that is, m is such that Fq m = Fq (α).
+
+  Proof. The restriction π|Fq m of π to Fq m has order m since it is a
+  generator of Gal(Fq m /Fq ). Hence, π m (α) = (π|Fq m )m (α) = α. This
+  implies that α, π(α), . . . , π m−1 (α) yield all conjugates of α. It remains
+  to show that they are pairwise distinct. Suppose that π n (α) = α for
+  some n ≥ 1. Then it is clear that π n (β) = β for all β ∈ Fq (α), that is,
+     n                                                                 n
+  β q − β = 0 for all elements β ∈ Fq m . Thus, the polynomial x q − x has
+  at least q m roots. Hence, n ≥ m. This implies that α, π(α), . . . , π m−1 (α)
+  are pairwise distinct.
+
+
+  Corollary 1.3.3. All distinct conjugates of an element α ∈ Fq with
+                                2             m−1
+  respect to Fq are α, α q , α q , . . . , α q , where m is the least positive
+  integer such that Fq m contains α, that is, m is such that Fq m = Fq (α).
+
+  Proof. This follows from Proposition 1.3.2 and the fact that π(α) = α q .
+
+
+   By field theory, all conjugates of α with respect to Fq form the set of all
+roots of the minimal polynomial of α over Fq . Hence, we get the following
+result.
+                          Copyrighted Material
+
+
+
+
+                             8        CHAPTER 1
+
+
+
+  Corollary 1.3.4. Let f be an irreducible polynomial over Fq of degree
+                                                     2              m−1
+  m and let α ∈ Fq be a root of f . Then α, α q , α q , . . . , α q     are all
+  distinct roots of f , and moreover Fq m = Fq (α).
+
+
+  From the above result we obtain that all roots of an irreducible polynomial
+f over Fq are simple and that Fq m is the splitting field of f over Fq , where
+m = deg(f ).
+
+
+  Lemma 1.3.5. A monic irreducible polynomial f (x) of degree m over
+                n
+  Fq divides x q − x if and only if m divides n.
+
+
+  Proof. Let α ∈ Fq be a root of f (x). Then we have Fq m = Fq (α)
+  by Corollary 1.3.4. If m divides n, then Fq m is a subfield of Fq n by
+                                                             n
+  Theorem 1.1.5(iii). From Proposition 1.1.1(iii) we get β q − β = 0 for
+                                   n
+  all β ∈ Fq n . In particular, α q − α = 0. Hence, the minimal polynomial
+                                    n
+  f (x) of α over Fq divides x q − x.
+                          n              n
+      If f (x) divides x q − x, then α q − α = 0. Hence, α ∈ Fq n by the
+  existence part of the proof of Theorem 1.1.2. Now Fq m = Fq (α) ⊆ Fq n
+  and our desired result follows from Theorem 1.1.5(iii).
+           n
+   Since x q − x has no multiple roots, we know from Lemma 1.3.5 that the
+product of all monic irreducible polynomials over Fq whose degrees divide
+                 n
+n is equal to x q − x. From this we obtain the number of monic irreducible
+polynomials over Fq of given degree, as stated in the following theorem.
+
+
+  Theorem 1.3.6. Let Iq (n) be the number of monic irreducible polyno-
+  mials over Fq of fixed degree n ≥ 1. Then
+
+                                      1
+                           Iq (n) =         µ(d)q n/d ,
+                                      n d|n
+
+
+  where the sum is over all positive integers d dividing n and µ is the
+  Möbius function on N defined by
+                
+                
+                1     if d = 1,
+          µ(d) = (−1) if d is the product of r distinct primes,
+                     r
+                
+                
+                  0    otherwise.
+                               Copyrighted Material
+
+
+
+
+          FINITE FIELDS AND FUNCTION FIELDS                                       9
+
+
+
+  Proof. Since the product of all monic irreducible polynomials over
+                                           n
+  Fq whose degrees divide n is equal to x q − x, we obtain the identity
+                                  
+                            qn =       dIq (d)
+                                         d|n
+
+  by comparing degrees. Applying the Möbius inversion formula
+  (e.g., see [72, p. 92]), we get the desired result.
+
+
+
+1.4 Trace and Norm
+
+In this section, we discuss two maps from the field Fq m to the field Fq : trace
+and norm.
+
+  Definition 1.4.1. The trace map TrFq m /Fq from Fq m to Fq is defined
+  to be
+                                        
+                                               σ,
+                                        σ ∈G
+
+
+  where G := Gal(Fq m /Fq ), that is, for any α ∈ Fq m , we put
+                                                 
+                              TrFq m /Fq (α) =          σ (α).
+                                                 σ ∈G
+
+
+  If there is no confusion, we simply denote the map by Tr.
+
+For any τ ∈ Gal(Fq m /Fq ) and α ∈ Fq m , we have
+
+                                                               
+       τ (Tr(α)) = τ          σ (α) =           (τ σ )(α) =             σ (α) = Tr(α).
+                       σ ∈G              σ ∈G                    σ ∈G
+
+
+Thus indeed, Tr is a map from Fq m to Fq . Furthermore, the trace map has the
+following properties.
+
+  Proposition 1.4.2.
+
+    (i) Tr(α + β) = Tr(α) + Tr(β) for all α, β ∈ Fq m .
+   (ii) Tr(aα) = aTr(α) for all α ∈ Fq m and a ∈ Fq .
+                             Copyrighted Material
+
+
+
+
+                              10      CHAPTER 1
+
+
+
+  (iii) Tr(σ (α)) = Tr(α) for all σ ∈ Gal(Fq m /Fq ) and α ∈ Fq m . In
+        particular, Tr(π(α)) = Tr(α q ) = Tr(α), where π ∈ Gal(Fq m /Fq )
+        is the Frobenius.
+
+   The proof of the above proposition easily follows from the definition
+of the trace map. We glean from (i) and (ii) of the above proposition that
+Tr is a linear transformation when we view Fq m and Fq as vector spaces
+over Fq .
+   Since π is a generator of the cyclic group G = Gal(Fq m /Fq ) of order m,
+                         
+we have Tr = σ ∈G σ = m−1    i=0 π . Hence, for any α ∈ Fq m , we have
+                                   i
+
+
+
+                       
+                       m−1
+                                                    2                m−1
+             Tr(α) =         π i (α) = α + α q + α q + · · · + α q         .
+                       i=0
+
+
+  Theorem 1.4.3.
+    (i) The trace map is surjective. Thus, the kernel of Tr is a vector space
+        of dimension m − 1 over Fq .
+   (ii) An element α of Fq m satisfies Tr(α) = 0 if and only if α =
+        π(β) − β = β q − β for some β ∈ Fq m .
+
+  Proof.
+    (i) An element α of Fq m is in the kernel of Tr if and only if α is a root
+                                          2             m−1
+        of the polynomial x + x q + x q + · · · + x q . Thus, the kernel
+        of Tr contains at most q m−1 elements. Therefore, there are at least
+        q m /q m−1 = q elements in the image of Tr. Since the image of Tr
+        is a subset of Fq , we conclude that the image is the same as Fq . As
+        the dimension of the Fq -linear space Fq m is m, the dimension of the
+        kernel is equal to m − 1.
+   (ii) Consider the Fq -linear map φ : γ ∈ Fq m → π(γ ) − γ . By Prop-
+        osition 1.4.2(iii), the image Im(φ) is contained in the kernel of
+        Tr. Now φ(γ ) = 0 if and only if π(γ ) = γ . This is equivalent
+        to γ being an element of Fq . Hence, the kernel of φ is Fq . So
+        Im(φ) contains q m /q = q m−1 elements. This implies that Im(φ)
+        is the same as the kernel of Tr. Therefore, Tr(α) = 0 if and only
+        if α ∈ Im(φ), that is, there exists an element β ∈ Fq m such that
+        α = φ(β) = π(β) − β.
+                               Copyrighted Material
+
+
+
+
+         FINITE FIELDS AND FUNCTION FIELDS                                            11
+
+
+
+  Definition 1.4.4. The norm map NmFq m /Fq from Fq m to Fq is defined
+  to be
+                                        
+                                              σ,
+                                       σ ∈G
+
+
+  where G := Gal(Fq m /Fq ), that is, for any α ∈ Fq m , we put
+                                                   
+                          NmFq m /Fq (α) =                σ (α).
+                                                   σ ∈G
+
+
+  If there is no confusion, we simply denote the map by Nm.
+
+For any τ ∈ Gal(Fq m /Fq ) and α ∈ Fq m , we have
+
+                                                                 
+     τ (Nm(α)) = τ            σ (α) =           (τ σ )(α) =               σ (α) = Nm(α).
+                       σ ∈G              σ ∈G                      σ ∈G
+
+Thus indeed, Nm is a map from Fq m to Fq . Furthermore, the norm map has
+the following properties.
+
+  Proposition 1.4.5.
+
+    (i) Nm(α · β) = Nm(α) · Nm(β) for all α, β ∈ Fq m .
+   (ii) Nm(aα) = a m Nm(α) for all α ∈ Fq m and a ∈ Fq .
+  (iii) Nm(σ (α)) = Nm(α) for all σ ∈ Gal(Fq m /Fq ) and α ∈ Fq m .
+        In particular, Nm(π(α)) = Nm(α q ) = Nm(α), where π ∈
+        Gal(Fq m /Fq ) is the Frobenius.
+
+  The proof of the above proposition easily follows from the definition of the
+norm map. We obtain from (i) of the above proposition that Nm is a group
+homomorphism from F∗q m to F∗q .
+  Since π is a generator of the cyclic group G = Gal(Fq m /Fq ) of order m,
+                         
+we have Nm = σ ∈G σ = m−1    i=0 π . Hence, for any α ∈ Fq m , we have
+                                   i
+
+
+
+                         
+                         m−1
+                                                             2              m−1
+               Nm(α) =          π i (α) = α · α q · α q · · · · · α q             .
+                          i=0
+                                Copyrighted Material
+
+
+
+
+                                   12         CHAPTER 1
+
+
+
+   Theorem 1.4.6.
+    (i) The norm map is an epimorphism from F∗q m to F∗q . Thus, the kernel
+        of Nm is a cyclic group of order (q m − 1)/(q − 1).
+   (ii) An element α of Fq m satisfies Nm(α) = 1 if and only if α =
+        π(β)/β = β q−1 for some β ∈ F∗q m .
+
+   Proof. Using similar arguments as in the proof of Theorem 1.4.3 and
+   replacing Tr by Nm, we obtain the desired results.
+
+
+
+1.5 Function Fields of One Variable
+
+For a given field k, a function field over k is a field extension F of k such that
+there is at least one element x ∈ F that is transcendental over k. The field k is
+called a constant field of F .
+   For a function field F over k, we consider the set k1 of elements of F that
+are algebraic over k. It is clear that k1 is a field since sums, products, and
+inverses of algebraic elements over k are again algebraic over k. Hence, we
+have the chain of fields k ⊆ k1 ⊆ F .
+
+   Lemma 1.5.1. Let F be a function field over k and let k1 be the set
+   of elements of F that are algebraic over k. Then:
+    (i) F is also a function field over k1 ;
+   (ii) k1 is algebraically closed in F , that is, all elements in F \ k1 are
+        transcendental over k1 .
+
+
+   Proof.
+    (i) Let x ∈ F be a transcendental element over k. We will show that
+        x is also transcendental
+                                          over k1 . Suppose that x were algebraic
+        over k1 . Let ni=0 ci T i with ci ∈ k1 be the minimal polynomial
+        of x over k1 . Then x is algebraic over k(c0 , c1 , . . . , cn ). Hence,
+        k(c0 , c1 , . . . , cn , x) is a finite extension of k(c0 , c1 , . . . , cn ). Since
+        all ci are algebraic over k, it follows that k(c0 , c1 , . . . , cn ) is also
+        a finite extension of k. Therefore, [k(c0 , c1 , . . . , cn , x) : k] =
+        [k(c0 , c1 , . . . , cn , x) : k(c0 , c1 , . . . , cn )] · [k(c0 , c1 , . . . , cn ) : k] <
+        ∞. Thus [k(x) : k] ≤ [k(c0 , c1 , . . . , cn , x) : k] < ∞. This implies
+        that x is algebraic over k, a contradiction.
+                             Copyrighted Material
+
+
+
+
+         FINITE FIELDS AND FUNCTION FIELDS                           13
+
+
+
+   (ii) It suffices to show that if α ∈ F is algebraic over k1 , then
+                    n of ik1 . Let α ∈ F be an algebraic element over
+        α is an element
+        k1 and let i=0 ci T with ci ∈ k1 be its minimal polynomial over
+        k1 . With the same arguments as in the proof of (i), we can show that
+        [k(α) : k] < ∞, that is, α is algebraic over k. Hence, α is in k1 .
+
+
+   For a function field F over k, we say that k is algebraically closed in F if k
+is the same as k1 = {α ∈ F : α is algebraic over k}. In this case, we call
+k the full constant field of F . From now on we always mean that F is a
+function field over k with full constant field k whenever we write F /k. We
+will now concentrate on algebraic function fields of one variable, which are
+defined as follows.
+
+
+  Definition 1.5.2. The function field F /k is an algebraic function field
+  of one variable over k if there exists a transcendental element x ∈ F
+  over k such that F is a finite extension of the rational function field
+  k(x). If in addition the full constant field k is finite, then F /k is
+  called a global function field.
+
+    The study of algebraic function fields of one variable has a long history.
+Classical books on this topic include those by Chevalley [18] and Deur-
+ing [25]. The more recent book by Stichtenoth [117] puts a special emphasis
+on global function fields.
+    In the rest of this section, F /k will always denote an algebraic function
+field of one variable. We develop the theory of algebraic function fields of
+one variable by starting from the concept of a valuation. We add ∞ to the
+field R of real numbers to form the set R ∪ {∞}, and we put ∞ + ∞ =
+∞ + c = c + ∞ = ∞ for any c ∈ R. We agree that c < ∞ for any
+c ∈ R.
+
+
+  Definition 1.5.3. A valuation of F /k is a map ν : F → R ∪ {∞}
+  satisfying the following conditions:
+  1. ν(z) = ∞ if and only if z = 0;
+  2. ν(yz) = ν(y) + ν(z) for all y, z ∈ F ;
+  3. ν(y + z) ≥ min (ν(y), ν(z)) for all y, z ∈ F ;
+  4. ν(F ∗ ) = {0};
+  5. ν(α) = 0 for all α ∈ k ∗ .
+                          Copyrighted Material
+
+
+
+
+                            14         CHAPTER 1
+
+
+
+  Remark 1.5.4.
+  (i) Condition (3) is called the triangle inequality. In fact, we have a
+      stronger result called the strict triangle inquality, which says that
+                           ν(y + z) = min (ν(y), ν(z))                  (1.1)
+       whenever ν(y) = ν(z). In order to show (1.1), we can assume
+       that ν(y) < ν(z). Suppose that ν(y + z) = min (ν(y), ν(z)). Then
+       ν(y + z) > min (ν(y), ν(z)) = ν(y) by condition (3). Thus ν(y) =
+       ν((y + z) − z) ≥ min (ν(y + z), ν((−1) · z)) = min (ν(y + z), ν(z)) >
+       ν(y), a contradiction.
+  (ii) If k is finite, then condition (5) follows from the other conditions in
+       Definition 1.5.3. Note that if k = Fq , then α q−1 = 1 for all α ∈ k ∗
+       by Proposition 1.1.1(iii), and so 0 = ν(1) = ν(α q−1 ) = (q − 1)ν(α),
+       which yields ν(α) = 0.
+
+  If the image ν(F ∗ ) is a discrete set in R, then ν is called discrete. If
+ν(F ∗ ) = Z, then ν is called normalized.
+  Example 1.5.5. Consider the rational function field k(x). The full
+  constant field of k(x) is k since it is easily seen that a nonconstant
+  rational function in k(x) cannot be algebraic over k. Let p(x) be a monic
+  irreducible polynomial in k[x]. Let the map νp(x) : k(x) → Z ∪ {∞} be
+  defined as follows:
+    (i) for a nonzero polynomial f (x) ∈ k[x] with pm (x)f (x), that is,
+        pm (x)|f (x) and pm+1 (x) |f (x), put νp(x) (f (x)) = m;
+   (ii) for a nonzero rational function f (x)/g(x) ∈ k(x), put
+        νp(x) (f (x)/g(x)) = νp(x) (f (x)) − νp(x) (g(x));
+  (iii) put νp(x) (0) = ∞.
+  It is easy to verify that νp(x) is a well-defined map and satisfies the
+  conditions in Definition 1.5.3. Hence, νp(x) is a (discrete) normalized
+  valuation of k(x).
+     Besides the valuations νp(x) defined above, we have another (discrete)
+  normalized valuation ν∞ of k(x) defined by
+                                 
+                         f (x)
+                    ν∞               = deg(g(x)) − deg(f (x))
+                         g(x)
+
+  for any two nonzero polynomials f (x), g(x) ∈ k[x] and ν∞ (0) = ∞. It
+  is easy to show that ν∞ is a well-defined valuation map.
+                             Copyrighted Material
+
+
+
+
+         FINITE FIELDS AND FUNCTION FIELDS                          15
+
+
+
+     We will see later in this section (see Theorem 1.5.8) that every
+  normalized valuation of k(x) is of the form νp(x) for some monic
+  irreducible polynomial p(x) ∈ k[x] or ν∞ .
+
+   Two discrete valuations ν and λ of F /k are called equivalent if there exists
+a constant c > 0 such that
+
+                        ν(z) = cλ(z) for all z ∈ F ∗ .
+
+Obviously, this yields an equivalence relation between discrete valuations of
+F /k. An equivalence class of discrete valuations of F /k is called a place
+of F /k.
+    If ν is a discrete valuation of F /k, then ν(F ∗ ) is a nonzero discrete
+subgroup of (R, +), and so we have ν(F ∗ ) = bZ for some positive b ∈ R.
+Thus, there exists a uniquely determined normalized valuation of F that is
+equivalent to ν. In other words, every place P of F /k contains a uniquely
+determined normalized valuation of F /k, which is denoted by νP . Thus, we
+can identify places of F /k and (discrete) normalized valuations of F /k.
+    For a place P of F /k and an element z ∈ F ∗ , we say that P is a zero of z
+if νP (z) > 0 and that P is a pole of z if νP (z) < 0.
+    For the normalized valuation νP of F /k we have νP (F ∗ ) = Z. Thus, there
+exists an element t ∈ F satisfying νP (t) = 1. Such an element t is called a
+local parameter (or uniformizing parameter) of F at the place P .
+    For a place P of F /k, we set
+
+                         OP = {z ∈ F : νP (z) ≥ 0}.
+
+Using the properties of valuations, it is easy to show that OP forms a subring
+of F with k ⊆ OP . We call OP the valuation ring of the place P .
+
+  Proposition 1.5.6. The valuation ring OP has a unique maximal ideal
+  given by
+                         MP := {z ∈ F : νP (z) ≥ 1}.
+
+  Proof. It is trivial that MP is an ideal of OP . Since 1 ∈ OP \MP , we ob-
+  tain that MP is a proper ideal. It remains to show that any proper ideal J
+  of OP is contained in MP . Take z ∈ J and suppose that νP (z) = 0. Then
+  νP (z −1 ) = −νP (z) = 0, and so z −1 ∈ OP . Thus, 1 = z −1 z ∈ J and,
+  hence, J = OP , a contradiction. Therefore, νP (z) ≥ 1 and J ⊆ MP .
+                          Copyrighted Material
+
+
+
+
+                             16       CHAPTER 1
+
+
+
+   The ideal MP is called the maximal ideal of the place P . It is, in fact, a
+principal ideal since MP = tOP for any local parameter t of F at P .
+
+
+  Remark 1.5.7. Valuation rings in F /k can be characterized purely
+  algebraically as the maximal proper Noetherian subrings of F /k,
+  or also as the maximal principal ideal domains properly contained in
+  F /k (see [105, Section 2.1]). A place of F /k can then be defined as the
+  maximal ideal of some valuation ring in F /k. This alternative approach
+  to the concept of a place is presented in the book of Stichtenoth [117].
+
+
+  We now determine all discrete valuations of the rational function field k(x).
+The valuations νp(x) and ν∞ are defined as in Example 1.5.5.
+
+
+  Theorem 1.5.8. Every discrete valuation of the rational function field
+  k(x) is equivalent to either νp(x) for some monic irreducible polynomial
+  p(x) in k[x] or to ν∞ .
+
+
+  Proof. Let ν be a discrete valuation of k(x) and let P be its correspond-
+  ing place. We distinguish two cases according to the value of ν(x).
+     Case 1: ν(x) ≥ 0. Then k[x] ⊆ OP and ν(k(x)∗ ) = {0} by the
+  properties of a valuation, and so J := k[x] ∩ MP is a nonzero ideal of
+  k[x]. Furthermore, J = k[x] since 1 ∈    / J. Since MP is a prime ideal
+  of OP , it follows that J is a prime ideal of k[x]. Consequently, there
+  exists a monic irreducible p(x) ∈ k[x] such that J is the principal ideal
+  (p(x)). In particular, c := ν(p(x)) > 0. If h(x) ∈ k[x] is not divisible by
+  p(x), then h(x) ∈/ MP , and so ν(h(x)) = 0. Thus, if we write a nonzero
+  r(x) ∈ k(x) in the form
+
+                                             f (x)
+                              r(x) = p(x)m
+                                             g(x)
+
+  with m ∈ Z and f (x), g(x) ∈ k[x] not divisible by p(x), then
+
+                     ν(r(x)) = mν(p(x)) = cνp(x) (r(x)),
+
+  and so ν is equivalent to νp(x) .
+                                Copyrighted Material
+
+
+
+
+         FINITE FIELDS AND FUNCTION FIELDS                                           17
+
+
+
+    Case 2: ν(x) < 0. Then c := ν(x −1 ) > 0 and x −1 ∈ MP . Take any
+  nonzero f (x) ∈ k[x] of degree d, say. Then
+
+                       
+                       d                    
+                                            d                      
+                                                                   d
+            f (x) =          αi x i = x d         αi x i−d = x d         αd−i x −i
+                       i=0                  i=0                    i=0
+
+
+  with all αi ∈ k. Furthermore,
+
+               
+               d                             
+                                             d
+                      αd−i x −i = αd +             αd−i x −i = αd + s(x)
+                i=0                          i=1
+
+
+  with s(x) ∈ MP . Since αd = 0, we have ν(αd ) = 0, and so
+
+                                    
+                                    d
+                                ν           αd−i x −i    =0
+                                    i=0
+
+
+  by the strict triangle inequality (see Remark 1.5.4(i)). It follows that
+
+                ν(f (x)) = ν(x d ) = −dν(x −1 ) = cν∞ (f (x)),
+
+  and so ν is equivalent to ν∞ .
+
+
+  Remark 1.5.9. If we write Oν = {z ∈ F : ν(z) ≥ 0} and Mν =
+  {z ∈ F : ν(z) > 0} for an arbitrary valuation ν of F /k and let Oν
+  and Mν play the roles of OP and MP , respectively, in the proof of
+  Theorem 1.5.8, then the argument in the proof goes through. Thus,
+  this proof demonstrates that every valuation of k(x) is automatically
+  discrete.
+
+   Theorem 1.5.8 shows that there are exactly two types of places of the
+rational function field k(x): (i) the finite places containing some valuation
+νp(x) ; (ii) the infinite place containing the valuation ν∞ . Note that the
+valuations νp(x) and ν∞ are nonequivalent since νp(x) (p(x)) = 1, whereas
+ν∞ (p(x)) < 0. Furthermore, νp(x) and νq(x) are nonequivalent for distinct
+monic irreducible p(x), q(x) ∈ k[x] since νp(x) (p(x)) = 1, whereas
+νq(x) (p(x)) = 0. Thus, there is a one-to-one correspondence between the finite
+places of k(x) and the monic irreducible polynomials in k[x]. We may use
+this correspondence to speak, for instance, of the place p(x) of k(x) when
+                             Copyrighted Material
+
+
+
+
+                                 18     CHAPTER 1
+
+
+
+we mean the place containing the valuation νp(x) . To summarize, the set of
+distinct places of k(x) can be identified with the set
+
+                {p(x) ∈ k[x] : p(x) monic irreducible} ∪ {∞}.
+
+  Definition 1.5.10. Let P be a place of the algebraic function field F /k
+  of one variable over k. The field FP := OP /MP is called the residue
+  class field of P . The canonical ring homomorphism
+
+                      z ∈ OP → z(P ) := z + MP ∈ FP
+
+  is called the residue class map of P .
+
+  Example 1.5.11. Consider again the rational function field k(x).
+  If p(x) ∈ k[x] is monic irreducible, then for the finite place p(x) of k(x),
+  we have
+                                                       
+                f (x)
+      Op(x) =         : f (x), g(x) ∈ k[x], p(x) | g(x) ,
+                g(x)
+                                                                  
+                f (x)
+      Mp(x) =         : f (x), g(x) ∈ k[x], p(x)|f (x), p(x) | g(x) .
+                g(x)
+
+  For any h(x) ∈ k[x], we write h(x) for the residue class of h(x) modulo
+  the ideal (p(x)) of k[x]. If p(x) | h(x), then h(x) ∈ k[x]/(p(x)) has a
+                              −1
+  multiplicative inverse h(x) ∈ k[x]/(p(x)). The map ψp(x) : Op(x) →
+  k[x]/(p(x)) given by
+                             
+                     f (x)                      −1             f (x)
+             ψp(x)               = f (x) g(x)        for all         ∈ Op(x)
+                     g(x)                                      g(x)
+
+  is well defined. Clearly, ψp(x) is a surjective ring homomorphism
+  with kernel Mp(x) , and so the residue class field of the place p(x) is
+  isomorphic to k[x]/(p(x)). For the infinite place ∞ of k(x), we have
+                                                                   
+        f (x)
+ O∞ =         : f (x), g(x) ∈ k[x], g(x) = 0, deg(f (x)) ≤ deg(g(x)) ,
+        g(x)
+                                                         
+        f (x)
+ M∞ =         : f (x), g(x) ∈ k[x], deg(f (x)) < deg(g(x)) ,
+        g(x)
+                             Copyrighted Material
+
+
+
+
+       FINITE FIELDS AND FUNCTION FIELDS                                    19
+
+
+
+where we put as usual deg(0) = −∞. Every r(x) ∈ O∞ can be written
+in the form
+
+                             αd x d + αd−1 x d−1 + · · · + α0
+                    r(x) =
+                              x d + βd−1 x d−1 + · · · + β0
+
+with all αi , βj ∈ k and d ≥ 0. The map ψ∞ : O∞ → k given by
+
+                    ψ∞ (r(x)) = αd         for all r(x) ∈ O∞
+
+is well defined. It is easily seen that ψ∞ is a surjective ring homomor-
+phism with kernel M∞ , and so the residue class field of the place ∞ is
+isomorphic to k.
+
+Theorem 1.5.12. Every valuation of an algebraic function field of one
+variable is discrete.
+
+Proof. Let F /k be an algebraic function field of one variable. By
+Definition 1.5.2, there exists a transcendental element x ∈ F over k such
+that F is a finite extension of K := k(x). Let ν be an arbitrary valuation
+of F and let ξ be the restriction of ν to K. It suffices to prove that the
+index [ν(F ∗ ) : ξ (K ∗ )] is finite. Since ν(F ∗ ) is an infinite subgroup of
+(R, +), this shows then that ξ (K ∗ ) = {0} is not possible. Hence, ξ is a
+valuation of K, thus discrete by Remark 1.5.9, and so ν is discrete.
+   Let z 1 , . . . , z n ∈ F ∗ be such that ν(z 1 ), . . . , ν(z n ) are in distinct
+cosets modulo ξ (K ∗ ). We claim that z 1 , . . . , z n are linearly independent
+over K. This will then show that
+
+                      [ν(F ∗ ) : ξ (K ∗ )] ≤ [F : K] < ∞.
+
+So, suppose we had
+
+                                  
+                                  n
+                                        bi z i = 0,
+                                  i=1
+
+
+where without loss of generality all bi ∈ K ∗ . If we had ν(bi z i ) =
+ν(bj z j ) for some i and j with 1 ≤ i < j ≤ n, then
+
+           ν(z i ) − ν(z j ) = ν(bj ) − ν(bi ) = ξ (bj bi−1 ) ∈ ξ (K ∗ ),
+                              Copyrighted Material
+
+
+
+
+                                   20         CHAPTER 1
+
+
+
+  a contradiction to the choice of z 1 , . . . , z n . Thus, ν(b1 z 1 ), . . . , ν(bn z n )
+  are all distinct, and so the strict triangle inequality yields
+
+                            
+                            n
+                        ν          bi z i    = min ν(bi z i ) < ∞,
+                                                  1≤i≤n
+                             i=1
+
+
+  which is again a contradiction.
+   In the above proof, we have shown, in particular, that the restriction of a
+valuation of F /k to k(x) yields a valuation of k(x). Obviously, for equivalent
+valuations of F the restrictions are again equivalent. Thus, a place Q of F
+corresponds by restriction to a unique place P of k(x). We say that Q lies
+over P or that P lies under Q. Therefore, every place of F lies either over a
+place of k(x) corresponding to a monic irreducible polynomial in k[x] or over
+the infinite place of k(x).
+
+  Theorem 1.5.13. The residue class field of every place of F /k is a finite
+  extension (of an isomorphic copy) of k.
+
+  Proof. Let Q be a place of F that lies over the place P of K := k(x)
+  with x as in Definition 1.5.2. Let RQ := OQ /MQ and RP := OP /MP
+  be the corresponding residue class fields and note that OP ⊆ OQ .
+  The map ρ : RP → RQ given by
+
+                     ρ(b + MP ) = b + MQ                  for all b ∈ OP
+
+  is well defined since MP ⊆ MQ . It is clear that ρ is an injective ring
+  homomorphism, and so RQ contains the isomorphic copy ρ(RP ) of RP
+  as a subfield.
+     Let z 1 , . . . , z n ∈ OQ be such that z 1 + MQ , . . . , z n + MQ are
+  linearly independent over ρ(RP ). We claim that z 1 , . . . , z n are linearly
+  independent over K. This will then show that
+
+                            [RQ : ρ(RP )] ≤ [F : K] < ∞.
+
+  Since RP is a finite extension (of an isomorphic copy) of k (see
+  Example 1.5.11), this proves the theorem. So, suppose we had
+
+                                            
+                                            n
+                                                  bi z i = 0
+                                            i=1
+                                  Copyrighted Material
+
+
+
+
+          FINITE FIELDS AND FUNCTION FIELDS                            21
+
+
+
+  with b1 , . . . , bn ∈ K not all 0. Without loss of generality
+
+                               νP (b1 ) = min νP (bi ).
+                                             1≤i≤n
+
+
+  Then b1 = 0 and
+
+                                       
+                                       n
+                                z1 +         bi b1−1 z i = 0.
+                                       i=2
+
+
+  By the condition on νP (b1 ), we have bi b1−1 ∈ OP for 2 ≤ i ≤ n. Passing
+  to the residue classes modulo MQ , we get
+
+                            
+                            n
+           (z 1 + MQ ) +          ρ(bi b1−1 + MP )(z i + MQ ) = 0 + MQ ,
+                            i=2
+
+
+  a contradiction to the choice of z 1 , . . . , z n .
+
+  In view of Theorem 1.5.13, the following definition is meaningful.
+
+
+  Definition 1.5.14. The degree deg(P ) of a place P of F /k is defined to
+  be the degree of the residue class field of P over k. A place of F /k of
+  degree 1 is also called a rational place of F /k.
+
+
+  Example 1.5.15. Let F = k(x) be the rational function field over k.
+  As we noted in Example 1.5.5, the full constant field of F is k. By
+  Example 1.5.11, the degree of a finite place p(x) of F is equal to the
+  degree of the polynomial p(x) and the degree of the infinite place of
+  F is equal to 1. If k = Fq , then the rational function field F has thus
+  exactly q + 1 rational places.
+
+
+   Next we prove the approximation theorem for valuations of algebraic
+function fields of one variable. The following two preparatory results are
+needed for the proof.
+
+
+  Lemma 1.5.16. If P1 and P2 are two distinct places of F /k, then there
+  exists an element z ∈ F such that νP1 (z) > 0 and νP2 (z) ≤ 0.
+                       Copyrighted Material
+
+
+
+
+                         22       CHAPTER 1
+
+
+
+Proof. First consider any u ∈ F with νP2 (u) = 0. If νP1 (u) = 0, then
+either z = u or z = u−1 works. Thus, we are left with the case where
+νP2 (u) = 0 always implies νP1 (u) = 0.
+   Let y ∈ F ∗ be arbitrary and let t ∈ F be a local parameter at P2 .
+Then we can write y = t n u with n ∈ Z and νP2 (u) = 0. It follows
+that νP1 (u) = 0, and so νP1 (y) = nνP1 (t). Since νP1 is normalized, we
+must have νP1 (t) = ±1. If νP1 (t) = 1, then νP1 (y) = n = νP2 (y) for all
+y ∈ F ∗ , a contradiction to P1 = P2 . Thus, νP1 (t) = −1, and then we
+take z = t −1 .
+
+
+Lemma 1.5.17. If P1 , . . . , Pn are distinct places of F /k, then there
+exists an element z ∈ F such that νP1 (z) > 0 and νPi (z) < 0 for
+2 ≤ i ≤ n.
+
+Proof. We proceed by induction on n. For n = 2, we apply
+Lemma 1.5.16 and we get w ∈ F with νP1 (w) > 0 and νP2 (w) ≤ 0 as
+well as y ∈ F with νP2 (y) > 0 and νP1 (y) ≤ 0. Then we take z = wy −1 .
+    Assume that the lemma is true for n − 1 distinct places for some
+n ≥ 3. By this hypothesis, there exists w ∈ F such that νP1 (w) > 0 and
+νPi (w) < 0 for 2 ≤ i ≤ n − 1. There also exists y ∈ F with νP1 (y) > 0
+and νPn (y) < 0. If νPn (w) < 0, we take z = w. If νPn (w) ≥ 0, we put
+z = w + y r with an integer r ≥ 1. Then νP1 (z) > 0, and for 2 ≤ i ≤ n
+we obtain
+
+                   νPi (z) = min (νPi (w), rνPi (y)) < 0
+
+by choosing r in such a way that the strict triangle inequality applies.
+
+
+Theorem 1.5.18 (Approximation Theorem). Let P1 , . . . , Pn be dis-
+tinct places of F /k. Then for any given elements w1 , . . . , wn ∈ F and
+integers m1 , . . . , mn , there exists an element z ∈ F such that
+
+                   νPi (z − wi ) = mi   for 1 ≤ i ≤ n.
+
+Proof. We first treat the special case w1 = 1, w2 = · · · = wn = 0, and
+we show the weaker result that there exists y ∈ F with
+
+          νP1 (y − 1) > m1 ,      νPi (y) > mi   for 2 ≤ i ≤ n.        (1.2)
+                             Copyrighted Material
+
+
+
+
+           FINITE FIELDS AND FUNCTION FIELDS                            23
+
+
+
+  By Lemma 1.5.17 we get w ∈ F with νP1 (w) > 0 and νPi (w) < 0
+  for 2 ≤ i ≤ n. Now put y = (1 + ws )−1 with an integer s ≥ 1.
+  Then for sufficiently large s we have νP1 (y−1) = νP1 (−ws (1+ws )−1 ) =
+  sνP1 (w) > m1 and νPi (y) = −νPi (1 + ws ) = −sνPi (w) > mi for
+  2 ≤ i ≤ n.
+      Now let w1 , . . . , wn ∈ F be arbitrary. Choose b ∈ Z such that
+  νPi (wj ) ≥ b for all 1 ≤ i, j ≤ n and put di = mi − b for 1 ≤ i ≤ n.
+  By (1.2) we obtain y1 , . . . , yn ∈ F such that for 1 ≤ i, j ≤ n we have
+
+               νPi (yi − 1) > di ,      νPi (yj ) > di     for j = i.
+            n
+  Let y =     j =1 wj yj . Then we can write
+
+
+                                                 
+                                                 n
+                      y − wi = wi (yi − 1) +            wj yj ,
+                                                 j =1
+                                                 j =i
+
+
+
+  and so
+
+                 νPi (y − wi ) > b + di = mi         for 1 ≤ i ≤ n            (1.3)
+
+  by the triangle inequality.
+     Finally, for each i = 1, . . . , n, choose ui ∈ F such that νPi (ui ) = mi .
+  By (1.3) there exists z ∈ F with
+
+                  νPi (z − (ui + wi )) > mi     for 1 ≤ i ≤ n.
+
+  Then
+
+             νPi (z − wi ) = min (νPi (z − ui − wi ), νPi (ui )) = mi
+
+  for 1 ≤ i ≤ n by the strict triangle inequality.
+
+    Let P be a place of F /k and let t ∈ F be a local parameter of F at P .
+Given an element z ∈ F , we choose an integer r such that νP (z) ≥ r. Then
+zt −r ∈ OP , and so we can put
+
+                                ar = (zt −r )(P ).
+                           Copyrighted Material
+
+
+
+
+                              24       CHAPTER 1
+
+
+
+Note that ar is an element of the residue class field FP of P . Next we observe
+that
+
+                              νP (z − ar t r ) ≥ r + 1,
+
+and so
+
+                             νP (zt −r−1 − ar t −1 ) ≥ 0.
+
+Thus, we can put
+
+                         ar+1 = (zt −r−1 − ar t −1 )(P ).
+
+Then ar+1 ∈ FP and
+
+                       νP (z − ar t r − ar+1 t r+1 ) ≥ r + 2.
+
+Now we construct further elements aj ∈ FP inductively. Assume that for
+an integer m > r we have already obtained elements ar , ar+1 , . . . , am ∈ FP
+such that
+                                               
+                                    
+                                    m
+                         νP z −           aj t j  ≥ m + 1.
+                                    j =r
+
+
+
+Then we put
+
+                                                        
+                                       
+                                       m
+                  am+1 = zt −m−1 −            aj t j −m−1  (P ) ∈ FP ,
+                                        j =r
+
+
+
+and this yields
+
+                                               
+                                    
+                                    m+1
+                         νP z −           aj t j  ≥ m + 2.
+                                    j =r
+                             Copyrighted Material
+
+
+
+
+          FINITE FIELDS AND FUNCTION FIELDS                            25
+
+
+
+We summarize this construction in the formal expansion
+
+                                       ∞
+                                       
+                                  z=          aj t j                        (1.4)
+                                       j =r
+
+
+which is called the local expansion of z at P . Note that if ar = 0 in (1.4), then
+νP (z) = r.
+
+
+
+1.6 Extensions of Valuations
+
+Let F /k and E/k  be algebraic function fields of one variable such that
+F ⊆ E, [E : F ] < ∞, and their full constant fields k and k  satisfy
+k ⊆ k  . Note that then [k  : k] < ∞. In this section we discuss the
+relationships between valuations, or equivalently places, of F and E. More
+general situations in which a valuation is extended from a given field to an
+extension field are treated in the books of Ribenboim [105] and Weiss [129].
+
+   Lemma 1.6.1. For any valuation ν of E/k  , we have
+
+                       [ν(E ∗ ) : ν(F ∗ )] ≤ [E : F ] < ∞.
+
+   Proof. This is shown in the same way as in the special case considered
+   in the proof of Theorem 1.5.12.
+   If ν is a valuation of E/k  , then it is trivial that its restriction to F /k
+satisfies the conditions (1), (2), (3), and (5) in Definition 1.5.3. Moreover,
+Lemma 1.6.1 implies that the restriction also has the property (4). Thus, the
+restriction of ν to F /k yields a valuation of F /k. Clearly, for equivalent
+valuations of E the restrictions are again equivalent. Hence, a place Q
+of E corresponds by restriction to a unique place P of F . We extend a
+terminology introduced in Section 1.5 and say that Q lies over P or that P
+lies under Q. Recall that νQ denotes the normalized valuation belonging to
+the place Q.
+
+   Definition 1.6.2. If the place Q of E lies over the place P of F , then
+   the ramification index e(Q|P ) of Q over P is the positive integer
+
+               e(Q|P ) := [νQ (E ∗ ) : νQ (F ∗ )] = [Z : νQ (F ∗ )].
+                             Copyrighted Material
+
+
+
+
+                              26      CHAPTER 1
+
+
+
+  We say that Q is unramified in the extension E/F if e(Q|P ) = 1, that
+  Q is ramified in the extension E/F if e(Q|P ) > 1, and that Q is totally
+  ramified in the extension E/F if e(Q|P ) = [E : F ].
+
+   With νP denoting as usual the normalized valuation belonging to the
+place P , Definition 1.6.2 shows that
+
+                   νQ (z) = e(Q|P )νP (z) for all z ∈ F ∗ .
+
+  If the places Q and P are as above, then their residue class fields EQ and
+FP satisfy [EQ : k  ] < ∞ and [FP : k] < ∞ according to Theorem 1.5.13.
+Furthermore, the well-defined map z(P ) → z(Q) for z ∈ OP provides an em-
+bedding of FP into EQ , and so EQ can be viewed as a finite extension of FP .
+
+  Definition 1.6.3. If the place Q of E lies over the place P of F ,
+  then the relative degree f (Q|P ) of Q over P is the positive integer
+  f (Q|P ) := [EQ : FP ].
+
+According to a general principle concerning extensions of valuations (see for
+example, [129, Theorem 1.6.5]), if the place P of F is given and Q1 , . . . , Qr
+are distinct places of E lying over P , then
+
+                      
+                      r
+                             e(Qi |P )f (Qi |P ) ≤ [E : F ].               (1.5)
+                       i=1
+
+
+This shows, in particular, that there can be at most [E : F ] places of E
+lying over P . Note also that if one of the places of E lying over P is totally
+ramified in E/F , then there can be no other places of E lying over P .
+
+  Definition 1.6.4. A place P of F splits completely in the extension
+  E/F if there are exactly [E : F ] places of E lying over P .
+
+   It follows from (1.5) that if P splits completely in E/F , then e(Q|P ) =
+f (Q|P ) = 1 for each place Q of E lying over P .
+   Given a place P of F , does there exist a place of E lying over it? There is
+an elegant argument in Ribenboim [105, Chapter 4, Theorem 1], which uses
+Zorn’s lemma and shows that any valuation of a field can be extended to any
+algebraic extension of the field. Explicit constructions of extended valuations
+can be found in Ribenboim [105, Chapter 4] and Weiss [129, Chapter 2].
+                                Copyrighted Material
+
+
+
+
+            FINITE FIELDS AND FUNCTION FIELDS                          27
+
+
+
+    It is a well-known fact (see [117, Theorem III.1.11]) that if the full constant
+field k of F is perfect, that is, if every algebraic extension of k is separable,
+and if Q1 , . . . , Qr are all distinct places of E lying over P , then (1.5) can be
+strengthened to
+
+                        
+                        r
+                              e(Qi |P )f (Qi |P ) = [E : F ].                 (1.6)
+                        i=1
+
+
+This provides an important relationship between ramification indices, relative
+degrees, and the degree of the extension E/F . Since every finite field is
+perfect (see, e.g., Corollary 1.3.4), (1.6) holds in particular if F (and therefore
+E) is a global function field.
+
+
+1.7 Constant Field Extensions
+
+Throughout this section, we are given:
+    (i) a global function field F /Fq with full constant field Fq ;
+   (ii) the composite field Fn := F · Fq n , called a constant field extension
+        of F and contained in a fixed algebraic closure of F , where n is a
+        positive integer.
+    If Fq n = Fq (β), then we have Fn = F (β). We recall from Theorem 1.1.5
+(ii) that the Galois group Gal(Fq n /Fq ) is a cyclic group.
+
+   Lemma 1.7.1. With the notation above, we have:
+    (i) Fn /F is a cyclic extension with [Fn : F ] = n and Gal(Fn /F )
+        Gal(Fq n /Fq );
+   (ii) the full constant field of Fn is Fq n .
+
+   Proof.
+    (i) Let Fq n = Fq (β) and let f be the minimal polynomial of β
+        over Fq . We will prove that f is irreducible over F . Suppose that
+        f had a factorization f = gh over F with g and h monic and
+        deg(g) ≥ 1, deg(h) ≥ 1. It is obvious that all roots of g and
+        h are elements of Fq n . Hence, from the fact that the coefficients
+        of a monic polynomial are polynomial expressions of its roots, it
+        follows that g and h are polynomials over Fq n . Thus, all coefficients
+                           Copyrighted Material
+
+
+
+
+                             28       CHAPTER 1
+
+
+
+        of g and h are algebraic over Fq . Hence, each coefficient of g and
+        h is an element of Fq since Fq is algebraically closed in F , and we
+        obtain a contradiction to f being irreducible over Fq . This shows
+        that [Fn : F ] = n and Gal(Fn /F ) Gal(Fq n /Fq ).
+   (ii) It is trivial that the full constant field of Fn contains Fq n since
+        Fq n /Fq is a finite extension. Let z ∈ Fn be an algebraic element
+        over Fq n . Then Fq n (z)/Fq is a finite extension, and so from (i) we
+        get
+
+                 n = [Fn : F ] = [F · Fq n (z) : F ] = [Fq n (z) : Fq ].
+
+       Hence, Fq n (z) = Fq n , that is, z ∈ Fq n . This means that Fq n is the
+       full constant field of Fn .
+
+
+   By Lemma 1.7.1 we can identify Gal(Fn /F ) with Gal(Fq n /Fq ) in the
+following way. Let {β1 = 1, β2 , . . . , βn } be a basis of Fq n over Fq . Then
+for any τ ∈ Gal(Fq n /Fq ) and x = ni=1 βi xi ∈ Fn with all xi ∈ F , put
+
+                                        
+                                        n
+                              τ (x) =         τ (βi )xi .
+                                        i=1
+
+
+Then τ is a Galois automorphism of Fn /F and all elements of Gal(Fn /F ) are
+obtained in this way.
+
+  Theorem 1.7.2. Let Fn = F · Fq n be a constant field extension of F .
+  Then for any place P of F and any place Q of Fn lying over P , the
+  following holds:
+
+    (i) e(Q|P ) = 1;
+   (ii) deg(Q) = d/gcd(d, n), where d = deg(P ) is the degree of P ;
+  (iii) f (Q|P ) = n/gcd(d, n);
+  (iv) there are exactly gcd(d, n) places of Fn lying over P .
+
+  Proof.
+
+    (i) Let {β1 , . . . , βn } be a basis of Fq n over Fq . Then its discriminant
+        (β1 , . . . , βn ) is an element of F∗q , and so
+
+                               νP ((β1 , . . . , βn )) = 0.
+                             Copyrighted Material
+
+
+
+
+       FINITE FIELDS AND FUNCTION FIELDS                                        29
+
+
+
+     Hence, {β1 , . . . , βn } is a P -integral basis of Fn /F , that is, every
+     element in the integral closure of OP in Fn can be written as a linear
+     combination of β1 , . . . , βn with coefficients from OP . The desired
+     conclusion follows now from Dedekind’s discriminant theorem
+     (see [129, Theorem 4.8.14]).
+(ii) We first prove that the residue class field RQ of Q is the composite
+     field FP · Fq n , where FP is the residue class field of P . It is obvious
+     that FP · Fq n can be viewed as a subfield of RQ (compare with
+     Section 1.6). Since a basis {β1 , . . . , βn } of Fq n over Fq is a P -
+     integral basis of Fn /F , we can write any element of RQ in the form
+     z(Q), where
+
+                                            
+                                            n
+                                      z=          z i βi
+                                            i=1
+
+
+     with z 1 , . . . , z n ∈ OP . Hence,
+
+                          
+                          n                    
+                                               n
+                z(Q) =           z i (Q)βi =         z i (P )βi ∈ FP · Fq n ,
+                           i=1                 i=1
+
+     showing that RQ = FP · Fq n . This yields
+
+         deg(Q) = [RQ : Fq n ] = [FP · Fq n : Fq n ] = [Fq d · Fq n : Fq n ]
+                                     d
+                               =            .
+                                 gcd(d, n)
+
+(iii) We have
+
+         f (Q|P ) = [RQ : FP ] = [FP · Fq n : FP ] = [Fq d · Fq n : Fq d ]
+                       n
+                  =           .
+                    gcd(d, n)
+
+(iv) This follows from (i), (iii), and (1.6).
+

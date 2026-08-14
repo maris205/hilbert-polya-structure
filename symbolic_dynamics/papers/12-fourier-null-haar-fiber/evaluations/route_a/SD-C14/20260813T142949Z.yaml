@@ -1,0 +1,182 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C14
+source_commit: 0bc93d570f11df9ca3ca08ad6793064930b9951f
+evaluation_date: 2026-08-13
+artifact_path_base: papers/12-fourier-null-haar-fiber
+
+source_lock:
+  candidate_definition: "SD-C14 places W=1 direct-sum u, with u the Haar unitary of L(Z), on each entropy-ordered tensor-prime atom loop and evaluates repetitions with the positive faithful nonnormalized trace Phi_c(a direct-sum x)=a+c tau(x)."
+  object: "Tensor-prime symbolic atom loops with the common infinite Haar fiber W=1 direct-sum u."
+  family: "symbolic dynamics"
+  phase_space: "Disjoint full-shift atom loops F_p with fiber algebra C direct-sum L(Z)."
+  dynamics: "The unique primitive loop at F_p has time log(p); its r-th traversal has fiber holonomy W^r."
+  parameters: "c is frozen in {0.25,1,3} for controls; no phase, clock, scale, cutoff, or target-root parameter is fitted."
+  parameter_provenance: "The atom clock is entropy; Haar trace and cyclic/density controls are fixed analytically before execution."
+  arithmetic_origin: "Tensor multiplication makes nonunit indecomposable full shifts exactly F_p and entropy gives log(p); repetitions give r log(p)."
+  clock: "Topological entropy log(p), without fitted rescaling or offset."
+  normalization: "Primary ledger uses positive Phi_c with Phi_c(1)=1+c. Its normalized state is separately audited and has moments 1/(1+c)."
+  determinant_convention: "The primary object is the analytic trace-log D_c=exp(-sum_r q^r Phi_c(W^r)/r) on |q|<1 atomwise and Re(s)>1 globally. Fuglede--Kadison magnitude and self-adjoint controls are kept separate."
+  orbit_cutoff: "All-order analytic moment theorem; cyclic orders N=2,...,64 with repetitions r=1,...,128."
+  cutoff: "128 atoms for each inventory; Fourier perturbation frequencies 1,...,16; self-adjoint powers 1,...,16."
+  precision: "Exact divisibility/formal identities and IEEE-754 binary64; 65536-point midpoint quadrature only checks the exact FK formula."
+  training_data: "none; no fitting, target spectrum, zero list, crossing census, or validation target"
+  allowed_data: "Tensor multiplication, topological entropy, exact Fourier coefficients, symbolic path words, cyclic approximants, and frozen nonprime controls."
+  forbidden_data: "Riemann-zero tables, target-root fitting, inserted von Mangoldt weights, cross-family repairs, and mixing analytic, Fuglede--Kadison, or self-adjoint determinant data."
+  code_commit: 0bc93d570f11df9ca3ca08ad6793064930b9951f
+  freeze_note: "The source and code commit freezes the complete Paper12 manuscript, proof, experiment, and result object; this evaluation and PAPER_MANIFEST are finalized in the following metadata-only commit."
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - DERIVATION_PACKAGE.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc14_haar_fiber_experiment.py
+    - code/test_sdc14_haar_fiber_experiment.py
+    - results/summary.json
+    - results/cyclic_moments.csv
+    - results/cyclic_approximants.csv
+    - results/haar_fk_formulas.csv
+    - results/density_perturbations.csv
+    - results/selfadjoint_control.csv
+    - results/inventory_controls.csv
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: "Tensor-prime full shifts and entropy log(p) generate primitive atoms, clocks, and prime-power repetitions internally."
+  strongest_failure: "The Haar determinant identity is inventory-independent; composite-only and random-increasing controls reproduce it exactly."
+  arithmetic_controls:
+    - "tensor-prime inventory, 128 atoms"
+    - "composite-only inventory, 128 atoms"
+    - "seeded random-increasing inventory, 128 atoms"
+    - "three frozen Haar masses c=0.25,1,3"
+  artifacts:
+    - SOURCE_LOCK.md
+    - results/inventory_controls.csv
+    - EXPERIMENT_REPORT.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "For every nonzero integer r, the positive faithful nonnormalized trace satisfies Phi_c(W^r)=1 exactly, preserving the intrinsic atom-loop repetition ledger at all orders."
+  strongest_failure: "The escape relies on Phi_c(1)=1+c rather than a state; normalization makes every nonzero moment 1/(1+c). Finite cyclic approximants leak first at r=N."
+  metrics:
+    primitive_orbit_definition: "the unique loop at each tensor-prime atom F_p"
+    repetition_rule: "r traversals have time r log(p), weight p^(-rs), and fiber W^r"
+    all_order_positive_ledger: true
+    trace_positive_and_faithful_for_c_positive: true
+    normalized_state_ledger: false
+    cyclic_orders_tested: "N=2,...,64"
+    cyclic_repetition_range: "r=1,...,128"
+    all_cyclic_first_leaks_equal_order: true
+    density_frequencies_tested: "k=1,...,16"
+    all_density_first_leaks_equal_frequency: true
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/cyclic_moments.csv
+    - results/cyclic_approximants.csv
+    - results/density_perturbations.csv
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "The analytic trace-log exists on |q|<1 atomwise and the honest Euler domain Re(s)>1 globally, with exact formula D_c(q)=1-q."
+  strongest_failure: "The Haar sector is exactly absent from this determinant, so the successful moment escape produces no new analytic factor or divisor."
+  metrics:
+    zero_error_train: "not_applicable; no fitting or target zeros"
+    zero_error_validation: "not_applicable; no target-zero comparison"
+    zero_error_test: "not_applicable; Riemann-zero data are forbidden"
+    extra_zero_count: "not_applicable; no target divisor is claimed"
+    missing_zero_count: "not_applicable; no target divisor comparison is authorized"
+    root_count_discrepancy: "not_applicable; no root or crossing census was performed"
+    cutoff_drift: "not_applicable; no target root sequence or fitted finite-cutoff determinant is evaluated"
+    precision_drift: "not_applicable; analytic determinant equality is exact; FK quadrature residual is separately at most 4.440892098500626e-16"
+    control_margin: "not_applicable; all 9 prime/composite/random inventory controls are exactly determinant-blind, which refutes specificity"
+    analytic_single_block: "D_c(q)=1-q"
+    cyclic_approximant_determinant: "(1-q)(1-q^N)^(c/N)"
+    fk_max_quadrature_residual: 4.440892098500626e-16
+    target_zero_data_used: false
+    crossing_census_performed: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/haar_fk_formulas.csv
+    - results/inventory_controls.csv
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The all-order Fourier classification, analytic determinant identity, cyclic leak formula, H^2=I, and balanced-word coefficient are exact."
+  strongest_failure: "There is no new determinant-visible factor, target divisor, completion, functional equation, Gamma factor, pole/trivial-zero treatment, counting law, or same-object Weil compression."
+  analytic_structure:
+    positive_measure_classification: true
+    analytic_haar_visibility: false
+    normalized_state_escape: false
+    finite_support_escape: false
+    selfadjoint_escape: false
+    recurrent_balanced_escape: false
+    target_divisor: false
+    analytic_continuation_to_target: false
+    completed_functional_equation: false
+    gamma_factor: false
+    pole_removal: false
+    trivial_zero_mechanism: false
+    riemann_von_mangoldt_law: false
+  weil_compression:
+    status: "No natural same-object Weil/Hermitian compression is derived from the determinant-invisible Haar sector."
+    evidence_status: OPEN
+  artifacts:
+    - DERIVATION_PACKAGE.md
+    - results/selfadjoint_control.csv
+    - results/summary.json
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "The Haar unitary and its self-adjoint 2-by-2 block are canonical frozen operators."
+  strongest_failure: "Self-adjointization satisfies H^2=I and exposes total Haar mass at power two; it supplies no target trace formula, compact-resolvent generator, natural quantization, or Route-B-ready spectrum."
+  metrics:
+    canonical_haar_unitary: true
+    selfadjoint_block_defined: true
+    H_squared_identity: true
+    first_selfadjoint_leak_power: 2
+    fixed_target_generator: false
+    natural_quantization: false
+    compact_resolvent: false
+    target_counting_law: false
+    route_b_readiness: false
+  artifacts:
+    - EXPERIMENT_REPORT.md
+    - results/selfadjoint_control.csv
+    - docs/obstruction_registry.md
+
+adversarial_controls:
+  controls_used:
+    - "cyclic approximants N=2,...,64"
+    - "positive density perturbations at frequencies 1,...,16"
+    - "self-adjoint block H"
+    - "formal recurrent inverse word uu^(-1)"
+    - "composite-only and seeded random-increasing inventories"
+    - "normalized-state control"
+  proves_too_much_risk: "Decisive. Tensor-prime, composite-only, and random-increasing inventories are all exactly determinant-blind for every frozen c, while the only determinant-sensitive approximations or perturbations break the ledger."
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "SD-C14 proves the unique nonnormalized infinite Haar escape from positive finite-unitary moment rigidity and proves its exact analytic determinant invisibility. It establishes no new target divisor, RH statement, completion, Weil compression, or Hilbert-Polya operator. Stage status: GO_INFINITE_HAAR_ESCAPE / STOP_DETERMINANT_INVISIBILITY / STOP_SCOPED / PROVES_TOO_MUCH."
+blocking_conditions:
+  - "Normalized-state exactness forces c=0 and the trivial delta mass."
+  - "Every finite cyclic approximation leaks at repetition equal to its order."
+  - "The Haar component cancels from every nonzero analytic trace-log coefficient."
+  - "Self-adjointization restores the identity sector at power two."
+  - "Recurrent inverse paths create balanced identity words uu^(-1)."
+  - "Composite and random inventories reproduce determinant invisibility."
+  - "No target analytic completion or fixed self-adjoint generator exists."
+next_smallest_test: "Within Symbolic Dynamics, classify whether any positive semifinite fiber can preserve the required moments while contributing a nonzero same-trace analytic determinant coefficient; reject mechanisms that move only a distinct FK or self-adjoint object."
+round2_clues:
+  - "ROUND2_CLUE: nonpositive distributions or scattering magnitudes could make Fourier-null sectors visible under a different determinant outside the present positive symbolic trace class; record only and do not develop."
+route_b_invocation_allowed: false

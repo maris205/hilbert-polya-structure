@@ -1,0 +1,682 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=0.92in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,tabularx}
+\usepackage{graphicx,float}
+\usepackage{placeins}
+\usepackage{xcolor}
+\usepackage[round,authoryear]{natbib}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{url}
+
+\graphicspath{{figures/}}
+\input{math_commands.tex}
+\input{figures/latex_includes.tex}
+
+\hypersetup{
+  pdftitle={Finite Arithmetic Capacity under Additive Locally Constant, Good-Reduction Multiplier, and Algebraic-Action Readouts},
+  pdfauthor={Anonymous},
+  pdfsubject={A scoped additive capacity theorem for exact prime-logarithm readouts},
+  pdfkeywords={arithmetic dynamics, symplectic map, periodic orbit, S-unit, Hermite--Lindemann, Henon map}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\crefname{theorem}{theorem}{theorems}
+\crefname{lemma}{lemma}{lemmas}
+\crefname{corollary}{corollary}{corollaries}
+\crefname{proposition}{proposition}{propositions}
+\crefname{definition}{definition}{definitions}
+
+\title{\textbf{Finite Arithmetic Capacity under Additive Locally Constant,\\
+Good-Reduction Multiplier, and Algebraic-Action Readouts}}
+\author{Anonymous}
+\date{Round-1 revised manuscript, August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study a fixed additive periodic-orbit readout whose exact prime hits admit
+representations
+\[
+ \log p=v_p+\log q_p+\alpha_p,
+\]
+where the $v_p$ lie in one finite-dimensional rational space $V$, each
+$q_p>0$ is algebraic and $q_p^2$ is a unit away from one finite rational-prime
+set $\SQ$, and each $\alpha_p$ is real algebraic.  We prove the rank-plus-support
+capacity bound $|\Phit|\leq\dimQ V+|\SQ|$.  A rational dependence among outside-support
+$v_p$ terms produces $\log R=\beta$ with $R>0$ algebraic and $\beta$
+algebraic.  Hermite--Lindemann forces $R=1$; after squaring, a finite-place
+valuation above each distinct outside prime forces its relation coefficient
+to vanish.  The proof requires neither a prior finiteness assumption nor a
+target search.
+
+We give source certificates for fixed finite-memory locally constant
+readouts, good-reduction generalized H\'enon multiplier moduli, and regularly
+evaluated algebraic exact actions.  A selector architecture is a corollary of
+the additive theorem.  A source-locked exact/static audit closes nine
+proof, scope, control, isolation, review, and upstream gates; its single
+registered run has 51 passing tests, zero numerical candidate runs, and zero
+target matches.  The result is an exact capacity certificate for the declared
+class, not a universal symplectic no-go theorem, a complete escape trichotomy,
+or a Riemann-zero construction.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Prime logarithms arise as desired periodic scales in several arithmetic and
+spectral analogies.  Berry and Keating describe a hypothetical chaotic
+``Riemann dynamics'' whose primitive periods are tied to logarithms of primes
+\citep{berry_keating_1999}.  Deninger's foliated and arithmetic dynamical
+programs assign length $\log Nx$ to closed-point packets
+\citep{deninger_1998,deninger_2026}; the scaling-site and ad\`ele-class-space
+program of Connes and Consani contains prime-indexed periodic orbits of length
+$\log p$ \citep{connes_consani_2016,connes_consani_2024}.  These works motivate
+the scale, but they also warn against a universal obstruction: arithmetic
+spaces can carry the primes intrinsically.
+
+We ask a narrower design question.  Suppose a finite architecture combines
+three familiar sources of periodic observables: a finite-rank locally constant
+term, logarithms of multiplier moduli with one fixed finite bad-prime support,
+and an algebraically evaluated action term.  How many distinct rational-prime
+logarithms can the resulting \emph{additive} readout equal exactly when all
+maps, supports, coefficients, and normalizations are fixed before the target
+is inspected?
+
+The answer is a rank-plus-support bound.  If every hit prime satisfies
+\begin{equation}
+ \log p=v_p+\log q_p+\alpha_p,
+ \qquad v_p\in V,\quad q_p^2\in\cO_{\SQ}^{\times},
+ \quad \alpha_p\in\Qbar\cap\R,
+ \label{eq:intro-normal-form}
+\end{equation}
+with $q_p\in\Qbar\cap\R_{>0}$, then
+\begin{equation}
+ \boxed{|\Phit|\leq\dimQ V+|\SQ|.}
+ \label{eq:intro-bound}
+\end{equation}
+Here $\cO_{\SQ}^{\times}$ is shorthand for zero valuation at all finite
+places not above $\SQ$; the definition is made field-independent below.
+
+Our contributions are four precise statements.
+\begin{enumerate}
+  \item We prove the additive bound \eqref{eq:intro-bound}, including
+  rational and negative multiplier powers, arbitrary valid certificate
+  selection, repeated-hit set semantics, and the $q=1$ edge case.
+  \item We supply complete source certificates: higher-block recoding for
+  locally constant readouts; a projective, non-Archimedean, and monodromy
+  argument for good-reduction generalized H\'enon maps; and regular algebraic
+  action evaluation with a separate gauge-invariance ledger.
+  \item We demote the earlier selector union to a corollary and state the
+  escape map only as necessary failures of this certificate.  The exits are
+  neither exclusive, exhaustive, nor sufficient for arithmetic provenance.
+  \item We bind the theorem and scope to a registered exact/static audit.
+  Nine gates pass, 20 proof IDs and 19 scope-operation IDs close, and 51
+  official tests pass without reading target data or executing a numerical
+  candidate.
+\end{enumerate}
+
+\begin{figure}[t]
+  \centering
+  \AdditiveCapacityFigure
+  \caption{The scoped additive certificate.  A fixed finite-rank term, a
+  fixed-support multiplier-log term, and a real algebraic action term combine
+  in one readout.  Hermite--Lindemann and valuation isolation yield the
+  rank-plus-support bound.  The lower boundary records necessary ways to leave
+  the certificate; it is not a complete or sufficient trichotomy.  The
+  categorical states are loaded from the frozen source and official audit.}
+  \label{fig:additive-capacity}
+\end{figure}
+
+The scope restriction is substantive.  We do not treat an algebraic
+irrational coefficient on a multiplier logarithm, an arbitrary nonlinear
+mixer, a logarithm applied after an algebraic action, a general H\"older roof,
+a complex logarithm branch, or approximate equality.  We make no historical
+priority claim and no claim about zeta zeros, trace formulas, determinants,
+quantization, or ``Route B.''
+
+\section{Arithmetic and dynamical context}
+\label{sec:context}
+
+\paragraph{Symbolic periods.}
+Shifts of finite type, higher-block presentations, suspension flows, and
+periodic-orbit zeta functions provide the standard finite-state setting for
+locally constant roofs \citep{parry_pollicott_1990,lind_marcus_1995}.  Our
+Class-L statement uses only an elementary consequence: a fixed finite-memory
+observable becomes an edge function on a finite higher-block graph.  We do
+not assert finite rational rank for a general point-dependent H\"older roof.
+
+\paragraph{Arithmetic H\'enon dynamics and multipliers.}
+Plane polynomial automorphisms decompose into elementary and generalized
+H\'enon pieces \citep{friedland_milnor_1989}.  Arithmetic studies develop
+heights, periodic points, and local behavior for H\'enon maps
+\citep{silverman_1994,ingram_2014,hsia_kawaguchi_2018}.  Recent multiplier
+work studies complex rigidity and thermodynamic geometry
+\citep{cantat_dujardin_2026,bianchi_he_2026}.  Our Class-M certificate does
+not claim novelty for that broad literature.  It isolates the narrower fact
+that a frozen good-reduction architecture puts squared return moduli in an
+$S$-unit group with one fixed rational-prime support.
+
+\paragraph{Exact action readouts.}
+Generating potentials and action sums are standard tools for exact symplectic
+maps and variational dynamics \citep{delshams_ramirezros_1997,
+bialy_tsodikovich_2023}.  In the present certificate, the operative arithmetic
+fact is regular evaluation: a rational potential over $\Qbar$ evaluated on an
+algebraic finite orbit gives an algebraic sum.  A full endpoint ledger is
+needed to distinguish preservation of algebraicity from canonical gauge
+invariance.
+
+\paragraph{Transcendence and arithmetic spaces.}
+The only transcendence input is Hermite--Lindemann, in the form that
+$e^\beta$ is transcendental for nonzero algebraic $\beta$
+\citep{baker_2022}.  Standard valuation and extension facts are used in their
+usual number-field form \citep{neukirch_1999}.  Conversely, Deninger's
+infinite-dimensional systems and the Connes--Consani scaling/ad\`ele spaces
+are positive architectures outside the finite L/M/A class.  Connes's
+trace-formula program supplies wider arithmetic-spectral context
+\citep{connes_1999}, but no trace-formula or zero-spectral conclusion is
+drawn here.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Closest contexts and the claim boundary.}
+\label{tab:related-boundary}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}
+  >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\toprule
+Context & Overlap & Difference here \\
+\midrule
+Symbolic suspensions & Finite-state periodic sums and zeta functions & We prove an exact rational-capacity statement for a fixed finite-rank subspace. \\
+Arithmetic H\'enon maps & Good reduction, heights, periodic points & We use a squared-modulus $S$-unit certificate inside a mixed additive theorem. \\
+Exact actions & Periodic generating sums and gauge choices & We retain only regular algebraic evaluation as one additive source. \\
+Arithmetic spaces & Prime/closed-point orbits of length $\log p$ or $\log Nx$ & These positive examples lie outside the finite certificate and preclude universal framing. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+\FloatBarrier
+
+\section{The additive certificate and its closure}
+\label{sec:setup}
+
+Fix a finite set $\SQ$ of rational primes.  For a nonzero algebraic number
+$x$, call $x$ an \emph{$\SQ$-unit} if, in a number field containing $x$,
+\begin{equation}
+ v_w(x)=0
+ \quad\text{for every finite place $w$ not lying above $\SQ$.}
+ \label{eq:sunit}
+\end{equation}
+We saturate the exceptional places above $\SQ$.  The definition is unchanged
+after finite extension.
+
+\begin{lemma}[Extension invariance]
+\label{lem:extension}
+Let $E/K$ be a finite extension of number fields and $x\in K^\times$.
+If $x$ has zero valuation at every finite place of $K$ away from $\SQ$, then
+the same holds at every finite place of $E$ away from $\SQ$.  Multiplication
+and inversion preserve the property.
+\end{lemma}
+
+\begin{proof}
+If $w$ lies above $v$, normalized additive valuations satisfy
+$v_w(x)=e(w/v)v_v(x)$ up to the common positive normalization convention.
+A place $w$ away from $\SQ$ lies above a place $v$ away from $\SQ$, so both
+sides vanish.  The product and inverse statements follow from additivity.
+\end{proof}
+
+\begin{definition}[Canonical additive readout]
+\label{def:readout}
+Fix a finite-dimensional $\Q$-subspace $V\subset\R$, the set $\SQ$, and all
+maps, coefficients, supports, gauges, and assembly operations independently
+of the eventual target.  An in-scope readout is
+\begin{equation}
+ L=v+\log q+\alpha,
+ \qquad v\in V,\quad q\in\Qbar\cap\R_{>0},\quad
+ q^2\text{ an $\SQ$-unit},\quad \alpha\in\Qbar\cap\R,
+ \label{eq:canonical}
+\end{equation}
+where $\log$ is the real logarithm on positive inputs.
+\end{definition}
+
+The target-independence clause is a provenance condition excluding preloaded
+lookup data.  Once valid representations are supplied, the proof below uses
+only the common spaces $V$ and $\SQ$ and the stated algebraicity and unit
+conditions; it does not use the mechanism by which provenance was certified.
+
+\begin{lemma}[Rational multiplier-log closure]
+\label{lem:rational-closure}
+Let $q_1,\ldots,q_t>0$ be algebraic, with every $q_j^2$ an $\SQ$-unit, and
+let $c_j\in\Q$.  Then
+\[
+ \sum_{j=1}^t c_j\log q_j=\log q
+\]
+for a positive algebraic $q$ whose square is an $\SQ$-unit.
+\end{lemma}
+
+\begin{proof}
+Choose $D\geq1$ with $m_j=Dc_j\in\Z$ and set
+$q=\prod_j q_j^{m_j/D}$, using the unique positive real algebraic roots in a
+finite extension.  The real logarithm gives the stated equality.  Moreover
+$(q^2)^D=\prod_j(q_j^2)^{m_j}$.  At a place outside $\SQ$, the right side has
+zero valuation, hence $D v_w(q^2)=0$.  Negative exponents are harmless because
+the unit group is closed under inversion.
+\end{proof}
+
+Thus the class admits finite rational sums, differences, repetitions, and
+rational scalings of L terms; rational sums of positive M logarithms; negative
+and rational M powers; $q=1$; and finite algebraic sums/scales of real
+algebraic A terms.  It excludes algebraic irrational M-log coefficients,
+nonlinear post-assembly maps, target/orbit lookup tables, log-after-action,
+general H\"older roofs without a common finite-rank proof, complex-log
+branches, approximate matching, and target-dependent support or weights.
+
+\section{Finite arithmetic capacity}
+\label{sec:theorem}
+
+Let $\Phit$ denote a set of \emph{distinct} positive rational primes.
+Repeated orbit hits and repeated certificates do not change its cardinality.
+
+\begin{theorem}[Additive finite arithmetic capacity]
+\label{thm:capacity}
+Suppose every $p\in\Phit$ has at least one representation
+\begin{equation}
+ \log p=v_p+\log q_p+\alpha_p
+ \label{eq:hit}
+\end{equation}
+within \cref{def:readout}.  Select one arbitrary valid representation for
+each distinct prime before testing any relation.  Then
+\begin{equation}
+ |\Phit|\leq \dimQ V+|\SQ|.
+ \label{eq:main-bound}
+\end{equation}
+No prior finiteness assumption on $\Phit$ is required.
+\end{theorem}
+
+\begin{proof}
+Put $\PP_0=\Phit\setminus\SQ$.  We prove that the selected family
+$\{v_p:p\in\PP_0\}$ is linearly independent over $\Q$.
+
+Take distinct $p_1,\ldots,p_k\in\PP_0$ and suppose
+$\sum_i c_i v_{p_i}=0$ with $c_i\in\Q$.  Clearing denominators produces
+integers $m_i$, not all zero, such that
+\begin{equation}
+ \sum_{i=1}^k m_i v_{p_i}=0.
+ \label{eq:relation}
+\end{equation}
+Substitution of \eqref{eq:hit} into \eqref{eq:relation}, using positivity and
+the real logarithm law even for negative powers, gives
+\begin{equation}
+ \log R=\beta,
+ \quad
+ R=\frac{\prod_i p_i^{m_i}}{\prod_iq_{p_i}^{m_i}}
+   \in\Qbar\cap\R_{>0},
+ \quad
+ \beta=\sum_i m_i\alpha_{p_i}\in\Qbar\cap\R.
+ \label{eq:logR}
+\end{equation}
+If $\beta\neq0$, Hermite--Lindemann makes $e^\beta$ transcendental, contrary
+to $e^\beta=R\in\Qbar$.  Hence $\beta=0$, and injectivity of the real
+exponential gives $R=1$.
+
+Square this algebraic identity before taking valuations:
+\begin{equation}
+ \prod_{i=1}^k p_i^{2m_i}
+ =\prod_{i=1}^k(q_{p_i}^2)^{m_i}.
+ \label{eq:squared}
+\end{equation}
+Put the finitely many factors into one number field $E$.
+\Cref{lem:extension} preserves the $\SQ$-unit condition.  Fix $i$ and take a
+finite place $w$ of $E$ above $p_i$.  The right side of
+\eqref{eq:squared} has zero $w$-valuation because $p_i\notin\SQ$.
+For $j\neq i$, the distinct rational prime $p_j$ also has zero
+$w$-valuation, while $v_w(p_i)>0$.  Therefore
+$2m_i v_w(p_i)=0$ and $m_i=0$.  This holds for every $i$, contradicting a
+nonzero relation.
+
+Every finite subfamily of the outside $v_p$ terms is independent.  A
+$\Q$-space of dimension $r$ cannot contain $r+1$ independent vectors, so
+$|\PP_0|\leq r$.  At most $|\SQ|$ distinct hit primes lie inside $\SQ$,
+which proves \eqref{eq:main-bound}.  If $\PP_0$ were infinite, choosing
+$r+1$ elements would already give the same contradiction.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \ProofFlowFigure
+  \caption{The complete proof flow.  The only transcendence input removes
+  the real algebraic additive contamination.  Squaring then exposes only the
+  certified $q_p^2$ factors, and one finite place above each distinct
+  outside-support prime isolates its coefficient.  The frozen proof ledger
+  records every dependency; the diagram is not a numerical proof.}
+  \label{fig:proof-flow}
+\end{figure}
+
+\begin{remark}[Edge cases and abstract attainability]
+If $V=\{0\}$, no outside-support prime can be hit.  The case $q_p=1$ simply
+adds zero.  The rank contribution is abstractly attainable: a graph with $r$
+deliberately inserted independent labels realizes $r$ formal labels.  This
+shows capacity of the bare rank hypothesis only.  It is target injection, not
+arithmetic emergence or an intrinsic-provenance optimality result.  Likewise, the
+fixed H\'enon control with $a=-15/16$ and fixed point $(5/4,5/4)$ has exact
+multiplier moduli $2$ and $1/2$ only because the denominator has already put
+the prime $2$ in the bad support.
+\end{remark}
+
+\section{Three source certificates}
+\label{sec:sources}
+
+\subsection{Class L: finite memory gives finite rank}
+
+Let a fixed finite-memory observable depend on $m$ consecutive symbols of a
+finite-state shift.  Pass to the higher-block graph whose vertices are
+admissible $(m-1)$-blocks and whose edges are admissible $m$-blocks.  The
+periodic sum becomes an integer combination of finitely many edge values.
+A finite collection of such architectures therefore lies in one fixed
+finite-dimensional rational span $V$.  The edge values need not be
+algebraic.  This certificate does not cover arbitrary H\"older roofs.
+
+\subsection{Class M: good reduction gives fixed support}
+\label{subsec:M}
+
+Consider a finite composition of monic area-preserving generalized H\'enon
+factors of degrees at least two over an $S$-integer ring.  Expanding a finite
+periodic orbit into the individual factors gives a cyclic scalar recurrence
+\begin{equation}
+ z_{j+1}+z_{j-1}=P_{i_j}(z_j).
+ \label{eq:henon-recurrence}
+\end{equation}
+Cyclic neighbor occurrences retain multiplicity: for a one-step cycle, the
+left side is $2z_0$.
+
+Homogenize the $j$th equation to its own degree $d_{i_j}$.  On the common
+hyperplane at infinity, monicity leaves $z_j^{d_{i_j}}=0$ for every $j$;
+there is no projective point at infinity.  After base change to an algebraic
+closure, the cyclic projective solution scheme therefore lies in an affine
+chart and is both proper and affine.  A finite-type affine scheme proper over
+a field is finite.  Finiteness descends through the field extension, so the
+cyclic scheme is finite, with zero-dimensional support even when it is
+nonreduced, and all periodic coordinates are algebraic.
+
+At a non-Archimedean place of good reduction, suppose a cyclic coordinate has
+maximum norm $R>1$.  At an index attaining the maximum, the monic leading
+term is uniquely dominant, so
+$|P_{i_j}(z_j)|=R^{d_{i_j}}>R$.  The recurrence gives the contrary bound
+$|P_{i_j}(z_j)|\leq R$.  Hence every periodic coordinate is integral away
+from the fixed bad places.
+
+The derivative factors and their inverses lie in $\SL_2$ of the integral
+closure there.  Return eigenvalues are therefore units.  Put the orbit and
+eigenvalue in a common normal extension and saturate every place above
+$\SQ$.  Complex conjugation preserves the complement, so for
+$q=|\lambda|>0$,
+\begin{equation}
+ q^2=\lambda\overline\lambda
+ \label{eq:modulus-unit}
+\end{equation}
+is an $\SQ$-unit.  No step identifies $\overline\lambda$ with
+$\lambda^{-1}$, and no claim is made that $\log q$ is algebraic.
+
+\subsection{Class A: algebraic action with a separate gauge ledger}
+
+Let an algebraic exact-symplectic map have a single-valued
+$\Qbar$-rational potential $G$, and let all evaluations on an algebraic
+periodic orbit be regular.  Every value $G(P_j)$ and hence every finite
+action $\sum_jG(P_j)$ is algebraic.  Declared algebraic sums, scales,
+averages, repetitions, real parts, imaginary parts, and moduli remain real
+algebraic.
+
+Under a stepwise algebraic exact gauge,
+\begin{equation}
+ G'_j=G_j+\chi_{j+1}\circ F_j-\chi_j+C_j,
+\end{equation}
+the action changes by the full endpoint term
+\begin{equation}
+ \chi_n(P_n)-\chi_0(P_0)+\sum_jC_j.
+ \label{eq:gauge}
+\end{equation}
+Algebraic endpoint shifts preserve algebraicity even when they do not cancel;
+endpoint compatibility is separately required for canonical gauge
+invariance.  Poles, multivalued logarithmic gauges, closed non-exact
+primitive changes, transcendental constants, and log-after-action lie outside
+this source certificate.
+
+\subsection{Selector corollary}
+
+\begin{corollary}[Selector L/M/A architecture]
+\label{cor:selector}
+If a realized target is supplied by one L, M, or A component, embed it in
+\eqref{eq:canonical} as
+\[
+ (v,q,\alpha)=(\ell_L,1,0),\qquad
+ (0,|\lambda|,0),\qquad
+ (0,1,\cA),
+\]
+respectively.  Then \eqref{eq:main-bound} applies.
+\end{corollary}
+
+\begin{figure}[t]
+  \centering
+  \SourceAuditFigure
+  \caption{The three source certificates and their audit boundary.  L
+  contributes a vector in one finite rational space; M contributes a real
+  logarithm whose squared modulus has fixed support; A contributes a real
+  algebraic term.  The actual terminal Paper-3 and Paper-4 packages validate
+  the upstream provenance, while the registered audit checks the structured
+  dependencies and zero-execution contract.}
+  \label{fig:source-audit}
+\end{figure}
+
+\section{Capacity boundary and positive outside architectures}
+\label{sec:boundary}
+
+\begin{corollary}[Necessary certificate escapes]
+\label{cor:escapes}
+An exact construction realizing more than $\dimQ V+|\SQ|$ distinct rational
+primes cannot retain all hypotheses of \cref{def:readout}.  It must lose the
+common finite-rank space, fixed finite support, real-algebraic action term, or
+rational additive normal form.
+\end{corollary}
+
+This is contraposition within one declared certificate.  The four failures
+may overlap, need not cover arbitrary dynamics, and do not establish an
+arithmetic correspondence.  The identity map on $\mathbb A^2$ with constant
+potential $G\equiv\log2$ is a useful symbolic control: it shows that a
+transcendental normalization can inject a target, but it lies outside Class A
+and evaluates no numerical logarithm.  Similarly, allowing $q=p$ with
+prime-dependent support or inserting $\log p$ as an edge length abandons the
+target-independence hypothesis rather than refuting the theorem.
+
+Positive arithmetic architectures make the boundary concrete.  Deninger's
+systems for arithmetic schemes are infinite-dimensional and attach periodic
+packets to closed points \citep{deninger_2026}.  Connes--Consani's scaling
+site and ad\`ele class space carry prime places intrinsically and exhibit
+periodic orbits $C_p$ of length $\log p$
+\citep{connes_consani_2016,connes_consani_2024}.  These constructions do not
+fit a frozen finite L/M/A certificate.  They are outside examples, not
+confirmation that one of our four exits is sufficient and not evidence for a
+universal dimension claim.
+
+The theorem is exact-only.  Hermite--Lindemann and valuations do not turn
+small numerical error into equality, so no approximate separation bound is
+claimed.  Algebraic irrational coefficients on multiplier logs also remain
+open: the elementary rational-root closure in
+\cref{lem:rational-closure} does not cover them.
+
+\section{Registered exact/static audit}
+\label{sec:audit}
+
+The implementation was source-locked before the official run.  A fresh
+independent code reviewer bound the exact tree and source-lock hashes with a
+unique `DEPLOYMENT\_PASS` authority.  The upstream gate then rehashed seven
+terminal artifacts for each of the preceding H\'enon and algebraic-action
+papers, including their source locks, proofs, final result manifests,
+pipeline states, final-integrity records, approved PDFs, and independent
+Round-2 reviews.
+
+The single registered command performs an exact symbolic/static audit only.
+All nine gates passed: source lock, independent review, 20-ID proof ledger,
+scope ledger with ten admitted and nine excluded operations, six exact
+controls, twelve-file executable isolation, both upstream bindings, escape
+semantics, and output scope.  The post-run suite reported 51 passing tests.
+The registry records one registered run, zero candidate numerical runs, and
+zero target matches.  The result manifest enforces exact schemas and types,
+canonical gate recomputation, cross-artifact timestamp and digest agreement,
+and a flat allowlist.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Registered audit outcome.  Every value is categorical or exact.}
+\label{tab:audit}
+\begin{tabular}{@{}lrl@{}}
+\toprule
+Check & Count/value & Status \\
+\midrule
+Registered gates & 9/9 & PASS \\
+Proof dependency IDs & 20/20 & PASS \\
+Admitted / excluded operations & 10 / 9 & PASS \\
+Exact controls & 6/6 & PASS \\
+Scanned executable files / findings & 12 / 0 & PASS \\
+Actual terminal upstream packages & 2/2 & PASS \\
+Official tests & 51/51 & PASS \\
+Registered numerical runs / target matches & 0 / 0 & PASS \\
+Prime tables / target arrays / zero data & false / false / false & PASS \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The audit does not mechanically prove Hermite--Lindemann, the
+projective-affine dimension lemma, or valuation theory.  It verifies that the
+software uses the reviewed structured dependencies, applies the exact scope,
+and cannot emit `CAPACITY\_BOUND\_CERTIFIED` unless every gate is green.  The
+mathematical claims rest on the proofs above and in \cref{app:sources}.
+
+\section{Conclusion and limitations}
+\label{sec:conclusion}
+
+A finite additive L/M/A certificate has finite arithmetic capacity.  Once the
+locally constant contribution occupies one rational space, multiplier
+moduli have one finite bad support, and the action contribution is real
+algebraic, Hermite--Lindemann and finite-place valuations force a
+rank-plus-support bound on exact rational-prime logarithms.  The additive
+coupling, rather than a selector union, is the central result.
+
+The theorem has deliberate limits.  It says nothing quantitative about near
+matches, does not cover nonlinear or algebraic-irrational multiplier-log
+mixing, and does not classify nonalgebraic, multivalued, adelic, or
+infinite-place observables.  Its escape conditions are not a complete
+trichotomy and carry no sufficiency claim.  Two concrete next questions are a
+quantitative analogue for approximate equality and a separately source-locked
+analysis of an intrinsic outside-class clock.  Neither direction is opened by
+the present static audit.
+
+\appendix
+
+\section{Edge-case and scope ledger}
+\label{app:scope}
+
+\paragraph{Selection and repetitions.}
+For each distinct prime, choose one valid certificate before examining any
+finite relation.  The proof works for every such choice.  Multiple orbits or
+representations for one prime contribute one set element.
+
+\paragraph{Positive rational powers.}
+The unique positive real $D$th root of a positive algebraic number is
+algebraic.  After adjoining finitely many roots, extension invariance retains
+the $\SQ$-unit condition.  Negative exponents use inversion.  No complex
+logarithm branch occurs.
+
+\paragraph{Excluded outputs.}
+The certificate forbids output labels asserting a universal symplectic
+no-go, complete escape trichotomy, infinite-dimensional necessity, historical
+priority, Riemann-zero progress, or Route-B progress.  The accepted
+classification means only that the locked implication and provenance gates
+pass.
+
+\section{Expanded source-class proofs}
+\label{app:sources}
+
+\subsection{The projective-affine step in Class M}
+
+For a fixed itinerary, homogenize each equation in
+\eqref{eq:henon-recurrence} to its own degree.  At the common homogenizing
+coordinate $Z=0$, the monic term forces every cyclic coordinate to vanish;
+the projective solution scheme has no geometric point at infinity.  After
+base change to an algebraic closure, it is consequently a closed subscheme of
+an affine chart while remaining proper.  A finite-type affine scheme proper
+over a field is finite, equivalently its coordinate algebra is
+finite-dimensional over that field.  This statement permits nilpotents and
+does not assume the scheme reduced.  Finiteness descends along the field
+extension.  Thus the cyclic scheme is finite.  This establishes algebraicity
+at every finite period, not merely at audited sample periods.
+
+\subsection{The non-Archimedean maximum and monodromy}
+
+At a good place, all nonleading polynomial coefficients are integral and the
+leading coefficient is a unit.  If $R>1$ is the maximal cyclic norm, the
+ultrametric inequality and monicity give a unique leading magnitude
+$R^{d}>R$, contradicting the two-neighbor recurrence bound.  Hence the orbit
+is integral.  Derivative factors and their inverses have integral entries and
+determinant one, so a monodromy eigenvalue and its inverse are integral over
+the local ring.  Both valuations vanish.  In a normal extension saturated
+above $\SQ$, the same holds for the conjugate, which proves
+\eqref{eq:modulus-unit} without a reciprocal-conjugate shortcut.
+
+\subsection{Class-A gauge distinction}
+
+Summing the stepwise identity gives \eqref{eq:gauge} by ordinary
+telescoping.  If every displayed term is algebraic, the shifted action is
+algebraic even when $\chi_n(P_n)\neq\chi_0(P_0)$.  Endpoint compatibility
+removes that term and is required only when the numerical closed action is
+claimed to be gauge invariant.  A pole cannot be canceled after evaluation,
+and monodromy of a multivalued gauge requires a different ledger.
+
+\section{Reproducibility record}
+\label{app:repro}
+
+The official sequence was
+\begin{verbatim}
+PYTHONPATH=code python code/scripts/run_registered_audit.py
+PYTHONPATH=code pytest -q -p no:cacheprovider \
+  --junitxml=experiments/official_pytest.xml
+PYTHONPATH=code python code/scripts/build_result_manifest.py
+\end{verbatim}
+The corresponding SHA-256 prefixes are
+\begin{center}
+\small
+\begin{tabular}{@{}ll@{}}
+result & \texttt{9f9878247dc821d1} \\
+registry & \texttt{4ebec117a2254dc45} \\
+exclusive manifest & \texttt{21d6910ec1e8e299} \\
+source lock & \texttt{2d27abceb65cd0ad} \\
+reviewed tree & \texttt{10fd57b1f9961679} \\
+\end{tabular}
+\end{center}
+The accompanying integrity package records and rechecks every full 64-digit
+digest.
+
+The figure loader rechecks the source, reviewed tree, official
+classification, all nine gates, both upstream records, and every zero-target
+flag.  Figure scripts produce PDF and SVG vector masters and PNG review
+copies with fixed metadata.  The registered executable used no network, GPU,
+floating tolerance, numerical logarithm, prime table, target array, or
+Riemann-zero data.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

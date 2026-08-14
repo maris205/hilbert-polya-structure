@@ -263,8 +263,9 @@ Fermat-fourfold/Fano-threefold trace cancellation and moves the Euler and
 eighth-order determinant domain to \(\Re s>1/4\). These are retained positive
 structures rather than added to the obstruction list. The first unresolved
 uniform-moment wall is now the fourth chronological moment.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P47`; its
-immutable bundles retain legacy internal C-series provenance strings.
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P49`; the
+immutable P43--P47 bundles retain legacy internal C-series provenance
+strings, while P48--P49 were born namespaced.
 
 ## HCS-P44 additions (pressure-lane registry alias)
 
@@ -283,3 +284,15 @@ immutable bundles retain legacy internal C-series provenance strings.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O87 | Rational scalar transforms of H6 multipliers preserving every orbit repetition | proved functorial classification obstruction | The identity `R(X^r)=R(X)^r` forces every nonzero rational function to be the monomial `X^k`. Applied to P46's algebraic-unit multipliers, every rational scalar label is again a unit and cannot be a rational prime. | Complete only for rational identities on the multiplier torus. Continuous real powers, nonlocal orbit packets, prime ideals, cyclic resultants, and distributional traces remain outside scope. | ../henon_repetition_label_classification/README.md |
+
+## HCS-P48 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O88 | Common pressure-power labels \(P_\gamma=|\Lambda_\gamma|^h\) as rational primes for every primitive H6 orbit | proved three-orbit transcendence/unit obstruction | Exact primitive period \(1,3,4\) multipliers generate a degree-32 compositum, so their positive logarithms are \(\mathbb Q\)-linearly independent. For rational \(h>0\), no power is a rational integer greater than one because each multiplier is a unit. For irrational \(h\), Six Exponentials forces at least one of the three labels to be transcendental. | Stops the universal termwise rational-prime interpretation for every common real exponent, including the pressure root. It does not identify which label fails for transcendental \(h\), revoke the HCS-P45 prime-orbit counting law, or obstruct prime ideals, Galois packets, cyclic resultants and collective distributional/scattering traces. | ../henon_pressure_label_six_exponentials_obstruction/README.md |
+
+## HCS-P49 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O89 | Full multiplier-field norm scalarization of H6 cyclic determinant and primitive cyclotomic packets | proved reciprocal square-norm obstruction | In the multiplier field, $(\det(I-M_\gamma^r))\mathcal O_K=(1-\lambda_\gamma^r)^2$ and its norm is the square of the minimal trace-field norm. For every $n>2$, $\lambda_\gamma^{-\varphi(n)/2}\Phi_n(\lambda_\gamma)$ is an integer of the fixed trace field, so the full primitive norm is also a square. | Stops only promotion of the doubled full-field norm to a rational prime. The minimal trace-field Lehmer--Pierce sequence and principal ideal packets survive; the period-four sequence has eventual primitive rational divisors. No all-orbit packet trace is proved. | ../henon_cyclic_resultant_packet_obstruction/README.md |

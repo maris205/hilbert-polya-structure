@@ -1,0 +1,1294 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \setmainfont{Latin Modern Roman}
+  \usepackage{xeCJK}
+  \setCJKmainfont{Noto Serif CJK SC}
+  \setCJKsansfont{Noto Sans CJK SC}
+  \setCJKmonofont{Noto Sans Mono CJK SC}
+  \newCJKfontfamily\zhfont{Noto Serif CJK SC}
+\else\ifLuaTeX
+  \usepackage{fontspec}
+  \setmainfont{Latin Modern Roman}
+  \usepackage{luatexja-fontspec}
+  \setmainjfont{Noto Serif CJK SC}
+  \newjfontfamily\zhfont{Noto Serif CJK SC}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi\fi
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable,tabularx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{caption}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=MidnightBlue,
+  citecolor=ForestGreen,
+  urlcolor=BrickRed,
+  pdftitle={Arithmetic Period Packets and the Missing Trace},
+  pdfauthor={Liang Wang}
+}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Per}{\operatorname{Per}}
+\newcommand{\Tr}{\operatorname{tr}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\Aalg}{\mathcal A_{\mathrm{alg}}}
+\newcommand{\proved}{\textsf{PROVED}}
+\newcommand{\conditional}{\textsf{CONDITIONAL}}
+\newcommand{\openclaim}{\textsf{OPEN}}
+\newcommand{\nottest}{\textsf{NOT TESTABLE}}
+
+\title{\textbf{Arithmetic Period Packets and the Missing Trace:}\\
+A Source-Locked Zeta Audit of Deninger's Rational-Witt Flow}
+\author{Liang Wang\\
+\small School of Artificial Intelligence and Automation,\\[-2pt]
+\small Huazhong University of Science and Technology, Wuhan 430074, P.R. China\\
+\small \texttt{wangliang.f@gmail.com}}
+\date{13 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Deninger's rational-Witt flow for \(\Spec\Z\) derives an exact arithmetic
+clock: the periodic set is exhausted by compact packets \(\Gamma_p\), indexed
+by rational primes, and every orbit in \(\Gamma_p\) has least period
+\(\log p\).  We ask whether this theorem-level period structure already
+defines a natural dynamical zeta function or trace.  At the presently
+auditable level, it does not: the ordinary orbitwise product fails, while a
+source-intrinsic measured replacement is not yet testable.  First, we prove
+that the orbit set in each packet is uncountable.  Consequently the
+ordinary primitive-orbit counting measure is not locally finite in length, and
+the conventional orbitwise Ruelle product diverges already inside one packet
+for every positive real spectral parameter.  This is an unconditional
+obstruction to the ordinary product, not an impossibility theorem for all
+measured or cohomological replacements.  Second, we separate four interfaces:
+normalized Haar probability on an abstract packet base, its
+choice-independent lift to the source packet, relative masses across prime
+components, and an operator or Lefschetz trace.  Only the first is presently
+available as an abstract compact-group theorem.  On a conditional
+finite-support component algebra, homogeneous trace axioms leave arbitrary
+positive packet masses; their growth shifts the absolute-convergence abscissa
+from \(1\) to \(\alpha+1\) when \(m_p\asymp p^\alpha\).  Clean-family,
+Morse--Bott, foliated, groupoid, and microlocal trace theorems do not bypass
+the missing interfaces because their smooth, normal-return, measure, and
+operator hypotheses are not supplied by the frozen topological object.
+Deninger's Section 11 Haar-normalized convolution algebra is genuine but is
+defined on a different inverse-limit group, with no proved map to packet
+return traces.  Zero-free deterministic controls illustrate multiplicity
+divergence and normalization sensitivity but are not used to infer a trace.
+The calibrated Route-A verdict is arithmetic origin at A0, weak packet
+structure at A1, no A2 pass, and no A3 or A4 test.
+\end{abstract}
+
+\ifPDFTeX\else
+\begin{center}
+{\zhfont\bfseries 摘要}
+\end{center}
+{\zhfont
+Deninger 为 \(\Spec\Z\) 构造的有理 Witt 流给出了严格的算术时钟：
+周期集由素数 \(p\) 标记的紧致 packet \(\Gamma_p\) 穷尽，且 packet
+中每条轨道的最小周期均为 \(\log p\)。本文检验这一周期结构是否已经
+足以自然定义动力学 zeta 函数或迹。结论是否定的，但否定边界是精确的。
+我们证明每个 packet 含有不可数条同周期本原轨道，因此通常的逐轨
+Ruelle 乘积在任意正实参数处，仅在单个 packet 内就已发散。该结论只
+排除普通逐轨乘积，并不排除未来经额外结构定义的测度迹、群胚迹或
+Lefschetz 迹。进一步地，本文区分 packet 基空间上的归一化 Haar 概率、
+该概率到原始 packet 的选择无关提升、不同素数分量的相对质量，以及
+算子迹四个独立门槛。目前只有第一个门槛能由抽象紧群定理保证。
+在条件性的分量代数上，齐次迹公理保留任意 packet 权重；若
+\(m_p\asymp p^\alpha\)，绝对收敛边界随之移动到
+\(\Re s=\alpha+1\)。Deninger 第 11 节的 Haar 归一卷积代数属于另一
+逆极限群，现有来源没有建立其与周期 packet 返回迹之间的桥梁。
+因此 Route A 的校准结果为：A0 具有解析算术来源，A1 较弱，A2 没有
+通过的候选 determinant，A3 和 A4 未进入，整体仍属探索性候选。
+}
+\fi
+
+\medskip
+\noindent\textbf{Keywords:} arithmetic dynamics; dynamical zeta function;
+periodic-orbit packet; trace formula; Haar normalization; rational-Witt flow;
+Hilbert--P\'olya programme.
+
+\section{Introduction}
+
+A periodic-orbit route to the Riemann explicit formula requires a single
+object to carry several logically distinct structures.  Rational primes must
+arise intrinsically; prime powers must be repetitions; the clock must produce
+\(r\log p\); an operator, cohomology, or transfer construction must assign the
+same repetitions their coefficients; and a determinant must have a controlled
+analytic domain and divisor.  Writing the familiar prime Euler product after
+the primes and periods have been identified is not yet a dynamical
+determinant.  The factor one per prime is itself a trace-normalization claim.
+
+Deninger's arithmetic-dynamical construction makes this distinction
+unavoidable.  For the finite-kernel admissible rational-Witt system attached
+to \(\Spec\Z\), a rational prime does not select one isolated closed orbit.
+It selects a compact packet \(\Gamma_p\) of equal-period closed orbits
+\citep{Deninger2026,Deninger2024}.  This is stronger than a numerical
+prime-orbit analogy because the prime index and period \(\log p\) come from
+closed-point arithmetic.  It is weaker than the isolated-orbit setting of a
+classical Ruelle product because the transverse packet multiplicity has not
+been converted into a trace coefficient.
+
+The question of this paper is therefore narrow:
+
+\begin{quote}
+Does the frozen rational-Witt flow, without importing the desired Euler
+product, determine a natural packet trace and dynamical determinant?
+\end{quote}
+
+Our answer has two levels.  At the ordinary orbit-counting level the answer is
+rigorously no: every \(\Gamma_p\) contains uncountably many primitive orbits of
+the same least period, and the conventional orbitwise product diverges.  At
+the packetwise measured level the answer is \emph{not yet testable}: a
+canonical trace domain, choice-independent lift, cross-packet normalization,
+and return-trace theorem have not been defined for the frozen object.  The
+second conclusion is an interface diagnosis, not a theorem that every future
+enrichment must fail.
+
+The main contributions are:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item a source-locked reconstruction of the packet theorem, including its
+  admissibility and choice-dependence boundaries;
+  \item an elementary proof that the orbit base
+  \(B_p=\widehat{\Z}_{(p)}^\times/p^{\widehat{\Z}}\) is uncountable;
+  \item a proof that the conventional individual-orbit Ruelle product cannot
+  define a finite nonzero holomorphic product in any right half-plane;
+  \item a four-gate separation of local Haar probability, packet lift,
+  global component masses, and operator trace;
+  \item a conditional non-uniqueness theorem showing that homogeneous trace
+  axioms do not determine the packet masses;
+  \item an exact formula for how polynomial packet masses move the
+  absolute-convergence boundary;
+  \item an applicability audit of clean, Morse--Bott, foliated, groupoid, and
+  microlocal trace frameworks; and
+  \item deterministic zero-free controls that expose multiplicity divergence,
+  copied-packet additivity, and mass sensitivity without claiming to construct
+  a trace.
+\end{enumerate}
+
+The paper is a Stage-2 Route-A audit.  It does not inspect Riemann-zero data,
+fit a scale, hand-write an Euler product and relabel it dynamical, or open a
+general operator-algebra search.  Those exclusions are methodological: they
+prevent the target from supplying the missing normalization.
+
+\section{Research design and source discipline}
+\label{sec:methods}
+
+The study is a theoretical and computational mathematical case study with a
+comparative falsification design.  The research protocol was frozen before
+the packet weights were calculated.  It treated a rigorous nonexistence,
+non-uniqueness, or not-testable conclusion as a successful outcome and
+forbade continuation or divisor work until a trace and determinant had been
+legitimately defined.
+
+The primary case is \texttt{DEN-WITT-Z-FIN}.  The modular Ruelle quotient is
+retained only as an exact isolated-orbit coefficient benchmark; its failed
+rational-prime support from the preceding stage is not reopened.  An
+equal-period circle bundle over an arbitrary compact base and a disjoint
+copied packet serve as proves-too-much and normalization controls.
+
+The analysis followed five ordered steps:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item reconstruct the source object, actions, topology claims, packets,
+ orbit parametrization, and admissibility dependence;
+ \item test the conventional one-factor-per-orbit product before considering
+ any measured collapse;
+ \item separate existence, local Haar normalization, packet lift, global
+ component masses, and operator trace;
+ \item derive repetitions and convergence only for explicitly stipulated
+ weights, marking them diagnostic rather than dynamical; and
+ \item compare the missing inputs with primary trace-formula theorems and run
+ deterministic controls.
+\end{enumerate}
+
+The preregistration imposed ten obligations.  They cover an intrinsic trace
+domain; flow compatibility; invariance under packet automorphisms;
+disjoint-union additivity; transverse locality; finite-kernel compatibility;
+separate local and global normalization provenance; repetition covariance;
+an exact isolated-orbit comparison; and analytic legitimacy.  Rescaling,
+copied packets, arbitrary compact bases, determinant direction, and
+finite-stability claims were adversarial controls.  A design-stage Devil's
+Advocate audit passed the protocol subject to keeping packet-base probability
+distinct from packet trace.
+
+The literature investigation used original articles, author manuscripts, and
+publisher or institutional copies verified through 13 August 2026.  Search
+families targeted clean fixed sets, Morse--Bott periodic families, foliated
+flow traces, groupoid Haar systems, transverse measures, flat traces, and
+Ruelle determinants.  Fifteen work-level candidates were screened; eleven
+core source groups and two supporting sources were retained.  General
+operator-algebra constructions and Riemann-zero trace programs were excluded
+because they would change the frozen flow question.  A final independent
+proof audit rechecked the uncountability argument, finite-subset product net,
+conditional mass theorem, status calibration, test run, and artifact hashes.
+
+Non-elementary source claims are cited to their primary publications.  The
+elementary group and series arguments are displayed in full.  Computation is
+used only to reproduce finite consequences of those arguments, never to
+upgrade an open interface to a theorem.
+
+\section{Evidence boundary and frozen object}
+\label{sec:boundary}
+
+\subsection{Evidence vocabulary}
+
+Four labels are used throughout:
+\begin{description}[leftmargin=3.0cm,style=nextline]
+ \item[\proved] a statement in the audited primary source or a consequence
+ with a complete argument given here;
+ \item[\conditional] a theorem after explicitly listed extra assumptions,
+ which are not all supplied by the frozen source;
+ \item[\openclaim] a mathematically meaningful construction or property not
+ established or refuted for the frozen object;
+ \item[\nottest] an obligation that cannot yet be evaluated because its
+ domain, topology, measure, action, or operator has not been defined.
+\end{description}
+An \openclaim\ or \nottest\ interface is not converted into a negative
+existence theorem.  Conversely, a familiar formal expression is not counted
+as evidence that the missing interface exists.
+
+\subsection{Version and admissibility lock}
+
+The primary source manifestation audited here is arXiv:1807.06400v4,
+cross-linked by DOI to the 2026 journal article \citep{Deninger2026}; no
+page-perfect identity with the version of record is assumed.  The author's
+later overview, checked as arXiv:2301.11643v1, is used only as a corroborating
+restatement \citep{Deninger2024}.  Let
+\(\mathfrak X_0=\Spec\Z\).  The source begins with a rational-Witt point
+space, passes to a Frobenius colimit
+\(\check X_0(\mathbb C)_{\mathcal E}\) carrying a
+\(\Q_{>0}\)-action, and forms the suspension
+\begin{equation}
+ X_0(\mathcal E)=
+ \check X_0(\mathbb C)_{\mathcal E}
+ \times_{\Q_{>0}}\R_{>0},
+ \qquad
+ \phi^t[P,u]=[P,\e^t u].
+ \label{eq:suspension}
+\end{equation}
+
+The source offers several admissible character classes and explicitly notes
+that the best choice is unclear and that topology depends strongly on it
+\citep{Deninger2026}.  We freeze the finite-kernel class
+\(\mathcal E_f\).  It is source-permitted and is sufficient for the full
+packets in the periodic-point theorems; it is not asserted to be the unique
+canonical admissibility condition.  Every verdict below applies to this
+versioned object, denoted \texttt{DEN-WITT-Z-FIN}.
+
+\subsection{What the packet theorem actually supplies}
+
+Let \(x_0\) be a closed point with finite residue field and norm
+\(N x_0\).  Deninger's Theorems 5.2 and 6.1 construct a pre-suspension packet
+\(C_{x_0}\) and its suspended packet
+\[
+ \Gamma_{x_0}
+   =C_{x_0}\times_{\Q_{>0}}\R_{>0}.
+\]
+For \(\Spec\Z\), \(x_0=(p)\) and \(N x_0=p\).  The periodic set is exhausted
+by disjoint packets,
+\begin{equation}
+ \Per(X_0(\mathcal E_f))
+   =\coprod_{p\ {\rm prime}}\Gamma_p,
+ \label{eq:packetdecomp}
+\end{equation}
+and every point in \(\Gamma_p\) has additive flow isotropy
+\((\log p)\Z\).  Thus every fibre orbit has least period \(\log p\), and its
+\(r\)-fold return time is \(r\log p\).  Packet existence, disjointness,
+periodic exhaustion, and the arithmetic clock are \proved.
+
+After choosing a point above \(x_0\) and an embedding of roots of unity, the
+source gives an equivariant set-level packet description.  In the
+\(\Spec\Z\) specialization it has the form
+\begin{equation}
+ \Gamma_p\ \longleftrightarrow\
+ B_p\times\bigl(\R/(\log p)\Z\bigr),
+ \qquad
+ B_p=
+ \widehat{\Z}_{(p)}^\times/p^{\widehat{\Z}}
+ =
+ \frac{\operatorname{Aut}(\overline{\mathbb F}_p^\times)}
+ {\operatorname{Aut}(\overline{\mathbb F}_p)}.
+ \label{eq:packetcoordinates}
+\end{equation}
+The circle factors are the flow orbits.  Equations (37)--(39) in the source,
+including the fibration map to \(B_p\), depend on the auxiliary choices.  Only
+a different projection, equation (40), to
+\(\Q_{>0}/p^\Z\) is declared canonical \citep{Deninger2026}.
+
+Accordingly, \eqref{eq:packetcoordinates} is used as a noncanonical
+\(\R\)-equivariant bijection of sets.  The source does not prove that
+\(\Gamma_p/\R\) with its quotient topology is homeomorphic to \(B_p\), or
+that \(\Gamma_p\) is a locally trivial product bundle.  It does define
+topologies on the ambient spaces and a continuous flow, but some global
+equivariant continuous bijections in the construction are explicitly not
+homeomorphisms in general.  Upgrading the displayed packet coordinates
+requires a separate theorem.
+
+\begin{table}[ht]
+\centering
+\caption{Source-locked packet facts and their evidence status.}
+\label{tab:sourcefacts}
+\small
+\begin{tabularx}{\textwidth}{p{0.31\textwidth}p{0.22\textwidth}X}
+\toprule
+Obligation & Status & Boundary\\
+\midrule
+packet existence, compactness, and exhaustion & \proved & Theorems 5.2 and 6.1 and the author's restatement\\
+least period \(\log p\) & \proved & isotropy is \(p^\Z\), or \((\log p)\Z\) in additive time\\
+orbit set indexed by \(B_p\) & \proved & noncanonical set-level parametrization\\
+canonical topological identity \(\Gamma_p/\R=B_p\) & \openclaim & quotient topology and transition maps are not identified\\
+locally trivial packet bundle & \openclaim & no local-section or properness theorem is supplied\\
+selected packet groupoid & \nottest & several external choices are possible; none is source-locked\\
+packet return trace and determinant & \nottest & no trace domain or determinant theorem is defined\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Uncountable equal-period multiplicity}
+\label{sec:uncountable}
+
+The first obstruction does not depend on the unresolved packet topology.  It
+uses only the source's set-level orbit parametrization.  Put
+\[
+ G_p=\widehat{\Z}_{(p)}^\times
+     =\prod_{\ell\ne p}\Z_\ell^\times,
+ \qquad
+ H_p=p^{\widehat{\Z}}\subset G_p.
+\]
+Here \(H_p\) is the closed procyclic image of the continuous exponent map
+\(\widehat{\Z}\to G_p\); no injectivity assertion is needed.
+
+\begin{proposition}[Uncountable orbit base]
+\label{prop:uncountable}
+For every rational prime \(p\), the compact Hausdorff quotient group
+\(B_p=G_p/H_p\) has cardinality at least \(2^{\aleph_0}\).  Hence
+\(\Gamma_p\) contains uncountably many distinct primitive flow orbits, all
+with least period \(\log p\).
+\end{proposition}
+
+\begin{proof}
+Let
+\[
+ I_p=\{\ell:\ell\text{ is an odd prime and }\ell\ne p\}.
+\]
+This set is countably infinite, including when \(p=2\).  Define
+\[
+ S_p=\left\{(\varepsilon_\ell)_{\ell\ne p}\in G_p:
+ \begin{array}{ll}
+ \varepsilon_\ell\in\{\pm1\},&\ell\in I_p,\\
+ \varepsilon_\ell=1,&\ell\notin I_p
+ \end{array}\right\}.
+\]
+For odd \(\ell\), the units \(1\) and \(-1\) in \(\Z_\ell\) are distinct.
+Therefore
+\[
+ S_p\cong\prod_{\ell\in I_p}C_2,
+ \qquad |S_p|=2^{\aleph_0},
+\]
+and every element of \(S_p\) has order dividing two.
+
+A procyclic profinite group has at most one nonidentity involution.  Indeed,
+if \(x\) and \(y\) were distinct nonidentity involutions in \(H_p\), choose an
+open normal subgroup \(U\) containing none of \(x,y,xy\).  The finite cyclic
+quotient \(H_p/U\) would then contain two distinct nonidentity involutions,
+which is impossible.  Hence \(|S_p\cap H_p|\le2\).
+
+If \(q:G_p\to B_p\) is the quotient map, then
+\[
+ \ker(q|_{S_p})=S_p\cap H_p,
+ \qquad
+ |q(S_p)|=|S_p/(S_p\cap H_p)|=2^{\aleph_0}.
+\]
+Thus \(B_p\) is uncountable.  Through the source-audited noncanonical
+set-level parametrization, the set of flow orbits in \(\Gamma_p\) has this
+cardinality.  Since \(\log p\) is the least period of every such orbit, each
+is primitive.
+\end{proof}
+
+\begin{remark}
+Proposition~\ref{prop:uncountable} is a cardinality theorem.  It does not
+assert a homeomorphism \(\Gamma_p/\R\cong B_p\), continuity of the orbit
+family, or local triviality of the source's fibration.
+\end{remark}
+
+\begin{corollary}[Failure of length-local finiteness]
+\label{cor:notlocallyfinite}
+Let \(\mathcal P\) be the set of individual primitive periodic orbits of the
+frozen flow.  For every \(T\ge\log 2\),
+\[
+ \#\{\gamma\in\mathcal P:\ell(\gamma)\le T\}
+\]
+is uncountable.  In particular, the ordinary primitive-orbit counting measure
+\(\sum_{\gamma\in\mathcal P}\delta_{\ell(\gamma)}\) is not locally finite.
+\end{corollary}
+
+\begin{proof}
+Choose any prime \(p\le\e^T\).  Proposition~\ref{prop:uncountable} gives
+uncountably many primitive orbits at the single length \(\log p\le T\).
+\end{proof}
+
+\begin{theorem}[Orbitwise Ruelle-product obstruction]
+\label{thm:orbitproduct}
+Under the conventional convention of one factor per individual primitive
+orbit, the formal product
+\begin{equation}
+ Z_{\rm orb}(s)
+   =\prod_{\gamma\in\mathcal P}
+      (1-\e^{-s\ell(\gamma)})^{-1}
+ \label{eq:orbitproduct}
+\end{equation}
+does not define a finite nonzero ordinary Euler product on any right
+half-plane.  For every real \(\sigma>0\), the finite-subset net already
+diverges to \(+\infty\) within any fixed packet \(\Gamma_p\).
+\end{theorem}
+
+\begin{proof}
+Fix \(p\) and real \(\sigma>0\).  Every primitive orbit in \(\Gamma_p\)
+contributes the same factor
+\[
+ a_{p,\sigma}=(1-p^{-\sigma})^{-1}>1.
+\]
+For a finite subset \(F\Subset\mathcal P_p\) of packet orbits, the
+corresponding partial product is \(a_{p,\sigma}^{|F|}\).  Given \(M>0\),
+choose \(n\) such that \(a_{p,\sigma}^n>M\), and choose \(F_0\) containing
+\(n\) distinct orbits.  Every \(F\supseteq F_0\) then satisfies
+\[
+ \prod_{\gamma\in F}(1-p^{-\sigma})^{-1}
+  =a_{p,\sigma}^{|F|}\ge a_{p,\sigma}^{n}>M.
+\]
+The net therefore diverges to \(+\infty\).
+
+For completeness, at a complex point where the common factor
+\(a_p(s)=(1-p^{-s})^{-1}\) is defined, it is never equal to one.  If the
+finite-subset net converged to a nonzero limit \(L\), adjoining one fresh
+orbit would force both \(Z_F(s)\to L\) and \(a_p(s)Z_F(s)\to L\), hence
+\(a_p(s)L=L\), a contradiction.  At \(p^{-s}=1\) an individual factor is
+undefined.  Every right half-plane contains a positive real point, so no
+right half-plane supports the required finite nonzero ordinary product.
+\end{proof}
+
+\begin{remark}[Exact scope of the theorem]
+Theorem~\ref{thm:orbitproduct} rules out the \emph{ordinary orbit-counting}
+product \eqref{eq:orbitproduct}.  Replacing all orbits in \(\Gamma_p\) by one
+factor changes the primitive counting measure from one atom per orbit to one
+atom per packet.  Such a measured, clean-family, groupoid, or cohomological
+collapse could be meaningful after a new theorem supplies its coefficient.
+The theorem above neither constructs nor excludes every such enrichment.
+\end{remark}
+
+\section{Four independent trace-normalization gates}
+\label{sec:gates}
+
+The packet theorem and the ordinary-product obstruction leave open a more
+structured replacement.  Before one can speak of a packet determinant,
+however, four interfaces must be distinguished.  Figure~\ref{fig:gates}
+shows the logical order.  Possessing an earlier object does not automatically
+define the next.
+
+\begin{figure}[ht]
+\centering
+\input{figures/trace_gate_diagram.tex}
+\caption{The packet-to-determinant interface.  Green boxes are available from
+the source or an abstract compact-group theorem.  Red boxes are not supplied
+for the frozen object.  N1 alone is not a packet trace.}
+\label{fig:gates}
+\end{figure}
+
+\subsection{N1: normalized Haar probability on the abstract base}
+
+Given the compact Hausdorff group \(B_p\), the Haar theorem gives a unique
+translation-invariant probability measure \(\mu_p\) with
+\(\mu_p(B_p)=1\).  This statement is \proved\ as an abstract compact-group
+fact.  Deninger does not define \(\mu_p\) in the packet theorem.
+
+The word canonical must be qualified.  Normalized Haar probability is
+canonical \emph{after the abstract group \(B_p\) and its topology have been
+fixed}.  The source's projection from packet coordinates to \(B_p\) depends
+on a lift and an embedding.  The transition maps between different choices
+are not classified, so the source does not prove that transporting
+\(\mu_p\) to the quotient orbit set is choice-independent.  That
+source-to-packet assertion remains \openclaim.
+
+\subsection{N2: lift or disintegration to the packet}
+
+Even a canonical measure on an orbit base does not uniquely specify a measure
+or a periodic distribution on the total packet.  A lift would need at least:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item a canonical measurable quotient map from \(\Gamma_p\);
+ \item conditional measures along the circular flow fibres;
+ \item measurable or continuous variation of those conditional measures;
+ \item compatibility with isotropy and repeated coverings;
+ \item flow or holonomy invariance; and
+ \item independence of the auxiliary coordinates in
+ \eqref{eq:packetcoordinates}.
+\end{enumerate}
+Each individual orbit, viewed abstractly as the homogeneous circle
+\(\R/(\log p)\Z\), does have a unique normalized invariant Haar probability.
+What is missing is a source-canonical measurable assembly of those
+probabilities over the packet base, independence from the auxiliary packet
+coordinates, and a theorem identifying fibre probability with a return-trace
+coefficient.  The period \(\log p\) also gives a natural length measure of
+total mass \(\log p\); neither that measure nor normalized probability is
+automatically the trace-derived choice.  No disintegration and trace theorem
+making these distinctions is supplied.  N2 is therefore \openclaim\ at the
+conceptual level and \nottest\ as a frozen-source construction.
+
+\subsection{N3: relative masses across prime components}
+
+Suppose, conditionally, that every packet has acquired a normalized local
+functional.  This still does not select the mass of the whole packet relative
+to the other prime components.  The following elementary theorem isolates the
+remaining freedom without pretending that its algebra is already present in
+the source.
+
+\begin{theorem}[Conditional component-mass non-uniqueness]
+\label{thm:masses}
+Assume an algebraic direct sum of \(*\)-algebras, with componentwise product
+and involution,
+\[
+ \Aalg=\bigoplus_p\mathcal A_p,
+\]
+where every \(\mathcal A_p\) carries a nonzero positive trace \(\tau_p\).
+Assume also a component-preserving action by \(*\)-automorphisms whose
+restriction to each component leaves \(\tau_p\) invariant.  Then every
+positive sequence
+\(m=(m_p)_p\) defines
+\begin{equation}
+ \tau_m((a_p)_p)=\sum_p m_p\tau_p(a_p),
+ \label{eq:componenttrace}
+\end{equation}
+and \(\tau_m\) is positive, tracial, additive, and invariant under the
+component-preserving action.  Componentwise homogeneous axioms therefore do
+not determine the relative masses \(m_p\).
+\end{theorem}
+
+\begin{proof}
+Every element of \(\Aalg\) has finite support, so
+\eqref{eq:componenttrace} is well defined.  Linearity is immediate.
+Positivity follows from \(m_p>0\) and positivity of each \(\tau_p\).
+For \(a,b\in\Aalg\),
+\[
+ \tau_m(ab)=\sum_p m_p\tau_p(a_pb_p)
+           =\sum_p m_p\tau_p(b_pa_p)=\tau_m(ba).
+\]
+The assumed local invariance and direct-sum additivity give the corresponding
+properties componentwise.  If two
+sequences differ at an index where \(\tau_p\ne0\), the corresponding
+functionals are distinct.
+\end{proof}
+
+The hypotheses in Theorem~\ref{thm:masses} are substantive.  The frozen
+source provides neither the algebras \(\mathcal A_p\), their traces and
+domains, nor the absence of cross-prime relations.  On a completed algebra,
+boundedness, lower semicontinuity, semifiniteness, or summability can restrict
+the allowable sequences.  A future arithmetic category could also impose
+relations between components.  Thus the theorem is \conditional, while the
+existence and uniqueness of the source-intrinsic trace remain \nottest.
+
+A still simpler version is global rescaling: if a nonzero trace \(\tau\)
+satisfies only homogeneous axioms, then \(c\tau\) satisfies the same axioms
+for every \(c>0\).  A nonhomogeneous normalization such as \(\tau(1)=1\)
+would break this freedom, but the relevant algebra, unit, and source-derived
+normalization must first be specified.
+
+\subsection{O: operator or fixed-point trace}
+
+N1--N3 would not by themselves produce a dynamical trace formula.  One still
+needs a Hilbert, Banach, cohomological, or distributional domain; a return or
+propagation operator; a trace-class, flat-trace, or regularized-trace
+criterion; and a theorem deriving the periodic coefficient.  For example,
+under any full-support realization in which the return at time \(\log p\)
+acts as the identity on an infinite-dimensional \(L^2(\Gamma_p)\), the
+ordinary Hilbert-space trace is unavailable because the identity is not trace
+class.  This conditional observation does not exclude other flat or
+cohomological traces; it shows why a probability measure alone is not the
+operator theorem.
+
+\subsection{Copied-packet and arbitrary-base controls}
+
+Two controls expose hidden assumptions.  First, if a geometric component
+\(P\) is replaced by a disjoint union \(P\sqcup P\), trace additivity requires
+\[
+ \tau(P\sqcup P)=2\tau(P).
+\]
+Renormalizing both \(P\) and \(P\sqcup P\) to total mass one would violate
+additivity; counting once per isomorphism class would erase geometric
+multiplicity.  This is a consistency control, not an existence no-go.
+
+Second, any infinite compact group can be used as the base of a collection of
+equal-period circles and has normalized Haar probability.  Haar probability
+alone therefore proves too much: it is not arithmetic-specific.  A successful
+packet trace must use source-derived arithmetic or Frobenius structure at a
+clearly identified trace step.
+
+\section{Formal packet products and the abscissa diagnostic}
+\label{sec:formalproduct}
+
+To measure what is left undetermined, suppose only for this section that
+packet masses \(m_p\) have been supplied externally.  The formal packet
+product and its logarithmic derivative would be
+\begin{align}
+ Z_m(s)
+   &=\prod_p(1-p^{-s})^{-m_p}, \label{eq:formalZm}\\
+ \log Z_m(s)
+   &=\sum_p\sum_{r\ge1}\frac{m_p}{r}p^{-rs}, \label{eq:formalLog}\\
+ -\frac{Z_m'}{Z_m}(s)
+   &=\sum_p\sum_{r\ge1}m_p(\log p)p^{-rs}.
+ \label{eq:formalDerivative}
+\end{align}
+For nonintegral \(m_p\), the product notation means the exponential of
+\eqref{eq:formalLog} on its half-plane of absolute convergence.  Equivalently,
+for \(\Re s>0\) it uses the holomorphic power-series branch
+\(-\operatorname{Log}(1-p^{-s})=\sum_{r\ge1}p^{-rs}/r\).  No continuation is implied by
+this convention.
+These equations are a sensitivity model, not a determinant constructed from
+the flow.  In particular, choosing \(m_p=1\) gives the desired one-packet
+factor and the familiar repetition coefficient by stipulation.  The
+coefficient cannot then be cited as evidence that the stipulation was
+dynamically derived.
+
+\begin{theorem}[Packet mass determines the absolute abscissa]
+\label{thm:abscissa}
+Let \(m_p>0\), let \(\alpha\ge-1\), and suppose that for all sufficiently
+large primes
+\[
+ c p^\alpha\le m_p\le C p^\alpha
+\]
+for constants \(c,C>0\).  Then the positive series
+\[
+ \sum_p\sum_{r\ge1}\frac{m_p}{r}p^{-r\sigma}
+\]
+converges exactly when \(\sigma>\alpha+1\).  Thus the formal packet product's
+absolute-convergence abscissa is \(\alpha+1\), and is not determined by the
+period list alone.
+\end{theorem}
+
+\begin{proof}
+If \(\sigma\le0\), the \(r=1\) subseries has terms comparable to
+\(p^{\alpha-\sigma}\), whose exponent is at least \(-1\).  It diverges by
+Euler's reciprocal-prime theorem at exponent \(-1\), and by termwise
+domination above that exponent.  Hence it remains to consider \(\sigma>0\).
+For \(\sigma>0\),
+\[
+ \sum_{r\ge1}\frac{p^{-r\sigma}}{r}
+ =-\log(1-p^{-\sigma}).
+\]
+For all sufficiently large \(p\), this quantity is bounded above and below by
+positive constant multiples of \(p^{-\sigma}\).  The double series therefore
+converges if and only if
+\[
+ \sum_p m_pp^{-\sigma}
+ \asymp \sum_p p^{-(\sigma-\alpha)}
+\]
+converges.  The prime subseries converges for
+\(\sigma-\alpha>1\), by comparison with the corresponding integer
+\(p\)-series, and diverges for \(\sigma-\alpha\le1\): at equality this is
+Euler's divergent reciprocal-prime series, while below equality its positive
+terms dominate \(1/p\) for large \(p\).  Since \(\alpha\ge-1\), the claimed
+domain lies in \(\sigma>0\), where the logarithmic expansion is valid.
+\end{proof}
+
+\begin{corollary}
+Unit masses have formal abscissa \(1\); masses \(p^{-1/2}\), \(p\), and
+\(p^{-1}\) have formal abscissae \(1/2\), \(2\), and \(0\), respectively.
+Consequently a request that the product converge for \(\Re s>1\) cannot be
+used to infer unit packet mass: that would select the normalization from the
+desired output.
+\end{corollary}
+
+Signed masses do not remove the provenance problem.  Conditional
+cancellations may alter a signed finite sum while leaving the absolute
+first-return majorant
+\[
+ \sum_p |m_p|p^{-\sigma}
+\]
+unchanged.  A phase or sign must be produced by the same return trace, not
+chosen to improve convergence or match a target.
+
+\section{Zero-free computational controls}
+\label{sec:controls}
+
+\subsection{Design and leakage boundary}
+
+The accompanying script generates rational primes deterministically only
+after the packet-weight ambiguity and Theorem~\ref{thm:abscissa} have been
+stated.  Prime generation here evaluates closed-point-indexed formulas; it is
+not used to build the candidate dynamics.  The script imports no Riemann-zero
+table, calls no zeta-zero routine, fits no scale, and fits no packet mass.
+
+Four artifacts are produced:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item finite-orbit partial sums within fixed equal-period packets;
+ \item packet-product sensitivity for five disclosed mass models;
+ \item a repetition ledger for the first ten primes and five repetitions; and
+ \item a copied-packet additivity control.
+\end{enumerate}
+The main run used the 9,592 primes at most \(100{,}000\), five test values of
+\(\sigma\), and the mass models \(1\), \(p^{-1/2}\), \(p\), \(p^{-1}\), and a
+modulo-four sign.  Five unit tests passed.  A manifest records the cutoff,
+forbidden inputs, interpretation boundary, and SHA-256 hash of every result
+file.
+
+\subsection{Multiplicity and copied-packet results}
+
+For \(N\) disclosed individual orbits of period \(\log p\), the finite log
+product is exactly
+\begin{equation}
+ L_{p,\sigma}(N)=-N\log(1-p^{-\sigma}).
+ \label{eq:finiteorbit}
+\end{equation}
+At \(p=2\) and \(\sigma=1.25\), it increases from
+\(0.545500245954\) for \(N=1\) to \(69.8240314821\) for \(N=128\).
+This linear finite calculation illustrates the net used in
+Theorem~\ref{thm:orbitproduct}; it does not prove uncountability, which is
+supplied by Proposition~\ref{prop:uncountable}.
+
+The copied-packet file verifies for one, two, and three copies that log
+contributions scale exactly by the copy number.  For example, at the same
+\((p,\sigma)=(2,1.25)\), the values are
+\(0.545500245954\), \(1.09100049191\), and \(1.63650073786\).
+The control detects the inconsistency in silently renormalizing a disjoint
+union back to mass one.
+
+\subsection{Packet-mass sensitivity}
+
+Table~\ref{tab:sensitivity} reports selected finite log products.  The numbers
+are not convergence proofs; their role is to make the theorem's normalization
+dependence reproducible.
+
+\begin{table}[ht]
+\centering
+\caption{Selected values of
+\(\sum_{p\le X}-m_p\log(1-p^{-\sigma})\).}
+\label{tab:sensitivity}
+\begin{tabular}{llrrr}
+\toprule
+Mass \(m_p\) & \(\sigma\) & predicted abscissa &
+\(X=100\) & \(X=100{,}000\)\\
+\midrule
+\(1\)        & \(0.75\) & \(1\)   & \(3.613734\) & \(10.395150\)\\
+\(p^{-1}\)   & \(0.75\) & \(0\)   & \(0.816878\) & \(0.824218\)\\
+\(1\)        & \(1.25\) & \(1\)   & \(1.356372\) & \(1.509763\)\\
+\(p^{-1/2}\) & \(1.25\) & \(0.5\) & \(0.714463\) & \(0.721743\)\\
+\(p\)        & \(1.25\) & \(2\)   & \(11.761876\)& \(751.614398\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For the modulo-four sign model at \(\sigma=0.75\), the signed finite log
+product changes only from \(-0.581723\) to \(-0.658170\), while the absolute
+first-return mass grows from \(2.414362\) to \(9.179910\).  This is a direct
+warning against mistaking cancellation for a source-derived trace phase.
+
+All computational results are finite deterministic illustrations.  They are
+not existence tests for a trace, do not establish that arbitrary weights are
+admissible on an unspecified completed algebra, and do not carry any Route-A
+verdict independently of the proofs.
+
+\section{Why established trace frameworks do not fill the gap}
+\label{sec:frameworks}
+
+Positive-dimensional families of periodic points can contribute to rigorous
+trace formulas.  The obstruction is not the word family; it is the absence of
+the geometry, density, and operator hypotheses that make the family
+traceable.  This section audits five relevant interfaces.
+
+\subsection{Clean Hamiltonian and wave traces}
+
+In the Duistermaat--Guillemin setting, a positive elliptic
+pseudodifferential operator on a closed smooth manifold generates a
+Hamiltonian bicharacteristic flow on a smooth symplectic cotangent bundle.
+At a period \(T\), the fixed set may have positive dimension, but it must be
+clean:
+\begin{equation}
+ T_z\operatorname{Fix}(\Phi^T)
+   =\ker(d\Phi_z^T-I).
+ \label{eq:clean}
+\end{equation}
+The trace singularity is then obtained by integrating a canonical density on
+each clean component.  That density uses the symplectic normal linearization,
+the operator's symbol and half-density data, and Maslov information; it is not
+the uniform rule that every component counts once
+\citep{DuistermaatGuillemin1975}.
+
+For \(\Gamma_p\), the frozen source gives no finite-dimensional smooth atlas,
+derivative \(d\phi^T\), smooth fixed submanifold, symplectic normal bundle,
+principal symbol, or Maslov data.  Thus even the clean identity
+\eqref{eq:clean} cannot be stated on the current object.  This proves
+inapplicability of the cited theorem, not impossibility of constructing a
+future smooth enrichment.
+
+\subsection{Contact Morse--Bott families}
+
+The Morse--Bott contact condition likewise permits nonisolated periodic
+families only after substantial structure has been fixed.  For a compact
+smooth contact manifold with contact form \(\alpha\), the period-\(T\) set
+\(N_T\) must be a closed smooth submanifold, \(d\alpha|_{N_T}\) must have
+locally constant rank, and
+\[
+ T_xN_T=\ker(d\phi_x^T-I).
+\]
+Bourgeois uses these conditions to construct a Morse--Bott approach to
+contact homology \citep{Bourgeois2003}; the work itself is not a general
+packet trace formula.  The rational-Witt packet presently has neither the
+contact manifold nor the differential return data needed to test these
+conditions.
+
+\subsection{Foliated and transversally elliptic traces}
+
+Kordyukov's relative Duistermaat--Guillemin theorem starts with a compact
+smooth foliated manifold and a positive self-adjoint transversally elliptic
+pseudodifferential operator with holonomy-invariant transverse principal
+symbol.  The relative fixed locus must satisfy a smooth clean fibre-product
+condition, and a mollified propagator is made trace class before its trace
+singularities are analyzed \citep{Kordyukov2000}.  A transverse probability
+by itself supplies none of these operator inputs.
+
+The recent trace formula for foliated flows of
+\citet{AlvarezKordyukovLeichtnam2026} is particularly relevant because it is
+motivated by Deninger-type formulas.  Its hypotheses nonetheless remain
+specific: a closed smooth manifold, a smooth transversely oriented
+codimension-one foliation, a foliated smooth flow, simple closed orbits, and
+transversely simple preserved leaves, together with leafwise currents,
+smoothing \(b\)-pseudodifferential operators, and a regularized \(b\)-trace.
+The simple closed-orbit condition excludes the normal eigenvalue \(1\), so
+those closed orbits are locally isolated.  Positive-dimensional geometric
+terms in that formula are preserved leaves, not compact families of closed
+orbits.  Moreover, the \(b\)-trace is regularized and need not vanish on every
+commutator; some zero-time terms depend on auxiliary choices.  It cannot be
+replaced by packet-base Haar probability.
+
+\subsection{Groupoid Haar systems, transverse measures, and traces}
+
+Three constructions are often compressed into the word trace:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item A Haar system on a second-countable locally compact groupoid is a
+ continuous invariant family of Radon measures on range fibres.  It permits
+ convolution on \(C_c(G)\).  Existence and uniqueness are not automatic
+ \citep{Renault2006}.
+ \item A holonomy-invariant transverse measure is additional measured data.
+ Under the appropriate foliation hypotheses it induces a trace or dimension
+ map on a foliation operator algebra \citep{Connes1982}.  It also produces a
+ Ruelle--Sullivan current \citep{RuelleSullivan1975}.
+ \item A dynamical fixed-point trace requires a specified return,
+ propagation, transfer, or cohomological operator and a theorem identifying
+ its trace distribution with periodic geometry.
+\end{enumerate}
+The implications do not run automatically from the first item to the second
+or third.  A longitudinal Haar system for a standard transformation groupoid
+of the \(\R\)-flow, for example, would not choose a transverse mass on the
+uncountable orbit base or relative masses across primes.
+
+Several transformation or equivalence-relation groupoids could be built
+externally from the source-defined \(\Q_{>0}\) and \(\R\) actions.  The
+source does not select one as the periodic trace groupoid, define its arrow
+topology for this purpose, choose a Haar system and transverse measure, or
+specify an observable completion.  Freezing any such choice would create a
+new versioned candidate, not reveal a trace already present in
+\texttt{DEN-WITT-Z-FIN}.
+
+\subsection{Isolated Anosov traces as a coefficient benchmark}
+
+For compact smooth Anosov flows, the microlocal flat trace is defined only
+after a wavefront-set condition permits restriction of the propagator kernel
+to the diagonal.  The resulting Guillemin identity has the form
+\begin{equation}
+ \Tr^\flat \e^{-itP}
+  =\sum_{\gamma}
+    \frac{T_\gamma^\#\,
+    \delta(t-T_\gamma)}
+    {|\det(I-\mathcal P_\gamma)|},
+ \qquad t>0,
+ \label{eq:guillemin}
+\end{equation}
+where \(T_\gamma^\#\) is the primitive period and
+\(\mathcal P_\gamma\) is the normal Poincar\'e return map
+\citep{DyatlovZworski2016}.  Hyperbolicity makes the normal determinant
+nonzero.  Alternating exterior-power traces then lead to a Ruelle zeta
+function.
+
+Ruelle's original Fredholm construction assumes analytic hyperbolic
+structure \citep{Ruelle1976}.  Later work using anisotropic spaces and
+microlocal methods gives meromorphic continuation in smoother Anosov settings
+\citep{GiuliettiLiveraniPollicott2013,DyatlovZworski2016}.  The 2022 arXiv
+erratum to the former corrects part of its contact spectral-gap analysis while
+stating that its meromorphic-continuation result is unaffected
+\citep{GiuliettiLiveraniPollicottErratum2022}.  These theorems are rigorous
+benchmarks for how primitive period, repetition, normal stability, and an
+operator trace fit together.  They concern isolated hyperbolic periodic
+orbits and do not assign mass one to a topological packet.
+
+For the compact hyperbolic/Fuchsian benchmark in the cited setting, the
+direct-product convention also yields the exact identity
+\[
+ R_\Gamma(s)
+   =\prod_{\gamma_0}(1-N_{\gamma_0}^{-s})
+   =\frac{Z_\Gamma(s)}{Z_\Gamma(s+1)}
+\]
+and therefore
+\[
+ \frac{R_\Gamma'}{R_\Gamma}(s)
+   =\sum_{\gamma_0}\sum_{r\ge1}
+     (\log N_{\gamma_0})N_{\gamma_0}^{-rs}
+\]
+up to the displayed logarithmic-derivative convention
+\citep{Fried1986}.  This is an exact isolated-orbit coefficient calibration.
+It does not specialize to Deninger's packet system because the orbit
+cardinality, smooth normal return, and trace domain are different.
+
+\begin{longtable}{p{0.18\textwidth}p{0.26\textwidth}p{0.25\textwidth}p{0.208\textwidth}}
+\caption{Applicability matrix for positive-dimensional or measured trace
+frameworks.}\label{tab:frameworks}\\
+\toprule
+Framework & Geometric gate & Analytic or measured gate & Frozen packet status\\
+\midrule
+\endfirsthead
+\toprule
+Framework & Geometric gate & Analytic or measured gate & Frozen packet status\\
+\midrule
+\endhead
+clean Hamiltonian/PDO & smooth symplectic flow, clean fixed submanifold, normal linearization & elliptic propagator, symbols, canonical density, Maslov data & geometry and operator absent\\
+contact Morse--Bott & compact contact manifold, smooth \(N_T\), tangent identity, constant-rank \(d\alpha\) & contact-homology package; not itself a trace formula & contact and return data absent\\
+transversally elliptic & compact smooth foliation and clean relative fixed set & positive self-adjoint transversally elliptic operator and mollified trace & manifold, operator, and clean test absent\\
+foliated-flow \(b\)-trace & smooth codimension-one foliation; simple orbits and special preserved leaves & leafwise currents, smoothing \(b\)-PDO, regularized \(b\)-trace & packet family is neither input type\\
+locally compact groupoid & selected arrow topology and range fibres & Haar system gives convolution; transverse trace is extra data & no packet trace groupoid selected\\
+Anosov flat trace & smooth hyperbolic flow and isolated normal-nondegenerate orbits & wavefront-admissible flat trace and transfer generator & uncountable equal-period packets violate the orbit model\\
+\bottomrule
+\end{longtable}
+
+The table supports an applicability verdict: existing theorems cannot be
+invoked on the frozen packet object because their hypotheses are absent or
+not testable.  It does not prove that a new packet-specific theorem cannot be
+developed.
+
+\section{Deninger Section 11: a genuine algebra on a different object}
+\label{sec:section11}
+
+It would be inaccurate to say that the primary source contains no algebra or
+Haar normalization.  Section 11 constructs both.  The relevant object is a
+locally compact zero-dimensional inverse-limit group, denoted
+\(\overleftarrow K^{\times}\), with a compact open subgroup.  Haar measure is
+normalized by assigning that subgroup mass one, convolution is defined on
+\(C_c(\overleftarrow K^{\times})\), and a source-defined submonoid gives a
+nonunital convolution subalgebra.  The section further constructs a
+Galois-equivariant algebra homomorphism from that subalgebra to continuous
+functions on the rational-Witt point space \citep{Deninger2026}.
+
+All of these are \proved\ source structures.  Their presence makes the missing
+bridge more precise.  The inverse-limit group and its convolution algebra are
+not identified with \(B_p\), \(\Gamma_p/\R\), or a holonomy groupoid of the
+packet.  The algebra homomorphism is not a trace functional.  Section 11 does
+not provide:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item a map from its group convolution to the packet orbit relation;
+ \item a representation of the suspension flow on that convolution algebra;
+ \item a periodic-return kernel or operator;
+ \item a trace, flat trace, or semifinite weight whose fixed-time support is
+ \(\Gamma_p\);
+ \item a formula for primitive and repeated packet coefficients; or
+ \item a Fredholm or nuclear determinant theorem.
+\end{enumerate}
+Consequently the normalization of Haar measure on
+\(\overleftarrow K^{\times}\) fixes the scale of that \emph{group
+convolution}.  It does not fix the N2 packet lift, N3 relative packet masses,
+or O-gate return trace in Section~\ref{sec:gates}.
+
+\begin{table}[ht]
+\centering
+\caption{Section-11 bridge test.}
+\label{tab:section11}
+\begin{tabularx}{\textwidth}{X p{0.31\textwidth}}
+\toprule
+Required map or theorem & Frozen-source status\\
+\midrule
+inverse-limit locally compact group and normalized Haar convolution & \proved\\
+algebra homomorphism into functions on the rational-Witt point space & \proved\\
+map to \(\Gamma_p/\R\) or packet groupoid & \nottest\\
+flow-return representation and trace domain & \nottest\\
+source-derived cross-packet masses and repetition theorem & \nottest\\
+Fredholm determinant or divisor theorem & \nottest\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The overview article also recalls a distributional transverse-index formula
+for a different class of smooth compact foliated systems
+\citep{Deninger2024}.  That formula assumes smoothness, ellipticity,
+transversality, and related analytic data, and uses a mollified trace because
+fixed-time operators need not be trace class.  The rational-Witt spaces are
+later described as infinite-dimensional and not yet satisfactorily
+understood.  The overview supplies motivation, not a transfer theorem proving
+that the smooth trace formula applies to \(\Gamma_p\).
+
+\section{Route-A evaluation}
+\label{sec:route}
+
+The gate decision must preserve the split between a disproved ordinary
+construction and an undefined enriched one.  Table~\ref{tab:a2split} records
+that distinction.
+
+\begin{table}[ht]
+\centering
+\caption{A2 split verdict for the same frozen periodic object.}
+\label{tab:a2split}
+\small
+\begin{tabularx}{\textwidth}{p{0.31\textwidth}X p{0.24\textwidth}}
+\toprule
+Candidate construction & What is mathematically available? & Verdict\\
+\midrule
+ordinary product over every primitive orbit & finite-subset net, divergent by Theorem~\ref{thm:orbitproduct} & \texttt{A2\_FAIL} (\proved)\\
+packet product with \(m_p=1\) & formal expression after imposing the normalization & \texttt{A2\_FAIL} for dynamical provenance\\
+homogeneous direct-sum trace & conditional family \(\tau_m\); normalization remains free & \texttt{A2\_FAIL} for canonicality under the stated axioms\\
+trace intrinsic to the frozen source & no selected algebra, domain, lift, global mass, or return theorem & \texttt{NOT\_TESTABLE}\\
+Section-11 convolution as packet trace & convolution algebra exists; packet-return bridge does not & \texttt{NOT\_TESTABLE}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The full Route-A calibration is
+\texttt{A0\_ANALYTIC\_ARITHMETIC\_ORIGIN}, \texttt{A1\_WEAK}, and
+\texttt{A2\_FAIL}; the frozen-source measured alternative at A2 is
+\texttt{NOT\_TESTABLE}.  The registry records \texttt{A3\_FAIL}, but that
+gate is substantively not reached because A2 supplies no candidate
+determinant.  Finally, \texttt{A4\_FAIL} records that no quantum or
+cohomological lift is constructed.
+The overall status remains
+\(\texttt{ROUTE\_A\_EXPLORATORY}\).  The A3 serialization is a downstream
+gate failure, not evidence that an existing determinant failed continuation
+or root matching.  Continuation domain, divisor, functional equation,
+cutoff drift, missing roots, and extra roots all have the registry reason
+\path{not_applicable_no_candidate_determinant}.
+
+The arithmetic gate passes because the packet index and clock are derived
+from closed points.  A1 is weak because the periodic structure is genuine but
+does not have a canonical isolated-orbit multiplicity, normal monodromy,
+phase, or trace weight.  A2 has no pass for the reasons proved and delimited
+above.  No later layer can repair an undefined determinant retroactively.
+Accordingly Route B is not authorized by this paper.
+
+\subsection{Smallest positive next theorem}
+
+The minimum non-circular advance is not another formal Euler product.  It is
+a versioned enrichment supplying all of:
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+ \item a choice-independent topological or measured orbit quotient, or a
+ source-natural packet groupoid;
+ \item a compatible Haar system or transverse measure, including a proof of
+ invariance under all coordinate changes;
+ \item a canonical lift or disintegration to the packet;
+ \item a global arithmetic rule for component masses;
+ \item an observable, return, or cohomological operator with a legitimate
+ trace domain; and
+ \item a fixed-point or Lefschetz theorem deriving primitive and repeated
+ coefficients from that same structure.
+\end{enumerate}
+The expected Euler factor, convergence half-plane, or Riemann divisor may be
+used only after those inputs are fixed.  Otherwise the target would choose the
+normalization under test.
+
+\section{Limitations}
+\label{sec:limitations}
+
+This work is an exact audit of one versioned candidate, not a universal
+no-flow theorem.
+
+First, Proposition~\ref{prop:uncountable} uses the source's noncanonical
+set-level identification of the orbit set.  It proves cardinality and
+length-local nonfiniteness, but not that the packet quotient has the product
+topology of \(B_p\), that the orbit family is smooth or continuous, or that
+the packet is locally trivial.
+
+Second, the finite-kernel admissibility class is a disclosed source-permitted
+choice, not a uniquely selected arithmetic condition.  A different
+admissibility class changes the frozen candidate and requires a new
+evaluation.  The current no-go applies to the ordinary orbitwise product of
+the selected full-packet system.
+
+Third, Theorem~\ref{thm:masses} is conditional on an algebraic direct sum,
+local traces, component preservation, and only homogeneous componentwise
+axioms.  It does not assert that every positive sequence extends to a bounded
+or semifinite trace on every completion.  Nor does it exclude a future
+arithmetic functor that relates the packet components and selects their
+masses.
+
+Fourth, failure of \eqref{eq:orbitproduct} is not failure of every measured,
+clean, groupoid, distributional, or cohomological determinant.  Those
+alternatives are classified as open or not testable because the current source
+does not supply their input data.  This evidential distinction is the main
+scope boundary of the paper.
+
+Fifth, the computational audit is finite.  Its multiplicity and copied-packet
+relations are exact within the generated rows, while its cutoff tables merely
+illustrate the analytic theorem.  It provides no independent evidence for a
+trace and uses no Riemann-zero data.
+
+Finally, the literature investigation was targeted to primary sources that
+can decide the packet-to-trace interface: clean and Morse--Bott fixed sets,
+foliated traces, groupoid Haar systems, transverse measures, and Anosov flat
+traces.  It was not a systematic review of all noncommutative-geometric
+approaches.  The local primary PDFs were checked with standard PDF metadata
+and text extraction.  A reader-library preflight was unavailable in the
+environment, so page locators in the audit notes are advisory and were
+cross-checked against printed numbering rather than treated as a complete
+PDF-object certification.
+
+\section{Conclusion}
+
+Deninger's rational-Witt flow crosses a difficult arithmetic threshold: for
+\(\Spec\Z\), rational primes and periods \(\log p\) arise from the source
+geometry rather than from fitting.  The same theorem reveals why an Euler
+product does not follow automatically.  A prime indexes an uncountable
+packet of primitive equal-period orbits, not one isolated orbit.  The
+ordinary orbitwise Ruelle product therefore diverges within one packet at
+every positive real parameter.
+
+Collapsing a packet to one factor is a different construction.  Normalized
+Haar probability exists on the abstract compact base, but the source has not
+proved a choice-independent packet measure, a global trace normalization, or
+an operator fixed-point coefficient.  Conditional homogeneous trace axioms
+leave arbitrary component masses, and those masses move the formal
+convergence abscissa.  Section 11 provides a real Haar-normalized convolution
+algebra, but on another inverse-limit group and without a packet-return
+bridge.  Existing clean, foliated, groupoid, and microlocal trace theorems make
+clear what additional data are needed; none licenses the missing step on the
+frozen object.
+
+The rigorous endpoint is consequently split.  The conventional
+one-factor-per-orbit determinant fails.  A packetwise measured or
+cohomological determinant remains open and presently not testable.  Route A
+retains an exploratory arithmetic survivor, but no determinant reaches the
+analytic or quantum gates.  The next genuine advance must construct the
+packet-to-trace interface itself, rather than infer it from the desired Euler
+factor.
+
+\section*{Reproducibility and declarations}
+
+\paragraph{Data and code availability.}
+All research protocols, source-audit notes, proof audit, deterministic Python
+code, tests, experiment script, result tables, checksums, figure source, and
+manuscript source are included in the
+\path{papers/2-flow-zeta/} project directory.  From its
+\path{experiments/} subdirectory, the control suite is reproduced with
+\begin{verbatim}
+bash reproduce.sh
+\end{verbatim}
+No proprietary dataset or Riemann-zero dataset is used.
+
+\paragraph{Ethics statement.}
+This theoretical and computational study involves no human participants,
+animals, intervention, personal data, or identifiable information.  No
+institutional ethics review was required for the reported work.
+
+\paragraph{CRediT authorship contribution statement.}
+Liang Wang: Conceptualization, Methodology, Formal analysis, Investigation,
+Software, Validation, Data curation, Visualization, Writing---original draft,
+and Writing---review and editing.
+
+\paragraph{Funding.}
+No project-specific external funding source was declared for this work.
+
+\paragraph{Conflict of interest.}
+The author declares no financial or non-financial conflict of interest
+relevant to this study.
+
+\paragraph{AI-assistance disclosure.}
+OpenAI Codex assisted with literature triage, deterministic implementation,
+source-to-claim auditing, adversarial proof checking, and manuscript
+preparation.  No generative system is credited as an author.  The named
+author is responsible for source verification, mathematical claims, artifact
+release, and the final text.
+
+\appendix
+\section{Claim-to-evidence ledger}
+
+\begin{longtable}{p{0.40\textwidth}p{0.20\textwidth}p{0.30\textwidth}}
+\caption{Status of the manuscript's central claims.}\label{tab:claims}\\
+\toprule
+Claim & Evidence label & Basis\\
+\midrule
+\endfirsthead
+\toprule
+Claim & Evidence label & Basis\\
+\midrule
+\endhead
+packets exhaust the periodic set and have least period \(\log p\) & \proved & Deninger Theorems 5.2 and 6.1\\
+packet orbit set is noncanonically indexed by \(B_p\) & \proved & source equations (37)--(39)\\
+\(B_p\) is uncountable & \proved & Proposition~\ref{prop:uncountable}\\
+packet quotient is canonically homeomorphic to \(B_p\) & \openclaim & no source topology/transition theorem\\
+ordinary individual-orbit product diverges & \proved & Theorem~\ref{thm:orbitproduct}\\
+normalized Haar probability exists on abstract \(B_p\) & \proved & compact-group Haar theorem\\
+that probability canonically lifts to \(\Gamma_p\) & \openclaim/\nottest & quotient map and disintegration not source-defined\\
+homogeneous component axioms determine \(m_p\) & \conditional & they do not under Theorem~\ref{thm:masses}'s stipulated hypotheses\\
+intrinsic packet trace exists on the frozen object & \nottest & algebra, domain, and return theorem absent\\
+Section 11 is a Haar-normalized convolution algebra & \proved & primary-source construction\\
+Section 11 supplies a packet return trace & \nottest & no source bridge\\
+all enriched packet traces are impossible & not claimed & outside proved boundary\\
+\bottomrule
+\end{longtable}
+
+\section{Artifact map}
+
+\begin{longtable}{p{0.38\textwidth}p{0.54\textwidth}}
+\toprule
+Relative path & Purpose\\
+\midrule
+\endfirsthead
+\toprule
+Relative path & Purpose\\
+\midrule
+\endhead
+\path{notes/research_protocol.md} & frozen question, validity criteria, ten proof obligations, and ten adversarial controls\\
+\path{notes/devils_advocate_checkpoint1.md} & independent design-stage leakage and falsifiability audit\\
+\path{notes/phase2_deninger_source_audit.md} & theorem-numbered reconstruction of the source packet and Section 11\\
+\path{notes/phase2_trace_bibliography.md} & primary-source trace-framework applicability matrix and search ledger\\
+\path{notes/phase3_trace_no_go_audit.md} & mathematical no-go boundary and three-layer normalization audit\\
+\path{notes/proof_audit.md} & independent proof correction, status calibration, and result-hash verification\\
+\path{code/packet_trace_controls.py} & deterministic multiplicity, weight, repetition, and copy controls\\
+\path{code/test_packet_trace_controls.py} & five unit tests\\
+\path{experiments/reproduce.sh} & one-command reproduction entry point\\
+\path{results/orbit_multiplicity_divergence.csv} & finite equal-period multiplicity illustration\\
+\path{results/packet_weight_sensitivity.csv} & disclosed packet-mass and cutoff sensitivity table\\
+\path{results/packet_repetition_ledger.csv} & formal repeated-return terms under three mass models\\
+\path{results/copied_packet_control.csv} & disjoint-copy additivity control\\
+\path{results/packet_trace_controls_manifest.json} & run parameters, forbidden inputs, boundaries, and SHA-256 hashes\\
+\path{paper/figures/trace_gate_diagram.tex} & N1--N3--O logical interface diagram\\
+\bottomrule
+\end{longtable}
+
+\begingroup
+\small
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup
+
+\end{document}

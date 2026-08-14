@@ -1,0 +1,132 @@
+skill: route-b-evaluator
+skill_version: 0.2.0
+candidate_id: FF-FROB-OPERATOR-OWNERSHIP-P1-F2
+source_commit: unavailable-no-git
+evaluation_date: 2026-08-13
+
+route_a_entry:
+  route_a_verdict: ROUTE_A_SUCCESS_ROUTE_B_NOT_READY
+  entry_authorized: true_for_limited_early_audit_only
+  limitations: >-
+    The audit tests a natural Hilbert space, complete domain, self-adjointness,
+    spectral type, and ownership of the native determinant. It is not a Route-B promotion.
+
+source_lock:
+  arithmetic_origin: P1/F2 with its closed points and Frobenius endomorphism
+  clock: suspension flow time with roof log(2); no rescaling
+  normalization: positive constant component weights, all unitarily equivalent; t=2^(-s) only for the native zeta variable
+  operator: A_K is the orthogonal sum of -i d/du on every closed-point circle
+  domain: >-
+    componentwise periodic H1 functions whose global L2 and derivative
+    square norms are summable
+  boundary_conditions: periodic Sobolev trace on each circle; no fitted phases or couplings
+
+b1:
+  verdict: B1_COMPLETE_OPERATOR_DEFINITION
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The Hilbert direct sum, invariant measure, unitary group, differential
+    action, dense periodic Sobolev graph domain, boundary conditions, and core are explicit.
+  strongest_failure: the Koopman lift is a natural representation, not a source-derived physical quantization
+  obligations:
+    - preserve the frozen clock and every closed-point component
+    - treat any off-diagonal coupling or nonperiodic boundary condition as a new candidate
+  artifacts:
+    - papers/6-cohomological-owner/notes/proof_audit.md
+    - papers/5-quantum-flow/notes/candidate_lock.md
+
+b2:
+  verdict: B2_SELF_ADJOINT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Periodic Fourier transform diagonalizes every component as real
+    multiplication, and the countable orthogonal-sum theorem gives self-adjointness on the frozen graph domain.
+  strongest_failure: self-adjointness alone gives no discreteness or arithmetic trace
+  obligations:
+    - retain the maximal graph-summability domain
+    - do not infer spectral adequacy from unitarity
+  artifacts:
+    - papers/6-cohomological-owner/notes/proof_audit.md
+
+b3:
+  verdict: B3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Point spectrum is (2*pi/log(2))*Q, each point eigenvalue has countably
+    infinite multiplicity, and both full and essential spectra equal R.
+  strongest_failure: >-
+    The resolvent is noncompact, every positive-width interval has infinite
+    spectral-projection rank, and the standard heat operators are not trace class.
+  obligations:
+    - a new candidate must prove a source-derived mechanism removing essential spectrum without deleting arithmetic components
+    - prove an intrinsic Riemann-von-Mangoldt counting law before any promotion
+  artifacts:
+    - papers/6-cohomological-owner/results/koopman_multiplicity_controls.csv
+    - papers/6-cohomological-owner/notes/proof_audit.md
+
+b4:
+  verdict: B4_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The exact native point-count trace and graded determinant are owned by
+    etale Frobenius on graded cohomology and share the arithmetic parent.
+  strongest_failure: >-
+    They are not traces of A_K; no one-operator von-Mangoldt trace, rational-prime
+    clock, or intrinsic Weil-form compression is defined.
+  prime_power_trace: absent_for_A_K; native_characteristic_two_Lefschetz_trace_belongs_to_Phi
+  weil_form_compatibility: absent_for_rational_primes
+  obligations:
+    - construct a typed operator-level bridge rather than combine coordinates from A_K and Phi
+    - derive signed prime-power weights from that same operator
+  artifacts:
+    - papers/6-cohomological-owner/results/cohomological_trace_ledger.csv
+    - papers/6-cohomological-owner/results/operator_ownership_certificate.json
+
+b5:
+  verdict: B5_FAIL
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The native cohomological determinant is exactly 1/((1-t)(1-2t)), with a fully controlled divisor.
+  strongest_failure: >-
+    It is not a determinant of A_K and, after t=2^(-s), has vertical pole
+    lattices on real parts zero and one rather than the completed-xi divisor.
+  obligations:
+    - define a determinant of the same self-adjoint operator
+    - prove global equality to completed xi with multiplicities and a zero-free prefactor
+  artifacts:
+    - papers/6-cohomological-owner/results/frobenius_divisor_lift.csv
+
+adversarial_controls:
+  controls_used:
+    - arbitrary positive component weights
+    - kernel deletion
+    - direct sum with a finite-dimensional realization of Frobenius
+    - same-cycle-type non-arithmetic parent
+    - arbitrary circle Euler-product compiler
+  proves_too_much_risk: >-
+    Crediting self-adjointness from one operator and a determinant from another
+    would certify unrelated direct sums and generic Euler-product compilers.
+  verdict: STOP_SCOPED
+
+gates:
+  gate_a: native_finite_field_positive_control_only
+  gate_b: natural_unitary_completion_passes
+  gate_c: fails_target_spectral_type
+  gate_d: fails_same_operator_rational_prime_trace_and_weil_form
+  gate_e: fails_completed_xi_divisor
+
+overall_verdict: ROUTE_B_REJECTED
+claim_boundary: >-
+  The frozen Koopman generator is a genuine self-adjoint operator, and
+  cohomological Frobenius owns a genuine exact native determinant; no single
+  operator in the candidate owns both properties.
+blocking_conditions:
+  - essential spectrum R and infinite point multiplicities
+  - no trace-class heat or compact-resolvent spectral determinant
+  - no same-operator rational-prime trace or Weil-form bridge
+  - native determinant belongs to a different finite-dimensional cohomological action
+next_smallest_theorem: >-
+  Construct a functorial Hilbert realization and intertwining trace theorem in
+  which one closed/self-adjoint operator carries both the arithmetic return
+  ledger and its determinant, then re-audit B3 before B4 or B5.
+hilbert_polya_claim_allowed: false
