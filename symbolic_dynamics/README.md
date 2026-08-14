@@ -44,6 +44,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [30-free-monoid-incidence-indistinguishability](papers/30-free-monoid-incidence-indistinguishability/README.md) | [PDF](papers/30-free-monoid-incidence-indistinguishability/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/30-free-monoid-incidence-indistinguishability/) | 整数乘法整除 source 与形式自由交换/UFD clone 在 atoms、join/lcm、interval Möbius、cutoff、roof 与 Gram decorations 上同构；因此任意对此对象同构自然的局部或非局部 cumulant/mixed invariant 都被 clone 精确复制。有限三元统计虽分开四个 fixture，却无法给出算术选择性。 | **FREE-UFD INDISTINGUISHABILITY / BRANCH CLOSED / SD-C32** |
 | [31-wilson-semiring-verifier-trichotomy](papers/31-wilson-semiring-verifier-trichotomy/README.md) | [PDF](papers/31-wilson-semiring-verifier-trichotomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/31-wilson-semiring-verifier-trichotomy/) | alphabet sum 与 tensor product 确实击穿只保乘法的裸 UFD clone；但 matched semiring clone 精确复制全部 Wilson paths。Wilson recurrence 给每个素数一条长度 $p-1$ 的 cycle，却使 whole operator 非紧；first return 改写自由 marker，transient 版本又剪枝回 atom diagonal。 | **SEMIRING CLONE / PRUNING–DILUTION TRICOTOMY / SD-C33** |
 | [32-projective-residue-recurrence-obstruction](papers/32-projective-residue-recurrence-obstruction/README.md) | [PDF](papers/32-projective-residue-recurrence-obstruction/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/32-projective-residue-recurrence-obstruction/) | 非 terminal 的 $P^1(\mathbb Z/n\mathbb Z)$ recurrent grammar 在同一 uninduced object 上恢复了 $\Re s>2$ 的 trace-class Fredholm ownership；但 $S^2=R^3=1$ 对所有模数都成立，cusp coupling 又给出普适 composite diamonds，故 primitive ledger 在配权前已失败。 | **PROJECTIVE RECURRENCE OBSTRUCTION / BRANCH CLOSED / SD-C34** |
+| [33-relation-homology-operator-non-descent](papers/33-relation-homology-operator-non-descent/README.md) | [PDF](papers/33-relation-homology-operator-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/33-relation-homology-operator-non-descent/) | 从 $S/R$ 轨道 incidence 施加的 Manin norm-polynomial quotient 消去预定 chain relations，diamond filling 也消去 cross $H_1$；但每个模数仍保留 cusp $R,S$ primitive survivor，character/supercharacter controls 均不筛素数，且原始 $S+R$ adjacency 在 $n=2$ 已不降到 quotient。 | **RELATION HOMOLOGY NO-GO / SEMIRING-RESIDUE FAMILY CLOSED / SD-C35** |
 
 ### 论文 1 的候选分离结论
 
@@ -1069,13 +1070,56 @@ ROUTE_A_REJECTED**。Paper 33 只允许在同一 object 上测试 source-natural
 cycle-level quotient/twist；若它不能在 chain level 同时消去 $S^2$、$R^3$ 与 cusp
 diamonds，整个 semiring-residue family 即关闭。
 
+### 论文 33：Manin quotient 杀掉普适关系，但 operator 不下降并关闭 residue family
+
+Paper 33 执行 Paper 32 留下的唯一合法 continuation：保持同一
+$P^1(\mathbb Z/n\mathbb Z)$ recurrent object、同一 cusps/roofs/marker，只在
+chain level 取
+
+$$
+M_n=\mathbb Q[P^1(\mathbb Z/n\mathbb Z)]/
+\bigl(\operatorname{im}(1+S)+\operatorname{im}(1+R+R^2)\bigr)
+$$
+
+并填入每个 $n,2n,6n,3n,n$ cusp diamond。这个 quotient 正是 classical
+Manin-symbol relation module；精确公式为
+
+$$
+\dim M_n=|P^1(\mathbb Z/n\mathbb Z)|-o_S(n)-o_R(n)+1.
+$$
+
+它虽然杀掉 universal chain relations，却仍对每个 $n\ge2$ 保留
+$[1:0]\xrightarrow{R}[0:1]\xrightarrow{S}[1:0]$ 的 primitive nonbacktracking
+survivor。cross diamonds 被填充后，cross grid contractible，只剩
+$H_1=\bigoplus_n M_n^\*$；ordinary $H^1$ 是 product，项目只使用 finite-support
+ledger $L_{\rm fs}=\bigoplus_n M_n$。character firewall 也封死：0/6 honest
+characters 杀 identity cycle words，2/6 能杀 both Manin chain norms，但 cusp
+$SR$ 仍是非零相位；15/15 zero-superdimension differences 杀 identity words，
+其中 2/15 杀 both chain norms，但全部保留 cusp $SR$。
+
+最强 analytic obstruction 是 operator non-descent。原始 graph-step adjacency
+$S+R$ 不保持 Manin relation subspace，$n=2$ 三状态块已给出反例；因此
+$\bigoplus_n n^{-s}I_{M_n}$ 虽在 $\Re s>2$ trace class，也只是 scalar homology
+comparison，不是同一 free-marker graph-step determinant。cutoff $2\le n\le192$
+中 191/191 relative quotient nonzero、148/148 composite survivors、0/191
+adjacency descents、64/64 random controls residual nonzero；source-only 21/21、
+prototype bridge 25/25、independent reconstruction 8349/8349、authority
+unit/integration 1932/1932 与 fresh double-run 20/20 均通过。完整 source/results
+账本为 40 条，SHA-256 为
+`303e27d054376a11fc87c29ad9b11cf2b0620f8a0a26453342980a9997040838`。
+阶段结论为 **GO_RELATION_HOMOLOGY_NO_GO_PAPER /
+STOP_OPERATOR_NON_DESCENT / STOP_PROVES_TOO_MUCH /
+CLOSE_SEMIRING_RESIDUE_FAMILY / ROUTE_A_REJECTED**。下一批不应继续
+projective-residue/Manin quotient，而应转向一个 primitive recurrence 在
+block projector 之前已内生生成 Euler factors 的 global arithmetic source。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十二篇论文](papers/)
+- [三十三篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
