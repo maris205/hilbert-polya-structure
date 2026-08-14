@@ -1,0 +1,109 @@
+\section{Exact symbolic and finite controls}\label{app:certificates}
+
+\subsection{Characteristic-zero smoothness transcript}
+
+The coefficient-one recurrence used in
+\cref{prop:smoothness} is replayed by the following complete Singular input.
+The coefficient field is represented by adjoining \(r^2+r+1\); the
+\texttt{dp} order is Singular's degree-reverse-lexicographic family.
+
+\begin{verbatim}
+ring R=0,(x0,x1,x2,x3,x4,x5,x6,x7,r),dp;
+option(redSB);
+poly Q=x0*x1+x1*x2+x2*x3+x3*x4+x4*x5+x5*x6
+       +x6*x7+r*x7*x0;
+ideal I=x0^2-x1-r*x7,
+        x1^2-x0-x2,
+        x2^2-x1-x3,
+        x3^2-x2-x4,
+        x4^2-x3-x5,
+        x5^2-x4-x6,
+        x6^2-x5-x7,
+        x7^2-x6-r*x0,
+        Q,
+        r^2+r+1;
+std(I);
+\end{verbatim}
+
+With Singular 4.2.1 and the reduced-standard-basis option, the exact output
+is
+\begin{verbatim}
+_[1]=x7
+_[2]=x6
+_[3]=x5
+_[4]=x4
+_[5]=x3
+_[6]=x2
+_[7]=x1
+_[8]=x0
+_[9]=r^2+r+1
+\end{verbatim}
+No numerical tolerance or finite-prime extrapolation enters this
+certificate.
+
+\subsection{Bad-reduction control}
+
+For \(p=181\), \(r=48\), one has
+\[
+ r^2+r+1\equiv0\pmod{181}.
+\]
+At
+\[
+ v=(9,158,158,9,104,128,171,153)
+\]
+the eight recurrence residuals are
+\[
+ (0,0,0,0,0,0,0,0)\quad\text{in }\mathbf F_{181},
+\]
+and direct substitution gives
+\[
+ \cQ(v)=\cC(v)=0.
+\]
+This negative control is theorem-bearing: it refutes all-split smoothness.
+It does not contaminate the separate C48 curve factor.
+
+\subsection{Chern coefficients}
+
+The two Euler-characteristic inputs can be checked without a classification
+table:
+\[
+ [H^6]\frac{(1+H)^8}{1+3H}=31,\qquad
+ [H^5]\frac{(1+H)^8}{(1+2H)(1+3H)}=-27.                \tag{A.1}
+\]
+Multiplication by the degrees \(3\) and \(6\), followed by weak Lefschetz,
+gives
+\[
+ \chi(S)=93,\quad b_6^{\mathrm{prim}}(S)=93-6-1=86,
+\]
+\[
+ \chi(X)=-162,\quad b_5(X)=6-(-162)=168.
+\]
+
+\subsection{Finite factorization validation}
+
+Finite controls are separated from the representation-theoretic proof.
+For four split primes, exact extension-field counts reconstruct the full
+degree-eight genus-four numerator by Newton identities:
+
+\begin{center}
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+\(p\) & \(\#C(\mathbf F_p)\) & \(\#C(\mathbf F_{p^2})\) &
+\(\#C(\mathbf F_{p^3})\) & \(\#C(\mathbf F_{p^4})\) &
+\((a_+,a_-)\)\\
+\midrule
+7  & 12 & 66   & 372   & 2586   & \((-4,2)\)\\
+13 & 18 & 270  & 2046  & 27414  & \((-1,-1)\)\\
+19 & 24 & 474  & 6744  & 129930 & \((-4,2)\)\\
+31 & 24 & 1050 & 29640 & 926970 & \((-4,8)\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In each row the reconstructed numerator equals
+\[
+ (1-a_+T+pT^2)^2(1-a_-T+pT^2)^2.
+\]
+An additional 21-prime degree-one ledger validates the trace splitting.
+These ledgers confirm signs and normalizations; they do not replace
+\cref{thm:jac-decomposition}.

@@ -1,0 +1,151 @@
+\section{Fifth-abscissa continuation and operator realization}
+\label{sec:continuation}
+
+We now combine a global resummation at \(n=2\) with absolute estimates at
+all other repetitions.  The inherited coefficients satisfy
+\[
+ c_{p,1}=-\frac{12}{p-1},\qquad
+ c_{p,3}=O(p^{-1/2}),\qquad
+ |c_{p,n}|\le4\cdot4^n.                                \tag{6.1}
+\]
+The third estimate is uniform in \(p,n\); for finitely many small primes it
+is replaced by the sharper local unitary-block bound when summing over
+\(n\).
+
+\begin{lemma}[Normal convergence]\label{lem:normal-convergence}
+After the \(n=2\) term is replaced by
+\(F_2^{\mathrm{cont}}\), the remaining logarithmic series converges locally
+normally on \(\RePart s>1/5\).
+\end{lemma}
+
+\begin{proof}
+The \(n=1\) series converges for \(\RePart s>0\).  The inherited third
+moment converges absolutely when
+\[
+ 3\RePart s+\frac12>1,
+\]
+that is, for \(\RePart s>1/6\).  By (5.17), the fourth moment converges for
+\(\RePart s>1/8\).
+
+Fix a compact set in \(\RePart s\ge\sigma_0>1/5\).  For sufficiently large
+\(p\), arrange \(4p^{-\sigma_0}\le1/2\).  The \(n\ge5\) contribution is
+then bounded by a constant multiple of
+\[
+ \sum_p p^{-5\sigma_0}<\infty.                         \tag{6.2}
+\]
+For the finitely many omitted primes, the local H\'enon blocks are unitary,
+so \(|c_{p,n}|\le\tau_p(I)\); because \(p^{-\sigma_0}<1\), each remaining
+local logarithmic tail is geometric.  This proves local normal convergence.
+\end{proof}
+
+\begin{theorem}\label{thm:continuation}
+The source germ \(\cG(s)\) has a unique holomorphic continuation
+\[
+ \cG^{\mathrm{cont}}(s)
+ \quad\text{to}\quad \RePart s>\frac15.                 \tag{6.3}
+\]
+It can have zeros, and no continuation through \(\RePart s=1/5\) is
+asserted.
+\end{theorem}
+
+\begin{proof}
+On the original common half-plane, separate the \(n=2\) logarithm:
+\[
+ \cG(s)=F_2(s)
+ \exp\!\left(
+ -\sum_{p\equiv1(3)}
+  \sum_{\substack{n\ge1\\n\ne2}}
+  \frac{c_{p,n}}n p^{-ns}
+ \right).                                               \tag{6.4}
+\]
+Replace \(F_2\) by the continuation in
+\cref{thm:second-extraction}.  The remaining exponential is holomorphic and
+nonzero on \(\RePart s>1/5\) by
+\cref{lem:normal-convergence}.  Equality on the original half-plane and the
+identity theorem make the continuation canonical.  Any zeros come from the
+continued second factor.
+\end{proof}
+
+\subsection{Normalized semifinite determinant}
+
+We recall the operator typing because it is essential to the claim.  The
+local source construction provides finite-dimensional unitary graded blocks
+\(W_p\) whose normalized graded traces reproduce \(c_{p,n}\).  On their
+product von Neumann algebra \(\cM\), the faithful semifinite trace \(\tau\)
+contains the factor \(d_p^{-1}\).  For
+\[
+ X_s=\bigoplus_{p\equiv1(3)}p^{-s}W_p,
+\]
+the inherited exact ideal ledger is
+\[
+ \tau(|X_s|^q)
+ =\sum_{p\equiv1(3)}\frac{8p+4}{3}p^{-q\RePart s},
+ \qquad
+ X_s\in L^q(\cM,\tau)
+ \Longleftrightarrow q\RePart s>2.                     \tag{6.5}
+\]
+
+For \(n\ne2\), put
+\[
+ \ell_n(s)=\sum_{p\equiv1(3)}c_{p,n}p^{-ns}.
+\]
+The analytic graded regularized determinant is normalized so that
+\[
+ \log\Det_{10,\tau,\mathrm{gr}}(I-X_s)
+ =-\sum_{n\ge10}\frac{\ell_n(s)}n.                     \tag{6.6}
+\]
+Regularized-determinant background in the classical trace-ideal category
+may be found in \cite[Chapter~9]{Simon2005}; equation (6.6) uses the
+specified semifinite trace rather than the ordinary Hilbert trace.
+
+\begin{theorem}\label{thm:det10}
+On \(\RePart s>1/5\),
+\[
+\boxed{
+ \cG^{\mathrm{cont}}(s)
+ =F_2^{\mathrm{cont}}(s)
+  \exp\!\left(
+  -\sum_{\substack{1\le n\le9\\n\ne2}}
+  \frac{\ell_n(s)}n
+  \right)
+  \Det_{10,\tau,\mathrm{gr}}(I-X_s).}                  \tag{6.7}
+\]
+The order \(10\) is the least fixed normalized-semifinite integer order
+valid on the entire half-plane.
+\end{theorem}
+
+\begin{proof}
+If \(\RePart s>1/5\), then \(10\RePart s>2\), so (6.5) gives
+\(X_s\in L^{10}(\cM,\tau)\).  Order \(9\) fails arbitrarily close to the
+boundary.  Expanding (6.6), restoring powers \(1,\dots,9\) other than
+\(n=2\), and inserting the exact continued factor
+\(\exp(-\ell_2/2)=F_2^{\mathrm{cont}}\) gives (6.7).
+\end{proof}
+
+\begin{proposition}[Classical-trace firewall]\label{prop:classical}
+On the underlying ordinary Hilbert direct sum,
+\[
+ X_s\in S^q(\cH)\Longleftrightarrow q\RePart s>3.       \tag{6.8}
+\]
+Thus the least fixed classical Schatten order valid throughout
+\(\RePart s>1/5\) is \(15\), not \(10\).  Its local trace records the
+ordinary Galois norm rather than the degree-normalized local root.
+\end{proposition}
+
+\begin{proof}
+Removing the factor \(d_p^{-1}\asymp p^{-1}\) from the local trace changes
+the summand in (6.5) from order \(p^{1-q\sigma}\) to
+\(p^{2-q\sigma}\).  Prime summability is therefore equivalent to
+\(q\sigma>3\).  Since \(15\sigma>3\) for every \(\sigma>1/5\), while order
+\(14\) fails near the boundary, the stated minimum follows.  The same
+missing normalization multiplies the local graded logarithm by \(d_p\),
+which is precisely the ordinary Galois norm.
+\end{proof}
+
+\begin{remark}
+Neither (6.7) nor (6.8) is an ordinary Fredholm determinant statement on
+\(\RePart s>1/5\).  The unregularized normalized-semifinite trace-class
+domain is \(\RePart s>2\), and the ordinary Hilbert trace-class domain is
+\(\RePart s>3\).  The cancellations retained by the graded trace are part of
+the source object, not an estimate for \(|X_s|\).
+\end{remark}
