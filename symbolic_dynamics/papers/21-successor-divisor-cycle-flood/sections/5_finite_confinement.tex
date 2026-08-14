@@ -1,0 +1,151 @@
+\section{Exact finite confinement}
+\label{sec:confinement}
+
+Countable graphs normally make a fixed trace look like an infinite
+enumeration problem.  Here a maximum principle makes it finite.
+
+\begin{lemma}[Drop from a cyclic maximum]
+\label{lem:drop}
+Let \(M\) be a maximal vertex on a directed closed walk, and let \(M\to d\)
+be the next edge.  Then
+\[
+ d\le\frac{M+1}{2}.
+\]
+\end{lemma}
+
+\begin{proof}
+The edge condition gives \(d\mid M+1\).  The choice \(d=M+1\) contradicts
+maximality, so \(d\) is a proper divisor of \(M+1\).  Every proper positive
+divisor of an integer \(N\) is at most \(N/2\).
+\end{proof}
+
+\begin{theorem}[Confinement and extremal rigidity]
+\label{thm:confinement}
+Every length-\(r\) directed closed walk is contained in
+\[
+ \{2,3,\ldots,2r-1\}.
+\]
+If the walk reaches \(2r-1\), then it is \(C_r\), up to cyclic rotation.
+\end{theorem}
+
+\begin{proof}
+There is no length-one closed walk because \(n\nmid n+1\).  Let \(r\ge2\),
+rotate a closed walk to start at a maximum \(M\), and write its next vertex
+as \(d\).  By \cref{lem:drop},
+\[
+ d\le\frac{M+1}{2}.
+\]
+Every edge \(x\to y\) satisfies \(y\le x+1\).  After the first drop there are
+\(r-1\) edges left before returning to \(M\), so
+\[
+ M\le d+r-1
+ \le\frac{M+1}{2}+r-1.
+\]
+Rearranging gives \(M\le2r-1\).
+
+If \(M=2r-1\), equality must hold throughout.  Thus
+\[
+ d=\frac{M+1}{2}=r,
+\]
+and every remaining edge increases by exactly one.  The rotated walk is
+\[
+ 2r-1\to r\to r+1\to\cdots\to2r-1,
+\]
+which is \(C_r\).
+\end{proof}
+
+\begin{figure}[t]
+\centering
+\resizebox{0.92\textwidth}{!}{\input{figures/confinement_geometry}}
+\caption{At a maximum of a length-\(r\) closed walk, the next vertex is a
+proper divisor of \(M+1\), forcing a drop by at least half.  Each remaining
+edge increases its source by at most one.  Closing the walk gives
+\(M\le2r-1\); equality forces the canonical cycle \(C_r\).}
+\label{fig:confinement}
+\end{figure}
+
+\begin{corollary}[Exact finite trace cutoff]
+\label{cor:cutoff}
+For fixed \(r\), the order-\(r\) closed-walk sum of the infinite graph equals
+the corresponding sum in every induced prefix with cutoff \(N\ge2r-1\).
+The only primitive rotation class meeting the top vertex at the sharp cutoff
+is \(C_r\).
+\end{corollary}
+
+\begin{proof}
+\Cref{thm:confinement} confines every relevant walk to the prefix.  Its
+equality statement identifies the only class containing \(2r-1\).
+\end{proof}
+
+\subsection{Primitive and repetition recurrence}
+
+Let \(T_r\) denote the number of rooted length-\(r\) closed walks, and let
+\(P_r\) denote the number of primitive length-\(r\) rotation classes.
+Every rooted closed word is a power of a unique primitive class.  A primitive
+class of length \(d\mid r\) contributes \(d\), not \(r\), distinct rooted
+representatives after repetition.  Therefore
+\begin{equation}
+\label{eq:necklace}
+ T_r=\sum_{d\mid r}dP_d,
+ \qquad
+ P_r=\frac1r\sum_{d\mid r}\mu(r/d)T_d.
+\end{equation}
+The second identity is Möbius inversion.  It is the exact convention used by
+all finite certificates.
+
+\begin{table}[t]
+\centering
+\caption{Exact unweighted rooted traces \(T_r\) and primitive rotation counts
+\(P_r\).  By \cref{cor:cutoff}, the values are infinite-graph quantities,
+not cutoff estimates.}
+\label{tab:counts}
+\small
+\setlength{\tabcolsep}{4.2pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}c*{10}{r}@{}}
+\toprule
+\(r\) & 1&2&3&4&5&6&7&8&9&10\\
+\midrule
+\(T_r\) &0&2&3&10&10&29&28&82&93&192\\
+\(P_r\) &0&1&1&2&2&4&4&9&10&18\\
+\midrule
+\(r\) &11&12&13&14&15&16&17&18&19&20\\
+\midrule
+\(T_r\) &264&553&754&1458&2173&4002&6171&11027&17442&30620\\
+\(P_r\) &24&43&58&102&144&245&363&606&918&1521\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The table is a compact regression ledger.  Its qualitative message is
+already theorem-level: \(P_r\ge1\) for every \(r\ge2\), and the count grows
+far beyond the single canonical family.  The proof of confinement, rather
+than stabilization observed at two numerical cutoffs, certifies exactness.
+
+\subsection{Sparse finite protocol}
+
+For an order \(r\), exact enumeration needs only the sparse induced adjacency
+on \(2,\ldots,2r-1\).  Dynamic propagation or sparse matrix powering computes
+its diagonal sum.  Cartesian enumeration of all words is unnecessary and,
+for moderate \(r\), prohibitive.  The extremal contribution supplies an
+additional audit: exactly \(r\) rooted walks at order \(r\) use the top
+vertex, namely the rotations of \(C_r\).
+
+\subsection{Frozen exact certificate}
+
+The exact regression suite certifies all unweighted orders through \(32\),
+ending with
+\[
+ T_{32}=14{,}532{,}674,
+ \qquad
+ P_{32}=454{,}021.
+\]
+Explicit rotation reduction finds \(667\) primitive classes through length
+\(16\).  At \(s=1,2,3\), the suite records \(48\) exact weighted traces and
+\(51\) determinant coefficients through degree \(16\); Newton recurrence and
+independent multiplication of the primitive factors have zero coefficient
+mismatch.  A source audit checks \(30{,}626\) edges with zero quotient
+mismatch and zero loops.  All \(19\) declared tests pass, and two full
+regenerations produce a byte-identical frozen ledger.  These computations
+regress the preceding theorems; they are not premises of confinement or of
+the trace-class threshold.

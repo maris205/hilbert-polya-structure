@@ -32,6 +32,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [18-incidence-transition-holonomy](papers/18-incidence-transition-holonomy/README.md) | [PDF](papers/18-incidence-transition-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/18-incidence-transition-holonomy/) | subset-incidence transition rule 产生了真正非交换、非 one-letter-coboundary 的 $S_3$ holonomy；trivial/sign blocks 仍保留标量 Euler factor，但 faithful standard block 精确泄漏 mixed primitive coefficients，且全部 matched inventories 都复制该现象。 | **GENUINE TRANSITION HOLONOMY / ROUTE-A REJECTED / SD-C20** |
 | [19-stationary-semiring-sieve-shift](papers/19-stationary-semiring-sieve-shift/README.md) | [PDF](papers/19-stationary-semiring-sieve-shift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/19-stationary-semiring-sieve-shift/) | full-shift alphabet-sum、tensor 与 order 可把无 factor oracle 的逐商试除编译成一个 trace-class 单边 Markov graph，并在 $\Re s>1$ 精确给出 $1/\zeta(s)$；但全部计算状态都属 transient DAG，剪枝后只剩 Paper 04 的 prime loops，而任意总可判定集合都能复制同型 Euler 子积。 | **SEMIRING VERIFIER / PRUNING EQUIVALENT / ROUTE-A REJECTED / SD-C21** |
 | [20-recurrent-verifier-clock-dilution](papers/20-recurrent-verifier-clock-dilution/README.md) | [PDF](papers/20-recurrent-verifier-clock-dilution/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/20-recurrent-verifier-clock-dilution/) | 把完整试除计算闭成 prime cycle 后，每圈仍精确携带 $\log p$，但验证长度 $\ell(p)\asymp p\log p$ 会把 clock 稀释到至少一条边权趋于 $1$；whole adjacency 因而 essential norm 为 $1$、非紧且没有 Fredholm determinant。$z=1$ 的 orbit product 虽仍是 $1/\zeta$，Poincaré return 却把系统收缩回 Paper 04 的 diagonal atom loops。 | **CLOCK DILUTION / FIRST-RETURN COLLAPSE / ROUTE-A REJECTED / SD-C22** |
+| [21-successor-divisor-cycle-flood](papers/21-successor-divisor-cycle-flood/README.md) | [PDF](papers/21-successor-divisor-cycle-flood/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/21-successor-divisor-cycle-flood/) | successor–divisor grammar $n\to d\iff d\mid n+1$ 给出强连通、mixing 的 genuine recurrent shift，且自然 whole adjacency 精确满足 $L_s\in\mathcal S_1\iff\Re s>1/2$；但它没有长度一轨道，并从每个长度 $k\ge2$ 都产生 canonical primitive cycle，所有自然 orbit norms 又是 composite squares。 | **SHARP FREDHOLM / ALL-LENGTH CYCLE FLOOD / ROUTE-A REJECTED / SD-C23** |
 
 ### 论文 1 的候选分离结论
 
@@ -534,13 +535,63 @@ Paper 21 因而放弃“把一条越来越长的 verifier path 闭合”的方�
 successor–divisor grammar：它先检验 whole transfer 能否在更大的半平面成为真正
 trace-class Fredholm family，再在选择 roof 之前审计其 primitive-cycle species。
 
+### 论文 21：whole Fredholm 正则性成立，但 primitive species 全长度洪泛
+
+Paper 21 在所有非平凡 full-shift objects 上冻结局部 transition
+
+$$
+n\longrightarrow d
+\quad\Longleftrightarrow\quad d\ge2, d\mid n+1,
+$$
+
+并使用 endpoint roof $\tau(n,d)=\log n+\log d$。这个 countable Markov graph
+不是 verifier wrapper：它本身强连通、aperiodic 且 mixing，算术 transition 真正进入
+recurrent core。更强的是，column-source adjacency
+
+$$
+L_se_n=\sum_{d\mid n+1,\ d\ge2}(nd)^{-s}e_d
+$$
+
+满足 sharp theorem
+
+$$
+L_s\in\mathcal S_1\quad\Longleftrightarrow\quad\Re s>\frac12.
+$$
+
+因此 $det(I-zL_s)$ 在临界线右侧整个开半平面都是同一 whole symbolic object 的
+honest Fredholm determinant；Paper 20 的 noncompactness 已被真正修复。
+
+失败转移到了 orbit species。graph 没有自环，所以 $\operatorname{Tr}L_s=0$，而
+目标 prime Euler determinant 的一阶 trace 非零。与此同时，对每个 $k\ge2$ 都有
+simple primitive cycle
+
+$$
+C_k=(k,k+1,\ldots,2k-1),
+$$
+
+且其自然 norm 是 composite square
+$\left(\prod_{n=k}^{2k-1}n\right)^2$。任何长度 $r$ 的闭路都被严格限制在
+$\{2,\ldots,2r-1\}$，所以无限图的第 $r$ 阶 trace 可在 cutoff $2r-1$ exact
+认证；这也排除了有限窗口伪影。19/19 tests 精确给出 $T_{32}=14{,}532{,}674$、
+$P_{32}=454{,}021$，并在长度 16 内枚举 667 个 primitive classes。
+
+最锋利的 control 只保留 quotient $q=(n+1)/d\in\{1,2\}$：这个极窄 spine 仍保留
+强连通、mixing、全长度 $C_k$ 与相同 $\Re s>1/2$ trace-class 阈值；只保留
+$q=1$ 才变成无环。故阶段结论是
+**GO_SHARP_WHOLE_FREDHOLM / STOP_PRIME_ORBIT_LEDGER /
+CYCLE_FLOOD / PRUNING_PERSISTS / PROVES_TOO_MUCH**。
+
+Paper 22 不再改 base graph，而把 canonical quotient word 暴露为 holonomy，先精确
+分类哪些 cofactor classes 对应哪些 primitive cycles，再检验 character resolution
+能否在不牺牲 Fredholm 域的条件下隔离目标 orbit species。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十篇论文](papers/)
+- [二十一篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

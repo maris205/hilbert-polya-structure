@@ -1,0 +1,138 @@
+\section{Pruning and quotient controls}
+\label{sec:controls}
+
+Every edge carries the unique quotient label
+\[
+ q(n,d)=\frac{n+1}{d}.
+\]
+The full graph retains all \(q\ge1\).  To test whether the full divisor
+inventory creates the observed signal, we retain only \(q=1,2\).
+
+\begin{definition}[Two-quotient spine]
+Let \(G_{\{1,2\}}\) have the same vertex set as \(G_{\SD}\) and retain exactly
+the edges with \(q(n,d)\in\{1,2\}\).  Thus
+\[
+ q=1:\ n\to n+1,
+ \qquad
+ q=2:\ 2d-1\to d.
+\]
+Let \(L_s^{\{1,2\}}\) be its inherited endpoint-weighted adjacency.
+\end{definition}
+
+\begin{theorem}[Zero-margin spine]
+\label{thm:spine}
+The graph \(G_{\{1,2\}}\) is strongly connected and path-sense mixing, has no
+loops, and contains \(C_k\) for every \(k\ge2\).  Moreover,
+\[
+ L_s^{\{1,2\}}\in\Sone
+ \quad\Longleftrightarrow\quad
+ \RePart s>\frac12.
+\]
+\end{theorem}
+
+\begin{proof}
+All successor edges remain.  If \(n=2k-1\) is odd, the quotient-two edge
+\[
+ n\to k
+\]
+strictly decreases \(n\) unless \(n=3\), in which case it reaches \(2\).
+If \(n>2\) is even, then
+\[
+ n\to n+1\to\frac{n+2}{2}<n.
+\]
+Iterating reaches \(2\), while successor edges connect \(2\) to every
+vertex.  Thus the spine is strongly connected.  It retains the length-two
+and length-three loops based at \(3\), so the proof of
+\cref{thm:mixing} gives mixing.
+
+Every canonical cycle uses successor edges followed by
+\[
+ 2k-1\to k,
+\]
+whose quotient is two.  Hence every \(C_k\) remains.  No loop can appear
+because the spine is a subgraph of the loopless full graph.
+
+For a target row \(d\), there are at most two source columns, \(d-1\) and
+\(2d-1\).  Its rank-one row norm is \(O(d^{-2\sigma})\), so summing rows
+proves trace class for \(\sigma>1/2\).  Necessity follows from the retained
+successor diagonal exactly as in \cref{thm:traceclass}.
+\end{proof}
+
+The full graph and the spine therefore have zero control margin for the
+properties causing rejection: recurrence, aperiodicity, no degree-one trace,
+the all-length cycle flood, and the sharp trace-class boundary.  The extra
+divisors are not responsible for the decisive signal.
+
+\begin{proposition}[Successor-only negative control]
+\label{prop:successor-only}
+The quotient-one graph contains only \(n\to n+1\).  It is acyclic and has no
+periodic orbit.  Its inherited weighted adjacency is trace class exactly for
+\(\RePart s>1/2\), and its Fredholm determinant is identically one there.
+\end{proposition}
+
+\begin{proof}
+The vertex label strictly increases at every step.  The adjacency is the
+weighted shift
+\[
+ S_se_n=[n(n+1)]^{-s}e_{n+1},
+\]
+whose singular values are \([n(n+1)]^{-\RePart s}\).  This gives the stated
+trace-class range.  All power traces vanish because the graph is acyclic, so
+the local logarithmic determinant is zero.  Since the Fredholm determinant
+is entire in \(z\), it equals one identically.
+\end{proof}
+
+\begin{proposition}[General two-quotient family]
+\label{prop:qfamily}
+Fix \(q\ge2\).  Any quotient inventory containing \(1\) and \(q\) contains,
+for every \(d\ge2\), the simple primitive cycle
+\[
+ C_{d,q}=(d,d+1,\ldots,qd-1)
+\]
+of length \(d(q-1)\).
+\end{proposition}
+
+\begin{proof}
+Quotient one supplies all successor edges along the interval.  The final
+edge has quotient
+\[
+ \frac{(qd-1)+1}{d}=q.
+\]
+The vertices are distinct, giving a simple primitive cycle.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Graph controls.  Every entry is theorem-level; finite censuses are
+regression checks.}
+\label{tab:controls}
+\begin{tabularx}{\textwidth}{@{}L{0.24\textwidth}YYYY@{}}
+\toprule
+Inventory & Recurrent & Primitive lengths & Loops & Sharp \(\Sone\) range\\
+\midrule
+All quotients
+ & yes, mixing & every \(k\ge2\) & none & \(\RePart s>1/2\)\\
+\(q\in\{1,2\}\)
+ & yes, mixing & every \(k\ge2\) & none & \(\RePart s>1/2\)\\
+\(q=1\)
+ & no & none & none & \(\RePart s>1/2\)\\
+\(q\in\{1,q_0\}\), \(q_0\ge2\)
+ & not needed here & every \(d(q_0-1)\) & none & not claimed\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The frozen control census contains \(225\) quotient-family rows, \(20\)
+graph-control rows, \(64\) positive-weight rows, and \(56\) trace-class
+diagnostic rows.  The counts organize coverage; the zero-margin statement
+itself is the theorem-level consequence of \cref{thm:spine}.
+
+\subsection{Weight-inventory controls}
+
+Replacing the entropy inventory by positive vertex functions such as
+\(n+1\), \(n^2+1\), or \(2^n\) changes weights but not the directed graph.
+Such substitutions can diagnose convergence sensitivity; they cannot remove
+or create primitive cycles while weights remain nonzero.  We therefore label
+them \emph{weight controls}, not arithmetic-graph selectivity controls.  The
+quotient spine is the decisive graph control.
