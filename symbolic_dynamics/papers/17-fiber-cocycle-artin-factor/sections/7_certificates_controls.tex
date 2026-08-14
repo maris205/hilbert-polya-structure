@@ -1,0 +1,153 @@
+\section{Exact certificates, adversarial controls, and the transition boundary}
+\label{sec:certificates}
+
+The results in \cref{sec:factorization,sec:rigidity,sec:lifts} are algebraic
+theorems.  The finite computations reported here serve a narrower purpose:
+they certify sign conventions, repetitions, phase bookkeeping, primitive
+enumeration, and the scope of the hypotheses.  All calculations use integers,
+rational numbers, sparse formal polynomials, or exact matrices.  There is no
+floating-point root search and no target-zero input.
+
+\begin{table}[t]
+\centering
+\caption{Frozen exact certificates.  A row marked exact compares two
+independently constructed symbolic objects, not a fitted numerical sample.}
+\label{tab:certificates}
+\begin{tabularx}{\textwidth}{L{0.27\textwidth}L{0.22\textwidth}X}
+\toprule
+Certificate & Frozen extent & Outcome \\
+\midrule
+\(C_2\) block and regular determinants
+& \(n=1,\ldots,10\)
+& zero formal mismatch terms \\
+Trace and repetition ledger
+& 300 rows
+& 300 exact coefficient identities \\
+\(C_m\) character phases
+& 350 rows, \(2\le m\le8\)
+& 350 exact cyclotomic phase ledgers \\
+Regular \(C_m\) local determinants
+& seven group orders
+& \(\prod_p(1-x_p^m)\) in every row \\
+Primitive base/lift census
+& 350 rows
+& recurrence, \(q\), and multiplicity exact \\
+Natural one-letter tables
+& 72,079 tables in 35 cells
+& one operator-clean power table per cell \\
+Inventory controls
+& 64 runs
+& every identity exact; pass-rate margin zero \\
+Implementation tests
+& 14 tests
+& 14 passed, zero failures \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Independent coefficient ledgers}
+
+The formal \(C_2\) certificate constructs the regular \(2\times2\) matrix and
+the two character blocks separately, then compares their sparse
+determinants.  The trace certificate does not reuse the closed determinant:
+it expands
+\[
+\sum_{\ell\ge1}\frac{\tr(B^\ell)}{\ell}
+\tag{7.1}\label{7.1}
+\]
+through degree ten and compares the result with
+\(-\log\det(I-B)\).  The 300 exact agreements therefore test temporal
+repetitions and the scalar sign \(\eps(S)^\ell\), not just the
+inclusion--exclusion polynomial at one step.
+
+For \(C_m\), roots of unity are stored by exponent modulo \(m\).  The
+coefficient of a squarefree degree-\(k\) monomial in the \(j\)th character
+block is recorded as
+\[
+\bigl((-1)^k,jk\bmod m\bigr).
+\tag{7.2}\label{7.2}
+\]
+This exact phase ledger is compared with the product
+\(\prod_p(1-\omega^jx_p)\); multiplying all character blocks is compared
+independently with the determinant of the \(m\times m\) regular permutation
+matrix.
+
+\subsection{Finite audit of the rigidity quantifiers}
+
+After fixing the singleton label to the chosen generator \(a\), relabeling
+naturality reduces a truncated rule to a size table
+\[
+(r_1,\ldots,r_K)\in(\Z/m\Z)^K,\qquad r_1=1,
+\qquad \alpha(S)=a^{r_{|S|}}.
+\tag{7.3}\label{7.3}
+\]
+For every \(m=2,\ldots,8\) and \(K=2,\ldots,6\), all such tables were
+enumerated.  Across the resulting 35 cells there are 72,079 tables.  Exactly
+35 satisfy all regular-representation squarefree coefficient identities:
+one table per cell, namely
+\[
+r_k\equiv kr_1\pmod m.
+\tag{7.4}\label{7.4}
+\]
+The enumeration is not the proof of \cref{thm:rigidity}; it is an independent
+finite audit that uses faithful regular coefficients and therefore does not
+mistake a nonfaithful character coincidence for operator coherence.
+
+\subsection{Inventory universality and zero selectivity}
+
+The factor identities live in the free commutative polynomial ring
+\(\Z[x_p:p\in P]\).  Any substitution of commuting values preserves them.
+The adversarial inventory test makes that formal universality visible.  It
+uses four matched families---prime, shuffled-prime, composite-only, and
+random rational---with 16 frozen seeds per family.  All 64 runs satisfy all
+four determinant identities.  Thus every family has identity pass rate one
+and
+\[
+\text{identity pass-rate margin}=0.
+\tag{7.5}\label{7.5}
+\]
+Equation~\eqref{7.5} compares truth of the identities, not equality of their
+numerical determinant values.  Different substitutions generally produce
+different numbers; what fails to distinguish the arithmetic inventory is the
+mechanism's success criterion.
+
+This control is decisive for scope.  The construction has an intrinsic
+arithmetic source when \(x_p=p^{-s}\), but its clean factorization does not
+use the property of being prime.  It therefore proves too much to serve as an
+arithmetic selector.
+
+\subsection{Cohomology and transition countercontrols}
+
+Gauge controls separate genuine motion from a presentation artifact.  In 63
+vertex-coboundary rows, all audited periodic holonomies are identity and every
+edge label is recovered by the declared gauge.  The 21 constant-holonomy
+negative controls all have a nonidentity periodic witness.  These checks
+support the elementary firewall in \cref{prop:not-coboundary}.
+
+Four minimal two-symbol transition rules probe exactly where the one-letter
+theorem stops.  Their determinants are compared with the nearest atom-local
+character baseline:
+\[
+\begin{array}{llll}
+\toprule
+\text{rule}&\text{coboundary}&\text{first leakage}&\text{periodic witness}\\
+\midrule
+\text{vertex coboundary degree}&\text{yes}&\text{none}&\text{none}\\
+\text{diagonal return}&\text{no}&-2xy&(1)\\
+\text{incidence-intersection parity}&\text{no}&+2xy^2&(1)\\
+\text{strict symbol change}&\text{no}&-4x^2y^2&(1,2,3)\\
+\bottomrule
+\end{array}
+\tag{7.6}\label{7.6}
+\]
+The coboundary row is exactly atom-local after gauge conjugacy.  Each of the
+three noncoboundary rows has a periodic witness and eventually leaks.
+Notably, strict symbol change is clean at lower squarefree degrees but first
+fails at a temporal-power monomial.  Transition dependence is therefore a
+real loophole in \cref{thm:rigidity}, while low-degree squarefree cleanliness
+is not enough to exploit it.
+
+The next symbolic test must combine the two merge orders on a
+\(p,q,r\) incidence/refinement grammar with their commutator holonomy and the
+\(p^2q^2\) repetition ledger.  That is a forward obligation within Symbolic
+Dynamics, not a theorem claimed in this paper.

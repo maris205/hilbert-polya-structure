@@ -1,0 +1,296 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C19
+source_commit: SOURCE_COMMIT_PLACEHOLDER
+code_commit: CODE_COMMIT_PLACEHOLDER
+evaluation_date: "2026-08-14"
+artifact_path_base: papers/17-fiber-cocycle-artin-factor
+freeze_note: >-
+  Two-stage provenance: SOURCE_COMMIT_PLACEHOLDER and CODE_COMMIT_PLACEHOLDER
+  are replaced by the first authority commit that freezes source, code,
+  results, and paper artifacts. This evaluation and the paper-level manifest
+  are then sealed by a metadata-only second commit. This integration performs
+  no Git operation.
+
+source_lock:
+  candidate_definition: >-
+    For every finite tensor-atom inventory P, take the one-vertex full shift on
+    all nonempty subsets S of P with scalar coefficient
+    epsilon(S)=(-1)^(|S|+1), monomial x_S, and the intrinsic C2 cocycle
+    alpha(S)=|S| mod 2.
+  object: >-
+    The projective family of finite signed subset shifts and their genuine C2
+    skew extensions, with regular transfer B_reg=sum_S epsilon(S)x_S
+    L_a^|S| and its trivial/sign isotypic blocks at z=1.
+  family: symbolic_dynamics
+  phase_space: >-
+    X_P times C2, where X_P is the two-sided full shift on nonempty subsets of
+    a frozen finite atom set. Deck translations act only on C2 and commute with
+    the weighted shift without changing atoms or roofs.
+  dynamics: >-
+    The skew shift (x,g) maps to (sigma x,g+alpha(x_0)). Every nonempty finite
+    restriction is transitive; restrictions with at least two atoms are
+    mixing, while the one-atom restriction has period two.
+  parameters: >-
+    Formal C2 atoms n=1..10; trace degree 1..10; C_m orders 2..8 and all
+    characters; primitive census n=1..5, base length 1..10, m=2..8;
+    naturality degree 2..6; control seeds 17000..17015.
+  parameter_provenance: >-
+    Group, cocycle, normalization, cutoffs, controls, and seeds were frozen
+    before execution. There are no fitted parameters and no target-zero data.
+  arithmetic_origin: >-
+    Tensor-indecomposable finite full shifts are F_p and entropy h(F_p)=log p
+    supplies x_p=exp(-s h(F_p)). The free-commutative polynomial construction
+    is defined before arithmetic specialization.
+  clock: >-
+    T(S)=sum_(p in S) h(F_p), extended additively along symbolic words; no
+    fitted scale or offset.
+  normalization: >-
+    epsilon(S)=(-1)^(|S|+1), alpha(S)=|S| mod 2, and auxiliary temporal
+    normalization z=1. Off-shell atom-local factorization is forbidden.
+  determinant_convention: >-
+    D_chi=det(I-B_chi), D_reg=det(I-B_reg)=D_plus D_minus. D_reg is the whole
+    regular-extension determinant; D_plus and D_minus are isotypic block
+    determinants. Dynamical Artin L notation would invert these factors.
+  orbit_cutoff: >-
+    Exact primitive base-necklace degree recurrence through n=5 and base word
+    length 10; C_m lift closure and multiplicity through m=8.
+  cutoff: >-
+    Ten formal C2 cutoffs, 300 repetition rows, 350 C_m character rows, 350
+    primitive/lift rows, 72,079 naturality tables in 35 cells, 84 cohomology
+    controls, four transition controls, and 64 inventory controls.
+  precision: >-
+    Integer, Fraction, sparse formal-polynomial, and exact SymPy matrix
+    arithmetic only. No floating root calculation is used.
+  training_data: none
+  allowed_data:
+    - tensor multiplication, tensor indecomposability, and entropy of finite full shifts
+    - formal subset monomials and ordinary scalar edge signs
+    - finite cyclic groups, regular representations, and exact characters
+    - primitive symbolic necklaces, periodic holonomy, and lift multiplicity
+    - prime, composite, shuffled, random-rational, and formal inventories as controls
+  forbidden_data:
+    - Riemann-zero tables, target spectra, zero fitting, or target-derived phases
+    - prime-indexed cocycle tables or relabeling of distinct arithmetic roofs
+    - identifying an isotypic block divisor with the whole regular determinant
+    - claiming that atom-local factors remove mixed coefficients or primitive lifts
+    - off-shell z-not-equal-1 atom-local Euler factorization
+    - importing meromorphic continuation as a new Fredholm continuation theorem
+    - cross-family geometric, quantum, or self-adjoint repairs
+  code_commit: CODE_COMMIT_PLACEHOLDER
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/EXPERIMENT_TRACKER.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - experiments/run_sdc19_exact_suite.py
+    - code/sdc19_fiber_cocycle_artin_core.py
+    - code/sdc19_fiber_cocycle_artin_experiment.py
+    - code/analyze_sdc19_fiber_cocycle_artin_results.py
+    - code/test_sdc19_fiber_cocycle_artin_experiment.py
+    - code/run_sdc19_fiber_cocycle_artin_tests.py
+    - code/audit_sdc19_artifact_integrity.py
+    - code/freeze_sdc19_fiber_cocycle_artin_artifacts.py
+    - results/run_summary.json
+    - results/analysis_summary.json
+    - results/formal_c2_factorization.csv
+    - results/repetition_trace_ledger.csv
+    - results/cm_character_certificates.csv
+    - results/primitive_lift_census.csv
+    - results/naturality_tables.csv
+    - results/naturality_summary.csv
+    - results/coboundary_controls.csv
+    - results/transition_countercontrols.csv
+    - results/inventory_controls.csv
+    - results/test_summary.json
+    - results/integrity_audit.json
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+    - docs/EXPERIMENT_ARTIFACT_SCHEMA.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Tensor indecomposability identifies F_p intrinsically and entropy supplies
+    log p before specialization; neither a prime table nor a zero table is
+    embedded in the cocycle or transfer rule.
+  strongest_failure: >-
+    The determinant algebra is free-commutative and every matched composite,
+    shuffled, and random-rational control reproduces the exact identities, so
+    the finite-fiber factor supplies no arithmetic selectivity.
+  arithmetic_controls:
+    - free-commutative formal variables
+    - composite-only inventories
+    - shuffled prime inventories
+    - 16 seeded random-rational inventories
+    - coboundary and noncoboundary transition controls
+  artifacts:
+    - SOURCE_LOCK.md
+    - results/formal_c2_factorization.csv
+    - results/inventory_controls.csv
+    - results/inventory_comparison_table.csv
+    - results/analysis_summary.json
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Primitive base necklaces, total degree, Frobenius, lift traversal q, and
+    lifted-cycle multiplicity are intrinsic and exactly enumerated at every
+    frozen cutoff. The primary C2 extension has genuine recurrent motion.
+  strongest_failure: >-
+    A singleton atom closes only after m traversals in a C_m extension, while
+    mixed subset primitives with degree divisible by m close immediately.
+    Therefore atoms are not the primitive closed orbits of the full extension.
+  metrics:
+    primitive_definition: cyclic_necklaces_of_nonempty_subset_symbols
+    reflection_quotiented: false
+    primitive_base_rows: 350
+    base_lift_formula: q=m/gcd(m,c)
+    lifted_cycle_multiplicity: gcd(m,c)
+    c2_n_ge_2_rows_with_mixed_immediate_closures: 40/40
+    largest_base_primitive_count: 81962825835072
+    largest_mixed_immediate_closure_count: 40981411486080
+    largest_lifted_primitive_cycle_count: 122944237321152
+    completeness_risk_for_frozen_ranges: none_exact_recurrence
+  artifacts:
+    - results/c2_transitivity.csv
+    - results/primitive_lift_census.csv
+    - results/primitive_degree_distributions.json
+    - EXPERIMENT_REPORT.md
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    In one genuine commuting regular transfer, D_plus=product(1-x_p),
+    D_minus=product(1+x_p), and D_reg=D_plus D_minus=product(1-x_p^2).
+    All formal, repetition, character, and same-object certificates are exact.
+  strongest_failure: >-
+    The identity is frozen only at z=1, the full regular determinant cancels
+    the apparent zeta(s) divisor between blocks after continuation, and no
+    primitive prime-orbit bijection or target completed divisor results.
+  metrics:
+    zero_error_train: not_applicable_no_target_zero_evaluation
+    zero_error_validation: not_applicable_no_target_zero_evaluation
+    zero_error_test: not_applicable_no_target_zero_evaluation
+    extra_zero_count: not_applicable_no_target_zero_evaluation
+    missing_zero_count: not_applicable_no_target_zero_evaluation
+    root_count_discrepancy: not_applicable_no_target_zero_evaluation
+    cutoff_drift: zero_exact_finite_identity
+    precision_drift: zero_exact_arithmetic
+    control_margin: identity_pass_rate_margin_zero
+    target_zero_data_used: false
+    formal_c2_rows: 10
+    formal_mismatch_terms: 0
+    trace_repetition_exact: 300/300
+    cm_character_exact: 350/350
+    regular_local_exact: 7/7
+    whole_extension_determinant: D_reg
+    isotypic_block_determinants: D_plus,D_minus
+  artifacts:
+    - results/formal_c2_factorization.csv
+    - results/repetition_trace_ledger.csv
+    - results/cm_character_certificates.csv
+    - results/cm_regular_local_determinants.csv
+    - results/run_summary.json
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The countable finite-fiber adjacency series converges locally uniformly in
+    operator norm for Re(s)>1, giving a holomorphic matrix family there. The
+    regular transfer has an exact same-object Artin block decomposition.
+  strongest_failure: >-
+    There is no intrinsic Gamma factor, s-to-1-s functional equation, pole and
+    trivial-zero completion, Riemann-von-Mangoldt law, global target divisor,
+    nuclear continuation theorem, or natural Weil compression. Imported Euler
+    continuation earns no new dynamical credit.
+  analytic_structure:
+    honest_domain: Re(s)>1
+    finite_fiber_operator_norm_convergence: PROVED
+    conjugation_symmetry_in_honest_domain: PROVED
+    same_object_artin_decomposition: PROVED
+    off_shell_atom_local_factorization: REFUTED
+    functional_equation: OPEN
+    gamma_factor: OPEN
+    pole_removal: OPEN
+    trivial_zeros: OPEN
+    target_counting_law: OPEN
+    global_target_divisor_identity: OPEN
+  weil_compression:
+    status: NOT_TESTABLE
+    reason: no_intrinsic_Hermitian_or_Weil_compression_from_SD_C19
+  artifacts:
+    - SOURCE_LOCK.md
+    - results/run_summary.json
+    - EXPERIMENT_REPORT.md
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: >-
+    The finite symbolic skew extension, its deck action, transfer matrices,
+    character blocks, and periodic holonomies are explicitly defined.
+  strongest_failure: >-
+    No natural quantization, unitary or scattering completion, Hamiltonian,
+    self-adjoint generator, Hilbert-space domain, intrinsic T log T law, or
+    completed target divisor is supplied.
+  metrics:
+    natural_quantization: false
+    time_reversal_or_antiunitary_structure: not_applicable
+    proposed_hilbert_space_for_target: not_applicable
+    proposed_operator_domain_for_target: not_applicable
+    route_b_readiness: false
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+
+adversarial_controls:
+  controls_used:
+    - free-commutative formal identities through ten atoms
+    - prime, composite-only, and shuffled-prime inventories
+    - 16 seeded random-rational inventories
+    - vertex-coboundary gauge controls
+    - constant-holonomy negative controls
+    - four minimal transition-dependent controls
+  proves_too_much_risk: true
+  verdict: STOP_SCOPED / PROVES_TOO_MUCH
+
+route_tuple:
+  - A0_ANALYTIC_ARITHMETIC_ORIGIN
+  - A1_WEAK
+  - A2_ANALYTIC_DETERMINANT
+  - A3_PARTIAL_ANALYTIC_STRUCTURE
+  - A4_FAIL
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  SD-C19 proves that the tensor-subset shift admits a genuine recurrent C2
+  fiber whose Artin character determinants are atom-local at z=1, and proves
+  that functorial operator-coherent one-letter atom locality collapses to
+  uniform cyclic degree. It does not prove primitive prime-orbit matching,
+  arithmetic selectivity, a transition-cocycle no-go, a completed target
+  divisor, RH, or a Hilbert-Polya operator.
+blocking_conditions:
+  - prime singleton clocks multiply by the fiber order
+  - mixed primitive lifts survive at every nontrivial frozen C2 cutoff
+  - the one-letter clean branch has only cyclic factor-count holonomy
+  - controls reproduce every formal determinant identity with zero pass-rate margin
+  - isotypic divisors cancel in the whole regular determinant after continuation
+  - no completed analytic structure or intrinsic Weil compression exists
+  - no natural operator lift exists
+next_smallest_test: >-
+  Still within Symbolic Dynamics, test a transition cocycle derived only from
+  subset-incidence data on the p,q,r refinement grammar. Audit its two merge
+  orders and commutator holonomy together with squarefree degree four and the
+  temporal p^2 q^2 ledger; prove either a nonabelian clean factor or that no
+  leakage forces degree count plus a vertex coboundary.
+round2_clues:
+  - ROUND2_CLUE: geometric or quantum-cover realizations of orbit-dependent Frobenius are outside Session 4
+route_b_invocation_allowed: false

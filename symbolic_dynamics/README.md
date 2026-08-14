@@ -28,6 +28,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [14-tensor-bar-mobius-selector](papers/14-tensor-bar-mobius-selector/README.md) | [PDF](papers/14-tensor-bar-mobius-selector/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/14-tensor-bar-mobius-selector/) | 函子性 Abelian charge 被严格分类为 atom valuations，divisor-category cocycle 全为 coboundary；转向全局 tensor-bar grammar 后，同一 signed symbolic determinant 在 $\Re s>1$ 的 endpoint completion 中精确给出 $1/\zeta$ 与 $\Lambda_\otimes=\mu_\otimes*h$。但该反演对任意 weighted inventory 都成立，且 primitive cycles 是 factorization necklaces 而非 primes。 | **TENSOR-BAR DETERMINANT / ROUTE-A REJECTED / SD-C16** |
 | [15-bar-koszul-primitive-no-lift](papers/15-bar-koszul-primitive-no-lift/README.md) | [PDF](papers/15-bar-koszul-primitive-no-lift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/15-bar-koszul-primitive-no-lift/) | bar–Koszul squarefree subset shift 的标量 determinant 仍为 $\prod_p(1-x_p)$，但 $p^2q^2$ 的 primitive 账本为 $1^+$ 对 $2^-$，只能借低阶 $pq$ 轨道的二次重复抵消；$pqr$ 的残差为 $\mathbf1\oplus\mathrm{sgn}-\mathrm{Std}$，排除 $S_3$-自然的 sign involution。 | **PRIMITIVE NO-LIFT / ROUTE-A REJECTED / SD-C17** |
 | [16-equivariant-cycle-index-determinant](papers/16-equivariant-cycle-index-determinant/README.md) | [PDF](papers/16-equivariant-cycle-index-determinant/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/16-equivariant-cycle-index-determinant/) | Burnside/cycle-index ledger 精确保留 $pqr$ 的 character residual $(0,0,3)$，但算术权重 $x_p=p^{-s}$ 使固定 transfer 的置换 stabilizer 退化为恒等；等权恢复对称时非平凡 isotypes 全被 rank-one transfer 杀掉，而 diagonal equivariant lift 又引入 mixed-subset Euler factors。 | **FORMAL EQUIVARIANT LEDGER / ROUTE-A REJECTED / SD-C18** |
+| [17-fiber-cocycle-artin-factor](papers/17-fiber-cocycle-artin-factor/README.md) | [PDF](papers/17-fiber-cocycle-artin-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/17-fiber-cocycle-artin-factor/) | 真正 commuting 的 $C_2$ fiber 在同一 subset shift 中给出 Artin blocks $D_+=1/\zeta(s)$、$D_-=\zeta(s)/\zeta(2s)$ 与 whole determinant $D_{\rm reg}=1/\zeta(2s)$；但 mixed primitive lifts 仍大量存在，全部 matched inventories 也精确复制该分解。 | **ARTIN FACTOR / ROUTE-A REJECTED / SD-C19** |
 
 ### 论文 1 的候选分离结论
 
@@ -378,13 +379,50 @@ STOP_CHARACTER_FREDHOLM_FIBERS / STOP_STANDARD_SUPERTRACE_INTERPRETATION /
 PROVES_TOO_MUCH**。Paper 17 已把群作用从 prime-label relabeling 移到真正 commuting
 的 finite fiber，测试同一 symbolic skew extension 的 Artin factors；Route B 继续锁定。
 
+### 论文 17：真正的有限 fiber 成立，但 Artin blocks 仍不选择算术
+
+Paper 17 不再让群置换不同的 arithmetic roofs，而是在同一个 signed subset shift 上
+加入 commuting 的 $C_2$ deck fiber。对非空 subset symbol $S$ 冻结
+$\alpha(S)=|S|\bmod2$，则 regular transfer 的两个 character blocks 在 $z=1$ 精确满足
+
+$$
+D_+(s)=\prod_p(1-p^{-s})=\frac1{\zeta(s)},\qquad
+D_-(s)=\prod_p(1+p^{-s})=\frac{\zeta(s)}{\zeta(2s)},
+$$
+
+而真正属于整个 skew extension 的 determinant 是
+
+$$
+D_{\rm reg}(s)=D_+(s)D_-(s)
+=\prod_p(1-p^{-2s})=\frac1{\zeta(2s)}.
+$$
+
+因此这是一个合法的 same-object Artin decomposition，却不是把单个 block 的 divisor
+偷换成 whole determinant。primitive 账本也保持了这一边界：若一个 $C_m$ cocycle
+在 base primitive 上的总 charge 为 $c$，lift 要经过
+$m/\gcd(m,c)$ 次 base traversal 才闭合，并分裂为 $\gcd(m,c)$ 个 lifted cycles。
+prime singleton 的 clock 因而被 fiber order 放大，而 mixed subset primitives 在每个
+非平凡 cutoff 仍可立即闭合。
+
+更一般地，inclusion-compatible、relabel-natural 且 operator-coherent 的 atom-local
+one-letter cocycle 必须形如 $\alpha(S)=a^{|S|}$；若 extension transitive，其有效像只能
+是 cyclic。这关闭了 Paper 16 留下的 one-letter loophole，但不覆盖真正依赖 transition
+的 cocycle。14/14 tests、300 个 repetition rows、350 个 $C_m$ character rows、
+350 个 primitive/lift rows 与 72,079 张自然性表全部 exact；然而 64/64
+composite、shuffled、random-rational controls 也全部通过，control margin 为零。
+
+阶段结论为 **GO_GENUINE_FINITE_FIBER / GO_SAME_OBJECT_ARTIN_FACTORS /
+STOP_PRIMITIVE_PRIME_MATCHING / STOP_ARITHMETIC_SELECTIVITY /
+PROVES_TOO_MUCH**。Paper 18 已转向同一 tensor-subset grammar 上真正非交换的
+transition holonomy，检验它能否逃出 cyclic degree rigidity；Route B 继续锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十六篇论文](papers/)
+- [十七篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
