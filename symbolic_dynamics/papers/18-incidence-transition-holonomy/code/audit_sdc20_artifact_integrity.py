@@ -33,6 +33,7 @@ REQUIRED_ROUTE_KEYS = {
     "skill_version",
     "candidate_id",
     "source_commit",
+    "code_commit",
     "evaluation_date",
     "artifact_path_base",
     "source_lock",
@@ -42,6 +43,7 @@ REQUIRED_ROUTE_KEYS = {
     "a3",
     "a4",
     "adversarial_controls",
+    "route_tuple",
     "overall_verdict",
     "claim_boundary",
     "blocking_conditions",
@@ -89,6 +91,8 @@ def main() -> int:
 
     route_payload = yaml.safe_load(ROUTE_A.read_text(encoding="utf-8"))
     route_missing = sorted(REQUIRED_ROUTE_KEYS - set(route_payload))
+    source_commit = route_payload.get("source_commit")
+    code_commit = route_payload.get("code_commit")
     route_checks = {
         "yaml_parse": isinstance(route_payload, dict),
         "required_top_level_keys": not route_missing,
@@ -103,8 +107,13 @@ def main() -> int:
         ],
         "overall_rejected": route_payload.get("overall_verdict") == "ROUTE_A_REJECTED",
         "route_b_false": route_payload.get("route_b_invocation_allowed") is False,
-        "source_placeholder": route_payload.get("source_commit") == "SOURCE_COMMIT_PLACEHOLDER",
-        "code_placeholder": route_payload.get("code_commit") == "CODE_COMMIT_PLACEHOLDER",
+        "source_commit_sealed": isinstance(source_commit, str)
+        and len(source_commit) == 40
+        and all(character in "0123456789abcdef" for character in source_commit),
+        "code_commit_sealed": isinstance(code_commit, str)
+        and len(code_commit) == 40
+        and all(character in "0123456789abcdef" for character in code_commit),
+        "source_code_commit_match": source_commit == code_commit,
     }
 
     cache_paths = sorted(path.relative_to(ROOT).as_posix() for path in ROOT.rglob("__pycache__"))
