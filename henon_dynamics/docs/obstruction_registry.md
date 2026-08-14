@@ -267,9 +267,9 @@ Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
 retained positive structures rather than added to the obstruction list.
 The first untreated uniform-moment wall is now the fifth chronological
 moment; no continuation through \(\Re s=1/5\) is asserted.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P56`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P57`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P56 were born namespaced.
+strings, while P48--P57 were born namespaced.
 
 ## HCS-C51 additions
 
@@ -354,3 +354,9 @@ strings, while P48--P56 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O98 | Width-at-most-four locally constant realization of the H6 Galois excess | proved all-width incidence-ladder obstruction with an exact period-six witness | The primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy \(N_m(A_m)+N_m(B_{m+2})=N_m(A_{m+1})+N_m(B_{m+1})\) for every \(m\ge3\). At \(m=4\), the exact radical \(B_6\) field and shared period-five trace field give \(E_{A_5}+E_{B_5}>E_{A_4}+E_{B_6}\), contradicting the required periodic-sum identity. | Stops locally constant potentials only through width four. A determinant-one width-five minor interpolates the seven-cycle witness. The infinite ladder gives a necessary exponential discrepancy condition for one-sided Hölder data, but its asymptotics and the unrestricted/two-sided realization remain open. | ../henon_galois_excess_four_block_incidence_ladder/README.md |
+
+## HCS-P57 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O99 | Width-at-most-five locally constant realization of the H6 Galois excess | proved five-block incidence obstruction with exact six/seven-cycle trace fields | The `m=5` ladder row forces \(E(A_5)+E(B_7)=E(A_6)+E(B_6)\). Reflection reduction gives an irreducible cubic `A6` trace field and a shared irreducible totally real degree-fourteen `A7/B7` trace field. Exact root intervals imply \(E(A_5)>\log(554208972546768)\), while \(E(A_6)+E(B_6)<\log(21953081220)\); since \(E(B_7)>0\), the forced identity fails and \(\Delta_5>0\). | Stops locally constant potentials only through width five. Determinant `-1` and `+1` width-six minors interpolate the four-row and cumulative finite witnesses. Unrestricted one-/two-sided Hölder realizability remains the asymptotic \(\Delta_m\) gate. | ../henon_galois_excess_five_block_obstruction/README.md |
