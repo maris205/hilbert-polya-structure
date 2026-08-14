@@ -1,0 +1,112 @@
+\section{Proof details}
+\label{app:proofs}
+
+\subsection{Boolean interval recurrence}
+
+For \(S\subseteq[r]\), the interval \([\varnothing,S]\) in \(2^{[r]}\) is
+again Boolean.  The incidence recurrence
+\begin{equation}
+ \sum_{T\subseteq S}\mu(\varnothing,T)=\delta_{S,\varnothing}
+ \label{eq:boolean-recurrence}
+\end{equation}
+is solved by \(\mu(\varnothing,T)=(-1)^{|T|}\), since
+\(
+ \sum_{k=0}^{|S|}\binom{|S|}{k}(-1)^k=(1-1)^{|S|}
+\).
+This proves the sign used in \eqref{eq:boolean-weight} without importing a
+numerical label or factorization oracle.
+
+If \(a_1,\ldots,a_r\) are distinct prime covers in \(\MZ\), their full join
+is \(\prod_i a_i\).  Every divisor of that squarefree product is a unique
+subset product, so \(\beta_A\) is a pointed order isomorphism.  If the atoms
+are coordinate unit vectors in \(\Ffree\), the same proof replaces subset
+products by \(0/1\) exponent vectors.
+
+\subsection{Cumulant coefficient identity}
+
+Grouping the partitions in \cref{lem:factorization-cancellation} by their
+number of blocks gives
+\begin{equation}
+ c_r=\sum_{k=1}^r S(r,k)(-1)^{k-1}(k-1)!,
+ \label{eq:stirling-cumulant}
+\end{equation}
+where \(S(r,k)\) is a Stirling number of the second kind.  Using
+\(
+ \sum_{r\ge k}S(r,k)z^r/r!=(e^z-1)^k/k!
+\), one obtains
+\begin{align}
+ \sum_{r\ge1}c_r\frac{z^r}{r!}
+ &=\sum_{k\ge1}\frac{(-1)^{k-1}}{k}(e^z-1)^k\\
+ &=\log(1+e^z-1)=z.
+ \label{eq:cumulant-egf}
+\end{align}
+Thus \(c_1=1\) and all higher coefficients vanish.  The argument applies at
+every arity, although the executable candidate froze only ranks two and
+three.
+
+\subsection{Intervals and M{\"o}bius values under valuation}
+
+For \(m\mid n\), valuation restricts to
+\begin{equation}
+ [m,n]_{\mid}\ \iso\
+ [\PhiVal(m),\PhiVal(n)]_{\le}.
+ \label{eq:interval-isomorphism}
+\end{equation}
+Indeed, \(m\mid d\mid n\) is equivalent coordinatewise to
+\(
+ \PhiVal(m)\le\PhiVal(d)\le\PhiVal(n)
+\), and unique factorization supplies the inverse.  Applying the incidence
+recurrence on the two isomorphic intervals gives
+\begin{equation}
+ \mu_{\MZ}(m,n)
+ =\mu_{\Ffree}(\PhiVal(m),\PhiVal(n)).
+ \label{eq:mobius-transport}
+\end{equation}
+All constructions made from interval convolution therefore transport.
+
+\subsection{Decoration transport and global invariants}
+
+Let \(T_X\) be any source-resident \(k\)-index tensor.  Define its clone by
+\begin{equation}
+ T_{\Ffree}(\PhiVal(x_1),\ldots,\PhiVal(x_k))
+ :=T_{\MZ}(x_1,\ldots,x_k).
+ \label{eq:tensor-transport}
+\end{equation}
+The same rule transports roof marks, Gram kernels, compiled coefficient
+arrays, and compatible active cutoffs.  A global invariant may aggregate
+over all entries and all cutoff levels; equation~\eqref{eq:tensor-transport}
+still supplies an isomorphism of the complete filtered decorated object.
+The proof of \cref{thm:clone} therefore does not reduce a nonlocal
+construction to a local one.
+
+\subsection{Uniform majorant on compact substrips}
+
+Let \(K\) be a compact subset of
+\(
+ 1-2\eta<\Ree s<2\eta
+\).  There is \(\varepsilon>0\) such that for all \(s\in K\),
+\begin{equation}
+ 2\eta+\Ree s\ge1+\varepsilon,
+ \qquad
+ 2\eta+1-\Ree s\ge1+\varepsilon.
+ \label{eq:uniform-exponents}
+\end{equation}
+Consequently the absolute value of \eqref{eq:mixed-functional} is bounded,
+uniformly on \(K\), by a constant multiple of
+\begin{equation}
+ \left(\sum_{n\ge2}n^{-1-\varepsilon}\right)^2.
+ \label{eq:uniform-majorant}
+\end{equation}
+This proves normal convergence independently of prime-density estimates.
+The result is a statement about the new scalar functional only; it supplies
+no Schatten or trace-class classification of an unconstructed operator.
+
+\subsection{Why exponentiation does not upgrade the object}
+
+Given any holomorphic \(h(s)\), the function \(\exp(h(s))\) is holomorphic
+and zero-free.  This elementary fact does not make it a Fredholm determinant.
+A determinant requires an operator family and the corresponding trace-ideal
+or relative hypotheses.  Similarly, multiplying the inherited
+\(\detthree(I-z\cB_s)\) by \(\exp[-z^2\MK(s)/2]\) would declare a new
+scheme-dependent product.  It would not restore the quadratic term to the
+logarithm of \(\detthree\) or convert \(\MK\) into an ordinary trace.

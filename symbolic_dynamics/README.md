@@ -41,6 +41,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [27-mobius-incidence-atom-compiler](papers/27-mobius-incidence-atom-compiler/README.md) | [PDF](papers/27-mobius-incidence-atom-compiler/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/27-mobius-incidence-atom-compiler/) | 整数整除 source 的 covers 内生给出 atoms，Möbius-incidence idempotents 在迹之前消去 composite 与 mixed words，形成精确 atom Euler ledger；但可数 compiler 与坐标 atom table 有界相似，trace-class 域仍停在 $\Re s>1$。 | **SOURCE-DERIVED LEDGER / SIMILARITY COLLAPSE / SD-C29** |
 | [28-chiral-incidence-metric-trilemma](papers/28-chiral-incidence-metric-trilemma/README.md) | [PDF](papers/28-chiral-incidence-metric-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/28-chiral-incidence-metric-trilemma/) | reflected incidence-chiral family 在临界线上紧自伴且第四矩精确随 $t$ 运动；但 $B\notin\mathcal S_2$，$\det_3$ 删去二阶项，正定 source-natural metric 会将对象正交化回独立 atoms，而原生 motion 被所有对照复制。 | **CHIRAL MOTION / METRIC TRILEMMA / SD-C30** |
 | [29-functorial-chiral-counterterm-no-go](papers/29-functorial-chiral-counterterm-no-go/README.md) | [PDF](papers/29-functorial-chiral-counterterm-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/29-functorial-chiral-counterterm-no-go/) | source-natural quadratic subtraction 能分离 $B^2$ 的 prime-harmonic divergence，但 leading-only 与 full-diagonal schemes 相差一个非零可和有限项，因而自然性不唯一固定 finite part；保留 baseline mixed residue 与消去同型 controls 分别强制 $\beta=0$ 和 $\beta=1$，排除 pair-local linear-Gram 选择器。 | **FINITE-PART CLASSIFICATION / LOCAL SELECTIVITY NO-GO / SD-C31** |
+| [30-free-monoid-incidence-indistinguishability](papers/30-free-monoid-incidence-indistinguishability/README.md) | [PDF](papers/30-free-monoid-incidence-indistinguishability/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/30-free-monoid-incidence-indistinguishability/) | 整数乘法整除 source 与形式自由交换/UFD clone 在 atoms、join/lcm、interval Möbius、cutoff、roof 与 Gram decorations 上同构；因此任意对此对象同构自然的局部或非局部 cumulant/mixed invariant 都被 clone 精确复制。有限三元统计虽分开四个 fixture，却无法给出算术选择性。 | **FREE-UFD INDISTINGUISHABILITY / BRANCH CLOSED / SD-C32** |
 
 ### 论文 1 的候选分离结论
 
@@ -968,13 +969,41 @@ determinant 或 $\det_2$，也不改变辅助变量的 divisor。阶段结论是
 STOP_PAIRWISE_ARITHMETIC_SELECTIVITY / ROUTE_A_REJECTED**。非局部 filtered-tower invariant
 尚未被这个定理覆盖；Paper 30 只测试这一剩余漏口，Route B 仍锁定。
 
+### 论文 30：整除 incidence 的全部自然统计都被自由 UFD clone 复制
+
+Paper 30 将 Paper 29 留下的非局部漏口扩展到完整的 join、Möbius 与 connected-cumulant
+数据。唯一分解给出 source-preserving 同构
+
+$$
+(\mathbb N_{\ge1},\mid,\operatorname{lcm},\mu)
+\cong
+(\mathbb N^{(\mathcal P)},\le,\vee,\mu_{\rm prod}),
+$$
+
+并同时运输 atom covers、有限 cutoff、entropy roof 和 admissible Gram decoration。因此，
+任何在这一 decorated source 的同构下自然的 pair、triple、任意固定 arity 或全局
+filtered-tower functional，都不可能在整数 baseline 非零而在所有 formal free/UFD controls
+上为零。
+
+精确实验展示了这个边界为何必须由定理关闭：Boolean-join connected triple statistic
+在三个整数 baselines 上非零，并在 mutated-cover、composite-only、generic-DAG 与 random
+有限 fixtures 上为零；但 transported free-commutative 与 polynomial-UFD clones 逐项复制
+全部 pair/triple、31 个 predicate masks、markers 与 analytic auxiliary determinant。28/28 tests、
+1616/1616 independent checks 和 17 个双跑工件均通过。
+
+这不是系数选择失败，而是可见 source 数据的同构不可能性。阶段结论为
+**GO_FREE_UFD_CLONE_THEOREM / STOP_INCIDENCE_CUMULANT_SELECTOR /
+CLOSE_CHIRAL_INCIDENCE_COUNTERTERM_BRANCH / ROUTE_A_REJECTED**。Route B 继续锁定；
+Paper 31 只有在先引入并证明一个不被 valuation 同构运输的 source-derived 非乘法操作
+（例如加法–乘法兼容结构）后才允许建立新候选。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十九篇论文](papers/)
+- [三十篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
