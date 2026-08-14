@@ -1,0 +1,147 @@
+\section{Ghost, determinant, and character-readout incompatibility}
+\label{sec:ghost}
+
+The fixed-fiber obstruction concerns the rank-one transfer.  A natural
+alternative keeps each subset edge as a separate line and lets $S_n$ permute
+those lines.  This diagonal lift is genuinely representation-preserving, but
+its temporal traces reveal that it is a different determinant.
+
+\subsection{The diagonal subset operator}
+
+Define
+\[
+  D_xe_S=x_Se_S.
+  \tag{6.1}
+\]
+Use the parity $\eps(S)=(-1)^{|S|+1}$ only as a supertrace readout.  Then
+\[
+  \Str(D_x^r)
+  =\sum_{S\ne\varnothing}\eps(S)x_S^r
+  =b_P(x_1^r,\ldots,x_n^r).
+  \tag{6.2}
+\]
+This is the standard Adams ghost.  It differs from the rank-one trace
+$b_P(x)^r$ in (3.7).
+
+\begin{theorem}[Power-ghost separation]
+\label{thm:ghost-separation}
+For $n\ge2$ and $r\ge2$,
+\[
+ \coeff{x_1^{r-1}x_2}{b_P(x)^r}=r,
+ \qquad
+ \coeff{x_1^{r-1}x_2}{b_P(x_1^r,\ldots,x_n^r)}=0.
+ \tag{6.3}
+\]
+Hence the rank-one and diagonal ghost sequences disagree at every power
+$r\ge2$.
+\end{theorem}
+
+\begin{proof}
+Every term of $b_P$ has total degree at least one.  A degree-$r$ monomial in
+$b_P^r$ must choose a degree-one singleton from every factor.  Choose $x_2$
+from one of the $r$ factors and $x_1$ from all others, giving coefficient
+$r$.  Every exponent in $b_P(x^r)$ is divisible by $r$, so the second
+coefficient is zero.
+\end{proof}
+
+The witness is independent of the label inventory.  It also shows why a
+formal $C_2$ sign carrier is not the same as declaring subset edges even and
+odd.  The $C_2$ character reproduces the scalar powered sign inside the
+formal ledger; a fixed supertrace parity produces (6.2).  Replacing one by
+the other changes even-power traces.
+
+\subsection{Mixed-factor superdeterminant}
+
+Where the diagonal trace-log is formal or trace class, exponentiation of
+(6.2) yields
+\[
+\begin{split}
+ \sdet(I-D_x)
+ &=\exp\left(-\sum_{r\ge1}\frac1r
+       b_P(x_1^r,\ldots,x_n^r)\right)\\
+ &=\prod_{S\ne\varnothing}(1-x_S)^{\eps(S)}.
+\end{split}
+\tag{6.4}
+\]
+
+\begin{theorem}[Diagonal determinant obstruction]
+\label{thm:diagonal-determinant}
+For every $n\ge2$, the superdeterminant (6.4) is not the pure Euler
+determinant $\prod_{p\in P}(1-x_p)$.
+\end{theorem}
+
+\begin{proof}
+For two labels,
+\[
+  \sdet(I-D_x)
+  =\frac{(1-x_1)(1-x_2)}{1-x_1x_2},
+  \tag{6.5}
+\]
+which differs formally from $(1-x_1)(1-x_2)$.  For $n>2$, set every other
+variable to zero.  Equality would specialize to the false two-variable
+identity.
+\end{proof}
+
+At $x_1=1/4$ and $x_2=1/9$, the distinction is already exact:
+\[
+  (1-x_1)(1-x_2)=\frac23,
+  \qquad
+  \sdet(I-D_x)=\frac{24}{35}.
+  \tag{6.6}
+\]
+The extra factor is not a small numerical error; the ratio is $36/35$.
+Regularizing a later infinite product cannot erase a finite trace mismatch
+while preserving the same operator powers.
+
+\subsection{The character-readout theorem}
+
+The $pqr$ class provides a direct incompatibility without choosing an
+analytic realization.  Let $L$ be any linear scalar readout of the isolated
+representation coefficient in \Cref{thm:pqr}.
+
+\begin{theorem}[Euler ledger versus resolved motion]
+\label{thm:readout}
+If $L(R_3)\ne0$, the resolved primitive trace-log has a nonzero mixed
+$x_px_qx_r$ coefficient.  If the readout agrees with the pure Euler
+trace-log, then $L(R_3)=0$.  Thus no linear readout both detects the first
+resolved motion and preserves the pure Euler trace-log.
+\end{theorem}
+
+\begin{proof}
+The primitive coefficient at squarefree content is $R_3$ by
+\Cref{thm:pqr}.  By \Cref{prop:adams-isolation}, no higher temporal power has
+that multidegree, so the coefficient after applying $L$ is exactly $L(R_3)$.
+On the other hand,
+\[
+  -\log\prod_{a\in P}(1-x_a)
+  =\sum_{a\in P}\sum_{k\ge1}\frac{x_a^k}{k}
+  \tag{6.7}
+\]
+contains no mixed monomial.  Agreement with (6.7) forces $L(R_3)=0$.
+\end{proof}
+
+The theorem is conditional only on the explicitly verified isolation of the
+squarefree coefficient.  It is not a claim that every nontrivial character
+zeta contains every mixed composite.  It states that the first motion in
+SD-C18 is itself a mixed primitive coefficient, so a readout cannot both see
+it and pretend that the trace-log contains atom powers only.
+
+\subsection{The incompatibility triangle}
+
+\Cref{thm:covariance,thm:equal-weight,thm:ghost-separation,thm:readout}
+establish the three sides summarized in \Cref{fig:triangle}:
+
+\begin{enumerate}
+\item augmentation or dimension preserves the scalar Euler determinant but
+  kills $R_3$;
+\item distinct arithmetic weights preserve the entropy scale but destroy the
+  commuting label symmetry, while equal weights restore symmetry and kill
+  every nontrivial rank-one mode;
+\item the diagonal lift retains representation lines and standard powers but
+  changes the ghost sequence and determinant.
+\end{enumerate}
+
+No coordinatewise combination is allowed.  In particular, one cannot take
+the scalar determinant from $A_x$, the character spaces from $D_x$, and the
+arithmetic specialization from a semilinear family, then call the collection
+one Fredholm determinant.

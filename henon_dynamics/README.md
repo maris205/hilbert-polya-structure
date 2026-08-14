@@ -36,10 +36,12 @@ henon_pressure_label_six_exponentials_obstruction - HCS-P48 complete - Three exa
 henon_cyclic_resultant_packet_obstruction - HCS-P49 complete - Full multiplier-field cyclic norms are forced squares, while trace-field Lehmer--Pierce sequences and ideal packets survive as collective arithmetic structures.
 henon_tagged_prime_ideal_packet_assembly - HCS-P50 complete - Tagged trace-field prime-ideal packets assemble exactly at finite cutoff, while rational-prime pushforward has kernel rank 30 and merges incompatible residue clocks.
 henon_abel_graded_all_orbit_packet_germ - HCS-P51 complete - The finite packet ledger extends to an all-primitive-orbit Banach-valued holomorphic germ, while one exact orbit forces radius one and divergence at the ungraded Abel boundary.
+henon_totient_abel_boundary_escape - HCS-P52 complete - The exact period-four packet has a totient-driven Abel constant and Gamma(2,1) scaled-index profile, while its renormalized tagged divisor vectors have no norm or weak boundary.
+henon_pressure_weighted_all_orbit_abel_law - HCS-P53 complete - Full multiplier Mahler heights govern a proved pressure-weighted all-orbit Abel boundary and joint pressure-height/Gamma product law in the certified safe half-plane.
 
-`P43`--`P51` are the unique registry aliases for the pressure/orbit lane.
+`P43`--`P53` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
-strings to preserve their published hashes; `P48`--`P51` were born
+strings to preserve their published hashes; `P48`--`P53` were born
 namespaced. The unqualified IDs `C43`--`C48` in this repository belong to
 the full-kernel cubic lane listed in the theorem table below.
 
@@ -70,6 +72,8 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_pressure_weighted_all_orbit_abel_law/](henon_pressure_weighted_all_orbit_abel_law/) | P53: every orbit packet has leading coefficient \(\varphi(n)\log M(f_{\lambda_\gamma})/2\), and the Abel boundary interchanges with the complete pressure-weighted primitive-orbit sum; the joint limit is the pressure-height orbit law times Gamma\((2,1)\) | First pressure-weighted all-orbit packet boundary; Route A exploratory, A3 partial, pressure-critical continuation still open |
+| [henon_totient_abel_boundary_escape/](henon_totient_abel_boundary_escape/) | P52: the exact period-four packet mass is \(\varphi(n)\log L/2+O_L(1)\), giving a scalar Abel constant and Gamma\((2,1)\) scaled-index escape profile; the tagged vectors have no norm or weak limit | First source-native packet boundary law; Route A exploratory, A3 partial, all-orbit boundary still open |
 | [henon_abel_graded_all_orbit_packet_germ/](henon_abel_graded_all_orbit_packet_germ/) | P51: all primitive H6 cyclotomic packet divisors form a jointly holomorphic two-variable germ in a universal tagged Banach space; the period-four orbit has exact Abel radius one | First all-orbit arithmetic packet germ; Route A exploratory, A3 partial, raw boundary refuted |
 | [henon_mu3_weight_clock_bifurcation/](henon_mu3_weight_clock_bifurcation/) | C51: the second, third, and fourth cohomological Hénon moments split uniformly into weight-zero and weight-one packets of total rank \(4^n-1\); their exact \(2/n\) Log-\(L\) extraction aligns only the leading odd rail and proves a Tate-invariant factorwise center bifurcation | Structural completion audit, weight--clock theorem, and scoped direct-packet obstruction; inherited continuation remains \(\Re s>1/5\), Route A exploratory |
 | [henon_mu3_elliptic_resummation_fourth_moment/](henon_mu3_elliptic_resummation_fourth_moment/) | C50: explicit \(K=\mathbb Q(\sqrt{-3})\)-rational symmetries split the genus-four second-moment Jacobian as \(E_+^2\times E_-^2\) up to \(K\)-isogeny; modular resummation of that wall and a fourth-moment Fermat-sixfold/\((2,3)\)-fivefold cancellation extend the normalized Euler object and a tenth-order normalized-semifinite determinant to \(\Re s>1/5\) | Strongest current analytic continuation; Route A remains exploratory and A3 partial |

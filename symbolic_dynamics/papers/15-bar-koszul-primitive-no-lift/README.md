@@ -55,7 +55,11 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=code \
   pytest -q -p no:cacheprovider code/test_sdc17_bar_koszul_experiment.py
 python code/sdc17_bar_koszul_experiment.py
 sha256sum -c results/SHA256SUMS.txt
-latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+bibtex main
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 The experiment uses exact integer and rational arithmetic and no Riemann-zero

@@ -1,0 +1,47 @@
+\begin{tikzpicture}[
+  node distance=6mm and 8mm,
+  >=Latex,
+  every node/.style={font=\footnotesize,align=center},
+  source/.style={draw=formalblue,very thick,rounded corners,fill=formalblue!7,
+                 text width=0.77\linewidth,minimum height=9mm,inner sep=4pt},
+  pass/.style={draw=passgreen,thick,rounded corners,fill=passgreen!8,
+               text width=0.27\linewidth,minimum height=20mm,inner sep=4pt},
+  exact/.style={draw=formalblue,thick,rounded corners,fill=formalblue!7,
+                text width=0.29\linewidth,minimum height=20mm,inner sep=4pt},
+  warn/.style={draw=warningamber,thick,rounded corners,fill=warningamber!10,
+               text width=0.29\linewidth,minimum height=20mm,inner sep=4pt},
+  stop/.style={draw=stopred,very thick,rounded corners,fill=stopred!8,
+               text width=0.77\linewidth,minimum height=10mm,inner sep=4pt},
+  arrow/.style={->,thick,draw=charcoal}
+]
+\node[source] (base) {Same tensor-subset full shift, now in its two-block edge presentation\\
+$S\to T$ carries the unchanged arrival weight $w(T)$};
+\node[source,below=of base] (rule) {Intrinsic transition rule in $S_3$:\quad
+$S\subsetneq T\mapsto r=(12)$,\quad $T\subsetneq S\mapsto t=(23)$,\quad otherwise $e$};
+
+\node[pass,below left=8mm and -1mm of rule] (oned) {\textbf{one-dimensional blocks}\\[2pt]
+$D_{\one}=D_{\sgnrep}=(1-x)(1-y)$\\[2pt]
+clean scalar shadow};
+\node[exact,below=8mm of rule] (comm) {\textbf{genuine holonomy}\\[2pt]
+$\gamma_\square=[p,pq,q,pq]$\\
+$H(\gamma_\square)=(rt)^2\ne e$\\
+standard-character gap $3$};
+\node[warn,below right=8mm and -1mm of rule] (leak) {\textbf{standard block leaks}\\[2pt]
+$[x^2y]\,\Delta\log D=-3$\\
+$[xy^2]\,\Delta\log D=-3$\\
+$[x^2y^2]\,\Delta\log D=-6$};
+
+\node[source,below=11mm of comm] (merge) {Noncommutativity is real, but the mixed subset inventory remains visible;\\
+finite $S_3,D_4,Q_8$ all-irrep-clean tables collapse to the counting gauge class};
+\node[stop,below=of merge] (decision) {\texttt{STOP\_ARITHMETIC\_SELECTIVITY}\qquad
+\texttt{PROVES\_TOO\_MUCH}\qquad \texttt{ROUTE\_A\_REJECTED}};
+
+\draw[arrow] (base) -- (rule);
+\draw[arrow] (rule) -- (oned);
+\draw[arrow] (rule) -- (comm);
+\draw[arrow] (rule) -- (leak);
+\draw[arrow] (oned) -- (merge);
+\draw[arrow] (comm) -- (merge);
+\draw[arrow] (leak) -- (merge);
+\draw[arrow] (merge) -- (decision);
+\end{tikzpicture}

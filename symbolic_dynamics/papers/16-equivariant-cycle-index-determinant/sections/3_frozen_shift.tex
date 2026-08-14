@@ -1,0 +1,145 @@
+\section{The frozen tensor-subset shift}
+\label{sec:frozen}
+
+\subsection{Tensor source and finite edge alphabet}
+
+Let
+\[
+  \M=\{F_n:n\ge1\},\qquad F_m\otimes F_n=F_{mn},
+  \qquad h(F_n)=\log n.
+  \tag{3.1}
+\]
+An object $F_n$ is tensor-irreducible precisely when $n$ is prime.  Fix a
+finite set $P$ of such tensor atoms and attach an independent formal variable
+$x_p$ to every $p\in P$.  For a nonempty subset $S\subseteq P$, set
+\[
+  x_S=\prod_{p\in S}x_p,
+  \qquad \eps(S)=(-1)^{|S|+1}.
+  \tag{3.2}
+\]
+
+\begin{definition}[Finite SD-C18 shift]
+\label{def:shift}
+The phase space is the one-vertex full edge shift with alphabet
+\[
+  \E(P)=2^P\setminus\{\varnothing\}.
+  \tag{3.3}
+\]
+An edge $S$ has scalar formal weight $w(S)=\eps(S)x_S$.  A closed orbit is a
+cyclic word of subset edges, identified under rotation only.  Reflection is
+not quotiented.
+\end{definition}
+
+Under the entropy specialization $p=F_\mathfrak p$,
+\[
+  x_p=e^{-sh(p)}=\mathfrak p^{-s},
+  \qquad
+  T(S)=\sum_{p\in S}h(p).
+  \tag{3.4}
+\]
+The atom set and roof follow from tensor factorization and entropy.  No
+von Mangoldt coefficient, Möbius value, target-zero datum, or fitted phase is
+part of the edge rule.
+
+\subsection{Rank-one edge-state transfer and scalar shadow}
+
+Let $V_P=\C[\E(P)]$ with orthonormal basis $e_S$, and define
+\[
+  u_P=\sum_{S\in\E(P)}e_S,
+  \qquad
+  \ell_x(e_S)=\eps(S)x_S,
+  \qquad
+  A_x=u_P\otimes\ell_x.
+  \tag{3.5}
+\]
+This is the edge-state presentation of the one-vertex weighted full shift:
+every arriving edge may be followed by every outgoing edge.
+
+Put
+\[
+  b_P(x)=\ell_x(u_P)
+  =\sum_{S\in\E(P)}\eps(S)x_S
+  =1-\prod_{p\in P}(1-x_p).
+  \tag{3.6}
+\]
+
+\begin{theorem}[Rank-one scalar determinant]
+\label{thm:rank-one}
+For every $r\ge1$,
+\[
+  A_x^r=b_P(x)^{r-1}A_x,
+  \qquad \tr A_x^r=b_P(x)^r,
+  \tag{3.7}
+\]
+and
+\[
+  \det(I-A_x)=1-b_P(x)=\prod_{p\in P}(1-x_p).
+  \tag{3.8}
+\]
+\end{theorem}
+
+\begin{proof}
+The rank-one formula gives
+$A_x^2(v)=\ell_x(v)\ell_x(u_P)u_P=b_P(x)A_x(v)$, and induction gives
+(3.7).  The trace of $u\otimes\ell$ is $\ell(u)$, while the matrix
+determinant lemma gives $\det(I-u\otimes\ell)=1-\ell(u)$.  Equation (3.6)
+then proves (3.8).
+\end{proof}
+
+Where the trace-log is defined formally or analytically,
+\[
+ -\log\det(I-zA_x)
+ =\sum_{r\ge1}\frac{z^r}{r}b_P(x)^r.
+ \tag{3.9}
+\]
+Unique primitive-root decomposition regroups (3.9) as a sum over primitive
+cyclic subset words and their repetitions.  A negative scalar edge contributes
+its actual powered sign $(-1)^r$ at repetition $r$.
+
+Theorem \ref{thm:rank-one} is the scalar shadow inherited from the preceding
+candidate.  SD-C18 asks for more: retain the atom-permutation information of
+the primitive words and determine whether it defines invariant Fredholm
+fibers of the same arithmetic transfer.
+
+\subsection{Relabeling and the \texorpdfstring{$C_2$}{C2} sign carrier}
+
+Let $G_P=\SP(P)$.  It acts on subset edges by
+\[
+  \rho(g)e_S=e_{gS}
+  \tag{3.10}
+\]
+and on the coefficient ring by relabeling the variables.  Before arithmetic
+specialization, primitive cyclic words therefore form multigraded $G_P$-sets.
+Their isomorphism classes can be retained in the Burnside ring and then
+linearized in the representation ring.  The cycle index records the same
+finite-label action in symmetric-function coordinates.
+
+The scalar sign requires a separate power convention.  Let $C_2=\{1,c\}$
+and let $\tau$ be its nontrivial character line.  Color an edge $S$ by
+\[
+  \tau^{|S|+1}.
+  \tag{3.11}
+\]
+Evaluation at $c$ recovers $\eps(S)$.  More importantly,
+\[
+  \psi^r(\tau^{|S|+1})(c)
+  =\tau(c^r)^{|S|+1}
+  =\eps(S)^r.
+  \tag{3.12}
+\]
+Thus the $C_2$-colored ledger respects the frozen temporal-power sign.  By
+contrast, treating the scalar coefficient $-1$ as an integer under Adams
+operations would leave it fixed and fail at every even repetition.
+
+\begin{definition}[Formal equivariant ledger]
+\label{def:ledger}
+For each finite $P$, the SD-C18 ledger is the multigraded primitive-cycle
+class in the completed $C_2$-colored Burnside/species ring, with color
+(3.11), $G_P$ relabeling (3.10), and Adams powers acting on both colors and
+monomial multidegrees.
+\end{definition}
+
+Definition \ref{def:ledger} is formal: it stores orbit types, marks,
+characters, and powers before a scalar readout.  It is not yet a fixed-
+operator character determinant.  The next section shows why retaining this
+formal layer is nevertheless informative.

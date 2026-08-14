@@ -27,6 +27,9 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [13-character-resolved-holonomy](papers/13-character-resolved-holonomy/README.md) | [PDF](papers/13-character-resolved-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/13-character-resolved-holonomy/) | positive-cone $\mathbb Z$-skew extension 把 reciprocal Euler product 精确放在 deck-neutral Fourier coefficient，并让同一 parent lift 的非零 Bloch modes 看见 recurrent mixed returns；但没有任何单独 character fiber 保持 Euler ledger，全部 nonprime/random controls 也会运动，而 inverse reversal 在二阶污染零模。 | **CHARACTER RESOLUTION / ROUTE-A REJECTED / SD-C15** |
 | [14-tensor-bar-mobius-selector](papers/14-tensor-bar-mobius-selector/README.md) | [PDF](papers/14-tensor-bar-mobius-selector/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/14-tensor-bar-mobius-selector/) | 函子性 Abelian charge 被严格分类为 atom valuations，divisor-category cocycle 全为 coboundary；转向全局 tensor-bar grammar 后，同一 signed symbolic determinant 在 $\Re s>1$ 的 endpoint completion 中精确给出 $1/\zeta$ 与 $\Lambda_\otimes=\mu_\otimes*h$。但该反演对任意 weighted inventory 都成立，且 primitive cycles 是 factorization necklaces 而非 primes。 | **TENSOR-BAR DETERMINANT / ROUTE-A REJECTED / SD-C16** |
 | [15-bar-koszul-primitive-no-lift](papers/15-bar-koszul-primitive-no-lift/README.md) | [PDF](papers/15-bar-koszul-primitive-no-lift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/15-bar-koszul-primitive-no-lift/) | bar–Koszul squarefree subset shift 的标量 determinant 仍为 $\prod_p(1-x_p)$，但 $p^2q^2$ 的 primitive 账本为 $1^+$ 对 $2^-$，只能借低阶 $pq$ 轨道的二次重复抵消；$pqr$ 的残差为 $\mathbf1\oplus\mathrm{sgn}-\mathrm{Std}$，排除 $S_3$-自然的 sign involution。 | **PRIMITIVE NO-LIFT / ROUTE-A REJECTED / SD-C17** |
+| [16-equivariant-cycle-index-determinant](papers/16-equivariant-cycle-index-determinant/README.md) | [PDF](papers/16-equivariant-cycle-index-determinant/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/16-equivariant-cycle-index-determinant/) | Burnside/cycle-index ledger 精确保留 $pqr$ 的 character residual $(0,0,3)$，但算术权重 $x_p=p^{-s}$ 使固定 transfer 的置换 stabilizer 退化为恒等；等权恢复对称时非平凡 isotypes 全被 rank-one transfer 杀掉，而 diagonal equivariant lift 又引入 mixed-subset Euler factors。 | **FORMAL EQUIVARIANT LEDGER / ROUTE-A REJECTED / SD-C18** |
+| [17-fiber-cocycle-artin-factor](papers/17-fiber-cocycle-artin-factor/README.md) | [PDF](papers/17-fiber-cocycle-artin-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/17-fiber-cocycle-artin-factor/) | 真正 commuting 的 $C_2$ fiber 在同一 subset shift 中给出 Artin blocks $D_+=1/\zeta(s)$、$D_-=\zeta(s)/\zeta(2s)$ 与 whole determinant $D_{\rm reg}=1/\zeta(2s)$；但 mixed primitive lifts 仍大量存在，全部 matched inventories 也精确复制该分解。 | **ARTIN FACTOR / ROUTE-A REJECTED / SD-C19** |
+| [18-incidence-transition-holonomy](papers/18-incidence-transition-holonomy/README.md) | [PDF](papers/18-incidence-transition-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/18-incidence-transition-holonomy/) | subset-incidence transition rule 产生了真正非交换、非 one-letter-coboundary 的 $S_3$ holonomy；trivial/sign blocks 仍保留标量 Euler factor，但 faithful standard block 精确泄漏 mixed primitive coefficients，且全部 matched inventories 都复制该现象。 | **GENUINE TRANSITION HOLONOMY / ROUTE-A REJECTED / SD-C20** |
 
 ### 论文 1 的候选分离结论
 
@@ -331,13 +334,138 @@ PROVES_TOO_MUCH**。下一步 Paper 16 只追踪尚未被 scalar augmentation �
 Burnside/representation-valued cycle-index residual，检验它能否成为同一算术
 Fredholm object 的 character mode；Route B 继续锁定。
 
+### 论文 16：等变 residual 成立，算术 fixed-fiber symmetry 失败
+
+Paper 16 将 Paper 15 的 $pqr$ residual 提升到 Burnside/representation-valued
+cycle index。其正、负 primitive $S_3$-sets 给出
+
+$$
+R_{pqr}=[S_3/S_3]+[S_3/C_3]-[S_3/C_2],
+$$
+
+对应 character 与 subgroup marks 分别为
+
+$$
+\chi(e,(12),(123))=(0,0,3),
+\qquad (\phi_{\{e\}},\phi_{C_2},\phi_{C_3},\phi_{S_3})=(0,0,3,1).
+$$
+
+由于 $pqr$ 是 squarefree multidegree，任何 $r>1$ Adams/power 项都不能消掉这个
+residual；formal species/cycle-index ledger 因而是真正的正结果。
+
+但它不能成为算术 fixed-operator 的 character Fredholm decomposition。若
+$A_x$ 是 subset-edge transfer，则
+
+$$
+\rho(g)A_x\rho(g)^{-1}=A_{g\cdot x}.
+$$
+
+在 $x_p=p^{-s}$、$\Re s>0$ 时，各权重模严格不同，固定 $A_x$ 的 permutation
+stabilizer 只有恒等元。令所有权重相等虽恢复 $S_n$，rank-one transfer 的像却只在
+trivial isotype，所有非平凡 resolved determinants 都等于 $1$。改用保留 subset
+表示的 diagonal lift 又得到
+
+$$
+\operatorname{sdet}(I-D_x)
+=\prod_{\varnothing\ne S}(1-x_S)^{(-1)^{|S|+1}},
+$$
+
+从两原子起便多出 $(1-x_px_q)^{-1}$ 等 mixed factors。17/17 tests、4,008 个
+$C_2$ sign-power checks、56 个 ghost checks 和 455/455 controls 全部支持这一
+incompatibility triangle：**exact Euler augmentation、nontrivial character motion、
+commuting arithmetic symmetry** 在当前 canonical lifts 中不能同时成立。
+
+阶段结论为 **GO_FORMAL_EQUIVARIANT_LEDGER /
+STOP_CHARACTER_FREDHOLM_FIBERS / STOP_STANDARD_SUPERTRACE_INTERPRETATION /
+PROVES_TOO_MUCH**。Paper 17 已把群作用从 prime-label relabeling 移到真正 commuting
+的 finite fiber，测试同一 symbolic skew extension 的 Artin factors；Route B 继续锁定。
+
+### 论文 17：真正的有限 fiber 成立，但 Artin blocks 仍不选择算术
+
+Paper 17 不再让群置换不同的 arithmetic roofs，而是在同一个 signed subset shift 上
+加入 commuting 的 $C_2$ deck fiber。对非空 subset symbol $S$ 冻结
+$\alpha(S)=|S|\bmod2$，则 regular transfer 的两个 character blocks 在 $z=1$ 精确满足
+
+$$
+D_+(s)=\prod_p(1-p^{-s})=\frac1{\zeta(s)},\qquad
+D_-(s)=\prod_p(1+p^{-s})=\frac{\zeta(s)}{\zeta(2s)},
+$$
+
+而真正属于整个 skew extension 的 determinant 是
+
+$$
+D_{\rm reg}(s)=D_+(s)D_-(s)
+=\prod_p(1-p^{-2s})=\frac1{\zeta(2s)}.
+$$
+
+因此这是一个合法的 same-object Artin decomposition，却不是把单个 block 的 divisor
+偷换成 whole determinant。primitive 账本也保持了这一边界：若一个 $C_m$ cocycle
+在 base primitive 上的总 charge 为 $c$，lift 要经过
+$m/\gcd(m,c)$ 次 base traversal 才闭合，并分裂为 $\gcd(m,c)$ 个 lifted cycles。
+prime singleton 的 clock 因而被 fiber order 放大，而 mixed subset primitives 在每个
+非平凡 cutoff 仍可立即闭合。
+
+更一般地，inclusion-compatible、relabel-natural 且 operator-coherent 的 atom-local
+one-letter cocycle 必须形如 $\alpha(S)=a^{|S|}$；若 extension transitive，其有效像只能
+是 cyclic。这关闭了 Paper 16 留下的 one-letter loophole，但不覆盖真正依赖 transition
+的 cocycle。14/14 tests、300 个 repetition rows、350 个 $C_m$ character rows、
+350 个 primitive/lift rows 与 72,079 张自然性表全部 exact；然而 64/64
+composite、shuffled、random-rational controls 也全部通过，control margin 为零。
+
+阶段结论为 **GO_GENUINE_FINITE_FIBER / GO_SAME_OBJECT_ARTIN_FACTORS /
+STOP_PRIMITIVE_PRIME_MATCHING / STOP_ARITHMETIC_SELECTIVITY /
+PROVES_TOO_MUCH**。Paper 18 已转向同一 tensor-subset grammar 上真正非交换的
+transition holonomy，检验它能否逃出 cyclic degree rigidity；Route B 继续锁定。
+
+### 论文 18：非交换 transition holonomy 成立，但 faithful block 精确泄漏
+
+Paper 18 在同一 tensor-subset full shift 的完整 directed-edge presentation 上冻结
+$G=S_3$。若 $S\subsetneq T$，edge label 为 $r=(12)$；若
+$T\subsetneq S$，label 为 $t=(23)$；其余为恒等元。这个 cocycle 不是 Paper 17
+的 one-letter degree cocycle加 vertex coboundary：三原子 incidence loops 已给出
+不交换的 based holonomies，而 edge-marked 四步 commutator cycle 的 character gap
+精确等于 $3$。
+
+两原子 character blocks 展示了最清楚的 same-object 分裂。trivial 与 sign blocks
+都精确等于
+
+$$
+D_{mathbf1}(x,y)=D_{mathrm{sgn}}(x,y)=(1-x)(1-y),
+$$
+
+但二维 standard block 为
+
+$$
+D_{mathrm{Std}}(x,y)
+=(1-x)^2(1-y)^2+3xy(x+y)(xy+1)(x+y-1).
+$$
+
+因此真正看见非交换 holonomy 的 faithful factor 必然同时看见 mixed symbolic cycles：
+$\Delta\log D$ 中 $x^2y$、$xy^2$ 的系数为 $-3$，$x^2y^2$ 为 $-6$；
+未标记的 degree-six 聚合项 $x^3y^3=-9$ 与 edge-separated commutator certificate
+被严格分账。有限穷举进一步给出
+$S_3:36=36$、$D_4:64=64$、$Q_8:64=64$ 的
+“all-irrep clean = gauge”计数；$Q_8$ 只看一维 characters 时却有 512 个假 survivors。
+这些是 exact finite evidence，不被升格为一般 cohomology 定理。
+
+解析上，trivial block 在 $\Re s>1$ 有 trace-class realization；包含对称 incidence
+coupling 的 nontrivial blocks 只在 $\Re s>2$ 关闭。14/14 tests 与六类 inventory、
+五个冻结种子的 30/30 controls 全部通过，但 control margin 仍为零。由此阶段结论是
+**GO_GENUINE_TRANSITION_HOLONOMY / STOP_ARITHMETIC_SELECTIVITY /
+STOP_COMPLETED_DIVISOR / PROVES_TOO_MUCH**，Route B 继续锁定。
+
+这一批已经把“给 full-subset base 继续加 fiber/character/holonomy 装饰”的空间压缩得
+很小。下一批最值得做的仍是 Symbolic Dynamics，但应把算术约束写进 allowed
+transitions 本身：优先研究 constrained factorization、renewal 或 countable-Markov
+grammar，并在任何解析延拓之前先证明它能区分 matched arbitrary inventories。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十五篇论文](papers/)
+- [十八篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

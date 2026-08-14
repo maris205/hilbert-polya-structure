@@ -1,0 +1,64 @@
+\section{The scalar Abel boundary}
+
+We first recall the required average in a form that fixes the error budget.
+
+\begin{lemma}[Summatory totient]
+As $x\to\infty$,
+\begin{equation}
+\sum_{n\le x}\varphi(n)
+=\frac{3}{\pi^2}x^2+O(x\log(2x)).
+\label{eq:phisum}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+From $\varphi(n)=n\sum_{d\mid n}\mu(d)/d$,
+\[
+\sum_{n\le x}\varphi(n)
+=\frac12\sum_{d\le x}\mu(d)
+\left(\lfloor x/d\rfloor^2+\lfloor x/d\rfloor\right).
+\]
+Replacing the floors costs $O(x\sum_{d\le x}d^{-1})$.  Extending
+$\sum_{d\le x}\mu(d)d^{-2}$ to infinity costs $O(x)$ after multiplication
+by $x^2$, and the infinite sum is $1/\zeta(2)=6/\pi^2$.
+\end{proof}
+
+Put
+\begin{equation}
+Z(\tau)=\sum_{n\ge3}b_ne^{-\tau n},\qquad \tau>0.
+\label{eq:Ztau}
+\end{equation}
+
+\begin{theorem}[Totient Abel law]
+As $\tau\downarrow0$,
+\begin{equation}
+Z(\tau)=\frac{3\log L}{\pi^2\tau^2}
++O_L\!\left(\frac{\log(2/\tau)}{\tau}\right).
+\label{eq:Zasymptotic}
+\end{equation}
+Equivalently,
+\begin{equation}
+\lim_{u\uparrow1}(1-u)^2\sum_{n\ge3}b_nu^n
+=A_L:=\frac{3\log L}{\pi^2}
+=1.9330777456585248\ldots .
+\label{eq:Abel}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Stieltjes summation applied to \eqref{eq:phisum} yields
+\[
+\sum_{n\ge1}\varphi(n)e^{-\tau n}
+=\frac{6}{\pi^2\tau^2}
++O\!\left(\frac{\log(2/\tau)}{\tau}\right).
+\]
+Insert \eqref{eq:totientformula}.  The bounded correction contributes at
+most $C_L\sum_{n\ge3}e^{-\tau n}=O_L(\tau^{-1})$, proving
+\eqref{eq:Zasymptotic}.  Set $u=e^{-\tau}$ and use
+$(1-e^{-\tau})/\tau\to1$ for \eqref{eq:Abel}.
+\end{proof}
+
+The normalization is rigid.  The reciprocal packet contributes
+$\varphi(n)\log L/2$, so omitting the factor $1/2$ doubles the false target.
+The average order of $\varphi(n)$ is linear, so the boundary pole has order
+two rather than one.

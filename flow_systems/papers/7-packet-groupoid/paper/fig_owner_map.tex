@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+  >=Latex,
+  x=1cm,
+  y=1cm,
+  owner/.style={draw, rounded corners=2pt, align=center, inner sep=5pt,
+                text width=4.2cm, font=\small},
+  record/.style={draw, rounded corners=2pt, align=center, inner sep=5pt,
+                 text width=3.6cm, font=\small},
+  bridge/.style={-{Latex[length=2mm]}, thick},
+  nontransport/.style={-{Latex[length=2mm]}, dashed, thick}
+]
+  \node[owner] (source) at (-4.3,1.8) {\textbf{Published source}\\
+    \texttt{DEN-WITT-Z-FIN}\\
+    packets, repetitions, $\log p$ clocks};
+  \node[owner] (proxy) at (3.4,1.8) {\textbf{Selected proxy}\\
+    \texttt{MASS-FAM}\\
+    $Y_p$, $\mathcal M_p$, $\tau_m$};
+  \node[record] (flat) at (1.0,-0.8) {\textbf{Branch F}\\
+    \texttt{RETURN-DIST-M}\\
+    $C_{p,f}$ and $\Theta_m$};
+  \node[record] (zero) at (5.8,-0.8) {\textbf{Branch K}\\
+    \texttt{K0-M1}\\
+    $K_s$ and $D^{\mathrm{pr}}_{\tau}$};
+
+  \draw[nontransport] (source) --
+    node[fill=white, inner sep=1.5pt, font=\scriptsize]
+    {set-level motivation only} (proxy);
+  \draw[bridge] (proxy) -- node[left, font=\scriptsize] {owns} (flat);
+  \draw[bridge] (proxy) -- node[right, font=\scriptsize] {owns} (zero);
+  \draw[densely dashed, <->, gray] (flat) -- (zero);
+  \node[font=\scriptsize] at (3.4,-1.75)
+    {shared parent; distinct operator and functional};
+\end{tikzpicture}
