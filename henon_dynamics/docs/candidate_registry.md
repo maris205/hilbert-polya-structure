@@ -1421,3 +1421,31 @@ period-four term beyond index 12.  No all-orbit packet trace, continuation,
 or operator follows.  The collective lane has tuple **(A1_WEAK, A2_FAIL,
 A3_FAIL, A4_FORMAL_HINT)** and overall **ROUTE_A_EXPLORATORY**; full-field
 norm promotion is separately `STOP_SCOPED_SQUARE_NORM`.
+
+## HCS-P50 tagged prime-ideal packet assembly (2026-08-14)
+
+Candidate **HCS-P50** makes the surviving HCS-P49 ideal lane explicit; see
+the [HCS-P50 project](../henon_tagged_prime_ideal_packet_assembly/).  For a
+finite signed H6 source set, each inversion-fixed half packet
+
+\[
+\beta_{\gamma,n}
+=\lambda_\gamma^{-\varphi(n)/2}\Phi_n(\lambda_\gamma)
+\in\mathcal O_{F_\gamma}
+\]
+
+is factored before taking a rational norm.  The resulting free divisor ledger
+retains `(orbit, cyclotomic index, trace-field prime ideal)`, and rational norm
+pushforward is exactly weighted by residue degree.  At residue
+characteristic not dividing \(n\), every extending multiplier-field prime
+sees \(\lambda_\gamma\) with exact order \(n\).
+
+The signed period \(1,3,4\), \(3\le n\le20\) certificate has 125 tagged atoms
+over 95 rational primes, so the free pushforward kernel has rank 30.  The
+prime \(29\) carries exact orders \(7,14,15\), and \(p=109,n=11\) has two
+distinct split period-one primes plus a period-three prime.  Thus untagged
+rational-prime identification is `STOP_SCOPED_NONINJECTIVE`, while the
+finite tagged ledger is `PROVED_TAGGED_FINITE_CUTOFF_LEDGER`.  The tuple is
+**(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  A pressure-weighted all-orbit vector-valued limit
+is the next open theorem.

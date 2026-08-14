@@ -1,0 +1,388 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,booktabs,array,graphicx}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Norm}{N}
+\title{Tagged Prime-Ideal Packets and the Rational Pushforward\\
+Obstruction for H\'enon Monodromy}
+\author{Liang Wang$^{*1}$\\
+\small $^{1}$School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Wuhan 430074, P.R. China\\
+\small $^*$Corresponding author}
+\date{Preprint, August 2026}
+\hypersetup{pdfauthor={Liang Wang},pdftitle={Tagged Prime-Ideal Packets and the Rational Pushforward Obstruction for Henon Monodromy}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Full multiplier-field norms of primitive cyclotomic H\'enon packets are
+squares, but their inversion-fixed trace-field factors and prime ideals
+remain source-native arithmetic objects.  We construct an exact
+finite-cutoff assembly of those survivors.  Each atom retains the signed
+primitive orbit, cyclotomic index, trace-field prime ideal, residue degree,
+and ideal valuation.  The rational norm is an exact pushforward of this
+tagged divisor.  Moreover, at residue characteristic not dividing the
+cyclotomic index, every supporting multiplier-field prime sees the unstable
+multiplier with exact residue order equal to that index.  An exact
+certificate for signed primitive H6 periods one, three, and four and indices
+$3\le n\le20$ contains 125 tagged atoms over 95 rational primes.  The free
+rational pushforward therefore has kernel rank 30.  Explicit collisions
+show that the same rational prime carries different orbit labels, different
+indices, different trace primes, and even incompatible exact residue orders;
+$p=29$, for example, carries orders 7, 14, and 15.  Thus a rational-prime-
+only ledger is not a lossless H6 Euler clock.  The obstruction is scoped:
+weighted scalar statistics may remain useful, but an all-orbit trace first
+requires a convergent vector-valued tagged assembly.  No analytic
+continuation or Hilbert--P\'olya operator is claimed.
+\end{abstract}
+
+\section{Introduction}
+
+Periodic-orbit constructions often turn local determinant data into scalar
+Euler factors.  For the certified area-preserving H6 H\'enon survivor, this
+strategy encounters a sequence of algebraic obstructions.  The primitive
+return matrices have reciprocal algebraic-unit multipliers, but no common
+real power maps the exact primitive controls to rational primes.  Passing to
+cyclic resultants does produce integral sequences; taking the full
+multiplier-field norm, however, counts the inversion pair twice and yields a
+square.  The smallest surviving arithmetic objects are therefore the
+unit-normalized cyclotomic values in the fixed trace field and their
+prime-ideal factorizations.
+
+Cyclic resultants and their recurrences are well developed for a fixed
+polynomial \cite{hillar2005cyclic,hillarlevine2007recurrences}.  Primitive
+divisor theorems also give strong information for Lucas, Lehmer, and certain
+quadratic Lehmer--Pierce sequences \cite{bhv2001,flatters2009}.  Arithmetic
+dynamics supplies related Zsigmondy phenomena for iterates of a fixed
+rational map \cite{ingramsilverman2009,silverman2012}.  None of these results
+provides a common divisor ledger for varying signed H6 monodromy fields and
+pressure-weighted primitive orbits.
+
+This paper takes one deliberately finite but exact step.  We define a free
+tagged divisor group whose basis remembers an orbit, a cyclotomic index, and
+a trace-field prime ideal.  We prove that rational norms are exact
+residue-degree pushforwards of this object.  We then attach an intrinsic
+clock: away from residue characteristics dividing the index, every
+multiplier-field prime above a packet atom gives exact multiplier order.
+Finally, an executable H6 certificate proves that forgetting to rational
+primes is noninjective.
+
+The result has two complementary messages.  Positively, the phrase
+``retain the prime ideals'' becomes a concrete finite data type with exact
+functoriality.  Negatively, a bare rational prime cannot be a lossless local
+label: it can support incompatible source clocks.  This does not rule out
+derived scalar statistics.  It says that scalar pushforward must be treated
+as a lossy map, not as an identification.
+
+\section{Signed H6 fields and half packets}
+
+Consider
+\[
+H_6(q,p)=(1-6q^2-p,q),
+\qquad
+J(q)=\begin{pmatrix}-12q&-1\\1&0\end{pmatrix}.
+\]
+Every chronological return matrix has determinant one.  For a primitive
+orbit $\gamma$, let $\lambda_\gamma$ denote the actual signed unstable
+eigenvalue.  Its reciprocal is the second eigenvalue.  The sign is part of
+the source data: the exact period-three branch is negative.
+
+The three controls used below have multiplier polynomials
+\begin{align}
+f_1(X)&=X^4-4X^3-22X^2-4X+1,\label{eq:f1}\\
+f_3^-(X)&=X^4+76X^3-7374X^2+76X+1,\label{eq:f3}\\
+f_4(X)&=X^2-578X+1.\label{eq:f4}
+\end{align}
+They are reciprocal and monic with constant term one.  Write
+$K_\gamma=\mathbb Q(\lambda_\gamma)$, let $\iota$ be inversion, and set
+$F_\gamma=K_\gamma^{\langle\iota\rangle}$.  Their fixed trace fields and
+trace values $t_\gamma=\lambda_\gamma+\lambda_\gamma^{-1}$ are
+\[
+\begin{array}{c|c|c}
+\text{primitive period}&F_\gamma&t_\gamma\\\hline
+1&\mathbb Q(\sqrt7)&2+2\sqrt7\\
+3&\mathbb Q(\sqrt5)&-38-42\sqrt5\\
+4&\mathbb Q&578.
+\end{array}
+\]
+
+For $n>2$, define the inversion-fixed half packet
+\begin{equation}\label{eq:beta}
+\beta_{\gamma,n}
+=\lambda_\gamma^{-\varphi(n)/2}\Phi_n(\lambda_\gamma).
+\end{equation}
+Since $\varphi(n)$ is even, cyclotomic reciprocity shows that
+$\iota(\beta_{\gamma,n})=\beta_{\gamma,n}$.  The multiplier is a unit, so
+$\beta_{\gamma,n}\in\mathcal O_{F_\gamma}$.  This is the trace-field
+survivor of the full-field square norm.
+
+\section{Finite tagged assembly}
+
+Let $S$ be a finite set of pairs $(\gamma,n)$ with $n>2$.  For every
+supporting trace-field prime define a formal source atom.
+
+\begin{definition}[Tagged packet divisor]
+Let
+\[
+\mathcal A_S=\{(\gamma,n,\mathfrak q):
+(\gamma,n)\in S,\ \mathfrak q\mid(\beta_{\gamma,n})\}
+\]
+and
+\[
+\Div_{\mathrm{tag}}(S)
+=\bigoplus_{(\gamma,n,\mathfrak q)\in\mathcal A_S}
+\mathbb Z[\gamma,n,\mathfrak q].
+\]
+The finite tagged divisor is
+\begin{equation}\label{eq:tagdiv}
+\mathscr D_S=\sum_{(\gamma,n)\in S}
+\sum_{\mathfrak q}v_{\mathfrak q}(\beta_{\gamma,n})
+[\gamma,n,\mathfrak q].
+\end{equation}
+\end{definition}
+
+Here canonical means canonical relative to the fixed signed monodromy and
+the finite source set $S$.  We do not claim universal minimality among all
+possible encodings.
+
+Let $p=\mathfrak q\cap\mathbb Z$ and let
+$f(\mathfrak q/p)$ be the residue degree.  Define
+\begin{equation}\label{eq:push}
+\nu_S:[\gamma,n,\mathfrak q]\longmapsto
+f(\mathfrak q/p)[p]
+\end{equation}
+from the tagged group to the free rational-prime divisor group.
+
+\begin{theorem}[Exact finite assembly and norm pushforward]
+\label{thm:assembly}
+The divisor \eqref{eq:tagdiv} is a lossless finite record of the source
+prime-ideal factorizations.  For every $(\gamma,n)\in S$,
+\begin{equation}\label{eq:normpush}
+\operatorname{div}_{\mathbb Z}
+\left|\Norm_{F_\gamma/\mathbb Q}(\beta_{\gamma,n})\right|
+=\sum_{\mathfrak q\mid(\beta_{\gamma,n})}
+v_{\mathfrak q}(\beta_{\gamma,n})
+f(\mathfrak q/p)[p].
+\end{equation}
+Consequently the rational divisor of the product of all packet norms is
+$\nu_S(\mathscr D_S)$.
+\end{theorem}
+\begin{proof}
+Unique factorization of nonzero ideals gives
+$(\beta_{\gamma,n})=\prod_{\mathfrak q}\mathfrak q^{v_{\mathfrak q}}$.
+The ideal norm of $\mathfrak q$ is $p^{f(\mathfrak q/p)}$.  Taking norms and
+then rational prime divisors proves \eqref{eq:normpush}.  The source tags are
+basis coordinates in a finite free group, so they are retained before the
+pushforward.  Linearity proves the final assertion.
+\end{proof}
+
+\begin{remark}[Where the content lies]
+The retention of the tags is definitional once
+$\Div_{\mathrm{tag}}(S)$ is chosen.  The substantive assertions are that the
+H6 half packets canonically supply its coefficients, that residue degrees
+give the exact norm map \eqref{eq:normpush}, and that the same atoms carry
+the good-characteristic order in Theorem~\ref{thm:order}.  No novelty or
+minimality claim is made for free divisor groups in general.
+\end{remark}
+
+\section{The intrinsic good-characteristic clock}
+
+A trace-field atom supports primes in the multiplier field.  These two
+prime levels must be kept distinct.
+
+\begin{theorem}[Exact residue order]
+\label{thm:order}
+Let $\mathfrak q\mid(\beta_{\gamma,n})$ and let $\mathfrak P$ be any prime
+of $K_\gamma$ above $\mathfrak q$, of residue characteristic $p$.  If
+$p\nmid n$, then the reduction of $\lambda_\gamma$ in
+$(\mathcal O_{K_\gamma}/\mathfrak P)^\times$ has exact multiplicative order
+$n$.
+\end{theorem}
+\begin{proof}
+The unit factor in \eqref{eq:beta} implies
+$(\beta_{\gamma,n})\mathcal O_{K_\gamma}
+=(\Phi_n(\lambda_\gamma))$.  Hence
+$\Phi_n(\lambda_\gamma)\in\mathfrak P$.  Write $\bar\lambda$ for the
+reduction.  Since $p\nmid n$, $X^n-1$ is separable in characteristic $p$.
+In the reduced factorization
+\[
+X^n-1=\prod_{d\mid n}\Phi_d(X),
+\]
+the monic factors are therefore pairwise coprime.  Now
+$\Phi_n(\bar\lambda)=0$ implies $\bar\lambda^n=1$.  If its order were a
+proper divisor $d<n$, then $\bar\lambda$ would also be a root of
+$X^d-1=\prod_{e\mid d}\Phi_e(X)$, contradicting that coprimality.  Its
+order is exactly $n$.
+\end{proof}
+
+\begin{remark}[Bad characteristic]
+When $p\mid n$, exact order $n$ is impossible in a finite residue field:
+the multiplicative group has order $p^f-1$, which is prime to $p$.  The
+reduced cyclotomic factors also need not remain coprime.  Such atoms are
+retained in the divisor ledger, but their actual smaller order is not
+asserted or computed by Theorem~\ref{thm:order}.
+\end{remark}
+
+Thus $n$ is not merely a bookkeeping index at good characteristic.  It is an
+intrinsic finite-field clock.  Any pushforward that merges atoms with
+different $n$ can merge different exact clocks.
+
+\section{The rational pushforward obstruction}
+
+The norm map in Theorem~\ref{thm:assembly} is exact but need not be
+injective.  The following rank formula makes the information loss explicit.
+
+\begin{proposition}[Free kernel rank]
+\label{prop:kernel}
+Let $m=\#\mathcal A_S$, and let $r$ be the number of distinct rational
+primes below atoms in $\mathcal A_S$.  Then
+\[
+\operatorname{rank}_{\mathbb Z}\ker\nu_S=m-r.
+\]
+In particular, $m>r$ implies noninjectivity.
+\end{proposition}
+\begin{proof}
+For a fixed rational prime $p$, suppose $m_p$ tagged atoms lie above it.
+The $p$-block of \eqref{eq:push} is
+\[
+\mathbb Z^{m_p}\longrightarrow\mathbb Z,
+\qquad (x_i)\longmapsto\sum_i f_i x_i,
+\]
+with all $f_i>0$.  Its rank is one and its free kernel has rank $m_p-1$.
+Summing these independent blocks over the $r$ rational primes gives
+$\sum_p(m_p-1)=m-r$.
+\end{proof}
+
+Noninjectivity is a scoped obstruction.  It does not prohibit a useful
+weighted pushforward; it prohibits calling the untagged rational divisor a
+lossless reconstruction of the source packet.
+
+\section{Exact H6 certificate}
+
+The certificate computes the half packets for the signed controls
+\eqref{eq:f1}--\eqref{eq:f4} and indices $3\le n\le20$.  It reconstructs the
+trace polynomials, uses exact integral bases, factors ramified, inert, and
+split trace primes, and checks the multiplier order in every supporting
+finite-field factor.  No floating-point approximation or external prime
+table is used.
+
+The finite ledger contains
+\[
+54\ \text{packet rows},\qquad
+125\ \text{tagged atoms},\qquad
+95\ \text{distinct rational primes}.
+\]
+Proposition~\ref{prop:kernel} therefore gives
+\[
+\operatorname{rank}\ker\nu_S=125-95=30.
+\]
+This is not merely a signed-group artifact.  At $p=109,n=11$, three distinct
+effective basis atoms all have residue degree one and hence each maps to the
+same effective divisor $[109]$.  Noninjectivity is already visible on the
+positive atom set.
+There are 105 good-characteristic atoms with exact order and 20
+bad-characteristic atoms deliberately left uncertified.  All 54 rational
+norm factorizations reconstruct exactly, including 30 inherited half-norm
+crosschecks.  The canonical core digest is
+\begin{center}
+\small\texttt{9cc40f4b8ed5f54e36c70cb1db15b509837aee264e86bcf39395f827e59153ba}.
+\end{center}
+
+Table~\ref{tab:collisions} shows decisive source collisions.
+
+\begin{table}[t]
+\centering
+\caption{Selected tagged atoms.  The order column is the exact multiplier
+residue order; all displayed rows are good characteristic.}
+\label{tab:collisions}
+\small
+\resizebox{\textwidth}{!}{\input{../figures/collision_ledger.tex}}
+\end{table}
+
+The table exposes three independent tag requirements on this certificate.
+At $p=109,n=11$, periods one and three coexist, so the orbit tag is needed.
+Within period one, two distinct split trace primes coexist, so the
+prime-ideal tag is needed.  At $p=29$, the certified orders 7, 14, and 15
+coexist, so retaining only the rational prime loses the cyclotomic index and
+clock.  Further multi-order collisions occur at
+\[
+p\in\{11,19,29,79,131,307,38039\}.
+\]
+The signed period-three branch is separately mutation-tested: replacing it
+by the positive modulus changes its packet.
+
+These controls do not prove that our key is categorically minimal.  They
+prove that the displayed orbit, index, prime-ideal, and sign coarsenings lose
+actual information in the exact H6 data.
+
+The certificate is finite and is not evidence for an asymptotic density of
+collisions or of primitive rational divisors.  Its role is sharper and
+narrower: it is an exact counterexample to injectivity of the proposed
+rational-prime-only source map.
+
+\section{Source boundary and the next theorem}
+
+Hillar's cyclic-resultant framework and the Hillar--Levine recurrence theory
+concern one fixed polynomial \cite{hillar2005cyclic,hillarlevine2007recurrences}.
+Flatters' theorem supplies eventual primitive rational divisors for the
+period-four real-quadratic Lehmer--Pierce sequence \cite{flatters2009}, while
+the Bilu--Hanrot--Voutier theorem treats Lucas and Lehmer numbers
+\cite{bhv2001}.  Ingram--Silverman and related dynamical-Zsigmondy work treat
+orbits of a fixed rational map \cite{ingramsilverman2009,silverman2012}.
+These are strong positive analogues, but none accepts the present family of
+varying signed H6 monodromy fields and pressure weights.
+
+The next theorem must therefore begin with the tagged source object.  A
+schematic target is a pressure-filtered divisor measure
+\[
+\mathfrak D_T
+=\sum_{\substack{\gamma\ \mathrm{primitive}\\\ell_P(\gamma)\le T}}
+W_T(\gamma)
+\sum_{n\ge3}\sum_{\mathfrak q\mid(\beta_{\gamma,n})}
+v_{\mathfrak q}(\beta_{\gamma,n})[\gamma,n,\mathfrak q].
+\]
+One must specify a common vector-valued topology, derive $W_T$ from the H6
+pressure clock, and prove convergence before applying a rational norm map.
+No such theorem is supplied here.
+
+The strict Route-A tuple is
+\[
+(A1_{\rm WEAK},A2_{\rm FAIL},A3_{\rm FAIL},A4_{\rm FORMAL\_HINT}),
+\qquad \texttt{ROUTE\_A\_EXPLORATORY}.
+\]
+There is no global Fredholm determinant, continuation theorem, functional
+equation, Hilbert space, or self-adjoint operator.  Route B is not
+authorized.
+
+\paragraph{Reproducibility.}
+The certificate is regenerated by
+\texttt{bash code/run\_c50.sh}.  The script uses exact integer, ideal-basis,
+and finite-field polynomial arithmetic, runs eleven unit and adversarial
+tests, and emits both the canonical JSON ledger and
+Table~\ref{tab:collisions}.  It reads no prime table or Riemann-zero table.
+
+\section{Conclusion}
+
+Prime-ideal packets can be assembled across a finite signed H6 source set
+without losing their provenance.  Rational norms are exact pushforwards, and
+good-characteristic packet atoms carry the cyclotomic index as an exact
+residue-order clock.  The same exactness reveals the obstruction: the
+rational-prime-only map has a positive free kernel and merges incompatible
+clocks.  The mathematically honest next bridge is therefore vector-valued
+and pressure weighted.  Scalarization, if useful, must come after that
+assembly theorem rather than replace it.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=4pt,
+              text width=43mm,minimum height=12mm},
+  src/.style={box,fill=blue!7,draw=blue!55!black},
+  result/.style={box,fill=green!8,draw=green!45!black},
+  grp/.style={box,fill=orange!10,draw=orange!65!black},
+  stop/.style={box,fill=red!7,draw=red!60!black},
+  arr/.style={-{Latex[length=2mm]},thick,draw=black!65},
+  darr/.style={-{Latex[length=2mm]},thick,dashed,draw=red!65!black}
+]
+\node[src] (mon) {full-shift tensor inventory\\
+  $\F_m\otimes\F_n=\F_{mn}$, $h(\F_n)=\log n$};
+\node[src, right=5mm of mon] (words) {nonempty ordered words\\
+  $T=\sum h$, $\eps=(-1)^{k+1}$};
+\node[src, right=5mm of words] (shift) {one-vertex countable\\signed edge shift};
+
+\node[result, below=8mm of shift] (raw) {raw adjacency\\
+  $\Fbar=B/(1+B)$\\$\Ree s>\sbar$};
+\node[result, left=5mm of raw] (det) {same-object determinant\\
+  $\Dbar=1-z\Fbar$\\$\Dbar(s,1)=1/\zeta(s)$};
+\node[grp, left=5mm of det] (inc) {endpoint grouping\\
+  $c(n)=-\muten(n)$\\$\Ree s>1$};
+
+\node[result, below=8mm of det] (der) {frozen-roof derivative\\
+  $\partial_s\log\Dbar=\sum\Lamten(n)n^{-s}$};
+\node[stop, below=8mm of inc] (prim) {primitive cycles are factorization\\
+  necklaces, not tensor atoms};
+\node[stop, below=8mm of raw] (univ) {generic inventory: $D_X=(1+B_X)^{-1}$\\
+  \textsc{proves too much}};
+
+\draw[arr] (mon) -- (words);
+\draw[arr] (words) -- (shift);
+\draw[arr] (shift) -- (raw);
+\draw[arr] (raw) -- (det);
+\draw[arr] (det) -- (inc);
+\draw[arr] (det) -- (der);
+\draw[arr] (inc) -- (prim);
+\draw[darr] (raw) -- (univ);
+\end{tikzpicture}
