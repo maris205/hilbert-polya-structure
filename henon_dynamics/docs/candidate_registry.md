@@ -1449,3 +1449,44 @@ finite tagged ledger is `PROVED_TAGGED_FINITE_CUTOFF_LEDGER`.  The tuple is
 **(A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  A pressure-weighted all-orbit vector-valued limit
 is the next open theorem.
+
+## HCS-P51 Abel-graded all-orbit packet germ (2026-08-14)
+
+Candidate **HCS-P51** closes the next theorem named by P50; see the
+[HCS-P51 project](../henon_abel_graded_all_orbit_packet_germ/).  All
+primitive H6 orbit/index/prime-ideal atoms are placed in the common weighted
+space
+
+\[
+\mathcal B_{\rm tag}
+=\ell^1\!\left(\{(\gamma,n,\mathfrak q)\},
+f_{\mathfrak q}\log p\right).
+\]
+
+The packet norm is exactly
+\(\log|N_{F_\gamma/\mathbb Q}\beta_{\gamma,n}|\).  A new all-period
+conjugate-height bound, the exact symbolic census, the \(2^m\) fixed-algebra
+degree cap, and pressure expansion prove that
+
+\[
+\mathcal G(s,u)=
+\sum_{\gamma\ {\rm primitive}}e^{-s h_*\log|\Lambda_\gamma|}
+\sum_{n\ge3}u^nD_{\gamma,n}
+\]
+
+is jointly Banach-valued holomorphic for
+\[
+|u|<1,\qquad
+\Re s>\frac{\log(2\varphi)}{h_*\log J_*}.
+\]
+The certified safe threshold is \(3.125206884004728\ldots\).
+Residue-degree rational norm pushforward extends continuously with norm one.
+
+The Abel variable is essential: Flatters' theorem forces
+\(\|D_{\gamma_4,n}\|\ge\log2\) for every \(n>12\) on the exact period-four
+orbit.  Its \(u\)-radius is exactly one, and the raw \(u=1\) series diverges.
+The Route-A tuple is **(A1_WEAK, A2_FAIL,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  Abel-boundary renormalization is the next open
+theorem; no determinant, continuation, von-Mangoldt law, or operator is
+claimed.

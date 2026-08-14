@@ -1,0 +1,53 @@
+\section{Executable certificate and adversarial controls}
+
+The proof is analytic, but every inherited interface is frozen in a compact
+certificate.  Table \ref{tab:certificate} summarizes the finite checks.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Interface & Check & Result\\
+\midrule
+Dependencies & P31/P43/P46/P49/P50 hashes & $8/8$\\
+Symbolic census & periods $1$ through $32$ & exact\\
+Degree envelope & rank cap $2^m$ & exact\\
+Period-four packets & indices $3$ through $20$ & $18/18$ P50 matches\\
+Extended packets & indices $3$ through $24$ & $22/22$ nonzero\\
+Pressure domain & certified threshold & $3.125206884004728$\\
+Independent tests & unit/adversarial & $10/10$\\
+\bottomrule
+\end{tabular}
+\caption{Compact HCS-P51 audit ledger.}
+\label{tab:certificate}
+\end{table}
+
+The producer reconstructs the exact marked census from the four-state
+matrix, builds the inversion-fixed period-four packets from cyclotomic
+polynomials, and records the analytic constants.  The independent checker
+does not import the producer.  It recomputes the census and constants and
+independently rereads all eight hash-locked dependency files.  It then
+attacks four possible promotions:
+\begin{enumerate}
+\item deleting the $2^m$ field-degree cost;
+\item replacing $|u|<1$ by $u=1$;
+\item promoting norm pushforward to injective;
+\item promoting an open continuation, determinant, or operator claim.
+\end{enumerate}
+All four are rejected.
+
+The finite computation does not establish Theorem \ref{thm:germ} by
+extrapolation.  It verifies the constants and dependency contracts used by
+the proof.  The all-period conclusion comes from Lemmas
+\ref{lem:height} and \ref{lem:packet-envelope} and the exact geometric
+majorant.
+
+\paragraph{Reproducibility.}
+The certificate, independent checker, unit tests, figure generator, source
+audit, and compiled PDF are included in the project directory.  No table of
+rational primes or zeta zeros is consumed.
+
+\paragraph{Data availability.}
+All finite data displayed in the paper are generated from
+\path{results/c51_certificate.json}.  The figure carries a machine-readable
+trace file recording the certificate hash and panel claims.

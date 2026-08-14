@@ -1,0 +1,67 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-P51
+source_commit: "parent 6ddcd0e2e592a5eb993d636a057fcc730f464aa7"
+evaluation_date: 2026-08-14
+candidate_definition: "all-primitive-orbit Abel-graded trace-field prime-ideal packet germ in a universal weighted tagged ell1 space"
+family: "area-preserving Henon dynamics"
+phase_space: "the certified four-rectangle H6 survivor"
+dynamics: "H6(q,p)=(1-6q^2-p,q)"
+parameters: "complex pressure variable s, Abel variable u, primitive orbit gamma, and cyclotomic index n>2"
+parameter_provenance: "HCS-P31 pressure, P43 symbolic census, P46 integral monodromy, P49 half packets, and P50 tagged divisors"
+clock: "pressure-normalized orbit length h_star log|Lambda_gamma| together with intrinsic cyclotomic order n"
+normalization: "beta_(gamma,n)=lambda_gamma^(-phi(n)/2) Phi_n(lambda_gamma)"
+determinant_convention: "none; a Banach-valued divisor series is not promoted to a determinant"
+orbit_cutoff: "no orbit cutoff in the theorem; finite sentinels use m<=32 and period-four 3<=n<=24"
+precision: "exact algebra plus double-precision displays of rigorously sourced constants"
+training_data: "none"
+forbidden_data: "prime tables, Riemann-zero tables, fitted weights, post-hoc Abel radii, or deletion of orbit/index/prime-ideal tags"
+artifact_paths:
+  - README.md
+  - PROOF_PACKAGE.md
+  - paper/paper.pdf
+  - code/c51_abel_germ.py
+  - code/independent_check.py
+  - results/c51_certificate.json
+source_lock:
+  object: "effective divisors of signed inversion-fixed H6 cyclotomic packets"
+  clock: "pressure orbit length and cyclotomic index retained as separate source-native gradings"
+  normalization: "unit-normalized half packet in F_gamma=Q(lambda+lambda^-1)"
+  topology: "ell1 over tagged orbit/index/trace-prime atoms with weight f(q/p) log p"
+  domain: "|u|<1 and Re(s)>log(2phi)/(h_star log J_star); certified safe Re(s)>3.125206884004728"
+  precision: "hash-locked dependencies and exact finite sentinels"
+  allowed_data: "P31/P43/P46/P49/P50 source artifacts and source-derived constants"
+  forbidden_data: "target prime/zero fitting, rational-prime tag merging, u=1 substitution, and determinant promotion"
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "all primitive H6 orbits and every n>2 carry a canonical tagged packet with an intrinsic residue-order interpretation at good characteristic"
+  strongest_failure: "no bijection or asymptotic identification with all rational primes is proved"
+  metrics: {all_orbit_theorem: true, all_cyclotomic_indices_above_two: true, rational_pushforward_injective: false}
+  artifacts: [PROOF_PACKAGE.md, paper/paper.pdf]
+a2:
+  verdict: A2_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "a complete Banach-valued analytic series and a norm-one pushforward"
+  strongest_failure: "no transfer operator, trace-class realization, Fredholm determinant, or trace-log identity"
+  metrics: {banach_series: true, fredholm_determinant: false}
+  artifacts: [paper/paper.pdf, notes/ROUTE_B_SCOPE.md]
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "joint Banach-valued holomorphy on an explicit nonempty two-variable domain"
+  strongest_failure: "the raw u=1 boundary diverges and no analytic continuation, functional equation, zero law, or von Mangoldt trace is proved"
+  metrics: {certified_sigma: 3.125206884004728, u_radius_period_four: 1, analytic_continuation: false}
+  artifacts: [results/c51_certificate.json, PROOF_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: OPEN
+  strongest_evidence: "source-native SL2 monodromy, exact cyclotomic clock, and all-orbit analytic packaging"
+  strongest_failure: "no Hilbert space, operator domain, self-adjointness, compact resolvent, trace formula, or zero correspondence"
+  metrics: {}
+  artifacts: [notes/ROUTE_B_SCOPE.md]
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "the all-orbit Abel-graded germ and continuous rational norm pushforward are proved only in the stated domain; the raw u=1 series diverges and no zeta, determinant, von Mangoldt law, continuation, or Hilbert-Polya operator is claimed"
+blocking_conditions: ["source-native Abel-boundary renormalization", "pressure-compatible von Mangoldt weighting after retaining tags", "operator or determinant realization"]
+next_smallest_test: "classify and test canonical subtractions or logarithmic derivatives for the period-four Abel boundary before attempting a global boundary value"
+route_b_invocation_allowed: false
