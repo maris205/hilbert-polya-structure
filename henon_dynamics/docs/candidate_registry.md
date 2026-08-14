@@ -1718,3 +1718,45 @@ subsystem only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  The full Galois-weighted A2 gate, rational-prime
 trace, all-period Hölder realization and operator remain open; Route B is not
 authorized.
+
+## HCS-P56 all-width incidence ladder and four-block obstruction (2026-08-14)
+
+Candidate **HCS-P56** continues the P55 regularity gate without another
+isolated block search; see the
+[HCS-P56 project](../henon_galois_excess_four_block_incidence_ladder/).
+The two primitive families
+
+\[
+A_m=0^{m-2}21,\qquad B_m=0^{m-3}231
+\]
+
+satisfy, for every \(m\geq3\),
+
+\[
+N_m(A_m)+N_m(B_{m+2})=N_m(A_{m+1})+N_m(B_{m+1}).
+\]
+
+Both insertion differences are the same signed three-atom row.  The first
+new member, \(B_6=000231\), has radical coordinates, trace
+\(18062+5352\sqrt7\), an irreducible reciprocal degree-four multiplier
+polynomial and excess \(\operatorname{arcosh}(9031-2676\sqrt7)\).
+
+At \(m=4\), exact period-five isolators and the integer comparison
+\(709^2>104\cdot3902\) prove that the excesses violate the forced identity.
+Therefore no locally constant potential of width at most four realizes all
+H6 Galois excesses.  A determinant-one width-five minor interpolates the
+seven-cycle witness, so this finite obstruction is sharp rather than a
+general Hölder no-go.
+
+For one-sided Hölder data the ladder forces
+
+\[
+|E(A_m)+E(B_{m+2})-E(A_{m+1})-E(B_{m+1})|
+\leq C(4m+4)\vartheta^{\alpha m}.
+\]
+
+The discrepancy asymptotics remain the next all-period theorem.  The
+Route-A tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical
+subsystem only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  No rational-prime trace, full Galois-weighted
+determinant, operator or Route-B promotion is claimed.
