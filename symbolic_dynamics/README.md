@@ -798,21 +798,21 @@ Paper 26 冻结非空词上的循环系数：单色词取 (1)，mixed 词取 (0)
 projectors 都能精确实现该规则；困难不在是否存在 selector，而在它能否避免存储
 每个收到的颜色。
 
-答案是一个严格的 character-rigidity 定理。对 (m) 个颜色，determinant convention
+答案是一个严格的 character-rigidity 定理。对 $m$ 个颜色，determinant convention
 下的 Hankel rank 与 observable syntactic algebra 分别为
 
 $$
-m,qquad mathbb C^m;
+m,\qquad \mathbb C^m;
 $$
 
 literal nonempty-language convention 则多一个 dormant mode，成为
-(m+1) 与 (mathbb C^{m+1})。任何有限 ordinary trace realization 的半单化都
-含每色恰一个一维 character；任何 even (mathbb Z/2)-graded realization 在
+$m+1$ 与 $\mathbb C^{m+1}$。任何有限 ordinary trace realization 的半单化都
+含每色恰一个一维 character；任何 even $\mathbb Z/2$-graded realization 在
 Grothendieck 群中也有同一净颜色类。额外自由只能是 dormant 模、偶奇配对模与
 迹不可见 radical，因此完整 graded determinant 被强制为
 
 $$
-prod_{i=1}^{m}(1-zx_i).
+\prod_{i=1}^{m}(1-zx_i).
 $$
 
 这里不声称原矩阵同时对角化：非交换上三角扩张可以让 presentation 看似连通，
@@ -821,7 +821,7 @@ $$
 而两个反向 mixed words 仍分别留下 supertrace (+1) 与 (-1)。
 
 把 selector 与 Paper 25 的 holomorphic de Rham sector 张量后，确有
-(Re s>1) 上 honest degreewise trace-class graded ratio，但 countable color fiber
+$\Re s>1$ 上 honest degreewise trace-class graded ratio，但 countable color fiber
 酉等价于 supplied labels 的 disjoint atom sum。58/58 tests、51,734 条 exact rows
 与 27 个双跑 byte-identical artifacts 验证了 wordwise、Hankel、radical、graded、
 de Rham、marker 与任意库存 firewalls。阶段结论是
@@ -830,13 +830,50 @@ STOP_FINITE_RECOGNIZABLE_ESCAPE / SEMISIMPLE_ATOM_BLOCK_COLLAPSE /
 PROVES_TOO_MUCH / ROUTE_A_REJECTED**。Paper 27 因而不再供应颜色投影，而从固定
 integer factorization/divisibility source 内生编译 atom idempotents；Route B 继续锁定。
 
+### 论文 27：source-derived atom ledger 通过，但 incidence compiler 有界相似于原子表
+
+Paper 27 不再接收 prime list、颜色表或 prime-power coefficient table，而只冻结
+整数对象的 divisibility poset。底元 $1$ 的 covers 从 source relation 内生给出
+tensor atoms；若 $Z$ 是 incidence zeta、$M=Z^{-1}$、$E_n$ 是坐标 idempotent，则
+
+$$
+q_n=ZE_nM,\qquad q_nq_m=\delta_{nm}q_n.
+$$
+
+用 cover predicate 过滤 $q_n$ 后，每个非空 source word 的 trace 在且仅在它是同一
+atom 的 temporal repetition 时等于 $1$；composite source letter、mixed word 与
+错误 primitive necklace 都在取迹之前作为算子归零。Elias--gamma digit marker 也
+严格保留为 $u^{r\ell(p)}p^{-rs}$，所以这不是 after-the-fact coefficient filtering。
+
+在加权空间
+
+$$
+H_\eta=\left\{x:\sum_{n\ge1}n^{2\eta}|x_n|^2<\infty\right\}
+$$
+
+上，每个 $q_p$ 是 trace-one rank-one idempotent；当 $\eta>1$ 时，整族满足
+$q_p=ZE_pZ^{-1}$，其中 $Z$ 与 $Z^{-1}$ 都是有界算子。因此 marked transfer 与
+holomorphic de Rham graded ratio 都给出 honest atom Euler product，却与坐标
+atom table 有界相似。特别在 $u=1$ 时，特征值 $p^{-s}$ 强制 trace-class 域恰停在
+$\Re s>1$；scalar meromorphic continuation 不能冒充同一算子的 continuation。
+
+61/61 tests、2,384 条 exact/control/comparison rows 与 30 个 fresh double-run
+byte-identical artifacts 验证了 incidence inversion、cover atoms、逐词 selector、
+necklaces、marker、weighted Hilbert formulas、bounded similarity、de Rham ratio 与
+mutated-poset controls。阶段结论是 **GO_SOURCE_DERIVED_ATOM_ORBITS /
+GO_EXACT_NECKLACE_LEDGER / A1_PASS_ANALYTIC /
+STOP_INCIDENCE_SIMILARITY_COLLAPSE / STOP_CRITICAL_STRIP_CONTINUATION /
+ROUTE_A_REJECTED**。Paper 28 因而只保留同一 incidence parent 的原生 Gram 几何，
+检验其 chiral/adjoint completion 是否能在临界线产生非平凡、算术可选择的谱运动；
+Route B 继续锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十六篇论文](papers/)
+- [二十七篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

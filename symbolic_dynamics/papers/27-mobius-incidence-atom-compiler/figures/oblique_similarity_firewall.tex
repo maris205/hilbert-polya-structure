@@ -1,0 +1,39 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  box/.style={draw=charcoal,rounded corners=2pt,very thick,align=center,
+    inner sep=7pt,minimum height=23mm},
+  coord/.style={box,fill=formalblue!9,draw=formalblue},
+  map/.style={box,fill=warningamber!10,draw=warningamber},
+  obl/.style={box,fill=passgreen!9,draw=passgreen},
+  invariant/.style={box,fill=softgray,draw=charcoal},
+  open/.style={box,fill=stopred!7,draw=stopred,dashed},
+  arr/.style={-{Latex[length=1.6mm,width=1.2mm]},very thick,draw=charcoal},
+  darr/.style={-{Latex[length=1.6mm,width=1.2mm]},very thick,dashed,draw=stopred}
+]
+\node[coord,minimum width=42mm] (coordinate) at (0,0) {
+  coordinate table\\
+  $\epscoord_n\epscoord_m=\delta_{nm}\epscoord_n$\\
+  orthogonal in source coordinates};
+\node[map,minimum width=42mm] (zeta) at (5.6,0) {
+  unitriangular change\\
+  $\zeta\in1+J_N$\\
+  incidence off-diagonal data};
+\node[obl,minimum width=44mm] (oblique) at (11.5,0) {
+  compiled table\\
+  $q_n=\zeta\epscoord_n\zeta^{-1}$\\
+  oblique, primitive, complete};
+
+\node[invariant,minimum width=105mm] (cyclic) at (5.75,-2.75) {
+  ordinary cyclic invariant is unchanged:\quad
+  $\displaystyle\Tr Q(b)^r=\sum_n b_n^r$,\qquad
+  $\displaystyle\det(I-zQ(b))=\prod_n(1-zb_n)$};
+\node[open,minimum width=73mm] (adjoint) at (5.75,-4.65) {
+  not covered by ordinary similarity invariants:\\
+  mixed adjoint Gram geometry $q_p^*q_q$};
+
+\draw[arr] (coordinate.east) -- node[above,font=\scriptsize] {conjugate} (zeta.west);
+\draw[arr] (zeta.east) -- (oblique.west);
+\draw[arr] (coordinate.south) -- ++(0,-0.45) -| (cyclic.north west);
+\draw[arr] (oblique.south) -- ++(0,-0.45) -| (cyclic.north east);
+\draw[darr] (cyclic.south) -- (adjoint.north);
+\end{tikzpicture}

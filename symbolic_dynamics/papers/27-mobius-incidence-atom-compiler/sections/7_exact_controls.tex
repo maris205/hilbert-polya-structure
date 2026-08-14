@@ -1,0 +1,158 @@
+\section{Exact finite controls and evidence ownership}
+\label{sec:exact}
+
+The infinite claims above are proofs. A deterministic exact suite checks their
+finite algebra, marker bookkeeping, determinant identities, and failure
+controls independently. Integer arithmetic and rational fractions are used
+for every gating check; high precision appears only in one non-gating
+trace-log sanity line.
+
+The finalized integration passes all \(61/61\) regression tests and records
+2,384 exact ledger rows: 2,379 scientific, control, and comparison rows plus
+five strict-route gates. The row ownership is
+\[
+\begin{gathered}
+4\ \text{incidence inverse},\quad
+30\ \text{primitive},\quad
+900\ \text{pair},\quad
+256\ \text{cover},\\
+1016\ \text{necklace},\quad
+80\ \text{marker},\quad
+8\ \text{power trace},\quad
+4\ \text{Fredholm/de Rham},\\
+24\ \text{weighted Hilbert},\quad
+3\ \text{bounded similarity},\quad
+2\ \text{source mutation},\\
+30\ \text{stability/equivariance},\quad
+13\ \text{ablation},\quad
+9\ \text{analysis comparison},\quad
+5\ \text{route}.
+\end{gathered}
+\]
+
+\subsection{Compiler census}
+
+At the downset cutoff \(N=30\), the cover relation derives
+\[
+2,3,5,7,11,13,17,19,23,29
+\]
+as the atoms of \(1\). This displayed list is output, not input. The suite
+checks both products \(Z\mu=\mu Z=I\), every entry of
+\eqref{eq:kernel}, all \(30^2\) identities
+\[
+q_nq_m=\delta_{nm}q_n,
+\]
+completeness, exact rank and trace, and the obliqueness of every selected atom
+idempotent. Restriction from \(P_{30}\) to \(P_{18}\) reproduces the smaller
+compiler exactly. A deterministic nontrivial relabeling reproduces conjugate
+relabeling, ruling out hidden use of numeric prime names.
+
+\subsection{Words, necklaces, and markers}
+
+For the four source-derived atoms \(2,3,5,7\), every word through length six
+is checked. The cyclic-class census is shown in
+\cref{tab:necklace-census}. At every length, the only selected classes are
+the four monochromatic repetitions.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Exact cyclic-class census over the four source-derived atoms
+\(2,3,5,7\).}
+\label{tab:necklace-census}
+\begin{tabular}{rrr}
+\toprule
+word length \(r\) & all cyclic classes & selected classes \\
+\midrule
+1 & 4 & 4 \\
+2 & 10 & 4 \\
+3 & 24 & 4 \\
+4 & 70 & 4 \\
+5 & 208 & 4 \\
+6 & 700 & 4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Every word through length five over the alphabet \(2,3,4,5\) supplies a
+separate composite-letter control. In particular, a monochromatic \(4\)-word
+is rejected even though a temporal repetition of \(2\) survives. Marker
+exponents are checked through repetition eight and always equal
+\(r\ell(p)\).
+
+\subsection{Determinant fixtures}
+
+At the exact rational point
+\[
+(s,u,z)=(2,\tfrac12,\tfrac13),
+\]
+the \(30\times30\) incidence determinant is
+\begin{equation}
+\frac{
+13032061231684147510264082032595569214375
+}{
+13239391670016285360628993515288344395776
+},
+\label{eq:exact-incidence-determinant}
+\end{equation}
+equal to the finite source-atom product. All power traces through order eight
+agree with the corresponding atom sums.
+
+The suite also constructs separate finite zero- and one-form matrices and
+computes their ordinary determinants before taking the ratio. The exact
+graded result is
+\begin{equation}
+\frac{9217800049}{9364045824},
+\label{eq:exact-graded-ratio}
+\end{equation}
+again equal to the finite atom product. The order-30 trace-log residual is
+approximately \(3.95\times10^{-42}\); it is recorded only as a numerical
+sanity check and does not gate any theorem.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Falsification controls and the boundary each one owns.}
+\label{tab:falsification-controls}
+\begin{tabularx}{\textwidth}{L{37mm} L{45mm} Y}
+\toprule
+control & exact observed outcome & conclusion \\
+\midrule
+mutated source relation
+& covers become \(\{2,3,5,6\}\), and \(6\) is selected
+& compiler is faithful to the source and has no independent primality oracle \\
+scalar Möbius ablation
+& nonzero at \(6\), value \(-1\) at \(2\)
+& scalar inversion cannot replace the cover predicate \\
+zeta without inverse
+& the \(2\)- and \(4\)-columns fail cross-annihilation
+& Möbius inversion is required for orthogonal compilation \\
+no cover filter
+& every integer coordinate survives
+& incidence inversion alone has no atom selectivity \\
+relabeling
+& recompiled matrices equal conjugate relabeling
+& numeric names are not hard-coded \\
+cutoff restriction
+& every retained kernel entry stabilizes exactly
+& finite checks respect the locally finite infinite formula \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{What the computation does not prove}
+
+The exact suite corroborates finite identities, catches marker mistakes, and
+tests the ownership firewalls. It does not prove convergence of the countable
+operator series, boundedness of the global similarity, the sharp trace-class
+barrier, or the holomorphic determinant theorem. Those statements are owned
+by \cref{thm:rank-one,thm:global-similarity,thm:trace-class-transfer,%
+prop:trace-barrier,thm:graded-determinant}. No Riemann zero, target spectrum,
+private dataset, or fitted loss enters either the proofs or the exact suite.
+
+The canonical runner starts from a fresh result directory, fixes
+\texttt{PYTHONHASHSEED=0}, and executes the generator, tests, and analyzer
+twice. All 30 compared code/generated-result artifacts are byte identical,
+the 32-entry SHA-256 ledger passes, and the integrity audit reports no local
+cache or CRLF CSV artifact. This certificate covers code and generated
+results; it does not cover the manuscript or documentation.

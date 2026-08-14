@@ -1,0 +1,63 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  box/.style={draw=charcoal,rounded corners=2pt,very thick,align=center,
+    inner sep=6pt,minimum height=18mm},
+  source/.style={box,fill=formalblue!9,draw=formalblue},
+  pass/.style={box,fill=passgreen!9,draw=passgreen},
+  warn/.style={box,fill=warningamber!10,draw=warningamber},
+  stop/.style={box,fill=stopred!8,draw=stopred},
+  arr/.style={-{Latex[length=1.6mm,width=1.2mm]},very thick,draw=charcoal},
+  stoparr/.style={-{Latex[length=1.6mm,width=1.2mm]},very thick,draw=stopred},
+  note/.style={font=\sffamily\scriptsize,align=center,text=charcoal}
+]
+\node[source,minimum width=28mm] (source) at (0,0) {
+  fixed source\\
+  $(\N_{\ge1},\mid)$};
+\node[pass,minimum width=29mm] (covers) at (3.65,0) {
+  covers of $1$\\
+  $\At(P)=\Pp$\\[-1pt]
+  {\scriptsize derived, not listed}};
+\node[pass,minimum width=34mm] (compiler) at (7.7,0) {
+  incidence compiler\\
+  $q_n=\zeta\epscoord_n\mu$\\
+  $q_nq_m=\delta_{nm}q_n$};
+\node[pass,minimum width=34mm] (words) at (12.1,0) {
+  exact cyclic words\\
+  pure atom repeats $=1$\\
+  mixed/composite $=0$};
+\node[pass,minimum width=34mm] (derham) at (16.5,0) {
+  two honest degrees\\
+  local supertrace $=1$\\
+  marker $u^{r\ell(p)}$};
+\node[warn,minimum width=35mm] (product) at (20.95,0) {
+  surviving product\\
+  $\prod_p(1-zu^{\ell(p)}p^{-s})$\\
+  on the trace-class domain};
+
+\node[stop,minimum width=54mm] (collapse) at (9.8,-2.75) {
+  oblique-projector collapse\\
+  finite: $q_n=\zeta\epscoord_n\zeta^{-1}$\qquad
+  countable: bounded similarity for $\eta>1$};
+\node[stop,minimum width=44mm] (route) at (16.7,-2.75) {
+  no same-object continuation at $u=1$\\
+  no critical-line spectral mechanism};
+
+\draw[arr] (source.east) -- (covers.west);
+\draw[arr] (covers.east) -- (compiler.west);
+\draw[arr] (compiler.east) -- (words.west);
+\draw[arr] (words.east) -- (derham.west);
+\draw[arr] (derham.east) -- (product.west);
+\draw[stoparr] (compiler.south) -- ++(0,-0.6) -| (collapse.north west);
+\draw[stoparr] (product.south) -- ++(0,-0.6) -| (route.north east);
+\draw[stoparr] (collapse.east) -- (route.west);
+
+\draw[very thick,draw=charcoal] (-1.35,-4.15) -- (22.75,-4.15);
+\node[note,anchor=west,text=passgreen] at (-1.2,-4.5)
+  {A0 arithmetic source};
+\node[note,text=passgreen] at (6.2,-4.5)
+  {A1 exact atom orbits};
+\node[note,text=passgreen] at (13.0,-4.5)
+  {A2 honest graded determinant};
+\node[note,anchor=east,text=stopred] at (22.6,-4.5)
+  {A3/A4 fail; Route A rejected};
+\end{tikzpicture}
