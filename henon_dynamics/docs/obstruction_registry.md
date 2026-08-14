@@ -367,3 +367,9 @@ strings, while P48--P57 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O101 | Reflection-only physical pressure as a compiler for the full H6 survivor or all-conjugate Galois pressure | proved symbolic half-entropy obstruction | Exact transfer formulas and primitive reflection Möbius inversion give full primitive entropy `log(varphi)` but reflection entropy exactly `(1/2)log(varphi)`, hence reflection density `O(n varphi^(-n/2))`. | Stops a reflection-only compiler with uniformly subexponential compensating weights. It does not bound the number or height of algebraic closure roots, exclude exponentially growing Galois multiplicity, or prove any prime/operator statement. | ../henon_reflection_half_entropy_law/README.md |
+
+## HCS-P60 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O102 | Promotion of formal odd mixed-axis dynatomic degree to an effective primitive Galois population | proved formal-degree/effectivity interface obstruction | The exact closure degree is `2^((n+1)/2)` and odd-divisor Möbius inversion gives formal primitive entropy `(1/2)log(2)`, but projective-morphism dynatomic effectivity does not automatically apply to the birational Hénon extension intersected with a reversor fixed line. Repeated or excess lower-period intersection multiplicity is therefore not excluded for every period. | Stops inference from formal divisor degree alone to a reduced primitive-root count, Galois height pressure, or physical incidence. It does not negate the exact divisibility theorem, finite squarefreeness through period 15, or the possibility of a Hénon-specific transversality theorem. | ../henon_mixed_axis_dynatomic_entropy_gap/README.md |

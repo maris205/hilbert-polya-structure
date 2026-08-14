@@ -1929,3 +1929,36 @@ the algebraic reflection closures. Route A gains an analytic A1 result for
 the reflection subsystem but remains **ROUTE_A_EXPLORATORY**; Route B is not
 authorized. The next theorem is a primitive algebraic reflection dynatomic
 degree law and a comparison of its entropy with `(1/2)log(varphi)`.
+
+## HCS-P60 mixed-axis dynatomic entropy gap (2026-08-14)
+
+Candidate **HCS-P60** carries the P59 reflection census into the exact odd
+mixed-axis closure algebra; see the
+[HCS-P60 project](../henon_mixed_axis_dynatomic_entropy_gap/).  If
+`n=2m+1`, the fixed-axis recurrence gives
+
+\[
+F_n(X)=q_{m+1}(X)-q_m(X),\qquad \deg F_n=2^{m+1}.
+\]
+
+For every odd divisor `d|n`, quotient-ring periodicity proves `F_d|F_n`.
+The resulting formal Möbius divisor has degree
+
+\[
+D_n=\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}
+   =2^{(n+1)/2}+O\!\left(n2^{n/6+1/2}\right),
+\]
+
+and hence formal entropy `(1/2)log(2)`.  This is strictly larger than the
+physical reflection entropy `(1/2)log(varphi)` proved in P59.  Exact
+factorization for odd periods through 15 gives reduced closure polynomials
+and irreducible new quotients; the period-nine quotient is coefficientwise
+cross-locked to P58's degree-28 field.
+
+The degree statement is a formal algebraic population theorem, not an
+all-period reduced primitive-root census.  Standard dynatomic effectivity
+for projective morphisms does not automatically attach to the birational
+Hénon extension and its symmetry-line intersection.  Route A remains
+**ROUTE_A_EXPLORATORY** and Route B is not authorized.  The next theorem is
+an all-period transversality/intersection-multiplicity criterion, first on
+the certified physical survivor and then for the ambient closure roots.
