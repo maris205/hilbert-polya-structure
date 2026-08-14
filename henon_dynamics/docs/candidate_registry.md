@@ -1457,10 +1457,59 @@ No inert or global fractional root, automorphy, continuation, functional
 equation, RH statement, or self-adjoint generator follows.  The tuple is
 **(A1_WEAK, A2_SPLIT_LOCAL_ALGEBRA_ONLY,
 A3_PARTIAL_ARITHMETIC_STRUCTURE, A4_FORMAL_SYMMETRY_ONLY)** with overall
-**ROUTE_A_EXPLORATORY**.  C55 is locked to the four-dimensional rational
-equivariant deformation and projective Yukawa surface of the C53 rank-ten
-core, followed by an exact polarized-VHS comparison gate against honest
+**ROUTE_A_EXPLORATORY**.  This handed off to C55, which constructs the
+four-dimensional rational equivariant deformation and projective Yukawa
+surface of the C53 rank-ten core, followed by an exact necessary
+polarized-VHS comparison gate against honest
 \((h^{1,1},h^{2,1})=(1,4)\) Calabi--Yau families.
+
+## HCS-C55 rational Yukawa surface and relative CY3-type VHS (2026-08-15)
+
+Candidate **HCS-C55** realizes the variational gate opened by C54; see the
+[C55 project](../henon_mu3_rational_yukawa_surface/).
+For the C53 rational model of the fourth-moment cubic--quadric fivefold, it
+constructs a pointed smooth locally closed four-dimensional
+\(\mathbf Q\)-germ as a transverse slice in the fixed Hilbert germ.  Its
+Kodaira--Spencer map is
+
+\[
+T_{B_{\rm core},0}\simeq H^1(T_X)^{\mathscr G}.
+\]
+
+The whole fixed Hilbert locus is not asserted to have dimension four, and
+the construction is not a literal linear perturbation of the cubic
+equation.
+
+The intrinsic relative Reynolds norm graph for the nonconstant rank-\(24\)
+finite etale group scheme is self-transpose and idempotent.  Its image on
+\(R^5f_*\mathbf Q(1)\) is a polarizable rank-\(10\) VHS with Hodge numbers
+\((1,4,4,1)\), and its period map is locally immersive.  This is a CY3-type
+variation only: no relative Chow--Kunneth projector or honest Calabi--Yau
+threefold is constructed.
+
+In the frozen rational tangent basis, exact Cayley multiplication gives a
+primitive integral \(20\)-term projective Yukawa cubic.  Its gradient
+quotient has Hilbert series \((1+t)^4\) and length \(16\), so its zero locus
+in \(\mathbf P^3_{\mathbf Q}\) is a smooth geometrically irreducible cubic
+surface.  Rational here means defined over \(\mathbf Q\), not rational as a
+variety over \(\mathbf Q\).
+
+Projective \(\operatorname{GL}_4(\mathbf C)\)-equivalence of Yukawa cubics is
+proved to be necessary for an honest four-modulus polarized-VHS realization,
+but not sufficient.  The complete four-variable tensor needed for the named
+Braun--Candelas--Davies comparators is unavailable, so the exact status is
+**NOT-COMPARABLE-WITH-CURRENT-DATA**.  No honest CY3, motive, automorphy,
+continuation, functional equation, RH statement, or self-adjoint generator
+follows.  The tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.
+
+C56 is conditionally locked to the connected degree-\(27\) line scheme,
+full \(W(E_6)\) line-field Galois closure, and rational Picard rank of this
+surface.  That lock is not theorem evidence until the final committed C55
+coefficient object, released certificate, and C56 input are exactly rebound
+and replayed.
 
 ## Pressure-lane alias policy
 

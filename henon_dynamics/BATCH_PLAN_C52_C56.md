@@ -1,8 +1,9 @@
 # Batch plan: HCS-C52 through HCS-C56
 
-Status: **adaptive batch in progress; C52--C54 complete, C55 locked**
+Status: **adaptive batch in progress; C52--C55 complete, C56 conditionally
+locked pending final committed C55 rebind**
 
-Date: 2026-08-14
+Date: 2026-08-15
 
 ## Batch objective
 
@@ -22,17 +23,22 @@ orders, and whether the resulting tower admits a nonfactorwise completion.
 Each paper below has its own theorem-sized stop/go gate.  They are not five
 installments of one proof.
 
-The dependency graph after the first three realized gates is
+The dependency graph after the first four realized gates is
 
 \[
  C52\longrightarrow C53\longrightarrow C54\longrightarrow C55
  \longrightarrow C56.
 \]
 
-C52, C53, and C54 are complete.  C55 is locked from the actual C54
-symmetry/denominator theorem and its independent adaptive reconnaissance;
-C56 remains contingent and must be re-scoped after the realized C55 gate
-rather than forced to follow a failed branch.
+C52 through C55 are complete.  C55 realizes a four-dimensional rational
+equivariant deformation germ, a relative rank-ten CY3-type Reynolds
+variation, and a smooth geometrically irreducible rational Yukawa cubic
+surface, without constructing or excluding an honest Calabi--Yau
+threefold.  C56 is conditionally locked to the arithmetic of the
+twenty-seven-line scheme of that surface.  The lock becomes effective only
+after the released C55 certificate, the committed C55 coefficient object,
+and the live C56 input agree exactly and every line-scheme computation is
+replayed.
 
 ## HCS-C52: dihedral Chow projector and graph-algebra optimum
 
@@ -215,9 +221,10 @@ twisted Fermat descent rather than silently mixing two rational models.
 The all-order equation and group theorem are unconditional.  For \(n\ge5\),
 smoothness, motives, and packets are not asserted; the denominator theorem is
 conditional on packet admissibility.  No fixed-prime table, global/inert root,
-automorphy, functional equation, or RH claim is part of C54.  Its next gate is
-not another denominator paper: C55 compares the parameterized Yukawa/IVHS
-invariants of the C53 rank-ten Calabi--Yau-type core with a genuine rational
+automorphy, functional equation, or RH claim is part of C54.  Its next gate
+was not another denominator paper: C55 constructs the parameterized
+Yukawa/IVHS invariant of the C53 rank-ten Calabi--Yau-type core and gives an
+exact necessary gate for comparison with a genuine rational
 Calabi--Yau-threefold family before any motivic-identification claim.
 
 ## HCS-C55: rational Yukawa surface and honest Calabi--Yau VHS gate
@@ -228,110 +235,148 @@ What is the exact projective Yukawa invariant of the rational rank-ten
 Calabi--Yau-type core, and can it pass the necessary polarized-VHS tests for
 the third cohomology of a genuine Calabi--Yau threefold?
 
-### Locked unconditional theorem target
+### Realized theorem
 
-Construct the four-dimensional rational equivariant deformation germ of the
-\(n=4\) cubic--quadric complete intersection.  The deformation proof must
-establish unobstructedness, identify the fixed tangent space
-\(H^1(T_X)^{G_4}\), descend it using the nonconstant C54 rational group form,
-and extend the 24-graph Reynolds correspondence over the relative family.
-After one Tate twist, the relative projector must define a rank-ten
-polarized variation with Hodge numbers
+C55 constructs a pointed smooth locally closed four-dimensional
+\(\mathbf Q\)-germ \(B_{\rm core}\) as a transverse slice in the smooth fixed
+Hilbert germ of the descended \(n=4\) cubic--quadric complete intersection.
+Its Kodaira--Spencer map identifies
+
+\[
+T_{B_{\rm core},0}\simeq H^1(T_X)^{\mathscr G}.
+\]
+
+This is neither a dimension statement for the whole fixed Hilbert locus nor
+a literal family \(C+\sum_i t_ip_i=Q=0\).
+
+The intrinsic norm of the universal action graph for the nonconstant
+rank-\(24\) finite etale group scheme is self-transpose and idempotent.  Its
+image on \(R^5f_*\mathbf Q(1)\) is a polarizable rank-\(10\) VHS with Hodge
+numbers
 
 \[
 (h^{3,0},h^{2,1},h^{1,2},h^{0,3})=(1,4,4,1)
 \]
 
-and locally immersive period map.  Calling this a CY3-type variation does
-not assert that it is the third cohomology of an honest threefold.
+and the projected period map is locally immersive.  Exactly one Tate twist,
+\(\mathbf Q(1)\), is used.  No relative Chow--Kunneth projector and no
+Calabi--Yau threefold are constructed.
 
-For the Cayley polynomial \(F=yC+zQ\), independently certify the invariant
-tangent basis, the one-dimensional top trace, and the projective Yukawa
-tensor
+For the Cayley polynomial \(F=yC+zQ\), exact producer/checker replays certify
+the invariant tangent basis, the one-dimensional rational top trace, and the
+projective Yukawa tensor
 
 \[
 Y_{ijk}=\operatorname{Tr}_{R_{5,-6}}(y^5p_ip_jp_k)
 \]
 
-up to its single unavoidable nonzero scale.  The adaptive reconnaissance has
-identified a primitive integral four-variable cubic whose projective zero
-locus in \(\mathbf P^3_{\mathbb Q}\) is smooth and geometrically irreducible;
-C55 must promote that clue through independent exact producer/checker replays
-and a theorem-level Gauss--Manin/polarization derivation.  This rational
-Yukawa surface is the unconditional publication target even if no named
-honest-CY3 comparator is decided.
+up to its single unavoidable nonzero scale.  In the locked rational tangent
+basis this is a primitive integral \(20\)-term cubic.  Its gradient quotient
+has Hilbert series \((1+t)^4\) and length \(16\), so its zero locus
 
-### Honest-CY3 comparison branch
+\[
+S_H\subset\mathbf P^3_{\mathbf Q}
+\]
+
+is a smooth geometrically irreducible cubic surface.  Here rational means
+defined over \(\mathbf Q\), not rational as a variety over \(\mathbf Q\).
+
+### Realized necessary gate and unresolved comparator
 
 The first admitted comparators are the four-parameter
 Braun--Candelas--Davies \(\mathrm{Dic}_3\) and \(\mathbb Z_{12}\) quotient
 families, both honest generically smooth Calabi--Yau threefold families with
-\((h^{1,1},h^{2,1})=(1,4)\).  For either comparator C55 must compute the full
-four-variable B-model tensor and decide the exact incidence problem
+\((h^{1,1},h^{2,1})=(1,4)\).  An isomorphism with the third-cohomology
+polarized rational VHS of such a family necessarily identifies the two
+Yukawa cubics through
 
 \[
 Y_{\rm CY}(c;u)=\lambda Y_H(Au),
-\qquad A\in\operatorname{GL}_4,\quad\lambda\ne0.
+\qquad A\in\operatorname{GL}_4(\mathbf C),\quad\lambda\ne0.
 \]
 
-- A certified failure of projective \(\operatorname{GL}_4\)-equivalence is a
-  family-level local polarized-VHS obstruction and kills that named
-  realization.
-- A match advances only to Yukawa jets, the Gauss--Manin connection,
-  polarization, rational Hodge tensors, monodromy, and boundary cones.  It is
-  not evidence by itself for a motive.
-- Only an algebraic correspondence inducing the VHS map and satisfying the
-  projector-composition identities permits the phrase "honest motivic
-  realization."
+This condition is necessary, not sufficient: even a match would not identify
+higher Yukawa jets, the Gauss--Manin connection, monodromy, integral
+structure, or a motive.  No complete four-variable B-model tensor is
+currently available for either named comparator, and the mirror-side
+one-parameter calculation is not a substitute.  The realized comparator
+status is therefore **NOT-COMPARABLE-WITH-CURRENT-DATA**.  C55 neither
+establishes nor rules out an honest-CY3 realization.
 
-A base-point smooth cubic may be too weak because smooth cubic surfaces
-themselves have four-dimensional moduli.  The singular two-parameter
-dihedral locus, a one-parameter mirror Yukawa, and a noncommutative 3-CY
-category are therefore inadmissible substitutes for the required
-four-variable honest-family comparison.
+The Route-A tuple remains
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C55 proves no new continuation, functional
+equation, automorphy, RH statement, or Hilbert--Polya operator.
 
-### Minimal controls and kill gate
+## HCS-C56: twenty-seven-line field and maximal \(E_6\) arithmetic
 
-- Freeze the C52--C54 action, residue, Tate-twist, and Frobenius conventions.
-- Prove the rational four-germ and relative rank-ten projector before using
-  the word "variation."
-- Derive Yukawa multiplication from Gauss--Manin and polarization, and replay
-  rationality, factorization, and the empty projective singular locus
-  independently.
-- Prove functoriality under polarized-VHS isomorphisms before excluding any
-  comparator; exact parameter spaces and smooth/free loci are mandatory.
-- The reconnaissance of 8,505 coordinate-pair Fermat \(\mathbf P^3\)'s kills
-  only that standard projection route, not every linear space on the cubic.
-- **KILL:** a base-point tensor without a relative projector, Hodge-number
-  coincidence, isolated point counts, finite matching prime tables, or an
-  unnamed categorical resemblance is not a paper.
+### Conditional lock
 
-## HCS-C56: adaptive realization closure or nonfactorwise analytic gate
+C56 studies a new arithmetic object attached to the released C55 Yukawa
+surface: its finite etale Fano scheme of geometric lines and the Galois
+closure of the corresponding degree-\(27\) line field.  C55 constructs and
+controls the projective cubic; C56 determines the arithmetic monodromy of
+its lines.  It is therefore a separate theorem-sized paper, not a
+continuation of the C55 Cayley-ring calculation.
 
-### Adaptive rule
+The lock is conditional on a three-way exact rebind of the normalized
+primitive C55 coefficient vector: the released certificate, the committed
+implementation object, and the live C56 input must agree.  Temporary
+reconnaissance artifacts are chronology only and are not theorem evidence.
 
-C56 is deliberately not locked before C55.  It must be a theorem-sized
-consequence of the realized C55 branch, not a fifth installment of the same
-calculation.
+### Locked theorem target
 
-- If C55 finds a genuine geometric realization, C56 must construct and test
-  the induced compatible local factors, bad-prime data, completed functional
-  equation, and relation to the normalized-semifinite determinant.  Expected
-  Hasse--Weil continuation may not be used as a proved input without an
-  automorphy theorem.
-- If C55 proves an IVHS/Yukawa mismatch or a broader realization no-go, C56
-  may instead return to the analytic lane and decide a declared nonfactorwise
-  completion class, strictly extending C51's factorwise-center obstruction.
-- A second legitimate fallback is the exact conic-fibration/flattening gate
-  isolated during C53 reconnaissance, but only if it yields an exhaustive
-  geometric theorem rather than one plane or one prime.
+For the released surface \(S_H/\mathbf Q\), prove that its Fano line scheme
+is connected and finite etale of degree \(27\),
 
-### Publication veto
+\[
+F_1(S_H)\simeq\operatorname{Spec}E,
+\qquad [E:\mathbf Q]=27.
+\]
 
-No formal Gamma product, numerical zero plot, isolated rank-ten prime table,
-or mere increase of regularized determinant order qualifies.  If none of the
-three branches yields a theorem, the \(\mu_3\) full-kernel lane must close and
-hand off to a new self-dual dynamical form.
+Prove that the Galois closure \(\widetilde E\) satisfies
+
+\[
+\operatorname{Gal}(\widetilde E/\mathbf Q)\cong W(E_6),
+\qquad |W(E_6)|=51840.
+\]
+
+Deduce
+
+\[
+\rho(S_{H,\overline{\mathbf Q}})=7,
+\qquad \rho(S_H/\mathbf Q)=1,
+\]
+
+and that \(S_H\) has no \(\mathbf Q\)-defined line.  More precisely, every
+finite extension defining one geometric line must have degree divisible by
+\(27\).
+
+These conclusions depend only on the rational projective
+\(\operatorname{GL}_4\)-class and common scaling of the C55 cubic.  They do
+not imply that \(S_H(\mathbf Q)\) is empty, settle rationality of the surface,
+or establish an honest-CY3, VHS, motive, \(L\)-function, or
+Hilbert--Polya realization.
+
+### Exact controls and kill gates
+
+- Reconstruct all six Grassmann charts from the rebound released cubic.
+- Prove that the \(U_{01}\) quotient has length \(27\), and that the five
+  charts covering \(p_{01}=0\) give unit ideals.
+- Certify the degree-\(27\) lexicographic eliminant and all back-substitution
+  identities.
+- Prove irreducibility over \(\mathbf Q\) by the squarefree modular
+  subset-sum sieve at \(7,19,29,37\), whose degree intersection is exactly
+  \(\{0,27\}\).
+- Verify smooth reduction and the \(p=37\) Frobenius cycle type
+  \((2,5,5,5,10)\); together with transitivity, a cited subgroup lemma, and
+  an independent exact \(W(E_6)\) permutation/parity enumeration, it must
+  force the full Weyl group.
+- **KILL:** a failed C55 rebind, a line lost outside the main chart, a proper
+  degree surviving the modular sieve, a ramified or changed Frobenius
+  witness, or an inference of full \(W(E_6)\) merely from genericity,
+  transitivity, or an element of order five stops the claimed branch.
 
 ## Batch-wide publication vetoes
 
