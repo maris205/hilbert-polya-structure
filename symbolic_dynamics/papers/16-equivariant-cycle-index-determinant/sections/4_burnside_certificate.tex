@@ -1,0 +1,177 @@
+\section{Formal Burnside lift and the squarefree certificate}
+\label{sec:burnside}
+
+\subsection{Squarefree cycles are cyclic set partitions}
+
+Fix $|P|=n$ and consider the full squarefree multidegree
+$x_P=\prod_{p\in P}x_p$.  Every label appears exactly once.  The edge
+subsets of a contributing word are therefore disjoint and cover $P$.
+
+\begin{proposition}[Cyclic-partition enumeration]
+\label{prop:cyclic-partition}
+A cyclic word at squarefree content $x_P$ is primitive and is equivalent to a
+cyclically ordered set partition of $P$.  With $m$ blocks, the number of
+cycles is
+\[
+  (m-1)!S(n,m),
+  \tag{4.1}
+\]
+and their common scalar sign is $(-1)^{n+m}$.
+\end{proposition}
+
+\begin{proof}
+A nontrivial repetition would repeat every label of the shorter root, which
+is impossible at squarefree content.  An unordered set partition into $m$
+blocks has $(m-1)!$ cyclic orders.  The product of the edge signs is
+\[
+ \prod_{j=1}^m(-1)^{|S_j|+1}=(-1)^{n+m}.
+\]
+\end{proof}
+
+Consequently the total number of squarefree primitive cycles is
+\[
+  N_n=\sum_{m=1}^n(m-1)!S(n,m).
+  \tag{4.2}
+\]
+For $n\ge2$, the positive and negative scalar counts agree.  One proof is to
+observe that their difference is the coefficient of $x_P$ in
+\[
+  -\log\prod_{p\in P}(1-x_p)
+  =\sum_{p\in P}-\log(1-x_p),
+  \tag{4.3}
+\]
+which has no mixed monomial.  Exact values through seven labels are listed in
+\Cref{tab:squarefree-counts}.  These counts show that scalar balance persists;
+they do not prove equivariant balance.
+
+\begin{table}[t]
+\centering
+\caption{Squarefree primitive cyclic-partition counts.  The equality of
+positive and negative columns is scalar cancellation; it does not imply an
+equivariant pairing.}
+\label{tab:squarefree-counts}
+\begin{tabular}{rrrrr}
+\toprule
+$n$ & total & positive & negative & difference\\
+\midrule
+2 & 2 & 1 & 1 & 0\\
+3 & 6 & 3 & 3 & 0\\
+4 & 26 & 13 & 13 & 0\\
+5 & 150 & 75 & 75 & 0\\
+6 & 1,082 & 541 & 541 & 0\\
+7 & 9,366 & 4,683 & 4,683 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The first nonzero Burnside residual}
+
+Take $P=\{p,q,r\}$.  The six cycles separate by sign as
+\[
+ C_+=\{[pqr],[p][q][r],[p][r][q]\},
+ \tag{4.4}
+\]
+\[
+ C_-=\{[p][qr],[q][pr],[r][pq]\}.
+ \tag{4.5}
+\]
+Here $[pqr]$ denotes the one-edge subset $\{p,q,r\}$, while brackets between
+singletons denote a cyclic word of several edges.
+
+\begin{theorem}[$pqr$ Burnside and character certificate]
+\label{thm:pqr}
+The virtual $S_3$-set at squarefree content $pqr$ is
+\[
+  \RP_3=[C_+]-[C_-]
+  =[S_3/S_3]+[S_3/C_3]-[S_3/C_2].
+  \tag{4.6}
+\]
+Its marks at subgroup classes $(1,C_2,C_3,S_3)$ are
+\[
+  (0,0,3,1).
+  \tag{4.7}
+\]
+Under permutation linearization,
+\[
+  R_3=\one\oplus\sgnrep-\stdrep,
+  \tag{4.8}
+\]
+and its character at $(e,(12),(123))$ is
+\[
+  (0,0,3).
+  \tag{4.9}
+\]
+Thus scalar dimension kills a nonzero Burnside and representation class.
+\end{theorem}
+
+\begin{proof}
+The one-block cycle in (4.4) is fixed by all of $S_3$, giving $S_3/S_3$.
+The two orientations of three singleton blocks form the two-point orbit
+$S_3/C_3$: a transposition exchanges them, while a three-cycle is a cyclic
+rotation and fixes both necklaces.  The three singleton--pair cycles in
+(4.5) form the natural orbit $S_3/C_2$.  This proves (4.6).
+
+The identity subgroup fixes all objects.  A subgroup $C_2$ fixes the
+one-block positive cycle and one singleton--pair negative cycle.  The $C_3$
+subgroup fixes all three positive cycles and none of the negative cycles.
+The full group fixes only the one-block positive cycle.  Subtraction gives
+(4.7).
+
+Finally,
+\[
+ \C[S_3/S_3]=\one,
+ \quad \C[S_3/C_3]=\one\oplus\sgnrep,
+ \quad \C[S_3/C_2]=\one\oplus\stdrep.
+ \tag{4.10}
+\]
+Their virtual difference is (4.8).  The $S_3$ character table then gives
+(4.9).
+\end{proof}
+
+\begin{table}[t]
+\centering
+\caption{The exact $pqr$ certificate.  Marks count subgroup-fixed objects;
+the final column is positive minus negative.}
+\label{tab:pqr-marks}
+\begin{tabular}{lrrr}
+\toprule
+Subgroup & $|C_+^H|$ & $|C_-^H|$ & $\phi_H(\RP_3)$\\
+\midrule
+$1$ & 3 & 3 & 0\\
+$C_2$ & 1 & 1 & 0\\
+$C_3$ & 3 & 0 & 3\\
+$S_3$ & 1 & 0 & 1\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+An equivariant sign-reversing bijection would induce equal fixed-point counts
+for every subgroup.  The $C_3$ mark rules it out.  The failure is stronger
+than unequal presentation choices: it is invariant under relabeling and is
+visible in both Burnside and representation rings.
+
+\subsection{Adams isolation and formal projectivity}
+
+\begin{proposition}[Squarefree Adams isolation]
+\label{prop:adams-isolation}
+No Adams power $\psi^k$ with $k>1$ maps a monomial of integral nonnegative
+multidegree to $x_px_qx_r$.  Hence no temporal higher-power counterterm
+removes $\RP_3$ or $R_3$.
+\end{proposition}
+
+\begin{proof}
+On monomials, $\psi^k(x^\alpha)=x^{k\alpha}$.  Equality
+$k\alpha=(1,1,1)$ has no solution in $\N^3$ when $k>1$.
+\end{proof}
+
+The $C_2$ carrier from (3.11) handles the sign component simultaneously:
+$\psi^k(\tau)=\tau^k$.  Thus the formal positive result respects both
+multidegree and scalar temporal powers.
+
+For an inclusion $P\subset Q$, specialize $x_q=0$ for every
+$q\in Q\setminus P$.  Every edge meeting a new label vanishes, while the old
+edge and primitive-cycle terms remain.  These zero-specializations compose,
+so the multigraded Burnside/species ledgers form a formal projective family.
+This statement concerns coefficients and cycle indices.  It does not yet
+construct an inductive system of fixed weighted operators; that analytic
+question is deferred to \Cref{sec:infinite}.

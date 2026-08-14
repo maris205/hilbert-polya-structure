@@ -1,0 +1,295 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C18
+source_commit: SOURCE_COMMIT_PLACEHOLDER
+code_commit: SOURCE_COMMIT_PLACEHOLDER
+evaluation_date: "2026-08-14"
+artifact_path_base: papers/16-equivariant-cycle-index-determinant
+freeze_note: >-
+  Two-stage provenance: SOURCE_COMMIT_PLACEHOLDER will be replaced by the
+  first commit that freezes paper source, code, results, PDF, and root summary.
+  This evaluation and PAPER_MANIFEST are then sealed by a metadata-only commit.
+
+source_lock:
+  candidate_definition: >-
+    For each finite tensor-atom set P, SD-C18 is the one-vertex full edge shift
+    on all nonempty subsets S of P, equipped with ordinary scalar edge sign
+    (-1)^(|S|+1), multivariable monomial x_S, and its signed primitive-cycle
+    Burnside/representation/cycle-index ledger under atom relabeling.
+  object: >-
+    The projective family of finite signed subset shifts, squarefree primitive
+    necklaces modulo cyclic rotation, C2-colored temporal power operations,
+    the rank-one scalar shadow A_x, and the canonical comparison diagonal
+    subset operator D_x. These ledgers are kept distinct.
+  family: symbolic_dynamics
+  phase_space: >-
+    One vertex with one loop edge for every nonempty subset of a frozen finite
+    tensor-atom inventory; temporal words form a finite full edge shift.
+  dynamics: >-
+    Left shift on subset-edge words. Primitive periodic objects are cyclic
+    necklaces, reflection is not quotiented, and temporal repetition uses the
+    actual scalar power of every signed word.
+  parameters: >-
+    Squarefree atom ranks n=2..7; ghost, rank-one, stabilizer, diagonal, and
+    projective audits n=2..8; temporal powers r=1..8; analytic cutoffs
+    N=10,25,50,100,250; sigma=0.6,1.0,1.2,2.0; q=1,2,3,4; control seeds
+    16000..16015.
+  parameter_provenance: >-
+    The subset alphabet, scalar sign, group actions, canonical lifts, cutoffs,
+    and controls were frozen before execution. No target zero or fitted
+    parameter is used.
+  arithmetic_origin: >-
+    Nonunit tensor-indecomposable finite full shifts are F_p and entropy
+    h(F_p)=log p supplies the specialization x_p=exp(-s h(F_p)). The formal
+    multivariable object and all algebraic identities precede specialization.
+  clock: >-
+    T(S)=sum_(p in S) h(F_p) on an edge and the additive temporal roof on
+    words; no fitted scale or offset.
+  normalization: >-
+    epsilon(S)=(-1)^(|S|+1); scalar temporal powers use epsilon(S)^r. A
+    nontrivial C2 character line, not a negative integer Adams coefficient,
+    carries this sign through power operations.
+  determinant_convention: >-
+    The inherited rank-one shadow has det(I-A_x)=product_p(1-x_p). The
+    representation-preserving comparison has
+    sdet(I-D_x)=product_(S nonempty)(1-x_S)^epsilon(S). SD-C18 evaluates
+    whether a character-resolved determinant can retain the first identity;
+    it may not import the scalar shadow's A2 coordinate.
+  orbit_cutoff: >-
+    Exhaustive squarefree primitive cyclic words through n=7, exact S_n
+    conjugacy-class fixed counts, cyclic-subgroup marks, and orbit
+    decompositions; power audits through r=8.
+  cutoff: >-
+    Exact finite algebra through n=8, 4,008 C2 edge/power checks, 56 ghost
+    rows, 455 inventory controls, and 160 descriptive Schatten cutoff rows.
+  precision: >-
+    Integer and Fraction arithmetic for theorem certificates; binary64 only
+    for descriptive finite-cutoff Schatten sums, whose class labels come from
+    the proved q*Re(s)>1 criterion.
+  training_data: none
+  allowed_data:
+    - tensor multiplication, tensor indecomposability, and entropy of finite full shifts
+    - formal subset monomials, scalar signs, cyclic words, and temporal powers
+    - finite permutation actions, Burnside marks, characters, and cycle ledgers
+    - standard rank-one, diagonal, Schatten, and Fredholm calculations
+    - prime, composite, shuffled, random-rational, and formal inventories as controls
+  forbidden_data:
+    - Riemann-zero tables, target spectra, root fitting, or fitted phases
+    - treating semilinear relabeling covariance as fixed-fiber symmetry
+    - identifying b(x)^r with b(x^r)
+    - replacing scalar sign powers by integer Adams signs
+    - calling a completed cycle index an analytic fixed-operator determinant
+    - importing the rank-one scalar shadow's A2 result into the resolved tuple
+    - cross-family geometric or operator repairs
+  code_commit: SOURCE_COMMIT_PLACEHOLDER
+  artifact_paths:
+    - SOURCE_LOCK.md
+    - PREREGISTRATION.md
+    - EXPERIMENT_REPORT.md
+    - experiments/EXPERIMENT_PLAN.md
+    - experiments/EXPERIMENT_TRACKER.md
+    - experiments/IMPLEMENTATION_NOTES.md
+    - code/sdc18_equivariant_cycle_index_experiment.py
+    - code/test_sdc18_equivariant_cycle_index_experiment.py
+    - results/squarefree_summary.json
+    - results/sn_character_table.csv
+    - results/burnside_cyclic_marks.csv
+    - results/orbit_decomposition.csv
+    - results/s3_residual_certificate.json
+    - results/ghost_power_audit.csv
+    - results/projective_c2_adams_certificate.json
+    - results/rank_one_audit.csv
+    - results/stabilizer_audit.csv
+    - results/diagonal_superdet_audit.csv
+    - results/schatten_cutoffs.csv
+    - results/control_audit.csv
+    - results/sanity.json
+    - results/summary.json
+    - results/SHA256SUMS.txt
+    - docs/candidate_registry.md
+    - docs/obstruction_registry.md
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Tensor indecomposability identifies F_p intrinsically and entropy gives
+    log p without a prime or zero table inside the transfer definition; the
+    formal-variable ledger is fixed before arithmetic specialization.
+  strongest_failure: >-
+    The equivariant and determinant algebra is inventory-universal: every
+    matched formal, composite, shuffled, and random-rational control
+    reproduces it, so it supplies no arithmetic selectivity.
+  arithmetic_controls:
+    - free-commutative formal inventories
+    - composites-only entropy inventories
+    - shuffled prime weights
+    - 16 seeded random-rational inventories at each n=2..8
+    - equal-weight versus distinct-weight symmetry controls
+  artifacts:
+    - SOURCE_LOCK.md
+    - results/control_audit.csv
+    - results/stabilizer_audit.csv
+    - results/summary.json
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    Primitive necklaces, orientation convention, scalar signs, multiplicity,
+    finite group actions, and temporal powers are intrinsic and exhaustively
+    enumerated through n=7. The pqr residual is nonzero in both Burnside and
+    representation rings despite zero scalar dimension.
+  strongest_failure: >-
+    These primitive objects are cyclic ordered factorizations rather than one
+    distinguished orbit per tensor atom, and distinct arithmetic
+    specialization destroys the relabeling symmetry needed for character
+    fibers. No prime/prime-power orbit correspondence results.
+  metrics:
+    primitive_definition: cyclic_necklaces_of_nonempty_subset_edges
+    reflection_quotiented: false
+    squarefree_total_n2_to_n7: "2,6,26,150,1082,9366"
+    squarefree_all_primitive: true
+    squarefree_scalar_virtual_dimensions: "0,0,0,0,0,0"
+    pqr_virtual_character: "0,0,3"
+    pqr_burnside_marks: "0,0,3,1"
+    pqr_virtual_representation: "trivial + sign - standard"
+    higher_nontrivial_character_modes_through_n: 7
+    monodromy_or_stability: not_applicable
+    completeness_risk_for_frozen_ranges: none_exact_exhaustion
+  artifacts:
+    - results/squarefree_summary.json
+    - results/sn_character_table.csv
+    - results/burnside_cyclic_marks.csv
+    - results/orbit_decomposition.csv
+    - results/s3_residual_certificate.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: >-
+    The formal pqr residual survives scalar augmentation, and all higher Adams
+    powers are excluded from squarefree multidegree. Thus the completed
+    equivariant ledger contains information invisible in the scalar shadow.
+  strongest_failure: >-
+    No one fixed arithmetic operator has both nontrivial character sectors and
+    the pure Euler determinant. Distinct weights have no commuting relabeling
+    symmetry; equal weights make nontrivial rank-one sectors determinant one;
+    the canonical diagonal lift changes b(x)^r to b(x^r) and introduces mixed
+    subset factors.
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: not_applicable
+    precision_drift: not_applicable
+    control_margin: not_applicable
+    target_zero_data_used: false
+    rank_one_scalar_shadow_A2: excluded_incompatible_object
+    ghost_power_rows: 56
+    ghost_witness_for_r_ge_2: "coefficient r versus 0"
+    distinct_weight_stabilizer_order: 1
+    equal_weight_nontrivial_sector_determinant: 1
+    diagonal_mismatch_rows: 7
+  artifacts:
+    - results/ghost_power_audit.csv
+    - results/rank_one_audit.csv
+    - results/stabilizer_audit.csv
+    - results/diagonal_superdet_audit.csv
+    - EXPERIMENT_REPORT.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: OPEN
+  strongest_evidence: >-
+    The raw infinite diagonal subset operator has the exact Schatten criterion
+    D_s in S_q iff q*Re(s)>1, and therefore a standard trace-class
+    superdeterminant in its natural half-plane.
+  strongest_failure: >-
+    That determinant is the wrong mixed-subset product. There is no completed
+    functional equation, Gamma factor, pole/trivial-zero treatment, target
+    counting law, global target divisor theorem, or intrinsic Weil
+    compression for the resolved object.
+  analytic_structure:
+    raw_diagonal_schatten_criterion: "D_s in S_q iff q*Re(s)>1"
+    trace_class_half_plane: "Re(s)>1"
+    determinant_in_trace_class_half_plane: mixed_subset_superdeterminant
+    finite_stage_conjugation_symmetry: PROVED
+    functional_equation: OPEN
+    gamma_factor: OPEN
+    pole_removal: OPEN
+    trivial_zeros: OPEN
+    target_counting_law: OPEN
+    global_target_divisor_identity: OPEN
+  weil_compression:
+    status: NOT_TESTABLE
+    reason: no_intrinsic_Hermitian_or_Weil_compression_from_SD_C18
+  artifacts:
+    - results/schatten_cutoffs.csv
+    - SOURCE_LOCK.md
+    - docs/obstruction_registry.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: >-
+    The finite symbolic shift, semilinear group action, rank-one transfer, and
+    raw diagonal Hilbert-space comparison are explicitly defined.
+  strongest_failure: >-
+    No natural quantization, unitary or scattering completion, Hamiltonian
+    carrier, self-adjoint generator, operator domain, or target spectral
+    counting law is supplied. The diagonal comparison is not a Route-B host.
+  metrics:
+    natural_quantization: false
+    time_reversal_or_antiunitary_structure: not_applicable
+    proposed_hilbert_space_for_target: not_applicable
+    proposed_operator_domain_for_target: not_applicable
+    route_b_readiness: false
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+
+adversarial_controls:
+  controls_used:
+    - 7 free-commutative formal inventory rows
+    - prime and composites-only inventories
+    - shuffled prime weights
+    - 16 seeded random-rational inventories at every n=2..8
+    - equal-weight and distinct-weight symmetry controls
+    - rank-one versus diagonal power-ledger control
+    - scalar sign versus C2-colored Adams control
+  proves_too_much_risk: true
+  verdict: STOP_SCOPED / PROVES_TOO_MUCH
+
+route_tuple:
+  - A0_ANALYTIC_ARITHMETIC_ORIGIN
+  - A1_WEAK
+  - A2_FAIL
+  - A3_FAIL
+  - A4_FAIL
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  SD-C18 proves that scalar squarefree cancellation hides nonzero
+  representation/Burnside modes and proves that the frozen canonical
+  rank-one/diagonal lifts cannot turn those modes into arithmetic
+  character-resolved Fredholm fibers while retaining the pure Euler
+  determinant. It does not prove a universal no-go for all symbolic group
+  extensions, arithmetic selectivity, a target divisor theorem, RH, or a
+  Hilbert-Polya operator.
+blocking_conditions:
+  - distinct arithmetic weights leave only the identity relabeling stabilizer
+  - equal weights confine the rank-one image to the trivial representation
+  - rank-one ghosts b(x)^r and diagonal ghosts b(x^r) disagree
+  - the diagonal analytic lift introduces mixed-subset factors
+  - inventory controls reproduce every finite mechanism
+  - no completed analytic structure or intrinsic Weil compression exists
+  - no natural operator lift exists
+next_smallest_test: >-
+  Still within Symbolic Dynamics, replace base-label relabeling by a genuine
+  finite-group fiber cocycle commuting with a frozen symbolic transfer, and
+  publish its full character power traces before any determinant claim.
+round2_clues: []
+route_b_invocation_allowed: false

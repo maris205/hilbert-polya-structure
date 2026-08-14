@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+  node distance=9mm and 9mm,
+  box/.style={draw=charcoal,rounded corners=2pt,align=center,inner sep=5pt,
+    text width=0.27\textwidth,font=\footnotesize},
+  topbox/.style={box,draw=formalblue,very thick,text width=0.63\textwidth},
+  warnbox/.style={box,draw=warningamber,thick},
+  resultbox/.style={box,draw=charcoal,very thick,text width=0.72\textwidth},
+  arr/.style={-{Latex[length=2mm]},thick,draw=charcoal},
+  stoparr/.style={-{Latex[length=2mm]},thick,dashed,draw=warningamber}
+]
+\node[topbox] (formal) {Formal $C_2$-colored Burnside/species ledger\\[-1pt]
+$\mathcal R_3=[S_3/S_3]+[S_3/C_3]-[S_3/C_2]$\\
+$R_3=\one+\sgnrep-\stdrep$, $\chi=(0,0,3)$};
+
+\node[warnbox,below=12mm of formal,xshift=-0.31\textwidth] (aug) {Augmentation / dimension\\
+$\prod_p(1-x_p)$ retained\\
+$R_3\mapsto0$};
+\node[warnbox,below=12mm of formal] (arith) {Arithmetic specialization\\
+$x_p=p^{-s}$ distinct\\
+fixed $S_n$ stabilizer trivial};
+\node[warnbox,below=12mm of formal,xshift=0.31\textwidth] (diag) {Diagonal subset lift\\
+$b(x^r)$ replaces $b(x)^r$\\
+mixed factors appear};
+
+\draw[stoparr] (formal) -- node[left,font=\scriptsize,align=right] {Euler shadow\\but no motion} (aug);
+\draw[stoparr] (formal) -- node[right,font=\scriptsize,align=left] {covariant family\\not commuting fiber} (arith);
+\draw[stoparr] (formal) -- node[right,font=\scriptsize,align=left] {resolved lines\\wrong determinant} (diag);
+
+\node[resultbox,below=13mm of arith] (result) {\textcolor{formalblue}{\textbf{GO: formal equivariant ledger}}\quad
+$\vert$\quad
+\textcolor{warningamber}{\textbf{STOP: arithmetic character-Fredholm fibers}}};
+\draw[arr] (aug) -- (result);
+\draw[arr] (arith) -- (result);
+\draw[arr] (diag) -- (result);
+\end{tikzpicture}
