@@ -1,0 +1,161 @@
+\section{Linear-recurrence support rigidity}
+\label{sec:lrs}
+
+Finite weights replace Boolean acceptance by a scalar sequence.  That
+enlargement removes literal eventual periodicity of the values, but not the
+rigidity of their exact zero sets.
+
+\subsection{Cayley--Hamilton reduction}
+
+Let \(\mathbb F\) be a characteristic-zero field and fix
+\[
+        A,B\in M_d(\mathbb F),\qquad u,v\in\mathbb F^d.
+\]
+Define
+\[
+ x_k=u^{\mathsf T}A^{k-1}Bv,\qquad
+ y_k=\operatorname{tr}(A^{k-1}B).
+\]
+
+\begin{theorem}[Characteristic recurrence]
+\label{thm:recurrence}
+If
+\[
+ \chi_A(t)=t^d+c_{d-1}t^{d-1}+\cdots+c_0,
+\]
+then \(x_k\) and \(y_k\) satisfy
+\[
+ r_{k+d}+c_{d-1}r_{k+d-1}
+ +\cdots+c_1r_{k+1}+c_0r_k=0
+\]
+for every \(k\ge1\).  Their generating functions are rational:
+\[
+ \sum_{k\ge1}x_kz^{k-1}
+ =u^{\mathsf T}(I-zA)^{-1}Bv,
+\]
+\[
+ \sum_{k\ge1}y_kz^{k-1}
+ =\operatorname{tr}\bigl((I-zA)^{-1}B\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Cayley--Hamilton gives
+\[
+        A^d+c_{d-1}A^{d-1}+\cdots+c_0I=0.
+\]
+Multiply by \(A^{k-1}\) and apply either linear functional
+\[
+        X\mapsto u^{\mathsf T}XBv
+\quad\hbox{or}\quad
+        X\mapsto\operatorname{tr}(XB).
+\]
+The resolvent formulas follow from
+\[
+        (I-zA)^{-1}=\sum_{n\ge0}z^nA^n
+\]
+as formal series.  The adjugate formula makes both functions rational.
+\end{proof}
+
+This derivation is the concrete one-letter instance of the classical
+finite linear-representation framework \citep{Schutzenberger1961}.
+
+\subsection{Exact support}
+
+\begin{theorem}[SML prime-support obstruction]
+\label{thm:smlsupport}
+For \(r_k=x_k\) or \(r_k=y_k\), the zero set
+\[
+        Z(r)=\{k\ge1:r_k=0\}
+\]
+is a finite union of arithmetic progressions and a finite set.  Consequently
+\[
+        \supp(r)=\{k\ge1:r_k\ne0\}
+\]
+is ultimately periodic.  If \(\supp(r)\subseteq\Pp\), then
+\(\supp(r)\) is finite.
+\end{theorem}
+
+\begin{proof}
+\Cref{thm:recurrence} makes \(r\) an LRS over a characteristic-zero field.
+The Skolem--Mahler--Lech theorem
+\citep{Lech1953,Bell2006,Bell2008Corrigendum} gives the zero-set
+classification.  Beyond the finite exceptional set, membership is periodic
+modulo the least common multiple of the finitely many progression moduli.
+The complement is therefore ultimately periodic.  Apply
+\cref{lem:primeperiod}.
+\end{proof}
+
+\begin{corollary}[Fixed levels]
+\label{cor:fixedlevel}
+For fixed \(c\in\mathbb F\), the level set
+\[
+        \{k:r_k=c\}
+\]
+is ultimately periodic.  The same holds for every finite Boolean
+combination of zero tests or fixed-level tests on finitely many fixed
+linear responses.
+\end{corollary}
+
+\begin{proof}
+The constant sequence is an LRS, so \(r_k-c\) is an LRS.  Apply
+\cref{thm:smlsupport}.  Finite Boolean combinations of ultimately periodic
+sets remain ultimately periodic.
+\end{proof}
+
+\begin{corollary}[No exact finite-dimensional prime coefficient]
+\label{cor:noprimecoefficient}
+There are no fixed \(d,A,B,u,v\) over a characteristic-zero field such that
+\[
+ u^{\mathsf T}A^{k-1}Bv\ne0
+ \Longleftrightarrow k\in\Pp,
+\]
+or
+\[
+ \operatorname{tr}(A^{k-1}B)\ne0
+ \Longleftrightarrow k\in\Pp.
+\]
+\end{corollary}
+
+\begin{remark}[SML firewall]
+\label{rem:smlfirewall}
+The proof controls exact zero/nonzero support and, through
+\cref{cor:fixedlevel}, exact equality to a fixed scalar.  It does not show
+that sign, positivity, order, phase sector, threshold, or cutpoint
+recognition is ultimately periodic.  It also does not cover nonlinear
+updates, positive characteristic, growing dimension, or
+infinite-dimensional representations.  None of those stronger statements
+receives credit in this paper.
+\end{remark}
+
+\begin{table}[t]
+\centering
+\caption{The response theorem is exact but deliberately narrow.}
+\label{tab:responseboundary}
+\small
+\begin{tabularx}{\textwidth}{L{3.4cm}L{3.0cm}Y}
+\toprule
+Predicate on \(r_k\) & Status & Reason \\
+\midrule
+\(r_k=0\) or \(r_k\ne0\)
+& proved
+& direct SML zero-set theorem \\
+\(r_k=c\), fixed \(c\)
+& proved
+& apply SML to \(r_k-c\) \\
+finite Boolean combinations
+& proved
+& closure of ultimately periodic sets \\
+sign, positivity, cutpoint
+& not claimed
+& not a zero-set consequence of SML \\
+variable dimension or nonlinear state
+& not claimed
+& outside fixed LRS model \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The exact-support formulation is sufficient for the intended Euler
+coefficient: composites must contribute zero if only prime-indexed
+primitive factors are to remain.

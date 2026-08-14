@@ -1,0 +1,68 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >=Latex,
+  vtx/.style={circle,draw=charcoal,thick,minimum size=7.3mm,fill=white},
+  succ/.style={->,thick,draw=formalblue},
+  ret/.style={->,very thick,dashed,draw=warningamber},
+  flow/.style={->,thick,draw=charcoal},
+  finite/.style={draw=formalblue,rounded corners=2mm,thick,
+    fill=formalblue!6,align=center,minimum width=3.65cm,minimum height=1.45cm},
+  linear/.style={draw=passgreen,rounded corners=2mm,thick,
+    fill=passgreen!6,align=center,minimum width=3.65cm,minimum height=1.45cm},
+  control/.style={draw=warningamber,rounded corners=2mm,thick,dashed,
+    fill=warningamber!7,align=center,minimum width=3.65cm,minimum height=1.45cm},
+  countable/.style={draw=stopred,rounded corners=2mm,thick,dotted,
+    fill=stopred!5,align=center,minimum width=3.65cm,minimum height=1.45cm}
+]
+  \node[vtx] (k) at (0,2.55) {$k$};
+  \node[vtx] (k1) at (1.75,2.55) {$k+1$};
+  \node[vtx] (dots) at (3.65,2.55) {$\cdots$};
+  \node[vtx] (twok2) at (5.65,2.55) {$2k-2$};
+  \node[vtx] (twok1) at (7.55,2.55) {$2k-1$};
+  \draw[succ] (k) -- node[above] {$1$} (k1);
+  \draw[succ] (k1) -- node[above] {$1$} (dots);
+  \draw[succ] (dots) -- node[above] {$1$} (twok2);
+  \draw[succ] (twok2) -- node[above] {$1$} (twok1);
+  \draw[ret,bend left=34] (twok1) to node[below] {$2$} (k);
+
+  \node[draw=charcoal,very thick,rounded corners=2mm,fill=softgray!35,
+    align=center,minimum width=5.0cm,minimum height=1.15cm] (word)
+    at (11.1,2.55)
+    {$W(C_k)=1^{k-1}2$\\
+     unique-minimum mark, length $k$};
+  \draw[flow] (twok1.east) -- (word.west);
+
+  \node[finite] (f1) at (0.5,0.15)
+    {fixed finite fiber\\
+     $a^{k-1}b$\\
+     \textbf{eventually periodic}};
+  \node[linear] (f2) at (4.55,0.15)
+    {fixed linear fiber\\
+     $u^\mathsf TA^{k-1}Bv$ or trace\\
+     \textbf{LRS; SML support}};
+  \node[control] (f3) at (8.6,0.15)
+    {growing $N$-fiber\\
+     nilpotent shift\\
+     \textbf{memorizes every prefix}};
+  \node[countable] (f4) at (12.65,0.15)
+    {countable decider\\
+     transient or recurrent\\
+     \textbf{prune or clock-dilute}};
+
+  \draw[flow] (word.south) -- ++(0,-0.32) -| (f1.north);
+  \draw[flow] (word.south) -- ++(0,-0.32) -| (f2.north);
+  \draw[flow] (word.south) -- ++(0,-0.32) -| (f3.north);
+  \draw[flow] (word.south) -- ++(0,-0.32) -| (f4.north);
+
+  \node[draw=stopred,very thick,rounded corners=2mm,align=center,
+    minimum width=10.8cm,minimum height=1.05cm] (ledger)
+    at (6.55,-2.05)
+    {unchanged base ledger:
+     $z^kM_k^{-2s}$,\quad
+     $M_k=(2k-1)!/(k-1)!$\\
+     \textbf{neither prime-only support nor the monomial $zk^{-s}$}};
+  \draw[flow] (f1.south) -- ++(0,-0.25) -| (ledger.north);
+  \draw[flow] (f2.south) -- ++(0,-0.25) -| (ledger.north);
+  \draw[flow,dashed] (f3.south) -- ++(0,-0.25) -| (ledger.north);
+  \draw[flow,dotted] (f4.south) -- ++(0,-0.25) -| (ledger.north);
+\end{tikzpicture}

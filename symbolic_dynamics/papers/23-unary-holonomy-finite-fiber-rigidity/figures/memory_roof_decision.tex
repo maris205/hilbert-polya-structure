@@ -1,0 +1,73 @@
+\begin{tikzpicture}[
+  font=\footnotesize,
+  >=Latex,
+  flow/.style={->,thick,draw=charcoal},
+  changed/.style={->,thick,dashed,draw=warningamber},
+  fixed/.style={draw=formalblue,rounded corners=2mm,thick,
+    fill=formalblue!6,align=center,text width=3.55cm,
+    minimum width=3.75cm,minimum height=1.55cm,inner sep=2pt},
+  growbox/.style={draw=warningamber,rounded corners=2mm,thick,dashed,
+    fill=warningamber!7,align=center,text width=3.55cm,
+    minimum width=3.75cm,minimum height=1.55cm,inner sep=2pt},
+  trans/.style={draw=charcoal,rounded corners=2mm,thick,dotted,
+    fill=softgray!25,align=center,text width=3.55cm,
+    minimum width=3.75cm,minimum height=1.55cm,inner sep=2pt},
+  recur/.style={draw=stopred,rounded corners=2mm,very thick,
+    fill=stopred!5,align=center,text width=3.55cm,
+    minimum width=3.75cm,minimum height=1.55cm,inner sep=2pt},
+  induced/.style={draw=warningamber,diamond,aspect=2.3,thick,
+    fill=warningamber!6,align=center,inner sep=1.8mm}
+]
+  \node[draw=charcoal,very thick,rounded corners=2mm,fill=white,
+    align=center,minimum width=5.3cm,minimum height=1.0cm] (root)
+    at (6.3,2.8)
+    {reader for $W(C_k)=1^{k-1}2$};
+
+  \node[fixed] (fixed) at (0.65,0.75)
+    {fixed finite / fixed dimension\\
+     eventual periodicity or SML\\
+     \textbf{no infinite prime-only support}};
+  \node[growbox] (grow) at (4.85,0.75)
+    {dimension grows with cutoff\\
+     exact arbitrary-prefix fit\\
+     \textbf{PROVES TOO MUCH}};
+  \node[trans] (trans) at (9.05,0.75)
+    {countable, computation transient\\
+     DAG is trace-invisible\\
+     \textbf{prunes to selected loops}};
+  \node[recur] (recur) at (13.25,0.75)
+    {countable, computation recurrent\\
+     $\ell(n)\gg\log n$ with roof $\log n$\\
+     \textbf{whole adjacency noncompact}};
+
+  \draw[flow] (root.south) -- ++(0,-0.32) -| (fixed.north);
+  \draw[changed] (root.south) -- ++(0,-0.32) -| (grow.north);
+  \draw[flow,dotted] (root.south) -- ++(0,-0.32) -| (trans.north);
+  \draw[flow] (root.south) -- ++(0,-0.32) -| (recur.north);
+
+  \node[induced] (induced) at (11.3,-1.5)
+    {first return?\\$z^{\ell(n)}\mapsto z$};
+  \draw[changed] (trans.south) -- (induced.north west);
+  \draw[changed] (recur.south) -- (induced.north east);
+
+  \node[draw=passgreen,rounded corners=2mm,thick,fill=passgreen!6,
+    align=center,minimum width=5.55cm,minimum height=1.0cm] (natural)
+    at (3.4,-2.65)
+    {keep natural endpoint roof\\
+     honest $\mathcal S_1$ for $\Re s>1/2$\\
+     \textbf{factorial $M_k^{-2s}$}};
+  \node[draw=stopred,rounded corners=2mm,very thick,fill=stopred!5,
+    align=center,minimum width=5.55cm,minimum height=1.0cm] (forced)
+    at (9.6,-2.65)
+    {force total roof $\log k$ on length $k$\\
+     $k/\log k\to\infty$\\
+     \textbf{clock dilution}};
+  \draw[flow] (fixed.south) -- ++(0,-0.35) -| (natural.north);
+  \draw[changed] (grow.south) -- ++(0,-0.35) -| (natural.north);
+  \draw[changed] (induced.south) -- ++(0,-0.25) -| (forced.north);
+
+  \node[draw=stopred,very thick,rounded corners=2mm,align=center,
+    minimum width=10.5cm,minimum height=0.8cm] at (6.5,-4.1)
+    {No branch preserves the original recurrent word, marker,
+     trace-class whole operator, and prime Euler roof together.};
+\end{tikzpicture}

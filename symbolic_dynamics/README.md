@@ -34,6 +34,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [20-recurrent-verifier-clock-dilution](papers/20-recurrent-verifier-clock-dilution/README.md) | [PDF](papers/20-recurrent-verifier-clock-dilution/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/20-recurrent-verifier-clock-dilution/) | 把完整试除计算闭成 prime cycle 后，每圈仍精确携带 $\log p$，但验证长度 $\ell(p)\asymp p\log p$ 会把 clock 稀释到至少一条边权趋于 $1$；whole adjacency 因而 essential norm 为 $1$、非紧且没有 Fredholm determinant。$z=1$ 的 orbit product 虽仍是 $1/\zeta$，Poincaré return 却把系统收缩回 Paper 04 的 diagonal atom loops。 | **CLOCK DILUTION / FIRST-RETURN COLLAPSE / ROUTE-A REJECTED / SD-C22** |
 | [21-successor-divisor-cycle-flood](papers/21-successor-divisor-cycle-flood/README.md) | [PDF](papers/21-successor-divisor-cycle-flood/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/21-successor-divisor-cycle-flood/) | successor–divisor grammar $n\to d\iff d\mid n+1$ 给出强连通、mixing 的 genuine recurrent shift，且自然 whole adjacency 精确满足 $L_s\in\mathcal S_1\iff\Re s>1/2$；但它没有长度一轨道，并从每个长度 $k\ge2$ 都产生 canonical primitive cycle，所有自然 orbit norms 又是 composite squares。 | **SHARP FREDHOLM / ALL-LENGTH CYCLE FLOOD / ROUTE-A REJECTED / SD-C23** |
 | [22-cofactor-holonomy-fredholm-trilemma](papers/22-cofactor-holonomy-fredholm-trilemma/README.md) | [PDF](papers/22-cofactor-holonomy-fredholm-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/22-cofactor-holonomy-fredholm-trilemma/) | successor–divisor edge 的 intrinsic cofactor $q=(n+1)/d$ 精确分类 closed-path holonomy；$Q=2$ 当且仅当轨道是 $C_k=(k,\ldots,2k-1)$。two-parameter adjacency 的 sharp domain 为 $\Re s>1/2$ 且 $\Re(s+u)>1/2$，但 pure cofactor 非紧、endpoint regularization 阶乘衰减、unitary character 只改相位。 | **HOLONOMY RESOLUTION / FREDHOLM TRILEMMA / ROUTE-A REJECTED / SD-C24** |
+| [23-unary-holonomy-finite-fiber-rigidity](papers/23-unary-holonomy-finite-fiber-rigidity/README.md) | [PDF](papers/23-unary-holonomy-finite-fiber-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/23-unary-holonomy-finite-fiber-rigidity/) | canonical cofactor word $1^{k-1}2$ 上，任意固定有限状态响应最终周期，任意固定有限维矩阵响应是 LRS，因而不能精确选择无限 prime-only support；增长记忆虽可拟合任意有限目标，却完全不具算术选择性，且完整块行列式仍保留 $z^k$ 与阶乘 roof。 | **FINITE-FIBER RIGIDITY / FACTORIAL ROOF / ROUTE-A REJECTED / SD-C25** |
 
 ### 论文 1 的候选分离结论
 
@@ -645,13 +646,75 @@ Paper 23 因而保留 $C_k$ 上完整、有序的 quotient word $1^{k-1}2$，检
 finite fiber 或 finite-dimensional recurrence 能否在不编译 prime table 的前提下选择
 prime length；Route B 继续锁定。
 
+### 论文 23：有限记忆只能最终周期，增长记忆又会拟合一切
+
+Paper 23 在 Paper 22 已完全分类的 canonical cycles
+
+$$
+C_k=(k,k+1,\ldots,2k-1)
+$$
+
+上保留有序 cofactor word
+
+$$
+W(C_k)=1^{k-1}2.
+$$
+
+对任何固定有限群、有限半群、DFA 或 NFA，读这个 unary family 得到的响应都最终
+周期，因此不可能在所有素数长度上响应、在所有合数长度上静默。对固定
+$A,B\in M_d(\mathbb C)$，bilinear response 与 trace response
+
+$$
+u^{\mathsf T}A^{k-1}Bv,
+\qquad
+\operatorname{tr}(A^{k-1}B)
+$$
+
+都是线性递推序列；Skolem–Mahler–Lech 定理使其 exact zero/nonzero support 与固定
+level support 最终周期。若让维数随 cutoff 增长，nilpotent shift 又能逐项记住 prime、
+square、Fibonacci、random、hash 或任意 rational target，因而只能得到
+`PROVES_TOO_MUCH` 的有限拟合。
+
+论文同时修正了一个重要的 determinant 边界。令
+
+$$
+w_k=z^k\left(\frac{(2k-1)!}{(k-1)!}\right)^{-2s}.
+$$
+
+真正的 $d$ 维 local factor 是
+
+$$
+\det_{\mathbb C^d}(I-w_kBA^{k-1}),
+$$
+
+而不是 $1-w_k\operatorname{tr}(BA^{k-1})$。即使首个 trace 为零，高次重复仍可见；
+$A=I_2$、$B=\operatorname{diag}(1,-1)$ 的精确控制给出
+$\operatorname{tr}(B)=0$、$\operatorname{tr}(B^2)=2$ 与 local factor $1-w_k^2$。
+即使另行假设一维 prime-oracle deletion，保留下来的仍是
+
+$$
+\prod_p\left(1-z^p
+\left(\frac{(2p-1)!}{(p-1)!}\right)^{-2s}\right),
+$$
+
+而不是目标 Euler product。32/32 exact tests 审计了 4,095 个 canonical cycles、
+8,390,655 条 edges、1,054,474 个 finite-state configurations 和完整的 block
+determinant firewall；双跑的 31 个 artifacts 全部 byte-identical。
+
+阶段结论是 **GO_FINITE_FIBER_RIGIDITY / STOP_PRIME_LENGTH_SELECTOR /
+STOP_FACTORIAL_ROOF / PROVES_TOO_MUCH / ROUTE_A_REJECTED**。Paper 24 若继续这条
+同族分支，必须放弃对 unary word 再叠一层有限 character，转而寻找一个
+$O(\log n)$ symbolic length、总 roof $\log n$、在 primitive-orbit algebra 内部区分
+prime/composite 且 whole operator trace class 的 source-derived recurrent grammar；
+Route B 继续锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十二篇论文](papers/)
+- [二十三篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

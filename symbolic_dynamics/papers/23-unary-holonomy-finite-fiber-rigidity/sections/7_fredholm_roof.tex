@@ -1,0 +1,219 @@
+\section{Same-object Fredholm and factorial-roof ledger}
+\label{sec:fredholm}
+
+The algebraic response theorem does not by itself guarantee that the lifted
+graph operator is analytically legitimate.  We now specialize to complex
+fibers and prove the sharp nuclear domain before comparing determinant
+coefficients.
+
+\subsection{Sharp trace-class half-plane}
+
+\begin{theorem}[Finite-block nuclear threshold]
+\label{thm:traceclass}
+Let \(A,B\in M_d(\C)\) be fixed and not both zero.  On
+\(\cH=\ell^2(V)\otimes\C^d\),
+\[
+        L_{s,A,B}\in\Sone(\cH)
+        \Longleftrightarrow
+        \Re s>\frac12.
+\]
+On this half-plane, \(s\mapsto L_{s,A,B}\) is
+\(\Sone\)-valued holomorphic.
+\end{theorem}
+
+\begin{proof}
+Write \(\sigma=\Re s\) and split the operator into successor and return
+parts.  Their edge rank-one expansions give
+\[
+ \|S_{s,A}\|_1
+ \le \|A\|_1\sum_{n\ge2}[n(n+1)]^{-\sigma},
+\]
+\[
+ \|R_{s,B}\|_1
+ \le \|B\|_1\sum_{d\ge2}[(2d-1)d]^{-\sigma}.
+\]
+Both scalar series are comparable to \(\sum n^{-2\sigma}\), so
+\(\sigma>1/2\) is sufficient.
+
+If \(A\ne0\), compress the domain to even sources and the range to odd
+targets.  Even sources have no quotient-two return edge, and the compression
+is an injective block weighted shift with trace norm
+\[
+ \|A\|_1
+ \sum_{m\ge1}[(2m)(2m+1)]^{-\sigma}.
+\]
+It is not nuclear at \(\sigma\le1/2\).  If \(A=0\) and \(B\ne0\), the return
+map \(2d-1\mapsto d\) is injective and has trace norm
+\[
+ \|B\|_1
+ \sum_{d\ge2}[(2d-1)d]^{-\sigma},
+\]
+with the same boundary.  Local uniform convergence of the edge expansions
+on compact sub-half-planes proves holomorphy.
+\end{proof}
+
+\begin{corollary}
+\label{cor:fredholm}
+For \(\Re s>1/2\),
+\[
+        D_{A,B}(s,z)=\det_{\cH}(I-zL_{s,A,B})
+\]
+is an honest Fredholm determinant, entire in \(z\).
+\end{corollary}
+
+\subsection{Four ledgers that must not be conflated}
+
+Put
+\[
+        w_k=z^kM_k^{-2s},
+\qquad
+        P_k=BA^{k-1}.
+\]
+Column-source traversal gives \(P_k\), while trace cyclicity gives
+\(\operatorname{tr}(P_k)=\operatorname{tr}(A^{k-1}B)\).
+
+\begin{proposition}[Block determinant and trace logarithm]
+\label{prop:blockfactor}
+The complete local \(d\)-dimensional block factor associated with \(C_k\) is
+\[
+        \Delta_k(s,z)
+        =\det_{\C^d}(I-w_kP_k).
+\]
+As a normalized germ at \(w_k=0\),
+\[
+ -\log\Delta_k(s,z)
+ =\sum_{r\ge1}\frac{w_k^r}{r}\Tr(P_k^r).
+\]
+The expression \(w_k\Tr(P_k)\) is only its first trace-log term.
+\end{proposition}
+
+\begin{proof}
+The local return matrix is the scalar orbit weight \(w_k\) times its fiber
+monodromy \(P_k\).  The finite-dimensional determinant identity
+\[
+        -\log\det(I-X)
+        =\sum_{r\ge1}\frac1r\Tr(X^r)
+\]
+holds near \(X=0\).  Substitute \(X=w_kP_k\).
+\end{proof}
+
+\begin{remark}[A zero first trace does not delete a factor]
+\label{rem:tracenotfactor}
+If \(P_k=\operatorname{diag}(1,-1)\), then
+\[
+        \Tr(P_k)=0
+\quad\hbox{but}\quad
+        \det(I-w_kP_k)=1-w_k^2.
+\]
+Thus \(\Tr(P_k)=0\) does not mean that \(C_k\) disappears from the block
+determinant.  A marked bilinear observable
+\[
+        u^{\mathsf T}A^{k-1}Bv
+\]
+is separate again: it is neither the full block factor nor an unmarked
+trace coefficient.
+\end{remark}
+
+\begin{theorem}[All block coefficients remain LRS-rigid]
+\label{thm:exteriorlrs}
+Expand
+\[
+ \Delta_k(s,z)
+ =\sum_{j=0}^d(-w_k)^j\alpha_{j,k},
+\qquad
+ \alpha_{0,k}=1.
+\]
+For each fixed \(j\ge1\),
+\[
+ \alpha_{j,k}
+ =\Tr\!\left((\wedge^jB)(\wedge^jA)^{k-1}\right)
+\]
+is a fixed finite-dimensional LRS.  Consequently,
+\[
+ E_{\rm block}
+ =\{k:\Delta_k(s,z)\not\equiv1
+      \text{ as a polynomial in }w_k\}
+\]
+is ultimately periodic.  If \(E_{\rm block}\subseteq\Pp\), it is finite.
+\end{theorem}
+
+\begin{proof}
+The coefficient of \((-w_k)^j\) in
+\(\det(I-w_kP_k)\) is
+\(\Tr(\wedge^jP_k)\).  Exterior powers preserve multiplication:
+\[
+ \wedge^jP_k
+ =(\wedge^jB)(\wedge^jA)^{k-1}.
+\]
+\Cref{thm:recurrence,thm:smlsupport} therefore applies to each
+\(\alpha_{j,k}\).  The factor is nontrivial exactly when at least one of the
+finitely many \(\alpha_{j,k}\), \(j\ge1\), is nonzero.  A finite union of
+ultimately periodic supports is ultimately periodic; use
+\cref{lem:primeperiod}.
+\end{proof}
+
+\Cref{thm:exteriorlrs} repairs a tempting but false shortcut: the first
+trace cannot stand for the whole determinant.  The correct full-block
+statement is nevertheless finite-dimensional and remains within the same
+recurrence obstruction.
+
+\subsection{Scalar oracle control and immutable roof}
+
+A different object is useful only as a hostile control.  After the source
+is frozen, suppose a one-dimensional oracle attaches
+\[
+        c_k=\id_{\Pp}(k)
+\]
+and defines
+\[
+        \Delta_k^{\rm oracle}=1-w_kc_k.
+\]
+This deletion rule is not inferred from
+\(\Tr(P_k)\), \(\Delta_k\), or the marked bilinear response.
+
+\begin{theorem}[Factorial-roof persistence]
+\label{thm:factorial}
+Every \(r\)-th block trace-log term has base monomial
+\[
+        w_k^r=z^{kr}M_k^{-2sr}.
+\]
+The separate one-dimensional oracle control yields
+\[
+ \prod_{p\in\Pp}(1-z^pM_p^{-2s}),
+\]
+not
+\[
+ \prod_{p\in\Pp}(1-zp^{-s}).
+\]
+\end{theorem}
+
+\begin{proof}
+\Cref{prop:blockfactor} gives the block powers.  The oracle formula follows
+by substituting \(c_k=\id_{\Pp}(k)\).  Neither operation changes
+\cref{prop:monomial}.
+\end{proof}
+
+\begin{proposition}[Factorial scale]
+\label{prop:stirling}
+\[
+        \log M_k
+        =k\log k+(2\log2-1)k+O(\log k).
+\]
+\end{proposition}
+
+\begin{proof}
+Stirling's formula in
+\(\log(2k-1)!-\log(k-1)!\) gives
+\[
+\begin{aligned}
+\log M_k
+ &=2k\log(2k)-2k-k\log k+k+O(\log k)\\
+ &=k\log k+(2\log2-1)k+O(\log k).
+\end{aligned}
+\]
+\end{proof}
+
+The natural roof is therefore of order \(2k\log k\), not \(\log k\).
+The fixed block operator earns analytic-determinant credit, but neither its
+complete factor nor the oracle deletion control has the prime Euler
+monomial.

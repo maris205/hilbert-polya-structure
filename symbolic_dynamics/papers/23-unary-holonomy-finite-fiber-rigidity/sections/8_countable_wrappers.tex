@@ -1,0 +1,149 @@
+\section{Licensed countable wrappers}
+\label{sec:countable}
+
+Fixed finite memory cannot isolate prime-only support, while growing finite
+memory can store any cutoff.  Countable memory can run a total primality
+algorithm.  We do not claim that all countable symbolic extensions fail.
+We analyze only the two licensed architectures inherited from Papers19--20:
+transient computation and recurrent closure.
+
+\subsection{Transient computation is trace-invisible}
+
+\begin{theorem}[Universal transient-decider wrapper]
+\label{thm:transient}
+Let \(S\subseteq\{2,3,\ldots\}\) be decided by a total deterministic
+machine with finite runtime \(T(n)\).  Put the computation for input \(n\)
+on a one-way finite chain.  Send acceptance to a self-loop of weight
+\(n^{-s}\) and rejection to a one-way acyclic cemetery ray.  Give
+computation edge \(t\) weight \([n(t+2)]^{-s}\) and cemetery edge \(j\)
+weight \([n(j+1)]^{-s}\).
+
+For \(\Re s>1\), the whole weighted vertex adjacency is trace class and
+\[
+        \Tr L_{S,s}^r=\sum_{n\in S}n^{-rs},
+\]
+\[
+        \det(I-zL_{S,s})
+        =\prod_{n\in S}(1-zn^{-s}).
+\]
+\end{theorem}
+
+\begin{proof}
+Writing \(\sigma=\Re s\), the edge-rank-one majorant is
+\[
+\begin{aligned}
+\|L_{S,s}\|_1
+&\le
+\sum_{n\ge2}\sum_{t=0}^{T(n)}[n(t+2)]^{-\sigma}\\
+&\quad+
+\sum_{n\notin S}\sum_{j\ge1}[n(j+1)]^{-\sigma}
++\sum_{n\in S}n^{-\sigma}\\
+&\le
+2\left(\sum_{n\ge2}n^{-\sigma}\right)
+ \left(\sum_{j\ge2}j^{-\sigma}\right)
++\sum_{n\ge2}n^{-\sigma}<\infty.
+\end{aligned}
+\]
+All computation and cemetery edges are acyclic.  Closed walks occur only on
+accepted loops, which gives the trace and determinant formulas.
+\end{proof}
+
+\begin{corollary}[Selector tautology]
+\label{cor:selector}
+\Cref{thm:transient} compiles every total decidable support, including
+primes, squares, powers of two, and seeded total predicates.  Pruning the
+transient states leaves exactly the accepted diagonal loops.  The
+determinant cannot distinguish how the support was computed and is
+\textup{\textsc{Proves Too Much}}.
+\end{corollary}
+
+\subsection{Recurrent computation clock-dilutes}
+
+\begin{theorem}[Long-cycle/short-roof obstruction]
+\label{thm:clock}
+Close accepted computations into pairwise disjoint deterministic cycles of
+lengths \(\ell(n)\).  Assign nonnegative roofs
+\(\tau_{n,1},\ldots,\tau_{n,\ell(n)}\) with
+\[
+        \sum_{j=1}^{\ell(n)}\tau_{n,j}=\log n.
+\]
+If, along an infinite accepted subsequence,
+\[
+        \frac{\ell(n)}{\log n}\longrightarrow\infty,
+\]
+then for every fixed \(\sigma>0\) the whole weighted vertex adjacency is
+noncompact.
+\end{theorem}
+
+\begin{proof}
+Some edge satisfies
+\[
+        \tau_{n,j}\le\frac{\log n}{\ell(n)},
+\]
+and therefore has weight
+\[
+ \e^{-\sigma\tau_{n,j}}
+ \ge n^{-\sigma/\ell(n)}
+ \longrightarrow1.
+\]
+Choose one such edge on each disjoint cycle.  Its source vectors are
+orthonormal, and their images have mutually orthogonal components with
+norms bounded away from zero.  The images have no convergent subsequence,
+so the operator is not compact.
+\end{proof}
+
+\begin{corollary}[Canonical-spine dilution]
+\label{cor:spinedilution}
+If the natural endpoint roof on \(C_k\) is replaced by total roof
+\(\log k\), every nonnegative allocation over its \(k\) edges produces a
+noncompact whole adjacency, because
+\[
+        \frac{k}{\log k}\longrightarrow\infty.
+\]
+\end{corollary}
+
+Acceptance-independent padding is a matched control.  Adding \(n\) dummy
+steps to every input, regardless of acceptance, makes
+\(\ell(n)/\log n\) diverge for any decidable support.  The obstruction is
+therefore not prime-specific.
+
+\subsection{First return changes the object}
+
+\begin{proposition}[Marker collapse]
+\label{prop:inducing}
+First return to one marked state per accepted cycle multiplies its edge
+weights into \(n^{-s}\), but changes
+\[
+        z^{\ell(n)}\longmapsto z.
+\]
+For \(C_k\), it erases \(1^{k-1}2\) and maps \(z^k\) to \(z\).
+\end{proposition}
+
+\begin{proof}
+A return step represents one full original circuit.  The product of the
+edge weights becomes one return weight, while the induced graph assigns one
+new edge to that circuit.  The old edge count is therefore not preserved.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/memory_roof_decision}}
+  \caption{Every immediate enlargement of memory has a different failure
+  certificate: prime nonselection, arbitrary-prefix universality,
+  determinant-invisible transient computation, noncompact recurrent clocks,
+  or a changed first-return marker.  The natural endpoint roof remains
+  factorial; forcing \(\log k\) on a length-\(k\) orbit activates the
+  recurrent obstruction.}
+  \label{fig:memorydecision}
+\end{figure}
+
+\Cref{fig:memorydecision} separates four statements that are often merged:
+computability, recurrence visibility, whole-operator compactness, and
+marker preservation.  The scoped conclusion is:
+\begin{quote}
+Within the Paper19 transient and Paper20 recurrent total-decider wrappers,
+exact selection either becomes determinant-invisible computation, loses
+compactness under a short recurrent roof, or changes the orbit ledger under
+induction.
+\end{quote}
+No universal countable-state impossibility theorem is asserted.

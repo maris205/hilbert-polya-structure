@@ -40,10 +40,11 @@ henon_totient_abel_boundary_escape - HCS-P52 complete - The exact period-four pa
 henon_pressure_weighted_all_orbit_abel_law - HCS-P53 complete - Full multiplier Mahler heights govern a proved pressure-weighted all-orbit Abel boundary and joint pressure-height/Gamma product law in the certified safe half-plane.
 henon_mahler_pressure_pole_galois_excess_gate - HCS-P54 complete - The physical Mahler summand reaches a proved pressure pole at s=1, while the positive nonphysical Galois excess becomes the exact thermodynamic completion gate.
 henon_galois_excess_three_block_obstruction - HCS-P55 complete - Exact period-three through period-five block homology rejects every width-at-most-three Galois-excess potential, while width four interpolates the finite witness and leaves the all-period Hölder gate open.
+henon_galois_excess_four_block_incidence_ladder - HCS-P56 complete - Two primitive orbit families give an exact all-width incidence ladder; its first new period-six field proves a width-at-most-four excess obstruction, while a determinant-one width-five minor isolates the remaining Hölder-asymptotic gate.
 
-`P43`--`P55` are the unique registry aliases for the pressure/orbit lane.
+`P43`--`P56` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
-strings to preserve their published hashes; `P48`--`P55` were born
+strings to preserve their published hashes; `P48`--`P56` were born
 namespaced. The unqualified IDs `C43`--`C48` in this repository belong to
 the full-kernel cubic lane listed in the theorem table below.
 
@@ -75,6 +76,7 @@ The foundational local source is
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
 | [henon_mu3_d12_calabi_yau_core_projector/](henon_mu3_d12_calabi_yau_core_projector/) | C52: the complete order-\(24\) projective monomial source group gives \(K\)-rational middle Chow projectors of ranks \(10\) and \(158\); the rational graph algebra cannot isolate the desired rank-two extreme Hodge pair | First algebraic splitting of the fourth-moment odd packet; A3 packet control improved, A2/A4 inherited, Route A exploratory |
+| [henon_galois_excess_four_block_incidence_ladder/](henon_galois_excess_four_block_incidence_ladder/) | P56: the primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy an exact incidence relation for every width; the radical period-six member makes the width-four excess identity fail exactly, while a determinant-one width-five minor proves finite sharpness | Infinite symbolic regularity gate inside Route A; the one-sided Hölder discrepancy asymptotics, full Galois-weighted determinant and Route B remain open |
 | [henon_galois_excess_three_block_obstruction/](henon_galois_excess_three_block_obstruction/) | P55: an exact width-three incidence relation among five primitive H6 cycles violates the corresponding Galois-excess identity; a unimodular width-four minor proves finite sharpness, and a one-sided exponential discrepancy condition identifies the genuine Hölder gate | Exact finite-memory obstruction inside Route A; unrestricted Hölder realization, the full Galois-weighted determinant and Route B remain open |
 | [henon_mahler_pressure_pole_galois_excess_gate/](henon_mahler_pressure_pole_galois_excess_gate/) | P54: the P53 Mahler coefficient splits exactly into physical instability length plus nonnegative Galois excess; the physical primitive series has a source-backed simple pressure pole with residue \(3/(\pi^2h_*)\), while three exact orbits rule out scalar pressure retuning | First pressure-critical pole in this lane, scoped to the physical subsystem; Route A exploratory with physical A2 analytic determinant, full Galois-weighted A2 and Route B still open |
 | [henon_pressure_weighted_all_orbit_abel_law/](henon_pressure_weighted_all_orbit_abel_law/) | P53: every orbit packet has leading coefficient \(\varphi(n)\log M(f_{\lambda_\gamma})/2\), and the Abel boundary interchanges with the complete pressure-weighted primitive-orbit sum; the joint limit is the pressure-height orbit law times Gamma\((2,1)\) | First pressure-weighted all-orbit packet boundary; Route A exploratory, A3 partial, pressure-critical continuation still open |

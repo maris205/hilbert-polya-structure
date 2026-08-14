@@ -267,9 +267,9 @@ Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
 retained positive structures rather than added to the obstruction list.
 The first untreated uniform-moment wall is now the fifth chronological
 moment; no continuation through \(\Re s=1/5\) is asserted.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P55`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P56`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P55 were born namespaced.
+strings, while P48--P56 were born namespaced.
 
 ## HCS-C51 additions
 
@@ -348,3 +348,9 @@ strings, while P48--P55 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O97 | Width-at-most-three locally constant realization of the H6 Galois excess | proved cyclic three-block incidence obstruction | Five exact primitive cycles satisfy \(N_3(\gamma_3)+N_3(\gamma_5)=N_3(\gamma_{4a})+N_3(\gamma_{4b})\), while exact trace-field inequalities give \(E_3+E_5>E_{4a}+E_{4b}\). Every potential of width at most three must satisfy the failed identity. | Stops only finite-memory potentials through width three. A unimodular width-four minor interpolates the finite witness, and arbitrary finite periodic totals can be fitted with longer cylinders; unrestricted one-sided or two-sided Hölder realization remains open. | ../henon_galois_excess_three_block_obstruction/README.md |
+
+## HCS-P56 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O98 | Width-at-most-four locally constant realization of the H6 Galois excess | proved all-width incidence-ladder obstruction with an exact period-six witness | The primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy \(N_m(A_m)+N_m(B_{m+2})=N_m(A_{m+1})+N_m(B_{m+1})\) for every \(m\ge3\). At \(m=4\), the exact radical \(B_6\) field and shared period-five trace field give \(E_{A_5}+E_{B_5}>E_{A_4}+E_{B_6}\), contradicting the required periodic-sum identity. | Stops locally constant potentials only through width four. A determinant-one width-five minor interpolates the seven-cycle witness. The infinite ladder gives a necessary exponential discrepancy condition for one-sided Hölder data, but its asymptotics and the unrestricted/two-sided realization remain open. | ../henon_galois_excess_four_block_incidence_ladder/README.md |

@@ -1,0 +1,123 @@
+\section{Growing finite memory and finite-fit non-evidence}
+\label{sec:growing}
+
+\Cref{cor:noprimecoefficient} freezes the dimension before \(k\) tends to
+infinity.  Finite experiments reverse those quantifiers unless the model is
+held fixed.  The reversal admits an exact universal construction.
+
+\begin{theorem}[Bilinear nilpotent memorizer]
+\label{thm:bilmemorizer}
+Fix \(N\ge1\) and arbitrary
+\(\eta_1,\ldots,\eta_N\in\mathbb F\).  Let
+\(J_N\in M_N(\mathbb F)\) satisfy
+\[
+ J_Ne_j=e_{j+1}\quad(j<N),\qquad J_Ne_N=0.
+\]
+With
+\[
+        v=e_1,\qquad B=I,\qquad
+        u=\sum_{j=1}^N\eta_je_j,
+\]
+one has
+\[
+ u^{\mathsf T}J_N^{k-1}Bv
+ =
+ \begin{cases}
+ \eta_k,&1\le k\le N,\\
+ 0,&k>N.
+ \end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+For \(k\le N\), \(J_N^{k-1}e_1=e_k\), so the contraction reads the \(k\)-th
+coordinate of \(u\).  For \(k>N\), \(J_N^{k-1}=0\).
+\end{proof}
+
+\begin{theorem}[Trace nilpotent memorizer]
+\label{thm:trmemorizer}
+With the same \(J_N\), let \(B_\eta\) have entries
+\[
+        (B_\eta)_{1k}=\eta_k,\qquad 1\le k\le N,
+\]
+and all other entries zero.  Then
+\[
+ \operatorname{tr}(J_N^{k-1}B_\eta)
+ =
+ \begin{cases}
+ \eta_k,&1\le k\le N,\\
+ 0,&k>N.
+ \end{cases}
+\]
+\end{theorem}
+
+\begin{proof}
+The only nonzero contribution to the trace is
+\[
+        (J_N^{k-1})_{k1}(B_\eta)_{1k}=\eta_k.
+\]
+Nilpotence gives zero after \(N\).
+\end{proof}
+
+The two constructions expose where the apparent information resides:
+\(\eta\) is stored directly in the endpoint covector \(u\) or the first row
+of \(B_\eta\).  Nothing in the successor--divisor source selects those
+entries.
+
+\begin{corollary}[Arbitrary-prefix universality]
+\label{cor:provestoomuch}
+For every cutoff \(N\), the same nilpotent architecture realizes each of:
+\[
+\begin{array}{c}
+\text{prime indicator},\quad
+\text{square indicator},\quad
+\text{powers of two},\quad
+\text{Fibonacci membership},\\
+\text{a seeded bit string},\quad
+\text{a hash-derived string},\quad
+\text{arbitrary signed rational values}.
+\end{array}
+\]
+Therefore finite-prefix success is
+\[
+        \text{\normalfont\scshape Control}
+        \mid
+        \text{\normalfont\scshape Proves Too Much}.
+\]
+\end{corollary}
+
+\begin{table}[t]
+\centering
+\caption{The fixed and growing statements have different quantifier order.
+Only the first tests an infinite source-derived response.}
+\label{tab:quantifiers}
+\small
+\begin{tabularx}{\textwidth}{L{3.1cm}YY}
+\toprule
+Regime & Quantifiers & Interpretation \\
+\midrule
+fixed finite dimension
+& \(\forall d,A,B,u,v\), no infinite prime-only exact support
+& asymptotic no-go from SML \\
+growing cutoff model
+& \(\forall N,\eta_{1:N}\), an \(N\)-dimensional realization exists
+& target vector is memorized \\
+valid finite audit
+& freeze \(d,A,B,u,v\), then enlarge evaluation cutoff
+& tests the fixed theorem without changing the model \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{remark}[Why a large prime prefix is not special]
+The memorizer fits every bit pattern with zero residual.  Increasing \(N\)
+and rebuilding \(J_N,u,B_\eta\) merely enlarges the stored table.  A finite
+prime experiment becomes informative only if the dimension and all
+parameters are frozen first and evaluated beyond their construction range.
+Matched arbitrary-target controls are mandatory even then.
+\end{remark}
+
+This control also guards the later countable construction.  Infinite memory
+can encode a total decider; the question is not whether primality is
+computable, but whether the computation is source-derived and visible to
+the same recurrent determinant.
