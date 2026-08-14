@@ -398,3 +398,9 @@ source-native prime-power trace---rather than ambient root effectivity.
 
 - [P62 proof package](../henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
 - [P62 exact certificate](../henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)
+
+## HCS-C54 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O104 | Ordinary finite-rank rational compatible realization of the complete good-split exponent \(4/n\) | proved weight-separated denominator rigidity with exact \(n=3\) symmetry and counterpacket closure | On every packet-admissible smooth row, Chebotarev--Brauer--Nesbitt after restriction to \(K\) forces \(n[V_0]=4[\mathsf E_n]\) and \(n[V_1]=4[\mathsf O_n]\) on the two pure weights separately.  Their ranks imply realizability exactly when \(n\mid4\), so only \(n=2,4\) survive; the total rank falsely accepts \(n=3\).  At \(n=3\), the exact \(\operatorname{Dih}(C_9)\) character has no nonzero common central source-isotypic sector clearing \(4/3\) on both rails, while every split-invisible virtual rational class restricts to zero over \(K\) and changes neither rail rank nor multiplicity. | The factor theorem is conditional on packet admissibility, certified here only for \(n=2,3,4\); the all-\(n\) result is instead the equation-level classification of the full projective monomial ideal stabilizer, not the full PGL automorphism group.  It proves no smoothness or motive for \(n\ge5\), and constructs no inert or global fractional root, automorphy, continuation, functional equation, or RH statement. | ../henon_mu3_universal_dihedral_denominator_rigidity/THEOREM_PACKAGE.md |

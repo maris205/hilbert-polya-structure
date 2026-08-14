@@ -1,6 +1,6 @@
 # Batch plan: HCS-C52 through HCS-C56
 
-Status: **adaptive batch in progress; C52--C53 complete, C54 locked**
+Status: **adaptive batch in progress; C52--C54 complete, C55 locked**
 
 Date: 2026-08-14
 
@@ -22,16 +22,17 @@ orders, and whether the resulting tower admits a nonfactorwise completion.
 Each paper below has its own theorem-sized stop/go gate.  They are not five
 installments of one proof.
 
-The dependency graph after the first two realized gates is
+The dependency graph after the first three realized gates is
 
 \[
  C52\longrightarrow C53\longrightarrow C54\longrightarrow C55
  \longrightarrow C56.
 \]
 
-C52 and C53 are complete.  C54 is locked from the actual C53 rational
-descent; C55 and C56 remain contingent and must be re-scoped after the
-preceding gate rather than forced to follow a failed branch.
+C52, C53, and C54 are complete.  C55 is locked from the actual C54
+symmetry/denominator theorem and its independent adaptive reconnaissance;
+C56 remains contingent and must be re-scoped after the realized C55 gate
+rather than forced to follow a failed branch.
 
 ## HCS-C52: dihedral Chow projector and graph-algebra optimum
 
@@ -172,7 +173,7 @@ power is an ordinary finite-rank compatible-system multiplicity.
 
 ## HCS-C54: universal dihedral source symmetry and denominator rigidity
 
-### Locked positive theorem
+### Realized universal and denominator theorems
 
 For every \(n\ge2\), the full projective monomial ideal stabilizer of the
 ordered source pair is
@@ -185,7 +186,7 @@ This is not a claim about the full PGL automorphism group.  Under the C53
 descent it becomes a generally nonconstant finite etale \(\mathbf Q\)-group
 scheme of rank \(6n\), split by \(K\), with exactly two rational points.
 
-For every packet-admissible smooth row, require an ordinary semisimple
+For every packet-admissible smooth row, require an ordinary actual
 finite-rank compatible system to reproduce the complete good-split local
 factor with exponent \(4/n\) while preserving the weight-zero/weight-one
 decomposition.  Then such a system exists if and only if
@@ -199,7 +200,7 @@ Chebotarev--Brauer--Nesbitt and the two pure ranks separately; the total rank
 alone falsely accepts \(n=3\).  The converse uses honest direct copies and
 therefore matches every local power trace, not just the first coefficient.
 
-### Exact n=3 and counterpacket gates
+### Realized n=3 and counterpacket gates
 
 The complete \(G_3=\operatorname{Dih}(C_9)\) Cayley/Fermat character shows
 that no nonzero common central source-isotypic sector clears the \(4/3\)
@@ -219,43 +220,91 @@ not another denominator paper: C55 compares the parameterized Yukawa/IVHS
 invariants of the C53 rank-ten Calabi--Yau-type core with a genuine rational
 Calabi--Yau-threefold family before any motivic-identification claim.
 
-## HCS-C55: rank-ten Yukawa comparison and honest Calabi--Yau realization gate
+## HCS-C55: rational Yukawa surface and honest Calabi--Yau VHS gate
 
 ### Dominant question
 
-Is the rational rank-ten Calabi--Yau-type motive of C53 the third cohomology
-of a genuine Calabi--Yau threefold, rather than merely a Hodge-size match?
+What is the exact projective Yukawa invariant of the rational rank-ten
+Calabi--Yau-type core, and can it pass the necessary polarized-VHS tests for
+the third cohomology of a genuine Calabi--Yau threefold?
 
-### First comparison target
+### Locked unconditional theorem target
 
-Construct the four-parameter invariant deformation of the C53 core and
-compute its polarized infinitesimal variation of Hodge structure, especially
-the Yukawa cubic in a source-canonical tangent basis.  Independently compute
-the same invariant for an explicit rational Calabi--Yau quotient family with
-\((h^{1,1},h^{2,1})=(1,4)\).  Compare their Yukawa moduli up to the allowed
-linear change of tangent coordinates and polarization scale.
+Construct the four-dimensional rational equivariant deformation germ of the
+\(n=4\) cubic--quadric complete intersection.  The deformation proof must
+establish unobstructedness, identify the fixed tangent space
+\(H^1(T_X)^{G_4}\), descend it using the nonconstant C54 rational group form,
+and extend the 24-graph Reynolds correspondence over the relative family.
+After one Tate twist, the relative projector must define a rank-ten
+polarized variation with Hodge numbers
 
-### Positive and negative theorem branches
+\[
+(h^{3,0},h^{2,1},h^{1,2},h^{0,3})=(1,4,4,1)
+\]
 
-- **Positive:** an exact family-level identification of the IVHS/Yukawa data
-  authorizes a search for an algebraic correspondence or a common geometric
-  construction; it does not by itself prove a motivic isomorphism.
-- **Negative:** a certified invariant mismatch rules out that entire family
-  as a realization of the Hénon core, which is substantially stronger than
-  a mismatched finite-prime trace.
+and locally immersive period map.  Calling this a CY3-type variation does
+not assert that it is the third cohomology of an honest threefold.
 
-If the initial rational quotient family is excluded, C55 may pivot to an
-explicit \((2,2,3)\) Calabi--Yau or a quotient/resolution construction, but it
-must retain a parameterized invariant or correspondence theorem.  Merely
-sharing Betti number ten is not evidence.
+For the Cayley polynomial \(F=yC+zQ\), independently certify the invariant
+tangent basis, the one-dimensional top trace, and the projective Yukawa
+tensor
+
+\[
+Y_{ijk}=\operatorname{Tr}_{R_{5,-6}}(y^5p_ip_jp_k)
+\]
+
+up to its single unavoidable nonzero scale.  The adaptive reconnaissance has
+identified a primitive integral four-variable cubic whose projective zero
+locus in \(\mathbf P^3_{\mathbb Q}\) is smooth and geometrically irreducible;
+C55 must promote that clue through independent exact producer/checker replays
+and a theorem-level Gauss--Manin/polarization derivation.  This rational
+Yukawa surface is the unconditional publication target even if no named
+honest-CY3 comparator is decided.
+
+### Honest-CY3 comparison branch
+
+The first admitted comparators are the four-parameter
+Braun--Candelas--Davies \(\mathrm{Dic}_3\) and \(\mathbb Z_{12}\) quotient
+families, both honest generically smooth Calabi--Yau threefold families with
+\((h^{1,1},h^{2,1})=(1,4)\).  For either comparator C55 must compute the full
+four-variable B-model tensor and decide the exact incidence problem
+
+\[
+Y_{\rm CY}(c;u)=\lambda Y_H(Au),
+\qquad A\in\operatorname{GL}_4,\quad\lambda\ne0.
+\]
+
+- A certified failure of projective \(\operatorname{GL}_4\)-equivalence is a
+  family-level local polarized-VHS obstruction and kills that named
+  realization.
+- A match advances only to Yukawa jets, the Gauss--Manin connection,
+  polarization, rational Hodge tensors, monodromy, and boundary cones.  It is
+  not evidence by itself for a motive.
+- Only an algebraic correspondence inducing the VHS map and satisfying the
+  projector-composition identities permits the phrase "honest motivic
+  realization."
+
+A base-point smooth cubic may be too weak because smooth cubic surfaces
+themselves have four-dimensional moduli.  The singular two-parameter
+dihedral locus, a one-parameter mirror Yukawa, and a noncommutative 3-CY
+category are therefore inadmissible substitutes for the required
+four-variable honest-family comparison.
 
 ### Minimal controls and kill gate
 
-- Exact parameter spaces and smooth/free loci over \(\mathbf Q\).
-- Polarization-normalized IVHS and Yukawa tensors on both sides.
-- Coordinate-invariant comparison data, not fitted bases.
-- **KILL:** Hodge-number coincidence, isolated point counts, or an unnamed
-  categorical resemblance is not a paper.
+- Freeze the C52--C54 action, residue, Tate-twist, and Frobenius conventions.
+- Prove the rational four-germ and relative rank-ten projector before using
+  the word "variation."
+- Derive Yukawa multiplication from Gauss--Manin and polarization, and replay
+  rationality, factorization, and the empty projective singular locus
+  independently.
+- Prove functoriality under polarized-VHS isomorphisms before excluding any
+  comparator; exact parameter spaces and smooth/free loci are mandatory.
+- The reconnaissance of 8,505 coordinate-pair Fermat \(\mathbf P^3\)'s kills
+  only that standard projection route, not every linear space on the cubic.
+- **KILL:** a base-point tensor without a relative projector, Hodge-number
+  coincidence, isolated point counts, finite matching prime tables, or an
+  unnamed categorical resemblance is not a paper.
 
 ## HCS-C56: adaptive realization closure or nonfactorwise analytic gate
 
