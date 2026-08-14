@@ -1,0 +1,211 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C16
+source_commit: WORKTREE_PENDING_FINAL_COMMIT
+code_commit: WORKTREE_PENDING_FINAL_COMMIT
+evaluation_date: "2026-08-14"
+artifact_path_base: papers/14-tensor-bar-mobius-selector
+freeze_note: >-
+  First-stage research artifacts, code, results, and paper source will be
+  committed together; source_commit and code_commit will be replaced by that
+  commit in a second metadata-only freeze before push.
+
+source_lock:
+  object: >-
+    One-vertex countable signed edge shift whose edges are nonempty ordered
+    reduced words of nonunit finite full shifts in the tensor monoid
+    F_m tensor F_n = F_(mn).
+  arithmetic_origin: >-
+    Tensor atoms, tensor powers, divisibility, topological entropy, the
+    incidence Mobius inverse, and Lambda_tensor=mu_tensor*h are intrinsic to
+    the same full-shift tensor source; no prime coefficient table is loaded.
+  clock: "T(a_1,...,a_k)=sum_j h(F_(a_j))=log(product_j a_j)"
+  normalization: >-
+    Reduced-bar sign (-1)^(k+1), no fitted scale or offset, and the canonical
+    determinant specialization z=1.
+  determinant_convention: >-
+    D_bar(s,z)=det_C(I-z L_bar,s)=1-z F_bar(s). Raw word summation is used
+    only for Re(s)>sigma_bar; endpoint-first incidence grouping is used for
+    Re(s)>1. At z=1, D_bar(s,1)=1/zeta(s) in the grouped domain.
+  cutoff: >-
+    local N={16,32,64,128}; incidence X={64,128,256,512}; formal bar endpoint
+    512; raw word length through 64; grouped numeric cutoff through 100000;
+    trace-log repetition through 256.
+  precision: >-
+    Exact integer/Fraction arithmetic for finite certificates and 80-decimal
+    mpmath arithmetic for separately labeled numerical observations.
+  allowed_data:
+    - tensor multiplication of finite full shifts
+    - intrinsic topological entropy
+    - ordered reduced tensor words and divisor chains
+    - exact incidence algebra and formal Dirichlet coefficients
+    - scalar Fredholm determinant and generic inventory controls
+  forbidden_data:
+    - Riemann-zero tables or target spectra
+    - target-root fitting or root selection
+    - precomputed mu_tensor or Lambda_tensor as transfer weights
+    - fitted per-atom phases or signs
+    - Paper-13 local operator stitched to the global incidence readout
+    - cross-family repairs
+
+a0:
+  verdict: A0_ANALYTIC_ARITHMETIC_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: >-
+    All 960 exact incidence rows satisfy Lambda_tensor(p^r)=log p and vanish
+    on mixed-prime endpoints; the identity is also the canonical entropy-roof
+    derivative of the same bar determinant.
+  strongest_failure: >-
+    The reduced-bar parity is a modeling choice and universal reciprocal
+    inversion is not itself arithmetically selective.
+  arithmetic_controls:
+    - composite-only ambient evaluations
+    - 16 shuffled-prime seeds
+    - 16 random-increasing seeds
+    - 8 random entropy relabel seeds
+    - random weighted and synthetic signed inventories
+  artifacts:
+    - SOURCE_LOCK.md
+    - PROOF_PACKAGE.md
+    - results/global_incidence_ledger.csv
+    - results/global_incidence_controls.csv
+    - results/entropy_relabel_controls.csv
+    - results/global_incidence_summary.json
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The one-vertex code shift has reproducible factorization-word necklaces,
+    and its trace-log records their repetitions with the frozen sign and roof.
+  strongest_failure: >-
+    Primitive necklaces are not tensor atoms or rational primes; the
+    prime-power ledger appears only after signed endpoint aggregation.
+  metrics:
+    primitive_definition: cyclic_necklaces_of_ordered_bar_code_edges
+    repetition_formula: "-log D_bar=sum_(r>=1) z^r F_bar^r/r"
+    trace_log_rows: 81
+    final_trace_log_max_residual: 7.151980202205042e-30
+    orbitwise_prime_bijection: false
+    monodromy_or_stability: not_applicable
+  artifacts:
+    - results/bar_trace_log.csv
+    - EXPERIMENT_REPORT.md
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: >-
+    The scalar Fredholm determinant is analytic in the raw domain; all 512
+    endpoint coefficients equal the independent Mobius/Dirichlet inverse,
+    giving D_bar(s,1)=1/zeta(s) on Re(s)>1 after endpoint grouping.
+  strongest_failure: >-
+    The determinant is a universal geometric-series inverse and provides no
+    target divisor match, arithmetic selectivity, or continuation beyond the
+    ordinary reciprocal-zeta half-plane identity.
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: exact_zero_for_all_formal_coefficients_through_512
+    precision_drift: >-
+      not_applicable_for_exact_formal_claims; numerical observations use the
+      single frozen 80-digit precision and report residuals without promotion
+    control_margin: not_applicable_universal_controls_also_pass_exactly
+    sigma_bar: >-
+      1.728647238998183618135103010297691464234109849335035732321285908423179
+    raw_geometric_identity_max_residual: 1.9126762000924173e-81
+    formal_endpoint_rows: 512
+    universal_control_rows: 10
+  artifacts:
+    - results/bar_formal_coefficients.csv
+    - results/bar_raw_convergence.csv
+    - results/bar_exact_certificates.json
+    - results/bar_endpoint_completion.csv
+    - results/bar_universal_controls.csv
+    - results/summary.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: OPEN
+  strongest_evidence: >-
+    Conjugation symmetry holds in the proved half-plane and the grouped
+    reciprocal identity is analytic there.
+  strongest_failure: >-
+    No completed functional equation, Gamma factor, trivial-zero treatment,
+    global continuation, Riemann-von Mangoldt law, target divisor theorem, or
+    intrinsic Weil compression is supplied.
+  analytic_structure:
+    conjugation_symmetry: PROVED_in_declared_half_plane
+    raw_domain: "Re(s)>sigma_bar"
+    endpoint_grouped_domain: "Re(s)>1"
+    functional_equation: OPEN
+    gamma_factor: OPEN
+    trivial_zeros: OPEN
+    counting_law: OPEN
+    global_divisor_identity: OPEN
+  weil_compression:
+    status: NOT_TESTABLE
+    reason: no_intrinsic_Hermitian_or_Weil_compression_from_SD_C16
+  artifacts:
+    - SOURCE_LOCK.md
+    - EXPERIMENT_REPORT.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: >-
+    The scalar transfer operator is completely defined on C in its stated
+    analytic domains.
+  strongest_failure: >-
+    There is no natural quantization, unitary/scattering completion,
+    Hamiltonian phase space, self-adjoint operator, or domain proposal.
+  metrics:
+    quantization: not_applicable
+    time_reversal: not_applicable
+    proposed_hilbert_space: not_applicable
+    proposed_operator_domain: not_applicable
+  artifacts:
+    - SOURCE_LOCK.md
+
+adversarial_controls:
+  controls_used:
+    - planted prefix/block-preserving prime shuffles
+    - composite-only inventory
+    - random-increasing support
+    - random positive rational weights
+    - synthetic signed weights
+    - shuffled ramp weights
+    - three generic scalar partition sums
+  proves_too_much_risk: true
+  verdict: STOP_SCOPED / PROVES_TOO_MUCH
+
+route_tuple:
+  - A0_ANALYTIC_ARITHMETIC_ORIGIN
+  - A1_WEAK
+  - A2_ANALYTIC_DETERMINANT
+  - A3_FAIL
+  - A4_FAIL
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: >-
+  SD-C16 proves a source-locked tensor-Mobius incidence identity and a genuine
+  scalar reduced-bar Fredholm determinant on explicitly separated domains.
+  It does not prove orbitwise prime correspondence, arithmetic selectivity,
+  completed-zeta divisor structure, RH, or a Hilbert-Polya operator. The
+  global incidence readout is not the Paper-13 local character operator.
+blocking_conditions:
+  - primitive bar-code necklaces are not tensor atoms
+  - universal inversion proves too much on generic inventories
+  - no completion or target divisor theorem beyond Re(s)>1
+  - no intrinsic Weil compression
+  - no natural operator lift
+next_smallest_test: >-
+  Within Symbolic Dynamics, test whether a canonical sign-reversing quotient
+  before cyclic primitive reduction can retain one atom class and its
+  repetitions while cancelling composite factorization histories; otherwise
+  prove the universal bar inversion cannot become an orbitwise Euler ledger.
+round2_clues: []
+route_b_invocation_allowed: false

@@ -1,0 +1,170 @@
+\section{Endpoint incidence and entropy innovation}
+\label{sec:incidence}
+
+The raw bar shift is defined by ordered words.  Tensor arithmetic appears
+when those words are grouped by their endpoint object.  Because each endpoint
+has only finitely many ordered factorizations, this grouping is exact before
+any infinite endpoint sum is taken.
+
+\subsection{Tensor-divisor M\"obius coefficient}
+
+For functions on $\M$, define tensor-divisor convolution by
+\[
+  (f*g)(n)=\sum_{d\mid n}f(d)g(n/d).
+  \tag{5.1}
+\]
+Let $\mathbf1(n)=1$ and define $\muten$ intrinsically by
+\[
+  \muten*\mathbf1=\delta_1.
+  \tag{5.2}
+\]
+No factorization table is used in the symbolic transfer; (5.2) names the
+coefficient that emerges after finite endpoint cancellation.
+
+For $n\ge2$, set
+\[
+  c(n)=\sum_{k\ge1}\ \sum_{\substack{a_1,\ldots,a_k\ge2\\
+                         a_1\cdots a_k=n}}
+       (-1)^{k+1}.
+  \tag{5.3}
+\]
+The sum is finite because $k\le\log_2n$.
+
+\begin{theorem}[Endpoint cancellation]
+\label{thm:endpoint}
+For every $n\ge2$,
+\[
+  c(n)=-\muten(n).
+  \tag{5.4}
+\]
+The endpoint-first series
+\[
+  \Fbar^{\mathrm{inc}}(s)
+  =-\sum_{n\ge2}\muten(n)n^{-s}
+  \tag{5.5}
+\]
+converges absolutely for $\Ree s>1$ and agrees with the raw transfer in
+$\Ree s>\sbar$.
+\end{theorem}
+
+\begin{proof}
+The coefficient of $n^{-s}$ in $B(s)^k$ is the number of ordered
+factorizations in (5.3).  As a formal Dirichlet series,
+\[
+  1-\bigl(B-B^2+B^3-\cdots\bigr)=(1+B)^{-1}.
+\]
+The coefficient of $(1+B)^{-1}$ is the convolution inverse in (5.2), so the
+nonunit coefficient in the parenthesized series is $-\muten(n)$.  For
+$\sigma>1$,
+\[
+  \sum_{n\ge1}|\muten(n)|n^{-\sigma}
+  =\prod_p(1+p^{-\sigma})
+  =\frac{\zeta(\sigma)}{\zeta(2\sigma)}<\infty,
+\]
+which proves absolute convergence after endpoint grouping.  Equality in the
+common domain follows from \Cref{prop:raw}.
+\end{proof}
+
+The theorem extends the coefficient-grouped formula, not the raw countable
+edge sum.  In the strip $1<\Ree s\le\sbar$, cancellation must be completed at
+each finite endpoint before endpoints are summed.  This order is part of the
+mathematical object called the incidence completion.
+
+\subsection{M\"obius entropy innovation}
+
+Define the entropy newly appearing at endpoint $\F_n$ by
+\[
+  \Lamten=\muten*h.
+  \tag{5.6}
+\]
+Equivalently,
+\[
+  \Lamten(n)=h(\F_n)-
+  \sum_{\substack{d\mid n\\d<n}}\Lamten(d),
+  \qquad
+  h(\F_n)=\sum_{d\mid n}\Lamten(d).
+  \tag{5.7}
+\]
+
+\begin{proposition}[Prime-power support]
+\label{prop:lambda}
+The unique solution of (5.7) is
+\[
+  \Lamten(p^r)=\log p,
+  \qquad
+  \Lamten(n)=0
+\]
+when $n$ contains at least two distinct tensor atoms.
+\end{proposition}
+
+\begin{proof}
+Write $n=\prod_jp_j^{a_j}$.  The prime-power divisors contribute
+\[
+  \sum_j\sum_{r=1}^{a_j}\log p_j
+  =\sum_ja_j\log p_j=\log n=h(\F_n).
+\]
+Thus the displayed support rule solves (5.7); induction on divisibility gives
+uniqueness.
+\end{proof}
+
+The result is the classical identity $\mu*\log=\Lambda$ on the frozen tensor
+monoid.  It must not be described as an additive cocycle:
+$\Lamten(pq)=0$ for distinct atoms while
+$\Lamten(p)+\Lamten(q)>0$.  Nor may it be inserted after the fact as a weight
+on a completed closed word.  Its relevance here is that it is derived by the
+same bar cancellation and entropy roof.
+
+\begin{corollary}[Canonical roof derivative]
+\label{cor:derivative}
+On $\Ree s>1$,
+\[
+  \frac{d}{ds}\log\Dbar(s,1)
+  =-\frac{\zeta'(s)}{\zeta(s)}
+  =\sum_{n\ge1}\Lamten(n)n^{-s}.
+  \tag{5.8}
+\]
+\end{corollary}
+
+\begin{proof}
+Differentiate (4.9) in the raw domain.  The derivative inserts the roof
+$T(\mathbf a)$ from (4.3).  Endpoint grouping and
+\Cref{thm:endpoint} identify its coefficient with (5.6).  Both sides of (5.8)
+are absolutely convergent Dirichlet series for $\Ree s>1$, extending the
+coefficient identity there.
+\end{proof}
+
+This derivation answers a delicate source-lock question.  If one began with
+$\Lamten(n)n^{-s}$ as the edge potential, the construction would simply
+rewrite $-\zeta'/\zeta$.  SD-C16 instead begins with the local tensor word,
+the entropy roof, and its bar parity.  The determinant is formed first; its
+canonical roof derivative produces the Mangoldt-shaped output.  The result is
+still classical arithmetic after endpoint grouping, but it is not inserted
+as a von Mangoldt weight.
+
+\subsection{Universal inversion theorem}
+
+The same calculation also supplies the sharpest obstruction.
+
+\begin{proposition}[Universal reciprocal-partition inversion]
+\label{prop:universal}
+Let $X$ be any countable weighted nonunit inventory with partition sum
+$B_X(s)$, and form the same one-vertex ordered-word shift with product weight
+and reduced-bar parity.  Wherever the raw geometric series converges,
+\[
+  F_X(s)=\frac{B_X(s)}{1+B_X(s)},
+  \qquad
+  D_X(s,1)=\frac1{1+B_X(s)}.
+  \tag{5.9}
+\]
+\end{proposition}
+
+\begin{proof}
+The total weight at internal length $k$ is
+$(-1)^{k+1}B_X(s)^k$.  Geometric summation and the one-dimensional
+determinant give (5.9).  No atom, divisor, or entropy property is used.
+\end{proof}
+
+Thus $D=1/\zeta$ is exact, but the inversion mechanism is universal.  It
+does not distinguish the full-shift tensor inventory from composite-only,
+randomized, or synthetic positive inventories.  This is the central
+\textsc{proves too much} result.

@@ -25,6 +25,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [11-unitary-fiber-moment-rigidity](papers/11-unitary-fiber-moment-rigidity/README.md) | [PDF](papers/11-unitary-fiber-moment-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/11-unitary-fiber-moment-rigidity/) | 对有限维 unitary/Bloch fiber，faithful positive normalized trace 中 $\tau(U)=1$ 已强制 $U=I$；非忠实状态或 graded 复制可隐藏谱运动，但 ordinary determinant 会看见它，而 Berezinian 又将它完全消去，recurrent finite-path 构造则总在某个重复阶数泄漏。 | **POSITIVE-MOMENT RIGIDITY / ROUTE-A REJECTED / SD-C13** |
 | [12-fourier-null-haar-fiber](papers/12-fourier-null-haar-fiber/README.md) | [PDF](papers/12-fourier-null-haar-fiber/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/12-fourier-null-haar-fiber/) | 所有正次 Fourier moments 都等于 $1$ 的有限正圆周测度唯一形如 $\delta_1+c\,m_{\rm Haar}$；这个无限维 diffuse escape 保留 Euler ledger，却被原标量全纯 trace-log determinant 完全消去。归一化、有限近似、selfadjointization 或 inverse coupling 都会分别破坏 ledger、迟发泄漏或产生 balanced mixed words。 | **HAAR ESCAPE / DETERMINANT INVISIBILITY / SD-C14** |
 | [13-character-resolved-holonomy](papers/13-character-resolved-holonomy/README.md) | [PDF](papers/13-character-resolved-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/13-character-resolved-holonomy/) | positive-cone $\mathbb Z$-skew extension 把 reciprocal Euler product 精确放在 deck-neutral Fourier coefficient，并让同一 parent lift 的非零 Bloch modes 看见 recurrent mixed returns；但没有任何单独 character fiber 保持 Euler ledger，全部 nonprime/random controls 也会运动，而 inverse reversal 在二阶污染零模。 | **CHARACTER RESOLUTION / ROUTE-A REJECTED / SD-C15** |
+| [14-tensor-bar-mobius-selector](papers/14-tensor-bar-mobius-selector/README.md) | [PDF](papers/14-tensor-bar-mobius-selector/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/14-tensor-bar-mobius-selector/) | 函子性 Abelian charge 被严格分类为 atom valuations，divisor-category cocycle 全为 coboundary；转向全局 tensor-bar grammar 后，同一 signed symbolic determinant 在 $\Re s>1$ 的 endpoint completion 中精确给出 $1/\zeta$ 与 $\Lambda_\otimes=\mu_\otimes*h$。但该反演对任意 weighted inventory 都成立，且 primitive cycles 是 factorization necklaces 而非 primes。 | **TENSOR-BAR DETERMINANT / ROUTE-A REJECTED / SD-C16** |
 
 ### 论文 1 的候选分离结论
 
@@ -248,13 +249,57 @@ integer cocycles。只有当某个 cocycle 的首个非零 Fourier coefficient�
 建立下一候选；纯 adjacency、positive charge、rank 或 entropy coboundary 规则已经被
 Paper 13 定理级排除。
 
+### 论文 14：局部 character 关闭，全局 tensor-bar determinant 成立
+
+Paper 14 完成了 Paper 13 留下的 character 分类。对 full-shift tensor monoid，任意
+Abelian monoidal charge 都唯一写成
+
+$$
+q(F_n)=\sum_p v_p(n)q(F_p).
+$$
+
+若它在所有 composite 上为零，则 $2q(F_p)=3q(F_p)=0$ 强制
+$q(F_p)=0$；thin tensor-divisor category 上的 coherent cocycle 也全部是 coboundary。
+因此有限局部、有限状态或普通 character holonomy 不能同时选出 tensor atoms、保留
+prime-power repetitions 并对 matched controls 消失。完整枚举中，18 个预注册规则、
+256 个 radius-one truth tables 与 260 个一至二状态 transducers 的 robust pass 均为零。
+
+正面逃生口是一个真正全局的 reduced tensor-bar code。令边为非空 ordered tensor
+words，clock 为 entropy sum，ordinary scalar sign 为 $(-1)^{k+1}$。在
+$\Re s>\sigma_{\rm bar}$、$\zeta(\sigma_{\rm bar})=2$ 时，raw edge transfer 为
+
+$$
+F_{\rm bar}(s)=\frac{\zeta(s)-1}{\zeta(s)},
+\qquad
+D_{\rm bar}(s,z)=1-zF_{\rm bar}(s).
+$$
+
+按 tensor endpoint 先分组后，公式在 $\Re s>1$ 绝对收敛，并满足
+
+$$
+D_{\rm bar}(s,1)=\frac1{\zeta(s)},
+\qquad
+\frac{d}{ds}\log D_{\rm bar}(s,1)
+=\sum_n\Lambda_\otimes(n)n^{-s},
+\qquad \Lambda_\otimes=\mu_\otimes*h.
+$$
+
+512 个 formal coefficients、960 个 incidence rows、trace-log 至 repetition 256
+全部通过 exact 或高精度检查；但 10 组 generic/composite/random/synthetic inventories
+也全部精确反演。更关键的是，负号是 ordinary scalar edge weight，重复时变成
+$\epsilon^r$；它不是 odd supertrace parity。Euler ledger 因而可能跨 primitive 与
+repetition 层抵消，尚未形成 $p\leftrightarrow\gamma_p$ 的 orbitwise 对应。阶段结论是
+**GO_TENSOR_MOBIUS_INCIDENCE_DETERMINANT / STOP_ARITHMETIC_SELECTIVITY /
+STOP_ORBITWISE_PRIME_CORRESPONDENCE**。Paper 15 将直接审计 primitive 层的
+sign-reversing reduction，而不会重新扫描局部 character。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十三篇论文](papers/)
+- [十四篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

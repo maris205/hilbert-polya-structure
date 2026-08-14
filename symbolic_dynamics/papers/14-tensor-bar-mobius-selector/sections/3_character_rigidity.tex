@@ -1,0 +1,155 @@
+\section{Functorial character rigidity}
+\label{sec:rigidity}
+
+We first classify the candidate characters that can be constructed from the
+tensor monoid itself.  This converts an open-ended scan into a finite list of
+algebraic obstructions.
+
+\subsection{Universal valuation charge}
+
+Let
+\[
+  \M=\{\F_n:n\ge1\}/\!\cong,
+  \qquad
+  \F_m\otimes\F_n=\F_{mn}.
+\]
+The tensor unit is $\F_1$ and the nonunit atoms are $\F_p$.  The Grothendieck
+group is the free abelian group
+\[
+  K=\M^{\mathrm{gp}}\cong\bigoplus_p\Z e_p,
+  \qquad
+  v(\F_n)=\sum_pv_p(n)e_p.
+\]
+
+\begin{theorem}[Valuation classification]
+\label{thm:valuation}
+For every abelian group $A$, restriction to tensor atoms gives a natural
+bijection
+\[
+  \Hom_{\mathrm{Mon}}(\M,A)\cong\prod_p A.
+\]
+Explicitly, every monoidal charge is
+\[
+  q(\F_n)=\sum_pv_p(n)q(\F_p).
+  \tag{3.1}
+\]
+Every multiplicative unitary character similarly satisfies
+$\chi(\F_n)=\prod_p\chi(\F_p)^{v_p(n)}$.
+\end{theorem}
+
+\begin{proof}
+Unique tensor factorization gives (3.1) for any homomorphism.  Conversely,
+any atom assignment extends by (3.1), and the extension is additive under
+tensor product.  Unique factorization also proves uniqueness.  Composing
+with an additive-to-multiplicative character gives the unitary statement.
+\end{proof}
+
+The theorem identifies both the freedom and the data-loading risk.  An
+arbitrary sequence $q(\F_p)$ is possible, but it is an independent parameter
+at every atom.  Functorial generation from unmarked tensor structure does not
+select such a sequence.  In particular, if all atoms are treated symmetrically
+under their permutations, then $q(\F_n)=a\sum_pv_p(n)$ for one $a\in A$.
+That character records only the total number of tensor factors with
+multiplicity.
+
+\begin{corollary}[Prime-exclusive abelian no-go]
+\label{cor:prime-no-go}
+No abelian monoidal charge can be nonzero on an atom and zero on every
+decomposable object.
+\end{corollary}
+
+\begin{proof}
+For an atom $p$, the requested composite collapse gives
+\[
+  2q(\F_p)=q(\F_{p^2})=0,
+  \qquad
+  3q(\F_p)=q(\F_{p^3})=0.
+\]
+Subtracting yields $q(\F_p)=0$.  No torsion hypothesis is needed.  In
+multiplicative notation, $\chi(p)^2=\chi(p)^3=1$ forces $\chi(p)=1$.
+\end{proof}
+
+This also diagnoses an initially tempting but invalid control.  Prime powers
+are composite objects, yet a Route-A Euler ledger requires them as
+repetitions of a primitive prime object.  A control that demands zero on
+\emph{all} composites erases the target repetition sector.  The correct
+comparison separates prime powers from objects containing at least two
+distinct atoms.
+
+\subsection{Coherent divisor cocycles are gauge}
+
+Let $\operatorname{Div}(\M)$ be the thin category with one arrow $d\to n$
+when $\F_d$ tensor-divides $\F_n$.  An $A$-valued coherent cocycle satisfies
+\[
+  \kappa(d,d)=0,
+  \qquad
+  \kappa(d,n)+\kappa(n,m)=\kappa(d,m)
+  \quad(d\mid n\mid m).
+\]
+
+\begin{theorem}[Divisor-cocycle rigidity]
+\label{thm:coboundary}
+Every coherent abelian cocycle on $\operatorname{Div}(\M)$ is a coboundary:
+\[
+  \kappa(d,n)=b(n)-b(d),
+  \qquad b(n)=\kappa(1,n).
+  \tag{3.2}
+\]
+Consequently a character-twisted divisor transfer is diagonally conjugate to
+the untwisted transfer and has the same determinant wherever both are
+defined.
+\end{theorem}
+
+\begin{proof}
+Apply coherence to the chain $1\mid d\mid n$.  Then
+$\kappa(1,d)+\kappa(d,n)=\kappa(1,n)$, which is (3.2).  Exponentiating $b$
+produces the diagonal gauge implementing the conjugacy.
+\end{proof}
+
+The initial tensor unit is the source of this rigidity.  Nonzero holonomy can
+be retained only by remembering different ordered factorization histories
+instead of identifying them as the unique thin-category arrow.  That is the
+higher-chain move made in \Cref{sec:bar}; it is not a rescued one-cocycle.
+
+\subsection{Entropy and shuffle rigidity}
+
+Suppose a real charge is generated regularly from entropy and is additive
+under tensor product.  It has the form
+\[
+  q_t(\F_n)=t h(\F_n)=t\log n.
+\]
+A unitary twist is then
+\[
+  n^{-s}e^{i\theta q_t(\F_n)}
+  =n^{-(s-i\theta t)},
+  \tag{3.3}
+\]
+only a vertical translation of $s$.  If $q_t$ is also integer-valued on every
+$\F_n$, then $t=0$: otherwise $t\log2$ and $t\log3$ would be integers, making
+$\log2/\log3$ rational and contradicting unique factorization.
+
+Finally, let a transfer construction be natural under isomorphisms of the
+structured inventory $(\M,\otimes,h,\text{grammar})$.  A pure presentation
+shuffle $\sigma$ changes its matrix only by
+\[
+  L_{\sigma X}=P_\sigma L_XP_\sigma^{-1}.
+  \tag{3.4}
+\]
+All traces, determinants, root multisets, and character-response norms are
+unchanged.  Therefore a nonzero arithmetic response cannot be required to
+collapse under a pure relabeling.  If shuffling a list changes adjacency,
+then the list order was part of the grammar and the observed separation tests
+that external order, not tensor arithmetic.
+
+The classification may be summarized as
+\[
+\begin{array}{c@{\quad\longrightarrow\quad}l}
+\text{monoidal object character} & \text{valuation sum},\\
+\text{coherent divisor one-cocycle} & \text{coboundary gauge},\\
+\text{regular entropy character} & \text{vertical parameter translation}.
+\end{array}
+\]
+Together with shuffle naturality, this proves the scoped no-go: no standard
+functorially generated abelian one-character meets the desired selector
+criterion.  It does not classify arbitrary nonlinear incidence transforms,
+higher chains, or every computable symbolic rule.

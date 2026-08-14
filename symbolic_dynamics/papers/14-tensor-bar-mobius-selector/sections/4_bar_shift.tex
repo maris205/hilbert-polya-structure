@@ -1,0 +1,177 @@
+\section{The reduced tensor bar-code shift}
+\label{sec:bar}
+
+The rigidity result says that the next candidate must retain higher
+factorization chains rather than compress them into an abelian one-cocycle.
+This section freezes that candidate completely.
+
+\subsection{Phase space, clock, and potential}
+
+Let $\M_+=\{\F_n:n\ge2\}$.  Define the countable code alphabet
+\[
+  \C=\coprod_{k\ge1}\M_+^k.
+  \tag{4.1}
+\]
+A symbol $\mathbf a=(\F_{a_1},\ldots,\F_{a_k})$ is a nonempty ordered tensor
+word.  Equivalently, it is the strict cumulative divisor chain
+\[
+  \F_1<\F_{a_1}<\F_{a_1a_2}<\cdots<\F_{a_1\cdots a_k}.
+  \tag{4.2}
+\]
+The phase space is the one-vertex countable edge shift with one return edge
+for each $\mathbf a\in\C$.  Thus a point is a bi-infinite sequence of code
+edges, and temporal recurrence is the ordinary shift of that sequence.
+
+Freeze the roof, parity, and complex weight
+\[
+\begin{split}
+  T(\mathbf a)&=\sum_{j=1}^k h(\F_{a_j})
+               =\log(a_1\cdots a_k),\\
+  \eps(\mathbf a)&=(-1)^{k+1},\\
+  \phi_s(\mathbf a)&=\eps(\mathbf a)e^{-sT(\mathbf a)}.
+\end{split}
+\tag{4.3}
+\]
+The sign is determined by reduced-bar length after the bar grammar has been
+chosen.  The choice of this grammar is a modeling choice, not an output of
+the entropy and not evidence for arithmetic selectivity.  Crucially, no
+prime predicate, M\"obius coefficient, Mangoldt coefficient, zero table, or
+per-atom phase occurs in (4.1)--(4.3).
+
+The construction remembers ordered histories.  It is functorial under
+isomorphisms of the tensor monoid, but it does not descend to the unique arrow
+of the thin divisor category.  This is exactly why
+\Cref{thm:coboundary} does not gauge it away.
+
+\subsection{Raw alphabet sum}
+
+Let
+\[
+  B(s)=\sum_{n\ge2}e^{-s h(\F_n)}
+      =\sum_{n\ge2}n^{-s}=\zeta(s)-1.
+  \tag{4.4}
+\]
+The total weight of length-$k$ code edges is $(-1)^{k+1}B(s)^k$ whenever the
+sum may be rearranged.  Absolute summability of the raw alphabet requires
+\[
+\begin{split}
+  \sum_{\mathbf a\in\C}|\phi_s(\mathbf a)|
+  &=\sum_{k\ge1}\sum_{a_1,\ldots,a_k\ge2}
+    (a_1\cdots a_k)^{-\Ree s}\\
+  &=\sum_{k\ge1}B(\Ree s)^k<\infty.
+\end{split}
+\tag{4.5}
+\]
+
+\begin{definition}[Raw convergence boundary]
+Let $\sbar$ be the unique real solution of
+\[
+  \zeta(\sbar)=2.
+\]
+Numerically,
+$\sbar=1.7286472389981836181\ldots$.
+\end{definition}
+
+Uniqueness follows because $\zeta(\sigma)-1$ is continuous and strictly
+decreasing from $+\infty$ to $0$ on $\sigma>1$.  Equation (4.5) is finite
+exactly for $\Ree s>\sbar$.
+
+\begin{proposition}[Raw reduced-bar transfer]
+\label{prop:raw}
+For $\Ree s>\sbar$, the raw edge sum is absolutely convergent and
+\[
+  \Fbar(s)
+  :=\sum_{\mathbf a\in\C}\phi_s(\mathbf a)
+  =\sum_{k\ge1}(-1)^{k+1}B(s)^k
+  =\frac{B(s)}{1+B(s)}.
+  \tag{4.6}
+\]
+\end{proposition}
+
+\begin{proof}
+In the stated half-plane, $|B(s)|\le B(\Ree s)<1$.  The absolute bound (4.5)
+permits Fubini rearrangement by internal word length.  The resulting series
+is geometric, which proves (4.6).
+\end{proof}
+
+The domain in \Cref{prop:raw} belongs to the source lock.  An analytic formula
+obtained by regrouping coefficients below $\sbar$ must not be mislabeled as
+the raw sum over code edges.
+
+\subsection{Function space and canonical determinant}
+
+The weighted vertex adjacency of a one-vertex edge shift acts on
+\[
+  \B=\ell^2(\{*\})\cong\CC.
+\]
+After the alphabet sum has converged, define
+\[
+  L_{\mathrm{bar},s}c=\Fbar(s)c.
+  \tag{4.7}
+\]
+This is a one-dimensional trace-class operator.  Its $r$th trace is
+$\Fbar(s)^r$, the weight sum of all based temporal words of $r$ code edges.
+Thus the scalar operator is the weighted adjacency of the frozen recurrent
+shift, rather than an unrelated scalar attached after factorization.
+
+\begin{theorem}[Same-object Fredholm determinant]
+\label{thm:determinant}
+For $\Ree s>\sbar$, the canonical determinant of SD-C16 is
+\[
+  \Dbar(s,z)
+  :=\det_{\CC}(I-zL_{\mathrm{bar},s})
+  =1-z\Fbar(s).
+  \tag{4.8}
+\]
+At the frozen specialization $z=1$,
+\[
+  \Dbar(s,1)=\frac{1}{\zeta(s)}.
+  \tag{4.9}
+\]
+\end{theorem}
+
+\begin{proof}
+Equation (4.8) is the determinant of the one-dimensional operator (4.7).
+Using (4.4) and (4.6),
+\[
+  1-\Fbar(s)=1-\frac{B(s)}{1+B(s)}
+             =\frac1{1+B(s)}=\frac1{\zeta(s)}.
+\]
+\end{proof}
+
+The theorem is stronger than merely rewriting the classical logarithmic
+derivative: it identifies a single weighted symbolic adjacency whose
+determinant has the required value in a proved raw domain.  It is also much
+weaker than an RH mechanism.  The partition sum $1+B(s)$ equals $\zeta(s)$
+because the source inventory already contains exactly one $\F_n$ at every
+integer entropy $\log n$.
+
+\subsection{Trace-log and primitive cycles}
+
+Whenever $|z\Fbar(s)|<1$, the determinant has the convergent trace expansion
+\[
+  \log\Dbar(s,z)
+  =-\sum_{r\ge1}\frac{z^r}{r}\tr L_{\mathrm{bar},s}^r
+  =-\sum_{r\ge1}\frac{z^r}{r}\Fbar(s)^r.
+  \tag{4.10}
+\]
+The sign in (4.3) is an ordinary scalar edge weight.  Repeating a single code
+edge $\mathbf a$ exactly $r$ times contributes
+\[
+  \eps(\mathbf a)^r e^{-rsT(\mathbf a)}.
+  \tag{4.11}
+\]
+It is not a chain grading or supertrace parity: an odd supertrace sector would
+carry one fixed minus sign at every repetition order, whereas a negative
+scalar edge alternates with $r$.  We therefore claim no chain complex,
+contractible-pair cancellation, or homological reduction in this paper.
+
+The primitive cycles behind (4.10) are cyclic necklaces in the countable
+alphabet $\C$.  A one-cycle may itself be an ordered factorization chain, and
+longer primitive cycles concatenate several such chains.  There is no
+canonical bijection between these necklaces and the tensor atoms $\F_p$.
+
+At $z=1$, (4.9) gives a nonzero analytic logarithm throughout $\Ree s>1$.
+We do not silently identify that logarithm with the power series (4.10) at
+points where $|\Fbar(s)|\ge1$.  The distinction between analytic logarithm,
+trace-log germ, and raw alphabet sum will be maintained in the audit.
