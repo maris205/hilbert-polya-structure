@@ -1,11 +1,12 @@
 # HCS-C56 theorem package
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; exact theorem package in the project
-RELEASE_CANDIDATE.**
+RELEASE_FROZEN.**
 The classical implications below are proved, and the instance-specific gates
 labelled `C56-EXACT-*` have been independently certified by the current
-code/results prefreeze.  This is an exact C56 instance theorem, but it is not
-yet a frozen release artifact.
+code/results prefreeze.  This is the exact theorem package of the frozen C56
+release; the machine evidence intentionally remains at
+`PREFREEZE_CODE_RESULTS_PASS`.
 
 ## 1. Fixed surface
 
@@ -259,8 +260,10 @@ checker pass all 10 semantic gates, the adversarial rebound sweep passes all
 2684 classified leaves, and the test suite passes 15/15.  The current exact
 identifiers are recorded in `README.md` and `INTEGRITY_REPORT.md`.  The
 official paper build and documentation provenance pass.  Accordingly this
-file may be cited as the exact theorem package of the no-commit project
-`RELEASE_CANDIDATE`; it is not a committed or frozen release.
+file may be cited as the exact theorem package of the project
+`RELEASE_FROZEN`, bound to implementation commit
+`b32402f1dd276a2684d3e849dae26150ebb595e1`.  The separate provenance commit
+remains null/external and is not a theorem input.
 
 ## 5. Claim boundary
 

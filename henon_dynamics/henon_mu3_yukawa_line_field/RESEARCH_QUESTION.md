@@ -1,6 +1,6 @@
 # HCS-C56 research question
 
-Status: **ANSWERED; DOCS_FINAL_NO_MORE_EDITS AND PROJECT RELEASE_CANDIDATE.**
+Status: **ANSWERED; DOCS_FINAL_NO_MORE_EDITS AND PROJECT RELEASE_FROZEN.**
 
 ## Primary question
 
@@ -123,7 +123,8 @@ The code/results state remains the exact `PREFREEZE_CODE_RESULTS_PASS` byte
 state with 10/10 semantic gates, 2684/2684 rebound mutations, and 15/15 tests.
 The official 19-page paper build and its source/PDF/log/text/report hashes
 pass.  The final read-only audit also passes, and the self-excluding formal
-root-package aggregate is bound in the Route record.  The project is therefore
-a no-commit `RELEASE_CANDIDATE`; implementation/provenance commits remain
-intentionally unset.  A separate 46-entry self-excluding full-project
+root-package aggregate is bound in the Route record.  The project is
+`RELEASE_FROZEN` at implementation commit
+`b32402f1dd276a2684d3e849dae26150ebb595e1`; the separate provenance commit
+remains null/external.  A separate 46-entry self-excluding full-project
 successor is verified externally and is not a theorem premise.

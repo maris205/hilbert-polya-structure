@@ -4,7 +4,7 @@ Title: **The Twenty-Seven-Line Field of the Fourth Hénon Yukawa
 Surface**
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; official 19-page paper build PASS for the
-project RELEASE_CANDIDATE.**
+project RELEASE_FROZEN.**
 
 One-sentence target contribution: **For the exact cubic surface produced by
 HCS-C55, certify that its Fano scheme is one degree-27 finite étale field
@@ -192,13 +192,14 @@ warnings. Fonts, extracted text, metadata, and all page visuals also pass.
 
 | Artifact | Value |
 |---|---|
-| paper source | `b284a2f17a53b979374a5525a0642472bd7a14cb72f8260de87bea9a15628a29` |
+| paper source | `5db4cfd2650485001d00fc2f52681d4cfaf8e739f4924b331df7ccc06a851cb3` |
 | bibliography | complete; 6 cited entries; BibTeX warnings 0 |
-| PDF | `ae8f422e3183455206f3459f0952d7e5175633bc534c318bfb7326b08c6c604e` |
-| log | `afd4dc0323cc3139d6a1e8c441210d453c4c51ab4c5b14aa68d2197a7033af60` |
-| extracted text | `7c1722fa8286b4dcbb03a3acbe1fcec09a3a26890638599168e8844c9c3ae718` |
-| compilation report | `e0b39488e2f3f589f6332db7cd09300d10614044763b7fced6c2bd505c698cb5` |
+| PDF | `750c1da7366701495fa3bf1f37014000d56fcb59a556f896224a5611b622a923` |
+| log | `9f2845fdc37011aa259085810595703819741844be0d0ff15cdfc78c94e41a07` |
+| extracted text | `217ca51b1b0b4e6637f3d8405f23671aa89775d30e37ac964cb0684b548c2856` |
+| compilation report | `fd7c17d5121d4661b4fb385e2ab420882cfced172f9c5098c4152d68c6d5a3c8` |
 | independent paper audit | source semantics, isolated compile, and final artifact audit PASS |
 
-The controlled bootstrap and final official build are complete.  No further
-paper edit or compilation is authorized in this lane.
+The controlled bootstrap, former documentation build, and superseding frozen
+status-repair build are complete.  No further paper edit or compilation is
+authorized in this lane.

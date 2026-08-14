@@ -1,7 +1,7 @@
 # HCS-C56 derivation package
 
 Status: **DOCS_FINAL_NO_MORE_EDITS; exact derivation in the project
-RELEASE_CANDIDATE.**  Every numerical statement below that is not inherited from
+RELEASE_FROZEN.**  Every numerical statement below that is not inherited from
 the frozen HCS-C55 surface is supplied by the current exact payload and
 independently recomputed by the checker.
 
@@ -378,5 +378,6 @@ pass at code/results prefreeze.  The canonical identifiers are recorded in
 outside theorem provenance.  The official paper-build identifiers are
 recorded externally.  The scoped manifest remains the default code/results
 identity, while a 46-entry self-excluding full-project successor is verified
-separately as a release-wide ledger.  Commit provenance remains unset at this
-no-commit release-candidate milestone.
+separately as a release-wide ledger.  The project is `RELEASE_FROZEN` at
+implementation commit `b32402f1dd276a2684d3e849dae26150ebb595e1`; the
+separate provenance commit remains null/external.

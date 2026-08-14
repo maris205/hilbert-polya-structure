@@ -157,7 +157,7 @@ These remain resource envelopes, not promoted release measurements.
 | implementation commit | `b32402f1dd276a2684d3e849dae26150ebb595e1` |
 | provenance commit | null; external/not separately promoted |
 | full-project manifest successor | root `FULL_PROJECT_HASHES.sha256`; 46 entries, self-excluding, verified separately; digest external-only |
-| paper source | `b284a2f17a53b979374a5525a0642472bd7a14cb72f8260de87bea9a15628a29` |
-| paper PDF | `ae8f422e3183455206f3459f0952d7e5175633bc534c318bfb7326b08c6c604e` |
-| paper log/text | `afd4dc0323cc3139d6a1e8c441210d453c4c51ab4c5b14aa68d2197a7033af60`; `7c1722fa8286b4dcbb03a3acbe1fcec09a3a26890638599168e8844c9c3ae718` |
-| compilation report | `e0b39488e2f3f589f6332db7cd09300d10614044763b7fced6c2bd505c698cb5` |
+| paper source | `5db4cfd2650485001d00fc2f52681d4cfaf8e739f4924b331df7ccc06a851cb3` |
+| paper PDF | `750c1da7366701495fa3bf1f37014000d56fcb59a556f896224a5611b622a923` |
+| paper log/text | `9f2845fdc37011aa259085810595703819741844be0d0ff15cdfc78c94e41a07`; `217ca51b1b0b4e6637f3d8405f23671aa89775d30e37ac964cb0684b548c2856` |
+| compilation report | `fd7c17d5121d4661b4fb385e2ab420882cfced172f9c5098c4152d68c6d5a3c8` |

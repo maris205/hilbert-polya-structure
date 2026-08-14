@@ -1,6 +1,6 @@
 # HCS-C56 compilation report
 
-Status: **PASS; official final build against exact
+Status: **PASS; official frozen status-repair build against exact
 `PREFREEZE_CODE_RESULTS_PASS` machine evidence**
 
 ## Build
@@ -13,27 +13,34 @@ Status: **PASS; official final build against exact
 - PDF: `paper/main.pdf`.
 - Total pages: 19 A4 pages.
 - Appendix A begins on page 13; references begin on page 19.
-- File size: 449889 bytes.
+- File size: 450045 bytes.
 - PDF SHA-256:
-  `ae8f422e3183455206f3459f0952d7e5175633bc534c318bfb7326b08c6c604e`.
+  `750c1da7366701495fa3bf1f37014000d56fcb59a556f896224a5611b622a923`.
 - Final LaTeX log SHA-256:
-  `afd4dc0323cc3139d6a1e8c441210d453c4c51ab4c5b14aa68d2197a7033af60`.
+  `9f2845fdc37011aa259085810595703819741844be0d0ff15cdfc78c94e41a07`.
 
 No conference page limit is asserted.  The project uses a single-column
 mathematical-article format.
 
 ## Build history and authority
 
-The final build supersedes two non-authoritative predecessors:
+The frozen status-repair build supersedes three non-authoritative
+predecessors:
 
 1. a fresh isolated source-audit build, performed outside the live tree;
 2. the controlled live bootstrap build whose three diagnostic digests are
-   printed in section 7 of the paper and explicitly labelled chronology-only.
+   printed in section 7 of the paper and explicitly labelled chronology-only;
+3. the former documentation build, superseded because its current-state prose
+   still described an obsolete pre-promotion project state after the
+   implementation commit and frozen project release had been established.
 
 The bootstrap build was used only to replace the precompile/null prose with a
-truthful compiled-evidence statement.  The final PDF, log, text, source, and
-report identifiers in this report and the Route record are the documentation
-authority.  No source edit or compilation follows this final build.
+truthful compiled-evidence statement.  The status-repair source change affects
+only the project-layer release/provenance wording: it does not modify the
+machine certificate, its status, or any mathematical claim.  The PDF, log,
+text, source, and report identifiers in this report and the Route record are
+the frozen documentation authority.  No source edit or compilation follows
+this build.
 
 ## Paper-source lock
 
@@ -41,7 +48,7 @@ authority.  No source edit or compilation follows this final build.
 - Digest definition: SHA-256 of their lexicographically ordered `sha256sum`
   lines, evaluated from the project root.
 - Paper-source SHA-256:
-  `b284a2f17a53b979374a5525a0642472bd7a14cb72f8260de87bea9a15628a29`.
+  `5db4cfd2650485001d00fc2f52681d4cfaf8e739f4924b331df7ccc06a851cb3`.
 
 ## Automated checks
 
@@ -56,9 +63,9 @@ authority.  No source edit or compilation follows this final build.
 - Stale section files: 0; every one of the 13 files in `paper/sections/` is
   input by `paper/main.tex`.
 - Bibliography: 6 entries, all cited.
-- Text extraction: PASS, with 1356 lines, 6838 words, and 44922 bytes.
+- Text extraction: PASS, with 1355 lines, 6863 words, and 45171 bytes.
 - Extracted-text SHA-256:
-  `7c1722fa8286b4dcbb03a3acbe1fcec09a3a26890638599168e8844c9c3ae718`.
+  `217ca51b1b0b4e6637f3d8405f23671aa89775d30e37ac964cb0684b548c2856`.
 - Residual TODO/FIXME/XXX/[VERIFY] markers in extracted PDF: 0.
 - Literal `??` or `[?]` placeholders in extracted PDF: 0.
 - Ghostscript null-device parse: PASS.
@@ -85,8 +92,9 @@ authority.  No source edit or compilation follows this final build.
   2684 = 2662 payload + 20 schema + 2 envelope; 2684/2684 pass.
 - Direct producer/checker/test digests are bound by the scoped manifest and
   are not separately promoted in the root Route record.
-- Implementation/provenance commits: unset at this no-commit
-  release-candidate milestone.
+- Project state: `RELEASE_FROZEN`, binding implementation commit
+  `b32402f1dd276a2684d3e849dae26150ebb595e1`.
+- Separate provenance commit: `null`; external and not separately promoted.
 - Full-project successor: root `FULL_PROJECT_HASHES.sha256`, 46 entries and
   self-excluding; verified separately, with its digest external-only.
 
@@ -102,12 +110,12 @@ documentation and compilation lane.
 - Title and author metadata are present and correct.
 - All 26 fonts are embedded and subsetted Type 1 fonts.
 - No Type 3 font occurs.
-- Fresh raster inspection of all 19 pages is clean.  It covers the
-  title/abstract, theorem and scope firewalls, cubic and line-section formulas,
-  chart/clopen proof, modular irreducibility, Galois/parity ledger,
+- Fresh raster inspection of the key pages 1, 9--13, 15, and 19 is clean.  It
+  covers the title/abstract, theorem and scope firewalls, Galois/parity ledger,
   Hochschild--Serre rank bridge, exact tuple/bootstrap block, declarations,
-  source ledger, eliminant table, modular factors, Picard lattice, and
-  bibliography.
+  source ledger, modular factors, and bibliography.  The unchanged layout of
+  the remaining mathematical pages had already passed the preceding all-page
+  release inspection.
 - The long hashes on page 11 and the 28 eliminant coefficients on page 16 are
   complete, unclipped, and text-extractable.
 
@@ -131,5 +139,5 @@ documentation and compilation lane.
 - No motive, VHS, Calabi--Yau, automorphy, generic-family, dynamical, RH, or
   exhaustive novelty claim is made.
 
-This report is frozen with the official final PDF.  Its own digest and the
+This report is frozen with the official status-repair PDF.  Its own digest and the
 Route-record digest are recorded externally to avoid self-hash cycles.

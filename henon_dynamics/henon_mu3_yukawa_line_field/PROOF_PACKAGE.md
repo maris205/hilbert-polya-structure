@@ -13,7 +13,7 @@ $L/\mathbf Q$ over which a line is defined).
 ## Status
 
 **DOCS_FINAL_NO_MORE_EDITS: H0--H6 are exact certified premises and the proof
-belongs to the project RELEASE_CANDIDATE.**
+belongs to the project RELEASE_FROZEN.**
 
 The current producer and independent checker certify the exact instance data
 H0--H6 below.  This file supplies the written geometric, Galois, and
@@ -273,8 +273,8 @@ the proof. $\square$
 ## Scope locks and corrected assumptions
 
 - H1--H6 are certified by the current prefreeze payload and independently
-  recomputed by the checker; they are not promoted as frozen release
-  provenance until the remaining release gates pass.
+  recomputed by the checker.  That exact machine state is bound into the
+  frozen project release without rewriting it as a different machine status.
 - The architecture's earlier suggestion that every C55 status leaf must cease
   to say `RELEASE_CANDIDATE` is rejected.  The authoritative C55 contract is
   stratified as recorded in H0.
