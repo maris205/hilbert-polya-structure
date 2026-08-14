@@ -1,0 +1,89 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-P54
+source_commit: "research baseline 6154a14895e4a8de929fd36322a519995d148e00"
+evaluation_date: 2026-08-14
+candidate_definition: "P53 Mahler amplitude split into the physical suspension pressure pole and a positive Galois excess"
+family: "area-preserving Henon dynamics"
+phase_space: "the certified four-state mixing H6 survivor"
+dynamics: "H6(q,p)=(1-6q^2-p,q) with the frozen symbolic conjugacy"
+parameters: "complex pressure variable s, pressure root h_star and excess abscissa sigma_Gal"
+parameter_provenance: "HCS-P31/P45 pressure normalization and HCS-P53 Mahler-height amplitude"
+clock: "normalized instability length hat_ell_gamma=h_star*log(Lambda_gamma)"
+normalization: "3/pi^2 times primitive orbit amplitude; entropy-one pressure line s=1"
+determinant_convention: "physical subsystem uses the suspension zeta and its logarithmic derivative; no determinant is assigned to the full Galois-weighted amplitude"
+orbit_cutoff: "all primitive orbits in the analytic theorem; exact periods 1, 3 and 4 in the finite certificate"
+precision: "exact quadratic trace roots, 90-digit arithmetic and independent residue/digest checks"
+training_data: "none"
+forbidden_data: "Riemann-zero tables, rational-prime tables, fitted Galois potentials, post-hoc pressure rescaling or conditional-to-unconditional promotion"
+code_commit: "research baseline 6154a14895e4a8de929fd36322a519995d148e00"
+artifact_paths:
+  - README.md
+  - PROOF_PACKAGE.md
+  - paper/paper.pdf
+  - code/c54_pressure_pole.py
+  - code/independent_check.py
+  - results/c54_certificate.json
+source_lock:
+  object: "certified weak-mixing H6 symbolic suspension and P53 full multiplier Mahler-height coefficient"
+  clock: "primitive normalized roof length h_star*ell_gamma; repetitions are kept separate"
+  normalization: "3/pi^2, with physical first repetition extracted from -zeta'/zeta"
+  determinant_convention: "analytic suspension zeta only for the physical subsystem; full candidate has no Euler/Fredholm determinant"
+  cutoff: "none for the theorem; three exact orbits and three finite Euler identities for regression"
+  precision: "eight dependency hashes, exact surds and independently recomputed 90-digit intervals"
+  allowed_data: "P31/P45/P48/P53 source artifacts and source-derived H6 trace polynomials"
+  forbidden_data: "target zeros/primes, finite interpolation of a Holder potential, scalar-to-full determinant promotion or Route-B claims"
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "the frozen survivor has an intrinsic all-period primitive-orbit structure, normalized roof and exact physical/nonphysical multiplier decomposition"
+  strongest_failure: "the primitive objects are dynamical primes; no intrinsic bijection with all rational primes or von Mangoldt amplitudes exists"
+  metrics:
+    primitive_orbit_scope: "all in source theorem"
+    exact_galois_witnesses: 3
+    dependency_locks: 8
+  artifacts:
+    - PROOF_PACKAGE.md
+    - results/c54_certificate.json
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "the physical normalized suspension zeta has a source-backed meromorphic germ, and its primitive logarithmic derivative has the certified simple pole"
+  strongest_failure: "this verdict is restricted to the physical subsystem; the full Galois-weighted amplitude has no Euler or Fredholm determinant and no A2 pass"
+  metrics:
+    physical_subsystem_only: true
+    physical_pole_at_s_1: true
+    residue_lower: 1.0934452004122974
+    residue_upper: 1.0934727351860325
+    full_galois_determinant: false
+  artifacts:
+    - paper/paper.pdf
+    - notes/SOURCE_AUDIT.md
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED_PLUS_CONDITIONAL_THEOREM
+  strongest_evidence: "the physical germ, analytic repetition tail and exact excess-abscissa trichotomy isolate the pressure-critical interface; a source-backed conditional full-pole theorem is explicit"
+  strongest_failure: "the actual Galois excess has neither a proved Holder realization nor a direct boundary theorem, and no functional equation or completed divisor is obtained"
+  metrics:
+    excess_abscissa_upper_bound: 3.125207
+    scalar_roof_completion: false
+    conditional_holder_completion: true
+  artifacts:
+    - PROOF_PACKAGE.md
+    - notes/HOSTILE_REVIEW_ROUND2.md
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: OPEN
+  strongest_evidence: "the same H6 symplectic survivor and instability clock underlie the pressure zeta"
+  strongest_failure: "no natural Hilbert space, operator domain, quantization, unitary completion or spectral parameter map is constructed"
+  metrics: {}
+  artifacts:
+    - notes/ROUTE_B_SCOPE.md
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "the physical suspension subsystem has an analytic zeta and primitive pressure pole; the full Mahler amplitude has only an exact positive-excess gate and a conditional Holder completion, with no rational-prime trace, completed determinant or operator"
+blocking_conditions:
+  - "construct a single source-compatible Holder/asymptotically additive periodic-sum realization of the Galois excess or determine sigma_Gal directly"
+  - "derive a full Galois-weighted Euler/Fredholm determinant without discarding nonphysical conjugates"
+  - "supply rational-prime/von-Mangoldt trace data before any Route-B promotion"
+next_smallest_test: "test Livsic consistency of the exact Galois-excess periodic data on the shortest symbolic orbit relations of the same H6 survivor"
+route_b_invocation_allowed: false

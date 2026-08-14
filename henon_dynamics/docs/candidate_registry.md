@@ -1641,3 +1641,43 @@ tuple is **(A1_WEAK, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE,
 A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Pressure-critical
 continuation, a rational-prime von-Mangoldt trace, a determinant and an
 operator remain open.
+
+## HCS-P54 physical pressure pole and Galois-excess gate (2026-08-14)
+
+Candidate **HCS-P54** resolves the first pressure-critical component named by
+P53; see the
+[HCS-P54 project](../henon_mahler_pressure_pole_galois_excess_gate/).  Every
+primitive-orbit Mahler height has the canonical positive splitting
+
+\[
+\mathcal H_\gamma=\ell_\gamma+E_\gamma,
+\qquad E_\gamma\ge0.
+\]
+
+The physical first-repetition series is extracted from the logarithmic
+derivative of the entropy-one suspension zeta.  Parry--Pollicott's theorem and
+a normally convergent repetition tail prove
+
+\[
+\mathcal A_{\rm phys}(s)
+=\frac{3}{\pi^2h_*}\frac1{s-1}+G_{\rm phys}(s),
+\]
+
+with residue in
+\((1.093445200412297389\ldots,1.093472735186032499\ldots)\).
+This all-period pole is source-backed and does not rely on finite-orbit
+extrapolation.
+
+The exact period-one, period-three and period-four excesses are respectively
+positive, positive and zero.  Hence the full Mahler height cannot be a
+constant multiple of the instability roof modulo a coboundary.  If
+\(\sigma_{\rm Gal}\) is the positive excess-series abscissa, the defining
+full amplitude has abscissa \(\max\{1,\sigma_{\rm Gal}\}\), giving a precise
+three-regime pressure gate.  A full simple pole follows conditionally if one
+Hölder observable realizes every \(E_\gamma\) as a periodic sum; that
+realization remains open.
+
+The Route-A tuple is **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical
+subsystem only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  The full Galois-weighted candidate has no A2 pass,
+and no rational-prime trace, completed determinant or operator is claimed.

@@ -76,3 +76,4 @@ Wuhan 430074, P. R. China.
 
 henon_dynamics/henon_totient_abel_boundary_escape - HCS-P52 complete - The exact period-four Hénon packet has a proved totient Abel constant and Gamma(2,1) scaled-index profile, while its renormalized tagged divisor vectors have no norm or weak boundary.
 henon_dynamics/henon_pressure_weighted_all_orbit_abel_law - HCS-P53 complete - Mahler spectral heights govern a proved pressure-weighted all-orbit Abel boundary and joint orbit-index Gamma law in the certified safe half-plane, while tagged vectors still escape.
+henon_dynamics/henon_mahler_pressure_pole_galois_excess_gate - HCS-P54 complete - The physical Mahler summand has a source-backed pressure pole with certified residue, while a positive Galois excess is isolated as the exact gate to the full amplitude.

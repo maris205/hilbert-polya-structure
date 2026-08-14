@@ -267,9 +267,9 @@ Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
 retained positive structures rather than added to the obstruction list.
 The first untreated uniform-moment wall is now the fifth chronological
 moment; no continuation through \(\Re s=1/5\) is asserted.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P53`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P54`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P53 were born namespaced.
+strings, while P48--P54 were born namespaced.
 
 ## HCS-C51 additions
 
@@ -330,3 +330,9 @@ strings, while P48--P53 were born namespaced.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O93 | Norm or weak boundary of the pressure-weighted all-orbit Abel-renormalized tagged packet vectors | proved all-orbit tagged-mass escape obstruction | For real \(\sigma\) in the certified P51 half-plane, the exact Mahler-height Abel law gives \(\|E_{\sigma,\tau}\|\to(3/\pi^2)\sum_\gamma e^{-\sigma\widehat\ell_\gamma}\mathcal H_\gamma>0\), while every fixed `(orbit,index,prime-ideal)` coordinate tends to zero. Coordinate functionals force any norm or weak limit to vanish, contradicting the continuous mass functional; no subnet can converge. | Stops only vector boundary convergence in the original all-orbit source-tagged weighted \(\ell^1\) topology. The scalar pressure-Abel amplitude and the pressure-height orbit law times Gamma\((2,1)\) survive. Pressure-critical continuation, a distribution retaining every prime-ideal atom, rational-prime trace, determinant and operator remain open. | ../henon_pressure_weighted_all_orbit_abel_law/README.md |
+
+## HCS-P54 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O94 | Scalar pressure retuning of the full H6 multiplier Mahler height | proved three-orbit Galois-excess obstruction | The exact period-four orbit has \(\mathcal H_4=\ell_4>0\), forcing any identity \(\mathcal H_\gamma=c\ell_\gamma+\) periodic coboundary to have \(c=1\). The exact period-one orbit has residual \(E_1=\operatorname{arcosh}(\sqrt7-1)>0\), contradicting that identity; period three supplies an independent positive excess witness. | Stops only constant rescaling of the physical instability roof, even modulo coboundary. It does not exclude a non-proportional Hölder or asymptotically additive potential. The physical suspension-zeta pressure pole survives exactly; the full Galois-weighted determinant and the value of \(\sigma_{\rm Gal}\) remain open. | ../henon_mahler_pressure_pole_galois_excess_gate/README.md |
