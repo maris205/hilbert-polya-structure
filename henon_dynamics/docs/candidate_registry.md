@@ -1233,6 +1233,30 @@ remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)**.  The next wall is
 the middle cohomology of the \(n=3\) \((2,3)\) threefold.
 
+## HCS-C49 Fano-threefold third moment (2026-08-14)
+
+Candidate **HCS-C49** resolves that third-moment wall; see
+[`../henon_mu3_fano_threefold_third_moment/`](../henon_mu3_fano_threefold_third_moment/).
+The exact six-step chronological zero fibre decomposes projectively into a
+Fermat cubic fourfold, a split quadric fourfold, and their \((2,3)\) Fano
+threefold intersection.  An exact Jacobi-sum decomposition and
+Chevalley--Warning divisibility give
+
+\[
+C_{p,3}=-42-2b_p-2a_p/p,
+\qquad c_{p,3}=O(p^{-1/2}).
+\]
+
+This extends the canonical normalized Euler germ and its
+\(\tau\)-regularized graded operator realization from \(\Re s>1/3\) to
+\(\Re s>1/4\); the least fixed positive semifinite Schatten order on the
+new half-plane is eight, with seven explicit chronological counterterms.
+The determinant is not a classical Fredholm determinant, and no functional
+equation, continuation through \(1/4\), or Riemann divisor is claimed.  The
+tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy

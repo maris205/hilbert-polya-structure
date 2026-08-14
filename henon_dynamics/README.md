@@ -66,6 +66,7 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mu3_fano_threefold_third_moment/](henon_mu3_fano_threefold_third_moment/) | C49: the third moment is an exact Fermat-fourfold/Fano-threefold Frobenius cancellation, extending the normalized Euler germ and an eighth-order normalized-semifinite determinant to \(\Re s>1/4\) | Strongest current analytic advance; Route A remains exploratory and A3 partial |
 | [henon_mu3_fixed_coefficient_field_obstruction/](henon_mu3_fixed_coefficient_field_obstruction/) | C44: every paired first Hénon moment generates the full real cyclotomic field, with degree \((p-1)/2\) for every split prime | Fixed-coefficient compatible-system repair rejected |
 | [henon_mu3_galois_norm_rank_obstruction/](henon_mu3_galois_norm_rank_obstruction/) | C45: ordinary Galois norm has unbounded virtual rank, while its canonical normalized logarithmic root gives a holomorphic nonzero Euler germ on \(\Re s>1/2\) | Route-A exploratory analytic germ |
 | [henon_mu3_normalized_root_branch_obstruction/](henon_mu3_normalized_root_branch_obstruction/) | C46: exact \(p=7\) norm has finite divisor orders \(\pm2\), forcing cubic branching of the normalized root | Ordinary determinant promotion rejected |
