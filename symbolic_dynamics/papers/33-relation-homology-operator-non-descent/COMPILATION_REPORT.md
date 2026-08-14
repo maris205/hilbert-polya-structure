@@ -12,8 +12,8 @@
 - PDF: `main.pdf`
 - Pages: 10
 - Page size: A4 (`595.276 x 841.89 pts`)
-- File size: 367,310 bytes
-- SHA-256: `f8af8a6764f4f14edb882603ca46ba57d50079d22736c9a0d36d6dd7c6e16c9c`
+- File size: 367,313 bytes
+- SHA-256: `fc264c607bb23366b365fe5b453e1f707ef87befe7cb2661132e8359e2258426`
 
 ## Checks
 
@@ -26,7 +26,8 @@
 - Figures: pure TikZ; no raster figures
 - Visual QA: pages 3--6 rendered to PNG and inspected; Figures 1--3 have no
   label collisions after final layout pass
-- Route-B/RH/target-zero claims: absent
+- Positive Route-B/RH/target-zero claims: 0; only negative scope and locked-route
+  declarations are present
 
 ## Notes
 

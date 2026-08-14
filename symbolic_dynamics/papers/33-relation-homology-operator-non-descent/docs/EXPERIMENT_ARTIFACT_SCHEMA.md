@@ -58,4 +58,6 @@
 The five meta-integrity files (`SHA256SUMS.txt`, `aggregate_sha256.txt`,
 `artifact_inventory.json`, and the two audit certificates) are excluded from
 their own ledger to avoid circular self-hashing; the integrity audit validates
-them directly.
+them directly.  The root-owned `PAPER_MANIFEST.sha256` is excluded from both
+the scientific ledger and canonical-text count so the later metadata-only
+commit binding is hash-stable.

@@ -1106,7 +1106,7 @@ adjacency descents、64/64 random controls residual nonzero；source-only 21/21�
 prototype bridge 25/25、independent reconstruction 8349/8349、authority
 unit/integration 1932/1932 与 fresh double-run 20/20 均通过。完整 source/results
 账本为 40 条，SHA-256 为
-`303e27d054376a11fc87c29ad9b11cf2b0620f8a0a26453342980a9997040838`。
+`0cb14d9b25e313f6c34d53983fb01a869175838461cd7e2ca9f27fd0b29d8f30`。
 阶段结论为 **GO_RELATION_HOMOLOGY_NO_GO_PAPER /
 STOP_OPERATOR_NON_DESCENT / STOP_PROVES_TOO_MUCH /
 CLOSE_SEMIRING_RESIDUE_FAMILY / ROUTE_A_REJECTED**。下一批不应继续
