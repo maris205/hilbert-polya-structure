@@ -708,13 +708,50 @@ $O(\log n)$ symbolic length、总 roof $\log n$、在 primitive-orbit algebra �
 prime/composite 且 whole operator trace class 的 source-derived recurrent grammar；
 Route B 继续锁定。
 
+### 论文 24：有限码、纯 primitive ledger 与 whole Fredholm 形成三难
+
+Paper 24 直接测试了 Paper 23 留下的最强压缩义务。冻结有限可见 alphabet、正标量
+edge weights、每个 prime 恰一条 primitive cycle 且无额外 primitive orbit，并要求
+
+$$
+T(\gamma_p)=\log p.
+$$
+
+正性与唯一分解首先强迫不同 prime cycles 顶点不交：若两圈共享 recurrent vertex，
+拼接闭词的 primitive root 会给出 $pq=r^m$。有限可见码又强迫无穷子列满足
+
+$$
+\ell(p)\ge \frac{\log p}{4\log b}.
+$$
+
+因此每条长圈至少有一条 edge roof 不超过 $4\log b$。这些边来自互不相交的 sources，
+其标准基向量弱收敛到零，但 whole adjacency 的像范数一致有正下界；算子对每个
+$\sigma>0$ 都非紧，因而不属于任何有限 Schatten 类。
+
+共享 prefix trie 或 renewal hub 虽节省状态，却使 determinant 变成
+$1-\sum_n w_n$，其 connected logarithm保留所有 mixed primitive necklaces。
+若要求标准 graph marker
+
+$$
+\det(I-zL_s)=\prod_p(1-zp^{-s}),
+$$
+
+比较 $z$ 的一次系数还会直接强迫 $\ell(p)=1$；这正退化为 Paper 04 的 countable
+atom loops。35/35 exact tests、672 个正 roof 分配、共享 trie/renewal、factorization、
+finite-prefix S-adic 与任意库存 controls 全部吻合该三难。阶段结论是
+**GO_KRAFT_FREDHOLM_OBSTRUCTION / STOP_FINITE_SYMBOL_LOG_CODE /
+STOP_LITERAL_RECURRENT_COMPRESSION / SELECTOR_TAUTOLOGICAL /
+ROUTE_A_REJECTED**。这个 theorem 只锁 natural graph-coordinate space；Paper 25
+继续检验 canonical holomorphic/de Rham graded transfer 能否修复 nuclearity 而不在
+cohomology 上塌回 atom inventory。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十三篇论文](papers/)
+- [二十四篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
