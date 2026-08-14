@@ -11,6 +11,7 @@
 - Route tuple: `A0_STRUCTURAL_ARITHMETIC_RELATION / A1_WEAK /
   A2_ANALYTIC_DETERMINANT / A3_FAIL / A4_FAIL`.
 - Overall: `ROUTE_A_REJECTED`, `ROUTE_B_LOCKED`.
-- Provenance: `PENDING_FIRST_ARTIFACT_COMMIT`; all three provenance fields in
-  the Route YAML must be sealed together after the first commit.
+- Scientific provenance: commit
+  `6d332d79fdf3bba54458e6ad96cc38354ed406e5`; all three provenance fields in
+  the Route YAML are sealed to the same immutable artifact snapshot.
 - Target data: none; target-zero metrics are not applicable.
