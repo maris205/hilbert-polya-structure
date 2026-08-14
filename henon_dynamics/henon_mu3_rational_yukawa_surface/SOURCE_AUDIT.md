@@ -1,8 +1,8 @@
 # HCS-C55 source-control and bounded-novelty audit
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; primary theorem locators, exact
-release-candidate tuple, bounded novelty screen, independent hostile paper
-audit, and official compilation verified**.
+Status: **RELEASE_FROZEN; primary theorem locators, exact release-candidate
+tuple, bounded novelty screen, independent hostile paper audit, official
+compilation, and implementation provenance verified**.
 
 Audit date: 2026-08-15 UTC.
 
@@ -14,12 +14,13 @@ four-dimensional invariant basis, top reductions, cubic coefficients, and
 gradient algebra must be proved or exactly certified inside HCS-C52--C55.
 
 Temporary architecture calculations are reconnaissance, not release
-evidence. At promotion, the formal chain will consist only of:
+evidence. The frozen formal chain consists only of:
 
 - released HCS-C52--C54 artifacts;
 - the C55 proof and derivation packages;
 - the primary sources and locators below;
-- promoted C55 producer/checker artifacts and the independent read-only
+- promoted C55 producer/checker artifacts at implementation commit
+  `e5661e80da6f7de53f574f97f768744095ba8ae0` and the independent read-only
   hostile audit record. No unpackaged temporary hash is release authority.
 
 ## 2. Deformation and algebraization sources
@@ -347,7 +348,7 @@ referee review.
 ## 7. Source-audit verdict
 
 **PASS: SOURCE LOCATORS AND BOUNDED NOVELTY FIREWALLS SUPPORT THE
-RELEASE-CANDIDATE THEOREM.**
+RELEASE-FROZEN PROJECT THEOREM.**
 
 No current source supports the forbidden promotions “literal invariant
 linear family,” “relative Chow--Künneth projector,” “\(\mathbf Q(2)\),”

@@ -1,7 +1,7 @@
 # HCS-C55 narrative report
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; exact finite controls, independent hostile
-paper audit, and official compilation passed**.
+Status: **RELEASE_FROZEN; exact finite controls, independent hostile paper
+audit, official compilation, and implementation provenance are locked**.
 
 ## What this project is trying to finish
 
@@ -133,5 +133,6 @@ descent, direct-cube/20-trace agreement, and the complete scalar-leaf rebound
 sweep. The exact code/results lane is a release candidate, and the official
 paper build, documentation-hash backfill, and verified 47-entry full-project
 inventory are complete. The manifest SHA-256 is reported only outside its
-covered artifacts to avoid a self-cycle. The implementation commit remains a
-later provenance step; the no-CY3/no-motive scope is unchanged.
+covered artifacts to avoid a self-cycle. Implementation commit
+`e5661e80da6f7de53f574f97f768744095ba8ae0` records the frozen release bytes;
+the no-CY3/no-motive scope is unchanged.

@@ -1,7 +1,7 @@
 # HCS-C55 exact experiment plan
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; exact tuple promoted to
-RELEASE_CANDIDATE and official paper build passed**.
+Status: **RELEASE_FROZEN; exact machine tuple remains RELEASE_CANDIDATE,
+official paper build passed, and implementation provenance is locked**.
 
 This is an exact algebra experiment, not a numerical fit. The frozen
 producer/checker tuple closes the finite computations used by Theorems A--C
@@ -195,8 +195,8 @@ Each mutation must fail:
 - Record software versions and monomial-order conventions.
 - Promote only through an atomic manifest step.
 - Final hashes were kept null until promotion and are now recorded in the
-  integrity, compilation, and Route-A records. The implementation commit
-  remains a later provenance field.
+  integrity, compilation, and Route-A records. Implementation commit
+  `e5661e80da6f7de53f574f97f768744095ba8ae0` is provenance-locked.
 
 ## Comparator lane
 

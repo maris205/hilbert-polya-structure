@@ -1,12 +1,13 @@
 # HCS-C55 experiment tracker
 
-Overall status: **DOCS_FINAL_NO_MORE_EDITS; exact code/results, paper source,
-official PDF, compilation report, Route-A record, and the verified 47-entry
-full-project inventory are frozen against RELEASE_CANDIDATE evidence**.
+Overall status: **RELEASE_FROZEN; exact code/results, paper source, official
+PDF, compilation report, Route-A record, verified 47-entry full-project
+inventory, and implementation provenance are locked**.
 
 The exact certificate and independent-check tuple is frozen below. The
 independent hostile audit passed without promoting an unpackaged temporary
-hash. The implementation commit remains a later provenance field.
+hash. Implementation commit
+`e5661e80da6f7de53f574f97f768744095ba8ae0` records the release bytes.
 
 | Gate | Current state | Closure evidence |
 |---|---|---|
@@ -37,11 +38,11 @@ hash. The implementation commit remains a later provenance field.
 | Route-A record | COMPLETE | final PDF/source/report hashes backfilled |
 | full-project manifest | COMPLETE | 47-entry inventory verified; SHA-256 reported externally to avoid a self-cycle |
 
-## Release-candidate provenance
+## Release-candidate evidence and frozen provenance
 
 | Field | Value |
 |---|---|
-| implementation_commit | null (later provenance stage) |
+| implementation_commit | `e5661e80da6f7de53f574f97f768744095ba8ae0` |
 | producer_payload_sha256 | `6afc529d2ab9e849592d9eba7b76324cc7a840670f50c669f90fdd079c0b4323` |
 | certificate_sha256 | `aa6a57bc496d78afd5728640083179bb0dd24963deb44e31459c59edc71c381f` |
 | independent_check_sha256 | `e24c90fac1b222ed161eec677c06209c901f0decc335e769dc7df4ce53c68469` |
@@ -53,14 +54,14 @@ hash. The implementation commit remains a later provenance field.
 | paper_log_sha256 | `690ea4a3fd8af63384f02cf05eebadab5c2a4b9746bc7da999e54c18c59135a2` |
 | paper_text_sha256 | `6eb5fb4b9bb4a23b68cadbce75c9cf16a61637031a3dba7dc3106a4cf5d32b19` |
 | compilation_report_sha256 | `b38790520104f13bf8c4348bf7c9453c86ed1f3d09bfda98e024172556ec812b` |
-| route_record_sha256 | `8fe1db8504b71b83e2669371a8ecf485c6755700050bb6ae7527782d83c6ef11` |
+| route_record_sha256 | `320b561d1a6fd9a23daafefc3bfdd75d5cf41d6e1eaee6c353bec6f956e7c4a2` |
 | full_project_manifest_inventory | 47 verified entries; SHA-256 external-only |
 | route_verdict | ROUTE_A_EXPLORATORY |
-| release_status | RELEASE_CANDIDATE |
+| release_status | RELEASE_FROZEN |
 
 ## Current blockers
 
-There is no conceptual, exact-theorem, paper, documentation, or inventory
-blocker. The 47-entry full-project manifest is verified, while the
-implementation commit remains a later provenance step and is not a theorem
-input. The absence of a BCD comparison is not a blocker for Theorems A--D.
+There is no conceptual, exact-theorem, paper, documentation, inventory, or
+provenance blocker. The 47-entry full-project manifest and implementation
+commit are locked. The absence of a BCD comparison is not a blocker for
+Theorems A--D.

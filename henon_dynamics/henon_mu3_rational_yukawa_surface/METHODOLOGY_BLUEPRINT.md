@@ -1,7 +1,7 @@
 # HCS-C55 methodology blueprint
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; exact evidence, independent hostile paper
-audit, and official compilation closed**.
+Status: **RELEASE_FROZEN; exact evidence, independent hostile paper audit,
+official compilation, and implementation provenance are locked**.
 
 ## 1. Problem anchor
 
@@ -186,7 +186,8 @@ Promotion is split into three noncircular stages.
    verified 47-entry full-project manifest under an external-only hash policy.
    This stage has passed.
 
-The implementation commit remains null as an explicitly later provenance
-stage and is not a theorem dependency. The full-project manifest inventory is
-current; its SHA-256 is deliberately reported only outside manifest-covered
-artifacts to avoid a self-hash cycle, and it is not used as paper evidence.
+Implementation commit
+`e5661e80da6f7de53f574f97f768744095ba8ae0` is provenance-locked and is not
+a theorem dependency. The full-project manifest inventory is current; its
+SHA-256 is deliberately reported only outside manifest-covered artifacts to
+avoid a self-hash cycle, and it is not used as paper evidence.

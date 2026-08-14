@@ -1,9 +1,8 @@
 # HCS-C55: the Yukawa cubic surface over Q of the fourth Hénon dihedral core
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; exact code/results, paper source, official
-PDF, compilation report, Route-A record, and the verified 47-entry
-full-project inventory are frozen against RELEASE_CANDIDATE evidence; the
-implementation commit is deferred to the later provenance stage**.
+Status: **RELEASE_FROZEN with persistent scoped code/results and verified
+47-entry full-project inventories; implementation commit
+`e5661e80da6f7de53f574f97f768744095ba8ae0` is provenance-locked**.
 
 Let $K=\mathbf Q(\rho)$, where $\rho^2+\rho+1=0$, and let
 
@@ -130,10 +129,11 @@ exist, the release label is NOT-COMPARABLE-WITH-CURRENT-DATA.
 - compilation report:
   `b38790520104f13bf8c4348bf7c9453c86ed1f3d09bfda98e024172556ec812b`;
 - Route-A record:
-  `8fe1db8504b71b83e2669371a8ecf485c6755700050bb6ae7527782d83c6ef11`;
+  `320b561d1a6fd9a23daafefc3bfdd75d5cf41d6e1eaee6c353bec6f956e7c4a2`;
 - full-project manifest: 47 verified entries; its SHA-256 is reported only
   outside manifest-covered artifacts to avoid a self-hash cycle;
-- implementation commit: null by design at this provenance stage.
+- implementation commit:
+  `e5661e80da6f7de53f574f97f768744095ba8ae0`.
 
 An independent read-only source/paper/hostile audit passed. No unpackaged
 temporary-file hash is used as release authority.

@@ -1,7 +1,8 @@
 # HCS-C55 implementation checklist
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; exact implementation, hostile/source
-audit, official compilation, and documentation-hash backfill passed**.
+Status: **RELEASE_FROZEN; exact implementation, hostile/source audit,
+official compilation, documentation-hash backfill, and implementation
+commit `e5661e80da6f7de53f574f97f768744095ba8ae0` are provenance-locked**.
 
 ## Frozen inputs
 
@@ -117,8 +118,11 @@ audit, official compilation, and documentation-hash backfill passed**.
 - [x] write the scoped artifact manifest
 - [x] verify the 47-entry full-project manifest while reporting its SHA-256
       only outside manifest-covered artifacts to avoid a self-hash cycle
-- [x] fill PDF/source/report/Route hashes; retain the explicit null for the
-      later implementation-commit provenance stage
+- [x] fill PDF/source/report/Route hashes while retaining the explicit null
+      until the implementation-commit provenance stage
+- [x] backfill implementation commit
+      `e5661e80da6f7de53f574f97f768744095ba8ae0` without reopening the paper
+      or changing the scoped release-candidate tuple
 - [x] leave top registries and the user-owned prompt untouched unless the
       root task separately authorizes them
 

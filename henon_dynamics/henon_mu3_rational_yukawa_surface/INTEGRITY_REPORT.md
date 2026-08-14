@@ -1,8 +1,8 @@
 # HCS-C55 integrity report
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; exact code/results, paper source,
-official PDF, compilation report, Route-A integrity, and the verified
-47-entry full-project inventory passed**.
+Status: **RELEASE_FROZEN against the persistent scoped code/results and
+verified 47-entry full-project inventories; implementation commit
+`e5661e80da6f7de53f574f97f768744095ba8ae0` is provenance-locked**.
 
 Audit date: 2026-08-15 UTC.
 
@@ -73,11 +73,11 @@ self-hash cycle.
 - BCD is a necessary comparator gate only.
 - No Hodge/Yukawa match is promoted to an honest CY3 or motive.
 
-## 4. Exact release-candidate fields
+## 4. Exact evidence and frozen provenance fields
 
 | Field | Current value |
 |---|---|
-| code_commit | null; later provenance stage |
+| code_commit | `e5661e80da6f7de53f574f97f768744095ba8ae0` |
 | producer_payload_sha256 | `6afc529d2ab9e849592d9eba7b76324cc7a840670f50c669f90fdd079c0b4323` |
 | certificate_sha256 | `aa6a57bc496d78afd5728640083179bb0dd24963deb44e31459c59edc71c381f` |
 | independent_check_sha256 | `e24c90fac1b222ed161eec677c06209c901f0decc335e769dc7df4ce53c68469` |
@@ -89,7 +89,7 @@ self-hash cycle.
 | paper_log_sha256 | `690ea4a3fd8af63384f02cf05eebadab5c2a4b9746bc7da999e54c18c59135a2` |
 | paper_text_sha256 | `6eb5fb4b9bb4a23b68cadbce75c9cf16a61637031a3dba7dc3106a4cf5d32b19` |
 | compilation_report_sha256 | `b38790520104f13bf8c4348bf7c9453c86ed1f3d09bfda98e024172556ec812b` |
-| route_record_sha256 | `8fe1db8504b71b83e2669371a8ecf485c6755700050bb6ae7527782d83c6ef11` |
+| route_record_sha256 | `320b561d1a6fd9a23daafefc3bfdd75d5cf41d6e1eaee6c353bec6f956e7c4a2` |
 | full_project_manifest_inventory | 47 verified entries; SHA-256 external-only to avoid a self-cycle |
 | route_verdict | ROUTE_A_EXPLORATORY |
 
@@ -146,8 +146,10 @@ full suite passes (15/15) test methods and (13/13) named semantic gates.
 
 ## 8. Current integrity verdict
 
-**DOCS_FINAL_NO_MORE_EDITS; RELEASE_CANDIDATE_INTEGRITY_PASS.**
+**RELEASE_FROZEN_INTEGRITY_PASS; IMPLEMENTATION_PROVENANCE_LOCKED.**
 
-There is no identified conceptual, exact, source, paper, documentation, or
-inventory blocker. The 47-entry full-project manifest is verified; only the
-implementation commit remains a later provenance-only field.
+There is no identified conceptual, exact, source, paper, documentation,
+inventory, or provenance blocker. The 47-entry full-project manifest is
+verified, and implementation commit
+`e5661e80da6f7de53f574f97f768744095ba8ae0` is backfilled without changing
+the frozen theorem, paper, PDF, or scoped evidence tuple.
