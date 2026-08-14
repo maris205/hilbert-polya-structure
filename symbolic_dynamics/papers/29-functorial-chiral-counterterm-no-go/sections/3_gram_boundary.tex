@@ -1,0 +1,161 @@
+\section{Exact Gram geometry at the quadratic boundary}
+\label{sec:gram}
+
+Let $Z$ be the zeta matrix of a finite pointed poset, let $M=Z^{-1}$,
+and let $E_x=e_xe_x^{\mathsf T}$.  The incidence idempotent
+\begin{equation}
+ q_x=ZE_xM
+ \label{eq:qx}
+\end{equation}
+has the rank-one factorization $q_x=u_xv_x^{\mathsf T}$, where
+\begin{equation}
+ u_x(a)=\one_{a\le x},
+ \qquad
+ v_x(b)=\mu(x,b)\one_{x\le b}.
+ \label{eq:uv}
+\end{equation}
+For $W=\diag(w(a))$, put
+\begin{equation}
+ X^\sharp=W^{-1}X^*W,
+ \qquad
+ G_{xy}=\Tr(q_xq_y^\sharp).
+ \label{eq:sharp-gram}
+\end{equation}
+
+\begin{proposition}[General Gram contraction]
+\label{prop:general-gram}
+For every finite weighted pointed poset,
+\begin{equation}
+ G_{xy}
+ =\bigl(u_y^{\mathsf T}Wu_x\bigr)
+  \bigl(v_x^{\mathsf T}W^{-1}v_y\bigr).
+ \label{eq:general-gram}
+\end{equation}
+The matrix $G$ is real symmetric and positive semidefinite for source-real
+data, and it is invariant under transported pointed isomorphisms.
+\end{proposition}
+
+The first factor in \eqref{eq:general-gram} measures overlap of lower cones;
+the second measures overlap of weighted M\"obius upper tails.  This
+factorization is the only incidence input needed for the counterterm theorem.
+
+\subsection{Divisibility coefficients}
+
+Fix $\eta>1$ and $w(n)=n^{2\eta}$.  Define
+\begin{equation}
+ C_\eta=\sum_{k\ge1}\frac{\mu(k)^2}{k^{2\eta}}
+ =\frac{\zeta(2\eta)}{\zeta(4\eta)}.
+ \label{eq:Ceta}
+\end{equation}
+
+\begin{theorem}[Exact atom Gram]
+\label{thm:atom-gram}
+For divisibility covers $p,q$,
+\begin{equation}
+ G_{pp}=C_\eta(1+p^{-2\eta}),
+ \label{eq:Gdiag}
+\end{equation}
+and, for $p\ne q$,
+\begin{equation}
+ G_{pq}=C_\eta
+ \frac{(pq)^{-2\eta}}
+ {(1+p^{-2\eta})(1+q^{-2\eta})}>0.
+ \label{eq:Gmixed}
+\end{equation}
+\end{theorem}
+
+The proof is in \cref{app:proofs}.  The off-diagonal positivity is important:
+it makes a nonzero mixed pair a generic two-atom mechanism rather than a
+numerical accident.
+
+\subsection{The finite quadratic ledger}
+
+For a finite active cover set $F$, set
+\begin{equation}
+ T_{s,F}=\sum_{p\in F}p^{-s}q_p,
+ \qquad
+ \cB_{s,F}=
+ \begin{pmatrix}
+ 0&T_{s,F}\\ T_{1-s,F}^\sharp&0
+ \end{pmatrix}.
+ \label{eq:finite-block}
+\end{equation}
+Finite-dimensional cyclicity gives
+\begin{equation}
+ Q_F(s):=\Tr\cB_{s,F}^2
+ =2\sum_{p,q\in F}p^{-s}q^{s-1}G_{pq}.
+ \label{eq:QFs}
+\end{equation}
+This is an exact finite ledger.  It is not notation for the nonexistent
+countable critical quadratic trace.
+
+At $s=1/2+it$, symmetry of $G$ yields
+\begin{align}
+ Q_F(t)&=D_F+M_F(t),\label{eq:Qsplit}\\
+ D_F&=2\sum_{p\in F}\frac{G_{pp}}p,\label{eq:DF}\\
+ M_F(t)&=4\sum_{p<q\in F}\frac{G_{pq}}{\sqrt{pq}}
+ \cos\!\left(t\log\frac qp\right).
+ \label{eq:MF}
+\end{align}
+
+\begin{theorem}[Mixed summability and reflection]
+\label{thm:mixed-summability}
+For $\eta>1$, the limit
+\begin{equation}
+ M_\eta(t)=4\sum_{p<q}\frac{G_{pq}}{\sqrt{pq}}
+ \cos\!\left(t\log\frac qp\right)
+ \label{eq:Meta}
+\end{equation}
+converges absolutely and uniformly for real $t$.  For
+$F_X=\{p:p\le X\}$,
+\begin{equation}
+ \sup_{t\in\mathbb R}|M_\eta(t)-M_{F_X}(t)|
+ =O_\eta(X^{1/2-2\eta}).
+ \label{eq:mixed-tail}
+\end{equation}
+Moreover,
+\begin{equation}
+ M_\eta(s)=2\sum_{p<q}G_{pq}
+ \left(p^{-s}q^{s-1}+q^{-s}p^{s-1}\right)
+ \label{eq:mixed-holo}
+\end{equation}
+is holomorphic on $1-2\eta<\Re s<2\eta$ and obeys
+$M_\eta(1-s)=M_\eta(s)$.
+\end{theorem}
+
+\begin{theorem}[Unique divergent germ]
+\label{thm:diagonal-germ}
+The diagonal ledger satisfies the exact identity
+\begin{equation}
+ D_{F_X}
+ =2C_\eta\sum_{p\le X}\frac1p
+ +2C_\eta\sum_{p\le X}p^{-1-2\eta}.
+ \label{eq:diagonal-decomposition}
+\end{equation}
+Only the first term diverges.  The second converges to
+$2C_\eta P(1+2\eta)$ with tail $O_\eta(X^{-2\eta})$.
+Consequently,
+\begin{equation}
+ Q_{F_X}(t)=2C_\eta\log\log X
+ +2C_\eta\bigl(\Meta+P(1+2\eta)\bigr)
+ +M_\eta(t)+o(1),
+ \label{eq:sharp-asymptotic}
+\end{equation}
+uniformly in real $t$.
+\end{theorem}
+
+\begin{figure}[t]
+\centering
+\input{figures/quadratic_decomposition}
+\caption{The critical finite quadratic ledger has one divergent germ and two
+absolutely summable pieces.  Leading-only subtraction removes the first box;
+full-diagonal subtraction also removes the finite diagonal tail.  Their
+difference is a legitimate nonzero scheme shift, so convergence does not
+select a finite part.}
+\label{fig:quadratic-decomposition}
+\end{figure}
+
+Theorem~\ref{thm:diagonal-germ} is the analytic core of the paper.  It licenses
+a finite part, while the distinction visualized in
+\cref{fig:quadratic-decomposition} prevents that finite part from being called
+canonical without another axiom.

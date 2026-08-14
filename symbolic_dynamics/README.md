@@ -35,6 +35,12 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [21-successor-divisor-cycle-flood](papers/21-successor-divisor-cycle-flood/README.md) | [PDF](papers/21-successor-divisor-cycle-flood/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/21-successor-divisor-cycle-flood/) | successor–divisor grammar $n\to d\iff d\mid n+1$ 给出强连通、mixing 的 genuine recurrent shift，且自然 whole adjacency 精确满足 $L_s\in\mathcal S_1\iff\Re s>1/2$；但它没有长度一轨道，并从每个长度 $k\ge2$ 都产生 canonical primitive cycle，所有自然 orbit norms 又是 composite squares。 | **SHARP FREDHOLM / ALL-LENGTH CYCLE FLOOD / ROUTE-A REJECTED / SD-C23** |
 | [22-cofactor-holonomy-fredholm-trilemma](papers/22-cofactor-holonomy-fredholm-trilemma/README.md) | [PDF](papers/22-cofactor-holonomy-fredholm-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/22-cofactor-holonomy-fredholm-trilemma/) | successor–divisor edge 的 intrinsic cofactor $q=(n+1)/d$ 精确分类 closed-path holonomy；$Q=2$ 当且仅当轨道是 $C_k=(k,\ldots,2k-1)$。two-parameter adjacency 的 sharp domain 为 $\Re s>1/2$ 且 $\Re(s+u)>1/2$，但 pure cofactor 非紧、endpoint regularization 阶乘衰减、unitary character 只改相位。 | **HOLONOMY RESOLUTION / FREDHOLM TRILEMMA / ROUTE-A REJECTED / SD-C24** |
 | [23-unary-holonomy-finite-fiber-rigidity](papers/23-unary-holonomy-finite-fiber-rigidity/README.md) | [PDF](papers/23-unary-holonomy-finite-fiber-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/23-unary-holonomy-finite-fiber-rigidity/) | canonical cofactor word $1^{k-1}2$ 上，任意固定有限状态响应最终周期，任意固定有限维矩阵响应是 LRS，因而不能精确选择无限 prime-only support；增长记忆虽可拟合任意有限目标，却完全不具算术选择性，且完整块行列式仍保留 $z^k$ 与阶乘 roof。 | **FINITE-FIBER RIGIDITY / FACTORIAL ROOF / ROUTE-A REJECTED / SD-C25** |
+| [24-kraft-fredholm-log-code-trilemma](papers/24-kraft-fredholm-log-code-trilemma/README.md) | [PDF](papers/24-kraft-fredholm-log-code-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/24-kraft-fredholm-log-code-trilemma/) | 有限 alphabet 的可分 prime code 在总 roof $\log p$ 下被 Kraft 不等式强制出无界 cycle length，从而 whole adjacency 非紧；共享 trie/renewal 则产生 mixed primitive necklaces，唯一 clean trace-class escape 是 Paper 04 的 countable atom diagonal。 | **KRAFT–FREDHOLM TRILEMMA / ROUTE-A REJECTED / SD-C26** |
+| [25-holomorphic-lefschetz-code-collapse](papers/25-holomorphic-lefschetz-code-collapse/README.md) | [PDF](papers/25-holomorphic-lefschetz-code-collapse/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/25-holomorphic-lefschetz-code-collapse/) | holomorphic de Rham $0|1$ complex 在所有 repetitions 上精确抵消 affine-branch 分母并给出 honest graded determinant；但共享 renewal 保留 mixed necklaces，分离 components 又在 cohomology 上退化为任意 atom inventory。 | **LEFSCHETZ CANCELLATION / COHOMOLOGY COLLAPSE / SD-C27** |
+| [26-pure-power-selector-atom-collapse](papers/26-pure-power-selector-atom-collapse/README.md) | [PDF](papers/26-pure-power-selector-atom-collapse/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/26-pure-power-selector-atom-collapse/) | 单色词为 $1$、mixed 词为 $0$ 的逐词 cyclic selector 可精确实现，但任意有限维普通或 graded 实现的可见半单化都被强制为一颜色一块；radical 只能制造 determinant-invisible 的表示连通。 | **PURE-POWER SELECTOR / ATOM-BLOCK COLLAPSE / SD-C28** |
+| [27-mobius-incidence-atom-compiler](papers/27-mobius-incidence-atom-compiler/README.md) | [PDF](papers/27-mobius-incidence-atom-compiler/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/27-mobius-incidence-atom-compiler/) | 整数整除 source 的 covers 内生给出 atoms，Möbius-incidence idempotents 在迹之前消去 composite 与 mixed words，形成精确 atom Euler ledger；但可数 compiler 与坐标 atom table 有界相似，trace-class 域仍停在 $\Re s>1$。 | **SOURCE-DERIVED LEDGER / SIMILARITY COLLAPSE / SD-C29** |
+| [28-chiral-incidence-metric-trilemma](papers/28-chiral-incidence-metric-trilemma/README.md) | [PDF](papers/28-chiral-incidence-metric-trilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/28-chiral-incidence-metric-trilemma/) | reflected incidence-chiral family 在临界线上紧自伴且第四矩精确随 $t$ 运动；但 $B\notin\mathcal S_2$，$\det_3$ 删去二阶项，正定 source-natural metric 会将对象正交化回独立 atoms，而原生 motion 被所有对照复制。 | **CHIRAL MOTION / METRIC TRILEMMA / SD-C30** |
+| [29-functorial-chiral-counterterm-no-go](papers/29-functorial-chiral-counterterm-no-go/README.md) | [PDF](papers/29-functorial-chiral-counterterm-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/29-functorial-chiral-counterterm-no-go/) | source-natural quadratic subtraction 能分离 $B^2$ 的 prime-harmonic divergence，但 leading-only 与 full-diagonal schemes 相差一个非零可和有限项，因而自然性不唯一固定 finite part；保留 baseline mixed residue 与消去同型 controls 分别强制 $\beta=0$ 和 $\beta=1$，排除 pair-local linear-Gram 选择器。 | **FINITE-PART CLASSIFICATION / LOCAL SELECTIVITY NO-GO / SD-C31** |
 
 ### 论文 1 的候选分离结论
 
@@ -930,13 +936,45 @@ STOP_POSITIVE_METRIC_COMPLETION / STOP_FIXED_HILBERT_POLYA_OPERATOR /
 ROUTE_A_REJECTED**。Route B 继续锁定；下一批最小义务是分类 source-natural 的
 $B^2$ counterterms，而不是再叠加任意 block completion。
 
+### 论文 29：二阶反项可自然构造，但 finite part 不唯一且 mixed residue 无选择性
+
+Paper 29 保留 Paper 28 的同一 incidence-chiral family，并分解 finite-cutoff 二次型
+
+$$
+Q_F(t)=2\sum_{p\in F}\frac{G_{pp}}p
++4\sum_{p<q\in F}\frac{G_{pq}}{\sqrt{pq}}
+\cos\left(t\log\frac qp\right).
+$$
+
+对 $\eta>1$，mixed 项绝对可和，而 diagonal 项的唯一发散 germ 是
+$2C_\eta\sum_pp^{-1}$。然而 leading-only 与 full-diagonal 两个同样自然的减法相差
+
+$$
+2C_\eta\sum_pp^{-1-2\eta},
+$$
+
+这是一个非零、绝对可和且 atom-local 的 finite scheme shift。因而自然性与收敛性
+只能固定发散 germ，不能唯一固定 finite part。
+
+更强的负结论是 pair-local linear-Gram 选择器的精确二择一：保留
+divisibility baseline 的 mixed pair 强制 $\beta=0$，而消去同一 transported local type
+的 controls 则强制 $\beta=1$。因此不存在同时满足两者的局部自然反项。
+
+602/602 independent checks、23/23 tests、76 个 baseline mixed/$B^4$ pairs、四类 controls 与
+49 组预注册系数网格共同验证了这一分类。把 finite part 补回 $\det_3$ 只会乘上
+zero-free quadratic exponential；它是新的 scheme-dependent functional，不是 ordinary Fredholm
+determinant 或 $\det_2$，也不改变辅助变量的 divisor。阶段结论是
+**GO_SCOPED_RENORMALIZATION_RIGIDITY / STOP_CANONICAL_FINITE_PART /
+STOP_PAIRWISE_ARITHMETIC_SELECTIVITY / ROUTE_A_REJECTED**。非局部 filtered-tower invariant
+尚未被这个定理覆盖；Paper 30 只测试这一剩余漏口，Route B 仍锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十八篇论文](papers/)
+- [二十九篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
