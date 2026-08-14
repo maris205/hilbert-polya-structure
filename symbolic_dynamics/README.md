@@ -29,6 +29,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [15-bar-koszul-primitive-no-lift](papers/15-bar-koszul-primitive-no-lift/README.md) | [PDF](papers/15-bar-koszul-primitive-no-lift/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/15-bar-koszul-primitive-no-lift/) | bar–Koszul squarefree subset shift 的标量 determinant 仍为 $\prod_p(1-x_p)$，但 $p^2q^2$ 的 primitive 账本为 $1^+$ 对 $2^-$，只能借低阶 $pq$ 轨道的二次重复抵消；$pqr$ 的残差为 $\mathbf1\oplus\mathrm{sgn}-\mathrm{Std}$，排除 $S_3$-自然的 sign involution。 | **PRIMITIVE NO-LIFT / ROUTE-A REJECTED / SD-C17** |
 | [16-equivariant-cycle-index-determinant](papers/16-equivariant-cycle-index-determinant/README.md) | [PDF](papers/16-equivariant-cycle-index-determinant/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/16-equivariant-cycle-index-determinant/) | Burnside/cycle-index ledger 精确保留 $pqr$ 的 character residual $(0,0,3)$，但算术权重 $x_p=p^{-s}$ 使固定 transfer 的置换 stabilizer 退化为恒等；等权恢复对称时非平凡 isotypes 全被 rank-one transfer 杀掉，而 diagonal equivariant lift 又引入 mixed-subset Euler factors。 | **FORMAL EQUIVARIANT LEDGER / ROUTE-A REJECTED / SD-C18** |
 | [17-fiber-cocycle-artin-factor](papers/17-fiber-cocycle-artin-factor/README.md) | [PDF](papers/17-fiber-cocycle-artin-factor/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/17-fiber-cocycle-artin-factor/) | 真正 commuting 的 $C_2$ fiber 在同一 subset shift 中给出 Artin blocks $D_+=1/\zeta(s)$、$D_-=\zeta(s)/\zeta(2s)$ 与 whole determinant $D_{\rm reg}=1/\zeta(2s)$；但 mixed primitive lifts 仍大量存在，全部 matched inventories 也精确复制该分解。 | **ARTIN FACTOR / ROUTE-A REJECTED / SD-C19** |
+| [18-incidence-transition-holonomy](papers/18-incidence-transition-holonomy/README.md) | [PDF](papers/18-incidence-transition-holonomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/18-incidence-transition-holonomy/) | subset-incidence transition rule 产生了真正非交换、非 one-letter-coboundary 的 $S_3$ holonomy；trivial/sign blocks 仍保留标量 Euler factor，但 faithful standard block 精确泄漏 mixed primitive coefficients，且全部 matched inventories 都复制该现象。 | **GENUINE TRANSITION HOLONOMY / ROUTE-A REJECTED / SD-C20** |
 
 ### 论文 1 的候选分离结论
 
@@ -416,13 +417,55 @@ STOP_PRIMITIVE_PRIME_MATCHING / STOP_ARITHMETIC_SELECTIVITY /
 PROVES_TOO_MUCH**。Paper 18 已转向同一 tensor-subset grammar 上真正非交换的
 transition holonomy，检验它能否逃出 cyclic degree rigidity；Route B 继续锁定。
 
+### 论文 18：非交换 transition holonomy 成立，但 faithful block 精确泄漏
+
+Paper 18 在同一 tensor-subset full shift 的完整 directed-edge presentation 上冻结
+$G=S_3$。若 $S\subsetneq T$，edge label 为 $r=(12)$；若
+$T\subsetneq S$，label 为 $t=(23)$；其余为恒等元。这个 cocycle 不是 Paper 17
+的 one-letter degree cocycle加 vertex coboundary：三原子 incidence loops 已给出
+不交换的 based holonomies，而 edge-marked 四步 commutator cycle 的 character gap
+精确等于 $3$。
+
+两原子 character blocks 展示了最清楚的 same-object 分裂。trivial 与 sign blocks
+都精确等于
+
+$$
+D_{mathbf1}(x,y)=D_{mathrm{sgn}}(x,y)=(1-x)(1-y),
+$$
+
+但二维 standard block 为
+
+$$
+D_{mathrm{Std}}(x,y)
+=(1-x)^2(1-y)^2+3xy(x+y)(xy+1)(x+y-1).
+$$
+
+因此真正看见非交换 holonomy 的 faithful factor 必然同时看见 mixed symbolic cycles：
+$\Delta\log D$ 中 $x^2y$、$xy^2$ 的系数为 $-3$，$x^2y^2$ 为 $-6$；
+未标记的 degree-six 聚合项 $x^3y^3=-9$ 与 edge-separated commutator certificate
+被严格分账。有限穷举进一步给出
+$S_3:36=36$、$D_4:64=64$、$Q_8:64=64$ 的
+“all-irrep clean = gauge”计数；$Q_8$ 只看一维 characters 时却有 512 个假 survivors。
+这些是 exact finite evidence，不被升格为一般 cohomology 定理。
+
+解析上，trivial block 在 $\Re s>1$ 有 trace-class realization；包含对称 incidence
+coupling 的 nontrivial blocks 只在 $\Re s>2$ 关闭。14/14 tests 与六类 inventory、
+五个冻结种子的 30/30 controls 全部通过，但 control margin 仍为零。由此阶段结论是
+**GO_GENUINE_TRANSITION_HOLONOMY / STOP_ARITHMETIC_SELECTIVITY /
+STOP_COMPLETED_DIVISOR / PROVES_TOO_MUCH**，Route B 继续锁定。
+
+这一批已经把“给 full-subset base 继续加 fiber/character/holonomy 装饰”的空间压缩得
+很小。下一批最值得做的仍是 Symbolic Dynamics，但应把算术约束写进 allowed
+transitions 本身：优先研究 constrained factorization、renewal 或 countable-Markov
+grammar，并在任何解析延拓之前先证明它能区分 matched arbitrary inventories。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [十七篇论文](papers/)
+- [十八篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
