@@ -1,8 +1,8 @@
 # HCS-C54 implementation checklist
 
-Status: **DOCS_FINAL_NO_MORE_EDITS against the persistent scoped code/results
-RELEASE_CANDIDATE and 44-entry full-project inventory; later
-implementation-commit provenance remains pending**.
+Status: **RELEASE_FROZEN against the persistent scoped code/results and
+44-entry full-project inventories; implementation commit
+`f2fee2f9844b84aa31e076aabe9d4bb88fbd3618` is provenance-locked**.
 
 ## Mathematics
 
@@ -44,7 +44,7 @@ implementation-commit provenance remains pending**.
 - [x] Record the final payload, certificate, check, schema, and scoped-manifest
   hashes.
 - [x] Include the scoped manifest in the 44-entry full-project inventory.
-- [ ] Backfill the implementation commit in the later provenance stage without
+- [x] Backfill the implementation commit in the later provenance stage without
   changing the frozen paper.
 
 ## Documentation

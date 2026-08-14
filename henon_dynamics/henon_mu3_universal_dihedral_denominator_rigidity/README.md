@@ -1,8 +1,8 @@
 # HCS-C54: universal dihedral symmetry and split-denominator rigidity
 
-Status: **DOCS_FINAL_NO_MORE_EDITS against the persistent scoped code/results
-RELEASE_CANDIDATE and 44-entry full-project inventory; implementation-commit
-provenance remains pending**.
+Status: **RELEASE_FROZEN with persistent scoped code/results and 44-entry
+full-project inventories; implementation commit
+`f2fee2f9844b84aa31e076aabe9d4bb88fbd3618` is provenance-locked**.
 
 The source lock is the rationally descended HCS-C53 family.  Put
 
@@ -87,7 +87,6 @@ Not claimed:
 - automorphy, meromorphic continuation, a functional equation, or RH.
 
 The persistent scoped code/results release-candidate tuple, 44-entry
-full-project inventory, and frozen PDF digest are recorded in
-INTEGRITY_REPORT.md.  Only the implementation-commit provenance remains for a
-later stage.  No theorem depends on that later identifier, and its backfill
-must not reopen the paper.
+full-project inventory, implementation commit, and frozen PDF digest are
+recorded in INTEGRITY_REPORT.md.  The provenance backfill does not alter the
+frozen paper or its mathematical claims.

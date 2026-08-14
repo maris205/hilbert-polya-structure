@@ -18,8 +18,8 @@ HCS-C53 supplies the explicit semilinear reversal, rational equation model,
 and certified rational compatible packet data in the smooth rows \(2,3,4\).
 It is not cited for a semisimplicity theorem.  HCS-C54's scoped code/results
 lane is now a release candidate with a persistent replayable manifest.  The
-44-entry full-project inventory includes that manifest; only the implementation
-commit remains a later provenance stage.
+44-entry full-project inventory includes that manifest, and implementation
+commit `f2fee2f9844b84aa31e076aabe9d4bb88fbd3618` records the release bytes.
 
 ### 1.1 Committed upstream provenance lock
 
@@ -59,8 +59,9 @@ The persistent 11-entry code/results manifest and release-candidate hashes are:
 This is the SHA-256 of the persistent file
 `results/CODE_RESULTS_HASHES.sha256`.  That file lists exactly seven release
 code files and four release result files and excludes both manifest files.
-The 44-entry full-project inventory includes the scoped manifest.  It does not
-claim the pending implementation commit.
+The 44-entry full-project inventory includes the scoped manifest.  The
+implementation commit is
+`f2fee2f9844b84aa31e076aabe9d4bb88fbd3618`.
 
 ## 2. Primary-source locators
 

@@ -1,8 +1,8 @@
 # HCS-C54 integrity report
 
-Status: **DOCS_FINAL_NO_MORE_EDITS against the persistent scoped code/results
-RELEASE_CANDIDATE and 44-entry full-project inventory; implementation-commit
-provenance remains pending**.
+Status: **RELEASE_FROZEN against the persistent scoped code/results and
+44-entry full-project inventories; implementation commit
+`f2fee2f9844b84aa31e076aabe9d4bb88fbd3618` is provenance-locked**.
 
 ## Mathematical red team
 
@@ -89,9 +89,10 @@ The displayed manifest hash is the digest of the persistent
 `results/CODE_RESULTS_HASHES.sha256`.  Its 11 entries are exactly seven
 release code files and four release result files; both manifest files are
 excluded from that scope.  The 44-entry full-project inventory includes the
-scoped manifest.  Only the implementation commit remains a later provenance
-stage.  Temporary or unpackaged reconnaissance remains historical only and is
-not a theorem input or reproducibility source.
+scoped manifest.  The implementation commit is
+`f2fee2f9844b84aa31e076aabe9d4bb88fbd3618`.  Temporary or unpackaged
+reconnaissance remains historical only and is not a theorem input or
+reproducibility source.
 
 ## Compiled manuscript
 
@@ -145,7 +146,7 @@ backfill; it is the documentation-freeze gate.
   drift;
 - [x] LaTeX compilation and PDF audit;
 - [x] final full formal/paper raw-byte and TeX-token gate;
-- [ ] implementation-commit provenance backfill after the documentation
+- [x] implementation-commit provenance backfill after the documentation
   freeze.
 
 ## Workspace boundary
