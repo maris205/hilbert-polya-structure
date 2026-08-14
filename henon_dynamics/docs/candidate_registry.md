@@ -1505,11 +1505,47 @@ follows.  The tuple is
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 **ROUTE_A_EXPLORATORY**.
 
-C56 is conditionally locked to the connected degree-\(27\) line scheme,
-full \(W(E_6)\) line-field Galois closure, and rational Picard rank of this
-surface.  That lock is not theorem evidence until the final committed C55
-coefficient object, released certificate, and C56 input are exactly rebound
-and replayed.
+C56 exactly rebounds that released coefficient object and closes the line-field
+gate below.
+
+## HCS-C56 twenty-seven-line field and maximal \(E_6\) arithmetic (2026-08-15)
+
+Candidate **HCS-C56** completes the five-paper batch; see the
+[C56 project](../henon_mu3_yukawa_line_field/).  For the frozen C55 cubic
+surface \(Y/\mathbf Q\), it proves
+
+\[
+ F_1(Y)\simeq\operatorname{Spec}E,\qquad [E:\mathbf Q]=27,
+\]
+
+with \(E\) non-Galois.  The normal closure \(K\) is distinct from \(E\) and
+satisfies
+
+\[
+ \operatorname{Gal}(K/\mathbf Q)\cong W(E_6),\qquad [K:\mathbf Q]=51840.
+\]
+
+The main Grassmann quotient has Hilbert counts \((1,4,10,12,0)\), all five
+complementary charts are empty, and the squarefree factor patterns at
+\(7,19,29,37\) have subset-sum intersection \(\{0,27\}\).  Exact lattice
+enumeration gives the index-two subgroup of size \(25920\) and places all
+\(5184\) elements of type \((2,5,5,5,10)\) outside it; ordinary \(S_{27}\)
+permutation sign is deliberately not used as Coxeter parity.
+
+The geometric Picard rank is seven.  The machine computes invariant Picard
+rank one, and the written Hochschild--Serre torsion/rank bridge gives
+\(\rho(Y/\mathbf Q)=1\).  Hence \(Y\) has no \(\mathbf Q\)-line; more
+generally, if a finite extension \(L/\mathbf Q\) defines a line, then
+\(27\mid[L:\mathbf Q]\).  This does not imply that \(Y(\mathbf Q)\) is empty,
+settle rationality, or produce a Hasse/Brauer--Manin, motive, VHS,
+Calabi--Yau, automorphy, continuation, functional-equation, RH, or
+Hilbert--Polya theorem.
+
+The exact arithmetic result improves the partial A3 evidence while leaving
+A1, A2, and A4 inherited.  The stable route tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.
 
 ## Pressure-lane alias policy
 

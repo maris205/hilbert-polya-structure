@@ -1,7 +1,7 @@
 # Batch plan: HCS-C52 through HCS-C56
 
-Status: **adaptive batch in progress; C52--C55 complete, C56 conditionally
-locked pending final committed C55 rebind**
+Status: **adaptive batch complete; C52--C56 each closed as an independent
+theorem-sized paper**
 
 Date: 2026-08-15
 
@@ -30,15 +30,15 @@ The dependency graph after the first four realized gates is
  \longrightarrow C56.
 \]
 
-C52 through C55 are complete.  C55 realizes a four-dimensional rational
+C52 through C56 are complete.  C55 realizes a four-dimensional rational
 equivariant deformation germ, a relative rank-ten CY3-type Reynolds
 variation, and a smooth geometrically irreducible rational Yukawa cubic
 surface, without constructing or excluding an honest Calabi--Yau
-threefold.  C56 is conditionally locked to the arithmetic of the
-twenty-seven-line scheme of that surface.  The lock becomes effective only
-after the released C55 certificate, the committed C55 coefficient object,
-and the live C56 input agree exactly and every line-scheme computation is
-replayed.
+threefold.  C56 exactly rebounds the released C55 coefficient object and
+classifies the twenty-seven-line scheme of that surface: it is one connected
+degree-\(27\) finite-etale field point whose normal closure has full
+\(W(E_6)\) Galois group, with geometric/arithmetic Picard ranks \(7/1\) and
+no rational line.
 
 ## HCS-C52: dihedral Chow projector and graph-algebra optimum
 
@@ -311,7 +311,7 @@ equation, automorphy, RH statement, or Hilbert--Polya operator.
 
 ## HCS-C56: twenty-seven-line field and maximal \(E_6\) arithmetic
 
-### Conditional lock
+### Realized theorem
 
 C56 studies a new arithmetic object attached to the released C55 Yukawa
 surface: its finite etale Fano scheme of geometric lines and the Galois
@@ -320,10 +320,10 @@ controls the projective cubic; C56 determines the arithmetic monodromy of
 its lines.  It is therefore a separate theorem-sized paper, not a
 continuation of the C55 Cayley-ring calculation.
 
-The lock is conditional on a three-way exact rebind of the normalized
-primitive C55 coefficient vector: the released certificate, the committed
-implementation object, and the live C56 input must agree.  Temporary
-reconnaissance artifacts are chronology only and are not theorem evidence.
+The normalized primitive C55 coefficient vector was rebound three ways: the
+released certificate, committed implementation object, and live C56 input
+agree exactly.  Temporary reconnaissance artifacts remain chronology only
+and are not theorem evidence.
 
 ### Locked theorem target
 
@@ -377,6 +377,21 @@ Hilbert--Polya realization.
   degree surviving the modular sieve, a ramified or changed Frobenius
   witness, or an inference of full \(W(E_6)\) merely from genericity,
   transitivity, or an element of order five stops the claimed branch.
+
+All gates close exactly.  The main quotient has Hilbert counts
+\((1,4,10,12,0)\); the five complementary charts are empty; the factor-degree
+patterns at \(7,19,29,37\) have subset-sum intersection \(\{0,27\}\); and the
+independent lattice enumeration gives
+
+\[
+ |W(E_6)|=51840,\qquad |U|=25920.
+\]
+
+All \(5184\) elements of type \((2,5,5,5,10)\) lie outside \(U\), while the
+ordinary \(S_{27}\) action has no odd element.  The machine fixed-space rank
+is one; the written Hochschild--Serre torsion/rank bridge supplies the
+arithmetic Picard rank.  The release checks pass \(10/10\) semantic gates,
+\(2684/2684\) rebound mutations, and \(15/15\) tests.
 
 ## Batch-wide publication vetoes
 

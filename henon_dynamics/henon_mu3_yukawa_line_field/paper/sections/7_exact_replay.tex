@@ -1,0 +1,157 @@
+\section{Exact replay and evidence boundary}
+\label{sec:exact-replay}
+
+The proof separates three kinds of evidence.  General theorems control the
+geometry of line sections and the subgroup alternatives.  Exact computation
+supplies the large instance-specific identities.  Written arguments connect
+those inputs to the global scheme, Galois, and Picard conclusions.
+
+\subsection{Claim-to-evidence ledger}
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Claim & Exact machine input & Written or external bridge\\
+\midrule
+\(\FanoY\) finite \(\etale\), rank \(27\)
+& exact smoothness replay
+& Kass--Wickelgren Theorem~2 gives total rank; Corollary~53 gives simple
+zeros\\
+global chart equality
+& quotient dimension \(27\), lex shape, four direct zero remainders
+& finite \(\etale\) makes the chart open-and-closed; equal rank gives equality\\
+\(g\) irreducible
+& four complete squarefree modular factorizations and subset sums
+& Gauss's lemma and \cref{lem:subset-sum}\\
+\(\Gal(K/\Q)=\WE\)
+& prime-\(37\) factorization and exact Weyl/Coxeter enumeration
+& Frobenius cycle type, Elsenhans--Jahnel Lemma~8, exclusion of \(\Ucox\)\\
+\(\rho(Y/\Q)=1\)
+& fixed rank \(1\) for the explicit \(\WE\)-action on the geometric Picard
+lattice
+& Hochschild--Serre torsion cokernel, followed by tensoring with \(\Q\)\\
+no \(\Q\)-line
+& connected degree-\(27\) Fano scheme
+& the universal property of \(\Spec(E)\) and the tower law\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The Picard row is a release-critical boundary.  The machine calculation does
+\emph{not} directly certify the arithmetic Picard rank.  It certifies the
+rank-one fixed subspace of the geometric Picard representation.  The passage
+to \(\rho(Y/\Q)=1\) is the written Hochschild--Serre argument in
+\cref{eq:hs-picard,eq:arithmetic-picard}.
+
+\subsection{Independent finite gates}
+
+The producer reconstructs the frozen twenty-term cubic, generates the six
+Grassmann chart systems, computes the degree-order and lexicographic bases,
+factors the eliminant at the four selected primes, and constructs the Weyl
+group from Picard reflections.  It emits a strict canonical JSON payload.
+
+The checker imports no producer module.  It independently:
+\begin{enumerate}[leftmargin=*]
+\item validates the layered frozen C55 source contract before importing the
+cubic;
+\item rebuilds the surface and all chart equations;
+\item recomputes the standard monomial box and all four direct remainders;
+\item verifies the five complementary unit ideals;
+\item multiplies every stored modular factor, checks derivative gcds, and
+recomputes every subset-sum set;
+\item rebuilds the Picard lattice, the \(27\) line classes, all six
+reflections, the \(51840\)-element group, Coxeter kernel, target class counts,
+and fixed rank;
+\item derives each terminal theorem gate from those data rather than trusting
+a producer conclusion string.
+\end{enumerate}
+
+The schema rejects unknown or missing keys, duplicate JSON keys, floats,
+booleans in integer fields, noncanonical integers, oversized input, and
+optimized execution that would suppress assertions.  The hostile suite
+mutates every classified scalar leaf while rebinding the exposed envelope
+digests; semantic leaves must still be rejected for mathematical reasons.
+It also exercises source drift, symlink and path attacks, stale outputs,
+promotion-order failures, rollback after every move, and byte/mtime
+nonmutation in read-only check mode.
+
+\subsection{Official code/results prefreeze tuple}
+
+The refreshed prefreeze payload encodes the machine fixed rank and the
+requirement for the written Hochschild--Serre bridge as separate leaves.  A
+fresh default replay passes all ten semantic gates.  The exact code/results
+prefreeze tuple used by this source draft is:
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\textwidth}>{\raggedright\arraybackslash}p{0.66\textwidth}@{}}
+\toprule
+field & prefreeze value\\
+\midrule
+semantic gates & \texttt{10/10}\\
+semantic rebound sweep
+& \texttt{2684/2684 = 2662 payload + 20 schema + 2 envelope}\\
+test methods & \texttt{15/15}\\
+payload SHA-256
+& \texttt{5b17c9ed7bea60680556af70297199b653d51188bb30ce59f7c2c6bfbc94f661}\\
+certificate SHA-256
+& \texttt{26739ce5aedb4a3467645f9c1b2036d4d3eec9ce4d0dbce23d67ea7b67e5fbc4}\\
+canonical schema SHA-256
+& \texttt{ef26d7204a38e28aaf00eed8188b31d34d590c9c8a19924f1d0798e40b052d5f}\\
+schema-file SHA-256
+& \texttt{adab34998a944c8a4af8db774e511f0453839ea6a6e14e9437ffc259be3da504}\\
+independent-check SHA-256
+& \texttt{4ccfb09139a4bfa812ea9c57ff8b65a6a8e603dbdb00e245355a4563386489a9}\\
+scoped-manifest SHA-256 and entry count
+& \texttt{20d29af97128e766bb5e59bf6f82f8401c6ed62f279371b031febcefd5d99b4a};
+\(12\) entries\\
+producer/checker/test direct release fields
+& bound by the scoped manifest; otherwise \texttt{null}\\
+implementation/provenance commits & \texttt{null}\\
+full-project successor
+& root \texttt{FULL\_PROJECT\_HASHES.sha256}; self-excluding 46 entries;
+verified separately; digest external-only\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The self-excluding scoped manifest remains the default code/results identity
+and default runner scope.  The code/results state is
+\texttt{PREFREEZE\_CODE\_RESULTS\_PASS}, while the no-commit project is a
+\texttt{RELEASE\_CANDIDATE}.  The separately verified root successor covers
+the 46-entry release-wide tree without replacing that scoped identity; its
+digest is external-only to avoid self-reference.  Temporary architecture,
+reconnaissance, and hostile-review digests are chronology only and are never
+theorem inputs.
+
+\subsection{Computational boundary}
+
+Computer algebra certifies finite identities: coefficients, ideal
+membership, quotient dimensions, modular products, group enumeration, and
+matrix ranks.  It does not supply the classical line theorem, the
+open-and-closed scheme argument, the subgroup theorem, the
+Hochschild--Serre rank bridge, or the universal property used for fields of
+definition.  Conversely, the cited theorems do not verify the eliminant,
+factors, or Weyl enumeration for this surface.  Both layers are needed.
+
+A controlled bootstrap live build completed after the independent isolated
+source audit.  It produced an (18)-page A4 PDF with zero final-pass
+TeX/BibTeX warnings, box warnings, unresolved references or citations,
+duplicate destinations, and rerun requests; all (26) fonts were embedded,
+subsetted Type~1 fonts.  Its diagnostic predecessor identifiers were:
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.70\textwidth}@{}}
+bootstrap PDF SHA-256
+& \texttt{241d631aad89aea4a8885fb36187b8509ce2316a51d19ef6b51a82824c478f0c}\\
+bootstrap log SHA-256
+& \texttt{9a6595a90af1bf5f8091ded907aab00721e4542cbfda9944fb20550e21e8df30}\\
+bootstrap text SHA-256
+& \texttt{037a5dd42a69b2f0219af912f96ca4629628c09306bbd0c427d189b6f4729c91}.
+\end{tabular}
+\end{center}
+These three bootstrap digests are chronology-only and are not release
+authority.  The controlled final rebuild supersedes them; its paper-source,
+PDF, log, extracted-text, and compilation-report digests are recorded
+externally in the Route record and compilation report, rather than embedded
+here, to avoid a self-hash cycle.

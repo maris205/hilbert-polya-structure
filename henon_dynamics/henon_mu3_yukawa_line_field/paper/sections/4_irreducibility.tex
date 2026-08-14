@@ -1,0 +1,99 @@
+\section{Four-prime irreducibility}
+\label{sec:irreducibility}
+
+\Cref{prop:complete-chart} identifies the full line scheme with a
+degree-\(27\) finite \(\Q\)-algebra.  To prove connectedness, it remains to
+show that \(g\) is irreducible.
+
+\begin{lemma}[Subset-sum obstruction]
+\label{lem:subset-sum}
+Let \(g\in\mathbf Z[d]\) be primitive of degree \(n\).  Suppose that, for a
+prime \(p\), its leading coefficient survives modulo \(p\) and
+\[
+ \bar g=u_p\prod_{j=1}^{r_p}q_{p,j}
+\]
+is a squarefree factorization into distinct monic irreducibles of degrees
+\(e_{p,1},\ldots,e_{p,r_p}\).  If \(g\) has a rational factor of degree
+\(m\), then
+\[
+ m\in S_p:=
+ \left\{\sum_{j\in J}e_{p,j}:
+ J\subseteq\{1,\ldots,r_p\}\right\}.
+\]
+\end{lemma}
+
+\begin{proof}
+Gauss's lemma supplies a primitive integral factorization \(g=vw\) with
+\(\deg v=m\).  Since the leading coefficient of \(\bar g\) is nonzero,
+reduction preserves the degrees of both factors.  Squarefreeness makes
+\(\bar v\) a product of a subset of the distinct \(q_{p,j}\), so its degree
+is a subset sum of their degrees.
+\end{proof}
+
+\subsection{Complete modular witnesses}
+
+The exact factorizations are squarefree, preserve degree, and multiply back
+to the reduction of \(g\).  Their compact data are:
+\begin{center}
+\begin{tabular}{@{}cccl@{}}
+\toprule
+\(p\)& leading coefficient & factorization unit & factor degrees\\
+\midrule
+\(7\)&\(2\)&\(2\)&\((3,3,3,3,3,6,6)\)\\
+\(19\)&\(8\)&\(8\)&\((1,4,4,6,12)\)\\
+\(29\)&\(26\)&\(26\)&\((1,2,8,8,8)\)\\
+\(37\)&\(29\)&\(29\)&\((2,5,5,5,10)\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+All multiplicities are one, and in each case
+\(\gcd(\bar g,\bar g')=1\).  The monic factors themselves are listed in
+\cref{app:modular-data}; recording only their degrees would not certify
+factor multiplication or squarefreeness.
+
+The corresponding subset-sum sets are
+\begin{align}
+S_7={}&\{0,3,6,9,12,15,18,21,24,27\},\nonumber\\
+S_{19}={}&\{0,1,4,5,6,7,8,9,10,11,12,13,14,15,16,17,
+18,19,20,21,22,23,26,27\},\nonumber\\
+S_{29}={}&\{0,1,2,3,8,9,10,11,16,17,18,19,24,25,26,27\},\nonumber\\
+S_{37}={}&\{0,2,5,7,10,12,15,17,20,22,25,27\}.
+\label{eq:subset-sets}
+\end{align}
+Their successive intersections are
+\begin{equation}
+\begin{aligned}
+S_7&=\{0,3,6,9,12,15,18,21,24,27\},\\
+S_7\cap S_{19}&=\{0,6,9,12,15,18,21,27\},\\
+S_7\cap S_{19}\cap S_{29}&=\{0,9,18,27\},\\
+S_7\cap S_{19}\cap S_{29}\cap S_{37}&=\{0,27\}.
+\end{aligned}
+\label{eq:intersection-chain}
+\end{equation}
+
+\begin{proposition}
+\label{prop:g-irreducible}
+The polynomial \(g\) is irreducible over \(\Q\).  Consequently
+\[
+ E:=\Q[d]/(g)
+\]
+is a degree-\(27\) number field and
+\[
+ \FanoY\cong\Spec(E)
+\]
+is connected and finite \(\etale\).
+\end{proposition}
+
+\begin{proof}
+If \(g\) had a proper rational factor of degree \(m\), then
+\(1\le m\le26\).  Applying \cref{lem:subset-sum} at all four primes would
+put \(m\) in the last intersection of
+\cref{eq:intersection-chain}, which is \(\{0,27\}\).  This is impossible.
+The remaining assertions follow from \cref{prop:complete-chart}.
+\end{proof}
+
+\begin{remark}
+The proof uses the complete modular factorizations as exact identities.
+A rational CAS declaration that \(g\) is irreducible is neither needed nor
+treated as an independent proof.
+\end{remark}

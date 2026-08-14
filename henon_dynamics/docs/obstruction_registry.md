@@ -405,7 +405,7 @@ source-native prime-power trace---rather than ambient root effectivity.
 |---|---|---|---|---|---|
 | HEN-O104 | Ordinary finite-rank rational compatible realization of the complete good-split exponent \(4/n\) | proved weight-separated denominator rigidity with exact \(n=3\) symmetry and counterpacket closure | On every packet-admissible smooth row, Chebotarev--Brauer--Nesbitt after restriction to \(K\) forces \(n[V_0]=4[\mathsf E_n]\) and \(n[V_1]=4[\mathsf O_n]\) on the two pure weights separately.  Their ranks imply realizability exactly when \(n\mid4\), so only \(n=2,4\) survive; the total rank falsely accepts \(n=3\).  At \(n=3\), the exact \(\operatorname{Dih}(C_9)\) character has no nonzero common central source-isotypic sector clearing \(4/3\) on both rails, while every split-invisible virtual rational class restricts to zero over \(K\) and changes neither rail rank nor multiplicity. | The factor theorem is conditional on packet admissibility, certified here only for \(n=2,3,4\); the all-\(n\) result is instead the equation-level classification of the full projective monomial ideal stabilizer, not the full PGL automorphism group.  It proves no smoothness or motive for \(n\ge5\), and constructs no inert or global fractional root, automorphy, continuation, functional equation, or RH statement. | ../henon_mu3_universal_dihedral_denominator_rigidity/THEOREM_PACKAGE.md |
 
-## HCS-C55 positive boundary
+## HCS-C55--C56 positive boundary
 
 HCS-C55 proves a rational equivariant deformation germ, a relative rank-ten
 CY3-type Reynolds variation, an exact smooth geometrically irreducible
@@ -413,5 +413,12 @@ Yukawa cubic surface, and a conditional necessary Yukawa gate for an honest
 CY3 comparison.  The named comparator status is
 **NOT-COMPARABLE-WITH-CURRENT-DATA**, so no comparator has been excluded and
 no new obstruction row is justified.  HEN-O104 remains the last allocated
-identifier.  The conditional C56 line-field lock is likewise planning, not
-an obstruction theorem or a basis for allocating a new row.
+identifier.
+
+HCS-C56 subsequently classifies the line arithmetic of that one frozen cubic:
+its line scheme is a degree-\(27\) field point, the normal closure has full
+\(W(E_6)\), and there is no \(\mathbf Q\)-line.  This is a positive arithmetic
+classification of a single surface, not a reusable realization-class no-go.
+It therefore does not justify allocating a new obstruction row; HEN-O104
+remains the last registry obstruction identifier after completion of
+C52--C56.
