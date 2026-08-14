@@ -126,8 +126,7 @@ def main() -> int:
         "forbidden_runtime_metadata": forbidden_metadata,
         "json_parse": json_parse,
         "research_package": {
-            "path": "/tmp/paper18_research_notes/RESEARCH_PACKAGE.md",
-            "available": Path("/tmp/paper18_research_notes/RESEARCH_PACKAGE.md").is_file(),
+            "integrity_gate": "not_required_external_discovery_notes",
             "prototype_result_diff": "not_applicable_no_prototype_result_tree",
         },
         "route_a_schema": route_checks,
@@ -146,7 +145,6 @@ def main() -> int:
         and not forbidden_metadata
         and all(route_checks.values())
         and not route_missing
-        and payload["research_package"]["available"]
     )
     payload["integrity_pass"] = passed
     if not passed:
