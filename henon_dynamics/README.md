@@ -1302,3 +1302,16 @@ array dumps are intentionally excluded from synchronization.  Papers,
 source, compact certificates, and audit records remain versioned.
 
 Last synchronized research snapshot: **2026-08-14**.
+
+## HCS-P58 physical-tail/Galois-scale interface
+
+P58 derives the three period-eight/nine reflection trace fields and proves
+`Delta_6<0<Delta_7` exactly.  The negative-fixed-point tail controls one
+physical embedding, whereas Galois excess sums all nonphysical embeddings;
+the missing bridge is therefore a uniform primitive reflection-ensemble
+count/height theorem.
+
+- [P58 overview](henon_physical_tail_galois_parity_obstruction/README.md)
+- [P58 paper](henon_physical_tail_galois_parity_obstruction/paper/paper.pdf)
+- [P58 proof package](henon_physical_tail_galois_parity_obstruction/PROOF_PACKAGE.md)
+- [P58 exact certificate](henon_physical_tail_galois_parity_obstruction/results/c58_certificate.json)
