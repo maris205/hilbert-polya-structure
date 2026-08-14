@@ -41,10 +41,11 @@ henon_pressure_weighted_all_orbit_abel_law - HCS-P53 complete - Full multiplier 
 henon_mahler_pressure_pole_galois_excess_gate - HCS-P54 complete - The physical Mahler summand reaches a proved pressure pole at s=1, while the positive nonphysical Galois excess becomes the exact thermodynamic completion gate.
 henon_galois_excess_three_block_obstruction - HCS-P55 complete - Exact period-three through period-five block homology rejects every width-at-most-three Galois-excess potential, while width four interpolates the finite witness and leaves the all-period Hölder gate open.
 henon_galois_excess_four_block_incidence_ladder - HCS-P56 complete - Two primitive orbit families give an exact all-width incidence ladder; its first new period-six field proves a width-at-most-four excess obstruction, while a determinant-one width-five minor isolates the remaining Hölder-asymptotic gate.
+henon_galois_excess_five_block_obstruction - HCS-P57 complete - Exact reflection reductions give a cubic A6 trace field and one totally real degree-fourteen A7/B7 field; the certified positive Delta5 excludes every width-at-most-five excess potential, while a unimodular width-six minor preserves the genuine Hölder-asymptotic gate.
 
-`P43`--`P56` are the unique registry aliases for the pressure/orbit lane.
+`P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
-strings to preserve their published hashes; `P48`--`P56` were born
+strings to preserve their published hashes; `P48`--`P57` were born
 namespaced. The unqualified IDs `C43`--`C48` in this repository belong to
 the full-kernel cubic lane listed in the theorem table below.
 
@@ -75,6 +76,8 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mu3_d12_calabi_yau_core_projector/](henon_mu3_d12_calabi_yau_core_projector/) | C52: the complete order-\(24\) projective monomial source group gives \(K\)-rational middle Chow projectors of ranks \(10\) and \(158\); the rational graph algebra cannot isolate the desired rank-two extreme Hodge pair | First algebraic splitting of the fourth-moment odd packet; A3 packet control improved, A2/A4 inherited, Route A exploratory |
+| [henon_galois_excess_five_block_obstruction/](henon_galois_excess_five_block_obstruction/) | P57: reflection reduction produces an irreducible cubic `A6` trace field and a shared totally real degree-fourteen `A7/B7` field; exact Sturm intervals and an integer-product margin prove \(\Delta_5>0\), while determinant \(\pm1\) width-six minors prove finite sharpness | Exact width-at-most-five regularity obstruction inside Route A; the whole-sequence \(\Delta_m\) asymptotics, unrestricted Hölder realization, full Galois-weighted determinant and Route B remain open |
 | [henon_galois_excess_four_block_incidence_ladder/](henon_galois_excess_four_block_incidence_ladder/) | P56: the primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy an exact incidence relation for every width; the radical period-six member makes the width-four excess identity fail exactly, while a determinant-one width-five minor proves finite sharpness | Infinite symbolic regularity gate inside Route A; the one-sided Hölder discrepancy asymptotics, full Galois-weighted determinant and Route B remain open |
 | [henon_galois_excess_three_block_obstruction/](henon_galois_excess_three_block_obstruction/) | P55: an exact width-three incidence relation among five primitive H6 cycles violates the corresponding Galois-excess identity; a unimodular width-four minor proves finite sharpness, and a one-sided exponential discrepancy condition identifies the genuine Hölder gate | Exact finite-memory obstruction inside Route A; unrestricted Hölder realization, the full Galois-weighted determinant and Route B remain open |
 | [henon_mahler_pressure_pole_galois_excess_gate/](henon_mahler_pressure_pole_galois_excess_gate/) | P54: the P53 Mahler coefficient splits exactly into physical instability length plus nonnegative Galois excess; the physical primitive series has a source-backed simple pressure pole with residue \(3/(\pi^2h_*)\), while three exact orbits rule out scalar pressure retuning | First pressure-critical pole in this lane, scoped to the physical subsystem; Route A exploratory with physical A2 analytic determinant, full Galois-weighted A2 and Route B still open |

@@ -1328,6 +1328,40 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
 \(K\)-rational algebraic projector separating the rank-two extreme Hodge
 piece of \(O_4\) from its rank-166 level-one piece.
 
+## HCS-C52 dihedral middle Chow projector (2026-08-14)
+
+Candidate **HCS-C52** answers the C51 projector gate for the explicit
+fourth-moment fivefold; see
+[`../henon_mu3_d12_calabi_yau_core_projector/`](../henon_mu3_d12_calabi_yau_core_projector/).
+Its complete projective monomial source stabilizer is
+
+\[
+G_{\rm mon}\cong\operatorname{Dih}(C_{12}),
+\qquad |G_{\rm mon}|=24.
+\]
+
+After removing the six ambient Tate projectors, the Reynolds graph average
+gives two \(K=\mathbb Q(\zeta_3)\)-rational middle Chow projectors.  Their
+ranks are \(10\) and \(158\).  The first has untwisted Hodge ledger
+\((1,4,4,1)\) across \(H^{4,1},H^{3,2},H^{2,3},H^{1,4}\), so it becomes
+Calabi--Yau-threefold Hodge type after one Tate twist.  The second becomes
+pure level one, with multiplicities \((79,79)\), after the C51 twist by
+two.  The same algebraic correspondences act in every Weil realization;
+no strict compatible local-polynomial system is claimed.
+
+Exact Cayley-ring character theory shows that the extreme line and four
+middle copies are all trivial-isotypic.  Therefore every idempotent in the
+rational graph algebra retaining the extreme line retains the full rank-10
+block.  This refutes the desired rank-two projector only inside
+\(\mathbb Q[G_{\rm mon}]\); correspondences in the full Chow ring remain
+open.  No local Frobenius polynomial, automorphy, functional equation, new
+Euler half-plane, Riemann divisor, or self-adjoint generator is obtained.
+The tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.  C53 must compute exact Frobenius polynomials of
+the rank-10 core and either prove an irreducibility/commutant obstruction
+or construct a correspondence beyond the graph algebra.
+
 ## Pressure-lane alias policy
 
 The following independently frozen pressure/orbit batch arrived with legacy
@@ -1760,3 +1794,40 @@ Route-A tuple remains **(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical
 subsystem only, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  No rational-prime trace, full Galois-weighted
 determinant, operator or Route-B promotion is claimed.
+
+## HCS-P57 five-block Galois-excess obstruction (2026-08-14)
+
+Candidate **HCS-P57** resolves the next metric member of the P56 ladder; see
+the [HCS-P57 project](../henon_galois_excess_five_block_obstruction/).
+Reflection reduction gives the primitive `A6` coordinate pattern
+`(a,b,c,d,c,b)` and the shared `A7/B7` pattern `(a,b,c,d,d,c,b)`.  Their
+chronological trace fields have degrees three and fourteen.  The latter is
+irreducible, totally real, and contains the physical `A7` and `B7` cycles as
+two different embeddings with traces in `(-390512,-390511)` and
+`(230985,230986)`.
+
+At width five the ladder forces
+
+\[
+E(A_5)+E(B_7)=E(A_6)+E(B_6).
+\]
+
+Sturm isolators and
+`log(u-1)<arcosh(u/2)<log(u)` reduce the opposite inequality to
+
+\[
+554208972546768>21953081220.
+\]
+
+Thus \(\Delta_5=139.7325728699\ldots>0\) exactly, and no locally constant
+potential of width at most five realizes every primitive Galois excess.  A
+determinant `-1` four-row width-six minor and a determinant `+1` cumulative
+nine-row minor prove finite sharpness.  They also prevent promotion to an
+unrestricted Hölder no-go.
+
+The next theorem is the stable-tail asymptotic of the whole sequence
+\(\Delta_m\), not another isolated block search.  Route A remains
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT for the physical subsystem only,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
+**ROUTE_A_EXPLORATORY**.  No full Galois-weighted determinant, rational-prime
+trace, operator or Route-B promotion is claimed.

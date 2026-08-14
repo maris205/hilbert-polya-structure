@@ -267,15 +267,21 @@ Euler object and a tenth-order determinant to \(\Re s>1/5\). These are
 retained positive structures rather than added to the obstruction list.
 The first untreated uniform-moment wall is now the fifth chronological
 moment; no continuation through \(\Re s=1/5\) is asserted.
-The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P56`; the
+The pressure/orbit lane uses registry aliases `HCS-P43`--`HCS-P57`; the
 immutable P43--P47 bundles retain legacy internal C-series provenance
-strings, while P48--P56 were born namespaced.
+strings, while P48--P57 were born namespaced.
 
 ## HCS-C51 additions
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O94 | One factorwise standard pure-motive completion of the normalized cohomological Hénon moments at the frozen prime clock | proved weight--clock and scoped direct-packet obstruction | For the exact tower \(u=ns+j\), \(j\ge1\), a pure weight-\(w\) factor has pulled-back center \(((w+1)/2-j)/n\).  The leading odd centers are zero, the leading even centers are \(-1/4,-1/6,-1/8\), and later odd centers are \(-(j-1)/n\).  Consistent Tate relabeling changes weight and argument together and leaves every center fixed.  Moreover, a semisimple direct \(K\)-packet retaining the \(E_n/O_n\) decomposition and realizing the factorwise exponent \(2/n\) would have nonintegral weightwise ranks at \(n=3,4\). | Stops a common factorwise standard pure-motive center and the stated direct source-native trace-preserving packet.  It does not exclude restriction of scalars, Galois-orbit counterpackets, nonfactorwise cancellations, a regularized infinite Gamma product with separately proved spectral-zeta continuation and branch data, or the inherited normalized-semifinite determinant.  Center zero itself is not an RH obstruction. | ../henon_mu3_weight_clock_bifurcation/THEOREM_PACKAGE.md |
+
+## HCS-C52 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O95 | Rank-two extreme-Hodge projector inside the projective-monomial graph algebra of the fourth Hénon moment | proved trivial-isotypic graph-algebra obstruction | The exact \(D_{12}\)-character has one trivial copy in \(H^{4,1}\) and four trivial copies in \(H^{3,2}\).  Every \(a\in\mathbb Q[G_{\rm mon}]\) acts on every trivial copy by the same augmentation \(\varepsilon(a)\).  If an idempotent retains the extreme line, \(\varepsilon(a)=1\), so it also retains all four middle copies and their conjugates; its middle rank is at least \(1+4+4+1=10\).  The Reynolds projector attains this bound after composition with the algebraic middle projector. | Exact for the complete rational graph algebra of the order-\(24\) projective monomial source group, not merely its center.  It does not classify the full automorphism group or the full Chow correspondence ring, and it does not exclude a new incidence correspondence, coniveau decomposition, or other algebraic rank-two projector outside \(\mathbb Q[G_{\rm mon}]\). | ../henon_mu3_d12_calabi_yau_core_projector/THEOREM_PACKAGE.md |
 
 ## HCS-P44 additions (pressure-lane registry alias)
 
@@ -335,16 +341,22 @@ strings, while P48--P56 were born namespaced.
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
-| HEN-O94 | Scalar pressure retuning of the full H6 multiplier Mahler height | proved three-orbit Galois-excess obstruction | The exact period-four orbit has \(\mathcal H_4=\ell_4>0\), forcing any identity \(\mathcal H_\gamma=c\ell_\gamma+\) periodic coboundary to have \(c=1\). The exact period-one orbit has residual \(E_1=\operatorname{arcosh}(\sqrt7-1)>0\), contradicting that identity; period three supplies an independent positive excess witness. | Stops only constant rescaling of the physical instability roof, even modulo coboundary. It does not exclude a non-proportional Hölder or asymptotically additive potential. The physical suspension-zeta pressure pole survives exactly; the full Galois-weighted determinant and the value of \(\sigma_{\rm Gal}\) remain open. | ../henon_mahler_pressure_pole_galois_excess_gate/README.md |
+| HEN-O96 | Scalar pressure retuning of the full H6 multiplier Mahler height | proved three-orbit Galois-excess obstruction | The exact period-four orbit has \(\mathcal H_4=\ell_4>0\), forcing any identity \(\mathcal H_\gamma=c\ell_\gamma+\) periodic coboundary to have \(c=1\). The exact period-one orbit has residual \(E_1=\operatorname{arcosh}(\sqrt7-1)>0\), contradicting that identity; period three supplies an independent positive excess witness. | Stops only constant rescaling of the physical instability roof, even modulo coboundary. It does not exclude a non-proportional Hölder or asymptotically additive potential. The physical suspension-zeta pressure pole survives exactly; the full Galois-weighted determinant and the value of \(\sigma_{\rm Gal}\) remain open. | ../henon_mahler_pressure_pole_galois_excess_gate/README.md |
 
 ## HCS-P55 additions (pressure-lane registry alias)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
-| HEN-O95 | Width-at-most-three locally constant realization of the H6 Galois excess | proved cyclic three-block incidence obstruction | Five exact primitive cycles satisfy \(N_3(\gamma_3)+N_3(\gamma_5)=N_3(\gamma_{4a})+N_3(\gamma_{4b})\), while exact trace-field inequalities give \(E_3+E_5>E_{4a}+E_{4b}\). Every potential of width at most three must satisfy the failed identity. | Stops only finite-memory potentials through width three. A unimodular width-four minor interpolates the finite witness, and arbitrary finite periodic totals can be fitted with longer cylinders; unrestricted one-sided or two-sided Hölder realization remains open. | ../henon_galois_excess_three_block_obstruction/README.md |
+| HEN-O97 | Width-at-most-three locally constant realization of the H6 Galois excess | proved cyclic three-block incidence obstruction | Five exact primitive cycles satisfy \(N_3(\gamma_3)+N_3(\gamma_5)=N_3(\gamma_{4a})+N_3(\gamma_{4b})\), while exact trace-field inequalities give \(E_3+E_5>E_{4a}+E_{4b}\). Every potential of width at most three must satisfy the failed identity. | Stops only finite-memory potentials through width three. A unimodular width-four minor interpolates the finite witness, and arbitrary finite periodic totals can be fitted with longer cylinders; unrestricted one-sided or two-sided Hölder realization remains open. | ../henon_galois_excess_three_block_obstruction/README.md |
 
 ## HCS-P56 additions (pressure-lane registry alias)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
-| HEN-O96 | Width-at-most-four locally constant realization of the H6 Galois excess | proved all-width incidence-ladder obstruction with an exact period-six witness | The primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy \(N_m(A_m)+N_m(B_{m+2})=N_m(A_{m+1})+N_m(B_{m+1})\) for every \(m\ge3\). At \(m=4\), the exact radical \(B_6\) field and shared period-five trace field give \(E_{A_5}+E_{B_5}>E_{A_4}+E_{B_6}\), contradicting the required periodic-sum identity. | Stops locally constant potentials only through width four. A determinant-one width-five minor interpolates the seven-cycle witness. The infinite ladder gives a necessary exponential discrepancy condition for one-sided Hölder data, but its asymptotics and the unrestricted/two-sided realization remain open. | ../henon_galois_excess_four_block_incidence_ladder/README.md |
+| HEN-O98 | Width-at-most-four locally constant realization of the H6 Galois excess | proved all-width incidence-ladder obstruction with an exact period-six witness | The primitive families \(A_m=0^{m-2}21\) and \(B_m=0^{m-3}231\) satisfy \(N_m(A_m)+N_m(B_{m+2})=N_m(A_{m+1})+N_m(B_{m+1})\) for every \(m\ge3\). At \(m=4\), the exact radical \(B_6\) field and shared period-five trace field give \(E_{A_5}+E_{B_5}>E_{A_4}+E_{B_6}\), contradicting the required periodic-sum identity. | Stops locally constant potentials only through width four. A determinant-one width-five minor interpolates the seven-cycle witness. The infinite ladder gives a necessary exponential discrepancy condition for one-sided Hölder data, but its asymptotics and the unrestricted/two-sided realization remain open. | ../henon_galois_excess_four_block_incidence_ladder/README.md |
+
+## HCS-P57 additions (pressure-lane registry alias)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O99 | Width-at-most-five locally constant realization of the H6 Galois excess | proved five-block incidence obstruction with exact six/seven-cycle trace fields | The `m=5` ladder row forces \(E(A_5)+E(B_7)=E(A_6)+E(B_6)\). Reflection reduction gives an irreducible cubic `A6` trace field and a shared irreducible totally real degree-fourteen `A7/B7` trace field. Exact root intervals imply \(E(A_5)>\log(554208972546768)\), while \(E(A_6)+E(B_6)<\log(21953081220)\); since \(E(B_7)>0\), the forced identity fails and \(\Delta_5>0\). | Stops locally constant potentials only through width five. Determinant `-1` and `+1` width-six minors interpolate the four-row and cumulative finite witnesses. Unrestricted one-/two-sided Hölder realizability remains the asymptotic \(\Delta_m\) gate. | ../henon_galois_excess_five_block_obstruction/README.md |
