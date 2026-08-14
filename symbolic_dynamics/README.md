@@ -43,6 +43,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [29-functorial-chiral-counterterm-no-go](papers/29-functorial-chiral-counterterm-no-go/README.md) | [PDF](papers/29-functorial-chiral-counterterm-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/29-functorial-chiral-counterterm-no-go/) | source-natural quadratic subtraction 能分离 $B^2$ 的 prime-harmonic divergence，但 leading-only 与 full-diagonal schemes 相差一个非零可和有限项，因而自然性不唯一固定 finite part；保留 baseline mixed residue 与消去同型 controls 分别强制 $\beta=0$ 和 $\beta=1$，排除 pair-local linear-Gram 选择器。 | **FINITE-PART CLASSIFICATION / LOCAL SELECTIVITY NO-GO / SD-C31** |
 | [30-free-monoid-incidence-indistinguishability](papers/30-free-monoid-incidence-indistinguishability/README.md) | [PDF](papers/30-free-monoid-incidence-indistinguishability/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/30-free-monoid-incidence-indistinguishability/) | 整数乘法整除 source 与形式自由交换/UFD clone 在 atoms、join/lcm、interval Möbius、cutoff、roof 与 Gram decorations 上同构；因此任意对此对象同构自然的局部或非局部 cumulant/mixed invariant 都被 clone 精确复制。有限三元统计虽分开四个 fixture，却无法给出算术选择性。 | **FREE-UFD INDISTINGUISHABILITY / BRANCH CLOSED / SD-C32** |
 | [31-wilson-semiring-verifier-trichotomy](papers/31-wilson-semiring-verifier-trichotomy/README.md) | [PDF](papers/31-wilson-semiring-verifier-trichotomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/31-wilson-semiring-verifier-trichotomy/) | alphabet sum 与 tensor product 确实击穿只保乘法的裸 UFD clone；但 matched semiring clone 精确复制全部 Wilson paths。Wilson recurrence 给每个素数一条长度 $p-1$ 的 cycle，却使 whole operator 非紧；first return 改写自由 marker，transient 版本又剪枝回 atom diagonal。 | **SEMIRING CLONE / PRUNING–DILUTION TRICOTOMY / SD-C33** |
+| [32-projective-residue-recurrence-obstruction](papers/32-projective-residue-recurrence-obstruction/README.md) | [PDF](papers/32-projective-residue-recurrence-obstruction/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/32-projective-residue-recurrence-obstruction/) | 非 terminal 的 $P^1(\mathbb Z/n\mathbb Z)$ recurrent grammar 在同一 uninduced object 上恢复了 $\Re s>2$ 的 trace-class Fredholm ownership；但 $S^2=R^3=1$ 对所有模数都成立，cusp coupling 又给出普适 composite diamonds，故 primitive ledger 在配权前已失败。 | **PROJECTIVE RECURRENCE OBSTRUCTION / BRANCH CLOSED / SD-C34** |
 
 ### 论文 1 的候选分离结论
 
@@ -1025,13 +1026,56 @@ direct 与 isolated runner 各 18/18、完整树可重复 integrity audit 和 16
 STOP_WHOLE_FREDHOLM / CLOSE_TERMINAL_SEMIRING_VERIFIER_BRANCH /
 ROUTE_A_REJECTED**。Paper 32 必须改用无 accept/reject terminal 的共享 recurrent grammar。
 
+### 论文 32：共享 residue recurrence 获得 Fredholm ownership，但普适关系淹没 primitive ledger
+
+Paper 32 将 terminal verifier 替换为真正共享状态的非终止系统。每个模数
+$n$ 使用
+
+$$
+X_n=P^1(\mathbb Z/n\mathbb Z),\qquad
+S[a:b]=[-b:a],\quad R[a:b]=[-b:a+b],
+$$
+
+并以双向 cusp maps 连接 $n,2n,3n$。这个 uninduced graph-step operator 在
+$\Re s>2$ 上 trace class 且 trace-norm holomorphic，因此普通
+$\det(I-zB_s)$ 确实属于同一 recurrent object；Paper 31 的 whole-operator
+ownership 缺口被实质修复。
+
+然而 primitive ledger 在任何 roof 之前已经失败。projective action 恒满足
+
+$$
+S^2=R^3=1,
+$$
+
+所以 primes、prime-power composites 与 mixed composites 都具有同型 recurrent
+cycles。更强地，每个 $n\ge2$ 都产生非回溯 primitive diamond
+
+$$
+c_n\to c_{2n}\to c_{6n}\to c_{3n}\to c_n,
+$$
+
+其顶点 $6n$ 必为合数。静态等式
+$|P^1(\mathbb Z/n\mathbb Z)|=n+1$ 虽精确刻画素数，但用它删减 blocks 就是把
+完成的 field/primality test 重新作为 terminal gate，违反 source lock。
+
+cutoff $2\le n\le192$ 的 191 个模数中，全部 148 个合数都有 recurrent support，
+31/31 cusp diamonds 顶点为合数，48/48 random $C_2*C_3$ actions 复制普适 recurrence，
+191/191 matched finite-semiring clones 逐项运输完整加乘表与 projective graph。
+4,819,026/4,819,026 independent checks、13/13 assertions、16 个 fresh double-run
+工件均通过。阶段结论为 **GO_NONTERMINAL_SHARED_RECURRENCE /
+GO_SAME_OBJECT_FREDHOLM / STOP_PRIMITIVE_LEDGER /
+STOP_PROVES_TOO_MUCH / CLOSE_EUCLIDEAN_PROJECTIVE_RESIDUE_RECURRENCE_BRANCH /
+ROUTE_A_REJECTED**。Paper 33 只允许在同一 object 上测试 source-natural
+cycle-level quotient/twist；若它不能在 chain level 同时消去 $S^2$、$R^3$ 与 cusp
+diamonds，整个 semiring-residue family 即关闭。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十一篇论文](papers/)
+- [三十二篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

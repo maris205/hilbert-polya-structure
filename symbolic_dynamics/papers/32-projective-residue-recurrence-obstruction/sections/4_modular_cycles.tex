@@ -1,0 +1,92 @@
+\section{Universal modular recurrence}
+\label{sec:modular-cycles}
+
+Freeze the two matrices
+\[
+ S=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
+ R=\begin{pmatrix}0&-1\\1&1\end{pmatrix}.
+\]
+Both have determinant one over every residue ring and therefore preserve
+unimodular pairs.  Their projective actions are
+\[
+ S_n[a:b]=[-b:a],\qquad
+ R_n[a:b]=[-b:a+b].
+\]
+Every state has both outgoing edges.  There is no halting state and no
+conditional closure rule.
+
+\begin{theorem}[Universal overlapping recurrence]
+\label{thm:universal-recurrence}
+For every $n\ge2$,
+\[
+ S_n^2=I,\qquad R_n^3=I
+\]
+on $X_n$.  Every $x\in X_n$ lies on an $S$-marked primitive orbit of length
+one or two and an $R$-marked primitive orbit of length one or three.
+\end{theorem}
+
+\begin{proof}
+Direct multiplication gives
+\[
+ S^2=-I,\qquad
+ R^2=\begin{pmatrix}-1&-1\\1&0\end{pmatrix},\qquad
+ R^3=-I.
+\]
+Scalar $-I$ multiplies both coordinates by the unit $-1$ and is therefore
+trivial on projective classes.  The least positive return time of $x$ under
+$S_n$ divides two, while its least positive return under $R_n$ divides three.
+Each least return word is primitive.  The generator labels distinguish the
+families, and both contain $x$.
+\end{proof}
+
+The theorem gives the desired kind of recurrence: it is nonterminal,
+marker-distinct, and overlapping on actual states.  It also gives an
+immediate A1 obstruction.  The proof is uniform in $n$ and cannot distinguish
+a prime from a prime power or a mixed composite.
+
+\begin{figure}[t]
+\centering
+\resizebox{0.96\textwidth}{!}{\input{figures/projective_recurrence}}
+\caption{The projective relations create two labelled return families through
+shared states in both prime and composite blocks.  The drawings show
+representative states; \cref{thm:universal-recurrence} applies to every state.
+The recurrence requirement is met, but the mechanism is not arithmetically
+selective.}
+\label{fig:projective-recurrence}
+\end{figure}
+
+\subsection{Primitive support before roofs}
+
+The obstruction is independent of analytic weights.  In the labelled path
+algebra, the words $SS$ and $RRR$ close at every vertex.  Some vertices may
+have a shorter least return, but each vertex still belongs to the primitive
+cycle of its corresponding permutation orbit.  Therefore the primitive
+support of every composite block is nonempty before a roof is assigned.
+Changing positive edge weights cannot remove those paths.
+
+The labelled nature of the statement matters.  Even if an $S$- and an
+$R$-orbit share the same vertex sequence in a small block, their edge words
+remain distinct.  This is precisely the shared-state overlap required after
+Paper 31; it is not a claim that the two permutations generate disjoint
+cycles.
+
+\begin{proposition}[Generic presentation compiler]
+\label{prop:generic-compiler}
+Let $Y$ be any nonempty finite set with permutations $a,b$ satisfying
+$a^2=b^3=I$.  The labelled action graph has an $a$-return and a $b$-return
+through every state.
+\end{proposition}
+
+\begin{proof}
+The least return under $a$ divides two and the least return under $b$ divides
+three.  Different generator labels distinguish the words.  No residue-ring
+structure is used.
+\end{proof}
+
+\Cref{prop:generic-compiler} identifies the exact `proves too much' control.
+A random finite $C_2*C_3$ action copies the recurrence property without
+carrying projective geometry, a field distinction, or an arithmetic source.
+The finite controls in \cref{sec:exact-audit} realize this logical test with
+48 seeded actions.  Their role is not to prove the theorem, but to check that
+the implementation has not smuggled residue labels into a universal relation
+test.

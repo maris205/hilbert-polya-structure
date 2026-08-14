@@ -1,0 +1,51 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  state/.style={circle,draw=charcoal,fill=white,minimum size=6mm,inner sep=1pt},
+  sourcebox/.style={rounded corners,draw=formalblue,very thick,fill=formalblue!5,
+    minimum width=6.0cm,minimum height=3.7cm},
+  compbox/.style={rounded corners,draw=warningamber,very thick,densely dashed,
+    fill=warningamber!7,minimum width=6.0cm,minimum height=3.7cm},
+  sarr/.style={->,formalblue,thick,bend left=18},
+  rarr/.style={->,warningamber,thick}
+]
+\node[rounded corners,draw=charcoal,very thick,fill=softgray,
+  minimum width=4.2cm,minimum height=9mm] (relation) at (0,2.9)
+  {$S^2=-I,\quad R^3=-I\quad\Rightarrow\quad S_n^2=R_n^3=I$};
+
+\node[sourcebox] (primebox) at (-3.6,-0.2) {};
+\node[font=\bfseries\small,text=formalblue] at (-3.6,1.25)
+  {prime block $X_p$};
+\node[state] (p0) at (-4.75,-0.2) {$x$};
+\node[state] (p1) at (-3.6,0.55) {$Sx$};
+\node[state] (p2) at (-2.45,-0.2) {$R^2x$};
+\draw[sarr] (p0) to node[left,font=\scriptsize] {$S$} (p1);
+\draw[sarr] (p1) to node[right,font=\scriptsize] {$S$} (p0);
+\draw[rarr] (p0) -- node[below,font=\scriptsize] {$R$} (p2);
+\draw[rarr] (p2) -- node[right,font=\scriptsize] {$R$} (p1);
+\draw[rarr] (p1) -- node[above left,font=\scriptsize] {$R$} (p0);
+\node[align=center,font=\scriptsize] at (-3.6,-1.32)
+  {the two labelled return families\\share projective states};
+
+\node[compbox] (compbox) at (3.6,-0.2) {};
+\node[font=\bfseries\small,text=warningamber!80!black] at (3.6,1.25)
+  {composite block $X_m$};
+\node[state] (c0) at (2.45,-0.2) {$y$};
+\node[state] (c1) at (3.6,0.55) {$Sy$};
+\node[state] (c2) at (4.75,-0.2) {$R^2y$};
+\draw[sarr] (c0) to node[left,font=\scriptsize] {$S$} (c1);
+\draw[sarr] (c1) to node[right,font=\scriptsize] {$S$} (c0);
+\draw[rarr] (c0) -- node[below,font=\scriptsize] {$R$} (c2);
+\draw[rarr] (c2) -- node[right,font=\scriptsize] {$R$} (c1);
+\draw[rarr] (c1) -- node[above left,font=\scriptsize] {$R$} (c0);
+\node[align=center,font=\scriptsize] at (3.6,-1.32)
+  {the same relation cycles survive\\for prime powers and mixed composites};
+
+\draw[->,charcoal,thick] (relation.south west) -- (primebox.north);
+\draw[->,charcoal,thick] (relation.south east) -- (compbox.north);
+\node[draw=warningamber,thick,densely dashed,rounded corners,
+  fill=warningamber!8,align=center] at (0,-2.65)
+  {shared-state recurrence is genuine,\\but arithmetic selectivity is absent};
+\draw[->,warningamber,thick,densely dashed] (primebox.south) -- (-0.9,-2.35);
+\draw[->,warningamber,thick,densely dashed] (compbox.south) -- (0.9,-2.35);
+\end{tikzpicture}

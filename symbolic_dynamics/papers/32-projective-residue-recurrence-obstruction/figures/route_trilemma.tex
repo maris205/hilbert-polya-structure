@@ -1,0 +1,49 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  static/.style={rounded corners,draw=formalblue,very thick,fill=formalblue!6,
+    text width=4.0cm,minimum height=1.25cm,align=center},
+  flood/.style={regular polygon,regular polygon sides=6,draw=warningamber,
+    very thick,densely dashed,fill=warningamber!9,text width=4.0cm,
+    minimum height=1.45cm,align=center},
+  analytic/.style={rounded corners,double,draw=deepgreen,very thick,
+    fill=deepgreen!6,text width=4.0cm,minimum height=1.25cm,align=center},
+  stop/.style={regular polygon,regular polygon sides=8,draw=stopred,
+    very thick,densely dashed,fill=stopred!7,text width=3.3cm,
+    minimum height=1.35cm,align=center}
+]
+\node[static] (field) at (-5.0,2.1)
+  {static field criterion\\$|X_n|=n+1\iff n$ prime};
+\node[flood] (cycles) at (0,2.1)
+  {universal recurrent flood\\$S^2$, $R^3$, cusp diamonds};
+\node[analytic] (fredholm) at (5.0,2.1)
+  {same uninduced object\\$B_s\in\mathcal S_1$, $\Re s>2$};
+
+\node[stop] (projector) at (-5.0,-0.45)
+  {forbidden block projector\\$\mathbf1_{\{|X_n|=n+1\}}$};
+\draw[->,stopred,very thick,densely dashed] (field) --
+  node[right,font=\scriptsize,align=left] {only immediate path\\to prime-only blocks} (projector);
+\draw[->,stopred,very thick] ($(projector.north west)+(0.15,0.1)$) --
+  ($(projector.south east)+(-0.15,-0.1)$);
+\draw[->,stopred,very thick] ($(projector.south west)+(0.15,-0.1)$) --
+  ($(projector.north east)+(-0.15,0.1)$);
+
+\node[rounded corners,draw=warningamber,very thick,densely dashed,
+  fill=warningamber!8,text width=4.1cm,align=center] (a1) at (0,-0.45)
+  {A1 fails before weights:\\composites own primitive support};
+\node[rounded corners,double,draw=deepgreen,very thick,fill=deepgreen!6,
+  text width=4.1cm,align=center] (a2) at (5.0,-0.45)
+  {A2 passes analytically:\\ordinary $\det(I-zB_s)$ exists};
+\draw[->,warningamber,very thick,densely dashed] (cycles) -- (a1);
+\draw[->,deepgreen,very thick] (fredholm) -- (a2);
+
+\node[rounded corners,draw=charcoal,very thick,fill=softgray,
+  text width=11.0cm,align=center,inner sep=7pt] (tuple) at (0,-3.0)
+  {\texttt{(A0\_STRUCTURAL\_ARITHMETIC\_RELATION, A1\_FAIL,}\\
+   \texttt{A2\_ANALYTIC\_DETERMINANT, A3\_FAIL, A4\_FAIL)}\\[2pt]
+   \texttt{ROUTE\_A\_REJECTED}\quad\textbullet\quad
+   Route B locked\quad\textbullet\quad branch closed};
+\draw[->,charcoal,thick] (projector.south) -- ($(tuple.north west)+(1.0,0)$);
+\draw[->,charcoal,thick] (a1.south) -- (tuple.north);
+\draw[->,charcoal,thick] (a2.south) -- ($(tuple.north east)+(-1.0,0)$);
+\end{tikzpicture}
