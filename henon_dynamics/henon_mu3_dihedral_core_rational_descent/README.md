@@ -1,6 +1,9 @@
 # HCS-C53: rational descent of the Hénon moment packets
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; code/results RELEASE_CANDIDATE**.
+Status: **RELEASE_CANDIDATE; implementation provenance backfilled**.
+
+C53 implementation commit:
+`0a7f0fdb8290eab4aa92ed5ade432401c40c22cf`.
 
 Source lock: C52 implementation commit
 `208feef86365cd92ace8dad02904acff6623eeec`; frozen C52 certificate
@@ -57,3 +60,6 @@ Not claimed:
 A conic-bundle/Prym realization is outside the C53 certificate. Any future
 version requires an independent flatness theorem, discriminant analysis,
 and source audit.
+
+The default runner verifies the 20/20 semantic gates, 63/63 targeted tests,
+both byte-identical Route-A records, and the full-project release manifest.

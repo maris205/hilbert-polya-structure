@@ -74,6 +74,7 @@ single-column mathematical-article format.
   PRE_C53_RECONNAISSANCE_REGRESSION_ANCHOR_UNCERTIFIED, not an independently
   reconstructed point-count theorem; no C52 provenance is asserted.
 
-This is the final paper-source/report freeze.  Full-project manifest creation
-and implementation-provenance backfill must record these bytes without
-reopening the paper.
+This is the final paper-source/report freeze.  The full-project manifest is
+verified, and implementation commit
+`0a7f0fdb8290eab4aa92ed5ade432401c40c22cf` is backfilled without reopening
+the paper or changing the frozen PDF.

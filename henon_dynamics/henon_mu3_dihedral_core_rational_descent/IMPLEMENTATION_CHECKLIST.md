@@ -1,6 +1,6 @@
 # HCS-C53 implementation checklist
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; code/results RELEASE_CANDIDATE**
+Status: **RELEASE FROZEN; implementation provenance backfilled**
 
 ## Mathematics
 
@@ -33,7 +33,7 @@ Status: **DOCS_FINAL_NO_MORE_EDITS; code/results RELEASE_CANDIDATE**
 - [x] Freeze documentation only after the release-candidate code and paper gates
   pass.
 - [x] Update documentation after final code/results promotion.
-- [ ] Expand the full-project manifest and backfill implementation provenance
+- [x] Expand the full-project manifest and backfill implementation provenance
   during release integration.
 
 ## Release firewall

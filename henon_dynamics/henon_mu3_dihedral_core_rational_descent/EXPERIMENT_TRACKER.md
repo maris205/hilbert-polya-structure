@@ -1,6 +1,6 @@
 # HCS-C53 experiment tracker
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; code/results RELEASE_CANDIDATE**
+Status: **RELEASE FROZEN; implementation provenance backfilled**
 
 | Gate | Required output | Status |
 |---|---|---|
@@ -18,8 +18,8 @@ successfully on a freshly produced canonical certificate and hashes are
 recorded. Documentation claims remain bounded by `THEOREM_PACKAGE.md` even
 if a control calculation suggests a stronger pattern.
 
-The final code/results release-candidate replay passes 20/20 semantic gates,
-63/63 targeted mutations, and 11/11 code/results-manifest entries. Its locked
+The final release-candidate replay passes 20/20 semantic gates,
+63/63 targeted mutations, and 42/42 full-project manifest entries. Its locked
 hashes are:
 
 - certificate:
@@ -28,10 +28,10 @@ hashes are:
   8064224eda63fa9d890efd26ec9aa167c7cd9458662620be3135196a09494d41;
 - independent check:
   0d38643ded626c2a5e1536c8a4df9c56ae98c4fda01e1d15660996ea8c495e67;
-- code/results manifest:
+- pre-integration code/results manifest:
   b62f353d119d6c8565f513dad771a047a5e6343411d08ad2e91562fe84923480.
 
-These hashes are the release-candidate evidence tuple. Expansion to the
-complete-project manifest and implementation-provenance backfill are separate
-release-integration steps; they do not reopen the theorem documents or
-manuscript.
+These hashes are the release-candidate evidence tuple. The complete-project
+manifest and implementation SHA
+`0a7f0fdb8290eab4aa92ed5ade432401c40c22cf` are now frozen without reopening
+the theorem documents or manuscript.

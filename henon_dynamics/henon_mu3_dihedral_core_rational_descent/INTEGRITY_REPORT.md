@@ -1,6 +1,6 @@
 # HCS-C53 integrity report
 
-Status: **DOCS_FINAL_NO_MORE_EDITS; code/results RELEASE_CANDIDATE**
+Status: **PASS; implementation provenance backfilled**
 
 ## Mathematical red team
 
@@ -36,7 +36,7 @@ A read-only default replay passes:
 
 - 20/20 independent semantic gates;
 - 63/63 targeted mutation tests;
-- 11/11 code/results-manifest entries.
+- 42/42 full-project manifest entries.
 
 Locked release-candidate hashes:
 
@@ -46,7 +46,7 @@ Locked release-candidate hashes:
   8064224eda63fa9d890efd26ec9aa167c7cd9458662620be3135196a09494d41;
 - independent check:
   0d38643ded626c2a5e1536c8a4df9c56ae98c4fda01e1d15660996ea8c495e67;
-- code/results manifest:
+- pre-integration code/results manifest:
   b62f353d119d6c8565f513dad771a047a5e6343411d08ad2e91562fe84923480.
 
 The \(p=7\) trace is labeled
@@ -100,12 +100,14 @@ e59beee292830263189aaed6fe558a21e3ca5ec6ea5a5c57c12dd3f90b19f33e.
   208feef86365cd92ace8dad02904acff6623eeec.
 - Frozen C52 certificate:
   a2b0b281bfb311f979c7ed65e441a184ebe338b05f5fec8a60768610965c9c94.
-- C53 implementation commit remains pending release integration.
+- C53 implementation commit:
+  0a7f0fdb8290eab4aa92ed5ade432401c40c22cf.
 - The user-owned untracked file henon_dynamics/codex_prompt.md was neither
   read for content nor modified, staged, or included in an artifact list.
 
 The theorem documents, Route-A record, manuscript, compilation report, and
 PDF are final against the release-candidate evidence tuple above.  The
-certificate has status `RELEASE_CANDIDATE`.  Implementation-provenance
-backfill and expansion to the full-project manifest remain separate
-release-integration steps and must not reopen the frozen documentation.
+certificate has status `RELEASE_CANDIDATE`; the implementation SHA is
+backfilled into this report, the project README, and both Route-A records.
+The default runner verifies the complete project manifest without changing
+stable files.
