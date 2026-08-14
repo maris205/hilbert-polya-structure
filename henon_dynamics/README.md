@@ -44,6 +44,7 @@ henon_galois_excess_four_block_incidence_ladder - HCS-P56 complete - Two primiti
 henon_galois_excess_five_block_obstruction - HCS-P57 complete - Exact reflection reductions give a cubic A6 trace field and one totally real degree-fourteen A7/B7 field; the certified positive Delta5 excludes every width-at-most-five excess potential, while a unimodular width-six minor preserves the genuine Hölder-asymptotic gate.
 henon_physical_tail_galois_parity_obstruction - HCS-P58 complete - Period-eight/nine trace fields and opposite exact discrepancy signs separate physical stable-tail data from all-conjugate Galois excess.
 henon_reflection_half_entropy_law - HCS-P59 complete - Exact odd/even-axis Möbius formulas give reflection entropy `(1/2)log(phi)`, half the full H6 survivor entropy.
+henon_mixed_axis_dynatomic_entropy_gap - HCS-P60 complete - Odd mixed-axis closure polynomials have exact degree `2^((n+1)/2)` and formal primitive entropy `(1/2)log(2)`, exposing an effectivity/transversality gate above the physical half-entropy law.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
@@ -1343,3 +1344,38 @@ and its comparison with the symbolic half entropy.
 - [P59 paper](henon_reflection_half_entropy_law/paper/paper.pdf)
 - [P59 proof package](henon_reflection_half_entropy_law/PROOF_PACKAGE.md)
 - [P59 exact certificate](henon_reflection_half_entropy_law/results/c59_certificate.json)
+
+## HCS-P60 mixed-axis dynatomic entropy gap
+
+P60 executes the algebraic reflection-dynatomic step named by P59 for every
+odd period.  On the mixed fixed-axis slice, the exact closure polynomial is
+
+\[
+F_n(X)=q_{(n+1)/2}(X)-q_{(n-1)/2}(X),
+\qquad \deg F_n=2^{(n+1)/2}.
+\]
+
+For odd divisors `d|n`, the recurrence proves `F_d|F_n` directly in the
+quotient ring.  Möbius inversion therefore gives a formal primitive degree
+
+\[
+D_n=\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}
+   =2^{(n+1)/2}+O\!\left(n2^{n/6+1/2}\right),
+\]
+
+whose entropy is `(1/2)log(2)`, strictly greater than P59's physical
+reflection entropy `(1/2)log(phi)`. Exact factorization through period 15 is
+squarefree and the new quotients are irreducible, with the period-nine
+degree-28 quotient cross-locked to P58.
+
+The all-period statement is deliberately formal: a birational Hénon map and
+a symmetry-line slice are not automatically covered by projective
+dynatomic effectivity theorems.  The next bridge is an all-period
+transversality/intersection-multiplicity theorem identifying which formal
+roots are reduced primitive closures and which belong to the certified
+physical survivor.
+
+- [P60 overview](henon_mixed_axis_dynatomic_entropy_gap/README.md)
+- [P60 paper](henon_mixed_axis_dynatomic_entropy_gap/paper/paper.pdf)
+- [P60 proof package](henon_mixed_axis_dynatomic_entropy_gap/PROOF_PACKAGE.md)
+- [P60 exact certificate](henon_mixed_axis_dynatomic_entropy_gap/results/c60_certificate.json)
