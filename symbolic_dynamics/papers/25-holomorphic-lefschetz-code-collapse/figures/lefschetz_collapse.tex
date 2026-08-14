@@ -1,0 +1,59 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  >=Latex,
+  box/.style={draw=charcoal,rounded corners=2pt,very thick,align=center,
+    inner sep=5pt,minimum height=14mm},
+  source/.style={box,fill=formalblue!9,draw=formalblue},
+  fail/.style={box,fill=stopred!8,draw=stopred},
+  pass/.style={box,fill=passgreen!9,draw=passgreen},
+  warn/.style={box,fill=warningamber!10,draw=warningamber},
+  arr/.style={->,very thick,draw=charcoal},
+  note/.style={font=\sffamily\scriptsize,align=center,text=charcoal}
+]
+\node[source,minimum width=32mm] (code) at (0,0) {
+  logarithmic code\\[-1pt]
+  $c(n)$, $\ell(n)=O(\log n)$\\
+  $\phi_n(z)=a_n+q_nz$\\[-1pt]
+  $q_n=2^{-\ell(n)}$};
+
+\node[fail,minimum width=40mm] (scalar) at (4.3,1.35) {
+  ordinary zero-forms\\
+  $\Tr W_0^r=\dfrac{w^r}{1-q^r}$\\[-1pt]
+  scalar / ordinary tensor: \textbf{fail}\\[-2pt]
+  {\scriptsize $q=0$ is the rank-one boundary}};
+
+\node[pass,minimum width=39mm] (derham) at (4.3,-1.35) {
+  canonical de Rham $0|1$\\
+  $P_N\xrightarrow{d}P_{N-1}dz$\\[-1pt]
+  $\Str W^r=w^r$ for every $r$\\[-2pt]
+  {\scriptsize exterior numerator $1-q^r$}};
+
+\node[warn,minimum width=36mm] (graded) at (8.7,-1.35) {
+  exact all-order escape\\
+  $\dfrac{\det(I-zW_0)}{\det(I-zW_1)}=1-zw$\\[-1pt]
+  \textbf{graded ratio}, not block product};
+
+\node[fail,minimum width=39mm] (shared) at (13.2,0.75) {
+  one shared disk\\
+  $1-z\sum_jw_j$\\[-1pt]
+  mixed necklaces survive};
+
+\node[fail,minimum width=39mm] (disjoint) at (13.2,-2.15) {
+  one disk per label\\
+  $\prod_j(1-zw_j)$\\[-1pt]
+  atom-loop inventory};
+
+\draw[arr] (code.east) -- ++(0.55,0) |- (scalar.west);
+\draw[arr] (code.east) -- ++(0.55,0) |- (derham.west);
+\draw[arr,draw=passgreen] (derham.east) -- (graded.west);
+\draw[arr] (graded.east) -- ++(0.45,0) |- (shared.west);
+\draw[arr] (graded.east) -- ++(0.45,0) |- (disjoint.west);
+
+\draw[very thick,draw=charcoal] (-1.65,-3.25) -- (15.15,-3.25);
+\node[note,anchor=west] at (-1.55,-3.62) {
+  \textcolor{passgreen}{genuine A2 analytic repair}};
+\node[note] at (6.7,-3.62) {
+  \textcolor{stopred}{A1 fails: branch combinatorics are untouched}};
+\node[note,anchor=east] at (15.05,-3.62) {
+  \textcolor{stopred}{A3/A4 fail}};
+\end{tikzpicture}

@@ -745,13 +745,59 @@ ROUTE_A_REJECTED**。这个 theorem 只锁 natural graph-coordinate space；Pape
 继续检验 canonical holomorphic/de Rham graded transfer 能否修复 nuclearity 而不在
 cohomology 上塌回 atom inventory。
 
+### 论文 25：解析 nuclear escape 成功，但同调只留下 atom inventory
+
+Paper 25 把 Paper 24 的 logarithmic binary code 编译成严格收缩的 affine inverse
+branches。对单支 $\phi(z)=a+qz$ 与权 $w$，零形式 pullback 的重复迹为
+
+$$
+\operatorname{Tr}(wU_{\phi,0})^r=\frac{w^r}{1-q^r}.
+$$
+
+任何 scalar normalization 在匹配 $r=1$ 后都会在 $r=2$ 失败；普通 trace-class
+tensor fiber 若想补出分子 $1-q^r$，其 Fredholm determinant 将被迫等于
+$(1-t)/(1-qt)$，因有极点而不可能。
+
+真正的正面突破来自 canonical holomorphic de Rham $0|1$ complex：
+
+$$
+\operatorname{Tr}W_0^r-\operatorname{Tr}W_1^r=w^r,
+\qquad
+\frac{\det(I-zW_0)}{\det(I-zW_1)}=1-zw.
+$$
+
+这在所有 repetitions 上精确成立，两边都是 $\Re s>1$ 中 honest trace-class
+holomorphic operators；但不变量是 graded/relative determinant，不是普通 block
+determinant。
+
+共享 renewal assembly 的 cohomology 只有一个常数态，所以最终只得到
+
+$$
+1-z\sum_jw_j,
+$$
+
+全部 mixed primitive necklaces 仍然存活。把 branches 分离后虽得到
+$\prod_j(1-zw_j)$，但每个 contractible analytic fiber 都约掉，只剩 supplied label
+对应的一个 $H^0$ atom loop；primes、squares、Fibonacci、random、hash 与任意
+inventory 全部同样成功。原始 digit marker 也仍是
+$u^{\ell(n)}n^{-s}$，只有 first-return induction 才能改成每个 codeword 一个 $z$。
+
+53/53 exact tests 验证了 4,095 个 code branches、完整 characteristic-polynomial
+quotients、1,183 个 primitive necklaces（其中 1,174 个 mixed survivors）与 42 个
+full-inventory controls。阶段结论是 **GO_HOLOMORPHIC_NUCLEARITY /
+GO_CANONICAL_LEFSCHETZ_CANCELLATION / GO_FULL_GRADED_DETERMINANT /
+STOP_SHARED_RENEWAL_MIXED_WORDS / COHOMOLOGY_COLLAPSE /
+ATOM_INVENTORY_EQUIVALENCE / ROUTE_A_REJECTED**。Paper 26 转而让 grading 作用于
+branch combinatorics 本身：若它仍需要一原子一颜色的记忆，就应证明 exact cyclic
+selector 的 semisimple collapse；Route B 继续锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十四篇论文](papers/)
+- [二十五篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

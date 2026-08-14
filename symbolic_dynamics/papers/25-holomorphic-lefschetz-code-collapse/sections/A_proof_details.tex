@@ -1,0 +1,143 @@
+\section{Proof details}
+\label{app:proofs}
+
+\subsection{Triangular affine pullback}
+
+For \(\phi(z)=a+qz\),
+\[
+ U_{\phi,0}z^k=(a+qz)^k
+ =\sum_{j=0}^k\binom{k}{j}a^{k-j}q^jz^j.
+\]
+Thus the finite monomial matrix is upper triangular by degree and has
+diagonal \(1,q,\ldots,q^N\).  On one-forms,
+\[
+ U_{\phi,1}(z^kdz)=q(a+qz)^kdz,
+\]
+whose diagonal is \(q,q^2,\ldots,q^N\) on
+\(P_{N-1}dz\).  This proves directly that
+\begin{align*}
+ \Tr(wU_{\phi,0}|P_N)^r
+ &=w^r\sum_{m=0}^Nq^{rm},\\
+ \Tr(wU_{\phi,1}|P_{N-1}dz)^r
+ &=w^r\sum_{m=1}^Nq^{rm},
+\end{align*}
+so their difference is \(w^r\) for every \(N\) and \(r\).
+
+To check the chain identity on a monomial, compute
+\begin{align*}
+ dU_{\phi,0}z^k
+ &=kq(a+qz)^{k-1}dz,\\
+ U_{\phi,1}d z^k
+ &=U_{\phi,1}(kz^{k-1}dz)
+ =kq(a+qz)^{k-1}dz.
+\end{align*}
+This is \(DM_0=M_1D\) in matrix form.
+
+\subsection{Finite cohomological determinant identity}
+
+Choose the invariant constants \(C\subset P_N\) and the quotient
+\(P_N/C\).  Differentiation induces an isomorphism
+\[
+        \overline d:P_N/C\longrightarrow P_{N-1}dz.
+\]
+The chain identity makes the induced zero-form quotient action similar to
+the one-form action.  In a basis adapted to \(C\subset P_N\), the weighted
+zero-form matrix is block upper triangular with the scalar \(w\) on \(C\)
+and a block similar to \(wM_1\) on the quotient.  Therefore
+\[
+ \det(I-zwM_0)=(1-zw)\det(I-zwM_1).
+\]
+
+For a weighted sum \(L_k=\sum_jw_jM_{j,k}\), constants carry
+\(S_w=\sum_jw_j\), and the same quotient similarity yields
+\[
+ \det(I-zL_0)=(1-zS_w)\det(I-zL_1).
+\]
+No commutativity among the branch matrices is used.
+
+\subsection{Tensor moment obstruction in full detail}
+
+For trace-class \(B\), the Fredholm determinant has the local expansion
+\[
+ \log\det(I-tB)=-\sum_{r\ge1}\frac{t^r}{r}\Tr B^r.
+\]
+If \(\Tr B^r=1-q^r\), then
+\begin{align*}
+ \log\det(I-tB)
+ &=-\sum_{r\ge1}\frac{t^r}{r}
+   +\sum_{r\ge1}\frac{(qt)^r}{r}\\
+ &=\log(1-t)-\log(1-qt).
+\end{align*}
+Exponentiation gives \((1-t)/(1-qt)\) on a neighborhood of zero.  By
+analytic continuation it would equal the entire Fredholm determinant away
+from its alleged pole, which is impossible.  The argument applies equally
+to a finite matrix.  It uses the full moment sequence; a search over small
+matrices is only a regression test.
+
+\subsection{Absolute fixed-word summation}
+
+For the code inventory \(n\ge2\), one has \(|q_n|\le2^{-3}\).  Hence for
+every nonempty word \(\alpha\),
+\[
+ \left|\frac1{1-q_\alpha}\right|
+ \le\frac1{1-2^{-3}}.
+\]
+If \(\sum_j|w_j|<\infty\), then at power \(r\)
+\[
+ \sum_{\alpha\in J^r}|w_\alpha|
+ =\left(\sum_j|w_j|\right)^r<\infty.
+\]
+The degree-zero and degree-one fixed-word traces are therefore absolutely
+summable.  Termwise subtraction is justified and yields
+\[
+ \sum_{\alpha\in J^r}
+ w_\alpha\left(\frac1{1-q_\alpha}
+ -\frac{q_\alpha}{1-q_\alpha}\right)
+ =\sum_{\alpha\in J^r}w_\alpha=S_w^r.
+\]
+
+\subsection{Primitive-necklace identity}
+
+Let \(A_r=(\sum_jw_j)^r\).  The shared connected trace logarithm is
+\[
+ \sum_{r\ge1}\frac{z^r}{r}A_r
+ =-\log\left(1-z\sum_jw_j\right).
+\]
+Every word has a unique representation as a positive power of a primitive
+cyclic word together with a choice of starting point.  Grouping the word sum
+by this primitive root gives
+\[
+ -\log\left(1-z\sum_jw_j\right)
+ =-\sum_{[\alpha]\ \mathrm{primitive}}
+   \log(1-z^{|\alpha|}w_\alpha),
+\]
+which exponentiates to \eqref{eq:necklace-product}.  Pure one-letter roots
+generate the repeated terms \(w_j^r\); roots using multiple labels generate
+the mixed ledger.
+
+\subsection{Direct-sum determinant and trace class}
+
+For a direct sum \(T=\bigoplus_nT_n\), the sufficient trace-class condition
+\(\sum_n\lVert T_n\rVert_1<\infty\) gives
+\[
+        \det(I-zT)=\prod_n\det(I-zT_n)
+\]
+locally uniformly in \(z\).  Here the common compact-containment estimate
+gives \(\lVert U_{\phi_n,k}\rVert_1\le C_k\), uniformly in \(n\).  Thus
+\[
+ \sum_{n\in S}\lVert n^{-s}U_{\phi_n,k}\rVert_1
+ \le C_k\sum_{n\ge2}n^{-\Re s}<\infty
+\]
+for \(\Re s>1\).  Componentwise application of
+\eqref{eq:local-det-identity} proves \eqref{eq:disjoint-det}.
+
+\subsection{Prime cohomology boundary}
+
+The diagonal cohomology operator \(C_{\Pp,s}\) is normal with singular
+values \(p^{-\Re s}\).  Hence
+\[
+        \lVert C_{\Pp,s}\rVert_1=\sum_pp^{-\Re s}.
+\]
+Euler's divergence of \(\sum_pp^{-1}\) gives the boundary at \(1\).
+This is an operator statement, independent of any meromorphic continuation
+of the scalar determinant ratio.

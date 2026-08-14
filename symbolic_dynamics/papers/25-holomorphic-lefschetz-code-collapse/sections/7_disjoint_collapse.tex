@@ -1,0 +1,113 @@
+\section{Disjoint components and atom-loop collapse}
+\label{sec:disjoint}
+
+Mixed necklaces disappear if every label is placed on a private recurrent
+disk.  That modification produces the desired product, but it also exposes
+where the arithmetic inventory resides.
+
+\begin{theorem}[Disjoint graded factorization]
+\label{thm:disjoint-factor}
+Let \(S\subseteq\{2,3,\ldots\}\).  For \(\Re s>1\), the disjoint pair
+\[
+ \cE^k_{S,s}=\bigoplus_{n\in S}n^{-s}U_{\phi_n,k}
+\]
+satisfies
+\begin{equation}
+ \det(I-z\cE^0_{S,s})
+ =\left[\prod_{n\in S}(1-zn^{-s})\right]
+   \det(I-z\cE^1_{S,s}).
+ \label{eq:disjoint-det}
+\end{equation}
+Thus
+\begin{equation}
+        \Dgr(z;\cE_{S,s})
+        =\prod_{n\in S}(1-zn^{-s}).
+ \label{eq:disjoint-product}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+\Cref{prop:trace-class} makes both degreewise direct sums trace class.  Apply
+\cref{thm:local-cancellation} on each component and multiply.  Absolute
+convergence of \(\sum_{n\in S}|n^{-s}|\) gives convergence of the product
+and permits the componentwise Fredholm factorization.
+\end{proof}
+
+\begin{theorem}[Cohomological atom-loop equivalence]
+\label{thm:atom-collapse}
+The graded determinant in \eqref{eq:disjoint-product} is the ordinary
+Fredholm determinant of the diagonal trace-class operator
+\begin{equation}
+        C_{S,s}=\diag(n^{-s})_{n\in S}
+        \quad\text{on }\ell^2(S).
+ \label{eq:cohomology-diagonal}
+\end{equation}
+Equivalently, every disk contributes one constant cohomology state, and all
+nonconstant analytic modes cancel.
+\end{theorem}
+
+\begin{proof}
+The finite complex \eqref{eq:polynomial-complex} has one-dimensional
+cohomology represented by constants.  On the component labelled \(n\), the
+weighted pullback acts on that class by \(n^{-s}\).  Direct-sum cohomology is
+therefore \(\bigoplus_{n\in S}\C\), and its induced map is
+\eqref{eq:cohomology-diagonal}.  Its ordinary determinant is precisely
+\eqref{eq:disjoint-product}.  The same conclusion also follows directly
+from the telescoping component spectra.
+\end{proof}
+
+The theorem is stronger than saying that the output resembles an Euler
+product.  It identifies a determinant-equivalent minimal model: one
+one-dimensional loop per supplied label.  The affine translations \(a_n\),
+contractions \(q_n\), and logarithmic digit histories occur only in paired
+acyclic modes.
+
+\subsection{Arbitrary-inventory control}
+
+The disjoint construction is functorial in \(S\).  Without changing a digit
+map, function space, form degree, or local determinant rule, it returns a
+product for every inventory.
+
+\begin{table}[t]
+\centering
+\caption{The same disjoint compiler applied to mandatory inventories.}
+\label{tab:inventories}
+\small
+\begin{tabularx}{\textwidth}{L{3.2cm}L{5.1cm}Y}
+\toprule
+Inventory \(S\) & Surviving graded factor & Source-selectivity verdict \\
+\midrule
+rational primes
+& $\prod_p(1-zp^{-s})$
+& desired unmarked factor only after the prime component list is supplied \\
+squares
+& $\prod_{m\ge2}(1-zm^{-2s})$
+& identical analytic mechanism \\
+Fibonacci values
+& $\prod_{n\in S_{\rm Fib}}(1-zn^{-s})$
+& identical analytic mechanism \\
+all integers
+& $\prod_{n\ge2}(1-zn^{-s})$
+& identical analytic mechanism \\
+seeded random or hash set
+& $\prod_{n\in S_{\rm ctrl}}(1-zn^{-s})$
+& matched nonarithmetic control succeeds \\
+arbitrary decidable inventory
+& $\prod_{n\in S}(1-zn^{-s})$
+& construction factors whatever it is given \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+For \(S=\Pp\) and \(z=1\), the product equals \(1/\zeta(s)\) in the Euler
+half-plane.  This equality earns analytic determinant credit but no
+prime-selection credit.  The prime set appears as the recurrent component
+index, and \cref{thm:atom-collapse} deletes every other trace of the code.
+In the project's control language, the disjoint architecture
+\textsc{Proves Too Much}.
+
+Shared and disjoint assemblies are therefore not two representations of one
+dynamical object.  Shared recurrence is connected and contains mixed
+necklaces.  Disjoint recurrence removes them by changing the recurrent
+component structure.  The next section adds the independent clock
+distinction.
