@@ -1,0 +1,24 @@
+\begin{tikzpicture}[>=Latex,scale=0.85,
+  v/.style={circle,draw=charcoal,fill=softgray,minimum size=7mm,inner sep=0pt},
+  e/.style={line width=0.65pt,charcoal},
+  cell/.style={fill=warningamber!14,draw=warningamber,line width=0.7pt}]
+  \foreach \a in {0,1,2,3} {
+    \foreach \b in {0,1,2} {
+      \node[v] (n\a\b) at (1.25*\a,1.25*\b) {$m2^{\a}3^{\b}$};
+    }
+  }
+  \foreach \a/\anext in {0/1,1/2,2/3} {
+    \foreach \b in {0,1,2} {
+      \draw[e] (n\a\b) -- (n\anext\b);
+    }
+  }
+  \foreach \a in {0,1,2,3} {
+    \foreach \b/\bnext in {0/1,1/2} {
+      \draw[e] (n\a\b) -- (n\a\bnext);
+    }
+  }
+  \draw[cell] (n00.center) rectangle (n11.center);
+  \draw[cell] (n10.center) rectangle (n21.center);
+  \draw[cell] (n01.center) rectangle (n12.center);
+  \node[align=center] at (2.0,-0.85) {\small unit diamonds fill the grid};
+\end{tikzpicture}
