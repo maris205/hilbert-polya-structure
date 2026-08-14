@@ -2,7 +2,7 @@
 
 Status: **AMBER B0--B2 theorem package; release candidate**
 
-Implementation commit: `PENDING_RELEASE_COMMIT`.
+Implementation commit: `208feef86365cd92ace8dad02904acff6623eeec`.
 
 The mathematical packages, independently checked exact certificate,
 manuscript, and Route-A record are present.  The release remains scoped to

@@ -1,8 +1,8 @@
 # HCS-C52 integrity report
 
-Status: **PASS at release-candidate freeze; commit provenance pending backfill**
+Status: **PASS; implementation provenance backfilled**
 
-Implementation commit: `PENDING_RELEASE_COMMIT`.
+Implementation commit: `208feef86365cd92ace8dad02904acff6623eeec`.
 
 ## Mathematical red team
 
@@ -106,7 +106,6 @@ the certificate and independent check byte-for-byte, pass all semantic and
 mutation gates, and verify the complete manifest without changing stable
 files.
 
-After the implementation commit, that full SHA is backfilled into this
-report, the project README, and both byte-identical Route-A records before
-the final provenance commit.  The user-owned `henon_dynamics/codex_prompt.md`
-is excluded from every commit.
+The full implementation SHA is backfilled into this report, the project
+README, and both byte-identical Route-A records.  The user-owned
+`henon_dynamics/codex_prompt.md` is excluded from every commit.
