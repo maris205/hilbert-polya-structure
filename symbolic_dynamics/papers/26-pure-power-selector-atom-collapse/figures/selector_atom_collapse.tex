@@ -1,0 +1,59 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  >=Latex,
+  box/.style={draw=charcoal,rounded corners=2pt,very thick,align=center,
+    inner sep=5pt,minimum height=17mm},
+  source/.style={box,fill=formalblue!9,draw=formalblue},
+  exact/.style={box,fill=passgreen!9,draw=passgreen},
+  warn/.style={box,fill=warningamber!10,draw=warningamber},
+  stop/.style={box,fill=stopred!8,draw=stopred},
+  arr/.style={-{Latex[length=1.2mm,width=1mm]},very thick,draw=charcoal},
+  note/.style={font=\sffamily\scriptsize,align=center,text=charcoal}
+]
+\node[source,minimum width=31mm] (word) at (0,0) {
+  shared return word\\[-1pt]
+  $w=a_{i_1}\cdots a_{i_r}$\\
+  mixed necklaces present};
+
+\node[exact,minimum width=38mm] (support) at (4.2,1.45) {
+  reduced-support exterior rule\\
+  $\Str\Lambda^\bullet Q_{\supp(w)}$
+  $=(1-1)^{|\supp(w)|-1}$\\[-2pt]
+  {\scriptsize exact, cyclic, word-indexed}};
+
+\node[exact,minimum width=38mm] (projector) at (4.2,-1.45) {
+  stationary projectors\\
+  $P_iP_j=\delta_{ij}P_i$\\
+  $\Tr P_w=\chi_m(w)$\\[-2pt]
+  {\scriptsize exact, one line per color}};
+
+\node[warn,minimum width=35mm] (algebra) at (8.75,0) {
+  observable quotient\\
+  $\mathcal A_{\chi_m}\cong\mathbb C^m$\\
+  one net simple per color};
+
+\node[exact,minimum width=40mm] (derham) at (13.35,0.8) {
+  tensor Paper25 de Rham sector\\
+  local analytic supertrace $=1$\\
+  degreewise trace class on $\Re s>1$};
+
+\node[stop,minimum width=40mm] (product) at (13.35,-1.65) {
+  surviving graded determinant\\
+  $\displaystyle\prod_n(1-zu^{\ell(n)}n^{-s})$\\
+  disjoint supplied atom blocks};
+
+\draw[arr] (word.east) -- ++(0.45,0) |- (support.south west);
+\draw[arr] (word.east) -- ++(0.45,0) |- (projector.north west);
+\draw[arr] (support.east) -- ++(0.45,0) |- (algebra.north west);
+\draw[arr] (projector.east) -- ++(0.45,0) |- (algebra.south west);
+\draw[arr] (algebra.east) -- ++(0.45,0) |- (derham.south west);
+\draw[arr] (derham.south) -- (product.north);
+
+\draw[very thick,draw=charcoal] (-1.55,-3.05) -- (15.35,-3.05);
+\node[note,anchor=west,text=passgreen] at (-1.45,-3.42)
+  {exact pure/mixed coefficient};
+\node[note,text=stopred] at (7.2,-3.42)
+  {A1 fails: memory grows with inventory};
+\node[note,anchor=east,text=stopred] at (15.25,-3.42)
+  {A3/A4 absent};
+\end{tikzpicture}

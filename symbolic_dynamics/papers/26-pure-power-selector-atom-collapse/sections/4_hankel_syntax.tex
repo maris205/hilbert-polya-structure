@@ -1,0 +1,124 @@
+\section{Hankel memory and syntactic algebra}
+\label{sec:hankel}
+
+The support automaton may remember every subset of colors, but the minimal
+linear memory is much smaller and still grows with \(m\).  Let
+
+\[
+ H_m(u,v)=\chi_m(uv),\qquad u,v\in A_m^*,
+\]
+
+be the two-sided Hankel matrix under either empty-word convention.
+
+\begin{theorem}[exact Hankel rank]
+\label{thm:hankel-rank}
+Over \(\C\),
+\begin{equation}
+ \rank H_m=
+ \begin{cases}
+  m,&\chi_m(\epsword)=m,\\
+  m+1,&\chi_m(\epsword)=0.
+ \end{cases}
+ \label{eq:hankel-ranks}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The submatrix with rows and columns indexed by the single letters satisfies
+
+\[
+ H_m(a_i,a_j)=\chi_m(a_ia_j)=\delta_{ij},
+\]
+
+so its rank is \(m\).  Every residual following a nonempty pure prefix is one
+of the \(m\) color residuals; a mixed prefix has the zero residual.  Under the
+character convention, the empty residual is the sum of the color residuals,
+so the full rank is at most \(m\).  Under the language convention, the empty
+residual is independent: at the empty suffix it has value zero, whereas every
+color residual has value one.  It adds one and no more.  This proves
+\eqref{eq:hankel-ranks}.
+\end{proof}
+
+By the Hankel realization theorem, the ranks in
+\Cref{thm:hankel-rank} are the minimal dimensions for general bilinear linear
+representations, not only for trace realizations.  In particular, no fixed
+finite-dimensional linear recognizer works for unbounded color inventories.
+
+The same calculation can be stated intrinsically through the syntactic
+algebra.  Let \(R_m=\C\langle a_1,\ldots,a_m\rangle\).
+
+\begin{theorem}[observable syntactic algebra]
+\label{thm:syntactic-algebra}
+The syntactic algebra of the selector is
+\begin{equation}
+ \cA_{\chi_m}\cong
+ \begin{cases}
+  \C^m,&\chi_m(\epsword)=m,\\
+  \C^{m+1},&\chi_m(\epsword)=0.
+ \end{cases}
+ \label{eq:syntactic-algebra}
+\end{equation}
+In the second line, the extra simple is dormant: every letter acts on it by
+zero.
+\end{theorem}
+
+\begin{proof}
+For the character convention, let
+
+\[
+ \pi:R_m\longrightarrow\C^m,
+ \qquad \pi(a_i)=e_i,
+\]
+
+where the \(e_i\) are primitive orthogonal idempotents, and put
+\(\tau(v)=\sum_i v_i\).  Then
+\(\chi_m(w)=\tau(\pi(w))\).  The context pairing on the image is
+
+\[
+ (v,w)\longmapsto\tau(vw)=\sum_i v_iw_i,
+\]
+
+which is nondegenerate.  Therefore the largest two-sided ideal invisible in
+all contexts is exactly \(\ker\pi\), and the observable quotient is \(\C^m\).
+
+For the language convention, add a coordinate \(e_0\).  Send the algebra unit
+to \((1,\ldots,1)\), every \(a_i\) to \(e_i\), and use
+
+\[
+ \tau_0(v)=\sum_{i=1}^m v_i-mv_0.
+\]
+
+The identity has value zero, every nonempty pure power has value one, and a
+mixed word maps to zero.  The context form is diagonal with weights
+\((-m,1,\ldots,1)\), hence nondegenerate over \(\C\).  The quotient is
+\(\C^{m+1}\), and all letters have zero \(e_0\)-coordinate.
+\end{proof}
+
+\begin{corollary}[color-proportional observable memory]
+Any finite recognizable construction for \(\chi_m\) may contain redundant or
+exponentially large support memory, but its minimal observable quotient has
+one active coordinate per color.  The language empty-word convention adds
+exactly one determinant-invisible coordinate.
+\end{corollary}
+
+\begin{table}[t]
+\centering
+\small
+\caption{The empty-word convention changes minimal recognition but not the
+positive-word determinant.}
+\label{tab:empty-word}
+\begin{tabularx}{\textwidth}{L{33mm} c c Y}
+\toprule
+Convention & Hankel rank & syntactic algebra & extra determinant content \\
+\midrule
+\(\chi_m(\epsword)=m\) & \(m\) & \(\C^m\) & none \\
+\(\chi_m(\epsword)=0\) & \(m+1\) & \(\C^{m+1}\) & dormant simple; letters act by zero \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The syntactic theorem closes the general recognizable-readout loophole.  A
+stronger question remains for trace presentations: does the wordwise cyclic
+character force each color to survive as an actual simple factor, or could a
+smaller collection of noncommuting matrices emulate all traces?  The next
+section proves the sharp semisimple answer.

@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+"""Audit SD-C28 exact artifacts, Route schema, source policy, and hygiene."""
+
+from __future__ import annotations
+
+import ast
+import csv
+import json
+from pathlib import Path
+
+import yaml
+
+
+ROOT = Path(__file__).resolve().parents[1]
+RESULTS = ROOT / "results"
+OUTPUT = RESULTS / "integrity_audit.json"
+ROUTE_A = ROOT / "evaluations" / "route_a" / "SD-C28" / "2026-08-14.yaml"
+CORE = ROOT / "code" / "sdc28_pure_power_selector.py"
+PENDING = "PENDING_FIRST_ARTIFACT_COMMIT"
+
+EXPECTED_ROWS = {
+    "projector_word_ledger.csv": 34636,
+    "radical_word_ledger.csv": 15029,
+    "graded_word_ledger.csv": 1274,
+    "hankel_syntactic_ledger.csv": 8,
+    "aggregate_adversary.csv": 34,
+    "support_incidence_ledger.csv": 12,
+    "bar_hochschild_controls.csv": 12,
+    "de_rham_local_controls.csv": 72,
+    "de_rham_tensor_word_ledger.csv": 120,
+    "arbitrary_inventory_controls.csv": 21,
+    "marker_ownership_controls.csv": 511,
+    "route_gate_summary.csv": 5,
+}
+EXPECTED_TUPLE = [
+    "A0_STRUCTURAL_ARITHMETIC_RELATION",
+    "A1_FAIL",
+    "A2_ANALYTIC_DETERMINANT",
+    "A3_FAIL",
+    "A4_FAIL",
+]
+REQUIRED_ROUTE_KEYS = {
+    "skill", "skill_version", "candidate_id", "source_commit", "code_commit",
+    "evaluation_date", "artifact_path_base", "freeze_note", "source_lock",
+    "a0", "a1", "a2", "a3", "a4", "adversarial_controls", "route_tuple",
+    "overall_verdict", "claim_boundary", "blocking_conditions", "next_smallest_test",
+    "round2_clues", "route_b_invocation_allowed",
+}
+
+
+def csv_rows(name: str) -> list[dict[str, str]]:
+    with (RESULTS / name).open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def main() -> int:
+    row_counts: dict[str, int] = {}
+    csv_lf_only: dict[str, bool] = {}
+    for name, expected in EXPECTED_ROWS.items():
+        raw = (RESULTS / name).read_bytes()
+        data = csv_rows(name)
+        row_counts[name] = len(data)
+        csv_lf_only[name] = b"\r" not in raw and raw.endswith(b"\n")
+        if len(data) != expected:
+            raise AssertionError(f"{name}: {len(data)} != {expected}")
+
+    summary = json.loads((RESULTS / "summary.json").read_text(encoding="utf-8"))
+    tests = json.loads((RESULTS / "test_summary.json").read_text(encoding="utf-8"))
+    double = json.loads((RESULTS / "double_run_certificate.json").read_text(encoding="utf-8"))
+    oracle = json.loads((RESULTS / "source_oracle_certificate.json").read_text(encoding="utf-8"))
+    route = yaml.safe_load(ROUTE_A.read_text(encoding="utf-8"))
+    metrics = route.get("a2", {}).get("metrics", {})
+    zero_fields = (
+        "zero_error_train", "zero_error_validation", "zero_error_test",
+        "extra_zero_count", "missing_zero_count", "root_count_discrepancy",
+    )
+    source_commit = route.get("source_commit")
+    code_commit = route.get("code_commit")
+    lock_commit = route.get("source_lock", {}).get("code_commit")
+    route_checks = {
+        "required_keys": not (REQUIRED_ROUTE_KEYS - set(route)),
+        "candidate": route.get("candidate_id") == "SD-C28",
+        "family": route.get("source_lock", {}).get("family") == "symbolic_dynamics",
+        "tuple": route.get("route_tuple") == EXPECTED_TUPLE,
+        "layer_verdicts": [route.get(key, {}).get("verdict") for key in ("a0", "a1", "a2", "a3", "a4")] == EXPECTED_TUPLE,
+        "rejected": route.get("overall_verdict") == "ROUTE_A_REJECTED",
+        "route_b_false": route.get("route_b_invocation_allowed") is False,
+        "paired_pending": source_commit == code_commit == lock_commit == PENDING,
+        "two_stage_note": "two-stage" in route.get("freeze_note", "").lower(),
+        "zero_fields_na": all(isinstance(metrics.get(field), str) and metrics[field].startswith("not_applicable;") for field in zero_fields),
+        "zero_data_false": metrics.get("target_zero_data_used") is False,
+    }
+    tree = ast.parse(CORE.read_text(encoding="utf-8"))
+    calls = {
+        (node.func.id if isinstance(node.func, ast.Name) else node.func.attr).lower()
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call) and isinstance(node.func, (ast.Name, ast.Attribute))
+    }
+    source_checks = {
+        "evaluator_separated": oracle.get("candidate_evaluator_separated") is True,
+        "forbidden_calls_empty": oracle.get("forbidden_candidate_calls") == [],
+        "static_no_oracles": calls.isdisjoint({"factorint", "isprime", "mangoldt", "primepi", "primerange", "zeta", "zetazero"}),
+        "prime_table_false": oracle.get("prime_table_used_in_candidate") is False,
+        "zero_data_false": oracle.get("riemann_zero_data_used") is False,
+        "wordwise": oracle.get("wordwise_not_aggregate_only") is True,
+    }
+    scientific_checks = {
+        "summary_pass": summary.get("status") == "PASS",
+        "projector_exact": summary.get("all_projector_exact") is True,
+        "radical_exact": summary.get("all_radical_exact") is True,
+        "graded_exact": summary.get("all_graded_exact") is True,
+        "hankel_exact": summary.get("all_hankel_exact") is True,
+        "aggregate_counterexample": summary.get("aggregate_wordwise_counterexample_found") is True,
+        "de_rham_exact": summary.get("all_de_rham_exact") is True,
+        "proves_too_much": summary.get("all_inventory_proves_too_much") is True,
+        "tests": tests.get("status") == "PASS" and tests.get("passed") == tests.get("collected"),
+        "double_run": double.get("byte_identical") is True,
+    }
+    cache_paths = sorted(path.relative_to(ROOT).as_posix() for path in ROOT.rglob("*") if path.name in {"__pycache__", ".pytest_cache"})
+    checks = {
+        "row_counts": row_counts == EXPECTED_ROWS,
+        "csv_lf": all(csv_lf_only.values()),
+        "route": all(route_checks.values()),
+        "source": all(source_checks.values()),
+        "scientific": all(scientific_checks.values()),
+        "no_caches": not cache_paths,
+    }
+    payload = {
+        "candidate_id": "SD-C28",
+        "status": "PASS" if all(checks.values()) else "FAIL",
+        "checks": checks,
+        "row_counts": row_counts,
+        "csv_lf_only": csv_lf_only,
+        "route_checks": route_checks,
+        "source_checks": source_checks,
+        "scientific_checks": scientific_checks,
+        "cache_paths": cache_paths,
+    }
+    OUTPUT.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print(json.dumps(payload, indent=2, sort_keys=True))
+    return 0 if payload["status"] == "PASS" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

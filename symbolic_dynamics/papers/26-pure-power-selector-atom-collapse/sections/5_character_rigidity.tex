@@ -1,0 +1,127 @@
+\section{Ordinary and graded character rigidity}
+\label{sec:character}
+
+For \(0\le i\le m\), define one-dimensional \(R_m\)-modules by
+\begin{equation}
+ a_j\big|_{L_i}=\delta_{ij}\quad(i\ge1),
+ \qquad
+ a_j\big|_{L_0}=0.
+ \label{eq:color-characters}
+\end{equation}
+Put \(\Lambda_m=\bigoplus_{i=1}^mL_i\).  On every positive word,
+\begin{equation}
+ \Tr(w\mid\Lambda_m)=\chi_m(w),
+ \label{eq:target-character}
+\end{equation}
+while the identity trace is \(m\).
+
+\begin{theorem}[ordinary semisimple rigidity]
+\label{thm:ordinary-rigidity}
+Let \(\rho:R_m\to\operatorname{End}(V)\) be finite dimensional over \(\C\).
+If
+\begin{equation}
+ \Tr\rho(w)=\chi_m(w)\qquad(w\in A_m^+),
+ \label{eq:ordinary-word-hypothesis}
+\end{equation}
+then
+\begin{equation}
+ V^{\ssim}\cong
+ \Lambda_m\oplus L_0^{\oplus(\dim V-m)}.
+ \label{eq:ordinary-semisimplification}
+\end{equation}
+In particular, \(\dim V\ge m\), and every active color character occurs once.
+\end{theorem}
+
+\begin{proof}
+Let \(d=\dim V-m\).  The trace difference between \(V\) and \(\Lambda_m\)
+vanishes on the augmentation ideal spanned by positive words.  If \(d\ge0\),
+the characters of \(V\) and \(\Lambda_m\oplus L_0^{\oplus d}\) agree also at
+the identity.  If \(d<0\), compare instead
+\(V\oplus L_0^{\oplus(-d)}\) with \(\Lambda_m\).  In either case the two
+representations factor through their finite-dimensional combined image
+algebra.
+
+Quotient that image algebra by its Jacobson radical.  The resulting complex
+semisimple algebra is a finite product of matrix algebras, and its irreducible
+trace functionals are linearly independent.  Equality of characters therefore
+gives equality of semisimplifications.  The case \(d<0\) would put a positive
+\(L_0\)-multiplicity on the first side and no \(L_0\) on the second, impossible
+because simple-module classes form a free basis of the Grothendieck group.
+Thus \(d\ge0\), and \eqref{eq:ordinary-semisimplification} follows.
+\end{proof}
+
+The proof is a finite-image form of the Brauer--Nesbitt principle.  It uses
+the trace of every algebra element, obtained by linearity from every word; it
+does not infer a common eigenbasis for the original generators.
+
+Now let \(V=V_+\oplus V_-\) be \(\mathbb Z/2\)-graded and require each letter
+to act evenly.
+
+\begin{theorem}[graded virtual rigidity]
+\label{thm:graded-rigidity}
+If
+\begin{equation}
+ \Str\rho(w)=\chi_m(w)\qquad(w\in A_m^+),
+ \label{eq:graded-word-hypothesis}
+\end{equation}
+then
+\begin{equation}
+ [V_+^{\ssim}]-[V_-^{\ssim}]
+ =\sum_{i=1}^m[L_i]+d[L_0],
+ \qquad d=\dim V_+-\dim V_- -m.
+ \label{eq:virtual-class}
+\end{equation}
+Equivalently, there are a semisimple module \(W\) and integers \(a,b\ge0\),
+\(a-b=d\), such that
+\begin{equation}
+ V_+^{\ssim}\cong W\oplus\Lambda_m\oplus L_0^{\oplus a},
+ \qquad
+ V_-^{\ssim}\cong W\oplus L_0^{\oplus b}.
+ \label{eq:virtual-decomposition}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Add \(|d|\) dormant modules to the side required to match the identity trace.
+Dormant modules vanish on every positive word, so
+\eqref{eq:graded-word-hypothesis} and \eqref{eq:target-character} give equality
+of the full ordinary characters of the two enlarged sides.  Apply the same
+finite combined-image argument as in \Cref{thm:ordinary-rigidity}, then cancel
+common simple multiplicities.  This yields
+\eqref{eq:virtual-class} and \eqref{eq:virtual-decomposition}.
+\end{proof}
+
+\begin{proposition}[literal splitting is false]
+\label{prop:radical-counterexample}
+There are noncommuting, nonsplit realizations satisfying every word trace in
+\eqref{eq:ordinary-word-hypothesis}.  Moreover, arbitrary common
+representations may be added in even and odd degree without changing a single
+supertrace.
+\end{proposition}
+
+\begin{proof}
+Choose strictly upper-triangular matrices \(N_i\) in a basis compatible with
+the projector diagonal and set \(A_i=P_i+N_i\).  Every product \(A_w\) is upper
+triangular with diagonal equal to that of \(P_w\).  Hence
+\(\Tr A_w=\Tr P_w=\chi_m(w)\), while the \(A_i\) need not commute and the
+module need not split.  The second statement follows because identical even
+and odd traces cancel word by word.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.92\textwidth}{!}{\input{figures/character_visibility_layers}}
+  \caption{The wordwise selector fixes the active semisimple virtual class.
+  Dormant modules affect only the empty word, matched parity sectors cancel,
+  and radical extensions may change the literal matrix presentation while
+  remaining invisible to every cyclic trace.  The theorem classifies the
+  semisimplification and determinant, not simultaneous diagonalization.}
+  \label{fig:visibility-layers}
+\end{figure}
+
+\Cref{fig:visibility-layers} is the operative interpretation of the collapse.
+An implementation can look connected through its upper-triangular blocks,
+but no such connection changes the observable color character.  Conversely,
+the theorem does not label radical geometry meaningless for every purpose; it
+says only that cyclic traces and the determinant considered here cannot use it
+to select arithmetic atoms.

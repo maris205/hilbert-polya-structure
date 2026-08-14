@@ -1,0 +1,53 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  >=Latex,
+  state/.style={draw=formalblue,circle,very thick,fill=formalblue!8,
+    minimum size=7mm,inner sep=0pt},
+  box/.style={draw=charcoal,rounded corners=2pt,very thick,align=center,
+    inner sep=5pt,minimum height=15mm},
+  pass/.style={box,fill=passgreen!9,draw=passgreen},
+  fail/.style={box,fill=stopred!8,draw=stopred},
+  map/.style={->,very thick,draw=charcoal},
+  edge/.style={->,very thick,draw=formalblue}
+]
+% positive orientation
+\node[state] (p0) at (-5.0,1.4) {$0$};
+\node[state] (p1) at (-3.6,2.1) {$1$};
+\node[state] (p2) at (-3.6,0.7) {$2$};
+\draw[edge] (p0) -- (p1);
+\draw[edge] (p1) -- (p2);
+\draw[edge] (p2) -- (p0);
+\node[font=\sffamily\bfseries,text=passgreen] at (-4.25,2.75)
+  {$\Str(A_0A_1A_2)=+1$};
+
+% reverse orientation
+\node[state] (m0) at (-0.8,1.4) {$0$};
+\node[state] (m1) at (0.6,2.1) {$1$};
+\node[state] (m2) at (0.6,0.7) {$2$};
+\draw[edge,draw=stopred] (m0) -- (m2);
+\draw[edge,draw=stopred] (m2) -- (m1);
+\draw[edge,draw=stopred] (m1) -- (m0);
+\node[font=\sffamily\bfseries,text=stopred] at (-0.05,2.75)
+  {$\Str(A_2A_1A_0)=-1$};
+
+\node[box,fill=warningamber!10,draw=warningamber,minimum width=37mm]
+  (abel) at (3.15,1.4) {abelianize labels\\both give $x_0x_1x_2$\\sum $=0$};
+\draw[map] (p1.east) -- ++(0.55,0) |- (abel.west);
+\draw[map] (m1.east) -- ++(0.55,0) |- (abel.west);
+
+\node[pass,minimum width=48mm] (aggregate) at (-2.9,-1.4) {
+  aggregate commuting pencil\\
+  $\Str(\sum_i x_iA_i)^r=\sum_i x_i^r$\\
+  \textbf{passes}};
+\node[fail,minimum width=48mm] (wordwise) at (2.9,-1.4) {
+  necklace-resolved ledger\\
+  mixed oriented words are nonzero\\
+  \textbf{fails}};
+\draw[map] (abel.south) -- ++(0,-0.35) -| (aggregate.north);
+\draw[map] (abel.south) -- ++(0,-0.35) -| (wordwise.north);
+
+\node[draw=charcoal,dashed,very thick,rounded corners=2pt,fill=softgray,
+  align=center,minimum width=126mm,inner sep=4pt] at (0,-2.85) {
+  required order: audit every positive word first; impose commuting weights only afterward};
+\end{tikzpicture}
+

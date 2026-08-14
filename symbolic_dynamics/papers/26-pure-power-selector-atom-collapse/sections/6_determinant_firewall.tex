@@ -1,0 +1,111 @@
+\section{Full determinant and the aggregate firewall}
+\label{sec:determinant}
+
+Let
+\begin{equation}
+ T_\pm(x)=\sum_{i=1}^m x_i\rho_\pm(a_i),
+ \label{eq:weighted-color-pencil}
+\end{equation}
+where the \(x_i\) are independent commuting scalars.  Independence is used
+only after the ordered-word trace identities have been imposed.
+
+\begin{theorem}[full cyclic determinant collapse]
+\label{thm:determinant-collapse}
+Every realization satisfying the wordwise hypothesis of
+\Cref{thm:graded-rigidity} obeys, for \(r\ge1\),
+\begin{equation}
+ \Str T(x)^r=\sum_{i=1}^m x_i^r,
+ \label{eq:pure-power-traces}
+\end{equation}
+and
+\begin{equation}
+ \frac{\det(I-zT_+(x))}{\det(I-zT_-(x))}
+ =\prod_{i=1}^m(1-zx_i).
+ \label{eq:finite-color-product}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Expanding the \(r\)th power gives
+\[
+ \Str T(x)^r
+ =\sum_{i_1,\ldots,i_r}x_{i_1}\cdots x_{i_r}
+   \Str\rho(a_{i_1}\cdots a_{i_r}).
+\]
+Every mixed word has supertrace zero, and for each \(i\) the pure word
+\(a_i^r\) has supertrace one.  This proves
+\eqref{eq:pure-power-traces}.  The formal trace logarithm then gives
+\[
+ \begin{aligned}
+ \log\frac{\det(I-zT_+)}{\det(I-zT_-)}
+ &=-\sum_{r\ge1}\frac{z^r}{r}\Str T^r\\
+ &=-\sum_i\sum_{r\ge1}\frac{(zx_i)^r}{r}
+ =\sum_i\log(1-zx_i),
+ \end{aligned}
+\]
+which exponentiates to \eqref{eq:finite-color-product}.
+\end{proof}
+
+The left side of \eqref{eq:finite-color-product} is a graded determinant, or
+finite-dimensional Berezinian: a quotient of two ordinary determinants.  It
+is not the ordinary determinant of the ungraded block sum, which equals
+
+\[
+ \det(I-z(T_+\oplus T_-))=\det(I-zT_+)\det(I-zT_-).
+\]
+
+Radical extensions and common even/odd modules may remain in the operator
+presentation, but \eqref{eq:finite-color-product} shows that the full cyclic
+determinant has already forgotten them.
+
+\subsection{Why a correct scalar product is not enough}
+
+The converse direction fails after abelianization.  Let
+
+\[
+ R_0=E_{12},\qquad R_1=E_{23},\qquad R_2=E_{31}.
+\]
+
+Put the atom projectors plus \(R_i\) in even degree and \(R_i^T\) in odd
+degree.  Transposition makes the non-atom part of every power trace of the
+commuting pencil cancel.  Thus the aggregate identity
+
+\begin{equation}
+ \Str\left(\sum_{i=0}^2x_iA_i\right)^r=\sum_{i=0}^2x_i^r
+ \label{eq:aggregate-passes}
+\end{equation}
+
+holds in the exact fixtures.  Yet oriented words retain information erased by
+commuting variables:
+
+\begin{equation}
+ \Str(A_0A_1A_2)=1,
+ \qquad
+ \Str(A_2A_1A_0)=-1.
+ \label{eq:oriented-witness}
+\end{equation}
+
+Both words become the monomial \(x_0x_1x_2\), so their errors cancel in
+\eqref{eq:aggregate-passes}.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.90\textwidth}{!}{\input{figures/wordwise_aggregate_firewall}}
+  \caption{A commuting pencil combines oppositely oriented necklaces with
+  the same content.  The matrix-unit adversary has exact aggregate power
+  traces but nonzero mixed word supertraces.  Accordingly, SD-C28 audits each
+  positive word before introducing commuting branch weights.}
+  \label{fig:wordwise-firewall}
+\end{figure}
+
+The implication used in the paper is therefore one way:
+
+\[
+ \text{wordwise selector}
+ \Longrightarrow\text{all power traces}
+ \Longrightarrow\text{determinant product},
+\]
+
+where neither reverse arrow is licensed.  This is stronger than a numerical
+warning.  It is an exact algebraic counterexample to any protocol that
+certifies branch purity only from a commutative Euler product.

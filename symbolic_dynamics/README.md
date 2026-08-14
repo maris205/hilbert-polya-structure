@@ -791,13 +791,52 @@ ATOM_INVENTORY_EQUIVALENCE / ROUTE_A_REJECTED**。Paper 26 转而让 grading 作
 branch combinatorics 本身：若它仍需要一原子一颜色的记忆，就应证明 exact cyclic
 selector 的 semisimple collapse；Route B 继续锁定。
 
+### 论文 26：逐词 selector 精确成立，但有限可见部分必塌缩为颜色块
+
+Paper 26 冻结非空词上的循环系数：单色词取 (1)，mixed 词取 (0)，并要求在
+所有 repetitions 上逐词成立。reduced-support exterior Euler coefficient 与坐标
+projectors 都能精确实现该规则；困难不在是否存在 selector，而在它能否避免存储
+每个收到的颜色。
+
+答案是一个严格的 character-rigidity 定理。对 (m) 个颜色，determinant convention
+下的 Hankel rank 与 observable syntactic algebra 分别为
+
+$$
+m,qquad mathbb C^m;
+$$
+
+literal nonempty-language convention 则多一个 dormant mode，成为
+(m+1) 与 (mathbb C^{m+1})。任何有限 ordinary trace realization 的半单化都
+含每色恰一个一维 character；任何 even (mathbb Z/2)-graded realization 在
+Grothendieck 群中也有同一净颜色类。额外自由只能是 dormant 模、偶奇配对模与
+迹不可见 radical，因此完整 graded determinant 被强制为
+
+$$
+prod_{i=1}^{m}(1-zx_i).
+$$
+
+这里不声称原矩阵同时对角化：非交换上三角扩张可以让 presentation 看似连通，
+却不改变任何 cyclic trace 或 determinant。一个三颜色 exact adversary 还证明，
+只检查 commuting pencil 的 aggregate power traces 不够；所有聚合检查可同时通过，
+而两个反向 mixed words 仍分别留下 supertrace (+1) 与 (-1)。
+
+把 selector 与 Paper 25 的 holomorphic de Rham sector 张量后，确有
+(Re s>1) 上 honest degreewise trace-class graded ratio，但 countable color fiber
+酉等价于 supplied labels 的 disjoint atom sum。58/58 tests、51,734 条 exact rows
+与 27 个双跑 byte-identical artifacts 验证了 wordwise、Hankel、radical、graded、
+de Rham、marker 与任意库存 firewalls。阶段结论是
+**GO_EXACT_PURE_POWER_SELECTOR / GO_CHARACTER_RIGIDITY /
+STOP_FINITE_RECOGNIZABLE_ESCAPE / SEMISIMPLE_ATOM_BLOCK_COLLAPSE /
+PROVES_TOO_MUCH / ROUTE_A_REJECTED**。Paper 27 因而不再供应颜色投影，而从固定
+integer factorization/divisibility source 内生编译 atom idempotents；Route B 继续锁定。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [二十五篇论文](papers/)
+- [二十六篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
