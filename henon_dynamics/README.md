@@ -45,6 +45,7 @@ henon_galois_excess_five_block_obstruction - HCS-P57 complete - Exact reflection
 henon_physical_tail_galois_parity_obstruction - HCS-P58 complete - Period-eight/nine trace fields and opposite exact discrepancy signs separate physical stable-tail data from all-conjugate Galois excess.
 henon_reflection_half_entropy_law - HCS-P59 complete - Exact odd/even-axis Möbius formulas give reflection entropy `(1/2)log(phi)`, half the full H6 survivor entropy.
 henon_mixed_axis_dynatomic_entropy_gap - HCS-P60 complete - Odd mixed-axis closure polynomials have exact degree `2^((n+1)/2)` and formal primitive entropy `(1/2)log(2)`, exposing an effectivity/transversality gate above the physical half-entropy law.
+henon_survivor_reflection_transversality - HCS-P61 complete - Every primitive odd mixed-axis root in the certified H6 survivor is transverse/simple and counted by the reversible-necklace law, but these roots are exponentially sparse in formal degree.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
@@ -1379,3 +1380,36 @@ physical survivor.
 - [P60 paper](henon_mixed_axis_dynatomic_entropy_gap/paper/paper.pdf)
 - [P60 proof package](henon_mixed_axis_dynatomic_entropy_gap/PROOF_PACKAGE.md)
 - [P60 exact certificate](henon_mixed_axis_dynatomic_entropy_gap/results/c60_certificate.json)
+
+## HCS-P61 survivor reflection transversality
+
+P61 closes the physical half of P60's effectivity gate.  If `n=2m+1`, pull
+the second reflection axis back by `H^(m+1)` to obtain the involution
+
+\[
+K_m=H^{-(m+1)}RH^{m+1},\qquad H^n=JK_m.
+\]
+
+A tangency of the two fixed curves would give a common fixed tangent and
+hence eigenvalue `+1` for `DH^n`.  Uniform hyperbolicity of the certified H6
+survivor excludes that multiplier.  Thus every primitive odd physical
+mixed-axis root is transverse and simple.
+
+The symmetry-equivariant coding gives one root per primitive reversible
+necklace, so
+
+\[
+P_n=\sum_{d\mid n}\mu(n/d)F_{(d+3)/2},\qquad
+\frac{P_n}{D_n}=\Theta((\varphi/2)^{n/2}).
+\]
+
+Every physical root has local coefficient `+1` in the formal divisor, but
+physical incidence is exponentially sparse in its degree. Exact rational
+isolators through period 11 and an independent Cartesian enumeration match
+the counts `1,1,2,4,6,12`. The ambient critical resultant and all-period
+global effectivity remain open.
+
+- [P61 overview](henon_survivor_reflection_transversality/README.md)
+- [P61 paper](henon_survivor_reflection_transversality/paper/paper.pdf)
+- [P61 proof package](henon_survivor_reflection_transversality/PROOF_PACKAGE.md)
+- [P61 exact certificate](henon_survivor_reflection_transversality/results/c61_certificate.json)
