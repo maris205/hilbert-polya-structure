@@ -1,0 +1,138 @@
+\section{Machine certificate and fail-closed contract}
+\label{app:certificate}
+
+The identities below bind the exact machine input.  Paper and full-project
+identities are external, non-self-referential records.
+
+\subsection{Envelope and upstream locks}
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}l>{\ttfamily\raggedright\arraybackslash}Xr@{}}
+\toprule
+object & \normalfont\sha & bytes\\
+\midrule
+certificate
+& 3078baf167d2344982d9f93811f1fd59a8258c8178ecce4decbd2b054b16092f
+& 27326\\
+independent check report
+& fb0afb77f130fb2d0a792af8d949e5c1a8e1b7864525dd62f1d1a41d99a79bcf
+& 2176\\
+schema file
+& 81942b5f8012071cbc1bd24f8a85e04a2e7fea10b3f5cb8e8ca3014c6e822f72
+& 1040\\
+scoped manifest
+& 864c05b18e0bdcafbc5b5e3206840a1b25afa355b9737ebcc9d1806e33fcec5d
+& 4855\\
+\bottomrule
+\end{tabularx}
+\caption{Authoritative live envelope.  The manifest is self-excluding.}
+\label{tab:envelope-hashes}
+\end{table}
+
+The canonical payload digest is
+\[
+\code{72e498b544599dbb8c7c56b2fd999ed8be80bdb0abd19393b5e47ddf60ae4574},
+\]
+the canonical schema digest is
+\[
+\code{4c4675b71556867a5699574b5f3f54aa40551c76a14e22ac21c62370add61cc4},
+\]
+and the independent replay-summary digest is
+\[
+\code{17b383c762b20f45767c4daffc704cbfd2f6e9a54f97886de641d11018b3ac68}.
+\]
+The envelope is \code{PREFREEZE\_CODE\_RESULTS\_PASS}; this machine-layer
+status is intentionally distinct from the paper and full-project identities.
+
+The upstream import uses the review-safe logical objects \code{I56},
+\code{P56}, and \code{R56} from the companion anonymous-supplement package
+\code{henon\_mu3\_yukawa\_line\_field}.  Their exact object names are rebound
+inside the machine certificate rather than printed as public-repository
+locators here.  The import replays the upstream certificate
+\[
+\code{26739ce5aedb4a3467645f9c1b2036d4d3eec9ce4d0dbce23d67ea7b67e5fbc4}.
+\]
+It also binds the upstream payload, check report, manifest, and Route, while
+preserving \(E\ne K\).
+
+\subsection{Semantic evidence artifacts}
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}
+ >{\ttfamily\raggedright\arraybackslash}X
+ >{\ttfamily\raggedright\arraybackslash}X@{}}
+\toprule
+artifact & \normalfont compressed \sha\ and bytes
+& \normalfont decompressed \sha\ and bytes\\
+\midrule
+\nolinkurl{a12_crt_transcript.json.gz}
+& \shortstack[l]{5171ed975096c1cffed221e7eeec7a87\\d3afd2970ccd91c431b5283587f7a22f\\\normalfont 18797009 bytes}
+& \shortstack[l]{1189d4b015b2024fede11fbc4361575e\\ccbddeed9c3ff6043cd34d16ec311fb2\\\normalfont 40146042 bytes}\\
+\nolinkurl{a12_table.json.gz}
+& \shortstack[l]{1034828fcfaad5262ea0388762947e78b\\f51f3986be642643dfdf5f66711e3f6\\\normalfont 15817606 bytes}
+& \shortstack[l]{9dd43ebbdd61873dae3f6437c160a0dfb\\c389934a62a38057b915955c117c3cc\\\normalfont 33700083 bytes}\\
+\nolinkurl{delta_crt.json.gz}
+& \shortstack[l]{4deead9914f31b0012afd91088339793\\330874a3b5156ceaeb1371fcb495f685\\\normalfont 97372 bytes}
+& \shortstack[l]{61ead9febb5ee8295c75980b81ba1c73\\c2d9cdaebf9e87dd0d0e76da899999a9\\\normalfont 288384 bytes}\\
+\nolinkurl{incidence_char0_witness.json.gz}
+& \shortstack[l]{4853641b143d3d7d0c2086fbee13f9d1\\f191bac960a989e8e85aede117cf8060\\\normalfont 1697390 bytes}
+& \shortstack[l]{2c42ac21f43e54870b030c71facff31b\\0b0b5a05da544b7455f960e47448a392\\\normalfont 4297007 bytes}\\
+\nolinkurl{theta_crt.json.gz}
+& \shortstack[l]{91181a525e0acb17e73d2e96fd4e7d5d\\7a25913784ef8ad9d3be59c430a4fadd\\\normalfont 50282 bytes}
+& \shortstack[l]{5760dd3f4a1e07834f974e340f6cd488\\d9b793dab8efa0864505903cf9e1bcb3\\\normalfont 132705 bytes}\\
+\bottomrule
+\end{tabularx}
+\caption{The five large evidence inputs.  Each has gzip mtime zero and must
+survive deterministic decompression and semantic replay.}
+\label{tab:evidence-hashes}
+\end{table}
+
+\subsection{Gate and executable separation}
+
+The independent check report binds the gate payloads:
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}c>{\ttfamily}l@{}}
+G0&7b4b72505f6480ae085a5b8e27749c28c9fab87e26c883b1d74da33f5baa7fc8\\
+G1&a25b718a28f5260b7cbfa1c5ee954f10de7f8b586b0cd573ac33038b49d90d58\\
+G2&a462027bf02dac1f1d54a373130d11e262db76247821feffb7143accb88af3e9\\
+G3&323f89c767f44a705009a05b0eaecc2804a1201ff46ab52949eabb1582f9fea1\\
+G4&f07c2ed52daddb00428e016bc17c1e299df218553b58aca725f0254f171f328c\\
+G5&fce3d88a04abdf2b6c3e6ebd76a7776d4e14daaba048ffa74b76276d4f367e32\\
+G6&3f5d2802efb69942dd79e74e9b3c5aae47091b04223b90dda08183880637245b\\
+G7&ea63a74a6db2024f0cc937dc90675986f122659e2decf629ad2020dcdcb6d798\\
+\end{tabular}
+\end{center}
+
+The producer, independent checker, pipeline, atomic promoter, manifest
+builder, runner, and test-suite digests are respectively
+\[
+\begin{gathered}
+\code{30b6aae77ceaa33fb2adf2d0ec69477afe2a8b11c789e4dce857873f46e52941},\\
+\code{a44ad192b7840bba4b4a74899de0d369e79f3a8d41853a84c854ed34739e0064},\\
+\code{00dfc9e376525c16bb0925f1fc7af2a0b7adef3945e4f3020fbba0fd900faf0e},\\
+\code{c2057c74e4973576a3e67b6ef27a1da261ff7263480e91342c91da04d1a32558},\\
+\code{822e291876ca6df1822fbb2a8930fd8fd842d7bf4e58a2c95307f7e0036a4a8b},\\
+\code{8bcb6f206c991c827b8af63bedfd63b7991d9f376cfdb969ff2333e88fbfc6f4},\\
+\code{e883b79c1e104054526155ccc5c459b430779a8a16779cec4d4ec082d91eb591}.
+\end{gathered}
+\]
+The manifest binds \(18\) code files and \(10\) non-manifest results; the
+live inventory adds the manifest.
+
+\subsection{Fail-closed behavior}
+
+The suite mutates every classified scalar leaf while rebinding exposed
+hashes, and independently rejects semantic changes.  It also tests malformed
+parsing, optimized execution, import-path injection, deterministic gzip,
+special links/files, stale output, lock replacement, and hostile shell
+startup.  Failure injection into the fixed nine-file refresh must restore
+hash, size, mode, and nanosecond mtime.  The nonmutating default runner
+compares byte/mode/mtime/inode snapshots from an external directory and
+retains uncertain stages fail-closed.  These checks protect evidence
+identity; they do not prove the source classification, Hilbert--90 descent,
+divisor exhaustion, or cocycle comparison.

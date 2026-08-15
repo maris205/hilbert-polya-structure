@@ -1,0 +1,170 @@
+\section{Prior results, the frozen object, and the proof contract}
+\label{sec:setup-sources}
+
+\subsection{The fixed surface and its line fields}
+
+In homogeneous coordinates \(u_0,u_1,u_2,u_3\), let
+\begin{align}
+F={}&75081586157u_0^3-28576620789u_0^2u_1
+-122000922135u_0^2u_2-5364921951u_0^2u_3\nonumber\\
+&+164150208636u_0u_1^2-415458334296u_0u_1u_2
++151070718312u_0u_1u_3\nonumber\\
+&+1158143874300u_0u_2^2+114691988016u_0u_2u_3
++113572676646u_0u_3^2\nonumber\\
+&+6898957820u_1^3+1132596902196u_1^2u_2
+-30413540316u_1^2u_3\nonumber\\
+&-2054867641020u_1u_2^2+151980984216u_1u_2u_3
++36794420832u_1u_3^2\nonumber\\
+&+2646295985484u_2^3+560186573940u_2^2u_3
++706181383584u_2u_3^2+1884468968u_3^3,
+\label{eq:cubic}
+\end{align}
+and set \(Y=V(F)\subset\PP^3_{\Q}\).  Its primitive, positive-leading
+normalization fixes the common scalar.  The upstream exact theorem proves
+that \(Y\) is smooth and geometrically irreducible and that its Fano scheme
+of lines is connected of degree \(27\).  Write \(E/\Q\) for that non-Galois
+residue field and \(K/\Q\) for its normal closure.  The frozen arithmetic
+input is
+\begin{equation}
+ [E:\Q]=27,\qquad E\ne K,\qquad
+ \Gal(K/\Q)\cong\WE,\qquad |\WE|=51840.
+\label{eq:frozen-line-field}
+\end{equation}
+Thus \(K\) is the common normal field of the lines; \(E\) is not used as a
+configuration field.
+
+Let
+\[
+ \Lambda=\Picbar
+\]
+be the rank-seven geometric Picard lattice.  In a marked blow-up model we use
+the basis \(h,e_1,\ldots,e_6\), with intersection form
+\(\operatorname{diag}(1,-1,\ldots,-1)\), and hyperplane class
+\begin{equation}
+ H_Y=3h-e_\Sigma,\qquad e_\Sigma=e_1+\cdots+e_6.
+\label{eq:picard-basis}
+\end{equation}
+The \(27\) line classes are \(e_i\), \(h-e_i-e_j\), and
+\(2h-\sum_{j\ne i}e_j\).  Their intersection graph is the exact
+Schl\"afli configuration used throughout.  The anonymous supplement names the
+surface package \code{henon\_mu3\_rational\_yukawa\_surface} and the companion
+line-field package \code{henon\_mu3\_yukawa\_line\_field}; no external
+bibliographic claim is attached to those internal package names.
+
+\subsection{Double-sixes and fixed fields}
+
+A \emph{sixer} is a set of six pairwise skew lines.  A double-six is an
+unordered pair \(D=\{\cE,\cG\}\) of opposite sixers; the same symbols
+\(\cE\) and \(\cG\) denote the corresponding effective sums of six lines.
+Fix one \(D\), and choose the marking in \cref{eq:picard-basis} so that
+\begin{equation}
+ [\cE]=e_\Sigma,\qquad [\cG]=12h-5e_\Sigma.
+\label{eq:marked-double-six}
+\end{equation}
+Define
+\begin{align}
+ U_1&=\Stab_{\WE}(D)\cong S_6\times C_2,\\
+ U_1^+&=\Stab_{\WE}(\cE)\cap\Stab_{\WE}(\cG)\cong S_6,\\
+ \FD&=K^{U_1},\qquad \FDp=K^{U_1^+}.
+\label{eq:basic-fields}
+\end{align}
+Thus \(U_1^+\) has index two in \(U_1\); the nontrivial element of the
+quotient exchanges the two sixers.  The other subgroup needed for the
+universal argument is
+\[
+ U_3\cong(S_3\times S_3)\rtimes C_2,\qquad
+ |U_3|=72,\qquad [\WE:U_3]=720.
+\]
+It stabilizes a classical triple of azygetic double-sixes.  The selected
+machine model of \(U_1\) will not be used as a substitute for the theorem
+classifying every subgroup with nonzero 2-primary cohomology.  Whenever an
+\(S_6\)-action appears below, it means this embedded subgroup \(U_1^+\), not
+an unspecified abstract copy.
+
+\subsection{Prior work by mathematical role}
+
+\paragraph{Picard cohomology and the 2-primary alternatives.}
+Swinnerton-Dyer identifies the algebraic Brauer quotient over an algebraic
+number field with Picard cohomology and proves that its possible nonzero
+2-primary parts on a cubic surface are \(\Z/2\) and \((\Z/2)^2\)
+\cite{SwinnertonDyer1993}.  Elsenhans and Jahnel place the corresponding
+Galois images inside \(U_1\) and \(U_3\), respectively, and prove the
+restriction and class-map statements \cite{ElsenhansJahnel2010Brauer}.
+These source theorems, not the selected subgroup computation, supply the
+universal quantifier in \cref{thm:degree}.
+
+\paragraph{Orientation and cyclic algebras.}
+The index-two orientation field and the cyclic algebra obtained from a norm
+divisor are prior mechanisms \cite{ElsenhansJahnel2010Brauer}.  Explicit
+descent, including a full-\(U_1\) example with line orbits \([12,15]\), also
+predates this instance \cite{ElsenhansJahnel2010DoubleSix}.  What is computed
+here is the orientation square and canonical norm-divisor quartic for
+\cref{eq:cubic}.
+
+\paragraph{Resolvers and moduli.}
+A degree-\(36\) double-six resolver is already explicit
+\cite{ElsenhansJahnel2012OrderThree}, and the associated moduli covers occur
+in resolvent-degree theory \cite{FarbWolfson2019}.  We claim no generic
+resolver construction; the resolver here selects an exact subfield of \(K\).
+
+\paragraph{The number-field bridge.}
+The subgroup statements concern only finite subgroups of \(\WE\), the
+integral lattice, and line configurations, while Swinnerton-Dyer works over
+algebraic number fields.  We construct the norm divisor directly over
+\(\FD\) and use the number-field Hochschild--Serre sequence, for which Viray
+is a modern supporting locator \cite{Viray2023}.
+
+\subsection{Source, machine, and written-bridge contract}
+
+Source theorems control every possible image, exact arithmetic verifies this
+instance, and written algebraic geometry connects them to fields, divisors,
+and Brauer classes.  Their division of labor is recorded in
+\cref{tab:dependency-contract}.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.17\textwidth}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}X@{}}
+\toprule
+Claim & Source theorem & Exact instance input & Written bridge\\
+\midrule
+Universal degree
+& Complete \(\Z/2\)--\(U_1\), \((\Z/2)^2\)--\(U_3\) alternatives
+& Full \(\WE\) line field
+& \(K^{H_L}=K\cap L\), index factors, tower law\\
+Equality fields
+& Same classification
+& \(U_1\) index, core, normalizer, and 36 configurations
+& Equality of indices and Galois correspondence\\
+Brauer jump
+& Number-field Picard/Brauer identification
+& Integral \(H^1(\WE,\Lambda)\) and \(H^1(U_1,\Lambda)\)
+& Inflation and Hochschild--Serre\\
+Exact fields
+& General resolver/descent context only
+& Resolver coefficients, irreducibility, stabilizers
+& Orbit--stabilizer and fixed fields\\
+Quartic
+& None
+& Gauge, \(60\times31\) matrix, nonzero pivot, restrictions
+& Hilbert--90 descent and ambient lifting\\
+Quaternion
+& General double-six class mechanism
+& Orientation, line distinctness, Picard action
+& Degree exhaustion, norm-divisor criterion, cocycle comparison\\
+\bottomrule
+\end{tabularx}
+\caption{Every theorem claim is split into its source, exact-instance, and
+written components.  No column silently certifies another.}
+\label{tab:dependency-contract}
+\end{table}
+
+The exact tuple used below has the intentionally layer-specific machine status
+\begin{center}
+\nolinkurl{PREFREEZE_CODE_RESULTS_PASS}
+\end{center}
+Paper and full-project identities are separate external records, so the
+machine envelope is never cited as its own release provenance.
