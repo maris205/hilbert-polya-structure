@@ -1520,3 +1520,26 @@ remains exploratory and Route B is not authorized.
 - [P64 paper](henon_reflection_boundary_mahler_pressure/paper/paper.pdf)
 - [P64 proof package](henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md)
 - [P64 exact certificate](henon_reflection_boundary_mahler_pressure/results/c64_certificate.json)
+
+## HCS-P65 minimal symmetry-defect pressure
+
+P65 replaces an unavailable global cylinder constant by an exact symbolic
+calibration. Every finite observable supported wholly on one side of the
+reflection axis has the same expectation under P64's boundary and invariant
+laws. The first centered cross-axis observable
+`chi=1{s[-1]=s[1]}` has expectations `1` and `1/2`, giving
+
+\[
+P_J(t)=\frac12\log2-t,
+\qquad
+P_{\rm orb}(t)=\frac12\log2-\frac t2.
+\]
+
+The two-parameter Mahler/symmetry pressure planes therefore have an exact
+transverse derivative gap `-1/2`, even though the unperturbed Mahler slope
+gap remains open. Route A remains exploratory; Route B is not authorized.
+
+- [P65 overview](henon_minimal_symmetry_defect_pressure/README.md)
+- [P65 paper](henon_minimal_symmetry_defect_pressure/paper/paper.pdf)
+- [P65 proof package](henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md)
+- [P65 certificate](henon_minimal_symmetry_defect_pressure/results/c65_certificate.json)

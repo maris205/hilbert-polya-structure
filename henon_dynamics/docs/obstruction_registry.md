@@ -434,3 +434,9 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O106 | Identification of the marked primitive reflection-root ensemble with the invariant maximal-entropy measure | proved reflection-boundary sampling obstruction | Equivariant coding gives `s[-k]=s[k]` in the marked-axis limit, so `P(s[-1]=s[1])=1`; fair two-sided Bernoulli gives `1/2`. The boundary limit is not shift invariant, although cyclic orbit averaging does converge to maximal entropy. | Stops only the naive marked-root equidistribution compiler. It preserves a proved nonconstant packet-Mahler pressure with boundary slope and an orbit-averaged pressure with maximal-entropy slope. It does not prove the two numerical slopes differ or control individual Galois-factor heights. | ../henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md |
+
+## HCS-P65 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O107 | Finite one-sided symbolic observables as separators of marked reflection-boundary and maximal-entropy sampling | proved one-sided blindness obstruction with minimal cross-axis repair | The reflected boundary law and fair two-sided Bernoulli law have identical restrictions to every finite nonnegative or nonpositive coordinate algebra. The radius-one cross-axis observable `1{s[-1]=s[1]}` is the first scoped separator and gives an exact pressure-gradient gap `-1/2`. | Scoped to the frozen sign coding and one-sided support class; arbitrary recodings are not claimed. The repair is symbolic and extensive but supplies no Mahler-slope inequality, rational-prime semantics, determinant, or operator. | ../henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md |

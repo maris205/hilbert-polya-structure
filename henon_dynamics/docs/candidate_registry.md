@@ -2223,3 +2223,18 @@ packet law but not a prime trace or individual factor-height pressure. Route
 B is not authorized. The next candidate is a certified-cylinder theorem
 separating the marked boundary slope from the orbit-averaged maximal-entropy
 slope.
+
+## HCS-P65 minimal symmetry-defect pressure (2026-08-15)
+
+Candidate **HCS-P65** supplies an exact calibration after P64; see the
+[HCS-P65 project](../henon_minimal_symmetry_defect_pressure/). Every finite
+one-sided observable is blind to the marked-boundary/maximal-entropy
+distinction. The centered radius-one observable
+`chi=1{s[-1]=s[1]}` has expectations `1` and `1/2`, so its extensive marked
+and orbit pressures are `(1/2)log2-t` and `(1/2)log2-t/2`. Coupling it to the
+Mahler variable gives a certified transverse gradient gap of `-1/2`.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized. The
+next structural gate is cohomology invariance: because the boundary measure
+is not invariant, a symbolic coboundary may alter marked pressure while
+leaving orbit pressure unchanged.
