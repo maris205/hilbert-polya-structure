@@ -1746,3 +1746,4 @@ not authorized.
 - [P72 paper](henon_relative_lind_essential_ladder/paper/paper.pdf)
 - [P72 proof package](henon_relative_lind_essential_ladder/PROOF_PACKAGE.md)
 - [P72 certificate](henon_relative_lind_essential_ladder/results/c72_certificate.json)
+- [P68--P72 batch review](BATCH_REVIEW_P68_P72.md)
