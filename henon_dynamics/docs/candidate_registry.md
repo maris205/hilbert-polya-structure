@@ -2304,3 +2304,28 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
 periodwise aggregate mean. Route B is not authorized. The next candidate is
 the exact cumulant gap between this mean-field factor and the orbit-resolved
 exponential moment.
+
+## HCS-P69 orbit-resolved reflection cumulant pressure (2026-08-16)
+
+Candidate **HCS-P69** resolves P68's first missing invariant; see the
+[HCS-P69 project](../henon_orbit_resolved_reflection_cumulant_pressure/).
+For \(\chi=\mathbf1\{s_{-1}=s_1\}\), odd cyclic decimation and reflection
+give the exact packet polynomial
+
+\[
+F_{2m+1}(q)=2q(1+q^2)^m
+\]
+
+and the primitive dilation-Möbius law
+\(E_n(q)=\sum_{k\mid n}\mu(k)F_{n/k}(q^k)\). Therefore
+
+\[
+P_{\rm orb}(s)=\frac12\log(1+e^{-2s}),\qquad
+P_{\rm orb}(s)-P_{\rm mf}(s)=\frac12\log\cosh s.
+\]
+
+The gap is strictly positive away from zero and its second derivative at zero
+is \(1/2\). The Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Route B is not authorized. The exact \(E_n\) are the
+input for the next orbit-resolved Euler product.

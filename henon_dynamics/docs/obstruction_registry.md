@@ -458,3 +458,9 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O110 | Meromorphic/Fredholm promotion of the unrenormalized canonical packet-mean Euler product at its entropy boundary | proved exponential-essential-boundary obstruction | Möbius inversion gives `sum_(n odd)D_n z^n=sum_(k odd)mu(k)2z^k/(1-2z^(2k))`. Repeated factors are analytic through the positive radius `R=2^(-1/2)`, so `log Z_0=1/[sqrt(2)(1-sqrt(2)z)]+G` with `G` analytic. Exponentiation produces an essential singularity at `R`, not a meromorphic pole. | Stops only the naive boundary promotion of this unrenormalized aggregate-mean product. It does not exclude a relative/counterterm determinant, an orbit-resolved exponential-moment product, the standard full `D_infinity` Lind zeta, or a different transfer operator. The open-disk Euler germ and exact repetition ledger survive. | ../henon_canonical_reflection_packet_euler_product/PROOF_PACKAGE.md |
+
+## HCS-P69 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O111 | Exponential of the periodwise canonical mean as a substitute for the orbit-resolved exponential moment | proved all-parameter cumulant obstruction | For the natural minimal defect `chi=1{s[-1]=s[1]}`, the primitive orbit-resolved pressure is `(1/2)log(1+exp(-2s))`, while the aggregate-mean pressure is `(1/2)log2-s/2`. Their difference is exactly `(1/2)log cosh(s)`, positive for every real `s!=0`; the asymptotic variance rate is `1/2`. | Stops the mean-field replacement for this frozen natural observable, at every nonzero real parameter. It does not invalidate P68's own aggregate product or prove the same gap for every potential. The exact primitive moment polynomials and orbit-resolved pressure survive, but prime semantics and an operator remain open. | ../henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md |

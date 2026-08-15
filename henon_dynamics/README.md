@@ -1640,3 +1640,33 @@ within-period cumulant information erased by aggregate averaging.
 - [P68 paper](henon_canonical_reflection_packet_euler_product/paper/paper.pdf)
 - [P68 proof package](henon_canonical_reflection_packet_euler_product/PROOF_PACKAGE.md)
 - [P68 certificate](henon_canonical_reflection_packet_euler_product/results/c68_certificate.json)
+
+## HCS-P69 orbit-resolved reflection cumulant pressure
+
+P69 computes exactly what P68's periodwise mean suppresses. For the minimal
+cross-axis observable \(\chi=\mathbf1\{s_{-1}=s_1\}\), odd decimation turns
+the orbit sum into nearest-neighbor equality energy on a reflected binary
+chain. Thus
+
+\[
+F_{2m+1}(q)=2q(1+q^2)^m,\qquad
+E_n(q)=\sum_{k\mid n}\mu(k)F_{n/k}(q^k),
+\]
+
+where \(E_n\) is the primitive weighted polynomial. The orbit-resolved
+pressure is
+
+\[
+P_{\rm orb}(s)=\frac12\log(1+e^{-2s}),
+\]
+
+and its exact gap from P68's affine mean-field pressure is
+\(\frac12\log\cosh s\), strictly positive for every \(s\ne0\). This is a
+global cumulant theorem, not only a variance diagnostic. Route A remains
+exploratory and Route B is not authorized. P70 will feed the exact primitive
+polynomials into the full orbit-resolved Euler product.
+
+- [P69 overview](henon_orbit_resolved_reflection_cumulant_pressure/README.md)
+- [P69 paper](henon_orbit_resolved_reflection_cumulant_pressure/paper/paper.pdf)
+- [P69 proof package](henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md)
+- [P69 certificate](henon_orbit_resolved_reflection_cumulant_pressure/results/c69_certificate.json)
