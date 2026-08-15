@@ -1457,10 +1457,95 @@ No inert or global fractional root, automorphy, continuation, functional
 equation, RH statement, or self-adjoint generator follows.  The tuple is
 **(A1_WEAK, A2_SPLIT_LOCAL_ALGEBRA_ONLY,
 A3_PARTIAL_ARITHMETIC_STRUCTURE, A4_FORMAL_SYMMETRY_ONLY)** with overall
-**ROUTE_A_EXPLORATORY**.  C55 is locked to the four-dimensional rational
-equivariant deformation and projective Yukawa surface of the C53 rank-ten
-core, followed by an exact polarized-VHS comparison gate against honest
+**ROUTE_A_EXPLORATORY**.  This handed off to C55, which constructs the
+four-dimensional rational equivariant deformation and projective Yukawa
+surface of the C53 rank-ten core, followed by an exact necessary
+polarized-VHS comparison gate against honest
 \((h^{1,1},h^{2,1})=(1,4)\) Calabi--Yau families.
+
+## HCS-C55 rational Yukawa surface and relative CY3-type VHS (2026-08-15)
+
+Candidate **HCS-C55** realizes the variational gate opened by C54; see the
+[C55 project](../henon_mu3_rational_yukawa_surface/).
+For the C53 rational model of the fourth-moment cubic--quadric fivefold, it
+constructs a pointed smooth locally closed four-dimensional
+\(\mathbf Q\)-germ as a transverse slice in the fixed Hilbert germ.  Its
+Kodaira--Spencer map is
+
+\[
+T_{B_{\rm core},0}\simeq H^1(T_X)^{\mathscr G}.
+\]
+
+The whole fixed Hilbert locus is not asserted to have dimension four, and
+the construction is not a literal linear perturbation of the cubic
+equation.
+
+The intrinsic relative Reynolds norm graph for the nonconstant rank-\(24\)
+finite etale group scheme is self-transpose and idempotent.  Its image on
+\(R^5f_*\mathbf Q(1)\) is a polarizable rank-\(10\) VHS with Hodge numbers
+\((1,4,4,1)\), and its period map is locally immersive.  This is a CY3-type
+variation only: no relative Chow--Kunneth projector or honest Calabi--Yau
+threefold is constructed.
+
+In the frozen rational tangent basis, exact Cayley multiplication gives a
+primitive integral \(20\)-term projective Yukawa cubic.  Its gradient
+quotient has Hilbert series \((1+t)^4\) and length \(16\), so its zero locus
+in \(\mathbf P^3_{\mathbf Q}\) is a smooth geometrically irreducible cubic
+surface.  Rational here means defined over \(\mathbf Q\), not rational as a
+variety over \(\mathbf Q\).
+
+Projective \(\operatorname{GL}_4(\mathbf C)\)-equivalence of Yukawa cubics is
+proved to be necessary for an honest four-modulus polarized-VHS realization,
+but not sufficient.  The complete four-variable tensor needed for the named
+Braun--Candelas--Davies comparators is unavailable, so the exact status is
+**NOT-COMPARABLE-WITH-CURRENT-DATA**.  No honest CY3, motive, automorphy,
+continuation, functional equation, RH statement, or self-adjoint generator
+follows.  The tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.
+
+C56 exactly rebounds that released coefficient object and closes the line-field
+gate below.
+
+## HCS-C56 twenty-seven-line field and maximal \(E_6\) arithmetic (2026-08-15)
+
+Candidate **HCS-C56** completes the five-paper batch; see the
+[C56 project](../henon_mu3_yukawa_line_field/).  For the frozen C55 cubic
+surface \(Y/\mathbf Q\), it proves
+
+\[
+ F_1(Y)\simeq\operatorname{Spec}E,\qquad [E:\mathbf Q]=27,
+\]
+
+with \(E\) non-Galois.  The normal closure \(K\) is distinct from \(E\) and
+satisfies
+
+\[
+ \operatorname{Gal}(K/\mathbf Q)\cong W(E_6),\qquad [K:\mathbf Q]=51840.
+\]
+
+The main Grassmann quotient has Hilbert counts \((1,4,10,12,0)\), all five
+complementary charts are empty, and the squarefree factor patterns at
+\(7,19,29,37\) have subset-sum intersection \(\{0,27\}\).  Exact lattice
+enumeration gives the index-two subgroup of size \(25920\) and places all
+\(5184\) elements of type \((2,5,5,5,10)\) outside it; ordinary \(S_{27}\)
+permutation sign is deliberately not used as Coxeter parity.
+
+The geometric Picard rank is seven.  The machine computes invariant Picard
+rank one, and the written Hochschild--Serre torsion/rank bridge gives
+\(\rho(Y/\mathbf Q)=1\).  Hence \(Y\) has no \(\mathbf Q\)-line; more
+generally, if a finite extension \(L/\mathbf Q\) defines a line, then
+\(27\mid[L:\mathbf Q]\).  This does not imply that \(Y(\mathbf Q)\) is empty,
+settle rationality, or produce a Hasse/Brauer--Manin, motive, VHS,
+Calabi--Yau, automorphy, continuation, functional-equation, RH, or
+Hilbert--Polya theorem.
+
+The exact arithmetic result improves the partial A3 evidence while leaving
+A1, A2, and A4 inherited.  The stable route tuple is
+**(A1_WEAK, A2_ANALYTIC_DETERMINANT,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_NATURAL_QUANTIZATION)** with overall
+**ROUTE_A_EXPLORATORY**.
 
 ## Pressure-lane alias policy
 
@@ -2082,3 +2167,115 @@ horseshoe, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  Route B is not authorized.  The next theorem is a
 uniform height/Galois-excess pressure for these effective totally real
 primitive divisors; no rational-prime trace follows from total reality.
+
+## HCS-P63 primitive-coordinate height and flat pressure (2026-08-15)
+
+Candidate **HCS-P63** executes the first height-pressure test named by P62;
+see the
+[HCS-P63 project](../henon_primitive_coordinate_height_flat_pressure/).
+P46 integrality, P62 real-conjugate exhaustion, and the cyclic maximum
+principle give the sharp uniform root bound
+
+\[
+|x|\le1+\sqrt7,
+\qquad h(x)\le\log(1+\sqrt7).
+\]
+
+Consequently the ordinary primitive-coordinate partition satisfies
+
+\[
+e^{-|s|C}D_n\le Z_n(s)\le e^{|s|C}D_n
+\]
+
+and has pressure `(1/2)log(2)` for every fixed real `s`.  This remains true
+under every fixed nonzero algebraic rescaling.  The candidate therefore
+produces a proved normalization obstruction rather than a new arithmetic
+pressure.  Exact finite factorization through period 11 and an independent
+root-bound check through period 9 are certificate layers only.
+
+The Route-A tuple is **(A1_PASS_ANALYTIC,
+A2_ANALYTIC_DETERMINANT inherited, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Route B is not
+authorized.  The next candidate is the extensive packet Mahler average and
+the equidistribution of the complete primitive reflection-root ensemble.
+
+## HCS-P64 reflection-boundary Mahler packet pressure (2026-08-15)
+
+Candidate **HCS-P64** resolves P63's packet-level extensive-height question;
+see the
+[HCS-P64 project](../henon_reflection_boundary_mahler_pressure/). The
+full-shift coding is made equivariant with the Hénon reversor, so odd
+mixed-axis roots are exactly primitive palindromic half-words. Primitive
+subtraction has total-variation cost at most `tau(n)2^(-n/3)`.
+
+The marked root measures converge to the reflected one-sided Bernoulli law
+`s[-k]=s[k]`, which is not shift invariant. Cyclically averaging the same
+orbits converges to the invariant fair Bernoulli measure. Consequently the
+packet Mahler average converges to a positive constant `kappa_J` and
+
+\[
+\lim \frac1n\log\bigl(D_n e^{-sna_n}\bigr)
+=\frac12\log2-s\kappa_J.
+\]
+
+The Route-A status is **ROUTE_A_EXPLORATORY**: this is a proved extensive
+packet law but not a prime trace or individual factor-height pressure. Route
+B is not authorized. The next candidate is a certified-cylinder theorem
+separating the marked boundary slope from the orbit-averaged maximal-entropy
+slope.
+
+## HCS-P65 minimal symmetry-defect pressure (2026-08-15)
+
+Candidate **HCS-P65** supplies an exact calibration after P64; see the
+[HCS-P65 project](../henon_minimal_symmetry_defect_pressure/). Every finite
+one-sided observable is blind to the marked-boundary/maximal-entropy
+distinction. The centered radius-one observable
+`chi=1{s[-1]=s[1]}` has expectations `1` and `1/2`, so its extensive marked
+and orbit pressures are `(1/2)log2-t` and `(1/2)log2-t/2`. Coupling it to the
+Mahler variable gives a certified transverse gradient gap of `-1/2`.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized. The
+next structural gate is cohomology invariance: because the boundary measure
+is not invariant, a symbolic coboundary may alter marked pressure while
+leaving orbit pressure unchanged.
+
+## HCS-P66 boundary cohomology anomaly (2026-08-15)
+
+Candidate **HCS-P66** resolves P65's cohomology-invariance test; see the
+[HCS-P66 project](../henon_reflection_boundary_cohomology_anomaly/). For the
+marked reflection-boundary law,
+
+\[
+A_J(u)=\int(u-u\circ\sigma)\,d\eta_J
+\]
+
+has norm exactly two because `eta_J` and its one-step translate are mutually
+singular. Explicit radius-`r` cylinders approach this norm with value
+`2(1-2^(-r))`. Thus marked pressure depends on the chosen cohomology
+representative. Every complete periodic-orbit average, however, annihilates
+every coboundary exactly by telescoping.
+
+The Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not
+authorized. The next candidate is a uniqueness theorem for normalized
+linear samplers on finite cycles that annihilate all coboundaries.
+
+## HCS-P67 unique gauge-invariant orbit sampler (2026-08-15)
+
+Candidate **HCS-P67** closes P66's normalization question; see the
+[HCS-P67 project](../henon_unique_gauge_invariant_orbit_sampler/). On every
+primitive `n`-cycle, a normalized real linear sampler annihilates every
+coboundary if and only if all weights equal `1/n`. No positivity is assumed,
+and a one-site transfer function detects every nonuniform choice.
+
+P64's orbit-averaged equidistribution then upgrades this finite theorem to a
+universal pressure for every continuous potential:
+
+\[
+\mathcal P_f(s)=\frac12\log2-s\int f\,d\mu_B.
+\]
+
+It is exactly gauge invariant and uniformly Lipschitz in the potential. The
+Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not authorized:
+the functional has no source-native determinant, rational-prime labels, or
+von Mangoldt amplitudes. That determinant/trace interface is the next major
+candidate rather than another sampling normalization.

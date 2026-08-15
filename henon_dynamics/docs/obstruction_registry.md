@@ -404,3 +404,51 @@ source-native prime-power trace---rather than ambient root effectivity.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O104 | Ordinary finite-rank rational compatible realization of the complete good-split exponent \(4/n\) | proved weight-separated denominator rigidity with exact \(n=3\) symmetry and counterpacket closure | On every packet-admissible smooth row, Chebotarev--Brauer--Nesbitt after restriction to \(K\) forces \(n[V_0]=4[\mathsf E_n]\) and \(n[V_1]=4[\mathsf O_n]\) on the two pure weights separately.  Their ranks imply realizability exactly when \(n\mid4\), so only \(n=2,4\) survive; the total rank falsely accepts \(n=3\).  At \(n=3\), the exact \(\operatorname{Dih}(C_9)\) character has no nonzero common central source-isotypic sector clearing \(4/3\) on both rails, while every split-invisible virtual rational class restricts to zero over \(K\) and changes neither rail rank nor multiplicity. | The factor theorem is conditional on packet admissibility, certified here only for \(n=2,3,4\); the all-\(n\) result is instead the equation-level classification of the full projective monomial ideal stabilizer, not the full PGL automorphism group.  It proves no smoothness or motive for \(n\ge5\), and constructs no inert or global fractional root, automorphy, continuation, functional equation, or RH statement. | ../henon_mu3_universal_dihedral_denominator_rigidity/THEOREM_PACKAGE.md |
+
+## HCS-C55--C56 positive boundary
+
+HCS-C55 proves a rational equivariant deformation germ, a relative rank-ten
+CY3-type Reynolds variation, an exact smooth geometrically irreducible
+Yukawa cubic surface, and a conditional necessary Yukawa gate for an honest
+CY3 comparison.  The named comparator status is
+**NOT-COMPARABLE-WITH-CURRENT-DATA**, so no comparator has been excluded and
+no new obstruction row is justified.  HEN-O104 remains the last allocated
+identifier.
+
+HCS-C56 subsequently classifies the line arithmetic of that one frozen cubic:
+its line scheme is a degree-\(27\) field point, the normal closure has full
+\(W(E_6)\), and there is no \(\mathbf Q\)-line.  This is a positive arithmetic
+classification of a single surface, not a reusable realization-class no-go.
+It therefore does not justify allocating a new obstruction row; HEN-O104
+remains the last registry obstruction identifier after completion of
+C52--C56.
+
+## HCS-P63 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O105 | Ordinary fixed-parameter Weil-height pressure of the complete odd primitive H6 reflection-coordinate population | proved non-extensive flat-pressure obstruction | Integral cyclic coordinates and full real Galois exhaustion give `h(alpha)<=log(1+sqrt(7))` uniformly in period. Hence `exp(-abs(s)C)D_n<=Z_n(s)<=exp(abs(s)C)D_n`, so every fixed-real-`s` pressure equals the unweighted entropy `(1/2)log(2)`. | Invariant under every fixed nonzero algebraic coordinate rescaling. Stops only ordinary individual coordinate height without an orbit-clock factor. It does not stop `n*h(alpha)`, packet Mahler height, discriminant/ramification height, or multiplier Galois excess; none of those is proved here. | ../henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md |
+
+## HCS-P64 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O106 | Identification of the marked primitive reflection-root ensemble with the invariant maximal-entropy measure | proved reflection-boundary sampling obstruction | Equivariant coding gives `s[-k]=s[k]` in the marked-axis limit, so `P(s[-1]=s[1])=1`; fair two-sided Bernoulli gives `1/2`. The boundary limit is not shift invariant, although cyclic orbit averaging does converge to maximal entropy. | Stops only the naive marked-root equidistribution compiler. It preserves a proved nonconstant packet-Mahler pressure with boundary slope and an orbit-averaged pressure with maximal-entropy slope. It does not prove the two numerical slopes differ or control individual Galois-factor heights. | ../henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md |
+
+## HCS-P65 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O107 | Finite one-sided symbolic observables as separators of marked reflection-boundary and maximal-entropy sampling | proved one-sided blindness obstruction with minimal cross-axis repair | The reflected boundary law and fair two-sided Bernoulli law have identical restrictions to every finite nonnegative or nonpositive coordinate algebra. The radius-one cross-axis observable `1{s[-1]=s[1]}` is the first scoped separator and gives an exact pressure-gradient gap `-1/2`. | Scoped to the frozen sign coding and one-sided support class; arbitrary recodings are not claimed. The repair is symbolic and extensive but supplies no Mahler-slope inequality, rational-prime semantics, determinant, or operator. | ../henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md |
+
+## HCS-P66 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O108 | Marked reflection packet pressure as a Livšic/cohomology-invariant dynamical pressure | proved norm-two boundary gauge anomaly with exact orbit repair | The marked boundary law `eta_J` and its one-step translate are mutually singular, so `u -> int(u-u∘sigma)d eta_J` has dual total-variation norm `2`; finite cylinders attain `2(1-2^(-r))`. A complete period-`n` orbit sum of every coboundary is exactly zero. | Scoped to the marked reflection sampling convention and frozen sign coding. It does not invalidate the frozen coordinate representative or P64's marked Mahler law; it proves that the law is not canonical modulo cohomology. Uniform cyclic averaging repairs this defect but supplies no prime labels, determinant, or operator. | ../henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md |
+
+## HCS-P67 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O109 | A nonuniform normalized cyclic linear sampler as a cohomology-invariant replacement for marked reflection sampling | proved cyclic-incidence uniqueness obstruction with canonical uniform repair | For `(Du)_j=u_j-u_(j+1)`, every weight vector satisfies `L_w(Du)=sum_j(w_j-w_(j-1))u_j`. Vanishing for every `u` forces all weights equal; normalization gives exactly `w_j=1/n`. Every nonuniform vector fails on a one-site basis function. | Covers arbitrary real, including signed, normalized linear samplers on each complete primitive cycle. A nonlinear or potential-adaptive rule lies outside the theorem but would not be the predeclared linear packet sampler audited here. Uniform averaging survives and gives a universal gauge-invariant pressure, but no arithmetic determinant or operator. | ../henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md |

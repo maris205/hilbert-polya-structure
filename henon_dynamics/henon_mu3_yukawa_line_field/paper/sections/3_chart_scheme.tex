@@ -1,0 +1,135 @@
+\section[A degree-27 chart presentation]{A degree-\(27\) chart presentation}
+\label{sec:chart-scheme}
+
+\subsection[The U01 equations]{The \(U_{01}\) equations}
+
+On the standard Pl\"ucker chart \(U_{01}\), write a line as the row span of
+\begin{equation}
+ M(a,b,c,d)=
+ \begin{pmatrix}
+ 1&0&a&b\\
+ 0&1&c&d
+ \end{pmatrix}.
+\label{eq:chart-matrix}
+\end{equation}
+With parameters \(s,t\), its points are
+\[
+ (s,t,as+ct,bs+dt).
+\]
+Restricting \cref{eq:cubic} gives
+\begin{equation}
+ F(s,t,as+ct,bs+dt)
+ =f_0s^3+f_1s^2t+f_2st^2+f_3t^3.
+\label{eq:restricted-cubic}
+\end{equation}
+The four sparse polynomials \(f_i\in\Q[a,b,c,d]\) are printed in
+\cref{app:chart-data}.  Their common zero scheme is
+\(\FanoY\cap U_{01}\).
+
+The degree-order calculation has a \(21\)-element Gr\"obner basis.  Its
+standard monomials have total-degree counts
+\begin{equation}
+  (H_0,H_1,H_2,H_3,H_{\ge4})=(1,4,10,12,0),
+\label{eq:chart-hilbert}
+\end{equation}
+so the quotient dimension is \(27\).  Exact FGLM conversion gives a
+four-element lexicographic shape
+\begin{equation}
+\begin{aligned}
+ g(d)&=0,\\
+ \lambda_c c+h_c(d)&=0,\\
+ \lambda_b b+h_b(d)&=0,\\
+ \lambda_a a+h_a(d)&=0,
+\end{aligned}
+\qquad
+\lambda_a\lambda_b\lambda_c\ne0,
+\label{eq:lex-shape}
+\end{equation}
+where \(g\in\mathbf Z[d]\) is primitive of degree \(27\), and each
+\(h_\bullet\) has degree at most \(26\).  The complete coefficient arrays
+are carried by the exact electronic certificate; the compact invariants and
+the coefficient endpoints of \(g\) are recorded in
+\cref{app:chart-data}.
+
+The shape computation alone is not used as an ideal-membership proof.
+Instead, the independent replay substitutes
+\begin{equation}
+ a=-\frac{h_a(d)}{\lambda_a},\qquad
+ b=-\frac{h_b(d)}{\lambda_b},\qquad
+ c=-\frac{h_c(d)}{\lambda_c}
+\label{eq:back-substitution}
+\end{equation}
+into each \(f_i\), clears the three constant denominators, and reduces the
+resulting numerator modulo \(g\).  All four remainders are exactly zero.
+
+\subsection{From the chart to the global scheme}
+
+Let
+\[
+ A_g=\Q[d]/(g).
+\]
+The four direct remainder identities induce a surjection
+\begin{equation}
+ \Q[a,b,c,d]/(f_0,f_1,f_2,f_3)
+ \twoheadrightarrow A_g,
+\label{eq:chart-surjection}
+\end{equation}
+because the image contains the class of \(d\).  Dually, this gives a closed
+immersion
+\begin{equation}
+ Z:=\Spec(A_g)\hookrightarrow \FanoY\cap U_{01}.
+\label{eq:chart-closed}
+\end{equation}
+
+\begin{lemma}[Open-and-closed bridge]
+\label{lem:clopen}
+The immersion in \cref{eq:chart-closed} is a closed immersion into the global
+scheme \(\FanoY\).
+\end{lemma}
+
+\begin{proof}
+By \cref{prop:fano-etale}, \(\FanoY\) is a finite \(\etale\) scheme over a
+field.  Its underlying space is finite and discrete, and every open
+subscheme is a union of connected components.  Thus
+\(\FanoY\cap U_{01}\) is open-and-closed in \(\FanoY\).  Composing
+\cref{eq:chart-closed} with this closed inclusion proves the claim.
+\end{proof}
+
+\begin{proposition}[Complete chart presentation]
+\label{prop:complete-chart}
+There is an isomorphism
+\[
+  \FanoY\cong\Spec\!\bigl(\Q[d]/(g)\bigr).
+\]
+In particular all \(27\) geometric lines lie in \(U_{01}\).
+\end{proposition}
+
+\begin{proof}
+The algebra \(A_g\) has \(\Q\)-dimension \(27\), because
+\(\deg g=27\).  Hence \(Z\) and \(\FanoY\) are finite schemes of the same
+rank.  The global closed immersion from \cref{lem:clopen} corresponds to a
+surjective map between their \(27\)-dimensional coordinate algebras.  It is
+therefore an isomorphism.
+\end{proof}
+
+\subsection{Independent complement guard}
+
+The exact replay also generates the other five standard charts and adds the
+equation \(p_{01}=0\), which cuts out the complement of \(U_{01}\).  Each
+resulting ideal has reduced Gr\"obner basis \(\{1\}\):
+\begin{center}
+\begin{tabular}{@{}ccc@{}}
+\toprule
+chart & row-coordinate convention & equation for \(p_{01}=0\)\\
+\midrule
+\(U_{02}\)&\((s,as+ct,t,bs+dt)\)&\(c=0\)\\
+\(U_{03}\)&\((s,as+ct,bs+dt,t)\)&\(c=0\)\\
+\(U_{12}\)&\((as+ct,s,t,bs+dt)\)&\(c=0\)\\
+\(U_{13}\)&\((as+ct,s,bs+dt,t)\)&\(c=0\)\\
+\(U_{23}\)&\((as+ct,bs+dt,s,t)\)&\(ad-bc=0\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+This calculation independently audits the chart convention.  It is not used
+circularly to justify \cref{lem:clopen}; global equality already follows
+from finite \(\etale\) rank comparison.

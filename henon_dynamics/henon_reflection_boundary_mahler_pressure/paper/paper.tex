@@ -1,0 +1,359 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[numbers,sort&compress]{natbib}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\SigmaTwo}{\{-,+\}^{\Z}}
+\newcommand{\logp}{\log^{+}}
+
+\hypersetup{
+  pdftitle={Reflection-Boundary Equidistribution and Extensive Mahler Packet Pressure for a Henon Horseshoe},
+  pdfauthor={Liang Wang},
+  pdfsubject={Reversible Henon dynamics, symbolic equidistribution, and Mahler packet pressure},
+  pdfkeywords={Henon map, reversible dynamics, symbolic dynamics, Mahler measure, pressure}
+}
+
+\title{Reflection-Boundary Equidistribution and\\
+Extensive Mahler Packet Pressure for a H\'enon Horseshoe}
+\author{Liang Wang\\
+\small School of Artificial Intelligence and Automation\\
+\small Huazhong University of Science and Technology\\
+\small Wuhan 430074, P. R. China}
+\date{August 15, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the area-preserving H\'enon map
+$H(x,y)=(6-x^2-y,x)$, previous full-horseshoe and algebraic-exhaustion
+results make every odd primitive mixed-axis coordinate divisor reduced,
+totally real, and of degree
+$D_n=\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}$.  Ordinary coordinate Weil
+height is uniformly bounded, so its fixed-parameter pressure is flat.  We
+identify the correct extensive packet limit.  Primitive coordinates sampled
+at their marked reflection axis converge to a non-invariant
+reflection-boundary Bernoulli measure, while time-averaging the same selected
+orbits converges to the invariant maximal-entropy Bernoulli measure.  The
+marked limit implies convergence of normalized logarithmic Mahler measures
+and a nonconstant linear packet pressure
+\[
+ \lim_{\substack{n\to\infty\\ n\ \mathrm{odd}}}
+ \frac1n\log\!\left(D_ne^{-snD_n^{-1}\log M(\widetilde\Psi_n)}\right)
+ =\frac12\log2-s\kappa_J,
+\]
+where $0<\kappa_J\le\log(1+\sqrt7)$.  Exact symbolic enumeration through
+period $21$ and independent primitive-polynomial diagnostics through period
+$11$ accompany the theorem.  The result is a packet-level thermodynamic
+statement; it does not prove an individual height pressure, a prime trace,
+or a Hilbert--P\'olya operator.
+\end{abstract}
+
+\section{Introduction}
+
+Consider the scaled H\'enon automorphism
+\begin{equation}\label{eq:H}
+ H(x,y)=(6-x^2-y,x).
+\end{equation}
+It is linearly conjugate to the repository normalization
+$(q,p)\mapsto(1-6q^2-p,q)$.  Arai's certified hyperbolic plateau
+\cite{Arai2007} transports the Devaney--Nitecki full-shift horseshoe
+\cite{DevaneyNitecki1979} to parameter $6$.  Combining this with the
+Friedland--Milnor complex fixed-point count \cite{FriedlandMilnor1989}
+exhausts every complex periodic point by the real full two-shift.  In
+particular, the odd mixed-axis primitive coordinate polynomial is reduced,
+effective and totally real.
+
+The integral recurrence
+\begin{equation}\label{eq:recurrence}
+ x_{j+1}=6-x_j^2-x_{j-1}
+\end{equation}
+gives the sharp periodic bound $|x_j|\le1+\sqrt7$.  Thus an ordinary
+fixed-parameter height weight is non-extensive.  The first natural repair is
+the packet-average Mahler mass
+\begin{equation}\label{eq:an-intro}
+ a_n=\frac1{D_n}\log M(\widetilde\Psi_n),
+\end{equation}
+multiplied by the period clock $n$.
+
+A subtlety appears before pressure: mixed-axis roots are marked at a
+reflection axis.  They are sparse, symmetry-centered points rather than
+generic marked periodic points.  We prove that their axis distribution is a
+reflected one-sided Bernoulli process, not the invariant two-sided Bernoulli
+measure.  Time-averaging the same orbits does recover maximal entropy.  This
+separation is the main structural result and prevents a false identification
+of the two Mahler slopes.
+
+\section{Equivariant full-shift coding}
+
+Define the involution
+\begin{equation}\label{eq:J}
+ J(x,y)=(x,6-x^2-y).
+\end{equation}
+Then $J^2=1$ and $JHJ=H^{-1}$.  Let $\sigma$ be the left shift on
+$\SigmaTwo$ and let
+\begin{equation}\label{eq:rho}
+ (\rho\omega)_k=\omega_{-k}.
+\end{equation}
+
+\begin{lemma}[Equivariant coding]\label{lem:equivariant}
+There is a homeomorphism $\pi:\SigmaTwo\to\Lambda$, where $\Lambda$ is the
+real chain recurrent set of \eqref{eq:H}, such that
+\begin{equation}\label{eq:equivariant}
+ \pi\sigma=H\pi,\qquad \pi\rho=J\pi.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+At a Devaney--Nitecki large-parameter anchor, the sign itinerary is a
+one-to-one full-shift coding.  Since $J$ preserves the first coordinate and
+$H^kJ=JH^{-k}$, that coding intertwines $J$ with \eqref{eq:rho}.
+
+Continue the basic set and its conjugacy along Arai's connected uniformly
+hyperbolic plateau from the anchor to parameter $6$.  Choose the structural
+continuation $h_a$ in the standard small-neighborhood normalization.  Both
+$h_a$ and $J_a h_aJ_{10}$ conjugate the anchor dynamics to the parameter-$a$
+dynamics and are close to the identity.  Expansivity gives uniqueness in
+this normalization, so $J_a h_aJ_{10}=h_a$.  Composing the anchor itinerary
+with $h_6$ proves \eqref{eq:equivariant}.
+\end{proof}
+
+This is a specialization of standard symbolic/hyperbolic continuation
+machinery; \citet{LindMarcus1995} gives symbolic background, and
+\citet{Kang2018} gives broader reversible-periodic context.  Neither source
+is used to assert the counting or limit theorem below.
+
+\section{Reflection half-words and primitive removal}
+
+Fix an odd integer $n=2m+1$.  The intersection
+$\operatorname{Fix}(\sigma^n)\cap\operatorname{Fix}(\rho)$ consists of the
+words
+\begin{equation}\label{eq:palindrome}
+ (\omega_0,\omega_1,\ldots,\omega_m,
+  \omega_m,\ldots,\omega_1),
+\end{equation}
+so it has cardinality $2^{m+1}$.  Under \cref{lem:equivariant}, these are
+exactly the marked points in
+$\operatorname{Fix}(H^n)\cap\operatorname{Fix}(J)$.  The mixed-axis closure
+has degree $2^{m+1}$ and consists of simple points, so no symbolic point or
+algebraic root is missing.
+
+Let $\Omega_n^{\mathrm{prim}}$ denote the exact-period subset and put
+\begin{equation}\label{eq:Dn}
+ D_n=\#\Omega_n^{\mathrm{prim}}
+ =\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}.
+\end{equation}
+
+\begin{lemma}[Primitive subtraction]\label{lem:primitive}
+If $U_n=\operatorname{Fix}(\sigma^n)\cap\operatorname{Fix}(\rho)$, then
+\begin{equation}\label{eq:primitive-bound}
+ \frac{\#(U_n\setminus\Omega_n^{\mathrm{prim}})}{\#U_n}
+ \le \tau(n)2^{-n/3}.
+\end{equation}
+Consequently uniform measure on $U_n$ and on
+$\Omega_n^{\mathrm{prim}}$ differ in total variation by a quantity tending
+exponentially to zero.
+\end{lemma}
+
+\begin{proof}
+Every proper divisor $d$ of an odd integer $n$ satisfies $d\le n/3$.
+Bounding all lower-period contributions by
+$\sum_{d\mid n,d<n}2^{(d+1)/2}$ and dividing by $2^{(n+1)/2}$ gives
+\eqref{eq:primitive-bound}.  The total variation identity follows because
+the primitive family is a subset of the full family.
+\end{proof}
+
+In particular,
+\begin{equation}\label{eq:entropy}
+ \lim_{\substack{n\to\infty\\n\ \mathrm{odd}}}\frac1n\log D_n
+ =\frac12\log2.
+\end{equation}
+
+\section{Two different weak-star limits}
+
+Let $\eta_n$ be uniform measure on $\Omega_n^{\mathrm{prim}}$, with the
+reflection axis marked at coordinate zero.  Let $(\xi_k)_{k\ge0}$ be iid
+fair signs and form a two-sided sequence by
+\begin{equation}\label{eq:boundary-process}
+ \omega_k=\omega_{-k}=\xi_k\qquad(k\ge0).
+\end{equation}
+Denote its law by $\eta_J$.
+
+\begin{theorem}[Reflection-boundary limit]\label{thm:axis}
+As odd $n$ tends to infinity,
+\begin{equation}\label{eq:axis-limit}
+ \eta_n\stackrel{*}{\longrightarrow}\eta_J.
+\end{equation}
+The limit is not shift invariant and is not the fair two-sided Bernoulli
+measure $\mu_B$.
+\end{theorem}
+
+\begin{proof}
+For a fixed cylinder radius $r$ and $n>2r$, the free coordinates
+$\omega_0,\ldots,\omega_r$ in \eqref{eq:palindrome} are independent fair
+signs.  The negative coordinates are their reflected copies.  This proves
+cylinder convergence for the full family; \cref{lem:primitive} transfers it
+to the primitive family.
+
+Under $\eta_J$, the event $\{\omega_{-1}=\omega_1\}$ has probability one,
+whereas it has $\mu_B$-probability $1/2$.  After applying one shift, the same
+event pulls back to $\{\omega_0=\omega_2\}$, which has $\eta_J$-probability
+$1/2$.  Hence $\eta_J$ is not shift invariant.
+\end{proof}
+
+Now erase the distinguished axis by averaging over each cyclic orbit:
+\begin{equation}\label{eq:orbit-average}
+ \bar\eta_n=\frac1n\sum_{j=0}^{n-1}(\sigma^j)_*\eta_n.
+\end{equation}
+
+\begin{theorem}[Orbit-averaged limit]\label{thm:orbit}
+For odd $n\to\infty$,
+\begin{equation}\label{eq:orbit-limit}
+ \bar\eta_n\stackrel{*}{\longrightarrow}\mu_B.
+\end{equation}
+More precisely, for a cylinder $C$ depending on coordinates $[-r,r]$,
+\begin{equation}\label{eq:cylinder-bound}
+ |\bar\eta_n(C)-\mu_B(C)|
+ \le \frac{4r+1}{n}+\tau(n)2^{-n/3}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+First use all palindromes.  A window centered at $j$ contains two positions
+paired by reflection only if
+$2j\equiv-(a+b)\pmod n$ for some $a,b\in[-r,r]$.  Because $n$ is odd,
+each value of $a+b\in[-2r,2r]$ produces at most one bad center, so there are
+at most $4r+1$.  At every other center the window reads distinct free
+half-word coordinates and has exactly the fair Bernoulli law.  Average over
+centers and then apply \cref{lem:primitive}.
+\end{proof}
+
+\section{Extensive packet pressure}
+
+Write $x(z)$ for the first scaled coordinate and set
+\begin{equation}\label{eq:phi}
+ \phi(z)=\logp|x(z)|.
+\end{equation}
+This is continuous on the compact horseshoe and satisfies
+$0\le\phi\le\log(1+\sqrt7)$.  Define
+\begin{equation}\label{eq:kappas}
+ \kappa_J=\int\phi\,d(\pi_*\eta_J),\qquad
+ \kappa_{\max}=\int\phi\,d(\pi_*\mu_B).
+\end{equation}
+
+\begin{proposition}\label{prop:kappa-positive}
+One has
+\begin{equation}\label{eq:kappa-bound}
+ 0<\kappa_J\le\log(1+\sqrt7).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The upper bound is immediate.  The constant negative itinerary represents
+the fixed point with first coordinate $-1-\sqrt7$.  By continuity, a finite
+cylinder around this sequence has $\phi>0$.  That cylinder has positive
+$\eta_J$-measure, proving strict positivity.
+\end{proof}
+
+Let $\widetilde\Psi_n\in\Z[T]$ be the monic integral primitive coordinate
+polynomial.  Total reality and squarefreeness give
+\begin{equation}\label{eq:mahler}
+ a_n:=\frac1{D_n}\log M(\widetilde\Psi_n)
+ =\frac1{D_n}\sum_{\widetilde\Psi_n(\alpha)=0}\logp|\alpha|.
+\end{equation}
+The right side is the $\phi$-average under $\pi_*\eta_n$.
+
+\begin{theorem}[Packet-Mahler pressure]\label{thm:pressure}
+For every fixed $s\in\R$,
+\begin{equation}\label{eq:packet-pressure}
+ \lim_{\substack{n\to\infty\\n\ \mathrm{odd}}}
+ \frac1n\log\left(D_n\exp(-sn a_n)\right)
+ =\frac12\log2-s\kappa_J.
+\end{equation}
+This pressure is nonconstant.
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:axis} and continuity, $a_n\to\kappa_J$.  Combine this with
+\eqref{eq:entropy}.  Nonconstancy follows from
+\cref{prop:kappa-positive}.
+\end{proof}
+
+Similarly, define
+\begin{equation}\label{eq:bn}
+ b_n=\frac1{nD_n}\sum_{\alpha}\sum_{j=0}^{n-1}
+ \phi(H^jz_\alpha),
+\end{equation}
+where $z_\alpha\in\operatorname{Fix}(J)$ is the point with first coordinate
+$\alpha$.  Then \cref{thm:orbit} gives $b_n\to\kappa_{\max}$ and
+\begin{equation}\label{eq:orbit-pressure}
+ \lim\frac1n\log\left(D_n\exp(-sn b_n)\right)
+ =\frac12\log2-s\kappa_{\max}.
+\end{equation}
+
+\section{Executable certificate}
+
+The primary certificate enumerates every primitive palindrome through odd
+period $21$.  For radius-two cylinders, the marked-axis total variation
+from fair Bernoulli stabilizes at $3/4$, whereas the orbit-averaged values
+decrease toward zero.  It independently rebuilds the primitive integral
+polynomials and reports the diagnostics in \cref{tab:numerics}.
+
+\begin{table}[ht]
+\centering
+\caption{Finite diagnostics.  These decimals are not used to prove
+\cref{thm:axis,thm:orbit,thm:pressure}.}
+\label{tab:numerics}
+\begin{tabular}{@{}rrr@{}}
+\toprule
+$n$ & marked Mahler average & orbit average\\
+\midrule
+1  & 0.895879734614027 & 0.895879734614027\\
+3  & 0.693147180559945 & 0.767528364331349\\
+5  & 0.592642696019558 & 0.775457104945456\\
+7  & 0.648968099586674 & 0.786446733777541\\
+9  & 0.660700003269176 & 0.790519108637561\\
+11 & 0.670373466816018 & 0.789976524363231\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A second implementation uses a different least-period test through period
+$17$ and the exact period-one/three polynomial sentinels.  Normal and
+optimized test runs agree, and 26 contract mutations are rejected.
+
+\section{Claim boundary and next theorem}
+
+The pressure in \eqref{eq:packet-pressure} weights the complete packet by
+its average Mahler mass.  It is not the individual partition
+$\sum_\alpha e^{-sn h(\alpha)}$.  If $\widetilde\Psi_n$ factors, different
+factors may have different Weil heights; weak convergence of all roots does
+not control that finer distribution.
+
+The finite rows suggest $\kappa_J\ne\kappa_{\max}$, but a theorem requires
+certified cylinder enclosures and a tail estimate for \eqref{eq:phi}.  No
+prime-power family, von Mangoldt amplitude, determinant continuation,
+self-adjoint operator, zeta-zero correspondence, or Riemann-hypothesis
+statement is obtained here.
+
+\section{Conclusion}
+
+The reflection slice supports a genuine extensive packet pressure, but its
+natural marked measure is a boundary process rather than an invariant
+equilibrium state.  Orbit averaging restores maximal entropy.  This
+distinction turns a false shortcut into two exact limit theorems and isolates
+a concrete next task: rigorously separate the two H\'enon Mahler slopes.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

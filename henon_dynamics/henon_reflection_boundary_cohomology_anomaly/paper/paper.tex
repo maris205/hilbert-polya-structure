@@ -1,0 +1,204 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[numbers]{natbib}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\hypersetup{pdftitle={A Norm-Two Cohomology Anomaly at the Henon Reflection Boundary},pdfauthor={Liang Wang},pdfsubject={Marked reflection packets and gauge-invariant orbit averaging},pdfkeywords={Henon map, reversible dynamics, symbolic cohomology, packet pressure}}
+\title{A Norm-Two Cohomology Anomaly at the H\'enon Reflection Boundary}
+\author{Liang Wang\\\small School of Artificial Intelligence and Automation\\\small Huazhong University of Science and Technology\\\small Wuhan 430074, P. R. China}
+\date{August 15, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Primitive odd reflection points of the full H\'enon horseshoe admit two
+natural sampling conventions.  Marking the reflection center converges to a
+non-invariant boundary Bernoulli law $\eta_J$, whereas cyclic orbit averaging
+converges to the invariant maximal-entropy law.  We prove that marked packet
+pressure is not invariant under symbolic coboundaries.  Its anomaly is the
+functional
+\[
+ A_J(u)=\int (u-u\circ\sigma)\,d\eta_J,
+\]
+whose dual total-variation norm is exactly two.  Explicit locally constant
+functions $v_r$ satisfy $A_J(v_r)=2(1-2^{-r})$, so the extremal norm is
+approached by finite cylinders.  By contrast, a coboundary sums to zero on
+every finite periodic orbit; consequently every uniformly orbit-averaged
+packet pressure is exactly gauge invariant before taking a limit.  The
+result identifies orbit averaging as a necessary structural repair, while
+making no arithmetic trace or operator claim.  An exact mutation-locked
+certificate accompanies the theorem.
+\end{abstract}
+
+\section{Reflection-boundary sampling}
+
+The area-preserving H\'enon map
+\[
+ H(x,y)=(6-x^2-y,x)
+\]
+has a real chain-recurrent set conjugate to the full two-shift; its reversor
+is intertwined with sequence reversal.  This follows from the
+Devaney--Nitecki horseshoe and Arai's hyperbolic plateau
+\cite{DevaneyNitecki1979,Arai2007}.  We use the standard left shift
+$(\sigma\omega)_k=\omega_{k+1}$ on $\{0,1\}^{\mathbb Z}$; basic symbolic
+cohomology terminology follows \citet{LindMarcus1995}.
+
+Let $(\xi_k)_{k\geq0}$ be independent fair bits and define the marked
+reflection-boundary process
+\begin{equation}\label{eq:eta}
+ \omega_k=\omega_{-k}=\xi_k \qquad (k\geq0).
+\end{equation}
+Its law is denoted by $\eta_J$.  Earlier packet equidistribution shows that
+marked primitive reflection points converge to $\eta_J$, while uniformly
+averaging their time origins converges to the fair two-sided Bernoulli law.
+The present paper asks whether the marked pressure is an intrinsic object
+under the usual potential relation
+\begin{equation}\label{eq:cohomology}
+ f' = f+u-u\circ\sigma.
+\end{equation}
+
+For a continuous potential $f$, write the marked packet pressure as
+\begin{equation}\label{eq:pressuredef}
+ P_J(f)=\frac12\log2-\int f\,d\eta_J.
+\end{equation}
+This is the limiting extensive pressure proved for the preceding packet
+family; the formula also defines its continuous extension to arbitrary
+symbolic potentials.
+
+\section{The boundary anomaly}
+
+Define
+\begin{equation}\label{eq:anomaly}
+ A_J(u)=\int (u-u\circ\sigma)\,d\eta_J.
+\end{equation}
+
+\begin{theorem}[Exact gauge law]\label{thm:gauge}
+For every continuous $f,u$,
+\begin{equation}\label{eq:gaugelaw}
+ P_J(f+u-u\circ\sigma)=P_J(f)-A_J(u).
+\end{equation}
+In particular, marked pressure descends to symbolic cohomology classes if
+and only if $A_J$ vanishes identically.
+\end{theorem}
+
+\begin{proof}
+Substitution of \eqref{eq:cohomology} into \eqref{eq:pressuredef} gives
+\eqref{eq:gaugelaw}.  The last statement follows by testing every transfer
+function $u$.
+\end{proof}
+
+The functional is nonzero because $\eta_J$ is not shift invariant.  More is
+true.  For a finite signed measure $\nu$, use the dual norm
+\[
+ \lVert\nu\rVert_{\mathrm{TV}}
+ =\sup_{\lVert u\rVert_\infty\leq1}\left|\int u\,d\nu\right|,
+\]
+which equals two, rather than one, for the difference of mutually singular
+probability measures.
+
+\begin{theorem}[Norm-two anomaly]\label{thm:normtwo}
+The measures $\eta_J$ and $\sigma_*\eta_J$ are mutually singular, and
+\begin{equation}\label{eq:normtwo}
+ \lVert A_J\rVert
+ =\lVert\eta_J-\sigma_*\eta_J\rVert_{\mathrm{TV}}=2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The support of $\eta_J$ consists of sequences fixed by reflection about the
+marked origin.  The support of $\sigma_*\eta_J$ consists of sequences fixed
+by reflection about the adjacent center.  A sequence satisfying both
+symmetries is invariant under their composition, a shift by two, and hence
+is period two.  This finite set has probability zero under either iid
+half-word construction.  The measures are therefore mutually singular.
+The difference of two mutually singular probability measures has dual
+total-variation norm two.  Finally,
+$A_J(u)=\int u\,d(\eta_J-\sigma_*\eta_J)$.
+\end{proof}
+
+\section{Finite-cylinder extremizers}
+
+The norm in \cref{thm:normtwo} is not merely an abstract measure-theoretic
+quantity.  For $r\geq1$, let
+\begin{equation}\label{eq:ur}
+ u_r(\omega)=\one_{\{\omega_{-k}=\omega_k\;\text{for }1\leq k\leq r\}},
+ \qquad v_r=2u_r-1.
+\end{equation}
+
+\begin{proposition}[Local witnesses]\label{prop:witness}
+For every $r\geq1$,
+\begin{equation}\label{eq:witness}
+ \int u_r\,d\eta_J=1,
+ \qquad
+ \int u_r\circ\sigma\,d\eta_J=2^{-r},
+ \qquad
+ A_J(v_r)=2(1-2^{-r}).
+\end{equation}
+Thus $\lVert v_r\rVert_\infty=1$ and $A_J(v_r)\to2$.
+\end{proposition}
+
+\begin{proof}
+The first equality is built into \eqref{eq:eta}.  After one shift, the $r$
+constraints become
+\[
+ \xi_{k-1}=\xi_{k+1},\qquad 1\leq k\leq r.
+\]
+They leave precisely two free parity classes among the $r+2$ involved fair
+bits, so their probability is $2^2/2^{r+2}=2^{-r}$.  Affine centering then
+gives the third equality.
+\end{proof}
+
+This also gives a fully finite diagnosis: a radius-$r$ cylinder already
+detects all but $2^{1-r}$ of the maximal anomaly.
+
+\section{Orbit averaging repairs the gauge}
+
+Let $\omega$ be periodic with period $n$.  The coboundary identity telescopes:
+\begin{equation}\label{eq:telescoping}
+ \sum_{j=0}^{n-1}(u-u\circ\sigma)(\sigma^j\omega)
+ =u(\omega)-u(\sigma^n\omega)=0.
+\end{equation}
+
+\begin{corollary}[Finite-period gauge invariance]\label{cor:orbit}
+Every packet statistic formed by uniformly averaging a potential over each
+complete periodic orbit is unchanged by \eqref{eq:cohomology}, at every
+finite period and for every transfer function $u$.
+\end{corollary}
+
+\begin{proof}
+Apply \eqref{eq:telescoping} orbit by orbit before taking any packet sum or
+limit.
+\end{proof}
+
+The contrast is structural.  Marked reflection sampling retains a boundary
+and therefore a norm-two gauge defect.  Complete cyclic sampling removes the
+boundary exactly.  This proves that the frozen coordinate-Mahler marked law
+is a valid coordinate-dependent statistic, but not a canonical Liv\v{s}ic
+invariant.  It also isolates the next theorem: among normalized linear
+samplers on an $n$-cycle, is uniform cyclic averaging the unique sampler
+that annihilates every coboundary?
+
+\section{Executable certificate and claim boundary}
+
+The accompanying exact-arithmetic programs verify \eqref{eq:witness} for
+$1\leq r\leq12$, mutual-singularity support intersections on finite windows,
+and telescoping on every binary word through period $10$.  Two independent
+implementations agree, seven unit tests pass in normal and optimized modes,
+and 19 hostile mutations of signs, shifts, normalizations, and endpoint
+claims are rejected.  No floating-point evidence enters the theorem.
+
+This paper proves a symbolic pressure obstruction and its exact repair.  It
+does not produce rational-prime labels, von Mangoldt amplitudes, a Fredholm
+determinant, a self-adjoint operator, or a Hilbert--P\'olya correspondence.
+Route A therefore remains exploratory and Route B is not authorized.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

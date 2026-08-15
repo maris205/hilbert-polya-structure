@@ -80,6 +80,8 @@ The foundational local source is
 
 | Project | Main result | Hilbert–Pólya status |
 |---|---|---|
+| [henon_mu3_yukawa_line_field/](henon_mu3_yukawa_line_field/) | C56: the Fano line scheme of the frozen C55 cubic surface is the connected finite-etale point \(\operatorname{Spec}E\) with \([E:\mathbf Q]=27\); \(E\) is non-Galois, its normal closure has Galois group \(W(E_6)\) of order \(51840\), and the surface has geometric/arithmetic Picard ranks \(7/1\), no \(\mathbf Q\)-line, and the divisibility obstruction \(27\mid[L:\mathbf Q]\) for every finite field \(L\) defining a line | Exact arithmetic classification of one frozen Yukawa cubic; the arithmetic rank uses the written Hochschild--Serre torsion/rank bridge after the machine fixed-space computation, and no \(\mathbf Q\)-point, rationality, Hasse/Brauer--Manin, motive, VHS, automorphy, functional equation, or Hilbert--Pólya operator follows, Route A exploratory |
+| [henon_mu3_rational_yukawa_surface/](henon_mu3_rational_yukawa_surface/) | C55: a four-dimensional \(\mathbf Q\)-defined transverse equivariant deformation germ carries an intrinsic relative Reynolds image on \(R^5f_*\mathbf Q(1)\), giving a polarizable rank-\(10\) CY3-type VHS with Hodge numbers \((1,4,4,1)\) and locally immersive period map; exact Cayley multiplication produces a primitive rational projective Yukawa cubic whose zero surface is smooth and geometrically irreducible | A new exact local Hodge/Yukawa invariant of the fourth-moment core; no full fixed-Hilbert dimension claim, literal linear family, relative Chow--Kunneth projector, honest CY3, motive, BCD comparison, automorphy, functional equation, or Hilbert--Polya operator, Route A exploratory |
 | [henon_mu3_universal_dihedral_denominator_rigidity/](henon_mu3_universal_dihedral_denominator_rigidity/) | C54: for every \(n\ge2\), the full projective monomial ideal stabilizer of the cubic--weighted-cycle-quadric source is \(\operatorname{Dih}(C_{3n})\) of order \(6n\), and its C53 descent is a nonconstant rank-\(6n\) rational group scheme with two rational geometric elements; on packet-admissible smooth rows, the complete good-split local exponent \(4/n\) is realized by an actual finite-rank rational compatible system exactly when \(n\mid4\), while the exact \(n=3\) character and split-invisible counterpacket gates cannot clear the denominator | All-order equation/group classification and packet-conditioned split-local rigidity; the group is not promoted to the full PGL stabilizer, rows \(n\ge5\) have no smoothness or motive theorem, and no inert/global root, automorphy, continuation, functional equation, or Hilbert--Pólya operator is obtained, Route A exploratory |
 | [henon_mu3_dihedral_core_rational_descent/](henon_mu3_dihedral_core_rational_descent/) | C53: an explicit Hilbert--90 basis descends the ordered cubic/quadric source equations to \(\mathbb Q\) for every \(n\); on the certified fourth-moment row the twisted order-24 symmetry and its rank-10 Chow core descend to \(\mathbb Q\), with degree-ten integral, weight-five, reciprocal good-prime local polynomials and exact split/inert quadratic-base-change identities | First rational compatible-system package for the rank-10 core and exact split-local half-root repair; no new Euler half-plane, global continuation, functional equation, or Hilbert--Pólya operator, Route A exploratory |
 | [henon_mu3_d12_calabi_yau_core_projector/](henon_mu3_d12_calabi_yau_core_projector/) | C52: the complete order-\(24\) projective monomial source group gives \(K\)-rational middle Chow projectors of ranks \(10\) and \(158\); the rational graph algebra cannot isolate the desired rank-two extreme Hodge pair | First algebraic splitting of the fourth-moment odd packet; A3 packet control improved, A2/A4 inherited, Route A exploratory |
@@ -1443,3 +1445,160 @@ remain open.
 - [P62 paper](henon_full_horseshoe_algebraic_exhaustion/paper/paper.pdf)
 - [P62 proof package](henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
 - [P62 exact certificate](henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)
+
+## HCS-P63 primitive-coordinate height and flat pressure
+
+P63 tests the all-period coordinate-height pressure proposed after P62.  In
+the integral coordinate `x=6q`, every primitive root is an algebraic integer
+and every conjugate is another real periodic coordinate.  The cyclic
+recurrence gives the sharp all-period bound
+
+\[
+|x|\le1+\sqrt7,
+\qquad h(x)\le\log(1+\sqrt7).
+\]
+
+For the degree-`D_n` scaled primitive divisor,
+
+\[
+Z_n(s)=\sum_{\widetilde\Psi_n(\alpha)=0}e^{-s h(\alpha)}
+\]
+
+satisfies `exp(-|s|C)D_n <= Z_n(s) <= exp(|s|C)D_n`.  Therefore, for every
+fixed real `s`,
+
+\[
+\lim_{n\to\infty,\ n\text{ odd}}\frac1n\log Z_n(s)
+=\frac12\log2.
+\]
+
+The same flatness holds after every fixed nonzero algebraic coordinate
+rescaling.  Thus ordinary per-root coordinate height is not an extensive
+clock and cannot create a new pressure pole.  Exact finite polynomials and
+factor heights through period 11, an independent Sturm checker through
+period 9, and 25 hostile mutations support the theorem ledger.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized.  The
+next non-micro object is an extensive packet height, beginning with
+`n*D_n^(-1) log M(tilde_Psi_n)` and a reflection-root equidistribution
+theorem.
+
+- [P63 overview](henon_primitive_coordinate_height_flat_pressure/README.md)
+- [P63 paper](henon_primitive_coordinate_height_flat_pressure/paper/paper.pdf)
+- [P63 proof package](henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md)
+- [P63 exact certificate](henon_primitive_coordinate_height_flat_pressure/results/c63_certificate.json)
+
+## HCS-P64 reflection-boundary Mahler packet pressure
+
+P64 corrects the first equidistribution guess made after P63. Under the
+reversor-equivariant full-shift coding, odd mixed-axis roots are primitive
+palindromic words marked at their reflection center. Their marked empirical
+measures converge to a reflected one-sided fair Bernoulli process, not to the
+invariant maximal-entropy measure. Averaging the same selected cycles over
+all time origins does converge to maximal entropy, with radius-`r` cylinder
+error at most
+
+\[
+\frac{4r+1}{n}+\tau(n)2^{-n/3}.
+\]
+
+For `a_n=D_n^{-1} log M(tilde_Psi_n)`, one has `a_n -> kappa_J`, where
+`0<kappa_J<=log(1+sqrt(7))`, and
+
+\[
+\lim_{n\to\infty,\ n\text{ odd}}\frac1n
+\log\bigl(D_ne^{-sna_n}\bigr)
+=\frac12\log2-s\kappa_J.
+\]
+
+This is a nonconstant extensive whole-packet pressure, not an individual
+factor-height pressure. Finite diagnostics suggest the marked and
+orbit-averaged slopes differ, but rigorous separation remains open. Route A
+remains exploratory and Route B is not authorized.
+
+- [P64 overview](henon_reflection_boundary_mahler_pressure/README.md)
+- [P64 paper](henon_reflection_boundary_mahler_pressure/paper/paper.pdf)
+- [P64 proof package](henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md)
+- [P64 exact certificate](henon_reflection_boundary_mahler_pressure/results/c64_certificate.json)
+
+## HCS-P65 minimal symmetry-defect pressure
+
+P65 replaces an unavailable global cylinder constant by an exact symbolic
+calibration. Every finite observable supported wholly on one side of the
+reflection axis has the same expectation under P64's boundary and invariant
+laws. The first centered cross-axis observable
+`chi=1{s[-1]=s[1]}` has expectations `1` and `1/2`, giving
+
+\[
+P_J(t)=\frac12\log2-t,
+\qquad
+P_{\rm orb}(t)=\frac12\log2-\frac t2.
+\]
+
+The two-parameter Mahler/symmetry pressure planes therefore have an exact
+transverse derivative gap `-1/2`, even though the unperturbed Mahler slope
+gap remains open. Route A remains exploratory; Route B is not authorized.
+
+- [P65 overview](henon_minimal_symmetry_defect_pressure/README.md)
+- [P65 paper](henon_minimal_symmetry_defect_pressure/paper/paper.pdf)
+- [P65 proof package](henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md)
+- [P65 certificate](henon_minimal_symmetry_defect_pressure/results/c65_certificate.json)
+
+## HCS-P66 reflection-boundary cohomology anomaly
+
+P66 tests whether the marked pressure from P64--P65 is intrinsic under the
+usual symbolic replacement `f -> f+u-u∘sigma`. It is not. Its exact boundary
+anomaly is
+
+\[
+A_J(u)=\int (u-u\circ\sigma)\,d\eta_J,
+\qquad
+P_J(f+u-u\circ\sigma)=P_J(f)-A_J(u).
+\]
+
+The boundary law and its one-step translate are mutually singular, so the
+dual total-variation norm of `A_J` is exactly `2`. Radius-`r` locally constant
+witnesses realize `2(1-2^{-r})`. In contrast, every complete periodic-orbit
+sum of a coboundary telescopes to zero exactly, making uniform cyclic packet
+averaging gauge invariant before any limit.
+
+This is a canonical-sampling obstruction and repair, not an arithmetic
+trace. Route A remains exploratory and Route B is not authorized. The next
+theorem is uniqueness of the normalized cyclic sampler that annihilates all
+coboundaries.
+
+- [P66 overview](henon_reflection_boundary_cohomology_anomaly/README.md)
+- [P66 paper](henon_reflection_boundary_cohomology_anomaly/paper/paper.pdf)
+- [P66 proof package](henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md)
+- [P66 certificate](henon_reflection_boundary_cohomology_anomaly/results/c66_certificate.json)
+
+## HCS-P67 unique gauge-invariant orbit sampler
+
+P67 proves that P66's orbit-averaging repair is canonical. For a normalized
+real linear sampler on an `n`-cycle,
+
+\[
+L_w(Du)=\sum_j(w_j-w_{j-1})u_j.
+\]
+
+It annihilates every coboundary if and only if `w_j=1/n` for all `j`. This
+uses no positivity assumption, and every nonuniform sampler is rejected by a
+one-site transfer function.
+
+Combining this uniqueness theorem with P64's orbit-averaged packet
+equidistribution gives, for every continuous potential `f`,
+
+\[
+\mathcal P_f(s)=\frac12\log2-s\int f\,d\mu_B.
+\]
+
+The finite packet and limiting functional are exactly cohomology invariant
+and Lipschitz in `f`. This is a canonical sparse-packet pressure, not full
+topological pressure or an arithmetic trace. Route A remains exploratory and
+Route B is not authorized. The next non-micro gate is a source-native
+reflection-packet determinant or trace with intrinsic arithmetic semantics.
+
+- [P67 overview](henon_unique_gauge_invariant_orbit_sampler/README.md)
+- [P67 paper](henon_unique_gauge_invariant_orbit_sampler/paper/paper.pdf)
+- [P67 proof package](henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md)
+- [P67 certificate](henon_unique_gauge_invariant_orbit_sampler/results/c67_certificate.json)

@@ -1,0 +1,148 @@
+{
+  "candidate_id": "pcf_quadratic_exact_2adic_boundary_v1",
+  "lock_version": 2,
+  "lock_date_utc": "2026-08-14",
+  "lock_status": "SOURCE_LOCKED_V2_NO_REGISTERED_EXECUTION",
+  "title": "Exact 2-Adic Valuation of Higher-Period Multipliers for a Frozen PCF Quadratic",
+  "upstream_bindings": {
+    "paper2_source_lock_sha256": "aab59e6d97e919bd9f11f74cf45d8163fc320560dfa74bee85401bd184d37842",
+    "paper2_proof_package_sha256": "6d01f26b5832bd88923d4f4ba0bb5ed7010a571f17f46a0e75b6247499034e17",
+    "paper2_final_pdf_sha256": "160e9c6fa12c35f500fbae39d9316fc55e8c9b4f1b044ef3deda6037e0b5b1c3",
+    "paper5_capacity_final_pdf_sha256": "9c3b395a9d4ec704fb54951bd69d5d0fd6d9db7bb6c857f8fb45ee6e5b69c0f8"
+  },
+  "execution_state_at_lock": {
+    "registered_runs": 0,
+    "official_candidate_runs": 0,
+    "prelock_exploratory_run_groups": 2,
+    "prelock_development_seen_periods": [1, 2, 3, 4, 5, 6, 7, 8],
+    "prelock_observation": "Exact development gcd checks saw no B=+1 or B=-1 hit through period 8; a second timing/resultant benchmark repeated periods 4 through 7. These observations preceded this lock and have no blind or confirmatory status.",
+    "external_prime_tables_accessed": false,
+    "riemann_zero_data_accessed": false,
+    "parameter_search_performed": false,
+    "approximate_target_search_performed": false
+  },
+  "parameter": {
+    "symbol": "u",
+    "minimal_polynomial": "U^3-2*U^2+2*U-2",
+    "root_selection": "unique real root",
+    "map": "g(z)=z^2-u",
+    "quadratic_family_parameter": "c=-u",
+    "provenance": "Inherited unchanged from Batch-01 Paper 2; no multiplier, prime, zero, or spectral selection."
+  },
+  "definitions": {
+    "exact_cycle_multiplier": "Lambda_C=(g^n)'(z_0)=2^n*product_{j=0}^{n-1}g^j(z_0)",
+    "normalized_cycle_product": "B_C=Lambda_C/2^n",
+    "rational_base2_equality": "Lambda_C in Q and abs(Lambda_C)=2^n, equivalently B_C in {+1,-1}",
+    "modulus_only": "abs(Lambda_C)=2^n without rationality; outside the arithmetic equality certificate",
+    "characteristic_exponent": "chi_C=(1/n)*log(abs(Lambda_C)); chi_C=log(2) is modulus-only unless rationality is separately imposed"
+  },
+  "frozen_theorem_claims": [
+    "T1: For a complete non-Archimedean field of characteristic zero and residue characteristic 2, and f(z)=z^2+c with 0<abs(c)<1, every finite exact period n>=2 cycle lies on the unit circle and has multiplier norm abs(2)^n.",
+    "T2: For the frozen PCF quadratic, at every cycle-field place w over 2, w(Lambda_C)=n*w(2).",
+    "T3: If the frozen multiplier is rational, Lambda_C=2^n*m with m an odd integer.",
+    "T4: Frozen cycles are unique Frobenius-Hensel lifts and B_C is the corresponding unramified local norm.",
+    "T5: B_C in {+1,-1} forces two specified leading nonprincipal coefficients of the reciprocal residue minimal polynomial to vanish; this excludes exact periods 2 and 3 only.",
+    "T6: A rational base-2 equality arising only after repetition already comes from primitive B_C in {+1,-1}."
+  ],
+  "open_claims_and_nonclaims": {
+    "all_period_B_plus_or_minus_1": "OPEN_FOR_N_GE_4",
+    "complex_modulus_only": "NOT_DECIDED",
+    "all_pcf_quadratics": "NOT_CLAIMED",
+    "prime_orbit_correspondence": "NOT_CLAIMED",
+    "route_a": "NOT_ADVANCED",
+    "route_b": "NOT_OPENED"
+  },
+  "registered_exact_audit": {
+    "role": "DEVELOPMENT_SEEN_REPRODUCTION_AND_IMPLEMENTATION_FALSIFICATION_ONLY",
+    "periods": [2, 3, 4, 5, 6, 7],
+    "new_blind_periods": [],
+    "post_null_extension_allowed": false,
+    "exact_set_component": "Psi_n_set is the monic polynomial rad(F_n)/gcd(rad(F_n), product_{d|n,d<n} rad(F_d)), where F_d=g^d-X; formal dynatomic and scheme multiplicities are recorded separately and never replace this set-theoretic least-period object.",
+    "primary_engine": "exact gcd of Psi_n_set with B_n-epsilon over Q(u)=Q[U]/(Q(U)), epsilon in {+1,-1}",
+    "independent_engine": "exact target resultant reduced in Q(u), followed by its exact nonzero rational field norm; reduction modulo the fixed control prime q=3 is an optional diagnostic and is never selected post hoc or required when inconclusive",
+    "mandatory_checks": [
+      "formal dynatomic diagnostic versus the frozen radical/set-difference exact-period component",
+      "squarefreeness or explicit scheme multiplicity",
+      "exact degree divisible by n",
+      "B_n invariant under g modulo the exact-period component",
+      "gcd and resultant engines agree",
+      "periods 2 and 3 agree with the theorem-level finite-field obstruction",
+      "all serialized coefficients use exact arithmetic"
+    ],
+    "interpretation_if_all_absent": "ABSENT_EXACTLY_FOR_N_2_TO_7_DEVELOPMENT_SEEN; ALL_PERIOD_EQUALITY_REMAINS_OPEN",
+    "interpretation_if_hit": "STOP_IMMEDIATELY_AND_EXTRACT_AN_EXACT_CYCLE_WITH_TWO_INDEPENDENT_CERTIFICATES"
+  },
+  "controls": {
+    "power_map": {
+      "map": "z^2",
+      "prediction": "every nonzero exact period-n cycle has B_n=+1 and Lambda=2^n",
+      "role": "sharp equality positive control"
+    },
+    "chebyshev": {
+      "map": "z^2-2",
+      "prediction": "at exact period n=2, Psi_2=X^2+X-1, B_2=-1, and Lambda=-4",
+      "role": "non-power equality and sign-path control"
+    },
+    "negative_target": {
+      "map": "z^2",
+      "target": "B_n=2",
+      "prediction": "no hit",
+      "role": "target-classifier negative control"
+    },
+    "formal_period_pollution": {
+      "map": "z^2-3/4",
+      "prediction": "formal period-2 fixed-point pollution is detected and removed",
+      "role": "exact-period saturation control"
+    },
+    "upstream_regression": {
+      "periods": [1, 2, 3, 4],
+      "prediction": "Paper-2 exact polynomials and f_u/g conjugacy hashes and invariants agree",
+      "role": "inheritance control"
+    }
+  },
+  "run_order": [
+    "source-lock hash and upstream binding preflight",
+    "forbidden-data static scan",
+    "proof-contract and symbolic parameter/PCF checks",
+    "controls-only run",
+    "independent pre-execution code review with DEPLOYMENT_PASS bound to source-lock v2",
+    "registered development-seen exact reproduction for periods 2 through 7",
+    "full tests, analysis, strict result manifest, and independent manuscript review"
+  ],
+  "stop_rules": [
+    "No registered candidate execution before an independent code-review DEPLOYMENT_PASS bound to the current code tree and source-lock hash.",
+    "Any source-lock, upstream-hash, PCF-orbit, Eisenstein, exact-period, squarefree, invariance, gcd/resultant, norm, or control disagreement stops the run.",
+    "A target hit stops period scanning immediately and requires two exact extraction certificates before any interpretation.",
+    "A null result at periods 2 through 7 may not be extended to period 8 or beyond after inspection and may not be called blind.",
+    "Finite absence may not be promoted to an all-period theorem.",
+    "The mod-2 obstruction may not be claimed sufficient from period 4 onward.",
+    "Rational equality, modulus-only equality, and characteristic exponent equality may not be interchanged.",
+    "No prime/zero matching, parameter fitting, zeta stage, quantization, Route-A escalation, or Route-B stage is opened."
+  ],
+  "allowed_data": [
+    "the frozen algebraic parameter and upstream theorem artifacts",
+    "internally generated exact dynatomic, cycle-product, gcd, resultant, norm, and finite-field control objects",
+    "bibliographic metadata and primary literature used for attribution"
+  ],
+  "forbidden_data": [
+    "external prime tables",
+    "Riemann zeros or any target-zero list",
+    "floating or near-rational orbit matching",
+    "post-hoc parameter, sign, period cutoff, or target changes",
+    "uncertified formal-period roots presented as exact cycles",
+    "claims of blind validation for periods observed before the lock"
+  ],
+  "compute_budget": {
+    "gpu_required": false,
+    "cpu_limit": "32 cores available; implementation should remain single-process deterministic unless reviewed",
+    "memory_limit": "60 GiB cgroup, approximately 41 GiB available at batch start",
+    "expected_registered_runtime": "under 10 CPU-minutes",
+    "failure_status": "NOT_EXECUTED_RESOURCE_LIMIT; cutoff may not be weakened post hoc"
+  },
+  "software_lock": {
+    "python": "system Python 3.12 series",
+    "sympy": "1.14.0 exact arithmetic",
+    "gpu": "not used",
+    "network_during_registered_run": false
+  }
+}

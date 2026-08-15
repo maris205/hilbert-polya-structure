@@ -92,3 +92,88 @@ matrix spectral radii, approximate matching, or growing families.
 
 Artifacts: [proof package](../papers/2-branch-baker/PROOF_PACKAGE.md),
 [verified results](../papers/2-branch-baker/results/EXPERIMENT_RESULTS.md).
+
+## O9 — Base-two exponent boundary for the frozen PCF quadratic (PROVED / OPEN tail)
+
+For the frozen PCF quadratic
+
+\[
+g(z)=z^2-u,\qquad u^3-2u^2+2u-2=0,
+\]
+
+the exact local argument makes every period-\(n\ge2\) point a 2-adic unit.
+Consequently a rational period-\(n\) multiplier is \(2^n\) times an odd
+integer.  The equality \(\Lambda=\pm2^n\) is proved impossible at periods 2
+and 3.  The exact periods 2--7 ledger also contains no target hit, but those
+periods were development-seen before the source lock and do not prove the
+all-period statement.  The equality question remains open for arbitrary
+\(n\ge4\).
+
+Artifacts: [proof package](../papers/7-base2-exponent-clock/notes/PROOF_PACKAGE.md),
+[registered ledger](../papers/7-base2-exponent-clock/results/EXPERIMENT_RESULTS.json).
+
+## O10 — Prime-torsion capacity is not a prime clock (PROVED)
+
+Every hyperbolic matrix in \(SL_2(\mathbb Z)\) has a nonzero prime-order
+torsion point of every exact period \(n>12\).  For the standard trace-three
+cat map such a carrier exists exactly for
+\(n\notin\{1,6,12\}\), including the non-semisimple modulo-five repair at
+period 10.  This is capacity rather than specificity: periodic points are
+exactly torus torsion, every additive order occurs, and
+\(x\mapsto\log\operatorname{ord}(x)\) is unbounded and discontinuous in every
+neighborhood.  Native linear monodromy depends on the period, not the torsion
+order.  Thus the construction proves too much and does not provide a local or
+Hölder prime-labelled potential.
+
+Artifacts: [proof package](../papers/8-cat-torsion-capacity/notes/PROOF_PACKAGE.md),
+[exact audit](../papers/8-cat-torsion-capacity/results/EXPERIMENT_RESULTS.json).
+
+## O11 — Prime-shell orbit multiplicity (PROVED, scalar scope)
+
+For the standard cat map the nonzero \(p\)-torsion shell has one primitive
+orbit only at \(p=2\).  Every odd prime has at least \(p-1\) primitive orbits.
+Accordingly an unweighted one-time orbit-label product has local factor
+\((1-p^{-s})^{-m_p}\), while a raw-return product retains the orbit periods as
+well.  A pure product of nonzero scalar denominator factors cannot reduce its
+degree from \(m_p>1\) to one.  Fractional shell weights can force unit total
+mass, but that normalization is global, partition-tautological, and works for
+composite exact-order shells too.  The theorem does not exclude numerators,
+matrix-valued or alternating Fredholm determinants, or a separately justified
+equivariant mechanism.
+
+Artifacts: [proof package](../papers/9-cat-prime-shell-multiplicity/notes/PROOF_PACKAGE.md),
+[five-shell audit](../papers/9-cat-prime-shell-multiplicity/results/EXPERIMENT_RESULTS.json).
+
+## O12 — Full-centralizer compression kills the native period (PROVED)
+
+Over \(\mathbb Z/q\mathbb Z\), the cyclic-vector locus of the standard cat
+matrix is a torsor for the full local centralizer
+\(C_q=(\mathbb Z/q\mathbb Z[A])^\times\).  Its coarse \(C_q\)-quotient is one
+class, but \(A\in C_q\), so the induced dynamics is the identity and has native
+period one.  Restricting to the determinant-one/symplectic centralizer retains
+the norm-image strata.  Obtaining a single class therefore uses a
+modulus-dependent nonsymplectic pseudo-symmetry family, and the label
+\(q^{-s}\) still has to be supplied externally.  The same compression works
+for composite moduli, so it is not prime-specific.
+
+Artifacts: [proof package](../papers/10-cat-centralizer-quotient/notes/PROOF_PACKAGE.md),
+[nine-modulus audit](../papers/10-cat-centralizer-quotient/results/EXPERIMENT_RESULTS.json).
+
+## O13 — Equivariant retention versus compression (PROVED, family-uniform scope)
+
+For a finite abelian \(C\)-set
+\(X=\bigsqcup_K n_K C/K\) with distinguished \(A\in C\), the source period on
+\(C/K\) is
+\([\langle A\rangle:\langle A\rangle\cap K]\).  Coarse and orbit-counting
+reductions collapse the translation; fixed-point Burnside data retain the
+subgroup \(\langle A\rangle\), while a labelled effective \(C\times\mathbb Z\)
+invariant can recover \(A\) only modulo the action kernel.  Static
+inertia/stabilizer data do not restore the clock.  At the locked modulus
+\(q=2\), point-cardinality happens to give source support with unit exponent,
+but this is the unique row/type exception, is not family-uniform, and its
+support collides with \(q=4\).  Hence no single audited reduction supplies an
+intrinsic modulus clock across the family.
+
+Artifacts: [proof package](../papers/11-cat-equivariant-clock/notes/PROOF_PACKAGE.md),
+[independent scope correction](../papers/11-cat-equivariant-clock/notes/INDEPENDENT_POSTRUN_SCOPE_AUDIT.md),
+[exact audit](../papers/11-cat-equivariant-clock/results/EXPERIMENT_RESULTS.json).
