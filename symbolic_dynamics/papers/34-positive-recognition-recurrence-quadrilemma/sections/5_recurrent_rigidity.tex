@@ -1,0 +1,54 @@
+\section{Recurrent rigidity and the connector repair}
+
+\begin{lemma}[simple and disjoint atom cycles]\label{lem:disjoint}
+Under the literal ledger and \eqref{eq:free}, every atom cycle is simple and
+two distinct atom cycles share no vertex.
+\end{lemma}
+
+\begin{proof}
+If distinct cycles meet, rotate their edge words $x,y$ at a shared vertex and
+write $xy=w^m$ with $w$ primitive.  The literal ledger identifies $w$ with
+some $\gamma_d$.  Roof additivity gives
+$N(a)N(c)=N(d)^m$, contradicting \eqref{eq:free}.  If one atom cycle repeats
+a vertex before closing, split it there into nonempty closed words and take
+their primitive roots.  The same argument yields
+$N(a)=N(c)^mN(d)^n$, another forbidden exponent relation.
+\end{proof}
+
+\begin{lemma}[mixed root in a shared component]\label{lem:scc}
+Every recurrent strongly connected component is exactly one atom cycle.
+\end{lemma}
+
+\begin{proof}
+Suppose one component contains distinct atom cycles $\gamma_a$ and
+$\gamma_c$.  They are vertex-disjoint by \cref{lem:disjoint}.  Choose any
+path $\alpha$ from an attachment vertex of the first cycle to one on the
+second, and any path $\beta$ back.  The closed word
+\[
+W=\gamma_a\alpha\gamma_c\beta
+\]
+has a primitive root $w$.  Since $W=w^m$, $W$ and $w$ have identical edge
+support.  The ledger identifies $w$ with an atom cycle.  Because it meets
+$\gamma_a$, \cref{lem:disjoint} forces equality with $\gamma_a$; yet $w$
+also contains an edge of $\gamma_c$, a contradiction.  Every extra edge in
+a recurrent component lies on a closed walk and yields the same argument.
+\end{proof}
+
+No shortest-path or interior-avoidance normal form is used.  This distinction
+is essential.  The preregistered finite proxy required both connectors to
+avoid both cycles internally and failed on $18{,}272$ examples.  The repaired
+statement asks only for mutual reachability, which is exactly what a strongly
+connected component supplies.
+
+\begin{figure}[t]
+\centering
+\input{figures/connector_repair.tex}
+\caption{Left: the preregistered strict connector normal form need not exist.
+Right: arbitrary mutual SCC paths suffice because a word and its primitive
+root have identical edge support.  A one-way connector is not recurrent.}
+\label{fig:repair}
+\end{figure}
+
+The argument is graph-theoretic and independent of weights.  Positivity
+enters later, when a literal orbit statement is converted into a trace
+statement without cancellation.

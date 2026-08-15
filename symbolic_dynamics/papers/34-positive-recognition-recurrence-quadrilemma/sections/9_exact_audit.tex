@@ -1,0 +1,54 @@
+\section{Exact adversarial audit}
+
+The computation was frozen before canonical execution and uses only exact
+integer, rational, and symbolic arithmetic.  Candidate generation and the
+independent evaluator use different algorithms: Tarjan SCCs versus
+transitive-closure SCCs, DFS cycles versus vertex-permutation cycles,
+period-divisor roots versus coordinate-period roots, and Newton identities
+versus direct recurrent-block reconstruction.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}L{0.34\textwidth}Y r@{}}
+\toprule
+Gate & Interpretation & Exact outcome\\
+\midrule
+All loop-allowed digraphs, $n\le4$ & exhaustive, not sampled & $66{,}066$ graphs\\
+Shared-state mixed roots & exhaustive within that census & $613{,}996/613{,}996$\\
+Repaired connector roots & arbitrary mutual SCC paths & $161{,}475/161{,}475$\\
+Seeded $n=5,\dots,8$ controls & finite, explicitly nonexhaustive & $69{,}073/69{,}073$\\
+Strict connector proxy & preregistered normal form & $18{,}272$ failures\\
+Terminal compiler & $126$ recurrent, $34$ acyclic states & exact pruning\\
+Kraft/clock & $12$ configurations & $6{,}141$ rows, $0$ failures\\
+Raw/induced marker & one factor per frozen atom & $17/17$ differ, agree at $z=1$\\
+\bottomrule
+\end{tabularx}
+\caption{Canonical exact evidence.  The seeded controls are never described
+as an exhaustive graph census.}
+\label{tab:audit}
+\end{table}
+
+The repaired mixed-root audit totals $844{,}544/844{,}544$ certificates with
+no true failure.  The failed strict proxy remains in the public artifact
+ledger: $24$ failures on three vertices, $17{,}952$ on four vertices, and
+$296$ among the seeded controls.  This is evidence for theorem repair, not a
+discarded inconvenience.
+
+The terminal graph has $160$ states, of which $126$ are recurrent and $34$
+are acyclic decision states.  Newton reconstruction equals the product of
+the $17$ recurrent cycle factors.  Across eight post-freeze inventories,
+every proper nonempty support pruning changes the determinant.  Signed and
+matrix controls deliberately lie outside the theorem: a signed three-state
+nilpotent recurrent matrix has determinant one, and orthogonal matrix
+branches can annihilate mixed products while retaining pure ones.
+
+The canonical authority run contains $76/76$ passing tests.  Two cleared
+fresh-result runs produced $19/19$ byte-identical artifacts with aggregate
+SHA-256
+\nolinkurl{ae0aa6d1767bb207d0096df149224995bfb40aba674367a2f300668bfdd88c02}.
+The final result ledger contains $41$ entries; its ledger-file SHA-256 is
+\nolinkurl{6ffbbee5ce1e2a20f0fb00839b89981293c25a8eca2a0995ed384e7448dc7591}.
+The sealed package additionally checks LF-only text, exact terminal newlines,
+absence of cache and timestamp fields, Route schema, source separation, and
+result-set equality.

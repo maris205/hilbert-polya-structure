@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  v/.style={circle,draw,minimum size=4.5mm,inner sep=0pt},
+  arr/.style={-{Latex[length=1.8mm]},thick},
+  bad/.style={stopred,very thick},
+  good/.style={deepgreen,very thick}
+]
+\begin{scope}[xshift=-4.8cm]
+  \node[v] (a1) at (0,0) {};
+  \node[v] (a2) at (-0.8,-0.8) {};
+  \node[v] (a3) at (0.8,-0.8) {};
+  \draw[arr] (a1) -- (a2) -- (a3) -- (a1);
+  \node[v] (b1) at (3.1,0) {};
+  \node[v] (b2) at (2.3,-0.8) {};
+  \node[v] (b3) at (3.9,-0.8) {};
+  \draw[arr] (b1) -- (b2) -- (b3) -- (b1);
+  \draw[arr,dashed] (a1) to[bend left=18] node[above] {$\alpha$} (b1);
+  \draw[arr,dashed] (b2) to[bend left=18] node[below] {$\beta$} (a2);
+  \draw[bad] (-0.35,0.55) -- (3.45,-1.25);
+  \draw[bad] (-0.35,-1.25) -- (3.45,0.55);
+  \node[align=center] at (1.55,-1.65) {strict interior-avoidance proxy\\need not exist};
+\end{scope}
+\begin{scope}[xshift=1.1cm]
+  \node[v] (c1) at (0,0) {};
+  \node[v] (c2) at (-0.8,-0.8) {};
+  \node[v] (c3) at (0.8,-0.8) {};
+  \draw[arr] (c1) -- (c2) -- (c3) -- (c1);
+  \node[v] (d1) at (3.1,0) {};
+  \node[v] (d2) at (2.3,-0.8) {};
+  \node[v] (d3) at (3.9,-0.8) {};
+  \draw[arr] (d1) -- (d2) -- (d3) -- (d1);
+  \draw[arr,good] (c1) to[bend left=28] node[above] {$\alpha$} (d2);
+  \draw[arr,good] (d1) to[bend left=35] node[below] {$\beta$} (c3);
+  \node[align=center] at (1.55,-1.65) {$W=\gamma_a\alpha\gamma_c\beta$\\$\supp(W)=\supp(\sqrt[m]{W})$};
+\end{scope}
+\end{tikzpicture}

@@ -45,6 +45,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [31-wilson-semiring-verifier-trichotomy](papers/31-wilson-semiring-verifier-trichotomy/README.md) | [PDF](papers/31-wilson-semiring-verifier-trichotomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/31-wilson-semiring-verifier-trichotomy/) | alphabet sum 与 tensor product 确实击穿只保乘法的裸 UFD clone；但 matched semiring clone 精确复制全部 Wilson paths。Wilson recurrence 给每个素数一条长度 $p-1$ 的 cycle，却使 whole operator 非紧；first return 改写自由 marker，transient 版本又剪枝回 atom diagonal。 | **SEMIRING CLONE / PRUNING–DILUTION TRICOTOMY / SD-C33** |
 | [32-projective-residue-recurrence-obstruction](papers/32-projective-residue-recurrence-obstruction/README.md) | [PDF](papers/32-projective-residue-recurrence-obstruction/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/32-projective-residue-recurrence-obstruction/) | 非 terminal 的 $P^1(\mathbb Z/n\mathbb Z)$ recurrent grammar 在同一 uninduced object 上恢复了 $\Re s>2$ 的 trace-class Fredholm ownership；但 $S^2=R^3=1$ 对所有模数都成立，cusp coupling 又给出普适 composite diamonds，故 primitive ledger 在配权前已失败。 | **PROJECTIVE RECURRENCE OBSTRUCTION / BRANCH CLOSED / SD-C34** |
 | [33-relation-homology-operator-non-descent](papers/33-relation-homology-operator-non-descent/README.md) | [PDF](papers/33-relation-homology-operator-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/33-relation-homology-operator-non-descent/) | 从 $S/R$ 轨道 incidence 施加的 Manin norm-polynomial quotient 消去预定 chain relations，diamond filling 也消去 cross $H_1$；但每个模数仍保留 cusp $R,S$ primitive survivor，character/supercharacter controls 均不筛素数，且原始 $S+R$ adjacency 在 $n=2$ 已不降到 quotient。 | **RELATION HOMOLOGY NO-GO / SEMIRING-RESIDUE FAMILY CLOSED / SD-C35** |
+| [34-positive-recognition-recurrence-quadrilemma](papers/34-positive-recognition-recurrence-quadrilemma/README.md) | [PDF](papers/34-positive-recognition-recurrence-quadrilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/34-positive-recognition-recurrence-quadrilemma/) | 正标量 literal atom-only ledger 强制 declared cycles 分居 recurrent components；识别 DAG 对全部 power traces/Fredholm determinant 可剪枝，有限 alphabet 与总 roof $\log p$ 又强制 whole operator 非紧，而 first return 会把原始 $z^{\ell(p)}$ marker 改成 $z$。 | **POSITIVE COMPILER QUADRILEMMA / ROUTE-A REJECTED / SD-C36** |
 
 ### 论文 1 的候选分离结论
 
@@ -1113,13 +1114,55 @@ CLOSE_SEMIRING_RESIDUE_FAMILY / ROUTE_A_REJECTED**。下一批不应继续
 projective-residue/Manin quotient，而应转向一个 primitive recurrence 在
 block projector 之前已内生生成 Euler factors 的 global arithmetic source。
 
+### 论文 34：正标量识别编译器在 recurrence、Fredholm 与时钟之间四重封路
+
+Paper 34 把此前分散在 terminal verifier、有限码与 clock-dilution 分支中的停止条件
+统一为一个 quantifier-clean 的同对象定理。对 one-sided、正标量、有限
+orbit-separating alphabet 的 countable Markov graph，若每个 arithmetic atom $a$
+具有精确 primitive cycle、总 roof $log N(a)$，并保留原始 graph-step marker $z$，
+则 literal atom-only ledger 强制这些 cycles 落在彼此分离的 recurrent components。
+若两条 declared cycles 属于同一 strongly connected component，任取双向连接路径
+$\alpha,\beta$ 后，闭词
+
+$$
+W=\gamma_a\alpha\gamma_c\beta
+$$
+
+的 primitive root 同时使用两圈的边，因此产生额外 mixed primitive orbit。这里不再
+要求连接路径的 interiors 避开两圈；预注册中这一过强 normal form 被精确反例否定，
+而修正后的 SCC 命题得到完整验证。
+
+如果 whole vertex operator 属于 trace class，全部非循环识别边都从每个 power trace
+与 Fredholm determinant 中剪除；计算层对 determinant 不可见。另一方面，有限局部
+可分离性与 primes 的多项式增长迫使无穷子列满足
+
+$$
+\ell(p)\ge \frac{\log p}{4\log b}.
+$$
+
+把总 roof $\log p$ 分到这些长圈上，必产生一致远离零的 edge weights；原始 whole
+operator 即使有界也非紧，更不属于任何有限 Schatten 类。Poincaré first return 虽把
+循环压成 trace-class diagonal，却同时把
+$1-z^{\ell(p)}p^{-s}$ 改成 $1-zp^{-s}$；二者只在 $z=1$ 遗忘时钟后相等。
+
+完整 $n\le4$ 的 66,066 个图与 64 个确定性 seeded controls 共审计
+844,544 个修正后 mixed-root constructions，全部通过；同时公开保留原 C2 normal
+form 的 18,272 个反例。76/76 tests、85/85 integrity checks、20/20 scientific
+checks，以及 fresh/cold/idempotent 双跑均通过。阶段结论为
+**GO_QUANTIFIER_CLEAN_NO_GO_SYNTHESIS / STOP_POSITIVE_LITERAL_COMPILER /
+STOP_WHOLE_FREDHOLM / STOP_MARKER_CHANGING_FIRST_RETURN /
+CLOSE_POSITIVE_RECOGNITION_COMPILER_BRANCH / ROUTE_A_REJECTED**。
+signed、matrix、nonpositive、infinite-hidden-alphabet 与 nondeterministic cancellations
+均明确留在定理范围之外；Paper 35 转向 affine-semigroup/Bost--Connes object firewall，
+不把这些边界误报成已关闭。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十三篇论文](papers/)
+- [三十四篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

@@ -1,0 +1,45 @@
+\section{Exact pruning and operator ownership}
+\label{sec:pruning}
+
+Let $V_c$ be the union of atom-cycle vertices.  Permute each cycle forward
+and fix all other vertices, obtaining a unitary $U$.  If $E_{\rm diag}$ is
+the diagonal conditional expectation, then
+\[
+D_\sigma=E_{\rm diag}(U^*L_\sigma),\qquad C_\sigma=UD_\sigma.
+\]
+Contractivity of $E_{\rm diag}$ on trace class gives
+$\|C_\sigma\|_1\le\|L_\sigma\|_1$.
+
+Every diagonal coefficient of $L_\sigma^r$ is a sum over length-$r$ closed
+walks based at that vertex.  Each edge of a closed walk lies in a recurrent
+component, so \cref{lem:scc} puts the walk entirely on one atom cycle.
+Consequently the diagonal coefficients of $L_\sigma^r$ and $C_\sigma^r$
+coincide.  Summing proves \eqref{eq:trace-equality}.  The trace-class
+identity
+\[
+\log\det(I-zL)=-\sum_{r\ge1}\frac{z^r}{r}\Tr L^r
+\]
+first gives equality near $z=0$, and entireness extends it to all $z$.  A
+weighted cycle of length $\ell(a)$ has determinant
+\[
+1-z^{\ell(a)}\prod_{e\in\gamma_a}e^{-\sigma\tau(e)}
+=1-z^{\ell(a)}N(a)^{-\sigma},
+\]
+which proves \eqref{eq:rawdet}.
+
+The conclusion is stronger than pruning a finite nilpotent branch: any edge
+outside the recurrent core is invisible, even if infinitely many such edges
+feed into or leave cycle vertices.  But trace-class ownership is conditional.
+If the whole operator is not trace class, the formal orbit product is not
+thereby an ordinary Fredholm determinant.
+
+The terminal control makes the meaning transparent.  For
+\[
+L=\begin{pmatrix}0&0\\ c&x\end{pmatrix}
+\quad(c,x>0),
+\qquad \det(I-zL)=1-zx.
+\]
+Deleting the feed state changes neither a power trace nor the determinant.
+A recognizer followed by accept-loop orbitification can therefore implement
+any decidable support, but the periodic ledger records the terminal output
+convention rather than recurrent computation.
