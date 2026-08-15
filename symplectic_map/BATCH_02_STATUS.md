@@ -13,7 +13,7 @@
 - Cross-model upload: disabled
 - External prime/zero data: forbidden unless a future frozen candidate first
   passes its arithmetic entry gates
-- Batch status: `COMPLETE_LOCAL_PENDING_GITHUB_SYNC`
+- Batch status: `COMPLETE_SYNCED`
 
 ## Paper Queue
 
@@ -318,3 +318,12 @@ can an exact period-\(n\) orbit with rational multiplier satisfy
   `765eea5cb974d70f80d25deafaa6d711be9940f397a24439460058420767292c`.
   Local status is now `COMPLETE_LOCAL_PENDING_GITHUB_SYNC`; no sixth paper
   has been opened.
+- 2026-08-15: The explicit Batch-02 allowlist was synchronized to GitHub in
+  bulk commit `3b91eb95e1917bb73c81bbc58b1d813c1ef5ac7a`.  The commit added the
+  five frozen paper packages, batch audit, dashboard, README, and two
+  registries as 489 staged paths (486 additions and 3 modifications), with
+  zero deletions, zero gitlinks, and no nested `.git`, cache, checkpoint, or
+  build-intermediate payload.  The live `origin/main` identity was checked
+  immediately before and after the push.  This final dashboard-only closure
+  records `COMPLETE_SYNCED`; all scientific artifacts remain byte-identical,
+  and no sixth paper has been opened.
