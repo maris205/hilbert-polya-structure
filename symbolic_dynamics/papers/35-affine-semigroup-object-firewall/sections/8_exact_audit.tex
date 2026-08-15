@@ -1,0 +1,65 @@
+\section{Exact audit and adversarial controls}
+\label{sec:audit}
+
+The computation is an exact finite audit of claims that have finite witnesses;
+it is not a numerical approximation of an infinite determinant.  Candidate
+generation and evaluation are source-separated.  The generator uses affine
+multiplication, words, finite boxes, and quotient actions.  The independent
+evaluator reconstructs normal forms, heights, cyclic reduction, primitive
+roots, quotient cycles, determinant coefficients, and control labels without
+importing the source core.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}Y r Y@{}}
+\toprule
+Audit block & Exact size & Frozen conclusion \\
+\midrule
+positive height edges & 520 & every retained edge strictly increases height \\
+symmetric backtracks & 520 & one formal two-step class per retained edge \\
+word census & 699,040 & 126,553 admissible words \\
+primitive cyclic-NB classes & 88 & complete within the frozen word cutoff \\
+affine witnesses & 8 & all primitive of length $r+3$ \\
+finite quotients & 48 & relation retained; $U_q^q$ retained; degeneration flagged \\
+fresh artifacts & 23 & two cleared runs byte-identical \\
+tests & 84/84 & includes five mutation-sensitivity assertions \\
+evaluator gates & 10/10 & independent exact checks pass \\
+\bottomrule
+\end{tabularx}
+\caption{Canonical exact-prototype census.  Authority hashes are frozen only
+after the independent integration pipeline completes.}
+\label{tab:exact-audit}
+\end{table}
+
+The canonical baseline is $r=4$; the suite also uses $r=2,3,5$, multiple
+bases, mutated exponent relations, generic monoid words, and commutator
+controls.  All eight declared affine witnesses have the predicted length and
+primitive status.  The 48 quotient rows simultaneously verify the relation
+and the extra translation cycle, including the $(2,2)$ polygon degeneration.
+
+For $\beta=2,3$ and a finite diagonal cutoff, exact rational arithmetic checks
+\cref{eq:partition-trace,eq:diagonal-log} coefficient by coefficient.  A
+separate evaluator-only prime-Fock fixture verifies the free-$z$ marker in
+\cref{eq:bosonic-det}; it is explicitly labelled a prime-seeded control.
+
+Boundary fixtures prevent an overbroad conclusion.  A nonzero signed scalar
+does not erase all repetitions.  The matrix
+$M=\diag(1,-1)$ has $\Tr M=0$ but $\Tr M^2=2$.  More generally a finite matrix
+local factor is identically one exactly when the holonomy is nilpotent:
+\begin{equation}
+\det(I-tM)\equiv1
+\quad\Longleftrightarrow\quad M\text{ is nilpotent}.
+\label{eq:nilpotent-boundary}
+\end{equation}
+Thus signed, matrix, graded, and groupoid mechanisms are genuine boundary
+axes; the positive scalar theorem does not claim to eliminate them.
+
+Fresh A/B and cache-free cold C reproduce all $23$ scientific artifacts
+byte-identically, with aggregate
+\nolinkurl{94df5a68ef2a3a9a05bedddea2b6f210e437622a3d77cb1f9ec4aff351a55fed}.
+The final $47$-entry canonical code/result ledger has SHA-256
+\nolinkurl{8ca89e858fadd9069916eeba3584aeae005ba0f1189dc7ec7c51c6cdde6b7e36}.
+The integration also verifies exact-one-terminal-LF text, source/evaluator
+separation, Route-A v0.2 schema, dependency provenance, idempotence, and
+metadata-seal stability.

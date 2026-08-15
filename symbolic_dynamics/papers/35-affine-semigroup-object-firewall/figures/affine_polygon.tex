@@ -1,0 +1,26 @@
+\begin{tikzpicture}[
+  font=\small,
+  vertex/.style={circle,draw,fill=white,minimum size=7mm,inner sep=1pt},
+  edge/.style={-{Latex[length=2mm]},thick},
+  rev/.style={-{Latex[length=2mm]},thick,stopred},
+  label/.style={fill=white,inner sep=1pt}
+]
+\node[vertex] (x) at (0,0) {$x$};
+\node[vertex] (xv) at (2.3,1.15) {$xv$};
+\node[vertex] (end) at (5.1,0) {$xvu=xu^rv$};
+\node[vertex] (xu) at (1.6,-1.15) {$xu$};
+\node[vertex] (xur) at (3.45,-1.15) {$xu^r$};
+\draw[edge,deepgreen] (x) -- node[label,above left] {$v$} (xv);
+\draw[edge,deepgreen] (xv) -- node[label,above right] {$u$} (end);
+\draw[edge,formalblue] (x) -- node[label,below left] {$u$} (xu);
+\draw[edge,formalblue] (xu) -- node[label,below] {$u^{r-1}$} (xur);
+\draw[edge,formalblue] (xur) -- node[label,below right] {$v$} (end);
+\draw[rev,dashed] (end)
+  .. controls (4.7,-2.35) and (0.4,-2.35) ..
+  node[pos=.5,label,below=1pt] {$\bar v\,\bar u^r$} (x);
+\node[draw,rounded corners=2pt,align=left,fill=softgray,text width=5.6cm]
+  at (9.0,0) {closed word: $v u\bar v\bar u^r$\par
+  length: $r+3$\par
+  cyclically nonbacktracking\par
+  one positive $v$ $\Rightarrow$ not a proper power};
+\end{tikzpicture}

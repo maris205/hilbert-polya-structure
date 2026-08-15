@@ -46,6 +46,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [32-projective-residue-recurrence-obstruction](papers/32-projective-residue-recurrence-obstruction/README.md) | [PDF](papers/32-projective-residue-recurrence-obstruction/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/32-projective-residue-recurrence-obstruction/) | 非 terminal 的 $P^1(\mathbb Z/n\mathbb Z)$ recurrent grammar 在同一 uninduced object 上恢复了 $\Re s>2$ 的 trace-class Fredholm ownership；但 $S^2=R^3=1$ 对所有模数都成立，cusp coupling 又给出普适 composite diamonds，故 primitive ledger 在配权前已失败。 | **PROJECTIVE RECURRENCE OBSTRUCTION / BRANCH CLOSED / SD-C34** |
 | [33-relation-homology-operator-non-descent](papers/33-relation-homology-operator-non-descent/README.md) | [PDF](papers/33-relation-homology-operator-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/33-relation-homology-operator-non-descent/) | 从 $S/R$ 轨道 incidence 施加的 Manin norm-polynomial quotient 消去预定 chain relations，diamond filling 也消去 cross $H_1$；但每个模数仍保留 cusp $R,S$ primitive survivor，character/supercharacter controls 均不筛素数，且原始 $S+R$ adjacency 在 $n=2$ 已不降到 quotient。 | **RELATION HOMOLOGY NO-GO / SEMIRING-RESIDUE FAMILY CLOSED / SD-C35** |
 | [34-positive-recognition-recurrence-quadrilemma](papers/34-positive-recognition-recurrence-quadrilemma/README.md) | [PDF](papers/34-positive-recognition-recurrence-quadrilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/34-positive-recognition-recurrence-quadrilemma/) | 正标量 literal atom-only ledger 强制 declared cycles 分居 recurrent components；识别 DAG 对全部 power traces/Fredholm determinant 可剪枝，有限 alphabet 与总 roof $\log p$ 又强制 whole operator 非紧，而 first return 会把原始 $z^{\ell(p)}$ marker 改成 $z$。 | **POSITIVE COMPILER QUADRILEMMA / ROUTE-A REJECTED / SD-C36** |
+| [35-affine-semigroup-object-firewall](papers/35-affine-semigroup-object-firewall/README.md) | [PDF](papers/35-affine-semigroup-object-firewall/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/35-affine-semigroup-object-firewall/) | 正 affine Cayley source 有严格高度而无 recurrence；形式逆边制造 backtracks，Hashimoto reduction 又保留普适 affine relation cycles。Bost--Connes 的 $\zeta(\beta)$ 是另一 diagonal Gibbs 对象的首个 trace coefficient，不是同一 graph-step primitive determinant。 | **AFFINE OBJECT FIREWALL / ROUTE-A REJECTED / SD-C37** |
 
 ### 论文 1 的候选分离结论
 
@@ -1156,13 +1157,49 @@ signed、matrix、nonpositive、infinite-hidden-alphabet 与 nondeterministic ca
 均明确留在定理范围之外；Paper 35 转向 affine-semigroup/Bost--Connes object firewall，
 不把这些边界误报成已关闭。
 
+### 论文 35：affine source 的 acyclicity、relation cycles 与 Gibbs object firewall
+
+Paper 35 冻结全正 affine semigroup
+$P=\mathbb N_0\rtimes\mathbb N^\times$ 的 right Cayley source，并用有限生成切片
+$P_r=\langle u,v\mid vu=u^rv\rangle^+$ 给出自然 whole-operator benchmark。正向边使
+$h(b,a)=b+a$ 严格增加，所以源图没有闭路；加形式逆边后，每条边都产生两步
+backtrack。Hashimoto reduction 虽删除 immediate reversals，却保留长度 $r+3$ 的
+primitive relation word
+
+$$
+vu\bar v\bar u^r.
+$$
+
+这些关系环对 prime、composite 与 prime-power 的 $r$ 一视同仁。有限 congruence
+quotients 同时保留 relation word 并新添 $U_q^q$ translation cycles，因此不会忠实
+下降完整 primitive ledger。有限生成切片上的 positive、symmetric 与 Hashimoto
+operators 虽有界，却都由平移正交列证明非紧；full all-$n$ adjacency 甚至具有无穷
+outdegree，不能在一个 basis vector 上定义为 $\ell^2$ 向量。
+
+Bost--Connes diagonal Gibbs operator 则是另一个诚实 trace-class 对象：
+
+$$
+\operatorname{Tr}(D_\beta)=\zeta(\beta),\qquad
+-\log\det(I-zD_\beta)=\sum_{m\ge1}\frac{z^m}{m}\zeta(m\beta).
+$$
+
+所以 partition trace 只是 connected Fredholm logarithm 的 $[z]$ 系数；prime-Fock
+Euler product又从一开始使用 prime-indexed one-particle basis。exact audit 含
+699,040 个 frozen words、126,553 个 admissible words、88 个 primitive cyclic-NB
+classes 与 48 个 quotient fixtures；84/84 tests、10/10 independent gates 及 23 个
+fresh/cold scientific artifacts 全部通过。阶段结论为
+**STOP_POSITIVE_AFFINE_RECURRENCE / STOP_RELATION_CYCLE_POLLUTION /
+STOP_PARTITION_TRACE_IDENTIFICATION / CLOSE_AFFINE_SEMIGROUP_PARTITION_IDENTIFICATION_BRANCH /
+ROUTE_A_REJECTED**。Paper 36 只允许在同一 uninduced symbolic object 上测试
+source-natural chain cancellation，并必须同时保留原 marker 与非零 recurrent sector。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十四篇论文](papers/)
+- [三十五篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
