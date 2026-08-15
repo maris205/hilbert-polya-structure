@@ -2167,3 +2167,229 @@ horseshoe, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  Route B is not authorized.  The next theorem is a
 uniform height/Galois-excess pressure for these effective totally real
 primitive divisors; no rational-prime trace follows from total reality.
+
+## HCS-P63 primitive-coordinate height and flat pressure (2026-08-15)
+
+Candidate **HCS-P63** executes the first height-pressure test named by P62;
+see the
+[HCS-P63 project](../henon_primitive_coordinate_height_flat_pressure/).
+P46 integrality, P62 real-conjugate exhaustion, and the cyclic maximum
+principle give the sharp uniform root bound
+
+\[
+|x|\le1+\sqrt7,
+\qquad h(x)\le\log(1+\sqrt7).
+\]
+
+Consequently the ordinary primitive-coordinate partition satisfies
+
+\[
+e^{-|s|C}D_n\le Z_n(s)\le e^{|s|C}D_n
+\]
+
+and has pressure `(1/2)log(2)` for every fixed real `s`.  This remains true
+under every fixed nonzero algebraic rescaling.  The candidate therefore
+produces a proved normalization obstruction rather than a new arithmetic
+pressure.  Exact finite factorization through period 11 and an independent
+root-bound check through period 9 are certificate layers only.
+
+The Route-A tuple is **(A1_PASS_ANALYTIC,
+A2_ANALYTIC_DETERMINANT inherited, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Route B is not
+authorized.  The next candidate is the extensive packet Mahler average and
+the equidistribution of the complete primitive reflection-root ensemble.
+
+## HCS-P64 reflection-boundary Mahler packet pressure (2026-08-15)
+
+Candidate **HCS-P64** resolves P63's packet-level extensive-height question;
+see the
+[HCS-P64 project](../henon_reflection_boundary_mahler_pressure/). The
+full-shift coding is made equivariant with the Hénon reversor, so odd
+mixed-axis roots are exactly primitive palindromic half-words. Primitive
+subtraction has total-variation cost at most `tau(n)2^(-n/3)`.
+
+The marked root measures converge to the reflected one-sided Bernoulli law
+`s[-k]=s[k]`, which is not shift invariant. Cyclically averaging the same
+orbits converges to the invariant fair Bernoulli measure. Consequently the
+packet Mahler average converges to a positive constant `kappa_J` and
+
+\[
+\lim \frac1n\log\bigl(D_n e^{-sna_n}\bigr)
+=\frac12\log2-s\kappa_J.
+\]
+
+The Route-A status is **ROUTE_A_EXPLORATORY**: this is a proved extensive
+packet law but not a prime trace or individual factor-height pressure. Route
+B is not authorized. The next candidate is a certified-cylinder theorem
+separating the marked boundary slope from the orbit-averaged maximal-entropy
+slope.
+
+## HCS-P65 minimal symmetry-defect pressure (2026-08-15)
+
+Candidate **HCS-P65** supplies an exact calibration after P64; see the
+[HCS-P65 project](../henon_minimal_symmetry_defect_pressure/). Every finite
+one-sided observable is blind to the marked-boundary/maximal-entropy
+distinction. The centered radius-one observable
+`chi=1{s[-1]=s[1]}` has expectations `1` and `1/2`, so its extensive marked
+and orbit pressures are `(1/2)log2-t` and `(1/2)log2-t/2`. Coupling it to the
+Mahler variable gives a certified transverse gradient gap of `-1/2`.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized. The
+next structural gate is cohomology invariance: because the boundary measure
+is not invariant, a symbolic coboundary may alter marked pressure while
+leaving orbit pressure unchanged.
+
+## HCS-P66 boundary cohomology anomaly (2026-08-15)
+
+Candidate **HCS-P66** resolves P65's cohomology-invariance test; see the
+[HCS-P66 project](../henon_reflection_boundary_cohomology_anomaly/). For the
+marked reflection-boundary law,
+
+\[
+A_J(u)=\int(u-u\circ\sigma)\,d\eta_J
+\]
+
+has norm exactly two because `eta_J` and its one-step translate are mutually
+singular. Explicit radius-`r` cylinders approach this norm with value
+`2(1-2^(-r))`. Thus marked pressure depends on the chosen cohomology
+representative. Every complete periodic-orbit average, however, annihilates
+every coboundary exactly by telescoping.
+
+The Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not
+authorized. The next candidate is a uniqueness theorem for normalized
+linear samplers on finite cycles that annihilate all coboundaries.
+
+## HCS-P67 unique gauge-invariant orbit sampler (2026-08-15)
+
+Candidate **HCS-P67** closes P66's normalization question; see the
+[HCS-P67 project](../henon_unique_gauge_invariant_orbit_sampler/). On every
+primitive `n`-cycle, a normalized real linear sampler annihilates every
+coboundary if and only if all weights equal `1/n`. No positivity is assumed,
+and a one-site transfer function detects every nonuniform choice.
+
+P64's orbit-averaged equidistribution then upgrades this finite theorem to a
+universal pressure for every continuous potential:
+
+\[
+\mathcal P_f(s)=\frac12\log2-s\int f\,d\mu_B.
+\]
+
+It is exactly gauge invariant and uniformly Lipschitz in the potential. The
+Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not authorized:
+the functional has no source-native determinant, rational-prime labels, or
+von Mangoldt amplitudes. That determinant/trace interface is the next major
+candidate rather than another sampling normalization.
+
+## HCS-P68 canonical reflection-packet Euler product (2026-08-16)
+
+Candidate **HCS-P68** promotes P67's canonical sampler to an explicit analytic
+germ; see the
+[HCS-P68 project](../henon_canonical_reflection_packet_euler_product/).
+The product
+
+\[
+\mathcal Z_f(z,s)=\prod_{n\ {\rm odd}}
+(1-z^n e^{-sn b_n(f)})^{-D_n}
+\]
+
+is exactly cohomology invariant in its convergence disk, and its logarithmic
+derivative distinguishes primitive packets from all repetitions by a divisor
+sum. In the unweighted case its radius is \(2^{-1/2}\), but its logarithm has
+principal part \(1/[\sqrt2(1-\sqrt2z)]\); hence the product has an exponential
+essential singularity at the positive entropy boundary.
+
+The formal Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. It is not the full Lind zeta and retains only a
+periodwise aggregate mean. Route B is not authorized. The next candidate is
+the exact cumulant gap between this mean-field factor and the orbit-resolved
+exponential moment.
+
+## HCS-P69 orbit-resolved reflection cumulant pressure (2026-08-16)
+
+Candidate **HCS-P69** resolves P68's first missing invariant; see the
+[HCS-P69 project](../henon_orbit_resolved_reflection_cumulant_pressure/).
+For \(\chi=\mathbf1\{s_{-1}=s_1\}\), odd cyclic decimation and reflection
+give the exact packet polynomial
+
+\[
+F_{2m+1}(q)=2q(1+q^2)^m
+\]
+
+and the primitive dilation-Möbius law
+\(E_n(q)=\sum_{k\mid n}\mu(k)F_{n/k}(q^k)\). Therefore
+
+\[
+P_{\rm orb}(s)=\frac12\log(1+e^{-2s}),\qquad
+P_{\rm orb}(s)-P_{\rm mf}(s)=\frac12\log\cosh s.
+\]
+
+The gap is strictly positive away from zero and its second derivative at zero
+is \(1/2\). The Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Route B is not authorized. The exact \(E_n\) are the
+input for the next orbit-resolved Euler product.
+
+## HCS-P70 orbit-resolved reflection Euler boundary (2026-08-16)
+
+Candidate **HCS-P70** closes the full product named by P69; see the
+[HCS-P70 project](../henon_orbit_resolved_reflection_euler_boundary/).
+One individual Euler factor is retained for every primitive marked reflection
+word, and
+
+\[
+[z^m]\,z\partial_z\log\mathcal Z_{\rm orb}
+=\sum_{\substack{n\mid m\\n\ {\rm odd}}}nE_n(q^{m/n}).
+\]
+
+The exact positive-weight boundary is \(R(q)=(1+q^2)^{-1/2}\), where the
+product has an exponential essential singularity. Its radius relative to the
+aggregate-mean product is
+\[
+R(q)/R_{\rm mf}(q)=1/\sqrt{(q+q^{-1})/2},
+\]
+strictly below one unless \(q=1\). The Route-A tuple is **(A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. A relative Lind/transfer counterterm is open; Route B
+is not authorized.
+
+## HCS-P71 relative Lind counterterm (2026-08-16)
+
+Candidate **HCS-P71** performs the source comparison named by P70; see the
+[HCS-P71 project](../henon_relative_lind_counterterm/). The full two-shift
+reverse Lind formula has, at \(u=1-\sqrt2t=0\), exponential coefficient
+\(1/\sqrt2+3/4\) and logarithmic coefficient \(-1/2\). P70 contributes only
+\(1/\sqrt2\). Therefore
+
+\[
+C_{\rm rel}(t)=u^{1/2}e^{-3/(4u)}
+\frac{\zeta_{\rm flip}(t)}{\mathcal Z_{\rm orb}(t,1)}
+\]
+
+has a nonzero holomorphic local extension. The pair \((3/4,1/2)\) is unique
+among all power-exponential counterterms. The Route-A tuple is **(A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Global single-valued continuation and operator
+ownership remain open; Route B is not authorized.
+
+## HCS-P72 relative Lind essential-singularity ladder (2026-08-16)
+
+Candidate **HCS-P72** answers P71's globalization question; see the
+[HCS-P72 project](../henon_relative_lind_essential_ladder/). The exact
+primitive/repetition regrouping is
+
+\[
+\log\mathcal Z_{\rm orb}(t,1)
+=\sum_{m\ge1}c_m\frac{2t^m}{1-2t^{2m}},\qquad
+c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+
+Every \(c_m\) is nonzero. After the unique P71 \(m=1\) counterterm, the
+relative continuation has an exponential essential singularity at every
+\(\rho_m=2^{-1/(2m)}\), \(m\ge2\), and \(\rho_m\nearrow1\). Therefore this
+specific relative germ is not a meromorphic finite-dimensional or
+holomorphic trace-class Fredholm determinant on the unit disk. The Route-A
+tuple remains **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Punctured-domain infinite-rank ownership is open;
+arithmetic advance is NO and Route B is not authorized.

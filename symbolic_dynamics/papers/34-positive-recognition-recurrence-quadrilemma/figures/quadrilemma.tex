@@ -1,0 +1,27 @@
+\begin{tikzpicture}[scale=0.83,transform shape,
+  font=\scriptsize,
+  node distance=5mm and 7mm,
+  box/.style={draw,rounded corners,align=center,minimum height=8mm,text width=27mm,inner sep=3pt},
+  source/.style={box,fill=formalblue!10,draw=formalblue,very thick},
+  midbox/.style={box,fill=warningamber!10,draw=warningamber},
+  stop/.style={box,fill=stopred!8,draw=stopred,thick},
+  arr/.style={-{Latex[length=2mm]},thick}
+]
+\node[source,text width=38mm] (src) {positive stationary compiler\\literal atom ledger, free edge marker};
+\node[midbox,below left=9mm and 42mm of src] (shared) {shared recurrent SCC};
+\node[midbox,below left=9mm and 7mm of src] (term) {terminal/off-core recognition};
+\node[midbox,below right=9mm and 7mm of src] (private) {private visible cycles};
+\node[midbox,below right=9mm and 42mm of src] (return) {first-return compression};
+\node[stop,below=6mm of shared] (mixed) {mixed primitive root\\A1 fails};
+\node[stop,below=6mm of term] (prune) {exact cyclic pruning\\recognizer invisible};
+\node[stop,below=6mm of private] (compact) {clock dilution\\whole operator noncompact};
+\node[stop,below=6mm of return] (marker) {$z^{\ell}$ becomes $z$\\changed object};
+\draw[arr] (src) -- (shared);
+\draw[arr] (src) -- (term);
+\draw[arr] (src) -- (private);
+\draw[arr] (src) -- (return);
+\draw[arr] (shared) -- (mixed);
+\draw[arr] (term) -- (prune);
+\draw[arr] (private) -- (compact);
+\draw[arr] (return) -- (marker);
+\end{tikzpicture}

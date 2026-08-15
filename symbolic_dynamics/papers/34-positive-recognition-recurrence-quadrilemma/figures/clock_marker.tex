@@ -1,0 +1,24 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  v/.style={circle,draw,minimum size=4.5mm,inner sep=0pt},
+  box/.style={draw,rounded corners,align=center,inner sep=3pt},
+  arr/.style={-{Latex[length=1.8mm]},thick}
+]
+\node[v] (v1) at (0,0) {};
+\node[v] (v2) at (1.1,0.65) {};
+\node[v] (v3) at (2.2,0) {};
+\node[v] (v4) at (1.1,-0.65) {};
+\draw[arr] (v1) -- node[above left] {$\tau_1$} (v2);
+\draw[arr] (v2) -- node[above right] {$\tau_2$} (v3);
+\draw[arr] (v3) -- (v4);
+\draw[arr] (v4) -- (v1);
+\node[align=center] at (1.1,-1.2) {$\sum\tau_j=\log N(a)$\\$\min\tau_j\le\log N(a)/\ell(a)$};
+\node[box,fill=formalblue!8,draw=formalblue] (weak) at (4.5,0) {$\delta_{u_a}\rightharpoonup0$\\$\|L_\sigma\delta_{u_a}\|\ge c_\sigma>0$};
+\draw[arr] (v3) -- (weak);
+\node[box,fill=stopred!8,draw=stopred] (noncompact) at (7.2,0) {whole $L_\sigma$\\not compact};
+\draw[arr] (weak) -- (noncompact);
+\node[box,fill=warningamber!8,draw=warningamber] (raw) at (1.0,-2.45) {raw factor\\$1-z^{\ell(a)}N(a)^{-s}$};
+\node[box,fill=deepgreen!8,draw=deepgreen] (ind) at (5.1,-2.45) {first return\\$1-zN(a)^{-s}$};
+\draw[arr] (raw) -- node[above] {induce} (ind);
+\node at (3.05,-3.08) {equal after $z=1$, not as free-marker germs};
+\end{tikzpicture}

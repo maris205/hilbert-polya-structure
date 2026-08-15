@@ -45,6 +45,9 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [31-wilson-semiring-verifier-trichotomy](papers/31-wilson-semiring-verifier-trichotomy/README.md) | [PDF](papers/31-wilson-semiring-verifier-trichotomy/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/31-wilson-semiring-verifier-trichotomy/) | alphabet sum 与 tensor product 确实击穿只保乘法的裸 UFD clone；但 matched semiring clone 精确复制全部 Wilson paths。Wilson recurrence 给每个素数一条长度 $p-1$ 的 cycle，却使 whole operator 非紧；first return 改写自由 marker，transient 版本又剪枝回 atom diagonal。 | **SEMIRING CLONE / PRUNING–DILUTION TRICOTOMY / SD-C33** |
 | [32-projective-residue-recurrence-obstruction](papers/32-projective-residue-recurrence-obstruction/README.md) | [PDF](papers/32-projective-residue-recurrence-obstruction/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/32-projective-residue-recurrence-obstruction/) | 非 terminal 的 $P^1(\mathbb Z/n\mathbb Z)$ recurrent grammar 在同一 uninduced object 上恢复了 $\Re s>2$ 的 trace-class Fredholm ownership；但 $S^2=R^3=1$ 对所有模数都成立，cusp coupling 又给出普适 composite diamonds，故 primitive ledger 在配权前已失败。 | **PROJECTIVE RECURRENCE OBSTRUCTION / BRANCH CLOSED / SD-C34** |
 | [33-relation-homology-operator-non-descent](papers/33-relation-homology-operator-non-descent/README.md) | [PDF](papers/33-relation-homology-operator-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/33-relation-homology-operator-non-descent/) | 从 $S/R$ 轨道 incidence 施加的 Manin norm-polynomial quotient 消去预定 chain relations，diamond filling 也消去 cross $H_1$；但每个模数仍保留 cusp $R,S$ primitive survivor，character/supercharacter controls 均不筛素数，且原始 $S+R$ adjacency 在 $n=2$ 已不降到 quotient。 | **RELATION HOMOLOGY NO-GO / SEMIRING-RESIDUE FAMILY CLOSED / SD-C35** |
+| [34-positive-recognition-recurrence-quadrilemma](papers/34-positive-recognition-recurrence-quadrilemma/README.md) | [PDF](papers/34-positive-recognition-recurrence-quadrilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/34-positive-recognition-recurrence-quadrilemma/) | 正标量 literal atom-only ledger 强制 declared cycles 分居 recurrent components；识别 DAG 对全部 power traces/Fredholm determinant 可剪枝，有限 alphabet 与总 roof $\log p$ 又强制 whole operator 非紧，而 first return 会把原始 $z^{\ell(p)}$ marker 改成 $z$。 | **POSITIVE COMPILER QUADRILEMMA / ROUTE-A REJECTED / SD-C36** |
+| [35-affine-semigroup-object-firewall](papers/35-affine-semigroup-object-firewall/README.md) | [PDF](papers/35-affine-semigroup-object-firewall/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/35-affine-semigroup-object-firewall/) | 正 affine Cayley source 有严格高度而无 recurrence；形式逆边制造 backtracks，Hashimoto reduction 又保留普适 affine relation cycles。Bost--Connes 的 $\zeta(\beta)$ 是另一 diagonal Gibbs 对象的首个 trace coefficient，不是同一 graph-step primitive determinant。 | **AFFINE OBJECT FIREWALL / ROUTE-A REJECTED / SD-C37** |
+| [36-affine-cayley-chain-cancellation-no-go](papers/36-affine-cayley-chain-cancellation-no-go/README.md) | [PDF](papers/36-affine-cayley-chain-cancellation-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/36-affine-cayley-chain-cancellation-no-go/) | 完整 affine Cayley relation filling 使复形契约并清空全部 recurrent homology，且不等长关系 $vu=u^rv$ 阻止原 unit-step marker 下降；同一 prequotient 的 trace-class damped Hashimoto determinant 仍严格看见 relation polygon，而标量 chain superlift 又以通用 $1-2+1=0$ 把所有 one-relator controls 一并消去。 | **CHAIN CANCELLATION / CLOCK NON-DESCENT / ROUTE-A REJECTED / SD-C38** |
 
 ### 论文 1 的候选分离结论
 
@@ -1113,13 +1116,131 @@ CLOSE_SEMIRING_RESIDUE_FAMILY / ROUTE_A_REJECTED**。下一批不应继续
 projective-residue/Manin quotient，而应转向一个 primitive recurrence 在
 block projector 之前已内生生成 Euler factors 的 global arithmetic source。
 
+### 论文 34：正标量识别编译器在 recurrence、Fredholm 与时钟之间四重封路
+
+Paper 34 把此前分散在 terminal verifier、有限码与 clock-dilution 分支中的停止条件
+统一为一个 quantifier-clean 的同对象定理。对 one-sided、正标量、有限
+orbit-separating alphabet 的 countable Markov graph，若每个 arithmetic atom $a$
+具有精确 primitive cycle、总 roof $log N(a)$，并保留原始 graph-step marker $z$，
+则 literal atom-only ledger 强制这些 cycles 落在彼此分离的 recurrent components。
+若两条 declared cycles 属于同一 strongly connected component，任取双向连接路径
+$\alpha,\beta$ 后，闭词
+
+$$
+W=\gamma_a\alpha\gamma_c\beta
+$$
+
+的 primitive root 同时使用两圈的边，因此产生额外 mixed primitive orbit。这里不再
+要求连接路径的 interiors 避开两圈；预注册中这一过强 normal form 被精确反例否定，
+而修正后的 SCC 命题得到完整验证。
+
+如果 whole vertex operator 属于 trace class，全部非循环识别边都从每个 power trace
+与 Fredholm determinant 中剪除；计算层对 determinant 不可见。另一方面，有限局部
+可分离性与 primes 的多项式增长迫使无穷子列满足
+
+$$
+\ell(p)\ge \frac{\log p}{4\log b}.
+$$
+
+把总 roof $\log p$ 分到这些长圈上，必产生一致远离零的 edge weights；原始 whole
+operator 即使有界也非紧，更不属于任何有限 Schatten 类。Poincaré first return 虽把
+循环压成 trace-class diagonal，却同时把
+$1-z^{\ell(p)}p^{-s}$ 改成 $1-zp^{-s}$；二者只在 $z=1$ 遗忘时钟后相等。
+
+完整 $n\le4$ 的 66,066 个图与 64 个确定性 seeded controls 共审计
+844,544 个修正后 mixed-root constructions，全部通过；同时公开保留原 C2 normal
+form 的 18,272 个反例。76/76 tests、85/85 integrity checks、20/20 scientific
+checks，以及 fresh/cold/idempotent 双跑均通过。阶段结论为
+**GO_QUANTIFIER_CLEAN_NO_GO_SYNTHESIS / STOP_POSITIVE_LITERAL_COMPILER /
+STOP_WHOLE_FREDHOLM / STOP_MARKER_CHANGING_FIRST_RETURN /
+CLOSE_POSITIVE_RECOGNITION_COMPILER_BRANCH / ROUTE_A_REJECTED**。
+signed、matrix、nonpositive、infinite-hidden-alphabet 与 nondeterministic cancellations
+均明确留在定理范围之外；Paper 35 转向 affine-semigroup/Bost--Connes object firewall，
+不把这些边界误报成已关闭。
+
+### 论文 35：affine source 的 acyclicity、relation cycles 与 Gibbs object firewall
+
+Paper 35 冻结全正 affine semigroup
+$P=\mathbb N_0\rtimes\mathbb N^\times$ 的 right Cayley source，并用有限生成切片
+$P_r=\langle u,v\mid vu=u^rv\rangle^+$ 给出自然 whole-operator benchmark。正向边使
+$h(b,a)=b+a$ 严格增加，所以源图没有闭路；加形式逆边后，每条边都产生两步
+backtrack。Hashimoto reduction 虽删除 immediate reversals，却保留长度 $r+3$ 的
+primitive relation word
+
+$$
+vu\bar v\bar u^r.
+$$
+
+这些关系环对 prime、composite 与 prime-power 的 $r$ 一视同仁。有限 congruence
+quotients 同时保留 relation word 并新添 $U_q^q$ translation cycles，因此不会忠实
+下降完整 primitive ledger。有限生成切片上的 positive、symmetric 与 Hashimoto
+operators 虽有界，却都由平移正交列证明非紧；full all-$n$ adjacency 甚至具有无穷
+outdegree，不能在一个 basis vector 上定义为 $\ell^2$ 向量。
+
+Bost--Connes diagonal Gibbs operator 则是另一个诚实 trace-class 对象：
+
+$$
+\operatorname{Tr}(D_\beta)=\zeta(\beta),\qquad
+-\log\det(I-zD_\beta)=\sum_{m\ge1}\frac{z^m}{m}\zeta(m\beta).
+$$
+
+所以 partition trace 只是 connected Fredholm logarithm 的 $[z]$ 系数；prime-Fock
+Euler product又从一开始使用 prime-indexed one-particle basis。exact audit 含
+699,040 个 frozen words、126,553 个 admissible words、88 个 primitive cyclic-NB
+classes 与 48 个 quotient fixtures；84/84 tests、10/10 independent gates 及 23 个
+fresh/cold scientific artifacts 全部通过。阶段结论为
+**STOP_POSITIVE_AFFINE_RECURRENCE / STOP_RELATION_CYCLE_POLLUTION /
+STOP_PARTITION_TRACE_IDENTIFICATION / CLOSE_AFFINE_SEMIGROUP_PARTITION_IDENTIFICATION_BRANCH /
+ROUTE_A_REJECTED**。Paper 36 只允许在同一 uninduced symbolic object 上测试
+source-natural chain cancellation，并必须同时保留原 marker 与非零 recurrent sector。
+
+### 论文 36：完整 relation filling、marker non-descent 与 prequotient determinant 分离
+
+Paper 36 在 Paper 35 的同一 affine presentation family
+
+$$
+M_r=\langle u,v\mid vu=u^rv\rangle^+
+$$
+
+上测试最直接的 chain-level repair。形式逆边与 Hashimoto rule 先删除 immediate
+backtracks；随后在每个 vertex 填入定义关系的 Cayley $2$-cell。Gray--Steinberg 的
+已知 contractibility 定理在这里适用，因此完整 filling 使 $K_r$ 契约，全部正次数
+homology 与 primitive recurrent classes 同时消失。该拓扑结论不被冒充为新定理；
+本文的新边界是它与原时钟及同对象解析所有权的组合不相容。
+
+关系 cell 比较长度 $2$ 的 $vu$ 与长度 $r+1$ 的 $u^rv$。任何取值于 torsion-free
+Abelian group 的 cell-invariant additive degree 都满足
+
+$$
+(r-1)\deg(u)=0,
+$$
+
+所以原始 unit generator-step marker 不可能下降。与此同时，在完整、未诱导的
+oriented-edge space 上，source-coordinate damping
+$T_{r,\theta}=D_\theta H_rD_\theta$ 是 trace class；长度 $r+3$ 的 affine relation
+polygon 给出严格正的 $\operatorname{Tr}(T_{r,\theta}^{r+3})$。因此空 chain quotient
+与该 ordinary Fredholm determinant 不是同一 determinant-bearing object。
+
+标量 cellular superlift 虽在每个 power 上给出 $1-2+1=0$，但这一结果只读
+cell-orbit multiplicity，任意 two-generator one-relator presentation 都同样通过，
+故属于 **PROVES TOO MUCH**。canonical exact audit 中 source 与 prototype 各通过
+33/33，独立 evaluator 通过 35/35，authority suite 通过 53/53；19 个科学 payload
+在 fresh A/B 与 cache-free cold C 间逐字节一致，最终有 27 个 result files、74/74
+integrity checks 与 43-entry immutable ledger；Route provenance 独立审计并在
+metadata stage 配对绑定。阶段结论为
+**STOP_TOTAL_RELATION_FILLING / STOP_MARKER_NON_DESCENT / STOP_OBJECT_MISMATCH /
+STOP_GENERIC_SUPERCANCELLATION / ROUTE_A_REJECTED**。Paper 37 只允许在同一
+unquotiented、same-marker Hashimoto object 上测试 source-derived non-flat
+finite-rank local coefficients；不得转向 first return、KMS/GNS、prime basis、
+有限 quotient 或另一个 determinant。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十三篇论文](papers/)
+- [三十六篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

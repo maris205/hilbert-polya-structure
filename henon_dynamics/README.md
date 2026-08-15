@@ -1445,3 +1445,305 @@ remain open.
 - [P62 paper](henon_full_horseshoe_algebraic_exhaustion/paper/paper.pdf)
 - [P62 proof package](henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
 - [P62 exact certificate](henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)
+
+## HCS-P63 primitive-coordinate height and flat pressure
+
+P63 tests the all-period coordinate-height pressure proposed after P62.  In
+the integral coordinate `x=6q`, every primitive root is an algebraic integer
+and every conjugate is another real periodic coordinate.  The cyclic
+recurrence gives the sharp all-period bound
+
+\[
+|x|\le1+\sqrt7,
+\qquad h(x)\le\log(1+\sqrt7).
+\]
+
+For the degree-`D_n` scaled primitive divisor,
+
+\[
+Z_n(s)=\sum_{\widetilde\Psi_n(\alpha)=0}e^{-s h(\alpha)}
+\]
+
+satisfies `exp(-|s|C)D_n <= Z_n(s) <= exp(|s|C)D_n`.  Therefore, for every
+fixed real `s`,
+
+\[
+\lim_{n\to\infty,\ n\text{ odd}}\frac1n\log Z_n(s)
+=\frac12\log2.
+\]
+
+The same flatness holds after every fixed nonzero algebraic coordinate
+rescaling.  Thus ordinary per-root coordinate height is not an extensive
+clock and cannot create a new pressure pole.  Exact finite polynomials and
+factor heights through period 11, an independent Sturm checker through
+period 9, and 25 hostile mutations support the theorem ledger.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized.  The
+next non-micro object is an extensive packet height, beginning with
+`n*D_n^(-1) log M(tilde_Psi_n)` and a reflection-root equidistribution
+theorem.
+
+- [P63 overview](henon_primitive_coordinate_height_flat_pressure/README.md)
+- [P63 paper](henon_primitive_coordinate_height_flat_pressure/paper/paper.pdf)
+- [P63 proof package](henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md)
+- [P63 exact certificate](henon_primitive_coordinate_height_flat_pressure/results/c63_certificate.json)
+
+## HCS-P64 reflection-boundary Mahler packet pressure
+
+P64 corrects the first equidistribution guess made after P63. Under the
+reversor-equivariant full-shift coding, odd mixed-axis roots are primitive
+palindromic words marked at their reflection center. Their marked empirical
+measures converge to a reflected one-sided fair Bernoulli process, not to the
+invariant maximal-entropy measure. Averaging the same selected cycles over
+all time origins does converge to maximal entropy, with radius-`r` cylinder
+error at most
+
+\[
+\frac{4r+1}{n}+\tau(n)2^{-n/3}.
+\]
+
+For `a_n=D_n^{-1} log M(tilde_Psi_n)`, one has `a_n -> kappa_J`, where
+`0<kappa_J<=log(1+sqrt(7))`, and
+
+\[
+\lim_{n\to\infty,\ n\text{ odd}}\frac1n
+\log\bigl(D_ne^{-sna_n}\bigr)
+=\frac12\log2-s\kappa_J.
+\]
+
+This is a nonconstant extensive whole-packet pressure, not an individual
+factor-height pressure. Finite diagnostics suggest the marked and
+orbit-averaged slopes differ, but rigorous separation remains open. Route A
+remains exploratory and Route B is not authorized.
+
+- [P64 overview](henon_reflection_boundary_mahler_pressure/README.md)
+- [P64 paper](henon_reflection_boundary_mahler_pressure/paper/paper.pdf)
+- [P64 proof package](henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md)
+- [P64 exact certificate](henon_reflection_boundary_mahler_pressure/results/c64_certificate.json)
+
+## HCS-P65 minimal symmetry-defect pressure
+
+P65 replaces an unavailable global cylinder constant by an exact symbolic
+calibration. Every finite observable supported wholly on one side of the
+reflection axis has the same expectation under P64's boundary and invariant
+laws. The first centered cross-axis observable
+`chi=1{s[-1]=s[1]}` has expectations `1` and `1/2`, giving
+
+\[
+P_J(t)=\frac12\log2-t,
+\qquad
+P_{\rm orb}(t)=\frac12\log2-\frac t2.
+\]
+
+The two-parameter Mahler/symmetry pressure planes therefore have an exact
+transverse derivative gap `-1/2`, even though the unperturbed Mahler slope
+gap remains open. Route A remains exploratory; Route B is not authorized.
+
+- [P65 overview](henon_minimal_symmetry_defect_pressure/README.md)
+- [P65 paper](henon_minimal_symmetry_defect_pressure/paper/paper.pdf)
+- [P65 proof package](henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md)
+- [P65 certificate](henon_minimal_symmetry_defect_pressure/results/c65_certificate.json)
+
+## HCS-P66 reflection-boundary cohomology anomaly
+
+P66 tests whether the marked pressure from P64--P65 is intrinsic under the
+usual symbolic replacement `f -> f+u-u∘sigma`. It is not. Its exact boundary
+anomaly is
+
+\[
+A_J(u)=\int (u-u\circ\sigma)\,d\eta_J,
+\qquad
+P_J(f+u-u\circ\sigma)=P_J(f)-A_J(u).
+\]
+
+The boundary law and its one-step translate are mutually singular, so the
+dual total-variation norm of `A_J` is exactly `2`. Radius-`r` locally constant
+witnesses realize `2(1-2^{-r})`. In contrast, every complete periodic-orbit
+sum of a coboundary telescopes to zero exactly, making uniform cyclic packet
+averaging gauge invariant before any limit.
+
+This is a canonical-sampling obstruction and repair, not an arithmetic
+trace. Route A remains exploratory and Route B is not authorized. The next
+theorem is uniqueness of the normalized cyclic sampler that annihilates all
+coboundaries.
+
+- [P66 overview](henon_reflection_boundary_cohomology_anomaly/README.md)
+- [P66 paper](henon_reflection_boundary_cohomology_anomaly/paper/paper.pdf)
+- [P66 proof package](henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md)
+- [P66 certificate](henon_reflection_boundary_cohomology_anomaly/results/c66_certificate.json)
+
+## HCS-P67 unique gauge-invariant orbit sampler
+
+P67 proves that P66's orbit-averaging repair is canonical. For a normalized
+real linear sampler on an `n`-cycle,
+
+\[
+L_w(Du)=\sum_j(w_j-w_{j-1})u_j.
+\]
+
+It annihilates every coboundary if and only if `w_j=1/n` for all `j`. This
+uses no positivity assumption, and every nonuniform sampler is rejected by a
+one-site transfer function.
+
+Combining this uniqueness theorem with P64's orbit-averaged packet
+equidistribution gives, for every continuous potential `f`,
+
+\[
+\mathcal P_f(s)=\frac12\log2-s\int f\,d\mu_B.
+\]
+
+The finite packet and limiting functional are exactly cohomology invariant
+and Lipschitz in `f`. This is a canonical sparse-packet pressure, not full
+topological pressure or an arithmetic trace. Route A remains exploratory and
+Route B is not authorized. The next non-micro gate is a source-native
+reflection-packet determinant or trace with intrinsic arithmetic semantics.
+
+- [P67 overview](henon_unique_gauge_invariant_orbit_sampler/README.md)
+- [P67 paper](henon_unique_gauge_invariant_orbit_sampler/paper/paper.pdf)
+- [P67 proof package](henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md)
+- [P67 certificate](henon_unique_gauge_invariant_orbit_sampler/results/c67_certificate.json)
+
+## HCS-P68 canonical reflection-packet Euler product
+
+P68 crosses the first determinant-interface gate without overpromoting it.
+P67's unique cyclic packet mean defines
+
+\[
+\mathcal Z_f(z,s)=
+\prod_{\substack{n\ge1\\n\ {\rm odd}}}
+\left(1-z^n e^{-sn b_n(f)}\right)^{-D_n},
+\]
+
+and its logarithmic derivative has the exact primitive/repetition ledger
+
+\[
+[z^m]\,z\partial_z\log\mathcal Z_f
+=\sum_{\substack{n\mid m\\n\ {\rm odd}}}
+nD_n e^{-sm b_n(f)}.
+\]
+
+At \(s=0\) the radius is \(2^{-1/2}\), while
+
+\[
+\log\mathcal Z_0(z)
+=\frac{1}{\sqrt2(1-\sqrt2z)}+G(z)
+\]
+
+near the positive boundary, with \(G\) analytic. Thus the product has an
+exponential essential singularity, not a meromorphic pole. It is a canonical
+packet Euler germ, but it is neither the full infinite-dihedral Lind zeta nor
+an orbit-resolved Fredholm determinant. Route A earns an exact A2 prefix and
+partial A3 structure; Route B remains unauthorized. The next gate is the
+within-period cumulant information erased by aggregate averaging.
+
+- [P68 overview](henon_canonical_reflection_packet_euler_product/README.md)
+- [P68 paper](henon_canonical_reflection_packet_euler_product/paper/paper.pdf)
+- [P68 proof package](henon_canonical_reflection_packet_euler_product/PROOF_PACKAGE.md)
+- [P68 certificate](henon_canonical_reflection_packet_euler_product/results/c68_certificate.json)
+
+## HCS-P69 orbit-resolved reflection cumulant pressure
+
+P69 computes exactly what P68's periodwise mean suppresses. For the minimal
+cross-axis observable \(\chi=\mathbf1\{s_{-1}=s_1\}\), odd decimation turns
+the orbit sum into nearest-neighbor equality energy on a reflected binary
+chain. Thus
+
+\[
+F_{2m+1}(q)=2q(1+q^2)^m,\qquad
+E_n(q)=\sum_{k\mid n}\mu(k)F_{n/k}(q^k),
+\]
+
+where \(E_n\) is the primitive weighted polynomial. The orbit-resolved
+pressure is
+
+\[
+P_{\rm orb}(s)=\frac12\log(1+e^{-2s}),
+\]
+
+and its exact gap from P68's affine mean-field pressure is
+\(\frac12\log\cosh s\), strictly positive for every \(s\ne0\). This is a
+global cumulant theorem, not only a variance diagnostic. Route A remains
+exploratory and Route B is not authorized. P70 will feed the exact primitive
+polynomials into the full orbit-resolved Euler product.
+
+- [P69 overview](henon_orbit_resolved_reflection_cumulant_pressure/README.md)
+- [P69 paper](henon_orbit_resolved_reflection_cumulant_pressure/paper/paper.pdf)
+- [P69 proof package](henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md)
+- [P69 certificate](henon_orbit_resolved_reflection_cumulant_pressure/results/c69_certificate.json)
+
+## HCS-P70 orbit-resolved reflection Euler boundary
+
+P70 restores one Euler factor for every primitive marked reflection word:
+
+\[
+\mathcal Z_{\rm orb}(z,q)=
+\prod_{n\ {\rm odd}}\prod_{\omega\in A_n}
+(1-z^nq^{S_n\chi(\omega)})^{-1}.
+\]
+
+Its logarithmic derivative has exact coefficient
+\(\sum_{n\mid m}nE_n(q^{m/n})\). For every \(q>0\), the radius is
+
+\[
+R(q)=(1+q^2)^{-1/2},
+\]
+
+and the logarithm has one explicit simple-pole principal part, so the product
+has an exponential essential singularity. The mean-field radius
+\((2q)^{-1/2}\) is strictly too large unless \(q=1\). Route A now has a full
+orbit-resolved Euler germ and partial analytic structure, but no arithmetic
+trace; Route B is not authorized. P71 will test an explicit relative
+counterterm against source-native flip/Lind zeta structure.
+
+- [P70 overview](henon_orbit_resolved_reflection_euler_boundary/README.md)
+- [P70 paper](henon_orbit_resolved_reflection_euler_boundary/paper/paper.pdf)
+- [P70 proof package](henon_orbit_resolved_reflection_euler_boundary/PROOF_PACKAGE.md)
+- [P70 certificate](henon_orbit_resolved_reflection_euler_boundary/results/c70_certificate.json)
+
+## HCS-P71 relative Lind counterterm
+
+P71 compares P70 with the primary-source full two-shift reverse Lind zeta.
+In the boundary coordinate \(u=1-\sqrt2t\), the full Lind logarithm has
+exponential coefficient \(1/\sqrt2+3/4\) and branch coefficient \(-1/2\);
+the odd packet accounts for only \(1/\sqrt2\). Consequently
+
+\[
+u^{1/2}e^{-3/(4u)}
+\frac{\zeta_{\rm flip}(t)}{\mathcal Z_{\rm orb}(t,1)}
+\]
+
+extends holomorphically and nonvanishingly across \(u=0\) as a local branch
+germ. Among counterterms \(u^\beta e^{-c/u}\), this forces uniquely
+\((c,\beta)=(3/4,1/2)\). Thus a source-native local bridge exists, but odd
+packet data alone is incomplete. Global continuation, zeros, and a transfer
+determinant remain open; Route B is not authorized.
+
+- [P71 overview](henon_relative_lind_counterterm/README.md)
+- [P71 paper](henon_relative_lind_counterterm/paper/paper.pdf)
+- [P71 proof package](henon_relative_lind_counterterm/PROOF_PACKAGE.md)
+- [P71 certificate](henon_relative_lind_counterterm/results/c71_certificate.json)
+
+## HCS-P72 relative Lind essential-singularity ladder
+
+P72 globalizes the exact logarithmic ledger far enough to test P71's local
+counterterm. Primitive and repetition indices regroup into
+
+\[
+\log\mathcal Z_{\rm orb}(t,1)
+=\sum_{m\ge1}c_m\frac{2t^m}{1-2t^{2m}},\qquad
+c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+
+No channel vanishes. The P71 counterterm removes the \(m=1\) singularity,
+but for every \(m\ge2\) the relative continuation has an exponential
+essential singularity at \(\rho_m=2^{-1/(2m)}\), and these points increase
+to one. Thus the local bridge cannot be a meromorphic/Fredholm determinant
+on the entire unit disk. A punctured-domain infinite-rank renormalization is
+the surviving analytic direction. Arithmetic advance is NO and Route B is
+not authorized.
+
+- [P72 overview](henon_relative_lind_essential_ladder/README.md)
+- [P72 paper](henon_relative_lind_essential_ladder/paper/paper.pdf)
+- [P72 proof package](henon_relative_lind_essential_ladder/PROOF_PACKAGE.md)
+- [P72 certificate](henon_relative_lind_essential_ladder/results/c72_certificate.json)
+- [P68--P72 batch review](BATCH_REVIEW_P68_P72.md)

@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  >=Latex,
+  vertex/.style={circle,draw=charcoal,fill=white,minimum size=6mm,inner sep=1pt},
+  edge/.style={->,very thick,formalblue},
+  note/.style={rounded corners,draw=warningamber,fill=white,align=center,
+    font=\small,inner sep=4pt}
+]
+\coordinate (x) at (0,0);
+\coordinate (top) at (4.4,1.25);
+\coordinate (botone) at (3.0,-1.15);
+\coordinate (bottwo) at (6.1,-1.15);
+\coordinate (y) at (9.0,0);
+
+\filldraw[fill=softgray,draw=charcoal,dashed,thick]
+  (x) -- (top) -- (y) -- (bottwo) -- (botone) -- cycle;
+\node[font=\bfseries,text=charcoal] at (4.5,0) {$C_{r,x}$};
+
+\node[vertex] (X) at (x) {$x$};
+\node[vertex] (T) at (top) {};
+\node[vertex] (B1) at (botone) {};
+\node[vertex] (B2) at (bottwo) {};
+\node[vertex] (Y) at (y) {$xvu$};
+
+\draw[edge] (X) -- node[above left,font=\small] {$v$} (T);
+\draw[edge] (T) -- node[above right,font=\small] {$u$} (Y);
+\draw[edge] (X) -- node[below left,font=\small] {$u^r$} (B1);
+\draw[edge] (B1) -- (B2);
+\draw[edge] (B2) -- node[below right,font=\small] {$v$} (Y);
+
+\node[font=\small\bfseries,text=formalblue] at (4.5,1.82)
+  {two original steps: $z^2$};
+\node[font=\small\bfseries,text=formalblue] at (4.5,-1.72)
+  {$r+1$ original steps: $z^{r+1}$};
+\node[note] at (4.5,-2.45)
+  {$z^2\ne z^{r+1}$ for $r\ge2$\\unit marker does not descend};
+\end{tikzpicture}

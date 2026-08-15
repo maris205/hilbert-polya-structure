@@ -1,0 +1,31 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=7mm and 10mm,
+  box/.style={rounded corners,draw=charcoal,thick,align=center,
+    text width=3.3cm,minimum height=1.1cm,inner sep=5pt,font=\small},
+  source/.style={box,fill=softgray,text width=3.2cm},
+  good/.style={box,draw=deepgreen,fill=white,text width=3.5cm},
+  stop/.style={box,draw=stopred,fill=white,text width=3.5cm},
+  arr/.style={->,very thick,formalblue},
+  compare/.style={dashed,very thick,warningamber}
+]
+\node[source] (src) {formal reverse affine Cayley graph\\
+Hashimoto shift, free edge marker $z$};
+\node[good,above right=5mm and 15mm of src] (op)
+  {source damping\\$T_{r,\theta}=D_\theta H_rD_\theta$ trace class};
+\node[good,right=9mm of op] (trace)
+  {$\Tr(T^{r+3})>0$\\ordinary Fredholm trace sees relation};
+\node[stop,below right=5mm and 15mm of src] (cell)
+  {attach every translated relation $2$-cell};
+\node[stop,right=9mm of cell] (empty)
+  {$K_r$ contractible\\no recurrent class; $z$ does not descend};
+
+\draw[arr] (src.north east) -- (op.west);
+\draw[arr] (op) -- (trace);
+\draw[arr] (src.south east) -- (cell.west);
+\draw[arr] (cell) -- (empty);
+\draw[compare] ($(trace.south)+(0,-1mm)$) --
+  node[right,align=left,font=\scriptsize,text=warningamber]
+  {not one ledger\\not an operator compression}
+  ($(empty.north)+(0,1mm)$);
+\end{tikzpicture}

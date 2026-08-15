@@ -422,3 +422,63 @@ classification of a single surface, not a reusable realization-class no-go.
 It therefore does not justify allocating a new obstruction row; HEN-O104
 remains the last registry obstruction identifier after completion of
 C52--C56.
+
+## HCS-P63 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O105 | Ordinary fixed-parameter Weil-height pressure of the complete odd primitive H6 reflection-coordinate population | proved non-extensive flat-pressure obstruction | Integral cyclic coordinates and full real Galois exhaustion give `h(alpha)<=log(1+sqrt(7))` uniformly in period. Hence `exp(-abs(s)C)D_n<=Z_n(s)<=exp(abs(s)C)D_n`, so every fixed-real-`s` pressure equals the unweighted entropy `(1/2)log(2)`. | Invariant under every fixed nonzero algebraic coordinate rescaling. Stops only ordinary individual coordinate height without an orbit-clock factor. It does not stop `n*h(alpha)`, packet Mahler height, discriminant/ramification height, or multiplier Galois excess; none of those is proved here. | ../henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md |
+
+## HCS-P64 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O106 | Identification of the marked primitive reflection-root ensemble with the invariant maximal-entropy measure | proved reflection-boundary sampling obstruction | Equivariant coding gives `s[-k]=s[k]` in the marked-axis limit, so `P(s[-1]=s[1])=1`; fair two-sided Bernoulli gives `1/2`. The boundary limit is not shift invariant, although cyclic orbit averaging does converge to maximal entropy. | Stops only the naive marked-root equidistribution compiler. It preserves a proved nonconstant packet-Mahler pressure with boundary slope and an orbit-averaged pressure with maximal-entropy slope. It does not prove the two numerical slopes differ or control individual Galois-factor heights. | ../henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md |
+
+## HCS-P65 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O107 | Finite one-sided symbolic observables as separators of marked reflection-boundary and maximal-entropy sampling | proved one-sided blindness obstruction with minimal cross-axis repair | The reflected boundary law and fair two-sided Bernoulli law have identical restrictions to every finite nonnegative or nonpositive coordinate algebra. The radius-one cross-axis observable `1{s[-1]=s[1]}` is the first scoped separator and gives an exact pressure-gradient gap `-1/2`. | Scoped to the frozen sign coding and one-sided support class; arbitrary recodings are not claimed. The repair is symbolic and extensive but supplies no Mahler-slope inequality, rational-prime semantics, determinant, or operator. | ../henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md |
+
+## HCS-P66 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O108 | Marked reflection packet pressure as a Livšic/cohomology-invariant dynamical pressure | proved norm-two boundary gauge anomaly with exact orbit repair | The marked boundary law `eta_J` and its one-step translate are mutually singular, so `u -> int(u-u∘sigma)d eta_J` has dual total-variation norm `2`; finite cylinders attain `2(1-2^(-r))`. A complete period-`n` orbit sum of every coboundary is exactly zero. | Scoped to the marked reflection sampling convention and frozen sign coding. It does not invalidate the frozen coordinate representative or P64's marked Mahler law; it proves that the law is not canonical modulo cohomology. Uniform cyclic averaging repairs this defect but supplies no prime labels, determinant, or operator. | ../henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md |
+
+## HCS-P67 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O109 | A nonuniform normalized cyclic linear sampler as a cohomology-invariant replacement for marked reflection sampling | proved cyclic-incidence uniqueness obstruction with canonical uniform repair | For `(Du)_j=u_j-u_(j+1)`, every weight vector satisfies `L_w(Du)=sum_j(w_j-w_(j-1))u_j`. Vanishing for every `u` forces all weights equal; normalization gives exactly `w_j=1/n`. Every nonuniform vector fails on a one-site basis function. | Covers arbitrary real, including signed, normalized linear samplers on each complete primitive cycle. A nonlinear or potential-adaptive rule lies outside the theorem but would not be the predeclared linear packet sampler audited here. Uniform averaging survives and gives a universal gauge-invariant pressure, but no arithmetic determinant or operator. | ../henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md |
+
+## HCS-P68 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O110 | Meromorphic/Fredholm promotion of the unrenormalized canonical packet-mean Euler product at its entropy boundary | proved exponential-essential-boundary obstruction | Möbius inversion gives `sum_(n odd)D_n z^n=sum_(k odd)mu(k)2z^k/(1-2z^(2k))`. Repeated factors are analytic through the positive radius `R=2^(-1/2)`, so `log Z_0=1/[sqrt(2)(1-sqrt(2)z)]+G` with `G` analytic. Exponentiation produces an essential singularity at `R`, not a meromorphic pole. | Stops only the naive boundary promotion of this unrenormalized aggregate-mean product. It does not exclude a relative/counterterm determinant, an orbit-resolved exponential-moment product, the standard full `D_infinity` Lind zeta, or a different transfer operator. The open-disk Euler germ and exact repetition ledger survive. | ../henon_canonical_reflection_packet_euler_product/PROOF_PACKAGE.md |
+
+## HCS-P69 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O111 | Exponential of the periodwise canonical mean as a substitute for the orbit-resolved exponential moment | proved all-parameter cumulant obstruction | For the natural minimal defect `chi=1{s[-1]=s[1]}`, the primitive orbit-resolved pressure is `(1/2)log(1+exp(-2s))`, while the aggregate-mean pressure is `(1/2)log2-s/2`. Their difference is exactly `(1/2)log cosh(s)`, positive for every real `s!=0`; the asymptotic variance rate is `1/2`. | Stops the mean-field replacement for this frozen natural observable, at every nonzero real parameter. It does not invalidate P68's own aggregate product or prove the same gap for every potential. The exact primitive moment polynomials and orbit-resolved pressure survive, but prime semantics and an operator remain open. | ../henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md |
+
+## HCS-P70 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O112 | Aggregate-mean convergence boundary as the analytic boundary of the individual-factor reflection Euler product | proved strict moving-radius obstruction | The resolved radius is `R(q)=(1+q^2)^(-1/2)` and the mean-field radius is `(2q)^(-1/2)`. Their ratio is `1/sqrt((q+q^(-1))/2)`, strictly below one for every positive `q!=1`. At the true boundary the resolved product has an exponential essential singularity. | Stops the mean-field boundary substitution for the frozen minimal defect and all positive nontrivial weights. It does not exclude a relative counterterm, analytic continuation around other boundary points, the full Lind zeta, or another transfer determinant. The full resolved Euler germ and exact coefficient ledger survive. | ../henon_orbit_resolved_reflection_euler_boundary/PROOF_PACKAGE.md |
+
+## HCS-P71 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O113 | The odd orbit-resolved reflection packet counterterm alone as a regularization of the full two-shift Lind zeta | proved residual-subgroup and branch obstruction with unique local repair | At `u=1-sqrt(2)t`, the full Lind logarithm has pole coefficient `1/sqrt(2)+3/4` and log coefficient `-1/2`, while P70 supplies only `1/sqrt(2)`. The ratio retains `3/(4u)-(1/2)log u`. A nonzero holomorphic local normalization within `u^beta exp(-c/u)` forces uniquely `c=3/4`, `beta=1/2`. | Stops packet-only regularization and any wrong power-exponential local counterterm. It does not stop the proved uniquely normalized local relative germ, nor does it decide global monodromy, other singularities, zeros, transfer-operator realization, or arithmetic semantics. | ../henon_relative_lind_counterterm/PROOF_PACKAGE.md |
+
+## HCS-P72 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O114 | Unit-disk meromorphic or holomorphic trace-class Fredholm globalization of the uniquely normalized P71 relative Lind/packet germ | proved infinite essential-singularity ladder obstruction | Exact regrouping gives `log Z_orb=sum_(m>=1)c_m Phi(t^m)` with `c_m=m^(-1)product_(p|m,p odd)(1-p)!=0`. After the `m=1` counterterm, `log C_rel=-c_m/[sqrt(2)m(1-t/rho_m)]+holomorphic` at every `rho_m=2^(-1/(2m))`, `m>=2`. Hence `C_rel` has infinitely many essential singularities inside the unit disk, accumulating at one. | Stops only whole-unit-disk meromorphic finite-state determinants and quotients of holomorphic trace-class Fredholm determinants for this exact relative germ. It preserves P71's local extension and leaves punctured/slit domains, infinite singular counterterms, non-trace-class operators, and infinite-rank models open. It supplies no prime semantics. | ../henon_relative_lind_essential_ladder/PROOF_PACKAGE.md |
