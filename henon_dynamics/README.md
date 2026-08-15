@@ -1571,3 +1571,34 @@ coboundaries.
 - [P66 paper](henon_reflection_boundary_cohomology_anomaly/paper/paper.pdf)
 - [P66 proof package](henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md)
 - [P66 certificate](henon_reflection_boundary_cohomology_anomaly/results/c66_certificate.json)
+
+## HCS-P67 unique gauge-invariant orbit sampler
+
+P67 proves that P66's orbit-averaging repair is canonical. For a normalized
+real linear sampler on an `n`-cycle,
+
+\[
+L_w(Du)=\sum_j(w_j-w_{j-1})u_j.
+\]
+
+It annihilates every coboundary if and only if `w_j=1/n` for all `j`. This
+uses no positivity assumption, and every nonuniform sampler is rejected by a
+one-site transfer function.
+
+Combining this uniqueness theorem with P64's orbit-averaged packet
+equidistribution gives, for every continuous potential `f`,
+
+\[
+\mathcal P_f(s)=\frac12\log2-s\int f\,d\mu_B.
+\]
+
+The finite packet and limiting functional are exactly cohomology invariant
+and Lipschitz in `f`. This is a canonical sparse-packet pressure, not full
+topological pressure or an arithmetic trace. Route A remains exploratory and
+Route B is not authorized. The next non-micro gate is a source-native
+reflection-packet determinant or trace with intrinsic arithmetic semantics.
+
+- [P67 overview](henon_unique_gauge_invariant_orbit_sampler/README.md)
+- [P67 paper](henon_unique_gauge_invariant_orbit_sampler/paper/paper.pdf)
+- [P67 proof package](henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md)
+- [P67 certificate](henon_unique_gauge_invariant_orbit_sampler/results/c67_certificate.json)

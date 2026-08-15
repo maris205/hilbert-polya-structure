@@ -2258,3 +2258,24 @@ every coboundary exactly by telescoping.
 The Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not
 authorized. The next candidate is a uniqueness theorem for normalized
 linear samplers on finite cycles that annihilate all coboundaries.
+
+## HCS-P67 unique gauge-invariant orbit sampler (2026-08-15)
+
+Candidate **HCS-P67** closes P66's normalization question; see the
+[HCS-P67 project](../henon_unique_gauge_invariant_orbit_sampler/). On every
+primitive `n`-cycle, a normalized real linear sampler annihilates every
+coboundary if and only if all weights equal `1/n`. No positivity is assumed,
+and a one-site transfer function detects every nonuniform choice.
+
+P64's orbit-averaged equidistribution then upgrades this finite theorem to a
+universal pressure for every continuous potential:
+
+\[
+\mathcal P_f(s)=\frac12\log2-s\int f\,d\mu_B.
+\]
+
+It is exactly gauge invariant and uniformly Lipschitz in the potential. The
+Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not authorized:
+the functional has no source-native determinant, rational-prime labels, or
+von Mangoldt amplitudes. That determinant/trace interface is the next major
+candidate rather than another sampling normalization.

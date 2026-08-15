@@ -446,3 +446,9 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O108 | Marked reflection packet pressure as a Livšic/cohomology-invariant dynamical pressure | proved norm-two boundary gauge anomaly with exact orbit repair | The marked boundary law `eta_J` and its one-step translate are mutually singular, so `u -> int(u-u∘sigma)d eta_J` has dual total-variation norm `2`; finite cylinders attain `2(1-2^(-r))`. A complete period-`n` orbit sum of every coboundary is exactly zero. | Scoped to the marked reflection sampling convention and frozen sign coding. It does not invalidate the frozen coordinate representative or P64's marked Mahler law; it proves that the law is not canonical modulo cohomology. Uniform cyclic averaging repairs this defect but supplies no prime labels, determinant, or operator. | ../henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md |
+
+## HCS-P67 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O109 | A nonuniform normalized cyclic linear sampler as a cohomology-invariant replacement for marked reflection sampling | proved cyclic-incidence uniqueness obstruction with canonical uniform repair | For `(Du)_j=u_j-u_(j+1)`, every weight vector satisfies `L_w(Du)=sum_j(w_j-w_(j-1))u_j`. Vanishing for every `u` forces all weights equal; normalization gives exactly `w_j=1/n`. Every nonuniform vector fails on a one-site basis function. | Covers arbitrary real, including signed, normalized linear samplers on each complete primitive cycle. A nonlinear or potential-adaptive rule lies outside the theorem but would not be the predeclared linear packet sampler audited here. Uniform averaging survives and gives a universal gauge-invariant pressure, but no arithmetic determinant or operator. | ../henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md |
