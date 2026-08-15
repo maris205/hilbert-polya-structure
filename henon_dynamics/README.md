@@ -1445,3 +1445,45 @@ remain open.
 - [P62 paper](henon_full_horseshoe_algebraic_exhaustion/paper/paper.pdf)
 - [P62 proof package](henon_full_horseshoe_algebraic_exhaustion/PROOF_PACKAGE.md)
 - [P62 exact certificate](henon_full_horseshoe_algebraic_exhaustion/results/c62_certificate.json)
+
+## HCS-P63 primitive-coordinate height and flat pressure
+
+P63 tests the all-period coordinate-height pressure proposed after P62.  In
+the integral coordinate `x=6q`, every primitive root is an algebraic integer
+and every conjugate is another real periodic coordinate.  The cyclic
+recurrence gives the sharp all-period bound
+
+\[
+|x|\le1+\sqrt7,
+\qquad h(x)\le\log(1+\sqrt7).
+\]
+
+For the degree-`D_n` scaled primitive divisor,
+
+\[
+Z_n(s)=\sum_{\widetilde\Psi_n(\alpha)=0}e^{-s h(\alpha)}
+\]
+
+satisfies `exp(-|s|C)D_n <= Z_n(s) <= exp(|s|C)D_n`.  Therefore, for every
+fixed real `s`,
+
+\[
+\lim_{n\to\infty,\ n\text{ odd}}\frac1n\log Z_n(s)
+=\frac12\log2.
+\]
+
+The same flatness holds after every fixed nonzero algebraic coordinate
+rescaling.  Thus ordinary per-root coordinate height is not an extensive
+clock and cannot create a new pressure pole.  Exact finite polynomials and
+factor heights through period 11, an independent Sturm checker through
+period 9, and 25 hostile mutations support the theorem ledger.
+
+Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized.  The
+next non-micro object is an extensive packet height, beginning with
+`n*D_n^(-1) log M(tilde_Psi_n)` and a reflection-root equidistribution
+theorem.
+
+- [P63 overview](henon_primitive_coordinate_height_flat_pressure/README.md)
+- [P63 paper](henon_primitive_coordinate_height_flat_pressure/paper/paper.pdf)
+- [P63 proof package](henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md)
+- [P63 exact certificate](henon_primitive_coordinate_height_flat_pressure/results/c63_certificate.json)

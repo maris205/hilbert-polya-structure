@@ -422,3 +422,9 @@ classification of a single surface, not a reusable realization-class no-go.
 It therefore does not justify allocating a new obstruction row; HEN-O104
 remains the last registry obstruction identifier after completion of
 C52--C56.
+
+## HCS-P63 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O105 | Ordinary fixed-parameter Weil-height pressure of the complete odd primitive H6 reflection-coordinate population | proved non-extensive flat-pressure obstruction | Integral cyclic coordinates and full real Galois exhaustion give `h(alpha)<=log(1+sqrt(7))` uniformly in period. Hence `exp(-abs(s)C)D_n<=Z_n(s)<=exp(abs(s)C)D_n`, so every fixed-real-`s` pressure equals the unweighted entropy `(1/2)log(2)`. | Invariant under every fixed nonzero algebraic coordinate rescaling. Stops only ordinary individual coordinate height without an orbit-clock factor. It does not stop `n*h(alpha)`, packet Mahler height, discriminant/ramification height, or multiplier Galois excess; none of those is proved here. | ../henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md |

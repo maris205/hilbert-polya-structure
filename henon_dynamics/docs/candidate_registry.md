@@ -2167,3 +2167,34 @@ horseshoe, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FORMAL_HINT)** with overall
 **ROUTE_A_EXPLORATORY**.  Route B is not authorized.  The next theorem is a
 uniform height/Galois-excess pressure for these effective totally real
 primitive divisors; no rational-prime trace follows from total reality.
+
+## HCS-P63 primitive-coordinate height and flat pressure (2026-08-15)
+
+Candidate **HCS-P63** executes the first height-pressure test named by P62;
+see the
+[HCS-P63 project](../henon_primitive_coordinate_height_flat_pressure/).
+P46 integrality, P62 real-conjugate exhaustion, and the cyclic maximum
+principle give the sharp uniform root bound
+
+\[
+|x|\le1+\sqrt7,
+\qquad h(x)\le\log(1+\sqrt7).
+\]
+
+Consequently the ordinary primitive-coordinate partition satisfies
+
+\[
+e^{-|s|C}D_n\le Z_n(s)\le e^{|s|C}D_n
+\]
+
+and has pressure `(1/2)log(2)` for every fixed real `s`.  This remains true
+under every fixed nonzero algebraic rescaling.  The candidate therefore
+produces a proved normalization obstruction rather than a new arithmetic
+pressure.  Exact finite factorization through period 11 and an independent
+root-bound check through period 9 are certificate layers only.
+
+The Route-A tuple is **(A1_PASS_ANALYTIC,
+A2_ANALYTIC_DETERMINANT inherited, A3_PARTIAL_ANALYTIC_STRUCTURE,
+A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Route B is not
+authorized.  The next candidate is the extensive packet Mahler average and
+the equidistribution of the complete primitive reflection-root ensemble.
