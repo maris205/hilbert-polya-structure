@@ -1,8 +1,8 @@
 # HCS-C57 primary-source audit
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; primary locators and theorem
-boundaries verified; machine source contract PREFREEZE_CODE_RESULTS_PASS;
-release provenance pending; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; primary locators and theorem boundaries verified; machine
+source contract PREFREEZE_CODE_RESULTS_PASS.**
 
 Search/access date: **2026-08-15 UTC**.
 

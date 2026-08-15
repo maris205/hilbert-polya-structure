@@ -1,7 +1,8 @@
 # HCS-C57 research question
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
-PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Problem
 
@@ -81,7 +82,7 @@ Scores use 1 (weak) through 5 (strong).
 
 | criterion | score | reason |
 |---|---:|---|
-| Feasible | 5 | The exact producer and independent checker pass G0--G7 for incidence, field, cohomology, orientation, G6 quartic/rank, and G7 divisor/quaternion/class inputs; the separate scope firewall and official paper gates also pass, while post-compile root binding and release packaging remain. |
+| Feasible | 5 | The exact producer and independent checker pass G0--G7 for incidence, field, cohomology, orientation, G6 quartic/rank, and G7 divisor/quaternion/class inputs; the separate scope firewall, official paper gates, final root audit, and release packaging also pass. |
 | Interesting | 5 | The result gives a sharp arithmetic minimum and an explicit nonzero Brauer class on a distinguished cubic surface. |
 | Novel, bounded | 4 | General double-six resolvers and order-two classes are classical; the bounded search did not locate this fixed surface's complete field-and-quaternion package. |
 | Ethical/reproducible | 5 | The proof separates general theorems, exact finite algebra, and negative claims; no private data or numerical fitting is involved. |
@@ -204,7 +205,8 @@ release. It does not license a smaller “resolver only” paper.
 The theorem question and proof architecture are locked. The project-local
 certificate, strict schema, independent check, scoped manifest, 33/33 tests,
 and 535/535 rebound cases pass at `PREFREEZE_CODE_RESULTS_PASS`. The official
-18-file paper source, 24-page PDF, compilation report, and hostile paper audit
-also pass. The post-compile formal-package hash, commits, full-project manifest,
-archive, and release promotion remain pending. This is the intentional
-`PAPER_COMPILED`/`PAPER_HOSTILE_PASS` but `NOT_RELEASED` boundary.
+18-file paper source, 24-page PDF, compilation report, hostile paper audit,
+final root audit, external formal binding, implementation identity,
+self-excluding 64-entry manifest, and byte-identical archived Route also pass.
+P57 records `RELEASE_FROZEN` and `DOCS_FINAL_NO_MORE_EDITS` while preserving
+the protected machine layer.

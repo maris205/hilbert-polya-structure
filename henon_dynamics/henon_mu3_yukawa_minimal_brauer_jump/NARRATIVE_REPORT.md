@@ -1,7 +1,8 @@
 # HCS-C57 narrative report
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; theorem narrative locked; machine
-PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; theorem narrative locked; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. From a cubic surface to a minimal cohomological jump
 
@@ -178,10 +179,11 @@ double-six resolver.
 The mathematical route is locked, and the project-local machine certificate,
 strict schema, independent checker, scoped manifest, 33/33 tests, and 535/535
 rebound pass at `PREFREEZE_CODE_RESULTS_PASS`. The official 18-file paper
-source, 24-page PDF, compilation report, and independent hostile paper audit
-also pass. The post-compile formal-package identity, commits, full-project
-manifest, archive, and release remain pending, so the project is
-`PAPER_COMPILED`/`PAPER_HOSTILE_PASS` but `NOT_RELEASED`. Temporary feasibility
-and `/tmp` transport results cannot be cited as release provenance.
+source, 24-page PDF, compilation report, independent hostile paper audit, final
+root audit, external formal-package binding, implementation identity,
+self-excluding 64-entry manifest, and byte-identical archived Route also pass.
+P57 therefore records `RELEASE_FROZEN` and `DOCS_FINAL_NO_MORE_EDITS` while
+preserving the machine layer. Temporary feasibility and `/tmp` transport
+results cannot be cited as release provenance.
 
 No later-batch topic has been selected.

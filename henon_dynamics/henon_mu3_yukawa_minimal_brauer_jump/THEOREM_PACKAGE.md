@@ -1,15 +1,17 @@
 # HCS-C57 theorem package
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
-PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 This file states the exact theorem target and the finite premises that a C57
 release must certify. The mathematical implication from those premises is
 proved in PROOF_PACKAGE.md. The project-local exact producer and independent
 checker now certify C57-EXACT-0 through C57-EXACT-7 at
 `PREFREEZE_CODE_RESULTS_PASS`, with a strict schema and scoped manifest. These
-remain machine-prefreeze theorem inputs. The separately bound paper is now
-compiled and hostile-audited, but neither layer is yet a project release.
+remain machine-prefreeze theorem inputs. The separately bound paper is compiled
+and hostile-audited. P57 closes the external root, implementation-identity,
+manifest, archived-Route, and promotion gates without changing either layer.
 
 ## 1. Frozen object
 
@@ -471,6 +473,8 @@ The implication from C57-EXACT-0 through C57-EXACT-7 to Theorems A--D is
 written, and the exact project-local handoff and independent replay pass. The
 machine tuple binds the finite premises while preserving every labeled
 written bridge. The official paper source, 24-page PDF, compilation report,
-and independent hostile paper audit pass. The post-compile formal-package
-identity, commits, full-project manifest, archive, and project promotion remain
-pending, so C57 is `PAPER_COMPILED`/`PAPER_HOSTILE_PASS` but `NOT_RELEASED`.
+independent hostile paper audit, final root audit, external formal binding,
+implementation identity, self-excluding 64-entry manifest, and byte-identical
+archived Route pass. C57 is `RELEASE_FROZEN`; documentation is
+`DOCS_FINAL_NO_MORE_EDITS`, while the protected machine layer remains
+`PREFREEZE_CODE_RESULTS_PASS`.

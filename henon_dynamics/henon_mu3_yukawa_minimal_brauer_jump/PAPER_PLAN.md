@@ -1,7 +1,8 @@
 # HCS-C57 paper plan
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; implemented manuscript plan;
-machine PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; implemented manuscript plan; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Working title
 
@@ -199,7 +200,7 @@ auxiliaries.
 | PDF | `60bdbcbb1a9ddc03ac6a142d22142821860545026fb9dfa21a8001960c7d0200` |
 | official stabilized log | `ddbbf698c8b0c3b1167f708ec32fe0e92b4ba47d4d6af8c3b5f379425886884b` |
 | extracted text | `0d91dd71471e5131a554320bf8dfef94b9a0b378b56b8f3a261d99061b3f1877` |
-| compilation report | `4684570886e26e4dc1510ce681baa6f5d28c38f2331bafe50281605a186c64fe` |
+| compilation report | `964e86bd1cc41ac56edbfc9d9e729edad5b4254788d6f5b4daa961fd22265561` |
 | source definition | SHA-256 of lexicographically ordered `sha256sum` lines for 17 TeX files and `paper/references.bib`, evaluated from the C57 project root |
 | inventory and size | 18 source files; 20 paper files including PDF and report; auxiliaries 0; PDF 24 pages and 537984 bytes |
 | extracted-text metrics | 1321 lines; 9314 whitespace-delimited tokens; 75541 bytes |
@@ -208,10 +209,11 @@ auxiliaries.
 ## 12. Current boundary
 
 The paper directory, six-entry bibliography, official PDF, external stabilized
-log digest, extracted-text digest, and compilation report are complete and
-bound. The post-compile formal-package identity, commits, self-excluding
-full-project manifest, release archive, and project promotion remain pending;
-`promotion_authorized=false` and the project is `NOT_RELEASED`.
+log digest, extracted-text digest, compilation report, final hostile root
+audit, external formal identity, implementation/provenance policy,
+self-excluding 64-entry full-project manifest, and byte-identical archived
+Route are complete. P57 authorizes promotion: the project is `RELEASE_FROZEN`
+and documentation is `DOCS_FINAL_NO_MORE_EDITS`.
 
 Later batch items are contingent and unselected; this plan assigns none of
 them a topic.

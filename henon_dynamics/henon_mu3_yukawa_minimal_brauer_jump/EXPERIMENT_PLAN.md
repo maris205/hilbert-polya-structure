@@ -1,7 +1,8 @@
 # HCS-C57 exact experiment plan
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; execution design locked; machine
-PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; execution design locked; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Objective
 
@@ -163,10 +164,11 @@ classification and rebound inventory.
 11. official controlled compilation and artifact audit;
 12. post-compile root binding and release provenance.
 
-Steps 1--11 pass. The producer, independent checker, 33/33 tests, 535/535
+Steps 1--12 pass. The producer, independent checker, 33/33 tests, 535/535
 rebound cases, 28-entry scoped manifest, external-cwd replay, 29-file
 nonmutation snapshot, formal source gate, hostile paper audit, and official
-24-page build are complete. Step 12 remains the pre-release gate.
+24-page build are complete. P57 also closes the final root binding and release
+provenance gate.
 
 ## 7. Current state
 
@@ -175,10 +177,11 @@ ending at the determinant quartic/rank certificate and G7 containing the
 divisor/quaternion/class match. The separate negative-scope contract passes
 with all 30 nonclaim leaves false. The certificate, schema, check report,
 scoped manifest, 33/33 tests, and 535/535 rebound are project-local exact
-evidence; Phase-1 and `/tmp` artifacts remain non-provenance. No C57
-implementation/provenance commit exists. The 18-file paper-source digest, PDF,
-log, extracted-text, and compilation-report digests are bound; the
-post-compile formal-package digest, full-project manifest, archive, commits,
-and release remain pending.
+evidence; Phase-1 and `/tmp` artifacts remain non-provenance. Implementation
+commit `c124ba53c3d89514a00b0949e62b645228dbcfc5` is bound; the separate
+provenance commit remains `null` under the external-only policy. The paper
+tuple, final 13-root aggregate, self-excluding 64-entry full-project manifest,
+and byte-identical archived Route are verified under their acyclic external
+hash policies. C57 is `RELEASE_FROZEN` with documentation final.
 
 No later-batch topic is selected by this plan.

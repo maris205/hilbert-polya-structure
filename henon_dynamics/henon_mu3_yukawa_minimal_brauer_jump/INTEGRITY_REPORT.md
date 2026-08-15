@@ -1,18 +1,19 @@
 # HCS-C57 integrity report
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; formal scope locked; machine
-PREFREEZE_CODE_RESULTS_PASS; release identities pending; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; formal scope locked; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Integrity conclusion
 
-The current milestone is a compiled and hostile-audited paper backed by the
-machine-prefreeze theorem package, not a C57 release. The formal implication
-and source boundary are explicit, and the exact project-local producer,
-independent checker, official refresh, mandatory replay, 33/33 tests, and
-535/535 rebound pass. The 18-file paper source, 24-page PDF, official log,
-extracted text, and compilation report are bound below. The post-compile
-formal package, commits, full-project manifest, archive, and release promotion
-remain unset at their separate gates.
+P57 freezes C57 with final documentation and a compiled, hostile-audited paper
+backed by the unchanged machine-prefreeze theorem package. The formal
+implication and source boundary are explicit, and the exact project-local
+producer, independent checker, official refresh, mandatory replay, 33/33
+tests, and 535/535 rebound pass. The 18-file paper source, 24-page PDF,
+official log, extracted text, compilation report, final hostile root audit,
+external 13-root binding, implementation identity, self-excluding 64-entry
+manifest, and byte-identical archived Route all pass.
 
 ## 2. Ownership boundary
 
@@ -52,13 +53,13 @@ negative claims audited in Section 8 form a separate unnumbered firewall.
 
 | claim | universal source | exact machine premise | written bridge | current project state |
 |---|---|---|---|---|
-| 36 divides every 2-primary jump degree | SD93/EJ10 \(U_1/U_3\) classification | frozen \(W(E_6)\) input | fixed field and index divisibility | machine premise PASS; written bridge complete; post-compile root audit pending |
-| equality fields are double-six fields | classification plus group theory | \(U_1\) self-normalizer/core | equality in tower degrees | machine premise PASS; written bridge complete; post-compile root audit pending |
-| quotient over \(F_D\) is \(\mathbf Z/2\) | SD93/EJ10 | integral \(H^1(U_1,\Lambda)\) | inflation and Hochschild--Serre | machine premise PASS; written bridge complete; post-compile root audit pending |
-| \(F_D=\mathbf Q(\theta)=\mathbf Q(\delta)\) | Galois correspondence | exact stabilizers | orbit-stabilizer | machine premise PASS; written bridge complete; post-compile root audit pending |
-| canonical \(Q_D\) | none | gauge, matrix, pivot, restrictions | rank sandwich | machine premise PASS; written bridge complete; post-compile root audit pending |
-| \(\operatorname{div}Q_D=\mathcal E+\mathcal G\) | none | line distinctness/restrictions | degree exhaustion | machine premise PASS; written bridge complete; post-compile root audit pending |
-| quaternion generator | EJ cyclic-class precedent | orientation, norm, cocycle match | unramifiedness plus nontriviality | machine premise PASS; written bridge complete; post-compile root audit pending |
+| 36 divides every 2-primary jump degree | SD93/EJ10 \(U_1/U_3\) classification | frozen \(W(E_6)\) input | fixed field and index divisibility | machine premise PASS; written bridge complete; final root audit PASS |
+| equality fields are double-six fields | classification plus group theory | \(U_1\) self-normalizer/core | equality in tower degrees | machine premise PASS; written bridge complete; final root audit PASS |
+| quotient over \(F_D\) is \(\mathbf Z/2\) | SD93/EJ10 | integral \(H^1(U_1,\Lambda)\) | inflation and Hochschild--Serre | machine premise PASS; written bridge complete; final root audit PASS |
+| \(F_D=\mathbf Q(\theta)=\mathbf Q(\delta)\) | Galois correspondence | exact stabilizers | orbit-stabilizer | machine premise PASS; written bridge complete; final root audit PASS |
+| canonical \(Q_D\) | none | gauge, matrix, pivot, restrictions | rank sandwich | machine premise PASS; written bridge complete; final root audit PASS |
+| \(\operatorname{div}Q_D=\mathcal E+\mathcal G\) | none | line distinctness/restrictions | degree exhaustion | machine premise PASS; written bridge complete; final root audit PASS |
+| quaternion generator | EJ cyclic-class precedent | orientation, norm, cocycle match | unramifiedness plus nontriviality | machine premise PASS; written bridge complete; final root audit PASS |
 
 ## 5. Classification firewall
 
@@ -126,7 +127,7 @@ The package consistently records false/unsupported for:
 - \(\delta=P(\theta)\);
 - motive, automorphy, Calabi--Yau, or dynamics claims.
 
-## 9. Machine, paper, and remaining-null tables
+## 9. Machine, paper, and release tables
 
 | machine identity | authoritative value |
 |---|---|
@@ -144,38 +145,33 @@ The package consistently records false/unsupported for:
 | PDF | `60bdbcbb1a9ddc03ac6a142d22142821860545026fb9dfa21a8001960c7d0200` |
 | official stabilized log | `ddbbf698c8b0c3b1167f708ec32fe0e92b4ba47d4d6af8c3b5f379425886884b` |
 | extracted text | `0d91dd71471e5131a554320bf8dfef94b9a0b378b56b8f3a261d99061b3f1877` |
-| compilation report | `4684570886e26e4dc1510ce681baa6f5d28c38f2331bafe50281605a186c64fe` |
+| compilation report | `964e86bd1cc41ac56edbfc9d9e729edad5b4254788d6f5b4daa961fd22265561` |
 | source / paper inventory | 18 source files; source + PDF + report = 20 files; auxiliaries 0 |
 | PDF / extracted text | 24 pages, 537984 bytes / 1321 lines, 9314 tokens, 75541 bytes |
 | compile and hostile audit | zero LaTeX/BibTeX/reference/citation/box warnings; 31 embedded fonts; no Type 3; Ghostscript PASS; `PAPER_HOSTILE_PASS` with 0 blocker |
 
 | release identity | current value |
 |---|---|
-| code commit | null |
-| provenance commit | null |
-| separately packaged mathematics subpayload | null |
-| packaged hostile audit | null |
-| formal package | null |
-| full-project manifest | null |
-| release archive | null |
+| code commit | `c124ba53c3d89514a00b0949e62b645228dbcfc5` |
+| provenance commit | `null`; external-only, no separate provenance commit |
+| separately packaged mathematics subpayload | `null`; machine-layer field intentionally unchanged |
+| packaged hostile audit | `null`; independent audits pass without a packaged hash |
+| formal package | bound only in the final Route; digest external to the 13 roots |
+| full-project manifest | `FULL_PROJECT_HASHES.sha256`; 64 entries; self-excluding; digest external |
+| archived Route | `evaluations/route_a/HCS-C57/20260815T000000Z.yaml`; byte-identical to the live Route; digest external |
 
-The independent machine and paper hostile audits passed without a packaged
-audit hash. No Phase-1, `/tmp`, pre-edit-document, or agent-message hash may
-fill any remaining-null row.
+The independent machine, paper, and final root hostile audits passed without a
+packaged audit hash. No Phase-1, `/tmp`, pre-edit-document, or agent-message
+hash fills any release identity.
 
-## 10. Release blockers
+## 10. Release closure
 
 The exact machine artifacts, independent checker/counts, scoped manifest,
-machine hostile replay, paper source, hostile paper audit, and official build
-are closed. The remaining blockers are:
-
-1. the edited post-compile roots still require their final hostile audit and
-   stable external formal-package identity;
-2. implementation/provenance commit policy is unset;
-3. the self-excluding full-project manifest and release archive are unset;
-4. project release has not been authorized.
-
-Until all four close, the correct state is
-`PAPER_COMPILED`/`PAPER_HOSTILE_PASS` but `NOT_RELEASED`.
+machine hostile replay, paper source, hostile paper audit, official build,
+final root audit, external formal identity, implementation/provenance policy,
+self-excluding full-project manifest, archived Route, and promotion are closed.
+The correct project state is `RELEASE_FROZEN`; documentation is
+`DOCS_FINAL_NO_MORE_EDITS`. The protected machine bytes intentionally retain
+their `PREFREEZE_CODE_RESULTS_PASS` / `PAPER_PENDING` layered state.
 
 Later batch items remain contingent and unselected.

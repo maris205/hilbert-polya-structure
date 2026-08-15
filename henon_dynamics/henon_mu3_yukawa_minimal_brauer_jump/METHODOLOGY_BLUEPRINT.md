@@ -1,7 +1,8 @@
 # HCS-C57 methodology blueprint
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; theorem and verification
-methodology locked; machine PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; theorem and verification methodology locked; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Methodological principle
 
@@ -221,10 +222,11 @@ C57 cannot be released if any of the following occurs:
 The theorem design, source contract, and methodology are locked. The exact
 project-local code/results tuple, independent checker, 33/33 tests, and
 535/535 rebound cases pass at `PREFREEZE_CODE_RESULTS_PASS`. The formal source
-gate, 18-file paper source, independent hostile paper audit, and official
-24-page build pass. The Route binds the paper hashes while leaving the
-post-compile formal package, commits, full-project manifest, archive, and
-release promotion pending.
+gate, 18-file paper source, independent hostile paper audit, official 24-page
+build, final hostile root audit, external 13-root binding, implementation
+identity, self-excluding 64-entry release manifest, and byte-identical archived
+Route pass. Their acyclic external hash policies close P57 while preserving the
+`PREFREEZE_CODE_RESULTS_PASS` machine layer.
 
 Later batch items remain contingent and unselected; this methodology assigns
 them no topic.

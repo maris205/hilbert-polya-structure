@@ -1,7 +1,8 @@
 # HCS-C57 derivation
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; exact derivation fixed;
-project-local machine premises PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; exact derivation fixed; project-local machine premises
+PREFREEZE_CODE_RESULTS_PASS.**
 
 This file derives the formulas used in the theorem package. It distinguishes
 formal consequences of the frozen C56 theorem, classical classification
@@ -9,9 +10,11 @@ results, and finite exact calculations now certified by the C57 machine
 handoff at `PREFREEZE_CODE_RESULTS_PASS`. The labeled written bridges remain
 mathematical arguments rather than machine claims.
 
-The official 24-page paper build and its independent hostile audit now pass.
-That paper milestone does not promote the still-pending formal-package,
-commit, full-manifest, archive, or project-release gates.
+The official 24-page paper build, independent hostile paper audit, final hostile
+root audit, external 13-root binding, implementation identity, self-excluding
+64-entry release manifest, and byte-identical archived Route now pass. P57
+therefore freezes the project without changing this derivation or the protected
+machine tuple.
 
 ## 1. Galois-theoretic setup
 

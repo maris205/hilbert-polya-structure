@@ -1,7 +1,8 @@
 # HCS-C57 proof package
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; proof implication complete;
-project-local exact premises PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; proof implication complete; project-local exact premises
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Claim
 
@@ -25,8 +26,9 @@ For the frozen HCS-C55/HCS-C56 cubic surface \(Y/\mathbf Q\), prove:
 The argument below is a complete written implication from H0--H7. The exact
 premises are bound by the project-local producer and independent checker at
 `PREFREEZE_CODE_RESULTS_PASS`. The official paper compiled from this proof and
-passed an independent hostile audit. Neither the machine handoff nor the paper
-milestone is a project release, and no temporary computation is cited as
+passed an independent hostile audit. P57 then closed the separate root,
+implementation-identity, manifest, archived-Route, and promotion gates without
+changing the proof or machine premises. No temporary computation is cited as
 release authority.
 
 The proof deliberately separates:

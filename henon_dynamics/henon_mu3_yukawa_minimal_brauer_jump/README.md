@@ -1,7 +1,8 @@
 # HCS-C57: minimal 2-primary Brauer jump
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
-PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 HCS-C57 studies one fixed object: the smooth Q-defined cubic surface \(Y\)
 released by HCS-C55, together with the full \(W(E_6)\) line field proved in
@@ -14,11 +15,13 @@ The exact project-local machine tuple now passes
 29-file live inventory, with a self-excluding 28-entry scoped manifest. The
 certificate, strict schema, independent checker, 33-test suite, and full
 semantic rebound are bound below. The official 18-file paper source, 24-page
-PDF, compilation report, and independent hostile paper audit also pass.
-Implementation/provenance commits, the post-compile formal-document hash,
-full-project manifest, archive, and release remain deliberately unset. Phase-1
-and `/tmp` artifacts are chronology and transport evidence only; none is
-release provenance.
+PDF, compilation report, independent hostile paper audit, final hostile root
+audit, external formal binding, implementation identity, self-excluding
+64-entry release manifest, and byte-identical archived Route also pass. P57
+freezes the project and final documentation. The protected machine files retain
+their intentional `PREFREEZE_CODE_RESULTS_PASS` / `PAPER_PENDING` layered state.
+Phase-1 and `/tmp` artifacts are chronology and transport evidence only; none
+is release provenance.
 
 ## 1. Locked outcome
 
@@ -174,7 +177,10 @@ The C57 root package consists of:
 - PAPER_PLAN.md: implemented manuscript plan and official artifact tuple;
 - paper/: 18 bound source files, the official PDF, and the compilation report;
 - route_a_evaluation.yaml: `PAPER_COMPILED`/`PAPER_HOSTILE_PASS` Route record
-  with the unchanged machine PREFREEZE tuple.
+  with the unchanged machine PREFREEZE tuple and final frozen-release state;
+- FULL_PROJECT_HASHES.sha256: external, self-excluding 64-entry release ledger;
+- evaluations/route_a/HCS-C57/20260815T000000Z.yaml: archived Route,
+  byte-identical to the final live Route.
 
 The paper subtree contains exactly 20 files: 18 source files, `main.pdf`, and
 `COMPILATION_REPORT.md`; no generated auxiliary remains.
@@ -206,7 +212,10 @@ official atomic refresh, mandatory nonmutating replay, 33/33 tests, and
 the 24-page, 537984-byte PDF digest is
 `60bdbcbb1a9ddc03ac6a142d22142821860545026fb9dfa21a8001960c7d0200`;
 and the independent paper audit reports `PAPER_HOSTILE_PASS` with zero blocker.
-Project status nevertheless remains `NOT_RELEASED` with
-`promotion_authorized=false`. The next gates are the post-compile root audit
-and formal-package binding, commits, full-project manifest, archive, and final
-release promotion.
+P57 binds implementation commit
+`c124ba53c3d89514a00b0949e62b645228dbcfc5`; the separate provenance commit is
+`null` under the external-only policy. The final formal identity is bound only
+in the Route, while Route, archived-Route, and full-manifest digests remain in
+the acyclic external manifest policy. Project status is `RELEASE_FROZEN`,
+`promotion_authorized=true`, and documentation is
+`DOCS_FINAL_NO_MORE_EDITS`; no C57 release-provenance gate remains open.

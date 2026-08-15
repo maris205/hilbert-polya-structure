@@ -1,7 +1,8 @@
 # HCS-C57 implementation checklist
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; theorem design complete; G0--G7
-and the independent machine replay PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; theorem design complete; G0--G7 and the independent
+machine replay PREFREEZE_CODE_RESULTS_PASS.**
 
 ## A. Frozen input
 
@@ -112,15 +113,16 @@ and the independent machine replay PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
 - [x] Verify primary-source locators.
 - [x] Record bounded novelty boundary.
 - [x] Receive official machine tuple.
-- [ ] Bind root documentation hashes.
-- [ ] Obtain final hostile root-doc PASS.
+- [x] Bind root documentation hashes.
+- [x] Obtain final hostile root-doc PASS.
 - [x] Authorize paper source.
 - [x] Draft paper.
 - [x] Obtain independent hostile paper PASS.
 - [x] Compile and audit the official 24-page PDF.
-- [ ] Bind the full-project manifest and release archive.
-- [ ] Bind commit/provenance policy and authorize project release.
+- [x] Bind the full-project manifest and release archive.
+- [x] Bind commit/provenance policy and authorize project release.
 
-The machine and paper gates pass. The edited post-compile roots, formal-package
-identity, commits, full-project manifest, archive, and project promotion remain
-separate release gates.
+All machine, paper, post-compile root, implementation/provenance-policy,
+full-project-manifest, archived-Route, and promotion gates pass. The protected
+machine layer remains `PREFREEZE_CODE_RESULTS_PASS`; P57 freezes the project and
+final documentation without rewriting those bytes.

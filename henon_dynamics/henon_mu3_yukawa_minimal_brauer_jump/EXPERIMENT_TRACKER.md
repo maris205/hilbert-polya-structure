@@ -1,7 +1,8 @@
 # HCS-C57 experiment tracker
 
-Status: **PAPER_COMPILED; PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
-PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
+Status: **RELEASE_FROZEN; DOCS_FINAL_NO_MORE_EDITS; PAPER_COMPILED;
+PAPER_HOSTILE_PASS; THEOREM_TARGET_LOCKED; machine
+PREFREEZE_CODE_RESULTS_PASS.**
 
 ## 1. Milestone summary
 
@@ -14,7 +15,7 @@ PREFREEZE_CODE_RESULTS_PASS; NOT_RELEASED.**
 | machine producer | PREFREEZE PASS | project-local source and payload identities bound |
 | independent checker | PREFREEZE PASS | independent replay report bound |
 | tests/rebound | PREFREEZE PASS | 33/33 tests; 535/535 mutations rejected |
-| root Route | PAPER_COMPILED / NOT_RELEASED | machine and paper tuples populated; release provenance pending |
+| root Route | DOCS_FINAL_NO_MORE_EDITS / RELEASE_FROZEN | final formal identity and release provenance bound under external no-self-hash policy |
 | formal source gate | PASS | theorem/source hostile audit cleared paper authorization |
 | paper source | PASS | 18 source files; canonical aggregate bound |
 | paper hostile audit | PASS | zero blocker |
@@ -69,7 +70,7 @@ mutations. It is not G7 and is not a substitute for G7.
 - A nonzero gauge determinant is required before deleting four monomials.
 - Brauer class construction supplies no local evaluation.
 
-## 5. Machine, paper, and remaining-null ledger
+## 5. Machine, paper, and release ledger
 
 | machine field | authoritative value |
 |---|---|
@@ -90,37 +91,34 @@ mutations. It is not G7 and is not a substitute for G7.
 | PDF | `60bdbcbb1a9ddc03ac6a142d22142821860545026fb9dfa21a8001960c7d0200` |
 | official stabilized log | `ddbbf698c8b0c3b1167f708ec32fe0e92b4ba47d4d6af8c3b5f379425886884b` |
 | extracted text | `0d91dd71471e5131a554320bf8dfef94b9a0b378b56b8f3a261d99061b3f1877` |
-| compilation report | `4684570886e26e4dc1510ce681baa6f5d28c38f2331bafe50281605a186c64fe` |
+| compilation report | `964e86bd1cc41ac56edbfc9d9e729edad5b4254788d6f5b4daa961fd22265561` |
 | inventory | 18 source + PDF + report = 20 files; generated auxiliaries 0 |
 | PDF/text metrics | 24 pages; 537984 bytes / 1321 lines; 9314 tokens; 75541 bytes |
 | hostile paper audit | `PAPER_HOSTILE_PASS`; 0 blocker |
 
-The following release identities remain intentionally unset:
+The final release identities use an acyclic external policy:
 
 | field | value |
 |---|---|
-| C57 implementation commit | null |
-| C57 provenance commit | null |
-| separately packaged mathematics-subpayload hash | null |
-| packaged hostile-audit hash | null |
-| C57 formal-package hash | null |
-| full-project manifest hash | null |
-| release archive hash | null |
+| C57 implementation commit | `c124ba53c3d89514a00b0949e62b645228dbcfc5` |
+| C57 provenance commit | `null`; external-only, no separate provenance commit |
+| separately packaged mathematics-subpayload hash | `null`; machine-layer field intentionally unchanged |
+| packaged hostile-audit hash | `null`; independent audits pass without a packaged audit hash |
+| C57 formal-package identity | bound only in the final Route; digest external to the 13 roots |
+| full-project manifest | `FULL_PROJECT_HASHES.sha256`; 64 entries; self-excluding; digest external |
+| archived Route | `evaluations/route_a/HCS-C57/20260815T000000Z.yaml`; byte-identical to the live Route; digest external |
 
 The independent machine hostile replay passed without creating a packaged
 audit artifact. Temporary, `/tmp`, pre-edit-document, and agent-message
-digests are not substituted for any null field.
+digests are not substituted for any identity.
 
-## 6. Immediate next gate
+## 6. Release closure
 
-The exact machine handoff and official paper build are complete. Next:
-
-1. audit and bind the post-compile 13-root formal package without embedding a
-   self-hash in those roots;
-2. bind implementation/provenance policy and the self-excluding full-project
-   manifest;
-3. create and audit the release archive;
-4. only then authorize project promotion.
+The exact machine handoff, official paper build, final hostile root audit,
+external 13-root binding, implementation/provenance policy, self-excluding
+64-entry full-project manifest, and byte-identical archived Route are complete.
+P57 authorizes project promotion and freezes C57; no C57 theorem, paper, or
+release-provenance gate remains open.
 
 ## 7. Later-batch boundary
 

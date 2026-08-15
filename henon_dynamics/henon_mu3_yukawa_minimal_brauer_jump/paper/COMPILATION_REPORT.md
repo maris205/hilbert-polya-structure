@@ -1,7 +1,8 @@
 # HCS-C57 compilation report
 
-Status: **PASS; official paper build against the exact
-`PREFREEZE_CODE_RESULTS_PASS` machine evidence; full-project release pending**
+Status: **PASS; official paper build; project `RELEASE_FROZEN` at implementation
+commit `c124ba53c3d89514a00b0949e62b645228dbcfc5`; protected machine layer remains
+`PREFREEZE_CODE_RESULTS_PASS` / `PAPER_PENDING`**
 
 ## Build
 
@@ -85,11 +86,24 @@ directories or TeX installations is made.
   structural mutations are rejected; the hostile suite has 33 tests.
 - Code/results inventory: 18 code files and 11 result files, or 29 live files
   including the scoped manifest.
+- Project status: `RELEASE_FROZEN`, binding implementation commit
+  `c124ba53c3d89514a00b0949e62b645228dbcfc5`.
+- Separate provenance commit: `null`; release provenance is external-only and
+  no separate provenance commit is promoted.
+- The protected code/results bytes, including their machine-side
+  `PAPER_PENDING` prose, remain at the intentional
+  `PREFREEZE_CODE_RESULTS_PASS` layer and are not rewritten by P57.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 64 entries
+  and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C57/20260815T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
 
 The scoped manifest remains the exact machine-lane identity. Paper and
 full-project identities are separate, external layers and do not replace it.
-The paper build does not rewrite any code, result, certificate, or evidence
-archive.
+P57 does not rewrite any paper source, PDF, code, result, certificate, or
+machine evidence artifact.
 
 ## PDF checks
 
@@ -134,7 +148,8 @@ archive.
   automorphy, dynamical theorem, Riemann-hypothesis statement, or generic
   resolver priority.
 
-This report records the official paper build. Its own digest, the final
-formal-package digest, the Route-record digest, and the full-project manifest
-digest remain external to their respective hashed objects to avoid self-hash
-cycles.
+This report records the official paper build and P57 release closure. The
+report does not contain its own digest or any Route, archived-Route, or
+full-project-manifest digest. Those identities are bound only in acyclic
+external consumers; the formal-package digest likewise remains external to the
+13 Markdown files it covers.
