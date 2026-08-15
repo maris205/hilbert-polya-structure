@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[numbers]{natbib}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Zpack}{\mathcal Z}
+\hypersetup{pdftitle={A Canonical Reflection-Packet Euler Product and Its Essential Boundary Singularity},pdfauthor={Liang Wang},pdfsubject={Henon reflection packets and dynamical zeta structure},pdfkeywords={Henon map, flip system, Euler product, essential singularity, Lind zeta}}
+\title{A Canonical Reflection-Packet Euler Product\\and Its Essential Boundary Singularity}
+\author{Liang Wang\\\small School of Artificial Intelligence and Automation\\\small Huazhong University of Science and Technology\\\small Wuhan 430074, P. R. China}
+\date{August 16, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Odd reflection packets in the full H\'enon horseshoe admit a unique normalized
+linear sampler invariant under symbolic coboundaries.  We promote that sampler
+to a canonical packet-mean Euler product.  Its logarithmic derivative has an
+exact primitive/repetition divisor law, and the product converges in an
+explicit disk.  In the unweighted case its radius is $2^{-1/2}$ and
+\[
+ \log\Zpack_0(z)
+ =\frac{1}{\sqrt2(1-\sqrt2z)}+G(z),
+\]
+where $G$ is analytic near the positive boundary point.  Consequently the
+Euler product has an exponential essential singularity there, rather than a
+meromorphic pole.  We distinguish this restricted packet object from the
+standard Lind zeta of the full infinite-dihedral action and from an
+orbit-resolved weighted determinant.  The result is an exact Route-A analytic
+germ and an exact obstruction to one naive Fredholm promotion; it supplies no
+rational-prime trace or operator.
+\end{abstract}
+
+\section{Canonical data and source boundary}
+
+Consider the area-preserving H\'enon map
+$H(x,y)=(6-x^2-y,x)$.  The inherited hyperbolic coding identifies its real
+chain-recurrent set with the full two-shift and intertwines a reversor with
+sequence reversal \cite{DevaneyNitecki1979,Arai2007}.  For odd $n$, let $A_n$
+denote the primitive marked reflection packet.  Its exact cardinality is
+\begin{equation}\label{eq:Dn}
+ D_n=|A_n|=\sum_{d\mid n}\mu(n/d)2^{(d+1)/2}.
+\end{equation}
+The preceding canonical-sampler theorem proves that
+\begin{equation}\label{eq:bn}
+ b_n(f)=\frac{1}{nD_n}\sum_{\omega\in A_n}\sum_{j=0}^{n-1}
+ f(\sigma^j\omega)
+\end{equation}
+is the unique normalized real linear sampler on these cycles that annihilates
+every coboundary.  In particular,
+\begin{equation}\label{eq:gauge}
+ b_n(f+u-u\circ\sigma)=b_n(f)
+\end{equation}
+exactly at each finite period.
+
+There is already a standard zeta theory for flip systems.  A flip and the
+shift generate an action of the infinite dihedral group, and the Lind zeta is
+defined by fixed-point counts for all finite-index subgroups.  The exact
+decomposition in \citet{KimLeePark2003} combines a square root of the ordinary
+shift zeta with odd and even flip fixed-point series; matrix extensions appear
+in \citet{Ryu2019}.  Our object below is deliberately narrower: it uses only
+the odd primitive packet in \eqref{eq:Dn} and the aggregate mean
+\eqref{eq:bn}.  We do not identify it with the Lind zeta.
+
+\section{The packet-mean Euler product}
+
+For bounded continuous $f$, define
+\begin{equation}\label{eq:product}
+ \Zpack_f(z,s)=\prod_{\substack{n\ge1\\n\ \mathrm{odd}}}
+ \left(1-z^n e^{-sn b_n(f)}\right)^{-D_n}.
+\end{equation}
+One sufficient absolute-convergence condition is
+\begin{equation}\label{eq:safedisk}
+ \sqrt2\,|z|e^{|s|\lVert f\rVert_\infty}<1,
+\end{equation}
+because $D_n\le2^{(n+1)/2}$.  Thus \eqref{eq:product} defines a nonzero
+analytic germ.  Equation \eqref{eq:gauge} makes it exactly cohomology
+invariant in this disk.
+
+\begin{theorem}[Primitive and repeated packets]\label{thm:ledger}
+In the disk of absolute convergence,
+\begin{align}
+ \log\Zpack_f(z,s)
+ &=\sum_{\substack{n\ge1\\n\ \mathrm{odd}}}D_n
+   \sum_{r\ge1}\frac{z^{nr}e^{-srn b_n(f)}}{r},\label{eq:log}\\
+ [z^m]\,z\partial_z\log\Zpack_f(z,s)
+ &=\sum_{\substack{n\mid m\\n\ \mathrm{odd}}}
+ nD_ne^{-sm b_n(f)}.\label{eq:logder}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Expand $-\log(1-w)=\sum_{r\ge1}w^r/r$ in \eqref{eq:product}; absolute
+convergence justifies rearrangement.  Differentiation multiplies the
+$(n,r)$ term by $nr$, and collecting $m=nr$ gives \eqref{eq:logder}.
+\end{proof}
+
+The divisor condition in \eqref{eq:logder} distinguishes a primitive packet
+of length $n$ from its $r$-fold repetition.  It does not retain the
+distribution of individual orbit weights within $A_n$: all factors at one
+period receive the common mean $b_n(f)$.  This mean-field firewall becomes
+the next research gate.
+
+\section{The unweighted entropy boundary}
+
+Set $s=0$ and write $\Zpack_0(z)=\Zpack_f(z,0)$.  The primitive generating
+series can be summed exactly.
+
+\begin{proposition}[M\"obius generating function]\label{prop:Dseries}
+For $|z|<2^{-1/2}$,
+\begin{equation}\label{eq:Dseries}
+ D(z):=\sum_{\substack{n\ge1\\n\ \mathrm{odd}}}D_nz^n
+ =\sum_{\substack{k\ge1\\k\ \mathrm{odd}}}
+ \mu(k)\frac{2z^k}{1-2z^{2k}}.
+\end{equation}
+Its radius is $R=2^{-1/2}$, and near the positive point $R$,
+\begin{equation}\label{eq:Dprincipal}
+ D(z)=\frac{1}{\sqrt2(1-\sqrt2z)}+G_1(z)
+\end{equation}
+with $G_1$ analytic.
+\end{proposition}
+
+\begin{proof}
+Substitute \eqref{eq:Dn}, put $n=km$, and interchange the absolutely
+convergent sums.  Since $m$ is odd,
+\[
+ \sum_{m\ \mathrm{odd}}2^{(m+1)/2}z^{km}
+ =\frac{2z^k}{1-2z^{2k}},
+\]
+which proves \eqref{eq:Dseries}.  The $k=1$ term satisfies
+\begin{equation}\label{eq:partialfraction}
+ \frac{2z}{1-2z^2}
+ =\frac{1}{\sqrt2(1-\sqrt2z)}
+  -\frac{1}{\sqrt2(1+\sqrt2z)}.
+\end{equation}
+Every $k\ge3$ term is analytic in a neighborhood of $R$.  Positivity of
+$D_n$ and the pole in \eqref{eq:partialfraction} give the radius.
+\end{proof}
+
+\begin{theorem}[Essential boundary singularity]\label{thm:essential}
+There is a function $G$, analytic near $R=2^{-1/2}$, such that
+\begin{equation}\label{eq:logprincipal}
+ \log\Zpack_0(z)=\frac{1}{\sqrt2(1-\sqrt2z)}+G(z).
+\end{equation}
+Consequently $\Zpack_0$ has an essential singularity at $R$.
+\end{theorem}
+
+\begin{proof}
+The $r=1$ part of \eqref{eq:log} is $D(z)$.  For $r\ge2$, the series
+\[
+ \sum_{n\ \mathrm{odd}}D_n\sum_{r\ge2}\frac{z^{nr}}r
+\]
+is analytic for $|z|<2^{-1/4}$, which strictly contains a neighborhood of
+the positive point $R$.  Combine this with \cref{prop:Dseries}.  Exponentiating
+\eqref{eq:logprincipal} gives a nonvanishing analytic factor times the
+exponential of a simple pole, and hence an essential singularity.
+\end{proof}
+
+This theorem is an analytic obstruction to calling \eqref{eq:product} a
+meromorphic Fredholm determinant at its entropy boundary.  It is not a no-go
+theorem for a separately renormalized relative determinant.
+
+\section{Exact audit and route status}
+
+The accompanying implementation computes $D_n$ through period $41$ by
+M\"obius inversion and independently by divisor subtraction.  It expands the
+Euler product through order $41$ and recovers \eqref{eq:logder} from the
+coefficient identity $zZ'= (zZ'/Z)Z$.  Eight tests pass in normal and
+optimized modes; five upstream artifacts are hash locked and 25 hostile
+mutations are rejected.
+
+The strongest positive result is the exact canonical Euler germ and its
+repetition law.  The strongest obstruction is the essential boundary
+singularity.  Route A records an A2 certified prefix and partial A3 analytic
+structure, but no prime semantics.  No rational-prime labels, von Mangoldt
+amplitudes, transfer operator, self-adjoint generator, or completed Riemann
+determinant has been constructed; Route B is not authorized.  The next
+minimal theorem is to compare \eqref{eq:product} with the orbit-resolved
+exponential moment.  Its first missing invariant is within-period variance.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

@@ -1602,3 +1602,41 @@ reflection-packet determinant or trace with intrinsic arithmetic semantics.
 - [P67 paper](henon_unique_gauge_invariant_orbit_sampler/paper/paper.pdf)
 - [P67 proof package](henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md)
 - [P67 certificate](henon_unique_gauge_invariant_orbit_sampler/results/c67_certificate.json)
+
+## HCS-P68 canonical reflection-packet Euler product
+
+P68 crosses the first determinant-interface gate without overpromoting it.
+P67's unique cyclic packet mean defines
+
+\[
+\mathcal Z_f(z,s)=
+\prod_{\substack{n\ge1\\n\ {\rm odd}}}
+\left(1-z^n e^{-sn b_n(f)}\right)^{-D_n},
+\]
+
+and its logarithmic derivative has the exact primitive/repetition ledger
+
+\[
+[z^m]\,z\partial_z\log\mathcal Z_f
+=\sum_{\substack{n\mid m\\n\ {\rm odd}}}
+nD_n e^{-sm b_n(f)}.
+\]
+
+At \(s=0\) the radius is \(2^{-1/2}\), while
+
+\[
+\log\mathcal Z_0(z)
+=\frac{1}{\sqrt2(1-\sqrt2z)}+G(z)
+\]
+
+near the positive boundary, with \(G\) analytic. Thus the product has an
+exponential essential singularity, not a meromorphic pole. It is a canonical
+packet Euler germ, but it is neither the full infinite-dihedral Lind zeta nor
+an orbit-resolved Fredholm determinant. Route A earns an exact A2 prefix and
+partial A3 structure; Route B remains unauthorized. The next gate is the
+within-period cumulant information erased by aggregate averaging.
+
+- [P68 overview](henon_canonical_reflection_packet_euler_product/README.md)
+- [P68 paper](henon_canonical_reflection_packet_euler_product/paper/paper.pdf)
+- [P68 proof package](henon_canonical_reflection_packet_euler_product/PROOF_PACKAGE.md)
+- [P68 certificate](henon_canonical_reflection_packet_euler_product/results/c68_certificate.json)

@@ -2279,3 +2279,28 @@ Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not authorized:
 the functional has no source-native determinant, rational-prime labels, or
 von Mangoldt amplitudes. That determinant/trace interface is the next major
 candidate rather than another sampling normalization.
+
+## HCS-P68 canonical reflection-packet Euler product (2026-08-16)
+
+Candidate **HCS-P68** promotes P67's canonical sampler to an explicit analytic
+germ; see the
+[HCS-P68 project](../henon_canonical_reflection_packet_euler_product/).
+The product
+
+\[
+\mathcal Z_f(z,s)=\prod_{n\ {\rm odd}}
+(1-z^n e^{-sn b_n(f)})^{-D_n}
+\]
+
+is exactly cohomology invariant in its convergence disk, and its logarithmic
+derivative distinguishes primitive packets from all repetitions by a divisor
+sum. In the unweighted case its radius is \(2^{-1/2}\), but its logarithm has
+principal part \(1/[\sqrt2(1-\sqrt2z)]\); hence the product has an exponential
+essential singularity at the positive entropy boundary.
+
+The formal Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. It is not the full Lind zeta and retains only a
+periodwise aggregate mean. Route B is not authorized. The next candidate is
+the exact cumulant gap between this mean-field factor and the orbit-resolved
+exponential moment.
