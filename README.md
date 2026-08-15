@@ -94,3 +94,4 @@ henon_dynamics/henon_canonical_reflection_packet_euler_product - HCS-P68 complet
 henon_dynamics/henon_orbit_resolved_reflection_cumulant_pressure - HCS-P69 complete - A rank-two reflected transfer matrix gives the exact nonlinear orbit pressure and proves a one-half-log-cosh gap from aggregate mean-field weighting.
 henon_dynamics/henon_orbit_resolved_reflection_euler_boundary - HCS-P70 complete - The full individual-factor reflection Euler product has exact radius (1+q^2)^(-1/2), an essential boundary, and a strict mean-field radius displacement.
 henon_dynamics/henon_relative_lind_counterterm - HCS-P71 complete - Full flip-subgroup data leaves residual essential coefficient 3/4 and branch exponent 1/2, yielding a unique local Lind/packet counterterm.
+henon_dynamics/henon_relative_lind_essential_ladder - HCS-P72 complete - Exact Möbius/repetition channels force an infinite essential-singularity ladder after the unique local Lind counterterm.

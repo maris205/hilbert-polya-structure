@@ -1722,3 +1722,27 @@ determinant remain open; Route B is not authorized.
 - [P71 paper](henon_relative_lind_counterterm/paper/paper.pdf)
 - [P71 proof package](henon_relative_lind_counterterm/PROOF_PACKAGE.md)
 - [P71 certificate](henon_relative_lind_counterterm/results/c71_certificate.json)
+
+## HCS-P72 relative Lind essential-singularity ladder
+
+P72 globalizes the exact logarithmic ledger far enough to test P71's local
+counterterm. Primitive and repetition indices regroup into
+
+\[
+\log\mathcal Z_{\rm orb}(t,1)
+=\sum_{m\ge1}c_m\frac{2t^m}{1-2t^{2m}},\qquad
+c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+
+No channel vanishes. The P71 counterterm removes the \(m=1\) singularity,
+but for every \(m\ge2\) the relative continuation has an exponential
+essential singularity at \(\rho_m=2^{-1/(2m)}\), and these points increase
+to one. Thus the local bridge cannot be a meromorphic/Fredholm determinant
+on the entire unit disk. A punctured-domain infinite-rank renormalization is
+the surviving analytic direction. Arithmetic advance is NO and Route B is
+not authorized.
+
+- [P72 overview](henon_relative_lind_essential_ladder/README.md)
+- [P72 paper](henon_relative_lind_essential_ladder/paper/paper.pdf)
+- [P72 proof package](henon_relative_lind_essential_ladder/PROOF_PACKAGE.md)
+- [P72 certificate](henon_relative_lind_essential_ladder/results/c72_certificate.json)

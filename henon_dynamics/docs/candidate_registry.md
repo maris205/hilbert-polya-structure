@@ -2371,3 +2371,25 @@ among all power-exponential counterterms. The Route-A tuple is **(A1_WEAK,
 A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
 **ROUTE_A_EXPLORATORY**. Global single-valued continuation and operator
 ownership remain open; Route B is not authorized.
+
+## HCS-P72 relative Lind essential-singularity ladder (2026-08-16)
+
+Candidate **HCS-P72** answers P71's globalization question; see the
+[HCS-P72 project](../henon_relative_lind_essential_ladder/). The exact
+primitive/repetition regrouping is
+
+\[
+\log\mathcal Z_{\rm orb}(t,1)
+=\sum_{m\ge1}c_m\frac{2t^m}{1-2t^{2m}},\qquad
+c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+
+Every \(c_m\) is nonzero. After the unique P71 \(m=1\) counterterm, the
+relative continuation has an exponential essential singularity at every
+\(\rho_m=2^{-1/(2m)}\), \(m\ge2\), and \(\rho_m\nearrow1\). Therefore this
+specific relative germ is not a meromorphic finite-dimensional or
+holomorphic trace-class Fredholm determinant on the unit disk. The Route-A
+tuple remains **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Punctured-domain infinite-rank ownership is open;
+arithmetic advance is NO and Route B is not authorized.
