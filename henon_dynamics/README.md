@@ -1543,3 +1543,31 @@ gap remains open. Route A remains exploratory; Route B is not authorized.
 - [P65 paper](henon_minimal_symmetry_defect_pressure/paper/paper.pdf)
 - [P65 proof package](henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md)
 - [P65 certificate](henon_minimal_symmetry_defect_pressure/results/c65_certificate.json)
+
+## HCS-P66 reflection-boundary cohomology anomaly
+
+P66 tests whether the marked pressure from P64--P65 is intrinsic under the
+usual symbolic replacement `f -> f+u-u∘sigma`. It is not. Its exact boundary
+anomaly is
+
+\[
+A_J(u)=\int (u-u\circ\sigma)\,d\eta_J,
+\qquad
+P_J(f+u-u\circ\sigma)=P_J(f)-A_J(u).
+\]
+
+The boundary law and its one-step translate are mutually singular, so the
+dual total-variation norm of `A_J` is exactly `2`. Radius-`r` locally constant
+witnesses realize `2(1-2^{-r})`. In contrast, every complete periodic-orbit
+sum of a coboundary telescopes to zero exactly, making uniform cyclic packet
+averaging gauge invariant before any limit.
+
+This is a canonical-sampling obstruction and repair, not an arithmetic
+trace. Route A remains exploratory and Route B is not authorized. The next
+theorem is uniqueness of the normalized cyclic sampler that annihilates all
+coboundaries.
+
+- [P66 overview](henon_reflection_boundary_cohomology_anomaly/README.md)
+- [P66 paper](henon_reflection_boundary_cohomology_anomaly/paper/paper.pdf)
+- [P66 proof package](henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md)
+- [P66 certificate](henon_reflection_boundary_cohomology_anomaly/results/c66_certificate.json)

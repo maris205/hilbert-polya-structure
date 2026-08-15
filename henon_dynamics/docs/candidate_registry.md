@@ -2238,3 +2238,23 @@ Route A remains **ROUTE_A_EXPLORATORY** and Route B is not authorized. The
 next structural gate is cohomology invariance: because the boundary measure
 is not invariant, a symbolic coboundary may alter marked pressure while
 leaving orbit pressure unchanged.
+
+## HCS-P66 boundary cohomology anomaly (2026-08-15)
+
+Candidate **HCS-P66** resolves P65's cohomology-invariance test; see the
+[HCS-P66 project](../henon_reflection_boundary_cohomology_anomaly/). For the
+marked reflection-boundary law,
+
+\[
+A_J(u)=\int(u-u\circ\sigma)\,d\eta_J
+\]
+
+has norm exactly two because `eta_J` and its one-step translate are mutually
+singular. Explicit radius-`r` cylinders approach this norm with value
+`2(1-2^(-r))`. Thus marked pressure depends on the chosen cohomology
+representative. Every complete periodic-orbit average, however, annihilates
+every coboundary exactly by telescoping.
+
+The Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not
+authorized. The next candidate is a uniqueness theorem for normalized
+linear samplers on finite cycles that annihilate all coboundaries.

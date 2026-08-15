@@ -440,3 +440,9 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O107 | Finite one-sided symbolic observables as separators of marked reflection-boundary and maximal-entropy sampling | proved one-sided blindness obstruction with minimal cross-axis repair | The reflected boundary law and fair two-sided Bernoulli law have identical restrictions to every finite nonnegative or nonpositive coordinate algebra. The radius-one cross-axis observable `1{s[-1]=s[1]}` is the first scoped separator and gives an exact pressure-gradient gap `-1/2`. | Scoped to the frozen sign coding and one-sided support class; arbitrary recodings are not claimed. The repair is symbolic and extensive but supplies no Mahler-slope inequality, rational-prime semantics, determinant, or operator. | ../henon_minimal_symmetry_defect_pressure/PROOF_PACKAGE.md |
+
+## HCS-P66 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O108 | Marked reflection packet pressure as a Livšic/cohomology-invariant dynamical pressure | proved norm-two boundary gauge anomaly with exact orbit repair | The marked boundary law `eta_J` and its one-step translate are mutually singular, so `u -> int(u-u∘sigma)d eta_J` has dual total-variation norm `2`; finite cylinders attain `2(1-2^(-r))`. A complete period-`n` orbit sum of every coboundary is exactly zero. | Scoped to the marked reflection sampling convention and frozen sign coding. It does not invalidate the frozen coordinate representative or P64's marked Mahler law; it proves that the law is not canonical modulo cohomology. Uniform cyclic averaging repairs this defect but supplies no prime labels, determinant, or operator. | ../henon_reflection_boundary_cohomology_anomaly/PROOF_PACKAGE.md |
