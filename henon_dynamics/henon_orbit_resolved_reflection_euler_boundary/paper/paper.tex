@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[numbers]{natbib}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Zorb}{\mathcal Z_{\rm orb}}
+\hypersetup{pdftitle={The Moving Essential Boundary of an Orbit-Resolved Henon Reflection Euler Product},pdfauthor={Liang Wang},pdfsubject={Reflection Euler products and analytic boundaries},pdfkeywords={Henon map, Euler product, reflection symmetry, dynamical zeta, essential singularity}}
+\title{The Moving Essential Boundary of an\\Orbit-Resolved H\'enon Reflection Euler Product}
+\author{Liang Wang\\\small School of Artificial Intelligence and Automation\\\small Huazhong University of Science and Technology\\\small Wuhan 430074, P. R. China}
+\date{August 16, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We construct the full Euler product carrying the individual symmetry-defect
+weights of every primitive odd reflection word in the full H\'enon horseshoe.
+If $A_n$ is the primitive marked packet and
+$S_n\chi$ is the orbit sum of $\chi(s)=\mathbf1\{s_{-1}=s_1\}$, set
+\[
+ \mathcal Z_{\rm orb}(z,q)=
+ \prod_{n\ {\rm odd}}\prod_{\omega\in A_n}
+ (1-z^nq^{S_n\chi(\omega)})^{-1}.
+\]
+Its logarithmic derivative has the exact primitive/repetition coefficient
+$\sum_{n\mid m}nE_n(q^{m/n})$, where $E_n$ is the primitive moment
+polynomial.  For every $q>0$, the convergence radius is
+$R(q)=(1+q^2)^{-1/2}$ and
+\[
+ \log\mathcal Z_{\rm orb}(z,q)
+ =\frac{q}{\sqrt{1+q^2}\,[1-\sqrt{1+q^2}\,z]}+G_q(z)
+\]
+near the positive boundary, with $G_q$ analytic.  Thus the boundary is
+exponentially essential.  The aggregate-mean radius is $(2q)^{-1/2}$ and is
+strictly too large unless $q=1$.  This closes the orbit-resolved analytic
+germ but leaves relative Lind/Fredholm renormalization and arithmetic
+semantics open.
+\end{abstract}
+
+\section{From moments to individual Euler factors}
+
+For $H(x,y)=(6-x^2-y,x)$, the inherited full-horseshoe coding and reversor
+identify odd reflection packets with reversal-fixed binary words
+\cite{DevaneyNitecki1979,Arai2007}.  Let $A_n$ be the primitive marked
+packet and put
+\[
+ \chi(s)=\mathbf1\{s_{-1}=s_1\},\qquad
+ S_n\chi(s)=\sum_{j=0}^{n-1}\chi(\sigma^js).
+\]
+The primitive moment polynomial
+\begin{equation}\label{eq:En}
+ E_n(q)=\sum_{\omega\in A_n}q^{S_n\chi(\omega)}
+\end{equation}
+was computed exactly from the reflected rank-two transfer matrix:
+\begin{align}
+ F_{2m+1}(q)&=2q(1+q^2)^m,\label{eq:Fn}\\
+ E_n(q)&=\sum_{k\mid n}\mu(k)F_{n/k}(q^k).\label{eq:primitive}
+\end{align}
+
+For $q>0$, define the orbit-resolved product
+\begin{equation}\label{eq:product}
+ \Zorb(z,q)=\prod_{\substack{n\ge1\\n\ {\rm odd}}}
+ \prod_{\omega\in A_n}
+ \left(1-z^nq^{S_n\chi(\omega)}\right)^{-1}.
+\end{equation}
+Unlike an aggregate-mean product, \eqref{eq:product} retains every individual
+energy in \eqref{eq:En}.
+
+\begin{theorem}[Primitive and repeated weights]\label{thm:ledger}
+In the disk of absolute convergence,
+\begin{align}
+ \log\Zorb(z,q)&=\sum_{r\ge1}\frac1r E(z^r,q^r),
+ \qquad E(z,q):=\sum_{n\ {\rm odd}}E_n(q)z^n,\label{eq:log}\\
+ [z^m]\,z\partial_z\log\Zorb(z,q)
+ &=\sum_{\substack{n\mid m\\n\ {\rm odd}}}
+ nE_n(q^{m/n}).\label{eq:derivative}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Expand each factor of \eqref{eq:product} by
+$-\log(1-w)=\sum_{r\ge1}w^r/r$.  An $r$-fold repetition replaces both
+$z^n$ by $z^{nr}$ and $q^{S_n\chi}$ by $q^{rS_n\chi}$.  Summing first over
+$\omega$ gives $E_n(q^r)$, proving \eqref{eq:log}; differentiation and
+collection of $m=nr$ gives \eqref{eq:derivative}.
+\end{proof}
+
+\section{The two-variable primitive series}
+
+\begin{proposition}\label{prop:primitive-series}
+For $q>0$ and sufficiently small $z$,
+\begin{equation}\label{eq:Eseries}
+ E(z,q)=\sum_{\substack{k\ge1\\k\ {\rm odd}}}
+ \mu(k)\frac{2(qz)^k}
+ {1-(1+q^{2k})z^{2k}}.
+\end{equation}
+Its first positive singularity is
+\begin{equation}\label{eq:radius}
+ R(q)=\frac1{\sqrt{1+q^2}}.
+\end{equation}
+Near $R(q)$,
+\begin{equation}\label{eq:Eprincipal}
+ E(z,q)=
+ \frac{q/\sqrt{1+q^2}}{1-\sqrt{1+q^2}\,z}+G_{1,q}(z),
+\end{equation}
+where $G_{1,q}$ is analytic.
+\end{proposition}
+
+\begin{proof}
+Insert \eqref{eq:Fn} into \eqref{eq:primitive}, multiply by $z^n$, and
+interchange the sums to obtain \eqref{eq:Eseries}.  The $k=1$ denominator
+gives \eqref{eq:radius} and the displayed principal part.  For odd $k\ge3$,
+\[
+ (1+q^{2k})^{1/k}<1+q^2
+\]
+by the strict binomial inequality.  Therefore their positive singular radii
+are all larger than $R(q)$.
+\end{proof}
+
+\section{Moving essential boundary}
+
+\begin{theorem}[Essential-boundary curve]\label{thm:boundary}
+For every fixed $q>0$, there is a function $G_q$, analytic near $R(q)$,
+such that
+\begin{equation}\label{eq:principal}
+ \log\Zorb(z,q)=
+ \frac{q}{\sqrt{1+q^2}\,[1-\sqrt{1+q^2}\,z]}+G_q(z).
+\end{equation}
+Consequently \(\Zorb(\,\cdot\,,q)\) has an essential singularity at \(R(q)\).
+\end{theorem}
+
+\begin{proof}
+The $r=1$ term of \eqref{eq:log} is handled by
+\cref{prop:primitive-series}.  For $r\ge2$, the first positive singular
+radius of $E(z^r,q^r)$ is
+\[
+ (1+q^{2r})^{-1/(2r)}>R(q),
+\]
+again by the strict binomial inequality.  Hence all repetition terms are
+analytic near $R(q)$.  Equation \eqref{eq:principal} follows, and
+exponentiating a simple pole gives an essential singularity.
+\end{proof}
+
+The object in \eqref{eq:product} is still a restricted marked-packet product,
+not the full Lind zeta of the infinite-dihedral action
+\cite{KimLeePark2003,Ryu2019}.  The latter includes all finite-index subgroup
+fixed-point data.
+
+\section{The exact cost of mean-field weighting}
+
+Write $q=e^{-s}$.  The orbit-resolved pressure is
+$\frac12\log(1+q^2)$, while the aggregate-mean pressure is
+$\frac12\log(2q)$.  Thus their radii obey
+\begin{equation}\label{eq:ratio}
+ \frac{R(q)}{R_{\rm mf}(q)}
+ =\sqrt{\frac{2q}{1+q^2}}
+ =\frac1{\sqrt{(q+q^{-1})/2}}\le1.
+\end{equation}
+Equality holds only for $q=1$.  Mean-field weighting therefore predicts a
+strictly too-large disk at every nontrivial positive weight.  At $q=1$,
+\eqref{eq:product} specializes coefficientwise to the unweighted canonical
+packet product.
+
+\section{Certificate and route boundary}
+
+The exact certificate constructs \eqref{eq:derivative} as integer
+polynomials through degree $31$, checks the rational values
+$q=1/2,1,2$, and locks the $q=1$ coefficients to the earlier product.
+An independent program audits \eqref{eq:radius}--\eqref{eq:ratio} at five
+positive weights.  Eight tests pass in normal and optimized modes, six
+dependencies are locked, and 24 hostile mutations are rejected.
+
+The result closes a full orbit-resolved Route-A Euler germ and its boundary
+curve.  Its essential singularity prevents naive Fredholm promotion but does
+not exclude a separately proved relative counterterm.  No rational-prime
+labels, von Mangoldt amplitudes, Hilbert space, or self-adjoint operator have
+been constructed.  Route B is not authorized.  The next major problem is a
+source-native comparison with the full flip/Lind zeta and an explicit
+relative renormalization test.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

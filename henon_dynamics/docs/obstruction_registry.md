@@ -464,3 +464,9 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O111 | Exponential of the periodwise canonical mean as a substitute for the orbit-resolved exponential moment | proved all-parameter cumulant obstruction | For the natural minimal defect `chi=1{s[-1]=s[1]}`, the primitive orbit-resolved pressure is `(1/2)log(1+exp(-2s))`, while the aggregate-mean pressure is `(1/2)log2-s/2`. Their difference is exactly `(1/2)log cosh(s)`, positive for every real `s!=0`; the asymptotic variance rate is `1/2`. | Stops the mean-field replacement for this frozen natural observable, at every nonzero real parameter. It does not invalidate P68's own aggregate product or prove the same gap for every potential. The exact primitive moment polynomials and orbit-resolved pressure survive, but prime semantics and an operator remain open. | ../henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md |
+
+## HCS-P70 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O112 | Aggregate-mean convergence boundary as the analytic boundary of the individual-factor reflection Euler product | proved strict moving-radius obstruction | The resolved radius is `R(q)=(1+q^2)^(-1/2)` and the mean-field radius is `(2q)^(-1/2)`. Their ratio is `1/sqrt((q+q^(-1))/2)`, strictly below one for every positive `q!=1`. At the true boundary the resolved product has an exponential essential singularity. | Stops the mean-field boundary substitution for the frozen minimal defect and all positive nontrivial weights. It does not exclude a relative counterterm, analytic continuation around other boundary points, the full Lind zeta, or another transfer determinant. The full resolved Euler germ and exact coefficient ledger survive. | ../henon_orbit_resolved_reflection_euler_boundary/PROOF_PACKAGE.md |

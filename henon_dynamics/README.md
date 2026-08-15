@@ -1670,3 +1670,32 @@ polynomials into the full orbit-resolved Euler product.
 - [P69 paper](henon_orbit_resolved_reflection_cumulant_pressure/paper/paper.pdf)
 - [P69 proof package](henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md)
 - [P69 certificate](henon_orbit_resolved_reflection_cumulant_pressure/results/c69_certificate.json)
+
+## HCS-P70 orbit-resolved reflection Euler boundary
+
+P70 restores one Euler factor for every primitive marked reflection word:
+
+\[
+\mathcal Z_{\rm orb}(z,q)=
+\prod_{n\ {\rm odd}}\prod_{\omega\in A_n}
+(1-z^nq^{S_n\chi(\omega)})^{-1}.
+\]
+
+Its logarithmic derivative has exact coefficient
+\(\sum_{n\mid m}nE_n(q^{m/n})\). For every \(q>0\), the radius is
+
+\[
+R(q)=(1+q^2)^{-1/2},
+\]
+
+and the logarithm has one explicit simple-pole principal part, so the product
+has an exponential essential singularity. The mean-field radius
+\((2q)^{-1/2}\) is strictly too large unless \(q=1\). Route A now has a full
+orbit-resolved Euler germ and partial analytic structure, but no arithmetic
+trace; Route B is not authorized. P71 will test an explicit relative
+counterterm against source-native flip/Lind zeta structure.
+
+- [P70 overview](henon_orbit_resolved_reflection_euler_boundary/README.md)
+- [P70 paper](henon_orbit_resolved_reflection_euler_boundary/paper/paper.pdf)
+- [P70 proof package](henon_orbit_resolved_reflection_euler_boundary/PROOF_PACKAGE.md)
+- [P70 certificate](henon_orbit_resolved_reflection_euler_boundary/results/c70_certificate.json)

@@ -2329,3 +2329,26 @@ is \(1/2\). The Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
 **ROUTE_A_EXPLORATORY**. Route B is not authorized. The exact \(E_n\) are the
 input for the next orbit-resolved Euler product.
+
+## HCS-P70 orbit-resolved reflection Euler boundary (2026-08-16)
+
+Candidate **HCS-P70** closes the full product named by P69; see the
+[HCS-P70 project](../henon_orbit_resolved_reflection_euler_boundary/).
+One individual Euler factor is retained for every primitive marked reflection
+word, and
+
+\[
+[z^m]\,z\partial_z\log\mathcal Z_{\rm orb}
+=\sum_{\substack{n\mid m\\n\ {\rm odd}}}nE_n(q^{m/n}).
+\]
+
+The exact positive-weight boundary is \(R(q)=(1+q^2)^{-1/2}\), where the
+product has an exponential essential singularity. Its radius relative to the
+aggregate-mean product is
+\[
+R(q)/R_{\rm mf}(q)=1/\sqrt{(q+q^{-1})/2},
+\]
+strictly below one unless \(q=1\). The Route-A tuple is **(A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. A relative Lind/transfer counterterm is open; Route B
+is not authorized.
