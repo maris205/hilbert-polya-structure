@@ -2,7 +2,7 @@
 
 `c63_height_flat_pressure.py` rebuilds the odd primitive mixed-axis
 polynomials, applies the integral scaling, computes finite factor/height
-diagnostics, locks the all-period theorem payload, and rejects 24 hostile
+diagnostics, locks the all-period theorem payload, and rejects 25 hostile
 mutations.  `independent_check.py` separately reconstructs periods through
 9 and uses exact rational Sturm intervals to check the uniform root bound.
 
