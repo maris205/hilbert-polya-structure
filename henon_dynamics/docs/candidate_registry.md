@@ -2352,3 +2352,22 @@ strictly below one unless \(q=1\). The Route-A tuple is **(A1_WEAK,
 A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
 **ROUTE_A_EXPLORATORY**. A relative Lind/transfer counterterm is open; Route B
 is not authorized.
+
+## HCS-P71 relative Lind counterterm (2026-08-16)
+
+Candidate **HCS-P71** performs the source comparison named by P70; see the
+[HCS-P71 project](../henon_relative_lind_counterterm/). The full two-shift
+reverse Lind formula has, at \(u=1-\sqrt2t=0\), exponential coefficient
+\(1/\sqrt2+3/4\) and logarithmic coefficient \(-1/2\). P70 contributes only
+\(1/\sqrt2\). Therefore
+
+\[
+C_{\rm rel}(t)=u^{1/2}e^{-3/(4u)}
+\frac{\zeta_{\rm flip}(t)}{\mathcal Z_{\rm orb}(t,1)}
+\]
+
+has a nonzero holomorphic local extension. The pair \((3/4,1/2)\) is unique
+among all power-exponential counterterms. The Route-A tuple is **(A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Global single-valued continuation and operator
+ownership remain open; Route B is not authorized.

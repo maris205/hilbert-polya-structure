@@ -1699,3 +1699,26 @@ counterterm against source-native flip/Lind zeta structure.
 - [P70 paper](henon_orbit_resolved_reflection_euler_boundary/paper/paper.pdf)
 - [P70 proof package](henon_orbit_resolved_reflection_euler_boundary/PROOF_PACKAGE.md)
 - [P70 certificate](henon_orbit_resolved_reflection_euler_boundary/results/c70_certificate.json)
+
+## HCS-P71 relative Lind counterterm
+
+P71 compares P70 with the primary-source full two-shift reverse Lind zeta.
+In the boundary coordinate \(u=1-\sqrt2t\), the full Lind logarithm has
+exponential coefficient \(1/\sqrt2+3/4\) and branch coefficient \(-1/2\);
+the odd packet accounts for only \(1/\sqrt2\). Consequently
+
+\[
+u^{1/2}e^{-3/(4u)}
+\frac{\zeta_{\rm flip}(t)}{\mathcal Z_{\rm orb}(t,1)}
+\]
+
+extends holomorphically and nonvanishingly across \(u=0\) as a local branch
+germ. Among counterterms \(u^\beta e^{-c/u}\), this forces uniquely
+\((c,\beta)=(3/4,1/2)\). Thus a source-native local bridge exists, but odd
+packet data alone is incomplete. Global continuation, zeros, and a transfer
+determinant remain open; Route B is not authorized.
+
+- [P71 overview](henon_relative_lind_counterterm/README.md)
+- [P71 paper](henon_relative_lind_counterterm/paper/paper.pdf)
+- [P71 proof package](henon_relative_lind_counterterm/PROOF_PACKAGE.md)
+- [P71 certificate](henon_relative_lind_counterterm/results/c71_certificate.json)
