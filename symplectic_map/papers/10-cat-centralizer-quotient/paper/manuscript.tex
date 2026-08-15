@@ -1,0 +1,992 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=0.88in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,tabularx,longtable}
+\usepackage{graphicx,float,placeins}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage{xurl}
+
+\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
+\ifdefined\pdftrailerid\pdftrailerid{}\fi
+\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=15\fi
+
+\hypersetup{
+  pdftitle={A Centralizer-Quotient Audit for Cat-Map Torsion Shells},
+  pdfauthor={Anonymous Authors},
+  pdfsubject={Full and symplectic centralizers, cyclic-vector torsors, and coarse quotient dynamics},
+  pdfkeywords={cat map, finite centralizer, cyclic vector, torsion shell, norm map, quotient dynamics}
+}
+
+\input{math_commands.tex}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\classification}{\texttt{CENTRALIZER\_CYCLIC\_TORSOR\_CERTIFIED}}
+\newcommand{\routea}{\texttt{A0\_FAIL\_MODULUS\_GLOBAL\_NON\_SPECIFIC}}
+\newcommand{\routeb}{\texttt{ROUTE\_B\_NOT\_OPENED}}
+\setlength{\emergencystretch}{2em}
+\graphicspath{{figures/}}
+
+\title{A Centralizer-Quotient Audit for Cat-Map Torsion Shells}
+\author{Anonymous Authors}
+\date{Pre-review manuscript, August 15, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the standard cat matrix
+\(A=\left(\begin{smallmatrix}2&1\\1&1\end{smallmatrix}\right)\), we test
+whether centralizer symmetry can turn a finite torsion shell into one
+intrinsic arithmetic Euler factor.  The vector \(e_1\) is cyclic over
+\(\mathbb Z/q\mathbb Z\) for every \(q\ge2\); hence the commutant is
+\(R_q[A]\), whose unit group acts simply transitively on the cyclic-vector
+locus.  The full-centralizer quotient has one class, but it also divides out
+\(A\), so the induced map is the identity with primitive period one.
+Replacing its formal variable by \(q^{-s}\) therefore supplies the modulus
+clock externally.  The symplectic centralizer instead leaves norm classes,
+numbering \(\varphi(q)\) when \(5\nmid q\) and \(\varphi(q)/2\) when
+\(5\mid q\), while its induced dynamics is still trivial.  Over prime
+fields, the full nonzero shell has one, three, or two full-centralizer strata
+in the inert, split, or ramified cases.  A source-locked exact audit at five
+primes and four predeclared composites matches the proof-controlled ledger;
+the same one-class construction holds at composites.  Thus this deliberately
+modest structural audit supplies neither a prime selector nor a native
+\(\log q\) clock and closes only the coarse full-centralizer route.  Enriched
+equivariant, orbifold, groupoid, Hecke, and quantized refinements remain
+untested.
+\end{abstract}
+
+\noindent\textbf{Keywords:} cat map, finite-module centralizer, cyclic-vector
+torsor, norm class, quotient dynamics, arithmetic Euler factor.
+
+\section{Introduction and bounded question}
+\label{sec:introduction}
+
+Let \(T_A\colon\Ttwo\to\Ttwo\) be the toral automorphism induced by
+\begin{equation}
+  A=\begin{pmatrix}2&1\\1&1\end{pmatrix}.
+  \label{eq:cat-matrix}
+\end{equation}
+For an integer \(q\ge2\), write \(R_q=\Z/q\Z\) and view \(A\) as an
+automorphism of \(R_q^2\).  Earlier multiplicity analysis leaves a natural
+escape: perhaps a symmetry quotient can compress the many \(A\)-orbits on a
+torsion shell to one local object.  The bounded question here is whether the
+finite-module centralizer supplies that compression without importing the
+modulus label or discarding the native dynamics.
+
+The answer separates an exact algebraic success from a dynamical failure.
+There is a natural cyclic-vector locus on which the full centralizer acts
+simply transitively.  Its coarse quotient is one point.  However, the group
+being divided out contains \(A\), so the quotient map is the identity and
+has period one for every modulus.  If one instead restricts to determinant
+one, the quotient retains norm classes but still no nontrivial motion.  The
+mechanism therefore removes multiplicity only by removing the clock that was
+supposed to generate a modulus-dependent local factor.
+
+\subsection{Prior-art boundary}
+
+This audit assembles established ingredients rather than proposing a
+new centralizer classification.  The closest algebraic collision is
+\citet{BaakeNeumaerkerRoberts2013}.  Their rational-lattice framework treats
+finite cat-map symmetries, cyclic-matrix commutants, finite-field normal
+types, reversing groups, and prime-power orbit data.  In particular, the
+field-level split, inert, and Jordan cases below are classical.  Our
+fixed-matrix proof over every \(R_q\) serves the audit by making the
+cyclic-vector torsor and its construction cost explicit.  It is not a claim
+that cyclic commutants or finite-lattice symmetry groups were previously
+unknown.  General ring centralizers require care over zero divisors, while
+regular-matrix and companion-ring work supplies the broader terminology and
+context \citep{Marais2014,Stasinski2016,NoferiniWilliams2024}; none of those
+sources substitutes for the fixed-basis proof below.
+
+The determinant-one layer has an equally direct precedent.  Norm-one
+elements of quadratic orders modulo the quantization level form the Hecke
+centralizers used by \citet{KurlbergRudnick2000}.  That work prevents us from
+presenting \(C_q^1\), the norm formula, or the local arithmetic split as a new
+Hecke mechanism.  The invariant-form formulation is also established in the
+quantum cat-map setting \citep{KurlbergRosenzweigRudnick2007}.  We instead
+give an elementary proof for the specific
+order \(R_q[T]/(T^2-3T+1)\) and use it only to show what remains after the
+full \(\GL_2\) centralizer is restricted to \(\SL_2\).
+
+The quotient-dynamical observation also has decisive direct prior art.
+\citet{GuseinZadeLuengoMelle2015} explicitly separates transformation order
+in a space from order in its quotient and notes the trivial induced action
+when the transformation belongs to the acting group.  Their Burnside-ring,
+equivariant, and orbifold refinements retain information absent from the
+coarse quotient.  Quotient closed-orbit semantics and group-action zeta
+functions provide further adjacent boundaries
+\citep{Zegowitz2017,Miles2017}.  Accordingly, the clock-erasure statement below is an
+application of a known quotient principle to this frozen Route-A candidate,
+not a new zeta definition or an impossibility result for enriched quotients.
+
+Prime-lattice orbit structure is classical \citep{Gaspari1994}, as are
+finite and rational-lattice cycle products
+\citep{BaakeRobertsWeiss2008}.  Recent prime-power cycle analysis
+\citep{TanLi2025} and finite-torus determinant packaging
+\citep{Chandra2026} further rule out broad finite-ring or cycle-product
+novelty.  These sources do not make the present negative decision for us,
+but they sharply limit its defensible contribution to the explicit
+full-versus-symplectic quotient comparison and the resulting semantic audit.
+
+The note's contribution is consequently diagnostic and deliberately modest:
+\begin{enumerate}
+  \item give an all-\(q\), field-free proof that the cyclic-vector locus is a
+        torsor under the full local centralizer.
+  \item prove that its one-class coarse quotient has identity induced
+        dynamics, so \(z=q^{-s}\) is an external specialization rather than
+        a return-time law.
+  \item identify the symplectic quotient with the image of a quadratic norm
+        and determine its exact size, including the binary and ramified-five
+        boundaries.
+  \item separate the cyclic locus from the complete prime shell, classify the
+        full-centralizer and reversing strata, and extend the count formulas
+        to composite moduli by Chinese remaindering.
+  \item record a one-shot, development-seen exact audit as an implementation
+        control without using nine finite rows to prove an all-\(q\) theorem.
+\end{enumerate}
+
+The scope exclusions are part of the claim.  We do not define a new
+equivariant, Burnside, orbifold, stacky, groupoid, or twisted-sector zeta
+function.  We do not construct Hecke operators, a quantization, a transfer
+operator, a Fredholm determinant, a prime selector, a prime--zero
+correspondence, or a Riemann-hypothesis mechanism.  The note makes no
+historical-priority claim.  It evaluates only the coarse quotient and the
+closely related determinant-one quotient for the frozen matrix
+\eqref{eq:cat-matrix}.
+
+Section~\ref{sec:setup} fixes the three symmetry layers.
+Section~\ref{sec:torsor} proves the centralizer torsor.
+Section~\ref{sec:quotient} separates quotient cardinality from quotient
+dynamics.  Section~\ref{sec:strata} treats the complete prime shell and
+reversal.  Section~\ref{sec:composite-audit} gives the composite formulas and
+the registered exact ledger.  Section~\ref{sec:decision} states the route
+decision and its limitations.
+
+\section{Setup and three symmetry layers}
+\label{sec:setup}
+
+Define the exact additive-order shell
+\begin{equation}
+  E_q=\{v\in R_q^2:\ord_+(v)=q\}.
+  \label{eq:exact-shell}
+\end{equation}
+The cyclic determinant and cyclic-vector locus are
+\begin{equation}
+  \Delta_q(v)=\det[v,Av],
+  \qquad
+  \CV_q=\{v\in R_q^2:\Delta_q(v)\in R_q^\times\}.
+  \label{eq:cyclic-locus}
+\end{equation}
+Thus \(v\in\CV_q\) precisely when \((v,Av)\) is an \(R_q\)-basis.
+The distinction \(\CV_q\subseteq E_q\) will matter: equality holds in the
+inert cases below, but it fails at split and ramified primes.
+
+We use three different symmetry groups.  The full commuting group is
+\begin{equation}
+  C_q=\Cent_{\GL_2(R_q)}(A).
+  \label{eq:full-centralizer}
+\end{equation}
+The symplectic commuting group is
+\begin{equation}
+  C_q^1=C_q\cap\Sp_2(R_q)=C_q\cap\SL_2(R_q),
+  \label{eq:symplectic-centralizer}
+\end{equation}
+where the equality follows from
+\(D^t\Omega D=(\det D)\Omega\) in dimension two.  For a prime \(p\), the
+reversing group is
+\begin{equation}
+  \mathcal R_p(A)=
+  \{G\in\GL_2(\F_p):GAG^{-1}=A^{\pm1}\}.
+  \label{eq:reversing-group}
+\end{equation}
+The first two groups commute with \(A\), while the third also permits time reversal.
+Conflating these layers would conceal both the determinant cost of the
+one-class quotient and the limits of the reversor.
+
+The characteristic identity
+\begin{equation}
+  A^2-3A+I=0
+  \label{eq:characteristic}
+\end{equation}
+defines the quadratic algebra
+\begin{equation}
+  S_q=R_q[T]/(T^2-3T+1).
+  \label{eq:quadratic-algebra}
+\end{equation}
+For \(a,b\in R_q\), its norm is
+\begin{equation}
+  N_q(a+bT)=a^2+3ab+b^2.
+  \label{eq:norm}
+\end{equation}
+The discriminant is five, so the local algebra is split, inert, or ramified
+according to the behavior of five at the relevant prime.
+
+\section{Universal cyclic basis and the centralizer torsor}
+\label{sec:torsor}
+
+The key field-free fact is visible in one determinant:
+\begin{equation}
+  e_1=\binom10,
+  \qquad
+  Ae_1=\binom21,
+  \qquad
+  P=[e_1,Ae_1]=\begin{pmatrix}1&2\\0&1\end{pmatrix},
+  \qquad \det P=1.
+  \label{eq:universal-cyclic-basis}
+\end{equation}
+Hence \((e_1,Ae_1)\) is a basis over every \(R_q\), including nonfields and
+nonreduced residue rings.
+
+\begin{theorem}[All-modulus centralizer torsor]
+\label{thm:torsor}
+For every integer \(q\ge2\), the following statements hold.
+\begin{enumerate}
+  \item The full matrix commutant is
+        \(\Cent_{\Mat_2(R_q)}(A)=R_q[A]\), and
+        \(C_q=R_q[A]^\times\).
+  \item The map
+        \begin{equation}
+          C_q\longrightarrow\CV_q,
+          \qquad U\longmapsto Ue_1,
+          \label{eq:torsor-map}
+        \end{equation}
+        is a \(C_q\)-equivariant bijection.  Thus \(\CV_q\) is a
+        \(C_q\)-torsor.
+  \item Every cyclic vector has exact additive order \(q\), so
+        \(\CV_q\subseteq E_q\).
+  \item Every \(A\)-orbit in \(\CV_q\) has length \(\ord_q(A)\), and the
+        orbit set is
+        \begin{equation}
+          \Gamma_q^{\mathrm{cyc}}
+          \simeq C_q/\langle A\rangle.
+          \label{eq:A-orbit-cosets}
+        \end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let \(X\in\Mat_2(R_q)\) commute with \(A\).  There are unique
+\(a,b\in R_q\) such that
+\(Xe_1=ae_1+bAe_1\).  Commutation determines the other basis vector:
+\[
+  X(Ae_1)=A(Xe_1)=aAe_1+bA^2e_1.
+\]
+Therefore \(X\) and \(aI+bA\) agree on the basis
+\((e_1,Ae_1)\), which proves
+\(\Cent_{\Mat_2(R_q)}(A)=R_q[A]\).  Taking units gives
+\(C_q=R_q[A]^\times\).  No division or field hypothesis enters this
+argument.
+
+Every \(v\in R_q^2\) is uniquely \(v=Ue_1\) for some
+\(U=aI+bA\in R_q[A]\).  Because \(U\) commutes with \(A\),
+\begin{equation}
+  [v,Av]=[Ue_1,AUe_1]=U[e_1,Ae_1]=UP,
+  \qquad
+  \Delta_q(v)=\det U.
+  \label{eq:delta-is-determinant}
+\end{equation}
+A square matrix over the finite commutative ring \(R_q\) is invertible
+exactly when its determinant is a unit.  Hence \(v\in\CV_q\) if and only if
+\(U\in C_q\), proving bijectivity of \eqref{eq:torsor-map}.  Left
+multiplication is then free and transitive.
+
+A cyclic vector is a member of an \(R_q\)-basis and is therefore
+unimodular.  Its reduction modulo every prime divisor of \(q\) is nonzero.
+Componentwise over each \(p^k\parallel q\), at least one coordinate is a
+unit and has additive order \(p^k\).  Chinese remaindering gives global
+additive order \(q\), proving \(\CV_q\subseteq E_q\).
+
+Under \(\CV_q\simeq C_q\), the matrix \(A\) acts by multiplication by
+\(A\in C_q\).  If \(A^kUe_1=Ue_1\), then commutativity and invertibility of
+\(U\) give \(A^ke_1=e_1\).  The same equality applied after \(A\) shows
+that \(A^k\) fixes the cyclic basis, so \(A^k=I\).  Every orbit therefore
+has exact length \(\ord_q(A)\), and its orbit set is the coset space in
+\eqref{eq:A-orbit-cosets}.
+\end{proof}
+
+Theorem~\ref{thm:torsor} is an explicit fixed-matrix derivation of standard
+cyclic-module algebra.  It is not presented as a new cyclic-matrix theorem.
+Its role is to make the later quotient and its construction cost completely
+visible.  Finite-lattice cyclic commutants, rational-lattice centralizers,
+and reversing symmetries have a substantial prior theory
+\citep{BaakeNeumaerkerRoberts2013}; the proof here is scoped to the frozen
+matrix and every residue ring \(R_q\).
+
+\section{Coarse quotient dynamics and the symplectic boundary}
+\label{sec:quotient}
+
+\subsection{Multiplicity one also kills the clock}
+
+Because \(R_q[A]\) is commutative, the residual group
+\(C_q/\langle A\rangle\) acts simply transitively on
+\(\Gamma_q^{\mathrm{cyc}}\).  Equivalently,
+\begin{equation}
+  \CV_q/C_q=\{*\}.
+  \label{eq:one-point-quotient}
+\end{equation}
+This is the desired set-theoretic multiplicity-one statement.
+
+It is not a retained source orbit.  Since \(A\in C_q\), the induced map on
+the quotient is
+\begin{equation}
+  \bar A(*)=*.
+  \label{eq:identity-quotient-map}
+\end{equation}
+The ordinary Artin--Mazur zeta of this one-point map is
+\begin{equation}
+  \zeta_{\bar A}(z)
+  =\exp\!\left(\sum_{n\ge1}\frac{z^n}{n}\right)
+  =(1-z)^{-1}.
+  \label{eq:one-point-zeta}
+\end{equation}
+Its primitive period is one for every \(q\).  The original period
+\(\ord_q(A)\) and the original number
+\(|C_q|/\ord_q(A)\) of cyclic \(A\)-orbits have both disappeared.
+Consequently
+\begin{equation}
+  z=q^{-s}
+  \label{eq:external-specialization}
+\end{equation}
+is an external modulus specialization.  It is not a Birkhoff sum, quotient
+return period, monodromy invariant, or other datum of
+\eqref{eq:identity-quotient-map}.  This clock-erasure mechanism is a direct
+instance of the coarse-quotient distinction already emphasized in the
+equivariant-zeta and quotient-orbit literature
+\citep{GuseinZadeLuengoMelle2015,Zegowitz2017}.
+
+\subsection{The determinant-one quotient leaves norm classes}
+
+The assignment \(T\mapsto A\) gives an algebra isomorphism
+\begin{equation}
+  S_q\xrightarrow{\sim}R_q[A].
+  \label{eq:algebra-isomorphism}
+\end{equation}
+Indeed, the map is onto and both displayed bases have rank two.  The cyclic
+basis also shows directly that \(I\) and \(A\) are independent.  For
+\(U=aI+bA\), a determinant calculation gives
+\begin{equation}
+  \det U=a^2+3ab+b^2=N_q(a+bT).
+  \label{eq:determinant-norm}
+\end{equation}
+Thus
+\begin{equation}
+  C_q^1=\ker\!\left(N_q:S_q^\times\to R_q^\times\right).
+  \label{eq:norm-one-centralizer}
+\end{equation}
+This is the elementary finite-module counterpart of the familiar norm-one
+centralizers used in quantum cat-map Hecke theory
+\citep{KurlbergRudnick2000}.  No Hecke or quantum claim is made here.
+
+\begin{theorem}[Symplectic quotient]
+\label{thm:symplectic-quotient}
+For every \(q\ge2\), the fibers of \(\Delta_q\) on \(\CV_q\) are exactly
+the \(C_q^1\)-orbits.  Hence
+\begin{equation}
+  \CV_q/C_q^1\simeq\im N_q.
+  \label{eq:symplectic-quotient}
+\end{equation}
+Moreover,
+\begin{equation}
+  |\im N_q|=
+  \begin{cases}
+    \varphi(q),&5\nmid q,\\
+    \varphi(q)/2,&5\mid q.
+  \end{cases}
+  \label{eq:norm-image-cardinality}
+\end{equation}
+The induced action of \(A\) on every quotient class is the identity.
+\end{theorem}
+
+\begin{proof}
+For \(D\in C_q\) and \(v\in\CV_q\), commutation gives
+\begin{equation}
+  \Delta_q(Dv)
+  =\det[Dv,ADv]
+  =\det D\,\Delta_q(v).
+  \label{eq:delta-covariance}
+\end{equation}
+In particular \(C_q^1\) preserves \(\Delta_q\).  Conversely, write
+\(v=Ue_1\) and \(w=Ve_1\) under the torsor identification.  Equation
+\eqref{eq:delta-is-determinant} gives
+\(\Delta_q(v)=N_q(U)\) and \(\Delta_q(w)=N_q(V)\).  These values agree
+exactly when \(N_q(VU^{-1})=1\), or equivalently when
+\(VU^{-1}\in C_q^1\).  The fibers are therefore the symplectic-centralizer
+orbits, proving \eqref{eq:symplectic-quotient}.
+
+Write \(q=\prod p^{k_p}\).  Chinese remaindering decomposes both \(S_q\)
+and its norm into the corresponding local factors.  If \(p\ne5\), the
+quadratic algebra is etale.  In the split case its norm
+\((u,v)\mapsto uv\) is onto.  In the inert case, the residue-field norm is
+onto and the trace maps on successive principal-unit quotients are onto, so
+the unit norm is onto at every \(p^k\).  This includes \(p=2\), where
+\(T^2+T+1\) is irreducible over \(\F_2\).
+
+At \(p=5\), put \(\pi=2T-3\).  Then \(\pi^2=5\), every element is uniquely
+\(c+d\pi\), and
+\begin{equation}
+  N(c+d\pi)=c^2-5d^2.
+  \label{eq:ramified-norm}
+\end{equation}
+The residue of a unit norm modulo five is therefore a square.  Conversely,
+every unit with square residue modulo five has a square root modulo \(5^k\)
+by Hensel lifting.  A scalar square root realizes that unit as a norm.  The
+local image is the index-two subgroup of units with square residue.  The
+Chinese remainder product proves \eqref{eq:norm-image-cardinality}.
+
+Finally, \(A\in C_q^1\) because \(\det A=1\).  It follows that \(A\) fixes
+every \(C_q^1\)-orbit class.
+\end{proof}
+
+If \(r_q=|\im N_q|\), the ordinary zeta of the symplectic coarse quotient is
+therefore
+\begin{equation}
+  \zeta_{\mathrm{id}}(z)=(1-z)^{-r_q}.
+  \label{eq:symplectic-identity-zeta}
+\end{equation}
+Restricting to symplectic symmetry restores multiplicity, not a clock.  The
+full quotient obtains one class only by using the generally nonsymplectic
+part of the local \(\GL_2\) centralizer.  Figure~\ref{fig:quotient-layers}
+summarizes the information retained by the three symmetry layers.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig1_quotient_layers.pdf}
+  \caption{%
+    Three quotient layers separate set compression from dynamical
+    compression.  (A) The cyclic-vector locus
+    $\mathrm{CV}_q\subseteq E_q$ is identified with the full local
+    centralizer $C_q$ by $U\mapsto Ue_1$; split and ramified shells retain
+    additional noncyclic strata.  (B) Cyclic $A$-orbits form
+    $C_q/\langle A\rangle$.  The residual full-$C_q$ quotient has one class,
+    while the determinant-one quotient has $|\operatorname{im}N_q|$ classes;
+    both induced $A$ maps are the identity.  (C) The full, symplectic, and
+    reversing layers retain different norm and noncyclic information.  The
+    torsor and identity-map conclusions are proof-sourced for every $q$;
+    shown discard counts are frozen prime controls.  Burnside, orbifold,
+    stacky, groupoid, and twisted-sector refinements are outside scope, not
+    ruled out.}
+  \label{fig:quotient-layers}
+\end{figure*}
+
+\section{Prime-shell strata and reversal}
+\label{sec:strata}
+
+For \(v=(x,y)^t\in\F_p^2\),
+\begin{equation}
+  \Delta_p(x,y)=x^2-xy-y^2,
+  \qquad \disc(\Delta_p)=5.
+  \label{eq:prime-quadratic-form}
+\end{equation}
+The complete nonzero shell is \(E_p=\F_p^2\setminus\{0\}\).  Its
+noncyclic part is the nonzero zero locus of \(\Delta_p\).
+The split, inert, ramified, and reversing cases belong to the established
+prime- and rational-lattice orbit setting
+\citep{Gaspari1994,BaakeNeumaerkerRoberts2013}; the proposition records the
+specialized strata used by this audit.
+
+\begin{proposition}[Full-shell centralizer strata]
+\label{prop:prime-strata}
+The full nonzero prime shell has the following structure.
+\begin{enumerate}
+  \item At \(p=2\), and at every odd inert prime
+        \(\left(\frac5p\right)=-1\), one has \(\CV_p=E_p\), and \(C_p\)
+        is transitive on the shell.
+  \item If \(p\ne5\) is split, then
+        \begin{equation}
+          |\CV_p|=(p-1)^2,
+          \qquad |E_p\setminus\CV_p|=2(p-1).
+          \label{eq:split-counts}
+        \end{equation}
+        The discarded set consists of two punctured eigenlines, and
+        \(E_p/C_p\) has three classes: the cyclic complement and the two
+        eigenlines.
+  \item At \(p=5\),
+        \begin{equation}
+          |\CV_5|=20,
+          \qquad |E_5\setminus\CV_5|=4,
+          \label{eq:ramified-counts}
+        \end{equation}
+        and \(E_5/C_5\) has two classes: the punctured Jordan eigenline and
+        its cyclic complement.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+At \(p=2\), the form \(x^2+xy+y^2\) is nonzero at all three nonzero
+vectors.  At an odd inert prime, \eqref{eq:prime-quadratic-form} is
+anisotropic.  In both cases every nonzero vector is cyclic, and the torsor
+theorem makes \(C_p\) simply transitive on the shell.
+
+At a split prime, the form factors into two distinct linear factors.  Its
+nonzero zero set is the disjoint union of two punctured lines and has
+\(2(p-1)\) points.  The complement consequently has \((p-1)^2\) points.
+In an eigenbasis, \(C_p\) consists of invertible diagonal matrices.  It is
+transitive on the complement and separately on each punctured eigenline,
+giving three classes.
+
+At \(p=5\), the form is the square of one nonzero linear form.  The
+punctured zero line has four points.  In Jordan coordinates the centralizer
+has the form \(\{aI+bN:a\ne0,\ N^2=0\}\), which is transitive separately
+on that line and on its complement.  This gives the two ramified classes.
+\end{proof}
+
+The fixed integer matrix
+\begin{equation}
+  J=\begin{pmatrix}0&-1\\1&0\end{pmatrix}
+  \label{eq:reversor}
+\end{equation}
+satisfies
+\begin{equation}
+  JAJ^{-1}=A^{-1},
+  \qquad J^2=-I,
+  \qquad \Delta_p(Jv)=-\Delta_p(v).
+  \label{eq:reversor-identities}
+\end{equation}
+Every reversor differs from \(J\) by a commuter, so the group in
+\eqref{eq:reversing-group} is \(C_p\cup JC_p\).  In the split case, \(J\)
+interchanges the two eigenlines.  It cannot merge their union with the
+cyclic complement because \eqref{eq:reversor-identities} preserves zero
+versus unit values of \(\Delta_p\).  At the ramified prime, the unique
+eigenline is preserved.  The full-shell reversing-orbit counts at the frozen
+primes \(2,3,5,7,11\) are therefore
+\begin{equation}
+  1,\ 1,\ 2,\ 1,\ 2.
+  \label{eq:reversing-counts}
+\end{equation}
+This casewise statement concerns the explicitly defined reversing group.  It
+does not assert a broader classification of every normalizer that may act on
+\(\langle A\rangle\) through arbitrary power automorphisms.
+
+The prime analysis exposes a second cost of the torsor quotient.  In the
+split and ramified cases, the torsor is only the cyclic locus.  Calling it the
+complete shell would silently discard two eigenlines or one Jordan
+eigenline, respectively.
+
+\section{Composite formulas and the exact audit}
+\label{sec:composite-audit}
+
+\subsection{All-modulus cardinalities}
+
+Membership in \(\CV_q\) is equivalent to \(\Delta_q(v)\) being a unit, so
+it can be tested modulo each prime divisor of \(q\).  Every admissible pair
+modulo \(p\) has \(p^{2(k-1)}\) lifts modulo \(p^k\).  Therefore
+\begin{equation}
+  |\CV_q|
+  =\prod_{p^k\parallel q}p^{2(k-1)}c_p,
+  \label{eq:CV-general-count}
+\end{equation}
+where
+\begin{equation}
+  c_p=
+  \begin{cases}
+    p^2-1,&p=2\text{ or }\left(\frac5p\right)=-1,\\
+    (p-1)^2,&p\ne5\text{ and }\left(\frac5p\right)=1,\\
+    p(p-1),&p=5.
+  \end{cases}
+  \label{eq:local-CV-count}
+\end{equation}
+The exact-order shell has the Jordan-totient cardinality
+\begin{equation}
+  |E_q|=J_2(q)=q^2\prod_{p\mid q}(1-p^{-2}),
+  \label{eq:jordan-totient}
+\end{equation}
+with the product explicitly over prime divisors.  Equations
+\eqref{eq:CV-general-count} and \eqref{eq:jordan-totient} determine the
+discarded set by subtraction.
+
+Since Theorem~\ref{thm:torsor} holds for every \(q\), the identity
+\begin{equation}
+  |\CV_q/C_q|=1
+  \label{eq:all-q-one-class}
+\end{equation}
+also holds for every composite modulus.  This is a theorem, not an
+extrapolation from the four finite controls below.  It proves too much for a
+prime-specific mechanism: primality is nowhere used in the one-class
+quotient.
+
+\subsection{Registered nine-modulus ledger}
+
+The finite audit used the ordered, source-locked tuple
+\begin{equation}
+  (2,3,5,7,11,4,6,9,10).
+  \label{eq:frozen-moduli}
+\end{equation}
+The five primes were inherited controls.  The composites were predeclared
+to test an inert lift, CRT products, and the ramified-five boundary.  No
+modulus was scanned, added, removed, or replaced after source lock.
+Figure~\ref{fig:nine-modulus-ledger} displays the exact counts before the
+same values are recorded in compact tables.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_nine_modulus_ledger.pdf}
+  \caption{%
+    Exact ledger for the frozen ordered moduli
+    $q=2,3,5,7,11,4,6,9,10$.  (A) The cyclic locus can be smaller than the
+    exact-order shell, but its cardinality always equals $|C_q|$ in the
+    registered audit.  (B) Full-centralizer, symplectic-centralizer, and
+    cyclic-$A$-orbit counts are kept distinct.  (C) The full cyclic quotient
+    has one class at every control; the symplectic cyclic quotient has the
+    exact norm-image count, and full-shell quotients expose the additional
+    split/ramified strata.  Reversing groups were audited only at the five
+    prime controls, so composite entries are marked not audited.  These
+    development-seen finite rows verify the implementation and fixed
+    controls; they do not prove the all-$q$ formulas.}
+  \label{fig:nine-modulus-ledger}
+\end{figure*}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Exact shell, centralizer, and \(A\)-orbit counts in frozen order.
+The finite rows are implementation controls.  The all-\(q\) authority is the
+proof above.}
+\label{tab:registered-core-ledger}
+\begin{tabular}{rrrrrrrr}
+\toprule
+\(q\) & \(|E_q|\) & \(|\CV_q|\) & discard & \(|C_q|\) & \(|C_q^1|\) &
+\(\ord_q(A)\) & \(A\)-orbits \\
+\midrule
+2  & 3   & 3   & 0  & 3   & 3  & 3  & 1  \\
+3  & 8   & 8   & 0  & 8   & 4  & 4  & 2  \\
+5  & 24  & 20  & 4  & 20  & 10 & 10 & 2  \\
+7  & 48  & 48  & 0  & 48  & 8  & 8  & 6  \\
+11 & 120 & 100 & 20 & 100 & 10 & 5  & 20 \\
+4  & 12  & 12  & 0  & 12  & 6  & 3  & 4  \\
+6  & 24  & 24  & 0  & 24  & 12 & 12 & 2  \\
+9  & 72  & 72  & 0  & 72  & 12 & 12 & 6  \\
+10 & 72  & 60  & 12 & 60  & 30 & 30 & 2  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Exact cyclic and full-shell quotient counts.  A dash means that
+the prime-only reversing control was not part of the registered composite
+contract.}
+\label{tab:registered-quotient-ledger}
+\begin{tabular}{rrrrrr}
+\toprule
+\(q\) & \(|\CV_q/C_q|\) & \(|\CV_q/C_q^1|\) &
+\(|E_q/C_q|\) & \(|E_q/C_q^1|\) & reversing \(|E_q/\mathcal R_q|\) \\
+\midrule
+2  & 1 & 1  & 1 & 1  & 1 \\
+3  & 1 & 2  & 1 & 2  & 1 \\
+5  & 1 & 2  & 2 & 4  & 2 \\
+7  & 1 & 6  & 1 & 6  & 1 \\
+11 & 1 & 10 & 3 & 12 & 2 \\
+4  & 1 & 2  & 1 & 2  & -- \\
+6  & 1 & 2  & 1 & 2  & -- \\
+9  & 1 & 6  & 1 & 6  & -- \\
+10 & 1 & 2  & 2 & 4  & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The audit compared two independently structured exact engines.  One
+enumerated the matrix commutant, centralizers, shells, determinant fibers,
+orbits, quotient transitions, and prime reversing relation.  The other used
+\(aI+bA\), the algebra norm, and the torsor map.  Every row passed
+object-level equality, not only agreement of summary counts.  In particular,
+the audit checked that the \(C_q^1\)-orbits equal the \(\Delta_q\)-fibers,
+that both quotient transitions are identity maps, and that reversing
+symmetry never mixes cyclic and noncyclic strata.
+
+The independent first deployment review rejected an earlier semantic
+validator because a hollow fabricated row could satisfy its shallow checks.
+Deployment remained locked.  The repaired validator imposed exact recursive
+schemas, residue types, uniqueness and partition checks, and canonical
+comparison with a fresh fixed-\(q\) recomputation.  The same fabricated row
+became a negative test, after which a second independent review issued a
+hash-bound deployment pass.  Exactly one registered audit was then executed.
+An independent result reviewer reconstructed every stored object without
+importing the candidate and issued \texttt{RESULT\_PASS}.
+
+Four findings matter for the route decision.  First, every full cyclic
+quotient has one class and identity dynamics.  Second, the symplectic
+quotient counts are
+\begin{equation}
+  1,2,2,6,10,2,2,6,2,
+  \label{eq:observed-norm-classes}
+\end{equation}
+which exactly equal the norm-image sizes.  Third, the cyclic locus is not
+the complete shell at \(q=5,11,10\).  Fourth, all four composite controls
+have the same one-class full cyclic quotient.  The finite data are exact
+falsification controls for the implementation.  They do not prove any of the
+all-modulus statements.
+
+\section{Route decision, construction cost, and limitations}
+\label{sec:decision}
+
+The positive algebraic mechanism is exact.  The cyclic-vector locus is a
+full-centralizer torsor, and the full quotient has one class.  Two
+independent failures prevent that fact from becoming an intrinsic
+Riemann-style local factor.
+
+First, the coarse quotient removes the dynamical clock.  Its native factor
+is \((1-z)^{-1}\) because the quotient contains one fixed point.  The symbol
+\(q\) does not occur in the induced dynamics.  Writing
+\((1-q^{-s})^{-1}\) therefore attaches the modulus after quotienting.  The
+same problem remains for the symplectic quotient: it consists of several
+fixed classes and has formal zeta \((1-z)^{-|\im N_q|}\).
+Figure~\ref{fig:clock-semantics} separates this native identity factor from
+the externally attached modulus label.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig3_clock_semantics.pdf}
+  \caption{%
+    Source periods do not survive either coarse centralizer quotient.  (A)
+    The exact source period $\operatorname{ord}_q(A)$ varies across the nine
+    controls, whereas both induced quotient maps have native primitive period
+    one.  (B) The intrinsic identity-map factor is expressed in an abstract
+    variable $z$; substituting $z=q^{-s}$ or assigning length $\log q$ is an
+    external modulus specialization, not a quotient return-time law.  (C)
+    every predeclared composite control has the same one-class full cyclic
+    quotient as the primes, so the coarse mechanism supplies no intrinsic
+    prime selector.  Enriched equivariant and Hecke constructions remain
+    live but untested.  All $q^{-s}$ and $\log q$ expressions are symbolic;
+    no numerical value is evaluated.}
+  \label{fig:clock-semantics}
+\end{figure*}
+
+Second, the construction is not prime-specific.  The torsor proof and
+one-class quotient hold for every modulus.  The predeclared composites do
+not merely imitate the prime controls numerically.  They instantiate the same
+all-\(q\) theorem.  Restricting the product to prime labels would consequently
+be another external choice.
+
+The full centralizer also carries a geometric cost.  The group \(C_q\) is
+defined using every commuter over \(R_q\), including determinant values
+outside one.  Reduction of the global integral centralizer gives a
+homomorphism into \(C_q\), but the quotient used here does not require a
+local element to arise from one fixed global torus symmetry group.  It uses
+all \(q\)-dependent local pseudo-symmetries.  We make no converse claim that
+every local commuter fails to lift.  No global-lift classification is needed
+for the audit.
+
+The result does not rule out finer objects.  A non-effective quotient,
+Burnside-ring invariant, equivariant Lefschetz theory, orbifold or groupoid
+zeta, stacky quotient, or twisted-sector construction may retain stabilizer
+and source-orbit information erased by the coarse set quotient.  Such
+objects require their own definitions and source locks.  The present note
+neither constructs nor rejects them.  Equivariant, group-action, and twisted
+quotient approaches provide concrete adjacent precedents
+\citep{GuseinZadeLuengoMelle2015,Miles2017,Walton2018}.  Likewise, norm-one Hecke
+centralizers may act nontrivially after quantization even though their coarse
+class space is fixed.  No conclusion about Hecke spectra, quantum
+eigenstates, equidistribution, transfer operators, Fredholm determinants, or
+zeros follows from Theorem~\ref{thm:symplectic-quotient}.
+
+Within the frozen scope, the exact terminal decision is
+\begin{center}
+\small
+\classification\\[2pt]
+\routea\\[2pt]
+\routeb.
+\end{center}
+The first line certifies the torsor and the associated exact finite audit.
+The second records that the local factor still needs an external modulus
+clock and an external prime restriction.  The third prevents the negative
+coarse-quotient result from being promoted to a spectral or quantization
+claim.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+For the standard cat matrix, a single universal cyclic basis controls the
+finite centralizer over every \(\Z/q\Z\).  This yields a clean torsor: the
+unit group of \(R_q[A]\) acts freely and transitively on the cyclic-vector
+locus.  The same identification exposes why the apparent one-factor repair
+does not solve the dynamical problem.  Quotienting by the full centralizer
+also quotients by \(A\), leaving one fixed class with period one.  The
+symplectic subgroup preserves the determinant norm and leaves exactly the
+norm-image classes, all fixed.  Prime-shell and reversing strata show that
+the torsor is not always the complete shell, while CRT shows that the
+one-class construction is not restricted to primes.
+
+The resulting conclusion is narrow but complete: the coarse local
+centralizer quotient compresses multiplicity only after erasing the clock,
+and \(z=q^{-s}\) reintroduces that clock as a label.  The note closes this
+coarse Route-A variant.  Whether an explicitly defined equivariant or
+groupoid refinement can retain the necessary source information without
+becoming another global normalization is a separate question, not an
+unstated extension of the present theorem.
+
+\appendix
+
+\section{Proof and evidence firewall}
+\label{app:firewall}
+
+The claims in the main text have three distinct evidence roles.
+
+\begin{longtable}{C{0.08\textwidth} p{0.39\textwidth} p{0.42\textwidth}}
+\caption{Claim authority and scope boundary.}
+\label{tab:claim-firewall}\\
+\toprule
+claim & authority & boundary \\
+\midrule
+\endfirsthead
+\toprule
+claim & authority & boundary \\
+\midrule
+\endhead
+C1 & Theorem~\ref{thm:torsor}, item 1 & all \(q\). Standard cyclic-module
+algebra for the frozen matrix, not a new centralizer classification \\
+C2 & Theorem~\ref{thm:torsor}, items 2--3 & torsor and exact-order inclusion.
+The cyclic locus need not equal the full shell \\
+C3 & Theorem~\ref{thm:torsor}, item 4 & cyclic \(A\)-orbits are
+\(C_q/\langle A\rangle\) with uniform source period \\
+C4 & equations~\eqref{eq:one-point-quotient}--\eqref{eq:one-point-zeta} &
+one coarse class and identity induced dynamics; no new zeta definition \\
+C5 & equation~\eqref{eq:external-specialization} & \(q^{-s}\) and
+\(\log q\) are external labels, not quotient return-time laws \\
+C6 & Theorem~\ref{thm:symplectic-quotient}, first statement &
+symplectic orbits are norm fibers; no Hecke or representation result \\
+C7 & equation~\eqref{eq:norm-image-cardinality} & all-\(q\) norm-image
+formula, including binary and ramified-five boundaries \\
+C8 & Proposition~\ref{prop:prime-strata} and
+equation~\eqref{eq:reversing-counts} & prime full-shell strata and fixed
+reversor only; no broad normalizer theorem \\
+C9 & equations~\eqref{eq:CV-general-count}--\eqref{eq:all-q-one-class} &
+CRT theorem for all moduli. Composite rows are controls only \\
+C10 & Tables~\ref{tab:registered-core-ledger} and
+\ref{tab:registered-quotient-ledger} & one development-seen exact audit,
+not proof, statistical inference, or novelty evidence \\
+X1 & Section~\ref{sec:decision} & Burnside-ring, equivariant, orbifold,
+stacky, groupoid, and twisted-sector refinements remain untested \\
+X2 & Section~\ref{sec:decision} & Hecke, transfer, Fredholm, and quantum
+constructions remain untested; Route B is unopened \\
+\bottomrule
+\end{longtable}
+
+The all-\(q\) centralizer, torsor, norm image, and CRT formulas are
+theorem-derived.  The exact audit can falsify a faulty implementation or a
+misstated control row, but no finite collection of moduli proves those
+formulas.  Conversely, the proof does not certify that software stored the
+correct orbit partitions, determinant fibers, quotient transitions, or
+reversing groups.  Independent object-level reconstruction provides that
+separate implementation check.
+
+The audit used exact residue arithmetic only.  It accessed no external prime
+table, generated modulus target, Riemann-zero data, random draw, fitted
+parameter, numerical \(s\), numerical \(\log q\), or numerical
+\(q^{-s}\).  No matrix search, equivariant construction, Hecke operator,
+transfer operator, Fredholm determinant, or quantum system was run.
+
+\section{Frozen provenance}
+\label{app:provenance}
+
+Manuscript production was bound to the following independently reviewed
+upstream artifacts:
+\begin{description}
+  \item[Source lock]
+  \nolinkurl{aa99218099f2e2c3e14367bfe75f9da881d8b204689c07c6fa963f9582b696e2}.
+  \item[Proof package]
+  \nolinkurl{2eafe71f32c452ff8a20a6818ccb43082e02b866db7353e26c36ff432f1b2a4c}.
+  \item[Independent source review]
+  \nolinkurl{a551784d205d9ef52ce6a493ab66cb7295a4a9dadbeb8bb2353fc58e3011dff5}.
+  \item[Reviewed execution tree]
+  \nolinkurl{87b08f11fc67eae47bdf745f8286700376f3debc5ac3fd190075a5fa2632f436}.
+  \item[Independent two-round code review]
+  \nolinkurl{990b1762e2aea6c379288854cca918cc4bbe87b7ea7ccadef7458ecfcf6988f0}.
+  \item[Registered exact result]
+  \nolinkurl{8dceb1b8a63db462c1fd55a242ea35de974f73b6c80da68517b91c9eebb214ff}.
+  \item[Independent result review]
+  \nolinkurl{29264a8fd97d3acf4435ed807294bffcda0844a48728d8572083d92a3bcf5b58}.
+  \item[Strict result manifest]
+  \nolinkurl{db1dda86ff8bf13fd307cbb1eb6ea6a8c3c0de531ea5b1cc28a58c7bb085b658}.
+  \item[Official result report]
+  \nolinkurl{1ece7db3fbee75bcecaecb0ad05f89fe88699c4231bea80581f382f33ed3aa6e}.
+  \item[Official validation report]
+  \nolinkurl{f94dbfb28a71aea4dac5e89a8bc2a622bba092b66098c2fc2217ceba19a8ad5a}.
+\end{description}
+
+The manuscript also binds the independently released planning, citation, and
+figure package:
+\begin{description}
+  \item[Paper plan]
+  \nolinkurl{972c13d2551e51bb2781bf7f177314812460c161af0ce1daa748eeff413cbe8a}.
+  \item[Citation verification]
+  \nolinkurl{b4596ed56aee5eb47314221bba681098e45011a3fdc9dafc201315e597a1bfc6}.
+  \item[Frozen bibliography]
+  \nolinkurl{1ccce7ade3079ca995f00058f4811bdd02a9062d8038b27be2f967f480fe8699}.
+  \item[Exact LaTeX figure includes]
+  \nolinkurl{dfd829b896edcfd02b8d7b02fd9d30bfe8ec49ce42adaba79e1d627cd930708b}.
+  \item[Figure manifest]
+  \nolinkurl{1a2c7de68772ddeb5c614d0ade89a48710e93a3e5a5ff4a393db5c6f3cd4c2ab}.
+  \item[Framed asset tree]
+  \nolinkurl{33b8e1d767221529ff2b97fddca0145b1f9724cae924c37afa2847ecfc2bc9d6}.
+  \item[Round-1 bounded-repair history]
+  \nolinkurl{97f971328996efae866356bdc2c4715a68fcb470dcbe64029d7758d1ec73256a}.
+  \item[Round-2 independent asset pass]
+  \nolinkurl{9277132df8400c550f108c9a71d466a1c3752bbf3c1be2ae39d565e932bc3e87}.
+  \item[Figure 1 publication PDF]
+  \nolinkurl{ac8b29c810881e6383fb3f8b7cb55c602e052ef1677def5643d540b8ee12feb3}.
+  \item[Figure 2 publication PDF]
+  \nolinkurl{f86ff8e50c5a138996c8f379fa0309ddc6071cffca1d540b81e07304dae2dd73}.
+  \item[Figure 3 publication PDF]
+  \nolinkurl{0df9de8544c05e60749d456244c2920ac15c03a8bc5f5011a66f8d2c5e8cee33}.
+\end{description}
+
+The registered audit occurred once before manuscript production.  No
+candidate, test suite, source computation, or scientific experiment was
+rerun for writing.  Compilation, bibliography processing, and visual QA are
+mechanical manuscript-production steps and do not alter the frozen source,
+code, or result authority.
+
+\section*{Availability and declarations}
+
+\paragraph{Data and code availability.}
+The accompanying local research package contains the source lock, proof
+package, reviewed exact-arithmetic implementation, single registered result,
+independent reviews, and strict result manifest.  No external dataset is used
+by the mathematical claims or the finite audit.
+
+\paragraph{Ethics declaration.}
+The work involves no human participants, animals, personal data, or
+intervention study.
+
+\paragraph{Author contributions.}
+Authorship and CRediT-role metadata are withheld in this anonymous pre-review
+copy and will be supplied by the authors for any non-anonymous release.
+
+\paragraph{Conflict of interest.}
+Conflict-of-interest metadata are withheld with the anonymous author record
+and must be completed before an external submission.
+
+\paragraph{Funding acknowledgment.}
+Funding metadata are withheld during anonymous pre-review and must be
+completed before an external submission.
+
+\paragraph{AI-assisted workflow disclosure.}
+AI-assisted research and writing tools were used to organize source-locked
+materials, draft text, and support mechanical checks.  Mathematical claims,
+citations, finite outputs, and lifecycle statements were separately bound to
+recorded source, code, result, and manuscript review gates.  Responsibility
+for the released content remains with the authors.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

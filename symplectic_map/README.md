@@ -9,3 +9,8 @@
 4-integral-henon-multipliers - Route A / A0_FAIL - 证明积分辛Hénon周期乘子为代数单位、精确有理模长只能为1，并将S-整数推广的有理素因子限制在固定有限坏素数集
 5-algebraic-action-clocks - Exact theorem / SCOPED CERTIFICATE - 由周期作用量的代数性与Hermite--Lindemann定理排除代数归一化作用量等于log p；不外推到log|A|、多值规范或超越归一化
 6-arithmetic-clock-escape-trichotomy - Exact theorem / CAPACITY_BOUND_CERTIFIED - 对有限秩项、固定坏素数支撑与代数作用量的加法读出证明素数命中数不超过dim_Q(V)+|S_Q|，明确下一候选必须逃离至少一个有限性机制
+7-base2-exponent-clock - Exact theorem / SCOPED 2-ADIC BOUNDARY - 证明冻结PCF二次映射的高周期点为2-adic单位、其有理乘子为2^n乘奇整数；排除n=2,3的±2^n并审计development-seen n=2--7，但n>=4的全周期等式问题保持OPEN
+8-cat-torsion-capacity - Exact theorem / A0_FAIL_PROVES_TOO_MUCH - 用原始除子证明双曲环面自同构在所有n>12都有素数阶精确周期载体，并给出标准cat映射的N\{1,6,12}精确分类；阶数时钟却覆盖全部整数且非局部、非连续
+9-cat-prime-shell-multiplicity - Exact obstruction / A0_FAIL_GLOBAL_NORMALIZATION_ONLY - 标准cat映射的p-torsion壳仅p=2有单一原始轨道，所有奇素数均有m_p>=p-1；纯标量Euler因子无法消除次数，分数权修复只是对素数与合数都成立的壳层全局归一化
+10-cat-centralizer-quotient - Exact boundary / A0_FAIL_MODULUS_GLOBAL_NON_SPECIFIC - 循环向量集是完整局部GL中心化子的torsor，但商后A的动力学为恒等；辛中心化子仍留下范数像分层，单类压缩依赖随模数变化的非辛伪对称与外贴q标签
+11-cat-equivariant-clock - Exact boundary / EQUIVARIANT_RETENTION_COMPRESSION_TRADEOFF - Burnside、equivariant与stacky增强在源周期、子群、生成元和稳定子之间形成严格保留-压缩层级；带标签有效C x Z数据可恢复A模作用核，但不存在统一的内生模数时钟，q=2仅是明确披露的逐行例外
