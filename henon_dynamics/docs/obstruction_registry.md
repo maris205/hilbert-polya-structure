@@ -428,3 +428,9 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O105 | Ordinary fixed-parameter Weil-height pressure of the complete odd primitive H6 reflection-coordinate population | proved non-extensive flat-pressure obstruction | Integral cyclic coordinates and full real Galois exhaustion give `h(alpha)<=log(1+sqrt(7))` uniformly in period. Hence `exp(-abs(s)C)D_n<=Z_n(s)<=exp(abs(s)C)D_n`, so every fixed-real-`s` pressure equals the unweighted entropy `(1/2)log(2)`. | Invariant under every fixed nonzero algebraic coordinate rescaling. Stops only ordinary individual coordinate height without an orbit-clock factor. It does not stop `n*h(alpha)`, packet Mahler height, discriminant/ramification height, or multiplier Galois excess; none of those is proved here. | ../henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md |
+
+## HCS-P64 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O106 | Identification of the marked primitive reflection-root ensemble with the invariant maximal-entropy measure | proved reflection-boundary sampling obstruction | Equivariant coding gives `s[-k]=s[k]` in the marked-axis limit, so `P(s[-1]=s[1])=1`; fair two-sided Bernoulli gives `1/2`. The boundary limit is not shift invariant, although cyclic orbit averaging does converge to maximal entropy. | Stops only the naive marked-root equidistribution compiler. It preserves a proved nonconstant packet-Mahler pressure with boundary slope and an orbit-averaged pressure with maximal-entropy slope. It does not prove the two numerical slopes differ or control individual Galois-factor heights. | ../henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md |

@@ -1487,3 +1487,36 @@ theorem.
 - [P63 paper](henon_primitive_coordinate_height_flat_pressure/paper/paper.pdf)
 - [P63 proof package](henon_primitive_coordinate_height_flat_pressure/PROOF_PACKAGE.md)
 - [P63 exact certificate](henon_primitive_coordinate_height_flat_pressure/results/c63_certificate.json)
+
+## HCS-P64 reflection-boundary Mahler packet pressure
+
+P64 corrects the first equidistribution guess made after P63. Under the
+reversor-equivariant full-shift coding, odd mixed-axis roots are primitive
+palindromic words marked at their reflection center. Their marked empirical
+measures converge to a reflected one-sided fair Bernoulli process, not to the
+invariant maximal-entropy measure. Averaging the same selected cycles over
+all time origins does converge to maximal entropy, with radius-`r` cylinder
+error at most
+
+\[
+\frac{4r+1}{n}+\tau(n)2^{-n/3}.
+\]
+
+For `a_n=D_n^{-1} log M(tilde_Psi_n)`, one has `a_n -> kappa_J`, where
+`0<kappa_J<=log(1+sqrt(7))`, and
+
+\[
+\lim_{n\to\infty,\ n\text{ odd}}\frac1n
+\log\bigl(D_ne^{-sna_n}\bigr)
+=\frac12\log2-s\kappa_J.
+\]
+
+This is a nonconstant extensive whole-packet pressure, not an individual
+factor-height pressure. Finite diagnostics suggest the marked and
+orbit-averaged slopes differ, but rigorous separation remains open. Route A
+remains exploratory and Route B is not authorized.
+
+- [P64 overview](henon_reflection_boundary_mahler_pressure/README.md)
+- [P64 paper](henon_reflection_boundary_mahler_pressure/paper/paper.pdf)
+- [P64 proof package](henon_reflection_boundary_mahler_pressure/PROOF_PACKAGE.md)
+- [P64 exact certificate](henon_reflection_boundary_mahler_pressure/results/c64_certificate.json)

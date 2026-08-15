@@ -2198,3 +2198,28 @@ A2_ANALYTIC_DETERMINANT inherited, A3_PARTIAL_ANALYTIC_STRUCTURE,
 A4_FORMAL_HINT)** with overall **ROUTE_A_EXPLORATORY**.  Route B is not
 authorized.  The next candidate is the extensive packet Mahler average and
 the equidistribution of the complete primitive reflection-root ensemble.
+
+## HCS-P64 reflection-boundary Mahler packet pressure (2026-08-15)
+
+Candidate **HCS-P64** resolves P63's packet-level extensive-height question;
+see the
+[HCS-P64 project](../henon_reflection_boundary_mahler_pressure/). The
+full-shift coding is made equivariant with the Hénon reversor, so odd
+mixed-axis roots are exactly primitive palindromic half-words. Primitive
+subtraction has total-variation cost at most `tau(n)2^(-n/3)`.
+
+The marked root measures converge to the reflected one-sided Bernoulli law
+`s[-k]=s[k]`, which is not shift invariant. Cyclically averaging the same
+orbits converges to the invariant fair Bernoulli measure. Consequently the
+packet Mahler average converges to a positive constant `kappa_J` and
+
+\[
+\lim \frac1n\log\bigl(D_n e^{-sna_n}\bigr)
+=\frac12\log2-s\kappa_J.
+\]
+
+The Route-A status is **ROUTE_A_EXPLORATORY**: this is a proved extensive
+packet law but not a prime trace or individual factor-height pressure. Route
+B is not authorized. The next candidate is a certified-cylinder theorem
+separating the marked boundary slope from the orbit-averaged maximal-entropy
+slope.
