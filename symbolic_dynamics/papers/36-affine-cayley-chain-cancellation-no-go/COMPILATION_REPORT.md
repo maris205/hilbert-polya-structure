@@ -23,7 +23,7 @@ the authority directory.
 | PDF | `main.pdf` |
 | pages | 11 |
 | page geometry | A4, 595.276 × 841.890 pt |
-| file size | 389,058 bytes |
+| file size | 389,045 bytes |
 | PDF version | 1.5 |
 | fonts | 24/24 Type 1 fonts embedded and subset |
 | raster images | 0 |
@@ -59,24 +59,26 @@ reproduces 33/33 prototype semantic checks and passes 35/35 authority
 integration checks; and the authority suite passes 53/53 tests. Fresh A/B and
 cache-free cold C reproduce all 19 scientific payloads and all six captured
 stage stdout streams byte-identically. The final package contains 27 result
-files, passes 71/71 strict integrity checks, and has a sorted 44-entry
-code/result ledger whose 44/44 entries verify. All 48 sampled scalar chain-lift
+files, passes 74/74 strict integrity checks, and has a sorted 43-entry
+immutable code/result ledger whose 43/43 entries verify. The Route card is
+schema-audited separately so its paired provenance can be sealed metadata-only.
+All 48 sampled scalar chain-lift
 powers vanish exactly; the all-orders statement is proved independently.
 
 ## Final fingerprints
 
 | Artifact | SHA-256 |
 |---|---|
-| `main.pdf` | `be20604aff65d580a94b852b59fb03fdd07767192bdac02c2a20084b17691c75` |
-| canonical code/result ledger | `6458284dfd8f8e18100571ca695e3a8d5815e92588975d53a8201595344a213f` |
+| `main.pdf` | `d163715c5b324dd24bffe780c9cbe71a66c8f9eb1bcde97c640ef3b275fc6d72` |
+| canonical code/result ledger | `2874181eb08de0c9b8a0a35a5627ddc4dac1c865457bcf134c508d84669983b2` |
 | scientific aggregate | `58a5d3b404d85163edfe74bea45b077da07ac6ff4f0794aff0bf9f1fbcf6ea9e` |
-| research lock | `c5834fb3b95a652f09300b6153265392e179fac9e71649a8849093a2118d082b` |
+| research lock | `1f1f5ef49f09cf234063e23d6e12464cc24592bfb66648a6dcbb7e695f16051c` |
 | environment lock | `67f4e67f32637886b7877f28d076dfefa45fa473d37d4e78153167c69e12f736` |
 | dependency lock | `b92d875c3ccebc87fd0037af3eb7566df2bcbbcea45688f9f28675085f8d1fbd` |
-| integrity audit | `2954f8eaf40bd88f6a81b8ba04f43faf1c298642df8c99b9b9806b816419309d` |
-| idempotence certificate | `1ae54c221801ad1aaf53e869014a6f3bd6362a93d3d14f38c43078926ecf49d3` |
-| experiment report | `b888140a7cd5a45a7fdb00091272667c2e1477e3233877ffe0fdc1f6957e9513` |
-| Route-A v0.2 YAML | `a9342f1d99cadef9073ce14ddfe05fcf4263b294a0981f1d89699990ec9d0b60` |
+| integrity audit | `903229d0e823a48b0575ee7078c16aecc654a288f04f5517c5f1bbb4c30e9195` |
+| idempotence certificate | `9b896c40e0260e7551397c65cff008f3e2cd29c55a4a93e69f173d9cea65c253` |
+| experiment report | `8727a613806ad9dfe6e05ef59a06225c4e6274eafb48e7ecddcb6dccf3a50b95` |
+| Route-A v0.2 YAML | schema/provenance audited separately; excluded from Stage-1 ledger |
 
 ## Review boundary
 

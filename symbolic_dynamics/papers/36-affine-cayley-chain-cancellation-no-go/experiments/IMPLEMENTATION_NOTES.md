@@ -34,6 +34,19 @@ three runs.
 The scientific pipeline is Python-standard-library only. PyYAML is scoped to
 Route-A sealing and integrity audit and is separately version-locked.
 
+## Metadata boundary
+
+The Stage-1 SHA ledger excludes the Route YAML. Its scientific fields are
+fixed, while the three paired provenance fields and freeze note may change in
+metadata-only Stage 2. The strict auditor accepts only all-pending or one
+identical lowercase 40-hex triple. It never reads the root paper manifest.
+
+The idempotence harness copies the authority tree to an isolated temporary
+root, tests pending and dummy-sealed Route cards with a manifest both present
+and absent, and requires the 43-entry ledger and integrity JSON to remain
+byte-identical. It restores no authority file because all mutations occur only
+inside the temporary copy.
+
 ## Scope
 
 Finite word and chain computations certify implementations and controls. They

@@ -34,9 +34,8 @@ DOC_FILES = (
     "docs/candidate_registry.md",
     "docs/obstruction_registry.md",
 )
-ROUTE_AND_REPORT = (
+REPORT_FILES = (
     "EXPERIMENT_REPORT.md",
-    "evaluations/route_a/SD-C38/2026-08-15.yaml",
 )
 RESULT_FILES = (
     "results/ANALYSIS_REPORT.md",
@@ -63,7 +62,9 @@ RESULT_FILES = (
     "results/test_report.json",
     "results/trace_audit.csv",
 )
-LEDGER_PATHS = tuple(sorted(CODE_FILES + EXPERIMENT_FILES + DOC_FILES + ROUTE_AND_REPORT + RESULT_FILES))
+LEDGER_PATHS = tuple(
+    sorted(CODE_FILES + EXPERIMENT_FILES + DOC_FILES + REPORT_FILES + RESULT_FILES)
+)
 
 
 def digest(path: Path) -> str:

@@ -1225,8 +1225,9 @@ polygon 给出严格正的 $\operatorname{Tr}(T_{r,\theta}^{r+3})$。因此空 c
 cell-orbit multiplicity，任意 two-generator one-relator presentation 都同样通过，
 故属于 **PROVES TOO MUCH**。canonical exact audit 中 source 与 prototype 各通过
 33/33，独立 evaluator 通过 35/35，authority suite 通过 53/53；19 个科学 payload
-在 fresh A/B 与 cache-free cold C 间逐字节一致，最终有 27 个 result files、71/71
-integrity checks 与 44-entry canonical ledger。阶段结论为
+在 fresh A/B 与 cache-free cold C 间逐字节一致，最终有 27 个 result files、74/74
+integrity checks 与 43-entry immutable ledger；Route provenance 独立审计并在
+metadata stage 配对绑定。阶段结论为
 **STOP_TOTAL_RELATION_FILLING / STOP_MARKER_NON_DESCENT / STOP_OBJECT_MISMATCH /
 STOP_GENERIC_SUPERCANCELLATION / ROUTE_A_REJECTED**。Paper 37 只允许在同一
 unquotiented、same-marker Hashimoto object 上测试 source-derived non-flat

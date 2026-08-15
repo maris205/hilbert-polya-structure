@@ -53,11 +53,11 @@ candidate: SD-C38
   all six stage stdout streams byte-identically;
 - authority scientific aggregate SHA-256
   `58a5d3b404d85163edfe74bea45b077da07ac6ff4f0794aff0bf9f1fbcf6ea9e`;
-- `27` canonical result files, `71/71` integrity checks, and a `44`-entry
+- `27` canonical result files, `74/74` integrity checks, and a `43`-entry
   code/result ledger whose SHA-256 is
-  `6458284dfd8f8e18100571ca695e3a8d5815e92588975d53a8201595344a213f`;
-- strict Route-A v0.2 card SHA-256
-  `a9342f1d99cadef9073ce14ddfe05fcf4263b294a0981f1d89699990ec9d0b60`.
+  `2874181eb08de0c9b8a0a35a5627ddc4dac1c865457bcf134c508d84669983b2`;
+- the strict Route-A v0.2 card is audited independently of the immutable
+  Stage-1 ledger so that its paired provenance can be bound metadata-only.
 
 ## Research authority
 

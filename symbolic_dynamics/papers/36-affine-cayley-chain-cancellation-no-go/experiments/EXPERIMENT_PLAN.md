@@ -91,12 +91,17 @@ sides match the preregistered prototype aggregate.
 ### M5 — route and integrity seal
 
 - Freeze strict Route-A v0.2 YAML with the exact rejected tuple.
-- Use paired `PENDING_FIRST_ARTIFACT_COMMIT` in all three provenance fields.
+- Use paired `PENDING_FIRST_ARTIFACT_COMMIT` in all three provenance fields;
+  permit only a later simultaneous replacement by one lowercase 40-hex commit.
 - Lock research-document and dependency hashes.
-- Generate exact sorted SHA-256 ledger and aggregate.
+- Generate an exact sorted 43-entry SHA-256 ledger and aggregate, excluding
+  the metadata-mutable Route YAML.
 - Verify exact result inventory, UTF-8/LF, exactly one LF at EOF, no trailing
   whitespace/control bytes/caches, source/evaluator separation, route schema,
-  scoped A2 metrics, research pointers, A/B/C certificates, and idempotence.
+  scoped A2 metrics, research pointers, A/B/C certificates, and the canonical
+  presence and hygiene of the nonrecursive idempotence certificate.
+- Verify that Route dummy sealing and root-manifest presence/absence leave both
+  the immutable ledger and complete integrity output byte-identical.
 
 ## 5. Acceptance gates
 
@@ -110,7 +115,8 @@ sides match the preregistered prototype aggregate.
 6. A2 contains all nine v0.2 metrics; target-zero and stability fields are
    scoped `not_applicable;...` values.
 7. `source_commit`, top-level `code_commit`, and
-   `source_lock.code_commit` are the identical pending token.
+   `source_lock.code_commit` are either the identical pending token or the
+   same lowercase 40-hex metadata-only seal.
 8. Route B is false and proves-too-much risk is realized.
 9. A/B/C, research, dependency, inventory, SHA, hygiene, and cache gates pass.
 
@@ -123,6 +129,9 @@ sides match the preregistered prototype aggregate.
 - `docs/EXPERIMENT_ARTIFACT_SCHEMA.md`, candidate registry, and obstruction
   registry.
 - `evaluations/route_a/SD-C38/2026-08-15.yaml`.
+
+The Route card remains in the artifact inventory but not in the immutable
+Stage-1 SHA ledger. It is schema/provenance-audited separately.
 
 No writer-owned file, root manifest, repository README, Git state, mirror, or
 Route-B artifact is modified by experiment integration.

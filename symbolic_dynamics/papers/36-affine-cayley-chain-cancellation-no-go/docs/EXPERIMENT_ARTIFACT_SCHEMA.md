@@ -23,11 +23,18 @@ result set and the authority scientific aggregate.
 
 ## Integrity metadata
 
-`SHA256SUMS.txt` is a sorted relative-path ledger over experiment-owned code,
-plans, docs, Route card, report, and non-self-referential results.
+`SHA256SUMS.txt` is a sorted 43-entry relative-path ledger over immutable
+experiment-owned code, plans, docs, report, and non-self-referential results.
 `aggregate_sha256.txt` is the SHA-256 of that ledger. The idempotence and
 integrity payloads are excluded from the ledger to avoid recursion and are
 bound by the later paper manifest.
+
+The Route YAML is excluded because its paired provenance fields and freeze
+note are intentionally mutable in metadata-only Stage 2. Integrity parses it
+separately and accepts exactly one of two states: all three provenance fields
+are `PENDING_FIRST_ARTIFACT_COMMIT`, or all three are the same lowercase
+40-hex commit. The root `PAPER_MANIFEST.sha256` is ignored by experiment
+integrity; it is owned and regenerated outside this layer.
 
 All canonical text must be UTF-8, LF-only, exactly one terminal LF, free of
 trailing whitespace and forbidden control bytes, and accompanied by no Python
@@ -36,5 +43,5 @@ or test cache.
 ## Route-A v0.2
 
 The strict YAML contains all required input fields, allowed evidence enums,
-the nine A2 metrics, the paired pending provenance triple, the frozen tuple,
+the nine A2 metrics, paired pending-or-sealed provenance, the frozen tuple,
 `ROUTE_A_REJECTED`, and `route_b_invocation_allowed: false`.

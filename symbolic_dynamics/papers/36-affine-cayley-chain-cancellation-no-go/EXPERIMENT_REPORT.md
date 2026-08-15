@@ -57,7 +57,7 @@ binds seven frozen authority documents plus the external research package;
 its SHA-256 is:
 
 ```text
-c5834fb3b95a652f09300b6153265392e179fac9e71649a8849093a2118d082b
+1f1f5ef49f09cf234063e23d6e12464cc24592bfb66648a6dcbb7e695f16051c
 ```
 
 ## Exact relation and trace controls
@@ -127,8 +127,16 @@ separately locked and used only to parse the strict Route-A card during the
 integrity seal. No GPU, network, external dataset, floating tolerance,
 target-zero datum, coefficient fit, or Route-B tool is used.
 
-The final integrity stage requires the exact result inventory, sorted and
-unique SHA ledger, research and dependency pointers, A/B/C certificates,
-Route-A schema and enums, UTF-8/LF, exactly one terminal LF, no trailing
-whitespace or forbidden control bytes, and no Python/test cache. Final ledger
-and report hashes are reported externally after the nonrecursive seal.
+The final integrity stage requires the exact result inventory, a sorted and
+unique 43-entry immutable SHA ledger, research and dependency pointers, A/B/C
+certificates, Route-A schema and enums, UTF-8/LF, exactly one terminal LF, no
+trailing whitespace or forbidden control bytes, and no Python/test cache.
+
+The mutable Route YAML is deliberately excluded from the Stage-1 SHA ledger.
+It is audited separately and is valid only with either three paired
+`PENDING_FIRST_ARTIFACT_COMMIT` fields or three identical lowercase 40-hex
+fields after a metadata-only seal. The root paper manifest is likewise outside
+experiment integrity. Metadata-stability tests require identical integrity
+bytes with the manifest present or absent and with a dummy paired Route seal.
+Final ledger and report hashes are reported externally after the nonrecursive
+seal.

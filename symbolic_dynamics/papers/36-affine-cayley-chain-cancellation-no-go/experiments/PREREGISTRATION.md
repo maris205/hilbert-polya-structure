@@ -99,12 +99,15 @@ route_b_invocation_allowed: false
 All target-zero and root-comparison metrics are scoped
 `not_applicable;...` strings. The three provenance fields are paired as
 `PENDING_FIRST_ARTIFACT_COMMIT`; a future metadata-only stage may replace all
-three with the same immutable artifact commit.
+three with the same lowercase 40-hex immutable artifact commit. The mutable
+Route card is excluded from the Stage-1 SHA ledger and audited separately.
 
 ## 7. Hygiene and inventory
 
 Canonical text is UTF-8 with LF line endings, exactly one terminal LF, no
 trailing whitespace, no forbidden control bytes, and no Python/test caches.
-The result inventory and SHA ledger are exact, sorted, path-unique, and
-independently verified. Self-referential integrity files are explicitly
-excluded from the ledger and bound later by the paper manifest.
+The result inventory and 43-entry immutable SHA ledger are exact, sorted,
+path-unique, and independently verified. The Route card and self-referential
+integrity files are explicitly excluded. Experiment integrity ignores the
+root paper manifest and must be byte-stable across manifest presence/absence
+and paired Route metadata sealing.
