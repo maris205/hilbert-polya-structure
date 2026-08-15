@@ -47,6 +47,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [33-relation-homology-operator-non-descent](papers/33-relation-homology-operator-non-descent/README.md) | [PDF](papers/33-relation-homology-operator-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/33-relation-homology-operator-non-descent/) | 从 $S/R$ 轨道 incidence 施加的 Manin norm-polynomial quotient 消去预定 chain relations，diamond filling 也消去 cross $H_1$；但每个模数仍保留 cusp $R,S$ primitive survivor，character/supercharacter controls 均不筛素数，且原始 $S+R$ adjacency 在 $n=2$ 已不降到 quotient。 | **RELATION HOMOLOGY NO-GO / SEMIRING-RESIDUE FAMILY CLOSED / SD-C35** |
 | [34-positive-recognition-recurrence-quadrilemma](papers/34-positive-recognition-recurrence-quadrilemma/README.md) | [PDF](papers/34-positive-recognition-recurrence-quadrilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/34-positive-recognition-recurrence-quadrilemma/) | 正标量 literal atom-only ledger 强制 declared cycles 分居 recurrent components；识别 DAG 对全部 power traces/Fredholm determinant 可剪枝，有限 alphabet 与总 roof $\log p$ 又强制 whole operator 非紧，而 first return 会把原始 $z^{\ell(p)}$ marker 改成 $z$。 | **POSITIVE COMPILER QUADRILEMMA / ROUTE-A REJECTED / SD-C36** |
 | [35-affine-semigroup-object-firewall](papers/35-affine-semigroup-object-firewall/README.md) | [PDF](papers/35-affine-semigroup-object-firewall/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/35-affine-semigroup-object-firewall/) | 正 affine Cayley source 有严格高度而无 recurrence；形式逆边制造 backtracks，Hashimoto reduction 又保留普适 affine relation cycles。Bost--Connes 的 $\zeta(\beta)$ 是另一 diagonal Gibbs 对象的首个 trace coefficient，不是同一 graph-step primitive determinant。 | **AFFINE OBJECT FIREWALL / ROUTE-A REJECTED / SD-C37** |
+| [36-affine-cayley-chain-cancellation-no-go](papers/36-affine-cayley-chain-cancellation-no-go/README.md) | [PDF](papers/36-affine-cayley-chain-cancellation-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/36-affine-cayley-chain-cancellation-no-go/) | 完整 affine Cayley relation filling 使复形契约并清空全部 recurrent homology，且不等长关系 $vu=u^rv$ 阻止原 unit-step marker 下降；同一 prequotient 的 trace-class damped Hashimoto determinant 仍严格看见 relation polygon，而标量 chain superlift 又以通用 $1-2+1=0$ 把所有 one-relator controls 一并消去。 | **CHAIN CANCELLATION / CLOCK NON-DESCENT / ROUTE-A REJECTED / SD-C38** |
 
 ### 论文 1 的候选分离结论
 
@@ -1193,13 +1194,52 @@ STOP_PARTITION_TRACE_IDENTIFICATION / CLOSE_AFFINE_SEMIGROUP_PARTITION_IDENTIFIC
 ROUTE_A_REJECTED**。Paper 36 只允许在同一 uninduced symbolic object 上测试
 source-natural chain cancellation，并必须同时保留原 marker 与非零 recurrent sector。
 
+### 论文 36：完整 relation filling、marker non-descent 与 prequotient determinant 分离
+
+Paper 36 在 Paper 35 的同一 affine presentation family
+
+$$
+M_r=\langle u,v\mid vu=u^rv\rangle^+
+$$
+
+上测试最直接的 chain-level repair。形式逆边与 Hashimoto rule 先删除 immediate
+backtracks；随后在每个 vertex 填入定义关系的 Cayley $2$-cell。Gray--Steinberg 的
+已知 contractibility 定理在这里适用，因此完整 filling 使 $K_r$ 契约，全部正次数
+homology 与 primitive recurrent classes 同时消失。该拓扑结论不被冒充为新定理；
+本文的新边界是它与原时钟及同对象解析所有权的组合不相容。
+
+关系 cell 比较长度 $2$ 的 $vu$ 与长度 $r+1$ 的 $u^rv$。任何取值于 torsion-free
+Abelian group 的 cell-invariant additive degree 都满足
+
+$$
+(r-1)\deg(u)=0,
+$$
+
+所以原始 unit generator-step marker 不可能下降。与此同时，在完整、未诱导的
+oriented-edge space 上，source-coordinate damping
+$T_{r,\theta}=D_\theta H_rD_\theta$ 是 trace class；长度 $r+3$ 的 affine relation
+polygon 给出严格正的 $\operatorname{Tr}(T_{r,\theta}^{r+3})$。因此空 chain quotient
+与该 ordinary Fredholm determinant 不是同一 determinant-bearing object。
+
+标量 cellular superlift 虽在每个 power 上给出 $1-2+1=0$，但这一结果只读
+cell-orbit multiplicity，任意 two-generator one-relator presentation 都同样通过，
+故属于 **PROVES TOO MUCH**。canonical exact audit 中 source 与 prototype 各通过
+33/33，独立 evaluator 通过 35/35，authority suite 通过 53/53；19 个科学 payload
+在 fresh A/B 与 cache-free cold C 间逐字节一致，最终有 27 个 result files、71/71
+integrity checks 与 44-entry canonical ledger。阶段结论为
+**STOP_TOTAL_RELATION_FILLING / STOP_MARKER_NON_DESCENT / STOP_OBJECT_MISMATCH /
+STOP_GENERIC_SUPERCANCELLATION / ROUTE_A_REJECTED**。Paper 37 只允许在同一
+unquotiented、same-marker Hashimoto object 上测试 source-derived non-flat
+finite-rank local coefficients；不得转向 first return、KMS/GNS、prime basis、
+有限 quotient 或另一个 determinant。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十五篇论文](papers/)
+- [三十六篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
