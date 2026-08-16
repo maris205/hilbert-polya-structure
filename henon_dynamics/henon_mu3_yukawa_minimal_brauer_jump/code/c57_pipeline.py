@@ -1,0 +1,253 @@
+#!/usr/bin/env python3
+"""Backend preflights and deterministic subprocess-report parsing for C57."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import sys
+from typing import Any, Sequence
+
+from c57_exact import (
+    StrictDataError,
+    read_stable,
+    reject_optimized_python,
+    sha256_bytes,
+    strict_json_loads,
+    canonical_json_bytes,
+)
+
+
+EXPECTED_BACKENDS = {
+    "pari": {
+        "python": [3, 10, 12],
+        "cypari2": "2.1.2",
+        "pari": "[2, 13, 3]",
+        "executable_sha256": "d6bca2b84e73c7775a0dd5e6a76899cfe4ee62863d7c8f88513811d1fda23f49",
+        "executable_size_bytes": 5937704,
+    },
+    "flint_group": {
+        "python": [3, 12, 3],
+        "flint": "0.9.0",
+        "sympy": "1.14.0",
+        "jsonschema": "4.25.0",
+        "executable_sha256": "9a3d9e94d2be60d9a2a91d08f62292a152e28175fb4ee1d871aa5850fbb7a101",
+        "executable_size_bytes": 30626264,
+    },
+}
+EXPECTED_SINGULAR = {
+    "resolved_executable": "/usr/bin/Singular",
+    "executable_sha256": "4be749821f5c7d0777a60d187409618a4d43b3da2af0b8656d42bf860b995e63",
+    "executable_size_bytes": 18584,
+    "version_first_line": "Singular for x86_64-Linux version 4.2.1 (4212, 64 bit) Dec 17 2021 20:20:53",
+}
+
+
+def executable(path: Path, label: str) -> Path:
+    resolved = path.resolve(strict=True)
+    metadata = resolved.stat()
+    if not stat.S_ISREG(metadata.st_mode) or not os.access(resolved, os.X_OK):
+        raise StrictDataError(f"{label} backend is not an executable regular file")
+    return resolved
+
+
+def clean_environment() -> dict[str, str]:
+    # Reject hostile optimization at the orchestration boundary.  Never erase
+    # it and continue, since doing that would turn a requested unsafe run into
+    # an apparently valid one.
+    reject_optimized_python()
+    return {
+        "PATH": "/usr/bin:/bin",
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "TZ": "UTC",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONHASHSEED": "0",
+        "PYTHONNOUSERSITE": "1",
+    }
+
+
+def python_preflight(pari_python: Path, flint_group_python: Path) -> dict[str, Any]:
+    pari = executable(pari_python, "PARI")
+    flint_group = executable(flint_group_python, "FLINT/SymPy")
+    if pari == flint_group:
+        raise StrictDataError("PARI and FLINT/SymPy backends must be explicit distinct interpreters")
+    snippets = {
+        "pari": (
+            pari,
+            "import importlib.metadata,json,os,sys; from cypari2 import Pari; "
+            "assert not sys.flags.optimize; p=Pari(); "
+            "print(json.dumps({'backend':'PARI','python':list(sys.version_info[:3]),"
+            "'cypari2':importlib.metadata.version('cypari2'),"
+            "'pari':str(p('version()'))},sort_keys=True,separators=(',',':')))",
+        ),
+        "flint_group": (
+            flint_group,
+            "import importlib.metadata,json,sys,flint,sympy,jsonschema; assert not sys.flags.optimize; "
+            "print(json.dumps({'backend':'FLINT_SYMPY','python':list(sys.version_info[:3]),"
+            "'flint':getattr(flint,'__version__','unknown'),'sympy':sympy.__version__,"
+            "'jsonschema':importlib.metadata.version('jsonschema')},sort_keys=True,separators=(',',':')))",
+        ),
+    }
+    result = {}
+    for key, (binary, source) in snippets.items():
+        binary_raw, binary_fingerprint = read_stable(binary, max_bytes=40_000_000)
+        completed_runs = [
+            subprocess.run(
+                [str(binary), "-s", "-B", "-c", source],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                env=clean_environment(),
+                cwd="/",
+                check=True,
+                timeout=60,
+            )
+            for _ in range(2)
+        ]
+        if any(completed.stderr for completed in completed_runs):
+            raise StrictDataError(f"{key} backend preflight emitted stderr")
+        if completed_runs[0].stdout != completed_runs[1].stdout:
+            raise StrictDataError(f"{key} backend preflight is nondeterministic")
+        completed = completed_runs[0]
+        value = strict_json_loads(completed.stdout.strip(), max_bytes=10_000)
+        expected_versions = {
+            "backend": "PARI" if key == "pari" else "FLINT_SYMPY",
+            **{
+                name: expected
+                for name, expected in EXPECTED_BACKENDS[key].items()
+                if not name.startswith("executable_")
+            },
+        }
+        if value != expected_versions:
+            raise StrictDataError(f"unsupported {key} backend versions: {value}")
+        if (
+            sha256_bytes(binary_raw) != EXPECTED_BACKENDS[key]["executable_sha256"]
+            or binary_fingerprint.size_bytes
+            != EXPECTED_BACKENDS[key]["executable_size_bytes"]
+        ):
+            raise StrictDataError(f"unsupported {key} Python executable bytes")
+        result[key] = {
+            "resolved_executable": str(binary),
+            "versions": value,
+            "executable_sha256": sha256_bytes(binary_raw),
+            "executable_size_bytes": binary_fingerprint.size_bytes,
+        }
+    return result
+
+
+def singular_preflight(singular_path: Path) -> dict[str, Any]:
+    singular = executable(singular_path, "Singular")
+    raw, fingerprint = read_stable(singular, max_bytes=1_000_000)
+    completed = subprocess.run(
+        [str(singular), "--version"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=clean_environment(),
+        check=True,
+        timeout=60,
+    )
+    if completed.stderr:
+        raise StrictDataError("Singular preflight emitted stderr")
+    try:
+        first_line = completed.stdout.decode("utf-8", errors="strict").splitlines()[0]
+    except (UnicodeDecodeError, IndexError) as exc:
+        raise StrictDataError("Singular version output is malformed") from exc
+    observed = {
+        "resolved_executable": str(singular),
+        "executable_sha256": sha256_bytes(raw),
+        "executable_size_bytes": fingerprint.size_bytes,
+        "version_first_line": first_line,
+    }
+    if observed != EXPECTED_SINGULAR:
+        raise StrictDataError(f"unsupported Singular backend: {observed}")
+    return observed
+
+
+def run_canonical_report(
+    python: Path,
+    script: Path,
+    arguments: Sequence[str | Path],
+    *,
+    timeout: int,
+    max_stdout_bytes: int = 10_000_000,
+) -> tuple[dict[str, Any], str]:
+    binary = executable(python, "Python")
+    if not script.is_file() or script.is_symlink():
+        raise StrictDataError(f"report script must be a regular non-symlink file: {script}")
+    completed = subprocess.run(
+        [str(binary), "-s", "-B", str(script), *(str(value) for value in arguments)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=clean_environment(),
+        check=True,
+        timeout=timeout,
+    )
+    if completed.stderr:
+        raise StrictDataError(f"report script emitted stderr: {script.name}")
+    if len(completed.stdout) > max_stdout_bytes:
+        raise StrictDataError(f"report stdout exceeds limit: {script.name}")
+    lines = completed.stdout.splitlines()
+    json_lines = [line for line in lines if line.startswith(b"{") and line.endswith(b"}")]
+    if len(json_lines) != 1:
+        raise StrictDataError(f"report must have exactly one JSON line: {script.name}")
+    raw = json_lines[0]
+    report = strict_json_loads(raw, max_bytes=max_stdout_bytes)
+    if type(report) is not dict:
+        raise StrictDataError("canonical report must be an object")
+    canonical = json.dumps(
+        report,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+    if raw != canonical:
+        raise StrictDataError(f"report JSON line is not canonical: {script.name}")
+    declared = [line.split(b" ", 1)[1].decode() for line in lines if line.startswith(b"report_sha256 ")]
+    actual = hashlib.sha256(raw).hexdigest()
+    if declared != [actual]:
+        raise StrictDataError(f"canonical report digest line mismatch: {script.name}")
+    permitted_progress = {
+        line
+        for line in lines
+        if line.startswith(b"division_step ")
+    }
+    unexplained = [
+        line
+        for line in lines
+        if line not in permitted_progress
+        and line != raw
+        and not line.startswith(b"report_sha256 ")
+    ]
+    if unexplained:
+        raise StrictDataError(f"unexpected report stdout line: {script.name}")
+    return report, actual
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--preflight", action="store_true", required=True)
+    parser.add_argument("--pari-python", type=Path, default=Path("/usr/bin/python3"))
+    parser.add_argument(
+        "--flint-group-python",
+        type=Path,
+        default=Path("/root/miniconda3/bin/python3"),
+    )
+    parser.add_argument("--singular", type=Path, default=Path("/usr/bin/Singular"))
+    arguments = parser.parse_args()
+    reject_optimized_python()
+    value = {
+        "python": python_preflight(arguments.pari_python, arguments.flint_group_python),
+        "singular": singular_preflight(arguments.singular),
+    }
+    sys.stdout.buffer.write(canonical_json_bytes(value))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

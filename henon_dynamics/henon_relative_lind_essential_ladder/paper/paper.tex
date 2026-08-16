@@ -1,0 +1,238 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[numbers]{natbib}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Zorb}{\mathcal Z_{\rm orb}}
+\newcommand{\zflip}{\zeta_{\rm flip}}
+\newcommand{\PhiF}{\Phi}
+\hypersetup{pdftitle={An Infinite Essential-Singularity Ladder beyond the Local Henon-Lind Counterterm},pdfauthor={Liang Wang},pdfsubject={Reflection packet Euler products and relative Lind zeta continuation},pdfkeywords={Henon map, Lind zeta, flip system, Euler product, essential singularity, Fredholm obstruction}}
+\title{An Infinite Essential-Singularity Ladder beyond the\\Local H\'enon--Lind Counterterm}
+\author{Liang Wang\\\small School of Artificial Intelligence and Automation\\\small Huazhong University of Science and Technology\\\small Wuhan 430074, P. R. China}
+\date{August 16, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The odd reflection-packet Euler product of the full H\'enon horseshoe and
+the Lind zeta of the full two-shift reverse action admit a unique local
+relative counterterm at their common entropy boundary.  We determine what
+happens after that first cancellation.  Writing
+\(\Phi(x)=2x/(1-2x^2)\), we prove the exact regrouping
+\[
+ \log\Zorb(t,1)=\sum_{m\ge1}c_m\Phi(t^m),\qquad
+ c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+Every coefficient $c_m$ is nonzero.  The locally normalized relative germ
+therefore continues, on punctured branches, as
+\[
+ \log C_{\rm rel}(t)=H_{\rm rel}(1-\sqrt2t)
+ -\sum_{m\ge2}c_m\Phi(t^m),
+\]
+where $H_{\rm rel}$ is explicit and regular on the positive corridor.  For
+every $m\ge2$, the point $\rho_m=2^{-1/(2m)}$ is an exponential essential
+singularity, and $\rho_m\nearrow1$.  Thus the first-boundary counterterm is
+locally exact but cannot globalize to a meromorphic finite-state or
+holomorphic trace-class Fredholm determinant on the unit disk.  A
+punctured-domain infinite-rank model remains open; no arithmetic trace or
+Route-B claim is made.
+\end{abstract}
+
+\section{The local bridge and the global question}
+
+For the full two-shift with reverse flip, \citet[Example~4.3]{KimLeePark2003}
+give
+\begin{equation}\label{eq:lind}
+ \zflip(t)=(1-2t^2)^{-1/2}
+ \exp\!\left(\frac{2t+3t^2}{1-2t^2}\right).
+\end{equation}
+The conjugate full H\'enon horseshoe \cite{DevaneyNitecki1979} also carries
+the different odd marked-reflection product
+\begin{equation}\label{eq:packet-product}
+ \Zorb(t,1)=\prod_{\substack{n\ge1\\n\ {\rm odd}}}(1-t^n)^{-D_n},
+\end{equation}
+where $D_n$ is the number of primitive marked reflection words of period
+$n$.  This product is not the full infinite-dihedral Lind zeta.
+
+Put $u=1-\sqrt2t$.  The preceding local comparison proves that
+\begin{equation}\label{eq:counterterm}
+ C_{\rm rel}(t)=u^{1/2}e^{-3/(4u)}
+ \frac{\zflip(t)}{\Zorb(t,1)}
+\end{equation}
+extends holomorphically and nonvanishingly across $u=0$ on a local branch.
+The power $1/2$ and exponential coefficient $3/4$ are unique.  The present
+paper asks whether this local germ can be a meromorphic determinant on the
+whole unit disk.
+
+\section{A scalar-channel regrouping}
+
+Let
+\begin{equation}\label{eq:Phi}
+ \PhiF(x)=\frac{2x}{1-2x^2}.
+\end{equation}
+All odd reflection words have generating function $\PhiF(t)$, and primitive
+dilation M\"obius inversion gives
+\begin{equation}\label{eq:primitive}
+ E(t):=\sum_{\substack{n\ge1\\n\ {\rm odd}}}D_nt^n
+ =\sum_{\substack{k\ge1\\k\ {\rm odd}}}\mu(k)\PhiF(t^k).
+\end{equation}
+Taking the logarithm of \eqref{eq:packet-product}, first in its disk of
+absolute convergence, yields
+\begin{equation}\label{eq:repetition}
+ \log\Zorb(t,1)=\sum_{r\ge1}\frac1rE(t^r).
+\end{equation}
+
+\begin{theorem}[Exact channel decomposition]\label{thm:channels}
+For $|t|<2^{-1/2}$,
+\begin{equation}\label{eq:channels}
+ \log\Zorb(t,1)=\sum_{m\ge1}c_m\PhiF(t^m),
+\end{equation}
+where
+\begin{equation}\label{eq:cm}
+ c_m=\frac1m\sum_{\substack{k\mid m\\k\ {\rm odd}}}k\mu(k)
+ =\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\end{equation}
+In particular, $c_m\ne0$ for every $m\ge1$.
+\end{theorem}
+
+\begin{proof}
+Insert \eqref{eq:primitive} into \eqref{eq:repetition} and group terms with
+$m=kr$.  The coefficient of $\PhiF(t^m)$ is
+\[
+ \sum_{\substack{k\mid m\\k\ {\rm odd}}}\frac{\mu(k)}{m/k}
+ =\frac1m\sum_{\substack{k\mid m\\k\ {\rm odd}}}k\mu(k).
+\]
+The sum is multiplicative on the odd radical of $m$, giving the Euler
+product in \eqref{eq:cm}.  Every factor $1-p$ is nonzero.
+\end{proof}
+
+The decomposition is more than a coefficient identity: each $m$ is now an
+independent rational singular channel.
+
+\section{Continuation after the first cancellation}
+
+The $m=1$ channel is precisely
+\(\PhiF(t)=2t/(1-2t^2)\).  Direct substitution into \eqref{eq:lind} gives
+the following exact regular remainder.
+
+\begin{proposition}[Relative continuation formula]\label{prop:relative}
+Set
+\begin{equation}\label{eq:Hrel}
+ H_{\rm rel}(u)=-\frac12\log(2-u)
+ -\frac{3(2u-3)}{4(u-2)}.
+\end{equation}
+On every compatible branch that begins at the origin and avoids the stated
+singular points,
+\begin{equation}\label{eq:relative-cont}
+ \log C_{\rm rel}(t)=H_{\rm rel}(1-\sqrt2t)
+ -\sum_{m\ge2}c_m\PhiF(t^m).
+\end{equation}
+The series is normally convergent on compact subsets of $|t|<1$ that avoid
+the zeros of $1-2t^{2m}$, $m\ge2$.
+\end{proposition}
+
+\begin{proof}
+The logarithm of \eqref{eq:counterterm} is
+\[
+ \tfrac12\log u-\frac{3}{4u}+\log\zflip(t)
+ -\log\Zorb(t,1).
+\]
+Because $1-2t^2=u(2-u)$, subtracting the $m=1$ channel gives exactly
+\[
+ \tfrac12\log u+\log\zflip(t)-\frac{3}{4u}-\PhiF(t)
+ =H_{\rm rel}(u).
+\]
+This proves \eqref{eq:relative-cont} in the initial disk and hence by
+continuation.  Also $|c_m|\le1$.  On a compact set with $|t|\le r<1$, all
+sufficiently large terms satisfy $|\PhiF(t^m)|\ll r^m$; the finitely many
+earlier denominators are bounded away from zero.  This proves normal
+convergence off the punctures.
+\end{proof}
+
+Notice that \eqref{eq:Hrel} is regular throughout the positive interval
+$0<t<1$.  All later positive singularities therefore come from the packet
+channels, not from the source Lind factor.
+
+\section{The infinite essential-singularity ladder}
+
+For $m\ge1$, define
+\begin{equation}\label{eq:rho}
+ \rho_m=2^{-1/(2m)},\qquad v_m=1-t/\rho_m.
+\end{equation}
+Then $1-2t^{2m}=2mv_m+O(v_m^2)$ and
+$2t^m=\sqrt2+O(v_m)$.
+
+\begin{theorem}[Positive essential ladder]\label{thm:ladder}
+For each $m\ge2$, the continuation in \eqref{eq:relative-cont} has
+\begin{equation}\label{eq:principal}
+ \log C_{\rm rel}(t)=
+ -\frac{c_m}{\sqrt2\,m}\frac1{1-t/\rho_m}
+ +G_m(t),
+\end{equation}
+where $G_m$ is holomorphic near $\rho_m$.  Consequently $C_{\rm rel}$ has
+an exponential essential singularity at every $\rho_m$, and
+\begin{equation}\label{eq:ladder-limit}
+ 2^{-1/4}=\rho_2<\rho_3<\cdots<1,\qquad \rho_m\longrightarrow1.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+At the positive point $\rho_m$, the equation
+$1-2\rho_m^{2j}=0$ holds only when $j=m$.  Hence all channels except the
+$m$th are holomorphic there.  The local expansion above gives
+\[
+ \PhiF(t^m)=\frac{1}{\sqrt2\,m}\frac1{v_m}+O(1).
+\]
+Insert this into \eqref{eq:relative-cont}.  By \eqref{eq:cm}, $c_m\ne0$,
+so exponentiating the nonzero simple pole in \eqref{eq:principal} produces
+an essential singularity.  Monotonicity and the limit in
+\eqref{eq:ladder-limit} are immediate.
+\end{proof}
+
+The $m=1$ singularity is exactly the one removed by the unique P71
+counterterm.  The theorem says that this cancellation is genuinely local:
+it reveals, rather than removes, all later channels.
+
+\section{Determinant obstruction and scope}
+
+\begin{corollary}[No unit-disk meromorphic determinant]\label{cor:no-det}
+The relative continuation $C_{\rm rel}$ is not meromorphic on the unit
+disk.  In particular, it cannot equal a finite-dimensional determinant or
+a quotient of holomorphic trace-class Fredholm determinants on that disk.
+\end{corollary}
+
+\begin{proof}
+A meromorphic function has only poles as isolated nonremovable
+singularities.  By \cref{thm:ladder}, $C_{\rm rel}$ has infinitely many
+isolated essential singularities inside the disk.  Finite-dimensional
+determinants are holomorphic polynomials, and a quotient of holomorphic
+Fredholm determinants is meromorphic.
+\end{proof}
+
+This is an object-specific obstruction, not a prohibition on every operator
+model.  A transfer operator may live on a slit or punctured domain, use an
+infinite singular counterterm, or fail to be trace class at the ladder.  No
+such model is constructed here.  Nor do the channel indices $m$ carry
+rational-prime or von-Mangoldt semantics.  Route A gains an exact global
+analytic obstruction but no arithmetic advance; Route B remains
+unauthorized.
+
+\section{Executable certificate}
+
+The certificate verifies \eqref{eq:cm} in divisor-sum and Euler-product
+forms, compares \eqref{eq:channels} coefficientwise with the primitive
+Euler product through degree 48, and records the first 24 singular channels.
+An independent implementation reconstructs 64 channels without importing
+the main module.  Eight tests pass in normal and optimized modes, six
+dependencies are hash-locked, and 25 claim mutations are rejected.  The
+finite ledger certifies the algebra; \cref{thm:channels,thm:ladder} prove the
+all-$m$ statements.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

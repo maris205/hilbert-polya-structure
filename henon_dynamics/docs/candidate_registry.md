@@ -2279,3 +2279,117 @@ Route-A status remains **ROUTE_A_EXPLORATORY** and Route B is not authorized:
 the functional has no source-native determinant, rational-prime labels, or
 von Mangoldt amplitudes. That determinant/trace interface is the next major
 candidate rather than another sampling normalization.
+
+## HCS-P68 canonical reflection-packet Euler product (2026-08-16)
+
+Candidate **HCS-P68** promotes P67's canonical sampler to an explicit analytic
+germ; see the
+[HCS-P68 project](../henon_canonical_reflection_packet_euler_product/).
+The product
+
+\[
+\mathcal Z_f(z,s)=\prod_{n\ {\rm odd}}
+(1-z^n e^{-sn b_n(f)})^{-D_n}
+\]
+
+is exactly cohomology invariant in its convergence disk, and its logarithmic
+derivative distinguishes primitive packets from all repetitions by a divisor
+sum. In the unweighted case its radius is \(2^{-1/2}\), but its logarithm has
+principal part \(1/[\sqrt2(1-\sqrt2z)]\); hence the product has an exponential
+essential singularity at the positive entropy boundary.
+
+The formal Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. It is not the full Lind zeta and retains only a
+periodwise aggregate mean. Route B is not authorized. The next candidate is
+the exact cumulant gap between this mean-field factor and the orbit-resolved
+exponential moment.
+
+## HCS-P69 orbit-resolved reflection cumulant pressure (2026-08-16)
+
+Candidate **HCS-P69** resolves P68's first missing invariant; see the
+[HCS-P69 project](../henon_orbit_resolved_reflection_cumulant_pressure/).
+For \(\chi=\mathbf1\{s_{-1}=s_1\}\), odd cyclic decimation and reflection
+give the exact packet polynomial
+
+\[
+F_{2m+1}(q)=2q(1+q^2)^m
+\]
+
+and the primitive dilation-Möbius law
+\(E_n(q)=\sum_{k\mid n}\mu(k)F_{n/k}(q^k)\). Therefore
+
+\[
+P_{\rm orb}(s)=\frac12\log(1+e^{-2s}),\qquad
+P_{\rm orb}(s)-P_{\rm mf}(s)=\frac12\log\cosh s.
+\]
+
+The gap is strictly positive away from zero and its second derivative at zero
+is \(1/2\). The Route-A tuple is **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Route B is not authorized. The exact \(E_n\) are the
+input for the next orbit-resolved Euler product.
+
+## HCS-P70 orbit-resolved reflection Euler boundary (2026-08-16)
+
+Candidate **HCS-P70** closes the full product named by P69; see the
+[HCS-P70 project](../henon_orbit_resolved_reflection_euler_boundary/).
+One individual Euler factor is retained for every primitive marked reflection
+word, and
+
+\[
+[z^m]\,z\partial_z\log\mathcal Z_{\rm orb}
+=\sum_{\substack{n\mid m\\n\ {\rm odd}}}nE_n(q^{m/n}).
+\]
+
+The exact positive-weight boundary is \(R(q)=(1+q^2)^{-1/2}\), where the
+product has an exponential essential singularity. Its radius relative to the
+aggregate-mean product is
+\[
+R(q)/R_{\rm mf}(q)=1/\sqrt{(q+q^{-1})/2},
+\]
+strictly below one unless \(q=1\). The Route-A tuple is **(A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. A relative Lind/transfer counterterm is open; Route B
+is not authorized.
+
+## HCS-P71 relative Lind counterterm (2026-08-16)
+
+Candidate **HCS-P71** performs the source comparison named by P70; see the
+[HCS-P71 project](../henon_relative_lind_counterterm/). The full two-shift
+reverse Lind formula has, at \(u=1-\sqrt2t=0\), exponential coefficient
+\(1/\sqrt2+3/4\) and logarithmic coefficient \(-1/2\). P70 contributes only
+\(1/\sqrt2\). Therefore
+
+\[
+C_{\rm rel}(t)=u^{1/2}e^{-3/(4u)}
+\frac{\zeta_{\rm flip}(t)}{\mathcal Z_{\rm orb}(t,1)}
+\]
+
+has a nonzero holomorphic local extension. The pair \((3/4,1/2)\) is unique
+among all power-exponential counterterms. The Route-A tuple is **(A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Global single-valued continuation and operator
+ownership remain open; Route B is not authorized.
+
+## HCS-P72 relative Lind essential-singularity ladder (2026-08-16)
+
+Candidate **HCS-P72** answers P71's globalization question; see the
+[HCS-P72 project](../henon_relative_lind_essential_ladder/). The exact
+primitive/repetition regrouping is
+
+\[
+\log\mathcal Z_{\rm orb}(t,1)
+=\sum_{m\ge1}c_m\frac{2t^m}{1-2t^{2m}},\qquad
+c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+
+Every \(c_m\) is nonzero. After the unique P71 \(m=1\) counterterm, the
+relative continuation has an exponential essential singularity at every
+\(\rho_m=2^{-1/(2m)}\), \(m\ge2\), and \(\rho_m\nearrow1\). Therefore this
+specific relative germ is not a meromorphic finite-dimensional or
+holomorphic trace-class Fredholm determinant on the unit disk. The Route-A
+tuple remains **(A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**. Punctured-domain infinite-rank ownership is open;
+arithmetic advance is NO and Route B is not authorized.

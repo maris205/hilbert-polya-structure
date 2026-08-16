@@ -1,0 +1,182 @@
+\section{Exact local arithmetic and the two permutation carriers}
+\label{sec:local-arithmetic}
+
+\subsection{The surface envelope and field support}
+
+An exact Macaulay resultant calculation for the four partial derivatives of
+$F$, divided by the standard extraneous factor, gives
+\begin{equation}
+\begin{split}
+\Delta_Y={}&2^{64}\cdot3^{43}\cdot5^7\cdot181^{24}\cdot283
+\cdot997^{24}\cdot1801\\
+&\hspace{18mm}\cdot2346241^{24}\cdot
+14932047182473291995860108491583652133938007263719.
+\end{split}
+\label{eq:surface-divided-discriminant}
+\end{equation}
+The determinant was evaluated by two exact engines, one using fraction-free
+elimination and one using exact polynomial arithmetic.  Their complete
+matrices and determinant guards are summarized in \cref{app:local}.  The
+factorization in \cref{eq:surface-divided-discriminant} is a bad-reduction
+envelope for the integral surface model; it is not a field discriminant.
+
+The global maximal order $\cO_E$ has rank $27$.  Its exact discriminant has
+valuations
+\begin{equation}
+\begin{array}{c|rrrrrrrrr}
+p&2&3&5&181&283&997&1801&2346241&q\\ \hline
+v_p(\Disc E)&0&46&36&18&6&18&6&18&6.
+\end{array}
+\label{eq:discE-valuation-vector}
+\end{equation}
+
+\begin{proposition}[Envelope and exact support]
+\label{prop:support}
+The sets $\cB_Y$ and $\cR_{E,K}$ in \cref{thm:main} are respectively the
+nine-prime set supported by \cref{eq:surface-divided-discriminant} and the
+eight-prime set obtained by deleting $2$.
+\end{proposition}
+
+\begin{proof}
+Away from the support of the divided discriminant, the integral cubic has
+smooth reduction.  The finite line scheme then extends as a finite étale
+scheme, so the Galois action on its geometric points is unramified.
+\Cref{eq:discE-valuation-vector} shows that all eight displayed odd
+primes ramify in $E$, while $2$ does not.
+
+It remains to pass from the non-Galois field $E$ to its normal closure.  At
+$2$, the zero permutation conductor says that inertia fixes all $27$ cosets
+of a line stabilizer $H\leq\WE$.  The kernel of this action is
+$\Core_{\WE}(H)$.  Since the line action in
+\cref{eq:frozen-galois-input} is faithful, this core is trivial.  Thus
+inertia at $2$ is trivial in $K$.  The same faithfulness shows that
+nontrivial inertia at any of the eight odd primes cannot act trivially on all
+$27$ lines.  Hence $E$ and $K$ have the same stated support.
+\end{proof}
+
+\subsection{Local maximal-order rows}
+
+For a prime $\mathfrak p\mid p$ of $E$, write
+\[
+ e=e(\mathfrak p/p),\qquad f=f(\mathfrak p/p),\qquad
+ d=v_{\mathfrak p}(\mathfrak D_{E_{\mathfrak p}/\Q_p}).
+\]
+Its contribution to $v_p(\Disc E)$ is $fd$.  Exact prime-ideal decomposition
+in the maximal order gives the following complete rows.
+
+\begin{table}[ht]
+\centering
+\caption{Maximal-order local rows.  Every row in the last line occurs at
+each of the three rational primes, rather than being assigned one row per
+prime.}
+\label{tab:local-rows}
+\begin{tabular}{@{}c l c c@{}}
+\toprule
+$p$&multiset of $(e,f,d)$&$\sum fd$&local degrees $ef$\\
+\midrule
+$3$&$\efrow{3}{1}{3},\efrow{6}{1}{7},\efrow{9}{1}{18}^2$&
+$46$&$(3,6,9,9)$\\
+$5$&$\efrow{1}{1}{0}^2,\efrow{5}{1}{7}^3,\efrow{10}{1}{15}$&
+$36$&$(1,1,5,5,5,10)$\\
+$181,997,2346241$&
+$\efrow{3}{1}{2},\efrow{3}{2}{2},\efrow{3}{6}{2}$&
+$18$&$(3,6,18)$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The equalities
+\[
+3+7+18+18=46,\qquad 0+0+7+7+7+15=36,\qquad
+2+2\cdot2+6\cdot2=18
+\]
+are direct different calculations, made before the representation-theoretic
+conductor computation and used later as checks.  No constituent conductor is
+obtained by splitting a global sum.
+
+At the reflection primes $283,1801,q$, we deliberately do not list an
+$(e,f,d)$ decomposition.  Their inertia is obtained by the geometric
+ordinary-double-point argument in \cref{sec:reflection}.  The six
+transpositions of a root reflection then give $v_p(\Disc E)=6$,
+consistently with \cref{eq:discE-valuation-vector}.
+
+\subsection{The 36-point authority and its boundary}
+
+Let $\theta_{36}\in\Z[T]$ be the frozen degree-$36$ polynomial whose roots
+label the double-sixes.  A second frozen polynomial $\delta_{36}$ has the
+same global splitting field but is not a local authority in this paper.  The
+distinction matters because a stable-looking finite-precision factorization
+does not by itself identify the factors over $\Q_p$.
+
+The factor-stability step uses the Krasner--Hensel criterion in the form
+localized in \citet[Chapter II, \S2, Exercises 1--2, p.~30]
+{serre1979local}.  For each asserted factorization, the working precision
+exceeds both the valuation of the global polynomial discriminant and twice
+the largest factor-polynomial discriminant valuation; the monic factors are
+simple and multiply back to the original polynomial at the same precision.
+The source supplies the criterion, while all exponents, factors, and
+inequalities below are computations for \cref{eq:frozen-cubic}.
+
+\begin{proposition}[Certified double-six partitions]
+\label{prop:theta-authority}
+The polynomial $\theta_{36}$ is a certified local authority with the records
+in \cref{tab:theta-authority}.  No theorem assertion depends on
+$\delta_{36}$, and no apparent $\delta_{36}$ factorization is used as
+corroboration.
+\end{proposition}
+
+\begin{table}[ht]
+\centering
+\caption{Certified $\theta_{36}$ factor degrees and strict precision bounds.
+The two bounds in the fourth column are the global
+polynomial-discriminant valuation and twice the largest factor-polynomial
+discriminant valuation.}
+\label{tab:theta-authority}
+\small
+\begin{tabularx}{\textwidth}{@{}c c c c >{\raggedright\arraybackslash}X@{}}
+\toprule
+$p$&certified precisions&factor degrees&bounds&conclusion\\
+\midrule
+$3$&$(900,950,1000)$&$(3,3,3,9,18)$&$(886,538)$&
+all three precisions clear both\\
+$5$&$(900,950,1000)$&$(1,5,10,10,10)$&$(746,246)$&
+all three precisions clear both\\
+$181,997,2346241$&$(20,30,40)$&$(3,6,9,18)$&$(24,24)$&
+precision $40$ clears both\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+For comparison only, at the tame $C_3$ primes the global
+polynomial-discriminant valuation of $\delta_{36}$ is $840$, and twice its
+largest factor-polynomial discriminant valuation is $408$.  Precision $40$
+is below both values.  We therefore assign $\delta_{36}$ the formal role
+\emph{bounded nonresult and nondependency}.  It supplies neither a premise
+nor a cross-check, at the tame or wild primes.  Polynomial discriminants
+appear nowhere else in the proof: they are separation bounds, not
+substitutes for the field discriminants of $E$ or $K$.
+
+\subsection{Why two actions are needed}
+
+For $D\leq\WE$, its orbits on the $27$ lines have sizes equal to the local
+factor degrees of $g$.  Its orbits on the $36$ double-sixes similarly match
+the certified factor degrees of $\theta_{36}$.  Thus the wild targets are
+\begin{equation}
+\begin{array}{c|cc}
+&27\text{-line carrier}&36\text{-double-six carrier}\\ \hline
+p=3&(3,6,9,9)&(3,3,3,9,18)\\
+p=5&(1,1,5,5,5,10)&(1,5,10,10,10).
+\end{array}
+\label{eq:wild-carrier-targets}
+\end{equation}
+The line carrier alone leaves multiple subgroup embeddings.  The double-six
+carrier removes most of this ambiguity, but at $3$ three raw decomposition
+classes still have the same simultaneous orbit targets.  Normality,
+tame-quotient structure, branchwise differents, and the graded tame action
+are therefore genuine proof steps, not database decoration.
+
+The tame order-three case illustrates the same asymmetry.  Two $C_3$ classes
+have compatible line behavior, but on double-sixes they have types
+$3^{12}$ and $1^3 3^{11}$.  The certified $\theta_{36}$ type $3^{12}$
+selects \Tom{6}; see \cref{prop:tame-c3}.  The $27$-line action then supplies
+the $(V_6,V_{20})$ fixed spaces used for conductors.

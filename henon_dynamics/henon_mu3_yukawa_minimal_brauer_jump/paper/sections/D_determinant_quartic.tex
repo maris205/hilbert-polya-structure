@@ -1,0 +1,123 @@
+\section{Determinant specification of \texorpdfstring{\(Q_D\)}{Q-D}}
+\label{app:quartic-specification}
+
+This appendix fixes every convention needed to recover the quartic without
+printing its expanded degree-\(36\) coefficient table.
+
+\subsection{Gauge and monomial order}
+
+List all exponent vectors
+\[
+ (e_0,e_1,e_2,e_3),\qquad e_i\ge0,\qquad
+ e_0+e_1+e_2+e_3=4,
+\]
+in descending lexicographic order.  Delete
+\[
+ (4,0,0,0),\quad(3,1,0,0),\quad(3,0,1,0),\quad(3,0,0,1).
+\]
+The validity and uniqueness of this deletion are proved by the gauge block
+\cref{eq:gauge-block,eq:gauge-determinant}.  The remaining ordered monomials
+are
+\begin{align*}
+m_0&=u_0^2u_1^2,&
+m_1&=u_0^2u_1u_2,&
+m_2&=u_0^2u_1u_3,\\
+m_3&=u_0^2u_2^2,&
+m_4&=u_0^2u_2u_3,&
+m_5&=u_0^2u_3^2,\\
+m_6&=u_0u_1^3,&
+m_7&=u_0u_1^2u_2,&
+m_8&=u_0u_1^2u_3,\\
+m_9&=u_0u_1u_2^2,&
+m_{10}&=u_0u_1u_2u_3,&
+m_{11}&=u_0u_1u_3^2,\\
+m_{12}&=u_0u_2^3,&
+m_{13}&=u_0u_2^2u_3,&
+m_{14}&=u_0u_2u_3^2,\\
+m_{15}&=u_0u_3^3,&
+m_{16}&=u_1^4,&
+m_{17}&=u_1^3u_2,\\
+m_{18}&=u_1^3u_3,&
+m_{19}&=u_1^2u_2^2,&
+m_{20}&=u_1^2u_2u_3,\\
+m_{21}&=u_1^2u_3^2,&
+m_{22}&=u_1u_2^3,&
+m_{23}&=u_1u_2^2u_3,\\
+m_{24}&=u_1u_2u_3^2,&
+m_{25}&=u_1u_3^3,&
+m_{26}&=u_2^4,\\
+m_{27}&=u_2^3u_3,&
+m_{28}&=u_2^2u_3^2,&
+m_{29}&=u_2u_3^3,\\
+m_{30}&=u_3^4.&&&
+\end{align*}
+The normalization is \(q_0=1\); equivalently,
+\([u_0^2u_1^2]Q_D=1\).
+
+\subsection{The \texorpdfstring{\(60\times31\)}{60 by 31} matrix}
+
+For a carrier root \(d\), write the corresponding line as
+\[
+ (s,t,a(d)s+c(d)t,b(d)s+dt).
+\]
+For every \(m_j\), expand
+\begin{equation}
+ m_j(s,t,a(d)s+c(d)t,b(d)s+dt)
+ =\sum_{\tau=0}^4r_{\tau j}(d)s^{4-\tau}t^\tau.
+\label{eq:binary-restriction}
+\end{equation}
+Reduce \(r_{\tau j}(d)\) modulo the monic carrier \(\Acarrier(d)\):
+\[
+ r_{\tau j}(d)\equiv
+ \sum_{\rho=0}^{11}M_{12\tau+\rho,j}d^\rho
+ \pmod{\Acarrier(d)}.
+\]
+This fixes the row convention
+\begin{equation}
+ \operatorname{row}=12(\text{binary degree})+(\text{carrier degree}),
+\label{eq:row-convention}
+\end{equation}
+with both degrees increasing.  The matrix
+\[
+ M_D=(M_{rj})_{\substack{0\le r<60\\0\le j<31}}
+\]
+is therefore determined by the surface, chart shape, carrier, gauge, and
+orders above.
+
+\subsection{Pivot and Cramer's rule}
+
+Let
+\[
+ \cR=\{0,1,\ldots,10,12,\ldots,20,24,\ldots,29,36,37,38,48\}.
+\]
+Define
+\[
+ N_D=(M_{rj})_{\substack{r\in\cR\\1\le j\le30}},
+ \qquad
+ b_D=(M_{r0})_{r\in\cR}.
+\]
+The exact pivot certificate proves \(\det N_D\ne0\).  If
+\(N_D^{(j)}(b_D)\) denotes \(N_D\) with its \(j\)-th column replaced by
+\(b_D\), then
+\begin{equation}
+ q_j=-\frac{\det N_D^{(j)}(b_D)}{\det N_D},
+ \qquad 1\le j\le30.
+\label{eq:cramer-Q}
+\end{equation}
+\Cref{eq:QD-definition,eq:cramer-Q}, together with the monomial
+list, define \(Q_D\) exactly.
+
+The pivot determinant has nonzero norm \(3\) modulo \(7\).  The exact orbit
+replay checks all \(36\) conjugate determinant values and all
+\(36\cdot60=2160\) restriction equations.  Stable internal fingerprints are
+\begin{center}
+\begin{tabular}{@{}l@{}}
+pivot determinant coefficient digest:\\
+\code{1af5bfdc9b2f945094835fd81281305fb84dfc8208cb542874f2803420cd3a9e}\\[3pt]
+canonical solution digest:\\
+\code{eb9e803e16f5623647843dd7636fe3d511af60f8f31c453ea6826cd3e4d25573}
+\end{tabular}
+\end{center}
+The fingerprints audit the exact arrays.  They are not mathematical
+substitutes for gauge invertibility, the Hilbert--90 upper bound, pivot
+nonvanishing, or the complete restriction replay.

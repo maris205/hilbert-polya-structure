@@ -1,0 +1,361 @@
+# Adaptive batch plan: HCS-C57 through HCS-C61
+
+Status: **adaptive batch; C57 and C58 released and frozen; C59--C61 remain
+contingent and unselected**
+
+Date: 2026-08-16
+
+## Batch protocol
+
+This is a five-paper adaptive batch, not a list of five predetermined
+questions.  C57 and C58 are frozen.  C58 was selected from exact C56/C57
+field and double-six outputs after a fresh hostile comparison; its theorem,
+paper, and release provenance are now closed.  After each paper is released,
+the next paper may be selected only from that
+predecessor's actual positive
+theorem, certified obstruction, or explicitly unresolved branch.  A proposed
+successor must pass a fresh primary-source novelty audit, a theorem-size and
+non-salami review, and a falsifiable exact-computation gate before its title or
+claim is fixed.
+
+The current dependency graph is therefore
+
+\[
+ C56\longrightarrow C57\longrightarrow C58\longrightarrow
+ \underbrace{C59\longrightarrow C60\longrightarrow C61}
+ _{\text{contingent and presently unselected}}.
+\]
+
+No result, title, or method is reserved for C59--C61.  A negative C58 result
+may change the direction of C59 just as materially as a positive one.  Batch
+completion requires five independently theorem-sized papers, each with its
+own proof package, exact replay, source audit, manuscript, release tuple, and
+commit/provenance closure.
+
+## HCS-C57: minimal Brauer-jump field and explicit class
+
+### Why C57 is locked only now
+
+C56 proves that the released C55 Yukawa cubic surface \(Y/\mathbf Q\) has a
+connected degree-\(27\) line scheme, full line-field normal closure
+
+\[
+ \operatorname{Gal}(K/\mathbf Q)\cong W(E_6),
+ \qquad |W(E_6)|=51840,
+\]
+
+and geometric/arithmetic Picard ranks \(7/1\).  Those are the actual frozen
+C56 outputs.  They make it possible to ask an arithmetic base-change question
+that was not available before C56: what is the smallest extension on which
+the algebraic Brauer group jumps, and can its nonzero class be exhibited
+exactly?
+
+C57 studies this new field-and-class object.  It is not another computation
+of the 27-line field, a repackaging of the known \(W(E_6)\) conjugacy table, or
+a generic theorem about cubic surfaces.
+
+### Locked theorem target
+
+Let \(D=\{E,G\}\) be a double-six and let
+
+\[
+ U_D=\operatorname{Stab}_{W(E_6)}(D)\cong S_6\times C_2,
+ \qquad F_D=K^{U_D}.
+\]
+
+The target is one instance-specific theorem with the following inseparable
+parts.
+
+1. Prove the sharp base-change divisibility statement
+
+   \[
+   \bigl(\operatorname{Br}(Y_L)/\operatorname{Br}(L)\bigr)[2]\ne0
+   \quad\Longrightarrow\quad 36\mid[L:\mathbf Q],
+   \]
+
+   and prove that equality is attained at \(F_D\), where
+   \([F_D:\mathbf Q]=36\) and
+   \(\operatorname{Br}(Y_{F_D})/\operatorname{Br}(F_D)\cong\mathbf Z/2\).
+   Here the quotient is the algebraic/cohomological Brauer quotient; no
+   Brauer--Manin evaluation is asserted.
+
+2. Construct an exact irreducible degree-\(36\) double-six resolvent for
+   \(F_D\), certify that its splitting field is exactly the frozen field
+   \(K\), and construct the oriented quadratic extension.  If
+   \(U_D^+\cong S_6\) denotes the embedded index-two subgroup of \(U_D\)
+   preserving the two sixers separately, then this extension is
+
+   \[
+   F_D'=K^{U_D^+}=F_D(\beta_D),
+   \qquad \beta_D^2=\delta_D.
+   \]
+
+3. Define a canonical quartic \(Q_D\) over \(F_D\), by an exact normalized
+   one-dimensional kernel or equivalent determinant formula, whose divisor on
+   \(Y\) is the twelve lines \(E+G\).  With \(H=-K_Y\) and \(\ell=u_0\), prove
+
+   \[
+   \operatorname{div}_Y(Q_D/\ell^4)=E+G-4H
+       =\operatorname{Norm}_{F_D'/F_D}(E-2H),
+   \]
+
+   and prove that the cyclic algebra
+
+   \[
+   (F_D'/F_D,Q_D/\ell^4)
+   \quad\text{equivalently}\quad
+   (\delta_D,Q_D/\ell^4)
+   \]
+
+   is the unique nonzero algebraic Brauer class.
+
+The quartic may be represented exactly by a normalized Cramer-determinant
+recipe.  Printing an enormous expanded coefficient table is not part of the
+claim.
+
+### Exact controls and kill gates
+
+- G0 binds the released C56 certificate, payload, committed source objects,
+  cubic coefficients, complete 27-line scheme, and Picard lattice before any
+  C57 invariant is read.
+- G1 reconstructs the characteristic-zero incidence carrier: every line has
+  exactly ten neighbours, giving 135 edges, 72 sixers, and 36 double-sixes.
+- G2 independently enumerates \(W(E_6)\), the exact stabilizer
+  \(S_6\times C_2\), its faithful degree-36 action, and the integral cocycle
+  quotient \(H^1(U_D,\operatorname{Pic}\bar Y)=\mathbf Z/2\).  The global
+  degree lower bound must use the complete Swinnerton-Dyer/Elsenhans--Jahnel
+  two-primary classification, not an incomplete list of natural subgroups.
+- G3 constructs the monic degree-36 resolver with a proved coefficient bound,
+  proven-prime CRT reconstruction, full modular factor certificates,
+  irreducibility, and trivial action kernel, so its splitting field is \(K\).
+- G4 proves that the central involution exchanges the two sixers, sends
+  \(\beta_D\) to \(-\beta_D\), and gives the claimed oriented quadratic
+  extension.  It must not be confused with the global determinant quadratic
+  field of the cubic.
+- G5 verifies in characteristic zero that the selected degree-12 line carrier
+  and its degree-15 complement multiply to the frozen degree-27 eliminant.
+- G6 fixes the quartic gauge, proves a rank-30 restriction matrix and a
+  one-dimensional normalized kernel, and verifies all twelve line
+  restrictions.
+- G7 proves degree exhaustion for the quartic divisor, the exact norm-divisor
+  identity, unramifiedness, and the separate class-map computation identifying
+  the cyclic algebra with the nonzero cohomology generator.
+- Across G0--G7, release additionally requires a genuinely independent
+  checker, a strict schema, hostile scalar and subtree mutations,
+  deterministic replay, fail-closed rollback-atomic promotion, and scoped and
+  full manifests.  These are cross-cutting release conditions, not a
+  substitute for the mathematical G7 gate.
+- **KILL:** a failed C56 rebind, a non-exhaustive incidence carrier, a
+  reducible or wrongly split resolver, a nonfaithful degree-36 action, a
+  missing oriented quadratic binding, failure of the exact 12+15 factor
+  identity, or failure of the normalized quartic/divisor/class bridge stops
+  C57.  It may not be replaced by an abstract \(H^1\) table or by a large
+  unverified polynomial dump.
+
+### Novelty and scope firewall
+
+Classical and modern sources already provide the general double-six
+stabilizer, degree-36 resolvent method, and construction of order-two Brauer
+classes.  Tables of the 25 element conjugacy classes of \(W(E_6)\), the
+vanishing of the base-field algebraic Brauer group under the full action, and
+stable nonrationality of minimal cubic surfaces are also prior results.  C57
+does not claim any of those as new.
+
+The bounded novelty claim is the exact, source-locked realization for this
+frozen Yukawa surface: the sharp first jump field, its certified normal
+closure and orientation, and a canonical explicit generator.  C57 makes no
+claim about rational points, a Brauer--Manin obstruction or local evaluation,
+surface rationality, the complete local Artin package, bad Euler factors, root
+numbers, automorphy, a motive, a Calabi--Yau realization, RH, or a
+Hilbert--Polya operator.  The Route-A tuple remains exploratory and is not
+strengthened merely by this arithmetic classification.
+
+## HCS-C58: filtered inertia and conductors of the 27-line field
+
+### Machine-prefreeze handoff
+
+C56 supplies the degree-27 field \(E\), its \(W(E_6)\)-normal closure \(K\),
+and the faithful line action. C57 supplies both frozen degree-36 polynomial
+identities and the double-six action. C58 uses them asymmetrically: theta alone
+is `KRASNER_CERTIFIED_AUTHORITY`; delta is
+`BOUNDED_NON_RESULT_NONDEPENDENCY`, never a theorem dependency or
+corroborating source.
+
+All eight G0--G7 gates passed the official refresh, mandatory nonmutating live
+replay, and independent `POSTREFRESH_PASS` audit. The tuple binds certificate
+`456a4813...`, payload `fba2df...`, schema `ccbc20eb...`, check
+`64454700...`, evidence `e374d3...`/`0e0b3f...`, and manifest
+`a1874229...`; counts are code/results/live/scoped `14/8/22/21`, gates 8,
+leaves/rebounds `1149/1199`, and tests 45. The independent formal-document
+review also passes and its external aggregate is frozen in Route.
+
+The official anonymous paper is now a deterministic 28-page build with an
+exact 17-source lock `b0842e68...`, PDF `63b84e44...`, stabilized log
+`7f868cce...`, extracted text `98fcf53d...`, and 19-file live paper inventory
+with zero auxiliaries. Two independent read-only audits return
+`PAPER_HOSTILE_PASS`. P58 binds the full I58 implementation commit,
+self-excluding 56-entry full-project manifest, and byte-identical final Route
+archive. C58 is `RELEASE_FROZEN` and promotion is authorized;
+`provenance_commit` remains null under the external-only policy. The protected
+22-file machine layer remains `PREFREEZE_CODE_RESULTS_PASS` /
+`POSTREFRESH_PASS`, and its 21-entry scoped manifest remains the exact machine
+identity. C59--C61 remain contingent and unselected.
+
+### Exact theorem
+
+Let
+
+\[
+q=14932047182473291995860108491583652133938007263719,
+\quad A=181\cdot997\cdot2346241,
+\quad B=283\cdot1801\cdot q,
+\]
+
+and \(\mathbf Q[27]=\mathbf1\oplus V_6\oplus V_{20}\). The surface
+divided-discriminant bad-prime envelope is
+\(\{2,3,5,181,283,997,1801,2346241,q\}\), whereas the exact ramified
+support of both \(E\) and \(K\) is the eight-prime set obtained by deleting
+2. On the displayed envelope,
+
+\[
+v_p(\operatorname{Disc}E)=(0,46,36,18,6,18,6,18,6).
+\]
+
+The core-free faithful line action converts the zero p=2 permutation
+conductor into unramifiedness in \(K\).
+
+At p=3 the exact rows are
+\((3,1,3),(6,1,7),(9,1,18)^2\). Theta is stable and multiplies back at
+`[900,950,1000]`, clearing polynomial-discriminant bounds 886/538 and
+certifying degrees `(3,3,3,9,18)`. The complete Table-of-Marks hits are
+ToM 140/order 18, 142/order 18, and 206/order 36; ToM 206 is D-only. The
+valid `(D,I,|D/I|)` triples are
+
+\[
+(140,140,1),(142,142,1),(206,140,2),(206,142,2).
+\]
+
+Across them, exact `Fraction` arithmetic exhausts deep ToM 6 with multiplicity
+two, ToM 7 once, and ToM 8 once. With base `(2,5,8,8)`, \(C_3^2\)
+contribution `(1,2,4,4)`, and deep contributions
+`(1/3,2/3,1,1)`, `(0,0,1,1)`, `(1/3,2/3,1,1)`, the formal solutions are
+`(7,-18)`, `(1,6)`, `(7,-18)`. Thus only deep ToM 7 survives. Serre IV §2
+Proposition 9 at final odd grade 7 requires inversion and kills central ToM
+142, leaving
+
+\[
+I_0=(C_3^2):C_2,\ I_1=C_3^2,\ I_2=\cdots=I_7=C_3,\ I_8=1,
+\]
+
+and final pairs `(D,I)=(140,140),(206,140)`. Hence
+\(|D_3|\in\{18,36\}\) is an explicit nondependency. The Swan/Artin tuples
+are `(5,18)`/`(11,35)`.
+
+At p=5 the rows are \((1,1,0)^2,(5,1,7)^3,(10,1,15)\). Theta at
+`[900,950,1000]` clears 746/246 and certifies degrees `(1,5,10,10,10)`.
+The complete hits 147/247/295 have orders 20/60/120; Sylow-5 normality leaves
+only `(D,I,|D/I|)=(147,147,1)`. The filtration is
+\(20,5,5,5,1\), with Swan/Artin `(3,12)`/`(7,29)`.
+
+At each of \(181,997,2346241\), the rows are
+\((3,1,2),(3,2,2),(3,6,2)\). Theta stability at `[20,30,40]` clears
+24/24 and selects tame C3 subgroup ToM 6 with Artin `(6,12)`. Delta's tame
+bounds 840/408 are not cleared at 40 and delta is unused.
+
+At each of \(283,1801,q\), exact four-chart elimination gives one reduced
+ODP in chart 0 and unit ideals elsewhere. Unit Hessian, unique critical Hensel
+lift mod \(p^2\), critical-value congruence, valuation-one smoothing, regular
+total space, and odd-characteristic Picard--Lefschetz select root-reflection
+subgroup ToM 2. Its line/double-six types are
+\(1^{15}2^6\)/\(1^{16}2^{10}\), Artin `(1,5)`, Swan `(0,0)`; no local
+\(e/f\) row is claimed.
+
+The global identities are
+
+\[
+\mathfrak N(V_6)=3^{11}5^7A^6B,\qquad
+\mathfrak N(V_{20})=3^{35}5^{29}A^{12}B^5,
+\]
+
+\[
+\operatorname{Disc}(E)=3^{46}5^{36}A^{18}B^6,
+\quad
+\operatorname{Disc}(K)=3^{106560}5^{80352}A^{34560}B^{25920},
+\]
+
+with \(\mathfrak N(V_6)\mathfrak N(V_{20})=\operatorname{Disc}(E)\).
+Signature `(3,12)` and `polsturm(theta36)=4` select subgroup ToM 5; the
+separate `CharacterTable("U4(2).2")` element-class index is 17, of size 540
+and centralizer 96. Under CTblLib 1.3.1 the plus/minus dimensions are `(3,3)`
+on \(V_6\) and `(11,9)` on \(V_{20}\).
+
+### Exact gates and kill controls
+
+- G0 binds frozen C55/C56/C57 with exact full inventories 47/46/64.
+- G1 separates the surface envelope from eight-prime field support and proves
+  the p=2 core-free bridge.
+- G2 certifies all maximal-order rows and theta-only local bounds.
+- G3 exhausts all 350 `U4(2).2` subgroup classes and every D/I pair.
+- G4 certifies the ToM `6x2,7,8` `Fraction` ledger, Serre inversion, p=5
+  chain, and complete reflection bridge.
+- G5 derives every fixed space, Swan/Artin tuple, and different identity.
+- G6 closes the conductors/discriminants and separates archimedean subgroup
+  ToM 5 from element-class index 17 under CTblLib 1.3.1.
+- G7 enforces strict parsing, 1199 rebounds, atomic replay/manifest discipline,
+  and exact scope leaf `NO_BAD_EULER_OR_ROOT_NUMBER`.
+- **KILL:** delta promotion/corroboration; missing D/I/profile row; ToM 206 as
+  inertia; deep ToM 6/8 selection; incomplete reflection lift; arch-index or
+  CTblLib drift; or any failed local/global identity stops C58.
+
+### Hostile comparison and publication firewall
+
+The ordered-Steiner degree-240 lane remains deferred; the quaternion,
+tame-only, and 27-carrier-only lanes remain killed for the reasons already
+recorded in the C58 formal package.
+
+`NO_BAD_EULER_OR_ROOT_NUMBER`: C58 proves no decomposition Frobenius, bad
+Euler polynomial/factor, local epsilon factor, local/global root number, Artin
+holomorphy, automorphy, analytic continuation, or functional equation. Even
+resolving \(D_3\) later would not authorize them. C58 also makes no claim
+about rational points, the Hasse principle, weak approximation, Brauer--Manin
+obstruction, a motive, RH, or a Hilbert--Polya operator.
+
+## HCS-C59 through HCS-C61: contingent slots
+
+C59, C60, and C61 have no locked titles, objects, theorem statements, or
+experiment programs.  Each slot is opened only after the immediately
+preceding paper is frozen and its actual theorem/obstruction has been audited.
+At every transition the batch plan must record:
+
+- the exact predecessor result used as input;
+- why the new object is mathematically distinct from that predecessor;
+- the alternatives rejected by primary-source and duplication checks;
+- one theorem-sized positive or negative target;
+- exact GO/KILL controls that can terminate the branch; and
+- the unchanged Route-A and Hilbert--Polya firewalls.
+
+Failure to find a non-salami, source-distinct theorem at a transition is a
+batch blocker; it is not permission to split the predecessor's certificate
+or manuscript into another paper.
+
+## Batch-wide publication vetoes
+
+The following are supporting computations or corollaries, not standalone
+papers in this batch:
+
+- reproducing the known 25-class \(W(E_6)\) trace or \(H^1\) table;
+- stating only that the base-field Brauer group vanishes;
+- stating only that Picard-rank-one cubic surfaces are not stably rational;
+- printing a degree-36 resolver without the fixed-field, normal-closure, and
+  explicit-class bridges;
+- inferring rational points, rationality, or Brauer--Manin failure from the
+  absence of a rational line;
+- calling a finite list of good-prime point counts a Hasse--Weil or Artin
+  package;
+- promoting bounded numerical reconstruction, a timed-out exact calculation,
+  or a single implementation's self-reported Boolean to theorem evidence; or
+- claiming automorphy, a functional equation, RH, or a Hilbert--Polya operator
+  from the arithmetic of the 27 lines.
+
+Every realized successor must add a fresh source ledger and hostile novelty
+audit.  No absolute priority claim is authorized by this planning document.

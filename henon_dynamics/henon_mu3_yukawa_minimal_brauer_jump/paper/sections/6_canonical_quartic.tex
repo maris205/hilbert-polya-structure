@@ -1,0 +1,210 @@
+\section{The canonical determinant quartic}
+\label{sec:canonical-quartic}
+
+We next turn the twelve-line carrier into one canonical quartic.  Two rank
+bounds have different origins.  Geometry produces a section and hence an
+upper bound on the restriction rank; exact arithmetic supplies a nonzero
+pivot and hence the lower bound.  Keeping both halves visible prevents a
+finite-field minor from being mistaken for an existence proof.
+
+\subsection{A proved quotient gauge}
+
+The space \(H^0(\PP^3_{\FD},\mathcal O(4))\) has dimension \(35\).  Since
+\(F\) is a nonzero cubic, multiplication by \(F\) embeds the four-dimensional
+space of linear forms:
+\begin{equation}
+ F\cdot H^0(\PP^3_{\FD},\mathcal O(1))
+ \subset H^0(\PP^3_{\FD},\mathcal O(4)).
+\label{eq:F-linear-subspace}
+\end{equation}
+The quotient therefore has dimension \(31\).
+
+Put
+\[
+ c=[u_0^3]F=75081586157.
+\]
+Using the source basis \((Fu_0,Fu_1,Fu_2,Fu_3)\) and projecting to the
+coefficients of
+\[
+ u_0^4,\quad u_0^3u_1,\quad u_0^3u_2,\quad u_0^3u_3,
+\]
+gives the triangular block
+\begin{equation}
+ B_F=
+ \begin{pmatrix}
+ 75081586157&0&0&0\\
+ -28576620789&75081586157&0&0\\
+ -122000922135&0&75081586157&0\\
+ -5364921951&0&0&75081586157
+ \end{pmatrix}.
+\label{eq:gauge-block}
+\end{equation}
+Its determinant is
+\begin{equation}
+ \det B_F=c^4
+ =31778526453059635681033276764499400992765201\ne0.
+\label{eq:gauge-determinant}
+\end{equation}
+Consequently the four coefficient functionals restrict isomorphically to
+the subspace in \cref{eq:F-linear-subspace}.  Every class modulo \(F\) times
+a linear form has a unique representative in which those four coefficients
+vanish.  This proves the gauge; deleting four monomials is not a convention
+made after inspecting the answer.
+
+Let
+\[
+ \cM=(m_0,m_1,\ldots,m_{30})
+\]
+be the remaining degree-four monomials in the locked descending
+lexicographic order, with
+\begin{equation}
+ m_0=u_0^2u_1^2.
+\label{eq:normalization-monomial}
+\end{equation}
+The complete order appears in \cref{app:quartic-specification}.
+
+\subsection{Restriction matrix}
+
+For each of the twelve carrier lines, restriction of
+\[
+ Q=\sum_{j=0}^{30}q_jm_j
+\]
+is a binary quartic and supplies five scalar equations.  We use the monic
+carrier in the \(d\)-variable with the scaling
+\(\alpha_i=c_gd_i\) and subtop normalization of
+\cref{eq:alpha-scaling,eq:carrier-subtop}.  Reducing the five coefficients
+against that degree-\(12\) carrier gives the exact matrix
+\begin{equation}
+ M_D\in\operatorname{Mat}_{60\times31}(\FD),\qquad M_Dq=0.
+\label{eq:restriction-matrix}
+\end{equation}
+Rows are ordered first by binary degree \(0,\ldots,4\) and then by carrier
+degree \(0,\ldots,11\).  The column order is \(\cM\).
+
+\begin{proposition}[Geometric upper bound]
+\label{prop:rank-upper}
+The matrix \(M_D\) satisfies \(\rank_{\FD}M_D\le30\).
+\end{proposition}
+
+\begin{proof}
+By the marking fixed in \cref{eq:marked-double-six}, the divisor classes of
+the two sixers are
+\[
+ [\cE]=e_\Sigma,\qquad [\cG]=12h-5e_\Sigma.
+\]
+Hence
+\begin{equation}
+ \cE+\cG\sim12h-4e_\Sigma=4H_Y.
+\label{eq:double-six-class}
+\end{equation}
+This geometric equivalence does not by itself provide an \(\FD\)-rational
+section, so we descend it explicitly.
+
+Put \(k=\FD\), and choose a \(k\)-rational hyperplane section
+\(H_0=\divv_Y(\ell)\).  Both the unordered divisor \(\cE+\cG\) and \(4H_0\)
+are \(k\)-rational.  Over \(\bar k\), choose
+\(r\in\bar k(Y)^\times\) such that
+\[
+ \divv(r)=\cE+\cG-4H_0.
+\]
+For \(\sigma\in G_k\), the rational function
+\(c_\sigma=\sigma(r)/r\) has zero divisor.  Since \(Y_{\bar k}\) is
+projective and integral, \(c_\sigma\in\bar k^\times\).  These scalars form a
+multiplicative cocycle.  Hilbert theorem 90 gives \(a\in\bar k^\times\) with
+\[
+ c_\sigma=\frac{\sigma(a)}{a}.
+\]
+It follows that \(r_0=r/a\) lies in \(k(Y)^\times\).  The section
+\[
+ s_D=r_0\ell^4\in H^0(Y_k,\mathcal O_Y(4))
+\]
+is defined over \(k\) and vanishes along \(\cE+\cG\).
+
+The hypersurface restriction sequence
+\begin{equation}
+ 0\longrightarrow\mathcal O_{\PP^3_k}(1)
+ \xrightarrow{\;\cdot F\;}\mathcal O_{\PP^3_k}(4)
+ \longrightarrow\mathcal O_{Y_k}(4)\longrightarrow0
+\label{eq:restriction-sequence}
+\end{equation}
+is surjective on global sections because
+\(H^1(\PP^3_k,\mathcal O(1))=0\).  Thus \(s_D\) lifts to a nonzero ambient
+quartic class over \(k\) that restricts to zero on the twelve lines.  After
+applying the unique gauge, this class is a nonzero vector in \(\ker M_D\).
+Therefore \(\rank M_D\le30\).
+\end{proof}
+
+\begin{proposition}[Exact lower bound]
+\label{prop:rank-lower}
+The matrix \(M_D\) has rank at least \(30\).
+\end{proposition}
+
+\begin{proof}
+Delete the \(m_0\)-column and select the zero-based row set
+\begin{equation}
+ \cR=\{0,\ldots,10,12,\ldots,20,24,\ldots,29,36,37,38,48\}.
+\label{eq:pivot-rows}
+\end{equation}
+The resulting matrix \(N_D\) is \(30\times30\).  Exact arithmetic at the
+denominator-good prime \(7\) computes the norm of its determinant as
+\[
+ \Norm_{\FD/\Q}(\det N_D)\equiv3\pmod7.
+\]
+Thus \(\det N_D\ne0\) in \(\FD\).  The replay verifies the same nonvanishing
+for all thirty-six conjugate configurations, and so
+\(\rank M_D\ge30\).
+\end{proof}
+
+\begin{theorem}[Determinant-defined quartic]
+\label{thm:canonical-quartic}
+For every double-six \(D\),
+\[
+ \rank_{\FD}M_D=30,\qquad \dim_{\FD}\ker M_D=1.
+\]
+There is a unique kernel vector
+\[
+ q_D=(1,q_1,\ldots,q_{30}),
+\]
+and hence a unique normalized gauge representative
+\begin{equation}
+ Q_D=\sum_{j=0}^{30}q_jm_j
+\label{eq:QD-definition}
+\end{equation}
+whose restrictions to all twelve lines vanish.  Every \(q_j\) is defined by
+Cramer's rule from the locked matrix \(N_D\).
+\end{theorem}
+
+\begin{proof}
+\Cref{prop:rank-upper,prop:rank-lower} give rank \(30\), hence a
+one-dimensional kernel.  If a kernel vector had \(q_0=0\), its entries in
+columns \(1,\ldots,30\) would lie in the kernel of the invertible selected
+minor \(N_D\), so the vector would be zero.  Thus \(q_0\ne0\) on the kernel
+line and can be uniquely normalized to one.  Solving the selected equations
+by Cramer's rule gives \cref{eq:QD-definition}; the independent replay then
+checks all \(60\) equations, not only the pivot rows, at all \(36\)
+conjugates.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}lc@{}}
+\toprule
+quartic invariant & exact value\\
+\midrule
+ambient monomials & \(35\)\\
+subspace \(F\cdot H^0(\mathcal O(1))\) & \(4\)\\
+gauge columns & \(31\)\\
+restriction equations & \(12\cdot5=60\)\\
+locked pivot size & \(30\times30\)\\
+restriction rank / kernel dimension & \(30/1\)\\
+normalization & \([u_0^2u_1^2]Q_D=1\)\\
+\bottomrule
+\end{tabular}
+\caption{Dimension, gauge, rank, and normalization data for \(Q_D\).}
+\label{tab:quartic-invariants}
+\end{table}
+
+At this stage we know that \(Q_D\) is a nonzero quartic class and vanishes on
+the twelve carrier lines.  We have not yet promoted those restrictions to a
+divisor equality; that is a separate geometric argument in
+\cref{sec:quaternion}.

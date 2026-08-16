@@ -1602,3 +1602,148 @@ reflection-packet determinant or trace with intrinsic arithmetic semantics.
 - [P67 paper](henon_unique_gauge_invariant_orbit_sampler/paper/paper.pdf)
 - [P67 proof package](henon_unique_gauge_invariant_orbit_sampler/PROOF_PACKAGE.md)
 - [P67 certificate](henon_unique_gauge_invariant_orbit_sampler/results/c67_certificate.json)
+
+## HCS-P68 canonical reflection-packet Euler product
+
+P68 crosses the first determinant-interface gate without overpromoting it.
+P67's unique cyclic packet mean defines
+
+\[
+\mathcal Z_f(z,s)=
+\prod_{\substack{n\ge1\\n\ {\rm odd}}}
+\left(1-z^n e^{-sn b_n(f)}\right)^{-D_n},
+\]
+
+and its logarithmic derivative has the exact primitive/repetition ledger
+
+\[
+[z^m]\,z\partial_z\log\mathcal Z_f
+=\sum_{\substack{n\mid m\\n\ {\rm odd}}}
+nD_n e^{-sm b_n(f)}.
+\]
+
+At \(s=0\) the radius is \(2^{-1/2}\), while
+
+\[
+\log\mathcal Z_0(z)
+=\frac{1}{\sqrt2(1-\sqrt2z)}+G(z)
+\]
+
+near the positive boundary, with \(G\) analytic. Thus the product has an
+exponential essential singularity, not a meromorphic pole. It is a canonical
+packet Euler germ, but it is neither the full infinite-dihedral Lind zeta nor
+an orbit-resolved Fredholm determinant. Route A earns an exact A2 prefix and
+partial A3 structure; Route B remains unauthorized. The next gate is the
+within-period cumulant information erased by aggregate averaging.
+
+- [P68 overview](henon_canonical_reflection_packet_euler_product/README.md)
+- [P68 paper](henon_canonical_reflection_packet_euler_product/paper/paper.pdf)
+- [P68 proof package](henon_canonical_reflection_packet_euler_product/PROOF_PACKAGE.md)
+- [P68 certificate](henon_canonical_reflection_packet_euler_product/results/c68_certificate.json)
+
+## HCS-P69 orbit-resolved reflection cumulant pressure
+
+P69 computes exactly what P68's periodwise mean suppresses. For the minimal
+cross-axis observable \(\chi=\mathbf1\{s_{-1}=s_1\}\), odd decimation turns
+the orbit sum into nearest-neighbor equality energy on a reflected binary
+chain. Thus
+
+\[
+F_{2m+1}(q)=2q(1+q^2)^m,\qquad
+E_n(q)=\sum_{k\mid n}\mu(k)F_{n/k}(q^k),
+\]
+
+where \(E_n\) is the primitive weighted polynomial. The orbit-resolved
+pressure is
+
+\[
+P_{\rm orb}(s)=\frac12\log(1+e^{-2s}),
+\]
+
+and its exact gap from P68's affine mean-field pressure is
+\(\frac12\log\cosh s\), strictly positive for every \(s\ne0\). This is a
+global cumulant theorem, not only a variance diagnostic. Route A remains
+exploratory and Route B is not authorized. P70 will feed the exact primitive
+polynomials into the full orbit-resolved Euler product.
+
+- [P69 overview](henon_orbit_resolved_reflection_cumulant_pressure/README.md)
+- [P69 paper](henon_orbit_resolved_reflection_cumulant_pressure/paper/paper.pdf)
+- [P69 proof package](henon_orbit_resolved_reflection_cumulant_pressure/PROOF_PACKAGE.md)
+- [P69 certificate](henon_orbit_resolved_reflection_cumulant_pressure/results/c69_certificate.json)
+
+## HCS-P70 orbit-resolved reflection Euler boundary
+
+P70 restores one Euler factor for every primitive marked reflection word:
+
+\[
+\mathcal Z_{\rm orb}(z,q)=
+\prod_{n\ {\rm odd}}\prod_{\omega\in A_n}
+(1-z^nq^{S_n\chi(\omega)})^{-1}.
+\]
+
+Its logarithmic derivative has exact coefficient
+\(\sum_{n\mid m}nE_n(q^{m/n})\). For every \(q>0\), the radius is
+
+\[
+R(q)=(1+q^2)^{-1/2},
+\]
+
+and the logarithm has one explicit simple-pole principal part, so the product
+has an exponential essential singularity. The mean-field radius
+\((2q)^{-1/2}\) is strictly too large unless \(q=1\). Route A now has a full
+orbit-resolved Euler germ and partial analytic structure, but no arithmetic
+trace; Route B is not authorized. P71 will test an explicit relative
+counterterm against source-native flip/Lind zeta structure.
+
+- [P70 overview](henon_orbit_resolved_reflection_euler_boundary/README.md)
+- [P70 paper](henon_orbit_resolved_reflection_euler_boundary/paper/paper.pdf)
+- [P70 proof package](henon_orbit_resolved_reflection_euler_boundary/PROOF_PACKAGE.md)
+- [P70 certificate](henon_orbit_resolved_reflection_euler_boundary/results/c70_certificate.json)
+
+## HCS-P71 relative Lind counterterm
+
+P71 compares P70 with the primary-source full two-shift reverse Lind zeta.
+In the boundary coordinate \(u=1-\sqrt2t\), the full Lind logarithm has
+exponential coefficient \(1/\sqrt2+3/4\) and branch coefficient \(-1/2\);
+the odd packet accounts for only \(1/\sqrt2\). Consequently
+
+\[
+u^{1/2}e^{-3/(4u)}
+\frac{\zeta_{\rm flip}(t)}{\mathcal Z_{\rm orb}(t,1)}
+\]
+
+extends holomorphically and nonvanishingly across \(u=0\) as a local branch
+germ. Among counterterms \(u^\beta e^{-c/u}\), this forces uniquely
+\((c,\beta)=(3/4,1/2)\). Thus a source-native local bridge exists, but odd
+packet data alone is incomplete. Global continuation, zeros, and a transfer
+determinant remain open; Route B is not authorized.
+
+- [P71 overview](henon_relative_lind_counterterm/README.md)
+- [P71 paper](henon_relative_lind_counterterm/paper/paper.pdf)
+- [P71 proof package](henon_relative_lind_counterterm/PROOF_PACKAGE.md)
+- [P71 certificate](henon_relative_lind_counterterm/results/c71_certificate.json)
+
+## HCS-P72 relative Lind essential-singularity ladder
+
+P72 globalizes the exact logarithmic ledger far enough to test P71's local
+counterterm. Primitive and repetition indices regroup into
+
+\[
+\log\mathcal Z_{\rm orb}(t,1)
+=\sum_{m\ge1}c_m\frac{2t^m}{1-2t^{2m}},\qquad
+c_m=\frac1m\prod_{\substack{p\mid m\\p\ {\rm odd}}}(1-p).
+\]
+
+No channel vanishes. The P71 counterterm removes the \(m=1\) singularity,
+but for every \(m\ge2\) the relative continuation has an exponential
+essential singularity at \(\rho_m=2^{-1/(2m)}\), and these points increase
+to one. Thus the local bridge cannot be a meromorphic/Fredholm determinant
+on the entire unit disk. A punctured-domain infinite-rank renormalization is
+the surviving analytic direction. Arithmetic advance is NO and Route B is
+not authorized.
+
+- [P72 overview](henon_relative_lind_essential_ladder/README.md)
+- [P72 paper](henon_relative_lind_essential_ladder/paper/paper.pdf)
+- [P72 proof package](henon_relative_lind_essential_ladder/PROOF_PACKAGE.md)
+- [P72 certificate](henon_relative_lind_essential_ladder/results/c72_certificate.json)
+- [P68--P72 batch review](BATCH_REVIEW_P68_P72.md)

@@ -1,0 +1,168 @@
+\section{Divisor exhaustion and the explicit Brauer generator}
+\label{sec:quaternion}
+
+The linear system in \cref{sec:canonical-quartic} only proves vanishing on
+twelve lines.  We first show that those lines exhaust the quartic divisor.
+We then use the oriented quadratic field to express the divisor of a rational
+function as a norm.  Finally, and separately, we compare the associated
+Picard cocycle with the unique nonzero cohomology class.
+
+\subsection{The exact divisor}
+
+\begin{proposition}[Degree exhaustion]
+\label{prop:divisor-exhaustion}
+The normalized determinant quartic satisfies
+\begin{equation}
+ \divv_{Y_{\FD}}(Q_D)=\cE+\cG.
+\label{eq:QD-divisor}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The exact carrier and restriction replay supplies twelve distinct lines and
+shows that \(Q_D\) vanishes identically on each.  Thus every line in
+\(\cE+\cG\) is a prime component of \(\divv(Q_D)\) with multiplicity at
+least one.  The quartic is not \(F\) times a linear form: its gauge class is
+the normalized nonzero vector in \(\ker M_D\).  It therefore defines a
+nonzero effective divisor on \(Y_{\FD}\) of class \(4H_Y\).
+
+Intersecting with a hyperplane gives
+\begin{equation}
+ (4H_Y)\cdot H_Y=4H_Y^2=4\deg(Y)=12.
+\label{eq:quartic-degree}
+\end{equation}
+Each of the twelve distinct carrier lines has hyperplane degree one, so the
+known components already contribute the full degree \(12\).  Every nonzero
+effective residual divisor has positive hyperplane degree, and any
+multiplicity greater than one would also increase the degree.  Neither is
+possible.  Hence \cref{eq:QD-divisor} holds exactly.
+\end{proof}
+
+This argument is the geometric boundary between the last two machine gates:
+the \(60\times31\) rank calculation constructs \(Q_D\), while distinctness
+and \cref{eq:quartic-degree} identify its divisor.  Restriction vanishing
+alone would not rule out a residual curve.
+
+\subsection{The norm divisor and unramifiedness}
+
+Let
+\begin{equation}
+ \ell=u_0,\qquad \cL_0=\divv_Y(\ell),\qquad
+ f_D=\frac{Q_D}{\ell^4}.
+\label{eq:fD-def}
+\end{equation}
+The exact line replay verifies that no carrier line is contained in the
+hyperplane \(\ell=0\).  Over the oriented field \(\FDp\), define
+\begin{equation}
+ \cD=\cE-2\cL_0.
+\label{eq:oriented-divisor}
+\end{equation}
+The nontrivial automorphism \(\iota\) of \(\FDp/\FD\) exchanges \(\cE\) and
+\(\cG\), and fixes \(\cL_0\).  Therefore
+\begin{align}
+ \Norm_{\FDp/\FD}(\cD)
+ &=\cD+\iota(\cD)\nonumber\\
+ &=\cE+\cG-4\cL_0\nonumber\\
+ &=\divv(f_D).
+\label{eq:norm-divisor}
+\end{align}
+The cyclic-algebra divisor criterion now shows that
+\begin{equation}
+ \mathcal A_D=(\FDp/\FD,f_D)
+             =(\delta_D,Q_D/u_0^4)
+\label{eq:quaternion}
+\end{equation}
+has zero residue at every codimension-one point of \(Y_{\FD}\), and hence
+extends to an unramified class in \(\Br(Y_{\FD})\).  This is the same general
+double-six mechanism that appears in the prior class construction
+\cite{ElsenhansJahnel2010Brauer}; the input specific to this surface is the
+exact divisor \cref{eq:QD-divisor}.
+
+\subsection{Unramified does not yet mean nonzero}
+
+We identify the class of \cref{eq:quaternion} in
+\(H^1(U_1,\Lambda)\).  In the basis of \cref{eq:picard-basis}, put
+\begin{equation}
+ d_0=e_\Sigma-2h.
+\label{eq:d0-def}
+\end{equation}
+The first sixer has class \(e_\Sigma\), while its opposite has class
+\(12h-5e_\Sigma\).  Since \([\cL_0]=H_Y\),
+\begin{equation}
+ [\cD]=e_\Sigma-2H_Y
+       =3e_\Sigma-6h
+       =3d_0.
+\label{eq:D-class}
+\end{equation}
+
+Write \(U_1=U_1^+\times\langle\iota\rangle\), with \(\iota\) the central
+involution exchanging the sixers.  The exact Picard action gives
+\begin{equation}
+ \iota(h)=5h-2e_\Sigma,\qquad
+ \iota(e_\Sigma)=12h-5e_\Sigma,\qquad
+ \iota(d_0)=-d_0.
+\label{eq:iota-action}
+\end{equation}
+Moreover,
+\begin{equation}
+ \Lambda^{U_1^+}=\Z h\oplus\Z e_\Sigma.
+\label{eq:S6-invariants}
+\end{equation}
+For \(x=ah+be_\Sigma\), direct substitution into
+\cref{eq:iota-action} yields
+\[
+ (1+\iota)x=(6a+12b)h-(2a+4b)e_\Sigma,
+\]
+and
+\[
+ (\iota-1)x=4(a+3b)h-2(a+3b)e_\Sigma.
+\]
+Consequently
+\begin{equation}
+ \ker(1+\iota\mid\Lambda^{S_6})=\Z d_0,\qquad
+ (\iota-1)\Lambda^{S_6}=2\Z d_0.
+\label{eq:coboundary-lattice}
+\end{equation}
+
+With the norm-divisor convention in \cref{eq:norm-divisor}, the
+Hochschild--Serre cocycle of \(\mathcal A_D\) is zero on \(U_1^+=S_6\) and
+takes \(\iota\) to
+\[
+ [\cD]=3d_0.
+\]
+If this cocycle were a \(U_1\)-coboundary, its vanishing on \(S_6\) would
+force a cobounding class into \(\Lambda^{S_6}\).  Its value at \(\iota\)
+would then lie in \((\iota-1)\Lambda^{S_6}=2\Z d_0\), contrary to
+\[
+ 3d_0\notin2\Z d_0.
+\]
+Thus the class is nonzero.
+
+\begin{theorem}[Explicit generator]
+\label{thm:explicit-generator}
+The quaternion
+\[
+ \mathcal A_D=(\delta_D,Q_D/u_0^4)
+\]
+is unramified on \(Y_{\FD}\) and represents the unique nonzero element of
+\[
+ \Br(Y_{\FD})/\operatorname{im}\Br(\FD)\cong\Z/2.
+\]
+\end{theorem}
+
+\begin{proof}
+Unramifiedness follows from \cref{eq:norm-divisor}.  The calculation
+\cref{eq:D-class,eq:coboundary-lattice} proves that its Picard cocycle is
+nonzero.  By \cref{eq:exact-H1,eq:brauer-picard-bridge}, this cocycle is the
+unique nonzero cohomology class and therefore the generator of the displayed
+Brauer quotient.
+\end{proof}
+
+\begin{remark}[Global boundary]
+The proof separates three logically different assertions: the norm divisor
+proves unramifiedness, the integral lattice proves nontriviality, and neither
+computes a local evaluation.  In particular,
+\cref{thm:explicit-generator} does not assert that \(Y(\FD)\) is empty or
+nonempty, and it does not establish a Brauer--Manin obstruction, a
+Hasse-principle failure, or a failure of weak approximation.
+\end{remark}
