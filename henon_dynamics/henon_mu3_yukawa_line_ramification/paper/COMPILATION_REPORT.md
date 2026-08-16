@@ -1,9 +1,10 @@
 # HCS-C58 compilation report
 
-Status: **PASS; official final6 paper build; `PAPER_HOSTILE_PASS`; machine
-layer `PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS`; formal layer
-`FORMAL_DOCS_PASS`; project `NOT_RELEASED`; I58 implementation commit
-pending.**
+Status: **PASS; official final6 paper build; `PAPER_HOSTILE_PASS`; project
+`RELEASE_FROZEN` at implementation commit
+`55f2b9471475a8becdd97478b248b327a786bce5`; protected machine layer remains
+`PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS` and the formal layer remains
+`FORMAL_DOCS_PASS`.**
 
 ## Build
 
@@ -147,13 +148,24 @@ source bytes. No paper-source byte changed during the official build.
 - Formal-document audit: `FORMAL_DOCS_PASS`.
 - Frozen 13-root-Markdown formal aggregate:
   `7d464a25811362027dfc79d112e9e875306c6d8fc4c824648e1d2bed161d85ef`.
-- Neither the 22 protected machine files nor the 13 frozen formal Markdown
-  files is rewritten by the paper build or by I58 paper integration.
+- Project status: `RELEASE_FROZEN`, binding implementation commit
+  `55f2b9471475a8becdd97478b248b327a786bce5`.
+- Separate provenance commit: `null`; release provenance is external-only and
+  no separate provenance commit is promoted.
+- The protected 22 machine files and frozen 13-root formal package are not
+  rewritten by P58. Their historical `PAPER_PENDING` prose is a layered-state
+  record, not the live project release status.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 56
+  entries and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C58/20260816T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
 
-The scoped machine manifest remains the exact machine-lane identity. It is
-not the pending full-project release manifest. The machine and formal layers
-may retain their intentional historical `PAPER_PENDING` prose; this report
-is the successor paper-state record.
+The 21-entry scoped manifest remains the exact machine-lane identity. The
+56-entry successor is the release-wide ledger and does not replace it. P58
+does not rewrite any paper source, PDF, code, result, certificate, evidence
+artifact, or frozen formal-root Markdown file.
 
 ## PDF checks
 
@@ -226,20 +238,30 @@ is the successor paper-state record.
 - The paper makes no rational-point, local-point, weak-approximation,
   Hasse-principle, Brauer--Manin, or all-cubic-surfaces assertion.
 
-## I58 release boundary
+## P58 release closure
 
 - Paper compilation status: `PAPER_COMPILED`.
 - Independent paper audit status: `PAPER_HOSTILE_PASS`.
 - Machine status: `PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS`.
 - Formal-document status: `FORMAL_DOCS_PASS`.
-- Project release status: `NOT_RELEASED`.
-- I58 implementation commit: **pending; no hash is guessed here**.
-- Full-project release manifest: pending.
-- Release archive: pending.
-- Promotion authorization: false.
+- Project release status: `RELEASE_FROZEN`.
+- Implementation commit:
+  `55f2b9471475a8becdd97478b248b327a786bce5`.
+- Separate provenance commit: `null`; P58 provenance remains external-only and
+  no separate provenance-commit identity is promoted.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 56
+  entries and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C58/20260816T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
+- Promotion authorization: true.
+- P58 rewrites no paper source, PDF, code, result, certificate, evidence, or
+  frozen formal-document byte.
+- C59--C61 remain contingent and unselected.
 
-This report records the official final6 paper build and the evidence available
-for initial I58 paper integration. It contains neither its own digest nor any
-Route digest, archived-Route digest, full-project-manifest digest, or I58/P58
-commit identity. Those acyclic successor identities remain external and may
-be populated only after the corresponding artifacts exist.
+This report records the official final6 paper build and P58 release closure.
+It contains neither its own digest nor any live-Route, archived-Route,
+full-project-manifest, or P58 commit digest. Those acyclic identities are
+verified and reported only by external consumers. The frozen formal-package
+digest likewise remains external to the 13 Markdown files it covers.

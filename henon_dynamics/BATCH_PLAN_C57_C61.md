@@ -1,17 +1,17 @@
 # Adaptive batch plan: HCS-C57 through HCS-C61
 
-Status: **adaptive batch; C57 released and frozen; C58 paper compiled and
-hostile-passed with release closure pending; C59--C61 remain contingent and
-unselected**
+Status: **adaptive batch; C57 and C58 released and frozen; C59--C61 remain
+contingent and unselected**
 
 Date: 2026-08-16
 
 ## Batch protocol
 
 This is a five-paper adaptive batch, not a list of five predetermined
-questions.  C57 is frozen, and C58 has now been selected from exact C56/C57
-field and double-six outputs after a fresh hostile comparison.  After each
-paper is released, the next paper may be selected only from that
+questions.  C57 and C58 are frozen.  C58 was selected from exact C56/C57
+field and double-six outputs after a fresh hostile comparison; its theorem,
+paper, and release provenance are now closed.  After each paper is released,
+the next paper may be selected only from that
 predecessor's actual positive
 theorem, certified obstruction, or explicitly unresolved branch.  A proposed
 successor must pass a fresh primary-source novelty audit, a theorem-size and
@@ -21,8 +21,7 @@ claim is fixed.
 The current dependency graph is therefore
 
 \[
- C56\longrightarrow C57\longrightarrow
- \boxed{C58}\longrightarrow
+ C56\longrightarrow C57\longrightarrow C58\longrightarrow
  \underbrace{C59\longrightarrow C60\longrightarrow C61}
  _{\text{contingent and presently unselected}}.
 \]
@@ -194,9 +193,13 @@ The official anonymous paper is now a deterministic 28-page build with an
 exact 17-source lock `b0842e68...`, PDF `63b84e44...`, stabilized log
 `7f868cce...`, extracted text `98fcf53d...`, and 19-file live paper inventory
 with zero auxiliaries. Two independent read-only audits return
-`PAPER_HOSTILE_PASS`. The implementation-commit identity, self-excluding
-full-project manifest, byte-identical Route archive, release freeze, and
-promotion remain pending and are not inferred from the paper build.
+`PAPER_HOSTILE_PASS`. P58 binds the full I58 implementation commit,
+self-excluding 56-entry full-project manifest, and byte-identical final Route
+archive. C58 is `RELEASE_FROZEN` and promotion is authorized;
+`provenance_commit` remains null under the external-only policy. The protected
+22-file machine layer remains `PREFREEZE_CODE_RESULTS_PASS` /
+`POSTREFRESH_PASS`, and its 21-entry scoped manifest remains the exact machine
+identity. C59--C61 remain contingent and unselected.
 
 ### Exact theorem
 
