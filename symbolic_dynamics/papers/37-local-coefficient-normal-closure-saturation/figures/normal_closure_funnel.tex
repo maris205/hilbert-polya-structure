@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=7mm,
+  box/.style={rounded corners,draw=charcoal,thick,align=center,
+    fill=white,inner sep=5pt,font=\small},
+  top/.style={box,draw=formalblue,text width=3.15cm},
+  middle/.style={box,draw=warningamber,text width=9.8cm},
+  lower/.style={box,draw=stopred,text width=8.4cm},
+  arr/.style={->,very thick,formalblue}
+]
+\node[top] (cells) {translated cells\\$R_r^{\pm1}$};
+\node[top,right=7mm of cells] (conj) {conjugates\\$aR_r^{\pm1}a^{-1}$};
+\node[top,right=7mm of conj] (reps) {repetitions\\all power traces};
+
+\node[middle,below=10mm of conj] (products)
+  {arbitrary finite mixed products\\
+   $w=\prod_j a_jR_r^{\varepsilon_j}a_j^{-1}$};
+\node[lower,below=of products] (closed)
+  {every cyclically reduced closed Cayley label lies in
+   $\langle\!\langle R_r\rangle\!\rangle$};
+\node[lower,below=of closed,text=stopred] (empty)
+  {every primitive term vanishes\\$\log Z_{\rm gr}(z)=0$, $Z_{\rm gr}(z)=1$};
+
+\draw[arr] (cells) -- (products.north west);
+\draw[arr] (conj) -- (products);
+\draw[arr] (reps) -- (products.north east);
+\draw[arr] (products) -- (closed);
+\draw[->,very thick,stopred] (closed) -- (empty);
+
+\node[rounded corners,draw=warningamber,dashed,thick,fill=white,
+  left=8mm of products,align=center,font=\scriptsize,text width=2.8cm]
+  (warning) {direct-cell matching alone\\stops before mixed products};
+\draw[dashed,very thick,warningamber,-|] (warning.east) -- (products.west);
+\end{tikzpicture}

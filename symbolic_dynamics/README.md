@@ -48,6 +48,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [34-positive-recognition-recurrence-quadrilemma](papers/34-positive-recognition-recurrence-quadrilemma/README.md) | [PDF](papers/34-positive-recognition-recurrence-quadrilemma/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/34-positive-recognition-recurrence-quadrilemma/) | 正标量 literal atom-only ledger 强制 declared cycles 分居 recurrent components；识别 DAG 对全部 power traces/Fredholm determinant 可剪枝，有限 alphabet 与总 roof $\log p$ 又强制 whole operator 非紧，而 first return 会把原始 $z^{\ell(p)}$ marker 改成 $z$。 | **POSITIVE COMPILER QUADRILEMMA / ROUTE-A REJECTED / SD-C36** |
 | [35-affine-semigroup-object-firewall](papers/35-affine-semigroup-object-firewall/README.md) | [PDF](papers/35-affine-semigroup-object-firewall/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/35-affine-semigroup-object-firewall/) | 正 affine Cayley source 有严格高度而无 recurrence；形式逆边制造 backtracks，Hashimoto reduction 又保留普适 affine relation cycles。Bost--Connes 的 $\zeta(\beta)$ 是另一 diagonal Gibbs 对象的首个 trace coefficient，不是同一 graph-step primitive determinant。 | **AFFINE OBJECT FIREWALL / ROUTE-A REJECTED / SD-C37** |
 | [36-affine-cayley-chain-cancellation-no-go](papers/36-affine-cayley-chain-cancellation-no-go/README.md) | [PDF](papers/36-affine-cayley-chain-cancellation-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/36-affine-cayley-chain-cancellation-no-go/) | 完整 affine Cayley relation filling 使复形契约并清空全部 recurrent homology，且不等长关系 $vu=u^rv$ 阻止原 unit-step marker 下降；同一 prequotient 的 trace-class damped Hashimoto determinant 仍严格看见 relation polygon，而标量 chain superlift 又以通用 $1-2+1=0$ 把所有 one-relator controls 一并消去。 | **CHAIN CANCELLATION / CLOCK NON-DESCENT / ROUTE-A REJECTED / SD-C38** |
+| [37-local-coefficient-normal-closure-saturation](papers/37-local-coefficient-normal-closure-saturation/README.md) | [PDF](papers/37-local-coefficient-normal-closure-saturation/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/37-local-coefficient-normal-closure-saturation/) | 普通可逆有限秩 local transport 不可能删去完整 primitive Euler factor；graded shear 虽能抵消直接 affine relator 及全部 repetitions，却在 mixed normal-closure products 上泄漏，而饱和到全部 mixed products 又会清空所有 closed-word ledger。 | **LOCAL-COEFFICIENT SATURATION / MIXED LEAKAGE / ROUTE-A REJECTED / SD-C39** |
 
 ### 论文 1 的候选分离结论
 
@@ -1234,13 +1235,43 @@ unquotiented、same-marker Hashimoto object 上测试 source-derived non-flat
 finite-rank local coefficients；不得转向 first return、KMS/GNS、prime basis、
 有限 quotient 或另一个 determinant。
 
+### 论文 37：direct-relator cancellation、mixed leakage 与 normal-closure saturation
+
+Paper 37 保持 Paper 36 的同一 unquotiented affine Hashimoto path space、原始一步
+marker 与 source-coordinate damping，只允许在边上传递一致有界的有限秩可逆
+local coefficients。对单个 primitive orbit，完整 ordinary matrix Euler factor
+消失当且仅当 holonomy 的全部幂迹为零；有限维情形这等价于 holonomy nilpotent，
+因此真正可逆的 local system 连一个完整 primitive factor 都不能删除。
+
+平衡 graded rank-two shear 可在所有 repetitions 上消去定义 relator 及其 conjugates，
+但显式 primitive mixed word $M_r$ 满足
+
+$$
+\operatorname{Str}W(M_r)=-4r^4(r-1)\ne0 \qquad (r\ge2),
+$$
+
+所以只杀基本 relation cells 会发生 mixed leakage。若把取消义务扩展到整个
+normal closure，则 affine Cayley $2$-complex 的单连通性把每条 closed word 都纳入
+饱和类，最终 graded ledger 为空且 $Z_{\mathrm{gr}}(z)=1$。这给出“泄漏或全部清空”
+的严格二择一，而不是选择性算术机制。
+
+canonical exact audit 通过 131/131 个独立 source/evaluator assertions、32/32 个
+authority integration tests 与 82/82 个 integrity checks；8/8 个 frozen affine
+fixtures 均取消 direct factor 且 8/8 泄漏，random controls 中所有满足 direct
+cancellation 的实例也都发生 conditional leakage。26 个 result files 与 39-entry
+immutable ledger 完整闭合。阶段结论为
+**STOP_LOCAL_COEFFICIENT_SATURATION / ROUTE_A_REJECTED / ROUTE_B_LOCKED**。
+Paper 38 只允许测试 presentation-canonical Bass--Serre tree geodesic shift 与其
+canonical modular cocycle，并必须明确属于新对象；若 primitive ledger 为空、发散、
+被 generic controls 复制或 marker 不兼容，则关闭整个 affine branch。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十六篇论文](papers/)
+- [三十七篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

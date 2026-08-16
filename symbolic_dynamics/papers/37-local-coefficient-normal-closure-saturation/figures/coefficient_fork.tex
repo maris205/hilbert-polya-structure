@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=7mm and 7mm,
+  box/.style={rounded corners,draw=charcoal,thick,align=center,
+    text width=4.15cm,minimum height=1.05cm,inner sep=5pt,font=\small},
+  source/.style={box,fill=softgray,text width=7.2cm},
+  ordinary/.style={box,draw=warningamber,fill=white},
+  graded/.style={box,draw=formalblue,fill=white},
+  saturated/.style={box,draw=stopred,fill=white},
+  arr/.style={->,very thick,formalblue},
+  stoparr/.style={->,very thick,stopred}
+]
+\node[source] (src) {unquotiented affine Hashimoto shift\\
+source damping, bounded invertible edge transport, one free marker $z$};
+\node[ordinary,below left=9mm and 5mm of src] (ord)
+  {ordinary factor deletion\\$\Longleftrightarrow$ nilpotent holonomy};
+\node[graded,below=9mm of src] (grad)
+  {graded direct-cell match\\all repetitions cancel};
+\node[saturated,below right=9mm and 5mm of src] (sat)
+  {normal-closure saturation\\all closed factors cancel};
+
+\node[saturated,below=7mm of ord,text=stopred] (ordstop)
+  {invertible holonomy\\cannot delete};
+\node[saturated,below=7mm of grad,text=stopred] (leak)
+  {mixed word leaks\\$-4r^4(r-1)\ne0$};
+\node[saturated,below=7mm of sat,text=stopred] (empty)
+  {$\log Z_{\rm gr}=0$\\empty primitive ledger};
+
+\draw[arr] (src.south west) -- (ord.north);
+\draw[arr] (src.south) -- (grad.north);
+\draw[arr] (src.south east) -- (sat.north);
+\draw[stoparr] (ord) -- (ordstop);
+\draw[stoparr] (grad) -- (leak);
+\draw[stoparr] (sat) -- (empty);
+
+\node[rounded corners,draw=stopred,thick,fill=white,
+  below=9mm of leak,align=center,font=\small\bfseries,
+  text=stopred,inner sep=5pt,text width=8.0cm] (final)
+  {no branch retains a selective primitive sector};
+\draw[stoparr] (ordstop.south) |- (final.west);
+\draw[stoparr] (leak) -- (final);
+\draw[stoparr] (empty.south) |- (final.east);
+\end{tikzpicture}

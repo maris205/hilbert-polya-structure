@@ -1,0 +1,76 @@
+\section{Exact source/evaluator-separated audit}
+\label{sec:audit}
+
+The frozen prototype tests finite witnesses and implementation identities; it
+does not numerically approximate the infinite Fredholm determinant.  The
+source process constructs presentations, relator products, and the frozen
+matrices.  A separate evaluator imports no source module and independently
+performs free and cyclic reduction, affine evaluation, exact integer matrix
+arithmetic, characteristic-polynomial comparison, and decisions.
+
+All 131 preregistered assertions pass.  For $r=1,\ldots,8$, every direct
+factor cancels.  Every row also has a primitive mixed leak in the bounded
+two-cell census.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}rllrr@{}}
+\toprule
+$r$ & role & shortest leak in frozen census & length & first supertrace \\
+\midrule
+1 & balanced control & \texttt{UUVuvvuV} & 8 & $-8$ \\
+2 & mutation & \texttt{UUvUvuVV} & 8 & $-64$ \\
+3 & mutation & \texttt{UUUvUUvuVV} & 10 & $-648$ \\
+4 & composite baseline & \texttt{UUUUvUUUvuVV} & 12 & $-3072$ \\
+5 & mutation & \texttt{UUUUUvUUUUvuVV} & 14 & $-10000$ \\
+6 & mutation & \texttt{UUUUUUvUUUUUvuVV} & 16 & $-25920$ \\
+7 & mutation & \texttt{UUUUUUUvUUUUUUvuVV} & 18 & $-57624$ \\
+8 & mutation & \texttt{UUUUUUUUvUUUUUUUvuVV} & 20 & $-114688$ \\
+\bottomrule
+\end{tabular}
+\caption{Affine controls.  Uppercase letters denote formal inverses.  For
+$r\ge2$, the row is \cref{eq:mixed-word} and its value is exactly
+$-4r^4(r-1)$.  ``Shortest'' is relative only to the preregistered bounded
+census.}
+\label{tab:affine-audit}
+\end{table}
+
+The generic controls distinguish direct-factor matching from arithmetic
+selection.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}L{0.38\textwidth}rrL{0.25\textwidth}@{}}
+\toprule
+control family & total & direct matches & mixed result after match \\
+\midrule
+affine $r=1,\ldots,8$ & 8 & 8 & leaks $8/8$ \\
+random cyclic one-relator & 48 & 9 & leaks $9/9$ \\
+paired random two-relator & 24 & 2 both-match & both leak \\
+\bottomrule
+\end{tabular}
+\caption{Matched controls.  A direct characteristic-polynomial match is
+neither rare enough nor stable enough under mixed products to define an
+arithmetic sector.}
+\label{tab:generic-audit}
+\end{table}
+
+The evaluator checks power supertraces through order twelve, the traceless
+invertible and nilpotent boundaries, exact inverse-edge matrices, all affine
+closed paths, six fixed mutations, and the random controls generated with
+seed $370037$.  The independent authority layer reproduces all 131 assertions
+and passes 32/32 integration tests.  Fresh A/B and isolated cold C reproduce
+the scientific, source-packet, and Route bytes exactly; four metadata states,
+two manifest states, and a second materialization leave the scientific bytes
+unchanged.  The closed result set has 26 files, all 82 integrity checks pass,
+and all 39 immutable-ledger entries verify.  The scientific payload SHA-256 is
+\nolinkurl{b17967f294da018e2e045ae70ac7731f5612f4bd4693115ea33dbaebb7fc0d6e}.
+The pre-seal Route card is schema-audited separately from that immutable
+ledger so its paired provenance can be bound metadata-only.
+
+The finite data corroborate the direct-match formula, mixed leakage, generic
+firewall, and source/evaluator split.  Trace-class ownership, arbitrary-rank
+nilpotence, flat triviality, the all-$r$ formula, and normal-closure saturation
+are proved independently in \cref{sec:factor,sec:shear,sec:normal-closure}.
