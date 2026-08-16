@@ -1,0 +1,136 @@
+\section{Tree emptiness and Fredholm failure}
+\label{sec:tree-fredholm}
+
+\subsection{No periodic actual-edge geodesic}
+
+\begin{lemma}[Full-tree emptiness]
+\label{lem:no-period}
+The full oriented-edge geodesic shift on $\Trree$ has no periodic point of
+positive period.
+\end{lemma}
+
+\begin{proof}
+Suppose $(e_i)_{i\in\mathbb Z}$ has period $n>0$.  The word
+$e_0e_1\cdots e_{n-1}$ is reduced because immediate reversal is forbidden.
+Periodicity identifies the terminal vertex after one period with the initial
+vertex, so the word is a positive reduced closed path.  A tree has no such
+path.  This contradiction proves the claim.
+\end{proof}
+
+The qualifier ``actual edge'' matters.  If $e_n=g e_0$ for some nontrivial
+$g\in\Gr$, the segment is an orbital fundamental segment, not a period of the
+raw edge sequence.
+
+\subsection{An infinite orthogonal-column witness}
+
+\begin{proposition}[Noncompactness]
+\label{prop:noncompact}
+The operator $\Hash$ in \eqref{eq:hashimoto} is noncompact and therefore not
+trace class.
+\end{proposition}
+
+\begin{proof}
+Choose oriented edges $e_1,e_2,\ldots$ with distinct terminal vertices.  For
+$i\ne j$, the support of $\Hash\delta_{e_i}$ consists of oriented edges whose
+origin is $t(e_i)$, while the support of $\Hash\delta_{e_j}$ has origin
+$t(e_j)$.  The supports are disjoint.  Since $\Trree$ has degree $r+1$,
+\[
+  \langle \Hash\delta_{e_i},\Hash\delta_{e_j}\rangle=0,
+  \qquad
+  \|\Hash\delta_{e_j}\|_2^2=r.
+\]
+Thus the image of an orthonormal sequence has no convergent subsequence.
+The operator is not compact.  Every trace-class operator is compact, which
+proves the second assertion.
+\end{proof}
+
+For $r=1$, this witness is the bilateral shift along either orientation of
+the line.  For $r\ge2$, each image has $r$ legal nonbacktracking
+continuations.
+
+\begin{corollary}[Canonical modular weights do not repair trace class]
+\label{cor:modular-noncompact}
+Fix a finite complex parameter $s$.  Any nonzero per-step scalar weighting
+derived only from $\modc^{-s}$ remains noncompact on the full tree.
+\end{corollary}
+
+\begin{proof}
+One tree step changes height by $+1$ or $-1$.  The two possible transition
+magnitudes are $r^{-\operatorname{Re}s}$ and
+$r^{\operatorname{Re}s}$ (both one when $r=1$).  Restrict the family in
+\Cref{prop:noncompact} to one oriented type.  Its images remain pairwise
+orthogonal with a fixed positive norm.
+\end{proof}
+
+A potential $r^{-s\beta(x)}$ based on an absolute Busemann coordinate is not
+the per-step cocycle: choosing its zero chooses a basepoint, and one tree
+direction makes the reciprocal weight grow.  A different radial damping may
+be analytically useful, as finite-total-weight graph theory illustrates
+\citep{deitmar2015ihara}, but it is outside the frozen object.
+
+\subsection{Why formal zero traces are insufficient}
+
+By \Cref{lem:no-period}, every diagonal matrix coefficient
+$\langle\delta_e,\Hash^n\delta_e\rangle$ vanishes.  It is tempting to write
+\[
+  \Tr(\Hash^n)=0,
+  \qquad
+  \det(I-z\Hash)=
+  \exp\!\left(-\sum_{n\ge1}\frac{z^n}{n}\Tr(\Hash^n)\right)=1.
+  \label{eq:unowned-formal}
+\]
+Equation \eqref{eq:unowned-formal} is not an ordinary Fredholm identity.
+The trace-log expansion requires trace-class ownership before the diagonal is
+summed.  \Cref{prop:noncompact} rules out that premise.  A groupoid or
+von Neumann trace can be meaningful in another framework
+\citep{clair2001zeta,lenz2019ihara}; it must be named as that framework and
+cannot be relabeled as the ordinary trace on $\ell^2(\Eor\Trree)$.
+
+\subsection{Action, properness, and the common end}
+
+Let $\rho_r:\Gr\to\Aut(\Trree)$ be the action homomorphism and put
+$H_r=\rho_r(\Gr)$.  The base vertex is the coset $A$.  Its stabilizer for the
+original action is $A\cong\mathbb Z$, and all vertex stabilizers are conjugate
+copies; edge stabilizers are also infinite cyclic.  In the compact-open
+topology, a subgroup of the automorphism group of a locally finite tree is
+discrete precisely when its vertex stabilizer is finite
+\citep{clair2001zeta}.  This criterion applies to the image $H_r$.
+
+For $r\ge2$, the kernel is the core of $A$ and
+\[
+  \ker\rho_r\subseteq
+  \bigcap_{n\ge0}v^nAv^{-n}
+  =\bigcap_{n\ge0}\langle u^{r^n}\rangle=\{1\}.
+\]
+Thus the action is faithful.  The base-vertex stabilizer in $H_r$ is the
+infinite group $\rho_r(A)\cong\mathbb Z$, so $H_r$ is non-discrete.
+
+For $r=1$, $G_1=A\times\langle v\rangle\cong\mathbb Z^2$ and $\Trree$ is a
+line.  The subgroup $A=\langle u\rangle$ fixes the line pointwise, while $v$
+translates it by one edge.  Hence
+\[
+  \ker\rho_1=A,
+  \qquad H_1\cong\langle v\rangle\cong\mathbb Z,
+\]
+and $H_1$ is discrete.  The original $G_1$ action is nevertheless non-proper
+because its vertex and edge stabilizers contain the infinite kernel.  It is
+not a finite-stabilizer tree-lattice action.  Replacing it by $G_1/A$ changes
+the acting group and collapses the original group-conjugacy ledger.
+
+For $r\ge2$, the ascending action fixes a common end.  The union
+\begin{equation}
+  N_r=\bigcup_{j\ge0}v^{-j}Av^j\cong\mathbb Z[1/r]
+  \label{eq:end-kernel}
+\end{equation}
+has zero signed translation and lies in the end stabilizer kernel.  It is
+infinite.  Hence the finite-cardinality end average used in the discrete
+tree-lattice construction is unavailable.  This observation agrees with the
+standard quasi-parabolic description of ascending HNN actions
+\citep{fima2022transitivity}.
+
+At $r=1$, the infinite kernel $A$ already fixes every vertex and edge, so the
+finite-stabilizer hypothesis fails even though the quotient image is
+discrete.  The three statements in this section are logically distinct: no
+cycles, non-trace-class edge dynamics, and the $r$-split tree-lattice
+hypothesis failure.  Each one independently prevents the requested
+same-object determinant/ledger pair.

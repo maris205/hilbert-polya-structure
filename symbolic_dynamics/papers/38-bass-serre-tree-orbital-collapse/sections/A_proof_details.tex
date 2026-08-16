@@ -1,0 +1,113 @@
+\section{Proof details for the orbital boundary}
+\label{app:proofs}
+
+This appendix gives the algebra suppressed in the main proof map.  Its
+statements belong to the group-orbital boundary unless they explicitly name
+the full-tree object.
+
+\subsection{Localization and the fixed-height quotient}
+
+\begin{lemma}
+\label{lem:localization-quotient}
+For $r\ge2$ and $k>0$,
+\[
+ \mathbb Z[1/r]/(r^k-1)\mathbb Z[1/r]
+ \cong \mathbb Z/(r^k-1)\mathbb Z.
+\]
+\end{lemma}
+
+\begin{proof}
+Put $M=r^k-1$.  Since $\gcd(r,M)=1$, multiplication by every power of $r$
+is invertible modulo $M$.  Hence a localized element $a/r^j$ has the integer
+residue $a(r^j)^{-1}\pmod M$, so the natural map from $\mathbb Z$ is
+surjective after quotienting.  Its kernel consists exactly of the integers
+in $M\mathbb Z[1/r]$.  If $n=M a/r^j$ is integral, invertibility of $r^j$
+modulo $M$ implies $M\mid n$; the kernel is $M\mathbb Z$.
+\end{proof}
+
+Equation \eqref{eq:conjugation} shows that height-$k$ conjugation by
+$(c,0)$ changes $b$ by $(1-r^k)c$, whereas conjugation by $(0,m)$ multiplies
+$b$ by $r^m$.  Lemma~\ref{lem:localization-quotient} therefore gives the
+claimed multiplication action on $\mathbb Z/M\mathbb Z$.
+
+\subsection{Order, fixed points, and endpoint identification}
+
+\begin{lemma}
+\label{lem:mult-order}
+Multiplication by $r$ has exact order $k$ modulo $M=r^k-1$, and the $j$th
+power has $r^{\gcd(j,k)}-1$ fixed residues.
+\end{lemma}
+
+\begin{proof}
+Certainly $r^k\equiv1\pmod M$.  If $0<j<k$, then
+$0<r^j-1<M$, so $M\nmid r^j-1$; the order is exactly $k$.  A residue $x$
+is fixed by the $j$th power precisely when
+$(r^j-1)x\equiv0\pmod M$.  A multiplication map by $q$ on
+$\mathbb Z/M\mathbb Z$ has $\gcd(q,M)$ kernel elements.  Finally,
+\[
+  \gcd(r^j-1,r^k-1)=r^{\gcd(j,k)}-1,
+\]
+which proves the count.
+\end{proof}
+
+For a digit word $d=(d_0,\ldots,d_{k-1})$ with $0\le d_i<r$, define
+\[
+ \Phi(d)=\sum_{i=0}^{k-1}d_i r^i\pmod M.
+\]
+A cyclic digit rotation changes $\Phi$ by multiplication by $r$ (up to the
+choice of rotation direction, which replaces $r$ by its inverse).  Before
+reduction, the digit sum ranges from $0$ to $M$.  Distinct values inside this
+closed interval can be congruent modulo $M$ only at the endpoints.  Those
+endpoints are realized uniquely by $0^k$ and $(r-1)^k$.  This proves both the
+single endpoint collision and $\Cclass(k)=\Nneck(k)-1$.
+
+\subsection{Primitive repetition and the rational product}
+
+Suppose a length-$d$ word represents $b$.  Repeating it $m$ times, where
+$k=md$, represents
+\begin{equation}
+ b\bigl(1+r^d+\cdots+r^{(m-1)d}\bigr).
+ \label{eq:digit-repeat}
+\end{equation}
+The same factor occurs in the semidirect-product power
+\[
+ (b,d)^m=
+ \left(b\bigl(1+r^d+\cdots+r^{(m-1)d}\bigr),md\right).
+\]
+Thus minimal necklace period agrees with primitive positive group height.
+The sole endpoint collision is already of period one.  If $L_r(k)$ denotes
+the ordinary number of primitive $r$-ary necklaces, then
+\[
+ \Pclass(1)=L_r(1)-1=r-1,
+ \qquad \Pclass(k)=L_r(k)\quad(k>1).
+\]
+The Witt identity
+\[
+ \prod_{k\ge1}(1-z^k)^{-L_r(k)}=(1-rz)^{-1}
+\]
+immediately gives \eqref{eq:orbital-product}.  Equivalently, taking formal
+logarithms shows that the coefficient of $z^n$ is
+$n^{-1}\sum_{d\mid n}d\Pclass(d)=r^n/n-1/n$, the logarithm of
+$(1-z)/(1-rz)$.
+
+\subsection{Weighted noncompactness in operator form}
+
+Let $W_s$ be any allowed per-step modular weighting.  On a fixed oriented
+step type its coefficient is a nonzero scalar $c_s$.  Choose the edge family
+in \Cref{prop:noncompact} so that every selected edge has that type.  After
+passing to an infinite subfamily if necessary, the vectors
+$W_s\Hash\delta_{e_j}$ have disjoint supports and one fixed positive squared
+norm.  Hence they have no norm-convergent subsequence.  This proves
+noncompactness without using a diagonal trace or a spectral-radius
+calculation.
+
+\subsection{Translation length without an inherited marker}
+
+The HNN height extends to a Busemann function on vertices: adjacent vertices
+have heights differing by one.  Therefore a path from $x$ to $gx$ has at
+least $|\height(g)|$ edges.  For $g=(a,k)$, choose $j$ with $r^ja\in\mathbb
+Z$ and conjugate by $v^j$.  The resulting $u^mv^k$ moves the base vertex by
+exactly $|k|$.  This proves \eqref{eq:translation-length}; it also shows why
+the statement concerns translation length, not the length of an arbitrary
+written word.  The distinction is exactly the marker firewall used in
+\Cref{sec:marker-controls}.

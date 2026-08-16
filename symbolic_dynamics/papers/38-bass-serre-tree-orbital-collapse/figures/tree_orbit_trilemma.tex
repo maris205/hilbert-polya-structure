@@ -1,0 +1,52 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=7mm and 7mm,
+  box/.style={rounded corners,draw=charcoal,thick,align=center,
+    text width=4.05cm,minimum height=1.0cm,inner sep=5pt,font=\small},
+  source/.style={box,fill=softgray,text width=8.0cm},
+  tree/.style={box,draw=formalblue,fill=white},
+  operator/.style={box,draw=warningamber,fill=white},
+  orbital/.style={box,draw=deepgreen,fill=white},
+  terminal/.style={box,draw=stopred,fill=white,text=stopred},
+  arr/.style={->,very thick,formalblue},
+  stoparr/.style={->,very thick,stopred}
+]
+\node[source] (src) {original ascending-HNN splitting of $\BS(1,r)$\\
+full Bass--Serre tree, canonical modular cocycle, new edge clock};
+
+\node[tree,below left=10mm and 5mm of src] (full)
+  {literal full-tree geodesic shift\\no positive reduced closed path};
+\node[operator,below=10mm of src] (op)
+  {full-tree Hashimoto operator\\orthogonal columns of norm $\sqrt r$};
+\node[orbital,below right=10mm and 5mm of src] (orb)
+  {change to group conjugacy\\positive HNN height};
+
+\node[terminal,below=7mm of full] (empty)
+  {primitive ledger\\empty};
+\node[terminal,below=7mm of op] (nofred)
+  {noncompact, non-trace-class\\no ordinary Fredholm};
+\node[terminal,below=7mm of orb] (generic)
+  {$r\ge2$: generic necklaces\\$r=1$: divergent};
+
+\draw[arr] (src.south west) -- (full.north);
+\draw[arr] (src.south) -- (op.north);
+\draw[arr] (src.south east) -- (orb.north);
+\draw[stoparr] (full) -- (empty);
+\draw[stoparr] (op) -- (nofred);
+\draw[stoparr] (orb) -- (generic);
+
+\node[rounded corners,draw=warningamber,dashed,thick,fill=white,
+  right=8mm of op,above=2mm of orb,align=center,font=\scriptsize,
+  text width=3.2cm] (firewall)
+  {quotient, von Neumann,\\groupoid, or radial weight\\$\ne$ full-tree Fredholm};
+\draw[dashed,very thick,warningamber,-|] (firewall.west) -- (op.east);
+
+\node[rounded corners,draw=stopred,thick,fill=white,
+  below=10mm of nofred,align=center,font=\small\bfseries,
+  text=stopred,inner sep=6pt,text width=8.2cm] (final)
+  {no nonempty selective same-object Fredholm ledger\\
+   \texttt{CLOSE\_ENTIRE\_AFFINE\_BRANCH}};
+\draw[stoparr] (empty.south) |- (final.west);
+\draw[stoparr] (nofred) -- (final);
+\draw[stoparr] (generic.south) |- (final.east);
+\end{tikzpicture}
