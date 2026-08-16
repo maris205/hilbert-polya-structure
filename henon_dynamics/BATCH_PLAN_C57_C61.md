@@ -1,33 +1,43 @@
 # Adaptive batch plan: HCS-C57 through HCS-C61
 
-Status: **adaptive batch; C57 and C58 released and frozen; C59--C61 remain
-contingent and unselected**
+Status: **adaptive batch; C57 and C58 released and frozen; C59 machine,
+post-refresh, formal-document, and paper audits pass, with release closure
+pending; C60--C61 remain contingent and unselected**
 
 Date: 2026-08-16
 
 ## Batch protocol
 
 This is a five-paper adaptive batch, not a list of five predetermined
-questions.  C57 and C58 are frozen.  C58 was selected from exact C56/C57
-field and double-six outputs after a fresh hostile comparison; its theorem,
-paper, and release provenance are now closed.  After each paper is released,
-the next paper may be selected only from that
-predecessor's actual positive
-theorem, certified obstruction, or explicitly unresolved branch.  A proposed
-successor must pass a fresh primary-source novelty audit, a theorem-size and
-non-salami review, and a falsifiable exact-computation gate before its title or
-claim is fixed.
+questions.  C57 and C58 are frozen.  C59 was selected only after C58's actual
+released filtered-inertia theorem passed fresh mathematical, primary-source,
+non-salami, primitive-realization, and engineering-feasibility review.  The
+C59 selection is `TARGET_LOCK_GO`: it fixes one theorem target and scope.
+All eight project-local G0--G7 premises now have
+`PREFREEZE_CODE_RESULTS_PASS`; the official atomic refresh, its mandatory
+nonmutating replay, and the independent read-only machine audit have
+`POSTREFRESH_PASS`.  The updated formal-document package has an independent
+`FORMAL_DOCS_PASS`, and the deterministic anonymous paper has
+`PAPER_HOSTILE_PASS`; C59 release provenance remains pending.  After each
+paper is released, the next paper may be
+selected only from that predecessor's actual positive theorem, certified
+obstruction, or explicitly unresolved branch.  A proposed successor must pass
+a fresh primary-source novelty audit, a theorem-size and non-salami review,
+and a falsifiable exact-computation gate before its title or claim is fixed.
 
 The current dependency graph is therefore
 
 \[
  C56\longrightarrow C57\longrightarrow C58\longrightarrow
- \underbrace{C59\longrightarrow C60\longrightarrow C61}
+ \underbrace{C59}_{\substack{\text{paper hostile PASS}\\
+                              \text{release pending}}}
+ \longrightarrow
+ \underbrace{C60\longrightarrow C61}
  _{\text{contingent and presently unselected}}.
 \]
 
-No result, title, or method is reserved for C59--C61.  A negative C58 result
-may change the direction of C59 just as materially as a positive one.  Batch
+No result, title, or method is reserved for C60--C61.  C59 is restricted to
+the exact integrated theorem and KILL controls recorded below.  Batch
 completion requires five independently theorem-sized papers, each with its
 own proof package, exact replay, source audit, manuscript, release tuple, and
 commit/provenance closure.
@@ -199,7 +209,8 @@ archive. C58 is `RELEASE_FROZEN` and promotion is authorized;
 `provenance_commit` remains null under the external-only policy. The protected
 22-file machine layer remains `PREFREEZE_CODE_RESULTS_PASS` /
 `POSTREFRESH_PASS`, and its 21-entry scoped manifest remains the exact machine
-identity. C59--C61 remain contingent and unselected.
+identity. At the P58 handoff C59--C61 were contingent and unselected; the
+separate C59 section below records the later post-C58 target selection.
 
 ### Exact theorem
 
@@ -320,12 +331,188 @@ resolving \(D_3\) later would not authorize them. C58 also makes no claim
 about rational points, the Hasse principle, weak approximation, Brauer--Manin
 obstruction, a motive, RH, or a Hilbert--Polya operator.
 
-## HCS-C59 through HCS-C61: contingent slots
+## HCS-C59: primitive Gassmann twins from the 27 lines
 
-C59, C60, and C61 have no locked titles, objects, theorem statements, or
-experiment programs.  Each slot is opened only after the immediately
-preceding paper is frozen and its actual theorem/obstruction has been audited.
-At every transition the batch plan must record:
+### Target-lock handoff
+
+C59 uses the released C58 normal closure $K/\mathbf Q$, its labelled
+$W(E_6)$-action, exact eight-prime ramification support, full lower inertia
+filtrations, and the two surviving alternatives
+$D_3\in\{\mathrm{ToM}\ 140,\mathrm{ToM}\ 206\}$. It constructs two new
+degree-$320$ fixed fields. It does not resolve that decomposition-group
+alternative and does not extend C58 to bad Euler factors or root numbers.
+
+Let $H_+,H_-\leq W(E_6)$ be the exact embedded subgroup representatives
+with order $162$, index $320$, SmallGroup identifiers `[162,11]` and
+`[162,19]`, and frozen-version TomLib locators 301 and 303. James already
+found the eleven Gassmann collisions among the 350 subgroup classes; ToM
+numbers are software locators, not durable field definitions.
+
+If $d_i$ are the labelled roots of the released degree-$27$ eliminant,
+$L$ is its leading coefficient, and $\alpha_i=Ld_i$, set
+
+\[
+ \mathcal S_+=H_+\!\cdot\!\{1,2\}\sqcup
+ H_+\!\cdot\!\{1,9\},\qquad |\mathcal S_+|=27+27,
+\]
+\[
+ \mathcal S_-=H_-\!\cdot\!\{1,2\},\qquad |\mathcal S_-|=81,
+\]
+
+and define the integral quadratic sums
+
+\[
+ \eta_\pm=\sum_{\{i,j\}\in\mathcal S_\pm}\alpha_i\alpha_j.
+\]
+
+Here `eta` always denotes the scaled integral invariant. If the unscaled sum
+is mentioned it is $\widetilde\eta_\pm$, with
+$\eta_\pm=L^2\widetilde\eta_\pm$. The exact product-form resolvents are
+
+\[
+ R_\pm(T)=\prod_{gH_\pm\in G/H_\pm}(T-g\eta_\pm)\in\mathbf Z[T].
+\]
+
+The earlier staged split-prime and graph computations are design chronology
+only.  The promoted G1 certificate now proves project-locally the support
+stabilizers, all 27 line substitutions in all four chart equations at
+(692717), and `Aut(Schlaefli graph)=W(E6)` as equality with the released
+51,840-element permutation set. Expanded characteristic-zero coefficients are
+not claimed.
+
+### Locked integrated theorem target
+
+With the promoted G0--G7 premises certified, C59 proves
+
+\[
+ F_+=\mathbf Q(\eta_+)=K^{H_+},\qquad
+ F_-=\mathbf Q(\eta_-)=K^{H_-}.
+\]
+
+The fields are nonisomorphic, have degree $320$ and common normal closure
+$K$, and have equal Dedekind zeta functions. Their common signature and
+signed discriminant are
+
+\[
+ (r_1,r_2)=(16,152),
+\]
+\[
+ \operatorname{Disc}(F_+)=\operatorname{Disc}(F_-)
+ =+3^{624}5^{496}A^{192}B^{160},
+\]
+
+where
+
+\[
+ A=181\cdot997\cdot2346241=423395612137,
+\]
+\[
+ B=283\cdot1801\cdot
+ 14932047182473291995860108491583652133938007263719.
+\]
+
+Their exact finite ramified support is the eight-prime C58 support.
+
+For $D_3=\mathrm{ToM}\ 140$, the complete rows
+`(n,e,f,d)^multiplicity` are
+
+```text
+F+: (1,1,1,0)^8, (6,6,1,11)^10, (9,9,1,18)^8,
+    (18,18,1,37)^10
+F-: (2,2,1,1)^4, (3,3,1,5)^12, (6,6,1,11)^4,
+    (9,9,1,18)^4, (18,18,1,37)^12.
+```
+
+For $D_3=\mathrm{ToM}\ 206$, with normal inertia ToM 140, they are
+
+```text
+F+: (2,1,2,0)^4, (12,6,2,11)^5, (18,9,2,18)^4,
+    (36,18,2,37)^5
+F-: (4,2,2,1)^2, (6,3,2,5)^6, (12,6,2,11)^2,
+    (18,9,2,18)^2, (36,18,2,37)^6.
+```
+
+In the first branch $F_+$ has eight degree-one factors and $F_-$ has
+none. In the second branch $F_+$ has four unramified quadratic factors and
+$F_-$ has no degree-two factor. Thus the finite etale
+$\mathbf Q_3$-algebras differ in either branch, so the fields are
+arithmetically equivalent but not locally equivalent and do not have
+isomorphic adele rings. The tuples `(n,e,f,d)` are not claimed to classify
+individual high-degree completions.
+
+### Canonical G0--G7 and KILL controls
+
+- G0 binds the complete released C56/C58 inventories, manifests,
+  Route/archive pairs, exact labelled carriers, Batch lock, and guard file.
+- G1 certifies the exact integral orbit sums, support stabilizers, four-chart
+  line reconstruction, full graph-automorphism bridge, 320 distinct values,
+  and both modular coefficient hashes at (692717).
+- G2 exhausts all 350 subgroup classes, all eleven collision buckets, the
+  unique index-(320) minimum, full permutation characters, cores, and
+  durable subgroup invariants.
+- G3 proves the fixed-field, common-normal-closure, nonisomorphism, and
+  Artin-formalism bridges.
+- G4 proves signature `(16,152)`, the positive signed discriminant, and exact
+  eight-prime support from the C58 filtration.
+- G5 certifies every ToM-140 double coset/local row and the totals degree
+  (320), `sum(f*d)=624`.
+- G6 certifies the unique normal ToM-140 inertia in ToM 206, every second-
+  branch row, the same totals, and branch-independent local separation.
+- G7 enforces independent producer/checker call graphs, strict schema,
+  complete mutations/rebounds, atomic promotion, manifests, source credits,
+  and scope false leaves.
+- **KILL:** a mutable or abstract subgroup definition; a larger support
+  stabilizer; fewer than 320 distinct conjugates; sampled rather than full
+  characters; a lower or additional minimum collision; any failed global
+  exponent or support rebind; an incomplete local table; failure of either
+  branch to separate; or scope/novelty leakage stops C59. No partial fallback
+  paper is licensed.
+
+### Novelty and scope firewall
+
+James's collision classification, Perlis/Gassmann arithmetic equivalence,
+explicit arithmetically equivalent fields with different ramified local
+algebras, and general relative-resolvent methodology are prior art. The
+bounded C59 novelty claim is only the frozen cubic-surface primitive
+realization together with its complete exact global and both-branch local
+arithmetic. No absolute priority claim is authorized.
+
+`NO_BAD_EULER_OR_ROOT_NUMBER`: C59 proves no decomposition Frobenius, bad
+Artin Euler polynomial/factor, local epsilon factor, local/global root number,
+Artin holomorphy, or automorphy. It also proves no integral permutation
+equivalence, ring-of-integers or class-number equality, integral basis,
+individually classified high-degree completion, rational point, Hasse
+principle, weak approximation, Brauer--Manin obstruction, motive, RH, or
+Hilbert--Polya operator.
+
+The C59 machine layer is `PREFREEZE_CODE_RESULTS_PASS` with independent
+`POSTREFRESH_PASS`: 13 code files and 8 result files form a 21-file live
+inventory, the self-excluding scoped manifest has 20 entries, all G0--G7
+gates pass, 48 tests pass, and the independent checker rejects 20,894
+certificate mutations plus 8 evidence-rebound mutations.  The frozen machine
+tuple binds payload `a6428add...`, certificate `3c4c756d...`, check report
+`271d0123...`, schema `07a817bb...`, evidence `0b01f9d...` and `667e0e...`,
+and scoped manifest `c4145ea2...`.  The machine-bound Batch input remains the
+pre-documentation byte snapshot; this edited handoff is a later documentation
+layer and does not authorize another machine refresh.
+
+The current C59 state is `THEOREM_TARGET_LOCKED` /
+`PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS` /
+`FORMAL_DOCS_PASS` / `PAPER_COMPILED` / `PAPER_HOSTILE_PASS` /
+`NOT_RELEASED`.  The anonymous 27-page paper has an exact 25-source lock,
+two byte-identical deterministic clean builds, zero diagnostics, embedded
+Type-1 fonts, no raster images, and an independent zero-blocker hostile
+audit.  Its I59 paper inventory is exactly 27 files: 25 sources, the PDF, and
+the compilation report.  The implementation commit, self-excluding
+full-project manifest, byte-identical Route archive, promotion, and release
+gate remain pending.
+
+## HCS-C60 through HCS-C61: contingent slots
+
+C60 and C61 have no locked titles, objects, theorem statements, or experiment
+programs. Each slot is opened only after the immediately preceding paper is
+frozen and its actual theorem/obstruction has been audited. At every
+transition the batch plan must record:
 
 - the exact predecessor result used as input;
 - why the new object is mathematically distinct from that predecessor;

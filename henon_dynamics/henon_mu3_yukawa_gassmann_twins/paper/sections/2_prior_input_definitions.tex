@@ -1,0 +1,189 @@
+\section{Prior work, frozen input, and durable definitions}
+\label{sec:prior-definitions}
+
+\subsection{Arithmetic equivalence and its local boundary}
+
+Gassmann's character condition and Perlis's number-field formulation identify
+equality of Dedekind zeta functions with equality of the relevant induced
+trivial characters \citep[Theorem~1]{perlis1977equation}.  This criterion is
+the universal bridge used below; the present work does not propose a new
+criterion for arithmetic equivalence.  Bosma and de Smit explain the common
+global invariants forced by arithmetic equivalence and use permutation
+characters computationally \citep[printed pp.~67--68]{bosmadesmit2002small}.
+Our contribution is narrower: we give primitive line-coordinate generators
+and exact ramified arithmetic for one fixed normal closure.
+
+Equal zeta functions do not imply equality of all arithmetic attached to the
+ramified completions.  Explicit common-normal-closure constructions with
+different ramified local degrees occur in the literature
+\citep[proof of Theorem~1.2]{mcreynolds2015spectra}, and explicit polynomial
+pairs can have identical zeta data but different ramification tuples
+\citep[Theorems~1.3 and~3.7]{mantillasoler2019question}.  Komatsu separates
+arithmetic equivalence from equivalence of adele rings
+\citep{komatsu1984adele}.  These works preclude any claim that local
+inequivalence or nonisomorphic adele rings are new in general.  What is
+specific here is that the same local obstruction is proved for each of the
+two decomposition groups still possible in this cubic-surface instance.
+
+We call two number fields \emph{locally equivalent} if their places can be
+put in a bijection under which paired completions are isomorphic as
+topological fields.  Equivalently, their adele rings are isomorphic as
+topological rings; we use this standard equivalence in the sense discussed by
+Komatsu \citep{komatsu1984adele}.
+
+\subsection{Subgroup collisions and resolvents}
+
+James's complete $W(E_6)$ computation is the prior source for the figures
+$350$, $339$, and eleven collision pairs
+\citep[\S3.1, p.~22]{james2022bayesian}.  We neither rediscover those
+collisions nor call the pair in \cref{thm:integrated} a new Gassmann pair.
+The phrase ``unique minimum-index'' will always mean unique among those
+eleven collision buckets in the complete $350$-class table.  It is not a
+minimum-degree assertion about arithmetically equivalent fields in general.
+
+The resolvent method is likewise classical.  Stauduhar constructs resolvents
+from ordered roots and subgroup invariants
+\citep{stauduhar1973determination}; Fieker and Kl\"uners develop practical
+relative invariants and stabilizer methods
+\citep[\S\S1--2 and Remark~2.1]{fiekerklueners2014computation}.  Our orbit
+products use this established framework.  Their special feature is the exact
+quadratic support in the labelled $27$-line carrier and a split-prime
+noncollision proof of primitivity, not a new resolvent algorithm.
+
+Explicit realization of subgroups of $W(E_6)$ through lines on cubic
+surfaces is also established.  Elsenhans and Jahnel give a moduli and inverse
+Galois construction, including an algorithm that produces cubic surfaces
+with prescribed line action
+\citep[Theorem in the introduction, Algorithm~5.1, and
+Algorithm~A.10]{elsenhansjahnel2015moduli}.  Here that geometric program is
+an input boundary.  The paper studies two particular primitive subfields and
+their global and local arithmetic inside one already fixed realization.
+
+The source audit authorizes only the following bounded conjunction: for this one
+cubic-surface line extension, exact integral quadratic orbit sums
+primitively realize the table-restricted minimum-index $W(E_6)$ Gassmann
+pair, and the resulting fields have an exact eight-prime global arithmetic
+package and nonisomorphic finite \etale{} $\Qthree$-algebras in both
+surviving decomposition-group branches.  This is a source boundary, not an
+absolute-priority or ``first'' claim.
+
+\subsection{The frozen cubic-surface input}
+
+Two released predecessor results are used without being re-proved.  The fixed
+surface is $Y=V(\Phi)\subset\mathbf P^3_\Q$, where
+\begin{equation*}
+\begin{aligned}
+\Phi={}&75081586157u_0^3-28576620789u_0^2u_1-122000922135u_0^2u_2\\
+&-5364921951u_0^2u_3+164150208636u_0u_1^2-415458334296u_0u_1u_2\\
+&+151070718312u_0u_1u_3+1158143874300u_0u_2^2
+  +114691988016u_0u_2u_3\\
+&+113572676646u_0u_3^2+6898957820u_1^3+1132596902196u_1^2u_2\\
+&-30413540316u_1^2u_3-2054867641020u_1u_2^2
+  +151980984216u_1u_2u_3\\
+&+36794420832u_1u_3^2+2646295985484u_2^3
+  +560186573940u_2^2u_3\\
+&+706181383584u_2u_3^2+1884468968u_3^3.
+\end{aligned}
+\end{equation*}
+The line-field input supplies the nonmonic eliminant $g(d)$, its leading
+coefficient $L$, the reconstructed $27$ lines, and the faithful action
+\eqref{eq:intro-G}.  These are electronic exact data rather than an implicit
+choice: the C56 certificate and release commit in
+\cref{tab:released-input-identities} define $\Phi$ at
+\path{payload.surface.primitive_coefficients}, define $g$ at
+\path{payload.irreducibility.eliminant_coefficients_d_0_to_27} (with $L$ its
+$d^{27}$ coefficient), and give the four symbolic line equations at
+\path{payload.grassmann_main_chart.line_equations_sparse}.  The C59 resolver
+evidence in the same table fixes the actual-to-standard label map and the
+arrays
+\path{payload.line_configuration.d_by_standard_label} and
+\path{payload.line_configuration.alpha_by_standard_label}.  The
+characteristic-zero symbols $d_i$ and $\alpha_i=Ld_i$ remain the labelled
+roots and scaled roots above.  At the split prime $p=692717$, the two resolver
+arrays store their reductions at zero-based JSON index $i-1$; they do not
+store the characteristic-zero algebraic numbers themselves.  Together with
+the actual-to-standard map, these entries make ``labelled root'' a recorded
+rather than implicit ordering convention.
+
+The ramification input supplies the exact eight-prime support of $K$, the
+lower filtrations at $3$ and $5$, the tame inertia classes, complex
+conjugation, and the exhaustive alternative
+\begin{equation}
+ D_3=\Tom{140}
+ \quad\text{or}\quad
+ D_3=\Tom{206},
+ \qquad I_3=\Tom{140}
+ \text{ in either case}.
+ \label{eq:d3-alternatives}
+\end{equation}
+The second case has $[D_3:I_3]=2$.  The analysis below carries both entries
+of \eqref{eq:d3-alternatives} through separate tables and selects neither.
+
+\subsection{Durable subgroup data}
+
+Equations \eqref{eq:Hplus-cycles} and \eqref{eq:Hminus-cycles} are the
+field-defining subgroup data.  For an alternative exact encoding, if a
+permutation is stored by its images of $1,\ldots,27$, the three generators
+of $H_+$ are
+\begin{align*}
+&(1,2,19,21,20,3,24,11,9,10,23,15,13,14,22,5,4,18,6,16,17,12,8,27,25,26,7),\\
+&(16,27,13,12,22,26,15,25,24,7,14,18,20,5,1,23,8,17,9,19,6,2,10,3,4,21,11),\\
+&(26,13,22,20,24,15,21,3,14,1,19,11,25,18,23,7,5,9,12,27,16,8,6,17,2,10,4),
+\end{align*}
+and those of $H_-$ are
+\begin{align*}
+&(5,1,6,2,3,4,10,21,14,17,19,11,7,8,9,15,18,20,12,13,16,26,22,27,23,24,25),\\
+&(7,15,13,12,26,5,16,18,20,1,22,8,9,6,27,11,4,25,3,24,14,10,21,19,17,23,2),\\
+&(16,23,9,8,26,27,7,25,24,10,11,12,13,6,5,22,17,18,19,20,2,1,21,3,4,15,14).
+\end{align*}
+This redundant exact encoding guards against cycle-convention ambiguity.
+
+\FloatBarrier
+\begin{table}[t]
+\centering
+\caption{Durable invariants of the two exact embedded subgroups.  The final
+row consists only of version-sensitive locators in the frozen TomLib table;
+it is not a definition of either subgroup.}
+\label{tab:subgroup-invariants}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Invariant & $H_+$ & $H_-$\\
+\midrule
+Order / index & $162/320$ & $162/320$\\
+SmallGroup identifier & $[162,11]$ & $[162,19]$\\
+Abelianization invariants & $[2,3]$ & $[2]$\\
+Derived subgroup order & $27$ & $81$\\
+Centre order & $1$ & $1$\\
+Core in $G$ & $1$ & $1$\\
+Normalizer order in $G$ & $324$ & $324$\\
+Frozen TomLib locator & $301$ & $303$\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+\begin{lemma}[Embedded subgroup carrier]
+\label{lem:embedded-subgroups}
+The arrays above generate embedded subgroups of the released labelled action
+with the invariants in \cref{tab:subgroup-invariants}.  The pair supports in
+\eqref{eq:intro-supports} have setwise stabilizers $H_+$ and $H_-$,
+respectively.
+\end{lemma}
+
+\begin{proof}
+The image arrays determine permutations without reference to a package
+ordering.  Closure in the displayed $27$-point action gives order $162$ in
+each case, hence index $51840/162=320$.  Exact enumeration gives the
+remaining group invariants in \cref{tab:subgroup-invariants}.  Acting on
+unordered pairs gives component sizes $27,27$ for $H_+$ and $81$ for $H_-$;
+the two $H_+$ components are disjoint.  Enumerating the setwise stabilizer of
+the resulting $54$- and $81$-element supports returns exactly the displayed
+groups.  The full pair arrays and their certificate hashes are recorded in
+\cref{app:split-graph}; the finite enumeration is independently reconstructed
+as described in \cref{sec:reproducibility}.
+\end{proof}
+
+The fixed version used for the finite table is GAP~4.11.1 with TomLib~1.2.9,
+whose table is named \texttt{U4(2).2}.  GAP and TomLib supply computational
+conventions and versioned data, not the durable field definition
+\citep{gap2021,tomlib2019}.

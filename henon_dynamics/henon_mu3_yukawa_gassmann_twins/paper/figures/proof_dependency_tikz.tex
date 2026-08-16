@@ -1,0 +1,111 @@
+% Color-free vector proof-dependency diagram.  No title or global scaling.
+\usetikzlibrary{calc}
+\begin{tikzpicture}[
+  font=\footnotesize,
+  input/.style={
+    draw,
+    double,
+    double distance=0.65pt,
+    line width=0.55pt,
+    rounded corners=1pt,
+    align=center,
+    inner xsep=4.5pt,
+    inner ysep=3.5pt,
+    text width=6.15cm
+  },
+  module/.style={
+    draw,
+    line width=0.5pt,
+    rounded corners=1pt,
+    align=center,
+    inner xsep=4.5pt,
+    inner ysep=3.5pt
+  },
+  halfmodule/.style={module,text width=2.58cm,minimum height=18mm},
+  foundation/.style={module,text width=6.15cm,minimum height=16mm},
+  combine/.style={module,line width=0.75pt,text width=13.35cm,minimum height=14mm},
+  outcome/.style={module,line width=0.75pt,text width=4cm,minimum height=18mm},
+  localresult/.style={module,line width=0.85pt,text width=8.25cm,minimum height=13mm},
+  final/.style={
+    module,
+    line width=1pt,
+    text width=11.7cm,
+    minimum height=14mm,
+    font=\footnotesize\bfseries
+  },
+  flow/.style={
+    -{Latex[length=1.8mm,width=1.15mm]},
+    line width=0.55pt,
+    rounded corners=2pt
+  }
+]
+  \node[input] (c56)
+    {\textbf{C56 frozen geometric input}\\
+     labelled \(27\)-line carrier and faithful \(G=W(E_6)\)-action};
+  \node[input,anchor=north west] (c58) at ([xshift=8mm]c56.north east)
+    {\textbf{C58 frozen arithmetic input}\\
+     lower filtrations and complex conjugation \(c\)\\
+     both retained alternatives: \(D_3=\mathrm{ToM}\,140\)\\
+     and \(D_3=\mathrm{ToM}\,206\)};
+  \coordinate (centerline) at ($(c56)!0.5!(c58)$);
+
+  \node[halfmodule,anchor=north west] (resolvents)
+    at ([yshift=-7mm]c56.south west)
+    {\textbf{Primitive construction}\\
+     scaled roots and quadratic supports\\
+     split-prime noncollision};
+  \node[halfmodule,anchor=north east] (gassmann)
+    at ([yshift=-7mm]c56.south east)
+    {\textbf{Gassmann carrier}\\
+     complete \(350\)-class table\\
+     equal full characters};
+
+  \node[foundation,anchor=north] (fields)
+    at ([yshift=-7mm]$(resolvents.south)!0.5!(gassmann.south)$)
+    {\textbf{Primitive degree-\(\CFTFieldDegree\) fields}\\
+     \(F_\pm=\mathbf Q(\eta_\pm)=K^{H_\pm}\) on \(G/H_\pm\);\\
+     common closure and zeta, but \(F_+\not\cong F_-\)};
+
+  \node[combine,anchor=north] (transport)
+    at ([yshift=-7mm]centerline |- fields.south)
+    {\textbf{Transport the complete C58 data to both coset carriers \(G/H_\pm\)}\\
+     orbit counts for the global ledger; complete double cosets for each local ledger};
+
+  \node[outcome,anchor=north west] (global)
+    at ([yshift=-7mm]transport.south west)
+    {\textbf{Global arithmetic}\\
+     \(c\Rightarrow\) signature \(\CFTSignature\) and positive sign\\
+     filtrations \(\Rightarrow\) common support and discriminant};
+  \node[outcome,right=6mm of global] (tom140)
+    {\textbf{\(D_3=\mathrm{ToM}\,140\)}\\
+     complete local rows\\
+     degree-one separator};
+  \node[outcome,right=6mm of tom140] (tom206)
+    {\textbf{\(D_3=\mathrm{ToM}\,206\)}\\
+     complete local rows\\
+     unramified-quadratic separator};
+
+  \node[localresult,anchor=north] (bothlocal)
+    at ([yshift=-7mm]$(tom140.south)!0.5!(tom206.south)$)
+    {\textbf{Both alternatives retained}\\
+     nonisomorphic finite \(\mathbf Q_3\)-algebras in each branch; neither is selected};
+
+  \node[final,anchor=north] (theorem)
+    at ([yshift=-7mm]$(transport.center |- bothlocal.south)$)
+    {Integrated degree-\(\CFTFieldDegree\) theorem:\\
+     primitive Gassmann twins with equal global data and local separation in both branches};
+
+  \draw[flow] (c56.south west) -- (resolvents.north);
+  \draw[flow] (c56.south east) -- (gassmann.north);
+  \draw[flow] (resolvents.south) -- (fields.north west);
+  \draw[flow] (gassmann.south) -- (fields.north east);
+  \draw[flow] (fields.south) -- (transport.north west);
+  \draw[flow] (c58.south) -- (transport.north east);
+  \draw[flow] (transport.south west) -- (global.north);
+  \draw[flow] (transport.south) -- (tom140.north);
+  \draw[flow] (transport.south east) -- (tom206.north);
+  \draw[flow] (tom140.south) -- (bothlocal.north west);
+  \draw[flow] (tom206.south) -- (bothlocal.north east);
+  \draw[flow] (global.south) -- (theorem.north west);
+  \draw[flow] (bothlocal.south) -- (theorem.north east);
+\end{tikzpicture}

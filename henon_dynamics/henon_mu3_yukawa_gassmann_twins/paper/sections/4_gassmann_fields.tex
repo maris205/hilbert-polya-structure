@@ -1,0 +1,140 @@
+\section{The complete Gassmann table and field consequences}
+\label{sec:gassmann}
+
+\subsection{The complete collision table}
+
+For a subgroup $H\leq G$, let
+\[
+ \chi_H=\Ind_H^G\one
+\]
+be the rational permutation character of $G$ acting on $G/H$.  The finite
+calculation compares the complete $25$-entry character vector for each of all
+$350$ subgroup conjugacy classes, not selected cyclic rows or sampled
+Frobenius data.
+
+The prior count of $350$ classes, $339$ profiles, and eleven collisions is
+due to James \citep[\S3.1, p.~22]{james2022bayesian}.  The exact replay in
+the fixed \texttt{U4(2).2} table yields the complete projection in
+\cref{tab:collision-buckets}.
+
+\FloatBarrier
+\begin{table}[H]
+\centering
+\caption{All collision buckets in the complete $350$-class $W(E_6)$
+subgroup table.  The index is $[G:H]$ for either member of the bucket.}
+\label{tab:collision-buckets}
+\begin{tabular}{@{}cc@{\qquad}cc@{}}
+\toprule
+Bucket & Index & Bucket & Index\\
+\midrule
+$[12,15]$ & $12960$ & $[17,21]$ & $12960$\\
+$[29,36]$ & $8640$ & $[31,39]$ & $8640$\\
+$[41,42]$ & $6480$ & $[46,48]$ & $6480$\\
+$[57,58]$ & $6480$ & $[59,64]$ & $6480$\\
+$[112,120]$ & $3240$ & $[132,140]$ & $2880$\\
+$[301,303]$ & $320$ & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+\begin{proposition}[Complete-table minimum]
+\label{prop:table-minimum}
+The equality $\chi_{H_+}=\chi_{H_-}$ holds on every conjugacy class of
+$G$.  Among the eleven buckets in \cref{tab:collision-buckets},
+$[301,303]$ is the unique bucket of minimum index, namely $320$.
+\end{proposition}
+
+\begin{proof}
+Grouping the $350$ complete character vectors by equality gives precisely
+the eleven two-class buckets displayed in \cref{tab:collision-buckets}; all
+other profiles occur once.  The common vector for rows $301$ and $303$ is
+\[
+(320,0,0,32,8,20,0,0,0,0,0,0,0,2,0,0,16,0,0,0,0,4,0,0,0).
+\]
+The index entries in \cref{tab:collision-buckets} show that $320$ is strictly
+smaller than the other ten bucket indices.  This proves uniqueness only
+within the complete $W(E_6)$ table.
+\end{proof}
+
+The result is not inferred from a sample of good primes.  The exact carrier
+contains all $350\times25$ character entries; its checksum-bound form and
+the independent regrouping check are described in \cref{app:gassmann-audit}.
+
+\subsection{Common normal closure and nonisomorphism}
+
+\begin{lemma}[Normal closure from the core]
+\label{lem:core-normal-closure}
+For $F=K^H$, the normal closure of $F/\Q$ inside $K$ is
+$K^{\Core_G(H)}$.  In particular, both $F_+$ and $F_-$ have normal closure
+$K$.
+\end{lemma}
+
+\begin{proof}
+The conjugates of $K^H$ inside $K$ are $K^{gHg^{-1}}$.  Their compositum is
+fixed by the intersection of their fixing groups:
+\[
+ \bigcap_{g\in G}gHg^{-1}=\Core_G(H).
+\]
+This compositum is the normal closure inside $K$.  Both cores are trivial by
+\cref{tab:subgroup-invariants}, so both normal closures equal $K$.
+\end{proof}
+
+\begin{lemma}[Common-normal-closure conjugacy criterion]
+\label{lem:field-nonisomorphism}
+The fields $F_+$ and $F_-$ are not isomorphic over $\Q$.
+\end{lemma}
+
+\begin{proof}
+Their subgroup abelianizations have invariant factors $[2,3]$ and $[2]$.
+Thus $H_+$ and $H_-$ are not isomorphic and, in particular, are not
+conjugate in $G$.  This subgroup distinction alone is not yet the desired
+field statement.
+
+Suppose instead that a $\Q$-isomorphism $F_+\to F_-$ existed.  Extend it to
+an automorphism $\sigma$ of $\Qbar$.  By
+\cref{lem:core-normal-closure}, both fields have the same normal closure
+$K$, so $\sigma(K)=K$.  The restriction of $\sigma$ to $K$ belongs to $G$
+and transports point stabilizers:
+\[
+ \sigma H_+\sigma^{-1}=H_-.
+\]
+This contradicts nonconjugacy.  Hence no such field isomorphism exists.
+\end{proof}
+
+\subsection{Artin formalism and the common zeta function}
+
+For any subgroup $H\leq G$, Artin formalism gives
+\begin{equation}
+ \zeta_{K^H}(s)=L\!\left(s,\Ind_H^G\one\right).
+ \label{eq:artin-zeta}
+\end{equation}
+This is the classical Gassmann--Perlis bridge
+\citep[Theorem~1]{perlis1977equation}; permutation-character computations
+in arithmetic equivalence are also treated by Bosma and de Smit
+\citep[printed p.~68]{bosmadesmit2002small}.
+
+\begin{proposition}[Zeta equality]
+\label{prop:zeta-equality}
+The two Dedekind zeta functions agree:
+\[
+ \zeta_{F_+}(s)=\zeta_{F_-}(s).
+\]
+\end{proposition}
+
+\begin{proof}
+By the split-prime noncollision bridge in
+\cref{lem:split-noncollision}, $F_\pm=K^{H_\pm}$.  (The separate
+\cref{cor:product-minimal} identifies the product-form minimal
+polynomials.)  Substitute
+$H=H_+$ and $H=H_-$ in \eqref{eq:artin-zeta}.  The full character identity
+in \cref{prop:table-minimum} makes the two Artin $L$-functions identical.
+\end{proof}
+
+From the equality in \cref{prop:zeta-equality} alone we infer none of integral
+permutation equivalence, isomorphic rings of integers, equality of class
+numbers, local equivalence, adelic equivalence, or isomorphic idele groups.
+The local tables in \cref{sec:local} separately disprove local and adelic
+equivalence for the present pair.  Together,
+\cref{prop:table-minimum,lem:core-normal-closure,lem:field-nonisomorphism,prop:zeta-equality}
+prove \cref{thm:integrated}(ii)--(iii).

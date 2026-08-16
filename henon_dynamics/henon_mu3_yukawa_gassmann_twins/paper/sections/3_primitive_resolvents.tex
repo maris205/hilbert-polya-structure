@@ -1,0 +1,188 @@
+\section{Primitive integral quadratic resolvents}
+\label{sec:primitive}
+
+\subsection{Scaled roots and integrality}
+
+The leading coefficient is essential.  Write
+\begin{equation}
+ g(x)=Lx^{27}+b_{26}x^{26}+\cdots+b_1x+b_0,
+ \qquad b_i\in\Z.
+ \label{eq:eliminant-general}
+\end{equation}
+
+\begin{lemma}[Integral scaling]
+\label{lem:integral-scaling}
+Every $\alpha_i=Ld_i$ is an algebraic integer.  Consequently
+$\eta_\pm$ are algebraic integers and $R_\pm(T)\in\Z[T]$.
+\end{lemma}
+
+\begin{proof}
+Substitute $x=y/L$ in \eqref{eq:eliminant-general} and multiply by
+$L^{26}$.  The result is the monic integral equation
+\[
+ y^{27}+b_{26}y^{26}+Lb_{25}y^{25}+\cdots
+   +L^{25}b_1y+L^{26}b_0=0.
+\]
+It is satisfied by $y=Ld_i$, proving that $\alpha_i$ is integral.  Products
+$\alpha_i\alpha_j$ and the finite sums \eqref{eq:intro-eta} are therefore
+integral.
+
+Because $H_\pm$ fix $\eta_\pm$, the products over $G/H_\pm$ are
+well-defined.  Their coefficients are symmetric functions of a full
+$G$-orbit, hence lie in the fixed field $K^G=\Q$.  They are also algebraic
+integers.  A rational algebraic integer lies in $\Z$, so every coefficient
+of $R_\pm$ is integral.
+\end{proof}
+
+\begin{convention}[Scaled and unscaled sums]
+\label{conv:eta-scaling}
+Throughout the paper, $\eta_\pm$ means exactly the scaled sum in
+\eqref{eq:intro-eta}.  The optional unscaled quantity is
+\[
+ \widetilde\eta_\pm
+   =\sum_{\{i,j\}\in\cS_\pm}d_id_j,
+ \qquad
+ \eta_\pm=L^2\widetilde\eta_\pm.
+\]
+All integral-polynomial and modular-coefficient statements refer to
+$\eta_\pm$, never to $\widetilde\eta_\pm$.
+\end{convention}
+
+The finite product defining $R_\pm$ is an exact characteristic-zero object;
+an expanded coefficient vector is neither needed nor supplied.  In
+particular, no characteristic-zero coefficient hash is asserted.  This
+distinction matters because the hashes below bind modular products only.
+
+\subsection{Support stabilizers and formal orbits}
+
+The setwise support computation in \cref{lem:embedded-subgroups} gives
+\begin{equation}
+ \Stab_G(\cS_+)=H_+,
+ \qquad
+ \Stab_G(\cS_-)=H_-.
+ \label{eq:support-stabilizers}
+\end{equation}
+Thus each support has $320$ translates.  Equality
+\eqref{eq:support-stabilizers} is a statement about formal supports.  It
+does not by itself exclude an accidental equality between two evaluated
+quadratic sums.  The next argument supplies exactly that missing bridge.
+
+\subsection{The split-prime noncollision argument}
+
+The prime used for the specialization is
+\begin{equation}
+ p=692717.
+ \label{eq:split-prime}
+\end{equation}
+Exact arithmetic proves that $p$ is prime, is outside the ramified support,
+and does not divide the eliminant or lexicographic reconstruction
+denominators.  Modulo $p$, the normalized eliminant is squarefree and splits
+as $1^{27}$.  Hence all labelled roots and all scaled values can be reduced
+in one common residue field.
+
+\begin{lemma}[Split-prime noncollision]
+\label{lem:split-noncollision}
+For each sign, the $320$ translated values $g\eta_\pm$, indexed by
+$gH_\pm\in G/H_\pm$, are pairwise distinct in characteristic zero.
+Consequently
+\[
+ \Stab_G(\eta_\pm)=H_\pm,
+ \qquad
+ \Q(\eta_\pm)=K^{H_\pm}.
+\]
+\end{lemma}
+
+\begin{proof}
+Reduce the labelled roots, their scaled coordinates, and the translated
+support sums modulo a fixed prime of the integral model above $p$.  Complete
+enumeration gives $320$ distinct residues for the $H_+$ family and $320$
+distinct residues for the $H_-$ family.  If two characteristic-zero
+conjugates were equal, their difference would be zero as an algebraic
+integer and would reduce to zero at every common integral reduction.  Their
+residues would then coincide, a contradiction.
+
+It follows that the $G$-orbit of $\eta_\pm$ has size $320$.  Since
+$H_\pm$ fixes $\eta_\pm$ and $[G:H_\pm]=320$, orbit--stabilizer forces
+$\Stab_G(\eta_\pm)=H_\pm$.  Galois correspondence then gives
+\[
+ [\Q(\eta_\pm):\Q]=320,
+ \qquad
+ \Q(\eta_\pm)=K^{H_\pm}.
+\]
+\end{proof}
+
+As an independently checkable summary of the specialization, the monic
+degree-$320$ products modulo $p$ have $321$ coefficients and SHA-256 values
+\begin{align}
+ H_+\colon\quad &
+ \hexsha{21b304679d3b77a7b1fae4182e203d8f2652588efffa4a160cccd98ac3e81257},
+ \label{eq:modhash-plus}\\
+ H_-\colon\quad &
+ \hexsha{76fa8081c92e58839f60659fa7c9979d9b002fae5408cc30777341d21665acb2}.
+ \label{eq:modhash-minus}
+\end{align}
+These are hashes of the complete modular coefficient arrays.  They are not
+hashes of expanded characteristic-zero coefficients.
+
+\begin{corollary}[Exact product-form minimal polynomials]
+\label{cor:product-minimal}
+The orbit products $R_\pm(T)$ are the monic integral irreducible separable
+minimal polynomials of $\eta_\pm$, each of degree $320$.
+\end{corollary}
+
+\begin{proof}
+By \cref{lem:integral-scaling}, the orbit products lie in $\Z[T]$.  By
+\cref{lem:split-noncollision}, each product contains every distinct
+$\Q$-conjugate of $\eta_\pm$ exactly once.  It is therefore the minimal
+polynomial.  Characteristic zero gives separability.
+\end{proof}
+
+\subsection{Graph authority and labelling independence}
+
+The labelled action is tied back to the cubic surface rather than accepted
+as a free-standing abstract permutation representation.  At the split prime,
+the exact lexicographic formulas reconstruct all $27$ lines.  Substitution
+into each of four chart line equations gives zero for every line.  Pairwise
+incidence then yields a graph with $27$ vertices, $135$ edges, and degree
+$10$ at every vertex.  We denote this line-intersection graph by
+$\Gamma_{\mathrm{meet}}$.  It is the complement of the graph conventionally
+called the Schlaefli graph, whose edges join skew lines and which is therefore
+$16$-regular; complementation does not change the automorphism group.
+
+\begin{lemma}[Full graph-labelling bridge]
+\label{lem:graph-bridge}
+Inside the fixed labelled action,
+\[
+ \Aut(\Gamma_{\mathrm{meet}})=G
+\]
+as equality of the two complete $51{,}840$-element permutation sets.  Any
+other graph identification transports $H_\pm$ and $\cS_\pm$ by one element
+of $G$ and merely permutes the $320$ factors of $R_\pm$.
+\end{lemma}
+
+\begin{proof}
+The six fixed simple-reflection generators preserve the reconstructed graph,
+so the released $G$ is contained in the graph automorphism group.  Exact
+enumeration gives $|G|=51840$.  Independently, individualization followed by
+equitable color refinement with base vertices $1,2,3,4,5$ gives cell-choice
+sizes $27,16,10,6,2$ and a discrete final partition.  Their product is
+$51840$, an upper bound for the graph automorphism group.  Thus containment
+and the matching upper bound give equality of the complete permutation sets.
+
+Two identifications of the reconstructed graph with the standard labelled
+graph differ by an automorphism, hence by some $w\in G$.  They send
+$(H_\pm,\cS_\pm)$ to $(wH_\pm w^{-1},w\cS_\pm)$.  Left multiplication by
+$w$ permutes the full coset orbit, leaving its product and noncollision
+property unchanged.  Literal equality with the particular fixed fields in
+\cref{thm:integrated} uses the displayed labelling; a relabelling transports
+the subgroups with it.
+\end{proof}
+
+Eight sampled graph isomorphisms would not prove
+\cref{lem:graph-bridge}.  The argument uses all four chart equations, all
+$27$ reconstructed lines, and equality of the full permutation sets.  This
+completes the proof of \cref{thm:integrated}(i).
+
+\FloatBarrier
+\input{figures/figure_proof_dependency}
+\FloatBarrier

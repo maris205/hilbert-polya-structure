@@ -1,0 +1,172 @@
+\section{Signature, conductors, and the exact global discriminant}
+\label{sec:global}
+
+The global invariants are computed on the two $320$-point coset carriers.
+The equality of permutation characters predicts equality of their conductor
+data, but the proof below uses the exact orbit counts supplied by the fixed
+lower filtrations.
+
+\subsection{Complex conjugation and the signature}
+
+Let $c\in G$ be the fixed complex-conjugation element.  On each carrier
+$G/H_\pm$, the cyclic group $\langle c\rangle$ has $168$ orbits.
+
+\begin{lemma}[Signature]
+\label{lem:signature}
+Both fields have signature $(r_1,r_2)=(16,152)$, and their discriminants
+have positive sign.
+\end{lemma}
+
+\begin{proof}
+Fixed cosets correspond to real embeddings and two-element orbits correspond
+to conjugate pairs.  Therefore
+\[
+ r_1+2r_2=320,
+ \qquad
+ r_1+r_2=168.
+\]
+Subtracting gives $r_2=152$ and then $r_1=16$.  The sign of a number-field
+discriminant is $(-1)^{r_2}=+1$.
+\end{proof}
+
+\subsection{Permutation conductors from orbit deficits}
+
+Let $V_H=\Q[G/H]$.  If a subgroup $J\leq G$ has $o_H(J)$ orbits on
+$G/H$, then
+\begin{equation}
+ \dim V_H^J=o_H(J),
+ \qquad
+ \operatorname{codim}V_H^J=320-o_H(J).
+ \label{eq:orbit-codim}
+\end{equation}
+For a lower filtration $G_0\supseteq G_1\supseteq\cdots$ with inertia
+$G_0$, the Artin conductor of the permutation representation is
+\begin{equation}
+ a(V_H)=\sum_{u\geq0}\frac{|G_u|}{|G_0|}
+       \bigl(320-o_H(G_u)\bigr).
+ \label{eq:permutation-conductor}
+\end{equation}
+The conductor--discriminant identity identifies this integer with the prime
+exponent of $\Disc(K^H)$.  This is a field-discriminant computation; it does
+not use a defining-polynomial discriminant.
+
+The common exact orbit vector, in the order
+$(I_3,P_3,Q_3,I_5,P_5,C_3,C_2,C_\infty)$, is
+\begin{equation}
+ (36,56,112,16,64,128,160,168).
+ \label{eq:common-orbit-vector}
+\end{equation}
+Here $P_p$ denotes wild inertia, $Q_3$ the last nontrivial deep subgroup
+needed below, $C_3$ a tame cubic inertia class, and $C_2$ the reflection
+class.
+
+\begin{proposition}[Exact conductor exponents]
+\label{prop:conductor-exponents}
+For either $H=H_+$ or $H=H_-$, the field $K^H$ has common conductor
+exponents
+\[
+ v_3=624,
+ \qquad v_5=496,
+ \qquad v_A=192,
+ \qquad v_B=160.
+\]
+\end{proposition}
+
+\begin{proof}
+At $3$, the lower filtration has inertia order $18$, first wild group order
+$9$, and six occurrences of the deep order-$3$ group.  Substituting
+\eqref{eq:common-orbit-vector} in \eqref{eq:permutation-conductor} gives
+\begin{align*}
+ v_3
+ &= (320-36)+\frac{9}{18}(320-56)
+    +6\frac{3}{18}(320-112)\\
+ &= (320-36)+\frac{320-56}{2}+(320-112)\\
+ &=284+132+208=624.
+\end{align*}
+At $5$, inertia has order $20$ and the order-$5$ wild group occurs in three
+positive lower grades.  Hence
+\begin{align*}
+ v_5
+ &= (320-16)+3\frac{5}{20}(320-64)\\
+ &= (320-16)+\frac34(320-64)\\
+ &=304+192=496.
+\end{align*}
+At a tame cubic prime only $G_0=C_3$ contributes, and at a reflection prime
+only $G_0=C_2$ contributes.  Formula \eqref{eq:orbit-codim} therefore gives
+\[
+ v_A=320-128=192,
+ \qquad
+ v_B=320-160=160.
+\]
+The orbit vector is identical on both coset carriers, so the calculation
+applies to both fields.
+\end{proof}
+
+\FloatBarrier
+\begin{table}[t]
+\centering
+\caption{Global arithmetic ledger.  The coefficients in the conductor rows
+come from the complete lower filtrations, not from a polynomial
+discriminant.}
+\label{tab:global-ledger}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Place/type & Orbit counts used & Field-discriminant contribution\\
+\midrule
+$3$ & $(36,56,112)$ &
+$(320-36)+\frac12(320-56)+(320-112)=624$\\
+$5$ & $(16,64)$ &
+$(320-16)+\frac34(320-64)=496$\\
+tame $C_3$ primes & $128$ & $320-128=192$\\
+reflection $C_2$ primes & $160$ & $320-160=160$\\
+infinity & $168$ & $(r_1,r_2)=(16,152)$; sign $+$\\
+\bottomrule
+\end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{Exact support and signed identity}
+
+Let $q$ denote the certified prime below, and define
+\begin{align}
+ q&=14932047182473291995860108491583652133938007263719,
+ \label{eq:q-definition}\\
+ A&=181\cdot997\cdot2346241=423395612137,
+ \label{eq:A-definition}\\
+ B&=283\cdot1801\cdot q
+ =7610610604104534884325967676315830570581925356194091077.
+ \label{eq:B-definition}
+\end{align}
+
+\begin{corollary}[Signed field discriminant and exact support]
+\label{cor:global-discriminant}
+For both signs,
+\[
+ \Disc(F_\pm)=+3^{624}5^{496}A^{192}B^{160},
+\]
+and the finite ramified support is exactly
+\[
+ \{3,5,181,283,997,1801,2346241,q\}.
+\]
+\end{corollary}
+
+\begin{proof}
+The normal closure $K$ is unramified outside the displayed eight primes.
+Every subfield of $K$ is therefore unramified outside the same set, giving
+one inclusion.  Conversely, each exponent in
+\cref{prop:conductor-exponents} is positive.  After expanding $A$ and $B$,
+every one of the eight primes occurs with positive field-discriminant
+valuation, hence ramifies in each $F_\pm$.  This gives the reverse inclusion.
+The positive sign is \cref{lem:signature}.
+\end{proof}
+
+The positive discriminant is an $11{,}658$-digit integer.  As a
+reproducibility check, its unsigned no-newline decimal expansion has SHA-256
+\[
+\hexsha{7f3ed0f731e5905f9af8254df2114ad15c2bb7d96cfa9a8b464a58ae8ea3ae70}.
+\]
+The decimal expansion itself is not needed in the paper.  Neither the
+factorization nor its digest asserts an integral basis, a maximal order,
+monogenicity, or equality between the discriminant of an expanded
+degree-$320$ polynomial and the field discriminant.  This completes the
+proof of \cref{thm:integrated}(iv).
