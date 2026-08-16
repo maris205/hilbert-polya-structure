@@ -1,9 +1,10 @@
 # HCS-C59 compilation report
 
-Status: **PASS; official final paper build; `PAPER_HOSTILE_PASS`; machine
-layer `PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS`; formal layer
-`FORMAL_DOCS_PASS`; project `NOT_RELEASED`; I59 implementation commit
-pending.**
+Status: **PASS; official final paper build; `PAPER_HOSTILE_PASS`; project
+`RELEASE_FROZEN` at implementation commit
+`6c806120f17dab2e7b0bca37fcc156dfc459a4b7`; protected machine layer remains
+`PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS` and the formal layer remains
+`FORMAL_DOCS_PASS`.**
 
 ## Build
 
@@ -168,15 +169,24 @@ every release manifest.
   `026a5f6d69be8588a60fb3aae10823f589d6befd26dc1f72a2d84d9c890f9925`.
 - Incoming pre-paper Batch SHA-256:
   `19797e7209f9551b967018323f930569d4fda9ca1f3b4e8e5106ac4bfb1d93f2`.
-- Neither the 21 protected machine files nor the 13 frozen formal Markdown
-  files is rewritten by the paper build or by I59 paper integration.
+- Project status: `RELEASE_FROZEN`, binding implementation commit
+  `6c806120f17dab2e7b0bca37fcc156dfc459a4b7`.
+- Separate provenance commit: `null`; release provenance is external-only and
+  no separate provenance-commit identity is promoted.
+- The protected 21 machine files and frozen 13-root formal package are not
+  rewritten by P59. Their historical `PAPER_PENDING` prose is a layered-state
+  record, not the live project release status.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 63
+  entries and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C59/20260816T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
 
-The scoped machine manifest remains the exact machine-lane identity. It is
-not the pending full-project release manifest. The machine and formal layers
-may retain their intentional historical `PAPER_PENDING` prose; this report
-is the successor paper-state record. The incoming Route and Batch digests
-record the pre-paper handoff and are expected to acquire new external digests
-when their I59 paper-state prose is updated.
+The 20-entry scoped manifest remains the exact machine-lane identity. The
+63-entry successor is the release-wide ledger and does not replace it. P59
+does not rewrite any paper source, PDF, code, result, certificate, evidence
+artifact, or frozen formal-root Markdown file.
 
 ## PDF checks
 
@@ -241,20 +251,30 @@ when their I59 paper-state prose is updated.
   weak approximation, Brauer--Manin obstruction, motive, RH, or
   Hilbert--Polya operator.
 
-## I59 release boundary
+## P59 release closure
 
 - Paper compilation status: `PAPER_COMPILED`.
 - Independent paper audit status: `PAPER_HOSTILE_PASS`.
 - Machine status: `PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS`.
 - Formal-document status: `FORMAL_DOCS_PASS`.
-- Project release status: `NOT_RELEASED`.
-- I59 implementation commit: **pending; no hash is guessed here**.
-- Full-project release manifest: not created; pending.
-- Release archive: not created; pending.
-- Promotion authorization: false.
+- Project release status: `RELEASE_FROZEN`.
+- Implementation commit:
+  `6c806120f17dab2e7b0bca37fcc156dfc459a4b7`.
+- Separate provenance commit: `null`; P59 provenance remains external-only and
+  no separate provenance-commit identity is promoted.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 63
+  entries and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C59/20260816T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
+- Promotion authorization: true.
+- P59 rewrites no paper source, PDF, code, result, certificate, evidence, or
+  frozen formal-document byte.
+- C60--C61 remain contingent and unselected.
 
-This report records the official final paper build and the evidence available
-for initial I59 paper integration. It contains neither its own digest nor any
-I59 live-Route digest, archived-Route digest, full-project-manifest digest, or
-I59/P59 commit identity. Those acyclic successor identities remain external
-and may be populated only after the corresponding artifacts exist.
+This report records the official final paper build and P59 release closure.
+It contains neither its own digest nor any live-Route, archived-Route,
+full-project-manifest, or P59 commit digest. Those acyclic identities are
+verified and reported only by external consumers. The frozen formal-package
+digest likewise remains external to the 13 Markdown files it covers.

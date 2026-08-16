@@ -1,25 +1,19 @@
 # Adaptive batch plan: HCS-C57 through HCS-C61
 
-Status: **adaptive batch; C57 and C58 released and frozen; C59 machine,
-post-refresh, formal-document, and paper audits pass, with release closure
-pending; C60--C61 remain contingent and unselected**
+Status: **adaptive batch; C57 through C59 released and frozen; C60--C61
+remain contingent and unselected**
 
 Date: 2026-08-16
 
 ## Batch protocol
 
 This is a five-paper adaptive batch, not a list of five predetermined
-questions.  C57 and C58 are frozen.  C59 was selected only after C58's actual
-released filtered-inertia theorem passed fresh mathematical, primary-source,
-non-salami, primitive-realization, and engineering-feasibility review.  The
-C59 selection is `TARGET_LOCK_GO`: it fixes one theorem target and scope.
-All eight project-local G0--G7 premises now have
-`PREFREEZE_CODE_RESULTS_PASS`; the official atomic refresh, its mandatory
-nonmutating replay, and the independent read-only machine audit have
-`POSTREFRESH_PASS`.  The updated formal-document package has an independent
-`FORMAL_DOCS_PASS`, and the deterministic anonymous paper has
-`PAPER_HOSTILE_PASS`; C59 release provenance remains pending.  After each
-paper is released, the next paper may be
+questions.  C57 through C59 are frozen.  C59 was selected only after C58's
+actual released filtered-inertia theorem passed fresh mathematical,
+primary-source, non-salami, primitive-realization, and engineering-feasibility
+review.  Its theorem, machine/formal packages, anonymous paper, I59
+implementation identity, and P59 release provenance are now closed.  After
+each paper is released, the next paper may be
 selected only from that predecessor's actual positive theorem, certified
 obstruction, or explicitly unresolved branch.  A proposed successor must pass
 a fresh primary-source novelty audit, a theorem-size and non-salami review,
@@ -28,10 +22,7 @@ and a falsifiable exact-computation gate before its title or claim is fixed.
 The current dependency graph is therefore
 
 \[
- C56\longrightarrow C57\longrightarrow C58\longrightarrow
- \underbrace{C59}_{\substack{\text{paper hostile PASS}\\
-                              \text{release pending}}}
- \longrightarrow
+ C56\longrightarrow C57\longrightarrow C58\longrightarrow C59\longrightarrow
  \underbrace{C60\longrightarrow C61}
  _{\text{contingent and presently unselected}}.
 \]
@@ -496,16 +487,18 @@ and scoped manifest `c4145ea2...`.  The machine-bound Batch input remains the
 pre-documentation byte snapshot; this edited handoff is a later documentation
 layer and does not authorize another machine refresh.
 
-The current C59 state is `THEOREM_TARGET_LOCKED` /
-`PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS` /
-`FORMAL_DOCS_PASS` / `PAPER_COMPILED` / `PAPER_HOSTILE_PASS` /
-`NOT_RELEASED`.  The anonymous 27-page paper has an exact 25-source lock,
-two byte-identical deterministic clean builds, zero diagnostics, embedded
-Type-1 fonts, no raster images, and an independent zero-blocker hostile
-audit.  Its I59 paper inventory is exactly 27 files: 25 sources, the PDF, and
-the compilation report.  The implementation commit, self-excluding
-full-project manifest, byte-identical Route archive, promotion, and release
-gate remain pending.
+The official anonymous paper is a deterministic 27-page build with exact
+25-source lock `184dbbdb...`, PDF `b0cfaf63...`, stabilized log `7960319b...`,
+layout text `0204133c...`, and exact 27-file live paper inventory with zero
+auxiliaries.  The independent final read-only audit returns
+`PAPER_HOSTILE_PASS` with zero blockers.  P59 binds the full I59 implementation
+commit `6c806120f17dab2e7b0bca37fcc156dfc459a4b7`, self-excluding 63-entry
+full-project manifest, and byte-identical final Route archive.  C59 is
+`RELEASE_FROZEN` and promotion is authorized; `provenance_commit` remains
+null under the external-only policy.  The protected 21-file machine layer
+remains `PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS`, and its 20-entry
+scoped manifest remains the exact machine identity.  C60--C61 remain
+contingent and unselected.
 
 ## HCS-C60 through HCS-C61: contingent slots
 
