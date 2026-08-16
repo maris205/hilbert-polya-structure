@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -22,6 +23,30 @@ ROUTE_REL = "evaluations/route_a/SD-C41/2026-08-16.yaml"
 ROUTE_INDEPENDENT_REL = "evaluations/route_a/SD-C41/independent_evaluation.json"
 REPORT_REL = "EXPERIMENT_REPORT.md"
 SCIENCE_SHA256 = "77a45be483807b81ba61fe0f16b16be20fcd7e6e4ff1f3f74f34d052c6881d93"
+PENDING = "PENDING_FIRST_ARTIFACT_COMMIT"
+DUMMY_ARTIFACT_COMMIT = "0123456789abcdef0123456789abcdef01234567"
+MANIFEST_REL = "PAPER_MANIFEST.sha256"
+
+STAGE1_FREEZE_NOTE = (
+    "freeze_note: >-\n"
+    "  Stage 1 authority card. Paper 39 is a retrospective closure/audit\n"
+    "  meta-object assembled after P35-P38 outcomes were known and frozen before\n"
+    "  the Paper-39 authority checker run. The three provenance fields remain\n"
+    "  PENDING_FIRST_ARTIFACT_COMMIT and no root manifest exists. Stage 2 is\n"
+    "  metadata-only and may change only this fixed Route card and add the\n"
+    "  self-excluding root manifest.\n"
+)
+
+
+def sealed_freeze_note(commit: str) -> str:
+    return (
+        "freeze_note: >-\n"
+        f"  Stage 1 artifact commit {commit} contains the three\n"
+        "  PENDING_FIRST_ARTIFACT_COMMIT fields and no root manifest. Stage 2 is\n"
+        "  metadata-only: it seals source_commit, code_commit, and\n"
+        "  source_lock.code_commit to that same lowercase 40-hex artifact commit\n"
+        "  and adds the sorted self-excluding PAPER_MANIFEST.sha256.\n"
+    )
 
 LOCKED_RESEARCH = {
     "DAG_BRIDGE.json": "4fa3bb28e6a2371dfb134f4a45ff03c1953ea68764f1decb70c64a9d5423d240",
@@ -66,6 +91,7 @@ RESULT_PATHS = sorted(
         "results/reproducibility_certificate.json",
         "results/route_evaluation.json",
         "results/scientific_results.json",
+        "results/sealed_state_compatibility.json",
         "results/source_evaluator_boundary.json",
         "results/source_packet.json",
     ]
@@ -111,6 +137,49 @@ def digest(path: Path) -> str:
 
 def digest_bytes(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
+
+
+def sealed_route_bytes(stage1_raw: bytes, commit: str) -> bytes:
+    if not re.fullmatch(r"[0-9a-f]{40}", commit) or commit == "0" * 40:
+        raise ValueError("sealed commit must be one lowercase nonzero 40-hex value")
+    text = stage1_raw.decode("utf-8")
+    if text.count(STAGE1_FREEZE_NOTE) != 1:
+        raise ValueError("Stage-1 freeze note is not exact")
+    text = text.replace(STAGE1_FREEZE_NOTE, sealed_freeze_note(commit), 1)
+    replacements = [
+        (rf"^source_commit: {PENDING}$", f"source_commit: {commit}"),
+        (rf"^code_commit: {PENDING}$", f"code_commit: {commit}"),
+        (rf"^  code_commit: {PENDING}$", f"  code_commit: {commit}"),
+    ]
+    for pattern, replacement in replacements:
+        text, count = re.subn(pattern, replacement, text, count=1, flags=re.MULTILINE)
+        if count != 1:
+            raise ValueError(f"Route provenance field is not exact: {pattern}")
+    return text.encode("utf-8")
+
+
+def root_manifest_bytes(root: Path) -> bytes:
+    manifest_path = root / MANIFEST_REL
+    paths = sorted(
+        path.relative_to(root).as_posix()
+        for path in root.rglob("*")
+        if path.is_file() and path != manifest_path
+    )
+    return "".join(f"{digest(root / relative)}  {relative}\n" for relative in paths).encode("utf-8")
+
+
+def run_standalone_audit(root: Path, *, hidden: bool = False) -> subprocess.CompletedProcess[bytes]:
+    env = os.environ.copy()
+    env.update({"PYTHONDONTWRITEBYTECODE": "1", "PYTHONHASHSEED": "0"})
+    if hidden:
+        env["PAPER39_HIDE_EXTERNAL_PROVENANCE"] = "1"
+    return subprocess.run(
+        [sys.executable, "-I", "-B", str(root / "code/audit_integrity.py")],
+        cwd=root,
+        env=env,
+        check=False,
+        capture_output=True,
+    )
 
 
 def write_if_changed(relative: str, raw: bytes) -> bool:
@@ -488,7 +557,13 @@ The normal and hidden-provenance standalone integrity audits are
 byte-identical. The exact result and managed-text sets, dependency/import
 surface, immutable research/prototype locks, self-excluding SHA ledger,
 UTF-8/LF/EOF hygiene, and no-cache/no-symlink boundary are machine checked.
-The Stage-1 root manifest is absent.
+At authority generation, the Stage-1 root manifest is absent. The same
+read-only audit accepts exactly two paired live states: (A) manifest absent,
+the three literal pending provenance fields, and the accurate Stage-1 note; or
+(B) an exact self-excluding root manifest, three identical lowercase nonzero
+40-hex provenance fields, and the accurate metadata-only seal note. Every
+mixed state is rejected. An isolated dummy sealed-state B, including its full
+manifest, reproduces the exact stored normal/hidden audit bytes.
 
 ## Route-A disposition
 
@@ -497,7 +572,8 @@ strict Route-A v0.2 tuple is
 `(A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL)`, Route B is false and locked,
 and every target/root metric is `NA`. The fixed Stage-1 Route card carries the
 literal paired provenance triple `PENDING_FIRST_ARTIFACT_COMMIT`. Stage 2 is
-limited to that card plus the self-excluding root manifest.
+metadata-only and is limited to that card plus the self-excluding root
+manifest.
 """
     return text.encode("utf-8")
 
@@ -650,6 +726,174 @@ def finalize_integrity() -> bytes:
     raise RuntimeError("ledger/audit fixed point not reached")
 
 
+def verify_dummy_sealed_state(expected_audit_raw: bytes) -> dict[str, bool]:
+    if (ROOT / MANIFEST_REL).exists():
+        raise RuntimeError("dummy-seal verification requires the authority Stage-1 state")
+
+    with tempfile.TemporaryDirectory(prefix="sd_c41_sealed_compatibility_") as temporary:
+        temporary_root = Path(temporary)
+
+        def fresh_clone(name: str) -> Path:
+            clone = temporary_root / name
+            shutil.copytree(ROOT, clone)
+            if (clone / MANIFEST_REL).exists():
+                raise RuntimeError("dummy sealed clone unexpectedly inherited a manifest")
+            return clone
+
+        def seal(clone: Path, commit: str = DUMMY_ARTIFACT_COMMIT) -> None:
+            route_path = clone / ROUTE_REL
+            route_path.write_bytes(sealed_route_bytes(route_path.read_bytes(), commit))
+
+        def write_manifest(clone: Path) -> None:
+            (clone / MANIFEST_REL).write_bytes(root_manifest_bytes(clone))
+
+        def rejected(clone: Path) -> bool:
+            audited = run_standalone_audit(clone)
+            try:
+                payload = json.loads(audited.stdout)
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                return False
+            return (
+                audited.returncode == 1
+                and not audited.stderr
+                and payload.get("all_pass") is False
+                and payload.get("counts", {}).get("checks_passed")
+                < payload.get("counts", {}).get("checks_total")
+            )
+
+        valid = fresh_clone("valid_state_b")
+        seal(valid)
+        write_manifest(valid)
+        normal = run_standalone_audit(valid)
+        hidden = run_standalone_audit(valid, hidden=True)
+        if (
+            normal.returncode != 0
+            or hidden.returncode != 0
+            or normal.stderr
+            or hidden.stderr
+            or normal.stdout != hidden.stdout
+            or normal.stdout != expected_audit_raw
+        ):
+            raise RuntimeError(
+                "dummy sealed state B did not reproduce the exact stored audit: "
+                f"normal_rc={normal.returncode}; hidden_rc={hidden.returncode}; "
+                f"normal_sha={digest_bytes(normal.stdout)}; expected_sha={digest_bytes(expected_audit_raw)}; "
+                f"normal_stderr={normal.stderr.decode(errors='replace')!r}; "
+                f"hidden_stderr={hidden.stderr.decode(errors='replace')!r}"
+            )
+
+        controls: dict[str, bool] = {}
+
+        clone = fresh_clone("pending_with_manifest")
+        write_manifest(clone)
+        controls["manifest_present_with_pending_triple"] = rejected(clone)
+
+        clone = fresh_clone("sealed_without_manifest")
+        seal(clone)
+        controls["sealed_triple_without_manifest"] = rejected(clone)
+
+        clone = fresh_clone("mismatched_triple")
+        seal(clone)
+        route_path = clone / ROUTE_REL
+        route_text, count = re.subn(
+            rf"^code_commit: {DUMMY_ARTIFACT_COMMIT}$",
+            "code_commit: fedcba9876543210fedcba9876543210fedcba98",
+            route_path.read_text(encoding="utf-8"),
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if count != 1:
+            raise RuntimeError("mismatched-triple control could not mutate top-level code_commit")
+        route_path.write_text(route_text, encoding="utf-8", newline="\n")
+        write_manifest(clone)
+        controls["sealed_manifest_mismatched_triple"] = rejected(clone)
+
+        clone = fresh_clone("inaccurate_note")
+        seal(clone)
+        route_path = clone / ROUTE_REL
+        route_text = route_path.read_text(encoding="utf-8")
+        sealed_note = sealed_freeze_note(DUMMY_ARTIFACT_COMMIT)
+        if route_text.count(sealed_note) != 1:
+            raise RuntimeError("inaccurate-note control could not find sealed note")
+        inaccurate_note = sealed_note.replace(
+            "PAPER_MANIFEST.sha256.\n",
+            "PAPER_MANIFEST.sha256. Scientific bytes may also change.\n",
+            1,
+        )
+        route_path.write_text(route_text.replace(sealed_note, inaccurate_note, 1), encoding="utf-8", newline="\n")
+        write_manifest(clone)
+        controls["sealed_manifest_inaccurate_note"] = rejected(clone)
+
+        clone = fresh_clone("wrong_hash")
+        seal(clone)
+        write_manifest(clone)
+        manifest_path = clone / MANIFEST_REL
+        manifest_raw = manifest_path.read_bytes()
+        replacement = b"0" if manifest_raw[:1] != b"0" else b"1"
+        manifest_path.write_bytes(replacement + manifest_raw[1:])
+        controls["sealed_manifest_wrong_hash"] = rejected(clone)
+
+        clone = fresh_clone("unsorted_manifest")
+        seal(clone)
+        write_manifest(clone)
+        manifest_path = clone / MANIFEST_REL
+        lines = manifest_path.read_bytes().splitlines(keepends=True)
+        manifest_path.write_bytes(b"".join(reversed(lines)))
+        controls["sealed_manifest_unsorted"] = rejected(clone)
+
+        clone = fresh_clone("duplicate_path")
+        seal(clone)
+        write_manifest(clone)
+        manifest_path = clone / MANIFEST_REL
+        lines = manifest_path.read_bytes().splitlines(keepends=True)
+        manifest_path.write_bytes(b"".join(lines + [lines[0]]))
+        controls["sealed_manifest_duplicate_path"] = rejected(clone)
+
+        clone = fresh_clone("manifest_self_included")
+        seal(clone)
+        write_manifest(clone)
+        manifest_path = clone / MANIFEST_REL
+        manifest_path.write_bytes(
+            manifest_path.read_bytes() + b"0000000000000000000000000000000000000000000000000000000000000000  PAPER_MANIFEST.sha256\n"
+        )
+        controls["sealed_manifest_self_included"] = rejected(clone)
+
+        clone = fresh_clone("manifest_missing_path")
+        seal(clone)
+        write_manifest(clone)
+        manifest_path = clone / MANIFEST_REL
+        lines = manifest_path.read_bytes().splitlines(keepends=True)
+        manifest_path.write_bytes(b"".join(lines[1:]))
+        controls["sealed_manifest_missing_path"] = rejected(clone)
+
+        clone = fresh_clone("uppercase_commit")
+        seal(clone)
+        route_path = clone / ROUTE_REL
+        route_path.write_text(
+            route_path.read_text(encoding="utf-8").replace(DUMMY_ARTIFACT_COMMIT, DUMMY_ARTIFACT_COMMIT.upper()),
+            encoding="utf-8",
+            newline="\n",
+        )
+        write_manifest(clone)
+        controls["sealed_uppercase_commit"] = rejected(clone)
+
+        clone = fresh_clone("zero_commit")
+        seal(clone)
+        route_path = clone / ROUTE_REL
+        route_path.write_text(
+            route_path.read_text(encoding="utf-8").replace(DUMMY_ARTIFACT_COMMIT, "0" * 40),
+            encoding="utf-8",
+            newline="\n",
+        )
+        write_manifest(clone)
+        controls["sealed_zero_commit"] = rejected(clone)
+
+        if not all(controls.values()):
+            failed = sorted(name for name, passed in controls.items() if not passed)
+            raise RuntimeError(f"sealed-state invalid controls were not rejected: {failed}")
+        return controls
+
+
 def main() -> int:
     verify_static_locks()
     before = snapshot_outputs()
@@ -775,7 +1019,45 @@ def main() -> int:
         "schema": "paper39-idempotence-certificate-v1",
         "write_policy": "WRITE_ONLY_IF_BYTES_DIFFER",
     }
+    seal_control_names = [
+        "manifest_present_with_pending_triple",
+        "sealed_manifest_duplicate_path",
+        "sealed_manifest_inaccurate_note",
+        "sealed_manifest_mismatched_triple",
+        "sealed_manifest_missing_path",
+        "sealed_manifest_self_included",
+        "sealed_manifest_unsorted",
+        "sealed_manifest_wrong_hash",
+        "sealed_triple_without_manifest",
+        "sealed_uppercase_commit",
+        "sealed_zero_commit",
+    ]
+    sealed_compatibility = {
+        "all_pass": True,
+        "audit_byte_identity_required_across_states": True,
+        "dummy_artifact_commit_format": "LOWERCASE_NONZERO_40HEX",
+        "invalid_controls_rejected": {name: True for name in seal_control_names},
+        "mixed_states_rejected": True,
+        "normal_hidden_state_b_byte_identical": True,
+        "schema": "paper39-sealed-state-compatibility-v1",
+        "stored_audit_sha_embedded": False,
+        "valid_state_a_accepted": True,
+        "valid_state_b_audit_byte_identical": True,
+    }
     integrity_contract = {
+        "accepted_live_states": {
+            "A_PENDING_WITHOUT_MANIFEST": {
+                "freeze_note": "ACCURATE_STAGE1_NOTE",
+                "manifest": "ABSENT",
+                "provenance_triple": "PENDING_FIRST_ARTIFACT_COMMIT",
+            },
+            "B_SEALED_WITH_MANIFEST": {
+                "freeze_note": "ACCURATE_METADATA_ONLY_SEAL_NOTE",
+                "manifest": "SORTED_UNIQUE_EXACT_SELF_EXCLUDING_SHA256",
+                "provenance_triple": "ONE_IDENTICAL_LOWERCASE_NONZERO_40HEX_COMMIT",
+            },
+        },
+        "authority_generation_state": "A_PENDING_WITHOUT_MANIFEST",
         "exact_result_paths": RESULT_PATHS,
         "exact_text_paths": MANAGED_TEXT_PATHS,
         "expected_counts": {
@@ -792,10 +1074,18 @@ def main() -> int:
         },
         "ledger_exclusions": sorted(LEDGER_EXCLUSIONS),
         "ledger_paths": LEDGER_PATHS,
+        "manifest_validation": [
+            "FORMAT_LOWERCASE_SHA256_TWO_SPACES_PATH",
+            "SORTED_UNIQUE_PATHS",
+            "SAFE_RELATIVE_PATHS",
+            "SELF_EXCLUDED",
+            "EXACT_CURRENT_FILE_SET",
+            "ALL_DECLARED_HASHES_MATCH",
+        ],
+        "mixed_states": "REJECT",
         "route_fixed_path": ROUTE_REL,
-        "schema": "paper39-integrity-contract-v1",
+        "schema": "paper39-integrity-contract-v2",
         "science_projection_sha256": SCIENCE_SHA256,
-        "stage1_manifest": "ABSENT",
     }
 
     planned: dict[str, bytes] = {}
@@ -824,6 +1114,7 @@ def main() -> int:
             "results/reproducibility_certificate.json": canonical_bytes(reproducibility),
             "results/route_evaluation.json": branch["route_evaluation.json"],
             "results/scientific_results.json": branch["scientific_results.json"],
+            "results/sealed_state_compatibility.json": canonical_bytes(sealed_compatibility),
             "results/source_evaluator_boundary.json": canonical_bytes(boundary),
             "results/source_packet.json": branch["source_packet.json"],
             REPORT_REL: report_raw,
@@ -839,6 +1130,9 @@ def main() -> int:
         raise RuntimeError("planned result path set mismatch")
 
     audit_raw = finalize_integrity()
+    observed_controls = verify_dummy_sealed_state(audit_raw)
+    if observed_controls != sealed_compatibility["invalid_controls_rejected"]:
+        raise RuntimeError("sealed-state control certificate differs from executed controls")
     if child_audit and child_audit != audit_raw:
         raise RuntimeError("cold-copy and authority integrity bytes differ")
     normal = subprocess.run(

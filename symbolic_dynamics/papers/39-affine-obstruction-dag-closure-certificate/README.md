@@ -75,16 +75,18 @@ independent evaluator: 278/278; sha256=21bb9b3f623215875bdf93670165da41ff5c42f7e
 science projection: sha256=77a45be483807b81ba61fe0f16b16be20fcd7e6e4ff1f3f74f34d052c6881d93
 adversarial mutations: 29/29 rejected by each evaluator; sha256=f5fee0209155d06c8e16aedbf44ed2003f29115ad76b7f06bafe8be8a6d26f56
 Route evaluation: 14/14; json_sha256=f0d7f98e06e50b1605642fda3abc47b253103c79119886fa5a5b1b0e5c6b2902
-fixed Route YAML: sha256=b3537a77c363c9db3e619c0afb90c3dc369f6060d8d923fb0d7334b052688924
+fixed Route YAML: sha256=9cda64c6ddf6bfbb865cb576b1a7475e2ce477c3627102e31862ec4c647ebc4e
 analysis summary: sha256=acf6dfefcead90b84eb0f28f43c60bf94ad0512389a7ce50d458d6b08e87560a
-integrity audit: 215/215; sha256=278f54bb4cbf236a66fad56265f5d0db3f833841bf6a666c2617d4179fda47a1
-ledger audit: 64/64; sha256=8b80089b995fe6eaf8d6e3d3e813422d7b4bb101b7aa327aeae6ef9d09ec612e
-exact result set: 35; sha256=ae4aea4560e1a4c2140c49d45f152d92fc4d2d2ddf715c04f6b2a77f1b64b08d
-exact text set: 66; sha256=9d9ae52987f63be01526e69b0a26635a0df69e3f3fa6e06dfeb825d055ecde89
-managed outputs: 38
-managed aggregate: sha256=1ef0ce887a4d44a688a64b85df874b4d92da6a1e95808df7b6b5d78962d814a6
-experiment report: sha256=8306e7aa658a1ab24c1d8aac9c2cda9752959bcd3c9f270c23435f0dfa64321d
+integrity audit: 224/224; sha256=3c8aed949d8300e327bc265cd23b982b47397981ac379fef99a6d302360d7ac6
+ledger audit: 65/65; sha256=be32c6dcf43050307668d583425c67226e2edbb6231120977448e8b4e778e067
+exact result set: 36; sha256=69dcf722a5187dfb576a2a607b72f019cd471273c5090277db8e994e09a382dd
+exact text set: 67; sha256=e92eddfec5be91fb74a617ed08c7f532e856cbc08c51d14887eafd9ee39358c5
+sealed-state controls: 11/11 rejected; sha256=f12f9890d761e5cffe62f70a743cbc0a4749fe90237aa391033321581197181a
+paired audit states: A=PENDING+manifest_absent; B=identical_lowercase_nonzero_40hex+exact_self_excluding_manifest; mixed_states=REJECT
+managed outputs: 39
+managed aggregate: sha256=ac09cd2c3be39e4d6d6ce754b5648d8a2abf7fd7fb9848db984558ff33dc82b3
+experiment report: sha256=86f2184b00e25085c18abeab99ef58815290100c42cb267ea33d16f6439d4dcd
 locks: research=24f180a30990c3cd581f0732dabeb641dac9e962b17300883a28f77a3844e43a; prototype=c78ca2e09dd026860533f36b94d538397ec0ba20f40980eb9dadfd2dea011762; dependency=44b432ce9f83986bb0f42fa44a3de23eef5b7910d68b5e234166212a451691dd
-reproducibility: fresh A/B, cold C, hidden-provenance clone, and two full-runner passes; changed_paths=0
+reproducibility: fresh A/B, cold C, hidden-provenance clone, dummy sealed-B normal/hidden audit identity, and two full-runner passes; changed_paths=0
 census: spine=6/5; expanded=22/28; tags=17; classes=14 (6/6/2); tokens=16 (8/8); registry=6; new/ranked/proposed=0/0/0
 ```

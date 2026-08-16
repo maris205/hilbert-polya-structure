@@ -106,8 +106,9 @@ def sealed_yaml(seed_raw: bytes, result: dict[str, Any]) -> bytes:
         "  Stage 1 authority card. Paper 39 is a retrospective closure/audit\n"
         "  meta-object assembled after P35-P38 outcomes were known and frozen before\n"
         "  the Paper-39 authority checker run. The three provenance fields remain\n"
-        "  PENDING_FIRST_ARTIFACT_COMMIT and no root manifest exists. Stage 2 may\n"
-        "  change only this fixed Route card and add the self-excluding root manifest.\n"
+        "  PENDING_FIRST_ARTIFACT_COMMIT and no root manifest exists. Stage 2 is\n"
+        "  metadata-only and may change only this fixed Route card and add the\n"
+        "  self-excluding root manifest.\n"
     )
     if old_note not in seed_text:
         raise ValueError("immutable Route seed freeze note not recognized")

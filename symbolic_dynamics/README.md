@@ -1327,9 +1327,11 @@ metadata，不能偷渡 candidate identity。
 
 authority exact integration 通过 535/535 个 main assertions、278/278 个独立
 evaluator assertions、两套 evaluator 各 29/29 个 adversarial mutations，以及
-215/215 个 integrity checks。Fresh A/B、cold C、隐藏外部 provenance 的 clean
-clone 与两次完整 runner 均字节稳定；35 个 exact result files、38 个 managed
-outputs 与 64-entry immutable ledger 闭合。严格 Route tuple 为
+224/224 个 integrity checks。Fresh A/B、cold C、隐藏外部 provenance 的 clean
+clone、模拟 sealed State B 与两次完整 runner 均字节稳定；State A 的 pending
+triple/manifest-absent 审计和 State B 的 sealed triple/self-excluding manifest 审计
+逐字节相同，11/11 个混合或伪造状态全部被拒绝。36 个 exact result files、39 个
+managed outputs 与 65-entry immutable ledger 闭合。严格 Route tuple 为
 `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`，Route B locked。阶段结论为
 **CLOSE_ENTIRE_AFFINE_BRANCH / ROUTE_A_REJECTED /
 RETURN_CONTROL_TO_PREEXISTING_GLOBAL_CANDIDATE_REGISTRY**。这个 handoff 不排名、

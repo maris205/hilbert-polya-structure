@@ -58,7 +58,13 @@ The normal and hidden-provenance standalone integrity audits are
 byte-identical. The exact result and managed-text sets, dependency/import
 surface, immutable research/prototype locks, self-excluding SHA ledger,
 UTF-8/LF/EOF hygiene, and no-cache/no-symlink boundary are machine checked.
-The Stage-1 root manifest is absent.
+At authority generation, the Stage-1 root manifest is absent. The same
+read-only audit accepts exactly two paired live states: (A) manifest absent,
+the three literal pending provenance fields, and the accurate Stage-1 note; or
+(B) an exact self-excluding root manifest, three identical lowercase nonzero
+40-hex provenance fields, and the accurate metadata-only seal note. Every
+mixed state is rejected. An isolated dummy sealed-state B, including its full
+manifest, reproduces the exact stored normal/hidden audit bytes.
 
 ## Route-A disposition
 
@@ -67,4 +73,5 @@ strict Route-A v0.2 tuple is
 `(A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL)`, Route B is false and locked,
 and every target/root metric is `NA`. The fixed Stage-1 Route card carries the
 literal paired provenance triple `PENDING_FIRST_ARTIFACT_COMMIT`. Stage 2 is
-limited to that card plus the self-excluding root manifest.
+metadata-only and is limited to that card plus the self-excluding root
+manifest.

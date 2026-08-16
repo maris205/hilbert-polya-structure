@@ -14,6 +14,22 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_SCIENCE_SHA256 = "77a45be483807b81ba61fe0f16b16be20fcd7e6e4ff1f3f74f34d052c6881d93"
+PENDING = "PENDING_FIRST_ARTIFACT_COMMIT"
+ROUTE_RELATIVE = "evaluations/route_a/SD-C41/2026-08-16.yaml"
+MANIFEST_RELATIVE = "PAPER_MANIFEST.sha256"
+EXPECTED_SEAL_CONTROLS = {
+    "manifest_present_with_pending_triple",
+    "sealed_manifest_duplicate_path",
+    "sealed_manifest_inaccurate_note",
+    "sealed_manifest_mismatched_triple",
+    "sealed_manifest_missing_path",
+    "sealed_manifest_self_included",
+    "sealed_manifest_unsorted",
+    "sealed_manifest_wrong_hash",
+    "sealed_triple_without_manifest",
+    "sealed_uppercase_commit",
+    "sealed_zero_commit",
+}
 EXPECTED_RESEARCH = {
     "DAG_BRIDGE.json": "4fa3bb28e6a2371dfb134f4a45ff03c1953ea68764f1decb70c64a9d5423d240",
     "DA_REPORT.md": "ef9aacc4584125853c572802a81e7243a60472ad5c5df17af57dd92d2e1599a3",
@@ -105,13 +121,140 @@ def text_hygiene(path: Path) -> bool:
     return not any(byte < 32 and byte not in (9, 10) for byte in raw)
 
 
+def route_manifest_state() -> dict[str, bool]:
+    route_text = (ROOT / ROUTE_RELATIVE).read_text(encoding="utf-8")
+    source_values = re.findall(r"^source_commit: (\S+)$", route_text, re.MULTILINE)
+    code_values = re.findall(r"^code_commit: (\S+)$", route_text, re.MULTILINE)
+    lock_values = re.findall(r"^  code_commit: (\S+)$", route_text, re.MULTILINE)
+    all_provenance_field_lines = re.findall(
+        r"^[ \t]*(?:source_commit|code_commit):[^\n]*$", route_text, re.MULTILINE
+    )
+    triple = source_values + code_values + lock_values
+    triple_shape = len(source_values) == len(code_values) == len(lock_values) == 1 and len(all_provenance_field_lines) == 3
+    freeze_note_shape = len(re.findall(r"^freeze_note: >-$", route_text, re.MULTILINE)) == 1
+    note_match = re.search(r"^freeze_note: >-\n((?:  .*\n)+)", route_text, re.MULTILINE)
+    note = " ".join(line.strip() for line in note_match.group(1).splitlines()) if note_match else ""
+    manifest_path = ROOT / MANIFEST_RELATIVE
+    manifest_present = manifest_path.exists() or manifest_path.is_symlink()
+    manifest_regular_file = manifest_path.is_file() and not manifest_path.is_symlink()
+
+    pending_triple = triple_shape and triple == [PENDING, PENDING, PENDING]
+    sealed_commit = triple[0] if triple_shape and len(set(triple)) == 1 else ""
+    sealed_triple = bool(re.fullmatch(r"[0-9a-f]{40}", sealed_commit)) and sealed_commit != "0" * 40
+    stage1_note = note == (
+        "Stage 1 authority card. Paper 39 is a retrospective closure/audit meta-object assembled after "
+        "P35-P38 outcomes were known and frozen before the Paper-39 authority checker run. The three "
+        "provenance fields remain PENDING_FIRST_ARTIFACT_COMMIT and no root manifest exists. Stage 2 is "
+        "metadata-only and may change only this fixed Route card and add the self-excluding root manifest."
+    )
+    sealed_note = sealed_triple and note == (
+        f"Stage 1 artifact commit {sealed_commit} contains the three PENDING_FIRST_ARTIFACT_COMMIT fields "
+        "and no root manifest. Stage 2 is metadata-only: it seals source_commit, code_commit, and "
+        "source_lock.code_commit to that same lowercase 40-hex artifact commit and adds the sorted "
+        "self-excluding PAPER_MANIFEST.sha256."
+    )
+    paired_state_a = freeze_note_shape and not manifest_present and pending_triple and stage1_note and not sealed_note
+    paired_state_b = freeze_note_shape and manifest_regular_file and sealed_triple and sealed_note and not pending_triple
+
+    manifest_format = True
+    manifest_sorted_unique = True
+    manifest_paths_safe = True
+    manifest_self_excluded = True
+    manifest_exact_set = True
+    manifest_hashes = True
+    if manifest_present and not manifest_regular_file:
+        manifest_format = False
+        manifest_sorted_unique = False
+        manifest_paths_safe = False
+        manifest_self_excluded = False
+        manifest_exact_set = False
+        manifest_hashes = False
+    elif manifest_regular_file:
+        try:
+            manifest_raw = manifest_path.read_bytes()
+            manifest_text = manifest_raw.decode("utf-8")
+        except UnicodeDecodeError:
+            manifest_raw = b""
+            manifest_text = ""
+            manifest_format = False
+        manifest_format = (
+            manifest_format
+            and not manifest_raw.startswith(b"\xef\xbb\xbf")
+            and b"\r" not in manifest_raw
+            and manifest_raw.endswith(b"\n")
+            and not manifest_raw.endswith(b"\n\n")
+            and not any(byte < 32 and byte != 10 for byte in manifest_raw)
+            and all(line.rstrip(" \t") == line for line in manifest_text.splitlines())
+        )
+        lines = manifest_text.splitlines()
+        rows: list[tuple[str, str]] = []
+        for line in lines:
+            match = re.fullmatch(r"([0-9a-f]{64})  ([^\n]+)", line)
+            if match is None:
+                manifest_format = False
+                continue
+            rows.append((match.group(2), match.group(1)))
+        declared_paths = [relative for relative, _ in rows]
+        manifest_sorted_unique = declared_paths == sorted(set(declared_paths))
+        manifest_paths_safe = all(
+            relative
+            and relative.strip() == relative
+            and not relative.startswith("/")
+            and not relative.startswith("./")
+            and ".." not in Path(relative).parts
+            and Path(relative).as_posix() == relative
+            for relative in declared_paths
+        )
+        manifest_self_excluded = MANIFEST_RELATIVE not in declared_paths
+        actual_paths = sorted(
+            path.relative_to(ROOT).as_posix()
+            for path in ROOT.rglob("*")
+            if path.is_file() and path != manifest_path
+        )
+        manifest_exact_set = declared_paths == actual_paths
+        manifest_hashes = manifest_format and manifest_paths_safe and manifest_self_excluded and all(
+            (ROOT / relative).is_file() and digest(ROOT / relative) == expected
+            for relative, expected in rows
+        )
+
+    manifest_valid = all(
+        (
+            manifest_format,
+            manifest_sorted_unique,
+            manifest_paths_safe,
+            manifest_self_excluded,
+            manifest_exact_set,
+            manifest_hashes,
+        )
+    )
+    state_a = paired_state_a and manifest_valid
+    state_b = paired_state_b and manifest_valid
+
+    return {
+        "exactly_one_legal_state": state_a ^ state_b,
+        "manifest_presence_matches_provenance_state": (not manifest_present and state_a) or (manifest_present and state_b),
+        "manifest_regular_file_for_state": (not manifest_present and state_a) or (manifest_regular_file and state_b),
+        "route_triple_shape_and_semantics": triple_shape and (pending_triple or sealed_triple),
+        "provenance_hash_semantics": pending_triple if state_a else sealed_triple and len(set(triple)) == 1,
+        "freeze_note_matches_provenance_state": (state_a and stage1_note) or (state_b and sealed_note),
+        "manifest_format_valid_for_state": manifest_format,
+        "manifest_sorted_unique_for_state": manifest_sorted_unique,
+        "manifest_paths_safe_for_state": manifest_paths_safe,
+        "manifest_self_excluded_for_state": manifest_self_excluded,
+        "manifest_exact_set_for_state": manifest_exact_set,
+        "manifest_hashes_valid_for_state": manifest_hashes,
+    }
+
+
 def main() -> int:
     checks: list[tuple[str, bool]] = []
 
     def check(name: str, passed: Any) -> None:
         checks.append((name, bool(passed)))
 
-    check("stage1_manifest_absent", not (ROOT / "PAPER_MANIFEST.sha256").exists())
+    paired_state = route_manifest_state()
+    for name, passed in paired_state.items():
+        check("paired_state:" + name, passed)
     check("authority_root_has_code", (ROOT / "code/run_exact_integration.py").is_file())
 
     research = parse_json("docs/RESEARCH_LOCK.json")
@@ -169,7 +312,34 @@ def main() -> int:
     result_set = parse_json("results/exact_result_set.json")
     text_set = parse_json("results/exact_text_set.json")
     actual_results = sorted(path.relative_to(ROOT).as_posix() for path in (ROOT / "results").rglob("*") if path.is_file())
-    check("integrity_contract_schema", contract.get("schema") == "paper39-integrity-contract-v1")
+    check("integrity_contract_schema", contract.get("schema") == "paper39-integrity-contract-v2")
+    check(
+        "integrity_contract_paired_states",
+        contract.get("authority_generation_state") == "A_PENDING_WITHOUT_MANIFEST"
+        and contract.get("mixed_states") == "REJECT"
+        and contract.get("accepted_live_states")
+        == {
+            "A_PENDING_WITHOUT_MANIFEST": {
+                "freeze_note": "ACCURATE_STAGE1_NOTE",
+                "manifest": "ABSENT",
+                "provenance_triple": "PENDING_FIRST_ARTIFACT_COMMIT",
+            },
+            "B_SEALED_WITH_MANIFEST": {
+                "freeze_note": "ACCURATE_METADATA_ONLY_SEAL_NOTE",
+                "manifest": "SORTED_UNIQUE_EXACT_SELF_EXCLUDING_SHA256",
+                "provenance_triple": "ONE_IDENTICAL_LOWERCASE_NONZERO_40HEX_COMMIT",
+            },
+        }
+        and contract.get("manifest_validation")
+        == [
+            "FORMAT_LOWERCASE_SHA256_TWO_SPACES_PATH",
+            "SORTED_UNIQUE_PATHS",
+            "SAFE_RELATIVE_PATHS",
+            "SELF_EXCLUDED",
+            "EXACT_CURRENT_FILE_SET",
+            "ALL_DECLARED_HASHES_MATCH",
+        ],
+    )
     check("exact_result_contract_match", contract.get("exact_result_paths") == result_set.get("paths"))
     check("exact_result_count", result_set.get("count") == len(result_set.get("paths", [])))
     check("exact_result_sorted_unique", result_set.get("paths") == sorted(set(result_set.get("paths", []))))
@@ -336,6 +506,7 @@ def main() -> int:
 
     metadata = parse_json("results/metadata_stability.json")
     manifest = parse_json("results/manifest_metadata_stability.json")
+    sealed_compatibility = parse_json("results/sealed_state_compatibility.json")
     reproducibility = parse_json("results/reproducibility_certificate.json")
     external = parse_json("results/external_provenance_stability.json")
     cold = parse_json("results/cold_copy_certificate.json")
@@ -343,7 +514,16 @@ def main() -> int:
     reproduction = parse_json("results/prototype_reproduction.json")
     boundary = parse_json("results/source_evaluator_boundary.json")
     check("metadata_stability", metadata.get("all_pass") is True and metadata.get("states") == ["absent", "null", "empty", "populated"])
-    check("manifest_metadata_stability", manifest.get("all_pass") is True and manifest.get("stage1_manifest_actual_state") == "ABSENT")
+    check("transport_manifest_metadata_stability_certificate", manifest.get("all_pass") is True and manifest.get("stage1_manifest_actual_state") == "ABSENT")
+    check(
+        "sealed_state_compatibility_certificate",
+        sealed_compatibility.get("all_pass") is True
+        and sealed_compatibility.get("valid_state_a_accepted") is True
+        and sealed_compatibility.get("valid_state_b_audit_byte_identical") is True
+        and sealed_compatibility.get("normal_hidden_state_b_byte_identical") is True
+        and set(sealed_compatibility.get("invalid_controls_rejected", {})) == EXPECTED_SEAL_CONTROLS
+        and all(sealed_compatibility.get("invalid_controls_rejected", {}).values()),
+    )
     check("reproducibility_ABC", reproducibility.get("all_pass") is True and reproducibility.get("fresh_processes") == ["A", "B", "C"] and all(reproducibility.get("byte_identity", {}).values()))
     check("external_provenance_stability", external.get("all_pass") is True and external.get("external_prototype_consulted_by_either_run") is False)
     check("cold_copy_pass", cold.get("all_pass") is True and cold.get("empty_results_at_start") is True and cold.get("external_provenance_hidden") is True)
@@ -354,27 +534,24 @@ def main() -> int:
     route = parse_json("results/route_evaluation.json")
     independent_route = parse_json("evaluations/route_a/SD-C41/independent_evaluation.json")
     route_text = (ROOT / "evaluations/route_a/SD-C41/2026-08-16.yaml").read_text(encoding="utf-8")
-    pending = "PENDING_FIRST_ARTIFACT_COMMIT"
+    pending = PENDING
     check("route_json_independent_copy", route == independent_route)
     check("route_v02", route.get("skill_version") == "0.2.0")
     check("route_all_fail", route.get("route_tuple") == ["A0_FAIL", "A1_FAIL", "A2_FAIL", "A3_FAIL", "A4_FAIL"])
     check("route_rejected", route.get("overall_verdict") == "ROUTE_A_REJECTED")
     check("route_B_false", route.get("B") is False and route.get("route_b_invocation_allowed") is False)
     check("route_metrics_all_NA", route.get("target_and_root_metrics") and set(route["target_and_root_metrics"].values()) == {"NA"})
-    check("route_pending_json_triple", set(route.get("paired_provenance", {}).values()) == {pending} and len(route.get("paired_provenance", {})) == 3)
+    check("route_json_generation_record_pending_triple", set(route.get("paired_provenance", {}).values()) == {pending} and len(route.get("paired_provenance", {})) == 3)
     check("route_science_hash", route.get("science_projection_sha256") == EXPECTED_SCIENCE_SHA256)
     check("route_seed_hash", route.get("seed_route_sha256") == EXPECTED_RESEARCH["ROUTE_A_EVALUATION.yaml"])
-    check("route_yaml_top_source_pending", re.search(rf"^source_commit: {pending}$", route_text, re.MULTILINE) is not None)
-    check("route_yaml_top_code_pending", re.search(rf"^code_commit: {pending}$", route_text, re.MULTILINE) is not None)
-    check("route_yaml_source_lock_code_pending", re.search(rf"^  code_commit: {pending}$", route_text, re.MULTILINE) is not None)
-    pending_field_lines = [
-        line
-        for line in route_text.splitlines()
-        if re.fullmatch(rf"(?:  )?(?:source_commit|code_commit): {pending}", line)
-    ]
-    check("route_yaml_exact_pending_field_triple", len(pending_field_lines) == 3)
-    check("route_yaml_stage1_manifest_absent", "stage1_root_manifest: ABSENT" in route_text)
-    check("route_yaml_stage2_scope", "stage2_semantic_scope: ROUTE_CARD_PLUS_SELF_EXCLUDING_ROOT_MANIFEST_ONLY" in route_text)
+    stage1_manifest_lines = re.findall(r"^  stage1_root_manifest:.*$", route_text, re.MULTILINE)
+    stage2_scope_lines = re.findall(r"^  stage2_semantic_scope:.*$", route_text, re.MULTILINE)
+    check(
+        "route_yaml_paired_state_contract_declared",
+        stage1_manifest_lines == ["  stage1_root_manifest: ABSENT"]
+        and stage2_scope_lines
+        == ["  stage2_semantic_scope: ROUTE_CARD_PLUS_SELF_EXCLUDING_ROOT_MANIFEST_ONLY"],
+    )
     check("route_yaml_no_stale_tmp_wording", "in this /tmp package" not in route_text)
     check("route_yaml_metrics_NA", all(f"  {key}: \"NA\"" in route_text for key in route.get("target_and_root_metrics", {})))
 
@@ -384,7 +561,12 @@ def main() -> int:
     check("report_retrospective_scope", "retrospective" in report and "not a universal affine no-go" in report)
     check("report_registry_handoff", "RETURN_CONTROL_TO_PREEXISTING_GLOBAL_CANDIDATE_REGISTRY" in report)
     check("report_route_all_fail", "(A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL)" in report)
-    check("report_pending", pending in report)
+    check(
+        "report_paired_state_contract",
+        pending in report
+        and "self-excluding root manifest" in report
+        and "metadata-only" in report,
+    )
 
     passed = sum(value for _, value in checks)
     result = {
