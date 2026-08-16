@@ -1,0 +1,171 @@
+\section{Frozen inputs, local orders, and authority bounds}
+\label{app:local}
+
+\subsection{Exact algebraic input}
+
+The primitive coefficient array of \cref{eq:frozen-cubic} has $20$ entries.
+The four Grassmann-chart equations are obtained by the direct substitution
+\[
+ (u_0,u_1,u_2,u_3)=(s,t,as+ct,bs+dt)
+\]
+and equating the coefficients of $s^3,s^2t,st^2,t^3$.  A degree-order basis
+has Hilbert counts $(1,4,10,12,0)$; lexicographic conversion produces an
+eliminant $g(d)$ of degree $27$ and rational back-substitutions for
+$a,b,c$.  Substituting those expressions into all four chart equations,
+clearing denominators, and reducing modulo $g$ gives four zero remainders.
+The complement of the chart is empty by five independent unit-ideal
+calculations.
+
+The maximal-order calculation uses a transformed monic degree-$27$
+polynomial together with an oriented isomorphism back to the original class
+of $d$.  The orientation is part of the input: the original eliminant
+generator maps to a rational polynomial in the transformed generator.  The
+full numerator vector is too large for print, so the following canonical
+guards identify it and the integral basis without abbreviation at the data
+layer.
+
+\begin{table}[ht]
+\centering
+\caption{Compact guards for the exact field presentation.}
+\label{tab:field-input-guards}
+\begin{tabularx}{\textwidth}{@{}l X@{}}
+\toprule
+object&SHA-256 or exact property\\
+\midrule
+oriented original-generator image&
+\hexsha{aea67936d6dd88a7ef9ecaabd4740b737e52de9c34958e77bcefc5a51eed0e23}\\
+transformed monic polynomial&
+\hexsha{1ecdb17baaa586a5361cfdf71ae6af218e05adb0b784aba514410a933fc74c64}\\
+canonical $27$-element integral basis&
+\hexsha{5102fd87524498ef170b944f174b9c917279f7498f59b372de85b9913a0fbcc8}\\
+PARI textual basis carrier&
+\hexsha{ec66da41c6ad35e441c9916d3e448206ecc36e857fbab814475420a25c5d4813};
+$4{,}549{,}955$ bytes\\
+maximality certification&
+no unresolved prime returned by \texttt{nfcertify}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The semantics of \texttt{nfbasis}, \texttt{nfinit},
+\texttt{idealprimedec}, \texttt{nfcertify}, and \texttt{polsturm} are those
+of the PARI/GP user's guide \citep{parigroup2021}.  The software reference
+does not certify any displayed output; exact carriers and independent
+reconstruction do.
+
+\subsection{Divided discriminant engines}
+
+The Macaulay construction uses a $56\times56$ matrix and a $24\times24$
+extraneous block.  Fraction-free determinant evaluation and an independent
+exact polynomial engine give the same quotient.  Its decimal-newline guard
+is
+\[
+\texttt{2be931285c05779d59f6d7f9f7006bd87a3c36e72c4d57dab7315413a3672ed9},
+\]
+and its prime factorization is exactly
+\cref{eq:surface-divided-discriminant}.  The field discriminant, computed
+from the integral basis rather than this resultant, is positive with $586$
+digits and guard
+\[
+\texttt{7548db5eb3f1c5549d80f6125521e9f3c7f965fb39b7198a8d28f93e8f78d6ca}.
+\]
+The different origin of these two integers is why the nine-prime surface
+envelope and eight-prime field support remain separate throughout the paper.
+
+\subsection{Complete local-row summary}
+
+For readability, repeated rows are compressed only by their multiplicity.
+\begin{longtable}{@{}c r r r r r r@{}}
+\caption{All maximal-order local rows used in the theorem.}
+\label{tab:appendix-local-rows}\\
+\toprule
+$p$&multiplicity&degree $ef$&$e$&$f$&$d$&$fd$\\
+\midrule
+\endfirsthead
+\toprule
+$p$&multiplicity&degree $ef$&$e$&$f$&$d$&$fd$\\
+\midrule
+\endhead
+$3$&1&3&3&1&3&3\\
+&1&6&6&1&7&7\\
+&2&9&9&1&18&18\\
+\midrule
+$5$&2&1&1&1&0&0\\
+&3&5&5&1&7&7\\
+&1&10&10&1&15&15\\
+\midrule
+$181$&1&3&3&1&2&2\\
+&1&6&3&2&2&4\\
+&1&18&3&6&2&12\\
+\midrule
+$997$&1&3&3&1&2&2\\
+&1&6&3&2&2&4\\
+&1&18&3&6&2&12\\
+\midrule
+$2346241$&1&3&3&1&2&2\\
+&1&6&3&2&2&4\\
+&1&18&3&6&2&12\\
+\bottomrule
+\end{longtable}
+
+The prime-ideal HNF carriers and prime-vector complements are retained in the
+arithmetic evidence rather than typeset: they occupy several megabytes and
+do not shorten any proof.  Their canonical aggregate guard is
+\[
+\texttt{ee43a97eb36fdfb21565b339da78b7b2a4e73ef226e34b49223f127a1617ae4a}.
+\]
+
+\subsection{\texorpdfstring{All certified \(\theta_{36}\) factor rows}{All certified theta36 factor rows}}
+
+At $3$ and $5$, the factor rows remain identical at precisions
+$900,950,1000$, every factor is monic and simple, and the minimum
+coefficientwise multiply-back valuations are exactly $900,950,1000$.  The
+compressed rows are:
+
+\begin{table}[ht]
+\centering
+\caption{Wild $\theta_{36}$ factor rows.  The last column is the
+polynomial-discriminant valuation of one factor.}
+\label{tab:wild-theta-factor-rows}
+\begin{tabular}{@{}c c c c c c@{}}
+\toprule
+$p$&count&factor degree&mod-$p$ exponent&residual degree&
+factor poldisc exponent\\
+\midrule
+$3$&3&3&3&1&11\\
+&1&9&9&1&62\\
+&1&18&18&1&269\\
+\midrule
+$5$&1&1&1&1&0\\
+&1&5&5&1&27\\
+&3&10&10&1&123\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thus the global/twice-largest bounds are $886/538$ at $3$ and $746/246$ at
+$5$.  All three precisions exceed both numbers.
+
+At each of $181,997,2346241$, the $\theta_{36}$ rows are
+\begin{equation}
+\begin{array}{c|rrrr}
+\text{factor degree}&3&6&9&18\\ \hline
+e&3&3&3&3\\
+f&1&2&3&6\\
+d&2&2&2&2\\
+\text{factor poldisc exponent}&2&4&6&12.
+\end{array}
+\label{eq:tame-theta-rows}
+\end{equation}
+Their field-different contributions sum to $24$, the global
+polynomial-discriminant exponent is $24$, and twice the largest factor
+exponent is $24$.  Precision $40$ clears both bounds, and factor
+multiplication is verified at $20,30,40$.
+
+For $\delta_{36}$, the same apparent factor degrees at tame precision have
+factor polynomial-discriminant exponents $4,20,48,204$.  Hence the
+twice-largest bound is $408$, while the global exponent is $840$.  Precision
+$40$ clears neither.  No $\delta_{36}$ row, at any prime, is used to prove
+or corroborate a local partition.  This negative authority statement is
+part of the premise graph, not an observation omitted from the successful
+lane.

@@ -1,0 +1,215 @@
+\section{Exhaustive subgroup and fixed-space ledgers}
+\label{app:groups}
+
+This appendix records the finite-group part of the proof independently of
+the local-arithmetic carriers in \cref{app:local}.  Throughout, ``ToM'' means
+the fixed ordering of the $350$ conjugacy classes in
+\texttt{TableOfMarks("U4(2).2")}.  A label is therefore a reproducibility
+coordinate, not an intrinsic name for a subgroup.  Every retained class was
+reconstructed as a permutation subgroup on the labelled sets of $27$ lines
+and $36$ double-sixes.  The GAP, TomLib, and CTblLib conventions are those
+recorded in \citep{gap2021,tomlib2019,ctbllib2020}; none of those software
+references supplies an instance calculation for the surface.
+
+\subsection{Search predicate and branch contributions}
+
+For a subgroup $H\leq \WE$, write
+\[
+ \lambda_{27}(H)=\bigl(|\Omega|:\Omega\in H\backslash\{1,\ldots,27\}\bigr),
+ \qquad
+ \lambda_{36}(H)=\bigl(|\Xi|:\Xi\in H\backslash\{1,\ldots,36\}\bigr),
+\]
+with each tuple sorted increasingly.  The first pass compares these tuples
+with the exact local degrees.  A proposed ordered pair $(D,I)$ is then kept
+only when $I\trianglelefteq D$, the prescribed wild Sylow subgroup is normal
+in $I$, and $D/I$ is cyclic.  At $p=3$ we additionally require $I/P$ to be
+cyclic of order prime to $3$, where $P$ is the wild Sylow subgroup.  These
+tests are run over all ordered containments between the $350$ reconstructed
+classes; no abstract subgroup name is used as a search seed.
+
+The branch-different calculation can be stated directly on the line action.
+Let $\Omega_1,\ldots,\Omega_t$ be the $I_0$-orbits.  For $H\leq I_0$, put
+\begin{equation}
+ c_j(H)=\frac{|H|}{|I_0|}
+ \left(|\Omega_j|-\#(H\backslash\Omega_j)\right).
+ \label{eq:branch-layer-contribution}
+\end{equation}
+Thus one lower layer equal to $H$ contributes
+$(c_1(H),\ldots,c_t(H))$ to the branch different vector.  Formula
+\cref{eq:branch-layer-contribution} is simply the Artin conductor formula for
+the permutation module, separated over the $I_0$-orbits.  In particular its
+entries are rational before the complete filtration is assembled; they must
+not be rounded.
+
+\subsection{\texorpdfstring{The complete $p=3$ ledger}{The complete p=3 ledger}}
+
+The simultaneous target is
+\[
+ \lambda_{27}=(3,6,9,9),\qquad
+ \lambda_{36}=(3,3,3,9,18).
+\]
+The raw and containment passes give exactly the following data.
+
+\begin{table}[ht]
+\centering
+\caption{All $p=3$ simultaneous hits and all valid ordered pairs.}
+\label{tab:app-p3-pairs}
+\begin{tabular}{@{}c c c c c c@{}}
+\toprule
+$D$ ToM&$|D|$&$\IdGroup(D)$&$I$ ToM&$|D/I|$&status before deep scan\\
+\midrule
+140&18&$(18,4)$&140&1&valid\\
+142&18&$(18,3)$&142&1&valid\\
+206&36&$(36,10)$&140&2&valid; $D$ only\\
+206&36&$(36,10)$&142&2&valid; $D$ only\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+There are no other raw hits: they are ToM $140$, $142$, and $206$ only.
+The last class cannot be inertia because its quotient by its order-$9$ wild
+subgroup has order $4$ and is not cyclic.  It is retained in
+\cref{tab:app-p3-pairs} solely as a decomposition overgroup.
+
+For every occurrence of a normal order-$3$ subgroup compatible with one of
+these four pairs, \cref{eq:branch-layer-contribution} gives the following
+complete multiset.  Keeping the multiplicity two for ToM $6$ is necessary:
+the two entries come from different ordered containments.
+
+\begin{table}[ht]
+\centering
+\caption{Full exact-rational deep-profile calculation at $p=3$.}
+\label{tab:app-p3-deep}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}c c c c c c c c@{}}
+\toprule
+deep $Q$&multiplicity&line type&double-six type&
+$\dim(V_6^Q,V_{20}^Q)$&$\mathbf c(Q)$&$\mathbf b$&$(r,s)$\\
+\midrule
+ToM 6&2&$3^9$&$3^{12}$&$(0,8)$&
+$(\frac13,\frac23,1,1)$&$(2,5,8,8)$&$(7,-18)$\\
+ToM 7&1&$1^9 3^6$&$1^6 3^{10}$&$(4,10)$&
+$(0,0,1,1)$&$(2,5,8,8)$&$(1,6)$\\
+ToM 8&1&$3^9$&$1^3 3^{11}$&$(2,6)$&
+$(\frac13,\frac23,1,1)$&$(2,5,8,8)$&$(7,-18)$\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Here the target is $(3,7,18,18)$ and one $P=C_3^2$ layer contributes
+$(1,2,4,4)$.  Solving
+\[
+ (2,5,8,8)+r(1,2,4,4)+s\mathbf c(Q)=(3,7,18,18)
+\]
+over exact fractions produces the last column.  Only ToM $7$ gives a
+nonnegative integral solution.  It gives one $P$ layer and six $Q$ layers.
+The grade-$7$ inversion test of \cref{prop:p3-serre} then removes the two
+rows with inertia ToM $142$, leaving $(D,I)=(140,140)$ and $(206,140)$.
+This last test changes neither the deep profile nor the unresolved order of
+$D$.
+
+\subsection{\texorpdfstring{The complete $p=5$ and involution ledgers}{The complete p=5 and involution ledgers}}
+
+At $p=5$ the target pair is
+\[
+ (1,1,5,5,5,10),\qquad (1,5,10,10,10).
+\]
+All raw simultaneous hits and the normal-Sylow test are reproduced below.
+
+\begin{table}[ht]
+\centering
+\caption{All $p=5$ hits; the first row is the unique valid inertia class.}
+\label{tab:app-p5-hits}
+\begin{tabular}{@{}c c c c c@{}}
+\toprule
+ToM&order&$\IdGroup$&Sylow $5$ normal?&conclusion\\
+\midrule
+147&20&$(20,3)$&yes&$(D,I,|D/I|)=(147,147,1)$\\
+247&60&$(60,5)$&no&excluded as inertia\\
+295&120&$(120,34)$&no&excluded as inertia\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The base branch vector is $(0,0,4,4,4,9)$, one $C_5$ layer contributes
+$(0,0,1,1,1,2)$, and the target is $(0,0,7,7,7,15)$.  Hence precisely three
+positive layers occur.  This recovers the lower orders
+$(20,5,5,5,1)$ without importing a break from the abstract group.
+
+For completeness, the exhaustive order-two scan contains four classes.
+The two permutation profiles, rather than order alone, distinguish a root
+reflection from complex conjugation.
+
+\begin{table}[ht]
+\centering
+\caption{All order-two subgroup classes in the two labelled actions.}
+\label{tab:app-order-two}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}c c c c c c c c@{}}
+\toprule
+subgroup ToM&line type&double-six type&$\dim(V_6^H,V_{20}^H)$&
+$|N_G(H)|$&class size&centralizer&element index\\
+\midrule
+2&$1^{15}2^6$&$1^{16}2^{10}$&$(5,15)$&1440&36&1440&16\\
+3&$1^3 2^{12}$&$1^{12}2^{12}$&$(2,12)$&1152&45&1152&2\\
+4&$1^7 2^{10}$&$1^8 2^{14}$&$(4,12)$&192&270&192&3\\
+5&$1^3 2^{12}$&$1^4 2^{16}$&$(3,11)$&96&540&96&17\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+For a subgroup of order two, its normalizer equals its centralizer.  The
+reflection geometry selects subgroup ToM $2$.  At infinity the simultaneous
+line/double-six profile selects subgroup ToM $5$; only after this subgroup
+selection does the character table identify element-class index $17$.
+
+\subsection{Fixed spaces and conductor arithmetic}
+
+The fixed spaces were computed from the labelled rational matrices for
+$V_6$ and $V_{20}$, not inferred from subgroup order.  The complete list used
+in the paper is
+\begin{equation}
+\begin{array}{c|c|c|c}
+\text{place or role}&H&\dim(V_6^H,V_{20}^H)&
+\codim(V_6^H,V_{20}^H)\\ \hline
+p=3,\ I_0&\Tom{140}&(0,3)&(6,17)\\
+p=3,\ I_1&C_3^2&(0,4)&(6,16)\\
+p=3,\ I_2=\cdots=I_7&\Tom{7}&(4,10)&(2,10)\\
+p=5,\ I_0&\Tom{147}&(2,3)&(4,17)\\
+p=5,\ I_1=I_2=I_3&C_5&(2,4)&(4,16)\\
+\text{tame }C_3&\Tom{6}&(0,8)&(6,12)\\
+\text{reflection}&\Tom{2}&(5,15)&(1,5)\\
+\text{complex conjugation}&\Tom{5}&(3,11)&(3,9)
+\end{array}
+\label{eq:app-fixed-space-ledger}
+\end{equation}
+Substitution into the lower-numbering formula gives, with no omitted layer,
+\[
+\begin{aligned}
+ \Sw_3&=\frac9{18}(6,16)+6\frac3{18}(2,10)=(5,18),\\
+ \Sw_5&=3\frac5{20}(4,16)=(3,12).
+\end{aligned}
+\]
+Adding the $I_0$ codimensions gives $(11,35)$ and $(7,29)$, respectively.
+For the tame rows the Swan term is zero and the final column of
+\cref{eq:app-fixed-space-ledger} is already the Artin pair.
+
+Finally, the normal-closure exponents provide a group-order check that is
+manifestly independent of $D_3$.  For a Galois extension with group $G$ and
+lower inertia groups $I_i$,
+\begin{equation}
+ v_p(\Disc K)=\frac{|G|}{|I_0|}\sum_{i\geq0}(|I_i|-1).
+ \label{eq:galois-disc-local}
+\end{equation}
+With $|G|=51840$, the four local sums and multipliers are
+\[
+\begin{array}{c|c|c|c}
+p&\sum_i(|I_i|-1)&|G|/|I_0|&v_p(\Disc K)\\ \hline
+3&37&2880&106560\\
+5&31&2592&80352\\
+181,997,2346241&2&17280&34560\\
+283,1801,q&1&25920&25920.
+\end{array}
+\]
+This calculation uses $I_0$ and its filtration only; the two possible
+decomposition-group orders at $3$ therefore give the same result.
