@@ -1,0 +1,78 @@
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  spine/.style={rounded corners=2pt,draw=formalblue,very thick,fill=white,
+    align=center,text width=2.25cm,minimum height=1.15cm,font=\scriptsize},
+  close/.style={spine,draw=stopred,text=stopred},
+  registry/.style={spine,draw=governancepurple,text=governancepurple},
+  fiber/.style={rounded corners=2pt,draw=charcoal,thick,fill=softgray,
+    align=left,text width=2.55cm,minimum height=1.62cm,font=\scriptsize,
+    inner sep=4pt},
+  aux/.style={fiber,draw=warningamber,dashed,fill=white},
+  arr/.style={->,very thick,formalblue},
+  terminalarr/.style={->,very thick,stopred},
+  governarr/.style={->,very thick,governancepurple},
+  projection/.style={->,densely dotted,thick,charcoal},
+  badge/.style={rounded corners,draw=charcoal,fill=white,align=center,
+    font=\scriptsize,inner sep=4pt}
+]
+\node[spine] (s35) at (0,2.6)
+  {\texttt{N35}\\object firewall};
+\node[spine] (s36) at (3.0,2.6)
+  {\texttt{N36}\\filling / clock};
+\node[spine] (s37) at (6.0,2.6)
+  {\texttt{N37}\\coefficient fork};
+\node[spine] (s38) at (9.0,2.6)
+  {\texttt{N38}\\tree / orbital};
+\node[close] (s39) at (12.0,2.6)
+  {\texttt{N39}\\encoded branch closed};
+\node[registry] (sr) at (15.0,2.6)
+  {registry handoff\\no ranking};
+
+\draw[arr] (s35) -- (s36);
+\draw[arr] (s36) -- (s37);
+\draw[arr] (s37) -- (s38);
+\draw[terminalarr] (s38) -- (s39);
+\draw[governarr] (s39) -- (sr);
+
+\node[badge,above=5mm of s36] (contract)
+  {retrospective contract\\\textbf{14 classes / 16 tokens / 17 tags}};
+\node[badge,above=5mm of s38,text width=5.1cm] (partition)
+  {$28=17$ internal $+5$ closure $+3$ token exits\\
+   $+1$ non-domain firewall $+2$ guards};
+
+\node[fiber] (f35) at (0,-0.15)
+  {\textbf{P35 fiber (7)}\\
+   \texttt{N35F,N35P,N35S,}\\
+   \texttt{N35H,N35Q,N35D,}\\
+   \texttt{N35B}};
+\node[fiber] (f36) at (3.4,-0.15)
+  {\textbf{P36 fiber (2)}\\
+   \texttt{N36F,N36G}\\[2pt]
+   filling, quotient clock};
+\node[fiber] (f37) at (6.8,-0.15)
+  {\textbf{P37 fiber (3)}\\
+   \texttt{N37O,N37D,N37N}\\[2pt]
+   local systems, grading};
+\node[fiber] (f38) at (10.2,-0.15)
+  {\textbf{P38 fiber (5)}\\
+   \texttt{N38T,N38M,N38L,}\\
+   \texttt{N38O,N38K}};
+\node[aux,text width=5.2cm,minimum height=1.9cm,font=\scriptsize] (fa) at (14.0,-0.15)
+  {\textbf{exact singleton mappings (5)}\\
+   \texttt{N00} $\mapsto$ \texttt{AUX\_CONTRACT\_ROOT}\\
+   \texttt{NX} $\mapsto$ \texttt{AUX\_NONMEMBERSHIP\_SINK}\\
+   \texttt{NC} $\mapsto$ \texttt{N39\_AFFINE\_BRANCH\_CLOSED}\\
+   \texttt{NR} $\mapsto$ \texttt{N\_REGISTRY\_HANDOFF}\\
+   \texttt{NS} $\mapsto$ \texttt{AUX\_EMPTY\_REGISTRY\_FALLBACK}};
+
+\draw[projection] (f35.north) -- node[right,font=\tiny]{fiber} (s35.south);
+\draw[projection] (f36.north) -- node[right,font=\tiny]{fiber} (s36.south);
+\draw[projection] (f37.north) -- node[right,font=\tiny]{fiber} (s37.south);
+\draw[projection] (f38.north) -- node[right,font=\tiny]{fiber} (s38.south);
+
+\node[badge,below=4mm of f37,text width=12.2cm] (semantics)
+  {total many-to-one projection with explicit, auditable fibers\\
+   the 6/5 spine communicates; the 22/28 DAG owns the proof\\
+   \texttt{E35\_36} $\cdot$ \texttt{E36\_37} $\cdot$ \texttt{E37\_38}
+   $\cdot$ \texttt{E38\_CLOSE} $\cdot$ \texttt{E\_CLOSE\_REGISTRY}};
+\end{tikzpicture}

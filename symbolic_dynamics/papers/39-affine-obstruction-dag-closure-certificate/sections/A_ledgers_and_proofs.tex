@@ -1,0 +1,221 @@
+\section{Expanded ledgers and proof details}
+\label{app:ledgers}
+
+This appendix prints the finite records used in the main proof.  The canonical
+machine-readable form remains \code{DAG\_BRIDGE.json}; the tables below are a
+human-readable rendering.  \Cref{tab:edges,tab:tokens,tab:endpoints} give the
+edge, request, and terminal records used by the proof.
+
+\subsection{Ranks and expanded edges}
+
+The topological rank is
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}L{1.2cm}Y@{}}
+\toprule
+Rank & Nodes \\
+\midrule
+0 & \code{N00} \\
+1 & \code{N35F,N35P} \\
+2 & \code{N35S} \\
+3 & \code{N35H} \\
+4 & \code{N35Q,N35D,N35B,N36F} \\
+5 & \code{N36G,N37O} \\
+6 & \code{N37D} \\
+7 & \code{N37N} \\
+8 & \code{N38T} \\
+9 & \code{N38M,N38L,N38O,N38K} \\
+10 & \code{NX,NC} \\
+11 & \code{NR,NS} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{longtable}{@{}L{1.2cm}L{1.4cm}L{1.4cm}L{6.2cm}@{}}
+\caption{All 28 expanded edges.  Every row strictly increases the displayed
+rank.}\label{tab:edges}\\
+\toprule
+Edge & From & To & Role \\
+\midrule
+\endfirsthead
+\toprule
+Edge & From & To & Role \\
+\midrule
+\endhead
+\code{E00a} & N00 & N35F & internal transition \\
+\code{E00b} & N00 & N35P & internal transition \\
+\code{E01} & N35P & N35S & internal transition \\
+\code{E02} & N35S & N35H & internal transition \\
+\code{E03} & N35H & N35Q & internal transition \\
+\code{E04a} & N35H & N35D & internal transition \\
+\code{E04b} & N35H & N35B & internal transition \\
+\code{E05} & N35H & N36F & internal transition \\
+\code{E06} & N36F & N36G & internal transition \\
+\code{E07} & N36F & N37O & internal transition; four-field reset \\
+\code{E08} & N37O & N37D & internal transition \\
+\code{E09} & N37D & N37N & internal transition \\
+\code{E10} & N37N & N38T & internal transition; object reset \\
+\code{E11} & N38T & N38M & internal transition \\
+\code{E12} & N38T & N38L & internal transition; category-import comparison \\
+\code{E13} & N38T & N38O & internal transition; object reset \\
+\code{E14} & N38T & N38K & internal transition; marker comparison \\
+\code{E15} & N38T & NC & closure \\
+\code{E16} & N38M & NC & closure \\
+\code{E17} & N38L & NC & closure \\
+\code{E18} & N38O & NC & closure \\
+\code{E19} & N38K & NC & closure \\
+\code{E20} & N35H & NX & token-associated contract exit \\
+\code{E21} & N36F & NX & token-associated contract exit \\
+\code{E22} & N37N & NX & auxiliary non-domain firewall; zero coverage \\
+\code{E23} & N38T & NX & token-associated contract exit \\
+\code{E24} & NC & NR & realized governance guard \\
+\code{E25} & NC & NS & conditional governance guard \\
+\bottomrule
+\end{longtable}
+
+The rank at the target exceeds the rank at the source in each row, so the
+expanded graph is a DAG.  The five closure edges are separate because each
+Paper-38 endpoint owns a different obstruction.  The three exit edges collect
+explicit tokens by boundary location; E22 is excluded from that partition even
+though it shares the sink \code{NX}.
+
+\subsection{The sixteen request tokens}
+
+{\scriptsize
+\begin{longtable}{@{}L{5.8cm}L{2.6cm}L{2.2cm}L{2.7cm}@{}}
+\caption{Exact request-token normalizer.  Endpoint lists are obstruction
+endpoints for \Obstructed{} rows and exit endpoints for \Exit{} rows.}
+\label{tab:tokens}\\
+\toprule
+Token & Repair class & Disposition & Endpoint(s) \\
+\midrule
+\endfirsthead
+\toprule
+Token & Repair class & Disposition & Endpoint(s) \\
+\midrule
+\endhead
+\nolinkurl{AFFINE_CAYLEY_FROZEN_FAMILY} & affine Cayley representation &
+\Obstructed & N35F, N35P, N35S, N35H, N36F \\
+\nolinkurl{FINITE_RANK_LOCAL_SYSTEM_FROZEN_FAMILY} & finite-rank local system &
+\Obstructed & N37O, N37D, N37N \\
+\nolinkurl{CHARACTER_FROZEN_FAMILY} & character & \Obstructed & N37O, N36G \\
+\nolinkurl{GRADING_FROZEN_FAMILY} & grading & \Obstructed & N36G, N37D, N37N \\
+\nolinkurl{QUOTIENT_FROZEN_FAMILY} & quotient & \Obstructed & N35Q, N36F \\
+\nolinkurl{MODULAR_PHASE_FROZEN_FAMILY} & modular phase & \Obstructed & N38M, N38O \\
+\nolinkurl{INDUCED_SHIFT_EXIT} & induced shift & \Exit & NX via E21 \\
+\nolinkurl{FIRST_RETURN_MAP_EXIT} & first-return map & \Exit & NX via E21 \\
+\nolinkurl{VALUATION_TREE_EXIT} & valuation tree & \Exit & NX via E23 \\
+\nolinkurl{BOUNDARY_MODEL_EXIT} & boundary model & \Exit & NX via E20 \\
+\nolinkurl{BASEPOINT_DAMPING_EXIT} & basepoint damping & \Exit & NX via E23 \\
+\nolinkurl{FINITE_TOTAL_WEIGHT_RETROFIT_EXIT} & finite-total-weight retrofit &
+\Exit & NX via E23 \\
+\nolinkurl{FROZEN_ASCENDING_HNN_BASS_SERRE_SPLITTING} & Bass--Serre splitting &
+\Obstructed & N38T \\
+\nolinkurl{ALTERNATIVE_BASS_SERRE_SPLITTING_EXIT} & Bass--Serre splitting &
+\Exit & NX via E23 \\
+\nolinkurl{FROZEN_TREE_LATTICE_GROUPOID_IMPORT} & groupoid trace &
+\Obstructed & N38L \\
+\nolinkurl{ALTERNATIVE_GROUPOID_CATEGORY_EXIT} & groupoid trace &
+\Exit & NX via E23 \\
+\bottomrule
+\end{longtable}
+}
+
+The table is the complete syntax of the request quantifier.  English prose in
+the predecessor prohibitions does not create additional tokens.  In particular,
+there is no arbitrary rank, character, completion, splitting, or groupoid
+instance.
+
+\subsection{Endpoint terminal ledger}
+
+\begin{longtable}{@{}L{1.6cm}L{2.3cm}L{3.0cm}L{7.0cm}@{}}
+\caption{Expanded endpoint classifications.}\label{tab:endpoints}\\
+\toprule
+Node & Class & Failed coordinates & Terminal meaning \\
+\midrule
+\endfirsthead
+\toprule
+Node & Class & Failed coordinates & Terminal meaning \\
+\midrule
+\endhead
+N35F & obstructed & $R,D$ & full positive affine recurrence stop \\
+N35P & obstructed & $R,D$ & bounded positive recurrence stop \\
+N35S & obstructed & $S,D,C$ & universal backtrack pollution \\
+N35H & obstructed & $S,D,C$ & relation-cycle pollution \\
+N35Q & obstructed & $S,D,M$ & quotient ledger/marker non-descent \\
+N35D & obstructed & $R,S,M$ & partition-trace identification \\
+N35B & obstructed & $I,S,M$ & Fock/support substitution \\
+N36F & obstructed & $R,S,D,M,C$ & complete fill erases recurrence \\
+N36G & obstructed & $R,S,C$ & generic scalar erasure \\
+N37O & obstructed & $S,C$ & invertible factor non-deletion \\
+N37D & obstructed & $S,C$ & mixed normal-closure leakage \\
+N37N & obstructed & $R,S,C$ & local-coefficient saturation \\
+N38T & obstructed & $R,D$ & full-tree empty/non-Fredholm \\
+N38M & obstructed & $R,D$ & modular noncompactness \\
+N38L & obstructed & $D,C$ & tree-lattice hypotheses \\
+N38O & obstructed & $S,D,M,C$ & orbital genericity/divergence \\
+N38K & obstructed & $M$ & marker nontransport \\
+NX & exit & $\varnothing$ & outside frozen affine contract \\
+NC & closure meta & $\varnothing$ & encoded affine branch closed \\
+NR & governance & $\varnothing$ & return to historical registry \\
+NS & conditional guard & $\varnothing$ & empty-registry fallback \\
+\bottomrule
+\end{longtable}
+
+The audit root \code{N00} has no terminal status and is omitted.  The empty
+sets in the last four rows have different semantics: nonmembership, closure
+metadata, realized governance, and a conditional guard.  None is an
+obstruction endpoint.
+
+\subsection{Proof dependency structure}
+
+The proof of \cref{thm:closure} depends on four finite facts and four inherited
+kernels:
+\begin{enumerate}
+  \item the 16 token IDs are an exact, duplicate-free domain;
+  \item every obstruction record has a continuous provenance path ending in
+  the displayed tested endpoint set;
+  \item every EXIT record has empty obstruction fields and an explicit boundary
+  path;
+  \item the endpoint failed-coordinate map is total and nonempty on the 17
+  tested endpoints;
+  \item Paper 35 supplies the object-fork obstructions;
+  \item Paper 36 supplies filling, quotient-ownership, and marker non-descent;
+  \item Paper 37 supplies the finite-coefficient leakage-or-erasure fork; and
+  \item Paper 38 supplies the frozen-splitting tree/orbital trilemma.
+\end{enumerate}
+The first four are proved by the Paper-39 finite ledgers.  The last four are
+owned by the hashed predecessor mathematical packages.  This separation is
+why the executable audit can verify coverage without pretending to prove the
+infinite kernels.
+
+\subsection{Sharp scope countermodels}
+
+For completeness, the principal countermodels are explicit.
+
+\paragraph{Finite recurrence.}
+For the directed $m$-cycle with adjacency matrix $A$,
+$\det(I-zA)=1-z^m$.  Thus a symbolic system can possess a primitive orbit and
+an ordinary finite determinant outside the predecessor affine objects.
+
+\paragraph{Noninvertible deletion.}
+The nilpotent matrix
+$N=\left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)$ satisfies
+$\det(I-tN)=1$.  Factor deletion is possible after leaving the frozen
+invertible-transport family.
+
+\paragraph{Weighted trees.}
+A sufficiently summable root-dependent damping can make an infinite-tree
+operator trace class.  The resulting operator is not the canonical undamped
+or modularly weighted Paper-38 object.
+
+\paragraph{Proper tree lattices.}
+Discrete, proper actions with finite stabilizers can support tree-lattice
+determinant theories.  The frozen $\BS(1,r)$ action fails the required
+hypotheses.  The local failure cannot be universalized to every tree action.
+
+\paragraph{First-trace cancellation.}
+The invertible traceless matrix
+$J=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$ has
+$\det(I-tJ)=1+t^2$.  Vanishing first trace is insufficient for deletion of all
+primitive factors.

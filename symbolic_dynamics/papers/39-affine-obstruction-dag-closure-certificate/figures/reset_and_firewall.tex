@@ -1,0 +1,60 @@
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  state/.style={rounded corners=2pt,draw=formalblue,very thick,fill=white,
+    align=center,text width=3.8cm,minimum height=1.0cm,font=\scriptsize},
+  field/.style={rounded corners=1pt,draw=warningamber,thick,fill=white,
+    align=center,text width=1.72cm,minimum height=.86cm,font=\scriptsize,
+    inner sep=2pt},
+  firewall/.style={rounded corners=2pt,draw=stopred,very thick,dashed,fill=white,
+    align=center,text width=4.15cm,minimum height=1.05cm,font=\scriptsize},
+  meta/.style={rounded corners=2pt,draw=charcoal,thick,fill=softgray,
+    align=center,font=\scriptsize,inner sep=5pt},
+  resetarr/.style={->,very thick,warningamber},
+  firearr/.style={->,very thick,dashed,stopred},
+  noarr/.style={-|,very thick,stopred}
+]
+\node[state] (p36) at (0,2.45)
+  {P36 filled/control object\\prequotient ownership};
+\node[state] (p37) at (0,-1.7)
+  {P37 unquotiented matrix-affine\\Hashimoto object};
+
+\node[field] (obj) at (-3.0,.8) {object\\\textbf{RESET / P37}};
+\node[field] (mark) at (-1.0,.8) {marker\\\textbf{RESET / P37}};
+\node[field] (oper) at (1.0,.8) {operator owner\\\textbf{RESET / P37}};
+\node[field] (det) at (3.0,.8) {determinant owner\\\textbf{RESET / P37}};
+
+\draw[resetarr] (p36.south) -- node[right,font=\scriptsize,align=left]
+  {expanded \texttt{E07}\\projects to \texttt{E36\_37}} (0,1.32);
+\draw[resetarr] (0,.28) -- (p37.north);
+\draw[warningamber,very thick] (-3.0,1.12) -- (3.0,1.12);
+\draw[warningamber,very thick] (-3.0,.48) -- (3.0,.48);
+
+\node[meta,text width=5.6cm] (forbid) at (-1.05,-3.35)
+  {forbidden reading: “unfill the P36 object, then add coefficients”\\
+   no transport/equivalence theorem exists};
+
+\node[firewall] (n37n) at (8.25,2.2)
+  {\texttt{N37N}\\historical future-search boundary};
+\node[firewall] (nx) at (8.25,-.05)
+  {\texttt{NX}\\auxiliary non-domain sink};
+\draw[firearr] (n37n) -- node[left=1mm,font=\scriptsize,align=right,fill=white,
+  inner sep=1pt]
+  {\texttt{E22}\\\texttt{AUXILIARY\_}\\
+   \texttt{NON\_DOMAIN\_}\\\texttt{FIREWALL}} (nx);
+
+\node[meta,right=5mm of nx,text width=3.15cm,fill=white] (empty)
+  {token fiber $=\varnothing$\\
+   class fiber $=\varnothing$\\
+   failed-\texttt{Good} role: none};
+\draw[noarr] (nx.east) -- (empty.west);
+
+\node[firewall,below=7mm of nx,text width=5.1cm] (zero)
+  {historical path retained\\\textbf{closure credit $=0$}};
+\draw[firearr] (nx) -- (zero);
+
+\node[meta,text width=6.2cm] (audit) at (5.45,-3.35)
+  {inherited obligation and historical provenance are audit metadata\\
+   not transported candidate identity};
+\draw[densely dotted,thick,charcoal,->] (forbid.east) -- (audit.west);
+\draw[densely dotted,thick,charcoal,->] (zero.south west) -- (audit.north east);
+\end{tikzpicture}

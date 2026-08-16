@@ -49,7 +49,8 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [35-affine-semigroup-object-firewall](papers/35-affine-semigroup-object-firewall/README.md) | [PDF](papers/35-affine-semigroup-object-firewall/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/35-affine-semigroup-object-firewall/) | 正 affine Cayley source 有严格高度而无 recurrence；形式逆边制造 backtracks，Hashimoto reduction 又保留普适 affine relation cycles。Bost--Connes 的 $\zeta(\beta)$ 是另一 diagonal Gibbs 对象的首个 trace coefficient，不是同一 graph-step primitive determinant。 | **AFFINE OBJECT FIREWALL / ROUTE-A REJECTED / SD-C37** |
 | [36-affine-cayley-chain-cancellation-no-go](papers/36-affine-cayley-chain-cancellation-no-go/README.md) | [PDF](papers/36-affine-cayley-chain-cancellation-no-go/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/36-affine-cayley-chain-cancellation-no-go/) | 完整 affine Cayley relation filling 使复形契约并清空全部 recurrent homology，且不等长关系 $vu=u^rv$ 阻止原 unit-step marker 下降；同一 prequotient 的 trace-class damped Hashimoto determinant 仍严格看见 relation polygon，而标量 chain superlift 又以通用 $1-2+1=0$ 把所有 one-relator controls 一并消去。 | **CHAIN CANCELLATION / CLOCK NON-DESCENT / ROUTE-A REJECTED / SD-C38** |
 | [37-local-coefficient-normal-closure-saturation](papers/37-local-coefficient-normal-closure-saturation/README.md) | [PDF](papers/37-local-coefficient-normal-closure-saturation/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/37-local-coefficient-normal-closure-saturation/) | 普通可逆有限秩 local transport 不可能删去完整 primitive Euler factor；graded shear 虽能抵消直接 affine relator 及全部 repetitions，却在 mixed normal-closure products 上泄漏，而饱和到全部 mixed products 又会清空所有 closed-word ledger。 | **LOCAL-COEFFICIENT SATURATION / MIXED LEAKAGE / ROUTE-A REJECTED / SD-C39** |
-| [38-bass-serre-tree-orbital-collapse](papers/38-bass-serre-tree-orbital-collapse/README.md) | [PDF](papers/38-bass-serre-tree-orbital-collapse/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/38-bass-serre-tree-orbital-collapse/) | presentation-canonical Bass--Serre full tree 没有正长度 reduced closed path，而其 full-edge Hashimoto operator 非紧且非迹类；转向 orbital conjugacy ledger 只得到对所有 ascending HNN controls 通用的 necklace 函数，且改变对象与 marker。 | **BASS–SERRE TREE / ORBITAL COLLAPSE / AFFINE BRANCH CLOSED / SD-C40** |
+| [38-bass-serre-tree-orbital-collapse](papers/38-bass-serre-tree-orbital-collapse/README.md) | [PDF](papers/38-bass-serre-tree-orbital-collapse/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/38-bass-serre-tree-orbital-collapse/) | 对冻结 ascending-HNN splitting/presentation canonical 的 Bass--Serre full tree 没有正长度 reduced closed path，而其 full-edge Hashimoto operator 非紧且非迹类；转向 orbital conjugacy ledger 只得到对所有 ascending HNN controls 通用的 necklace 函数，且改变对象与 marker。 | **BASS–SERRE TREE / ORBITAL COLLAPSE / AFFINE BRANCH CLOSED / SD-C40** |
+| [39-affine-obstruction-dag-closure-certificate](papers/39-affine-obstruction-dag-closure-certificate/README.md) | [PDF](papers/39-affine-obstruction-dag-closure-certificate/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/39-affine-obstruction-dag-closure-certificate/) | 在 P35--P38 结果已知后，把其哈希化 outcome 组装成 checker-frozen 的 6-node/5-edge structural spine 与 22-node/28-edge typed proof DAG；14 类修复与 16 个请求 token 全部在精确有限域内归类，EXIT 不冒充失败，E22 不获 closure credit，跨 P36→P37 的四个候选状态字段全部 RESET。 | **RELATIVE AFFINE CLOSURE AUDIT / REGISTRY HANDOFF / ROUTE-A REJECTED / SD-C41** |
 
 ### 论文 1 的候选分离结论
 
@@ -1262,14 +1263,14 @@ fixtures 均取消 direct factor 且 8/8 泄漏，random controls 中所有满�
 cancellation 的实例也都发生 conditional leakage。26 个 result files 与 39-entry
 immutable ledger 完整闭合。阶段结论为
 **STOP_LOCAL_COEFFICIENT_SATURATION / ROUTE_A_REJECTED / ROUTE_B_LOCKED**。
-Paper 38 只允许测试 presentation-canonical Bass--Serre tree geodesic shift 与其
-canonical modular cocycle，并必须明确属于新对象；若 primitive ledger 为空、发散、
+Paper 38 只允许测试对冻结 ascending-HNN splitting/presentation canonical 的
+Bass--Serre tree geodesic shift 与其 canonical modular cocycle，并必须明确属于新对象；若 primitive ledger 为空、发散、
 被 generic controls 复制或 marker 不兼容，则关闭整个 affine branch。
 
 ### 论文 38：满树空 ledger、orbital necklace 与 affine branch closure
 
-Paper 38 按 Paper 37 的最后义务转到原 ascending-HNN splitting 的
-presentation-canonical Bass--Serre tree，并明确声明这是新对象、不给 same-object
+Paper 38 按 Paper 37 的最后义务转到对冻结 ascending-HNN splitting/presentation
+canonical 的 Bass--Serre tree，并明确声明这是新对象、不给 same-object
 或 same-marker credit。满树本身是一棵树，所以没有任何正长度 reduced closed
 path，geodesic primitive ledger 为空；其 full oriented-edge Hashimoto operator
 在正则树上保留无穷个等范数正交列，因此非紧、非迹类，也不拥有 ordinary
@@ -1307,13 +1308,42 @@ ROUTE_A_REJECTED / ROUTE_B_LOCKED**。Paper 39 只允许形成 affine-branch clo
 obstruction DAG 并把控制权交回全局 Symbolic Dynamics registry；不得再换一个
 affine representation 重开候选。
 
+### 论文 39：retrospective typed closure audit 与 registry handoff
+
+Paper 39 不引入新的相空间、表示、算子、determinant、marker 或算术 source。它在
+Papers 35--38 的结果已知之后，把这些 content-addressed outcomes 组装成一个只对
+自身有限域负责、并在本轮 checker 运行前冻结的 typed audit。可执行 structural
+spine 有 6 个节点与 5 条边；保留全部证明证据的 expanded DAG 有 22 个节点、28
+条 typed edges 与 17 个 internal transition tags。二者之间是带显式 fibers 的
+total many-to-one projection，而不是同构或可逆压缩。
+
+冻结域恰含 14 个 repair classes 与 16 个 request tokens。类级 census 为
+6 `OBSTRUCTED`、6 `EXIT_ONLY`、2 `MIXED`；token 级 census 为 8 obstruction、
+8 EXIT。EXIT 只声明离开冻结对象类别，不计作 `Good` 的失败。E22 是域外历史
+firewall，其 class/token fibers 为空且不给 closure credit；P36→P37 的 coarse
+edge 则在 P37 source lock 下把 object、marker、operator owner 与 determinant
+owner 四个候选状态字段全部 `RESET`，历史 provenance 仅作 non-state audit
+metadata，不能偷渡 candidate identity。
+
+authority exact integration 通过 535/535 个 main assertions、278/278 个独立
+evaluator assertions、两套 evaluator 各 29/29 个 adversarial mutations，以及
+215/215 个 integrity checks。Fresh A/B、cold C、隐藏外部 provenance 的 clean
+clone 与两次完整 runner 均字节稳定；35 个 exact result files、38 个 managed
+outputs 与 64-entry immutable ledger 闭合。严格 Route tuple 为
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`，Route B locked。阶段结论为
+**CLOSE_ENTIRE_AFFINE_BRANCH / ROUTE_A_REJECTED /
+RETURN_CONTROL_TO_PREEXISTING_GLOBAL_CANDIDATE_REGISTRY**。这个 handoff 不排名、
+不选择、也不授权 Paper 40；若继续，下一篇必须另行 source-lock 一个非 affine
+候选。`STOP_NO_SOURCE_LOCKED_NON_AFFINE_SUCCESSOR` 只是在独立空 registry fixture
+中执行过的条件 fallback，不是当前 realized terminal。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十八篇论文](papers/)
+- [三十九篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

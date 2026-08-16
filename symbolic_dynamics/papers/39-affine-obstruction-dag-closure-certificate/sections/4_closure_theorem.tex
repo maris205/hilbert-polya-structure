@@ -1,0 +1,154 @@
+\section{Relative affine-branch closure}
+\label{sec:theorem}
+
+For $r\ge2$, write
+\[
+M_r=\langle u,v\mid vu=u^rv\rangle^+,
+\qquad
+G_r=\langle u,v\mid vuv^{-1}=u^r\rangle.
+\]
+The predecessor objects associated with these presentations are not identified
+with each other.  The symbols only index the source-owned families whose
+outcomes are recorded at the expanded endpoints.
+
+\subsection{Endpoint-obstruction totality}
+
+Let $V_{\mathrm{test}}$ be the 17 tested endpoints in the expanded graph.  The
+bridge stores the following total map to failed coordinates:
+\begin{align*}
+\Fail(\code{N35F})=\Fail(\code{N35P})&=\{R,D\},\\
+\Fail(\code{N35S})=\Fail(\code{N35H})&=\{S,D,C\},\\
+\Fail(\code{N35Q})&=\{S,D,M\},\\
+\Fail(\code{N35D})&=\{R,S,M\},\\
+\Fail(\code{N35B})&=\{I,S,M\},\\
+\Fail(\code{N36F})&=\{R,S,D,M,C\},\\
+\Fail(\code{N36G})&=\{R,S,C\},\\
+\Fail(\code{N37O})=\Fail(\code{N37D})&=\{S,C\},\\
+\Fail(\code{N37N})&=\{R,S,C\},\\
+\Fail(\code{N38T})=\Fail(\code{N38M})&=\{R,D\},\\
+\Fail(\code{N38L})&=\{D,C\},\\
+\Fail(\code{N38O})&=\{S,D,M,C\},\\
+\Fail(\code{N38K})&=\{M\}.
+\end{align*}
+Every value is nonempty.  The map is not defined by graph reachability alone;
+each set is inherited from the source-owned theorem at that endpoint.  The
+sink \code{NX} instead has an empty failed-coordinate set because it represents
+nonmembership, not an unsuccessful candidate.
+
+\begin{lemma}[Endpoint-obstruction totality]
+\label{lem:endpoint-totality}
+For every $p\in\Paths$, the endpoint $\End(p)$ lies in
+$V_{\mathrm{test}}$.  For every $c\in X_{\End(p)}(r)$, at least one coordinate
+in $\Fail(\End(p))$ is false for $c$.
+\end{lemma}
+
+\begin{proof}
+The finite path table lists one nonempty provenance path for each tested
+endpoint and no in-contract path to \code{NX}, \code{NC}, \code{NR}, or
+\code{NS}.  Direct inspection of the edge endpoints shows that the terminal
+node of every listed in-contract path is one of the 17 nodes above.  The
+inherited theorem named by the endpoint record proves the stated coordinate
+failure under that endpoint's own object and quantifiers.  The nonempty sets
+displayed above exhaust $V_{\mathrm{test}}$, which proves both assertions.
+\end{proof}
+
+The word ``totality'' in \cref{lem:endpoint-totality} is deliberately local.
+It refers to the finite endpoint table.  It is not a claim that all conceivable
+repair processes terminate, nor does it use reflexive reachability to manufacture
+a terminal witness.
+
+\subsection{The token classifier}
+
+The normalizer in \cref{eq:normalizer} assigns eight tokens to obstruction
+paths and eight to exit paths.  The obstruction tokens are the six frozen
+families plus the canonical Bass--Serre and groupoid-import tokens.  The exit
+tokens are the six exit-only requests plus the two explicit alternatives from
+the mixed classes.  Every token record names its exact instance scope; the
+normalizer cannot be extended by imagining an unrecorded instance.
+
+\begin{proposition}[Finite request classification]
+\label{prop:token-totality}
+For every $q\in\SigmaReq$, exactly one of the following holds.
+\begin{enumerate}
+  \item $\mathsf{norm}(q)$ is an obstruction record with at least one endpoint
+  $v\in V_{\mathrm{test}}$ and $\Fail(v)\ne\varnothing$.
+  \item $\mathsf{norm}(q)$ is an exit record whose terminal endpoint is
+  \code{NX}, whose obstruction-endpoint list is empty, and whose failed-\Good{}
+  set is empty.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The 16 token IDs in \cref{tab:tokens} are distinct and equal the declared
+domain of the finite normalizer.  Eight records have disposition
+\Obstructed{} and nonempty obstruction-endpoint/path lists; their endpoints
+belong to $V_{\mathrm{test}}$, so \cref{lem:endpoint-totality} applies.  The
+remaining eight records have disposition \Exit{}, empty obstruction lists, and
+an explicit exit edge ending at \code{NX}.  No record has both dispositions,
+and the two counts sum to 16.
+\end{proof}
+
+\Cref{fig:classification} visualizes this finite, disjoint classifier.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{0.96\textwidth}{!}{\input{figures/request_classification}}
+  \caption{The finite classifier separates class dispositions from token
+  outcomes.  Six classes are obstructed and six are exit-only.  Each of the two
+  mixed classes contributes one obstructed canonical token and one explicit
+  category-changing exit token.  Thus the token census is eight plus eight.
+  Solid paths terminate with a nonempty failed-\Good{} set; dashed EXIT paths
+  terminate with an empty set and never count as evidence for $\neg\Good$.}
+  \label{fig:classification}
+\end{figure}
+
+At class level, the census is six obstructed, six exit-only, and two mixed
+(Bass--Serre splitting and groupoid trace).  An exit-only row says only that its
+one request token changes the frozen category; a mixed row quantifies only over
+its two recorded tokens, not all conceivable alternatives.
+
+\subsection{Relative closure theorem}
+
+\begin{theorem}[Relative exhaustion of the encoded affine branch]
+\label{thm:closure}
+Under \cref{ass:timing,ass:predecessors}, for every $r\ge2$ and every
+$c\in\Caff(r)$,
+\[
+\neg\Good(c).
+\]
+Moreover, every request $q\in\SigmaReq$ is classified by
+\cref{prop:token-totality}; no request in the finite domain remains unassigned.
+\end{theorem}
+
+\begin{proof}
+Take $c\in\Caff(r)$.  By \cref{eq:candidate-domain}, $c=(p,x)$ for a nonempty
+provenance path $p\in\Paths$ and an endpoint datum
+$x\in X_{\End(p)}(r)$.  By \cref{lem:endpoint-totality}, the endpoint lies in
+$V_{\mathrm{test}}$ and at least one coordinate listed by
+$\Fail(\End(p))$ is false for $x$.  Since \Good{} is the conjunction of all
+six coordinates, $\Good(c)$ is false.  The final request-classification
+statement is \cref{prop:token-totality}.
+\end{proof}
+
+The theorem has two related conclusions but no hidden equivalence.  The first
+quantifies over endpoint-typed candidate data on the in-contract provenance
+paths.  The second classifies all 16 request tokens, including category exits
+that do not lie in $\Caff(r)$.  Exit classification completes the request table;
+it does not prove $\neg\Good$ for a changed object.
+
+\subsection{Inherited kernels and sharp boundaries}
+
+The endpoint map packages four source-owned kernels: Paper 35 supplies the
+object fork; Paper 36 the filling, quotient-ownership, and clock fork; Paper 37
+the finite-coefficient leakage-or-erasure fork; and Paper 38 the tree/orbital
+trilemma for the tree canonical to the frozen ascending-HNN splitting and
+presentation.  Paper 39 contributes their typed coverage proof, not new
+versions of these kernels.  Their hypotheses and dependency structure remain
+in the frozen packages and \cref{app:ledgers}.
+
+The quantifier $r\ge2$ is intentional.  At $r=1$ some affine obstructions
+disappear while filling, nonproper-action, and orbital controls remain, so the
+balanced case is only a control.  The explicit countermodels in
+\cref{app:ledgers}---finite cycles, noninvertible deletion, summable tree
+damping, proper tree lattices, and first-trace cancellation---show sharply why
+\cref{thm:closure} cannot become a universal impossibility theorem.
