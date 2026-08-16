@@ -2393,3 +2393,113 @@ tuple remains **(A1_WEAK, A2_CERTIFIED_PREFIX,
 A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
 **ROUTE_A_EXPLORATORY**. Punctured-domain infinite-rank ownership is open;
 arithmetic advance is NO and Route B is not authorized.
+
+## HCS-P73 relative Lind full-ladder counterterm (2026-08-16)
+
+Candidate **HCS-P73** constructs the all-complex counterterm named by P72;
+see the
+[HCS-P73 project](../henon_relative_lind_full_ladder_counterterm/).
+The raw pole expansion of each \(c_m\Phi(t^m)\) has total absolute mass
+\(\sqrt2|c_m|\), which is nonsummable already along odd primes.  Subtracting
+the Taylor polynomial through degree \(m-1\) from every pole factor gives a
+normally and unconditionally convergent double series whose level sums are
+unchanged.  Including the explicit negative source factor yields the exact
+normalized identity \(K_{\rm all}C_{\rm rel}=1\).
+
+The Route-A tuple remains **(A0_NOT_ADDRESSED, A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**.  The counterterm copies the complete object it
+cancels and supplies no independent operator or arithmetic trace.  Route B
+is not authorized.
+
+## HCS-P74 all-channel counterterm gauge rigidity (2026-08-16)
+
+Candidate **HCS-P74** classifies the freedom left by P73; see the
+[HCS-P74 project](../henon_all_channel_counterterm_gauge_rigidity/).
+Cancellation of every channel forces \(d_m=c_m\).  Requiring the remaining
+source-cancelled object to extend holomorphically and nowhere zero forces
+\((a,\beta)=(3/4,1/2)\).  The answer is
+nevertheless unique only modulo multiplication by
+\(\mathcal O(\mathbb D)^\times\).  No finite Taylor jet fixes the
+holomorphic gauge.  Genus \(m-1\) gives complete normalized trivialization,
+whereas genus \(m\) leaves the explicit analytic residual
+\[
+\exp\!\left(-2\sum_{m\ge2}c_mt^m\right)
+=e^{2t}\prod_{\substack{d\ge1\\d\ {\rm odd}}}
+(1-t^d)^{2\mu(d)}.
+\]
+
+The Route-A tuple remains **(A0_NOT_ADDRESSED, A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**.  Uniqueness from channel removability and any
+finite basepoint jet is refuted in the stated channel-log class; whether
+independent source-native structure selects a canonical gauge remains open.
+Operator and arithmetic ownership remain open, and Route B is not authorized.
+
+## HCS-P75 weighted reflection scalar-channel divisor (2026-08-16)
+
+Candidate **HCS-P75** extends the P72 regrouping to P70's full weight family;
+see the [HCS-P75 project](../henon_weighted_reflection_channel_divisor/).
+It proves
+\[
+\log\mathcal Z_{\rm orb}(z,q)
+=\sum_{m\ge1}c_m
+\frac{2(qz)^m}{1-(1+q^{2m})z^{2m}},
+\]
+with the same nonzero coefficient \(c_m\).  Introducing an independent
+fugacity \(w\) gives bidisk channels
+\(2w^m/(1-z^{2m}-w^{2m})\); the hypersurfaces
+\(z^{2m}+w^{2m}=1\) are smooth and locally finite, and the channel sum
+converges normally off their union.  Restriction to the physical fiber
+\(w=qz\) recovers the positive-weight family, with every fiber root and
+local principal coefficient explicit.
+
+The Route-A tuple remains **(A0_NOT_ADDRESSED, A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**.  A \(q\ne1\) Lind source, joint collision theorem,
+operator, and arithmetic labeling are not claimed.  Route B is not
+authorized.
+
+## HCS-P76 weighted reflection natural-boundary circle (2026-08-16)
+
+Candidate **HCS-P76** determines the fixed-weight global boundary left open
+by P75; see the
+[HCS-P76 project](../henon_weighted_reflection_natural_boundary/).
+For every \(q>0\), the distinct radii
+\(\rho_m(q)=(1+q^{2m})^{-1/(2m)}\) increase to
+\(L(q)=\min(1,q^{-1})\).  All \(2m\) roots on the \(m\)th circle are
+exponential essential singularities and their angular mesh becomes dense.
+Thus \(|z|=L(q)\) is a natural boundary for the exact unrenormalized
+punctured continuation.
+
+The Route-A tuple remains **(A0_NOT_ADDRESSED, A1_WEAK,
+A2_CERTIFIED_PREFIX, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**.  The result does not cover a counterterm-modified
+object, construct an operator, or advance arithmetic semantics.  Route B is
+not authorized.
+
+## HCS-P77 tautological Fredholm ownership firewall (2026-08-16)
+
+Candidate **HCS-P77** performs the punctured ownership test named by P72 and
+P76; see the
+[HCS-P77 project](../henon_tautological_fredholm_ownership_firewall/).
+For each fixed \(q>0\), the channel diagonal
+\(A(\,\cdot\,,q)=\operatorname{diag}(c_m\Psi_m(\,\cdot\,,q))\) is
+holomorphic with values in \(\mathcal S_1\) on
+\(\Omega_q=\{|z|<\min(1,q^{-1})\}\setminus\Sigma_q\), and gives the
+exact post-hoc determinant \(\det_F(e^A)=e^{\operatorname{Tr}A}\).
+This earns only tautological
+analytic ownership: every nonvanishing holomorphic function has a rank-one
+Fredholm encoding.
+
+Each independently specified cyclic orbit block owns the finite Euler
+denominator \(D_\omega(z)=\det(I-zB_\omega)\); the corresponding P70
+Euler factor is \(D_\omega(z)^{-1}\).  The block singular values lie in
+\(\{1,q\}\).  An infinite
+primitive singleton-word subsequence keeps singular values bounded below,
+so the source-native direct sum is noncompact and not Schatten.  The Route-A
+tuple remains **(A0_NOT_ADDRESSED, A1_WEAK, A2_CERTIFIED_PREFIX,
+A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
+**ROUTE_A_EXPLORATORY**.  A genuine source-native compact/nuclear transfer
+operator remains open; arithmetic advance is NO and Route B is not
+authorized.

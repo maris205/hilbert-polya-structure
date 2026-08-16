@@ -482,3 +482,33 @@ C52--C56.
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
 |---|---|---|---|---|---|
 | HEN-O114 | Unit-disk meromorphic or holomorphic trace-class Fredholm globalization of the uniquely normalized P71 relative Lind/packet germ | proved infinite essential-singularity ladder obstruction | Exact regrouping gives `log Z_orb=sum_(m>=1)c_m Phi(t^m)` with `c_m=m^(-1)product_(p|m,p odd)(1-p)!=0`. After the `m=1` counterterm, `log C_rel=-c_m/[sqrt(2)m(1-t/rho_m)]+holomorphic` at every `rho_m=2^(-1/(2m))`, `m>=2`. Hence `C_rel` has infinitely many essential singularities inside the unit disk, accumulating at one. | Stops only whole-unit-disk meromorphic finite-state determinants and quotients of holomorphic trace-class Fredholm determinants for this exact relative germ. It preserves P71's local extension and leaves punctured/slit domains, infinite singular counterterms, non-trace-class operators, and infinite-rank models open. It supplies no prime semantics. | ../henon_relative_lind_essential_ladder/PROOF_PACKAGE.md |
+
+## HCS-P73 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O115 | Raw pole-by-pole exponential factors as an order-independent full-ladder counterterm | proved nonabsolute-order obstruction with exact primary-factor repair | The partial fractions have coefficients `b_(m,k)=c_m(-1)^k/(sqrt(2)m)` and total absolute mass `sum_k abs(b_(m,k))=sqrt(2)abs(c_m)`. The sum over levels diverges already along odd primes, so the raw pole series is not unconditionally convergent and has no permutation-independent value. Degree-`(m-1)` Taylor subtractions cancel within each level, preserve the exact level sum `c_m Phi(t^m)`, and yield an absolutely normally convergent double series. | Stops only the uncorrected unordered pole product. The proved genus-`m-1` counterterm survives, but it copies the complete singular ledger and therefore supplies no independent transfer or arithmetic ownership. P74 separately classifies the resulting holomorphic-gauge freedom. | ../henon_relative_lind_full_ladder_counterterm/PROOF_PACKAGE.md |
+
+## HCS-P74 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O116 | The all-channel singular divisor and a finite basepoint jet as a unique global counterterm prescription | proved holomorphic-gauge torsor obstruction | Removability forces every channel coefficient. Requiring holomorphic nowhere-zero extension at the remaining source point forces `(a,beta)=(3/4,1/2)`, but multiplication by any element of `O(D)^x` preserves all singular cancellations. Neither value normalization nor any finite Taylor jet kills this infinite-dimensional freedom; genus `m-1` and genus `m` give distinct explicit residuals. | Complete in the stated channel-log and nowhere-zero extension class. A separately declared gauge axiom, such as `G=0` in the frozen decomposition or a prescribed full germ/infinite jet, can select a representative; the theorem does not exclude source-native extra structure that supplies such an axiom. | ../henon_all_channel_counterterm_gauge_rigidity/PROOF_PACKAGE.md |
+
+## HCS-P75 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O117 | A fixed unweighted scalar pole ladder as the analytic geometry of every positive reflection weight | proved moving two-variable divisor obstruction | Introduce an independent fugacity `w`. The exact bidisk channels have denominators `1-z^(2m)-w^(2m)` and smooth locally finite hypersurfaces `z^(2m)+w^(2m)=1`. Restriction to the physical positive-`q` fiber `w=qz` gives roots of radius `(1+q^(2m))^(-1/(2m))`. | Stops only reuse of the `q=1` scalar divisor as a weight-independent boundary. The exact bidisk channel continuation survives. No `q!=1` Lind source, joint collision classification, operator, or arithmetic interpretation follows from the divisor alone. | ../henon_weighted_reflection_channel_divisor/PROOF_PACKAGE.md |
+
+## HCS-P76 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O118 | Meromorphic continuation of the unrenormalized positive-weight orbit product through its limiting fiber circle | proved dense essential-natural-boundary obstruction | For every `q>0`, the distinct radii `rho_m(q)=(1+q^(2m))^(-1/(2m))` increase to `L(q)=min(1,q^(-1))`; each of the `2m` phased roots has nonzero principal coefficient and hence is an exponential essential singularity. Their angular meshes are boundary-dense, so no boundary point has a neighborhood carrying a meromorphic function that agrees with the single-valued unrenormalized channel continuation on its intersection with `Omega_q={abs(z)<L(q)} minus Sigma_q`. | Object-specific to the exact unrenormalized punctured continuation on a fixed positive-weight fiber. It is not a Taylor-radius statement, and an all-channel counterterm defines a different function outside the no-go. The result proves no operator or arithmetic semantics. | ../henon_weighted_reflection_natural_boundary/PROOF_PACKAGE.md |
+
+## HCS-P77 additions
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O119 | Bare Fredholm representability of the punctured scalar product as source-native dynamical ownership | proved universal-encoding and source-block noncompactness firewall | For each fixed `q>0`, the channel diagonal is holomorphic with values in `S_1` on `Omega_q` and gives a post-hoc determinant, but every nonvanishing holomorphic function already has a rank-one Fredholm representation. Each independently specified cyclic source block owns the Euler denominator `D_omega=det(I-zB_omega)` and the P70 factor is `D_omega^(-1)`. The block singular values lie in `{1,q}`; an infinite singleton-word subsequence keeps them bounded below by `min(1,q)>0`, so the direct sum is noncompact and belongs to no Schatten class. | Rejects ownership inferred solely from existence of a Fredholm formula. For `z!=0`, the bare orbit-block perturbation `zB_q` is not trace class, so the standard determinant `det_F(I-zB_q)` is not defined; this does not assert that `I-zB_q` is never a Fredholm operator. A new compact/nuclear source-native transfer operator, a justified regularized determinant, and arithmetic emitters remain open. | ../henon_tautological_fredholm_ownership_firewall/PROOF_PACKAGE.md |

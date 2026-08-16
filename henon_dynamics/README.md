@@ -1747,3 +1747,175 @@ not authorized.
 - [P72 proof package](henon_relative_lind_essential_ladder/PROOF_PACKAGE.md)
 - [P72 certificate](henon_relative_lind_essential_ladder/results/c72_certificate.json)
 - [P68--P72 batch review](BATCH_REVIEW_P68_P72.md)
+
+## HCS-P73 relative Lind full-ladder counterterm
+
+P73 treats every complex pole of P72 separately.  With
+
+\[
+\alpha_{m,k}=2^{-1/(2m)}e^{\pi i k/m},\qquad
+b_{m,k}=\frac{c_m(-1)^k}{\sqrt2\,m},
+\]
+
+one has the exact partial fractions
+
+\[
+c_m\Phi(t^m)=\sum_{k=0}^{2m-1}
+\frac{b_{m,k}}{1-t/\alpha_{m,k}}.
+\]
+
+The raw pole family is not absolutely summable.  Subtracting the Taylor
+polynomial through degree \(m-1\) makes the individual pole factors normally
+and unconditionally summable on compact punctured subsets, without changing
+their level sum.  After also cancelling the residual source singularity at
+\(w=1+\sqrt2t=0\), the normalized full counterterm satisfies
+\(K_{\rm all}C_{\rm rel}=1\) on every compatible branch.  This is exact
+all-channel renormalization, but it copies the entire packet ledger and is
+not an independent determinant or transfer operator.  Arithmetic advance is
+NO and Route B is not authorized.
+
+- [P73 overview](henon_relative_lind_full_ladder_counterterm/README.md)
+- [P73 paper](henon_relative_lind_full_ladder_counterterm/paper/paper.pdf)
+- [P73 proof package](henon_relative_lind_full_ladder_counterterm/PROOF_PACKAGE.md)
+- [P73 certificate](henon_relative_lind_full_ladder_counterterm/results/c73_certificate.json)
+
+## HCS-P74 all-channel counterterm gauge rigidity
+
+P74 determines exactly what the singular divisor fixes.  In the channel-log
+class
+
+\[
+W_{d,G}(t)=\exp\!\left(\sum_{m\ge2}d_m\Phi(t^m)+G(t)\right),
+\]
+
+removability at every channel radius forces \(d_m=c_m\) coefficientwise.
+Requiring the source-cancelled object to extend holomorphically and nowhere
+zero across the remaining negative source point uniquely forces the
+power-exponential pair \((a,\beta)=(3/4,1/2)\).  The divisor leaves the
+nowhere-zero holomorphic factor \(e^G\) completely free, however, and no
+finite Taylor jet fixes that gauge.
+
+The genus-\(m-1\) convention cancels the channel sector.  The forced source
+factor then leaves \(e^{-3/2}\), and the stated final scalar normalization
+\(e^{3/2}\) makes the full residual \(1\).  Under the same final scalar
+normalization, the equally explicit source-preserving genus-\(m\) convention
+leaves
+
+\[
+\exp\!\left(-2\sum_{m\ge2}c_mt^m\right)
+=e^{2t}\prod_{\substack{d\ge1\\d\ {\rm odd}}}
+(1-t^d)^{2\mu(d)}.
+\]
+
+Thus singular cancellation is rigid modulo holomorphic gauge, while no
+finite basepoint jet selects a unique gauge.  Whether independent
+source-native structure supplies a canonical normalization remains open.
+No operator or arithmetic ownership follows; Route B is not authorized.
+
+- [P74 overview](henon_all_channel_counterterm_gauge_rigidity/README.md)
+- [P74 paper](henon_all_channel_counterterm_gauge_rigidity/paper/paper.pdf)
+- [P74 proof package](henon_all_channel_counterterm_gauge_rigidity/PROOF_PACKAGE.md)
+- [P74 certificate](henon_all_channel_counterterm_gauge_rigidity/results/c74_certificate.json)
+
+## HCS-P75 weighted reflection scalar-channel divisor
+
+P75 extends the exact regrouping to the full P70 weight family:
+
+\[
+\log\mathcal Z_{\rm orb}(z,q)
+=\sum_{m\ge1}c_m
+\frac{2(qz)^m}{1-(1+q^{2m})z^{2m}}.
+\]
+
+The coefficient \(c_m\) is unchanged and never vanishes.  Introduce an
+independent fugacity \(w\).  On the bidisk the lifted channels are
+\(2w^m/(1-z^{2m}-w^{2m})\), with polar hypersurfaces
+
+\[
+H_m:\quad z^{2m}+w^{2m}=1.
+\]
+
+They are smooth and locally finite in the bidisk, and the channel series is
+normally convergent on compact subsets of their complement.  Restricting to
+the physical fiber \(w=qz\) recovers the positive-\(q\) family.  On every
+such fiber the \(m\)th channel has \(2m\) explicitly phased roots
+and a nonzero exact principal coefficient.  P75 does not claim the dense
+limiting boundary, a weighted Lind source for \(q\ne1\), an operator, or
+arithmetic semantics.  Route B remains unauthorized.
+
+- [P75 overview](henon_weighted_reflection_channel_divisor/README.md)
+- [P75 paper](henon_weighted_reflection_channel_divisor/paper/paper.pdf)
+- [P75 proof package](henon_weighted_reflection_channel_divisor/PROOF_PACKAGE.md)
+- [P75 certificate](henon_weighted_reflection_channel_divisor/results/c75_certificate.json)
+
+## HCS-P76 weighted reflection natural-boundary circle
+
+P76 globalizes P75 on every fixed positive weight fiber.  Its singular radii
+
+\[
+\rho_m(q)=(1+q^{2m})^{-1/(2m)}
+\]
+
+increase strictly to \(L(q)=\min(1,q^{-1})\).  Every point
+
+\[
+\rho_m(q)e^{\pi i k/m},\qquad 0\le k<2m,
+\]
+
+is an exponential essential singularity, and the angular mesh has gap
+\(\pi/m\).  The roots therefore accumulate at every point of
+\(|z|=L(q)\), proving that this circle is a natural boundary for the exact
+unrenormalized punctured continuation.  For \(q>1\) the limiting circle lies
+strictly inside the unit disk.
+
+The theorem is deliberately object-specific: an all-channel counterterm
+changes the function.  It proves no source-native operator, arithmetic
+trace, or Route-B statement.
+
+- [P76 overview](henon_weighted_reflection_natural_boundary/README.md)
+- [P76 paper](henon_weighted_reflection_natural_boundary/paper/paper.pdf)
+- [P76 proof package](henon_weighted_reflection_natural_boundary/PROOF_PACKAGE.md)
+- [P76 certificate](henon_weighted_reflection_natural_boundary/results/c76_certificate.json)
+
+## HCS-P77 tautological Fredholm ownership firewall
+
+P77 separates analytic representability from dynamical ownership.  For each
+fixed \(q>0\), on P76's punctured domain
+\(\Omega_q=\{|z|<\min(1,q^{-1})\}\setminus\Sigma_q\),
+
+\[
+A(z,q)=\operatorname{diag}\bigl(c_m\Psi_m(z,q)\bigr)
+\]
+
+is locally trace class, so \(K=e^A-I\) is trace class and
+
+\[
+\det_F(I+K)=e^{\operatorname{Tr}A}
+=\exp\!\left(\sum_m c_m\Psi_m\right).
+\]
+
+This is an exact determinant representation, but it is post hoc and
+parameter dependent.  Indeed every nonvanishing holomorphic function \(F\)
+has the rank-one representation
+\(\det_F(I+(F-1)P)=F\).
+
+The source-native alternative behaves oppositely.  A weighted cyclic block
+\(B_\omega\) owns the Euler denominator polynomial
+\[
+\det(I-zB_\omega)=1-z^nq^{S_n\chi(\omega)},
+\]
+whose reciprocal is the corresponding P70 Euler factor.  Its singular
+values are the edge weights in \(\{1,q\}\).  Infinitely
+many primitive singleton reflection words therefore give singular values
+bounded below by \(\min(1,q)>0\); the full orbit-block direct sum is
+noncompact, so for \(z\ne0\) the standard trace-class determinant
+\(\det_F(I-zB_q)\) is not defined.  A genuine compact or
+nuclear source-native transfer owner remains open.  Arithmetic advance is
+NO and Route B is not authorized.
+
+- [P77 overview](henon_tautological_fredholm_ownership_firewall/README.md)
+- [P77 paper](henon_tautological_fredholm_ownership_firewall/paper/paper.pdf)
+- [P77 proof package](henon_tautological_fredholm_ownership_firewall/PROOF_PACKAGE.md)
+- [P77 certificate](henon_tautological_fredholm_ownership_firewall/results/c77_certificate.json)
+- [P73--P77 batch plan](BATCH_PLAN_P73_P77.md)
+- [P73--P77 batch review](BATCH_REVIEW_P73_P77.md)
