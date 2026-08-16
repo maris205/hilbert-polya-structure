@@ -1,0 +1,329 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[numbers]{natbib}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Zch}{\mathcal Z_{\mathrm{ch}}}
+\newcommand{\Sch}{\mathcal S_1}
+\newcommand{\Fdet}{\det_{\mathrm F}}
+\hypersetup{pdftitle={A Fredholm Ownership Firewall for the Weighted Henon Reflection Euler Family},pdfauthor={Liang Wang},pdfsubject={Trace-class realizations and source-native cyclic blocks},pdfkeywords={Henon map, Euler product, Fredholm determinant, trace class, cyclic weighted shift}}
+\title{A Fredholm Ownership Firewall for the\\Weighted H\'enon Reflection Euler Family}
+\author{Liang Wang\\\small School of Artificial Intelligence and Automation\\\small Huazhong University of Science and Technology\\\small Wuhan 430074, P. R. China}
+\date{August 16, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The weighted reflection Euler family of the full H\'enon horseshoe has an
+explicit punctured scalar continuation.  We ask whether a Fredholm
+determinant representation gives that continuation meaningful operator
+ownership.  Its logarithmic channels can indeed be placed on the diagonal
+of a locally trace-class holomorphic family $A(z,q)$, and
+$\Fdet(\exp A)=\exp(\operatorname{Tr}A)$ recovers the continuation exactly.
+This realization is nevertheless tautological: every nonvanishing
+holomorphic scalar $F$ satisfies
+$F=\Fdet(I+(F-1)P)$ for a fixed rank-one projection $P$.  In the opposite
+direction, each primitive source word owns a finite weighted cyclic block
+$B_\omega$ with
+$\det(I-zB_\omega)=1-z^nq^{S_n\chi(\omega)}$.  This is the P70 Euler
+denominator, whose reciprocal is the corresponding Euler factor.  Its singular values are the
+physical edge weights in $\{1,q\}$.  Primitive singleton reflection words at
+every odd length therefore put a uniform positive singular-value floor in
+the undamped full orbit-block direct sum.  That sum is bounded but
+noncompact, belongs to no finite Schatten ideal, and has no ordinary
+trace-class Fredholm determinant.  The comparison furnishes a claim
+firewall: analytic determinant realization is proved but tautological,
+finite source blocks are exact, and a genuine source-derived transfer owner
+remains open.
+\end{abstract}
+
+\section{The operator question after scalar continuation}
+
+The H\'enon horseshoe admits a full-shift model in the hyperbolic regime
+relevant here \cite{DevaneyNitecki1979,Arai2007}.  Previous steps of the
+present programme associated to its marked reflection packets the weighted
+channel expansion
+\begin{equation}\label{eq:channel-expansion}
+ \mathcal L(z,q)=\sum_{m\geq1}h_m(z,q),\qquad
+ h_m(z,q)=c_m\frac{2(qz)^m}
+ {1-(1+q^{2m})z^{2m}},
+\end{equation}
+where
+\begin{equation}\label{eq:coefficient}
+ c_m=\frac1m\prod_{\substack{p\mid m\\p\ \mathrm{odd}}}(1-p),
+ \qquad 0<|c_m|\leq1.
+\end{equation}
+For fixed $q>0$, put
+\begin{align}
+ L(q)&=\min(1,q^{-1}),\\
+ \rho_m(q)&=(1+q^{2m})^{-1/(2m)},\\
+ \Sigma_q&=\{\rho_m(q)e^{\pi i k/m}:m\geq1,\ 0\leq k<2m\},\\
+ \Omega_q&=\{z:|z|<L(q)\}\setminus\Sigma_q.
+\end{align}
+The preceding scalar theory proves that \eqref{eq:channel-expansion}
+converges normally on compact subsets of $\Omega_q$ and defines the
+nonvanishing continuation
+\begin{equation}\label{eq:zch}
+ \Zch(z,q)=\exp \mathcal L(z,q).
+\end{equation}
+It also classifies the limiting circle; we do not revisit or cross that
+boundary.  Instead we distinguish two questions:
+
+\begin{enumerate}
+ \item Can the known scalar \eqref{eq:zch} be represented by a legitimate
+ trace-class Fredholm determinant?
+ \item Does an operator built independently from the source dynamics own
+ the same determinant?
+\end{enumerate}
+
+The first answer is yes.  The second is not implied by the first.
+
+\section{A locally trace-class channel realization}
+
+Let $(e_m)_{m\geq1}$ be the standard basis of $\ell^2(\mathbb N)$ and let
+$P_m$ project onto $\mathbb C e_m$.  Define
+\begin{equation}\label{eq:A}
+ A(z,q)=\sum_{m\geq1}h_m(z,q)P_m
+       =\operatorname{diag}(h_1(z,q),h_2(z,q),\ldots).
+\end{equation}
+
+\begin{theorem}[Channel-diagonal determinant]\label{thm:channel}
+For every fixed $q>0$, $A:\Omega_q\to\Sch$ is holomorphic in trace norm.
+The family
+\[
+ K_{\mathrm{ch}}(z,q)=\exp A(z,q)-I
+\]
+is likewise trace-class holomorphic, and
+\begin{equation}\label{eq:channel-det}
+ \Fdet(I+K_{\mathrm{ch}}(z,q))
+ =\exp(\operatorname{Tr}A(z,q))
+ =\Zch(z,q).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $C\Subset\Omega_q$.  Choose $r<L(q)$ such that $|z|\leq r$ on $C$.
+Then $r<1$ and $qr<1$.  All finitely many early denominators in
+\eqref{eq:channel-expansion} are uniformly separated from zero on $C$.
+For all sufficiently large $m$ and all $z\in C$,
+\[
+ \left|1-(1+q^{2m})z^{2m}\right|
+ \geq1-r^{2m}-(qr)^{2m}\geq\frac12.
+\]
+Using \eqref{eq:coefficient},
+\begin{equation}\label{eq:tail}
+ \sup_{z\in C}|h_m(z,q)|\leq4(qr)^m
+\end{equation}
+for the same tail.  Thus $\sum_m h_mP_m$ converges locally uniformly in
+$\Sch$, since the trace norm of a diagonal operator is the sum of the
+absolute diagonal entries.  The Banach-valued Weierstrass theorem gives
+trace-norm holomorphy, and
+$\operatorname{Tr}A=\sum_mh_m=\mathcal L$.
+
+The exponential remains in $I+\Sch$.  More explicitly, for the diagonal
+tail,
+\[
+ |e^{h_m}-1|\leq e^{|h_m|}|h_m|,
+\]
+so \eqref{eq:tail} again gives locally uniform trace-norm convergence.
+The standard trace-ideal identity
+$\Fdet(e^A)=e^{\operatorname{Tr}A}$ \cite{Simon2005} now yields
+\eqref{eq:channel-det}.
+\end{proof}
+
+This theorem is an exact analytic statement.  It is not yet a test of
+dynamical provenance, because the entries of $A$ were read from the already
+completed scalar logarithm.
+
+\section{The universal rank-one firewall}
+
+\begin{lemma}[Universal scalar realization]\label{lem:rankone}
+Let $U\subset\mathbb C$ be a domain, let $F$ be a nonvanishing holomorphic
+function on $U$, and let $P$ be a fixed rank-one orthogonal projection on an
+arbitrary Hilbert space.  Then
+\[
+ K_F(z)=(F(z)-1)P
+\]
+is trace-class holomorphic and
+\begin{equation}\label{eq:rankone}
+ \Fdet(I+K_F(z))=F(z),\qquad z\in U.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Scalar multiplication makes $K_F$ holomorphic in trace norm.  It has one
+possibly nonzero eigenvalue, $F(z)-1$.  The finite-rank definition of the
+Fredholm determinant therefore gives
+$\Fdet(I+K_F)=1+(F-1)=F$.
+\end{proof}
+
+\Cref{lem:rankone} is deliberately elementary.  It shows that the bare
+existence of a parameter-dependent trace-class family with determinant $F$
+is universal and therefore cannot, by itself, identify a transfer
+mechanism, periodic-point trace, or dynamically selected state space.  We
+call such a construction a \emph{scalar-built realization}.  A genuine
+source owner would have to be specified from the dynamics independently of
+the already known $F$ and then derive $F$ as a consequence.  In this sense
+\Cref{thm:channel} is \texttt{PROVED\_TAUTOLOGICAL}: correct and useful for
+analysis, but insufficient as an ownership theorem.
+
+\section{Finite source-native cyclic blocks}
+
+The literal source construction has more provenance.  Let $\omega$ be a
+primitive marked reflection word of odd length $n$.  Write
+\[
+ \chi_j=\chi(\sigma^j\omega)\in\{0,1\},\qquad
+ S(\omega)=\sum_{j=0}^{n-1}\chi_j.
+\]
+On $\mathbb C^n$, with indices read modulo $n$, set
+\begin{equation}\label{eq:block}
+ B_\omega e_j=q^{\chi_j}e_{j+1}.
+\end{equation}
+These are the physical edge weights; no period damping has been inserted.
+
+\begin{proposition}[Exact orbit block]\label{prop:block}
+For every $q>0$ and every such $\omega$,
+\begin{align}
+ B_\omega^n&=q^{S(\omega)}I,\label{eq:turn}\\
+ \det(I-zB_\omega)&=1-z^nq^{S(\omega)},\label{eq:block-det}
+\end{align}
+and the singular values of $B_\omega$ are precisely the multiset
+$\{q^{\chi_0},\ldots,q^{\chi_{n-1}}\}\subset\{1,q\}$.
+Consequently
+\begin{equation}\label{eq:block-bounds}
+ \min(1,q)\|x\|\leq\|B_\omega x\|
+ \leq\max(1,q)\|x\|.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+After one full cycle, every $e_j$ has acquired every edge weight once, which
+proves \eqref{eq:turn}.  Moreover
+$e_0,B_\omega e_0,\ldots,B_\omega^{n-1}e_0$ are nonzero multiples of the
+standard basis, so $e_0$ is cyclic.  Hence the minimal polynomial has degree
+$n$; by \eqref{eq:turn} it is $\lambda^n-q^{S(\omega)}$, which is also the
+characteristic polynomial.  Substitution gives \eqref{eq:block-det}.
+Finally,
+\[
+ B_\omega^*B_\omega e_j=q^{2\chi_j}e_j.
+\]
+Taking positive square roots proves the singular-value statement and
+\eqref{eq:block-bounds}.
+\end{proof}
+
+Thus every finite Euler denominator has an exact source-native owner, and
+the corresponding P70 Euler factor is the reciprocal determinant
+\(\det(I-zB_\omega)^{-1}\).  The issue is whether all of these blocks are
+summable in a determinant class.
+
+\section{The full source sum is not compact}
+
+For every odd $n\geq3$, let $\omega_n=(1,0,\ldots,0)$ with the singleton at
+the chosen reflection center.  Reflection fixes $\omega_n$.  It is
+primitive: repetition of a shorter word would create more than one symbol
+equal to $1$.  Exactly the two sites adjacent to the singleton have unequal
+distance-two neighbours, so
+\begin{equation}\label{eq:singleton-energy}
+ S(\omega_n)=n-2.
+\end{equation}
+
+Let $\mathfrak R$ be the countable collection of physical primitive marked
+reflection words and form the Hilbert direct sum
+\begin{equation}\label{eq:direct-sum}
+ \mathcal H=\bigoplus_{\omega\in\mathfrak R}\mathbb C^{|\omega|},
+ \qquad B_q=\bigoplus_{\omega\in\mathfrak R}B_\omega.
+\end{equation}
+
+\begin{theorem}[Source-native obstruction]\label{thm:obstruction}
+For every $q>0$, $B_q$ is bounded and noncompact.  It belongs to no Schatten
+class $\mathcal S_p$ with $0<p<\infty$.  In particular, for $z\ne0$ the
+expression $\Fdet(I-zB_q)$ is not an ordinary trace-class Fredholm
+determinant.
+\end{theorem}
+
+\begin{proof}
+The uniform bounds \eqref{eq:block-bounds} pass to the Hilbert direct sum:
+\[
+ \min(1,q)\|x\|\leq\|B_qx\|\leq\max(1,q)\|x\|.
+\]
+Choose one unit basis vector $u_n$ from each singleton block.  The vectors
+$u_n$ are orthonormal, their images lie in mutually orthogonal blocks, and
+$\|B_qu_n\|\geq\min(1,q)>0$.  Hence $(B_qu_n)$ has no convergent subsequence,
+so $B_q$ is not compact.  Every finite Schatten class is contained in the
+compact operators.  Thus $B_q\notin\mathcal S_p$ for every finite $p$; in
+particular $zB_q\notin\Sch$ when $z\ne0$, which excludes the ordinary
+trace-class determinant.
+\end{proof}
+
+The theorem concerns the literal undamped source blocks.  It does not refute
+every conceivable transfer operator.  It says that compactness or
+nuclearity must come from additional source-derived structure, rather than
+from taking the naive full direct sum.
+
+\section{A graded ledger is not an operator trace}
+
+There is a useful but dangerous remnant of trace combinatorics.  From the
+cyclic shift action,
+\begin{equation}\label{eq:ledger}
+ \sum_{j=0}^{n-1}\langle e_j,B_\omega^re_j\rangle=
+ \begin{cases}
+ 0,&n\nmid r,\\
+ nq^{(r/n)S(\omega)},&n\mid r.
+ \end{cases}
+\end{equation}
+For fixed $r$, only the finitely many lengths $n\mid r$ contribute, and
+there are finitely many binary source words at each such length.  Therefore
+\eqref{eq:ledger} reproduces a locally finite coefficient ledger after
+summing over blocks.
+
+This does not contradict \Cref{thm:obstruction}.  The left side of
+\eqref{eq:ledger} is a finite-block diagonal sum; its aggregate is tied to
+the canonical block basis.  Since $B_q^r$ is still bounded below and
+noncompact, it is not trace class.  The aggregate cannot be promoted to a
+basis-independent Hilbert-space trace or used in the Fredholm trace
+expansion.  We retain it only as a formal graded identity.
+
+\section{Executable certificate and claim boundary}
+
+The accompanying standard-library certificate performs exact rational
+Gaussian elimination on finite cyclic blocks, verifies representative
+weighted full turns, compares channel trace exponentials with products of
+diagonal exponentials, and tests unrelated rank-one realizations.  A second
+program reconstructs the formulas without importing the primary module.
+Normal and optimized unit-test runs enforce the same schema, and mutation
+tests reject promotions of the operator and arithmetic claims.  These
+computations audit finite identities; the local trace-norm and noncompactness
+arguments remain the proofs.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Claim & Status\\
+\midrule
+Punctured analytic determinant & \texttt{PROVED\_TAUTOLOGICAL}\\
+Universal rank-one firewall & \texttt{PROVED}\\
+Finite source cyclic blocks & \texttt{PROVED}\\
+Full source direct sum trace class & \texttt{REFUTED}\\
+Genuine source-derived transfer owner & \texttt{OPEN}\\
+Arithmetic trace or Route B & \texttt{NO / NOT AUTHORIZED}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+No rational-prime semantics, von Mangoldt trace, self-adjoint
+Hilbert--P\'olya operator, or arithmetic advance follows.  The constructive
+next question is precise: find a dynamically forced state space and a
+source-derived compactness mechanism whose genuine operator traces produce
+the weighted channels without inserting the completed scalar function.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
