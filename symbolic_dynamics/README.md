@@ -53,6 +53,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [39-affine-obstruction-dag-closure-certificate](papers/39-affine-obstruction-dag-closure-certificate/README.md) | [PDF](papers/39-affine-obstruction-dag-closure-certificate/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/39-affine-obstruction-dag-closure-certificate/) | 在 P35--P38 结果已知后，把其哈希化 outcome 组装成 checker-frozen 的 6-node/5-edge structural spine 与 22-node/28-edge typed proof DAG；14 类修复与 16 个请求 token 全部在精确有限域内归类，EXIT 不冒充失败，E22 不获 closure credit，跨 P36→P37 的四个候选状态字段全部 RESET。 | **RELATIVE AFFINE CLOSURE AUDIT / REGISTRY HANDOFF / ROUTE-A REJECTED / SD-C41** |
 | [40-gauss-mayer-projection-firewalls](papers/40-gauss-mayer-projection-firewalls/README.md) | [PDF](papers/40-gauss-mayer-projection-firewalls/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/40-gauss-mayer-projection-firewalls/) | 把普通 Gauss digit shift 与 two-digit pair return 通过 $\rho\iota=\iota\sigma^2$ 严格分型，并从 $K_s=\mathcal L_s^2$ 的 Fredholm traces 导出 intrinsic pair ledger；对且仅对 trace、order discriminant、expanding norm 三个投影，完整 rational-prime reciprocal-Euler conjunction 全部失败，而 pair ledger 与 same-space determinant 保留。严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FORMAL_HINT)`。 | **GO_MODULAR_PRIMITIVE_LEDGER / GO_SAME_OBJECT_MAYER_DETERMINANT / STOP_CANONICAL_INTEGER_PROJECTION / STOP_RATIONAL_INTEGER_CLOCK_REPETITION_CONJUNCTION / STOP_OPERATOR_VISIBLE_SELECTOR_NOT_OWNED / ROUTE_A_REJECTED / SD-C42** |
 | [41-knauf-rooted-clock-non-descent](papers/41-knauf-rooted-clock-non-descent/README.md) | [PDF](papers/41-knauf-rooted-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/41-knauf-rooted-clock-non-descent/) | 对冻结的 Knauf rooted label，trailing-zero stable quotient 上的 append-one 不下降；该 label 既非 cyclic clock 也不满足 temporal powers，literal Liouville scalar phase 同样不下降。state inventory 仍在 `Re(s)>2` 上拥有 diagonal Fredholm determinant，但不获得 binary primitive-return ownership。canonical replay 为 `24/24` 与 `25/25`，science SHA-256 为 `f9cbcde9a757896b976ad81a66f235d670029f727b6fda9b4e851846bac50bec`；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **ROOTED CLOCK NON-DESCENT / INVENTORY DETERMINANT OWNERSHIP / ROUTE-A REJECTED / SD-C43** |
+| [42-function-field-clock-non-descent](papers/42-function-field-clock-non-descent/PAPER_PLAN.md) | [PDF](papers/42-function-field-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/42-function-field-clock-non-descent/) | 对冻结的 full $q$-shift（$q\in\{2,3,5\}$），exact degree clock 在 length two 强制 composite $q^2$；同 marker 的 factor identification 又在 length one 强制 $p=q$ 与 $q{:}1$ multiplicity；marked determinant 的首个 $z$ 系数 $q^{1-s}$ 也不等于 prime-zeta $P(s)$。function-field prime-polynomial ledger 与 source determinant 保留。canonical replay 为 `11/11` 与 `11/11`，science SHA-256 为 `078d98da2f3c89c0f5f4e7ef6be84066ee60a1c1d82c86788de675ad349b7848`；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`。 | **STOP_Q_POWER_RATIONAL_PRIME_SUPPORT / STOP_MARKER_MULTIPLICITY_CONJUNCTION / STOP_FIRST_MARKED_COEFFICIENT_MISMATCH / ROUTE_A_REJECTED / SD-C44** |
 
 ### 论文 1 的候选分离结论
 
@@ -1419,13 +1420,45 @@ selection、witness 与结果均为 retrospective；Paper 39 只提供 existence
 provenance，不 ranking/authorize 本 successor，Paper 40 也不提供 selection
 或 novelty credit。
 
+### 论文 42：finite-field clock 与 rational-prime factor 的三重不下降
+
+Paper 42 冻结 full $q$-shift（$q\in\{2,3,5\}$）的 oriented primitive
+necklaces、degree clock $n\log q$、source-symbol marker $z^n$、ordinary word
+powers 与 weighted-adjacency determinant。若把每个 primitive object 总地送到
+rational prime 并保留 clock，则任何 length-two primitive（例如 $[01]$）都被
+迫使落到 $q^2$，与 prime support 矛盾。若再要求 factor monomial
+$z^nq^{-ns}=zp^{-s}$，自由 marker 已迫使 $n=1$、随后 $p=q$，但 source 有
+$q$ 个 length-one factors，target 在 $p=q$ 只有一个，故 multiplicity 为
+$q{:}1$ 而非一一对应。最后，两个 marked determinant 的首个 $z$ 系数分别为
+$q^{1-s}$ 与 $P(s)=\sum_p p^{-s}$；在 $\Re s>1$ 上也不能相同。
+
+这些结论不损害 source 的正面结构：necklace count 与 monic irreducible
+polynomial count 精确一致，full-shift periodic ledger、scalar determinant 与
+function-field norm clock 都保留。关闭的只是 frozen same-clock/same-marker
+rational-prime projection；changed marker、partial/induced maps、countable 或
+infinite-memory systems 以及其他 function-field/number-field correspondences
+均需新 source lock。严格 Route tuple 为
+`(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`，
+overall 为 `ROUTE_A_REJECTED`，Route B 为 false。
+
+authority canonical replay 的 main/independent checks 均为 `11/11`；science
+SHA-256 为
+`078d98da2f3c89c0f5f4e7ef6be84066ee60a1c1d82c86788de675ad349b7848`，source
+resolver 为 `29/29`，mutation suite 为 `2246/2246` 且 survivors 为零；integrity
+audit 为 `56/56`、SHA-256
+`7c5fd2bee0e1a3fdf23a59c692a262d42b1933db61db059f86258a54aa730aa2`，result
+ledger 为 95 entries、SHA-256
+`2ba51004cc37fa5ec2da98b6e4e5f65e9c73bb6d373f8da0009879e9ced97d0b`。
+selector、结果同步与 publication block 全部是 retrospective；typed closure
+novelty 仅 `3/10`，不获得 discovery、priority 或 Route-B credit。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十一篇论文](papers/)
+- [四十二篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

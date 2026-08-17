@@ -1,0 +1,145 @@
+\section{Three exact non-descent theorems}
+\label{sec:non-descent}
+
+The three failures below use different data. The clock theorem does not
+depend on the marker convention. The marker/multiplicity theorem does not use
+the analytic coefficient limit. The determinant theorem does not require an
+objectwise map. Keeping them separate shows exactly which proposed
+identification each witness defeats.
+
+\subsection{Clock preservation forces composite support}
+
+\begin{theorem}[No total exact-clock rational-prime map]
+\label{thm:clock}
+There is no total map
+\[
+ \pi:\Prim_q\longrightarrow\Primes
+\]
+such that
+\[
+ \log\pi(\gamma)=n(\gamma)\log q
+\]
+for every primitive source necklace $\gamma$.
+\end{theorem}
+
+\begin{proof}
+The word $01$ exists over each frozen alphabet. It is primitive: if a
+two-letter word were a proper power, it would be the square of a one-letter
+word and its two symbols would coincide. Let $\gamma=[01]$. Clock
+preservation gives
+\[
+ \log\pi(\gamma)=2\log q=\log(q^2).
+\]
+The real logarithm is injective on positive numbers, so
+$\pi(\gamma)=q^2$. Since $q>1$, this forced label is composite, contrary to
+$\pi(\gamma)\in\Primes$.
+\end{proof}
+
+Totality matters because the claim concerns the full primitive product.
+Omitting $[01]$ defines a partial projection, not a counterexample to
+\cref{thm:clock}. Mapping the class to a finite-field prime polynomial also
+changes the target type, and replacing the clock by an arbitrary prime
+enumeration abandons the theorem's equality.
+
+\subsection{Marker and weight expose multiplicity}
+
+\begin{theorem}[No marker--weight--multiplicity identification]
+\label{thm:multiplicity}
+There is no factorwise identification of all source primitive factors
+\[
+ \left(1-z^nq^{-ns}\right)^{-1}
+\]
+with rational-prime factors $(1-zp^{-s})^{-1}$ that preserves the free
+marker, analytic weight, and multiplicity.
+\end{theorem}
+
+\begin{proof}
+Equality of the factor monomials requires
+\begin{equation}
+ z^nq^{-ns}=zp^{-s}.                                         \label{eq:factor-equality}
+\end{equation}
+Because $z$ is free, equality of exponents in \cref{eq:factor-equality}
+forces $n=1$. Equality of the weights as functions of $s$ then forces $p=q$.
+By \cref{eq:necklace},
+\[
+ \Nq(1)=q.
+\]
+Thus the source has $q$ distinct length-one primitive necklaces, all with the
+only compatible monomial $zq^{-s}$. The rational Euler product has one
+primitive factor indexed by the rational prime $p=q$. The required factor
+multiplicity is therefore $q:1$, not $1:1$.
+\end{proof}
+
+Specializing $z=1$ before the comparison erases the marker witness rather
+than answering it. Likewise, merging the $q$ source factors or selecting one
+of them introduces an explicit quotient or projection. Those constructions
+can be useful controls, but they are outside the factorwise identification in
+\cref{thm:multiplicity}.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/three_obstructions}}
+  \caption{Three independent exact failure channels. Clock preservation sends
+  the primitive class $[01]$ to the composite $q^2$. Marker and weight
+  preservation reduce to length one, where $q$ source factors collide with
+  one target factor. The complete marked determinants already differ in the
+  first logarithmic $z$ coefficient.}
+  \label{fig:three-obstructions}
+\end{figure}
+
+\subsection{The first marked coefficient already differs}
+
+\begin{theorem}[Marked determinant nonidentity]
+\label{thm:coefficient}
+On their common absolute-convergence domain, $\Dq(s,z)$ and $\DP(s,z)$ are
+not equal as analytic functions of $(s,z)$. Their logarithms differ in the
+coefficient of $z$.
+\end{theorem}
+
+\begin{proof}
+Equations \eqref{eq:source-det} and \eqref{eq:target-log} give
+\begin{equation}
+ [z]\{-\log\Dq(s,z)\}=q^{1-s},
+ \qquad
+ [z]\{-\log\DP(s,z)\}=P(s)=\sum_{p\in\Primes}p^{-s}.         \label{eq:first-coefficients}
+\end{equation}
+The target series is the coefficient obtained from the rational Euler product
+on $\RePart s>1$ \citep{nistDLMF25211}. We show the two functions in
+\cref{eq:first-coefficients} cannot agree.
+
+Set $s=\sigma>1$ real and multiply by $2^\sigma$. For $q=2$, the source is
+identically $2$, whereas
+\[
+ 2^\sigma P(\sigma)
+ =1+\sum_{p\ge3}\left(\frac2p\right)^\sigma\longrightarrow1.
+\]
+For $q=3$ or $q=5$, the scaled source is
+\[
+ 2^\sigma q^{1-\sigma}=q\left(\frac2q\right)^\sigma
+ \longrightarrow0,
+\]
+while the scaled target still tends to one. To justify the target limit,
+bound the tail for $\sigma\ge2$ by
+$\sum_{n\ge3}(2/n)^2<\infty$ and apply dominated convergence term by term.
+Thus the first coefficients differ for every frozen $q$, and the analytic
+determinants cannot be identical.
+\end{proof}
+
+This argument uses no rational-prime table, Riemann-zero data, fitting, or
+global divisor comparison. It also has the correct determinant orientation:
+the positive Euler products are reciprocals of $\Dq$ and $\DP$, while
+\cref{thm:coefficient} compares $-\log$ of the determinants.
+
+\begin{corollary}[Three bounded closures]
+\label{cor:closures}
+The total exact-clock rational-prime projection fails; the same-marker
+factorwise identification fails; and equality of the complete marked
+determinants fails. No one conclusion is enlarged to all partial maps,
+changed markers, induced systems, or symbolic extensions.
+\end{corollary}
+
+\begin{proof}
+Apply \cref{thm:clock,thm:multiplicity,thm:coefficient} to their respective
+contracts. Their quantifier notes exclude precisely the changed constructions
+listed in the statement.
+\end{proof}
