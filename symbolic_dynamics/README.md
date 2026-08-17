@@ -51,6 +51,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [37-local-coefficient-normal-closure-saturation](papers/37-local-coefficient-normal-closure-saturation/README.md) | [PDF](papers/37-local-coefficient-normal-closure-saturation/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/37-local-coefficient-normal-closure-saturation/) | 普通可逆有限秩 local transport 不可能删去完整 primitive Euler factor；graded shear 虽能抵消直接 affine relator 及全部 repetitions，却在 mixed normal-closure products 上泄漏，而饱和到全部 mixed products 又会清空所有 closed-word ledger。 | **LOCAL-COEFFICIENT SATURATION / MIXED LEAKAGE / ROUTE-A REJECTED / SD-C39** |
 | [38-bass-serre-tree-orbital-collapse](papers/38-bass-serre-tree-orbital-collapse/README.md) | [PDF](papers/38-bass-serre-tree-orbital-collapse/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/38-bass-serre-tree-orbital-collapse/) | 对冻结 ascending-HNN splitting/presentation canonical 的 Bass--Serre full tree 没有正长度 reduced closed path，而其 full-edge Hashimoto operator 非紧且非迹类；转向 orbital conjugacy ledger 只得到对所有 ascending HNN controls 通用的 necklace 函数，且改变对象与 marker。 | **BASS–SERRE TREE / ORBITAL COLLAPSE / AFFINE BRANCH CLOSED / SD-C40** |
 | [39-affine-obstruction-dag-closure-certificate](papers/39-affine-obstruction-dag-closure-certificate/README.md) | [PDF](papers/39-affine-obstruction-dag-closure-certificate/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/39-affine-obstruction-dag-closure-certificate/) | 在 P35--P38 结果已知后，把其哈希化 outcome 组装成 checker-frozen 的 6-node/5-edge structural spine 与 22-node/28-edge typed proof DAG；14 类修复与 16 个请求 token 全部在精确有限域内归类，EXIT 不冒充失败，E22 不获 closure credit，跨 P36→P37 的四个候选状态字段全部 RESET。 | **RELATIVE AFFINE CLOSURE AUDIT / REGISTRY HANDOFF / ROUTE-A REJECTED / SD-C41** |
+| [40-gauss-mayer-projection-firewalls](papers/40-gauss-mayer-projection-firewalls/README.md) | [PDF](papers/40-gauss-mayer-projection-firewalls/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/40-gauss-mayer-projection-firewalls/) | 把普通 Gauss digit shift 与 two-digit pair return 通过 $\rho\iota=\iota\sigma^2$ 严格分型，并从 $K_s=\mathcal L_s^2$ 的 Fredholm traces 导出 intrinsic pair ledger；对且仅对 trace、order discriminant、expanding norm 三个投影，完整 rational-prime reciprocal-Euler conjunction 全部失败，而 pair ledger 与 same-space determinant 保留。严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FORMAL_HINT)`。 | **GO_MODULAR_PRIMITIVE_LEDGER / GO_SAME_OBJECT_MAYER_DETERMINANT / STOP_CANONICAL_INTEGER_PROJECTION / STOP_RATIONAL_INTEGER_CLOCK_REPETITION_CONJUNCTION / STOP_OPERATOR_VISIBLE_SELECTOR_NOT_OWNED / ROUTE_A_REJECTED / SD-C42** |
 
 ### 论文 1 的候选分离结论
 
@@ -1339,13 +1340,63 @@ RETURN_CONTROL_TO_PREEXISTING_GLOBAL_CANDIDATE_REGISTRY**。这个 handoff 不�
 候选。`STOP_NO_SOURCE_LOCKED_NON_AFFINE_SUCCESSOR` 只是在独立空 registry fixture
 中执行过的条件 fallback，不是当前 realized terminal。
 
+### 论文 40：two-digit Gauss--Mayer 的三投影与 ownership firewall
+
+Paper 40 独立采用 literal six-card rule：historical card 必须同时具有非空的
+intrinsic primitive/repetition ledger 与 exact proved verdict
+`A2_ANALYTIC_DETERMINANT`。`SD-C01`、`SD-C02`、`SD-C04` 通过首层筛选，
+`SD-C04` 再按冻结的 A3、A4 次序胜出；Paper 39 只提供 terminal-clean promotion
+provenance，不参与排名、选择或授权。本文把 digit space $X=\mathbb N^{\mathbb N}$
+上的 $\sigma$ 与 pair space $X_2=(\mathbb N^2)^{\mathbb N}$ 上的一对移位 $\rho$
+分开，并用 grouping bijection $\iota$ 证明
+$\rho\circ\iota=\iota\circ\sigma^2$。因此 `SigmaPrimitiveDigit`、
+`RhoPrimitivePair` 与 `GeodesicPrimitiveClass` 始终是三个不同类型。
+
+正向结果属于 pair object 自身。令 $K_s=\mathcal L_s^2$、
+$D_{42}(s,u)=\det(I-u^2K_s)$，则在 Mayer nuclear half-plane 内、形式地关于
+$u^2$（或充分小 $|u|$）有 intrinsic primitive-pair Fredholm regrouping；$u=1$
+的 Selberg-zeta/Fredholm equality 只作为函数恒等式使用，不导入逐 orbit 的
+pair/geodesic 对应。对冻结的三个标量投影
+
+$$
+P_t=t,\qquad P_\Delta=t^2-4,\qquad P_N=\lambda^2,
+$$
+
+本文逐列关闭 rational-prime ledger。$\Delta=(t-2)(t+2)$ 只在边界值
+$(t,\Delta)=(3,5)$ 为素数，$\lambda^2$ 为无理数；trace 与 order discriminant
+不保 temporal powers 或 derivative clock，norm 虽精确保 clock 与 powers 却不在
+rational-integer support。trace $4$、$6$、$10$ 的三类 exact collision 关闭
+one-to-one multiplicity，Mayer stability denominator 关闭 target amplitude，而冻结的
+untwisted schema 没有声明任何 scalar-prime postselection 的 reducing owner。结论只对
+这三个投影和这个 operator schema 成立，不是 twists、changed objects 或全部 dynamical
+zeta constructions 的 universal no-go。
+
+authority final integration 中，main 与 independent evaluators 分别通过 210/210、
+208/208；scientific projection SHA-256 为
+`340aff6f08e7cf9360d57d34ff9c66e99f9322343b3069fe37e5acc2f55aa7c5`。
+integrity audit 通过 83/83，102/102-entry ledger、54 个 result files、2 个 evaluation
+files 与 1 份 experiment report 闭合。两套 evaluator 各拒绝全部 164 个 packet
+mutations；Route 的 422 次执行由 24 个 explicit 与 398 个 exhaustive recursive
+mutations 组成，覆盖 409 个 distinct payloads，18/18 strict checks 通过；hidden
+cold-copy 第二次完整运行的 changed paths 为零。
+
+严格 Route tuple 为
+`(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,`
+`A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FORMAL_HINT)`，Route B locked。阶段结论为
+**GO_MODULAR_PRIMITIVE_LEDGER / GO_SAME_OBJECT_MAYER_DETERMINANT /
+STOP_CANONICAL_INTEGER_PROJECTION /
+STOP_RATIONAL_INTEGER_CLOCK_REPETITION_CONJUNCTION /
+STOP_OPERATOR_VISIBLE_SELECTOR_NOT_OWNED / ROUTE_A_REJECTED**。两个 GO 只给予
+intrinsic pair ledger 与 same-object Mayer determinant 正向 credit，不给予
+rational-prime、digit-primitive 或 geodesic-primitive credit。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [三十九篇论文](papers/)
+- [四十篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

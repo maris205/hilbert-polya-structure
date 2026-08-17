@@ -1,0 +1,133 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: SD-C04
+source_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+evaluation_date: 2026-08-12
+artifact_path_base: papers/01-falsification-first-audit
+
+source_lock:
+  object: "Countable Gauss continued-fraction shift with inverse branches phi_n(z)=1/(n+z) and Mayer transfer operator."
+  family: "symbolic dynamics"
+  phase_space: "N^N coding regular continued fractions"
+  dynamics: "left shift / inverse-branch iteration"
+  parameters: "all digits n>=1; finite diagnostics D in {2,3,4,5}, word length in {4,6,8}"
+  parameter_provenance: "canonical continued-fraction grammar and derivative weights"
+  arithmetic_origin: "continued fractions and PSL(2,Z) matrix products"
+  clock: "T_gamma=2 log lambda_plus(M_gamma)"
+  normalization: "Mayer's s parameter and holomorphic branch convention"
+  determinant_convention: "D_MG(s)=det(I-L_s^2)=det(I-L_s)det(I+L_s)"
+  function_space: "Mayer holomorphic Banach-space realization; finite word code only approximates orbit sums"
+  roof_function: "negative logarithm of the branch derivative"
+  potential_function: "0 beyond the derivative weight"
+  cocycle: "intrinsic plus/minus parity sectors from the source-supported factorization"
+  cutoff: "digits 1..D with D=2,3,4,5; primitive words through length 4,6,8"
+  precision: "exact 2x2 integer monodromy; 80 decimal digits for roofs and sums"
+  orbit_cutoff: "maximum 63319 primitive necklaces at D=5,L=8"
+  training_data: "none"
+  allowed_data: "continued-fraction words, exact monodromy, frozen neighboring alphabet/roof/parity controls"
+  forbidden_data: "Riemann zeros, prime labels, log-prime roof, post-selected parity sector"
+  code_commit: 7c059754141bec1e3a6980bbe12345d126a7372f
+  artifact_paths:
+    - farey_gauss_transfer/DERIVATION_PACKAGE.md
+    - farey_gauss_transfer/results/summary.json
+    - farey_gauss_transfer/results/cutoff_table.csv
+    - farey_gauss_transfer/results/controls.csv
+    - farey_gauss_transfer/results/exact_orbit_ledger.csv.gz
+
+a0:
+  verdict: A0_WEAK_ARITHMETIC_RELATION
+  evidence_status: PROVED
+  strongest_evidence: "The grammar, matrices, derivative roof, and parity sectors are canonical arithmetic/modular objects fixed independently of target zeros."
+  strongest_failure: "Primitive cycles are periodic continued fractions/quadratic irrationals or hyperbolic modular classes, not rational primes; no Lambda(p^r) ledger exists."
+  arithmetic_controls:
+    - "neighboring digit alphabet 2..6"
+    - "same words with additive log(1+a) roof"
+    - "even-only, odd-only, and parity-twisted sectors"
+    - "non-reversal trace-collision classes"
+  artifacts:
+    - farey_gauss_transfer/results/controls.csv
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: "Primitive necklaces, cyclic equivalence, exact monodromy, reversal metadata, and word-power repetitions are intrinsic."
+  strongest_failure: "The exact ledger is for the wrong arithmetic species and matrix trace has thousands of non-reversal collisions."
+  metrics:
+    primitive_necklaces_max_cutoff: 63319
+    cyclic_invariance_failures: 0
+    reversal_transpose_failures: 0
+    repetition_matrix_failures: 0
+    missing_reverse_orbits: 0
+    nonreversal_trace_collision_groups: 7018
+  artifacts:
+    - farey_gauss_transfer/results/exact_orbit_ledger.csv.gz
+    - farey_gauss_transfer/results/collision_examples.json
+
+a2:
+  verdict: A2_ANALYTIC_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: "Primary sources establish the nuclear Mayer operator and signed Fredholm factorization for the same Gauss grammar."
+  strongest_failure: "The finite computation evaluates truncated orbit sums, not Fredholm continuation, and the analytic divisor is the modular/Selberg object rather than xi."
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: "at D=5,L=8: word drift 0.002326,0.0001774,1.62e-6,5.35e-5 on the locked s grid; digit drift 0.03872,0.01314,0.001993,0.009102"
+    precision_drift: "maximum 40-to-80 dps drift 5.28e-42"
+    control_margin: "at s=1.5: baseline 0.413943, neighboring digits 0.128915, additive roof 0.201666, parity twist -0.323865"
+  artifacts:
+    - farey_gauss_transfer/results/cutoff_table.csv
+    - farey_gauss_transfer/results/summary.json
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: "The same symbolic system has a source-supported infinite-dimensional Fredholm determinant and modular Selberg factorization."
+  strongest_failure: "It does not reproduce the completed Riemann divisor or a rational-prime Weil compression."
+  analytic_structure:
+    nuclear_transfer_operator: true
+    signed_factorization: true
+    own_modular_continuation: "source-supported"
+    completed_riemann_functional_equation: false
+    rational_prime_divisor: false
+  weil_compression:
+    status: "no natural rational-prime compression from the frozen Gauss ledger"
+    evidence_status: STOP_SCOPED
+  artifacts:
+    - docs/LITERATURE_AUDIT.md
+    - farey_gauss_transfer/DERIVATION_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: "The determinant has a known modular-surface/geodesic interpretation in the literature."
+  strongest_failure: "That geometric carrier is outside the primary family, and no rational-prime same-clock Hilbert-Polya lift follows from it."
+  metrics:
+    known_geometric_carrier: true
+    developed_in_session: false
+    route_b_readiness: false
+  artifacts:
+    - ROUND2_CLUES.md
+
+adversarial_controls:
+  controls_used:
+    - "neighboring digit alphabet"
+    - "neighboring additive roof"
+    - "even/odd/parity sectors"
+    - "trace-collision audit"
+  proves_too_much_risk: "controlled for finite word summaries, but the main failure is arithmetic-species mismatch"
+  verdict: "The exact determinant remains natural for its own modular species and fails the rational-prime A0 target."
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "Strongest natural analytic symbolic determinant found, but not a rational-prime or completed-xi candidate."
+blocking_conditions:
+  - "no canonical rational-prime primitive correspondence"
+  - "no prime-power von Mangoldt repetition amplitudes"
+  - "known divisor belongs to the modular/Selberg species"
+next_smallest_test: "Pre-register any proposed word-to-prime map and test it against exact trace collisions, neighboring digits, shuffled words, and composite discriminants before any determinant comparison."
+round2_clues:
+  - "RC-01: modular geometric carrier for the intrinsic parity sectors"
+route_b_invocation_allowed: false

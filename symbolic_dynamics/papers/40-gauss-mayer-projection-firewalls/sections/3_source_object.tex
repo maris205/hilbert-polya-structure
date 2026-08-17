@@ -1,0 +1,165 @@
+\section{Typed source object, marker, and determinant}
+\label{sec:source}
+
+\subsection{Digit and pair returns}
+
+Let
+\[
+  X=\N^{\N},\qquad
+  \sigma(a_1,a_2,a_3,\ldots)=(a_2,a_3,a_4,\ldots)
+\]
+be the digit space with its one-digit shift.  Let
+\[
+  \Xtwo=(\N^2)^{\N},\qquad
+  \rho((a_1,a_2),(a_3,a_4),\ldots)
+  =((a_3,a_4),(a_5,a_6),\ldots)
+\]
+be the ordered-pair space with its one-pair shift.  Grouping adjacent digits
+defines the bijection
+\[
+  \iota(a_1,a_2,a_3,a_4,\ldots)
+  =((a_1,a_2),(a_3,a_4),\ldots),
+\]
+for which
+\begin{equation}
+  \rho\circ\iota=\iota\circ\sigma^2.
+  \label{eq:grouping-conjugacy}
+\end{equation}
+The typing matters: $\sigma^2$ acts on $X$, whereas $\rho$ acts on $\Xtwo$.
+A \RhoPrimitive{} object is a finite cyclic word in the pair alphabet with
+least period under $\rho$, quotiented by pair rotation only.  Digit reversal
+is metadata, not an additional quotient.
+
+For
+$w=((a_1,a_2),\ldots,(a_{2k-1},a_{2k}))$, flatten in displayed pair order
+and set
+\begin{equation}
+  A(a)=\begin{pmatrix}a&1\\1&0\end{pmatrix},
+  \qquad
+  M(w)=A(a_1)A(a_2)\cdots A(a_{2k}).
+  \label{eq:monodromy}
+\end{equation}
+Every digit matrix has determinant $-1$, so $M(w)\in\mathrm{SL}_2(\Z)$.
+All entries are positive and $t(w)=\tr M(w)\ge3$.  We write
+\begin{equation}
+  \Delta(w):=\Delta_{\Z[M]}(w)=t(w)^2-4,
+  \quad
+  \lambda(w)=\frac{t(w)+\sqrt{\Delta(w)}}2,
+  \quad
+  T(w)=2\log\lambda(w).
+  \label{eq:labels-clock}
+\end{equation}
+The free variable $u$ counts original Gauss digits.  Thus one pair return
+carries $u^2$, and a pair word of length $k$ repeated $r$ times carries
+$u^{2kr}$.
+
+\subsection{Gauss branches and raw operator order}
+
+For $\phi_a(z)=(a+z)^{-1}$, use
+\[
+  B(a)=\begin{pmatrix}0&1\\1&a\end{pmatrix},
+  \qquad J=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\]
+Since $A(a)=JB(a)J$, the stored branch
+$\Phi_w=\phi_{a_1}\circ\cdots\circ\phi_{a_{2k}}$ is represented by
+$B(a_1)\cdots B(a_{2k})$, conjugate to $M(w)$.  At its positive attracting
+fixed point $x_w$,
+\begin{equation}
+  d_w:=|\Phi_w'(x_w)|=\lambda(w)^{-2},
+  \qquad -\log d_w=T(w).
+  \label{eq:branch-clock}
+\end{equation}
+
+The stored order is not the raw nesting order of the transfer operator.
+Writing $j_{a,s}(z)=(a+z)^{-2s}$ on Mayer's fixed holomorphic logarithm
+branch,
+\[
+  \Ls(\Ls f)(z)
+  =\sum_{a,b\ge1}j_{a,s}(z)j_{b,s}(\phi_a z)
+    f(\phi_b\circ\phi_a z).
+\]
+Hence raw indices must be globally reversed to recover stored composition
+order in $\Ls^{2k}$.  The resulting complex weight is the nested product of
+the $j_{a,s}$ factors; only at the positive real fixed point is it written
+using the modulus in \eqref{eq:branch-clock}.  Global reversal is a bijection
+on words and descends to cyclic pair classes, so it changes bookkeeping but
+not the primitive-pair inventory.
+
+\subsection{Mayer space and three analytic domains}
+
+Let
+\[
+  D=\{z\in\C:|z-1|<3/2\}
+\]
+and let $A_\infty(D)$ denote the functions holomorphic on $D$ and continuous
+on $\overline D$, with the supremum norm.  On this realization,
+\begin{equation}
+  (\Ls f)(z)=\sum_{n\ge1}(z+n)^{-2s}
+  f\!\left((z+n)^{-1}\right)
+  \label{eq:mayer-operator}
+\end{equation}
+is nuclear of order zero for $\RePart s>1/2$
+\citep{Mayer1990Gauss,Mayer1990SelbergPreprint}.  Mayer's Proposition~3
+gives the holomorphic Fredholm identity on the same half-plane,
+\begin{equation}
+  Z_{\PSL}(s)
+  =\det(I-\Ls^2)
+  =\det(I-\Ls)\det(I+\Ls).
+  \label{eq:mayer-selberg}
+\end{equation}
+The initial Selberg Euler product is absolutely convergent for
+$\RePart s>1$, and the separately sourced meromorphic continuation extends
+to $\C$.  These are three distinct statements: nuclear/Fredholm existence and
+the holomorphic identity, initial Euler-product convergence, and meromorphic
+continuation.
+
+Set $\Ks=\Ls^2$ and
+\begin{equation}
+  \Dforty(s,u)=\det(I-u^2\Ks).
+  \label{eq:marked-det}
+\end{equation}
+For fixed $s$ in the nuclear half-plane, this is a same-space Fredholm family.
+The logarithmic trace series and primitive product below are understood
+coefficientwise/formally in $u^2$, or analytically for sufficiently small
+$|u|$ with the local logarithm at $u=0$.  We neither continue that logarithm
+through determinant zeros nor import a Selberg interpretation for arbitrary
+$u$.
+
+\begin{proposition}[Intrinsic pair Fredholm ledger]
+\label{prop:pair-fredholm}
+In the preceding domain and local/formal sense,
+\begin{align}
+ -\log\Dforty(s,u)
+ &=\sum_{n\ge1}\frac{u^{2n}}{n}\operatorname{Tr}(\Ks^n) \\
+ &=\sum_{[v]\ \rho\text{-primitive}}\sum_{r\ge1}
+   \frac{u^{2k(v)r}d_v^{rs}}{r(1-d_v^r)},
+ \label{eq:pair-trace-series}
+\end{align}
+and consequently
+\begin{equation}
+  \Dforty(s,u)^{-1}
+  =\prod_{[v]}\prod_{j\ge0}
+    \left(1-u^{2k(v)}d_v^{s+j}\right)^{-1}.
+  \label{eq:pair-product}
+\end{equation}
+This ledger is typed to \RhoPrimitive{} and asserts no objectwise
+correspondence with primitive geodesics.
+\end{proposition}
+
+The proof is given in Appendix~\ref{app:fredholm-proof}.  The object,
+marker, monodromy, branch, clock, and determinant ownership summarized above
+are displayed in Figure~\ref{fig:object-gate}.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/object_projection_gate}}
+  \caption{Typed same-object construction and projection gate.  The digit
+  shift $\sigma$ on $X$ and pair shift $\rho$ on $\Xtwo$ are related by the
+  grouping conjugacy \eqref{eq:grouping-conjugacy}; one pair carries $u^2$.
+  Monodromy, branch clock, and $\det(I-u^2\Ls^2)$ retain positive modular
+  ownership.  None of the three scalar maps preserves the complete
+  rational-prime support, multiplicity, clock, repetition, amplitude, and
+  operator-owner conjunction.  The $u=1$ equality is functional and gives no
+  objectwise pair/geodesic bridge.}
+  \label{fig:object-gate}
+\end{figure}

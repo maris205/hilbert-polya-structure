@@ -1,0 +1,50 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  panel/.style={draw=formalblue, rounded corners=2pt, line width=.8pt,
+    fill=formalblue!7, align=center, text width=4.55cm, minimum height=2.25cm,
+    inner sep=5pt},
+  witness/.style={draw=governancepurple, rounded corners=2pt, line width=.8pt,
+    fill=governancepurple!7, align=center, text width=4.55cm,
+    minimum height=2.85cm, inner sep=5pt},
+  badge/.style={draw=warningamber, fill=warningamber!12, rounded corners=2pt,
+    align=center, inner sep=3pt, font=\scriptsize},
+  link/.style={->, line width=.8pt, draw=charcoal, >=Latex}
+]
+  \node[panel] (delta) at (0,3.65)
+    {\textbf{Order discriminant}\\[3pt]
+     $\Delta=(t-2)(t+2)$\\
+     prime exactly at $(t,\Delta)=(3,5)$};
+  \node[panel] (norm) at (5.45,3.65)
+    {\textbf{Norm and clock}\\[3pt]
+     $(t-1)^2<\Delta<t^2$\\
+     $\lambda^2\notin\mathbb Q$, $\lambda^2>t$};
+  \node[panel] (power) at (10.9,3.65)
+    {\textbf{Powers and amplitude}\\[3pt]
+     $q_r=tq_{r-1}-q_{r-2}$\\
+     $q_2=t^2-2$; source keeps $(1-d^r)^{-1}$};
+
+  \node[witness] (c4) at (0,0)
+    {\textbf{Trace $4$: reversal phases}\\[2pt]
+     $((1,2)):\ \left(\begin{smallmatrix}3&1\\2&1\end{smallmatrix}\right)$\quad
+     $((2,1)):\ \left(\begin{smallmatrix}3&2\\1&1\end{smallmatrix}\right)$\\[3pt]
+     $\Delta=12$; distinct pair factors\\
+     \textcolor{stopred}{composite trace in full ledger}};
+  \node[witness] (c6) at (5.45,0)
+    {\textbf{Trace $6$: non-reversal}\\[2pt]
+     $((1,4)):\ \left(\begin{smallmatrix}5&1\\4&1\end{smallmatrix}\right)$\quad
+     $((2,2)):\ \left(\begin{smallmatrix}5&2\\2&1\end{smallmatrix}\right)$\\[3pt]
+     $\Delta=32$; one-pair species\\
+     flattened type need not be primitive};
+  \node[witness] (c10) at (10.9,0)
+    {\textbf{Trace $10$: cross pair length}\\[2pt]
+     $((2,4)):\ \left(\begin{smallmatrix}9&2\\4&1\end{smallmatrix}\right)$\quad
+     $((1,1),(1,2)):\ \left(\begin{smallmatrix}8&3\\5&2\end{smallmatrix}\right)$\\[3pt]
+     $\Delta=96$; non-reversal\\
+     pair lengths one and two};
+
+  \draw[link] (delta.south) -- (c4.north);
+  \draw[link] (norm.south) -- (c6.north);
+  \draw[link] (power.south) -- (c10.north);
+  \node[badge] at (5.45,-2.05)
+    {$P_\Delta$ and $P_N$ factor through $t$: every lower pair collides under all three maps};
+\end{tikzpicture}

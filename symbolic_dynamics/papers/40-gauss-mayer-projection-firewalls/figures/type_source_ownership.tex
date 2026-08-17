@@ -1,0 +1,52 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\sffamily\small,
+  type/.style={draw=governancepurple, rounded corners=2pt, line width=.8pt,
+    fill=governancepurple!8, align=center, text width=3.4cm, inner sep=5pt},
+  domnode/.style={draw=formalblue, rounded corners=2pt, line width=.8pt,
+    fill=formalblue!7, align=center, text width=4.55cm, inner sep=5pt},
+  owner/.style={draw=deepgreen, rounded corners=2pt, line width=.8pt,
+    fill=deepgreen!8, align=center, text width=3.75cm, inner sep=5pt},
+  outside/.style={draw=warningamber, rounded corners=2pt, line width=.8pt,
+    fill=warningamber!10, align=center, text width=3.75cm, inner sep=5pt},
+  flow/.style={->, line width=.8pt, draw=charcoal},
+  dotted/.style={->, densely dotted, line width=.9pt, draw=formalblue},
+  barred/.style={->, dashed, line width=1pt, draw=stopred}
+]
+  \node[type] (rho) at (0,4.2) {{\scriptsize\RhoPrimitive}\\one-pair shift $\rho$};
+  \node[type] (sigma) at (0,2.25) {{\scriptsize\SigmaPrimitive}\\one-digit shift $\sigma$};
+  \node[type] (geo) at (0,.3) {{\scriptsize\GeoPrimitive}\\hyperbolic/geodesic class};
+  \node[outside, text width=4.15cm] (split) at (4.55,3.25)
+    {typed grouping and split\\$\rho\iota=\iota\sigma^2$\\
+     odd period: one cycle\\even period: two cycles};
+  \draw[dotted] (sigma.east) -- (split.west);
+  \draw[dotted] (split.west) -- (rho.east);
+  \draw[barred] (rho.south) -- node[right, font=\scriptsize, text=stopred]
+    {no coercion} (geo.north);
+
+  \node[domnode] (nuclear) at (9.35,4.35)
+    {nuclearity $+$ holomorphic Fredholm identity\\
+     $\RePart s>1/2$};
+  \node[domnode] (euler) at (9.35,2.45)
+    {initial absolute Selberg Euler product\\
+     $\RePart s>1$};
+  \node[domnode] (cont) at (9.35,.55)
+    {source-qualified meromorphic continuation\\$s\in\C$};
+  \draw[dotted] (nuclear) -- node[right, font=\scriptsize] {narrower product domain} (euler);
+  \draw[dotted] (euler) -- node[right, font=\scriptsize] {source continuation} (cont);
+  \node[outside, text width=4.55cm] (ulocal) at (9.35,-1.05)
+    {marked log/product: formal in $u^2$ or small $|u|$ near $0$\\
+     $u=1$ identity is functional only};
+  \draw[dotted] (cont) -- (ulocal);
+
+  \node[type, text width=3.75cm] (scalar) at (14.65,4.15)
+    {scalar postselection\\$P_t,\ P_\Delta,\ P_N$};
+  \node[owner] (full) at (14.65,1.95)
+    {full owner\\$K_s=\Ls^2$ and\\$\det(I-u^2K_s)$};
+  \node[outside] (twists) at (14.65,-.55)
+    {outside contract\\twists, direct sums, changed spaces or roofs};
+  \draw[barred] (scalar) -- node[right, font=\scriptsize, text=stopred]
+    {no declared projector} (full);
+  \draw[flow] (full) -- node[right, font=\scriptsize] {scope boundary} (twists);
+  \draw[dotted] (nuclear.east) -- (full.west);
+\end{tikzpicture}
