@@ -1,9 +1,7 @@
 # Adaptive batch plan: HCS-C57 through HCS-C61
 
-Status: **adaptive batch; C57 through C59 released and frozen; C60 machine,
-formal-document, deterministic-paper, and hostile-paper audits pass, with
-release closure pending and C60 NOT_RELEASED; C61 remains contingent and
-unselected**
+Status: **adaptive batch; C57 through C60 released and frozen; C61 remains
+contingent and unselected**
 
 Date: 2026-08-17
 
@@ -22,11 +20,9 @@ a fresh primary-source novelty audit, a theorem-size and non-salami review,
 and a falsifiable exact-computation gate before its title or claim is fixed.
 C60 was selected only after C59 was RELEASE_FROZEN, P59 was pushed and
 rebound, bounded exact group/primitive/local pilots passed, and an independent
-hostile target review returned PASS. Selection does not constitute
-implementation or theorem proof. C60 has since passed its complete official
-machine refresh, mandatory nonmutating replay, independent post-machine
-formal-documents hostile audit, deterministic anonymous paper build, and
-independent zero-blocker hostile paper audit. Release closure remains pending.
+hostile target review returned PASS. Its theorem, machine/formal packages,
+anonymous paper, final rebased I60 implementation identity, and P60 release
+provenance are now closed.
 The protected C59-closing sentence that records C60 as
 `IMPLEMENTATION_PENDING` is historical target-lock chronology and is
 superseded by the layered C60 status in this preamble and in C60's status
@@ -36,16 +32,13 @@ The current dependency graph is therefore
 
 \[
  C56\longrightarrow C57\longrightarrow C58\longrightarrow C59\longrightarrow
- \underbrace{C60}_{\substack{\text{paper hostile PASS}\\
-                              \text{release pending}}}
- \longrightarrow
+ C60\longrightarrow
  \underbrace{C61}_{\text{contingent and unselected}}.
 \]
 
 No result, title, or method is reserved for C61. C59 is restricted to the
-exact released theorem below, and C60 is restricted to its machine-certified,
-formally audited, and paper-hostile-audited integrated target and KILL controls
-while implementation/release gates remain pending. Batch
+exact released theorem below, and C60 is restricted to the exact released
+theorem and KILL controls recorded below. Batch
 completion requires five independently theorem-sized papers, each with its
 own proof package, exact replay, source audit, manuscript, release tuple, and
 commit/provenance closure.
@@ -743,11 +736,16 @@ the PDF SHA-256 is
 `6a418f2b10a24c072c3097921a54cf60bf1bd73c63ab60d2e434b8ec9c8624c2`.
 Two independent clean builds produced byte-identical PDF, stabilized log,
 bibliography output, and layout text, and the independent hostile paper audit
-returned zero blockers. Exact downstream status is
-`FORMAL_DOCS_PASS / PAPER_COMPILED / PAPER_HOSTILE_PASS / NOT_RELEASED`,
-with release promotion false and implementation/provenance commits,
-full-project manifest, and Route archive null or pending. C61 remains
-contingent and unselected.
+returned zero blockers. P60 binds the final rebased I60 implementation commit
+`f3b3726c40519cdd8ac7832f9f22df16d451b890`, whose audited sole parent is
+`eb76c85bd335e182cafd573f9dd7bf4aadba360b` and whose exact tree is
+`a41a7e09495df362122d0fe0fd3f30e8909b69ef`, together with the self-excluding
+88-entry full-project manifest and byte-identical final Route archive. C60 is
+`RELEASE_FROZEN` and promotion is authorized; `provenance_commit` remains null
+under the external-only policy. The protected 21-file machine layer remains
+`PREFREEZE_CODE_RESULTS_PASS / POSTREFRESH_PASS`, its 20-entry scoped manifest
+remains the exact machine identity, and the 13-root formal aggregate remains
+`FORMAL_DOCS_PASS`. C61 remains contingent and unselected.
 
 ## HCS-C61: contingent slot
 

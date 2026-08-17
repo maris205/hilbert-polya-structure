@@ -1,9 +1,10 @@
 # HCS-C60 compilation report
 
 Status: **PASS; official final paper build; `PAPER_COMPILED`;
-`PAPER_HOSTILE_PASS`; machine layer `PREFREEZE_CODE_RESULTS_PASS` /
-`POSTREFRESH_PASS`; formal layer `FORMAL_DOCS_PASS`; project
-`NOT_RELEASED`; I60 implementation commit pending.**
+`PAPER_HOSTILE_PASS`; project `RELEASE_FROZEN` at implementation commit
+`f3b3726c40519cdd8ac7832f9f22df16d451b890`; protected machine layer remains
+`PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS` and the formal layer remains
+`FORMAL_DOCS_PASS`.**
 
 ## Build
 
@@ -217,14 +218,26 @@ inventory and every future release manifest.
   `44b58dc4b43732803dc7b4b04bd0f86673d2161bf95afc9f8f74a77e048bd7a2`.
 - `SOURCE_AUDIT.md` SHA-256:
   `50c046c396874e6c0406e92d4ed552fb8b00272d6a0b93d9857c6b4bff13d07f`.
-- Neither the 21 protected machine files nor the 13 frozen formal Markdown
-  files is rewritten by the paper build or by I60 paper integration.
+- Project status: `RELEASE_FROZEN`, binding implementation commit
+  `f3b3726c40519cdd8ac7832f9f22df16d451b890`. Its audited sole parent is
+  `eb76c85bd335e182cafd573f9dd7bf4aadba360b` and its exact tree is
+  `a41a7e09495df362122d0fe0fd3f30e8909b69ef`.
+- Separate provenance commit: `null`; release provenance is external-only and
+  no separate provenance-commit identity is promoted.
+- The protected 21 machine files and frozen 13-root formal package are not
+  rewritten by P60. Their historical `PAPER_PENDING` prose is a layered-state
+  record, not the live project release status.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 88
+  entries and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C60/20260817T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
 
-The scoped machine manifest remains the exact default machine-lane identity.
-It is not the pending full-project release manifest. The machine and formal
-layers retain their intentional historical `PAPER_PENDING` prose; this report
-is the successor paper-state record. Their unchanged bytes do not contradict
-the later `PAPER_COMPILED` state recorded here and in the live Route.
+The 20-entry scoped manifest remains the exact default machine-lane identity.
+The 88-entry successor is the release-wide ledger and does not replace it.
+P60 does not rewrite any paper source, PDF, code, result, certificate,
+evidence artifact, or frozen formal-root Markdown file.
 
 ## PDF checks
 
@@ -280,23 +293,32 @@ the later `PAPER_COMPILED` state recorded here and in the live Route.
   Hilbert--Polya operator.
 - `NO_BAD_EULER_OR_ROOT_NUMBER` remains literal.
 
-## I60 release boundary
+## P60 release closure
 
 - Paper compilation status: `PAPER_COMPILED`.
 - Independent paper audit status: `PAPER_HOSTILE_PASS`.
 - Machine status: `PREFREEZE_CODE_RESULTS_PASS` / `POSTREFRESH_PASS`.
 - Formal-document status: `FORMAL_DOCS_PASS`.
-- Project release status: `NOT_RELEASED`.
-- I60 implementation commit: **pending; no hash is guessed here**.
-- Provenance commit: null; pending pre-release policy.
-- Full-project release manifest: null; not created; pending.
-- Release archive: null; not created; pending.
-- Promotion authorization: false.
+- Project release status: `RELEASE_FROZEN`.
+- Implementation commit:
+  `f3b3726c40519cdd8ac7832f9f22df16d451b890`, with audited sole parent
+  `eb76c85bd335e182cafd573f9dd7bf4aadba360b` and exact tree
+  `a41a7e09495df362122d0fe0fd3f30e8909b69ef`.
+- Separate provenance commit: `null`; P60 provenance remains external-only and
+  no separate provenance-commit identity is promoted.
+- Release-wide successor: root `FULL_PROJECT_HASHES.sha256`, exactly 88
+  entries and self-excluding; its digest is verified and reported externally.
+- Frozen Route archive:
+  `evaluations/route_a/HCS-C60/20260817T000000Z.yaml`, byte-identical to the
+  final live `route_a_evaluation.yaml`; both digests remain external to this
+  report.
+- Promotion authorization: true.
+- P60 rewrites no paper source, PDF, code, result, certificate, evidence, or
+  frozen formal-document byte.
 - C61: contingent and unselected.
 
-This report records the official final paper build and the evidence available
-for initial I60 paper integration. It contains neither its own digest nor any
-live-Route or archived-Route digest, full-project-manifest digest, or future
-implementation, release, or provenance commit identity. Those acyclic
-successor identities remain external and may be populated only after the
-corresponding artifacts exist.
+This report records the official final paper build and P60 release closure. It
+contains neither its own digest nor any live-Route, archived-Route,
+full-project-manifest, or P60 commit digest. Those acyclic identities are
+verified and reported only by external consumers. The frozen formal-package
+digest likewise remains external to the 13 Markdown files it covers.
