@@ -1,0 +1,1730 @@
+{
+  "authority_overlay_coverage": {
+    "baseline_exact_writer_and_root_lock": true,
+    "publication_artifacts_binary_text_classified": true,
+    "publication_changed_paths_bounded": true,
+    "unknown_extra_missing_and_unauthorized_reject": true,
+    "writer_paths_excluded_from_integration_ledger": true
+  },
+  "blueprint_section": "9_Adversarial_mutation_matrix",
+  "blueprint_sha256": "4ab7098718be5992281097e250f5158e837938162a5817a2a047f112aa7e07fc",
+  "class_count": 62,
+  "classes": [
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Adapter",
+      "class_id": "adapter",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Put a pass/survivor flag in an adapter or change an evidence anchor",
+      "required_rejection": "Raw-input/anchor failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "read_only_integrity_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card_in_output_tree",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Artifact path",
+      "class_id": "artifact_path",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Use host-absolute, parent-escaping, nonexistent, or wrong-base paths",
+      "required_rejection": "Path-resolution failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "static_or_environment",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "static_hygiene_probe"
+          ],
+          "domain": "static_tree_hygiene",
+          "expectation": "exact_positive_control"
+        }
+      ],
+      "class": "Cache",
+      "class_id": "cache",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "static_or_environment",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Precreate or generate `__pycache__`, `.pyc`, or tool cache files",
+      "required_rejection": "Hygiene/audit failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Candidate",
+      "class_id": "candidate",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Change `SD-C45`, parent `SD-C02`, source type, or factor direction",
+      "required_rejection": "Candidate/type failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Check flag",
+      "class_id": "check_flag",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "canonical_output",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Flip producer `pass`, gate count, or expected tuple without raw change",
+      "required_rejection": "Ignored as evidence and rejected as an unexpected field"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Chronology",
+      "class_id": "chronology",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Set prospective, preregistered, blind, results-unseen, novelty, priority, or outcome-independent true",
+      "required_rejection": "Chronology failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Compactness",
+      "class_id": "compactness",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Remove the finite-cylinder witness or closed-intersection step",
+      "required_rejection": "Topology dependency failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Continuity",
+      "class_id": "continuity",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Set continuity false while retaining factor permanence",
+      "required_rejection": "Factor-contract failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "CRT algorithm",
+      "class_id": "crt_algorithm",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Change one inverse or one incremental merge",
+      "required_rejection": "Exact witness failure in both implementations"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "CRT sign",
+      "class_id": "crt_sign",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Solve `n-j=a` or alter a modulus/representative without recomputing",
+      "required_rejection": "Congruence failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "relocated_complete_output_tree",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "process_isolation_probe"
+          ],
+          "domain": "runtime_environment",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "static_or_environment",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "CWD relocation",
+      "class_id": "cwd_relocation",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "static_or_environment",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Run from a different working or installation directory",
+      "required_rejection": "Canonical bytes must remain identical"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Duplicate boundary",
+      "class_id": "duplicate_boundary",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Remove `STOP_DUPLICATE` or turn bounded search absence into novelty proof",
+      "required_rejection": "Literature/claim failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Empty `P0`",
+      "class_id": "empty_p0",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Omit the empty row, call `1^Z` a nontrivial cycle, or erase one fixed point",
+      "required_rejection": "Empty-case failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Equivariance",
+      "class_id": "equivariance",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Restrict to one time, nonnegative times only, or alter the commuting equation",
+      "required_rejection": "Full-Z factor failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Factor target",
+      "class_id": "factor_target",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Add finite alphabet, finite radius, soficity, expansivity, or finite-fiber assumptions",
+      "required_rejection": "Frozen quantifier failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Finite `P0` period",
+      "class_id": "finite_p0_period",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Claim a proper divisor of `Q` is a period or omit leastness",
+      "required_rejection": "Stabilizer/least-period failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Finite `P0` product",
+      "class_id": "finite_p0_product",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Use `product p`, omit a square, or set nonempty `Q=1`",
+      "required_rejection": "Divisibility/support failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Finite `P0` type",
+      "class_id": "finite_p0_type",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Insert a composite, duplicate a prime, or use an ordered multiset",
+      "required_rejection": "Finite-set/type failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Fixed anchor",
+      "class_id": "fixed_anchor",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Make `pi(0^Z)` nonfixed or omit equivariance in its proof",
+      "required_rejection": "Anchor failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Fixed counts",
+      "class_id": "fixed_counts",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Change any `#Fix(S^m)` from one",
+      "required_rejection": "Ledger/determinant failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "JSON structure",
+      "class_id": "json_structure",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Delete, duplicate, rename, or add any packet field",
+      "required_rejection": "Exact-set failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "JSON type",
+      "class_id": "json_type",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Replace Boolean by integer, integer by float, list by scalar, or string by number",
+      "required_rejection": "Exact type/schema failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "portable_snapshot_probe"
+          ],
+          "domain": "portable_source_snapshot",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Live dependency",
+      "class_id": "live_dependency",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "static_or_environment",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Make a result depend on the availability or contents of the historical tree/network",
+      "required_rejection": "Portability hard failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Marker",
+      "class_id": "marker",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Replace `z^r` by `z`, specialize `z=1`, or identify comparator `u=z` as an object map",
+      "required_rejection": "Marker/repetition failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Metric",
+      "class_id": "metric",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Drop one tail, change `1/3`, or claim a stronger false bound",
+      "required_rejection": "Tail-certificate failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Missing residue",
+      "class_id": "missing_residue",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Choose an occupied residue or omit one point-coordinate pair",
+      "required_rejection": "Zero-window failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "process_isolation_probe"
+          ],
+          "domain": "runtime_environment",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "static_or_environment",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Module shadow",
+      "class_id": "module_shadow",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "static_or_environment",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Inject hostile stdlib/project modules or `sitecustomize`",
+      "required_rejection": "Isolated invocation unaffected; naive mode rejected"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Modulus-four control",
+      "class_id": "modulus_four_control",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Change `0111`, its support residues, or least period while retaining the certificate",
+      "required_rejection": "Concrete-control failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Observable",
+      "class_id": "observable",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Substitute a measure or aperiodic zeta under the Artin--Mazur owner",
+      "required_rejection": "Observable failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Operator owner",
+      "class_id": "operator_owner",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Call `[1]` a source, `C(Y)`, transfer, or Hilbert--Polya operator",
+      "required_rejection": "Ownership failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Output tamper",
+      "class_id": "output_tamper",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "canonical_output",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Flip any science, theorem, witness, chronology, owner, Route, or summary field without raw support",
+      "required_rejection": "Independent consistency failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "P39--P42 role",
+      "class_id": "p39_p42_role",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Mark any predecessor as ranking, selecting, authorizing, or transferring credit",
+      "required_rejection": "Governance failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "payload_hygiene_probe"
+          ],
+          "domain": "canonical_payload_hygiene",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Path leak",
+      "class_id": "path_leak",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "static_or_environment",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Force any producer/evaluator/report to serialize a host path",
+      "required_rejection": "Portability failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Periodic separation",
+      "class_id": "periodic_separation",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Set a positive finite-orbit minimum to zero or omit the second-fixed-point case",
+      "required_rejection": "Periodic-rigidity failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Prime allocation",
+      "class_id": "prime_allocation",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Reuse a prime within one window, insert a composite, or unsort the allocation",
+      "required_rejection": "Coprimality/type failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Primitive support",
+      "class_id": "primitive_support",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Count traversals as primitives or identify the singleton with infinitely many primes",
+      "required_rejection": "Type/cardinality failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "authority_overlay",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "authority_overlay",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "read_only_integrity_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "paired_provenance_state",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "paired_provenance_state",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Provenance State A",
+      "class_id": "provenance_state_a",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "read_only_integrity_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "paired_provenance_state",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Add a paper manifest or replace only part of the pending triple",
+      "required_rejection": "Illegal mixed-state failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "read_only_integrity_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "paired_provenance_state",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "paired_provenance_state",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Provenance State B",
+      "class_id": "provenance_state_b",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "read_only_integrity_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "paired_provenance_state",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Omit the manifest, use unequal/zero/nonhex commits, or stale freeze text",
+      "required_rejection": "Illegal sealed-state failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Repair direction",
+      "class_id": "repair_direction",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Call an extension/product/induced system a factor repair",
+      "required_rejection": "Direction/clock failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Repair scope",
+      "class_id": "repair_scope",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Set `declared_repairs_are_exhaustive=true`",
+      "required_rejection": "Quantifier failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Result ledger",
+      "class_id": "result_ledger",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "canonical_output",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Self-include, omit, duplicate, unsort, path-escape, or use a wrong hash",
+      "required_rejection": "Ledger failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "authority_overlay",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Result set",
+      "class_id": "result_set",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "canonical_output",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Add, remove, rename, or symlink an expected output",
+      "required_rejection": "Exact-output-set failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Route A0",
+      "class_id": "route_a0",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Raise A0 despite explicit prime-square grammar",
+      "required_rejection": "Route semantic failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Route A1",
+      "class_id": "route_a1",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Credit rational-prime primitive support or raise A1",
+      "required_rejection": "Route semantic failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Route A2",
+      "class_id": "route_a2",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Replace the exact trivial label with fail/pass-completed or change determinant orientation",
+      "required_rejection": "Route semantic failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Route A3/A4",
+      "class_id": "route_a3_a4",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Raise either rung using `[1]` or the external comparator",
+      "required_rejection": "Route semantic failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Route B",
+      "class_id": "route_b",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Set either Route-B Boolean true or alter its frozen same-object/completed-structure reason",
+      "required_rejection": "Route-B hard failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "route_card",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Route schema",
+      "class_id": "route_schema",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "route_card",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Change any scalar value/type, key, list member/order, or evidence status",
+      "required_rejection": "Recursive schema failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Run A/B/C",
+      "class_id": "run_a_b_c",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "canonical_output",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Serialize a run label/root or let one run consume another run's output",
+      "required_rejection": "Reproducibility/independence failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "canonical_output",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Science hash",
+      "class_id": "science_hash",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "canonical_output",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Alter science bytes while preserving an old binding",
+      "required_rejection": "Hash-binding failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Selection card",
+      "class_id": "selection_card",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Modify, omit, duplicate, or ambiguously parse a C02/C03/C05 byte",
+      "required_rejection": "Card hash/schema failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Selector",
+      "class_id": "selector",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Preset C02, omit a rule clause, use paper/candidate order, or call the rule prospective",
+      "required_rejection": "Selection derivation failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Shift direction",
+      "class_id": "shift_direction",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Use `x_(n-j)` or a one-sided shift in place of `x_(n+j)`",
+      "required_rejection": "Dynamics/congruence failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Source fixture",
+      "class_id": "source_fixture",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Add enough support residues to fill a retained `p^2` class while claiming membership",
+      "required_rejection": "Membership-certificate failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "static_or_environment",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Source ID",
+      "class_id": "source_id",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "read_only_integrity_auditor"
+        ],
+        "domain": "static_or_environment",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Duplicate, unsort, rename, path-escape, or alter any of the 40 expected hashes",
+      "required_rejection": "Source-resolver failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Source periodic word",
+      "class_id": "source_periodic_word",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Accept a nonzero periodic source word or choose `p` dividing its period",
+      "required_rejection": "Source-collapse failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Source quantifier",
+      "class_id": "source_quantifier",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Replace all rational primes by a finite list or change `p^2` to `p`",
+      "required_rejection": "Source-contract failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "authority_overlay",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "authority_overlay",
+          "expectation": "exact_positive_control"
+        },
+        {
+          "designated_consumers": [
+            "independent_route_auditor",
+            "read_only_integrity_auditor",
+            "strict_route_validator"
+          ],
+          "domain": "paired_provenance_state",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        },
+        {
+          "designated_consumers": [
+            "read_only_integrity_auditor"
+          ],
+          "domain": "paired_provenance_state",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Stage-2 scope",
+      "class_id": "stage_2_scope",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "independent_route_auditor",
+          "read_only_integrity_auditor",
+          "strict_route_validator"
+        ],
+        "domain": "paired_provenance_state",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Change anything other than the canonical Route card and paper manifest",
+      "required_rejection": "Metadata-only scope failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Surjectivity",
+      "class_id": "surjectivity",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Delete a lift or set onto false",
+      "required_rejection": "Factor-contract failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Target action",
+      "class_id": "target_action",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Replace the homeomorphism by an unrelated noninvertible map",
+      "required_rejection": "Target-type failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Universal inference",
+      "class_id": "universal_inference",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Mark a finite fixture/window table as proof of all points/windows",
+      "required_rejection": "Quantifier failure"
+    },
+    {
+      "allowed_instance_contracts": [
+        {
+          "designated_consumers": [
+            "algorithm_C",
+            "algorithm_F"
+          ],
+          "domain": "raw_packet",
+          "expectation": "all_designated_consumers_reject_nonzero"
+        }
+      ],
+      "class": "Zeta orientation",
+      "class_id": "zeta_orientation",
+      "default_instance_contract": {
+        "designated_consumers": [
+          "algorithm_C",
+          "algorithm_F"
+        ],
+        "domain": "raw_packet",
+        "expectation": "all_designated_consumers_reject_nonzero"
+      },
+      "mutation": "Swap zeta and inverse determinant, flip the logarithmic sign, or change `1-z` to its reciprocal",
+      "required_rejection": "Determinant-convention failure"
+    }
+  ],
+  "generated_id_policy": {
+    "future_counts_and_hashes_frozen_here": false,
+    "id_format": "class_id__zero_padded_instance_index__json_pointer_slug",
+    "ids_c_sorted_and_unique_at_run_time": true
+  },
+  "instance_contract_policy": {
+    "contract_fields": [
+      "class_id",
+      "designated_consumers",
+      "domain",
+      "expectation",
+      "id",
+      "variant"
+    ],
+    "mutation_outcome": "REJECT_NONZERO_for_every_exact_designated_consumer",
+    "observed_outcome_keys_equal_designated_consumers": true,
+    "positive_controls_separate_from_rejection_records": true,
+    "producer_emits_per_instance_contract": true,
+    "read_only_auditor_rederives_each_contract": true
+  },
+  "recursive_route_coverage": {
+    "mapping_key_presence": "every_mapping_key_at_every_recursive_path",
+    "mapping_unknown_key": "one_unknown_key_at_every_mapping_path",
+    "scalar_type": "every_scalar_at_every_recursive_path",
+    "scalar_value": "every_scalar_at_every_recursive_path",
+    "sequence_member": "every_list_member_at_every_recursive_path",
+    "sequence_order": "every_list_with_at_least_two_members"
+  },
+  "schema": "paper43-static-mutation-class-registry-v3"
+}

@@ -1,0 +1,41 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=8mm and 10mm,
+  box/.style={draw,rounded corners=2pt,align=center,text width=0.255\textwidth,
+    minimum height=25mm,inner sep=4pt,font=\small},
+  arrow/.style={-{Latex[length=2.4mm]},thick}
+]
+\node[box,draw=proofgreen,fill=proofgreen!6] (infinite)
+  {\textbf{All primes}\\fresh \(p^2\) for every window\\proximality and
+  singleton periodic ledger};
+\node[box,draw=stopred,fill=stopred!5,right=of infinite] (finite)
+  {\textbf{Finite nonempty \(P_0\)}\\
+  \(Q=\prod_{p\in P_0}p^2\)\\
+  \(x_n=1\iff n\equiv1\pmod Q\)\\least period \(Q\)};
+\node[box,draw=stopred,fill=stopred!5,right=of finite] (empty)
+  {\textbf{Empty \(P_0\)}\\constraints vacuous\\
+  \(0^{\mathbb Z}\neq1^{\mathbb Z}\)\\two fixed points};
+
+\draw[arrow,stopred] (infinite) -- (finite);
+\draw[arrow,stopred] (finite) -- (empty);
+\node[font=\scriptsize,align=center,fill=white,inner sep=1.5pt]
+  at ($(infinite)!0.5!(finite)+(0,18mm)$)
+  {delete infinitely\\many exclusions};
+\node[font=\scriptsize,align=center,fill=white,inner sep=1.5pt]
+  at ($(finite)!0.5!(empty)+(0,18mm)$)
+  {delete the rest};
+
+\node[draw=mutedpurple,fill=mutedpurple!6,rounded corners=2pt,
+  below=10mm of finite,text width=0.74\textwidth,align=center,inner sep=5pt,
+  font=\small] (repairs)
+  {Products/extensions import cycles; inducing changes time; nonfactor maps
+  delete hypotheses; an aperiodic zeta changes the observable.  None is a
+  same-contract repair.};
+\draw[arrow,mutedpurple,dashed] (finite) -- (repairs);
+\draw[arrow,mutedpurple,dashed] (empty) -- (repairs);
+\end{tikzpicture}
+\caption{Sharpness of the all-prime source.  The empty finite set is a
+separate edge case, not a nontrivial \(Q\)-cycle.}
+\label{fig:sharpness}
+\end{figure}

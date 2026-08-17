@@ -1,0 +1,42 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  node distance=10mm and 15mm,
+  system/.style={draw,rounded corners=2pt,align=center,minimum height=14mm,
+    text width=0.31\textwidth,inner sep=5pt},
+  case/.style={draw,rounded corners=2pt,align=center,text width=0.36\textwidth,
+    inner sep=5pt,font=\small},
+  arrow/.style={-{Latex[length=2.5mm]},thick}
+]
+\node[system,draw=sourceblue,fill=sourceblue!7] (source)
+  {\(\Xsf\)\\compact, two-sided, proximal};
+\node[system,draw=factorblue,fill=factorblue!7,right=of source] (target)
+  {arbitrary compact metrizable \(Y\)\\\(S\) a homeomorphism};
+\draw[arrow,factorblue] (source) -- (target);
+\node[font=\small,align=center,fill=white,inner sep=2pt,
+  text width=0.28\textwidth]
+  at ($(source.north)!0.5!(target.north)+(0,9mm)$)
+  {continuous, onto,\\\(\mathbb Z\)-equivariant \(\pi\)};
+
+\node[case,draw=stopred,fill=stopred!5,below=13mm of source]
+  (fixedcase) {\textbf{Second fixed point:}
+  \(d(S^n y,S^n y_0)=d(y,y_0)>0\).};
+\node[case,draw=stopred,fill=stopred!5,right=of fixedcase]
+  (cyclecase) {\textbf{Least period \(r>1\):}
+  \(d(S^n y,S^n Sy)\geq\delta_r>0\).};
+\draw[arrow,stopred] (target.south) -- ++(0,-4mm) -| (fixedcase.north);
+\draw[arrow,stopred] (target.south) -- ++(0,-4mm) -| (cyclecase.north);
+
+\coordinate (midcases) at ($(fixedcase.south)!0.5!(cyclecase.south)$);
+\node[draw=proofgreen,fill=proofgreen!6,rounded corners=2pt,
+  below=11mm of midcases,
+  text width=0.55\textwidth,align=center,inner sep=5pt] (conclusion)
+  {both cases contradict proximality; therefore
+  \(\Per(Y,S)=\{\pi(0^{\mathbb Z})\}\)};
+\draw[arrow,proofgreen] (fixedcase) -- (conclusion);
+\draw[arrow,proofgreen] (cyclecase) -- (conclusion);
+\end{tikzpicture}
+\caption{The arbitrary-factor quantifier and the two periodic-separation
+cases.  No symbolic presentation of \(Y\) is used.}
+\label{fig:factor-separation}
+\end{figure}

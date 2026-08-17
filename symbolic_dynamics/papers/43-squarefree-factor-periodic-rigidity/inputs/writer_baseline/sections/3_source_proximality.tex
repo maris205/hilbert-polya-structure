@@ -1,0 +1,111 @@
+\section{The squarefree source and an exact proximality certificate}
+\label{sec:source-proximality}
+
+We now prove the source property used by the factor argument.  Keeping this
+proof local serves two purposes: it fixes the two-sided indexing convention,
+and it exposes exactly where the infinitely many pairwise-coprime
+prime-square exclusions enter.
+
+\subsection{Topological source}
+
+For a fixed rational prime \(p\), let \(F_p\) consist of those binary
+sequences whose support meets every residue class modulo \(p^2\).  If
+\(x\in F_p\), choose one occupied coordinate from each of the finitely many
+residue classes.  The cylinder that keeps those coordinates equal to one is
+contained in \(F_p\).  Hence \(F_p\) is open and
+\[
+  \Xsf=\bigcap_{p\in\Pset}
+  \bigl(\{0,1\}^{\mathbb Z}\setminus F_p\bigr)
+\]
+is closed in the compact full shift.  Translation permutes the residue
+classes modulo every \(p^2\), so \(\Xsf\) is shift invariant.  It is
+therefore a compact metrizable \(\mathbb Z\)-system.  The point
+\(0^{\mathbb Z}\) lies in \(\Xsf\) and is fixed.
+
+For later use, define the nonempty missing-residue set
+\begin{equation}
+  M_p(x):=
+  \left(\mathbb Z/p^2\mathbb Z\right)
+  \setminus\bigl(\supp(x)\bmod p^2\bigr).
+  \label{eq:missing-residue}
+\end{equation}
+Choosing an element of \(M_p(x)\) is a proof witness after \(x\) and \(p\)
+have been fixed.  It is not a fitted parameter.
+
+\begin{definition}[Proximal pair]
+For a compact metrizable system \((X,T)\), a pair \((x,y)\) is proximal if,
+for one (equivalently every) compatible metric,
+\[
+  \inf_{n\geq0}d(T^n x,T^n y)=0.
+\]
+The system is proximal if every pair is proximal.
+\end{definition}
+
+\subsection{Fresh-prime CRT construction}
+
+\begin{proposition}[Window synchronization]
+\label{prop:window-synchronization}
+For every \(x^{(1)},x^{(2)}\in\Xsf\) and every integer \(L\geq0\), there is
+an integer \(n_L\geq0\) such that
+\[
+  x^{(1)}_{n_L+j}=x^{(2)}_{n_L+j}=0
+  \qquad(-L\leq j\leq L).
+\]
+\end{proposition}
+
+\begin{proof}
+For every \(j\in\{-L,\ldots,L\}\) and \(i\in\{1,2\}\), choose a rational
+prime \(p_{j,i}\), with all \(2(2L+1)\) chosen primes distinct.  By
+\cref{eq:missing-residue}, choose
+\[
+  a_{j,i}\in M_{p_{j,i}}(x^{(i)}).
+\]
+The moduli \(p_{j,i}^2\) are pairwise coprime.  The Chinese remainder theorem
+therefore gives an integer \(n\), unique modulo their product, satisfying
+\begin{equation}
+  n+j\equiv a_{j,i}\pmod{p_{j,i}^2}
+  \qquad(j\in[-L,L],\ i\in\{1,2\}).
+  \label{eq:crt-system}
+\end{equation}
+Choose the nonnegative representative \(n_L\).  Because
+\(a_{j,i}\) is absent from the support of \(x^{(i)}\) modulo
+\(p_{j,i}^2\), \cref{eq:crt-system} forces
+\(x^{(i)}_{n_L+j}=0\) for every requested pair \((j,i)\).
+\end{proof}
+
+Distinct primes are chosen for point-coordinate pairs, not merely for
+coordinates.  This prevents two unrelated missing residues from being
+imposed modulo the same prime square.  The construction uses arbitrarily
+large primes as \(L\) grows; this is precisely why a finite collection of
+exclusions cannot support the proof.
+
+\subsection{Metric conclusion}
+
+Use the compatible product metric
+\begin{equation}
+  d_X(x,y)=\frac13\sum_{k\in\mathbb Z}
+  2^{-|k|}|x_k-y_k|.
+  \label{eq:product-metric}
+\end{equation}
+If two points agree on \([-L,L]\), then
+\begin{align}
+  d_X(x,y)
+  &\leq \frac13\sum_{|k|>L}2^{-|k|}
+   =\frac13\left(2\sum_{k=L+1}^{\infty}2^{-k}\right)
+   =\frac{2^{1-L}}{3}.
+  \label{eq:metric-tail}
+\end{align}
+Combining \cref{prop:window-synchronization,eq:metric-tail} and letting
+\(L\to\infty\) proves the following.
+
+\begin{corollary}[Source proximality]
+\label{cor:source-proximal}
+The two-sided system \((\Xsf,\sigma)\) is proximal.
+\end{corollary}
+
+This local proof earns no novelty credit: source proximality is known from
+the squarefree and general \(\mathscr B\)-free literature discussed in
+\cref{sec:prior-scope}.  Its role is exact source control.  In particular,
+it exhibits the all-prime-square quantifier needed later for the sharpness
+statement; no finite census is substituted for the theorem.
+

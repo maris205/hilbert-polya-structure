@@ -54,6 +54,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [40-gauss-mayer-projection-firewalls](papers/40-gauss-mayer-projection-firewalls/README.md) | [PDF](papers/40-gauss-mayer-projection-firewalls/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/40-gauss-mayer-projection-firewalls/) | 把普通 Gauss digit shift 与 two-digit pair return 通过 $\rho\iota=\iota\sigma^2$ 严格分型，并从 $K_s=\mathcal L_s^2$ 的 Fredholm traces 导出 intrinsic pair ledger；对且仅对 trace、order discriminant、expanding norm 三个投影，完整 rational-prime reciprocal-Euler conjunction 全部失败，而 pair ledger 与 same-space determinant 保留。严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FORMAL_HINT)`。 | **GO_MODULAR_PRIMITIVE_LEDGER / GO_SAME_OBJECT_MAYER_DETERMINANT / STOP_CANONICAL_INTEGER_PROJECTION / STOP_RATIONAL_INTEGER_CLOCK_REPETITION_CONJUNCTION / STOP_OPERATOR_VISIBLE_SELECTOR_NOT_OWNED / ROUTE_A_REJECTED / SD-C42** |
 | [41-knauf-rooted-clock-non-descent](papers/41-knauf-rooted-clock-non-descent/README.md) | [PDF](papers/41-knauf-rooted-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/41-knauf-rooted-clock-non-descent/) | 对冻结的 Knauf rooted label，trailing-zero stable quotient 上的 append-one 不下降；该 label 既非 cyclic clock 也不满足 temporal powers，literal Liouville scalar phase 同样不下降。state inventory 仍在 `Re(s)>2` 上拥有 diagonal Fredholm determinant，但不获得 binary primitive-return ownership。canonical replay 为 `24/24` 与 `25/25`，science SHA-256 为 `f9cbcde9a757896b976ad81a66f235d670029f727b6fda9b4e851846bac50bec`；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **ROOTED CLOCK NON-DESCENT / INVENTORY DETERMINANT OWNERSHIP / ROUTE-A REJECTED / SD-C43** |
 | [42-function-field-clock-non-descent](papers/42-function-field-clock-non-descent/PAPER_PLAN.md) | [PDF](papers/42-function-field-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/42-function-field-clock-non-descent/) | 对冻结的 full $q$-shift（$q\in\{2,3,5\}$），exact degree clock 在 length two 强制 composite $q^2$；同 marker 的 factor identification 又在 length one 强制 $p=q$ 与 $q{:}1$ multiplicity；marked determinant 的首个 $z$ 系数 $q^{1-s}$ 也不等于 prime-zeta $P(s)$。function-field prime-polynomial ledger 与 source determinant 保留。canonical replay 为 `11/11` 与 `11/11`，science SHA-256 为 `078d98da2f3c89c0f5f4e7ef6be84066ee60a1c1d82c86788de675ad349b7848`；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`。 | **STOP_Q_POWER_RATIONAL_PRIME_SUPPORT / STOP_MARKER_MULTIPLICITY_CONJUNCTION / STOP_FIRST_MARKED_COEFFICIENT_MISMATCH / ROUTE_A_REJECTED / SD-C44** |
+| [43-squarefree-factor-periodic-rigidity](papers/43-squarefree-factor-periodic-rigidity/PAPER_PLAN.md) | [PDF](papers/43-squarefree-factor-periodic-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/43-squarefree-factor-periodic-rigidity/) | 对 two-sided all-rational-prime-square admissible shift，任意到 compact metrizable $\mathbb Z$-system 的 continuous surjective equivariant factor 都恰有一个周期点，即 all-zero fixed point 的像；所以全部 fixed-point counts 均为 $1$，Artin--Mazur zeta 为 $1/(1-z)$、inverse determinant 为 $1-z$，而 singleton primitive support 不能重标为 rational primes。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false；`STOP_DUPLICATE=LIVE_CONDITIONAL` 只是外部 literature/claim boundary，不是第五个严格终止码。 | **STOP_TRIVIAL_ONE_MINUS_Z_DIVISOR / STOP_PROXIMAL_PERIODIC_RIGIDITY / PROCEED_ONLY_AS_INTERNAL_EXACT_CLOSURE / STOP_SINGLETON_PRIMITIVE_SUPPORT / ROUTE_A_REJECTED / SD-C45** |
 
 ### 论文 1 的候选分离结论
 
@@ -1452,13 +1453,52 @@ ledger 为 95 entries、SHA-256
 selector、结果同步与 publication block 全部是 retrospective；typed closure
 novelty 仅 `3/10`，不获得 discovery、priority 或 Route-B credit。
 
+### 论文 43：squarefree factor 不能复活周期轨道
+
+Paper 43 冻结 exact two-sided all-rational-prime-square admissible shift。对任意到
+compact metrizable $\mathbb Z$-system 的 continuous、surjective、equivariant
+factor，source proximality 下降到 factor；若 factor 中存在非固定的 finite orbit，
+其有限个互异点具有正分离距离，与 proximality 矛盾。再与 all-zero source fixed
+point 的像比较，便知 factor 恰有这一个周期点。因此每个 fixed-point count 都是
+$1$，Artin--Mazur zeta 为 $1/(1-z)$，inverse determinant 为 $1-z$；唯一 primitive
+fixed orbit 及其 temporal repetitions 不是 rational-prime primitive species。这个
+结论只在冻结对象及上述 factor quantifiers 内成立，是 internal exact closure，
+不是新的 proximality mechanism 或 universal aperiodic-factor theorem。
+
+source resolver 以 `40/40` 通过并留下唯一 retrospective selector survivor
+`SD-C02`；selector 写于全部 card outcomes、literature facts 与 proof 已知之后，
+integration chronology 为
+`RETROSPECTIVE_KNOWN_MATHEMATICS_V6_AUTHORITY_OVERLAY_REPAIR`。它不提供
+prospective、blind、novelty、priority、predecessor-ranking 或 authorization credit；
+standalone novelty 保持 `1/10`，只有 program-internal typed-closure value `2/10`。
+严格 Route tuple 为
+`(A0_FAIL, A1_FAIL, A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FAIL)`，overall 为
+`ROUTE_A_REJECTED`，Route B 为 false。四字段终止映射为
+`determinant_comparison=STOP_TRIVIAL_ONE_MINUS_Z_DIVISOR`、
+`factor_cycle_creation=STOP_PROXIMAL_PERIODIC_RIGIDITY`、
+`literature=PROCEED_ONLY_AS_INTERNAL_EXACT_CLOSURE` 与
+`rational_prime_identification=STOP_SINGLETON_PRIMITIVE_SUPPORT`；外部
+`STOP_DUPLICATE=LIVE_CONDITIONAL` 仍然有效，但不是第五个 strict Route terminal。
+
+authority canonical replay 的 main/independent evaluators 为 `17/17` 与 `13/13`，
+main/independent Route checks 为 `23/23` 与 `24/24`，science SHA-256 为
+`ae57c6ffb38eb86d43912677eda19574db0ef50f05c25d964d1fcf261fb2422d`。16 个 CRT
+control rows、6 个 factor-separation obligations、5 个 finite-$P_0$ rows 与 8 个
+fixed-count coefficients 的 failure counters 全为零；62 类共 893 个 negative
+mutations 无 survivor。exact output namespace 为 53 paths，self-excluding result
+ledger 为 49 entries、SHA-256
+`51cd6900505984e0eec391fcd0ff77aedd7747eedd114ec95d2ddf4d273e8a5f`；integrity
+audit 为 `16/16`、SHA-256
+`c4e31e1c48b74bf890e011bae5538bfb98b88dd2f6eb2d36b3021a73a7033021`。Run A/B/C
+及 relocated cold Run C 字节一致，完整 parent rerun 的 changed paths 为空。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十二篇论文](papers/)
+- [四十三篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
