@@ -1,0 +1,115 @@
+\section{Exhaustive uniqueness, characters, and zeta functions}
+\label{sec:uniqueness-zeta}
+
+The common-normalizer construction sits inside a known finite collision
+census.  We first delimit exactly what is unique, and then use the resulting
+$\Vfour$ lattice to obtain a representation-ring identity.
+
+\subsection{The exact eleven-bucket predicate}
+
+For an unordered collision bucket $\{a,b\}$ represented by embedded
+subgroups $H_a,H_b\le G$, define the predicate
+\begin{equation}
+\label{eq:uniqueness-predicate}
+\begin{split}
+\mathcal P(a,b):\quad &N_G(H_a)\text{ and }N_G(H_b)
+     \text{ are conjugate in }G,\\
+&[N_G(H_a):H_a]=[N_G(H_b):H_b]=2.
+\end{split}
+\end{equation}
+No degree or target locator is included in $\mathcal P$.  The computation
+starts from all $350$ subgroup conjugacy classes and their $339$ distinct
+permutation-character profiles; it then evaluates \eqref{eq:uniqueness-predicate}
+on every one of the eleven collision buckets recorded by James
+\citep[\S3.1, printed p.~22]{james2022bayesian}.
+
+\begin{proposition}[Restricted exhaustive uniqueness]
+\label{prop:restricted-uniqueness}
+Among the eleven collision buckets, $\mathcal P(a,b)$ holds exactly for
+$\{a,b\}=\{301,303\}$.
+\end{proposition}
+
+\begin{proof}
+For each bucket, generate both exact subgroups, compute their normalizers in
+the full $51840$-element group, test normalizer conjugacy in $G$, and divide
+the two normalizer orders by the subgroup order.  The complete rows are in
+\cref{tab:collision-census}.  Only the final row has conjugate normalizers
+and index pair $[2,2]$.  The calculation contains no target-filtering step:
+all eleven Boolean leaves are computed before the unique qualifying list is
+formed.
+\end{proof}
+
+The exhaustive count is summarized in \cref{fig:uniqueness-funnel}.
+\input{figures/paper_calls/fig_uniqueness_funnel.tex}
+This count does not say that the envelope is a globally unique $\Vfour$
+configuration.  The bucket $112/120$ is the instructive near-miss: its
+normalizers are conjugate, and after transport the two order-$16$ groups
+generate a group of order $32$ with intersection of order $8$.  Nevertheless
+each normalizer has order $64$, so the normalizer indices are $[4,4]$ and
+$\mathcal P(112,120)$ is false.  Dropping the index-two clause would therefore
+support a false uniqueness sentence.
+
+\subsection{The rational \texorpdfstring{$\Vfour$}{V4} relation}
+
+Let $V=N/J\cong\Vfour$ and let $A_+,A_0,A_3$ be its three order-two
+subgroups, the images of $\Hplus,\Hzero,\Hthree$.  In the rational
+representation ring of $V$,
+\begin{equation}
+ [V/1]+2[V/V]=[V/A_+]+[V/A_0]+[V/A_3].
+ \label{eq:V4-relation}
+\end{equation}
+Indeed, the regular character is the sum of the trivial character and the
+three nontrivial one-dimensional characters.  Each two-point permutation
+character $\Q[V/A_i]$ is the sum of the trivial character and the unique
+nontrivial character with kernel $A_i$.  Both sides of
+\eqref{eq:V4-relation} therefore contain the trivial character three times
+and each nontrivial character once.
+
+Inflate \eqref{eq:V4-relation} along $N\twoheadrightarrow N/J$ and induce
+from $N$ to $G$.  Transitivity of induction yields
+\begin{equation}
+ [G/J]+2[G/N]=[G/\Hplus]+[G/\Hzero]+[G/\Hthree].
+ \label{eq:G-character-relation}
+\end{equation}
+The independent computation in \cref{tab:character-vectors} verifies
+\eqref{eq:G-character-relation} on all $25$ conjugacy classes, with
+coefficient order $(\Hplus,\Hzero,\Hthree,J,N)=(-1,-1,-1,1,2)$.
+Checking all classes prevents a matching-dimensions argument from being
+mistaken for character equality.
+
+\begin{remark}[Characters, not finite sets]
+The two sides of \eqref{eq:G-character-relation} are equal after passing to
+rational permutation representations.  They are not isomorphic finite
+$G$-sets: the orbit decompositions have different numbers and stabilizer
+types.  Every use below is additive in characters.
+\end{remark}
+
+\subsection{Dedekind zeta consequence}
+
+For $H\le G$, Artin formalism identifies the Dedekind zeta function of
+$K^H$ with the Artin $L$-function attached to
+$\Ind_H^G\one$.  Multiplicativity on character sums, as in Perlis's
+criterion \citep{perlis1977equation}, converts
+\eqref{eq:G-character-relation} into
+\begin{equation}
+ \zeta_L(s)\zeta_M(s)^2
+ =\zeta_{\Fplus}(s)\zeta_{\Fzero}(s)\zeta_{\Fthree}(s).
+ \label{eq:zeta-first}
+\end{equation}
+The original $\Hplus,\Hminus$ pair has equal permutation characters, and
+conjugation by $x$ preserves the character.  Hence
+$\zeta_{\Fthree}=\zeta_{\Fplus}$ and
+\begin{equation}
+ \zeta_L(s)\zeta_M(s)^2
+ =\zeta_{\Fplus}(s)^2\zeta_{\Fzero}(s).
+ \label{eq:zeta-second}
+\end{equation}
+The generic $\Vfour$ identity is classical; the contribution here is its
+realization by the exact embedded fields together with their explicit
+generators and arithmetic.
+
+Equations \eqref{eq:zeta-first}--\eqref{eq:zeta-second} are the entire
+analytic conclusion.  We compute no new decomposition Frobenius, bad Artin
+Euler factor, epsilon factor, or root number, and infer no holomorphy or
+automorphy statement.  The next section uses conductor characters only to
+compute discriminants, a logically separate finite invariant.

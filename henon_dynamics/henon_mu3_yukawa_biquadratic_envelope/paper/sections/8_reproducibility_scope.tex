@@ -1,0 +1,113 @@
+\section{Exact computation, reproducibility, and scope}
+\label{sec:reproducibility}
+
+The proof uses finite computation at four bounded points: subgroup closure and
+the collision census, stabilizers and modular orbit values, permutation
+characters and conductor orbits, and local double cosets.  This section
+records how those premises are reconstructed and how they connect to the
+mathematical arguments.  Test counts are evidence about implementation
+integrity, not substitutes for the proofs in
+\cref{sec:envelope,sec:primitive,sec:uniqueness-zeta,sec:global,sec:local}.
+
+\subsection{Proof-to-gate map}
+
+The anonymous certificate has eight gates.
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{@{}cYY@{}}
+\toprule
+gate & finite obligation & mathematical destination\\
+\midrule
+G0 & released normal extension, labelled lines, prior subgroup and local data &
+premises of \cref{sec:released-input}\\
+G1 & durable groups, transport, lattice, all eleven predicate rows &
+\cref{prop:group-lattice,prop:restricted-uniqueness}\\
+G2 & three carriers, stabilizers, $160/320/640$ modular noncollision &
+\cref{lem:split-noncollision,eq:primitive-identities}\\
+G3 & exact point/pair partitions and cubic stabilizer &
+\cref{prop:coefficient-orbit}\\
+G4 & cores, normalizers, all $25$ character values, $\Vfour$ relation &
+\cref{prop:closures-aut,eq:G-character-relation}\\
+G5 & archimedean and filtration orbit counts, exact support &
+\cref{prop:absolute-discriminants,eq:relative-norms}\\
+G6 & every absolute and relative row for both $D_3$ branches &
+\cref{prop:branch-independent}\\
+G7 & independent reconstruction, schema, mutation, source, and scope controls &
+authority for the finite premises and the boundary below\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The finite group calculations use GAP~4.11.1 and TomLib~1.2.9
+\citep{gap2021,tomlib2019}; the frozen environment also records CTblLib~1.3.1
+and SmallGrp~1.4.1.  Package locators are always checked against durable
+permutation arrays.  Thus a change in table ordering cannot silently redefine
+a field.
+
+\subsection{Independent reconstruction and adversarial checks}
+
+The paper-facing package contains $13$ source files and $8$ result files;
+the complete live inventory has $21$ files, while the self-excluding scoped
+manifest binds $20$.  Two complete official cycles each pass $53/53$ tests
+and reconstruct all eight gates.  The canonical payload has $9310$ scalar
+leaves.  The independent checker rejects $9339$ value mutations, $9339$ type
+mutations, and $14$ structural mutations.  Its evidence-rebound suite rejects
+$6$ group-document and $4$ resolver-document mutations; two additional
+self-consistent artifact-row digest attacks give the explicit count summary
+$6/4/10/2/12$.  Thirty-nine child-input snapshots are rebound before the
+certificate write.
+
+The group and primitive-resolver evidence are produced by separate lanes.
+The integrated checker does not call the producer's theorem functions: it
+runs the final group checker to recover the canonical projection, invokes an
+independently implemented resolver reconstruction, and rebuilds all payload
+leaves.  Strict parsers reject duplicate keys, booleans disguised as integers,
+unknown fields, symlinks, path substitution, stale caches, and input changes
+between validation and write.  The exact schema, certificate, check report,
+component evidence, and self-excluding manifest are bound by the hashes in
+\cref{tab:evidence-hashes}.  These controls make the finite claims
+reproducible from the anonymous supplement while leaving the conceptual proof
+visible in the paper.
+
+\subsection{Scope firewall}
+
+\begin{center}
+\fbox{\begin{minipage}{0.92\textwidth}
+\textbf{Scope.}  The exact uniqueness theorem is restricted to the eleven
+collision buckets and the predicate ``normalizers conjugate in $\WE$ and
+both normalizer indices equal two.''  Orbit polynomials are exact in product
+form; no expanded characteristic-zero coefficient vector is claimed.  The
+degree obstruction concerns commutative formal polynomials in independent
+labelled variables.  The character relation is not a finite-set
+isomorphism.  The zeta identity yields no new bad Euler factor, epsilon
+factor, root number, holomorphy, automorphy, or analytic-continuation
+statement.  Neither $D_3$
+branch is selected, and local tuples are not a classification of local
+fields.  No integral-equivalence, integral-basis, maximal-order, class-number,
+regulator, trace-form, rational-point, motive, H\'enon, Yukawa, Calabi--Yau,
+dynamical, spectral, Riemann-hypothesis, or Hilbert--P\'olya conclusion is
+made.
+\end{minipage}}
+\end{center}
+
+The literal scope tag in the certificate is
+\[
+ \codeword{NO_BAD_EULER_OR_ROOT_NUMBER}.
+\]
+The full set of thirty false scope leaves is grouped and listed in
+\cref{app:scope-leaves}.  This redundancy is intentional: a downstream use
+of a discriminant or zeta identity should not be able to erase the nonclaims
+that accompanied it.
+
+\subsection{Anonymous supplementary boundary}
+
+An anonymized supplementary archive is intended to contain canonical JSON,
+strict schemas, immutable manifests, durable group arrays, and replay
+instructions.  The draft contains no repository URL, host name, user name,
+institutional path, commit identity, or identifying acknowledgement.  The
+supplementary certificate's machine-layer field
+\codeword{release_authorized=false} records that its finite evidence is not,
+by itself, a promotion or publication claim.  That workflow field is not a
+mathematical premise of the theorem.  Release and archival state are managed
+outside the manuscript so that the mathematical source remains stable across
+later packaging steps.

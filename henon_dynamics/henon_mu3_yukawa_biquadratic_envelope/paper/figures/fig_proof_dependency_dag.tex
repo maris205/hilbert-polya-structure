@@ -1,0 +1,93 @@
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % Four narrow source boxes keep the natural width below the 15 cm paper
+  % text block, so the scriptsize node text is never scaled down.
+  \node[csi input, minimum width=3.2cm] (E0) at (-5.4,12.2)
+    {E0: ambient action,\\exact roots and arithmetic};
+  \node[csi input, minimum width=3.2cm] (E1) at (-1.8,12.2)
+    {E1: embedded subgroups\\and transport};
+  \node[csi input, minimum width=3.2cm] (E2) at (1.8,12.2)
+    {E2: integral carriers and\\split witness $p=\CsiSplitPrime$};
+  \node[csi input, minimum width=3.2cm] (E3) at (5.4,12.2)
+    {E3: complete frozen\\collision census};
+
+  \node[csi proof, minimum width=3.2cm] (P1) at (-2.8,10.55)
+    {P1: embedded subgroup lattice\\and exact finite action};
+  \draw[csi evidence] (E0.south east) -- (P1.north west);
+  \draw[csi evidence] (E1.south) -- (P1.north);
+
+  % Foundational algebraic consequences.
+  \node[csi proof, minimum width=2.45cm] (P2) at (-5.6,8.7)
+    {P2: fields, closures,\\automorphism groups};
+  \node[csi proof, minimum width=2.45cm] (P5) at (-2.8,8.7)
+    {P5: coefficient-orbit\\lemma};
+  \node[csi proof, minimum width=2.45cm] (P8) at (0,8.7)
+    {P8: rational\\character relation};
+  \node[csi proof, minimum width=2.45cm] (P3) at (2.8,8.7)
+    {P3: carrier stabilizers\\and orbit sizes};
+  \node[csi proof, minimum width=2.45cm] (P7) at (5.6,8.7)
+    {P7: exact restricted\\uniqueness};
+
+  \draw[CsiBlack,line width=0.65pt] (P1.south) -- (-2.8,9.55);
+  \draw[CsiBlack,line width=0.65pt] (-5.6,9.55) -- (2.8,9.55);
+  \foreach \x/\nodeName in {-5.6/P2,-2.8/P5,0/P8,2.8/P3}
+    \draw[csi imply] (\x,9.55) -- (\nodeName.north);
+  \draw[csi evidence] (E2.south) -- (2.8,9.55);
+  \fill[CsiBlack] (2.8,9.55) circle[radius=1.2pt];
+  \draw[csi evidence] (E3.south) -- (P7.north);
+
+  \node[csi proof, minimum width=2.7cm] (P6) at (-2.8,7.05)
+    {P6: formal quadratic gap\\and cubic escape};
+  \node[csi proof, minimum width=2.7cm] (P9) at (0,7.05)
+    {P9: Dedekind-zeta\\identity};
+  \node[csi proof, minimum width=2.7cm] (P4) at (2.8,7.05)
+    {P4: split-prime noncollision\\and primitive generators};
+  \draw[csi imply] (P5) -- (P6);
+  \draw[csi imply] (P8) -- (P9);
+  \draw[csi imply] (P3) -- (P4);
+
+  \draw[CsiBlack,line width=0.65pt] (-5.6,6.05) -- (5.6,6.05);
+  \foreach \nodeName/\x in {P2/-5.6,P6/-2.8,P9/0,P4/2.8,P7/5.6}
+    \draw[CsiBlack,line width=0.65pt] (\nodeName.south) -- (\x,6.05);
+  \node[csi proof, minimum width=8.0cm] (S1) at (0,5.15)
+    {algebraic assembly: fixed fields, generators, invariant gap,\\
+     restricted uniqueness, and zeta identity};
+  \draw[csi imply] (0,6.05) -- (S1.north);
+
+  % The released arithmetic input travels around the algebraic panel, not
+  % through it, and feeds both complete local branches separately.
+  \node[csi proof, minimum width=3.0cm] (P10) at (-4.8,3.55)
+    {P10: signatures and\\absolute discriminants};
+  \node[csi proof, minimum width=3.0cm] (P12) at (0,3.55)
+    {P12: first complete\\local branch};
+  \node[csi proof, minimum width=3.0cm] (P13) at (4.8,3.55)
+    {P13: second complete\\local branch};
+  \draw[csi evidence] (E0.west) -- (-7.1,12.2) -- (-7.1,4.35);
+  \draw[CsiDark,dashed,line width=0.6pt] (-7.1,4.35) -- (4.8,4.35);
+  \foreach \x/\nodeName in {-4.8/P10,0/P12,4.8/P13}
+    \draw[csi evidence] (\x,4.35) -- (\nodeName.north);
+
+  \node[csi proof, minimum width=3.0cm] (P11) at (-4.8,1.95)
+    {P11: relative\\discriminant norms};
+  \node[csi proof, minimum width=4.2cm] (P14) at (2.4,1.95)
+    {P14: common tame relative conclusion;\\no branch selection};
+  \draw[csi imply] (P10) -- (P11);
+  \draw[csi imply] (P12) -- (P14);
+  \draw[csi imply] (P13) -- (P14);
+
+  % Algebraic and arithmetic assemblies meet only at the final theorem.
+  \draw[CsiBlack,line width=0.65pt] (S1.east) -- (7.1,5.15) -- (7.1,0.95);
+  \draw[CsiBlack,line width=0.65pt] (-4.8,0.95) -- (7.1,0.95);
+  \draw[CsiBlack,line width=0.65pt] (P11.south) -- (-4.8,0.95);
+  \draw[CsiBlack,line width=0.65pt] (P14.south) -- (2.4,0.95);
+  \node[font=\sffamily\scriptsize,fill=white,inner xsep=4pt,text=CsiDark]
+    at (0,0.95) {joint theorem assembly};
+
+  \node[csi final, minimum width=12.8cm] (T) at (0,-0.15)
+    {Integrated theorem: fixed-field envelope, primitive generators, formal gap,\\
+     restricted uniqueness, zeta identity, and branch-independent arithmetic};
+  \draw[csi imply] (0,0.95) -- (T.north);
+
+  \begin{scope}[on background layer]
+    \node[draw=CsiMid,rounded corners=3pt,fit=(E0)(E1)(E2)(E3),inner sep=7pt] {};
+  \end{scope}
+\end{tikzpicture}

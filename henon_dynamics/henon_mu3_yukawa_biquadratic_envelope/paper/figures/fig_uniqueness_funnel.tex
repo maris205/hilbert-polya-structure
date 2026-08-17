@@ -1,0 +1,28 @@
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \node[csi field, minimum width=3.0cm, minimum height=1.25cm] (classes) at (-6.4,2.6)
+    {\Large\bfseries \CsiClassCount\\[-1pt]\scriptsize subgroup classes};
+  \node[csi field, minimum width=3.0cm, minimum height=1.25cm] (profiles) at (-2.2,2.6)
+    {\Large\bfseries \CsiProfileCount\\[-1pt]\scriptsize character profiles};
+  \node[csi field, minimum width=3.0cm, minimum height=1.25cm] (buckets) at (2.2,2.6)
+    {\Large\bfseries \CsiBucketCount\\[-1pt]\scriptsize collision buckets};
+  \node[csi final, minimum width=3.0cm, minimum height=1.25cm] (winner) at (6.4,2.6)
+    {\Large\bfseries \CsiQualifierCount\\[-1pt]\scriptsize qualifier: \CsiQualifierBucket};
+
+  \draw[csi imply] (classes) -- (profiles);
+  \draw[csi imply] (profiles) -- (buckets);
+  \draw[csi imply] (buckets) -- (winner);
+
+  \node[csi input, minimum width=10.6cm] (predicate) at (0,0.55)
+    {Exact predicate evaluated on all \CsiBucketCount\ buckets:\\[2pt]
+     \CsiPredicateLeft\\[-1pt]\texttt{AND}\\[-1pt]\CsiPredicateRight};
+  \draw[csi evidence] (predicate) -- (buckets);
+
+  \node[csi near, minimum width=4.7cm] (near) at (5.0,-1.15)
+    {near miss \CsiNearMissBucket:\ conjugate normalizers,\\
+     indices \CsiNearMissIndices; fails the required $[2,2]$};
+  \draw[csi evidence] (near) to[bend left=10] (predicate.east);
+
+  \node[font=\sffamily\scriptsize,align=left,text=CsiDark] at (-4.7,-1.15)
+    {Conclusion scope: among the frozen collision buckets only.\\
+     No broad uniqueness claim for $V_4$ configurations is made.};
+\end{tikzpicture}
