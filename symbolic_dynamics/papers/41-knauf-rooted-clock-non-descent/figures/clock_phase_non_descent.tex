@@ -1,0 +1,24 @@
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  panel/.style={draw=charcoal, rounded corners=2pt, line width=.8pt,
+    align=center, inner sep=7pt, fill=white, text width=4.5cm},
+  fail/.style={panel, draw=stopred, fill=stopred!8},
+  control/.style={panel, draw=deepgreen, fill=deepgreen!9, text width=9.8cm},
+  meta/.style={panel, draw=warningamber, fill=warningamber!9}
+]
+  \node[fail] (clockcyc) at (0,2.2)
+    {clock: cyclic descent\\$01\sim_{\rm cyc}10$\\$h(01)=3\ne2=h(10)$};
+  \node[fail] (clockpow) at (6.0,2.2)
+    {clock: temporal power\\$1\mapsto11$\\$h(11)=3\ne4=h(1)^2$};
+  \node[fail] (phasecyc) at (0,-1.6)
+    {phase: cyclic descent\\$001\sim_{\rm cyc}010$\\$\lambda(4)=+1\ne-1=\lambda(3)$};
+  \node[fail] (phasepow) at (6.0,-1.6)
+    {phase: temporal power\\$\lambda(h(1))^2=+1$\\$\lambda(h(11))=-1$};
+  \node[control] (positive) at (3.0,-4.5)
+    {changed-clock positive controls:\quad
+     $\Tr(M_uM_v)=\Tr(M_vM_u)$\quad and\quad
+     $\rho(M^r)=\rho(M)^r$};
+  \node[meta, text width=10.8cm] at (3.0,5.0)
+    {exact failures belong to the rooted $h$ clock and literal scalar
+     $\lambda\!\circ h$, not to matrix clocks in general};
+\end{tikzpicture}

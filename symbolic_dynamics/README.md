@@ -52,6 +52,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [38-bass-serre-tree-orbital-collapse](papers/38-bass-serre-tree-orbital-collapse/README.md) | [PDF](papers/38-bass-serre-tree-orbital-collapse/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/38-bass-serre-tree-orbital-collapse/) | 对冻结 ascending-HNN splitting/presentation canonical 的 Bass--Serre full tree 没有正长度 reduced closed path，而其 full-edge Hashimoto operator 非紧且非迹类；转向 orbital conjugacy ledger 只得到对所有 ascending HNN controls 通用的 necklace 函数，且改变对象与 marker。 | **BASS–SERRE TREE / ORBITAL COLLAPSE / AFFINE BRANCH CLOSED / SD-C40** |
 | [39-affine-obstruction-dag-closure-certificate](papers/39-affine-obstruction-dag-closure-certificate/README.md) | [PDF](papers/39-affine-obstruction-dag-closure-certificate/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/39-affine-obstruction-dag-closure-certificate/) | 在 P35--P38 结果已知后，把其哈希化 outcome 组装成 checker-frozen 的 6-node/5-edge structural spine 与 22-node/28-edge typed proof DAG；14 类修复与 16 个请求 token 全部在精确有限域内归类，EXIT 不冒充失败，E22 不获 closure credit，跨 P36→P37 的四个候选状态字段全部 RESET。 | **RELATIVE AFFINE CLOSURE AUDIT / REGISTRY HANDOFF / ROUTE-A REJECTED / SD-C41** |
 | [40-gauss-mayer-projection-firewalls](papers/40-gauss-mayer-projection-firewalls/README.md) | [PDF](papers/40-gauss-mayer-projection-firewalls/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/40-gauss-mayer-projection-firewalls/) | 把普通 Gauss digit shift 与 two-digit pair return 通过 $\rho\iota=\iota\sigma^2$ 严格分型，并从 $K_s=\mathcal L_s^2$ 的 Fredholm traces 导出 intrinsic pair ledger；对且仅对 trace、order discriminant、expanding norm 三个投影，完整 rational-prime reciprocal-Euler conjunction 全部失败，而 pair ledger 与 same-space determinant 保留。严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FORMAL_HINT)`。 | **GO_MODULAR_PRIMITIVE_LEDGER / GO_SAME_OBJECT_MAYER_DETERMINANT / STOP_CANONICAL_INTEGER_PROJECTION / STOP_RATIONAL_INTEGER_CLOCK_REPETITION_CONJUNCTION / STOP_OPERATOR_VISIBLE_SELECTOR_NOT_OWNED / ROUTE_A_REJECTED / SD-C42** |
+| [41-knauf-rooted-clock-non-descent](papers/41-knauf-rooted-clock-non-descent/README.md) | [PDF](papers/41-knauf-rooted-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/41-knauf-rooted-clock-non-descent/) | 对冻结的 Knauf rooted label，trailing-zero stable quotient 上的 append-one 不下降；该 label 既非 cyclic clock 也不满足 temporal powers，literal Liouville scalar phase 同样不下降。state inventory 仍在 `Re(s)>2` 上拥有 diagonal Fredholm determinant，但不获得 binary primitive-return ownership。canonical replay 为 `24/24` 与 `25/25`，science SHA-256 为 `f9cbcde9a757896b976ad81a66f235d670029f727b6fda9b4e851846bac50bec`；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **ROOTED CLOCK NON-DESCENT / INVENTORY DETERMINANT OWNERSHIP / ROUTE-A REJECTED / SD-C43** |
 
 ### 论文 1 的候选分离结论
 
@@ -1390,13 +1391,41 @@ STOP_OPERATOR_VISIBLE_SELECTOR_NOT_OWNED / ROUTE_A_REJECTED**。两个 GO 只给
 intrinsic pair ledger 与 same-object Mayer determinant 正向 credit，不给予
 rational-prime、digit-primitive 或 geodesic-primitive credit。
 
+### 论文 41：rooted clock 不下降，inventory determinant 分型保留
+
+Paper 41 只关闭冻结的 `SD-C06` rooted-label test。对
+`h(w)=1^T M_w e_1`，trailing-zero relation 保留 source state，却不支持
+right append-one 的 well-defined quotient action；ordinary rotations 与 word
+powers 又分别破坏 cyclic clock 和 temporal-power law。literal
+`lambda(h(w))` 同时失去 cyclic 与 repetition character。该结论不量化到
+trace/eigenvalue clocks、扩大的 states、non-scalar cocycles、Farey/Gauss/
+Selberg 或 adelic models。
+
+另一方面，stable-state inventory 上的 diagonal `Q_s` 在 `Re(s)>2` 为
+trace class，并拥有 `det(I-uQ_s)`；其 local trace-log 只在 `|u|<1`
+使用。这个 marker 计数 inventory eigenvalue powers，不是 binary primitive
+returns，因此不把 A2 或 A4 改成通过。严格 Route tuple 为
+`(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`，
+overall 为 `ROUTE_A_REJECTED`，Route B 为 false。
+
+authority canonical replay 的 main/independent checks 为 `24/24` 与 `25/25`；
+science SHA-256 为
+`f9cbcde9a757896b976ad81a66f235d670029f727b6fda9b4e851846bac50bec`，integrity
+audit 为 `51/51`、SHA-256
+`cf16ba60ca4a45e3e31c5e48590c7cafd69d45694ab343cecf0076476f936d5e`，result
+ledger 为 79 entries、SHA-256
+`25f7aa42c6d55d7608509dbe1b66586bda6db98120ba450f5b59a5c6f3d19f99`。
+selection、witness 与结果均为 retrospective；Paper 39 只提供 existence
+provenance，不 ranking/authorize 本 successor，Paper 40 也不提供 selection
+或 novelty credit。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十篇论文](papers/)
+- [四十一篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

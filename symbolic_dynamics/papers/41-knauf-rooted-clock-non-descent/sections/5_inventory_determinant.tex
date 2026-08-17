@@ -1,0 +1,98 @@
+\section{The determinant owned by state inventory}
+\label{sec:inventory}
+
+Let $S_K$ be the trailing-zero colimit.  We inherit the source multiplicity
+theorem
+\[
+ \#\{x\in S_K:h(x)=n\}=\varphi(n)
+\]
+and the associated partition identity from the number-theoretic spin-chain
+literature \citep{knauf1993phases,knauf1998spin,knauf1999erratum}.  The
+following theorem does not create primitive dynamics; it identifies the
+operator and determinant already forced by that inventory.
+
+\begin{theorem}[State-inventory determinant]
+\label{thm:inventory-determinant}
+For $\RePart s>2$, define the diagonal operator on $\ell^2(S_K)$ by
+\[
+ Q_se_x=h(x)^{-s}e_x.
+\]
+Then $Q_s$ is trace class and
+\[
+ \Tr Q_s=\sum_{n\ge1}\varphi(n)n^{-s}
+ =\frac{\zeta(s-1)}{\zeta(s)}.
+\]
+Its Fredholm determinant is entire in the free variable $u$ and equals
+\[
+ \Delta_K(s,u)=\det(I-uQ_s)
+ =\prod_{n\ge1}(1-un^{-s})^{\varphi(n)}.
+\]
+For $|u|<1$ its local trace-log is
+\[
+ -\log\Delta_K(s,u)
+ =\sum_{r\ge1}\frac{u^r}{r}
+   \frac{\zeta(rs-1)}{\zeta(rs)}.
+\]
+Finally, $\Delta_K(s,1)=0$.
+\end{theorem}
+\begin{proof}
+Put $\sigma=\RePart s>2$.  Because $Q_s$ is diagonal, its trace norm is
+\[
+ \lVert Q_s\rVert_1
+ =\sum_{x\in S_K}|h(x)^{-s}|
+ =\sum_{n\ge1}\varphi(n)n^{-\sigma}<\infty.
+\]
+Thus $Q_s$ is trace class.  Absolute convergence permits regrouping by the
+exact multiplicity of each label, yielding the displayed zeta quotient.
+
+Trace-class Fredholm theory gives an entire function of $u$ and the product
+over eigenvalues.  Regrouping those eigenvalues by $n$ gives the second
+product.  Moreover $\lVert Q_s\rVert=1$, since the $n=1$ eigenvalue is one
+and every other eigenvalue has modulus below one.  Hence, for $|u|<1$, the
+operator series for $-\log(I-uQ_s)$ converges in the domain needed to take
+traces.  Therefore
+\[
+ -\log\det(I-uQ_s)
+ =\sum_{r\ge1}\frac{u^r}{r}\Tr(Q_s^r).
+\]
+The same multiplicity ledger gives
+\[
+ \Tr(Q_s^r)=\sum_{n\ge1}\varphi(n)n^{-rs}
+ =\frac{\zeta(rs-1)}{\zeta(rs)},
+\]
+because $\RePart(rs)>2$ for every positive integer $r$.  Finally,
+$\varphi(1)=1$, so the determinant product contains the factor $1-u$ and
+vanishes at $u=1$.
+\end{proof}
+
+The theorem separates three statements that can otherwise be conflated.
+The coefficient of $u$ in the trace-log is the source partition function.
+The higher coefficients count powers of fixed diagonal eigenvalues.  The
+free marker $u$ is neither binary depth nor temporal return time, and $Q_s$
+depends on the Dirichlet parameter rather than defining a fixed
+self-adjoint Hilbert--Polya operator.
+
+This diagonal inventory determinant is not the orbit determinant appearing
+in expanding-map or Gauss/modular transfer-operator formalisms
+\citep{ruelle1976zeta,mayer1990gauss,mayer1991selberg}.  Its marker enumerates
+powers of fixed inventory eigenvalues, not returns of binary primitive
+classes.  Those references provide changed-model context; they do not prove
+the formula for $Q_s$, which was derived above.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/inventory_ownership}}
+  \caption{The stable-state inventory owns both the partition trace and its
+  marked diagonal Fredholm determinant on $\RePart s>2$, with the displayed
+  trace-log restricted to $|u|<1$. The marker counts diagonal powers, not
+  binary primitive returns; the barred arrow prevents that ownership from
+  being transferred to the missing dynamical operator.}
+  \label{fig:inventory-owner}
+\end{figure}
+
+Thus \Cref{thm:inventory-determinant} is an ownership control.  It proves
+that the obstruction is not an absence of all Fredholm determinants.  It
+also proves why this particular determinant cannot earn A2 primitive-orbit
+credit: the source binary refinement has no declared return operator on
+$S_K$, and the rooted clock already fails the cyclic and power laws required
+for such a ledger.

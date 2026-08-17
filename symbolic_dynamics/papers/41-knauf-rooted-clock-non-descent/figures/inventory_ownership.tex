@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\sffamily\small,
+  box/.style={draw=charcoal, rounded corners=2pt, line width=.8pt,
+    align=center, inner sep=6pt, fill=white},
+  source/.style={box, draw=formalblue, fill=formalblue!8},
+  owned/.style={box, draw=deepgreen, fill=deepgreen!9},
+  stopped/.style={box, draw=stopred, fill=stopred!8},
+  boundary/.style={box, draw=warningamber, fill=warningamber!10},
+  flow/.style={->, line width=.9pt, draw=charcoal},
+  analytic/.style={->, dotted, line width=1pt, draw=deepgreen},
+  attempt/.style={->, dashed, line width=1pt, draw=governancepurple}
+]
+  \node[source, text width=3.1cm] (layers) at (0,1.3)
+    {finite rooted layers\\$W_k=\{0,1\}^k$};
+  \node[source, text width=3.6cm] (states) at (4.7,1.3)
+    {stable-state inventory $S_K$\\$\#\{x:h(x)=n\}=\varphi(n)$};
+  \node[owned, text width=3.8cm] (op) at (9.8,1.3)
+    {$Q_se_x=h(x)^{-s}e_x$\\trace class for $\RePart s>2$};
+  \draw[flow] (layers) -- node[above] {$w\mapsto w0$} (states);
+  \draw[flow] (states) -- node[above] {diagonalize} (op);
+
+  \node[owned, text width=4.8cm] (trace) at (15.3,3.5)
+    {$\Tr Q_s=\dfrac{\zeta(s-1)}{\zeta(s)}$\\owned partition trace};
+  \node[owned, text width=5.1cm] (det) at (15.3,-.3)
+    {$\Delta_K(s,u)=\prod_{n\ge1}(1-un^{-s})^{\varphi(n)}$\\
+     marked inventory determinant};
+  \draw[analytic] (op.north east) -- (trace.west);
+  \draw[analytic] (op.south east) -- (det.west);
+
+  \node[boundary, text width=4.8cm] (domain) at (9.8,-2.8)
+    {trace-log only for $|u|<1$\\$n=1$ factor gives $\Delta_K(s,1)=0$};
+  \draw[analytic] (det.south west) -- (domain.east);
+
+  \node[stopped, text width=4.7cm] (returns) at (15.3,-3.4)
+    {binary primitive returns\\no declared return operator};
+  \draw[attempt] (det) -- node[right] {$u$ counts diagonal powers} (returns);
+  \draw[stopred, line width=1.4pt]
+    ($(returns.north)+( -.15,.10)$) -- ($(returns.north)+(.15,-.10)$);
+\end{tikzpicture}
