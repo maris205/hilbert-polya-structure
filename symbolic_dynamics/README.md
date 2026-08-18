@@ -1548,6 +1548,19 @@ integrity 为 `15/15`、SHA-256
 retrospective，不获得 prospective、blind、novelty、priority、Route-B 或
 authorization credit。
 
+Paper 44 另以 append-only 日期路径
+`evaluations/route_a/SD-C46/2026-08-19.yaml` 完成 canonical Route-A v0.2
+actual evaluation。该 19-field card 由同一 frozen science H1
+`b0e41ac3d6bd30618421d1b76122c3e9e04d070b` 重建，严格不添加 Section 8
+未列出的 top-level `code_commit`；新的 evaluator-code H1 只在 primary、independent
+与 mutation receipts 中绑定，并且必须包含 science H1 ancestry。hostile audit 固定为
+25 cases、3 positive controls、51 rejection invocations、54 total consumer
+invocations、0 survivors；renderer 与两 validators 还共同拒绝仅含相同四个
+`100644 blob` code objects、但没有 science ancestry 的 orphan root。publication
+State-B 的 out-of-band Stage-1 anchor 仍固定为历史 science H1；以 evaluator-code
+H1 代替必须返回 `ROUTE_STAGE1_COMMIT_MISMATCH`。原 v0.3 chronology、严格 tuple、
+`ROUTE_A_REJECTED`、Route-B lock、主定理边界与 PDF 均不变。
+
 ### 论文 45：isospectral arithmetic fiber retractions
 
 Paper 45 对每个整数 $h\ge2$ 比较两个到 $h$-free integers 的 idempotent arithmetic
