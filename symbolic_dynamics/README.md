@@ -8,6 +8,10 @@ operator-algebra 想法只记为 `ROUND2_CLUE`，不在当前路线展开。
 Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不再增加项目包装目录。
 全部可共享论文直接位于根目录的 [`papers/`](papers/) 中。
 
+Papers 44--48 的候选选择、跨篇查重、来源宇宙边界与两阶段
+provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)
+统一归档；该归档只登记可重放证据，不把有限检索升级为全局优先权声明。
+
 ## 论文与简明结论
 
 | 论文项目 | 可共享论文 | 简明结果 | 状态 |
