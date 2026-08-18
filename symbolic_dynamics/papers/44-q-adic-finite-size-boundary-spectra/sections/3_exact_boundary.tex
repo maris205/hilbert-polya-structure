@@ -1,0 +1,154 @@
+\section{Exact finite-\texorpdfstring{\(N\)}{N} calculus and the
+\texorpdfstring{\(q\)}{q}-adic boundary}
+\label{sec:exact}
+
+Fix an integer \(q\ge2\) and a finite \(d\times d\) primitive matrix
+\(A\in\{0,1\}^{d\times d}\).  On the alphabet
+\(\mathcal A=\{1,\ldots,d\}\), define
+\[
+  X_A^{(q)}
+  =\{x\in\mathcal A^{\mathbb N}: A_{x_n,x_{qn}}=1
+    \text{ for every }n\ge1\}.
+\]
+The cutoff \(N\) always means the prefix \(\{1,\ldots,N\}\); only
+constraints with both endpoints in this prefix are imposed.  Write \(Z(N)\)
+for its number of admissible labelings and set \(Z(0)=1\).  For ordinary
+\(A\)-admissible words, put
+\[
+  W_0=1,\qquad
+  W_\ell=\one^{T}A^{\ell-1}\one\quad(\ell\ge1).
+\]
+
+\subsection{Chains and increments}
+
+Every positive integer has a unique representation \(n=q^vi\) with
+\(q\nmid i\).  Consequently, the nonempty truncated chains
+\[
+  \mathcal C_i(N)=\{i,qi,\ldots,q^{\ell_i(N)-1}i\},
+  \qquad
+  \ell_i(N)=1+\lfloor\log_q(N/i)\rfloor ,
+\]
+partition the prefix.  Constraints never cross two such chains, so the
+standard chain product is the exact identity
+\begin{equation}
+  Z(N)=\prod_{\substack{1\le i\le N\\q\nmid i}}W_{\ell_i(N)}
+      =\prod_{\ell\ge1}W_\ell^{C_\ell(N)},
+  \label{eq:chain-product}
+\end{equation}
+where the finite histogram is
+\[
+  C_\ell(N)=
+  \lfloor N/q^{\ell-1}\rfloor
+  -2\lfloor N/q^\ell\rfloor
+  +\lfloor N/q^{\ell+1}\rfloor .
+\]
+
+Let \(\nu_q(N)=\max\{v\ge0:q^v\mid N\}\).  Adding the site \(N\) extends
+only the chain rooted at \(N/q^{\nu_q(N)}\), from length \(\nu_q(N)\) to
+length \(\nu_q(N)+1\).  Define
+\[
+  c_v=\log\frac{W_{v+1}}{W_v},\qquad
+  \rho=\rho(A),\qquad d_v=c_v-\log\rho .
+\]
+Then
+\begin{equation}
+  \log Z(N)-\log Z(N-1)=c_{\nu_q(N)}.
+  \label{eq:increment}
+\end{equation}
+The convention \(W_0=1\) covers \(\nu_q(N)=0\), when a new one-site chain
+appears.
+
+Primitivity supplies a Perron spectral gap.  Thus for constants
+\(C_0>0\), \(0<\theta<1\), and an integer \(m\ge0\),
+\[
+  W_\ell=C_0\rho^{\ell-1}
+  (1+O(\ell^m\theta^\ell)).
+\]
+It follows that \(d_v=O(v^m\theta^v)\), and hence both
+\(\sum_v|d_v|\) and \(\sum_{v\ge1}|d_v-d_{v-1}|\) converge.
+The natural mean increment is
+\begin{equation}
+  h=\sum_{v\ge0}\frac{q-1}{q^{v+1}}c_v
+   =\log\rho+\sum_{v\ge0}\frac{q-1}{q^{v+1}}d_v .
+  \label{eq:entropy}
+\end{equation}
+
+\subsection{The exact residue identity}
+
+The number of \(n\le N\) with valuation \(v\) is
+\[
+  A_v(N)=\lfloor N/q^v\rfloor-\lfloor N/q^{v+1}\rfloor .
+\]
+For \(r_v(N)=N\bmod q^v\in\{0,\ldots,q^v-1\}\), this becomes
+\begin{equation}
+  A_v(N)=N\frac{q-1}{q^{v+1}}
+         -\frac{r_v(N)}{q^v}
+         +\frac{r_{v+1}(N)}{q^{v+1}}.
+  \label{eq:valuation-census}
+\end{equation}
+Summing \eqref{eq:increment} by valuations and substituting
+\eqref{eq:valuation-census} gives the following result.
+
+\begin{theorem}[Exact \(q\)-adic finite-size boundary]
+\label{thm:qadic-boundary}
+For every \(N\ge1\),
+\begin{equation}
+  E(N):=\log Z(N)-hN
+  =-\sum_{v\ge1}(d_v-d_{v-1})\frac{N\bmod q^v}{q^v}.
+  \label{eq:exact-remainder}
+\end{equation}
+For \(x\in\mathbb Z_q\), let \(x\bmod q^v\) denote the canonical integer
+representative of its level-\(v\) coordinate.  The series
+\begin{equation}
+  E_{A,q}(x)
+  :=-\sum_{v\ge1}(d_v-d_{v-1})
+       \frac{x\bmod q^v}{q^v}
+  \label{eq:boundary-map}
+\end{equation}
+converges uniformly to a continuous real-valued map on \(\mathbb Z_q\).
+Moreover,
+\begin{align}
+  \Acc_{N\to\infty}E(N)&=E_{A,q}(\mathbb Z_q), \label{eq:acc-log}\\
+  \Acc_{N\to\infty}(Z(N)e^{-hN})
+    &=\exp(E_{A,q}(\mathbb Z_q)). \label{eq:acc-exp}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:increment} yields
+\(\log Z(N)=\sum_{v\ge0}c_vA_v(N)\).  Substitute
+\eqref{eq:valuation-census}, separate \(c_v=\log\rho+d_v\), and use
+\(\sum_vA_v(N)=N\) together with \eqref{eq:entropy}.  An index shift gives
+\eqref{eq:exact-remainder}; it is justified by the absolute summability of
+\((d_v)\).
+
+For \(x\in\mathbb Z_q\), each coordinate \(x\bmod q^v\) is locally constant
+and \(0\le(x\bmod q^v)/q^v<1\).  The summable majorant
+\(\sum_{v\ge1}|d_v-d_{v-1}|\) proves uniform convergence and continuity.
+
+If \(E(N_j)\to y\) with \(N_j\to\infty\), compactness of \(\mathbb Z_q\)
+provides a \(q\)-adically convergent subsequence \(N_{j_k}\to x\).
+Continuity then gives \(y=E_{A,q}(x)\).  Conversely, for fixed
+\(x\in\mathbb Z_q\), the explicit integers
+\[
+  N_j=(x\bmod q^j)+q^j
+\]
+tend to infinity and converge to \(x\) in \(\mathbb Z_q\).  Hence
+\(E(N_j)\to E_{A,q}(x)\), proving the reverse inclusion.  Finally,
+exponentiation is continuous and injective on \(\mathbb R\), which gives
+\eqref{eq:acc-exp}.
+\end{proof}
+
+\begin{remark}[Type of the boundary]
+The fractions \((x\bmod q^v)/q^v\) in \eqref{eq:boundary-map} are evaluated
+in \(\mathbb R\) after selecting compatible finite-quotient coordinates.
+Thus \(\mathbb Z_q\) is a compact inverse-limit domain, not the codomain of
+the series.  No field structure is used, so composite \(q\) is included.
+\end{remark}
+
+\begin{remark}[Full-shift and one-symbol controls]
+For \(A=J_d\), \(W_\ell=d^\ell\), \(c_v=\log d\), and \(d_v=0\).
+Therefore \(Z(N)=d^N\) and \(E_{A,q}\equiv0\).  The case \(A=[1]\) gives
+the same zero boundary with \(d=1\).  These exact controls detect a spurious
+chain multiplicity or an omitted \(W_0\).
+\end{remark}

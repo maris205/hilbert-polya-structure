@@ -55,6 +55,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [41-knauf-rooted-clock-non-descent](papers/41-knauf-rooted-clock-non-descent/README.md) | [PDF](papers/41-knauf-rooted-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/41-knauf-rooted-clock-non-descent/) | 对冻结的 Knauf rooted label，trailing-zero stable quotient 上的 append-one 不下降；该 label 既非 cyclic clock 也不满足 temporal powers，literal Liouville scalar phase 同样不下降。state inventory 仍在 `Re(s)>2` 上拥有 diagonal Fredholm determinant，但不获得 binary primitive-return ownership。canonical replay 为 `24/24` 与 `25/25`，science SHA-256 为 `f9cbcde9a757896b976ad81a66f235d670029f727b6fda9b4e851846bac50bec`；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **ROOTED CLOCK NON-DESCENT / INVENTORY DETERMINANT OWNERSHIP / ROUTE-A REJECTED / SD-C43** |
 | [42-function-field-clock-non-descent](papers/42-function-field-clock-non-descent/PAPER_PLAN.md) | [PDF](papers/42-function-field-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/42-function-field-clock-non-descent/) | 对冻结的 full $q$-shift（$q\in\{2,3,5\}$），exact degree clock 在 length two 强制 composite $q^2$；同 marker 的 factor identification 又在 length one 强制 $p=q$ 与 $q{:}1$ multiplicity；marked determinant 的首个 $z$ 系数 $q^{1-s}$ 也不等于 prime-zeta $P(s)$。function-field prime-polynomial ledger 与 source determinant 保留。canonical replay 为 `11/11` 与 `11/11`，science SHA-256 为 `078d98da2f3c89c0f5f4e7ef6be84066ee60a1c1d82c86788de675ad349b7848`；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`。 | **STOP_Q_POWER_RATIONAL_PRIME_SUPPORT / STOP_MARKER_MULTIPLICITY_CONJUNCTION / STOP_FIRST_MARKED_COEFFICIENT_MISMATCH / ROUTE_A_REJECTED / SD-C44** |
 | [43-squarefree-factor-periodic-rigidity](papers/43-squarefree-factor-periodic-rigidity/PAPER_PLAN.md) | [PDF](papers/43-squarefree-factor-periodic-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/43-squarefree-factor-periodic-rigidity/) | 对 two-sided all-rational-prime-square admissible shift，任意到 compact metrizable $\mathbb Z$-system 的 continuous surjective equivariant factor 都恰有一个周期点，即 all-zero fixed point 的像；所以全部 fixed-point counts 均为 $1$，Artin--Mazur zeta 为 $1/(1-z)$、inverse determinant 为 $1-z$，而 singleton primitive support 不能重标为 rational primes。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false；`STOP_DUPLICATE=LIVE_CONDITIONAL` 只是外部 literature/claim boundary，不是第五个严格终止码。 | **STOP_TRIVIAL_ONE_MINUS_Z_DIVISOR / STOP_PROXIMAL_PERIODIC_RIGIDITY / PROCEED_ONLY_AS_INTERNAL_EXACT_CLOSURE / STOP_SINGLETON_PRIMITIVE_SUPPORT / ROUTE_A_REJECTED / SD-C45** |
+| [44-q-adic-finite-size-boundary-spectra](papers/44-q-adic-finite-size-boundary-spectra/PAPER_PLAN.md) | [PDF](papers/44-q-adic-finite-size-boundary-spectra/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/44-q-adic-finite-size-boundary-spectra/) | 对任意 primitive finite zero--one adjacency matrix $A$ 与整数 radix $q\ge2$（含 composite $q$），order-one prefix remainder $E(N)=\log Z(N)-hN$ 精确延拓为 $\mathbb Z_q\to\mathbb R$ 的连续函数，其像恰为完整 accumulation set；仅在 binary golden control，该像是 strongly separated Cantor set，Hausdorff/box dimension 均为 $\log2/(2\log\varphi)$，ordinary cutoff generating function 的 unit circle 是 natural boundary。Ban--Hu--Lai author manuscript arXiv:2210.09115v1 的一维 displayed linear subleading formula 由 full-shift control 纠正，全部有效 prior leading/boundary results 记 zero candidate credit，且未 line-check version of record 或 erratum。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false。 | **EXACT Q-ADIC ACCUMULATION IMAGE / GOLDEN CANTOR DIMENSION / GOLDEN RADIAL NATURAL BOUNDARY / ROUTE_A_REJECTED / SD-C46** |
 
 ### 论文 1 的候选分离结论
 
@@ -1492,13 +1493,64 @@ audit 为 `16/16`、SHA-256
 `c4e31e1c48b74bf890e011bae5538bfb98b88dd2f6eb2d36b3021a73a7033021`。Run A/B/C
 及 relocated cold Run C 字节一致，完整 parent rerun 的 changed paths 为空。
 
+### 论文 44：q-adic finite-size boundary spectra
+
+Paper 44 固定 primitive finite zero--one adjacency matrix $A$ 与整数 radix
+$q\ge2$，包括 composite $q$。令 $Z(N)$ 为 multiplicative SFT 的 prefix count、
+$h$ 为 leading entropy、$E(N)=\log Z(N)-hN$；加入一个 cutoff site 只改变一条
+$q$-adic chain，其 exact increment 只读相应 valuation。由此得到连续实值映射
+$E_{A,q}:\mathbb Z_q\to\mathbb R$，其中
+$\mathbb Z_q=\varprojlim_v\mathbb Z/q^v\mathbb Z$，且其像恰为 $E(N)$ 在
+$N\to\infty$ 时的完整 accumulation set。仅对 binary golden adjacency，boundary
+image 是 strongly separated Cantor set，其 Hausdorff 与 box dimensions 都等于
+$\log2/(2\log\varphi)$；同一 coefficient tail 使 ordinary cutoff generating
+function $G(z)=\sum_{N\ge0}E(N)z^N$ 在 primitive dyadic roots 具有稠密非零 radial
+singularities，因此 unit circle 是 natural boundary。
+
+source correction 只针对 Ban--Hu--Lai author manuscript
+arXiv:2210.09115v1（submitted 2022-10-17）：其 $d=1$、$N=p^{kn}$ displayed
+linear subleading specialization 被 full-shift $A=J_d$ control 否定，并由 bounded
+exact remainder 调和。这个处理是 same-object correction/reconciliation，不是
+priority claim，也不是 exact duplicate；未 line-check version of record 或任何
+erratum。multiplicative-SFT 对象、$q$-adic chain partition、chain product、leading
+entropy/dimensions、boundary-complexity terminology 以及 Ban--Hu--Lai 的全部有效
+leading/boundary results 均获 zero candidate novelty credit。外部
+`STOP_DUPLICATE=LIVE_CONDITIONAL` 继续有效，但不是 strict Route terminal。
+
+一般定理要求 primitive $A$；reducible、irreducible-periodic、countable-state 与
+higher-step extensions 均未认领。Cantor geometry 和 natural boundary 只属于
+$q=2$ golden control，不推出 all-$(q,A)$ Cantor theorem；dimension 是 real boundary
+image $E_{A,2}(\mathbb Z_2)$ 的维数，不是原 multiplicative shift 的维数，也不认领
+ordinary continuous-scale Minkowski content。$G$ 不是 Artin--Mazur zeta、transfer
+trace 或 determinant；没有 meromorphic-continuation、isolated-pole、periodic-orbit
+ledger、completed-divisor 或 fixed self-adjoint operator claim。finite exact replay
+也不替代 uniform convergence、完整 accumulation image、all-level separation 或
+natural-boundary proof。
+
+严格 Route tuple 为
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`，overall 为
+`ROUTE_A_REJECTED`，Route B 为 false；唯一正坐标 A3 只记录 golden natural
+boundary。authority exact replay 为 580 cases（548 theorem-domain 与 32 scope
+rejections），33 对 independently certified golden intervals 全部 overlap，exact
+algebraic control 为 `99044>0`；19 个 mutation families、20 个 concrete instances、
+52 次 designated consumer invocations 与 8 个 frozen external-auditor mutations 均
+无 survivor，primary/independent Route checks 均为 `6/6`。science SHA-256 为
+`c988d083cbdd05a84f698497bfb6b8c13f9540fe3801497da9c7ce05d09f8e10`；result
+ledger 为 22 entries、SHA-256
+`2397a01fb66e42980b9a71a6861350afe52ceb258d3ae119dcbeef58b4d3086e`；final
+integrity 为 `15/15`、SHA-256
+`66ae3af081047fa9f896346a1d0c4698b933f85de0812188b3df79db78817b86`。该 State-A
+记录的 authority writes 与 Git operations 均为零，selection 与 rendering 都是
+retrospective，不获得 prospective、blind、novelty、priority、Route-B 或
+authorization credit。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十三篇论文](papers/)
+- [四十四篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

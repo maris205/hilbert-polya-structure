@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  site/.style={circle,draw=chainblue,thick,minimum size=7mm,inner sep=1pt},
+  newsite/.style={circle,draw=goldenorange,very thick,fill=goldenorange!12,minimum size=8mm,inner sep=1pt},
+  box/.style={rounded corners,draw,thick,align=center,inner sep=5pt}
+]
+  \node[site] (i) at (0,2.0) {\(i\)};
+  \node[site] (qi) at (1.5,2.0) {\(qi\)};
+  \node (dots) at (2.9,2.0) {\(\cdots\)};
+  \node[site] (prev) at (4.35,2.0) {\(q^{v-1}i\)};
+  \node[newsite] (new) at (6.2,2.0) {\(q^vi=N\)};
+  \draw[chainblue,thick,->] (i)--(qi);
+  \draw[chainblue,thick,->] (qi)--(dots);
+  \draw[chainblue,thick,->] (dots)--(prev);
+  \draw[goldenorange,very thick,->] (prev)--(new);
+  \node[align=center,font=\scriptsize] at (2.35,2.72)
+    {one \(q\)-adic chain};
+  \node[align=center,font=\scriptsize,text=goldenorange!80!black] at (6.2,2.72)
+    {the only updated endpoint};
+
+  \node[box,draw=chainblue] (increment) at (3.0,0.15)
+    {\(\displaystyle \log Z(N)-\log Z(N-1)=c_{\nu_q(N)}\)};
+  \draw[->,thick] (new.south) to[out=-90,in=15] (increment.east);
+
+  \node[box,draw=boundaryteal,text width=5.5cm] (inverse) at (10.8,0.15)
+    {\(\displaystyle (N\bmod q^v)_{v\ge1}\longrightarrow x\in\mathbb Z_q\)\\[1mm]
+     \(\displaystyle E_{A,q}(x)=
+       -\sum_{v\ge1}(d_v-d_{v-1})\frac{x\bmod q^v}{q^v}\)};
+  \node[box,draw=proofgreen,text width=5.5cm] (image) at (10.8,-1.9)
+    {\(\displaystyle \Acc_{N\to\infty}\{\log Z(N)-hN\}
+       =E_{A,q}(\mathbb Z_q)\)};
+  \draw[->,very thick,boundaryteal] (increment.east) --
+    node[above,font=\scriptsize,fill=white,inner sep=1pt] {valuation sum}
+    (inverse.west);
+  \draw[->,very thick,proofgreen] (inverse.south) -- (image.north);
+\end{tikzpicture}

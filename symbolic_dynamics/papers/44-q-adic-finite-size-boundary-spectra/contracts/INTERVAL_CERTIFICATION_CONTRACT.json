@@ -1,0 +1,70 @@
+{
+  "evaluator_A": {
+    "analytic_tail_bound": "tail_A(k,V) = 7*2^k/(6*5^(V+1))",
+    "delta_identity": "Delta_v = log((W_(v+1)*W_(v-1))/W_v^2)",
+    "internal_log_interval": {
+      "expansion": "log(x)=2*sum_(n>=0) y^(2n+1)/(2n+1), y=(x-1)/(x+1)",
+      "remainder_bound": "2*abs(y)^(2n+3)/((2n+3)*(1-y^2)) after term n",
+      "stopping_rule": "first n with remainder_bound <= 2^(-(bits+32))"
+    },
+    "serialized_outward_rounding": {
+      "direction": "lower_floor_upper_ceil_tail_ceil",
+      "dyadic_denominator": "2^(bits+16)"
+    },
+    "truncation_index": "V = floor(bits/2)+18"
+  },
+  "evaluator_B": {
+    "analytic_tail_bound": "tail_B(k,M) = 2*t_upper^((M+1)*(k+2))/((M+1)*(1-t_upper^(k+2)))",
+    "binet_series": "gamma_k=sum_(m>=1) ((1-r^m)^2/(m*(2-r^m)))*r^(m*(k+2))",
+    "internal_outward_rounding": {
+      "applies_after": [
+        "addition",
+        "division",
+        "multiplication",
+        "power",
+        "subtraction"
+      ],
+      "direction": "lower_floor_upper_ceil",
+      "dyadic_denominator": "2^(bits+48)"
+    },
+    "serialized_outward_rounding": {
+      "direction": "lower_floor_upper_ceil_tail_ceil",
+      "dyadic_denominator": "2^(bits+16)"
+    },
+    "sqrt5_bracket": "floor(sqrt(5)*10^digits)/10^digits <= sqrt(5) < (floor+1)/10^digits, digits=floor(0.30103*bits)+14",
+    "truncation_index": "M = floor(bits/2)+20"
+  },
+  "evidence_boundary": {
+    "finite_interval_overlap_proves_infinite_theorem": false,
+    "infinite_theorem_owner": "P",
+    "output_class": "FINITE_EXACT_OR_CERTIFIED_DIAGNOSTIC"
+  },
+  "negative_controls": [
+    {
+      "id": "MUT-TAIL/finite_samples_only",
+      "rejects": "missing analytic remainder bound in either route"
+    },
+    {
+      "id": "MUT-RSIGN/positive_t",
+      "rejects": "wrong Binet contraction sign"
+    },
+    {
+      "id": "MUT-LOGSIGN/positive_coefficients",
+      "rejects": "wrong logarithm-series sign"
+    },
+    {
+      "id": "gamma_interval_disjoint",
+      "rejects": "nonoverlap in the strict comparator"
+    },
+    {
+      "id": "static_byte_flip",
+      "rejects": "any unsealed change to endpoint direction, guard bits, truncation, or tail formula"
+    }
+  ],
+  "precision_bits": [
+    128,
+    256,
+    512
+  ],
+  "schema": "paper44-interval-certification-contract-v1"
+}

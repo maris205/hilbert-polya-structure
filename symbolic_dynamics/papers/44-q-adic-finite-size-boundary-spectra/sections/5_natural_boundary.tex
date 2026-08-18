@@ -1,0 +1,104 @@
+\section{Dense radial singularities}
+\label{sec:natural}
+
+Keep the binary golden control and set \(E(0)=0\).  The variable in
+\[
+  G(z)=\sum_{N\ge0}E(N)z^N
+\]
+marks the prefix cutoff \(N\).  Because \cref{thm:qadic-boundary} makes
+\(E(N)\) bounded, \(G\) is analytic on the open unit disk.
+
+For an integer \(Q\ge2\), periodicity gives the rational residue series
+\begin{equation}
+  R_Q(z):=\sum_{N\ge0}(N\bmod Q)z^N
+  =\frac{P_Q(z)}{1-z^Q},\qquad
+  P_Q(z)=\sum_{a=0}^{Q-1}az^a.
+  \label{eq:residue-generating}
+\end{equation}
+Writing \(\Delta_v=d_v-d_{v-1}\), absolute convergence of
+\(\sum_v|\Delta_v|\) permits the exact rearrangement
+\begin{equation}
+  G(z)=-\sum_{v\ge1}\frac{\Delta_v}{2^v}R_{2^v}(z),
+  \qquad |z|<1.
+  \label{eq:G-residue}
+\end{equation}
+
+\begin{theorem}[Radial coefficients and natural boundary]
+\label{thm:natural}
+Let \(\xi\) be a primitive \(2^v\)-th root of unity, \(v\ge1\).  Then
+\begin{equation}
+  \lim_{s\uparrow1}(1-s)G(s\xi)
+  =-\frac{\gamma_{v-1}}{2^{v-1}(1-\xi)}\ne0.
+  \label{eq:radial-coefficient}
+\end{equation}
+The unit circle is a natural boundary for \(G\).
+\end{theorem}
+
+\begin{proof}
+If \(w<v\), then \(1-\xi^{2^w}\ne0\), so the radial leading coefficient
+of \(R_{2^w}\) vanishes.  If \(w\ge v\), set \(Q=2^w\).  Since
+\(\xi^Q=1\) and \(\xi\ne1\), differentiating the finite geometric sum gives
+\[
+  P_Q(\xi)=-\frac{Q}{1-\xi}.
+\]
+Together with \(1-s^Q\sim Q(1-s)\), this implies
+\begin{equation}
+  \lim_{s\uparrow1}(1-s)R_Q(s\xi)=-\frac1{1-\xi}.
+  \label{eq:residue-radial}
+\end{equation}
+The limit may pass through \eqref{eq:G-residue}.  Indeed,
+\[
+  \frac{1-s}{Q}|R_Q(s\xi)|
+  \le\frac{1-s}{Q}\sum_{N\ge0}Qs^N=1,
+\]
+so the level-\(w\) contribution is dominated by \(|\Delta_w|\).  Dominated
+convergence now yields
+\[
+  \lim_{s\uparrow1}(1-s)G(s\xi)
+  =\frac1{1-\xi}\sum_{w\ge v}\frac{\Delta_w}{2^w}.
+\]
+By \eqref{eq:gamma-residue},
+\(\sum_{w\ge v}\Delta_w/2^w=-\gamma_{v-1}/2^{v-1}\), which proves
+\eqref{eq:radial-coefficient}; nonvanishing follows from
+\cref{thm:golden}.
+
+Primitive dyadic roots are dense on the unit circle.  If \(G\) admitted
+analytic continuation across any boundary point, the continuation domain
+would contain an open boundary arc and hence a primitive dyadic root
+\(\xi\).  More explicitly, let \(H\) be holomorphic on a neighborhood
+\(U\ni\xi\) and agree with \(G\) on \(U\cap\mathbb D\), as forced by the
+identity theorem.  Holomorphy makes \(H\) bounded on some closed disk about
+\(\xi\) contained in \(U\).  Equation \eqref{eq:radial-coefficient} instead
+makes \(G(s\xi)=H(s\xi)\) unbounded like a nonzero multiple of
+\((1-s)^{-1}\) as \(s\uparrow1\), a contradiction.
+\end{proof}
+
+\paragraph{Normalization control.}
+The first nonreal control prevents a silent phase error.  For \(Q=4\) and
+\(\xi=i\),
+\[
+  P_4(i)=-2-2i=-\frac4{1-i},\qquad
+  \lim_{s\uparrow1}(1-s)R_4(si)
+  =-\frac1{1-i}=\frac{-1-i}{2}.
+\]
+This differs from \(i/(1-i)=(-1+i)/2\).  The exact coefficient in
+\eqref{eq:radial-coefficient}, rather than a merely proportional
+expression, is therefore essential.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/fig3_radial_firewall}}
+  \caption{The analytic implication and its type firewall.  Residue
+  generating functions yield nonzero radial leading coefficients at a dense
+  set of dyadic roots, which obstruct continuation across every boundary
+  arc.  The marker is a prefix cutoff: no orbit zeta, trace, determinant, or
+  isolated-pole interpretation is used.}
+  \label{fig:radial-firewall}
+\end{figure}
+
+\begin{remark}[Radial is not meromorphic]
+Equation \eqref{eq:radial-coefficient} is an Abelian radial statement.
+Because the singular boundary points are dense, they are not isolated poles
+of a meromorphic continuation.  The conclusion is precisely the natural
+boundary and no stronger meromorphic assertion.
+\end{remark}

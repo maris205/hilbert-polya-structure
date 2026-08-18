@@ -1,0 +1,341 @@
+{
+  "consumer_contract": {
+    "A": "code/evaluator_a/evaluate.py",
+    "B": "code/evaluator_b/evaluate.py",
+    "I": "code/auditors/independence_auditor.py",
+    "L": "code/auditors/source_auditor.py",
+    "P": "code/auditors/proof_auditor.py",
+    "T": "code/auditors/type_auditor.py",
+    "X": "code/comparator/exact_compare.py"
+  },
+  "expected_family_count": 19,
+  "expected_instance_count": 20,
+  "instances": [
+    {
+      "consumers": [
+        "T",
+        "A",
+        "B"
+      ],
+      "domain": "source_contract",
+      "expected_code": "INVALID_RADIX",
+      "expected_exit": 2,
+      "family_id": "MUT-Q1",
+      "instance_id": "MUT-Q1/q_equals_one",
+      "payload": {
+        "q": 1
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "A",
+        "B"
+      ],
+      "domain": "source_contract",
+      "expected_code": "NONPRIMITIVE_ZERO_ADJACENCY",
+      "expected_exit": 2,
+      "family_id": "MUT-A0",
+      "instance_id": "MUT-A0/zero_2x2",
+      "payload": {
+        "dimension": 2,
+        "matrix_row_major": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "A",
+        "B"
+      ],
+      "domain": "source_contract",
+      "expected_code": "STOP_SCOPED",
+      "expected_exit": 2,
+      "family_id": "MUT-APR",
+      "instance_id": "MUT-APR/reducible_identity_2x2",
+      "payload": {
+        "dimension": 2,
+        "matrix_row_major": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "theorem_label": "primitive"
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "A",
+        "B"
+      ],
+      "domain": "source_contract",
+      "expected_code": "STOP_SCOPED",
+      "expected_exit": 2,
+      "family_id": "MUT-APR",
+      "instance_id": "MUT-APR/period_two_2x2",
+      "payload": {
+        "dimension": 2,
+        "matrix_row_major": [
+          0,
+          1,
+          1,
+          0
+        ],
+        "theorem_label": "primitive"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "source_edge",
+      "expected_code": "SOURCE_EDGE_CHANGED",
+      "expected_exit": 2,
+      "family_id": "MUT-EDGE",
+      "instance_id": "MUT-EDGE/additive_n_plus_q",
+      "payload": {
+        "edge_rule": "n_to_n_plus_q"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "prefix_cutoff",
+      "expected_code": "PREFIX_CONVENTION_CHANGED",
+      "expected_exit": 2,
+      "family_id": "MUT-PREFIX",
+      "instance_id": "MUT-PREFIX/zero_based_half_open",
+      "payload": {
+        "formula_prefix": "one_through_N",
+        "prefix": "zero_through_N_minus_one"
+      }
+    },
+    {
+      "consumers": [
+        "B",
+        "P"
+      ],
+      "domain": "perron_normalization",
+      "expected_code": "PERRON_SUBTRACTION_MISSING",
+      "expected_exit": 2,
+      "family_id": "MUT-NOSUB",
+      "instance_id": "MUT-NOSUB/d_equals_c",
+      "payload": {
+        "d_v_definition": "c_v"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "residue_formula",
+      "expected_code": "RESIDUE_FORMULA_MISMATCH",
+      "expected_exit": 2,
+      "family_id": "MUT-MODFLOOR",
+      "instance_id": "MUT-MODFLOOR/floor_quotient",
+      "payload": {
+        "residue_operator": "floor_N_over_q_power"
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "A",
+        "B"
+      ],
+      "domain": "residue_type",
+      "expected_code": "RESIDUE_TYPE_ERROR",
+      "expected_exit": 2,
+      "family_id": "MUT-MODFRAC",
+      "instance_id": "MUT-MODFRAC/unnormalized_real_fractional_part",
+      "payload": {
+        "residue_type": "real_fractional_part_without_q_power_normalization"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "P"
+      ],
+      "domain": "accumulation_representative",
+      "expected_code": "REPRESENTATIVE_NOT_DIVERGENT",
+      "expected_exit": 2,
+      "family_id": "MUT-REP",
+      "instance_id": "MUT-REP/no_q_power",
+      "payload": {
+        "representative": "x_mod_q_power"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "golden_binet",
+      "expected_code": "BINET_SIGN_MISMATCH",
+      "expected_exit": 2,
+      "family_id": "MUT-RSIGN",
+      "instance_id": "MUT-RSIGN/positive_t",
+      "payload": {
+        "r_sign": "positive"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "log_series",
+      "expected_code": "LOG_SERIES_SIGN_MISMATCH",
+      "expected_exit": 2,
+      "family_id": "MUT-LOGSIGN",
+      "instance_id": "MUT-LOGSIGN/positive_coefficients",
+      "payload": {
+        "log_one_minus_u_series_sign": "positive"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "P"
+      ],
+      "domain": "infinite_tail",
+      "expected_code": "INFINITE_TAIL_UNCERTIFIED",
+      "expected_exit": 2,
+      "family_id": "MUT-TAIL",
+      "instance_id": "MUT-TAIL/finite_samples_only",
+      "payload": {
+        "analytic_tail_certificate": null,
+        "finite_samples_present": true
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "P"
+      ],
+      "domain": "dimension_owner",
+      "expected_code": "BOUNDARY_DIMENSION_OWNER_ERROR",
+      "expected_exit": 2,
+      "family_id": "MUT-DIM",
+      "instance_id": "MUT-DIM/original_shift_label",
+      "payload": {
+        "dimension_object": "original_multiplicative_shift"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "radial_tail",
+      "expected_code": "RADIAL_LEVEL_TAIL_OMITTED",
+      "expected_exit": 2,
+      "family_id": "MUT-POLELEVEL",
+      "instance_id": "MUT-POLELEVEL/only_w_equals_v",
+      "payload": {
+        "included_levels": "w_equals_v_only"
+      }
+    },
+    {
+      "consumers": [
+        "A",
+        "B",
+        "X"
+      ],
+      "domain": "radial_normalization",
+      "expected_code": "RADIAL_COEFFICIENT_NORMALIZATION_ERROR",
+      "expected_exit": 2,
+      "family_id": "MUT-RADIALXI",
+      "instance_id": "MUT-RADIALXI/xi_over_one_minus_xi",
+      "payload": {
+        "bracket_coefficient": "xi_over_one_minus_xi",
+        "root": "i"
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "P"
+      ],
+      "domain": "analytic_type",
+      "expected_code": "ANALYTIC_TYPE_ERROR",
+      "expected_exit": 2,
+      "family_id": "MUT-MERO",
+      "instance_id": "MUT-MERO/isolated_meromorphic_poles",
+      "payload": {
+        "singularity_type": "isolated_meromorphic_poles_of_full_G"
+      }
+    },
+    {
+      "consumers": [
+        "T",
+        "P"
+      ],
+      "domain": "claim_scope",
+      "expected_code": "NOT_CURRENTLY_JUSTIFIED",
+      "expected_exit": 2,
+      "family_id": "MUT-CONTENT",
+      "instance_id": "MUT-CONTENT/ordinary_minkowski_nonexistence",
+      "payload": {
+        "extra_claim": "ordinary_Minkowski_content_nonexistence"
+      }
+    },
+    {
+      "consumers": [
+        "L"
+      ],
+      "domain": "literature_ownership",
+      "expected_code": "PRIOR_OWNERSHIP_TRANSFER",
+      "expected_exit": 2,
+      "family_id": "MUT-OWNER",
+      "instance_id": "MUT-OWNER/leading_results_new",
+      "payload": {
+        "novel_components": [
+          "chain_product",
+          "entropy",
+          "leading_dimensions"
+        ]
+      }
+    },
+    {
+      "consumers": [
+        "I"
+      ],
+      "domain": "evaluator_independence",
+      "expected_code": "EVALUATOR_INDEPENDENCE_FAILURE",
+      "expected_exit": 2,
+      "family_id": "MUT-EVAL",
+      "instance_id": "MUT-EVAL/B_imports_A_fixture",
+      "payload": {
+        "evaluator_B_import": "evaluator_a.fixture_expansion"
+      }
+    }
+  ],
+  "outcome_union": [
+    "ACCEPT",
+    "REJECT",
+    "HARNESS_ERROR"
+  ],
+  "schema": "paper44-mutation-registry-v1",
+  "survivor_rule": "A mutation survives if any designated consumer is missing, any unlisted consumer is present, any consumer returns zero, any rejection code differs, any envelope is noncanonical, or any consumer raises an uncaught exception."
+}

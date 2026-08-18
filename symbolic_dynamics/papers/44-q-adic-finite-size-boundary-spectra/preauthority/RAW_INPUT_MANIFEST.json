@@ -1,0 +1,149 @@
+{
+  "assignment_cap": 16777216,
+  "canonical_fixture_expansion": {
+    "canonical_tuple": ["q", "dimension", "matrix_row_major", "N"],
+    "cartesian_rule": "For every source_configuration, expand its generator into concrete matrices, pair every emitted matrix with every q in that configuration's q_values, and pair each such pair with every integer N in the resolved inclusive N range.",
+    "deduplication_rule": "Deduplicate by exact equality of the canonical tuple. Retain sorted unique contributing configuration ids and scopes only as noncanonical provenance; they do not create additional tests or alter the tuple.",
+    "finite_N_rule": "For each concrete matrix and q, include every integer N from 1 through resolved_max_N inclusive.",
+    "matrix_generation_rules": {
+      "all_primitive_zero_one_matrices_in_lexicographic_row_major_order": "Enumerate every dimension-by-dimension zero-one row-major vector in lexicographic order and retain exactly those matrices A for which A^k is strictly positive entrywise for some integer k at least 1.",
+      "explicit_matrix": "Emit exactly the supplied matrix_row_major vector after verifying that its length is dimension squared."
+    },
+    "ordering_rule": "Sort the deduplicated canonical tuples lexicographically by q ascending, dimension ascending, matrix_row_major entry sequence, and N ascending.",
+    "resolved_max_N_rule": "Use explicit max_N when present; otherwise use the largest integer N at least 1 for which dimension^N is at most assignment_cap."
+  },
+  "contains_expected_outputs": false,
+  "digit_stream_controls": [
+    "all_zero_digits",
+    "all_maximal_digits",
+    "alternating_zero_maximal_digits",
+    "polynomial_digits_a_j_equal_j_squared_plus_j_plus_one_mod_q"
+  ],
+  "digit_stream_expansion": {
+    "canonical_tuple": ["digit_stream_control", "q", "depth"],
+    "cartesian_rule": "Pair every digit_stream_control with every listed q and every listed depth.",
+    "deduplication_rule": "Deduplicate by exact equality of the canonical digit-stream tuple.",
+    "depth_values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "digit_index_origin": 0,
+    "digit_prefix_rule": "Depth j uses exactly a_0 through a_(j-1) and the canonical residue sum from k=0 through j-1 of a_k times q^k.",
+    "formula_definitions": {
+      "all_maximal_digits": "a_j = q - 1 for every integer j at least 0",
+      "all_zero_digits": "a_j = 0 for every integer j at least 0",
+      "alternating_zero_maximal_digits": "a_j = 0 for even j and a_j = q - 1 for odd j",
+      "polynomial_digits_a_j_equal_j_squared_plus_j_plus_one_mod_q": "a_j is the canonical representative in {0,...,q-1} of j^2 + j + 1 modulo q"
+    },
+    "ordering_rule": "Sort the deduplicated tuples lexicographically by digit_stream_control, q ascending, and depth ascending.",
+    "q_values": [2, 3, 4, 6]
+  },
+  "fixture_expansion_shared": false,
+  "matrix_encoding": "dimension plus row-major zero-one entries",
+  "precision_bits": [
+    128,
+    256,
+    512
+  ],
+  "precision_expansion_rule": "Run every interval-valued calculation at each precision_bits value in ascending order; exact-integer records have no precision coordinate.",
+  "purpose": "Neutral raw source configurations shared by both evaluators; no expected value, derived fixture, or result is present.",
+  "schema_version": "paper44.raw-input.v2",
+  "source_configurations": [
+    {
+      "dimension": 1,
+      "generator": "explicit_matrix",
+      "id": "one_symbol",
+      "matrix_row_major": [1],
+      "max_N": 20,
+      "q_values": [2, 3, 4, 6],
+      "scope": "positive_control"
+    },
+    {
+      "dimension": 2,
+      "generator": "explicit_matrix",
+      "id": "full_binary",
+      "matrix_row_major": [1, 1, 1, 1],
+      "max_N": 20,
+      "q_values": [2, 3, 4, 6],
+      "scope": "positive_control"
+    },
+    {
+      "dimension": 3,
+      "generator": "explicit_matrix",
+      "id": "full_ternary",
+      "matrix_row_major": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "max_N": 15,
+      "q_values": [2, 3, 4, 6],
+      "scope": "positive_control"
+    },
+    {
+      "dimension": 2,
+      "generator": "explicit_matrix",
+      "id": "golden_binary",
+      "matrix_row_major": [1, 1, 1, 0],
+      "max_N": 20,
+      "q_values": [2, 3, 4, 6],
+      "scope": "theorem_domain"
+    },
+    {
+      "dimension": 2,
+      "generator": "all_primitive_zero_one_matrices_in_lexicographic_row_major_order",
+      "id": "all_primitive_binary",
+      "matrix_row_major": null,
+      "max_N_rule": "largest N with dimension_to_the_N at most assignment_cap",
+      "q_values": [2, 3, 4, 6],
+      "scope": "theorem_domain"
+    },
+    {
+      "dimension": 3,
+      "generator": "explicit_matrix",
+      "id": "primitive_ternary_a",
+      "matrix_row_major": [1, 1, 0, 0, 1, 1, 1, 0, 1],
+      "max_N_rule": "largest N with dimension_to_the_N at most assignment_cap",
+      "q_values": [2, 3, 4, 6],
+      "scope": "theorem_domain"
+    },
+    {
+      "dimension": 3,
+      "generator": "explicit_matrix",
+      "id": "primitive_ternary_b",
+      "matrix_row_major": [1, 1, 0, 1, 0, 1, 0, 1, 1],
+      "max_N_rule": "largest N with dimension_to_the_N at most assignment_cap",
+      "q_values": [2, 3, 4, 6],
+      "scope": "theorem_domain"
+    },
+    {
+      "dimension": 2,
+      "generator": "explicit_matrix",
+      "id": "zero_binary",
+      "matrix_row_major": [0, 0, 0, 0],
+      "max_N": 8,
+      "q_values": [2],
+      "scope": "scope_rejection"
+    },
+    {
+      "dimension": 2,
+      "generator": "explicit_matrix",
+      "id": "reducible_identity_binary",
+      "matrix_row_major": [1, 0, 0, 1],
+      "max_N": 8,
+      "q_values": [2],
+      "scope": "scope_rejection"
+    },
+    {
+      "dimension": 2,
+      "generator": "explicit_matrix",
+      "id": "period_two_binary",
+      "matrix_row_major": [0, 1, 1, 0],
+      "max_N": 8,
+      "q_values": [2],
+      "scope": "scope_rejection"
+    },
+    {
+      "dimension": 2,
+      "generator": "explicit_matrix",
+      "id": "invalid_q_one_golden",
+      "matrix_row_major": [1, 1, 1, 0],
+      "max_N": 8,
+      "q_values": [1],
+      "scope": "scope_rejection"
+    }
+  ]
+}

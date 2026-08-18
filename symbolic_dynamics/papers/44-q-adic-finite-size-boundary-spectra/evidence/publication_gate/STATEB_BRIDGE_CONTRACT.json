@@ -1,0 +1,73 @@
+{
+  "candidate_id": "SD-C46",
+  "external_anchors": {
+    "publication_seal_sha256": {
+      "format": "lowercase_hex64",
+      "required_before_seal_parse": true,
+      "value_embedded": false
+    },
+    "stage1_commit": {
+      "format": "lowercase_nonzero_hex40",
+      "required_for_state_B": true,
+      "route_fields": [
+        "code_commit",
+        "source_commit",
+        "source_lock.code_commit"
+      ],
+      "value_embedded": false
+    }
+  },
+  "legacy_core": {
+    "preoutput_seal_sha256": "2135bb54e94326b336cb384f25340339df1c057497d7eaeb170632e482122fec",
+    "state_A_final_tree_sha256": "be4f7ee57be4fc901b7ecc40f258937ebc20c504d07f0b0964348ffe20b57ed4",
+    "static_manifest_entry_count": 58,
+    "static_manifest_sha256": "5f93fd2595a173e30e8d745c18fc74550fb6415df2f63429c4433576f05a30b0"
+  },
+  "output_states": {
+    "A": {
+      "legacy_semantics_preserved": true,
+      "paper_manifest_present": false,
+      "route_commit_values": [
+        "NONE",
+        "PREAUTHORITY_NO_COMMIT",
+        "NONE"
+      ]
+    },
+    "B": {
+      "direct_legacy_integrity_FINAL_required": true,
+      "paper_manifest_domain": "full_published_root_including_exact_writer_overlay_excluding_PREOUTPUT_STATIC_SEAL_and_manifest_self",
+      "paper_manifest_present": true,
+      "seal_embeds_final_tree_sha256": false,
+      "seal_embeds_stage1_commit": false
+    }
+  },
+  "overlay": {
+    "new_manifest_excludes": [
+      "WRITER_MANIFEST.sha256",
+      "evidence/publication_gate/PUBLICATION_OVERLAY_SEAL.json"
+    ],
+    "predecessor_publication_seal_sha256": "9dfcedb2dba3fd0b637c565e974c5831a6f4a2fa6f7e2269583d862811e5eb72",
+    "predecessor_writer_manifest_sha256": "f3b98a455ac6dd2aaeaf32f37a5ef9d69cb7bff45c640a24a80a9ed40f8814b5",
+    "superseding_overlay_allowed": true
+  },
+  "physical_attacks": [
+    "missing_stage1_commit",
+    "wrong_stage1_commit",
+    "uppercase_stage1_commit",
+    "route_commit_full_reclose",
+    "paper_manifest_reclose",
+    "writer_manifest_and_seal_reclose",
+    "auditor_manifest_and_seal_reclose",
+    "state_A_state_B_mixed"
+  ],
+  "schema": "paper44-stateb-bridge-contract-v1",
+  "status": "HOLD_FOR_INDEPENDENT_STATEB_PUBLICATION_AUDIT",
+  "transactions": {
+    "first_state_B_transition": "one_atomic_RENAME_EXCHANGE",
+    "forced_late_failure_exit": 86,
+    "idempotent_second_transition_replacements": 0,
+    "overlay_upgrade": "bounded_predecessor_to_superseding_overlay_with_rollback",
+    "rollback_exit": 87,
+    "stage_all_before_target_write": true
+  }
+}
