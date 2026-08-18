@@ -1,7 +1,11 @@
 # Paper 44 authenticated State-B bridge commands
 
 `SEAL_SHA256` and `STAGE1_H1` are out-of-band values.  The seal must be
-lowercase hex64.  H1 must be the exact nonzero lowercase 40-hex Stage1 commit.
+lowercase hex64.  For this frozen Paper 44 publication, `STAGE1_H1` is the
+historical science H1
+`b0e41ac3d6bd30618421d1b76122c3e9e04d070b`, whose three values are recorded
+in the State-B route under `outputs/evaluations/`.  It is not the later
+Route-v0.2 evaluator-code H1 prime used by the new validators.
 Never execute a controller directly from the mutable overlay before completing
 the bootstrap below.  Before section 2, the operator must also hold exclusive
 ownership or an external exclusive lease on `TARGET` for the entire command;
@@ -21,7 +25,7 @@ SOURCE=/tmp/paper44_stateb_publication_repair
 TARGET=/tmp/disposable-paper44-full-root
 FIXTURE=/tmp/current-stage1-paper44-fixture
 SEAL_SHA256=<externally-approved-lowercase-seal-sha256>
-STAGE1_H1=<externally-observed-lowercase-stage1-commit>
+STAGE1_H1=b0e41ac3d6bd30618421d1b76122c3e9e04d070b
 
 [[ "$SEAL_SHA256" =~ ^[0-9a-f]{64}$ ]]
 [[ "$STAGE1_H1" =~ ^[0-9a-f]{40}$ && "$STAGE1_H1" != 0000000000000000000000000000000000000000 ]]
