@@ -1,0 +1,44 @@
+% Hand-authored vector figure; no empirical values are encoded here.
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[
+      >=Stealth,
+      box/.style={draw=paperblue!75!black, rounded corners=2pt,
+        fill=paperblue!5, align=center, inner sep=5pt},
+      use/.style={draw=papergold!75!black, rounded corners=2pt,
+        fill=papergold!8, align=center, inner sep=4pt, font=\footnotesize},
+      every edge/.style={draw=papergray, line width=.55pt}]
+    \node[box, text width=12.7cm] (edge) at (0,0)
+      {$m+n\mid mn$ \quad$\Longleftrightarrow$\quad
+       $\displaystyle \frac1m+\frac1n=\frac1k$,\quad
+       $k=\displaystyle\frac{mn}{m+n}\in\mathbb N$};
+
+    \node[box, text width=5.65cm] (global) at (-3.35,-2.05)
+      {\textbf{Coprime--scale coordinate}\\[-1pt]
+       $m=t a(a+b),\quad n=t b(a+b)$\\
+       $t\geq1,\ (a,b)=1,\quad k=tab$};
+    \node[box, text width=5.65cm] (row) at (3.35,-2.05)
+      {\textbf{Fixed-row divisor coordinate}\\[-1pt]
+       $d\mid m^2,\quad d<m$\\
+       $k=m-d,\quad n=m^2/d-m$};
+
+    \node[use, text width=5.65cm] (globaluse) at (-3.35,-3.75)
+      {global ideal sums; first two traces;\\Mordell--Tornheim gcd extraction};
+    \node[use, text width=5.65cm] (rowuse) at (3.35,-3.75)
+      {row Schur bounds; compact tails;\\the endpoint $\Re s=0$};
+
+    \draw[->] ($(edge.south)+(-3.0cm,0)$) --
+      node[midway,left=1pt,fill=white,inner sep=1pt,font=\scriptsize]
+      {$g=(m,n)$} (global.north);
+    \draw[->] ($(edge.south)+(3.0cm,0)$) --
+      node[midway,right=1pt,fill=white,inner sep=1pt,font=\scriptsize]
+      {$d=m-k$} (row.north);
+    \draw[->] (global) -- (globaluse);
+    \draw[->] (row) -- (rowuse);
+  \end{tikzpicture}
+  \caption{Two exact coordinates for the same ordered edge.  The
+  coprime--scale coordinate exposes global sums, whereas the divisor-row
+  coordinate exposes fixed-row decay.  Neither notion of ``primitive'' is
+  a statement about the least temporal period of a closed walk.}
+  \label{fig:two-coordinates}
+\end{figure}

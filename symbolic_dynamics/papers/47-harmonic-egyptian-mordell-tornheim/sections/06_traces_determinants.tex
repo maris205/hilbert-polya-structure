@@ -1,0 +1,133 @@
+\section{Zeta and Mordell--Tornheim traces}
+\label{sec:traces-determinants}
+
+Define the coprime double series
+\begin{equation}
+ P(s)=\sum_{\substack{a,b\geq1\\(a,b)=1}}
+ a^{-s}b^{-s}(a+b)^{-2s}.
+ \label{eq:primitive-P}
+\end{equation}
+The majorant in \eqref{eq:hs-majorant} shows that it converges absolutely
+for $\sigma>1/2$.  We first compute traces only where operator ideals make
+them legal; analytic continuation plays no role.
+
+\begin{theorem}[The two legal traces]
+\label{thm:two-traces}
+For $\sigma>1$,
+\begin{equation}
+ \Tr(E_s)=2^{-s}\zeta(s).
+ \label{eq:first-trace}
+\end{equation}
+For $\sigma>1/2$,
+\begin{equation}
+ \Tr(E_s^2)=\zeta(2s)P(s)
+ =\frac{\zeta(2s)}{\zeta(4s)}\zMT(s,s;2s).
+ \label{eq:second-trace}
+\end{equation}
+Both statements are identities of absolutely convergent series in the
+displayed domains.
+\end{theorem}
+
+\begin{proof}
+If $\sigma>1$, \cref{prop:trace-wall} makes $E_s$ trace class, so its trace
+is the absolutely convergent standard-basis diagonal sum.  The loops are
+exactly $m=2t$, and therefore
+\[
+ \Tr(E_s)=\sum_{t\geq1}(2t)^{-s}=2^{-s}\zeta(s).
+\]
+
+Now suppose $\sigma>1/2$.  By \cref{prop:hs-wall}, $E_s$ is
+Hilbert--Schmidt, hence $E_s^2$ is trace class.  Moreover,
+\[
+ \sum_{m,n}|e_s(m,n)e_s(n,m)|
+ =\sum_{m,n}|e_s(m,n)|^2<\infty,
+\]
+so the trace may be evaluated term by term:
+\begin{equation}
+ \Tr(E_s^2)
+ =\sum_{\substack{m,n\geq1\\m+n\mid mn}}(mn)^{-s}.
+ \label{eq:ordered-edge-trace}
+\end{equation}
+This is an ordered-edge sum.  Applying
+\cref{prop:coprime-coordinate} and using
+$mn=t^2ab(a+b)^2$ gives
+\[
+ \Tr(E_s^2)
+ =(\sum_{t\geq1}t^{-2s})
+  \sum_{\substack{a,b\geq1\\(a,b)=1}}
+    a^{-s}b^{-s}(a+b)^{-2s}
+ =\zeta(2s)P(s).
+\]
+No factor of two is inserted: $(a,b)$ is already ordered.
+
+Finally, decompose an arbitrary ordered pair $(u,v)$ uniquely as
+$u=ga$, $v=gb$ with $(a,b)=1$.  Absolute convergence permits regrouping,
+and \eqref{eq:mt-definition} becomes
+\begin{align*}
+ \zMT(s,s;2s)
+ &=\sum_{g\geq1}g^{-4s}
+   \sum_{\substack{a,b\geq1\\(a,b)=1}}
+     a^{-s}b^{-s}(a+b)^{-2s}\\
+ &=\zeta(4s)P(s).
+\end{align*}
+Substitution proves the second equality in \eqref{eq:second-trace}.
+\end{proof}
+
+The adjective ``coprime'' in $P(s)$ refers only to $(a,b)=1$.  The
+arbitrary-pair sum $\zMT(s,s;2s)$ and the elementary gcd extraction remain
+classical arithmetic objects; the graph-specific statement is that the
+same operator whose even diagonal gives \eqref{eq:first-trace} has
+\eqref{eq:second-trace} as its two-step trace.
+
+\subsection{Determinant consequences}
+
+The ideal walls determine exactly which determinant is available.  We use
+the standard convention
+\[
+ \det_2(I-zA)=\det((I-zA)e^{zA})
+ \qquad(A\in\Schatten{2}).
+\]
+
+\begin{corollary}[Legal determinants and local logarithms]
+\label{cor:determinants}
+If $\sigma>1/2$, the function
+$D_2(z;s)=\det_2(I-zE_s)$ is entire in $z$.  On the disk
+$|z|\,\|E_s\|<1$, with the logarithm normalized by
+$\log D_2(0;s)=0$,
+\begin{equation}
+ \log D_2(z;s)
+ =-\sum_{r\geq2}\frac{z^r}{r}\Tr(E_s^r),
+ \label{eq:det2-local-log}
+\end{equation}
+and in particular
+\begin{equation}
+ [z^2]\log D_2(z;s)
+ =-\frac12\frac{\zeta(2s)}{\zeta(4s)}
+   \zMT(s,s;2s).
+ \label{eq:det2-quadratic}
+\end{equation}
+If $\sigma>1$, the ordinary determinant
+$D_1(z;s)=\det(I-zE_s)$ is entire in $z$ and
+\begin{align}
+ \log D_1(z;s)&=-\sum_{r\geq1}\frac{z^r}{r}\Tr(E_s^r),
+ \label{eq:det1-local-log}\\
+ D_2(z;s)&=D_1(z;s)\exp\!(z\Tr(E_s))
+ \label{eq:det-overlap}
+\end{align}
+on the same sufficient local disk for the logarithm.
+\end{corollary}
+
+\begin{proof}
+These are the standard Hilbert--Carleman and Fredholm determinant
+identities for Schatten operators \citep{Simon2005}.  In the first domain,
+$E_s^r$ is trace class for every $r\geq2$ because $E_s^2$ is trace class
+and $E_s$ is bounded.  Substituting \eqref{eq:second-trace} in the
+$r=2$ term gives \eqref{eq:det2-quadratic}.  In the trace-class overlap,
+the definition of $\det_2$ gives \eqref{eq:det-overlap}, and
+\eqref{eq:first-trace} supplies the exponent.
+\end{proof}
+
+Only the determinant functions are asserted globally in $z$.  The
+logarithmic series and the chosen logarithm are local.  We do not use the
+right side of \eqref{eq:second-trace} to continue a determinant past an
+ideal wall, and we do not claim a completed divisor or functional equation.

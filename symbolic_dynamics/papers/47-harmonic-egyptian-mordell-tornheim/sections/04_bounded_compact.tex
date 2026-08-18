@@ -1,0 +1,91 @@
+\section{Boundedness and compactness}
+\label{sec:bounded-compact}
+
+The divisor coordinate turns the absolute row sum into an exact finite
+expression.  Indeed, from
+$n=m(m-d)/d$ in \eqref{eq:divisor-map},
+\begin{equation}
+ R_m(\sigma):=\sum_{n\geq1}|e_s(m,n)|
+ =m^{-\sigma}
+  \sum_{\substack{d\mid m^2\\d<m}}
+  (\frac{d}{m-d})^{\sigma/2}.
+ \label{eq:exact-row-sum}
+\end{equation}
+Only $\sigma$ occurs on the right.
+
+\begin{proposition}[Vanishing Schur rows]
+\label{prop:vanishing-rows}
+For every $\sigma>0$,
+\begin{equation}
+ R_m(\sigma)
+ \ll_\sigma \tau(m^2)
+ (m^{-\sigma}+m^{-3\sigma/4})=o(1).
+ \label{eq:row-decay}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Split the divisors in \eqref{eq:exact-row-sum} at $m/2$.  If $d\leq m/2$,
+then $d/(m-d)\leq1$, so the total contribution is at most
+$m^{-\sigma}\tau(m^2)$.
+
+If $d>m/2$, put $e=m-d$.  The relations $d\mid m^2$ and $m=d+e$ imply
+$d\mid e^2$.  Since $d>m/2$, this gives
+$e\geq(m/2)^{1/2}$.  Also $d<m$, and hence each term in this part satisfies
+\[
+ m^{-\sigma}(\frac d e)^{\sigma/2}
+ \leq m^{-\sigma/2}e^{-\sigma/2}
+ \leq 2^{\sigma/4}m^{-3\sigma/4}.
+\]
+There are at most $\tau(m^2)$ terms.  This proves the bound in
+\eqref{eq:row-decay}; the conclusion follows from the standard estimate
+$\tau(n)=n^{o(1)}$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}\textup{(i)}]
+Suppose first that $\sigma>0$.  The finitely many initial values together
+with \cref{prop:vanishing-rows} give
+$\sup_m R_m(\sigma)<\infty$.  Because the absolute coefficient matrix is
+symmetric, the Schur test proves that \eqref{eq:coefficient-array} induces
+a bounded operator.
+
+For compactness, write $P_M=P_{\{1,\ldots,M\}}$ and $Q_M=I-P_M$.
+The same symmetric Schur test applied to the tail block gives
+\begin{equation}
+ \|Q_M E_s Q_M\|
+ \leq \sup_{m>M}R_m(\sigma)\longrightarrow0.
+ \label{eq:tail-schur}
+\end{equation}
+On the other hand,
+$E_s-Q_M E_sQ_M=P_M E_s+Q_M E_sP_M$ is finite rank.  Thus $E_s$ is a norm
+limit of finite-rank operators and is compact.  Since $P_N\to I$ strongly,
+the standard compact-operator approximation then yields the concrete
+compression statement
+\begin{equation}
+ \|E_s-P_NE_sP_N\|\longrightarrow0.
+ \label{eq:compression-convergence}
+\end{equation}
+
+Now let $\sigma<0$.  At every even vertex $m$ there is a loop and its
+diagonal coefficient has modulus $m^{-\sigma}$, which is unbounded along
+the even integers.  No bounded operator can have such diagonal matrix
+coefficients.
+
+It remains to treat $\sigma=0$.  Every nonzero coefficient then has modulus
+one.  By \cref{prop:divisor-row}, the squared $\ell^2$ norm of row $m$ is
+the number of divisors $d\mid m^2$ below $m$.  Divisor pairs about the
+central divisor $m$ give
+\begin{equation}
+ \deg(m)=\frac{\tau(m^2)-1}{2}.
+ \label{eq:degree-formula}
+\end{equation}
+For squarefree $m$, this is $(3^{\omega(m)}-1)/2$, which is unbounded as
+the number of prime factors grows.  The row norms of a bounded operator
+would be uniformly bounded by its operator norm, a contradiction.  This
+proves both necessity and the strict endpoint.
+\end{proof}
+
+The proof is analytic at every stage.  In particular,
+\eqref{eq:compression-convergence} follows from the tail estimate and
+compactness; observing stable singular values in a finite grid would not
+prove it.

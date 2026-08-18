@@ -58,6 +58,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [44-q-adic-finite-size-boundary-spectra](papers/44-q-adic-finite-size-boundary-spectra/PAPER_PLAN.md) | [PDF](papers/44-q-adic-finite-size-boundary-spectra/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/44-q-adic-finite-size-boundary-spectra/) | 对任意 primitive finite zero--one adjacency matrix $A$ 与整数 radix $q\ge2$（含 composite $q$），order-one prefix remainder $E(N)=\log Z(N)-hN$ 精确延拓为 $\mathbb Z_q\to\mathbb R$ 的连续函数，其像恰为完整 accumulation set；仅在 binary golden control，该像是 strongly separated Cantor set，Hausdorff/box dimension 均为 $\log2/(2\log\varphi)$，ordinary cutoff generating function 的 unit circle 是 natural boundary。Ban--Hu--Lai author manuscript arXiv:2210.09115v1 的一维 displayed linear subleading formula 由 full-shift control 纠正，全部有效 prior leading/boundary results 记 zero candidate credit，且未 line-check version of record 或 erratum。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false。 | **EXACT Q-ADIC ACCUMULATION IMAGE / GOLDEN CANTOR DIMENSION / GOLDEN RADIAL NATURAL BOUNDARY / ROUTE_A_REJECTED / SD-C46** |
 | [45-isospectral-arithmetic-fiber-retractions](papers/45-isospectral-arithmetic-fiber-retractions/PAPER_PLAN.md) | [PDF](papers/45-isospectral-arithmetic-fiber-retractions/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/45-isospectral-arithmetic-fiber-retractions/) | 对每个整数 $h\ge2$，把 prime exponent 饱和到 $h-1$ 与 modulo $h$ 的两种 $h$-free arithmetic retraction 加权为紧算子；在共同有界域，它们有相同的简单非零谱、全部共同合法 power traces 与 integer-order regularized determinants，但饱和族恰在 $\Re s>1$ boundedly similar to compact normal，modulo 族则在全部 $\Re s>1/h$ 有界域如此，故 $1/h<\Re s\le1$ 是精确 isospectral-but-not-similar band。饱和 Riesz projections 有 exact primorial optimizer 和三种 maximal-order regimes；两族 singular values 有 explicit Weyl laws 且 $C_{h,1}=D_{h,1}=1$；self-commutator wall 为 $\Re(s)q=1$，区别于 operator Schatten wall $\Re(s)q=2$。 | **GO_EVALUATED / ISOSPECTRAL--NONSIMILAR BAND / EXACT PRIMORIAL--WEYL--COMMUTATOR LAWS / ROUTE_A_REJECTED_NOT_EVALUATED** |
 | [46-dyadic-sum-hankel-cycle-calculus](papers/46-dyadic-sum-hankel-cycle-calculus/PAPER_PLAN.md) | [PDF](papers/46-dyadic-sum-hankel-cycle-calculus/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/46-dyadic-sum-hankel-cycle-calculus/) | 对 looped support $m+n=2^a$ 的 Dirichlet-weighted coefficient array $h_s(m,n)=\mathbf 1_{\{m+n=2^a\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。每条边保持 $v_2$，从而在 bounded half-plane 得到 scaled odd-block direct sum、合法 trace powers 与 determinant products；固定 ordered dyadic labels 的 cyclic system 则有完整 odd/even solver。canonical State-A replay 覆盖 4 个 cutoffs、335,922 个 ordered tuples 与 36 个 exact traces，strict type-and-value mismatch 全为零；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / EXACT 2-ADIC BLOCK PRODUCT / COMPLETE LABELED CYCLE CALCULUS / ROUTE_A_REJECTED / SD-C48** |
+| [47-harmonic-egyptian-mordell-tornheim](papers/47-harmonic-egyptian-mordell-tornheim/PAPER_PLAN.md) | [PDF](papers/47-harmonic-egyptian-mordell-tornheim/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/47-harmonic-egyptian-mordell-tornheim/) | 对 looped harmonic-quotient graph $m+n\mid mn$ 的 Dirichlet-weighted coefficient array $e_s(m,n)=\mathbf 1_{\{m+n\mid mn\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。divisor-row 与 coprime--scale 两套 exact coordinates 控制这些 thresholds；even loops 与 ordered-edge ledger 分别导出 $\operatorname{Tr}(E_s)=2^{-s}\zeta(s)$ 及 $\operatorname{Tr}(E_s^2)=\zeta(2s)\zeta_{\mathrm{MT}}(s,s;2s)/\zeta(4s)$。mixed triangle 与 negative principal minor 排除 scale-fiber 和 positivity 简化；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / ZETA--MORDELL--TORNHEIM TRACE / MIXED-CYCLE SIGN WITNESS / ROUTE_A_REJECTED / SD-C49** |
 
 ### 论文 1 的候选分离结论
 
@@ -1653,13 +1654,77 @@ writer manifest SHA-256 为
 writer seal 状态为 `HOLD_FOR_INDEPENDENT_WRITER_AUDIT`；它是 pre-installation hold，
 不是 independent acceptance、publication verdict 或 authority-write authorization。
 
+### 论文 47：harmonic-quotient graph 的 sharp ideal walls 与 Mordell--Tornheim trace
+
+Paper 47 固定 positive-integer looped graph
+$m+n\mid mn$，并以
+$e_s(m,n)=\mathbf 1_{\{m+n\mid mn\}}(mn)^{-s/2}$ 作为 $\ell^2(\mathbb N)$ 上的
+coefficient array，complex powers 使用 real logarithm。每条 ordered edge 有唯一
+coprime--scale coordinates
+$m=ta(a+b)$、$n=tb(a+b)$，其中 $t\ge1$、$(a,b)=1$；固定 row $m$ 的 neighbors
+又由 $d\mid m^2$、$d<m$ 经 $n=m^2/d-m$ 独立参数化。divisor rows 给出 sharp
+bounded/compact wall：$E_s$ bounded 且 compact 当且仅当 $\sigma=\Re s>0$；
+coprime--scale sum 与 endpoint witnesses 则给出
+$E_s\in\mathcal S_2\iff\sigma>1/2$ 和
+$E_s\in\mathcal S_1\iff\sigma>1$。finite cutoff 不被用于证明任何 infinite endpoint。
+
+在各自合法域内，even loops 给出
+$\operatorname{Tr}(E_s)=2^{-s}\zeta(s)$（$\sigma>1$），而 ordered-edge ledger 给出
+$\operatorname{Tr}(E_s^2)=\zeta(2s)P(s)
+=\zeta(2s)\zeta_{\mathrm{MT}}(s,s;2s)/\zeta(4s)$（$\sigma>1/2$），没有额外 factor
+two。因此 Hilbert--Carleman determinant 的 local logarithm 满足
+$[z^2]\log\det_2(I-zE_s)=-\operatorname{Tr}(E_s^2)/2$；ordinary Fredholm
+determinant 只在 trace-class domain 使用。triangle $15$--$30$--$60$ 的三个 harmonic
+quotients 为 $10,20,12$，且 real $s>1$ 时 $\{3,6\}$ principal block determinant 为
+$-18^{-s}$，所以 coprime coordinates 既不分解为 isolated scale fibers，也不强制
+positivity。
+
+claim boundary 只覆盖这个 frozen looped graph、one-edge clock、standard-basis
+weight 与前两个合法 traces。complex phase removal 只是 left--right unitary
+multiplication，不是 unitary conjugacy，也不传递 spectra、powers、traces 或
+determinants。不主张 all-$\mathcal S_p$ theorem、rational-prime primitive ledger、
+completed target divisor、functional equation 或 fixed self-adjoint Hilbert--Pólya
+operator。Egyptian-fraction parameterization 与 classical Mordell--Tornheim theory
+保持 prior-owned；bounded literature audit 的 disposition 为
+`SEARCH_BOUNDED_NO_EXACT_OPERATOR_PACKAGE`，search absence 不转换为 novelty 或
+priority credit，`STOP_DUPLICATE` 仍只是 live external publication disposition。
+
+严格 Route tuple 为
+`(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`，
+overall 为 `ROUTE_A_REJECTED`，Route B invocation 为 false。三个 internal terminal
+codes 分别为 `STOP_NO_RATIONAL_PRIME_PRIMITIVES`、
+`STOP_NO_COMPLETED_TARGET_STRUCTURE` 与 `STOP_NO_FIXED_SELF_ADJOINT_LIFT`；外部
+`STOP_DUPLICATE` 不进入 Route terminal fields。
+
+canonical State-A replay 在 $N=16,32,64,128$ 的 complete compressions 中分别得到
+16、40、96、228 条 ordered edges 与 8、16、32、64 个 loops；direct divisibility
+lane 与 coprime-parameter/divisor-row lane 的 12 个 named comparisons 全部 PASS。
+39 个 theorem/governance mutations 的 60 次 designated invocations、35 个 expanded
+mutations 的 48 次 invocations，以及 15 个 frozen external-auditor mutations 均无
+survivor；这些只证明 implementation 与 provenance closure。State-A result-ledger
+SHA-256 为
+`dba161719ef85dee433a13aa14505ab6b0f5ff0fef8c627ea39ddb4bf81bfe47`，exact
+comparison SHA-256 为
+`e36e0a5c37029277fe16bc389c0582196be96cd846a3a4a018b83d5454d88aa0`，两条 Route
+validator 共享 normalized route SHA-256
+`a16a08b142c4eb2a892b8833a0fa168db28aa40215f43e398c121cd90e6cd4a7`。
+
+最终 14 页 writer PDF SHA-256 为
+`b6c4d6aa27fe23f74b4c9e63628cd9b34b83d1d4d0908b040cc923af4c0ae12d`，51-entry
+writer manifest SHA-256 为
+`10bc900a80497637ec397bbc7c7d43c5be736845dee413129252fa07920a98cf`，writer seal
+SHA-256 为
+`940bc4e75c8da31f45c42c25cd447497753616ef3f29786745ce37472d40f787`。
+writer seal 状态为 `HOLD_FOR_INDEPENDENT_WRITER_AUDIT`；它是 pre-installation hold，
+不是 independent acceptance、publication verdict 或 authority-write authorization。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十六篇论文](papers/)
+- [四十七篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
