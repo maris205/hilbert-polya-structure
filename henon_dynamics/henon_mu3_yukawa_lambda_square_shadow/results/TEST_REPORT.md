@@ -23,5 +23,12 @@ The G2 atlas checker additionally returned:
  "nonconjugate_rows": 5, "total_size": 51360}, "status": "PASS"}
 ```
 
+The G3 product-form checker returned:
+
+```text
+{"exterior_square": {"rows": 10, "total_size": 51040},
+ "symmetric_square": {"rows": 11, "total_size": 51360}, "status": "PASS"}
+```
+
 The result remains `PREFREEZE_CODE_RESULTS_PASS`; no release or theorem
 promotion is asserted.
