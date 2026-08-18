@@ -1,6 +1,6 @@
 # Paper 48 Experiment Report
 
-Integration state: `A` / `PREAUTHORITY_INTEGRATION`.
+Integration state: `B` / `PUBLICATION_SHAPED_AWAITING_ROOT_AUTHORIZATION`.
 
 ## Finite controls
 
