@@ -1,0 +1,59 @@
+\begin{tikzpicture}[
+  >=Latex,
+  panel/.style={
+    draw=black!60,
+    rounded corners=1.5mm,
+    minimum width=67mm,
+    minimum height=58mm,
+    inner sep=3mm
+  },
+  shell/.style={
+    draw=black!65,
+    rounded corners=0.8mm,
+    minimum width=12mm,
+    minimum height=9mm,
+    align=center,
+    font=\scriptsize
+  },
+  active/.style={shell, fill=teal!14, very thick, draw=teal!65!black},
+  zero/.style={shell, fill=gray!8, dashed},
+  arr/.style={->, semithick, draw=purple!70!black},
+]
+  \node[panel] (leftpanel) at (-3.7,0) {};
+  \node[panel] (rightpanel) at (3.7,0) {};
+
+  \node[font=\small\bfseries, anchor=north] at (leftpanel.north)
+    {Higher radices \(b\ge3\): same-shell pinch};
+  \node[font=\small\bfseries, anchor=north] at (rightpanel.north)
+    {Binary radix \(b=2\): paired-shell pinch};
+
+  \node[active] (l0) at (-5.6,0.75) {\(I_k\)};
+  \node[active, right=5mm of l0] (l1) {\(B_{kk}\)};
+  \node[active, right=5mm of l1] (l2) {\(I_k\)};
+  \draw[arr] (l0) -- (l1);
+  \draw[arr] (l1) -- (l2);
+  \node[align=center, font=\scriptsize, text width=59mm]
+    at (-3.7,-1.18) {
+      \(P_kBP_k=B_{kk}\), with\\[0.8mm]
+      \(\|B_{kk}\|_{S_q}\gtrsim
+      (\kappa_{b,q}b^{-\sigma})^k\).\\[0.8mm]
+      Orthogonal shell projections force nonsummability
+      when the ratio is at least one.
+    };
+
+  \node[zero] (r0) at (2.0,0.88) {\(I_{2j}\)};
+  \node[zero, right=17mm of r0] (r1) {\(I_{2j+1}\)};
+  \node[font=\scriptsize] at (r0.south) [below=1mm] {\(B_{2j,2j}=0\)};
+  \node[font=\scriptsize] at (r1.south) [below=1mm] {\(B_{2j+1,2j+1}=0\)};
+  \draw[arr, bend left=16] (r0) to node[above, font=\scriptsize] {\(X_j^*\)} (r1);
+  \draw[arr, bend left=16] (r1) to node[below, font=\scriptsize] {\(X_j\)} (r0);
+  \node[align=center, font=\scriptsize, text width=60mm]
+    at (3.7,-1.28) {
+      \(\widehat P_jB\widehat P_j=
+      (\begin{smallmatrix}0&X_j\\X_j^*&0\end{smallmatrix})\),\quad
+      \(\|\widehat P_jB\widehat P_j\|_{S_q}^q
+      =2\|X_j\|_{S_q}^q\),\\[0.8mm]
+      and \(\|X_j\|_{S_q}\gtrsim
+      (\kappa_{2,q}2^{-\sigma})^{2j}\).
+    };
+\end{tikzpicture}

@@ -1,0 +1,150 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Digitwise constraints are local, but the operators they generate need not
+have local analytic behavior.  A simple example is the rule that two
+nonnegative base-\(b\) digits may be adjacent exactly when their sum is
+smaller than \(b\).  As a zero-completed fixed-length control, this rule
+gives a finite Kronecker power.  On the positive integers, however, word length is
+unbounded, the all-zero word is absent, and the Dirichlet weight interacts
+with both the number and the length of the admissible words; the finite
+control is not a finite restriction of this positive-vertex source.  The
+resulting infinite operator therefore has two different sources of
+divergence.
+
+Write the base-\(b\) expansions as
+\[
+  m=\sum_{j\ge0}m_jb^j,\qquad
+  n=\sum_{j\ge0}n_jb^j,
+  \qquad 0\le m_j,n_j<b,
+\]
+with only finitely many nonzero digits.  We say that \(m+n\) is
+\emph{carry-free in base \(b\)}, and write \(m\carryfree n\), if
+\(m_j+n_j<b\) for every \(j\).  For \(s\in\C\), consider the formal matrix
+\begin{equation}
+  B_{b,s}(m,n)
+  =\one_{\{m\carryfree n\}}(mn)^{-s/2},
+  \qquad m,n\in\N=\{1,2,\ldots\},
+  \label{eq:operator-intro}
+\end{equation}
+where complex powers use the real logarithm.  Whenever this matrix has a
+bounded completion, we use the same symbol for the resulting operator on
+\(\ell^2(\N)\).
+
+The finite digit matrix
+\[
+  C_b=(\one_{\{a+c<b\}})_{0\le a,c<b}
+\]
+contains the local rule.  Set
+\[
+  \kappa_{b,q}=\|C_b\|_{S_q},
+  \qquad
+  \tau_b=\kappa_{b,1},
+  \qquad
+  \alpha_b=\log_b\tau_b.
+\]
+Our central result is the following exact surface.
+
+\begin{theorem}[Exact Schatten surface]
+\label{thm:main-intro}
+For every integer \(b\ge2\), every \(1\le q<\infty\), and every
+\(s\in\C\) with \(\sigma=\Re s\),
+\begin{equation}
+  B_{b,s}\in S_q
+  \quad\Longleftrightarrow\quad
+  \sigma>\max\{1,\log_b\kappa_{b,q}\}.
+  \label{eq:main-surface-intro}
+\end{equation}
+Moreover, boundedness, compactness, and Hilbert--Schmidt membership are each
+equivalent to \(\sigma>1\), while trace-class membership is equivalent to
+\(\sigma>\alpha_b\), where \(\alpha_b>1\).
+\end{theorem}
+
+The maximum in \cref{eq:main-surface-intro} is structural.  The first wall,
+\(\sigma=1\), is already visible in one positive-density column.  The second
+comes from the exponential \(S_q\)-growth of the digit tensors.  It is an
+active endpoint only when \(\log_b\kappa_{b,q}>1\); otherwise the universal
+wall hides it.  Equality at an active digit wall is nevertheless delicate.
+For \(b\ge3\), diagonal radix shells provide a direct orthogonal pinching.
+For \(b=2\), every such diagonal block is exactly zero, and equality must be
+recovered from disjoint pairs of adjacent shells.
+
+The digit constants are explicit:
+\begin{equation}
+  s_j(C_b)
+  =
+  (
+    2\sin\frac{(2j-1)\pi}{4b+2}
+  )^{-1},
+  \qquad 1\le j\le b.
+  \label{eq:digit-spectrum-intro}
+\end{equation}
+For example, \(\tau_2=\sqrt5\) and
+\(\alpha_2=\log_2\sqrt5\), whereas
+\(\kappa_{b,2}^2=b(b+1)/2<b^2\).  Thus the trace-class wall lies strictly
+to the right of \(1\), but the Hilbert--Schmidt digit wall lies strictly to
+its left for every radix.
+
+Beyond ideal membership, the same domain bookkeeping determines which
+cycle expressions are legal.  In \(\sigma>1\), all powers
+\(B_{b,s}^r\), \(r\ge2\), are trace class and their traces are absolutely
+convergent weighted closed-walk sums.  Consequently
+\(\Dettwo(I-zB_{b,s})\) is entire in \(z\), with its trace-power logarithm
+only asserted locally near \(z=0\).  The ordinary trace and Fredholm
+determinant require the smaller trace-class domain
+\(\sigma>\alpha_b\).  The positive-vertex convention is essential here:
+the all-zero digit word must be removed before traces or temporal support
+are interpreted.
+
+The mechanism of the proof is summarized in \cref{fig:mechanism}.  It also
+shows the evidence boundary used throughout the paper: finite tensors and
+computations check identities, but the infinite classification comes from
+analytic shell summation and endpoint pinching.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{../figures/tikz/mechanism_pipeline}}
+  \caption{The proof pipeline.  Exact digit singular values determine
+  unweighted shell norms; Dirichlet weights turn them into a universal
+  shell-separation ratio and a digit-growth ratio.  Their strict
+  summability, together with the appropriate endpoint pinching, yields the
+  ideal surface and its trace, determinant, and period consequences.  The
+  lower boxes isolate the binary zero-block exception and the
+  proof-versus-validation boundary.}
+  \label{fig:mechanism}
+\end{figure}
+
+\paragraph{Contributions and scope.}
+The paper establishes three linked statements.
+\begin{enumerate}
+  \item It gives a self-contained classification of \(B_{b,s}\) in every
+  Banach Schatten ideal \(S_q\), for every integer radix, including both
+  strict walls.
+  \item It separates the higher-radix same-shell endpoint mechanism from the
+  binary paired-shell mechanism and derives the exact bounded, compact,
+  Hilbert--Schmidt, and trace-class corollaries.
+  \item It records the legal weighted trace and determinant domains and the
+  least-period support of the countable carry-free graph shift, with the
+  zero word deleted.
+\end{enumerate}
+
+These statements do not assign new ownership to classical carry criteria,
+finite Pascal or Boolean matrices, finite disjointness tensors, or the
+general theory of trace ideals.  Kummer's and Lucas's classical
+prime-modular results provide historical arithmetic context
+\cite{kummer1852ergaenzung,lucas1878congruences}; standard ideal and
+regularized-determinant terminology follows Simon \cite{simon2005trace}.
+The all-radix relation used here is defined directly, so no
+composite-radix version of Kummer's theorem is invoked.  A bounded directed
+search did not find the same-quantifier infinite weighted theorem, but that
+absence is not a priority or exhaustiveness claim.
+
+\paragraph{Organization.}
+\Cref{sec:related} fixes the ownership boundary.
+\Cref{sec:digit} derives the digit spectrum, and \cref{sec:shells} turns it
+into exact shell formulas.  \Cref{sec:thresholds} proves the sharp surface
+and both endpoint mechanisms.  \Cref{sec:dynamics} treats traces,
+determinants, and least periods.  \Cref{sec:validation} reports finite
+consistency controls without using them as proof.  The appendices expand
+the digit recurrence, shell coordinates, endpoint limiting arguments, and
+reproducibility ledger.

@@ -1,0 +1,64 @@
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=8mm,
+  box/.style={
+    draw=black!65,
+    rounded corners=1.5mm,
+    align=center,
+    inner xsep=3mm,
+    inner ysep=2.5mm,
+    minimum height=12mm,
+    font=\small
+  },
+  note/.style={
+    draw=black!50,
+    rounded corners=1mm,
+    align=center,
+    inner sep=2mm,
+    font=\scriptsize
+  },
+  flow/.style={->, semithick, draw=black!70},
+]
+  \node[box, fill=blue!8, text width=27mm] (digit) {
+    \textbf{digit rule}\\[-1mm]
+    \(a+c<b\)\\
+    \(C_b=(\mathbf 1_{a+c<b})\)
+  };
+  \node[box, fill=teal!9, text width=34mm, right=of digit] (shell) {
+    \textbf{radix shells}\\[-1mm]
+    \(A_{k\ell}\simeq
+      \mathbf 1\otimes C_{b-1}\otimes C_b^{\otimes\ell}\)\\
+    \(A_{kk}\simeq C_{b-2}\otimes C_b^{\otimes k}\)
+  };
+  \node[box, fill=orange!10, text width=32mm, right=of shell] (walls) {
+    \textbf{two geometric walls}\\[-1mm]
+    \(b^{(1-\sigma)/2}<1\)\\
+    \(\kappa_{b,q}b^{-\sigma}<1\)
+  };
+  \node[box, fill=purple!8, text width=36mm, right=of walls] (out) {
+    \textbf{operator consequences}\\[-1mm]
+    exact \(S_q\) surface\\
+    trace/determinant domains\\
+    least-period support
+  };
+
+  \draw[flow] (digit) -- node[above, font=\scriptsize, align=center]
+    {digit permutation\\and covariance} (shell);
+  \draw[flow] (shell) -- node[above, font=\scriptsize, align=center]
+    {Dirichlet\\weights} (walls);
+  \draw[flow] (walls) -- node[above, font=\scriptsize, align=center]
+    {summation\\and pinching} (out);
+
+  \node[note, fill=red!5, text width=40mm, below=7mm of shell] (binary) {
+    \textbf{binary geometry:}\quad
+    \(C_0=0\), so same-shell pinching is replaced by paired adjacent shells
+  };
+  \draw[flow] (shell.south) -- (binary.north);
+  \draw[flow] (binary.east) -| (walls.south);
+
+  \node[note, fill=gray!8, text width=44mm, below=7mm of out] (firewall) {
+    finite lanes and hostile tests check formulas and implementations;
+    the infinite classification is proved analytically
+  };
+  \draw[flow, dashed] (firewall.north) -- (out.south);
+\end{tikzpicture}

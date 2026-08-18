@@ -1,0 +1,219 @@
+\section{Sharp ideal thresholds}
+\label{sec:thresholds}
+
+\subsection{Sufficiency}
+
+\begin{proposition}[Summable side of the surface]
+\label{prop:sufficiency}
+If
+\begin{equation}
+  \sigma>1
+  \quad\text{and}\quad
+  \kappa_{b,q}b^{-\sigma}<1,
+  \label{eq:sufficiency-conditions}
+\end{equation}
+then \(B_{b,s}\in S_q\).
+\end{proposition}
+
+\begin{proof}
+By the two-sided unitary relation \cref{eq:two-sided-unitary}, it is enough
+to take \(s=\sigma\).  Sum the embedded shell blocks first over a finite
+square \(0\le k,\ell\le K\).  For the strict upper triangle, put
+\(k=\ell+h\).  \Cref{eq:two-ratios} gives
+\[
+  \sum_{\ell\ge0}\sum_{h\ge1}
+  \|B_{\ell+h,\ell}\|_{S_q}
+  \le
+  c_{b,q}
+  \sum_{h\ge1}b^{h(1-\sigma)/2}
+  \sum_{\ell\ge0}
+  (\kappa_{b,q}b^{-\sigma})^\ell.
+\]
+Both geometric series converge under
+\cref{eq:sufficiency-conditions}.  The lower triangle has the same block
+norms.  On the diagonal,
+\cref{eq:same-shell-factor,eq:weighted-comparison} gives
+\[
+  \sum_{k\ge0}\|B_{kk}\|_{S_q}
+  \le
+  \kappa_{b-2,q}
+  \sum_{k\ge0}
+  (\kappa_{b,q}b^{-\sigma})^k.
+\]
+Because \(q\ge1\), \(S_q\) is a Banach ideal.  The finite block sums are
+therefore Cauchy in \(S_q\), and their limit has the prescribed matrix
+entries.  This constructs the completed operator and proves the claim.
+\end{proof}
+
+\subsection{The universal wall}
+
+\begin{proposition}[Column obstruction]
+\label{prop:column-wall}
+If \(\sigma\le1\), the formal matrix in \cref{eq:operator-intro} has no
+bounded completion on \(\ell^2(\N)\).
+\end{proposition}
+
+\begin{proof}
+The column indexed by \(n=1\) contains every \(m\) whose units digit lies
+in \(\{0,\ldots,b-2\}\), because adding \(1\) creates no carry exactly on
+that residue set.  The squared norm of this column is therefore at least
+\[
+  \sum_{\substack{m\ge1\\m\bmod b\in\{0,\ldots,b-2\}}}m^{-\sigma}.
+\]
+For \(0<\sigma\le1\), this is a finite union of arithmetic-progression
+subseries of the divergent \(p\)-series; for \(\sigma\le0\), its summands
+do not tend to zero.  Hence the column is not in \(\ell^2\), which is
+incompatible with boundedness.
+\end{proof}
+
+The universal obstruction has no digit-spectrum input.  It remains the
+active wall whenever \(\log_b\kappa_{b,q}\le1\); in that case the point
+\(\sigma=\log_b\kappa_{b,q}\) is already on the unbounded side and is not a
+second analytic endpoint.
+
+\subsection{The higher-radix digit wall}
+
+We use the standard orthogonal block pinching: if \((Q_j)\) are mutually
+orthogonal projections, then
+\[
+  \Phi(T)=\bigoplus_j Q_jTQ_j
+\]
+is contractive on \(S_q\), \(1\le q<\infty\), and
+\begin{equation}
+  \|\Phi(T)\|_{S_q}^q
+  =\sum_j\|Q_jTQ_j\|_{S_q}^q.
+  \label{eq:pinching-norm}
+\end{equation}
+The statement follows first for finite families by averaging over diagonal
+unitaries and then for countable families by monotone truncation.
+
+Suppose \(\sigma>1\) and
+\[
+  \rho_{b,q}(\sigma):=\kappa_{b,q}b^{-\sigma}\ge1.
+\]
+For \(b\ge3\), pinch \(B_{b,\sigma}\) with the shell projections \(P_k\).
+The lower half of \cref{eq:weighted-comparison} gives
+\begin{equation}
+  \|B_{kk}\|_{S_q}
+  \ge
+  b^{-\sigma}\kappa_{b-2,q}
+  \rho_{b,q}(\sigma)^k.
+  \label{eq:higher-radix-lower}
+\end{equation}
+Because \(\kappa_{b-2,q}>0\), the \(q\)th powers in
+\cref{eq:higher-radix-lower} are not summable.  By
+\cref{eq:pinching-norm}, \(B_{b,\sigma}\notin S_q\).
+
+When \(\log_b\kappa_{b,q}>1\), this argument treats the active digit-wall
+endpoint \(\sigma=\log_b\kappa_{b,q}\) and the entire interval strictly
+below it but above the universal wall.  When
+\(\log_b\kappa_{b,q}\le1\), no \(\sigma>1\) satisfies
+\(\rho_{b,q}(\sigma)\ge1\), and \cref{prop:column-wall} already supplies
+necessity.
+
+\subsection{Binary paired-shell repair}
+\label{sec:binary-pairing}
+
+At \(b=2\), the preceding pinch is illegal as a digit-wall witness because
+\(B_{kk}=0\) for every \(k\); see \cref{rem:binary-zero-block}.  We first
+remove the phase by \cref{eq:two-sided-unitary} and work with the real
+matrix \(B_{2,\sigma}\).  Let
+\[
+  \widehat P_j=P_{2j}+P_{2j+1},
+  \qquad
+  X_j:=B_{2j+1,2j}.
+\]
+The spaces \(I_{2j}\oplus I_{2j+1}\) are mutually orthogonal.  Since the
+two diagonal-shell blocks vanish and \(B_{2,\sigma}\) is real symmetric,
+\begin{equation}
+  \widehat P_jB_{2,\sigma}\widehat P_j
+  =
+  \begin{pmatrix}
+    0&X_j^*\\
+    X_j&0
+  \end{pmatrix}.
+  \label{eq:binary-pair-block}
+\end{equation}
+Its nonzero singular values are those of \(X_j\), each repeated twice, so
+\begin{equation}
+  \|\widehat P_jB_{2,\sigma}\widehat P_j\|_{S_q}^q
+  =2\|X_j\|_{S_q}^q.
+  \label{eq:binary-double-sv}
+\end{equation}
+
+Using \cref{eq:binary-adjacent-exact} in the lower weighted comparison,
+\begin{equation}
+  \|X_j\|_{S_q}
+  \ge
+  2^{-3\sigma/2}
+  (\kappa_{2,q}2^{-\sigma})^{2j}.
+  \label{eq:binary-pair-lower}
+\end{equation}
+Thus, throughout the full binary digit-norm nonmembership range
+\(\kappa_{2,q}2^{-\sigma}\ge1\) with \(\sigma>1\), the \(q\)th powers of
+the paired compressions are nonsummable.  This includes both the
+strict-below case, where the lower bound grows, and equality, where it
+does not decay.  Equality is the exceptional repaired endpoint only
+because same-shell pinching is unavailable.  As before, if the digit wall
+is at or below \(1\), the universal column wall is the active boundary.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{../figures/tikz/pinching_comparison}}
+  \caption{The two digit-wall pinching mechanisms after phase removal.  For
+  \(b\ge3\), nonzero same-shell blocks provide an orthogonal sequence.  For
+  \(b=2\), \(X_j=B_{2j+1,2j}\) is the real weighted adjacent-shell block,
+  and the mutually orthogonal two-shell compressions duplicate its
+  singular values.  Both lower bounds reject ratio \(1\); the right-hand
+  construction is required because every binary same-shell block is zero.}
+  \label{fig:pinching-comparison}
+\end{figure}
+
+\subsection{Classification and operator classes}
+
+\begin{theorem}[Sharp classification]
+\label{thm:sharp-classification}
+For every integer \(b\ge2\), every \(1\le q<\infty\), and every
+\(s\in\C\), with \(\sigma=\Re s\),
+\[
+  B_{b,s}\in S_q
+  \quad\Longleftrightarrow\quad
+  \sigma>\max\{1,\log_b\kappa_{b,q}\}.
+\]
+\end{theorem}
+
+\begin{proof}
+The forward implication fails at \(\sigma\le1\) by
+\cref{prop:column-wall}.  For \(\sigma>1\) but
+\(\kappa_{b,q}b^{-\sigma}\ge1\), it fails by
+\cref{eq:higher-radix-lower} when \(b\ge3\) and by
+\cref{eq:binary-pair-lower} when \(b=2\).  Two-sided unitary equivalence
+transfers these conclusions from real \(\sigma\) to complex \(s\).
+The reverse implication is \cref{prop:sufficiency}.
+\end{proof}
+
+\begin{corollary}[Bounded, compact, Hilbert--Schmidt, and trace class]
+\label{cor:operator-classes}
+The following are equivalent:
+\[
+  B_{b,s}\text{ is bounded},\qquad
+  B_{b,s}\text{ is compact},\qquad
+  B_{b,s}\in S_2,\qquad
+  \sigma>1.
+\]
+Furthermore,
+\[
+  B_{b,s}\in S_1
+  \quad\Longleftrightarrow\quad
+  \sigma>\alpha_b=\log_b\tau_b>1.
+\]
+\end{corollary}
+
+\begin{proof}
+For \(\sigma>1\), \cref{cor:digit-comparisons} gives
+\(\log_b\kappa_{b,2}<1\), so \cref{thm:sharp-classification} yields
+Hilbert--Schmidt, hence compact and bounded, membership.  For
+\(\sigma\le1\), boundedness fails by \cref{prop:column-wall}.  The
+trace-class statement is the case \(q=1\), together with
+\(\tau_b>b\).
+\end{proof}

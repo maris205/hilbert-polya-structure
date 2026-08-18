@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "artifact_path_policy": {
+    "allow_relative_paths_only": true,
+    "cache_aux_bytecode_and_host_tokens_forbidden": true,
+    "forced_late_failure_requires_byte_and_metadata_identity": true,
+    "parent_segments_forbidden": true,
+    "pre_io_symlink_and_nonregular_rejection": true,
+    "second_complete_run_requires_zero_physical_replacements": true,
+    "stage_complete_declared_output_set_before_atomic_install": true
+  },
+  "case_registry": [
+    {"N":[64,128,256],"b":2,"case_id":"FIN-B2-Q1-EQUALITY","controls":["ADJACENT_SHELL","DIRECT_POSITIVE_PREFIX","ZERO_DELETED","ZERO_INCLUDED"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"1","r":[1,2,3,4],"shell_pairs_by_control":{"ADJACENT_SHELL":[[1,0],[3,2]]},"sigma":"log_b_kappa_b_q"},
+    {"N":[64,128,256],"b":2,"case_id":"FIN-B2-Q2-SIGMA1","controls":["ADJACENT_SHELL","DIRECT_POSITIVE_PREFIX","ZERO_DELETED"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"2","r":[2,3,4],"shell_pairs_by_control":{"ADJACENT_SHELL":[[1,0],[3,2]]},"sigma":"1"},
+    {"N":[128,256,512],"b":2,"case_id":"FIN-B2-Q3-ADJACENT","controls":["ADJACENT_SHELL","DIRECT_POSITIVE_PREFIX"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"3","r":[2,3,4],"shell_pairs_by_control":{"ADJACENT_SHELL":[[2,1],[4,3]]},"sigma":"6/5"},
+    {"N":[81,243,729],"b":3,"case_id":"FIN-B3-Q1-LOOP","controls":["DIRECT_POSITIVE_PREFIX","SAME_SHELL","ZERO_DELETED"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"1","r":[1,2,3,4],"shell_pairs_by_control":{"SAME_SHELL":[[1,1],[3,3]]},"sigma":"3/2"},
+    {"N":[81,243,729],"b":3,"case_id":"FIN-B3-Q2-SAME-SHELL","controls":["CROSS_SHELL","DIRECT_POSITIVE_PREFIX","SAME_SHELL"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"2","r":[1,2,3,4],"shell_pairs_by_control":{"CROSS_SHELL":[[3,1]],"SAME_SHELL":[[1,1],[3,3]]},"sigma":"5/4"},
+    {"N":[64,256,1024],"b":4,"case_id":"FIN-B4-Q2-DIRECT-PREDICATE","controls":["CROSS_SHELL","DIRECT_POSITIVE_PREFIX","ZERO_DELETED"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"2","r":[1,2,3,4],"shell_pairs_by_control":{"CROSS_SHELL":[[2,0],[3,1]]},"sigma":"5/4"},
+    {"N":[125,625],"b":5,"case_id":"FIN-B5-Q3-RANDOM-MASK","controls":["DIRECT_POSITIVE_PREFIX","RANDOMIZED_DIGIT_MASK"],"evidence_type":"FINITE_OPERATOR_CONTROL","q":"3","r":[1,2,3,4],"shell_pairs_by_control":{},"sigma":"4/3"},
+    {"case_id":"INF-SIGMA-WALL","evidence_type":"INFINITE_THEOREM_CERTIFICATE","parameter_rows":["sigma<1","sigma=1","sigma>1"],"theorem_field":"bounded_compact_HS_iff_sigma_gt_one"},
+    {"case_id":"INF-DIGIT-WALL","evidence_type":"INFINITE_THEOREM_CERTIFICATE","parameter_rows":["sigma<log_b_kappa_b_q","sigma=log_b_kappa_b_q","sigma>log_b_kappa_b_q"],"theorem_field":"S_q_iff_sigma_gt_max_of_walls"},
+    {"case_id":"INF-DET2-DOMAIN","determinant_variable_z":{"imag":"1/10","real":"1/10"},"evidence_type":"INFINITE_THEOREM_CERTIFICATE","parameter_rows":["sigma=1","1<sigma<=alpha_b","sigma>alpha_b"],"theorem_field":"det2_and_ordinary_determinant_domains"},
+    {"case_id":"INF-TRACE-LPS","evidence_type":"INFINITE_THEOREM_CERTIFICATE","radices":[2,3,5],"theorem_field":"positive_vertex_trace_and_least_period_sets"}
+  ],
+  "common_finite_case_ids": [
+    "FIN-B2-Q1-EQUALITY",
+    "FIN-B2-Q2-SIGMA1",
+    "FIN-B2-Q3-ADJACENT",
+    "FIN-B3-Q1-LOOP",
+    "FIN-B3-Q2-SAME-SHELL",
+    "FIN-B4-Q2-DIRECT-PREDICATE",
+    "FIN-B5-Q3-RANDOM-MASK"
+  ],
+  "finite_case_expansion": {
+    "canonical_row_order": ["case_id","b","q","sigma","N","r","control","k","l","mask_depth","mask_integer","precision_bits"],
+    "deduplication": "after expansion, reject rather than remove duplicate canonical coordinate tuples",
+    "non_mask_coordinates": "mask_depth, mask_integer, and mask_sha256 are JSON null",
+    "non_shell_coordinates": "k and l are JSON null",
+    "output_membership": "before scientific comparison, regenerate the full expanded coordinate set from this contract and reject any output row whose complete canonical coordinate tuple is absent or duplicated",
+    "rule": "for each FIN case take the Cartesian product N x r x controls; each shell control crosses only its own shell_pairs_by_control entry and retains a row only if N >= b^(max(k,l)+1)-1; RANDOMIZED_DIGIT_MASK crosses every declared depth and its 16 generated masks; each row crosses precision_bits",
+    "semantic_cross_field_validation": {
+      "ADJACENT_SHELL":"k and l are integers and k=l+1",
+      "CROSS_SHELL":"k and l are integers and k>l",
+      "RANDOMIZED_DIGIT_MASK":"k and l are null; mask fields are nonnull; 0<=mask_integer<2^mask_depth; mask_sha256 and masked_vertex_count are present",
+      "SAME_SHELL":"k and l are integers and k=l",
+      "full_shell_containment":"for every shell control require N >= b^(max(k,l)+1)-1",
+      "non_mask_control":"mask_depth, mask_integer, mask_sha256, and masked_vertex_count are null",
+      "non_shell_control":"k and l are null",
+      "trace_nonvacuity":"finite_trace_power_record is present and corresponds to the top-level r"
+    },
+    "semantic_rejection_codes": {
+      "adjacent_relation":"ADJACENT_SHELL_COORDINATE_MISMATCH",
+      "cross_relation":"CROSS_SHELL_COORDINATE_MISMATCH",
+      "full_shell_containment":"SHELL_NOT_CONTAINED_IN_PREFIX",
+      "mask_fields":"RANDOM_MASK_COORDINATE_MISMATCH",
+      "same_relation":"SAME_SHELL_COORDINATE_MISMATCH",
+      "trace_record":"TRACE_RECORD_MISSING_OR_MISMATCHED"
+    },
+    "shell_controls": ["ADJACENT_SHELL","CROSS_SHELL","SAME_SHELL"]
+  },
+  "evidence_types": {
+    "FINITE_OPERATOR_CONTROL": {
+      "designated_consumers": ["A","B","X"],
+      "forbidden_fields": ["infinite_boundedness_verdict","infinite_ideal_verdict","infinite_trace_or_determinant_domain","infinite_least_period_classification"],
+      "required_common_fields": ["case_id","b","q","sigma","N","r","control","k","l","mask_depth","mask_integer","mask_sha256","source_object_type","zero_convention","finite_support_count","finite_rank","finite_singular_interval_list","finite_shell_norm_intervals","finite_trace_power_record","finite_period_witnesses","masked_vertex_count","precision_bits"]
+    },
+    "INFINITE_THEOREM_CERTIFICATE": {
+      "designated_consumers": ["P"],
+      "forbidden_consumers": ["A","B","X"],
+      "required_fields": ["case_id","theorem_field","strict_domain_expression","endpoint_witness_type","proof_dependency_hash"]
+    }
+  },
+  "declared_output_paths": [
+    "EXPERIMENT_REPORT.md",
+    "evaluations/independent_evaluation.json",
+    "evaluations/main_evaluation.json",
+    "results/SHA256SUMS.txt",
+    "results/adversarial_tests.json",
+    "results/comparison.json",
+    "results/evaluator_a_native.json",
+    "results/evaluator_a_projection.json",
+    "results/evaluator_b_native.json",
+    "results/evaluator_b_projection.json",
+    "results/integrity_audit.json",
+    "results/mutation_outcomes.json",
+    "results/proof_audit.json"
+  ],
+  "exception_total_mapping": {
+    "nonzero_unclassified_exit": {"error_class":"UNCLASSIFIED_NONZERO_EXIT","outcome":"HARNESS_ERROR"},
+    "parse_or_schema_exception": {"error_class":"PARSE_OR_SCHEMA_ERROR","outcome":"HARNESS_ERROR"},
+    "timeout": {"error_class":"TIMEOUT","outcome":"HARNESS_ERROR"},
+    "unexpected_exception": {"error_class":"UNEXPECTED_EXCEPTION","outcome":"HARNESS_ERROR"}
+  },
+  "interval_width_targets": {
+    "128": "1e-30",
+    "256": "1e-60",
+    "512": "1e-120"
+  },
+  "json_schemas": {
+    "error_record": {
+      "additionalProperties": false,
+      "properties": {
+        "error_class": {"enum":["PARSE_OR_SCHEMA_ERROR","TIMEOUT","UNEXPECTED_EXCEPTION","UNCLASSIFIED_NONZERO_EXIT"]},
+        "message_sha256": {"pattern":"^[0-9a-f]{64}$","type":"string"},
+        "outcome": {"const":"HARNESS_ERROR"}
+      },
+      "required":["error_class","message_sha256","outcome"],
+      "type":"object"
+    },
+    "finite_projection_record": {
+      "additionalProperties": false,
+      "allOf": [
+        {"if":{"properties":{"control":{"enum":["ADJACENT_SHELL","CROSS_SHELL","SAME_SHELL"]}},"required":["control"]},"then":{"properties":{"finite_shell_norm_intervals":{"minItems":1},"k":{"type":"integer"},"l":{"type":"integer"},"mask_depth":{"type":"null"},"mask_integer":{"type":"null"},"mask_sha256":{"type":"null"},"masked_vertex_count":{"type":"null"}}}},
+        {"if":{"properties":{"control":{"enum":["DIRECT_POSITIVE_PREFIX","ZERO_DELETED","ZERO_INCLUDED"]}},"required":["control"]},"then":{"properties":{"k":{"type":"null"},"l":{"type":"null"},"mask_depth":{"type":"null"},"mask_integer":{"type":"null"},"mask_sha256":{"type":"null"},"masked_vertex_count":{"type":"null"}}}},
+        {"if":{"properties":{"control":{"const":"RANDOMIZED_DIGIT_MASK"}},"required":["control"]},"then":{"properties":{"k":{"type":"null"},"l":{"type":"null"},"mask_depth":{"enum":[4,6,8],"type":"integer"},"mask_integer":{"minimum":0,"type":"integer"},"mask_sha256":{"pattern":"^[0-9a-f]{64}$","type":"string"},"masked_vertex_count":{"minimum":0,"type":"integer"}}}},
+        {"if":{"properties":{"mask_depth":{"const":4}},"required":["mask_depth"]},"then":{"properties":{"mask_integer":{"maximum":15}}}},
+        {"if":{"properties":{"mask_depth":{"const":6}},"required":["mask_depth"]},"then":{"properties":{"mask_integer":{"maximum":63}}}},
+        {"if":{"properties":{"mask_depth":{"const":8}},"required":["mask_depth"]},"then":{"properties":{"mask_integer":{"maximum":255}}}}
+        ,{"if":{"properties":{"control":{"const":"ADJACENT_SHELL"}},"required":["control"]},"then":{"oneOf":[{"properties":{"k":{"const":1},"l":{"const":0}}},{"properties":{"k":{"const":2},"l":{"const":1}}},{"properties":{"k":{"const":3},"l":{"const":2}}},{"properties":{"k":{"const":4},"l":{"const":3}}}]}},
+        {"if":{"properties":{"control":{"const":"CROSS_SHELL"}},"required":["control"]},"then":{"oneOf":[{"properties":{"k":{"const":2},"l":{"const":0}}},{"properties":{"k":{"const":3},"l":{"const":1}}}]}},
+        {"if":{"properties":{"control":{"const":"SAME_SHELL"}},"required":["control"]},"then":{"oneOf":[{"properties":{"k":{"const":1},"l":{"const":1}}},{"properties":{"k":{"const":3},"l":{"const":3}}}]}},
+        {"if":{"properties":{"case_id":{"const":"FIN-B4-Q2-DIRECT-PREDICATE"},"control":{"const":"CROSS_SHELL"},"k":{"const":3}},"required":["case_id","control","k"]},"then":{"properties":{"N":{"enum":[256,1024]}}}}
+      ],
+      "properties": {
+        "N":{"minimum":1,"type":"integer"},
+        "b":{"minimum":2,"type":"integer"},
+        "case_id":{"pattern":"^FIN-[A-Z0-9-]+$","type":"string"},
+        "control":{"enum":["ADJACENT_SHELL","CROSS_SHELL","DIRECT_POSITIVE_PREFIX","RANDOMIZED_DIGIT_MASK","SAME_SHELL","ZERO_DELETED","ZERO_INCLUDED"]},
+        "finite_period_witnesses":{"items":{"type":"string"},"type":"array","uniqueItems":true},
+        "finite_rank":{"minimum":0,"type":"integer"},
+        "finite_shell_norm_intervals":{"items":{"$ref":"#/$defs/interval"},"type":"array"},
+        "finite_singular_interval_list":{"items":{"$ref":"#/$defs/interval"},"type":"array"},
+        "finite_support_count":{"minimum":0,"type":"integer"},
+        "finite_trace_power_record":{"$ref":"#/$defs/trace_record"},
+        "k":{"oneOf":[{"minimum":0,"type":"integer"},{"type":"null"}]},
+        "l":{"oneOf":[{"minimum":0,"type":"integer"},{"type":"null"}]},
+        "mask_depth":{"oneOf":[{"enum":[4,6,8],"type":"integer"},{"type":"null"}]},
+        "mask_integer":{"oneOf":[{"minimum":0,"type":"integer"},{"type":"null"}]},
+        "mask_sha256":{"oneOf":[{"pattern":"^[0-9a-f]{64}$","type":"string"},{"type":"null"}]},
+        "masked_vertex_count":{"oneOf":[{"minimum":0,"type":"integer"},{"type":"null"}]},
+        "precision_bits":{"enum":[128,256,512],"type":"integer"},
+        "q":{"pattern":"^[1-9][0-9]*(?:/[1-9][0-9]*)?$","type":"string"},
+        "r":{"minimum":1,"type":"integer"},
+        "sigma":{"type":"string"},
+        "source_object_type":{"const":"PositiveIntegerCarryFreeFiniteCompression"},
+        "zero_convention":{"enum":["ZERO_DELETED_POSITIVE","ZERO_INCLUDED_CONTROL"]}
+      },
+      "required":["case_id","b","q","sigma","N","r","control","k","l","mask_depth","mask_integer","mask_sha256","source_object_type","zero_convention","finite_support_count","finite_rank","finite_singular_interval_list","finite_shell_norm_intervals","finite_trace_power_record","finite_period_witnesses","masked_vertex_count","precision_bits"],
+      "type":"object",
+      "$defs":{
+        "interval":{"additionalProperties":false,"properties":{"lower":{"pattern":"^-?[0-9]+(?:\\.[0-9]+)?(?:e-?[0-9]+)?$","type":"string"},"precision_bits":{"enum":[128,256,512],"type":"integer"},"upper":{"pattern":"^-?[0-9]+(?:\\.[0-9]+)?(?:e-?[0-9]+)?$","type":"string"}},"required":["lower","upper","precision_bits"],"type":"object"},
+        "trace_record":{"additionalProperties":false,"properties":{"exact_value":{"oneOf":[{"pattern":"^-?[0-9]+(?:/[1-9][0-9]*)?$","type":"string"},{"type":"null"}]},"interval":{"oneOf":[{"$ref":"#/$defs/interval"},{"type":"null"}]}},"oneOf":[{"properties":{"exact_value":{"pattern":"^-?[0-9]+(?:/[1-9][0-9]*)?$","type":"string"},"interval":{"type":"null"}}},{"properties":{"exact_value":{"type":"null"},"interval":{"$ref":"#/$defs/interval"}}}],"required":["exact_value","interval"],"type":"object"}
+      }
+    },
+    "infinite_certificate_record": {
+      "additionalProperties": false,
+      "properties": {
+        "case_id":{"pattern":"^INF-[A-Z0-9-]+$","type":"string"},
+        "endpoint_witness_type":{"type":"string"},
+        "proof_dependency_hash":{"pattern":"^[0-9a-f]{64}$","type":"string"},
+        "strict_domain_expression":{"type":"string"},
+        "theorem_field":{"type":"string"}
+      },
+      "required":["case_id","theorem_field","strict_domain_expression","endpoint_witness_type","proof_dependency_hash"],
+      "type":"object"
+    },
+    "mutation_consumer_outcome": {
+      "additionalProperties": false,
+      "properties": {
+        "code":{"pattern":"^[A-Z0-9_]+$","type":"string"},
+        "consumer":{"enum":["A","B","G","I","P","R_INDEPENDENT","R_MAIN","S","T","X"]},
+        "exit_code":{"const":2},
+        "outcome":{"const":"REJECT"}
+      },
+      "required":["consumer","outcome","code","exit_code"],
+      "type":"object"
+    }
+  },
+  "metadata_identity_fields": ["sha256","st_dev","st_ino","st_mode","st_size","st_mtime_ns","st_ctime_ns"],
+  "outcome_union": {
+    "ACCEPT": {"exit_code":0,"payload":"canonical typed result"},
+    "HARNESS_ERROR": {"exit_code":3,"payload":"typed infrastructure failure"},
+    "REJECT": {"exit_code":2,"payload":"exact nonzero rejection code"}
+  },
+  "precision_bits": [128,256,512],
+  "randomized_digit_mask_control": {
+    "credit":"zero_novelty_control",
+    "canonical_mask_order":"depth ascending, then unsigned mask integer ascending after duplicate rejection",
+    "canonical_scalar_bytes":"UTF-8 bytes, with no BOM, of the exact ASCII sequence case_id=<case_id>\\nb=<decimal b>\\nq=<reduced q string>\\nsigma=<exact sigma string>\\nN=<decimal N>\\nr=<decimal r>\\ncontrol=RANDOMIZED_DIGIT_MASK\\ndepth=<decimal depth>\\n",
+    "counter_protocol":"counter starts at zero and is encoded as exactly eight unsigned big-endian bytes",
+    "depths":[4,6,8],
+    "deterministic_seed_material":"raw 32-byte SHA256 digest of canonical_scalar_bytes",
+    "digest_protocol":"for successive counters compute raw SHA256(seed_raw_32_bytes || counter_big_endian_8_bytes); take the low depth bits of the first eight digest bytes interpreted unsigned big-endian",
+    "mask_application":"on the zero-deleted positive-prefix matrix, retain exactly vertices whose base-b digits are zero at every position j>=depth and at every 0<=j<depth whose mask bit j is zero; take the induced weighted submatrix",
+    "mask_count_per_depth":16,
+    "mask_generation":"increment counter after every digest; duplicate mask integers are skipped until 16 distinct masks are obtained",
+    "mask_sha256_definition":"lowercase hex SHA256 of canonical_scalar_bytes || mask_integer encoded as eight unsigned big-endian bytes",
+    "required_output_fields":["mask_depth","mask_integer","mask_sha256","masked_vertex_count","finite_rank","finite_singular_interval_list","finite_trace_power_record"],
+    "required":true,
+    "role":"proves_too_much ownership and tensor-mechanism control"
+  },
+  "schema_version":"paper48.experiment-contract.v1",
+  "serialization": {
+    "booleans":"JSON Boolean, never integer",
+    "complex":"object with reduced rational-string real and imag",
+    "exact_sets":"C-sorted duplicate-free arrays",
+    "integers":"JSON integer, never Boolean or float",
+    "rationals":"reduced signed p/q string with positive denominator",
+    "unknown_fields":"reject"
+  }
+}

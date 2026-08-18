@@ -59,6 +59,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [45-isospectral-arithmetic-fiber-retractions](papers/45-isospectral-arithmetic-fiber-retractions/PAPER_PLAN.md) | [PDF](papers/45-isospectral-arithmetic-fiber-retractions/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/45-isospectral-arithmetic-fiber-retractions/) | 对每个整数 $h\ge2$，把 prime exponent 饱和到 $h-1$ 与 modulo $h$ 的两种 $h$-free arithmetic retraction 加权为紧算子；在共同有界域，它们有相同的简单非零谱、全部共同合法 power traces 与 integer-order regularized determinants，但饱和族恰在 $\Re s>1$ boundedly similar to compact normal，modulo 族则在全部 $\Re s>1/h$ 有界域如此，故 $1/h<\Re s\le1$ 是精确 isospectral-but-not-similar band。饱和 Riesz projections 有 exact primorial optimizer 和三种 maximal-order regimes；两族 singular values 有 explicit Weyl laws 且 $C_{h,1}=D_{h,1}=1$；self-commutator wall 为 $\Re(s)q=1$，区别于 operator Schatten wall $\Re(s)q=2$。 | **GO_EVALUATED / ISOSPECTRAL--NONSIMILAR BAND / EXACT PRIMORIAL--WEYL--COMMUTATOR LAWS / ROUTE_A_REJECTED_NOT_EVALUATED** |
 | [46-dyadic-sum-hankel-cycle-calculus](papers/46-dyadic-sum-hankel-cycle-calculus/PAPER_PLAN.md) | [PDF](papers/46-dyadic-sum-hankel-cycle-calculus/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/46-dyadic-sum-hankel-cycle-calculus/) | 对 looped support $m+n=2^a$ 的 Dirichlet-weighted coefficient array $h_s(m,n)=\mathbf 1_{\{m+n=2^a\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。每条边保持 $v_2$，从而在 bounded half-plane 得到 scaled odd-block direct sum、合法 trace powers 与 determinant products；固定 ordered dyadic labels 的 cyclic system 则有完整 odd/even solver。canonical State-A replay 覆盖 4 个 cutoffs、335,922 个 ordered tuples 与 36 个 exact traces，strict type-and-value mismatch 全为零；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / EXACT 2-ADIC BLOCK PRODUCT / COMPLETE LABELED CYCLE CALCULUS / ROUTE_A_REJECTED / SD-C48** |
 | [47-harmonic-egyptian-mordell-tornheim](papers/47-harmonic-egyptian-mordell-tornheim/PAPER_PLAN.md) | [PDF](papers/47-harmonic-egyptian-mordell-tornheim/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/47-harmonic-egyptian-mordell-tornheim/) | 对 looped harmonic-quotient graph $m+n\mid mn$ 的 Dirichlet-weighted coefficient array $e_s(m,n)=\mathbf 1_{\{m+n\mid mn\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。divisor-row 与 coprime--scale 两套 exact coordinates 控制这些 thresholds；even loops 与 ordered-edge ledger 分别导出 $\operatorname{Tr}(E_s)=2^{-s}\zeta(s)$ 及 $\operatorname{Tr}(E_s^2)=\zeta(2s)\zeta_{\mathrm{MT}}(s,s;2s)/\zeta(4s)$。mixed triangle 与 negative principal minor 排除 scale-fiber 和 positivity 简化；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / ZETA--MORDELL--TORNHEIM TRACE / MIXED-CYCLE SIGN WITNESS / ROUTE_A_REJECTED / SD-C49** |
+| [48-all-radix-carry-free-schatten](papers/48-all-radix-carry-free-schatten/PAPER_PLAN.md) | [PDF](papers/48-all-radix-carry-free-schatten/paper/CarryFreeRadixOperators.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/48-all-radix-carry-free-schatten/) | 对正整数上的 carry-free radix coefficient array $B_{b,s}(m,n)=\mathbf 1_{\{m+n\text{ 在 base }b\text{ 中无进位}\}}(mn)^{-s/2}$，每个整数 $b\ge2$、每个 $1\le q<\infty$ 都满足精确分类 $B_{b,s}\in\mathcal S_q\iff\Re s>\max\{1,\log_b\kappa_{b,q}\}$。证明分离 universal column wall 与 digit-norm wall；binary same-shell blocks 全零时，paired adjacent-shell pinching 覆盖包括 equality 在内的完整 nonmembership range。因而 bounded、compact、Hilbert--Schmidt 等价于 $\Re s>1$，trace class 等价于 $\Re s>\alpha_b$；trace powers、regularized determinant 与 one-sided least-period support 只在各自合法域陈述。每条 finite lane 的 1,965 rows、8,010 intervals 与 420 shell envelopes 只是 consistency evidence；严格 tuple 为 `(A0_FAIL,A1_FAIL,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`。 | **EXACT ALL-RADIX SCHATTEN SURFACE / BINARY ENDPOINT PINCHING / WEIGHTED TRACE--PERIOD LEDGER / ROUTE_A_REJECTED / SD-C50** |
 
 ### 论文 1 的候选分离结论
 
@@ -1718,13 +1719,77 @@ SHA-256 为
 writer seal 状态为 `HOLD_FOR_INDEPENDENT_WRITER_AUDIT`；它是 pre-installation hold，
 不是 independent acceptance、publication verdict 或 authority-write authorization。
 
+### 论文 48：carry-free radix operators 的 exact Schatten surface
+
+Paper 48 固定整数 radix $b\ge2$ 与 positive-integer vertex set
+$\mathbb N=\{1,2,\ldots\}$，并以
+$B_{b,s}(m,n)=\mathbf 1_{\{m+n\text{ 在 base }b\text{ 中无进位}\}}(mn)^{-s/2}$
+作为 $\ell^2(\mathbb N)$ 上的 coefficient array，complex powers 使用 real logarithm。
+one-digit compatibility matrix
+$C_b=(\mathbf 1_{\{a+c<b\}})_{0\le a,c<b}$ 的 singular values 为
+$[2\sin((2j-1)\pi/(4b+2))]^{-1}$；记
+$\kappa_{b,q}=\|C_b\|_{\mathcal S_q}$。complex phase 只通过 left--right diagonal
+unitaries 移除，不被表述为 unitary conjugacy、positivity 或 self-adjointness。
+
+主定理对每个 $b\ge2$、$1\le q<\infty$ 与 $s\in\mathbb C$ 给出严格等价
+$B_{b,s}\in\mathcal S_q\iff
+\sigma=\Re s>\max\{1,\log_b\kappa_{b,q}\}$。positive-density column 给出
+universal wall，orthogonal pinching 给出 digit wall；若 digit wall 不高于 $1$，它被
+universal wall 隐藏。对 $b\ge3$，same-shell blocks 处理有效 digit wall；对 $b=2$，
+所有 same-shell blocks 都为零，必须用 mutually orthogonal paired adjacent shells
+恢复 $\kappa_{2,q}2^{-\sigma}\ge1$ 的完整 nonmembership range，包括 equality。
+finite cutoff 不参与任何 infinite endpoint proof。
+
+直接推论是 bounded、compact 与 Hilbert--Schmidt membership 都当且仅当
+$\sigma>1$，而 trace class 当且仅当
+$\sigma>\alpha_b=\log_b\|C_b\|_{\mathcal S_1}>1$。当 $\sigma>1$、$r\ge2$ 时，
+trace powers 是绝对收敛的 weighted based closed-walk sums，且
+$\det_2(I-zB_{b,s})$ 对 $z$ entire；其 trace-power logarithm 只在 $z=0$ 的充分小
+邻域陈述。ordinary trace 与 Fredholm determinant 只在 $\sigma>\alpha_b$ 使用。
+one-sided graph shift 的 least-period support 为
+$\{2,3,\ldots\}$（$b=2$）和 $\{1,2,3,\ldots\}$（$b>2$），每个允许长度都有
+无限多个 periodic points；因此不主张 unweighted Artin--Mazur zeta function。
+
+finite evidence 的 ownership 明确分离：Evaluator A 使用 direct positive-prefix
+matrices 与 quotient/remainder carry checks，Evaluator B 使用独立解析的 digit
+automaton 与 shell/Kronecker factorization；每条 lane 各有 1,965 rows，共比较
+8,010 个 one-digit singular-value intervals 与 420 个 weighted shell envelopes。
+只有 proof auditor P 核验 universal wall、含 binary equality repair 的 digit wall、
+determinant domains 与 positive-vertex trace/least-period ledger。39 个 atomic
+mutations 产生 68 个 designated rejections 与 322 个 nondesignated acceptances，另有
+76 个 physical/adversarial instances，均无 survivor；这些只验证 frozen implementation
+与 proof dependencies，不是 infinite theorem、priority 或 publication 的证明。
+
+carry criteria、Kummer/Lucas congruences、finite Pascal/Boolean/disjointness matrices、
+digit Kronecker products 与 explicit finite singular values 均保持 prior-owned、记 zero
+candidate novelty credit。bounded source search 未找到 exact same-quantifier package，
+但 search absence 不转换为 novelty、priority 或 exhaustiveness。本文不主张
+composite-radix Kummer theorem、$0<q<1$ quasi-Schatten classification、complex
+zero-free trace、completed $s$-plane function、functional equation、prescribed divisor、
+rational-prime primitive ledger 或 spectral-divisor/Hilbert--Pólya interpretation。
+
+严格 Route tuple 为
+`(A0_FAIL,A1_FAIL,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`，overall 为
+`ROUTE_A_REJECTED`，Route B invocation 为 false。writer-side canonical results ledger
+SHA-256 为
+`dd1fbc2ee0fb16bf4df7ff74cbc2dc59fa00e02e18d545f3b782c1ee4f55fc62`。最终 16 页
+PDF SHA-256 为
+`5bb755f9b2b0eaf56c79b8de5e94253bc9e7ed4b8d6ef9fd4c815f832cf54573`，50-row
+writer manifest SHA-256 为
+`dc202c75ce087f944f42ab39f6ba75d616a100dcc4e6822a2a8154d0f6269efa`，writer seal
+SHA-256 为
+`6a58654ae25fd73d69d653696a794c23214fa927213b49f5dfa426056d2c46f6`。
+final writer overlay 含 54 个 regular files。
+writer seal 内状态为 `HOLD_FOR_INDEPENDENT_WRITER_AUDIT`；该字段记录封存时的
+writer-side gate，不是 priority、publication、README 或 authority-write authorization。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十七篇论文](papers/)
+- [四十八篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
