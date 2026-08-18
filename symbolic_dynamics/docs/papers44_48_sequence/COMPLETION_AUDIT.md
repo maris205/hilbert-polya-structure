@@ -1,12 +1,14 @@
 # Papers 44--48 completion audit
 
-Status: **PRE-PUSH CLEAN / TERMINAL PENDING**.
+Status: **COMPLETE**.
 
 Audit date: 2026-08-19 UTC.  This record indexes the current scientific,
-manuscript, Route, and local Git evidence for Papers 44--48.  The terminal
-disposition is deliberately pending until the final documentation commit is
-reachable from GitHub `main`, the plain mirror is synchronized, and an
-independent terminal audit passes against both trees.
+manuscript, Route, and Git evidence for Papers 44--48.  Its terminal promotion
+is acyclic: pushed checkpoint
+`9f40ddb4a5ed7ac9bd34585fd60969345a5a0658` was independently audited first;
+the promotion changes only the two sequence status records, after which a
+final external GitHub/mirror check verifies the promotion without embedding
+its own commit identifier.
 
 ## Scope and interpretation
 
@@ -104,17 +106,36 @@ rebase or synthetic test OID is part of the authority history.
 
 ## Terminal gates
 
-The following items are intentionally not pre-claimed in this pre-push record:
-
-- [ ] final GitHub `main` compare-and-swap check and push;
-- [ ] verification that every Stage-1/Stage-2 commit above is reachable from
-      the pushed remote head;
-- [ ] exact path/kind/mode/byte synchronization to the plain mirror;
-- [ ] authority and mirror publication audits in normal and hostile
+- [x] GitHub `main` compare-and-swap push and readback at audited checkpoint
+      `9f40ddb4a5ed7ac9bd34585fd60969345a5a0658`;
+- [x] all seven Stage-1/Stage-2 pairs above reachable from the pushed head;
+- [x] exact path/kind/mode/byte synchronization to the plain mirror;
+- [x] authority and mirror publication audits in normal and hostile
       environments;
-- [ ] final independent cross-paper terminal verdict.
+- [x] final independent cross-paper terminal verdict.
 
-The status may be promoted to `COMPLETE` only after all five checks are
-recorded against the final remote head.  Until then, the scientifically closed
-packages are **PRE-PUSH CLEAN**, while the sequence as a distributed artifact
-remains **TERMINAL PENDING**.
+At the audited checkpoint, local `HEAD`, `origin/main`, and GitHub `main` were
+identical with ahead/behind `0/0`.  The root README had 48 sequential paper
+rows and 151 Markdown links with zero missing local targets.  The authority and
+plain mirror each had 5,037 descendants: 861 directories, 4,176 regular files,
+zero symlinks or other kinds, and 330,539,026 regular-file bytes.  Their
+independently serialized path/kind/mode/size/content frame was identical at
+`42f8cd0296c50c3f1720e338a3d2f67f33c4c03759c8bbc63ac4a25eda6fb670`,
+with zero mismatches.
+
+Ten terminal paper-root replays passed: P44--P48 on both authority and mirror,
+each under normal and hostile environments.  The stable receipt SHA-256 values
+were `c34275e1dece410c78ad4fcabf3817512f3c91c360a086f3af6d9d6ae83c7c27`
+(P44), `8c920cf14a1404bfa645d62a21f3c6e7ecfec61354b7cba501f4bfd770a83b7f`
+(P46), `cd403e40ef37bdce8462f6d51e1c873de38b0e8e1cd13b61402c03075ce033e8`
+(P47), and `3feb47970cd549801cabd0b32af721f844e15455206f495c2aac439aaaf26617`
+(P48).  P45's repaired stack passed main 48/48, independent 43/43, and its
+137-entry State-B manifest; their receipts were respectively
+`ddb754261e7c1443999f83ab72a4401c3cafa6fc199a91d09aff1187aceb02bf`,
+`a82e15610f27cf3abe20b46e88e2963345f0fc9245690c7451265ea34cf9b29e`,
+and `6fae5f8085fb2a16ed25835e9c99dc8bb88ee8c1d64d10ba272a740764a84ac3`.
+
+The final promotion commit is constrained to the two status records in this
+directory.  A post-promotion remote readback, clean-index check, checksum
+mirror sync, and zero-difference frame comparison are the external closure of
+that final acyclic step.  No paper subtree is modified by the promotion.

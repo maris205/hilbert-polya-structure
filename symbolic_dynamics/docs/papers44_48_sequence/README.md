@@ -1,6 +1,6 @@
 # Papers 44–48 sequence-selection provenance
 
-Status: **PRE-PUSH CLEAN / TERMINAL PENDING**.
+Status: **COMPLETE**.
 
 This directory makes the two frozen selection packets for Papers 44–48
 Git-reachable.  It preserves the research-gate chronology; it does not create
