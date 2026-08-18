@@ -1,0 +1,412 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,tabularx,array,xcolor,hyperref,xurl,enumitem}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\sha}[1]{\texttt{\scriptsize #1}}
+\title{Zeta-Equivalent Tensor Algebras of the Hénon Gassmann Twins and an Explicit Fourier Descent}
+\author{Anonymous authors}
+\date{Machine-certified manuscript, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give an exact, bounded computation for one released Gassmann pair in the labelled action of
+$G=W(E_6)$, $|G|=51840$.  If $H_+$ and $H_-$ are the nonconjugate subgroups of order $162$
+and index $320$, then the three finite etale algebras
+\[
+ F_+\otimes F_+,\qquad F_+\otimes F_-,\qquad F_-\otimes F_-
+\]
+are pairwise distinct in the Burnside ring while their rational linearizations, and hence their
+formal products of Dedekind zeta functions, agree.  We enumerate all 36 double-coset factors,
+separate the 160 conjugate mixed positions into 12 factors and 8 rational field types, and give
+the complete 160/12/8 dictionary.  A normalized Fourier decomposition of a released integral
+carrier has rank three and identifies an exact degree-40 mixed base through an embedded stabilizer
+equality.  The resulting $A/B/M/F_+$ diamond has degrees $40,80,160,320$.  Global arithmetic
+for all advertised fields and both retained local branches is recorded.  The computation is
+reproducible from the released source and result inventories; it makes no claim about bad Euler
+factors, root numbers, automorphy, RH, or a Hilbert--Polya operator.
+\end{abstract}
+
+\section{Contribution and boundary}
+Let $K/\Q$ be the released common normal closure, with $G=\Gal(K/\Q)=W(E_6)$.  The released
+subgroups $H_+$ and $H_-$ have order 162, trivial core, equal rational permutation character,
+and are not conjugate.  Put $F_\pm=K^{H_\pm}$ and $x=[G/H_+]$, $y=[G/H_-]$.
+The contribution is the exact instance
+\begin{equation}
+ x^2,\;xy,\;y^2\text{ pairwise distinct in }B(G),\qquad
+ \operatorname{lin}(x^2)=\operatorname{lin}(xy)=\operatorname{lin}(y^2).
+\label{eq:main}
+\end{equation}
+The corresponding finite etale algebras are therefore pairwise nonisomorphic despite equal
+rational character and zeta products.  The statement is an instance-level theorem, not a new
+general Burnside or Fourier method; double-coset tensor factorization, Gassmann equivalence,
+and Artin formalism are classical (see \cite{james,perlis,bartel}).
+
+Throughout, arrays are one-based images on 27 labels, composition is left-after-right, and
+all arithmetic is exact.  Hashes and Table-of-Marks locators are checks, never definitions.
+The literal scope firewall is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\begin{theorem}[Integrated C61 theorem]\label{thm:main}
+For this fixed labelled $W(E_6)$ extension and released Gassmann pair, the three products
+$x^2,xy,y^2$ have the complete 36-row atlas below, are pairwise distinct in $B(G)$, and
+have one common rational linearization.  The mixed product has 160 conjugate positions,
+12 factors, and 8 rational field types.  The normalized Fourier carrier has rank three,
+the seed-149 join is the degree-40 P6 base, and the $A/B/M/F_+$ diamond has degrees
+$40,80,160,320$.  The global table and both retained local branches are exact.
+\end{theorem}
+
+The proof is conditional only on the released machine premises explicitly rebound in
+Section~\ref{sec:evidence}; the mathematical implications are proved in Sections 2--7.
+No pilot table is used as theorem authority.
+
+\section{Prior work and ownership}
+Gassmann's construction and Perlis's theorem supply the bridge from equal permutation characters
+to equal zeta functions \cite{gassmann,perlis}.  Burnside linearization and its kernel are
+prior infrastructure \cite{bartel,parzanchevski,lin}; the double-coset tensor/compositum
+decomposition is also prior, with precise statements in Etienne's Lemmas 1.11--1.12 and
+Proposition 1.13 \cite{etienne}.  James's Section 3.1 collision census, especially page 22,
+is selection context only \cite{james}.  Kida's Proposition 4.1 and Corollary 4.2 are the
+closest compositum comparator, but use matched linearly disjoint extensions rather than the
+complete atlas inside one common $W(E_6)$ closure \cite{kida}.  Accordingly, our contribution
+is the bounded exact conjunction in Theorem~\ref{thm:main}, not a general method or priority claim.
+
+\section{Tensor products from double cosets}
+For subgroups $H,J\leq G$, the diagonal action gives
+\begin{equation}
+ (G/H)\times(G/J)\simeq\coprod_{HgJ\in H\backslash G/J}G/(H\cap gJg^{-1}).
+\label{eq:doublecoset}
+\end{equation}
+For a representative $g$ write $I_{ab,g}=H_a\cap gH_bg^{-1}$ and
+$J_{ab,g}=\langle H_a,gH_bg^{-1}\rangle$.  Core-freeness and the common normal closure
+identify the factor and base fields as $K^{I_{ab,g}}=F_aF_b^g$ and
+$K^{J_{ab,g}}=F_a\cap F_b^g$.
+
+\begin{lemma}[Tensor and fixed-field dictionary]\label{lem:dictionary}
+For $H,J\leq G$,
+\[
+K^H\otimes_\Q K^J\cong\prod_{HgJ\in H\backslash G/J}K^{H\cap gJg^{-1}},
+\quad K^HK^J=K^{H\cap J},\quad K^H\cap K^J=K^{\langle H,J\rangle}.
+\]
+\end{lemma}
+\begin{proof}
+The orbit through $(H,gJ)$ in $(G/H)\times(G/J)$ has stabilizer
+$H\cap gJg^{-1}$, and two such points share an orbit precisely when their representatives
+share a double coset.  Passing from finite $G$-sets to finite etale algebras gives the first
+identity.  The compositum is fixed by $H\cap J$ and the intersection by the subgroup generated
+by $H$ and $J$, proving the remaining identities by Galois correspondence.
+\end{proof}
+
+\begin{lemma}[Core-free isomorphism criterion]\label{lem:corefree}
+If $I_1,I_2\leq G$ have trivial core, then $K^{I_1}$ and $K^{I_2}$ are
+$\Q$-isomorphic if and only if $I_1$ and $I_2$ are conjugate in $G$.
+\end{lemma}
+\begin{proof}
+Trivial core makes $K$ the normal closure of either fixed field.  A $\Q$-isomorphism extends
+to an automorphism of an algebraic closure and restricts on the common normal closure to some
+$g\in G$.  For $\alpha\in K^{I_1}$ and $h\in I_1$,
+$(ghg^{-1})(g\alpha)=g(h\alpha)=g\alpha$.  Thus $gI_1g^{-1}$ fixes $K^{I_2}$,
+and equal degrees force equality.  Conversely a conjugator maps one fixed field to the other.
+\end{proof}
+
+\subsection{Complete 36-row factor atlas}
+The following is the complete row inventory.  The label $Q_i$ is a rational isomorphism type;
+the listed degree is the factor degree and the multiplicity is one per double-coset row.
+\begin{longtable}{@{}lllrr@{}}
+\caption{All 36 tensor rows.}\label{tab:36}\\
+\toprule
+product & row & $Q$ type & degree & multiplicity\\\midrule
+\endfirsthead\toprule product & row & $Q$ type & degree & multiplicity\\\midrule\endhead
+$T_{++}$&1&Q1&320&1\\ $T_{++}$&2&Q1&320&1\\ $T_{++}$&3&Q2&960&1\\
+$T_{++}$&4&Q2&960&1\\ $T_{++}$&5&Q3&1920&1\\ $T_{++}$&6&Q4&5760&1\\
+$T_{++}$&7&Q4&5760&1\\ $T_{++}$&8&Q5&8640&1\\ $T_{++}$&9&Q5&8640&1\\
+$T_{++}$&10&Q6&17280&1\\ $T_{++}$&11&Q7&25920&1\\ $T_{++}$&12&Q7&25920&1\\
+$T_{+-}$&1&Q8&640&1\\ $T_{+-}$&2&Q9&960&1\\ $T_{+-}$&3&Q9&960&1\\
+$T_{+-}$&4&Q10&1920&1\\ $T_{+-}$&5&Q11&2880&1\\ $T_{+-}$&6&Q11&2880&1\\
+$T_{+-}$&7&Q12&2880&1\\ $T_{+-}$&8&Q12&2880&1\\ $T_{+-}$&9&Q13&8640&1\\
+$T_{+-}$&10&Q13&8640&1\\ $T_{+-}$&11&Q14&17280&1\\ $T_{+-}$&12&Q15&51840&1\\
+$T_{--}$&1&Q16&320&1\\ $T_{--}$&2&Q16&320&1\\ $T_{--}$&3&Q17&960&1\\
+$T_{--}$&4&Q17&960&1\\ $T_{--}$&5&Q3&1920&1\\ $T_{--}$&6&Q4&5760&1\\
+$T_{--}$&7&Q4&5760&1\\ $T_{--}$&8&Q18&8640&1\\ $T_{--}$&9&Q18&8640&1\\
+$T_{--}$&10&Q6&17280&1\\ $T_{--}$&11&Q7&25920&1\\ $T_{--}$&12&Q7&25920&1\\
+\bottomrule
+\end{longtable}
+Each product has dimension $102400$.  Thus the spectra are
+\[
+T_{++}=T_{--}=[320^2,960^2,1920,5760^2,8640^2,17280,25920^2],
+\]
+\[
+T_{+-}=[640,960^2,1920,2880^4,8640^2,17280,51840].
+\]
+The complete $Q$ atlas (order, normalizer order, automorphism order, core order) is:
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule type&$|Q|$&$|N_G(Q)|$&$|\operatorname{Aut}_\Q|$&$|\operatorname{core}|$\\\midrule
+Q1&162&324&2&1\\Q2&54&1296&24&1\\Q3&27&1296&48&1\\Q4&9&324&36&1\\Q5&6&24&4&1\\Q6&3&1296&432&1\\Q7&2&96&48&1\\Q8&81&324&4&1\\Q9&54&108&2&1\\Q10&27&1296&48&1\\Q11&18&36&2&1\\Q12&18&108&6&1\\Q13&6&36&6&1\\Q14&3&216&72&1\\Q15&1&51840&51840&1\\Q16&162&324&2&1\\Q17&54&216&4&1\\Q18&6&24&4&1\\\bottomrule\end{tabular}\end{center}
+
+\subsection{The eight P types and pairwise separation}
+The join atlas has eight types:
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule type&$|P|$&$|N_G(P)|$&$|\operatorname{Aut}_\Q|$&$|\operatorname{core}|$\\\midrule
+P1&162&324&2&1\\P2&648&1296&2&1\\P3&1296&1296&1&1\\P4&51840&51840&1&51840\\P5&324&324&1&1\\P6&1296&1296&1&1\\P7&162&324&2&1\\P8&648&1296&2&1\\\bottomrule\end{tabular}\end{center}
+The plus-self join with digest \sha{263f31237e6f5111f76fd3470b6936a1a314020255c22eab55cece395c2adeb5}
+and the transported minus-self join are conjugate, so they form one $P3$ class.  The mixed
+Fourier join has digest \sha{55d7f2df8abc6709489e9bf632c45d620b9b570e6a295a82ee6f941c24c2c6bc}
+and is $P6$, not $P3$.  This is the witness separating the three Burnside products; equal
+degree spectra alone would not suffice.
+
+\begin{proposition}[Burnside and zeta conclusions]\label{prop:burnside}
+Equation~\eqref{eq:main} holds.  The three finite etale algebras are pairwise nonisomorphic,
+while their products of Dedekind zeta functions agree.
+\end{proposition}
+\begin{proof}
+The mixed spectrum contains degrees 640, 2880, and 51840, absent from either self spectrum,
+so $xy$ differs from $x^2$ and $y^2$.  The self spectra agree, but their two diagonal
+degree-320 constituents have $H_+$ and $H_-$ type respectively.  The released subgroups are
+nonconjugate and core-free; Lemma~\ref{lem:corefree} separates these constituents, proving
+$x^2\ne y^2$.
+
+Rational linearization $\ell:B(G)\to R_\Q(G)$ is a ring homomorphism.  From the released
+Gassmann identity $\ell(x)=\ell(y)$ we obtain
+$\ell(x^2)=\ell(xy)=\ell(y^2)$.  In particular $x(x-y)$, $y(x-y)$, and
+$(x+y)(x-y)$ are explicit nonzero kernel elements.  The tensor decompositions turn Burnside
+inequality into nonisomorphism of the finite etale algebras.  Finally $\zeta_{K^H}$ is the Artin
+$L$-function of $\operatorname{Ind}_H^G\mathbf1$; multiplicativity over direct sums gives the
+three equal zeta products.  This formal consequence computes no forbidden bad Euler data.
+\end{proof}
+
+\section{The mixed 160/12/8 dictionary}
+There are 160 conjugate positions, 12 mixed double cosets, and 8 rational field types.  The
+complete type dictionary is shown in Table~\ref{tab:dictionary}; ``base'' is the intersection
+degree and ``factor'' is the compositum degree.
+\begin{table}[ht]
+\centering\small
+\caption{Mixed 160/12/8 dictionary.}\label{tab:dictionary}
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule relative type&$P$&$Q$&raw multiplicity&base&factor\\\midrule
+1&P5&Q8&1&160&640\\2&P3&Q9&3&40&960\\3&P6&Q10&3&40&1920\\
+4&P4&Q11&9&1&2880\\5&P4&Q12&9&1&2880\\6&P4&Q13&27&1&8640\\
+7&P4&Q14&27&1&17280\\8&P4&Q15&81&1&51840\\\bottomrule
+\end{tabular}
+\end{table}
+The degree-640 row recovers the released C60 field $L$ over $M$ (degrees $640$ and $160$);
+the degree-51840 row is the unique mixed maximum $K$.  These uniqueness statements are
+restricted to the twelve mixed rows.  The field dictionary follows from Galois correspondence,
+not from subgroup order or hash coincidence.
+
+\begin{proposition}[Mixed classification]\label{prop:mixed}
+The mixed 160 positions form 12 double cosets and exactly 8 $\Q$-isomorphism classes, with
+the multiplicities and degrees in Table~\ref{tab:dictionary}.
+\end{proposition}
+\begin{proof}
+The 160 conjugates of $H_-$ were enumerated from the released labelled arrays.  Their left
+$H_+$-orbits give 12 double cosets.  Every intersection was reconstructed as a complete
+embedded subgroup and all eight type representatives have trivial core.  Lemma~\ref{lem:corefree}
+therefore converts the eight conjugacy classes into exactly eight rational field types.  The raw
+counts satisfy $1+3+3+9+9+27+27+81=160$, and the twelve factor degrees sum to 102400.
+For type 1 the complete intersection and join equal the released groups $J$ and $N$, so
+Lemma~\ref{lem:dictionary} gives $L/M$.  Type 8 has trivial intersection and factor $K$.
+\end{proof}
+
+\section{Product-form resolvents and Fourier descent}
+The 14 source-owned carriers use a regular Lagrange basis in the 27 labelled roots.  At the
+completely split prime $p=692717$, every advertised orbit value is distinct both in characteristic
+zero and modulo $p$.  This evaluated noncollision is what upgrades formal stabilizers to field
+degrees; no expanded characteristic-zero coefficient vector is claimed.
+
+Let $\lambda$ be the released primitive carrier.  The exact Fourier components satisfy
+\begin{equation}
+ R_0=0,\qquad r_+=R_+/2,\qquad r_3=R_3/4,\qquad r_0=r_+r_3,
+\end{equation}
+and the normalized reconstruction is
+\begin{equation}
+ 4\lambda=\operatorname{Tr}+2r_++4r_3.
+\label{eq:fourier}
+\end{equation}
+The orbit-span dimension over $M$ is three.  The identity values at $p$ are
+\[
+\operatorname{Tr}=581739,\quad r_+=643771,\quad r_3=119649,
+\quad r_0=582281\pmod p.
+\]
+The 243-term trace carrier has digest \sha{a7398d36cea0c83ace64466a579e21666731d1e3c8e8641df4ce036c79de2bd7}.
+The exact square-class identity is $[\delta_0]=[\delta_+][\delta_3]$.
+
+Set $S_+=\Stab_G(r_+)$ and $T_+=\Stab_G(\{r_+,-r_+\})$.  The seed-149 mixed join equals
+the same embedded element set as $T_+$, of order 1296; this is stronger than an abstract group
+isomorphism or a Table-of-Marks locator.  With
+\[
+ A=\Q(\delta_+)=K^{T_+},\quad B=\Q(r_+)=K^{S_+},\quad M=K^N,\quad F_+=K^{H_+},
+\]
+the exact diamond is
+\begin{equation}
+ [A:\Q],[B:\Q],[M:\Q],[F_+:\Q]=40,80,160,320,
+ \qquad B\cap M=A,\quad BM=F_+.
+\end{equation}
+Moreover $\operatorname{Aut}_\Q(A)=1$, $|\operatorname{Aut}_\Q(B)|=2$, and both routes around
+the diamond agree on relative discriminant norms.
+
+\begin{proposition}[Fourier rank and evaluated fields]\label{prop:fourier}
+The four $V_4=N/J$ conjugates of $\lambda$ span a three-dimensional $M$-space, and the
+displayed $A/B/M/F_+$ diagram is the exact evaluated fixed-field diamond.
+\end{proposition}
+\begin{proof}
+For each rational character $\chi$ of $V_4$, form
+$R_\chi=\sum_{q\in V_4}\chi(q)q(\lambda)$.  Character orthogonality gives
+$4\lambda=\operatorname{Tr}+R_++R_0+R_3$.  Exact sparse arithmetic proves $R_0=0$,
+$R_+=2r_+$, and $R_3=4r_3$, giving Equation~\eqref{eq:fourier}.  The three remaining
+terms lie in distinct rational eigenspaces.  Their nonzero reductions at $p=692717$ prove
+nonvanishing in characteristic zero, hence their independence and rank three.
+
+If an integral formal carrier is fixed by $H$, it has at most $[G:H]$ characteristic-zero
+conjugates.  When all $[G:H]$ formal orbit values have pairwise distinct reductions at a
+completely split prime, no two characteristic-zero values coincide.  Thus the evaluated
+stabilizer is exactly $H$ and the carrier generates $K^H$.  Applying this argument to
+$r_+,\delta_+,r_3,\delta_3,r_0,\delta_0$ gives orbit sizes $80,40,320,160,320,160$.
+
+The seed-149 join equals $T_+$ as a complete embedded element set.  Hence
+$A=K^{T_+}=F_+\cap F_-^{g_{149}}$.  The exact subgroup identities
+$S_+\cap N=H_+$ and $\langle S_+,N\rangle=T_+$ give, by
+Lemma~\ref{lem:dictionary}, $BM=F_+$ and $B\cap M=A$.  Subgroup orders give the four
+degrees and normalizers give the automorphism orders.  In particular $\Q(r_+)\ne F_+$ and
+$\Q(\delta_+)\ne M$.
+\end{proof}
+
+The product $r_0=r_+r_3$ is distinct from the vanished direct component $R_0$.
+Squaring yields $\delta_0=\delta_+\delta_3$, hence
+$[\delta_0]=[\delta_+][\delta_3]$ in $M^\times/M^{\times2}$.
+
+\section{Global arithmetic}
+All discriminants below are field discriminants obtained from permutation conductors; they are
+not polynomial or order discriminants.  The exponent vector is ordered $(3,5,\Pi_A,\Pi_B)$ and
+the signature is $(r_1,r_2)$.
+\begin{center}\scriptsize
+\begin{tabular}{@{}lrrll@{}}\toprule field&degree&sign&signature&exponents\\\midrule
+C1&160&+&(16,72)&(308,248,96,80)\\C2&40&+&(8,16)&(68,62,18,20)\\C3&40&-&(6,17)&(75,61,24,15)\\C4&1&+&(1,0)&(0,0,0,0)\\
+E1&640&+&(0,320)&(1264,992,384,320)\\E2&960&+&(16,472)&(1944,1488,624,480)\\E3&1920&+&(0,960)&(3808,2976,1152,960)\\
+E4&2880&+&(16,1432)&(5872,4464,1872,1440)\\E5&2880&+&(48,1416)&(5856,4464,1872,1440)\\E6&8640&+&(48,4296)&(17640,13392,5616,4320)\\
+E7&17280&+&(0,8640)&(35504,26784,11520,8640)\\E8&51840&+&(0,25920)&(106560,80352,34560,25920)\\B&80&+&(4,38)&(154,122,48,30)\\\bottomrule\end{tabular}\end{center}
+The ramified support is exactly $\{3,5\}$ together with the two certified Fourier-prime
+supports $\Pi_A,\Pi_B$.  The relative norm vectors for the five diamond extensions are
+independently consistent along both routes.
+
+\begin{proposition}[Conductor calculation]\label{prop:global}
+The displayed signatures and field-discriminant vectors follow from the exact permutation
+orbit vectors, and both diamond routes agree.
+\end{proposition}
+\begin{proof}
+For a degree-$n$ action with $o_\infty$ complex-conjugation orbits,
+$r_1=2o_\infty-n$ and $r_2=n-o_\infty$.  For the released filtration the exact exponents are
+\[
+v_3=(n-o_{I_3})+\tfrac12(n-o_{P_3})+(n-o_{Q_3}),\qquad
+v_5=(n-o_{I_5})+\tfrac34(n-o_{P_5}),
+\]
+\[
+v_{\Pi_A}=n-o_{C_3},\qquad v_{\Pi_B}=n-o_{C_2}.
+\]
+Substitution of the independently reconstructed orbit vectors gives every row above.  For
+$E/C$, the tower formula
+\[
+\operatorname{Disc}(E/\Q)=\operatorname{Disc}(C/\Q)^{[E:C]}
+N_{C/\Q}(\mathfrak d_{E/C})
+\]
+gives
+\[
+N(\mathfrak d_{B/A})=(4,0,0,0),\quad N(\mathfrak d_{M/A})=(8,4,0,20),
+\]
+\[
+N(\mathfrak d_{F_+/B})=(8,8,0,40),\quad
+N(\mathfrak d_{F_+/A})=(24,8,0,40),\quad N(\mathfrak d_{F_+/M})=(8,0,0,0).
+\]
+Both $2(8,4,0,20)+(8,0,0,0)$ and $4(4,0,0,0)+(8,8,0,40)$ equal
+$(24,8,0,40)$, proving route consistency.
+\end{proof}
+
+\section{Both local branches and complementarity}
+We retain, without selecting, the two released Table-of-Marks branches $D_3=\mathrm{ToM}\,140$
+and $D_3=\mathrm{ToM}\,206$.  The table gives factor counts, degree totals, and different totals
+for the bases $B,C_1,C_2,C_3,C_4$ and the eight mixed factors $E_i$.
+\begin{center}\scriptsize
+\begin{tabular}{@{}lrrr|rrr@{}}\toprule &\multicolumn{3}{c|}{ToM 140}&\multicolumn{3}{c}{ToM 206}\\field&factors&degree&different&factors&degree&different\\\midrule
+B&10&80&154&8&80&154\\C1&22&160&308&11&160&308\\C2&10&40&68&5&40&68\\C3&7&40&75&5&40&75\\C4&1&1&0&1&1&0\\
+E1&56&640&1264&28&640&1264\\E2&72&960&1944&36&960&1944\\E3&160&1920&3808&80&1920&3808\\E4&188&2880&5872&94&2880&5872\\E5&204&2880&5856&102&2880&5856\\E6&552&8640&17640&276&8640&17640\\E7&968&17280&35504&484&17280&35504\\E8&2880&51840&106560&1440&51840&106560\\\bottomrule\end{tabular}\end{center}
+Every uncollected row was checked, every ramified relative row is tame with $(e,d)=(2,1)$,
+and the primewise laws are
+\[
+\gcd(\mathfrak d_{F_+/M},\mathfrak d_{F_3/M})=1,\quad
+\mathfrak d_{F_0/M}=\mathfrak d_{F_+/M}\mathfrak d_{F_3/M},\quad
+\mathfrak d_{L/M}=\mathfrak d_{F_0/M}^2.
+\]
+The archimedean calculation gives complementary real splitting and $\mathbb C\times\mathbb C$
+over every real place of $M$.  The tuples $(n,e,f,d)$ do not classify local fields.
+
+\begin{proof}[Proof of the local assertion in Theorem~\ref{thm:main}]
+For each base prime and relative row $(g,e,f,d)$, set $a=gfd$.  Every uncollected row in
+both branches verifies
+\[
+\min(a_+,a_3)=0,\qquad a_0=a_++a_3,qquad a_L=2a_0.
+\]
+The valuation identities imply the three displayed ideal equalities.  The ToM 140 and 206
+branch populations are respectively $(8,8,6,0)$ and $(4,4,3,0)$ for
+$(H_+,H_3,1,H_0)$, while both have residue-degree masses $(8,8,6,0)$; no branch is
+selected.  Every ramified relative row has $e=2,d=1$, hence is tame.  Independently, the
+infinite types $H_+:8,H_3:8,H_0:0$ prove the archimedean complementarity.
+\end{proof}
+
+\section{Reproducibility and evidence}\label{sec:evidence}
+The official clean refresh and mandatory replay each passed $57/57$ using GAP 4.11.1 and TomLib
+1.2.9 for the independent group lane \cite{gap,tomlib}.  The authoritative payload,
+certificate, report, schema, and scoped manifest have digests
+\begin{center}\scriptsize
+\begin{tabular}{@{}ll@{}}payload&\sha{b7fb70451433fd4c93fd9d60a338426362f42c4594ff4de5a35e25f49819ab1a}\\certificate&\sha{c6d64787e91c78e7e7f74b88720ebf169c13d8200f78c585abe63d4e1b9b2dec}\\report&\sha{4b8b3bd21209cc9346ac7e38fbb9771d0b8b33de0cd28ccbb117beaa95e8c161}\\schema (pretty)&\sha{a446d693742a327dd0b1edd3ad5da97a50dc76cc0f1f7e171096df341ad10e76}\\manifest&\sha{eb48ffb2ec728ca9d1966cfd22b6a9f2eba447bcf872d2068f4604112d19a6d1}\\producer&\sha{dadf8899f2fe82b65131a43ffbe438602db79a12654489b34d35ae8a6ee83d99}\\checker&\sha{571de05ce06cf98c1acb6809800cf5f212755ce91c5d2f8eb5733eb1aa708887}\end{tabular}\end{center}
+The payload has 19078 scalar leaves and the schema 29; the checker rejects 19109 value,
+19109 type, and 14 structural certificate mutations, plus 6 group, 4 resolver, and 2 artifact
+contract rebounds.  All 30 scope leaves are false.  The paper uses no external pilot as theorem
+authority and no generated certificate as a definition.
+
+\section{Limitations and conclusion}
+Equation~\eqref{eq:main} is the exact bounded conclusion.  We do not claim bad Euler data,
+decomposition Frobenius, epsilon or root numbers, Artin holomorphy, automorphy, analytic
+continuation, RH, a Hilbert--Polya operator, maximal orders, integral bases, class numbers,
+regulators, local-field classification, rational points, or branch selection.  Both local branches
+remain part of the theorem data.  Release and promotion are workflow states distinct from the
+mathematical certificate; this manuscript reports the machine-complete evidence while retaining
+that separation.
+
+\appendix
+\section{Claim-to-evidence matrix}
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}\toprule claim&evidence\\\midrule
+36 tensor rows and characters&G1 payload and independent GAP projection\\
+160/12/8 dictionary&G2 mixed resolver rows, core-free extension checks\\
+field degrees&G3 product-form carriers and complete split-prime noncollision\\
+Fourier bridge and diamond&G4 exact sparse identities, stabilizers, embedded seed-149 equality\\
+global arithmetic&G5 conductor and relative-norm vectors\\
+both local branches&G6 complete uncollected rows and primewise ideal laws\\
+independence and firewall&G7 source separation, mutation suites, 30 false scope leaves\\\bottomrule
+\end{tabularx}\end{center}
+
+\bibliographystyle{plain}
+\begin{thebibliography}{12}
+\bibitem{gassmann} F. Gassmann, Bemerkungen zur vorstehenden Arbeit von Hurwitz,
+\emph{Math. Z.} 25 (1926), 665--675. DOI: \url{https://doi.org/10.3929/ethz-a-000092350}.
+\bibitem{james} A. A. James, \emph{A Bayesian Approach to Computing Brauer Groups of Cubic Surfaces}, Ph.D. thesis, Rice University, 2022, Section 3.1, especially p. 22.
+\bibitem{perlis} R. Perlis, On the equation $\zeta_K(s)=\zeta_{K'}(s)$,
+\emph{J. Number Theory} 9 (1977), 342--360. DOI: \url{https://doi.org/10.1016/0022-314X(77)90070-1}.
+\bibitem{bartel} A. Bartel and T. Dokchitser, Brauer relations in finite groups,
+\emph{J. Eur. Math. Soc.} 17 (2015), 2473--2512. DOI: \url{https://doi.org/10.4171/JEMS/563}.
+\bibitem{parzanchevski} O. Parzanchevski, On $G$-sets and isospectrality,
+\emph{Ann. Inst. Fourier} 63 (2013), 2307--2329. DOI: \url{https://doi.org/10.5802/aif.2831}.
+\bibitem{lin} H.-Y. Lin, E. Shinder, and S. Zimmermann, Factorization centers in dimension two and the Grothendieck ring of varieties, \emph{Algebraic Geometry} 10 (2023), 680--697, arXiv:2012.04806.
+\bibitem{etienne} F. Etienne, Computing class groups by induction with generalised norm relations,
+arXiv:2411.13124v2, 2024, Lemmas 1.11--1.12 and Proposition 1.13.
+\bibitem{kida} M. Kida, Arithmetic equivalence under isoclinism,
+\emph{Communications in Algebra} 52 (2024), 3008--3019. DOI: \url{https://doi.org/10.1080/00927872.2024.2312460}.
+\bibitem{gap} The GAP Group, \emph{GAP -- Groups, Algorithms, and Programming}, Version 4.11.1, 2021.
+\bibitem{tomlib} J. Neubueser et al., \emph{TomLib}, Version 1.2.9, GAP package, 2019.
+\end{thebibliography}
+\end{document}
