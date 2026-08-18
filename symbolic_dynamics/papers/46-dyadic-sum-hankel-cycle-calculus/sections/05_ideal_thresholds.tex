@@ -1,0 +1,135 @@
+\section{Sharp Hilbert--Schmidt and trace-class thresholds}
+\label{sec:ideals}
+
+Distinct dyadic anti-diagonals have disjoint support.  Hence, whenever the
+sum is finite,
+\begin{equation}
+  \norm{H_s}_2^2
+  =\sum_{a\ge1}\sum_{m=1}^{2^a-1}
+     [m(2^a-m)]^{-\sigma}.
+  \label{eq:hs-levels}
+\end{equation}
+The following elementary level estimates contain the entire
+Hilbert--Schmidt threshold.  Their detailed constants are recorded in
+\cref{app:endpoints}.
+
+\begin{lemma}[Dyadic anti-diagonal estimates]
+\label{lem:level-estimates}
+For $N=2^a$:
+\begin{enumerate}
+  \item if $0<\alpha<1$, then
+  \[
+    \sum_{m=1}^{N-1}[m(N-m)]^{-\alpha}
+    \asymp_\alpha N^{1-2\alpha};
+  \]
+  \item if $\alpha=1$, then the sum is $2H_{N-1}/N$;
+  \item if $\alpha>1$, then the sum is $O_\alpha(N^{-\alpha})$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By symmetry it suffices to sum over $m\le N/2$.  There,
+$N/2\le N-m<N$, so the level is comparable to
+$N^{-\alpha}\sum_{m\le N/2}m^{-\alpha}$.  This is
+$N^{1-2\alpha}$ for $\alpha<1$ and $O(N^{-\alpha})$ for $\alpha>1$.
+At $\alpha=1$, the partial-fraction identity
+\[
+  \frac1{m(N-m)}=\frac1N(\frac1m+\frac1{N-m})
+\]
+gives the exact formula.
+\end{proof}
+
+\begin{theorem}[Sharp Hilbert--Schmidt wall]
+\label{thm:hs}
+The bounded realization $H_s$ belongs to $\Schatten{2}$ if and only if
+$\sigma>1/2$.
+\end{theorem}
+
+\begin{proof}
+For $0<\sigma<1$, applying the first part of
+\cref{lem:level-estimates} to \cref{eq:hs-levels} gives a dyadic outer
+series comparable to
+$\sum_a2^{a(1-2\sigma)}$, which converges exactly when
+$\sigma>1/2$.  In particular, the level mass stays bounded below at
+$\sigma=1/2$.  At $\sigma=1$, the exact harmonic formula is
+$2H_{2^a-1}/2^a$, which is summable in $a$.  For $\sigma>1$, the third
+part gives an $O(2^{-a\sigma})$ level bound.  Finally,
+\cref{thm:bounded} already excludes $\sigma\le0$.
+\end{proof}
+
+Trace class needs a different endpoint witness.  Sufficiency follows from
+entrywise summability:
+\begin{equation}
+  \sum_{m,n\ge1}\abs{h_s(m,n)}
+  =\sum_{a\ge1}\sum_{m=1}^{2^a-1}
+    [m(2^a-m)]^{-\sigma/2}.
+  \label{eq:entrywise-sum}
+\end{equation}
+For $1<\sigma<2$, the $a$th level is
+$O(2^{a(1-\sigma)})$; for $\sigma=2$ it is
+$2H_{2^a-1}/2^a=O(a2^{-a})$; and for $\sigma>2$ it is
+$O(2^{-a\sigma/2})$.  These level bounds make
+\cref{eq:entrywise-sum} finite whenever
+$\sigma>1$.  Expanding the matrix into rank-one coordinate operators then
+converges absolutely in trace norm.
+
+For necessity, set $Q_j=4^j$ and
+\begin{equation}
+  I_j=\Z\cap[Q_j/4,Q_j/3],
+  \qquad
+  J_j=\{Q_j-m:m\in I_j\}.
+  \label{eq:matching-sets}
+\end{equation}
+All sets $I_j$ and $J_j$ are pairwise disjoint.  For a finite upper index
+$J$, define a partial isometry $V_J$ by
+\[
+  V_J e_{Q_j-m}
+  =\frac{h_s(m,Q_j-m)}{\abs{h_s(m,Q_j-m)}}e_m,
+  \qquad m\in I_j,\quad j\le J,
+\]
+and let it vanish on the orthogonal complement.  Its selected domain and
+range vectors are orthonormal, so $\norm{V_J}=1$.  Direct matrix
+multiplication gives
+\begin{equation}
+  \Tr(V_J^*H_s)
+  =\sum_{j\le J}\sum_{m\in I_j}
+    [m(Q_j-m)]^{-\sigma/2}.
+  \label{eq:trace-dual-pairing}
+\end{equation}
+Each inner sum is comparable to $Q_j^{1-\sigma}$: it contains a fixed
+positive proportion of $Q_j$ indices, and both factors are comparable to
+$Q_j$.  If $H_s$ were trace class for $\sigma\le1$, standard trace duality
+\citep{simon2005trace} would bound \cref{eq:trace-dual-pairing} by
+$\norm{H_s}_1$ uniformly in $J$,
+whereas its right-hand side diverges.
+
+\begin{theorem}[Sharp trace-class wall]
+\label{thm:trace-class}
+The bounded realization $H_s$ belongs to $\Schatten{1}$ if and only if
+$\sigma>1$.
+\end{theorem}
+
+\begin{proof}
+Entrywise summability proves sufficiency.  The disjoint matching argument
+proves necessity for $0<\sigma\le1$, including the endpoint; for
+$\sigma\le0$ there is no bounded realization by \cref{thm:bounded}.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.93\textwidth}{!}{\input{figures/fig2_phase_diagram.tex}}
+  \caption{The three strict walls require different analytic witnesses.
+  Open circles exclude the endpoints: boundedness and compactness begin at
+  $\sigma>0$, the Hilbert--Schmidt property at $\sigma>1/2$, and trace class
+  at $\sigma>1$.  Line style duplicates the color encoding.}
+  \label{fig:phase-diagram-main}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{Exact operator-ideal and determinant domains.  Every endpoint is
+  rejected analytically rather than by finite-cutoff extrapolation.}
+  \label{tab:phase-domains-main}
+  \small
+  \input{figures/generated/theorem_phase_table.tex}
+\end{table}

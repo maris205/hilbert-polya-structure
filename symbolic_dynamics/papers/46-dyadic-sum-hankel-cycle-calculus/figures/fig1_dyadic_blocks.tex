@@ -1,0 +1,53 @@
+\begin{tikzpicture}[font=\small,>=Stealth]
+  \begin{scope}[x=0.48cm,y=0.48cm]
+    \draw[->] (0.65,0.75)--(9.25,0.75) node[right] {$m$};
+    \draw[->] (0.75,0.65)--(0.75,9.25) node[above] {$n$};
+    \foreach \x in {1,...,8}{
+      \draw[black!12] (\x,0.8)--(\x,8.2);
+      \draw[black!12] (0.8,\x)--(8.2,\x);
+      \node[below] at (\x,0.75) {\scriptsize\x};
+      \node[left] at (0.75,\x) {\scriptsize\x};
+    }
+    \draw[black!35,dashed] (0.8,1.2)--(1.2,0.8);
+    \draw[black!35,dashed] (0.8,3.2)--(3.2,0.8);
+    \draw[black!35,dashed] (0.8,7.2)--(7.2,0.8);
+    \draw[black!35,dashed] (7.8,8.2)--(8.2,7.8);
+    \foreach \x/\y in {1/1,1/3,3/1,1/7,3/5,5/3,7/1}
+      \filldraw[fill=black,draw=black] (\x,\y) circle (2.7pt);
+    \foreach \x/\y in {2/2,2/6,6/2}
+      \filldraw[fill=black!60,draw=black] (\x-0.065,\y-0.065)
+        rectangle (\x+0.065,\y+0.065);
+    \filldraw[fill=white,draw=black,rotate around={45:(4,4)}]
+      (3.92,3.92) rectangle (4.08,4.08);
+    \filldraw[fill=black!20,draw=black]
+      (8,8.13)--(7.87,7.90)--(8.13,7.90)--cycle;
+    \draw[black,very thick] (0.86,1.86)--(1.14,2.14);
+    \draw[black,very thick] (0.86,2.14)--(1.14,1.86);
+    \node[black,align=left,anchor=west] at (1.25,2.15)
+      {\scriptsize cross-valuation\\[-1pt]\scriptsize pair forbidden};
+    \node[anchor=west] at (4.4,7.4) {\scriptsize $\bullet\ v_2=0$};
+    \node[anchor=west] at (4.4,6.85) {\scriptsize $\blacksquare\ v_2=1$};
+    \node[anchor=west] at (4.4,6.30) {\scriptsize $\blacklozenge\ v_2=2$};
+    \node[anchor=west] at (4.4,5.75) {\scriptsize $\blacktriangle\ v_2=3$};
+  \end{scope}
+
+  \draw[->,very thick] (4.85,2.35)--(5.75,2.35)
+    node[midway,above,align=center,font=\scriptsize]{reorder by\\valuation};
+
+  \begin{scope}[shift={(6.0,0.15)}]
+    \node[font=\small,anchor=west] at (0,4.20)
+      {$\ell^2(\N)=\displaystyle\bigoplus_{k\ge0}\ell^2(2^k\N_{\rm odd})$};
+    \foreach \y/\lab/\scale/\shade in {
+      3.30/{$A_s$}/{$1$}/5,
+      2.35/{$2^{-s}A_s$}/{$2^{-s}$}/10,
+      1.40/{$2^{-2s}A_s$}/{$2^{-2s}$}/15,
+      0.45/{$\ddots$}/{$\ddots$}/20}{
+      \draw[rounded corners,fill=black!\shade,draw=black,thick]
+        (0,\y-0.30) rectangle (3.15,\y+0.30);
+      \node at (1.22,\y) {\lab};
+      \node[anchor=west,font=\scriptsize] at (2.05,\y) {scale \scale};
+    }
+    \node[anchor=west,align=left,font=\scriptsize] at (0,-0.20)
+      {one odd block repeated exactly;\\no finite-cutoff approximation};
+  \end{scope}
+\end{tikzpicture}

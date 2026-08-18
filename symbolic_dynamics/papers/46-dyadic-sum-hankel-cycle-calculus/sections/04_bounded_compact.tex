@@ -1,0 +1,64 @@
+\section{The boundedness and compactness wall}
+\label{sec:bounded}
+
+The absolute row sums simultaneously give a Schur bound and a compactness
+criterion.  For $\sigma>0$, let
+\begin{equation}
+  R_m=\sum_{n\ge1}\abs{h_s(m,n)}.
+  \label{eq:row-sum}
+\end{equation}
+Let $A=A(m)$ be the least integer for which $2^A>m$.  The neighbors of $m$
+are exactly $n_j=2^{A+j}-m$, $j\ge0$.  The first neighbor is a positive
+integer, while for $j\ge1$, $n_j\ge2^{A+j-1}$.  Consequently the row sum
+satisfies
+\begin{align}
+ R_m
+ &=m^{-\sigma/2}\sum_{j\ge0}(2^{A+j}-m)^{-\sigma/2} \notag\\
+ &\le m^{-\sigma/2}
+   +\frac{m^{-\sigma/2}2^{-A\sigma/2}}
+          {1-2^{-\sigma/2}}
+ \le m^{-\sigma/2}+C_\sigma m^{-\sigma}.
+ \label{eq:row-decay}
+\end{align}
+In particular, $\sup_mR_m<\infty$ and $R_m\to0$.
+
+\begin{theorem}[Sharp boundedness and compactness]
+\label{thm:bounded}
+The coefficient array $h_s$ admits a bounded operator realization on
+$\ell^2(\N)$ if and only if $\sigma>0$.  Whenever it does, the realization
+$H_s$ is compact.
+\end{theorem}
+
+\begin{proof}
+For $\sigma>0$, the modulus array is symmetric, so the Schur test and
+\cref{eq:row-decay} give a bounded realization.  To prove compactness, fix
+$\varepsilon>0$.  Choose $M$ so that $R_m<\varepsilon$ for $m>M$.  Each of
+the finitely many rows $m\le M$ is absolutely summable, so some $N\ge M$
+satisfies
+\begin{equation*}
+  \sum_{n>N}\abs{h_s(m,n)}<\varepsilon,
+  \qquad 1\le m\le M.
+\end{equation*}
+Every absolute row sum of $H_s-P_NH_sP_N$ is then below $\varepsilon$:
+for $m\le M$ it is the selected row tail, and for $m>M$ it is at most
+$R_m$.  The same holds for columns by symmetry of the modulus array.  A
+second Schur estimate yields
+$\norm{H_s-P_NH_sP_N}\le\varepsilon$.  Hence finite-rank compressions
+converge in norm.
+
+Suppose now that $\sigma\le0$ and that a bounded operator had the declared
+matrix coefficients.  In its row indexed by $1$, the entries at
+$n=2^a-1$, $a\ge1$, have squared moduli $(2^a-1)^{-\sigma}$.  Therefore
+\begin{equation}
+  \sum_{a\ge1}\abs{h_s(1,2^a-1)}^2
+  =\sum_{a\ge1}(2^a-1)^{-\sigma}=\infty.
+  \label{eq:row-one-obstruction}
+\end{equation}
+But a row of a bounded operator is the coordinate sequence of its adjoint
+applied to a basis vector and must lie in $\ell^2$.  This contradiction
+excludes every bounded realization on $\sigma\le0$.
+\end{proof}
+
+The proof is genuinely infinite at the boundary: no finite singular-value
+calculation can witness the divergent row in
+\cref{eq:row-one-obstruction}.

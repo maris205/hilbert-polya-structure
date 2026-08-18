@@ -1,0 +1,49 @@
+\section{Cycle intervals, parity, and orbit bookkeeping}
+\label{app:cycles}
+
+The affine coordinates in \cref{thm:cycle-solver} make positivity
+transparent.  Under even compatibility,
+\[
+  n_i=(-1)^{i-1}x+b_i.
+\]
+Every odd index contributes a strict lower bound $x>-b_i$, and every even
+index contributes a strict upper bound $x<b_i$.  Both index sets are
+nonempty for even $r\ge2$, so the interval $(L(q),U(q))$ is finite.  It may
+be empty.  Since all $q_i$ and hence all $b_i$ are integers, its positive
+solution count is exactly
+\[
+  \#(\Z\cap(L(q),U(q)))
+  =\max\{0,U(q)-L(q)-1\}.
+\]
+For the odd block, the recurrence modulo two reads
+$n_{i+1}\equiv n_i\pmod2$, because $q_i$ is even.  Thus filtering $x=n_1$
+to odd values filters every vertex simultaneously.
+
+At $r=1$, \cref{eq:odd-candidate} gives $n_1=q_1/2$.  This is exactly the
+loop at a power of two.  In the odd block only $q_1=2$ remains, corresponding
+to the loop at vertex $1$.  This length-one convention is independent of the
+restriction $r\ge2$ used for Hilbert--Schmidt trace powers.
+
+\paragraph{Based words, rotations, and primitive period.}
+A solution of \cref{eq:cycle-system} is a based vertex word
+$(n_1,\ldots,n_r)$.  Rotating the word changes its base point but represents
+the same cyclic orbit.  The edge labels rotate with it.  A word is primitive
+only when its least cyclic shift period is $r$; a repeated traversal is not a
+new primitive orbit.  The label tuple is derived from the vertex word and
+does not replace it: the same compatible even label tuple can have several
+vertex solutions, as $(4,8,8,4)$ demonstrates.
+
+The coefficient $1/r$ in the local determinant logarithm removes cyclic base
+points at the level of based trace terms.  It does not declare every label
+tuple primitive, nor does it turn a repeated word into a new primitive.
+Any Euler-product reorganization would require a separate least-period
+reduction.  No such primitive-orbit product is claimed in this paper.
+
+\paragraph{Finite-cutoff evaluation.}
+For a cutoff $N$, a matrix-independent evaluator lists the allowed ordered
+labels, applies \cref{thm:cycle-solver}, and then retains precisely the
+solutions with $1\le n_i\le N$ for every $i$.  Summing
+$\prod_i n_i^{-s}$ over these based solutions agrees with the trace of the
+cutoff matrix power.  The procedure is exact because the theorem classifies
+all positive solutions for each fixed ordered tuple; it uses neither a
+spectral approximation nor a primitive-orbit heuristic.

@@ -1,0 +1,142 @@
+\section{Valuation blocks, trace powers, and legal determinants}
+\label{sec:blocks}
+
+For $k\ge0$, let
+\[
+  \mathcal H_k
+  =\overline{\operatorname{span}}\{e_{2^ku}:u\in\Nodd\}.
+\]
+These spaces are mutually orthogonal and exhaust $\ell^2(\N)$.  Let
+$W_k:\ell^2(\Nodd)\to\mathcal H_k$ send $e_u$ to $e_{2^ku}$.  Define
+\[
+  \mathcal K:=\bigoplus_{k\ge0}\ell^2(\Nodd),
+  \qquad
+  W:\mathcal K\longrightarrow\ell^2(\N),
+  \qquad
+  W((x_k)_{k\ge0})=\sum_{k\ge0}W_kx_k.
+\]
+Orthogonality of the $\mathcal H_k$ makes $W$ a unitary.  Every block direct
+sum below is an operator on the explicitly named source space $\mathcal K$.
+
+\begin{theorem}[Exact $2$-adic direct sum]
+\label{thm:direct-sum}
+If $\sigma>0$, then, as bounded operators,
+\begin{equation}
+  W^*H_sW=\bigoplus_{k\ge0}2^{-ks}A_s.
+  \label{eq:direct-sum}
+\end{equation}
+No unbounded-operator equivalence is asserted for $\sigma\le0$.
+\end{theorem}
+
+\begin{proof}
+\Cref{lem:valuation} makes all off-diagonal blocks between distinct
+$\mathcal H_k$ vanish.  If $m=2^ku$ and $n=2^kv$ with $u,v$ odd, then
+\[
+  h_s(m,n)
+  =2^{-ks}\one_{\{u+v=2^b\text{ for some }b\ge1\}}(uv)^{-s/2}.
+\]
+Thus the $k$th diagonal block is exactly $2^{-ks}A_s$.  Boundedness on
+$\sigma>0$ is supplied by \cref{thm:bounded}, so the block identity is an
+identity of bounded operators.
+\end{proof}
+
+The direct sum now carries operator algebra, unlike the left--right phase
+factorization in \cref{lem:phase}.  In the Hilbert--Schmidt half-plane,
+$H_s^2$ and $A_s^2$ are trace class by Schatten H\"older, and multiplication
+by bounded powers handles every $r\ge2$.
+
+\begin{proposition}[Trace powers and the ordinary trace]
+\label{prop:trace-powers}
+If $\sigma>1/2$ and $r\ge2$, then
+\begin{equation}
+  \Tr(H_s^r)
+  =\frac{\Tr(A_s^r)}{1-2^{-rs}}.
+  \label{eq:trace-factor}
+\end{equation}
+If $\sigma>1$, then
+\begin{equation}
+  \Tr(H_s)=\sum_{k\ge0}2^{-ks}
+  =\frac1{1-2^{-s}}.
+  \label{eq:ordinary-trace}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Taking the $r$th power of \cref{eq:direct-sum} gives blocks
+$2^{-krs}A_s^r$.  Because the full power is trace class, its trace is the
+absolutely convergent sum of the block traces.  The scalar geometric series
+converges since $r\sigma>1$, proving \cref{eq:trace-factor}.  In the
+trace-class domain, the trace is the absolutely convergent diagonal sum.
+Loops occur exactly at $2^k$, and the diagonal entry there is $2^{-ks}$,
+which gives \cref{eq:ordinary-trace}.
+\end{proof}
+
+We next separate an entire determinant identity from its local logarithm.
+For a Hilbert--Schmidt operator $T$, write
+\[
+  E_2(w)=(1-w)e^w,\qquad
+  \det_2(I-zT)=\prod_j E_2(z\lambda_j(T)),
+\]
+where eigenvalues are repeated with algebraic multiplicity.  This is the
+standard Hilbert--Carleman determinant convention
+\citep{simon2005trace}.
+
+\begin{proposition}[Regularized block product]
+\label{prop:det2-product}
+If $\sigma>1/2$, then
+\begin{equation}
+  \det_2(I-zH_s)
+  =\prod_{k\ge0}\det_2(I-z2^{-ks}A_s),
+  \label{eq:det2-product}
+\end{equation}
+and the product converges uniformly on every compact subset of $\C$.
+\end{proposition}
+
+\begin{proof}
+Set $T_k=2^{-ks}A_s$ on the $k$th summand of $\mathcal K$.  Each $T_k$ is
+Hilbert--Schmidt, and
+\[
+  \sum_{k\ge0}\norm{T_k}_2^2
+  =\norm{A_s}_2^2\sum_{k\ge0}2^{-2k\sigma}<\infty.
+\]
+By \cref{thm:direct-sum}, $\bigoplus_kT_k=W^*H_sW$.  Applying the
+square-summable direct-sum theorem \cref{lem:abstract-det2-sum} therefore
+gives \cref{eq:det2-product} and compact-uniform convergence.  That lemma
+also supplies the complete nonnormal combined-eigenvalue argument, including
+the finite exceptional factors and canonical-product tail control.
+\end{proof}
+
+Both sides of \cref{eq:det2-product} are entire in $z$.  On the smaller
+zero-free disk $\abs{z}\norm{H_s}<1$, choose the logarithm branch normalized
+by $\log\det_2(I)=0$.  Then
+\begin{equation}
+  \log\det_2(I-zH_s)
+  =-\sum_{r\ge2}\frac{z^r}{r}
+      \frac{\Tr(A_s^r)}{1-2^{-rs}}.
+  \label{eq:local-log-det2}
+\end{equation}
+This logarithmic series is local; it is not a global logarithm of the entire
+function in \cref{eq:det2-product}.
+
+In the overlap $\sigma>1$, $H_s$ and $A_s$ are trace class.  Let
+$D_K=\bigoplus_{k=0}^K2^{-ks}A_s$.  Then
+\[
+  \norm{W^*H_sW-D_K}_1
+  =\norm{A_s}_1\sum_{k>K}2^{-k\sigma}\longrightarrow0.
+\]
+For finite $K$, the Fredholm determinant of $I-zD_K$ is the product of the
+block determinants.  Continuity of the determinant in trace norm, uniformly
+for $z$ in a compact set, permits $K\to\infty$ and gives
+\begin{equation}
+  \det(I-zH_s)
+  =\prod_{k\ge0}\det(I-z2^{-ks}A_s)
+  \label{eq:det-product}
+\end{equation}
+locally uniformly in $z$.  The two determinant conventions agree through
+\begin{equation}
+  \det_2(I-zH_s)
+  =\det(I-zH_s)\exp\!(\frac{z}{1-2^{-s}}).
+  \label{eq:det-overlap}
+\end{equation}
+No ordinary determinant is used on $1/2<\sigma\le1$, and no infinite
+determinant is defined outside its corresponding ideal domain.

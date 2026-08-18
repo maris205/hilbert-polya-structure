@@ -57,6 +57,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [43-squarefree-factor-periodic-rigidity](papers/43-squarefree-factor-periodic-rigidity/PAPER_PLAN.md) | [PDF](papers/43-squarefree-factor-periodic-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/43-squarefree-factor-periodic-rigidity/) | 对 two-sided all-rational-prime-square admissible shift，任意到 compact metrizable $\mathbb Z$-system 的 continuous surjective equivariant factor 都恰有一个周期点，即 all-zero fixed point 的像；所以全部 fixed-point counts 均为 $1$，Artin--Mazur zeta 为 $1/(1-z)$、inverse determinant 为 $1-z$，而 singleton primitive support 不能重标为 rational primes。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false；`STOP_DUPLICATE=LIVE_CONDITIONAL` 只是外部 literature/claim boundary，不是第五个严格终止码。 | **STOP_TRIVIAL_ONE_MINUS_Z_DIVISOR / STOP_PROXIMAL_PERIODIC_RIGIDITY / PROCEED_ONLY_AS_INTERNAL_EXACT_CLOSURE / STOP_SINGLETON_PRIMITIVE_SUPPORT / ROUTE_A_REJECTED / SD-C45** |
 | [44-q-adic-finite-size-boundary-spectra](papers/44-q-adic-finite-size-boundary-spectra/PAPER_PLAN.md) | [PDF](papers/44-q-adic-finite-size-boundary-spectra/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/44-q-adic-finite-size-boundary-spectra/) | 对任意 primitive finite zero--one adjacency matrix $A$ 与整数 radix $q\ge2$（含 composite $q$），order-one prefix remainder $E(N)=\log Z(N)-hN$ 精确延拓为 $\mathbb Z_q\to\mathbb R$ 的连续函数，其像恰为完整 accumulation set；仅在 binary golden control，该像是 strongly separated Cantor set，Hausdorff/box dimension 均为 $\log2/(2\log\varphi)$，ordinary cutoff generating function 的 unit circle 是 natural boundary。Ban--Hu--Lai author manuscript arXiv:2210.09115v1 的一维 displayed linear subleading formula 由 full-shift control 纠正，全部有效 prior leading/boundary results 记 zero candidate credit，且未 line-check version of record 或 erratum。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false。 | **EXACT Q-ADIC ACCUMULATION IMAGE / GOLDEN CANTOR DIMENSION / GOLDEN RADIAL NATURAL BOUNDARY / ROUTE_A_REJECTED / SD-C46** |
 | [45-isospectral-arithmetic-fiber-retractions](papers/45-isospectral-arithmetic-fiber-retractions/PAPER_PLAN.md) | [PDF](papers/45-isospectral-arithmetic-fiber-retractions/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/45-isospectral-arithmetic-fiber-retractions/) | 对每个整数 $h\ge2$，把 prime exponent 饱和到 $h-1$ 与 modulo $h$ 的两种 $h$-free arithmetic retraction 加权为紧算子；在共同有界域，它们有相同的简单非零谱、全部共同合法 power traces 与 integer-order regularized determinants，但饱和族恰在 $\Re s>1$ boundedly similar to compact normal，modulo 族则在全部 $\Re s>1/h$ 有界域如此，故 $1/h<\Re s\le1$ 是精确 isospectral-but-not-similar band。饱和 Riesz projections 有 exact primorial optimizer 和三种 maximal-order regimes；两族 singular values 有 explicit Weyl laws 且 $C_{h,1}=D_{h,1}=1$；self-commutator wall 为 $\Re(s)q=1$，区别于 operator Schatten wall $\Re(s)q=2$。 | **GO_EVALUATED / ISOSPECTRAL--NONSIMILAR BAND / EXACT PRIMORIAL--WEYL--COMMUTATOR LAWS / ROUTE_A_REJECTED_NOT_EVALUATED** |
+| [46-dyadic-sum-hankel-cycle-calculus](papers/46-dyadic-sum-hankel-cycle-calculus/PAPER_PLAN.md) | [PDF](papers/46-dyadic-sum-hankel-cycle-calculus/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/46-dyadic-sum-hankel-cycle-calculus/) | 对 looped support $m+n=2^a$ 的 Dirichlet-weighted coefficient array $h_s(m,n)=\mathbf 1_{\{m+n=2^a\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。每条边保持 $v_2$，从而在 bounded half-plane 得到 scaled odd-block direct sum、合法 trace powers 与 determinant products；固定 ordered dyadic labels 的 cyclic system 则有完整 odd/even solver。canonical State-A replay 覆盖 4 个 cutoffs、335,922 个 ordered tuples 与 36 个 exact traces，strict type-and-value mismatch 全为零；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / EXACT 2-ADIC BLOCK PRODUCT / COMPLETE LABELED CYCLE CALCULUS / ROUTE_A_REJECTED / SD-C48** |
 
 ### 论文 1 的候选分离结论
 
@@ -1591,13 +1592,74 @@ writer manifest SHA-256 为
 `(A0_FAIL,A1_FAIL,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`，overall 为
 `ROUTE_A_REJECTED_NOT_EVALUATED`，且不授权 Route B。
 
+### 论文 46：dyadic-sum weighted Hankel operators and labeled cycle calculus
+
+Paper 46 固定 positive-integer looped graph
+$m+n=2^a$（$a\ge1$），并以
+$h_s(m,n)=\mathbf 1_{\{m+n=2^a\}}(mn)^{-s/2}$ 作为 $\ell^2(\mathbb N)$ 上的
+coefficient array，complex powers 使用 real logarithm。该 array 有 bounded realization
+当且仅当 $\sigma=\Re s>0$，且在整个 bounded half-plane 都 compact；其 sharp ideal
+walls 为
+$H_s\in\mathcal S_2\iff\sigma>1/2$ 与
+$H_s\in\mathcal S_1\iff\sigma>1$。三个 endpoints 分别由 infinite-row obstruction、
+dyadic anti-diagonal central mass 与 pairwise-disjoint trace-dual matchings 处理，finite
+cutoff 不被用来推出任何 infinite theorem。
+
+每条合法边都保持 $v_2$。令 $A_s$ 为 odd-vertex compression，则仅在有界域
+$\sigma>0$ 有 bounded-operator unitary equivalence
+$H_s\simeq\bigoplus_{k\ge0}2^{-ks}A_s$。当 $\sigma>1/2$、$r\ge2$ 时，
+$\operatorname{Tr}(H_s^r)=\operatorname{Tr}(A_s^r)/(1-2^{-rs})$，并有 locally
+uniform 的 Hilbert--Carleman block product
+$\det_2(I-zH_s)=\prod_{k\ge0}\det_2(I-z2^{-ks}A_s)$；ordinary Fredholm determinant
+及其 block product 只在 $\sigma>1$ 使用。entire product 与 near-zero logarithmic trace
+series 分开陈述，complex left--right phase factorization 也不被误作 conjugacy 或用于
+传递 spectra、powers、traces 与 determinants。
+
+对固定 ordered dyadic labels $q_i=2^{a_i}$，cyclic equations
+$n_i+n_{i+1}=q_i$ 由 alternating recurrence 完全求解：odd length 只有一个 algebraic
+candidate，再检查全部 vertices 的 positivity；even length 先要求 alternating label sum
+为零，再由一个 explicit open integer interval 给出全部 positive solutions。在 odd block
+中只保留 odd $n_1$。这个 theorem 分类 fixed ordered label tuple 的 based vertex
+solutions；它本身不 quotient rotations，也不识别 primitive temporal orbits。
+
+claim boundary 只覆盖这一 frozen looped graph、real-logarithm branch 与 one-edge marker
+$z$。不主张 all-$\mathcal S_p$ theorem、rational-prime emergence、completed target
+divisor、functional equation、fixed self-adjoint Hilbert--Pólya lift 或 priority。bounded
+literature search 的 disposition 是 `SEARCH_BOUNDED_NO_EXACT_PACKAGE_HIT`；
+Fournier--Wagner novelty credit 为零，search absence 不转换为 novelty 或 priority credit。
+
+canonical State-A finite replay 覆盖完整 cutoffs $N=8,16,32,64$、335,922 个 ordered
+dyadic label tuples 与 36 个 exact rational trace cases，support、cycle、trace mismatch
+均为零，并要求 strict recursive type-and-value equality。proof auditor replay 8 个 frozen
+anchors、0 theorem failures；62 个 mutation instances（25 families）的 162 次 designated
+invocations 无 survivor，frozen external audit 的 13 个 physical clones、22 次 invocations
+也全部拒绝。primary/independent Route validators 分别通过 `10/10` 与 `18/18`，严格
+tuple 为
+`(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`，
+overall 为 `ROUTE_A_REJECTED`，Route B locked；terminal codes 为
+`STOP_EXPLICIT_DYADIC_INPUT`、`STOP_NO_RATIONAL_PRIME_PRIMITIVES` 与
+`STOP_NO_COMPLETED_SELF_ADJOINT_LIFT`。
+
+State-A result-ledger SHA-256 为
+`fa22dde6ec3a9cbd473528ebb619863ac7beb0d1c9cc807394541501153add37`，science
+projection SHA-256 为
+`8f03cf68855e1614b368d8f464349b4f96cc6ab1ac0faaddaa35c748e63080de`；writer-side
+canonical ledger SHA-256 为
+`a0f669a865382da47776754d0a785d81fd7243fbb4f1d5f270dddeb5acfbe7a6`。最终 16 页
+writer PDF SHA-256 为
+`8772e8c9649bea045bace7b369d446ff51f5c9a7eb95c7e1bc957a9ff2f02d6e`，49-entry
+writer manifest SHA-256 为
+`20f1331409e52d1cf5725268e729aa32f093042e8af43f3e90020859e7216ba8`。
+writer seal 状态为 `HOLD_FOR_INDEPENDENT_WRITER_AUDIT`；它是 pre-installation hold，
+不是 independent acceptance、publication verdict 或 authority-write authorization。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十五篇论文](papers/)
+- [四十六篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

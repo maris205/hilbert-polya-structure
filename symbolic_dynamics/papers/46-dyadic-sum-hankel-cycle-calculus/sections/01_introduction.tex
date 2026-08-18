@@ -1,0 +1,83 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Arithmetic sparsity can make an infinite matrix simultaneously tractable and
+deceptive.  In the matrix studied here, an entry is present only when its two
+indices sum to a power of two, but every present entry is weighted by both
+indices.  The support is lacunary, the weights are not translation invariant,
+and the three basic operator-ideal questions have three different sharp
+answers.
+
+For $s\in\C$, write $\sigma=\Re s$ and consider the coefficient array
+\begin{equation}
+  h_s(m,n)=\one_{\{m+n=2^a\text{ for some }a\ge1\}}
+  (mn)^{-s/2},\qquad m,n\in\N,
+  \label{eq:intro-matrix}
+\end{equation}
+where powers use the real logarithm and loops are retained.  We prove that
+these coefficients define a bounded operator $H_s$ on $\ell^2(\N)$ exactly
+for $\sigma>0$, and that the resulting operator is then compact.  Its
+Hilbert--Schmidt and trace-class walls are, sharply,
+\begin{equation}
+  H_s\in\Schatten{2}\iff\sigma>\frac12,
+  \qquad
+  H_s\in\Schatten{1}\iff\sigma>1.
+  \label{eq:intro-walls}
+\end{equation}
+The endpoints are not consequences of a common interpolation argument.  The
+wall at zero is detected by one infinite row, the Hilbert--Schmidt wall by
+central mass on each dyadic anti-diagonal, and the trace-class wall by
+pairwise disjoint trace-dual matchings.
+
+The same support has an exact arithmetic symmetry.  Every legal edge
+preserves the $2$-adic valuation, so in the bounded half-plane the operator
+is an orthogonal direct sum of scaled copies of its odd-vertex block.  This
+identity yields trace-power factors and, in the Hilbert--Schmidt domain, a
+locally uniformly convergent block product for the Hilbert--Carleman
+determinant.  It also explains why the marker for walk length and the
+$2$-adic scale weight must remain different variables.
+
+\begin{figure}[t]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/fig1_dyadic_blocks.tex}}
+  \caption{The support $m+n=2^a$ lies on dyadic anti-diagonals, yet every
+  legal edge preserves $v_2$.  Reordering the basis by exact valuation turns
+  the bounded operator into scaled copies of its odd block.  Marker shape and
+  grayscale fill both identify the valuation, and the cross marks a
+  candidate pair that is not an edge.}
+  \label{fig:dyadic-blocks-main}
+\end{figure}
+
+Our third component is algebraic rather than asymptotic.  Given fixed ordered
+dyadic labels $q_i$, the equations $n_i+n_{i+1}=q_i$ around a cycle reduce to
+an alternating recurrence.  Odd length fixes one candidate vertex word.
+Even length imposes one alternating compatibility equation and leaves an
+explicit finite interval for $n_1$.  This solver classifies based positive
+vertex solutions for the fixed ordered label tuple; it does not by itself
+quotient cyclic rotations or identify primitive orbits.
+
+The contributions are therefore three precise statements.
+\begin{enumerate}
+  \item We establish the sharp bounded/compact, Hilbert--Schmidt, and
+  trace-class walls $0$, $1/2$, and $1$, including analytic endpoint
+  obstructions.
+  \item We prove the exact bounded-operator decomposition
+  $H_s\simeq\bigoplus_{k\ge0}2^{-ks}A_s$, derive its legal trace formulas,
+  and give a self-contained proof of the regularized-determinant block
+  product.
+  \item We give the complete odd/even solver for fixed ordered dyadic cycle
+  labels and compare an algebraic implementation with a direct finite walk
+  enumerator.
+\end{enumerate}
+
+The computational comparison is deliberately narrower than the theorem.
+The exact finite replays agree without a mismatch on the declared grid; the
+complete counts are reported once in \cref{tab:canonical-replay-main}.  This
+agreement establishes implementation fidelity, not an infinite endpoint,
+external novelty, or a priority claim.
+
+\Cref{sec:related} positions the result.  \Cref{sec:source} fixes the source,
+types, and complex-parameter convention.  \Cref{sec:bounded,sec:ideals}
+prove the three walls.  \Cref{sec:blocks} develops valuation blocks, traces,
+and determinants, while \cref{sec:cycles} solves the labeled cyclic systems.
+\Cref{sec:replay} reports the finite replay and closes with limitations.
