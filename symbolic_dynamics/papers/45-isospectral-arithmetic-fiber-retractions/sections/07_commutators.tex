@@ -1,0 +1,123 @@
+\section{Self-commutator ideals}
+\label{sec:commutators}
+
+The operator ideal wall arises from the first power of a block singular
+value.  A self-commutator sees its square and hence produces a different
+threshold.
+
+\begin{lemma}[Rank-one self-commutator]
+\label{lem:rankone-commutator}
+Let $T=\rho\,u\otimes v$, where $u,v$ are unit vectors, and let $a$ be the
+modulus of the unique nonzero eigenvalue.  The two possibly zero singular
+values of $T^*T-TT^*$ are equal to
+\begin{equation}
+  c=\rho^2\sqrt{1-a^2/\rho^2}.
+  \label{eq:commutator-c}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+$T^*T=\rho^2v\otimes v$ and $TT^*=\rho^2u\otimes u$.  Their difference
+is self-adjoint and traceless on $\operatorname{span}\{u,v\}$.  Its
+determinant there is
+$-\rho^4(1-|\langle u,v\rangle|^2)$.  Since
+$a=\rho|\langle u,v\rangle|$, the two eigenvalues are $\pm c$, proving
+the claim.
+\end{proof}
+
+For the arithmetic blocks, \cref{eq:rho-S,eq:rho-M} gives the exact angle
+ratios
+\begin{align}
+  \frac{|\lambda_m|^2}{\rho_S(m)^2}
+    &=\prod_{p\in J_h(m)}(1-p^{-\sigma}),
+      \label{eq:S-angle}\\
+  \frac{|\lambda_m|^2}{\rho_M(m)^2}
+    &=\frac1{\zeta(h\sigma)}.
+      \label{eq:M-angle}
+\end{align}
+
+\begin{theorem}[Exact commutator wall]
+\label{thm:commutator-wall}
+For $0<q<\infty$,
+\begin{align*}
+  [S_{h,s}^*,S_{h,s}]\in\Sq
+    &\iff\sigma q>1,\\
+  [M_{h,s}^*,M_{h,s}]\in\Sq
+    &\iff\sigma>1/h\ \text{and}\ \sigma q>1.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Let $c_m$ be the quantity in \cref{eq:commutator-c} for block $m$.
+For $S$, $c_m\le\rho_S(m)^2$, so
+\[
+  \sum_m c_m^q\le\sum_m\rho_S(m)^{2q}<\infty
+\]
+whenever $\sigma q>1$, by \cref{prop:schatten} with exponent $2q$.
+
+For necessity when $h\ge3$, fix a prime $p_0$ and let
+$m_r=p_0^{h-1}r$ as $r\ne p_0$ varies over primes.  The prime $r$ has
+exponent one and is not saturated, so $J_h(m_r)=\{p_0\}$.  The angle
+factor in \cref{eq:S-angle} is a fixed positive constant and
+$c_{m_r}\asymp r^{-\sigma}$.  The prime sum
+$\sum_r c_{m_r}^q$ diverges when $\sigma q\le1$.
+
+That witness is ill typed for $h=2$, because exponent one is already
+saturated.  Instead fix $p_0$ and take $m_r=p_0r$.  Now
+$J_2(m_r)=\{p_0,r\}$, while
+\[
+  1-(1-p_0^{-\sigma})(1-r^{-\sigma})\ge p_0^{-\sigma}.
+\]
+Again $c_{m_r}\asymp r^{-\sigma}$, proving divergence at and below the
+same wall.
+
+For $M$, \cref{eq:M-angle} makes the angular factor a fixed positive
+constant throughout the bounded domain.  Thus $c_m\asymp m^{-\sigma}$,
+and the $h$-free sum $\sum_mc_m^q$ converges exactly for
+$\sigma q>1$.  The boundedness condition $\sigma>1/h$ remains mandatory.
+The factor two from the two singular values per nonzero block does not
+affect membership.
+\end{proof}
+
+The $h=2$ case also admits a closed Hilbert--Schmidt identity.  For a
+squarefree $m$, define
+\[
+  \Lambda_m=\prod_{p\mid m}(p^\sigma-1)^{-1},
+  \qquad
+  \Delta_m=\prod_{p\mid m}(1-p^{-\sigma}).
+\]
+Then $\rho_S(m)^2=\Lambda_m$ and the two commutator singular values are
+$\Lambda_m\sqrt{1-\Delta_m}$.
+
+\begin{proposition}[$h=2$ Euler control]
+\label{prop:h2-euler-control}
+If $\sigma>1/2$, then
+\begin{equation}
+  \|[S_{2,s}^*,S_{2,s}]\|_2^2
+  =2\left\{
+    \prod_p\left[1+(p^\sigma-1)^{-2}\right]
+    -\prod_p\left[1+\frac{p^{-2\sigma}}{1-p^{-\sigma}}\right]
+    \right\}.
+  \label{eq:h2-HS}
+\end{equation}
+Both products converge separately.
+\end{proposition}
+
+\begin{proof}
+Summing the two squared singular values gives
+$2\sum_m\Lambda_m^2(1-\Delta_m)$.  Squarefree multiplicativity yields
+the first Euler product from $\sum_m\Lambda_m^2$.  The local nontrivial
+factor in $\Lambda_m^2\Delta_m$ is
+\[
+  (p^\sigma-1)^{-2}(1-p^{-\sigma})
+  =\frac{p^{-2\sigma}}{1-p^{-\sigma}},
+\]
+which gives the second product.  Each nonconstant local factor is
+$O(p^{-2\sigma})$, so both products converge for $\sigma>1/2$.
+At equality, \cref{thm:commutator-wall} already gives divergence; no
+subtraction of divergent Euler products is defined.
+\end{proof}
+
+No ideal endpoint in this section is inferred from a finite block.  The
+strict failure comes from an explicit infinite positive subfamily.
+

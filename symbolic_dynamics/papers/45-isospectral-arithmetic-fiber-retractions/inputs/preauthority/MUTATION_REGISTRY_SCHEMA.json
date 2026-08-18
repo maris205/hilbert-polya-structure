@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paper45.mutation-registry-schema.v4",
+  "title": "Paper 45 executable mutation registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schema_version", "consumer_keys", "mutations", "execution_contract", "survivor_semantics"],
+  "properties": {
+    "$schema": {"const": "./MUTATION_REGISTRY_SCHEMA.json"},
+    "schema_version": {"const": "paper45.mutation-registry.v4"},
+    "consumer_keys": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["A", "B", "G", "I", "P", "R_INDEPENDENT", "R_MAIN", "S", "T", "X"],
+      "properties": {
+        "A": {"const": "direct finite map and matrix evaluator"},
+        "B": {"const": "independent exponent Euler and analytic evaluator"},
+        "G": {"const": "integrity path transaction and hygiene auditor"},
+        "I": {"const": "evaluator independence auditor"},
+        "P": {"const": "independent infinite theorem and proof auditor"},
+        "R_INDEPENDENT": {"const": "independent strict Route v0.2 validator"},
+        "R_MAIN": {"const": "main strict Route v0.2 validator"},
+        "S": {"const": "source and ownership auditor"},
+        "T": {"const": "type and object contract auditor"},
+        "X": {"const": "non-scientific exact comparator"}
+      }
+    },
+    "mutations": {
+      "type": "array",
+      "minItems": 75,
+      "maxItems": 75,
+      "items": {"$ref": "#/$defs/mutation"}
+    },
+    "execution_contract": {"$ref": "#/$defs/executionContract"},
+    "survivor_semantics": {"$ref": "#/$defs/survivorSemantics"}
+  },
+  "$defs": {
+    "consumerKey": {
+      "enum": ["A", "B", "G", "I", "P", "R_INDEPENDENT", "R_MAIN", "S", "T", "X"]
+    },
+    "portablePath": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+    },
+    "jsonValue": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "boolean"},
+        {"type": "integer"},
+        {"type": "number", "not": {"type": "integer"}},
+        {"type": "string"}
+      ]
+    },
+    "pointerOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target_artifact", "pointer", "value_from", "value_to"],
+      "properties": {
+        "kind": {"const": "replace_json_pointer"},
+        "target_artifact": {"const": "EXPERIMENT_CONTRACT.json"},
+        "pointer": {"type": "string", "pattern": "^(?:/(?:[^~/]|~0|~1)*)+$"},
+        "value_from": {"$ref": "#/$defs/jsonValue"},
+        "value_to": {"$ref": "#/$defs/jsonValue"}
+      }
+    },
+    "symlinkOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target_artifact", "path", "value_from", "value_to"],
+      "properties": {
+        "kind": {"const": "filesystem_symlink_swap"},
+        "target_artifact": {"const": "results"},
+        "path": {"const": "results"},
+        "value_from": {"const": "regular_directory_in_disposable_root"},
+        "value_to": {"const": "symlink_to_harness_external_sentinel"}
+      }
+    },
+    "forbiddenArtifactOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target_artifact", "path", "value_from", "value_to", "expected_parent", "content_utf8"],
+      "properties": {
+        "kind": {"const": "filesystem_create_forbidden_artifact"},
+        "target_artifact": {"const": "results/__pycache__/cache.pyc"},
+        "path": {"const": "results/__pycache__/cache.pyc"},
+        "value_from": {"const": "absent"},
+        "value_to": {"const": "regular_file_with_forbidden_cache_sentinel"},
+        "expected_parent": {"const": "regular_results_directory_in_disposable_root"},
+        "content_utf8": {"const": "PAPER45_FORBIDDEN_CACHE_SENTINEL"}
+      }
+    },
+    "lateFailureOperation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "target_artifact", "checkpoint", "value_from", "value_to", "expected_metadata_tuple_fields"],
+      "properties": {
+        "kind": {"const": "force_late_failure"},
+        "target_artifact": {"const": "results"},
+        "checkpoint": {"const": "after_complete_stage_validation_before_directory_rename"},
+        "value_from": {"const": "complete_stage_validated_and_target_identity_snapshotted"},
+        "value_to": {"const": "raise_HARNESS_ERROR_before_install"},
+        "expected_metadata_tuple_fields": {"const": ["path", "file_type", "sha256", "size_bytes", "mode", "mtime_ns"]}
+      }
+    },
+    "operation": {
+      "oneOf": [
+        {"$ref": "#/$defs/pointerOperation"},
+        {"$ref": "#/$defs/symlinkOperation"},
+        {"$ref": "#/$defs/forbiddenArtifactOperation"},
+        {"$ref": "#/$defs/lateFailureOperation"}
+      ]
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "code", "consumers", "domain", "operation"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^M(?:00[1-9]|0[1-6][0-9]|07[0-5])$"},
+        "code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]+$"},
+        "consumers": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/consumerKey"}},
+        "domain": {"enum": ["comparison", "coverage", "evidence_type", "firewall", "independence", "infinite_analytic", "infinite_constant", "infinite_endpoint", "infinite_witness", "integrity", "object", "ownership", "raw_json", "route", "source", "symbolic_ast", "transaction", "type"]},
+        "operation": {"$ref": "#/$defs/operation"}
+      }
+    },
+    "executionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consumer_outcome_schema_ref", "fresh_disposable_copy_per_mutation", "mutation_order", "pointer_precondition", "precondition_failure", "production_artifacts_never_mutated", "typed_operation_precondition"],
+      "properties": {
+        "consumer_outcome_schema_ref": {"const": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/mutationOutcome"},
+        "fresh_disposable_copy_per_mutation": {"const": true},
+        "mutation_order": {"const": "C_sort_by_id_M001_through_M075"},
+        "pointer_precondition": {"const": "resolve RFC6901 pointer then require exact JSON type and value equality with value_from"},
+        "precondition_failure": {"const": "HARNESS_ERROR:MUTATION_PRECONDITION_FAILED"},
+        "production_artifacts_never_mutated": {"const": true},
+        "typed_operation_precondition": {"const": "validate target path and all expected fields before the first filesystem action"}
+      }
+    },
+    "survivorSemantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected_exit_code", "kill_requires", "survivor_if"],
+      "properties": {
+        "expected_exit_code": {"const": 2},
+        "kill_requires": {"const": "every and only designated consumer keys return REJECT with the exact row code"},
+        "survivor_if": {
+          "const": [
+            "missing extra or duplicate consumer",
+            "ACCEPT or zero exit",
+            "wrong rejection code",
+            "HARNESS_ERROR",
+            "parse or schema exception",
+            "timeout",
+            "malformed payload",
+            "unclassified nonzero exit"
+          ]
+        }
+      }
+    }
+  }
+}

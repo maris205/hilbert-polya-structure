@@ -1,0 +1,99 @@
+\section{Isospectrality without bounded similarity}
+\label{sec:similarity}
+
+The spectral idempotent for the nonzero eigenvalue in block $m$ is
+\begin{equation}
+  \Pi_{T,m}=\lambda_m^{-1}T_m.
+  \label{eq:riesz-block}
+\end{equation}
+It is an oblique projection onto $\C e_m$, and therefore
+\begin{equation}
+  \|\Pi_{T,m}\|=\frac{\rho_T(m)}{|\lambda_m|}.
+  \label{eq:riesz-ratio}
+\end{equation}
+Combining this ratio with the two block masses yields
+\begin{align}
+  \|\Pi_{S,m}\|
+    &=\prod_{p\in J_h(m)}(1-p^{-\sigma})^{-1/2},
+      \label{eq:riesz-S}\\
+  \|\Pi_{M,m}\|&=\sqrt{\zeta(h\sigma)}.
+      \label{eq:riesz-M}
+\end{align}
+
+The following block lemma supplies the converse that a mere appeal to
+necessary projection bounds would miss.
+
+\begin{lemma}[Uniform block diagonalization]
+\label{lem:uniform-diagonalization}
+Let $T=\bigoplus_mT_m$ be a compact orthogonal direct sum of rank-one
+blocks.  Suppose each block has nonzero eigenvalue $\lambda_m$ with range
+$\C e_m$, and suppose that the $\lambda_m$ are pairwise distinct.  Then
+$T$ is boundedly similar to the normal diagonal operator
+with entries $\lambda_m$ and zeros on the block kernels if and only if
+$\sup_m\|\lambda_m^{-1}T_m\|<\infty$.
+\end{lemma}
+
+\begin{proof}
+If $T=XNX^{-1}$ and $N$ is normal, the nonzero spectral projections of
+$N$ are orthogonal.  Hence those of $T$ have norms at most
+$\|X\|\|X^{-1}\|$.
+
+Conversely, decompose a block as
+$\Hs_m=\C e_m\oplus K_m$.  It has the matrix form
+\[
+  T_m=\begin{pmatrix}\lambda_m&\varphi_m\\0&0\end{pmatrix}.
+\]
+Set
+\[
+  Y_m=\begin{pmatrix}1&-\lambda_m^{-1}\varphi_m\\0&I_{K_m}\end{pmatrix}.
+\]
+A direct multiplication gives
+$Y_m^{-1}T_mY_m=\diag(\lambda_m,0)$.  The norm of
+$\lambda_m^{-1}\varphi_m$ is controlled by the norm of the idempotent
+$\lambda_m^{-1}T_m$; therefore the hypothesis uniformly bounds both
+$Y_m$ and $Y_m^{-1}$.  The direct sum $Y=\bigoplus_mY_m$ is bounded and
+invertible and conjugates $T$ to the stated diagonal.  Since
+$|\lambda_m|\to0$, that diagonal is compact and normal.  A norm identity
+and explicit bounds are given in \cref{app:graph-transform}.
+\end{proof}
+
+\begin{theorem}[Exact similarity gap]
+\label{thm:similarity}
+\begin{align*}
+  S_{h,s}\sim_{\mathrm{bd}}\text{ compact normal}&\iff\sigma>1,\\
+  M_{h,s}\sim_{\mathrm{bd}}\text{ compact normal}&\iff\sigma>1/h.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+The modulo norm in \cref{eq:riesz-M} is a finite constant, independent of
+$m$, throughout the bounded domain.  The lemma applies.
+
+Every finite set of primes can occur as $J_h(m)$, by taking
+$m=\prod_{p\in E}p^{h-1}$.  Consequently
+\[
+  \sup_{m\in\Fh}\|\Pi_{S,m}\|
+  =\left(\prod_p(1-p^{-\sigma})^{-1}\right)^{1/2}
+\]
+as a finite value or $+\infty$.  This is finite exactly for $\sigma>1$.
+The lemma again gives both directions.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{0.98\linewidth}{!}{\input{figures/phase_diagram}}
+  \caption{Exact existence, similarity, power-ideal, and commutator-ideal
+  conditions.  The horizontal bands encode only the fixed ordering
+  $0<1/h\le1$; the ideal thresholds are stated algebraically because their
+  relative positions depend on $h,k,q$.  Every displayed wall is strict.}
+  \label{fig:phase}
+\end{figure}
+
+In the full interval $1/h<\sigma\le1$, both operators exist and have the
+same simple nonzero spectrum.  Their common power traces and determinants
+also agree whenever the corresponding ideal condition is met; here
+``determinants'' means order-$r$ regularized determinants for integers
+$r$ satisfying $r\sigma>2$, never the order-one Fredholm determinant.  Yet one
+operator has uniformly controlled eigenprojections and the other does not.
+This is an obstruction to bounded similarity, not merely to unitary
+equivalence.

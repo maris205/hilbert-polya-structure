@@ -1,0 +1,921 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "paper45.experiment-contract-schema.v4",
+  "title": "Paper 45 executable experiment contract and output schemas",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "case_registry",
+    "common_finite_case_ids",
+    "common_finite_optimization_case_ids",
+    "infinite_coverage_gate",
+    "raw_json_parser",
+    "serialization_case_grid",
+    "evidence_types",
+    "precision_bits",
+    "interval_width_targets",
+    "serialization",
+    "output_artifacts",
+    "metadata_identity",
+    "transaction_policy",
+    "artifact_path_policy",
+    "outcome_totalization",
+    "mutation_execution",
+    "semantic_validation",
+    "mutation_baseline"
+  ],
+  "properties": {
+    "$schema": {"const": "./EXPERIMENT_CONTRACT_SCHEMA.json"},
+    "schema_version": {"const": "paper45.experiment-contract.v4"},
+    "case_registry": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/caseRegistryItem"}
+    },
+    "common_finite_case_ids": {
+      "const": ["FIN-H2-M1-REAL", "FIN-H2-M6-COMPLEX", "FIN-H2-M6-REAL", "FIN-H3-M12-REAL", "FIN-H4-M8-COMPLEX", "FIN-H6-M32-REAL"]
+    },
+    "common_finite_optimization_case_ids": {
+      "const": ["FIN-PRIMORIAL-H3-THREE-REGIMES"]
+    },
+    "infinite_coverage_gate": {"$ref": "#/$defs/infiniteCoverageGate"},
+    "raw_json_parser": {"$ref": "#/$defs/rawJsonParser"},
+    "serialization_case_grid": {"$ref": "#/$defs/serializationCaseGrid"},
+    "evidence_types": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["FINITE_COMPRESSION", "FINITE_OPTIMIZATION", "INFINITE_THEOREM_CERTIFICATE"],
+      "properties": {
+        "FINITE_COMPRESSION": {"$ref": "#/$defs/finiteEvidenceConfiguration"},
+        "FINITE_OPTIMIZATION": {"$ref": "#/$defs/finiteEvidenceConfiguration"},
+        "INFINITE_THEOREM_CERTIFICATE": {"$ref": "#/$defs/infiniteEvidenceConfiguration"}
+      }
+    },
+    "precision_bits": {
+      "const": [128, 256, 512]
+    },
+    "interval_width_targets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["128", "256", "512"],
+      "properties": {
+        "128": {"const": "1e-30"},
+        "256": {"const": "1e-60"},
+        "512": {"const": "1e-120"}
+      }
+    },
+    "serialization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["booleans", "complex", "dirichlet_power_ast", "exact_sets", "integers", "rationals", "unknown_fields"],
+      "properties": {
+        "booleans": {"type": "string"},
+        "complex": {"const": "exact inputs and residuals only: object with normalized reduced rational-string real and imag"},
+        "dirichlet_power_ast": {"const": "DIRICHLET_POWER envelope: base and exponent numerator/denominator are canonical integer strings; exact RFC8785 JCS UTF-8 and lowercase SHA-256 are stored"},
+        "exact_sets": {"type": "string"},
+        "integers": {"type": "string"},
+        "rationals": {"type": "string"},
+        "unknown_fields": {"const": "rejected by additionalProperties false"}
+      }
+    },
+    "output_artifacts": {
+      "const": [
+        {"path": "results/SHA256SUMS.txt", "producer": "MANIFEST_BUILDER", "required": true, "schema_ref": "sha256sum-v1-self-excluding-C-sort"},
+        {"path": "results/comparator_x.json", "producer": "X", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/comparisonReport"},
+        {"path": "results/evaluation_report.json", "producer": "EVALUATION_DRIVER", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/evaluationReport"},
+        {"path": "results/evaluator_a.json", "producer": "A", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/scienceProjection"},
+        {"path": "results/evaluator_b.json", "producer": "B", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/scienceProjection"},
+        {"path": "results/integrity_audit.json", "producer": "G", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/integrityReport"},
+        {"path": "results/mutation_outcomes.json", "producer": "MUTATION_RUNNER", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/mutationBundle"},
+        {"path": "results/proof_auditor_p.json", "producer": "P", "required": true, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/proofAudit"}
+      ]
+    },
+    "metadata_identity": {"$ref": "#/$defs/metadataIdentity"},
+    "transaction_policy": {"$ref": "#/$defs/transactionPolicy"},
+    "artifact_path_policy": {"$ref": "#/$defs/artifactPathPolicy"},
+    "outcome_totalization": {"$ref": "#/$defs/outcomeTotalization"},
+    "mutation_execution": {"$ref": "#/$defs/mutationExecution"},
+    "semantic_validation": {"$ref": "#/$defs/semanticValidation"},
+    "mutation_baseline": {"$ref": "#/$defs/mutationBaseline"}
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "infiniteCaseIds": {
+      "const": [
+        "INF-COMM-H2-EULER",
+        "INF-COMM-H2-Q2",
+        "INF-COMM-H3-Q2",
+        "INF-CROSSOVER-ALLH",
+        "INF-DET-H4-R2",
+        "INF-FREE-UFD-CONTROL-H3",
+        "INF-M-EXIST-H3",
+        "INF-POWER-H2-K1-Q2",
+        "INF-PRIMORIAL-H3-THREE-REGIMES",
+        "INF-S-EXIST-H2",
+        "INF-SIMILARITY-M-H3",
+        "INF-SIMILARITY-S-H2",
+        "INF-TAUBERIAN-H3",
+        "INF-TRACE-H3-K2",
+        "INF-WEYL-H3-NONCROSSOVER"
+      ]
+    },
+    "infiniteCoverageGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_hash_input", "case_count", "ordered_case_ids", "ordered_set_sha256", "producer_rules", "proof_hash_closure", "verdict_closure"],
+      "properties": {
+        "canonical_hash_input": {"const": "UTF-8 LF-joined ordered_case_ids with one terminal LF"},
+        "case_count": {"const": 15},
+        "ordered_case_ids": {"$ref": "#/$defs/infiniteCaseIds"},
+        "ordered_set_sha256": {"const": "6401b141f7b46b0f7275ec124ec571542655b9874cfa9aa5c7123108577e8a84"},
+        "producer_rules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["A", "B", "P"],
+          "properties": {
+            "A": {"const": "infinite_case_ids and infinite_records are exactly empty arrays"},
+            "B": {"const": "infinite_case_ids and infinite_records contain exactly ordered_case_ids in this order with no duplicate or extra"},
+            "P": {"const": "audited_case_ids and per_case_audits contain exactly ordered_case_ids in this order with no duplicate or extra"}
+          }
+        },
+        "proof_hash_closure": {"const": "for each case_id P copies B certificate_owner and the three hashes exactly; certificate_payload_sha256 is RFC8785 JCS SHA-256 of the B record with that field omitted"},
+        "verdict_closure": {"const": "P overall PASS iff every per-case verdict is PASS; otherwise overall HOLD"}
+      }
+    },
+    "rawJsonParser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_storage", "duplicate_member_detection", "duplicate_member_outcome", "last_win_forbidden", "noncanonical_storage_outcome", "raw_json_required", "reordered_unique_members"],
+      "properties": {
+        "canonical_storage": {"const": "store exact RFC8785 JCS UTF-8 string and its lowercase SHA-256; recompute both before acceptance"},
+        "duplicate_member_detection": {"const": "token-stream detection at every nesting depth before object construction"},
+        "duplicate_member_outcome": {"const": "REJECT:DUPLICATE_JSON_MEMBER"},
+        "last_win_forbidden": {"const": true},
+        "noncanonical_storage_outcome": {"const": "REJECT:NONCANONICAL_AST_STORAGE"},
+        "raw_json_required": {"const": true},
+        "reordered_unique_members": {"const": "ACCEPT_then_canonicalize_to_identical_RFC8785_JCS"}
+      }
+    },
+    "serializationCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "raw_json", "expected_outcome", "expected_code"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^(?:POS|NEG)-AST-[A-Z0-9-]+$"},
+        "raw_json": {"type": "string", "minLength": 2},
+        "expected_outcome": {"enum": ["ACCEPT", "ACCEPT_CANONICALIZE", "REJECT"]},
+        "expected_code": {"enum": ["NONE", "AST_POSITIVE_INTEGER_STRING_REQUIRED", "AST_CANONICAL_SIGNED_INTEGER_STRING_REQUIRED", "DUPLICATE_JSON_MEMBER", "NONCANONICAL_AST_STORAGE"]},
+        "expected_jcs_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "serializationCaseGrid": {
+      "type": "array",
+      "minItems": 13,
+      "maxItems": 13,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "POS-AST-M6-REAL-CANONICAL"}, "expected_outcome": {"const": "ACCEPT"}, "expected_code": {"const": "NONE"}, "expected_jcs_sha256": {"const": "9fbc8e3e06689e1ca23a748627eaccaf2a868a78f63a0448b55c9d56b92cc66e"}}, "required": ["expected_jcs_sha256"]}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "POS-AST-M6-COMPLEX-REORDERED"}, "expected_outcome": {"const": "ACCEPT_CANONICALIZE"}, "expected_code": {"const": "NONE"}, "expected_jcs_sha256": {"const": "9d1178afc5275c0225b2b8f8713299899f75dd296dbcfc71cbd53a7d9ef9d29b"}}, "required": ["expected_jcs_sha256"]}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-BASE-6-DOT-0"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-BASE-6E0"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-BASE-TRUE"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-BASE-PLUS-6"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-BASE-LEADING-ZERO"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-NUMERATOR-1-DOT-0"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_CANONICAL_SIGNED_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-DENOMINATOR-1-DOT-0"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-NUMERATOR-MINUS-ZERO"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_CANONICAL_SIGNED_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-DENOMINATOR-ZERO"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "AST_POSITIVE_INTEGER_STRING_REQUIRED"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-DUPLICATE-BASE-LAST-WIN"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "DUPLICATE_JSON_MEMBER"}}}]},
+        {"allOf": [{"$ref": "#/$defs/serializationCase"}, {"properties": {"case_id": {"const": "NEG-AST-NONCANONICAL-STORED-JCS"}, "expected_outcome": {"const": "REJECT"}, "expected_code": {"const": "NONCANONICAL_AST_STORAGE"}}}]}
+      ],
+      "items": false
+    },
+    "rationalString": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9][0-9]*)(/[1-9][0-9]*)?$"
+    },
+    "decimalString": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+    },
+    "positiveIntegerString": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "canonicalSignedIntegerString": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*|-[1-9][0-9]*)$"
+    },
+    "canonicalPositiveIntegerString": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]*$"
+    },
+    "portablePath": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$"
+    },
+    "complexExact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["real", "imag"],
+      "properties": {
+        "real": {"$ref": "#/$defs/rationalString"},
+        "imag": {"$ref": "#/$defs/rationalString"}
+      }
+    },
+    "canonicalRationalAst": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": {"$ref": "#/$defs/canonicalSignedIntegerString"},
+        "denominator": {"$ref": "#/$defs/canonicalPositiveIntegerString"}
+      }
+    },
+    "dirichletPowerAst": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "base", "exponent", "log_branch"],
+      "properties": {
+        "node_type": {"const": "DIRICHLET_POWER"},
+        "base": {"$ref": "#/$defs/canonicalPositiveIntegerString"},
+        "exponent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["real", "imag"],
+          "properties": {
+            "real": {"$ref": "#/$defs/canonicalRationalAst"},
+            "imag": {"$ref": "#/$defs/canonicalRationalAst"}
+          }
+        },
+        "log_branch": {"const": "REAL_LOG_POSITIVE_BASE"}
+      }
+    },
+    "dirichletPowerAstEnvelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ast", "canonical_jcs_utf8", "canonical_jcs_sha256"],
+      "properties": {
+        "ast": {"$ref": "#/$defs/dirichletPowerAst"},
+        "canonical_jcs_utf8": {"type": "string", "pattern": "^\\{\\\"base\\\":"},
+        "canonical_jcs_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "pairedDirichletPowerAst": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"$ref": "#/$defs/dirichletPowerAstEnvelope"},
+        "MODULO": {"$ref": "#/$defs/dirichletPowerAstEnvelope"}
+      }
+    },
+    "astEnvelopeM1Real": {
+      "const": {"ast":{"node_type":"DIRICHLET_POWER","base":"1","exponent":{"real":{"numerator":"-3","denominator":"4"},"imag":{"numerator":"0","denominator":"1"}},"log_branch":"REAL_LOG_POSITIVE_BASE"},"canonical_jcs_utf8":"{\"base\":\"1\",\"exponent\":{\"imag\":{\"denominator\":\"1\",\"numerator\":\"0\"},\"real\":{\"denominator\":\"4\",\"numerator\":\"-3\"}},\"log_branch\":\"REAL_LOG_POSITIVE_BASE\",\"node_type\":\"DIRICHLET_POWER\"}","canonical_jcs_sha256":"4722299196ea7a530243ef828df4d51e7e884179ceceb4a2f41dedcb6cbe6b30"}
+    },
+    "astEnvelopeM6Real": {
+      "const": {"ast":{"node_type":"DIRICHLET_POWER","base":"6","exponent":{"real":{"numerator":"-3","denominator":"4"},"imag":{"numerator":"0","denominator":"1"}},"log_branch":"REAL_LOG_POSITIVE_BASE"},"canonical_jcs_utf8":"{\"base\":\"6\",\"exponent\":{\"imag\":{\"denominator\":\"1\",\"numerator\":\"0\"},\"real\":{\"denominator\":\"4\",\"numerator\":\"-3\"}},\"log_branch\":\"REAL_LOG_POSITIVE_BASE\",\"node_type\":\"DIRICHLET_POWER\"}","canonical_jcs_sha256":"9fbc8e3e06689e1ca23a748627eaccaf2a868a78f63a0448b55c9d56b92cc66e"}
+    },
+    "astEnvelopeM6Complex": {
+      "const": {"ast":{"node_type":"DIRICHLET_POWER","base":"6","exponent":{"real":{"numerator":"-3","denominator":"4"},"imag":{"numerator":"-1","denominator":"6"}},"log_branch":"REAL_LOG_POSITIVE_BASE"},"canonical_jcs_utf8":"{\"base\":\"6\",\"exponent\":{\"imag\":{\"denominator\":\"6\",\"numerator\":\"-1\"},\"real\":{\"denominator\":\"4\",\"numerator\":\"-3\"}},\"log_branch\":\"REAL_LOG_POSITIVE_BASE\",\"node_type\":\"DIRICHLET_POWER\"}","canonical_jcs_sha256":"9d1178afc5275c0225b2b8f8713299899f75dd296dbcfc71cbd53a7d9ef9d29b"}
+    },
+    "astEnvelopeM12Real": {
+      "const": {"ast":{"node_type":"DIRICHLET_POWER","base":"12","exponent":{"real":{"numerator":"-2","denominator":"3"},"imag":{"numerator":"0","denominator":"1"}},"log_branch":"REAL_LOG_POSITIVE_BASE"},"canonical_jcs_utf8":"{\"base\":\"12\",\"exponent\":{\"imag\":{\"denominator\":\"1\",\"numerator\":\"0\"},\"real\":{\"denominator\":\"3\",\"numerator\":\"-2\"}},\"log_branch\":\"REAL_LOG_POSITIVE_BASE\",\"node_type\":\"DIRICHLET_POWER\"}","canonical_jcs_sha256":"22f9a0ebcffb6374d1b89bfd291f12e710b5ac8e710d129ea7bceea85ec053e4"}
+    },
+    "astEnvelopeM8Complex": {
+      "const": {"ast":{"node_type":"DIRICHLET_POWER","base":"8","exponent":{"real":{"numerator":"-5","denominator":"8"},"imag":{"numerator":"-1","denominator":"10"}},"log_branch":"REAL_LOG_POSITIVE_BASE"},"canonical_jcs_utf8":"{\"base\":\"8\",\"exponent\":{\"imag\":{\"denominator\":\"10\",\"numerator\":\"-1\"},\"real\":{\"denominator\":\"8\",\"numerator\":\"-5\"}},\"log_branch\":\"REAL_LOG_POSITIVE_BASE\",\"node_type\":\"DIRICHLET_POWER\"}","canonical_jcs_sha256":"fb937185c71ab310a492f25514d1db7b7599320c494393af52436bc3e1a9b5a2"}
+    },
+    "astEnvelopeM32Real": {
+      "const": {"ast":{"node_type":"DIRICHLET_POWER","base":"32","exponent":{"real":{"numerator":"-7","denominator":"12"},"imag":{"numerator":"0","denominator":"1"}},"log_branch":"REAL_LOG_POSITIVE_BASE"},"canonical_jcs_utf8":"{\"base\":\"32\",\"exponent\":{\"imag\":{\"denominator\":\"1\",\"numerator\":\"0\"},\"real\":{\"denominator\":\"12\",\"numerator\":\"-7\"}},\"log_branch\":\"REAL_LOG_POSITIVE_BASE\",\"node_type\":\"DIRICHLET_POWER\"}","canonical_jcs_sha256":"c0da96eeb3900fdf13298ae744a397316eb23602e7fb18e5dc175dfec29dbf0c"}
+    },
+    "astPairM1Real": {"type":"object","additionalProperties":false,"required":["SATURATED","MODULO"],"properties":{"SATURATED":{"$ref":"#/$defs/astEnvelopeM1Real"},"MODULO":{"$ref":"#/$defs/astEnvelopeM1Real"}}},
+    "astPairM6Real": {"type":"object","additionalProperties":false,"required":["SATURATED","MODULO"],"properties":{"SATURATED":{"$ref":"#/$defs/astEnvelopeM6Real"},"MODULO":{"$ref":"#/$defs/astEnvelopeM6Real"}}},
+    "astPairM6Complex": {"type":"object","additionalProperties":false,"required":["SATURATED","MODULO"],"properties":{"SATURATED":{"$ref":"#/$defs/astEnvelopeM6Complex"},"MODULO":{"$ref":"#/$defs/astEnvelopeM6Complex"}}},
+    "astPairM12Real": {"type":"object","additionalProperties":false,"required":["SATURATED","MODULO"],"properties":{"SATURATED":{"$ref":"#/$defs/astEnvelopeM12Real"},"MODULO":{"$ref":"#/$defs/astEnvelopeM12Real"}}},
+    "astPairM8Complex": {"type":"object","additionalProperties":false,"required":["SATURATED","MODULO"],"properties":{"SATURATED":{"$ref":"#/$defs/astEnvelopeM8Complex"},"MODULO":{"$ref":"#/$defs/astEnvelopeM8Complex"}}},
+    "astPairM32Real": {"type":"object","additionalProperties":false,"required":["SATURATED","MODULO"],"properties":{"SATURATED":{"$ref":"#/$defs/astEnvelopeM32Real"},"MODULO":{"$ref":"#/$defs/astEnvelopeM32Real"}}},
+    "certifiedComplexInterval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["real", "imag"],
+      "properties": {
+        "real": {"$ref": "#/$defs/certifiedInterval"},
+        "imag": {"$ref": "#/$defs/certifiedInterval"}
+      }
+    },
+    "pairedCertifiedComplexInterval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"$ref": "#/$defs/certifiedComplexInterval"},
+        "MODULO": {"$ref": "#/$defs/certifiedComplexInterval"}
+      }
+    },
+    "certifiedInterval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lower", "upper", "precision_bits", "width_target", "method_id"],
+      "properties": {
+        "lower": {"$ref": "#/$defs/decimalString"},
+        "upper": {"$ref": "#/$defs/decimalString"},
+        "precision_bits": {"enum": [128, 256, 512]},
+        "width_target": {"enum": ["1e-30", "1e-60", "1e-120"]},
+        "method_id": {"type": "string", "minLength": 1}
+      },
+      "allOf": [
+        {"if": {"properties": {"precision_bits": {"const": 128}}}, "then": {"properties": {"width_target": {"const": "1e-30"}}}},
+        {"if": {"properties": {"precision_bits": {"const": 256}}}, "then": {"properties": {"width_target": {"const": "1e-60"}}}},
+        {"if": {"properties": {"precision_bits": {"const": 512}}}, "then": {"properties": {"width_target": {"const": "1e-120"}}}}
+      ]
+    },
+    "pairedIntervals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"$ref": "#/$defs/certifiedInterval"},
+        "MODULO": {"$ref": "#/$defs/certifiedInterval"}
+      }
+    },
+    "pairedComplex": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"$ref": "#/$defs/complexExact"},
+        "MODULO": {"$ref": "#/$defs/complexExact"}
+      }
+    },
+    "finiteCompressionCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "cutoffs", "evidence_type", "h", "k", "label_m", "q", "retractions", "s"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^FIN-"},
+        "cutoffs": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+        "evidence_type": {"const": "FINITE_COMPRESSION"},
+        "h": {"type": "integer", "minimum": 2},
+        "k": {"type": "integer", "minimum": 1},
+        "label_m": {"$ref": "#/$defs/positiveIntegerString"},
+        "q": {"$ref": "#/$defs/rationalString"},
+        "retractions": {"const": ["SATURATED", "MODULO"]},
+        "s": {"$ref": "#/$defs/complexExact"}
+      }
+    },
+    "finiteOptimizationCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "evidence_type", "h", "samples_sigma", "x_cutoffs"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^FIN-PRIMORIAL-"},
+        "evidence_type": {"const": "FINITE_OPTIMIZATION"},
+        "h": {"type": "integer", "minimum": 2},
+        "samples_sigma": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"$ref": "#/$defs/rationalString"}},
+        "x_cutoffs": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "integer", "minimum": 1}}
+      }
+    },
+    "infiniteCertificateCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "evidence_type", "samples_sigma", "theorem_field"],
+      "oneOf": [
+        {"required": ["h"], "not": {"required": ["h_values"]}},
+        {"required": ["h_values"], "not": {"required": ["h"]}}
+      ],
+      "properties": {
+        "analytic_variable_u": {"$ref": "#/$defs/complexExact"},
+        "case_id": {"type": "string", "pattern": "^INF-"},
+        "determinant_order_r": {"type": "integer", "minimum": 1},
+        "determinant_variable_z": {"$ref": "#/$defs/complexExact"},
+        "evidence_type": {"const": "INFINITE_THEOREM_CERTIFICATE"},
+        "h": {"type": "integer", "minimum": 2},
+        "h_values": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "integer", "minimum": 2}},
+        "k": {"type": "integer", "minimum": 1},
+        "q": {"$ref": "#/$defs/rationalString"},
+        "samples_sigma": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/rationalString"}},
+        "theorem_field": {"type": "string", "pattern": "^[A-Za-z0-9_]+$"}
+      }
+    },
+    "caseRegistryItem": {
+      "oneOf": [
+        {"$ref": "#/$defs/finiteCompressionCase"},
+        {"$ref": "#/$defs/finiteOptimizationCase"},
+        {"$ref": "#/$defs/infiniteCertificateCase"}
+      ]
+    },
+    "finiteEvidenceConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["designated_consumers", "forbidden_fields", "output_schema_ref"],
+      "properties": {
+        "designated_consumers": {"const": ["A", "B", "X"]},
+        "forbidden_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "output_schema_ref": {"type": "string", "pattern": "^EXPERIMENT_CONTRACT_SCHEMA\\.json#"}
+      }
+    },
+    "infiniteEvidenceConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["designated_consumers", "forbidden_consumers", "output_schema_ref"],
+      "properties": {
+        "designated_consumers": {"const": ["B", "P"]},
+        "forbidden_consumers": {"const": ["A", "X"]},
+        "output_schema_ref": {"const": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/infiniteCertificateRecord"}
+      }
+    },
+    "outputArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "producer", "required", "schema_ref"],
+      "properties": {
+        "path": {"$ref": "#/$defs/portablePath"},
+        "producer": {"enum": ["A", "B", "P", "X", "MUTATION_RUNNER", "G", "EVALUATION_DRIVER", "MANIFEST_BUILDER"]},
+        "required": {"const": true},
+        "schema_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "metadataIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity_scope", "tuple_fields", "uid_gid_excluded_for_relocation"],
+      "properties": {
+        "identity_scope": {"const": "all declared target files and their declared parent directories"},
+        "tuple_fields": {"const": ["path", "file_type", "sha256", "size_bytes", "mode", "mtime_ns"]},
+        "uid_gid_excluded_for_relocation": {"const": true}
+      }
+    },
+    "transactionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forced_late_failure_checkpoint", "install_primitive", "preexisting_different_target", "preexisting_identical_target", "stage_directory", "stage_failure_cleanup", "target_directory"],
+      "properties": {
+        "forced_late_failure_checkpoint": {"const": "after_complete_stage_validation_before_directory_rename"},
+        "install_primitive": {"const": "same_filesystem_atomic_directory_rename"},
+        "preexisting_different_target": {"const": "reject_TARGET_EXISTS_DIFFERENT_without_write"},
+        "preexisting_identical_target": {"const": "success_with_zero_physical_replacements"},
+        "stage_directory": {"const": "results.__stage__"},
+        "stage_failure_cleanup": {"const": "remove_stage_only_never_touch_target"},
+        "target_directory": {"const": "results"}
+      }
+    },
+    "artifactPathPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allow_relative_paths_only", "cache_aux_and_host_tokens_forbidden", "declared_output_set_is_exact", "parent_segments_forbidden", "pre_io_symlink_and_nonregular_rejection", "undeclared_paths_forbidden"],
+      "properties": {
+        "allow_relative_paths_only": {"const": true},
+        "cache_aux_and_host_tokens_forbidden": {"const": true},
+        "declared_output_set_is_exact": {"const": true},
+        "parent_segments_forbidden": {"const": true},
+        "pre_io_symlink_and_nonregular_rejection": {"const": true},
+        "undeclared_paths_forbidden": {"const": true}
+      }
+    },
+    "outcomeTotalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_outcomes", "event_mapping", "raw_exception_text_forbidden", "unhandled_exception_forbidden"],
+      "properties": {
+        "allowed_outcomes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ACCEPT", "HARNESS_ERROR", "REJECT"],
+          "properties": {
+            "ACCEPT": {"const": {"exit_code": 0, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/acceptOutcome"}},
+            "HARNESS_ERROR": {"const": {"exit_code": 3, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/harnessErrorOutcome"}},
+            "REJECT": {"const": {"exit_code": 2, "schema_ref": "EXPERIMENT_CONTRACT_SCHEMA.json#/$defs/rejectOutcome"}}
+          }
+        },
+        "event_mapping": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ast_scalar_type_or_lexeme_violation", "consumer_output_schema_failure", "duplicate_json_member", "internal_exception", "io_failure", "malformed_consumer_payload", "mutation_semantic_rejection", "normal_valid_result", "noncanonical_ast_storage", "process_nonzero_unclassified", "raw_input_parse_failure", "timeout"],
+          "properties": {
+            "ast_scalar_type_or_lexeme_violation": {"const": "REJECT:exact_case_grid_code"},
+            "consumer_output_schema_failure": {"const": "HARNESS_ERROR:SCHEMA_ERROR"},
+            "duplicate_json_member": {"const": "REJECT:DUPLICATE_JSON_MEMBER"},
+            "internal_exception": {"const": "HARNESS_ERROR:INTERNAL_EXCEPTION"},
+            "io_failure": {"const": "HARNESS_ERROR:IO_ERROR"},
+            "malformed_consumer_payload": {"const": "HARNESS_ERROR:MALFORMED_PAYLOAD"},
+            "mutation_semantic_rejection": {"const": "REJECT:exact_registry_code"},
+            "normal_valid_result": {"const": "ACCEPT"},
+            "noncanonical_ast_storage": {"const": "REJECT:NONCANONICAL_AST_STORAGE"},
+            "process_nonzero_unclassified": {"const": "HARNESS_ERROR:NONZERO_EXIT"},
+            "raw_input_parse_failure": {"const": "HARNESS_ERROR:PARSE_ERROR"},
+            "timeout": {"const": "HARNESS_ERROR:TIMEOUT"}
+          }
+        },
+        "raw_exception_text_forbidden": {"const": true},
+        "unhandled_exception_forbidden": {"const": true}
+      }
+    },
+    "mutationExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["json_pointer_standard", "pointer_precondition", "precondition_failure", "production_artifacts_never_mutated", "registry_schema", "typed_operation_precondition"],
+      "properties": {
+        "json_pointer_standard": {"const": "RFC6901"},
+        "pointer_precondition": {"const": "resolve target in fresh disposable copy and require JSON type and value equal value_from before replacement"},
+        "precondition_failure": {"const": "HARNESS_ERROR:MUTATION_PRECONDITION_FAILED"},
+        "production_artifacts_never_mutated": {"const": true},
+        "registry_schema": {"const": "MUTATION_REGISTRY_SCHEMA.json"},
+        "typed_operation_precondition": {"type": "string", "minLength": 1}
+      }
+    },
+    "semanticValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ast_canonicalization_rule", "case_ids_unique", "common_case_ids_resolve_to_declared_evidence_type", "exact_output_artifact_array_required", "finite_compression_cutoff_precision_pairs_required", "finite_compression_pairing_rule", "infinite_coverage_rule", "interval_rule", "mutation_ids_unique_and_C_sorted", "mutation_pointer_preconditions_required", "output_parent_and_producer_coverage_exact", "rational_rule", "set_arrays_C_sorted_and_duplicate_free"],
+      "properties": {
+        "ast_canonicalization_rule": {"const": "duplicate-member token scan before object construction; validate canonical integer strings and reduced rationals; RFC8785-canonicalize unique-member objects; require stored JCS bytes and SHA-256 exact"},
+        "case_ids_unique": {"const": true},
+        "common_case_ids_resolve_to_declared_evidence_type": {"const": true},
+        "exact_output_artifact_array_required": {"const": true},
+        "finite_compression_cutoff_precision_pairs_required": {"const": true},
+        "finite_compression_pairing_rule": {"const": "zip each finite-compression case.cutoffs with precision_bits in array order"},
+        "infinite_coverage_rule": {"const": "derive C-sorted INF IDs from case_registry and require exact ordered_case_ids; recompute ordered_set_sha256; require exact A/B/P arrays; reject missing extra duplicate reordered or undeclared INF case; close B-to-P owner/hash fields by case_id"},
+        "interval_rule": {"const": "parse finite decimals; require lower<=upper, matching precision_bits/width_target, and upper-lower<=width_target"},
+        "mutation_ids_unique_and_C_sorted": {"const": true},
+        "mutation_pointer_preconditions_required": {"const": true},
+        "output_parent_and_producer_coverage_exact": {"const": true},
+        "rational_rule": {"const": "parse p or p/q; denominator positive; gcd(abs(p),q)=1; zero serialized as 0"},
+        "set_arrays_C_sorted_and_duplicate_free": {"const": true}
+      }
+    },
+    "mutationBaseline": {
+      "const": {
+        "case": {"basis_index": "1", "determinant_order_r": 2, "h": 2, "k": 1, "label_m": "6", "q": "2", "sigma": "real_part_of_s"},
+        "cases": {"INF-CROSSOVER-ALLH": {"sigma_1": "1"}},
+        "claims": {
+          "commutator": {"domain": "sigma*q>1", "h2_witness": "two_saturated_primes"},
+          "determinant": {"domain": "r*sigma>2"},
+          "modulo": {"existence": "sigma>1/h", "similarity": "sigma>1/h"},
+          "modulo_power": {"existence_guard": true},
+          "power_schatten": "k*sigma*q>2",
+          "saturated": {"existence": "sigma>0", "similarity": "sigma>1"},
+          "tauberian": {"hypotheses": "strip+positivity+simple_pole+residue"},
+          "trace": {"domain": "k*sigma>2"},
+          "weyl": {"constants": "C_h_1=D_h_1=1"}
+        },
+        "comparison": {"bool_int": "strict", "tolerance": "predeclared"},
+        "controls": {"free_UFD": "negative_control"},
+        "independence": {"expected_table_shared": false, "oracle_use": false, "output_embargo": true, "source_trees": "disjoint"},
+        "infinite_coverage": {
+          "A": {"exact_count": 0},
+          "B": {"certificate_owner": "B", "exact_count": 15, "membership": "exact_declared_15", "order": "C_sorted"},
+          "P": {"audit_owner": "P", "exact_count": 15, "hash_closure": "exact_B_match", "membership": "exact_declared_15", "order": "C_sorted", "verdict_closure": "overall_PASS_iff_all_per_case_PASS"},
+          "ordered_set_sha256": "6401b141f7b46b0f7275ec124ec571542655b9874cfa9aa5c7123108577e8a84"
+        },
+        "object": {"J_h": "exponent_equals_h_minus_one", "basis_weight": "n^(-s/2)", "retraction": "saturated_or_modulo_typed"},
+        "ownership": {"external_sources": "includes_Abanin_Mannanikov_2023", "framing": "new_pairwise_arithmetic_classification", "h_free_part": "zero_credit", "internal_predecessors": "P27_P28_P29_P30_P43", "priority": false, "weighted_composition": "zero_credit"},
+        "provenance": {"phase2_manifest_sha256": "d035310ac046981abe7a37a033b1354e3d8da3f53f33d631786ed80f40b90181"},
+        "record": {"evidence_type": "FINITE_COMPRESSION", "finite_eigenvalue_branch": "REAL_LOG_POSITIVE_BASE", "finite_eigenvalue_base_encoding": "canonical_positive_integer_string", "finite_eigenvalue_encoding": "canonical_DIRICHLET_POWER_AST_RFC8785_envelope", "finite_eigenvalue_rational_encoding": "canonical_numerator_denominator_integer_strings", "finite_eigenvalue_storage": "exact_RFC8785_JCS_UTF8_plus_SHA256", "nonzero_cyclic_atoms": "h_free_labels_only", "riesz_norm_type": "operator_norm_not_probability", "singular_value_type": "metric_not_eigenvalue"},
+        "raw_parser": {"duplicate_members": "reject_before_object_construction", "noncanonical_stored_jcs": "reject_exact_code", "reordered_unique_members": "canonicalize_not_reject"},
+        "route": {"evaluation_state": "NOT_RUN_PREAUTHORITY_EXPECTATION", "terminal_owner": "A0_A4_owned_fields_only"},
+        "scope": {"all_h": true},
+        "sources": {"Luan_Khoi": {"doi": "10.1090/conm/645/12907"}}
+      }
+    },
+    "mapValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["n", "tau_h", "omega_h"],
+      "properties": {
+        "n": {"$ref": "#/$defs/positiveIntegerString"},
+        "tau_h": {"$ref": "#/$defs/positiveIntegerString"},
+        "omega_h": {"$ref": "#/$defs/positiveIntegerString"}
+      }
+    },
+    "fiberMembership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/positiveIntegerString"}},
+        "MODULO": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/positiveIntegerString"}}
+      }
+    },
+    "pairedRanks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"type": "integer", "minimum": 0},
+        "MODULO": {"type": "integer", "minimum": 0}
+      }
+    },
+    "pairedTwoIntervals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["SATURATED", "MODULO"],
+      "properties": {
+        "SATURATED": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/certifiedInterval"}},
+        "MODULO": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/certifiedInterval"}}
+      }
+    },
+    "finiteCompressionRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "evidence_type", "cutoff", "precision_bits", "map_values", "fiber_membership", "block_rank", "finite_nonzero_eigenvalue", "finite_singular_value_interval", "finite_power_residual", "finite_riesz_norm_interval", "finite_commutator_singular_intervals"],
+      "properties": {
+        "case_id": {"enum": ["FIN-H2-M1-REAL", "FIN-H2-M6-REAL", "FIN-H2-M6-COMPLEX", "FIN-H3-M12-REAL", "FIN-H4-M8-COMPLEX", "FIN-H6-M32-REAL"]},
+        "evidence_type": {"const": "FINITE_COMPRESSION"},
+        "cutoff": {"type": "integer", "minimum": 1},
+        "precision_bits": {"enum": [128, 256, 512]},
+        "map_values": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/mapValue"}},
+        "fiber_membership": {"$ref": "#/$defs/fiberMembership"},
+        "block_rank": {"$ref": "#/$defs/pairedRanks"},
+        "finite_nonzero_eigenvalue": {"$ref": "#/$defs/pairedDirichletPowerAst"},
+        "finite_nonzero_eigenvalue_interval": {"$ref": "#/$defs/pairedCertifiedComplexInterval"},
+        "finite_singular_value_interval": {"$ref": "#/$defs/pairedIntervals"},
+        "finite_power_residual": {"$ref": "#/$defs/pairedComplex"},
+        "finite_riesz_norm_interval": {"$ref": "#/$defs/pairedIntervals"},
+        "finite_commutator_singular_intervals": {"$ref": "#/$defs/pairedTwoIntervals"}
+      },
+      "allOf": [
+        {"if": {"properties": {"case_id": {"const": "FIN-H2-M1-REAL"}}, "required": ["case_id"]}, "then": {"properties": {"finite_nonzero_eigenvalue": {"$ref": "#/$defs/astPairM1Real"}}}},
+        {"if": {"properties": {"case_id": {"const": "FIN-H2-M6-COMPLEX"}}, "required": ["case_id"]}, "then": {"properties": {"finite_nonzero_eigenvalue": {"$ref": "#/$defs/astPairM6Complex"}}}},
+        {"if": {"properties": {"case_id": {"const": "FIN-H2-M6-REAL"}}, "required": ["case_id"]}, "then": {"properties": {"finite_nonzero_eigenvalue": {"$ref": "#/$defs/astPairM6Real"}}}},
+        {"if": {"properties": {"case_id": {"const": "FIN-H3-M12-REAL"}}, "required": ["case_id"]}, "then": {"properties": {"finite_nonzero_eigenvalue": {"$ref": "#/$defs/astPairM12Real"}}}},
+        {"if": {"properties": {"case_id": {"const": "FIN-H4-M8-COMPLEX"}}, "required": ["case_id"]}, "then": {"properties": {"finite_nonzero_eigenvalue": {"$ref": "#/$defs/astPairM8Complex"}}}},
+        {"if": {"properties": {"case_id": {"const": "FIN-H6-M32-REAL"}}, "required": ["case_id"]}, "then": {"properties": {"finite_nonzero_eigenvalue": {"$ref": "#/$defs/astPairM32Real"}}}}
+      ]
+    },
+    "finiteOptimizationRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "evidence_type", "h", "sigma", "x_cutoff", "maximizer_label", "primorial_label", "tie_labels"],
+      "properties": {
+        "case_id": {"const": "FIN-PRIMORIAL-H3-THREE-REGIMES"},
+        "evidence_type": {"const": "FINITE_OPTIMIZATION"},
+        "h": {"const": 3},
+        "sigma": {"enum": ["2/3", "1", "4/3"]},
+        "x_cutoff": {"enum": [100, 1000, 10000]},
+        "maximizer_label": {"$ref": "#/$defs/positiveIntegerString"},
+        "primorial_label": {"$ref": "#/$defs/positiveIntegerString"},
+        "tie_labels": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/positiveIntegerString"}}
+      }
+    },
+    "infiniteCertificateRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "evidence_type", "certificate_owner", "theorem_field", "strict_domain_expression", "endpoint_witness_type", "certificate_value", "proof_dependency_hash", "analytic_derivation_hash", "certificate_payload_sha256"],
+      "properties": {
+        "case_id": {"enum": ["INF-COMM-H2-EULER", "INF-COMM-H2-Q2", "INF-COMM-H3-Q2", "INF-CROSSOVER-ALLH", "INF-DET-H4-R2", "INF-FREE-UFD-CONTROL-H3", "INF-M-EXIST-H3", "INF-POWER-H2-K1-Q2", "INF-PRIMORIAL-H3-THREE-REGIMES", "INF-S-EXIST-H2", "INF-SIMILARITY-M-H3", "INF-SIMILARITY-S-H2", "INF-TAUBERIAN-H3", "INF-TRACE-H3-K2", "INF-WEYL-H3-NONCROSSOVER"]},
+        "evidence_type": {"const": "INFINITE_THEOREM_CERTIFICATE"},
+        "certificate_owner": {"const": "B"},
+        "theorem_field": {"type": "string", "pattern": "^[A-Za-z0-9_]+$"},
+        "strict_domain_expression": {"type": "string", "minLength": 1},
+        "endpoint_witness_type": {"type": "string", "minLength": 1},
+        "certificate_value": {"type": "string", "minLength": 1},
+        "proof_dependency_hash": {"$ref": "#/$defs/hash"},
+        "analytic_derivation_hash": {"$ref": "#/$defs/hash"},
+        "certificate_payload_sha256": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "infiniteRecordsExact": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-COMM-H2-EULER"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-COMM-H2-Q2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-COMM-H3-Q2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-CROSSOVER-ALLH"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-DET-H4-R2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-FREE-UFD-CONTROL-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-M-EXIST-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-POWER-H2-K1-Q2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-PRIMORIAL-H3-THREE-REGIMES"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-S-EXIST-H2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-SIMILARITY-M-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-SIMILARITY-S-H2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-TAUBERIAN-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-TRACE-H3-K2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/infiniteCertificateRecord"}, {"properties": {"case_id": {"const": "INF-WEYL-H3-NONCROSSOVER"}}}]}
+      ],
+      "items": false
+    },
+    "scienceProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "producer", "contract_sha256", "declared_infinite_case_set_sha256", "finite_records", "infinite_case_ids", "infinite_records"],
+      "properties": {
+        "schema_version": {"const": "paper45.science-projection.v3"},
+        "producer": {"enum": ["A", "B"]},
+        "contract_sha256": {"$ref": "#/$defs/hash"},
+        "declared_infinite_case_set_sha256": {"const": "6401b141f7b46b0f7275ec124ec571542655b9874cfa9aa5c7123108577e8a84"},
+        "finite_records": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {"$ref": "#/$defs/finiteCompressionRecord"},
+              {"$ref": "#/$defs/finiteOptimizationRecord"}
+            ]
+          }
+        },
+        "infinite_case_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+        "infinite_records": {"type": "array", "items": {"$ref": "#/$defs/infiniteCertificateRecord"}}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"producer": {"const": "A"}}, "required": ["producer"]},
+          "then": {"properties": {"infinite_case_ids": {"const": []}, "infinite_records": {"const": []}}}
+        },
+        {
+          "if": {"properties": {"producer": {"const": "B"}}, "required": ["producer"]},
+          "then": {"properties": {"infinite_case_ids": {"$ref": "#/$defs/infiniteCaseIds"}, "infinite_records": {"$ref": "#/$defs/infiniteRecordsExact"}}}
+        }
+      ]
+    },
+    "perCaseAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "certificate_owner", "audit_owner", "certificate_payload_sha256", "proof_dependency_hash", "analytic_derivation_hash", "verdict"],
+      "properties": {
+        "case_id": {"enum": ["INF-COMM-H2-EULER", "INF-COMM-H2-Q2", "INF-COMM-H3-Q2", "INF-CROSSOVER-ALLH", "INF-DET-H4-R2", "INF-FREE-UFD-CONTROL-H3", "INF-M-EXIST-H3", "INF-POWER-H2-K1-Q2", "INF-PRIMORIAL-H3-THREE-REGIMES", "INF-S-EXIST-H2", "INF-SIMILARITY-M-H3", "INF-SIMILARITY-S-H2", "INF-TAUBERIAN-H3", "INF-TRACE-H3-K2", "INF-WEYL-H3-NONCROSSOVER"]},
+        "certificate_owner": {"const": "B"},
+        "audit_owner": {"const": "P"},
+        "certificate_payload_sha256": {"$ref": "#/$defs/hash"},
+        "proof_dependency_hash": {"$ref": "#/$defs/hash"},
+        "analytic_derivation_hash": {"$ref": "#/$defs/hash"},
+        "verdict": {"enum": ["PASS", "HOLD"]}
+      }
+    },
+    "perCaseAuditsExact": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-COMM-H2-EULER"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-COMM-H2-Q2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-COMM-H3-Q2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-CROSSOVER-ALLH"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-DET-H4-R2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-FREE-UFD-CONTROL-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-M-EXIST-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-POWER-H2-K1-Q2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-PRIMORIAL-H3-THREE-REGIMES"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-S-EXIST-H2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-SIMILARITY-M-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-SIMILARITY-S-H2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-TAUBERIAN-H3"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-TRACE-H3-K2"}}}]},
+        {"allOf": [{"$ref": "#/$defs/perCaseAudit"}, {"properties": {"case_id": {"const": "INF-WEYL-H3-NONCROSSOVER"}}}]}
+      ],
+      "items": false
+    },
+    "proofAudit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "producer", "contract_sha256", "declared_infinite_case_set_sha256", "audited_case_ids", "per_case_audits", "findings", "verdict"],
+      "properties": {
+        "schema_version": {"const": "paper45.proof-audit.v2"},
+        "producer": {"const": "P"},
+        "contract_sha256": {"$ref": "#/$defs/hash"},
+        "declared_infinite_case_set_sha256": {"const": "6401b141f7b46b0f7275ec124ec571542655b9874cfa9aa5c7123108577e8a84"},
+        "audited_case_ids": {"$ref": "#/$defs/infiniteCaseIds"},
+        "per_case_audits": {"$ref": "#/$defs/perCaseAuditsExact"},
+        "findings": {"type": "array", "items": {"type": "string"}},
+        "verdict": {"enum": ["PASS", "HOLD"]}
+      },
+      "allOf": [
+        {"if": {"properties": {"verdict": {"const": "PASS"}}, "required": ["verdict"]}, "then": {"properties": {"per_case_audits": {"items": {"properties": {"verdict": {"const": "PASS"}}}}}}},
+        {"if": {"properties": {"verdict": {"const": "HOLD"}}, "required": ["verdict"]}, "then": {"properties": {"per_case_audits": {"contains": {"properties": {"verdict": {"const": "HOLD"}}, "required": ["verdict"]}, "minContains": 1}}}}
+      ]
+    },
+    "comparisonReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "producer", "contract_sha256", "finite_case_ids", "exact_mismatch_count", "interval_mismatch_count", "verdict"],
+      "properties": {
+        "schema_version": {"const": "paper45.comparison-report.v1"},
+        "producer": {"const": "X"},
+        "contract_sha256": {"$ref": "#/$defs/hash"},
+        "finite_case_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^FIN-"}},
+        "exact_mismatch_count": {"type": "integer", "minimum": 0},
+        "interval_mismatch_count": {"type": "integer", "minimum": 0},
+        "verdict": {"enum": ["PASS", "HOLD"]}
+      }
+    },
+    "harnessError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["error_class", "stage", "message_digest", "retryable"],
+      "properties": {
+        "error_class": {"enum": ["PARSE_ERROR", "SCHEMA_ERROR", "TIMEOUT", "NONZERO_EXIT", "MALFORMED_PAYLOAD", "IO_ERROR", "INTERNAL_EXCEPTION", "MUTATION_PRECONDITION_FAILED"]},
+        "stage": {"enum": ["input", "preflight", "consumer", "comparison", "mutation", "stage_validation", "install", "audit"]},
+        "message_digest": {"$ref": "#/$defs/hash"},
+        "retryable": {"type": "boolean"}
+      }
+    },
+    "acceptOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mutation_id", "consumer_key", "outcome", "exit_code", "result_digest"],
+      "properties": {
+        "mutation_id": {"type": "string", "pattern": "^M[0-9]{3}$"},
+        "consumer_key": {"enum": ["A", "B", "G", "I", "P", "R_INDEPENDENT", "R_MAIN", "S", "T", "X"]},
+        "outcome": {"const": "ACCEPT"},
+        "exit_code": {"const": 0},
+        "result_digest": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "rejectOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mutation_id", "consumer_key", "outcome", "exit_code", "rejection_code", "result_digest"],
+      "properties": {
+        "mutation_id": {"type": "string", "pattern": "^M[0-9]{3}$"},
+        "consumer_key": {"enum": ["A", "B", "G", "I", "P", "R_INDEPENDENT", "R_MAIN", "S", "T", "X"]},
+        "outcome": {"const": "REJECT"},
+        "exit_code": {"const": 2},
+        "rejection_code": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]+$"},
+        "result_digest": {"$ref": "#/$defs/hash"}
+      }
+    },
+    "harnessErrorOutcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mutation_id", "consumer_key", "outcome", "exit_code", "error"],
+      "properties": {
+        "mutation_id": {"type": "string", "pattern": "^M[0-9]{3}$"},
+        "consumer_key": {"enum": ["A", "B", "G", "I", "P", "R_INDEPENDENT", "R_MAIN", "S", "T", "X"]},
+        "outcome": {"const": "HARNESS_ERROR"},
+        "exit_code": {"const": 3},
+        "error": {"$ref": "#/$defs/harnessError"}
+      }
+    },
+    "mutationOutcome": {
+      "oneOf": [
+        {"$ref": "#/$defs/acceptOutcome"},
+        {"$ref": "#/$defs/rejectOutcome"},
+        {"$ref": "#/$defs/harnessErrorOutcome"}
+      ]
+    },
+    "mutationBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "contract_sha256", "registry_sha256", "outcomes"],
+      "properties": {
+        "schema_version": {"const": "paper45.mutation-outcomes.v1"},
+        "contract_sha256": {"$ref": "#/$defs/hash"},
+        "registry_sha256": {"$ref": "#/$defs/hash"},
+        "outcomes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/mutationOutcome"}}
+      }
+    },
+    "integrityReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "producer", "contract_sha256", "exact_output_paths", "manifest_verified", "path_policy_verified", "late_failure_identity_verified", "second_run_zero_replacements", "verdict"],
+      "properties": {
+        "schema_version": {"const": "paper45.integrity-report.v1"},
+        "producer": {"const": "G"},
+        "contract_sha256": {"$ref": "#/$defs/hash"},
+        "exact_output_paths": {"const": ["results/SHA256SUMS.txt", "results/comparator_x.json", "results/evaluation_report.json", "results/evaluator_a.json", "results/evaluator_b.json", "results/integrity_audit.json", "results/mutation_outcomes.json", "results/proof_auditor_p.json"]},
+        "manifest_verified": {"type": "boolean"},
+        "path_policy_verified": {"type": "boolean"},
+        "late_failure_identity_verified": {"type": "boolean"},
+        "second_run_zero_replacements": {"type": "boolean"},
+        "verdict": {"enum": ["PASS", "HOLD"]}
+      }
+    },
+    "evaluationReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "contract_sha256", "c1", "c2", "infinite_coverage", "mutation_survivors", "external_disposition"],
+      "properties": {
+        "schema_version": {"const": "paper45.evaluation-report.v1"},
+        "contract_sha256": {"$ref": "#/$defs/hash"},
+        "c1": {"enum": ["PASS", "HOLD", "STOP_FALSE"]},
+        "c2": {"enum": ["PASS", "HOLD", "STOP_FALSE"]},
+        "infinite_coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["a_infinite_count", "b_infinite_count", "p_audit_count", "case_set_sha256", "b_p_id_match", "b_p_owner_hash_closure", "verdict"],
+          "properties": {
+            "a_infinite_count": {"const": 0},
+            "b_infinite_count": {"const": 15},
+            "p_audit_count": {"const": 15},
+            "case_set_sha256": {"const": "6401b141f7b46b0f7275ec124ec571542655b9874cfa9aa5c7123108577e8a84"},
+            "b_p_id_match": {"type": "boolean"},
+            "b_p_owner_hash_closure": {"type": "boolean"},
+            "verdict": {"enum": ["PASS", "HOLD"]}
+          },
+          "allOf": [
+            {"if": {"properties": {"verdict": {"const": "PASS"}}, "required": ["verdict"]}, "then": {"properties": {"b_p_id_match": {"const": true}, "b_p_owner_hash_closure": {"const": true}}}},
+            {"if": {"properties": {"verdict": {"const": "HOLD"}}, "required": ["verdict"]}, "then": {"anyOf": [{"properties": {"b_p_id_match": {"const": false}}}, {"properties": {"b_p_owner_hash_closure": {"const": false}}}]}}
+          ]
+        },
+        "mutation_survivors": {"type": "integer", "minimum": 0},
+        "external_disposition": {"enum": ["GO_EVALUATED", "HOLD_REPAIR", "STOP_FALSE", "STOP_DUPLICATE", "STOP_GENERIC_SPECIALIZATION"]}
+      }
+    }
+  }
+}

@@ -56,6 +56,7 @@ Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不�
 | [42-function-field-clock-non-descent](papers/42-function-field-clock-non-descent/PAPER_PLAN.md) | [PDF](papers/42-function-field-clock-non-descent/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/42-function-field-clock-non-descent/) | 对冻结的 full $q$-shift（$q\in\{2,3,5\}$），exact degree clock 在 length two 强制 composite $q^2$；同 marker 的 factor identification 又在 length one 强制 $p=q$ 与 $q{:}1$ multiplicity；marked determinant 的首个 $z$ 系数 $q^{1-s}$ 也不等于 prime-zeta $P(s)$。function-field prime-polynomial ledger 与 source determinant 保留。canonical replay 为 `11/11` 与 `11/11`，science SHA-256 为 `078d98da2f3c89c0f5f4e7ef6be84066ee60a1c1d82c86788de675ad349b7848`；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`。 | **STOP_Q_POWER_RATIONAL_PRIME_SUPPORT / STOP_MARKER_MULTIPLICITY_CONJUNCTION / STOP_FIRST_MARKED_COEFFICIENT_MISMATCH / ROUTE_A_REJECTED / SD-C44** |
 | [43-squarefree-factor-periodic-rigidity](papers/43-squarefree-factor-periodic-rigidity/PAPER_PLAN.md) | [PDF](papers/43-squarefree-factor-periodic-rigidity/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/43-squarefree-factor-periodic-rigidity/) | 对 two-sided all-rational-prime-square admissible shift，任意到 compact metrizable $\mathbb Z$-system 的 continuous surjective equivariant factor 都恰有一个周期点，即 all-zero fixed point 的像；所以全部 fixed-point counts 均为 $1$，Artin--Mazur zeta 为 $1/(1-z)$、inverse determinant 为 $1-z$，而 singleton primitive support 不能重标为 rational primes。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_ANALYTIC_DETERMINANT, A3_FAIL, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false；`STOP_DUPLICATE=LIVE_CONDITIONAL` 只是外部 literature/claim boundary，不是第五个严格终止码。 | **STOP_TRIVIAL_ONE_MINUS_Z_DIVISOR / STOP_PROXIMAL_PERIODIC_RIGIDITY / PROCEED_ONLY_AS_INTERNAL_EXACT_CLOSURE / STOP_SINGLETON_PRIMITIVE_SUPPORT / ROUTE_A_REJECTED / SD-C45** |
 | [44-q-adic-finite-size-boundary-spectra](papers/44-q-adic-finite-size-boundary-spectra/PAPER_PLAN.md) | [PDF](papers/44-q-adic-finite-size-boundary-spectra/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/44-q-adic-finite-size-boundary-spectra/) | 对任意 primitive finite zero--one adjacency matrix $A$ 与整数 radix $q\ge2$（含 composite $q$），order-one prefix remainder $E(N)=\log Z(N)-hN$ 精确延拓为 $\mathbb Z_q\to\mathbb R$ 的连续函数，其像恰为完整 accumulation set；仅在 binary golden control，该像是 strongly separated Cantor set，Hausdorff/box dimension 均为 $\log2/(2\log\varphi)$，ordinary cutoff generating function 的 unit circle 是 natural boundary。Ban--Hu--Lai author manuscript arXiv:2210.09115v1 的一维 displayed linear subleading formula 由 full-shift control 纠正，全部有效 prior leading/boundary results 记 zero candidate credit，且未 line-check version of record 或 erratum。严格 tuple 为 `(A0_FAIL, A1_FAIL, A2_FAIL, A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)`，overall 为 `ROUTE_A_REJECTED`，Route B 为 false。 | **EXACT Q-ADIC ACCUMULATION IMAGE / GOLDEN CANTOR DIMENSION / GOLDEN RADIAL NATURAL BOUNDARY / ROUTE_A_REJECTED / SD-C46** |
+| [45-isospectral-arithmetic-fiber-retractions](papers/45-isospectral-arithmetic-fiber-retractions/PAPER_PLAN.md) | [PDF](papers/45-isospectral-arithmetic-fiber-retractions/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/45-isospectral-arithmetic-fiber-retractions/) | 对每个整数 $h\ge2$，把 prime exponent 饱和到 $h-1$ 与 modulo $h$ 的两种 $h$-free arithmetic retraction 加权为紧算子；在共同有界域，它们有相同的简单非零谱、全部共同合法 power traces 与 integer-order regularized determinants，但饱和族恰在 $\Re s>1$ boundedly similar to compact normal，modulo 族则在全部 $\Re s>1/h$ 有界域如此，故 $1/h<\Re s\le1$ 是精确 isospectral-but-not-similar band。饱和 Riesz projections 有 exact primorial optimizer 和三种 maximal-order regimes；两族 singular values 有 explicit Weyl laws 且 $C_{h,1}=D_{h,1}=1$；self-commutator wall 为 $\Re(s)q=1$，区别于 operator Schatten wall $\Re(s)q=2$。 | **GO_EVALUATED / ISOSPECTRAL--NONSIMILAR BAND / EXACT PRIMORIAL--WEYL--COMMUTATOR LAWS / ROUTE_A_REJECTED_NOT_EVALUATED** |
 
 ### 论文 1 的候选分离结论
 
@@ -1544,13 +1545,59 @@ integrity 为 `15/15`、SHA-256
 retrospective，不获得 prospective、blind、novelty、priority、Route-B 或
 authorization credit。
 
+### 论文 45：isospectral arithmetic fiber retractions
+
+Paper 45 对每个整数 $h\ge2$ 比较两个到 $h$-free integers 的 idempotent arithmetic
+retractions：$\tau_h$ 把每个 prime exponent 截在 $h-1$，$\omega_h$ 则把它 modulo
+$h$。以 $n^{-s/2}$ 加权相应 basis maps 得到 $S_{h,s}$ 与 $M_{h,s}$；前者 bounded
+且 compact 当且仅当 $\Re s>0$，后者当且仅当 $\Re s>1/h$。在共同有界域，两者的
+simple nonzero eigenvalues 都是 $m^{-s/2}$（$m$ 遍历 $h$-free integers）；当
+$k\Re s>2$ 时共同 power trace 为
+$\operatorname{Tr}(S_{h,s}^k)=\operatorname{Tr}(M_{h,s}^k)
+=\zeta(ks/2)/\zeta(hks/2)$，共同合法的 integer-order regularized determinants
+也完全相同。
+
+相同 cyclic ledger 并不固定 metric geometry。$S_{h,s}$ boundedly similar to a
+compact normal operator 当且仅当 $\Re s>1$，而 $M_{h,s}$ 在其全部 bounded domain
+$\Re s>1/h$ 都满足；因此完整的 $1/h<\Re s\le1$ band isospectral but not similar。
+饱和族 Riesz projections 的最大值由 exact primorial label 取得，并有 subcritical、
+critical 与 supercritical 三种 maximal-order regimes。两族 singular-value counting
+functions 分别满足带 explicit positive Euler-product constants $C_{h,\sigma}$ 与
+$D_{h,\sigma}$ 的 Weyl laws，且 exact crossover 为 $C_{h,1}=D_{h,1}=1$；不主张
+$\sigma\ne1$ 时两常数有统一次序。两种 self-commutators 的 sharp ideal wall 均为
+$\Re(s)q=1$，严格区别于 operator Schatten wall $\Re(s)q=2$；$h=2$ 使用单独 endpoint
+witness，并有 exact Hilbert--Schmidt Euler identity。
+
+claim boundary 仅覆盖这两个 frozen maps、各自 bounded/ideal domains 与上述 all-$h$
+paired classification。rational primes 是 valuation grammar 的显式输入；free-UFD
+clone 是负对照而不是 positive arithmetic evidence。generic weighted-composition、
+rank-one fiber、Schatten、regularized determinant、power-free-part 与经典
+Tauberian/PNT/Mertens 工具均不获 candidate novelty credit；没有 rational-prime
+primitive selector、completed divisor、functional equation、Riemann-zero model 或
+fixed self-adjoint Hilbert--Pólya operator claim。
+
+authority external evaluation 的 C1/C2 均为 PASS，disposition 为 `GO_EVALUATED`：
+A 与 B 各有 21 个 finite records，B 与 proof auditor P 的 15 个 infinite cases
+逐项 closure，comparator 的七个 finite case IDs 为 0 exact mismatch、0 interval
+mismatch，75 个 registered mutations 的 168 次 physical outcomes 无 survivor。
+result manifest SHA-256 为
+`2fae66ff866b63e7119fce7b86c928f589570572728cae942d758f4e599ad734`；17 页 writer
+PDF SHA-256 为
+`072bfb9de07b46f7705118ce8342b3f56a90fef45240ee24be33c9931b908783`，43-row
+writer manifest SHA-256 为
+`2a9aff655b2040c61015b3f25394fa95bbb496d19b7a970854620b190c543893`。
+`GO_EVALUATED` 是 external scientific/publication disposition，不是 Route terminal；
+冻结 Route 文件仍只是 unevaluated expectation
+`(A0_FAIL,A1_FAIL,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`，overall 为
+`ROUTE_A_REJECTED_NOT_EVALUATED`，且不授权 Route B。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十四篇论文](papers/)
+- [四十五篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
