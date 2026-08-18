@@ -1,7 +1,7 @@
 # Adaptive batch HCS-C62 through HCS-C66
 
-Status: **C62 selected / target-lock pending implementation; C63--C66
-contingent and unselected**.
+Status: **C62 prefreeze complete; C63 target locked / implementation in
+progress; C64--C66 contingent and unselected**.
 
 This is a new adaptive batch.  C62 is selected only from C61's released
 Gassmann/Burnside theorem.  C63 may be selected only from C62's actual
@@ -29,5 +29,16 @@ guessed constants.
 
 ## C63--C66
 
-`UNSELECTED_CONTINGENT`: each slot remains open until its predecessor's
-released theorem or certified obstruction supplies a concrete successor.
+### C63
+
+Selected contingent target: the primitive four-term Burnside relation exposed
+by the C62 exterior-square shadow, with the exact rank-13/nullity-3 character
+matrix on the 16 C62 subgroup types.  The project-local target lock is
+`henon_dynamics/henon_mu3_yukawa_burnside_kernel_rank/`.  The inherited
+`S9-S10` C60 collision is a control, not a novelty claim.  C63 remains
+`NOT_RELEASED` until its own producer, checker, manuscript, and manifest
+gates close.
+
+`C64--C66 UNSELECTED_CONTINGENT`: each later slot remains open until its
+predecessor's released theorem or certified obstruction supplies a concrete
+successor.
