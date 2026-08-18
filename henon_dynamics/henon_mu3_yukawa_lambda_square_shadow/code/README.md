@@ -7,5 +7,7 @@ conjugacy witnesses.  `c62_atlas.py` upgrades those rows to complete
 stabilizer, core, and normalizer element sets; `c62_atlas_checker.py` checks
 the resulting G2 invariants.  `c62_resolvent.py` adds factorized marker
 carriers and split-prime noncollision, with `c62_resolvent_checker.py`
-checking the G3 contract.  These outputs are implementation evidence only;
+checking the G3 contract.  `c62_dictionary.py` groups stabilizers by explicit
+ambient conjugacy and `c62_dictionary_checker.py` checks the G4 fixed-field
+dictionary contract.  These outputs are implementation evidence only;
 the independent arithmetic, paper, and release gates remain to be added.

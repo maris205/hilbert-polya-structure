@@ -1,6 +1,6 @@
 # HCS-C62 theorem package
 
-Status: **TARGET_LOCKED / IMPLEMENTATION_PENDING / PAPER_PENDING / NOT_RELEASED**
+Status: **PREFREEZE_IMPLEMENTED / PAPER_COMPILED / NOT_RELEASED**
 
 ## Conditional theorem target
 
@@ -45,3 +45,7 @@ Kill C62 if C61 cannot be rebound, if the lambda action is incomplete, if a
   field dictionary is inferred only from subgroup orders, or if the paper
   replaces a collapsed branch with an unrelated claim.  The scope literal
   `NO_BAD_EULER_OR_ROOT_NUMBER` is mandatory.
+
+Current status: the finite-group gates G0--G5 and paper compilation pass;
+G6 arithmetic/local data are intentionally unclaimed under the scope literal,
+and final release closure is still pending.

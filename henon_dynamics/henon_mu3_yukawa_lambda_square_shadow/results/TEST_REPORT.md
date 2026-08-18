@@ -28,6 +28,15 @@ The G3 product-form checker returned:
 ```text
 {"exterior_square": {"rows": 10, "total_size": 51040},
  "symmetric_square": {"rows": 11, "total_size": 51360}, "status": "PASS"}
+
+The G4 fixed-field dictionary checker returned:
+
+```text
+{"status": "PASS", "summary": {"exterior_square":
+ {"minus_type_count": 10, "plus_minus_differ": true, "plus_type_count": 10},
+ "symmetric_square": {"minus_type_count": 11, "plus_minus_differ": true,
+ "plus_type_count": 11}}, "type_count": 16}
+```
 ```
 
 The result remains `PREFREEZE_CODE_RESULTS_PASS`; no release or theorem

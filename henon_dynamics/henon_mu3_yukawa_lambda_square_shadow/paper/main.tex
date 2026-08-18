@@ -1,0 +1,125 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref,microtype}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\title{Lambda-Square Shadows of a \texorpdfstring{$W(E_6)$}{W(E6)} Gassmann Pair}
+\author{C62 computational research note}
+\date{August 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Starting from the released degree-160 Gassmann pair for the Weyl group
+$G=W(E_6)$, we compute the exterior-square and symmetric-square shadows of
+the two permutation $G$-sets.  Exact finite-group enumeration verifies equal
+rational characters, complete orbit atlases, core-free stabilizers, normalizer
+orders, and a fixed-field dictionary grouped by ambient conjugacy.  The two
+shadows have dimensions $51{,}040$ and $51{,}360$.  Product-form marker
+carriers are supplied with a split-prime noncollision witness.  These are
+finite-group and formal marker results only: no arithmetic field resolvent,
+discriminant, Euler factor, or root-number claim is made.
+\end{abstract}
+
+\section{Question and scope}
+Let $H_+$ and $H_-$ be the released nonconjugate order-$162$ subgroups of
+$G=W(E_6)$, and write $X_\pm=G/H_\pm$.  The question is whether applying the
+degree-two lambda operations can preserve the permutation character while
+separating the resulting finite $G$-sets and their fixed-field shadows.
+Throughout, the scope literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  Thus all conclusions below are
+finite-group or formal-marker conclusions.
+
+\section{Lambda identities}
+For a finite $G$-set $X$ and $g\in G$, the standard formulas are
+\[
+ \chi_{\Lambda^2 X}(g)=\frac{\chi_X(g)^2-\chi_X(g^2)}2,
+ \qquad
+ \chi_{\operatorname{Sym}^2X}(g)=\frac{\chi_X(g)^2+\chi_X(g^2)}2.
+\]
+The released C61 equality $\chi_{X_+}=\chi_{X_-}$ therefore implies equality
+of both degree-two characters.  The producer independently evaluates these
+identities on the complete $W(E_6)$ action and records dimensions
+\[
+ |\Lambda^2X_\pm|=\binom{320}{2}=51{,}040,
+ \qquad |\operatorname{Sym}^2X_\pm|=\binom{321}{2}=51{,}360.
+\]
+
+\section{Complete orbit atlases}
+The exact action enumerates all two-subsets and all size-two multisets.  The
+exterior-square atlas has 10 orbits totaling $51{,}040$ points; the
+symmetric-square atlas has 11 orbits totaling $51{,}360$ points.  For every
+orbit we store the complete stabilizer element set, its core, its normalizer,
+and canonical digests.  In each row the fixed-field degree is checked by
+\[
+ [G^{\mathrm{core}(S)}:S]=\frac{|G|}{|S|}=\frac{51{,}840}{|S|},
+\]
+with trivial core in all 42 plus/minus orbit records.
+
+Four matched exterior rows and five matched symmetric rows have
+nonconjugate plus/minus stabilizers.  Hence character equality is not used as
+an isomorphism test for the actual finite $G$-sets.
+
+\section{Fixed-field dictionary}
+The G4 dictionary groups the complete stabilizer sets by conjugacy in the
+ambient $W(E_6)$, producing 16 explicit type labels.  The checker verifies
+that each label has a consistent subgroup order, normalizer order, core order,
+and fixed-field degree.  The plus and minus type sets differ in both lambda
+operations.  Several subgroup orders split into multiple labels, so subgroup
+order, orbit-table position, or a hash cannot serve as the field identifier.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+shadow & orbit count & total degree & matched nonconjugate rows\\
+\midrule
+$\Lambda^2$ & 10 & 51,040 & 4\\
+$\operatorname{Sym}^2$ & 11 & 51,360 & 5\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Marker carriers and arithmetic boundary}
+For each orbit $\mathcal O$ the reproducibility package stores the formal
+carrier
+\[
+ R_{\mathcal O}(T)=\prod_{(i,j)\in\mathcal O}
+ \bigl(T-(512X_i+X_j)\bigr).
+\]
+At the released split-prime witness $p=692717$, all evaluated marker values
+inside each orbit are distinct and below $p$.  This certifies a convenient
+noncollision label for the orbit computation.  It does not expand the carrier
+over characteristic zero and does not identify an arithmetic number field.
+Consequently no discriminant, different, local extension, Euler factor,
+ramification, or root-number statement is made here.
+
+\section{Reproducibility and nonclaims}
+The code and JSON evidence are deterministic and source-bound to the released
+C61 group action.  The commands are:
+\begin{verbatim}
+python3 code/c62_lambda.py
+python3 code/c62_atlas.py
+python3 code/c62_resolvent.py
+python3 code/c62_dictionary.py
+python3 code/c62_dictionary_checker.py
+\end{verbatim}
+All outputs are marked prefreeze until the final audit and manifest closure.
+The paper deliberately does not claim arithmetic equivalence beyond the
+finite fixed-field shadow, and it does not claim any bad-prime or root-number
+result.
+
+\section{Conclusion}
+Degree-two lambda operations preserve the rational permutation character of
+the C61 Gassmann pair while producing complete, explicitly separated finite
+orbit/stabilizer data.  The resulting 16-type fixed-field dictionary and the
+formal marker carriers constitute the C62 contribution within the stated
+scope boundary.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+\bibitem{serre}
+J.-P. Serre, \emph{Topics in Galois Theory}, Jones and Bartlett, 1992.
+\bibitem{burnside}
+W. Burnside, \emph{Theory of Groups of Finite Order}, Cambridge University Press, 1911.
+\end{thebibliography}
+\end{document}
