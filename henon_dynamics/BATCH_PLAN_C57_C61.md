@@ -1,7 +1,7 @@
 # Adaptive batch plan: HCS-C57 through HCS-C61
 
-Status: **adaptive batch; C57 through C60 released and frozen; C61 remains
-contingent and unselected**
+Status: **adaptive batch; C57 through C60 released and frozen; C61
+`TARGET_LOCKED / IMPLEMENTATION_PENDING / PAPER_PENDING / NOT_RELEASED`**
 
 Date: 2026-08-17
 
@@ -23,6 +23,14 @@ rebound, bounded exact group/primitive/local pilots passed, and an independent
 hostile target review returned PASS. Its theorem, machine/formal packages,
 anonymous paper, final rebased I60 implementation identity, and P60 release
 provenance are now closed.
+After P60 was frozen at
+`fe1217810b72840619efdf40a2af31b8b80d96f6`, C61 passed a bounded adaptive
+scan and primary-source/non-salami review for one integrated tensor/Fourier
+target.  The scan and all `/tmp` pilots remain selection chronology only,
+never theorem authority.  C61 has no implementation, machine evidence,
+paper, release tuple, or promotion authorization.  Its exact current status
+is `TARGET_LOCKED / IMPLEMENTATION_PENDING / PAPER_PENDING / NOT_RELEASED`.
+
 The protected C59-closing sentence that records C60 as
 `IMPLEMENTATION_PENDING` is historical target-lock chronology and is
 superseded by the layered C60 status in this preamble and in C60's status
@@ -33,12 +41,12 @@ The current dependency graph is therefore
 \[
  C56\longrightarrow C57\longrightarrow C58\longrightarrow C59\longrightarrow
  C60\longrightarrow
- \underbrace{C61}_{\text{contingent and unselected}}.
+ \underbrace{C61}_{\text{target locked; implementation pending}}.
 \]
 
-No result, title, or method is reserved for C61. C59 is restricted to the
-exact released theorem below, and C60 is restricted to the exact released
-theorem and KILL controls recorded below. Batch
+The C61 slot is reserved only for the exact integrated theorem target below.
+C59 and C60 remain restricted to their exact released theorems and KILL
+controls.  Batch
 completion requires five independently theorem-sized papers, each with its
 own proof package, exact replay, source audit, manuscript, release tuple, and
 commit/provenance closure.
@@ -747,21 +755,151 @@ under the external-only policy. The protected 21-file machine layer remains
 remains the exact machine identity, and the 13-root formal aggregate remains
 `FORMAL_DOCS_PASS`. C61 remains contingent and unselected.
 
-## HCS-C61: contingent slot
+## HCS-C61: zeta-equivalent tensor algebras and Fourier descent
 
-C61 has no locked title, object, theorem statement, or experiment program. It
-may be opened only after C60 is frozen and its actual theorem/obstruction has
-been audited. At that transition the batch plan must record:
+### Target-lock handoff
 
-- the exact C60 result used as input;
-- why the new object is mathematically distinct from C60;
-- alternatives rejected by primary-source and duplication checks;
-- one theorem-sized positive or negative target;
-- exact GO/KILL controls; and
-- unchanged Route-A and Hilbert--Polya firewalls.
+C61 was selected only after C60 was `RELEASE_FROZEN` at P60
+`fe1217810b72840619efdf40a2af31b8b80d96f6`.  The released C60 theorem,
+certificate, payload, group/resolvent evidence, live/archive Route, complete
+project manifest, and protected guard are mandatory G0 inputs.  The final
+target report is owner-bound in this staged package:
 
-Failure to find a non-salami, source-distinct C61 theorem is a batch blocker;
-it is not permission to split C60's future certificate or manuscript.
+```text
+target_report_sha256: eb0a70f62427cd8b70fa35dc4153bd93d57d9ddef5ab7a349d439be3a8257026
+novelty_source_audit_sha256: d8fb7baa602cf32c89e2b457f9f0abf5f52c70ff377c8b23aae0e48ab921be25
+```
+
+That digest was supplied by the target-report owner and must be rebound from
+the exact 59,956-byte, 1,096-line report.  No earlier target-report digest or
+self-atlas aggregate hash may be substituted or guessed.  The bounded scan,
+arithmetic design, source audit, and all `/tmp`
+pilots are target-selection chronology, not C61 theorem authority.
+
+The locked title is
+
+> **Zeta-Equivalent Tensor Algebras of the Hénon Gassmann Twins and an
+> Explicit Fourier Descent.**
+
+The project basename is
+`henon_mu3_yukawa_tensor_fourier_descent`.  Its object is the ordered triple
+
+\[
+ \mathscr T_{++}=F_+\otimes_{\mathbf Q}F_+,
+ \qquad \mathscr T_{+-}=F_+\otimes_{\mathbf Q}F_-,
+ \qquad \mathscr T_{--}=F_-\otimes_{\mathbf Q}F_-,
+\]
+
+inside C60's released common `W(E6)` normal closure, together with the full
+double-coset factorization and one exact Fourier-selected mixed base.  This is
+not C60's single biquadratic envelope: the headline objects are three
+dimension-`102400` finite étale algebras and the multiplicative Burnside
+defect of the released Gassmann pair.  C60's `L/M` is recovered as the unique
+minimum mixed factor/base and is an anchor, not a new C61 field claim.
+
+### Conditional integrated theorem target
+
+Put `x=[G/H_+]` and `y=[G/H_-]` in `B(G)`, with
+`G=W(E6)`.  Conditional on all project-local G0--G7 gates, C61 shall prove
+
+\[
+ x^2,\;xy,\;y^2\text{ pairwise distinct in }B(G),
+ \qquad
+ \operatorname{lin}(x^2)=\operatorname{lin}(xy)
+ =\operatorname{lin}(y^2),
+\]
+
+and hence pairwise nonisomorphic but zeta-equivalent finite étale algebras.
+All three products have 12 factors and dimension `102400`; the self spectra
+are
+
+```text
+[320x2,960x2,1920,5760x2,8640x2,17280,25920x2],
+```
+
+while the mixed spectrum is
+
+```text
+[640,960x2,1920,2880x4,8640x2,17280,51840].
+```
+
+The mixed product must be resolved as exactly `160` conjugate positions,
+`12` double cosets, and `8` `Q`-isomorphism types.  The two self products
+must be separated by their diagonal degree-`320` subgroup types, not by their
+equal degree spectra.
+
+Fourier decomposition of C60's released carrier `lambda` must independently
+reconstruct integral `r_+,r_3,r_0=r_+r_3`, prove `R_0=0`, exact division by
+`2/4`, orbit-span dimension three, and
+`delta_0=delta_+delta_3`.  The rank-three bridge must bind the 243-term Trace
+carrier SHA-256
+`a7398d36cea0c83ace64466a579e21666731d1e3c8e8641df4ce036c79de2bd7`
+and exact split-prime identity values `581739/643771/119649` for
+`Trace/r_+/r_3`.  With
+
+\[
+ S_+=\operatorname{Stab}_G(r_+),\qquad
+ T_+=\operatorname{Stab}_G(\{r_+,-r_+\}),
+\]
+
+the canonical mixed seed-149 join must equal `T_+` as the same embedded
+element set.  Writing `A=Q(delta_+)=K^{T_+}` and
+`B=Q(r_+)=K^{S_+}`, the target diamond is
+
+\[
+ [A:Q],[B:Q],[M:Q],[F_+:Q]=40,80,160,320,
+ \qquad B\cap M=A,\quad BM=F_+.
+\]
+
+The complete global arithmetic covers all eight mixed compositum types, all
+four mixed intersection classes, and `A,B`.  Both retained `D_3` branches
+`ToM140` and `ToM206`, every advertised factor row, and the subordinate ideal
+complementarity law must remain present.  No branch is selected.
+
+### Canonical gates and KILL controls
+
+- G0 rebinds every released P60/C60 byte, convention, labelled root, manifest,
+  Route/archive identity, Batch input, protected guard, and all 30 false scope
+  leaves.
+- G1 reconstructs all 36 tensor rows, all three characters, both complete
+  self atlases, pairwise Burnside separation, and the common zeta product.
+- G2 proves the mixed `160/12/8` atlas, fixed-field dictionary, core-free
+  isomorphism grouping, unique `L/M` minimum, and unique `K` maximum.
+- G3 constructs project-local exact product-form resolvents and proves formal
+  stabilizers plus complete split-prime noncollision at `p=692717`.
+- G4 proves the normalized Fourier/Kummer identities, exact type-3 equality,
+  and the `A/B/M/F_+` diamond.
+- G5 certifies all advertised signatures, discriminants, support, and
+  relative-discriminant norm vectors by independent lanes.
+- G6 retains complete uncollected local rows for both `D_3` branches and
+  proves finite and archimedean complementarity without classifying local
+  fields from `(n,e,f,d)`.
+- G7 enforces independent Python, GAP/TomLib, and arithmetic checkers; strict
+  schemas; hostile mutations; atomic manifests; source ownership; formal and
+  paper review; and explicit later promotion discipline.
+
+Any missing self row, changed spectrum, conflation of `160/12/8`, failure of
+exact embedded `T_+=J_type3`, failure of evaluated noncollision or the field
+diamond, omission/selection of either local branch, salami fallback, or
+scope/independence failure kills this target.  There is no atlas-only,
+Fourier-only, local-only, or one-self-product fallback under C61.
+
+### Source and scope boundary
+
+Burnside multiplication and its linearization ideal, double-coset/tensor
+factorization, Gassmann/Perlis zeta equivalence, generic Fourier projection,
+and the James `W(E6)` collision census are prior art.  The bounded claim is
+only the exact certified conjunction for this released pair.  No absolute
+priority language is authorized.
+
+The exact status is
+`TARGET_LOCKED / IMPLEMENTATION_PENDING / PAPER_PENDING / NOT_RELEASED`.
+All G0--G7 leaves are pending; `promotion_authorized` is false.  The literal
+scope firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, with all 30 prescribed leaves
+false.  C61 proves no bad Euler factor, decomposition Frobenius, epsilon or
+root number, automorphy, RH, Hilbert--Pólya operator, branch selection, class
+number, regulator, maximal order, integral basis, local-field classification,
+or paper/release completion.
 
 ## Batch-wide publication vetoes
 
