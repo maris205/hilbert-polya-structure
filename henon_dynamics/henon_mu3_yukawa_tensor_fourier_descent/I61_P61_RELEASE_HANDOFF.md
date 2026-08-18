@@ -1,6 +1,6 @@
 # HCS-C61 I61/P61 release handoff
 
-Status: **`I61_PAPER_INTEGRATED / P61_HANDOFF_READY / PROMOTION_PENDING`**.
+Status: **`I61_PAPER_INTEGRATED / P61_RELEASE_FROZEN / PROMOTION_AUTHORIZED`**.
 
 This handoff follows the C60 convention: the frozen C61 code/results and
 13-file formal target-lock package remain byte-stable machine inputs, while
@@ -30,9 +30,18 @@ paper and release provenance are additive.  The protected
 - Batch target-lock input: `13a626b4f43cf560bf194268d503e41ba1bbded16ad59e305c24b9045ee1d814`.
 - Scope: `NO_BAD_EULER_OR_ROOT_NUMBER`.
 
-## Promotion gates
+## Release closure
 
-I61 is paper-complete and P61 is handoff-ready.  Promotion is not asserted
-until the release-wide manifest, final C57--C61 audit, fresh remote reconcile,
-commit, and push have all passed.  This document does not rewrite the frozen
-target-lock files and does not grant `promotion_authorized` by itself.
+I61 is paper-complete and P61 is release-frozen.  The final C57--C61 audit,
+fresh remote reconcile, allowlisted commit, and push all passed.
+
+- Release commit: `d67aae7bbecf2d9ef476fb642f4a2b9676de5027`.
+- Release tree: `53b6e43a1c1d0204f9d069c2f3f2c16cb090055c`.
+- Remote verification: `HEAD == origin/main`, with the release commit
+  reachable from `origin/main`.
+- Release-wide manifest: `FULL_PROJECT_HASHES.sha256`, 43 self-excluding
+  entries; its digest is recorded in the top-level final audit.
+
+The frozen machine certificate/checker continue to report their deliberate
+`NOT_RELEASED`/false machine-layer fields; this additive handoff is the
+post-machine release authorization and does not rewrite target-lock inputs.

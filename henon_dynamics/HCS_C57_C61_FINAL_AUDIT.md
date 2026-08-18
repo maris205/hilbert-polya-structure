@@ -1,8 +1,9 @@
 # HCS-C57--C61 completion audit
 
-Audit status: **`PASS_PENDING_COMMIT_PUSH`**.  This is the pre-commit evidence
-record; the final status becomes complete only after the allowlisted commit is
-created, the remote is reconciled, and the push is verified.
+Audit status: **`COMPLETE_RELEASE_FROZEN`**.
+
+The allowlisted release commit was created, the remote was reconciled, the
+push was verified, and `HEAD == origin/main`.
 
 ## Batch coverage
 
@@ -12,7 +13,7 @@ created, the remote is reconciled, and the push is verified.
 | C58 | `ROUTE_A_C58_RELEASE_FROZEN`, machine/formal pass | `PAPER_COMPILED`, hostile-pass predecessor binding | frozen release route and full manifest |
 | C59 | `ROUTE_A_C59_RELEASE_FROZEN`, machine/formal pass | `PAPER_COMPILED`, hostile-pass predecessor binding | frozen release route and full manifest |
 | C60 | `ROUTE_A_C60_RELEASE_FROZEN`, G0--G7 and post-refresh pass | 26-page `PAPER_COMPILED / PAPER_HOSTILE_PASS` | P60 commit `fe1217810b72840619efdf40a2af31b8b80d96f6`, archived Route |
-| C61 | official refresh/replay `57/57`, G0--G7 pass, payload/report rebound | 9-page `PAPER_COMPILED / PAPER_HOSTILE_PASS` | I61/P61 handoff, archive Route, 43-entry manifest |
+| C61 | official refresh/replay `57/57`, G0--G7 pass, payload/report rebound | 9-page `PAPER_COMPILED / PAPER_HOSTILE_PASS` | P61 `RELEASE_FROZEN`, archive Route, 43-entry manifest |
 
 ## C61 bindings
 
@@ -26,7 +27,7 @@ created, the remote is reconciled, and the push is verified.
 - Paper PDF: `7fc2af35298df1eaa15b2ec842b83e7aade01288f34826c382f96f2461c578e8`.
 - Archive Route: `evaluations/route_a/HCS-C61/20260818T000000Z.yaml`.
 - Release-wide manifest: `FULL_PROJECT_HASHES.sha256`, 43 self-excluded entries,
-  SHA-256 `f736cc3dbfd72ce31a841e8feba26ff43013d597c16ee009825ae714ca8a12b6`.
+  SHA-256 `849fec6b7b9b0d6b4e958d5531a14773015f71d35d87a87e52b5db6d950463b1`.
 
 ## Invariants
 
@@ -38,8 +39,13 @@ created, the remote is reconciled, and the push is verified.
   branches remain retained and unselected.
 - No C61 machine result, certificate, or manifest was copied from `/tmp`.
 
-## Remaining gate
+## Version-control closure
 
-Only version-control closure remains: fresh-fetch/reconcile `origin/main`, stage
-the exact allowlist (excluding the protected guard and build auxiliaries), make
-the release commit, push it, and verify remote ancestry and tree identity.
+- Release commit: `d67aae7bbecf2d9ef476fb642f4a2b9676de5027`.
+- Release tree: `53b6e43a1c1d0204f9d069c2f3f2c16cb090055c`.
+- Remote: `origin/main` resolves to the same commit and tree.
+- Protected `codex_prompt.md` remains unstaged and unchanged by design.
+
+The C61 machine-layer reports intentionally retain their source-stable
+`NOT_RELEASED`/false fields.  The additive C61 archive Route and I61/P61
+handoff record the post-machine release authorization above.
