@@ -48,6 +48,7 @@ henon_mixed_axis_dynatomic_entropy_gap - HCS-P60 complete - Odd mixed-axis closu
 henon_survivor_reflection_transversality - HCS-P61 complete - Every primitive odd mixed-axis root in the certified H6 survivor is transverse/simple and counted by the reversible-necklace law, but these roots are exponentially sparse in formal degree.
 henon_mu3_yukawa_lambda_square_shadow - C62 prefreeze complete - The exterior/symmetric lambda-square shadows of the C61 W(E6) Gassmann pair have complete finite-group atlases and a 16-type fixed-field dictionary; arithmetic/local claims remain explicitly out of scope.
 henon_mu3_yukawa_burnside_kernel_rank - C63 prefreeze complete - The C62 exterior shadow exposes a primitive four-versus-four Burnside relation with a 25-by-16 character matrix of rank 13; the full Burnside ring and arithmetic/local claims are not asserted.
+henon_mu3_yukawa_burnside_marks - C64 prefreeze complete - The restricted 16-type table-of-marks matrix has rank 16 and determinant (2^{23}3^3), separating the C63 character-zero relation; full Burnside-ring and arithmetic/local claims are not asserted.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
