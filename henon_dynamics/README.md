@@ -53,6 +53,7 @@ henon_mu3_yukawa_mark_defect - C65 prefreeze complete - The C63 character-kernel
 henon_mu3_yukawa_mark_cokernel - C66 prefreeze complete - The restricted 16-by-16 mark map has Smith invariants (1,2^{10},4^3,24,144), cokernel (Z/2)^10 + (Z/4)^3 + Z/24 + Z/144, and primary parts Z/2/Z/4/Z/8/Z/16 at 2 and Z/3 + Z/9 at 3; the result is restricted to the frozen support.
 henon_mu3_yukawa_mark_coordinate_profile - C67 prefreeze complete - Fixing the named S_i mark coordinates gives exact least-integral-multiplier profiles (36,12,6,6,2,2,36,6,16,8,6,12,2,2,36,36) and transpose profile (1,4,2,2,2,2,36,6,16,8,2,4,2,2,2,2), both with global denominator 144.
 henon_mu3_yukawa_mark_defect_duality - C68 prefreeze complete - The C65 saturation defect embeds in the C66 restricted cokernel as (Z/8) + (Z/2)^2; the quotient and transpose-side annihilator have Smith invariants (1^4,2^8,4^2,12,144), with annihilator coordinate types S1,S4,S7,S8.
+henon_mu3_yukawa_mark_defect_splitting - C69 prefreeze complete - The actual C68 defect inclusion splits via rho([x])=(x10 mod 8,x3 mod 2,x1+x15 mod 2); an explicit complement has Smith invariants (1^4,2^8,4^2,12,144), and the fixed subgroup has exactly 2^41 complements.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`

@@ -1,0 +1,148 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\diag}{\operatorname{diag}}
+\title{Splitting a Concrete Defect Extension in a Restricted Mark Cokernel}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a frozen $16\times16$ restricted self-mark matrix $M$, earlier exact
+calculations locate a subgroup
+$D\cong\mathbb Z/8\oplus(\mathbb Z/2)^2$ inside
+$C=\mathbb Z^{16}/M\mathbb Z^{16}$.  Abstract invariant factors do not decide
+whether this particular inclusion splits.  We give a three-coordinate
+retraction, an explicit index-$32$ lattice for its kernel, and an integral
+presentation of the resulting complement.  We also prove that the fixed
+subgroup has exactly $2^{41}$ complements.  All claims concern only the named
+sixteen-type support.
+\end{abstract}
+
+\section{The concrete extension}
+Let $M$ be the exact restricted mark matrix, let
+$U=[u_1\ u_2\ u_3]$, and put
+\[
+ C=\Z^{16}/M\Z^{16},\qquad
+ A=\Z/8\oplus\Z/2\oplus\Z/2.
+\]
+The preceding certificate proves that $a\mapsto[Ua]$ embeds $A$ in $C$;
+write its image as $D$.  It also gives
+\[
+ C/D\cong(\Z/2)^8\oplus(\Z/4)^2\oplus\Z/12\oplus\Z/144.
+\]
+The question here is about the actual extension
+$0\to D\to C\to C/D\to0$.  The abstract groups alone are insufficient:
+$0\to\Z/2\to\Z/4\to\Z/2\to0$, for example, does not split.
+
+The scope firewall is
+\[
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\]
+No full table of marks, full Burnside ring, arithmetic or local construction,
+Euler factor, root number, automorphy, or Hilbert--Polya operator is claimed.
+
+\section{A sparse retraction}
+For $x=(x_1,\ldots,x_{16})^T$, define
+\[
+ \rho([x])=(x_{10}\bmod8,\ x_3\bmod2,\ x_1+x_{15}\bmod2).
+\]
+Its integer row matrix is
+\[
+ R=\begin{pmatrix}
+ e_{10}^T\\ e_3^T\\ e_1^T+e_{15}^T
+ \end{pmatrix},\qquad \Delta=\diag(8,2,2).
+\]
+
+\begin{theorem}[Splitting of the actual inclusion]
+The map $\rho:C\to A$ is well defined and its restriction to $D$ is the
+identity.  Consequently $C=D\oplus\ker\rho$.
+\end{theorem}
+
+\begin{proof}
+Exact integer multiplication gives $RM\equiv0$ rowwise modulo $(8,2,2)$,
+so $\rho$ descends through $M\Z^{16}$.  It also gives
+\[
+ RU=\diag(1,-1,-1)\equiv I_3\pmod\Delta.
+\]
+Thus $\rho([Ua])=a$ in $A$ for every $a$, which is precisely the retraction
+identity for the fixed inclusion.
+\end{proof}
+
+\section{An explicit complement}
+Let
+\[
+ L=\{x\in\Z^{16}:x_{10}\equiv0\ (8),\ x_3\equiv0\ (2),\
+ x_1+x_{15}\equiv0\ (2)\}.
+\]
+This is the full inverse image of zero under the congruence map represented by
+$R$; in particular, it is not the integer kernel of $R$.  A column basis $B$
+is obtained from the standard basis by replacing
+\[
+ b_1=e_1-e_{15},\quad b_3=2e_3,\quad
+ b_{10}=8e_{10},\quad b_{15}=2e_{15}.
+\]
+It has determinant $32$.  Since $RM\equiv0\pmod\Delta$,
+$M\Z^{16}\subset L$.
+
+\begin{proposition}[Complement presentation]
+Put $K=L/M\Z^{16}$.  The matrix $N=B^{-1}M$ is integral, satisfies $BN=M$,
+and has Smith invariants
+\[
+ (1,1,1,1,2,2,2,2,2,2,2,2,4,4,12,144).
+\]
+Hence
+\[
+ K\cong(\Z/2)^8\oplus(\Z/4)^2\oplus\Z/12\oplus\Z/144,
+ \qquad |K|=7077888.
+\]
+\end{proposition}
+
+\begin{proof}
+The displayed basis describes the three congruences directly.  Exact
+Gauss--Jordan elimination makes $N$ integral; Euclidean Smith reduction gives
+the stated diagonal.  The product check
+$|D||K|=32\cdot7077888=226492416=|C|$ is independent confirmation.
+\end{proof}
+
+\section{Counting every complement}
+Fix the displayed retraction $\rho_0$.  Any other retraction differs from it
+by a homomorphism vanishing on $D$, hence by a unique member of
+$\Hom(C/D,D)$.  Conversely every such homomorphism, composed with the quotient
+map and added to $\rho_0$, is a retraction.  Thus the retractions form a
+torsor under $\Hom(C/D,D)$.
+
+The $2$-primary part of the quotient is
+\[
+ (C/D)_{(2)}\cong(\Z/2)^8\oplus(\Z/4)^3\oplus\Z/16.
+\]
+Using $|\Hom(\Z/2^a,\Z/2^b)|=2^{\min(a,b)}$, the exponents for the three
+target factors $\Z/8,\Z/2,\Z/2$ are respectively $17,12,12$.  Therefore
+\[
+ |\Hom(C/D,D)|=2^{17+12+12}=2^{41}=2199023255552.
+\]
+For a fixed inclusion, taking kernels bijects retractions with complements:
+a chosen complement determines the unique projection that is the identity on
+$D$.  Hence there are exactly $2^{41}$ complements.  In particular, the
+explicit $K$ above is not canonical.
+
+\section{Reproducibility and conclusion}
+The evidence binds the exact C64, C65, C66, and C68 bytes.  Producer and
+checker independently reconstruct $R,B,N$, the Smith diagonal, and the
+homomorphism count; a separate SymPy path reproduces the matrix identities and
+Smith form.  Clean replay passes and twenty-three hostile semantic mutations
+are rejected.  C69 therefore resolves the extension question constructively:
+the concrete defect subgroup splits, its displayed complement has the C68
+quotient invariants, and all complements are counted exactly.
+
+\end{document}
