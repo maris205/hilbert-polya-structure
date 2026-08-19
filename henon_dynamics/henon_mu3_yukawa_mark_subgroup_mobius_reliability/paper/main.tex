@@ -1,0 +1,181 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks,bookmarks=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\PhiC}{\Phi}
+\title{Möbius Reliability on the Twenty-Subgroup Lattice of a Named Abelian Core}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We compute the exact generating-closure reliability law for sixteen frozen
+named coordinates in $Q\cong\Z/9\oplus\Z/3\oplus\Z/2$.  A label is deleted
+independently with probability $q$, and the retained labels generate a
+subgroup of the actual twenty-node subgroup lattice.  For each subgroup $H$,
+we count the labels whose cyclic closure lies in $H$, form the cumulative
+probability $P_{\leq H}(q)=q^{16-n_H}$, and apply the integer Möbius function
+of that lattice.  An independent enumeration of all $2^{16}=65536$ supports
+agrees coefficient-by-coefficient for every subgroup.  The top row is
+\(1-q-q^4+q^5-q^7-q^8+5q^9-3q^{10}\), which factors as
+\((1-q)(1-q^4-q^7-2q^8+3q^9)\) and reproduces the preceding C73
+reliability result.  The calculation is finite and source-bound; it makes no
+arithmetic, local, Euler-factor, root-number, Burnside-ring, or Hilbert--Polya
+claim.
+\end{abstract}
+
+\section{Named finite probability object}
+Let
+\[
+ Q=\Z/9\oplus\Z/3\oplus\Z/2,
+ \qquad L=\{S_1,\ldots,S_{16}\}.
+\]
+The sixteen coordinates and the ordered list of all twenty subgroups are
+inherited byte-for-byte from the C76 closure-orbit evidence.  If
+$A\subseteq L$ is the retained support, write
+\[
+ \PhiC(A)=\langle x_i:S_i\in A\rangle\leq Q,
+ \qquad \PhiC(\varnothing)=\{0\}.
+\]
+Every label is retained with probability $1-q$ and deleted with probability
+$q$.  Thus the exact probability of a closure event is a polynomial in the
+single formal variable $q$; no floating-point evaluation is used.
+
+For each label let $C_i=\langle x_i\rangle$.  Define
+\[
+ n_H=\#\{i:C_i\leq H\}.
+\]
+The labels outside this set must be deleted for the generated subgroup to be
+contained in $H$, while labels in the set are unrestricted.
+
+\begin{theorem}[Cumulative law]
+For every one of the twenty source-ordered subgroups,
+\[
+ P_{\leq H}(q):=\Prb[\PhiC(A)\leq H]=q^{16-n_H}.
+\]
+\end{theorem}
+
+The C73--C76 source binding is
+\[
+\begin{split}
+\operatorname{sha256}(\text{C73 evidence})&=\texttt{e91c8e6dcf1de5362b1a052ada83eb758b2c2d75520c1e8bdbd37ab055c725e5},\\
+\operatorname{sha256}(\text{C73 manifest})&=\texttt{a50b5707d36f8b94b463e6c5fc4b5b7f6d6df7eb5e87d70bfc82d2b1a653cd8d},\\
+\operatorname{sha256}(\text{C75 evidence})&=\texttt{8beee17a227153e066907549df70c14a087b7de4141c3092d7cebd4a91541d98},\\
+\operatorname{sha256}(\text{C75 manifest})&=\texttt{7ede3e35c3101d17c683d2da440037d5bd4e002266530b52b3d1cb36ed4c8fcb},\\
+\operatorname{sha256}(\text{C76 evidence})&=\texttt{42e7783b2652666b84ea7f82b65d2421d98064ee5d5011ab94033aa18c051a94},\\
+\operatorname{sha256}(\text{C76 manifest})&=\texttt{55725664005113ae993b54197ff4fbd97bde347ce49aa69ea0c228372ba289d5}.
+\end{split}
+\]
+
+\section{Möbius inversion}
+Let $K\leq H$ denote containment in the actual subgroup poset, and let
+$\mu(K,H)$ be its integer Möbius function.  The cumulative events satisfy
+$P_{\leq H}=\sum_{K\leq H}P_{=K}$, so inversion gives the exact identity
+\[
+ P_{=H}(q)=\sum_{K\leq H}\mu(K,H)q^{16-n_K}.
+ \tag{1}
+\]
+
+The source-ordered subgroup orders and containment counts are
+{\scriptsize
+\[
+\begin{array}{c|rrrrrrrrrrrrrrrrrrrr}
+ i&0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19\\\hline
+ |H_i|&1&2&3&3&3&3&6&6&6&6&9&9&9&9&18&18&18&18&27&54\\
+ n_{H_i}&5&6&7&6&7&6&8&7&8&7&11&7&7&8&12&8&8&9&15&16
+\end{array}
+\]
+}\normalsize
+
+For a direct check, let $c_{H,k}$ be the number of supports of size $k$ with
+closure exactly $H$.  Exhaustive enumeration yields
+\[
+ P^{\rm dir}_{=H}(q)=\sum_{k=0}^{16}c_{H,k}(1-q)^kq^{16-k}.
+ \tag{2}
+\]
+
+\begin{proposition}[Exact inversion check]
+For all twenty subgroups, the integer coefficient vectors obtained from (1)
+and (2) are identical.  The direct support totals by index are
+{\scriptsize
+\[
+\begin{array}{c|rrrrrrrrrrrrrrrrrrrr}
+ i&0&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19\\\hline
+ \sum_kc_{H_i,k}&32&32&96&32&96&32&96&32&96&32&1760&64&64&192&1760&64&64&192&30400&30400.
+\end{array}
+\]
+}\normalsize
+These totals sum to $65536$, and $\sum_H P_{=H}(q)=1$ identically.
+\end{proposition}
+
+\section{The complete polynomial atlas}
+For compactness, each row below lists the nonzero terms as
+``exponent: coefficient'' pairs in $q$.  This is the canonical integer
+coefficient representation of (1), not a numerical approximation.
+
+\small
+\begin{center}
+\begin{tabular}{c|l}
+index $i$ & nonzero coefficients of $P_{=H_i}(q)$\\\hline
+0 & $11:1$\\
+1 & $10:1,\ 11:-1$\\
+2 & $9:1,\ 11:-1$\\
+3 & $10:1,\ 11:-1$\\
+4 & $9:1,\ 11:-1$\\
+5 & $10:1,\ 11:-1$\\
+6 & $8:1,\ 9:-1,\ 10:-1,\ 11:1$\\
+7 & $9:1,\ 10:-2,\ 11:1$\\
+8 & $8:1,\ 9:-1,\ 10:-1,\ 11:1$\\
+9 & $9:1,\ 10:-2,\ 11:1$\\
+10 & $5:1,\ 9:-2,\ 10:-2,\ 11:3$\\
+11 & $9:1,\ 10:-1$\\
+12 & $9:1,\ 10:-1$\\
+13 & $8:1,\ 10:-1$\\
+14 & $4:1,\ 5:-1,\ 8:-2,\ 10:5,\ 11:-3$\\
+15 & $8:1,\ 9:-2,\ 10:1$\\
+16 & $8:1,\ 9:-2,\ 10:1$\\
+17 & $7:1,\ 8:-1,\ 9:-1,\ 10:1$\\
+18 & $1:1,\ 5:-1,\ 8:-1,\ 9:-2,\ 10:3$\\
+19 & $0:1,\ 1:-1,\ 4:-1,\ 5:1,\ 7:-1,\ 8:-1,\ 9:5,\ 10:-3$
+\end{tabular}
+\end{center}
+\normalsize
+
+The final row corresponds to $H_{19}=Q$:
+\[
+\begin{split}
+ P_{=Q}(q)&=1-q-q^4+q^5-q^7-q^8+5q^9-3q^{10}\\
+ &= (1-q)(1-q^4-q^7-2q^8+3q^9).
+\end{split}
+\tag{3}
+\]
+Equation (3) is exactly the homogeneous reliability polynomial reported by
+C73.  The agreement is a cross-generation consistency check: C77 derives it
+from the full subgroup lattice, while C73 obtained it from the generation
+criterion.
+
+\section{Reproducibility and scope}
+The producer binds all C73, C75, and C76 bytes before reading source data.  An independent
+checker reconstructs cyclic closures, containment, the Möbius recursion, and
+all 65536 direct supports.  Separate symbolic cross-check, clean replay, and
+hostile semantic mutations are required release gates.  The effective C76
+label action and its six-element ambient-kernel boundary are retained; no
+non-faithful ambient lift is substituted.
+
+This theorem note concerns only a finite named presentation and its deletion
+probability polynomials.  It does not claim a full table of marks or Burnside
+ring, an arithmetic or local object, Euler factors, root numbers, automorphy,
+or a Hilbert--Polya operator.  The scope firewall is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\end{document}
