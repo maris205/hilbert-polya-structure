@@ -24,7 +24,7 @@ def main() -> None:
     assert result["complement_lattice_index"] == 32
     assert result["complement_smith_invariants"] == expected["complement_smith_invariants"]
     assert result["complement_count"] == 2 ** 41
-    print(json.dumps({"status": "REPLAY_PASS", **result}, sort_keys=True))
+    print(json.dumps({**result, "status": "REPLAY_PASS"}, sort_keys=True))
 
 
 if __name__ == "__main__":
