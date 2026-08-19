@@ -1,0 +1,151 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.82in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\W}{W(E_6)}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+
+\title{Coordinate-Wise Integrality for a Restricted Table-of-Marks Map}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The C66 Smith form gives the invariant factors of the frozen 16-type
+table-of-marks map, but it does not record how its finite cokernel sits in
+the named subgroup coordinates.  We compute that embedding invariant
+directly.  The least multipliers of the sixteen standard mark coordinates
+are
+\[
+(36,12,6,6,2,2,36,6,16,8,6,12,2,2,36,36),
+\]
+while the transpose profile is
+\[
+(1,4,2,2,2,2,36,6,16,8,2,4,2,2,2,2).
+\]
+Both least common multiples and the global denominator of the exact inverse
+are $144$, and the inverse has $43$ nonzero entries.  This is a coordinate
+profile for the explicitly restricted 16-type map, not a canonical Smith
+basis or a full Burnside-ring statement.
+\end{abstract}
+
+\section{Set-up and scope}
+Let $G=\W$ be the order-$51840$ group in the preceding source package, and
+let $S_1,\ldots,S_{16}$ be its frozen subgroup representatives.  C64 fixes
+the transitive sets $X_j=G/S_j$ and the integer self-mark matrix
+\[
+ M_{ij}=\lvert (G/S_j)^{S_i}\rvert.
+\]
+The matrix is nonsingular over $\Q$ and has determinant
+$226492416=2^{23}3^3$.  C66 computes its full Smith form.  C67 asks a
+different question: how hard is it to realize one named mark coordinate at a
+time by an integral virtual combination of the $X_j$?
+
+For the standard basis vectors $e_j$ of $\Z^{16}$ define
+\[
+ o_j=\min\{n>0:n e_j\in M\Z^{16}\}.
+\]
+For the transpose map define $\widehat o_i$ in the same way with $M^T$.
+The scope firewall is
+\[
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\]
+No claim is made about the full table of marks, the full Burnside ring,
+arithmetic resolvents, local fields, Euler factors, root numbers, automorphy,
+or a Hilbert--Polya operator.
+
+\section{Exact rational method}
+Because $M$ is invertible over $\Q$,
+\[
+ n e_j\in M\Z^{16}
+ \quad\Longleftrightarrow\quad
+ nM^{-1}e_j\in\Z^{16}.
+\]
+If a rational vector $v$ has reduced coordinate denominators
+$d_1,\ldots,d_{16}$, the least positive $n$ for which $nv$ is integral is
+$\operatorname{lcm}(d_1,\ldots,d_{16})$.  Thus $o_j$ is the least common
+multiple of the reduced denominators in column $j$ of $M^{-1}$.  Similarly,
+$\widehat o_i$ is the least common multiple of the denominators in row $i$
+of $M^{-1}$, since $(M^T)^{-1}=M^{-T}$.
+
+The producer performs exact Gauss--Jordan elimination with rational integers.
+A separate checker uses a different pivot order and elimination loop, while
+an independent SymPy calculation checks both identity products and all
+denominator profiles.  No floating point arithmetic is used.
+
+\begin{theorem}[Coordinate-wise mark-integrality profile]
+In the fixed order $S_1,\ldots,S_{16}$,
+\[
+\begin{aligned}
+(o_1,\ldots,o_{16})
+  &=(36,12,6,6,2,2,36,6,16,8,6,12,2,2,36,36),\\
+(\widehat o_1,\ldots,\widehat o_{16})
+  &=(1,4,2,2,2,2,36,6,16,8,2,4,2,2,2,2).
+\end{aligned}
+\]
+Both profile least common multiples are $144$.  The least common multiple of
+all denominators in $M^{-1}$ is $144$, and exactly $43$ entries of $M^{-1}$
+are nonzero.
+\end{theorem}
+
+\begin{proof}
+Exact inversion gives $M M^{-1}=M^{-1}M=I_{16}$.  For each column $j$,
+reduce the sixteen rational entries to lowest terms and take their
+denominator least common multiple.  In order, these values are
+\[
+(36,12,6,6,2,2,36,6,16,8,6,12,2,2,36,36).
+\]
+Applying the same operation to each row gives
+\[
+(1,4,2,2,2,2,36,6,16,8,2,4,2,2,2,2).
+\]
+The largest denominator lcm over all entries is $144$, and a direct support
+count gives $43$ nonzero entries.  The denominator lemma in the preceding
+paragraph proves minimality of every listed multiplier.
+\end{proof}
+
+\begin{proposition}[Compatibility with the preceding integral invariants]
+The same frozen source bytes reproduce the C66 Smith invariants
+\[
+(1,2,2,2,2,2,2,2,2,2,2,4,4,4,24,144)
+\]
+and determinant $226492416$.  C65 compatibility remains
+\[
+\operatorname{SNF}(L_o)=(2,8),\qquad
+\operatorname{SNF}(L_a)=(2,2,8),\qquad
+U(L_a)/(L_a+U(L_o))\cong\Z/2.
+\]
+\end{proposition}
+
+\begin{proof}
+These are checked as source-bound upstream certificates, independently of
+the rational inversion.  The C67 result does not identify the C65 relative
+class with a direct summand of the C66 cokernel.
+\end{proof}
+
+\section{Reproducibility and boundary}
+The evidence binds C64 mark bytes, the C64 manifest, and C66 evidence and
+manifest by SHA-256.  The producer, structural checker, clean replay,
+independent rational-inverse check, and twelve hostile mutations all pass.
+The coordinate profile depends on the named $S_i$ ordering; it is therefore
+an embedding datum rather than an abstract-group invariant.
+
+The theorem concerns only the frozen 16-type lattice map.  In particular, it
+does not compute a full table of marks or assert any arithmetic or
+local-field interpretation.
+
+\section{Conclusion}
+C66 supplies the abstract finite cokernel, while C67 supplies its
+coordinate-wise integrality profile.  The two profiles and the global
+denominator $144$ are exact, replayable invariants of the named restricted
+mark map and provide the input for the next adaptive question.
+
+\end{document}
