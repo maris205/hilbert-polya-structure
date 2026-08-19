@@ -1,6 +1,6 @@
 # Adaptive batch HCS-C69 through HCS-C73
 
-Status: **C69--C70 prefreeze complete; C71--C73 contingent**.
+Status: **C69--C73 prefreeze complete; round closure complete**.
 
 This is a five-paper adaptive round. Each successor is selected only after the
 predecessor has an exact theorem or a certified obstruction. Every paper must
@@ -67,11 +67,70 @@ The producer, independent checker, SymPy/GAP cross-check, clean replay,
 
 Project: `henon_mu3_yukawa_mark_direct_factor_orbit/`.
 
-## C71--C73
+## C71 (completed prefreeze)
 
-`UNSELECTED_CONTINGENT`: each later slot remains open until the preceding
-paper's released theorem or certified obstruction supplies a distinct exact
-question. No slot will be filled by merely renaming a matrix invariant already
-proved in C64--C70.
+C70 leaves a fixed complement family whose universal intersection is an exact
+new target.  C71 computes the full complement-pair intersection geometry:
+
+```text
+universal intersection = 8C ~= Z/3 + Z/18, order 54
+complements of the fixed inclusion = 2^41
+named generating triples for 8C = 25 (all contain S9)
+```
+
+The intersection-index spectrum is
+`1:1, 2:28665, 4:117600270, 8:70111567864,
+16:1030892519424, 32:1097901539328`.
+The project passes its independent Birkhoff/duality, GAP/SymPy, replay,
+hostile-mutation, and byte-reproducible paper gates.
+
+Project: `henon_mu3_yukawa_mark_complement_geometry/`.
+
+## C72 (completed prefreeze)
+
+C71's universal core is placed in the named coordinate model
+`Z/9 + Z/3 + Z/2`.  C72 classifies all `65536` named supports, reaches all
+20 subgroups of `8C`, and separates named from abstract generator rank:
+
+```text
+named minimum = 3; abstract minimum = 2
+minimal named generating supports = 25
+support counts by sizes 3--16 = 25,224,940,2461,4504,6095,6269,
+  4950,2992,1364,455,105,15,1
+```
+
+The complete 20-subgroup atlas, independent checker, group cross-check,
+replay, hostile mutations, and two clean PDF builds pass.
+
+Project: `henon_mu3_yukawa_mark_coordinate_core_atlas/`.
+
+## C73 (completed prefreeze)
+
+C72's support geometry yields a distinct deletion question.  The non-isolated
+part of the named generation hypergraph is a cone over `K_{1,1,2,5}` with
+apex `S9`; six dummy labels are isolated.  The exact blocker and reliability
+theorems are:
+
+```text
+minimal blockers = 5, with sizes 1,4,7,8,8
+destructive deletion sets = 35136
+surviving deletion sets = 30400
+R(q) = (1-q)(1-q^4-q^7-2q^8+3q^9)
+robustness parameters = 0 / 3 / 13 (unprotected / S9 protected / existential)
+```
+
+The heterogeneous reliability formula, coordinate-importance table, and
+hypergraph symmetry boundary are included.  Independent rank checking,
+block-state SymPy expansion, structural GAP order check, replay, 35/35
+hostile mutations, two clean PDF builds, and the prefreeze manifest all pass.
+
+Project: `henon_mu3_yukawa_mark_generation_blocker_reliability/`.
+
+## Scope and closure
+
+Each successor was selected only after the preceding paper's exact theorem
+supplied a distinct question; no slot was filled by renaming a matrix
+invariant already proved in C64--C70.  C69--C73 are committed and pushed, with
+their prefreeze manifests preserving the explicit release gates.
 
 The scope firewall for the round is `NO_BAD_EULER_OR_ROOT_NUMBER`.

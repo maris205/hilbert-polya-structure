@@ -55,6 +55,9 @@ henon_mu3_yukawa_mark_coordinate_profile - C67 prefreeze complete - Fixing the n
 henon_mu3_yukawa_mark_defect_duality - C68 prefreeze complete - The C65 saturation defect embeds in the C66 restricted cokernel as (Z/8) + (Z/2)^2; the quotient and transpose-side annihilator have Smith invariants (1^4,2^8,4^2,12,144), with annihilator coordinate types S1,S4,S7,S8.
 henon_mu3_yukawa_mark_defect_splitting - C69 prefreeze complete - The actual C68 defect inclusion splits via rho([x])=(x10 mod 8,x3 mod 2,x1+x15 mod 2); an explicit complement has Smith invariants (1^4,2^8,4^2,12,144), and the fixed subgroup has exactly 2^41 complements.
 henon_mu3_yukawa_mark_direct_factor_orbit - C70 prefreeze complete - Aut(C) is transitive on D-type direct factors, ordered (D,K) decompositions, and split embeddings; counts are 5846893330432, 12857454406351852314558464, and 2245207038885888, while 2947589144576 of 8794482475008 abstract D-type subgroups are non-direct.
+henon_mu3_yukawa_mark_complement_geometry - C71 prefreeze complete - The fixed complement family has 2^41 members, universal intersection 8C ~= Z/3 + Z/18 of order 54, an exact intersection-index spectrum, and 25 named generating triples.
+henon_mu3_yukawa_mark_coordinate_core_atlas - C72 prefreeze complete - The named Z/9 + Z/3 + Z/2 coordinate atlas classifies all 65536 supports, reaches all 20 subgroups of 8C, and separates named minimum 3 from abstract minimum 2.
+henon_mu3_yukawa_mark_generation_blocker_reliability - C73 prefreeze complete - The named generation hypergraph has non-isolated cone K_{1,1,2,5} geometry, five minimal blockers, exact 35136/30400 deletion counts, and homogeneous/heterogeneous reliability formulae.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
