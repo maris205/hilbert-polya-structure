@@ -58,6 +58,11 @@ henon_mu3_yukawa_mark_direct_factor_orbit - C70 prefreeze complete - Aut(C) is t
 henon_mu3_yukawa_mark_complement_geometry - C71 prefreeze complete - The fixed complement family has 2^41 members, universal intersection 8C ~= Z/3 + Z/18 of order 54, an exact intersection-index spectrum, and 25 named generating triples.
 henon_mu3_yukawa_mark_coordinate_core_atlas - C72 prefreeze complete - The named Z/9 + Z/3 + Z/2 coordinate atlas classifies all 65536 supports, reaches all 20 subgroups of 8C, and separates named minimum 3 from abstract minimum 2.
 henon_mu3_yukawa_mark_generation_blocker_reliability - C73 prefreeze complete - The named generation hypergraph has non-isolated cone K_{1,1,2,5} geometry, five minimal blockers, exact 35136/30400 deletion counts, and homogeneous/heterogeneous reliability formulae.
+henon_mu3_yukawa_mark_named_core_affine_rigidity - C74 prefreeze complete - The named Q=Z/9+Z/3+Z/2 core has |Aut(Q)|=108 and |Aff(Q)|=5832, while both named-multiset and underlying-point affine stabilizers are trivial; the C73 abstract hypergraph symmetry is not an affine core symmetry.
+henon_mu3_yukawa_mark_closure_incidence_lift - C75 prefreeze complete - The lifted closure-incidence symmetry has order 11520 with a C6 lattice-action kernel, weighted stabilizer 12, duplicate-fibre kernel 960, and pure 20-subgroup image 18.
+henon_mu3_yukawa_mark_closure_orbit_atlas - C76 prefreeze complete - The effective 1920-element label image partitions all 65536 supports into 3024 orbits, with 98 closure-minimal supports and 25 full-core minimal triples; the 11520 ambient lift remains distinct.
+henon_mu3_yukawa_mark_subgroup_mobius_reliability - C77 prefreeze complete - Möbius inversion on the actual 20-subgroup lattice matches direct enumeration of all 65536 supports and reproduces the C73 top reliability polynomial, without claiming a full Burnside ring.
+henon_mu3_yukawa_mark_repair_distance_geometry - C78 prefreeze complete - Deletion/repair geometry for all 65536 supports has exact distance distribution 30400/32704/2368/64, maximum repair distance 3, and a verified bivariate generating function with x marking deletions.
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
