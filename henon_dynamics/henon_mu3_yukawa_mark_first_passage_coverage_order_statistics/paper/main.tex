@@ -1,0 +1,85 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C96CoverageOrderStatistics20260821}
+\newtheorem{theorem}{Theorem}
+\title{Order Statistics of Exact First-Passage Target Coverage}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We compute the exact first-passage order statistics of target coverage in a
+frozen sixteen-label, twenty-target subgroup model.  Decoding all twenty C88
+hit bitsets on all 65536 supports gives the exact target-coverage histogram
+at every prefix size.  For each $r=1,\ldots,20$, we determine the law and
+first four raw moments of the first time $K_r$ at which at least $r$ targets
+have been hit.  Every distribution is carried by exact support counts and
+$16!$-weighted permutation counts.  The trivial target is retained, making
+$K_1=0$ deterministically.  This is a finite result under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+
+\section{Coverage statistic}
+Let $h_i(A)$ be the frozen C88 indicator that support $A$ hits target $H_i$,
+and define
+\[
+ C(A)=\sum_{i=0}^{19}h_i(A),\qquad
+ K_r=\min\{k:C(A_k)\geq r\}.
+\]
+Here $A_k$ is the support of the first $k$ labels in a uniform permutation.
+The trivial subgroup is target zero and satisfies $h_0(A)=1$ for every $A$.
+Thus $C(\varnothing)=1$ and $K_1=0$; all twenty targets remain in the model.
+
+\section{Exact laws}
+For $0\leq k\leq16$ and $1\leq r\leq20$, put
+\[
+ G_r(k)=\#\{A:|A|=k,\ C(A)\geq r\}.
+\]
+\begin{theorem}
+The exact CDF and PMF of each coverage order statistic are
+\[
+ \Pr(K_r\leq k)=\frac{G_r(k)}{\binom{16}{k}},\qquad
+ \Pr(K_r=k)=\Pr(K_r\leq k)-\Pr(K_r\leq k-1).
+\]
+Multiplying the reduced PMF by $16!$ gives a nonnegative integer permutation
+count.  These counts sum to $16!$, and
+\[
+ \mathbb E[K_r]=\sum_{k=0}^{15}\Pr(K_r>k).
+\]
+Moreover $K_r\leq K_{r+1}$ pointwise.
+\end{theorem}
+\begin{proof}
+The first $k$ positions of a uniform permutation have a uniform
+$k$-element support.  Taking consecutive CDF differences gives the first-hit
+law.  For $k\geq1$, each oriented support edge that first crosses rank $r$
+has exactly $(k-1)!(16-k)!$ permutation completions; at time zero the empty
+support has $16!$ completions.  The expectation is the standard finite
+survival sum, and nested threshold events give rank monotonicity.
+\end{proof}
+
+\section{Atlas features}
+The receipt partitions every one of the seventeen cardinality layers by all
+twenty possible coverage counts and records four raw moments, mean, and
+variance for every rank.  For example,
+$\mathbb E[K_2]=17/12$, while
+$\mathbb E[K_{10}]=15589/3960$.  The frozen support lattice admits coverage
+jumps: ranks 13 through 20 have the same law, equal to the top-target law,
+whose mean is $36499/3960$.  These equalities are observations of the exact
+finite receipt, not a classification claim beyond it.
+
+\section{Audit and scope}
+An independent checker decodes every C88 bitset and reconstructs all support
+histograms.  SymPy checks all twenty probability generating functions and
+their moments; clean replay preserves evidence hash
+\[
+\texttt{75a93c80b5e44f6aca1885073cf12e943de02751ad4e99aa37e83bf211b6ca23}.
+\]
+Fifteen hostile mutations are rejected.  No arithmetic/local data, Euler
+factors, root numbers, automorphy, full Burnside ring or table of marks, or
+Hilbert--Polya operator is claimed.
+\end{document}

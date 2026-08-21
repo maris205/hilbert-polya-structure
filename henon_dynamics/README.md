@@ -78,6 +78,11 @@ henon_mu3_yukawa_mark_first_passage_joint_coupling - C90 prefreeze complete - Ex
 henon_mu3_yukawa_mark_first_passage_race_atlas - C91 prefreeze complete - Exact left-first, tie, and right-first race laws for all 108 incomparable target pairs.
 henon_mu3_yukawa_mark_first_passage_label_sensitivity - C92 prefreeze complete - Exact 20-by-16 first-passage pivotal-rank and label-sensitivity atlas with efficiency identities.
 henon_mu3_yukawa_mark_first_passage_orbit_quotient - C93 prefreeze complete - Effective order-1920 quotient of the first-passage laws with 16 target orbits, distinct from the ambient order-11520 lift.
+henon_mu3_yukawa_mark_first_passage_hazard_residual - C94 prefreeze complete - Exact discrete hazard and residual-life atlas for all 20 first-passage targets.
+henon_mu3_yukawa_mark_first_passage_comparable_delay - C95 prefreeze complete - Exact conditional delay laws for all 102 comparable ordered target pairs, including reflexive pairs.
+henon_mu3_yukawa_mark_first_passage_coverage_order_statistics - C96 prefreeze complete - Exact coverage order-statistic laws for all 20 target ranks over all 65536 supports.
+henon_mu3_yukawa_mark_first_passage_pair_orbit_quotient - C97 prefreeze complete - Faithful order-1920 quotient of all 400 ordered target-pair C90 laws into 272 pair orbits.
+henon_mu3_yukawa_mark_first_passage_conditional_kernel - C98 prefreeze complete - Exact forward/reverse conditional kernels for all 400 target pairs with Bayes and total-moment identities.
 
 ## C79--C83 package index
 
@@ -123,6 +128,25 @@ operator claim.
 | C93 | [package](henon_mu3_yukawa_mark_first_passage_orbit_quotient/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_orbit_quotient/paper/main.pdf) | `4104f181b88d83666c9fcff814a7029a148c498e6393ad181c60fe5133adb9fe` | `a60e0855482e205b0174281c4a20b8f86d2eb9531a3f980cb76d92fcfb77c608` | `956588842f57ec297299fd12c4de52bd37d2d3d9b6a4eaeec9e10f81790bcc20` |
 
 - [C89--C93 batch plan](BATCH_PLAN_C89_C93.md)
+
+## C94-C98 package index
+
+This five-paper round deepens the C88 first-passage atlas with hazards,
+comparable delays, coverage order statistics, ordered-pair symmetry, and
+conditional kernels.  All packages use the scope firewall
+`NO_BAD_EULER_OR_ROOT_NUMBER` and make no arithmetic, Euler-factor,
+root-number, automorphy, full Burnside/table-of-marks, or Hilbert--Polya
+operator claim.
+
+| paper | package / paper | evidence | manifest | PDF |
+|---|---|---|---|---|
+| C94 | [package](henon_mu3_yukawa_mark_first_passage_hazard_residual/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_hazard_residual/paper/main.pdf) | `e185462629459a7d6602e3d1e3f49977a82d3fdee86007c3f906b224f028d1b` | `c2eafa0f604aeb817a010afcf9f4e1841f4c02ca7b91ce303b31e9ad04930912` | `c9678e7a39c3ae4aeaff56ce20f809cd2bd894bae4ca98cf5164cd18c2dddf54` |
+| C95 | [package](henon_mu3_yukawa_mark_first_passage_comparable_delay/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_comparable_delay/paper/main.pdf) | `53e5c9a1dbda2fa7e01af34ce6fc161ac102a312b003e1c86402ae7ec7373a3c` | `ba03e5e86ec6a9f3d7a31d9e6b57533c4af5e65db0e4f9fa3dfeddba15d47176` | `60caec178a32d3d33d459cd0103c922fb5e967d25e06830fcd4011705ac3698c` |
+| C96 | [package](henon_mu3_yukawa_mark_first_passage_coverage_order_statistics/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_coverage_order_statistics/paper/main.pdf) | `75a93c80b5e44f6aca1885073cf12e943de02751ad4e99aa37e83bf211b6ca23` | `bfd172a456330ea7d5c0c821e4a3ef93f0a39db9e49a9159b16ecbea3932bb4a` | `9222c35bd7d0d8c097ffadf47eeb086e735adbfccd98bff142143087c4626e18` |
+| C97 | [package](henon_mu3_yukawa_mark_first_passage_pair_orbit_quotient/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_pair_orbit_quotient/paper/main.pdf) | `099d8f32794d6967b3f2653f92dcaa0b096c711b67ed070330d7763a146bc696` | `94f4b3c8e15977e0882194bc6c0165291694902169d01f9ff278a542e74ed516` | `7c52b3081c1941b8c18aec7cfce89e2a95f4f85581e6135505061af0260422b1` |
+| C98 | [package](henon_mu3_yukawa_mark_first_passage_conditional_kernel/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_conditional_kernel/paper/main.pdf) | `49179ea34f6f10b7e20c68914cdd7aa5bb5df775cefade69f1a40163f2e933cb` | `feeeaa4af1959b804e21923f47bf24df161fb78d69b624ead768473cb652f4d1` | `774fa65062106e611c3d597b56aa4865a341f880263b1431bc4a6661f5820cfb` |
+
+- [C94--C98 batch plan](BATCH_PLAN_C94_C98.md)
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`
