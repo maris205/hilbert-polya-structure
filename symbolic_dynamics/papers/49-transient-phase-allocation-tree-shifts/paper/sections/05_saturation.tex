@@ -1,0 +1,145 @@
+\section{Saturation: mean, convolution, and Fourier support}
+\label{sec:saturation}
+
+The optimizer in \eqref{eq:one-level-optimizer} is always bounded by the
+spectral mean $\bar c=\log\rho(C(a))$.  We now characterize equality without
+relaxing the integer composition.
+
+\begin{lemma}[Mean preservation and invertibility]
+\label{lem:H-invertible}
+The circulant map $x\mapsto H(x)$ defined in \eqref{eq:H-definition}
+preserves the phase mean and is invertible on $\R^p$.  Consequently,
+\begin{equation}
+ H(x)\text{ is constant}\quad\Longleftrightarrow\quad x\text{ is constant}.
+ \label{eq:H-constant-iff}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Because the kernel weights sum to one, cyclic reindexing gives
+\[
+ \frac1p\sum_jH_j(x)=\frac1p\sum_jx_j.
+\]
+For invertibility, evaluate the unnormalized kernel polynomial at a $p$th
+root of unity $z$:
+\begin{equation}
+ \sum_{t=0}^{p-1}d^{p-1-t}z^t
+ =\frac{d^p-z^p}{d-z}=\frac{d^p-1}{d-z}.
+ \label{eq:H-multiplier}
+\end{equation}
+It is nonzero since $d\geq2$ and $|z|=1$.  Thus every Fourier multiplier of
+$H$ is nonzero, which proves invertibility.  Constants are preserved, so
+\eqref{eq:H-constant-iff} follows.
+\end{proof}
+
+For later use, let $N\geq1$, $m\in\Comp_p(N)$, and set
+\begin{equation}
+ \Psi_j^{(N)}(m;c)=\frac1N\sum_{s=0}^{p-1}m_sH_{s+j}(c),
+ \qquad
+ \Psi_*^{(N)}(m;c)=\min_j\Psi_j^{(N)}(m;c).
+ \label{eq:Psi-definition}
+\end{equation}
+For $N=d$, this is exactly $D_1(m;c)$.
+
+\begin{theorem}[Exact constant-convolution criterion]
+\label{thm:saturation}
+For every $N\geq1$ and $m\in\Comp_p(N)$,
+\begin{equation}
+ \Psi_*^{(N)}(m;c)\leq\bar c.
+ \label{eq:spectral-mean-bound}
+\end{equation}
+The following are equivalent:
+\begin{enumerate}[label=(\alph*)]
+  \item $\Psi_*^{(N)}(m;c)=\bar c$;
+  \item $\sum_s m_sc_{s+k}$ is independent of $k\in\Z/p\Z$;
+  \item $\prod_s a_{s+k}^{m_s}$ is independent of
+  $k\in\Z/p\Z$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Define $b_k=N^{-1}\sum_s m_sc_{s+k}$.  By linearity and covariance,
+$H_j(b)=\Psi_j^{(N)}(m;c)$.  Moreover,
+\[
+ \frac1p\sum_kb_k
+ =\frac{1}{Np}\sum_{s,k}m_sc_{s+k}
+ =\bar c,
+\]
+and \cref{lem:H-invertible} shows that the mean of the $p$ values $H_j(b)$
+is also $\bar c$.  Their minimum is at most their mean, proving
+\eqref{eq:spectral-mean-bound}.  Equality holds exactly when all $H_j(b)$
+equal the mean.  By \eqref{eq:H-constant-iff}, this is equivalent to $b$
+being constant, which is (b).  Finally,
+\[
+ \sum_sm_sc_{s+k}=\log\Bigl(\prod_sa_{s+k}^{m_s}\Bigr),
+\]
+and injectivity of the logarithm gives the equivalence with (c).
+\end{proof}
+
+The integer form (c) is useful both conceptually and computationally: exact
+saturation can be certified by shifted products, with no tolerance applied to
+linear combinations of logarithms.
+
+\subsection{What divisibility does and does not say}
+
+For $q\in\Z/p\Z$, use the discrete Fourier convention
+\begin{equation}
+ \widehat c(q)=\sum_{j=0}^{p-1}c_j
+ \exp\!\left(-\frac{2\pi\mathrm i qj}{p}\right).
+ \label{eq:DFT}
+\end{equation}
+
+\begin{theorem}[Divisibility under full Fourier support]
+\label{thm:fourier-divisibility}
+Let $N\geq1$.
+\begin{enumerate}[label=(\roman*)]
+  \item If $p\mid N$, the uniform composition $m_s=N/p$ saturates
+  \eqref{eq:spectral-mean-bound}.
+  \item Suppose $\widehat c(q)\neq0$ for every $q=1,\ldots,p-1$.  Then a
+  saturating composition in $\Comp_p(N)$ exists if and only if $p\mid N$,
+  and every saturating composition is uniform.
+\end{enumerate}
+In particular, the one-level sufficient condition is $p\mid d$.  Its
+necessity requires the hypothesis in (ii).
+\end{theorem}
+
+\begin{proof}
+If $m_s=N/p$, then
+$\sum_s m_sc_{s+k}=(N/p)\sum_sc_s$ for every $k$, so (i) follows from
+\cref{thm:saturation}.
+
+For (ii), take the Fourier transform of
+$b_k=N^{-1}\sum_sm_sc_{s+k}$.  With the convention
+\eqref{eq:DFT}, direct reindexing gives
+\begin{equation}
+ \widehat b(q)=N^{-1}\widehat m(-q)\widehat c(q).
+ \label{eq:fourier-product}
+\end{equation}
+If $m$ saturates, $b$ is constant by \cref{thm:saturation}; hence
+$\widehat b(q)=0$ for every nonzero mode.  Full nonzero Fourier support of
+$c$ then forces all nonzero modes of $m$ to vanish.  Fourier inversion makes
+$m$ constant.  Its integer entries sum to $N$, so this is possible exactly
+when $p\mid N$, and then $m_s=N/p$.  The converse is (i).
+\end{proof}
+
+\begin{example}[A mandatory nondivisible witness]
+\label{ex:nondivisible}
+Take
+\[
+ p=4,\qquad d=N=2,\qquad a=(2,3,2,3),\qquad m=(1,1,0,0).
+\]
+For all four shifts $k$,
+\[
+ \prod_{s=0}^3a_{s+k}^{m_s}=6.
+\]
+Thus $m$ saturates by \cref{thm:saturation}, even though $4\nmid2$.  The
+phase vector has period two, so its length-four Fourier transform has a
+missing nonzero mode.  This example rules out any unconditional
+``saturation if and only if $p\mid d$'' statement.
+\end{example}
+
+The distinction is between arithmetic availability and algebraic degeneracy.
+Divisibility makes the uniform integer allocation available for every phase
+profile.  When the profile loses Fourier modes, a nonuniform allocation can
+be invisible to the circular convolution and can saturate for a different
+reason.

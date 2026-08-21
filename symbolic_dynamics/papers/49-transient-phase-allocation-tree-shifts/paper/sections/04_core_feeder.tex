@@ -1,0 +1,156 @@
+\section{Complete cyclic cores and one-level phase allocation}
+\label{sec:core-feeder}
+
+We first compute the core from cylinders.  This is the only irreducible
+calculation used later.
+
+\begin{theorem}[Complete cyclic core]
+\label{thm:core}
+For $d\geq2$, $p\geq1$, and positive phase sizes
+$a=(a_0,\ldots,a_{p-1})$, the complete cyclic block satisfies
+\begin{equation}
+ \dimH T_{C(a)}=\min_{j\in\Z/p\Z}H_j(c),
+ \qquad c_j=\log a_j.
+ \label{eq:core-dimension}
+\end{equation}
+Moreover,
+\begin{equation}
+ \rho(C(a))=\Bigl(\prod_{j=0}^{p-1}a_j\Bigr)^{1/p},
+ \qquad \log\rho(C(a))=\bar c.
+ \label{eq:core-spectral-mean}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Fix a root phase $h$.  At level $\ell$ there are $d^\ell$ vertices and each
+has $a_{h+\ell}$ independent label choices.  Hence the exact number of
+depth-$n$ cylinders in this root-phase stratum is
+\begin{equation}
+ P_{n,h}=\prod_{\ell=0}^n a_{h+\ell}^{d^\ell}.
+ \label{eq:core-prefix-count}
+\end{equation}
+By \cref{lem:weighted-limit}, along $n\equiv r\pmod p$,
+\[
+ \frac{\log P_{n,h}}{|\Delta_n|}\longrightarrow H_{h+r}(c).
+\]
+The $p$ residue limits form the same cyclic list for every $h$, so
+\cref{lem:cylinder-dimension} gives $\min_jH_j(c)$ for each root-phase
+stratum.  The core shift is the finite union of those $p$ strata, proving
+\eqref{eq:core-dimension}.
+
+For \eqref{eq:core-spectral-mean}, every row of $C(a)^p$ has sum
+$\prod_j a_j$.  The all-one vector is therefore an eigenvector with that
+eigenvalue, while the maximum-row-sum norm gives the reverse bound on the
+spectral radius.  Thus $\rho(C(a)^p)=\prod_j a_j$, and spectral mapping yields
+the displayed formula.  This is an elementary block calculation, not an
+imported dimension--spectral-radius equality.
+\end{proof}
+
+\subsection{The unrestricted one-level feeder}
+
+Add one state $r$ to the core.  Put an edge from $r$ to every label in every
+$V_s$, no edge $r\to r$, and no edge from the core back to $r$.  This is the
+\emph{unrestricted one-level feeder}.  For a phase composition
+$m\in\Comp_p(d)$, define
+\begin{align}
+ b_k(m;c)&=\frac1d\sum_{s=0}^{p-1}m_s c_{s+k},
+ \label{eq:b-definition}\\
+ D_1(m;c)&=\min_{j\in\Z/p\Z}H_j(b(m;c)).
+ \label{eq:D1-definition}
+\end{align}
+
+\begin{proposition}[Fixed one-level phase assignment]
+\label{prop:fixed-one-level}
+Fix the phase of each of the $d$ ordered children of a root labeled $r$, and
+let $m_s$ count children assigned to phase $s$.  The corresponding closed
+stratum $X_m$ has
+\begin{equation}
+ \dimH X_m=D_1(m;c)
+ =\min_j\frac1d\sum_{s=0}^{p-1}m_sH_{s+j}(c).
+ \label{eq:D1-two-forms}
+\end{equation}
+The value depends only on the composition, although the stratum itself also
+depends on the ordered assignment.
+\end{proposition}
+
+\begin{proof}
+For total depth $n\geq1$, each of the $m_s$ subtrees entering phase $s$
+contributes $a_{s+\ell}^{d^\ell}$ choices at relative level $\ell$.  Therefore
+\begin{equation}
+ P_{n,m}=\prod_{s=0}^{p-1}\prod_{\ell=0}^{n-1}
+ a_{s+\ell}^{m_s d^\ell}.
+ \label{eq:feeder-prefix-count}
+\end{equation}
+Using \eqref{eq:b-definition}, this becomes
+\begin{equation}
+ \log P_{n,m}=d\sum_{\ell=0}^{n-1}d^\ell b_\ell(m;c).
+ \label{eq:feeder-prefix-log}
+\end{equation}
+Since
+\[
+ \frac{d|\Delta_{n-1}|}{|\Delta_n|}\longrightarrow1,
+\]
+\cref{lem:weighted-limit} shows that the residue limits of
+$\log P_{n,m}/|\Delta_n|$ are the cyclic list $H_j(b(m;c))$.
+The first identity in \eqref{eq:D1-two-forms} follows from
+\cref{lem:cylinder-dimension}.  For the second, linearity and cyclic covariance
+give, term by term,
+\[
+ H_j(b(m;c))=\frac1d\sum_s m_sH_{s+j}(c).
+\]
+\end{proof}
+
+\begin{theorem}[One-level transient optimizer]
+\label{thm:one-level}
+Let $M_1(a)$ denote the complete cyclic core with its unrestricted one-level
+feeder.  Then
+\begin{equation}
+ \boxed{\displaystyle
+ \dimH T_{M_1(a)}=
+ \max_{m\in\Comp_p(d)}\min_{j\in\Z/p\Z}
+ \frac1d\sum_{s=0}^{p-1}m_sH_{s+j}(c).}
+ \label{eq:one-level-optimizer}
+\end{equation}
+In particular, the maximum in \eqref{eq:one-level-optimizer} already
+dominates every core-root stratum.
+\end{theorem}
+
+\begin{proof}
+There are $p^d$ ordered phase assignments for the children of $r$.  The
+root-$r$ stratum is their finite union.  Grouping by composition and applying
+\cref{eq:finite-union,prop:fixed-one-level} gives the maximum in
+\eqref{eq:one-level-optimizer} for that stratum.
+
+It remains to verify that passing to the full shift, where the root may also
+lie in the core, does not increase the answer.  For any phase $s$, take the
+concentrated composition $m=de_s$.  Then
+\begin{equation}
+ D_1(de_s;c)=\min_j H_{s+j}(c)=\min_jH_j(c).
+ \label{eq:concentrated-dominance}
+\end{equation}
+Thus concentrated compositions recover the complete-core value, up to cyclic
+reindexing.  The feeder maximum therefore dominates every core-root stratum.
+The full shift is a finite union of the feeder-root and core-root strata, so
+\eqref{eq:one-level-optimizer} follows.
+\end{proof}
+
+\begin{remark}[Declared finite-composition variants]
+\label{rem:finite-composition}
+Suppose a separately declared one-level feeder admits a nonempty finite set
+$F\subseteq\Comp_p(d)$ of phase compositions and no others, while retaining
+the complete cyclic core and having no return edge.  The identical finite
+union proof gives
+\[
+ \dimH(\text{feeder-root stratum})=\max_{m\in F}D_1(m;c).
+\]
+The full-shift dimension is the maximum of this value and the core value
+unless $F$ contains a concentrated composition.  This observation does not
+cover incomplete core blocks, arbitrary transient feeder shapes, or return
+edges.
+\end{remark}
+
+Equation \eqref{eq:one-level-optimizer} explains why graph-theoretic
+transience is not dimension-negligible in this metric.  The state $r$ appears
+only at the root of its stratum, but its phase allocation is inherited by
+$d^\ell$ vertices at every later relative level.  The root itself has
+vanishing normalized weight; the descendant allocation it selects does not.

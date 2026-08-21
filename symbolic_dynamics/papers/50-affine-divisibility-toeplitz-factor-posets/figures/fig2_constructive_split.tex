@@ -1,0 +1,42 @@
+% Reproducible monochrome TikZ source for Figure 2.
+\begin{tikzpicture}[
+  font=\small,
+  >=Stealth,
+  lane/.style={draw=black, rounded corners=2pt, inner sep=7pt,
+               text width=.41\linewidth, align=left},
+  proofbox/.style={draw=black, rounded corners=1.2pt, inner sep=5pt,
+               text width=.36\linewidth, align=center},
+  flow/.style={->, semithick}
+]
+  \node[lane,anchor=north west] (prime) at (0,0) {\textbf{Prime base $p$.}\\
+    Let $q$ be a common period with $p^{N+1}\nmid q$.  Write
+    $q=p^j d$, where $0\leq j\leq N$ and $p\nmid d$.};
+  \node[proofbox,below=5mm of prime] (cong) {Choose $t\in\mathbb Z$ so that\\
+    $1+(p-1)dt\equiv p\pmod {p^2}$.};
+  \node[proofbox,below=5mm of cong] (kill) {$r_j\in[0,p^N-1]$ and\\
+    $\nu_p(L_p(r_j))=j$,\quad
+    $\nu_p(L_p(r_j+tq))=j+1$.};
+  \node[proofbox,below=5mm of kill,fill=black!8] (presult)
+    {$u_j\neq u_{j+1}$ contradicts common periodicity;\\
+     the least common period is $p^{N+1}$.};
+  \draw[flow] (prime) -- (cong);
+  \draw[flow] (cong) -- (kill);
+  \draw[flow] (kill) -- (presult);
+
+  \node[lane,anchor=north west] (comp) at (.52\linewidth,0)
+    {\textbf{Composite base $p$.}\\
+     Choose a prime $\ell\mid p$ and set
+     $q=\ell p^N<p^{N+1}$.  Fix $0\leq k<p^N$ and every $t\in\mathbb Z$.};
+  \node[proofbox,below=5mm of comp] (low) {If $e=\nu_p(L_p(k))<N$, then\\
+    $L_p(k+tq)=p^e[a+(p-1)t\ell p^{N-e}]$,\\
+    whose bracket is $a\pmod p$.};
+  \node[proofbox,below=5mm of low] (top) {If $e=N$, then $k=r_N$ and\\
+    $L_p(k+tq)=p^N[1+(p-1)\ell t]$,\\
+    whose bracket is $1\pmod\ell$.};
+  \node[proofbox,below=5mm of top,fill=black!8] (cresult)
+    {Every exponent is preserved for every translate;\\
+     $\ell p^N$ is a strict common period.};
+  \draw[flow] (comp) -- (low);
+  \draw[flow] (low) -- (top);
+  \draw[flow] (top) -- (cresult);
+\end{tikzpicture}

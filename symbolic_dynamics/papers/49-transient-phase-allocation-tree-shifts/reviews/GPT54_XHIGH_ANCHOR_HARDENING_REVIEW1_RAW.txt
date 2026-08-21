@@ -1,0 +1,17 @@
+**CRITICAL**
+
+None in the provided excerpts.
+
+**MAJOR**
+
+- Both candidates still make the builder/sealer no-follow guarantee conditional instead of absolute. In [p49 `build_static_manifest.py:47`](/tmp/p49_stage0_candidate/code/integration/build_static_manifest.py:47), [p49 `seal_preoutput.py:36`](/tmp/p49_stage0_candidate/code/integration/seal_preoutput.py:36), [p50 `build_static_manifest.py:47`](/tmp/p50_stage0_candidate/code/integration/build_static_manifest.py:47), and [p50 `seal_preoutput.py:36`](/tmp/p50_stage0_candidate/code/integration/seal_preoutput.py:36), `os.open(... | getattr(os, "O_NOFOLLOW", 0))` silently drops `O_NOFOLLOW` when the constant is unavailable. That means the stated requirement “builder and sealer must not follow anchor symlinks” is not encoded fail-closed in the code itself. Exact fix: hard-require `os.O_NOFOLLOW` and abort if it is unavailable, then open with `os.O_WRONLY | os.O_NOFOLLOW`; keep the existing `fstat`-before-`ftruncate` check.
+
+**MINOR**
+
+- Standalone static rerun semantics are looser than integration rerun semantics. In [p49 `static_audit.py:74`](/tmp/p49_stage0_candidate/code/auditors/static_audit.py:74) and [p50 `static_audit.py:74`](/tmp/p50_stage0_candidate/code/auditors/static_audit.py:74), `verify_outputs()` only enforces type/mode hygiene plus existence of `outputs/state_A`, while [p49 `run_integration.py:80`](/tmp/p49_stage0_candidate/code/integration/run_integration.py:80) and [p50 `run_integration.py:80`](/tmp/p50_stage0_candidate/code/integration/run_integration.py:80) require the `outputs/` child set to be exactly `["state_A"]`. That can let `stage0-static-audit-v1` return PASS on a rerun tree that integration will REJECT. Exact fix: mirror the exact child-set check in static rerun mode and reject any sibling such as `.state_A.stage` or other extras.
+
+P49 verdict: `HOLD_FOR_FRESH_INDEPENDENT_PRE_RUN_REAUDIT`. The direct excluded-anchor blocker is substantially closed on the read path: `run_integration.py` and `static_audit.py` both `lstat` the root and both anchors before manifest/seal reads, reject root `0777`, reject anchor symlinks and `0666`, reject `outputs/` root `0777`, keep descendant mode/type checks exact, preserve canonical reject envelopes, and keep status at `HOLD_FOR_FRESH_INDEPENDENT_PRE_RUN_REAUDIT`. It is not `READY` because the builder/sealer no-follow promise is still conditional.
+
+P50 verdict: `HOLD_FOR_FRESH_INDEPENDENT_PRE_RUN_REAUDIT` for the same reason. The repaired integration/static-verifier checks match the required blocker semantics, but the writer-side no-follow guarantee is not yet fail-closed in code.
+
+Combined terminal verdict: not `READY`. Zero CRITICAL, one shared MAJOR, one shared MINOR. The excluded-node blocker is closed for the provided static replacement and mode-mutation cases, but not fully closed as an unconditional code-level guarantee until the `O_NOFOLLOW` fallback is removed and made fail-closed.

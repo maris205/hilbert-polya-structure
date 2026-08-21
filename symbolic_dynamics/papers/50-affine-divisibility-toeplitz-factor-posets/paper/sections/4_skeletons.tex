@@ -1,0 +1,183 @@
+\section{Skeletons and constructive periods}
+\label{sec:skeletons}
+
+The affine term first gives periodicity at each coordinate, with an
+argument that remains valid for composite bases.
+
+\begin{lemma}[Coordinate periodicity]
+\label{lem:coordinate-periodicity}
+  Let $k\in\Z$ and $e=\nu_p(L_p(k))$.  Then $p^{e+1}$ is a period of the
+  position $k$ in $x_{p,u}$.
+\end{lemma}
+
+\begin{proof}
+  Write $L_p(k)=p^e a$ with $p\nmid a$.  For every $t\in\Z$,
+  \begin{equation}
+    L_p\bigl(k+t p^{e+1}\bigr)
+      =p^e\bigl[a+(p-1)tp\bigr].
+    \label{eq:coordinate-periodicity}
+  \end{equation}
+  The bracket is congruent to $a$ modulo $p$, so it is not divisible by
+  $p$.  The exponent of \cref{eq:coordinate-periodicity} is therefore
+  $e$, and the directive letter is unchanged along the whole arithmetic
+  progression.  No inverse modulo $p$ was used.
+\end{proof}
+
+The centers in \cref{eq:L-r} satisfy two identities that will recur:
+\begin{equation}
+  L_p(r_N)=p^N,
+  \qquad
+  r_{N+1}=r_N+p^N.
+  \label{eq:center-identities}
+\end{equation}
+
+\begin{theorem}[Exact one-hole skeleton]
+\label{thm:exact-skeleton}
+  For every $N\geq1$,
+  \[
+    \Per_{p^N}(x_{p,u})=\Z\setminus(r_N+p^N\Z).
+  \]
+\end{theorem}
+
+\begin{proof}
+  Since $\gcd(p-1,p)=1$, the congruence in \cref{eq:L-r} gives
+  \begin{equation}
+    p^N\mid L_p(k)
+      \quad\Longleftrightarrow\quad
+    k\equiv r_N\pmod {p^N}.
+    \label{eq:hole-congruence}
+  \end{equation}
+  If $k$ is outside this residue class, put
+  $e=\nu_p(L_p(k))<N$ and write $L_p(k)=p^e a$, where $p\nmid a$.  Then,
+  for every $t\in\Z$,
+  \begin{equation}
+    L_p(k+t p^N)
+       =p^e\bigl[a+(p-1)t p^{N-e}\bigr].
+    \label{eq:skeleton-nonhole}
+  \end{equation}
+  The bracket in \cref{eq:skeleton-nonhole} is $a$ modulo $p$; hence the
+  exponent and letter remain constant.  Thus every nonhole position lies
+  in $\Per_{p^N}(x_{p,u})$.
+
+  Conversely, take any $k\equiv r_N\pmod {p^N}$.  Its $p^N$-progression
+  contains both $r_N$ and $r_{N+1}=r_N+p^N$.  By
+  \cref{eq:center-identities}, their letters are $u_N$ and $u_{N+1}$.
+  They are unequal by \cref{eq:neighbor-distinct}, so no coordinate in the
+  alleged hole progression is $p^N$-periodic.  This proves the reverse
+  inclusion and the equality.
+\end{proof}
+
+\begin{corollary}[Essential periods and simple Toeplitz form]
+\label{cor:simple-toeplitz}
+  Every $p^N$ is essential, the powers $(p^N)_{N\geq1}$ form a period
+  structure, and $x_{p,u}$ is an aperiodic normal simple Toeplitz sequence.
+\end{corollary}
+
+\begin{proof}
+  The $p^N$-skeleton has exactly one hole residue modulo $p^N$.  Any
+  positive translation period of that partial word must preserve the hole
+  set, and hence must be divisible by $p^N$.  Its least period is therefore
+  $p^N$.
+
+  Define
+  \begin{equation}
+    H_N=\{k:p^N\mid L_p(k)\}=r_N+p^N\Z,
+    \qquad H_0=\Z.
+    \label{eq:nested-holes}
+  \end{equation}
+  The layer $H_N\setminus H_{N+1}$ consists exactly of coordinates with
+  exponent $N$, so it is filled uniformly by $u_N$, leaving the one hole
+  class $H_{N+1}$.  No integer lies in every $H_N$: otherwise the fixed
+  nonzero integer $L_p(k)$ would be divisible by all powers of $p$.
+  Together with \cref{lem:coordinate-periodicity}, this shows that the
+  periodic positions cover $\Z$ and that the one-hole filling has no
+  residual coordinate.  This is the normal simple Toeplitz recursion.
+
+  If $x_{p,u}$ had a nonzero global period $q$, translation by $q$ would
+  preserve each exact skeleton and therefore each unique hole class in
+  \cref{eq:nested-holes}.  Hence $p^N\mid q$ for every $N$, impossible for
+  a fixed nonzero integer.  Thus the sequence is aperiodic.
+\end{proof}
+
+Skeleton essentiality does not by itself settle constructiveness: the
+latter concerns the common period of all positions in a finite block.  The
+next theorem separates these notions.
+
+\begin{theorem}[Constructiveness is equivalent to primality]
+\label{thm:constructive-split}
+  Let $B_N=x_{p,u}[0,p^N-1]$.  Its essential period equals $p^{N+1}$ for
+  every $N\geq1$ if $p$ is prime.  If $p$ is composite and $\ell$ is any
+  prime divisor of $p$, then $\ell p^N$ is a common period of $B_N$ and
+  satisfies $\ell p^N<p^{N+1}$.
+\end{theorem}
+
+\begin{proof}
+  We first obtain a common upper period for every integer base.  If
+  $0\leq k<p^N$, then
+  \[
+    0<L_p(k)<p^{N+1}.
+  \]
+  Hence $e=\nu_p(L_p(k))\leq N$.  The calculation in
+  \cref{lem:coordinate-periodicity} shows that $p^{N+1}$ is a period of
+  every such position.  Thus $p^{N+1}$ is a common period of $B_N$.
+
+  Suppose now that $p$ is prime and that a positive common period $q$ is
+  not divisible by $p^{N+1}$.  Write
+  \begin{equation}
+    q=p^j d,\qquad 0\leq j\leq N,\qquad p\nmid d.
+    \label{eq:prime-period-decomposition}
+  \end{equation}
+  Because $(p-1)d$ is invertible modulo $p^2$, there is $t\in\Z$ with
+  \begin{equation}
+    1+(p-1)dt\equiv p\pmod {p^2}.
+    \label{eq:prime-witness}
+  \end{equation}
+  The coordinate $r_j$ lies in $[0,p^N-1]$, where $r_0=0$, and
+  \begin{align*}
+    L_p(r_j)&=p^j,\\
+    L_p(r_j+tq)&=p^j\bigl[1+(p-1)dt\bigr].
+  \end{align*}
+  By \cref{eq:prime-witness}, the two divisibility exponents are exactly
+  $j$ and $j+1$.  Their letters $u_j$ and $u_{j+1}$ differ, contradicting
+  that $q$ is a period of the position $r_j$.  Thus every common period is
+  divisible by $p^{N+1}$, and the upper bound gives equality.
+
+  Finally let $p$ be composite, fix a prime $\ell\mid p$, and put
+  $q=\ell p^N$.  Since $\ell<p$, this period is strictly smaller than
+  $p^{N+1}$.  Fix $0\leq k<p^N$, let
+  $e=\nu_p(L_p(k))$, and take an arbitrary $t\in\Z$.  If $e<N$, write
+  $L_p(k)=p^e a$ with $p\nmid a$.  Then
+  \begin{equation}
+    L_p(k+tq)
+       =p^e\bigl[a+(p-1)t\ell p^{N-e}\bigr].
+    \label{eq:composite-low}
+  \end{equation}
+  The bracket is $a$ modulo $p$, so the exponent remains $e$.  If $e=N$,
+  \cref{eq:hole-congruence} and $0\leq k<p^N$ force $k=r_N$, and
+  \begin{equation}
+    L_p(k+tq)=p^N\bigl[1+(p-1)\ell t\bigr].
+    \label{eq:composite-top}
+  \end{equation}
+  The bracket is $1$ modulo $\ell$, so it cannot be divisible by $p$.
+  Again the exponent is unchanged.  Since $t$ was arbitrary,
+  $\ell p^N$ is a full-progression period of every position of $B_N$.
+\end{proof}
+
+\begin{figure}[!b]
+  \centering
+  \resizebox{\textwidth}{!}{\input{../figures/fig2_constructive_split.tex}}
+  \caption{Schematic proof map for the finite-block dichotomy.  In the
+  prime lane, every candidate common period missing a factor of
+  $p^{N+1}$ is contradicted at a center $r_j$ by a congruence modulo
+  $p^2$.  In the composite lane, each prime divisor $\ell$ of $p$ supplies
+  the strict common period $\ell p^N$; the exponent-$N$ coordinate is
+  checked separately.  The theorem quantifies over every integer
+  translate, not only the displayed witnesses.}
+  \label{fig:constructive-split}
+\end{figure}
+
+The proof covers $p=3$ and every composite base without treating a
+nonmultiple of $p$ as a unit outside the prime lane.  If one adopts a
+literal finite-block convention omitting coordinate zero, the same split
+holds; the replacement witness is recorded in
+\cref{app:boundary-conventions}.

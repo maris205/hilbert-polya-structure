@@ -64,6 +64,8 @@ provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)
 | [46-dyadic-sum-hankel-cycle-calculus](papers/46-dyadic-sum-hankel-cycle-calculus/PAPER_PLAN.md) | [PDF](papers/46-dyadic-sum-hankel-cycle-calculus/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/46-dyadic-sum-hankel-cycle-calculus/) | 对 looped support $m+n=2^a$ 的 Dirichlet-weighted coefficient array $h_s(m,n)=\mathbf 1_{\{m+n=2^a\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。每条边保持 $v_2$，从而在 bounded half-plane 得到 scaled odd-block direct sum、合法 trace powers 与 determinant products；固定 ordered dyadic labels 的 cyclic system 则有完整 odd/even solver。canonical State-A replay 覆盖 4 个 cutoffs、335,922 个 ordered tuples 与 36 个 exact traces，strict type-and-value mismatch 全为零；严格 tuple 为 `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / EXACT 2-ADIC BLOCK PRODUCT / COMPLETE LABELED CYCLE CALCULUS / ROUTE_A_REJECTED / SD-C48** |
 | [47-harmonic-egyptian-mordell-tornheim](papers/47-harmonic-egyptian-mordell-tornheim/PAPER_PLAN.md) | [PDF](papers/47-harmonic-egyptian-mordell-tornheim/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/47-harmonic-egyptian-mordell-tornheim/) | 对 looped harmonic-quotient graph $m+n\mid mn$ 的 Dirichlet-weighted coefficient array $e_s(m,n)=\mathbf 1_{\{m+n\mid mn\}}(mn)^{-s/2}$，bounded realization 恰在 $\Re s>0$ 存在且全域 compact；Hilbert--Schmidt 与 trace-class sharp walls 分别为 $\Re s>1/2$ 与 $\Re s>1$。divisor-row 与 coprime--scale 两套 exact coordinates 控制这些 thresholds；even loops 与 ordered-edge ledger 分别导出 $\operatorname{Tr}(E_s)=2^{-s}\zeta(s)$ 及 $\operatorname{Tr}(E_s^2)=\zeta(2s)\zeta_{\mathrm{MT}}(s,s;2s)/\zeta(4s)$。mixed triangle 与 negative principal minor 排除 scale-fiber 和 positivity 简化；严格 tuple 为 `(A0_ANALYTIC_ARITHMETIC_ORIGIN,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`。 | **SHARP 0--1/2--1 IDEAL WALLS / ZETA--MORDELL--TORNHEIM TRACE / MIXED-CYCLE SIGN WITNESS / ROUTE_A_REJECTED / SD-C49** |
 | [48-all-radix-carry-free-schatten](papers/48-all-radix-carry-free-schatten/PAPER_PLAN.md) | [PDF](papers/48-all-radix-carry-free-schatten/paper/CarryFreeRadixOperators.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/48-all-radix-carry-free-schatten/) | 对正整数上的 carry-free radix coefficient array $B_{b,s}(m,n)=\mathbf 1_{\{m+n\text{ 在 base }b\text{ 中无进位}\}}(mn)^{-s/2}$，每个整数 $b\ge2$、每个 $1\le q<\infty$ 都满足精确分类 $B_{b,s}\in\mathcal S_q\iff\Re s>\max\{1,\log_b\kappa_{b,q}\}$。证明分离 universal column wall 与 digit-norm wall；binary same-shell blocks 全零时，paired adjacent-shell pinching 覆盖包括 equality 在内的完整 nonmembership range。因而 bounded、compact、Hilbert--Schmidt 等价于 $\Re s>1$，trace class 等价于 $\Re s>\alpha_b$；trace powers、regularized determinant 与 one-sided least-period support 只在各自合法域陈述。每条 finite lane 的 1,965 rows、8,010 intervals 与 420 shell envelopes 只是 consistency evidence；严格 tuple 为 `(A0_FAIL,A1_FAIL,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`。 | **EXACT ALL-RADIX SCHATTEN SURFACE / BINARY ENDPOINT PINCHING / WEIGHTED TRACE--PERIOD LEDGER / ROUTE_A_REJECTED / SD-C50** |
+| [49-transient-phase-allocation-tree-shifts](papers/49-transient-phase-allocation-tree-shifts/PAPER_PLAN.md) | [PDF](papers/49-transient-phase-allocation-tree-shifts/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/49-transient-phase-allocation-tree-shifts/) | 对 complete cyclic Markov hom tree-shift，unrestricted one-level feeder 的 Hausdorff dimension 是整数 phase composition 上的 exact finite max--min；saturation 当且仅当 allocation 与 log phase sizes 的 circular convolution 为常数。canonical unrestricted $L$-level forced chain 的 exact denominator 为 $d^L$，优化值单调并以 $O(d^{-L})$ 逼近 spectral mean；四状态例从 cyclic core $(\log 2)/3$ 提升到 full shift $(\log 2)/2$，仅反驳 naive cyclic-essential-SCC maximum。 | **PUBLISHED_STATE_A_EXACT / NARROW STATE-B CONTRACT** |
+| [50-affine-divisibility-toeplitz-factor-posets](papers/50-affine-divisibility-toeplitz-factor-posets/PAPER_PLAN.md) | [PDF](papers/50-affine-divisibility-toeplitz-factor-posets/paper/main.pdf) · [LaTeX/证明/实验/Route-A 记录](papers/50-affine-divisibility-toeplitz-factor-posets/) | 对固定 $p\ge3$ 且 directive 具有 exact finite support、least period 至少 2、cyclic neighbors 不同的 affine divisibility Toeplitz family，pure-power constructiveness 当且仅当 $p$ 为素数。每个 onto pointed same-base in-family factor 唯一为 surjective one-block letter quotient；target 的 pointed-conjugacy classes 恰为 directive cyclic adjacency graph 的 independent-set partitions，按 refinement 排序。 | **PUBLISHED_STATE_A_EXACT / NARROW STATE-B CONTRACT** |
 
 ### 论文 1 的候选分离结论
 
@@ -1815,13 +1817,82 @@ final writer overlay 含 54 个 regular files。
 writer seal 内状态为 `HOLD_FOR_INDEPENDENT_WRITER_AUDIT`；该字段记录封存时的
 writer-side gate，不是 priority、publication、README 或 authority-write authorization。
 
+### 论文 49：transient phase allocation 的 exact Hausdorff dimension
+
+Paper 49 的冻结题名为 *Hausdorff Dimension for Complete Cyclic Markov Hom
+Tree-Shifts with an Unrestricted One-Level Feeder or Canonical Unrestricted
+$L$-Level Forced Chains*。对象固定为 complete cyclic Markov hom tree-shift：
+complete cyclic core 的 phase sizes 为 $a_0,\ldots,a_{p-1}$，树度为 $d$，并只加
+一个无回边、对各 phase unrestricted 的 one-level strictly transient feeder。
+
+主定理把 feeder 的 Hausdorff dimension 写成对所有非负整数 phase
+compositions（总和为 $d$）的 exact finite max--min。spectral mean 是统一上界，
+达到上界当且仅当 allocation 与 log phase sizes 的 circular convolution 为常数；
+$p\mid d$ 在一般情形只保证充分性，只有在声明的 full Fourier-support 假设下才保证
+必要性。canonical unrestricted $L$-level forced chain 的 exact denominator 是
+$d^L$，优化值单调并以显式 $O(d^{-L})$ 误差趋向 spectral mean。四状态 witness 的
+cyclic core dimension 为 $(\log 2)/3$，full dimension 为 $(\log 2)/2$，所以它只
+否定 naive cyclic-essential-SCC maximum，并不提供 arbitrary reducible formula。
+
+owner subtraction 保持明确：Ban--Lai--Wu 拥有 rooted-tree metric 与 irreducible
+Hausdorff-dimension background；Ban--Chang--Hu--Wu (2021, 2022) 已拥有 reducible
+topological-entropy component-maximum failure 的邻近现象。本文 residual package 只含
+上述 complete-cyclic phase optimizer、saturation arithmetic、canonical forced-chain
+convergence 与 explicit Hausdorff obstruction；不覆盖 return edges、incomplete blocks、
+arbitrary transient feeder shapes，也不作 unconditional divisibility iff、priority 或
+exhaustive-novelty 声明。
+
+publication 边界现由 authenticated State-A package 固定：authority 中原有
+96-node integration Stage A 保持逐字节不变，writer difference $W=62$ 已精确安装，
+其 transaction 状态为 `PUBLISHED_STATE_A_EXACT`；这个 authenticated State-A package
+就是 H1 content boundary。publication contract 将 derived State B 严格限制为
+`outputs/state_B/PUBLICATION_PROVENANCE.json` 与
+`outputs/state_B/PAPER_MANIFEST.json` 两个载体；它们只登记 provenance 与 full-root
+manifest，不改变受保护的 State A，也不扩大任何科学主张。这里的
+`PUBLISHED_STATE_A_EXACT` 只命名 authenticated State-A package，不表示论文已经
+external published；本文也不声称任何具体 H1/H2 hash 或 remote push/mirror 已完成。
+
+### 论文 50：affine divisibility Toeplitz 的 pointed factor poset
+
+Paper 50 的冻结题名为 *Affine Divisibility Toeplitz Systems: Constructive Periods
+and Same-Base Pointed Factor Posets*。固定 $p\ge3$，directive $u$ 有 exact finite
+support、least period $h\ge2$ 且 cyclic neighbors 不同，并令
+$x_{p,u}(k)=u_{\nu_p((p-1)k+1)}$。这里的 factor 一律是 continuous、onto、shift
+commuting、same-base 且 pointed。
+
+主定理给出 exact one-hole skeletons 与 essential powers，并在 all-coordinate
+finite-block convention 下证明 pure-power constructiveness 当且仅当 $p$ 为素数；
+composite base 的每个 prime divisor $\ell\mid p$ 都产生严格 counterperiod
+$\ell p^N$。在冻结 affine family 内，每个 onto pointed same-base factor 唯一为
+surjective one-block letter quotient。因而 target 的 pointed-conjugacy classes 恰为
+directive cyclic adjacency graph 的 independent-set partitions，morphisms 正好对应
+refinement；这里不作 lattice 声明。
+
+owner subtraction 同样局部化：Downarowicz--Kwiatkowski--Lacroix (1995) 已拥有
+general over-zero aligned-symbol factor criterion；Hosseini--Yassawi 已拥有
+constructive terminology 与 cross-base obstruction。本文 residual package 只是本显式
+family 的 high-center radius-zero collapse、unique letter quotient 与 admissible-partition
+poset；不分类 cross-base、nonpointed、nonzero odometer phase、arbitrary Toeplitz
+targets，也不声称 all-base constructive、priority 或 exhaustiveness。
+
+publication 边界现由 authenticated State-A package 固定：authority 中原有
+105-node integration Stage A 保持逐字节不变；49 个 writer files 中 3 个是 exact
+protected overlaps，writer difference $W=46$ 已精确安装，其 transaction 状态为
+`PUBLISHED_STATE_A_EXACT`；这个 authenticated State-A package 就是 H1 content
+boundary。publication contract 将 derived State B 严格限制为
+`outputs/state_B/PUBLICATION_PROVENANCE.json` 与
+`outputs/state_B/PAPER_MANIFEST.json` 两个载体；它们只登记 provenance 与 full-root
+manifest，不改变受保护的 State A，也不扩大任何科学主张。这里的
+`PUBLISHED_STATE_A_EXACT` 只命名 authenticated State-A package，不表示论文已经
+external published；本文也不声称任何具体 H1/H2 hash 或 remote push/mirror 已完成。
+
 ## 目录
 
 - [研究提案](propose-symbolic-dynamics.md)
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [四十八篇论文](papers/)
+- [五十篇论文](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
