@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Random-Order Prefix Assembly of a Frozen H\'enon Core}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the first prefix of a uniformly random ordering of the sixteen named
+labels whose generated subgroup is the full finite core.  Exhaustive closure
+enumeration and a pivotal-label counting identity give the exact distribution
+over all $16!=20922789888000$ permutations.  The stopping time ranges from 3
+to 16, with exact mean $36499/3960\approx9.2169$.  An independent closure
+checker, a symbolic factorial generating check, clean replay, and fifteen
+hostile mutations certify the receipt.  This is a finite named-support result
+under the firewall \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+
+\section{Stopping rule}
+Let $\pi$ be a permutation of $L=\{S_1,\ldots,S_{16}\}$ and
+$A_k(\pi)=\{\pi_1,\ldots,\pi_k\}$.  Define
+\[
+ T(\pi)=\min\{k:\Phi(A_k(\pi))=Q\}.
+\]
+The C75 point-set closure gives 25 inclusion-minimal full-core supports, all
+of size three, but larger prefixes can be the first full prefix when their
+last label is pivotal.
+
+\begin{theorem}[Pivotal-prefix identity]
+For a full-core support $S$ of size $k$, let
+\[
+ p(S)=\#\{\ell\in S:\Phi(S\setminus\{\ell\})\ne Q\}.
+\]
+Then
+\[
+ N_k=\#\{\pi:T(\pi)=k\}
+ =\sum_{|S|=k,\,\Phi(S)=Q}p(S)(k-1)!(16-k)!.
+\]
+\end{theorem}
+\begin{proof}
+Choose the first $k$ labels to be $S$, choose a pivotal label $\ell$ to be
+last within that prefix, order the other $k-1$ labels arbitrarily, and order
+the remaining $16-k$ labels arbitrarily.  The preceding prefix is not full,
+and every permutation with stopping time $k$ is counted exactly once.
+\end{proof}
+
+\section{Exact distribution}
+The stopping counts for $k=3,\ldots,16$ are
+\[
+\begin{array}{c|r}
+\toprule
+k&N_k\\\midrule
+3&934053120000\\
+4&1641059481600\\
+5&1927502438400\\
+6&1927328256000\\
+7&1807490764800\\
+8&1671222067200\\
+9&1556813260800\\
+10&1467573811200\\
+11&1398684672000\\
+12&1348868505600\\
+13&1319170406400\\
+14&1307674368000\\
+15&1307674368000\\
+16&1307674368000\\
+\bottomrule
+\end{array}
+\]
+They sum to $16!$.  The probability generating function
+$G(z)=\sum_kN_kz^k/16!$ satisfies $G(1)=1$ and
+\[
+ G'(1)=\mathbb E[T]=\frac{36499}{3960}.
+\]
+For example, $\Pr[T=3]=5/112$ and $\Pr[T\geq15]=3/16$.
+
+\section{Audit and scope}
+The producer binds C76/C78 and the frozen C81 receipt, reconstructs the C75
+closure table, and computes every full-support and pivotal pattern.  The
+independent checker repeats this route and verifies all factorial-weighted
+counts, reduced probabilities, survival counts, and the expectation.  A
+SymPy polynomial check independently recovers the stopping counts.  The
+canonical evidence hash is
+\texttt{4777695a3082a2cca1ee82cdced208f0bddf56431285774a51e7563c4cfdfea0}.
+No arithmetic/local, Euler-factor, root-number, automorphy, full
+Burnside/table-of-marks, or Hilbert--Polya conclusion is asserted.
+\end{document}

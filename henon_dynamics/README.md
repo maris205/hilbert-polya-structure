@@ -63,6 +63,26 @@ henon_mu3_yukawa_mark_closure_incidence_lift - C75 prefreeze complete - The lift
 henon_mu3_yukawa_mark_closure_orbit_atlas - C76 prefreeze complete - The effective 1920-element label image partitions all 65536 supports into 3024 orbits, with 98 closure-minimal supports and 25 full-core minimal triples; the 11520 ambient lift remains distinct.
 henon_mu3_yukawa_mark_subgroup_mobius_reliability - C77 prefreeze complete - Möbius inversion on the actual 20-subgroup lattice matches direct enumeration of all 65536 supports and reproduces the C73 top reliability polynomial, without claiming a full Burnside ring.
 henon_mu3_yukawa_mark_repair_distance_geometry - C78 prefreeze complete - Deletion/repair geometry for all 65536 supports has exact distance distribution 30400/32704/2368/64, maximum repair distance 3, and a verified bivariate generating function with x marking deletions.
+henon_mu3_yukawa_mark_repair_witness_multiplicity - C79 prefreeze complete - Minimum-repair witness multiplicities are enumerated exactly over all 65536 supports, with maximum repair distance 3 and witness values 1,4,7,8,25.
+henon_mu3_yukawa_mark_threshold_repair_atlas - C80 prefreeze complete - The complete 65536-by-20 threshold-repair atlas reaches every frozen subgroup target and recovers the C78 repair-distance marginal.
+henon_mu3_yukawa_mark_effective_orbit_repair_profile - C81 prefreeze complete - The effective 1920 label action (distinct from the 11520 ambient lift) gives 3024 repair-profile orbits and 14 profile classes.
+henon_mu3_yukawa_mark_bitflip_noise_fourier_spectrum - C82 prefreeze complete - The full-core Boolean predicate has an exact 1024-term Walsh spectrum, degree 10, and an exact Hamming bit-flip autocorrelation law.
+henon_mu3_yukawa_mark_random_order_assembly_stopping_time - C83 prefreeze complete - Uniform random label order has an exact prefix-assembly stopping distribution with minimum 3 and expectation 36499/3960.
+
+## C79--C83 package index
+
+Each package below contains its research question, source audit, theorem
+package, reproducibility code, canonical evidence, compiled paper, and a
+file-hash manifest.  The round remains finite/combinatorial and uses the
+scope firewall `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+| paper | package / paper | evidence | manifest | PDF |
+|---|---|---|---|---|
+| C79 | [package](henon_mu3_yukawa_mark_repair_witness_multiplicity/README.md) · [paper](henon_mu3_yukawa_mark_repair_witness_multiplicity/paper/main.pdf) | `147a9b77e0ee7459040a7cc3c026bb21bce950a806e4fbc3ce0441dc9bb6c879` | `982cce509de371d59c4b87cda75af057d994c6fc36146daddc3b983c9c63246c` | `d6f75f6988400da3723bded7de4c523f1cb0d802b65459bc647b0fae82bbdbb2` |
+| C80 | [package](henon_mu3_yukawa_mark_threshold_repair_atlas/README.md) · [paper](henon_mu3_yukawa_mark_threshold_repair_atlas/paper/main.pdf) | `8d27428b14dbd7354e9c8308ad76b1108e3f551702165833301509cd52de7df5` | `a674116ab6f8f9478130219cc525478525f10f2e42f515e71418a3066e2b229c` | `853886c1cc20424eeb3eb71227df6135a90ccc3166c97a31e1119ea59cd73a31` |
+| C81 | [package](henon_mu3_yukawa_mark_effective_orbit_repair_profile/README.md) · [paper](henon_mu3_yukawa_mark_effective_orbit_repair_profile/paper/main.pdf) | `c3cc35f45e1c8f7c9d4ecaecca820bf9dbc4db1c6a5769c20c75bad21f32fd9f` | `110d8119169515bf38ca00906ab0cb51264a100f961bfa00142886b326fa6141` | `d6bb73164b5e4602604944d359d54c83e2e0bfe1c40044ae653ea8d13b4bdf80` |
+| C82 | [package](henon_mu3_yukawa_mark_bitflip_noise_fourier_spectrum/README.md) · [paper](henon_mu3_yukawa_mark_bitflip_noise_fourier_spectrum/paper/main.pdf) | `6fc49cad02956f463b1e37d017506f437edce6717414da74770ad94913ccefa1` | `5934de3a933e559e941fc636860db2f9f5ceca181acd9d4915396e9facdc8f8b` | `b111d8ea403d5c87c0565a99633b0815b861d4a532eae356b6e295e40c78fa30` |
+| C83 | [package](henon_mu3_yukawa_mark_random_order_assembly_stopping_time/README.md) · [paper](henon_mu3_yukawa_mark_random_order_assembly_stopping_time/paper/main.pdf) | `4777695a3082a2cca1ee82cdced208f0bddf56431285774a51e7563c4cfdfea0` | `0ba1c15876a3ebf5e2e1a036e4025ce20dd9b3056280663d17ebc05237256f44` | `2be00d3c24597c1b3b305862581449a48dc534172d212a32c260e2412166fe96` |
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`

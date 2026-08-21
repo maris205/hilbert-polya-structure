@@ -1,0 +1,103 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Q}{Q}
+\newcommand{\Phiop}{\Phi}
+\title{An All-Subgroup Containment-Threshold Atlas for a Frozen H\'enon Core}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We replace exact full-core repair by a target-containment observable on the
+twenty actual subgroup rows of
+$\Q=\mathbb Z/9\oplus\mathbb Z/3\oplus\mathbb Z/2$.  For a deletion set
+$D$ and retained labels $A=L\setminus D$, define
+$\tau_H(D)=\min\{|R|:R\subseteq D,,H\subseteq\Phiop(A\cup R)\}$.
+An exhaustive receipt stores all $20\times65536$ integer values, their
+deleted-cardinality tables, and target distributions.  The full target row
+is exactly the C78 repair distance, with distribution
+$30400,32704,2368,64$.  An independent target-antichain reconstruction,
+symbolic marginal checks, clean replay, and thirteen hostile mutations pass.
+The result is a finite named-support atlas and makes no arithmetic, local,
+Burnside-ring, table-of-marks, or Hilbert--Polya claim.
+\end{abstract}
+
+\section{Targeted repair}
+Let $L=\{S_1,\ldots,S_{16}\}$ be the frozen named presentation.  For every
+subgroup row $H\leq\Q$ and deletion set $D\subseteq L$, put
+\[
+ \tau_H(D)=\min\{|R|:R\subseteq D,\ H\subseteq
+ \Phiop((L\setminus D)\cup R)\}.
+\]
+This is deliberately a containment threshold.  It does not require the
+generated subgroup to equal $H$; in particular, different rows of the same
+order remain separate named targets.
+
+\section{Finite antichain identity}
+\begin{theorem}
+For a fixed target $H$, let $\mathcal M_H$ be the inclusion-minimal named
+supports $M$ satisfying $H\subseteq\Phiop(M)$.  Then
+\[
+  \tau_H(D)=\min_{M\in\mathcal M_H}|M\setminus(L\setminus D)|.
+\]
+\end{theorem}
+\begin{proof}[Proof sketch]
+Any feasible restoration contains a target-containing support.  Removing
+labels one at a time while containment persists reaches a member of
+$\mathcal M_H$, and removing labels from the retained part is impossible by
+the definition of the set difference.  Conversely, restoring $M\setminus A$
+is feasible for every $M\in\mathcal M_H$.
+\end{proof}
+
+The C80 checker reconstructs the point-set addition table from C75, derives
+each $\mathcal M_H$, and evaluates this formula for every one of the 65536
+retained masks.  The twenty target orders in row order are
+\[
+1,2,3,3,3,3,6,6,6,6,9,9,9,9,18,18,18,18,27,54.
+\]
+
+\section{The exact-core boundary}
+The last row is $H=\Q$.  Its threshold values are
+\[
+\#\{D:\tau_\Q(D)=0,1,2,3\}
+  =(30400,32704,2368,64).
+\]
+The source-bound pivot/block decomposition gives, independently,
+\[
+ \tau_\Q(D)=\mathbf1_{S_9\in D}+
+ \max\bigl(0,t(D)-2\bigr),
+\]
+where $t(D)$ counts fully deleted blocks of sizes $1,1,2,5$.  Thus the C80
+row is exactly C78's $\rho$ row, while the other nineteen rows describe
+proper-subgroup containment and can have smaller thresholds.
+
+Every deleted-cardinality table has row sum $\binom{16}{k}$, hence each
+target's cardinality marginal is $(1+x)^{16}$.  If $H_1\subseteq H_2$, then
+\[
+ \tau_{H_1}(D)\leq\tau_{H_2}(D)\quad\text{for every }D,
+\]
+which the receipt checks on all profiles using the actual subgroup bitsets.
+
+\section{Certification and scope}
+The producer binds the C75, C76, and C78 evidence/manifests by raw-byte
+SHA-256.  The canonical C80 evidence hash is
+\texttt{8d27428b14dbd7354e9c8308ad76b1108e3f551702165833301509cd52de7df5}.
+The independent checker uses target antichains rather than the producer's
+descending recurrence; a SymPy script verifies all twenty cardinality
+marginals and the exact C78 polynomial; clean replay preserves the digest;
+and $13/13$ hostile mutations are rejected.
+
+This receipt concerns only the named sixteen-label finite model.  It does not
+claim a full Burnside ring or table of marks, arithmetic/local data, Euler
+factors, root numbers, automorphy, or a Hilbert--Polya operator.
+
+\end{document}
