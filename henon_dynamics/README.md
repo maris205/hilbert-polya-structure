@@ -68,6 +68,11 @@ henon_mu3_yukawa_mark_threshold_repair_atlas - C80 prefreeze complete - The comp
 henon_mu3_yukawa_mark_effective_orbit_repair_profile - C81 prefreeze complete - The effective 1920 label action (distinct from the 11520 ambient lift) gives 3024 repair-profile orbits and 14 profile classes.
 henon_mu3_yukawa_mark_bitflip_noise_fourier_spectrum - C82 prefreeze complete - The full-core Boolean predicate has an exact 1024-term Walsh spectrum, degree 10, and an exact Hamming bit-flip autocorrelation law.
 henon_mu3_yukawa_mark_random_order_assembly_stopping_time - C83 prefreeze complete - Uniform random label order has an exact prefix-assembly stopping distribution with minimum 3 and expectation 36499/3960.
+henon_mu3_yukawa_mark_minimum_repair_matroid - C84 prefreeze complete - Every minimum-repair family is a direct-sum truncated partition matroid; five exact basis-exchange graph types are certified over all 65536 deletion sets.
+henon_mu3_yukawa_mark_threshold_vector_poset_rigidity - C85 prefreeze complete - The 20-dimensional threshold vector is a closure invariant whose zero ideal recovers the subgroup and reverses the complete 20-subgroup poset.
+henon_mu3_yukawa_mark_effective_orbit_flip_chain - C86 prefreeze complete - The faithful order-1920 action strongly lumps the 16-cube to a 3024-state one-bit flip chain with exact reversible flows and invariant Walsh spectrum.
+henon_mu3_yukawa_mark_label_influence_interaction_atlas - C87 prefreeze complete - All 16 coalition-size first-order rows and 120 signed second-order pair rows are certified, with 7 label orbits, 27 pair orbits, and 10 numerical classes.
+henon_mu3_yukawa_mark_subgroup_first_passage_atlas - C88 prefreeze complete - Exact random-order first-passage laws for all 20 subgroup targets are certified with 102 pointwise subgroup-order relations.
 
 ## C79--C83 package index
 
@@ -80,9 +85,19 @@ scope firewall `NO_BAD_EULER_OR_ROOT_NUMBER`.
 |---|---|---|---|---|
 | C79 | [package](henon_mu3_yukawa_mark_repair_witness_multiplicity/README.md) · [paper](henon_mu3_yukawa_mark_repair_witness_multiplicity/paper/main.pdf) | `147a9b77e0ee7459040a7cc3c026bb21bce950a806e4fbc3ce0441dc9bb6c879` | `982cce509de371d59c4b87cda75af057d994c6fc36146daddc3b983c9c63246c` | `d6f75f6988400da3723bded7de4c523f1cb0d802b65459bc647b0fae82bbdbb2` |
 | C80 | [package](henon_mu3_yukawa_mark_threshold_repair_atlas/README.md) · [paper](henon_mu3_yukawa_mark_threshold_repair_atlas/paper/main.pdf) | `8d27428b14dbd7354e9c8308ad76b1108e3f551702165833301509cd52de7df5` | `a674116ab6f8f9478130219cc525478525f10f2e42f515e71418a3066e2b229c` | `853886c1cc20424eeb3eb71227df6135a90ccc3166c97a31e1119ea59cd73a31` |
-| C81 | [package](henon_mu3_yukawa_mark_effective_orbit_repair_profile/README.md) · [paper](henon_mu3_yukawa_mark_effective_orbit_repair_profile/paper/main.pdf) | `c3cc35f45e1c8f7c9d4ecaecca820bf9dbc4db1c6a5769c20c75bad21f32fd9f` | `110d8119169515bf38ca00906ab0cb51264a100f961bfa00142886b326fa6141` | `d6bb73164b5e4602604944d359d54c83e2e0bfe1c40044ae653ea8d13b4bdf80` |
+| C81 | [package](henon_mu3_yukawa_mark_effective_orbit_repair_profile/README.md) · [paper](henon_mu3_yukawa_mark_effective_orbit_repair_profile/paper/main.pdf) | `c3cc35f45e1c8f7c9d4ecaecca820bf9dbc4db1c6a5769c20c75bad21f32fd9f` | `ff3028fd68817795b08ff24332ef44de4cf520ccba543f053fbd78140ac1b512` | `d6bb73164b5e4602604944d359d54c83e2e0bfe1c40044ae653ea8d13b4bdf80` |
 | C82 | [package](henon_mu3_yukawa_mark_bitflip_noise_fourier_spectrum/README.md) · [paper](henon_mu3_yukawa_mark_bitflip_noise_fourier_spectrum/paper/main.pdf) | `6fc49cad02956f463b1e37d017506f437edce6717414da74770ad94913ccefa1` | `5934de3a933e559e941fc636860db2f9f5ceca181acd9d4915396e9facdc8f8b` | `b111d8ea403d5c87c0565a99633b0815b861d4a532eae356b6e295e40c78fa30` |
-| C83 | [package](henon_mu3_yukawa_mark_random_order_assembly_stopping_time/README.md) · [paper](henon_mu3_yukawa_mark_random_order_assembly_stopping_time/paper/main.pdf) | `4777695a3082a2cca1ee82cdced208f0bddf56431285774a51e7563c4cfdfea0` | `0ba1c15876a3ebf5e2e1a036e4025ce20dd9b3056280663d17ebc05237256f44` | `2be00d3c24597c1b3b305862581449a48dc534172d212a32c260e2412166fe96` |
+| C83 | [package](henon_mu3_yukawa_mark_random_order_assembly_stopping_time/README.md) · [paper](henon_mu3_yukawa_mark_random_order_assembly_stopping_time/paper/main.pdf) | `033f42f0eea2518f7cb269dd465d82d4871a729d2b93679fcd9f3af38cf9ca28` | `981f9b07297f1b69676e8ced2625e69df5bd8fcd366415a2f984eb6311ddaa85` | `47fdd116564bac2790593f67a4d65e1b664d98e3f3206231c131c7827fe0722c` |
+
+## C84-C88 package index
+
+| paper | package / paper | evidence | manifest | PDF |
+|---|---|---|---|---|
+| C84 | [package](henon_mu3_yukawa_mark_minimum_repair_matroid/README.md) · [paper](henon_mu3_yukawa_mark_minimum_repair_matroid/paper/main.pdf) | `9c3b20c703b680a391ad1834c0f55cabaf27bfed14cee2099b0c3afa1eb259ca` | `2957c0837803155fdca24a896accdb95aee147440093fabc1b9ac49bb09e9c8d` | `2a37dacc711e5a42dc7b4a33f87d2cc47d31cae20cf05ac345ebcec198c2f4f0` |
+| C85 | [package](henon_mu3_yukawa_mark_threshold_vector_poset_rigidity/README.md) · [paper](henon_mu3_yukawa_mark_threshold_vector_poset_rigidity/paper/main.pdf) | `22bdaf9fa2fe08532b45eae51cf7704a1509764b5a09f10eebb98012224be152` | `d1e0af8c896e8975ef7544714d379499b2d69e50bdaabf4d8d55621e4c42d261` | `55126890b5bea6894dc2b7bbb90db6525df4e90cebbc3fc80a0e1c952ac5edcc` |
+| C86 | [package](henon_mu3_yukawa_mark_effective_orbit_flip_chain/README.md) · [paper](henon_mu3_yukawa_mark_effective_orbit_flip_chain/paper/main.pdf) | `7b3e2179590c3dc8662a59f1d79ffbb12f2a4a787438a6902d6c28b2842e70b8` | `eb223600feb511a52051317b8d80c51423df022a934ca87b6d0ad90b2a4c381f` | `544418e44bdf5a22a7a1f416fc4f6367aff6f9320c24986e9de626d0511e4423` |
+| C87 | [package](henon_mu3_yukawa_mark_label_influence_interaction_atlas/README.md) · [paper](henon_mu3_yukawa_mark_label_influence_interaction_atlas/paper/main.pdf) | `bedeb7a3d912330e5eadc72629ee24d773648993f73f20f23eaf477028334d6e` | `3f93dddf1421db6f0acb641aa95691ba1b7afcbd17315a79b2b33b3c27e97831` | `6b676d65b14aaf6f93f8d8d5e7226cbac45f1fb1a8379a0240dcbdf1c6cabd13` |
+| C88 | [package](henon_mu3_yukawa_mark_subgroup_first_passage_atlas/README.md) · [paper](henon_mu3_yukawa_mark_subgroup_first_passage_atlas/paper/main.pdf) | `4511d434f477784782f2af5106afff4c2cf3b48cd7eb7a62ed05b8f2f42afb1b` | `aab137987b45be54d401b5a021212412de25097b149a73ee65c8e0daaced56c5` | `d8341a25856ac4d26de0a6398c39c625f8475ab624a923e498fa81a4fca1125b` |
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`

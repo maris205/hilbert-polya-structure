@@ -1,0 +1,270 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,longtable,array,tabularx}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\cF}{F}
+\newcommand{\cL}{L}
+\title{Coalition-Size Influence and Pair Interaction\\
+of a Frozen H\'enon Label Predicate}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We compute the complete first- and second-order discrete derivative atlas of
+a monotone Boolean predicate on sixteen named labels.  The predicate is true
+for 30400 of 65536 supports.  Every one of the 16 first-order rows is resolved
+by coalition size, and every one of the 120 unordered-pair rows retains
+positive and negative discrete-Hessian counts, exact uniform Banzhaf
+normalization, and exact factorial-weighted Shapley interaction.  The faithful
+1920-element label group has seven label orbits and 27 pair orbits; the latter
+collapse to ten numerical classes.  An independent block-criterion checker, a
+symbolic multilinear kernel, deterministic replay, and 27 hostile mutations
+certify the receipt.  The result is finite and combinatorial under the scope
+firewall \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+
+\section{Frozen predicate and contribution}
+Let $\cL=\{S_1,\ldots,S_{16}\}$.  Partition nine active direction labels as
+\[
+ B_1=\{S_1\},\quad B_2=\{S_{16}\},\quad
+ B_3=\{S_7,S_{15}\},\quad
+ B_4=\{S_3,S_4,S_8,S_{11},S_{12}\}.
+\]
+For $A\subseteq\cL$, define
+\[
+ \cF(A)=1
+ \quad\Longleftrightarrow\quad
+ S_9\in A\ \text{ and }\ \#\{r:A\cap B_r\ne\varnothing\}\geq2.
+ \tag{1}
+\]
+The remaining labels $S_2,S_5,S_6,S_{10},S_{13},S_{14}$ are dummies.
+Equivalently, $A$ contains one of 25 minimal generating triples.  Exactly
+30400 supports satisfy (1).
+
+Scalar first-order values were available upstream.  The new object here is a
+coalition-size-resolved first-order atlas, the complete signed second-order
+atlas on all $\binom{16}{2}=120$ pairs, and their faithful label-action
+quotient.  Equal numerical values are not used to infer orbit equivalence.
+
+\section{Exact conventions}
+For $i\notin A$ and $i,j\notin A$, set
+\begin{align*}
+ \Delta_i\cF(A)&=\cF(A\cup\{i\})-\cF(A),\\
+ \Delta_{ij}\cF(A)&=\cF(A\cup\{i,j\})-\cF(A\cup\{i\})
+ -\cF(A\cup\{j\})+\cF(A).
+\end{align*}
+Define the size-resolved counts
+\begin{align*}
+ c_i(k)&=\sum_{\substack{A\subseteq\cL\setminus\{i\}\\|A|=k}}
+ \Delta_i\cF(A),\\
+ p_{ij}(k)&=\#\{A:|A|=k,\ \Delta_{ij}\cF(A)=1\},\\
+ n_{ij}(k)&=\#\{A:|A|=k,\ \Delta_{ij}\cF(A)=-1\},\qquad
+ d_{ij}(k)=p_{ij}(k)-n_{ij}(k).
+\end{align*}
+No floating-point convention is involved.  The first-order indices are
+\[
+ \beta_i=2^{-15}\sum_{k=0}^{15}c_i(k),\qquad
+ \phi_i=\sum_{k=0}^{15}c_i(k)\frac{k!(15-k)!}{16!},
+ \tag{2}
+\]
+and the pair indices are
+\[
+ \beta_{ij}=2^{-14}\sum_{k=0}^{14}d_{ij}(k),\qquad
+ I_{ij}=\sum_{k=0}^{14}d_{ij}(k)\frac{k!(14-k)!}{15!}.
+ \tag{3}
+\]
+
+\section{First-order atlas}
+\begin{theorem}[Exact first-order values]
+The nonzero rows fall into four numerical classes shown in
+Table~\ref{tab:first}.  Six dummy rows vanish.  The raw swing total is 40704,
+$\sum_i\beta_i=159/128$, and $\sum_i\phi_i=1$.
+\end{theorem}
+
+\begin{table}[h]
+\centering
+\caption{First-order numerical classes.  Each tuple is (labels per class,
+raw swings, uniform Banzhaf, Shapley--Shubik).}
+\label{tab:first}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Labels & swings & $\beta_i$ & $\phi_i$\\
+\midrule
+$S_9$ & 30400 & $475/512$ & $271/360$\\
+$S_1,S_{16}$ & 2240 & $35/512$ & $61/1260$\\
+$S_7,S_{15}$ & 2112 & $33/512$ & $2/45$\\
+$S_3,S_4,S_8,S_{11},S_{12}$ & 320 & $5/512$ & $31/2520$\\
+$S_2,S_5,S_6,S_{10},S_{13},S_{14}$ & 0 & 0 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The complete coalition-size vectors, split after $k=7$, are
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}l p{0.35\textwidth} p{0.35\textwidth}@{}}
+\toprule
+row & $c_i(0),\ldots,c_i(7)$ & $c_i(8),\ldots,c_i(15)$\\
+\midrule
+$S_1,S_{16}$ & $0,0,8,59,196,390,521,494$ & $339,166,55,11,1,0,0,0$\\
+$S_7,S_{15}$ & $0,0,7,52,175,355,486,473$ & $332,165,55,11,1,0,0,0$\\
+$S_3,S_4,S_8,S_{11},S_{12}$ & $0,0,4,25,66,95,80,39$ & $10,1,0,0,0,0,0,0$\\
+$S_9$ & $0,0,25,224,940,2461,4504,6095$ & $6269,4950,2992,1364,455,105,15,1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Signed pair interaction atlas}
+\begin{theorem}[Ten exact numerical classes]
+The 120 unordered pairs occupy the ten classes in
+Table~\ref{tab:classes}.  The positive and negative columns give, per pair,
+$\sum_kp_{ij}(k)$ and $\sum_kn_{ij}(k)$.  The canonical receipt additionally
+retains all 15 cells of $p_{ij}$, $n_{ij}$, and $d_{ij}$ for every pair.
+\end{theorem}
+
+\begin{table}[h]
+\centering
+\caption{Complete numerical classification of the pair atlas.}
+\label{tab:classes}
+\small
+\begin{tabular}{@{}rllrrrr@{}}
+\toprule
+class & representative & pairs & positive & negative & $\beta_{ij}$ & $I_{ij}$\\
+\midrule
+K01 & $S_1,S_2$ & 75 & 0 & 0 & 0 & 0\\
+K02 & $S_1,S_3$ & 10 & 64 & 256 & $-3/256$ & 0\\
+K03 & $S_1,S_7$ & 4 & 64 & 2048 & $-31/256$ & $-5/84$\\
+K04 & $S_1,S_9$ & 2 & 2240 & 0 & $35/256$ & $31/168$\\
+K05 & $S_1,S_{16}$ & 1 & 64 & 2176 & $-33/256$ & $-11/168$\\
+K06 & $S_3,S_4$ & 10 & 0 & 320 & $-5/256$ & $-1/56$\\
+K07 & $S_3,S_7$ & 10 & 64 & 128 & $-1/256$ & $1/168$\\
+K08 & $S_3,S_9$ & 5 & 320 & 0 & $5/256$ & $5/84$\\
+K09 & $S_7,S_9$ & 2 & 2112 & 0 & $33/256$ & $1/6$\\
+K10 & $S_7,S_{15}$ & 1 & 0 & 2112 & $-33/256$ & $-13/168$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Positive Hessians record complementary label action at a losing coalition;
+negative Hessians record redundancy at a winning threshold.  Both signs can
+occur for one pair, so retaining only the signed sum would discard structure.
+For example, $S_1,S_7$ has 64 positive and 2048 negative coalitions, whereas
+$S_7,S_9$ has 2112 positive and no negative coalitions.
+
+\section{Faithful label and pair quotients}
+The lifted ambient object has order 11520, but an order-six factor fixes every
+label.  The quotient used here is the faithful 1920-element label image.  It
+has seven label orbits:
+\[
+\begin{gathered}
+\{S_1,S_{16}\},\ \{S_2\},\ \{S_3,S_4,S_{11},S_{12}\},\
+\{S_5,S_6,S_{10},S_{13},S_{14}\},\\
+\{S_7,S_{15}\},\ \{S_8\},\ \{S_9\}.
+\end{gathered}
+\]
+Thus $S_8$ and $S_3$ share first-order numbers without sharing a faithful
+orbit.  The action has 27 unordered-pair orbits.  Their size spectrum is
+\[
+ \{1:5,\ 2:7,\ 4:7,\ 5:3,\ 8:1,\ 10:3,\ 20:1\}.
+\]
+Table~\ref{tab:orbits} gives every orbit representative and its invariant
+interaction row.
+
+{\small
+\renewcommand{\arraystretch}{0.94}
+\begin{longtable}{@{}llrrrrr@{}}
+\caption{All 27 faithful unordered-pair orbits.}\label{tab:orbits}\\
+\toprule
+orbit & representative & size & positive & negative & $\beta_{ij}$ & $I_{ij}$\\
+\midrule
+\endfirsthead
+\toprule
+orbit & representative & size & positive & negative & $\beta_{ij}$ & $I_{ij}$\\
+\midrule
+\endhead
+P01 & $S_1,S_2$ & 2 & 0 & 0 & 0 & 0\\
+P02 & $S_1,S_3$ & 4 & 64 & 256 & $-3/256$ & 0\\
+P03 & $S_1,S_4$ & 4 & 64 & 256 & $-3/256$ & 0\\
+P04 & $S_1,S_5$ & 10 & 0 & 0 & 0 & 0\\
+P05 & $S_1,S_7$ & 4 & 64 & 2048 & $-31/256$ & $-5/84$\\
+P06 & $S_1,S_8$ & 2 & 64 & 256 & $-3/256$ & 0\\
+P07 & $S_1,S_9$ & 2 & 2240 & 0 & $35/256$ & $31/168$\\
+P08 & $S_1,S_{16}$ & 1 & 64 & 2176 & $-33/256$ & $-11/168$\\
+P09 & $S_2,S_3$ & 4 & 0 & 0 & 0 & 0\\
+P10 & $S_2,S_5$ & 5 & 0 & 0 & 0 & 0\\
+P11 & $S_2,S_7$ & 2 & 0 & 0 & 0 & 0\\
+P12 & $S_2,S_8$ & 1 & 0 & 0 & 0 & 0\\
+P13 & $S_2,S_9$ & 1 & 0 & 0 & 0 & 0\\
+P14 & $S_3,S_4$ & 4 & 0 & 320 & $-5/256$ & $-1/56$\\
+P15 & $S_3,S_5$ & 20 & 0 & 0 & 0 & 0\\
+P16 & $S_3,S_7$ & 8 & 64 & 128 & $-1/256$ & $1/168$\\
+P17 & $S_3,S_8$ & 4 & 0 & 320 & $-5/256$ & $-1/56$\\
+P18 & $S_3,S_9$ & 4 & 320 & 0 & $5/256$ & $5/84$\\
+P19 & $S_3,S_{11}$ & 2 & 0 & 320 & $-5/256$ & $-1/56$\\
+P20 & $S_5,S_6$ & 10 & 0 & 0 & 0 & 0\\
+P21 & $S_5,S_7$ & 10 & 0 & 0 & 0 & 0\\
+P22 & $S_5,S_8$ & 5 & 0 & 0 & 0 & 0\\
+P23 & $S_5,S_9$ & 5 & 0 & 0 & 0 & 0\\
+P24 & $S_7,S_8$ & 2 & 64 & 128 & $-1/256$ & $1/168$\\
+P25 & $S_7,S_9$ & 2 & 2112 & 0 & $33/256$ & $1/6$\\
+P26 & $S_7,S_{15}$ & 1 & 0 & 2112 & $-33/256$ & $-13/168$\\
+P27 & $S_8,S_9$ & 1 & 320 & 0 & $5/256$ & $5/84$\\
+\bottomrule
+\end{longtable}
+}
+
+\section{Identities, verification, and scope}
+\begin{proposition}[Endpoint identity]
+For every $i\in\cL$,
+\[
+ \sum_{j\ne i}I_{ij}
+ =\Delta_i\cF(\cL\setminus\{i\})-\Delta_i\cF(\varnothing).
+ \tag{4}
+\]
+Only $S_9$ has right-hand side one; the other fifteen right-hand sides vanish.
+Consequently $\sum_{i<j}I_{ij}=1/2$.  Direct enumeration also gives
+$\sum_{i<j}\beta_{ij}=-119/256$; no Banzhaf efficiency claim is made.
+\end{proposition}
+\begin{proof}
+Insert (3), sum over $j\ne i$, and group coalitions by size.  The weighted
+sum telescopes from the marginal of $i$ at the empty coalition to its marginal
+at the full complementary coalition.  Equation (1) evaluates the endpoints.
+\end{proof}
+
+The producer constructs the truth table by testing containment of the 25
+minimal triples.  A separate checker reconstructs (1) from the pivot and four
+blocks.  A third kernel expands the unique multilinear Boolean polynomial:
+it has degree ten and 475 terms, agrees on all 65536 Boolean inputs, and its
+symbolic discrete derivatives recover all 136 coalition-size rows.  Clean
+replay is byte-identical, and 27 semantic mutations are rejected.
+
+The distance-one autocorrelation from the hash-bound C82 receipt and the
+monotone boundary swings partition the sixteen outgoing cube edges from each
+true support.  Therefore
+\[
+ 40704+445696=16\cdot30400=486400.
+ \tag{5}
+\]
+
+The canonical evidence digest is
+\[
+\begin{gathered}
+\texttt{bedeb7a3d912330e5eadc72629ee24d7}\\[-2pt]
+\texttt{73648993f73f20f23eaf477028334d6e}.
+\end{gathered}
+\]
+The computation concerns a finite named Boolean predicate and its faithful
+permutation action.  It asserts no arithmetic/local data, Euler factor, root
+number, automorphy, full Burnside ring/table of marks, or Hilbert--Polya
+operator.
+
+\end{document}

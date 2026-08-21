@@ -32,7 +32,7 @@ T=16:1307674368000.
 
 They sum to `16! = 20922789888000`; the exact mean is
 `36499/3960 ≈ 9.21691919`.  The canonical evidence SHA-256 is
-`4777695a3082a2cca1ee82cdced208f0bddf56431285774a51e7563c4cfdfea0`.
+`033f42f0eea2518f7cb269dd465d82d4871a729d2b93679fcd9f3af38cf9ca28`.
 The complete prefreeze file binding is recorded in
 [C83_PREFREEZE_MANIFEST.json](C83_PREFREEZE_MANIFEST.json).
 Independent closure/pivotal enumeration, a SymPy
