@@ -73,6 +73,11 @@ henon_mu3_yukawa_mark_threshold_vector_poset_rigidity - C85 prefreeze complete -
 henon_mu3_yukawa_mark_effective_orbit_flip_chain - C86 prefreeze complete - The faithful order-1920 action strongly lumps the 16-cube to a 3024-state one-bit flip chain with exact reversible flows and invariant Walsh spectrum.
 henon_mu3_yukawa_mark_label_influence_interaction_atlas - C87 prefreeze complete - All 16 coalition-size first-order rows and 120 signed second-order pair rows are certified, with 7 label orbits, 27 pair orbits, and 10 numerical classes.
 henon_mu3_yukawa_mark_subgroup_first_passage_atlas - C88 prefreeze complete - Exact random-order first-passage laws for all 20 subgroup targets are certified with 102 pointwise subgroup-order relations.
+henon_mu3_yukawa_mark_first_passage_moments_cumulants - C89 prefreeze complete - Exact raw, factorial, central moments, and cumulants through order six for all 20 C88 first-passage targets.
+henon_mu3_yukawa_mark_first_passage_joint_coupling - C90 prefreeze complete - Exact joint survival arrays, mixed moments, and covariance for all 400 ordered target pairs.
+henon_mu3_yukawa_mark_first_passage_race_atlas - C91 prefreeze complete - Exact left-first, tie, and right-first race laws for all 108 incomparable target pairs.
+henon_mu3_yukawa_mark_first_passage_label_sensitivity - C92 prefreeze complete - Exact 20-by-16 first-passage pivotal-rank and label-sensitivity atlas with efficiency identities.
+henon_mu3_yukawa_mark_first_passage_orbit_quotient - C93 prefreeze complete - Effective order-1920 quotient of the first-passage laws with 16 target orbits, distinct from the ambient order-11520 lift.
 
 ## C79--C83 package index
 
@@ -98,6 +103,26 @@ scope firewall `NO_BAD_EULER_OR_ROOT_NUMBER`.
 | C86 | [package](henon_mu3_yukawa_mark_effective_orbit_flip_chain/README.md) · [paper](henon_mu3_yukawa_mark_effective_orbit_flip_chain/paper/main.pdf) | `7b3e2179590c3dc8662a59f1d79ffbb12f2a4a787438a6902d6c28b2842e70b8` | `eb223600feb511a52051317b8d80c51423df022a934ca87b6d0ad90b2a4c381f` | `544418e44bdf5a22a7a1f416fc4f6367aff6f9320c24986e9de626d0511e4423` |
 | C87 | [package](henon_mu3_yukawa_mark_label_influence_interaction_atlas/README.md) · [paper](henon_mu3_yukawa_mark_label_influence_interaction_atlas/paper/main.pdf) | `bedeb7a3d912330e5eadc72629ee24d773648993f73f20f23eaf477028334d6e` | `3f93dddf1421db6f0acb641aa95691ba1b7afcbd17315a79b2b33b3c27e97831` | `6b676d65b14aaf6f93f8d8d5e7226cbac45f1fb1a8379a0240dcbdf1c6cabd13` |
 | C88 | [package](henon_mu3_yukawa_mark_subgroup_first_passage_atlas/README.md) · [paper](henon_mu3_yukawa_mark_subgroup_first_passage_atlas/paper/main.pdf) | `4511d434f477784782f2af5106afff4c2cf3b48cd7eb7a62ed05b8f2f42afb1b` | `aab137987b45be54d401b5a021212412de25097b149a73ee65c8e0daaced56c5` | `d8341a25856ac4d26de0a6398c39c625f8475ab624a923e498fa81a4fca1125b` |
+
+## C89-C93 package index
+
+This five-paper round extends the C88 first-passage receipt.  C89, C91, and
+C92 are independently regenerated from frozen source receipts; C90 binds its
+C89 marginal checks explicitly, and C93 binds its C92 sensitivity transport
+check explicitly.  All packages use the scope firewall
+`NO_BAD_EULER_OR_ROOT_NUMBER` and make no arithmetic, Euler-factor,
+root-number, automorphy, full Burnside/table-of-marks, or Hilbert--Polya
+operator claim.
+
+| paper | package / paper | evidence | manifest | PDF |
+|---|---|---|---|---|
+| C89 | [package](henon_mu3_yukawa_mark_first_passage_moments_cumulants/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_moments_cumulants/paper/main.pdf) | `86a589505280721590674235626ddc21e37d57c891c726c7e6fbba98b2bd3af9` | `81daf852ce48765f5804b675133e77cb086ae2ee94f3973237ec3ce6d5c3b16e` | `5f7d98c1a62a8bb1ebe2ffaf88cb9331ea1f53d2fe89dc816ca3463f9e9c797b` |
+| C90 | [package](henon_mu3_yukawa_mark_first_passage_joint_coupling/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_joint_coupling/paper/main.pdf) | `c457a267b2621c71f7f5ad810ce9dec41aacfe25de3e843fab1398be75571978` | `4233c3b8e60a09729ce1befdb68e28566bde87042fef3059f8ff98cac6ebb737` | `d1dcd62d535729aa36c6c173421c7e5ff9789d6520c464da6be3dfc23ae55af3` |
+| C91 | [package](henon_mu3_yukawa_mark_first_passage_race_atlas/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_race_atlas/paper/main.pdf) | `36b0fffda585ea483ba5603101c83c361b85ca4ba9a49c878f1e366d3c13ff0f` | `542de9625733b94e9aaec3f430d048d8878f6fe1b556e2f0493b5c7a50a31495` | `468d2f66b2296bd96a05760cc6d70e25e850d94b89c9bafa17fc0040a162b26b` |
+| C92 | [package](henon_mu3_yukawa_mark_first_passage_label_sensitivity/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_label_sensitivity/paper/main.pdf) | `902d6b2fd688abc525d2fab187559bfc9904c7f3c97dc51af62050586d145812` | `ca0c6435c6a69c845ae663f25ff3fcc002c2b6ea119c14b8205da2c529594642` | `960f7c5869ed49a40f21cf22dd5eb2c1a14b652b982ce0ee69407454406b4a95` |
+| C93 | [package](henon_mu3_yukawa_mark_first_passage_orbit_quotient/README.md) · [paper](henon_mu3_yukawa_mark_first_passage_orbit_quotient/paper/main.pdf) | `4104f181b88d83666c9fcff814a7029a148c498e6393ad181c60fe5133adb9fe` | `a60e0855482e205b0174281c4a20b8f86d2eb9531a3f980cb76d92fcfb77c608` | `956588842f57ec297299fd12c4de52bd37d2d3d9b6a4eaeec9e10f81790bcc20` |
+
+- [C89--C93 batch plan](BATCH_PLAN_C89_C93.md)
 
 `P43`--`P57` are the unique registry aliases for the pressure/orbit lane.
 The `P43`--`P47` project bundles retain legacy internal `HCS-C43`--`HCS-C47`

@@ -1,0 +1,68 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Exact Moments and Cumulants of Twenty Frozen First-Passage Times}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+The C88 frozen sixteen-label model supplies exact first-passage distributions
+for twenty subgroup targets.  We compute their raw, falling-factorial, central,
+and cumulant moments through order six.  Every entry is a rational number.  A
+second representation reconstructs the laws from the complete C88 hit
+bitsets, while survival-tail summation independently recovers both ordinary
+and factorial moments.  Probability-generating functions, clean replay, and
+thirteen hostile mutations complete the finite audit.  The scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+
+\section{Frozen random variables}
+Let $L$ be the sixteen named labels and let $A_k$ be the first $k$ entries of
+a uniformly random permutation.  For each actual frozen subgroup $H$ define
+$T_H=\min\{k:H\leq\Phi(A_k)\}$.  C88 records the exact count $N_H(k)$ of
+permutations with $T_H=k$.
+
+\section{Moment theorem}
+\begin{theorem}
+For every one of the twenty targets and $0\leq r\leq6$, the certificate
+contains the exact values
+\[
+m_r=\mathbb E[T_H^r],\qquad f_r=\mathbb E[(T_H)_r],\qquad
+\mu_r=\mathbb E[(T_H-\mathbb ET_H)^r],
+\]
+and cumulants $\kappa_1,\ldots,\kappa_6$.  If
+$S_H(k)=\Pr(T_H>k)$, then
+\[
+m_r=\sum_{k=0}^{15}((k+1)^r-k^r)S_H(k),\quad
+f_r=r!\sum_{k=0}^{15}{k\choose r-1}S_H(k)\quad(r\geq1).
+\]
+\end{theorem}
+\begin{proof}
+The first two identities are the finite tail-sum formulas for a
+nonnegative integer-valued variable.  Raw moments determine central moments
+and cumulants through the standard binomial and moment-cumulant recursions.
+The producer evaluates the left sides from C88 permutation counts; the
+independent checker evaluates the same quantities from C88's support bitsets.
+\end{proof}
+
+\section{Inventory and audit}
+The canonical receipt has twenty rows and $17$ distribution cells per row,
+then $7$ raw, factorial, and central cells and $6$ cumulants per target.  The
+mean in every row equals its C88 expectation; the top target is
+$36499/3960$.  SymPy verifies normalized generating functions, derivatives at
+one, exact central moments, and both tail identities.  A clean subprocess
+replay preserves evidence digest
+\[
+\texttt{86a589505280721590674235626ddc21e37d57c891c726c7e6fbba98b2bd3af9}.
+\]
+
+No arithmetic/local-data, Euler-factor, root-number, automorphy,
+full Burnside/table-of-marks, or Hilbert--Polya operator claim is made.
+\end{document}

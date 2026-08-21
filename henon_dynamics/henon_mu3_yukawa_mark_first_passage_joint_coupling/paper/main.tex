@@ -1,0 +1,66 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Exact Joint Survival and Mixed Moments for Twenty First-Passage Targets}
+\author{Anonymous}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We compute the complete joint first-passage coupling induced by a uniform
+ordering of the sixteen frozen labels.  For every ordered pair of the twenty
+actual subgroup targets, all $17\times17$ joint survival counts and reduced
+probabilities are exact.  Nested support enumeration supplies the counts,
+while two-dimensional tail summation gives mixed moments through bidegree
+six and covariance.  Every marginal is recovered in 400 independent pair
+checks.  A separate bitset/zeta reconstruction, SymPy arithmetic, clean
+replay, and thirteen hostile mutations audit the receipt.  The scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{abstract}
+
+\section{Joint survival surface}
+Let $T_i$ and $T_j$ be C88 first-passage times and define
+\[
+J_{ij}(k,l)=\#\{\pi:T_i(\pi)>k,\ T_j(\pi)>l\},\qquad 0\leq k,l\leq16.
+\]
+For $k\leq l$, choose a non-hit $k$-support $A$ for $i$ and a non-hit
+$l$-support $B\supseteq A$ for $j$.  The pair has
+$k!(l-k)!(16-l)!$ completions to a full permutation.  The reverse order is
+obtained by transposition.
+
+\begin{theorem}
+The canonical C90 receipt contains every $J_{ij}(k,l)$ for all 400 ordered
+pairs.  With $\Delta_a(k)=(k+1)^a-k^a$ and $a,b\leq6$,
+\[
+ \mathbb E[T_i^aT_j^b]=\frac1{16!}\sum_{k,l=0}^{15}
+ \Delta_a(k)\Delta_b(l)J_{ij}(k,l).
+\]
+Orders $(a,0)$ and $(0,b)$ recover the exact C89 marginal raw moments, and
+the covariance is $\mathbb E[T_iT_j]-\mathbb E[T_i]\mathbb E[T_j]$.
+\end{theorem}
+\begin{proof}
+The first statement follows by partitioning permutations according to their
+two nested prefix supports.  The displayed formula is the finite
+two-variable tail-sum identity; the marginal and covariance formulas are
+immediate specializations.
+\end{proof}
+
+\section{Exact inventory and audit}
+There are $400\cdot289=115600$ joint survival cells, $400\cdot49$ mixed
+moment cells, and 400 covariance values.  The checker reconstructs all cells
+from C88 hit bitsets using an independent superset zeta transform.  Pair
+transpose symmetry, diagonal single-target survival recovery, monotone tail
+surfaces, and both marginal axes are checked exactly.  SymPy verifies every
+mixed moment and covariance.  Clean replay preserves
+\[
+\texttt{c457a267b2621c71f7f5ad810ce9dec41aacfe25de3e843fab1398be75571978}.
+\]
+
+No arithmetic/local-data, Euler-factor, root-number, automorphy,
+full Burnside/table-of-marks, or Hilbert--Polya operator claim is made.
+\end{document}
