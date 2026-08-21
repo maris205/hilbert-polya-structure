@@ -1,0 +1,21 @@
+**Verdict**
+
+NOT READY
+
+**CRITICAL**
+
+- None.
+
+**MAJOR**
+
+- Exact deep result-schema enforcement is still not fail-closed. [RESULT_SCHEMA.json](/tmp/p49_stage0_candidate/contracts/RESULT_SCHEMA.json:45) and [RESULT_SCHEMA.json](/tmp/p49_stage0_candidate/contracts/RESULT_SCHEMA.json:120) declare many semantically exact fields only as plain `"list"` values, including log-form fields, exponent-list fields, and integer-composition fields. Then [result_schema.py](/tmp/p49_stage0_candidate/code/auditors/result_schema.py:138), [result_schema.py](/tmp/p49_stage0_candidate/code/auditors/result_schema.py:145), and [result_schema.py](/tmp/p49_stage0_candidate/code/auditors/result_schema.py:165) merely check that those fields are lists, validate term dicts only if a dict happens to appear, and never require the list contents to be exact log-term records, exact exponent-term records, or exact integers. As written, malformed envelopes such as `component_dimension=["x"]`, `shifted_products=[true, null]`, or `prefix_exponents[0].component_root0=[0]` satisfy the current validator if both engines emit them. [type_audit.py](/tmp/p49_stage0_candidate/code/auditors/type_audit.py:147) only negative-controls cross-paper label, unknown key, and missing key, so this gap is not falsified; [run_integration.py](/tmp/p49_stage0_candidate/code/integration/run_integration.py:93) and [run_integration.py](/tmp/p49_stage0_candidate/code/integration/run_integration.py:94) rely on that same validator before install. Minimal repair: extend `RESULT_SCHEMA.json` with per-field element contracts for exact log-term lists, exact exponent-term lists, and exact integer lists; make `validate_science()` enforce those element types and shapes; and add malformed-element negative controls in `type_audit.py`.
+
+**MINOR**
+
+- Auxiliary audit-output identity is not fully bound during integration. [run_integration.py](/tmp/p49_stage0_candidate/code/integration/run_integration.py:38) accepts any canonical top-level `PASS` envelope, and [run_integration.py](/tmp/p49_stage0_candidate/code/integration/run_integration.py:118) only rechecks `status`, not the exact expected audit `schema` values or required payload keys for `static_audit`, `source_audit`, `independence_audit`, `type_audit`, and `mutation_audit`. Minimal repair: assert each audit artifact’s exact `schema` string and minimal payload shape before installation.
+
+**Recheck Summary**
+
+The earlier plan-gate receipt provenance problem appears fixed: the contract now binds both review and raw receipt by relative path and SHA in [PROJECT_CONTRACT.json](/tmp/p49_stage0_candidate/contracts/PROJECT_CONTRACT.json:26), the raw receipt is present and locked in [INPUT_LOCK.json](/tmp/p49_stage0_candidate/contracts/INPUT_LOCK.json:226), and [source_audit.py](/tmp/p49_stage0_candidate/code/auditors/source_audit.py:115) verifies the exact files and exact `PLAN_READY` verdict. The earlier mutation-through-real-engines, manifest/seal slug binding, builder hygiene, and auxiliary contract-file identity findings also appear fixed in this payload.
+
+I do not see a new static mismatch between the frozen C0-C7 theorem/proof package and the two science engines, and the finite checks remain correctly framed as falsification-only rather than proof. The remaining blocker is the still-permissive deep result-schema validator.

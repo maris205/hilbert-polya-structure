@@ -1,0 +1,101 @@
+\section{A four-state obstruction and exact verification}
+\label{sec:example}
+
+The smallest application needed here has one transient state and a
+two-phase complete core.
+
+\begin{corollary}[Strict failure of a cyclic-essential-SCC maximum]
+\label{cor:four-state}
+Let $d=2$, order the states as $(r,a,b_1,b_2)$, and take the adjacency matrix
+\begin{equation}
+ M=\begin{pmatrix}
+ 0&1&1&1\\
+ 0&0&1&1\\
+ 0&1&0&0\\
+ 0&1&0&0
+ \end{pmatrix}.
+ \label{eq:four-state-matrix}
+\end{equation}
+Call a strongly connected component \emph{cyclic essential} when it contains
+a directed cycle and supports an infinite core-rooted stratum.  The only
+cyclic essential strongly connected component is
+$\{a,b_1,b_2\}$, and
+\begin{equation}
+ \dimH T_{M|\{a,b_1,b_2\}}=\frac{\log2}{3},
+ \qquad
+ \dimH T_M=\frac{\log2}{2}.
+ \label{eq:four-state-values}
+\end{equation}
+Hence Hausdorff dimension for an arbitrary reducible Markov hom tree-shift
+cannot equal the maximum dimension of its cyclic essential strongly connected
+components.
+\end{corollary}
+
+\begin{proof}
+The core has phases $V_0=\{a\}$ and $V_1=\{b_1,b_2\}$, so
+$a=(1,2)$ and $c=(0,\log2)$.  It is strongly connected, while $r$ has no
+incoming edge and is strictly transient.  By \eqref{eq:p2-core} with $d=2$,
+the core dimension is
+\[
+ \frac{\log2}{2}-\frac{\log2}{6}=\frac{\log2}{3}.
+\]
+At a root labeled $r$, assign one child to each phase.  The composition
+$(1,1)$ is uniform, so \cref{thm:saturation}, or directly
+\eqref{eq:p2-optimizer}, gives dimension $\bar c=\log2/2$.  The universal
+mean bound shows that no feeder assignment can exceed this value, and
+\cref{thm:one-level} shows that it is the dimension of the full shift.
+\end{proof}
+
+The corollary refutes the cyclic-essential-SCC maximum formula; it does not provide a
+formula for all reducible matrices.  In particular, the proof uses the
+complete bipartite phase blocks and the absence of a return edge.  It also
+does not claim the analogous topological-entropy mechanism, which belongs to
+the scope of \citet{banEtAl2021,banEtAl2022}.
+
+\subsection{Role of exact computation}
+
+All universal statements above are proved analytically.  Exact computation
+serves three narrower roles: it checks circular indices and finite-prefix
+normalizations, compares independent implementations on bounded domains, and
+ensures that hypothesis-breaking controls are rejected.  Logarithmic
+expressions are stored as rational linear forms in logarithms of primes;
+equalities such as the four shifted products in
+\cref{ex:nondivisible} are decided by integer factorization rather than a
+floating-point tolerance.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Frozen verification lanes.  Full hashes and domains are reproduced
+in \cref{app:reproducibility}.  ``Assertions'' counts deterministic exact
+checks, not statistical trials.}
+\label{tab:verification}
+\begin{tabular}{@{}P{0.17\textwidth}P{0.25\textwidth}P{0.31\textwidth}P{0.19\textwidth}@{}}
+\toprule
+Lane & Exact volume & Independence and role & Frozen anchor \\
+\midrule
+Stage-2 package
+& $73{,}517$ assertions
+& Closed-form and direct level-recursion engines; six mutation controls
+& \texttt{bea7a189\allowbreak ea0b3472\allowbreak cc6b469e\allowbreak b36e6460\allowbreak b60c4bae\allowbreak 66265659\allowbreak b19af6e8\allowbreak 983f0da} \\
+\addlinespace
+Cross-audit
+& $56{,}710$ independent assertions
+& Independent formulas, recursion, optimizer replay, and six negative controls; active bytes before/after equal
+& \texttt{273f18e5\allowbreak 7b55f4fa\allowbreak c76cefc3\allowbreak f9544e8d\allowbreak 180508cc\allowbreak 2297bdd9\allowbreak e4a3c781\allowbreak edb082d6} \\
+\addlinespace
+Independent fraction audit
+& $1{,}740$ profiles, $127{,}500$ compositions, $37{,}440$ prefix-residue checks
+& Separate rational implementation; nine nested-grid checks; all six theorem gates re-audited
+& \texttt{59b8451b\allowbreak d0356e70\allowbreak d9529520\allowbreak 9d60b5d1\allowbreak 28882e51\allowbreak afb5774a\allowbreak e806770d\allowbreak ea450765} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The plotted data in \cref{fig:deep-convergence,fig:two-phase} are also
+deterministic.  Figure~\ref{fig:deep-convergence} copies selected exact
+optimizer records and balanced-composition certificates from the frozen
+sweep.  Figure~\ref{fig:two-phase} evaluates the displayed closed formulas.
+Their data-generation script verifies the source hash, and a separate checker
+recomputes all plotted identities.

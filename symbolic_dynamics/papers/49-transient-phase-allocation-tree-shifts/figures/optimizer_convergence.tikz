@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+\begin{groupplot}[
+  group style={group size=2 by 1,horizontal sep=1.35cm},
+  width=0.47\textwidth,
+  height=0.36\textwidth,
+  grid=major,
+  grid style={black!8},
+  tick label style={font=\scriptsize},
+  label style={font=\small},
+  legend style={font=\scriptsize,draw=none,fill=none},
+]
+\nextgroupplot[
+  xlabel={transient depth $L$},
+  ylabel={dimension},
+  xtick={1,2,3},
+  legend style={at={(0.02,0.98)},anchor=north west,font=\tiny,draw=none,fill=white,fill opacity=0.85,text opacity=1},
+]
+\addplot+[blue,thick,mark=*] table[x=level,y=dimension,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{0:0}] {../figures/data/fig2_exact.csv};
+\addlegendentry{$d=2,p=3,a=(1,2,3)$}
+\addplot+[orange!85!black,thick,mark=square*] table[x=level,y=dimension,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{1:1}] {../figures/data/fig2_exact.csv};
+\addlegendentry{$d=2,p=4,a=(1,2,3,1)$}
+\addplot+[green!50!black,thick,mark=triangle*] table[x=level,y=dimension,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{2:2}] {../figures/data/fig2_exact.csv};
+\addlegendentry{$d=3,p=2,a=(1,2)$}
+\addplot+[blue,densely dashed,forget plot] coordinates {(1,0.5972531564093517) (3,0.5972531564093517)};
+\addplot+[orange!85!black,densely dashed,forget plot] coordinates {(1,0.4479398673070138) (3,0.4479398673070138)};
+\addplot+[green!50!black,densely dashed,forget plot] coordinates {(1,0.3465735902799727) (3,0.3465735902799727)};
+
+\nextgroupplot[
+  xlabel={transient depth $L$},
+  ylabel={gap to $\bar c$},
+  ymode=log,
+  xtick={1,2,3,4,5,6,7,8},
+  legend style={at={(0.02,0.02)},anchor=south west,font=\tiny,draw=none,fill=white,fill opacity=0.85,text opacity=1},
+]
+\addplot+[blue,thick,mark=*] table[x=level,y=balanced_gap,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{0:0}] {../figures/data/fig2_balanced.csv};
+\addlegendentry{gap $(d,p)=(2,3)$}
+\addplot+[blue,densely dashed,mark=none] table[x=level,y=certificate,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{0:0}] {../figures/data/fig2_balanced.csv};
+\addlegendentry{bound $(2,3)$}
+\addplot+[orange!85!black,thick,mark=square*] table[x=level,y=balanced_gap,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{1:1}] {../figures/data/fig2_balanced.csv};
+\addlegendentry{gap $(d,p)=(3,4)$}
+\addplot+[orange!85!black,densely dashed,mark=none] table[x=level,y=certificate,col sep=comma,
+  restrict expr to domain={\thisrow{series}}{1:1}] {../figures/data/fig2_balanced.csv};
+\addlegendentry{bound $(3,4)$}
+\end{groupplot}
+\end{tikzpicture}

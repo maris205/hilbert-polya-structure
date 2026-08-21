@@ -1,0 +1,20 @@
+**Findings**
+
+**CRITICAL**
+- [run_integration.py](/tmp/p50_stage0_candidate/code/integration/run_integration.py:63) dynamically loads `code/auditors/result_schema.py` in the parent process at lines 63-70, after the preoutput static check has already run in [build_artifacts](/tmp/p50_stage0_candidate/code/integration/run_integration.py:78) at lines 80-84 and before installation proceeds at lines 107-109. Under a normal `python .../run_integration.py` invocation, that local import is bytecode-write-capable and can create `code/auditors/__pycache__/result_schema.*.pyc` outside `outputs/`. That violates the claimed single-write domain and can make the first run pass while poisoning replay, because [static_audit.py](/tmp/p50_stage0_candidate/code/auditors/static_audit.py:17) explicitly rejects caches at lines 17, 35-36, and 64-68. Minimal repair: remove parent-process local-module importing from the integration path, or at minimum hard-disable bytecode before any candidate-path import and keep schema validation in an isolated child process.
+
+**MAJOR**
+- [ARCHITECTURE.md](/tmp/p50_stage0_candidate/ARCHITECTURE.md:17) promises hostile-directory checking with isolated Python at lines 17-20, but [run_integration.py](/tmp/p50_stage0_candidate/code/integration/run_integration.py:6) does not enforce isolation for the orchestrator itself. Its top-level imports at lines 6-15 happen before any sanitization, and only spawned children are isolated in [isolated()](/tmp/p50_stage0_candidate/code/integration/run_integration.py:43) at lines 43-56. That means the entrypoint is not fail-closed against `PYTHONPATH` or module-shadowing attacks in the parent process, which is a direct miss on the hostile-integration gate. Minimal repair: make the entrypoint a bootstrap that re-execs `sys.executable -I -B` before doing real work, or fail closed unless already isolated and bytecode-disabled.
+
+**MINOR**
+- [type_audit.py](/tmp/p50_stage0_candidate/code/auditors/type_audit.py:39) uses the same local dynamic-import pattern at lines 39-46. Integration currently masks this by spawning it with `-B`, but standalone use of that auditor is still not side-effect-free. Minimal repair: apply the same no-local-import or no-bytecode rule there.
+- [type_audit.py](/tmp/p50_stage0_candidate/code/auditors/type_audit.py:131) only scans file contents for forbidden `SD-C...` tokens at lines 131-137. A bad Route-ID embedded in a filename or directory name would evade this gate. Minimal repair: scan relative path strings as well as file contents.
+- [PAPER_PLAN.md](/tmp/p50_stage0_candidate/inputs/preauthority/PAPER_PLAN.md:19) still says `AWAITING_GPT54_XHIGH_PLAN_REVIEW` at lines 19-20, while the locked receipt and gate are already `PLAN_READY` in [PROJECT_CONTRACT.json](/tmp/p50_stage0_candidate/contracts/PROJECT_CONTRACT.json:25) lines 25-33 and [PLAN_GATE.json](/tmp/p50_stage0_candidate/inputs/preauthority/PLAN_GATE.json:17) lines 17-23. The receipt path/SHA/verdict binding is present and correct elsewhere, so this is not blocking, but it is stale status text inside the copied plan. Minimal repair: annotate the plan header with the frozen `PLAN_READY` receipt instead of leaving only the pre-review status.
+
+The affine-divisibility math, same-base pointed factor scope, RESULT_SCHEMA recursion, and the two-engine separation looked consistent on the locked State-A payload itself. The blockers are in the orchestration layer, not in the theorem/proof package.
+
+**Verdict**
+
+`NOT READY`
+
+READY requires zero CRITICAL and zero MAJOR, and this payload has both.

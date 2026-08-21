@@ -1,0 +1,19 @@
+**CRITICAL**
+
+None.
+
+**MAJOR**
+
+None. The prior shared no-follow blocker is closed in both candidates: `code/integration/build_static_manifest.py` and `code/integration/seal_preoutput.py` now fail closed if `os.O_NOFOLLOW` is unavailable, then open the anchor with `os.O_WRONLY | os.O_NOFOLLOW` before the existing `fstat`/`ftruncate` regular-file and `0644` check.
+
+**MINOR**
+
+None. The prior standalone rerun-namespace gap is closed in both `code/auditors/static_audit.py` files: `verify_outputs()` now requires the exact `outputs/` child set `["state_A"]`, matching the integration-side sibling rejection.
+
+P49 verdict: `READY`. In the updated payload, the entrypoint and static verifier both keep `lstat` root/anchor checks before anchor reads, root/anchor/outputs type and mode gates are exact, manifest and seal remain correctly bound, reject envelopes stay canonical, isolated-entrypoint behavior is preserved, frozen preoutput state remains output-free, and rerun/idempotency hygiene stays fail-closed.
+
+P50 verdict: `READY` for the same reasons. I do not see a regression relative to the prior review.
+
+Combined terminal verdict: `READY`. Zero CRITICAL, zero MAJOR, zero MINOR in the updated payload. The internal frozen status fields consistently remaining `HOLD_FOR_FRESH_INDEPENDENT_PRE_RUN_REAUDIT` are status-consistent for the snapshot and do not conflict with the external review verdict.
+
+Residual gap: this recheck is based on the updated files and evidence you provided; I did not execute the disposable PASS/REJECT cases, per your instruction not to run tools.

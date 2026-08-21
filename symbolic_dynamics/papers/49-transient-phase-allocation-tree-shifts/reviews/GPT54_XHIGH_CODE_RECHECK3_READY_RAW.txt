@@ -1,0 +1,14 @@
+**CRITICAL**
+- None.
+
+**MAJOR**
+- None. The last `0C/1M/1m` blocker set looks resolved in this payload. Recursive result-element typing is now explicit in `RESULT_SCHEMA.json` and enforced by [`result_schema.py`](/tmp/p49_stage0_candidate/code/auditors/result_schema.py:105), with malformed-element falsifiers in [`type_audit.py`](/tmp/p49_stage0_candidate/code/auditors/type_audit.py:147). The raw `PLAN_READY` receipt is now path- and SHA-bound in [`PROJECT_CONTRACT.json`](/tmp/p49_stage0_candidate/contracts/PROJECT_CONTRACT.json:26), locked in [`INPUT_LOCK.json`](/tmp/p49_stage0_candidate/contracts/INPUT_LOCK.json:226), and checked fail-closed in [`source_audit.py`](/tmp/p49_stage0_candidate/code/auditors/source_audit.py:115). Integration also now binds each audit artifact by exact schema and payload-key set in [`run_integration.py`](/tmp/p49_stage0_candidate/code/integration/run_integration.py:85).
+
+**MINOR**
+- [`run_integration.py`](/tmp/p49_stage0_candidate/code/integration/run_integration.py:184) verifies only the installed file set, and [`run_integration.py`](/tmp/p49_stage0_candidate/code/integration/run_integration.py:188) only mode-checks the rest of the `outputs/state_A` tree. An unexpected empty directory under `outputs/state_A/` would therefore survive rerun verification, so the replay is not an exact tree-shape check. Minimal repair: derive the expected directory set from `artifacts` parent paths and reject any extra directory during `verify_installed()`.
+- [`type_audit.py`](/tmp/p49_stage0_candidate/code/auditors/type_audit.py:130) restricts the Route-ID grep to `ARCHITECTURE.md`, `STATUS.txt`, `code/`, and `contracts/`. That omits candidate-authored root `reviews/` files and all copied `inputs/`, so the unassigned-route audit is not tree-wide. Minimal repair: scan the full candidate tree excluding `outputs/`, or at least include `reviews/` and `inputs/`, before asserting no `SD-C...` token exists.
+
+**Verdict**
+READY.
+
+I did not find a remaining static blocker on frozen theorem/proof scope fidelity, exact recursive science-envelope typing, two-engine separation, falsification-only framing, byte-locked `PLAN_READY` receipt handling, real-engine mutation execution, hostile deterministic integration, manifest/seal slug binding, auxiliary contract identity, or unassigned Route state that rises to CRITICAL or MAJOR.

@@ -1,0 +1,140 @@
+\section{The pointed factor poset}
+\label{sec:poset}
+
+Once \cref{thm:factor-collapse} has removed all local context, factor
+targets are controlled by kernels of finite letter maps.  Cyclic adjacency
+is the only obstruction to remaining inside the frozen directive family.
+
+For a partition $\mathcal P$ of $\calA$, let
+$\pi_{\mathcal P}:\calA\to\calA/\mathcal P$ send a letter to its block and
+write
+\begin{equation}
+  u^{\mathcal P}_n=\pi_{\mathcal P}(u_n).
+  \label{eq:quotient-directive}
+\end{equation}
+When this directive has a shorter period than $u$, it is always normalized
+to its least period.  Write
+$T_{\mathcal P}=T_{p,u^{\mathcal P}}$ for this canonical quotient target;
+its alphabet is literally the block set $\calA/\mathcal P$.
+
+\begin{theorem}[Admissible partitions classify factor targets]
+\label{thm:partition-poset}
+  Fix $T_{p,u}$.  The following sets are in bijection:
+  \begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+    \item pointed-conjugacy classes of same-base factor targets inside the
+      affine family;
+    \item partitions of $\calA$ whose blocks are independent in $G_u$.
+  \end{enumerate}
+  At the representative level, there is a factor
+  $T_{\mathcal P}\to T_{\mathcal Q}$ exactly when $\mathcal P$ refines
+  $\mathcal Q$, and this factor is unique.  Thus the canonical quotient
+  targets form a thin category.  Passing to pointed-conjugacy classes
+  identifies arbitrary relabelings with these canonical representatives
+  and gives the admissible-partition refinement poset.
+\end{theorem}
+
+\begin{proof}
+  By \cref{thm:factor-collapse}, a factor is a surjective letter map
+  $\lambda:\calA\to\calB$ satisfying $v=\lambda\circ u$.  Its kernel
+  partition $\mathcal P$ has the property
+  \begin{equation}
+    \lambda(u_i)\neq\lambda(u_{i+1})
+    \quad\Longleftrightarrow\quad
+    \text{no edge $\{u_i,u_{i+1}\}$ lies in one $\mathcal P$-block}.
+    \label{eq:kernel-admissible}
+  \end{equation}
+  Thus the image directive has unequal cyclic neighbors exactly when every
+  block of $\mathcal P$ is independent in $G_u$.  Exact source support
+  implies that every block occurs in $u^{\mathcal P}$.  Neighbor
+  inequality excludes period one, and reduction to the least period
+  preserves exact support and neighbor inequality.  Hence every factor
+  kernel is admissible and gives a frozen in-family target.
+
+  Conversely, if $\mathcal P$ is admissible, the block map
+  $\pi_{\mathcal P}$ is surjective and \cref{eq:quotient-directive} is a
+  frozen directive after least-period reduction.  The converse direction
+  of \cref{thm:factor-collapse} supplies the pointed factor.
+
+  It remains to identify target classes rather than labeled block maps.
+  Two factor maps with the same kernel induce a well-defined bijection
+  between their image alphabets, sending the image of each source letter
+  under one map to its image under the other.  Their image directives
+  therefore differ by a bijective relabeling, so
+  \cref{cor:pointed-conjugacy} makes the targets pointedly conjugate.
+  Conversely, a pointed conjugacy between two targets is a bijective
+  relabeling.  Equality at every directive index then says that two source
+  letters have the same image under the first factor exactly when they have
+  the same image under the second.  Their kernels are equal.
+
+  Finally, a factor from the canonical $\mathcal P$-quotient to the
+  canonical $\mathcal Q$-quotient is, by
+  \cref{thm:factor-collapse}, forced on every source letter to satisfy
+  $\mu([a]_{\mathcal P})=[a]_{\mathcal Q}$.  This formula is well defined
+  exactly when every $\mathcal P$-block lies in one $\mathcal Q$-block,
+  which is precisely refinement; in that case it also constructs the
+  factor.  Exact support makes this block map unique.  Hence the canonical
+  targets form the asserted thin category.  The preceding kernel argument
+  then gives the asserted refinement poset only after passage to
+  pointed-conjugacy classes.
+\end{proof}
+
+The word \emph{poset} is exact here.  We make no general lattice claim:
+the meet or join of two set partitions can leave the admissible subposet.
+
+\begin{corollary}[Graphical enumeration]
+\label{cor:graph-counts}
+  Let $S_{G_u}(k)$ denote the number of partitions of $V(G_u)$ into
+  exactly $k$ nonempty independent blocks.  Then $S_{G_u}(k)$ is the
+  number of $k$-letter target classes modulo pointed conjugacy.  The
+  minimum target-alphabet size is $\chi(G_u)$, and a binary target exists
+  exactly when $G_u$ is bipartite.  Moreover,
+  \begin{equation}
+    P_{G_u}(z)=\sum_k S_{G_u}(k)\fall{z}{k},
+    \qquad
+    \fall{z}{k}=z(z-1)\cdots(z-k+1).
+    \label{eq:falling-expansion}
+  \end{equation}
+\end{corollary}
+
+\begin{proof}
+  The first assertion is \cref{thm:partition-poset}.  The smallest number
+  of independent blocks in a vertex partition is the chromatic number.
+  The graph has at least one edge by cyclic neighbor inequality, so
+  $\chi(G_u)\geq2$; consequently, a two-block partition exists exactly when
+  the graph is bipartite.
+
+  To count proper colorings by $z$ labeled colors, first choose the
+  partition into $k$ nonempty color classes and then injectively assign
+  $k$ color labels to the blocks.  There are $\fall{z}{k}$ such assignments.
+  Summing over $k$ proves \cref{eq:falling-expansion}.
+\end{proof}
+
+\begin{example}[The four-cycle]
+\label{ex:c4}
+  For $u=(0,1,2,3)^{\Z}$, the graph $G_u$ is $C_4$.  Its admissible
+  partitions are
+  \begin{align*}
+    &\{0\}\mid\{1\}\mid\{2\}\mid\{3\},\\
+    &\{0,2\}\mid\{1\}\mid\{3\},
+      \qquad
+      \{1,3\}\mid\{0\}\mid\{2\},\\
+    &\{0,2\}\mid\{1,3\}.
+  \end{align*}
+  Hence $S_{C_4}(2)=1$, $S_{C_4}(3)=2$, and $S_{C_4}(4)=1$, so
+  \[
+    P_{C_4}(z)=\fall{z}{2}+2\fall{z}{3}+\fall{z}{4}.
+  \]
+\end{example}
+
+\begin{figure}[t]
+  \centering
+  \resizebox{.88\textwidth}{!}{\input{../figures/fig3_c4_poset.tex}}
+  \caption{For the directive $(0,1,2,3)$, the adjacency graph is the
+  four-cycle.  Its admissible partitions are exactly the four displayed
+  independent-set partitions; they represent pointed-conjugacy classes of
+  same-base targets inside the frozen affine family.  Upward edges are
+  unique pointed factor maps and correspond to refinement from fine to
+  coarse.  This example is a diamond; the general classification is only a
+  refinement poset, with no lattice assertion.}
+  \label{fig:c4-poset}
+\end{figure}

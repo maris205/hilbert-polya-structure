@@ -1,0 +1,25 @@
+**Verdict**
+
+NOT READY
+
+**CRITICAL**
+
+- None.
+
+**MAJOR**
+
+- Plan-gate receipt provenance is still not fail-closed. [PROJECT_CONTRACT.json](/tmp/p49_stage0_candidate/contracts/PROJECT_CONTRACT.json:26) lines 26-33 carry only `plan_review_receipt_sha256`, not a receipt path; [INPUT_LOCK.json](/tmp/p49_stage0_candidate/contracts/INPUT_LOCK.json:207) lines 207-223 lock the review summary files but no raw receipt artifact; and [source_audit.py](/tmp/p49_stage0_candidate/code/auditors/source_audit.py:77) lines 77-103 only verify that the digest string appears in prose in [PRE_STAGE0_HANDOFF.md](/tmp/p49_stage0_candidate/inputs/preauthority/PRE_STAGE0_HANDOFF.md:37) lines 37-38 and [PAPER_PLAN.md](/tmp/p49_stage0_candidate/inputs/preauthority/PAPER_PLAN.md:280) lines 280-282. That does not prove the claimed raw receipt exists, is locked, or is the source of the `PLAN_READY` gate. Minimal repair: add the actual raw receipt file as a locked input, record its relative path and SHA-256 in `plan_gate`, and have `source_audit.py` hash that exact file and bind it to the reviewed `PLAN_READY` artifact.
+
+- The exact `p49` science-schema string is now bound, but the declared result-schema boundaries are still not enforced on the science outputs. [RESULT_SCHEMA.json](/tmp/p49_stage0_candidate/contracts/RESULT_SCHEMA.json:1) lines 1-36 define `allowed_scalar_types`, `case_keys`, `exact_log_form_term_keys`, and `unknown_or_missing_key_rule: "reject"`. [type_audit.py](/tmp/p49_stage0_candidate/code/auditors/type_audit.py:59) lines 59-75 and 91 only check the `science_schema` string, and [run_integration.py](/tmp/p49_stage0_candidate/code/integration/run_integration.py:73) lines 73-80 only check top-level schema equality plus `project_slug` and `evidence_class`. Two synchronized engines could therefore emit the same structurally out-of-contract payload and still install. Minimal repair: add one exact validator against `RESULT_SCHEMA.json` and run it in both `type_audit.py` and `run_integration.py` on the actual production and independent science envelopes before comparison/installation.
+
+**MINOR**
+
+- Auxiliary contract identity/schema bindings are still permissive. [type_audit.py](/tmp/p49_stage0_candidate/code/auditors/type_audit.py:59) loads `STATE_A_CASES.json`, `ROUTE_EXPECTATION.json`, and `RESULT_SCHEMA.json`, but it never asserts `cases["schema"]`, `route["schema"]`, `route["paper_number"]`, `route["slug"]`, or `route["expected_authority_relative_path"]` against the project contract. Minimal repair: bind those fields explicitly so paper identity is fail-closed across all contract files.
+
+- Plan review parsing is weaker than it should be even aside from the missing receipt file. [source_audit.py](/tmp/p49_stage0_candidate/code/auditors/source_audit.py:94) lines 94-98 accept any `plan_review_path` string and only require that the file text contains the substring `PLAN_READY`. Minimal repair: reject absolute/escaping review paths and require an exact verdict token/format instead of substring search.
+
+**Recheck Summary**
+
+The prior findings on exact `p49` science-schema string binding in type/integration, mutation coverage through both real science engines, manifest/seal `project_slug` binding, and static builder/verifier forbidden-artifact parity appear fixed in the current payload.
+
+I did not find a new static mismatch between the frozen C0-C7 theorem/proof scope and the two science engines, and the finite checks are still framed as falsification-only rather than proof. The remaining blockers are the plan-gate receipt provenance gap and the still-unenforced deeper result-schema contract.

@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small},
+  state/.style={circle,draw=black!70,thick,minimum size=7mm,inner sep=0pt},
+  phase/.style={rounded corners,draw=black!60,thick,minimum width=16mm,minimum height=8mm},
+  note/.style={align=center,font=\footnotesize}
+]
+  \node[state,fill=black!8] (r) at (0,0) {$r$};
+  \node[note,above=2mm of r] {one transient\\root};
+
+  \node[state,fill=blue!16] (c0) at (-3.0,-1.6) {$V_0$};
+  \node[state,fill=orange!22] (c1) at (-1.0,-1.6) {$V_1$};
+  \node[state,fill=gray!12] (cmid) at (1.0,-1.6) {$\cdots$};
+  \node[state,fill=green!18] (clast) at (3.0,-1.6) {$V_{p-1}$};
+  \foreach \child in {c0,c1,cmid,clast} {
+    \draw[->,thick] (r) -- (\child);
+  }
+  \node[note,left=2mm of c0] {$m_0$ children};
+  \node[note,right=2mm of clast] {$m_{p-1}$ children};
+  \node[note] at (0,-2.35) {$m_s\geq0$, \quad $\sum_s m_s=d$};
+
+  \node[phase,fill=blue!16] (v0) at (-3.0,-3.45) {$V_0$};
+  \node[phase,fill=orange!22] (v1) at (-1.0,-3.45) {$V_1$};
+  \node[phase,fill=gray!12] (vmid) at (1.0,-3.45) {$\cdots$};
+  \node[phase,fill=green!18] (vlast) at (3.0,-3.45) {$V_{p-1}$};
+  \draw[->,thick] (v0) to[bend left=12] node[above,font=\scriptsize] {complete} (v1);
+  \draw[->,thick,dashed] (v1) -- (vmid);
+  \draw[->,thick,dashed] (vmid) -- (vlast);
+  \draw[->,thick] (vlast) to[bend left=20] (v0);
+  \node[note] at (0,-2.92) {complete cyclic core: $V_j\longrightarrow V_{j+1}$};
+
+  \draw[decorate,decoration={brace,amplitude=5pt},thick]
+    (-3.55,-1.15) -- (3.55,-1.15)
+    node[midway,above=7pt,note] {ordered children, grouped only for counting};
+
+  \node[draw=black!55,rounded corners,fill=white,align=center,text width=10.8cm]
+    at (0,-5.35) {$\displaystyle
+      \dim_H X_r
+      =\max_{\substack{m_s\in\mathbb Z_{\geq0}\\\sum_s m_s=d}}
+       \min_j\frac1d\sum_s m_s H_{s+j}(c)$\\[-1mm]
+      \footnotesize The finite feeder chooses the integer phase allocation;
+      the infinite core supplies the residue-dependent weights.};
+\end{tikzpicture}
