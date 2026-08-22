@@ -1,6 +1,6 @@
 # Adaptive batch HCS-C64 through HCS-C68
 
-Status: **C64--C68 prefreeze complete**.
+Status: **round complete; five packages prefreeze-verified and release-ready**.
 
 This is a five-paper adaptive round.  Each successor is selected only after
 the predecessor's exact theorem or certified obstruction is available.  A
@@ -99,6 +99,11 @@ Project: `henon_mu3_yukawa_mark_defect_duality/`.
 The complete evidence and manifest are closed under independent exact,
 SymPy, replay, and 17/17 hostile-mutation gates.
 
+The underlying quotient, congruence-lattice, and Smith computations are
+standard finite-integral procedures.  The bounded contribution is the
+source-specific embedding and row-side annihilator for this frozen C65/C66
+instance; no general extension theorem or priority claim is made.
+
 ## C68 implementation gate
 
 `PREFREEZE_COMPLETE`: C68 fresh pilot, independent replay, scope audit, and
@@ -108,3 +113,25 @@ paper compilation are complete; release closure remains a git operation.
 released theorem or certified obstruction supplies the next concrete target.
 
 The scope firewall for the round is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+## Package index and release ledger
+
+Each package supplies a research question, source audit, theorem package,
+source-bound producer, independent checker, clean replay, hostile mutation
+audit, compiled manuscript, and scoped file-hash manifest. The release ledger
+below records the canonical receipt hashes; the manifests intentionally cover
+the executable/evidence/paper core rather than every narrative note.
+
+| paper | package | evidence SHA-256 | manifest SHA-256 | PDF SHA-256 |
+|---|---|---|---|---|
+| C64 | `henon_mu3_yukawa_burnside_marks` | `7c4673e46f2b97ac03d4e331c762a47286058c36ea243fb20fc39543dd699212` | `eb1d6a55cb81ccfc9b3041879cb913367a514f5c4cba50872d8b286c0ac095b6` | `2228e29506b39f2fb0aaa45ddb38b5739caef786ba5695ca1091cffdc52c523d` |
+| C65 | `henon_mu3_yukawa_mark_defect` | `ebdd80fd2292225b98248aacd6b21bafab2987bdccb801c22c10adef7e7b4e4c` | `f8709e490d0c077c6498ce96617d6711b58790d245e93e20124aa43b3dadc913` | `2bf84d08510f8de277ea4e1897efd886084fed9aceefcb9528824a8f07088362` |
+| C66 | `henon_mu3_yukawa_mark_cokernel` | `ce74edeec04b245637e5b12165a7fcdeb42475b0dead7373b1bcf3e37f22beb1` | `aa9a750fd87cfd09948167e0af93145823dff7d34c7bdb1ed13d1a8df493c626` | `df9c1ea9cac5c22d47b445145c353ef659629dff285bcddd13824d495119a1cb` |
+| C67 | `henon_mu3_yukawa_mark_coordinate_profile` | `357cd372b2341a36e483adcf771512d08d5207f71796550b6759c25813d3badd` | `473cf1172f13bb3b61eb78c92de4026e552dd751549c4131cff904d4845a9cb8` | `cb37a923fe9dd0364a9b752bc6523621d86b3f16829f0805382cb188fb19d708` |
+| C68 | `henon_mu3_yukawa_mark_defect_duality` | `6d99afb5ec5e291f068f603060c79c72114e3fd2c26e0c9c21fdd5281add9ab9` | `aab32e57216e091c2eeedc2486a6651d83bfac713ad6f290d9c1bb9b45a947bc` | `0d466021cb0fd3f764afb3f9322ed5079636a4d1410c41d739cb1246709ab072` |
+
+All five rows passed producer/checker, replay, and hostile-mutation gates;
+the independent symbolic cross-checks passed for C65--C68, and the two-build
+PDF checks are byte-identical. The release operation is limited to this
+batch plan, the five package trees, and the index entry in
+`henon_dynamics/README.md`.

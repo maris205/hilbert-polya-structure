@@ -34,4 +34,12 @@ Entry points:
 - `code/c67_rational_crosscheck.py`: independent SymPy check;
 - `code/c67_mutation_test.py`: hostile mutations;
 - `results/c67_coordinate_profile_evidence.json`: canonical evidence;
+- `PILOT_REPORT.md`, `results/RESULTS.md`, and `results/HOSTILE_AUDIT.md`:
+  human-readable pilot and hostile-audit receipts;
 - `paper/main.pdf`: compiled manuscript.
+
+The prefreeze manifest is a scoped ledger for the canonical executable,
+evidence, and paper artifacts. The three narrative receipts above are
+deliberately auxiliary and do not alter the frozen C67 authority bytes used by
+C68; their numerical statements are reproduced by the checked evidence and
+`results/TEST_REPORT.md`.

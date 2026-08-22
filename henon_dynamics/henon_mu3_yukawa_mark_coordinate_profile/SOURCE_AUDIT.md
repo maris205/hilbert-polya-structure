@@ -14,3 +14,11 @@ The C64 matrix digest is
 Schema IDs, prefreeze statuses, matrix shape, determinant, and the literal
 `NO_BAD_EULER_OR_ROOT_NUMBER` are checked before inversion. C66 is used only
 for its already certified upstream SNF compatibility.
+
+## Bounded novelty audit
+
+Rational inversion and least-integral-multiplier calculations are standard.
+The bounded contribution is the exact coordinate and transpose profiles for
+the named frozen map, including the denominator and support counts. This is
+an instance-specific coordinate result; no canonical Smith basis, general
+theorem, or priority claim is made.

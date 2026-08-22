@@ -13,3 +13,10 @@ The C64 matrix hash is
 Schema IDs, prefreeze statuses, and `NO_BAD_EULER_OR_ROOT_NUMBER` are checked
 before any Smith computation.  C65 is used only for its already certified
 compatibility values `(2,8)`, `(2,2,8)`, and relative `Z/2`.
+
+## Bounded novelty audit
+
+Smith normal form and primary decomposition are standard procedures. The
+bounded contribution is the exact invariant-factor computation for this frozen
+16-by-16 mark embedding, together with its source-bound compatibility check
+against C65. No general classification or priority claim is made.

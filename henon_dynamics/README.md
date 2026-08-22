@@ -84,6 +84,24 @@ henon_mu3_yukawa_mark_first_passage_coverage_order_statistics - C96 prefreeze co
 henon_mu3_yukawa_mark_first_passage_pair_orbit_quotient - C97 prefreeze complete - Faithful order-1920 quotient of all 400 ordered target-pair C90 laws into 272 pair orbits.
 henon_mu3_yukawa_mark_first_passage_conditional_kernel - C98 prefreeze complete - Exact forward/reverse conditional kernels for all 400 target pairs with Bayes and total-moment identities.
 
+## C64-C68 package index
+
+This finite-group/mark-map round uses the scope firewall
+`NO_BAD_EULER_OR_ROOT_NUMBER`. The manifests are scoped ledgers for the
+canonical executable, evidence, and paper artifacts; each package also keeps
+its source audit, theorem package, replay, hostile-mutation report, and
+compiled manuscript.
+
+| paper | package / paper | evidence | manifest | PDF |
+|---|---|---|---|---|
+| C64 | [package](henon_mu3_yukawa_burnside_marks/README.md) · [paper](henon_mu3_yukawa_burnside_marks/paper/main.pdf) | `7c4673e46f2b97ac03d4e331c762a47286058c36ea243fb20fc39543dd699212` | `eb1d6a55cb81ccfc9b3041879cb913367a514f5c4cba50872d8b286c0ac095b6` | `2228e29506b39f2fb0aaa45ddb38b5739caef786ba5695ca1091cffdc52c523d` |
+| C65 | [package](henon_mu3_yukawa_mark_defect/README.md) · [paper](henon_mu3_yukawa_mark_defect/paper/main.pdf) | `ebdd80fd2292225b98248aacd6b21bafab2987bdccb801c22c10adef7e7b4e4c` | `f8709e490d0c077c6498ce96617d6711b58790d245e93e20124aa43b3dadc913` | `2bf84d08510f8de277ea4e1897efd886084fed9aceefcb9528824a8f07088362` |
+| C66 | [package](henon_mu3_yukawa_mark_cokernel/README.md) · [paper](henon_mu3_yukawa_mark_cokernel/paper/main.pdf) | `ce74edeec04b245637e5b12165a7fcdeb42475b0dead7373b1bcf3e37f22beb1` | `aa9a750fd87cfd09948167e0af93145823dff7d34c7bdb1ed13d1a8df493c626` | `df9c1ea9cac5c22d47b445145c353ef659629dff285bcddd13824d495119a1cb` |
+| C67 | [package](henon_mu3_yukawa_mark_coordinate_profile/README.md) · [paper](henon_mu3_yukawa_mark_coordinate_profile/paper/main.pdf) | `357cd372b2341a36e483adcf771512d08d5207f71796550b6759c25813d3badd` | `473cf1172f13bb3b61eb78c92de4026e552dd751549c4131cff904d4845a9cb8` | `cb37a923fe9dd0364a9b752bc6523621d86b3f16829f0805382cb188fb19d708` |
+| C68 | [package](henon_mu3_yukawa_mark_defect_duality/README.md) · [paper](henon_mu3_yukawa_mark_defect_duality/paper/main.pdf) | `6d99afb5ec5e291f068f603060c79c72114e3fd2c26e0c9c21fdd5281add9ab9` | `aab32e57216e091c2eeedc2486a6651d83bfac713ad6f290d9c1bb9b45a947bc` | `0d466021cb0fd3f764afb3f9322ed5079636a4d1410c41d739cb1246709ab072` |
+
+- [C64--C68 batch plan](BATCH_PLAN_C64_C68.md)
+
 ## C79--C83 package index
 
 Each package below contains its research question, source audit, theorem
