@@ -2055,3 +2055,22 @@ their exact evidence boundary and are not promoted to Route B.
 See the [C104--C108 batch plan](BATCH_PLAN_C104_C108.md) and
 [batch review](BATCH_REVIEW_C104_C108.md) for the exact artifact ledger,
 uniform audit, and current Route-A tuple.
+
+## Route-A dynamics-variant round C109--C113
+
+This round broadens the A-route search across five distinct Hénon subtypes:
+dissipative, periodically forced Floquet, three-site variational/symplectic,
+piecewise-affine border-collision, and third-order memory dynamics.  Each
+entry is a complete finite paper package with exact evidence, independent
+validation, hostile mutation tests, and a compiled PDF.  The finite prefixes
+are reported with their evidence boundaries and are not promoted to Route B.
+
+- [C109 dissipative Hénon](henon_dissipative_route_a/README.md) · [paper PDF](henon_dissipative_route_a/paper/main.pdf)
+- [C110 non-autonomous Floquet Hénon](henon_nonautonomous_floquet_route_a/README.md) · [paper PDF](henon_nonautonomous_floquet_route_a/paper/main.pdf)
+- [C111 three-site variational ring](henon_three_site_variational_lattice/README.md) · [paper PDF](henon_three_site_variational_lattice/paper/main.pdf)
+- [C112 piecewise-affine border collision](henon_piecewise_affine_border_collision_route_a/README.md) · [paper PDF](henon_piecewise_affine_border_collision_route_a/paper/main.pdf)
+- [C113 third-order memory Hénon](henon_third_order_memory_route_a/README.md) · [paper PDF](henon_third_order_memory_route_a/paper/main.pdf)
+
+See the [C109--C113 batch plan](BATCH_PLAN_C109_C113.md) and
+[batch review](BATCH_REVIEW_C109_C113.md) for the full hash ledger, uniform
+audit, and the unchanged global Route-A tuple.

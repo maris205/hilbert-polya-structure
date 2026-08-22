@@ -1,0 +1,84 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C112BorderHenon20260822}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{proposition}{Proposition}
+\title{A Piecewise-Affine Border-Collision H\'enon Pilot}
+\author{Anonymous Route-A report}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We freeze a two-branch piecewise-affine H\'enon map with a border at $x=0$.
+Exact affine returns verify every binary itinerary through period eight and
+give 71 primitive necklaces.  A separately frozen branch weight produces an
+exact finite weighted transfer determinant.  The construction is a switching
+pilot only: it does not assert a global Markov partition or an analytic
+Fredholm operator.
+\end{abstract}
+
+\section{Frozen switching map}
+For $s\in\{0,1\}$ let
+\[
+ P_s(x,y)=(-5x+c_s-y,x),\qquad (c_0,c_1)=(-2,2),
+\]
+with domains $x<0$ and $x>0$.  The border $x=0$ is excluded rather than
+assigned after counting.  Both branch derivatives equal
+\[
+ B=\begin{pmatrix}-5&-1\\1&0\end{pmatrix},\qquad\det B=1.
+\]
+The affine translation is retained in the orbit check, so the calculation is
+not an averaged transition matrix.
+
+\section{Exact finite ledger}
+For each binary word $w$ of length at most eight we solve
+$(I-B^n)q=t_w$ over the rationals and iterate the resulting point.  Every
+word has a unique non-border point with the declared itinerary.  Cyclic
+canonicalization gives the primitive counts
+\[
+ (2,1,2,3,6,9,18,30),
+\]
+for periods one through eight, totaling 71.  The identity
+
+\[
+ t_n=\sum_{d\mid n}d p_d
+\]
+is therefore a finite exact necklace relation.
+
+To expose branch chronology without fitting a parameter, freeze
+$\rho_0=1/2$ and $\rho_1=2/3$ and put the destination-weighted block $\rho_jB$
+on every allowed transition $i\to j$.  The resulting four-dimensional
+screening matrix $A$ has
+\[
+ \det(I-zA)=\frac{49z^2+210z+36}{36},
+ \qquad \det(I-zA_{\rm unweighted})=1+10z+4z^2.
+\]
+The weighted trace prefix begins
+\[
+ -\frac{35}{6},\quad \frac{1127}{36},\quad -\frac{18865}{108},\quad
+ \frac{1265327}{1296}.
+\]
+
+\begin{proposition}
+The affine-return ledger, primitive quotient, determinant, and trace prefix
+are reproduced by an independent implementation and a SymPy calculation.
+\end{proposition}
+\begin{proof}
+The checker reconstructs the affine return and branch inequalities without
+calling producer functions.  The symbolic script independently expands the
+four-by-four determinant and powers.
+\end{proof}
+
+\section{Route-A boundary}
+The finite switching certificate earns
+`A1\_PARTIAL\_CERTIFIED` and `A2\_CERTIFIED\_PREFIX`.  It does not prove that
+the border map has a complete geometric coding, that boundary orbits are
+absent at all periods, or that the weighted matrix is a Fredholm determinant.
+The package makes no arithmetic or Route-B claim.  All evidence is protected
+by the `NO\_BAD\_EULER\_OR\_ROOT\_NUMBER` scope firewall.
+\end{document}
