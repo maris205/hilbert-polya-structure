@@ -1,0 +1,73 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C107OpenHoleHenon20260822}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{proposition}{Proposition}
+\title{An Open-Hole H\'enon Survivor and Its Exact Escape Determinant}
+\author{Anonymous Route-A report}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We freeze the certified four-state local H\'enon symbolic interface and remove
+one geometric state before every iterate.  The surviving three-state matrix
+has exact determinant $1-z-z^3$.  We enumerate rooted survivor words,
+primitive necklaces, and escape traces through period twelve, with independent
+and symbolic checks.  This is a discrete open-transfer certificate: it does
+not yet prove that a geometric open H\'enon operator is analytic or nuclear,
+and it makes no arithmetic or Hilbert--P\'olya claim.
+\end{abstract}
+
+\section{Frozen hole}
+The inherited source/target adjacency is
+\[
+A=\begin{pmatrix}1&0&1&0\\1&0&0&0\\0&1&0&1\\0&1&0&0\end{pmatrix}.
+\]
+We delete state $3$ before each iterate.  The survivor matrix is therefore
+\[
+B=\begin{pmatrix}1&0&1\\1&0&0\\0&1&0\end{pmatrix}.
+\]
+The hole is frozen; it is not selected after looking at traces or zeros.
+
+\section{Exact escape ledger}
+Direct expansion gives
+\[
+\det(I-zB)=1-z-z^3.
+\]
+If $t_n=\operatorname{tr}(B^n)$ and $p_n$ counts primitive survivor necklaces,
+then
+\[
+t_n=\sum_{d\mid n}d p_d.
+\]
+The first twelve rooted trace counts are
+\[
+1,1,4,5,6,10,15,21,31,46,67,98.
+\]
+
+\begin{proposition}
+The open matrix, determinant, trace sequence, and primitive inversion are
+reproduced exactly by an independent implementation and a SymPy calculation.
+\end{proposition}
+\begin{proof}
+The checker reconstructs the principal submatrix from the frozen adjacency,
+computes matrix powers, and applies divisor inversion.  The symbolic script
+independently expands the determinant and traces.
+\end{proof}
+
+\section{Controls and boundary}
+Deleting states $0,1,2,3$ instead gives determinants $1$, $1-z$, $1-z$, and
+$1-z-z^3$, respectively.  Thus the chosen hole is a genuine frozen geometry
+choice rather than a relabeling convention.  The present theorem is only a
+finite symbolic open-transfer result.  A future A2 upgrade must prove that the
+geometric hole has no boundary periodic orbits and that the same open transfer
+operator is compact/nuclear on a named space.  The preregistered verdict is
+`A1\_PARTIAL\_CERTIFIED`, `A2\_CERTIFIED\_PREFIX`, `A3\_NOT\_ADDRESSED`,
+`A4\_FAIL`.  No prime table, zero table, Euler factor, or Route-B object is
+used.
+\end{document}

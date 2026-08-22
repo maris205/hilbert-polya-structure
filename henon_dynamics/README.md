@@ -2038,3 +2038,20 @@ NO and Route B is not authorized.
 - [P77 certificate](henon_tautological_fredholm_ownership_firewall/results/c77_certificate.json)
 - [P73--P77 batch plan](BATCH_PLAN_P73_P77.md)
 - [P73--P77 batch review](BATCH_REVIEW_P73_P77.md)
+
+## Route-A dynamics-variant round C104--C108
+
+This round tests five distinct Hénon subtypes while preserving the
+`NO_BAD_EULER_OR_ROOT_NUMBER` firewall.  Each entry below has a complete
+research package and a compiled paper PDF; finite prefixes are reported with
+their exact evidence boundary and are not promoted to Route B.
+
+- [C104 polynomial multi-branch pilot](henon_polynomial_multibranch_route_a/README.md) · [paper PDF](henon_polynomial_multibranch_route_a/paper/main.pdf)
+- [C105 kneading/pruning prefix](henon_kneading_pruning_hofbauer/README.md) · [paper PDF](henon_kneading_pruning_hofbauer/paper/main.pdf)
+- [C106 variational coupled Hénon lattice](henon_variational_coupled_henon_lattice/README.md) · [paper PDF](henon_variational_coupled_henon_lattice/paper/main.pdf)
+- [C107 open-hole survivor transfer](henon_open_hole_route_a/README.md) · [paper PDF](henon_open_hole_route_a/paper/main.pdf)
+- [C108 complex holomorphic transfer gate](henon_holomorphic_complex_transfer/README.md) · [paper PDF](henon_holomorphic_complex_transfer/paper/main.pdf)
+
+See the [C104--C108 batch plan](BATCH_PLAN_C104_C108.md) and
+[batch review](BATCH_REVIEW_C104_C108.md) for the exact artifact ledger,
+uniform audit, and current Route-A tuple.
