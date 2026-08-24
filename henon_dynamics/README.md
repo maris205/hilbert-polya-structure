@@ -2074,3 +2074,23 @@ are reported with their evidence boundaries and are not promoted to Route B.
 See the [C109--C113 batch plan](BATCH_PLAN_C109_C113.md) and
 [batch review](BATCH_REVIEW_C109_C113.md) for the full hash ledger, uniform
 audit, and the unchanged global Route-A tuple.
+
+## Route-A dynamics-variant round C114--C118
+
+This round keeps the A-route priority while widening the dynamical design
+space again: a finite local Koopman jet, a rational reversible McMillan/QRT
+map, a nonsmooth Lozi map, a Markov-switching H\'enon cocycle, and a damped
+conformally symplectic two-site dimer.  Each paper has exact evidence,
+independent validation, hostile mutation tests, a closed manifest, and a
+reproducible compiled PDF.  Every local or finite prefix retains its explicit
+scope boundary.
+
+- [C114 local jet Koopman quotient](henon_local_jet_koopman_route_a/README.md) · [paper PDF](henon_local_jet_koopman_route_a/paper/main.pdf)
+- [C115 rational reversible McMillan/QRT map](henon_mcmillan_rational_route_a/README.md) · [paper PDF](henon_mcmillan_rational_route_a/paper/main.pdf)
+- [C116 nonsmooth Lozi itinerary pruning](henon_lozi_nonsmooth_route_a/README.md) · [paper PDF](henon_lozi_nonsmooth_route_a/paper/main.pdf)
+- [C117 Markov-switching tangent moments](henon_markov_switching_moment_route_a/README.md) · [paper PDF](henon_markov_switching_moment_route_a/paper/main.pdf)
+- [C118 conformally symplectic damped dimer](henon_conformally_symplectic_dimer_route_a/README.md) · [paper PDF](henon_conformally_symplectic_dimer_route_a/paper/main.pdf)
+
+See the [C114--C118 batch plan](BATCH_PLAN_C114_C118.md) and
+[batch review](BATCH_REVIEW_C114_C118.md) for the exact hash ledger, release
+audit, integrity checks, and the unchanged global Route-A tuple.

@@ -1,0 +1,136 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C114LocalJetKoopman20260824}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{proposition}{Proposition}
+\title{An Exact Fifteen-Dimensional Local Koopman Jet\\for a Polynomial H\'enon Germ}
+\author{Anonymous Route-A report}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We construct the exact Koopman pullback of the polynomial germ
+$F(u,v)=(u^2+3u/2-v/2,u)$ on the local algebra
+$A_4=\mathbb Q[u,v]/(u,v)^5$.  In its fifteen-element monomial basis, the
+operator has trace $129/16$, determinant $2^{-20}$, and a characteristic
+polynomial determined by five associated-graded blocks.  The nonlinear term
+changes eleven matrix entries, but only in strictly degree-raising positions;
+the correction is nilpotent of index four.  The resulting finite determinant
+is an exact operator-first Route-A prefix.  It is not a global Koopman
+spectrum or Fredholm determinant, and no arithmetic or Route-B claim is made.
+\end{abstract}
+
+\section{A finite local operator}
+Let $\mathfrak m=(u,v)$ and freeze
+\[
+ F(u,v)=\left(u^2+\frac32u-\frac12v,\;u\right),
+ \qquad F(0,0)=(0,0).
+\]
+Because both coordinates of $F$ lie in $\mathfrak m$, pullback sends
+$\mathfrak m^5$ into itself.  Composition therefore defines the rational
+operator
+\[
+ K:A_4\longrightarrow A_4,\qquad K[p]=[p\circ F],
+ \quad A_4=\mathbb Q[u,v]/\mathfrak m^5.
+\]
+We order the basis by total degree,
+\[
+ \mathcal B=(1;u,v;u^2,uv,v^2;u^3,u^2v,uv^2,v^3;
+ u^4,u^3v,u^2v^2,uv^3,v^4),
+\]
+and use the convention that column $j$ contains $K(\mathcal B_j)$.  Exact
+truncated substitution gives all $225$ matrix cells in the accompanying
+evidence.  For example,
+\[
+ K[u]=u^2+\frac32u-\frac12v,\qquad K[v]=u,
+\]
+so the finite operator already retains nonlinear information.
+
+\section{Graded blocks and exact determinant}
+The total-degree filtration is $K$-invariant.  On its degree-$d$ quotient,
+only the linearization
+\[
+ L(u,v)=\left(\frac32u-\frac12v,u\right),\qquad
+ DL(0)=\begin{pmatrix}3/2&-1/2\\1&0\end{pmatrix}
+\]
+survives.  Its eigenvalues are $1$ and $1/2$, so the degree-$d$ pullback has
+eigenvalues $1,1/2,\ldots,2^{-d}$.  Table~\ref{tab:blocks} records the five
+exact blocks without printing an unreadable full matrix.
+\begin{table}[ht]
+\centering
+\small
+\caption{Associated-graded data for the order-four jet.}
+\label{tab:blocks}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+$d$ & dimension & eigenvalues & trace & determinant\\
+\midrule
+0 & 1 & $1$ & $1$ & $1$\\
+1 & 2 & $1,1/2$ & $3/2$ & $1/2$\\
+2 & 3 & $1,1/2,1/4$ & $7/4$ & $1/8$\\
+3 & 4 & $1,1/2,1/4,1/8$ & $15/8$ & $1/64$\\
+4 & 5 & $1,1/2,1/4,1/8,1/16$ & $31/16$ & $1/1024$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{proposition}
+On $A_4$, eigenvalue $2^{-k}$ has algebraic multiplicity $5-k$.  Hence
+\[
+ \chi_K(\lambda)=\prod_{k=0}^{4}(\lambda-2^{-k})^{5-k},\qquad
+ \det(I-zK)=\prod_{k=0}^{4}(1-2^{-k}z)^{5-k}.
+\]
+In particular $\operatorname{tr}K=129/16$, $\det K=2^{-20}$, and
+\[
+ \operatorname{tr}(K^n)=\sum_{k=0}^{4}(5-k)2^{-kn}\quad(1\leq n\leq8).
+\]
+\end{proposition}
+\begin{proof}
+In the degree-ordered basis, $K$ is block triangular.  Its diagonal blocks
+are the homogeneous pullbacks of $L$, whose degree-$d$ eigenvalues are the
+monomials $1^{d-k}(1/2)^k$.  Multiplying the five block characteristic
+polynomials proves both factorizations; summing and multiplying their
+eigenvalues gives the trace formulas and determinant.
+\end{proof}
+
+\section{Nonlinear signal and linear control}
+Let $K_{\rm lin}$ be the pullback obtained by replacing $F$ with $L$ and let
+$N=K-K_{\rm lin}$.  Independent exact reconstruction finds eleven nonzero
+entries in $N$.  Every one maps a degree-$d$ column to a row of strictly
+higher degree, and direct multiplication gives $N^4=0$ but $N^3\ne0$.
+Thus $K\ne K_{\rm lin}$ while their diagonal graded blocks, characteristic
+polynomials, and finite determinants agree.  This comparison prevents two
+opposite errors: discarding the nonlinear jet, or attributing new finite
+eigenvalues to a strictly filtration-raising correction.
+
+The canonical ledger also stores the first eight traces of powers.  A
+producer using rational polynomial dictionaries, a checker with a separately
+written engine, and a fresh SymPy expansion agree on every matrix cell and
+identity.  Canonical replay fixes the evidence bytes; thirteen hostile edits
+to the model, basis, matrix, invariants, verdict, and nonclaims are all
+rejected.
+
+\section{Route-A boundary}
+The A1 result is partial-certified only for one fixed point and its order-four
+local jet.  The A2 result is certified-prefix only for the finite
+fifteen-dimensional quotient $A_4$.  No global orbit classification,
+invariant Banach or Hilbert space, global Koopman spectrum, nuclearity,
+analytic tail theorem, or Fredholm determinant has been established; A3 is
+not addressed and A4 fails.
+
+In particular, the displayed $\det(I-zK)$ is an ordinary finite matrix
+determinant.  We make no claim about arithmetic/local data, Euler factors,
+root numbers, automorphy, Riemann zeros, a Hilbert--P\'olya operator, or Route
+B.  The release scope is the literal
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\end{document}

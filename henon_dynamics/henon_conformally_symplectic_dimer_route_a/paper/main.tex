@@ -1,0 +1,119 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.73in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\title{A Conformally Symplectic Damped H\'enon Dimer:\\ Exact Period-Two Mode Monodromy}
+\author{Route-A finite certificate C118}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct an exact rational certificate for a damped two-site variational
+H\'enon map.  Its Jacobian is conformally symplectic with factor $1/2$ and
+determinant $1/4$.  Two synchronous fixed points and one primitive synchronous
+period-two orbit are verified exactly.  The two-step monodromy factors into
+longitudinal and transverse Laplacian modes with traces $-59/4$ and $-13$.
+An uncoupled control isolates a trace shift of $7/4$.  The result is a finite
+low-period tangent witness, not a global transfer-operator theorem.
+\end{abstract}
+
+\section{Damped variational model}
+For $q,p\in\mathbb Q^2$, let
+\[
+ U(q)=\sum_{i=1}^2\left(\frac{13}{4}q_i^2-\frac13q_i^3\right)
+ -\frac18(q_1-q_2)^2,
+ \qquad F(q,p)=(\nabla U(q)-\tfrac12p,q).
+\]
+Writing
+\[
+ L=\begin{pmatrix}1&-1\\-1&1\end{pmatrix},\quad
+ H(q)=\operatorname{diag}(13/2-2q_i)-\tfrac14L,
+\]
+the Jacobian and its exact inverse are
+\[
+ J(q)=\begin{pmatrix}H(q)&-I_2/2\\I_2&0\end{pmatrix},\qquad
+ F^{-1}(Q,P)=(P,2(\nabla U(P)-Q)).
+\]
+For $\Omega=\left(\begin{smallmatrix}0&I_2\\-I_2&0\end{smallmatrix}\right)$,
+direct multiplication gives
+\[
+ J(q)^\mathsf T\Omega J(q)=\tfrac12\Omega,\qquad \det J(q)=\tfrac14.
+\]
+There is also an exact primitive relation.  With $\lambda=q\cdot dp$,
+\[
+ F^*\lambda-\tfrac12\lambda
+ =d\bigl(U(q)-\tfrac12p\cdot q\bigr).
+\]
+These are polynomial identities, not numerical sample fits.
+
+\section{Exact synchronous orbit witnesses}
+Synchrony is invariant because $L(1,1)^\mathsf T=0$.  The fixed states are
+\[
+ P_0=((0,0),(0,0)),\qquad P_5=((5,5),(5,5)).
+\]
+The two distinct states
+\[
+ C_2=((2,2),(6,6)),\qquad C_6=((6,6),(2,2))
+\]
+satisfy $F(C_2)=C_6$ and $F(C_6)=C_2$, giving a primitive period-two
+witness.  The direct four-dimensional two-step monodromy is
+\[
+ M=\begin{pmatrix}
+ -107/8&-7/8&23/8&-1/8\\
+ -7/8&-107/8&-1/8&23/8\\
+ 9/4&1/4&-1/2&0\\1/4&9/4&0&-1/2
+ \end{pmatrix},
+\]
+with trace $-111/4$ and determinant $1/16$.
+
+\section{Longitudinal and transverse factors}
+The Laplacian eigenvalues are $0$ and $2$.  At synchronous coordinate $s$,
+the scalar Hessian value in mode $\ell$ is
+\[
+ h_s(\ell)=13/2-2s-\ell/4.
+\]
+Thus the mode pairs at $s=2,6$ are $(5/2,-11/2)$ and $(2,-6)$.  A one-step
+mode matrix is $J_h=\left(\begin{smallmatrix}h&-1/2\\1&0\end{smallmatrix}\right)$.
+The exact two-step data are
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+mode & $(h_2,h_6)$ & $\operatorname{tr}(J_{h_6}J_{h_2})$ & determinant\\
+\midrule
+longitudinal & $(5/2,-11/2)$ & $-59/4$ & $1/4$\\
+transverse & $(2,-6)$ & $-13$ & $1/4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Consequently the direct and mode reconstructions agree:
+\begin{align*}
+ \det(I-zM)&=(1+59z/4+z^2/4)(1+13z+z^2/4)\\
+ &=1+\tfrac{111}{4}z+\tfrac{769}{4}z^2
+   +\tfrac{111}{16}z^3+\tfrac1{16}z^4.
+\end{align*}
+At $\kappa=0$, the synchronous orbit remains valid but both modes are
+longitudinal: the full trace is $-59/2$.  Coupling therefore shifts the direct
+trace by $7/4$ in this controlled tangent comparison.
+
+\section{Reproducibility and scope}
+From the package directory run
+\begin{verbatim}
+python3 code/c118_damped_dimer_producer.py
+python3 code/c118_damped_dimer_checker.py
+python3 code/c118_sympy_crosscheck.py
+python3 code/c118_replay.py
+python3 code/c118_mutation.py
+\end{verbatim}
+The independent checker, 13 symbolic checks, canonical replay, and all 12
+hostile mutations pass.
+
+The verdict is $A1=\texttt{A1\_WEAK}$: only named fixed and period-two
+witnesses are certified.  $A2=\texttt{A2\_FAIL}$ because tangent monodromy is
+not a source-owned transfer operator; $A3$ is not addressed and $A4$ fails.
+We claim no complete orbit atlas, transfer/Fredholm/nuclear owner, arithmetic
+local data, Euler factors, root numbers, automorphy, Hilbert--P\'olya operator,
+or Route B.  The firewall is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}
