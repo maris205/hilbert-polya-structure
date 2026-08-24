@@ -1,0 +1,63 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C132
+source_commit: WORKTREE_PRECOMMIT
+evaluation_date: 2026-08-24
+source_lock:
+  object: the two Möbius branches phi_a(z)=1/(a+z), a in {3,6}, acting by unweighted composition on normalized Bergman A^2 of the unit disk
+  clock: one branch composition per iterate; word length is the primitive-orbit period
+  normalization: normalized disk area, e_n(z)=sqrt(n+1)z^n, and L=C_phi3+C_phi6
+  determinant_convention: D(z)=det(I-z*L), with the trace-class Fredholm determinant on the left
+  cutoff: no theorem cutoff; word lengths one through ten are replay receipts only
+  precision: exact integer Möbius matrices and symbolic radicals; 30-digit decimal trace sums are non-theorem replay checks
+  allowed_data: frozen branches, unit-disk geometry, Bergman normalization, and intrinsic word matrices
+  forbidden_data: prime/zero tables, arithmetic local factors, target fitting, and Route-B inputs
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: intrinsic primitive cyclic branch words with exact repetition, cyclic invariance, fixed points, multipliers, and composition weights
+  strongest_failure: no prime-like target correspondence or arithmetic amplitude law
+  metrics:
+    rooted_word_receipts_through_10: 2046
+    primitive_cycles_through_10: 226
+  artifacts:
+    - results/c132_mobius_bergman_evidence.json
+    - THEOREM_PACKAGE.md
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact all-period power traces and a source-owned trace-class Fredholm determinant with primitive product
+  strongest_failure: no frozen target divisor, missing/extra-zero census, or sealed target validation region
+  metrics:
+    raw_product_absolute_convergence_radius: 1/2
+    trace_norm_upper_bound: 89/16
+  artifacts:
+    - paper/main.pdf
+    - results/c132_mobius_bergman_evidence.json
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source Fredholm determinant is entire and its raw primitive product is proved for absolute value of z less than one half
+  strongest_failure: no target functional equation, Gamma factor, counting law, or analytic-continuation comparison
+  metrics:
+    raw_product_absolute_convergence_radius: 1/2
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - SOURCE_AUDIT.md
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: none beyond the named Bergman transfer-operator Hilbert space
+  strongest_failure: no source-derived unitary, scattering, Hamiltonian, antiunitary, or self-adjoint lift
+  metrics: {}
+  artifacts:
+    - SOURCE_AUDIT.md
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact nonlinear order-sensitive source determinant only; no arithmetic or external spectral identification
+blocking_conditions:
+  - no prime-like primitive-orbit semantics
+  - no target divisor protocol
+  - no target global analytic comparison
+  - no natural unitary or self-adjoint lift
+next_smallest_test: vary the branch alphabet in a frozen separated family and prove a uniform trace-class and order-sensitivity theorem without target fitting
+route_b_invocation_allowed: false

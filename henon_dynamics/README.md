@@ -2136,3 +2136,27 @@ reproducible paper PDF.
 See the [C124--C128 batch plan](BATCH_PLAN_C124_C128.md) and
 [batch review](BATCH_REVIEW_C124_C128.md) for the progress gates, exact hash
 ledger, uniform release audit, and conservative Route-A boundary.
+
+## Route-A structural-gate round C129--C133
+
+This round continues the explicit-progress rule across five further dynamical
+subtypes: a phase-sensitive graph-directed affine IFS, an irrational-roof
+symbolic suspension, an all-odd metaplectic family, a nonlinear
+Möbius--Bergman trace owner, and a metric quantum graph.  Each entry has an
+all-period or uniform structural theorem, exact controls, independent
+validation, hostile mutation tests, a closed manifest, and a reproducible
+paper PDF.  Phase, clock, quantization, nonlinear order, and scattering
+boundaries remain separate.
+
+- [C129 graph-directed phase holonomy](henon_graph_directed_phase_holonomy_route_a/README.md) · [paper PDF](henon_graph_directed_phase_holonomy_route_a/paper/main.pdf)
+- [C130 irrational-roof suspension](henon_irrational_roof_suspension_route_a/README.md) · [paper PDF](henon_irrational_roof_suspension_route_a/paper/main.pdf)
+- [C131 all-odd metaplectic family](henon_odd_level_metaplectic_family_route_a/README.md) · [paper PDF](henon_odd_level_metaplectic_family_route_a/paper/main.pdf)
+- [C132 nonlinear Möbius--Bergman trace owner](henon_mobius_bergman_trace_route_a/README.md) · [paper PDF](henon_mobius_bergman_trace_route_a/paper/main.pdf)
+- [C133 metric quantum-graph unitary scattering](henon_quantum_graph_unitary_scattering_route_a/README.md) · [paper PDF](henon_quantum_graph_unitary_scattering_route_a/paper/main.pdf)
+
+See the [C129--C133 batch plan](BATCH_PLAN_C129_C133.md) and
+[batch review](BATCH_REVIEW_C129_C133.md) for the exact progress claims,
+artifact ledger, uniform release audit, and strict per-candidate Route-A
+tuples.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, every package has
+`route_b_invocation_allowed=false`, and no coordinates are combined across
+candidates.

@@ -1,0 +1,64 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C133
+source_commit: WORKTREE_PRECOMMIT
+evaluation_date: 2026-08-24
+source_lock:
+  object: theta metric graph with edge lengths 1,2,3 and degree-three Kirchhoff vertices
+  clock: one scattering step with symmetric half-edge propagation; metric length counted once per traversed bond
+  normalization: Kirchhoff amplitude 2/3-delta and unscaled edge lengths
+  determinant_convention: D(rho,k)=det(I-rho*U(k))
+  cutoff: no theorem cutoff; topological periods 1 through 8 are replay sentinels
+  precision: exact rational and symbolic polynomial arithmetic
+  allowed_data: frozen graph incidence, metric lengths, and Kirchhoff rule
+  forbidden_data: prime/zero tables, arithmetic local factors, target fitting, and Route-B inputs
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: intrinsic primitive directed-bond cycles with exact orientation, repetition, metric length, phase, multiplicity, and signed scattering amplitude
+  strongest_failure: no prime-like target correspondence or amplitude law
+  metrics:
+    rooted_walks_through_8: 14760
+    primitive_cycles_through_8: 1905
+  artifacts:
+    - results/c133_quantum_graph_evidence.json
+    - THEOREM_PACKAGE.md
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-owned secular determinant and all-period primitive product
+  strongest_failure: no frozen target divisor, sealed validation region, or missing/extra-zero census
+  metrics:
+    determinant_degree_in_rho: 6
+    physical_polynomial_degree: 12
+  artifacts:
+    - paper/main.pdf
+    - results/c133_quantum_graph_evidence.json
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: finite exponential-polynomial secular determinant
+  strongest_failure: no target functional equation, Gamma factor, counting law, or analytic-continuation comparison
+  metrics: {}
+  artifacts:
+    - SOURCE_AUDIT.md
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: source-derived C^6 directed-bond Hilbert space, real-k unitary propagation, metric clock, and exact antiunitary reversal
+  strongest_failure: no target-compatible spectral law and no self-adjoint Hilbert--Polya realization
+  metrics:
+    unitary_entries: 36
+    reversal_entries: 36
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact finite metric-graph unitary/scattering and orbit determinant only
+blocking_conditions:
+  - no prime-like orbit semantics
+  - no target divisor protocol
+  - no target global analytic structure
+  - no Route-B authorization
+next_smallest_test: vary the metric in a frozen family and prove a nonaliasing or resonance-stability theorem without fitting a target
+route_b_invocation_allowed: false

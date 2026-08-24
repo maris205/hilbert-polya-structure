@@ -3,6 +3,26 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C129--HCS-C133 structural-gate round (2026-08-24)
+
+Five source-locked candidates were retained as distinct Route-A structural
+advances.  Their packages and formal evaluations are:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C129 | All-period fifth-root phase-twisted Hardy trace/Fredholm owner that distinguishes a branch-assignment pair with identical untwisted determinant; finite-quotient boundary explicit. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_graph_directed_phase_holonomy_route_a/`](../henon_graph_directed_phase_holonomy_route_a/) |
+| HCS-C130 | Irrational-roof suspension with exact primitive trace product, all-population-sector clock separation, no nonzero imaginary period, and an exact same-sector orbit collision. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_irrational_roof_suspension_route_a/`](../henon_irrational_roof_suspension_route_a/) |
+| HCS-C131 | Exact metaplectic unitary, Weyl Egorov, clock, reversal, and growing no-action-alias window for every odd level, including composite moduli. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_odd_level_metaplectic_family_route_a/`](../henon_odd_level_metaplectic_family_route_a/) |
+| HCS-C132 | Separated nonlinear Möbius IFS with a trace-class Bergman owner, all-word/all-period trace theorem, primitive product, and intrinsic same-count order sensitivity. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_mobius_bergman_trace_route_a/`](../henon_mobius_bergman_trace_route_a/) |
+| HCS-C133 | Source-derived metric quantum-graph unitary with antiunitary reversal, exact secular determinant, signed primitive walk product, and scoped normalization/metric controls. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_quantum_graph_unitary_scattering_route_a/`](../henon_quantum_graph_unitary_scattering_route_a/) |
+
+C131 and C133 reach different A4 subgates for different source systems.  Their
+coordinates are not combined.  No candidate includes a frozen external
+target-divisor, zero-census, analytic-completion, or counting-law protocol, so
+strict A2/A3 remain failed.  The common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, the overall status is
+`ROUTE_A_EXPLORATORY`, and `route_b_invocation_allowed=false` for all five.
+
 ## HCS-C124--HCS-C128 structural-gate round (2026-08-24)
 
 Five source-locked candidates were retained as explicit Route-A structural

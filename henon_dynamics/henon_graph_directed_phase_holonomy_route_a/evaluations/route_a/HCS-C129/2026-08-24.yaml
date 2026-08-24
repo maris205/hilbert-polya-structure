@@ -1,0 +1,74 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C129
+source_commit: UNCOMMITTED_PACKAGE_BUILD
+evaluation_date: 2026-08-24
+
+source_lock:
+  object: three-state graph-directed affine Henon contractions with a frozen Z/5 translation character
+  clock: one admissible graph edge per iterate
+  normalization: C124 coordinates, c=(1/2,1/3,1/5), chi(m)=zeta_5^m
+  determinant_convention: D_chi(z)=det(I-z*L_chi)
+  cutoff: no theorem cutoff; periods and Taylor powers 1 through 8 are replay prefixes
+  precision: exact rational group-ring and cyclotomic arithmetic
+  allowed_data: frozen A, translations, B, c, Hardy domain, and character
+  forbidden_data: external zero or prime tables, arithmetic/local factors, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: primitive admissible necklaces biject with primitive geometric cycles at all periods
+  strongest_failure: no prime-like target correspondence is supplied
+  metrics:
+    rooted_closed_words_through_8: 284
+    primitive_cycles_through_8: 40
+    theorem_period_cutoff: none
+  artifacts:
+    - results/c129_phase_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-side phase-twisted trace-class Fredholm determinant and primitive repetition identities
+  strongest_failure: no frozen target divisor is compared, so the Route-A A2 target-facing gate fails
+  metrics:
+    trace_prefix_length: 8
+    taylor_degree: 8
+    target_zero_comparison_count: 0
+  artifacts:
+    - paper/main.pdf
+    - results/c129_phase_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source Fredholm determinant is entire and has a normally convergent lattice product
+  strongest_failure: no target functional equation, Gamma factor, counting law, or continuation comparison is in scope
+  metrics:
+    source_entire_determinant: true
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: a frozen U(1) character supplies an exact orbit phase compatible with the same global source operator
+  strongest_failure: no source-derived unitary, scattering, Hamiltonian, or metaplectic quantization is constructed
+  metrics:
+    character_order: 5
+    natural_quantizations_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c129_phase_evidence.json
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact finite-quotient position sensitivity under one frozen character; no complete geometry or target recovery
+blocking_conditions:
+  - one character sees only translation residues modulo five and branch assignment
+  - target divisor matching is absent
+  - target global analytic structure is absent
+next_smallest_test: compare a source-defined separating family of characters while preserving the same all-period owner
+route_b_invocation_allowed: false
