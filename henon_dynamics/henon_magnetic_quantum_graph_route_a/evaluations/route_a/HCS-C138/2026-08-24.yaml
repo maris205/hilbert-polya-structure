@@ -1,0 +1,67 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C138
+source_commit: WORKTREE_PRECOMMIT
+evaluation_date: 2026-08-24
+source_lock:
+  object: the theta metric graph with edge lengths 1,2,3, degree-three Kirchhoff vertices, and magnetic directed-bond phases modulo a common shift
+  clock: one metric edge length per traversed directed bond; topological period counts scattering steps
+  normalization: C=(2/3)11^T-I_3, S=[[0,C],[C,0]], symmetric half-phase propagation, and directed-bond order (+1,+2,+3,-1,-2,-3)
+  determinant_convention: D(rho;x,q)=det(I-rho*U_alpha(k)) reduced exactly to det(I_3-rho^2*C*X_-*C*X_+)
+  cutoff: no determinant or orbit-product theorem cutoff; periods one through eight are replay receipts only
+  precision: exact rational amplitudes, symbolic Laurent monomials, and exact radicals for the pi/2 control
+  allowed_data: frozen graph, metric lengths, Kirchhoff law, magnetic phases, intrinsic directed walks, and exact negative controls
+  forbidden_data: prime/zero tables, arithmetic local factors, target fitting, target divisors, and Route-B inputs
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: intrinsic primitive directed-bond cycles have exact repetition, signed scattering amplitudes, metric lengths, gauge-invariant winding vectors, and reverse-orientation partners
+  strongest_failure: no prime-like target correspondence or arithmetic amplitude law
+  metrics:
+    rooted_closed_walks_through_8: 14760
+    primitive_cycles_through_8: 1905
+  artifacts:
+    - results/c138_magnetic_graph_evidence.json
+    - THEOREM_PACKAGE.md
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the source owns a complete finite-dimensional Laurent secular determinant and primitive directed-orbit germ
+  strongest_failure: no frozen target divisor, missing/extra-zero census, or sealed target validation region
+  metrics:
+    determinant_degree_in_rho: 6
+    nonzero_rho_degrees: 4
+  artifacts:
+    - paper/main.pdf
+    - results/c138_magnetic_graph_evidence.json
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: finite-dimensional determinant identities are exact for the frozen magnetic graph
+  strongest_failure: no target functional equation, Gamma factor, counting law, or analytic-continuation comparison
+  metrics:
+    gauge_flux_coordinates: 2
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - SOURCE_AUDIT.md
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: a source-derived unitary family on C^6 with exact metric clock, common-phase gauge quotient, antiunitary alpha-to-minus-alpha reversal, and secular determinant
+  strongest_failure: no self-adjoint Hamiltonian with an externally prescribed spectrum and no Hilbert-Polya identification
+  metrics:
+    hilbert_dimension: 6
+    independent_flux_coordinates: 2
+    wrong_fixed_alpha_reversal_defect_entries: 8
+  artifacts:
+    - paper/main.pdf
+    - results/c138_magnetic_graph_evidence.json
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact magnetic unitary/scattering family and oriented source determinant only; no arithmetic or external spectral identification
+blocking_conditions:
+  - no prime-like primitive-orbit semantics
+  - no target divisor protocol
+  - no target global analytic comparison
+  - no self-adjoint target-spectrum realization
+next_smallest_test: test a larger source-owned graph family while retaining exact gauge, reversal, winding, and determinant controls without target fitting
+route_b_invocation_allowed: false

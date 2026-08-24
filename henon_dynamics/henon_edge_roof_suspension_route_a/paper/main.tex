@@ -1,0 +1,159 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\title{Edge-Count Separation and Residual Orbit Collisions\\
+in a Nonlattice Binary Suspension}
+\author{Route-A structural certificate C135}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We refine a symbol-count suspension clock to a directed-edge roof on the full
+binary shift.  An exact four-variable matrix determinant gives the rooted
+trace law and primitive-orbit product at every period.  The nonlattice roof
+$\bigl(1,\sqrt2,\sqrt3,\sqrt6\bigr)$ separates every distinct directed
+edge-count sector, including the requested words $000111$ and $001011$.
+It remains noninjective on primitive orbits: $001011$ and $001101$ collide,
+and a flow-conservation theorem proves that all periodic data are blind to
+off-diagonal orientation.  The construction is source-side and dynamical,
+not an arithmetic or target-facing factorization.
+\end{abstract}
+
+\section{Formal determinant and all-period product}
+Let $\Sigma$ be the two-sided full binary shift and assign the ordered edge
+roof
+\[
+\tau=\begin{pmatrix}1&\sqrt2\\ \sqrt3&\sqrt6\end{pmatrix}.
+\]
+The suspension identifies $(x,t+\tau_{x_0x_1})$ with $(\sigma x,t)$.  For
+formal edge variables put
+\[
+M(x)=\begin{pmatrix}x_{00}&x_{01}\\x_{10}&x_{11}\end{pmatrix},\qquad
+\Delta(x)=\det(I-M(x)).
+\]
+Direct calculation gives
+\begin{equation}
+\Delta(x)=1-x_{00}-x_{11}+x_{00}x_{11}-x_{01}x_{10}. \tag{1}
+\end{equation}
+For every $n\geq1$, matrix multiplication yields the exact rooted-word law
+\begin{equation}
+\operatorname{Tr}M(x)^n=\sum_{\substack{w\ {\rm rooted\ closed}\\|w|=n}}
+\prod_{i,j}x_{ij}^{N_{ij}(w)}. \tag{2}
+\end{equation}
+Expanding $-\log\det(I-M)=\sum_{n\geq1}\operatorname{Tr}(M^n)/n$ and
+grouping each rooted word by its unique primitive root and repetition proves,
+in the total-edge-degree completion,
+\begin{equation}
+\Delta(x)=\prod_{[\gamma]\ {\rm primitive}}
+\left(1-\prod_{i,j}x_{ij}^{N_{ij}(\gamma)}\right). \tag{3}
+\end{equation}
+There are only finitely many primitive necklaces of any fixed total degree,
+so every coefficient of (3) receives finitely many contributions; the formal
+product is therefore well defined.  Equations (2)--(3) hold at every period.
+
+\section{Nonlattice specialization}
+Substitute $x_{ij}=e^{-s\tau_{ij}}$.  Then
+\begin{equation}
+d_\tau(s)=1-e^{-s}-e^{-\sqrt6s}
++e^{-(1+\sqrt6)s}-e^{-(\sqrt2+\sqrt3)s}, \tag{4}
+\end{equation}
+and (3) specializes to
+\[
+d_\tau(s)=\prod_{[\gamma]}
+(1-e^{-s\ell(\gamma)}),\qquad
+\ell=N_{00}+\sqrt2N_{01}+\sqrt3N_{10}+\sqrt6N_{11}.
+\]
+If $h>0$ is the unique solution of
+$\rho((e^{-h\tau_{ij}})_{ij})=1$, the logarithmic trace and primitive
+expansions converge absolutely for $\operatorname{Re}s>h$.  Indeed, for
+$\sigma>h$ the positive matrix $M_\tau(\sigma)=(e^{-\sigma\tau_{ij}})$ has
+spectral radius below one, while absolute values at $s$ are bounded entrywise
+by $M_\tau(\sigma)$.  Hence
+$\sum_n\operatorname{Tr}(M_\tau(\sigma)^n)/n$ converges and dominates both
+regroupings.  The explicit finite exponential polynomial (4) is entire, so
+its reciprocal is meromorphic.  The fixed cycles $[0]$ and $[1]$ have lengths
+$1$ and $\sqrt6$; their irrational ratio rules out a common clock lattice and
+proves that the roof is nonlattice.  It also rules out an imaginary period of
+the full exponential polynomial: $d_\tau(s+iT)=d_\tau(s)$ for all $s$ would
+force both $e^{-iT}=1$ and $e^{-iT\sqrt6}=1$, hence $T=0$.
+
+\section{Exact edge-sector separation}
+The numbers $1,\sqrt2,\sqrt3,\sqrt6$ form the rational basis of
+$\mathbb Q(\sqrt2,\sqrt3)$.  For completeness, applying the four independent
+sign changes $\sqrt2\mapsto\pm\sqrt2$ and
+$\sqrt3\mapsto\pm\sqrt3$ to a rational linear relation and adding with signs
+isolates each coefficient.  Equality of two roof lengths therefore forces
+equality of their entire directed-edge-count vectors.  At period six,
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+word & $(N_{00},N_{01},N_{10},N_{11})$ & rooted multiplicity & length\\
+\midrule
+$000111$ & $(2,1,1,2)$ & $6$ & $2+\sqrt2+\sqrt3+2\sqrt6$\\
+$001011$ & $(1,2,2,1)$ & $12$ & $1+2\sqrt2+2\sqrt3+\sqrt6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Their difference is
+$1-\sqrt2-\sqrt3+\sqrt6\ne0$.  Thus the two words, which have the same
+symbol population, occupy different edge sectors.  Under C130's
+destination-symbol control $\tau_{ij}=\rho_j$ with
+$\rho=(1,\sqrt2)$, both instead have length $3+3\sqrt2$.
+
+The trace multiplicities also have a direct orbit explanation.  A primitive
+period-six necklace contributes its six rooted rotations.  There is one
+necklace in the $(2,1,1,2)$ sector, giving coefficient $6$, and two necklaces
+in the $(1,2,2,1)$ sector, giving coefficient $12$.
+
+\section{The residual collision is structural}
+The primitive words $001011$ and $001101$ are not cyclic rotations, but both
+have edge vector $(1,2,2,1)$ and hence the same roof time.  They are the first
+same-edge-count primitive collision, at period six.
+
+This obstruction holds at every period.  In any closed binary word, every
+crossing from $0$ to $1$ must be balanced by a crossing from $1$ to $0$;
+hence
+\begin{equation}
+N_{01}=N_{10}. \tag{5}
+\end{equation}
+Algebraically, write the symbols as integers.  Each transition contributes
+$x_{r+1}-x_r$, which is $1$ on $01$, $-1$ on $10$, and zero otherwise.
+Summing around a closed word telescopes to zero and proves (5) without a
+period cutoff.
+Every periodic length and determinant coefficient consequently depends on the
+off-diagonal roof only through $\tau_{01}+\tau_{10}$, never through
+$\tau_{01}-\tau_{10}$.  Ordered formal variables preserve the accounting,
+but closed-orbit data themselves cannot recover orientation asymmetry.  The
+same quotient is visible directly in (1), where the off-diagonal variables
+occur only as $x_{01}x_{10}$.  Thus replacing
+$(\tau_{01},\tau_{10})$ by $(\tau_{01}+a,\tau_{10}-a)$, while retaining
+positive roof values, leaves every periodic length and determinant unchanged.
+
+\paragraph{Progress over C130.}
+C130 separated symbol-population clock sectors but aggregated $000111$ and
+$001011$.  C135 refines the same exact all-period determinant to complete
+directed-edge-count sensitivity and separates that pair.  It deliberately
+retains collisions inside one edge sector and proves the exact observable
+quotient rather than claiming orbit injectivity.
+
+\section{Validation and Route-A boundary}
+The replay prefix contains 2,046 rooted words and 226 primitive cycles through
+period ten; the theorem has no cutoff.  A standard-library checker independent
+of the producer passes 2,121 assertions, including (5) for every replay word.
+An independent SymPy reconstruction passes 37 checks; byte replay and all 43
+hostile cases (42 repaired-hash plus one stale-hash case) pass.
+
+The strict tuple is $(\texttt{A1\_WEAK},\texttt{A2\_FAIL},
+\texttt{A3\_FAIL},\texttt{A4\_FAIL})$, overall
+\texttt{ROUTE\_A\_EXPLORATORY}.  The product in (3) is a symbolic-dynamical
+primitive-orbit identity, not an arithmetic Euler product.  We claim no target
+divisor or global analytic comparison, prime-like correspondence,
+arithmetic/local data, Euler factors, root numbers, automorphy, natural
+self-adjoint or unitary lift, Hilbert--P\'olya operator, or Riemann-zero
+relation.  Route B is unauthorized; the literal firewall is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

@@ -1,0 +1,156 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[11pt]{article}
+\usepackage[margin=0.84in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Tr}{\operatorname{Tr}}
+\title{Gauge-Invariant Magnetic Holonomy\\in Exact Theta-Graph Scattering}
+\author{H\'enon Route-A Working Series, C138}
+\date{24 August 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We equip the exact theta metric graph with a two-dimensional magnetic-flux
+family.  Its directed-bond evolution on $\mathbb C^6$ is unitary, invariant
+under a common phase shift, and obeys an antiunitary identity that sends
+$\alpha$ to $-\alpha$.  A block reduction gives the complete Laurent secular
+determinant in degrees $\rho^0,\rho^2,\rho^4,\rho^6$.  Primitive walks retain
+signed Kirchhoff amplitudes and oriented winding monomials, although the full
+determinant is even under flux reversal.  Exact zero-, $\pi$-, and
+$\pi/2$-flux controls separate these statements.  This is a source-owned
+unitary/scattering candidate, not a target spectral or arithmetic match.
+\end{abstract}
+
+\section{Frozen magnetic graph}
+Join vertices $L,R$ by edges of lengths $\ell=(1,2,3)$.  At each vertex use
+\[
+ C=\frac23\mathbf1\mathbf1^T-I_3,\qquad
+ S=\begin{pmatrix}0&C\\C&0\end{pmatrix},\qquad
+ J=\begin{pmatrix}0&I_3\\I_3&0\end{pmatrix}.
+\]
+Directed bonds are ordered $(+1,+2,+3,-1,-2,-3)$.  For real $k$ and
+$\alpha=(\alpha_1,\alpha_2,\alpha_3)$, set
+\[
+ P_\alpha(k)=\operatorname{diag}\left(
+ (e^{i(k\ell_j+\alpha_j)/2})_{j=1}^3,
+ (e^{i(k\ell_j-\alpha_j)/2})_{j=1}^3\right),
+ \qquad U_\alpha(k)=P_\alpha(k)SP_\alpha(k).
+\]
+The symmetric split accumulates one metric length and one signed magnetic
+phase per traversed bond.  Here $\alpha\in\mathbb R^3$ is a chosen lift.
+If $\alpha_j$ is increased by $2\pi$, the two orientations of edge $j$
+acquire a common sign $E_j$, so $U_{\alpha+2\pi e_j}=E_jU_\alpha E_j$.
+Thus the unitary equivalence class and determinant descend to the flux torus,
+although the displayed lifted matrix need not be entrywise periodic.
+
+\begin{theorem}[unitary gauge and reversal]\label{thm:gauge}
+$U_\alpha(k)$ is unitary.  A common shift
+$\alpha\mapsto\alpha+c\mathbf1$ leaves it unchanged.  With coefficient
+conjugation $K$ and $\Theta=JK$,
+\[
+ \Theta U_\alpha(k)\Theta^{-1}=U_{-\alpha}(k)^{-1}.
+\]
+\end{theorem}
+\begin{proof}
+$C^2=I_3$, hence $S$ is real orthogonal; $P_\alpha(k)$ is diagonal unitary.
+For
+$D_c=\operatorname{diag}(e^{ic/2}I_3,e^{-ic/2}I_3)$, one has
+$P_{\alpha+c\mathbf1}=D_cP_\alpha$ and $D_cSD_c=S$.  Since the diagonal
+matrices commute,
+$U_{\alpha+c\mathbf1}=P_\alpha D_cSD_cP_\alpha=U_\alpha$.
+
+For reversal, $J\overline{P_\alpha(k)}J=P_\alpha(-k)$ and $JSJ=S$.
+Thus $J\overline{U_\alpha(k)}J=U_\alpha(-k)$.  On the other hand,
+$P_{-\alpha}(k)^{-1}=P_\alpha(-k)$ and $S^{-1}=S$, so
+$U_{-\alpha}(k)^{-1}=U_\alpha(-k)$.  This proves the identity and also
+shows why holding $\alpha$ fixed is generally false.
+\end{proof}
+
+\section{Complete Laurent determinant}
+Put $x_j=e^{ik\ell_j}$, $q_j=e^{i\alpha_j}$ and
+\[
+ X_+=\operatorname{diag}(x_jq_j),\qquad
+ X_-=\operatorname{diag}(x_j/q_j).
+\]
+Sylvester's identity first moves the two half phases together:
+$\det(I_6-\rho P_\alpha SP_\alpha)
+=\det(I_6-\rho S P_\alpha^2)$.  The latter matrix has off-diagonal blocks
+$-\rho CX_-$ and $-\rho CX_+$, so a block determinant gives
+\[
+ D(\rho;x,q)=\det(I_3-\rho^2CX_-CX_+)
+ =1-\rho^2T_1+\rho^4T_2-\rho^6(x_1x_2x_3)^2,
+\]
+where, writing $Q_{ij}=q_i/q_j+q_j/q_i$ and letting $k$ denote the
+complement of $i,j$,
+\begin{align*}
+ T_1&=\frac19\sum_i x_i^2+\frac49\sum_{i<j}x_ix_jQ_{ij},\\
+ T_2&=\frac19\sum_{i<j}x_i^2x_j^2
+      +\frac49\sum_{i<j}x_ix_jx_k^2Q_{ij}.
+\end{align*}
+The block reduction proves at once that every odd power of $\rho$ vanishes;
+the displayed constant, quadratic, quartic, and sextic terms are therefore
+the complete Laurent polynomial, not a truncation.  Only ratios of the
+$q_j$ occur, agreeing with the operator-level common-phase identity in
+Theorem~\ref{thm:gauge}.  Since every $Q_{ij}$ is fixed by
+$q\mapsto q^{-1}$, the full determinant is also invariant under flux
+reversal.
+
+At zero flux and $(x_1,x_2,x_3)=(t,t^2,t^3)$, $\rho=1$, the result is
+\begin{align}\label{eq:zero}
+ -\frac19&(t-1)^3(t+1)(t^2+1)(t^2+t+1)\nonumber\\
+ &\qquad\times(3t^2-2t+3)(3t^2+5t+3),
+\end{align}
+exactly the C133 specialization.
+
+\section{Oriented primitive walks}
+For a closed directed walk $p$, define
+$m_j(p)=N_{+j}(p)-N_{-j}(p)$.  Closure gives $\sum_jm_j=0$, and the ordered
+weight is
+\[
+ A_p\rho^{n_p}e^{ikL_p}\prod_jq_j^{m_j(p)}.
+\]
+Thus the primitive germ is the product of
+$1-A_p\rho^{n_p}e^{ikL_p}q^{m(p)}$.  The two-step walk $(+i,-j)$ with
+$i\ne j$ has amplitude $4/9$ and phase $q_i/q_j$; its reverse has
+$q_j/q_i$.  The individual terms distinguish orientation.  The complete
+determinant is inversion-even only after reverse walks are paired: reversal
+preserves $A_p,L_p,n_p$ and sends the winding vector $m(p)$ to $-m(p)$.
+Thus determinant evenness and orientation-sensitive ledger data are
+compatible statements at different aggregation levels.
+
+\section{Controls, receipts, and boundary}
+Flux $q=(-1,1,1)$ changes the $\rho^2$ coefficient by
+$16x_1(x_2+x_3)/9$: the two ratios involving $q_1$ change from $2$ to
+$-2$.  This proves that common gauge invariance does not make nontrivial
+flux invisible.  At $k=0$, $\alpha=(\pi/2,0,0)$, the correct
+$\alpha\mapsto-\alpha$ reversal defect vanishes.  Holding $\alpha$ fixed
+instead gives eight nonzero entries and squared Frobenius norm $64/9$.
+Replacing $2/3$ by $1/2$ destroys vertex unitarity; changing the reverse
+length of edge three from $3$ to $4$ destroys bond reversal.
+
+The exact ledger reconstructs 14,760 rooted walks and 1,905 primitive cycles
+through period eight.  An independent checker closes every field, a separate
+symbolic run performs 197 exact checks, replay is byte-identical, and 44
+repaired-hash plus one stale-hash mutations are rejected.
+
+The strict verdict is
+\[
+ (\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},\mathrm{A3\_FAIL},
+ \mathrm{A4\_UNITARY\_OR\_SCATTERING\_CANDIDATE}).
+\]
+There is no target divisor, prime or zero table, functional equation,
+arithmetic Euler factor, root number, automorphy claim, or Hilbert--P\'olya
+operator.  Route B is unauthorized.  The active firewall is
+\[
+ \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\]
+
+\section{Conclusion}
+C138 turns one exact scattering graph into a gauge-controlled magnetic family
+whose determinant and oriented paths are both source-owned.  External target
+identification remains unsupported.
+\end{document}

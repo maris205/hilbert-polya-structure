@@ -3,6 +3,27 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C134--HCS-C138 refinement round (2026-08-24)
+
+Five source-locked candidates were retained as separate Route-A advances.
+Each one sharpens a named C129--C133 boundary without combining coordinates
+across systems:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C134 | A faithful Laurent-character Hardy family whose first three normalized logarithmic Fredholm jets recover every branch-labelled integer translation in the frozen scaled affine family; label orientation and finite-precision stability remain explicit boundaries. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_faithful_character_torus_route_a/`](../henon_faithful_character_torus_route_a/) |
+| HCS-C135 | A directed-edge nonlattice suspension with an exact all-period determinant/product that separates the former C130 collision, while a new same-edge-count primitive pair and `N01=N10` prove residual orbit and orientation blindness. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_edge_roof_suspension_route_a/`](../henon_edge_roof_suspension_route_a/) |
+| HCS-C136 | Exact generalized-character CRT factorization of Fourier, chirp, Weyl, metaplectic, and antiunitary structures for fixed ordered coprime odd factors, with bracket coherence and a no-scalar obstruction to naive standard-character tensoring. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_crt_metaplectic_compatibility_route_a/`](../henon_crt_metaplectic_compatibility_route_a/) |
+| HCS-C137 | A compact parameter rectangle of separated Möbius branches with uniform trace-class/Lipschitz bounds, all-word Fredholm data, and a strictly positive same-count nonlinear order gap; the larger tangent rectangle is an exact negative control. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_uniform_mobius_bergman_family_route_a/`](../henon_uniform_mobius_bergman_family_route_a/) |
+| HCS-C138 | A source-derived magnetic theta-graph unitary with common-phase gauge invariance, parameter-changing antiunitary reversal, complete Laurent determinant, and winding-resolved oriented primitive ledger; determinant-level flux-sign blindness remains explicit. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_magnetic_quantum_graph_route_a/`](../henon_magnetic_quantum_graph_route_a/) |
+
+C136 and C138 retain different A4 subgates on different source systems; they
+are not merged.  No candidate has a frozen external target divisor, target
+zero census, analytic completion, or counting-law protocol.  Hence A2/A3
+remain failed, every overall verdict is `ROUTE_A_EXPLORATORY`, the common
+scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
+`route_b_invocation_allowed=false` throughout.
+
 ## HCS-C129--HCS-C133 structural-gate round (2026-08-24)
 
 Five source-locked candidates were retained as distinct Route-A structural

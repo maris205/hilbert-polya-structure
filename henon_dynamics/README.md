@@ -2160,3 +2160,24 @@ artifact ledger, uniform release audit, and strict per-candidate Route-A
 tuples.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, every package has
 `route_b_invocation_allowed=false`, and no coordinates are combined across
 candidates.
+
+## Route-A refinement round C134--C138
+
+This round converts five boundaries from C129--C133 into new exact tests: a
+faithful character torus, a directed-edge roof, CRT-compatible generalized
+metaplectic characters, a uniform nonlinear Bergman family, and a magnetic
+quantum graph.  Every paper records one explicit structural advance together
+with the obstruction that remains.  Exact evidence, independent validation,
+hostile mutation tests, closed manifests, and reproducible PDF papers are
+retained package by package.
+
+- [C134 faithful character-torus recovery](henon_faithful_character_torus_route_a/README.md) · [paper PDF](henon_faithful_character_torus_route_a/paper/main.pdf)
+- [C135 directed-edge nonlattice suspension](henon_edge_roof_suspension_route_a/README.md) · [paper PDF](henon_edge_roof_suspension_route_a/paper/main.pdf)
+- [C136 CRT-compatible metaplectic characters](henon_crt_metaplectic_compatibility_route_a/README.md) · [paper PDF](henon_crt_metaplectic_compatibility_route_a/paper/main.pdf)
+- [C137 uniform Möbius--Bergman family](henon_uniform_mobius_bergman_family_route_a/README.md) · [paper PDF](henon_uniform_mobius_bergman_family_route_a/paper/main.pdf)
+- [C138 magnetic theta-graph scattering](henon_magnetic_quantum_graph_route_a/README.md) · [paper PDF](henon_magnetic_quantum_graph_route_a/paper/main.pdf)
+
+See the [C134--C138 batch plan](BATCH_PLAN_C134_C138.md) and
+[batch review](BATCH_REVIEW_C134_C138.md) for the exact hash ledger, uniform
+release audit, cross-review repairs, and conservative Route-A tuples.  The
+common scope remains `NO_BAD_EULER_OR_ROOT_NUMBER`; Route B is unauthorized.

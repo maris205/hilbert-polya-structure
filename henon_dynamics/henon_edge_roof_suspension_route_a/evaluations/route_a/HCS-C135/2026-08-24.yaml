@@ -1,0 +1,71 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C135
+source_commit: UNCOMMITTED_PACKAGE_BUILD
+evaluation_date: 2026-08-24
+
+source_lock:
+  object: full binary shift suspension with the ordered edge roof matrix [[1,sqrt(2)],[sqrt(3),sqrt(6)]]
+  clock: continuous edge-roof suspension time with base return count retained
+  normalization: unit transition weights and the exact basis (1,sqrt(2),sqrt(3),sqrt(6))
+  determinant_convention: d_tau(s)=det(I-M_tau(s))
+  cutoff: no theorem cutoff; periods 1 through 10 are replay only
+  precision: exact integer edge-count vectors and symbolic multiquadratic arithmetic
+  allowed_data: frozen full-shift adjacency and ordered roof matrix only
+  forbidden_data: external prime or zero tables, arithmetic/local factors, root numbers, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: intrinsic primitive suspension orbits and their directed-edge-count vectors are reproducible at every period
+  strongest_failure: no prime-like target correspondence is supplied
+  metrics:
+    rooted_closed_words_through_10: 2046
+    primitive_cycles_through_10: 226
+    first_same_edge_count_collision_period: 6
+  artifacts:
+    - results/c135_edge_roof_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact all-period formal determinant, trace identity, and primitive suspension product
+  strongest_failure: no frozen target divisor is compared
+  metrics:
+    replay_period_limit: 10
+    target_zero_comparison_count: 0
+  artifacts:
+    - results/c135_edge_roof_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source determinant is an explicit entire exponential polynomial with a nonlattice clock
+  strongest_failure: no target functional equation, Gamma factor, counting law, or continuation comparison is in scope
+  metrics:
+    source_entire_determinant: true
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the suspension flow is a natural classical clock refinement
+  strongest_failure: no unitary, scattering, Hamiltonian, metaplectic, or self-adjoint lift is constructed
+  metrics:
+    natural_quantizations_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact injectivity of admissible directed-edge-count sectors; no orbit injectivity or off-diagonal orientation recovery
+blocking_conditions:
+  - distinct primitive necklaces can share one edge-count vector
+  - every binary closed word satisfies N01=N10
+  - target divisor and target global analytic structure are absent
+next_smallest_test: move to a minimal three-state edge graph and test whether directed flow conservation leaves a smaller but nonzero orientation-blind subspace
+route_b_invocation_allowed: false

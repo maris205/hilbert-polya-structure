@@ -1,0 +1,75 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C134
+source_commit: UNCOMMITTED_PACKAGE_BUILD
+evaluation_date: 2026-08-24
+
+source_lock:
+  object: scaled three-state graph-directed affine Henon contractions with the labelled character torus of integer translations
+  clock: one admissible graph edge per iterate
+  normalization: fixed A, B, c; k at least one; translations are a branch permutation of (-2k,0,2k); chi_u(m)=u^m
+  determinant_convention: D_t,u(z)=det(I-z*L_t,u)
+  cutoff: no theorem cutoff; periods and Taylor powers 1 through 8 are replay prefixes
+  precision: exact Laurent-polynomial and Gaussian-rational arithmetic
+  allowed_data: frozen affine family, graph, weights, scaled Hardy domains, and labelled character parameter
+  forbidden_data: external zero or prime tables, arithmetic/local factors, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: primitive admissible necklaces biject with primitive geometric cycles at all periods throughout the scaled separated family
+  strongest_failure: no prime-like target correspondence is supplied
+  metrics:
+    rooted_closed_words_through_8: 284
+    primitive_cycles_through_8: 40
+    theorem_period_cutoff: none
+  artifacts:
+    - results/c134_character_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-side trace-class Fredholm character family and three-log-jet recovery theorem
+  strongest_failure: no frozen target divisor is compared, so the target-facing A2 gate fails
+  metrics:
+    trace_prefix_length: 8
+    taylor_degree: 8
+    exact_permutation_recoveries: 12
+    target_zero_comparison_count: 0
+  artifacts:
+    - paper/main.pdf
+    - results/c134_character_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source Fredholm family is entire and has a normally convergent lattice product
+  strongest_failure: no target functional equation, Gamma factor, counting law, or continuation comparison is in scope
+  metrics:
+    source_entire_determinant: true
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: the labelled U(1) character torus supplies an exact source-side phase family on one global Hardy owner
+  strongest_failure: no source-derived unitary, scattering, Hamiltonian, or metaplectic quantization is constructed
+  metrics:
+    faithful_exact_character_anchors: 1
+    natural_quantizations_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c134_character_evidence.json
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact labelled integer-translation recovery inside the frozen affine family; no finite-precision stability, arbitrary geometry, or target recovery
+blocking_conditions:
+  - removing the labelled character orientation leaves the parameter-inversion ambiguity D_{-t,u}(z)=D_{t,u^{-1}}(z)
+  - target divisor matching is absent
+  - target global analytic structure is absent
+next_smallest_test: seek a natural source-derived phase or operator structure while preserving the exact recovery theorem
+route_b_invocation_allowed: false
