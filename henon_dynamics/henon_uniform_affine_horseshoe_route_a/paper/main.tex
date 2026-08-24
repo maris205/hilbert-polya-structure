@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\usepackage{xcolor}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\title{A Parameter-Uniform Affine H\'enon Horseshoe:\\
+Exact Coding, Stability Traces, and a Trace-Class Owner}
+\author{H\'enon Route-A Working Series, C127}
+\date{24 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We exhibit a two-parameter family of piecewise-affine H\'enon horseshoes for
+which the hyperbolic geometry, full-shift coding, every-period fixed-point
+weights, and a trace-class operator identity are uniform on an explicit
+rectangle.  For $(\lambda,\mu)\in[3,4]\times[1/5,1/3]$, every based binary
+word of length $n$ determines exactly one periodic point and the weighted
+fixed-point sum is
+\[
+ \frac{2^n}{(\lambda^n-1)(1-\mu^n)}.
+\]
+We realize this sum as the $n$th trace of a natural stability-mode operator,
+derive its Fredholm product, prove a uniform zero-free disk $|z|<3/2$, and
+give explicit trace-norm Lipschitz constants across the whole parameter
+rectangle.  The result closes a structural uniform-parameter gate; it does
+not compare the determinant with an external spectral target.
+\end{abstract}
+
+\section{Progress over the prior gate}
+
+The prior H\'enon-track evidence included individual parameter witnesses and
+finite symbolic prefixes.  Such evidence does not imply persistence on a
+region.  Here the advance is a single theorem, with explicit constants, on a
+two-dimensional parameter rectangle.  It simultaneously controls strip
+geometry, hyperbolicity, coding, all periods, a global Hilbert-space owner,
+and its determinant.  No fitted target data enter the construction.
+
+\section{The affine horseshoe}
+
+Let $\mathcal P=[3,4]\times[1/5,1/3]$.  For
+$(\lambda,\mu)\in\mathcal P$, set
+\[
+ R_0=[0,\lambda^{-1}]\times[0,1],\qquad
+ R_1=[1-\lambda^{-1},1]\times[0,1]
+\]
+and define, for $e\in\{0,1\}$,
+\begin{equation}\label{eq:map}
+ F_{\lambda,\mu}(x,y)=
+ \bigl(\lambda x-(\lambda-1)e,\;\mu y+(1-\mu)e\bigr),
+ \qquad (x,y)\in R_e.
+\end{equation}
+Each vertical strip maps across the square into a horizontal strip.  The
+domain gap is $1-2/\lambda\ge1/3$ and the image gap is
+$1-2\mu\ge1/3$.  On either branch,
+\[
+ DF_{\lambda,\mu}=\operatorname{diag}(\lambda,\mu),
+ \qquad \lambda\ge3,\quad 0<\mu\le1/3.
+\]
+Thus the coordinate cones are invariant with uniform expansion and
+contraction.
+
+\begin{theorem}[uniform coding and periodic closure]\label{thm:coding}
+The maximal two-sided invariant set of \eqref{eq:map} is conjugate to the
+full two-shift.  A based word $e_0\ldots e_{n-1}$ has exactly one periodic
+point, whose initial coordinates are
+\begin{align}
+ x_0&=\frac{\lambda-1}{\lambda^n-1}
+       \sum_{j=0}^{n-1}\lambda^{n-1-j}e_j,\label{eq:x}\\
+ y_0&=\frac{1-\mu}{1-\mu^n}
+       \sum_{j=0}^{n-1}\mu^{n-1-j}e_j.\label{eq:y}
+\end{align}
+Consequently $\#\Fix(F^n)=2^n$, and the primitive-cycle count is
+\[
+ p_n=\frac1n\sum_{d\mid n}\operatorname{mobius}(d)2^{n/d}.
+\]
+\end{theorem}
+
+\begin{proof}
+Forward iteration of the first coordinate and backward determination of the
+stable coordinate give nested intervals whose diameters are bounded by
+$3^{-k}$.  The strip gaps make distinct itineraries disjoint.  Solving the
+two affine closure equations gives \eqref{eq:x}--\eqref{eq:y}; these points
+remain in their prescribed strips by the same nested-interval construction.
+There are therefore $2^n$ based fixed points.  M\"obius inversion removes
+repetitions and cyclic rooting.
+\end{proof}
+
+\section{A trace-class stability owner}
+
+At every $q\in\Fix(F^n)$,
+\[
+ |\det(I-DF^n(q))|=(\lambda^n-1)(1-\mu^n).
+\]
+We now obtain the resulting orbit sum as an actual operator trace.  Let
+\[
+ \mathcal H=\mathbb C^2\otimes
+ \ell^2(\mathbb N_{\ge1}\times\mathbb N_0),\qquad
+ J=\begin{pmatrix}1&1\\1&1\end{pmatrix},
+\]
+and let $D_{\lambda,\mu}$ be diagonal with entry
+$\lambda^{-r}\mu^s$ at $(r,s)$.  Define
+$K_{\lambda,\mu}=J\otimes D_{\lambda,\mu}$.
+
+\begin{theorem}[all-period trace identity]\label{thm:trace}
+The operator $K_{\lambda,\mu}$ is trace class, uniformly on $\mathcal P$,
+and
+\begin{align}
+ \|K_{\lambda,\mu}\|_1
+ &=\frac{2}{(\lambda-1)(1-\mu)}\le\frac32,\label{eq:norm}\\
+ \Tr K_{\lambda,\mu}^n
+ &=\frac{2^n}{(\lambda^n-1)(1-\mu^n)}
+ =\sum_{q\in\Fix(F^n)}\frac1{|\det(I-DF^n(q))|}.
+ \label{eq:trace}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+The nonzero eigenvalue of $J$ is $2$.  Both geometric series in
+\[
+ 2\sum_{r\ge1}\lambda^{-r}\sum_{s\ge0}\mu^s
+\]
+converge uniformly, proving \eqref{eq:norm}.  Taking $n$th powers gives
+$\Tr J^n=2^n$ and
+\[
+ \sum_{r\ge1}\lambda^{-nr}\sum_{s\ge0}\mu^{ns}
+ =\frac1{(\lambda^n-1)(1-\mu^n)},
+\]
+which is \eqref{eq:trace}.
+\end{proof}
+
+\section{Uniform determinant control}
+
+Trace class makes the following product an ordinary Fredholm determinant:
+\begin{equation}\label{eq:fredholm}
+ \det(I-zK_{\lambda,\mu})
+ =\prod_{r\ge1,\,s\ge0}
+   \bigl(1-2z\lambda^{-r}\mu^s\bigr).
+\end{equation}
+Its smallest-modulus zero is $z=\lambda/2$, so the determinant is zero-free
+for $|z|<\lambda/2$ and uniformly zero-free for $|z|<3/2$.  The word
+``open'' matters: at $\lambda=3$, the boundary point $z=3/2$ is a zero.
+
+Differentiating the absolutely convergent diagonal series gives
+\[
+ \|\partial_\lambda K\|_1\le\frac34,
+ \qquad
+ \|\partial_\mu K\|_1\le\frac94
+\]
+on $\mathcal P$.  Integration along a coordinate path yields
+\begin{equation}\label{eq:lipschitz}
+ \|K_{\lambda,\mu}-K_{\lambda',\mu'}\|_1
+ \le\frac34|\lambda-\lambda'|+
+      \frac94|\mu-\mu'|.
+\end{equation}
+Equations \eqref{eq:fredholm}--\eqref{eq:lipschitz} are global parameter
+statements, not neighboring-point numerical tests.
+
+\section{Exact certificate and hostile controls}
+
+The release evidence uses rational arithmetic on a $3\times3$ parameter grid,
+checks periods through $12$, and replays representative words exactly.  An
+independent implementation reconstructs every invariant.  A separate SymPy
+program verifies the geometric-series and matrix identities, while sixteen
+semantic mutations test gaps, counts, traces, displayed periodic coordinates,
+scope flags, and route labels.
+
+Three failure modes delimit the theorem.  If $\lambda<2$, the domain strips
+can overlap; if $\mu>1/2$, the image strips can overlap.  Replacing the
+stability denominator by $(\lambda\mu)^n$ is not a harmless convention: it
+breaks the trace identity.  Finally, $2^n$ counts rooted words, not primitive
+cycles; the latter require M\"obius inversion.
+
+\section{Route-A assessment and limitations}
+
+The structural uniform-parameter subgate is certified.  The strict canonical
+tuple is nevertheless
+\[
+ (\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+A2 and A3 remain failed because there is no frozen target-facing protocol,
+missing/extra-zero census, or target divisor comparison.  The internal zeros
+of \eqref{eq:fredholm} must not be rebranded as arithmetic zeros.  No natural
+quantization is constructed, and Route B is not authorized.  The active scope
+is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section{Conclusion}
+
+This family supplies an explicit answer to a narrow but important Route-A
+question: exact orbit coding and a trace-class stability determinant can be
+made uniform on a genuine H\'enon-style parameter region.  The next separate
+task is target-facing validation under a future authorized protocol; it is
+not inferred from the present structural theorem.
+
+\end{document}

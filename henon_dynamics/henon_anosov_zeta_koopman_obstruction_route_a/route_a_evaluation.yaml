@@ -1,0 +1,129 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C125
+source_commit: ab22333a24eacecdd33c9fb07a9394d9fe0cc99b
+evaluation_date: 2026-08-24
+
+candidate_definition: "the hyperbolic toral automorphism induced by A=[[2,1],[1,1]], its unweighted Artin-Mazur orbit zeta, and its natural Haar-space Koopman action"
+family: "two-dimensional monomial/Anosov toral automorphism"
+phase_space: "T^2=R^2/Z^2 with normalized Haar measure"
+dynamics: "T_A([x])=[Ax] for A=[[2,1],[1,1]]"
+parameters: "no fitted parameter; one fixed integer matrix"
+parameter_provenance: "selected before computation as an exact hyperbolic all-period control, without prime or target-zero data"
+clock: "one torus iterate"
+normalization: "unsigned fixed-point cardinality and unweighted Artin-Mazur convention"
+determinant_convention: "zeta_T(z)=exp(sum_(n>=1) #Fix(T_A^n) z^n/n); this orbit zeta is not identified with det(I-zU) for Koopman U"
+orbit_cutoff: "none in the theorem; periods 1 through 12 are replay sentinels"
+precision: "exact integers, radicals, rational formal series, and exhaustive finite modular enumeration"
+training_data: "none"
+forbidden_data: "prime tables, Riemann-zero tables, target fitting, post-hoc normalization, arithmetic local factors, and Route-B claims"
+code_commit: "uncommitted C125 package built on baseline ab22333a24eacecdd33c9fb07a9394d9fe0cc99b; parent batch commit will bind release"
+artifact_paths:
+  - RESEARCH_QUESTION.md
+  - SOURCE_AUDIT.md
+  - THEOREM_PACKAGE.md
+  - results/c125_anosov_evidence.json
+  - results/TEST_REPORT.md
+  - paper/main.pdf
+
+transfer_operator: "natural Koopman composition U on L^2(T^2,Haar); proved unitary, noncompact, non-Schatten, and not trace class"
+prior_work_links:
+  - ../henon_fock_nuclear_contraction_route_a/
+  - ../henon_projective_algebraic_stability_route_a/
+
+source_lock:
+  object: "T_A, its complete periodic-point sets, its Artin-Mazur zeta, and the natural Koopman unitary"
+  clock: "one iterate, without time change"
+  normalization: "unsigned cardinalities; signed det(A^n-I) retained only as a rejecting control"
+  determinant_convention: "primitive-orbit Artin-Mazur zeta; no ordinary Fredholm determinant is assigned to non-trace-class Koopman U"
+  cutoff: "all n theorem; exact period-12 replay only"
+  precision: "exact arithmetic and canonical JSON bytes"
+  allowed_data: "integer matrix powers, torus kernels, Mobius inversion, Fourier characters, and finite cyclic-aliasing controls"
+  forbidden_data: "prime/zero tables, arithmetic labels, target fitting, hidden prefactors, and Route-B promotion"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "all primitive periodic orbits are intrinsically and reproducibly counted at every period by exact torus-kernel cardinalities and Mobius inversion"
+  strongest_failure: "there is no prime-like correspondence, logarithmic-prime clock, target amplitude law, or arithmetic labeling"
+  metrics:
+    primitive_orbit_definition: PROVED
+    primitive_repeated_separation: PROVED
+    forward_orientation_and_multiplicity: PROVED
+    phase_convention: "MODELING_CHOICE: unweighted real phase +1; no target phase law"
+    all_period_completeness: PROVED
+    monodromy_source: "the constant derivative A^n is exact"
+    prime_like_clock_law: NOT_TESTABLE
+    prime_like_amplitude_law: NOT_TESTABLE
+    direct_prime_or_zero_lookup: REFUTED
+    neighboring_control: "parabolic shear has nonisolated fixed circles and fails the finite convention"
+    signed_control: "det(A^n-I) is negative and is not substituted for unsigned cardinality"
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c125_anosov_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "the internally owned primitive product is exactly (1-z)^2/(1-3z+z^2) at every order"
+  strongest_failure: "no target divisor or sealed zero comparison exists, and the natural Koopman owner is not determinant class"
+  metrics:
+    explicit_zeta_convention: PROVED
+    all_order_rational_zeta: PROVED
+    ordinary_koopman_fredholm_owner: REFUTED
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: "finite cyclic Fourier pseudo-traces vary with modulus"
+    precision_drift: 0
+    control_margin: "exact parabolic, sign, and modulus-dependent aliasing controls"
+  artifacts:
+    - results/c125_anosov_evidence.json
+    - results/HOSTILE_AUDIT.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: OPEN
+  strongest_evidence: "the source orbit zeta is a globally rational meromorphic function"
+  strongest_failure: "no target functional equation, Gamma factor, trivial-zero treatment, counting law, or controlled target continuation is supplied"
+  metrics:
+    source_meromorphic_continuation: PROVED
+    target_conjugation_symmetry: NOT_TESTABLE
+    target_functional_equation: NOT_TESTABLE
+    gamma_factor: NOT_TESTABLE
+    trivial_zeros: NOT_TESTABLE
+    Riemann_von_Mangoldt_law: NOT_TESTABLE
+    no_target_zero_producing_prefactor: NOT_TESTABLE
+  artifacts:
+    - SOURCE_AUDIT.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: "the coherent torus phase space has a source-defined unitary Koopman action on L^2(T^2,Haar) with the unchanged discrete clock"
+  strongest_failure: "no trace-compatible quantization preserves the required orbit phases/weights, and no self-adjoint target operator is constructed"
+  metrics:
+    coherent_phase_space: PROVED
+    natural_unitary_action: PROVED
+    time_reversal_test: OPEN
+    trace_compatible_orbit_phase_lift: OPEN
+    natural_quantization: OPEN
+    route_b_ready: false
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+overall_tuple: "(A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)"
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "C125 proves a complete all-period torus-orbit census, its exact rational Artin-Mazur zeta, and noncompactness of the natural Koopman unitary. It does not prove a prime-like orbit law, target divisor match, ordinary Koopman Fredholm determinant, target analytic structure, natural quantization, Hilbert-Polya operator, or Route-B readiness."
+blocking_conditions:
+  - "no prime-like orbit-to-target correspondence or amplitude law"
+  - "no target divisor comparison or sealed validation region"
+  - "the natural Koopman operator is unitary but not determinant class"
+  - "no target analytic completion or trace-compatible quantum lift"
+next_smallest_test: "retain the exact orbit census but replace the natural L2 owner only if a source-derived anisotropic or flat-trace space is specified before any target comparison"
+route_b_invocation_allowed: false

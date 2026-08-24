@@ -1,0 +1,162 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C125AnosovZetaKoopman20260824}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{proposition}{Proposition}
+\title{An Exact Anosov Orbit Zeta and a\\
+Koopman Determinant-Class Obstruction}
+\author{Anonymous Route-A report}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the toral automorphism induced by
+$A=\left(\begin{smallmatrix}2&1\\1&1\end{smallmatrix}\right)$, we prove
+$\#\operatorname{Fix}(T_A^n)=|\det(A^n-I)|$ at every period, recover all
+primitive counts by M\"obius inversion, and resum the Artin--Mazur zeta to
+$(1-z)^2/(1-3z+z^2)$.  The natural Koopman action on
+$L^2(\mathbb T^2)$ is unitary but noncompact: it permutes the Fourier basis
+and therefore belongs to no finite Schatten class.  Thus the exact orbit zeta
+is not the ordinary trace-class Fredholm determinant of this natural owner.
+Parabolic, signed-count, and cyclic-aliasing controls delimit the result.
+\end{abstract}
+
+\section{Complete orbit census}
+Freeze $T_A([x])=[Ax]$ on $\mathbb T^2=\mathbb R^2/\mathbb Z^2$, with one
+iterate as clock and unsigned fixed-point cardinality as normalization.  The
+eigenvalues of $A$ are
+\[
+ \lambda_\pm=\frac{3\pm\sqrt5}{2},\qquad
+ \lambda_+>1>\lambda_->0,\qquad \lambda_+\lambda_-=1.
+\]
+Hence $A^n-I$ is nonsingular for every $n\geq1$.  Fixed points of $T_A^n$
+are the kernel of the induced integer torus endomorphism, whose cardinality is
+the lattice index $|\det(A^n-I)|$.
+
+\begin{proposition}
+Let $S_n=\operatorname{tr}(A^n)$.  For every $n\geq1$,
+\[
+ N_n:=\#\operatorname{Fix}(T_A^n)=S_n-2,
+ \quad S_0=2,\ S_1=3,\ S_n=3S_{n-1}-S_{n-2}.
+\]
+The number of points of exact period $n$ is
+$P_n=\sum_{d\mid n}\mu(n/d)N_d$, and the primitive-orbit count is
+$O_n=P_n/n$.
+\end{proposition}
+
+Indeed, in dimension two,
+$\det(A^n-I)=\det(A^n)-\operatorname{tr}(A^n)+1=2-S_n<0$.
+M\"obius inversion then separates primitive points from repetitions.  This is
+an all-order theorem; Table~\ref{tab:counts} is only a replay sentinel.
+\begin{table}[ht]
+\centering
+\scriptsize
+\caption{Exact replay through period twelve.}
+\label{tab:counts}
+\begin{tabular}{@{}c*{6}{r}@{}}
+\toprule
+$n$&1&2&3&4&5&6\\ \midrule
+$N_n$&1&5&16&45&121&320\\
+$O_n$&1&2&5&10&24&50\\ \midrule
+$n$&7&8&9&10&11&12\\ \midrule
+$N_n$&841&2205&5776&15125&39601&103680\\
+$O_n$&120&270&640&1500&3600&8610\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Primitive product and exact zeta}
+With the frozen unweighted convention,
+\[
+ \zeta_T(z)=\exp\!\left(\sum_{n\geq1}\frac{N_nz^n}{n}\right)
+ =\prod_{\gamma\ \mathrm{primitive}}(1-z^{|\gamma|})^{-1}.
+\]
+Since $N_n=\lambda_+^n+\lambda_-^n-2$, the elementary logarithmic series
+gives
+\[
+ \boxed{\displaystyle
+ \zeta_T(z)=\frac{(1-z)^2}
+ {(1-\lambda_+z)(1-\lambda_-z)}
+ =\frac{(1-z)^2}{1-3z+z^2}.}
+\]
+The identity holds formally at zero and as the displayed rational meromorphic
+function.  It is an internally owned orbit zeta, not a target-divisor match.
+
+\section{Natural Koopman obstruction}
+On $\mathcal H=L^2(\mathbb T^2,dx)$ define $(Uf)(x)=f(T_Ax)$.  Haar
+invariance makes $U$ unitary.  For the Fourier characters
+$e_k(x)=\exp(2\pi i k\cdot x)$,
+\[
+ Ue_k=e_{A^{\mathsf T}k}.
+\]
+The index map is a bijection of $\mathbb Z^2$.  More decisively, the
+orthonormal sequence $e_{(j,0)}$ maps to the orthonormal sequence
+$e_{(2j,j)}$.  Its image has no norm-convergent subsequence, so $U$ is not
+compact.  Consequently $U$ lies in no finite Schatten class, is not trace
+class, and supplies neither an ordinary operator trace nor an ordinary
+trace-class Fredholm determinant $\det(I-zU)$.  We therefore do not identify
+that nonexistent ordinary determinant with $\zeta_T$; generalized flat or
+anisotropic traces would require a separately frozen theorem.
+
+\section{Three exact controls}
+First, the parabolic parent
+$B=\left(\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right)$ satisfies
+$B^n=\left(\begin{smallmatrix}1&n\\0&1\end{smallmatrix}\right)$.
+Its fixed set is the union of the $n$ circles $y=j/n$; the finite
+fixed-cardinality convention is unavailable.  Second,
+$\det(A^n-I)=-N_n$: deleting the absolute value creates signed Lefschetz
+data, not negative cardinalities.
+
+Third, wrap Fourier indices modulo $m$ and count solutions of
+$(A^{\mathsf Tn}-I)k=0\pmod m$.  These finite cyclic pseudo-traces vary with
+$m$ rather than approaching an ordinary Koopman trace.  For example,
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}c*{7}{r}@{}}
+\toprule
+$n\backslash m$&2&3&4&5&6&7&8\\ \midrule
+2&1&1&1&5&1&1&1\\
+3&4&1&16&1&4&1&16\\
+4&1&9&1&5&9&1&1\\
+6&4&1&16&5&4&1&64\\
+\bottomrule
+\end{tabular}
+\end{center}
+The evidence exhausts moduli $2$ through $12$ for these four iterates.
+
+\section{Progress, validation, and boundary}
+Relative to C121, the result advances from all-order degree growth plus one
+cycle to a complete all-order fixed/primitive census and exact orbit zeta.
+Relative to C119, rich recurrent dynamics and a natural global Hilbert action
+now coexist in one system; the new theorem identifies their precise mismatch:
+the natural action is unitary rather than determinant class.
+
+An independent implementation reconstructs every evidence field; a fresh
+SymPy program passes 238 exact checks, canonical replay fixes the bytes, and
+all 23 hostile edits are rejected.  Fixed-date isolated PDF builds agree
+bytewise and all fonts are embedded.
+
+Complete intrinsic orbit data still lack a prime-like correspondence, so A1
+is weak.  The exact internal zeta has no target-divisor test and no ordinary
+Koopman Fredholm owner, so A2 fails.  Target functional equation, Gamma
+factor, counting law, and continuation are absent, so A3 fails.  The natural
+unitary action supplies only an A4 formal hint.  Thus
+\begin{center}
+\texttt{(A1\_WEAK, A2\_FAIL, A3\_FAIL, A4\_FORMAL\_HINT)},\\
+\texttt{ROUTE\_A\_EXPLORATORY},\quad
+\texttt{route\_b\_invocation\_allowed=false}.
+\end{center}
+We make no claim about arithmetic/local data, Euler factors, root numbers,
+automorphy, Hilbert--P\'olya, Riemann zeros, natural quantization, or Route B.
+Scope: \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\end{document}

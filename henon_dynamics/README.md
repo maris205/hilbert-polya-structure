@@ -2115,3 +2115,24 @@ See the [C119--C123 batch plan](BATCH_PLAN_C119_C123.md) and
 [batch review](BATCH_REVIEW_C119_C123.md) for the exact artifact ledger,
 uniform audit, integrity/failure-mode review, and the strict per-candidate
 Route-A verdicts.
+
+## Route-A structural-gate round C124--C128
+
+This round keeps subtype diversity but raises the progress threshold: each
+paper closes an all-period, parameter-uniform, natural-operator, or exact
+obstruction gate.  The five systems are a graph-directed analytic Hénon IFS,
+an Anosov torus automorphism, a critical Chebyshev contracting skew product,
+a parameter-uniform affine horseshoe, and an exact finite metaplectic lift.
+Every entry has exact evidence, independent reconstruction, hostile mutation
+tests, a package-local Route-A evaluation, a closed manifest, and a
+reproducible paper PDF.
+
+- [C124 graph-directed Hardy--Fredholm bridge](henon_graph_directed_hardy_trace_route_a/README.md) · [paper PDF](henon_graph_directed_hardy_trace_route_a/paper/main.pdf)
+- [C125 Anosov zeta and Koopman obstruction](henon_anosov_zeta_koopman_obstruction_route_a/README.md) · [paper PDF](henon_anosov_zeta_koopman_obstruction_route_a/paper/main.pdf)
+- [C126 Chebyshev contracting skew product](henon_chebyshev_contracting_skew_route_a/README.md) · [paper PDF](henon_chebyshev_contracting_skew_route_a/paper/main.pdf)
+- [C127 uniform affine Hénon horseshoe](henon_uniform_affine_horseshoe_route_a/README.md) · [paper PDF](henon_uniform_affine_horseshoe_route_a/paper/main.pdf)
+- [C128 finite metaplectic Hénon quantization](henon_finite_metaplectic_quantization_route_a/README.md) · [paper PDF](henon_finite_metaplectic_quantization_route_a/paper/main.pdf)
+
+See the [C124--C128 batch plan](BATCH_PLAN_C124_C128.md) and
+[batch review](BATCH_REVIEW_C124_C128.md) for the progress gates, exact hash
+ledger, uniform release audit, and conservative Route-A boundary.

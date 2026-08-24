@@ -3,6 +3,25 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C124--HCS-C128 structural-gate round (2026-08-24)
+
+Five source-locked candidates were retained as explicit Route-A structural
+progress.  Their packages and formal evaluations are:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C124 | Strongly separated graph-directed Hénon cycles and their all-period trace-class Hardy--Fredholm owner; translation blindness recorded exactly. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_graph_directed_hardy_trace_route_a/`](../henon_graph_directed_hardy_trace_route_a/) |
+| HCS-C125 | Complete Anosov torus orbit zeta plus proof that the natural Koopman unitary is noncompact and non-Schatten. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_anosov_zeta_koopman_obstruction_route_a/`](../henon_anosov_zeta_koopman_obstruction_route_a/) |
+| HCS-C126 | Complete all-period real Chebyshev-skew atlas, primitive counts, stability, orientation, and repetition. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_chebyshev_contracting_skew_route_a/`](../henon_chebyshev_contracting_skew_route_a/) |
+| HCS-C127 | Uniform two-parameter affine-horseshoe coding and trace-class stability determinant with exact Lipschitz bounds. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_uniform_affine_horseshoe_route_a/`](../henon_uniform_affine_horseshoe_route_a/) |
+| HCS-C128 | Exact level-seven metaplectic unitary with Weyl Egorov, clock preservation, antiunitary reversal, finite-level aliasing, and a scoped even-modulus convention obstruction. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_finite_metaplectic_quantization_route_a/`](../henon_finite_metaplectic_quantization_route_a/) |
+
+C124 closes the previously named internal primitive/global-owner bridge, and
+C128 reaches the natural-quantization subgate.  No candidate contains a
+frozen target-divisor protocol, so strict A2/A3 remain failed and the overall
+status is `ROUTE_A_EXPLORATORY`.  Candidate coordinates are not combined;
+Route B remains unauthorized.
+
 Round `HCS-2026-08-05` is complete: C02/C02B remains an analytic
 infrastructure candidate, while C03 and C05 are registered obstructions.  The
 conditional next-paper roadmap is
