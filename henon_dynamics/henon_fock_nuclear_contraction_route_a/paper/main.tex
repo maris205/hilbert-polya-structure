@@ -1,0 +1,129 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\title{A Trace-Class Bosonic Fock Owner for an Exact\\Linear H\'enon-Type Contraction}
+\author{Route-A structural certificate C119}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We freeze a rational linear H\'enon-type map whose Euclidean singular values
+are strictly below one and second-quantize it on standard bosonic Fock space.
+The resulting operator is trace class.  We derive all power traces, an entire
+Fredholm product, its Taylor coefficients through degree eight, and its full
+zero divisor.  Strict contraction also forces the origin to be the only
+periodic point.  Thus the construction supplies a source-defined analytic
+operator determinant while failing the nontrivial orbit branch; no external
+target-divisor or arithmetic correspondence is claimed.
+\end{abstract}
+
+\section{Frozen contraction and its orbit obstruction}
+Let $\Phi(v)=Av$ on $\mathbb C^2$, where
+\[
+ A=\begin{pmatrix}3/4&-1/4\\1/2&0\end{pmatrix},\qquad
+ \chi_A(\lambda)=(\lambda-1/2)(\lambda-1/4),\qquad \det A=1/8.
+\]
+This is the recurrence $\Phi(x,y)=(3x/4-y/4,x/2)$.  Euclidean contraction,
+not merely spectral-radius contraction, follows from
+\[
+ A^{\mathsf T}A=\begin{pmatrix}13/16&-3/16\\-3/16&1/16\end{pmatrix},
+ \qquad s_{1,2}^2=\frac{7\pm3\sqrt5}{16}.
+\]
+Both numbers lie in $(0,1)$: $49>45$ gives $7-3\sqrt5>0$, while
+$5<9$ gives $7+3\sqrt5<16$.  Hence $s_1,s_2<1$.  Moreover, for every
+$n\geq1$, the eigenvalues of $A^n-I$ are $2^{-n}-1$ and $4^{-n}-1$.
+Thus $A^n-I$ is invertible, so the origin is the only finite-period point,
+even over $\mathbb C$.
+
+\section{A trace-class Fock operator}
+On the standard bosonic Fock space
+\[
+ \mathcal F_s(\mathbb C^2)=\bigoplus_{m\geq0}\operatorname{Sym}^m(\mathbb C^2),
+ \qquad \Gamma(A)=\bigoplus_{m\geq0}\operatorname{Sym}^m A,
+\]
+the polar decomposition and functoriality of symmetric powers show that the
+singular values of $\Gamma(A)$ are exactly $s_1^i s_2^j$, $i,j\geq0$.
+Consequently
+\[
+ \|\Gamma(A)\|_1=\sum_{i,j\geq0}s_1^i s_2^j
+ =\frac1{(1-s_1)(1-s_2)}<\infty.
+\]
+Thus $\Gamma(A)$ is trace class.  Since $A$ has distinct eigenvalues, its
+degree-$m$ symmetric power has eigenvalues $2^{-i}4^{-j}$ for $i+j=m$.
+Across all degrees, each pair $(i,j)\in\mathbb Z_{\geq0}^2$ occurs once, and
+therefore, for every $n\geq1$,
+\begin{equation}
+ t_n:=\operatorname{Tr}\Gamma(A)^n
+ =\sum_{i,j\geq0}2^{-in}4^{-jn}
+ =\frac1{(1-2^{-n})(1-4^{-n})}. \tag{1}
+\end{equation}
+
+\section{Fredholm product, coefficients, and zeros}
+Trace class makes the Fredholm determinant entire, and its eigenvalue product is
+\begin{equation}
+ D(z)=\det(I-z\Gamma(A))
+ =\prod_{i,j\geq0}(1-z\,2^{-i}4^{-j}). \tag{2}
+\end{equation}
+The product is genus zero because $\sum_{i,j}2^{-i}4^{-j}<\infty$.
+Writing $D(z)=\sum_{n\geq0}d_nz^n$, the exact recurrence
+\[
+ d_0=1,\qquad nd_n=-\sum_{k=1}^n t_kd_{n-k}
+\]
+gives the independently checked prefix below.
+\begin{center}
+\scriptsize
+\begin{tabular}{@{}rcc@{}}
+\toprule
+$n$ & $t_n$ & $d_n$\\
+\midrule
+0 & --- & $1$\\
+1 & $8/3$ & $-8/3$\\
+2 & $64/45$ & $128/45$\\
+3 & $512/441$ & $-32768/19845$\\
+4 & $4096/3825$ & $3014656/5060475$\\
+5 & $32768/31713$ & $-23119003648/160482843675$\\
+6 & $262144/257985$ & $112877646118912/4600240713943875$\\
+7 & $2097152/2080641$ & $-29195669458808471552/9571449439300898023875$\\
+8 & $16777216/16711425$ & $35666710678759844872192/125452987800916870398929625$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Equation~(2) also gives the complete zero divisor.  A zero $2^k$ arises from
+$i+2j=k$; the nonnegative solutions are
+$(i,j)=(k-2j,j)$ for $0\leq j\leq\lfloor k/2\rfloor$.  Hence
+\[
+ \operatorname{ord}_{z=2^k}D=\lfloor k/2\rfloor+1\qquad(k\geq0),
+\]
+and there are no other zeros.
+
+\section{Reproducibility and Route-A boundary}
+From the package directory run
+\begin{verbatim}
+python3 code/c119_fock_producer.py
+python3 code/c119_fock_checker.py
+python3 code/c119_sympy_crosscheck.py
+python3 code/c119_replay.py
+python3 code/c119_mutation.py
+\end{verbatim}
+The independent checker, 21 symbolic checks, byte replay, and all 12 hostile
+mutations pass.  No citation or external data enters the certificate.
+
+The strict evaluator tuple is
+\[
+ (\texttt{A1\_FAIL},\texttt{A2\_FAIL},
+   \texttt{A3\_FAIL},\texttt{A4\_FAIL}).
+\]
+A1 records the absence of nontrivial periodic orbits.  Although the Fock
+determinant theorem is exact, A2 fails because this owner is not derived from
+primitive orbits and no target divisor is matched.  A3 fails because no target
+functional equation, Gamma factor, counting law, or continuation comparison
+is attempted.  Overall status remains Route-A exploratory.
+We claim no orbit-derived determinant,
+arithmetic/local data, Euler factors, root numbers, automorphy,
+Hilbert--P\'olya operator, Riemann-zero correspondence, or Route B.  The
+literal firewall is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

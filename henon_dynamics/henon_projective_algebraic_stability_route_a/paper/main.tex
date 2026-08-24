@@ -1,0 +1,138 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\pdftrailerid{C121ProjectiveStability20260824}
+\pdfinfoomitdate=1
+\pdfsuppressptexinfo=15
+\newtheorem{proposition}{Proposition}
+\title{Projective Algebraic Stability and Exact Degree Doubling\\
+for a Quadratic H\'enon Automorphism}
+\author{Anonymous Route-A report}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We freeze the polynomial automorphism
+$H(x,y)=(x^2-4-y,x)$ and determine its exact projective degree growth.  Its
+forward and inverse indeterminacy points are distinct, and the exceptional
+line maps to a forward-fixed point.  A recurrence proves
+$\deg H^n=2^n$ for every $n\geq1$, hence algebraic dynamical degree two.
+We also certify two fixed points and a primitive real two-cycle with exact
+tangent monodromy; parameters $-3$ and $-5$ are exact negative controls for
+that cycle.  These are exact structural data, but there is no complete orbit
+atlas, prime-like target correspondence, or determinant/analytic bridge.
+\end{abstract}
+
+\section{Birational projective geometry}
+Freeze
+\[
+ H(x,y)=(x^2-4-y,x),\qquad H^{-1}(x,y)=(y,y^2-4-x).
+\]
+Direct substitution verifies both inverse compositions.  Homogenization gives
+\[
+ \bar H[X:Y:Z]=[X^2-4Z^2-YZ:XZ:Z^2],
+\]
+\[
+ \bar H^{-1}[X:Y:Z]=[YZ:Y^2-4Z^2-XZ:Z^2].
+\]
+The corresponding indeterminacy points are
+$I_+=[0:1:0]$ and $I_-=[1:0:0]$.  On $Z=0$ away from $I_+$, the forward map
+has image $I_-$, and $\bar H(I_-)=I_-$.  Since $\det DH=1$, the affine map
+has no exceptional curve; the line at infinity is the only projective
+exceptional curve.  Its orbit is the fixed sequence $I_-,I_-,\ldots$ and
+therefore never reaches $I_+$.
+
+\section{Degree recurrence}
+Put $p_{-1}=y$, $p_0=x$, and
+\[
+ p_n=p_{n-1}^2-4-p_{n-2}.
+\]
+Then $H^n=(p_n,p_{n-1})$.  Induction shows that $p_n$ has degree $2^n$ and
+unique monic leading term $x^{2^n}$: squaring $p_{n-1}$ supplies that term,
+whereas the remaining terms have lower degree.
+
+For completeness, set $P_k=Z^{2^k}p_k(X/Z,Y/Z)$ and $d=2^n$.  The
+projective representative of $H^n$ is
+\[
+ [P_n:P_{n-1}Z^{d/2}:Z^d].
+\]
+Its first coordinate contains $X^d$ and is not divisible by $Z$, while every
+common factor would have to divide the third coordinate $Z^d$.  The triple
+therefore has gcd one.  Consequently
+\[
+ \deg \bar H^n=2^n=(\deg\bar H)^n,\qquad
+ \lambda_1(\bar H)=\lim_{n\to\infty}\deg(H^n)^{1/n}=2.
+\]
+Thus $\bar H$ is algebraically stable at every order, independently of the
+finite replay cutoff.
+The exact replay prefix is shown in Table~\ref{tab:degrees}.
+\begin{table}[ht]
+\centering
+\small
+\caption{Nonexpanded recursive degree certificate.}
+\label{tab:degrees}
+\begin{tabular}{@{}c*{8}{c}@{}}
+\toprule
+$n$&1&2&3&4&5&6&7&8\\
+\midrule
+$\deg p_n$&2&4&8&16&32&64&128&256\\
+$\deg p_{n-1}$&1&2&4&8&16&32&64&128\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Exact low-period witnesses}
+A fixed point has $x=y=q$ and $q^2-2q-4=0$, giving
+\[
+ (q,q)=(1+\sqrt5,1+\sqrt5),\quad(1-\sqrt5,1-\sqrt5).
+\]
+There is also the primitive real cycle
+\[
+ (0,-2)\longmapsto(-2,0)\longmapsto(0,-2).
+\]
+For $B(x)=\bigl(\begin{smallmatrix}2x&-1\\1&0\end{smallmatrix}\bigr)$, its monodromy
+based at $(0,-2)$ is
+\[
+ B(-2)B(0)=\begin{pmatrix}-1&4\\0&-1\end{pmatrix},\quad
+ \operatorname{tr}=-2,\quad\det=1,
+\]
+and $\det(I-zB(-2)B(0))=(1+z)^2$.
+
+The witness also fixes the parameter.  For
+$H_c(x,y)=(x^2+c-y,x)$, each proposed transition has residual $(c+4,0)$.
+Thus $c=-3$ and $c=-5$ give nonzero residuals $(1,0)$ and $(-1,0)$,
+respectively, rather than preserving this cycle.
+
+\section{Scope}
+The evidence stores an exact recurrence DAG, sparse leading certificates, and
+integer probes through $n=8$, avoiding full expansion at degree $256$.  An
+independent checker reconstructs the complete ledger; a fresh SymPy program
+passes 97 identities, canonical replay fixes the bytes, and all sixteen
+hostile edits are rejected.  Fixed-date isolated PDF builds agree bytewise and
+all fonts are embedded.
+
+The all-order degree law, fixed points, and single primitive cycle support only
+A1 weak: no prime-like orbit-to-target correspondence or complete atlas is
+present.  No weighted dynamical zeta, target divisor, or transfer owner exists,
+so A2 fails.  No functional equation, Gamma-factor treatment, counting law,
+controlled continuation, or analytic bridge exists, so A3 fails; no natural
+lift is supplied, so A4 fails.  In the repository evaluator vocabulary,
+\begin{center}
+\texttt{(A1\_WEAK, A2\_FAIL, A3\_FAIL, A4\_FAIL)},\quad
+\texttt{ROUTE\_A\_EXPLORATORY}.
+\end{center}
+The algebraic dynamical degree is not promoted to entropy, and we make no
+claim about arithmetic/local data, Euler factors, root numbers, automorphy,
+Hilbert--P\'olya, Riemann zeros, or Route B.  The release scope is the literal
+\begin{center}
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{center}
+
+\end{document}

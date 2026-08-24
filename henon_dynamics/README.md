@@ -2094,3 +2094,24 @@ scope boundary.
 See the [C114--C118 batch plan](BATCH_PLAN_C114_C118.md) and
 [batch review](BATCH_REVIEW_C114_C118.md) for the exact hash ledger, release
 audit, integrity checks, and the unchanged global Route-A tuple.
+
+## Route-A dynamics-variant round C119--C123
+
+This round continues the A-route diversity strategy with a trace-class
+bosonic-Fock contraction, a quartic variational three-cycle, a projectively
+algebraically stable polynomial automorphism, a three-dimensional
+adaptive-feedback automorphism, and an iid additive-noise moment system.  Each
+entry is a complete paper package with exact evidence, independent validation,
+hostile mutation tests, a closed manifest, and a reproducible compiled PDF.
+Local, low-period, finite-word, and finite-moment boundaries remain explicit.
+
+- [C119 trace-class bosonic-Fock contraction](henon_fock_nuclear_contraction_route_a/README.md) · [paper PDF](henon_fock_nuclear_contraction_route_a/paper/main.pdf)
+- [C120 quartic variational period-three certificate](henon_quartic_variational_period3_route_a/README.md) · [paper PDF](henon_quartic_variational_period3_route_a/paper/main.pdf)
+- [C121 projective algebraic stability](henon_projective_algebraic_stability_route_a/README.md) · [paper PDF](henon_projective_algebraic_stability_route_a/paper/main.pdf)
+- [C122 adaptive-feedback Hénon automorphism](henon_adaptive_feedback_route_a/README.md) · [paper PDF](henon_adaptive_feedback_route_a/paper/main.pdf)
+- [C123 additive-noise Hénon moments](henon_additive_noise_moment_route_a/README.md) · [paper PDF](henon_additive_noise_moment_route_a/paper/main.pdf)
+
+See the [C119--C123 batch plan](BATCH_PLAN_C119_C123.md) and
+[batch review](BATCH_REVIEW_C119_C123.md) for the exact artifact ledger,
+uniform audit, integrity/failure-mode review, and the strict per-candidate
+Route-A verdicts.

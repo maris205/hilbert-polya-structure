@@ -1,0 +1,116 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.73in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\title{Periodic Noise Words and Exact Markov Moments\\
+for an Additive-Noise H\'enon Contraction}
+\author{Route-A finite certificate C123}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study an iid two-branch affine H\'enon system in exact arithmetic.  Strict
+contraction makes every finite noise word own a unique periodic state.  All
+126 rooted words through length six yield 23 primitive necklaces.  The same
+source law closes a 15-dimensional Markov operator on polynomials of degree at
+most four, from which stationary covariance and a non-Gaussian fourth
+cumulant are recovered.  These are finite random-dynamics certificates, not a
+global Fredholm or arithmetic construction.
+\end{abstract}
+
+\section{Frozen additive-noise model}
+Let $\sigma_n\in\{-1,+1\}$ be iid and uniform, and freeze
+\[
+ F_\sigma(x,y)=\left(\frac x2-\frac y4+\frac\sigma2,\frac x4\right),
+ \qquad
+ A=\begin{pmatrix}1/2&-1/4\\1/4&0\end{pmatrix}.
+\]
+The common linear part has repeated eigenvalue $1/4$ and determinant $1/16$.
+The eigenvalues of $A^{\mathsf T}A$ are
+\[
+ \frac3{16}\pm\frac{\sqrt2}{8},
+\]
+both strictly below one.  Each branch and every finite composition is
+therefore a strict affine contraction.
+
+\section{Periodic noise-word atlas}
+For a chronological word $\omega=(\sigma_0,\ldots,\sigma_{n-1})$, write
+$F_\omega=F_{\sigma_{n-1}}\circ\cdots\circ F_{\sigma_0}$.
+Its linear part is $A^n$, so $I-A^n$ is invertible and $F_\omega$ has one
+exact fixed state.  Cyclic rotations change the phase of the same oriented
+word orbit.  We choose the lexicographically least rotation with $-<+$ and
+remove repeated words.
+
+\begin{center}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+period $n$ & 1&2&3&4&5&6&total\\
+\midrule
+rooted words tested &2&4&8&16&32&64&126\\
+primitive necklaces &2&1&2&3&6&9&23\\
+\bottomrule
+\end{tabular}
+\end{center}
+Every row in the evidence ledger records its canonical word, all rational
+states, the chosen rooted length-$n$ block probability $2^{-n}$, $A^n$, and
+composition determinant $16^{-n}$.  This row value is neither the total mass
+of its necklace nor an infinite periodic-orbit probability.  The cutoff
+$n\le6$ is literal; no all-period completeness is asserted.
+
+\section{Degree-four Markov operator}
+The model itself defines
+\[
+ (Pf)(x,y)=\frac12 f(F_+(x,y))+\frac12 f(F_-(x,y)).
+\]
+The 15-dimensional space
+\[
+ \mathcal P_{\le4}=\operatorname{span}\{x^iy^j:i+j\le4\}
+\]
+is invariant.  In the graded monomial basis, the exact source-owned matrix
+$K=P|_{\mathcal P_{\le4}}$ satisfies
+\[
+ \operatorname{tr}K=\frac{453}{256},\qquad \det K=2^{-80}.
+\]
+All sixteen coefficients of $\det(I-zK)$ are stored in the evidence receipt.
+
+Solving $K^{\mathsf T}\mu=\mu$ with $\mu(1)=1$ gives zero odd moments and
+\[
+ \Sigma=\begin{pmatrix}\mu(x^2)&\mu(xy)\\\mu(xy)&\mu(y^2)\end{pmatrix}
+ =\frac1{3375}\begin{pmatrix}1088&128\\128&68\end{pmatrix},
+ \quad \det\Sigma=\frac{256}{50625}.
+\]
+It obeys $\Sigma=A\Sigma A^{\mathsf T}+\operatorname{diag}(1/4,0)$ exactly.
+The fourth cumulant
+\[
+ \mu(x^4)-3\mu(x^2)^2
+ =-\frac{47789203456}{359401303125}
+\]
+is nonzero, so we do not replace the stationary law by a Gaussian closure.
+With noise removed, the stable deterministic system has zero stationary
+covariance.
+
+\section{Validation and boundary}
+From the package directory run
+\begin{verbatim}
+python3 code/c123_noise_producer.py
+python3 code/c123_noise_checker.py
+python3 code/c123_sympy_crosscheck.py
+python3 code/c123_replay.py
+python3 code/c123_mutation.py
+\end{verbatim}
+The independent checker, fresh symbolic reconstruction, canonical replay, and
+all 19 hostile mutations pass.
+
+The canonical verdict is
+$(\texttt{A1\_WEAK},\texttt{A2\_FAIL},\texttt{A3\_FAIL},
+\texttt{A4\_FAIL})$, overall \texttt{ROUTE\_A\_EXPLORATORY}.
+The finite word ledger has no prime-like target correspondence.  The
+degree-four Markov determinant has no target-divisor match or analytic bridge,
+and no global analytic structure is established.  We claim no complete random
+orbit atlas, global nuclear/Fredholm owner, arithmetic local data, Euler
+factors, root numbers, automorphy, Hilbert--P\'olya operator, or Route B.  The firewall is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}
