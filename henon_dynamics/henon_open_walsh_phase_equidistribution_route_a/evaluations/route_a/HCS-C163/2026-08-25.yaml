@@ -1,0 +1,92 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C163
+source_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: phase-resolved full-cycle spectrum of the frozen three-symbol open Walsh gate
+family: open Walsh quantum maps indexed by register length k
+phase_space: (C^3) tensor k with k at least 1
+dynamics: cyclic tensor shift B_k with one rank-two gate A per tick
+parameters: integer register length k; the projector and DFT convention are frozen
+parameter_provenance: inherited unchanged from C148, C153, and C158
+clock: one B_k application is one tick; C_k=B_k^k is exactly one complete register cycle
+normalization: nonzero eigenvalues counted with algebraic multiplicity; unit phase and centered sqrt(k) log modulus
+determinant_convention: E_k(z)=det(I_(3^k)-z*C_k); phase claims concern nonzero eigenvalues only
+orbit_cutoff: all-k theorem; k<=32 and Fourier modes m<=24 are finite sentinels
+precision: exact radicals, rational polynomials, and integers; 60-place decimals are non-claim-bearing sentinels
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or divisor tables, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+artifact_paths:
+  - results/c163_phase_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: frozen C148/C153/C158 Walsh gate with A=F3^*diag(1,0,1)
+  clock: one complete factor cycle is k Walsh ticks
+  normalization: algebraic-multiplicity-weighted phase and centered sqrt(k) normalized log modulus
+  determinant_convention: E_k(z)=det(I-z*C_k), with zero eigenvalues excluded from phase
+  cutoff: all-k proof with finite binomial, Fourier, control, and mutation sentinels
+  precision: exact algebra for claim-bearing non-torsion and multiplicity statements
+  allowed_data: frozen gate, tensor identity, one-site invariants, and source-derived projector controls
+  forbidden_data: external target, prime, arithmetic-local, automorphy, Hilbert--Polya, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: the natural full-cycle clock has an exact all-k multiplicity-weighted Haar phase law and joint Gaussian-Haar scaling
+  strongest_failure: the result is a source-side resonance law and supplies no prime-like primitive-orbit correspondence
+  metrics:
+    all_k_phase_theorems: 1
+    all_k_joint_limit_theorems: 1
+    target_correspondences: 0
+  artifacts:
+    - results/c163_phase_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: all nonzero full-cycle phases and their algebraic multiplicities have an exact Fourier law
+  strongest_failure: no frozen target divisor or determinant comparison is supplied
+  metrics:
+    exact_fourier_identities: 1
+    target_divisor_comparisons: 0
+  artifacts:
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source phase measure converges to Haar and couples asymptotically independently to Gaussian log-modulus fluctuation
+  strongest_failure: no target functional equation, counting law, continuation, or global divisor comparison is authorized
+  metrics:
+    source_side_limit_coordinates: 2
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: the natural subunitary scattering gate now has a phase-resolved growing-k limit and a same-clock projector control
+  strongest_failure: no self-adjoint or antiunitary limiting operator is constructed
+  metrics:
+    source_phase_limits: 1
+    same_clock_torsion_controls: 1
+    self_adjoint_limits: 0
+  artifacts:
+    - results/c163_phase_evidence.json
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: convergence concerns only the source-side multiplicity-weighted full-cycle phase and log-modulus law
+blocking_conditions:
+  - the gate is subunitary and nonnormal rather than a self-adjoint Hamiltonian
+  - the Haar phase law is not a target divisor comparison
+  - no target analytic or arithmetic comparison is authorized
+next_smallest_test: determine whether a natural dilation or symmetry class can retain the phase law without fabricating self-adjointness
+route_b_invocation_allowed: false

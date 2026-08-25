@@ -1,0 +1,89 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C160
+source_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: cyclic Rule 90 on every Mersenne circumference with a maximal-subgroup period sieve
+family: L=2^r-1 for every r>=2; exact prime-subfamily theorem whenever L>3 is prime
+phase_space: periodic image im(a) in F_2[x,x^(-1)]/(x^L-1)
+dynamics: multiplication by a=x+x^(-1) restricted to im(a)
+parameters: no fitted parameter; r and source-derived circumference L are family indices
+parameter_provenance: frozen Rule-90 local rule and Mersenne source-size family
+clock: one Rule-90 update on im(a)
+normalization: uniform labeled states; exact-period points first; geometric cycles after division by period
+determinant_convention: finite Artin--Mazur zeta exp(sum Fix(n) z^n/n)
+orbit_cutoff: all-r sieve and all-Mersenne-prime theorem; finite replay 2<=r<=10
+precision: exact F_2 polynomial arithmetic and arbitrary-precision integers
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+artifact_paths:
+  - results/c160_rule90_sieve_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: Rule 90 on cyclic Mersenne rings
+  clock: one cellular-automaton update on the complete periodic image
+  normalization: labeled states, exact-period states, then geometric cycles
+  determinant_convention: finite Artin--Mazur zeta with constant term one
+  cutoff: all-parameter theorem; finite replay through r=10
+  precision: exact finite-field polynomials and integers
+  allowed_data: frozen local rule and source-derived finite circumference factorization
+  forbidden_data: external target prime or zero tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: exact maximal-subgroup inclusion--exclusion for all Mersenne lengths and a complete two-period law for every Mersenne-prime length greater than three
+  strongest_failure: the theorem remains a finite-volume cellular-automaton family and is not the original Henon dynamics
+  metrics:
+    finite_family_rows: 9
+    subset_intersection_cells: 27
+    exact_prime_sentinels: 3
+  artifacts:
+    - results/c160_rule90_sieve_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every finite Mersenne-prime source zeta is closed form
+  strongest_failure: there is no target divisor or target root-count comparison
+  metrics:
+    exact_source_zeta_family: 1
+    target_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: all finite cycle factors in the prime subfamily are exact
+  strongest_failure: no target functional equation, counting law, or continuation comparison is present
+  metrics:
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the finite linear dynamics and time-group action are explicit
+  strongest_failure: no natural unitary, scattering, Hamiltonian, or self-adjoint lift is constructed
+  metrics:
+    natural_lifts_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: ordinary factors of the finite circumference index source clock subgroups and are not arithmetic local factors; no infinitude of Mersenne primes is claimed
+blocking_conditions:
+  - finite-volume family with no target divisor comparison
+  - no target analytic continuation or counting law
+  - no natural operator lift
+next_smallest_test: seek a linear cellular family whose exact subgroup sieve persists under a natural infinite-volume operator limit
+route_b_invocation_allowed: false

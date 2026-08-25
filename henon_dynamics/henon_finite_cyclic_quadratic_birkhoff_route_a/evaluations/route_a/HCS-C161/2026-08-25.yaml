@@ -1,0 +1,106 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C161
+source_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: complete quadratic Birkhoff amplitudes for finite odd cyclic rotations
+family: finite cyclic rotations indexed by odd q with quadratic source observables indexed by a and b
+phase_space: Z/qZ
+dynamics: R_q(x)=x+1 mod q
+parameters: odd q and residues a,b; n is the exact iterate clock
+parameter_provenance: source-defined finite dynamics with no fit; selected after the Heisenberg hard gate failed
+clock: exact Birkhoff iterate n>=1
+normalization: unscaled complete sum over all x mod q
+determinant_convention: none; no isolated-orbit or target determinant
+orbit_cutoff: all-parameter theorem; exhaustive regression for odd q<=31 and n<=2q
+precision: exact modular proof with floating regression sentinels
+training_data: none
+forbidden_data: target zero/prime tables, target divisors/counting laws, arithmetic local or Euler factors, root numbers, automorphy, Hilbert--Polya inputs, Route B
+code_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+artifact_paths:
+  - results/c161_cyclic_gauss_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+candidate:
+  definition: complete quadratic Birkhoff amplitudes for finite odd cyclic rotations
+  family: finite cyclic rotations indexed by odd q with quadratic source observables
+  phase_space: Z/qZ
+  dynamics: R_q(x)=x+1 mod q
+  parameters: odd q and residues a,b; n is the exact iterate clock
+  provenance: no fit; explicit pivot after rejecting an unproved Heisenberg local-equivalence draft
+
+source_lock:
+  object: R_q(x)=x+1 with phi_(a,b)(x)=a*x^2+b*x on Z/qZ, q odd
+  clock: exact Birkhoff iterate n>=1
+  normalization: G_(q,n)=sum_(x mod q) exp(2*pi*i*S_n phi(x)/q)
+  determinant_convention: none
+  cutoff: all-parameter theorem; exhaustive q<=31 sentinel
+  precision: exact modular arithmetic plus deterministic complex sentinels
+  allowed_data: source residues, gcd, modular inverses, and finite-ring Jacobi symbols
+  training_data: none
+  forbidden_data: target data and all scope-firewall items
+  code_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+  artifacts:
+    - results/c161_cyclic_gauss_evidence.json
+    - THEOREM_PACKAGE.md
+    - code/c161_cyclic_gauss_producer.py
+    - code/c161_cyclic_gauss_checker.py
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every finite rotation orbit and every quadratic Birkhoff phase is exactly defined and the complete amplitude is evaluated for all iterates
+  strongest_failure: this finite source periodicity is not a target primitive-orbit correspondence
+  metrics:
+    all_parameter_amplitude_theorems: 1
+    exhaustive_formula_cases: 261630
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c161_cyclic_gauss_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the exact amplitude magnitude and phase follow from a source finite Gauss evaluation
+  strongest_failure: no isolated stability determinant or target determinant comparison is present
+  metrics:
+    exact_vanishing_gates: 1
+    target_determinant_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the prime-modulus source zero level has an exact discriminant law
+  strongest_failure: no target functional equation, divisor, or counting law is compared
+  metrics:
+    prime_zero_regression_cases: 164284
+    target_global_structure_checks: 0
+  artifacts:
+    - results/RESULTS.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: on ell^2(Z/qZ), G_(q,n)=Tr(U_phi^n K_q^(-n)) at the same iterate and Theta=D_g P J is an involutive antiunitary with Theta U_phi Theta^(-1)=U_phi^(-1)
+  strongest_failure: the compensating shift is essential and no target operator is constructed
+  metrics:
+    finite_source_unitaries: 1
+    exact_time_reversal_antiunitaries: 1
+    target_operator_claims: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: Jacobi and prime refer only to finite source rings; there is no arithmetic local or Euler interpretation and no target trace identity
+blocking_conditions:
+  - no target orbit correspondence or isolated stability determinant
+  - no target analytic or counting structure
+  - the finite source unitary is not a Hilbert--Polya operator
+next_smallest_test: seek a natural infinite dynamical limit that preserves the exact Gauss phase without importing target data
+route_b_invocation_allowed: false

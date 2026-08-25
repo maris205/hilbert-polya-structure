@@ -1,0 +1,91 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C159
+source_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: binary S-gap shift with S={s>=0:Thue--Morse parity t_s=1}
+family: one infinite synchronized renewal shift and its all-zero limit point
+phase_space: compact binary subshift X_S
+dynamics: left shift sigma restricted to X_S
+parameters: no fitted parameter; the Thue--Morse parity gap set is frozen
+parameter_provenance: source-defined binary digit-sum parity
+clock: one left shift
+normalization: labeled fixed points; exact-period points by Mobius inversion; cycles after division by period
+determinant_convention: Artin--Mazur zeta exp(sum Fix(n) z^n/n), constant term one
+orbit_cutoff: all-parameter theorems; period 18 and formal degree 48 are replay sentinels
+precision: exact integers and rational entropy bracket
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 63f75cf476711de93e6096ef74ac16969e1127d0
+artifact_paths:
+  - results/c159_s_gap_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: Thue--Morse S-gap renewal shift
+  clock: one left shift
+  normalization: fixed points first; exact-period points by Mobius inversion; geometric cycles after division by period
+  determinant_convention: zeta_X(z)=1/((1-z)(1-zT(z)))
+  cutoff: all-parameter theorem; finite sentinels at period 18 and degree 48
+  precision: exact integers and rational bounds
+  allowed_data: Thue--Morse parity sequence and source renewal code
+  forbidden_data: external prime or zero tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: recurrent topological mixing with dense periodic points and a constructive recurrent transitive point
+  strongest_failure: this is a synchronized symbolic renewal model rather than the original Henon map
+  metrics:
+    fixed_period_rows: 18
+    renewal_series_cells: 49
+    short_code_lengths: 2
+  artifacts:
+    - results/c159_s_gap_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source Artin--Mazur zeta and entropy equation at all orders
+  strongest_failure: no frozen target divisor or target root-count comparison is present
+  metrics:
+    exact_source_zeta: 1
+    target_comparisons: 0
+  artifacts:
+    - results/c159_s_gap_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: explicit meromorphic continuation in the unit disk with a proved unit-circle natural boundary
+  strongest_failure: no target functional equation, Gamma factor, trivial-zero, or counting-law comparison is present
+  metrics:
+    proved_natural_boundary_circles: 1
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the compact shift and its recurrent orbit construction are explicit
+  strongest_failure: no natural unitary, scattering, Hamiltonian, or self-adjoint lift is constructed
+  metrics:
+    natural_lifts_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: the proved unit-circle natural boundary belongs only to the source renewal zeta and is not a target critical line or divisor
+blocking_conditions:
+  - no target divisor or global-structure comparison
+  - no arithmetic interpretation of renewal factors
+  - no natural operator lift
+next_smallest_test: seek a recurrent source with an intrinsic operator realization whose determinant retains the renewal natural-boundary control
+route_b_invocation_allowed: false

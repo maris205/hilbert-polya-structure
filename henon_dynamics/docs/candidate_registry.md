@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C159--HCS-C163 theorem-progress round (2026-08-25)
+
+Five source-locked candidates pass an explicit theorem-first gate.  Two
+initial proposals were rejected before manuscript release: a clock-decorated
+Sturmian vacuum was too close to the preceding periodic-orbit obstruction,
+and the proposed all-iterate Heisenberg evaluation lacked the required
+quotient and degenerate primary-component proofs.  The replacements and the
+three retained systems give five separate all-parameter advances:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C159 | The Thue--Morse one-set defines a uniquely decipherable S-gap shift that is mixing, has dense periodic points, and admits a recurrent dense orbit.  Its exact Artin--Mazur zeta is `2/(2-3z+z(1-z)P(z))`, where `P(z)=product_(j>=0)(1-z^(2^j))`, and the unit circle is a meromorphic natural boundary. | `(A1_WEAK,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)` | [`../henon_thue_morse_s_gap_natural_boundary_route_a/`](../henon_thue_morse_s_gap_natural_boundary_route_a/) |
+| HCS-C160 | For every Mersenne circumference, the non-full-period Rule-90 states form the exact union of maximal proper-clock fixed spaces, with an inclusion--exclusion formula from polynomial-gcd dimensions.  At every Mersenne-prime circumference `L>3`, the only periods are `1,L` and there are exactly `2^(L-1)-1` full-period states. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_rule90_maximal_subgroup_sieve_route_a/`](../henon_rule90_maximal_subgroup_sieve_route_a/) |
+| HCS-C161 | Every quadratic Birkhoff exponential sum for an odd finite cyclic rotation reduces to one explicit quadratic Gauss sum and has a complete gcd/Jacobi evaluation, including the exact vanishing branch.  Prime pure-quadratic zero-level sets obey an exact discriminant law; the amplitudes have the natural same-clock trace owner `Tr(U^n K^(-n))` and an explicit involutive antiunitary reversal. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_finite_cyclic_quadratic_birkhoff_route_a/`](../henon_finite_cyclic_quadratic_birkhoff_route_a/) |
+| HCS-C162 | At every represented square-billiard shell `N>=1`, the Dirichlet Abel half-wave trace has the exact normalized boundary coefficient `exp(i*pi/4) r_2^src(N)/(8*pi*N^(1/4))`.  All nonmatching shells and any coincident boundary-subtraction simple pole vanish under the `epsilon^(3/2)` normalization. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_square_billiard_renormalized_branch_amplitude_route_a/`](../henon_square_billiard_renormalized_branch_amplitude_route_a/) |
+| HCS-C163 | The ratio of the two normalized open-Walsh one-site phases is nontorsion.  The exact Fourier law for the multiplicity-weighted full-cycle phase measure gives exponential decay of every fixed nonzero mode, Haar equidistribution, and a joint Gaussian-modulus/Haar-phase limit. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_open_walsh_phase_equidistribution_route_a/`](../henon_open_walsh_phase_equidistribution_route_a/) |
+
+C161 and C162 retain natural quantizations of different finite-rotation and
+billiard systems; C163 retains only its own finite scattering parent.  These
+A4 coordinates are not merged.  C159's analytic continuation result concerns
+only its source zeta, and C160 makes no assertion that infinitely many
+Mersenne primes exist.  No candidate has a frozen external target divisor,
+zero census, functional equation, counting-law comparison, arithmetic local
+datum, Euler factor, root number, automorphy object, or Hilbert--Polya
+operator.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, Route B remains
+unauthorized, and `route_b_invocation_allowed=false` throughout.
+
 ## HCS-C154--HCS-C158 dynamics-refinement round (2026-08-25)
 
 Five source-locked candidates turn the preceding residual boundaries into

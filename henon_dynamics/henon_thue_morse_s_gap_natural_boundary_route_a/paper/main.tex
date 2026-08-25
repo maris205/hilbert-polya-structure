@@ -1,0 +1,156 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.70in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb}
+\title{A Mixing Thue--Morse Gap Shift with an Exact Zeta and a Natural Boundary}
+\author{Route-A structural certificate C159}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We replace a one-pass symbolic interface by a recurrent renewal system.  Let
+$S$ contain the indices at which the Thue--Morse bit is one, and require
+successive binary ones to be separated by a gap in $S$.  The resulting
+S-gap shift is topologically mixing, has dense periodic points, and contains
+a recurrent transitive point.  Unique circular renewal parsing gives its
+exact Artin--Mazur zeta:
+$\zeta_X(z)=2/[2-3z+z(1-z)\prod_{j\geq0}(1-z^{2^j})]$.
+The least positive solution of the renewal equation also gives an exact
+entropy characterization and a rational root bracket.  The Thue--Morse
+product then proves, by dense dyadic radial zeros, that the unit circle is a natural boundary for the source
+zeta's meromorphic continuation inside the unit disk.  This is a source
+theorem, independently checked at finite sentinel orders, and not a target
+divisor, arithmetic factorization, functional-equation match, or operator
+claim.
+\end{abstract}
+\noindent\textbf{Keywords:} symbolic dynamics; S-gap shift; Thue--Morse
+sequence; renewal system; Artin--Mazur zeta; topological mixing; natural
+boundary.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+\begin{sloppypar}
+本文把一次性符号接口替换为可反复返回的更新动力系统。令集合 $S$ 由
+\foreignlanguage{english}{Thue--Morse} 序列中取值为一的下标组成，并规定相邻两个一之间的零间隙必须属于 $S$。
+我们证明所得间隙移位拓扑混合、周期点稠密，且存在既递归又具有稠密轨道的点。
+周期构型中每个一给出唯一圆周更新分解，因此可求得完整的
+\foreignlanguage{english}{Artin--Mazur} $\zeta$ 函数。进一步利用
+\foreignlanguage{english}{Thue--Morse} 无穷乘积在稠密二进单位根上的径向零，证明该源系统亚纯延拓的单位圆是自然边界。
+该结论仅描述源动力系统，不构成目标除子、算术分解或算子实现。
+\end{sloppypar}
+\noindent 关键词：符号动力系统；间隙移位；\foreignlanguage{english}{Thue--Morse} 序列；
+更新系统；\foreignlanguage{english}{Artin--Mazur} $\zeta$ 函数；拓扑混合；自然边界。
+\end{otherlanguage}
+
+\section{A recurrent renewal shift}
+Write $t_s\in\{0,1\}$ for the parity of the binary digit sum of $s$ and
+put $S=\{s\geq0:t_s=1\}$.  Let $X_S\subset\{0,1\}^{\mathbb Z}$ consist of
+the all-zero point and the sequences in which successive ones have $s\in S$
+zeros between them.  Equivalently, its renewal code is
+$\mathcal C=\{10^s:s\in S\}$.  One left shift is one clock tick.
+
+Because $1,2\in S$, codeword lengths two and three are available.  Any
+admissible word containing a one can first have its two partial end gaps
+completed to the nearest code boundaries; an all-zero word of length $L$
+can be placed inside $10^{2^k}$ once $2^k\geq L$, since $t_{2^k}=1$.
+After this boundary completion, words of lengths two and three fill every
+sufficiently large requested connector.  Hence any two cylinders meet after
+every sufficiently large time: $X_S$ is topologically mixing.
+
+Repeating a finite boundary-aligned code concatenation gives a periodic point
+in every cylinder containing a one.  The cylinder $[0^L]$ is met separately
+by $(10^{2^k})^\infty$ for $2^k\geq L$, so periodic points are dense.  To see
+recurrence constructively, enumerate the admissible words and recursively
+form a boundary-aligned block containing two copies of its predecessor and
+the next enumerated word, separated by two/three-length fillers.  A centered
+limit contains every word and returns to each earlier nested cylinder.  It is
+both recurrent and transitive.  Thus recurrence is not inferred merely from
+the word ``mixing.''
+
+\section{Exact zeta and entropy}
+Define, as formal series,
+\[
+T(z)=\sum_{s\geq0}t_sz^s,\quad F(z)=zT(z),\quad
+P(z)=\prod_{j\geq0}(1-z^{2^j}).
+\]
+Unique binary expansion gives
+\[
+P(z)=\sum_{s\geq0}(-1)^{t_s}z^s=\frac1{1-z}-2T(z).
+\tag{1}
+\]
+Every nonzero periodic point has a unique circular parse at its ones.  In
+$-\log(1-F)=\sum_{q\geq1}F^q/q$, division by $q$ removes the $q$ choices of
+marked code boundary in a cyclic codeword list; converting boundary marks to
+the $n$ possible shift origins gives exactly the Artin--Mazur coefficient
+$\#\operatorname{Fix}(\sigma^n)/n$.  Thus the renewal
+part contributes $(1-F)^{-1}$, while the all-zero fixed point contributes
+$(1-z)^{-1}$.  Therefore
+\begin{equation}
+\zeta_{X_S}(z)=\frac1{(1-z)(1-F(z))}
+=\frac{2}{2-3z+z(1-z)P(z)}.                 \tag{2}
+\end{equation}
+On the positive real axis $F$ is strictly increasing from zero to infinity.
+Its unique solution $F(R)=1$ gives $h_{\rm top}=-\log R$, and an exact
+rational partial sum plus geometric tail certifies
+\[
+0.67633710444063914<R<0.67633710444063915.  \tag{3}
+\]
+
+\section{The analytic boundary}
+If $\omega^{2^m}=1$ and $0<r<1$, the finite prefix of $P(r\omega)$ has
+modulus at most $2^m$; from level $m$ onward all factors are
+$1-r^{2^j}\in[0,1]$.  Thus
+\[
+|P(r\omega)|\leq2^m(1-r^{2^m})\longrightarrow0.             \tag{4}
+\]
+Dyadic roots are dense on $|z|=1$.  Were $P$ meromorphic across an arc, the
+finite radial limit zero in (4) would exclude a pole at every dyadic root in
+that arc; each would be a zero (possibly after removing a removable
+singularity).  Their interior accumulation would force the continuation to
+vanish identically, contradicting $P(0)=1$.  Hence $P$ crosses no arc.
+
+Equation (2) meromorphically continues the source zeta through the open unit
+disk.  A continuation across any boundary arc, restricted to a subarc not
+containing $1$, would also continue
+\[
+P(z)=\frac{2/\zeta_{X_S}(z)-2+3z}{z(1-z)},
+\]
+contradicting the preceding paragraph.  The unit circle is therefore its
+natural boundary.
+
+The period-18 and degree-48 ledgers are sentinels, not theorem cutoffs.  An
+independent checker passes 742 assertions, SymPy passes 118 checks, canonical
+replay is byte-identical, and 46 hostile cases are rejected.  The strict
+tuple is $(\texttt{A1\_WEAK},\texttt{A2\_FAIL},
+\texttt{A3\_PARTIAL\_ANALYTIC\_STRUCTURE},\texttt{A4\_FAIL})$.
+The A3 label records only source analytic structure.  We claim no target
+divisor, arithmetic/local factor, target functional equation or counting
+law, root number, automorphy, natural self-adjoint or Hilbert--P\'olya lift,
+or Route-B authorization.  Scope:
+\begin{center}\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.\end{center}
+
+\section*{Declarations}
+\paragraph{Data and code availability.}
+Package-local evidence and code provide the exact certificate, independent
+checker, symbolic reconstruction, replay, and mutation audit.
+\paragraph{Ethics.}
+No human participants, animals, personal, clinical, or sensitive data are
+used; research ethics approval is not applicable.
+\paragraph{Author contributions (CRediT).}
+This anonymous certificate records Conceptualization, Formal analysis,
+Software, Validation, Writing---original draft, and Writing---review and
+editing at artifact level.  AI systems are not authors.
+\paragraph{Conflicts of interest.} No conflict of interest is known.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{AI-use disclosure.}
+An AI coding assistant supported drafting, exact-code development, and
+internal proof checking.  It was not an external reviewer; every released
+claim is exposed to deterministic and hostile checks.
+\end{document}

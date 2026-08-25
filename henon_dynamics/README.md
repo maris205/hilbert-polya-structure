@@ -2271,3 +2271,26 @@ See the [C154--C158 batch plan](BATCH_PLAN_C154_C158.md) and
 content-addressed artifacts, internal cross-review repairs, and uniform
 release audit.  The common scope remains `NO_BAD_EULER_OR_ROOT_NUMBER`; the
 five Route-A coordinates are not combined, and Route B remains unauthorized.
+
+## Route-A theorem-progress round C159--C163
+
+This round enforces a theorem-first gate: every retained paper contributes an
+all-parameter identity, limit law, classification, or obstruction stronger
+than its predecessor.  A clock-decorated Sturmian candidate and an incomplete
+Heisenberg all-iterate evaluation were rejected; the round pivoted to a
+mixing Thue--Morse S-gap shift and finite cyclic quadratic Birkhoff amplitudes.
+The other three papers sharpen Rule-90 cycle sieving, square-billiard Abel
+boundary coefficients, and open-Walsh phase statistics.
+
+- [C159 mixing Thue--Morse S-gap shift and natural boundary](henon_thue_morse_s_gap_natural_boundary_route_a/README.md) · [paper PDF](henon_thue_morse_s_gap_natural_boundary_route_a/paper/main.pdf)
+- [C160 exact Rule-90 maximal-subgroup period sieve](henon_rule90_maximal_subgroup_sieve_route_a/README.md) · [paper PDF](henon_rule90_maximal_subgroup_sieve_route_a/paper/main.pdf)
+- [C161 finite cyclic quadratic Birkhoff amplitudes](henon_finite_cyclic_quadratic_birkhoff_route_a/README.md) · [paper PDF](henon_finite_cyclic_quadratic_birkhoff_route_a/paper/main.pdf)
+- [C162 square-billiard renormalized branch amplitudes](henon_square_billiard_renormalized_branch_amplitude_route_a/README.md) · [paper PDF](henon_square_billiard_renormalized_branch_amplitude_route_a/paper/main.pdf)
+- [C163 open-Walsh phase equidistribution](henon_open_walsh_phase_equidistribution_route_a/README.md) · [paper PDF](henon_open_walsh_phase_equidistribution_route_a/paper/main.pdf)
+
+See the [C159--C163 batch plan](BATCH_PLAN_C159_C163.md) and
+[batch review](BATCH_REVIEW_C159_C163.md) for the theorem ledger, rejected
+candidate record, content-addressed artifacts, cross-review repairs, and
+uniform release audit.  The common scope remains
+`NO_BAD_EULER_OR_ROOT_NUMBER`; the five source systems remain separate and
+Route B remains unauthorized.
