@@ -1,0 +1,94 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C158
+source_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: full-cycle secular spectrum of the frozen three-symbol open Walsh gate
+family: open Walsh quantum maps indexed by register length k
+phase_space: (C^3) tensor k with k at least 1
+dynamics: cyclic tensor shift B_k with one rank-two gate A per tick
+parameters: integer register length k; the projector and DFT convention are frozen
+parameter_provenance: inherited unchanged from the source-side C148 and C153 Walsh gate
+clock: one B_k application is one tick; C_k=B_k^k is exactly one complete register cycle
+normalization: nonzero eigenvalues counted with algebraic multiplicity and X_k=(1/k)log|rho|
+determinant_convention: E_k(z)=det(I_(3^k)-z*C_k)
+orbit_cutoff: all-k theorem; k<=5 field polynomials, k<=3 direct Kronecker checks, and k<=24 binomial ledgers are sentinels
+precision: exact Q(sqrt(3),i) arithmetic and integers; decimal values are non-claim-bearing sentinels
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or divisor tables, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+artifact_paths:
+  - results/c158_full_cycle_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: frozen C148/C153 Walsh gate with A=F3^*diag(1,0,1)
+  clock: one complete factor cycle is k Walsh ticks
+  normalization: algebraic-multiplicity-weighted surviving log modulus divided by k
+  determinant_convention: E_k(z)=det(I-z*C_k), with zero eigenvalues contributing unit factors
+  cutoff: all-k proof with finite coefficient, Kronecker, concentration, and mutation sentinels
+  precision: exact field arithmetic for claim-bearing coefficients and exact integer multiplicities
+  allowed_data: the frozen one-site gate, tensor identity, and source-derived closed/projector-order/moved-hole controls
+  forbidden_data: external target, prime, arithmetic-local, automorphy, Hilbert--Polya, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: the natural full-cycle clock has an exact all-k tensor spectrum and algebraic multiplicities
+  strongest_failure: the result is a source-side resonance multiset and supplies no prime-like primitive-orbit correspondence
+  metrics:
+    all_k_factorizations: 1
+    surviving_degree_at_k: 2^k
+    target_correspondences: 0
+  artifacts:
+    - results/c158_full_cycle_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: E_k has a complete degree-2^k secular factorization for every k
+  strongest_failure: no frozen target divisor, inverse-zero normalization, or stable target determinant comparison is supplied
+  metrics:
+    direct_kronecker_k_max: 3
+    field_polynomial_k_max: 5
+    target_divisor_comparisons: 0
+  artifacts:
+    - results/c158_full_cycle_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the surviving log-modulus measures have an exact mean, variance, concentration bound, weak limit, and Gaussian fluctuation law
+  strongest_failure: no target functional equation, counting law, continuation, phase limit, or global divisor comparison is present
+  metrics:
+    proven_scaling_statements: 5
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: B_k is a natural finite-dimensional subunitary scattering gate with a same-clock closed unitary parent
+  strongest_failure: no self-adjoint, antiunitary, or phase-resolved growing-k limit is constructed
+  metrics:
+    natural_scattering_gates: 1
+    same_clock_unitary_controls: 1
+    self_adjoint_limits: 0
+  artifacts:
+    - results/c158_full_cycle_evidence.json
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: convergence concerns only normalized log moduli and does not imply a phase or self-adjoint spectral limit
+blocking_conditions:
+  - the gate is subunitary and nonnormal rather than a self-adjoint Hamiltonian
+  - modulus concentration discards phase information
+  - no target analytic or arithmetic comparison is authorized
+next_smallest_test: derive a source-native phase-resolved full-cycle limit or prove that projector controls obstruct one
+route_b_invocation_allowed: false

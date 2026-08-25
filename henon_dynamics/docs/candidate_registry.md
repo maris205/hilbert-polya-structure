@@ -3,6 +3,31 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C154--HCS-C158 dynamics-refinement round (2026-08-25)
+
+Five source-locked candidates turn the preceding residual boundaries into
+all-parameter statements.  The heteroclinic symbolic closure, Rule-90
+Mersenne family, Heisenberg quadratic module, Dirichlet billiard trace, and
+open Walsh full-cycle spectrum remain separate systems:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C154 | One heteroclinic sequence generates an orbit closure whose exact pieces are the Thue--Morse hull, one period-three orbit, and the wandering interface orbit.  Its complete two-sided orbit is dense, but standard forward transitivity fails; its only primitive cycle has length three and its Artin--Mazur zeta is `1/(1-z^3)`. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_thue_morse_heteroclinic_period3_route_a/`](../henon_thue_morse_heteroclinic_period3_route_a/) |
+| HCS-C155 | On the `2^(L-1)`-point periodic image of Mersenne-length Rule 90, every proper-clock fixed space has dimension at most `2L/3`.  The short-period mass and normalized Burnside cycle-count error are at most `2L*2^(-L/3)`, so full period and mean normalized cycle length both concentrate at one. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_rule90_mersenne_full_period_concentration_route_a/`](../henon_rule90_mersenne_full_period_concentration_route_a/) |
+| HCS-C156 | Fibonacci--Lucas factorizations give the exact Smith types of every frozen Heisenberg horizontal module and improve the central-rotation denominator to `L_n` for odd `n` and `5F_n` for even `n`.  Its source-internal primary quadratic decomposition makes the zero-rotation count multiplicative across coprime primary summands. | `(A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_heisenberg_primary_quadratic_module_route_a/`](../henon_heisenberg_primary_quadratic_module_route_a/) |
+| HCS-C157 | The genuine Dirichlet Abel half-wave trace of the unit square has an exact two-dimensional Poisson representation.  Its nonaxis terms regroup absolutely by primitive billiard direction and repetition, with source-derived coefficient `2s/pi` and boundary branch singularities at the clean-family lengths. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_square_billiard_abel_wave_trace_route_a/`](../henon_square_billiard_abel_wave_trace_route_a/) |
+| HCS-C158 | The open Walsh full cycle has an exact degree-`2^k` secular factorization.  The multiplicity-weighted nonzero log moduli have mean `-log(3)/4`, variance `sigma^2/k`, exponential concentration, a point-mass weak limit, and a centered Gaussian fluctuation limit. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_open_walsh_full_cycle_secular_scaling_route_a/`](../henon_open_walsh_full_cycle_secular_scaling_route_a/) |
+
+C156, C157, and C158 retain different A4 subgates on different source
+systems and are not merged.  “Primary” in C156 is finite-group primary
+decomposition, not arithmetic localization; C154's dense full orbit is not
+misreported as forward transitivity; and C158 proves no phase or
+self-adjoint limit.  No candidate has a frozen external target divisor, zero
+census, functional equation, counting-law comparison, arithmetic local
+datum, Euler factor, root number, automorphy object, or Hilbert--Polya
+operator.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, A2/A3 remain
+failed, and `route_b_invocation_allowed=false` throughout.
+
 ## HCS-C149--HCS-C153 dynamics-refinement round (2026-08-25)
 
 Five source-locked candidates sharpen one exact boundary from each paper in

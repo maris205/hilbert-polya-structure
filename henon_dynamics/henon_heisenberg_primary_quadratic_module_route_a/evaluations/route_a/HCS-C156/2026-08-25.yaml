@@ -1,0 +1,110 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C156
+source_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: central-rotation finite quadratic modules over horizontal fixed classes of the frozen Heisenberg lattice automorphism
+family: Heisenberg nilmanifold automorphism, iterated over every positive integer n
+phase_space: left quotient Z^3 backslash H with H the real three-dimensional Heisenberg group
+dynamics: Phi(v,z)=(Av,z+q(v)) with A=[[2,1],[1,1]] and q(x,y)=x(x-1)+xy+y(y-1)/2
+parameters: no fitted parameters; n is the only family index
+parameter_provenance: exact continuation of the frozen C151 automorphism and its representative-invariant central rotation
+clock: one application of Phi per iterate; n is preserved exactly
+normalization: group-theoretic primary components use CRT idempotents modulo the horizontal-group exponent h_n
+determinant_convention: Smith normal form of A^n-I; no target or isolated-orbit determinant
+orbit_cutoff: all-iterate structure theorem; exact primary component enumeration through n=14 is the replay sentinel
+precision: exact integer and rational arithmetic; no floating-point claim path
+training_data: none; no parameter is fitted to a target table
+forbidden_data: external prime or zero tables, arithmetic/local or Euler factors, root numbers, automorphy data, target divisors, Hilbert--Polya inputs, and Route-B inputs
+code_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+artifact_paths:
+  - results/c156_primary_module_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+candidate:
+  definition: central-rotation finite quadratic modules over horizontal fixed classes of the frozen Heisenberg lattice automorphism
+  family: Heisenberg nilmanifold automorphism, iterated over every positive integer n
+  phase_space: left quotient Z^3 backslash H with H the real three-dimensional Heisenberg group
+  dynamics: Phi(v,z)=(Av,z+q(v)) with A=[[2,1],[1,1]] and q(x,y)=x(x-1)+xy+y(y-1)/2
+  parameters: no fitted parameters; n is the only family index
+  provenance: exact continuation of the frozen C151 automorphism and its representative-invariant central rotation
+
+source_lock:
+  object: G_n=Z^2/(A^n-I)Z^2 equipped with rho_n([m])=q_n(v)-m_1*v_2 mod 1, v=(A^n-I)^(-1)m
+  clock: one application of Phi per iterate; n is preserved exactly
+  normalization: group-theoretic primary components use CRT idempotents modulo the horizontal-group exponent h_n
+  determinant_convention: Smith normal form of A^n-I; no target or isolated-orbit determinant
+  cutoff: all-iterate structure theorem; exact primary component enumeration through n=14 is the replay sentinel
+  precision: exact integer and rational arithmetic; no floating-point claim path
+  allowed_data: frozen C151 matrix, Heisenberg group law, lattice correction, and source-derived Fibonacci/Lucas sequences
+  training_data: none
+  forbidden_data: external prime or zero tables, arithmetic/local or Euler factors, root numbers, automorphy data, target divisors, Hilbert--Polya inputs, and Route-B inputs
+  code_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+  artifacts:
+    - results/c156_primary_module_evidence.json
+    - THEOREM_PACKAGE.md
+    - code/c156_primary_module_producer.py
+    - code/c156_primary_module_checker.py
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every horizontal fixed-class group has an all-iterate Smith type and its central rotation splits into exact orthogonal primary components
+  strongest_failure: the zero rotations lift to positive-dimensional clean fixed circles rather than isolated primitive orbits
+  metrics:
+    certified_iterates: 14
+    primary_components: 23
+    enumerated_primary_elements: 314151
+  artifacts:
+    - results/c156_primary_module_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the universal rotation denominator is lowered for every n to h_n=L_n for odd n and h_n=5F_n for even n
+  strongest_failure: the ordinary isolated stability denominator remains singular along every clean fixed circle and no isolated-orbit determinant is obtained
+  metrics:
+    all_iterate_denominator_theorems: 1
+    finite_sharpness_rows: 13
+    target_determinant_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact zero counts factor over group-theoretic primary components and are certified through n=14
+  strongest_failure: no target functional equation, analytic continuation, divisor, or counting-law comparison is present
+  metrics:
+    exact_zero_count_rows: 14
+    target_global_structure_checks: 0
+  artifacts:
+    - results/c156_primary_module_evidence.json
+    - results/RESULTS.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: the frozen Heisenberg automorphism has a natural Haar Koopman unitary with the same iterate clock
+  strongest_failure: the finite primary zero projectors are not shown to be operator traces or an isolated-orbit trace formula
+  metrics:
+    natural_unitary_lifts: 1
+    operator_trace_bridges: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: primary means finite-abelian-group primary decomposition only; it is not an arithmetic local or Euler factorization, and finite denominator sharpness through n=14 is not extrapolated
+blocking_conditions:
+  - fixed components are clean circles rather than isolated primitive orbits
+  - the ordinary isolated stability weight is singular
+  - no all-iterate closed formula for the zero count is proved
+  - no target analytic structure or operator-trace bridge is present
+next_smallest_test: derive and evaluate the finite quadratic Gauss sums for every n without importing target or arithmetic-local data
+route_b_invocation_allowed: false

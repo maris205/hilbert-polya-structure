@@ -1,0 +1,89 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C154
+source_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: full shift-orbit closure of one 234-past / Thue--Morse-future heteroclinic configuration
+family: one frozen two-sided symbolic heteroclinic orbit closure
+phase_space: compact subshift X over alphabet {0,1,2,3,4}
+dynamics: left shift sigma restricted to X
+parameters: no fitted parameter; the two alphabets, period-three phase, and interface at coordinates -1 and 0 are frozen
+parameter_provenance: source-derived Thue--Morse substitution and the declared period-three word 234
+clock: one left shift
+normalization: fixed points first; exact-period points by Mobius inversion; cycles after division by period
+determinant_convention: Artin--Mazur zeta exp(sum Fix(n) z^n/n)
+orbit_cutoff: all-period theorem; finite windows, periods 60, and zeta degree 36 are replay sentinels
+precision: exact symbols, integers, and formal power series
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or divisor tables, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 506dead810d67fa58fa7c42b2d9a09bfae161059
+artifact_paths:
+  - results/c154_heteroclinic_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: closure of one 234-past / Thue--Morse-future heteroclinic full shift orbit
+  clock: one left shift
+  normalization: fixed points first; exact-period points by Mobius inversion; cycles after division by period
+  determinant_convention: Artin--Mazur zeta exp(sum Fix(n) z^n/n)
+  cutoff: all-period theorem; finite windows, periods 60, and zeta degree 36 are replay sentinels
+  precision: exact symbols, integers, and formal power series
+  allowed_data: frozen Thue--Morse substitution, period-three word 234, and their single interface
+  forbidden_data: external prime or zero tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: the period-three orbit is generated as the negative limit component of one dense full heteroclinic Z-orbit rather than freely attached
+  strongest_failure: standard forward topological transitivity and minimality fail, and every interface point is wandering
+  metrics:
+    primitive_cycles: 1
+    interface_replay_rows: 73
+    periodic_limit_phases: 3
+  artifacts:
+    - results/c154_heteroclinic_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the source zeta is exactly 1/(1-z^3)
+  strongest_failure: this one-factor rational zeta has no frozen target divisor comparison
+  metrics:
+    source_zeta_factors: 1
+    target_comparisons: 0
+  artifacts:
+    - results/c154_heteroclinic_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the all-period orbit ledger is exact
+  strongest_failure: no target functional equation, counting law, or continuation comparison is present
+  metrics:
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the symbolic homeomorphism and its nonwandering decomposition are explicit
+  strongest_failure: no natural unitary, scattering, Hamiltonian, or self-adjoint lift is constructed
+  metrics:
+    natural_lifts_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: dense full two-sided Z-orbit does not imply standard forward topological transitivity in this system
+blocking_conditions:
+  - the only primitive orbit is a simple period-three limit component
+  - the interface orbit is isolated and wandering
+  - no target analytic structure or natural lift is present
+next_smallest_test: couple the asymptotic symbolic components through recurrent interfaces rather than isolated wandering points
+route_b_invocation_allowed: false

@@ -2250,3 +2250,24 @@ content-addressed artifacts, failed-conjecture record, cross-review repairs,
 and uniform release audit.  The common scope remains
 `NO_BAD_EULER_OR_ROOT_NUMBER`; the five Route-A coordinates are not combined,
 and Route B remains unauthorized.
+
+## Route-A dynamics-refinement round C154--C158
+
+This round replaces five residual qualitative boundaries by exact structure
+or scaling theorems: a single heteroclinic symbolic orbit closure, Rule-90
+full-period concentration, a Heisenberg primary quadratic module, the
+Dirichlet square-billiard Abel trace, and a full-cycle open-Walsh secular
+limit.  The papers keep these dynamical subtypes separate and record the
+remaining obstruction beside every positive result.
+
+- [C154 Thue--Morse/period-three heteroclinic closure](henon_thue_morse_heteroclinic_period3_route_a/README.md) · [paper PDF](henon_thue_morse_heteroclinic_period3_route_a/paper/main.pdf)
+- [C155 Mersenne Rule-90 full-period concentration](henon_rule90_mersenne_full_period_concentration_route_a/README.md) · [paper PDF](henon_rule90_mersenne_full_period_concentration_route_a/paper/main.pdf)
+- [C156 Heisenberg primary quadratic module](henon_heisenberg_primary_quadratic_module_route_a/README.md) · [paper PDF](henon_heisenberg_primary_quadratic_module_route_a/paper/main.pdf)
+- [C157 square-billiard Dirichlet Abel trace](henon_square_billiard_abel_wave_trace_route_a/README.md) · [paper PDF](henon_square_billiard_abel_wave_trace_route_a/paper/main.pdf)
+- [C158 open-Walsh full-cycle secular scaling](henon_open_walsh_full_cycle_secular_scaling_route_a/README.md) · [paper PDF](henon_open_walsh_full_cycle_secular_scaling_route_a/paper/main.pdf)
+
+See the [C154--C158 batch plan](BATCH_PLAN_C154_C158.md) and
+[batch review](BATCH_REVIEW_C154_C158.md) for the proof ledger,
+content-addressed artifacts, internal cross-review repairs, and uniform
+release audit.  The common scope remains `NO_BAD_EULER_OR_ROOT_NUMBER`; the
+five Route-A coordinates are not combined, and Route B remains unauthorized.
