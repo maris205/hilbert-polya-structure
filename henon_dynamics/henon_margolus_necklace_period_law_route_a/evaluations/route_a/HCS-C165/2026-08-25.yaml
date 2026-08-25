@@ -1,0 +1,92 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C165
+source_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: binary two-phase Margolus block cellular automaton on a ring of 2m sites
+family: every integer m greater than or equal to one
+phase_space: labelled binary configurations on Z/(2m)Z
+dynamics: staggered swap layer B after even-pair swap layer A
+parameters: m is the source half-ring size; no fitted parameter
+parameter_provenance: frozen local swap schedule and source ring size
+clock: one complete B-after-A tick
+normalization: labelled configurations, exact least full-tick periods, then geometric cycles
+determinant_convention: finite Artin--Mazur zeta and ordinary same-clock finite Koopman determinant
+orbit_cutoff: all-m theorem; finite replay through m=16 and direct enumeration through m=8
+precision: exact permutations, integers, rational probabilities, and symbolic polynomials
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+artifact_paths:
+  - results/c165_margolus_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: one binary two-layer partitioned cellular automaton for every m
+  clock: one complete staggered B-after-A swap schedule
+  normalization: labelled states, exact-period states, then geometric cycles
+  determinant_convention: source Artin--Mazur zeta and the inverse same-clock Koopman determinant
+  cutoff: all-parameter proof with finite exact sentinels only
+  precision: exact permutation and integer arithmetic
+  allowed_data: frozen swap layers and source-derived finite divisors
+  forbidden_data: external target prime or zero tables, arithmetic local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: exact conjugacy to a four-letter rotation gives every fixed, exact-period, and primitive-cycle count for every m
+  strongest_failure: the source primitive necklaces carry no target prime-like semantics and the system is exactly reducible
+  metrics:
+    finite_family_rows: 16
+    fixed_cells: 136
+    period_cells: 50
+    directly_enumerated_configurations: 87380
+  artifacts:
+    - results/c165_margolus_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the complete finite source zeta and its Koopman determinant are exact for every m
+  strongest_failure: no target divisor, root count, or frozen target validation region is present
+  metrics:
+    exact_source_zeta_families: 1
+    target_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: all finite source determinant factors and multiplicities are proved
+  strongest_failure: no target functional equation, counting law, or continuation comparison is attempted
+  metrics:
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: the counting-measure Koopman permutation uses the identical full tick, its determinant is the inverse source zeta, and reflection plus conjugation is an antiunitary reversor
+  strongest_failure: the lift is finite; it is self-adjoint only at m=1,2, is non-self-adjoint for m>=3, and supplies no uniform target spectral construction
+  metrics:
+    same_clock_koopman_owners: 1
+    explicit_antiunitary_reversors: 1
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c165_margolus_evidence.json
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: the system is exactly conjugate to a four-letter necklace rotation and is not claimed to be chaotic or interacting; the finite Koopman owner is not Hilbert--Polya
+blocking_conditions:
+  - no target divisor comparison
+  - no target analytic continuation, functional equation, or counting law
+  - finite exactly reducible source dynamics
+next_smallest_test: test a genuinely interacting reversible partitioned rule while preserving a same-clock exact period owner
+route_b_invocation_allowed: false

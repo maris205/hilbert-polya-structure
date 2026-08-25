@@ -1,0 +1,94 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C164
+source_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: branch-resolved induced Fredholm family for the C159 Thue--Morse S-gap renewal shift
+family: one recurrent synchronized renewal shift, its first-return branch space, and a separately frozen uninduced adjacency
+phase_space: binary S-gap subshift X_S and return-branch Hilbert space l2(S)
+dynamics: one left shift on X_S; induced return branches have durations s+1
+parameters: no fitted parameter; q_s=exp(-sqrt(s+1)) is a fixed Hilbert gauge
+parameter_provenance: source-defined Thue--Morse parity and a fixed subexponential diagonal branch gauge
+clock: one left shift; induced return duration is retained as z^(s+1)
+normalization: det_F(I-L_z)=(1-z)(1-F(z)) with constant term one
+determinant_convention: Fredholm determinant of the direct sum of the all-zero fixed-orbit block and induced branch family
+orbit_cutoff: all-parameter operator theorems; 128 bits, 32 branch rows, and degree 48 are sentinels
+precision: exact formal integers and analytic comparison proofs
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya claims, and Route B
+code_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+artifact_paths:
+  - results/c164_fredholm_owner_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: C159 Thue--Morse S-gap renewal shift and its intrinsic return branches
+  clock: one left shift; branch 10^s returns after s+1 ticks
+  normalization: F(z)=sum_(s in S)z^(s+1) and zeta_X(z)^(-1)=(1-z)(1-F(z))
+  determinant_convention: trace-class Fredholm determinant with constant term one
+  cutoff: all-parameter theorem; finite sentinels at source bit 128 and degree 48
+  precision: exact formal coefficients and analytic summability comparison
+  allowed_data: Thue--Morse parity and source renewal code
+  forbidden_data: external zero or prime tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: recurrent renewal dynamics now has a source branch-resolved trace-class first-return owner
+  strongest_failure: the owner is induced and nonunitary rather than a compact realization of the original time-one adjacency
+  metrics:
+    source_branch_rows: 32
+    exact_trace_power_rows: 6
+    formal_degree: 48
+  artifacts:
+    - results/c164_fredholm_owner_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact Fredholm determinant equals the complete source inverse zeta on the open disk
+  strongest_failure: no frozen target divisor or target root-count comparison is present
+  metrics:
+    exact_source_fredholm_owners: 1
+    target_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a3:
+  verdict: A3_PARTIAL_ANALYTIC_STRUCTURE
+  evidence_status: PROVED
+  strongest_evidence: trace-norm holomorphy on the disk and a proved obstruction to trace-class meromorphic continuation through every boundary arc
+  strongest_failure: this is source analytic structure with no target functional equation or counting-law comparison
+  metrics:
+    proved_trace_class_domains: 1
+    proved_boundary_arc_obstructions: 1
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the induced transfer owner is explicit and all bounded diagonal Hilbert realizations of the uninduced adjacency are proved noncompact
+  strongest_failure: no natural unitary, Hamiltonian, self-adjoint, or Hilbert--Polya lift is constructed
+  metrics:
+    induced_nonunitary_owners: 1
+    uninduced_schatten_realizations: 0
+    natural_self_adjoint_lifts: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: operator ownership belongs to the source first-return family; the time-one adjacency is not compact and no target-facing or self-adjoint conclusion follows
+blocking_conditions:
+  - induced owner is nonunitary and not the uninduced time-one adjacency
+  - no target divisor or global-structure comparison
+  - no natural self-adjoint or Hilbert--Polya lift
+next_smallest_test: seek a genuinely different source dynamics with a same-clock unitary or antiunitary owner while retaining an all-parameter orbit theorem
+route_b_invocation_allowed: false

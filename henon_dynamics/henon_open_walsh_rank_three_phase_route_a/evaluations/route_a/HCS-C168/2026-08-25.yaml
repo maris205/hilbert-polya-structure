@@ -1,0 +1,94 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C168
+source_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: rank-three phase-resolved full-cycle spectrum of the natural four-symbol open Walsh gate
+family: open Walsh quantum maps indexed by integer register length k
+phase_space: (C^4) tensor k with k at least 1
+dynamics: cyclic Walsh register shift B_k with one rank-three opening per tick
+parameters: integer register length k; DFT convention and hole digit 1 are frozen
+parameter_provenance: natural four-symbol single-hole generalization, fixed before computation
+clock: one B_k application is one tick; C_k=B_k^k is exactly one complete register cycle
+normalization: nonzero eigenvalues counted with algebraic multiplicity; phases normalized to unit modulus; centered sqrt(k) log modulus
+determinant_convention: E_k(z)=det(I_(4^k)-z*C_k), whose nonzero degree is 3^k
+orbit_cutoff: all-k theorem; k<=24 and Fourier modes m<=24 are finite sentinels
+precision: exact radicals, rational recurrences, and integers; decimal columns are non-claim-bearing sentinels
+training_data: none; no parameter is fitted to a target table
+forbidden_data: target zero or divisor tables, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+artifact_paths:
+  - results/c168_rank_three_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: A=F4^*diag(1,0,1,1) and C_k=B_k^k=A^(tensor k)
+  clock: one complete factor cycle is k Walsh ticks
+  normalization: algebraic-multiplicity-weighted nonzero spectrum with unit phases and centered sqrt(k) log modulus
+  determinant_convention: E_k(z)=det(I-z*C_k), retaining zero eigenvalues only through their generalized-space dimension
+  cutoff: all-k proof with finite spectral, Fourier, control, and mutation sentinels
+  precision: exact algebra for all claim-bearing spectra, phase contraction, and multiplicity statements
+  allowed_data: frozen DFT gate, tensor identity, finite-group Fourier analysis, and source-derived moved-hole controls
+  forbidden_data: external target, prime, arithmetic-local, automorphy, Hilbert--Polya, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: the natural rank-three full-cycle spectrum has an exact all-k secular product, Haar phase law, and joint Gaussian-Haar scaling
+  strongest_failure: this is a source-side resonance law with no prime-like primitive-orbit correspondence
+  metrics:
+    all_k_secular_theorems: 1
+    all_k_phase_limit_theorems: 1
+    all_k_joint_limit_theorems: 1
+    target_correspondences: 0
+  artifacts:
+    - results/c168_rank_three_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: all nonzero full-cycle eigenvalues and algebraic multiplicities have an exact multinomial determinant law
+  strongest_failure: no frozen target divisor or determinant comparison is supplied
+  metrics:
+    exact_source_determinant_products: 1
+    target_divisor_comparisons: 0
+  artifacts:
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: source phases converge weakly to Haar and jointly with Gaussian log-modulus fluctuations
+  strongest_failure: no target functional equation, counting law, continuation, or global divisor comparison is authorized
+  metrics:
+    source_side_limit_coordinates: 2
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: the natural subunitary rank-three scattering gate has a phase-resolved growing-k limit and a same-clock torsion control
+  strongest_failure: the hole-reflection antiunitary identity changes hole and propagation order and yields no fixed-hole self-adjoint limiting operator
+  metrics:
+    source_phase_limits: 1
+    same_clock_torsion_controls: 1
+    antiunitary_control_identities: 1
+    self_adjoint_limits: 0
+  artifacts:
+    - results/c168_rank_three_evidence.json
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: convergence concerns only the source-side multiplicity-weighted full-cycle phase and centered log-modulus law
+blocking_conditions:
+  - the gate is subunitary and nonnormal rather than a self-adjoint Hamiltonian
+  - weak Haar convergence has finite-k total-variation distance one from continuous Haar
+  - no target analytic or arithmetic comparison is authorized
+next_smallest_test: test whether a natural multihole or higher-rank Walsh subtype preserves exact phase control without claiming a uniform Fourier gap
+route_b_invocation_allowed: false

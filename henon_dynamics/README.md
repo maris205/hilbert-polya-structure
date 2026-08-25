@@ -2294,3 +2294,26 @@ candidate record, content-addressed artifacts, cross-review repairs, and
 uniform release audit.  The common scope remains
 `NO_BAD_EULER_OR_ROOT_NUMBER`; the five source systems remain separate and
 Route B remains unauthorized.
+
+## Route-A theorem-progress round C164--C168
+
+This round keeps the theorem-first gate and broadens the dynamical mix: an
+induced renewal Fredholm family, a reversible Margolus cellular automaton, a
+high-dimensional dyadic skew tower, a continuously deformed rectangular
+billiard, and a natural rank-three open Walsh gate.  Repeated or unsupported
+candidate lines were explicitly pivoted before paper release.  Each retained
+paper proves an all-parameter identity, classification, limit law, or
+obstruction and states its remaining boundary beside the theorem.
+
+- [C164 induced Thue--Morse first-return Fredholm owner](henon_thue_morse_induced_fredholm_owner_route_a/README.md) · [paper PDF](henon_thue_morse_induced_fredholm_owner_route_a/paper/main.pdf)
+- [C165 reversible Margolus necklace period law](henon_margolus_necklace_period_law_route_a/README.md) · [paper PDF](henon_margolus_necklace_period_law_route_a/paper/main.pdf)
+- [C166 dyadic Pascal skew-tower period theorem](henon_dyadic_pascal_skew_tower_route_a/README.md) · [paper PDF](henon_dyadic_pascal_skew_tower_route_a/paper/main.pdf)
+- [C167 rectangular-billiard deformation branches](henon_rectangular_billiard_deformation_branch_route_a/README.md) · [paper PDF](henon_rectangular_billiard_deformation_branch_route_a/paper/main.pdf)
+- [C168 natural rank-three open-Walsh phase law](henon_open_walsh_rank_three_phase_route_a/README.md) · [paper PDF](henon_open_walsh_rank_three_phase_route_a/paper/main.pdf)
+
+See the [C164--C168 batch plan](BATCH_PLAN_C164_C168.md) and
+[batch review](BATCH_REVIEW_C164_C168.md) for the exact theorem ledger,
+candidate-pivot record, content-addressed artifacts, hostile cross-review,
+and uniform release audit.  The five coordinates remain separate.  Their
+common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains
+unauthorized.

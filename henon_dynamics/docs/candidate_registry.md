@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C164--HCS-C168 theorem-progress round (2026-08-25)
+
+This round enforces one all-parameter advance per paper while changing
+dynamical subtype whenever a continuation would merely repeat a finite or
+already exhausted pattern.  A fourth consecutive Rule-90 law, a collapsed
+two-dimensional shear, an unsupported uniform irrational shell gap, and a
+freely selected three-phase tensor model were not promoted.  The retained
+systems remain separate:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C164 | The recurrent Thue--Morse S-gap shift has a natural trace-norm holomorphic rank-one first-return owner with `Tr(K_z^m)=F(z)^m` and `det_F(I-([z] direct_sum K_z))=(1-z)(1-F(z))=zeta_X(z)^(-1)`.  Every bounded positive-diagonal weighted realization of the uninduced one-step adjacency is noncompact and belongs to no finite Schatten class; the induced trace-class owner cannot continue meromorphically through a unit-circle arc. | `(A1_WEAK,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)` | [`../henon_thue_morse_induced_fredholm_owner_route_a/`](../henon_thue_morse_induced_fredholm_owner_route_a/) |
+| HCS-C165 | One full Margolus tick on a binary `2m`-ring is exactly conjugate to cyclic rotation on a four-letter necklace of length `m`.  This yields all-iterate fixed counts `4^gcd(m,n)`, exact-period and primitive-cycle formulas, the complete zeta, a short-period bound, a reflection reversor, and the finite Koopman determinant. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_margolus_necklace_period_law_route_a/`](../henon_margolus_necklace_period_law_route_a/) |
+| HCS-C166 | Every point of the `d`-dimensional dyadic Pascal skew tower modulo `2^r` has exact period `M=2^(r+floor(log_2 d))`.  Hence fixed sets are either empty or the whole space, the cycle count and zeta have one exact factor, and truncated-polynomial substitution supplies an involutive reversor and same-clock antiunitary. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_dyadic_pascal_skew_tower_route_a/`](../henon_dyadic_pascal_skew_tower_route_a/) |
+| HCS-C167 | Every nonzero dual shell of every rectangular Dirichlet billiard has the canonical full-trace coefficient `alpha*exp(i*pi/4)*R_alpha(E)/(8*pi*E^(1/4))`.  All distinct absolute-direction collisions occur at positive-rational `beta=alpha^2`, every pairwise crossing is transverse, irrational beta has sign-only multiplicity, and rational fibres are exactly `v*m^2+u*n^2=N`. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_rectangular_billiard_deformation_branch_route_a/`](../henon_rectangular_billiard_deformation_branch_route_a/) |
+| HCS-C168 | The natural four-symbol single-hole Walsh gate has three nonzero one-site spectral branches.  Their tensor full cycles have an exact multinomial secular product, fixed-mode exponential phase decay, weak Haar phase equidistribution, a centered log-modulus Gaussian law, and a joint Gaussian--Haar limit; a moved hole supplies an exact torsion control. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_open_walsh_rank_three_phase_route_a/`](../henon_open_walsh_rank_three_phase_route_a/) |
+
+C165 and C166 use different finite Koopman systems, C167 uses the natural
+rectangular half-wave operator, and C168 retains only its finite open
+scattering parent.  Their A4 labels are not combined.  C164 separates the
+induced owner from both its uninduced adjacency and a tautological scalar
+determinant.  No candidate imports a target divisor, zero or prime census,
+functional equation, target counting law, arithmetic local datum, Euler
+factor, root number, automorphy object, or Hilbert--Polya operator.  The common
+scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; Route B remains unauthorized and
+`route_b_invocation_allowed=false` throughout.
+
 ## HCS-C159--HCS-C163 theorem-progress round (2026-08-25)
 
 Five source-locked candidates pass an explicit theorem-first gate.  Two

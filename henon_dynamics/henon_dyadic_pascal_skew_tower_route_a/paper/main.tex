@@ -1,0 +1,139 @@
+\pdfvariable suppressoptionalinfo 512\relax
+\pdfvariable trailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.64in]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb}
+\newfontfamily\cjkfont{Droid Sans Fallback}
+\linespread{0.92}
+\setlength{\parskip}{1.5pt}
+\title{\vspace{-1.55em}Exact Clocks and Time Reversal in Dyadic Pascal Skew Towers}
+\author{Route-A structural certificate C166}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For $q=2^r$ and every $d\ge2$, consider the finite affine tower
+$T(x_1,\ldots,x_d)=(x_1+x_2,\ldots,x_{d-1}+x_d,x_d+1)$.
+With $a=\lfloor\log_2d\rfloor$ and $M=2^{r+a}$, we prove that
+$\operatorname{Fix}(T^n)$ is the entire $q^d$-state space exactly when
+$M\mid n$, and is empty otherwise.  Thus every state has least period $M$,
+there are $q^d/M$ primitive cycles, and
+$\zeta_T(z)=(1-z^M)^{-q^d/M}$.  The finite Koopman determinant is its
+reciprocal.  In truncated-polynomial coordinates, $T$ is multiplication by
+$1+t$ and substitution $t\mapsto-t/(1+t)$ is an involutive reversor, yielding
+an exact antiunitary time reversal.  The proof uses Pascal coefficients and a
+sharp binary-valuation witness; finite sweeps are only regression sentinels.
+No complexity, target determinant, arithmetic, or Hilbert--P\'olya claim is
+made.
+\end{abstract}
+\noindent\textbf{Keywords:} affine dynamics; Pascal tower; dyadic valuation;
+exact period; Artin--Mazur zeta; Koopman unitary; time reversal.
+
+\smallskip
+\noindent{\cjkfont\small\parbox{\linewidth}{\raggedright\emergencystretch=3em
+中文摘要：本文研究定义在有限模空间上的高维帕斯卡斜塔，而不是把二维剪切重新包装成独立模型。
+对任意 $q=2^r$ 与 $d\ge2$，维数跨越二的幂次时，公共周期按
+$M=2^{r+\lfloor\log_2d\rfloor}$ 精确跳变。我们证明：只有当 $M$ 整除迭代次数时，所有状态同时固定；其余时刻没有固定状态。
+由此得到完整的本原轨道数、动力学泽塔函数和有限库普曼行列式。
+截断多项式代换 $t\mapsto-t/(1+t)$ 还给出保持原时钟的反演与反酉对称。
+证明依赖二项式系数的精确二进赋值，而有限枚举仅用于回归验证。
+本文不主张复杂性、目标谱匹配、算术局部结构或希尔伯特波利亚算子。
+
+关键词：仿射动力学；帕斯卡斜塔；二进赋值；精确周期；动力学泽塔；库普曼酉算子；时间反演。}}
+
+\section{Pascal ownership of every iterate}
+In $R=(\mathbb Z/q\mathbb Z)[t]/(t^{d+1})$, encode a state by the unit
+\[
+p_x(t)=1+x_dt+x_{d-1}t^2+\cdots+x_1t^d.                    \tag{1}
+\]
+Multiplication by $1+t$ is exactly $T$, so
+\[
+p_{T^nx}=(1+t)^np_x,\qquad
+T^nx=x\Longleftrightarrow q\mid\binom nk\quad(1\le k\le d). \tag{2}
+\]
+The last equivalence is independent of $x$: the unit $p_x$ cancels in $R$.
+It already shows that every fixed set is either the whole state space or
+empty.
+
+\section{The sharp dyadic clock}
+Let $a=\lfloor\log_2d\rfloor$ and $M=2^{r+a}$.  Since
+\[
+\binom nk=\frac nk\binom{n-1}{k-1},
+\qquad v_2\!\left(\binom nk\right)\ge v_2(n)-v_2(k),        \tag{3}
+\]
+for $1\le k\le n$.  Coefficients with $k>n$ vanish and are automatically
+divisible by $q$.  Thus $M\mid n$ implies divisibility by $q$ for every
+$k\le d$ without assigning a valuation to zero.
+
+Conversely, $q\nmid n$ is detected by $k=1$.  If $q\mid n$ but $M\nmid n$,
+write $v_2(n)=r+b$ with $0\le b<a$ and choose
+\[
+k=2^{b+1}\le2^a\le d.                                    \tag{4}
+\]
+The low $r+b$ binary digits of $n-1$ are all one, and the low $b+1$ digits of
+$k-1$ are all one.  Lucas reduction modulo two makes
+$\binom{n-1}{k-1}$ odd; hence
+\[
+v_2\!\left(\binom nk\right)=r+b-(b+1)=r-1.                \tag{5}
+\]
+This coefficient violates (2).  Therefore, for every parameter and iterate,
+\[
+\operatorname{Fix}(T^n)=
+\begin{cases}(\mathbb Z/q\mathbb Z)^d,&M\mid n,\\
+\varnothing,&M\nmid n.
+\end{cases}                                                \tag{6}
+\]
+This is the all-parameter proof; the 25,200 coefficient checks and 27,788
+direct state periods packaged with C166 are finite regression sentinels.
+
+\section{Cycles, zeta, and the finite Koopman owner}
+Equation (6) gives least period $M$ for all $q^d$ states and exactly $q^d/M$
+primitive cycles.  Thus
+\[
+\log\zeta_T(z)=\sum_{n\ge1}\frac{\#\operatorname{Fix}(T^n)}n z^n
+=-\frac{q^d}{M}\log(1-z^M),
+\quad \zeta_T(z)=(1-z^M)^{-q^d/M}.                         \tag{7}
+\]
+On $\mathcal H=\ell^2((\mathbb Z/q\mathbb Z)^d)$ let
+$U_Tf=f\circ T$.  Its cycle decomposition immediately gives the same-clock
+identity
+\[
+\det(I-zU_T)=(1-z^M)^{q^d/M}=\zeta_T(z)^{-1}.              \tag{8}
+\]
+
+\section{A truncated-ring reversor and scope}
+Nilpotence of $t$ makes
+\[
+\sigma(t)=-\frac{t}{1+t}=-t+t^2-\cdots+(-1)^dt^d          \tag{9}
+\]
+a well-defined substitution automorphism of $R$.  Direct composition gives
+$\sigma^2(t)=t$ and $1+\sigma(t)=(1+t)^{-1}$; consequently
+\[
+\sigma T\sigma=T^{-1}.                                    \tag{10}
+\]
+If $P_\sigma f=f\circ\sigma$ and $J$ is complex conjugation, then
+$\Theta=P_\sigma J$ satisfies
+\[
+\Theta^2=I,\qquad \Theta U_T\Theta^{-1}=U_T^{-1}.          \tag{11}
+\]
+The standalone shear is absorbed as $d=2$; no product-rotation branch is
+presented as new progress.  The strict tuple is
+$(\texttt{A1\_WEAK},\texttt{A2\_FAIL},\texttt{A3\_FAIL},
+\texttt{A4\_NATURAL\_QUANTIZATION})$.  This finite source theorem supplies
+no complexity result, target trace/divisor/counting law, arithmetic local or
+Euler datum, root number, automorphy statement, Hilbert--P\'olya operator, or
+Route-B authorization.  Scope: \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section*{Declarations}
+\textbf{Data availability.} All claim-bearing evidence and programs are in
+the release; no external dataset is used.  \textbf{Ethics.} No human
+participants, animals, or sensitive personal data are involved.
+\textbf{Author contributions/CRediT.} Anonymous technical certificate;
+Conceptualization, Formal analysis, Software, Validation, and Writing are
+recorded at package level.  \textbf{Competing interests.} None known.
+\textbf{Funding.} No external funding is reported.  \textbf{AI-use
+disclosure.} An AI coding assistant supported derivation planning, drafting,
+and code review.  Packaged exact checks validate quantitative claims; the
+assistant was not treated as an external peer reviewer.
+\end{document}

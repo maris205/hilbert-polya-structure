@@ -1,0 +1,106 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C166
+source_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+evaluation_date: 2026-08-25
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: high-dimensional dyadic Pascal skew towers with an exact dimension-dependent clock
+family: finite affine towers indexed by r>=1 and d>=2
+phase_space: (Z/2^r Z)^d
+dynamics: T(x_1,...,x_d)=(x_1+x_2,...,x_(d-1)+x_d,x_d+1)
+parameters: q=2^r, r>=1, d>=2; n is the exact iterate
+parameter_provenance: source-defined with no fit; the standalone shear was absorbed as d=2
+clock: exact iterate n with M=2^(r+floor(log_2 d))
+normalization: unweighted fixed counts and Artin--Mazur zeta
+determinant_convention: det(I-z U_T)=zeta_T(z)^(-1) for the finite Koopman permutation
+orbit_cutoff: all-parameter theorem; r<=6,d<=16 regression sentinels only
+precision: exact integer, modular, polynomial-ring, and permutation arithmetic
+training_data: none
+forbidden_data: target zero/prime tables, target divisor/counting law, arithmetic local or Euler data, root numbers, automorphy, Hilbert--Polya, Route B
+code_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+artifact_paths:
+  - results/c166_pascal_tower_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+candidate:
+  definition: high-dimensional dyadic Pascal skew towers with an exact dimension-dependent clock
+  family: finite affine nilpotent skew towers
+  phase_space: (Z/2^r Z)^d
+  dynamics: multiplication by 1+t on the constant-term-one hyperplane of a truncated polynomial ring
+  parameters: r>=1, d>=2, n>=1
+  provenance: no fit and no target data
+
+source_lock:
+  object: the frozen Pascal tower map
+  clock: exact iterate n
+  normalization: unweighted fixed-point count
+  determinant_convention: finite Koopman characteristic determinant
+  cutoff: all parameters; finite ledger is a regression sentinel
+  precision: exact
+  allowed_data: source integers, binomial coefficients, residues, and truncated polynomials
+  training_data: none
+  forbidden_data: all target-facing and scope-firewall items
+  code_commit: 4342893ce5e2516924181744bfacc01c12e4959d
+  artifacts:
+    - results/c166_pascal_tower_evidence.json
+    - THEOREM_PACKAGE.md
+    - code/c166_pascal_tower_producer.py
+    - code/c166_pascal_tower_checker.py
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every primitive cycle is intrinsic and the complete all-parameter period census is q^d/M cycles of length M
+  strongest_failure: no target primitive-orbit correspondence is present
+  metrics:
+    all_parameter_period_theorems: 1
+    finite_parameter_rows: 90
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c166_pascal_tower_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the finite source zeta and Koopman determinant are exact reciprocals
+  strongest_failure: no frozen target determinant comparison or missing-extra-zero audit is present
+  metrics:
+    exact_source_determinants: 1
+    target_determinant_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source zeta is an exact rational function for every r and d
+  strongest_failure: no target continuation, functional equation, divisor, or counting law is compared
+  metrics:
+    exact_source_zeta_families: 1
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: the same finite state permutation gives U_T and the truncated-ring involution gives Theta U_T Theta^(-1)=U_T^(-1)
+  strongest_failure: this finite Koopman operator is not a target or Hilbert--Polya operator
+  metrics:
+    finite_source_unitaries: 1
+    exact_source_antiunitaries: 1
+    target_operator_claims: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: a finite source clock and determinant theorem with no complexity, target, arithmetic, or cross-candidate promotion
+blocking_conditions:
+  - no target primitive-orbit or determinant comparison
+  - no target analytic structure
+  - the finite Koopman unitary is not a Hilbert--Polya construction
+next_smallest_test: study a source-natural infinite-dimensional limit without changing the clock or importing target data
+route_b_invocation_allowed: false

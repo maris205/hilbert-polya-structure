@@ -1,0 +1,138 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.70in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb}
+\title{Exact Necklace Periods and a Koopman Owner for a Margolus Automaton}
+\author{Route-A structural certificate C165}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study binary configurations on a ring of $2m$ sites under two staggered
+layers of nearest-neighbour swaps.  One full tick first exchanges the even
+pairs and then the staggered pairs.  Direct composition sends even labels two
+sites forward and odd labels two sites backward.  By pairing each even site
+with a reversed odd site, we identify the configuration map with cyclic
+rotation of an $m$-letter word over a four-letter alphabet.  It follows that
+$|\operatorname{Fix}(T^n)|=4^{\gcd(m,n)}$, and M\"obius inversion gives all
+exact-period configurations and primitive cycles.  These are all-size source
+theorems, not extrapolations from the finite checks.  Proper periods occupy
+at most $m/2^m$ of configuration space, uniformly including the identity
+boundary $m=1$.  Reflection reverses the full tick, while the finite
+counting-measure Koopman permutation owns the inverse source zeta and admits
+an antiunitary reversal.  This is not a chaos, target-divisor, or
+uniform self-adjoint spectral claim.
+\end{abstract}
+\noindent\textbf{Keywords:} partitioned cellular automaton; Margolus blocks;
+cyclic rotation; necklace; exact period; primitive cycle; dynamical zeta.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+\begin{sloppypar}
+本文研究 $2m$ 个站点的二元环，其中一个完整时钟依次执行两层交错近邻交换。
+直接跟踪带标签的元胞可知，偶站点向前移动两格，奇站点向后移动两格。
+把偶站点与反向编号的奇站点配对后，整个配置动力系统严格等价于四字母长度
+$m$ 词的循环旋转。因此可以得到所有时刻的不动配置数，并由莫比乌斯反演恢复
+精确周期配置和本原周期。有限枚举仅用于回归检查，不承担全参数定理的证明。
+所有非满周期配置的比例至多为 $m/2^m$，并且该估计保留 $m=1$ 的恒等边界。
+站点反射把完整时钟变为其逆，而计数测度上的有限维\foreignlanguage{english}{Koopman}
+置换恰好拥有源动力行列式及反酉时间反演。本文不宣称混沌，不比较目标除子，
+也不把该有限酉算子提升为自伴目标算子。
+\end{sloppypar}
+\noindent 关键词：分块元胞自动机；交错交换；循环旋转；项链；精确周期；
+本原周期；动力 $\zeta$ 函数。
+\end{otherlanguage}
+
+\section{Full-tick site law}
+Let $X_m=\{0,1\}^{\mathbb Z/(2m)\mathbb Z}$.  Layer $A$ swaps
+$(0,1),(2,3),\ldots$, while $B$ swaps
+$(1,2),(3,4),\ldots,(2m-1,0)$.  One tick is $T=B\circ A$.
+The labelled-cell permutation is
+\[
+\tau(i)=\begin{cases}i+2,&i\ \text{even},\\i-2,&i\ \text{odd},\end{cases}
+\pmod {2m}.                                                   \tag{1}
+\]
+Put $e_j=2j$ and $o_j=1-2j$.  Then
+$\tau(e_j)=e_{j+1}$ and $\tau(o_j)=o_{j+1}$.  Hence
+\[
+\Phi(x)_j=(x_{e_j},x_{o_j})\in\{0,1\}^2                    \tag{2}
+\]
+conjugates $T$ to cyclic rotation of a four-letter word of length $m$.
+
+\section{Period law}
+The $n$th power of the rotation has $\gcd(m,n)$ coordinate cycles, proving
+\[
+|\operatorname{Fix}(T^n)|=4^{\gcd(m,n)}.                    \tag{3}
+\]
+Every exact period divides $m$.  For $d\mid m$,
+\[
+P_m(d)=\sum_{e\mid d}\mu(d/e)4^e,\qquad C_m(d)=P_m(d)/d.    \tag{4}
+\]
+Thus the finite source zeta is
+\[
+\zeta_T(z)=\prod_{d\mid m}(1-z^d)^{-C_m(d)}.                \tag{5}
+\]
+At $m=1$ the full tick is the identity on four configurations.  At $m=2$
+there are four fixed configurations and twelve configurations in six
+two-cycles.
+
+\section{Uniform full-period concentration}
+If $d<m$ divides $m$, then $d\le m/2$ and $P_m(d)\le4^d$.  There are fewer
+than $m$ proper divisors, so
+\[
+\Pr(\operatorname{per}<m)
+=\frac{\sum_{d\mid m,\ d<m}P_m(d)}{4^m}
+\le m4^{-m/2}=\frac{m}{2^m}.                               \tag{6}
+\]
+Thus $\Pr(\operatorname{per}=m)\ge1-m/2^m$.  At $m=1$ the short set is
+empty.  The factor $m$ is a deliberately coarse uniform majorant; no
+optimality is claimed.
+
+\section{Reversal and the same-clock operator owner}
+Reflection $r(i)=-i\pmod{2m}$ preserves parity, and (1) gives
+$r\tau r=\tau^{-1}$.  Its configuration action $R$ obeys
+$RTR=T^{-1}$.  On $\mathcal H_m=\ell^2(X_m)$ with counting measure, let
+$(U_Tf)(x)=f(T^{-1}x)$.  Each dynamical $d$-cycle contributes a cyclic
+permutation block, hence
+\begin{equation}
+\det(I-zU_T)=\prod_{d\mid m}(1-z^d)^{C_m(d)}
+=\zeta_T(z)^{-1}.                                            \tag{7}
+\end{equation}
+For $\Theta f(x)=\overline{f(Rx)}$, one has
+$\Theta U_T\Theta=U_T^{-1}$.  This is a finite, source-natural, same-clock
+Koopman lift.  It is self-adjoint for $m=1,2$: respectively $T=I$ and
+$T^2=I$.  For every $m\ge3$, $P_m(m)>0$ supplies an $m$-cycle, so $T^2\ne I$
+and the permutation unitary is not self-adjoint.  No uniform self-adjoint
+Hilbert--P\'olya realization is claimed.
+
+Exact ledgers contain 136 fixed-time and 50 period cells through $m=16$;
+87{,}380 configurations are directly enumerated through $m=8$.  The
+independent checker passes 723 assertions, SymPy passes 481 checks, byte
+replay is exact, and 58 hostile cases are rejected.  These are regression
+sentinels.  The strict tuple is
+$(\texttt{A1\_WEAK},\texttt{A2\_FAIL},\texttt{A3\_FAIL},
+\texttt{A4\_NATURAL\_QUANTIZATION})$.  The exact conjugacy is not described
+as chaos or interaction.  No target table, Euler factor, root number,
+automorphy, Hilbert--P\'olya operator, or Route-B input is used.  Scope:
+\begin{center}\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.\end{center}
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+code accompany the manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing.  AI systems are not authors.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer.
+\end{document}
