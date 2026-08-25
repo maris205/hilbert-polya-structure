@@ -1,0 +1,178 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\documentclass[10pt]{article}
+\usepackage[margin=0.62in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\title{Exact Traces and Escape Ranks\\for a Three-Symbol Open Walsh Gate}
+\author{H\'enon Route-A Working Series, C148}
+\date{25 August 2026}
+
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+\begin{abstract}
+We study a finite three-symbol Walsh gate obtained by passing one qutrit per
+step through a rank-two Fourier--projection contraction.  The gate has exact
+left and right defect projections, a tensor-power identity after one full
+factor cycle, and an all-period trace formula governed by a greatest common
+divisor.  Newton recursion then gives exact secular polynomials.  A tempting
+one-step rank formula is false: the rank is $2\,3^{k-1}$, while $2^k$ occurs
+only after $k$ steps.  The construction is a finite scattering subgate with a
+closed unitary parent, not a self-adjoint or target-matched quantization.
+\end{abstract}
+
+\section{Frozen open gate}
+Let $\omega=e^{2\pi i/3}=(-1+i\sqrt3)/2$ and
+\[
+ (F_3)_{j\ell}=3^{-1/2}\omega^{j\ell},\qquad
+ P=\operatorname{diag}(1,0,1),\qquad A=F_3^*P.
+\]
+On $\mathcal H_k=(\mathbb C^3)^{\otimes k}$, with lexicographic qutrit
+basis, freeze
+\begin{equation}
+ B_k(v_0\otimes\cdots\otimes v_{k-1})
+ =v_1\otimes\cdots\otimes v_{k-1}\otimes Av_0.       \tag{1}
+\end{equation}
+One application is one clock tick, and
+$D_k(z)=\det(I_{3^k}-zB_k)$.  No spectral rescaling is performed.
+
+\begin{theorem}
+For every $k,n\ge1$, with $d=\gcd(n,k)$,
+\begin{align}
+ \|B_k\|&=1,& \rank B_k&=2\,3^{k-1},
+ &B_k^k&=A^{\otimes k},& \rank B_k^k&=2^k,             \tag{2}\\
+ \Tr(B_k^n)&=\Tr(A^{n/d})^d.                           \tag{3}
+\end{align}
+The subunitarity defects are the rank-$3^{k-1}$ projections
+\begin{align}
+ I-B_k^*B_k&=(I-P)\otimes I_{3^{k-1}},\tag{4}\\
+ I-B_kB_k^*&=I_{3^{k-1}}\otimes F_3^*(I-P)F_3.\tag{5}
+\end{align}
+\end{theorem}
+\begin{proof}
+Write $S(v_0,\ldots,v_{k-1})=(v_1,\ldots,v_{k-1},v_0)$ and
+$C=I^{\otimes(k-1)}\otimes A$.  Then $B_k=CS$, while
+$A^*A=P$ and $AA^*=F_3^*PF_3$.  This proves the norm, one-step rank, and
+both Gram formulas.  Tracking a pure tensor for $k$ steps sends every factor
+through $A$ once and restores its position, proving the tensor identity and
+its rank.
+
+For (3), multiplication of basis matrix elements identifies factor positions
+along the cycles of addition by $n$ modulo $k$.  This permutation has $d$
+cycles, indexed by residues modulo $d$.  During the $n$ successive shifts,
+the departing positions are $0,1,\ldots,n-1$ modulo $k$; each residue modulo
+$d$ occurs exactly $n/d$ times.  Thus every permutation cycle contracts
+exactly $n/d$ ordered copies of $A$, and its free qutrit-index sum is
+$\Tr(A^{n/d})$.  The $d$ cycles are independent, giving the displayed power.
+This proves every period; no finite replay is used.
+\end{proof}
+
+The distinction in (2) is substantive.  One tick opens only the factor
+crossing the cut; the full tensor opening occurs only after $k$ ticks.
+
+\section{Secular and path formulas}
+The one-qutrit characteristic polynomial is
+\[
+ \det(\lambda I-A)=\lambda(\lambda^2-\tau\lambda+q),\qquad
+ \tau=\frac{\sqrt3}{6}-\frac i2,\quad
+ q=-\frac12-\frac{\sqrt3 i}{6}.
+\]
+Put $t_0=2,t_1=\tau$ and
+$t_m=\tau t_{m-1}-qt_{m-2}$.  Thus $t_m=\Tr(A^m)$.  If
+$D_k(z)=\sum_jc_{k,j}z^j$, then
+\begin{equation}
+ c_{k,0}=1,\qquad
+ c_{k,m}=-\frac1m\sum_{j=1}^m c_{k,m-j}
+ t_{j/\gcd(j,k)}^{\gcd(j,k)}.                         \tag{6}
+\end{equation}
+This is a reproducible expression in $\mathbb Q(\sqrt3,i)$.  In particular,
+\begin{align*}
+ D_1(z)&=1+\left(-\frac{\sqrt3}{6}+\frac i2\right)z
+ +\left(-\frac12-\frac{\sqrt3 i}{6}\right)z^2,\\
+ D_2(z)&=1+\left(-\frac{\sqrt3}{6}+\frac i2\right)z
+ +\left(-\frac{\sqrt3}{6}+\frac i6\right)z^3
+ +\left(-\frac16-\frac{\sqrt3 i}{6}\right)z^4.
+\end{align*}
+To prove the endpoint, triangularize $A$.  It has one zero and two nonzero
+eigenvalues, counted algebraically, so $A^{\otimes k}=B_k^k$ has exactly
+$3^k-2^k$ zero eigenvalues.  Spectral mapping preserves that total at zero:
+zero is the only eigenvalue of $B_k$ whose $k$th power is zero.  Hence
+\begin{equation}
+ \det(\lambda I-B_k)=\lambda^{3^k-2^k}
+ \sum_{j=0}^{2^k}c_{k,j}\lambda^{2^k-j},             \tag{7}
+\end{equation}
+and the last coefficient is nonzero.  The exact payload lists every
+coefficient through $k=5$; its compact receipt is
+\begin{center}\small
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+$k$ & $3^k$ & $\rank B_k$ & $\deg D_k$ & nonzero $c_{k,j}$\\
+\midrule
+1 & 3   & 2   & 2  & 3\\
+2 & 9   & 6   & 4  & 4\\
+3 & 27  & 18  & 8  & 9\\
+4 & 81  & 54  & 16 & 13\\
+5 & 243 & 162 & 32 & 21\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+In the frozen basis, a directed edge carries its complex matrix entry.  Matrix
+multiplication and primitive-root decomposition give
+\begin{equation}
+ \Tr(B_k^n)=\sum_{w\ \mathrm{rooted\ closed}}a(w),\qquad
+ D_k(z)=\prod_{[p]\ \mathrm{primitive}}
+ (1-a(p)z^{|p|}).                                    \tag{8}
+\end{equation}
+All signed and complex cancellations are retained.  Since the maximum
+absolute column sum is $\sqrt3$, the absolute rooted-path mass at time $n$ is
+at most $3^k(\sqrt3)^n$.  Thus the logarithmic majorant converges for
+$|z|<1/\sqrt3$, where the raw product is absolutely regroupable.  The
+determinant is globally a polynomial; no larger raw product domain is claimed.
+
+\section{Controls and boundary}
+For $P=I_3$, $A=F_3^*$ and the corresponding $B_k$ is unitary of rank $3^k$,
+with vanishing defects.  This is the closed parent from which the opening is
+defined.  Projector order is an isospectral negative control: if
+$A_{\rm R}=PF_3^*$, then
+\[
+ A_{\rm R}=F_3AF_3^*,\qquad
+ \Tr(A_{\rm R}^m)=\Tr(A^m).
+\]
+Formula (3) therefore leaves every $D_k$ unchanged, although matrix entries
+and the left/right Gram placements change.  By contrast, moving the hole to
+$P_0=\operatorname{diag}(0,1,1)$ preserves opening rank but gives
+\[
+ \Tr(F_3^*P_0)=-\frac{\sqrt3}{3}-i,\qquad
+ [z]D_k^{(P_0)}=\frac{\sqrt3}{3}+i,
+\]
+rather than $[z]D_k=-\sqrt3/6+i/2$.  Hole location, but not this projector
+order, changes the secular data.
+
+Exact replay checks 60 traces and all 67 coefficients for $k=1,\ldots,5$.
+The $k=2$ prefix through period eight totals 510 rooted paths and 71 primitive
+cycles; it is not the proof of (2), (3), or (8).  A producer-independent
+checker passes 748 assertions, SymPy passes 141 checks, byte replay passes, and
+40 repaired-hash plus one stale-hash mutations are rejected.
+
+The strict Route-A verdict is
+\begin{center}\small
+\texttt{A1\_WEAK / A2\_FAIL / A3\_FAIL /}
+\texttt{A4\_UNITARY\_OR\_SCATTERING\_CANDIDATE},\\[-2pt]
+overall \texttt{ROUTE\_A\_EXPLORATORY}.
+\end{center}
+This finite-$k$ subunitary gate is not
+self-adjoint and has no semiclassical target matching.  We claim no target
+divisor or counting law, prime-like map, arithmetic local data, Euler factor,
+root number, automorphy, antiunitary symmetry, Hilbert--P\'olya operator, or
+Route-B authorization.  Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

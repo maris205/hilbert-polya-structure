@@ -1,0 +1,50 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C146
+source_commit: 81f980703cb8d255d99daf8425064b28b61a8f7e
+evaluation_date: 2026-08-25
+source_lock:
+  object: standard upper-triangular Heisenberg integer-lattice automorphism Phi_A
+  clock: positive iterate number n
+  normalization: central period one; no fitted parameter
+  determinant_convention: ordinary isolated-orbit stability factor, obstruction test only
+  cutoff: exact ledger through n=20; theorem all n>=1
+  precision: exact integers, rationals, and symbolic algebra
+  allowed_data: frozen group, lattice, and A=[[2,1],[1,1]]
+  forbidden_data: target/prime tables, arithmetic local/Euler/root-number/automorphy/HP/Route-B data
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: one clean central fixed-circle component at every iterate
+  strongest_failure: periodic objects are positive-dimensional families, not isolated primitive orbits
+  metrics: {iterate_ledger_rows: 20, certified_circle_components_per_iterate_lower_bound: 1}
+  artifacts: [THEOREM_PACKAGE.md, results/c146_heisenberg_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact derivative factorization
+  strongest_failure: det(I-DPhi_A^n)=0 for every n>=1
+  metrics: {singular_iterates_through_cutoff: 20}
+  artifacts: [THEOREM_PACKAGE.md, results/TEST_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: zero Lefschetz number at every iterate
+  strongest_failure: no target analytic-structure comparison
+  metrics: {lefschetz_zero_rows: 20}
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: Haar preservation gives the natural Koopman unitary on L2(N,Haar) with the same iterate clock
+  strongest_failure: no bridge connects Koopman traces to the singular clean-family orbit weights
+  metrics: {natural_koopman_operators: 1, isolated_orbit_weight_bridges: 0}
+  artifacts: [NARRATIVE_REPORT.md]
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: central clean-family obstruction only; full component count not asserted
+blocking_conditions:
+  - ordinary isolated-orbit denominator is singular at every iterate
+  - naive horizontal-class fibre lift is refuted by a period-two cocycle witness
+  - no target, arithmetic, or global analytic evidence
+next_smallest_test: classify the actual fibre-rotation character on ker(A^n-I mod Z^2) without assuming it vanishes
+route_b_invocation_allowed: false

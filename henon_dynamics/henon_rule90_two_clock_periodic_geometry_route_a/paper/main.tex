@@ -1,0 +1,133 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\title{Exact Two-Clock Periodic Geometry of Cyclic Rule 90}
+\author{Route-A structural certificate C145}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We count every temporally periodic configuration of Rule 90 on every finite
+cyclic binary lattice.  For spatial circumference $L$ and time $n$, the fixed
+count is a power of two whose exponent is an explicit polynomial-gcd degree.
+An ideal-theoretic proof covers even $L$, where the spatial polynomial can be
+non-squarefree.  M\"obius inversion then separates exact-period points from
+primitive temporal cycles, and fixed configurations are exactly labeled
+$L\times n$ spatiotemporal tori.  A complete $24\times24$ ledger gives
+domain-qualified aspect-ratio witnesses and a same-fixed-count control with
+different primitive content.  The result is exact finite-volume progress, not
+a single frozen target determinant.
+\end{abstract}
+
+\section{Frozen Rule-90 family}
+On the cyclic lattice $\mathbb Z/L\mathbb Z$, Rule 90 is
+\[
+(F_Lu)_i=u_{i-1}+u_{i+1}\pmod2.
+\]
+Both summands are retained when the two neighbor indices coincide; over
+$\mathbb F_2$ they then cancel.  Thus the definition also covers $L=1,2$.
+Encode $u$ in
+$R_L=\mathbb F_2[x,x^{-1}]/(x^L-1)$; then $F_L$ is multiplication by
+$a=x+x^{-1}$.  Freeze the ordered pair $(L,n)$ as the spatial and temporal
+clocks.  Write $\operatorname{Fix}(L,n)=\#\ker(F_L^n-I)$,
+$P_L(n)$ for points of least positive temporal period $n$, and $C_L(n)$ for
+their geometric temporal cycles.  These three quantities are not
+interchangeable.
+
+\section{Kernel--gcd theorem}
+\textbf{Multiplication lemma.}  For monic $f\in k[x]$ and any $h$, multiplication
+$m_h$ on $k[x]/(f)$ satisfies
+\begin{equation}
+\dim\ker m_h=\deg\gcd(f,h).                                      \tag{1}
+\end{equation}
+Indeed, put $g=\gcd(f,h)$, $f=gf_1$, and $h=gh_1$.  Since
+$\gcd(f_1,h_1)=1$,
+\[
+f\mid hq\quad\Longleftrightarrow\quad f_1\mid q.
+\]
+The kernel is therefore represented uniquely by $f_1r$ with $\deg r<\deg g$,
+which proves (1): these representatives span, and
+$f\mid f_1(r-r')$ would force $g\mid(r-r')$, hence $r=r'$ by the degree
+bound.  This also covers $\deg g=0$.  The argument uses divisibility rather
+than distinct roots.
+
+Because $x$ is invertible modulo $x^L+1=x^L-1$ in characteristic two,
+clearing the Laurent denominator does not change the kernel:
+\begin{equation}
+x^n(a^n-1)=(x^2+1)^n+x^n=:b_n.                                  \tag{2}
+\end{equation}
+Applying (1) gives the all-size formula
+\begin{equation}
+\boxed{\ \operatorname{Fix}(L,n)
+=2^{\deg\gcd(x^L+1,(x^2+1)^n+x^n)}\ },\qquad L,n\geq1.           \tag{3}
+\end{equation}
+No squarefree hypothesis occurs: for example
+$x^6+1=(x^3+1)^2$ over $\mathbb F_2$, and (3) still applies.
+
+\section{Exact temporal cycles and tori}
+Even when $F_L$ is not invertible on the whole state space, a point satisfying
+$F_L^nu=u$ lies on a cycle whose least period divides $n$.  Hence the
+fixed-point set at time $n$ is the disjoint union of exact-period sets at
+divisors of $n$.  M\"obius inversion and orbit partitioning give
+\begin{equation}
+P_L(n)=\sum_{d\mid n}\mu(n/d)\operatorname{Fix}(L,d),
+\qquad C_L(n)=\frac{P_L(n)}{n}\in\mathbb Z_{\geq0}.               \tag{4}
+\end{equation}
+The division occurs only after inversion: exact-period-$n$ points form cycles
+of size $n$.
+
+A labeled spatiotemporal torus is an array satisfying
+\[
+u_{i,j+1}=u_{i-1,j}+u_{i+1,j},\qquad i\bmod L,\quad j\bmod n.
+\]
+Its row at $j=0$ determines all rows, and temporal closure is precisely
+$F_L^nu=u$.  Thus the number of labeled $L\times n$ tori is
+$\operatorname{Fix}(L,n)$.
+
+\section{Two-clock witnesses}
+The table records exact counts for $1\leq L,n\leq24$.  Every minimum below is
+within that frozen cutoff, not over unbounded $L,n$; the bounded-search domains
+are distinct:
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+search subset & area & cells $(L,n;\operatorname{Fix})$ & nonzero exact content\\
+\midrule
+$1\leq L,n\leq24$ & $3$ & $(1,3;1),(3,1;4)$ & $(3,1):P=4$\\
+$2\leq L,n\leq24$ & $6$ & $(2,3;1),(3,2;4)$ & none at displayed times\\
+$2\leq L,n\leq24$, some $P>0$ & $12$ & $(2,6;1),(3,4;4),(4,3;1),(6,2;16)$ & $(6,2):P=12,C=6$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For each area the search enumerates every eligible divisor pair $(L,n)$ in the
+stated box; no best-case pair is omitted.
+Thus area $Ln$ loses aspect ratio.  A different control fixes $L=5$:
+\[
+\operatorname{Fix}(5,3)=\operatorname{Fix}(5,6)=16,
+\quad(P_5(3),C_5(3))=(15,5),\quad(P_5(6),C_5(6))=(0,0).           \tag{5}
+\]
+One fixed count therefore loses the divisor history that determines primitive
+content.
+
+\section{Validation and Route-A boundary}
+Across 576 cells, the ledger sums to 488,334 fixed points, 283,758
+exact-period points, and 24,474 primitive cycles.  The independent
+binary-matrix checker passes 6,520 assertions, including direct state
+enumeration at small sizes.  SymPy passes 1,177 exact polynomial checks,
+production replays byte-identically, and all 43 hostile cases (42 repaired-hash
+and one stale-hash) are rejected.
+
+The strict tuple is $(\texttt{A1\_WEAK},\texttt{A2\_FAIL},
+\texttt{A3\_FAIL},\texttt{A4\_FAIL})$, overall
+\texttt{ROUTE\_A\_EXPLORATORY}.  The intrinsic finite-volume cycles depend on
+two essential clocks; we supply no single frozen target divisor, target
+functional equation or counting law, arithmetic/local factor, root number,
+automorphy, natural operator lift, Hilbert--P\'olya operator, infinite-volume
+limit, or Route-B authorization.  The scope literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

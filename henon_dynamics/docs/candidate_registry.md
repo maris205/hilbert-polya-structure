@@ -3,6 +3,30 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C144--HCS-C148 dynamics-diversification round (2026-08-25)
+
+Five source-locked candidates were retained as distinct Route-A results.
+The round deliberately separates symbolic, cellular-automaton, nilpotent,
+integrable, and finite scattering dynamics; no coordinate or verdict is
+transferred between systems:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C144 | The minimal uniformly recurrent Thue--Morse subshift has no periodic point at any positive period, so every Artin--Mazur fixed count vanishes and its source zeta is exactly one; periodic cyclic substitution words are only finite approximant controls. | `(A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_thue_morse_periodic_orbit_vacuum_route_a/`](../henon_thue_morse_periodic_orbit_vacuum_route_a/) |
+| HCS-C145 | Cyclic Rule 90 has the all-size polynomial-gcd fixed-point formula, exact temporal Möbius counts, and labeled space--time tori; frozen `24 x 24` minimum witnesses prove that area and a single fixed count erase essential two-clock primitive data. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_rule90_two_clock_periodic_geometry_route_a/`](../henon_rule90_two_clock_periodic_geometry_route_a/) |
+| HCS-C146 | A lattice Heisenberg automorphism has a clean central fixed circle, singular isolated-orbit determinant, and zero Lefschetz number at every iterate; an explicit period-two cocycle refutes the naive lift of every horizontal torus fixed class. | `(A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_heisenberg_nilmanifold_clean_fixed_sets_route_a/`](../henon_heisenberg_nilmanifold_clean_fixed_sets_route_a/) |
+| HCS-C147 | Primitive rational square-billiard directions carry positive-transverse-length clean families with a family-tangent unit multiplier; the exact census finds the first symmetry-inequivalent length collision, while an irrational-aspect control removes distinct-direction collisions. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_rectangular_billiard_orbit_family_route_a/`](../henon_rectangular_billiard_orbit_family_route_a/) |
+| HCS-C148 | A three-symbol open Walsh gate has exact one-step and full-cycle ranks, projection defects, an all-period gcd trace theorem, exact finite secular polynomials, and a signed primitive-path product; closing the hole restores a unitary parent. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_open_walsh_baker_scattering_route_a/`](../henon_open_walsh_baker_scattering_route_a/) |
+
+C146, C147, and C148 reach different A4 subgates on different source
+systems; they are not merged.  C144 is a proved Route-A rejection because its
+otherwise rich recurrent system has a complete periodic-orbit vacuum.  No
+candidate has a frozen external target divisor, zero census, functional
+equation, counting-law comparison, arithmetic local data, Euler factor, root
+number, automorphy object, or Hilbert--Polya operator.  Thus A2/A3 remain
+failed, the common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
+`route_b_invocation_allowed=false` throughout.
+
 ## HCS-C139--HCS-C143 dynamics-diversification round (2026-08-25)
 
 Five source-locked candidates were retained as distinct Route-A advances.

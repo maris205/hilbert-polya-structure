@@ -2203,3 +2203,25 @@ See the [C139--C143 batch plan](BATCH_PLAN_C139_C143.md) and
 content-addressed artifacts, cross-review repairs, and uniform release audit.
 The five Route-A coordinates remain separate.  Their common scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains unauthorized.
+
+## Route-A dynamics-diversification round C144--C148
+
+This round again changes dynamical subtype paper by paper: a minimal
+substitution subshift, a two-clock cellular automaton, a nilmanifold
+automorphism, an integrable billiard, and an open Walsh quantum gate.  Each
+paper closes an all-period structural theorem or obstruction and includes an
+exact negative control.  The packages retain producer-independent checks,
+separate symbolic reconstruction, hostile mutation tests, closed manifests,
+and reproducible PDF papers.
+
+- [C144 Thue--Morse periodic-orbit vacuum](henon_thue_morse_periodic_orbit_vacuum_route_a/README.md) · [paper PDF](henon_thue_morse_periodic_orbit_vacuum_route_a/paper/main.pdf)
+- [C145 Rule-90 two-clock periodic geometry](henon_rule90_two_clock_periodic_geometry_route_a/README.md) · [paper PDF](henon_rule90_two_clock_periodic_geometry_route_a/paper/main.pdf)
+- [C146 Heisenberg nilmanifold clean fixed sets](henon_heisenberg_nilmanifold_clean_fixed_sets_route_a/README.md) · [paper PDF](henon_heisenberg_nilmanifold_clean_fixed_sets_route_a/paper/main.pdf)
+- [C147 rectangular-billiard primitive families](henon_rectangular_billiard_orbit_family_route_a/README.md) · [paper PDF](henon_rectangular_billiard_orbit_family_route_a/paper/main.pdf)
+- [C148 open Walsh quantum-baker scattering gate](henon_open_walsh_baker_scattering_route_a/README.md) · [paper PDF](henon_open_walsh_baker_scattering_route_a/paper/main.pdf)
+
+See the [C144--C148 batch plan](BATCH_PLAN_C144_C148.md) and
+[batch review](BATCH_REVIEW_C144_C148.md) for the exact progress ledger,
+content-addressed artifacts, cross-review repairs, and uniform release audit.
+The five Route-A coordinates are not combined.  Their common scope remains
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains unauthorized.

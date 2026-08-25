@@ -1,0 +1,73 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C148
+source_commit: 81f980703cb8d255d99daf8425064b28b61a8f7e
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: "B_k(v0 tensor ... tensor v_(k-1))=v1 tensor ... tensor A*v0, A=F3^*diag(1,0,1)"
+  clock: "one application of B_k"
+  normalization: "unitary normalized F3, no spectral rescaling"
+  determinant_convention: "D_k(z)=det(I_(3^k)-z B_k)"
+  cutoff: "all-period theorem; direct traces n<=12; exact polynomials k=1,...,5; paths k=2,n<=8"
+  precision: "exact Q(sqrt(3),i)"
+  allowed_data: "frozen DFT, projector, tensor shift, exact path amplitudes"
+  forbidden_data: "target zeros/divisors, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, Route B"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "intrinsic fixed-basis complex primitive closed paths and an all-period trace/product identity"
+  strongest_failure: "no prime-like target correspondence; paths remain basis-dependent quantum amplitudes"
+  metrics:
+    direct_trace_sentinels: 60
+    rooted_paths_periods_1_to_8_summed: 510
+    primitive_paths_periods_1_to_8_summed: 71
+  artifacts:
+    - results/c148_walsh_baker_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "exact finite secular determinants and complex primitive products"
+  strongest_failure: "no frozen target divisor comparison, sealed target test, or root-count audit"
+  metrics:
+    exact_k_values: 5
+    exact_coefficient_cells: 67
+    target_comparisons: 0
+  artifacts:
+    - results/c148_walsh_baker_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: "finite-dimensional determinant is polynomial and the raw path product has a proved local absolute domain"
+  strongest_failure: "no target functional equation, target counting law, normalization factors, or controlled target continuation"
+  metrics:
+    target_functional_equation_checks: 0
+    target_counting_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: "source-derived subunitary gate with exact projection defects and an exact closed unitary P=I parent"
+  strongest_failure: "finite k only; not self-adjoint and no semiclassical target matching; antiunitary symmetry not asserted"
+  metrics:
+    left_defect_rank: "3^(k-1)"
+    right_defect_rank: "3^(k-1)"
+    closed_control_unitary: true
+  artifacts:
+    - results/c148_walsh_baker_evidence.json
+    - paper/main.pdf
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "finite-k scattering subgate and source determinant only; no target, arithmetic, self-adjoint, Hilbert--Polya, or Route-B claim"
+blocking_conditions:
+  - "no prime-like target map"
+  - "no target divisor or global analytic comparison"
+  - "no self-adjoint or semiclassical limit theorem"
+next_smallest_test: "freeze a genuine k-to-infinity scaling and test whether resonance statistics stabilize without importing target data"
+route_b_invocation_allowed: false

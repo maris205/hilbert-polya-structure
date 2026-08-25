@@ -1,0 +1,69 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C145
+source_commit: 81f980703cb8d255d99daf8425064b28b61a8f7e
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: Rule-90 multiplication by x+x^{-1} on F_2[x,x^{-1}]/(x^L-1)
+  clock: ordered pair of spatial circumference L and temporal iterate n
+  normalization: fixed points first; exact-period points by Mobius inversion; cycles after division by n
+  determinant_convention: no single-variable determinant; exact two-clock table only
+  cutoff: all-size theorem; 1<=L,n<=24 replay ledger
+  precision: exact F_2 polynomial and integer arithmetic
+  allowed_data: frozen local cellular-automaton rule only
+  forbidden_data: external prime or zero tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: exact intrinsic finite-volume temporal cycles and labeled spatiotemporal tori for every L and n
+  strongest_failure: the orbit source depends essentially on two finite-volume clocks and has no prime-like target map
+  metrics:
+    replay_cells: 576
+    primitive_cycles_in_ledger: 24474
+    non_squarefree_even_lengths_included: true
+  artifacts:
+    - results/c145_rule90_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: fixed, exact-period, and primitive-cycle counts are exact at every finite volume
+  strongest_failure: no single frozen circumference, clock, or target divisor determinant is supplied
+  metrics:
+    target_comparisons: 0
+    ordered_clock_dimensions: 2
+  artifacts:
+    - results/c145_rule90_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source finite-volume counting theorem is all-size
+  strongest_failure: no target functional equation, counting law, or continuation comparison is present
+  metrics:
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: Rule 90 is a natural local linear dynamical system
+  strongest_failure: no natural unitary, scattering, Hamiltonian, or self-adjoint lift is constructed
+  metrics:
+    natural_lifts_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: minimum-area witnesses are explicitly restricted to the frozen 24-by-24 search domains
+blocking_conditions:
+  - circumference and temporal period are two essential clocks
+  - area and one fixed count lose periodic-geometry information
+  - no target analytic structure or natural lift is present
+next_smallest_test: freeze one circumference family or a scaling law and test whether its exact temporal determinant remains stable under neighboring lengths
+route_b_invocation_allowed: false
