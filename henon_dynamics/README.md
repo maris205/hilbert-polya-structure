@@ -2181,3 +2181,25 @@ See the [C134--C138 batch plan](BATCH_PLAN_C134_C138.md) and
 [batch review](BATCH_REVIEW_C134_C138.md) for the exact hash ledger, uniform
 release audit, cross-review repairs, and conservative Route-A tuples.  The
 common scope remains `NO_BAD_EULER_OR_ROOT_NUMBER`; Route B is unauthorized.
+
+## Route-A dynamics-diversification round C139--C143
+
+This round tests five deliberately different source mechanisms: a finite-
+memory symbolic roof, a strictly sofic suspension, a nonlinear complex
+inverse-branch operator, a countable renewal operator, and an inhomogeneous
+coined quantum walk.  Each paper proves an all-period or analytic structural
+advance and retains an exact negative control.  The packages include
+independent validation, hostile mutation tests, closed manifests, and
+reproducible PDF papers.
+
+- [C139 four-block marker suspension](henon_four_block_marker_suspension_route_a/README.md) · [paper PDF](henon_four_block_marker_suspension_route_a/paper/main.pdf)
+- [C140 strictly sofic mod-three suspension](henon_mod3_sofic_suspension_route_a/README.md) · [paper PDF](henon_mod3_sofic_suspension_route_a/paper/main.pdf)
+- [C141 quadratic inverse-branch Ruelle ladder](henon_quadratic_inverse_branch_ruelle_route_a/README.md) · [paper PDF](henon_quadratic_inverse_branch_ruelle_route_a/paper/main.pdf)
+- [C142 trace-class countable renewal operator](henon_trace_class_renewal_operator_route_a/README.md) · [paper PDF](henon_trace_class_renewal_operator_route_a/paper/main.pdf)
+- [C143 inhomogeneous coined quantum walk](henon_inhomogeneous_coined_quantum_walk_route_a/README.md) · [paper PDF](henon_inhomogeneous_coined_quantum_walk_route_a/paper/main.pdf)
+
+See the [C139--C143 batch plan](BATCH_PLAN_C139_C143.md) and
+[batch review](BATCH_REVIEW_C139_C143.md) for the exact progress ledger,
+content-addressed artifacts, cross-review repairs, and uniform release audit.
+The five Route-A coordinates remain separate.  Their common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains unauthorized.

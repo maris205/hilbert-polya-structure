@@ -1,0 +1,75 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C141
+source_commit: UNCOMMITTED_PACKAGE_BUILD
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: quadratic polynomial F(z)=z^2-6 with its two principal-square-root inverse branches on D_4
+  clock: one inverse branch per iterate
+  normalization: Hardy H^2(D_4), e_j(z)=(z/4)^j, actual branch derivatives, headline weight m=2
+  determinant_convention: D_2(u)=det(I-u*L_2)
+  cutoff: no theorem cutoff; periods and Taylor powers 1 through 6 are exact replay prefixes
+  precision: exact integer and rational quotient-algebra arithmetic
+  allowed_data: frozen polynomial, disk, inverse branches, Hardy normalization, and intrinsic multipliers
+  forbidden_data: external zero or prime tables, arithmetic/local factors, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every length-n inverse word has one fixed point and all roots of F^n(z)-z are exhausted at every n
+  strongest_failure: no prime-like target correspondence is supplied
+  metrics:
+    rooted_periodic_points_through_6: 126
+    primitive_orbits_through_6: 23
+    theorem_period_cutoff: none
+  artifacts:
+    - results/c141_quadratic_ruelle_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: trace-class source operator, all-order multiplier trace identity, exact determinant prefix, and primitive stability product
+  strongest_failure: no frozen target divisor or zero census is compared
+  metrics:
+    trace_prefix_length: 6
+    taylor_degree: 6
+    target_zero_comparison_count: 0
+  artifacts:
+    - paper/main.pdf
+    - results/c141_quadratic_ruelle_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source Fredholm determinant is entire and the raw primitive product is absolutely convergent for |u|<4
+  strongest_failure: no target functional equation, Gamma factor, counting law, or continuation comparison is in scope
+  metrics:
+    source_entire_determinant: true
+    raw_product_proved_radius: 4
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: a canonical source-side nuclear transfer operator is constructed
+  strongest_failure: it is neither a natural unitary nor a self-adjoint, metaplectic, or scattering quantization
+  metrics:
+    trace_class_transfer_operators_constructed: 1
+    natural_quantizations_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c141_quadratic_ruelle_evidence.json
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: exact source-side inverse-branch stability traces and a primitive product only in its proved raw-product disk; no target or quantization claim
+blocking_conditions:
+  - target divisor matching is absent
+  - target global analytic structure is absent
+  - no natural unitary or self-adjoint lift is constructed
+next_smallest_test: vary the quadratic parameter only after proving a uniform owner domain and retaining exact all-period control
+route_b_invocation_allowed: false

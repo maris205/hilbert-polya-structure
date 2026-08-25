@@ -3,6 +3,29 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C139--HCS-C143 dynamics-diversification round (2026-08-25)
+
+Five source-locked candidates were retained as distinct Route-A advances.
+The round deliberately changes dynamical subtype from paper to paper; no
+coordinate or verdict is transferred between systems:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C139 | A nonlattice binary suspension whose four-block `0011` marker has an exact eight-state determinant and all-period primitive product; it separates the frozen period-six pair invisible to every forward roof of memory at most three, while a new period-seven collision proves residual noninjectivity. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_four_block_marker_suspension_route_a/`](../henon_four_block_marker_suspension_route_a/) |
+| HCS-C140 | A strictly sofic mod-three gap suspension with its minimal three-state right Fischer cover and exact all-period correction for the all-zero label point, yielding the intrinsic rational zeta `(1+v+v^2)/(1-u-v^3)` without conflating it with the cover determinant. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_mod3_sofic_suspension_route_a/`](../henon_mod3_sofic_suspension_route_a/) |
+| HCS-C141 | A trace-class inverse-branch Ruelle ladder for `F(z)=z^2-6` on `H^2(D_4)`, with complete periodic-point exhaustion, exact all-period multiplier traces, `m=0/1` controls, and an `m=2` Fredholm product beginning at stability index two in its proved raw-product disk. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_quadratic_inverse_branch_ruelle_route_a/`](../henon_quadratic_inverse_branch_ruelle_route_a/) |
+| HCS-C142 | An infinite-rank trace-class countable renewal operator with the exact entire order-zero determinant `1-sum_(m>=1)2^(-m(m+1)/2)z^m` and primitive excursion product; a matched constant-advance control proves that formal rational renewal algebra alone does not confer Fredholm ownership. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_trace_class_renewal_operator_route_a/`](../henon_trace_class_renewal_operator_route_a/) |
+| HCS-C143 | A spatially inhomogeneous five-cycle coined quantum walk with exact unitarity, source-derived antiunitary reversal, signed primitive paths, and an order-sensitive secular polynomial for equal-population coin arrangements; population averaging is an exact nonunitary control. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_inhomogeneous_coined_quantum_walk_route_a/`](../henon_inhomogeneous_coined_quantum_walk_route_a/) |
+
+C143 reaches only its own finite source-derived unitary/scattering subgate;
+it is not combined with the symbolic, holomorphic, or countable-operator
+coordinates of C139--C142.  No candidate has a frozen external target
+divisor, zero census, functional equation, analytic counting protocol, or
+arithmetic local data.  Thus A2/A3 remain failed, every overall verdict is
+`ROUTE_A_EXPLORATORY`, the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and
+`route_b_invocation_allowed=false` throughout.
+
 ## HCS-C134--HCS-C138 refinement round (2026-08-24)
 
 Five source-locked candidates were retained as separate Route-A advances.

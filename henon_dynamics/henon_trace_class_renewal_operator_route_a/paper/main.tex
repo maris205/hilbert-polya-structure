@@ -1,0 +1,155 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[11pt]{article}
+\usepackage[margin=0.84in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Hh}{\mathcal H}
+\newcommand{\Tr}{\operatorname{Tr}}
+\title{Trace-Class Renewal Dynamics\\with an Entire Fredholm Determinant}
+\author{H\'enon Route-A Working Series, C142}
+\date{25 August 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct a countable renewal graph whose natural operator on
+$\ell^2(\mathbb N_0)$ is infinite-rank and trace class.  A rank-one
+factorization gives the all-order identity
+\[
+ \det_{\!F}(I-zT)=1-\sum_{m\ge1}2^{-m(m+1)/2}z^m,
+\]
+an entire function of order zero.  Every closed path decomposes into
+first-return excursions, yielding an intrinsic primitive-necklace product.
+A matched constant-advance control retains a rational formal renewal series
+but is noncompact, showing that scalar renewal algebra does not by itself
+establish Fredholm ownership.  These are source-dynamical results, not an
+arithmetic or target spectral identification.
+\end{abstract}
+
+\section{A countable source model}
+Let $\Hh=\ell^2(\mathbb N_0)$ with basis $(e_n)_{n\ge0}$.  Freeze
+\[
+ Se_n=b_ne_{n+1},\qquad Re_n=a_ne_0,\qquad
+ a_n=b_n=2^{-(n+1)},\qquad T=S+R.
+\]
+The directed graph has an advance edge $n\to n+1$ of weight $b_n$ and a
+return edge $n\to0$ of weight $a_n$.  One edge is one unit of clock.  The
+unique first-return excursion of length $m$ has weight
+\begin{equation}\label{eq:cm}
+ c_m=a_{m-1}\prod_{j=0}^{m-2}b_j=2^{-m(m+1)/2}.
+\end{equation}
+No parameter is fitted and no external spectral data enter this definition.
+
+\section{Trace class and the all-order determinant}
+\begin{theorem}\label{thm:det}
+The operator $T$ is trace class, with
+$\lVert T\rVert_1\le1+1/\sqrt3$, and for all $z\in\mathbb C$,
+\begin{equation}\label{eq:det}
+ D(z):=\det_{\!F}(I-zT)=1-\sum_{m\ge1}c_mz^m.
+\end{equation}
+The function $D$ is entire of order zero.
+\end{theorem}
+\begin{proof}
+The singular values of $S$ are $(b_n)$, so $\lVert S\rVert_1=1$.
+Writing $R=|e_0\rangle\langle a|$ gives
+$\lVert R\rVert_1=\lVert a\rVert_2=1/\sqrt3$.  Monotonicity of the weights
+gives
+$\lVert S^k\rVert=\prod_{j=0}^{k-1}b_j=2^{-k(k+1)/2}$; hence the spectral
+radius is zero.  Every $S^k$ also has zero trace, so
+$\det_F(I-zS)=1$.  Factoring through $I-zS$ and applying the rank-one
+determinant identity gives
+\[
+ D(z)=1-z\langle a,(I-zS)^{-1}e_0\rangle
+ =1-\sum_{m\ge1}a_{m-1}\prod_{j=0}^{m-2}b_jz^m,
+\]
+which is \eqref{eq:det}.  If $d_m=-2^{-m(m+1)/2}$ denotes its nonconstant
+coefficient, then the coefficient characterization of entire order gives
+\[
+ \limsup_{m\to\infty}
+ \frac{m\log m}{\log(1/|d_m|)}
+ =\limsup_{m\to\infty}
+ \frac{m\log m}{m(m+1)\log2/2}=0.
+\]
+Thus the series converges on all of $\mathbb C$ and has order zero.
+\end{proof}
+
+The theorem is genuinely infinite-dimensional.  If $T_N$ denotes the
+compression to $e_0,\ldots,e_{N-1}$, the same factorization yields
+\begin{equation}\label{eq:finite}
+ \det(I-zT_N)=1-\sum_{m=1}^{N}c_mz^m,
+ \qquad \Tr(T_N^n)=\Tr(T^n)\quad(n\le N).
+\end{equation}
+A closed path of length $n$ cannot reach vertex $n$; this proves the trace
+stability rather than merely observing it numerically.
+
+\section{Primitive excursion product}
+Every closed path must hit vertex zero, because advances alone never close.
+Cutting at consecutive visits to zero gives a cyclic word
+$p=(m_1,\ldots,m_k)$ in positive excursion lengths.  Put
+$\ell_p=\sum_jm_j$ and $w_p=\prod_jc_{m_j}$.
+
+\begin{proposition}\label{prop:product}
+On $|z|<(1+1/\sqrt3)^{-1}$,
+\begin{equation}\label{eq:product}
+ D(z)=\prod_{[p]\ \mathrm{primitive}}(1-w_pz^{\ell_p}),
+\end{equation}
+where $[p]$ is a cyclic necklace.  Orientation, total edge clock, weight,
+and repetition remain explicit.
+\end{proposition}
+\begin{proof}
+The trace-class logarithm
+$-\log D(z)=\sum_{n\ge1}\Tr(T^n)z^n/n$ is absolutely convergent on the
+stated disk, since
+$|\Tr(T^n)|\le\lVert T^n\rVert_1\le\lVert T\rVert_1^n$.
+All graph weights are nonnegative, so the same bound gives absolute
+convergence before regrouping.  The unique excursion decomposition
+reorganizes rooted closed
+paths into primitive necklaces and repetitions, giving
+$\sum_{[p]}\sum_{r\ge1}w_p^rz^{r\ell_p}/r$, the negative logarithm of
+\eqref{eq:product}.
+\end{proof}
+
+\section{An ownership control}
+Keep $a_n=2^{-(n+1)}$ but replace every advance weight by
+$\widetilde b_n=1/2$.  The formal first-return coefficients become
+$2^{-(2m-1)}$, so formal summation gives
+\[
+ 1-\sum_{m\ge1}2^{-(2m-1)}z^m
+ =\frac{1-3z/4}{1-z/4}.
+\]
+Nevertheless, the associated shift has singular value $1/2$ with infinite
+multiplicity and is noncompact.  The return is rank one; if their sum were
+compact, subtracting that return would make the shift compact, a
+contradiction.  Thus this displayed rational function is only the formal
+first-return series and is not the ordinary Fredholm determinant of the
+natural control operator.  The distinction is operator ownership, not
+algebraic complexity.
+
+\section{Exact audit and Route-A boundary}
+The release reconstructs 16 coefficients, 12 traces, and all 225 primitive
+necklaces through total clock ten.  A producer-independent checker makes 110
+assertions; a separate SymPy run makes 56 exact checks; canonical replay is
+byte-identical; and 24 repaired-hash plus one stale-hash mutation are
+rejected.  Finite ledgers are implementation sentinels, not proofs of the
+infinite statements.
+
+The conservative verdict is
+\[
+ (\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},\mathrm{A3\_FAIL},
+ \mathrm{A4\_FAIL}).
+\]
+The source determinant is entire, but no target divisor, target functional
+equation, counting law, prime correspondence, arithmetic local factor,
+Euler factor, root number, automorphy object, unitary lift, or
+Hilbert--P\'olya operator is supplied.  Route B remains unauthorized under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section{Conclusion}
+C142 supplies a countable, infinite-rank dynamical owner whose trace law,
+Fredholm determinant, and primitive cycles are one coherent object.  Any
+target-facing comparison is a separate, currently unsupported problem.
+\end{document}

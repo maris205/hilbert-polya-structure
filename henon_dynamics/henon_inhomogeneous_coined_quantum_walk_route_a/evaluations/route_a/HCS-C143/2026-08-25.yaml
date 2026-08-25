@@ -1,0 +1,56 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C143
+source_commit: fca8e39701937fe62547d589ec5550881ee621a5
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: "U_w=S C_w on C^5 tensor C^2 for w in {00011,00101}"
+  clock: "one coin-then-flip-flop-shift step"
+  normalization: "C0=(1/5)[[3,4],[4,-3]], C1=(1/13)[[5,12],[12,-5]]"
+  determinant_convention: "D_w(z)=det(I_10-zU_w)"
+  cutoff: "paths through 10; traces through 12; matrix identities exact"
+  precision: "exact rational arithmetic"
+  allowed_data: "frozen cycle, coins, signed amplitudes"
+  forbidden_data: "prime/zero tables; target divisor; arithmetic local factors; Euler factors; root numbers; automorphy; Hilbert--Polya; Route B"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "intrinsic signed primitive state cycles with exact orientation, clock, repetition, and amplitude"
+  strongest_failure: "no prime-like correspondence and fixed finite state dimension"
+  metrics: {path_clock_replay: 10}
+  artifacts: [THEOREM_PACKAGE.md, results/c143_quantum_walk_evidence.json]
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "exact secular determinants and signed primitive products for both frozen walks"
+  strongest_failure: "no frozen target divisor or missing/extra-zero census"
+  metrics: {matrix_dimension: 10, trace_replay_per_walk: 12}
+  artifacts: [THEOREM_PACKAGE.md, paper/main.pdf]
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: "source-unitary palindromicity of both finite secular polynomials"
+  strongest_failure: "no target completion, functional equation, counting law, or continuation comparison"
+  metrics: {secular_degree: 10}
+  artifacts: [THEOREM_PACKAGE.md]
+
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: "source-derived unitary, Hilbert space, one-step clock, signed paths, classical shadow, and involutive antiunitary reversal"
+  strongest_failure: "not a self-adjoint realization and no Route-B-ready target spectral bridge"
+  metrics: {unitary_dimension: 10, exact_arrangements: 2}
+  artifacts: [THEOREM_PACKAGE.md, results/c143_quantum_walk_evidence.json]
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "finite source-unitary structure only; no arithmetic or target spectral identification"
+blocking_conditions:
+  - "no target-facing comparison protocol"
+  - "fixed finite dimension"
+  - "no self-adjoint operator with target spectrum"
+next_smallest_test: "construct a source-derived growing-cycle family and test whether order sensitivity survives a controlled limit"
+route_b_invocation_allowed: false
