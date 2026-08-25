@@ -1,0 +1,70 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C150
+source_commit: 2d4e6211a254ef49d87718569d23466f4c6dcf4c
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: Rule-90 multiplication by x+x^{-1} on Mersenne cyclic rings L=2^r-1
+  clock: one cellular-automaton update with temporal period n
+  normalization: fixed points first; exact-period points by Mobius inversion; cycles after division by n
+  determinant_convention: exact finite polynomial-gcd counts; no target determinant
+  cutoff: all-r theorem; r<=8 and power controls s<=8 are replay sentinels
+  precision: exact F_2 polynomial, binary-matrix, and integer arithmetic
+  allowed_data: frozen local Rule-90 rule and source-derived length families only
+  forbidden_data: external prime or zero tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: for every r the half-size image is exactly the periodic set, reached in one update, with all periods dividing 2^r-1
+  strongest_failure: the result remains a finite-volume scaling family with no prime-like target correspondence
+  metrics:
+    replay_family_rows: 8
+    divisor_period_cells: 27
+    periodic_fraction_numerator: 1
+    periodic_fraction_denominator: 2
+  artifacts:
+    - results/c150_rule90_mersenne_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: fixed and primitive counts are exact for every family member
+  strongest_failure: no frozen target divisor comparison or stable infinite-volume determinant is supplied
+  metrics:
+    target_comparisons: 0
+    family_parameters: 1
+  artifacts:
+    - results/c150_rule90_mersenne_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the transient-periodic decomposition is an all-r theorem
+  strongest_failure: no target functional equation, counting law, or continuation comparison is present
+  metrics:
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: Rule 90 is a natural local linear cellular automaton
+  strongest_failure: no natural unitary, scattering, Hamiltonian, or self-adjoint lift is constructed
+  metrics:
+    natural_lifts_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: cycle periods divide L, but not every divisor of L is asserted to occur
+blocking_conditions:
+  - the exact source remains finite-volume for each r
+  - the Mersenne and power-of-two families have sharply incompatible periodic geometry
+  - no target analytic structure or natural lift is present
+next_smallest_test: study whether any normalized cycle statistic has a controlled r-to-infinity limit without erasing period data
+route_b_invocation_allowed: false

@@ -1,0 +1,70 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C153
+source_commit: 2d4e6211a254ef49d87718569d23466f4c6dcf4c
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: "B_k(v0 tensor ... tensor v_(k-1))=v1 tensor ... tensor v_(k-1) tensor A*v0, A=F3^*diag(1,0,1)"
+  clock: "one application of B_k"
+  normalization: "rank fraction divided by 3^k; ordinary traces otherwise; no spectral rescaling"
+  determinant_convention: "no growing-k determinant claimed; fixed-k source traces only"
+  cutoff: "all-parameter proof; rank ledger k<=24 and 0<=n<=2k; cluster ledger n<=20"
+  precision: "exact integers and Q(sqrt(3),i)"
+  allowed_data: "frozen DFT, rank-two projector, tensor shift, exact source traces"
+  forbidden_data: "target zeros/divisors, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, Route B"
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "intrinsic exact factor-shift clock, all-period gcd trace classes, and reproducible source-side path structure"
+  strongest_failure: "no prime-like correspondence and no primitive-orbit upgrade in the growing-k limit"
+  metrics:
+    exact_rank_rows: 624
+    fixed_period_cluster_ledgers: 20
+  artifacts:
+    - results/c153_walsh_escape_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: "exact finite-dimensional traces and growing-system image ranks"
+  strongest_failure: "no frozen target divisor comparison and no full growing-k secular determinant theorem"
+  metrics:
+    target_comparisons: 0
+    full_secular_limits: 0
+  artifacts:
+    - results/c153_walsh_escape_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: "fixed-period normalized traces vanish with an exact finite cluster classification"
+  strongest_failure: "no target functional equation, counting law, continuation, or moving-order determinant control"
+  metrics:
+    exact_fixed_period_cluster_ledgers: 20
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED
+  strongest_evidence: "source-derived subunitary tensor gates with exact escape and a same-clock closed unitary parent"
+  strongest_failure: "no self-adjoint or antiunitary growing-k limit and no semiclassical target matching"
+  metrics:
+    finite_hilbert_dimension: "3^k"
+    closed_parent_escape_exponent: 0
+  artifacts:
+    - results/c153_walsh_escape_evidence.json
+    - paper/main.pdf
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: "finite and growing-k source ranks plus fixed-period traces only; no full secular, target, arithmetic, self-adjoint, Hilbert--Polya, or Route-B claim"
+blocking_conditions:
+  - "gcd obstruction prevents a general unnormalized fixed-period trace limit"
+  - "no prime-like target map or divisor comparison"
+  - "no full growing-k secular or self-adjoint limit theorem"
+next_smallest_test: "freeze a moving-period regime n=n(k) for trace observables and prove a bounded or distributional limit without importing target data"
+route_b_invocation_allowed: false

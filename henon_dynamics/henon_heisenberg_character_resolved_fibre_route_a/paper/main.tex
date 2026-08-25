@@ -1,0 +1,97 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.57in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\linespread{0.95}
+\title{\vspace{-1.8em}Central-Rotation-Resolved Fixed Fibres for a\\Heisenberg Nilmanifold Automorphism}
+\author{Route-A structural certificate C151}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a frozen Heisenberg lattice automorphism, we derive the central rotation
+over every horizontal fixed class.  Its zero level counts clean fixed circles,
+and a finite root-of-unity average gives the component count at every iterate.
+Exact rational histograms through iterate twelve distinguish horizontal fixed
+classes from actual components.  This is a source-side clean-family result,
+not an isolated-orbit or target construction.
+\end{abstract}
+
+\section{Fixed-fibre equation}
+On $N=\mathbb Z^3\backslash H$, use
+\[
+(x,y,z)(X,Y,Z)=(x+X,y+Y,z+Z+xY),\quad
+A=\begin{pmatrix}2&1\\1&1\end{pmatrix},
+\]
+and $\Phi(v,z)=(Av,z+q(v))$, where
+$q(x,y)=x(x-1)+xy+y(y-1)/2$.  Put $B=A^n$, $M=B-I$, and
+$q_n(v)=\sum_{j=0}^{n-1}q(A^jv)$.  The horizontal fixed classes are
+$\mathbb Z^2/M\mathbb Z^2$.  If $m=Mv$, the left-quotient equation is
+\[
+(Bv,z+q_n(v))=(m_1,m_2,k)(v,z)
+              =(v+m,z+k+m_1v_2).
+\]
+It follows that the fibre rotation is
+\begin{equation}
+ \rho_n(v)=q_n(v)-m_1v_2\pmod 1,                 \tag{1}
+\end{equation}
+and the fibre is fixed exactly when $\rho_n(v)=0$.  The condition is
+independent of $z$, so a zero produces the whole central circle.
+
+For completeness, this is representative invariant.  Replace $v$ by $v+r$
+with $r\in\mathbb Z^2$, put $s=Mr$, and use the automorphism identity
+\[
+q_n(v+r)-q_n(v)-q_n(r)=(Bv)_1(Br)_2-v_1r_2.
+\]
+The change in (1) reduces to
+$q_n(r)+\det(v,s)+m_1s_2-s_1r_2$.  Since $B$ preserves area,
+$\det(v+m,r+s)=\det(v,r)$, and the change becomes
+\[
+q_n(r)-m_1r_2+m_2r_1+s_1m_2-s_1r_2\in\mathbb Z.
+\]
+Thus (1) is well-defined on the horizontal class.  Along a fixed fibre, the derivative is
+block lower triangular with diagonal blocks $B$ and $1$.  Since $I-B$ is
+invertible, $\ker(I-D\Phi^n)$ is exactly the central tangent, so the component
+is clean.
+
+\section{Finite root-of-unity projector}
+Let $D_n=|\det M|$.  The adjugate formula puts the coordinates of $v$ in
+$D_n^{-1}\mathbb Z$, while $q_n$ is quadratic with half-integral
+coefficients.  Thus $\rho_n\in Q_n^{-1}\mathbb Z/\mathbb Z$ for
+$Q_n=2D_n^2$.  Root-of-unity orthogonality gives
+\begin{equation}
+C_n=\frac{1}{Q_n}\sum_{a=0}^{Q_n-1}
+ \sum_{[m]\in\mathbb Z^2/M\mathbb Z^2}
+e^{2\pi i a\rho_n(m)}.                           \tag{2}
+\end{equation}
+Here $\rho_n$ is generally quadratic and is not asserted to be a homomorphism
+of the horizontal quotient.  Equation (2) is only a central cyclic
+root-of-unity filter: the average over $a$ is one at rotation zero and zero at
+every other $Q_n$-torsion rotation.
+
+\section{Exact certificate and boundary}
+The exact pairs $(D_n,C_n)$ through $n=12$ are
+\[
+\begin{array}{c|rrrrrrrrrrrr}
+n&1&2&3&4&5&6&7&8&9&10&11&12\\ \hline
+D_n&1&5&16&45&121&320&841&2205&5776&15125&39601&103680\\
+C_n&1&1&4&1&21&4&57&1&148&105&397&144
+\end{array}
+\]
+The checker reconstructs every rotation through $n=12$ by exact direct
+cocycle iteration; a separate SymPy path rebuilds the first eight full
+histograms.  In particular, the values $C_{10}=105$ and $C_{12}=144$ refute
+the simple Lucas/parity/modulo-three extrapolation suggested by earlier rows;
+no all-iterate closed form for $C_n$ is claimed.
+
+The tuple is $(\texttt{A1\_FAIL},\texttt{A2\_FAIL},
+\texttt{A3\_FAIL},\texttt{A4\_FORMAL\_HINT})$.  Haar Koopman evolution is
+only a formal unitary hint.  We claim no isolated primitive-orbit determinant,
+target divisor, target functional equation or counting law, arithmetic/local
+factor, Euler factor, root number, automorphy, Hilbert--P\'olya construction,
+or Route-B authorization.  Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

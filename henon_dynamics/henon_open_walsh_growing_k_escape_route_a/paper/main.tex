@@ -1,0 +1,155 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.68in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\rank}{\operatorname{rank}}
+\title{Saturated Image Escape and GCD Trace Clusters\\
+in a Growing Open Walsh Gate}
+\author{H\'enon Route-A Working Series, C153}
+\date{25 August 2026}
+
+\begin{document}
+\maketitle
+\vspace{-1.3em}
+\begin{abstract}
+For a three-symbol open Walsh factor shift, we determine the image rank at
+every system size and time.  At time proportional to tensor length, the
+signed log-survival rate is linear and then saturates after one full factor
+cycle.  Fixed-period traces retain a greatest-common-divisor dependence on the
+system size and need not converge, but dimension-normalized traces vanish.  These are source-side
+large-system statements, not a secular, self-adjoint, or target-matched limit.
+\end{abstract}
+
+\section{Frozen gate and exact power rank}
+Let $\omega=e^{2\pi i/3}$,
+\[
+ (F_3)_{j\ell}=3^{-1/2}\omega^{j\ell},\qquad
+ P=\operatorname{diag}(1,0,1),\qquad A=F_3^*P.
+\]
+On $\mathcal H_k=(\mathbb C^3)^{\otimes k}$ freeze
+\begin{equation}
+B_k(v_0\otimes\cdots\otimes v_{k-1})
+=v_1\otimes\cdots\otimes v_{k-1}\otimes Av_0.       \tag{1}
+\end{equation}
+One application is one clock tick.  Direct calculation gives
+\[
+\det(\lambda I-A)=\lambda(\lambda^2-\tau\lambda+q_0),\quad
+\tau=\frac{\sqrt3}{6}-\frac i2,\quad
+q_0=-\frac12-\frac{\sqrt3 i}{6}.
+\]
+Since $q_0\ne0$, zero is a simple eigenvalue and the other two eigenvalues
+are nonzero.  Hence $\rank(A^m)=2$ for every $m\ge1$, while $\rank(A^0)=3$.
+
+\begin{theorem}
+For every $k\ge1$ and $n\ge0$,
+\begin{equation}
+ \rank(B_k^n)=2^{\min(n,k)}3^{k-\min(n,k)}.           \tag{2}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Write $n=qk+r$, with $0\le r<k$.  Iterating (1) on a pure tensor gives
+\[
+B_k^n(v_0,\ldots,v_{k-1})=
+(A^qv_r,\ldots,A^qv_{k-1},A^{q+1}v_0,\ldots,A^{q+1}v_{r-1}).
+\]
+If $q=0$, exactly $n=r$ factors have positive powers of $A$; if $q\ge1$,
+all $k$ do.  Tensor-rank multiplicativity proves (2), including the identity
+boundary $n=0$.
+\end{proof}
+
+The survival fraction is therefore
+\begin{equation}
+ S_k(n)=\frac{\rank(B_k^n)}{3^k}
+       =\left(\frac23\right)^{\min(n,k)}.             \tag{3}
+\end{equation}
+For $n_k=\lfloor\alpha k\rfloor$ and $\alpha\ge0$,
+\begin{equation}
+ \lim_{k\to\infty}\frac1k\log S_k(n_k)
+ =\min(\alpha,1)\log(2/3).                           \tag{4}
+\end{equation}
+Thus the positive escape exponent is
+$E(\alpha)=\min(\alpha,1)\log(3/2)$.  At $\alpha=0$ one has $n_k=0$,
+$S_k=1$, and $E(0)=0$; no positive-time formula is silently substituted at
+this identity boundary.
+
+\section{Fixed-period traces}
+For the two nonzero roots, let their power-sum initial value be $t_0=2$;
+put $t_1=\tau$ and $t_m=\tau t_{m-1}-q_0t_{m-2}$.  Thus
+$t_m=\Tr(A^m)$ only for $m\ge1$ (whereas $\Tr(A^0)=3$).  Basis-index
+contraction along the cycles of
+addition by $n$ modulo $k$ gives, for $d=\gcd(n,k)$,
+\begin{equation}
+ \Tr(B_k^n)=t_{n/d}^{d}.                             \tag{5}
+\end{equation}
+Indeed the factor permutation has $d$ independent cycles, and each cycle
+contracts $n/d$ ordered copies of $A$.
+
+At fixed $n$, (5) ranges over the equality-merged set of divisor values
+\begin{equation}
+ \{t_{n/d}^{d}:d\mid n\}.                           \tag{6}
+\end{equation}
+where divisors that produce the same complex number define one cluster value.
+For each divisor $d\mid n$, the unbounded sequence
+$k_j=d(1+j(n/d))$ satisfies $\gcd(n,k_j)=d$, so every divisor class occurs
+infinitely often.  Conversely no other value can occur.  Because this is a
+finite set,
+\begin{equation}
+ 3^{-k}\Tr(B_k^n)\longrightarrow0                    \tag{7}
+\end{equation}
+for every fixed period.
+
+The normalization cannot be removed in general.  At period two, odd $k$ have
+$d=1$ and even $k$ have $d=2$, so
+\begin{equation}
+\begin{aligned}
+t_2&=\frac56+\frac{\sqrt3}{6}i,&
+t_1^2&=-\frac16-\frac{\sqrt3}{6}i,\\[-2pt]
+t_2-t_1^2&=1+\frac{\sqrt3}{3}i=-2q_0\ne0.
+\end{aligned}                                                    \tag{8}
+\end{equation}
+The odd and even subsequences are distinct constants.  Hence
+$\Tr(B_k^2)$ has no unnormalized $k\to\infty$ limit.
+
+\section{Validation and boundary}
+Three controls separate rank escape from trace geometry.  For $P=I_3$, the
+closed parent is unitary and every power has rank $3^k$, so its escape exponent
+is zero.  For $A_{\rm R}=PF_3^*=F_3AF_3^*$, uniform tensor conjugation leaves
+the rank law and trace clusters unchanged.  Moving the hole to
+$P_0=\operatorname{diag}(0,1,1)$ gives
+\[
+ \det(\lambda I-F_3^*P_0)
+ =\lambda(\lambda+i)(3\lambda+\sqrt3)/3.
+\]
+Its zero root is simple and the other two roots are nonzero, so every positive
+one-site power has rank two and the full rank law survives.  Its trace values
+change, showing that rank escape does not determine trace geometry.
+
+The exact payload contains 624 rank rows, 192 macroscopic rows, and divisor
+ledgers through period twenty.  A producer-independent checker, separate
+symbolic reconstruction, byte replay, and semantic mutation suite validate
+the implementation: the checker passes 6,193 assertions, SymPy passes 213
+checks, replay is byte-identical, and all 53 hostile cases (52 repaired-hash
+and one stale-hash) are rejected.  Finite ledgers are sentinels, not proofs of
+the all-parameter statements.
+
+The strict Route-A tuple is
+\[
+(\texttt{A1\_WEAK},\texttt{A2\_FAIL},\texttt{A3\_FAIL},
+ \texttt{A4\_UNITARY\_OR\_SCATTERING\_CANDIDATE}),
+\]
+overall \texttt{ROUTE\_A\_EXPLORATORY}.  The source-derived subunitary family
+and same-clock closed unitary parent support only the displayed A4 candidate:
+no self-adjoint or antiunitary growing-$k$ limit is constructed.  We claim no
+full growing-$k$ secular limit, target divisor, functional equation, counting
+law, prime-like map, arithmetic local data, Euler factor, root number,
+automorphy, Hilbert--P\'olya operator, or Route-B authorization.
+Scope: \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

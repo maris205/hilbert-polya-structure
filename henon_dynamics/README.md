@@ -2225,3 +2225,28 @@ See the [C144--C148 batch plan](BATCH_PLAN_C144_C148.md) and
 content-addressed artifacts, cross-review repairs, and uniform release audit.
 The five Route-A coordinates are not combined.  Their common scope remains
 `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains unauthorized.
+
+## Route-A dynamics-refinement round C149--C153
+
+This round turns the five explicit C144--C148 boundaries into new exact
+tests: a finite periodic attachment to an aperiodic symbolic component, a
+Mersenne scaling family for Rule 90, character-resolved nilmanifold fibre
+rotations, a primitive billiard-direction heat transform, and a controlled
+growing-size limit for the open Walsh gate.  Each paper records a genuine
+all-parameter theorem or exact classification together with the remaining
+obstruction.  Producer-independent checks, separate symbolic
+reconstructions, hostile mutations, closed manifests, and reproducible PDF
+papers are retained package by package.
+
+- [C149 Thue--Morse finite periodic skeleton](henon_thue_morse_finite_periodic_skeleton_route_a/README.md) · [paper PDF](henon_thue_morse_finite_periodic_skeleton_route_a/paper/main.pdf)
+- [C150 Rule-90 Mersenne scaling family](henon_rule90_mersenne_scaling_route_a/README.md) · [paper PDF](henon_rule90_mersenne_scaling_route_a/paper/main.pdf)
+- [C151 character-resolved Heisenberg fibres](henon_heisenberg_character_resolved_fibre_route_a/README.md) · [paper PDF](henon_heisenberg_character_resolved_fibre_route_a/paper/main.pdf)
+- [C152 primitive billiard-family heat transform](henon_billiard_primitive_heat_trace_route_a/README.md) · [paper PDF](henon_billiard_primitive_heat_trace_route_a/paper/main.pdf)
+- [C153 growing-`k` open Walsh escape](henon_open_walsh_growing_k_escape_route_a/README.md) · [paper PDF](henon_open_walsh_growing_k_escape_route_a/paper/main.pdf)
+
+See the [C149--C153 batch plan](BATCH_PLAN_C149_C153.md) and
+[batch review](BATCH_REVIEW_C149_C153.md) for the theorem ledger,
+content-addressed artifacts, failed-conjecture record, cross-review repairs,
+and uniform release audit.  The common scope remains
+`NO_BAD_EULER_OR_ROOT_NUMBER`; the five Route-A coordinates are not combined,
+and Route B remains unauthorized.

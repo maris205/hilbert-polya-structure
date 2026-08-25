@@ -1,0 +1,75 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\title{Mersenne Scaling in Cyclic Rule 90}
+\author{Route-A structural certificate C150}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For Rule 90 on every binary ring of Mersenne circumference $L=2^r-1$, the
+local multiplier $a=x+x^{-1}$ satisfies $a^{L+1}=a$.  Its image contains
+exactly half the state space, every state reaches it in one step, and all
+image points are periodic with periods dividing $L$.  Polynomial gcd and
+M\"obius inversion resolve primitive cycles.  In contrast, power-of-two rings
+are nilpotent.  This is an exact scaling theorem, not a target determinant.
+\end{abstract}
+
+\section{Mersenne identity and image}
+Work in $R_L=\mathbb F_2[x,x^{-1}]/(x^L-1)$, where one Rule-90 update is
+multiplication by $a=x+x^{-1}$.  If $L=2^r-1$, Frobenius gives
+\begin{equation}
+a^{2^r}=x^{2^r}+x^{-2^r}=x+x^{-1}=a,\qquad a^{L+1}=a.\tag{1}
+\end{equation}
+For monic $f$ and a multiplier $h$, writing $f=gf_1$, $h=gh_1$ with
+$g=\gcd(f,h)$ shows
+$f\mid hq$ exactly when $f_1\mid q$.  Thus multiplication by $h$ on
+$k[x]/(f)$ has kernel dimension $\deg g$.  Multiplication by $x$ is invertible and $xa=(x+1)^2$.  Since odd $L$ makes
+$x^L+1$ squarefree and $x+1$ is a factor,
+$\gcd(x^L+1,(x+1)^2)=x+1$.  Hence $\dim\ker a=1$ and
+$\dim\operatorname{im}a=L-1$.
+
+For $y=au$ in the image, (1) yields $a^Ly=y$.  Thus the restriction to the
+image is a permutation with order dividing $L$.  Every state enters the image
+after one update.  Conversely, if $a^nu=u$, then
+$u=a(a^{n-1}u)$ lies in the image.  The periodic set is therefore exactly the
+image, with $2^{L-1}$ points: exactly half of all states.
+
+\section{Exact periods}
+The standard multiplication-kernel calculation gives
+\begin{equation}
+\operatorname{Fix}_L(n)=2^{\deg\gcd(x^L+1,(x^2+1)^n+x^n)}.\tag{2}
+\end{equation}
+Consequently
+\[
+P_L(n)=\sum_{d\mid n}\mu(n/d)\operatorname{Fix}_L(d),\qquad
+C_L(n)=P_L(n)/n.
+\]
+All realized periods divide $L$.
+The converse is not asserted: a divisor of $L$ need not be realized.  The
+division by $n$ occurs only after M\"obius inversion, so fixed configurations,
+exact-period configurations, and primitive cycles remain distinct.
+
+\section{Power-of-two control and boundary}
+For $L=2^s$,
+$a^{2^{s-1}}=x^{2^{s-1}}+x^{-2^{s-1}}=0$ because the two monomials coincide.
+Thus the map is nilpotent and only zero is periodic.
+Indeed, if $a^nu=u$, repeated use of this equality expresses $u$ as
+$a^{qn}u$ for every $q$; choosing $q$ beyond the nilpotency index forces
+$u=0$.
+
+The structural statements above hold for every $r,s\geq1$; the exact ledgers
+through $r,s\leq8$ are implementation sentinels.  They contain 27
+divisor-period cells and pass 153 independent matrix assertions, 276
+SymPy checks, byte replay, and 45 hostile cases.  The strict tuple is
+$(\texttt{A1\_WEAK},\texttt{A2\_FAIL},\texttt{A3\_FAIL},
+\texttt{A4\_FAIL})$.  We claim no infinite-volume determinant or
+thermodynamic limit, target divisor, target functional equation or counting
+law, arithmetic/local factor, root number, automorphy, natural operator lift,
+Hilbert--P\'olya operator, or Route-B authorization.  Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}

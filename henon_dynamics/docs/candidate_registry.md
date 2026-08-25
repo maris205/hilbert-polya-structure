@@ -3,6 +3,31 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C149--HCS-C153 dynamics-refinement round (2026-08-25)
+
+Five source-locked candidates sharpen one exact boundary from each paper in
+the preceding round.  The symbolic attachment, cellular-automaton scaling
+family, nilmanifold cocycle, billiard heat transform, and growing Walsh gate
+remain separate systems; no coordinate or verdict is transferred between
+them:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C149 | Attaching tagged cycles of lengths `1,2,3,5` to the aperiodic Thue--Morse component gives an exact all-period fixed-count formula and rational Artin--Mazur zeta, while any nonempty finite disjoint periodic attachment necessarily destroys minimality. | `(A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_thue_morse_finite_periodic_skeleton_route_a/`](../henon_thue_morse_finite_periodic_skeleton_route_a/) |
+| HCS-C150 | On every Mersenne ring `L=2^r-1`, Rule 90 sends all states into a periodic image of dimension `L-1` in one tick, so exactly half the states are periodic and every cycle length divides `L`; the adjacent power-of-two family is nilpotent. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_rule90_mersenne_scaling_route_a/`](../henon_rule90_mersenne_scaling_route_a/) |
+| HCS-C151 | Every horizontal fixed class of the frozen Heisenberg automorphism has an exact central fibre rotation; a finite central cyclic root-of-unity projector counts precisely the zero-rotation clean circles at every iterate, and the certified histogram through iterate twelve rejects an early closed-form extrapolation. | `(A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_heisenberg_character_resolved_fibre_route_a/`](../henon_heisenberg_character_resolved_fibre_route_a/) |
+| HCS-C152 | The ordered positive primitive square-billiard directions admit an absolutely convergent length heat transform with exact Möbius/theta factorization and small-time law `3/(8*pi*t)+O(t^(-1/2)log(1/t))`; it remains distinct from a wave or Dirichlet spectral trace. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_billiard_primitive_heat_trace_route_a/`](../henon_billiard_primitive_heat_trace_route_a/) |
+| HCS-C153 | The open Walsh family has the all-parameter law `rank(B_k^n)=2^min(n,k)3^(k-min(n,k))`, a saturated macroscopic escape exponent, and an exact divisor-indexed fixed-period trace cluster set; unnormalized traces can oscillate while dimension-normalized traces vanish. | `(A1_WEAK,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [`../henon_open_walsh_growing_k_escape_route_a/`](../henon_open_walsh_growing_k_escape_route_a/) |
+
+C151, C152, and C153 retain different A4 subgates on different source
+systems and are not merged.  C149 is a controlled source rejection: its
+finite skeleton is declared rather than intrinsic.  No candidate has a
+frozen external target divisor, zero census, functional equation,
+counting-law comparison, arithmetic local datum, Euler factor, root number,
+automorphy object, or Hilbert--Polya operator.  The common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, A2/A3 remain failed, and
+`route_b_invocation_allowed=false` throughout.
+
 ## HCS-C144--HCS-C148 dynamics-diversification round (2026-08-25)
 
 Five source-locked candidates were retained as distinct Route-A results.

@@ -1,0 +1,69 @@
+skill: route-a-evaluator
+skill_version: 0.1.0
+candidate_id: HCS-C149
+source_commit: 2d4e6211a254ef49d87718569d23466f4c6dcf4c
+evaluation_date: 2026-08-25
+
+source_lock:
+  object: topological disjoint union of X_TM and tagged cycles C_1,C_2,C_3,C_5
+  clock: one componentwise iterate
+  normalization: fixed points first; exact-period points by Mobius inversion; cycles after division by period
+  determinant_convention: Artin--Mazur zeta exp(sum Fix(n) z^n/n)
+  cutoff: all-period theorem; periods 60 and zeta degree 30 are replay sentinels
+  precision: exact finite maps, integers, and formal power series
+  allowed_data: frozen Thue--Morse substitution and declared tagged cycles only
+  forbidden_data: external prime or zero tables, arithmetic/local factors, root numbers, automorphy data, and Route-B inputs
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exactly one primitive cycle at each attached length 1,2,3,5
+  strongest_failure: the cycles are freely declared disjoint components, not intrinsic orbits of X_TM, and their attachment destroys minimality
+  metrics:
+    attached_points: 11
+    primitive_cycles: 4
+    replay_periods: 60
+  artifacts:
+    - results/c149_skeleton_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the source zeta is exactly 1/((1-z)(1-z^2)(1-z^3)(1-z^5))
+  strongest_failure: this elementary finite rational factor has no frozen target divisor comparison
+  metrics:
+    source_zeta_factors: 4
+    target_comparisons: 0
+  artifacts:
+    - results/c149_skeleton_evidence.json
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: source rationality is exact
+  strongest_failure: no target functional equation, counting law, or continuation comparison is present
+  metrics:
+    target_global_structure_checks: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the componentwise topological system is explicit
+  strongest_failure: no natural unitary, scattering, Hamiltonian, or self-adjoint lift is constructed
+  metrics:
+    natural_lifts_constructed: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: the tagged cycles are disjoint attachments and the system is not minimal or claimed almost minimal
+blocking_conditions:
+  - the finite skeleton is extrinsic to the Thue--Morse language
+  - minimality is necessarily lost
+  - no target analytic structure or natural lift is present
+next_smallest_test: replace free attachment by a source-derived symbolic family with intrinsic finite-volume cycles
+route_b_invocation_allowed: false

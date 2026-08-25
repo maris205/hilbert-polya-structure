@@ -1,0 +1,91 @@
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.57in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\linespread{0.94}
+\title{\vspace{-1.8em}A Primitive-Direction Heat Transform\\for Square-Billiard Families}
+\author{Route-A structural certificate C152}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We regularize the primitive direction families of the unit square billiard by
+a positive squared-length heat transform.  M\"obius inversion gives an exact
+theta factorization, and an elementary quarter-disk count plus Stieltjes
+integration gives its small-time law.  Coincident lengths retain direction
+multiplicity.  The construction is not a wave trace, isolated-orbit
+determinant, or target identity.
+\end{abstract}
+
+\section{Transform and factorization}
+For ordered positive coprime pairs, coordinate swap retained and axes
+excluded, set
+\begin{equation}
+H_{\rm prim}(t)=\sum_{\substack{m,n\geq1\\(m,n)=1}}
+ e^{-4t(m^2+n^2)},\qquad t>0.                    \tag{1}
+\end{equation}
+The exponent is $-tL_{m,n}^2$ for square-billiard length
+$L_{m,n}=2\sqrt{m^2+n^2}$.  With
+$\theta_+(u)=\sum_{k\geq1}e^{-uk^2}$, the coprimality identity gives
+\begin{equation}
+H_{\rm prim}(t)=\sum_{d\geq1}\mu(d)\theta_+(4td^2)^2.      \tag{2}
+\end{equation}
+The interchange is absolute because monotonicity gives
+\[
+\theta_+(4td^2)\leq\int_0^\infty e^{-4td^2x^2}\,dx
+=\frac{\sqrt\pi}{4d\sqrt t},
+\]
+so the absolute transformed sum is bounded by
+$\frac{\pi}{16t}\sum_{d\geq1}d^{-2}$.  Each ordered primitive direction
+appears once, so different pairs of the same length add their multiplicities.
+
+\section{Primitive density and small time}
+For real $R\geq0$, let $Q(R)$ count ordered positive lattice points in the
+quarter disk and let $N(R)$ count the coprime ones.  Unit-square comparison
+gives
+\[
+Q(R)=\frac{\pi R^2}{4}+O(R+1).
+\]
+M\"obius inversion then yields
+\begin{equation}
+N(R)=\sum_{d\leq R/\sqrt2}\mu(d)Q(R/d)
+    =\frac{3R^2}{2\pi}+O(R\log R).               \tag{3}
+\end{equation}
+Indeed, absolute Dirichlet convolution and the Basel sum give
+$\sum_{d\geq1}\mu(d)d^{-2}=1/\zeta(2)=6/\pi^2$; its omitted tail is
+$O(R^{-1})$, while the boundary errors sum to
+$O(R\sum_{d\leq R}d^{-1})$.
+Stieltjes integration by parts gives
+\[
+H_{\rm prim}(t)=8t\int_0^\infty r e^{-4tr^2}N(r)\,dr.
+\]
+Substitution of (3) gives
+\begin{equation}
+H_{\rm prim}(t)=\frac{3}{8\pi t}
+ +O\!\left(t^{-1/2}\log(1/t)\right),\qquad t\downarrow0.  \tag{4}
+\end{equation}
+The remainder follows directly from
+$t\int_0^\infty r^2\log(2+r)e^{-4tr^2}\,dr$ after the change
+$u=\sqrt t\,r$.
+
+\section{Exact validation and boundary}
+If $b_s$ counts every ordered positive representation $s=a^2+b^2$ and
+$c_s$ the primitive ones, (2) is coefficientwise
+$c_s=\sum_{d^2\mid s}\mu(d)b_{s/d^2}$.  Producer and independent checker
+agree for every $s\leq20000$ and on Euclidean radius counts through $200$;
+SymPy independently verifies initial coefficients and the leading integral.
+
+This is a direction-label heat transform.  It is not a clean wave trace, a
+Gutzwiller or isolated-orbit determinant, or the spectral heat trace of the
+Dirichlet Laplacian.
+
+The tuple is
+$(\texttt{A1\_WEAK},\texttt{A2\_FAIL},\texttt{A3\_FAIL},
+\texttt{A4\_NATURAL\_QUANTIZATION})$.  We claim no target divisor,
+functional equation or counting law, arithmetic/local factor, Euler factor,
+root number, automorphy, Hilbert--P\'olya construction, or Route-B
+authorization.  Scope: \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{document}
