@@ -1,0 +1,102 @@
+\section{Phase decomposition and exact pattern counts}\label{sec:phase}
+
+Fix disjoint sets $A$ and $B$ with $|A|=m$ and $|B|=n$.  The graph
+$K_{m,n}$ has vertex set $A\sqcup B$ and every edge joins $A$ to $B$.  Write
+\[
+ X_{m,n}^{(d)}=\{x\in(A\sqcup B)^{\Z^d}:x_v\sim x_{v+e_i}
+ \text{ for all }v\in\Z^d,\ 1\leq i\leq d\}.
+\]
+Let
+\[
+ \chi(v)=v_1+\cdots+v_d\pmod 2,
+ \qquad \E=\ker\chi,
+ \qquad \OO=\Z^d\setminus\E.
+\]
+
+\begin{lemma}[Intrinsic phase]\label{lem:phase}
+Every $x\in X_{m,n}^{(d)}$ has exactly one of the following orientations:
+\[
+x_{\E}\subset A,\quad x_{\OO}\subset B,
+\qquad\text{or}\qquad
+x_{\E}\subset B,\quad x_{\OO}\subset A.
+\]
+If $\omega(x)=1$ in the first case and $-1$ in the second, then
+$\omega(\sigma^v x)=(-1)^{\chi(v)}\omega(x)$.
+\end{lemma}
+
+\begin{proof}
+Choose the part containing $x_0$.  Along every nearest-neighbour edge the
+part changes.  The parity of the length of a lattice path from $0$ to $v$ is
+$\chi(v)$, so the part at $v$ is forced and is independent of the chosen
+path.  Translation by an odd vector exchanges the two parity classes, while
+translation by an even vector preserves them.
+\end{proof}
+
+\begin{proposition}[All finite shapes]\label{prop:patterns}
+The number $N_{m,n}(F)$ of patterns on a finite set $F$ that extend to
+$X_{m,n}^{(d)}$ satisfies $N_{m,n}(\varnothing)=1$.  For nonempty $F$ it is
+\[
+ N_{m,n}(F)=
+ m^{|F\cap\E|}n^{|F\cap\OO|}
+ +n^{|F\cap\E|}m^{|F\cap\OO|}.
+ \tag{2.1}\label{eq:finite-count}
+\]
+In particular,
+\[
+ h_{\rm top}(X_{m,n}^{(d)})=\frac12\log(mn).
+ \tag{2.2}\label{eq:entropy}
+\]
+\end{proposition}
+
+\begin{proof}
+The empty restriction is unique.  If $F$ is nonempty, the two alternatives
+in \cref{lem:phase} are disjoint on $F$.  In the first phase the sites in
+$F\cap\E$ have $m$ choices and those in $F\cap\OO$ have $n$ choices; the
+second phase reverses the roles.  Every such restriction extends: choose
+arbitrary symbols from the phase-prescribed target part at every site outside
+$F$.  Completeness of the bipartite target makes the resulting global
+configuration valid.  Summing the two phase counts proves
+\eqref{eq:finite-count}.
+
+Take rectangular Følner boxes.  They are connected and their two parity
+classes have sizes $|F|/2+O(1)$.  Applying \eqref{eq:finite-count}, taking
+$|F|^{-1}\log$, and passing to the limit gives \eqref{eq:entropy}.
+\end{proof}
+
+The global choice of phase contributes only a bounded factor, while each
+even--odd pair contributes $mn$ choices.  Importantly, disconnected pieces
+of $F$ cannot choose phases independently: global extendibility couples them
+through \cref{lem:phase}.  The conjugacy in the next section makes that
+pairing local.
+
+Let $X^+$ be the phase component with $A$ on $\E$, and let $X^-$ be the
+other component.  Although neither component is invariant under the full
+$\Z^d$ action, both are invariant under the subgroup $\E$.
+
+\begin{proposition}[Full-shift model for a phase]\label{prop:phase-full}
+As an $\E$-system, $X^+$ is conjugate to the full shift
+$(A\times B)^{\E}$.  The map is
+\[
+ \Theta_+(x)_v=(x_v,x_{v+e_1}),\qquad v\in\E.
+ \tag{2.3}\label{eq:phase-pair}
+\]
+The component $X^-$ has the same full-shift model after translating the
+anchors by $e_1$.
+\end{proposition}
+
+\begin{proof}
+The edges $(v,v+e_1)$ with $v\in\E$ are disjoint and cover $\Z^d$.
+Consequently \eqref{eq:phase-pair} records every input coordinate exactly
+once.  Conversely, an arbitrary labelling of $\E$ by $A\times B$ can be
+unpacked independently on these dimers and gives a valid point of $X^+$,
+because every lattice edge joins an $A$ symbol to a $B$ symbol.  Packing and
+unpacking are continuous and commute with translations in $\E$.  For $X^-$,
+the $A$-anchors form the coset $e_1+\E$; translating this coset back to
+$\E$ gives the identical construction.
+\end{proof}
+
+An odd translation exchanges $X^+$ and $X^-$.  It follows that every
+full-action invariant probability is the equal mixture of an
+$\E$-invariant probability on one component and its odd translate.  This
+observation will turn the equilibrium problem into the ordinary full-shift
+variational problem on the dimer alphabet.

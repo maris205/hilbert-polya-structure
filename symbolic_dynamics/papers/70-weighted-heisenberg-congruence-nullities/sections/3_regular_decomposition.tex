@@ -1,0 +1,116 @@
+\section{Finite Heisenberg regular decomposition}
+
+Let $k$ be an algebraic closure of $\Fp$.  We first remove a possible field
+splitting ambiguity.
+
+\begin{lemma}[Base change]\label{lem:base-change}
+For a matrix $A$ over $\Fp$, its nullity over $\Fp$ equals the nullity of
+$A\otimes_{\Fp}k$ over $k$.
+\end{lemma}
+
+\begin{proof}
+Field extension is flat, so tensoring the exact sequence
+$0\to\ker A\to\Fp^n\to\Fp^m$ with $k$ remains exact.  Equivalently, the
+nonzero minors determining the rank remain nonzero after embedding
+$\Fp\hookrightarrow k$.
+\end{proof}
+
+The complex Stone--von Neumann theorem supplies a standard model for finite
+Heisenberg representations \citep{GurevichHadani2010}.  Grassberger and
+H\"ormann give an elementary construction of all irreducible representations
+of $H(\mathbb{Z}_n)$ \citep{GrassbergerHormann2001}; at prime $n=\ell$, their
+classification owns the character/nontrivial-central-character type ledger
+used below.  Since our splitting field has characteristic $p$, we still record
+the cross-characteristic classification directly rather than silently
+transferring a complex representation statement.
+
+\begin{lemma}[Cross-characteristic irreducibles]\label{lem:irreducibles}
+Over $k$, the irreducibles of $\Ql$ are the following:
+\begin{enumerate}
+\item for every $(u,v)\in\mu_\ell(k)^2$, the character
+\[
+ \chi_{u,v}(a)=u,\qquad \chi_{u,v}(b)=v,\qquad \chi_{u,v}(c)=1;
+\]
+\item for every nontrivial $\zeta\in\mu_\ell(k)$, one degree-$\ell$ module
+$\pi_\zeta$ on the basis $e_0,\ldots,e_{\ell-1}$, given by
+\[
+ \pi_\zeta(a)e_j=\zeta^j e_j,
+ \qquad
+ \pi_\zeta(b)e_j=e_{j+1\bmod\ell},
+ \qquad
+ \pi_\zeta(c)=\zeta I.
+\]
+The modules in this list are pairwise inequivalent and the list is complete.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Because $p\ne\ell$, the polynomial $t^\ell-1$ has $\ell$ distinct roots in
+$k$.  The characters in (1) are therefore distinct and exhaust the
+characters of the abelianization $\Ql/[\Ql,\Ql]\cong\Fell^2$.
+
+For (2), the displayed clock and shift matrices satisfy
+$\pi_\zeta(a)\pi_\zeta(b)=
+\zeta\pi_\zeta(b)\pi_\zeta(a)$, matching $[a,b]=c$.  The clock matrix has
+$\ell$ distinct one-dimensional eigenspaces.  Any invariant subspace is a
+sum of some of them, because their spectral projectors are polynomials in
+the clock matrix.  The shift matrix cyclically permutes all eigenspaces, so
+a nonzero invariant subspace contains all of them.  Thus $\pi_\zeta$ is
+irreducible.  Distinct values of $\zeta$ give inequivalent modules because
+the center acts by different scalars.
+
+Maschke's theorem applies over $k$, and the sum of the squared degrees of the
+displayed pairwise inequivalent irreducibles is
+\[
+ \ell^2+(\ell-1)\ell^2=\ell^3=|\Ql|.
+\]
+For a split semisimple group algebra this is the full dimension ledger, so
+there are no further irreducibles.
+\end{proof}
+
+\begin{proposition}[Regular-module ledger]\label{prop:regular-ledger}
+Over $k$, the right regular module of $\Ql$ decomposes into the $\ell^2$
+characters, each once, and the $\ell-1$ modules $\pi_\zeta$, each with
+multiplicity $\ell$.  Consequently,
+\begin{align}\label{eq:nullity-ledger}
+ \Null(T_{\alpha,\beta,\gamma})
+ &=\#\{(u,v)\in\mu_\ell(k)^2:
+             \alpha+\beta u+\gamma v=0\}\notag\\
+ &\quad+\ell\sum_{\substack{\zeta^\ell=1\\\zeta\ne1}}
+  \Null\bigl(\alpha I+\beta\pi_\zeta(a)
+                         +\gamma\pi_\zeta(b)\bigr).
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Maschke's theorem applies because $p\nmid|\Ql|$, and
+\cref{lem:irreducibles} gives the complete split list.  To freeze the
+right-translation convention, set
+$(R_hf)(q)=f(qh)$.  For a representation $\pi$ on $V$, identify its matrix-
+coefficient space with $V^*\otimes V$ by
+\[
+ \varphi_{\lambda,v}(q)=\lambda(\pi(q)v).
+\]
+Then
+\[
+ R_h\varphi_{\lambda,v}(q)
+ =\lambda(\pi(q)\pi(h)v)
+ =\varphi_{\lambda,\pi(h)v}(q).
+\]
+Thus $R_h$ acts as $I_{V^*}\otimes\pi(h)$: the right regular module contains
+$\dim V$ copies of $V$, and the finite operator acts on each copy by
+$\alpha I+\beta\pi(a)+\gamma\pi(b)$.  Inserting the degrees from
+\cref{lem:irreducibles} proves \eqref{eq:nullity-ledger}.
+\end{proof}
+
+\begin{remark}[Right versus left]\label{rem:left-right}
+Our finite operator is right translation because the local rule reads
+$q,qa,qb$, and the matrix-coefficient calculation above gives the displayed
+$\pi(a),\pi(b)$ blocks without a transpose or inverse.  Under the common
+dual convention the blocks are contragredient.  On characters this replaces
+$(u,v)$ by $(u^{-1},v^{-1})$, a permutation of
+$\mu_\ell(k)^2$.  On nonlinear modules it replaces the central scalar
+$\zeta$ by $\zeta^{-1}$, a permutation of the nontrivial central characters.
+Hence the summed nullities in \eqref{eq:nullity-ledger} are unchanged even
+though individual matrices need not be identical.
+\end{remark}

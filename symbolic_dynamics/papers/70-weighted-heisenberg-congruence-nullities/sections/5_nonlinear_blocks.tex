@@ -1,0 +1,63 @@
+\section{Clock--shift blocks and the Fermat jump}
+
+Fix a nontrivial central character.  Use the explicit module
+$\pi_\zeta$ from \cref{lem:irreducibles}; writing its two generators again,
+\begin{equation}\label{eq:clock-shift}
+ U=\operatorname{diag}(1,\zeta,\ldots,\zeta^{\ell-1}),
+ \qquad Ve_j=e_{j+1\bmod\ell}.
+\end{equation}
+Changing the central character only replaces $\zeta$ by another primitive
+root, which will not change the calculation below.
+
+\begin{lemma}[Clock--shift determinant]\label{lem:clock-shift-det}
+For nonzero $\alpha,\beta,\gamma\in k$,
+\begin{equation}\label{eq:clock-shift-det}
+ \det(\alpha I+\beta U+\gamma V)
+ =\alpha^\ell+\beta^\ell+\gamma^\ell.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $d_j=\alpha+\beta\zeta^j$.  In the determinant of
+$\operatorname{diag}(d_0,\ldots,d_{\ell-1})+\gamma V$, a nonzero permutation
+term can use only the full diagonal or the unique full $\ell$-cycle.  The
+cycle sign is $(-1)^{\ell-1}=1$ because $\ell$ is odd.  Therefore
+\[
+ \det(\alpha I+\beta U+\gamma V)
+ =\prod_{j=0}^{\ell-1}(\alpha+\beta\zeta^j)+\gamma^\ell.
+\]
+The factorization of $X^\ell-Y^\ell$, evaluated at
+$X=\alpha$ and $Y=-\beta$, gives
+$\prod_j(\alpha+\beta\zeta^j)=\alpha^\ell+\beta^\ell$.
+This proves \eqref{eq:clock-shift-det}.
+\end{proof}
+
+A determinant alone would not determine the fixed-space dimension.  The
+special cyclic sparsity gives the required corank statement.
+
+\begin{lemma}[Exact nonlinear nullity]\label{lem:nonlinear-nullity}
+Every nonlinear block is invertible when $\Delta_\ell\ne0$ and has nullity
+exactly one when $\Delta_\ell=0$.
+\end{lemma}
+
+\begin{proof}
+Since $(Vx)_j=x_{j-1}$, in the basis of \eqref{eq:clock-shift} the equation
+$(\alpha I+\beta U+\gamma V)x=0$ is exactly
+\begin{equation}\label{eq:cyclic-recurrence}
+ (\alpha+\beta\zeta^j)x_j+\gamma x_{j-1}=0
+ \qquad(j\bmod\ell).
+\end{equation}
+Since $\gamma\ne0$, a single coordinate determines all other coordinates by
+successive use of \eqref{eq:cyclic-recurrence}.  The kernel therefore has
+dimension at most one.  By \cref{lem:clock-shift-det}, it is nonzero exactly
+when $\Delta_\ell=0$, in which case its dimension is one.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}]
+By \cref{prop:character-count}, the characters contribute $\Dcycl$.  By
+\cref{lem:nonlinear-nullity}, either none or all of the $\ell-1$ nonlinear
+types are singular.  Each singular type has block nullity one and multiplicity
+$\ell$ in the regular representation, so its total contribution is
+$\ell(\ell-1)$.  Insert these terms into \eqref{eq:nullity-ledger}, then use
+\cref{lem:base-change} to descend the nullity from $k$ to $\Fp$.
+\end{proof}

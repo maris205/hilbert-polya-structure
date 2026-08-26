@@ -1,0 +1,168 @@
+\section{The degree-exponent spectrum}\label{sec:multi}
+
+For $x\in X_\tau$, define the forward degree exponent when the limit exists:
+\[
+ \lambda(x)=\lim_{n\to\infty}\frac1n
+ \log\prod_{j=0}^{n-1}d_\tau(F_\tau^j x),
+ \qquad
+ E_\tau(\alpha)=\{x:\lambda(x)=\alpha\}.
+ \tag{5.1}\label{eq:level}
+\]
+We use Bowen's topological entropy $h_B$ for a possibly noncompact level set
+\citep{Bowen1973}.
+
+Equip $X_\tau$ with the compatible product metric
+\[
+ \rho(x,y)=2^{-N(x,y)},\qquad
+ N(x,y)=\min\{|i|:x_i\ne y_i\},
+\]
+with $N(x,x)=\infty$ and the convention $2^{-\infty}=0$.  Write
+$B_n(x,\epsilon)=\{y:\rho(F_\tau^j x,F_\tau^j y)<\epsilon
+\text{ for }0\leq j<n\}$.
+
+\begin{lemma}[Future-symbol reduction]\label{lem:boundary}
+For every $x$ and $n\geq2$,
+\[
+ \sum_{j=0}^{n-1}\phi_\tau(F_\tau^j x)
+ =\log k_{x_{-1}}+
+ \sum_{i=0}^{n-2}\log k_{\tau(x_i)}.
+ \tag{5.2}\label{eq:boundary}
+\]
+The first term is uniformly bounded.  Moreover, for every $M\geq1$,
+\[
+ B_n(x,2^{-M})=
+ \left\{y:\begin{array}{ll}
+ y_i=x_i&\text{for }-M\leq i\leq-1,\\
+ y_i=x_i&\text{for }0\leq i\leq n+M-1
+ \end{array}\right\}.
+\]
+Consequently the negative coordinates and the $M$ terminal future symbols
+contribute only factors $|Z|^M$ and $|S|^M$ to Bowen covers.  The Bowen
+entropy of $E_\tau(\alpha)$ therefore equals the digit-average level-set
+entropy in the one-sided full shift on $S$ for the weights
+$a_s=\log k_{\tau(s)}$.
+\end{lemma}
+
+\begin{proof}
+The degree at time zero is $k_{x_{-1}}$.  For $j\geq1$, the symbol at
+coordinate $-1$ of $F_\tau^j x$ is $\tau(x_{j-1})$, giving
+\eqref{eq:boundary}.  Since the alphabet is finite, the boundary term divided
+by $n$ tends uniformly to zero.
+
+For the displayed Bowen-cylinder identity, the inequality
+$\rho(F_\tau^j x,F_\tau^j y)<2^{-M}$ means agreement in the coordinate
+window $[-M,M]$ at time $j$.  The nonnegative part of that window reads the
+initial future coordinates $j,\ldots,j+M$; as $0\leq j<n$, their union is
+$[0,n+M-1]$.  At time zero the negative part reads exactly the initial block
+$[-M,-1]$.  At later times its surviving old-past coordinates remain inside
+that block, while every future coordinate that has crossed the zipper is
+seen only through $\tau$ and is already fixed by agreement of the future
+symbols.  This proves both inclusions.
+
+Thus, relative to a length-$n$ future cylinder, passage to an
+$(n,2^{-M})$ Bowen ball requires at most $|Z|^M|S|^M$ refinements, a factor
+independent of $n$.  Together with the uniform boundary term, this proves
+the asserted entropy reduction.
+\end{proof}
+
+Let $\Delta(S)$ and $\Delta(Z)$ denote the corresponding probability
+simplices, and write $H$ for Shannon entropy with natural logarithms.
+
+\begin{theorem}[Exact multifractal spectrum]\label{thm:spectrum}
+Put $k_{\min}=\min_z k_z$ and $k_{\max}=\max_z k_z$.  If
+$\alpha\notin[\log k_{\min},\log k_{\max}]$, then
+$E_\tau(\alpha)=\varnothing$.  For every $\alpha$ in this interval,
+\begin{align}
+ h_B(E_\tau(\alpha))
+ &=\max_{p\in\Delta(S):\,\sum_s p_s\log k_{\tau(s)}=\alpha}H(p)
+ \tag{5.3}\label{eq:spectrum-s}\\
+ &=\max_{r\in\Delta(Z):\,\sum_z r_z\log k_z=\alpha}
+ \bigl(H(r)+\alpha\bigr)
+ \tag{5.4}\label{eq:spectrum-z}\\
+ &=\inf_{t\in\R}\bigl(P_\tau(t)-t\alpha\bigr).
+ \tag{5.5}\label{eq:legendre}
+\end{align}
+For an interior $\alpha$ and a nonuniform profile, the infimum is attained at
+the unique $t$ satisfying $P_\tau'(t)=\alpha$.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:boundary}, it suffices to work with future words and the digit
+weights $a_s$.  We spell out the Carath\'eodory step because fixed-length type
+counts alone would give only capacity entropy.  Put
+\[
+ H_\alpha=\max\{H(p):p\in\Delta(S),\ \textstyle\sum_s p_sa_s=\alpha\}
+\]
+when the constraint is feasible.  For $\eta>0$, let $H_{\alpha,\eta}$ be the
+same maximum with the equality replaced by
+$|\sum_s p_sa_s-\alpha|\leq\eta$.  Compactness and continuity give
+$H_{\alpha,\eta}\downarrow H_\alpha$ as $\eta\downarrow0$.
+
+For $N\geq1$, let $Y_{N,\eta}$ be the set of future sequences whose
+length-$n$ digit average lies in that $\eta$-window for every $n\geq N$.
+The exact average level set is contained in
+$\bigcup_NY_{N,\eta}$.  The number of length-$n$ words in the window is at
+most
+\[
+ (n+1)^{|S|}\exp(nH_{\alpha,\eta}),
+\]
+by the method of types.  Fixing the metric scale $2^{-M}$ adds at most the
+factor $|Z|^M|S|^M$ from \cref{lem:boundary}.  Hence, for every
+$s>H_{\alpha,\eta}$, a fixed-length cover with arbitrarily large
+$n\geq N$ has Bowen--Carath\'eodory sum bounded by
+\[
+ |Z|^M|S|^M(n+1)^{|S|}
+ \exp\bigl(-n(s-H_{\alpha,\eta})\bigr),
+\]
+which tends to zero.  Countable stability of Bowen entropy gives the upper
+bound $h_B(E_\tau(\alpha))\leq H_{\alpha,\eta}$; now let
+$\eta\downarrow0$.
+
+For the reverse bound, fix a feasible $p$ and denote by $\nu_p$ the probability
+law obtained by putting a Bernoulli-$p$ law on the future coordinates while
+fixing one arbitrary past.  Almost every future is
+$p$-generic and hence belongs to $E_\tau(\alpha)$.  For every fixed $M$, the
+Bowen-cylinder identity and the Shannon law of large numbers give, at almost
+every such point,
+\[
+ \lim_{n\to\infty}-\frac1n
+ \log\nu_p\bigl(B_n(x,2^{-M})\bigr)=H(p).
+\]
+The entropy distribution principle therefore yields
+$h_B(E_\tau(\alpha))\geq H(p)$.  Maximizing over feasible $p$ proves
+\eqref{eq:spectrum-s}.  If the constraint is infeasible, no digit average can
+converge to $\alpha$; its feasible interval is the convex hull of the weights,
+namely $[\log k_{\min},\log k_{\max}]$.
+
+Given $p$, group it by fibres:
+$r_z=\sum_{s\in\tau^{-1}(z)}p_s$.  The entropy chain rule gives
+\[
+ H(p)=H(r)+\sum_z r_z H(p(\,\cdot\mid z))
+ \leq H(r)+\sum_z r_z\log k_z=H(r)+\alpha.
+ \tag{5.6}\label{eq:conditional-max}
+\]
+Equality holds by distributing mass uniformly within each fibre.  This
+proves \eqref{eq:spectrum-z}.
+
+For any $t$ and any feasible $p$, the Gibbs variational inequality
+\eqref{eq:gibbs} rearranges to
+$H(p)\leq P_\tau(t)-t\alpha$.  Hence the maximum is at most the infimum in
+\eqref{eq:legendre}.  If $\alpha$ is interior, continuity and strict
+monotonicity of $P_\tau'$ give a parameter $t$ with
+$P_\tau'(t)=\alpha$; the distribution $p_t$ is feasible and equality in
+\eqref{eq:gibbs} proves the reverse inequality.  At the endpoints, take
+$t\to-\infty$ or $t\to+\infty$ and use continuity of the constrained maximum.
+\end{proof}
+
+At either endpoint $k\in\{k_{\min},k_{\max}\}$, the formula retains every
+fibre of that extremal size:
+\[
+ h_B(E_\tau(\log k))=\log(km_k)
+\]
+(with the two endpoint statements coinciding in the uniform case).  The
+spectrum reaches the full entropy $\log|S|$ at
+\[
+ \alpha=P_\tau'(0)=\sum_z\frac{k_z}{|S|}\log k_z.
+\]
+Together with \cref{cor:folding}, the tangent parameter describes both the
+folding entropy of $\mu_t$ and the degree exponent of its generic points.

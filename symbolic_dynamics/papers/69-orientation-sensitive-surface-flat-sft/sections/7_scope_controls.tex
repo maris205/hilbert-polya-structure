@@ -1,0 +1,103 @@
+\section{Scope, ownership, and finite controls}
+\label{sec:scope}
+
+\subsection{What is and is not being recovered}
+
+The output of \cref{thm:reconstruction} is the order of $\K$ and the multiset
+of pairs $(d_\chi,\nu_\chi)$.  The theorem does not assert that this signature
+determines the multiplication table of $\K$, its full character table, or its
+isomorphism class.  Likewise, \cref{cor:spectral-equivalence} is an exact
+classification of the two selected periodic sequences, not a classification
+of finite groups.
+
+The classical input must also be kept separate from the residual result.
+Equations \eqref{eq:orientable-hom} and \eqref{eq:nonorientable-hom} are the
+Mednykh and Frobenius--Schur formulas, respectively.  Klug's account
+\cite{Klug2025} is our chosen modern normalization source, not a reassignment
+of historical ownership.  Snyder's lattice-TQFT proof \cite{Snyder2007}
+already supplies a topological/combinatorial surface-state-sum route to both
+formulas.  Likewise, the inverse-degree sums used here belong to the standard
+character-degree zeta-function setting \cite{LiebeckShalev2005}, and the
+Vandermonde inversion is elementary.  The residual proof sequence in this
+manuscript begins with the finite-type flat model and rooted gauge identity,
+specializes the owned formulas to the two explicit families, and inverts their
+joint output.  No priority claim is made for this combination.
+
+Periodic-data recovery also has a prior symbolic-dynamics line.  Ward and
+Roettger use periodic points to recover the finite abelian parameter of a
+Ledrappier-type algebraic $\ZZ^2$ Markov shift
+\cite{Ward1998,Roettger2005}.  Their acting group, configuration law, and
+recovered invariant differ from the surface-group and Frobenius--Schur setting
+here, so they are conceptual nearest neighbors rather than a collision with
+\cref{thm:reconstruction}.  This distinction does not turn the bounded search
+for the present combination into a priority certificate.
+
+\subsection{Separation from the finite-Heisenberg nullity engine}
+
+This paper's moment argument and the finite-Heisenberg modular-nullity engine
+used in the neighboring P70 project address different systems and invariants.
+The distinctions are structural:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lYY@{}}
+\toprule
+Feature & Present paper (P69) & Finite-Heisenberg project (P70) \\
+\midrule
+Acting group & nonorientable surface group $\pi_1(N_3)$ & discrete Heisenberg group \\
+Alphabet/model & nonabelian finite-group edge labels with flat holonomy & additive finite-field principal linear kernel \\
+Finite-index datum & number of flat connections on surface covers & nullity on finite Heisenberg quotients \\
+Representation input & complex character degrees and FS indicators & modular Maschke/Schr\"odinger blocks \\
+Inverse engine & finite exponential moments and Vandermonde inversion & blockwise linear algebra and modular rank jumps \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Thus neither the characteristic-three phenomenon nor the modular-nullity
+calculation of P70 is reused here.  The two projects share only the broad
+practice of probing a group shift by finite-index fixed data.
+
+\subsection{Exact finite regression controls}
+
+The script \texttt{verify\_surface\_flat\_sft.py} implements the groups
+$D_8$, $Q_8$, and $C_3$ from their multiplication laws and performs the following
+checks using exact integers and rational arithmetic:
+\begin{enumerate}
+ \item it checks identity, inverses, and associativity;
+ \item it enumerates the distribution of one commutator and convolves it to
+ count homomorphisms from orientable surface groups;
+ \item it enumerates the distribution of one square and convolves it to count
+ homomorphisms from nonorientable surface groups;
+ \item it multiplies by the rooted gauge factors and compares with
+ \eqref{eq:d8q8-O}--\eqref{eq:q8-N} for $m=1,\ldots,4$ and
+ $n=1,\ldots,5$;
+ \item for $C_3$, it derives the exact one-dimensional indicator signature
+ $(1,0,0)$, checks both surface formulas, and reconstructs all three
+ multiplicities $(c_1^+,c_1^-,c_1^0)=(1,0,2)$ from normalized moments;
+ \item it checks the orientable surface formula for $S_3$ at genera one
+ through three as a separate non-order-eight control.
+\end{enumerate}
+For the $C_3$ control, the degree multiset is $\{1,1,1\}$, while only the
+trivial character is self-dual.  Hence the two non-real characters disappear
+from every nonorientable moment, and the predicted fixed counts reduce to
+\begin{equation}
+ O_{C_3}(m)=3^{4m+1},\qquad N_{C_3}(n)=3^{2n}.
+ \label{eq:c3-controls}
+\end{equation}
+The direct commutator and square-product enumerations agree with
+\eqref{eq:c3-controls}.  Their normalized moments are $P_m=3$, $Q_m=1$, and
+$R_m=1$, which recover $t_1=3$, $s_1=1$, $\delta_1=1$, and therefore the
+stated $(+,-,0)$ multiplicities.  This is an exact exercise of the
+$\nu=0$ branch, not numerical approximation.
+
+The stored run ends in \texttt{ALL CHECKS PASS}.  This finite enumeration can
+detect normalization or parity regressions.  It cannot prove the gauge
+bijection, the all-genus character formulas, or the infinite moment inversion;
+those statements rest on the proofs above.
+
+\subsection{Release posture}
+
+The package is an anonymous internal Stage-2 draft.  A bounded search did not
+locate an exact collision involving this flat SFT, these two explicit families,
+and the same joint reconstruction.  That negative search is not a priority
+result.  Specialist review of the symbolic-dynamics, surface-topology, and
+finite-group literature remains mandatory before any external release.

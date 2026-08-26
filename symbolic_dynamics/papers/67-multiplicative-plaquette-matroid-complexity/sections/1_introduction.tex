@@ -1,0 +1,141 @@
+\section{Introduction}
+
+Multiplicative symbolic constraints come with more than one natural finite
+geometry.  Arithmetic prefixes retain the indices $1,\ldots,N$, while
+prime-valuation or exponent coordinates organize a multiplicative orbit into
+a lattice.  Pattern counts in these geometries need not have the same scale.
+The difference is structural, not a normalization error.
+
+The foundational multiplicative-integer framework and its dimension theory
+were developed by Kenyon, Peres, and Solomyak
+\citep{KenyonPeresSolomyak2012}.  Two-generator dimension problems and pattern
+generation for multiplicative systems, as well as coupled multidimensional
+systems, axial products, surface entropy, and affine multiplicative shifts are
+treated in
+\citep{PeresSchmelingSeuretSolomyak2014,BanHuLin2019,
+BanHuLai2021,BanHuLaiLiao2025,BanHuLaiLiaoAffine2025}.
+Prime-valuation coordinates also
+support exact density and correlation constructions, including recent
+symbolic realizations \citep{MoraCuellarRojasAravenaYavicoli2026}.  Against
+this established background, we isolate one finite-field linear rule and ask
+for an exact answer on \emph{every} finite coordinate set.
+
+Fix coprime integers $a,b\geq2$ and a finite field $\F_q$.  On
+$\F_q^{\N}$ define
+\begin{equation}\label{eq:def-X}
+ X_{a,b}=\left\{x:
+ x_n-x_{an}-x_{bn}+x_{abn}=0
+ \text{ for every }n\in\N\right\}.
+\end{equation}
+For $c\in\N$, the decimation $D_c(x)_n=x_{cn}$ preserves $X_{a,b}$, so
+\eqref{eq:def-X} is a compact linear multiplicative system.  The local rule
+factors into two first differences after multiplicative coordinates are
+introduced.  That elementary observation is only the starting point: the
+main result identifies the full finite-projection matroid.
+
+Every $n\in\N$ can be written uniquely as
+\[
+ n=r a^i b^j,
+ \qquad i,j\in\Nzero,
+ \qquad a\nmid r,\quad b\nmid r.
+\]
+For a finite $F\subset\N$ and a fixed root $r$, let
+\[
+ E_r(F)=\{(i,j):r a^i b^j\in F\}.
+\]
+Make a bipartite graph $G_r(F)$ whose row vertices are the $i$'s occurring in
+$E_r(F)$, whose column vertices are the $j$'s occurring there, and whose
+edges are the pairs in $E_r(F)$.  Write $I_r(F)$ and $J_r(F)$ for its two
+vertex classes and $c_r(F)$ for its number of connected components.  Empty
+graphs are omitted.  Define
+\begin{align}
+ d(F)&=\sum_r\bigl(|I_r(F)|+|J_r(F)|-c_r(F)\bigr),
+ \label{eq:dF}\\
+ \beta(F)&=\sum_r\bigl(|E_r(F)|-|I_r(F)|-|J_r(F)|+c_r(F)\bigr).
+ \label{eq:betaF}
+\end{align}
+Thus $d(F)+\beta(F)=|F|$, and $\beta(F)$ is the sum of the graph cycle ranks.
+For precision, the \emph{coordinate-dependence matroid on $F$} below is the
+vector matroid of the evaluation maps
+\[
+ \epsilon_n:X_{a,b}\longrightarrow\F_q,
+ \qquad \epsilon_n(x)=x_n,\qquad n\in F.
+\]
+Thus $A\subseteq F$ is independent when the functionals
+$\{\epsilon_n:n\in A\}$ are linearly independent.  This is the standard
+linear-dependence meaning of matroid terminology \citep{Whitney1935}.
+
+\begin{theorem}[Finite-shape structure]\label{thm:main}
+Let $a,b\geq2$ be coprime and let $\F_q$ be a finite field.
+\begin{enumerate}
+\item Put $\cB=\{n\in\N:ab\nmid n\}$.  Coordinate restriction is a
+topological-group isomorphism
+\[
+ X_{a,b}\longrightarrow\F_q^{\cB}.
+\]
+Its inverse is explicit: if $n=r a^i b^j$, then
+\begin{equation}\label{eq:global-inverse-intro}
+ x_{r a^i b^j}=x_{r a^i}+x_{r b^j}-x_r.
+\end{equation}
+\item For every finite $F\subset\N$, the image $\proj_F(X_{a,b})$ is a
+linear subspace of dimension $d(F)$.  Hence
+\begin{equation}\label{eq:finite-count-intro}
+ |\proj_F(X_{a,b})|=q^{d(F)}.
+\end{equation}
+The coordinate-dependence matroid is the direct sum over $r$ of the graphic
+matroids of $G_r(F)$.  Equivalently, allowed labels are exactly those whose
+alternating sum vanishes on every graph cycle.
+\item Let $\mu$ be normalized Haar measure on $X_{a,b}$.  Then
+\begin{equation}\label{eq:haar-intro}
+ \Ent_\mu(Z_F)=d(F)\log q,
+ \qquad
+ \TC_\mu(Z_F)=\beta(F)\log q,
+ \qquad Z_F=(x_n)_{n\in F}.
+\end{equation}
+The coordinates in $F$ are jointly independent if and only if every
+$G_r(F)$ is a forest.  In particular, every two distinct coordinates are
+independent.
+\end{enumerate}
+\end{theorem}
+
+The theorem unifies two counts that look incompatible when stated alone.
+
+\begin{corollary}[Prefixes and exponent rectangles]\label{cor:two-geometries}
+For every $L\geq1$,
+\begin{equation}\label{eq:prefix-count-intro}
+ |\proj_{\{1,\ldots,L\}}(X_{a,b})|
+ =q^{L-\lfloor L/(ab)\rfloor}.
+\end{equation}
+For a root $r$ and $M,N\geq1$, put
+\[
+ Q_r(M,N)=\{r a^i b^j:0\leq i<M,\ 0\leq j<N\}.
+\]
+Then
+\begin{equation}\label{eq:rectangle-count-intro}
+ |\proj_{Q_r(M,N)}(X_{a,b})|=q^{M+N-1},
+ \qquad
+ \beta(Q_r(M,N))=(M-1)(N-1).
+\end{equation}
+\end{corollary}
+
+The first exponent in \eqref{eq:prefix-count-intro} has positive density in
+the arithmetic interval.  The second is boundary order in the exponent box.
+We call the former an arithmetic-prefix complexity and the latter an exact
+exponent-box boundary law.  Neither phrase silently selects a F\o lner
+sequence or asserts a topological entropy for the multiplicative action.
+
+The proof has three short layers.  First, the multiplicative root
+decomposition turns \eqref{eq:def-X} into a vanishing mixed difference on
+$\Nzero^2$, whose solutions are sums of one row and one column potential.
+Second, restriction to an arbitrary finite set becomes a vertex-potential map
+on $G_r(F)$; its rank and its cycle conditions are the standard incidence
+rank and cycle space.  Third, Haar measure pushes forward uniformly to every
+finite image, converting rank and cycle rank into exact entropy and total
+correlation.
+
+\paragraph{Organization.}
+\Cref{sec:coordinates} proves the global coordinates and product
+homeomorphism.  \Cref{sec:finite} proves the all-finite-shape rank, cycle, and
+Haar statements.  \Cref{sec:prefixes,sec:rectangles} specialize the formula
+to the two geometries.  \Cref{sec:scope} records the literature context and the
+claim boundary.

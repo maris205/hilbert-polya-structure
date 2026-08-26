@@ -1,0 +1,170 @@
+\section{Finite moment inversion and recovery}
+\label{sec:moment-recovery}
+
+We isolate the elementary inverse principle used below.  It is stated over
+$\CC$, although all applications have positive rational bases.
+
+\begin{lemma}[Finite exponential moments]
+\label{lem:finite-moments}
+Let $z_1,\ldots,z_r$ be distinct nonzero complex numbers and
+\[
+ u_m=\sum_{i=1}^r a_i z_i^m\qquad(m\geq1),
+\]
+where $a_i\neq0$.  The sequence $(u_m)_{m\geq1}$ determines the unordered
+collection $\{(z_i,a_i):1\leq i\leq r\}$.  If the bases $z_i$ are already
+known and $u_m=\sum_i a_i z_i^m$ is available at any $r$ consecutive
+nonnegative indices $m=m_0,\ldots,m_0+r-1$, then those moments determine all
+coefficients, allowing $m_0=0$ and allowing some coefficients to be zero.
+\end{lemma}
+
+\begin{proof}
+As a formal power series at the origin,
+\begin{equation}
+ \sum_{m\geq1}u_m t^{m-1}
+ =\sum_{i=1}^r\frac{a_i z_i}{1-z_i t}.
+ \label{eq:moment-generating}
+\end{equation}
+The reduced rational function on the right has simple poles $z_i^{-1}$.
+Their positions recover the bases, and their residues recover the
+coefficients.  Hence equality of all moments forces equality of the unordered
+collections.
+
+When the bases are known, moments with nonnegative indices
+$m_0,\ldots,m_0+r-1$ give a
+linear system with matrix
+$(z_i^{m_0+j})_{0\leq j<r,1\leq i\leq r}$.  Its determinant is a nonzero
+monomial times the Vandermonde product
+$\prod_{i<j}(z_j-z_i)$, so all coefficients are uniquely determined.
+\end{proof}
+
+For each degree $d$ occurring in $\Irr(\K)$, introduce the multiplicities
+\begin{align*}
+ c_d^+&=\#\{\chi:d_\chi=d,\ \nu_\chi=+1\},\\
+ c_d^-&=\#\{\chi:d_\chi=d,\ \nu_\chi=-1\},\\
+ c_d^0&=\#\{\chi:d_\chi=d,\ \nu_\chi=0\},\\
+ t_d&=c_d^++c_d^-+c_d^0.
+\end{align*}
+
+\begin{theorem}[Reconstruction from the two spectra]
+\label{thm:reconstruction}
+The joint sequences
+\[
+ (O_{\K}(m))_{m\geq1},\qquad (N_{\K}(n))_{n\geq1}
+\]
+determine $|\K|$ and every multiplicity $c_d^+,c_d^-,c_d^0$.  Equivalently,
+they determine the multiset
+$\{(d_\chi,\nu_\chi):\chi\in\Irr(\K)\}$.
+\end{theorem}
+
+\begin{proof}
+We proceed in four steps.
+
+\emph{Step 1: the group order.}
+By \eqref{eq:orientable-spectrum},
+\[
+ O_{\K}(m)^{1/(4m)}
+ =|\K|\left(\sum_{\chi\in\Irr(\K)}d_\chi^{-2m}\right)^{1/(4m)}.
+\]
+There is at least one degree-one character, namely the trivial character.  The
+sum in parentheses is bounded below by $1$ and above by
+$|\Irr(\K)|$, independently of $m$.  Therefore
+\begin{equation}
+ |\K|=\lim_{m\to\infty}O_{\K}(m)^{1/(4m)}.
+ \label{eq:recover-order}
+\end{equation}
+
+\emph{Step 2: all degree multiplicities.}
+After recovering $|\K|$, normalize the orientable moments as
+\begin{equation}
+ P_m=\frac{O_{\K}(m)}{|\K|^{4m}}
+     =\sum_d t_d(d^{-2})^m.
+ \label{eq:P-moments}
+\end{equation}
+Inverse-degree sums $\sum_{\chi}\chi(1)^{-t}$ are standard character-degree
+zeta values; see, for example, Liebeck and Shalev \cite{LiebeckShalev2005}.
+We use this standard finite-group expression at positive even integers, not a new zeta
+function.  Distinct degrees give distinct nonzero bases $d^{-2}$, and every
+coefficient $t_d$ is positive.  By \cref{lem:finite-moments}, $(P_m)$ recovers
+the bases and coefficients, hence every occurring degree $d$ and its total
+multiplicity $t_d$.
+
+\emph{Step 3: the self-dual multiplicities.}
+At even nonorientable indices, indicator-zero characters vanish and both
+nonzero indicators have even power.  Thus
+\begin{equation}
+ Q_m=\frac{N_{\K}(2m)}{|\K|^{4m}}
+ =\sum_d(c_d^++c_d^-)(d^{-2})^m,
+ \qquad m\geq1.
+ \label{eq:Q-moments}
+\end{equation}
+The bases are already known from \eqref{eq:P-moments}.  The Vandermonde part
+of \cref{lem:finite-moments}, with zero coefficients allowed, recovers
+\[
+ s_d:=c_d^++c_d^-
+\]
+for every occurring $d$.
+
+\emph{Step 4: the indicator signs.}
+At odd index $n=2m+1$, where $m\geq0$,
+\begin{align}
+ R_m&=\frac{N_{\K}(2m+1)}{|\K|^{4m+2}}\notag\\
+ &=\sum_d(c_d^+-c_d^-)d^{-(2m+1)}
+  =\sum_d\frac{c_d^+-c_d^-}{d}(d^{-2})^m.
+ \label{eq:R-moments}
+\end{align}
+Again the bases are known.  If $r$ distinct degrees occur, the known-base
+clause of \cref{lem:finite-moments}, now with $m_0=0$, shows that
+$R_0,\ldots,R_{r-1}$ recover the coefficients
+\[
+ b_d:=\frac{c_d^+-c_d^-}{d}.
+\]
+Since each degree $d$ is already known from \eqref{eq:P-moments}, multiplying
+by $d$ gives $\delta_d:=d b_d=c_d^+-c_d^-$ for every degree.  Finally,
+\begin{equation}
+ c_d^+=\frac{s_d+\delta_d}{2},\qquad
+ c_d^-=\frac{s_d-\delta_d}{2},\qquad
+ c_d^0=t_d-s_d.
+ \label{eq:multiplicity-recovery}
+\end{equation}
+This reconstructs the claimed multiset.
+\end{proof}
+
+\begin{corollary}[Exact equivalence of the selected periodic data]
+\label{cor:spectral-equivalence}
+For finite groups $\K$ and $\K'$, the two identities
+\[
+ O_{\K}(m)=O_{\K'}(m)\quad(m\geq1),\qquad
+ N_{\K}(n)=N_{\K'}(n)\quad(n\geq1)
+\]
+hold if and only if
+\[
+ |\K|=|\K'|
+ \quad\text{and}\quad
+ \{(d_\chi,\nu_\chi):\chi\in\Irr(\K)\}
+ =\{(d_\psi,\nu_\psi):\psi\in\Irr(\K')\}
+\]
+as multisets.
+\end{corollary}
+
+\begin{proof}
+The forward implication is \cref{thm:reconstruction}.  For the reverse
+implication, substitute the common order and pair multiset into
+\eqref{eq:orientable-spectrum} and \eqref{eq:nonorientable-spectrum}.
+\end{proof}
+
+\begin{remark}[Finite algebra after the order limit]
+\label{rem:finite-recovery}
+Once $|\K|$ is known and there are $r$ distinct degrees, the remaining
+reconstruction is finite.  The rational function
+\eqref{eq:moment-generating} for $(P_m)$ has denominator degree $r$; standard
+finite recurrence recovery determines it from finitely many exact moments.
+After its $r$ bases are known, $r$ even nonorientable moments and $r$ odd
+nonorientable moments solve two Vandermonde systems.  The infinite sequences
+in \cref{thm:reconstruction} are used to state the invariant without assuming
+$r$ or $|\K|$ in advance.
+\end{remark}
+
+The parity split is essential.  The orientable moments alone cannot distinguish
+characters of equal degree with different indicators.  The even
+nonorientable moments detect self-duality but cannot distinguish $+1$ from
+$-1$.  The odd nonorientable moments supply exactly the missing signed data.

@@ -1,0 +1,126 @@
+\section{Multiplicative components and global coordinates}\label{sec:coordinates}
+
+Write
+\[
+ \cR_{a,b}=\{r\in\N:a\nmid r,\ b\nmid r\}.
+\]
+The coprimality assumption gives a coordinate system adapted to both
+multipliers.
+
+\begin{lemma}[Root decomposition]\label{lem:root-decomposition}
+The map
+\[
+ \cR_{a,b}\times\Nzero^2\longrightarrow\N,
+ \qquad (r,i,j)\longmapsto r a^i b^j,
+\]
+is a bijection.
+\end{lemma}
+
+\begin{proof}
+For $n\in\N$, let $i$ be maximal with $a^i\mid n$ and let $j$ be maximal
+with $b^j\mid n$.  Since $a$ and $b$ are coprime, $a^i b^j\mid n$.  The
+integer $r=n/(a^i b^j)$ is divisible by neither $a$ nor $b$, by maximality.
+
+Conversely, suppose $n=r a^i b^j$ with $r\in\cR_{a,b}$.  The factor
+$r b^j$ is not divisible by $a$: otherwise $\gcd(a,b^j)=1$ would imply
+$a\mid r$.  Hence $i$ is the maximal exponent of a power of $a$ dividing
+$n$.  The same argument identifies $j$ as the maximal $b$-exponent.  Both
+exponents and then $r$ are unique.
+\end{proof}
+
+For $x\in\F_q^{\N}$ and $r\in\cR_{a,b}$, set
+\[
+ y^{(r)}_{i,j}=x_{r a^i b^j},
+ \qquad (i,j)\in\Nzero^2.
+\]
+The equation defining $X_{a,b}$ becomes
+\begin{equation}\label{eq:mixed-difference}
+ y_{i,j}-y_{i+1,j}-y_{i,j+1}+y_{i+1,j+1}=0.
+\end{equation}
+We omit the root superscript while studying one component.
+
+\begin{lemma}[Integration of the plaquette rule]\label{lem:integrate}
+An array $y\in\F_q^{\Nzero^2}$ satisfies
+\eqref{eq:mixed-difference} for all $i,j\geq0$ if and only if
+\begin{equation}\label{eq:integrated}
+ y_{i,j}=y_{i,0}+y_{0,j}-y_{0,0}
+ \qquad(i,j\geq0).
+\end{equation}
+Equivalently, after the gauge choice $v_0=0$, it has the unique form
+\begin{equation}\label{eq:u-plus-v}
+ y_{i,j}=u_i+v_j,
+ \qquad
+ u_i=y_{i,0},\quad v_j=y_{0,j}-y_{0,0}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Rearranging \eqref{eq:mixed-difference} gives
+\[
+ y_{i+1,j+1}-y_{i,j+1}=y_{i+1,j}-y_{i,j}.
+\]
+Thus the horizontal increment from row $i$ to row $i+1$ is independent of
+the column.  Summing these increments from $0$ to $i-1$ yields
+$y_{i,j}-y_{0,j}=y_{i,0}-y_{0,0}$, which is
+\eqref{eq:integrated}.  Direct substitution proves the converse.  The gauge
+formula \eqref{eq:u-plus-v} follows immediately and remains valid in
+characteristic two.
+\end{proof}
+
+The component solution group is therefore explicitly isomorphic to
+\[
+ \cY\cong \F_q^{\Nzero}\times\F_q^{\N},
+\]
+where the two factors record the full row axis and the positive column axis.
+The next proposition identifies these axes directly in the arithmetic index
+set.
+
+\begin{proposition}[Global free-axis coordinates]\label{prop:global-homeo}
+Let
+\[
+ \cB=\{n\in\N:ab\nmid n\}.
+\]
+The restriction map
+\begin{equation}\label{eq:restriction-map}
+ \rho_{\cB}:X_{a,b}\longrightarrow\F_q^{\cB},
+ \qquad x\longmapsto x|_{\cB},
+\end{equation}
+is a topological-group isomorphism.  If
+$n=r a^i b^j$ is its root representation, the inverse map is
+\begin{equation}\label{eq:inverse-map}
+ (\rho_{\cB}^{-1}z)_{r a^i b^j}
+ =z_{r a^i}+z_{r b^j}-z_r.
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:global-product}
+ X_{a,b}\cong\prod_{r\in\cR_{a,b}}\cY
+ \cong\F_q^{\cB}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For $n=r a^i b^j$, the product $ab$ divides $n$ exactly when $i,j\geq1$.
+The forward implication uses coprimality: if $i=0$ and $a\mid r b^j$, then
+$a\mid r$, contrary to $r\in\cR_{a,b}$; the case $j=0$ is symmetric.  Thus
+$\cB$ is precisely the union of the two axes in every root component, with
+the origin counted once.
+
+By \Cref{lem:integrate}, those axes determine every point of $X_{a,b}$, so
+\eqref{eq:restriction-map} is injective.  Conversely, for arbitrary
+$z\in\F_q^{\cB}$, formula \eqref{eq:inverse-map} is defined because all three
+indices on its right lie in $\cB$.  It agrees with $z$ on either axis and
+satisfies every plaquette equation by \Cref{lem:integrate}.  Hence restriction
+is surjective.
+
+Both maps are homomorphisms.  Restriction is continuous, and each coordinate
+of its inverse depends on only three coordinates of $z$.  The inverse is
+therefore continuous in the product topology.  The component product
+description follows from \Cref{lem:root-decomposition,lem:integrate}.
+\end{proof}
+
+\begin{remark}[Why coprimality is structural]\label{rem:coprime}
+The proof uses $\gcd(a,b)=1$ twice: to split divisibility exponents and to
+identify the free axes with $ab\nmid n$.  When the multipliers share a factor,
+the exponent coordinates can have multiple presentations, so
+\Cref{prop:global-homeo} is not asserted.
+\end{remark}
