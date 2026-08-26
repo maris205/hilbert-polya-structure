@@ -1,0 +1,146 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C173
+source_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_lyness_five_cycle_obstruction_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: positive-quadrant Lyness birational map with exact order five
+family: nonlinear integrable birational dynamical systems
+phase_space: X=(0,infinity)^2
+dynamics: F(x,y)=(y,(1+y)/x)
+parameters: none
+parameter_provenance: parameter-free classical recurrence frozen before validation
+arithmetic_origin: none; exact fifth-order dynamics has no intrinsic prime or prime-power structure
+clock: one application of F is one tick
+normalization: fixed-point cardinality for the classical Artin--Mazur convention and unweighted invariant-measure Koopman composition
+determinant_convention: classical Artin--Mazur series if all fixed sets are finite; ordinary det(I-zU) only if zU is trace class
+orbit_cutoff: all-point theorem; n<=50 and 100 rational starts are finite regression sentinels
+precision: exact rational and symbolic algebra
+training_data: none; no target table or parameter fitting
+forbidden_data: target zero or divisor tables, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+artifact_paths:
+  - results/c173_lyness_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: F(x,y)=(y,(1+y)/x) on the positive quadrant
+  arithmetic_origin: none; no prime correspondence or arithmetic weight emerges from the candidate
+  clock: one map application is one tick and F^5 is the proved full cycle
+  normalization: exact fixed-point cardinality and the Koopman convention U f=f o F
+  determinant_convention: classical Artin--Mazur fixed-point series and ordinary trace-class Fredholm determinant, both tested rather than regularized
+  cutoff: all-point proof with a 100-row rational grid and fixed-set ledger through n=50 as sentinels
+  precision: exact rational functions, radicals, Jacobian algebra, and cyclic group algebra
+  allowed_data: frozen map, positivity, change of variables, prime order five, and finite cyclic Fourier algebra
+  forbidden_data: external target, prime, arithmetic-local, automorphy, Hilbert--Polya, and Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: exact all-point order-five structure is derived without any target data
+  strongest_failure: the candidate has no intrinsic primes, prime powers, logarithmic periods, von Mangoldt weights, or arithmetic origin
+  arithmetic_controls:
+    - a finite five-cycle permutation shows that finite order alone need not destroy a fixed-point zeta; continuum cardinality is decisive here
+    - the identity map on a nonatomic space reproduces the infinite-fixed-set obstruction without arithmetic content
+    - the neighboring recurrence F_a(x,y)=(y,(a+y)/x) loses the frozen fifth-iterate identity for generic a, so the identity is structural at a=1 rather than fitted
+    - randomized arithmetic labels are not used and cannot create an intrinsic correspondence
+  artifacts:
+    - SOURCE_AUDIT.md
+    - results/HOSTILE_AUDIT.md
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the unique period-one point and all exact period-five points are classified globally
+  strongest_failure: primitive period-five orbits form an uncountable continuum and carry no arithmetic labels, isolated-orbit stability ledger, or prime correspondence
+  metrics:
+    all_point_period_classifications: 1
+    least_period_values: 2
+    finite_primitive_orbit_families: 0
+    target_correspondences: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c173_lyness_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: the first failure is located exactly at n=5 because Fix(F^5)=X is uncountable
+  strongest_failure: neither the classical Artin--Mazur series nor an ordinary trace-class Koopman Fredholm determinant exists
+  metrics:
+    first_failed_artin_mazur_coefficient: 5
+    finite_fixed_counts_at_multiples_of_five: 0
+    exact_source_determinants: 0
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: NOT_TESTABLE
+    precision_drift: 0
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/HOSTILE_AUDIT.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact finite-order geometry makes the absence of the required source determinant explicit
+  strongest_failure: no determinant exists on which to test continuation, functional equation, divisor, counting law, or Weil compression
+  analytic_structure:
+    conjugation_symmetry: NOT_TESTABLE
+    functional_equation: NOT_TESTABLE
+    continuation: NOT_TESTABLE
+    counting_law: NOT_TESTABLE
+  weil_compression:
+    natural_compression: none
+    arithmetic_side: none
+    verdict: STOP_SCOPED
+  artifacts:
+    - RESEARCH_QUESTION.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: invariant log-symplectic measure gives a natural order-five unitary Koopman operator, exact cyclic projections, and antiunitary reversal
+  strongest_failure: all five eigenvalues have infinite multiplicity; the operator is noncompact, non-Schatten, non-self-adjoint, and unrelated to a target spectrum
+  metrics:
+    natural_unitary_lifts: 1
+    exact_spectral_projections: 5
+    infinite_dimensional_eigenspaces: 5
+    antiunitary_reversal_identities: 1
+    self_adjoint_target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c173_lyness_evidence.json
+
+adversarial_controls:
+  controls_used:
+    - finite five-cycle permutation
+    - identity map on a nonatomic space
+    - neighboring Lyness parameter a not equal to one
+    - repaired-hash semantic mutations
+  proves_too_much_risk: the analysis concludes obstruction rather than an RH-like theorem and therefore cannot certify controls as target operators
+  verdict: PASS_WITH_REJECTION
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact fifth-order dynamics, period classification, invariant measure, reversal, and natural Koopman decomposition only
+blocking_conditions:
+  - no arithmetic origin or prime-like primitive-orbit correspondence
+  - uncountable fixed set at every positive multiple of five
+  - natural Koopman operator is noncompact and outside the trace-class Fredholm framework
+  - no target analytic or arithmetic comparison is authorized
+next_smallest_test: retain C173 as a finite-order continuum obstruction control; examine a different dynamics subtype with isolated countable primitive orbits
+round2_clues:
+  - exact integrability does not imply a usable periodic-orbit zeta on a continuum
+  - natural Koopman liftability can coexist with decisive A1 through A3 failure
+  - finite-order permutation controls separate order from continuum-cardinality failure
+route_b_invocation_allowed: false

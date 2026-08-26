@@ -1,0 +1,129 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C170
+source_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_kac_ring_cycle_classification_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: reversible finite Kac ring with an arbitrary binary marker word
+family: every N greater than or equal to one and every epsilon in {+1,-1}^N
+phase_space: Z/NZ times {+1,-1}
+dynamics: T(j,s)=(j+1,epsilon_j*s)
+parameters: N and the full marker word
+parameter_provenance: frozen source size and markers; no fitted parameter
+arithmetic_origin: none; the ring size and arbitrary marker word are kinetic inputs without intrinsic prime semantics
+clock: one site advance using the departed-site marker
+normalization: labelled states, least periods, then geometric cycles
+determinant_convention: finite Artin--Mazur zeta and same-clock Koopman determinant
+orbit_cutoff: all-parameter proof; class sentinel N<=24 and exhaustive marker sentinel N<=10
+precision: exact signs, permutations, integers, and polynomials
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+artifact_paths:
+  - results/c170_kac_ring_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: one Kac-ring permutation for every size and marker word
+  arithmetic_origin: none; marker parity carries no proved arithmetic or prime-power meaning
+  clock: one departed-marker site advance
+  normalization: labelled states then exact-period geometric cycles
+  determinant_convention: source Artin--Mazur zeta and inverse same-clock finite Koopman determinant
+  cutoff: all-parameter proof with finite exact sentinels only
+  precision: exact finite permutation and integer arithmetic
+  allowed_data: marker word and its source-derived product eta
+  forbidden_data: external target tables, arithmetic local inputs, and Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  arithmetic_origin: none; marker signs are arbitrary kinetic inputs and no intrinsic prime correspondence is proved
+  strongest_evidence: all classification data are derived solely from the frozen source marker word
+  strongest_failure: eta parity has no demonstrated arithmetic or prime semantics
+  arithmetic_controls:
+    - shuffled markers with the same eta have the same cycle law
+    - random marker words remain classified only by eta
+    - composite and prime ring sizes obey the same formulas
+    - a cyclic-translation normal form removes apparent marker complexity
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: exact primitive-cycle classification for every N and every marker configuration
+  strongest_failure: only one or two finite cycles occur and the system is exactly reducible to cyclic translation
+  metrics:
+    class_rows: 48
+    marker_words_exhaustively_checked: 2046
+    labelled_states_checked: 36868
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c170_kac_ring_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source zeta and inverse Koopman determinant are exact for every family member
+  strongest_failure: no target divisor, root count, validation region, or comparison is present
+  metrics:
+    exact_source_zeta_classes: 2
+    target_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: all source polynomial factors and root multiplicities are proved
+  strongest_failure: no target functional equation, counting law, Gamma factor, or continuation comparison is attempted
+  metrics:
+    target_global_structure_checks: 0
+  analytic_structure: finite source polynomials only; no continuation or target functional-equation comparison
+  weil_compression: absent because eta supplies no natural arithmetic weight side
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: counting-measure Koopman is the same-clock permutation unitary and the gauge supplies an explicit antiunitary reversor for every marker word
+  strongest_failure: the owner is finite and self-adjoint only for L<=2; it gives no target spectral construction
+  metrics:
+    same_clock_koopman_owners: 1
+    explicit_all_marker_reversor_constructions: 1
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c170_kac_ring_evidence.json
+
+adversarial_controls:
+  controls_used:
+    - shuffled same-parity marker words
+    - random marker words
+    - prime and composite ring sizes
+    - cyclic-translation normal form
+  proves_too_much_risk: every marker arrangement collapses to one of two non-arithmetic finite cycle types
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete finite kinetic cycle and operator classification with no arithmetic or target bridge
+blocking_conditions:
+  - no intrinsic arithmetic origin
+  - finite exactly reducible cycle system
+  - no target divisor comparison
+  - no target analytic structure comparison
+next_smallest_test: retain the all-marker gauge pattern and test a genuinely interacting reversible kinetic model
+round2_clues:
+  - an all-marker theorem can be complete while the dynamical family is exactly reducible
+  - parity classification is a reusable reversal mechanism but not arithmetic evidence
+  - future kinetic candidates must retain interaction beyond a cyclic normal form
+route_b_invocation_allowed: false

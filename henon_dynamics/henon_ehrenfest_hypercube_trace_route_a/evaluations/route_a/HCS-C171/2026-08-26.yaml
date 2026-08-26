@@ -1,0 +1,122 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C171
+source_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_ehrenfest_hypercube_trace_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: Ehrenfest coordinate-flip Markov operator on every finite hypercube
+family: reversible product-space Markov dynamics
+phase_space: the d-dimensional sign hypercube for every integer d at least 1
+dynamics: uniformly flip one coordinate per step
+parameters: integer d at least 1
+parameter_provenance: structural dimension, never fitted
+arithmetic_origin: none; the rule and parameter range do not distinguish primes
+clock: one coordinate flip is one discrete Markov tick
+normalization: uniform probability measure and ordinary finite-dimensional trace
+determinant_convention: D_d(z)=det(I-zP_d)
+orbit_cutoff: all-d theorem; d<=18 and n<=24 are sentinels
+precision: exact integer and rational arithmetic
+training_data: none
+forbidden_data: target tables, primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, Route B
+code_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+artifact_paths:
+  - results/c171_ehrenfest_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: P_d is the average of the d coordinate-flip permutations
+  arithmetic_origin: none
+  clock: one uniformly chosen flip
+  normalization: uniform hypercube probability and ordinary trace
+  determinant_convention: det(I-zP_d)
+  cutoff: all-d proof with d<=18 and n<=24 finite sentinels
+  precision: exact rational arithmetic
+  allowed_data: hypercube combinatorics, Walsh characters, binomial coefficients, Krawtchouk identities
+  forbidden_data: external target, prime, local arithmetic, automorphy, Hilbert--Polya, Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every dimension, including composite-only and neighboring controls, obeys the same generic binomial spectrum
+  strongest_failure: no prime orbit, prime-power repetition, logarithmic prime clock, or arithmetic weight is intrinsic
+  arithmetic_controls:
+    - randomized arithmetic labels
+    - composite-only dimension labels
+    - neighboring dimensions
+    - lazy-kernel parent
+  artifacts:
+    - SOURCE_AUDIT.md
+    - results/HOSTILE_AUDIT.md
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: for every d>1 the exact trace is owned by a genuine Markov average rather than a deterministic primitive-periodic-orbit system
+  strongest_failure: d=1 is only one isolated deterministic two-cycle; no uniform family-level primitive owner, orientation, phase, stability multiplier, or completeness inventory exists
+  metrics:
+    all_parameter_trace_theorems: 1
+    exact_return_theorems: 1
+    uniform_family_primitive_orbit_owners: 0
+    isolated_deterministic_boundary_dimensions: 1
+    prime_correspondences: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c171_ehrenfest_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the exact source determinant and trace-log identity hold for all d
+  strongest_failure: there is no frozen target divisor comparison and for d>1 the determinant is not a deterministic Artin--Mazur zeta
+  metrics:
+    exact_source_determinants: 1
+    target_divisor_comparisons: 0
+  artifacts:
+    - paper/main.pdf
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: finite source determinants have real coefficients and exact spectral symmetry
+  strongest_failure: no target functional equation, continuation, counting law, or Weil compression is supplied
+  analytic_structure: finite polynomial only; no target analytic comparison
+  weil_compression: not defined because no natural arithmetic side exists
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: P_d is a natural finite self-adjoint contraction on the frozen L2 space
+  strongest_failure: exp(-itP_d) changes the discrete Markov clock and path weights, so no same-clock quantization is obtained
+  metrics:
+    natural_self_adjoint_operators: 1
+    same_clock_unitary_lifts: 0
+    antiunitary_target_constructions: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+adversarial_controls:
+  controls_used:
+    - randomized labels
+    - composite dimensions
+    - neighboring dimensions
+    - lazy kernels
+  proves_too_much_risk: the same diagonalization applies to non-arithmetic product walks
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact all-dimensional source spectrum, determinant, returns and reversible compression only
+blocking_conditions:
+  - mandatory arithmetic gate fails
+  - for d>1 the weighted Markov trace is not a deterministic Artin--Mazur zeta, while d=1 is only an isolated two-cycle boundary
+  - no target global structure is compared
+  - the obvious unitary exponential changes clock and weights
+next_smallest_test: identify a non-fitted arithmetic product walk whose source rule itself generates prime-power repetition weights
+round2_clues: retain exact lumping and self-adjointness, reject post-hoc Hamiltonian reinterpretation
+route_b_invocation_allowed: false

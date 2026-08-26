@@ -1,0 +1,129 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C169
+source_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_furstenberg_skew_shift_spectral_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: irrational Furstenberg skew shift on the two-torus
+family: every irrational alpha modulo one
+phase_space: two-torus with normalized Haar measure
+dynamics: T_alpha(x,y)=(x+alpha,y+x) modulo one
+parameters: one irrational rotation parameter alpha
+parameter_provenance: frozen source parameter; never fitted
+arithmetic_origin: none; an arbitrary irrational rotation parameter has no intrinsic prime or prime-power semantics
+clock: one application of T_alpha
+normalization: normalized Haar measure and Fourier basis e_(m,k)
+determinant_convention: Artin--Mazur zeta from finite fixed sets; ordinary Fredholm determinant only when trace class
+orbit_cutoff: all-parameter proof; Fourier grid n<=32, |m|<=12, |k|<=8 and separate sector sentinel 0<|k|<=12
+precision: exact integer affine coefficients and formal irrational alpha
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: ee8af7b8e265fa4f901d5ed2d1c2edd51475b06f
+artifact_paths:
+  - results/c169_skew_shift_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: one affine skew shift for every irrational alpha
+  arithmetic_origin: none; no prime correspondence or arithmetic weight is intrinsic
+  clock: one map application
+  normalization: Haar measure and the stated Fourier convention
+  determinant_convention: source Artin--Mazur zeta; no invented regularized Koopman determinant
+  cutoff: all-parameter proof; Fourier sentinel n<=32, |m|<=12, |k|<=8 and separate sector sentinel 0<|k|<=12
+  precision: exact symbolic identities
+  allowed_data: frozen map and integer Fourier indices
+  forbidden_data: external target tables and all Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  arithmetic_origin: none; the parameter is an arbitrary irrational rotation and no intrinsic prime correspondence exists
+  strongest_evidence: source definitions use no target data or fitted arithmetic parameter
+  strongest_failure: neither periodic data nor operator sectors carry a proved arithmetic origin
+  arithmetic_controls:
+    - rational-alpha neighboring control has periodic points but changes the frozen irrational family
+    - rigid irrational rotation control also has no positive-period points
+    - randomized arithmetic labels cannot change the empty fixed-set theorem
+    - the same Fourier-sector mechanism holds without prime semantics
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every positive iterate has empty fixed set for every irrational alpha
+  strongest_failure: there are no primitive periodic orbits at all
+  metrics:
+    positive_iterate_fixed_counts: 0
+    sentinel_iterates: 32
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c169_skew_shift_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the source Artin--Mazur zeta is exactly one
+  strongest_failure: a constant zeta has no target divisor comparison, while the Koopman operator has no ordinary Fredholm determinant
+  metrics:
+    exact_source_zeta_families: 1
+    target_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: source spectral type and operator ideal boundary are completely proved
+  strongest_failure: no target functional equation, counting law, Gamma factor, or continuation comparison is attempted
+  metrics:
+    target_global_structure_checks: 0
+  analytic_structure: source zeta is the constant one; no target analytic comparison exists
+  weil_compression: absent because no arithmetic orbit side or source determinant owner is available
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: the same-clock Haar Koopman unitary has a complete Fourier decomposition and explicit antiunitary reversor
+  strongest_failure: it is noncompact, non-Schatten, has no ordinary Fredholm determinant, and supplies no self-adjoint target construction
+  metrics:
+    same_clock_koopman_owners: 1
+    explicit_antiunitary_reversors: 1
+    bilateral_shift_copies: countably_infinite
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - rational neighboring parameters
+    - rigid irrational rotation
+    - randomized arithmetic labels
+    - Fourier shifts with no arithmetic interpretation
+  proves_too_much_risk: the same spectral decomposition is generic to non-arithmetic affine skew dynamics
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete source spectral and reversal theorem, but empty periodic data and no arithmetic or target bridge
+blocking_conditions:
+  - no intrinsic arithmetic origin
+  - no primitive periodic orbits
+  - no target divisor or global analytic comparison
+  - no ordinary Fredholm determinant for the Koopman operator
+next_smallest_test: retain the spectral decomposition as a negative control and move to a model with nonempty intrinsic primitive cycles
+round2_clues:
+  - a natural Koopman lift can coexist with a completely empty periodic-orbit layer
+  - a source zeta equal to one is a hard obstruction rather than a target match
+  - future candidates must generate nonempty intrinsic primitive cycles before determinant work
+route_b_invocation_allowed: false

@@ -2317,3 +2317,27 @@ candidate-pivot record, content-addressed artifacts, hostile cross-review,
 and uniform release audit.  The five coordinates remain separate.  Their
 common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains
 unauthorized.
+
+## Route-A theorem-progress round C169--C173
+
+This round applies the expanded `A0--A4` roadmap and changes dynamical subtype
+in every paper: a parabolic Furstenberg skew shift, a deterministic Kac
+scatterer ring, a reversible Ehrenfest chain, a primitive finite-field
+multiplier, and the nonlinear integrable Lyness map.  An Anosov torus family,
+a baker-map continuation, and a generic complete-graph Hashimoto factorization
+were screened out as collisions with earlier repository lines.  Each retained
+paper closes an all-parameter theorem or exact obstruction and exposes its
+arithmetic and determinant boundary beside the result.
+
+- [C169 irrational Furstenberg skew-shift spectrum](henon_furstenberg_skew_shift_spectral_route_a/README.md) · [paper PDF](henon_furstenberg_skew_shift_spectral_route_a/paper/main.pdf)
+- [C170 all-marker Kac-ring cycle classification](henon_kac_ring_cycle_classification_route_a/README.md) · [paper PDF](henon_kac_ring_cycle_classification_route_a/paper/main.pdf)
+- [C171 Ehrenfest hypercube trace and Krawtchouk lumping](henon_ehrenfest_hypercube_trace_route_a/README.md) · [paper PDF](henon_ehrenfest_hypercube_trace_route_a/paper/main.pdf)
+- [C172 primitive finite-field multiplier](henon_primitive_field_multiplier_route_a/README.md) · [paper PDF](henon_primitive_field_multiplier_route_a/paper/main.pdf)
+- [C173 Lyness five-cycle determinant obstruction](henon_lyness_five_cycle_obstruction_route_a/README.md) · [paper PDF](henon_lyness_five_cycle_obstruction_route_a/paper/main.pdf)
+
+See the [C169--C173 batch plan](BATCH_PLAN_C169_C173.md) and
+[batch review](BATCH_REVIEW_C169_C173.md) for the A0--A4 theorem ledger,
+candidate pivots, content-addressed artifacts, two integrity gates, and uniform
+release audit.  The five source systems and their verdict coordinates remain
+separate.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B
+remains unauthorized.

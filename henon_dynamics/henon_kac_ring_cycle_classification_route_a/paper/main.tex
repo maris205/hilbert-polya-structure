@@ -1,0 +1,119 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.72in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\title{Exact Cycle Classification for Every Finite Kac Ring}
+\author{Route-A structural certificate C170}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every ring size and every binary marker configuration, we classify all
+cycles of the reversible finite Kac ring.  The marker product $\eta$ is the
+only invariant needed: positive product gives two cycles of length $N$, while
+negative product gives one cycle of length $2N$.  We derive all fixed counts,
+the Artin--Mazur zeta, and the finite Koopman determinant.
+\end{abstract}
+\noindent\textbf{Keywords:} Kac ring; marker configuration; exact period;
+primitive cycle; dynamical zeta; Koopman permutation; time reversal.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对任意环长和任意二元标记配置的可逆有限\foreignlanguage{english}{Kac}环给出完整周期分类。
+所有动力信息只依赖标记乘积 $\eta$：正乘积产生两个长度为 $N$ 的周期，负乘积产生
+一个长度为 $2N$ 的周期。由此严格导出所有时刻的不动点数、动力 $\zeta$ 函数、
+有限维\foreignlanguage{english}{Koopman}行列式与反酉时间反演。
+
+\noindent 关键词：\foreignlanguage{english}{Kac}环；标记配置；精确周期；本原周期；动力 $\zeta$ 函数；
+\foreignlanguage{english}{Koopman}置换；时间反演。
+\end{otherlanguage}
+\section{All-marker classification}
+On $X_N=\mathbb Z/N\mathbb Z\times\{\pm1\}$ let
+\[
+T(j,s)=(j+1,\varepsilon_j s),\qquad
+\eta=\prod_{j=0}^{N-1}\varepsilon_j.
+\]
+One circuit gives $T^N(j,s)=(j,\eta s)$.  Since every return time is divisible
+by $N$, all states have exact period $N$ when $\eta=+1$ and exact period $2N$
+when $\eta=-1$.  Hence there are respectively two and one geometric cycles.
+With $L=N$ or $2N$ and $c=2N/L$,
+\[
+\#\operatorname{Fix}(T^n)=2N\,\mathbf1_{L\mid n},\quad
+\zeta_T(z)=(1-z^L)^{-c},\quad
+\det(I-zU_T)=(1-z^L)^c.
+\]
+The eigenvalues of the counting-measure Koopman permutation are all $L$-th
+roots of unity, each with multiplicity $c$.
+The zeta exponent counts geometric cycles, whereas the fixed count uses all
+$2N$ labelled states; keeping those multiplicities separate prevents a
+factor-of-$L$ error.  The two $N=1$ cases are included: positive product is
+the identity on two states, and negative product is one transposition.
+\section{Gauge and reversal}
+Set $g_0=1$, $g_j=\prod_{r<j}\varepsilon_r$, and $q=g_js$.  In $(j,q)$
+coordinates the map advances the site, preserves $q$ away from the wrap, and
+sends $q$ to $\eta q$ at the wrap.  If $\eta=+1$, reflection $j\mapsto-j$
+reverses each cycle.  If $\eta=-1$, define
+$\psi(j,+1)=j$ and $\psi(j,-1)=N+j$; the map becomes translation by one on
+$\mathbb Z/(2N)\mathbb Z$, reversed by $t\mapsto-t$.  Pullback through the
+gauge yields an involution $R$ with $RTR=T^{-1}$.  Thus
+$\Theta f=\overline{f\circ R}$ is antiunitary and
+$\Theta U_T\Theta=U_T^{-1}$.  The permutation unitary is self-adjoint exactly
+when $L\le2$.
+\section{Route-A decision and evidence boundary}
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Gate&Verdict&Reason\\
+\midrule
+A0&\texttt{FAIL}&no intrinsic arithmetic origin\\
+A1&\texttt{WEAK}&complete but finite reducible cycles\\
+A2&\texttt{FAIL}&no target divisor comparison\\
+A3&\texttt{FAIL}&no target global comparison\\
+A4&\texttt{NATURAL\_QUANTIZATION}&same-clock permutation and reversal\\
+\bottomrule
+\end{tabular}
+\end{center}
+The v0.2 overall verdict is \texttt{ROUTE\_A\_REJECTED}, because A0 fails;
+Route B is false.  The paper is retained as theorem progress, not as a primary
+Hilbert--P\'olya candidate.
+
+The release ledger contains 48 class rows through $N=24$.  An independent
+implementation exhausts all 2{,}046 marker words through $N=10$, covering
+36{,}868 labelled states, 36{,}868 fixed-time checks, and 73{,}736 reversal
+identities.  Its checker passes 114{,}056 assertions, SymPy passes 221 matrix
+and polynomial checks, byte replay is exact, and 17 hostile mutations are
+rejected.  These are regression sentinels only; the all-size, all-marker
+result rests on the circuit and gauge proofs.  Citation and reference
+registries each have population zero, and no novelty or priority claim is
+made.
+
+\paragraph{Limitations.}
+The system is a finite, exactly reducible kinetic toy model.  Its primitive
+cycles have no proved prime semantics.  We make no target divisor,
+functional-equation, counting-law, arithmetic local-factor, Euler-factor,
+root-number, automorphy, or Hilbert--P\'olya claim.  Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing.  AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+\end{document}

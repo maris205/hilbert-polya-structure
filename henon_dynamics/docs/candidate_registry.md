@@ -3,6 +3,36 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C169--HCS-C173 theorem-progress round (2026-08-26)
+
+This is the first batch recorded under Route-A evaluator 0.2.0, frozen to
+`../../flow_systems/skills/route-a-evaluator.md` at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`;
+the Hénon-local skill remains the older 0.1.0 vocabulary.  Every strict tuple
+therefore includes the arithmetic-relevance gate `A0`.  A proposed Anosov
+torus family was rejected as a C125 parameter variation, a baker-map proposal
+was rejected as too close to the C148/C158/C163/C168 Walsh lineage, and a
+complete-graph Hashimoto factorization was rejected after the C15/C29--C30
+collision scan.  The five replacements are separate dynamical subtypes:
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C169 | Every irrational Furstenberg skew shift has no positive-period point and source zeta `1`; its Haar Koopman operator has a pure-point component whose eigenvalues are dense on the unit circle and an orthogonal countably infinite-multiplicity Lebesgue component.  The exact affine reversor gives same-clock antiunitary time reversal, while noncompactness excludes every finite Schatten class and an ordinary Fredholm determinant. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_furstenberg_skew_shift_spectral_route_a/`](../henon_furstenberg_skew_shift_spectral_route_a/) |
+| HCS-C170 | Every marked Kac ring is classified by marker parity: it consists of two exact `N`-cycles when the marker product is `+1` and one exact `2N`-cycle when it is `-1`.  This yields all-iterate fixed counts, the complete zeta, the finite Koopman determinant, and a gauge-derived reversor for every marker word. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_kac_ring_cycle_classification_route_a/`](../henon_kac_ring_cycle_classification_route_a/) |
+| HCS-C171 | The `d`-dimensional Ehrenfest operator has the complete Walsh spectrum `1-2j/d` with multiplicity `binom(d,j)`, exact power traces and determinant, and an exact self-adjoint Krawtchouk lumping to the Hamming-weight birth--death chain.  For `d>1` the trace-log object is a weighted Markov determinant rather than a deterministic Artin--Mazur zeta; `d=1` is the isolated two-cycle and supplies no uniform family-level arithmetic primitive layer.  Unitary evolution would change the source clock. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_ehrenfest_hypercube_trace_route_a/`](../henon_ehrenfest_hypercube_trace_route_a/) |
+| HCS-C172 | Multiplication by a primitive element of every finite field has one fixed point and one cycle through all nonzero elements.  Its fixed counts, zeta, Koopman determinant, spectrum, inversion reversor, and exact self-adjoint boundary `Q<=3` are uniform in the prime power `Q`; composite cyclic controls prove that no prime-to-orbit or logarithmic clock follows. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_primitive_field_multiplier_route_a/`](../henon_primitive_field_multiplier_route_a/) |
+| HCS-C173 | The positive Lyness map has order five, one fixed point, and uncountably many fixed points at every fifth iterate.  Its natural invariant-measure Koopman unitary has all five fifth roots with infinite multiplicity, but is noncompact, non-Schatten, non-self-adjoint, and has no ordinary Fredholm determinant; the classical Artin--Mazur zeta is undefined. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_lyness_five_cycle_obstruction_route_a/`](../henon_lyness_five_cycle_obstruction_route_a/) |
+
+The C172 phase-space cardinality is intrinsic arithmetic input but does not
+supply rational-prime primitive objects, prime-power repetitions in the
+explicit-formula sense, `log p`, or von-Mangoldt weights.  The other four
+systems fail `A0` outright.  The natural finite or Koopman operators recorded
+at `A4` are not combined and are not Hilbert--Polya operators.  No candidate
+imports a target divisor, zero or prime census, functional equation, target
+counting law, arithmetic local datum, Euler factor, root number, or automorphy
+object.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
+`route_b_invocation_allowed=false` throughout.
+
 ## HCS-C164--HCS-C168 theorem-progress round (2026-08-25)
 
 This round enforces one all-parameter advance per paper while changing
