@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  node distance=7mm and 9mm,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,text width=0.22\linewidth},
+  theorem/.style={box,fill=blue!7,draw=blue!55!black},
+  arithmetic/.style={box,fill=green!8,draw=green!45!black},
+  boundary/.style={box,fill=red!5,draw=red!45!black},
+  arrow/.style={-{Latex[length=2.2mm]},thick},
+  dashedarrow/.style={-{Latex[length=2.2mm]},thick,dashed}
+]
+\node[arithmetic] (owner) {$U_p=\prod_{\ell\ne p}\mathbf Z_\ell^\times$\newline
+  $B_p=U_p/e_p(\widehat{\mathbf Z})$};
+\node[theorem,right=of owner] (primary) {canonical primary factors\newline
+  $B_p\cong\prod_r B_{p,(r)}$};
+\node[theorem,right=of primary] (dual) {dual restriction kernels\newline
+  $K_{p,r}=B_{p,(r)}^\vee$};
+
+\node[arithmetic,below=of dual] (defect) {local defect\newline
+  $\kappa_r(p)$};
+\node[theorem,left=of defect] (ulm) {complete finite and\newline transfinite Ulm sequence};
+\node[theorem,left=of ulm] (compact) {characteristic quotient\newline
+  $B_{p,(r)}/\overline{\operatorname{Tor}(B_{p,(r)})}$};
+
+\node[theorem,below=of compact,text width=0.39\linewidth] (classification) {classification theorem\newline
+  $B_p\cong_{\mathrm{top}}B_q\iff
+  \kappa_r(p)=\kappa_r(q)$ for every prime $r$};
+\node[boundary,right=of classification,text width=0.31\linewidth] (firewall) {not inferred:\newline
+  $p=q$, actual packet topology, measure, flow, trace, operator, or determinant};
+
+\draw[arrow] (owner) -- (primary);
+\draw[arrow] (primary) -- (dual);
+\draw[arrow] (dual) -- (defect);
+\draw[arrow] (defect) -- (ulm);
+\draw[arrow] (ulm) -- (compact);
+\draw[arrow] (compact) -- (classification);
+\draw[dashedarrow] (classification) -- node[above,font=\scriptsize]{owner ceiling} (firewall);
+\end{tikzpicture}

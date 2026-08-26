@@ -13,7 +13,10 @@
 | `5-quantum-flow` — Route A / A4 与有限 Route B / B1--B3 | **完成，独立审稿 ACCEPT** | 典范 Koopman 生成元定义完整且自伴，但点谱为 `(2*pi/log(2))*Q`、每点无穷重、全谱与本质谱均为 `R`，故在 B3 严格失败。见[论文](papers/5-quantum-flow/paper/paper.pdf)。 |
 | `6-cohomological-owner` — 同母体 operator ownership | **完成，独立审稿 ACCEPT** | 精确 Hasse--Weil 行列式由分次 étale Frobenius 拥有，自伴悬挂时间由另一 Koopman 算子拥有；共同算术母体不允许跨算子拼接 Route-B credits。见[论文](papers/6-cohomological-owner/paper/paper.pdf)。 |
 | `7-packet-groupoid` — Route A / A0--A3 | **完成，引用审计 ACCEPT、同行评审 FINAL ACCEPT** | 修复 finite-kernel `E_f` 的同一来源拓扑桥并证明其横向塌缩与严格非满射；在显式 proxy 上分离局部有限 return distribution 与右半平面零模 trace-log determinant，证明后者 base-blind、可编译任意时钟，故四个 typed records 均保持 `ROUTE_A_EXPLORATORY`。见[论文](papers/7-packet-groupoid/paper/paper.pdf)、[中文摘要](papers/7-packet-groupoid/notes/stage7_summary_zh.md)与[Route-A 审计](papers/7-packet-groupoid/notes/route_audit.md)。 |
-| `8-isotropy-trace` — Route A / A0--A4 | **完成，引用审计 ACCEPT、同行评审 FINAL ACCEPT** | 在一个已选定的实际 Deninger `E_f` 素轨道上，dual-Haar regular FNS trace 精确抹去所有非零回归，而 trivial-character C*-trace 保留完整重复 comb 且不能沿固定 regular map 正常延拓；packet 主问题仍为 `NOT_TESTABLE`，正时间 coefficient-one 结果仅是 scalar Radon ledger。五份 typed records 均为 `ROUTE_A_EXPLORATORY`，Route B 未调用。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[中文摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与[Route-A 审计](papers/8-isotropy-trace/notes/route_audit.md)。 |
+| `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
+| `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
+| `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 中文流程记录已交付，待终止确认** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)与[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)。 |
+| `24--28` — 新一轮五种连续时间子型 | **5/5 进入 Stage 1；初始化审计通过；每篇均有可核验进展** | P24 证明 level-`(3)` neat/torsion-free lemma 并冻结 `Q(i)` prime-ideal owner；P25 证明 no-eclipse、冻结内部预声明负控；P26 导出 level-11 newform 正 time-change 周期变分；P27 证明 residual congruence inverse limit 无周期点但不预填正式 Route verdict；P28 区分 `N->infinity` tensor-power family 与固定 `Delta^L` candidate。见[批次启动记录](BATCH_START_PAPERS_24_28.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -21,6 +24,29 @@
 
 论文 2--6 的统一封板、Route 状态、障碍、发布哈希与下一批优先级见
 [五篇批次报告](BATCH_REPORT_PAPERS_2_6.md)。
+
+## Paper 22 结论概要
+
+对每个 `N>1`，有限自由根覆盖 `k[x] -> k[s]`、`x -> s^N` 强迫出的
+Verschiebung 局部前像在 overlap 上不能下降。因此，`V_N` 在 fppf site 上不存在
+通过 `omega` 的加性 sheaf lift；finite-flat site 的非存在性由独立论证得到。
+等价地，对 `e:0->K->Z->W->0` 不存在 `u:K->K` 使
+`u_*e=V_N^*e`；`N=1` 的 identity lift 是严格对照。该反例要求修正
+Deninger v1 Corollary 4.6 的 sectionwise Dedekind-ring 表述，但不否定
+Propositions 4.3、4.5 或 Corollary 4.7。
+
+## 下一轮 Papers 24--28
+
+五篇均处于 Proposal Stage 1 / Route A A0--A1，Route B 未调用，Gates A--E
+未到达；大胆假设全部标为 `HEURISTIC`，没有预发正式 Route tuple。
+
+| Paper | 子类型 | 当前明确进展 |
+|---|---|---|
+| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow | 自包含证明 Gaussian level-`(3)` neat/torsion-free；主目标冻结为 `Q(i)` Dedekind-zeta prime-ideal calibration，rational-prime push-forward 单列 |
+| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering | `d=6a` no-eclipse 推导闭合；exact multiple scattering 与 semiclassical zeta 分离；内部预声明 half-density `PROVES_TOO_MUCH` 负控尚未执行 |
+| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | 冻结 `rho` 为 time-density、速度乘子 `1/rho` 与 `X_epsilon=X/rho`；正性区间和 `T_epsilon=ell+epsilon integral alpha_f` 已证明，prime link 仍为 `HEURISTIC` |
+| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit geodesic lamination | 已严格证明 residual tower 极限流无周期点，标记 `PROVED_A1_OBSTRUCTION`；仅作 informal Route-A mapping，正式 tuple/overall 未分配，A2--A4 未评价 |
+| [P28](papers/28-bolza-magnetic-flow/README.md) | magnetic Hamiltonian flow | `b=1/2` 给出 `c1=1` 并以 connection holonomy 取代全局 potential；冻结 `H_N=Delta^{L^N}` 的 `N->infinity` 半经典族，固定 `Delta^L` 的高能 trace/轨道 ownership 保持 `OPEN/NOT_ESTABLISHED` |
 
 ## 按时间记录
 
@@ -50,6 +76,8 @@
 
 8-isotropy-trace - Route A / A0-A4（完成） - 在同一个已选定实际 `E_f` 素轨道上闭合 one-orbit groupoid、character trace、fixed regular FNS trace 与 finite-corner normality obstruction；packet 主问题保持 `NOT_TESTABLE`，固定单轨 analogue 为 `REFUTED`，正时间 closed-point scalar ledger 为 `PASS`，18/18 target-free controls 通过，五份 Route-A records 均保持 `ROUTE_A_EXPLORATORY`，Route B 未调用
 
+9-packet-separation - Route A / A0-A4（完成） - 证明真实有限核素数 packet、全部继承周期轨道和时间轨道商均为非平凡不可分空间，限制对角轨道关系非闭；据此撤回 Paper 8 对真实轨道的标准圆/LCH 归属，并将 Zak、Poisson、FNS 与 character-trace 结果严格重归属到标准圆代理，20/20 target-free controls 通过，八份 Route-A records 均保持 `ROUTE_A_EXPLORATORY`，Route B 未调用
+
 ## 本批（论文 2--6）统一结论
 
 最强正进展是得到一个完全精确的有限域校准链：闭点、Frobenius 周期、悬挂
@@ -78,26 +106,49 @@ Route-A 记录均为 `ROUTE_A_EXPLORATORY`，Route B 未调用。下一项最小
 groupoid/Haar/representation/trace transport；它必须在 singleton base、
 copied packet 或 arbitrary-clock controls 中表现出非平凡区分力。
 
-## Paper 8 单篇检查点
+## Paper 8--9 版本化检查点
 
-Paper 8 的最强进展是在同一个已选定实际 `E_f` 素轨道及同一个 fixed regular
-map 上闭合了 normality-versus-return dichotomy：dual-Haar FNS trace 是 normal
-的，但精确值 `Tau_L(a_f)=L f(0)` 抹去所有非零回归；trivial-character
-C*-trace 则保留 `tau_0(a_f)=L sum_r f(rL)`，却不能正常延拓到该 fixed
-regular completion。因此固定单轨 normal-extension analogue 为 `REFUTED`。
+Paper 8 在标准 Hausdorff 圆上得到的局部算子数学仍然成立：dual-Haar regular
+FNS trace 的值为 `Tau_L(a_f)=L f(0)`，会抹去全部非零回归；
+trivial-character C*-trace 则给出 `tau_0(a_f)=L sum_r f(rL)`，并且不能沿固定
+regular map 正常延拓。Paper 9 的更正不否定这些公式，而是撤回其“真实继承
+Deninger 轨道”owner：真实轨道的继承拓扑不是标准圆，而是非平凡不可分拓扑。
 
-这一局部反证不能提升到 packet：继承的 `Gamma_p` Hausdorff/LCH、`Q_p`
-Hausdorff/local-triviality、标准 packet completion、Radon disintegration 与
-same-map restriction/disintegration/compression bridge 仍未闭合，所以 packet
-主问题保持 `NOT_TESTABLE`。另一个独立正结果
-`Theta_+=sum_p log(p) sum_(r>=1) delta_(r log p)` 是 coefficient-one 的正时间
-scalar Radon ledger；系数一来自 rational closed-point counting，不是
-packet-orbit multiplicity、横向测度唯一性或全局 operator trace。
+Paper 9 通过同时实数/profinite 逼近与固定阶段有限核特征收敛，证明对同一
+`Gamma_p` 中任意有序点对 `x,y`，常值序列 `x,x,...` 都收敛到 `y`。因此
+`Gamma_p`、每条继承轨道及 `Q_p` 均不可分且非 `T0`，限制对角等价关系非闭；
+朴素阿代尔双重商中的真实继承 `C_p` 也不可分。Connes--Consani scaling site
+内生定义的 Hausdorff 圆与显式标准圆代理仍是不同对象，不受此定理否定。
 
-五份 typed Route-A records 均为 `ROUTE_A_EXPLORATORY`：packet 与 bare-orbit
-records 为 `A1_WEAK`，regular trace 为 `A1_FAIL`，character trace 与 scalar
-record 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`。Route B
-`route_b_invocation_allowed=false`，没有 Route-B YAML，也不是
-`ROUTE_B_REJECTED`。下一项最小主检验是证明或否证定义单个 `Gamma_p` 的
-restricted diagonal equivalence relation 是否 closed；只有正结果才允许重开
-标准 packet LCH/completion 与 source-selected same-map trace transport。
+Stage 9 以八份 typed Route-A records 完成版本化重归属：真实 packet/轨道的
+标准 LCH--Hausdorff branches 为 `A1_FAIL`，真实拓扑定理 records 为
+`A1_WEAK`，标准圆 regular trace proxy 为 `A1_FAIL`，标准圆 trivial-character
+proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
+`ROUTE_A_EXPLORATORY`，Route B 未调用。正时间 coefficient-one scalar ledger
+`Theta_+` 与拓扑无关，保持原 Stage-8 记录且不重复发放 credit。下一项最小
+检验是研究不可分 packet 的 `T0`/Hausdorff 反射与连续可观测量究竟保留多少
+算术信息，而不是再把标准圆拓扑倒灌给来源对象。
+
+15-wieferich-ulm-packet-bases - 理论全文 / 用户授权 Stage-2 草稿（2026-08-22） - 已形成 14 页论文与可复建 PDF，证明裸紧群 `B_p` 的 Wieferich--Ulm 主分量结构及按 `kappa_r(p)` 的完整拓扑分类，并以 `r=11` 区分 `B_2` 与 `B_3`；Route-A 仅 required-input `NOT_TESTABLE` 且不分配 A0--A4/overall verdict，Route-B 为 `ROUTE_B_NOT_TESTABLE`，无 Route 晋级、发布或投稿授权。
+
+15-wieferich-ulm-packet-bases - Stage-2.5 完整性门 PASS（2026-08-22） - 10/10 来源、22/22 引用语境、8/8 claim 与 14 条 evidence rows 已核验；一轮局部书目/措辞修订后 open issues=0，14 页 PDF 干净重建通过。当前停在强制用户确认点，Stage 3 模拟同行评审尚未启动，发布/投稿/Route 晋级仍无授权。
+
+19-standardized-nerve-cohomology - Phase-2 去留结题/归并（2026-08-24） - 在精确 author-complex 比较成立的条件下，标准化 owner 的连续非正规化上同调 theorem shape 为 `H^0=H^1=R^Q`、`H^n=0 (n>=2)`；比较、cup 与高阶 `J*` 尚待本地证明。经典先例已足以停止独立 Paper 19，材料留作 Paper 12 修订。
+
+20-wieferich-ulm-separation - Phase-2 技术推论/归并（2026-08-24） - 每个固定有限 `kappa` 模式具有显式乘积相对素数密度，故每个固定有限坐标投影都有正密度无限纤维；局部计数有既有先例且一篇 2023 近邻全文仍待核，停止独立 Paper 20，归并 Paper 15。
+
+21-effective-exact-order-witnesses - Phase-2 来源门 PASS / 存活（2026-08-24） - 精确条件总密度修正为 `(r-1)/r^(m+1)`，单一冻结类密度为 `r^(-(m+1))`；无条件与 ERH/GRH 黑箱最小见证界已闭合。Phase 3 唯一硬门是计算 `E/Q(zeta_r)` 的局部 Artin 导子并证明相对导子界确有改进。
+
+22-fppf-verschiebung-lifts - Stage-6 中文流程记录已交付 / 等待终止确认（2026-08-26） - 13 页终稿论文保持不变；1,653-word 中文 Markdown 与 14 页流程记录 PDF 已生成，完整记录 Stage 1--6、迭代、whole-pipeline Collaboration Depth `Zone 2 — Mid (8/5/6)`、AI 自省和协作质量 `80/100`。当前 Stage 6 为 `in_progress`，需下一次明确确认才终止；Git 同步已获授权，投稿、公开发布、外联和 Route 晋级仍未授权。
+
+23-normal-trace-return-erasure - Phase-2 技术短注/归并（2026-08-24） - normal semifinite tracial weights 是中心密度权；全圆平移不变性恰好选出标量 Haar 权（正标量时为 FNS）并推出非零回归擦除，反向命题在一般 semifinite 类上未证明。分类主体属经典结果，停止独立全文，优先并回 Paper 8，且不转移到真实非 Hausdorff packet。
+
+24-bianchi-holonomy-flow - Stage 1 / A0--A1（2026-08-26） - 已自包含证明 level-`(3)` neat/torsion-free，冻结 complex length、cusp-aware zeta 与 `Q(i)` prime-ideal owner；rational-prime push-forward 单列 split/inert/ramified 规则，正式 Route tuple 尚未分配。
+
+25-three-disk-scattering-flow - Stage 1 / A0 负控（2026-08-26） - `d=6a` no-eclipse 条件已证明，exact multiple-scattering determinant 与 semiclassical orbit zeta 已分层；算术来源按控制设计缺失，word-length-12 half-density `PROVES_TOO_MUCH` 检验内部预声明但尚未执行，正式 tuple 未分配。
+
+26-level11-newform-time-change - Stage 1 / A0--A1（2026-08-26） - level-11 newform one-form、time-density `rho`、速度乘子 `1/rho`、`X/rho` generator、正性区间和闭轨周期一阶变分已冻结；Hecke/Euler decomposition 保持 `HEURISTIC`。
+
+27-congruence-inverse-limit-no-go - Stage 1 / local A1 obstruction（2026-08-26） - 对 `Gamma(3n!)` residual tower 证明极限 geodesic flow 无任何周期点，记录 `PROVED_A1_OBSTRUCTION`；因 formal evaluator tuple 尚未分配，不写正式 `A1_FAIL`，有限层 renormalized statistic 必须另列 owner。
+
+28-bolza-magnetic-flow - Stage 1 / A0--A1（2026-08-26） - 曲率 `-1` Bolza surface 上 `b=1/2` 给出 degree-one flux；非 exact 场排除全局 `A`，phase owner 修正为 connection holonomy；主量子架构冻结为随 `N` 改变的 `Delta^{L^N}` 半经典族，固定 `Delta^L` 的高能 trace 与磁轨 ownership 明确保留为 `OPEN/NOT_ESTABLISHED`，Route B 未调用。

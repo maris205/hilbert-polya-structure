@@ -1,0 +1,56 @@
+\begin{tikzpicture}[
+  font=\small,
+  owner/.style={draw=blue!65!black, rounded corners, very thick, align=center,
+                fill=blue!4, minimum width=46mm, minimum height=14mm},
+  case/.style={draw=blue!65!black, rounded corners, thick, align=center,
+               fill=blue!3, minimum width=38mm, minimum height=11mm},
+  result/.style={draw=green!45!black, rounded corners, thick, align=center,
+                 fill=green!5, minimum width=48mm, minimum height=12mm},
+  proxy/.style={draw=orange!75!black, rounded corners, thick, align=center,
+                fill=orange!7, minimum width=43mm, minimum height=11mm},
+  forbid/.style={draw=red!70!black, dashed, rounded corners, thick, align=center,
+                 fill=red!3, minimum width=43mm, minimum height=11mm},
+  arr/.style={-{Latex[length=2.5mm]}, thick},
+  law/.style={-{Latex[length=2.5mm]}, dotted, thick, purple!75!black}
+]
+\node[owner] (actual) at (0,0)
+  {each actual owner $X$\\
+   \texttt{ACT-PACKET-p}, \texttt{ACT-ORBIT-p-a},\\
+   \texttt{ACT-Q-p} (all indiscrete)};
+
+\node[result] (reflect) at (7.2,2.3)
+  {$\{*\}$\\$K_0$, Hausdorff, and CRH reflections};
+\node[result] (observe) at (7.2,0)
+  {$\mathbb C1_X$ and constant maps\\fixed $B(\ell^2)$: norm, SOT, WOT};
+\node[result] (measure) at (7.2,-2.3)
+  {$\mathcal B(X)=\{\varnothing,X\}$\\$\mathcal M^+_{\rm fin}(X)\cong[0,\infty)$};
+\draw[arr] (actual.north east) -- node[above,sloped,fill=white,inner sep=1pt]{P10-1} (reflect.west);
+\draw[arr] (actual.east) -- node[above,fill=white,inner sep=1pt]{\scriptsize P10-2/5b} (observe.west);
+\draw[arr] (actual.south east) -- node[below,sloped,fill=white,inner sep=1pt]{P10-3--4} (measure.west);
+
+\node[case] (qcase) at (-1.8,-5.2)
+  {\texttt{ACT-Q-p} only\\transported group law $*_p$};
+\node[result] (qchar) at (3.3,-5.2)
+  {topological group\\$\operatorname{Hom}_{\rm cont}(-,\mathbb T)=\{1\}$};
+\node[proxy] (unitquot) at (8.3,-5.2)
+  {$U_p/H_p$\\algebraic quotient set};
+\draw[arr] (qcase) -- node[above,fill=white,inner sep=0.5pt]{\scriptsize P10-5} (qchar);
+\draw[law] (qcase) to[bend left=14]
+  node[above,align=center]{set bijection $\phi_p$;\\law transport only} (unitquot);
+
+\node[case] (orbitcase) at (-1.8,-8.0)
+  {\texttt{ACT-ORBIT-p-a} only\\actual indiscrete topology};
+\node[proxy] (circle) at (3.3,-8.0)
+  {\texttt{STD-CIRCLE-p}\\ordinary Hausdorff circle};
+\draw[arr, blue!65!black] (circle.north west) to[bend left=14]
+  node[above,align=center] {$\beta_{p,a}^{-1}$\\continuous} (orbitcase.north east);
+\draw[arr, red!70!black, dashed] (orbitcase.south east) to[bend right=14]
+  node[below,align=center] {$\beta_{p,a}$\\not continuous} (circle.south west);
+
+\node[forbid] (excluded) at (8.3,-8.0)
+  {not inferred: representations,\\unbounded operators, traces};
+\draw[red!70!black, very thick] ($(excluded.north west)+(2mm,-2mm)$) --
+  ($(excluded.south east)+(-2mm,2mm)$);
+\draw[red!70!black, very thick] ($(excluded.south west)+(2mm,2mm)$) --
+  ($(excluded.north east)+(-2mm,-2mm)$);
+\end{tikzpicture}

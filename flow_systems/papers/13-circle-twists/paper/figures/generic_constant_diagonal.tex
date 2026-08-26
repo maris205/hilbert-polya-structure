@@ -1,0 +1,57 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  >=Latex,
+  algebra/.style={draw=violet!70!black, rounded corners=2pt, very thick,
+    fill=violet!5, align=center, minimum height=9mm, inner sep=4pt},
+  mapbox/.style={draw=blue!65!black, rounded corners=2pt, thick,
+    fill=blue!4, align=center, inner sep=4pt},
+  branch/.style={draw=black!60, rounded corners=2pt, thick,
+    fill=black!3, align=center, minimum height=9mm, inner sep=4pt},
+  p13/.style={draw=teal!70!black, rounded corners=2pt, thick, dashed,
+    fill=teal!4, align=center, minimum height=9mm, inner sep=4pt},
+  map/.style={->, very thick, blue!70!black},
+  inclusion/.style={->, very thick, violet!70!black},
+  inst/.style={->, thick, dashed, teal!70!black},
+  lab/.style={fill=white, inner sep=1.5pt, align=center}
+]
+  \node[algebra, text width=28mm] (C) at (0,4.5)
+    {arbitrary\\$C^*$-algebra $C$};
+  \node[mapbox, text width=38mm] (phis) at (4.4,4.5)
+    {isometric $*$-maps\\$\varphi_i:C\to B_i$, $i\in I$};
+  \node[algebra, text width=34mm] (Bi) at (8.8,4.5)
+    {arbitrary family\\$(B_i)_{i\in I}$};
+  \draw[map] (C) -- (phis);
+  \draw[map] (phis) -- (Bi);
+
+  \node[algebra, text width=42mm] (A) at (2.2,2.55)
+    {$A=\displaystyle\bigoplus_{i\in I}^{c_0}B_i$};
+  \node[algebra, text width=50mm] (MA) at (8.2,2.55)
+    {$M(A)=\displaystyle\prod_{i\in I}^{\mathrm{bounded}}M(B_i)$};
+  \draw[inclusion] (A) -- node[lab,above]{$c_0$ essential ideal} (MA);
+  \draw[map] (phis.south) to[out=-70,in=125]
+    node[lab,pos=.56,above right]{$\Delta(c)=(\varphi_i(c))_i$} (MA.north west);
+
+  \node[branch, text width=31mm] (zero) at (1.0,0.55)
+    {$c=0$\\$\Delta(c)\in A$};
+  \node[branch, text width=34mm] (finite) at (5.0,0.55)
+    {$c\ne0$, $I$ finite\\$\Delta(c)\in A$};
+  \node[branch, text width=54mm] (infinite) at (10.6,0.55)
+    {$c\ne0$, $I$ infinite: $\Delta(c)\notin A$\\
+     $\dist(\Delta(c),A)=\lVert\Delta(c)+A\rVert=\lVert c\rVert$};
+  \coordinate (split) at (8.2,1.45);
+  \draw[map] (MA.south) -- (split);
+  \draw[blue!70!black,very thick] (zero.north |- split) -- (infinite.north |- split);
+  \draw[map] (zero.north |- split) -- (zero.north);
+  \draw[map] (finite.north |- split) -- (finite.north);
+  \draw[map] (infinite.north |- split) -- (infinite.north);
+
+  \node[font=\scriptsize\bfseries,text=teal!70!black] at (6.0,-0.42)
+    {separately typed P13 applications of the generic statement};
+  \node[p13, text width=39mm] (max) at (2.0,-1.65)
+    {P13 maximal instantiation\\$I=Q^{\mathrm{bare}}$, $\varphi_q=d_{q,\sigma}^{\max}$};
+  \node[p13, text width=39mm] (red) at (6.3,-1.65)
+    {P13 reduced instantiation\\$I=Q^{\mathrm{bare}}$, $\varphi_q=d_{q,\sigma}^{\mathrm r}$};
+  \node[p13, text width=39mm] (prime) at (10.6,-1.65)
+    {fixed prime\\only an infinite-index example};
+  \draw[inst] (infinite) -- (prime);
+\end{tikzpicture}

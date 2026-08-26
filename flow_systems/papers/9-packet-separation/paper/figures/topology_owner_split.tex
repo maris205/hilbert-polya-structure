@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\scriptsize,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,minimum height=10mm},
+  actual/.style={box,fill=blue!6,draw=blue!55!black,text width=3.4cm},
+  intrinsic/.style={box,fill=green!7,draw=green!45!black,text width=3.4cm},
+  proxy/.style={box,fill=orange!9,draw=orange!65!black,text width=3.4cm},
+  blocked/.style={box,fill=red!5,draw=red!60!black,dashed,text width=3.4cm},
+  map/.style={-{Latex[length=2mm]},thick},
+  setmap/.style={-{Latex[length=2mm]},densely dashed,thick},
+  stop/.style={-{Bar[width=5pt]},red!65!black,dashed,thick},
+  label/.style={font=\tiny,fill=white,inner sep=1.2pt,align=center}
+]
+  \node[actual] (den) at (0,2.3)
+    {actual Deninger $E_f$ orbit\\inherited subspace topology\\\textbf{nontrivial indiscrete}};
+  \node[actual] (naive) at (6.0,2.3)
+    {$C_p^{\mathrm{naive}}\subset\Q^\times\backslash\A_{\Q}/\Zhat^\times$\\double-quotient subspace topology\\\textbf{nontrivial indiscrete}};
+  \node[intrinsic] (scaling) at (6.0,-0.4)
+    {intrinsic scaling-topos $C_p$\\source-owned topology\\\textbf{ordinary Hausdorff circle}};
+  \node[proxy] (proxy) at (0,-0.4)
+    {standard-circle proxy\\$\R_{>0}/p^{\Z}$ with imposed topology\\\textbf{ordinary Hausdorff circle}};
+
+  \node[blocked] (actualgrp) at (0,-3.1)
+    {actual standard LCH--Hausdorff\\groupoid branch\\\textbf{fails at unit-space prerequisite}};
+  \node[proxy] (proxyalg) at (6.0,-3.1)
+    {proxy-only calculations\\$\Tau_L(a_f)=Lf(0)$\\$\tau_0(a_f)=L\sum_r f(rL)$};
+
+  \draw[map] (den) -- (naive);
+  \draw[setmap] (scaling) -- (naive);
+  \draw[setmap] (den) -- (proxy);
+  \draw[setmap] (proxy) -- (scaling);
+  \draw[map] (proxy) -- (proxyalg);
+\end{tikzpicture}

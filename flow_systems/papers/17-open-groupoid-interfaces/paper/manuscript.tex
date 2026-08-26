@@ -1,0 +1,351 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=28mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+\setmathfont{TeX Gyre Termes Math}
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\usepackage{microtype}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{
+  unicode=true,
+  pdftitle={Topos and Open-Quantal-Frame Interfaces of Globally Indiscrete Action Groupoids},
+  pdfauthor={AUTHOR TO CONFIRM},
+  pdfsubject={Owner-sensitive interface calculations and obstructions; Technical Note},
+  pdfkeywords={action groupoid, classifying topos, open quantal frame, locale, owner typing},
+  colorlinks=true,
+  linkcolor=blue!45!black,
+  citecolor=green!35!black,
+  urlcolor=blue!55!black
+}
+
+\setlength{\parindent}{1.3em}
+\setlength{\parskip}{0.22em}
+\linespread{1.08}
+\setlength{\emergencystretch}{3em}
+\renewcommand{\arraystretch}{1.17}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\B}{\mathbf B}
+\newcommand{\Ocal}{\mathcal O}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Loc}{\mathbf{Loc}}
+\newcommand{\Top}{\mathbf{Top}}
+
+\title{\textbf{Topos and Open-Quantal-Frame Interfaces of Globally Indiscrete Action Groupoids:\\Owner-Sensitive Computations and Obstructions}\\[0.5em]
+\large Technical Note}
+\author{\textbf{AUTHOR TO CONFIRM}\\
+\small Affiliation, correspondence address, and author identifier: AUTHOR TO CONFIRM}
+\date{17 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This owner-sensitive Technical Note studies two parallel point-free interfaces and makes no standalone or full-paper claim.  For a nonempty globally indiscrete right $H$-space, we directly compute the classifying topos and the bare arrow-open quantale with its base.  Usual connected $\R$ yields $\Set$, whereas discrete $\Z$ yields $\B\Z$, so connectedness is retained.  Bare $\Ocal(H)$, the comparison map $q_H$, and local compactness remain separate; possible point loss occurs from $\Top$ to $\Loc$, not as failure of localic reconstruction.  The actual inherited owner gives $\Set/\Ocal(\R)/2$, while a separately imposed standard circle gives $\B\Z/\Ocal(S_L\times\R)/\Ocal(S_L)$, with no transfer between them.  Unequal-period dilation shows that the unmarked interface does not recover scale; strict marking is extra structure and does not recover $\log p$ from the unmarked output.  Deterministic controls are diagnostic and serialization receipts only.  The seven-owner evaluation leaves four exploratory and three rejected records; every owner fails A2--A4, no determinant-bearing continuation is obtained, and Route B remains closed at the Technical-Note ceiling.
+
+\medskip
+\noindent\textbf{Keywords:} action groupoid; classifying topos; open quantal frame; locale; owner typing
+\end{abstract}
+
+\begin{center}
+\textbf{中文摘要}
+\end{center}
+本文是一篇按对象所有者严格分型的技术札记，比较两个并行的无点化接口，不作独立完整论文之主张。对非空且整体不可分的右 $H$ 空间，本文分别直接计算分类拓扑斯及带基的裸箭头开集量格。通常连通的 $\R$ 给出 $\Set$，离散的 $\Z$ 给出 $\B\Z$，故连通性信息仍被保留。裸 $\Ocal(H)$、比较映射 $q_H$ 与局部紧性是三个独立条件；可能的点损失发生在 $\Top$ 到 $\Loc$ 的转换，而非局部重构定理失效。真实继承对象得到 $\Set/\Ocal(\R)/2$，另行赋予标准拓扑的圆得到 $\B\Z/\Ocal(S_L\times\R)/\Ocal(S_L)$，二者不互相转移结构。不等周期伸缩表明无标记接口不能恢复尺度；严格时间标记属于额外结构，不能从无标记输出恢复 $\log p$。确定性控制仅是诊断与序列化凭据。七个所有者中四个为探索性、三个被拒绝，全部在 A2--A4 失败，未得到行列式延拓，Route B 关闭，结论止于技术札记上限。
+
+\medskip
+\noindent\textbf{中文关键词：} 作用群胚；分类拓扑斯；开量格框架；局部；所有者分型
+
+\section{Introduction and scope}
+
+This note asks a deliberately narrow question.  Let a topological group $H$ act on the right of a nonempty space $X$ whose topology is globally indiscrete.  What is retained by the classifying-topos interface, and what is retained by the bare quantale of arrow opens?  The calculations are elementary once the owner, topology, handedness, and reconstruction hypotheses are frozen, yet the comparison is useful because several tempting identifications fail precisely at those type boundaries.
+
+The positive result is a pair of direct computations.  The range-first transformation groupoid is open, its classifying topos is equivalent to the topos of continuous discrete left $H$-sets, its arrow-open quantale is $\Ocal(H)$, and its base frame is $2$.  These statements are proved in parallel; neither is inferred from an etale-only bridge.  The usual real line then gives a connected-time collapse of the topos to $\Set$, while discrete $\Z$ supplies the mandatory counterexample $\B\Z$.  The quantale branch, by contrast, keeps the topology of $H$: for usual $\R$ it is nonunital.
+
+The negative content is equally structural.  A bare open quantale does not by itself license localic reconstruction.  The comparison map $q_H$ and local compactness have separate roles.  Likewise, the inherited topology of an actual arithmetic owner may not be replaced by the topology of a standard-circle proxy.  Their outputs can be placed side by side, but fields cannot be transported across that comparison.  Finally, simultaneous dilation of unequal periods preserves the unmarked interfaces, so numerical scale is not recoverable without an extra time marker.
+
+These are interface and obstruction statements at a Technical-Note ceiling.  They build on, and do not relabel, earlier owner-specific results.  The finite computational package checks conventions, provenance, mutations, and serialization; it is not proof of the topological theorems.  The concluding seven-owner evaluation records four exploratory and three rejected outcomes, with no positive A2, A3, or A4 coordinate.  Thus the note is nonstandalone in the project sense: its value is exact typing and a sharp boundary, not an analytic or spectral promotion.
+
+Throughout, positive statements are paired with their hypotheses, while every negative statement is limited to the named interface and owner under evaluation.
+
+\section{Conventions and admissible domains}
+
+Let $H$ be a topological group and let $X\ne\varnothing$ be a globally indiscrete right $H$-space.  We use the range-first convention already fixed for this owner \cite[lines~255--277]{wang2026convolution}:
+\begin{equation}\label{eq:ops}
+ r(x,h)=x,\qquad s(x,h)=x\cdot h,
+\end{equation}
+\begin{equation}\label{eq:prod}
+ (x,h)(x\cdot h,k)=(x,hk),\qquad
+ (x,h)^{-1}=(x\cdot h,h^{-1}).
+\end{equation}
+The arrow space of $G(X,H)$ is $X\times H$ with the product topology.  Since the only nonempty open of $X$ is $X$, every arrow open is $X\times U$ for a unique $U\in\Ocal(H)$.  The composable-pair chart is $X\times H\times H$, and multiplication is $(x,h,k)\mapsto(x,hk)$.  These formulas are not interchangeable with a source-first convention; handedness is part of the statement.
+
+Two small points prevent later ambiguity.  First, the action need not be free, transitive, effective, or proper.  None of those adjectives is used in the generic calculation.  The only topology imposed on the unit is the actual indiscrete topology, while the topology of the acting group is retained in full.  Second, ``open groupoid'' and ``etale groupoid'' are not synonyms here.  Openness asks for an open structure map; etaleness asks for a local-homeomorphism condition.  The usual real-time example satisfies the former and fails the latter.  This distinction is why an open-groupoid classifying topos is available even though an etale-only quantale--sheaf shortcut is not.
+
+Three quantale/localic objects must remain distinct.  First, the bare arrow-open quantale uses unions for joins, open-set product for multiplication, and inverse for involution.  Second, the canonical comparison
+\[
+ q_H:\Ocal(H)\otimes\Ocal(H)\longrightarrow\Ocal(H\times H),
+ \qquad U\otimes V\longmapsto U\times V,
+\]
+is additional data whose being an isomorphism is not formal for every space.  Third, local compactness is a domain hypothesis used in the cited localic reconstruction results.  No later sentence may replace this three-part gate by the single phrase ``the quantale determines the groupoid.''
+
+The owner registry is also part of the mathematics.  The generic real-time owner, the disconnected-time falsifier, an actual fixed-prime orbit, its actual packet, a separately imposed standard circle, an actual/standard comparison record, and an unmarked scaling control are seven different typed objects.  Their topology, provenance, and markedness differ.  Table~\ref{tab:t1} records the permitted outputs and is used later as a firewall, not as a source of proof.
+
+\begin{table}[htbp]
+\centering\scriptsize
+\caption{Owner/domain/joint-interface firewall.  Actual, standard, comparison, and control owners have distinct topology, provenance, and nontransferable interface fields.  This typing summary neither proves the source theorems nor licenses transfer between rows.}\label{tab:t1}
+\begin{tabularx}{\textwidth}{P{0.23\textwidth}P{0.18\textwidth}Y Y}
+\toprule
+Owner token & Type/domain & Licensed interface & Excluded transfer \\
+\midrule
+\nolinkurl{GENERIC_R_ACTUAL} & generic; usual $\R$ & $\Set,\Ocal(\R),2$ & arithmetic or marked-scale credit \\
+\nolinkurl{GENERIC_Z_FALSIFIER} & discrete-time control & $\B\Z$ falsifier & connected-$\R$ conclusion \\
+\nolinkurl{ACTUAL_ORBIT_P} & inherited actual orbit & $\Set,\Ocal(\R),2$ & standard topology or proxy fields \\
+\nolinkurl{ACTUAL_PACKET_P} & inherited actual packet & same generic point-free output & packet aggregation or proxy fields \\
+\nolinkurl{STANDARD_CIRCLE_PROXY} & imposed standard topology & $\B\Z,\Ocal(S_L\!\times\!\R),\Ocal(S_L)$ & actual provenance or strict marker \\
+\nolinkurl{ACTUAL_STANDARD_COMPARISON} & cross-owner record & typed asymmetry only & union of either owner's fields \\
+\nolinkurl{UNMARKED_SCALING_CONTROL} & plain dilation family & nonrecovery of numerical $L$ & strict-time or arithmetic credit \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{The generic joint interface}
+
+The framework terminology for open topological groupoids and equivariant sheaves is standard \cite[Section~2.1, journal pp.~542--543]{forssell2013}.  The statements below, however, are direct computations on $G(X,H)$ rather than results credited to that source.
+
+\begin{proposition}\label{prop:open}
+The transformation groupoid $G(X,H)$ is open.  For $H=\R$ with its usual topology it is not etale.
+\end{proposition}
+\begin{proof}
+The range projection sends $X\times U$ to $X$ when $U\ne\varnothing$ and to the empty set otherwise, hence is open.  The source map has the same two possible open images, so it is open as well.  For usual $\R$, any nonempty arrow neighborhood contains $X\times U$ with $U$ containing more than one time.  Its restriction under range cannot be a homeomorphism onto the indiscrete unit space: even when $X$ is a singleton, the time fiber prevents local injectivity; for nontrivial $X$, the same conclusion is immediate.  Thus no local-bisection basis exists.
+\end{proof}
+% TRACE_CLAIM:TN-02
+Proposition~\ref{prop:open}, with the owner restrictions in Table~\ref{tab:t1}, establishes openness and the usual-$\R$ non-etale specialization.  The citation fixes vocabulary; the proof is internal.
+
+\begin{theorem}\label{thm:topos}
+There is an equivalence
+\[
+ \B(G(X,H))\simeq\B_{\mathrm{cont}}(H),
+\]
+where the right side is the topos of discrete sets with continuous left $H$-action.
+\end{theorem}
+\begin{proof}
+An etale space over a nonempty indiscrete base is isomorphic over $X$ to $X\times S$ for a discrete set $S$: each local section has image open, while compatibility on the only nonempty base open forces the sheets to be globally indexed.  A left groupoid action on $X\times S$ is consequently determined by maps $h:S\to S$.  The action law gives a left $H$-action, and continuity of the groupoid action is exactly continuity of the orbit maps into discrete $S$.  Conversely a continuous discrete left $H$-set defines $(x,h,s)\mapsto(x,h\cdot s)$ on the trivial etale space.  These constructions act identically on equivariant maps and are mutually inverse up to the evident natural isomorphisms.
+\end{proof}
+% TRACE_CLAIM:TN-03
+The direct equivalence in Theorem~\ref{thm:topos} is summarized in the first row of Table~\ref{tab:t2}; that table distinguishes its evidence and premises from the quantale and reconstruction branches.
+
+The continuity clause on the sheet action deserves emphasis.  A discrete left $H$-set is continuous precisely when each point stabilizer is open, equivalently when each orbit map is locally constant.  The theorem therefore does not forget the topology of $H$.  It forgets the original action on the indiscrete unit coordinate because every etale sheaf has globally indexed sheets, but it retains exactly those discrete actions allowed by the topology of the acting group.  This explains why connected and disconnected time behave differently without appealing to a finite approximation.  It also shows why the result is not simply ``all actions are trivial'': triviality is a later connected-$\R$ corollary, not part of the generic equivalence.
+
+For usual $\R$, continuity of an orbit map $\R\to S$ into a discrete set and connectedness of $\R$ force every action to be trivial.  Hence $\B_{\mathrm{cont}}(\R)\simeq\Set$.  For discrete $\Z$, all set actions are continuous, so $\B_{\mathrm{cont}}(\Z)=\B\Z$; the regular translation action is nontrivial.  The disconnected example proves that no theorem for arbitrary $H$ may replace the connectedness premise.
+% TRACE_CLAIM:TN-04
+Thus the $\R/\Z$ split retains connectedness and Table~\ref{tab:t1} keeps the falsifier separate from the real-time owner.
+
+\begin{proposition}\label{prop:quantale}
+The bare arrow-open involutive quantale of $G(X,H)$ is $\Ocal(H)$, with
+\[
+ U\cdot V=\bigcup_{u\in U,v\in V}uv,\qquad U^*=U^{-1}.
+\]
+Its right-sided elements, hence its base frame, are $\varnothing$ and $H$.  For usual $\R$, the quantale is nonunital.
+\end{proposition}
+\begin{proof}
+The assignment $X\times U\mapsto U$ is an order isomorphism and preserves arbitrary unions.  Using the composable-pair chart and \eqref{eq:prod}, the product of $X\times U$ and $X\times V$ is $X\times UV$; inversion gives $X\times U^{-1}$.  A right-sided open satisfies $UH\subseteq U$, so a nonempty such open equals $H$.  If an open multiplicative unit existed for usual $\R$, it would have to be the singleton identity, which is not open.
+\end{proof}
+The operations agree with the open-groupoid quantale conventions of Protin and Resende \cite[printed pp.~203--205 and Theorem~2.41]{protinresende2012}, but the identification above is computed directly.
+% TRACE_CLAIM:TN-05
+Proposition~\ref{prop:quantale} and the second row of Table~\ref{tab:t2} separate the bare quantale/base calculation from every reconstruction statement.
+
+The two direct computations consequently remember different features.  The topos remembers the category of continuous actions on discrete sheets and is sensitive to the connected components of $H$.  The bare quantale remembers the full frame of opens of $H$ and the open-set product.  For usual $\R$, the topos becomes $\Set$ while the quantale remains the large nonunital frame $\Ocal(\R)$.  Calling one branch a refinement or consequence of the other would erase the premise structure that the comparison is meant to expose.  Their agreement on the base frame $2$ is a common owner fact, not an equivalence between the interfaces.
+
+\begin{table}[htbp]
+\centering\scriptsize
+\caption{Theorem--premise--evidence separation.  The topos calculation, bare quantale calculation, $q_H$ comparison, and localic reconstruction have different premises and evidence roles.  The table is not a substitute for proof and does not extend the locally compact reconstruction domain.}\label{tab:t2}
+\begin{tabularx}{\textwidth}{P{0.19\textwidth}P{0.25\textwidth}P{0.25\textwidth}Y}
+\toprule
+Conclusion & Necessary owner/domain premise & Proof role & External framework role \\
+\midrule
+$\B(G)\simeq\B_{\rm cont}(H)$ & nonempty indiscrete right $H$-space & direct etale-space/action equivalence & terminology for equivariant sheaves \\
+$\Ocal(G)\cong\Ocal(H)$; base $2$ & range-first arrow topology & direct open-product/inverse computation & open-quantale definitions \\
+$q_H$ identifies tensor opens & appropriate product-frame comparison & separate comparison-map proof & locale/product framework \\
+localic reconstruction & bare quantale plus $q_H$ plus local compactness & conclusion only on conjunction & reconstruction theorems and domain \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{The localic gate and the actual/standard firewall}
+
+The quantale calculation alone records all arrow opens and their multiplication, but the passage from topological spaces to locales changes the type of the input.  If $H$ is locally compact, the comparison $q_H$ is an isomorphism for the needed product of frames; together with the directly computed bare quantale, this places the owner in the localic reconstruction domain described by Protin and Resende \cite[Theorems~2.41 and~2.45, printed pp.~214--215 and 245--246]{protinresende2012}.  These clauses are conjunctive, not alternative.
+
+There are also two different uses of the word ``base.''  The topological unit space $X$ is the base of the transformation groupoid, while the right-sided part of the arrow-open quantale is its algebraically recovered base frame.  In this owner both have frame of opens $2$, but that agreement is proved by the right-sided calculation rather than imposed by notation.  On the standard circle the base frame is instead $\Ocal(S_L)$.  Keeping these meanings explicit blocks an apparently harmless substitution of a standard unit topology after the quantale computation has begun.
+% TRACE_CLAIM:TN-06
+Accordingly, Table~\ref{tab:t2} registers $\Ocal(H)$, $q_H$, and local compactness as separate premises and allows reconstruction only after all have been checked.
+
+This typing resolves an apparent tension for nonsober spaces.  Distinct topological points can induce the same completely prime-filter behavior after the functor $\Top\to\Loc$.  That loss has already occurred before the localic theorem receives its input.  A reconstruction theorem that correctly reconstructs the corresponding localic groupoid from a supported quantale has therefore not failed merely because it cannot recreate point distinctions discarded by the earlier functor.
+% TRACE_CLAIM:TN-07
+The loss location, recorded in the last two rows of Table~\ref{tab:t2}, is a typed inference: point loss belongs to $\Top\to\Loc$, not to failure of reconstruction on its stated localic domain.
+
+We now compare two owners.  For the actual inherited fixed-prime orbit, the unit topology is nontrivial indiscrete, the acting group is usual $\R$, and the generic calculation gives
+\[
+ \B(G_{\mathrm{act}})\simeq\Set,\qquad
+ \Ocal(G_{\mathrm{act}})\cong\Ocal(\R),\qquad
+ \Ocal(G_{\mathrm{act}}^{(0)})=2.
+\]
+For the separately imposed standard circle $S_L=\R/(L\Z)$ with its usual Hausdorff topology, the translation groupoid is transitive with isotropy $L\Z\cong\Z$.  The corresponding records are
+\[
+ \B(G_{\mathrm{std}})\simeq\B\Z,\qquad
+ \Ocal(G_{\mathrm{std}})=\Ocal(S_L\times\R),\qquad
+ \Ocal(G_{\mathrm{std}}^{(0)})=\Ocal(S_L).
+\]
+The displayed standard triple is derived directly in this note.  Paper 11 supports only the standard-circle owner/chart, the ordinary arrow-space and composable-pair charts, the range-first formulas and operations, and the owner-splice stop \cite[lines~255--277, 313--324, 337--405, and 1079--1087]{wang2026convolution}; it supplies no classifying-topos, open-quantale, base-frame, localic-reconstruction, comparison-triple, or Paper-17 theorem credit.
+% TRACE_CLAIM:TN-08
+The two triples are actual $\Set/\Ocal(\R)/2$ versus standard $\B\Z/\Ocal(S_L\times\R)/\Ocal(S_L)$, and Table~\ref{tab:t1} forbids topology, provenance, or output fields from crossing the comparison row.
+
+This is not a claim that the standard circle is incorrect.  It is a different object with a finer, explicitly imposed topology.  Nor is the comparison owner the union of both rows: it records the asymmetry and nothing more.  In particular, abstract integer isotropy on the proxy cannot supply an actual-owner circle topology, while actual arithmetic provenance cannot be transferred to the proxy.
+
+The comparison is best read column by column.  On the topos side, $\Set$ and $\B\Z$ differ because the actual and standard units lead to different effective sheet categories.  On the arrow-open side, $\Ocal(\R)$ and $\Ocal(S_L\times\R)$ differ already as frames, before multiplication is considered.  On the base side, $2$ and $\Ocal(S_L)$ make the topology-owner difference explicit.  None of these contrasts produces a continuous map, reflection, completion, or descent datum between the owners.  It is a typed ledger of outputs, and any stronger relationship would need to be stated and proved as a separate theorem.
+
+\section{Scale obstruction and fixed-prime application}
+
+Let $S_L=\R/(L\Z)$ and $S_M=\R/(M\Z)$ with $L,M>0$.  The simultaneous dilation
+\[
+ [x]_L\longmapsto[(M/L)x]_M,\qquad
+ t\longmapsto(M/L)t
+\]
+is an isomorphism of the unmarked transformation groupoids when the time group is transported along the same automorphism.  It induces equivalences of the classifying toposes and isomorphisms of the corresponding open-quantal-frame records.  Choosing $L\ne M$ proves that the plain interface does not recover a numerical period.  If the time coordinate is required to remain literally fixed, the same dilation is disallowed and $L$ can be distinguished; that requirement is an additional strict marker, not information latent in the unmarked output.
+
+This obstruction applies before any arithmetic substitution.  A fixed rational prime $p$ enters only afterward.  The exact inherited facts used from the fixed-prime owner are its actual indiscrete topology and the literal stabilizer $(\log p)\Z$ \cite[lines~409--426]{wang2026packets}.  The generic theorem then applies with usual $\R$.  It does not recover $p$, the numerical value $\log p$, orbit labels, packet decomposition, or standard topology from the resulting point-free triple.
+% TRACE_CLAIM:TN-10
+The fixed-prime actual orbit and packet therefore occupy their own rows of Table~\ref{tab:t1}; the source citation supplies only actual indiscreteness and the literal stabilizer, while the point-free calculation is this note's generic application.
+
+The contribution also requires a prior-work subtraction.  Paper 10 supplies only its separated universal-image, continuous scalar-observable, Borel/measurable-map on the stated target domain, and positive-finite-measure collapses \cite[claim ledger, lines~132--135; P10-1, lines~201--226; P10-2, lines~228--245; P10-3, lines~270--285; P10-4, lines~287--306]{wang2026reflections}.  Separately, Paper 11 supplies only its range-first and owner-splice records \cite[lines~255--277, 313--324, 337--405, and 1079--1087]{wang2026convolution}.  This note builds on those ceilings in TN-11 prior-subtraction mode only; it does not relabel any prior collapse or formula as a new topos or quantale result, and the present $\B(G)$ and $\Ocal(G)$ calculations do not upgrade them.
+
+The combined firewall has two consequences.  First, the strict-time witness can reject an invalid scale-recovery claim but cannot be transferred to the unmarked owner.  Second, the fixed-prime literal stabilizer can be retained as source data without being inferred from an action-blind interface.  These distinctions make nonrecovery a theorem about a named functor and owner rather than a claim that numerical periods can never be represented by richer marked structures.
+
+The word ``recover'' is used in this strict invariant sense: if two unequal values $L$ and $M$ yield isomorphic unmarked output records, then no assignment invariant under those isomorphisms can return the original numerical value on both.  The argument does not depend on whether one period looks arithmetic.  One may choose an arithmetic-looking $L$ and an unrelated $M$, and the same dilation still applies.  The obstruction is therefore stronger than failure of a particular formula and weaker than a universal impossibility theorem.  It identifies exactly which forgetful passage erased the scale and exactly which additional marking would prevent that erasure.
+
+\section{Finite diagnostic controls}
+
+The project control package checks range-first handedness, action-blind arrow records, the connected/disconnected firewall, domain guards, the quantale/localic boundary, actual/standard ownership, dilation and strict marking, fixed-prime provenance, and the aggregate target summary.  It has a historical and an effective execution record that must not be merged.
+
+The historical first run exited $10$ with six failures because ordinary isolated verification inherited a root-specific reproduction sentinel.  Its tuple remains downstream-invalid.  A separately authorized repair scrubbed that state for ordinary isolated children while retaining dedicated sentinel and lock tests.  The replacement top-level run exited $0$ without retry.  The manifest remained acyclic and bound five authorities, five implementation entries, and nine generated CSV artifacts.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Finite-control receipt.  The replacement package is deterministic and mutation-audited while the historical failed run remains visible and downstream-invalid.  These are finite diagnostics and serialization evidence only; they prove no mathematical theorem, novelty, numerical scale, determinant, or Route coordinate.}\label{tab:t3}
+\begin{tabularx}{\textwidth}{P{0.24\textwidth}P{0.22\textwidth}Y}
+\toprule
+Receipt layer & Exact value & Evidential ceiling \\
+\midrule
+Historical first run & exit 10; 6 failures; no retry & immutable failed tuple; downstream-invalid \\
+Replacement run & exit 0; 180 tests; 0 failures/errors & separately authorized implementation receipt \\
+Finite data & 9 CSVs; 3,436 rows; 84 negatives; 3,352 nonnegative & convention/provenance/negative fixtures \\
+Mutation and identity & 48 semantic + 42 package classes; 2 fresh generations; 3 byte-identical copies; zero residue & mutation isolation and deterministic serialization \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% TRACE_CLAIM:TN-12
+Table~\ref{tab:t3} gives the final finite receipt: nine CSVs, 3,436 body rows, 84 detected negatives, 3,352 nonnegative rows, 48 semantic and 42 package mutation classes, 180 passing replacement-run tests, two fresh generations, three byte-identical copies, and zero frozen residue.  The arithmetic checks $3436-84=3352$ and $48+42=90$ are bookkeeping, not proof.
+
+In particular, no finite row proves connectedness of $\R$, the classifying-topos equivalence, the quantale isomorphism, local compactness, the $q_H$ gate, reconstruction, non-etaleness, or nonrecovery of a continuous numerical scale.  The package can expose a sign error, owner splice, malformed mutation, or nondeterministic serialization.  The symbolic arguments in Sections 3--5 carry the mathematical conclusions.
+
+The historical/replacement distinction is methodologically important.  A later successful execution cannot rewrite the meaning of an earlier failed receipt.  The first tuple remains evidence that the original isolated verifier crossed a state boundary incorrectly; the replacement tuple is evidence that the repaired implementation closes that fault under a new authorization.  Reporting only the final zero exit would hide the causal record, while aggregating both runs would falsely describe a retry.  Table~\ref{tab:t3} therefore displays them as two execution layers and treats the unchanged CSV bytes as data identity, not as retroactive validation of the first run.
+
+Likewise, byte identity has a narrow interpretation.  Two fresh generations and the checked-in package agree on all generated artifacts, so the serialization path is deterministic for the frozen implementation and inputs.  This does not establish that the chosen finite cases exhaust the mathematical domain.  Mutation counts measure coverage of registered failure classes, not probability of correctness, and zero residue is a cleanup receipt rather than evidence about the groupoid.  These limits are why the controls remain useful without being allowed to carry theorem credit.
+
+\section{Route outcome and limitations}
+
+The owner-specific evaluation was performed on exactly the seven registry entries in Table~\ref{tab:t4}.  A coordinate records only evidence owned by that row.  In particular, the two generic controls cannot borrow arithmetic provenance; the actual orbit and packet cannot borrow standard topology or a strict marker; the proxy cannot borrow actual provenance; and the comparison row is not a coordinatewise union.
+
+\begin{table}[htbp]
+\centering\scriptsize
+\caption{Stage-17 Route disposition.  Four owners remain exploratory, three are rejected, every owner fails A2--A4, and Route B is closed.  Classification is owner-specific and cannot be aggregated; exploratory does not mean analytic, determinant, spectral, or publication success.}\label{tab:t4}
+\begin{tabularx}{\textwidth}{P{0.30\textwidth}P{0.31\textwidth}P{0.19\textwidth}Y}
+\toprule
+Owner record & $(A0,A1,A2,A3,A4)$ & Verdict & Route B \\
+\midrule
+\texttt{GEN-INDISC-R-ACTION-TOPOS-QF-CONTROL} & $(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & rejected & false \\
+\texttt{GEN-INDISC-Z-ACTION-TOPOS-CONTROL} & $(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & rejected & false \\
+\texttt{DEN-EF-ORBIT-ACTION-GRPD} & $(\mathrm{ARITH},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & exploratory & false \\
+\texttt{DEN-EF-PACKET-ACTION-GRPD-P} & $(\mathrm{ARITH},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & exploratory & false \\
+\texttt{DEN-EF-ORBIT-STD-CIRCLE-PROXY} & $(\mathrm{WEAK},\mathrm{WEAK},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & exploratory & false \\
+\texttt{DEN-EF-ORBIT-STD-CIRCLE-COMPARISON-P} & $(\mathrm{WEAK},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & exploratory & false \\
+\texttt{UNMARKED-PERIOD-SCALING-CONTROL} & $(\mathrm{FAIL},\mathrm{WEAK},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$ & rejected & false \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% TRACE_CLAIM:TN-13
+As Table~\ref{tab:t4} shows, four owners are exploratory and three are rejected; all seven fail A2, A3, and A4, and Route B is false.  ``Exploratory'' retains only the source or weak A0/A1 status printed in the row.  It is not a partial determinant construction and contributes no publication coordinate.
+
+The result has five principal limitations.  First, the topos theorem assumes a nonempty globally indiscrete unit owner and classifies discrete continuous $H$-actions; it is not a theorem for arbitrary unit topologies.  Second, the quantale statement is bare until the comparison and local-compactness gates have been verified.  Third, the actual/standard comparison retains two different owners and supplies no topology transport.  Fourth, scale nonrecovery concerns the unmarked interface; a strict marker is a different structure.  Fifth, the finite controls and Route files are diagnostic and evaluative records, not new mathematical evidence.
+
+% TRACE_CLAIM:TN-14
+Consistently with the exclusions in Table~\ref{tab:t1} and every failed A2--A4 entry in Table~\ref{tab:t4}, this note constructs no $C^*$-algebraic actual-owner package, Haar system, measure, trace, determinant, completed divisor, Weil compression, natural quantization, or standard-to-actual transfer.  It does not prove that all future enriched constructions are impossible.  It proves that none is supplied by the typed interfaces evaluated here.
+
+These failures are the substantive obstruction result.  A positive continuation would require a new same-owner object retaining information erased by the present functors, together with its own source, domain, and proof gates.  Such a continuation is neither presumed nor authorized by the word ``exploratory.''
+
+The coordinate failures are also logically distinct.  A2 asks for a same-owner determinant or comparable dynamical realization; no row has one.  A3 asks for a completed global analytic structure and the associated compression compatibility; no row has one.  A4 asks for a natural same-owner quantization or operator lift; again no row has one.  Failure of A2 is not used as a shortcut proof of A3 or A4: each negative coordinate records its own missing object.  Conversely, a weak A0 or A1 signal does not interpolate any of the later structures.  The table therefore reports all three failed columns even though the Route-B decision would already be blocked by the absence of an A4-ready owner.
+
+\section{Conclusion}
+
+For a nonempty globally indiscrete right $H$-space, two direct computations run in parallel.  The classifying topos is the topos of continuous discrete left $H$-sets; the bare arrow-open quantale is $\Ocal(H)$ with base $2$.  Connected usual $\R$ yields $\Set$, while discrete $\Z$ yields $\B\Z$.  Reconstruction enters only after the bare quantale, the comparison $q_H$, and local compactness have each been checked.
+
+Owner typing then explains the main asymmetries.  The actual inherited record $\Set/\Ocal(\R)/2$ is not the standard-circle record $\B\Z/\Ocal(S_L\times\R)/\Ocal(S_L)$.  Unequal-period dilation preserves the unmarked interface, while strict time is extra structure.  Fixed-prime substitution retains actual indiscreteness and the literal stabilizer but does not make numerical $\log p$ recoverable from the point-free output.
+
+The exact control receipt supports reproducibility at its finite diagnostic ceiling.  The seven-owner evaluation remains four exploratory and three rejected, with universal A2--A4 failure and Route B closed.  This is the final scope of the Technical Note: an exact joint-interface calculation, an owner and premise firewall, and a scale obstruction, without analytic or spectral promotion.
+
+\section*{Declarations}
+
+\noindent\textbf{Data and materials availability.}
+The mathematical claims were composed from the exact symbolic ledgers and owner manuscripts identified by the project gate; the finite package consists of nine CSV artifacts and its hash-bound manifest.  Stable public repository, archival identifier, redistribution status, and materials license are \textbf{AUTHOR TO CONFIRM}.  No public availability is asserted here.
+
+\noindent\textbf{Code availability.}
+The project contains a deterministic generator, test suite, and reproduction entry for the finite diagnostic package.  Repository URL, released revision, archival identifier, and code license are \textbf{AUTHOR TO CONFIRM}; no release is authorized by this manuscript.
+
+\noindent\textbf{Ethics approval and consent.}
+The frozen project materials describe mathematical proofs and deterministic synthetic controls and report no human participants, animals, personal data, or intervention.  Final author confirmation of that scope is required: \textbf{AUTHOR TO CONFIRM}.  Consent is not applicable only subject to that confirmation.
+
+\noindent\textbf{Competing interests and funding.}
+Competing-interests disclosure: \textbf{AUTHOR TO CONFIRM}.  Funding and grant metadata, or an author-confirmed statement of no specific funding: \textbf{AUTHOR TO CONFIRM}.
+
+\noindent\textbf{Author contributions and acknowledgments.}
+The author list, affiliations, CRediT roles, and acknowledgments are \textbf{AUTHOR TO CONFIRM}.  No role, institution, contributor, or permission is inferred from prior papers.
+
+\noindent\textbf{AI-use disclosure.}
+AI-assisted tools were used under human direction for composition planning, source-bound drafting, exact-byte and consistency checking, and formatting support.  They receive no authorship credit.  The submitting author must verify every definition, proof, citation, numerical receipt, disclosure, and final file and retains responsibility for the submission.  Venue-specific wording is \textbf{AUTHOR TO CONFIRM}.
+
+\noindent\textbf{Limitations.}
+The work is confined to the stated nonempty indiscrete owners, the separate localic premises, the actual/standard and strict/unmarked firewalls, and the finite diagnostic ceiling.  It is a nonstandalone Technical Note and creates no release entitlement.
+
+\begingroup
+\raggedright
+\bibliographystyle{plainnat}
+\bibliography{references}
+\endgroup
+
+\end{document}

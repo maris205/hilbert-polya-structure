@@ -1,0 +1,25 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small,align=center},
+  box/.style={draw,rounded corners=2pt,fill=blue!4,inner sep=6pt,minimum width=43mm},
+  cbox/.style={draw,rounded corners=2pt,fill=green!5,inner sep=6pt,minimum width=43mm},
+  stop/.style={draw=red!65!black,very thick,dashed},
+  note/.style={font=\footnotesize,align=center,text width=46mm}
+]
+  \node[box] (std) {$\Gstd$\\same carrier, orbitwise standard topology};
+  \node[box,right=30mm of std] (act) {$\Gactual$\\same carrier, actual indiscrete topology};
+  \draw[->,very thick] (std) -- node[above] {$J=\mathrm{id}$, continuous} (act);
+  \draw[<-,stop] ([yshift=-7mm]std.east) -- node[below,text=red!65!black] {reverse identity need not be continuous} ([yshift=-7mm]act.west);
+
+  \node[cbox,below=29mm of std] (hstd) {$H^1_{\cnv}(\Gstd;\R)=\R^Q$\\full algebraic Cartesian product};
+  \node[cbox,below=29mm of act] (hact) {$H^1_{\cnv}(\Gactual;\R)=\R[c]$\\one global time slope};
+  \draw[<-,very thick] (hstd) -- node[above] {$J^*$} node[below] {$\lambda\mapsto(q\mapsto\lambda)$} (hact);
+
+  \node[note,below=10mm of hstd] (diag) {$\operatorname{im}J^*=(\R^Q)^{\operatorname{Aut}_{\R}(\Gstd)}$\\$=\{\text{constant functions }Q\to\R\}$};
+  \node[note,below=10mm of hact] (bdry) {$B^1_{\cnv}(\Gactual;\R)=0$;\\$B^1_{\cnv}(\Gstd;\R)$ is generally nonzero};
+  \draw[->,thin] (hstd) -- (diag);
+  \draw[->,thin] (hact) -- (bdry);
+
+  \node[font=\scriptsize,text=black!70,below=6mm of $(diag.south)!0.5!(bdry.south)$]
+    {No topology is imposed on $\R^Q$, cohomology, or the automorphism group.};
+\end{tikzpicture}

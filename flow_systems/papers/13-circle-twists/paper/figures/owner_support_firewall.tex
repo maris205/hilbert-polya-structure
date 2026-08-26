@@ -1,0 +1,69 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  >=Latex,
+  owner/.style={draw=blue!65!black, rounded corners=2pt, very thick,
+    fill=blue!4, align=center, minimum height=9mm, inner sep=4pt},
+  record/.style={draw=teal!65!black, rounded corners=2pt, thick,
+    fill=teal!5, align=center, minimum height=8mm, inner sep=4pt},
+  branch/.style={draw=black!60, rounded corners=2pt, thick,
+    fill=black!3, align=center, minimum height=8mm, inner sep=4pt},
+  guard/.style={draw=red!70!black, dashed, rounded corners=2pt,
+    fill=red!3, align=center, inner sep=4pt},
+  map/.style={->, very thick, blue!70!black},
+  pull/.style={->, very thick, teal!70!black},
+  inherit/.style={->, thick, dashed, black!65},
+  lab/.style={fill=white, inner sep=1.5pt, align=center}
+]
+  \node[owner, text width=30mm] (time) at (0,4.4)
+    {usual time owner\\$\mathbb R$};
+  \node[owner, text width=43mm] (actual) at (5.3,4.4)
+    {actual owner\\$G_{\mathrm{actual}}(X)=X_{\mathrm{indisc}}\rtimes\mathbb R$};
+  \node[owner, text width=43mm] (standard) at (11.2,4.4)
+    {standard owner\\$G_{\mathrm{std}}(X)=\operatorname{Std}(X)\rtimes\mathbb R$};
+
+  \draw[map] (actual) -- node[lab,above]{time reduction} (time);
+  \draw[map] (standard) -- node[lab,above]{$J$ continuous} (actual);
+
+  \node[record, text width=28mm] (timerec) at (0,2.35)
+    {$A_\sigma=C_c(\mathbb R)$\\time test record};
+  \node[record, text width=38mm] (actualrec) at (5.3,2.35)
+    {$\Phi(f)(x,t)=f(t)$\\actual author test};
+  \node[record, text width=40mm] (stdrec) at (11.2,2.35)
+    {$\Psi_X(f)=J^*\Phi(f)$\\standard continuous pullback};
+
+  \draw[pull] (timerec) -- node[lab,above]{$\Phi$} (actualrec);
+  \draw[pull] (actualrec) -- node[lab,above]{$J^*$} (stdrec);
+  \draw[inherit] (time) -- (timerec);
+  \draw[inherit] (actual) -- (actualrec);
+  \draw[inherit] (standard) -- (stdrec);
+
+  \node[record, text width=24mm] (maxrec) at (4.0,0.75)
+    {actual author\\$\mathrm{TW\!-!FULL}$};
+  \node[record, text width=24mm] (redrec) at (6.6,0.75)
+    {actual author\\$\mathrm{TW\!-!RED}$};
+  \draw[inherit] (actualrec) -- (maxrec);
+  \draw[inherit] (actualrec) -- (redrec);
+
+  \node[record, text width=40mm] (support) at (11.2,0.75)
+    {$\supp_{\mathrm{std}}\Psi_X(f)$\\$=\operatorname{Std}(X)\times\supp(f)$};
+  \draw[pull] (stdrec) -- (support);
+
+  \node[branch, text width=29mm] (zero) at (7.8,-0.95)
+    {$f=0$\\compact for every $Q^{\mathrm{bare}}$};
+  \node[branch, text width=31mm] (finite) at (11.2,-0.95)
+    {$f\ne0$, $Q^{\mathrm{bare}}$ finite\\belongs to $C_c(G_{\mathrm{std}})$};
+  \node[branch, text width=31mm] (infinite) at (14.7,-0.95)
+    {$f\ne0$, $Q^{\mathrm{bare}}$ infinite\\not in $C_c(G_{\mathrm{std}})$};
+  \draw[inherit] (support) -- (zero);
+  \draw[inherit] (support) -- (finite);
+  \draw[inherit] (support) -- (infinite);
+
+  \node[guard, text width=47mm] (firewall) at (2.7,-1.15)
+    {owner firewall: max/r remain separate;\\no actual-to-standard topology transfer};
+
+  \node[owner, text width=27mm] (bare) at (9.3,-2.65)
+    {bare orbit set\\$Q^{\mathrm{bare}}$};
+  \node[owner, text width=27mm] (disc) at (13.2,-2.65)
+    {discrete record\\$Q^{\mathrm{disc}}$};
+  \draw[map] (bare) -- node[lab,above]{add topology} (disc);
+\end{tikzpicture}

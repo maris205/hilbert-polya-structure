@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\small,
+  box/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,minimum height=9mm},
+  source/.style={box,fill=blue!6,draw=blue!55!black},
+  quotient/.style={box,fill=green!7,draw=green!45!black},
+  data/.style={box,fill=orange!8,draw=orange!65!black},
+  map/.style={-{Latex[length=2mm]},thick},
+  limit/.style={-{Latex[length=2mm]},thick,densely dashed},
+  label/.style={font=\scriptsize,fill=white,inner sep=1.5pt,align=center}
+]
+  \node[source,text width=3.2cm] (start) at (0,2.2)
+    {$w=(j(P_b),u)$\\one prequotient representative};
+  \node[source,text width=4.1cm] (seq) at (5.0,2.2)
+    {$z_j=wq_j=(F_{q_j}j(P_b),q_j^{-1}u)$\\all in the same diagonal class};
+  \node[source,text width=3.0cm] (end) at (10.3,2.2)
+    {$w'=(j(P_a),v)$\\arbitrary target representative};
+
+  \node[data,text width=4.7cm] (targets) at (5.0,0)
+    {simultaneous targets\\$q_j\longrightarrow u/v$ in $\R_{>0}$\\
+     $q_j\longrightarrow ab^{-1}$ in $A_p$};
+
+  \node[quotient,text width=2.7cm] (x) at (1.1,-2.0)
+    {$x=\rho_p(w)$};
+  \node[quotient,text width=2.7cm] (const) at (5.0,-2.0)
+    {$\rho_p(z_j)=x$ for every $j$};
+  \node[quotient,text width=2.7cm] (y) at (9.0,-2.0)
+    {$y=\rho_p(w')$};
+
+  \draw[map] (start) -- (seq);
+  \draw[limit] (seq) -- (end);
+  \draw[map] (targets) -- (seq);
+  \draw[map] (start.south) -- node[left,label] {$\rho_p$} (x.north);
+  \draw[map] (end.south) -- node[right,label] {$\rho_p$} (y.north);
+  \draw[limit] (const) -- (y);
+  \draw[map] (x) -- (const);
+\end{tikzpicture}

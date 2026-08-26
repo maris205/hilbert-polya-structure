@@ -1,0 +1,365 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage[a4paper,margin=22mm,headheight=15pt]{geometry}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}[Scale=0.88]
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+
+\definecolor{arsblue}{HTML}{1F4E79}
+\definecolor{arsgray}{HTML}{5C6670}
+\hypersetup{
+  unicode=true,
+  colorlinks=true,
+  linkcolor=arsblue,
+  urlcolor=arsblue,
+  pdftitle={论文9--13创建、审查与完整性流程记录},
+  pdfsubject={ARS Stage 6 bilingual process record},
+  pdfauthor={AI-assisted research workflow; human confirmation pending}
+}
+\urlstyle{same}
+\setstretch{1.16}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.35em}
+\setlist[itemize]{leftmargin=2em,itemsep=0.25em,topsep=0.35em}
+\setlist[enumerate]{leftmargin=2.2em,itemsep=0.35em,topsep=0.35em}
+\titleformat{\section}{\Large\bfseries\color{arsblue}}{\thesection}{0.75em}{}
+\titleformat{\subsection}{\large\bfseries\color{arsblue}}{\thesubsection}{0.75em}{}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\status}[1]{\textsf{\bfseries #1}}
+\newcommand{\hashline}[1]{\begingroup\small\ttfamily\url{#1}\endgroup}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\contentsname}{目录}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize 论文 9--13｜ARS Stage 6}
+\fancyhead[R]{\footnotesize 过程与完整性记录}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.4cm}
+{\sffamily\bfseries\fontsize{25}{32}\selectfont
+论文 9--13 创建、审查与完整性流程记录\par}
+\vspace{0.9cm}
+{\Large 中文版｜ARS Stage 6\par}
+\vspace{1.6cm}
+\rule{0.78\textwidth}{0.7pt}\par
+\vspace{1.0cm}
+\begin{tabular}{rl}
+日期：& 2026 年 8 月 16 日（Asia/Shanghai）\\
+范围：& 论文 9、10、11、12 与论文 13 技术说明\\
+技术结论：& \status{PASS — C0/M0/m0}\\
+公开发布：& \code{PUBLIC_RELEASE_AUTHORIZED=false}\\
+Stage 6：& \code{in_progress}，等待用户终止确认
+\end{tabular}
+\vfill
+{\small 本记录由精确字节工件、追加式审查报告和批次审计重建。\\
+它不是作者身份、投稿授权或公开发布许可。\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+\section{执行摘要}
+
+论文 9--13 已完成研究设计、来源与所有权审计、数学证明、确定性控制、
+Route 评估、组合、引文预检、稿件审查及技术发布审计。最终五个稿件包均为
+精确六文件包，共 89 页；批次控制共 399/399 个测试、53 个 CSV、7,709 行和
+86 个显式负控。40 份 Route-A 记录中 25 份为 exploratory、15 份为 rejected，
+所有 A2--A4 坐标均失败，Route B 文件数为 0。
+
+论文 9--12 保留论文定位；论文 13 作为 Technical Note 内部接受。论文 13 的
+独立实质性判定仍为 \code{NOTE_OR_MERGE}、
+\code{STANDALONE_PASS=false}、\code{C0/M1/m0}。本记录不消除这一 Major，
+而是把它作为采用技术说明定位的依据。
+
+主上游收据为：
+\begin{itemize}
+  \item \code{papers/9-packet-separation/notes/papers9_13_batch_audit.md}
+  \item SHA-256：\hashline{6aa915a9e85153957b269448ba23b56716c4f64d18e6b3c85f904d73b0001aea}
+  \item 当前哈希图：65 个节点、255 条边、0 自环、0 环路。
+\end{itemize}
+
+\section{证据边界与归因规则}
+
+早期原始对话已在长会话压缩中不可见。不能诚实重建最初提示词、对话轮次号、
+逐次人工干预次数或完整 concession 统计。当前唯一可安全逐字引用的用户原话是：
+
+\begin{quote}
+\Large\bfseries “继续”
+\end{quote}
+
+该指令出现在五篇论文的 Stage 5 批次审计交付之后，本记录将它解释为进入 Stage 6
+流程总结的明确同意。更早的范围只作为工件支持的推断，不伪装成逐字引语。
+
+压缩会话摘要（不是可逐字引用的原始 turn）记录了五篇批次范围、整体自动委派和
+审计闭合前的 no-Git/no-public-sync 约束；冻结工件佐证了批次范围与发布 hold。
+当前唯一可逐字归于用户的原话仍是“继续”。证明撰写、来源核验、错误发现、修复和
+技术闭合归于 AI/审查流程；除非未来提供完整原始对话，不把这些贡献反向归于用户。
+
+\section{五篇论文的最终位置}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}lYrl@{}}
+\toprule
+论文 & 最终位置 & 页数 & PDF SHA-256（缩写）\\
+\midrule
+P9  & 内部接受的论文包 & 21 & \code{c55e4f45...85e02}\\
+P10 & 内部接受的论文包 & 19 & \code{30c22eb8...2ce4}\\
+P11 & 内部接受的论文包 & 16 & \code{15d20756...840d}\\
+P12 & 内部接受；保留 \code{STANDALONE_PASS} & 18 & \code{9d6747e9...c15}\\
+P13 & 内部接受的 Technical Note & 15 & \code{4082ca13...43c2}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+每个 \code{paper/} 目录恰有六个普通文件：README、TeX、BibTeX、两个原生
+TikZ 图源和一个 PDF。包内没有符号链接、辅助构建文件、第二个 PDF 或研究源 PDF。
+
+\section{证据对齐的逐阶段流程}
+
+\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.20\textwidth}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.32\textwidth}@{}}
+\toprule
+阶段 & 输入 & 产出与决定 & 迭代、纠错与最终门禁\\
+\midrule
+\endfirsthead
+\toprule
+阶段 & 输入 & 产出与决定 & 迭代、纠错与最终门禁\\
+\midrule
+\endhead
+1. 批次接收与候选冻结 & P9--P13 协议、候选锁、前序论文边界 & 建立五个所有者类型明确的项目，在批次边界统一交付 & 原始提示词不可见；历史 \code{pipeline_state.md} 仅作门禁时点快照。\\
+\addlinespace
+2. Phase 1 设计重锁 & 方法、devil/domain、source-feasibility 审查 & 五篇论文最终 Phase-1 均闭合 & P9 两态；P10 两态；P11 两态；P12 初版/v1/v2；P13 初版/v1；最终全部 \code{C0/M0/m0}。\\
+\addlinespace
+3. Phase 2 来源与先例 & 来源 PDF、所有者词典、有限先例搜索 & 冻结来源、术语、所有权与新颖性上限 & 始终保留 \code{SUPPORTED_WITHIN_SEARCH}，不把有限搜索升级为绝对优先权。\\
+\addlinespace
+4. Phase 3 证明与控制 & 锁定主张与来源上限 & 稳定证明、反例和确定性控制设计 & P12 经 v2/v3/v4；P13 经初版和 v2 corona；数学包通过，standalone 单独裁定。\\
+\addlinespace
+5. P13 控制修复 & 第一实现、mutation probes & 替换 manifest \code{26a41e...094c2} & 第一实现因 token/self-comparison oracle 不独立而 \code{C0/M1/m0}；修复后 176/176、12 CSV、2,665 行、67/67 负控，PASS。\\
+\addlinespace
+6. 发布形态裁定 & 证明、来源、控制与 standalone 审查 & P9--P12 保留论文定位；P13 转 Technical Note & P12 v4 关闭 routine-reduction Major；P13 保留 Major，门禁为 \code{PASS_TO_TECHNICAL_NOTE}。\\
+\addlinespace
+7. Route 评估 & 稳定证明与控制收据 & 40 份 Route-A YAML & 25 exploratory、15 rejected；120 个 A2--A4 坐标全部 FAIL；Route B 为 0。\\
+\addlinespace
+8. 组合与引文预检 & proof/Route tuple、来源上限 & 五份 composition blueprint；英文正文和独立简体中文摘要 & 先冻结结构、主张顺序、图表追踪和声明边界；blueprint 不增加数学证据。\\
+\addlinespace
+9. 稿件审查与重锁 & TeX、Bib、图源、PDF & 五个六文件稿件包 & P9 初稿 C1/M8 后接受；P12 Freeze 1→2→Correction→count relock；P13 Freeze 1 C0/M2/m1→Freeze 2→status relock。\\
+\addlinespace
+10. P12 有界纠错 & Review Freeze 2 tuple & 正确 Bib/PDF 与 citation→peer→release 追加链 & Stacks 题名改为 “Colimits of spaces”；中文计数改为 353 正文 + 32 关键词 = 385；两个历史 m1 均透明关闭。\\
+\addlinespace
+11. 引文、同行与发布审计 & 最终稿件 tuple & 每篇 citation、peer、release 报告 & P11--P13 有追加式状态重锁；所有当前引用图闭合且技术 PASS。\\
+\addlinespace
+12. 五篇批次审计 & 五个当前学术 tuple 与状态文档 & 统一的精确字节、PDF、来源、Route、控制和哈希图收据 & 关闭 P9 报告边和 P11/P12/P13 状态表述；最终 \code{PASS}、\code{C0/M0/m0}，公开发布仍 false。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{最小可证迭代计数}
+
+下表统计工件中明确命名的状态，而不是推测对话轮次。
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYYY@{}}
+\toprule
+论文 & 设计状态 & 证明／定位状态 & 稿件／终局状态\\
+\midrule
+P9 & 2 & 1 个稳定证明包 & 2：初稿与接受重审\\
+P10 & 2 & 1 个稳定证明／控制包 & 至少 2；含最终空格 Minor 重锁\\
+P11 & 2 & 1 个稳定证明／控制包 & 至少 2 个引文状态，另有状态重锁链\\
+P12 & 3 & 3：v2/v3/v4 & 4：Freeze 1、Freeze 2、Correction、count relock\\
+P13 & 2 个 Phase-1、3 个控制设计状态 & 2 个 standalone、2 个控制实现 & 3：Freeze 1、Freeze 2、status relock\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{完整性与可重复性统计}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{@{}lr@{}}
+\toprule
+项目 & 汇总\\
+\midrule
+单元测试 & 399/399\\
+CSV / 正文行 / 显式负控 & 53 / 7,709 / 86\\
+Route-A / Route-B & 40 / 0\\
+Exploratory / Rejected & 25 / 15\\
+本地研究 PDF / 复用 manifestation & 32 / 3\\
+PDF/preflight 对 & 35\\
+五个稿件 PDF 总页数 & 89\\
+字体 & 39，全部 embedded/subset/Unicode\\
+当前工件图 & 65 节点、255 边、0 自环、0 环\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+五个保留的稿件 PDF 均为 A4 PDF 1.5、无加密、无附件、无光栅图；Ghostscript
+解析通过。
+研究源 PDF 只保留于 \code{notes/sources/}，未进入任何 \code{paper/} 包。
+
+\section{改变研究方向的关键纠错}
+
+\begin{enumerate}
+  \item \textbf{标准材料不能重新包装成 standalone。} P12 v4 的同载体标准化/
+  \(H^1\) 对角不变量关闭了早期 routine-reduction Major。P13 的 corona 结论在
+  扣除前序贡献、前序论文和标准引理后仍是一条一般等距对角引理的实例，故诚实转为 Technical Note。
+  \item \textbf{控制必须独立失败关闭。} P13 第一版 CSV 字节虽正确，但 detector
+  若只查 token、或等式两边使用同一公式，不能证明 oracle 独立；修复并独立复跑后
+  才允许进入下游。
+  \item \textbf{所有者和类型优先于叙事。} Packet transitivity、同载体所有权、
+  morphism variance 和 Route owner 风险均通过版本化锁处理，而非文字掩盖。
+  \item \textbf{元数据也是完整性。} P12 的 Stacks 题名和中文计数约定错误均作为
+  历史 m1 保留，然后以追加式收据关闭。
+  \item \textbf{报告哈希边必须无环。} P9 的 \code{paper.log} 只能是历史临时构建
+  收据；下游报告绑定上游字节，不制造自哈希或反向循环。
+\end{enumerate}
+
+\section{协作深度轨迹（建议性）}
+
+该评价采用 Wang--Zhang rubric v1.0，非论文质量评价，也不阻断流程。原始早期
+对话缺失，因此为低至中等置信度的临时分数。
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lclY@{}}
+\toprule
+维度 & 分数 & 结论 & 证据上限\\
+\midrule
+Delegation Intensity & 8/10 & 高 & 整类任务被批量委派，不是零散微调\\
+Cognitive Vigilance & 4/10 & 中低 & 工作流门禁很强，但可见对话没有用户主动质询证据\\
+Cognitive Reallocation & 3/10 & 低 & 可见记录没有用户原创综合、反论证或定理级判断\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+判定为 \textbf{Zone 2 — Mid, automation-dominant}。Zone 3 要求三个维度均至少
+为 7，当前只支持高委派；Zone 1 也因 AI 使用强度很高而不成立。若希望未来形成
+可审计的 Zone 3，可在每个主要门禁人工挑战一条核心定理或引文，写出文章类型和
+发布边界的人工理由，并在每个纠错周期后记录一条原创综合。
+
+\section{AI 自我反思与 sycophancy 风险}
+
+AI 采用高并行、精确锁定和追加式审查。它的主要优点是独立 reviewer 多次阻止
+过早 PASS；主要代价是终局 README 指针和哈希边出现过多小型重锁。本反思由被评价
+的同一 AI 系统产生，不是独立外部证据。
+
+\begin{table}[htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lY@{}}
+\toprule
+指标 & 结果\\
+\midrule
+DA concession rate / 连续 concessions & \code{UNMEASURED}；压缩日志没有可靠分母\\
+Skipped checkpoints & \code{UNMEASURED}；广泛自动授权把若干非强制 checkpoint 合并到批次边界\\
+可见 user overrides / health alerts & 0 / 0；完整 health-alert 历史总数 \code{UNMEASURED}，不是“无风险”证明\\
+Intent-mode transitions & \code{UNMEASURED}；可见 Stage 5 至 6 是阶段迁移，不是 exploratory--goal-oriented 模式变化的证据\\
+Cross-model disagreements & 未启用 cross-model\\
+Sycophancy 风险 & \textbf{UNMEASURED / 需人工阅读}，不能标为 LOW\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{AI 明确做错的事项}
+
+\begin{itemize}
+  \item P12 初始 Bib 把 Stacks Tag 0B1W 写成 “Topological colimits”，早期 citation PASS 未发现。
+  \item P12 中文摘要曾用 \code{Script_Extensions=Han} 得到 370，把 17 个标点误计入正文。
+  \item P13 Freeze 1 的六键 trace、父 README 状态和 Han 计数不一致。
+  \item P13 第一版控制容许 tautological/token-detector oracle 通过，必须有界修复。
+  \item P12 控制审计出现并行 reproduce 编排事故；虽未污染结果，却暴露 runner 协调风险。
+  \item P13 README 状态指针多次变动，造成不必要的重锁链。
+  \item 批次报告曾在 \code{referrer->prerequisite} 方向下把新报告称为 sink，机器复核后改为 source。
+\end{itemize}
+
+\section{七类失败模式追溯审计}
+
+本批次没有统一、当时生成的 ARS v3.20 Stage 2.5/4.5 七项日志。P11--P13 的
+最终引文审计包含逐篇七项表，P9--P10 没有对应表；下表只是 Stage 6 对五篇最终
+证据的追溯综合，不替代缺失的正式记录。
+
+\small
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}>{\raggedright\arraybackslash}p{0.47\textwidth}@{}}
+\toprule
+模式 & 追溯评价 & 历史与解决\\
+\midrule
+\endfirsthead
+\toprule
+模式 & 追溯评价 & 历史与解决\\
+\midrule
+\endhead
+1. implementation bug passing self-review & CLEAR & P13 控制 oracle 被 mutation probe 判疑；替换实现和独立复跑关闭。\\
+2. hallucinated citation & CLEAR & 引文图闭合；P12 真实来源的元数据 m1 已纠正并重锁。\\
+3. hallucinated experimental result & CLEAR & 有限结果均绑定 CSV/manifest；P13 第一 manifest 被排除。\\
+4. shortcut reliance & CLEAR／理论边界 & 有限控制只作诊断，从不升级为连续或一般性定理。\\
+5. bug reframed as insight & CLEAR & oracle 缺陷先修复，未叙述成贡献。\\
+6. methodology fabrication & CLEAR & 测试、行数、负控、构建和 PDF 收据均匹配稳定字节。\\
+7. early frame-lock & CLEAR at final scope & standalone 强化受反例/先例审查降级；P13 采用 Technical Note。\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+没有记录到用户 override。
+
+\section{协作质量评价与可复用经验}
+
+旧版六维度量表的临时建议分数为：Direction Setting 88，Intellectual
+Contribution 45，Quality Gatekeeping 78，Iteration Discipline 80，Delegation
+Efficiency 92，Meta-Learning 47；等权总分为 \textbf{72/100 — Good}。该分数
+置信度低至中等，且必须与 Wang--Zhang 三维 rubric 分开理解。
+
+可复用经验如下：
+\begin{itemize}
+  \item 工件字节正确不等于控制 oracle 正确；mutation probe 是必要条件。
+  \item Standalone 价值必须在扣除前序论文和标准引理后重新审查。
+  \item \code{pipeline_state.md} 是历史门禁快照；后续精确报告定义当前状态。
+  \item README、citation、peer、release 和 batch 报告需要无环的绑定顺序。
+  \item 本地保留源 PDF 与公开载荷排除是不同门禁；没有真实 Git/archive/
+  fresh-clone 检查，不能声称公开安全。
+  \item 中文计数收据必须冻结 Unicode 属性、文本边界和关键词是否计入。
+\end{itemize}
+
+\section{外部发布门禁与 Stage 6 终止条件}
+
+以下仍需人类或真实发布系统决定：作者顺序、单位、通讯作者、ORCID、CRediT、
+经费、利益冲突、致谢、伦理/同意适用性、最终 AI/tool disclosure；未发表伴随论文
+的不可变公开身份或获批自包含替代；期刊与文章类型、模板、引文风格、许可证、
+可访问性和投稿日 DOI/撤稿/勘误/政策刷新；以及真实 Git/index/LFS/archive/upload/
+attachment/hidden-path/fresh-clone 源 PDF 排除检查。
+
+本流程记录不执行 Git、提交、推送、归档或上传。
+
+\begin{center}
+\fcolorbox{arsblue}{arsblue!5}{\parbox{0.88\textwidth}{
+\centering
+\textbf{当前 Stage 6 状态：\code{in_progress}}\\[0.4em]
+交付后仍等待用户以“完成”“确认”“结束”或等价明确表达接受；在该确认前，
+不得把流程标为终止，也不得推断公开发布授权。
+}}
+\end{center}
+
+\end{document}

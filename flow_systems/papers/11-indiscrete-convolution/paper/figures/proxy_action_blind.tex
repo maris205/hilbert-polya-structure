@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  font=\small,
+  node distance=6mm and 9mm,
+  box/.style={draw=black!70, rounded corners=2pt, align=center,
+    inner sep=6pt, text width=0.29\textwidth},
+  wide/.style={draw=black!70, rounded corners=2pt, fill=blue!4,
+    align=center, inner sep=6pt, text width=0.74\textwidth},
+  result/.style={draw=black!70, rounded corners=2pt, fill=green!7,
+    align=center, inner sep=6pt, text width=0.68\textwidth},
+  arr/.style={-{Latex[length=2.2mm]}, thick, draw=black!70},
+  stop/.style={line width=1.5pt, draw=red!70!black}
+]
+\node[box, fill=blue!5] (act) {$G^{\mathrm{act}}_{p,a}$\\actual topology};
+\node[box, fill=orange!8, right=28mm of act] (std) {$G^{\mathrm{std}}_p$\\
+  ordinary-circle proxy};
+\draw[arr] ($(act.east)+(0,2.2mm)$) --
+  node[above, font=\scriptsize] {$J$ not continuous} ($(std.west)+(0,2.2mm)$);
+\draw[arr] ($(std.west)+(0,-2.2mm)$) --
+  node[below, font=\scriptsize] {$J^{-1}$ continuous} ($(act.east)+(0,-2.2mm)$);
+
+\node[box, below=12mm of act] (alg) {$C^{\mathrm{glob}}_{\mathrm{qc}}
+  (G^{\mathrm{act}}_{p,a})$};
+\node[box, below=12mm of std] (proxyalg) {$C_c(G^{\mathrm{std}}_p)$};
+\draw[arr] (alg) -- node[above, font=\scriptsize] {$I$, test functions only}
+  (proxyalg);
+\node[font=\scriptsize, below=1mm of proxyalg] (image)
+  {$\operatorname{im}I=A_{\mathrm{const}}\subsetneq C_c(G^{\mathrm{std}}_p)$};
+\draw[stop] ($(proxyalg.east)+(4mm,-6mm)$) -- ($(proxyalg.east)+(4mm,6mm)$);
+\node[anchor=west, text=red!70!black, font=\scriptsize, align=left]
+  at ($(proxyalg.east)+(6mm,0)$) {STOP\\no norm/completion map};
+
+\node[wide, below=15mm of alg, xshift=26mm] (controls)
+  {trivial action \quad transitive arbitrary-period action \quad
+   nontransitive action\\independent prime/composite/arbitrary labels and periods};
+\node[result, below=of controls] (collapse)
+  {same $C_c(\mathbb R)$, same unit-regular norm, same transported completions\\
+   \textsc{proves\_too\_much}: no arithmetic promotion};
+\draw[arr] (alg) -- (controls);
+\draw[arr] (controls) -- (collapse);
+\end{tikzpicture}

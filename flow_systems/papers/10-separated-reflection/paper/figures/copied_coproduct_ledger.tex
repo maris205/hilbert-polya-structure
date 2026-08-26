@@ -1,0 +1,45 @@
+\begin{tikzpicture}[
+  font=\small,
+  node distance=12mm and 17mm,
+  comp/.style={draw=blue!65!black, rounded corners, thick, align=center,
+               fill=blue!4, minimum width=31mm, minimum height=10mm},
+  labelbox/.style={draw=green!45!black, rounded corners, very thick, align=center,
+                fill=green!5, minimum width=38mm, minimum height=12mm},
+  mass/.style={draw=purple!65!black, rounded corners, thick, align=center,
+               fill=purple!4, minimum width=40mm, minimum height=12mm},
+  ext/.style={draw=orange!80!black, rounded corners, thick, align=center,
+              fill=orange!7, minimum width=40mm, minimum height=12mm},
+  bad/.style={draw=red!70!black, dashed, rounded corners, thick, align=center,
+              fill=red!3, minimum width=41mm, minimum height=12mm},
+  arr/.style={-{Latex[length=2.5mm]}, thick}
+]
+\node[comp] (x1) {$\{i_1\}\!\times X_{i_1}$\\indiscrete};
+\node[comp, below=8mm of x1] (x2) {$\{i_2\}\!\times X_{i_2}$\\indiscrete};
+\node[comp, below=8mm of x2] (xn) {$\{i_n\}\!\times X_{i_n}$\\indiscrete};
+\begin{scope}[on background layer]
+\node[draw=blue!65!black, rounded corners, dashed, fill=blue!2,
+      fit=(x1)(xn), inner sep=5mm] (cop) {};
+\end{scope}
+\node[blue!65!black, above=5mm of x1] {tagged copied coproduct $X_I$};
+
+\node[labelbox, right=27mm of x2] (disc) {$I_{\mathrm{disc}}$\\$K_0$ retains labels only};
+\draw[arr] (cop.east) -- node[above] {$q_I$} (disc.west);
+
+\node[mass, above right=8mm and 27mm of disc] (cone)
+  {$\ell^1_+(I)$\\component masses $(m_i)$};
+\draw[arr] (disc) -- node[above,sloped] {$\mu(X_S)=\sum_{i\in S}m_i$} (cone);
+
+\node[ext, below right=8mm and 27mm of disc] (log)
+  {external prime labeling\\$p\mapsto\log p\notin C_b,C_0$};
+\draw[arr, orange!80!black] (disc) -- node[below,sloped] {extra arithmetic data} (log);
+
+\node[bad, below=15mm of disc] (global)
+  {not a topology theorem for the\\global Deninger suspension};
+\draw[red!70!black, very thick] ($(global.north west)+(2mm,-2mm)$) --
+  ($(global.south east)+(-2mm,2mm)$);
+\draw[red!70!black, very thick] ($(global.south west)+(2mm,2mm)$) --
+  ($(global.north east)+(-2mm,-2mm)$);
+
+\node[ext, below=5mm of log] (control)
+  {prime / composite / arbitrary labels\\same abstract classification};
+\end{tikzpicture}

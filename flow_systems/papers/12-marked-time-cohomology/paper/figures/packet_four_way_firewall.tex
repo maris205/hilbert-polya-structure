@@ -1,0 +1,27 @@
+\begin{tikzpicture}[
+  >=Latex,
+  every node/.style={font=\small,align=center},
+  src/.style={draw,rounded corners=2pt,fill=orange!9,inner sep=5pt,text width=31mm},
+  act/.style={draw,rounded corners=2pt,fill=red!5,inner sep=6pt,text width=39mm},
+  std/.style={draw,rounded corners=2pt,fill=blue!5,inner sep=6pt,text width=39mm},
+  quot/.style={draw,rounded corners=2pt,fill=green!5,inner sep=6pt,text width=35mm},
+  stop/.style={draw=red!65!black,very thick,dashed}
+]
+  \node[src] (den) {Deninger source\\packet, right flow, $p^{\Z}$, $\log p$ clock};
+  \node[act,right=14mm of den] (ga) {$\Gamma_p^{\mathrm{actual}}$\\globally indiscrete packet groupoid};
+  \node[quot,right=14mm of ga] (qa) {$Q_p^{\mathrm{actual}}$\\actual quotient: indiscrete};
+  \draw[->,thick] (den) -- node[above,font=\scriptsize] {source facts} (ga);
+  \draw[->,thick] (ga) -- node[above,font=\scriptsize] {orbit quotient} (qa);
+
+  \node[std,below=25mm of ga] (gs) {$\Gamma_p^{\mathrm{std}}$\\same set; constructed coproduct of standard circles};
+  \node[quot,below=25mm of qa] (qd) {$Q_p^{\mathrm{disc}}$\\same bare set; discrete component index};
+  \draw[->,thick] (gs) -- node[above,font=\scriptsize] {open components} (qd);
+  \draw[->,thick] (gs) -- node[left,font=\scriptsize] {$J$, continuous} (ga);
+
+  \draw[stop] ([xshift=-5mm,yshift=10mm]gs.north west) -- ([xshift=5mm,yshift=10mm]qd.north east);
+  \node[fill=white,text=red!65!black,font=\scriptsize] at ($(gs.north)!0.5!(qd.north)+(0,10mm)$)
+    {topology-transfer stop};
+
+  \node[font=\scriptsize,text width=112mm,below=8mm of gs.south east,anchor=north east]
+    {Strict maps preserve the mark; positive scaled maps transport it covariantly; unmarked maps need not retain it. No count, enumeration, measure, local triviality, or topology crosses the firewall.};
+\end{tikzpicture}

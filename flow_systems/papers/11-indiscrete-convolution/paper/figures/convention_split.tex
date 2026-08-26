@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  font=\small,
+  node distance=7mm and 10mm,
+  owner/.style={draw=black!70, rounded corners=2pt, fill=blue!5,
+    align=center, inner sep=6pt, text width=0.28\textwidth},
+  branch/.style={draw=black!65, rounded corners=2pt, align=center,
+    inner sep=6pt, text width=0.30\textwidth},
+  result/.style={draw=black!65, rounded corners=2pt, fill=green!7,
+    align=center, inner sep=6pt, text width=0.29\textwidth},
+  blocked/.style={draw=red!65!black, rounded corners=2pt, fill=red!4,
+    align=center, inner sep=6pt, text width=0.27\textwidth},
+  arr/.style={-{Latex[length=2.2mm]}, thick, draw=black!70},
+  cross/.style={-{Latex[length=2.2mm]}, thick, draw=red!65!black}
+]
+\node[owner] (actual) {$G^{\mathrm{act}}_{p,a}=X_{p,a}\rtimes\mathbb R$\\
+  actual inherited-indiscrete topology};
+
+\node[branch, below left=of actual] (global) {globally continuous\\
+  + ambient open-cover-QC support};
+\node[branch, below right=of actual] (hopen) {raw zero-extensions from\\
+  Hausdorff arrow opens};
+
+\node[result, below=of global] (nonzero) {$C^{\mathrm{glob}}_{\mathrm{qc}}
+  \cong C_c(\mathbb R)$\\nonzero author $*$-algebra};
+\node[result, below=of hopen] (zero) {$C_c^{\mathrm{HOp}}=\{0\}$\\
+  \textsc{diagnostic\_only}};
+
+\node[blocked, left=13mm of actual] (frameworks) {retained standard\\
+  groupoid frameworks};
+
+\draw[arr] (actual) -- (global);
+\draw[arr] (actual) -- (hopen);
+\draw[arr] (global) -- (nonzero);
+\draw[arr] (hopen) -- (zero);
+\draw[cross] (frameworks.east) -- node[above, align=center, font=\scriptsize]
+  {audited hypotheses fail\\\textsc{not\_applicable}} (actual.west);
+\draw[red!65!black, line width=1.1pt]
+  ($(frameworks.east)!0.48!(actual.west)+(0,2.0mm)$) --
+  ($(frameworks.east)!0.48!(actual.west)+(0,-2.0mm)$);
+\end{tikzpicture}
