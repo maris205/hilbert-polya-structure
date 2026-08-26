@@ -2364,3 +2364,29 @@ theorems, Route-A verdicts, internal cross-audit repairs, exact release hashes,
 and the uniform 472,538-checker/46,114-SymPy audit.  All five source systems
 remain separate, all fail A0, and Route B remains unauthorized under
 `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+## Route-A independent big-step round C179--C183
+
+This round deliberately prevents one manuscript from being split into five.
+It changes mathematical owner in every paper: arithmetic congruence returns,
+holomorphic elliptic-quotient dynamics, deterministic rotor routing,
+ultradiscrete soliton action--angle dynamics, and stochastic symmetric-group
+convolution. Each package closes an all-parameter theorem and its sharp
+Route-A boundary.
+
+- [C179 Zsigmondy congruence first-return tower](henon_zsigmondy_congruence_return_tower_route_a/README.md) · [paper PDF](henon_zsigmondy_congruence_return_tower_route_a/paper/main.pdf)
+- [C180 Lattès three-channel Lefschetz collapse](henon_lattes_three_channel_lefschetz_route_a/README.md) · [paper PDF](henon_lattes_three_channel_lefschetz_route_a/paper/main.pdf)
+- [C181 all-digraph rotor-router orbit theorem](henon_rotor_router_strong_digraph_route_a/README.md) · [paper PDF](henon_rotor_router_strong_digraph_route_a/paper/main.pdf)
+- [C182 periodic box--ball action--angle classification](henon_periodic_box_ball_action_angle_route_a/README.md) · [paper PDF](henon_periodic_box_ball_action_angle_route_a/paper/main.pdf)
+- [C183 random-transposition full partition spectrum](henon_random_transposition_full_spectrum_route_a/README.md) · [paper PDF](henon_random_transposition_full_spectrum_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C179_C183.md),
+[batch plan](BATCH_PLAN_C179_C183.md), and
+[batch review](BATCH_REVIEW_C179_C183.md) for candidate pivots, exact theorem
+increments, source ownership, strict Route-A verdicts, cross-audit repairs,
+release hashes, and the uniform 515,765-checker / 91,035-SymPy / 238-mutation /
+135-payload / 15-page audit. C179 alone reaches a
+weak arithmetic relation because primitive rational-prime divisors arise as
+intrinsic first-return moduli; it still lacks a unique global owner and a
+logarithmic prime clock. Coordinates remain candidate-local, the common scope
+is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.

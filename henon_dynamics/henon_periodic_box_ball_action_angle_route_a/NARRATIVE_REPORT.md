@@ -1,0 +1,7 @@
+# Narrative report
+
+The periodic box--ball system survives the mathematical attack and fails the arithmetic one.  Its integrability is unusually complete: KTT action variables and Takagi internal symmetries split every level set, including half filling, into finite lattice quotients on which every `T_l` is a literal translation.  Once that source theorem is frozen, augmented Smith normal form gives the exact return order, and the rest of finite dynamics follows without orbit search.
+
+The concrete progress is global rather than anecdotal.  One formula now owns component fixed points; finite sums own all sectors, all soliton contents, each fixed mass, and the full positive-weight space; Möbius inversion owns primitive cycles; and the ordinary finite Koopman determinant is exactly reciprocal to the Artin--Mazur zeta.  The deterministic ledger covers 193 levels, 236 positive symmetry sectors, and 1,524 translations, while an independent carrier enumerator verifies every state through `L=9`.
+
+The negative conclusion is equally precise.  Soliton lengths and Smith factors are integers, but they do not intrinsically encode rational primes.  The clock is one cellular-automaton update; replacing it by logarithmic prime time would be manual.  The finite rational zeta factors have no supplied target divisor, functional equation, counting law, or canonical infinite-volume normalization.  Thus exact action--angle solvability is retained as progress and rejected as a primary Route-A bridge.

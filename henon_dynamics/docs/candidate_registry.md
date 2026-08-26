@@ -3,6 +3,27 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C179--HCS-C183 independent big-step round (2026-08-26)
+
+This batch changes mathematical owner in every paper and forbids splitting
+one result into five packages. The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C179 | For every coprime `a>b>=1`, primitive prime divisors of `a^n-b^n` are exactly marked-point first-return moduli for multiplication by `a/b`; the exact Zsigmondy exceptions, prime-power order lift, finite-fibre cycle/zeta/spectrum/reversor, and nonunique-global-owner obstruction are closed in one theorem. Rational primes arise intrinsically, but the clock is `n`, not `log p`. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_zsigmondy_congruence_return_tower_route_a/`](../henon_zsigmondy_congruence_return_tower_route_a/) |
+| HCS-C180 | Every integer-multiplication Lattès quotient on every complex elliptic curve has a complete plus/minus/branch fixed-point and multiplier census. The count is `m^(2n)+1`, the source zeta is `1/((1-z)(1-m^2 z))`, and the three holomorphic Lefschetz channels cancel to one. The natural quotient-Haar Koopman isometry has Wold model `I_C direct-sum S^(aleph_0)`, is proper and non-Schatten, and is proved through the even-Fourier pullback model. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_lattes_three_channel_lefschetz_route_a/`](../henon_lattes_three_channel_lefschetz_route_a/) |
+| HCS-C181 | On every finite strongly connected directed multigraph, directed tree numbers determine a rotor-order-independent common recurrent-unicycle orbit length, exact orbit count, vertex-visit frequencies, all fixed iterates, zeta, finite Koopman determinant, and Eulerian specialization. The theorem is rotor traversal, not sandpile translation. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_rotor_router_strong_digraph_route_a/`](../henon_rotor_router_strong_digraph_route_a/) |
+| HCS-C182 | Every periodic box--ball level set, including every internal-symmetry sector, is a finite angle-variable lattice quotient on which the whole carrier family acts by simultaneous translation. Smith order gives each component period and exact aggregation gives all fixed iterates, primitive cycles, zeta, and finite Koopman determinant. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_periodic_box_ball_action_angle_route_a/`](../henon_periodic_box_ball_action_angle_route_a/) |
+| HCS-C183 | The lazy random-transposition operator on every `S_n` has the full partition-indexed character-ratio spectrum with regular multiplicities, finite determinant, trace/return and exact `L2` laws, bottom sector, and gap `2/n`. On frozen `S_n` the operator is not a deterministic map or an unweighted Artin--Mazur owner; its reciprocal gains a canonical primitive-cycle product only on the changed weighted path-space owner, which supplies no A0 arithmetic payload. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_random_transposition_full_spectrum_route_a/`](../henon_random_transposition_full_spectrum_route_a/) |
+
+C179 is retained as `ROUTE_A_EXPLORATORY`; the other four remain
+`ROUTE_A_REJECTED`. Coordinates are never merged. No target table, arithmetic
+local datum, Euler factor, root number, automorphy object, target divisor,
+Hilbert--Polya operator, or Route-B input is used. Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C174--HCS-C178 theorem-progress round (2026-08-26)
 
 This batch deliberately changes dynamical subtype in every paper and requires

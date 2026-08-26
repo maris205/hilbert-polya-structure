@@ -1,0 +1,133 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C182
+source_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_periodic_box_ball_action_angle_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: periodic binary box--ball carrier dynamics with KTT action--angle variables and Takagi internal-symmetry sectors
+family: every L>=1, 0<=M<=floor(L/2), every admissible soliton content, every internal symmetry, and every commuting T_l for l>=1
+phase_space: binary ring words of length L with M balls, and their disjoint positive-weight union over M
+dynamics: capacity-l periodic combinatorial-R carrier map T_l
+parameters: L, M, l, soliton multiplicities m_j, vacancies p_j, and alpha_j dividing gcd(m_j,p_j)
+parameter_provenance: intrinsic lattice, mass, carrier-capacity, conserved-action, and internal-symmetry data; never fitted
+arithmetic_origin: none; integer soliton lengths and Smith factors have no intrinsic rational-prime or prime-power semantics
+clock: one application of T_l is one discrete update; n is the unweighted iterate count
+normalization: binary 0=empty and 1=ball; uniform counting measure; no unfolding or fitted scale
+determinant_convention: finite Artin--Mazur cardinality zeta and ordinary finite counting-measure Koopman determinant
+orbit_cutoff: no theorem cutoff; exhaustive regression ledger for 2<=L<=14 and fixed prefixes n<=12
+precision: exact integers, binomials, Mobius inversion, determinants, determinantal divisors, Smith forms, and finite permutations
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, fitted clocks, and Route B
+code_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+artifact_paths:
+  - results/c182_periodic_bbs_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: periodic A_1^(1) box--ball system on binary rings with L>=2M
+  arithmetic_origin: none; no prime correspondence, logarithmic clock, or arithmetic amplitude is intrinsic
+  clock: one same-clock application of the selected T_l
+  normalization: KTT soliton content, Takagi internal symmetry, and uniform finite counting measure
+  determinant_convention: source Artin--Mazur zeta and ordinary determinant of the finite Koopman permutation
+  cutoff: all-parameter proof with exhaustive finite regression through L=14 and independent carrier enumeration through L=9
+  precision: exact integer and symbolic algebra
+  allowed_data: source papers, frozen parameters, exact sector matrices, and source-derived finite states
+  forbidden_data: target tables, arithmetic local data, post-hoc clocks, and all Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  arithmetic_origin: none; lattice and Smith integer structure is combinatorial rather than rational-prime arithmetic
+  strongest_evidence: the definition and proof use no target data, fitted scale, or manually assigned arithmetic weights
+  strongest_failure: no soliton or primitive cycle intrinsically owns a prime label, log-prime period, prime-power repetition, or von Mangoldt amplitude
+  arithmetic_controls:
+    - vacuum and half-filled boundary sectors
+    - neighboring L, M, and carrier capacities
+    - all internal-symmetry divisor sectors
+    - arbitrary finite lattice translations with the same Smith formulas
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+    arithmetic_clock_terms: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every component order, fixed point, repeated orbit, and primitive cycle is classified exactly for every parameter by the KTT/Takagi quotient and augmented Smith form
+  strongest_failure: the complete cycles carry neither arithmetic information nor source-derived stability, sign, phase, or von Mangoldt weights
+  metrics:
+    all_parameter_component_theorem: true
+    finite_level_sentinels: 193
+    finite_symmetry_sectors: 236
+    finite_translation_sentinels: 1524
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c182_periodic_bbs_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every fixed-parameter source zeta and finite Koopman determinant has an exact reciprocal cycle factorization
+  strongest_failure: no source divisor is compared with a target divisor, no target region exists, and no canonical infinite-volume determinant is supplied
+  metrics:
+    exact_source_zeta_families: all_L_M_m_alpha_l
+    target_comparisons: 0
+    fitted_parameters: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: every finite source factor is an exact rational function and every finite Koopman determinant is ordinary
+  strongest_failure: no target functional equation, Gamma factor, counting law, analytic continuation comparison, arithmetic compression, or Weil identity exists
+  metrics:
+    target_global_structure_checks: 0
+  analytic_structure: finite rational cycle products only; no target comparison or selected infinite-volume normalization
+  weil_compression: absent because there is no arithmetic primitive-orbit side
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: uniform counting measure gives a canonical same-clock finite Koopman permutation unitary whose ordinary determinant is reciprocal to the source zeta
+  strongest_failure: no canonical self-adjoint Hamiltonian, source time-reversal involution, arithmetic spectrum, or target operator is obtained
+  metrics:
+    same_clock_finite_unitary: true
+    ordinary_finite_determinant: true
+    target_operator: false
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - vacuum and half-filled edge cases
+    - neighboring carrier capacities and saturated capacities
+    - every exact internal-symmetry divisor sector in the finite ledger
+    - matched arbitrary finite abelian translations
+  proves_too_much_risk: every finite abelian translation has the same fixed-cycle-zeta-Koopman formulas without prime semantics
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete all-parameter action--angle consequence theorem and finite Koopman determinant, but no arithmetic origin, target divisor, global analytic bridge, or Hilbert--Polya claim
+blocking_conditions:
+  - no intrinsic rational-prime or prime-power origin
+  - no logarithmic arithmetic clock or source stability weights
+  - no target divisor comparison
+  - no target global analytic structure or Weil compression
+next_smallest_test: retain the action--angle/Smith construction as an exact non-arithmetic integrable control
+round2_clues:
+  - internal symmetry can change individual component orders while preserving exact global state counts
+  - augmented Smith form is a reusable translation-order certificate
+  - exact integrability and a natural finite unitary do not repair a failed arithmetic gate
+route_b_invocation_allowed: false

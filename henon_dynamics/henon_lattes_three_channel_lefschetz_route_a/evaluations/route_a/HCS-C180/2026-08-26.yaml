@@ -1,0 +1,132 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C180
+source_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_lattes_three_channel_lefschetz_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: "multiplication-by-m Lattes maps on E_tau/{+/-1}, with the full three-channel multiplier census"
+family: "complex algebraic and measure-preserving quotient dynamics"
+phase_space: "P^1 identified with E_tau/{+/-1}, for every complex elliptic curve E_tau"
+dynamics: "f_{m,tau} o pi = pi o [m]"
+parameters: "all complex elliptic moduli tau and all integers m>=2"
+parameter_provenance: "the full moduli and multiplication family was frozen before finite validation"
+arithmetic_origin: "elliptic torsion geometry only; no rational-prime or prime-power orbit correspondence"
+clock: "one application of f_{m,tau}"
+normalization: "unweighted fixed classes, separately resolved by multiplier channel"
+determinant_convention: "Artin--Mazur exponential; no ordinary Fredholm determinant is assigned to the noncompact Koopman isometry"
+orbit_cutoff: "global theorem; exact sentinels use m<=10,n<=12, direct torsion a<=80, and Wold box 20"
+precision: "exact integer, rational, finite-set, and formal-series arithmetic"
+training_data: "none"
+forbidden_data: "prime tables, target zeros or divisors, arithmetic local factors, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B"
+code_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+artifact_paths:
+  - results/c180_lattes_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+symbolic_partition: "regular plus torsion, regular minus torsion, and quotient branch classes"
+transfer_operator: "not introduced"
+potential_function: "unweighted; local fixed-point multipliers are retained only for the Lefschetz census"
+quantization_hint: "Haar Koopman proper isometry; line-bundle pullback changes degree by m^2"
+prior_work_links:
+  - "https://arxiv.org/abs/math/0402147"
+
+source_lock:
+  object: "the entire family f_{m,tau}:P^1->P^1 for every complex elliptic curve and integer m>=2"
+  arithmetic_origin: "elliptic torsion geometry only; no rational-prime or prime-power orbit correspondence is intrinsic"
+  clock: "one Lattes-map application is one tick"
+  normalization: "cardinality and holomorphic Lefschetz weights are stated separately"
+  determinant_convention: "zeta_AM=exp(sum #Fix(f^n) z^n/n)"
+  cutoff: "proofs are global; finite ledgers are regression sentinels"
+  precision: "exact algebra only"
+  allowed_data: "elliptic torsion, quotient branching, Haar measure, Fourier modes, and exact symbolic identities"
+  forbidden_data: "target data, primes, arithmetic local factors, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B"
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "the fixed set has a complete intrinsic torsion classification"
+  strongest_failure: "no fixed class or primitive orbit has a natural rational-prime label, logarithmic-prime clock, or prime-power repetition weight"
+  arithmetic_controls:
+    - "varying tau leaves every fixed count unchanged"
+    - "the branch count depends only on parity of m^n"
+    - "no prime or target table enters the derivation"
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "all fixed classes, multipliers, exact-period points, and primitive-cycle counts are explicit for every parameter"
+  strongest_failure: "the complete orbit ledger has no arithmetic labels or target amplitudes"
+  metrics:
+    fixed_channels: 3
+    all_parameter_multiplier_census: PROVED
+    target_correspondences: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c180_lattes_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "zeta_AM=1/((1-z)(1-m^2 z)) exactly"
+  strongest_failure: "the elementary rational zeta is modulus-blind and has no authorized target-divisor comparison"
+  metrics:
+    exact_source_zetas: 1
+    tau_sensitive_source_zetas: 0
+    target_matches: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "the rational zeta has global meromorphic continuation"
+  strongest_failure: "there is no target functional equation, counting law, or natural Weil compression"
+  analytic_structure:
+    continuation: "elementary rational continuation"
+    functional_equation: "absent"
+    counting_law: "m^(2n)+1 fixed points, not a target zero law"
+  weil_compression: "absent because no arithmetic primitive-orbit side exists"
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: "the natural Haar Koopman operator has exact Wold model I_C direct_sum S^(aleph_0)"
+  strongest_failure: "it is a proper noncompact non-Schatten isometry; line-bundle pullback changes the quantization space"
+  metrics:
+    natural_koopman_isometries: 1
+    ordinary_fredholm_determinants: 0
+    self_adjoint_target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - "all elliptic moduli tau"
+    - "even and odd m^n branch intersections"
+    - "direct torsion-set quotient enumeration"
+    - "23 repaired-hash mutations plus one stale-hash mutation"
+  proves_too_much_risk: "high: fixed counts erase elliptic modulus completely"
+  verdict: PASS_WITH_REJECTION
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "three-channel fixed-class census, Lefschetz identity, orbit/zeta theorem, and Wold obstruction only"
+blocking_conditions:
+  - "A0 fails: no rational-prime or prime-power origin"
+  - "the zeta is elementary and tau-blind"
+  - "the natural Koopman operator is a proper non-Schatten isometry"
+  - "no target analytic or arithmetic comparison is authorized"
+next_smallest_test: "retain C180 as a Lattes/Lefschetz/Wold obstruction control and switch dynamical subtype"
+round2_clues:
+  - "branch multipliers must not be merged into the regular torsion total"
+  - "full moduli uniformity is positive mathematics but negative arithmetic specificity"
+route_b_invocation_allowed: false

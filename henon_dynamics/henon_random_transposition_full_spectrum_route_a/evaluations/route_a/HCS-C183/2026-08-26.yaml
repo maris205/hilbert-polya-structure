@@ -1,0 +1,149 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C183
+source_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_random_transposition_full_spectrum_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: lazy random-transposition Markov chain on S_n
+family: every integer n at least two
+phase_space: finite symmetric group S_n with uniform probability
+dynamics: central convolution obtained by drawing an ordered pair uniformly and applying its transposition
+parameters: one integer deck size n at least two
+parameter_provenance: frozen source size; never fitted or selected from target data
+arithmetic_origin: none; the group size and partitions have no intrinsic rational-prime or prime-power semantics
+clock: one ordered-pair draw, including identity when both coordinates agree
+normalization: uniform probability and the L2 regular representation
+determinant_convention: finite Markov determinant det(I-z P_n), not an unweighted Artin--Mazur orbit determinant on frozen S_n
+path_space_lift: the weighted directed-edge path shift has the canonical primitive-cycle product for det(I-z P_n)^(-1), but changes phase space and dynamical owner
+orbit_cutoff: all-size proof; regression uses 2<=n<=11, 0<=k<=8, and direct word enumeration for n<=7 and k<=6
+precision: exact integer, rational, partition, character, determinant-factor, and transition-word identities
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+artifact_paths:
+  - results/c183_random_transposition_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: self-adjoint central Markov convolution P_n
+quantization_hint: abstract unitary dilation of a contraction only after enlarging Hilbert space
+prior_work_links:
+  - https://doi.org/10.1007/BF00535487
+
+source_lock:
+  object: lazy random-transposition chain on S_n
+  arithmetic_origin: absent
+  clock: one independent ordered-pair draw
+  normalization: uniform L2 and regular representation multiplicities
+  determinant_convention: finite Markov determinant on frozen S_n; reciprocal weighted path product only after changing owner
+  cutoff: all n proof with exact finite sentinels
+  precision: exact
+  allowed_data: partitions, hook lengths, transposition characters, and source walk words
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: PROVED
+    statement: every partition sector has the exact Frobenius character-ratio eigenvalue with multiplicity d_lambda squared
+  - status: PROVED
+    statement: determinant, trace, exact return probability, and L2 distance follow from one complete spectral ledger
+  - status: PROVED
+    statement: the gap is 2/n and the bottom eigenvalue is -1+2/n
+  - status: PROVED
+    statement: P_n is not induced by a single-valued deterministic map and is not a permutation Koopman operator on frozen S_n
+  - status: PROVED
+    statement: the weighted directed-edge path lift has a canonical primitive-cycle product but changes phase space and dynamical object
+  - status: STOP_SCOPED
+    statement: the classical total-variation cutoff is attributed and not claimed as new
+
+a0:
+  verdict: A0_FAIL
+  qualification: DECK_SIZE_AND_GROUP_REPRESENTATION_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: prime and composite deck sizes satisfy the same partition-theoretic formulas
+  strongest_failure: no intrinsic rational-prime carrier, logarithmic prime clock, or arithmetic origin exists
+  arithmetic_controls:
+    - compare prime and composite n
+    - erase external arithmetic labels without changing the chain
+    - retain identical representation-theoretic construction for every n
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_FAIL
+  qualification: FROZEN_S_N_HAS_NO_PRIMITIVE_ORBIT_CARRYING_AN_A0_ARITHMETIC_PAYLOAD_AND_WEIGHTED_PATH_LIFT_CHANGES_THE_OBJECT
+  evidence_status: PROVED
+  strongest_evidence: all random-walk return traces are exact and the changed weighted path space has a canonical primitive-cycle expansion
+  strongest_failure: the frozen source has no primitive orbit carrying an A0 arithmetic payload; the weighted path owner is not the frozen S_n owner
+  metrics:
+    deterministic_primitive_orbit_ledgers: 0
+    changed_weighted_path_cycle_products: 1
+    exact_partition_sectors: 193
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c183_random_transposition_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: FINITE_MARKOV_DETERMINANT_HAS_NO_TARGET_DIVISOR_MATCH
+  evidence_status: PROVED
+  strongest_evidence: the finite Markov determinant is completely factorized
+  strongest_failure: it is not an unweighted Artin--Mazur determinant on frozen S_n and has no target divisor match
+  metrics:
+    exact_finite_markov_determinants: 1
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_FUNCTIONAL_EQUATION_COUNTING_LAW_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact finite trace identities and self-adjoint spectral decomposition
+  strongest_failure: no target functional equation, Gamma factor, counting law, continuation theorem, or Weil compression exists
+  analytic_structure: finite polynomial determinant for each n only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  qualification: SELF_ADJOINT_MARKOV_CONTRACTION_AND_ABSTRACT_UNITARY_DILATION_ONLY
+  evidence_status: PROVED
+  strongest_evidence: P_n is a canonical self-adjoint Markov contraction on uniform L2
+  strongest_failure: it is not unitary and any unitary dilation enlarges Hilbert space without restoring deterministic source orbits
+  metrics:
+    physical_quantizations: 0
+    abstract_dilation_available: 1
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - prime versus composite deck size
+    - stochastic convolution versus deterministic permutation
+    - lazy versus nonlazy clock
+    - original Hilbert space versus abstract unitary dilation
+  proves_too_much_risk: generic finite self-adjoint Markov spectra also have exact determinants
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete all-size stochastic spectral theorem with a strict frozen-owner versus changed weighted-path-owner distinction and no A0 arithmetic payload
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - A1 fails because the frozen source has no primitive orbit carrying an A0 arithmetic payload
+  - finite Markov determinant has no target divisor semantics
+  - abstract dilation changes Hilbert space
+next_smallest_test: retain this chain as the canonical stochastic-spectrum negative control
+round2_clues:
+  - exact self-adjoint determinants do not imply an unweighted deterministic orbit owner on the frozen state space
+  - a canonical weighted path-cycle product may exist after a phase-space lift without repairing A0 or A1
+route_b_invocation_allowed: false

@@ -1,0 +1,135 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C181
+source_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_rotor_router_strong_digraph_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: "advance-then-move rotor-router permutation on recurrent unicycles of every finite strong directed multigraph"
+family: "finite deterministic graph dynamics and integrable permutation systems"
+phase_space: "recurrent unicycle states: a chip on the unique cycle and one selected distinguished outgoing arc per vertex"
+dynamics: "advance the rotor at the chip vertex, then move along the newly selected arc"
+parameters: "every finite nonempty strongly connected directed multigraph and every local cyclic ordering"
+parameter_provenance: "the full graph family was frozen before exhaustive small-graph validation"
+arithmetic_origin: "directed spanning trees and graph Laplacians only; no rational-prime correspondence"
+clock: "one rotor advance and chip move"
+normalization: "unweighted recurrent permutation counts"
+determinant_convention: "finite Koopman determinant det(I-zU), whose reciprocal is the Artin--Mazur zeta"
+orbit_cutoff: "global theorem; exhaustive simple graphs n<=4 plus four multigraph sentinels"
+precision: "exact integer, graph, finite-state, and symbolic polynomial arithmetic"
+training_data: "none"
+forbidden_data: "prime tables, target zeros or divisors, arithmetic local factors, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B"
+code_commit: bbb809ee198bc9ad5f196383baab1e3d9de38e43
+artifact_paths:
+  - results/c181_rotor_router_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+symbolic_partition: "recurrent unicycle states versus transient non-unicycle rotor states"
+transfer_operator: "not introduced; the natural operator is the finite permutation Koopman unitary"
+potential_function: "unweighted"
+quantization_hint: "canonical finite permutation Koopman unitary; cycle reversal is not source-canonical"
+prior_work_links:
+  - "https://arxiv.org/abs/1403.5875"
+
+source_lock:
+  object: "all finite nonempty strongly connected directed multigraphs with distinguished arcs and local cyclic orders"
+  arithmetic_origin: "directed spanning-tree and Laplacian data only; no rational-prime or prime-power orbit correspondence is intrinsic"
+  clock: "advance then move is one tick"
+  normalization: "recurrent unicycle cardinality and finite permutation traces"
+  determinant_convention: "zeta_AM=exp(sum #Fix(R^n)z^n/n)=det(I-zU)^(-1)"
+  cutoff: "proof is global; finite ledgers are regression sentinels"
+  precision: "exact graph and symbolic algebra"
+  allowed_data: "arc lists, cyclic orders, directed arborescences, rotor states, orbit decompositions"
+  forbidden_recast: "no sink, stabilization, recurrent sandpile torsor, or critical-group translation"
+  forbidden_data: "target data, primes, arithmetic local factors, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B"
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "arborescence counts are intrinsic graph invariants controlling all recurrent orbits"
+  strongest_failure: "neither arborescences nor rotor cycles carry natural rational-prime labels, logarithmic-prime clocks, or prime-power weights"
+  arithmetic_controls:
+    - "cyclic-order changes preserve M, L, and all frequency formulas"
+    - "Eulerian graphs collapse to edge-once tours"
+    - "parallel arcs and loops remain combinatorial rather than arithmetic labels"
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "every recurrent orbit, common period, vertex visit, and distinguished-arc frequency is classified"
+  strongest_failure: "the complete orbit ledger has no intrinsic arithmetic labels or target amplitudes"
+  metrics:
+    recurrent_orbit_completeness: PROVED
+    common_period_formula: "L=(sum_v d_v^+ t_v)/gcd_v(t_v)"
+    target_correspondences: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c181_rotor_router_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "zeta_AM=(1-z^L)^(-M) and det(I-zU)=(1-z^L)^M exactly"
+  strongest_failure: "the finite-cycle divisor has no authorized target comparison"
+  metrics:
+    exact_source_zetas: 1
+    exact_finite_determinants: 1
+    target_matches: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "the zeta and determinant are explicit rational/polynomial functions"
+  strongest_failure: "there is no target functional equation, counting law, or natural Weil compression"
+  analytic_structure:
+    continuation: "elementary rational continuation"
+    functional_equation: "absent"
+    counting_law: "periodic finite-cycle spikes, not a target zero law"
+  weil_compression: "absent because no arithmetic primitive-orbit side exists"
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: "the recurrent map is a canonical finite permutation and its Koopman lift is unitary with complete root-of-unity spectrum"
+  strongest_failure: "abstract orbit reversors depend on noncanonical basepoint choices and no arithmetic self-adjoint target operator appears"
+  metrics:
+    natural_finite_koopman_unitaries: 1
+    exact_spectral_multiplicity: "every L-th root occurs M times"
+    source_canonical_time_reversals: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - "all 1,625 simple strong digraphs on 2--4 vertices"
+    - "four multigraph sentinels with loops and parallel arcs"
+    - "1,697 cyclic-order audits"
+    - "25 repaired-hash mutations plus one stale-hash mutation"
+    - "explicit sandpile-recast firewall"
+  proves_too_much_risk: "moderate: the theorem is universal across rotor orders, but its graph invariants remain source-specific"
+  verdict: PASS_WITH_REJECTION
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "rotor-router orbit/frequency classification, finite zeta/determinant/spectrum, Eulerian degeneration, and natural quantization only"
+blocking_conditions:
+  - "A0 fails: no rational-prime or prime-power origin"
+  - "the zeta is a finite-cycle reciprocal with no target divisor"
+  - "no target functional equation or Weil compression exists"
+  - "natural finite quantization cannot override A0"
+next_smallest_test: "retain C181 as a rotor-router classification; switch to a different dynamical subtype rather than splitting this graph model"
+round2_clues:
+  - "individual distinguished-arc frequencies are the sharp local invariant"
+  - "Eulerian degeneration must remain an explicit corollary"
+  - "do not silently recast the dynamics as sandpile translation"
+route_b_invocation_allowed: false

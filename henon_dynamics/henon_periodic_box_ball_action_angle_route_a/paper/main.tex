@@ -1,0 +1,333 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.72in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newif\ifroundzero
+\newif\ifroundone
+\ifdefined\RoundZero\roundzerotrue\fi
+\ifdefined\RoundOne\roundonetrue\fi
+\title{Action--Angle Components, Exact Return Orders, and Zeta Laws\\
+for Every Periodic Box--Ball Level Set}
+\ifroundzero
+  \author{Route-A structural certificate C182 --- Round 0}
+\else\ifroundone
+  \author{Route-A structural certificate C182 --- Round 1}
+\else
+  \author{Route-A structural certificate C182}
+\fi\fi
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the periodic binary box--ball system, we freeze every $L\ge2M$, every
+soliton content and internal-symmetry sector, and every commuting carrier
+evolution $T_l$.  The action--angle bijection and invariant-torus
+decomposition are prior theorems of Kuniba--Takagi--Takenouchi and Takagi,
+not novelty claims.  From their precise component matrix we derive a single
+all-parameter theorem: augmented Smith normal form gives the exact order of
+each $T_l$ translation; component formulas aggregate over symmetries,
+contents, fixed mass, and the full positive-weight space; M\"obius inversion
+gives primitive cycles; and the Artin--Mazur zeta is the reciprocal ordinary
+determinant of the finite counting-measure Koopman permutation.  Vacuum,
+half filling, and saturated carrier capacity are included.  An independent
+periodic-carrier enumeration checks every binary state through $L=9$.
+The exact cycles have no intrinsic rational-prime origin or logarithmic
+arithmetic clock, so the candidate is mathematically retained and Route-A
+rejected.
+\end{abstract}
+\noindent\textbf{Keywords:} periodic box--ball system; action--angle
+variables; internal symmetry; Smith normal form; dynamical zeta; Koopman
+permutation.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文固定周期二元盒球系统的全部参数：$L\ge2M$、任意孤子含量、任意内部对称扇区以及
+全部可交换载流子演化 $T_l$。作用角变量双射与不变环面分解属于
+\foreignlanguage{english}{Kuniba--Takagi--Takenouchi} 和
+\foreignlanguage{english}{Takagi} 的既有定理，本文不声称其新颖性。
+在该定理上，我们用增广 \foreignlanguage{english}{Smith} 标准形给出每个平移的精确阶，
+把不动点公式逐层汇总到全部对称、全部孤子含量、固定球数和完整正权状态空间；再由
+莫比乌斯反演得到本原周期，并证明动力 $\zeta$ 函数等于有限计数测度
+\foreignlanguage{english}{Koopman} 置换普通行列式的倒数。真空、半填充和载流子饱和边界均被保留。
+独立的周期载流子程序穷举核验了 $L\le9$ 的所有二元状态。由于这些精确周期没有内生素数来源或
+对数算术时钟，数学结果被保留，但 \foreignlanguage{english}{Route-A} 候选被否决。
+
+\noindent 关键词：周期盒球系统；作用角变量；内部对称；
+\foreignlanguage{english}{Smith} 标准形；动力 $\zeta$ 函数；
+\foreignlanguage{english}{Koopman} 置换。
+\end{otherlanguage}
+
+\section{Frozen source dynamics and action data}
+Let $\mathcal P_{L,M}$ be the binary words on a ring of length $L$ with $M$
+balls, where $0\le M\le\lfloor L/2\rfloor$.  The capacity-$l$ periodic
+combinatorial-$R$ carrier defines $T_l$; one application is one unit of the
+discrete physical clock.  KTT prove that the $T_l$ commute and preserve the
+soliton content~\cite{KTT}
+\[
+m=(m_j)_{j\ge1},\qquad \sum_{j\ge1}j m_j=M.
+\]
+Put $H=\{j:m_j>0\}$ and
+\begin{equation}\label{eq:vacancy}
+p_j=L-2\sum_{k\in H}\min(j,k)m_k .
+\end{equation}
+Since $L\ge2M$, every $p_j\ge0$; for $N=\max H$,
+$p_N=L-2M$.  Thus equality in the density bound is visible as $p_N=0$,
+rather than excluded.
+
+For every $j\in H$, choose
+\[
+\alpha_j\mid\gcd(m_j,p_j),\qquad \gcd(m,0)=m,
+\]
+and order $H$ increasingly.  Define
+\begin{equation}\label{eq:Fh}
+F^{(\alpha)}_{jk}
+=\frac{\delta_{jk}p_k+2\min(j,k)m_k}{\alpha_k},
+\qquad
+h_l=(\min(j,l))_{j\in H}.
+\end{equation}
+The KTT/Takagi component theorem states that every connected component of
+the symmetry-$\alpha$ level is equivariantly bijective to~\cite{Takagi}
+\begin{equation}\label{eq:torus}
+G_\alpha=\mathbb Z^H/F^{(\alpha)}\mathbb Z^H,
+\qquad T_l[x]=[x+h_l].
+\end{equation}
+It has $D_\alpha=\det F^{(\alpha)}>0$ points.
+
+\ifroundzero
+The source theorem also supplies a positive integer component multiplicity
+$c(\alpha)$, and the symmetry sectors sum to the KTT level cardinality.  The
+later draft rounds make this multiplicity and the boundary cancellation
+explicit.
+\else
+The exact number of copies of \eqref{eq:torus} is
+\begin{equation}\label{eq:mult}
+c(\alpha)=\prod_{j\in H}
+\frac{|\Lambda^{(\alpha_j)}(m_j,p_j)|}{m_j/\alpha_j},
+\end{equation}
+where
+\begin{equation}\label{eq:lambda}
+|\Lambda^{(\alpha)}(m,p)|=
+\sum_{\substack{\beta\mid\gcd(m,p)\\\alpha\mid\beta}}
+\mu(\beta/\alpha)
+\binom{(p+m)/\beta-1}{m/\beta-1}.
+\end{equation}
+Equation \eqref{eq:lambda} is M\"obius inversion by exact internal period.
+The denominator in \eqref{eq:mult} is integral because cyclic shift acts
+freely with orbit size $m/\alpha$ on an exact-period sequence.  The sector
+identity is
+\begin{equation}\label{eq:sector-sum}
+\Omega_L(m)=\sum_\alpha c(\alpha)D_\alpha
+=\det F^{(1)}\prod_{j\in H}\frac1{m_j}
+\binom{p_j+m_j-1}{m_j-1}.
+\end{equation}
+\fi
+
+These statements are imported with attribution.  Our contribution starts
+from the exact finite translations in \eqref{eq:torus} and derives their
+complete fixed-cycle-determinant consequences.
+
+\section{Augmented Smith order}
+Fix one component, abbreviate $F=F^{(\alpha)}$, $h=h_l$, and
+$D=\det F$, and let $B=[F\mid h]$.  Write the nonzero Smith factors of $B$
+as $e_1,\ldots,e_s$.
+
+\begin{theorem}[Exact component return order]\label{th:order}
+The order of $T_l$ on the component is
+\begin{equation}\label{eq:order}
+q_{\alpha,l}=\min\{n\ge1:nh_l\in F^{(\alpha)}\mathbb Z^H\}
+=\frac{D_\alpha}{e_1\cdots e_s}.
+\end{equation}
+If $UFV=\operatorname{diag}(d_1,\ldots,d_s)$, equivalently
+\[
+q_{\alpha,l}=\operatorname{lcm}_i
+\frac{d_i}{\gcd(d_i,(Uh_l)_i)}.
+\]
+\end{theorem}
+
+Indeed, quotienting $G_\alpha$ by the cyclic subgroup generated by $[h]$
+gives
+\[
+G_\alpha/\langle[h]\rangle
+\cong\mathbb Z^s/(F\mathbb Z^s+\mathbb Zh).
+\]
+The group on the right has size $e_1\cdots e_s$ by Smith normal form, while
+$|G_\alpha|=D$.  Their ratio is the order of the cyclic subgroup, proving
+\eqref{eq:order}.  The second formula is the coordinate divisibility
+condition after applying $U$.  No determinant ratio is used without its
+lattice-index justification.
+
+Since $h_l=(j)_{j\in H}$ once $l\ge\max H$, all larger carriers induce the
+same translation on this level.  If $H=\varnothing$, the empty determinant
+and empty Smith product are one; the vacuum component is a singleton with
+$q=1$.
+
+\section{Fixed points, aggregation, and primitive cycles}
+Translation by an element of order $q$ on a finite group has a fixed point
+at iterate $n$ precisely when $q\mid n$, in which case every point is fixed.
+Therefore one component satisfies
+\begin{equation}\label{eq:component-fix}
+\#\operatorname{Fix}(T_l^n|G_\alpha)
+=D_\alpha\mathbf1_{q_{\alpha,l}\mid n}.
+\end{equation}
+After multiplying by the number of copies, the entire soliton level has
+\begin{equation}\label{eq:level-fix}
+F_{m,l}(n)=\sum_\alpha c(\alpha)D_\alpha
+\mathbf1_{q_{\alpha,l}\mid n}.
+\end{equation}
+
+\ifroundzero
+Equation \eqref{eq:level-fix} is the core aggregation law.  Subsequent
+rounds add fixed-mass and full positive-weight sums and audit every boundary.
+\else
+Because the action variable partitions the binary words,
+\begin{equation}\label{eq:global-fix}
+F_{L,M,l}(n)=\sum_{m:\sum jm_j=M}F_{m,l}(n),
+\qquad
+F^+_{L,l}(n)=\sum_{M=0}^{\lfloor L/2\rfloor}F_{L,M,l}(n),
+\end{equation}
+with state totals $\binom LM$ and
+$\sum_{M\le L/2}\binom LM$, respectively.  Thus ``all-state'' means an
+exact finite aggregation, not a sampled orbit list.
+\fi
+
+Let $P_n$ be the number of points of exact period $n$ and $C_n=P_n/n$ the
+number of primitive cycles.  M\"obius inversion gives
+\begin{equation}\label{eq:primitive}
+P_n=\sum_{d\mid n}\mu(n/d)F(d),\qquad C_n=P_n/n.
+\end{equation}
+Equivalently, one component contributes $D_\alpha/q_{\alpha,l}$ cycles of
+length $q_{\alpha,l}$, multiplied by $c(\alpha)$.  This proves integrality
+and completeness without a periodic-orbit cutoff.
+
+\section{Zeta and the finite Koopman determinant}
+For any one of the aggregations above, let $C_q$ denote its number of
+length-$q$ cycles.  Equations \eqref{eq:component-fix}--\eqref{eq:primitive}
+give
+\begin{equation}\label{eq:zeta}
+\zeta_{T_l}(z)
+=\exp\!\left(\sum_{n\ge1}\frac{F(n)}n z^n\right)
+=\prod_q(1-z^q)^{-C_q}.
+\end{equation}
+On $\ell^2(X)$ with counting measure, $U_lf=f\circ T_l$ is a canonical
+finite unitary permutation.  A $q$-cycle has characteristic polynomial
+$x^q-1$, hence
+\begin{equation}\label{eq:koopman}
+\det(I-zU_l)=\prod_q(1-z^q)^{C_q}=\zeta_{T_l}(z)^{-1}.
+\end{equation}
+This is the ordinary determinant of the same-clock finite operator.  It is
+neither a regularized infinite-volume determinant nor a Hilbert--P\'olya
+construction.
+
+\ifroundzero
+\section{Preliminary Route-A boundary}
+The exact finite cycles have no intrinsic prime labels or logarithmic clock.
+Accordingly this core draft retains the theorem and does not promote the
+candidate past the arithmetic entry gate.
+\else
+\section{Boundary closure}
+At half filling $p_N=0$.  In \eqref{eq:lambda}, all binomials for that
+coordinate equal one, so M\"obius cancellation leaves only $\alpha_N=m_N$
+with value one.  Thus the component theorem remains finite at $L=2M$.
+At $M=0$, the one-point vacuum is fixed by every $T_l$.  At
+$l\ge\max H$, the vector $h_l$ saturates.  These calculations close the
+three singular-looking edges without changing the clock or deleting states.
+
+\ifroundone
+\section{Route-A boundary}
+The exact cycles have no intrinsic prime labels, logarithmic periods, or
+source stability weights.  The finite zeta therefore remains a source
+identity rather than a target divisor theorem.  The final round adds the
+independent certificate and integrity audit.
+\else
+\section{Independent certificate and integrity audit}
+The exact regression ledger exhausts $2\le L\le14$: 193 soliton levels,
+236 positive internal-symmetry sectors, 1{,}524 translations, 342 fixed-mass
+aggregates, 62 positive-weight aggregates, and 23{,}136 fixed-point cells.
+For every level, the sector sum $\sum_\alpha c(\alpha)D_\alpha$ equals
+\eqref{eq:sector-sum}; summing all contents equals $\binom LM$.
+
+The checker imports no producer code.  Rational elimination and independent
+determinantal divisors pass 55{,}907 assertions.  More importantly, it runs
+the actual periodic carrier on every one of 559 states through $L=9$, checks
+108 complete permutations, reconstructs soliton content from conserved
+energies, and matches every level and all-state cycle spectrum.  SymPy passes
+38{,}979 determinant, Smith, order-minimality, M\"obius, primitive-cycle, and
+cycle-determinant checks.  Producer replay is byte exact; 64 repaired-hash
+semantic mutations and one stale-hash mutation are rejected.
+
+The seven mandatory integrity modes are all \texttt{CLEAR}: (1) implementation
+bugs are attacked by independent algebra and carrier enumeration; (2) both
+citations and formula ownership were source-verified; (3) every reported
+number has a deterministic command; (4) no data shortcut replaces the
+all-parameter proof; (5) no unexpected output is reframed as novelty;
+(6) methods match the executed scripts; and (7) frame-lock was tested by the
+precommitted Brockett fallback, which was unnecessary only after the full
+internal-symmetry theorem closed.  This is an internal integrity audit, not
+external peer review.
+
+\section{Route-A decision}
+Primitive cycles are intrinsic and complete but contain no arithmetic
+information or stability/von-Mangoldt weights: \texttt{A1\_WEAK}.  The
+source zeta and finite determinant are exact but make no target-divisor
+comparison: \texttt{A2\_FAIL}.  There is no target functional equation,
+counting law, continuation, or Weil compression: \texttt{A3\_FAIL}.  The
+same-clock counting-measure permutation is a natural finite quantization:
+\texttt{A4\_NATURAL\_QUANTIZATION}.  None repairs the absence of an intrinsic
+rational-prime origin or arithmetic clock: \texttt{A0\_FAIL}.  Hence
+\[
+\begin{aligned}
+(&\texttt{A0\_FAIL},\ \texttt{A1\_WEAK},\ \texttt{A2\_FAIL},\\
+ &\texttt{A3\_FAIL},\ \texttt{A4\_NATURAL\_QUANTIZATION}),
+\end{aligned}
+\]
+overall \texttt{ROUTE\_A\_REJECTED}; Route B is false.
+
+\paragraph{Limitations.}
+The imported action--angle result is not rebranded as a new theorem.  No
+canonical infinite-volume normalization, arithmetic primitive weight, target
+divisor, Gamma factor, functional equation, Riemann--von Mangoldt law, Weil
+compression, arithmetic local factor, Euler factor, root number, automorphy
+claim, or Hilbert--P\'olya operator is supplied.  Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\fi
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{KTT}
+A. Kuniba, T. Takagi, and A. Takenouchi,
+``Bethe ansatz and inverse scattering transform in a periodic box-ball
+system,'' \emph{Nuclear Physics B} 747 (2006), 354--397,
+\href{https://arxiv.org/abs/math/0602481}{arXiv:math/0602481v2}.
+\bibitem{Takagi}
+T. Takagi, ``Level Set Structure of an Integrable Cellular Automaton,''
+\emph{SIGMA} 6 (2010), 027,
+\href{https://sigma-journal.com/2010/027/}{arXiv:0906.1410}.
+\end{thebibliography}
+
+\ifroundzero\else\ifroundone\else
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing.  AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported exact-code
+development and drafting; it was not an external reviewer or an independent
+error process.
+\fi\fi
+\end{document}
