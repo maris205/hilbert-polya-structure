@@ -2390,3 +2390,29 @@ weak arithmetic relation because primitive rational-prime divisors arise as
 intrinsic first-return moduli; it still lacks a unique global owner and a
 logarithmic prime clock. Coordinates remain candidate-local, the common scope
 is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.
+
+## Route-A independent dynamical-owner round C184--C188
+
+This round again refuses to turn one manuscript into five installments.  It
+changes owner in every paper and closes five all-parameter results: finite
+fractal spectral decimation, an isospectral sorting flow, a Hamiltonian
+rigid-body atlas, rectangular tableau promotion, and irreducible max-plus
+cyclicity.  Each paper includes its singular or degenerate boundary and its
+strict stopping result.
+
+- [C184 Sierpiński-gasket spectral decimation](henon_sierpinski_gasket_spectral_decimation_route_a/README.md) · [paper PDF](henon_sierpinski_gasket_spectral_decimation_route_a/paper/main.pdf)
+- [C185 Brockett double-bracket sorting flow](henon_brockett_double_bracket_sorting_flow_route_a/README.md) · [paper PDF](henon_brockett_double_bracket_sorting_flow_route_a/paper/main.pdf)
+- [C186 triaxial Euler-top elliptic action--angle atlas](henon_euler_top_elliptic_action_angle_route_a/README.md) · [paper PDF](henon_euler_top_elliptic_action_angle_route_a/paper/main.pdf)
+- [C187 rectangular tableau-promotion cyclic sieving](henon_rectangular_tableau_promotion_csp_route_a/README.md) · [paper PDF](henon_rectangular_tableau_promotion_csp_route_a/paper/main.pdf)
+- [C188 irreducible max-plus projective cyclicity](henon_max_plus_irreducible_cyclicity_route_a/README.md) · [paper PDF](henon_max_plus_irreducible_cyclicity_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C184_C188.md),
+[batch plan](BATCH_PLAN_C184_C188.md), and
+[batch review](BATCH_REVIEW_C184_C188.md) for collision pivots, source
+ownership, exact theorem increments, cross-review repairs, release hashes,
+and the uniform executable/PDF audit.  All five fail A0 and therefore remain
+`ROUTE_A_REJECTED`; exact source mathematics is retained without manufacturing
+arithmetic semantics.  The release totals are 428,425 independent-checker
+assertions, 300,647 SymPy checks, 406 hostile rejections, 135 payloads, and
+eleven PDF pages.  Coordinates remain separate, the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.

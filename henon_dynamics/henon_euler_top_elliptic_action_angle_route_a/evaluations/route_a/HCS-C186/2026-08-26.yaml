@@ -1,0 +1,146 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C186
+source_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_euler_top_elliptic_action_angle_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: reduced triaxial Euler top on every angular-momentum sphere and every energy layer
+family: all 0<I1<I2<I3 and all G>0
+phase_space: coadjoint sphere S_G^2 with its KKS area
+dynamics: Mdot=M cross I^{-1}M
+parameters: three source inertias, angular-momentum magnitude, and source energy
+parameter_provenance: mechanical source parameters only; never fitted to target data
+arithmetic_origin: none
+clock: physical Euler time
+normalization: a=I1^{-1}>b=I2^{-1}>c=I3^{-1} and e=2E/G^2
+determinant_convention: no finite global Artin--Mazur determinant because resonant fixed sets are positive-dimensional
+orbit_cutoff: all-parameter proof; 180 exact rational regular sentinels
+precision: exact rational coefficient identities and 62-digit elliptic quadratures
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+artifact_paths:
+  - results/c186_euler_top_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: unitary Koopman group of the KKS-area-preserving Hamiltonian flow
+quantization_hint: canonical Koopman direct integral over energy circles
+prior_work_links:
+  - https://doi.org/10.1137/070704393
+  - https://arxiv.org/abs/1505.06186
+
+source_lock:
+  object: free triaxial rigid body reduced to its angular-momentum sphere
+  arithmetic_origin: absent
+  clock: physical time
+  normalization: inverse-inertia ordering and Jacobi modulus-square convention
+  determinant_convention: ordinary finite fixed-cardinality zeta is stopped on positive-dimensional resonances
+  cutoff: every regular and singular energy layer
+  precision: exact formulas plus regression quadratures
+  allowed_data: inertia, angular momentum, energy, elliptic integrals, and source phase portrait
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: PROVED
+    statement: both regular energy regimes have exact Jacobi charts and minimal periods for all strict triaxial parameters
+  - status: PROVED
+    statement: all axial equilibria, tangent stability rates, and four intermediate-axis heteroclinic branches are classified
+  - status: PROVED
+    statement: KKS cap actions and Jacobi angles give an exact action--angle atlas on every regular component
+  - status: PROVED
+    statement: a sampled time map fixes a regular component exactly at integral period resonance
+  - status: STOP_SCOPED
+    statement: the full-sphere ordinary Artin--Mazur series is unavailable because sufficiently large iterates have fixed circles
+
+a0:
+  verdict: A0_FAIL
+  qualification: INERTIA_ENERGY_AND_RESONANCE_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: the construction is continuous in arbitrary real mechanical parameters
+  strongest_failure: no intrinsic rational-prime carrier or logarithmic prime clock exists
+  arithmetic_controls:
+    - vary inertias continuously
+    - erase external arithmetic labels without changing the flow
+    - compare rational and irrational energy levels under the same theorem
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  qualification: CONTINUOUS_PERIODIC_FAMILIES_HAVE_EXACT_SOURCE_ORBITS_BUT_NO_A0_ARITHMETIC_PAYLOAD
+  evidence_status: PROVED
+  strongest_evidence: every regular orbit and its period are explicit
+  strongest_failure: orbit families are continuously energy-labelled and carry no arithmetic prime payload
+  metrics:
+    regular_components_per_energy: 2
+    finite_global_primitive_census: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  qualification: POSITIVE_DIMENSIONAL_FIXED_SETS_AND_NO_TARGET_DIVISOR
+  evidence_status: PROVED
+  strongest_evidence: every time-map resonance component is classified
+  strongest_failure: ordinary fixed cardinalities become infinite and no target divisor is present
+  metrics:
+    fixed_component_dimension_at_resonance: 1
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: ELLIPTIC_PERIODS_DO_NOT_SUPPLY_TARGET_ANALYTIC_STRUCTURE
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact complete elliptic integral periods and action quadratures
+  strongest_failure: no target functional equation, Gamma factor, counting law, continuation, or Weil compression
+  analytic_structure: classical elliptic integrals on source energy layers only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  qualification: KKS_AREA_GIVES_A_CANONICAL_UNITARY_KOOPMAN_GROUP
+  evidence_status: PROVED
+  strongest_evidence: Hamiltonian flow preserves KKS area and decomposes into exact circle Fourier modes
+  strongest_failure: Koopman unitarity has no prime semantics or target spectrum
+  metrics:
+    canonical_unitary_koopman_groups: 1
+    hilbert_polya_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - low versus high energy regimes
+    - regular versus separatrix energy
+    - strict triaxial versus symmetric boundary
+    - vector period versus dn component period
+    - full sphere versus one selected energy circle
+  proves_too_much_risk: generic one-degree Hamiltonian systems also have action--angle and Koopman coordinates
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete source-mechanical action--angle and fixed-set theorem with no arithmetic upgrade
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - continuous energy-labelled orbit families do not carry a rational-prime payload
+  - resonant time maps have positive-dimensional fixed sets
+  - canonical Koopman unitarity supplies no target divisor
+next_smallest_test: retain the Euler top as the canonical continuous-integrable positive-dimensional-fixed-set control
+round2_clues:
+  - exact source periods do not imply a finite global orbit zeta
+  - a natural unitary Koopman owner can coexist with total failure of the arithmetic gate
+route_b_invocation_allowed: false

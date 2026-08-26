@@ -3,6 +3,30 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C184--HCS-C188 independent dynamical-owner round (2026-08-26)
+
+This batch again forbids splitting one theorem into five papers.  Its five
+owners are, respectively, fractal spectral refinement, an isospectral
+gradient flow, a Hamiltonian rigid-body flow, a finite tableau permutation,
+and max-plus projective dynamics.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C184 | Every finite Sierpiński pre-gasket Dirichlet Laplacian has a complete 2/5/6 spectral-decimation genealogy, including the forced `6 -> 3` continuation, exact multiplicities, dimension closure, characteristic recurrence, closed determinant, heat trace, and finite spectral zeta.  Refinement changes the graph and Hilbert space and is not physical time. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FORMAL_HINT)` | [`../henon_sierpinski_gasket_spectral_decimation_route_a/`](../henon_sierpinski_gasket_spectral_decimation_route_a/) |
+| HCS-C185 | For every simple real symmetric orbit and strictly ordered diagonal target, the Brockett double-bracket flow is globally isospectral, has an exact strict Lyapunov law, exactly `n!` permutation equilibria, inversion-index linearization, convergence to one equilibrium, generic sorting, and no nonconstant recurrence.  Repeated source and target spectra are separated into stabilizer and Morse--Bott boundaries. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_brockett_double_bracket_sorting_flow_route_a/`](../henon_brockett_double_bracket_sorting_flow_route_a/) |
+| HCS-C186 | Every triaxial Euler top on every positive angular-momentum sphere has a two-regime Jacobi action--angle atlas, exact periods and endpoint limits, all axial stability rates, four heteroclinic branches, KKS cap actions, and a complete sampled-time fixed-set classification.  Resonant energy circles are fixed continua, so the ordinary isolated-cardinality Artin--Mazur series stops. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_euler_top_elliptic_action_angle_route_a/`](../henon_euler_top_elliptic_action_angle_route_a/) |
+| HCS-C187 | Rectangular standard-tableau promotion satisfies the complete q-hook cyclic-sieving fixed ledger for every iterate.  Möbius inversion yields all exact periods and cycles, zeta, finite Koopman determinant and spectral multiplicities, while evacuation is an exact reversor; one-row/column and `2 x 2` cases block a false uniform exact-order claim. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_rectangular_tableau_promotion_csp_route_a/`](../henon_rectangular_tableau_promotion_csp_route_a/) |
+| HCS-C188 | Every irreducible rational max-plus matrix has normalized matrix powers whose minimal ultimate period equals the lcm of the critical-component cyclicities.  A CSR tail, least transient, vector/projective period divisors, attraction cones, eigencone, ultimate spans, primitive boundary, reducible boundary, and a fixed-support unbounded-transient family are kept in one classification. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_max_plus_irreducible_cyclicity_route_a/`](../henon_max_plus_irreducible_cyclicity_route_a/) |
+
+All five remain `ROUTE_A_REJECTED` because all five fail A0.  Their exact
+spectral, flow, cyclic-sieving, and max-plus structures are retained as
+separate source theorems; coordinates are never merged.  No target table,
+arithmetic local datum, Euler factor, root number, automorphy object, target
+divisor, Hilbert--Polya operator, or Route-B input is used.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C179--HCS-C183 independent big-step round (2026-08-26)
 
 This batch changes mathematical owner in every paper and forbids splitting

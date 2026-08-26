@@ -1,0 +1,150 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C188
+source_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_max_plus_irreducible_cyclicity_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: normalized powers of every irreducible rational max-plus matrix
+family: all square rational matrices with finite or minus-infinity entries and strongly connected support
+phase_space: rational max-plus semimodule and its nonzero projectivization
+dynamics: x maps to B max-plus-times x, with B=A-lambda(A)
+parameters: dimension, support and rational finite weights
+parameter_provenance: source matrix data; never fitted to target tables
+arithmetic_origin: none; weights and critical cycles have no intrinsic rational-prime semantics
+clock: one max-plus matrix multiplication
+normalization: subtract the maximum cycle mean
+determinant_convention: none
+orbit_cutoff: all-parameter classical theorem; exact regression on 177 declared matrices and 901 vectors
+precision: exact Fraction and SymPy Rational arithmetic
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+artifact_paths:
+  - results/c188_max_plus_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: max-plus linear self-map only
+quantization_hint: absent; a tropical semimodule is not a source-native Hilbert-space quantization
+prior_work_links:
+  - https://doi.org/10.1016/j.laa.2009.04.027
+  - https://doi.org/10.1090/S0002-9947-2012-05605-4
+
+source_lock:
+  object: irreducible rational max-plus matrix
+  source_notation_translation: logarithmic max-times to max-plus semiring isomorphism
+  arithmetic_origin: absent
+  clock: one normalized max-plus matrix multiplication
+  normalization: B=A-lambda(A)
+  critical_cyclicity: lcm of critical-SCC gcd cycle lengths
+  determinant_convention: none
+  cutoff: all matrices with a finite declared regression
+  precision: exact
+  allowed_data: rational weights, support, cycles, critical graph, powers, CSR, and test vectors
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: ATTRIBUTED_PROVED
+    statement: the minimal ultimate period of normalized powers is exactly the critical cyclicity gamma
+  - status: DERIVED_PROVED
+    statement: the minimal transient is the first single equality B^(T+gamma)=B^T
+  - status: ATTRIBUTED_PROVED
+    statement: after a matrix-dependent transient the irreducible normalized powers equal C S^t R
+  - status: DERIVED_PROVED
+    statement: every raw and nonzero projective vector period divides gamma and exact strata are attraction-cone differences
+  - status: DERIVED_PROVED
+    statement: the eigencone is period one and ultimate column spans repeat by phase
+  - status: DERIVED_PROVED
+    statement: fixed dimension and support admit unbounded transient as weights vary
+  - status: STOP_SCOPED
+    statement: reducible matrices can require several growth rates and CSR terms
+
+a0:
+  verdict: A0_FAIL
+  qualification: WEIGHTS_SUPPORT_AND_CYCLE_MEANS_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: every irreducible rational matrix follows the same cyclicity theorem
+  strongest_failure: no rational-prime carrier, prime-power weight, or logarithmic prime clock emerges
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  qualification: ULTIMATE_MAX_PLUS_PERIODS_ARE_EXACT_BUT_HAVE_NO_A0_ARITHMETIC_PAYLOAD
+  evidence_status: PROVED
+  strongest_evidence: critical cyclicity gives every ultimate matrix phase and bounds all vector periods
+  strongest_failure: cycles carry only tropical support and weight data
+  metrics:
+    regression_matrices: 177
+    regression_vectors: 901
+    exact_simple_cycles: 441
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c188_max_plus_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: CSR_AND_PERIODIC_POWERS_DO_NOT_IDENTIFY_A_TARGET_DIVISOR
+  evidence_status: PROVED
+  strongest_evidence: the complete eventual matrix and CSR phases are exact
+  strongest_failure: no target divisor or zero-free normalization is identified
+  metrics:
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_FUNCTIONAL_EQUATION_COUNTING_LAW_CONTINUATION_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact finite-phase tropical dynamics
+  strongest_failure: no target analytic structure follows from eventual periodicity
+  analytic_structure: none
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  qualification: MAX_PLUS_SEMIMODULE_DYNAMICS_SUPPLIES_NO_SOURCE_NATIVE_HILBERT_SPACE_QUANTIZATION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: a natural max-plus linear self-map exists
+  strongest_failure: it is not a source-native complex Hilbert-space unitary or self-adjoint operator
+  metrics:
+    source_native_hilbert_space_operators: 0
+    target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+adversarial_controls:
+  controls_used:
+    - primitive gamma-one matrices with nonzero transient
+    - pure cycles of lengths two through six
+    - critical SCC cyclicities two and three with lcm six
+    - vectors with period strictly below the matrix period
+    - fixed-support unbounded-transient family
+    - reducible two-growth-rate diagonal matrix
+  proves_too_much_risk: eventual periodicity and CSR are generic tropical source structures without arithmetic semantics
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: all-irreducible tropical dynamical classification with no arithmetic payload, target divisor, analytic continuation, or Hilbert-space quantization
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - source periods have no arithmetic payload
+  - CSR has no target divisor semantics
+  - no source-native Hilbert-space operator exists
+next_smallest_test: retain max-plus cyclicity as a nonarithmetic exact control
+round2_clues:
+  - exact matrix periods do not force vector periods to be maximal
+  - primitive eventual constancy does not bound the transient
+  - irreducibility is the single-growth-rate firewall
+route_b_invocation_allowed: false

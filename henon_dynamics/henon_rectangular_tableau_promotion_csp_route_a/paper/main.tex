@@ -1,0 +1,204 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.65in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs}
+\title{Rectangular Promotion: Cyclic Sieving, the Complete Cycle Ledger,\\
+and the Finite Koopman Spectrum}
+\author{Route-A structural certificate C187}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every rectangular standard Young-tableau set $X_{a,b}=\mathrm{SYT}(b^a)$,
+we turn Rhoades's attributed cyclic-sieving theorem into a complete finite
+dynamical classification.  Root-of-unity evaluations of the unshifted
+$q$-hook polynomial give every fixed iterate; M\"obius inversion gives all
+least periods and cycles, hence the Artin--Mazur zeta, finite Koopman
+determinant, traces, and every spectral multiplicity.  Evacuation reverses
+promotion.  The theorem says $j^{ab}=1$, not that the order always equals
+$ab$.  The resulting finite unitary is natural but carries no intrinsic
+rational-prime semantics or target divisor.
+\end{abstract}
+\noindent\textbf{Keywords:} promotion; standard Young tableaux; cyclic
+sieving; $q$-hook formula; Koopman spectrum; evacuation.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对任意矩形标准杨表上的升运算给出完整有限动力学分类。以
+\foreignlanguage{english}{Rhoades}的未平移$q$钩长循环筛分定理为归属明确的输入，
+单位根取值给出每个迭代的固定点数；\foreignlanguage{english}{M\"obius}反演继而给出所有最小周期、循环、
+有限动力学$\zeta$函数、\foreignlanguage{english}{Koopman}行列式、迹与谱重数。疏散算子将升运算共轭到其逆。
+统一结论是$j^{ab}=1$，而不是所有矩形的实际阶都等于$ab$。该有限酉算子虽属源系统
+自身，却没有内生的有理素数语义或目标除子匹配。
+
+\noindent 关键词：升运算；标准杨表；循环筛分；$q$钩长公式；\foreignlanguage{english}{Koopman}谱；疏散。
+\end{otherlanguage}
+
+\section{Frozen convention and source theorem}
+Fix positive integers $a,b$, put $N=ab$, and let
+$X_{a,b}=\mathrm{SYT}(b^a)$.  We use the promotion convention $j$ in
+Rhoades~\cite{Rhoades10}: remove $N$, slide the hole northwest, increment the
+retained entries, and insert $1$.  Removing $1$ and sliding southeast is the
+inverse clock and is not silently substituted.
+
+For $[r]_q=(q^r-1)/(q-1)$ define the \emph{unshifted} polynomial
+\[
+ F_{a,b}(q)=\frac{[N]_q!}{\prod_{c\in b^a}[h(c)]_q}.
+\]
+Rhoades's rectangular standard-tableau CSP states, with
+$\omega_N=e^{2\pi i/N}$,
+\begin{equation}\label{eq:csp}
+ \#\operatorname{Fix}(j^d)=F_{a,b}(\omega_N^d)
+ \qquad(d\in\mathbb Z).
+\end{equation}
+The same source records the classical consequence $j^N=1$, with order
+background attributed to Haiman~\cite{Haiman92}.  It explicitly warns that
+the actual order need not be $N$.  Thus the cyclic group of order $N$ may act
+nonfaithfully.
+
+The polynomial convention matters.  The neighboring column-strict result in
+the source uses a shifted Schur specialization; importing that shift into
+\eqref{eq:csp} would change fixed counts.  We use exactly the standard-tableau
+formula displayed above.
+
+\section{From fixed points to every cycle}
+Let $P_\ell$ be the number of tableaux of least promotion period $\ell$, and
+let $C_\ell=P_\ell/\ell$.  Since $j^N=1$, only $\ell\mid N$ occur.  A tableau
+is fixed by $j^d$ precisely when its least period divides $d$, so divisor
+M\"obius inversion gives
+\begin{equation}\label{eq:mobius}
+ P_\ell=\sum_{d\mid\ell}\mu(\ell/d)
+ F_{a,b}(\omega_N^d),\qquad C_\ell=\frac{P_\ell}{\ell}.
+\end{equation}
+This is an all-rectangle consequence of the source theorem, not an inference
+from a finite table.  It also yields the actual promotion order as
+$\operatorname{lcm}\{\ell:C_\ell>0\}$, a divisor of $N$.
+
+\begin{center}\small
+\begin{tabular}{llll}
+\toprule
+Shape & $|X_{a,b}|$ & nonzero cycle counts & actual order\\
+\midrule
+$1\times b$ or $a\times1$ & $1$ & $C_1=1$ & $1$\\
+$2\times2$ & $2$ & $C_2=1$ & $2<4$\\
+$2\times3$ & $5$ & $C_2=C_3=1$ & $6$\\
+$3\times3$ & $42$ & $C_3=2,\ C_9=4$ & $9$\\
+$3\times4$ & $462$ & $C_3=2,C_4=3,C_6=4,C_{12}=35$ & $12$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For the sharp boundary, $F_{2,2}(q)=1+q^2$.  Its evaluations give no fixed
+tableau at one promotion step and two at the second, hence one two-cycle.  A
+uniform claim of exact order $N$ is therefore false even away from the
+one-dimensional singleton families.
+
+\section{Zeta, Koopman determinant, and reversal}
+The finite Artin--Mazur series and the cycle blocks give
+\begin{align}
+ \zeta_j(z)
+ &=\exp\!\left(\sum_{d\ge1}
+ \frac{\#\operatorname{Fix}(j^d)}d z^d\right)
+ =\prod_{\ell\mid N}(1-z^\ell)^{-C_\ell},\label{eq:zeta}\\
+ \det(I-zU_{a,b})
+ &=\prod_{\ell\mid N}(1-z^\ell)^{C_\ell}
+ =\zeta_j(z)^{-1},\label{eq:det}
+\end{align}
+where $(U_{a,b}f)(T)=f(jT)$ on counting $\ell^2(X_{a,b})$.  Each cycle is a
+cyclic permutation block.  Consequently
+\[
+ \operatorname{Tr}(U_{a,b}^d)=\#\operatorname{Fix}(j^d),\qquad
+ \operatorname{mult}(\omega_N^k)
+ =\sum_{\substack{\ell\mid N\\N\mid k\ell}}C_\ell.
+\]
+Summing these multiplicities over $k\bmod N$ gives
+$\sum_\ell\ell C_\ell=|X_{a,b}|$, so no spectral sector is missing.
+
+Sch\"utzenberger evacuation $e$ is an involution and satisfies
+$eje=j^{-1}$ on the rectangle~\cite{Rhoades10}.  Its permutation matrix $E$
+is a unitary reversor, $EUE=U^{-1}$.  Since all matrices are real, $E$ followed
+by coefficientwise conjugation is an antiunitary involution with the same
+reversal law.  This is a natural source operator statement; it is not a
+post-hoc diagonal encoding.
+
+\section{Exact evidence and Route-A stop}
+The formula ledger covers all 36 rectangles with $1\le a,b\le6$: 441
+iterate rows, 162 period rows, and 441 root-multiplicity rows.  Its largest
+population is the $6\times6$ value
+$1{,}671{,}643{,}033{,}734{,}960$, handled symbolically.  An independent
+checker constructs 37{,}401 tableaux across 26 declared small rectangles and
+passes 230{,}034 assertions, including promotion/demotion, evacuation and all
+direct cycles.  A separate SymPy path passes 3{,}065 checks; replay is byte
+exact; 107 repaired-hash and one stale-hash attacks are rejected.
+
+These finite checks are regression evidence, not a new proof of the
+Kazhdan--Lusztig CSP.  Source ownership remains with Rhoades and Haiman.  The
+package contribution is the source-locked Route-A synthesis and executable
+boundary certificate.
+
+Promotion has natural primitive cycles and a source-native finite unitary, but
+rectangle dimensions, hook lengths and cyclotomic orders do not intrinsically
+encode rational primes or prime powers.  The finite root-of-unity determinant
+has no established target divisor, functional equation, continuation, counting
+law, or Weil compression.  Therefore
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{WEAK},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{NATURAL\ QUANTIZATION}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, with Route B false and scope
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\ifcase\CRevisionRound
+\paragraph{Revision-round focus.} Round 0 freezes the promotion convention,
+the unshifted q-hook CSP, the order-divides-$N$ statement, and the M\"obius
+cycle recovery, including the singleton and $2\times2$ countercontrols.
+\or
+\paragraph{Revision-round focus.} Round 1 adds the exact zeta, reciprocal
+Koopman determinant, trace identity, and complete root-of-unity multiplicity
+formula derived from the cycle blocks.
+\or
+\paragraph{Revision-round focus.} Round 2 adds evacuation reversal, separates
+the attributed infinite theorem from finite regression, and locks the semantic
+mutation audit and strict Route-A stopping boundary.
+\fi
+
+\paragraph{Limitations and nonclaims.}
+We do not claim priority for cyclic sieving, the q-hook formula, the order
+bound, or evacuation.  We do not claim exact order $N$ uniformly or use finite
+enumeration as an infinite proof.  No rational-prime semantics, target
+divisor, Hilbert--Polya operator, external review, or acceptance score is
+asserted.
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+
+\begin{thebibliography}{2}
+\bibitem{Rhoades10} B. Rhoades,
+``Cyclic sieving, promotion, and representation theory,''
+\emph{J. Combin. Theory Ser. A} 117(1) (2010), 38--76.
+DOI: 10.1016/j.jcta.2009.03.017.
+
+\bibitem{Haiman92} M. D. Haiman,
+``Dual equivalence with applications, including a conjecture of Proctor,''
+\emph{Discrete Math.} 99 (1992), 79--113.
+DOI: 10.1016/0012-365X(92)90368-P.
+\end{thebibliography}
+\end{document}

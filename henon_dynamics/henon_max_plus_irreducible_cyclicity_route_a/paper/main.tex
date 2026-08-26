@@ -1,0 +1,234 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.65in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs}
+\newcommand{\Rmax}{\mathbb{Q}_{\max}}
+\title{Irreducible Max-Plus Powers: Exact Cyclicity, CSR Phases,\\
+Orbit Strata, and the Sharp Transient Boundary}
+\author{Route-A structural certificate C188}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every irreducible rational max-plus matrix $A$, normalize by its maximum
+cycle mean and let $\gamma$ be the lcm of the cyclicities of the critical
+components.  The source-locked cyclicity theorem says that $\gamma$ is the
+minimal ultimate period of the entire matrix-power sequence.  We integrate
+this with the exact first-equality transient, ultimate $CS^tR$ representation,
+raw and projective orbit strata, attraction cones, the eigencone, and periodic
+ultimate spans.  A fixed-support $2\times2$ family has every positive transient,
+while reducible matrices may have several growth rates.  The classification is
+exact but has no intrinsic rational-prime semantics, target divisor, or
+Hilbert-space quantization.
+\end{abstract}
+\noindent\textbf{Keywords:} max-plus algebra; cyclicity; critical graph; CSR;
+attraction cone; transient.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对任意不可约有理\foreignlanguage{english}{max-plus}矩阵给出统一的最终动力学分类。
+减去最大循环均值后，临界图各强连通分量循环性的最小公倍数$\gamma$，正是整个矩阵幂
+序列的最小最终周期。本文将这一有明确来源的经典定理与首次等式暂态、
+\foreignlanguage{english}{CSR}表示、向量及射影轨道分层、吸引锥、特征锥和最终列张成
+空间联系起来。固定的二阶支撑可以实现任意大的暂态；可约系统则可能具有多个增长率。
+这些精确热带结构不产生内生的有理素数语义、目标除子或希尔伯特空间量子化。
+
+\noindent 关键词：\foreignlanguage{english}{max-plus}代数；循环性；临界图；
+\foreignlanguage{english}{CSR}；吸引锥；暂态。
+\end{otherlanguage}
+
+\section{Frozen system and classical input}
+On $\Rmax=\mathbb Q\cup\{-\infty\}$ write
+$u\oplus v=\max(u,v)$ and $u\otimes v=u+v$.  Let
+$A\in\Rmax^{n\times n}$ have strongly connected finite support.  Its maximum
+cycle mean is $\lambda(A)$, and $B=A-\lambda(A)$ means that $\lambda(A)$ is
+subtracted from every finite entry.  The cited sources primarily use the
+equivalent max-times convention; the logarithm preserves powers, support,
+critical cycles and cyclicity while converting it exactly to this max-plus
+notation.  The critical graph is the union of all
+cycles attaining $\lambda(A)$.  If its strongly connected components have
+cyclicities $\gamma_1,\ldots,\gamma_s$---the gcds of their cycle lengths---put
+\[
+ \gamma=\operatorname{lcm}(\gamma_1,\ldots,\gamma_s).
+\]
+The classical cyclicity theorem, in the convention source-locked to
+Sergeev~\cite{Sergeev09}, states more than a period bound: the \emph{least}
+ultimate period of $\{B^t\}_{t\ge0}$ is exactly $\gamma$.  Thus there is a
+finite $T_0$ such that
+\begin{equation}\label{eq:period}
+ B^{t+\gamma}=B^t\qquad(t\ge T_0),
+\end{equation}
+and no smaller positive integer is an ultimate matrix period.  When the
+critical graph has several components the lcm, not a gcd across components,
+is essential.
+
+The second source lock is the ultimate CSR theory of Sergeev and
+Schneider~\cite{SS12}.  Put
+\[
+ K=(B^\gamma)^*=I\oplus B^\gamma\oplus\cdots\oplus B^{(n-1)\gamma}.
+\]
+Let $C$ retain the critical columns of $K$, $R$ its critical rows, and $S$ the
+critical edges of $B$, filling all other entries by $-\infty$.  For a
+matrix-dependent finite $T_{\rm CSR}$,
+\begin{equation}\label{eq:csr}
+ B^t=C\otimes S^t\otimes R\qquad(t\ge T_{\rm CSR}).
+\end{equation}
+Neither source asserts a weight-independent uniform transient, and neither do
+we.
+
+\section{Complete eventual dynamics}
+\paragraph{Exact transient.}
+Define $T(A)$ to be the least onset in~\eqref{eq:period}.  It has the sharp
+one-equality characterization
+\begin{equation}\label{eq:transient}
+ T(A)=\min\{t\ge0:B^{t+\gamma}=B^t\}.
+\end{equation}
+Indeed, the classical theorem makes the set nonempty.  If equality holds at
+one $t$, right multiplication by $B^k$ gives
+$B^{t+k+\gamma}=B^{t+k}$ for every $k\ge0$, proving~\eqref{eq:transient}.
+
+\paragraph{Vectors, projective classes, and attraction cones.}
+For every $x\in\Rmax^n$, equation~\eqref{eq:period} shows that the ultimate
+period of $B^t\otimes x$ divides $\gamma$.  For a nonzero vector, max-plus
+homogeneity gives the same conclusion after projectivization.  Both periods
+may be smaller: for
+\[
+ B=\begin{pmatrix}-\infty&0\\0&-\infty\end{pmatrix},
+ \qquad x=(0,0)^T,
+\]
+the matrix period is two whereas $x$ is fixed.
+
+For $p\mid\gamma$, the exact attraction cone is
+\[
+ \operatorname{Attr}_p(B)
+ =\{x:B^{T+p}\otimes x=B^T\otimes x\}.
+\]
+The same propagation proof shows that it consists precisely of vectors whose
+ultimate period divides $p$.  Hence the exact-period-$p$ stratum is
+\[
+ \operatorname{Attr}_p(B)\setminus
+ \bigcup_{\substack{q\mid p\\q<p}}\operatorname{Attr}_q(B).
+\]
+Replacing equality by projective equality gives the projective strata.  These
+are exact two-sided max-plus linear tests, not labels inferred from sampled
+orbits.
+
+\paragraph{Eigencone and ultimate spans.}
+The normalized eigencone $E(B)=\{x:B\otimes x=x\}$ lies in
+$\operatorname{Attr}_1(B)$.  For $0\le r<\gamma$, put
+$V_r=\operatorname{Col}(B^{T+r})$.  Then
+\[
+ V_{r+\gamma}=V_r,\qquad B(V_r)=V_{r+1},
+\]
+and every orbit lies in the corresponding phase cone after time $T$.  We do
+not assert that all $V_r$ are distinct.
+
+\section{Sharp boundaries}
+\paragraph{Primitive does not mean immediate.}
+If $\gamma=1$, the matrix powers are eventually constant.  Nevertheless, for
+every integer $m\ge1$ the fixed-support irreducible family
+\[
+ B_m=\begin{pmatrix}0&-m\\0&-1\end{pmatrix}
+\]
+has critical cyclicity one and, for $t\ge1$, direct induction gives
+\begin{equation}\label{eq:family}
+ B_m^t=\begin{pmatrix}0&-m\\0&\max(-t,-m)\end{pmatrix}.
+\end{equation}
+Thus its minimal transient is exactly $m$.  Fixed dimension and fixed support
+therefore admit unbounded transient as the weights vary; a dimension-only,
+weight-independent bound is false.
+
+\paragraph{Reducibility changes the theorem.}
+The reducible matrix $D=\operatorname{diag}(0,1)$ has component growth rates
+zero and one.  After normalization by the larger rate, its powers contain
+$-t$ and are not a single periodic sequence.  General reducible behavior is
+described by multiple growth rates and CSR terms~\cite{SS12}; we do not extend
+the irreducible conclusion across this boundary.
+
+\section{Exact evidence and Route-A stop}
+The exact ledger covers 177 matrices, 901 raw/projective vector rows, 441
+simple cycles and 189 critical components.  It checks 5,469 CSR cells and
+7,471 propagated-period cells.  An independent Karp/closure/Tarjan/gcd and
+binary-power checker passes 7,924 assertions.  A separate SymPy path passes
+10,615 checks; replay is byte exact; 137 repaired-hash and one stale-hash
+attacks are rejected.  Among the regression vectors, 28 raw and 28 projective
+orbits have period strictly below their matrix period.
+
+These checks are regression, not a finite proof of the source theorems.  The
+package contribution is the source-locked synthesis, elementary derived
+classification and executable boundary certificate.  Rational weights,
+support cycles and critical means carry no intrinsic rational-prime origin;
+ultimate phases and CSR identify no target divisor; no target functional
+equation, continuation, counting law or Weil compression follows; and a
+max-plus semimodule is not a source-native complex Hilbert-space quantization.
+Therefore
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{WEAK},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FAIL}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, with scope
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Ownership and derivation ledger.}
+The equality of the minimal ultimate matrix period with $\gamma$ is classical
+and owned by the first source; the ultimate CSR representation is owned by the
+second.  The package-level increment is their convention-consistent synthesis
+with the one-equality transient proof, exact divisor strata, phase-indexed
+ultimate spans, the fixed-support sharp family, and the reducible firewall.
+The census validates these formulas on declared finite inputs but supplies no
+priority or completeness claim about the wider literature.
+
+\ifcase\CRevisionRound
+\paragraph{Revision-round focus.} Round 0 freezes the irreducible rational
+max-plus convention, exact critical cyclicity, first-equality transient and
+the fixed-support family with every positive transient.
+\or
+\paragraph{Revision-round focus.} Round 1 adds the source-locked CSR phases,
+raw and projective attraction strata, the eigencone, and the periodic family
+of ultimate column spans.
+\or
+\paragraph{Revision-round focus.} Round 2 separates classical ownership from
+finite regression, closes the reducible multirate boundary, and locks the
+semantic mutation audit and five-gate Route-A stop.
+\fi
+
+\paragraph{Limitations and nonclaims.}
+We claim no priority for cyclicity, attraction-cone, ultimate-span, or CSR
+theory; no uniform transient; and no equality of every vector period with
+$\gamma$.  We assert no arithmetic local data, target divisor,
+Hilbert--P\'olya operator, global novelty, external review, or acceptance score.
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+
+\begin{thebibliography}{2}
+\bibitem{Sergeev09} S. Sergeev,
+``Max algebraic powers of irreducible matrices in the periodic regime: An
+application of cyclic classes,'' \emph{Linear Algebra Appl.} 431(8) (2009),
+1325--1339. DOI: 10.1016/j.laa.2009.04.027.
+
+\bibitem{SS12} S. Sergeev and H. Schneider,
+``CSR expansions of matrix powers in max algebra,''
+\emph{Trans. Amer. Math. Soc.} 364(11) (2012), 5969--5994.
+DOI: 10.1090/S0002-9947-2012-05605-4.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,147 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C187
+source_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_rectangular_tableau_promotion_csp_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: Schuetzenberger promotion on rectangular standard Young tableaux
+family: all positive rectangle dimensions a and b with N=ab
+phase_space: finite set SYT(b^a) with counting probability
+dynamics: remove N, slide the hole northwest, increment retained entries, and insert 1
+parameters: positive integers a and b
+parameter_provenance: source rectangle dimensions; never fitted to target data
+arithmetic_origin: none; hooks and rectangle dimensions have no intrinsic rational-prime semantics
+clock: one application of the frozen Rhoades promotion convention
+normalization: unshifted q-hook polynomial and counting L2
+determinant_convention: finite Artin--Mazur zeta and reciprocal finite Koopman determinant
+orbit_cutoff: all-rectangle source theorem; formula regression for 1<=a,b<=6 and direct enumeration on 26 declared small rectangles
+precision: exact integer polynomials, cyclotomic remainders, periods, cycles, determinants, and multiplicities
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+artifact_paths:
+  - results/c187_tableau_csp_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: source-native finite Koopman permutation U_ab
+quantization_hint: finite unitary with evacuation unitary reversal and evacuation-plus-conjugation antiunitary reversal
+prior_work_links:
+  - https://doi.org/10.1016/j.jcta.2009.03.017
+  - https://doi.org/10.1016/0012-365X(92)90368-P
+
+source_lock:
+  object: rectangular standard tableaux under promotion
+  arithmetic_origin: absent
+  clock: one remove-maximum promotion
+  normalization: unshifted standard-tableau q-hook polynomial
+  determinant_convention: source finite zeta and Koopman determinant
+  cutoff: all rectangles with exact finite regression
+  precision: exact
+  allowed_data: hooks, cyclotomic polynomials, CSP consequences, and direct small tableaux
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: PROVED
+    statement: Rhoades's attributed CSP gives every promotion fixed count for every rectangle and iterate
+  - status: PROVED
+    statement: Mobius inversion gives every least-period population and cycle count
+  - status: PROVED
+    statement: the cycle ledger gives the finite zeta, reciprocal Koopman determinant, trace, and all spectral multiplicities
+  - status: PROVED
+    statement: evacuation reverses promotion and supplies a canonical finite antiunitary after coefficient conjugation
+  - status: STOP_SCOPED
+    statement: j^N is the identity but promotion does not have exact order N uniformly
+
+a0:
+  verdict: A0_FAIL
+  qualification: RECTANGLE_AND_HOOK_DATA_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: every positive rectangle follows the same hook and CSP formulas
+  strongest_failure: no rational-prime carrier, prime-power repetition weight, or logarithmic prime clock emerges
+  arithmetic_controls:
+    - compare prime and composite rectangle areas
+    - retain the same theorem for one-dimensional and genuinely two-dimensional rectangles
+    - erase external arithmetic labels without changing promotion
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  qualification: FINITE_PROMOTION_CYCLES_ARE_COMPLETE_BUT_CARRY_NO_A0_ARITHMETIC_PAYLOAD
+  evidence_status: PROVED
+  strongest_evidence: all exact promotion cycles are recovered from every-iterate fixed counts
+  strongest_failure: no cycle carries an intrinsic A0 arithmetic label or logarithmic prime clock
+  metrics:
+    formula_rectangles: 36
+    exact_iterate_rows: 441
+    direct_tableaux: 37401
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c187_tableau_csp_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: FINITE_SOURCE_ZETA_AND_KOOPMAN_DETERMINANT_HAVE_NO_TARGET_DIVISOR_MATCH
+  evidence_status: PROVED
+  strongest_evidence: every source zeta and determinant factor is exact
+  strongest_failure: no target divisor or zero-free normalization is identified
+  metrics:
+    exact_cycle_factorizations: 36
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_FUNCTIONAL_EQUATION_COUNTING_LAW_CONTINUATION_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact finite rational zeta for every rectangle
+  strongest_failure: no target functional equation, counting law, continuation, or Weil compression exists
+  analytic_structure: finite rational source zeta only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  qualification: SOURCE_NATIVE_FINITE_UNITARY_AND_EVACUATION_ANTIUNITARY_REVERSOR_ONLY
+  evidence_status: PROVED
+  strongest_evidence: promotion itself induces a canonical finite unitary on counting L2 and evacuation reverses it
+  strongest_failure: the root-of-unity spectrum has no target self-adjoint or Hilbert--Polya identification
+  metrics:
+    source_native_finite_unitaries: 1
+    target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - one-row and one-column identity families
+    - 2-by-2 strict order-divisor counterexample
+    - transpose rectangles
+    - formula versus independent direct enumeration
+  proves_too_much_risk: generic finite permutations also have exact zeta functions and root-of-unity Koopman spectra
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete source-derived all-rectangle dynamical ledger with no A0 arithmetic payload or target divisor match
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - source cycles have no arithmetic payload
+  - finite determinant has no target divisor semantics
+  - natural finite unitary does not identify a target self-adjoint operator
+next_smallest_test: retain promotion as the canonical finite CSP and reversor control
+round2_clues:
+  - exact fixed counts determine the whole finite cycle and operator structure
+  - natural quantization cannot compensate for failed arithmetic and target gates
+route_b_invocation_allowed: false

@@ -1,0 +1,152 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C185
+source_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_brockett_double_bracket_sorting_flow_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: Brockett double-bracket sorting flow on a real symmetric simple-spectrum orthogonal orbit
+family: every integer n at least two, every simple real source spectrum, and every strictly increasing diagonal target N
+phase_space: compact orthogonal conjugacy orbit of a real symmetric matrix
+dynamics: dH/dt equals [H,[H,N]]
+parameters: n, the ordered simple source spectrum, and the strictly increasing diagonal entries of N
+parameter_provenance: arbitrary source-owned real data; never fitted or selected from target data
+arithmetic_origin: absent; the two spectra are arbitrary ordered real lists and carry no intrinsic rational-prime semantics
+clock: autonomous continuous flow time t
+normalization: F(H)=Tr(HN), with dF/dt equal to the squared Frobenius norm of [H,N]
+determinant_convention: none; no dynamical zeta or Fredholm determinant is promoted
+orbit_cutoff: all-n proof; finite exact permutation and pair-mode regression for 2<=n<=7
+precision: exact integer, rational matrix, permutation, and symbolic polynomial identities
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya operators, and Route-B inputs
+code_commit: 908a6818caedb0c46195a591873a2ac9c685b55e
+artifact_paths:
+  - results/c185_brockett_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: absent
+quantization_hint: state-dependent skew Lax generator and orthogonal conjugation only; no fixed linear quantum operator
+weil_form_hint: absent
+explicit_formula_hint: absent
+prior_work_links:
+  - https://doi.org/10.1016/0024-3795(91)90021-N
+
+source_lock:
+  object: all-size simple-spectrum Brockett flow dH/dt=[H,[H,N]]
+  arithmetic_origin: absent
+  clock: autonomous flow time
+  normalization: Frobenius normal-metric gradient ascent of Tr(HN)
+  determinant_convention: none
+  cutoff: all n theorem with exact n<=7 sentinels
+  precision: exact
+  allowed_data: symmetric matrices, ordered spectra, orthogonal conjugacy, commutators, permutations, and exact finite controls
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: PROVED
+    statement: the compact orthogonal orbit is globally invariant and every solution exists for all real time
+  - status: PROVED
+    statement: the Lax form preserves the complete simple spectrum and d Tr(HN)/dt=||[H,N]||_F^2
+  - status: PROVED
+    statement: the n factorial diagonal permutation equilibria have pair-mode rates indexed by inversions
+  - status: PROVED
+    statement: every trajectory converges to one equilibrium and generic initial data converge to the uniquely sorted diagonal
+  - status: PROVED
+    statement: strict Lyapunov monotonicity excludes nonconstant recurrent and periodic trajectories
+  - status: STOP_SCOPED
+    statement: repeated source spectra collapse labels and only zero ambient stabilizer rates, while repeated target spectra create genuine tangent zero modes and Morse--Bott families; no full boundary or Bruhat or Schubert closure theorem is claimed
+
+a0:
+  verdict: A0_FAIL
+  qualification: ARBITRARY_REAL_SPECTRA_HAVE_NO_INTRINSIC_RATIONAL_PRIME_OR_PRIME_POWER_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: irrational, prime-sized, composite-sized, relabeled, and reversed controls obey the same geometric theorem
+  strongest_failure: no intrinsic rational-prime carrier, prime-power repetition, logarithmic prime clock, or arithmetic weight emerges
+  arithmetic_controls:
+    - replace regression spectra by arbitrary irrational simple spectra
+    - randomly relabel or reverse the source spectrum
+    - compare prime and composite matrix sizes
+    - erase every external arithmetic label
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_FAIL
+  qualification: STRICT_LYAPUNOV_FLOW_HAS_NO_NONCONSTANT_PERIODIC_ORBITS_CARRYING_ARITHMETIC_PAYLOAD
+  evidence_status: PROVED
+  strongest_evidence: all n factorial equilibria and every tangent pair mode are resolved analytically
+  strongest_failure: the flow has no nonconstant recurrent or periodic orbit and therefore no primitive orbit carrying an A0 arithmetic payload
+  metrics:
+    nonconstant_periodic_orbits: 0
+    finite_permutation_equilibria_checked: 5912
+    finite_pair_modes_checked: 118004
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c185_brockett_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: NO_SOURCE_OWNED_DYNAMICAL_ZETA_OR_TARGET_DIVISOR_MATCH
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the finite tangent spectra are exact at every permutation equilibrium
+  strongest_failure: a local linearization characteristic polynomial is not a global dynamical determinant and no target divisor is compared
+  metrics:
+    exact_local_linearizations: 5912
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_FUNCTIONAL_EQUATION_COUNTING_LAW_CONTINUATION_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: global compact gradient convergence and exact finite tangent data
+  strongest_failure: no target functional equation, Gamma factor, counting law, continuation, or common arithmetic/dynamical compression exists
+  analytic_structure: finite-dimensional smooth gradient flow only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  qualification: STATE_DEPENDENT_SKEW_LAX_GENERATOR_IS_ONLY_A_FORMAL_ORTHOGONAL_LIFT_NOT_A_FIXED_QUANTUM_OPERATOR
+  evidence_status: PROVED
+  strongest_evidence: each trajectory is an orthogonal conjugation generated by the state-dependent skew matrix [H,N]
+  strongest_failure: the generator depends nonlinearly on H and supplies no fixed unitary or self-adjoint operator with the same Route-A clock
+  metrics:
+    fixed_quantum_operators: 0
+    state_dependent_lax_generators: 1
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - irrational versus integer spectra
+    - prime versus composite dimension
+    - sorted versus reversed source ordering
+    - simple versus repeated source spectrum
+    - strict versus repeated target spectrum
+  proves_too_much_risk: generic compact matrix gradient flows also have Lyapunov functions and exact local spectra
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete all-size simple-spectrum sorting theorem and exact Morse/inversion ledger, with repeated spectra excluded and no arithmetic or periodic-orbit promotion
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - A1 has no nonconstant periodic orbit carrying arithmetic information
+  - no source-owned dynamical determinant or target divisor match exists
+  - the state-dependent Lax lift is not a fixed quantum operator
+next_smallest_test: retain the flow as a canonical gradient-sorting negative control
+round2_clues:
+  - exact global convergence and full tangent spectra do not create arithmetic origin
+  - a Lax representation is not by itself a natural Hilbert--Polya quantization
+route_b_invocation_allowed: false
