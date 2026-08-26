@@ -2,8 +2,8 @@
 
 Date: **2026-08-26**
 
-Pipeline state: **awaiting_confirmation**  
-Current stage: **Stage 6 in progress; Chinese process record delivered; terminal acknowledgement pending**
+Pipeline state: **completed**  
+Current stage: **Stage 6 completed; terminal acknowledgement recorded; no next stage**
 
 | Stage | Status | Gate / evidence |
 |---|---|---|
@@ -25,7 +25,7 @@ Current stage: **Stage 6 in progress; Chinese process record delivered; terminal
 | Stage 3-prime re-review | **COMPLETE / MINOR REVISION / SCHOLAR CHECKPOINT APPROVED** | three-gate contract and checker PASS; 6/6 roadmap items `FULLY_ADDRESSED`; one minor regression drives B5; one previously missed minor issue is decision-inert |
 | Stage 4.5 final integrity | **ROUND 2 COMPLETE / EXACT PASS / ZERO-ISSUE BOUNDARY MET** | exact B0005/B0094 correction authorized and applied; fresh Mode-2 audit: A 3/3, B 21/21, C 16/16, D 37/74, E 49/49 with 63 replay-valid rows; SERIOUS=0, MEDIUM=0, MINOR=0 |
 | Stage 5 finalization | **COMPLETE / FULL CHECKPOINT CONFIRMED** | scholar supplied `内容确认`; exact accepted TeX/BibTeX compiled twice to byte-identical final PDF `e030259b...c761a`; final/proof extracted text identical; 13/13-page render, citation, font, build, and advisory-policy package checks closed; explicit Stage-6 entry confirms the Stage-5 checkpoint |
-| Stage 6 process summary | **IN PROGRESS / DELIVERED / TERMINAL ACK PENDING** | scholar selected Chinese first; 1,653-word Markdown and 14-page A4 PDF built; whole-pipeline observer reports Zone 2 — Mid with DI/CV/CR 8/5/6; completion awaits a separate terminal acknowledgement |
+| Stage 6 process summary | **COMPLETE / TERMINAL ACKNOWLEDGED** | scholar accepted the delivered 1,653-word Markdown and 14-page A4 PDF with the exact event `确认完成 Paper 22 Stage 6`; whole-pipeline observer remains advisory Zone 2 — Mid with DI/CV/CR 8/5/6; accepted process-record bytes are unchanged |
 | Route/release | NOT AUTHORIZED | pure algebra; no Route tuple or Gate A--E credit |
 
 ## Current theorem receipt
@@ -94,11 +94,15 @@ C1/C2 pass; B1--B5 remain `NOT-CHECKED` because no venue profile exists; no
 terminal token was emitted.  The scholar selected option 1 and explicitly
 entered Stage 6.  The Chinese process record is now delivered as Markdown,
 LaTeX, and a 14-page A4 PDF; its whole-pipeline Collaboration Depth observer
-result is advisory Zone 2 — Mid (`DI=8`, `CV=5`, `CR=6`).  Stage 6 remains
-`in_progress`, and global state remains `awaiting_confirmation`, because the
-entry/language-selection event is not a terminal acknowledgement.  Git
-synchronization is explicitly authorized for the current in-scope session
-results.  Submission, public release, author contact, cross-model upload, and
+result is advisory Zone 2 — Mid (`DI=8`, `CV=5`, `CR=6`).  The scholar then
+supplied the separate exact terminal event `确认完成 Paper 22 Stage 6` on
+2026-08-26.  Under the Stage-6 terminal semantics this changes Stage 6 to
+`completed` and the global pipeline state to `completed`; there is no next ARS
+stage.  The accepted process-record Markdown, generated LaTeX, and PDF remain
+byte-identical, while the completion receipt is the authoritative
+post-delivery state carrier.  Repository synchronization remains explicitly
+authorized for these in-scope terminal artifacts.  Submission, public release
+beyond that requested repository sync, author contact, cross-model upload, and
 Route advancement remain unauthorized.
 
 Primary artifacts:
@@ -192,7 +196,9 @@ Primary artifacts:
 - [Stage-6 process-record manifest](stage6_process_record/process_record_manifest.json)
 - [Stage-6 whole-pipeline Collaboration Depth advisory](stage6_process_record/stage6_collaboration_depth_advisory.md)
 - [Stage-6 terminal checkpoint](stage6_process_record/stage6_terminal_checkpoint.md)
+- [Stage-6 raw terminal event](stage6_process_record/stage6_terminal_event_20260826.txt)
+- [Stage-6 completion receipt](stage6_process_record/stage6_completion_receipt.md)
 
 ```text
-Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [~]SUMMARY
+Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [v]SUMMARY -> [v]COMPLETED
 ```

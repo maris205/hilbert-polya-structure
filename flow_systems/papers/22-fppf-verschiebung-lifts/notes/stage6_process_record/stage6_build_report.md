@@ -63,5 +63,8 @@ not touch the Stage-5 paper source, bibliography, or final paper PDF.
 - Visual inspection sampled the cover, contents, deliverables, stage table,
   collaboration trajectory, and terminal page; no clipping or unreadable table
   was observed.
-- Stage state remains `in_progress`; successful compilation is not a terminal
-  acknowledgement.
+- At build time the stage state remained `in_progress`; successful compilation
+  was not a terminal acknowledgement.  The later scholar event `确认完成 Paper
+  22 Stage 6` and the resulting `completed` state are recorded separately in
+  `stage6_completion_receipt.md`; the compiled process-record bytes were not
+  changed afterward.

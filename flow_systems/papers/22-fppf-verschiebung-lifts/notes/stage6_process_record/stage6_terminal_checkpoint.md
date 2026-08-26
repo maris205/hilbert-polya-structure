@@ -1,8 +1,11 @@
 # Paper 22 Stage-6 terminal checkpoint
 
 Date: **2026-08-26**  
-Checkpoint type: **terminal acknowledgement required**  
-Current status: **AWAITING SCHOLAR ACKNOWLEDGEMENT**
+Checkpoint type: **terminal acknowledgement — resolved**  
+Current status: **ACKNOWLEDGED / STAGE 6 COMPLETED / PIPELINE COMPLETED**
+
+Resolution event: **`确认完成 Paper 22 Stage 6`**  
+Resolution receipt: **`stage6_completion_receipt.md`**
 
 Delivered:
 
@@ -12,8 +15,8 @@ Delivered:
 - whole-pipeline Collaboration Depth advisory;
 - Paper-22 README conclusion synopsis and session-index update.
 
-This checkpoint does not close itself. An unambiguous scholar acknowledgement
-accepting the delivered Stage-6 record will change Stage 6 from `in_progress`
-to `completed` and the Paper-22 global pipeline from `awaiting_confirmation` to
-`completed`. A correction request or request for an English version keeps
-Stage 6 in progress.
+This checkpoint did not close itself.  The separate unambiguous scholar event
+above accepted the delivered Stage-6 record and changed Stage 6 from
+`in_progress` to `completed` and the Paper-22 global pipeline from
+`awaiting_confirmation` to `completed`.  The delivered process-record
+Markdown, generated LaTeX, and PDF were not rewritten after acceptance.

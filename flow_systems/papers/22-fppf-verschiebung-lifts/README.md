@@ -2,14 +2,11 @@
 
 ## Current status
 
-- Stage: **Stage 6 PROCESS SUMMARY in progress; Chinese record delivered;
-  terminal acknowledgement pending**.
-- Current checkpoint: the scholar selected Chinese first, requested this
-  conclusion synopsis, and entered Stage 6.  The 1,653-word Markdown record and
-  its 14-page A4 PDF include the complete stage history, iteration statistics,
-  whole-pipeline Collaboration Depth advisory, AI self-reflection, and the
-  final collaboration-quality evaluation.  Stage 6 is not marked complete
-  until the scholar explicitly accepts the delivered record.
+- Stage: **Stage 6 PROCESS SUMMARY completed; Paper-22 pipeline completed**.
+- Completion checkpoint: after delivery of the 1,653-word Markdown record and
+  its 14-page A4 PDF, the scholar supplied the exact terminal event `确认完成
+  Paper 22 Stage 6`.  The accepted Markdown, generated LaTeX, and PDF remain
+  byte-identical; the separate completion receipt records the terminal state.
 - Working title: *A Descent Obstruction to Verschiebung Lifts on fppf and
   Finite-Flat Sites*.
 - Primary owner: a universe-small absolute `NoethAffSch` site in Deninger's
@@ -95,6 +92,8 @@ together with the Dedekind-domain refinement, supplies injectivity.
 - [Stage-6 process-record manifest](notes/stage6_process_record/process_record_manifest.json)
 - [whole-pipeline Collaboration Depth advisory](notes/stage6_process_record/stage6_collaboration_depth_advisory.md)
 - [Stage-6 terminal checkpoint](notes/stage6_process_record/stage6_terminal_checkpoint.md)
+- [Stage-6 raw terminal event](notes/stage6_process_record/stage6_terminal_event_20260826.txt)
+- [Stage-6 completion receipt](notes/stage6_process_record/stage6_completion_receipt.md)
 
 The respectful source-author note is stored at
 [author_contact_draft.md](notes/author_contact_draft.md) and is prominently
@@ -119,8 +118,9 @@ orphan key.  The package verifier passes C1/C2 and remains explicitly
 `NOT-CHECKED` on B1--B5 because no venue profile was declared.  #660 remains
 `not_checked`; #672 remains advisory-unavailable; neither is restated as clean.
 Stage 5 is complete and its FULL checkpoint is confirmed by the explicit
-Stage-6 entry.  Stage 6 has delivered the Chinese process record and now awaits
-terminal acknowledgement.  Git synchronization of the current in-scope
-session results is explicitly authorized; submission, public release,
-source-author contact, venue-readiness claims, and Route advancement remain
-unauthorized.
+Stage-6 entry.  The scholar subsequently accepted the delivered Stage-6 record
+with `确认完成 Paper 22 Stage 6`; Stage 6 and the Paper-22 global pipeline are
+now `completed`, with no next ARS stage.  Git synchronization of the current
+in-scope terminal artifacts remains explicitly authorized; submission, public
+release beyond that repository sync, source-author contact, venue-readiness
+claims, and Route advancement remain unauthorized.
