@@ -47,6 +47,27 @@ def shannon_binary(theta):
     return -theta * log(theta) - (1.0 - theta) * log(1.0 - theta)
 
 
+def endpoint_receipt(profile, which):
+    """Return the exact endpoint symbol mass and a stable Legendre limit check."""
+    multiplicity = Counter(profile)
+    extremal_size = min(profile) if which == "min" else max(profile)
+    extremal_multiplicity = multiplicity[extremal_size]
+    endpoint_symbol_mass = extremal_size * extremal_multiplicity
+    direct_symbol_count = sum(k for k in profile if k == extremal_size)
+    assert direct_symbol_count == endpoint_symbol_mass
+
+    # Algebraically, P(t)-t log(k_*) is the logarithm of this shifted sum.
+    # Choosing the sign of t toward the named endpoint keeps every ratio <= 1
+    # and avoids cancellation in the numerical regression check.
+    t = -80.0 if which == "min" else 80.0
+    shifted_sum = sum(
+        k * exp(t * (log(k) - log(extremal_size))) for k in profile
+    )
+    limiting_legendre = log(endpoint_symbol_mass)
+    assert abs(log(shifted_sum) - limiting_legendre) < 1e-12
+    return extremal_size, extremal_multiplicity, endpoint_symbol_mass
+
+
 def main():
     for profile in ((1, 3), (1, 2, 3)):
         for n in range(1, 6):
@@ -93,6 +114,16 @@ def main():
     theta = 0.75
     assert abs(shannon_binary(theta) + theta * log(3.0) - log(4.0)) < 1e-12
     print("binary multifractal/Legendre identity and maximum: PASS")
+
+    repeated_extremes = (1, 1, 2, 4, 4)
+    minimum_receipt = endpoint_receipt(repeated_extremes, "min")
+    maximum_receipt = endpoint_receipt(repeated_extremes, "max")
+    assert minimum_receipt == (1, 2, 2)
+    assert maximum_receipt == (4, 2, 8)
+    print(
+        "repeated-extremal endpoint/Legendre limits: PASS "
+        "(profile (1,1,2,4,4), min mass 2, max mass 8)"
+    )
     print("ALL CHECKS PASS")
 
 

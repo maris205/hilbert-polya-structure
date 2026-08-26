@@ -3,6 +3,8 @@
 
 The computations are regression checks.  The manuscript proof uses the
 irreducible decomposition of the finite Heisenberg regular representation.
+The non-split character fixture below works explicitly in F_4 and compares
+an enumerated root-pair count with a gcd degree computed over F_2.
 """
 
 from __future__ import annotations
@@ -166,6 +168,49 @@ def polynomial_power_linear(alpha: int, beta: int, ell: int, p: int) -> list[int
     ]
 
 
+def f4_mul(left: int, right: int) -> int:
+    """Multiply bit-polynomials modulo x^2+x+1 over F_2."""
+
+    raw = 0
+    for shift in range(2):
+        if (right >> shift) & 1:
+            raw ^= left << shift
+    if raw & 0b100:
+        raw ^= 0b111
+    return raw
+
+
+def f4_pow(value: int, exponent: int) -> int:
+    out = 1
+    while exponent:
+        if exponent & 1:
+            out = f4_mul(out, value)
+        value = f4_mul(value, value)
+        exponent //= 2
+    return out
+
+
+def check_nonsplit_character_enumeration() -> None:
+    """Enumerate the ell=3 character equation over F_4, not F_2."""
+
+    ell, p = 3, 2
+    roots = [value for value in range(4) if f4_pow(value, ell) == 1]
+    assert roots == [1, 2, 3]
+    # In characteristic two, 1+u+v=0 is represented by XOR.
+    solution_pairs = [(u, v) for u, v in product(roots, repeat=2) if 1 ^ u ^ v == 0]
+    assert solution_pairs == [(2, 3), (3, 2)]
+
+    torsion = [1, 0, 0, 1]  # t^3-1 = t^3+1 over F_2
+    fermat_slice = polynomial_power_linear(1, 1, ell, p)
+    fermat_slice[0] = (fermat_slice[0] + 1) % p
+    ground_field_degree = gcd_degree(torsion, fermat_slice, p)
+    assert ground_field_degree == len(solution_pairs) == 2
+    print(
+        "non-split character enumeration F4/F2: "
+        "mu_3=[1,a,1+a] pairs=[(a,1+a),(1+a,a)] gcd_degree=2 PASS"
+    )
+
+
 def formula_nullity(
     ell: int, p: int, coefficients: tuple[int, int, int]
 ) -> int:
@@ -182,6 +227,7 @@ def formula_nullity(
 
 def main() -> None:
     check_clock_shift_blocks()
+    check_nonsplit_character_enumeration()
 
     # All coefficient triples have nonzero entries, and ell and p are distinct
     # odd/prime parameters as required by the theorem (p=2 is also allowed).

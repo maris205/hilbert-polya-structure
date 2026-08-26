@@ -63,43 +63,43 @@ def shift(v, dx, dy, nx=2, ny=2):
     return ((v[0] + dx) % nx, (v[1] + dy) % ny)
 
 
-def f_pair(a, b):
-    # A x B with sizes 2 x 6 to A' x B' with sizes 3 x 4.
-    q = a * 6 + b
-    return divmod(q, 4)
+def f_pair(a, b, n, s):
+    """Lexicographic bijection A x B -> A' x B' when mn=rs."""
+    q = a * n + b
+    return divmod(q, s)
 
 
-def finv_pair(ap, bp):
-    q = ap * 4 + bp
-    return divmod(q, 6)
+def finv_pair(ap, bp, s, n):
+    q = ap * s + bp
+    return divmod(q, n)
 
 
-def encode(x):
+def encode(x, n, s):
     y = {}
     for v, symbol in x.items():
         part, colour = symbol
         if part == 0:
             _, b = x[shift(v, 1, 0)]
-            ap, _ = f_pair(colour, b)
+            ap, _ = f_pair(colour, b, n, s)
             y[v] = (0, ap)
         else:
             _, a = x[shift(v, -1, 0)]
-            _, bp = f_pair(a, colour)
+            _, bp = f_pair(a, colour, n, s)
             y[v] = (1, bp)
     return y
 
 
-def decode(y):
+def decode(y, s, n):
     x = {}
     for v, symbol in y.items():
         part, colour = symbol
         if part == 0:
             _, bp = y[shift(v, 1, 0)]
-            a, _ = finv_pair(colour, bp)
+            a, _ = finv_pair(colour, bp, s, n)
             x[v] = (0, a)
         else:
             _, ap = y[shift(v, -1, 0)]
-            _, b = finv_pair(ap, colour)
+            _, b = finv_pair(ap, colour, s, n)
             x[v] = (1, b)
     return x
 
@@ -114,6 +114,27 @@ def all_torus_configurations(m, n):
             alphabets.append([(part, c) for c in range(size)])
         for word in product(*alphabets):
             yield dict(zip(sites, word))
+
+
+def check_dimer_bijection(m, n, r, s):
+    """Check the local dimer code and inverse on the 2 x 2 torus."""
+    assert m * n == r * s
+    count = 0
+    images = set()
+    sites = torus_sites()
+    for x in all_torus_configurations(m, n):
+        y = encode(x, n, s)
+        assert decode(y, s, n) == x
+        assert all(y[v][0] != y[shift(v, 1, 0)][0] for v in sites)
+        assert all(y[v][0] != y[shift(v, 0, 1)][0] for v in sites)
+        assert all(
+            0 <= colour < (r if part == 0 else s)
+            for part, colour in y.values()
+        )
+        images.add(tuple(y[v] for v in sites))
+        count += 1
+    assert count == 2 * (m * n) ** 2 == len(images)
+    return count
 
 
 def weighted_square_check():
@@ -146,10 +167,10 @@ def main():
         {(0, 0), (1, 0), (0, 1), (1, 1)},
         {(0, 0), (2, 0)},
     ]
-    for m, n in ((2, 2), (2, 3)):
+    for m, n in ((1, 1), (1, 6), (2, 2), (2, 3)):
         for shape in shapes:
             assert brute_extendible_patterns(shape, m, n) == formula(shape, m, n)
-    print("globally extendible finite-shape counts (six shapes, two parameter pairs): PASS")
+    print("globally extendible finite-shape counts (six shapes, four parameter pairs): PASS")
 
     remote_even = {(0, 0), (2, 0)}
     remote_opposite = {(0, 0), (3, 0)}
@@ -159,18 +180,16 @@ def main():
     assert brute_locally_admissible_patterns(remote_opposite, 2, 3) == 25
     print("global-phase versus local-admissibility counterexamples: PASS (13/25 and 12/25)")
 
-    count = 0
-    images = set()
-    sites = torus_sites()
-    for x in all_torus_configurations(2, 6):
-        y = encode(x)
-        assert decode(y) == x
-        assert all(y[v][0] != y[shift(v, 1, 0)][0] for v in sites)
-        assert all(y[v][0] != y[shift(v, 0, 1)][0] for v in sites)
-        images.add(tuple(y[v] for v in sites))
-        count += 1
-    assert count == 2 * 12**2 == len(images)
+    count = check_dimer_bijection(2, 6, 3, 4)
     print("radius-one dimer bijection K_(2,6) <-> K_(3,4): PASS (288 torus points)")
+
+    singleton_count = check_dimer_bijection(1, 6, 2, 3)
+    minimal_count = check_dimer_bijection(1, 1, 1, 1)
+    assert singleton_count == 72 and minimal_count == 2
+    print(
+        "singleton-part boundary controls: PASS "
+        "(K_(1,6) <-> K_(2,3): 72; K_(1,1): 2 torus points)"
+    )
 
     # L=2Z x 2Z has [E:L]=2; an odd period has no fixed point.
     assert count == 2 * (2 * 6) ** 2

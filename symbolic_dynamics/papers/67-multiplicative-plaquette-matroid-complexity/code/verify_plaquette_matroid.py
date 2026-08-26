@@ -46,6 +46,67 @@ def rank_mod(rows: list[list[int]], prime: int) -> int:
     return pivot_row
 
 
+def f4_add(left: int, right: int) -> int:
+    """Add in F_4 = F_2[u]/(u^2+u+1), encoded as a0 + a1*u."""
+    return left ^ right
+
+
+def f4_mul(left: int, right: int) -> int:
+    """Multiply encoded elements of F_4 exactly."""
+    left_constant, left_linear = left & 1, (left >> 1) & 1
+    right_constant, right_linear = right & 1, (right >> 1) & 1
+    constant = (left_constant * right_constant) ^ (
+        left_linear * right_linear
+    )
+    linear = (
+        (left_constant * right_linear)
+        ^ (left_linear * right_constant)
+        ^ (left_linear * right_linear)
+    )
+    return constant | (linear << 1)
+
+
+def f4_inverse(value: int) -> int:
+    """Return the multiplicative inverse of a nonzero encoded element."""
+    if value == 0:
+        raise ZeroDivisionError("zero has no inverse in F_4")
+    return next(candidate for candidate in range(1, 4) if f4_mul(value, candidate) == 1)
+
+
+def rank_f4(rows: list[list[int]]) -> int:
+    """Return row rank over the nonprime extension field F_4."""
+    if not rows:
+        return 0
+    matrix = [row.copy() for row in rows]
+    nrows = len(matrix)
+    ncols = len(matrix[0])
+    pivot_row = 0
+    for column in range(ncols):
+        pivot = next(
+            (row for row in range(pivot_row, nrows) if matrix[row][column]),
+            None,
+        )
+        if pivot is None:
+            continue
+        matrix[pivot_row], matrix[pivot] = matrix[pivot], matrix[pivot_row]
+        inverse = f4_inverse(matrix[pivot_row][column])
+        matrix[pivot_row] = [
+            f4_mul(inverse, entry) for entry in matrix[pivot_row]
+        ]
+        for row in range(nrows):
+            if row == pivot_row or not matrix[row][column]:
+                continue
+            factor = matrix[row][column]
+            matrix[row] = [
+                f4_add(left, f4_mul(factor, right))
+                for left, right in zip(matrix[row], matrix[pivot_row])
+            ]
+        pivot_row += 1
+        if pivot_row == nrows:
+            break
+    return pivot_row
+
+
 def root_coordinates(index: int, a: int, b: int) -> tuple[int, int, int]:
     """Return the unique (r,i,j) with index=r*a**i*b**j."""
     remainder = index
@@ -103,6 +164,22 @@ def direct_projection_dimension(
         - rank_mod(constraints, prime)
         + rank_mod(complement_matrix, prime)
     )
+
+
+def direct_projection_dimension_f4(
+    a: int, b: int, cutoff: int, selected: tuple[int, ...]
+) -> int:
+    """Project the finite prefix kernel over F_4 onto selected coordinates."""
+    # In characteristic two, the plaquette coefficients +1 and -1 coincide.
+    constraints = prefix_constraint_matrix(a, b, cutoff, 2)
+    selected_zero = {coordinate - 1 for coordinate in selected}
+    complement = [
+        column for column in range(cutoff) if column not in selected_zero
+    ]
+    complement_matrix = [
+        [row[column] for column in complement] for row in constraints
+    ]
+    return len(selected) - rank_f4(constraints) + rank_f4(complement_matrix)
 
 
 def edge_graph_statistics(
@@ -405,6 +482,111 @@ def check_haar_and_forest_independence() -> int:
     return cases
 
 
+def potential_pattern_counts_f4(
+    edges: tuple[tuple[int, int], ...],
+) -> tuple[Counter[tuple[int, ...]], int, int]:
+    """Enumerate a potential map over F_4 using exact polynomial arithmetic."""
+    row_vertices = sorted({row for row, _ in edges})
+    column_vertices = sorted({column for _, column in edges})
+    row_position = {vertex: index for index, vertex in enumerate(row_vertices)}
+    column_position = {
+        vertex: index for index, vertex in enumerate(column_vertices)
+    }
+    counts: Counter[tuple[int, ...]] = Counter()
+    for assignment in product(
+        range(4), repeat=len(row_vertices) + len(column_vertices)
+    ):
+        row_values = assignment[: len(row_vertices)]
+        column_values = assignment[len(row_vertices) :]
+        pattern = tuple(
+            f4_add(
+                row_values[row_position[row]],
+                column_values[column_position[column]],
+            )
+            for row, column in edges
+        )
+        counts[pattern] += 1
+    rank, _, components, _ = edge_graph_statistics(set(edges))
+    return counts, rank, components
+
+
+def check_extension_field_f4() -> tuple[int, int, int, int]:
+    """Exercise ranks, projections, rectangles, and Haar laws over F_4."""
+    assert all(f4_mul(value, f4_inverse(value)) == 1 for value in range(1, 4))
+
+    prefix_cases = 0
+    for cutoff in range(1, 81):
+        constraints = prefix_constraint_matrix(2, 3, cutoff, 2)
+        assert rank_f4(constraints) == cutoff // 6
+        prefix_cases += 1
+
+    projection_cases = 0
+    cutoff = 12
+    for mask in range(1 << cutoff):
+        selected = tuple(
+            coordinate
+            for coordinate in range(1, cutoff + 1)
+            if mask & (1 << (coordinate - 1))
+        )
+        direct = direct_projection_dimension_f4(2, 3, cutoff, selected)
+        graph_dimension, _ = arithmetic_graph_statistics(selected, 2, 3)
+        assert direct == graph_dimension
+        projection_cases += 1
+
+    rectangle_cases = 0
+    for rows_count in range(1, 7):
+        for columns_count in range(1, 7):
+            constraints: list[list[int]] = []
+            for row in range(rows_count - 1):
+                for column in range(columns_count - 1):
+                    equation = [0] * (rows_count * columns_count)
+                    for delta_row, delta_column in (
+                        (0, 0),
+                        (1, 0),
+                        (0, 1),
+                        (1, 1),
+                    ):
+                        position = (
+                            (row + delta_row) * columns_count
+                            + column
+                            + delta_column
+                        )
+                        equation[position] = f4_add(equation[position], 1)
+                    constraints.append(equation)
+            assert rank_f4(constraints) == (rows_count - 1) * (
+                columns_count - 1
+            )
+            rectangle_cases += 1
+
+    shapes = (
+        ((0, 0), (0, 1), (1, 1)),
+        ((0, 0), (0, 1), (1, 0), (1, 1)),
+        ((0, 0), (1, 1)),
+    )
+    haar_cases = 0
+    for edges in shapes:
+        counts, rank, components = potential_pattern_counts_f4(edges)
+        total_assignments = sum(counts.values())
+        assert len(counts) == 4**rank
+        assert set(counts.values()) == {4**components}
+        for first in range(len(edges)):
+            for second in range(first + 1, len(edges)):
+                marginal_pair = Counter()
+                for pattern, multiplicity in counts.items():
+                    marginal_pair[(pattern[first], pattern[second])] += multiplicity
+                assert len(marginal_pair) == 16
+                assert set(marginal_pair.values()) == {total_assignments // 16}
+        _, cycle_rank, _, _ = edge_graph_statistics(set(edges))
+        if cycle_rank:
+            assert all(
+                f4_add(f4_add(pattern[0], pattern[1]), f4_add(pattern[2], pattern[3]))
+                == 0
+                for pattern in counts
+            )
+        haar_cases += 1
+    return prefix_cases, projection_cases, rectangle_cases, haar_cases
+
+
 def main() -> None:
     coordinate_cases, global_instances = check_root_coordinates_and_global_axes()
     prefix_cases = check_prefixes()
@@ -412,6 +594,9 @@ def main() -> None:
     rectangle_cases = check_rectangles()
     edge_update_cases = check_edge_update_laws()
     haar_cases = check_haar_and_forest_independence()
+    f4_prefixes, f4_projections, f4_rectangles, f4_haar = (
+        check_extension_field_f4()
+    )
 
     print("multiplicative root and global-axis checks")
     print(f"  root coordinates checked:       {coordinate_cases}")
@@ -429,6 +614,11 @@ def main() -> None:
     print("  all distinct coordinate pairs are independent: PASS")
     print("  four-corner alternating cycle relation: PASS")
     print("rank theorem exercised in characteristics 2, 3, and 5")
+    print("nonprime extension-field checks: F_4 = F_2[u]/(u^2+u+1)")
+    print(f"  prefix ranks through 80:        {f4_prefixes}")
+    print(f"  all subsets of [1,12]:         {f4_projections}")
+    print(f"  rectangles through side 6:     {f4_rectangles}")
+    print(f"  exact Haar enumerations:        {f4_haar}")
     print("ALL CHECKS PASS")
 
 

@@ -4,8 +4,9 @@
 The script directly enumerates commutator and square-product tuple
 counts for D8, Q8, and C3, applies the spanning-tree gauge factor, and compares
 the results with the character formulas used in the paper.  The C3 control
-also exercises the Frobenius--Schur indicator-zero branch and the full
-(+, -, 0) reconstruction.  Finite checks are not proofs of the all-index
+exercises the Frobenius--Schur indicator-zero branch, and a separate exact
+two-degree fixture replays all three Vandermonde recovery ledgers with
+simultaneous (+, -, 0) sectors.  Finite checks are not proofs of the all-index
 theorem.
 """
 
@@ -225,6 +226,82 @@ def verify_c3_zero_indicator_control():
     print("C3: reconstructed (c_1^+, c_1^-, c_1^0)=(1, 0, 2) PASS")
 
 
+def solve_two_base_vandermonde(bases, moments, start_index):
+    """Solve two exact known-base moment equations over the rationals."""
+
+    first, second = bases
+    m0, m1 = start_index, start_index + 1
+    a00, a01 = first**m0, second**m0
+    a10, a11 = first**m1, second**m1
+    determinant = a00 * a11 - a01 * a10
+    assert determinant
+    return (
+        (moments[0] * a11 - a01 * moments[1]) / determinant,
+        (a00 * moments[1] - moments[0] * a10) / determinant,
+    )
+
+
+def verify_mixed_indicator_vandermonde_fixture():
+    """Replay P, Q, and R recovery for two degrees and all FS sectors."""
+
+    degrees = (1, 2)
+    bases = tuple(Fraction(1, degree**2) for degree in degrees)
+    fixture = {
+        1: {"plus": 2, "minus": 1, "zero": 1},
+        2: {"plus": 1, "minus": 2, "zero": 1},
+    }
+    totals = tuple(sum(fixture[d].values()) for d in degrees)
+    self_dual = tuple(
+        fixture[d]["plus"] + fixture[d]["minus"] for d in degrees
+    )
+    signed_over_degree = tuple(
+        Fraction(fixture[d]["plus"] - fixture[d]["minus"], d)
+        for d in degrees
+    )
+
+    p_moments = tuple(
+        sum(t * base**m for t, base in zip(totals, bases)) for m in (1, 2)
+    )
+    q_moments = tuple(
+        sum(s * base**m for s, base in zip(self_dual, bases)) for m in (1, 2)
+    )
+    r_moments = tuple(
+        sum(b * base**m for b, base in zip(signed_over_degree, bases))
+        for m in (0, 1)
+    )
+
+    recovered_totals = solve_two_base_vandermonde(bases, p_moments, 1)
+    recovered_self_dual = solve_two_base_vandermonde(bases, q_moments, 1)
+    recovered_signed_over_degree = solve_two_base_vandermonde(
+        bases, r_moments, 0
+    )
+    assert recovered_totals == totals
+    assert recovered_self_dual == self_dual
+    assert recovered_signed_over_degree == signed_over_degree
+
+    recovered = {}
+    for index, degree in enumerate(degrees):
+        delta = degree * recovered_signed_over_degree[index]
+        plus = (recovered_self_dual[index] + delta) / 2
+        minus = (recovered_self_dual[index] - delta) / 2
+        zero = recovered_totals[index] - recovered_self_dual[index]
+        recovered[degree] = (plus, minus, zero)
+    assert recovered == {
+        1: (Fraction(2), Fraction(1), Fraction(1)),
+        2: (Fraction(1), Fraction(2), Fraction(1)),
+    }
+
+    print(
+        "synthetic mixed-indicator fixture: "
+        f"bases={list(bases)} P={list(p_moments)} "
+        f"Q={list(q_moments)} R={list(r_moments)}"
+    )
+    print(
+        "synthetic mixed-indicator fixture: reconstructed "
+        "d=1:(2,1,1), d=2:(1,2,1) PASS"
+    )
+
+
 def main():
     d8 = d8_elements()
     q8 = q8_elements()
@@ -248,6 +325,7 @@ def main():
     print("D8/Q8: orientable equality and even/odd nonorientable split PASS")
 
     verify_c3_zero_indicator_control()
+    verify_mixed_indicator_vandermonde_fixture()
     verify_s3_control()
     print("ALL CHECKS PASS")
 

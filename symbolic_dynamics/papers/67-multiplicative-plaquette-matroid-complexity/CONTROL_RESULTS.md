@@ -1,6 +1,6 @@
 # Deterministic control results
 
-Run date: **2026-08-25 UTC**.
+Run date: **2026-08-26 UTC**.
 
 Environment:
 
@@ -50,6 +50,20 @@ Final status: **ALL CHECKS PASS**.
 - Every distinct coordinate pair was independent, and every four-cycle
   obeyed the alternating plaquette equation, including in characteristic two.
 
+### Nonprime extension-field control
+
+- Exact polynomial-basis arithmetic used
+  $\mathbb F_4=\mathbb F_2[u]/(u^2+u+1)$; field addition, multiplication,
+  inversion, and Gaussian elimination were implemented without numerical
+  approximation or a prime-field surrogate.
+- All 80 prefix ranks through cutoff 80 for $(a,b)=(2,3)$ agreed with
+  $\lfloor N/6\rfloor$.
+- Every one of the $2^{12}=4096$ coordinate subsets had the direct
+  $\mathbb F_4$ projection dimension predicted by its root-wise graph rank.
+- All 36 exponent rectangles through side length six and three exact Haar
+  forest/cycle enumerations satisfied the stated rank, fibre, pairwise
+  independence, and four-cycle relations.
+
 ### Edge deletion and addition
 
 - Eleven exact graph transitions checked all four deletions from a four-cycle,
@@ -63,14 +77,14 @@ Frozen receipt:
 
 ```text
 script SHA-256:
-d0a2d3a1bd0c743b375eaf7e2dc98b100ff08f30cd741641cb1fcd81ab98a158
+8cd3bee21428e8b1701e02ff054d5627dc1f1c7e5e1389694e51f5e370491431
 
 output SHA-256:
-a44506264017a8e6250e123df4477898def6c23f560c67b4e829948967c0bb26
+f3eeb1dbdc67b81bf6848c2aa92f92a5b29dad3bfac8fff61c0cee343b5b2432
 ```
 
 The live output, `code/verify_plaquette_matroid.out`, and
-`build/verify_plaquette_matroid.current.out` are byte-identical.
+`stage4/CONTROL_RUN.out` are byte-identical.
 
 ## Evidentiary limit
 

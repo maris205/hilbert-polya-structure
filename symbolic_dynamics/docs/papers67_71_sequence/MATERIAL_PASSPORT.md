@@ -10,12 +10,13 @@ its human-readable batch ledger.
 - Batch: `P67--P71`
 - Domain: symbolic dynamics
 - Evidence cutoff: 2026-08-26 UTC
-- Current authority: completed Stage-2.5 author-side integrity audit; awaiting
-  explicit confirmation before Stage 3 multi-role review
+- Current authority: completed exact author-bound Stage-4 internal revision;
+  Stage 3-prime verification review queued under standing authorization
 - Governing constraint: five distinct primary dynamical-system families, not
   five parameter variants of one object
-- Current state: five corrected compiled internal papers frozen; Stage 2.5
-  content gate `PASS_WITH_NOTES`; priority clearance not granted
+- Current state: five revised compiled internal papers; Stage-4 patch,
+  response, TeX-transport, control, compile, and visual-QA receipts complete;
+  priority clearance not granted
 - Active YAML status: `VERIFIED` for the bounded Stage-2.5 gate, SHA-256
   `097d6d3cc38d0dc8a97889ba40966bd82d422c8a4c4bc8ae0851015b85ea6f99`
 - External release: **HOLD**
@@ -31,7 +32,7 @@ its human-readable batch ledger.
 | `HEIS-WEIGHTED-FERMAT-JUMP` | P70 | weighted finite-Heisenberg fixed-nullity formula with cyclotomic character term and all-or-nothing nonlinear Fermat-locus jump | cross-characteristic block proof, convention audit, exact controls, 7-page PDF, direct finite-Heisenberg owner subtraction | specialist exact-formula/finite-quotient review; `MEDIUM-HIGH` collision risk; priority not granted |
 | `ZIP-DEGREE-PRESSURE-RIGIDITY` | P71 | local-degree pressure/equilibrium/curvature, exact Bowen spectrum, profile recovery and conjugacy, weighted periodic zeta | noncompact Bowen proof, exact controls, corrected 9-page PDF, current-work boundary expanded | specialist current/in-press zip thermodynamic review; `HIGH` pressure collision risk; priority not granted |
 
-## Frozen internal artifacts
+## Stage-2.5 frozen input artifacts
 
 | Slot | PDF | Pages | SHA-256 |
 |---:|---|---:|---|
@@ -40,6 +41,20 @@ its human-readable batch ledger.
 | P69 | `papers/69-orientation-sensitive-surface-flat-sft/main.pdf` | 11 | `93462a17e92207d9dfbccc55d6ac543391c55a8950d5057a50e9a3b9996c2766` |
 | P70 | `papers/70-weighted-heisenberg-congruence-nullities/main.pdf` | 7 | `61398af7a4ab61ea3ace029ec315721d4a855bf8f60986c84b2fdc94d9bd0142` |
 | P71 | `papers/71-zip-shift-degree-pressure/main.pdf` | 9 | `971b33083dc14ceb99831f94786167c1186bf9b8365557472fb2a9f493174a9e` |
+
+The table above is the immutable pre-Stage-3/Stage-4 PDF input set. The current
+Stage-4 outputs are:
+
+| Slot | Current PDF | Pages | SHA-256 |
+|---:|---|---:|---|
+| P67 | `papers/67-multiplicative-plaquette-matroid-complexity/main.pdf` | 11 | `cee9a255bbb805601531855c38512bcb011868825786f4dd56747055ce432454` |
+| P68 | `papers/68-complete-bipartite-homshift-conjugacies/main.pdf` | 7 | `a8e3491df2ce91ea43c5d1161c0300bb77209bd939f064c6dea20fdb2f8130e9` |
+| P69 | `papers/69-orientation-sensitive-surface-flat-sft/main.pdf` | 11 | `b45b6839b02cd7b285cab4b90753285d6c47f4b109a4461cce92bfc42b031b14` |
+| P70 | `papers/70-weighted-heisenberg-congruence-nullities/main.pdf` | 8 | `3091437f38faa5ef271fb2185e1c6fa7760e0762a296948c4a2d64fa012e8f9d` |
+| P71 | `papers/71-zip-shift-degree-pressure/main.pdf` | 10 | `a8c7555a8445b22d18f23cf191beb486eb41131a0218b80d4f8aea51564ee246` |
+
+These outputs pass the bounded Stage-4 internal gate. They are not specialist,
+novelty, priority, authorship, venue-fit, or release certificates.
 
 ## Evidence classes and review provenance
 
