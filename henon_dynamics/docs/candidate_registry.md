@@ -3,6 +3,31 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C174--HCS-C178 theorem-progress round (2026-08-26)
+
+This batch deliberately changes dynamical subtype in every paper and requires
+one enlarged all-parameter theorem rather than a renamed fixed-count ledger.
+Finite-field Frobenius, logistic/tent, and Gauss/Farey proposals were screened
+out before release because their local ownership or collision boundaries were
+weaker than the selected systems.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C174 | Every odd-affine 2-adic parity map has an exact countable first-return renewal with geometric Haar law.  The accelerated ordinary zeta fails, while the original-clock roof gives `(1-z)/(1-2z)` and the zero orbit restores `(1-2z)^(-1)`.  Reciprocal derivative stability collapses to `(1-z)^(-1)` for every odd parameter pair, proving parameter blindness; the positive-integer Collatz boundary is explicit. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_dyadic_odd_affine_parity_renewal_route_a/`](../henon_dyadic_odd_affine_parity_renewal_route_a/) |
+| HCS-C175 | Cyclic Rule 184 reaches its isolated-minority periodic core within `m^2` steps for every size and density.  Low-density cores rotate right, high-density cores rotate left, and cyclic independent-set counts yield every iterate, exact period, primitive cycle, zeta, and core determinant.  The whole sector is bijective exactly for `m<=1`. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_rule184_traffic_periodic_geometry_route_a/`](../henon_rule184_traffic_periodic_geometry_route_a/) |
+| HCS-C176 | Recurrent sandpile addition is exactly translation on the reduced-Laplacian critical group.  Smith and adjugate formulas agree on its order `L`; all recurrent orbits have length `L`, yielding the complete fixed ledger, zeta, finite Koopman determinant and character spectrum.  Group inversion reverses the clock and the unitary is self-adjoint exactly for `L<=2`; full stable-state dynamics remain separate. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_sandpile_translation_spectral_route_a/`](../henon_sandpile_translation_spectral_route_a/) |
+| HCS-C177 | Every integer expanding circle map has fixed counts `b^n-1`, zeta `(1-z)/(1-bz)`, a complete `1 direct_sum S^(aleph_0)` Koopman Wold model, explicit Perron filter, and a sharp mean-zero Sobolev correlation factor `b^(-ns)`.  Prime and composite degrees obey the same degree-only theorem. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_expanding_circle_wold_route_a/`](../henon_expanding_circle_wold_route_a/) |
+| HCS-C178 | Harmonic-oscillator strobes have a complete rational/irrational fixed-set dichotomy and Gaussian Laguerre--angular Koopman spectrum.  The natural same-real-time Hermite quantization satisfies exact Egorov and retains the metaplectic law `Q_(theta+2*pi)=-Q_theta`, `Q_(theta+4*pi)=Q_theta`; both physical unitaries are non-Schatten and lack ordinary Fredholm determinants. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_harmonic_strobe_quantization_route_a/`](../henon_harmonic_strobe_quantization_route_a/) |
+
+All five candidates fail the intrinsic-arithmetic gate.  Their exact dynamics,
+finite or infinite natural operators, and metaplectic lift are retained as
+separate source theorems and controls; no coordinates are merged.  No target
+table, divisor, functional equation, counting law, arithmetic local datum,
+Euler factor, root number, automorphy object, or Hilbert--Polya operator is
+claimed.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B is false.
+
 ## HCS-C169--HCS-C173 theorem-progress round (2026-08-26)
 
 This is the first batch recorded under Route-A evaluator 0.2.0, frozen to

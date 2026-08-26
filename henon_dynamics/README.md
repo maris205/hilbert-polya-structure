@@ -2341,3 +2341,26 @@ candidate pivots, content-addressed artifacts, two integrity gates, and uniform
 release audit.  The five source systems and their verdict coordinates remain
 separate.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B
 remains unauthorized.
+
+## Route-A theorem-progress round C174--C178
+
+This round takes larger theorem steps and changes subtype in every paper: an
+odd-affine 2-adic renewal, the Rule-184 traffic cellular automaton, recurrent
+Abelian sandpile stabilization, smooth expanding circle endomorphisms, and a
+classical/quantum harmonic-oscillator strobe.  Finite-field Frobenius,
+logistic/tent, and Gauss/Farey candidates were screened out before release;
+rotor-router, Lattès, and Morse--Smale alternatives remain future pivots.
+
+- [C174 odd-affine 2-adic parity renewal and clock recovery](henon_dyadic_odd_affine_parity_renewal_route_a/README.md) · [paper PDF](henon_dyadic_odd_affine_parity_renewal_route_a/paper/main.pdf)
+- [C175 cyclic Rule-184 periodic geometry](henon_rule184_traffic_periodic_geometry_route_a/README.md) · [paper PDF](henon_rule184_traffic_periodic_geometry_route_a/paper/main.pdf)
+- [C176 recurrent sandpile translation spectrum](henon_sandpile_translation_spectral_route_a/README.md) · [paper PDF](henon_sandpile_translation_spectral_route_a/paper/main.pdf)
+- [C177 expanding-circle Wold and sharp mixing law](henon_expanding_circle_wold_route_a/README.md) · [paper PDF](henon_expanding_circle_wold_route_a/paper/main.pdf)
+- [C178 harmonic-strobe Gaussian and metaplectic spectra](henon_harmonic_strobe_quantization_route_a/README.md) · [paper PDF](henon_harmonic_strobe_quantization_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C174_C178.md),
+[batch plan](BATCH_PLAN_C174_C178.md), and
+[batch review](BATCH_REVIEW_C174_C178.md) for candidate pivots, all-parameter
+theorems, Route-A verdicts, internal cross-audit repairs, exact release hashes,
+and the uniform 472,538-checker/46,114-SymPy audit.  All five source systems
+remain separate, all fail A0, and Route B remains unauthorized under
+`NO_BAD_EULER_OR_ROOT_NUMBER`.

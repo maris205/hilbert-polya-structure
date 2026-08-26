@@ -1,0 +1,254 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.72in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{Critical-Group Translation, Exact Spectrum, and Reversal\\for Recurrent Abelian Sandpiles}
+\author{Route-A structural certificate C176}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every finite connected undirected loopless multigraph with a sink and
+every nonnegative chip vector, we identify addition--stabilization on
+recurrent stable configurations with translation on the reduced-Laplacian
+critical group. Smith and adjugate formulas compute the translation order
+$L$ exactly. All recurrent orbits then have length $L$, giving closed fixed
+counts, Artin--Mazur zeta, finite Koopman determinant, and character spectrum.
+Group inversion supplies an antiunitary reversal, and the Koopman unitary is
+self-adjoint exactly when $L\le2$. A two-state path example shows why the
+positive theorem cannot be extended to all stable configurations.
+\end{abstract}
+\noindent\textbf{Keywords:} Abelian sandpile; recurrent configuration;
+critical group; Smith normal form; dynamical zeta; Koopman permutation.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对任意有限连通无向无环多重图、指定汇点和非负加砂向量，证明复现稳定构型上的
+加砂与稳定化严格等同于约化\foreignlanguage{english}{Laplacian}临界群平移。
+\foreignlanguage{english}{Smith}标准形和伴随矩阵给出平移阶 $L$ 的两套精确公式。
+所有复现轨道均具有长度 $L$，从而得到不动点、动力 $\zeta$ 函数、有限维
+\foreignlanguage{english}{Koopman}行列式和字符谱。群反演提供反酉时间反演，且
+\foreignlanguage{english}{Koopman}算子自伴当且仅当 $L\le2$。一个两状态路径例子说明，
+所有稳定构型上的映射不能被混同为复现置换。
+
+\noindent 关键词：阿贝尔沙堆；复现构型；临界群；\foreignlanguage{english}{Smith}标准形；
+动力 $\zeta$ 函数；\foreignlanguage{english}{Koopman}置换。
+\end{otherlanguage}
+
+\section{Sink stabilization and the recurrent bridge}
+Let $G$ be a finite connected undirected loopless multigraph with designated
+sink $s$. Write $V^\circ=V(G)\setminus\{s\}$ and $r=|V^\circ|$. With edge
+multiplicity $a_{vw}$, the reduced Laplacian is
+\[
+\Delta_{vv}=\deg(v),\qquad \Delta_{vw}=-a_{vw}\quad(v\ne w).
+\]
+A stable configuration satisfies $0\le\eta_v<\deg(v)$ for every
+$v\in V^\circ$. Toppling $v$ sends one chip along every incident edge and
+loses chips entering the sink. Connectivity to the sink gives termination;
+commuting toppling vectors and the least-action argument give a unique stable
+result. For $b\in\mathbb N^r$, one clock step is
+\[
+T_b(\eta)=\operatorname{stab}(\eta+b).
+\]
+
+The critical group and its order are
+\[
+K(G,s)=\mathbb Z^r/\Delta\mathbb Z^r,
+\qquad D=|K(G,s)|=\det\Delta.
+\]
+The next lemma owns the passage from physical height vectors to this quotient.
+
+\begin{lemma}[Burning and unique recurrent representatives]
+Start with the sink burned. A stable configuration is recurrent exactly when
+the remaining vertices can be burned successively whenever
+\[
+\eta_v\ge \#\{\text{edges from $v$ to currently unburned vertices}\}.
+\]
+Every class in $K(G,s)$ contains exactly one recurrent stable configuration.
+\end{lemma}
+
+To see the dynamical content, let $\beta_v=a_{vs}$ count edges to the sink.
+Then $\beta=\Delta\mathbf1$. After adding $\beta$, a burning order is exactly
+a legal sequence in which each nonsink topples once: before $v$ topples, sink
+edges and edges from earlier burned vertices have supplied the threshold
+missing from the displayed inequality. The final height is
+$\eta+\beta-\Delta\mathbf1=\eta$. Conversely, a nonempty unburnable set is a
+forbidden subconfiguration and cannot belong to the recurrent communicating
+class.
+
+For counting and uniqueness, fix local orders of parallel edges. Recording
+one earlier-burned predecessor edge for each vertex produces a spanning tree
+oriented to the sink; the height records the number and local rank of earlier
+edges, so the construction is invertible. The Laplacian cofactor expansion
+counts these trees by $\det\Delta=D$. The least-action comparison of two
+complete burning scripts shows that equivalent recurrent stable configurations
+coincide. Since the quotient also has $D$ classes, every class has exactly one
+recurrent representative.
+
+Thus the recurrent set $\mathcal R(G,s)$ is canonically a $K(G,s)$-torsor;
+the recurrent representative of zero supplies its sandpile-group identity.
+Stabilization of a recurrent state after any nonnegative addition remains
+recurrent and satisfies
+\[
+[T_b(\eta)]=[\eta]+[b].
+\]
+Actual addition--stabilization is therefore translation by $[b]$, rather than
+an abstract group substituted for the source dynamics.
+
+\section{Two exact formulas for the translation order}
+Define
+\[
+L=\operatorname{ord}_{K(G,s)}([b])
+=\min\{\ell\ge1:\ell b\in\Delta\mathbb Z^r\}.
+\]
+Suppose a Smith decomposition is frozen as
+\[
+U\Delta V=\operatorname{diag}(d_1,\ldots,d_r),
+\]
+with $U,V$ unimodular. Then $\ell[b]=0$ exactly when
+$d_i\mid\ell(Ub)_i$ for every coordinate. Hence
+\begin{equation}\label{eq:smith}
+L=\operatorname{lcm}_{1\le i\le r}
+\frac{d_i}{\gcd(d_i,(Ub)_i)}.
+\end{equation}
+
+The adjugate gives a coordinate-free alternative. Put
+$w=\operatorname{adj}(\Delta)b$. Since
+$\Delta^{-1}=\operatorname{adj}(\Delta)/D$,
+\[
+\ell b\in\Delta\mathbb Z^r
+\quad\Longleftrightarrow\quad
+D\mid\ell w_i\quad\text{for every }i.
+\]
+Taking prime valuations in the coordinate conditions yields
+\begin{equation}\label{eq:adj}
+L=\operatorname{lcm}_{i}\frac{D}{\gcd(D,w_i)}
+=\frac{D}{\gcd(D,w_1,\ldots,w_r)}.
+\end{equation}
+For $b=0$, both \eqref{eq:smith} and \eqref{eq:adj} give $L=1$. If $r=0$,
+the empty determinant convention gives $D=L=1$ and one empty recurrent state.
+
+\section{Cycles, zeta, characters, and reversal}
+\begin{theorem}[Complete recurrent translation law]
+Every recurrent orbit has exact length $L$, and there are $D/L$ primitive
+cycles. For every $n\ge1$,
+\[
+\#\operatorname{Fix}(T_b^n|\mathcal R)=
+\begin{cases}D,&L\mid n,\\0,&L\nmid n.\end{cases}
+\]
+Moreover
+\[
+\zeta_{T_b}(z)=(1-z^L)^{-D/L},\qquad
+\det(I-zU_b)=(1-z^L)^{D/L},
+\]
+and every $L$-th root of unity occurs in the spectrum of $U_b$ with
+multiplicity $D/L$.
+\end{theorem}
+
+A return at any recurrent state is exactly the equation $n[b]=0$, whose least
+positive solution is $L$ and is independent of the state. Dividing $D$ by the
+common orbit length gives the cycle count, fixed counts, and reciprocal zeta
+and determinant factors. For the spectral statement, the characters of
+$K(G,s)$ diagonalize $U_bf=f\circ T_b$. Restriction to the cyclic subgroup
+$\langle[b]\rangle$ is onto, and each character of that subgroup has $D/L$
+extensions. Its values on $[b]$ are precisely the $L$-th roots.
+
+Let $R(\eta)=\eta^{-1}$ in the recurrent sandpile group. Then
+\[
+R^2=I,\qquad RT_bR=T_b^{-1}.
+\]
+Consequently $\Theta f=\overline{f\circ R}$ is antiunitary and
+$\Theta U_b\Theta=U_b^{-1}$. Since $U_b^*=U_b^{-1}$,
+\[
+U_b=U_b^*\Longleftrightarrow T_b=T_b^{-1}
+\Longleftrightarrow 2[b]=0
+\Longleftrightarrow L\le2.
+\]
+
+\section{The full stable-state boundary}
+The preceding theorem is intentionally restricted to $\mathcal R(G,s)$.
+Consider the path $0$--$1$--$2$ with sink $2$ and nonsink addition
+$b=(1,0)$. Its stable states are $(0,0)$ and $(0,1)$. Direct toppling gives
+\[
+T_b(0,0)=(0,1),\qquad T_b(0,1)=(0,1).
+\]
+Thus the full stable-state map is noninjective. The reduced Laplacian has
+determinant one, and the recurrent set is the singleton $\{(0,1)\}$, where
+the theorem correctly gives $D=L=1$.
+
+No all-stable-state cycle classification or eventual-recurrence assertion is
+made for arbitrary $b$. Such a blanket statement would also fail at $b=0$,
+where every stable state is fixed. The natural Koopman unitary below belongs
+to the explicitly frozen recurrent phase space, not to a silently enlarged
+full stable space.
+
+\section{Evidence and Route-A decision}
+The regression ledger contains all 30 connected simple-graph isomorphism
+types on two through five vertices, 137 sink choices, 780 labelled additions,
+8{,}704 fixed rows, 32{,}938 full-stable transitions, 13{,}764 recurrent
+transitions, and 212{,}504 fixed-state comparisons. Among these labelled
+tests, 610 full stable maps are noninjective. A producer-independent checker
+passes 135{,}049 assertions, including opposite toppling orders, class
+signatures, every cycle and inversion identity. SymPy passes 5{,}248 Smith,
+adjugate, cyclic-spectrum and reversal checks; byte replay is exact; all 17
+hostile mutations are rejected. These rows are sentinels; the multigraph
+scope rests on the proofs. Citation and reference registries each have
+population zero, and no external novelty or priority claim is made.
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Gate&Verdict&Reason\\
+\midrule
+A0&\texttt{FAIL}&no intrinsic arithmetic origin\\
+A1&\texttt{WEAK}&complete recurrent cycles, no arithmetic information\\
+A2&\texttt{FAIL}&exact source zeta, no target divisor comparison\\
+A3&\texttt{FAIL}&finite rational source, no target global structure\\
+A4&\texttt{NATURAL\_QUANTIZATION}&same-clock recurrent permutation and reversal\\
+\bottomrule
+\end{tabular}
+\end{center}
+The v0.2 tuple is
+\[
+\begin{aligned}
+(&\texttt{A0\_FAIL},\texttt{A1\_WEAK},\texttt{A2\_FAIL},\\
+ &\texttt{A3\_FAIL},\texttt{A4\_NATURAL\_QUANTIZATION}).
+\end{aligned}
+\]
+The overall verdict is \texttt{ROUTE\_A\_REJECTED}; Route B is false. A4
+records a genuine finite same-clock unitary but cannot repair the failed
+arithmetic gate.
+
+\paragraph{Limitations.}
+The graph is undirected, finite, connected and loopless; directed graphs need
+additional hypotheses. Finite character spectra do not supply prime semantics.
+There is no target divisor, functional equation, counting law, continuation,
+Weil compression, arithmetic local factor, Euler factor, root number,
+automorphy claim, or Hilbert--P\'olya operator. Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+\end{document}

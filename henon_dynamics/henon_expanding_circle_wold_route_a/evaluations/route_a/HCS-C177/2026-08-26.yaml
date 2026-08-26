@@ -1,0 +1,135 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C177
+source_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_expanding_circle_wold_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: integer expanding circle endomorphism on the Haar circle
+family: every integer degree b at least two
+phase_space: real circle R/Z with normalized Haar probability
+dynamics: T_b(x)=b*x modulo one
+parameters: one integer degree b at least two
+parameter_provenance: frozen source parameter; never fitted or selected from target data
+arithmetic_origin: none; the integer degree is generic topological degree and carries no intrinsic rational-prime or prime-power semantics
+clock: one application of T_b
+normalization: normalized Haar measure, Fourier basis e_m, and homogeneous Sobolev norm on mean-zero functions
+determinant_convention: ordinary Artin--Mazur zeta from finite fixed sets; ordinary Fredholm determinant only for trace-class perturbations
+orbit_cutoff: all-parameter proof; exact regression uses 2<=b<=12, 1<=n<=12, |m|<=72, and correlation sentinels through n=8 and s=4
+precision: exact integer, rational, Fourier-index, and symbolic identities
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+artifact_paths:
+  - results/c177_expanding_circle_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: Perron adjoint U_b^* on Haar L2
+quantization_hint: canonical inverse-limit unitary dilation only after changing phase space
+
+source_lock:
+  object: integer expanding circle endomorphism T_b(x)=b*x modulo one
+  family: every integer b at least two
+  clock: one application of T_b
+  measure: normalized Haar measure
+  operator: U_b f=f after T_b on Haar L2
+  data_policy: frozen source identities only; no target tables or arithmetic local data
+
+claims:
+  - status: PROVED
+    statement: fixed points are the cyclic grid of order b^n-1 for every b and n
+  - status: PROVED
+    statement: exact periods follow by Mobius inversion and zeta_AM=(1-z)/(1-b*z)
+  - status: PROVED
+    statement: Koopman is one constant plus countably many unilateral Wold shifts
+  - status: PROVED
+    statement: Perron is the explicit backward Fourier filter
+  - status: PROVED
+    statement: mean-zero dot-H^s against L2 correlations have sharp factor b^(-n*s)
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: prime and composite degree controls satisfy the identical degree-only theorem
+  strongest_failure: no intrinsic prime correspondence, logarithmic prime clock, or arithmetic origin exists
+  arithmetic_controls:
+    - compare prime and composite b at identical formulas
+    - erase any external arithmetic label without changing the map
+    - retain the same Wold model across all degrees
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: all fixed counts, exact-period points, and primitive cycles are classified
+  strongest_failure: the ledger depends only on generic topological degree
+  metrics:
+    all_parameter_fixed_count_laws: 1
+    finite_periodic_rows: 132
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c177_expanding_circle_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source zeta is exactly the rational function (1-z)/(1-b*z)
+  strongest_failure: no target divisor match or determinant owner is established
+  metrics:
+    exact_source_zeta_families: 1
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the source analytic structure is completely rational
+  strongest_failure: no target functional equation, Gamma factor, counting law, or continuation comparison exists
+  analytic_structure: one zero at one and one degree pole; no target comparison
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: exact proper Koopman isometry, Perron adjoint, and canonical unitary dilation
+  strongest_failure: the dilation changes phase space; the original operator is nonunitary, noncompact, non-Schatten, and lacks an ordinary Fredholm determinant
+  metrics:
+    exact_wold_shift_copies: countably_infinite
+    physical_quantizations: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - prime versus composite degree
+    - arbitrary relabeling of b
+    - noninvertible source versus inverse-limit dilation
+    - rough L2 versus smooth mean-zero observables
+  proves_too_much_risk: all positive structure is generic to integer expanding maps
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete orbit, Wold, Perron, and correlation theorem without an arithmetic or target bridge
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - source zeta has only generic degree structure
+  - natural extension changes phase space
+  - no target global analytic comparison
+next_smallest_test: retain this family as the canonical expanding-endomorphism negative control
+round2_clues:
+  - integer parameters must not be mistaken for intrinsic arithmetic origin
+  - exact mixing and exact primitive cycles still do not imply a target bridge
+route_b_invocation_allowed: false

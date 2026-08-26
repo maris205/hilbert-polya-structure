@@ -1,0 +1,130 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C175
+source_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_rule184_traffic_periodic_geometry_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: cyclic synchronous elementary cellular automaton Rule 184 in each conserved particle sector
+family: every N>=1 and every 0<=k<=N
+phase_space: labelled cyclic binary words X_(N,k)
+dynamics: F(x)_i=x_(i-1)(1-x_i)+x_i*x_(i+1)
+parameters: ring length N and conserved particle count k
+parameter_provenance: intrinsic integer source parameters; never fitted
+arithmetic_origin: none; traffic particles, holes and rotations have no intrinsic prime or prime-power semantics
+clock: one simultaneous Rule-184 update
+normalization: labelled sites and right rotation (rho x)_i=x_(i-1)
+determinant_convention: finite-sector Artin--Mazur zeta; finite periodic-core Koopman determinant only
+orbit_cutoff: all-parameter proof; exhaustive sentinel 1<=N<=12 and 1<=n<=2N+2
+precision: exact binary states and integer combinatorics
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+artifact_paths:
+  - results/c175_rule184_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: cyclic Rule 184 on each fixed particle-number sector
+  arithmetic_origin: none; no prime correspondence or arithmetic weight is intrinsic
+  clock: one simultaneous local-rule update
+  normalization: labelled cyclic sites and the stated rotation convention
+  determinant_convention: source Artin--Mazur zeta and periodic-core finite determinant; no invented full-system unitary determinant
+  cutoff: all-parameter proof with exhaustive sentinel through N=12 and n=2N+2
+  precision: exact states, counts, gcd and binomial arithmetic
+  allowed_data: frozen local rule and source-derived combinatorics
+  forbidden_data: external target tables and all Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  arithmetic_origin: none; the cellular automaton is a non-arithmetic traffic model
+  strongest_evidence: the definition uses only cyclic adjacency and particle conservation
+  strongest_failure: no primitive traffic cycle owns a prime label, log-prime clock, or arithmetic weight
+  arithmetic_controls:
+    - cyclic rotation parent control
+    - reflected particle-hole traffic control
+    - neighboring particle sectors
+    - randomized labels on the same cycles
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every primitive temporal cycle and repetition is classified intrinsically for all N and k
+  strongest_failure: complete cycles carry no arithmetic information, stability multiplier, prime semantics, or target amplitude
+  metrics:
+    all_parameter_classification: true
+    exhaustive_words: 8190
+    primitive_rows: 299
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c175_rule184_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every sector Artin--Mazur zeta is an exact finite product over primitive temporal periods
+  strongest_failure: no source divisor is compared with a target divisor and no sealed target region exists
+  metrics:
+    exact_source_zeta_families: all_N_k
+    target_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: each source zeta is a finite rational function with exact coefficients
+  strongest_failure: no target functional equation, Gamma factor, counting law, continuation comparison, or Weil compression exists
+  metrics:
+    target_global_structure_checks: 0
+  analytic_structure: finite rational source products only; no target comparison
+  weil_compression: absent because there is no arithmetic orbit side
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: each canonical periodic core is a reversible finite rotation permutation, and full sectors with m<=1 coincide with that core
+  strongest_failure: for m>=2 the whole sector has transients and is nonbijective; restricting to the core changes the phase space
+  metrics:
+    whole_sector_unitary_boundary: m<=1
+    periodic_core_unitary: true
+    all_family_same_phase_space_unitary: false
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - cyclic rotations
+    - particle-hole reflected traffic
+    - neighboring density sectors
+    - randomized cycle labels
+  proves_too_much_risk: the exact necklace counting mechanism survives without any arithmetic semantics
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete source periodic geometry and transient-to-core theorem, but no arithmetic or target bridge and no full-family unitary
+blocking_conditions:
+  - no intrinsic arithmetic origin
+  - no target divisor comparison
+  - no target global analytic structure
+  - full sectors with m>=2 are noninvertible
+next_smallest_test: retain the all-density traffic theorem as a non-arithmetic irreversible control
+round2_clues:
+  - density-dependent transient geometry can still admit closed primitive-cycle products
+  - a canonical periodic-core unitary must not be promoted to the full noninvertible system
+  - future candidates need arithmetic semantics before exact finite zeta formulas receive Route-A credit
+route_b_invocation_allowed: false

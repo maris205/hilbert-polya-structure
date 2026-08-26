@@ -1,0 +1,158 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C174
+source_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_dyadic_odd_affine_parity_renewal_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: "odd-affine parity map on Z_2, together with its first-return map to the odd coset"
+family: "noninvertible 2-adic arithmetic and renewal dynamical systems"
+phase_space: "Z_2 with normalized Haar probability; odd cross-section O=1+2Z_2"
+dynamics: "T_{a,b}(x)=x/2 for even x and (a*x+b)/2 for odd x"
+parameters: "a,b are arbitrary odd integers"
+parameter_provenance: "the full odd-parameter family was frozen before symbolic derivation and finite validation"
+arithmetic_origin: "intrinsic dyadic local arithmetic, but no natural rational-prime or prime-power correspondence"
+clock: "one application of T_{a,b} is one original-clock tick; the induced roof is r(k)=k"
+normalization: "fixed-point cardinality, plus the separately declared reciprocal 2-adic derivative stability"
+determinant_convention: "classical Artin--Mazur exponential for T and an explicitly declared stability-weighted exponential; no substitute determinant for the return map"
+orbit_cutoff: "all-parameter theorem; finite sentinels use 36 parameter pairs, words n<=8, inverse prefixes of length 8, returns k<=12, periods n<=16, and roof coefficients n<=32"
+precision: "exact integer, rational, formal-series, and 2-adic valuation arithmetic"
+training_data: "none; no fitted parameters and no target tables"
+forbidden_data: "target zero or divisor tables, prime tables, arithmetic local factors, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B"
+code_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+artifact_paths:
+  - results/c174_parity_renewal_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+symbolic_partition: "parity partition Z_2=2Z_2 disjoint_union (1+2Z_2)"
+transfer_operator: "not introduced; the natural observable lift is the Haar Koopman isometry U f=f o T"
+roof_function: "r(k)=k on the countable first-return alphabet k>=1"
+potential_function: "unweighted, and separately |1-(T^n)'|_2^{-1} on periodic points"
+quantization_hint: "proper Koopman isometry with Wold model I_C direct_sum S^(aleph_0); inverse-limit unitarization changes phase space"
+prior_work_links:
+  - "https://doi.org/10.4153/CJM-1996-060-x"
+  - "https://arxiv.org/abs/2010.12987"
+
+source_lock:
+  object: "the entire family T_{a,b}:Z_2->Z_2 for odd integers a,b"
+  arithmetic_origin: "2-adic branch arithmetic only; no rational-prime labels, prime-power repetition law, or von Mangoldt weights"
+  clock: "one branch application is one tick; return symbol k carries exactly k original ticks"
+  normalization: "#Fix(T^n) and reciprocal 2-adic derivative stability are never mixed"
+  determinant_convention: "zeta_AM=exp(sum #Fix(T^n) z^n/n); zeta_stab=exp(sum W_n z^n/n); renewal zeta uses its explicit roof"
+  cutoff: "global proofs; finite exact ledgers are regression sentinels and are never presented as proof"
+  precision: "exact rational and symbolic algebra with exact v_2 identities"
+  allowed_data: "odd a,b, parity words, Haar measure, induced return times, exact derivatives, and formal series"
+  forbidden_data: "target zeros, target divisors, primes, arithmetic local factors, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route-B inputs"
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "the family is intrinsic to Z_2 and every theorem is derived without target data"
+  strongest_failure: "the primitive objects have no natural rational-prime labels, logarithmic prime periods, prime-power amplitudes, or von Mangoldt weights"
+  arithmetic_controls:
+    - "neighboring odd parameters a,b leave every unweighted count, return law, and stability sum unchanged"
+    - "the simpler Bernoulli dyadic shift has the same fixed counts and supplies the classical conjugate parent"
+    - "even-a and even-b boundary controls cease to be self-maps of Z_2 under the frozen branch formula"
+    - "the (3,1) positive-integer problem is separated from the larger Z_2 phase space by the legal noninteger 1/5 cycle"
+    - "randomized arithmetic labels are not used and cannot cure parameter blindness"
+  artifacts:
+    - SOURCE_AUDIT.md
+    - results/HOSTILE_AUDIT.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: "every parity word gives one explicit fixed point, Mobius inversion gives exact primitive-cycle counts, and repetitions are separated"
+  strongest_failure: "the complete primitive ledger is universal across odd parameters and carries no intrinsic prime labels, phases, or target amplitudes"
+  metrics:
+    fixed_word_formulas: "2^n for every n"
+    exact_period_formula: "P(n)=sum_{d|n} mu(n/d)2^d"
+    primitive_orbit_completeness: "PROVED"
+    stability_multiplier_formula: "a^{s_n}/2^n"
+    target_correspondences: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c174_parity_renewal_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "zeta_AM=1/(1-2z), zeta_stab=1/(1-z), and zeta_roof=(1-z)/(1-2z) are exact"
+  strongest_failure: "all source zetas are elementary and parameter-blind, with no target divisor match; the accelerated return map itself has infinitely many fixed points at time one"
+  metrics:
+    exact_source_zetas: 3
+    parameter_sensitive_source_zetas: 0
+    finite_return_map_fixed_count: 0
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: 0
+    precision_drift: 0
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/HOSTILE_AUDIT.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: "the rational functions are globally meromorphic and their complete divisors are explicit"
+  strongest_failure: "there is no Riemann-type functional equation, target counting law, or natural Weil-form compression"
+  analytic_structure:
+    conjugation_symmetry: "real-coefficient triviality only"
+    functional_equation: "absent"
+    continuation: "elementary rational continuation"
+    counting_law: "exponential binary fixed counts, not a target zero law"
+  weil_compression:
+    natural_compression: "none"
+    arithmetic_side: "none"
+    verdict: STOP_SCOPED
+  artifacts:
+    - RESEARCH_QUESTION.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: "Haar invariance yields a canonical proper Koopman isometry with exact Wold model, spectrum, and point spectrum"
+  strongest_failure: "the operator is nonunitary, noncompact, outside every finite Schatten class, and its same-clock unitary natural extension changes phase space"
+  metrics:
+    natural_koopman_isometries: 1
+    wold_unitary_summands: 1
+    unilateral_shift_multiplicity: "aleph_0"
+    self_adjoint_target_operators: 0
+    ordinary_fredholm_determinants: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c174_parity_renewal_evidence.json
+
+adversarial_controls:
+  controls_used:
+    - "all 36 frozen odd parameter sentinels"
+    - "classical binary-shift parent"
+    - "even-parameter non-self-map boundaries"
+    - "(3,1) noninteger 1/5 cycle"
+    - "25 repaired-hash semantic mutations plus one stale-hash mutation"
+  proves_too_much_risk: "maximal: both unweighted and stability-weighted outputs erase all odd parameters, so they cannot diagnose arithmetic specificity"
+  verdict: PASS_WITH_REJECTION
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: "exact renewal, original-clock roof recovery, stability parameter blindness, and operator obstruction only; classical parity conjugacy is prior work"
+blocking_conditions:
+  - "A0 fails: no rational-prime or prime-power origin"
+  - "source orbit and stability data are blind to every odd a,b"
+  - "the accelerated return map has infinitely many time-one fixed points"
+  - "the natural Koopman operator is a proper non-Schatten isometry"
+  - "no target analytic or arithmetic comparison is authorized"
+next_smallest_test: "retain C174 as a dyadic renewal and parameter-blindness obstruction control; switch to a genuinely different arithmetic dynamics family with intrinsic nonbinary labels"
+round2_clues:
+  - "clock recovery must retain the zero orbit as a separate factor"
+  - "a complete primitive-orbit theorem is only A1_WEAK when arithmetic labels are absent"
+  - "a natural operator can remain only an A4 formal hint when unitarization changes phase space"
+route_b_invocation_allowed: false

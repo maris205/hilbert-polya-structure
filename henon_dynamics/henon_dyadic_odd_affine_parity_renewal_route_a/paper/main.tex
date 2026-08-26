@@ -1,0 +1,246 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.64in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\linespread{0.96}
+\emergencystretch=2em
+\newcommand{\Ztwo}{\mathbb Z_2}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\val}{v_2}
+\title{\vspace{-1.5em}Exact Renewal and Clock Recovery for\\Odd-Affine Parity Maps on the 2-Adic Integers}
+\author{Route-A structural certificate HCS-C174}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For odd integers $a,b$, consider the parity map on the 2-adic integers that
+sends an even $x$ to $x/2$ and an odd $x$ to $(ax+b)/2$.  Classical parity
+coding conjugates this family to the one-sided binary shift; we use that
+conjugacy as prior foundation, not as a novelty claim.  We derive an exact
+first-return renewal description on the odd coset.  The return time is
+$\tau(x)=v_2(ax+b)$ with conditional Haar law $2^{-k}$, and the return map is
+a countable full shift with roof $r(k)=k$.  Its ordinary Artin--Mazur series
+is unavailable because it has infinitely many fixed points, but the roof
+recovers the original clock: $(1-\sum_{k\ge1}z^k)^{-1}=(1-z)/(1-2z)$, and
+restoring the zero orbit gives $(1-2z)^{-1}$.  Moreover both the unweighted
+fixed counts and reciprocal 2-adic derivative stability sums are independent
+of every odd parameter pair.  Exact solvability therefore supplies a
+parameter-blindness obstruction, not an arithmetic target model.
+\end{abstract}
+\noindent\textbf{Keywords:} 2-adic dynamics; parity coding; first return;
+renewal shift; dynamical zeta; Koopman isometry.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+对任意奇整数 $a,b$，本文研究二进整数环上的奇偶分支映射：偶点映为
+$x/2$，奇点映为 $(ax+b)/2$。经典 \foreignlanguage{english}{parity} 编码把该系统共轭到单边二元
+移位；本文把这一事实明确视为先验基础，而非新颖性主张。我们在奇数陪集上
+推导精确首返 \foreignlanguage{english}{renewal}：返回时间为 $\tau(x)=v_2(ax+b)$，条件 \foreignlanguage{english}{Haar} 分布为
+$2^{-k}$，首返映射是带屋顶 $r(k)=k$ 的可数字母满移位。加速映射因时间一
+已有无限多个不动点而不存在普通 \foreignlanguage{english}{Artin--Mazur} 级数；但屋顶精确恢复原始时钟，
+再补回零轨道即得 $(1-2z)^{-1}$。同时，无权不动点计数与二进导数稳定性权重
+对所有奇参数都完全失明。因此，精确可解性给出的是参数盲性障碍，而非算术目标模型。
+\end{otherlanguage}
+
+\section{Frozen family and ownership boundary}
+Fix odd $a,b\in\mathbb Z$ and normalized Haar probability $\mu$ on $\Ztwo$.
+The one-tick map is
+\begin{equation}\label{eq:T}
+T_{a,b}(x)=
+\begin{cases}
+x/2,&x\equiv0\pmod2,\\
+(ax+b)/2,&x\equiv1\pmod2.
+\end{cases}
+\end{equation}
+Oddness is structural: each numerator in the active branch is even.  The
+parity vector $Q_{a,b}(x)=\sum_{j\ge0}\epsilon_j(x)2^j$, with
+$\epsilon_j(x)=T^j(x)\bmod2$, conjugates $T_{a,b}$ to the dyadic shift.
+Bernstein and Lagarias treated this conjugacy and its odd $ax+b$
+generality~\cite{bernstein-lagarias}.  We claim no priority for it.  The
+question here is what first-return acceleration does to clock and parameter
+information.
+
+If $s_j=\sum_{i<j}\epsilon_i$, the inverse parity series is
+\begin{equation}\label{eq:inverse}
+Q_{a,b}^{-1}\!\left(\sum_{j\ge0}\epsilon_j2^j\right)
+=-b\sum_{j\ge0}\epsilon_j2^j a^{-s_{j+1}}.
+\end{equation}
+It also shows that $Q_{a,b}$ preserves congruence cylinders and hence Haar
+measure.  Multiplication by $b$ conjugates $T_{a,1}$ to $T_{a,b}$.
+
+\section{Fixed words and stability blindness}
+For a word $\epsilon=(\epsilon_0,\ldots,\epsilon_{n-1})$, put
+\[
+A_\epsilon=\sum_{j=0}^{n-1}\epsilon_j2^j a^{s_n-s_{j+1}}.
+\]
+Branch induction gives
+\begin{equation}\label{eq:iterate}
+2^nT^n(x)=a^{s_n}x+bA_\epsilon.
+\end{equation}
+Since $2^n-a^{s_n}$ is odd, every word has the unique fixed point
+\begin{equation}\label{eq:fixed}
+x_\epsilon=\frac{bA_\epsilon}{2^n-a^{s_n}}\in\Ztwo.
+\end{equation}
+The parity conjugacy makes all $2^n$ words admissible and distinct.  Thus
+\begin{equation}\label{eq:counts}
+\#\Fix(T^n)=2^n,
+\quad P(n)=\sum_{d\mid n}\mu(n/d)2^d,
+\quad \zeta_{\rm AM}(z)=\frac1{1-2z}.
+\end{equation}
+Here $P(n)$ counts exact-period points, so $P(n)/n$ counts primitive cycles.
+
+The branch derivatives are $1/2$ and $a/2$.  On the point with word
+$\epsilon$,
+\[
+(T^n)'=\frac{a^{s_n}}{2^n},\qquad
+\left|1-\frac{a^{s_n}}{2^n}\right|_2=2^n,
+\]
+because $2^n-a^{s_n}$ is odd.  Consequently
+\begin{equation}\label{eq:stab}
+W_n:=\sum_{x\in\Fix(T^n)}|1-(T^n)'(x)|_2^{-1}=1,
+\qquad \zeta_{\rm stab}(z)=\frac1{1-z}.
+\end{equation}
+Equations~\eqref{eq:counts} and~\eqref{eq:stab} are all-parameter theorems:
+both invariants erase $a$ and $b$.
+
+\section{First-return renewal and clock recovery}
+Let $O=1+2\Ztwo$.  For $x\in O$ with $ax+b\ne0$, define
+\begin{equation}\label{eq:return}
+\tau(x)=\val(ax+b),\qquad R(x)=\frac{ax+b}{2^{\tau(x)}}.
+\end{equation}
+The point $x_*=-b/a$ maps to zero and has infinite return time.  More
+generally, let $E$ be the set of odd points whose parity strings contain
+only finitely many ones.  Under the parity homeomorphism, $E$ is the union
+over all finite binary prefixes of one eventually-zero tail; it is therefore
+countable and Haar-null, and it contains $x_*$.  Its complement
+$O_\infty=O\setminus E$ is invariant under successive returns and has full
+conditional Haar measure.
+
+The affine map $x\mapsto ax+b$ sends $O$ bijectively and
+measure-preservingly onto $2\Ztwo$.  Hence the normalized Haar layers give
+\begin{equation}\label{eq:law}
+\mu_O(\tau=k)=2^{-k},\qquad k\ge1.
+\end{equation}
+The parity block associated with $k$ is $10^{k-1}$.  Concatenation gives a
+bijection from $O_\infty$ to $\{1,2,\ldots\}^{\mathbb N}$, conjugating $R$
+to the left shift.  Bernoulli independence of disjoint parity blocks then
+makes successive returns iid with the geometric product measure.  The
+constant block $k$ has fixed point
+\begin{equation}\label{eq:returnfixed}
+x_k=\frac b{2^k-a}.
+\end{equation}
+Thus $R$ already has infinitely many time-one fixed points and its ordinary
+Artin--Mazur series is undefined.
+
+Return symbol $k$ represents $k$ original ticks.  With roof $r(k)=k$, the
+first-return series and renewal zeta are
+\begin{equation}\label{eq:roof}
+F(z)=\sum_{k\ge1}z^k=\frac z{1-z},\qquad
+\zeta_{\rm roof}(z)=\frac1{1-F(z)}=\frac{1-z}{1-2z}.
+\end{equation}
+Indeed
+$\log\zeta_{\rm roof}=\sum_{n\ge1}(2^n-1)z^n/n$: these are exactly the
+original-clock periodic points whose binary words contain a one.  The
+omitted all-zero fixed orbit contributes $(1-z)^{-1}$, and therefore
+\begin{equation}\label{eq:recovery}
+\zeta_{\rm roof}(z)(1-z)^{-1}=\frac1{1-2z}=\zeta_{\rm AM}(z).
+\end{equation}
+
+\section{Operator boundary and Route-A decision}
+On $H=L^2(\Ztwo,\mu)$, $Uf=f\circ T$ is an isometry.  It is not surjective:
+under parity coding, its range consists of functions independent of the
+first digit.  The tail intersection $\bigcap_{n\ge0}U^nH$ consists only of
+constants, while $H\ominus UH$ is an infinite-dimensional copy of the tail
+$L^2$ space.  The Wold decomposition is therefore
+\begin{equation}\label{eq:wold}
+U\simeq I_{\mathbb C}\oplus S^{(\aleph_0)}.
+\end{equation}
+In particular $\sigma(U)=\overline{\mathbb D}$ and
+$\sigma_p(U)=\{1\}$.  The isometry is noncompact and lies in no finite
+Schatten class, so no ordinary Fredholm determinant $\det(I-zU)$ is
+available.  The two-sided inverse-limit shift is a same-clock unitary
+extension, but it changes the phase space and is not a repair of the frozen
+candidate.  Koopman methods have also been studied for the discrete
+positive-integer $3x+1$ system~\cite{leventides-poulios}; we make no general
+priority claim for a Collatz Koopman lift.
+
+\begin{center}
+\small
+\begin{tabular}{@{}>{\ttfamily}l p{0.71\linewidth}@{}}
+\toprule
+Gate & Exact verdict and blocking reason \\
+\midrule
+A0\_FAIL & Dyadic local arithmetic yields no rational-prime labels,
+prime-power repetition law, or von Mangoldt weight. \\
+A1\_WEAK & Primitive cycles are complete and reproducible, but have no
+intrinsic arithmetic labels or target amplitudes. \\
+A2\_FAIL & The three exact source zetas are elementary and parameter-blind;
+the accelerated map itself has infinitely many fixed points. \\
+A3\_FAIL & Rational continuation supplies no target functional equation,
+counting law, or natural Weil compression. \\
+A4\_FORMAL\_HINT & The natural lift is a proper non-Schatten isometry;
+same-clock unitarization changes phase space. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Thus the tuple is
+$(\texttt{A0\_FAIL},\texttt{A1\_WEAK},\texttt{A2\_FAIL},
+\texttt{A3\_FAIL},\texttt{A4\_FORMAL\_HINT})$.
+A0 failure forces \texttt{ROUTE\_A\_REJECTED}; later-layer exactness cannot
+override the arithmetic entry gate.
+
+\section{Limitations and reproducibility}
+For $(a,b)=(3,1)$ the 2-adic word $100$ gives
+$1/5\mapsto4/5\mapsto2/5\mapsto1/5$.  This legal $\Ztwo$ cycle is not a
+positive-integer orbit, so the paper gives no progress on the positive-integer
+$3x+1$ conjecture.  If exactly one of $a,b$ is even, the odd-branch
+numerator is odd and division by two leaves $\Ztwo$; the theorem does not
+cross that boundary.
+
+The release uses exact arithmetic only.  A producer, independent checker,
+SymPy derivation, byte replay, semantic mutation suite, and content-addressed
+manifest are included.  Finite ledgers are regression sentinels, not proofs.
+No prime table, target zero or divisor, arithmetic local factor, Euler factor,
+root number, automorphy, Hilbert--P\'olya operator, Route-B authorization,
+external review, or acceptance rate is claimed.  The scope literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+The final internal integrity pass separately cleared implementation bugs,
+citation identity and context, invented results, shortcut reliance,
+bug-as-insight reframing, methodology drift, and early-frame lock.  This is
+an artifact-bounded audit, not a certificate of universal novelty or journal
+readiness.  AI assistance was used for drafting and code generation; all
+claim-bearing formulas were reconstructed by independent exact code paths.
+
+\begin{otherlanguage}{chinese-simplified}
+\noindent 中文边界说明。\quad
+本文的精确结论限定于全体奇参数的 $\mathbb Z_2$ 动力学。经典 \foreignlanguage{english}{parity}
+共轭属于先验工作；有限回归表不替代理论证明；$(3,1)$ 特例不推出正整数
+\foreignlanguage{english}{Collatz} 结论。由于 \foreignlanguage{english}{A0} 缺少素数及素数幂来源，整体 \foreignlanguage{english}{Route A} 必须拒绝。
+\end{otherlanguage}
+
+\begin{thebibliography}{9}
+\bibitem{bernstein-lagarias}
+D. J. Bernstein and J. C. Lagarias,
+``The 3x+1 Conjugacy Map,''
+\emph{Canadian Journal of Mathematics} 48 (1996), 1154--1169.
+\href{https://doi.org/10.4153/CJM-1996-060-x}{doi:10.4153/CJM-1996-060-x}.
+
+\bibitem{leventides-poulios}
+J. Leventides and C. Poulios,
+``Koopman operators and the $3x+1$-dynamical system,''
+arXiv:2010.12987 (2020).
+\href{https://arxiv.org/abs/2010.12987}{arxiv.org/abs/2010.12987}.
+\end{thebibliography}
+
+\end{document}

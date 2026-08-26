@@ -1,0 +1,152 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+skill_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+candidate_id: HCS-C178
+source_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+evaluation_date: 2026-08-26
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_harmonic_strobe_quantization_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: all-angle stroboscopic family of the unit-frequency planar harmonic oscillator with invariant-Gaussian Koopman and natural quantum oscillator lifts
+family: elliptic linear Hamiltonian flows and their same-clock quantizations
+phase_space: X=R^2 with canonical coordinates (q,p)
+dynamics: T_theta=Phi_theta=R_theta for H=(q^2+p^2)/2
+parameters: physical real time theta in R; only the classical and Gaussian projections are taken modulo 2*pi
+parameter_provenance: physical Hamiltonian time at unit frequency; no fitted parameter and no quantum phase quotient
+arithmetic_origin: none; rational and irrational angle classes are dynamical resonance classes, not prime or prime-power data
+clock: one real physical time theta is one strobe and the same theta defines Q_theta=exp(-i*theta*Hhat); Q_(theta+2*pi)=-Q_theta and Q_(theta+4*pi)=Q_theta
+normalization: Gaussian probability Koopman basis and standard oscillator zero-point convention Hhat=N+1/2
+determinant_convention: classical Artin--Mazur fixed-point cardinality series and ordinary trace-class Fredholm determinant only
+orbit_cutoff: all-angle and all-iterate theorem; finite denominators through 12 and iterates through 36 are sentinels
+precision: exact symbolic, rational, Laguerre, Hermite, and cyclotomic algebra
+training_data: none; no target table or parameter fitting
+forbidden_data: target zeros or primes, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, heat/Wick same-clock substitution, and Route B
+code_commit: 100e5f601a0196710d53784bdeef40d2bff89fa8
+artifact_paths:
+  - results/c178_harmonic_strobe_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: H=(q^2+p^2)/2, T_theta=Phi_theta on R^2, U_theta f=f after T_theta on Gaussian L^2, and the real-time family Q_theta=exp(-i*theta*Hhat) on L^2(R)
+  arithmetic_origin: none
+  clock: theta is physical real time for both lifts; T and U are 2*pi-periodic, while Q is 4*pi-periodic and only projectively 2*pi-periodic
+  quantum_cover: Q_(theta+2*pi)=-Q_theta and Q_(theta+4*pi)=Q_theta; the global sign is retained
+  normalization: q-i*p=r*exp(i*phi), Gaussian probability measure, Hhat=(-d^2/dx^2+x^2)/2
+  determinant_convention: classical cardinality Artin--Mazur series and ordinary trace-class Fredholm determinant, never a heat-regularized substitute
+  cutoff: all angles and iterates analytically; finite exact ledgers are regression sentinels
+  precision: exact algebra
+  allowed_data: frozen oscillator, rotation group, Gaussian and Laguerre algebra, Hermite functional calculus, canonical commutators
+  forbidden_data: external target, prime, arithmetic-local, Euler, root-number, automorphy, Hilbert--Polya, heat-clock, and Route-B inputs
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: the entire all-angle theorem is derived from one parameter-free quadratic Hamiltonian without target data
+  strongest_failure: no primes, prime powers, logarithmic primitive periods, von Mangoldt weights, or arithmetic origin occur
+  arithmetic_controls:
+    - irrational angle controls produce the same elementary one-factor zeta
+    - every reduced rational order produces the same continuum-cardinality failure pattern
+    - the Gaussian and quantum spectra follow from angular and energy integers rather than rational primes
+    - heat damping can manufacture trace class only by changing the clock
+  artifacts:
+    - SOURCE_AUDIT.md
+    - results/HOSTILE_AUDIT.md
+
+a1:
+  verdict: A1_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: every periodic point is classified for every angle
+  strongest_failure: irrational angles have only the origin, while rational angles have uncountable nonisolated exact-period families
+  metrics:
+    all_angle_fixed_set_theorems: 1
+    isolated_nontrivial_primitive_orbits: 0
+    continuum_resonance_classes: countably_many_rational_orders
+    target_correspondences: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c178_harmonic_strobe_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: REFUTED
+  strongest_evidence: the irrational source zeta is exactly 1/(1-z) and the rational failure locus is exactly classified
+  strongest_failure: rational resonances have no classical Artin--Mazur series, and neither natural unitary is trace class
+  metrics:
+    irrational_source_zeta_factors: 1
+    rational_resonant_finite_fixed_counts: 0
+    ordinary_unitary_fredholm_determinants: 0
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: 0
+    precision_drift: 0
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/HOSTILE_AUDIT.md
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: source spectra and determinant failures are exact on their declared domains
+  strongest_failure: no target divisor, functional equation, counting law, analytic continuation comparison, or Weil compression exists
+  analytic_structure:
+    conjugation_symmetry: SOURCE_ONLY
+    functional_equation: NOT_TESTABLE
+    continuation: NOT_TESTABLE
+    counting_law: NOT_TESTABLE
+  weil_compression:
+    natural_compression: none
+    arithmetic_side: none
+    verdict: STOP_SCOPED
+  artifacts:
+    - RESEARCH_QUESTION.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: the standard quantum oscillator propagator uses the same real theta, has the exact Hermite spectrum and metaplectic double-cover law, implements the classical projection by Egorov, and has conjugation time reversal
+  strongest_failure: it is noncompact, outside every finite Schatten class, has no ordinary Fredholm determinant, and carries no arithmetic target spectrum
+  metrics:
+    natural_same_clock_quantum_lifts: 1
+    exact_egorov_coordinate_identities: 2
+    exact_antiunitary_reversals: 2
+    exact_metaplectic_2pi_sign_identities: 1
+    exact_metaplectic_4pi_return_identities: 1
+    ordinary_unitary_fredholm_determinants: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c178_harmonic_strobe_evidence.json
+
+adversarial_controls:
+  controls_used:
+    - reduced rational angles through every order
+    - three exact irrational algebraic angles
+    - Gaussian radial multiplicity against angular eigenvalue density
+    - exact real-time rational representatives and their 2*pi and 4*pi shifts
+    - heat and Wick clock substitution
+    - repaired-hash semantic mutations
+  proves_too_much_risk: a natural quantum lift exists for this elementary nonarithmetic system, so A4 alone cannot certify any arithmetic or RH-like conclusion
+  verdict: PASS_WITH_REJECTION
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact classical fixed sets, irrational source zeta, Gaussian Koopman spectrum, reversals, and the real-time metaplectic quantum oscillator spectrum only
+blocking_conditions:
+  - no arithmetic origin or prime-like primitive-orbit layer
+  - uncountable rational-resonance fixed sets
+  - both physical unitaries are noncompact and not trace class
+  - no target divisor or global analytic comparison
+next_smallest_test: retain C178 as the elliptic resonance and same-clock quantization control; change dynamical subtype rather than regularizing its clock
+round2_clues:
+  - a genuine natural quantization can coexist with complete A0 through A3 failure
+  - rational and irrational strobe angles require different classical determinant verdicts
+  - the classical 2*pi projection lifts to a 4*pi-periodic quantum unitary family with a retained 2*pi global sign
+  - heat regularization demonstrates operator existence only after a clock change
+route_b_invocation_allowed: false

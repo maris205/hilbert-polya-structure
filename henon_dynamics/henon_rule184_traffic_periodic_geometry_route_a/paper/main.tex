@@ -1,0 +1,216 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.72in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\newtheorem{theorem}{Theorem}
+\title{Periodic Geometry, Finite Attraction, and Exact Zeta Factors\\for Cyclic Rule 184}
+\author{Route-A structural certificate C175}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every ring length $N\ge1$ and every conserved particle number
+$0\le k\le N$, we classify the periodic states of cyclic Rule 184 and prove
+finite attraction to them. Below half density, the periodic core consists
+exactly of words without cyclic $11$ and the rule is right rotation there;
+above half density, holes are isolated and the rule is left rotation. A
+gap-defect Lyapunov argument gives an explicit $m^2$ entry bound, where
+$m=\min(k,N-k)$. Cyclic independent-set counts then yield a closed formula
+for every iterate, all primitive temporal cycles, the Artin--Mazur zeta, and
+the periodic-core Koopman determinant. The whole sector is a permutation
+exactly when $m\le1$; otherwise its transients block full-system unitarity.
+\end{abstract}
+\noindent\textbf{Keywords:} Rule 184; traffic cellular automaton; periodic
+core; gap Lyapunov function; cyclic independent set; dynamical zeta.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对任意环长 $N$ 和固定粒子数 $k$ 完整刻画循环\foreignlanguage{english}{Rule 184}的周期状态，并证明所有
+其他状态在有限时间内进入周期核。低密度时粒子最终彼此隔离并向右平移；高密度时空穴
+彼此隔离并向左平移。间隙缺陷的单调量给出 $m^2$ 的进入上界，其中
+$m=\min(k,N-k)$。由循环独立集计数进一步导出任意迭代的不动点闭式、本原周期、
+\foreignlanguage{english}{Artin--Mazur}动力 $\zeta$ 函数及周期核\foreignlanguage{english}{Koopman}行列式。含至少两个少数符号的全扇区
+存在瞬态，因而不能被宣称为酉系统。
+
+\noindent 关键词：\foreignlanguage{english}{Rule 184}；交通元胞自动机；周期核；间隙\foreignlanguage{english}{Lyapunov}函数；循环独立集；
+动力 $\zeta$ 函数。
+\end{otherlanguage}
+
+\section{Model and complete periodic core}
+For labelled cyclic sites, set
+\[
+X_{N,k}=\left\{x\in\{0,1\}^{\mathbb Z/N\mathbb Z}:
+\sum_i x_i=k\right\},\qquad
+F(x)_i=x_{i-1}(1-x_i)+x_ix_{i+1}.
+\]
+Thus every cyclic $10$ is updated simultaneously to $01$. One update is the
+clock, $(\rho x)_i=x_{i-1}$ is right rotation, and
+$m=\min(k,N-k)$.
+
+\begin{theorem}[All-size, all-density classification]
+If $k\le N/2$, a state is periodic exactly when it has no cyclic $11$, and
+$F=\rho$ on that core. If $k\ge N/2$, a state is periodic exactly when it
+has no cyclic $00$, and $F=\rho^{-1}$ on that core. Every state reaches the
+applicable core within $m^2$ updates. Every temporal least period divides
+$N$ and equals the least cyclic-rotation period of the word.
+\end{theorem}
+
+At half filling the two conditions leave exactly the two alternating states,
+both of period two. At $k=0,N$, the unique uniform state is fixed. These
+statements include $N=1$ and $N=2$ without changing the update convention.
+
+\section{Gap defects and finite attraction}
+Assume first $0<k\le N/2$ and label the $m=k$ particles in cyclic order.
+Let $g_i\ge0$ be the number of holes between particle $i$ and its successor,
+and put $u_i=\mathbf1_{g_i>0}$. Particle $i$ moves precisely when $u_i=1$;
+the simultaneous gap update is
+\begin{equation}\label{eq:gap}
+g_i'=g_i-u_i+u_{i+1}.
+\end{equation}
+A new zero at index $i$ occurs exactly when the old $g_{i+1}=0$ and
+$g_i\le1$. Hence every old zero-gap marker shifts one index backward unless
+its predecessor is at least two, in which case that marker is absorbed. The
+defect count $Z(g)=\#\{i:g_i=0\}$ never increases.
+
+Suppose $Z(g)>0$. Since $\sum_i g_i=N-k\ge k=m$, some gap is at least two.
+An excess gap remains at its index until a zero arrives immediately after it:
+if its successor is positive, both terms in \eqref{eq:gap} cancel; if the
+successor is zero, the excess absorbs that zero and decreases by one. Every
+unabsorbed zero moves backward once per update, so within at most $m$ steps a
+zero meets an excess and $Z$ strictly decreases. Initially $Z\le m$;
+therefore after at most $m^2$ updates every gap is positive. This is exactly
+the no-$11$ core, where every particle advances and $F=\rho$.
+
+Above half density, holes move left. Exchanging particles with holes and
+reversing cyclic orientation reproduces \eqref{eq:gap}, proving attraction
+to the no-$00$ core and $F=\rho^{-1}$ there. Conversely each core word is
+periodic because rotation has order dividing $N$. If a periodic non-core
+word entered the forward-invariant core, a sufficiently large multiple of
+its period would put the original word in the core, a contradiction. This
+proves completeness rather than merely eventual regularity.
+
+\section{All iterates, primitive cycles, and zeta}
+Let $I(g,r)$ count cyclic length-$g$ words with $r$ isolated marked sites:
+\[
+I(g,r)=
+\begin{cases}
+1,&r=0,\\[1mm]
+\dfrac{g}{g-r}\binom{g-r}{r},&1\le r\le\lfloor g/2\rfloor,\\[1mm]
+0,&\text{otherwise}.
+\end{cases}
+\]
+For $r>0$, count linearly nonadjacent words and remove those with both
+endpoints marked, with out-of-range binomial coefficients interpreted as zero:
+\[
+\binom{g-r+1}{r}-\binom{g-r-1}{r-2}
+=\frac{g}{g-r}\binom{g-r}{r}.
+\]
+
+\begin{theorem}[Every-iterate fixed count]
+For $n\ge1$, put $g=\gcd(N,n)$ and $q=N/g$. Then
+\[
+A_{N,k}(n):=\#\operatorname{Fix}(F^n|X_{N,k})=
+\begin{cases}
+I(g,m/q),&q\mid m,\\
+0,&q\nmid m.
+\end{cases}
+\]
+\end{theorem}
+An $F^n$-fixed word is periodic and hence lies in the isolated-minority core.
+There $F^n$ is rotation by $n$ in one of the two directions. Its invariant
+words are $q$ repetitions of a cyclic block of length $g$. Divisibility
+$q\mid m$ is necessary, and the block contains $m/q$ isolated minority
+symbols, proving the formula. At half filling it gives two fixed points
+exactly for even $n$; at $k=0,N$ it gives one for every $n$.
+
+For $d\mid N$, Möbius inversion separates repeated from primitive data:
+\[
+E_{N,k}(d)=\sum_{e\mid d}\mu(d/e)A_{N,k}(e),\qquad
+P_{N,k}(d)=\frac{E_{N,k}(d)}d.
+\]
+Here $E$ counts labelled points of exact period $d$, while $P$ counts
+geometric primitive cycles. Consequently
+\[
+\zeta_{N,k}(z)=\prod_{d\mid N}(1-z^d)^{-P_{N,k}(d)},\qquad
+\det(I-zU_{\rm core})=\prod_{d\mid N}(1-z^d)^{P_{N,k}(d)}.
+\]
+The determinant belongs to the finite permutation on the periodic core; it
+is exactly the reciprocal source zeta and is not a determinant invented for
+the transient full system.
+
+\section{Exact Koopman boundary}
+Every word in $X_{N,k}$ has isolated minority symbols exactly when $m\le1$.
+Thus the whole-sector map is a rotation permutation exactly in those sectors,
+and its uniform Koopman composition operator is unitary. If $m\ge2$, a word
+with adjacent minority symbols exists and is transient by the classification
+theorem. A finite self-map with a transient state is not bijective, so its
+uniform whole-sector Koopman operator is not unitary.
+
+The periodic core remains canonical for every sector. Restriction gives a
+finite rotation permutation, and spatial reflection reverses that rotation.
+This is a natural source-level operator on the core, but the restriction
+deletes transient traffic states. The all-sector family therefore receives
+only \texttt{A4\_FORMAL\_HINT}, not natural quantization of the original full
+phase spaces.
+
+\section{Evidence and Route-A decision}
+The finite ledger exhausts all 8{,}190 binary words through $N=12$, all 90
+sectors, 1{,}636 fixed-count rows through $n=2N+2$, 299 primitive rows, and
+196{,}608 word--iterate comparisons. A producer-independent moving-particle
+checker passes 34{,}545 assertions; SymPy passes 25{,}563 independent-set,
+Möbius, product, and gap checks; byte replay is exact; all 17 hostile
+mutations are rejected. These computations are regression sentinels. The
+all-parameter statements rest on the proofs above. Citation and reference
+registries each have population zero, and no external novelty or priority
+claim is made.
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+Gate&Verdict&Reason\\
+\midrule
+A0&\texttt{FAIL}&no intrinsic arithmetic origin\\
+A1&\texttt{WEAK}&complete intrinsic cycles, no arithmetic information\\
+A2&\texttt{FAIL}&exact source zeta, no target divisor comparison\\
+A3&\texttt{FAIL}&finite rational source, no target global structure\\
+A4&\texttt{FORMAL\_HINT}&core unitary discards transients for $m\ge2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The v0.2 tuple is
+\((\texttt{A0\_FAIL},\texttt{A1\_WEAK},\texttt{A2\_FAIL},
+\texttt{A3\_FAIL},\texttt{A4\_FORMAL\_HINT})\), with overall
+\texttt{ROUTE\_A\_REJECTED}; Route B is false.
+
+\paragraph{Limitations.}
+The result concerns the frozen synchronous cyclic rule and labelled sectors.
+It does not establish asynchronous or open-boundary traffic laws. Exact
+finite zeta factors do not supply prime semantics. There is no target
+divisor, functional equation, counting law, continuation, Weil compression,
+arithmetic local factor, Euler factor, root number, automorphy claim, or
+Hilbert--P\'olya operator. Scope:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal, or sensitive data
+are used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+\end{document}
