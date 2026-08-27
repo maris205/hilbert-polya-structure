@@ -1,0 +1,213 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.66in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\T}{\mathbb T}
+\newcommand{\e}{\mathrm e}
+\emergencystretch=3em
+\title{Couette Shear on the Infinite Periodic Channel:\\
+Exact Fourier Semigroup, Sharp Enhanced Dissipation, and Every Boundary}
+\author{Route-A structural certificate C206}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every real shear $a$, viscosity $\nu\ge0$, and physical time, we derive
+the complete Fourier semigroup of scalar Couette advection--diffusion on
+$\T\times\R$.  Completing one exact quadratic integral gives the exact and
+sharp $k$-sector norm $\exp\{-\nu(k^2t+a^2k^2t^3/12)\}$ and its cubic
+enhanced-dissipation scale, together with the precise norm-attainment
+boundary.  We prove composition, inviscid unitary mixing,
+all no-shear/zero-mode/zero-time boundaries, the full $L^2$ periodic-state
+classification, and noncompactness excluding an ordinary Fredholm
+determinant.  Finite exact cells audit conventions but do not prove the
+continuous theorem.  The inviscid unitary is only a formal lift: all
+arithmetic and determinant gates fail, so Route A is rejected.
+\end{abstract}
+\noindent\textbf{Keywords:} Couette flow; shear mixing; enhanced dissipation;
+Fourier semigroup; noncompactness.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对无限周期通道上的\foreignlanguage{english}{Couette}对流扩散方程给出全部实剪切、非负黏性与物理时间下的精确傅里叶半群。一次平方配方得到精确且尖锐的扇区范数、范数取等边界和三次增强耗散尺度，并统一处理无黏、无剪切、零模、零时刻、周期态及非迹类边界。有限证书只校验约定；由于不存在内生素数载体与目标行列式，路线\foreignlanguage{english}{A}仍被拒绝。
+\end{otherlanguage}
+
+\section{Frozen equation and Fourier sign}
+Let $\T=\R/(2\pi\mathbb Z)$ and consider
+\begin{equation}\label{eq:pde}
+ \partial_t f+a y\partial_xf=\nu(\partial_x^2+\partial_y^2)f,
+ \qquad (x,y)\in\T\times\R,\quad a\in\R,\ \nu\ge0.
+\end{equation}
+The clock is physical PDE time.  We freeze
+\[
+ \widehat f_k(\eta)=\frac1{2\pi}\int_{\T}\int_\R
+ f(x,y)\e^{-i(kx+\eta y)}\,dy\,dx.
+\]
+Since multiplication by $y$ becomes $i\partial_\eta$, the transformed equation is
+\begin{equation}\label{eq:fourier}
+ \partial_t\widehat f_k-a k\partial_\eta\widehat f_k
+ =-\nu(k^2+\eta^2)\widehat f_k.
+\end{equation}
+Couette damping and enhanced-dissipation context is classical~\cite{BMV}; we
+claim a convention-complete derivation and certificate, not priority.
+
+\section{Exact semigroup and composition}
+\begin{theorem}\label{thm:main}
+For every $k\in\mathbb Z$, $\eta\in\R$, and $t\ge0$,
+\begin{equation}\label{eq:semigroup}
+ \widehat{S_tf}_k(\eta)=\exp\!\left[-\nu\left\{k^2t+
+ t\left(\eta+\frac{akt}{2}\right)^2+\frac{a^2k^2t^3}{12}\right\}\right]
+ \widehat f_k(\eta+akt).
+\end{equation}
+Moreover $S_tS_s=S_{t+s}$ on $L^2(\T\times\R)$.
+\end{theorem}
+\begin{proof}
+The characteristic ending at $(t,\eta)$ is
+$\eta(r)=\eta+ak(t-r)$.  Integrating~\eqref{eq:fourier} gives
+\[
+ D_t(\eta)=k^2t+\int_0^t(\eta+akr)^2dr
+ =k^2t+\eta^2t+ak\eta t^2+\frac{a^2k^2t^3}{3}.
+\]
+Completing the square yields~\eqref{eq:semigroup}.  Direct expansion gives
+$D_t(\eta)+D_s(\eta+akt)=D_{t+s}(\eta)$ and the shifts add, proving composition.
+\end{proof}
+
+\section{Sharp sector norm and scale}
+\begin{proposition}\label{prop:norm}
+On the $k$-th Fourier sector,
+\begin{equation}\label{eq:norm}
+ \|S_t\|_{k\to k}=
+ \exp\!\left[-\nu\left(k^2t+\frac{a^2k^2t^3}{12}\right)\right].
+\end{equation}
+If $\nu t>0$, no nonzero $L^2$ vector attains this norm; frequency-localized
+packets approach it.  If $\nu t=0$, every nonzero vector attains the norm.
+\end{proposition}
+\begin{proof}
+Write the sector operator as $\mathcal M_{m_t}U_t$, where
+$U_tg(\eta)=g(\eta+akt)$ is unitary and $m_t(\eta)$ is the positive
+exponential in \eqref{eq:semigroup}.  Its essential supremum is the value in
+\eqref{eq:norm}: continuity and the unique quadratic minimizer
+$\eta_0=-akt/2$ give the upper bound, while normalized functions supported in
+shrinking intervals about $\eta_0$ approach equality.
+
+Let $N$ denote the value in \eqref{eq:norm}.  If $\nu t>0$ and a nonzero
+$g\in L^2(\R_\eta)$ attained the norm, equality of squared norms would give
+\[
+ \int_\R\bigl(N^2-|m_t(\eta)|^2\bigr)|U_tg(\eta)|^2\,d\eta=0.
+\]
+The first factor is strictly positive away from the singleton $\{\eta_0\}$,
+so $U_tg$ would be supported on a null set and hence vanish, a contradiction.
+If $\nu t=0$, $m_t\equiv1$ and $\mathcal M_{m_t}U_t$ is unitary (the identity
+when $t=0$), so every nonzero vector attains its norm.
+\end{proof}
+For $a\nu k\ne0$, the cubic factor reaches order one at
+$t=(12/(\nu a^2k^2))^{1/3}$; the ordinary heat term $\nu k^2t$ remains.
+
+\ifnum\CRevisionRound>0
+\section{Inviscid mixing and every degenerate boundary}
+At $\nu=0$,~\eqref{eq:pde} is the unitary shear group
+\[
+ f_k(y,t)=\e^{-iakty}f_k(y,0).
+\]
+For $f_k\overline g\in L^1$, its pairing with $g$ tends to zero for $ak\ne0$
+by the Riemann--Lebesgue lemma, while its $L^2$ norm is constant.  Thus weak
+mixing is not dissipative decay.  The involution $(x,y)\mapsto(-x,y)$ reverses
+this same clock.  Positive viscosity destroys unitarity.
+
+If $a=0$,~\eqref{eq:semigroup} is ordinary heat.  If $k=0$, it is
+one-dimensional heat in $y$, whose operator norm is one on the noncompact
+line.  If $t=0$, it is the identity.  These statements include the joint
+$a=\nu=0$ identity boundary.
+
+\section{Periodic states and the trace-class stop}
+\begin{proposition}\label{prop:periodic}
+Let $T>0$.  If $\nu>0$ and $S_Tf=f$ in $L^2$, then $f=0$.  If $\nu=0$ and
+$aT\ne0$, the $T$-periodic states are exactly the streamwise means.
+\end{proposition}
+\begin{proof}
+For $k\ne0$ and $\nu>0$,~\eqref{eq:norm} is strictly below one.  For $k=0$,
+the equality $(1-\e^{-\nu T\eta^2})\widehat f_0(\eta)=0$ confines support to
+the null set $\{0\}$.  In the inviscid case, periodicity makes every nonzero
+$k$ component periodic in $\eta$ with nonzero period $akT$; an $L^2(\R)$
+periodic function is zero.  The $k=0$ component is fixed.
+\end{proof}
+
+For $t>0$, the $k=0$ sector is multiplication by $\e^{-\nu t\eta^2}$ on the
+nonatomic space $L^2(\R_\eta)$.  A nonzero multiplication operator there is
+not compact.  Hence the full semigroup is noncompact and not trace class
+(the inviscid unitary and $t=0$ identity are also noncompact).  We therefore
+define no ordinary Fredholm determinant.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Executable closure and strict Route-A stop}
+The canonical ledger has 675 rational Fourier cells and 54 composition cells.
+A checker importing no producer closes 9,646 assertions.  A separate SymPy
+path closes 2,713 identities.  Exponentials use 100 working decimal digits;
+all 1,350 multiplier and sector-norm fields are serialized to 82 significant
+digits, and both executable paths lock this distinction.  Replay is byte
+exact; seventeen repaired-hash semantic/schema attacks and one stale-hash
+attack are rejected.  These are
+convention sentinels; Theorem~\ref{thm:main} and its proofs carry every
+continuous quantifier.
+
+The inviscid unitary supports only a formal hint.  There is no arithmetic
+origin, rational-prime primitive owner, isolated periodic ledger, target
+determinant, target analytic structure, or Weil compression.  Thus
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FORMAL\ HINT}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Claim firewall.}
+We claim no nonlinear Couette stability, bounded-wall theorem, arithmetic
+local data, Euler factor, root number, automorphy, target divisor or functional
+equation, Hilbert--P\'olya operator, finite-regression proof, exhaustive
+priority, external review, or acceptance score.
+\fi
+
+\ifcase\CRevisionRound
+\paragraph{Revision focus.} Round 0 freezes the Fourier convention and proves
+the exact semigroup, composition, sharp norm, and cubic scale.
+\or
+\paragraph{Revision focus.} Round 1 adds inviscid mixing, every parameter
+boundary, all periodic states, reversal, and the non-trace-class theorem.
+\or
+\paragraph{Revision focus.} Round 2 adds independent executable closure,
+source ownership, Route-A evaluation, disclosures, and the claim firewall.
+\fi
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact synthetic evidence
+and deterministic code accompany the paper; no observational data are used.
+\paragraph{Ethics.} No human, animal, personal, or sensitive data are used.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported derivation,
+drafting, and exact-code development; it was not an external reviewer or an
+independent peer-review process.
+
+\begin{thebibliography}{1}
+\bibitem{BMV} J. Bedrossian, N. Masmoudi, and V. Vicol,
+``Enhanced dissipation and inviscid damping in the inviscid limit of the
+Navier--Stokes equations near the two dimensional Couette flow,''
+\emph{Arch. Rational Mech. Anal.} 219 (2016), 1087--1159.
+DOI: 10.1007/s00205-015-0917-3.
+\end{thebibliography}
+\end{document}

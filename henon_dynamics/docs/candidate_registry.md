@@ -3,6 +3,30 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C204--HCS-C208 independent cross-subtype round (2026-08-27)
+
+This batch gives every paper a different complete dynamical owner:
+finite-field linear endomorphisms, a context-free non-sofic shift, a linear
+shear PDE, a nonlinear self-similar diffusion, and a continuous-time branching
+process.  No theorem is divided among the five artifacts.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C204 | Every linear endomorphism of every finite-dimensional vector space over every finite field has a rational-canonical fixed-count formula, an exact periodic/transient decomposition, all exact periods and cycles, a finite Artin--Mazur zeta, and the complete full-function Koopman characteristic polynomial, with singular, inseparable and nonsemisimple boundaries retained. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_finite_linear_rational_canonical_dynamics_route_a/`](../henon_finite_linear_rational_canonical_dynamics_route_a/) |
+| HCS-C205 | Every edge-type one-vertex `N`-loop Dyck shift has an exact context-free algebraic zeta, all fixed and primitive counts, entropy, a dominant-double-pole primitive-orbit asymptotic for `N>1`, algebraic branch points, and the exact `N=1` full-two-shift boundary. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_dyck_shift_algebraic_zeta_route_a/`](../henon_dyck_shift_algebraic_zeta_route_a/) |
+| HCS-C206 | Every Couette advection--diffusion semigroup on `T x R` has an exact Fourier propagator and sector norm with cubic-time exponent `a^2 k^2 t^3/12`, closing the enhanced-dissipation scale, inviscid mixing, all degenerate sectors, periodic states and the non-trace-class boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_couette_shear_enhanced_dissipation_route_a/`](../henon_couette_shear_enhanced_dissipation_route_a/) |
+| HCS-C207 | Every positive exponent of the one-dimensional nonlinear diffusion equation has one unified centered first-kind Barenblatt atlas: compact, Gaussian and algebraic-tail phases, exact Beta mass and moment formulas, sharp moment thresholds, pressure/free-boundary geometry and rescaled stationarity. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_barenblatt_full_exponent_similarity_route_a/`](../henon_barenblatt_full_exponent_similarity_route_a/) |
+| HCS-C208 | Every continuous-time linear birth--death branching process has an exact probability-generating semigroup, all-state transition mixture and moments, plus subcritical quasi-stationary, critical Yaglom and supercritical martingale-limit laws, with every critical and zero-rate boundary included. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_linear_birth_death_branching_route_a/`](../henon_linear_birth_death_branching_route_a/) |
+
+All five remain `ROUTE_A_REJECTED`.  C204 and C205 have genuine source
+primitive ledgers, and C206 has a natural inviscid unitary boundary, but these
+candidate-local coordinates cannot be combined.  No target table, arithmetic
+local datum, Euler factor, root number, automorphy object, target divisor,
+Hilbert--Pólya operator, or Route-B input is used.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C199--HCS-C203 independent cross-subtype round (2026-08-27)
 
 This batch gives every paper a different complete dynamical owner:

@@ -1,0 +1,196 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Fix}{\operatorname{Fix}}
+\title{Exact Periodic Orbits and Algebraic Zeta Geometry\\
+of One-Vertex Edge-Type Dyck Shifts}
+\author{HCS Research Program}
+\date{27 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We close the periodic-point theory of the edge-type Dyck shift associated with
+one vertex and $N$ loop edges.  The algebraic zeta function yields explicit
+odd and even fixed-count formulas for every $N$ and every period, followed by
+primitive points and orbits through M\"obius inversion.  We distinguish the
+$N=1$ full-two-shift boundary from the $N>1$ double dominant pole, quadratic
+branchpoints, nonrationality, and orbit asymptotics.  Formal series, symbolic
+algebra, and direct periodic-word enumeration independently audit the result;
+the source-locked entropy is $\log(N+1)$.
+\end{abstract}
+
+\section{Model and algebraic zeta}
+Let $D_N^E$ be the edge-type Dyck shift for the graph with one vertex and $N$
+loop edges.  Its alphabet is
+$\{a_i,b_i:1\le i\le N\}$, with inverse-monoid relation
+$a_i b_j=1$ for $i=j$ and $0$ otherwise.  A finite block is admissible when
+its reduction is nonzero.  Put
+\[
+ s_N(z)=\sqrt{1-4Nz^2}.
+\]
+The context-free circular-code series satisfies
+\[
+ g_N(z)=\frac{Nz^2}{1-g_N(z)},\qquad
+ g_N(z)=\frac{1-s_N(z)}2,
+\]
+where the second expression is the small solution.  The source theorem,
+specialized to the one-vertex $N$-loop graph, gives
+\[
+ \zeta_N(z)=\frac{1-g_N(z)}{(1-Nz-g_N(z))^2}.
+\]
+Substitution, rather than a claim of priority, yields
+\begin{equation}\label{eq:zeta}
+ \zeta_N(z)=\frac{2(1+s_N(z))}
+ {(1+s_N(z)-2Nz)^2}.
+\end{equation}
+
+\begin{theorem}[all fixed and primitive counts]\label{thm:counts}
+Let $F_N(n)=|\Fix(\sigma^n)|$.  If $n$ is odd, then
+\[
+ F_N(n)=2\left((N+1)^n-
+ \sum_{j=0}^{(n-1)/2}\binom njN^j\right).
+\]
+If $n$ is even, then
+\[
+ F_N(n)=2\left((N+1)^n-
+ \sum_{j=0}^{n/2}\binom njN^j\right)
+ +\binom n{n/2}N^{n/2}.
+\]
+The numbers of least-period points and primitive orbits are
+\[
+ P_N(n)=\sum_{d\mid n}\mu(n/d)F_N(d),\qquad C_N(n)=P_N(n)/n.
+\]
+\end{theorem}
+
+\begin{proof}
+By definition,
+$z\,\zeta_N'(z)/\zeta_N(z)=\sum_{n\ge1}F_N(n)z^n$.
+Insert~\eqref{eq:zeta}, expand the quadratic series $s_N(z)$, and separate the
+central binomial term when $n$ is even.  The two displayed parity formulas
+result.  M\"obius inversion isolates least periods.  A least-period-$n$ orbit
+has exactly $n$ possible origins, proving the last division.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{The origin-marked word convention}
+$F_N(n)$ counts points of $\Fix(\sigma^n)$, equivalently length-$n$ periodic
+words with a distinguished origin; it does not count cyclic necklaces.  Our
+direct audit enumerates such words and checks every cyclic factor through
+length $2n$ in the periodic extension.  A stack reduction cancels $a_i b_i$
+and rejects $a_i b_j$ for $i\ne j$.  Thirty-three $(N,n)$ cells, including
+$N=1,\ldots,6$, agree exactly with Theorem~\ref{thm:counts}.  Only after
+M\"obius inversion is $P_N(n)$ divided by $n$.
+
+This distinction is substantive: division of $F_N(n)$ before inversion would
+mix points whose least period properly divides $n$ and generally fail
+integrality.
+\begin{lemma}[two-period sufficiency]
+An $n$-periodic extension is admissible if and only if every cyclic factor of
+length at most $2n$ has nonzero reduction.
+\end{lemma}
+\begin{proof}
+Every nonzero reduced word has normal form $BA$, with unmatched closing letters
+$B$ followed by unmatched opening letters $A$.  Fix a cyclic origin and call
+its period word $v$.  If $v$ reduces to zero, a forbidden prefix already has
+length at most $n$.  Otherwise, in $v^2$ the only new interaction is the
+$AB$ interface.  A colour mismatch is therefore already visible there.  If
+the interface is compatible, equal lengths cancel and unequal lengths leave a
+monotone excess on one side; crucially, the final copy of $A$ is unchanged.
+Every later copy, and every prefix of it, repeats the same interface comparison.
+Thus the first zero prefix has length at most $2n$.  Auditing every cyclic
+origin covers every factor of the bi-infinite extension.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Boundary, poles, and asymptotics}
+\begin{theorem}[singularity dichotomy]
+For $N=1$, the radical in~\eqref{eq:zeta} cancels and
+$\zeta_1(z)=(1-2z)^{-1}$, so $F_1(n)=2^n$.  For $N>1$, the point
+$r_N=(N+1)^{-1}$ is a double pole, strictly inside the quadratic branchpoints
+$\pm(2\sqrt N)^{-1}$.  The zeta function is nonrational and
+\[
+ F_N(n)=2(N+1)^n+O\!\left(\frac{(2\sqrt N)^n}{\sqrt n}\right),
+ \qquad C_N(n)\sim\frac{2(N+1)^n}{n}.
+\]
+Moreover, $h_{\rm top}(D_N^E)=\log(N+1)$.
+\end{theorem}
+\begin{proof}
+At $r_N$, $s_N(r_N)=(N-1)/(N+1)$, so the squared denominator vanishes while
+the numerator and the derivative of its unsquared factor do not.  Since
+$N+1>2\sqrt N$ for $N>1$, this pole precedes both branchpoints.  Replacing
+$s_N$ by $-s_N$ changes~\eqref{eq:zeta}; quadratic conjugation therefore rules
+out rationality.  The omitted binomial tail is bounded by a geometric multiple
+of its central term, which is
+$O((2\sqrt N)^n/\sqrt n)$.  Proper divisors are exponentially smaller, and
+M\"obius inversion gives the cycle asymptotic.
+Krieger--Matsumoto Proposition~3.1 proves for Markov-Dyck shifts that
+topological entropy equals the exponential periodic-point growth rate.  The
+displayed asymptotic therefore gives $h_{\rm top}(D_N^E)=\log(N+1)$.  This
+uses that source theorem, not an unproved general identification of periodic
+growth with entropy.
+\end{proof}
+
+\section{Exact audit and scope}
+For $N=1,\ldots,6$ and $n=1,\ldots,24$, all $144$ counts from the binomial
+formula equal an independent exact formal logarithmic derivative.  SymPy
+checks $72$ coefficients plus cancellation, pole, dominance, conjugation, and
+six entropy/dominant-radius identities.  Byte replay is exact.  Eighteen semantic attacks with repaired
+payload hashes and one separate stale-hash integrity attack are rejected.
+
+\begin{center}
+\small
+\begin{tabular}{crrrrrr}
+\toprule
+$N\backslash n$ & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+1 & 2 & 4 & 8 & 16 & 32 & 64\\
+2 & 4 & 12 & 40 & 120 & 384 & 1152\\
+3 & 6 & 24 & 108 & 432 & 1836 & 7344\\
+4 & 8 & 40 & 224 & 1120 & 5888 & 29440\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This algebraic zeta is not identified with a target local factor.  We claim no
+root numbers, automorphy, target determinant, or Hilbert--P\'olya operator.  The
+registered tuple is
+\begin{center}\small\ttfamily
+(A0\_FAIL, A1\_WEAK, A2\_FAIL, A3\_FAIL, A4\_FAIL).
+\end{center}
+The exact record is \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.
+\fi
+
+\section*{Source note}
+The model, zeta formula, and entropy lock follow
+Krieger--Matsumoto~\cite{km2011}; Keller's loop-counting framework gives
+related context~\cite{keller1991}.  The official M\"unster volume PDF controls
+pagination; an arXiv journal-reference entry reports 171--185.  No priority
+claim is made.
+\begin{thebibliography}{9}
+\bibitem{km2011} W. Krieger and K. Matsumoto, Zeta functions and topological
+entropy of the Markov-Dyck shifts, \emph{M\"unster J. Math.} 4 (2011),
+171--184, arXiv:0706.3262.
+\bibitem{keller1991} G. Keller, Circular codes, loop counting, and
+zeta-functions, \emph{J. Combin. Theory Ser. A} 56 (1991), 75--83,
+\href{https://doi.org/10.1016/0097-3165(91)90023-A}{doi:10.1016/0097-3165(91)90023-A}.
+\end{thebibliography}
+\section*{Declarations}
+\textbf{Scope.} The exact registered literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\textbf{Data and code.} Exact ledgers, independent checks, and build
+instructions are supplied in the HCS-C205 release package.
+\textbf{Competing interests.} None declared.
+\textbf{AI-use disclosure.} Generative AI tools assisted drafting and code
+generation.  Every theorem statement, source record, exact output, and scope
+claim was checked through the released internal artifact audit chain; this is
+not external peer review or an independent error process.
+\end{document}

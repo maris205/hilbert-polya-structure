@@ -2495,3 +2495,29 @@ theorem increments, internal repairs, content-addressed hashes and the uniform
 Four packages retain candidate-local `A4_FORMAL_HINT`; C202 has `A4_FAIL`.
 None supplies A0--A3, so all five remain `ROUTE_A_REJECTED`.  Coordinates stay
 separate, scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.
+
+## Route-A independent cross-subtype round C204--C208
+
+This round again gives every paper one complete theorem-scale advance and
+changes the dynamical owner in every slot: an all-finite-field linear map, a
+non-sofic context-free shift, a linear shear PDE, a nonlinear self-similar
+diffusion, and a continuous-time branching process.  Finite ledgers and
+symbolic identities are regression oracles; all-family conclusions remain
+proof- or source-theorem driven.
+
+- [C204 finite linear rational-canonical dynamics](henon_finite_linear_rational_canonical_dynamics_route_a/README.md) · [paper PDF](henon_finite_linear_rational_canonical_dynamics_route_a/paper/main.pdf)
+- [C205 Dyck-shift algebraic zeta](henon_dyck_shift_algebraic_zeta_route_a/README.md) · [paper PDF](henon_dyck_shift_algebraic_zeta_route_a/paper/main.pdf)
+- [C206 Couette shear enhanced dissipation](henon_couette_shear_enhanced_dissipation_route_a/README.md) · [paper PDF](henon_couette_shear_enhanced_dissipation_route_a/paper/main.pdf)
+- [C207 full-exponent Barenblatt similarity atlas](henon_barenblatt_full_exponent_similarity_route_a/README.md) · [paper PDF](henon_barenblatt_full_exponent_similarity_route_a/paper/main.pdf)
+- [C208 linear birth--death branching process](henon_linear_birth_death_branching_route_a/README.md) · [paper PDF](henon_linear_birth_death_branching_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C204_C208.md),
+[batch plan](BATCH_PLAN_C204_C208.md), and completed
+[batch review](BATCH_REVIEW_C204_C208.md) for collision pivots, theorem
+increments, proof/evidence boundaries and the release audit.  The round closes
+15,623 checker exact cells/assertions, 4,060 SymPy checks, 112/112 hostile
+rejections, 135 content-addressed payloads and 15 final-paper pages.  C204 and
+C205 retain genuine source primitive ledgers, and C206 retains only a
+candidate-local inviscid operator hint; none clears A0 or supplies a target
+bridge.  Coordinates remain separate, scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.
