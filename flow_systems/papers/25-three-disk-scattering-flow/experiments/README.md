@@ -1,4 +1,4 @@
-# P25 experiment status — Round 2 complete
+# P25 experiment status — Round 3 complete
 
 The internally prespecified grid `d/a in {5.8,6.0,6.2}` and topological word
 length `<=12` has been executed.  The exact symbolic cutoff contains 747
@@ -19,3 +19,10 @@ half-density correlations are `0.999998520` and `0.999998755`, above the frozen
 `0.98` stop threshold.  The statistic-level result is therefore
 `[NUMERICAL_OBSERVATION]` and `[STOP_SCOPED] / PROVES_TOO_MUCH` for arithmetic
 interpretation.  The formal Route-A tuple remains unassigned.
+
+Round 3 executes a separate 100-digit, multiscale direct return-map validation.
+It expands the independent stability subset from 9 to 2,241 rows and leaves 0
+open rows at the frozen cutoff.  The exact replay artifacts are
+`round3_receipt.json` and `round3_validation.md`.  This numerical closure does
+not change the `STOP_SCOPED / PROVES_TOO_MUCH` arithmetic interpretation or
+authorize A2/Route B.

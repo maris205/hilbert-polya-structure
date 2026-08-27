@@ -1,4 +1,24 @@
-# P26 Round-2 results
+# P26 generated results
+
+## Round 3 — conjugacy owner
+
+- `round3_conjugacy_owner_ledger.csv`: 99 exact rows from 11 selected
+  Round-2 elements and nine bounded `Gamma_0(11)` conjugators.  Each row checks
+  determinants, subgroup membership, trace, powers two and three, and inverse
+  orientation over the integers.
+- `round3_translation_covariance_ledger.csv`: 44 direct q-series quadrature
+  checks under `z -> z+k`, `k=-2,-1,1,2`; maximum observed residual
+  `1.5543122344752192e-15`.
+- `round3_summary.json` and `round3_artifact_manifest.json`: the frozen counts,
+  scope boundary, verdict, and SHA-256 bindings.
+
+The analytic conjugacy/orientation/repetition result is `[PROVED]` in
+`../notes/round3_conjugacy_owner_theorem.md`.  The finite integer regression is
+`NUMERICALLY_CERTIFIED`; the binary64 period comparison is a
+`NUMERICAL_OBSERVATION`.  Neither is a complete conjugacy-class enumeration or
+a Hecke recurrence.
+
+## Round 2 — finite positive-word experiment
 
 Canonical generated artifacts are:
 

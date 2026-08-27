@@ -1,4 +1,23 @@
-# P26 Round-2 reproduction
+# P26 reproduction
+
+## Round 3
+
+Run:
+
+```bash
+./experiments/reproduce_round3.sh
+```
+
+It runs 5 unit tests, generates two isolated artifact trees, requires a
+recursive byte-for-byte match, installs the four canonical Round-3 artifacts,
+and writes `round3_reproducibility_receipt.json`.  The canonical tree SHA-256
+is:
+
+```text
+a3e71f86124ec8ae58f3971002fd3e0f11a0f06ccf3851e1f4ed4fad25d03841
+```
+
+## Round 2
 
 From the P26 directory, run:
 

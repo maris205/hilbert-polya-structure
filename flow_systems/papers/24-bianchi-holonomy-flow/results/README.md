@@ -29,3 +29,29 @@ Arithmetic validation must use a separate post-freeze join table with
 the orbit rows or cutoff.  The primary target is `zeta_{Q(i)}`; the rational-
 prime join is secondary and receives no automatic Riemann-`zeta` A0 credit.
 No such join table was generated in Round 2.
+
+## Round-3 Schottky-control results
+
+The following deterministic artifacts were generated on 2026-08-27:
+
+- `schottky_ping_pong_domains_round3.csv` — 8 paired-domain rows carrying the
+  exact circle centers/radii and ping-pong certificate fields;
+- `schottky_conjugacy_ledger_round3.csv` — 4,148 oriented cyclic classes through
+  marked word length 5;
+- `schottky_holonomy_shuffle_round3.csv` — 4,092 primitive-class rows with
+  length/repetition frozen under a target-free phase permutation;
+- `round3_metrics.json` — theorem checks, ledger counts, numerical residuals,
+  match/unmatched axes, and Route boundary fields.
+
+The exact construction certifies 8 disjoint closed disks, all 28 separation
+inequalities, 8 conjugacy identities, and 22,409 distinct exact projective
+matrices for the 22,409 freely reduced words including identity.  The cyclic
+ledger splits into 4,092 primitive classes and 56 repetitions, paired into
+2,074 unoriented classes.  Complex length and stability fields are numerical;
+their maximum trace-invariant reconstruction residual is `1.097e-14`.
+
+This is exact for the **marked word cutoff**, not a metric length-spectrum
+cutoff.  The quotient is convex-cocompact and infinite-volume with no cusps.
+Finite volume, cusp structure, covolume, length distribution, and full-group
+orbit count are not matched to the Bianchi candidate.  No arithmetic owner or
+post-freeze arithmetic join appears in these files.

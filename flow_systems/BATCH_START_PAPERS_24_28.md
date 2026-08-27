@@ -111,6 +111,22 @@ receipt are recorded in the
 [Round-2 execution report](BATCH_ROUND2_PAPERS_24_28.md). This startup document
 remains the frozen pre-execution contract.
 
+## Round-3 checkpoint
+
+Round 3 subsequently gave every project a distinct paper-facing result: P24 an
+explicit Schottky non-lattice control, P25 a 2,241/2,241 direct physical
+return-map stability certificate, P26 an oriented conjugacy/repetition owner
+theorem, P27 a closest-prior audit that narrows the novelty claim, and P28 a
+source-bound signed-field even-subsequence trace-owner theorem.  The batch
+passed 34/34 tests with deterministic validation for all five projects.  The
+formal route boundary is unchanged: Stage 1 / Route A A0--A1, tuples `0/5`,
+A2--A4 not evaluated, Route-B invocations `0/5`, and no Stage-2 manuscript
+authorization.  Counts, evidence boundaries, primary-source narrowing, hashes,
+and next artifacts are recorded in the
+[Round-3 execution report](BATCH_ROUND3_PAPERS_24_28.md).
+
+This checkpoint does not alter the frozen pre-execution constraints above.
+
 ## Primary-source screen
 
 The 2026-08-26 source screen used original papers, journal records, arXiv, and

@@ -1,4 +1,4 @@
-# P25 Round-2 results
+# P25 results — Rounds 2 and 3
 
 Generated artifacts:
 
@@ -38,3 +38,17 @@ neighboring-parameter persistence crosses the frozen stop threshold, so the
 half-density statistic is `[STOP_SCOPED] / PROVES_TOO_MUCH` as arithmetic
 evidence.  This does not test or establish the separately frozen
 `[MODELING_CHOICE] ABSENT_BY_CONSTRUCTION` A0-source status.
+
+## Round-3 direct stability ledger
+
+- `three_disk_return_map_validation_round3.csv` — 2,241 row-by-row direct
+  return-map checks, three difference scales, refinement method, parity factor,
+  determinant residual, trace residual, and explicit failure tier;
+- `round3_stability_metrics.json` — counts by word length, geometry, and source
+  trace-conditioning tier plus the certified residual envelope.
+
+All 2,241 rows are `NUMERICALLY_CERTIFIED` under the frozen Round-3 contract;
+2,232 are newly closed relative to Round 2.  The direct physical trace obeys
+`(-1)^word_length` times the positive-reflection paraxial trace.  The high-
+precision direct calculation is an independent dynamical calibration, not an
+exact determinant or arithmetic-specific result.

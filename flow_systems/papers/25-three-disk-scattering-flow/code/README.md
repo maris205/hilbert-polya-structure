@@ -1,4 +1,4 @@
-# P25 code status — Round 2 executed
+# P25 code status — Round 3 executed
 
 `round2_three_disk_ledger.py` performs four separated operations:
 
@@ -24,7 +24,21 @@ python3 code/round2_three_disk_ledger.py --verify-existing
 ```
 
 The second full command regenerates all 2,241 rows and requires an exact
-byte-for-byte match.  No prime or zero data are read.  The direct
-finite-difference return-map validation remains open on highly unstable rows;
-the code does not promote those rows beyond `NUMERICAL_OBSERVATION` for the
-stability statistic.
+byte-for-byte match.  No prime or zero data are read.
+
+Round 3 adds `round3_return_map_validation.py`.  It does not import or rebuild
+the paraxial factor product.  It refines the periodic point against a 100-digit
+physical ray-intersection/reflection map and forms direct Jacobians at three
+frozen finite-difference scales.  A geometric specular-stationarity fallback is
+used only when a rounded input point lies outside direct Newton's cylinder; the
+reported stability still comes from the direct ray map.
+
+```bash
+python3 code/test_round3_return_map_validation.py -v
+python3 code/round3_return_map_validation.py
+python3 code/round3_return_map_validation.py --verify-existing
+```
+
+The Round-3 result is 2,241/2,241 numerically certified direct checks.  This
+closes the finite-cutoff numerical validation gap but does not promote the
+aggregate half-density beyond `NUMERICAL_OBSERVATION`.

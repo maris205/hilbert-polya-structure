@@ -17,6 +17,20 @@ Working title: *Semiclassical Tensor-Power Trace*
   `N→∞` to fixed `Δ^L`; a 12-row owner ledger at common
   `N=1,2,4,8` passed 7/7 tests and byte-identical replay. This is owner
   bookkeeping, not a magnetic-orbit or spectral experiment.
+- Round-3 progress: the candidate is narrowed to a source-compatible
+  square-root connection and the even subsequence `N=2m`.  The exact observable
+  `P_N=sqrt(Delta^(L^N)+N^2/4)` centered at `(sqrt(5)/2)N` has principal shell
+  `|p|=1`; its trace clock is explicitly related to the original physical
+  clock by `T_trace=(sqrt(5)/2)T_physical`.  Under `q=2p`, both the source
+  symplectic form and Hamiltonian pull back with the same factor two, so the
+  source and project trace flows have the same primitive owners.  After the
+  exact reindexing `m=N/2`, the observable is covered by
+  Kordyukov--Taimanov Theorem 3 at `B=1` and `E=sqrt(5)`.  Magnetic-orbit trace
+  ownership is therefore **PROVED for this
+  signed-field even-subsequence subtype**; odd `N`, arbitrary flat twists, the
+  zero-field theorem, and the fixed-operator regime remain open.  A 12-row
+  contract passed 8/8 tests and a byte-identical two-run replay with tree
+  SHA-256 `a28bf68d0da5c34350224031428f18f325af0d11619df95f2509741475275f3d`.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -67,10 +81,10 @@ N = 1,2,...,       N→∞.
 
 The operator and its Hilbert space change with `N`; this is not the high-energy
 limit of one fixed operator.  The connection on `L` induces the connection on
-`L^N`, and its orbit holonomy is raised to the `N`th power, but whether those
-orbits own a selected trace of `H_N` remains `[OPEN]`; its exact pipeline state
-is `NOT_ESTABLISHED` until a trace regime and energy-window scaling are fixed
-and verified.
+`L^N`, and its orbit holonomy is raised to the `N`th power.  For the full all-`N`
+family and arbitrary degree-one flat twists, trace ownership remains `[OPEN]`
+with state `NOT_ESTABLISHED`.  The narrower source-compatible signed-field
+even subsequence has the `[PROVED]` Round-3 owner result stated above.
 
 Since the flux is nonzero, `F` is not exact and no global one-form `A` with
 `dA=F` exists.  Closed-orbit phases must therefore be written as connection
@@ -98,7 +112,8 @@ topology-, flux-, and degree-matched controls?
 `[HEURISTIC]`: the minimal nonzero flux may break zero-field time-reversal pairing
 and expose phase structure tied to the arithmetic Bolza surface.  Arithmetic
 provenance plus a natural quantum host does not establish a rational-prime
-correspondence or a same-owner trace formula.
+correspondence.  The even-subsequence same-owner trace theorem is a geometric
+calibration and by itself supplies no arithmetic-specific prime coding.
 
 ## First kill gate
 
@@ -123,9 +138,11 @@ result remains a magnetic trace calibration.
 - [Stage-1 research brief](notes/stage1_research_brief.md)
 - [Round-2 owner lemma](notes/round2_tensor_family_owner_lemma.md)
 - [Round-2 progress report](notes/round2_progress_report.md)
+- [Round-3 source-bound trace contract](notes/round3_trace_regime_contract.md)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
 
-No prime-orbit claim, fixed-spectrum match, same-owner trace correspondence, or
-Route-B credit is claimed.
+No rational-prime orbit claim, fixed-spectrum match, all-`N` trace claim, or
+Route-B credit is claimed.  The only same-owner trace result is the explicitly
+scoped source-compatible signed-field even subsequence.

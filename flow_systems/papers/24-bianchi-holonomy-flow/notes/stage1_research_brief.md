@@ -89,7 +89,10 @@ provenance alone proves neither map, and no Riemann-`zeta` A0 credit is assigned
 
 1. Holonomy shuffle at fixed lengths and repetitions.
 2. `m=0` scalar trace versus a chiral/holonomy-sensitive trace.
-3. Matched non-arithmetic Kleinian lattice.
+3. A structurally matched convex-cocompact classical Schottky Kleinian
+   non-lattice control.  Only generator rank, oriented alphabet, and word
+   cutoff are matched; finite volume, cusps, covolume, and length distribution
+   are explicitly not matched.
 4. Neighboring word cutoffs with completeness-risk accounting.
 5. After the orbit ledger is frozen: shuffled prime-ideal labels,
    matched-density composite ideals, and the simpler scalar trace.
@@ -106,6 +109,16 @@ four stated elementary generators and their inverses through word length 5;
 full-group generation, full conjugacy enumeration, and group-certified
 primitivity remain `[OPEN]`.  See `notes/round2_conclusion.md`.
 
+Round 3 executed the separate target-free control in
+`results/schottky_conjugacy_ledger_round3.csv`.  An exact paired-round-disk
+certificate proves that the control is a rank-4 classical Schottky group;
+22,409 reduced words have 22,409 distinct exact projective matrices, and the
+frozen cyclic ledger has 4,148 oriented classes.  The quotient is an
+infinite-volume non-lattice, not a finite-volume matched manifold.  Possible
+containment in a larger arithmetic ambient group remains `[OPEN]`, no
+arithmetic owner is assigned, and no target data defines or filters the group.
+See `notes/round3_conclusion.md`.
+
 ## Route mapping
 
 ```text
@@ -118,7 +131,12 @@ A1_SCREEN=FINITE_ELEMENTARY_WORDBALL_EXECUTED_FULL_PRIMITIVE_LEDGER_OPEN
 ROUND2_LEDGER_EVIDENCE=NUMERICALLY_CERTIFIED
 ROUND2_HOLONOMY_CONTROL_EVIDENCE=NUMERICAL_OBSERVATION
 ROUND2_HOLONOMY_CONTROL_VERDICT=OPEN
+ROUND3_SCHOTTKY_GROUP_EVIDENCE=PROVED
+ROUND3_SCHOTTKY_LEDGER_EVIDENCE=NUMERICALLY_CERTIFIED
+ROUND3_MATCH_SCOPE=RANK4_ALPHABET8_WORD_CUTOFF5_ONLY
+ROUND3_CROSS_SYSTEM_VERDICT=OPEN
 FORMAL_A0_A4_TUPLE=UNASSIGNED
+A2_A4_EVALUATION=NOT_EVALUATED
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false
 GATES_A_E=NOT_REACHED

@@ -1,6 +1,7 @@
 # Paper 27 — congruence inverse-limit no-go
 
-Working title: *No Periodic Orbits in a Residual Congruence-Limit Geodesic Flow*
+Working title: *Finite-Level Closed Geodesics without Inverse-Limit Periodic
+Orbits: an Explicit Congruence-Tower Ownership Audit*
 
 ## Current status
 
@@ -16,6 +17,37 @@ Working title: *No Periodic Orbits in a Residual Congruence-Limit Geodesic Flow*
   tuple and overall Route-A status are unassigned; A2--A4 are `NOT_EVALUATED`,
   Route-B evaluation is not run, invocation is disallowed, and Gates A--E are
   not reached.
+
+- Round-3 closest-prior audit: **COMPLETE, SEARCH-BOUNDED**.  Direct structural
+  prior work was found, so the theorem is not being positioned as a new general
+  aperiodicity theorem.  The candidate contribution is narrowed to the explicit
+  `Gamma(3 n!)` specialization, its sign-sensitive residual proof, the
+  reproducible finite-level order ledger, and the finite-owner firewall.
+
+### Round-3 closest-prior result — 2026-08-27
+
+The strongest prior-work overlap is substantive:
+
+- Martínez--Matsumoto--Verjovsky (2016) give a compact hyperbolic lamination
+  example without periodic geodesic orbits and separately describe the
+  universal hyperbolic solenoid as an inverse limit with simply connected
+  leaves.
+- Penner--Šarić (2008) define the noncompact punctured solenoid as the inverse
+  limit over finite-index subgroups of `PSL_2(Z)` and state that its leaves
+  are unit disks.
+- Alcalde Cuesta--Carballido Costas--Martínez--Verjovsky (2026) treat exactly
+  the object class of noncompact finite-area surface-covering inverse limits,
+  call the regular-cover case a hyperbolic McCord solenoidal surface of finite
+  type, and define its leafwise geodesic flow.
+
+No checked primary source stated the exact factorial-chain proposition
+`Gamma(3 n!)` verbatim.  That negative search result is bounded by the
+recorded strings and sources; it is not an absolute novelty claim.  In light of
+the direct structural prior, the no-period theorem is treated as an explicit
+specialization/case study rather than a standalone new general theorem.  See
+the [Round-3 source audit](notes/round3_closest_prior_audit.md), [Round-3
+conclusion](notes/round3_conclusion.md), and [Stage-1 research
+spine](paper/stage1_research_spine.md).
 
 ### Round-2 finite-level diagnostic — 2026-08-27
 
@@ -51,9 +83,11 @@ M_infinity = inverse_limit_n T^1Y_n.
 
 The bonding maps are the finite covering maps, and the flow is defined
 coordinatewise by the unit-speed geodesic flows.  The clock is hyperbolic
-arclength at every level.  Because the modular surfaces have cusps, the honest
-name is a principal-congruence inverse-limit geodesic lamination, not a compact
-McCord solenoid.
+arclength at every level.  In the terminology of Alcalde Cuesta et al. (2026),
+this normal regular-cover tower is a noncompact hyperbolic McCord solenoidal
+surface of finite type.  It is not the compact universal hyperbolic solenoid;
+`principal-congruence inverse-limit geodesic lamination` remains an
+unambiguous project-local description.
 
 ## Stage-1 no-go theorem
 
@@ -111,8 +145,12 @@ formal evidence tokens.
 - [pipeline state](notes/pipeline_state.md)
 - [planned finite-level diagnostic](results/README.md)
 - [Round-2 conclusion and owner firewall](notes/round2_conclusion.md)
+- [Round-3 closest-prior audit](notes/round3_closest_prior_audit.md)
+- [Round-3 conclusion](notes/round3_conclusion.md)
+- [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
 
 The no-periodic-orbit theorem remains the Route-relevant landed result.  The
-finite-level table is a reproducible diagnostic only; a full manuscript and
-external novelty audit remain pending.
+finite-level table is a reproducible diagnostic only.  The external
+closest-prior audit is complete and narrows the publishable claim; a manuscript
+has not been started and ARS Stage 2 has not begun.

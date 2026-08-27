@@ -4,7 +4,7 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress; Round 2 executed reproducibly**.
+- ARS: **Stage 1 RESEARCH in progress; Rounds 2--3 executed reproducibly**.
 - Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
 - The arithmetic one-form, positive time-density/slowness factor, reciprocal
   speed multiplier, generator, and exact period-variation formula are frozen.
@@ -16,6 +16,13 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 - Two isolated runs were byte-identical with artifact-tree SHA-256
   `e635ee051ea25d543eb4f3fd72bce5ae4da95d64ee2ca9f90b2f5f81ba8a2da5`;
   all 7 unit tests passed.
+- Round 3 proves that the newform one-form period is owned by an oriented
+  `Gamma_0(11)` conjugacy class, reverses sign under inverse orientation, and
+  is linear under repetition.  The finite regression layer checked 99 exact
+  bounded-conjugacy rows and 44 direct translation-covariance rows; 5/5 tests
+  and two byte-identical replays passed.  The maximum observed translation
+  residual is `1.5543122344752192e-15`, and the Round-3 tree SHA-256 is
+  `a3e71f86124ec8ae58f3971002fd3e0f11a0f06ccf3851e1f4ed4fad25d03841`.
 - Formal Route-A tuple: **unassigned**.
 - Route B: `EVALUATION=NOT_RUN`; `INVOCATION_ALLOWED=false`.
 
@@ -78,6 +85,7 @@ source-derived recurrence or prime owner exists, so
 - [pipeline state](notes/pipeline_state.md)
 - [Round-2 conclusion](notes/round2_conclusion.md)
 - [Round-2 completion receipt](notes/round2_completion_receipt.md)
+- [Round-3 conjugacy-owner theorem](notes/round3_conjugacy_owner_theorem.md)
 - [results and artifact contract](results/README.md)
 - [reproduction instructions](experiments/README.md)
 

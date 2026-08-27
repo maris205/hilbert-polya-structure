@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 新一轮五种连续时间子型 | **Round 2 已完成；5/5 可执行产物，31/31 测试通过** | P24 落地 10,944 条有限 word-ball primitive candidates 与 holonomy shuffle；P25 的 2,241 条实际 billiard 解数值显示 half-density 指标 `PROVES_TOO_MUCH`；P26 落地 11 条 level-11-selected time-change variation 账本；P27 以 24 条有限层双算法记录守住 `Per(M_infinity)=empty` 的 owner firewall；P28 完成 12 条 tensor-family owner 账本。全部仍在 Stage 1 / Route A A0--A1，正式 tuple `0/5`，Route B `0/5`。见[Round-2 报告](BATCH_ROUND2_PAPERS_24_28.md)。 |
+| `24--28` — 新一轮五种连续时间子型 | **Round 3 已完成；5/5 均有论文级进展，34/34 测试通过** | P24 建成显式 rank-4 Schottky 非格控制；P25 以 100 位直接物理 return map 将稳定性复验闭合到 2,241/2,241；P26 证明 level-11 newform period 的共轭、反向与重复 owner 定理；P27 因直接结构先例而收窄为显式 factorial-tower case study；P28 将 source-compatible `N=2m` 子型绑定到磁 Laplacian trace theorem。全部仍在 Stage 1 / Route A A0--A1，正式 tuple `0/5`，Route B `0/5`。见[Round-3 报告](BATCH_ROUND3_PAPERS_24_28.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,16 +38,17 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 ## 下一轮 Papers 24--28
 
 五篇均处于 Proposal Stage 1 / Route A A0--A1，Route B 未调用，Gates A--E
-未到达；Round 2 的五套 target-free 产物已执行并通过 31/31 测试，大胆假设
-仍按 `HEURISTIC` 管理，没有预发正式 Route tuple。
+未到达；Round 3 为五篇分别落地了控制构造、数值闭环、owner 定理、来源收窄
+或 trace 子型定理，共通过 34/34 测试。大胆假设仍按 `HEURISTIC` 管理，没有
+预发正式 Route tuple，也没有授权进入 ARS Stage 2。
 
 | Paper | 子类型 | 当前明确进展 |
 |---|---|---|
-| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow | 精确枚举 22,409 个 reduced words / 11,481 个矩阵，得到 10,944 个有限样本 primitive candidates；full-group completeness 与 prime-ideal owner 仍 `OPEN` |
-| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering | 747 个 primitive symbolic words 在三个参数上形成 2,241 条实际 specular 解；邻参相关均大于 `0.9999985`，因此 half-density arithmetic statistic 局部止损为 `PROVES_TOO_MUCH` |
-| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | 125 个 primitive positive necklaces 中筛得 11 个 level-11 representatives，周期变分与 generic/permutation controls 已复验；Hecke/Euler link 仍 `HEURISTIC/NOT_TESTABLE` |
-| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit geodesic lamination | 3 个元素、8 层、24 条 reduction-order 记录双算法一致；有限层 owner 不得冲抵极限流 `Per(M_infinity)=empty` 的严格阻断 |
-| [P28](papers/28-bolza-magnetic-flow/README.md) | magnetic Hamiltonian flow | `b=0,+1/2,-1/2` 与 `N=1,2,4,8` 的 12 条 owner 账本通过；trace regime、energy window 和 magnetic-orbit binding 仍 `OPEN/NOT_ESTABLISHED` |
+| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow + Schottky control | 8 个显式 paired disks 的 28/28 精确分离检查给出 free/discrete/convex-cocompact rank-4 control；cutoff 5 有 4,148 个 oriented cyclic classes。该 control 是 infinite-volume non-lattice，尚非 finite-volume/cusp-matched control |
+| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering | 100 位三尺度直接物理 return map 已复验 2,241/2,241 条稳定性；旧 2,232 个 open 全部关闭，但 half-density 仍只支持 `STOP_SCOPED / PROVES_TOO_MUCH` 负控结论 |
+| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | 证明 `omega_f` period 在 `Gamma_0(11)` 共轭下不变、反向变号、重复线性；99 条 exact conjugacy 与 44 条 translation checks 通过，Hecke/Euler recurrence 仍未证明 |
+| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit geodesic lamination | 最近先例审计发现直接结构重叠，撤回广义首创定位；保留 `Gamma(3n!)` 显式特例、PSL-sign residual proof、24 条有限层 ledger 与 owner firewall |
+| [P28](papers/28-bolza-magnetic-flow/README.md) | magnetic Hamiltonian flow | source-compatible square root 与偶子列 `N=2m` 已通过精确相空间缩放绑定来源 trace theorem，signed-field subtype ownership 为 `PROVED`；odd `N`、任意 twists、zero field 与 fixed `Delta^L` 仍 open |
 
 ## 按时间记录
 
@@ -155,3 +156,5 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 28-bolza-magnetic-flow - Stage 1 / A0--A1（2026-08-26） - 曲率 `-1` Bolza surface 上 `b=1/2` 给出 degree-one flux；非 exact 场排除全局 `A`，phase owner 修正为 connection holonomy；主量子架构冻结为随 `N` 改变的 `Delta^{L^N}` 半经典族，固定 `Delta^L` 的高能 trace 与磁轨 ownership 明确保留为 `OPEN/NOT_ESTABLISHED`，Route B 未调用。
 
 24--28-round2 - Stage 1 / Route A A0--A1（2026-08-27） - 五种连续时间子型均落地一个 target-free 可执行产物，31/31 测试与 5/5 确定性复验通过；P25 的 generic half-density statistic 局部判定 `STOP_SCOPED / PROVES_TOO_MUCH`，P27 的 `Per(M_infinity)=empty` 保持 `[PROVED] PROVED_A1_OBSTRUCTION`，其余有限账本不越界为 full owner。正式 Route-A tuples `0/5`、A2--A4 `0/5`、Route-B invocations `0/5`。详见 [Round-2 报告](BATCH_ROUND2_PAPERS_24_28.md)。
+
+24--28-round3 - Stage 1 / Route A A0--A1（2026-08-27） - 五篇分别落地 Schottky 非格控制、2,241/2,241 直接物理稳定性复验、newform 共轭/反向/重复 owner 定理、最近先例收窄和 source-bound magnetic even-subsequence trace 定理；34/34 测试通过。P27 不再主张一般 aperiodic laminated-flow novelty，P28 严格区分 frozen subtype `PROVED` 与 full/fixed regimes `OPEN/NOT_ESTABLISHED`。正式 Route-A tuples `0/5`、A2--A4 `0/5`、Route-B invocations `0/5`。详见 [Round-3 报告](BATCH_ROUND3_PAPERS_24_28.md)。

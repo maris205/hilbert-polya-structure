@@ -1,4 +1,20 @@
-# P26 Round-2 code
+# P26 code
+
+## Round 3
+
+`round3_conjugacy_owner.py` builds the exact bounded-conjugacy ledger and the
+direct translation-covariance ledger.  It imports the frozen Round-2 matrix,
+enumeration, eta-product, and quadrature definitions instead of duplicating
+them.  Run its five tests with:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_round3_conjugacy_owner.py
+```
+
+Canonical two-run reproduction is owned by
+`../experiments/reproduce_round3.sh`.
+
+## Round 2
 
 `round2_experiment.py` is a Python-standard-library-only deterministic
 generator.  It:

@@ -18,6 +18,10 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   generic instability-half-density persistence as arithmetic evidence.  This is
   a statistic-level negative result, not a formal A0--A4 tuple.  Route-B
   evaluation is not run and invocation is disallowed.
+- Round-3 stability status: **2,241/2,241 direct physical return-map checks
+  `NUMERICALLY_CERTIFIED`** at the frozen cutoff; 2,232 rows are newly closed
+  relative to Round 2.  Aggregate half-density evidence remains
+  `NUMERICAL_OBSERVATION`.
 
 ## Round-2 executed artifact
 
@@ -34,9 +38,11 @@ angle disagreements are `2.14e-14` and `4.61e-8`.
 
 The analytic paraxial monodromy formula supplies a half-density
 `|Lambda_u|^(-1/2)`.  A direct finite-difference return-map cross-check is
-`NUMERICALLY_CERTIFIED` for only 9 rows and remains `[OPEN]` for 2,232 highly
-unstable rows; therefore the batch-wide half-density conclusions are labeled
-`[NUMERICAL_OBSERVATION]`, not numerical certification.
+`NUMERICALLY_CERTIFIED` for only 9 rows in the historical Round-2 binary64
+artifact.  Round 3 replaces that check with a 100-digit, three-scale direct
+physical return-map calculation and certifies all 2,241 rows.  The batch-wide
+half-density conclusion nevertheless remains `[NUMERICAL_OBSERVATION]` because
+this is finite-cutoff numerical calibration, not an exact identity.
 
 Long monodromy products are rebuilt with 80-digit decimal arithmetic; the
 binary64 trace is retained as a recorded cross-check.  This removes catastrophic
@@ -103,6 +109,8 @@ Evidence labels in this project use the vocabulary of
 - [planned ledger](results/README.md)
 - [Round-2 conclusion](notes/round2_conclusion.md)
 - [Round-2 validation](experiments/round2_validation.md)
+- [Round-3 conclusion](notes/round3_conclusion.md)
+- [Round-3 direct validation](experiments/round3_validation.md)
 
 No exact scattering determinant, A2 zeta test, formal Route tuple, or manuscript
 is claimed yet.

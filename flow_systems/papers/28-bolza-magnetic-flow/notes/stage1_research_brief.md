@@ -24,9 +24,10 @@ metric from topology-, flux-, degree-, and regime-matched controls?
   tensor-power limit is not a fixed-operator high-energy limit.
 - Fixed-operator candidate: `Δ^L` on `L²(Σ_B,L)` is tracked separately
   and receives no tensor-family ownership by implication.
-- Trace binding: energy-window scaling, trace distribution, and periodic-orbit
-  ownership are `[OPEN]`; the exact ownership state is `NOT_ESTABLISHED`, not a
-  frozen result.
+- Full-family trace binding: for all `N` and arbitrary degree-one flat twists,
+  the energy-window theorem and periodic-orbit ownership remain `[OPEN]` /
+  `NOT_ESTABLISHED`.  Round 3 separately proves the narrower source-compatible
+  signed-field even-subsequence result.
 - Data prohibition: no prime/zero list or target-tuned field strength.
 
 ## Derived Stage-1 normalization
@@ -77,12 +78,15 @@ tensor-power trace-formula literature for magnetic Laplacians.
 are `0,+1,-1`; the negative-field bundle is `L^*`; and nonzero flux rules out a
 global ordinary potential.
 
-`[OPEN]`: the exact energy-window scaling and trace distribution to use for
-`H_N` in this project.
+`[PROVED under the Round-3 subtype]`: on the source-compatible square-root
+connection and even subsequence `N=2m`, the exact trace observable is
+`Tr phi(sqrt(Delta^(L^N)+N^2/4)-(sqrt(5)/2)N)`, with an `O(1)` transformed
+window.  It targets the already-frozen unit-speed shell.
 
-`[OPEN]`: whether the periodic magnetic orbits of the frozen classical flow own
-the selected trace of the exact family `H_N` under the still-open scaling.  The
-pipeline state is `NOT_ESTABLISHED`.
+`[PROVED under the Round-3 subtype]`: Kordyukov--Taimanov Theorem 3 binds
+primitive magnetic conjugacy classes to the selected trace on the signed-field
+even subsequence.  The full all-`N` family, arbitrary flat twists, zero-field
+control, and fixed-operator candidate remain `[OPEN]` / `NOT_ESTABLISHED`.
 
 `[HEURISTIC]`: the arithmetic substrate survives into individual magnetic
 primitive orbits strongly enough to create a rational-prime Euler ledger.
@@ -111,14 +115,15 @@ FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
    A0--A3 and its own fixed-operator trace and orbit-ownership obligations are
    independently established.
 
-## Concrete next artifact
+## Historical Round-2 artifact contract
 
-First prove a family-owner lemma fixing the octagon/group, `L`, its dual,
+Round 2 was required first to prove a family-owner lemma fixing the
+octagon/group, `L`, its dual,
 induced connections, classical generators, every `Hilbert_N`, every `H_N`,
 operator domains, tensor-power scaling, base and operator-bundle degrees, and
 holonomy repetition.  The lemma must explicitly keep orbit ownership
-`[OPEN]` with pipeline state `NOT_ESTABLISHED` until an exact trace theorem is
-matched.  Then create
+`[OPEN]` with pipeline state `NOT_ESTABLISHED` until an exact trace theorem was
+matched.  It then created
 `results/bolza_semiclassical_tensor_trace_ledger.csv` for
 `b=0,+1/2,-1/2` with the schema frozen in `results/README.md`.
 
@@ -149,8 +154,11 @@ A1_SCREEN=PRIMITIVE_MAGNETIC_LEDGER_NOT_EXECUTED
 A4_ARCHITECTURE_NOTE=SEMICLASSICAL_TENSOR_POWER_FAMILY_NO_CREDIT_YET
 ROUND2_OWNER_LEMMA=PROVED
 ROUND2_OWNER_LEDGER=12_ROWS_REPLAY_PASS
-SEMICLASSICAL_TRACE_REGIME=OPEN
-SEMICLASSICAL_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
+FULL_ALL_N_ARBITRARY_TWIST_TRACE_REGIME=OPEN
+FULL_ALL_N_ARBITRARY_TWIST_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
+ROUND3_EVEN_SUBSEQUENCE_TRACE_REGIME=SOURCE_BOUND
+ROUND3_EVEN_SUBSEQUENCE_MAGNETIC_ORBIT_OWNERSHIP=PROVED_UNDER_FROZEN_SUBTYPE
+ROUND3_FULL_ALL_N_SEQUENCE=OPEN
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN
 FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
 FORMAL_A0_A4_TUPLE=UNASSIGNED

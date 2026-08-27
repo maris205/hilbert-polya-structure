@@ -16,17 +16,26 @@ Date: **2026-08-27**
 | Exact group checks | **NUMERICALLY_CERTIFIED** — determinant one and `A=I mod 3` for every row |
 | Primitive/repetition scope | **`[NUMERICALLY_CERTIFIED]` WITH BOUNDARY** — 10,944 primitive-within-ball candidates and 32 observed exact repetitions; full-group primitivity `[OPEN]` |
 | Holonomy shuffle | **`[NUMERICAL_OBSERVATION]`** — 10,944 target-free rows executed; verdict `[OPEN]` |
+| Round-3 Schottky ping-pong certificate | **`[PROVED]`** — 8 closed disks, 28 exact separation checks, 8 exact conjugacy identities |
+| Round-3 Schottky marked-word ledger | **`[NUMERICALLY_CERTIFIED]`** — 22,409 distinct projective word matrices; 4,148 oriented cyclic classes at cutoff `<=5` |
+| Round-3 primitive / repetition split | **`[PROVED]` symbolically / `[NUMERICALLY_CERTIFIED]` artifact** — 4,092 / 56 in the frozen free-group marking |
+| Matched-control boundary | **FROZEN** — rank 4, alphabet 8, cutoff 5 only; finite volume, cusps, covolume, lengths, and full-group orbit counts not matched |
+| Control arithmetic scope | **NO OWNER** — infinite-volume non-lattice; possible larger arithmetic ambient containment `[OPEN]` |
+| Round-3 intrinsic holonomy diagnostic | **`[NUMERICAL_OBSERVATION]`** — score 0.0258111348; shuffled score 0.0234922291; arithmetic verdict `[OPEN]` |
 | Full `Gamma((3))` / conjugacy completeness | **OPEN** — elementary generated subgroup word ball only |
 | Orbit-to-prime-ideal map | **OPEN** — no arithmetic labels attached |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | Formal Route-A tuple | UNASSIGNED |
+| Route A A2--A4 | NOT EVALUATED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: either prove a generator/conjugacy completeness theorem or replace
-the word-ball sample by a certified full primitive-class enumeration, then run
-the matched non-arithmetic Kleinian control.  No orbit-to-Gaussian-prime-ideal
-claim or A0/A1 verdict is permitted before those owner/completeness obligations
-close.  A later rational-prime push-forward must separately preserve the frozen
+Next gate: predeclare a cross-system statistic that respects the deliberately
+narrow match contract, while either proving a generator/conjugacy completeness
+theorem or replacing the Bianchi word-ball sample by a certified full
+primitive-class enumeration.  The Schottky **construction** is complete, but
+the kill verdict remains `[OPEN]`.  No orbit-to-Gaussian-prime-ideal claim or
+A0/A1 verdict is permitted before the owner/completeness obligations close.  A
+later rational-prime push-forward must separately preserve the frozen
 split/inert/ramified rules.

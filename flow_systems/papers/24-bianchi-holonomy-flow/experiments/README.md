@@ -20,7 +20,26 @@ shuffle  = 0.02247064819754699
 ```
 
 This is `[NUMERICAL_OBSERVATION]`; it does not favor the observed angles over
-the shuffle and does not create an arithmetic owner.  The matched
-non-arithmetic Kleinian ledger and scalar/chiral trace comparison remain
-`[OPEN]`.  Arithmetic label controls remain prohibited until a canonical
-orbit owner exists.
+the shuffle and does not create an arithmetic owner.  At the Round-2
+checkpoint, both the independent Kleinian ledger and scalar/chiral trace
+comparison were `[OPEN]`.  Round 3 below closes the former construction only;
+the scalar/chiral comparison and arithmetic verdict remain `[OPEN]`.
+Arithmetic label controls remain prohibited until a canonical orbit owner
+exists.
+
+## Round 3
+
+The classical-Schottky control construction is now complete.  Exact
+Gaussian-rational checks plus the classical ping-pong theorem prove the
+rank-4 free, discrete, convex-cocompact control group.  The deterministic
+ledger and intrinsic shuffle were reproduced under the combined SHA-256 in
+`round3_receipt.json`; commands and claim boundaries are recorded in
+`round3_validation.md`.
+
+The phrase “matched control” is restricted to rank 4, oriented alphabet 8, and
+word cutoff 5.  This is an infinite-volume non-lattice, not a finite-volume
+matched manifold.  The construction is `[PROVED]`, the numerical ledger is
+`[NUMERICALLY_CERTIFIED]`, and the intrinsic phase/length scores are
+`[NUMERICAL_OBSERVATION]`.  The cross-system arithmetic verdict remains
+`[OPEN]`; formal Route-A tuple is `UNASSIGNED`, A2--A4 are `NOT_EVALUATED`, and
+Route B is not run or invocable.

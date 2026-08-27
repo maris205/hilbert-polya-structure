@@ -16,6 +16,9 @@ Date: **2026-08-27**
 | One-form period proxy | **NUMERICAL_OBSERVATION** — q-series axis quadrature with independent stability checks |
 | First kill controls | **EXECUTED / NUMERICAL_OBSERVATION** — bounded invariant generic observable, permutation, and simpler-parent length control |
 | Reproducibility | **REPRODUCIBLE** — 7/7 tests; two byte-identical runs; tree SHA-256 `e635ee051ea25d543eb4f3fd72bce5ae4da95d64ee2ca9f90b2f5f81ba8a2da5` |
+| Round-3 period owner | **PROVED** — oriented `Gamma_0(11)` conjugacy invariant; inverse orientation changes sign; repetition is linear |
+| Round-3 finite regression | **PASS** — 99 exact conjugacy rows, 44 translation-covariance rows, maximum observed residual `1.5543122344752192e-15` |
+| Round-3 reproducibility | **REPRODUCIBLE** — 5/5 tests; two byte-identical runs; tree SHA-256 `a3e71f86124ec8ae58f3971002fd3e0f11a0f06ccf3851e1f4ed4fad25d03841` |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | Formal Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |

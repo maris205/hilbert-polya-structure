@@ -13,7 +13,7 @@ Date: **2026-08-27**
 | Symbolic cutoff | **PROVED** — all 747 oriented primitive cyclic words through length 12 |
 | Actual orbit solutions | **NUMERICALLY_CERTIFIED** — 2,241/2,241 rows pass two-solver, reflection, visibility, and length checks |
 | Center-polygon proxy | **MODELING_CHOICE** — retained separately and never called an orbit |
-| Stability half-density | **NUMERICAL_OBSERVATION** — 80-digit analytic monodromy with binary64 trace cross-check on 2,241 rows; independent finite-difference cross-check certified for 9 and open for 2,232 |
+| Stability half-density | **NUMERICAL_OBSERVATION** — Round-3 100-digit physical return-map cross-check is numerically certified on 2,241/2,241 rows; 2,232 newly closed, 0 open at the frozen cutoff |
 | Half-density kill control | **EXECUTED** — 747 complete neighboring-parameter triplets plus shuffled/random/composite controls |
 | `PROVES_TOO_MUCH` verdict | **`[STOP_SCOPED]`** for half-density persistence as arithmetic evidence |
 | Proposal stage | Stage 1 / A0--A1 negative control |
@@ -26,9 +26,10 @@ The A0-source absence is fixed by the control design.  It is not an inference
 from the separate half-density experiment.  The Round-2 control now shows that
 the chosen half-density structure persists almost unchanged under neighboring
 non-arithmetic geometries, so that statistic is stopped as arithmetic evidence.
-The next gate is either a different source-derived observable with an explicit
-arithmetic owner or closure of the 2,232 open finite-difference stability
-cross-checks for a purely dynamical calibration; neither authorizes A2.
+Round 3 closes the former 2,232-row finite-difference gap as a purely dynamical
+calibration.  The next scientific gate would require a different source-derived
+observable with an explicit arithmetic owner; the present closure does not
+authorize A2.
 
 Evidence tokens are limited to the vocabulary in
 `skills/route-a-evaluator.md`; `UNASSIGNED` is a pipeline state.

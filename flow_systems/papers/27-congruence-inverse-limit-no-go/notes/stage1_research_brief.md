@@ -178,3 +178,23 @@ The formal Route-A tuple remains `UNASSIGNED`: the Round-2 table closes a
 finite-level diagnostic, not the missing rational-prime A0 link or a
 determinant convention for A2.  A2--A4 remain `NOT_EVALUATED`, Route B remains
 not run, and Gates A--E remain not reached.
+
+## Round-3 prior-work positioning addendum — 2026-08-27
+
+The search-bounded closest-prior audit found direct structural overlap.  In
+particular, prior primary work supplies examples of hyperbolic laminated
+geodesic flows without periodic orbits, describes universal and punctured
+solenoids with simply connected disk leaves, and treats noncompact finite-area
+inverse limits of regular surface coverings as hyperbolic McCord solenoidal
+surfaces of finite type.  Those results do not state the exact
+`Gamma(3 n!)` proposition verbatim, but they make the broad aperiodicity
+phenomenon and its simply-connected-leaf mechanism prior.
+
+Accordingly, this brief does **not** claim that
+`Per(M_infinity)=empty` is a standalone novel general theorem.  Its proposed
+paper role is an explicit, sign-sensitive principal-congruence specialization
+paired with a reproducible finite-level ledger and a same-owner firewall.  The
+full search protocol, exact links, source locators, include/exclude record, and
+bounded novelty judgment are in
+`notes/round3_closest_prior_audit.md`.  The non-prose Stage-1 manuscript plan
+is in `paper/stage1_research_spine.md`.  ARS Stage 2 remains not started.

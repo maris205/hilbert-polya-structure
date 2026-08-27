@@ -69,6 +69,15 @@ records neighboring parameters, deterministic period shuffling, random phase,
 random stability, rank-integer, guaranteed-composite, and deterministic
 random-integer controls.  See `notes/round2_conclusion.md`.
 
+Round 3 additionally executes
+`results/three_disk_return_map_validation_round3.csv`: a 100-digit physical
+ray-map calculation with three finite-difference scales.  It expands the
+independent stability validation from 9 to all 2,241 geometry rows and records
+the trace-parity convention and condition-aware refinement method explicitly.
+See `notes/round3_conclusion.md`.  The next paper-facing artifact is a
+theorem/experiment boundary outline for the negative-control manuscript, not
+an A2 evaluation.
+
 ## Route mapping
 
 ```text

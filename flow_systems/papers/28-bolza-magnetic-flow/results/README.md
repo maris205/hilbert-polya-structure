@@ -1,5 +1,19 @@
 # P28 results and planned orbit ledger
 
+## Round-3 source-bound trace contract
+
+`round3_trace_regime_contract.csv` contains 12 rows for
+`b=0,+1/2,-1/2` at common even powers `N=2,4,8,16`.  It freezes the operator,
+semiclassical scale, transformed spectral center/window, unit-speed classical
+shell, source parameter map, primitive period/action factors, and every owner
+firewall.  `round3_trace_regime_validation.json` records a PASS: eight signed
+field rows are source-bound, four zero-field control rows remain open, no row
+assigns a formal Route-A tuple, and no fixed-operator credit is allowed.
+
+The signed-field result depends on the explicit modeling choice that the
+degree-one connection is a square root of the source's `B=1` quantization
+connection.  The ledger contains no eigenvalues or orbit samples.
+
 ## Round-2 owner ledger
 
 `bolza_tensor_family_owner_ledger.csv` contains 12 exact owner rows for
@@ -32,8 +46,9 @@ Schema semantics:
   `N*bundle_degree`.
 - `b=-1/2` uses the dual bundle `L^*`; its tensor family is
   `Δ^{(L^*)^N}`.
-- `energy_window` records the exact `N`-dependent or rescaled spectral window;
-  it remains `OPEN` until source-bound.
+- `energy_window` records the exact `N`-dependent or rescaled spectral window.
+  Round 3 now binds it for the source-compatible even-subsequence subtype; it
+  remains open outside that scope.
 - `trace_regime` must be either `SEMICLASSICAL_TENSOR_POWER` or the explicitly
   separate `FIXED_OPERATOR_HIGH_ENERGY_CONTROL`; rows from the two regimes may
   not be pooled.
@@ -41,9 +56,11 @@ Schema semantics:
   `PROVED|HEURISTIC|MODELING_CHOICE|OPEN`.
 
 The `b=0,+1/2,-1/2` runs must share the same `tensor_power_N`, energy-window
-convention, trace regime, normalization, and orbit-selection rule.  No row may
-assign same-owner trace correspondence an evidence status stronger than
-`OPEN`; the exact pipeline ownership state remains `NOT_ESTABLISHED`.
+convention, trace regime, normalization, and orbit-selection rule.  Future
+numerical orbit rows may cite `PROVED` trace ownership only for the frozen
+source-compatible signed-field even subsequence and only with its clock and
+orientation conventions.  Zero-field, odd-`N`, arbitrary-twist, full all-`N`,
+and fixed-operator rows remain `OPEN` / `NOT_ESTABLISHED`.
 
 ```text
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN
