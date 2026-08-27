@@ -1,0 +1,189 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.64in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs}
+\emergencystretch=1em
+\title{Relaxed Douglas--Rachford Dynamics for Two Subspaces:\\
+An All-Parameter Principal-Angle Atlas}
+\author{Route-A structural certificate C197}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every pair of linear subspaces in finite-dimensional real Hilbert space
+and every real relaxation parameter, we give the complete orthogonal block
+atlas of the relaxed Douglas--Rachford map.  It yields the fixed space, sharp
+convergence window and rate, optimal relaxation, shadow limit, endpoint
+rotation dynamics, instability boundary, all power traces, and a closed finite
+determinant.  Exact rational sentinels are reconstructed independently from
+projections and by symbolic algebra; they test conventions without replacing
+the all-subspace proof.  The source-native orthogonal endpoint is a formal
+operator hint, but projection geometry has no intrinsic prime carrier or
+logarithmic clock, so the candidate fails Route A.
+\end{abstract}
+\noindent\textbf{Keywords:} Douglas--Rachford splitting; principal angles;
+relaxed projections; convergence rate; finite determinant; Route-A obstruction.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对有限维实希尔伯特空间中任意两个线性子空间及任意实松弛参数，给出松弛
+\foreignlanguage{english}{Douglas--Rachford}映射的完整主角分块。该分块一次确定不动空间、
+收敛区间与精确速率、最优松弛、影子极限、端点旋转、失稳边界、全部幂迹与有限行列式。
+有理角度证书仅检验符号与约定，不替代全参数证明。正交端点虽然是同钟自然算子，却没有
+内生素数载体或对数时钟，故不能通过\foreignlanguage{english}{Route A}。
+
+\noindent 关键词：投影算法；主角；松弛动力学；收敛速率；算术阻碍。
+\end{otherlanguage}
+
+\section{Frozen map and canonical planes}
+Let $U,V\subset H$ be linear subspaces, $P_W$ the orthogonal projection and
+$R_W=2P_W-I$.  One algorithmic tick is
+\[
+ T_\lambda=(1-\lambda)I+\frac{\lambda}{2}(I+R_VR_U),\qquad \lambda\in\mathbb R.
+\]
+This is the two-subspace specialization of the classical splitting lineage
+of Douglas and Rachford~\cite{DR56}; the sharp subspace convergence location
+and Friedrichs-angle rate are due to Bauschke et al.~\cite{B14}.
+
+The cosine--sine decomposition splits $H$ orthogonally into
+\[
+ F=(U\cap V)\oplus(U^\perp\cap V^\perp),\qquad
+ M=(U\cap V^\perp)\oplus(U^\perp\cap V),
+\]
+and principal planes $E_j$ with $0<\theta_j<\pi/2$.  On $F$ and $M$ the map is
+$I$ and $(1-\lambda)I$, respectively.  Choosing
+$U\cap E_j=\operatorname{span}(e_1)$ and
+$V\cap E_j=\operatorname{span}(\cos\theta_j e_1+\sin\theta_j e_2)$ gives
+\begin{equation}\label{eq:block}
+ T_\lambda|_{E_j}=\begin{pmatrix}
+ 1-\lambda\sin^2\theta_j&-\lambda\sin\theta_j\cos\theta_j\\
+ \lambda\sin\theta_j\cos\theta_j&1-\lambda\sin^2\theta_j
+ \end{pmatrix}.
+\end{equation}
+Its conjugate eigenvalues have squared modulus
+\begin{equation}\label{eq:rho}
+ \rho_j^2=1-\lambda(2-\lambda)\sin^2\theta_j.
+\end{equation}
+
+\section{Complete dynamics}
+For $\lambda\ne0$, $\operatorname{Fix}T_\lambda=F$; at $\lambda=0$ the map is
+the identity.  Equations~\eqref{eq:block}--\eqref{eq:rho} and orthogonality of
+the decomposition prove the following exhaustive classification.
+\begin{center}
+\begin{tabular}{@{}lll@{}}\toprule
+parameter & off-fixed behavior & conclusion\\ \midrule
+$\lambda=0$ & identity & every point fixed\\
+$0<\lambda<2$ & strict contraction & $T_\lambda^n\to P_F$\\
+$\lambda=2$ & signs and plane rotations & orthogonal recurrence boundary\\
+$\lambda\notin[0,2]$ & modulus $>1$ if nontrivial & unstable off $F$\\ \bottomrule
+\end{tabular}
+\end{center}
+In the contracting window the exact operator-norm rate is the largest existing
+quantity among
+\[
+ |1-\lambda|,\qquad
+ \sqrt{1-\lambda(2-\lambda)\sin^2\theta_j}.
+\]
+Thus $\lambda=1$ uniquely minimizes every nontrivial block simultaneously; its
+generic rate is $\cos\theta_F$.  Moreover
+$P_UT_\lambda^n x\to P_{U\cap V}x$, because $P_UP_F=P_{U\cap V}$.
+
+At $\lambda=2$, $T_2=R_VR_U$: it is $I$ on $F$, $-I$ on $M$, and rotation by
+$2\theta_j$ on $E_j$.  It has finite order exactly when every
+$\theta_j/\pi$ is rational (with the mismatch signs included in the least
+common order).  Hence the endpoint is not silently counted as convergence.
+
+\ifnum\CRevisionRound>0
+\section{Trace and determinant closure}
+Put $f=\dim F$, $h=\dim M$,
+$a_j=1-\lambda\sin^2\theta_j$, and $d_j=\rho_j^2$.  Then the complete finite
+factorization is
+\begin{equation}\label{eq:det}
+ \det(I-zT_\lambda)=(1-z)^f(1-(1-\lambda)z)^h
+ \prod_j(1-2a_jz+d_jz^2).
+\end{equation}
+The contribution $\tau_{j,n}$ of a principal plane to
+$\operatorname{tr}(T_\lambda^n)$ obeys
+$\tau_{j,0}=2$, $\tau_{j,1}=2a_j$ and
+$\tau_{j,n}=2a_j\tau_{j,n-1}-d_j\tau_{j,n-2}$.  Thus the same block theorem
+closes every trace, not only the asymptotic rate.  Formula~\eqref{eq:det} is a
+finite algorithmic determinant; no periodic-orbit or target ownership is
+introduced by notation.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact certificate and strict Route-A stop}
+The release ledger contains 28 rational generic blocks and 21 composite
+eight-dimensional models: 112 matrix cells and 441 power-trace cells plus all
+determinant coefficients.  The producer evaluates~\eqref{eq:block}; an
+independent checker instead constructs $P_U,P_V,R_U,R_V$ and takes direct
+matrix powers.  A separate symbolic derivation reconstructs all rows.  Replay
+is byte exact, and twelve repaired-hash semantic attacks plus one stale-hash
+attack are rejected.  The rational sentinels are regression, not proof of the
+cosine--sine decomposition.
+
+Projection geometry has no intrinsic rational-prime primitive carrier,
+prime-power repetition or $\log p$ clock.  Prime and composite dimensions obey
+the same theorem.  The finite determinant has neither target divisor nor
+functional equation.  Although $T_2$ is a source-native same-clock orthogonal
+map, relabeling it as a quantum operator would be post hoc.  Therefore
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FORMAL\ HINT}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Scope firewall.}
+We claim neither priority for splitting or its angle rate, nor an
+infinite-dimensional norm theorem without closed-sum hypotheses.  No target
+zero or prime table, arithmetic local datum, Euler factor, root number,
+automorphy, target analytic structure, Hilbert--P\'olya operator, external peer
+review or acceptance score is present.
+\fi
+
+\ifcase\CRevisionRound
+\paragraph{Revision focus.} Round 0 freezes the operator and proves the
+principal-plane atlas and complete relaxation classification.
+\or
+\paragraph{Revision focus.} Round 1 adds fixed/mismatch boundaries, sharp
+optimality, the shadow theorem and full trace--determinant closure.
+\or
+\paragraph{Revision focus.} Round 2 adds source ownership, independent exact
+validation, endpoint periodicity and the strict Route-A claim boundary.
+\fi
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal or sensitive data are
+used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+
+\begin{thebibliography}{2}
+\bibitem{DR56} J. Douglas Jr. and H. H. Rachford Jr., ``On the numerical
+solution of heat conduction problems in two and three space variables,''
+\emph{Trans. Amer. Math. Soc.} 82 (1956), 421--439.
+DOI: 10.1090/S0002-9947-1956-0084194-4.
+\bibitem{B14} H. H. Bauschke, J. Y. Bello Cruz, T. T. A. Nghia, H. M. Phan
+and X. Wang, ``The rate of linear convergence of the Douglas--Rachford
+algorithm for subspaces is the cosine of the Friedrichs angle,''
+\emph{J. Approx. Theory} 185 (2014), 63--79.
+DOI: 10.1016/j.jat.2014.06.002.
+\end{thebibliography}
+\end{document}

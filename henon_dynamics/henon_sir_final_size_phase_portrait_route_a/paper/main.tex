@@ -1,0 +1,171 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.64in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs}
+\emergencystretch=1em
+\title{The Closed SIR Flow for All Positive Parameters:\\
+Phase Curves, Final-Size Branches, and the No-Recurrence Boundary}
+\author{Route-A structural certificate C198}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give one complete dynamical atlas for the closed mass-action SIR system at
+all positive transmission and removal rates.  Exact scaling reduces the family
+to one planar flow; its first integral yields the phase curves, infection peak,
+time quadrature, final-size sensitivity and the correctly selected Lambert
+branch.  A monotone removed coordinate proves global convergence and excludes
+every nonconstant recurrent orbit.  A Lambert-free high-precision checker
+independently reconstructs both real final-size intersections.  The result is
+an idealized mathematical certificate, with no clinical data or medical advice.
+Its monotonicity and absence of intrinsic prime arithmetic force strict Route-A
+rejection.
+\end{abstract}
+\noindent\textbf{Keywords:} SIR model; phase portrait; final size; Lambert W;
+threshold; monotone dynamics; Route-A obstruction.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对全部正传播率与移除率的封闭质量作用\foreignlanguage{english}{SIR}系统给出统一动力学图谱。
+精确无量纲化把全参数族化为一个平面流；第一积分同时确定相曲线、感染峰值、时间积分、
+最终规模灵敏度及正确的\foreignlanguage{english}{Lambert W}分支。移除变量严格单调，因而全局收敛并
+排除全部非常值回归轨道。本文只研究理想化数学模型，不使用临床数据，也不提供医疗建议。
+
+\noindent 关键词：\foreignlanguage{english}{SIR}模型；相图；最终规模；阈值；单调动力学。
+\end{otherlanguage}
+
+\section{One phase portrait for all parameters}
+Fix $\beta,\gamma>0$ and physical time $t$ in
+\[
+ \dot S=-\beta SI,\qquad \dot I=\beta SI-\gamma I,
+ \qquad \dot R=\gamma I .
+\]
+The model and its threshold/final-size analysis descend from Kermack and
+McKendrick~\cite{KM27}; Lambert-branch analysis is treated explicitly by
+Pakes~\cite{P15}.  Put
+\[
+ \kappa=\gamma/\beta,\qquad x=S/\kappa,\quad y=I/\kappa,
+ \quad z=R/\kappa,\quad \tau=\gamma t.
+\]
+Every parameter pair is thereby conjugate, without changing physical-time
+orientation, to
+\begin{equation}\label{eq:flow}
+ x'=-xy,\qquad y'=y(x-1),\qquad z'=y.
+\end{equation}
+The nonnegative fixed-population simplex is invariant and compact, so solutions
+are global.  Direct differentiation gives
+\begin{equation}\label{eq:first}
+ H(x,y)=x+y-\log x=H(x_0,y_0),\qquad
+ y=y_0+x_0-x+\log(x/x_0).
+\end{equation}
+
+For $y_0>0$, $x$ decreases strictly.  If $x_0>1$, then $y$ grows until the
+unique crossing $x=1$ and
+\[
+ y_{\max}=y_0+x_0-1-\log x_0.
+\]
+If $x_0<1$, $y$ decreases from the start; at $x_0=1$ its first derivative is
+zero, after which decreasing $x$ makes it negative.  Thus the threshold and
+peak are globally, not locally, classified.
+
+\ifnum\CRevisionRound>0
+\section{Global limit, branch, and stability}
+Since $z'=y\ge0$ and population is bounded, $\int_0^\infty y\,d\tau<\infty$;
+bounded derivatives give $y(\tau)\to0$.  Also
+$x(\tau)=x_0\exp(-\int_0^\tau y\,ds)>0$.  Hence every $y_0>0$ trajectory has
+$0<x_\infty<\min(x_0,1)$ and~\eqref{eq:first} gives
+\begin{equation}\label{eq:final}
+ x_\infty e^{-x_\infty}=x_0e^{-x_0-y_0},\qquad
+ x_\infty=-W_0(-x_0e^{-x_0-y_0}).
+\end{equation}
+The function $x-\log x$ decreases on $(0,1)$ and increases on $(1,\infty)$.
+Thus $-W_{-1}$ is the other, upper intersection of the invariant curve; it is
+not the forward limit.  The exact time representation is
+\[
+ \tau=\int_{x(\tau)}^{x_0}
+ \frac{du}{u\{y_0+x_0-u+\log(u/x_0)\}}.
+\]
+Implicit differentiation of~\eqref{eq:final} yields
+$\partial x_\infty/\partial y_0=x_\infty/(x_\infty-1)<0$.
+
+If $y_0=0$, the initial point is already an equilibrium and remains fixed.
+In particular, when $x_0>1$ its final value is the upper root $x_0$, not the
+positive-infection $W_0$ branch.  On each population simplex the equilibrium
+line has tangential eigenvalue zero and transverse physical eigenvalue
+$\beta S_\ast-\gamma$.  Finally, $R$ is strictly increasing wherever $I>0$;
+there is no nonconstant periodic or recurrent orbit, and every trajectory
+converges to the disease-free line.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Independent certificate and Route-A stop}
+The exact release uses 24 positive-infection phase curves: nine subcritical,
+three threshold and twelve supercritical starts, plus four physical scalings.
+The producer evaluates 48 real Lambert-branch values.  The independent checker
+calls no Lambert routine: 100-digit Decimal logarithms and monotone bisection
+recover both intersections.  A separate symbolic path proves seven structural
+identities and tests every branch equation.  Replay is byte exact; twelve
+repaired-hash attacks and one stale-hash attack are rejected.  This ledger
+tests conventions and does not replace the all-parameter proof.
+
+The flow has no nonconstant primitive-periodic-orbit layer, rational-prime
+carrier, prime-power repetition or $\log p$ clock.  Its terminal Lambert
+equation is not a dynamical Zeta or target Fredholm determinant, and the
+dissipative flow has no source-native same-clock unitary lift.  Therefore
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FAIL}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Safety and scope firewall.}
+This idealized model supplies no prediction, calibration, intervention advice
+or claim about a real outbreak.  We claim no classical priority, elementary
+explicit formula for all components versus time, target zero/prime data,
+arithmetic local datum, Euler factor, root number, automorphy, target analytic
+structure, Hilbert--P\'olya operator, external review or acceptance score.
+\fi
+
+\ifcase\CRevisionRound
+\paragraph{Revision focus.} Round 0 freezes the physical model and proves the
+all-parameter scaling, first integral and complete peak atlas.
+\or
+\paragraph{Revision focus.} Round 1 adds global convergence, both Lambert
+branches, quadrature, sensitivity, equilibrium stability and no recurrence.
+\or
+\paragraph{Revision focus.} Round 2 adds the zero-infection boundary,
+independent branch validation, source ownership, safety and Route-A firewalls.
+\fi
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local synthetic exact evidence
+and deterministic code accompany this manuscript; no clinical data are used.
+\paragraph{Ethics.} No human, animal, clinical, personal or sensitive data are
+used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+
+\begin{thebibliography}{2}
+\bibitem{KM27} W. O. Kermack and A. G. McKendrick, ``A contribution to the
+mathematical theory of epidemics,'' \emph{Proc. R. Soc. A} 115 (1927),
+700--721. DOI: 10.1098/rspa.1927.0118.
+\bibitem{P15} A. G. Pakes, ``Lambert's W meets Kermack--McKendrick
+epidemics,'' \emph{IMA J. Appl. Math.} 80 (2015), 1368--1386.
+DOI: 10.1093/imamat/hxu057.
+\end{thebibliography}
+\end{document}

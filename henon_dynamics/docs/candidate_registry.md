@@ -3,6 +3,29 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C194--HCS-C198 independent all-parameter round (2026-08-27)
+
+This batch changes mathematical owner in every paper: positional-addition
+randomness, a nonlinear parabolic PDE, a noncompact many-body Hamiltonian,
+operator splitting, and a monotone compartmental ODE.  Each artifact closes
+one complete all-parameter theorem rather than one fifth of a shared result.
+The evaluator is `../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at
+SHA-256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C194 | For every width and integer base, the Holte carry chain has the exact coefficient-window transition law, base semigroup `P_aP_b=P_ab`, simple common spectrum, Eulerian stationary law, complete finite determinant/trace formulas, and exact projector convergence.  The base-power identity is not a rational-prime primitive-orbit repetition law. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_holte_carries_base_semigroup_route_a/`](../henon_holte_carries_base_semigroup_route_a/) |
+| HCS-C195 | Every fixed-mean periodic viscous Burgers flow with positive viscosity is globally conjugate through the positive projective Cole--Hopf coordinate to drift--heat flow.  Global smoothing, the unique constant equilibrium, no nonconstant recurrence, first-active-mode asymptotics, and the full equilibrium spectrum are closed for the complete Sobolev family. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_periodic_viscous_burgers_cole_hopf_route_a/`](../henon_periodic_viscous_burgers_cole_hopf_route_a/) |
+| HCS-C196 | Every repulsive rational Calogero--Moser phase point with `N>=2` is the ordered spectrum of a free Hermitian pencil.  Rank-one compression proves all-time simplicity and completeness; the package closes all trace integrals, both scattering ends, ordering reversal, a global spectral atlas, and the bounded-periodic obstruction. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_calogero_moser_free_hermitian_pencil_route_a/`](../henon_calogero_moser_free_hermitian_pencil_route_a/) |
+| HCS-C197 | Every relaxed Douglas--Rachford map for two real subspaces is classified on intersection and principal-angle blocks for every real relaxation.  The theorem gives the exact fixed space, sharp convergence window/rate, unique uniform optimum, shadow limit, determinant/traces, orthogonal endpoint rotations, finite-order criterion, and instability boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_douglas_rachford_principal_angle_route_a/`](../henon_douglas_rachford_principal_angle_route_a/) |
+| HCS-C198 | Every positive-parameter closed SIR flow has a complete scaled phase portrait: invariant, positivity, peak, branch-selected final size, quadrature, sensitivity, equilibrium stability, and no recurrence.  The infection-free upper-branch boundary is separate, and no clinical inference is made. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_sir_final_size_phase_portrait_route_a/`](../henon_sir_final_size_phase_portrait_route_a/) |
+
+All five remain `ROUTE_A_REJECTED`.  C194's weak integer-arithmetic signal and
+C196's natural quantization are candidate-local and are not combined.  No
+target table, arithmetic local datum, Euler factor, root number, automorphy
+object, target divisor, Hilbert--Pólya operator, or Route-B input is used.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C189--HCS-C193 independent big-step round (2026-08-27)
 
 This batch keeps five mathematical owners separate: common-forcing Möbius

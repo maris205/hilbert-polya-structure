@@ -1,0 +1,146 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C195
+source_commit: c3a5b9bbb3b6d0881f395abe4a01accd322f69cb
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_periodic_viscous_burgers_cole_hopf_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: periodic viscous Burgers on every fixed-mean Sobolev leaf
+family: all nu>0, L>0, m in R, and s>3/2
+phase_space: X_m^s={u in H^s(T_L;R):mean(u)=m}
+dynamics: u_t+u*u_x=nu*u_xx
+parameters: viscosity, circle circumference, conserved mean, and initial source field
+parameter_provenance: source PDE parameters only; never fitted to target data
+arithmetic_origin: none
+clock: source physical time
+normalization: kappa_k=2*pi*k/L; u=m-2*nu*d_x(log w)
+determinant_convention: none claimed
+orbit_cutoff: all-parameter analytic theorem; 24 exact finite regression cases only
+precision: analytic Sobolev proof plus exact rational-complex Laurent regression
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: c3a5b9bbb3b6d0881f395abe4a01accd322f69cb
+artifact_paths:
+  - results/c195_burgers_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: none claimed; the positive projective drift-heat semigroup is the classical source-PDE linearization
+quantization_hint: formal infinite-dimensional heat-generator lift only
+prior_work_links:
+  - https://doi.org/10.1002/cpa.3160030302
+  - https://www.jstor.org/stable/43633894
+
+source_lock:
+  object: real periodic viscous Burgers flow on a fixed-mean Sobolev leaf
+  arithmetic_origin: absent
+  clock: source physical time without reparametrization
+  normalization: frozen Cole--Hopf sign, drift sign, Fourier wave numbers, and spectrum convention
+  determinant_convention: no orbit determinant or zeta asserted
+  cutoff: every nu>0, L>0, m in R, and initial u in X_m^s
+  precision: analytic proof plus finite exact regression sentinels
+  allowed_data: source Fourier coefficients, viscosity, length, mean, and positive heat lifts
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: PROVED
+    statement: Cole--Hopf is a global bijective conjugacy from each fixed-mean Burgers leaf to the positive projectivized drift-heat cone
+  - status: PROVED
+    statement: every source orbit is global, instantly smooth, and converges to its unique constant equilibrium
+  - status: PROVED
+    statement: no nonconstant equilibrium, periodic point, or recurrent point exists
+  - status: PROVED
+    statement: the first active lift mode gives the exact leading decay and the complete linearized spectrum is explicit
+  - status: STOP_SCOPED
+    statement: the generic parabolic linearization supplies no arithmetic orbit ledger, divisor, or target analytic structure
+
+a0:
+  verdict: A0_FAIL
+  qualification: VISCOSITY_LENGTH_MEAN_AND_FIELDS_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: the theorem varies continuously over arbitrary real source parameters and fields
+  strongest_failure: no intrinsic prime carrier, prime-power repetition law, or logarithmic prime clock exists
+  arithmetic_controls:
+    - vary nu, L, and m continuously
+    - translate or rescale source units without changing theorem form
+    - erase all external labels while retaining the full phase portrait
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_FAIL
+  qualification: NO_NONCONSTANT_PERIODIC_OR_RECURRENT_SOURCE_OBJECTS
+  evidence_status: PROVED
+  strongest_evidence: every orbit converges to the unique constant state on its mean leaf
+  strongest_failure: the only periodic point is a constant equilibrium and carries no primitive-orbit arithmetic
+  metrics:
+    nonconstant_periodic_points: 0
+    primitive_orbit_ledger: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  qualification: NO_PRIMITIVE_ORBIT_DIVISOR_OR_TARGET_COMPARISON
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the complete recurrent set is one constant on each mean leaf
+  strongest_failure: no candidate divisor, Euler product, or target comparison is defined
+  metrics:
+    target_divisor_comparisons: 0
+    finite_regression_cases: 24
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: PARABOLIC_SMOOTHING_DOES_NOT_SUPPLY_TARGET_ANALYTIC_STRUCTURE
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact Fourier decay and sectorial linear spectrum
+  strongest_failure: no target functional equation, Gamma factor, counting law, continuation, or Weil compression
+  analytic_structure: source heat-semigroup analyticity only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  qualification: COLE_HOPF_GIVES_A_POSITIVE_PROJECTIVE_LINEAR_SOURCE_LIFT
+  evidence_status: PROVED
+  strongest_evidence: Burgers is globally conjugate to drift-heat on a positive projective cone
+  strongest_failure: a standard dissipative PDE linearization has no target spectral or prime semantics
+  metrics:
+    formal_linear_lifts: 1
+    hilbert_polya_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - fixed coordinates versus Galilean coordinates
+    - arbitrary mean including zero and nonzero drift
+    - first active mode versus next linear mode and nonlinear square
+    - full H^s space versus fixed-mean tangent space
+    - analytic theorem versus finite trigonometric regression
+  proves_too_much_risk: Cole--Hopf linearization is generic source-PDE structure and cannot by itself imply arithmetic significance
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete all-parameter source phase portrait with no arithmetic upgrade
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - no nonconstant periodic or recurrent orbit exists
+  - no primitive divisor or target analytic structure is defined
+  - the projective heat lift is not a Hilbert--Polya operator
+next_smallest_test: retain periodic viscous Burgers as the canonical globally linearizable dissipative-PDE negative control
+round2_clues:
+  - an exact infinite-dimensional linearization does not imply a primitive Euler product
+  - complete Fourier spectrum of a source generator is only a formal A4 hint
+route_b_invocation_allowed: false

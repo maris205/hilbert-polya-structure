@@ -1,0 +1,67 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C198
+source_commit: c3a5b9bbb3b6d0881f395abe4a01accd322f69cb
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: closed mass-action SIR flow
+  arithmetic_origin: none
+  clock: physical time t
+  normalization: Sdot=-beta*S*I, Idot=beta*S*I-gamma*I, Rdot=gamma*I
+  determinant_convention: none; Lambert final-size equation is not a dynamical determinant
+  cutoff: 24 regression cases; theorem has no cutoff
+  precision: exact symbolic identities plus 100-decimal branch sentinels
+  allowed_data: rational model parameters and initial-condition sentinels
+  forbidden_data: clinical data, fitted outbreaks, prime tables, target zeros
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: none
+  strongest_failure: biological compartments and rates have no intrinsic rational-prime semantics
+  arithmetic_controls: [prime_parameter_numerator, composite_parameter_numerator, rescaled_rates]
+  artifacts: [THEOREM_PACKAGE.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact phase curves
+  strongest_failure: R is strictly increasing whenever I>0, excluding nonconstant recurrence
+  metrics: {nonconstant_periodic_orbits: 0, equilibrium_line: "I=0"}
+  artifacts: [THEOREM_PACKAGE.md]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact Lambert final-size equation
+  strongest_failure: a terminal-state equation is not a primitive-orbit Zeta or Fredholm determinant
+  metrics: {extra_zero_count: null, missing_zero_count: null}
+  artifacts: [SOURCE_AUDIT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: global phase-portrait theorem
+  strongest_failure: no target continuation, divisor, counting law, functional equation, or Weil compression
+  analytic_structure: absent
+  weil_compression: not natural
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FAIL
+  evidence_status: PROVED
+  strongest_evidence: none
+  strongest_failure: dissipative monotone compartment flow has no source-native unitary or Hamiltonian lift preserving the clock
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [rate_rescaling, prime_vs_composite_rate_labels, infection_free_boundary]
+  proves_too_much_risk: high if exact solvability or Lambert W is treated as arithmetic evidence
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: idealized all-parameter mathematical SIR dynamics only; no clinical prediction or target determinant
+blocking_conditions:
+  - no arithmetic origin
+  - no nonconstant primitive periodic orbits
+  - no dynamical Zeta or natural operator lift
+next_smallest_test: none inside this family; retain monotone-coordinate obstruction as a control
+round2_clues: []
+route_b_invocation_allowed: false

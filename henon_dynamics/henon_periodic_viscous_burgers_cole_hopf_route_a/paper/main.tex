@@ -1,0 +1,202 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[8pt]{extarticle}
+\usepackage[a4paper,margin=15mm]{geometry}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs,tabularx}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.2pt}
+\setlist{nosep,leftmargin=14pt}
+\newtheorem{theorem}{Theorem}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\dd}{\partial}
+\newcommand{\kappak}{\kappa_k}
+\title{\vspace{-1.8em}\textbf{Periodic viscous Burgers as a positive projective heat flow}\\[-2pt]
+\large Global phase portrait, first-mode asymptotics, and a Route-A boundary}
+\author{HCS-C195 research artifact}
+\date{27 August 2026 \(\,\cdot\,\) revision \CRevisionRound}
+
+\begin{document}
+\maketitle
+\vspace{-1.5em}
+
+\begin{abstract}
+For every viscosity \(\nu>0\), circumference \(L>0\), mean \(m\in\mathbb R\),
+and \(s>3/2\), we identify the periodic viscous-Burgers semiflow on its
+fixed-mean \(H^s\) leaf with the strictly positive projectivization of a
+drift--heat semigroup. This gives a global physical-time solution and instant
+smoothing.
+\ifnum\CRevisionRound>0
+ Every orbit converges to the unique constant equilibrium, so no nonconstant
+periodic or recurrent point exists. The first active Fourier mode of the positive
+lift gives an exact leading expansion, and the entire linearized spectrum is explicit.
+\fi
+\ifnum\CRevisionRound>1
+ A 24-case exact oracle checks algebraic regressions but is not used as proof.
+The transformation is classical Hopf--Cole mathematics; the resulting linear lift
+is only a formal Route-A hint and supplies no arithmetic structure.
+\fi
+\end{abstract}
+
+\section{Frozen phase leaf and the correct linear state}
+
+On \(\TT_L=\mathbb R/L\mathbb Z\), consider
+\[
+ u_t+u u_x=\nu u_{xx},\qquad
+ X_m^s=\{u\in H^s(\TT_L;\mathbb R):L^{-1}\!\int_{\TT_L}u\,dx=m\}.
+\tag{1}
+\]
+The clock is the source physical time. Define
+\[
+\PP^{s+1}_+=
+\{w\in H^{s+1}(\TT_L;\mathbb R):\min w>0\}/\mathbb R_{>0},
+\qquad
+\Phi_m([w])=m-2\nu\dd_x\log w.                                      \tag{2}
+\]
+The quotient is essential: positive scalar multiples give the same Burgers state.
+If \(V_x=u-m\) and \(V\) is the unique zero-mean periodic primitive, then
+\[
+\Phi_m^{-1}(u)=[e^{-V/(2\nu)}].                                      \tag{3}
+\]
+Sobolev composition makes (2)--(3) smooth inverse maps for \(s>3/2\).
+
+In fixed \(x\), the autonomous linear semigroup is
+\[
+K_t=e^{t(\nu\dd_x^2-m\dd_x)},\qquad
+K_tw(x)=\bigl(e^{\nu t\dd_x^2}w\bigr)(x-mt).                          \tag{4}
+\]
+Thus pure heat appears after the Galilean coordinate \(y=x-mt\); it is not
+mislabelled as the autonomous fixed-coordinate flow.
+
+\begin{theorem}[global projective Cole--Hopf conjugacy]
+For all parameters above,
+\[
+S_t\Phi_m([w])=\Phi_m([K_tw]),\qquad t\ge0.                           \tag{5}
+\]
+The cone is invariant, every Burgers orbit is global, and \(S_tu\) is smooth for
+every \(t>0\).
+\ifnum\CRevisionRound>0
+ Moreover \(S_tu\to m\) in \(H^s\). Hence \(u\equiv m\) is the unique equilibrium,
+periodic point, and recurrent point on \(X_m^s\), where recurrence means
+\(S_{t_j}u\to u\) for some \(t_j\to\infty\).
+
+Write \(\kappa_k=2\pi k/L\) and
+\(w_0=\sum a_ke^{i\kappa_kx}\). If \(u_0\ne m\), let \(r\) be the first active
+absolute mode and \(r_2\) the next one (or \(\infty\)). Then, with
+\(\eta=\min(2\nu\kappa_r^2,\nu\kappa_{r_2}^2)>\nu\kappa_r^2\),
+\[
+S_tu_0-m=-\frac{2\nu}{a_0}\sum_{|k|=r}i\kappa_k a_k
+ e^{-\nu\kappa_r^2t}e^{i\kappa_k(x-mt)}
+ +O_{H^s}(e^{-\eta t}).                                               \tag{6}
+\]
+Consequently the exact logarithmic decay exponent is \(\nu\kappa_r^2\).
+The complexified linearization at \(m\), with domain \(H^{s+2}\subset H^s\), has
+complete spectrum
+\[
+\lambda_k=-\nu\kappa_k^2-i m\kappa_k,\qquad k\in\mathbb Z,             \tag{7}
+\]
+with \(k=0\) removed on the fixed-mean tangent space.
+\fi
+\end{theorem}
+
+\section{Proof mechanism}
+
+If \(w_t=\nu w_{xx}-m w_x\) and \(u=m-2\nu w_x/w\), direct differentiation
+gives \(u_t+uu_x-\nu u_{xx}=0\); conversely (3) recovers the same projective
+linear orbit. The periodic heat kernel preserves strict positivity, proving (5)
+and global smoothing.
+
+\ifnum\CRevisionRound>0
+Fourier diagonalization gives
+\[
+K_tw_0=a_0+\sum_{k\ne0}a_k
+e^{-\nu\kappa_k^2t}e^{i\kappa_k(x-mt)},\qquad a_0>0.                   \tag{8}
+\]
+Hence \(K_tw_0\to a_0\) in \(H^{s+1}\), so \(S_tu_0\to m\) in \(H^s\).
+A returning subsequence must have both limits \(u\) and \(m\), proving the recurrence
+claim. Separating the \(|k|=r\) pair in (8), the next linear tail decays at
+\(\nu\kappa_{r_2}^2\), while the first nonlinear term in
+\((a_0+h)^{-1}\) decays at \(2\nu\kappa_r^2\). This proves (6); its leading
+pair is nonzero and translation preserves its \(H^s\) norm. Finally
+\(h_t=\nu h_{xx}-m h_x\) diagonalizes in Fourier modes. Compact resolvent gives
+the completeness asserted in (7).
+\fi
+
+\ifnum\CRevisionRound>1
+\newpage
+\section{Exact oracle, ownership, and stopping boundary}
+
+At the regression normalization \(L=2\pi\), 24 strictly positive rational
+trigonometric lifts certify 24 zero cleared-denominator PDE residuals, 60 reality
+cells, 24 exact semigroup compositions, 24 leading-mode rows, and 408 spectral
+cells. A producer-independent checker executes 1,490 assertions; a separate SymPy
+program executes 129 checks on nine cases; byte replay passes; and 22 repaired-hash
+plus one stale-hash mutations are rejected. These finite rows are regression
+sentinels only---the all-function theorem is proved above.
+
+\begin{center}
+\begin{tabularx}{0.94\textwidth}{@{}l r X@{}}
+\toprule
+certificate layer & exact count & logical role\\
+\midrule
+positive Laurent lifts & 24 & sign, gap, and parameter regression\\
+generator residuals & 24 zero & cleared-\(w^3\) PDE identity\\
+semigroup compositions & 24 zero & physical-time composition sentinel\\
+linear spectrum & 408 cells & modes \(-8\) through \(8\), not completeness proof\\
+checker / SymPy & 1,490 / 129 & separate implementations and selected expansions\\
+semantic mutations & \(22+1\) rejected & repaired-hash semantics plus stale hash\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The substitution and viscous-Burgers solution method are classical work of Hopf
+\cite{hopf1950} and Cole \cite{cole1951}; no discovery or priority is claimed here.
+The source family has no intrinsic rational-prime carrier, no nonconstant recurrent
+or periodic orbit, no primitive divisor, and no target analytic structure. The exact
+verdict is
+\[
+\begin{aligned}
+(A0,A1,A2,A3,A4)=(&\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},
+\mathrm{A2\_FAIL},\\
+&\mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\end{aligned}
+\]
+The scope literal is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+Route A is rejected and Route B is not authorized. No Euler product or factor,
+root number, automorphy statement, target functional equation, or Hilbert--Pólya
+operator is asserted.
+
+\paragraph{Release boundary.}
+The theorem covers all \(\nu>0,L>0,m\in\mathbb R\) and \(u_0\in X_m^s\),
+\(s>3/2\), but not the inviscid limit, nonperiodic domains, or rougher phase spaces.
+The physical clock is never reparametrized. The exact oracle uses no target table;
+its rational heat/translation pairs probe a universal two-parameter multiplier and
+are not labelled as points on the physical one-parameter curve. Those normalized
+finite Fourier rows cannot establish the infinite-dimensional result.
+The positive projective heat generator remains a source operator, not a
+quantization claim.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{hopf1950}
+E. Hopf, \emph{The partial differential equation \(u_t+uu_x=\mu u_{xx}\)},
+Commun. Pure Appl. Math. 3 (1950), 201--230.
+\href{https://doi.org/10.1002/cpa.3160030302}{doi:10.1002/cpa.3160030302}.
+
+\bibitem{cole1951}
+J. D. Cole, \emph{On a quasi-linear parabolic equation occurring in aerodynamics},
+Quart. Appl. Math. 9 (1951), 225--236.
+\href{https://www.jstor.org/stable/43633894}{JSTOR 43633894}.
+\end{thebibliography}
+
+\end{document}

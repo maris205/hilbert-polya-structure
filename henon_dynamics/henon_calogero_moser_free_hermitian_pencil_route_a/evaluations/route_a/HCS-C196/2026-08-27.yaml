@@ -1,0 +1,120 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C196
+source_commit: c3a5b9bbb3b6d0881f395abe4a01accd322f69cb
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_calogero_moser_free_hermitian_pencil_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: repulsive free rational Calogero--Moser flow represented by a Hermitian pencil
+family: every N>=2 and every g>0
+phase_space: ordered chamber q_1<...<q_N with real momenta
+dynamics: Hamiltonian inverse-square repulsion in physical time
+parameters: N, g, and arbitrary ordered real initial data
+parameter_provenance: source-native; never fitted to target data
+arithmetic_origin: absent
+clock: physical Hamiltonian time t in R
+normalization: H=(1/2)sum p_j^2+sum_(j<k)g^2/(q_j-q_k)^2 and L_jk=p_j delta_jk+ig(1-delta_jk)/(q_j-q_k)
+determinant_convention: none; no periodic-orbit determinant is claimed
+orbit_cutoff: all-parameter proof; deterministic regression for 2<=N<=7
+precision: exact Gaussian rationals plus deterministic spectral sentinels
+training_data: none
+forbidden_data: target zero/prime tables, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert--Polya, and Route B
+code_commit: c3a5b9bbb3b6d0881f395abe4a01accd322f69cb
+artifact_paths:
+  - results/c196_calogero_moser_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: none claimed for the classical scattering flow
+quantization_hint: natural semibounded inverse-square Schrodinger realization on the ordered chamber; no target spectrum
+prior_work_links:
+  - https://doi.org/10.1063/1.1664820
+  - https://doi.org/10.1016/0001-8708(75)90151-6
+
+claims:
+  - status: ATTRIBUTED_PROVED
+    statement: the classical Moser Hermitian-pencil/ispectral solution
+  - status: DERIVED_PROVED
+    statement: rank-one commutator gives all-time simple spectrum and completeness
+  - status: DERIVED_PROVED
+    statement: every trace integral and Tr L^2=2H
+  - status: DERIVED_PROVED
+    statement: global forward/inverse scattering atlas and both ordered ends
+  - status: DERIVED_PROVED
+    statement: rank reversal with preserved spectral-line intercepts and no bounded nonconstant periodic motion
+  - status: STOP_SCOPED
+    statement: other Calogero families, quantum target spectra, and periodic-orbit zeta are excluded
+
+a0:
+  verdict: A0_FAIL
+  qualification: CONTINUOUS_PARTICLE_LABELS_AND_COUPLING_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: arbitrary real ordered data and every g>0
+  strongest_failure: no rational-prime carrier, prime-power repetition, or logarithmic clock
+  metrics: {target_tables_used: 0, intrinsic_prime_correspondences: 0}
+  artifacts: [SOURCE_AUDIT.md, THEOREM_PACKAGE.md]
+
+a1:
+  verdict: A1_FAIL
+  qualification: GLOBAL_SCATTERING_AND_APERIODICITY_SUPPLY_NO_PRIMITIVE_PERIODIC_ORBITS
+  evidence_status: PROVED
+  strongest_evidence: exact two-ended scattering atlas
+  strongest_failure: all relative trajectories are unbounded
+  metrics: {bounded_nonconstant_periodic_orbits: 0, exact_scattering_atlases: 1}
+  artifacts: [THEOREM_PACKAGE.md, paper/main.pdf]
+
+a2:
+  verdict: A2_FAIL
+  qualification: NO_SOURCE_ZETA_OR_TARGET_DIVISOR_ARISES_FROM_THE_FREE_SCATTERING_FLOW
+  evidence_status: STOP_SCOPED
+  strongest_evidence: complete source flow without a periodic determinant
+  strongest_failure: no source zeta or target divisor
+  metrics: {source_zeta_functions_claimed: 0, target_divisor_comparisons: 0}
+  artifacts: [THEOREM_PACKAGE.md]
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_FUNCTIONAL_EQUATION_COUNTING_LAW_CONTINUATION_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact finite-dimensional scattering geometry
+  strongest_failure: no target analytic structure
+  analytic_structure: source-native Hermitian perturbation only
+  weil_compression: absent
+  artifacts: [THEOREM_PACKAGE.md]
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  qualification: THE_INVERSE_SQUARE_SCHRODINGER_OPERATOR_IS_NATURAL_BUT_HAS_NO_TARGET_SPECTRAL_IDENTIFICATION
+  evidence_status: SOURCE_NATIVE_STOP_SCOPED
+  strongest_evidence: positive quadratic form and Friedrichs realization
+  strongest_failure: no target spectrum or Hilbert--Polya identification
+  metrics: {natural_quantizations: 1, target_operators: 0}
+  artifacts: [THEOREM_PACKAGE.md, paper/main.pdf]
+
+adversarial_controls:
+  controls_used:
+    - exact commutator sign and Tr L^2=2H factor
+    - LAPACK producer versus realified-Jacobi checker
+    - eigenvector intercepts versus polynomial projectors
+    - separate positive and negative time orderings
+    - inverse atlas reconstructs every finite initial position row
+    - finite evidence explicitly denied all-parameter proof status
+  proves_too_much_risk: any finite Hermitian pencil has computable sampled spectra and a natural matrix quantization analogy
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete classical scattering geometry without arithmetic periodic-orbit or target spectral semantics
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - A1 has no bounded primitive periodic orbit carrier
+  - no source determinant or target divisor exists
+  - natural quantization has no target spectral identification
+next_smallest_test: retain the model as an exact continuous integrable-scattering control
+round2_clues:
+  - particle rank reverses while intercepts remain attached to spectral lines
+  - the inverse atlas is stronger than a one-ended expansion
+  - natural quantization cannot compensate for A0 through A3
+route_b_invocation_allowed: false

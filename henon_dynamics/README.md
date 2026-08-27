@@ -2444,3 +2444,30 @@ independent-checker assertions, 14,995 SymPy checks, 619 hostile rejections,
 carrier or logarithmic clock, so all five remain `ROUTE_A_REJECTED`.
 Coordinates stay candidate-local, scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
 Route B remains false.
+
+## Route-A independent all-parameter round C194--C198
+
+This round takes one large, complete theorem step per paper and changes the
+dynamical owner in every slot: positional-addition carries, a nonlinear
+parabolic PDE, a repulsive many-body Hamiltonian, an operator-splitting
+algorithm, and a monotone compartmental ODE.  Finite certificates test exact
+conventions; the full-family conclusions remain proof- or source-theorem
+driven.
+
+- [C194 Holte carries base semigroup](henon_holte_carries_base_semigroup_route_a/README.md) · [paper PDF](henon_holte_carries_base_semigroup_route_a/paper/main.pdf)
+- [C195 periodic viscous Burgers Cole--Hopf flow](henon_periodic_viscous_burgers_cole_hopf_route_a/README.md) · [paper PDF](henon_periodic_viscous_burgers_cole_hopf_route_a/paper/main.pdf)
+- [C196 rational Calogero--Moser Hermitian pencil](henon_calogero_moser_free_hermitian_pencil_route_a/README.md) · [paper PDF](henon_calogero_moser_free_hermitian_pencil_route_a/paper/main.pdf)
+- [C197 all-relaxation Douglas--Rachford geometry](henon_douglas_rachford_principal_angle_route_a/README.md) · [paper PDF](henon_douglas_rachford_principal_angle_route_a/paper/main.pdf)
+- [C198 closed SIR final-size phase portrait](henon_sir_final_size_phase_portrait_route_a/README.md) · [paper PDF](henon_sir_final_size_phase_portrait_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C194_C198.md),
+[batch plan](BATCH_PLAN_C194_C198.md), and
+[batch review](BATCH_REVIEW_C194_C198.md) for the collision pivots,
+all-parameter proof ledger, exact Route-A tuples, adversarial repairs and
+content-addressed release hashes.  The uniform audit contains 29,591
+independent-checker assertions, 16,256 SymPy checks, 345 hostile rejections,
+135 payloads and 11 final PDF pages.  C194 alone reaches
+`A0_WEAK_ARITHMETIC_RELATION`, while C196 alone reaches
+`A4_NATURAL_QUANTIZATION`; the coordinates are not combined and all five
+remain `ROUTE_A_REJECTED`.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route
+B remains false.
