@@ -1,0 +1,148 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C190
+source_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_bulgarian_solitaire_recurrent_necklace_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: noninvertible Bulgarian solitaire on every finite integer-partition set
+family: every N>=1, uniquely N=binom(k,2)+r with 0<=r<k
+phase_space: the full partition set P(N), with its Brandt recurrent subset
+dynamics: remove one card from each pile and create one new pile from the removed cards
+parameters: deck size N and its uniquely determined k and r
+parameter_provenance: source deck size; never fitted to target data
+arithmetic_origin: none; partitions and binary necklaces have no intrinsic rational-prime semantics
+clock: one Bulgarian-solitaire move
+normalization: Brandt map from recurrent partitions to length-k weight-r binary words
+determinant_convention: full finite Artin--Mazur zeta and reciprocal full Koopman determinant
+orbit_cutoff: all-N attributed theorem; exact full-partition regression for 1<=N<=40
+precision: exact integer partitions, binary words, divisor sums, cycles, and symbolic polynomials
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+artifact_paths:
+  - results/c190_bulgarian_necklace_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: full finite Koopman pullback and recurrent permutation restriction
+quantization_hint: formal only; the full map is nonunitary and the recurrent root-of-unity permutation has no target identification
+prior_work_links:
+  - https://doi.org/10.1090/S0002-9939-1982-0656129-5
+  - https://doi.org/10.1080/00029890.1985.11971590
+
+source_lock:
+  object: Bulgarian solitaire on P(N)
+  arithmetic_origin: absent
+  clock: one declared Bulgarian move
+  normalization: recurrent partition equals positive parts of (k-1,...,0)+w
+  rotation_convention: right rotation of the binary word
+  determinant_convention: full finite source zeta and Koopman determinant
+  cutoff: all N with declared N<=40 regression
+  precision: exact
+  allowed_data: partitions, binary words, rotations, reflections, partition numbers, and divisor sums
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: ATTRIBUTED_PROVED
+    statement: Brandt recurrent partitions for N=binom(k,2)+r are weight-r binary words of length k and the move is rotation
+  - status: DERIVED_PROVED
+    statement: a gcd-binomial formula gives every positive-iterate fixed count
+  - status: DERIVED_PROVED
+    statement: Mobius inversion gives every least-period population and primitive cycle
+  - status: DERIVED_PROVED
+    statement: the cycle ledger gives the full finite zeta, reciprocal Koopman determinant, traces, and complete algebraic spectrum including transient zero multiplicity
+  - status: DERIVED_PROVED
+    statement: phase-zero reflection and its k phase shifts reverse rotation on the recurrent core
+  - status: STOP_SCOPED
+    statement: complete transient trees, hitting-time distributions, nilpotent Jordan sizes, and a global reversor are not claimed
+
+a0:
+  verdict: A0_FAIL
+  qualification: PARTITIONS_AND_BINARY_NECKLACES_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: the same recurrent theorem holds for every deck size without arithmetic labels
+  strongest_failure: no rational-prime carrier, prime-power repetition weight, or logarithmic prime clock emerges
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  qualification: RECURRENT_PRIMITIVE_CYCLES_ARE_COMPLETE_BUT_CARRY_NO_A0_ARITHMETIC_PAYLOAD
+  evidence_status: PROVED
+  strongest_evidence: all recurrent periods and primitive cycles follow exactly from the fixed ledger
+  strongest_failure: cycle lengths carry only word-rotation data
+  metrics:
+    regression_partitions: 215307
+    recurrent_words: 757
+    exact_cycles: 114
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c190_bulgarian_necklace_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: FINITE_SOURCE_ZETA_AND_KOOPMAN_DETERMINANT_HAVE_NO_TARGET_DIVISOR_MATCH
+  evidence_status: PROVED
+  strongest_evidence: every source cycle factor and full Koopman zero multiplicity are exact
+  strongest_failure: no target divisor or zero-free normalization is identified
+  metrics:
+    exact_system_factorizations: 40
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_FUNCTIONAL_EQUATION_COUNTING_LAW_CONTINUATION_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact finite rational zeta for every N
+  strongest_failure: finite necklace periodicity supplies no target analytic structure
+  analytic_structure: finite rational source zeta only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  qualification: RECURRENT_FINITE_PERMUTATION_SPECTRUM_IS_A_FORMAL_HINT_ONLY_NOT_A_TARGET_QUANTIZATION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the recurrent restriction is a natural finite unitary with reflection reversal
+  strongest_failure: the full Koopman map is nonunitary and no target self-adjoint operator is identified
+  metrics:
+    formal_recurrent_unitaries: 1
+    target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - every triangular deck has a singleton recurrent staircase
+    - N=8 has one 2-cycle and one 4-cycle
+    - direct full partitions versus an independently generated word model
+    - full Koopman transient zero multiplicity versus recurrent root spectrum
+    - reflection restricted to the recurrent core
+  proves_too_much_risk: any finite functional graph has a rational zeta and roots-of-unity cycle spectrum
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: all-N periodic and algebraic spectral classification without complete transient geometry or arithmetic payload
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - recurrent cycles have no arithmetic payload
+  - finite determinant has no target divisor semantics
+  - formal finite permutation spectrum does not identify a target operator
+next_smallest_test: retain Bulgarian solitaire as an exact noninvertible partition-dynamics control
+round2_clues:
+  - full noninvertibility contributes only algebraic zero multiplicity at the spectral level
+  - reflection reversal survives exactly on the recurrent core and nowhere globally is claimed
+  - triangular recurrence does not classify the transient basin
+route_b_invocation_allowed: false

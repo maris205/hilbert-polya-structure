@@ -1,0 +1,135 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C193
+source_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_markoff_vieta_descent_tree_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: largest-coordinate Vieta descent on normalized positive Markoff triples
+family: all positive integer solutions of x^2+y^2+z^2=3xyz modulo coordinate permutations
+phase_space: sorted positive triples x<=y<=z
+dynamics: replace the unique largest coordinate by the other Vieta root and sort
+parameters: no fitted parameter; the coefficient three is intrinsic to the equation
+parameter_provenance: classical Markoff equation; never target tables
+arithmetic_origin: intrinsic Diophantine integer surface, but no rational-prime orbit semantics
+clock: one strict largest-coordinate descent
+normalization: sorted representative of the coordinate-permutation orbit
+determinant_convention: none
+orbit_cutoff: all-solution source theorem; exact regression through depth ten and height 2000
+precision: exact unbounded integer and SymPy polynomial arithmetic
+training_data: none
+forbidden_data: mod-prime graphs, target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya and Route B
+code_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+artifact_paths:
+  - results/c193_markoff_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: none; an adjacency operator would be a formal post-hoc choice
+quantization_hint: formal tree adjacency only, with no target spectral ownership
+prior_work_links:
+  - https://doi.org/10.1007/BF02086269
+  - https://doi.org/10.1016/j.exmath.2006.10.002
+  - https://doi.org/10.1016/j.crma.2015.12.006
+
+claims:
+  - status: ATTRIBUTED_PROVED
+    statement: positive Markoff triples form the coordinate-permutation and Vieta orbit of the root
+  - status: DERIVED_PROVED
+    statement: every non-root normalized triple has a unique largest coordinate
+  - status: DERIVED_PROVED
+    statement: replacement of that coordinate gives a positive parent of strictly smaller height
+  - status: DERIVED_PROVED
+    statement: descent terminates at the root and reversing edges generates every positive solution
+  - status: DERIVED_PROVED
+    statement: the normalized solution graph is a rooted unique-parent tree
+  - status: STOP_SCOPED
+    statement: Frobenius largest-coordinate uniqueness and all mod-prime graphs remain outside the theorem
+
+a0:
+  verdict: A0_WEAK_ARITHMETIC_RELATION
+  qualification: INTRINSIC_DIOPHANTINE_DYNAMICS_WITHOUT_RATIONAL_PRIME_PRIMITIVES_OR_LOG_CLOCK
+  evidence_status: PROVED
+  strongest_evidence: the integer cubic and Vieta involutions are intrinsic rather than fitted arithmetic data
+  strongest_failure: no rational-prime carrier, prime-power repetition or logarithmic clock emerges
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+    intrinsic_diophantine_equations: 1
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_FAIL
+  qualification: STRICT_HEIGHT_DESCENT_HAS_NO_NONROOT_PRIMITIVE_PERIODIC_ORBITS
+  evidence_status: PROVED
+  strongest_evidence: integer height strictly decreases at every non-root clock step
+  strongest_failure: every orbit terminates and no repetition law exists
+  metrics:
+    exact_tree_rows: 513
+    bounded_solutions: 15
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c193_markoff_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: ROOTED_DESCENT_TREE_HAS_NO_SOURCE_NATIVE_TARGET_DETERMINANT
+  evidence_status: PROVED
+  strongest_evidence: the complete normalized tree and parent map are exact
+  strongest_failure: no target divisor or zero-free determinant normalization is identified
+  metrics:
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_CONTINUATION_FUNCTIONAL_EQUATION_COUNTING_LAW_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact Diophantine descent and tree structure
+  strongest_failure: termination implies no target analytic orbit product
+  analytic_structure: none
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  qualification: TREE_ADJACENCY_IS_AVAILABLE_ONLY_AS_A_POST_HOC_FORMAL_OPERATOR
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the rooted tree admits natural combinatorial adjacency operators
+  strongest_failure: no source selects one as a target self-adjoint quantization
+  metrics:
+    source_native_target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+adversarial_controls:
+  controls_used:
+    - tied-largest-coordinate equation
+    - first two repeated-coordinate branch levels
+    - bounded quadratic scan in a different solved variable
+    - complete descent traces to the root
+    - explicit Frobenius uniqueness nonclaim
+    - explicit mod-prime firewall
+  proves_too_much_risk: Diophantine origin alone does not create rational-prime orbit semantics
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: all-positive Markoff descent tree with only weak arithmetic relevance and no periodic owner or target determinant
+blocking_conditions:
+  - A0 lacks rational-prime primitives, powers and a logarithmic clock
+  - strict descent eliminates nonconstant recurrence
+  - no source-native target divisor is present
+  - tree adjacency is only a formal quantization hint
+next_smallest_test: retain the tree as an arithmetic-but-aperiodic negative control
+round2_clues:
+  - intrinsic Diophantine data can remain below the Route-A entry threshold
+  - unique parenthood does not solve Frobenius largest-coordinate uniqueness
+  - Vieta involutions and the autonomous descent have different recurrence behavior
+route_b_invocation_allowed: false

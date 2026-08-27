@@ -1,0 +1,147 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C189
+source_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_watanabe_strogatz_mobius_reduction_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: identical phase oscillators under arbitrary common time-dependent first-harmonic forcing
+family: all N>=3 and all continuous f:I->R and H:I->C
+phase_space: labelled configurations on (S^1)^N, including every collision stratum
+dynamics: theta_dot_j=f(t)+Im(H(t) exp(-i theta_j))
+parameters: source population size and common forcing functions only
+parameter_provenance: dynamical source parameters; never fitted to target data
+arithmetic_origin: none
+clock: source physical time
+normalization: z=exp(i theta), A=(1/2)[[if,H],[conj(H),-if]], Delta=omega^2-|H|^2
+determinant_convention: no ordinary finite isolated-orbit determinant on elliptic resonant configuration strata
+orbit_cutoff: all-parameter proof; finite rational action census for regression only
+precision: exact rational complex arithmetic
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya, and Route B
+code_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+artifact_paths:
+  - results/c189_ws_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: none claimed; projective SU(1,1) lift is finite-dimensional source linearization
+quantization_hint: formal two-dimensional Lie-group lift only
+prior_work_links:
+  - https://doi.org/10.1016/0167-2789(94)90196-1
+  - https://doi.org/10.1063/1.3247089
+  - https://doi.org/10.1103/PhysRevLett.101.264103
+
+source_lock:
+  object: common first-harmonic identical-phase Riccati flow
+  arithmetic_origin: absent
+  clock: source physical time
+  normalization: frozen circle, Riccati, SU(1,1), cross-ratio, and discriminant conventions
+  determinant_convention: ordinary finite fixed-cardinality zeta stops on positive-dimensional elliptic resonances
+  cutoff: every common forcing and every labelled collision partition
+  precision: analytic proof plus exact rational regression sentinels
+  allowed_data: source phases, common forcing, disk automorphisms, cross ratios, and constant generators
+  forbidden_data: all target tables and arithmetic local inputs
+
+claims:
+  - status: PROVED
+    statement: arbitrary common time-dependent first-harmonic forcing is represented by one PSU(1,1) flow acting on all phases
+  - status: PROVED
+    statement: every generic distinct labelled configuration has N-3 independent real cross-ratio invariants
+  - status: PROVED
+    statement: every collision partition is invariant and all cluster-stratum orbit dimensions are classified
+  - status: PROVED
+    statement: constant generators have a complete identity/elliptic/parabolic/hyperbolic classification and exact elliptic projected period
+  - status: STOP_SCOPED
+    statement: rational elliptic strobes have positive-dimensional fixed sets and no ordinary finite isolated-orbit ledger
+
+a0:
+  verdict: A0_FAIL
+  qualification: PHASE_LABELS_FORCING_AND_DISCRIMINANT_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: the theorem is continuous in arbitrary real and complex common forcing functions
+  strongest_failure: no intrinsic rational-prime carrier, prime-power repetition, or logarithmic prime clock exists
+  arithmetic_controls:
+    - vary common forcing continuously
+    - erase all external labels without changing the flow
+    - compare rational and irrational constant generators under the same theorem
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  qualification: ELLIPTIC_CONSTANT_SUBCLASS_HAS_EXACT_PERIODIC_CONTINUA_WITHOUT_ARITHMETIC_PAYLOAD
+  evidence_status: PROVED
+  strongest_evidence: every elliptic boundary orbit has exact projected period 2*pi/sqrt(Delta)
+  strongest_failure: periodic configurations form clean continua and carry no arithmetic prime labels
+  metrics:
+    generic_cross_ratio_invariants: N-3
+    finite_global_primitive_census: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  qualification: POSITIVE_DIMENSIONAL_FIXED_SETS_AND_NO_TARGET_DIVISOR
+  evidence_status: PROVED
+  strongest_evidence: a rational elliptic strobe has an iterate equal to the projective identity
+  strongest_failure: fixed configurations are positive-dimensional and no target divisor is present
+  metrics:
+    positive_dimensional_fixed_strata: true
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: LIE_GROUP_TRICHOTOMY_DOES_NOT_SUPPLY_TARGET_ANALYTIC_STRUCTURE
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact source discriminant, fixed-root equation, and period
+  strongest_failure: no target functional equation, Gamma factor, counting law, continuation, or Weil compression
+  analytic_structure: elementary one-parameter SU(1,1) subgroups only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  qualification: COMMON_RICCATI_DYNAMICS_HAS_A_TWO_DIMENSIONAL_SU11_LINEAR_LIFT
+  evidence_status: PROVED
+  strongest_evidence: one SU(1,1) fundamental matrix projectivizes to every phase
+  strongest_failure: the source lift is finite-dimensional and has no target spectral or prime semantics
+  metrics:
+    formal_linear_lifts: 1
+    hilbert_polya_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - paper/main.pdf
+
+adversarial_controls:
+  controls_used:
+    - time-dependent versus constant forcing
+    - distinct versus collided phase configurations
+    - identity versus nonzero parabolic generator
+    - SU(1,1) matrix period versus PSU(1,1) projected period
+    - common first harmonic versus heterogeneous or higher-harmonic boundary
+  proves_too_much_risk: every Riccati equation has a projective linear lift, so group linearization alone is not arithmetic evidence
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: complete source-dynamical Mobius reduction and stratum theorem with no arithmetic upgrade
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - exact elliptic periodic orbits occur in continuous configuration families
+  - rational strobes have positive-dimensional fixed sets
+  - the SU(1,1) lift supplies no target divisor or Hilbert--Polya operator
+next_smallest_test: retain the common first-harmonic flow as the canonical Mobius-group positive-dimensional-fixed-set control
+round2_clues:
+  - exact group reduction does not imply a primitive Euler product
+  - finite-dimensional source linearization is only a formal A4 hint
+route_b_invocation_allowed: false

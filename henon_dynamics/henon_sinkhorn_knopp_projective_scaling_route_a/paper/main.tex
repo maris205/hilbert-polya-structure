@@ -1,0 +1,164 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.65in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs}
+\newcommand{\one}{\mathbf 1}
+\title{Sinkhorn--Knopp Dynamics on Every Support Stratum:\\
+Exact Scalability, Projective Contraction, and the Local Rate}
+\author{Route-A structural certificate C191}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every square nonnegative matrix we classify alternating row--column
+normalization by support, total support and full indecomposability.  The
+source-locked theorem separates convergence, finite positive diagonal
+scalability, uniqueness of the doubly stochastic representative and gauge
+uniqueness of its factors.  On the positive stratum, Hilbert distance gives a
+data-dependent geometric contraction, while direct log-coordinate
+differentiation gives the exact full-cycle Jacobian $S^TS$ and local rate
+$\sigma_2(S)^2$.  Exact zero-pattern and rational-matrix oracles test every
+boundary without replacing the all-matrix proof.  Convergence leaves no
+nonconstant primitive-orbit owner, and the scaling data has no intrinsic
+rational-prime semantics or source-native Hilbert quantization.
+\end{abstract}
+\noindent\textbf{Keywords:} matrix scaling; Sinkhorn--Knopp; total support;
+Hilbert metric; projective contraction; local convergence rate.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对任意方形非负矩阵的交替行列归一化给出统一分层：支撑决定是否收敛，完全支撑决定
+是否存在有限正对角缩放，完全不可分解决定缩放因子的规范唯一性。在严格正矩阵层，
+\foreignlanguage{english}{Hilbert}射影度量给出依赖数据的几何压缩；在双随机极限$S$处，对数坐标下完整一步的
+\foreignlanguage{english}{Jacobian}恰为$S^TS$，局部速率为$\sigma_2(S)^2$。精确零模式与有理迭代仅作回归验证。
+收敛动力学没有非平凡本原周期轨道，也不产生内生的有理素数语义或\foreignlanguage{english}{Hilbert}空间量子化。
+
+\noindent 关键词：矩阵缩放；完全支撑；射影压缩；局部收敛速率。
+\end{otherlanguage}
+
+\section{One all-matrix classification}
+Let $A\ge0$ have no zero row or column.  Write $R(B)$ and $C(B)$ for row
+and column normalization and freeze one clock step
+$\mathcal S(B)=C(R(B))$.  A positive diagonal is a permutation $\pi$ with
+$\prod_i a_{i\pi(i)}>0$.  The matrix has \emph{support} if one exists,
+\emph{total support} if every positive entry belongs to one, and is
+\emph{fully indecomposable} if no independent row and column permutations
+expose a nontrivial rectangular zero corner.
+
+Sinkhorn and Knopp~\cite{SK67} prove that $\mathcal S^k(A)$ converges to a
+doubly stochastic limit exactly when $A$ has support.  The limit is reachable
+as $D_1AD_2$ with finite positive diagonal factors exactly on total support.
+The doubly stochastic representative is unique.  The
+Brualdi--Parter--Schneider theorem~\cite{BPS66} identifies the sharper gauge
+boundary: the factors are unique up to
+$(D_1,D_2)\mapsto(cD_1,c^{-1}D_2)$ exactly on a fully indecomposable block.
+If support is not total, positive entries outside every positive diagonal tend
+to zero; no finite positive factors can produce that limit.
+
+\section{Projective dynamics and exact local rate}
+Assume $A>0$.  On positive column rays the full scaling-vector update is
+\[
+ T_A(x)=\left[A^T\bigl((Ax)^{-1}\bigr)\right]^{-1},
+\]
+with componentwise inverses.  For Hilbert distance $d_H$, set
+\[
+ \Theta(A)=\max_{i,j,k,l}\frac{a_{ik}a_{jl}}{a_{il}a_{jk}},\qquad
+ \kappa(A)=\frac{\sqrt{\Theta(A)}-1}{\sqrt{\Theta(A)}+1}.
+\]
+Birkhoff contraction applied to $A$ and $A^T$ yields
+\begin{equation}\label{eq:contraction}
+ d_H(T_Ax,T_Ay)\le\kappa(A)^2d_H(x,y),
+\end{equation}
+the Franklin--Lorenz geometric mechanism~\cite{FL89}.  This coefficient is
+data-dependent and approaches one as projective diameter diverges.
+
+Let $S>0$ be the doubly stochastic limit.  In logarithmic column-scaling
+coordinates $u$, the convention-locked map is
+\[
+ F(u)=-\log\!\left(S^T\exp[-\log(S\exp u)]\right).
+\]
+Differentiating at zero gives $DF(0)=S^TS$.  The gauge vector $\one$ has
+eigenvalue one; on the quotient $\one^\perp$ the spectral radius is
+\begin{equation}\label{eq:rate}
+ \rho_{\rm loc}=\sigma_2(S)^2<1,
+\end{equation}
+in agreement with the local-rate analysis of Knight~\cite{K08}.  Equation
+\eqref{eq:rate} is local and asymptotic, not a global equality at every step.
+
+\section{Sharp boundaries, evidence, and Route-A stop}
+The exact ledger contains all 272 declared order-two and order-three patterns,
+four positive scaling cases, four hostile boundary cases, 242 repaired-hash
+rejections and one stale-hash rejection.  A producer-independent
+matching/connectivity checker passes 2,411 assertions; a separate SymPy/Ryser
+path passes 951 checks; replay is byte exact.  The nonsymmetric target makes
+$S^TS\ne S^2$ and closes a transpose blind spot.  These are regression oracles,
+not a finite proof of the source theorems.
+
+Every supported full-cycle orbit converges.  If such an orbit is periodic, it
+is therefore fixed.  This algorithmic fixed point is not an arithmetic
+primitive orbit.  Matchings, scaling factors and singular values provide no
+rational-prime carrier, prime-power repetition, $\log p$ clock, target divisor,
+functional equation or source-native self-adjoint quantization.  Thus
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FAIL}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Ownership and limitations.}
+The convergence, scalability, uniqueness, Hilbert-contraction and local-rate
+results belong to the cited sources.  This package owns only their
+convention-consistent synthesis, elementary Jacobian derivation, executable
+boundary certificate and strict Route-A audit.  It claims no dimension-only
+rate, no positive factors without total support, no classical priority, no
+target arithmetic object and no external review.
+
+\ifcase\CRevisionRound
+\paragraph{Revision-round focus.} Round 0 freezes the full support,
+total-support and factor-gauge classification.
+\or
+\paragraph{Revision-round focus.} Round 1 adds the positive Hilbert
+contraction, exact local Jacobian and four sharp zero-pattern boundaries.
+\or
+\paragraph{Revision-round focus.} Round 2 separates source ownership from
+finite regression and closes recurrence, semantic mutation and Route-A gates.
+\fi
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal or sensitive data are
+used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+
+\begin{thebibliography}{4}
+\bibitem{SK67} R. Sinkhorn and P. Knopp, ``Concerning nonnegative matrices and
+doubly stochastic matrices,'' \emph{Pacific J. Math.} 21(2) (1967), 343--348.
+DOI: 10.2140/pjm.1967.21.343.
+\bibitem{BPS66} R. A. Brualdi, S. V. Parter and H. Schneider, ``The diagonal
+equivalence of a nonnegative matrix to a stochastic matrix,'' \emph{J. Math.
+Anal. Appl.} 16(1) (1966), 31--50. DOI: 10.1016/0022-247X(66)90184-3.
+\bibitem{FL89} J. Franklin and J. Lorenz, ``On the scaling of multidimensional
+matrices,'' \emph{Linear Algebra Appl.} 114--115 (1989), 717--735.
+DOI: 10.1016/0024-3795(89)90490-4.
+\bibitem{K08} P. A. Knight, ``The Sinkhorn--Knopp algorithm: convergence and
+applications,'' \emph{SIAM J. Matrix Anal. Appl.} 30(1) (2008), 261--275.
+DOI: 10.1137/060659624.
+\end{thebibliography}
+\end{document}

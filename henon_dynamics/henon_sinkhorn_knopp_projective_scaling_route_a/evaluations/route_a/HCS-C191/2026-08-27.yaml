@@ -1,0 +1,134 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C191
+source_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+evaluation_date: 2026-08-27
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_sinkhorn_knopp_projective_scaling_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: alternating row and column normalization of every square nonnegative matrix
+family: all square nonnegative matrices with no zero row or column
+phase_space: a fixed nonnegative support stratum and its positive diagonal-scaling orbit
+dynamics: one row normalization followed by one column normalization
+parameters: dimension, zero pattern and nonnegative entries
+parameter_provenance: source matrix data; never fitted to target tables
+arithmetic_origin: none; matchings and scaling ratios have no intrinsic rational-prime semantics
+clock: one full alternating normalization cycle
+normalization: unit row sums followed by unit column sums
+determinant_convention: ordinary characteristic determinant only for the local Jacobian
+orbit_cutoff: all-matrix source theorem; finite exact regression on all declared order-two and order-three patterns
+precision: exact Fraction and SymPy Rational arithmetic
+training_data: none
+forbidden_data: target zero or prime tables, arithmetic local data, Euler factors, root numbers, automorphy, Hilbert--Polya and Route B
+code_commit: 4d7b214759f7ff982c0b19e662918acd307e0f58
+artifact_paths:
+  - results/c191_sinkhorn_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+transfer_operator: nonlinear positive scaling-ray map only
+quantization_hint: absent; the scaling algorithm is not a source-native self-adjoint Hilbert-space operator
+prior_work_links:
+  - https://doi.org/10.2140/pjm.1967.21.343
+  - https://doi.org/10.1016/0022-247X(66)90184-3
+  - https://doi.org/10.1016/0024-3795(89)90490-4
+  - https://doi.org/10.1137/060659624
+
+claims:
+  - status: ATTRIBUTED_PROVED
+    statement: alternating normalization converges to a doubly stochastic limit exactly on support
+  - status: ATTRIBUTED_PROVED
+    statement: finite positive diagonal scalability is equivalent to total support
+  - status: ATTRIBUTED_PROVED
+    statement: the scaled matrix is unique and factor gauges are unique exactly on fully indecomposable support
+  - status: ATTRIBUTED_PROVED
+    statement: positive matrices converge geometrically in Hilbert projective metric with a data-dependent bound
+  - status: DERIVED_PROVED
+    statement: the full-cycle log-scaling Jacobian at S is S-transpose S and has projective rate sigma_2(S)^2
+  - status: DERIVED_PROVED
+    statement: every periodic orbit in a convergent scaling stratum is fixed
+
+a0:
+  verdict: A0_FAIL
+  qualification: SUPPORT_MATCHINGS_AND_SCALING_RATIOS_HAVE_NO_INTRINSIC_RATIONAL_PRIME_ORIGIN
+  evidence_status: PROVED
+  strongest_evidence: the support and convergence classification is exact for every source matrix
+  strongest_failure: no prime carrier, prime-power repetition or logarithmic prime clock emerges
+  metrics:
+    target_tables_used: 0
+    intrinsic_prime_correspondences: 0
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_FAIL
+  qualification: CONVERGENT_SCALING_HAS_NO_NONCONSTANT_PRIMITIVE_PERIODIC_ORBITS
+  evidence_status: PROVED
+  strongest_evidence: every supported full-cycle orbit converges
+  strongest_failure: a convergent periodic orbit must be fixed and carries no arithmetic payload
+  metrics:
+    regression_patterns: 272
+    positive_exact_cases: 4
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c191_sinkhorn_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  qualification: SCALING_AND_LOCAL_JACOBIAN_DO_NOT_IDENTIFY_A_TARGET_DIVISOR
+  evidence_status: PROVED
+  strongest_evidence: the local characteristic determinant is exact
+  strongest_failure: no target divisor or zero-free normalization is identified
+  metrics:
+    target_divisor_comparisons: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a3:
+  verdict: A3_FAIL
+  qualification: NO_TARGET_CONTINUATION_FUNCTIONAL_EQUATION_COUNTING_LAW_OR_WEIL_COMPRESSION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact projective contraction and local spectral rate
+  strongest_failure: these generic positive-cone facts have no target analytic structure
+  analytic_structure: none
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FAIL
+  qualification: NO_SOURCE_NATIVE_SELF_ADJOINT_HILBERT_SPACE_QUANTIZATION
+  evidence_status: STOP_SCOPED
+  strongest_evidence: a natural nonlinear scaling map and its Jacobian exist
+  strongest_failure: neither is a target self-adjoint or unitary operator
+  metrics:
+    source_native_target_operators: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+adversarial_controls:
+  controls_used:
+    - support without total support
+    - total support without full indecomposability
+    - fully indecomposable support with zeros
+    - no-support Hall failure despite nonzero rows and columns
+    - positive matrices with two distinct projective diameters and local rates
+  proves_too_much_risk: matrix scaling and convergence are generic nonarithmetic structures
+  verdict: STOP_SCOPED
+
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: all-matrix scaling classification with no arithmetic carrier, primitive-orbit owner, target divisor or Hilbert quantization
+blocking_conditions:
+  - A0 intrinsic arithmetic gate fails
+  - convergence removes nonconstant recurrence
+  - the local Jacobian has no target divisor semantics
+  - no source-native target Hilbert-space operator exists
+next_smallest_test: retain Sinkhorn scaling as an exact nonarithmetic convergence control
+round2_clues:
+  - support, total support and full indecomposability answer different questions
+  - local singular-value rate is not a global dimension-only bound
+  - convergence cannot be relabelled as a primitive-periodic ledger
+route_b_invocation_allowed: false

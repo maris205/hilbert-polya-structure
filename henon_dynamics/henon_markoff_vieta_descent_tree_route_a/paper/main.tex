@@ -1,0 +1,169 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.65in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,booktabs}
+\title{The Positive Markoff--Vieta Tree:\\
+Unique Descent, Global Termination, and the Arithmetic Route-A Boundary}
+\author{Route-A structural certificate C193}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We orient the entire positive Markoff graph, modulo coordinate permutations,
+by replacing the unique largest coordinate with the other Vieta root.  Every
+non-root normalized solution has a positive parent of strictly smaller height;
+integer descent terminates at $(1,1,1)$, reverse edges generate every positive
+solution, and the quotient graph is a rooted tree.  A producer-independent
+bounded scan and separate symbolic reconstruction test the exact convention
+without replacing the all-solution proof.  The integer cubic gives intrinsic
+Diophantine structure but no rational-prime primitive carrier, prime-power
+repetition or logarithmic clock.  Strict descent also removes every non-root
+periodic orbit, so the candidate remains below Route A despite its arithmetic
+origin.
+\end{abstract}
+\noindent\textbf{Keywords:} Markoff equation; Vieta involution; infinite
+descent; Diophantine dynamics; rooted tree; Route-A obstruction.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文在坐标置换商上，为全部正整数\foreignlanguage{english}{Markoff}三元组定义最大坐标\foreignlanguage{english}{Vieta}下降。除根
+$(1,1,1)$外，每个规范化解都有唯一最大坐标；替换为二次方程的另一根得到严格更低的
+正整数父节点。因此下降有限终止，反向边生成全部正解，商图构成唯一父节点的有根树。
+精确整数扫描与独立符号复核只作约定哨兵。该系统具有内生丢番图结构，却没有有理素数
+本原载体、素数幂重复或对数时钟；严格下降也排除了非根周期轨道。
+
+\noindent 关键词：\foreignlanguage{english}{Markoff}方程；\foreignlanguage{english}{Vieta}对合；无穷递降；有根树；算术动力学。
+\end{otherlanguage}
+
+\section{Frozen Diophantine dynamics}
+Let
+\[
+ P(x,y,z)=x^2+y^2+z^2-3xyz.
+\]
+A normalized Markoff triple is a positive integral zero with $x\le y\le z$.
+For example $R_z(x,y,z)=(x,y,3xy-z)$.  Direct expansion gives
+$P\circ R_z=P$ and $R_z^2=\mathrm{id}$; the other maps follow by symmetry.
+As a quadratic in $z$, the two roots $z,z'$ obey
+\begin{equation}\label{eq:vieta}
+ z+z'=3xy,\qquad zz'=x^2+y^2,\qquad z'=3xy-z.
+\end{equation}
+The classical equation and reduction genealogy go back to
+Markoff~\cite{M79}; Bombieri gives a modern tree account~\cite{B07}.
+
+\section{Unique parent, termination, and completeness}
+First, every non-root normalized solution has a unique maximum.  If $y=z$,
+the equation becomes
+\[
+ (3x-2)y^2=x^2.
+\]
+For $x\ge2$ the quotient $x^2/(3x-2)$ is smaller than $x$, contradicting
+$y^2\ge x^2$; for $x=1$ it forces $y=1$, the root.
+
+Now let $q(t)=t^2-3xyt+x^2+y^2$.  At $t=y$,
+\[
+ q(y)=x^2-(3x-2)y^2\le0.
+\]
+Together with~\eqref{eq:vieta}, this places $y$ between the two positive
+roots.  Hence every non-root solution satisfies
+\begin{equation}\label{eq:descent}
+ 0<z'=3xy-z\le y<z.
+\end{equation}
+Define $D(x,y,z)=\operatorname{sort}(x,y,z')$ and fix $(1,1,1)$.  The integer
+height $h=z$ strictly decreases, so every orbit terminates.  The only terminal
+point is the root, since~\eqref{eq:descent} supplies a parent otherwise.
+
+No Vieta edge is lost by this orientation.  Replacing either nonmaximal
+coordinate gives
+\[
+ (3yz-x)-z=z(3y-1)-x>0,\qquad
+ (3xz-y)-z=z(3x-1)-y>0.
+\]
+Thus both nonparent mutations ascend strictly, while the largest-coordinate
+mutation is the unique descending edge.
+
+The source-locked Vieta-orbit statement records that all positive triples are
+obtained from the root by coordinate permutations and Vieta
+involutions~\cite{BGS16}.  Reversing $D$ therefore generates every normalized
+positive solution.  The descending coordinate is unique, and the preceding
+inequalities exhaust all other Vieta edges, so each non-root vertex has
+exactly one parent.  Connectivity and strict height exclude cycles: the
+normalized solution graph is a rooted tree.  Repeated coordinates merely
+collapse duplicate outgoing mutations at the first two levels
+$(1,1,1)\to(1,1,2)\to(1,2,5)$.
+
+\section{Evidence and the exact Route-A stop}
+The finite certificate contains 513 tree rows through depth ten, all 15
+solutions with largest coordinate at most 2,000, and 19 complete descent
+traces.  Depth-ten rows retain their one-step depth-eleven frontier children,
+so the census is not misdescribed as a closed finite tree.  A
+producer-independent checker solves a different quadratic variable and passes
+8,417 assertions; a separate SymPy path passes 8,418 checks; replay is byte
+exact; 156 repaired-hash and one stale-hash attacks are rejected.  The census
+is regression, not proof of global completeness.
+
+The integer cubic and Vieta maps are intrinsic Diophantine data, so A0 is
+weak rather than absent.  They do not select rational primes as primitive
+orbits, prime powers as repetitions or $\log p$ as time.  Moreover height
+strictly decreases, so the autonomous descent has no non-root periodic orbit.
+A tree adjacency operator is only a formal choice; no target divisor,
+functional equation or source-native target quantization follows.  Thus
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{WEAK\ ARITHMETIC},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FAIL},\mathrm{FORMAL\ HINT}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Open-problem and scope firewall.}
+Unique parenthood of a triple does not say that its largest Markoff number
+determines the other coordinates.  The Frobenius uniqueness conjecture remains
+open and is not used.  The modular strong-approximation program of
+Ref.~\cite{BGS16} supplies context only: this package uses no reduction modulo
+a prime, local arithmetic datum, Euler factor, root number or automorphy claim.
+It claims neither classical priority nor external review.
+
+\ifcase\CRevisionRound
+\paragraph{Revision-round focus.} Round 0 freezes the equation, Vieta root
+identities, unique maximum and strict descent.
+\or
+\paragraph{Revision-round focus.} Round 1 closes termination, reverse
+generation, unique parenthood and the all-solution rooted tree.
+\or
+\paragraph{Revision-round focus.} Round 2 adds source ownership, independent
+evidence, the Frobenius/modular firewall and strict Route-A grading.
+\fi
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local exact evidence and
+deterministic code accompany this manuscript.
+\paragraph{Ethics.} No human, animal, clinical, personal or sensitive data are
+used; approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing. AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported drafting and
+exact-code development; it was not an external reviewer or independent error
+process.
+
+\begin{thebibliography}{3}
+\bibitem{M79} A. Markoff, ``Sur les formes quadratiques binaires
+ind\'efinies,'' \emph{Math. Ann.} 15 (1879), 381--406.
+DOI: 10.1007/BF02086269.
+\bibitem{B07} E. Bombieri, ``Continued fractions and the Markoff tree,''
+\emph{Expo. Math.} 25(3) (2007), 187--213.
+DOI: 10.1016/j.exmath.2006.10.002.
+\bibitem{BGS16} J. Bourgain, A. Gamburd and P. Sarnak, ``Markoff triples and
+strong approximation,'' \emph{C. R. Math.} 354(2) (2016), 131--135.
+DOI: 10.1016/j.crma.2015.12.006.
+\end{thebibliography}
+\end{document}

@@ -3,6 +3,30 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C189--HCS-C193 independent big-step round (2026-08-27)
+
+This batch keeps five mathematical owners separate: common-forcing Möbius
+oscillators, a noninvertible partition map, positive-cone matrix scaling, a
+hyperplane face-semigroup walk, and integer Vieta descent.  It does not split
+one theorem into five papers.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C189 | Every identical first-harmonic phase ensemble under arbitrary common continuous forcing is one diagonal `PSU(1,1)` projective flow.  The theorem closes the generic `N-3` cross-ratio quotient, every collision-partition stratum, all constant-generator phase portraits and the exact elliptic projected period; rational strobes fix positive-dimensional families. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_watanabe_strogatz_mobius_reduction_route_a/`](../henon_watanabe_strogatz_mobius_reduction_route_a/) |
+| HCS-C190 | Every Bulgarian-solitaire deck size has a Brandt recurrent core conjugate to fixed-weight binary rotation.  This yields all positive-iterate fixed counts, least periods, cycles, finite zeta, the full Koopman characteristic polynomial including transient zero multiplicity, recurrent reflections and the triangular boundary. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_bulgarian_solitaire_recurrent_necklace_route_a/`](../henon_bulgarian_solitaire_recurrent_necklace_route_a/) |
+| HCS-C191 | Every square nonnegative matrix with no zero row or column is classified under Sinkhorn--Knopp iteration by support, total support and full indecomposability.  Positive matrices also have a data-dependent Hilbert contraction and exact log-coordinate local Jacobian `S^T S`, with quotient rate `sigma_2(S)^2`; all gauge and zero-pattern boundaries are explicit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_sinkhorn_knopp_projective_scaling_route_a/`](../henon_sinkhorn_knopp_projective_scaling_route_a/) |
+| HCS-C192 | Every finite real hyperplane arrangement and face measure has the Brown--Diaconis flat-indexed chamber-walk spectrum, determinant and traces, separating stationary sampler and mixing bounds, plus the complete nonseparating closed-component/stationary-simplex classification.  The stopping construction is not overstated as a strict strong stationary time. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_hyperplane_chamber_walk_route_a/`](../henon_hyperplane_chamber_walk_route_a/) |
+| HCS-C193 | Every normalized positive Markoff triple has a unique strictly lower largest-coordinate Vieta parent; both other mutations ascend, descent terminates at `(1,1,1)`, reverse edges generate every solution, and the full permutation quotient is a rooted tree.  This is a weak intrinsic Diophantine relation, not a rational-prime orbit law or a proof of Frobenius uniqueness. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_markoff_vieta_descent_tree_route_a/`](../henon_markoff_vieta_descent_tree_route_a/) |
+
+All five remain `ROUTE_A_REJECTED`.  C193 alone has a weak arithmetic A0
+signal, but none supplies rational primes as primitive carriers, prime powers
+as repetitions and `log p` as time.  No coordinate is transferred between
+papers.  No target table, arithmetic local datum, Euler factor, root number,
+automorphy object, target divisor, Hilbert--Pólya operator or Route-B input is
+used.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C184--HCS-C188 independent dynamical-owner round (2026-08-26)
 
 This batch again forbids splitting one theorem into five papers.  Its five

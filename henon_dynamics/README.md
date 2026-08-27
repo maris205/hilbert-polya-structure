@@ -2416,3 +2416,31 @@ arithmetic semantics.  The release totals are 428,425 independent-checker
 assertions, 300,647 SymPy checks, 406 hostile rejections, 135 payloads, and
 eleven PDF pages.  Coordinates remain separate, the common scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.
+
+## Route-A independent big-step round C189--C193
+
+This round again makes one complete advance per paper and changes the
+dynamical owner in every slot.  It closes an arbitrary-common-forcing Möbius
+oscillator theorem, an all-deck noninvertible partition theorem, an
+all-support-stratum matrix-scaling theorem, an all-arrangement
+face-semigroup-walk theorem, and the complete positive Markoff--Vieta descent
+tree.  Finite exact censuses remain regression oracles rather than substitutes
+for the all-parameter proofs.
+
+- [C189 Watanabe--Strogatz Möbius reduction](henon_watanabe_strogatz_mobius_reduction_route_a/README.md) · [paper PDF](henon_watanabe_strogatz_mobius_reduction_route_a/paper/main.pdf)
+- [C190 Bulgarian-solitaire recurrent necklaces](henon_bulgarian_solitaire_recurrent_necklace_route_a/README.md) · [paper PDF](henon_bulgarian_solitaire_recurrent_necklace_route_a/paper/main.pdf)
+- [C191 Sinkhorn--Knopp support-stratum dynamics](henon_sinkhorn_knopp_projective_scaling_route_a/README.md) · [paper PDF](henon_sinkhorn_knopp_projective_scaling_route_a/paper/main.pdf)
+- [C192 hyperplane chamber walks](henon_hyperplane_chamber_walk_route_a/README.md) · [paper PDF](henon_hyperplane_chamber_walk_route_a/paper/main.pdf)
+- [C193 positive Markoff--Vieta descent tree](henon_markoff_vieta_descent_tree_route_a/README.md) · [paper PDF](henon_markoff_vieta_descent_tree_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C189_C193.md),
+[batch plan](BATCH_PLAN_C189_C193.md), and
+[batch review](BATCH_REVIEW_C189_C193.md) for the model pivots, source
+ownership, exact theorem increments, hostile repairs, release hashes and
+uniform executable/PDF audit.  The release totals are 692,747
+independent-checker assertions, 14,995 SymPy checks, 619 hostile rejections,
+135 payloads and ten PDF pages.  C193 alone reaches
+`A0_WEAK_ARITHMETIC_RELATION`; it still has no rational-prime primitive
+carrier or logarithmic clock, so all five remain `ROUTE_A_REJECTED`.
+Coordinates stay candidate-local, scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
+Route B remains false.
