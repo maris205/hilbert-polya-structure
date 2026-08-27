@@ -1,0 +1,340 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cF}{\mathcal F}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+
+\title[Finite-language fans for four-IETs]{Finite-Language Polyhedral Fans and Cylinder Measures for Four-Interval Exchanges}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 27 August 2026}
+\subjclass[2020]{37B10, 37E05, 52B11, 68R15}
+\keywords{interval exchange transformation, symbolic coding, finite language, rational polyhedron, cylinder measure, hyperplane arrangement}
+
+\begin{document}
+
+\begin{abstract}
+Fix a permutation of four intervals and a finite language horizon $N$.  We
+show that the length simplex admits an effective rational polyhedral complex
+on whose relatively open cells the complete natural-coding language through
+length $N$ is constant.  More precisely, the cylinder of a word
+$w=w_0\cdots w_{n-1}$ is the interval
+\[
+ \left[
+ \max_j(\ell_{w_j}-c_j),
+ \min_j(r_{w_j}-c_j)
+ \right),
+ \qquad c_j=\sum_{q<j}\tau_{w_q},
+\]
+where every endpoint is an integer linear form in the length vector.
+Consequently the admissibility region of each word is a rational convex
+polyhedron, every cylinder measure is piecewise integer-linear, and finite
+parameter realizability is an exact rational linear-feasibility problem.  At
+a fixed parameter, membership is a direct endpoint comparison.  Language change
+along a parameter path must cross a cylinder-collapse hyperplane.  Exact
+rational controls for the reverse four-IET compare all cylinders through
+length six with a separate discontinuity-preimage partition.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+An interval exchange transformation (IET) cuts an interval into finitely many
+subintervals and rearranges them by translations.  Natural coding records the
+visited interval labels.  Keane's foundational work \cite{Keane1975} supports
+a rich interaction between geometry, ergodic theory, and combinatorics.
+Languages of $k$-IETs have strong global
+characterizations \cite{FerencziZamboni2008}, with more general coding classes
+treated in recent work \cite{FerencziHubertZamboni2026}.  Cylinder intervals
+and admissible subintervals also enter branching Rauzy induction
+\cite{DolcePerrin2017,DolceHughes2025}; our residual question is how all words
+through one fixed horizon vary jointly over the length-parameter simplex.
+
+This note asks a finite-parameter question.  Fix the permutation and inspect
+only words of length at most $N$.  How does that truncated language vary with
+the interval lengths?  Along a prescribed itinerary, every iterate is the
+initial point plus a sum of branch translations.  Since those translations
+are integer linear forms in the length vector, the entire word cylinder is an
+intersection of explicitly translated intervals.  Its nonemptiness is a
+finite strict linear system.
+
+Taking the common hyperplane arrangement for all words through length $N$
+gives a rational polyhedral complex on the length simplex.  On each cell, not
+only the finite language but the entire vector of cylinder measures is
+linear.  This is an effective finite-horizon parameterization, not a new
+global characterization of IET languages and not a replacement for Rauzy
+induction.  We use four intervals, and especially the reverse permutation, to
+keep the result away from the Sturmian and three-IET regimes.
+
+\section{Fixed-permutation interval exchanges}
+
+Let $d=4$ and let $\pi$ be a fixed irreducible permutation of
+$\{1,2,3,4\}$.  A length vector
+\[
+ \lambda=(\lambda_1,\ldots,\lambda_4)\in\R_{>0}^4,
+ \qquad \sum_{a=1}^4\lambda_a=1,
+\]
+defines domain intervals
+\[
+ I_a=[\ell_a,r_a),\qquad
+ \ell_a=\sum_{b<a}\lambda_b,
+ \quad r_a=\ell_a+\lambda_a.
+\]
+In the image order prescribed by $\pi$, the left endpoint of the copy of
+$I_a$ is
+\[
+ \ell'_a=\sum_{\pi(b)<\pi(a)}\lambda_b.
+\]
+The IET $T_{\pi,\lambda}$ translates $I_a$ by
+\begin{equation}\label{eq:translation}
+ \tau_a(\lambda)=\ell'_a-\ell_a.
+\end{equation}
+Thus $\ell_a,r_a,$ and $\tau_a$ are integer linear forms in $\lambda$.
+
+The natural coding of $x\in[0,1)$ is the word whose $j$th symbol is $a$ when
+$T^jx\in I_a$.  For a finite word $w=w_0\cdots w_{n-1}$, its cylinder is
+\[
+ C_w(\lambda)=\{x:T^jx\in I_{w_j}\text{ for }0\leq j<n\}.
+\]
+We use half-open intervals consistently and work with the positive-cylinder
+(equivalently nonsingular finite-factor) language.  A finite intersection of
+the intervals below is again $[L,R)$, so it is nonempty exactly when it has
+positive length, namely when $L<R$.
+
+\section{An exact cylinder formula}
+
+For a proposed word $w$, define
+\begin{equation}\label{eq:displacements}
+ c_0=0,
+ \qquad c_j(\lambda)=\sum_{q=0}^{j-1}\tau_{w_q}(\lambda),
+ \quad 1\leq j<n.
+\end{equation}
+
+\begin{theorem}[cylinder interval]\label{thm:cylinder}
+For every word $w=w_0\cdots w_{n-1}$,
+\begin{equation}\label{eq:cylinder}
+ C_w(\lambda)=[L_w(\lambda),R_w(\lambda)),
+\end{equation}
+where
+\begin{align}
+ L_w(\lambda)&=\max_{0\leq j<n}
+ \{\ell_{w_j}(\lambda)-c_j(\lambda)\},\label{eq:left}\\
+ R_w(\lambda)&=\min_{0\leq j<n}
+ \{r_{w_j}(\lambda)-c_j(\lambda)\}.\label{eq:right}
+\end{align}
+In particular, $w$ is admissible if and only if $L_w<R_w$.
+\end{theorem}
+
+\begin{proof}
+As long as the itinerary begins with $w_0\cdots w_{j-1}$, the map is a
+composition of the corresponding translations, so
+\[
+ T^jx=x+c_j(\lambda).
+\]
+The condition that the $j$th symbol is $w_j$ is therefore
+\[
+ \ell_{w_j}-c_j\leq x<r_{w_j}-c_j.
+\]
+Intersect these $n$ half-open intervals.  Their intersection is exactly
+\eqref{eq:cylinder}--\eqref{eq:right}, and it has positive length exactly when
+$L_w<R_w$.
+\end{proof}
+
+The formula also gives the Lebesgue measure of the cylinder:
+\begin{equation}\label{eq:measure}
+ \mu_\lambda(C_w)=\bigl(R_w(\lambda)-L_w(\lambda)\bigr)_+.
+\end{equation}
+
+\section{Word polyhedra}
+
+Let $a_j(\lambda)=\ell_{w_j}-c_j$ and
+$b_k(\lambda)=r_{w_k}-c_k$.  Every $a_j,b_k$ is an integer linear form.
+
+\begin{corollary}[convex admissibility region]\label{cor:polyhedron}
+The parameter region
+\[
+ \cA_w=\{\lambda\in\R_{>0}^4:\textstyle\sum_a\lambda_a=1,
+ \ w\in\cL(T_{\pi,\lambda})\}
+\]
+is the relatively open rational convex polyhedron cut out by
+\begin{equation}\label{eq:all-pairs}
+ a_j(\lambda)<b_k(\lambda),\qquad 0\leq j,k<n.
+\end{equation}
+Its relative closure in the positive simplex is contained in the weak
+polyhedron obtained by replacing $<$ with $\leq$.  If $\cA_w$ is nonempty,
+the two sets are equal.
+\end{corollary}
+
+\begin{proof}
+The inequality $\max_j a_j<\min_k b_k$ is equivalent to all $n^2$
+inequalities in \eqref{eq:all-pairs}.  Their coefficients are integers.
+Every limit point satisfies the corresponding weak inequalities.  If
+$\lambda^*$ satisfies all inequalities strictly, then the segment from
+$\lambda^*$ to any positive weakly feasible point, with the latter endpoint
+removed, is strictly feasible.  This proves the final assertion whenever
+$\cA_w$ is nonempty.
+\end{proof}
+
+This has an exact witness consequence.  The existence of some positive length
+vector realizing $w$ is decided by rational linear programming: maximize a
+common slack $\delta$ subject to
+\[
+ a_j+\delta\leq b_k,\qquad \lambda_i\geq\delta,
+ \qquad \sum_i\lambda_i=1.
+\]
+The strict system is feasible exactly when the optimum has $\delta>0$.
+Whenever it is feasible, it contains a rational length vector, and the
+midpoint $(L_w+R_w)/2$ is an explicit rational initial condition.  For a
+fixed rational $\lambda$, by contrast, membership requires only direct
+evaluation of $L_w<R_w$ and no optimization.
+
+\section{The finite-language fan}
+
+Fix a horizon $N$.  For every word $w$ with $1\leq|w|\leq N$, consider the
+central rational hyperplanes
+\begin{equation}\label{eq:arrangement}
+ a_j=a_{j'},\qquad b_k=b_{k'},\qquad a_j=b_k.
+\end{equation}
+All forms are homogeneous in $\lambda$, so these hyperplanes define a rational
+polyhedral fan in $\R^4$.  Intersect it with the positive length cone and then
+with $\sum\lambda_a=1$; denote the resulting finite polyhedral complex by
+$\cF_{\pi,N}$.
+
+\begin{theorem}[finite-language polyhedral complex]\label{thm:fan}
+On every relatively open cell $\sigma$ of $\cF_{\pi,N}$:
+\begin{enumerate}
+\item the complete truncated language
+$\cL_{\leq N}(T_{\pi,\lambda})$ is independent of
+$\lambda\in\sigma$;
+\item for each $|w|\leq N$, either $C_w$ is empty throughout $\sigma$, or
+$\mu_\lambda(C_w)$ is one fixed integer linear form in $\lambda$ throughout
+$\sigma$;
+\item existence of a parameter realizing a word, together with a rational
+parameter and initial-point witness, is computable by exact rational linear
+programming; membership at a fixed parameter is a direct comparison.
+\end{enumerate}
+If the truncated language changes along a continuous path in the positive
+simplex, the path meets a collapse hyperplane $a_j=b_k$ for some
+$|w|\leq N$.
+\end{theorem}
+
+\begin{proof}
+On a relatively open arrangement cell, the weak and strict orders among all
+the forms in \eqref{eq:arrangement} are fixed.  Hence the active maximum in
+\eqref{eq:left}, the active minimum in \eqref{eq:right}, and the sign of
+$R_w-L_w$ are fixed for every word through length $N$.  This proves the first
+two claims, and \cref{cor:polyhedron} gives the algorithmic claim.
+
+Along a continuous path, a word can enter or leave the positive-length
+language only when $R_w-L_w$ passes through zero.  At that parameter, an
+active lower endpoint equals an active upper endpoint, so the path meets one
+of the hyperplanes $a_j=b_k$.
+\end{proof}
+
+Not every formal wall must be essential: a hyperplane can lie outside the
+positive simplex, fail to be active, or leave the truncated language
+unchanged.  The theorem asserts the necessary wall-crossing direction and an
+effective common refinement, not irredundancy.
+
+\begin{corollary}[explicit arrangement bound]\label{cor:size-bound}
+Let
+\[
+ H_N=\sum_{n=1}^N4^n(2n^2-n).
+\]
+The construction of $\cF_{\pi,N}$ uses at most $H_N$ distinct hyperplanes,
+and its intersection with the three-dimensional length simplex has at most
+\[
+ \sum_{q=0}^3\binom{H_N}{q}
+\]
+full-dimensional cells.  Each length-$n$ word region itself has a description
+using at most $n^2$ strict rational inequalities.
+\end{corollary}
+
+\begin{proof}
+There are $4^n$ words of length $n$.  For each word, the displayed
+arrangement lists two families of $\binom n2$ same-side comparisons and one
+family of $n^2$ lower--upper comparisons, for at most $2n^2-n$ hyperplanes.
+Summing gives $H_N$; coincidences only decrease the number.  An arrangement
+of $H$ affine hyperplanes in dimension three has at most
+$\sum_{q=0}^3\binom Hq$ full-dimensional regions, by the standard induction
+that a newly added hyperplane cuts at most as many old regions as its induced
+two-dimensional arrangement has.  Finally, \eqref{eq:all-pairs} contains
+$n^2$ inequalities.
+\end{proof}
+
+\section{Reverse four-IET control example}
+
+Take the reverse permutation $\pi=(4,3,2,1)$.  The accompanying exact-rational
+control uses three integer length vectors, normalized to total length one:
+\[
+ (11,17,23,37),\qquad(7,13,29,47),\qquad(19,31,41,53).
+\]
+For every word length through six, it computes the positive cylinders using
+\cref{thm:cylinder}.  As a separate route, it constructs the partition by all
+preimages, through the same horizon, of the three IET discontinuities and
+reads the itinerary at the midpoint of every partition interval.  The two
+languages agree in $18$ complete set equalities containing $207$ positive
+cylinders.  The script also computes every endpoint as an integer coefficient
+vector, checks the all-pairs inequalities, and preserves two wall tests: a
+word that appears on exactly one side of an essential collapse wall, and an
+empty strict word region whose weak inequalities are nevertheless feasible.
+
+For the first vector, the checked complexity profile is
+\[
+ p(1),\ldots,p(6)=(4,7,10,13,16,19),
+\]
+the generic $3n+1$ profile expected for a four-IET satisfying the relevant
+finite no-connection conditions.  This profile is a control observation, not
+the theorem: \cref{thm:fan} applies equally on nongeneric cells, where some
+cylinders collapse.
+
+\section{Scope and owner boundary}
+
+Keane's foundational IET dynamics \cite{Keane1975}, the global
+characterization of $k$-IET languages by Ferenczi--Zamboni
+\cite{FerencziZamboni2008}, and the broader classes in
+Ferenczi--Hubert--Zamboni \cite{FerencziHubertZamboni2026} are prior theory.
+Branching Rauzy work already owns admissible/cylinder-interval structure and
+its extension to arbitrary standard IETs
+\cite{DolcePerrin2017,DolceHughes2025}.
+We do not claim the complexity law, minimality, unique ergodicity, Rauzy
+induction, or any global classification.  We also avoid the three-IET and
+Sturmian/Ostrowski specialization.
+
+The residual claim is finite-horizon and parameter-explicit: a word's
+admissibility region is one rational convex polyhedron, the joint language
+and cylinder-measure vector have a computable common polyhedral refinement
+with the explicit bound in \cref{cor:size-bound}, and every change is
+witnessed by a cylinder collapse.  The source search was bounded and does not
+establish worldwide priority.  This internal manuscript is not authorized
+for external release.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

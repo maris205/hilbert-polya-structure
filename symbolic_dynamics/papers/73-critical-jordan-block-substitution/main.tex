@@ -1,0 +1,322 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\cL}{\mathcal L}
+
+\title[Critical-Jordan rectangle discrepancy]{Exact Dyadic Rectangle Discrepancy at a Critical Jordan Resonance}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 27 August 2026}
+\subjclass[2020]{37B10, 37A30, 68R15}
+\keywords{multidimensional substitution, discrepancy, Jordan block, recognizability, dyadic rectangle, symbolic dynamics}
+
+\begin{document}
+
+\begin{abstract}
+We give an explicit primitive, aperiodic $2\times2$ block substitution whose
+incidence matrix has a size-two Jordan block at the critical eigenvalue $2$,
+equal to the linear expansion.  A radius-one finite certificate recognizes
+the complete supertile grid.  For the centered observable
+$f=\mathbf1_A-\mathbf1_B$, every translated dyadic rectangle of side lengths
+$2^m$ and $2^n$ satisfies a sharp discrepancy law:
+\[
+ \sup_{\substack{x\in X_\vartheta\\t\in\Z^2}}
+ \left|\sum_{q\in t+[0,2^m)\times[0,2^n)}f(x_q)\right|
+ =2^{\max(m,n)}\left(1+\frac{\min(m,n)}2\right).
+\]
+The proof combines an exact generalized-eigenvector identity with a
+pointwise periodic envelope.  Thus the critical Jordan logarithm is not only
+visible on complete supertiles: its sharp worst-case coefficient is determined
+uniformly over translations and for every dyadic aspect ratio.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For primitive substitution systems, incidence eigenvalues govern deviations
+of letter counts from their invariant frequencies.  This principle is
+classical in one-dimensional symbolic discrepancy
+\cite{Adamczewski2004} and has far-reaching higher-dimensional tiling forms
+\cite{BufetovSolomyak2013}.  At a boundary eigenvalue---modulus equal to the
+linear boundary scaling---a nontrivial Jordan block can introduce logarithmic
+losses.  General theory gives robust bounds, but it need not determine the
+sharp coefficient for a concrete symbolic window.
+
+We exhibit a three-letter planar block substitution for which the critical
+mechanism can be computed exactly.  Two finite structures cooperate.  First,
+the incidence matrix has a length-two left Jordan chain at eigenvalue $2$.
+Second, the three level-$n$ observable arrays admit pointwise lower and upper
+envelopes that are $2^n$-periodic.  A translated $2^n$ square samples each
+residue once, turning those pointwise envelopes into sharp sum bounds.
+
+The recognizability assertion is also explicit.  The $20$ legal $2\times2$
+patches form a substitution-closed set, while the $63$ legal $3\times3$
+patches split into four disjoint phase classes.  This is a complete
+radius-one certificate, rather than an appeal to recognizability in the
+abstract.  General recognizability and its computability for
+multidimensional constant-shape substitutions have been developed much more
+broadly \cite{Solomyak1998,Cabezas2023,CabezasLeroy2025}; those general results
+are not claimed here.
+
+\section{The substitution and its subshift}
+
+Let $\vartheta$ be the $2\times2$ substitution on $\{A,B,C\}$ given by
+\begin{equation}\label{eq:substitution}
+ \vartheta(A)=\begin{pmatrix}A&A\\B&C\end{pmatrix},\qquad
+ \vartheta(B)=\begin{pmatrix}B&B\\B&C\end{pmatrix},\qquad
+ \vartheta(C)=\begin{pmatrix}A&C\\C&C\end{pmatrix}.
+\end{equation}
+Let $X_\vartheta\subset\{A,B,C\}^{\Z^2}$ be the subshift whose finite patches
+occur in iterates $\vartheta^n(a)$.  Rows index output letters and columns
+index parent letters in the incidence matrix
+\begin{equation}\label{eq:matrix}
+ M=\begin{pmatrix}
+ 2&0&1\\
+ 1&3&0\\
+ 1&1&3
+ \end{pmatrix}.
+\end{equation}
+Since
+\[
+ M^2=\begin{pmatrix}5&1&5\\5&9&1\\6&6&10\end{pmatrix}>0,
+\]
+the substitution is primitive.  Its Perron eigenvalue is $4$, and its
+normalized right Perron vector is
+\begin{equation}\label{eq:frequencies}
+ \nu=(1/4,1/4,1/2)^{\mathsf T}.
+\end{equation}
+
+\subsection{A finite recognizability certificate}
+
+Write $\cL_2$ for the set of legal $2\times2$ patches.  Starting with the
+three images in \eqref{eq:substitution}, repeatedly adjoin every $2\times2$
+subpatch of $\vartheta(P)$ for every current patch $P$.  The cardinalities are
+\[
+ 3\longrightarrow13\longrightarrow20\longrightarrow20.
+\]
+Thus the resulting $20$-patch set is substitution-closed.  Every fine
+$2\times2$ patch crosses at most a $2\times2$ parent patch, so induction shows
+that this fixed set is exactly $\cL_2$.
+
+Every legal $3\times3$ patch is contained in $\vartheta(P)$ for some
+$P\in\cL_2$.  Classify it by the location of its upper-left corner modulo
+$2\Z^2$.  With one choice of origin, the class sizes in phase order
+$(0,0),(0,1),(1,0),(1,1)$ are
+\begin{equation}\label{eq:phase-counts}
+ 18,\quad20,\quad15,\quad10,
+\end{equation}
+and the four classes are pairwise disjoint.  The accompanying script performs
+this exhaustive set calculation with exact strings.
+
+\begin{proposition}[radius-one recognizability]\label{prop:recognizable}
+Every $3\times3$ patch in $X_\vartheta$ determines its phase modulo $2\Z^2$.
+Consequently every $x\in X_\vartheta$ has a unique level-one phase--parent
+pair: a unique offset $\tau\in\{0,1\}^2$ for the supertile grid and a unique
+parent configuration.  Iterating gives a unique level-$n$ cutting for every
+$n$.
+\end{proposition}
+
+\begin{proof}
+Take substituted approximants containing larger and larger centered patches
+of $x$.  Pass to a subsequence with a fixed grid offset and then take a
+compact limit of their parent configurations; this gives a level-one cutting.
+If its offset is $\tau$, a $3\times3$ window with upper-left corner $z$
+belongs to the finite phase class indexed by
+$(z-\tau)\bmod2\Z^2$.  For a second cutting with offset $\tau'$, the same
+window would belong to the class indexed by
+$(z-\tau')\bmod2\Z^2$.  Pairwise disjointness of the four classes forces
+$\tau=\tau'$.  At each common anchor, the corresponding $2\times2$ block is
+one of the three distinct images in \eqref{eq:substitution}, so it uniquely
+determines the parent letter.  This proves uniqueness at level one, and
+iteration proves the general case.
+\end{proof}
+
+\begin{corollary}\label{cor:aperiodic}
+The subshift $X_\vartheta$ is aperiodic, minimal, and uniquely ergodic, with
+letter frequencies \eqref{eq:frequencies}.
+\end{corollary}
+
+\begin{proof}
+If $p\in\Z^2$ is a period, the intrinsic phase detector forces
+$p\in2\Z^2$.  Desubstitution then makes $p/2$ a period.  Iteration forces $p$
+to be divisible by $2^n$ for every $n$, hence $p=0$.  Primitivity gives
+minimality and uniform patch frequencies, and therefore unique ergodicity;
+the letter frequencies are the normalized Perron vector.
+\end{proof}
+
+\section{The critical Jordan chain}
+
+Let
+\[
+ f(A)=1,\qquad f(B)=-1,\qquad f(C)=0.
+\]
+By \eqref{eq:frequencies}, $f$ has invariant mean zero.  Define the left row
+vectors
+\[
+ w_1=(1,-1,0),\qquad w_0=(-1,-1,1).
+\]
+Direct multiplication gives
+\begin{equation}\label{eq:jordan}
+ w_0M=2w_0,\qquad w_1M=2w_1+w_0,
+\end{equation}
+while
+\[
+ \det(\lambda I-M)=(\lambda-4)(\lambda-2)^2.
+\]
+Thus eigenvalue $2$ has a size-two Jordan block.  From
+\eqref{eq:jordan},
+\begin{equation}\label{eq:power}
+ w_1M^n=2^nw_1+n2^{n-1}w_0.
+\end{equation}
+
+For $a\in\{A,B,C\}$ let $S_n(a)$ be the sum of $f$ over the complete
+$n$-supertile $\vartheta^n(a)$.  Evaluating \eqref{eq:power} on the three
+coordinate vectors gives the exact identities
+\begin{equation}\label{eq:supertile-sums}
+\begin{aligned}
+ S_n(A)&=2^n\left(1-\frac n2\right),\\
+ S_n(B)&=-2^n\left(1+\frac n2\right),\\
+ S_n(C)&=n2^{n-1}.
+\end{aligned}
+\end{equation}
+The eigenvalue modulus $2$ equals the linear expansion, hence the designation
+\emph{critical}.  The Jordan factor $n$ becomes $\log_2R$ at side length
+$R=2^n$.
+
+\section{A periodic-envelope lemma}
+
+Let $F_n^a$ be the $2^n\times2^n$ array obtained by applying $f$ entrywise
+to $\vartheta^n(a)$.  The block recursions from \eqref{eq:substitution} are
+\[
+ F_{n+1}^A=\begin{pmatrix}F_n^A&F_n^A\\F_n^B&F_n^C\end{pmatrix},\quad
+ F_{n+1}^B=\begin{pmatrix}F_n^B&F_n^B\\F_n^B&F_n^C\end{pmatrix},\quad
+ F_{n+1}^C=\begin{pmatrix}F_n^A&F_n^C\\F_n^C&F_n^C\end{pmatrix}.
+\]
+
+\begin{lemma}[pointwise envelope]\label{lem:envelope}
+For every $n\geq0$,
+\[
+ F_n^B\leq F_n^A,\qquad F_n^B\leq F_n^C
+\]
+entrywise.  Moreover $F_n^A\leq F_n^C$ except at the single position
+$p_n=(0,2^n-1)$, where $F_n^A(p_n)-F_n^C(p_n)=1$.
+\end{lemma}
+
+\begin{proof}
+The assertion is immediate at $n=0$.  Substitute the three displayed block
+recursions.  Each required comparison reduces to the induction hypothesis in
+one of the four blocks.  The unique exceptional position moves into the
+upper-right block, from $p_n$ to $p_{n+1}=(0,2^{n+1}-1)$.
+\end{proof}
+
+Extend $F_n^B$ periodically to $\Z^2$, and likewise extend
+\[
+ U_n=F_n^C+\mathbf1_{\{p_n\}}.
+\]
+By unique level-$n$ cutting and \cref{lem:envelope}, after shifting their
+common phase these arrays bound the entire observable field of every
+$x\in X_\vartheta$ pointwise.  Every square
+$Q=t+[0,2^n)^2$, $t\in\Z^2$, samples each residue class modulo
+$2^n\Z^2$ exactly once.  Therefore
+\begin{equation}\label{eq:square-bounds}
+ -2^n\left(1+\frac n2\right)
+ \leq \sum_{q\in Q}f(x_q)
+ \leq n2^{n-1}+1.
+\end{equation}
+The left endpoint is attained by a complete $B$-supertile.
+
+\section{Exact discrepancy on every dyadic rectangle}
+
+For $m,n\geq0$, define
+\[
+ D(m,n)=\sup\left\{
+ \left|\sum_{q\in t+[0,2^m)\times[0,2^n)}f(x_q)\right|:
+ x\in X_\vartheta,\ t\in\Z^2
+ \right\}.
+\]
+
+\begin{theorem}[sharp dyadic rectangle law]\label{thm:rectangle}
+For all $m,n\geq0$,
+\begin{equation}\label{eq:rectangle}
+ D(m,n)=2^{\max(m,n)}
+ \left(1+\frac{\min(m,n)}2\right).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+First take $m=n=k$.  The absolute value of the lower endpoint in
+\eqref{eq:square-bounds} dominates the upper endpoint, and a complete
+$B$-supertile attains it.  Hence
+$D(k,k)=2^k(1+k/2)$.
+
+Suppose $m=k\leq n=\ell$.  Partition a
+$2^k\times2^\ell$ rectangle into $2^{\ell-k}$ dyadic squares of side $2^k$.
+The triangle inequality and the square case give
+\[
+ D(k,\ell)\leq2^{\ell-k}D(k,k)=2^\ell(1+k/2).
+\]
+For equality, take a complete $\ell$-supertile of type $B$ and its top strip
+of height $2^k$.  The top row of the parent array
+$\vartheta^{\ell-k}(B)$ consists entirely of $B$'s, so the strip is a row of
+$2^{\ell-k}$ complete $k$-supertiles of type $B$ and attains the negative
+bound.  If $n=k\leq m=\ell$, use the left strip instead; the left column of
+$\vartheta^{\ell-k}(B)$ also consists entirely of $B$'s.
+\end{proof}
+
+In particular, square windows of side $R=2^n$ have exact worst-case
+discrepancy
+\[
+ D(n,n)=R\left(1+\frac12\log_2R\right).
+\]
+The logarithm is therefore a global translated-window phenomenon, not merely
+an ancestral-supertile calculation.
+
+\section{Scope and reproducibility}
+
+The finite control checks primitivity, the Jordan identities, the supertile
+formulas through level $32$, and the pointwise envelope through level $8$.
+Those level-bounded tests are regression checks for the displayed algebra and
+induction.  Separately, starting from the three substitution images, the
+script constructs the complete $2\times2$ patch closure
+$3\to13\to20\to20$ and then all $63$ legal $3\times3$ patches, verifying that
+their four phase classes are pairwise disjoint.  This patch-language
+calculation is the exhaustive finite base of the recognizability proof.
+
+The result should not be read as a general discrepancy theorem.  General
+spectral control of substitution discrepancy belongs to the existing theory
+\cite{Adamczewski2004,BufetovSolomyak2013}.  In the planar critical
+size-two-Jordan regime, the general Lipschitz-domain estimate of
+\citet[Corollary~4.5]{BufetovSolomyak2013} allows
+$O(R(\log R)^2)$; the special pointwise order in
+\eqref{eq:substitution} is what yields the exact $R\log R$ law here.  We claim
+only this explicit system, its radius-one certificate, its exact Jordan
+chain, and formula \eqref{eq:rectangle}.  External priority and release
+questions remain outside this internal draft.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
