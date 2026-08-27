@@ -1,11 +1,14 @@
 # P28 code status
 
-`[OPEN]`; `EXECUTION_STATUS=NOT_RUN`.  No code has been executed.
-Implementation begins only after
-the family-owner lemma freezes the connection and dual connection, sign
-convention, every `Hilbert_N=L²(Σ_B,L^N)`, every
-`H_N=Δ^{L^N}`, operator domains, tensor-power scaling, energy-window rule,
-and trace regime.
+`EXECUTION_STATUS=ROUND2_OWNER_LEDGER_COMPLETED`. The owner lemma now freezes
+the connection/dual connection, sign convention, named Hilbert spaces,
+operators, domains, bundle degrees, field-reversal partners, and holonomy
+repetition. `build_owner_ledger.py` generated a 12-row target-free ledger for
+`N=1,2,4,8`; `test_owner_ledger.py` passed 7/7 tests and replayed
+byte-identically.
+
+The code deliberately leaves the rescaled operator `UNASSIGNED`, energy window
+`OPEN`, trace regime `UNASSIGNED`, and orbit ownership `NOT_ESTABLISHED`.
 
 The implementation must key all spectral outputs by `tensor_power_N` and must
 reject pooling with the separate fixed candidate `Δ^L`.  It must not emit a

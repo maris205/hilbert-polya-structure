@@ -12,6 +12,11 @@ Working title: *Semiclassical Tensor-Power Trace*
   degree-one line-bundle connection and its holonomy; the operator family
   `H_N=Δ^{L^N}` on `L²(Σ_B,L^N)`, `N→∞`, is frozen; and the
   `b=0,+1/2,-1/2` controls are assigned base-bundle degrees `0,+1,-1`.
+- Round-2 progress: the tensor-family owner-separation lemma is proved, including
+  exact dual-bundle/antiunitary field reversal and the non-transfer theorem from
+  `N→∞` to fixed `Δ^L`; a 12-row owner ledger at common
+  `N=1,2,4,8` passed 7/7 tests and byte-identical replay. This is owner
+  bookkeeping, not a magnetic-orbit or spectral experiment.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -116,8 +121,11 @@ result remains a magnetic trace calibration.
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
+- [Round-2 owner lemma](notes/round2_tensor_family_owner_lemma.md)
+- [Round-2 progress report](notes/round2_progress_report.md)
 - [pipeline state](notes/pipeline_state.md)
-- [planned owner/phase ledger](results/README.md)
+- [owner ledger and planned orbit schema](results/README.md)
+- [Round-2 execution receipt](experiments/round2_execution_receipt.md)
 
 No prime-orbit claim, fixed-spectrum match, same-owner trace correspondence, or
 Route-B credit is claimed.

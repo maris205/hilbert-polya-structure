@@ -7,6 +7,11 @@ and the changing family `H_N=Δ^{L^N}` on `L²(Σ_B,L^N)`,
 `N→∞`, are frozen.  The exact trace regime, same-owner magnetic-orbit
 binding, and arithmetic prime-orbit hypothesis remain open or unestablished.
 
+Round 2 proves the tensor-family/fixed-operator owner-separation lemma and
+validates a 12-row target-free ownership ledger. It does not yet supply the
+primitive magnetic-orbit or trace-regime evidence required to start the paper
+draft or assign a formal Route-A tuple.
+
 The degree-one `Δ^L` is only a separate fixed candidate:
 
 ```text

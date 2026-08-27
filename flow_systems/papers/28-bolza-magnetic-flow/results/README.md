@@ -1,4 +1,19 @@
-# P28 planned results
+# P28 results and planned orbit ledger
+
+## Round-2 owner ledger
+
+`bolza_tensor_family_owner_ledger.csv` contains 12 exact owner rows for
+`b=0,+1/2,-1/2` at common tensor powers `N=1,2,4,8`. It records bundle degrees,
+named Hilbert/operator owners, antiunitary and classical field-reversal
+partners, holonomy repetition, and the prohibition on fixed-operator credit
+transfer. Its validation is in `round2_owner_ledger_validation.json`.
+
+This file contains no primitive magnetic orbit, eigenvalue, or trace data.
+The `h=1/N` column is a `MODELING_CHOICE`; the rescaled operator and trace
+regime remain `UNASSIGNED`, the energy window remains `OPEN`, and all orbit
+ownership fields remain `NOT_ESTABLISHED`.
+
+## Planned magnetic-orbit ledger
 
 No magnetic-orbit data is claimed.  Planned
 `bolza_semiclassical_tensor_trace_ledger.csv` columns:

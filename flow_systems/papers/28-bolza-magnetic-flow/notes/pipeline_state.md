@@ -1,6 +1,6 @@
 # P28 pipeline state
 
-Date: **2026-08-26**
+Date: **2026-08-27**
 
 | Item | Status |
 |---|---|
@@ -17,6 +17,9 @@ Date: **2026-08-26**
 | Fixed-candidate orbit ownership | `FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED` |
 | Bold hypothesis | **`[HEURISTIC]`** — arithmetic-specific phase cancellation |
 | First controls | **FROZEN DESIGN** — degree `0,+1,-1`, dual-bundle field reversal, and non-arithmetic metric |
+| Round-2 owner lemma | **`[PROVED]`** — changing bundles, duality, antiunitary reversal, domain, repetition, and no fixed-owner credit transfer |
+| Round-2 owner ledger | **EXECUTED / REPLAY PASS** — 12 rows, `N=1,2,4,8`, 7/7 tests |
+| Magnetic-orbit ledger | **NOT RUN** — owner ledger contains no orbit or spectrum data |
 | Evidence tokens | `[PROVED]|[HEURISTIC]|[MODELING_CHOICE]|[OPEN]` |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | Formal Route-A tuple | UNASSIGNED |
@@ -24,7 +27,8 @@ Date: **2026-08-26**
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: complete the tensor-family owner lemma and source-bind one exact
-energy-window/trace regime before enumerating any magnetic orbit.  The lemma
-must not promote either semiclassical or fixed-operator magnetic-orbit ownership
-beyond `[OPEN]`; its exact pipeline state remains `NOT_ESTABLISHED`.
+Next gate: source-bind one exact rescaled operator, energy-window convention,
+and trace distribution before enumerating any magnetic orbit. The completed
+owner lemma does not promote either semiclassical or fixed-operator
+magnetic-orbit ownership beyond `[OPEN]`; its exact pipeline state remains
+`NOT_ESTABLISHED`.

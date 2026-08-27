@@ -147,3 +147,34 @@ The bracketed evidence tokens in this brief are restricted to `PROVED`,
 
 The proposition above is derived in this brief; the sources validate the
 framework, not the claimed novelty.
+
+## Round-2 addendum — finite reduction orders (2026-08-27)
+
+The previously registered eight-level table has been executed for three
+pre-frozen hyperbolic `Gamma(3)` matrices.  The projective order convention is
+`A ~ -A` in `PSL_2(Z/qZ)`.  Direct sequential multiplication and a separate
+group-order-bound factor reduction agree in all 24 matrix/modulus cases.  The
+order sequences are
+
+```text
+G3-A = [1,3,3,6,6,36,72,288]
+G3-B = [1,1,3,12,60,360,360,2880]
+G3-C = [1,2,6,12,12,72,72,576].
+```
+
+This gives `[NUMERICALLY_CERTIFIED]` finite-quotient order and period-scaling
+data.  It is not evidence for a periodic point of `M_infinity`: each finite
+order supplies a level-dependent closing multiple, while a periodic point of
+the inverse limit would require one fixed positive time at every level.  The
+owner field in all 24 rows is therefore
+`FINITE_CONGRUENCE_TOWER_REDUCTION_DIAGNOSTIC`, and the corresponding
+inverse-limit-flow credit is explicitly `FORBIDDEN`.
+
+The matrices are exact `Gamma(3)` members and their positive words are
+primitive necklaces.  Full conjugacy-class primitivity in `Gamma(3)` remains
+`[OPEN]`; no claim in the finite-order table needs that stronger statement.
+No prime table, Riemann-zero data, fitted clock, or target statistic was used.
+The formal Route-A tuple remains `UNASSIGNED`: the Round-2 table closes a
+finite-level diagnostic, not the missing rational-prime A0 link or a
+determinant convention for A2.  A2--A4 remain `NOT_EVALUATED`, Route B remains
+not run, and Gates A--E remain not reached.

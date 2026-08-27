@@ -17,6 +17,28 @@ Working title: *No Periodic Orbits in a Residual Congruence-Limit Geodesic Flow*
   Route-B evaluation is not run, invocation is disallowed, and Gates A--E are
   not reached.
 
+### Round-2 finite-level diagnostic — 2026-08-27
+
+The prespecified eight moduli `3,6,18,72,360,2160,15120,120960` have now
+been executed for three frozen hyperbolic elements of `Gamma(3)`.  The landed
+ledger has 24 rows.  Every projective reduction order was computed by both
+sequential matrix multiplication and an independent finite-group-bound factor
+reduction; all `24/24` pairs agree.  The observed order sequences are
+
+```text
+G3-A: 1,3,3,6,6,36,72,288
+G3-B: 1,1,3,12,60,360,360,2880
+G3-C: 1,2,6,12,12,72,72,576
+```
+
+These are `[NUMERICALLY_CERTIFIED]` finite-quotient diagnostics.  Their owner
+is the frozen congruence tower plus the three matrices, not the inverse-limit
+flow.  Consequently they do not weaken or compensate for the `[PROVED]`
+identity `Per(M_infinity)=empty`, and they receive no formal A1/A2 credit for
+that flow.  Positive-word primitivity is checked exactly, while primitivity as
+a full `Gamma(3)` conjugacy class remains `[OPEN]` because it is unnecessary
+for the reduction-order diagnostic.
+
 ## Frozen dynamical system
 
 For `n>=1`, let
@@ -88,6 +110,9 @@ formal evidence tokens.
 - [Stage-1 theorem brief](notes/stage1_research_brief.md)
 - [pipeline state](notes/pipeline_state.md)
 - [planned finite-level diagnostic](results/README.md)
+- [Round-2 conclusion and owner firewall](notes/round2_conclusion.md)
+- [reproduction entry point](experiments/reproduce.sh)
 
-The no-periodic-orbit theorem is the present landed result; a full manuscript
-and external novelty audit remain pending.
+The no-periodic-orbit theorem remains the Route-relevant landed result.  The
+finite-level table is a reproducible diagnostic only; a full manuscript and
+external novelty audit remain pending.

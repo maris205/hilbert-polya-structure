@@ -103,6 +103,14 @@ assigned, it is not the formal verdict `A1_FAIL`, and A2--A4 remain unevaluated.
   `b=0,+1/2,-1/2`; fixed-operator high-energy ownership remains separate and
   open.
 
+Each project received an executed Round-2 artifact on 2026-08-27. The finite
+ledger/control portions above landed; P28 stopped correctly at owner separation,
+with the energy window and trace regime still unassigned rather than invented.
+Numerical counts, claim boundaries, route-map correspondence and the 31/31 test
+receipt are recorded in the
+[Round-2 execution report](BATCH_ROUND2_PAPERS_24_28.md). This startup document
+remains the frozen pre-execution contract.
+
 ## Primary-source screen
 
 The 2026-08-26 source screen used original papers, journal records, arXiv, and

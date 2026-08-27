@@ -55,11 +55,13 @@ calibration result, not a transferred Riemann-zeta Route credit.
 4. Exact Hecke recurrence required before any prime-factor narrative.
 5. No Route B invocation from the mere existence of the base Laplacian.
 
-## Concrete next artifact
+## Round-2 artifact
 
-`results/newform_timechange_variation_ledger.csv` will record primitive class,
+`results/newform_timechange_variation_ledger.csv` records positive-word class,
 orientation, base length, newform period, first-variation coefficient,
 repetition identity, cutoff risk, generic-observable value, and permutation id.
+It is complete only for primitive positive `LR` necklaces through word cutoff
+9; it is not a complete `Gamma_0(11)` conjugacy-class ledger.
 
 ## Route mapping
 
@@ -67,7 +69,7 @@ repetition identity, cutoff risk, generic-observable value, and permutation id.
 PROPOSAL_STAGE=1
 ROUTE_A_SCOPE=A0-A1
 A0_SCREEN=ARITHMETIC_SUBSTRATE_PRESENT_PRIME_ORBIT_MAP_UNPROVED
-A1_SCREEN=INTRINSIC_PRIMITIVE_LEDGER_NOT_EXECUTED
+A1_SCREEN=FINITE_POSITIVE_WORD_LEDGER_EXECUTED_FULL_CLASS_OWNER_OPEN
 FORMAL_A0_A4_TUPLE=UNASSIGNED
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false
@@ -87,3 +89,21 @@ GATES_A_E=NOT_REACHED
   periods.
 
 No source located in this screen establishes the new Hecke/Euler hypothesis.
+
+## Round-2 addendum — 2026-08-27
+
+The frozen cutoff-9 enumeration contains 125 primitive positive hyperbolic
+necklaces; 11 exact word matrices satisfy `c=0 mod 11`.  Every selected row
+binds the word and matrix owner, primitive root/exponent, orientation, length,
+direct `M^2` repetition, numerical one-form period proxy, and the identical
+signed coefficient `first_variation_coefficient_dT_depsilon_at_0`.  Periods
+and controls have `NUMERICAL_OBSERVATION` status; only the finite exact word
+enumeration has `NUMERICALLY_CERTIFIED` status.
+
+The q-cutoff, quadrature, basepoint, orientation, and direct-repetition
+residuals are observed binary64 differences, not rigorous error bounds or
+exact-zero claims.  The norm-matched bounded observable, period permutation,
+and simpler-parent controls were executed, but no source-owned Hecke
+recurrence was obtained.  Hence the Hecke/Euler status remains `HEURISTIC`
+with testability `NOT_TESTABLE`; the formal Route-A tuple remains `UNASSIGNED`,
+Route B remains `NOT_RUN`, and no prime table or Riemann-zero data was used.

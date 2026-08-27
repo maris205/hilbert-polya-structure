@@ -122,6 +122,23 @@ matched.  Then create
 `results/bolza_semiclassical_tensor_trace_ledger.csv` for
 `b=0,+1/2,-1/2` with the schema frozen in `results/README.md`.
 
+## Round-2 execution — 2026-08-27
+
+The family-owner lemma is now `[PROVED]` and recorded in
+`round2_tensor_family_owner_lemma.md`. It closes degree, tensor-connection,
+dual-bundle, antiunitary field-reversal, operator-domain, holonomy-repetition,
+and family-versus-fixed ownership bookkeeping. It also proves that a
+changing-bundle `N→∞` result cannot be transferred to the high-energy limit of
+fixed `Δ^L` without a separate uniform two-parameter theorem.
+
+The deterministic owner ledger contains 12 rows for
+`b=0,+1/2,-1/2` at common `N=1,2,4,8`; 7/7 unit tests and a byte-identical
+replay passed. Every row keeps the rescaled operator unassigned, the energy
+window open, magnetic-orbit trace ownership `NOT_ESTABLISHED`, and fixed-owner
+credit transfer false. The ledger is therefore a prerequisite contract, not
+the planned primitive magnetic-orbit ledger. The formal Route-A tuple remains
+unassigned.
+
 ## Route mapping
 
 ```text
@@ -130,6 +147,8 @@ ROUTE_A_SCOPE=A0-A1
 A0_SCREEN=ARITHMETIC_SUBSTRATE_PRESENT_PRIME_LINK_UNPROVED
 A1_SCREEN=PRIMITIVE_MAGNETIC_LEDGER_NOT_EXECUTED
 A4_ARCHITECTURE_NOTE=SEMICLASSICAL_TENSOR_POWER_FAMILY_NO_CREDIT_YET
+ROUND2_OWNER_LEMMA=PROVED
+ROUND2_OWNER_LEDGER=12_ROWS_REPLAY_PASS
 SEMICLASSICAL_TRACE_REGIME=OPEN
 SEMICLASSICAL_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN

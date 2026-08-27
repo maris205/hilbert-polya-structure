@@ -26,14 +26,14 @@ primes while preserving the split/inert/ramified owners and multiplicities?
 - Data prohibition: no prime list, zero list, `log p` roof, or target-fitted
   word cutoff enters the definition.
 
-## PROVED background and the level-`(3)` lemma
+## `[PROVED]` background and the level-`(3)` lemma
 
-`PROVED` from the cited background: Bianchi quotients are finite-volume
+`[PROVED]` from the cited background: Bianchi quotients are finite-volume
 arithmetic hyperbolic 3-orbifolds; finite-volume odd-dimensional Selberg/Ruelle
 zeta theory has explicit cusp and scattering terms; complex length combines
 length and holonomy.
 
-`PROVED` here: the projected level-`(3)` principal congruence group is neat and
+`[PROVED]` here: the projected level-`(3)` principal congruence group is neat and
 torsion-free.  Let
 
 ```text
@@ -77,10 +77,10 @@ p=3 mod 4:  inert; one prime ideal of norm p^2.
 ```
 
 Hence the local factors are `(1-2^(-s))^(-1)`, `(1-p^(-s))^(-2)`, and
-`(1-p^(-2s))^(-1)`, respectively.  This owner table is `PROVED`; an orbit map to
+`(1-p^(-2s))^(-1)`, respectively.  This owner table is `[PROVED]`; an orbit map to
 it is not.
 
-`HEURISTIC`: an arithmetic-to-orbit map strong enough for Gaussian prime ideals
+`[HEURISTIC]`: an arithmetic-to-orbit map strong enough for Gaussian prime ideals
 may emerge from a Hecke decomposition of the primitive ledger.  A further
 rational-prime push-forward must preserve the owner table above.  Arithmetic
 provenance alone proves neither map, and no Riemann-`zeta` A0 credit is assigned.
@@ -98,9 +98,13 @@ provenance alone proves neither map, and no Riemann-`zeta` A0 credit is assigned
 
 ## Concrete next artifact
 
-`results/bianchi_complex_length_ledger.csv` will record word, exact matrix
-trace, loxodromic flag, primitive root, repetition exponent, `ell`, `theta`,
-orientation, holonomy weight, cutoff-completeness risk, and shuffle-control id.
+Round 2 executed
+`results/bianchi_complex_length_ledger_round2.csv` and the paired target-free
+holonomy shuffle.  Exact arithmetic certifies determinant one and level-`(3)`
+membership for every row.  The artifact is limited to the reduced word ball of
+four stated elementary generators and their inverses through word length 5;
+full-group generation, full conjugacy enumeration, and group-certified
+primitivity remain `[OPEN]`.  See `notes/round2_conclusion.md`.
 
 ## Route mapping
 
@@ -110,7 +114,10 @@ ROUTE_A_SCOPE=A0-A1
 A0_SCREEN=QI_ARITHMETIC_SUBSTRATE_PRESENT_ORBIT_IDEAL_MAP_UNPROVED
 PRIMARY_TARGET=DEDEKIND_ZETA_QI_CALIBRATION_NO_RIEMANN_A0_CREDIT
 SECONDARY_TARGET=RATIONAL_PRIME_PUSH_FORWARD_RULES_FROZEN_MAP_UNPROVED
-A1_SCREEN=PRIMITIVE_OBJECT_INTRINSIC_LEDGER_NOT_EXECUTED
+A1_SCREEN=FINITE_ELEMENTARY_WORDBALL_EXECUTED_FULL_PRIMITIVE_LEDGER_OPEN
+ROUND2_LEDGER_EVIDENCE=NUMERICALLY_CERTIFIED
+ROUND2_HOLONOMY_CONTROL_EVIDENCE=NUMERICAL_OBSERVATION
+ROUND2_HOLONOMY_CONTROL_VERDICT=OPEN
 FORMAL_A0_A4_TUPLE=UNASSIGNED
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false

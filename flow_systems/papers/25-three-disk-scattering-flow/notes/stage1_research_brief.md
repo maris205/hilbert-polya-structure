@@ -37,7 +37,7 @@ verdict or Route-A tuple is assigned at this Stage-1 checkpoint.
 
 ## Internally prespecified target-free falsification contract
 
-The following design is `[MODELING_CHOICE]`; its execution is `[OPEN]`:
+The following design is `[MODELING_CHOICE]`; Round-2 execution is now complete:
 
 1. Primitive words through topological word length 12 at neighboring
    geometries `d/a=5.8,6.0,6.2`.
@@ -52,21 +52,22 @@ The following design is `[MODELING_CHOICE]`; its execution is `[OPEN]`:
 1. **A0-source absence.** `[MODELING_CHOICE]` The frozen three-disk control has
    no intrinsic arithmetic owner.  This statement is part of the object design
    and is not estimated from the orbit ledger.
-2. **Half-density proves-too-much test.** `[OPEN]` The word-length-at-most-12
-   control asks whether a statistic built from stability half-density continues
-   to look arithmetic under neighboring geometries and matched non-arithmetic
-   labels.  Persistence would assign `[STOP_SCOPED] / PROVES_TOO_MUCH` to that
-   statistic.  Non-persistence would leave the verdict unassigned; it would not
-   supply the missing A0 arithmetic source.
+2. **Half-density proves-too-much test.** `[NUMERICAL_OBSERVATION]` All 747
+   symbolic primitive words have reliable actual-orbit solutions at all three
+   neighboring parameters.  Log-half-density correlations with the central
+   geometry are `0.999998520` and `0.999998755`, above the frozen `0.98` stop
+   threshold.  The half-density statistic therefore receives `[STOP_SCOPED] /
+   PROVES_TOO_MUCH` as arithmetic evidence.  This does not supply the missing
+   A0 arithmetic source.
 
 ## Concrete next artifact
 
-Enumerate all primitive oriented cyclic words through topological word length
-12 and record geometric existence, primitive root, repetition, length,
-collision points, monodromy, a declared half-density observable,
-reflection/Maslov phase, cutoff completeness, and the three neighboring
-geometries.  The statistic definition must be frozen before any control label
-is inspected.
+Round 2 executed `results/three_disk_primitive_ledger_round2.csv` and
+`results/three_disk_controls_round2.csv`.  The former separates exact symbolic
+enumeration, center-polygon proxy, and actual reflection solutions; the latter
+records neighboring parameters, deterministic period shuffling, random phase,
+random stability, rank-integer, guaranteed-composite, and deterministic
+random-integer controls.  See `notes/round2_conclusion.md`.
 
 ## Route mapping
 
@@ -75,11 +76,11 @@ PROPOSAL_STAGE=1
 ROUTE_A_SCOPE=A0-A1_NEGATIVE_CONTROL
 A0_SOURCE_EVIDENCE=MODELING_CHOICE
 A0_SOURCE_STATUS=ABSENT_BY_CONSTRUCTION
-HALF_DENSITY_CONTROL_EVIDENCE=OPEN
+HALF_DENSITY_CONTROL_EVIDENCE=NUMERICAL_OBSERVATION
 HALF_DENSITY_CONTROL_SCOPE=TOPOLOGICAL_WORD_LENGTH_LE_12
-PROVES_TOO_MUCH_VERDICT=UNASSIGNED_PENDING_LEDGER
+PROVES_TOO_MUCH_VERDICT=STOP_SCOPED_FOR_HALF_DENSITY_AS_ARITHMETIC_EVIDENCE
 FORMAL_A0_A4_TUPLE=UNASSIGNED
-FORMAL_EVALUATION_TRIGGER=AFTER_CONTROL_EXECUTION
+FORMAL_EVALUATION_TRIGGER=UNMET_REQUIRED_INPUTS_AND_NO_ARITHMETIC_OWNER
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false
 GATES_A_E=NOT_REACHED

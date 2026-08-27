@@ -9,14 +9,39 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
 - Concrete progress: the exact no-eclipse geometry is frozen; the exact quantum
   multiple-scattering determinant is separated from the semiclassical
   Gutzwiller--Voros orbit expansion; the project is internally prespecified as
-  the batch's non-arithmetic control.
+  the batch's non-arithmetic control.  Round 2 has now executed the full
+  symbolic cutoff and target-free negative-control experiment.
 - A0-source status: **`[MODELING_CHOICE] ABSENT_BY_CONSTRUCTION`**.  This status
   follows from the frozen control design and does not depend on the numerical
   half-density experiment.
-- Half-density control status: **`[OPEN]`**.  The word-length-at-most-12 ledger
-  has not been executed, so `PROVES_TOO_MUCH` is a possible future control
-  verdict, not a current result.  The formal Route-A tuple remains unassigned;
-  Route-B evaluation is not run and invocation is disallowed.
+- Half-density control status: **`[STOP_SCOPED] / PROVES_TOO_MUCH`** for using
+  generic instability-half-density persistence as arithmetic evidence.  This is
+  a statistic-level negative result, not a formal A0--A4 tuple.  Route-B
+  evaluation is not run and invocation is disallowed.
+
+## Round-2 executed artifact
+
+The deterministic symbolic enumerator found all 747 oriented primitive cyclic
+three-label words with no adjacent repetition through topological length 12.
+Across `d/a=5.8,6.0,6.2`, this gives 2,241 rows.  In every row the symbolic word,
+center-polygon proxy, and actual specular billiard solution are separate.
+
+`[NUMERICALLY_CERTIFIED]`: all 2,241 actual-orbit rows passed the frozen
+two-solver agreement, visibility, independent length, stationarity, and
+specular-reflection thresholds.  The maximum stationarity and reflection
+residuals are `3.20e-14` and `3.80e-14`; the maximum independent length and
+angle disagreements are `2.14e-14` and `4.61e-8`.
+
+The analytic paraxial monodromy formula supplies a half-density
+`|Lambda_u|^(-1/2)`.  A direct finite-difference return-map cross-check is
+`NUMERICALLY_CERTIFIED` for only 9 rows and remains `[OPEN]` for 2,232 highly
+unstable rows; therefore the batch-wide half-density conclusions are labeled
+`[NUMERICAL_OBSERVATION]`, not numerical certification.
+
+Long monodromy products are rebuilt with 80-digit decimal arithmetic; the
+binary64 trace is retained as a recorded cross-check.  This removes catastrophic
+`ad-bc` cancellation from the determinant field, but it is a precision check of
+the same paraxial formula, not a substitute for the independent return map.
 
 ## Frozen dynamical system
 
@@ -40,7 +65,7 @@ Can any target-free statistic of the primitive-orbit half-density distinguish
 rational primes from matched random/composite controls after stability and
 escape rate are frozen?
 
-`[HEURISTIC]`: instability factors can mimic an envelope such
+The original bold statement was `[HEURISTIC]`: instability factors can mimic an envelope such
 as `p^(-r/2)` without any arithmetic origin.  If so, amplitude resemblance is a
 generic hyperbolic effect and the tested statistic must be classified
 `[STOP_SCOPED] / PROVES_TOO_MUCH`.
@@ -52,13 +77,20 @@ identity.
 
 ## First kill gate
 
-The internally prespecified test enumerates primitive words through topological
-word length 12 at `d/a=5.8, 6.0, 6.2`, then compares shuffled periods, random
-phases, matched-density integers, and composites.  Its execution status is
-`[OPEN]`.  If an alleged arithmetic score persists across these controls, the
-statistic receives `[STOP_SCOPED] / PROVES_TOO_MUCH`; otherwise that verdict is
-not assigned.  Either outcome leaves the independently frozen A0-source absence
-unchanged and cannot manufacture an arithmetic owner for this geometry.
+The internally prespecified test has been executed.  For all 747 words with
+certified solutions at all three parameters, the correlations of log
+half-density at `d/a=6.0` with the `5.8` and `6.2` controls are respectively
+`0.999998520` and `0.999998755`, above the frozen `0.98` stop threshold.  A
+within-word-length period shuffle preserves nearly the same coarse correlation
+(`-0.965354` versus `-0.968442`), and the guaranteed-composite fixed-exponent
+RMSE (`1.104095`) is lower than the rank-integer proxy RMSE (`1.556276`).
+Random phase, random stability, and deterministic random-integer controls are
+also recorded row by row without prime or zero tables.
+
+Accordingly, `[NUMERICAL_OBSERVATION]` supports `[STOP_SCOPED] /
+PROVES_TOO_MUCH` for this half-density statistic as arithmetic evidence.  The
+outcome leaves the independently frozen A0-source absence unchanged and cannot
+manufacture an arithmetic owner for this geometry.
 
 Evidence labels in this project use the vocabulary of
 `skills/route-a-evaluator.md`; assignment states such as `UNASSIGNED` and
@@ -69,5 +101,8 @@ Evidence labels in this project use the vocabulary of
 - [Stage-1 research brief](notes/stage1_research_brief.md)
 - [pipeline state](notes/pipeline_state.md)
 - [planned ledger](results/README.md)
+- [Round-2 conclusion](notes/round2_conclusion.md)
+- [Round-2 validation](experiments/round2_validation.md)
 
-No numerical result or manuscript is claimed yet.
+No exact scattering determinant, A2 zeta test, formal Route tuple, or manuscript
+is claimed yet.
