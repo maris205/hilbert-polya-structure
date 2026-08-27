@@ -2471,3 +2471,27 @@ independent-checker assertions, 16,256 SymPy checks, 345 hostile rejections,
 `A4_NATURAL_QUANTIZATION`; the coordinates are not combined and all five
 remain `ROUTE_A_REJECTED`.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route
 B remains false.
+
+## Route-A independent cross-subtype round C199--C203
+
+This round again takes one complete theorem-scale step per paper and changes
+the dynamical owner in every slot: a nonholonomic rigid body, a degenerate
+diffusion, an inertial optimization recurrence, a reaction--diffusion wave,
+and a signed-network gradient semigroup.  Each package closes the full declared
+parameter family and its singular or degenerate boundaries; finite exact
+ledgers remain verification oracles rather than substitutes for the proofs.
+
+- [C199 signed-offset Chaplygin-sleigh scattering](henon_chaplygin_sleigh_complete_scattering_route_a/README.md) · [paper PDF](henon_chaplygin_sleigh_complete_scattering_route_a/paper/main.pdf)
+- [C200 Jacobi--Wright--Fisher spectral atlas](henon_jacobi_diffusion_spectral_atlas_route_a/README.md) · [paper PDF](henon_jacobi_diffusion_spectral_atlas_route_a/paper/main.pdf)
+- [C201 all-real Polyak heavy-ball stability](henon_polyak_heavy_ball_stability_route_a/README.md) · [paper PDF](henon_polyak_heavy_ball_stability_route_a/paper/main.pdf)
+- [C202 every-speed Fisher--KPP wave atlas](henon_fisher_kpp_traveling_wave_atlas_route_a/README.md) · [paper PDF](henon_fisher_kpp_traveling_wave_atlas_route_a/paper/main.pdf)
+- [C203 signed-Laplacian consensus and pseudoforests](henon_signed_laplacian_balance_consensus_route_a/README.md) · [paper PDF](henon_signed_laplacian_balance_consensus_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C199_C203.md),
+[batch plan](BATCH_PLAN_C199_C203.md), and
+[batch review](BATCH_REVIEW_C199_C203.md) for collision screening, exact
+theorem increments, internal repairs, content-addressed hashes and the uniform
+52,379-checker / 3,429-SymPy / 163-mutation / 135-payload / 15-page audit.
+Four packages retain candidate-local `A4_FORMAL_HINT`; C202 has `A4_FAIL`.
+None supplies A0--A3, so all five remain `ROUTE_A_REJECTED`.  Coordinates stay
+separate, scope is `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.

@@ -1,0 +1,264 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=0.66in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\ee}{\mathbf e}
+\newcommand{\sgn}{\operatorname{sgn}}
+\emergencystretch=3em
+\title{The Chaplygin Sleigh for Every Signed Mass Offset:\\
+Exact Scattering, Physical Reconstruction, and the Recurrence Boundary}
+\author{Route-A structural certificate C199}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give a convention-complete theorem for the classical Chaplygin sleigh with
+mass $m>0$, central inertia $J>0$, and arbitrary signed longitudinal offset
+$a$.  For $a\ne0$, every non-equilibrium positive-energy reduced orbit is an
+explicit heteroclinic: its blade rotates through an energy-independent angle
+and its contact point has two rigorously defined asymptotic lines.  We also classify
+the stable equilibrium half-axis, half-plane Poisson structure, necessarily
+singular reduced density and its configuration-Haar lift, reversor, and all zero-offset and zero-angular-
+velocity boundaries.  A finite exact/high-precision ledger checks conventions
+but is not used to prove the continuous theorem.  The Poisson form gives only
+a formal Route-A hint; the absence of an intrinsic prime carrier and target
+determinant forces rejection.
+\end{abstract}
+\noindent\textbf{Keywords:} Chaplygin sleigh; nonholonomic mechanics;
+heteroclinic scattering; reconstruction; invariant measure; reversibility.
+
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+本文对质量、转动惯量均为正且质心纵向偏置可取任意符号的经典
+\foreignlanguage{english}{Chaplygin sleigh}给出完整定理。偏置非零时，全部非平衡正能轨道均为
+显式异宿轨道；刀刃转角与能量无关，接触点具有两条严格定义的渐近直线。本文还统一分类
+稳定平衡半轴、半平面泊松结构、必然奇异的不变测度、时间反演以及零偏置等全部边界。
+有限精确计算只校验约定，不代替连续参数证明；路线\foreignlanguage{english}{A}最终仍被拒绝。
+
+\noindent 关键词：非完整力学；异宿散射；重构；不变测度；时间反演。
+\end{otherlanguage}
+
+\section{Convention, equations, and ownership}
+Let $r=(x,y)$ be the knife contact point, $\theta\in\mathbb S^1$ the
+\emph{blade} angle, $u$ the signed contact velocity along the blade, and
+$\omega=\dot\theta$.  Let $a\in\mathbb R$ be the signed longitudinal offset
+from contact point to centre of mass and put $I_c=J+ma^2$.  In physical time,
+the reduced equations and reconstruction are
+\begin{equation}\label{eq:system}
+ \dot r=u\ee(\theta),\quad \dot\theta=\omega,\quad
+ \dot u=a\omega^2,\quad
+ \dot\omega=-\frac{ma}{I_c}u\omega,\qquad
+ \ee(\theta)=(\cos\theta,\sin\theta).
+\end{equation}
+They imply
+\begin{equation}\label{eq:energy}
+ H=\frac m2u^2+\frac{I_c}{2}\omega^2=\text{constant}.
+\end{equation}
+The model, its nonholonomic reduction and Hamiltonization context are
+classical~\cite{Bloch00,BM09,M87}.  We claim a signed-parameter synthesis and
+certificate, not priority for those results.
+
+\section{All nonzero-offset scattering orbits}
+\begin{theorem}[signed-offset normal form]\label{thm:normal}
+Assume $a\ne0$, $H>0$, and $\omega(0)\ne0$.  Define
+\[
+ R=\sqrt{2H/m},\quad A=\frac{m|a|R}{I_c},\quad
+ \eta=\frac{\sqrt{I_c/m}}{|a|},\quad \sigma=\sgn\omega(0).
+\]
+There are unique $t_0\in\mathbb R$ and $\theta_0$ modulo $2\pi$ such that,
+with $s=A(t-t_0)$,
+\begin{equation}\label{eq:closed}
+ u=\sgn(a)R\tanh s,
+ \quad\omega=\sigma R\sqrt{m/I_c}\,\operatorname{sech}s,
+ \quad\theta=\theta_0+\sigma\eta\arcsin(\tanh s).
+\end{equation}
+It joins $(-\sgn(a)R,0)$ to $(\sgn(a)R,0)$ and its blade-angle deflection is
+\begin{equation}\label{eq:deflection}
+ \Delta\theta=\theta_+-\theta_-=\sigma\pi\eta,
+\end{equation}
+which is independent of $H$.
+\end{theorem}
+\begin{proof}
+The sign of a nonzero $\omega$ cannot change by uniqueness.  On the energy
+ellipse write $u=\sgn(a)R\tanh s$ and
+$\omega=\sigma R\sqrt{m/I_c}\operatorname{sech}s$.  The first reduced
+equation gives $\dot s=A$; substitution gives the second.  Since
+$d\{\arcsin(\tanh s)\}/ds=\operatorname{sech}s$, integration of
+$\dot\theta=\omega$ proves~\eqref{eq:closed}.  Taking $s\to\pm\infty$
+proves both endpoints and~\eqref{eq:deflection}.
+\end{proof}
+
+The endpoint table makes the signed convention explicit:
+\[
+\begin{array}{c|cc}
+ &t\to-\infty&t\to+\infty\\ \hline
+u&-\sgn(a)R&\sgn(a)R\\
+\omega&0^\sigma&0^\sigma\\
+\theta&\theta_0-\sigma\eta\pi/2&\theta_0+\sigma\eta\pi/2
+\end{array}
+\]
+
+\ifnum\CRevisionRound>0
+\section{Contact-point reconstruction and two lines}
+Put $q=\tanh s\in(-1,1)$.  Since $dt=dq/[A(1-q^2)]$, the full $SE(2)$
+reconstruction reduces exactly to
+\begin{equation}\label{eq:quad}
+ r(q)-r(0)=\frac{\sgn(a)R}{A}
+ \int_0^q\frac{y\,\ee(\theta_0+\sigma\eta\arcsin y)}{1-y^2}\,dy.
+\end{equation}
+This is a one-dimensional quadrature, not a claim of an elementary primitive.
+
+\begin{proposition}[affine asymptotes]
+Let $v_\pm=u_\pm\ee(\theta_\pm)$.  There are unique vectors $b_\pm$ such
+that
+\[
+ r(t)=b_\pm+v_\pm t+o(1)\qquad(t\to\pm\infty).
+\]
+Thus the contact trajectory scatters between two oriented affine lines.
+\end{proposition}
+\begin{proof}
+As $s\to+\infty$, $u-u_+=O(e^{-2s})$ while
+$\theta-\theta_+=O(e^{-s})$; hence
+$u\ee(\theta)-v_+=O(e^{-s})$, integrable in physical time because $s=At+O(1)$.
+Therefore $r(t)-v_+t$ has a finite limit.  The negative end is identical.
+Uniqueness follows by subtracting two candidate intercepts.
+\end{proof}
+
+The blade angle is not always the velocity heading.  The physical heading is
+$\theta$ when $u>0$ and $\theta+\pi$ when $u<0$ (modulo $2\pi$).  Therefore
+\eqref{eq:deflection} must not be silently relabelled as a velocity-heading
+deflection.
+
+\section{Stability, Poisson form, measure, and reversibility}
+The entire line $\omega=0$ is reduced equilibrium.  At $(u_*,0)$ its
+linearization has eigenvalues $0$ and
+\begin{equation}\label{eq:eigen}
+ \lambda_\perp=-\frac{ma}{I_c}u_*.
+\end{equation}
+Hence precisely $au_*>0$ is transversely stable.  On either open half-plane,
+\begin{equation}\label{eq:poisson}
+ \{u,\omega\}=\frac{a}{I_c}\omega
+\end{equation}
+is a nondegenerate Poisson bracket and $\dot f=\{f,H\}$ reproduces the reduced
+flow.  The density $\rho=1/|\omega|$ satisfies
+$\nabla\!\cdot(\rho\dot u,\rho\dot\omega)=0$ there.
+
+No positive $C^1$ \emph{reduced} invariant density can cross a nonzero reduced
+equilibrium: at $(u_*,0)$, invariance would give
+$0=\rho\,\nabla\!\cdot F=-\rho ma u_*/I_c$, a contradiction.  Thus the
+reduced singularity is structural, not a removable normalization.  Multiplying
+by configuration Haar volume gives an invariant full-flow measure off the
+singular line, and no smooth density of this Haar-factor form crosses it.
+However, $(u_*,0)$ with $u_*\ne0$ still reconstructs as translation in the
+full five-dimensional flow.  The pointwise reduced argument therefore does
+not exclude every possible configuration-dependent full-flow $C^1$ density.
+
+Finally,
+\[
+ \mathcal R(r,\theta,u,\omega)=(r,\theta,-u,-\omega)
+\]
+satisfies $F(\mathcal Rz)=-D\mathcal R\,F(z)$, so it is a physical-time
+reversor.
+
+\section{All degenerate boundaries and recurrence}
+If $a\ne0$ but $\omega_0=0$, the reduced state is fixed and $r$ is a straight
+line; $H=0$ is the fully fixed case.  Otherwise $\dot u=a\omega^2$ is strictly
+one-signed, excluding nonconstant recurrence.
+
+If $a=0$, both $u$ and $\omega$ are constant.  When $\omega\ne0$,
+\[
+ r(t)-r(0)=\frac{u}{\omega}
+ \bigl(\sin(\theta_0+\omega t)-\sin\theta_0,
+ -\cos(\theta_0+\omega t)+\cos\theta_0\bigr),
+\]
+and the complete $SE(2)$ state is periodic with period $2\pi/|\omega|$.  When
+$\omega=0$, motion is straight (fixed if also $u=0$).  Thus $a=0$ is a sharp
+recurrence boundary, not a regular member of the scattering family.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Independent certificate and strict Route-A stop}
+The deterministic ledger uses six rational $(m,J,a,H)$ families, both signs
+of $a$ and $\omega$, 12 heteroclinic cases, 36 states, and four $a=0$
+boundaries.  An independent checker imports no producer and closes 737
+assertions under recursively exact schema keys.  A separate SymPy derivation
+checks 25 structural and 36 rational hyperbolic identities.  Replay is byte
+exact; twelve repaired-hash attacks (including unknown-key and four mathematical
+attacks) plus one stale-hash attack are rejected.  These tests audit signs and
+conventions; Theorem~\ref{thm:normal} and the proofs above establish the
+continuous result.
+
+The half-plane bracket and the quantum comparison in~\cite{BR08} motivate only
+a formal operator hint.  There is no intrinsic rational-prime primitive-orbit
+ledger, prime-power repetition law, target Fredholm determinant, target
+divisor/functional equation, or constructed same-clock operator with the
+required spectrum.  Consequently
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FORMAL\ HINT}),
+\]
+overall \texttt{ROUTE\_A\_REJECTED}, Route B false, under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Claim firewall.}
+We claim no arithmetic local data, Euler factor, root number, automorphy,
+target analytic structure, Hilbert--P\'olya operator, a smooth global reduced
+or configuration-Haar-factor density, exclusion of all configuration-dependent full-flow densities,
+finite-regression proof, exhaustive priority, external review, or acceptance
+score.
+\fi
+
+\ifcase\CRevisionRound
+\paragraph{Revision focus.} Round 0 freezes the signed convention and proves
+the explicit all-energy heteroclinic scattering core.
+\or
+\paragraph{Revision focus.} Round 1 adds physical reconstruction, affine
+asymptotes, stability, Poisson/measure obstruction, reversibility and every
+degenerate recurrence boundary.
+\or
+\paragraph{Revision focus.} Round 2 adds independent executable closure,
+source ownership, Route-A evaluation, counterclaim firewall and disclosures.
+\fi
+
+\section*{Declarations}
+\paragraph{Data and code availability.} Package-local synthetic exact evidence
+and deterministic code accompany the manuscript; no observational data are
+used.
+\paragraph{Ethics.} No human, animal, personal or sensitive data are used;
+approval is not applicable.
+\paragraph{Author contributions (CRediT).} This anonymous certificate records
+Conceptualization, Formal analysis, Software, Validation, Writing---original
+draft, and Writing---review and editing.  AI systems are not authors.
+\paragraph{Funding.} No external funding is reported.
+\paragraph{Conflicts of interest.} None known.
+\paragraph{AI-use disclosure.} An AI coding assistant supported derivation,
+drafting and exact-code development; it was not an external reviewer or an
+independent peer-review process.
+
+\begin{thebibliography}{4}
+\bibitem{Bloch00} A. M. Bloch, ``Asymptotic Hamiltonian dynamics: the Toda
+lattice, the three-wave interaction and the non-holonomic Chaplygin sleigh,''
+\emph{Physica D} 141 (2000), 297--315.
+DOI: 10.1016/S0167-2789(00)00046-4.
+\bibitem{BM09} A. V. Borisov and I. S. Mamaev, ``The dynamics of a Chaplygin
+sleigh,'' \emph{J. Appl. Math. Mech.} 73 (2009), 156--161.
+DOI: 10.1016/j.jappmathmech.2009.04.005.
+\bibitem{M87} N. K. Moshchuk, ``On the motion of Chaplygin's sledge,''
+\emph{J. Appl. Math. Mech.} 51 (1987), 426--430.
+DOI: 10.1016/0021-8928(87)90079-7.
+\bibitem{BR08} A. M. Bloch and A. G. Rojo, ``Quantization of a Nonholonomic
+System,'' \emph{Phys. Rev. Lett.} 101 (2008), 030402.
+DOI: 10.1103/PhysRevLett.101.030402.
+\end{thebibliography}
+\end{document}

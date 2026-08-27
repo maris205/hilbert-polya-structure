@@ -3,6 +3,29 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C199--HCS-C203 independent cross-subtype round (2026-08-27)
+
+This batch gives every paper a different complete dynamical owner:
+nonholonomic scattering, a conservative degenerate diffusion, an inertial
+optimization recurrence, a reaction--diffusion wave reduction, and a signed
+network gradient semigroup.  No theorem is divided among the five artifacts.
+The evaluator is `../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at
+SHA-256 `6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C199 | Every signed-offset Chaplygin sleigh is closed by an explicit reduced scattering atlas and full `SE(2)` reconstruction: both heteroclinics, energy-independent blade-angle shift, asymptotic lines, stable half-axis, half-plane Poisson form, singular invariant measure, reversor, and the separate balanced periodic/straight boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_chaplygin_sleigh_complete_scattering_route_a/`](../henon_chaplygin_sleigh_complete_scattering_route_a/) |
+| HCS-C200 | Every positive mutation pair in the canonical conservative Jacobi--Wright--Fisher diffusion has a complete endpoint atlas, Beta reversibility, shifted-Jacobi eigenbasis, sharp gap, heat kernel and source-local determinant, triangular moment flow and stationary moments.  Recurrent paths are not confused with periodic semigroup observables. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_jacobi_diffusion_spectral_atlas_route_a/`](../henon_jacobi_diffusion_spectral_atlas_route_a/) |
+| HCS-C201 | Every real constant-parameter heavy-ball recurrence on an SPD spectral interval has an exact Jury triangle, endpoint root-radius formula and unique minimax Polyak parameters, including negative momentum, defective `k q^k` endpoint transients, nilpotent and symplectic boundaries, and complete characteristic data. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_polyak_heavy_ball_stability_route_a/`](../henon_polyak_heavy_ball_stability_route_a/) |
+| HCS-C202 | Every Fisher--KPP traveling-wave speed is classified by the minimal-speed threshold, node/focus and sign-changing boundaries, exact leading-edge asymptotics, zero-speed Hamiltonian ovals, strict nonzero-speed energy law, and the Ablowitz--Zeppetella control front. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_fisher_kpp_traveling_wave_atlas_route_a/`](../henon_fisher_kpp_traveling_wave_atlas_route_a/) |
+| HCS-C203 | Every finite static undirected positive-weight signed graph has an exact balance kernel, signed-consensus/zero projection and sharp rate; every principal minor and the complete characteristic polynomial are closed by rooted-tree and negative-unicycle pseudoforests with their exact powers of four. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_signed_laplacian_balance_consensus_route_a/`](../henon_signed_laplacian_balance_consensus_route_a/) |
+
+All five remain `ROUTE_A_REJECTED`.  The four formal operator/Poisson hints are
+candidate-local and cannot be combined.  No target table, arithmetic local
+datum, Euler factor, root number, automorphy object, target divisor,
+Hilbert--Pólya operator, or Route-B input is used.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C194--HCS-C198 independent all-parameter round (2026-08-27)
 
 This batch changes mathematical owner in every paper: positional-addition
