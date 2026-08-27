@@ -1,0 +1,339 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Rcal}{\mathcal R}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\lcmop}{\operatorname{lcm}}
+
+\title[Complete-bipartite sandpile translations]{Localized Addition Periods and Zeta Functions for Complete-Bipartite Sandpiles}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 27 August 2026}
+\subjclass[2020]{37B15, 05C25, 05C50, 82C20}
+\keywords{Abelian sandpile, complete bipartite graph, addition operator, critical group, orbit length, Artin--Mazur zeta function}
+
+\begin{document}
+
+\begin{abstract}
+Choose a sink in the $n$-vertex part of the complete bipartite graph
+$K_{m,n}$.  On recurrent Abelian sandpiles, any integral loading profile
+$w$ defines a permutation $T_w$.  We compute every coordinate of
+$Q_{m,n}^{-1}w$ and hence the exact order $L(w)$ as a finite least common
+multiple of explicit reduced denominators.  All $m^{n-1}n^{m-1}$ recurrent
+states then split into cycles of the same length $L(w)$, giving every iterate
+fixed-point count, the Artin--Mazur zeta function, all ergodic invariant
+measures, and the Koopman spectrum.  A two-site specialization has up to four
+denominator classes, with three when $n=2$.  In particular, adding at a vertex opposite the sink
+has period $mn$, whereas adding at another vertex in the sink part has period
+$m$.  Exact reduced-Laplacian checks cover both arbitrary and two-site
+profiles; literal burning, stabilization, and orbit enumeration cover every
+$K_{m,n}$ with $2\leq m,n\leq4$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The Abelian sandpile model turns local chip addition followed by stabilization
+into a finite dynamical system.  Dhar's addition operators commute, and their
+restriction to recurrent configurations forms a finite Abelian group
+\cite{Dhar1990,DharEtAl1995}.  Algebraically this group is the cokernel of the
+reduced graph Laplacian.  These facts convert a dynamical question---the
+period of a prescribed loading protocol---into an integral lattice question.
+
+Complete bipartite graphs have an especially explicit critical group.
+Lorenzini computed its bipartite form \cite{Lorenzini1991};
+\citet{JacobsonEtAl2003} review that case and solve the complete multipartite
+problem.  Recurrent and parking configurations on $K_{m,n}$ also have a rich
+operator and cyclic-lemma description \cite{AvalEtAl2016}, and recent work
+compares Abelian and stochastic recurrent models on the same graph family
+\cite{SeligZhu2025}.  We take these structures as prior art.  Our narrower
+objective is to retain the physical coordinates of an arbitrary loading
+profile relative to a fixed sink, rather than pass immediately to an abstract
+Smith normal form, and to compute the resulting deterministic orbit data.
+
+The calculation has a useful asymmetry.  The sink breaks the exchange between
+the two parts.  A chip added at a vertex opposite the sink generates a cycle
+of length $mn$, while a chip added beside the sink has period only $m$.
+For a general loading, the exact period is an elementary but nontrivial
+arithmetic function of the entire profile.  Once that period is known,
+translation on a finite group forces a uniform cycle decomposition, and the
+zeta function and Koopman spectrum become closed formulas.
+
+\section{Sandpile translations}
+
+Let
+\[
+ A=\{a_1,\ldots,a_m\},\qquad
+ B=\{b_1,\ldots,b_{n-1},q\}
+\]
+be the two parts of $K_{m,n}$, with $q$ designated as the sink.  We assume
+$m,n\geq2$.  A stable sandpile has heights $0,\ldots,n-1$ on vertices of
+$A$ and $0,\ldots,m-1$ on nonsink vertices of $B$.  When a nonsink reaches
+its degree, it topples one chip along every incident edge; chips reaching
+$q$ disappear.  Stabilization is independent of toppling order.
+
+Let $\Rcal_{m,n}$ be the recurrent configurations.  Stabilized componentwise
+addition makes $\Rcal_{m,n}$ a group isomorphic to
+\[
+ \Z^{m+n-1}/Q_{m,n}\Z^{m+n-1},
+\]
+where, in the order $A,B\setminus\{q\}$,
+\begin{equation}\label{eq:laplacian}
+ Q_{m,n}=
+ \begin{pmatrix}
+ nI_m&-J_{m,n-1}\\
+ -J_{n-1,m}&mI_{n-1}
+ \end{pmatrix}.
+\end{equation}
+The matrix-tree theorem gives
+\begin{equation}\label{eq:tree-count}
+ |\Rcal_{m,n}|=\det Q_{m,n}=m^{n-1}n^{m-1}.
+\end{equation}
+
+Let
+\[
+ w=(\alpha_1,\ldots,\alpha_m,
+       \beta_1,\ldots,\beta_{n-1})\in\Z^{m+n-1}.
+\]
+For a nonnegative profile, $T_w$ adds the indicated chips and stabilizes.  It
+is a permutation of $\Rcal_{m,n}$.  Integral profiles are then defined using
+inverse addition operators on the recurrent group.  In the cokernel, $T_w$
+is translation by $[w]$.  Put
+\[
+ A_w=\sum_{i=1}^{m}\alpha_i,
+ \qquad B_w=\sum_{j=1}^{n-1}\beta_j.
+\]
+
+For $N\geq1$ and $t\in\Z$, put
+\[
+ d_N(t)=\frac{N}{\gcd(N,t)}.
+\]
+Thus $d_N(0)=1$ and $d_N(t)$ is the reduced denominator of $t/N$.
+
+\section{The localized period formula}
+
+\begin{lemma}[order from a reduced Laplacian]\label{lem:denominator}
+If $Q$ is an invertible integer matrix and $w\in\Z^r$, then the order of
+$[w]$ in $\Z^r/Q\Z^r$ is the least positive integer $L$ for which
+$LQ^{-1}w\in\Z^r$.  Equivalently, it is the least common multiple of the
+reduced denominators of the coordinates of $Q^{-1}w$.
+\end{lemma}
+
+\begin{proof}
+The multiple $L[w]$ vanishes exactly when $Lw=Qz$ for some $z\in\Z^r$,
+which is equivalent to $LQ^{-1}w=z$ being integral.
+\end{proof}
+
+For an arbitrary profile define
+\begin{equation}\label{eq:general-period}
+ \begin{split}
+ L_{m,n}(w)=\lcmop\Big(&
+ \{d_{mn}((n-1)A_w+nB_w+m\alpha_i):1\leq i\leq m\},\\
+ &\{d_m(A_w+B_w+\beta_j):1\leq j<n\}\Big).
+ \end{split}
+\end{equation}
+
+\begin{theorem}[arbitrary-profile loading period]\label{thm:general-period}
+For every $m,n\geq2$ and $w\in\Z^{m+n-1}$,
+\[
+ \ord(T_w)=L_{m,n}(w).
+\]
+More explicitly,
+\begin{align}
+ (Q_{m,n}^{-1}w)_{a_i}
+ &=\frac{(n-1)A_w+nB_w+m\alpha_i}{mn},\label{eq:general-A}\\
+ (Q_{m,n}^{-1}w)_{b_j}
+ &=\frac{A_w+B_w+\beta_j}{m}.\label{eq:general-B}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Write $u_i$ and $v_j$ for the coordinates of $Q_{m,n}^{-1}w$, and put
+$U=\sum_i u_i$, $V=\sum_jv_j$.  The reduced-Laplacian equations are
+\[
+ nu_i-V=\alpha_i,\qquad mv_j-U=\beta_j.
+\]
+Summing the two families gives
+\[
+ nU-mV=A_w,\qquad mV-(n-1)U=B_w.
+\]
+Thus $U=A_w+B_w$ and
+$mV=(n-1)A_w+nB_w$.  Substitution proves
+equations~\eqref{eq:general-A} and~\eqref{eq:general-B}.  The order formula
+follows from \cref{lem:denominator}.
+\end{proof}
+
+Fix $a=a_1$ and $b=b_1$, specialize to
+$w_{\alpha,\beta}=\alpha e_a+\beta e_b$, and write
+$T_{\alpha,\beta}=T_{w_{\alpha,\beta}}$.  Define
+\begin{align}
+ L_{m,n}(\alpha,\beta)
+ =\lcmop\big(&d_{mn}(\alpha(m+n-1)+\beta n),
+ d_{mn}(\alpha(n-1)+\beta n),\notag\\
+ &d_m(\alpha+2\beta),
+ d_m(\alpha+\beta)\big),\label{eq:period}
+\end{align}
+where the final term is omitted when $n=2$.
+
+\begin{corollary}[two-site and single-site periods]\label{cor:period}
+For every $m,n\geq2$ and $\alpha,\beta\in\Z$,
+\[
+ \ord(T_{\alpha,\beta})=L_{m,n}(\alpha,\beta).
+\]
+In particular,
+\[
+ \ord(T_{1,0})=mn,\qquad \ord(T_{0,1})=m.
+\]
+\end{corollary}
+
+\begin{proof}
+Specializing \cref{thm:general-period} gives the following coordinates at
+the distinguished vertex $a$ and at each other vertex of $A$, respectively:
+\begin{equation}\label{eq:A-coordinates}
+ \frac{\alpha(m+n-1)+\beta n}{mn},
+ \qquad
+ \frac{\alpha(n-1)+\beta n}{mn}.
+\end{equation}
+At $b$ and at every other nonsink vertex of $B$, respectively, they are
+\begin{equation}\label{eq:B-coordinates}
+ \frac{\alpha+2\beta}{m},
+ \qquad
+ \frac{\alpha+\beta}{m}.
+\end{equation}
+The second kind in \eqref{eq:B-coordinates} is absent when $b$ is the sole
+nonsink vertex of $B$.  These reduced denominators prove \eqref{eq:period}.
+
+For $(\alpha,\beta)=(0,1)$, the $A$ coordinates already have denominator
+$m$, and every displayed denominator divides $m$.  Thus the order is $m$.
+For $(1,0)$, integrality of the difference between the two $A$ coordinates
+forces $n\mid L$, and the $B$ coordinates force $m\mid L$.  If
+$g=\gcd(m,n)>1$, write any common multiple of $m,n$ as
+$L=(mn/g)t$.  The other-$A$ coordinate after multiplication by $L$ is
+$t(n-1)/g$.  Since $g\mid n$ and $\gcd(g,n-1)=1$, integrality forces
+$g\mid t$.  Thus $mn\mid L$, and the least common multiple is $mn$.
+\end{proof}
+
+The formula retains more information than the abstract decomposition
+\[
+ K(K_{m,n})\cong(\Z/m\Z)^{n-2}\oplus
+ (\Z/n\Z)^{m-2}\oplus\Z/(mn)\Z
+\]
+because it locates the physical loading vector relative to a chosen sink and
+the vertex parts.
+
+\section{Orbit census, zeta function, and spectrum}
+
+Put $M_{m,n}=m^{n-1}n^{m-1}$ and $L=L_{m,n}(w)$.
+
+\begin{theorem}[complete translation dynamics]\label{thm:dynamics}
+The map $T_w$ partitions $\Rcal_{m,n}$ into exactly
+$M_{m,n}/L$ cycles, all of length $L$.  For every $k\geq1$,
+\[
+ |\Fix(T_w^k)|=
+ \begin{cases}
+ M_{m,n},&L\mid k,\\
+ 0,&L\nmid k.
+ \end{cases}
+\]
+Its Artin--Mazur zeta function is
+\[
+ \zeta_{T_w}(z)
+ =\exp\left(\sum_{k\geq1}\frac{|\Fix(T_w^k)|}{k}z^k\right)
+ =(1-z^L)^{-M_{m,n}/L}.
+\]
+\end{theorem}
+
+\begin{proof}
+On the recurrent group, the map is translation by an element $g$ of order
+$L$.  The orbit through any $x$ is the coset $x+\langle g\rangle$, so it has
+exactly $L$ points.  The cosets partition the group.  Translation by $kg$ has
+a fixed point exactly when $kg=0$, in which case it is the identity.  The
+fixed-count formula follows, and
+\[
+ \exp\left(\frac{M_{m,n}}L
+       \sum_{j\geq1}\frac{z^{jL}}j\right)
+ =(1-z^L)^{-M_{m,n}/L}
+\]
+gives the zeta function.
+\end{proof}
+
+\begin{corollary}[invariant measures and Koopman spectrum]\label{cor:spectrum}
+The ergodic invariant probability measures are precisely the uniform
+measures on the $M_{m,n}/L$ cycles.  On
+$\ell^2(\Rcal_{m,n})$ with counting measure, every $L$th root of unity is a
+Koopman eigenvalue with multiplicity $M_{m,n}/L$, and there are no other
+eigenvalues.  The topological and measure-theoretic entropies are zero.
+\end{corollary}
+
+\begin{proof}
+Each finite orbit supports one ergodic invariant measure, and every invariant
+measure is a convex combination of these.  On each $L$-cycle the Koopman
+operator is the regular cyclic permutation, whose eigenvalues are the $L$th
+roots of unity, each once.  Taking the direct sum over all cycles gives the
+multiplicities.  A finite permutation has zero entropy.
+\end{proof}
+
+For example, a single chip added opposite the sink has
+\[
+ \zeta_{T_{1,0}}(z)
+ =(1-z^{mn})^{-m^{n-2}n^{m-2}},
+\]
+whereas a single chip added in the sink part has
+\[
+ \zeta_{T_{0,1}}(z)
+ =(1-z^{m})^{-m^{n-2}n^{m-1}}.
+\]
+
+\section{Literal finite control and ownership boundary}
+
+The companion script carries out two independent checks.  First, for
+$2\leq m,n\leq8$, it constructs $Q_{m,n}$, verifies its determinant,
+computes $Q_{m,n}^{-1}w$ over exact rationals for both two-site and
+arbitrary deterministic profiles, and compares all reduced denominators with
+equations~\eqref{eq:general-period} and~\eqref{eq:period}.
+Second, for every $2\leq m,n\leq4$, it enumerates stable configurations,
+applies Dhar's burning test, performs literal legal stabilization, and checks
+the predicted cycle length for four nonnegative loading vectors.  These are
+regression controls, not replacements for the proof.
+
+The sandpile group and addition-operator framework are owned by
+\citet{Dhar1990,DharEtAl1995}; the bipartite critical group is due to
+\citet{Lorenzini1991} and is reviewed in the multipartite treatment of
+\citet{JacobsonEtAl2003}; detailed $K_{m,n}$ configuration operators and
+cyclic combinatorics appear in \citet{AvalEtAl2016}; and
+\citet{SeligZhu2025} is a current comparator on recurrent complete-bipartite
+sandpiles.  Finite-group translation orbit facts are also not claimed.  The
+residual statement here is only the sink-relative coordinate/order formula
+for physical loading profiles and its recorded dynamical consequences.  A
+bounded search through 27 August 2026 found no exact collision with that
+combined package.  This is not an absolute priority claim, and the manuscript
+remains on external-release hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

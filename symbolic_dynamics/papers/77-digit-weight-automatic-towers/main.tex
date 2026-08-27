@@ -1,0 +1,717 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Orb}{\operatorname{Orb}}
+\newcommand{\Per}{\operatorname{Per}}
+\newcommand{\htop}{h_{\mathrm{top}}}
+\newcommand{\zz}{\mathbf 0}
+\newcommand{\zero}{0^{\Z}}
+\newcommand{\pq}{P_q}
+
+\title[Digit-weight automatic towers]{Digit-Weight Automatic Towers:\\
+Cantor--Bendixson Layers, Nilpotent Cellular Automata, and Conjugacy Rigidity}
+\author{Anonymous}
+\date{Internal preprint, 27 August 2026}
+\subjclass[2020]{37B10, 68R15, 11B85, 54G12}
+\keywords{automatic sequence, countable subshift, Cantor--Bendixson rank, cellular automaton, endomorphism monoid, conjugacy rigidity}
+
+\begin{document}
+
+\begin{abstract}
+Fix integers $q\geq2$ and $d\geq1$, and mark the nonnegative integers whose
+base-$q$ expansion has exactly $d$ digits equal to $1$ and every other digit
+equal to $0$.  We determine the two-sided orbit closure of this indicator
+sequence.  It is a countable transitive subshift consisting of one fixed
+point and exactly $d+1$ free shift orbits, indexed by the number of retained
+digits.  Its Cantor--Bendixson derivatives delete these orbits one at a time,
+and its height is $d+2$.  Centered limits define continuous lowering cellular
+automata $D_r$.  They generate, together with the shift, the full
+endomorphism monoid:
+\[
+ \End(X_{q,d})=\{\zz\}\cup
+ \{\sigma^aD_r:a\in\Z,\ 0\leq r\leq d\},
+\]
+with truncated-addition composition and an absorbing zero.  Consequently
+$\Aut(X_{q,d})\cong\Z$.  We also prove arithmetic rigidity:
+$X_{q,d}$ and $X_{p,e}$ are conjugate exactly when $(q,d)=(p,e)$.  The only
+invariant probability is the point mass at the zero configuration, and the
+entropy is zero.  The exponential-support case $d=1$ is treated as an owned
+base case; the residual contribution is the exact package for $d\geq2$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+For $q\geq2$ and $d\geq1$, let
+\[
+ S_{q,d}=\left\{\sum_{i\in A}q^i:
+ A\subseteq\N_0,\ |A|=d\right\}.
+\]
+Thus $S_{q,d}$ consists of integers whose base-$q$ expansion has exactly
+$d$ unit digits and no other nonzero digits.  Its indicator is $q$-automatic:
+a finite automaton rejects digits outside $\{0,1\}$ and counts unit digits up
+to $d$.  This is a direct instance of the classical automatic-sequence
+framework initiated by Cobham \cite{Cobham1972}.  Sparse automatic supports
+and their polylogarithmic growth have a substantial general theory; a recent
+graph-theoretic account and precise ownership map are given by Wessel
+\cite{Wessel2025}.
+
+We study a different invariant: the complete two-sided orbit closure of the
+indicator, including its topology and every continuous shift-commuting
+self-map.  The answer is a finite tower of countably infinite orbits.  A
+bounded difference of two fixed-cardinality sums of $q$-powers forces their
+escaping exponent sets to agree.  This arithmetic rigidity classifies every
+centered limit, including the binary case where an informal ``no carry''
+argument would be insufficient.  The same classification makes the natural
+layer-lowering maps continuous.
+
+The endomorphism calculation is then forced by transitivity.  An endomorphism
+is determined by the image of the generating point.  Every possible image is
+realized by a shift followed by a lowering map, and the lowering maps form a
+nilpotent chain.  The return scales from the top layer to the next layer are
+the powers of $q$; requiring these scales in both directions under a
+conjugacy recovers the base itself, including when the two bases are powers
+of a common integer.
+
+The case $d=1$ is not claimed as a new system.  Gheorghiciuc treats the exact
+exponential occurrence function $G(n)=q^{n-1}$ and its word complexity
+\cite{Gheorghiciuc2007}.  Salo and T\"orm\"a explicitly use the binary
+powers-of-two orbit closure, with a slightly different initial-index
+convention, as a one-dimensional gadget \cite{SaloTorma2012}.  General
+automatic points in automatic systems and under factor maps are now
+characterized through quasi-fixed points \cite{Krawczyk2026}.  We retain
+$d=1$ in all theorem statements because it is the first level of the same
+proof, but our novelty claims concern $d\geq2$.
+
+The precise residual package is:
+\begin{enumerate}
+\item the exact orbit decomposition and Cantor--Bendixson tower;
+\item continuous lowering cellular automata and the full endomorphism
+monoid, not merely the automorphism group;
+\item conjugacy rigidity in both parameters $(q,d)$;
+\item the complete periodic-point and invariant-measure description.
+\end{enumerate}
+A bounded primary-source search through 27 August 2026, covering the exact
+defining equation, fixed-digit-weight automatic sets, powers-of-two orbit
+closures, countable automatic systems, and endomorphism calculations, found
+no source stating this combined $d\geq2$ package.  This is a bounded search
+report, not a claim of absolute priority.
+
+\section{Setup and the main theorem}
+
+Write $\N_0=\{0,1,2,\ldots\}$.  For a finite set $A\subseteq\N_0$, put
+\[
+ \pq(A)=\sum_{i\in A}q^i.
+\]
+The map $\pq$ is injective because its values have base-$q$ digits in
+$\{0,1\}$.  Set $S_{q,0}=\{0\}$ and define $x_{q,s}\in\{0,1\}^{\Z}$ by
+\[
+ x_{q,s}(n)=\begin{cases}
+ 1,&n\in S_{q,s},\\
+ 0,&n\notin S_{q,s}.
+ \end{cases}
+\]
+In particular, $x_{q,0}$ is the single marker at the origin.  We use the
+left shift
+\[
+ (\sigma^a x)(n)=x(n+a),
+ \qquad \supp(\sigma^a x)=\supp(x)-a.
+\]
+Let
+\[
+ X_{q,d}=\overline{\{\sigma^a x_{q,d}:a\in\Z\}},
+ \qquad
+ \cO_s=\{\sigma^a x_{q,s}:a\in\Z\}.
+\]
+The symbol $\zero$ denotes the all-zero configuration.  We reserve $\zz$ for
+the constant map with value $\zero$.
+
+By an endomorphism we mean a continuous map $F:X_{q,d}\to X_{q,d}$ satisfying
+$F\sigma=\sigma F$; surjectivity is not part of the definition.  Hedlund's
+theorem \cite{Hedlund1969} identifies these maps with sliding block codes on
+the subshift.
+
+\begin{theorem}[main theorem]\label{thm:main}
+For $q\geq2$ and $d\geq1$, the following hold.
+\begin{enumerate}
+\item The orbit decomposition is the disjoint union
+\begin{equation}\label{eq:orbit-decomposition}
+ X_{q,d}=\{\zero\}\sqcup\bigsqcup_{s=0}^{d}\cO_s.
+\end{equation}
+\item For $0\leq j\leq d$,
+\begin{equation}\label{eq:derivatives}
+ X_{q,d}^{(j)}=\{\zero\}\cup
+ \bigcup_{s=0}^{d-j}\cO_s,
+\end{equation}
+while $X_{q,d}^{(d+1)}=\{\zero\}$ and
+$X_{q,d}^{(d+2)}=\varnothing$.  Hence the Cantor--Bendixson height is
+$d+2$.
+\item There are continuous lowering maps $D_r$, $0\leq r\leq d$, such that
+\begin{equation}\label{eq:lowering-definition}
+ D_r(\zero)=\zero,
+ \qquad
+ D_r(\sigma^a x_{q,s})=
+ \begin{cases}
+ \sigma^a x_{q,s-r},&s\geq r,\\
+ \zero,&s<r.
+ \end{cases}
+\end{equation}
+They satisfy $D_0=\mathrm{id}$ and
+\begin{equation}\label{eq:lowering-composition}
+ D_rD_t=
+ \begin{cases}
+ D_{r+t},&r+t\leq d,\\
+ \zz,&r+t>d.
+ \end{cases}
+\end{equation}
+\item The full endomorphism monoid is
+\begin{equation}\label{eq:end-monoid}
+ \End(X_{q,d})=\{\zz\}\cup
+ \{\sigma^aD_r:a\in\Z,\ 0\leq r\leq d\}.
+\end{equation}
+Its multiplication is
+\begin{equation}\label{eq:end-multiplication}
+ (\sigma^aD_r)(\sigma^bD_t)=
+ \begin{cases}
+ \sigma^{a+b}D_{r+t},&r+t\leq d,\\
+ \zz,&r+t>d.
+ \end{cases}
+\end{equation}
+Consequently $\Aut(X_{q,d})=\langle\sigma\rangle\cong\Z$.
+\item If $p\geq2$ and $e\geq1$, then
+\begin{equation}\label{eq:conjugacy-rigidity}
+ (X_{q,d},\sigma)\cong(X_{p,e},\sigma)
+ \quad\Longleftrightarrow\quad (q,d)=(p,e).
+\end{equation}
+\item The only periodic point is $\zero$, the unique invariant Borel
+probability is $\delta_{\zero}$, and $\htop(X_{q,d})=0$.
+\end{enumerate}
+\end{theorem}
+
+The restriction $d,e\geq1$ in the rigidity statement is necessary.  At
+$d=0$, the orbit closure of the single marker is independent of $q$.
+
+\section{Bounded differences of digital sums}
+
+The following lemma is the arithmetic engine of every limit argument below.
+
+\begin{lemma}[bounded-difference rigidity]\label{lem:bounded-difference}
+Fix $q\geq2$ and $M\geq0$.  Let $(A_j)$ and $(B_j)$ be sequences of finite
+subsets of $\N_0$ with $|A_j|,|B_j|\leq M$.  Suppose that
+\[
+ |\pq(A_j)-\pq(B_j)|\leq C
+\]
+for a constant $C$ independent of $j$.  After passing to a subsequence,
+there are fixed finite sets $A,B\subseteq\N_0$ and finite sets $E_j$ such
+that
+\begin{equation}\label{eq:common-escape}
+ A_j=A\sqcup E_j,
+ \qquad B_j=B\sqcup E_j,
+ \qquad \min E_j\longrightarrow\infty,
+\end{equation}
+where the last condition is vacuous when $E_j$ is empty.
+\end{lemma}
+
+\begin{proof}
+The indicator functions of subsets of $\N_0$ lie in the compact product
+space $\{0,1\}^{\N_0}$.  A diagonal extraction makes membership of every
+fixed exponent eventually constant in both sequences.  Let $A$ and $B$ be
+the respective pointwise limits.  They are finite and have cardinality at
+most $M$: otherwise $M+1$ distinct exponents would eventually belong to one
+of the approximating sets.
+
+After discarding finitely many indices, write
+\[
+ A_j=A\sqcup A'_j,
+ \qquad B_j=B\sqcup B'_j,
+\]
+where the least exponent in $A'_j\cup B'_j$ tends to infinity whenever that
+union is nonempty.  Remove the common part
+$E_j=A'_j\cap B'_j$, and put
+\[
+ U_j=A'_j\setminus E_j,
+ \qquad V_j=B'_j\setminus E_j.
+\]
+The sets $U_j$ and $V_j$ are disjoint.  Moreover,
+\[
+ |\pq(U_j)-\pq(V_j)|
+ \leq C+\pq(A)+\pq(B)=:C'.
+\]
+If $U_j\cup V_j$ is nonempty, let $m_j$ be its least exponent.  Then
+$\pq(U_j)-\pq(V_j)$ is divisible by $q^{m_j}$.  For large $j$, one has
+$q^{m_j}>C'$, so this difference must be zero.  Injectivity of $\pq$ gives
+$U_j=V_j$; disjointness then forces both sets to be empty.  Thus
+$A'_j=B'_j=E_j$ for all sufficiently large $j$, proving
+\eqref{eq:common-escape}.
+\end{proof}
+
+The proof uses divisibility only after every stable low exponent has been
+removed.  It therefore covers $q=2$ without assuming that subtraction is
+carry-free.
+
+\section{Centered limits and orbit decomposition}
+
+\begin{proposition}[centered-limit normal form]\label{prop:centered-limits}
+Fix $0\leq s\leq d$.  Suppose
+\[
+ \sigma^{n_j}x_{q,s}\longrightarrow y\neq\zero.
+\]
+After passing to a subsequence, there exist $t\in\{0,\ldots,s\}$, an integer
+$a$, and sets $E_j\subseteq\N_0$ such that
+\begin{equation}\label{eq:center-normal-form}
+ |E_j|=s-t,
+ \qquad \min E_j\longrightarrow\infty,
+ \qquad n_j=a+\pq(E_j),
+\end{equation}
+and
+\begin{equation}\label{eq:center-limit}
+ y=\sigma^a x_{q,t}.
+\end{equation}
+Conversely, every sequence satisfying \eqref{eq:center-normal-form}
+converges as in \eqref{eq:center-limit}.
+\end{proposition}
+
+\begin{proof}
+Choose $k_0\in\Z$ with $y(k_0)=1$.  Coordinatewise convergence in the
+discrete alphabet implies that, for all sufficiently large $j$,
+\[
+ n_j+k_0=\pq(A_j)
+\]
+for a unique $s$-element set $A_j$.  Pass to a subsequence on which the
+membership of every fixed exponent stabilizes.  There is then a fixed finite
+set $B$ and sets $E_j$ whose least exponents tend to infinity such that
+\[
+ A_j=B\sqcup E_j.
+\]
+After one further extraction, $|E_j|$ is constant.  Put
+$t=|B|$ and $a=\pq(B)-k_0$.  This gives
+\eqref{eq:center-normal-form}.
+
+We identify the support of $y$.  If $a+k=\pq(C)$ for a $t$-element set
+$C$, then $C\cap E_j=\varnothing$ for large $j$, and
+\[
+ n_j+k=\pq(E_j\sqcup C)\in S_{q,s}.
+\]
+Hence $y(k)=1$.  Conversely, suppose $y(k)=1$.  For large $j$ there are
+$s$-element sets $C_j$ satisfying
+\[
+ \pq(C_j)=n_j+k,
+ \qquad
+ \pq(C_j)-\pq(A_j)=k-k_0.
+\]
+Apply \cref{lem:bounded-difference} to $(C_j)$ and $(A_j)$.  The stable
+part of $(A_j)$ is $B$, so the lemma gives a fixed $t$-element set $C$ and,
+after relabelling the common escaping part, $C_j=C\sqcup E_j$.  Therefore
+\[
+ \pq(C)-\pq(B)=k-k_0,
+ \qquad \pq(C)=a+k.
+\]
+We have proved
+\[
+ y(k)=1\quad\Longleftrightarrow\quad a+k\in S_{q,t},
+\]
+which is exactly $y=\sigma^a x_{q,t}$.
+
+For the converse, assume \eqref{eq:center-normal-form}.  If
+$a+k\in S_{q,t}$, adjoining its unique $t$ exponents to $E_j$ proves that
+$n_j+k\in S_{q,s}$ for large $j$.  If $n_j+k\in S_{q,s}$ along an infinite
+subsequence, compare the representing $s$-element sets with $E_j$ by
+\cref{lem:bounded-difference}; it follows that $a+k\in S_{q,t}$.  Thus every
+coordinate converges to that of $\sigma^a x_{q,t}$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}(1)]
+Every nonzero limit of shifts of $x_{q,d}$ belongs to one of the displayed
+orbits by \cref{prop:centered-limits}.  The zero configuration also occurs:
+$\sigma^{-j}x_{q,d}\to\zero$ as $j\to\infty$, since the support of
+$x_{q,d}$ is contained in $\N_0$.  Conversely, for $0\leq t\leq d$, choose
+$(d-t)$-element sets $E_j$ whose least exponent tends to infinity.
+\Cref{prop:centered-limits} gives
+\[
+ \sigma^{\pq(E_j)}x_{q,d}\longrightarrow x_{q,t},
+\]
+and shifting this convergence produces every point of $\cO_t$.
+
+It remains to verify disjointness.  Every nonzero point in $\cO_t$ has
+counting function
+\[
+ \#\bigl(\supp(x)\cap[-N,N]\bigr)=\Theta((\log N)^t)
+\]
+for $t\geq1$, while points of $\cO_0$ have singleton support.  Translation
+does not change the exponent of this polylogarithmic growth, so different
+layers cannot meet.  Indeed, the upper bound follows because every exponent
+in a representation of a point of $S_{q,t}\cap[0,N]$ is at most
+$\lfloor\log_q N\rfloor$, while the lower bound follows by choosing all $t$
+exponents below $\lfloor\log_q(N/t)\rfloor$; injectivity of $\pq$ makes these
+choices distinct.  Within one layer, a nonzero period would make a
+nonempty support that is bounded below invariant under a nonzero
+translation, which is impossible.  Thus every $\cO_t$ is a free orbit.
+\end{proof}
+
+\section{The Cantor--Bendixson tower}
+
+Let
+\[
+ Y_s=\{\zero\}\cup\bigcup_{t=0}^{s}\cO_t,
+ \qquad 0\leq s\leq d.
+\]
+
+\begin{lemma}[one orbit removed at a time]\label{lem:one-orbit}
+For $s\geq1$, the derived set of $Y_s$ is $Y_{s-1}$, while the derived set
+of $Y_0$ is $\{\zero\}$ and the derived set of $\{\zero\}$ is empty.
+\end{lemma}
+
+\begin{proof}
+Every point $\sigma^a x_{q,t}$ with $t<s$ is approached by points of
+$\cO_s$: choose $(s-t)$-element escaping sets $E_j$ and use
+\[
+ \sigma^{a+\pq(E_j)}x_{q,s}\longrightarrow\sigma^a x_{q,t}.
+\]
+The zero configuration is an accumulation point of every $Y_s$: for
+$s=0$, translate the single marker to infinity; for $s\geq1$, use
+$\sigma^{-j}x_{q,s}\to\zero$.
+
+We show that every point of $\cO_s$ is isolated in $Y_s$.  Otherwise a
+sequence of distinct points of $Y_s$ would converge to a point of $\cO_s$.
+After taking a subsequence, all points lie in one layer $\cO_t$, $t\leq s$.
+If their shift parameters are unbounded, \cref{prop:centered-limits} says
+that every nonzero limit belongs to a layer of index strictly below $t$.
+It therefore cannot lie in $\cO_s$.  If the parameters are bounded, a
+subsequence is constant; freeness of the orbit then contradicts distinctness.
+This proves $(Y_s)'=Y_{s-1}$.
+
+The same argument for $Y_0$ says that all single-marker points are isolated
+and their shifts accumulate only at $\zero$.  Finally, the singleton
+$\{\zero\}$ has empty derived set.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}(2)]
+Since $X_{q,d}=Y_d$, iterating \cref{lem:one-orbit} gives
+\eqref{eq:derivatives}, followed by $\{\zero\}$ and then the empty set.  In
+the convention where the height is the least ordinal with empty derivative,
+the height is $d+2$.  Equivalently, it is the least stable derivative index.
+The point rank of every member of $\cO_s$ is $d-s$, and the point rank of
+$\zero$ is $d+1$.
+\end{proof}
+
+For example, when $d=1$ the derivative chain is
+\[
+ X_{q,1}\supset \cO_0\cup\{\zero\}
+ \supset\{\zero\}\supset\varnothing.
+\]
+This makes the otherwise easy off-by-one error visible.
+
+\section{Lowering maps and their continuity}
+
+The orbit decomposition makes \eqref{eq:lowering-definition} a well-defined
+set map.  Shift commutation is immediate.  Its continuity is the nonlocal
+point of the construction.
+
+\begin{proposition}[continuity of lowering]\label{prop:lowering-continuity}
+For each $0\leq r\leq d$, the map $D_r$ in
+\eqref{eq:lowering-definition} is continuous.  Hence it is a cellular
+automaton on $X_{q,d}$.
+\end{proposition}
+
+\begin{proof}
+Because $X_{q,d}$ is compact metrizable, it suffices to prove sequential
+continuity.  Let $y_j\to y$.  There are only finitely many layers, so every
+subsequence has a further subsequence which either consists entirely of
+$\zero$ or lies in a fixed nonzero layer.  The former case is immediate.  In
+the latter case, write
+\[
+ y_j=\sigma^{n_j}x_{q,s}.
+\]
+We prove that its $D_r$-images have a further subsequence converging to
+$D_r(y)$.  This subsequence criterion implies convergence of the full image
+sequence.
+
+First suppose $y=\sigma^a x_{q,t}$ is nonzero.  By
+\cref{prop:centered-limits}, after a further extraction the centers have
+the form
+\[
+ n_j=a+\pq(E_j),
+ \qquad |E_j|=s-t,
+ \qquad \min E_j\to\infty.
+\]
+If $s<r$, then $t\leq s<r$ and both $D_r(y_j)$ and $D_r(y)$ are zero.  Assume
+$s\geq r$.  If $t\geq r$, then
+\[
+ D_r(y_j)=\sigma^{n_j}x_{q,s-r}
+ \longrightarrow \sigma^a x_{q,t-r}=D_r(y)
+\]
+by the converse half of \cref{prop:centered-limits}.
+
+If $t<r$, we claim that $D_r(y_j)\to\zero$.  Were there a nonzero sublimit,
+\cref{prop:centered-limits} would express the same centers as
+\[
+ n_j=b+\pq(F_j),
+ \qquad |F_j|\leq s-r,
+ \qquad \min F_j\to\infty.
+\]
+The difference $\pq(E_j)-\pq(F_j)=b-a$ is bounded.  Applying
+\cref{lem:bounded-difference} to the two escaping families forces
+$|E_j|=|F_j|$ eventually.  This is impossible because
+\[
+ |E_j|=s-t>s-r\geq|F_j|.
+\]
+Thus the only sublimit is $\zero=D_r(y)$.
+
+It remains to consider $y=\zero$.  If $D_r(y_j)$ had a nonzero sublimit,
+then necessarily $s\geq r$ (the case $s<r$ is identically zero), and
+the same normal form would give
+\[
+ n_j=b+\pq(F_j),
+ \qquad |F_j|=h\leq s-r
+\]
+after a further extraction.  The sets $F_j$ escape to infinity.
+Applying the converse part of \cref{prop:centered-limits} to the original
+layer $s$ would then give the nonzero limit
+$\sigma^b x_{q,s-h}$, where $s-h\geq r$, contradicting
+$y_j\to\zero$.  Therefore $D_r(y_j)\to\zero$.
+
+The map is continuous and commutes with $\sigma$.  Hedlund's theorem now
+supplies a finite-radius local rule, so $D_r$ is a cellular automaton.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}(3)]
+Only the composition law remains.  On a layer $\cO_s$, applying $D_t$ and
+then $D_r$ lowers the index by $r+t$ when $s\geq r+t$ and gives $\zero$
+otherwise.  This is $D_{r+t}$ when $r+t\leq d$.  If $r+t>d$, every layer is
+sent to $\zero$, so the composite is $\zz$.
+\end{proof}
+
+In particular, $D_1^{d+1}=\zz$.  The law is truncation to an absorbing zero,
+not saturation at the bottom nonzero layer.
+
+\section{The full endomorphism monoid}
+
+\begin{proof}[Proof of \cref{thm:main}(4)]
+The orbit of $x_{q,d}$ is dense in $X_{q,d}$.  Consequently two continuous
+shift-commuting maps that agree on $x_{q,d}$ agree on its orbit and hence on
+all of $X_{q,d}$.
+
+Let $F\in\End(X_{q,d})$.  If $F(x_{q,d})=\zero$, then
+$F(\sigma^a x_{q,d})=\zero$ for every $a$, so continuity and density give
+$F=\zz$.  Otherwise \eqref{eq:orbit-decomposition} gives unique
+$a\in\Z$ and $0\leq s\leq d$ such that
+\[
+ F(x_{q,d})=\sigma^a x_{q,s}.
+\]
+The endomorphism $\sigma^aD_{d-s}$ has the same value at $x_{q,d}$, hence
+$F=\sigma^aD_{d-s}$.  This proves that \eqref{eq:end-monoid} contains every
+endomorphism; \cref{prop:lowering-continuity} proves the reverse inclusion.
+
+The displayed maps are distinct.  Different lowering indices send
+$x_{q,d}$ to different layers.  At a fixed lowering index, different shift
+exponents give different points because every nonzero orbit is free.  The
+constant map is separate.  Since the lowering maps commute with the shift,
+\eqref{eq:end-multiplication} follows from
+\eqref{eq:lowering-composition}.
+
+For $r>0$, the image of $\sigma^aD_r$ misses the top $r$ layers; $\zz$ is
+also not invertible.  Every $\sigma^aD_0=\sigma^a$ is invertible.  The units
+are therefore precisely the shift powers, proving
+$\Aut(X_{q,d})\cong\Z$.
+\end{proof}
+
+\begin{remark}[surjective convention]
+Some authors reserve ``endomorphism'' for onto shift-commuting maps.  Under
+that convention the preceding proof shows that the surjective endomorphism
+monoid equals the automorphism group $\langle\sigma\rangle$.  Throughout this
+paper, $\End$ uses the broader cellular-automaton convention.
+\end{remark}
+
+\section{Conjugacy rigidity}
+
+We first isolate the arithmetic consequence of a one-digit degeneration.
+
+\begin{lemma}[one-digit return scales]\label{lem:one-digit-scales}
+Let $p\geq2$, $s\geq1$, and $u_j\to+\infty$.  If
+\[
+ \sigma^{u_j}x_{p,s}\longrightarrow\sigma^b x_{p,s-1},
+\]
+then for all sufficiently large $j$ there is an exponent $m_j\in\N_0$ such
+that
+\begin{equation}\label{eq:one-digit-centers}
+ u_j=b+p^{m_j}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Every subsequence has, by \cref{prop:centered-limits}, a further subsequence
+of the form $u_j=a+p^{m_j}$ whose limit is $\sigma^a x_{p,s-1}$.  Freeness of
+$\cO_{s-1}$ forces $a=b$.  If \eqref{eq:one-digit-centers} failed along
+infinitely many indices, applying this argument to precisely those indices
+would give a contradiction.
+\end{proof}
+
+\begin{lemma}[two-sided exponential matching]\label{lem:exponential-matching}
+Let $p,q\geq2$.  Suppose that for all sufficiently large $N$ there are
+integers $m_N$ and a fixed integer $K$ such that
+\begin{equation}\label{eq:exponential-difference}
+ q^N-p^{m_N}=K.
+\end{equation}
+Then $q=p^u$ for an integer $u\geq1$, and in fact $K=0$ and $m_N=uN$
+eventually.  If the analogous conclusion also holds with $p$ and $q$
+interchanged, then $p=q$.
+\end{lemma}
+
+\begin{proof}
+The right side of $p^{m_N}=q^N-K$ is eventually strictly increasing, so
+$m_N$ is eventually strictly increasing.  Dividing consecutive equations
+gives
+\[
+ p^{m_{N+1}-m_N}
+ =\frac{q^{N+1}-K}{q^N-K}\longrightarrow q.
+\]
+The left side lies in the discrete set $\{p,p^2,\ldots\}$.  It is therefore
+eventually constant and equal to $q$, so $q=p^u$ for some $u\geq1$.  Next,
+\[
+ p^{m_N-uN}=\frac{p^{m_N}}{q^N}\longrightarrow1.
+\]
+This is a sequence in the discrete set $p^{\Z}$, hence it eventually equals
+$1$.  Thus $m_N=uN$ and \eqref{eq:exponential-difference} gives $K=0$.
+
+If also $p=q^v$ for an integer $v\geq1$, then
+$q=q^{uv}$.  Since $q>1$, one has $uv=1$, so $u=v=1$ and $p=q$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:main}(5)]
+The forward implication is immediate when $(q,d)=(p,e)$.  Conversely, let
+$H:X_{q,d}\to X_{p,e}$ be a conjugacy.  Cantor--Bendixson height is a
+topological invariant, so $d+2=e+2$ and hence $d=e$.
+
+The isolated points of $X_{q,d}$ are exactly $\cO_d$, while the points of
+rank one are exactly $\cO_{d-1}$.  Thus there are integers $b,c$ with
+\[
+ H(x_{q,d})=\sigma^c x_{p,d},
+ \qquad
+ H(x_{q,d-1})=\sigma^b x_{p,d-1}.
+\]
+For every $N$,
+\[
+ \sigma^{q^N}x_{q,d}\longrightarrow x_{q,d-1}.
+\]
+Applying $H$ and using shift commutation gives
+\[
+ \sigma^{q^N+c}x_{p,d}\longrightarrow\sigma^b x_{p,d-1}.
+\]
+By \cref{lem:one-digit-scales},
+\[
+ q^N+c=b+p^{m_N}
+\]
+for all sufficiently large $N$.  Hence
+$q^N-p^{m_N}=b-c$ and \cref{lem:exponential-matching} gives $q=p^u$.
+Applying the same argument to $H^{-1}$ gives $p=q^v$.  The last part of
+\cref{lem:exponential-matching} yields $p=q$.
+\end{proof}
+
+The inverse conjugacy is essential.  For example, every power of $4$ is a
+power of $2$, but the odd powers of $2$ have no matching return scale in base
+$4$.
+
+\section{Periodic points, invariant measures, and entropy}
+
+\begin{proof}[Proof of \cref{thm:main}(6)]
+The point $\zero$ is fixed.  Every other point has a nonempty support bounded
+below.  If such a point had nonzero period $k$, its support would be invariant
+under translation by $k$ and would consequently be unbounded in both
+directions.  This contradiction proves
+\[
+ \Per(X_{q,d})=\{\zero\}.
+\]
+
+The space $X_{q,d}$ is countable by \eqref{eq:orbit-decomposition}.  Let
+$\mu$ be an invariant Borel probability.  All atoms on a fixed infinite
+orbit have the same mass.  That mass must be zero, since otherwise the orbit
+would have infinite total mass.  There are only finitely many such orbits,
+so their union has measure zero.  Therefore
+$\mu(\{\zero\})=1$ and $\mu=\delta_{\zero}$.
+
+The measure-theoretic entropy of $\delta_{\zero}$ is zero.  The variational
+principle for continuous maps of compact metric spaces now gives
+$\htop(X_{q,d})=0$.
+\end{proof}
+
+The system is therefore topologically transitive but uniquely ergodic on a
+fixed point; its transitive point is not recurrent.  The nontrivial structure
+is topological and functorial rather than measure-theoretic.
+
+\section{Ownership boundary and reproducible checks}
+
+The sequence $x_{q,1}$ has support $1,q,q^2,\ldots$.  Gheorghiciuc's
+exponential occurrence function is exactly this one-sided word and yields
+linear factor complexity \cite{Gheorghiciuc2007}.  In the binary case,
+Salo and T\"orm\"a call the orbit closure with markers at $2^n$, $n>0$, the
+binary powers-of-two shift \cite{SaloTorma2012}.  Their starting convention
+differs by one initial marker from ours.  These sources prevent any claim
+that the $d=1$ seed, exponential sparsity, or zero entropy is new.
+
+Cobham's theory owns automaticity \cite{Cobham1972}; Wessel and the sources
+therein own the general sparse-support dichotomy and automatic rank
+\cite{Wessel2025}; Krawczyk owns the general characterization of automatic
+points in an automatic system and its factors \cite{Krawczyk2026}.  None of
+those results is restated here as a contribution.  Our residual object is
+the $d\geq2$ tower, and the residual claims are the exact centered-limit
+normal form, Cantor--Bendixson filtration, full nilpotent endomorphism monoid,
+and two-parameter conjugacy rigidity.
+
+The accompanying script \texttt{code/verify\_digit\_weight.py} checks finite
+shadows of the fragile statements.  It tests many centered windows with
+nonconsecutive escaping exponents and nonzero phases, the absorbing
+truncated-addition law, a divisibility form of
+\cref{lem:bounded-difference}, and bidirectional return-scale separation.
+These computations are deterministic controls, not substitutes for the
+all-scale proofs.
+
+\section{Conclusion}
+
+Fixed unit-digit weight converts an elementary regular language into a
+countable transitive subshift with a rigid finite topological tower.  The
+same escaping-digit mechanism controls the orbit closure, every derivative,
+every cellular automaton, and every conjugacy.  The resulting endomorphism
+monoid is the product of integer shifts with a finite nilpotent lowering
+chain, completed by an absorbing zero.  The construction gives such a tower
+at every finite height at least three, while the base $q$ remains visible in
+the one-digit return scales.
+
+Two limitations are deliberate.  First, the paper treats only unit digits;
+allowing arbitrary nonzero digit values introduces genuine carry relations.
+Second, the ownership statement is bounded to the primary-source search
+described above and does not assert absolute priority.  Both extensions are
+natural directions for further work.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
