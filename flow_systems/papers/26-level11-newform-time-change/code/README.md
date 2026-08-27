@@ -1,5 +1,28 @@
 # P26 code
 
+## Round 4
+
+`round4_hecke_correspondence.py` freezes the prime-to-11 weight-two double
+coset and builds four ledgers:
+
+1. exact branch endpoint/gluing identities;
+2. exact eta-product Hecke coefficient identities plus a target-free
+   nonmodular control;
+3. exact permutation-cycle owners with finite complete primitive-root
+   certificates; and
+4. direct complex period sums at two q-cutoff/quadrature configurations.
+
+The script tests the correspondence-cycle relation. It does not construct a
+single-prime/single-orbit rule or evaluate a dynamical zeta. Run its eight
+tests with:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_round4_hecke_correspondence.py
+```
+
+Canonical two-run reproduction is owned by
+`../experiments/reproduce_round4.sh`.
+
 ## Round 3
 
 `round3_conjugacy_owner.py` builds the exact bounded-conjugacy ledger and the

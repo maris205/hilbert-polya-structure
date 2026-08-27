@@ -24,6 +24,8 @@ Date: **2026-08-27**
 | Closest-prior audit | **COMPLETE, SEARCH-BOUNDED** — direct structural prior found |
 | Novelty positioning | **NARROWED** — explicit factorial-chain case study / ownership method, no absolute novelty claim |
 | Stage-1 paper research spine | **COMPLETE AS PLAN** — not manuscript prose |
+| Round-4 period-escape theorem | **`[PROVED]`** — finite-quotient orders of every fixed infinite-order owner diverge in a descending normal residual tower |
+| Round-4 finite audit | **PASS / REPRODUCIBLE** — 24 rows, 21/21 divisibility transitions, 8/8 tests, combined SHA-256 `2fcf33ed6c458339ac808d7b7007a240b7a588b0093249a90a35559f1ef2aa22` |
 | Residual bold hypothesis | **`[HEURISTIC]`** — renormalized tower statistic retains congruence splitting |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | A2--A4 | NOT_EVALUATED |
@@ -40,6 +42,10 @@ residual-tower control, decide whether to prove a genuinely broader owner
 criterion or submit only a short methodological case study, and complete a
 human citation/positioning check before any ARS Stage-2 draft.  Finite-level
 order growth cannot replace its owner or alter `Per(M_infinity)=empty`.
+Round 4 closes the broader owner criterion for fixed hyperbolic elements:
+their quotient orders and whole-`g`-loop closing times necessarily escape,
+while the
+inverse-limit periodic set remains empty.
 
 Evidence labels follow `skills/route-a-evaluator.md`.
 `PROVED_A1_OBSTRUCTION` is a local theorem-progress tag, while `UNASSIGNED` and

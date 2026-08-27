@@ -144,13 +144,35 @@ credit transfer false. The ledger is therefore a prerequisite contract, not
 the planned primitive magnetic-orbit ledger. The formal Route-A tuple remains
 unassigned.
 
+## Round-4 execution — 2026-08-27
+
+The first explicit Bolza primitive-owner seed ledger is now `[PROVED]` within
+the frozen source-compatible signed-field even subtype.  The published regular
+octagon side-pairing matrices give four generators of trace
+`2(1+sqrt(2))`; their translation length equals the proved Bolza systole, so
+they cannot be proper powers.  The polygon presentation's abelianization proves
+that `f_j` and `f_j^-1` are not conjugate in `Gamma`.  The Round-4 counting
+schema nevertheless treats `{f_j,f_j^-1}` as one inverse-paired primitive axis
+owner and uses the sign of equation (19)'s `k` only to distinguish trace
+branches; the nonconjugacy fact does not mint a second owner credit.
+
+Kordyukov--Taimanov Theorem 3 and equation (19) then supply trace and physical
+periods, total even-`N` action, Maslov index zero, ordered Poincare multipliers,
+and the signed trace denominator for `k=+-1,+-2,+-3`.  There are four axis
+owners, eight `|k|=1` branches, and 24 total signed trace branches per field;
+both fields therefore produce 48 rows.  Field reversal maps `(b,k)` to
+`(-b,-k)` on the same axis-owner ID.  Twelve tests and two byte-identical
+builds passed.  The ledger contains no target data and assigns no arithmetic
+labels.  It is explicitly incomplete outside the four side-pairing axes.
+
 ## Route mapping
 
 ```text
 PROPOSAL_STAGE=1
 ROUTE_A_SCOPE=A0-A1
 A0_SCREEN=ARITHMETIC_SUBSTRATE_PRESENT_PRIME_LINK_UNPROVED
-A1_SCREEN=PRIMITIVE_MAGNETIC_LEDGER_NOT_EXECUTED
+A1_PROGRESS=4_INVERSE_PAIRED_AXIS_OWNERS_PER_FIELD_48_SIGNED_K_BRANCH_ROWS
+A1_COMPLETENESS=NOT_COMPLETE_BOLZA_PRIMITIVE_SPECTRUM
 A4_ARCHITECTURE_NOTE=SEMICLASSICAL_TENSOR_POWER_FAMILY_NO_CREDIT_YET
 ROUND2_OWNER_LEMMA=PROVED
 ROUND2_OWNER_LEDGER=12_ROWS_REPLAY_PASS
@@ -159,6 +181,14 @@ FULL_ALL_N_ARBITRARY_TWIST_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
 ROUND3_EVEN_SUBSEQUENCE_TRACE_REGIME=SOURCE_BOUND
 ROUND3_EVEN_SUBSEQUENCE_MAGNETIC_ORBIT_OWNERSHIP=PROVED_UNDER_FROZEN_SUBTYPE
 ROUND3_FULL_ALL_N_SEQUENCE=OPEN
+ROUND4_BOLZA_GROUP_REPRESENTATION=SOURCE_LOCKED
+ROUND4_INVERSE_PAIRED_AXIS_OWNERS_PER_FIELD=4
+ROUND4_FIELD_AXIS_OWNER_PAIRS=8
+ROUND4_SIGNED_TRACE_BRANCHES_PER_FIELD=24
+ROUND4_ORIENTATION_OWNER_CREDIT=0
+ROUND4_SIGNED_FIELD_LEDGER_ROWS=48
+ROUND4_UNIT_TESTS=12_PASS
+ROUND4_COMPLETE_PRIMITIVE_ENUMERATION=false
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN
 FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
 FORMAL_A0_A4_TUPLE=UNASSIGNED
@@ -167,7 +197,7 @@ ROUTE_B_INVOCATION_ALLOWED=false
 GATES_A_E=NOT_REACHED
 ```
 
-## Primary sources checked on 2026-08-26
+## Primary sources checked through 2026-08-27
 
 - Katz, Katz, Schein, and Vishne, *Bolza Quaternion Order and Asymptotics of
   Systoles Along Congruence Subgroups*,
@@ -186,3 +216,9 @@ GATES_A_E=NOT_REACHED
   https://arxiv.org/abs/2202.06055.  Supports constant fields, line-bundle
   quantization, the magnetic Laplacian trace, the critical regime, and
   holonomy/action phases.
+- Ebbens, Iordanov, Teillaud, and Vegter, *Delaunay triangulations of
+  generalized Bolza surfaces*, https://doi.org/10.20382/jocg.v13i1a5 and
+  https://arxiv.org/abs/2103.05960, checked on 2026-08-27.  Equation (5)
+  supplies the opposite-side-pairing matrices, equation (6) the polygon
+  relator, and Theorem 2 the Bolza systole used by the Round-4 primitive-owner
+  certificate.

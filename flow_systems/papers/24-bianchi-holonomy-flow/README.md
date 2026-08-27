@@ -13,7 +13,10 @@ Working title: *Complex Lengths and Holonomy-Twisted Orbit Traces on a Bianchi F
   inverses through word length 5, plus a target-free holonomy shuffle.  Round 3
   has now constructed a separate rank-4 classical Schottky non-lattice control
   with an exact paired-round-disk ping-pong certificate and a deterministic
-  cyclic-word ledger through the same marked cutoff.
+  cyclic-word ledger through the same marked cutoff.  Round 4 replaces that
+  geometry-mismatched surrogate with the source-proved finite-volume,
+  one-cusped, non-arithmetic `5_2=m015` control and a replayable
+  high-precision complex-length prefix.
 - Primary arithmetic target: **Dedekind-zeta calibration for `Q(i)`**.  This does
   not confer Riemann-`zeta` A0 credit.
 - Formal Route-A tuple: **unassigned**.
@@ -75,6 +78,48 @@ in the claimed non-lattice/no-arithmetic-owner sense.
 The target-free primitive phase/length score is `0.0258111348`, versus
 `0.0234922291` after the frozen intrinsic holonomy shuffle.  This is a
 `[NUMERICAL_OBSERVATION]`, not an arithmetic verdict.
+
+## Round-4 finite-volume cusped control
+
+`[PROVED BY SOURCE CHAIN]`: the complement `Y=S^3\5_2`, identified rigorously
+with census manifold `m015`, is an orientable torsion-free finite-volume
+hyperbolic 3-manifold with one complete torus cusp, and it is non-arithmetic.
+HIKMOT Theorem 5.1 supplies the verified finite-volume hyperbolic structure;
+SnapPy's documented rigorous `True` isometry result binds `5_2` to `m015`; and
+Reid's arithmetic-knot-complement theorem supplies non-arithmeticity.  See the
+[source audit](notes/round4_source_audit.md) for exact links and inference
+ownership.
+
+This is the first P24 control matching all of the following candidate axes:
+
+```text
+orientable torsion-free hyperbolic dimension 3;
+finite volume and noncompact cusp geometry;
+unit-speed geodesic flow and arclength clock;
+primitive loxodromic classes with complex length and holonomy.
+```
+
+`[NUMERICAL_OBSERVATION]` under pinned `snappy==3.3.2`, real-length cutoff
+`3.05`:
+
+```text
+complex-length groups                          18
+primitive geodesic classes by multiplicity     31
+independent-algorithm prefix classes             9
+independent prefix groups                        6
+maximum complex-length residual                  2.2944e-31
+```
+
+The numerical ledger is not a Sage interval certificate.  Its 18 rows retain
+representative words, multiplicity, complex length, holonomy, orientation, and
+PSL trace square.  Finite volume and non-arithmeticity come from the theorem
+chain, not from these decimals.
+
+The match is still not complete: arithmetic owner, exact cusp count and
+covolume of the level-`(3)` Bianchi quotient, generator marking, length
+distribution, and a full primitive spectrum are unmatched.  No cross-system
+score is reported because the Bianchi side is a generator word ball while the
+new control uses a metric cutoff.
 
 ## Frozen dynamical system
 
@@ -165,6 +210,12 @@ not close the cross-system kill verdict, because only combinatorial marking and
 cutoff are matched and the Bianchi word ball is still not a complete primitive
 ledger.  The arithmetic-hypothesis verdict therefore remains `[OPEN]`.
 
+Round 4 closes the previously missing **finite-volume/cusp control-class**
+obligation: `5_2=m015` is a genuine non-arithmetic lattice control.  It still
+does not close the kill verdict.  A valid statistic now requires a shared
+enumeration rule; directly comparing the Round-2 Bianchi word ball with the
+Round-4 metric length prefix would mix incompatible ledgers.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -174,6 +225,10 @@ ledger.  The arithmetic-hypothesis verdict therefore remains `[OPEN]`.
 - [Round-2 validation](experiments/round2_validation.md)
 - [Round-3 Schottky-control conclusion](notes/round3_conclusion.md)
 - [Round-3 validation](experiments/round3_validation.md)
+- [Round-4 finite-volume-control conclusion](notes/round4_conclusion.md)
+- [Round-4 source audit](notes/round4_source_audit.md)
+- [Round-4 validation](experiments/round4_validation.md)
+- [Stage-1 paper spine](paper/stage1_research_spine.md)
 
 No manuscript, orbit-to-prime-ideal map, formal Route advancement, or quantum
 claim is made at this checkpoint.

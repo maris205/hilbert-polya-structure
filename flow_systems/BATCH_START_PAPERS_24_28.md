@@ -127,6 +127,31 @@ and next artifacts are recorded in the
 
 This checkpoint does not alter the frozen pre-execution constraints above.
 
+## Round-4 checkpoint
+
+Round 4 again gives all five projects an independent paper-facing result.  P24
+now has a source-proved finite-volume, one-cusped, non-arithmetic `5_2=m015`
+control and a numerical complex-length prefix.  P25 closes the methods audit on
+all 39 condition-aware fallback rows without upgrading the stopped
+half-density statistic.  P26 proves the correctly normalized Hecke
+correspondence relation on a finite closed-cycle sum and proves that the
+genus-one same-owner control also passes, so the discriminative Euler
+interpretation is `STOP_SCOPED`.  P27 proves quotient-order and whole-`g`-loop
+closing-time escape for every fixed infinite-order element in a normal residual
+tower.  P28 instantiates four source-locked, inverse-paired Bolza primitive axes
+as a 48-row signed-field/signed-`k` magnetic trace-branch ledger without double
+crediting inverse classes.
+
+The five Round-4 suites pass 45/45 tests and 5/5 deterministic replays.  The
+formal route boundary remains unchanged: Stage 1 / Route A A0--A1, tuples
+`0/5`, A2--A4 not evaluated, Route-B invocations `0/5`, Gates A--E not reached,
+and no Stage-2 manuscript authorization.  Full counts, theorem/numerical
+boundaries, artifact hashes, route-map correspondence, and the next five
+artifacts are recorded in the
+[Round-4 execution report](BATCH_ROUND4_PAPERS_24_28.md).
+
+This checkpoint does not alter the frozen pre-execution constraints above.
+
 ## Primary-source screen
 
 The 2026-08-26 source screen used original papers, journal records, arXiv, and

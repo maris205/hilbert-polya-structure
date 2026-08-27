@@ -1,4 +1,4 @@
-# P25 results — Rounds 2 and 3
+# P25 results — Rounds 2 through 4
 
 Generated artifacts:
 
@@ -52,3 +52,17 @@ All 2,241 rows are `NUMERICALLY_CERTIFIED` under the frozen Round-3 contract;
 `(-1)^word_length` times the positive-reflection paraxial trace.  The high-
 precision direct calculation is an independent dynamical calibration, not an
 exact determinant or arithmetic-specific result.
+
+## Round-4 conditioning audit
+
+- `round4_conditioning_by_length.csv` gives the complete length-2-through-12
+  partition, including method counts and residual envelopes;
+- `round4_fallback_audit.csv` exposes every one of the 39 fallback rows; and
+- `round4_conditioning_metrics.json` records the static dependency audit,
+  descriptive partitions, shared acceptance checks, inference boundary, and
+  unchanged Route firewalls.
+
+The method split is 2,202 direct-Newton rows and 39 stationarity-fallback rows.
+The fallback rows occur only at lengths 11 and 12 and all pass the frozen final
+contract.  These are `NUMERICALLY_CERTIFIED` ledger facts; the aggregate
+half-density remains a `NUMERICAL_OBSERVATION`.

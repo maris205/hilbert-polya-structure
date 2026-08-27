@@ -1,4 +1,37 @@
-# P28 results and planned orbit ledger
+# P28 results and owner ledgers
+
+## Round-4 explicit Bolza magnetic-owner seed
+
+`round4_bolza_magnetic_owner_ledger.csv` is the first genuine conjugacy/orbit
+artifact.  It contains 48 target-free rows:
+
+```text
+4 inverse-paired primitive side-pairing axis owners per field
+x 6 signed source branches (k=+-1,+-2,+-3)
+x 2 signed fields
+= 48 rows.
+```
+
+For each field there are four owner IDs, eight `|k|=1` primitive branches, and
+24 signed trace branches.  The 16 `|k|=1` rows across both fields are branch
+rows, not owner rows.  Every row records the inverse-pair definition, canonical
+and branch words, signed `k`, primitive versus repetition branch status,
+signed-`k` and field partners, the exact Bolza trace/norm/length, signed trace
+time, absolute physical period, project even-`N` action coefficient, phase,
+Maslov index, ordered `N_B^k,N_B^-k` Poincare multipliers, absolute stability
+root, equation-(19) signed denominator, and all regime firewalls.  Field
+reversal is `(b,axis,k)->(-b,same axis,-k)`.
+
+`f_j` and `f_j^-1` are recorded as nonconjugate in `Gamma`, but they share one
+inverse-paired axis-owner ID in this no-double-counting schema.  The negative
+branch is not a second owner credit.  `round4_bolza_group_certificate.json`
+records the published matrix source lock and 120-decimal transcription replay;
+`round4_bolza_owner_validation.json` records `PASS`.
+
+The exact scope is four primitive side-pairing owners only.  This is not a
+complete Bolza primitive or systolic spectrum.  It assigns no rational-prime
+or prime-ideal labels, and it does not contain eigenvalues or numerically
+integrated trajectories.
 
 ## Round-3 source-bound trace contract
 
@@ -27,10 +60,10 @@ The `h=1/N` column is a `MODELING_CHOICE`; the rescaled operator and trace
 regime remain `UNASSIGNED`, the energy window remains `OPEN`, and all orbit
 ownership fields remain `NOT_ESTABLISHED`.
 
-## Planned magnetic-orbit ledger
+## Extension schema beyond the Round-4 seed
 
-No magnetic-orbit data is claimed.  Planned
-`bolza_semiclassical_tensor_trace_ledger.csv` columns:
+The Round-4 seed now instantiates the central owner columns.  A later
+bounded-length census and non-arithmetic control must extend it with:
 
 ```text
 field_b,bundle_degree,tensor_power_N,energy_window,trace_regime,
@@ -57,10 +90,12 @@ Schema semantics:
 
 The `b=0,+1/2,-1/2` runs must share the same `tensor_power_N`, energy-window
 convention, trace regime, normalization, and orbit-selection rule.  Future
-numerical orbit rows may cite `PROVED` trace ownership only for the frozen
+orbit rows may cite `PROVED` trace ownership only for the frozen
 source-compatible signed-field even subsequence and only with its clock and
-orientation conventions.  Zero-field, odd-`N`, arbitrary-twist, full all-`N`,
-and fixed-operator rows remain `OPEN` / `NOT_ESTABLISHED`.
+signed-`k`/inverse-pair conventions.  A new row also needs a certified group normal form
+or another explicit conjugacy/completeness certificate.  Zero-field, odd-`N`,
+arbitrary-twist, full all-`N`, and fixed-operator rows remain `OPEN` /
+`NOT_ESTABLISHED`.
 
 ```text
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN

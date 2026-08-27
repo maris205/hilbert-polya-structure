@@ -23,6 +23,29 @@ Orbits: an Explicit Congruence-Tower Ownership Audit*
   aperiodicity theorem.  The candidate contribution is narrowed to the explicit
   `Gamma(3 n!)` specialization, its sign-sensitive residual proof, the
   reproducible finite-level order ledger, and the finite-owner firewall.
+- Round-4 theorem: **`[PROVED]` period escape**.  In any descending normal
+  finite-index tower with trivial intersection, the finite-quotient orders of
+  every infinite-order element divide forward and tend to infinity.  Hence the
+  whole-`g`-loop closing times of every fixed hyperbolic owner escape to
+  infinity.  This is the minimal time among whole traversals of the selected
+  `g`-loop; without a conjugacy-primitivity proof it is not called the
+  underlying flow orbit's minimal period.  The 24 frozen rows validate the
+  finite prefix; they do not prove the asymptotic theorem.
+
+### Round-4 period-escape result — 2026-08-27
+
+For `o_n=ord(g Gamma_n)` in `Gamma_1/Gamma_n`, normal tower maps give
+`o_n | o_(n+1)`.  If this sequence were bounded, it would be eventually
+constant, forcing a positive power of the infinite-order element `g` into
+`intersection_n Gamma_n={e}`.  This contradiction proves `o_n -> infinity`
+and therefore the whole-`g`-loop closing time `o_n ell(g) -> infinity` for
+hyperbolic lifts.
+
+The exact specialization applies to `Gamma(3 n!)`.  The executable audit
+rechecks all 21 divisibility transitions for the three frozen elements; their
+last-to-first order growth factors are `288`, `2880`, and `576`.  The theorem
+strengthens the finite-owner firewall without reviving a general novelty claim.
+See the [Round-4 theorem](notes/round4_period_escape_theorem.md).
 
 ### Round-3 closest-prior result — 2026-08-27
 
@@ -147,6 +170,8 @@ formal evidence tokens.
 - [Round-2 conclusion and owner firewall](notes/round2_conclusion.md)
 - [Round-3 closest-prior audit](notes/round3_closest_prior_audit.md)
 - [Round-3 conclusion](notes/round3_conclusion.md)
+- [Round-4 period-escape theorem](notes/round4_period_escape_theorem.md)
+- [Round-4 reproducibility receipt](experiments/round4_reproducibility_receipt.json)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
 

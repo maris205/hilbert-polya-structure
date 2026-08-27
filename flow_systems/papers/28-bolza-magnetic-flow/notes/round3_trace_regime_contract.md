@@ -176,15 +176,19 @@ SEMICLASSICAL_EVEN_SUBSEQUENCE_MAGNETIC_ORBIT_OWNERSHIP=PROVED
 ```
 
 The negative-field even subsequence follows by the antiunitary duality and
-classical time reversal proved in Round 2.  We pair a positive-field oriented
-owner `(h,k)` with the reversed negative-field owner `(h^(-1),k)`: the
-primitive representative is reversed while the repetition index is held
-fixed.  Thus the represented group elements are `h^k` and `h^(-k)`, the norm
-is unchanged, and the action exponent changes sign.  For the frozen real-even
-test function, the trace distribution is correspondingly paired.  This avoids
-claiming an unqualified termwise conjugacy formula for arbitrary complex test
-functions.  The result is `[PROVED]` trace ownership for the stated subtype,
-not evidence for arithmetic-specific prime coding.
+classical time reversal proved in Round 2.  At the group-element level, the
+Round-3 map sends `(b,h,k)` to `(-b,h^(-1),k)`, so the represented elements are
+`h^k` and `h^(-k)` while the repetition magnitude is fixed.  Round 4 expresses
+the same map in its no-double-counting schema as
+`(b,{h,h^(-1)},k) -> (-b,{h,h^(-1)},-k)`: one inverse-paired primitive axis
+owner carries the two signed equation-(19) branches.  This bookkeeping does
+not assert that `h` and `h^(-1)` are conjugate in `Gamma`, and it gives the
+inverse branch no additional primitive-owner credit.  The norm is unchanged
+and the action exponent changes sign.  For the frozen real-even test function,
+the trace distribution is correspondingly paired.  This avoids claiming an
+unqualified termwise conjugacy formula for arbitrary complex test functions.
+The result is `[PROVED]` trace ownership for the stated subtype, not evidence
+for arithmetic-specific prime coding.
 
 ## 5. Control and claim boundary
 

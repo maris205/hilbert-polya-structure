@@ -14,6 +14,7 @@ Date: **2026-08-27**
 | Actual orbit solutions | **NUMERICALLY_CERTIFIED** — 2,241/2,241 rows pass two-solver, reflection, visibility, and length checks |
 | Center-polygon proxy | **MODELING_CHOICE** — retained separately and never called an orbit |
 | Stability half-density | **NUMERICAL_OBSERVATION** — Round-3 100-digit physical return-map cross-check is numerically certified on 2,241/2,241 rows; 2,232 newly closed, 0 open at the frozen cutoff |
+| Round-4 method audit | **NUMERICALLY_CERTIFIED / REPRODUCIBLE** — 2,202 direct-Newton plus 39 fallback rows; target-free selector dependency check; 8/8 tests; combined SHA-256 `85566062639b3e42efb4ae47816be5a967e8948233727fc1d0ef24bdeb432265` |
 | Half-density kill control | **EXECUTED** — 747 complete neighboring-parameter triplets plus shuffled/random/composite controls |
 | `PROVES_TOO_MUCH` verdict | **`[STOP_SCOPED]`** for half-density persistence as arithmetic evidence |
 | Proposal stage | Stage 1 / A0--A1 negative control |
@@ -27,7 +28,9 @@ from the separate half-density experiment.  The Round-2 control now shows that
 the chosen half-density structure persists almost unchanged under neighboring
 non-arithmetic geometries, so that statistic is stopped as arithmetic evidence.
 Round 3 closes the former 2,232-row finite-difference gap as a purely dynamical
-calibration.  The next scientific gate would require a different source-derived
+calibration.  Round 4 shows descriptively that the 39 fallback-requiring rows
+were neither discarded nor selected after reading the paraxial target.  The
+next scientific gate would require a different source-derived
 observable with an explicit arithmetic owner; the present closure does not
 authorize A2.
 

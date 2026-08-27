@@ -1,5 +1,20 @@
 # P27 experiment status
 
+## Round 4
+
+Run `bash experiments/reproduce_round4.sh`.  It checks the 24-row frozen input,
+all 21 order-divisibility transitions, the exact three order sequences, period
+ratios, owner firewalls, and two byte-identical builds.  Eight tests pass and
+the combined output SHA-256 is
+`2fcf33ed6c458339ac808d7b7007a240b7a588b0093249a90a35559f1ef2aa22`.
+
+The finite rows illustrate the proved group-theoretic closing-time escape
+theorem for whole traversals of a selected `g`-loop; they are not used to infer
+asymptotic divergence, primitive minimal periods, or inverse-limit periodic-
+orbit credit.
+
+## Round 2
+
 Round-2 finite-level diagnostics are complete.  Run:
 
 ```bash

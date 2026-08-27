@@ -126,7 +126,7 @@ GATES_A_E=NOT_REACHED
 ```
 
 The bracketed evidence tokens in this brief are restricted to `PROVED`,
-`HEURISTIC`, `MODELING_CHOICE`, and `OPEN`, as defined by
+`HEURISTIC`, `MODELING_CHOICE`, `OPEN`, and `NUMERICALLY_CERTIFIED`, as defined by
 `skills/route-a-evaluator.md`.  `PROVED_A1_OBSTRUCTION` is a local progress tag;
 `UNASSIGNED` and `NOT_EVALUATED` are stage states.
 
@@ -147,6 +147,23 @@ The bracketed evidence tokens in this brief are restricted to `PROVED`,
 
 The proposition above is derived in this brief; the sources validate the
 framework, not the claimed novelty.
+
+## Round-4 addendum — period escape for every fixed owner (2026-08-27)
+
+For a descending normal finite-index tower with trivial intersection and an
+infinite-order element `g`, let `o_n` be the order of `g` in the level-`n`
+quotient.  Quotient functoriality gives `o_n | o_(n+1)`.  If the sequence were
+bounded it would eventually equal one integer `r`, forcing `g^r` into the
+intersection and contradicting infinite order.  Hence `[PROVED]` `o_n` tends
+to infinity.  For a hyperbolic owner, the corresponding lift periods
+`o_n ell(g)` also tend to infinity as whole-`g`-loop closing times.  Unless
+`g` is separately proved conjugacy-primitive, this does not identify the
+underlying lifted flow orbit's minimal period.
+
+Applied to `Gamma(3 n!)`, this proves that every fixed finite-level hyperbolic
+owner escapes every bounded period window.  The Round-4 24-row audit checks the
+finite prefix and owner fields but is not the proof of divergence.  See
+`notes/round4_period_escape_theorem.md`.
 
 ## Round-2 addendum — finite reduction orders (2026-08-27)
 

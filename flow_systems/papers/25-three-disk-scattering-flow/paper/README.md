@@ -14,3 +14,11 @@ versus 9/2,241 in Round 2.  The manuscript can therefore separate two clean
 claims: a full finite-cutoff numerical stability calibration and a negative
 arithmetic-specificity control.  Neither is presented as an exact determinant
 theorem or a formal Route-A evaluation.
+
+Round 4 supplies the prospective Methods/Robustness subsection.  It exposes
+the full 2,202/39 refinement-method partition, locks every fallback row in a
+separate audit ledger, and verifies that the fallback path is target-free at
+the source-dependency level.  The prospective paper can therefore state that
+no difficult row was silently excluded while still labeling the audit
+post-hoc, descriptive, finite-cutoff, and non-causal.  Manuscript drafting
+remains not started.

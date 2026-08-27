@@ -55,3 +55,29 @@ cutoff.  The quotient is convex-cocompact and infinite-volume with no cusps.
 Finite volume, cusp structure, covolume, length distribution, and full-group
 orbit count are not matched to the Bianchi candidate.  No arithmetic owner or
 post-freeze arithmetic join appears in these files.
+
+## Round-4 finite-volume-control results
+
+The following artifacts were generated with pinned `snappy==3.3.2`:
+
+- `five_two_control_invariants_round4.json` — exact executable object/topology
+  contract, theorem-source receipts, group/peripheral data, and explicitly
+  non-interval numerical shapes, cusp parameter, and volume;
+- `five_two_primitive_length_groups_round4.csv` — 18 complex-length groups
+  representing 31 primitive geodesic classes by multiplicity at real length
+  `<3.05`;
+- `five_two_alt_crosscheck_round4.csv` — 9 primitive classes in 6 groups from
+  the independent alternative algorithm at real length `<2.10`;
+- `round4_metrics.json` — match axes, unmatched axes, counts, residual,
+  source/number status split, and Route boundary.
+
+Every length-group row records representative word, multiplicity, real length,
+holonomy angle, orientation/parity, PSL trace square, primitive semantics,
+completeness boundary, no-owner status, and target-data prohibition.  The
+maximum cross-algorithm complex-length residual is `2.2944e-31`, with identical
+prefix multiplicities.
+
+The 31-class prefix is a `[NUMERICAL_OBSERVATION]`, not a Sage interval
+certificate or a full primitive spectrum.  The separate source theorem chain
+proves that `5_2=m015` is a genuine finite-volume one-cusp non-arithmetic
+control.  No Bianchi/control score or arithmetic join was generated.

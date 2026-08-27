@@ -31,6 +31,22 @@ Working title: *Semiclassical Tensor-Power Trace*
   zero-field theorem, and the fixed-operator regime remain open.  A 12-row
   contract passed 8/8 tests and a byte-identical two-run replay with tree
   SHA-256 `a28bf68d0da5c34350224031428f18f325af0d11619df95f2509741475275f3d`.
+- Round-4 progress: the first genuine Bolza magnetic-owner seed ledger is now
+  complete.  A published opposite-side-pairing representation supplies four
+  explicit systolic generators, and systolic minimality proves primitivity.
+  Although abelianization proves `f_j` and `f_j^-1` are not conjugate in
+  `Gamma`, the no-double-counting schema assigns the inverse pair one primitive
+  axis-owner ID and uses Kordyukov--Taimanov equation (19)'s signed
+  `k=+-1,+-2,+-3` only as trace branches.  There are four axis owners per field
+  (eight field-owner pairs), eight `|k|=1` branches and 24 total signed branches
+  per field, hence 48 target-free rows.  Signed trace time, action, ordered
+  Poincare multipliers, and the displayed equation-(19) stability denominator
+  are all keyed by `k`; field reversal is `(b,k)->(-b,-k)` on the same axis
+  owner.  The ledger passed 12/12 tests and two byte-identical builds with tree
+  SHA-256
+  `b2387be3d4acc6485cd7f0e2d89eeaae9a36dace1ddf2d451d7f51ed3680bfd4`.
+  This is a four-axis-owner-per-field seed, not a complete Bolza primitive
+  spectrum and not an arithmetic-prime ledger.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -139,10 +155,15 @@ result remains a magnetic trace calibration.
 - [Round-2 owner lemma](notes/round2_tensor_family_owner_lemma.md)
 - [Round-2 progress report](notes/round2_progress_report.md)
 - [Round-3 source-bound trace contract](notes/round3_trace_regime_contract.md)
+- [Round-4 explicit Bolza owner ledger theorem](notes/round4_bolza_owner_ledger.md)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
+- [Stage-1 paper research spine](paper/stage1_research_spine.md)
 
 No rational-prime orbit claim, fixed-spectrum match, all-`N` trace claim, or
 Route-B credit is claimed.  The only same-owner trace result is the explicitly
-scoped source-compatible signed-field even subsequence.
+scoped source-compatible signed-field even subsequence; Round 4 instantiates
+four named inverse-paired Bolza primitive axis owners per field inside that
+subtype without claiming completeness or separate owner credit for signed-`k`
+branches.

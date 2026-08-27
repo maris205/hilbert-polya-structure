@@ -21,10 +21,21 @@ bonding transitions passing. Those rows are owned by the finite tower, not by
 the inverse-limit flow, so they do not alter the theorem
 `Per(M_infinity)=empty`.
 
+Round 4 adds the paper's general owner lemma: in a descending normal finite-
+index residual tower, the quotient orders of every infinite-order element
+diverge, so the corresponding finite-level whole-`g`-loop closing times escape
+to infinity.  These are minimal among whole traversals of the selected loop;
+they are not called primitive minimal periods without a separate conjugacy-
+primitivity proof.  Its proof is elementary and exact; the 24-row audit is
+explicitly a finite illustration.  This strengthens the methodological
+contribution while retaining the Round-3 decision not to claim general
+aperiodicity priority.
+
 Stage-1 planning artifacts:
 
 - [closest-prior audit](../notes/round3_closest_prior_audit.md)
 - [Round-3 conclusion](../notes/round3_conclusion.md)
+- [Round-4 period-escape theorem](../notes/round4_period_escape_theorem.md)
 - [research spine / methodology / section plan](stage1_research_spine.md)
 
 The spine is a plan, not a manuscript draft.  Advancement to Stage 2 remains

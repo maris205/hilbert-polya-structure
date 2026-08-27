@@ -1,5 +1,35 @@
 # P26 generated results
 
+## Round 4 — Hecke correspondence-cycle owner
+
+- `round4_hecke_branch_owner_ledger.csv`: 385 exact rows for the right action
+  of the 11 frozen owners on the standard double-coset branches at
+  `p={2,3,5,7,13}`. Every row binds
+  `beta_j M = gamma_j beta_(pi(j))` with an exact
+  `gamma_j in Gamma_0(11)`.
+- `round4_hecke_coefficient_ledger.csv`: 320 exact eta-product coefficient
+  checks of `a_(pn)+p a_(n/p)=a_p a_n`. All 320 pass. The bounded deterministic
+  nonmodular control fails 302 rows and is explicitly marked as lacking a
+  quotient owner.
+- `round4_hecke_cycle_ledger.csv`: 138 permutation-cycle owners
+  `delta_O=beta_j M^|O| beta_j^(-1)`. All 138 are exact integral
+  `Gamma_0(11)` matrices and all 138 pass the finite complete root search for
+  primitivity.
+- `round4_hecke_period_summary.csv`: 55 word/prime period-sum rows at q
+  cutoffs 1536/1024 and Simpson panels 256/128. Maximum primary complex
+  residual is `2.229752420147902e-14`; maximum comparison residual is
+  `1.9479273482635503e-14`.
+- `round4_summary.json` and `round4_artifact_manifest.json`: registered counts,
+  evidence tokens, control interpretation, claim boundary, and artifact
+  bindings.
+
+The cycle-pushforward relation is `[PROVED]`; exact finite ledgers are
+`NUMERICALLY_CERTIFIED`; quadrature residuals are `NUMERICAL_OBSERVATION`.
+The genus-one same-owner closed control also passes by theorem, so
+discriminative primitive-Euler evidence is `STOP_SCOPED`. A single-orbit
+recurrence, global primitive Euler factorization, A2 dynamical-zeta evaluation,
+formal Route-A tuple, and Route-B entry are not claimed.
+
 ## Round 3 — conjugacy owner
 
 - `round3_conjugacy_owner_ledger.csv`: 99 exact rows from 11 selected

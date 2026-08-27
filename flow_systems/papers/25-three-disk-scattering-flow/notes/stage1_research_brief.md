@@ -78,6 +78,12 @@ See `notes/round3_conclusion.md`.  The next paper-facing artifact is a
 theorem/experiment boundary outline for the negative-control manuscript, not
 an A2 evaluation.
 
+Round 4 adds a conditioning and fallback-selection audit.  All 39 fallback
+rows are exposed, retain the same final acceptance thresholds, and were chosen
+by a refinement path that does not read the paraxial target fields.  The audit
+is explicitly post-hoc and descriptive; it does not infer a causal dependence
+on word length or geometry.  See `notes/round4_conditioning_audit.md`.
+
 ## Route mapping
 
 ```text
@@ -96,8 +102,9 @@ GATES_A_E=NOT_REACHED
 ```
 
 Bracketed evidence tokens in the prose are restricted to `PROVED`,
-`HEURISTIC`, `MODELING_CHOICE`, `OPEN`, and (only after a positive control
-failure) `STOP_SCOPED`, as defined by `skills/route-a-evaluator.md`.
+`HEURISTIC`, `MODELING_CHOICE`, `OPEN`, `NUMERICAL_OBSERVATION`, and (only
+after a positive control failure) `STOP_SCOPED`, as defined by
+`skills/route-a-evaluator.md`.
 
 ## Primary sources checked on 2026-08-26
 

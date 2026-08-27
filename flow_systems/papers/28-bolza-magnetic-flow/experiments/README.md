@@ -1,5 +1,28 @@
 # P28 experiment status
 
+## Round 4
+
+`EXECUTION_STATUS=ROUND4_EXPLICIT_BOLZA_OWNER_LEDGER_COMPLETED`. Run:
+
+```bash
+./experiments/reproduce_round4.sh
+```
+
+Twelve tests pass; two isolated builds of the group certificate, 48-row CSV,
+validation report, and standard output are byte-identical.  The artifact tree
+SHA-256 is
+`b2387be3d4acc6485cd7f0e2d89eeaae9a36dace1ddf2d451d7f51ed3680bfd4`.
+This run validates a published matrix transcription and exact theorem-derived
+owner ledger.  It does not numerically integrate magnetic trajectories,
+enumerate the full Bolza spectrum, or test arithmetic discrimination.
+
+The declared seed contains four inverse-paired primitive axis owners per field
+and equation-(19) branches `k=+-1,+-2,+-3`: eight `|k|=1` branches and 24
+total signed branches per field, 48 rows overall.  Signed branches do not
+receive separate owner credit, and field reversal is `(b,k)->(-b,-k)` on the
+same axis ID.  Zero field, odd `N`, full all-`N`, arbitrary twists, fixed
+`Delta^L`, and the non-arithmetic metric control remain outside the run.
+
 ## Round 3
 
 `EXECUTION_STATUS=ROUND3_SOURCE_CONTRACT_COMPLETED`. Run:

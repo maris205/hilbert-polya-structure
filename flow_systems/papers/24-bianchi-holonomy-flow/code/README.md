@@ -51,3 +51,30 @@ PYTHONDONTWRITEBYTECODE=1 python3 code/round3_schottky_control.py --verify-exist
 The control matches only generator rank, oriented alphabet size, and word
 cutoff.  It is convex-cocompact and infinite-volume, not a finite-volume
 Bianchi substitute.  It has no arithmetic owner and consumes no target data.
+
+## Round 4 — finite-volume cusped non-arithmetic control
+
+`round4_finite_volume_control.py` freezes `5_2=m015`, checks the rigorous
+positive SnapPy isometry identification and exact topology fields, records the
+manually audited theorem-source chain, and builds a complex-length ledger with
+pinned `snappy==3.3.2`.
+
+The primary high-precision implementation emits grouped geodesics at real
+length `<3.05`; the independent `length_spectrum_alt` implementation checks the
+prefix at real length `<2.10` and 106-bit precision.  The program fails closed
+if the pinned version, counts, multiplicity vector, or numerical residual bound
+changes.
+
+Commands:
+
+```bash
+python3 -m pip install 'snappy==3.3.2'
+PYTHONDONTWRITEBYTECODE=1 python3 code/test_round4_finite_volume_control.py -v
+PYTHONDONTWRITEBYTECODE=1 python3 code/round4_finite_volume_control.py
+PYTHONDONTWRITEBYTECODE=1 python3 code/round4_finite_volume_control.py --verify-existing
+bash experiments/reproduce_round4.sh
+```
+
+The theorem chain proves the finite-volume one-cusp non-arithmetic control;
+the executable decimal invariants remain non-interval numerical observations.
+No prime, zero, arithmetic label, or target-fitted cutoff is consumed.

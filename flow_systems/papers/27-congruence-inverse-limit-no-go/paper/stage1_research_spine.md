@@ -81,6 +81,21 @@ This logical distinction is the methodological center of the proposed note.
 It must be presented as claim discipline and owner identity, not as a
 replacement for the prior solenoid literature.
 
+### Round-4 period-escape lemma
+
+For any descending normal finite-index tower with trivial intersection and any
+infinite-order element `g`, the quotient orders `o_n(g)` divide forward and
+tend to infinity.  Otherwise a bounded divisibility sequence would stabilize
+at `r`, putting `g^r` in the tower intersection.  For a hyperbolic owner the
+whole-`g`-loop closing times `o_n(g) ell(g)` therefore escape to infinity.
+They equal underlying primitive minimal periods only when the selected owner
+has separately proved conjugacy primitivity.
+
+This exact lemma should precede the finite diagnostic.  It explains why no
+bounded common-time owner can be extracted from the level sequence.  It is an
+elementary owner criterion, not a claim that the general aperiodicity
+phenomenon is new.
+
 ### Reproducible finite diagnostic
 
 Round 2 freezes three Gamma(3) hyperbolic matrices and eight levels:
@@ -201,6 +216,13 @@ Evidence status: [NUMERICALLY_CERTIFIED] for the finite diagnostic only.
 - Two exact order algorithms.
 - CSV schema and reproducibility checks.
 - Order sequences and finite closing periods.
+
+### 5A. Period escape and its finite prefix
+
+- Prove divisibility and divergence for an arbitrary normal residual tower.
+- Specialize to `Gamma(3 n!)` using the sign-sensitive intersection lemma.
+- Report the 24-row prefix and all plateaus without treating finite growth as
+  the proof of asymptotic escape.
 
 ### 6. The finite-owner firewall
 

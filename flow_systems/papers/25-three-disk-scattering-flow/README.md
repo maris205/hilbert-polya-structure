@@ -22,6 +22,12 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   `NUMERICALLY_CERTIFIED`** at the frozen cutoff; 2,232 rows are newly closed
   relative to Round 2.  Aggregate half-density evidence remains
   `NUMERICAL_OBSERVATION`.
+- Round-4 methods status: the 39/2,241 condition-aware fallback rows have a
+  complete deterministic audit.  All were old-open length-11/12 rows, all pass
+  the same final acceptance contract, and a static dependency check verifies
+  that fallback selection precedes and does not consume the paraxial comparison
+  target.  This is a post-hoc descriptive audit, not a claim of statistical
+  unbiasedness.
 
 ## Round-2 executed artifact
 
@@ -111,6 +117,8 @@ Evidence labels in this project use the vocabulary of
 - [Round-2 validation](experiments/round2_validation.md)
 - [Round-3 conclusion](notes/round3_conclusion.md)
 - [Round-3 direct validation](experiments/round3_validation.md)
+- [Round-4 conditioning audit](notes/round4_conditioning_audit.md)
+- [Round-4 reproducibility receipt](experiments/round4_reproducibility_receipt.json)
 
 No exact scattering determinant, A2 zeta test, formal Route tuple, or manuscript
 is claimed yet.

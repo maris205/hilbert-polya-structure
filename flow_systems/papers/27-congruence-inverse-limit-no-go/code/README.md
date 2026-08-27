@@ -25,3 +25,17 @@ bash experiments/reproduce.sh
 The analytic `[PROVED] PROVED_A1_OBSTRUCTION` does not depend on this code.
 Every generated row marks the finite-level statistic as not owned by the
 inverse-limit flow.
+
+Round 4 adds `round4_period_escape.py` and
+`test_round4_period_escape.py`.  The generator reads the frozen Round-2 ledger
+by exact SHA-256, checks the nested-modulus and order-divisibility contracts,
+and emits a 24-row period-escape ledger plus validation JSON.  It explicitly
+marks the asymptotic result as proved in the human-readable theorem rather than
+inferred from the finite prefix.
+
+```bash
+bash experiments/reproduce_round4.sh
+```
+
+Eight tests and two byte-identical builds must pass.  No prime/zero target data,
+formal Route tuple, or inverse-limit orbit credit enters the computation.

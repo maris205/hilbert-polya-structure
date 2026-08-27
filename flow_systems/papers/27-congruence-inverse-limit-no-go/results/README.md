@@ -46,3 +46,19 @@ description of `Gamma(q)`, the PSL sign convention is explicit, and common-time
 compatibility is separate from each finite-quotient order.  A2--A4 remain
 `NOT_EVALUATED`; the formal Route-A tuple and overall status remain
 `UNASSIGNED`.
+
+## Round-4 period-escape audit
+
+- `round4_period_escape_ledger.csv` rewrites the same 24 finite owners in the
+  theorem's quotient-order/whole-`g`-loop closing-time schema; and
+- `round4_period_escape_validation.json` records nested-modulus checks, all
+  frozen sequences, growth/plateau counts, theorem-versus-finite-evidence
+  separation, and unchanged Route firewalls.
+
+Every period-to-base ratio equals the finite quotient order.  The last observed
+orders are `288`, `2880`, and `576`; finite-prefix growth is
+`NUMERICALLY_CERTIFIED`.  Asymptotic divergence is owned by the separate
+`[PROVED]` group-theoretic theorem, not extrapolated from these rows.
+The recorded time is minimal among whole traversals of the chosen `g`-loop; it
+is not asserted to be an underlying primitive orbit's minimal period unless
+conjugacy primitivity is separately proved.

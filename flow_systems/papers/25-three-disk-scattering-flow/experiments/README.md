@@ -1,4 +1,15 @@
-# P25 experiment status — Round 3 complete
+# P25 experiment status — Round 4 complete
+
+## Round 4
+
+`./experiments/reproduce_round4.sh` runs eight independent tests and two
+byte-identical builds of the conditioning audit.  It records 2,202 direct-Newton
+rows and 39 stationarity-fallback rows, with a combined artifact SHA-256 of
+`85566062639b3e42efb4ae47816be5a967e8948233727fc1d0ef24bdeb432265`.
+The audit is post-hoc and descriptive; it generates no new orbit or target data
+and makes no unbiasedness claim.
+
+## Rounds 2 and 3
 
 The internally prespecified grid `d/a in {5.8,6.0,6.2}` and topological word
 length `<=12` has been executed.  The exact symbolic cutoff contains 747

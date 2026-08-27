@@ -89,10 +89,12 @@ provenance alone proves neither map, and no Riemann-`zeta` A0 credit is assigned
 
 1. Holonomy shuffle at fixed lengths and repetitions.
 2. `m=0` scalar trace versus a chiral/holonomy-sensitive trace.
-3. A structurally matched convex-cocompact classical Schottky Kleinian
-   non-lattice control.  Only generator rank, oriented alphabet, and word
-   cutoff are matched; finite volume, cusps, covolume, and length distribution
-   are explicitly not matched.
+3. Two nested non-arithmetic controls: the Round-3 convex-cocompact classical
+   Schottky non-lattice matches generator rank, oriented alphabet, and word
+   cutoff; the Round-4 `5_2=m015` knot complement matches hyperbolic dimension,
+   manifold status, finite volume, cusp presence, geodesic-flow clock, and
+   complex-length primitive type.  Neither control is assigned an arithmetic
+   owner, and covolume/length distribution remain unmatched.
 4. Neighboring word cutoffs with completeness-risk accounting.
 5. After the orbit ledger is frozen: shuffled prime-ideal labels,
    matched-density composite ideals, and the simpler scalar trace.
@@ -119,6 +121,16 @@ containment in a larger arithmetic ambient group remains `[OPEN]`, no
 arithmetic owner is assigned, and no target data defines or filters the group.
 See `notes/round3_conclusion.md`.
 
+Round 4 executed `results/five_two_primitive_length_groups_round4.csv` for the
+source-proved finite-volume, one-cusped, non-arithmetic control
+`S^3\5_2=m015`.  The theorem chain establishing the control object is separate
+from the local decimal ledger.  At real length `<3.05`, the ledger contains 18
+complex-length groups and 31 primitive classes by multiplicity; a second
+algorithm reproduces 9 classes in 6 groups with maximum residual
+`2.2944e-31`.  SageMath interval verification was unavailable, so every
+decimal field remains `[NUMERICAL_OBSERVATION]`.  See
+`notes/round4_conclusion.md` and `notes/round4_source_audit.md`.
+
 ## Route mapping
 
 ```text
@@ -135,6 +147,12 @@ ROUND3_SCHOTTKY_GROUP_EVIDENCE=PROVED
 ROUND3_SCHOTTKY_LEDGER_EVIDENCE=NUMERICALLY_CERTIFIED
 ROUND3_MATCH_SCOPE=RANK4_ALPHABET8_WORD_CUTOFF5_ONLY
 ROUND3_CROSS_SYSTEM_VERDICT=OPEN
+ROUND4_CONTROL_GEOMETRY=FINITE_VOLUME_ONE_CUSP_NONARITHMETIC_PROVED_BY_SOURCE_CHAIN
+ROUND4_LEDGER_EVIDENCE=NUMERICAL_OBSERVATION_NOT_INTERVAL_VERIFIED
+ROUND4_LEDGER_COUNTS=18_LENGTH_GROUPS_31_PRIMITIVE_CLASSES
+ROUND4_CROSSCHECK=9_CLASSES_6_GROUPS_MAX_RESIDUAL_2.2944E-31
+ROUND4_MATCH_SCOPE=FINITE_VOLUME_CUSP_DIMENSION3_MANIFOLD_CLOCK_COMPLEX_LENGTH_TYPE
+ROUND4_SAME_ENUMERATION_CONTRACT=OPEN
 FORMAL_A0_A4_TUPLE=UNASSIGNED
 A2_A4_EVALUATION=NOT_EVALUATED
 ROUTE_B_EVALUATION=NOT_RUN
@@ -158,5 +176,16 @@ GATES_A_E=NOT_REACHED
   hyperbolic three-manifolds*, https://doi.org/10.1090/jams/982 and
   https://arxiv.org/abs/1810.06346.  Supports the complex-length convention and
   holonomy-weighted 3D trace setting.
+- Hoffman et al., *Verified Computations for Hyperbolic 3-Manifolds*,
+  https://doi.org/10.1080/10586458.2015.1029599 and
+  https://arxiv.org/abs/1310.3410.  Theorem 5.1 supplies the verified
+  finite-volume hyperbolic census statement used for `m015`.
+- Reid, *Arithmeticity of Knot Complements*,
+  https://doi.org/10.1112/jlms/s2-43.1.171.  Supplies the classification that
+  makes the non-figure-eight knot complement `5_2` non-arithmetic.
+- SnapPy 3.3.2 official verified-computation and `Manifold` documentation,
+  https://snappy.computop.org/verify.html and
+  https://snappy.computop.org/manifold.html.  Supplies the interval-runtime
+  boundary and the rigorous semantics of a positive `is_isometric_to` result.
 
 External novelty is not claimed at Stage 1.

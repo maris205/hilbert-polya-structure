@@ -43,3 +43,19 @@ matched manifold.  The construction is `[PROVED]`, the numerical ledger is
 `[NUMERICAL_OBSERVATION]`.  The cross-system arithmetic verdict remains
 `[OPEN]`; formal Route-A tuple is `UNASSIGNED`, A2--A4 are `NOT_EVALUATED`, and
 Route B is not run or invocable.
+
+## Round 4
+
+The finite-volume non-arithmetic control is complete at the Stage-1 research
+level.  `reproduce_round4.sh` runs 9 unit tests, generates two independent
+temporary artifact trees, requires byte identity, and verifies the checked-in
+tree.  The core artifact hash is
+`54dc289c26ef8466405576c29d819d2ccc0464d57c78386e1a021464d78f6875`.
+
+The source theorem chain and local computation have deliberately separate
+statuses.  The former proves that `5_2=m015` is finite-volume, one-cusped and
+non-arithmetic.  The latter supplies 18 numerical complex-length groups / 31
+primitive classes and a 9-class independent prefix crosscheck.  It is not
+interval verified because SageMath is unavailable.  The same-enumeration
+Bianchi/control comparison remains `[OPEN]`; no score, tuple, A2+ layer, or
+Route-B evaluation is produced.

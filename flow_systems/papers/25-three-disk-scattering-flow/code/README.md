@@ -1,4 +1,4 @@
-# P25 code status — Round 3 executed
+# P25 code status — Rounds 3 and 4 executed
 
 `round2_three_disk_ledger.py` performs four separated operations:
 
@@ -30,8 +30,9 @@ Round 3 adds `round3_return_map_validation.py`.  It does not import or rebuild
 the paraxial factor product.  It refines the periodic point against a 100-digit
 physical ray-intersection/reflection map and forms direct Jacobians at three
 frozen finite-difference scales.  A geometric specular-stationarity fallback is
-used only when a rounded input point lies outside direct Newton's cylinder; the
-reported stability still comes from the direct ray map.
+used when direct fixed-point Newton raises or fails; Round 4 does not identify
+a unique failure cause because the frozen implementation catches a broad
+exception class.  The reported stability still comes from the direct ray map.
 
 ```bash
 python3 code/test_round3_return_map_validation.py -v
@@ -42,3 +43,17 @@ python3 code/round3_return_map_validation.py --verify-existing
 The Round-3 result is 2,241/2,241 numerically certified direct checks.  This
 closes the finite-cutoff numerical validation gap but does not promote the
 aggregate half-density beyond `NUMERICAL_OBSERVATION`.
+
+Round 4 adds `round4_conditioning_audit.py`.  It does not solve orbits.  It
+freezes the Round-3 ledger by SHA-256, emits length-stratified and fallback-only
+tables, checks every frozen numerical acceptance threshold, and uses Python's
+AST to audit the target-dependency boundary of ten direct-map/refinement
+functions.  Its eight tests and two-build replay run with only the standard
+library:
+
+```bash
+./experiments/reproduce_round4.sh
+```
+
+The static audit establishes an implementation property only.  It is not a
+proof of causal conditioning or sampling unbiasedness.

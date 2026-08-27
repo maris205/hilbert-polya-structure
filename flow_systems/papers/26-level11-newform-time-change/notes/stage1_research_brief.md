@@ -107,3 +107,41 @@ and simpler-parent controls were executed, but no source-owned Hecke
 recurrence was obtained.  Hence the Hecke/Euler status remains `HEURISTIC`
 with testability `NOT_TESTABLE`; the formal Route-A tuple remains `UNASSIGNED`,
 Route B remains `NOT_RUN`, and no prime table or Riemann-zero data was used.
+
+## Round-4 addendum — 2026-08-27
+
+The exact source-owned relation is now identified, but its owner is narrower
+than the original bold hypothesis. For a prime `p` not dividing 11, the
+standard weight-two double coset gives
+
+```text
+T_p f(z) = p f(pz) + (1/p) sum_(b=0)^(p-1) f((z+b)/p),
+integral_(T_(p,*)C) alpha_f = a_p integral_C alpha_f.
+```
+
+For a hyperbolic class `M`, right multiplication by `M` permutes the `p+1`
+double-coset branches. Each permutation cycle closes to an explicit oriented
+`Gamma_0(11)` geodesic owner, and the **sum** of those owners' periods is
+`a_p I(M)`. This is `[PROVED]`; it is not a single primitive-orbit recurrence.
+
+The frozen finite ledger uses `p={2,3,5,7,13}` and the 11 Round-2 owners. It
+contains 385 exact branch gluings, 320 exact eta-product coefficient rows, 138
+closed cycle owners with 138 exact finite primitive-root certificates, and 55
+direct complex period sums at two numerical configurations. The maximum
+primary residual is `2.229752420147902e-14`.
+
+The decisive control is analytic. Because `X_0(11)` has genus one, prime-to-11
+Hecke acts by the real scalar `a_p` on all real compact cohomology. Every
+legitimate closed-form control extending over `X_0(11)` therefore satisfies
+the same relation. A nonmodular q-series control fails, but has no quotient
+owner. Hence
+
+```text
+HECKE_CORRESPONDENCE_CYCLE_RELATION=PROVED
+DISCRIMINATIVE_HECKE_EULER_EVIDENCE=STOP_SCOPED
+PRIMITIVE_EULER_FACTORIZATION=NOT_ESTABLISHED
+FORMAL_A0_A4_TUPLE=UNASSIGNED
+A2_DYNAMICAL_ZETA_EVALUATION=NOT_RUN
+ROUTE_B_EVALUATION=NOT_RUN
+ROUTE_B_INVOCATION_ALLOWED=false
+```
