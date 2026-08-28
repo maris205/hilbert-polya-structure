@@ -2,9 +2,18 @@
 
 Date: **2026-08-28**
 
+Stage-2 handoff: the complete manuscript, references, 12-page PDF, clean build
+log, and manuscript audit are delivered under paper/. The next editorial gate
+is **ARS Stage 2.5 user confirmation**; no Stage 2.5 pass is claimed. The
+existing mathematical next gate remains unchanged: a third canonical control
+type and a source-derived ideal-valued refinement are required before any
+positive Route-A promotion.
+
 | Item | Status |
 |---|---|
-| ARS Stage 1 | **IN PROGRESS** |
+| ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
+| ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
+| ARS Stage 2.5 | **AWAITING USER CONFIRMATION** — not passed or claimed |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |
@@ -50,13 +59,13 @@ Date: **2026-08-28**
 | Remaining control mismatch | **OPEN** — marked generator count/presentation, exact Bianchi cusp count, covolume, length distribution, and full primitive spectra |
 | Full `Gamma((3))` / conjugacy completeness | **OPEN** — elementary generated subgroup word ball only |
 | Orbit-to-prime-ideal map | **OPEN** — no arithmetic labels attached |
-| Proposal stage | Stage 1 / Route A A0--A1 proxy audit |
+| Proposal stage | Stage 2 complete draft / Route A A0--A1 proxy audit |
 | Typed proxy Route-A tuple | `P24-BIANCHI-MARKED-WORD-PROXY = (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_EXPLORATORY` |
 | Full Bianchi flow Route-A tuple | UNASSIGNED |
 | Full Bianchi Route A A2--A4 | NOT EVALUATED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | NOT STARTED |
+| Manuscript | **STAGE 2 DRAFT COMPLETE** — post-review 4,029-word audited body; 7/7 citation closure; clean 12-page PDF; independent review 0 Blocker/0 Major and the single Minor fixed |
 
 Next gate: Round 8 shows that trace divisibility alone proves too much, but the
 mandatory control-type ledger remains `2/3`.  Before any positive promotion,

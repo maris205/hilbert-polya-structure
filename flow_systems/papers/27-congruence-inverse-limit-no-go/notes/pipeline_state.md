@@ -4,7 +4,9 @@ Date: **2026-08-28**
 
 | Item | Status |
 |---|---|
-| ARS Stage 1 | **IN PROGRESS** |
+| ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 comparative theorem spine |
+| ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
+| ARS Stage 2.5 | **AWAITING EXPLICIT USER CONFIRMATION** — not passed |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |
@@ -43,12 +45,13 @@ Date: **2026-08-28**
 | Round-8 exact replay | **REPRODUCIBLE** — 96 quadrant rows plus 1,248 coefficient rows, 12/12 tests, two byte-identical builds; core SHA-256 `a1b588724dacb2ab2986326a7a5e1c6aec654c61538c1465e26564357b568b33` |
 | Round-8 new-candidate Route tuple | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_REJECTED` |
 | Residual bold hypothesis | **`[HEURISTIC]`** — renormalized tower statistic retains congruence splitting |
-| Proposal stage | Stage 1 / Route A A0--A1 |
+| Proposal stage | **ARS Stage 2 draft complete / Route-A rejection retained** |
 | A2--A4 | **FAIL / NOT_TESTABLE** — the same owner has no primitive periodic-orbit population or determinant |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | NOT STARTED |
-| ARS Stage 2 | NOT STARTED |
+| Manuscript | **COMPLETE STAGE-2 DRAFT** — 4,593 source-aware body words, 12 pages, 5 verified cited sources |
+| Stage-2 regression | **PASS** — 58/58 historical tests plus 12/12 Round-8 verify-only tests |
+| Stage-2 PDF | **PASS** — unified post-review LuaLaTeX + BibTeX/plainnat numeric build; SHA-256 `540403e2cfb3c893822f3bcb80fb56e33bff00970f340df3dc9e6e8d2810d65a`; 0 Blocker/0 Major and the cosmetic Minor fixed |
 
 Closest-prior gate result: the broad phenomenon and the simply-connected-leaf
 mechanism have direct prior art.  The exact `Gamma(3 n!)` statement was not
@@ -71,3 +74,12 @@ base factor.  Its genericity keeps A0 failed and the full determinant absent.
 Evidence labels follow `skills/route-a-evaluator.md`.
 `PROVED_A1_OBSTRUCTION` is a local theorem-progress tag; the formal verdict is
 `A1_FAIL`, and the overall same-owner route is rejected.
+
+Round 9 converts the frozen comparative spine into the full paper
+`paper/manuscript.tex`, bibliography, compiled `paper/paper.pdf`, and
+`paper/stage2_manuscript_audit.md`.  It preserves the distinction between the
+aperiodic residual inverse-limit owner and the separately registered
+nonresidual homology-cover calibrator.  Neither the exact four-quadrant identity
+nor its 96-row replay is promoted to Route-A A2.  ARS Stage 2 is complete as a
+draft only; Stage 2.5 awaits explicit user confirmation and has not been
+passed.

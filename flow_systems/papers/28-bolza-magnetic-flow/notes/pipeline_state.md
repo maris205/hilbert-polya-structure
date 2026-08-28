@@ -4,7 +4,9 @@ Date: **2026-08-28**
 
 | Item | Status |
 |---|---|
-| ARS Stage 1 | **IN PROGRESS** |
+| ARS Stage 1 | **COMPLETE / RESEARCH SPINE FROZEN** |
+| ARS Stage 2 | **DRAFT COMPLETE** — full manuscript, bibliography, compiled PDF and manuscript audit delivered |
+| ARS Stage 2.5 | **AWAITING USER CONFIRMATION** — not passed; independent Stage-2 cross-review completed with 0 Blocker/0 Major and all 4 Minors fixed |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |
@@ -62,13 +64,16 @@ Date: **2026-08-28**
 | Round-2 owner ledger | **EXECUTED / REPLAY PASS** — 12 rows, `N=1,2,4,8`, 7/7 tests |
 | Magnetic-orbit ledger | **BOUNDED OWNER SUBSET EXECUTED** — 36 safely distinct inverse-paired axes per field and theorem-derived signed-`k` period/action/stability branches; no trajectory integration or complete `Gamma` spectrum |
 | Evidence tokens | `[PROVED]|[HEURISTIC]|[MODELING_CHOICE]|[OPEN]` |
-| Proposal stage | Stage 1 / Route A A0--A1 |
+| Proposal stage | ARS Stage 2 draft complete / Route A A0--A1 control theorem |
 | Formal Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | NOT STARTED |
+| Manuscript | **STAGE 2 DRAFT COMPLETE** — post-review 5,127 body words, 14 pages, 6/6 citation closure; Stage 2.5 awaiting user confirmation |
 
-Next gate: the contracted non-arithmetic control passes 6/6, its exact systole
+Workflow checkpoint: obtain explicit user confirmation before Stage 2.5
+cross-review. No Stage-2.5 passage or reviewer verdict is claimed here.
+
+Next scientific gate: the contracted non-arithmetic control passes 6/6, its exact systole
 is proved, and the target-blind common cutoff `Lambda=21/10` is frozen.  Build
 the matched Bolza/control geometric census at that unchanged cutoff, with
 exact quotient-conjugacy, inverse-pair ownership, and primitivity deduplication,

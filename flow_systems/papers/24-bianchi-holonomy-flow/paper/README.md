@@ -1,54 +1,66 @@
-# P24 paper status
+# Paper 24 manuscript status
 
-Manuscript not started.  ARS Stage 1 is in progress.  Round 2 has executed an
-exact finite elementary-generator word-ball ledger and holonomy shuffle, but
-full-group conjugacy/primitivity completeness remains `[OPEN]`.
-Round 3 has executed an exact rank-4 classical Schottky non-lattice control:
-the paired-round-disk ping-pong theorem is `[PROVED]`, and 4,148 oriented cyclic
-classes through marked word length 5 are `[NUMERICALLY_CERTIFIED]`.  This only
-matches rank, alphabet size, and cutoff; it is not a finite-volume or cusp-
-matched Bianchi manifold, and the cross-system arithmetic verdict is `[OPEN]`.
-Round 4 has now landed a source-proved finite-volume, one-cusped,
-non-arithmetic control `5_2=m015`, together with 18 high-precision
-complex-length groups representing 31 primitive classes by multiplicity.  An
-independent algorithm reproduces a 9-class prefix.  These decimals remain
-`[NUMERICAL_OBSERVATION]` because Sage interval verification was unavailable;
-the control's geometry and non-arithmeticity instead follow from the HIKMOT,
-SnapPy-isometry, and Reid theorem chain.  The resulting paper-facing argument
-is frozen in [stage1_research_spine.md](stage1_research_spine.md).
-Round 5 has now replaced the invalid Round-2-word-ball versus Round-4-metric-
-prefix comparison with one exact marked-word algorithm and a phase statistic
-frozen before execution.  It yields 2,074 versus 51 canonical marked owners
-and uses 1,932 versus 39 primitive loxodromic rows.  The absolute standardized
-phase contrast is `0.935490232934`, but this is only a marking-dependent
-`[NUMERICAL_OBSERVATION]`: the marked positive-generator counts are 4 and 2, so
-alphabet/presentation and sample-size confounds block an arithmetic verdict.
-Round 6 executes that same-count panel as an exhaustive exploratory audit:
-identity plus all 24 elementary right Nielsen moves on both four-markings.  The
-candidate `z` width is `0.916300044002`, but the redundant control width is
-`16.9152926064`; the frozen conjunction fails and the current statistic is
-stopped as marking-sensitive.  It does not authorize a metric prefix.
-Round 7 adds a positive exact theorem without crossing that firewall:
-`D9(gamma)=(tr(gamma)^2-4)/9` is a Gaussian integer for level-`(3)` matrices,
-is conjugacy/inversion invariant, and obeys an exact repetition square-factor
-law.  The reproducible 11,481-row audit passes every exact witness but yields
-only 145 distinct invariant values.  It is therefore paper-ready as a
-necessary-invariant theorem and collision result, not as an orbit-to-prime
-owner map.
-Round 8 supplies the corresponding specificity theorem.  All four frozen A0
-control families execute, but they instantiate only two of the three required
-canonical evaluator types, so the mandatory gate remains incomplete.  The
-normalized formula holds over every commutative principal-congruence ring
-under the stated non-zero-divisor hypothesis; 6,392 exact integer,
-neighboring-Gaussian-level, and Eisenstein control matrices all pass.
-Consequently `D9` is stopped as a Gaussian-specific owner mechanism.
-The signed first congruence jet is proved conjugacy/inversion/repetition
-compatible and raises the finite joint descriptor count from 145 to 517, but
-10,964 matrix collisions remain.  This is a significant paper-level negative
-specificity result plus a necessary owner refinement, not A1 ownership.
-The primary target is a `Q(i)` Dedekind-zeta calibration.  Rational-prime
-push-forward is secondary, and no Riemann-`zeta` A0 credit is claimed.
-The typed proxy tuple is
-`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`, overall
-`ROUTE_A_EXPLORATORY`.  The full Bianchi flow remains `UNASSIGNED`; Route B is
-`NOT_RUN` and not invocable.
+Date: **2026-08-28**
+
+Current pipeline state: **ARS Stage 2 draft complete; Stage 2.5 awaiting user
+confirmation.** Stage 2.5 has not been passed or claimed.
+
+## Stage 2 deliverables
+
+- manuscript.tex — complete English manuscript with an independent
+  Traditional-Chinese abstract.
+- references.bib — seven verified and fully cited primary/authoritative
+  sources, natbib/plainnat numeric style.
+- paper.pdf — 12-page LuaLaTeX/BibTeX build.
+- stage2_manuscript_audit.md — integrity, citation, claim, structure, test, and
+  reproducibility audit.
+
+The post-review root Round-9 audit counts **4,029 English body words**, seven bibliography
+entries, seven cited keys, no missing or orphan references, and all required
+manuscript/declaration surfaces.
+
+## Paper-level result
+
+Title: **Congruence Trace Universality and the Limits of First-Jet Separation
+in Bianchi Holonomy**
+
+The paper proves, for a commutative ring \(R\), a non-zero-divisor \(m\), and
+\(\gamma=I+mA\in\mathrm{SL}_2(R)\),
+\[
+\frac{\operatorname{tr}(\gamma)^2-4}{m^2}
+=m^2\det(A)^2-4\det(A).
+\]
+Consequently, Gaussian level-three integrality is universal
+principal-congruence algebra rather than a Gaussian-specific owner mechanism.
+The paper also proves the level-conjugacy, inversion, and repetition laws of
+the first congruence jet.
+
+The exact 11,481-matrix panel has 145 scalar values and 517 joint scalar/jet
+descriptors. The jet separates 372 of 11,336 scalar-collision rows, leaves
+10,964, reduces the maximum bucket from 505 to 84, and produces no singleton
+joint bucket. Four control families supply 6,396 exact witnesses, but cover
+only two of the three canonical Route-A control types.
+
+## Claim boundary
+
+The manuscript is a negative-specificity theorem and necessary-refinement
+paper. It does not claim a complete group/conjugacy/primitive census, an
+orbit-to-prime-ideal map, a metric prefix, a dynamical determinant, a
+prime/zero fit, or a spectral realization.
+
+The marked-word proxy remains
+\((A0_{\rm weak\ arithmetic\ relation},A1_{\rm weak},A2_{\rm fail},
+A3_{\rm fail},A4_{\rm fail})\), overall Route-A exploratory. The complete
+Bianchi flow remains unassigned. Route B was not run and is not invocable.
+
+## Verification
+
+- Full historical unit suite: **71/71 passed**.
+- Round-8 reproducer: **14/14 passed**; existing artifacts verified.
+- Final PDF build: clean LuaLaTeX, BibTeX, LuaLaTeX, LuaLaTeX chain.
+- No Python cache files remain.
+
+Earlier Stage-1 research development remains documented in
+stage1_research_spine.md and the notes, results, experiments, and code
+directories. The manuscript supersedes the former not-started status without
+altering those frozen evidence records.

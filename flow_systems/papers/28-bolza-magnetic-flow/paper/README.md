@@ -1,9 +1,33 @@
 # P28 paper status
 
-Working title: *Semiclassical Tensor-Power Trace*.
+Current manuscript title: *An Exact Systole and Finite Enumeration
+Certificate for a Nonarithmetic Genus-Two Octagon*.
 
-Manuscript not started.  Flux quantization, the `0,+1,-1` base-bundle controls,
-and the changing family `H_N=Δ^{L^N}` on `L²(Σ_B,L^N)` are frozen.
+**ARS Stage 2 draft complete; Stage 2.5 awaiting user confirmation.**
+Stage 2.5 has not been passed. Independent Stage-2 cross-review found no
+Blocker or Major issue; all four Minor items were fixed and recompiled.
+
+The Round-9 manuscript packages the Round-7 source-locked geometry and the
+Round-8 exact systole/completeness theorem as a standalone control paper. It
+contains 5,127 English body words, a 222-visible-word English abstract, an independent
+338-Han-character Traditional-Chinese abstract, six closed citations, and a
+14-page compiled PDF. The 104-item historical suite, canonical Round-8
+verify-only replay, and an additional isolated certificate build all pass.
+
+Paper deliverables:
+
+- [LaTeX manuscript](manuscript.tex)
+- [bibliography](references.bib)
+- [compiled PDF](paper.pdf)
+- [Stage-2 manuscript audit](stage2_manuscript_audit.md)
+
+The paper proves the exact nonarithmetic-control systole and finite
+completeness through Lambda=21/10. It treats the 144 equality records only as
+group elements, not owner or conjugacy classes. It does not run a
+Bolza/control census, magnetic comparison, A2 evaluation, or Route B.
+
+Flux quantization, the 0,+1,-1 base-bundle controls, and the changing family
+H_N=Delta^(L^N) on L²(Sigma_B,L^N) remain frozen upstream context.
 
 Round 2 proves the tensor-family/fixed-operator owner-separation lemma and
 validates a 12-row target-free ownership ledger. It does not yet supply the
@@ -96,12 +120,12 @@ with primitive equality witness `g0*g3`.  The target-blind common cutoff
 Methods result, but no matched geometric census or magnetic comparison is run.
 
 The paper-facing theorem chain and remaining evidence obligations are tracked
-in [the Stage-1 research spine](stage1_research_spine.md).  Stage 2 writing is
-not authorized: the eight named conjugacy ambiguities are closed, the matched
-non-arithmetic geometry is source verified, and its exact systole/cutoff
-completeness is proved, but the matched census at the already frozen cutoff
-must still determine whether the result is arithmetic-specific or a generic
-hyperbolic calibration.
+in [the Stage-1 research spine](stage1_research_spine.md). Under the Round-9
+manuscript freeze, the exact control theorem is now a complete Stage-2 paper
+draft in its own right. The matched census at the already frozen cutoff remains
+the next scientific experiment needed to determine whether a later comparison
+is arithmetic-specific or a generic hyperbolic calibration; it is not silently
+included in this manuscript.
 
 The degree-one `Δ^L` is only a separate fixed candidate:
 

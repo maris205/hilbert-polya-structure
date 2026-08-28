@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 8 完成；独立对抗复审 CLEAN，5/5 明确论文进展，372/372 全量测试通过** | P24 将 `D9` 提升为普适主同余定理并量化 first-jet refinement，同时按路线图纠正为 canonical controls `2/3 INCOMPLETE`；P25 证明物理三盘 roof 非常数上同调且不能由 symbolic determinant 作单一标量时钟转移；P26 完成 138 instances / 165 verdicts 的 exact taxonomy；P27 证明四种 clock/multiplicity renormalization 象限；P28 证明非算术 genus-2 control 的 exact systole 与有限 word-to-length completeness，并合法冻结 common cutoff `21/10`。typed records `5/5`，正向算术候选到达 A2 仍 `0/5`，Route B `0/5`；路线保持 ARS Stage 1 / Route A。见[Round-8 报告](BATCH_ROUND8_PAPERS_24_28.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 2 完整稿完成；5/5 PDF、独立交叉评审后 0 Blocker/0 Major、372/372 全量测试通过** | 五篇 Round-8 定理/证书已各自转化为相对完整、可独立阅读的论文，共 21,520 audited body words / 62 pages / 31 closed references；8 个 Minor 全部修复，统一编译与结构审计 5/5 PASS。科学 Route-A 状态不晋级：typed records `5/5`，正向算术候选到达 A2 仍 `0/5`，Route B `0/5`。当前停在强制 **Stage 2 -> 2.5 用户确认点**。见[Round-9 完整稿报告](BATCH_ROUND9_PAPERS_24_28.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -37,13 +37,17 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 24--28 最新结论
 
-五篇仍处于 **ARS Stage 1 / Route A**，Route B 未调用，正向 Gates A--E 未
-到达。Round 8 保持五个 formal Route-A records：三个
+五个科学对象仍处于 **Route A 的 A0--A1 / A1--A2 证据层**，Route B 未调用，
+正向 Gates A--E 未到达；论文生产流程则已完成 **ARS Stage 2 (`WRITE`)**，
+正在等待 Stage 2.5 (`INTEGRITY`) 的显式用户确认。Round 9 不改写 Round 8
+冻结的五个 formal Route-A records：三个
 `ROUTE_A_EXPLORATORY`、两个 `ROUTE_A_REJECTED`。A1 owner/completeness 基础与
 P25 的负控 A2 校准继续增强，但正向算术候选到达 A2 仍为 `0/5`；唯一
 `A2_ANALYTIC_DETERMINANT` 仍只属于非算术 unit-roof symbolic control。五篇
 全历史测试 `372/372`、本轮重放测试 `80/80`、五项双遍字节一致全部通过；
-P24--P28 的补丁后独立对抗复审均为 CLEAN，ARS Stage 2 仍未授权。
+五篇共形成 21,520 audited body words、62 页 PDF 与 31 条闭合文献。独立
+交叉评审初始为 0 Blocker / 0 Major / 8 Minor，8 项均已修复，补丁后统一
+编译、引用/PDF/结构审计为 5/5 PASS。
 
 | Paper | 子类型 | 当前明确进展 |
 |---|---|---|
@@ -51,9 +55,11 @@ P24--P28 的补丁后独立对抗复审均为 CLEAN，ARS Stage 2 仍未授权�
 | [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering / symbolic suspension control | exact period means 为 `d-2a` 与 `d-sqrt(3)a`，差 `(2-sqrt(3))a>0`，故物理 roof 不与常数上同调，也不能由 owner/repetition-preserving 的 `z=exp(-cs)` 转移 unit-roof determinant；2,241-row locked replay 支持但不替代证明。symbolic tuple 不变，physical billiard `UNASSIGNED` |
 | [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | 实结构给出 exact coordinate `k=2y+z`；全部 138 instances 与 165 group/law verdicts 已分类为 2 full complex kernels、2 real-projection-only kernels、134 true nonkernels、0 unresolved。三种 laws 分别失败 51/55、51/55、55/55，仍无 global owner product/determinant/A2 |
 | [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit / homology-cover geodesic flow | 新注册 pure-homology panel 上证明 degree `N^4`、owner order `N`、`N^3` primitive lifts 与 period `N ell(g)`；四象限中只有同时使用 `1/N` clock 和 `1/N^3` log-multiplicity normalization 才逐级精确恢复 base finite-panel factor。该 generic candidate 为 `A0_FAIL/ROUTE_A_REJECTED`，不是 full determinant |
-| [P28](papers/28-bolza-magnetic-flow/README.md) | magnetic Hamiltonian flow | 对 `NAZARENKO-EXP-OCTAGON-G2` 证明 exact systole `2 acosh(1/(2exp(-1/5)-1))=2.04302665588...`，primitive witness 为 `g0*g3`；exact tile certificate 覆盖 18,533 included / 108,616 rejected-boundary states，证明 `Lambda=21/10` 内的 short classes 完备，因此 common cutoff 已冻结。matched census/comparison、A2 与 Route B 均未运行 |
+| [P28](papers/28-bolza-magnetic-flow/README.md) | nonarithmetic genus-two geodesic control / magnetic precursor | 对 `NAZARENKO-EXP-OCTAGON-G2` 证明 exact systole `2 acosh(1/(2exp(-1/5)-1))=2.04302665588...`，primitive witness 为 `g0*g3`；exact tile certificate 覆盖 18,533 included / 108,616 rejected-boundary states，证明 `Lambda=21/10` 内的 short classes 完备，因此 common cutoff 已冻结。matched census/comparison、magnetic flow、A2 与 Route B 均未运行 |
 
-下一批最小合法产物已经再次收窄：P24 预冻结并执行第三种真正属于 evaluator
+当前流程上的最小合法下一步是先经用户确认进入 **Stage 2.5 完整性审计**；
+在此之前不启动新研究轮或 Route B。其后的研究路线候选仍已收窄：P24
+预冻结并执行第三种真正属于 evaluator
 列举表的 canonical control，再寻找 Gaussian ideal/Hecke refinement；P25 保留
 roof nontransfer 为论文结果，physical A2 若继续必须另建 genuine nonconstant-roof
 operator；P26 对 138 instances 做 full-group conjugacy/multiplicity dedup；P27
@@ -62,7 +68,8 @@ P28 保持 `Lambda=21/10` 不变，直接进入 target-blind matched Bolza/contr
 geometric census，并先完成 conjugacy/inverse/primitivity 去重。当前覆盖五类主
 连续时间子型、12 个几何/物理参数实例，另有 7 个 `q`-symbol analytic
 calibrators；合计 19 个 frozen model instances，但不视为 19 个独立样本。
-详细定理、哈希、路线对应、初始限定与评审修补见
+详细定理、PDF 哈希、路线对应、动力系统初始限定与独立评审修补见
+[Round-9 完整稿报告](BATCH_ROUND9_PAPERS_24_28.md)；底层研究证书见
 [Round-8 执行报告](BATCH_ROUND8_PAPERS_24_28.md)。
 
 ## 按时间记录
@@ -183,3 +190,5 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 24--28-round7 - Stage 1 / Route A A0--A1 与 A1--A2 负控校准（2026-08-28） - 五篇分别落地 exact Bianchi `D9` theorem + owner noninjectivity witness、universal `q>=2` symbolic determinant family、四个 Level-11 survivors 的 exact kernel taxonomy、fixed-owner Euler-prefix escape theorem，以及 P28 非算术 genus-2 control `6/6` source package。全量测试 `292/292`、本轮 replay tests `71/71`、5/5 双遍确定性复验通过；typed records `5/5`，正向算术候选到达 A2 仍 `0/5`，P24/P28 mandatory A0 controls 均明记 `0/3 INCOMPLETE`，Route-B invocations `0/5`，Stage 2 未授权。详见 [Round-7 报告](BATCH_ROUND7_PAPERS_24_28.md)。
 
 24--28-round8 - Stage 1 / Route A A0--A1 与 A1--A2 ownership/completeness 校准（2026-08-28） - 五篇分别落地 universal principal-congruence + first-jet theorem、physical-roof nontransfer theorem、138-instance complete exact taxonomy、homology-cover four-quadrant renormalization theorem，以及非算术 genus-2 control exact systole + finite word-to-length completeness theorem。全量测试 `372/372`、本轮 replay tests `80/80`、5/5 双遍确定性复验与补丁后独立复审通过；P24 canonical mandatory controls 严格记为 `2/3 INCOMPLETE`，P28 `Lambda=21/10` 已冻结但 matched census/control comparison 仍未运行。typed records `5/5`，正向算术候选到达 A2 仍 `0/5`，Route-B invocations `0/5`，Stage 2 未授权。详见 [Round-8 报告](BATCH_ROUND8_PAPERS_24_28.md)。
+
+24--28-round9 - ARS Stage 2 `WRITE` / Route A 状态保持（2026-08-28） - 五个 Round-8 theorem/certificate spines 已形成五篇相对完整论文：总计 `21,520` audited body words、`62` PDF pages、`31/31` closed cited records；全历史测试 `372/372`、Round-8 verify-only `80/80`、5/5 确定性重建与 5/5 manuscript audits 通过。独立交叉评审为 0 Blocker / 0 Major / 8 Minor，全部补丁后 clean build；P24 `2/3` control gate、正向 A2 `0/5`、Route B `0/5` 均不变。Stage 2 完成，Stage 2.5 尚未开始，等待用户显式确认。详见 [Round-9 完整稿报告](BATCH_ROUND9_PAPERS_24_28.md)。

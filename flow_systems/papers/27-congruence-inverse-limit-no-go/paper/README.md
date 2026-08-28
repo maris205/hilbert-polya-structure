@@ -1,85 +1,41 @@
 # P27 paper status
 
-Manuscript not started; **ARS Stage 2 has not begun**.  The Stage-1 brief
-establishes the local progress tag `[PROVED] PROVED_A1_OBSTRUCTION`.  The
-formal same-owner evaluation is now
-`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, overall
-`ROUTE_A_REJECTED`.
+**ARS Stage 2 draft complete; Stage 2.5 is awaiting explicit user confirmation.** Stage 2.5 has not been passed.
 
-The Round-3 closest-prior audit is complete on a search-bounded basis.  Direct
-prior work already covers (i) hyperbolic laminations with no periodic geodesic
-orbits, (ii) universal/punctured solenoids with simply connected disk leaves,
-and (iii) the noncompact finite-area McCord-solenoid object class.  Therefore
-the theorem is not positioned as a new general aperiodicity result.  The
-candidate paper is narrowed to an explicit `Gamma(3 n!)` specialization,
-sign-sensitive residual proof, reproducible finite reduction-order ledger, and
-the logical firewall separating finite-level closing periods from a single
-inverse-limit-flow period.
+## Manuscript deliverables
 
-Round 2 supplies a reproducible owner-firewall experiment: three frozen
-hyperbolic elements across eight congruence levels give 24 finite reduction
-orders, with two independent algorithms agreeing in 24/24 rows and all 21
-bonding transitions passing. Those rows are owned by the finite tower, not by
-the inverse-limit flow, so they do not alter the theorem
-`Per(M_infinity)=empty`.
+- [manuscript source](manuscript.tex)
+- [bibliography](references.bib)
+- [compiled paper](paper.pdf) — 12 pages
+- [Stage 2 manuscript audit](stage2_manuscript_audit.md)
+- reproducible LaTeX/BibTeX intermediates in `build/`
 
-Round 4 adds the paper's general owner lemma: in a descending normal finite-
-index residual tower, the quotient orders of every infinite-order element
-diverge, so the corresponding finite-level whole-`g`-loop closing times escape
-to infinity.  These are minimal among whole traversals of the selected loop;
-they are not called primitive minimal periods without a separate conjugacy-
-primitivity proof.  Its proof is elementary and exact; the 24-row audit is
-explicitly a finite illustration.  This strengthens the methodological
-contribution while retaining the Round-3 decision not to claim general
-aperiodicity priority.
+Title: **Renormalization Obstructions in Congruence and Homology Towers of Geodesic Flows**.
 
-Round 5 closes the planned cocompact control.  A canonical residual tower of a
-closed genus-2 surface group, refined by mod-`n!` homology kernels, gives an
-explicit `n!` lower bound for quotient orders and minimal lifted periods of
-three primitive-homology geodesics.  This proves that the mechanism is not
-specific to cusps, principal congruence, or arithmetic lattices.  It also
-sharpens the publishable positioning: the prospective paper is comparative
-methodology and ownership discipline, not a standalone arithmetic or general
-aperiodicity discovery.
+The paper gives a complete comparative account of the frozen Round 2–8 program. For a descending normal residual tower with one physical clock it proves inverse-limit aperiodicity, divisibility and divergence of fixed-owner quotient orders, and coefficientwise escape of every fixed finite owner panel. It specializes the theorem to `Gamma(3n!)`, includes a closed genus-two residual/homology control, and keeps finite whole-loop diagnostics distinct from primitive-period claims.
 
-Round 6 freezes the paper-facing outcome.  A short comparative owner-audit is
-GO; a standalone new general aperiodicity theorem and a same-owner Route-A A2
-paper are both NO-GO.  The contribution lock centers the common residual-tower
-proposition, the exact cusped specialization, the cocompact factorial bound,
-and the finite-owner firewall.  Five primary sources have authoritative web
-records and exact locators, but all nine external claim rows remain
-`HUMAN_CONFIRMATION_PENDING`; none is marked `USER_ATTESTED_READ`.
+The separately registered pure homology-cover calibrator proves that a primitive content-one owner has cover degree `N^4`, deck order `N`, `N^3` primitive lift components, and physical period `N ell(g)`. The four-quadrant theorem shows that clock rescaling or multiplicity normalization alone fails; their simultaneous use recovers the base finite-panel factor exactly. This is a generic fixed-panel calibration, not a global arithmetic determinant.
 
-Round 7 adds the paper's strongest same-owner analytic statement.  Every fixed
-primitive base owner's finite-level Euler factor becomes trivial in every
-fixed coefficient prefix, and the same holds for every fixed finite owner
-panel.  This turns the owner firewall into a coefficient-stability no-go
-theorem while leaving genuinely new, explicitly renormalized collective
-objects outside its scope.  See [the Round-7 research spine](round7_research_spine.md).
+The original residual candidate retains
 
-Round 8 constructs exactly such a separately registered calibration object.
-On pure genus-two homology covers, time rescaling and lift-multiplicity
-normalization form a four-quadrant theorem: either intervention alone fails,
-whereas both together recover the base finite-owner factor exactly at every
-level.  The result is generic and finite-panel only, so it is a Route-A
-negative control rather than a promotion.  See [the Round-8 research
-spine](round8_research_spine.md).  Stage 2 remains unauthorized.
+```text
+(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)
+```
 
-Stage-1 planning artifacts:
+and the calibrator retains
 
-- [closest-prior audit](../notes/round3_closest_prior_audit.md)
-- [Round-3 conclusion](../notes/round3_conclusion.md)
-- [Round-4 period-escape theorem](../notes/round4_period_escape_theorem.md)
-- [Round-5 cocompact control theorem](../notes/round5_cocompact_control_theorem.md)
-- [Round-6 compact-versus-cusped positioning audit](../notes/round6_compact_cusped_positioning_audit.md)
-- [Round-6 written go/no-go decision](../notes/round6_go_no_go_decision.md)
-- [Round-6 contribution lock](round6_contribution_lock.md)
-- [Round-7 owner-factor escape theorem](../notes/round7_owner_factor_escape_theorem.md)
-- [Round-7 research spine](round7_research_spine.md)
-- [Round-8 collective-renormalization theorem](../notes/round8_homology_renormalization_theorem.md)
-- [Round-8 research spine](round8_research_spine.md)
-- [research spine / methodology / section plan](stage1_research_spine.md)
+```text
+(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)
+```
 
-The spine and contribution lock are plans, not manuscript prose.  The narrow
-paper class is approved at the project level; advancement to Stage 2 remains
-conditional on human confirmation of the cited passages.
+Both remain `ROUTE_A_REJECTED`; Route B remains unauthorized.
+
+Verification completed on 2026-08-28:
+
+- all historical unit tests: **58/58 PASS**;
+- Round-8 verify-only reproducer: **12/12 PASS**, 96 quadrant rows, 1,248 coefficient rows, core SHA-256 `a1b588724dacb2ab2986326a7a5e1c6aec654c61538c1465e26564357b568b33`;
+- LuaLaTeX + BibTeX build: **PASS**, no undefined citations/references and no box overflow;
+- citation ledger: **5/5 cited entries**, no missing keys and no orphans;
+- no `__pycache__/` or `.pyc` residue.
+
+Research-history anchors remain available in the [Stage-1 spine](stage1_research_spine.md), [Round-6 contribution lock](round6_contribution_lock.md), [Round-7 spine](round7_research_spine.md), and [Round-8 spine](round8_research_spine.md).

@@ -1,55 +1,67 @@
-# P25 paper status
+# Paper 25 manuscript status
 
-Manuscript not started.  The intended result is a rigorous negative-control
-paper built from the internally prespecified geometry and label controls.  The
-A0 arithmetic source is `[MODELING_CHOICE] ABSENT_BY_CONSTRUCTION`; the separate
-word-length-at-most-12 experiment is now `[NUMERICAL_OBSERVATION]` and earns
-`[STOP_SCOPED] / PROVES_TOO_MUCH` only for treating generic instability
-half-density persistence as arithmetic evidence.  The physical-flow Route
-tuple and manuscript remain unassigned/not started.
+Date: **2026-08-28**
 
-Round 3 closes the principal numerical-method caveat in the prospective paper:
-the direct physical return-map stability check now covers 2,241/2,241 rows,
-versus 9/2,241 in Round 2.  The manuscript can therefore separate two clean
-claims: a full finite-cutoff numerical stability calibration and a negative
-arithmetic-specificity control.  Neither is presented as an exact determinant
-theorem or a formal Route-A evaluation.
+Current pipeline state: **ARS Stage 2 draft complete; Stage 2.5 awaiting user
+confirmation.** Stage 2.5 has not been passed or claimed.
 
-Round 4 supplies the prospective Methods/Robustness subsection.  It exposes
-the full 2,202/39 refinement-method partition, locks every fallback row in a
-separate audit ledger, and verifies that the fallback path is target-free at
-the source-dependency level.  The prospective paper can therefore state that
-no difficult row was silently excluded while still labeling the audit
-post-hoc, descriptive, finite-cutoff, and non-causal.  Manuscript drafting
-remains not started.
+## Stage 2 deliverables
 
-Round 5 supplies the paper's analytic mechanism theorem.  For a real `2 x 2`
-symplectic hyperbolic map, the exact repeated-orbit stability amplitude is the
-project half-density times `1/|1-sigma^r Lambda^(-r)|`.  The 6,723-row replay
-keeps primitive/repeated owners and physical eigenvalue signs explicit.  P25 is
-therefore retained as a methods/negative-control paper with a complete research
-spine.  This is not an ARS Stage-2 manuscript authorization.
+- manuscript.tex — complete English manuscript with an independent
+  Traditional-Chinese abstract.
+- references.bib — eight verified and fully cited primary sources,
+  natbib/plainnat numeric style.
+- paper.pdf — 12-page LuaLaTeX/BibTeX build.
+- stage2_manuscript_audit.md — integrity, citation, claim, structure, test, and
+  reproducibility audit.
 
-See [the Round-5 research spine](round5_research_spine.md).
+The post-review root Round-9 audit counts **4,055 English body words**, eight bibliography
+entries, eight cited keys, no missing or orphan references, and all required
+manuscript/declaration surfaces.
 
-Round 6 adds the separately typed unit-roof symbolic calibrator.  Its 747
-owners reproduce `det(I-zA)^(-1)` through degree 12, and collision parity is
-exactly `zeta_pi(z)=zeta_0(-z)`.  Its formal tuple is
-`(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`, overall
-`ROUTE_A_REJECTED`.  These A1/A2 credits do not transfer to the physical
-flight-length flow or exact scattering determinant.
+## Paper-level result
 
-Round 7 promotes that single q=3 calibrator into an infinite-family theorem.
-For every integer `q>=2`, the q-symbol no-repeat primitive Euler product is the
-reciprocal of `(1-(q-1)u z)(1+u z)^(q-1)`, and collision parity remains only
-`z -> -z`.  This is the paper's new analytic progress: it shows that exact
-primitive-to-determinant wiring persists across arbitrary alphabet size while
-arithmetic A0 remains absent.  See [the Round-7 research spine](round7_research_spine.md).
+Title: **Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Physical
+Three-Disk Flow**
 
-Round 8 supplies an exact clock-ownership theorem.  The period-two and
-period-three physical means differ by `(2-sqrt(3))a`, so the physical roof is
-not cohomologous to a constant and the unit-roof determinant cannot be imported
-through a single scalar substitution.  This turns the prior type warning into
-a theorem with a quantitative minimax lower bound and a locked 2,241-row
-replay.  See [the Round-8 research spine](round8_research_spine.md).  Stage 2
-and manuscript drafting remain unauthorized.
+For equal disks of radius \(a\) and equilateral center spacing \(d\), the paper
+proves the exact physical mean roofs
+\[
+T_2/2=d-2a,\qquad T_3/3=d-\sqrt3a.
+\]
+Their positive gap \((2-\sqrt3)a\) proves that the physical roof is not
+cohomologous to a constant, excludes every owner- and repetition-preserving
+scalar transfer \(z=e^{-cs}\), and gives a minimax mean-error lower bound of
+\((2-\sqrt3)a/2\).
+
+The locked replay contains 2,241 physical-orbit rows: 747 at each of
+\(d/a=29/5,6,31/5\). Per geometry, the period-two-derived constant matches
+three period-two owners and disagrees with 744 other owners. The paper also
+proves the exact \(q\)-symbol no-repeat unit-roof determinant family and the
+universal two-dimensional hyperbolic half-density factorization.
+
+## Claim boundary
+
+The positive symbolic A1/A2 results belong only to the typed unit-roof
+symbolic object. They do not transfer to the physical flight-length flow. The
+symbolic tuple remains
+\((A0_{\rm fail},A1_{\rm pass\ analytic},A2_{\rm analytic\ determinant},
+A3_{\rm fail},A4_{\rm fail})\), overall Route-A rejected.
+
+The physical flow remains unassigned. The manuscript does not claim a
+nonconstant-roof physical determinant, equality with the exact quantum
+multiple-scattering determinant, an arithmetic source, a resonance/prime/zero
+fit, or a spectral realization. Route B was not run and is not invocable.
+
+## Verification
+
+- Full historical unit suite: **65/65 passed**.
+- Round-8 verify-only reproducer: **12/12 passed**; existing artifacts
+  verified.
+- Final PDF build: clean LuaLaTeX, BibTeX, LuaLaTeX, LuaLaTeX chain.
+- No Python cache files remain.
+
+Earlier Stage-1 research development remains documented in the Round-5,
+Round-7, and Round-8 research spines and the notes, results, experiments, and
+code directories. The manuscript supersedes the former not-started status
+without altering frozen evidence.

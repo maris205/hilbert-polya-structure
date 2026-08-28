@@ -4,7 +4,9 @@ Date: **2026-08-28**
 
 | Item | Status |
 |---|---|
-| ARS Stage 1 | **IN PROGRESS** |
+| ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 theorem spine |
+| ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
+| ARS Stage 2.5 | **AWAITING EXPLICIT USER CONFIRMATION** — not passed |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |
@@ -50,13 +52,15 @@ Date: **2026-08-28**
 | Round-8 complete group taxonomy | **PROVED / 55 OF 55** — `a_p` and `a_p^2` each have 4 exact survivors and 51 exact failures; secondary `a_p^2-p` has 55 exact failures; 165/165 exact verdicts agree with inherited numerical cross-checks |
 | Round-8 failure explanation | **COMPLETE FOR FROZEN FINITE MULTISET** — all 51 primary failures have nonzero rational square mass at a nonunit Hecke degree; the four positives are exactly the full/projection kernels |
 | Round-8 reproducibility | **REPRODUCIBLE** — 18/18 tests; two byte-identical runs; tree SHA-256 `cc36c1f952c9ce89050996f4bb4c9905571f9ef09a0d7115be8a985e02a5621d` |
-| Proposal stage | Stage 1 / Route A A0--A1 |
+| Proposal stage | **ARS Stage 2 draft complete / Route A A0--A1 exploratory** |
 | Formal Route-A tuple | **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`** |
 | Overall Route-A status | **`ROUTE_A_EXPLORATORY`** — no promotion |
 | Route-A A2 evaluation | **FAIL / NOT_TESTABLE** — no formal A2 campaign; only the finite/local variation audit ran |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | NOT STARTED |
+| Manuscript | **COMPLETE STAGE-2 DRAFT** — 4,729 source-aware body words, 12 pages, 5 verified cited sources |
+| Stage-2 regression | **PASS** — 74/74 historical tests plus 18/18 Round-8 verify-only tests |
+| Stage-2 PDF | **PASS** — unified post-review LuaLaTeX + BibTeX/plainnat numeric build; SHA-256 `b2911495fff88a1e351c4b7cc65989f998df47822b3a2bae0db60b543c34d5aa`; independent review CLEAN |
 
 The positive-word ledger is finite and is not a complete `Gamma_0(11)`
 conjugacy-class certificate. The Hecke correspondence-cycle relation is now
@@ -79,3 +83,10 @@ square-sum identity.  This completes the frozen finite taxonomy but does not
 create prime ownership, a global conjugacy census, or a global determinant.
 The formal evaluation remains exploratory, A2 is `FAIL/NOT_TESTABLE`, and
 Route B remains disallowed.
+
+Round 9 converts the frozen theorem spine into the full paper
+`paper/manuscript.tex`, bibliography, compiled `paper/paper.pdf`, and
+`paper/stage2_manuscript_audit.md`.  The paper preserves the finite-multiset
+quantifier, exact 2/2/134 kernel split, 51/55 primary failures, and every
+Route-A/Route-B firewall.  ARS Stage 2 is complete as a draft only.  Stage 2.5
+awaits explicit user confirmation and has not been passed.

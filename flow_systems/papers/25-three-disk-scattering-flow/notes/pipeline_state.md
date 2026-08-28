@@ -2,9 +2,18 @@
 
 Date: **2026-08-28**
 
+Stage-2 handoff: the complete manuscript, references, 12-page PDF, clean build
+log, and manuscript audit are delivered under paper/. The next editorial gate
+is **ARS Stage 2.5 user confirmation**; no Stage 2.5 pass is claimed. A future
+physical-flow promotion still requires a genuinely nonconstant-roof operator
+with explicit ownership and analytic control; symbolic A1/A2 credit cannot be
+copied to the physical-flow row.
+
 | Item | Status |
 |---|---|
-| ARS Stage 1 | **IN PROGRESS** |
+| ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
+| ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
+| ARS Stage 2.5 | **AWAITING USER CONFIRMATION** — not passed or claimed |
 | Continuous-time object | **FROZEN** — equilateral three-disk exterior billiard |
 | No-eclipse condition | **`[PROVED]`** for `d=6a` |
 | Clock / primitive / repetition | **FROZEN** — flight length / cyclic primitive word / traversal powers |
@@ -27,14 +36,14 @@ Date: **2026-08-28**
 | Round-8 scalar-transfer audit | **REFUTED / REPRODUCIBLE** — no owner/repetition-preserving `z=exp(-cs)` transfer; 6 exact witness rows, 2,241 locked replay rows, 12/12 tests, core SHA-256 `9a29d8894b1ac81f9588fe221375bddc671898b9b08b409b0fa5a1d5a42a9014` |
 | Half-density kill control | **EXECUTED** — 747 complete neighboring-parameter triplets plus shuffled/random/composite controls |
 | `PROVES_TOO_MUCH` verdict | **`[STOP_SCOPED]`** for half-density persistence as arithmetic evidence |
-| Proposal stage | Stage 1 / typed A1--A2 negative-control calibration |
+| Proposal stage | Stage 2 complete draft / typed A1--A2 negative-control calibration |
 | Typed symbolic Route-A tuple | `THREE-DISK-NO-REPEAT-MASLOV-SYMBOLIC = (A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_REJECTED` |
 | Round-7 family Route-A tuple | `P25-Q-SYMBOL-NO-REPEAT-PHASE-CALIBRATOR = (A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_REJECTED` |
 | Round-8 Route effect | tuple unchanged and still owned by the unit-roof symbolic object; physical scalar-clock credit transfer is now exactly refuted |
 | Physical three-disk Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Paper disposition | **RETAIN** — methods/negative-control paper research spine complete; manuscript remains unauthorized/not started |
+| Paper disposition | **RETAIN / STAGE 2 DRAFT COMPLETE** — post-review 4,055-word audited body; 8/8 citation closure; clean 12-page PDF; independent review 0 Blocker/0 Major and both Minors fixed |
 
 The A0-source absence is fixed by the control design.  It is not an inference
 from the separate half-density experiment.  The Round-2 control now shows that
