@@ -224,6 +224,20 @@ Evidence status: [NUMERICALLY_CERTIFIED] for the finite diagnostic only.
 - Report the 24-row prefix and all plateaus without treating finite growth as
   the proof of asymptotic escape.
 
+### 5B. Cocompact factorial control
+
+- Replace the cusped modular surface by a marked closed genus-2 hyperbolic
+  surface.
+- Intersect the canonical bounded-index residual core with the mod-`n!`
+  homology kernel.
+- Prove the tower is normal, finite-index, nested, and residual.
+- For primitive homology owners, prove `n!` divides the quotient order and
+  hence `T_n(g)>=n! ell(g)`.
+- Use primitive homology plus the cyclic hyperbolic-axis stabilizer to justify
+  minimal lifted periods.
+- State explicitly that the executable computes exact homology lower bounds,
+  not the full residual-core quotients.
+
 ### 6. The finite-owner firewall
 
 - Finite-level period versus one common inverse-limit time.
@@ -233,9 +247,12 @@ Evidence status: [NUMERICALLY_CERTIFIED] for the finite diagnostic only.
 ### 7. Limits and controls
 
 - Exact-chain result is an explicit specialization.
-- Full conjugacy-class primitivity remains open but irrelevant to the landed
-  diagnostic.
-- Cocompact residual-tower control remains to be executed.
+- Full conjugacy-class primitivity remains open for the old Round-2
+  `Gamma(3)` matrix owners but irrelevant to that diagnostic.  The three
+  Round-5 closed-surface owners are separately primitive by their primitive
+  homology vectors.
+- Cocompact residual-tower control is complete and removes cusp,
+  principal-congruence, and arithmetic specificity.
 - Any future normalized finite-level statistic needs a new owner and a new
   evaluation.
 
@@ -275,7 +292,7 @@ a periodic orbit of M_infinity.
 
 ## Stage-1 exit criteria before any Stage-2 draft
 
-1. Complete the cocompact residual-tower control.
+1. **Complete:** cocompact residual-tower control.
 2. Decide whether there is a genuinely broader proposition beyond the known
    simply-connected-leaf mechanism.
 3. Perform a human verification of S1--S4 and their citation chains.

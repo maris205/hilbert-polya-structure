@@ -1,5 +1,46 @@
 # P28 results and owner ledgers
 
+## Round-5 bounded matched marked-cyclic census
+
+`round5_bolza_marked_cyclic_census.csv` contains 390 canonical records for all
+freely and cyclically reduced marked words of length at most four, modulo
+cyclic rotation and inversion.  The length counts are `4,16,60,310`; 366 rows
+are marked-primitive candidates and 24 are explicit powers.  The artifact is
+complete for that declared finite equivalence only.  It is not called a full
+`Gamma`-conjugacy census.
+
+Every row carries its marked root/repetition, exact matrix and inverse-paired
+matrix hashes, exact trace and trace squared, 120-decimal length, exact
+primitivity margin, homology vector/axis, owner-credit state, completeness
+boundary, and route firewalls.  Exact arithmetic in
+`Q(s,t,i)`, `s^2=2`, `t^2=1+s`, `i^2=-1`, finds no literal PSL matrix or
+inverse collisions.  Equal trace squared is recorded only as an isospectral
+group and never as a conjugacy certificate.
+
+The exact `ell<2ell_B` test proves `Gamma` primitivity for 44 rows.  These
+occupy 36 homology axes modulo sign.  `primitive_axis_owner_id` is assigned to
+exactly one proved row per such axis; eight other proved primitives sharing an
+axis are withheld, and 322 marked-primitive rows retain
+`NOT_ESTABLISHED_MARKED_PRIMITIVE_ONLY`.  Thus no unresolved record creates a
+second owner credit.
+
+`round5_bolza_magnetic_branch_ledger.csv` contains only the 36 credited owners
+per field at `k=+-1,+-2,+-3,+-4`: 288 rows per field and 576 total, split into
+144 `|k|=1` branch rows and 432 repetition rows.  It retains the Round-4
+inverse-paired owner convention, both partner involutions, the signed trace
+time/action/stability laws, all regime firewalls, and 48/48 historical seed
+compatibility checks.
+
+Supporting artifacts are:
+
+- `round5_bolza_marked_cyclic_certificate.json` — exact field, relator,
+  normal-form, count, equality/inverse, trace-isospectral, primitivity, and
+  distinctness certificates;
+- `round5_bolza_marked_cyclic_validation.json` — `PASS` with row/law/partner,
+  target-data, route, and Round-4 compatibility totals; and
+- `round5_nonarithmetic_control_contract.json` — a design-only source and
+  parameter contract.  It selects no geometry and reports no control result.
+
 ## Round-4 explicit Bolza magnetic-owner seed
 
 `round4_bolza_magnetic_owner_ledger.csv` is the first genuine conjugacy/orbit
@@ -60,10 +101,11 @@ The `h=1/N` column is a `MODELING_CHOICE`; the rescaled operator and trace
 regime remain `UNASSIGNED`, the energy window remains `OPEN`, and all orbit
 ownership fields remain `NOT_ESTABLISHED`.
 
-## Extension schema beyond the Round-4 seed
+## Extension schema beyond the Round-5 finite artifact
 
-The Round-4 seed now instantiates the central owner columns.  A later
-bounded-length census and non-arithmetic control must extend it with:
+The Round-5 artifact now instantiates the central owner columns for the safely
+credited finite subset.  The non-arithmetic control and later common-cutoff
+comparison must preserve:
 
 ```text
 field_b,bundle_degree,tensor_power_N,energy_window,trace_regime,
@@ -92,8 +134,10 @@ The `b=0,+1/2,-1/2` runs must share the same `tensor_power_N`, energy-window
 convention, trace regime, normalization, and orbit-selection rule.  Future
 orbit rows may cite `PROVED` trace ownership only for the frozen
 source-compatible signed-field even subsequence and only with its clock and
-signed-`k`/inverse-pair conventions.  A new row also needs a certified group normal form
-or another explicit conjugacy/completeness certificate.  Zero-field, odd-`N`,
+signed-`k`/inverse-pair conventions.  A new owner row also needs a certified
+group normal form or another explicit primitivity and conjugacy/distinctness
+certificate.  Marked-cyclic completeness alone is insufficient for full
+`Gamma`-conjugacy credit.  Zero-field, odd-`N`,
 arbitrary-twist, full all-`N`, and fixed-operator rows remain `OPEN` /
 `NOT_ESTABLISHED`.
 

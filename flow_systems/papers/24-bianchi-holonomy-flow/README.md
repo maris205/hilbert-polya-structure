@@ -16,7 +16,11 @@ Working title: *Complex Lengths and Holonomy-Twisted Orbit Traces on a Bianchi F
   cyclic-word ledger through the same marked cutoff.  Round 4 replaces that
   geometry-mismatched surrogate with the source-proved finite-volume,
   one-cusped, non-arithmetic `5_2=m015` control and a replayable
-  high-precision complex-length prefix.
+  high-precision complex-length prefix.  Round 5 now closes the Round-4
+  enumeration **data-type** mismatch with one pre-frozen marked cyclic-word
+  algorithm and one phase-sensitive statistic on both systems.  It retains the
+  explicit marked-count-4/alphabet-8 versus marked-count-2/alphabet-4
+  presentation confound.
 - Primary arithmetic target: **Dedekind-zeta calibration for `Q(i)`**.  This does
   not confer Riemann-`zeta` A0 credit.
 - Formal Route-A tuple: **unassigned**.
@@ -121,6 +125,46 @@ distribution, and a full primitive spectrum are unmatched.  No cross-system
 score is reported because the Bianchi side is a generator word ball while the
 new control uses a metric cutoff.
 
+## Round-5 common marked-word census
+
+`[PROVED]` for the finite symbolic contract: both systems use freely reduced,
+cyclically reduced words through marked length 5; the owner is the
+lexicographic minimum over cyclic rotations and inverse rotations; symbolic
+primitivity is the exact shortest word root; and multiplicity counts all linear
+words mapped to that owner.  The phase statistic and its 64 target-free
+permutations were frozen before execution under SHA-256
+`210cff78b8af54847baae1c7ef21572dd697d70004f50723f6b1bac4e19a85b7`.
+
+```text
+                                      Bianchi       5_2 control
+marked positive count / alphabet size    4 / 8            2 / 4
+raw cyclically reduced linear words    19,624              372
+canonical unoriented marked owners      2,074               51
+symbolic primitive / repetition       2,046/28            41/10
+loxodromic / parabolic / identity    1,940/132/2          48/3/0
+primitive loxodromic comparison rows    1,932               39
+```
+
+The candidate matrices satisfy determinant one and level-`(3)` membership
+exactly.  The control uses the pinned two-generator SnapPy presentation at
+212-bit precision, with maximum determinant residual `1.5618e-62`; those
+control holonomies remain non-interval numerical observations.  Both phase
+calculations then use the same binary64/17-significant-digit projection.
+
+For the frozen phase statistic
+`q=corr(ell,cos(theta))+i corr(ell,sin(theta))`, the permutation-standardized
+values are `-1.74684253916` and `-0.811352306226`, with absolute contrast
+`0.935490232934`.  Both observed `|q|` values are below their own 64-permutation
+null means.  No inferential threshold was frozen, and the rank/presentation and
+sample-size asymmetries remain.  This is therefore a marking-dependent
+`[NUMERICAL_OBSERVATION]`, not an arithmetic kill verdict.
+
+Round 5 closes only the former word-ball-versus-metric-cutoff **type mismatch**.
+It does not create a common alphabet, a presentation-invariant statistic, a
+metric primitive spectrum, a Gaussian-prime owner, or a formal Route tuple.
+The “rank” shorthand here means marked positive-generator count, not a claim
+about minimal group rank or a free presentation.
+
 ## Frozen dynamical system
 
 Let `Gamma((3))` be the principal congruence subgroup of
@@ -216,11 +260,19 @@ does not close the kill verdict.  A valid statistic now requires a shared
 enumeration rule; directly comparing the Round-2 Bianchi word ball with the
 Round-4 metric length prefix would mix incompatible ledgers.
 
+Round 5 removes that direct data-type error by executing one marked-word rule
+and one predeclared phase statistic on both systems.  It also exposes why the
+kill verdict is still not licensed: the samples arise from four-symbol and
+two-symbol positive markings and contain 1,932 versus 39 primitive loxodromic
+rows.  The next smallest gate is a preregistered same-marked-generator-count
+Nielsen sensitivity panel,
+not a post-hoc interpretation of the current contrast.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
 - [pipeline state](notes/pipeline_state.md)
-- [planned ledger](results/README.md)
+- [executed result ledgers](results/README.md)
 - [Round-2 conclusion](notes/round2_conclusion.md)
 - [Round-2 validation](experiments/round2_validation.md)
 - [Round-3 Schottky-control conclusion](notes/round3_conclusion.md)
@@ -228,6 +280,10 @@ Round-4 metric length prefix would mix incompatible ledgers.
 - [Round-4 finite-volume-control conclusion](notes/round4_conclusion.md)
 - [Round-4 source audit](notes/round4_source_audit.md)
 - [Round-4 validation](experiments/round4_validation.md)
+- [Round-5 theorem and method note](notes/round5_matched_marked_word_theorem.md)
+- [Round-5 conclusion](notes/round5_conclusion.md)
+- [Round-5 pre-result freeze](experiments/round5_freeze_contract.json)
+- [Round-5 validation](experiments/round5_validation.md)
 - [Stage-1 paper spine](paper/stage1_research_spine.md)
 
 No manuscript, orbit-to-prime-ideal map, formal Route advancement, or quantum

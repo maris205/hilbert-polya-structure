@@ -1,4 +1,4 @@
-# P24 code status — Round 2 executed
+# P24 code status — Rounds 2–5
 
 `round2_bianchi_ledger.py` uses exact pairs of Python integers for Gaussian
 arithmetic.  It enumerates the reduced word ball of
@@ -78,3 +78,37 @@ bash experiments/reproduce_round4.sh
 The theorem chain proves the finite-volume one-cusp non-arithmetic control;
 the executable decimal invariants remain non-interval numerical observations.
 No prime, zero, arithmetic label, or target-fitted cutoff is consumed.
+
+## Round 5 — matched marked-word comparison
+
+`round5_matched_marked_word.py` reads and hash-validates the pre-result contract
+in `experiments/round5_freeze_contract.json`.  It runs one generic enumeration
+function on inverse-paired alphabets with 4 and 2 positive marked symbols:
+
+```text
+freely reduced -> cyclically reduced -> rotations plus inverse rotations
+-> lexicographic owner -> shortest symbolic root -> marked multiplicity.
+```
+
+The candidate reuses the exact Gaussian-integer Round-2 matrices.  The control
+uses the pinned SnapPy 3.3.2 two-generator presentation and evaluates words in
+its 212-bit high-precision `SL2C` representation.  The common phase statistic
+uses the same binary64/17-significant-digit complex-length projection on both
+sides.  It and the 64 target-free permutations are part of the executable
+pre-result contract, not selected after the ledger is viewed.
+
+Commands:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 code/test_round5_matched_marked_word.py -v
+PYTHONDONTWRITEBYTECODE=1 python3 code/round5_matched_marked_word.py
+PYTHONDONTWRITEBYTECODE=1 python3 code/round5_matched_marked_word.py --verify-existing
+bash experiments/reproduce_round5.sh
+```
+
+The algorithm, canonicalization, symbolic primitivity, multiplicity and cutoff
+match.  Marked generator count and presentation do not: count 4/alphabet 8
+versus count 2/alphabet 4 is a frozen confound.  This is not a claim about
+minimal group rank.  The outputs are marked symbolic censuses,
+not complete group-conjugacy or metric-length spectra.  No prime/zero target
+data are read, and no formal Route tuple or A2+ evaluation is emitted.

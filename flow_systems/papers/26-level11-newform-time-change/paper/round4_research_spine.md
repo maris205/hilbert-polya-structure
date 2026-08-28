@@ -9,8 +9,9 @@ level-11 newform time change:
 2. the correctly normalized Hecke correspondence sends that owner to a finite
    sum of explicitly owned closed geodesics;
 3. the sum of their newform periods is exactly `a_p` times the original period;
-4. the finite Round-4 sample certifies all 138 resulting cycle owners as
-   primitive in `Gamma_0(11)`; and
+4. the finite Round-4 sample certifies all 138 resulting cycle-owner instances
+   as primitive in `Gamma_0(11)`, without full cross-instance conjugacy
+   deduplication; and
 5. the genus-one cohomology control proves that this Hecke identity alone is
    not selective enough to imply a primitive dynamical Euler factorization.
 
@@ -60,7 +61,7 @@ what Hecke owns, what is summed, and why the natural control also passes.
 ## Manuscript gate
 
 ARS remains at Stage 1, so this file is a research spine rather than a draft.
-The next paper-facing decision is whether to formulate a theorem-only case
-study around the correspondence owner plus obstruction, or first attempt the
-smallest zeta-variation algebra needed to decide whether the sum-valued Hecke
-action survives primitive/repetition bookkeeping.
+Round-5 disposition: the smallest zeta-variation algebra has now been carried
+out.  It proves exact inverse-orientation cancellation for the canonical
+product and a separate degree-moment obstruction for a one-sided audit.  The
+current paper-facing structure is in `round5_research_spine.md`.

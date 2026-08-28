@@ -145,3 +145,53 @@ A2_DYNAMICAL_ZETA_EVALUATION=NOT_RUN
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false
 ```
+
+## Round-5 addendum — 2026-08-27
+
+The frozen reciprocal primitive-orbit convention makes the zeta hypothesis
+fully algebraic before any global A2 claim.  For an oriented primitive owner
+`gamma#`, repetition `r` contributes
+
+```text
+d/depsilon [exp(-s r T_epsilon(gamma#))/r]|_0
+  = -s I(gamma#) exp(-s r ell(gamma#)).
+```
+
+The frozen-stability Selberg-type version divides this term by
+`1-exp(-r ell(gamma#))`.  These identities are `[PROVED]` for finite owner
+families and wherever the infinite sum is locally uniformly convergent.
+
+The canonical oriented product has a stronger obstruction:
+`I(gamma#^(-1))=-I(gamma#)` at the same length, so inverse primitive orbits
+cancel exactly and the first variation is zero.  A positive-word-only product
+is therefore only a noncanonical orientation half-ledger.
+
+On that half-ledger, let `P_d` be the sum of Hecke output periods at
+permutation-cycle degree `d`.  A naive Ruelle or frozen-Selberg Hecke
+recurrence for every `s` is equivalent to
+
+```text
+P_1=a_p I(M),
+P_d=0 for d>1.
+```
+
+This degree-moment theorem follows by `q=exp(-s ell(M))` expansion and Mobius
+inversion.  Round 4 proves only `sum_d P_d=a_p I(M)`, so it does not imply a
+zeta/Euler recurrence.  The source-locked finite audit records 1,104
+orientation/repetition rows, 110 degree moments, and 165 one-sided variation
+rows.  It observes 51/55 alpha groups violating the all-`s` moments and
+153/165 failures for each frozen zeta kernel.
+
+Accordingly,
+
+```text
+CANONICAL_INVERSE_PAIRED_FIRST_VARIATION=PROVED_EXACT_ZERO
+HECKE_DEGREE_MOMENT_CRITERION=PROVED
+HECKE_PERIOD_RELATION_IMPLIES_ZETA_RECURRENCE=false
+DISCRIMINATIVE_HECKE_EULER_EVIDENCE=STOP_SCOPED
+PRIMITIVE_EULER_FACTORIZATION=NOT_ESTABLISHED
+FORMAL_A0_A4_TUPLE=UNASSIGNED
+A2_DYNAMICAL_ZETA_EVALUATION=NOT_RUN
+ROUTE_B_EVALUATION=NOT_RUN
+ROUTE_B_INVOCATION_ALLOWED=false
+```

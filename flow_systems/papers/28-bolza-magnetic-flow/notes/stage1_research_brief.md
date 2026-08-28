@@ -165,14 +165,41 @@ both fields therefore produce 48 rows.  Field reversal maps `(b,k)` to
 builds passed.  The ledger contains no target data and assigns no arithmetic
 labels.  It is explicitly incomplete outside the four side-pairing axes.
 
+## Round-5 execution — 2026-08-27
+
+The four-axis seed is expanded to an exhaustive matched marked-cyclic census
+at marked length `L<=4`.  Canonicalization under cyclic rotation and inversion
+produces 390 rows: 366 marked-primitive candidates and 24 explicit powers.
+The source matrices are evaluated exactly in
+`Q(s,t,i)`, with `s^2=2`, `t^2=1+s`, and `i^2=-1`; no two canonical rows
+collide under literal projective matrix equality or equality after inversion.
+This is complete only for the declared marked-word equivalence, not for full
+`Gamma` conjugacy.
+
+The exact inequality `abs(trace)<10+8sqrt(2)`, equivalently
+`ell<2ell_B`, proves `Gamma` primitivity for 44 rows.  Conjugacy preserves the
+abelianized homology vector and inversion negates it, so the no-double-credit
+gate assigns at most one owner per homology vector modulo sign.  Thirty-six
+mutually distinguished inverse-paired owners per field receive credit; eight
+same-axis proved primitives are withheld, and 322 marked-primitive candidates
+remain `NOT_ESTABLISHED`.  The credited set produces 576 signed-field branches
+at `k=+-1,+-2,+-3,+-4`, including 48/48 compatible Round-4 seed branches.
+Fourteen tests and two byte-identical builds passed with tree SHA-256
+`1c8665ea55826e73c6aeb5f8cd6386a8d1020976d23004e1216d05e2f1e8a138`.
+
+The non-arithmetic constant-curvature genus-two control is not instantiated.
+Its source, non-arithmeticity, systole, marking, physics, and common-geodesic-
+cutoff requirements are frozen in a design-only contract.  No geometry or
+comparison result is fabricated.
+
 ## Route mapping
 
 ```text
 PROPOSAL_STAGE=1
 ROUTE_A_SCOPE=A0-A1
 A0_SCREEN=ARITHMETIC_SUBSTRATE_PRESENT_PRIME_LINK_UNPROVED
-A1_PROGRESS=4_INVERSE_PAIRED_AXIS_OWNERS_PER_FIELD_48_SIGNED_K_BRANCH_ROWS
-A1_COMPLETENESS=NOT_COMPLETE_BOLZA_PRIMITIVE_SPECTRUM
+A1_PROGRESS=36_DISTINCT_INVERSE_PAIRED_AXIS_OWNERS_PER_FIELD_576_SIGNED_K_BRANCH_ROWS
+A1_COMPLETENESS=COMPLETE_MARKED_CYCLIC_L_LE_4_FULL_GAMMA_CONJUGACY_NOT_ESTABLISHED
 A4_ARCHITECTURE_NOTE=SEMICLASSICAL_TENSOR_POWER_FAMILY_NO_CREDIT_YET
 ROUND2_OWNER_LEMMA=PROVED
 ROUND2_OWNER_LEDGER=12_ROWS_REPLAY_PASS
@@ -189,6 +216,18 @@ ROUND4_ORIENTATION_OWNER_CREDIT=0
 ROUND4_SIGNED_FIELD_LEDGER_ROWS=48
 ROUND4_UNIT_TESTS=12_PASS
 ROUND4_COMPLETE_PRIMITIVE_ENUMERATION=false
+ROUND5_MARKED_WORD_CUTOFF=4
+ROUND5_MATCHED_MARKED_CYCLIC_CLASSES=390
+ROUND5_MARKED_PRIMITIVE_CANDIDATES=366
+ROUND5_MARKED_POWER_CLASSES=24
+ROUND5_GAMMA_PRIMITIVITY_PROVED=44
+ROUND5_DISTINCT_OWNER_CREDITS_PER_FIELD=36
+ROUND5_SAME_HOMOLOGY_PROVED_RECORDS_WITHHELD=8
+ROUND5_GAMMA_PRIMITIVITY_OPEN=322
+ROUND5_SIGNED_FIELD_BRANCH_ROWS=576
+ROUND5_FULL_GAMMA_CONJUGACY_COMPLETENESS=NOT_ESTABLISHED
+ROUND5_NONARITHMETIC_CONTROL=DESIGN_ONLY_NOT_INSTANTIATED
+ROUND5_UNIT_TESTS=14_PASS
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN
 FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
 FORMAL_A0_A4_TUPLE=UNASSIGNED

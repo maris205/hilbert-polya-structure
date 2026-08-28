@@ -1,4 +1,4 @@
-# P25 results — Rounds 2 through 4
+# P25 results — Rounds 2 through 5
 
 Generated artifacts:
 
@@ -66,3 +66,19 @@ The method split is 2,202 direct-Newton rows and 39 stationarity-fallback rows.
 The fallback rows occur only at lengths 11 and 12 and all pass the frozen final
 contract.  These are `NUMERICALLY_CERTIFIED` ledger facts; the aggregate
 half-density remains a `NUMERICAL_OBSERVATION`.
+
+## Round-5 universal half-density theorem ledger
+
+- `round5_universal_half_density_ledger.csv` records 6,723 branches: 2,241
+  primitive owners times `r=1,2,3`, with primitive/repetition class, physical
+  eigenvalue sign, leading half-density, positive and physical exact
+  amplitudes, correction, and theorem residual;
+- `round5_universal_half_density_by_repetition.csv` gives the three frozen
+  repetition summaries; and
+- `round5_universal_half_density_metrics.json` records input hashes, theorem
+  statement, residual envelope, paper disposition, and route firewalls.
+
+The algebraic identity is `[PROVED]`; the replay is
+`[NUMERICALLY_CERTIFIED]`.  The maximum leading-factor relative correction is
+about `1.1093e-2`, `1.2305e-4`, and `1.3650e-6` for `r=1,2,3`.  These artifacts
+use no prime or Riemann-zero table.

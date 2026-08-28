@@ -1,4 +1,4 @@
-# P25 code status — Rounds 3 and 4 executed
+# P25 code status — Rounds 2 through 5 executed
 
 `round2_three_disk_ledger.py` performs four separated operations:
 
@@ -57,3 +57,14 @@ library:
 
 The static audit establishes an implementation property only.  It is not a
 proof of causal conditioning or sampling unbiasedness.
+
+Round 5 adds `round5_universal_half_density.py`.  It proves and replays the
+generic `2 x 2` symplectic hyperbolic stability factorization on all 2,241
+owners and repetitions `r=1,2,3`, preserving the physical eigenvalue sign.
+`test_round5_universal_half_density.py` supplies ten tests for input hashes,
+owner/repetition separation, both sign branches, the determinant identity,
+monotone repetition correction, deterministic bytes, and Route firewalls.
+
+```bash
+./experiments/reproduce_round5.sh
+```

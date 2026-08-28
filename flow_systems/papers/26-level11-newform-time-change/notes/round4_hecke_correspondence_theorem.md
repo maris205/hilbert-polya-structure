@@ -277,8 +277,9 @@ ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false
 ```
 
-The next smallest lawful artifact is not another coefficient fit. It is either
-an algebraic derivation showing how the **sum-valued** Hecke correspondence
-enters the first variation of a frozen dynamical zeta without collapsing
-primitive/repeated ownership, or a proof that no primitive Euler factorization
-can follow from this genus-one cohomological relation alone.
+Round-5 disposition: the next lawful artifact named here has now been
+executed.  The sum-valued relation enters a frozen log-zeta variation only
+through owner-length kernels; the canonical inverse-closed oriented first
+variation is exactly zero, and a one-sided audit requires additional
+degree-wise period moments not implied by this cohomological identity.  See
+`round5_zeta_variation_theorem.md`.

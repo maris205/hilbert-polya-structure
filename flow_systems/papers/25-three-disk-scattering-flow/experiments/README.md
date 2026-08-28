@@ -1,4 +1,4 @@
-# P25 experiment status — Round 4 complete
+# P25 experiment status — Rounds 2 through 5 complete
 
 ## Round 4
 
@@ -8,6 +8,13 @@ rows and 39 stationarity-fallback rows, with a combined artifact SHA-256 of
 `85566062639b3e42efb4ae47816be5a967e8948233727fc1d0ef24bdeb432265`.
 The audit is post-hoc and descriptive; it generates no new orbit or target data
 and makes no unbiasedness claim.
+
+## Round 5
+
+`./experiments/reproduce_round5.sh` runs ten theorem/ledger tests, builds the
+three Round-5 artifacts twice, requires byte identity, compares them with the
+committed results, and refreshes `round5_reproducibility_receipt.json`.  It does
+not rerun orbit solving or read target data.
 
 ## Rounds 2 and 3
 

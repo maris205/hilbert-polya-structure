@@ -16,6 +16,15 @@ independent algorithm reproduces a 9-class prefix.  These decimals remain
 the control's geometry and non-arithmeticity instead follow from the HIKMOT,
 SnapPy-isometry, and Reid theorem chain.  The resulting paper-facing argument
 is frozen in [stage1_research_spine.md](stage1_research_spine.md).
+Round 5 has now replaced the invalid Round-2-word-ball versus Round-4-metric-
+prefix comparison with one exact marked-word algorithm and a phase statistic
+frozen before execution.  It yields 2,074 versus 51 canonical marked owners
+and uses 1,932 versus 39 primitive loxodromic rows.  The absolute standardized
+phase contrast is `0.935490232934`, but this is only a marking-dependent
+`[NUMERICAL_OBSERVATION]`: the marked positive-generator counts are 4 and 2, so
+alphabet/presentation and sample-size confounds block an arithmetic verdict.
+The paper-level next artifact is a preregistered same-marked-generator-count Nielsen
+sensitivity panel.
 The primary target is a `Q(i)` Dedekind-zeta calibration.  Rational-prime
 push-forward is secondary, and no Riemann-`zeta` A0 credit is claimed.
 Formal Route-A tuple: `UNASSIGNED`; A2--A4: `NOT_EVALUATED`; Route B:

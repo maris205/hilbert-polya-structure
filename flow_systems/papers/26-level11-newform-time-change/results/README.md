@@ -1,5 +1,35 @@
 # P26 generated results
 
+## Round 5 — zeta first variation and degree-moment obstruction
+
+- `round5_zeta_repetition_ledger.csv`: 1,104 rows from 138
+  primitive-certified Round-4 Hecke cycle-owner instances in the finite output
+  multiset, two inverse orientations, and zeta repetitions `r=1,2,3,4`.  It
+  records Hecke cycle degree `d` separately, verifies the
+  `rL`/`rI` laws and cancellation of the logarithmic `1/r`, and pairs both
+  Ruelle and frozen-stability Selberg-type derivative contributions to exact
+  zero by orientation sign.
+- `round5_degree_moment_ledger.csv`: 110 degree-aggregated rows over the 55
+  word/Hecke-prime groups.  It records the necessary-and-sufficient all-`s`
+  obligations `P_1=a_p I(M)` and `P_d=0` for `d>1`, with an explicit
+  zero-owner degree-one row when necessary, separately for the real
+  newform period, the complex period, and the genus-one closed-form control.
+- `round5_hecke_zeta_variation_ledger.csv`: 165 one-sided audit rows at
+  `s={0.125,0.25,0.5}` and repetition cutoff `R=4`.  All 55 unweighted Hecke
+  sums pass, while 153/165 rows fail the naive Ruelle recurrence and 153/165
+  fail the naive frozen-Selberg recurrence.
+- `round5_summary.json` and `round5_artifact_manifest.json`: registered
+  counts, source-input hashes, evidence tokens, exact analytic boundaries,
+  and artifact bindings.
+
+The inverse-pair zero and the degree-moment criterion are `[PROVED]`.  The
+owner/repetition bookkeeping is `[NUMERICALLY_CERTIFIED]`; the weighted period
+residuals are `[NUMERICAL_OBSERVATION]` because they consume Round-4
+quadratures.  The positive-word orientation surface is explicitly a
+noncanonical half-ledger.  A global zeta construction/continuation, Route-A
+A2, primitive Euler factorization, formal Route tuple, and Route B are not
+claimed.
+
 ## Round 4 — Hecke correspondence-cycle owner
 
 - `round4_hecke_branch_owner_ledger.csv`: 385 exact rows for the right action
@@ -11,10 +41,11 @@
   checks of `a_(pn)+p a_(n/p)=a_p a_n`. All 320 pass. The bounded deterministic
   nonmodular control fails 302 rows and is explicitly marked as lacking a
   quotient owner.
-- `round4_hecke_cycle_ledger.csv`: 138 permutation-cycle owners
+- `round4_hecke_cycle_ledger.csv`: 138 permutation-cycle owner instances
   `delta_O=beta_j M^|O| beta_j^(-1)`. All 138 are exact integral
   `Gamma_0(11)` matrices and all 138 pass the finite complete root search for
-  primitivity.
+  primitivity.  They are output-multiset instances; full cross-instance
+  `Gamma_0(11)` conjugacy canonicalization is not claimed.
 - `round4_hecke_period_summary.csv`: 55 word/prime period-sum rows at q
   cutoffs 1536/1024 and Simpson panels 256/128. Maximum primary complex
   residual is `2.229752420147902e-14`; maximum comparison residual is

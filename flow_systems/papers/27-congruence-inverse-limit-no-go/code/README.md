@@ -39,3 +39,19 @@ bash experiments/reproduce_round4.sh
 
 Eight tests and two byte-identical builds must pass.  No prime/zero target data,
 formal Route tuple, or inverse-limit orbit credit enters the computation.
+
+Round 5 adds `round5_cocompact_owner_escape.py` and
+`test_round5_cocompact_owner_escape.py`.  The generator freezes a closed
+genus-2 surface-group presentation, three primitive-homology words, and the
+eight moduli `n!` for `1<=n<=8`.  It computes exact additive homology orders
+and records them only as certified lower bounds for the unenumerated full
+quotient orders.
+
+```bash
+bash experiments/reproduce_round5.sh
+```
+
+Ten tests and two byte-identical builds must pass.  The code does not enumerate
+the residual cores, numerically choose a hyperbolic metric, or import any
+prime/zero target.  Residual finiteness, tower residuality, and the minimal
+geodesic-period argument remain human-readable proofs in the Round-5 note.

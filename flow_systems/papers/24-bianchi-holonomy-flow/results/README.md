@@ -1,4 +1,4 @@
-# P24 Round-2 results
+# P24 results — Rounds 2–5
 
 The following deterministic artifacts were generated on 2026-08-27:
 
@@ -81,3 +81,30 @@ The 31-class prefix is a `[NUMERICAL_OBSERVATION]`, not a Sage interval
 certificate or a full primitive spectrum.  The separate source theorem chain
 proves that `5_2=m015` is a genuine finite-volume one-cusp non-arithmetic
 control.  No Bianchi/control score or arithmetic join was generated.
+
+## Round-5 matched marked-word results
+
+The pre-result contract is frozen separately in
+`experiments/round5_freeze_contract.json`.  The generated artifacts are:
+
+- `bianchi_matched_marked_word_round5.csv` — 2,074 canonical unoriented
+  marked owners from 19,624 raw cyclically reduced words;
+- `five_two_matched_marked_word_round5.csv` — 51 owners from 372 raw words
+  under the identical algorithm and cutoff;
+- `round5_matched_phase_comparison.json` — the predeclared complex
+  phase/length moment, two 64-permutation null summaries, and the descriptive
+  absolute standardized contrast;
+- `round5_metrics.json` — exact/numerical evidence boundaries, counts,
+  presentation confound, paper consequence, next artifact, and Route firewall.
+
+The candidate ledger splits into 2,046 symbolic primitive and 28 repetition
+owners; exact evaluation gives 1,940 loxodromic, 132 parabolic, and two identity
+rows.  The control splits into 41 primitive and 10 repetition owners, with 48
+loxodromic and three parabolic rows.  The comparison filter retains 1,932 and
+39 primitive loxodromic rows.
+
+The frozen standardized values are `-1.74684253916` and `-0.811352306226`;
+their absolute contrast is `0.935490232934`.  This is a marking-dependent
+`[NUMERICAL_OBSERVATION]`.  Marked-generator count/alphabet and presentation are not matched, so
+the result is not an arithmetic verdict and neither CSV is a complete metric
+length spectrum.  All target-data flags are `false`.

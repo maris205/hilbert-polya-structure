@@ -15,13 +15,14 @@ Date: **2026-08-27**
 | Center-polygon proxy | **MODELING_CHOICE** — retained separately and never called an orbit |
 | Stability half-density | **NUMERICAL_OBSERVATION** — Round-3 100-digit physical return-map cross-check is numerically certified on 2,241/2,241 rows; 2,232 newly closed, 0 open at the frozen cutoff |
 | Round-4 method audit | **NUMERICALLY_CERTIFIED / REPRODUCIBLE** — 2,202 direct-Newton plus 39 fallback rows; target-free selector dependency check; 8/8 tests; combined SHA-256 `85566062639b3e42efb4ae47816be5a967e8948233727fc1d0ef24bdeb432265` |
+| Round-5 universal mechanism | **`[PROVED]`** — exact two-dimensional symplectic hyperbolic amplitude factorization; 6,723 primitive/repetition branches replayed without target data |
 | Half-density kill control | **EXECUTED** — 747 complete neighboring-parameter triplets plus shuffled/random/composite controls |
 | `PROVES_TOO_MUCH` verdict | **`[STOP_SCOPED]`** for half-density persistence as arithmetic evidence |
 | Proposal stage | Stage 1 / A0--A1 negative control |
 | Formal Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | NOT STARTED |
+| Paper disposition | **RETAIN** — methods/negative-control paper research spine complete; manuscript remains unauthorized/not started |
 
 The A0-source absence is fixed by the control design.  It is not an inference
 from the separate half-density experiment.  The Round-2 control now shows that
@@ -30,9 +31,12 @@ non-arithmetic geometries, so that statistic is stopped as arithmetic evidence.
 Round 3 closes the former 2,232-row finite-difference gap as a purely dynamical
 calibration.  Round 4 shows descriptively that the 39 fallback-requiring rows
 were neither discarded nor selected after reading the paraxial target.  The
-next scientific gate would require a different source-derived
-observable with an explicit arithmetic owner; the present closure does not
-authorize A2.
+Round-5 theorem proves that the tested half-density is the universal leading
+factor of a two-dimensional hyperbolic stability amplitude.  This closes the
+paper's mechanism question and supports retaining the negative-control paper.
+Any positive scientific branch would require a different source-derived,
+phase-sensitive observable with an explicit owner; the present closure does
+not authorize A2 or manuscript drafting.
 
 Evidence tokens are limited to the vocabulary in
 `skills/route-a-evaluator.md`; `UNASSIGNED` is a pipeline state.

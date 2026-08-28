@@ -1,4 +1,4 @@
-# P24 experiment status — Round 2
+# P24 experiment status — Rounds 2–5
 
 The exact word-ball enumeration and target-free holonomy shuffle completed.
 The core output is reproduced byte for byte under the hash recorded in
@@ -59,3 +59,27 @@ primitive classes and a 9-class independent prefix crosscheck.  It is not
 interval verified because SageMath is unavailable.  The same-enumeration
 Bianchi/control comparison remains `[OPEN]`; no score, tuple, A2+ layer, or
 Route-B evaluation is produced.
+
+## Round 5
+
+The same-enumeration comparison has now been executed at the **marked-word
+algorithm** level.  The input contract and phase statistic were frozen before
+result execution under SHA-256
+`210cff78b8af54847baae1c7ef21572dd697d70004f50723f6b1bac4e19a85b7`.
+`reproduce_round5.sh` runs 10 tests, builds two independent temporary output
+trees, requires byte identity, and verifies the checked-in artifacts.
+
+The core-output SHA-256 is
+`b1d323ba04b6f0a0ead32516bc11f6bdf8610847d070ffe54c1b4b7ca0778892`.
+The Round-5 receipt schema 1.1 also binds the generator, ten-test suite, and
+reproduction script by SHA-256, so the archived result identifies its exact
+implementation version as well as its freeze contract and core artifacts.
+The two censuses contain 2,074 and 51 marked owners; the phase statistic uses
+1,932 and 39 primitive loxodromic rows.  Its absolute permutation-standardized
+contrast is `0.935490232934`.
+
+This closes the Round-4 word-ball-versus-metric-cutoff type mismatch, but not
+the scientific kill gate: the alphabets have sizes 8 and 4 and the underlying
+presentations differ.  The comparison is descriptive and marking-dependent.
+Prime/zero target data remain prohibited; Route tuple, A2+, and Route B remain
+unassigned/not run.

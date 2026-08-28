@@ -84,6 +84,15 @@ by a refinement path that does not read the paraxial target fields.  The audit
 is explicitly post-hoc and descriptive; it does not infer a causal dependence
 on word length or geometry.  See `notes/round4_conditioning_audit.md`.
 
+Round 5 proves the theorem/experiment boundary requested after Round 3.  For a
+real two-dimensional symplectic hyperbolic return map, the exact repetition
+amplitude is the project half-density times the universal correction
+`1/|1-sigma^r Lambda^(-r)|`.  The theorem is independent of three-disk data;
+the frozen 2,241 owners and `r=1,2,3` supply a 6,723-row reproducible replay.
+This justifies retaining P25 as the methods/negative-control paper rather than
+extending the stopped statistic by cutoff alone.  See
+`notes/round5_universal_half_density_theorem.md`.
+
 ## Route mapping
 
 ```text

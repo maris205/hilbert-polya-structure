@@ -28,6 +28,13 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   that fallback selection precedes and does not consume the paraxial comparison
   target.  This is a post-hoc descriptive audit, not a claim of statistical
   unbiasedness.
+- Round-5 theorem status: **`[PROVED]`** for every real two-dimensional
+  symplectic hyperbolic return map,
+  `|det(I-M^r)|^(-1/2)=Lambda^(-r/2)/|1-sigma^r Lambda^(-r)|`.  The tested
+  half-density is therefore a universal leading factor rather than an
+  arithmetic discriminator.  A 6,723-row primitive/repetition replay passes
+  on all 2,241 frozen owners.  The project is retained as a
+  methods/negative-control paper; Stage 2 remains unauthorized.
 
 ## Round-2 executed artifact
 
@@ -112,13 +119,16 @@ Evidence labels in this project use the vocabulary of
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
 - [pipeline state](notes/pipeline_state.md)
-- [planned ledger](results/README.md)
+- [executed result ledgers](results/README.md)
 - [Round-2 conclusion](notes/round2_conclusion.md)
 - [Round-2 validation](experiments/round2_validation.md)
 - [Round-3 conclusion](notes/round3_conclusion.md)
 - [Round-3 direct validation](experiments/round3_validation.md)
 - [Round-4 conditioning audit](notes/round4_conditioning_audit.md)
 - [Round-4 reproducibility receipt](experiments/round4_reproducibility_receipt.json)
+- [Round-5 theorem and negative-control closure](notes/round5_universal_half_density_theorem.md)
+- [Round-5 paper research spine](paper/round5_research_spine.md)
+- [Round-5 reproducibility receipt](experiments/round5_reproducibility_receipt.json)
 
 No exact scattering determinant, A2 zeta test, formal Route tuple, or manuscript
 is claimed yet.

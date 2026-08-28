@@ -1,5 +1,30 @@
 # P26 reproduction
 
+## Round 5
+
+Run:
+
+```bash
+./experiments/reproduce_round5.sh
+```
+
+It runs 11 unit tests, generates two isolated five-file Round-5 artifact
+trees from the exact Round-4 source ledgers, requires a recursive
+byte-for-byte match and identical generator stdout, installs the canonical
+artifacts, and writes `round5_reproducibility_receipt.json`.  The canonical
+tree SHA-256 is:
+
+```text
+7b21a0c25ee269d28b53cd8c0551c8b2a977307641c2d07be78810be2e975731
+```
+
+The registered surfaces contain 1,104 orientation/repetition rows, 110
+degree-moment rows, and 165 one-sided Hecke-zeta variation rows.  The receipt
+binds the two Round-4 input files and preserves Stage 1 / A0--A1, formal tuple
+`UNASSIGNED`, A2 `NOT_RUN`, and Route-B prohibition.  Exact orientation
+cancellation and the analytic degree-moment theorem are kept separate from
+binary64 weighted residuals.
+
 ## Round 4
 
 Run:
@@ -18,7 +43,7 @@ canonical Round-4 artifacts, and writes
 ```
 
 The exact surfaces contain 385 branch gluings, 320 eta-product coefficient
-relations, and 138 closed-cycle owner/primitivity certificates. The numerical
+relations, and 138 closed-cycle owner-instance/primitivity certificates. The numerical
 surface contains 55 direct complex period-sum rows at q cutoffs 1536/1024 and
 Simpson panels 256/128. Numerical residuals remain observations rather than
 rigorous error bounds. The receipt preserves the Stage-1/A0--A1 boundary,

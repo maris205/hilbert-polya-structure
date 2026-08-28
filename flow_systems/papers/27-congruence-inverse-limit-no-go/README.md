@@ -31,6 +31,40 @@ Orbits: an Explicit Congruence-Tower Ownership Audit*
   `g`-loop; without a conjugacy-primitivity proof it is not called the
   underlying flow orbit's minimal period.  The 24 frozen rows validate the
   finite prefix; they do not prove the asymptotic theorem.
+- Round-5 cocompact control: **`[PROVED]` with reproducible exact-integer
+  audit**.  On a closed genus-2 hyperbolic surface, the canonical residual-core
+  tower refined by the mod-`n!` homology kernel has trivial intersection.  For
+  each frozen primitive-homology owner, its quotient order is divisible by
+  `n!`, so the exact minimal lifted-geodesic period is at least
+  `n! ell(g)`.  This proves that period escape and inverse-limit aperiodicity
+  are not cusp, principal-congruence, or arithmetic-specific phenomena.
+
+### Round-5 cocompact control — 2026-08-27
+
+For the closed genus-2 surface group `Gamma`, let `R_n` be the intersection of
+all normal subgroups of index at most `n`, let `H_n` be the kernel of homology
+modulo `n!`, and put `Gamma_n=R_n intersection H_n`.  Finite generation and
+residual finiteness make this a descending normal finite-index residual tower.
+If the integral homology vector of `g` has content `d`, then
+
+```text
+n!/gcd(n!,d) divides ord(g Gamma_n).
+```
+
+The three frozen owners have primitive homology (`d=1`), which also proves
+that their base conjugacy classes are primitive.  Their certified lower-bound
+sequence at levels 1--8 is
+
+```text
+1, 2, 6, 24, 120, 720, 5040, 40320.
+```
+
+The landed ledger has 24 rows, ten tests pass, two builds are byte-identical,
+and the combined artifact SHA-256 is
+`f8b04a5bbc323bf2161cfe675b40c9b9dc16f2c67a12082dad29794396ade4ea`.
+The canonical residual cores are not enumerated and no full quotient order is
+reported as computed; the exact values are homology lower bounds.  See the
+[Round-5 cocompact theorem](notes/round5_cocompact_control_theorem.md).
 
 ### Round-4 period-escape result — 2026-08-27
 
@@ -166,16 +200,19 @@ formal evidence tokens.
 
 - [Stage-1 theorem brief](notes/stage1_research_brief.md)
 - [pipeline state](notes/pipeline_state.md)
-- [planned finite-level diagnostic](results/README.md)
+- [executed finite-level diagnostics](results/README.md)
 - [Round-2 conclusion and owner firewall](notes/round2_conclusion.md)
 - [Round-3 closest-prior audit](notes/round3_closest_prior_audit.md)
 - [Round-3 conclusion](notes/round3_conclusion.md)
 - [Round-4 period-escape theorem](notes/round4_period_escape_theorem.md)
 - [Round-4 reproducibility receipt](experiments/round4_reproducibility_receipt.json)
+- [Round-5 cocompact control theorem](notes/round5_cocompact_control_theorem.md)
+- [Round-5 reproducibility receipt](experiments/round5_reproducibility_receipt.json)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
 
 The no-periodic-orbit theorem remains the Route-relevant landed result.  The
-finite-level table is a reproducible diagnostic only.  The external
-closest-prior audit is complete and narrows the publishable claim; a manuscript
-has not been started and ARS Stage 2 has not begun.
+finite-level tables are reproducible diagnostics only.  The Round-5 control
+closes the planned compactness/cusp check and narrows the publishable claim to
+a comparative owner-audit paper.  A manuscript has not been started and ARS
+Stage 2 has not begun.

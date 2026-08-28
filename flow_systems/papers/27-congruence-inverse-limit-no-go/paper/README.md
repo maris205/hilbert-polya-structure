@@ -31,13 +31,24 @@ explicitly a finite illustration.  This strengthens the methodological
 contribution while retaining the Round-3 decision not to claim general
 aperiodicity priority.
 
+Round 5 closes the planned cocompact control.  A canonical residual tower of a
+closed genus-2 surface group, refined by mod-`n!` homology kernels, gives an
+explicit `n!` lower bound for quotient orders and minimal lifted periods of
+three primitive-homology geodesics.  This proves that the mechanism is not
+specific to cusps, principal congruence, or arithmetic lattices.  It also
+sharpens the publishable positioning: the prospective paper is comparative
+methodology and ownership discipline, not a standalone arithmetic or general
+aperiodicity discovery.
+
 Stage-1 planning artifacts:
 
 - [closest-prior audit](../notes/round3_closest_prior_audit.md)
 - [Round-3 conclusion](../notes/round3_conclusion.md)
 - [Round-4 period-escape theorem](../notes/round4_period_escape_theorem.md)
+- [Round-5 cocompact control theorem](../notes/round5_cocompact_control_theorem.md)
 - [research spine / methodology / section plan](stage1_research_spine.md)
 
-The spine is a plan, not a manuscript draft.  Advancement to Stage 2 remains
-conditional on the remaining Stage-1 controls and a human decision that the
-narrow methodological contribution is submission-worthy.
+The spine is a plan, not a manuscript draft.  The cocompact control is closed;
+advancement to Stage 2 remains conditional on a human citation check and a
+written decision that the narrowed comparative methodological contribution is
+submission-worthy.

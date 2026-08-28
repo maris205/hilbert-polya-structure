@@ -101,10 +101,13 @@ limit flow's nonexistent primitive orbit set.
 1. Compare the real tower with a trivial product flow carrying the same Haar
    fiber.
 2. Keep finite-level reduction orders separate from total-space periods.
-3. Repeat the no-go argument for a cocompact residual arithmetic tower to test
-   whether cusps are irrelevant to periodic-orbit erasure.
+3. Repeat the no-go argument for a cocompact residual tower without arithmetic
+   input to test whether cusps are irrelevant to periodic-orbit erasure.
 4. Prohibit inherited Route credit from the Deninger packet or base modular
    Selberg zeta.
+
+Control 3 is closed in Round 5: the closed genus-2 construction below proves
+that the mechanism survives without cusps or arithmetic congruence data.
 
 ## Route mapping
 
@@ -164,6 +167,37 @@ Applied to `Gamma(3 n!)`, this proves that every fixed finite-level hyperbolic
 owner escapes every bounded period window.  The Round-4 24-row audit checks the
 finite prefix and owner fields but is not the proof of divergence.  See
 `notes/round4_period_escape_theorem.md`.
+
+## Round-5 addendum — closed-surface factorial control (2026-08-27)
+
+Let `Gamma` be the fundamental group of a marked closed genus-2 hyperbolic
+surface.  Define `R_n` as the intersection of all normal subgroups of index at
+most `n`, define `H_n` as the kernel of integral homology reduced modulo `n!`,
+and set `Gamma_n=R_n intersection H_n`.  Finite generation and residual
+finiteness prove that this is a descending normal finite-index tower with
+trivial intersection.
+
+If `v(g)` has coordinate content `d`, its image in homology modulo `n!` has
+order `n!/gcd(n!,d)`.  Since `Gamma_n` lies inside the homology kernel, this
+order divides `ord(g Gamma_n)`.  The three frozen owners have content 1, so
+
+```text
+ord(g Gamma_n) >= n!,
+T_n(g) >= n! ell(g).
+```
+
+Primitive homology also rules out a proper group power; the cyclic stabilizer
+of a hyperbolic axis then identifies `T_n(g)` as the lifted orbit's exact
+minimal period, not merely a whole-loop closing time.  The 24-row executable
+replays the exact lower-bound sequence through `8!=40320`, but deliberately
+does not enumerate `R_n` or claim the full quotient orders were computed.
+
+This `[PROVED]` cocompact control establishes that period escape and the empty
+inverse-limit periodic set do not depend on cusps, principal congruence, or an
+arithmetic lattice.  It therefore strengthens the method while narrowing the
+paper's arithmetic interpretation.  The formal Route-A tuple remains
+`UNASSIGNED`; A2--A4 remain `NOT_EVALUATED`, and Route B remains not run.  See
+`notes/round5_cocompact_control_theorem.md`.
 
 ## Round-2 addendum — finite reduction orders (2026-08-27)
 

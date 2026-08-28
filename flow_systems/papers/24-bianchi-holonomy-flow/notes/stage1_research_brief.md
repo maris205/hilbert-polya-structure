@@ -95,13 +95,16 @@ provenance alone proves neither map, and no Riemann-`zeta` A0 credit is assigned
    manifold status, finite volume, cusp presence, geodesic-flow clock, and
    complex-length primitive type.  Neither control is assigned an arithmetic
    owner, and covolume/length distribution remain unmatched.
+   Round 5 applies one pre-frozen marked cyclic-word rule and phase statistic to
+   the Bianchi and `5_2` systems while retaining their marked-generator-count/presentation
+   asymmetry as an explicit confound.
 4. Neighboring word cutoffs with completeness-risk accounting.
 5. After the orbit ledger is frozen: shuffled prime-ideal labels,
    matched-density composite ideals, and the simpler scalar trace.
 6. No target score is evaluated until the exact primitive/repetition ledger and
    the split/inert/ramified owner table are frozen.
 
-## Concrete next artifact
+## Executed research artifacts and concrete next artifact
 
 Round 2 executed
 `results/bianchi_complex_length_ledger_round2.csv` and the paired target-free
@@ -131,6 +134,21 @@ algorithm reproduces 9 classes in 6 groups with maximum residual
 decimal field remains `[NUMERICAL_OBSERVATION]`.  See
 `notes/round4_conclusion.md` and `notes/round4_source_audit.md`.
 
+Round 5 executed `results/bianchi_matched_marked_word_round5.csv` and
+`results/five_two_matched_marked_word_round5.csv` under one exact symbolic
+algorithm and a pre-result freeze.  The ledgers contain 2,074 and 51 marked
+owners; the phase statistic uses 1,932 and 39 primitive loxodromic rows.  The
+absolute permutation-standardized contrast is `0.935490232934`.  This removes
+the invalid word-ball-versus-metric-prefix comparison, but it does not match
+marked generator count or presentation: the alphabets have sizes 8 and 4.  The result
+is marking-dependent numerical evidence, not an arithmetic verdict.  See
+`notes/round5_matched_marked_word_theorem.md` and
+`notes/round5_conclusion.md`.
+
+The next smallest artifact is a preregistered same-marked-generator-count Nielsen
+sensitivity panel.  Target tables remain prohibited, and no metric-spectrum or
+arithmetic interpretation may be chosen after viewing a marking result.
+
 ## Route mapping
 
 ```text
@@ -152,7 +170,13 @@ ROUND4_LEDGER_EVIDENCE=NUMERICAL_OBSERVATION_NOT_INTERVAL_VERIFIED
 ROUND4_LEDGER_COUNTS=18_LENGTH_GROUPS_31_PRIMITIVE_CLASSES
 ROUND4_CROSSCHECK=9_CLASSES_6_GROUPS_MAX_RESIDUAL_2.2944E-31
 ROUND4_MATCH_SCOPE=FINITE_VOLUME_CUSP_DIMENSION3_MANIFOLD_CLOCK_COMPLEX_LENGTH_TYPE
-ROUND4_SAME_ENUMERATION_CONTRACT=OPEN
+ROUND4_SAME_ENUMERATION_CONTRACT=CLOSED_BY_ROUND5_AT_MARKED_WORD_ALGORITHM_LEVEL
+ROUND5_FREEZE_SHA256=210CFF78B8AF54847BAAE1C7EF21572DD697D70004F50723F6B1BAC4E19A85B7
+ROUND5_MARKED_CENSUS=2074_CANDIDATE_51_CONTROL_OWNERS
+ROUND5_PHASE_ROWS=1932_CANDIDATE_39_CONTROL
+ROUND5_PHASE_EVIDENCE=NUMERICAL_OBSERVATION_MARKING_DEPENDENT
+ROUND5_PRESENTATION_CONFOUND=RANK4_ALPHABET8_VERSUS_RANK2_ALPHABET4
+ROUND5_ARITHMETIC_KILL_VERDICT=BLOCKED
 FORMAL_A0_A4_TUPLE=UNASSIGNED
 A2_A4_EVALUATION=NOT_EVALUATED
 ROUTE_B_EVALUATION=NOT_RUN

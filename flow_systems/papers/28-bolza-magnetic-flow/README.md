@@ -47,6 +47,26 @@ Working title: *Semiclassical Tensor-Power Trace*
   `b2387be3d4acc6485cd7f0e2d89eeaae9a36dace1ddf2d451d7f51ed3680bfd4`.
   This is a four-axis-owner-per-field seed, not a complete Bolza primitive
   spectrum and not an arithmetic-prime ledger.
+- Round-5 progress: the four-axis seed is expanded to a complete **matched
+  marked-cyclic census** at marked length `L<=4`.  Exhaustive free/cyclic
+  reduction and cyclic-rotation/inversion canonicalization give 390
+  inverse-paired marked classes: 366 marked-primitive candidates and 24
+  explicit powers.  Exact arithmetic in
+  `Q(s,t,i)`, `s^2=2`, `t^2=1+s`, `i^2=-1`, finds zero literal PSL matrix or
+  inverse collisions.  The exact gate
+  `|tr(g)|<10+8sqrt(2)`, equivalently `ell(g)<2ell_B`, proves `Gamma`
+  primitivity for 44 records.  To prevent conjugacy double credit, only one
+  proved primitive per homology vector modulo sign is credited: 36 distinct
+  inverse-paired owners per field; eight same-axis proved records are withheld,
+  and the other 322 marked-primitive candidates remain open.  The 36 credited
+  owners per field support 576 theorem-derived signed branches at
+  `k=+-1,+-2,+-3,+-4`, including 48/48 compatible Round-4 seed rows.  Fourteen
+  tests and two byte-identical builds passed with tree SHA-256
+  `1c8665ea55826e73c6aeb5f8cd6386a8d1020976d23004e1216d05e2f1e8a138`.
+  Completeness is proved only for the declared marked-word equivalence; full
+  `Gamma`-conjugacy completeness remains `NOT_ESTABLISHED`.  The
+  non-arithmetic genus-two control now has a strict source/parameter contract
+  but no geometry or comparison result is fabricated.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -156,6 +176,8 @@ result remains a magnetic trace calibration.
 - [Round-2 progress report](notes/round2_progress_report.md)
 - [Round-3 source-bound trace contract](notes/round3_trace_regime_contract.md)
 - [Round-4 explicit Bolza owner ledger theorem](notes/round4_bolza_owner_ledger.md)
+- [Round-5 bounded matched marked-cyclic census](notes/round5_bolza_marked_cyclic_census.md)
+- [Round-5 non-arithmetic control contract](notes/round5_nonarithmetic_control_contract.md)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
@@ -165,5 +187,7 @@ No rational-prime orbit claim, fixed-spectrum match, all-`N` trace claim, or
 Route-B credit is claimed.  The only same-owner trace result is the explicitly
 scoped source-compatible signed-field even subsequence; Round 4 instantiates
 four named inverse-paired Bolza primitive axis owners per field inside that
-subtype without claiming completeness or separate owner credit for signed-`k`
-branches.
+subtype, and Round 5 increases the safely distinct credited set to 36 owners
+per field.  The 390-row finite artifact is a complete matched marked-cyclic
+census at `L<=4`, not a full `Gamma`-conjugacy census; signed-`k` branches never
+receive separate owner credit.

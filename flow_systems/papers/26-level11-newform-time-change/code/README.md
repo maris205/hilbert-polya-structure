@@ -1,5 +1,32 @@
 # P26 code
 
+## Round 5
+
+`round5_zeta_variation.py` consumes the SHA-locked Round-4 cycle-owner and
+period-summary ledgers.  It freezes reciprocal Ruelle and frozen-stability
+Selberg-type log-product conventions and builds three artifacts:
+
+1. a 1,104-row primitive/inverse-orientation/zeta-repetition ledger;
+2. a 110-row degree-moment ledger for the all-`s` recurrence obligation,
+   including explicit absent degree-one bins; and
+3. a 165-row one-sided Hecke-zeta variation ledger at
+   `s={0.125,0.25,0.5}` and repetition cutoff `R=4`.
+
+The generator keeps Hecke permutation-cycle degree `d` distinct from zeta
+repetition `r`.  It checks exact inverse-sign cancellation and the finite
+weighted consequences of the Round-4 period observations.  It does not build
+a complete global zeta, run A2, read target-prime/zero tables, or promote a
+primitive Euler factorization.
+
+Run its eleven tests with:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_round5_zeta_variation.py
+```
+
+Canonical two-run reproduction is owned by
+`../experiments/reproduce_round5.sh`.
+
 ## Round 4
 
 `round4_hecke_correspondence.py` freezes the prime-to-11 weight-two double

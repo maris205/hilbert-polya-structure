@@ -1,5 +1,38 @@
 # P28 code status
 
+## Round 5
+
+`build_round5_bolza_marked_cyclic_census.py` exhaustively enumerates all
+freely/cyclically reduced marked words at `L<=4`, canonicalizes them modulo
+cyclic rotation and inversion, separates proper marked powers, and evaluates
+the source-locked matrices exactly in
+`Q(s,t,i)`, `s^2=2`, `t^2=1+s`, `i^2=-1`.  It audits literal PSL equality and
+equality-or-inverse collisions, computes exact trace-squared isospectral
+groups, and replays numerical lengths with the Round-4 120-decimal model.
+
+The exact systolic gate `abs(trace)<10+8sqrt(2)` proves `Gamma` primitivity for
+44 of 366 marked-primitive candidates.  A second conservative gate credits at
+most one proved primitive per abelianized homology vector modulo sign.  This
+emits 36 mutually distinguished inverse-paired owners per field, withholds
+eight same-axis proved records, and leaves 322 primitivity candidates open.
+Only the 36 credited axes receive theorem-derived branches at
+`k=+-1,+-2,+-3,+-4`, giving 576 rows and no orientation or signed-branch owner
+credit.  The builder also emits a design-only non-arithmetic control contract;
+it does not invent control matrices or a comparison result.
+
+`test_round5_bolza_marked_cyclic_census.py` has fourteen tests covering exact
+group replay, exhaustive counts, normal-form invariance, proper-power laws,
+matrix equality/inverse collisions, primitivity, homology-axis deduplication,
+signed-`k`/field involutions, periods, actions, stability, Round-4 compatibility,
+target-data absence, and route firewalls.  Canonical reproduction is:
+
+```bash
+./experiments/reproduce_round5.sh
+```
+
+The complete claim applies to the declared marked-cyclic equivalence only.
+Full `Gamma`-conjugacy completeness is `NOT_ESTABLISHED`.
+
 ## Round 4
 
 `build_round4_bolza_owner_ledger.py` transcribes the published genus-two

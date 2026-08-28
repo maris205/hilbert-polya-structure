@@ -1,5 +1,18 @@
 # P27 experiment status
 
+## Round 5
+
+Run `bash experiments/reproduce_round5.sh`.  It checks the three frozen
+primitive-homology owners at all eight factorial levels, the exact modular
+homology order formula, forward divisibility, owner/Route firewalls, and two
+byte-identical builds.  Ten tests pass and the combined artifact SHA-256 is
+`f8b04a5bbc323bf2161cfe675b40c9b9dc16f2c67a12082dad29794396ade4ea`.
+
+The generated 24 rows certify homology lower bounds through `8!=40320`.  They
+do not enumerate the canonical residual cores or compute the full quotient
+orders; the cocompact residual-tower and minimal-period conclusions are proved
+in the accompanying theorem note.
+
 ## Round 4
 
 Run `bash experiments/reproduce_round4.sh`.  It checks the 24-row frozen input,
@@ -36,5 +49,6 @@ STATUS=PASS
 ```
 
 See `round2_reproducibility_receipt.md` for hashes and the owner boundary.  The
-trivial-product and cocompact-tower structural controls remain `[OPEN]`; the
-executed finite quotient table is not one of those theorem-level controls.
+cocompact-tower structural control is now closed by Round 5; the
+trivial-product control remains `[OPEN]` and is not needed for the landed
+cocompact theorem.

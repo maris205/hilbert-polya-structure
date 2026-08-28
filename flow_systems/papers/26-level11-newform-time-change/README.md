@@ -4,7 +4,7 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress; Rounds 2--4 executed reproducibly**.
+- ARS: **Stage 1 RESEARCH in progress; Rounds 2--5 executed reproducibly**.
 - Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
 - The arithmetic one-form, positive time-density/slowness factor, reciprocal
   speed multiplier, generator, and exact period-variation formula are frozen.
@@ -40,6 +40,24 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 - Round 4 passed 8/8 tests and two byte-identical full replays; artifact-tree
   SHA-256 is
   `4cd45da8e7fa82e4688bc6975dae44c4206837b40652979167432ffe7b07f20e`.
+- Round 5 freezes reciprocal Ruelle and frozen-stability Selberg-type
+  log-products and proves their first-variation formulas without identifying
+  the Hecke cycle degree `d` with the zeta repetition `r`.
+- The canonical oriented primitive family contains both `gamma#` and
+  `gamma#^(-1)`.  Equal lengths and opposite 1-form periods make both
+  log-zeta first variations vanish pairwise: `PROVED_EXACT_ZERO`.
+- On a noncanonical one-sided orientation half-ledger, a naive Hecke-zeta
+  recurrence for every `s` is equivalent to the additional degree moments
+  `P_1=a_p I(M)` and `P_d=0` for all `d>1`.  The Round-4 Hecke theorem supplies
+  only `sum_d P_d=a_p I(M)` and therefore does not imply those obligations.
+- The source-locked finite audit has 1,104 orientation/repetition rows, 110
+  degree-moment rows, and 165 one-sided zeta rows.  It finds 38 mixed-degree
+  and 17 uniform-nonunit groups; 51/55 alpha-period groups violate the all-`s`
+  moment conditions, and both frozen kernels fail the naive recurrence in
+  153/165 rows.
+- Round 5 passed 11/11 tests and two byte-identical full replays; artifact-tree
+  SHA-256 is
+  `7b21a0c25ee269d28b53cd8c0551c8b2a977307641c2d07be78810be2e975731`.
 - Formal Route-A tuple: **unassigned**.
 - Route B: `EVALUATION=NOT_RUN`; `INVOCATION_ALLOWED=false`.
 
@@ -78,11 +96,13 @@ Can the first derivative of the time-changed dynamical zeta be decomposed into
 Hecke/Euler factors using only the same primitive-geodesic ledger?
 
 `PROVED`: the period of the Hecke **cycle pushforward** is `a_p` times the
-original period.  This is a sum-valued correspondence identity.  It does not
-say that an individual primitive closed geodesic has period `a_p`, and no
-primitive orbit-to-prime correspondence is assumed.
+original period.  Also `PROVED`: the canonical inverse-closed oriented zeta
+has zero first variation, while a one-sided nonzero audit requires degree-wise
+period moments not implied by the cycle-pushforward identity.  No individual
+primitive closed geodesic is assigned the value `a_p`, and no primitive
+orbit-to-prime correspondence is assumed.
 
-## Round-4 Hecke gate and kill result
+## Round-4/5 Hecke and zeta kill result
 
 Round 2 registered a norm-matched generic smooth observable and a period
 permutation. Round 4 separates these numerical controls from the stricter
@@ -106,6 +126,15 @@ Thus `hecke_correspondence_cycle_relation=PROVED`, while
 `primitive_euler_factorization=NOT_ESTABLISHED` and the discriminative Euler
 interpretation is `STOP_SCOPED`.  A2 remains unrun.
 
+Round 5 explains the obstruction at log-zeta level.  For an oriented primitive
+owner, the `r`-fold period variation cancels the logarithmic `1/r`, leaving an
+owner-length kernel.  In the complete oriented product, inverse owners cancel
+exactly.  If one instead retains only the positive-word orientation, a Hecke
+output of branch degree `d` is a new primitive `Gamma_0(11)` owner of length
+`d ell(M)`, not the repetition `M^d` in the zeta ledger.  The resulting
+length-kernel weights require new degree moments.  The unweighted homological
+relation alone cannot supply a primitive Euler factorization.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -116,6 +145,9 @@ interpretation is `STOP_SCOPED`.  A2 remains unrun.
 - [Round-4 Hecke-correspondence theorem](notes/round4_hecke_correspondence_theorem.md)
 - [Round-4 conclusion](notes/round4_conclusion.md)
 - [Round-4 paper-facing research spine](paper/round4_research_spine.md)
+- [Round-5 zeta-variation theorem](notes/round5_zeta_variation_theorem.md)
+- [Round-5 conclusion](notes/round5_conclusion.md)
+- [Round-5 paper-facing research spine](paper/round5_research_spine.md)
 - [results and artifact contract](results/README.md)
 - [reproduction instructions](experiments/README.md)
 

@@ -1,5 +1,34 @@
 # P28 experiment status
 
+## Round 5
+
+`EXECUTION_STATUS=ROUND5_MATCHED_MARKED_CYCLIC_CENSUS_COMPLETED`. Run:
+
+```bash
+./experiments/reproduce_round5.sh
+```
+
+Fourteen tests pass.  Two isolated builds of the 390-row census, 576-row
+signed-field branch ledger, exact group/census certificate, non-arithmetic
+control contract, validation report, and standard output are byte-identical.
+The artifact tree SHA-256 is
+`1c8665ea55826e73c6aeb5f8cd6386a8d1020976d23004e1216d05e2f1e8a138`.
+
+The finite scope is all freely and cyclically reduced marked words at `L<=4`
+modulo cyclic rotation and inversion.  It yields 366 marked-primitive
+candidates and 24 powers.  Exact `ell<2ell_B` proves 44 `Gamma` primitives;
+homology-axis deduplication credits 36 distinct inverse-paired owners per field
+and withholds eight same-axis proved records.  The remaining 322 candidates
+stay open.  Only credited owners receive `k=+-1,+-2,+-3,+-4` branches.  All
+48 Round-4 seed rows replay compatibly, and no signed branch creates owner
+credit.
+
+This run is not a full quotient-group conjugacy census and not an arithmetic
+discrimination experiment.  The non-arithmetic control artifact is a strict
+design/source contract with `geometry_selected=false` and
+`comparison_run=false`.  No target prime, prime ideal, zero, eigenvalue, or
+fixed-operator spectrum is used.
+
 ## Round 4
 
 `EXECUTION_STATUS=ROUND4_EXPLICIT_BOLZA_OWNER_LEDGER_COMPLETED`. Run:
@@ -57,7 +86,8 @@ Every tensor-family comparison must use a common `N`.  A fixed-operator
 high-energy control is a separate regime and cannot be used as evidence for the
 `N→∞` family.
 
-The non-arithmetic genus-2 metric is still not instantiated.  Round 3 has bound
-the signed-field even-subsequence operator, window, trace distribution, and
-owner.  The next experiment is its primitive-orbit ledger followed by the
-matched non-arithmetic metric; other regimes remain open.
+The non-arithmetic genus-2 metric is still not instantiated.  Round 5 has
+completed the finite Bolza marked-cyclic layer and frozen the source/parameter
+contract.  The next experiment must resolve or conservatively retain the eight
+same-homology conjugacy gaps, then source and instantiate the matched control
+under a common geometric cutoff; other regimes remain open.

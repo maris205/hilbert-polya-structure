@@ -5,7 +5,7 @@ periodic points.  This carries the local progress tag
 `PROVED_A1_OBSTRUCTION`, not a formal A1 verdict.  A finite-level diagnostic may
 still be useful but receives no limit-flow orbit credit.
 
-The planned diagnostic is now landed as
+The Round-2 diagnostic is landed as
 `round2/congruence_reduction_order_ledger.csv` with 24 rows.  Its main columns
 are:
 
@@ -62,3 +62,19 @@ orders are `288`, `2880`, and `576`; finite-prefix growth is
 The recorded time is minimal among whole traversals of the chosen `g`-loop; it
 is not asserted to be an underlying primitive orbit's minimal period unless
 conjugacy primitivity is separately proved.
+
+## Round-5 cocompact control
+
+- `round5_cocompact_homology_escape_ledger.csv` contains 24 rows for three
+  primitive-homology owners across the eight factorial levels; and
+- `round5_cocompact_homology_escape_validation.json` records the exact modular
+  homology orders, nesting, primitivity certificates, computation boundary,
+  owner firewall, and unchanged Route states.
+
+Each owner has the certified quotient-order lower-bound sequence
+`1,2,6,24,120,720,5040,40320`.  The corresponding minimal lifted-geodesic
+period is at least that factor times its symbolic base length.  These are exact
+homology quotient bounds; the canonical residual cores and full finite
+quotients are intentionally not enumerated.  The general cocompact theorem is
+`[PROVED]` in the accompanying note, while the serialized finite ledger is
+`[NUMERICALLY_CERTIFIED]`.

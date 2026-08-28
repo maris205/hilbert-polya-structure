@@ -22,3 +22,12 @@ the source-dependency level.  The prospective paper can therefore state that
 no difficult row was silently excluded while still labeling the audit
 post-hoc, descriptive, finite-cutoff, and non-causal.  Manuscript drafting
 remains not started.
+
+Round 5 supplies the paper's analytic mechanism theorem.  For a real `2 x 2`
+symplectic hyperbolic map, the exact repeated-orbit stability amplitude is the
+project half-density times `1/|1-sigma^r Lambda^(-r)|`.  The 6,723-row replay
+keeps primitive/repeated owners and physical eigenvalue signs explicit.  P25 is
+therefore retained as a methods/negative-control paper with a complete research
+spine.  This is not an ARS Stage-2 manuscript authorization.
+
+See [the Round-5 research spine](round5_research_spine.md).

@@ -3,7 +3,7 @@
 Working title: *Semiclassical Tensor-Power Trace on the Bolza Surface*.
 
 Manuscript drafting has not started.  This spine records the paper-facing
-result structure accumulated through Round 4 while ARS remains at Stage 1.
+result structure accumulated through Round 5 while ARS remains at Stage 1.
 
 ## Central question
 
@@ -34,6 +34,16 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
    24 total signed branches occur per field, producing 48 validated rows but
    no additional owner credit.  This is `[PROVED]` formula instantiation, not
    a numerical orbit integration.
+5. **Bounded matched marked-cyclic census.**  Exhaustive enumeration at marked
+   length `L<=4`, modulo cyclic rotation and inversion, gives 390 classes:
+   366 marked-primitive candidates and 24 powers.  Exact number-field matrix
+   evaluation finds no literal equality/inverse collision.  The exact
+   `ell<2ell_B` gate proves `Gamma` primitivity for 44 records.  Homology-axis
+   deduplication safely credits 36 mutually distinguished inverse-paired owners
+   per field and withholds eight same-axis proved records.  The other 322
+   marked-primitive candidates remain open.  This is `[PROVED]` only for the
+   named finite marked equivalence and the 36 credited owner subset; full
+   `Gamma`-conjugacy completeness is `NOT_ESTABLISHED`.
 
 ## Main result table currently available
 
@@ -50,21 +60,31 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
 | Inverse-paired primitive axis owners | `4` per field; `8` field-owner pairs |
 | Signed trace branches | `24` per field; `48` total rows |
 | Signed-field ledger rows | `48` |
+| Round-5 matched marked-cyclic classes | `390` at `L<=4` |
+| Marked primitive / power split | `366 / 24` |
+| `Gamma` primitivity certificates | `44`; `322` marked-primitive candidates open |
+| Distinct inverse-paired owner credits | `36` per field; `8` proved same-axis records withheld |
+| Round-5 signed trace branches | `288` per field; `576` total at `k=+-1,...,+-4` |
 | Target/arithmetic labels | `0` |
 
 ## What makes the result paper-facing
 
 The project now has one compatible chain from a published explicit Bolza group
-representation to primitive conjugacy, then to the source trace theorem's
+representation to a finite marked-cyclic normal form, a conservative primitive
+and owner-distinctness gate, then to the source trace theorem's
 magnetic period, action, stability, Maslov, signed-`k` branching, and field-sign
-pairing.  Earlier rounds supplied only owner architecture and a generic source
-contract; Round 4 supplies actual named inverse-paired Bolza axis owners while
-keeping signed trace branches separate from owner counting.
+pairing.  Round 4 supplied four named seed axes; Round 5 expands safely distinct
+owner credit ninefold to 36 per field while keeping 322 primitivity gaps, eight
+same-homology conjugacy gaps, and every signed branch separate from owner
+counting.
 
 ## What is not yet a paper conclusion
 
-- The four side pairings are a certified seed, not a complete primitive or
-  systolic spectrum.
+- The 390 rows are complete only for the declared matched marked-cyclic
+  equivalence, not for full `Gamma` conjugacy or the complete primitive length
+  spectrum.
+- Eight proved primitives sharing credited homology axes have no extra owner
+  credit, and 322 marked-primitive candidates lack a `Gamma`-primitivity proof.
 - No rational-prime or prime-ideal correspondence is assigned.
 - No arithmetic-specific cancellation has been measured.
 - The zero-field theorem and the metric-matched non-arithmetic control have not
@@ -80,9 +100,11 @@ keeping signed trace branches separate from owner counting.
 3. Explicit Bolza octagon group and primitive side-pairing lemma.
 4. Magnetic period/action/stability owner ledger.
 5. Field-reversal and signed-`k` branch controls.
-6. Bounded-length census and non-arithmetic metric control.
-7. Arithmetic discrimination result or explicit A0 failure.
+6. Bounded marked-cyclic census, quotient-conjugacy gap, and owner gate.
+7. Source-verified non-arithmetic metric control.
+8. Arithmetic discrimination result or explicit A0 failure.
 
-The paper is not ready to leave Stage 1 until sections 6--7 have executable
-evidence.  The immediate next artifact is a certified bounded-length conjugacy
-census followed by the metric-matched control.
+The paper is not ready to leave Stage 1 until sections 7--8 have executable
+evidence.  The immediate next artifacts are a certified resolution of the
+eight same-homology conjugacy ambiguities and a source-verified instantiation
+of the metric-matched non-arithmetic control under a common geometric cutoff.

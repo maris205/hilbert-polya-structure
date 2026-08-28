@@ -25,8 +25,9 @@ For the 11 frozen positive-word owners and `p={2,3,5,7,13}`:
 
 - 385/385 exact branch-gluing identities pass;
 - 320/320 eta-product Hecke coefficient identities pass;
-- 138 closed cycle owners are produced and all 138 receive exact finite
-  primitive-root certificates;
+- 138 closed cycle-owner instances are produced and all 138 receive exact
+  finite primitive-root certificates; full cross-instance conjugacy
+  deduplication is not claimed;
 - 55/55 direct complex period-sum checks pass;
 - maximum primary complex residual is `2.229752420147902e-14`;
 - 8/8 tests pass; and
