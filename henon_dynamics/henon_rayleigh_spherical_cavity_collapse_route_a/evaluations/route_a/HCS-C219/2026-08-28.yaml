@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C219
+candidate_definition: inviscid spherical-cavity Rayleigh wall-radius ODE with constant pressure difference
+family: rho>0, R0>0, Pi in R; Pi>0 collapse, Pi=0 equilibrium, Pi<0 expansion
+phase_space: positive-radius phase half-plane (R>0, R_dot in R) with R=0 retained only as a labeled singular boundary
+dynamics: R R_ddot + (3/2) R_dot^2 = -Pi/rho, R(0)=R0, R_dot(0)=0
+parameters: rho>0, R0>0, Pi in R; R0=0 is a nonclassical boundary case
+parameter_provenance: Rayleigh empty-cavity model parameters; no target fitting
+arithmetic_origin: none; the monotone collapse trajectory has no primitive arithmetic owner
+clock: physical continuous time t
+normalization: spherical liquid kinetic-energy normalization with physical radius R
+determinant_convention: no target determinant; only the source first-integral/Beta clock is recorded, and the source Beta clock is not target continuation/divisor/counting law
+orbit_cutoff: thirteen rational parameter rows; four dimensionless samples on each nondegenerate branch
+precision: 90 working decimal digits; 54 serialized significant digits
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+code_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+artifact_paths:
+  evidence: results/c219_rayleigh_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: Rayleigh spherical-cavity wall-radius equation and weighted liquid-energy Lagrangian
+  arithmetic_origin: none
+  clock: physical continuous time t
+  normalization: R(0)=R0, R_dot(0)=0, pressure difference Pi
+  cutoff: five collapse, two equilibrium, three expansion, three R0=0 boundary rows
+  precision: 90 working digits; independent hypergeometric clock path
+  allowed_data: first integral, Beta collapse constant, endpoint Puiseux law, energy/volume/Lp identities, sign boundaries
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy, target divisor, Hilbert-Polya operator
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-native pressure/energy ODE and universal dimensionless collapse profile
+  strongest_failure: no intrinsic rational-prime primitive, prime-power repetition, or log-prime clock
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: maximal monotone branches and explicit endpoint owner
+  strongest_failure: no discrete primitive periodic-orbit family; the collapse trajectory terminates at a singular boundary
+  metrics: {parameter_rows: 13, collapse_rows: 5, expansion_rows: 3}
+  artifacts: [THEOREM_PACKAGE.md, results/c219_rayleigh_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source Beta clock and inverse-profile branch structure, with no target continuation
+  strongest_failure: no target determinant, weighted primitive product, or zero-divisor correspondence
+  metrics: {target_zero_match: null, source_clock: exact}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-local incomplete-Beta endpoint branch and explicit Puiseux/Lp singularity ledger
+  strongest_failure: source Beta clock is not target continuation/divisor/counting law; no functional equation, arithmetic continuation, or Weil compression
+  artifacts: [THEOREM_PACKAGE.md, code/c219_rayleigh_sympy_crosscheck.py]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: source-native Lagrangian and finite liquid-energy structure
+  strongest_failure: no same-clock self-adjoint/scattering quantization is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [pressure-sign branch, zero-pressure equilibrium, zero-radius boundary, Beta-constant mutation, terminal-exponent mutation, Lagrangian/energy mutation, recursive nested-key closure, scope and stale hashes]
+  proves_too_much_risk: high if the endpoint singularity is misrepresented as a target spectral determinant or if the negative branch is called physical cavitation
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: source-local Rayleigh first-integral, Beta collapse clock, sign atlas, terminal singularity, energy/volume/Lp theorem only; the source Beta clock is not target continuation/divisor/counting law; no target arithmetic or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this frozen source family; preserve the R0=0 and Pi=0 boundaries and do not add physical corrections without a new source lock
+round2_clues: []
+route_b_invocation_allowed: false

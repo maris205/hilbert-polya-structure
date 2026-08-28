@@ -1,0 +1,208 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{Open TASEP: Matrix-Ansatz Stationarity and an All-Boundary Phase Atlas}
+\author{HCS Research Program}
+\date{28 August 2026\quad (revision \CRevisionRound)}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We give one source-locked theorem for the continuous-time open totally
+asymmetric exclusion process (TASEP).  Particles enter a finite binary chain
+at rate $\alpha$, hop right at unit rate, and leave at rate $\beta$.  The
+DEHP relation $DE=D+E$ evaluates every finite configuration word, yields a
+closed ballot-number normalization $Z_L$, and forces the exact current
+$J_L=Z_{L-1}/Z_L$.  We retain the equal-rate divided-difference limit and
+all zero-rate and small-size faces.  The analytic large-$L$ statement
+separates low-density, high-density, maximal-current, coexistence, and
+critical regimes; finite exact rows are explicitly regression sentinels and
+are not used as numerical proof of that limit.  A rational producer, an
+independent generator/nullspace checker, symbolic identities, clean replay,
+and hostile mutation tests accompany the paper.  The source theorem has no
+arithmetic owner, so its strict Route-A outcome is
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)}.
+\end{abstract}
+
+\section{Frozen process and contribution}
+For $L\geq 1$ let $\eta=(\eta_1,\ldots,\eta_L)\in\{0,1\}^L$, with
+$\eta_i=1$ denoting an occupied site.  An empty first site receives a
+particle at rate $\alpha$, each adjacent pattern $10$ changes to $01$ at
+unit rate, and an occupied last site is removed at rate $\beta$.  The
+physical clock is continuous time and the bulk rate is normalized to one.
+The empty $L=0$ chain is retained as a one-state boundary.
+
+The paper makes a single finite-to-asymptotic move.  It first proves the
+finite generator and its DEHP stationary vector for every positive
+$(\alpha,\beta)$, then states the all-parameter phase atlas and separately
+closes the singular faces.  The executable ledger checks rational
+instances only; it does not replace the analytic thermodynamic argument.
+
+\section{Generator and matrix product}
+For a test function $f$, the generator is
+\begin{align}
+(\mathcal Lf)(\eta)
+={}&\alpha(1-\eta_1)\{f(\eta^{1+})-f(\eta)\}\nonumber\\
+&+\sum_{i=1}^{L-1}\eta_i(1-\eta_{i+1})
+ \{f(\eta^{i,i+1})-f(\eta)\}\nonumber\\
+&+\beta\eta_L\{f(\eta^{L-})-f(\eta)\}.
+\label{eq:generator}
+\end{align}
+Here $\eta^{1+}$ fills site one, $\eta^{L-}$ empties the last site, and
+$\eta^{i,i+1}$ performs the indicated hop.
+
+\begin{proposition}[DEHP stationary vector]
+\label{prop:dehp}
+Let $D,E$ satisfy $DE=D+E$ and let
+\[
+\langle W|E=\alpha^{-1}\langle W|,\qquad
+D|V\rangle=\beta^{-1}|V\rangle .
+\]
+For a word with $D$ at occupied sites and $E$ at empty sites, put
+\[
+w(\eta)=\langle W|\prod_{i=1}^{L}
+[\eta_iD+(1-\eta_i)E]|V\rangle,\qquad
+Z_L=\sum_{\eta}w(\eta).
+\]
+If $\alpha,\beta>0$, then $\pi(\eta)=w(\eta)/Z_L$ is the unique stationary
+law of \eqref{eq:generator}, and the current is the same through every
+bond.
+\end{proposition}
+
+\paragraph{Proof sketch.}
+In the stationarity sum, a bulk gain--loss pair is replaced by $DE-D-E$,
+which vanishes.  The two remaining boundary terms are removed by the two
+boundary eigenvector identities.  Positive injection and extraction make the
+finite directed graph irreducible, so the stationary vector is unique.
+The same cancellation applied to a bond gives a common current.
+No infinite matrix truncation is needed: recursively strip a left $E$, a
+right $D$, or replace a $DE$ pair by $D+E$.
+
+\section{Closed normalization and finite current}
+Writing $x=\beta^{-1}$ and $y=\alpha^{-1}$, the exact finite normalization is
+\begin{equation}
+Z_0=1,\qquad
+Z_N=\sum_{p=1}^{N}
+\frac{p(2N-1-p)!}{N!(N-p)!}\,
+\frac{x^{p+1}-y^{p+1}}{x-y}\quad(N\geq1).
+\label{eq:Z}
+\end{equation}
+At $x=y$ the quotient is its continuous value $(p+1)x^p$.  Thus
+\begin{equation}
+J_L=\frac{Z_{L-1}}{Z_L}\quad(L\geq1),
+\qquad J_1=\frac{\alpha\beta}{\alpha+\beta}.
+\label{eq:current}
+\end{equation}
+The producer evaluates \eqref{eq:Z} in exact rational arithmetic.  The
+regression grid includes the equal-rate diagonal and all three critical
+boundary pieces (including their corner):
+\[
+\alpha,\beta\in\left\{\tfrac14,\tfrac12,\tfrac34,1,\tfrac32\right\}.
+\]
+
+\ifnum\CRevisionRound>0
+\section{Phase and boundary atlas}
+For unit bulk hopping, the analytic thermodynamic current is
+\[
+J=\begin{cases}
+\alpha(1-\alpha),&\alpha<\min(\beta,\frac12)
+       \quad\text{(low density)},\\
+\beta(1-\beta),&\beta<\min(\alpha,\frac12)
+       \quad\text{(high density)},\\
+\frac14,&\alpha>\frac12,\ \beta>\frac12
+       \quad\text{(maximal current)}.
+\end{cases}
+\]
+The line $0<\alpha=\beta<1/2$ is the coexistence (shock) line in the
+positive-rate interior; it has the same current but no single selected bulk
+density.  Its endpoint $(\alpha,\beta)=(0,0)$ is excluded from coexistence
+and is handled by the zero-rate boundary theorem below.  The faces
+$\alpha=1/2,\beta>1/2$ and $\beta=1/2,\alpha>1/2$ are critical and retain
+finite-size corrections.  Their intersection $\alpha=\beta=1/2$ is the
+multicritical phase-boundary junction and has the same bulk density and
+current with finite-size critical corrections.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+parameters & closed class & stationary description\\
+\midrule
+$\alpha>0,\ \beta>0$ & all $2^L$ states & unique DEHP law\\
+$\alpha=0,\ \beta>0$ & empty word & unique empty state\\
+$\alpha>0,\ \beta=0$ & full word & unique full state\\
+$\alpha=\beta=0$ & $0^{L-k}1^k,\ 0\leq k\leq L$ & simplex on $L+1$ absorbers; affine dimension $L$\\
+$L=0$ & one state & zero generator\\
+\bottomrule
+\end{tabular}
+\end{center}
+On the double-zero face the table lists $L+1$ absorbing extreme points.  Their
+normalized stationary family is the simplex on those absorbers, of affine
+dimension $L$; the linear (unnormalized) nullspace has one basis direction per
+absorber.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact audit and Route-A boundary}
+The release ledger contains 200 positive-rate rows (five-by-five rational
+rates for each of $L=0,1,2,3,4,5,6,8$) and 40 zero-rate rows.  It stores
+every finite configuration weight, $Z_L$, every bond current, and the exact
+stationary residual.  The independent checker reconstructs the generator and
+uses exact SymPy nullspaces through $L=4$; larger rows are covered by the
+irreducibility theorem.  A separate SymPy program checks all short-word
+quadratic identities, \eqref{eq:Z}, the equal-rate limit, and symbolic
+stationarity.  Clean replay is byte-identical, and repaired-hash, stale-hash,
+schema, and overclaim mutations are rejected.
+
+\begin{theorem}[Scope-locked conclusion]
+The finite matrix-product/current theorem and the source-cited phase atlas
+are exact, but they do not create a primitive orbit clock or an arithmetic
+target.  The strict Route-A tuple is
+\[
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)},
+\]
+with \texttt{ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.
+\end{theorem}
+The finite ledger is not numerical evidence for the thermodynamic limit and
+no priority or novelty claim is made.  The literal scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target primes, zeros, Euler
+factors, root numbers, automorphy, target divisor, or Hilbert--Polya operator
+is introduced.
+\fi
+
+\section*{Source note}
+The open-boundary recursion and phase diagram follow the source account of
+Derrida, Domany, and Mukamel~\cite{DDM1992}.  The matrix formulation,
+normalization, current, and profiles follow Derrida, Evans, Hakim, and
+Pasquier~\cite{DEHP1993}.  These citations are metadata anchors, not claims
+of priority for this package.
+
+\begin{thebibliography}{9}
+\bibitem{DDM1992}
+B. Derrida, E. Domany, and D. Mukamel,
+\textit{An exact solution of a one-dimensional asymmetric exclusion model
+with open boundaries}, Journal of Statistical Physics 69 (1992), 667--687.
+DOI: 10.1007/BF01050430.
+\bibitem{DEHP1993}
+B. Derrida, M. R. Evans, V. Hakim, and V. Pasquier,
+\textit{Exact solution of a 1D asymmetric exclusion model using a matrix
+formulation}, Journal of Physics A: Mathematical and General 26 (1993),
+1493--1517. DOI: 10.1088/0305-4470/26/7/011.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Data and code.} All finite rows and audit scripts are shipped with
+the package and use exact rational arithmetic.  \textbf{Limitations.} The
+finite ledger does not prove the $L\to\infty$ phase theorem.  \textbf{Scope.}
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; Route B is not authorized.
+\textbf{AI-use disclosure.} Generative tools assisted drafting and code
+generation; deterministic internal checks validate the displayed artifact.
+\end{document}

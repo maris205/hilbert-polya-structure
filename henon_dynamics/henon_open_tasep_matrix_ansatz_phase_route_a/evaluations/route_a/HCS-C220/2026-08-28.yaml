@@ -1,0 +1,87 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C220
+candidate_definition: continuous-time open totally asymmetric exclusion process with unit bulk hopping
+family: binary occupation chain on {0,1}^L with injection alpha and extraction beta
+phase_space: finite state space {0,1}^L, L>=0
+dynamics: 10 -> 01 at unit rate, 0 -> 1 at site one at rate alpha, 1 -> 0 at site L at rate beta
+parameters: L>=0 and alpha,beta>=0; alpha,beta>0 is the irreducible interior
+parameter_provenance: source-defined reservoir and hopping rates; no target fitting
+arithmetic_origin: none; sites and rates are not primitive arithmetic data
+clock: physical continuous time
+normalization: DEHP matrix product with Z_L; unit bulk rate
+determinant_convention: finite Markov generator and matrix-product normalization only; no target determinant
+orbit_cutoff: L=0,1,2,3,4,5,6,8; 200 positive-rate rows and 40 boundary rows
+precision: exact rational arithmetic; no floating-point ledger
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+code_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+artifact_paths:
+  evidence: results/c220_tasep_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: open TASEP finite generator and DEHP matrix Ansatz
+  arithmetic_origin: none
+  clock: physical continuous time
+  normalization: bulk hop rate one; D occupied and E empty
+  cutoff: exact configurations through L=8, positive and zero-rate faces
+  precision: rational fractions; independent SymPy nullspaces through L=4
+  allowed_data: source-local generator, matrix algebra, current, phase and boundary formulas
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+  phase_row_coverage: [LD, HD, MC, COEXISTENCE, CRIT_ALPHA, CRIT_BETA, CRIT_CORNER]
+  coexistence_condition: 0<alpha=beta<1/2 (positive-rate interior); endpoint (0,0) handled only by zero-rate boundary theorem
+  critical_corner: alpha=beta=1/2; bulk density 1/2; current 1/4; multicritical/phase-boundary junction with finite-size critical corrections
+  double_zero_geometry: L+1 absorbing extreme points; normalized stationary simplex has affine dimension L
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: rates and site labels are explicitly source-defined
+  strongest_failure: no intrinsic arithmetic origin or target label
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: complete finite configuration owner and exact stationary nullspace
+  strongest_failure: no primitive periodic-orbit family; this is a stochastic open chain
+  metrics: {interior_rows: 200, boundary_rows: 40, phase_rows: 7, max_L: 8}
+  artifacts: [THEOREM_PACKAGE.md, results/c220_tasep_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact DEHP normalization and uniform finite current
+  strongest_failure: no target determinant or zero-divisor correspondence
+  metrics: {target_zero_match: null, current_ratio: exact}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: all finite rate faces and analytic phase conditions are stated
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md, results/c220_tasep_evidence.json]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: DEHP non-commutative transfer algebra is an explicit local operator hint
+  strongest_failure: no same-clock self-adjoint target quantization is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [boundary orientation, DE relation, equal-rate limit, current ratio, nullspace dimension, scope and stale hashes]
+  proves_too_much_risk: high if finite rows are presented as proof of the thermodynamic phase limit
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact finite open-TASEP matrix-product/current theorem and source-cited phase atlas only; no target arithmetic or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no discrete primitive-orbit owner
+  - no target determinant or analytic target match
+  - matrix Ansatz is not a Hilbert-Polya construction
+next_smallest_test: none inside this source owner; preserve zero-rate and equal-rate branches
+round2_clues: []
+route_b_invocation_allowed: false

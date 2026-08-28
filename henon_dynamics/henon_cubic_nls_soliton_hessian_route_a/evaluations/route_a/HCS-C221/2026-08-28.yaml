@@ -1,0 +1,141 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C221
+source_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+candidate_definition: one-dimensional focusing cubic NLS standing wave and its real Hessian operators
+family: Q_omega(x)=sqrt(omega) sech(sqrt(omega)x), omega>0
+phase_space: H^1(R;C) with spectral analysis on L^2(R)
+dynamics: i psi_t + psi_xx + 2|psi|^2 psi = 0; psi=e^{i omega t}Q_omega
+parameters: real omega>0; no fitted scale
+parameter_provenance: source-defined focusing cubic coefficient and physical coordinates
+arithmetic_origin: none; continuous Hamiltonian PDE with exact rational regression probes only
+clock: physical NLS time t
+normalization: M=int |u|^2, H=(1/2)int |u_x|^2-(1/2)int |u|^4, S_omega=H+(omega/2)M
+determinant_convention: none; Hessians and continuous spectra are not zeta or Fredholm determinants
+orbit_cutoff: 15 profile, 3 integral, 15 spectral, and 15 factorization probes
+precision: exact Fraction labels and 82-significant-digit mpmath values
+training_data: none
+forbidden_data: target primes, target zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators, Route-B inputs
+date: 2026-08-28
+code_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+artifact_paths:
+  evidence: results/c221_nls_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+citations:
+  - key: ZakharovShabat1972
+    claim: integrable focusing NLS and sech soliton source
+    title: Exact theory of two-dimensional self-focusing and one-dimensional self-modulation of waves in nonlinear media
+    authors: V. E. Zakharov and A. B. Shabat
+    venue: Soviet Physics JETP 34, 62–69
+    date: '1972'
+    doi_or_url: https://www.jetp.ras.ru/cgi-bin/dn/e_034_01_0062
+  - key: Weinstein1985
+    claim: variational Hessian, spectral coercivity, and VK stability criterion
+    title: Modulational Stability of Ground States of Nonlinear Schrödinger Equations
+    authors: Michael I. Weinstein
+    venue: SIAM Journal on Mathematical Analysis 16, 472–491
+    date: '1985'
+    doi_or_url: https://doi.org/10.1137/0516034
+  - key: PoschlTeller1933
+    claim: original solvable Pöschl–Teller potential and ladder source; historical attribution only
+    title: Bemerkungen zur Quantenmechanik des anharmonischen Oszillators
+    authors: G. Pöschl and E. Teller
+    venue: Zeitschrift für Physik 83, 143–151
+    date: '1933'
+    doi_or_url: https://doi.org/10.1007/BF01331132
+route: A
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator:
+  path: flow_systems/skills/route-a-evaluator.md
+  version: 0.2.0
+  sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+source_lock:
+  object: one-dimensional focusing cubic NLS standing wave and real Hessian pair
+  arithmetic_origin: none; source-native continuum PDE only
+  clock: physical NLS time t
+  normalization: M=int |u|^2, H=(1/2)int |u_x|^2-(1/2)int |u|^4, S_omega=H+(omega/2)M
+  determinant_convention: no determinant; continuous Hessian spectrum only
+  cutoff: 15 profile, 3 integral, 15 spectral, 15 factorization rows
+  precision: 100 working decimal digits, 82 serialized significant digits
+  allowed_data: exact rational omega/x/y sentinels, sech and Pöschl-Teller identities
+  forbidden_data: target primes, target zeros, fitted frequencies, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: equation coefficients and physical scale are source-defined but non-arithmetic
+  strongest_failure: no intrinsic rational-prime or prime-power carrier
+  arithmetic_controls: [source-local rational grid, sign-reversed cubic boundary, omega-neighbor control]
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: standing-wave phase/translation symmetries give a relative-orbit hint
+  strongest_failure: no isolated primitive orbit or arithmetic period ledger
+  metrics: {profile_rows: 15, spectral_rows: 15, relative_orbit: weak}
+  artifacts: [THEOREM_PACKAGE.md, results/c221_nls_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: complete source-native Hessian eigenvalue owner
+  strongest_failure: no target divisor, source zeta, or prime-power repetition
+  metrics: {target_zero_match: null, discrete_modes: 3}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact Pöschl-Teller analytic structure and essential threshold
+  strongest_failure: no same-clock continuation or arithmetic explicit formula
+  analytic_structure: exact one-dimensional self-adjoint Hessian pair
+  weil_compression: not present
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: canonical Hamiltonian PDE and self-adjoint Hessian provide a natural quantization hint
+  strongest_failure: no Hilbert-Polya operator or target self-adjoint identification is constructed
+  metrics: {route_b_ready: false, finite_box_used_as_proof: false}
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+frozen_owner: one-dimensional focusing cubic NLS sech soliton Hessian and Pöschl-Teller ladder
+clock_description: physical elapsed NLS time; no logarithmic or target-fitted clock
+tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_NATURAL_QUANTIZATION]
+overall: ROUTE_A_REJECTED
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+positive: exact sech profile, action/mass/VK identities, complete L_plus/L_minus spectrum, Morse index, kernels and factorization
+failure: no intrinsic rational-prime carrier, isolated arithmetic primitive-orbit clock, target divisor, source zeta, or Hilbert-Polya identification
+finite_grid_is_proof: false
+stage_assessment:
+  A0: FAIL — no intrinsic prime or prime-power carrier in the continuum NLS coefficients
+  A1: WEAK — standing-wave symmetry gives only a relative-orbit hint, not an arithmetic primitive ledger
+  A2: FAIL — no source-native arithmetic divisor or periodic-orbit determinant
+  A3: FAIL — no same-clock target analytic bridge or determinant is constructed
+  A4: NATURAL_QUANTIZATION — canonical Hamiltonian PDE/Hessian is a model quantization hint only
+fatal_risks:
+  - continuous essential spectrum prevents an unqualified trace-class Fredholm determinant claim
+  - finite-box diagonalization cannot prove the continuum Pöschl-Teller spectrum
+  - VK slope and Hessian index do not by themselves prove full nonlinear orbital stability
+  - any target-arithmetic or Hilbert-Polya promotion exceeds the frozen scope
+adversarial_controls:
+  controls_used: [profile ODE sign, mass/action scaling, VK derivative, eigenpair residuals, Pöschl-Teller factorization, omega-zero and defocusing faces, repaired/stale hashes]
+  proves_too_much_risk: high if a finite-box spectrum is presented as a continuum proof or if a Hessian trace is called a zeta determinant
+  verdict: STOP_SCOPED
+claim_boundary: exact one-dimensional variational/Hessian theorem only; no arithmetic or target operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no isolated primitive-orbit owner
+  - no target determinant or analytic bridge
+  - no same-clock Hilbert-Polya construction
+next_smallest_test: none inside this owner; preserve continuum-versus-box and nonlinear-stability boundaries
+round2_clues: []
+claims:
+  arithmetic_local_data: false
+  euler_factors: false
+  root_numbers: false
+  automorphy: false
+  target_divisor_or_functional_equation: false
+  hilbert_polya_operator: false
+  full_nonlinear_orbital_stability: false

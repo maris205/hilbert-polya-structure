@@ -1,0 +1,513 @@
+{
+  "candidate_id": "HCS-C219",
+  "citations": [
+    {
+      "authors": "Lord Rayleigh",
+      "claim": "original spherical-cavity collapse equation and pressure calculation",
+      "doi": "10.1080/14786440808635681",
+      "key": "Rayleigh1917",
+      "title": "VIII. On the pressure developed in a liquid during the collapse of a spherical cavity",
+      "venue": "The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science",
+      "year": 1917
+    },
+    {
+      "authors": "M. S. Plesset and A. Prosperetti",
+      "claim": "source-locked bubble-dynamics and cavitation context",
+      "doi": "10.1146/annurev.fl.09.010177.001045",
+      "key": "PlessetProsperetti1977",
+      "title": "Bubble Dynamics and Cavitation",
+      "venue": "Annual Review of Fluid Mechanics",
+      "year": 1977
+    },
+    {
+      "authors": "M. P. Brenner, S. Hilgenfeldt, and D. Lohse",
+      "claim": "terminal 2/5 singularity and physical correction context",
+      "doi": "10.1103/RevModPhys.74.425",
+      "key": "BrennerHilgenfeldtLohse2002",
+      "title": "Single-bubble sonoluminescence",
+      "venue": "Reviews of Modern Physics",
+      "year": 2002
+    },
+    {
+      "authors": "D. Obreschkow, M. Bruderer, and M. Farhat",
+      "claim": "dimensionless Rayleigh profile, collapse clock and endpoint approximation context",
+      "doi": "10.1103/PhysRevE.85.066303",
+      "key": "ObreschkowBrudererFarhat2012",
+      "title": "Analytical approximations for the collapse of an empty spherical bubble",
+      "venue": "Physical Review E",
+      "year": 2012
+    }
+  ],
+  "evaluation_date": "2026-08-28",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "d/dt[R^3 R_dot^2+(2 Pi/(3 rho))R^3]=0",
+      "name": "energy_first_integral"
+    },
+    {
+      "formula": "int_0^1 x^(3/2)/sqrt(1-x^3) dx=(1/3)B(5/6,1/2)",
+      "name": "beta_substitution"
+    },
+    {
+      "formula": "delta_t=(R0/a)*(2/5)*(R/R0)^(5/2)*(1+5/22*(R/R0)^3+...)",
+      "name": "terminal_balance"
+    },
+    {
+      "formula": "2 pi rho R^3 R_dot^2+(4 pi/3)Pi R^3=(4 pi/3)Pi R0^3",
+      "name": "volume_energy"
+    },
+    {
+      "formula": "EL[L_phys]=4 pi rho R^2 [R R_ddot+(3/2)R_dot^2+Pi/rho]",
+      "name": "lagrangian_euler_lagrange"
+    },
+    {
+      "formula": "int_0^epsilon delta^(-3p/5) ddelta finite iff p<5/3; int delta^(-8p/5) finite iff p<5/8",
+      "name": "lp_integrability"
+    }
+  ],
+  "frozen_object": {
+    "clock": "physical continuous time t",
+    "energy_lagrangian": "L_phys=2*pi*rho*R^3*R_dot^2-(4*pi/3)*Pi*R^3",
+    "forbidden_data": "target primes/zeros, local arithmetic, Euler factors, root numbers, automorphy, Hilbert-Polya operators",
+    "initial_data": "R(0)=R0>0, R_dot(0)=0",
+    "parameters": "rho>0, R0>0, Pi in R; Pi>0 is the physical collapse sign",
+    "phase_space": "positive radius/velocity half-plane (R,V) with the R=0 boundary adjoined only as a labeled singular face",
+    "pressure_definition": "Pi=P_infinity-P_v (positive pressure deficit for an empty cavity)",
+    "system": "R R_ddot + (3/2) R_dot^2 = -Pi/rho for R>0"
+  },
+  "headline": "The inviscid spherical-cavity Rayleigh equation has a complete pressure-sign atlas, an exact incomplete-Beta collapse clock, a 2/5 terminal singularity, and a finite liquid-energy ledger.",
+  "nonclaims": [
+    "the inverse incomplete-Beta function is not presented as an elementary closed form",
+    "the finite ledger is a deterministic regression certificate and does not replace the quantified proof",
+    "no continuation through R=0 is asserted for the physical ODE",
+    "the source Beta clock is not target continuation/divisor/counting law and does not satisfy A3",
+    "no target prime/zero law, Euler factor, root number, automorphy, functional equation, or Hilbert-Polya operator",
+    "the negative-pressure branch is a mathematical sign control, not a claim about the original cavitation experiment"
+  ],
+  "payload_sha256": "2f3784efb8af4a5e929149eb1ddb6a5f0fe264147fff71b5c791ec1e8a16e0e9",
+  "regression": {
+    "case_count": 13,
+    "cases": [
+      {
+        "a": "0.816496580927726032732428024901963797321982493552223376",
+        "asymptotic_speed": null,
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "collapse_unit",
+        "collapse_time": "0.914681356501962454051662523177350698477975672390317177",
+        "density": "1",
+        "dimensionless_samples": [
+          {
+            "clock": "0.528047886326089823036795283178160350499088307654184014",
+            "x": "3/4"
+          },
+          {
+            "clock": "0.673982556836550826137337272127618268449099373616028865",
+            "x": "1/2"
+          },
+          {
+            "clock": "0.734289471151783634591537546838386994370157412501627685",
+            "x": "1/4"
+          },
+          {
+            "clock": "0.746443553545202159872975363910769204764433714257044655",
+            "x": "1/16"
+          }
+        ],
+        "energy_constant": "4.18879020478639098461685784437267051226289253250014109",
+        "initial_acceleration": "-1.00000000000000000000000000000000000000000000000000000",
+        "initial_radius": "1",
+        "maximal_interval": "[0,Tc) with R(Tc)=0",
+        "pressure": "1",
+        "regime": "collapse",
+        "terminal_coefficient": "1.33032499713098585515149830272702158984888270927878347",
+        "volume_terminal_coefficient": "9.86192883491420979893662086106272938241477324682205980"
+      },
+      {
+        "a": "0.894427190999915878563669467492510494176247343844610290",
+        "asymptotic_speed": null,
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "collapse_scaled",
+        "collapse_time": "1.94830071288824796520428832514191231175429141735005805",
+        "density": "5/4",
+        "dimensionless_samples": [
+          {
+            "clock": "0.528047886326089823036795283178160350499088307654184014",
+            "x": "3/4"
+          },
+          {
+            "clock": "0.673982556836550826137337272127618268449099373616028865",
+            "x": "1/2"
+          },
+          {
+            "clock": "0.734289471151783634591537546838386994370157412501627685",
+            "x": "1/4"
+          },
+          {
+            "clock": "0.746443553545202159872975363910769204764433714257044655",
+            "x": "1/16"
+          }
+        ],
+        "energy_constant": "79.8197244578740059846434578122125547614540077026415775",
+        "initial_acceleration": "-0.514285714285714285714285714285714285714285714285714286",
+        "initial_radius": "7/3",
+        "maximal_interval": "[0,Tc) with R(Tc)=0",
+        "pressure": "3/2",
+        "regime": "collapse",
+        "terminal_coefficient": "2.29392952942987687743205231004929186026459400600712383",
+        "volume_terminal_coefficient": "50.5625333530533117397020214330210493501186147473484025"
+      },
+      {
+        "a": "0.230021853114118072598708954875710662272065601186650366",
+        "asymptotic_speed": null,
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "collapse_small_pressure",
+        "collapse_time": "4.32906230494351408894795853369683809258220512069438791",
+        "density": "9/5",
+        "dimensionless_samples": [
+          {
+            "clock": "0.528047886326089823036795283178160350499088307654184014",
+            "x": "3/4"
+          },
+          {
+            "clock": "0.673982556836550826137337272127618268449099373616028865",
+            "x": "1/2"
+          },
+          {
+            "clock": "0.734289471151783634591537546838386994370157412501627685",
+            "x": "1/4"
+          },
+          {
+            "clock": "0.746443553545202159872975363910769204764433714257044655",
+            "x": "1/16"
+          }
+        ],
+        "energy_constant": "1.41842631273189959267449154518439636394087366179898958",
+        "initial_acceleration": "-0.0595238095238095238095238095238095238095238095238095238",
+        "initial_radius": "4/3",
+        "maximal_interval": "[0,Tc) with R(Tc)=0",
+        "pressure": "1/7",
+        "regime": "collapse",
+        "terminal_coefficient": "0.952460304236110146910263452488433874819742253297095823",
+        "volume_terminal_coefficient": "3.61933900450326247322511525075686794647799548106198333"
+      },
+      {
+        "a": "1.91485421551267621995020382273964310607342148599426412",
+        "asymptotic_speed": null,
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "collapse_large_pressure",
+        "collapse_time": "0.975053602216699425196392855013742249121412035422474092",
+        "density": "2/3",
+        "dimensionless_samples": [
+          {
+            "clock": "0.528047886326089823036795283178160350499088307654184014",
+            "x": "3/4"
+          },
+          {
+            "clock": "0.673982556836550826137337272127618268449099373616028865",
+            "x": "1/2"
+          },
+          {
+            "clock": "0.734289471151783634591537546838386994370157412501627685",
+            "x": "1/4"
+          },
+          {
+            "clock": "0.746443553545202159872975363910769204764433714257044655",
+            "x": "1/16"
+          }
+        ],
+        "energy_constant": "239.982772149220316827007480667184248098394884674487250",
+        "initial_acceleration": "-2.20000000000000000000000000000000000000000000000000000",
+        "initial_radius": "5/2",
+        "maximal_interval": "[0,Tc) with R(Tc)=0",
+        "pressure": "11/3",
+        "regime": "collapse",
+        "terminal_coefficient": "3.24186029027414548844504660785985986298944254431146024",
+        "volume_terminal_coefficient": "142.715615076727659100804700451812201901430274694157557"
+      },
+      {
+        "a": "0.755928946018454454429033072468360121631502623737842909",
+        "asymptotic_speed": null,
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "collapse_small_radius",
+        "collapse_time": "0.197593756438572571405457303841846398499214186150795486",
+        "density": "7/3",
+        "dimensionless_samples": [
+          {
+            "clock": "0.528047886326089823036795283178160350499088307654184014",
+            "x": "3/4"
+          },
+          {
+            "clock": "0.673982556836550826137337272127618268449099373616028865",
+            "x": "1/2"
+          },
+          {
+            "clock": "0.734289471151783634591537546838386994370157412501627685",
+            "x": "1/4"
+          },
+          {
+            "clock": "0.746443553545202159872975363910769204764433714257044655",
+            "x": "1/16"
+          }
+        ],
+        "energy_constant": "0.0670206432765822557538697255099627281962062805200022575",
+        "initial_acceleration": "-4.28571428571428571428571428571428571428571428571428571",
+        "initial_radius": "1/5",
+        "maximal_interval": "[0,Tc) with R(Tc)=0",
+        "pressure": "2",
+        "regime": "collapse",
+        "terminal_coefficient": "0.491118609918736654462728949494984677215792922440402185",
+        "volume_terminal_coefficient": "0.496189743221291798634213206732264536182354544125129611"
+      },
+      {
+        "a": "0.0",
+        "asymptotic_speed": "0.0",
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "equilibrium_zero_pressure",
+        "collapse_time": null,
+        "density": "4/3",
+        "dimensionless_samples": [],
+        "energy_constant": "0.0",
+        "initial_acceleration": "0.0",
+        "initial_radius": "9/5",
+        "maximal_interval": "[0,infinity), stationary R(t)=R0",
+        "pressure": "0",
+        "regime": "equilibrium",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": "0.0",
+        "asymptotic_speed": "0.0",
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "equilibrium_zero_pressure_unit",
+        "collapse_time": null,
+        "density": "1",
+        "dimensionless_samples": [],
+        "energy_constant": "0.0",
+        "initial_acceleration": "0.0",
+        "initial_radius": "1",
+        "maximal_interval": "[0,infinity), stationary R(t)=R0",
+        "pressure": "0",
+        "regime": "equilibrium",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": "0.816496580927726032732428024901963797321982493552223376",
+        "asymptotic_speed": "0.816496580927726032732428024901963797321982493552223376",
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "expansion_unit",
+        "collapse_time": null,
+        "density": "1",
+        "dimensionless_samples": [
+          {
+            "clock": "0.624268571530308011961844934230133482568569270523284069",
+            "x": "5/4"
+          },
+          {
+            "clock": "0.945938033156533829599691760215146222075902552044465781",
+            "x": "3/2"
+          },
+          {
+            "clock": "1.50380541264884403889939266486357098857745045421440193",
+            "x": "2"
+          },
+          {
+            "clock": "3.55311622923488995256970810416862311763964419812530494",
+            "x": "4"
+          }
+        ],
+        "energy_constant": "-4.18879020478639098461685784437267051226289253250014109",
+        "initial_acceleration": "1.00000000000000000000000000000000000000000000000000000",
+        "initial_radius": "1",
+        "maximal_interval": "[0,infinity), monotone expansion",
+        "pressure": "-1",
+        "regime": "expansion",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": "0.975900072948533179354384636240100189593812634614745993",
+        "asymptotic_speed": "0.975900072948533179354384636240100189593812634614745993",
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "expansion_scaled",
+        "collapse_time": null,
+        "density": "7/4",
+        "dimensionless_samples": [
+          {
+            "clock": "0.624268571530308011961844934230133482568569270523284069",
+            "x": "5/4"
+          },
+          {
+            "clock": "0.945938033156533829599691760215146222075902552044465781",
+            "x": "3/2"
+          },
+          {
+            "clock": "1.50380541264884403889939266486357098857745045421440193",
+            "x": "2"
+          },
+          {
+            "clock": "3.55311622923488995256970810416862311763964419812530494",
+            "x": "4"
+          }
+        ],
+        "energy_constant": "-35.3429173528851739327047380618944074472181557429699405",
+        "initial_acceleration": "0.952380952380952380952380952380952380952380952380952381",
+        "initial_radius": "3/2",
+        "maximal_interval": "[0,infinity), monotone expansion",
+        "pressure": "-5/2",
+        "regime": "expansion",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": "0.210818510677891955466592902962181235581303675955014455",
+        "asymptotic_speed": "0.210818510677891955466592902962181235581303675955014455",
+        "beta_clock": "0.746834200222186813103470880556190156391691990347044005",
+        "case_id": "expansion_weak",
+        "collapse_time": null,
+        "density": "5/2",
+        "dimensionless_samples": [
+          {
+            "clock": "0.624268571530308011961844934230133482568569270523284069",
+            "x": "5/4"
+          },
+          {
+            "clock": "0.945938033156533829599691760215146222075902552044465781",
+            "x": "3/2"
+          },
+          {
+            "clock": "1.50380541264884403889939266486357098857745045421440193",
+            "x": "2"
+          },
+          {
+            "clock": "3.55311622923488995256970810416862311763964419812530494",
+            "x": "4"
+          }
+        ],
+        "energy_constant": "-4.30191339704528271645450446825619170665270830305377145",
+        "initial_acceleration": "0.0363636363636363636363636363636363636363636363636363636",
+        "initial_radius": "11/6",
+        "maximal_interval": "[0,infinity), monotone expansion",
+        "pressure": "-1/6",
+        "regime": "expansion",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": null,
+        "asymptotic_speed": null,
+        "beta_clock": null,
+        "case_id": "zero_radius_collapse",
+        "collapse_time": null,
+        "density": "1",
+        "dimensionless_samples": [],
+        "energy_constant": null,
+        "initial_acceleration": null,
+        "initial_radius": "0",
+        "maximal_interval": "no positive-radius classical initial state at R0=0",
+        "pressure": "2",
+        "regime": "boundary",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": null,
+        "asymptotic_speed": null,
+        "beta_clock": null,
+        "case_id": "zero_radius_equilibrium",
+        "collapse_time": null,
+        "density": "1",
+        "dimensionless_samples": [],
+        "energy_constant": null,
+        "initial_acceleration": null,
+        "initial_radius": "0",
+        "maximal_interval": "no positive-radius classical initial state at R0=0",
+        "pressure": "0",
+        "regime": "boundary",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      },
+      {
+        "a": null,
+        "asymptotic_speed": null,
+        "beta_clock": null,
+        "case_id": "zero_radius_expansion",
+        "collapse_time": null,
+        "density": "1",
+        "dimensionless_samples": [],
+        "energy_constant": null,
+        "initial_acceleration": null,
+        "initial_radius": "0",
+        "maximal_interval": "no positive-radius classical initial state at R0=0",
+        "pressure": "-2",
+        "regime": "boundary",
+        "terminal_coefficient": null,
+        "volume_terminal_coefficient": null
+      }
+    ],
+    "collapse_x": [
+      "3/4",
+      "1/2",
+      "1/4",
+      "1/16"
+    ],
+    "expansion_x": [
+      "5/4",
+      "3/2",
+      "2",
+      "4"
+    ],
+    "serialized_significant_digits": 54,
+    "working_decimal_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "a monotone finite-time collapse trajectory has no primitive periodic-orbit owner or arithmetic clock",
+    "strongest_positive": "exact source-native nonlinear terminal singularity and sign/energy geometry",
+    "tuple": [
+      "A0_FAIL",
+      "A1_FAIL",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c219-rayleigh-spherical-cavity-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "86c7bb8a39cdd1b8e941e45833b068170ca06287",
+  "theorem": {
+    "acceleration_singularity": "R_ddot=-(6/25)C (Tc-t)^(-8/5)*(1+O((Tc-t)^(6/5)))",
+    "analytic_boundary": "inverse incomplete-Beta representation is source-local explicit solvability only; the source Beta clock is not target continuation/divisor/counting law and is not an A3 analytic-structure match",
+    "boundary": "R0=0 is not a positive-radius classical initial state; any absorbing R=0 extension is explicitly external to the ODE",
+    "collapse_branch": "Pi>0: R_dot=-sqrt(2 Pi/(3 rho))*sqrt((R0/R)^3-1)",
+    "collapse_clock": "Tc=(R0/a)*(1/3)*B(5/6,1/2), a=sqrt(2 Pi/(3 rho))",
+    "collapse_constant": "0.746834200222186813103470880556190156391691990347044005",
+    "collapse_decimal": "Tc=0.914681356501962... R0 sqrt(rho/Pi)",
+    "energy_ledger": "K_liquid=2*pi*rho*R^3 R_dot^2=(4*pi/3)Pi(R0^3-R^3), U=(4*pi/3)Pi R^3, E=K+U=(4*pi/3)Pi R0^3",
+    "first_integral": "R^3 R_dot^2 + (2 Pi/(3 rho)) R^3 = (2 Pi/(3 rho)) R0^3",
+    "lagrangian": "Euler-Lagrange equation of L_phys=2*pi*rho R^3 R_dot^2-(4*pi/3)Pi R^3 on R>0",
+    "lp_thresholds": "near Tc, R_dot in L^p iff p<5/3 and R_ddot in L^p iff p<5/8",
+    "sign_atlas": "Pi=0 is stationary; Pi<0 is global monotone expansion with R(t)~sqrt(2|Pi|/(3rho))*t; Pi>0 collapses at Tc",
+    "terminal_puiseux": "R=C (Tc-t)^(2/5)*(1+O((Tc-t)^(6/5))), C=R0^(3/5)*(5a/2)^(2/5)",
+    "velocity_singularity": "R_dot=-(2/5)C (Tc-t)^(-3/5)*(1+O((Tc-t)^(6/5)))",
+    "volume_law": "V=(4*pi/3)R^3~(4*pi/3)C^3(Tc-t)^(6/5), V_dot=O((Tc-t)^(1/5))"
+  }
+}

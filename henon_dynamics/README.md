@@ -2577,3 +2577,31 @@ All five tuples remain exactly as recorded in their evaluator YAML files,
 `ROUTE_A_REJECTED`, and `route_b_invocation_allowed: false`; no target primes,
 zeros, local arithmetic, Euler factors, root numbers, automorphy, target
 divisor, Hilbert--Pólya operator, or Route-B input is claimed.
+
+## Route-A independent cross-subtype round C219--C223
+
+This round takes one complete theorem-scale step per paper while switching
+the dynamical owner in every slot: a singular radial fluid ODE, a stochastic
+boundary-driven exclusion chain, a dispersive Hamiltonian PDE, a nonsmooth
+minimum-time control system, and a quantum-optical atom--field Hamiltonian.
+Each package closes its own parameter/boundary theorem, executable evidence,
+three substantive manuscript revisions, and content-addressed release
+manifest.  The finite ledgers are regression controls; the all-family claims
+are carried by the displayed proofs and source-local theorems.
+
+- [C219 Rayleigh spherical-cavity collapse](henon_rayleigh_spherical_cavity_collapse_route_a/README.md) · [paper PDF](henon_rayleigh_spherical_cavity_collapse_route_a/paper/main.pdf)
+- [C220 open TASEP matrix-Ansatz phase atlas](henon_open_tasep_matrix_ansatz_phase_route_a/README.md) · [paper PDF](henon_open_tasep_matrix_ansatz_phase_route_a/paper/main.pdf)
+- [C221 focusing cubic NLS soliton Hessian](henon_cubic_nls_soliton_hessian_route_a/README.md) · [paper PDF](henon_cubic_nls_soliton_hessian_route_a/paper/main.pdf)
+- [C222 bounded double-integrator bang--bang synthesis](henon_double_integrator_bang_bang_time_optimal_route_a/README.md) · [paper PDF](henon_double_integrator_bang_bang_time_optimal_route_a/paper/main.pdf)
+- [C223 Jaynes--Cummings excitation blocks](henon_jaynes_cummings_excitation_block_route_a/README.md) · [paper PDF](henon_jaynes_cummings_excitation_block_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C219_C223.md), [batch plan](BATCH_PLAN_C219_C223.md),
+and [batch review](BATCH_REVIEW_C219_C223.md) for collision decisions,
+theorem increments, exact audit counts, release hashes and the complete PDF
+reproducibility record.  The round closes 7,981 independent-checker
+assertions, 847 SymPy checks, 110 hostile rejections, 135 payloads (140
+physical files), and 14 final-paper pages.  The strict tuples are recorded in
+the per-paper evaluator YAML files; all five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false`.  The common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic or operator bridge is
+claimed.

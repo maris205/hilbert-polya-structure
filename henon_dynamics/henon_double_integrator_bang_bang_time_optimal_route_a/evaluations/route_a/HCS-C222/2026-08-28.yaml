@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C222
+candidate_definition: bounded-acceleration double integrator with minimum-time terminal rest
+family: a>0 whole-plane time-optimal synthesis; a=0 is a separate boundary
+phase_space: R^2 state plane with terminal state (0,0)
+dynamics: x_dot=v, v_dot=u, measurable control |u|<=a
+parameters: a>0
+parameter_provenance: physical acceleration bound; no target fitting
+arithmetic_origin: none; rational states are only regression sentinels
+clock: minimum physical elapsed time
+normalization: unit mass and acceleration bound a
+determinant_convention: none; reachable moments and HJB/Pontryagin only
+orbit_cutoff: 3 acceleration values x 7 positions x 5 velocities
+precision: 100 working decimal digits; 82 serialized significant digits
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+code_commit: 86c7bb8a39cdd1b8e941e45833b068170ca06287
+artifact_paths:
+  evidence: results/c222_double_integrator_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: physical bounded double integrator and terminal rest problem
+  arithmetic_origin: none
+  clock: physical minimum transfer time
+  normalization: unit mass, acceleration magnitude a
+  cutoff: 105 state sentinels covering origin, direct brake and both one-switch sides
+  precision: exact rationals plus independent 100-digit radical reconstruction
+  allowed_data: switching geometry, endpoint moments, value derivatives, terminal states
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native global control theorem and exact reachable-set boundary
+  strongest_failure: state coordinates and switching sides have no intrinsic rational-prime semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: unique one-switch extremals are classified up to null sets
+  strongest_failure: finite terminal transfers are not primitive periodic orbits and have no repetition law
+  metrics: {state_rows: 105, one_switch_rows: 94}
+  artifacts: [THEOREM_PACKAGE.md, results/c222_double_integrator_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact value function and switching parabola
+  strongest_failure: no determinant or target-zero correspondence exists
+  metrics: {target_zero_match: null, source_value: exact}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: radical value branches are explicit on the state plane
+  strongest_failure: no target continuation, divisor, functional equation or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: Pontryagin supplies a source-native Hamiltonian and affine costate
+  strongest_failure: no same-clock self-adjoint spectral target or natural Hilbert-Polya lift is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [switching-sign mutation, missing one-half factor, negative-arc attempt, terminal-state recomputation, HJB-sign mutation, unknown and stale hashes]
+  proves_too_much_risk: high if a necessary Pontryagin extremal is silently treated as sufficient
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: global time-optimal synthesis and source-local control certificates only; no target arithmetic or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this source family; retain nonsmooth switch and zero-acceleration boundaries
+round2_clues: []
+route_b_invocation_allowed: false
