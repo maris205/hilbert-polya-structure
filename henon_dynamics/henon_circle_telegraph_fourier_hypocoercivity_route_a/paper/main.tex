@@ -1,0 +1,132 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+\hypersetup{hidelinks}
+\newcommand{\revisionnote}{Revision checkpoint: essential-norm proof and all degenerate stationary faces closed.}
+\title{Exact Fourier Blocks and the Essential-Norm Boundary\ of the Circular Telegraph Semigroup}
+\author{Internal mathematical artifact -- HCS-C213}
+\date{28 August 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a complete source-local theorem for the velocity-jump process on the
+circle.  A speed $c\geq0$ transports a sign velocity and a rate
+$\lambda\geq0$ flips it.  Every Fourier mode is a two-by-two block whose
+centered square is scalar.  This yields an exact matrix exponential, the
+telegraph equation, a sharp spectral-abscissa gap, all stationary boundaries,
+and the essential-norm obstruction.  Critical Jordan blocks and both
+degenerate faces are included.  The finite receipt is a regression witness,
+not a proof by enumeration.  Route A is rejected under the declared scope.
+\end{abstract}
+
+\paragraph{Revision status.} \revisionnote\quad
+AI-use disclosure: language assistance was used for drafting and code review;
+all displayed identities and receipts are independently checked.
+
+\section{Owner and block reduction}
+Let $\mathbb T_{2\pi}=\mathbb R/(2\pi\mathbb Z)$ and let
+$v\in\{+1,-1\}$.  On normalized
+$L^2(\mathbb T_{2\pi}\times\{\pm1\})$ consider
+\[
+ Lf(x,v)=cv\,\partial_xf(x,v)+\lambda\bigl(f(x,-v)-f(x,v)\bigr).
+\]
+Here $L$ is the backward (observable) generator with periodic domain
+$D(L)=H^1_{\rm per}(\mathbb T_{2\pi})\otimes\mathbb C^2$.  Densities evolve
+under the adjoint $L^*$; its Fourier blocks are the conjugate-index blocks
+$G_{-k}$, so the spectra and block norms below are unchanged.
+The clock is physical elapsed time.  For the Fourier coefficient of mode
+$k\in\mathbb Z$ in the ordered velocity basis,
+\[
+ G_k=\begin{pmatrix}-\lambda+ick&\lambda\\[2pt]
+ \lambda&-\lambda-ick\end{pmatrix},\qquad N_k=G_k+\lambda I.
+\]
+Direct multiplication gives
+\begin{equation}\label{eq:square}
+ N_k^2=(\lambda^2-c^2k^2)I.
+\end{equation}
+
+\section{Exact semigroup and critical blocks}
+Put $\delta_k^2=\lambda^2-c^2k^2$.  Equation \eqref{eq:square} and the
+power series for the exponential imply
+\begin{equation}\label{eq:exp}
+ e^{tG_k}=e^{-\lambda t}\left(\cosh(\delta_kt)I+
+ \frac{\sinh(\delta_kt)}{\delta_k}N_k\right),
+\end{equation}
+where the quotient is $t$ when $\delta_k=0$.  Thus hyperbolic,
+oscillatory, and critical regimes are one formula.  The characteristic
+polynomial is
+\[
+ \det(rI-G_k)=(r+\lambda)^2-(\lambda^2-c^2k^2),
+ \qquad \rho_{k,\pm}=-\lambda\pm\sqrt{\lambda^2-c^2k^2}.
+\]
+If $\lambda=c|k|>0$, the nonzero nilpotent $N_k$ gives one Jordan block at
+$-\lambda$.  At $k=0$ the two eigenvalues are $0$ and $-2\lambda$.
+
+\section{Telegraph equation and the gap atlas}
+For $c>0$, writing the total density $\rho=f_++f_-$ and flux
+$j=f_+-f_-$, the forward (adjoint) equations give
+$\rho_t=-c j_x$ and $j_t=-c\rho_x-2\lambda j$.
+Elimination yields
+\begin{equation}\label{eq:telegraph}
+ \rho_{tt}+2\lambda\rho_t=c^2\rho_{xx}.
+\end{equation}
+For $c>0$ and $\lambda>0$, the sharp spectral-abscissa gap from the invariant
+constant mode is
+\[
+ g(c,\lambda)=\begin{cases}
+ \lambda,&\lambda\leq c,\\
+ \lambda-\sqrt{\lambda^2-c^2},&\lambda>c.
+ \end{cases}
+\]
+It is zero when $c=0$ or $\lambda=0$.  The word ``gap'' here means spectral
+abscissa: it is not a constant-free $L^2$ operator-norm decay assertion.
+Non-normal and critical blocks can have polynomial transient factors.
+
+\section{Stationary and essential boundaries}
+For $c>0,\lambda>0$, only the constant density is stationary.  If $c=0$,
+positions are frozen and every common spatial profile is stationary, an
+infinite-dimensional space.  If $\lambda=0$ and $c>0$, the stationary space
+is exactly the two velocity-wise spatial constants.  At $c=\lambda=0$ all
+functions are stationary.
+
+For $c>0,\lambda>0$, high-frequency blocks satisfy (this is an essential
+quotient statement, not a finite-mode estimate)
+\[
+ \lim_{|k|\to\infty}\|e^{tG_k}\|=e^{-\lambda t}
+\]
+in the essential quotient on the complement of constants.  Consequently the
+essential norm is $e^{-\lambda t}>0$ and the semigroup is noncompact; hence it
+belongs to no finite Schatten class.  On $c=0$ or $\lambda=0$ the essential
+norm is one.  The latter face is the same-clock unitary pair of translations,
+whereas $c=0$ is velocity-only mixing without spatial decay.
+
+\section{Receipt and scope boundary}
+The receipt contains $5\times5\times7\times4=700$ exact/high-precision block
+rows and 25 gap rows.  A producer-independent checker reconstructs every
+matrix entry and eigenvalue at 100 decimal working digits; every nonzero
+serialized decimal has 82 significant digits.  SymPy checks
+\eqref{eq:square}, the characteristic polynomial, \eqref{eq:telegraph}, the
+critical condition, and the diffusive gap identity.  Clean replay is
+byte-identical and hostile mutations include repaired-hash, unknown-key and
+stale-hash attacks.
+
+The finite grid does not carry the all-mode quantifiers; those follow from
+the displayed identities and the $|k|\to\infty$ argument.  The finite Fourier
+characteristic polynomial is source-local, not a Fredholm determinant or a
+target divisor.  No arithmetic local data, Euler factors, root numbers,
+automorphy, Hilbert--Polya operator, or Route-B invocation is claimed.
+
+\paragraph{Route-A decision.} The locked tuple is
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)}, with overall
+\texttt{ROUTE\_A\_REJECTED}; Route B is false.  The historical telegraph
+framework is cited to Kac (1974),
+\href{https://doi.org/10.1216/RMJ-1974-4-3-497}{Rocky Mountain Journal of
+Mathematics 4(3), 497--509}.
+The scope literal is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\end{document}

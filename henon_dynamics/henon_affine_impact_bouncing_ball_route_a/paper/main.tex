@@ -1,0 +1,130 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Sreg}{\mathcal S_+}
+\title{An Exact Event-Time Atlas for an Affine-Impact Bouncing Ball}
+\author{HCS Research Program}
+\date{28 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We analyse a gravity-driven ball on a half-line with restitution and a constant
+impact impulse.  The physical flow is $\dot q=v$, $\dot v=-g$, the guard is
+$q=0,v^-<0$, and the reset is $v^+=r(-v^-)+J$.  On the positive outgoing
+section the event map is the affine map $P(u)=ru+J$, but each iterate carries
+the physical roof $2u/g$.  This gives exact geometric and arithmetic event
+sequences, a sharp Zeno boundary, a unique positive forced flight for
+$J>0,r<1$, and separate elastic, sticking, and accelerating boundaries.  We
+adjoin $(0,0)$ as rest and exclude it from the regular section, so a
+zero-duration fixed event is not counted as a physical cycle.  The certificate
+checks 96 exact event-time cells and 36 interior impact reconstructions.  Any
+fixed-point series is explicitly an event-map object, not a physical-flow
+zeta or a target arithmetic construction.
+\end{abstract}
+
+\section{Hybrid model and reduction}
+For $g>0$, $0\le r\le1$, and $J\ge0$, let
+\[
+ \dot q=v,\qquad \dot v=-g\quad(q>0),\qquad
+ v^+=r(-v^-)+J\quad(q=0,v^-<0).
+\]
+The point $(q,v)=(0,0)$ is a separate absorbing rest state.  For an interior
+state, solving $q_0+v_0t-gt^2/2=0$ gives
+\[
+ \tau_0=\frac{v_0+\sqrt{v_0^2+2gq_0}}{g},\qquad
+ w_0=\sqrt{v_0^2+2gq_0},\qquad u_0=rw_0+J.
+\]
+Starting just after an impact with positive outgoing speed $u$, symmetry of
+constant acceleration gives one physical flight of duration $2u/g$ and returns
+the incoming speed $-u$.  Thus the outgoing section map is
+\[
+ P(u)=ru+J,\qquad \tau(u)=\frac{2u}{g},\qquad u\in\Sreg=(0,\infty).
+\]
+
+\begin{theorem}[event-time atlas]\label{thm:impact}
+For $r\ne1$, put $u_*=J/(1-r)$.  Then
+\[
+ u_n=u_*+r^n(u_0-u_*),\qquad
+ t_n=\frac2g\left[n u_*+(u_0-u_*)\frac{1-r^n}{1-r}\right].
+\]
+For $r=1$, $u_n=u_0+nJ$ and
+$t_n=\frac2g[n u_0+Jn(n-1)/2]$.  If $J=0$ and $0<r<1$, positive
+speeds form a Zeno sequence with accumulation time
+$2u_0/[g(1-r)]$.  The edge $r=0,J=0$ has one positive-duration flight at
+most and then sticks at rest.  If $J>0$ and $r<1$, $u_*$ is the unique
+positive forced cycle, with physical period $2u_*/g$ and event multiplier
+$P'(u)=r$; every positive speed converges to it.  At $r=1,J=0$ there is a
+continuum of elastic periods $2u/g$, while $r=1,J>0$ is nonperiodic with
+quadratic event times.
+\end{theorem}
+\begin{proof}
+The first equation is the quadratic flight root.  The reset gives $P$, and
+induction followed by a finite geometric or arithmetic sum gives the displayed
+iterates and times.  The geometric sum is finite precisely for
+$J=0,0<r<1$; $r=0$ reaches zero after one flight and the rest convention
+stops the execution.  Solving $u=P(u)$ and using contraction proves the forced
+cycle and its multiplier.  Identity and translation follow directly.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Section domains and formal series}
+The regular section is $\Sreg=(0,\infty)$ (the literal label
+\texttt{S\_+}): it parametrizes positive-duration
+flights only.  Consequently, for $J>0,r<1$ the physical event-map fixed-point
+series is $\zeta_{\rm phys}(z)=1/(1-z)$, whereas for $J=0,r<1$ it is the
+empty series $1$ on $\Sreg$.  If the section is artificially closed to
+$[0,\infty)$, the affine boundary point $u=0$ contributes the separate formal
+series $\zeta_{\rm aff}(z)=1/(1-z)$ when $J=0,r<1$; that point is rest, not
+a physical orbit.  For $r=1,J=0$ the fixed set is a continuum and a
+cardinality series is undefined.  For $r=1,J>0$ translation has no fixed
+point, so its finite-count series is $1$.  None of these event-map series is a
+physical-flow zeta.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact audit and scope boundary}
+Twelve rational controls cover contraction, strict Zeno, the $r=0$ sticking
+edge, elastic identity, and translation.  The ledger contains 96 exact roof and
+cumulative-time cells and 36 first-impact reconstructions.  An independent
+checker passes 368 exact assertions; SymPy passes 11 identities, byte replay is
+exact, and 14 repaired/stale hash mutations are rejected.  In particular, an
+attack that relabels $r=0,J=0$ as Zeno is caught before release.
+
+The Route-A tuple is
+\begin{center}\small\ttfamily
+(A0\_FAIL, A1\_WEAK, A2\_FAIL, A3\_FAIL, A4\_FORMAL\_HINT),
+\end{center}
+with \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.  The package makes no target
+prime, zero, local factor, root number, automorphy, target functional equation,
+or Hilbert--Polya operator claim.
+\fi
+
+\section*{Source note}
+Hybrid modeling context is given by Leine--Nijmeijer~\cite{leine2004} and
+Goebel--Sanfelice--Teel~\cite{goebel2012}; no priority claim is made.
+\begin{thebibliography}{9}
+\bibitem{leine2004} R. I. Leine and H. Nijmeijer, \emph{Dynamics and
+Bifurcations of Non-Smooth Mechanical Systems}, Springer (2004),
+DOI:\href{https://doi.org/10.1007/978-3-540-44398-8}{10.1007/978-3-540-44398-8}.
+\bibitem{goebel2012} R. Goebel, R. G. Sanfelice, and A. R. Teel,
+\emph{Hybrid Dynamical Systems: Modeling, Stability, and Robustness},
+Princeton University Press (2012),
+DOI:\href{https://doi.org/10.1515/9781400842636}{10.1515/9781400842636}.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} The exact registered literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\textbf{Data and code.} The theorem, exact ledger, independent checks, and
+build recipe are released with HCS-C212. \textbf{Competing interests.} None
+declared. \textbf{AI-use disclosure.} Generative tools assisted drafting and
+code generation; the internal artifact chain checked formulas, metadata, and
+scope boundaries.  This is not external peer review.
+\end{document}

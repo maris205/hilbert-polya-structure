@@ -2521,3 +2521,27 @@ C205 retain genuine source primitive ledgers, and C206 retains only a
 candidate-local inviscid operator hint; none clears A0 or supplies a target
 bridge.  Coordinates remain separate, scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.
+
+## Route-A independent cross-subtype round C209--C213
+
+This round changes the dynamical owner in every slot: a finite Catalan
+permutation, a retarded delay semigroup, a positive Hamiltonian flow, a hybrid
+impact system, and a persistent-velocity Markov process.  Each paper closes
+one complete theorem-scale advance, including its singular and boundary
+regimes; no theorem is split across the five packages.
+
+- [C209 Kreweras-complement cycle atlas](henon_kreweras_noncrossing_cycle_atlas_route_a/README.md) · [paper PDF](henon_kreweras_noncrossing_cycle_atlas_route_a/paper/main.pdf)
+- [C210 scalar retarded-delay Lambert stability](henon_scalar_retarded_delay_lambert_stability_route_a/README.md) · [paper PDF](henon_scalar_retarded_delay_lambert_stability_route_a/paper/main.pdf)
+- [C211 Hamiltonian Lotka--Volterra period atlas](henon_lotka_volterra_hamiltonian_period_atlas_route_a/README.md) · [paper PDF](henon_lotka_volterra_hamiltonian_period_atlas_route_a/paper/main.pdf)
+- [C212 affine-impact bouncing-ball atlas](henon_affine_impact_bouncing_ball_route_a/README.md) · [paper PDF](henon_affine_impact_bouncing_ball_route_a/paper/main.pdf)
+- [C213 circular telegraph Fourier/hypocoercivity atlas](henon_circle_telegraph_fourier_hypocoercivity_route_a/README.md) · [paper PDF](henon_circle_telegraph_fourier_hypocoercivity_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C209_C213.md), [batch plan](BATCH_PLAN_C209_C213.md),
+and [batch review](BATCH_REVIEW_C209_C213.md) for the frozen owners,
+collision decisions, proof/evidence boundaries, and release audit.  The round
+closes 30,406 checker assertions, 3,445 SymPy checks, 111 hostile mutations,
+135 content-addressed payloads, and 13 final-paper pages.  All five remain
+`ROUTE_A_REJECTED`; no target table, arithmetic local datum, Euler factor,
+root number, automorphy object, target divisor, Hilbert--Pólya operator, or
+Route-B input is used.  Coordinates remain separate, scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.

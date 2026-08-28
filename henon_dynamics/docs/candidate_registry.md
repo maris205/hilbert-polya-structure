@@ -2908,3 +2908,24 @@ A3_PARTIAL_ANALYTIC_STRUCTURE, A4_FAIL)** with overall
 **ROUTE_A_EXPLORATORY**.  A genuine source-native compact/nuclear transfer
 operator remains open; arithmetic advance is NO and Route B is not
 authorized.
+
+## HCS-C209--HCS-C213 independent cross-subtype round (2026-08-28)
+
+Five distinct source owners were frozen and each received one complete
+theorem-scale advance.  `NEW`/retained status is source-local bookkeeping, not
+a literature-novelty claim.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C209 | Ordinary Kreweras complementation on `NC(n)` has the all-iterate fixed ledger, exact least periods and cycles, finite source zeta, Koopman spectrum, rank duality, reflection reversors, and the `1,2,2n` small-order boundary. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_kreweras_noncrossing_cycle_atlas_route_a/`](../henon_kreweras_noncrossing_cycle_atlas_route_a/) |
+| HCS-C210 | The scalar retarded equation has a method-of-steps resolvent, Lambert-`W` roots with multiplicities, eventual compactness and spectral mapping, collision aggregation, and the complete nonnegative stability/Hopf atlas. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_scalar_retarded_delay_lambert_stability_route_a/`](../henon_scalar_retarded_delay_lambert_stability_route_a/) |
+| HCS-C211 | Positive Hamiltonian Lotka--Volterra levels form a global period annulus with Lambert-`W` turning branches, convergent area/period/action quadratures, center limit, and exact cycle averages. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_lotka_volterra_hamiltonian_period_atlas_route_a/`](../henon_lotka_volterra_hamiltonian_period_atlas_route_a/) |
+| HCS-C212 | The affine impact map and physical roof sums are exact; the theorem separates true Zeno, sticking, forced positive-duration cycles, elastic/translation boundaries, and a formally labelled event-map series. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_affine_impact_bouncing_ball_route_a/`](../henon_affine_impact_bouncing_ball_route_a/) |
+| HCS-C213 | The circular telegraph process has exact Fourier block exponentials, critical Jordan blocks, a telegraph PDE, sharp spectral-abscissa gap, stationary faces, and an essential-norm/noncompactness boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_circle_telegraph_fourier_hypocoercivity_route_a/`](../henon_circle_telegraph_fourier_hypocoercivity_route_a/) |
+
+All five are `ROUTE_A_REJECTED` and have `route_b_invocation_allowed: false`.
+No target divisor/counting law, arithmetic local datum, Euler factor, root
+number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
+introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.

@@ -1,0 +1,272 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\NC}{\mathrm{NC}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Fix}{\mathrm{Fix}}
+\newcommand{\Tr}{\mathrm{Tr}}
+
+\title{The ordinary Kreweras complement: an exact finite cycle atlas}
+\author{HCS-C209 source-derived research package}
+\date{28 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We freeze a finite dynamical system on the noncrossing partitions of a labelled
+polygon.  The clock is one ordinary Kreweras complement, defined by a
+permutation formula with an explicit orientation.  The type-A order-$2n$
+cyclic-sieving theorem supplies every iterate fixed count.  We then derive,
+without fitting, all least-period populations, cycle counts, the finite
+Artin--Mazur zeta, the reciprocal Koopman determinant, root-of-unity spectral
+multiplicities, rank duality, and polygon-reflection reversors.  The actual
+order is $1$, $2$, or $2n$ at $n=1$, $n=2$, or $n\geq3$; this small-dimensional
+boundary is part of the theorem.  Independent set-partition enumeration
+through $n=8$ and exact SymPy cyclotomic checks through $n=12$ audit the ledger.
+The result is deliberately source-local: Catalan data carry no intrinsic
+rational-prime clock, so no arithmetic determinant or Hilbert--Pólya claim is
+made.
+\end{abstract}
+
+\section{Object and orientation}
+Place vertices $[n]=\{0,1,\ldots,n-1\}$ counterclockwise on a convex polygon.
+A set partition is noncrossing when no two blocks contain $a,c$ and $b,d$ in
+the cyclic order $a<b<c<d$.  For $\pi\in\NC(n)$, let $p_\pi$ cycle each block
+in increasing order, and let $c=(0\ 1\ \cdots\ n-1)$.  We use
+\begin{equation}
+  K(\pi)=\operatorname{cycles}(p_\pi^{-1}c).                 \label{eq:K}
+\end{equation}
+The notation $\operatorname{cycles}$ means the set partition formed by the
+cycles of a permutation.  This convention gives the clockwise rotation
+$\rho_{-1}(i)=i-1\pmod n$ in the square identity below.  Replacing $c$ by
+$c^{-1}$ conjugates the action by a reflection and changes only this sign.
+
+There are two useful orders.  Let
+\begin{equation}
+ L_n=\begin{cases}1,&n=1,\\2,&n=2,\\2n,&n\ge3,\end{cases}\qquad
+ G_n=\begin{cases}1,&n=1,\\2n,&n\ge2.\end{cases}                 \label{eq:orders}
+\end{equation}
+$L_n$ is the actual order of the permutation $K$.  $G_n$ is the abstract
+cyclic-group order in the order-$2n$ CSP.  At $n=2$ the action has a kernel of
+order two, so these symbols must not be conflated.
+
+\section{Structural identities}
+
+\begin{theorem}[ordinary complement identities]\label{thm:struct}
+For every $n$, $K$ is a bijection of $\NC(n)$ and
+\begin{equation}
+ K^2=\rho_{-1},\qquad |K(\pi)|=n+1-|\pi|.
+ \label{eq:square-rank}
+\end{equation}
+It reverses refinement.  Every reflection $R_j(i)=j-i\pmod n$ obeys
+$R_j^2=1$ and $R_jKR_j=K^{-1}$.  The actual order is $L_n$ in
+\eqref{eq:orders}.
+\end{theorem}
+
+\begin{proof}[Proof sketch and boundary check]
+The permutation factorization $p_\pi p_{K(\pi)}=c$ is the usual geodesic
+factorization for a noncrossing partition.  Taking inverses and multiplying by
+$c$ gives the complement involution on the geodesic interval, hence the block
+count and refinement reversal.  Applying the factorization twice relabels all
+vertices by $i\mapsto i-1$, giving the first identity in \eqref{eq:square-rank}.
+Conjugating the displayed permutations by $R_j$ gives the dihedral relation.
+For $n\ge3$, polygon rotation acts faithfully on $\NC(n)$, so $K^2$ has order
+$n$.  If $n$ is odd, then $K^n$ is an odd power and reverses rank, sending the
+discrete partition to the indiscrete partition; hence it is not the identity.
+If $n$ is even, then $K^n=(K^2)^{n/2}=\rho_{-n/2}$, which is nontrivial by the
+same faithfulness.  Thus $K^n\ne1$ in either parity, while $K^{2n}=1$, and the
+order is $2n$.  Directly,
+$\NC(1)$ is a singleton and $K$ exchanges the two elements of $\NC(2)$.
+\end{proof}
+
+The rank $r(\pi)=n-|\pi|$ has Narayana distribution
+\begin{equation}
+ \#\{\pi:|\pi|=b\}=\frac{1}{n}\binom{n}{b}\binom{n}{b-1},
+ \qquad |\NC(n)|=\Cat_n=\frac{1}{n+1}\binom{2n}{n}.       \label{eq:narayana}
+\end{equation}
+The rank involution in Theorem~\ref{thm:struct} is checked row by row in the
+machine-readable evidence.
+
+\paragraph{Audit convention.}
+The distinction between the actual order $L_n$ and the abstract CSP order
+$G_n$ is part of the statement, not a post-processing choice; in particular,
+the $n=2$ generator is evaluated at fourth roots.
+
+\section{The fixed-point theorem}
+
+Write $[m]_q=1+q+\cdots+q^{m-1}$ and
+\begin{equation}
+ \Cat_n(q)=\frac{[2n]_q!}{[n]_q![n+1]_q!}\in\mathbb Z[q].       \label{eq:qcat}
+\end{equation}
+The rotation CSP for $\NC(n)$ is the type-A theorem of
+Reiner--Stanton--White.  The order-$2n$ complement extension is the $m=1$
+type-A Kreweras CSP, recorded by Bessis--Reiner and credited there to direct
+calculations of White.  We use these results with attribution, not as a claim
+of priority.
+
+\begin{theorem}[all-iterate fixed ledger]\label{thm:fixed}
+Let $F_n(d)=|\Fix(K^d)|$.  For $n=1$, $F_1(d)=1$.  For $n\ge2$, reduce $d$
+modulo $L_n$.  If $d=2r$ is even, then
+\begin{equation}
+ F_n(2r)=\begin{cases}
+ \Cat_n,&r\equiv0\pmod n,\\
+ \binom{2g}{g},&0<r<n,\quad g=\gcd(n,r).
+ \end{cases}                                             \label{eq:even-fixed}
+\end{equation}
+For odd $d$, $F_n(d)=\binom{n}{(n-1)/2}$ exactly when $n$ is odd and
+$d\equiv n\pmod{2n}$; all other odd rows are zero.
+Equivalently, for $n\ge2$,
+\begin{equation}
+ F_n(d)=\Cat_n\!\left(e^{2\pi i d/G_n}\right).             \label{eq:csp}
+\end{equation}
+At $n=2$, equation \eqref{eq:csp} uses fourth roots for the abstract $C_4$
+action even though the image permutation has order two.
+\end{theorem}
+
+\begin{proof}[Root reduction]
+The CSP gives \eqref{eq:csp}.  For even exponents it is the usual rotation
+specialization: a rotation with $g=\gcd(n,r)$ fixes $\binom{2g}{g}$ partitions,
+with the identity giving $\Cat_n$.  At an odd root the cyclotomic factors in
+\eqref{eq:qcat} cancel only for the central half-turn; rank reversal also
+forces $|\pi|=(n+1)/2$, so this row is absent for even $n$ and has the central
+binomial value for odd $n$.  These elementary cancellations are implemented
+with integer polynomial remainders in the SymPy audit.
+\end{proof}
+
+For orientation, the first rows are
+\begin{center}
+\begin{tabular}{c|c|c|l}
+\toprule
+$n$ & $L_n$ & $\Cat_n$ & $(F_n(0),F_n(1),\ldots,F_n(L_n-1))$\\
+\midrule
+1&1&1&(1)\\
+2&2&2&(2,0)\\
+3&6&5&(5,0,2,3,2,0)\\
+4&8&14&(14,0,2,0,6,0,2,0)\\
+5&10&42&(42,0,2,0,2,10,2,0,2,0)\\
+6&12&132&(132,0,2,0,6,0,20,0,6,0,2,0)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Periods, zeta, and Koopman spectrum}
+
+The rest of the atlas is a finite consequence and needs no additional source
+assumption.  Let $\mu$ denote the integer Möbius function.
+
+\begin{theorem}[cycle and determinant package]\label{thm:cycles}
+For every $\ell\mid L_n$, define
+\begin{equation}
+ P_{n,\ell}=\sum_{d\mid\ell}\mu(\ell/d)F_n(d),
+ \qquad C_{n,\ell}=P_{n,\ell}/\ell.                    \label{eq:mobius}
+\end{equation}
+Then $P_{n,\ell}$ is the number of points of least period $\ell$ and
+$C_{n,\ell}$ is the number of cycles.  They are nonnegative integers and sum
+to $\Cat_n$.  The finite zeta and Koopman determinant are
+\begin{equation}
+ \zeta_{K,n}(z)=\prod_{\ell\mid L_n}(1-z^\ell)^{-C_{n,\ell}},\qquad
+ \det(I-zU_n)=\prod_{\ell\mid L_n}(1-z^\ell)^{C_{n,\ell}}
+ =\zeta_{K,n}(z)^{-1},                                      \label{eq:zeta}
+\end{equation}
+where $U_nf=f\circ K$ on $\ell^2(\NC(n))$.
+\end{theorem}
+
+\begin{proof}
+The fixed-point trace identity is $F_n(d)=\sum_{\ell\mid d}P_{n,\ell}$.
+Möbius inversion gives \eqref{eq:mobius}; dividing by $\ell$ counts cycles.
+Each cycle contributes the factor $1-z^\ell$ to a permutation determinant and
+its reciprocal to the Artin--Mazur product.  This proves \eqref{eq:zeta}.
+\end{proof}
+
+\begin{corollary}[spectrum and reversor]
+The spectrum of $U_n$ consists of $L_n$th roots, with
+\begin{equation}
+ \operatorname{mult}\!\left(e^{2\pi i k/L_n}\right)
+ =\sum_{\substack{\ell\mid L_n\\L_n\mid k\ell}}C_{n,\ell},
+ \qquad \Tr(U_n^d)=F_n(d).                                  \label{eq:spectrum}
+\end{equation}
+The permutation matrix is unitary.  For every $j$, the map
+$J_jf=\overline{f\circ R_j}$ is antiunitary and reverses $U_n$:
+$J_jU_nJ_j=U_n^{-1}$.
+\end{corollary}
+
+For example, the nonzero cycle lengths for $n=3,4,5,6$ are respectively
+\(\{2,3\}\), \(\{2,4,8\}\), \(\{2,5,10\}\), and
+\(\{2,4,6,12\}\).  The machine ledger stores every exponent rather than only
+these summaries.
+
+\section{Independent evidence}
+
+The producer emits exact rows for $1\le n\le24$ (597 fixed rows, 131 period
+rows, 597 spectral rows, 300 rank rows, and 24 structural rows).  It also emits q-Catalan
+coefficients through $n=12$.  A separate checker reimplements restricted-growth
+set partitions, crossing detection, the permutation in \eqref{eq:K}, all
+reflections, and the cycle decomposition.  It enumerates all 2,055 partitions
+for $1\le n\le8$ and reports 8,025 assertions.  It does not import producer
+code.  A separate SymPy program reconstructs the q-factorial quotient and
+cyclotomic remainders (1,110 exact checks), then independently recomputes the
+period and spectral rows through $n=24$.
+
+The byte-replay script regenerates identical JSON.  The mutation harness tests
+32 repaired-hash payload mutations and one stale-hash mutation; all are
+rejected.  The release manifest excludes LaTeX sidecars and itself, and stores
+the hashes of exactly 27 payload files, including the three round PDFs.
+
+\paragraph{Release invariant.}
+Every displayed finite identity is recomputed from integer rows before the
+manifest is written; the round PDFs are retained so that later edits cannot
+silently replace the audited manuscript.
+
+\section{Scope, relation to C187, and conclusion}
+
+C209 is a complete finite combinatorial atlas, not an arithmetic promotion.
+The integer $n$, Catalan/Narayana counts, and polygon roots have no intrinsic
+rational-prime carrier.  We therefore record the conservative evaluator tuple
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},
+   \mathrm{A3\_FAIL},\mathrm{A4\_NATURAL\_QUANTIZATION}),
+\]
+with overall verdict `ROUTE\_A\_REJECTED` and no Route-B invocation.  The only
+operator is the finite source Koopman permutation; no target divisor,
+functional equation, Euler factor, root number, automorphy statement, or
+Hilbert--Pólya operator is asserted.
+
+C187 instead owns promotion of rectangular standard Young tableaux, its q-hook
+polynomial, and evacuation.  C209 owns set partitions, geometric complement,
+the $K^2$ polygon rotation, and the order-$2n$ complement clock.  Shared
+Möbius/CSP bookkeeping does not make one a parameter continuation of the other.
+
+\begin{thebibliography}{9}
+\bibitem{Kreweras1972}
+G.~Kreweras, ``Sur les partitions non croisées d'un cycle,''
+\emph{Discrete Mathematics} 1 (1972), 333--350.
+
+\bibitem{RSW2004}
+V.~Reiner, D.~Stanton, and D.~White, ``The cyclic sieving phenomenon,''
+\emph{Journal of Combinatorial Theory, Series A} 108 (2004), 17--50.
+
+\bibitem{BessisReiner2011}
+D.~Bessis and V.~Reiner, ``Cyclic sieving of noncrossing partitions for
+complex reflection groups,'' \emph{Annals of Combinatorics} 15(2) (2011),
+197--222.
+\end{thebibliography}
+
+\end{document}

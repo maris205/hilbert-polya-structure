@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C212
+candidate_definition: gravity-driven bouncing ball with restitution r and affine impact impulse J
+family: all g>0, 0<=r<=1, J>=0 hybrid impact parameters
+phase_space: half-line flight states q>0 with velocity v, plus separate rest state at (0,0)
+dynamics: q'=v, v'=-g with guard q=0,v^-<0 and reset v^+=r*(-v^-)+J
+parameters: real g>0, 0<=r<=1, J>=0
+parameter_provenance: source-defined mechanical parameters; no target fitting
+arithmetic_origin: none; gravity, restitution and impulse are source-local
+clock: physical continuous time t with outgoing-section roof 2u/g
+normalization: outgoing speed u>=0; zero speed is the separate rest state
+determinant_convention: no physical-flow determinant; event-map fixed series is formal only
+orbit_cutoff: twelve rational controls and eight formal event iterates each
+precision: exact rational arithmetic
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert--Polya operators
+source_commit: e8054522273dbd545f9d406978e5d4648c627918
+code_commit: e8054522273dbd545f9d406978e5d4648c627918
+artifact_paths:
+  evidence: results/c212_bouncing_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: gravity free flight on a half-line with affine impact reset
+  arithmetic_origin: none
+  clock: physical continuous time t with event section u and roof 2u/g
+  normalization: outgoing speed u>=0; zero speed is the separate rest state
+  cutoff: twelve rational controls and eight formal event iterates each
+  precision: exact rational arithmetic
+  allowed_data: source-local flight, reset, event-time and boundary algebra
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact hybrid guard/reset and physical event-time classification
+  strongest_failure: gravity, restitution and impulse have no intrinsic rational-prime semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: exact forced-cycle and Zeno event ledgers
+  strongest_failure: the event-map owner is affine and the elastic boundary has a continuum rather than a discrete primitive ledger
+  metrics: {controls: 12, event_cells: 96}
+  artifacts: [THEOREM_PACKAGE.md, results/c212_bouncing_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: formal fixed-point series is fully separated from physical flow
+  strongest_failure: no target determinant or zero correspondence exists
+  metrics: {event_map_series: formal_only, physical_flow_zeta: not_defined}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: affine event map and exact roof sums are source-local
+  strongest_failure: no target continuation, functional equation, counting law, or arithmetic compression exists
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: a one-dimensional event multiplier is explicit
+  strongest_failure: no same-clock self-adjoint target operator or quantization is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [strict-Zeno-0<r<1, r=0-sticking, rest-vs-zero-duration-event, contraction-vs-translation, closed-vs-regular-section-series]
+  proves_too_much_risk: high if a zero-duration fixed event or formal series is called a physical periodic orbit
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: affine-impact hybrid theorem only; no physical-flow zeta, target arithmetic, or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no discrete target primitive owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this source family; retain Zeno and rest controls
+round2_clues: []
+route_b_invocation_allowed: false
