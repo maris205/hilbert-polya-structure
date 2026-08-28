@@ -2545,3 +2545,35 @@ closes 30,406 checker assertions, 3,445 SymPy checks, 111 hostile mutations,
 root number, automorphy object, target divisor, Hilbert--Pólya operator, or
 Route-B input is used.  Coordinates remain separate, scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`, and Route B remains false.
+
+## Route-A independent cross-subtype round C214--C218
+
+This round takes one theorem-scale step per paper and deliberately changes
+the dynamical subtype in every slot: Brownian resetting renewal, partition-
+valued coalescent genealogy, planar Kepler collision regularization,
+constant-`f` rotating shallow-water Fourier flow, and Kelvin--Voigt spectral
+damping.  Each package closes its own all-parameter theorem and boundary
+cases, with independent evidence and a strict Route-A stopping decision.
+
+- [C214 Brownian resetting renewal and first-passage atlas](henon_brownian_stochastic_resetting_first_passage_route_a/README.md) · [paper PDF](henon_brownian_stochastic_resetting_first_passage_route_a/paper/main.pdf)
+- [C215 Kingman coalescent genealogy and branch-length atlas](henon_kingman_coalescent_genealogy_route_a/README.md) · [paper PDF](henon_kingman_coalescent_genealogy_route_a/paper/main.pdf)
+- [C216 planar Kepler conics and Levi--Civita collision boundary](henon_planar_kepler_conic_collision_regularization_route_a/README.md) · [paper PDF](henon_planar_kepler_conic_collision_regularization_route_a/paper/main.pdf)
+- [C217 rotating shallow-water Fourier projector atlas](henon_rotating_shallow_water_fourier_route_a/README.md) · [paper PDF](henon_rotating_shallow_water_fourier_route_a/paper/main.pdf)
+- [C218 Kelvin--Voigt essential spectral accumulation and optimal damping](henon_kelvin_voigt_wave_spectral_route_a/README.md) · [paper PDF](henon_kelvin_voigt_wave_spectral_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C214_C218.md),
+[batch plan](BATCH_PLAN_C214_C218.md), and
+[batch review](BATCH_REVIEW_C214_C218.md) for the frozen owners, cross-review
+repairs, exact theorem/evidence ledgers, and content-addressed release hashes.
+The uniform audit closes 24,208 independent-checker assertions, 549 SymPy
+checks, 101 hostile rejections, 135 payloads, and 13 final-paper pages.  The
+final PDF SHA-256 values are, in order C214--C218:
+`135989257553d59dadf4fbe2b31a2843c06a892a56b612fc1b9494289b8cde06`,
+`a2ce47e6c601a153720c29b907e27d0aae56ffc6e383e04ce54f3853fa718a5c`,
+`10b9769a1ef8be2a10ba6a1f9d8f55e271b8724124a93b7167ebbd64b571cf05`,
+`de12b191d81c6d12fe1c58800cfcc9c95481d69d8d47dfea636d74036177c7d1`, and
+`1d92dd1acfc9fd35d5f1622d32975dab9eac8a7de118624371b5d55eba623d97`.
+All five tuples remain exactly as recorded in their evaluator YAML files,
+`ROUTE_A_REJECTED`, and `route_b_invocation_allowed: false`; no target primes,
+zeros, local arithmetic, Euler factors, root numbers, automorphy, target
+divisor, Hilbert--Pólya operator, or Route-B input is claimed.

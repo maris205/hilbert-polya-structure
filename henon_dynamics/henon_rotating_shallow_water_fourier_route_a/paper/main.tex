@@ -1,0 +1,159 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\T}{\mathbb T}
+\title{A Complete Fourier Spectral Atlas for Constant-\(f\) Rotating Shallow Water}
+\author{HCS Research Program}
+\date{28 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a global same-clock theorem for the linear rotating shallow-water
+equations on the doubly periodic \(2\pi\)-torus.  Each lattice mode is a
+three-by-three skew-Hermitian block.  Its exact zero, plus, and minus
+projectors resolve the stationary geostrophic/potential-vorticity branch and
+the two inertia--gravity branches, including all zero-parameter faces.  We
+also prove the sum-of-two-squares shell multiplicities, a necessary and
+sufficient periodicity test for finite Fourier support, and the global
+unitary but noncompact/non-Schatten boundary.  A deterministic ledger and
+independent symbolic and numerical paths audit the claims.  The model has
+constant \(f\); no beta-plane Rossby assertion is made.
+\end{abstract}
+
+\section{Model and statement}
+Let \(u=(u_1,u_2)\) and \(\phi\) be complex fields on \(\mathbb T^2\), and let
+\[
+ u_t+fJu+c\nabla\phi=0,\qquad
+ \phi_t+c\nabla\!\cdot u=0,\qquad
+ J=\begin{pmatrix}0&-1\\1&0\end{pmatrix}.
+\]
+Here \(f\in\mathbb R\), \(c\geq0\), and \(t\) is physical time.  With
+\(e_n(x)=e^{i n\cdot x}\), \(n\in\mathbb Z^2\), the coefficient vector
+\(X_n=(\widehat u_{1,n},\widehat u_{2,n},\widehat\phi_n)^T\) obeys
+\[
+ \dot X_n=G_nX_n,\qquad
+ G_n=\begin{pmatrix}
+ 0&f&-icn_1\\[-1mm]-f&0&-icn_2\\[-1mm]
+ -icn_1&-icn_2&0
+ \end{pmatrix},\qquad
+ \omega_n=(f^2+c^2|n|^2)^{1/2}.
+\]
+For \(c>0\), the Fourier multiplier is taken on its maximal graph domain
+\[
+D(G)=\left\{X\in L^2:\ \sum_{n\in\mathbb Z^2}\|G_nX_n\|_{\mathbb C^3}^2<\infty\right\};
+\]
+trigonometric polynomials form a core and \(H^1\) is contained in this domain.
+The skew-Hermitian blocks close to a skew-adjoint generator and hence to the
+global unitary \(L^2\) group.  When \(c=0\), the bounded pointwise rotation is
+treated separately.
+
+\begin{theorem}[projector, shell, and operator atlas]\label{thm:atlas}
+For every \(n\) with \(\omega_n>0\), \(G_n^*=-G_n\),
+\[
+ G_n^3+\omega_n^2G_n=0,\quad
+ P_0=I+\frac{G_n^2}{\omega_n^2},\quad
+ P_\pm=\frac12\left(-\frac{G_n^2}{\omega_n^2}\mp\frac{iG_n}{\omega_n}\right),
+\]
+and \(P_0,P_+,P_-\) are mutually orthogonal projectors with ranks \(1,1,1\).
+Moreover
+\[
+ e^{tG_n}=P_0+\cos(\omega_nt)(I-P_0)
+       +\frac{\sin(\omega_nt)}{\omega_n}G_n .
+\]
+The \(P_0\) branch is stationary and is the linear
+potential-vorticity/geostrophic branch; \(P_\pm\) are the inertia--gravity
+branches.  At \(n=0\), \(f\ne0\) gives \(0,\pm i|f|\), while \(f=0\) gives a
+zero block.  For \(c>0\), the Fourier potential-vorticity quantity
+\[
+ \widehat\zeta_n-\frac{f}{c}\widehat\phi_n,\qquad
+ \widehat\zeta_n=i(n_1\widehat u_{2,n}-n_2\widehat u_{1,n}),
+\]
+is constant in time.
+
+For \(q>0\), the shell \(|n|^2=q\) has
+\(r_2(q)=4(d_1(q)-d_3(q))\) modes.  A finite Fourier-support solution is
+\(T\)-periodic if and only if \(\omega_nT\in2\pi\mathbb Z\) for every
+participating nonzero branch.  The full group on
+\(L^2(\mathbb T^2;\mathbb C^3)\) is unitary, but for every \(t\), including
+\(t=0\), it is neither compact nor in any Schatten class.
+\end{theorem}
+
+\begin{proof}
+Fourier transformation gives \(G_n\).  Direct multiplication yields the
+minimal polynomial \(z(z^2+\omega_n^2)\), and inspection of the entries gives
+\(G_n^*=-G_n\).  The three Lagrange polynomials for the roots
+\(0,\pm i\omega_n\) are precisely \(P_0,P_+,P_-\), proving orthogonality and
+the exponential after reducing its power series modulo the cubic.  Taking
+\(\zeta=\partial_1u_2-\partial_2u_1\) gives
+\(\zeta_t=-f\nabla\cdot u\), while \(\phi_t=-c\nabla\cdot u\), proving the
+potential-vorticity identity for \(c>0\).  The shell formula is the classical
+sum-of-two-squares identity.  Applying the projectors to a finite
+superposition proves the periodicity equivalence.  Finally, skew-adjointness
+gives unitarity; an orthonormal sequence of distinct Fourier modes is carried
+to another orthonormal sequence of norm one, proving noncompactness and the
+failure of every Schatten condition.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Degeneracies and finite controls}
+The faces \(f=0\), \(c=0\), and \(n=0\) are not silently folded into the
+generic projector formula.  In particular, \(f=c=0\) is a three-dimensional
+zero block, whereas \(c=0\) leaves a scalar stationary component at every
+mode.  The ledger contains eight rate cases, including a negative-\(f\)
+retrograde sentinel, and all integer modes in \([-3,3]^2\).  It also checks
+the shell identity for \(q\leq18\).  The periodicity assertion is only for
+finite support; an arbitrary \(L^2\) state need not be periodic.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Independent audit and scope boundary}
+The producer records 392 blocks, exact integer shell counts, projector
+residuals, two matrix-exponential times, and potential-vorticity residuals.
+The checker rebuilds every block independently, tests the cubic, all projector
+products, unitarity, exponential agreement, and every boundary face.
+SymPy supplies a separate symbolic path; byte replay is exact and all repaired
+and stale hash mutations are rejected.
+
+The result is source-native Fourier analysis.  Its Route-A tuple is
+\begin{center}\ttfamily
+(A0\_FAIL, A1\_WEAK, A2\_FAIL, A3\_FAIL, A4\_FORMAL\_HINT),
+\end{center}
+with \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.
+
+\small The registered scope literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  Spatial Fourier shells are not
+claimed to be arithmetic primitive orbits.  No target prime, zero, local
+factor, root number, automorphy statement, functional equation, or
+Hilbert--Polya operator is introduced.
+\fi
+
+\section*{Source note}
+The f-plane doubly periodic normal-mode context is discussed by
+Mohebalhojeh and Dritschel~\cite{md2001}; Salmon~\cite{salmon1988} provides
+Hamiltonian projection context.  Beta-plane results are intentionally outside
+the frozen model.
+\begin{thebibliography}{9}
+\bibitem{md2001} A. R. Mohebalhojeh and D. G. Dritschel,
+\textit{Hierarchies of Balance Conditions for the f-Plane Shallow-Water Equations},
+\emph{Journal of the Atmospheric Sciences} 58 (2001), 2411--2426.
+DOI: 10.1175/1520-0469(2001)058<2411:HOBCFT>2.0.CO;2.
+\bibitem{salmon1988} R. Salmon, \textit{Semigeostrophic theory as a
+Dirac-bracket projection}, \emph{Journal of Fluid Mechanics} 196 (1988),
+345--358. DOI: 10.1017/S0022112088002733.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target arithmetic
+or operator claim. \textbf{Data and code.} The theorem, ledger, independent
+checks, and build instructions are released with HCS-C217.
+\textbf{AI-use disclosure.} Generative tools assisted drafting and code
+generation; the internal artifact chain checked the displayed claims and
+metadata.  This is not external peer review.
+\end{document}

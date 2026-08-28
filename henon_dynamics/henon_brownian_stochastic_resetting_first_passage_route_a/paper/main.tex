@@ -1,0 +1,183 @@
+\pdfvariable suppressoptionalinfo 611
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\title{Brownian Resetting: A Renewal and First-Passage Atlas}
+\author{HCS--C214 research certificate}
+\date{28 August 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close a source-level theorem for one-dimensional Brownian motion with a
+Poisson reset to its starting point.  The free process has an absolutely
+continuous Laplace stationary law, while the separately killed search process
+has an exact first-passage renewal transform.  The mean hitting time, all
+Laplace moments, the unique positive reset optimum, and singular boundaries
+follow in one dimensionless calculation.  The denominator is a renewal
+resolvent, not a dynamical zeta or a Fredholm determinant.
+\end{abstract}
+
+\section{Two realizations}
+Fix $D,r,a>0$.  In the free realization on $\R$,
+$dX_t=\sqrt{2D}\,dW_t$ between independent rate-$r$ resets to $0$.
+In the search realization the same process starts at $0$ and is killed at
+$T_a=\inf\{t\geq0:X_t=a\}$; its law on $(-\infty,a)$ is therefore
+sub-Markov after absorption.  The stationary statement below belongs only to
+the free realization.  The clock is physical elapsed time.
+
+\section{Free renewal theorem}
+Let
+\[
+ G_D(x,t)=\frac{1}{\sqrt{4\pi Dt}}\exp\!\left(-\frac{x^2}{4Dt}\right).
+\]
+Conditioning on the last reset gives
+\begin{equation}
+p_r(x,t\mid0)=e^{-rt}G_D(x,t)+r\int_0^t e^{-ru}G_D(x,u)\,du .
+\label{eq:renewal}
+\end{equation}
+For $x\ne0$, the integral equals
+\[
+\frac{e^{-|x|\sqrt{r/D}}\operatorname{erfc}(\frac{|x|}{2\sqrt{Dt}}-\sqrt{rt})
+-e^{|x|\sqrt{r/D}}\operatorname{erfc}(\frac{|x|}{2\sqrt{Dt}}+\sqrt{rt})}{4\sqrt{Dr}},
+\]
+and its continuous $x=0$ value is $\operatorname{erf}(\sqrt{rt})/(2\sqrt{Dr})$.
+For every $t>0$ this is an absolutely continuous Lebesgue density.  Letting
+$t\to\infty$ gives the normalized free stationary law
+\begin{equation}
+p_{\rm st}(x)=\frac12\sqrt{\frac rD}\,e^{-|x|\sqrt{r/D}},
+\qquad \int_{\R}p_{\rm st}(x)\,dx=1.
+\label{eq:stationary}
+\end{equation}
+Equation \eqref{eq:stationary} is not a stationary claim for the killed search.
+
+\subsection*{A realization check}
+The distinction is operational, not cosmetic.  At a fixed positive time the
+free law is a Lebesgue density: a reset at an exactly prescribed instant has
+probability zero, so the renewal integral does not hide a point mass.  For the
+search process the state space is $(-\infty,a)$ with a Dirichlet boundary at
+$a$; probability that has reached the boundary is removed.  Thus
+\eqref{eq:stationary} can be used to describe long-time resetting on $\R$,
+but never to normalize the killed survival law.
+
+\section{Killed first passage}
+The no-reset transform from $0$ to $a$ is
+$f_0(q)=e^{-a\sqrt{q/D}}$.  A first-reset decomposition yields
+\begin{equation}
+F_r(s):=\E[e^{-sT_a}]
+ =\frac{(s+r)e^{-a\sqrt{(s+r)/D}}}
+ {s+r e^{-a\sqrt{(s+r)/D}}},
+\qquad s\geq0,
+\label{eq:fpt}
+\end{equation}
+and the survival transform
+\begin{equation}
+S_r(s):=\int_0^\infty e^{-st}\Pr(T_a>t)\,dt
+ =\frac{1-e^{-a\sqrt{(s+r)/D}}}
+ {s+r e^{-a\sqrt{(s+r)/D}}}.
+\label{eq:survival}
+\end{equation}
+For $s>0$, $1-F_r(s)=sS_r(s)$; continuity at zero gives
+\[
+\E[T_a]=-F_r'(0)=S_r(0)=\frac{e^{a\sqrt{r/D}}-1}{r}.
+\]
+All moments are finite for positive $D,r,a$.  For every $n\geq0$,
+\begin{equation}
+(-1)^nF_r^{(n)}(0)=\E[T_a^n],\qquad
+(-1)^nS_r^{(n)}(0)=\frac{\E[T_a^{n+1}]}{n+1}.
+\label{eq:moments}
+\end{equation}
+
+One direct way to see \eqref{eq:fpt} is to write $f=f_0(s+r)$ for the
+no-reset transform during one exponentially distributed attempt.  A reset
+before absorption contributes the factor $r(1-f)/(s+r)$ and starts an
+independent copy, hence
+\[
+F_r(s)=f+\frac{r(1-f)}{s+r}F_r(s).
+\]
+This scalar renewal equation also shows why its denominator is a resolvent of
+attempts rather than a periodic-orbit product.
+
+\section{Universal optimum and boundaries}
+Put $z=a\sqrt{r/D}$.  Then
+\[
+\frac D{a^2}\E[T_a]=g(z):=\frac{e^z-1}{z^2}.
+\]
+The derivative has the sign of
+$h(z)=z-2(1-e^{-z})$: $g(z)\to\infty$ at both endpoints,
+$h$ has exactly one root in $(0,\infty)$ other than the limiting root at zero,
+and
+\[
+z_*=1.5936242600400400923\ldots,
+\qquad r_*=D(z_*/a)^2.
+\]
+At $r=0$ there is no normalizable stationary density and the half-line
+MFPT is infinite; at $a=0$, $T_a=0$; at $D=0$, a reset path cannot reach a
+positive target.  These are boundaries, not substitutions into
+Eq.~\eqref{eq:fpt}.
+
+\section{Independent certificate and scope}
+The JSON certificate uses 81 propagator, 27 stationary, 9 normalization,
+108 transform, and 27 MFPT rows at fixed rational sentinels.  The checker
+recomputes the renewal integral by an independent $u=y^2$ quadrature and
+normalizes Eq.~\eqref{eq:stationary}; SymPy checks the heat equation,
+renewal algebra, moment jet, and optimality derivative.  Byte replay and
+hostile repaired-hash, stale-hash, and unknown-key tests are included.
+
+As a second-pass audit, we also test the zero-reset, zero-target, and
+zero-diffusivity boundaries separately.  This prevents a formal substitution
+of a singular boundary into the positive-parameter square-root formula and
+makes the theorem's scope machine-checkable.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+realization & state space & quantity certified \\
+\midrule
+free reset & $\R$ & density and normalized Laplace stationary law \\
+killed search & $(-\infty,a)$ & survival mass and first-passage transform \\
+boundary & $r=0,\ a=0,\ D=0$ & separate limiting behavior \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The source formulas are attributed to Evans--Majumdar (2011); the finite
+certificate is a reproducibility artifact, not a priority claim.  No numerical
+row selects $z_*$.  It follows from the exact derivative of $g$, with the
+positive-root sign bracket independently checked at $z=1$ and $z=2$.
+
+The release ledger records the source commit and evaluator hash alongside the
+payload hash.  It therefore distinguishes a mathematical identity from a
+finite regression observation: changing even one serialized row, citation
+locator, or scope flag is rejected after a repaired hash.  This is a
+provenance check, not an external peer-review score.
+
+The source attribution is Evans--Majumdar (2011) and the resetting review by
+Evans--Majumdar--Schehr (2020); no priority or novelty is claimed.  The strict
+Route-A verdict is
+\[
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FAIL)},\qquad
+\texttt{ROUTE\_A\_REJECTED}.
+\]
+The scope literal is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+There is no intrinsic rational-prime carrier, primitive periodic-orbit clock,
+arithmetic divisor, or Hilbert--Polya operator.  In particular, the denominator
+in Eq.~\eqref{eq:fpt} is never called a dynamical zeta.
+
+\begin{thebibliography}{9}\small
+\bibitem{EM11} M.~R.~Evans and S.~N.~Majumdar, ``Diffusion with stochastic
+resetting,'' \emph{Phys. Rev. Lett.} 106, 160601 (2011),
+\href{https://doi.org/10.1103/PhysRevLett.106.160601}{doi:10.1103/PhysRevLett.106.160601}.
+\bibitem{EM11opt} M.~R.~Evans and S.~N.~Majumdar, ``Diffusion with optimal
+resetting,'' \emph{J. Phys. A} 44, 435001 (2011),
+\href{https://doi.org/10.1088/1751-8113/44/43/435001}{doi:10.1088/1751-8113/44/43/435001}.
+\bibitem{EMS20} M.~R.~Evans, S.~N.~Majumdar and G.~Schehr, ``Stochastic
+resetting and applications,'' \emph{J. Phys. A} 53, 193001 (2020),
+\href{https://doi.org/10.1088/1751-8121/ab7cfe}{doi:10.1088/1751-8121/ab7cfe}.
+\end{thebibliography}
+\end{document}

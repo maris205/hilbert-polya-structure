@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C217
+candidate_definition: constant-f linear rotating shallow-water flow on the doubly periodic 2pi torus
+family: all real f and c>=0 with Fourier lattice n in Z^2
+phase_space: L2(T^2; C^3) energy space
+dynamics: u_t+f J u+c grad(phi)=0; phi_t+c div(u)=0
+parameters: real f,c; physical clock t
+parameter_provenance: source-defined Coriolis and gravity-wave rates; no target fitting
+arithmetic_origin: none; integer Fourier lattice is spatial, not a primitive-orbit owner
+clock: physical continuous time t
+normalization: 2pi-periodic torus, c=sqrt(gH) absorbed into c
+determinant_convention: no target determinant; finite block characteristic polynomial only
+orbit_cutoff: 8 cases and 49 modes per case, shells q=0,...,18
+precision: float64 matrix audit with exact integer shell ledger
+training_data: none
+forbidden_data: beta-plane Rossby claims, target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 077a098ac5811e465b69db71b5e6031a4827eb55
+code_commit: 077a098ac5811e465b69db71b5e6031a4827eb55
+artifact_paths:
+  evidence: results/c217_swe_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: constant-f rotating shallow-water Fourier blocks on T^2
+  arithmetic_origin: none
+  clock: physical continuous time t
+  normalization: 2pi torus and energy norm ||u||^2+||phi||^2
+  cutoff: 8 parameter faces including a negative-f sentinel, 49 modes each, q<=18 shell audit
+  precision: float64 independent matrix path and exact shell counts
+  allowed_data: source-local Fourier blocks, projectors, frequencies, shell multiplicities, operator-class boundaries
+  forbidden_data: beta-plane Rossby claims, target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact skew-Hermitian source-native block algebra
+  strongest_failure: spatial integer modes have no intrinsic prime or rational target semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every lattice mode has an explicit zero/plus/minus spectral owner
+  strongest_failure: no discrete primitive orbit family in the continuous PDE
+  metrics: {fourier_modes: 392, shell_levels: 19}
+  artifacts: [THEOREM_PACKAGE.md, results/c217_swe_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: finite-dimensional characteristic and projector identities
+  strongest_failure: no target determinant or zero-divisor correspondence
+  metrics: {target_zero_match: null, block_polynomial: exact}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact same-clock unitary group formula
+  strongest_failure: no target continuation, counting law, or arithmetic compression
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: skew-adjoint generator supplies a natural unitary spectral calculus
+  strongest_failure: no same-clock self-adjoint target quantization is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [projector sign, Coriolis sign, shell divisor count, zero-frequency faces, finite-support periodicity distinction, noncompactness distinction]
+  proves_too_much_risk: high if spatial lattice shells are presented as arithmetic primitive orbits
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: constant-f torus Fourier spectral theorem only; no beta-plane, target arithmetic, or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no discrete primitive-orbit owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this source family; preserve degeneracy and noncompactness controls
+round2_clues: []
+route_b_invocation_allowed: false

@@ -2929,3 +2929,29 @@ All five are `ROUTE_A_REJECTED` and have `route_b_invocation_allowed: false`.
 No target divisor/counting law, arithmetic local datum, Euler factor, root
 number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
 introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+## HCS-C214--HCS-C218 independent cross-subtype round (2026-08-28)
+
+Five unrelated dynamical owners were frozen, and each paper closes one
+all-parameter theorem together with its singular or degenerate faces.  The
+continuous stochastic, exchangeable genealogical, singular Hamiltonian,
+conservative wave, and mixed hyperbolic--parabolic systems are not slices of
+one shared manuscript.  `NEW`/retained status is source-local bookkeeping,
+not a literature-priority claim.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C214 | Fixed-point Poisson resetting of Brownian diffusion has an exact free renewal propagator and stationary density, while the separately killed target problem has exact survival/first-passage transforms, all moments, and the unique universal positive reset optimum, with `r=0`, `a=0`, and `D=0` faces explicit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_brownian_stochastic_resetting_first_passage_route_a/`](../henon_brownian_stochastic_resetting_first_passage_route_a/) |
+| HCS-C215 | The partition-valued Kingman coalescent has the all-sample block-transition law, independent holding-time construction, exact MRCA transform and infinite-sample limit, and an exact total-tree-length distribution, with exchangeability, restriction consistency, and `n=1` retained. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [`../henon_kingman_coalescent_genealogy_route_a/`](../henon_kingman_coalescent_genealogy_route_a/) |
+| HCS-C216 | Planar Kepler dynamics has a complete nonradial conic atlas, negative-energy period and radial action, positive-energy deflection, physical radial-collision boundary, fixed-energy Levi--Civita configuration continuation, and the fixed-time continuum obstruction. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_planar_kepler_conic_collision_regularization_route_a/`](../henon_planar_kepler_conic_collision_regularization_route_a/) |
+| HCS-C217 | Constant-`f` rotating shallow water on the two-torus has exact Fourier projectors and propagators, geostrophic/PV and inertia--gravity branches, sum-of-two-squares shell multiplicities, a finite-support resonance criterion, all zero faces, and a global noncompact/Schatten obstruction. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_rotating_shallow_water_fourier_route_a/`](../henon_rotating_shallow_water_fourier_route_a/) |
+| HCS-C218 | The Dirichlet Kelvin--Voigt wave has a complete under/critical/overdamped modal atlas, energy identity, slow/fast asymptotics, the non-eigenvalue essential accumulation at `-1/b`, noncompact positive-time semigroup, and a uniquely optimized spectral-abscissa gap. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_kelvin_voigt_wave_spectral_route_a/`](../henon_kelvin_voigt_wave_spectral_route_a/) |
+
+All five are `ROUTE_A_REJECTED` and have `route_b_invocation_allowed: false`.
+The weak orbit coordinates in C216--C217 and the candidate-local operator or
+quantization hints in C216--C218 are not combined across systems.  No target
+divisor/counting law, arithmetic local datum, Euler factor, root number,
+automorphy statement, Hilbert--Pólya operator, or Route-B input is introduced.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.

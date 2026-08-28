@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C218
+candidate_definition: Dirichlet one-dimensional Kelvin--Voigt wave on the normalized interval
+family: b>=0 Kelvin--Voigt damping with sine modes n>=1
+phase_space: H_0^1(0,pi) x L^2(0,pi) energy space
+dynamics: u_tt-u_xx-b u_txx=0 with u(0)=u(pi)=0
+parameters: b>=0; b=0 is the separate undamped boundary
+parameter_provenance: source-defined damping coefficient; no target fitting
+arithmetic_origin: none; sine index is a spatial mode, not a primitive orbit
+clock: physical continuous time t
+normalization: interval length pi so omega_n=n
+determinant_convention: modal quadratic pencil only; no target determinant
+orbit_cutoff: six damping cases and n=1,...,64
+precision: 60 working decimal digits; 40 serialized significant digits
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 077a098ac5811e465b69db71b5e6031a4827eb55
+code_commit: 077a098ac5811e465b69db71b5e6031a4827eb55
+artifact_paths:
+  evidence: results/c218_kv_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-28
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: Dirichlet Kelvin--Voigt wave generator and sine quadratic pencil
+  arithmetic_origin: none
+  clock: physical continuous time t
+  normalization: interval (0,pi), omega_n=n
+  cutoff: six b cases, 64 modes, asymptotic sentinels n=16,32,64
+  precision: 60 working decimal digits; independent complex-root path
+  allowed_data: source-local roots, Jordan faces, Weyl singular sequences, spectral abscissa, energy
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-native quadratic pencil and energy law
+  strongest_failure: sine labels and damping rates have no intrinsic prime semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: every mode has a fully classified root owner
+  strongest_failure: no discrete primitive-orbit family or recurrence owner
+  metrics: {modal_roots: 384, critical_faces: 1}
+  artifacts: [THEOREM_PACKAGE.md, results/c218_kv_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact spectral-abscissa gap and optimizer
+  strongest_failure: no target determinant or zero-divisor correspondence
+  metrics: {target_zero_match: null, source_gap: exact}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: explicit roots and Weyl essential accumulation
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: conservative b=0 wave boundary gives a natural skew-adjoint reference
+  strongest_failure: no same-clock self-adjoint target quantization is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [root sign, regime/Jordan label, spectral-gap mutation, essential-limit side, direct non-eigenvalue substitution, scope and stale hashes]
+  proves_too_much_risk: high if spectral abscissa is presented as a uniform operator-norm decay rate
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: normalized Kelvin--Voigt root/essential/gap theorem only; no target arithmetic or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no discrete primitive-orbit owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this source family; preserve Jordan and essential-spectrum distinctions
+round2_clues: []
+route_b_invocation_allowed: false
