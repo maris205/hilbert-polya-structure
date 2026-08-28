@@ -57,6 +57,14 @@ panel.  This turns the owner firewall into a coefficient-stability no-go
 theorem while leaving genuinely new, explicitly renormalized collective
 objects outside its scope.  See [the Round-7 research spine](round7_research_spine.md).
 
+Round 8 constructs exactly such a separately registered calibration object.
+On pure genus-two homology covers, time rescaling and lift-multiplicity
+normalization form a four-quadrant theorem: either intervention alone fails,
+whereas both together recover the base finite-owner factor exactly at every
+level.  The result is generic and finite-panel only, so it is a Route-A
+negative control rather than a promotion.  See [the Round-8 research
+spine](round8_research_spine.md).  Stage 2 remains unauthorized.
+
 Stage-1 planning artifacts:
 
 - [closest-prior audit](../notes/round3_closest_prior_audit.md)
@@ -68,6 +76,8 @@ Stage-1 planning artifacts:
 - [Round-6 contribution lock](round6_contribution_lock.md)
 - [Round-7 owner-factor escape theorem](../notes/round7_owner_factor_escape_theorem.md)
 - [Round-7 research spine](round7_research_spine.md)
+- [Round-8 collective-renormalization theorem](../notes/round8_homology_renormalization_theorem.md)
+- [Round-8 research spine](round8_research_spine.md)
 - [research spine / methodology / section plan](stage1_research_spine.md)
 
 The spine and contribution lock are plans, not manuscript prose.  The narrow

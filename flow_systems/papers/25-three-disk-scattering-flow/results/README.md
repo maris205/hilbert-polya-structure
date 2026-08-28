@@ -1,4 +1,4 @@
-# P25 results — Rounds 2 through 7
+# P25 results — Rounds 2 through 8
 
 Generated artifacts:
 
@@ -109,3 +109,17 @@ The core-output SHA-256 is
 `9c3daaa1feffa23090cc4edf5c3cdf0398389f814ef4f0f6b14cad254f23d4d9`.
 The cumulative owner counts are formula values; no billion-row enumeration is
 claimed.  Exactness belongs only to the non-arithmetic unit-roof family.
+
+## Round-8 roof nontransfer results
+
+- `round8_exact_roof_witnesses.csv` records the two exact symmetric owner
+  families at all three geometries and their locked-ledger residuals;
+- `round8_physical_roof_replay.csv` retains every one of the 2,241 frozen
+  physical owners and compares its mean period with the period-two scalar
+  clock; and
+- `round8_roof_nontransfer_summary.json` records the theorem, exact minimax
+  bound, per-geometry `3/744` match/disagreement split, and Route firewall.
+
+The core-output SHA-256 is
+`9a29d8894b1ac81f9588fe221375bddc671898b9b08b409b0fa5a1d5a42a9014`.
+The exact periodic-average gap, not the finite replay, proves nontransfer.

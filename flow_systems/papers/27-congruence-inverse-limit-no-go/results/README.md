@@ -113,3 +113,18 @@ zero.  The cusped rows retain `NOT_ESTABLISHED` base conjugacy primitivity and
 are not labeled primitive zeta factors.  The cocompact rows retain proved
 primitive homology but do not fabricate full quotient orders.  Core SHA-256 is
 `551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845`.
+
+## Round-8 homology-renormalization quadrants
+
+- `round8_renormalization_quadrants.csv` contains 96 exact rows for three
+  primitive owners, eight factorial moduli, and four clock/multiplicity
+  choices;
+- `round8_renormalization_prefix_coefficients.csv` contains 1,248 exact
+  coefficients through degree 12; and
+- `round8_homology_renormalization_summary.json` records the cover theorem,
+  quadrant outcomes, new-owner firewall, and Route boundary.
+
+Core SHA-256 is
+`a1b588724dacb2ab2986326a7a5e1c6aec654c61538c1465e26564357b568b33`.
+The fully renormalized finite-panel factor is exactly `(1-x_g)^(-1)` at every
+level.  No full primitive census or full-flow determinant is claimed.

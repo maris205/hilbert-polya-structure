@@ -4,7 +4,7 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress; Rounds 2--7 executed reproducibly**.
+- ARS: **Stage 1 RESEARCH in progress; Rounds 2--8 executed reproducibly**.
 - Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
 - The arithmetic one-form, positive time-density/slowness factor, reciprocal
   speed multiplier, generator, and exact period-variation formula are frozen.
@@ -83,6 +83,18 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 - Round 7 passed 13/13 tests and two byte-identical builds; artifact-tree
   SHA-256 is
   `bdfa8f5baaeef47f1bfd8482e8b459d2bd0606cdbb9cdcf0c441a8f65829d678`.
+- Round 8 extends exact Schreier homology from the four survivors to all 138
+  frozen Hecke cycle-owner instances and all 55 word/prime groups.  The exact
+  real-period coordinate is `k(x,y,z)=2y+z`; normalized periods are rational
+  ratios `k(owner)/k(source)`, so every quadratic degree moment is a rational
+  sum of squares.
+- The complete instance taxonomy is 2 full complex-period kernels, 2 nonzero
+  real-projection-only kernels, 134 true nonkernels, and 0 degenerate or
+  unresolved cases.  Both primary laws have exactly 4/55 survivors and 51/55
+  exact failures; the `a_p^2-p` control fails 55/55 exactly.
+- Round 8 passed 18/18 tests and two byte-identical builds; artifact-tree
+  SHA-256 is
+  `cc36c1f952c9ce89050996f4bb4c9905571f9ef09a0d7115be8a985e02a5621d`.
 - Formal Route-A tuple:
   **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`**;
   overall status **`ROUTE_A_EXPLORATORY`**.  A2 is `NOT_TESTABLE` here: only
@@ -130,7 +142,7 @@ period moments not implied by the cycle-pushforward identity.  No individual
 primitive closed geodesic is assigned the value `a_p`, and no primitive
 orbit-to-prime correspondence is assumed.
 
-## Round-4/5/6/7 Hecke and zeta kill result
+## Round-4/5/6/7/8 Hecke and zeta kill result
 
 Round 2 registered a norm-matched generic smooth observable and a period
 permutation. Round 4 separates these numerical controls from the stricter
@@ -179,6 +191,15 @@ result stronger while sharpening its negative interpretation: no new
 prime-to-orbit owner map or primitive Euler factor follows from these
 topological/parity kernels.
 
+Round 8 closes the remaining finite-ledger uncertainty.  The real involution
+acts by `tau(x,y,z)=(-x,y+z,-z)`, so the compact real-period direction is
+one-dimensional and every normalized owner period is an exact rational
+coordinate ratio.  The 134 nonkernel instances prove that all 51 primary
+group failures contain genuine nonunit-degree quadratic mass; the four
+positives are the only real-projection kernels in the complete frozen
+138-instance multiset.  This is an exact finite obstruction theorem, not a
+global primitive-orbit or determinant theorem.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -201,6 +222,11 @@ topological/parity kernels.
 - [Round-7 conclusion](notes/round7_conclusion.md)
 - [Round-7 paper-facing research spine](paper/round7_research_spine.md)
 - [Round-7 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round7.yaml)
+- [Round-8 complete-taxonomy freeze](notes/round8_taxonomy_freeze.md)
+- [Round-8 exact taxonomy theorem](notes/round8_exact_taxonomy_theorem.md)
+- [Round-8 conclusion](notes/round8_conclusion.md)
+- [Round-8 paper-facing research spine](paper/round8_research_spine.md)
+- [Round-8 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round8.yaml)
 - [results and artifact contract](results/README.md)
 - [reproduction instructions](experiments/README.md)
 

@@ -51,6 +51,14 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   zero mismatches.  This strengthens P25 into a universal negative-control
   theorem: exact A1--A2 wiring persists across an infinite non-arithmetic
   family, while the physical flow remains `UNASSIGNED`.
+- Round-8 clock-ownership status: **`[PROVED]`** that the physical roof is not
+  cohomologous to a constant.  The exact period-two and period-three mean
+  lengths are `d-2a` and `d-sqrt(3)a`, so no owner- and repetition-preserving
+  scalar substitution `z=exp(-c s)` transfers the unit-roof determinant.  The
+  minimax witness error is at least `(2-sqrt(3))a/2`.  A locked 2,241-row replay
+  finds exactly 3 scalar-clock matches and 744 disagreements at each geometry;
+  this finite count supports the artifact but is not the proof.  The physical
+  tuple remains `UNASSIGNED`.
 
 ## Round-2 executed artifact
 
@@ -137,6 +145,20 @@ determinant exactness alone cannot supply A0.  The family is formally typed
 `(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)` and
 rejected as a primary HP-Dynamics candidate.
 
+## Round-8 physical-roof nontransfer theorem
+
+The symmetric two-disk bounce has total period `2(d-2a)`, while the symmetric
+three-disk triangular owner has total period `3(d-sqrt(3)a)`.  Their periodic
+mean roofs differ by `(2-sqrt(3))a>0`.  Since a constant roof coboundary has
+the same periodic mean on every owner, the physical roof cannot be cohomologous
+to a constant.  Equivalently, the unit-roof finite determinant cannot be
+transported owner by owner through one global scalar change of variable.
+
+This closes a precise bridge rather than the physical problem itself.  A
+transfer operator with the genuine nonconstant roof remains possible and has
+not been evaluated.  No physical Gutzwiller--Voros, multiple-scattering, or
+target-divisor A2 claim is made.
+
 ## Research question and bold hypothesis
 
 Can any target-free statistic of the primitive-orbit half-density distinguish
@@ -198,6 +220,11 @@ Evidence labels in this project use the vocabulary of
 - [Round-7 freeze contract](experiments/round7_q_symbolic_family_freeze.json)
 - [Round-7 validation](experiments/round7_validation.md)
 - [Round-7 formal Route-A record](../../evaluations/route_a/P25-Q-SYMBOL-NO-REPEAT-PHASE-CALIBRATOR/2026-08-28-round7.yaml)
+- [Round-8 roof nontransfer theorem](notes/round8_roof_nontransfer_theorem.md)
+- [Round-8 paper research spine](paper/round8_research_spine.md)
+- [Round-8 freeze contract](experiments/round8_roof_nontransfer_freeze.json)
+- [Round-8 validation](experiments/round8_validation.md)
+- [Round-8 formal Route-A record](../../evaluations/route_a/P25-Q-SYMBOL-NO-REPEAT-PHASE-CALIBRATOR/2026-08-28-round8.yaml)
 
 No exact physical scattering determinant, physical-flow A2 test, or manuscript
 is claimed.  The formal A1/A2 tuple belongs only to the explicitly typed

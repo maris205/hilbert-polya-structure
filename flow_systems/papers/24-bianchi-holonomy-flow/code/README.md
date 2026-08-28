@@ -1,4 +1,4 @@
-# P24 code status — Rounds 2–6
+# P24 code status — Rounds 2–8
 
 `round2_bianchi_ledger.py` uses exact pairs of Python integers for Gaussian
 arithmetic.  It enumerates the reduced word ball of
@@ -148,3 +148,26 @@ bash experiments/reproduce_round7.sh --refresh
 The 12-test suite pins the freeze, census/order, determinant and congruence
 checks, exact theorem identities, collision count, Route firewall, byte
 determinism, and receipt bindings.
+
+## Round 8 — universal congruence controls and first jet
+
+`round8_congruence_specificity.py` implements exact arithmetic in `Z`, `Z[i]`,
+and `Z[omega]`.  It replays the universal principal-congruence formula on an
+integer level-3 panel, Gaussian level-2/4 panels, and an Eisenstein level-3
+panel, while a full-Gaussian-group witness panel checks that removing the level
+hypothesis really can destroy `/9` integrality.  It separately canonicalizes
+`((gamma-I)/3) mod 3` up to sign on every Round-7 candidate matrix and emits a
+one-row-per-`D9` collision profile.
+
+```bash
+python3 code/round8_congruence_specificity.py
+bash experiments/reproduce_round8.sh
+bash experiments/reproduce_round8.sh --refresh
+```
+
+The 14 tests cover the pinned target-free freeze, three exact quadratic-ring
+implementations, all 6,392 principal-control rows, ambient counterexamples,
+four-family execution plus strict `2/3` canonical-type accounting, the
+universal formula on all 11,481 candidate rows, jet
+conjugacy/inversion/repetition laws, collision counts, Route firewalls,
+deterministic rendering, and byte-bound receipts.

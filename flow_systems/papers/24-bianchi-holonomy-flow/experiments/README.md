@@ -1,4 +1,4 @@
-# P24 experiment status — Rounds 2–6
+# P24 experiment status — Rounds 2–8
 
 The exact word-ball enumeration and target-free holonomy shuffle completed.
 The core output is reproduced byte for byte under the hash recorded in
@@ -106,3 +106,24 @@ ledger, metrics, and validation report.
 The decision is
 `RETAIN_AS_SOURCE_DERIVED_NECESSARY_INVARIANT_WITHOUT_OWNER_OR_METRIC_PREFIX`.
 The full flow remains unassigned and Route B remains closed.
+
+## Round 8
+
+The pre-build universality/control contract is pinned at SHA-256
+`f60ef15527b254bef76dcf670c36c23018baf7ce7243792112795d2344240e0e`.
+`reproduce_round8.sh` runs 14 tests, creates two independent temporary builds,
+requires byte identity, and verifies the canonical tree.  Its default mode is
+read-only; `--refresh` is required to rewrite artifacts.  The primary-output
+SHA-256 is `cacf5b84d9faecdca1cdfc5e0082cbf21cf491fbfe75835d41919d4c9c5f54f3`.
+
+All four frozen control families execute completely, but they cover only two
+of the three required canonical evaluator types; the mandatory type gate is
+`INCOMPLETE_2_OF_3_CANONICAL_TYPES`.  The negative specificity decision is
+
+```text
+STOP_D9_AS_GAUSSIAN_SPECIFIC_ARITHMETIC_OWNER;
+RETAIN_UNIVERSAL_CONGRUENCE_THEOREM_AND_FIRST_JET_REFINEMENT
+```
+
+The experiment consumes no prime/zero table and authorizes no metric prefix,
+determinant, full-flow tuple, or Route-B evaluation.

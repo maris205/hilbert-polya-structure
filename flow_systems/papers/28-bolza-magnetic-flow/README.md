@@ -96,6 +96,23 @@ Working title: *Semiclassical Tensor-Power Trace*
   `a11917f6e9eab3bc48f1920b9727b0ec96a9c43c1f7ac13ab69984c005cfccef`.
   No control systole, common geometric cutoff, finite control census, magnetic
   comparison, A2 experiment, arithmetic label, or Route-B action is claimed.
+- Round-8 progress: the Round-7 control now has a theorem-level exact systole
+  and finite word-to-length completeness certificate.  Exact
+  Gaussian-integer polynomial `PSU(1,1)` normal forms and rational interval
+  signs exhaust the identity-connected tile component at
+  `|alpha|^2<=20000`: 18,533 included states and 108,616 exactly rejected
+  boundary states.  A compact-fundamental-polygon argument proves that every
+  conjugacy class with translation length at most `21/10` has a conjugate in
+  that component.  All nonidentity states satisfy
+  `ell>=2 acosh(1/(2exp(-1/5)-1))`, and `g0*g3` realizes equality, so this is
+  the exact control systole and a primitive witness.  The target-blind common
+  cutoff `Lambda=21/10` is therefore frozen.  Twenty-four tests and two
+  byte-identical builds pass with core SHA-256
+  `0a0ae16bbba5ed66958bc3714e91e038a8f80f3efc70224bfa5d9f87e48e6512`
+  and tree SHA-256
+  `c30beebdd2e832d9375f55f1eab700868b7b967dfb5ee43fcecc0ba5f60919ac`.
+  No Bolza/control census, magnetic comparison, A2 experiment, arithmetic
+  label, or Route-B action is run.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -212,6 +229,9 @@ result remains a magnetic trace calibration.
 - [Round-7 source-package freeze](notes/round7_nonarithmetic_source_package_freeze.md)
 - [Round-7 source verification and six-item gate](notes/round7_nonarithmetic_control_source_verification.md)
 - [Round-7 bounded-proxy Route-A evaluation](../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round7.yaml)
+- [Round-8 pre-computation freeze](notes/round8_control_systole_completeness_freeze.md)
+- [Round-8 exact systole/completeness theorem](notes/round8_control_systole_certificate.md)
+- [Round-8 bounded-proxy Route-A evaluation](../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round8.yaml)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
@@ -226,7 +246,9 @@ per field.  Round 6 proves that all eight formerly ambiguous same-axis records
 are exact conjugate duplicates, so the owner and branch counts do not change.
 The 390-row finite artifact is a complete matched marked-cyclic census at
 `L<=4`, not a full `Gamma`-conjugacy census; signed-`k` branches never receive
-separate owner credit.  Round 7 supplies a real non-arithmetic control geometry
-and four certified primitive control owners, but no Bolza/control conclusion is
-drawn until a target-blind common geometric cutoff and complete finite census
-are certified on both surfaces.
+separate owner credit.  Round 7 supplies the real non-arithmetic control
+geometry and four certified primitive generator owners.  Round 8 proves that
+control's exact systole and freezes the target-blind common cutoff `21/10` via
+a complete finite tile certificate.  No Bolza/control conclusion is drawn
+until the separate matched geometric census and owner/conjugacy deduplication
+are executed under that already frozen cutoff.

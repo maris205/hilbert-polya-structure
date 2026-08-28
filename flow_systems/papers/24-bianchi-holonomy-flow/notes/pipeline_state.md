@@ -42,6 +42,11 @@ Date: **2026-08-28**
 | Round-7 invariant laws | **`[PROVED]`** — conjugacy/inversion invariance and `D9(gamma^r)=D9(gamma)S_(r-1)(tr gamma)^2` with an integer recurrence |
 | Round-7 finite audit | **EXACT / REPRODUCIBLE** — all 11,481 frozen matrices pass; powers `r=1,...,5`; 145 distinct `D9` values and 11,336 collision rows beyond first occurrences |
 | Round-7 owner consequence | **NECESSARY INVARIANT ONLY** — collisions and incomplete conjugacy census block any orbit-to-Gaussian-prime-ideal interpretation; no metric prefix |
+| Round-8 universal theorem | **`[PROVED]`** — for commutative `R`, non-zero-divisor `m`, and `gamma=I+mA in SL_2(R)`, `D_m2=m^2 det(A)^2-4 det(A)` lies in `R` |
+| Round-8 A0 controls | **FROZEN FAMILIES COMPLETE 4/4; CANONICAL TYPE GATE INCOMPLETE 2/3** — full Gaussian ambient parent, integer level 3, Gaussian neighbor levels 2/4, and Eisenstein level 3; 6,396 exact matrices/witnesses; strictly these cover only `simpler parent system` and `neighboring dynamical parameters` in the evaluator list |
+| Round-8 specificity verdict | **REFUTED / STOP-SCOPED** — `D9` is a universal principal-congruence identity, not a Gaussian-specific owner mechanism |
+| Round-8 first-jet theorem | **`[PROVED]`** — `A mod m` is fixed by `Gamma((m))` conjugacy, negated by inversion, and multiplied by `r` under powers |
+| Round-8 first-jet audit | **EXACT / REPRODUCIBLE** — 145 `D9` values -> 517 joint descriptors; 372/11,336 collision rows separated; 10,964 remain; maximum bucket 505 -> 84 |
 | Remaining control mismatch | **OPEN** — marked generator count/presentation, exact Bianchi cusp count, covolume, length distribution, and full primitive spectra |
 | Full `Gamma((3))` / conjugacy completeness | **OPEN** — elementary generated subgroup word ball only |
 | Orbit-to-prime-ideal map | **OPEN** — no arithmetic labels attached |
@@ -53,12 +58,13 @@ Date: **2026-08-28**
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: Round 7 supplies the permitted different invariant and proves its
-exact algebraic laws, but its 145-to-11,481 collision profile shows that it
-does not solve ownership.  The smallest positive continuation is therefore an
-independently sourced owner-refinement theorem that separates trace collisions
-while preserving conjugacy, inversion, and repetition; absent that theorem,
-the owner map stays open.  The stopped phase statistic may not be reused to
-authorize a metric prefix.  The proxy tuple cannot be transferred to the
-complete flow, and any rational-prime push-forward must still preserve the
-frozen split/inert/ramified rules.
+Next gate: Round 8 shows that trace divisibility alone proves too much, but the
+mandatory control-type ledger remains `2/3`.  Before any positive promotion,
+execute a genuinely third evaluator-listed control type and derive an
+independently source-based Hecke- or ideal-valued refinement whose Gaussian
+splitting content fails on the integer and Eisenstein families, followed by
+exact conjugacy, inversion, repetition, and collision tests.  Until then, the
+owner map stays open.  Neither the stopped phase statistic nor universal D9
+integrality may authorize a metric prefix.  The proxy tuple cannot be
+transferred to the complete flow, and any rational-prime push-forward must
+still preserve the frozen split/inert/ramified rules.

@@ -33,7 +33,7 @@ Date: **2026-08-28**
 | Round-5 signed-`k` ledger | **EXECUTED / REPRODUCIBLE** — 36 owners per field, `k=+-1,+-2,+-3,+-4`, 576 rows, 48/48 Round-4 compatibility checks, zero orientation-owner fields |
 | Round-5 reproducibility | **PASS** — 14/14 tests, two byte-identical builds, tree SHA-256 `1c8665ea55826e73c6aeb5f8cd6386a8d1020976d23004e1216d05e2f1e8a138` |
 | Round-5 completeness boundary | **MARKED-CYCLIC ONLY** — full `Gamma`-conjugacy completeness is `NOT_ESTABLISHED`; equal exact trace squared never mints conjugacy credit |
-| Non-arithmetic genus-2 control | **`[PROVED] / SOURCE PACKAGE READY`** — `NAZARENKO-EXP-OCTAGON-G2`, `(a,alpha)=(exp(-1/10),pi/4)`, is source locked and independently proved non-arithmetic; four side-pairing owners are primitive; no systole or comparison is claimed |
+| Non-arithmetic genus-2 control | **`[PROVED] / SOURCE PACKAGE + SYSTOLE READY`** — `NAZARENKO-EXP-OCTAGON-G2`, `(a,alpha)=(exp(-1/10),pi/4)`, is source locked and independently proved non-arithmetic; four side-pairing owners are primitive; Round 8 proves its exact systole and finite cutoff completeness; no comparison is claimed |
 | Round-6 frozen-eight conjugacy closure | **`[PROVED] / PASS`** — eight explicit short words satisfy `x^-1*g*x=h` exactly in source-locked `SL(2)`; all eight historically withheld records are conjugate duplicates, with zero inverse fallbacks and zero new owner credits |
 | Round-6 owner consequence | **UNCHANGED** — 44 primitivity-certified records resolve to 36 credited inverse-paired classes plus eight exact duplicate records; 36 owners per field and 72 field-owner pairs |
 | Round-6 branch consequence | **BYTE-IDENTICAL REUSE** — the Round-5 576-row branch ledger remains canonical, SHA-256 `5f9cc50dfba3bb257a8a4f32c8bc5bd322a683788da4c9b900e9f8a5a62ee493` |
@@ -47,6 +47,13 @@ Date: **2026-08-28**
 | Round-7 primitive control owners | **`[PROVED]` FOR FOUR GENERATORS** — abelianization `Z^4` maps `g_j` to primitive basis vector `e_j`, excluding a proper-power representation; no systole or other-word credit |
 | Round-7 execution boundary | **NOT RUN BEYOND SOURCE PACKAGE** — no common cutoff, control census, branch comparison, target data, arithmetic labels, determinant, A2, or Route B |
 | Round-7 reproducibility | **PASS** — 22/22 tests, two byte-identical builds, core artifact SHA-256 `f1fbcc162907622e8f521dc08d56032afec7553810a9bbbcf3ba752728540386`, tree SHA-256 `a11917f6e9eab3bc48f1920b9727b0ec96a9c43c1f7ac13ab69984c005cfccef` |
+| Round-8 exact group engine | **PASS / NO DECIMAL EQUALITY KEYS** — Gaussian-integer polynomial matrices in `u=exp(-1/10)`, exact `PSU(1,1)` denominator normal forms, four inverse-pair identities, and the published relator all reduce exactly; every proof sign uses rational Taylor intervals |
+| Round-8 finite completeness | **`[PROVED]` THROUGH `Lambda=21/10`** — compact-polygon radius `D_F<3` converts every short conjugacy class to the exact identity-connected center sublevel component at `|alpha|^2<=20000`; 18,533 states are included and 108,616 distinct boundary states are rejected exactly |
+| Round-8 control systole | **`[PROVED]`** — `sys=2 acosh(1/(2exp(-1/5)-1))=2.043026655880296...`; all 18,532 nonidentity finite states meet the lower bound and `g0*g3` is an exact equality/primitive witness |
+| Round-8 common cutoff | **FROZEN / TARGET BLIND** — `Lambda_common=21/10`; chosen before traversal and before any branch outcome; neither surface census nor a magnetic comparison is run |
+| Round-8 source audit | **3 INCLUDED / 3 EXCLUDED** — exact locators, access date `2026-08-28`, source grade, claim support, and explicit boundaries; contextual algorithms are not credited with the project-local theorem |
+| Round-8 reproducibility | **PASS** — 24/24 tests, two byte-identical builds, core artifact SHA-256 `0a0ae16bbba5ed66958bc3714e91e038a8f80f3efc70224bfa5d9f87e48e6512`, tree SHA-256 `c30beebdd2e832d9375f55f1eab700868b7b967dfb5ee43fcecc0ba5f60919ac` |
+| Round-8 execution boundary | **NO CENSUS OR COMPARISON** — target/arithmetic labels remain zero; control/Bolza census, owner dedup, magnetic comparison, determinant, A2, and Route B remain not run/false |
 | Fixed degree-one candidate | `Δ^L` tracked separately; `FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN` |
 | Fixed-candidate orbit ownership | `FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED` |
 | Bold hypothesis | **`[HEURISTIC]`** — arithmetic-specific phase cancellation |
@@ -61,11 +68,11 @@ Date: **2026-08-28**
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: the contracted non-arithmetic control is selected and its strict
-source package passes 6/6.  Prove a rigorous control systole/lower bound or a
-finite word-to-length completeness certificate strong enough to predeclare one
-common geometric cutoff `Lambda`; only then freeze `Lambda` and run the
-target-blind matched census and magnetic comparison.  This progress applies
+Next gate: the contracted non-arithmetic control passes 6/6, its exact systole
+is proved, and the target-blind common cutoff `Lambda=21/10` is frozen.  Build
+the matched Bolza/control geometric census at that unchanged cutoff, with
+exact quotient-conjugacy, inverse-pair ownership, and primitivity deduplication,
+before generating any magnetic comparison outcome.  This progress applies
 only to the frozen signed-field even
 subsequence; zero field, odd `N`, full all-`N`, arbitrary twists, and fixed
 `Delta^L` remain open or `NOT_ESTABLISHED`.  The bounded-proxy evaluation is

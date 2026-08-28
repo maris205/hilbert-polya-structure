@@ -1,5 +1,20 @@
 # P27 code status
 
+Round 8 adds `round8_homology_renormalization.py` and its twelve-test suite.
+It source-locks the three Round-5 primitive-content-one owners, registers the
+pure homology cover as a new object, and emits 96 exact
+owner/level/renormalization rows plus 1,248 exact coefficients through degree
+12.  It never edits or relabels the Round-7 owner.
+
+```bash
+bash experiments/reproduce_round8.sh
+```
+
+Default mode verifies canonical bytes; `--refresh` is explicit.  The code
+checks the `N^4=N*N^3` deck-orbit decomposition and every coefficient of
+`(1-x^m)^(-k)` by exact integer arithmetic.  It does not define a full-flow
+determinant or read target data.
+
 Round 7 adds `round7_owner_factor_escape.py` and its twelve-test suite.  The
 builder hash-locks the Round-4 exact-order and Round-5 homology-lower-bound
 ledgers, emits 48 owner/level support rows and 54 fixed-prefix diagnostics, and

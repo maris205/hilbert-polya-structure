@@ -1,5 +1,35 @@
 # P28 experiment status
 
+## Round 8
+
+`EXECUTION_STATUS=ROUND8_EXACT_CONTROL_SYSTOLE_COMPLETENESS_COMPLETED`. Run:
+
+```bash
+./experiments/reproduce_round8.sh
+```
+
+Twenty-four tests pass.  Two isolated builds of the six-row source decision
+matrix, exact finite tile-ball certificate, validation, and standard output
+are byte-identical.  The core artifact SHA-256 is
+`0a0ae16bbba5ed66958bc3714e91e038a8f80f3efc70224bfa5d9f87e48e6512` and
+the artifact-tree SHA-256 is
+`c30beebdd2e832d9375f55f1eab700868b7b967dfb5ee43fcecc0ba5f60919ac`.
+
+Default mode rebuilds in temporary directories and verifies every canonical
+byte, including the receipt; it does not overwrite checked-in artifacts.  The
+maintainer refresh path is `./experiments/reproduce_round8.sh --refresh`.
+
+The run proves the exact non-arithmetic-control systole
+`2 acosh(1/(2exp(-1/5)-1))` and a finite word-to-length completeness theorem
+through `Lambda=21/10`.  It traverses 18,533 exact states, rejects 108,616
+distinct boundary states with rational interval signs, and uses `g0*g3` as an
+exact equality/primitive witness.  Thus the target-blind common cutoff
+`21/10` is frozen.
+
+This run does not execute a Bolza or control census, conjugacy-owner
+classification of the short states, a magnetic comparison, target/arithmetic
+labels, a determinant/A2 experiment, or Route B.
+
 ## Round 7
 
 `EXECUTION_STATUS=ROUND7_NONARITHMETIC_SOURCE_PACKAGE_COMPLETED`. Run:
@@ -149,6 +179,8 @@ high-energy control is a separate regime and cannot be used as evidence for the
 
 The non-arithmetic genus-2 metric is instantiated in Round 7, after Round 5
 froze the contract and Round 6 closed all eight same-homology gaps as exact
-conjugate duplicates.  The next experiment must first prove enough control
-length-spectrum completeness to freeze a target-blind common geometric cutoff;
-other regimes remain open.
+conjugate duplicates.  Round 8 proves its exact systole and freezes the
+target-blind common cutoff `21/10`.  The next experiment is the matched
+Bolza/control geometric census at that unchanged cutoff with exact
+conjugacy/inverse-pair/primitivity owner deduplication; other regimes remain
+open.

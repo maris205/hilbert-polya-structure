@@ -1,4 +1,4 @@
-# P24 results — Rounds 2–6
+# P24 results — Rounds 2–8
 
 The following deterministic artifacts were generated on 2026-08-27:
 
@@ -133,3 +133,25 @@ All rows pass.  The class split is 1 identity / 504 parabolic / 10,976
 loxodromic.  There are 145 distinct `D9` values and 11,336 rows beyond first
 occurrences.  This is exact finite-sample evidence for a necessary invariant,
 not a complete conjugacy ledger or Gaussian-prime-ideal owner map.
+
+## Round-8 universality and first-jet results
+
+- `round8_universal_congruence_controls.csv`: five executable subpanels for
+  four distinct A0 controls, totaling 6,396 exact matrices/witnesses;
+- `round8_d9_jet_collision_profile.csv`: one row for each of 145 `D9` values,
+  with signed-jet counts and residual matrix-descriptor collisions;
+- `round8_congruence_specificity_metrics.json`: theorem status, complete
+  `4/4` frozen-family execution, incomplete `2/3` canonical control-type gate,
+  first-jet statistics, decision, and Route firewall.
+
+All 6,392 principal-congruence control matrices pass the universal
+level-normalized discriminant formula.  Three of four full-ambient Gaussian
+witnesses fail `/9` integrality, proving that the level hypothesis is essential
+but Gaussian coefficients are not.  The A0 specificity verdict is therefore
+`REFUTED_D9_IS_NOT_GAUSSIAN_SPECIFIC`.
+
+On the 11,481 candidate rows, the signed first jet increases the joint
+descriptor count from 145 to 517, removes 372 of 11,336 `D9` collision rows,
+and reduces the largest bucket from 505 to 84.  The remaining 10,964 rows are
+matrix-descriptor collisions only; the incomplete sample does not license a
+distinct-owner interpretation.

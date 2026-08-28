@@ -1,4 +1,14 @@
-# P25 experiment status — Rounds 2 through 7 complete
+# P25 experiment status — Rounds 2 through 8 complete
+
+## Round 8
+
+`./experiments/reproduce_round8.sh` runs twelve tests, builds two independent
+artifact trees, requires byte identity, and verifies the checked-in outputs.
+The exact witness ledger has six family/geometry rows and the physical replay
+retains all 2,241 frozen owners.  Core SHA-256 is
+`9a29d8894b1ac81f9588fe221375bddc671898b9b08b409b0fa5a1d5a42a9014`.
+The default mode is read-only verification; `--refresh` is explicit.  The
+replay reads the locked physical ledger but no prime, zero, or resonance data.
 
 ## Round 7
 

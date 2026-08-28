@@ -35,6 +35,17 @@ law.  The reproducible 11,481-row audit passes every exact witness but yields
 only 145 distinct invariant values.  It is therefore paper-ready as a
 necessary-invariant theorem and collision result, not as an orbit-to-prime
 owner map.
+Round 8 supplies the corresponding specificity theorem.  All four frozen A0
+control families execute, but they instantiate only two of the three required
+canonical evaluator types, so the mandatory gate remains incomplete.  The
+normalized formula holds over every commutative principal-congruence ring
+under the stated non-zero-divisor hypothesis; 6,392 exact integer,
+neighboring-Gaussian-level, and Eisenstein control matrices all pass.
+Consequently `D9` is stopped as a Gaussian-specific owner mechanism.
+The signed first congruence jet is proved conjugacy/inversion/repetition
+compatible and raises the finite joint descriptor count from 145 to 517, but
+10,964 matrix collisions remain.  This is a significant paper-level negative
+specificity result plus a necessary owner refinement, not A1 ownership.
 The primary target is a `Q(i)` Dedekind-zeta calibration.  Rational-prime
 push-forward is secondary, and no Riemann-`zeta` A0 credit is claimed.
 The typed proxy tuple is

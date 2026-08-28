@@ -1,4 +1,4 @@
-# P24 Stage-1 research spine through Round 7
+# P24 Stage-1 research spine through Round 8
 
 Manuscript status: **NOT STARTED**.  This document freezes the paper-facing
 argument created by the research rounds; it is not an ARS Stage-2 draft.
@@ -20,7 +20,11 @@ control architecture rather than an arithmetic correspondence:
    comparison that closes the enumeration-type mismatch while identifying
    marked-generator-count/presentation as the remaining confound (Round 5);
 5. a 25-marking-per-system elementary-Nielsen audit that stops the current
-   phase statistic as marking-sensitive (Round 6).
+   phase statistic as marking-sensitive (Round 6);
+6. an exact level-`(3)` normalized trace-discriminant theorem plus a
+   distinct-owner same-`D9` collision witness (Round 7); and
+7. a universal principal-congruence theorem, four completed specificity
+   controls, and a quantified signed first-jet refinement (Round 8).
 
 The Round-4 advance is the first control in this project that simultaneously
 matches hyperbolic dimension, finite volume, cusp presence, manifold status,
@@ -109,6 +113,38 @@ source-derived arithmetic invariant and, simultaneously, a proof that `D9`
 is not an injective orbit owner.  It does not resurrect the Round-6 phase
 statistic or create a determinant/zero experiment.
 
+## Round-8 specificity theorem available for Theory and Results
+
+For every commutative ring `R`, non-zero-divisor `m`, and
+`gamma=I+mA in SL_2(R)`, exact determinant expansion proves
+
+```text
+(tr(gamma)^2-4)/m^2 = m^2 det(A)^2 - 4 det(A) in R.
+```
+
+The theorem converts `D9` integrality from a putative Gaussian clue into a
+universal congruence identity.  Four pre-frozen A0 controls are complete:
+the integer level-3 panel, Gaussian level-2/4 panels, and Eisenstein level-3
+panel pass on all 6,392 principal-congruence rows, while three explicit full
+ambient Gaussian matrices fail `/9` integrality after the level hypothesis is
+removed.  Thus the hypothesis is meaningful but its consequence is not
+Gaussian-specific.
+
+The same theorem package proves that the first jet `A mod m` is invariant under
+`Gamma((m))` conjugacy, changes sign under inversion, and scales by `r` under
+the `r`-th power.  Its sign class separates the Round-7 same-`D9` owner witness.
+Across the full finite panel, joint `(D9,J3)` descriptors increase from 145 to
+517 and reduce collision rows from 11,336 to 10,964; the largest bucket drops
+from 505 to 84.  No joint bucket is a singleton, and residual matrix collisions
+are not promoted to distinct-owner claims.
+
+Paper-facing disposition:
+
+```text
+STOP D9 as a Gaussian-specific arithmetic owner mechanism;
+RETAIN the universal theorem and signed first jet as a structural result.
+```
+
 ## Central falsification logic
 
 The decisive comparison is not “Bianchi versus any chaotic flow.”  Its first
@@ -141,6 +177,9 @@ or an intrinsic orbit-to-prime-ideal owner theorem.
   comparison with its rank/presentation limitation.
 - **Allowed:** the exact `D9` integrality, conjugacy/inversion invariance,
   repetition identity, and the frozen finite collision census.
+- **Allowed:** the universal principal-congruence formula, the four exact A0
+  control outcomes, the signed first-jet laws, and the bounded 145-to-517
+  descriptor refinement with its matrix-collision interpretation.
 - **Not allowed:** a full Bianchi primitive ledger, a presentation-invariant or
   metric-length comparison,
   an arithmetic-hypothesis verdict, an orbit-to-Gaussian-prime map, a full-flow

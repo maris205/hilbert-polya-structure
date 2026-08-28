@@ -23,7 +23,14 @@ Working title: *Complex Lengths and Holonomy-Twisted Orbit Traces on a Bianchi F
   presentation confound.  Round 6 then replaces that count mismatch by a
   canonical 25-marking-per-system elementary-Nielsen audit.  The control's
   standardized phase range has width `16.9153`, so the frozen exploratory rule
-  stops the current phase statistic as marking-sensitive.
+  stops the current phase statistic as marking-sensitive.  Round 7 proves an
+  exact level-normalized trace-discriminant theorem and a same-`D9`
+  distinct-owner witness.  Round 8 now proves that theorem over arbitrary
+  commutative principal-congruence rings, executes all four pre-frozen A0
+  control families, and stops `D9` as a Gaussian-specific owner mechanism
+  while retaining a quantified first-congruence-jet refinement.  Strict
+  evaluator accounting maps those families to only two canonical Route-A
+  control types, so the mandatory type gate remains `INCOMPLETE_2_OF_3`.
 - Primary arithmetic target: **Dedekind-zeta calibration for `Q(i)`**.  This does
   not confer Riemann-`zeta` A0 credit.
 - Formal Route-A tuple: the full Bianchi flow remains **unassigned**; the
@@ -322,6 +329,43 @@ sign; that residue is invariant under `Gamma((3))` conjugacy and changes sign
 under inversion.  Hence `D9` is provably non-injective on unoriented owners
 and is not promoted to a Gaussian-prime-ideal owner map or metric prefix.
 
+## Round-8 universal theorem and specificity obstruction
+
+`[PROVED]`: if `R` is a commutative ring, `m` is a non-zero-divisor, and
+`gamma=I+mA` lies in `SL_2(R)`, then
+
+```text
+(tr(gamma)^2-4)/m^2 = m^2 det(A)^2 - 4 det(A) in R.
+```
+
+Thus `D9` integrality is a universal principal-congruence identity, not a
+Gaussian-specific phenomenon.  All four pre-frozen A0 control families were
+executed:
+
+```text
+full SL_2(Z[i]) parent:       3/4 exact nonintegral /9 witnesses
+integer level 3:              485/485 pass
+Gaussian levels 2 and 4:      1,969/1,969 pass at each level
+Eisenstein level 3:           1,969/1,969 pass
+total exact matrices/witnesses 6,396
+```
+
+The parent failure shows that the principal-congruence hypothesis is real;
+the other controls show that its consequence is not field-specific.  The
+honest Route-A disposition is `STOP_SCOPED_D9_OWNER_MECHANISM`, not positive
+A0 credit.  Those four families instantiate only two canonical evaluator
+types, so the separate mandatory Route-A type gate remains
+`INCOMPLETE_2_OF_3_CANONICAL_TYPES`.
+
+Round 8 also proves that `J_m(gamma)=((gamma-I)/m) mod m` is fixed by
+`Gamma((m))` conjugacy, negated by inversion, and multiplied by `r` under the
+`r`-th power.  On the 11,481-row Gaussian panel, the signed first jet raises
+the joint descriptor count from 145 `D9` classes to 517 `(D9,J3)` classes and
+separates the exact Round-7 owner witness.  It removes 372 of 11,336 matrix
+collision rows, leaving 10,964; the largest bucket falls from 505 to 84 and no
+joint bucket is a singleton.  This is a necessary owner refinement, not a full
+conjugacy classification or prime-ideal map.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -346,6 +390,10 @@ and is not promoted to a Gaussian-prime-ideal owner map or metric prefix.
 - [Round-7 freeze contract](experiments/round7_trace_discriminant_freeze.json)
 - [Round-7 validation](experiments/round7_validation.md)
 - [Round-7 typed proxy Route-A record](../../evaluations/route_a/P24-BIANCHI-MARKED-WORD-PROXY/2026-08-28-round7.yaml)
+- [Round-8 universal theorem and specificity obstruction](notes/round8_universal_congruence_theorem.md)
+- [Round-8 freeze contract](experiments/round8_congruence_specificity_freeze.json)
+- [Round-8 validation](experiments/round8_validation.md)
+- [Round-8 typed proxy Route-A record](../../evaluations/route_a/P24-BIANCHI-MARKED-WORD-PROXY/2026-08-28-round8.yaml)
 - [Stage-1 paper spine](paper/stage1_research_spine.md)
 
 No manuscript, orbit-to-prime-ideal map, full-flow Route assignment, A2

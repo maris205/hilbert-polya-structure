@@ -78,10 +78,28 @@ four side-pairing generators primitive.  This is a paper-level Methods and
 Controls result.  It does not supply a control systole, common cutoff, finite
 control census, magnetic comparison, or arithmetic-specific conclusion.
 
+Round 8 proves the missing theorem instead of treating a finite word scan as
+complete.  With `u=exp(-1/10)`, every group element is represented by an exact
+Gaussian-integer polynomial matrix over
+`Delta^q sqrt(Delta)^p`, and rational Taylor intervals decide every radius and
+trace sign.  A compact-octagon argument proves that the exhausted 18,533-state
+tile component contains a conjugate of every class of length at most `21/10`;
+108,616 distinct boundary states are excluded exactly.  The global control
+systole is
+
+```text
+2 acosh(1/(2exp(-1/5)-1)) = 2.043026655880296...
+```
+
+with primitive equality witness `g0*g3`.  The target-blind common cutoff
+`Lambda=21/10` is therefore frozen.  This is a paper-facing theorem and
+Methods result, but no matched geometric census or magnetic comparison is run.
+
 The paper-facing theorem chain and remaining evidence obligations are tracked
 in [the Stage-1 research spine](stage1_research_spine.md).  Stage 2 writing is
-not authorized: the eight named conjugacy ambiguities are closed and the
-matched non-arithmetic geometry is source verified, but a common-cutoff census
+not authorized: the eight named conjugacy ambiguities are closed, the matched
+non-arithmetic geometry is source verified, and its exact systole/cutoff
+completeness is proved, but the matched census at the already frozen cutoff
 must still determine whether the result is arithmetic-specific or a generic
 hyperbolic calibration.
 

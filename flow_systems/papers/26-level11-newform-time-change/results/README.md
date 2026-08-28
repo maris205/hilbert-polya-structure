@@ -1,5 +1,28 @@
 # P26 generated results
 
+## Round 8 — complete exact finite taxonomy
+
+- `round8_exact_instance_taxonomy_ledger.csv`: 138 exact rows with regenerated
+  cycle owners and primitivity certificates, rational `Y_0(11)`/compact
+  homology coordinates, real involution, exact normalized period ratios, and
+  mutually exclusive full-kernel, projection-only, nonkernel, or degenerate
+  classifications.
+- `round8_exact_group_moment_taxonomy_ledger.csv`: 165 rows for 55 word/prime
+  groups and three predeclared scalar laws.  Each row records exact rational
+  degree moments, required moments, signed residuals, failure mechanism,
+  exact group class, and the inherited Round-6 numerical cross-check.
+- `round8_summary.json` and `round8_artifact_manifest.json`: the full
+  prime/law/count tables, theorem statement, source locks, claim boundary, and
+  source/output SHA-256 bindings.
+
+The exact instance split is 2 full complex-period kernels, 2 nonzero
+real-projection-only kernels, 134 true nonkernels, and 0 degenerate or
+unresolved rows.  Both primary laws have 4/55 exact survivors and 51/55 exact
+failures; the secondary `a_p^2-p` control fails 55/55.  All 165 exact verdicts
+agree with the Round-6 numerical statuses, with maximum normalized moment
+cross-check residual `1.9895196601282805e-13`.  The result completes the
+frozen finite taxonomy but does not promote A2 or open Route B.
+
 ## Round 7 — exact `p=5` survivor classification
 
 - `round7_exact_survivor_classification_ledger.csv`: four frozen survivor
@@ -39,7 +62,8 @@ Route B.
 The inverse-pair formulas and finite-multiset moment criterion are `[PROVED]`;
 as recorded at the end of Round 6, the period-weighted outcomes, including
 four `p=5` survivors, were `[NUMERICAL_OBSERVATION]`.  Round 7 upgrades those
-four rows exactly.  The formal tuple is
+four rows exactly, and Round 8 replaces all 55 frozen group verdicts by exact
+rational square-sum identities.  The formal tuple is
 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` with overall
 `ROUTE_A_EXPLORATORY`.  A2 is `FAIL/NOT_TESTABLE`: no complete primitive
 population, global product/continuation, root count, or zero comparison was

@@ -38,6 +38,10 @@ Date: **2026-08-28**
 | Round-7 coefficient-stability theorem | **`[PROVED]`** — every fixed primitive base-owner factor is eventually `1` modulo every fixed power; every fixed finite owner panel leaves every bounded coefficient and time window |
 | Round-7 finite replay | **REPRODUCIBLE** — 48 owner/level rows plus 54 fixed-prefix diagnostics, 12/12 tests, two byte-identical builds; core SHA-256 `551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845` |
 | Round-7 evidence firewall | **PASS** — 24 cusped exact orders remain loop diagnostics with primitivity `NOT_ESTABLISHED`; 24 cocompact rows remain primitive-homology-certified lower bounds with full orders not enumerated |
+| Round-8 new candidate | **REGISTERED SEPARATELY** — `P27-HOMOLOGY-RENORMALIZED-GEODESIC-PANEL`; pure homology cover, new `1/N` clock and new `1/N^3` logarithmic multiplicity normalization |
+| Round-8 four-quadrant theorem | **`[PROVED]`** — either intervention alone fails; both recover each base finite-owner factor exactly at every level |
+| Round-8 exact replay | **REPRODUCIBLE** — 96 quadrant rows plus 1,248 coefficient rows, 12/12 tests, two byte-identical builds; core SHA-256 `a1b588724dacb2ab2986326a7a5e1c6aec654c61538c1465e26564357b568b33` |
+| Round-8 new-candidate Route tuple | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_REJECTED` |
 | Residual bold hypothesis | **`[HEURISTIC]`** — renormalized tower statistic retains congruence splitting |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | A2--A4 | **FAIL / NOT_TESTABLE** — the same owner has no primitive periodic-orbit population or determinant |
@@ -58,7 +62,11 @@ confirmation remains pending.  Round 7 proves that fixed-owner finite-level
 factors also lose every nontrivial fixed coefficient prefix under the common
 clock.  Finite-level order growth cannot replace its owner or alter
 `Per(M_infinity)=empty`; a renormalized collective statistic remains a new,
-unevaluated candidate rather than a rescue of this record.
+separately evaluated candidate rather than a rescue of this record.  Round 8
+now proves the exact four-case calibration for that new finite panel: raw time
+causes support escape, time-only rescaling causes `N^3` multiplicity divergence,
+normalization-only still causes support escape, and both changes return the
+base factor.  Its genericity keeps A0 failed and the full determinant absent.
 
 Evidence labels follow `skills/route-a-evaluator.md`.
 `PROVED_A1_OBSTRUCTION` is a local theorem-progress tag; the formal verdict is

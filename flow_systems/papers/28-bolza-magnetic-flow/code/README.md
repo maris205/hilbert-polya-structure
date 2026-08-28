@@ -1,5 +1,36 @@
 # P28 code status
 
+## Round 8
+
+`build_round8_control_systole_certificate.py` implements the finite theorem
+frozen before computation.  It represents every traversed control element as
+a Gaussian-integer polynomial `PSU(1,1)` matrix divided by
+`Delta^q*sqrt(Delta)^p`, cancels common `Delta` factors, and canonicalizes the
+projective sign.  Four generator/inverse pairs and the published relator reduce
+to the exact identity.  Group equality never uses rounded matrix hashes.
+
+Exact `Fraction` Taylor intervals prove the polygon-radius, cutoff, and center
+guards and decide every nonzero trace-comparison polynomial.  Breadth-first
+side-neighbor expansion closes the identity-connected
+`|alpha|^2<=20000` component with 18,533 included states and 108,616 distinct
+rejected boundary states.  The compact-polygon lemma then makes the result
+complete for conjugacy classes of length at most `21/10`; the trace signs prove
+the exact systole and `g0*g3` equality witness.
+
+`test_round8_control_systole_certificate.py` has twenty-four tests covering
+source/upstream locks, exact inverses and relator, all rational guards, frozen
+state counts/digests, systole signs and primitivity, cutoff authorization, and
+the census/comparison/A2/Route-B firewalls.  Canonical reproduction is:
+
+```bash
+./experiments/reproduce_round8.sh
+```
+
+Default mode is verify-only; `--refresh` is explicit.  The builder freezes
+`Lambda=21/10` only after the theorem passes.  It does not run either surface
+census, classify the 144 equality group elements into conjugacy owners, or
+generate a magnetic comparison.
+
 ## Round 7
 
 `build_round7_nonarithmetic_control_gate.py` digest-binds the pre-computation

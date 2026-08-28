@@ -1,5 +1,15 @@
 # P27 experiment status
 
+## Round 8
+
+Run `bash experiments/reproduce_round8.sh`.  Twelve tests and two isolated
+builds must pass byte-for-byte before the checked-in outputs are verified.  The
+replay contains 96 quadrant rows and 1,248 exact coefficient rows; core
+SHA-256 is
+`a1b588724dacb2ab2986326a7a5e1c6aec654c61538c1465e26564357b568b33`.
+The new-owner, nonresidual-tower, finite-panel, Route, and target-data
+boundaries are all machine-checked.
+
 ## Round 7
 
 Run `bash experiments/reproduce_round7.sh`.  Twelve tests and two isolated

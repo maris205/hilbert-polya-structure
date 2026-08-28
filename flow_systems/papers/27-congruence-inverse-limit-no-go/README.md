@@ -55,6 +55,37 @@ Orbits: a Compact-versus-Cusped Residual-Tower Ownership Audit*
   escape without inferring primitivity for the three cusped loop rows.  Core
   SHA-256 is
   `551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845`.
+- Round-8 collective-renormalization theorem: **`[PROVED]`** for a separately
+  registered pure homology-cover finite-panel calibrator.  For each primitive
+  content-one owner, the deck order, lift count, and physical period are
+  `N`, `N^3`, and `N ell(g)`.  Physical time alone gives support escape;
+  `1/N` time alone gives multiplicity divergence; `1/N^3` logarithmic
+  normalization alone still gives support escape; applying both recovers
+  `(1-x_g)^(-1)` exactly at every level.  The 96 quadrant rows and 1,248 exact
+  coefficient rows have core SHA-256
+  `a1b588724dacb2ab2986326a7a5e1c6aec654c61538c1465e26564357b568b33`.
+  This new generic finite-panel object is `ROUTE_A_REJECTED`; it does not alter
+  the Round-7 same-owner verdict.
+
+### Round-8 four-quadrant collective renormalization — 2026-08-28
+
+For `H_N=ker(Gamma -> H_1(Sigma;Z/NZ))`, the genus-two deck group has degree
+`N^4`.  A primitive-content-one owner has order `N`, so its preimage has `N^3`
+primitive components of period `N ell(g)`.  The four clock/multiplicity choices
+are therefore
+
+```text
+(1-x_g^N)^(-N^3),  (1-x_g)^(-N^3),
+(1-x_g^N)^(-1),    (1-x_g)^(-1).
+```
+
+Only the last row, which explicitly changes both clock and normalization,
+recovers the base finite-owner factor.  The pure homology tower is not
+residual—its intersection is the commutator subgroup—and the result is generic
+for every marked genus-two metric.  It is a proves-too-much calibration, not a
+rational-prime candidate or full determinant.  See the
+[Round-8 theorem](notes/round8_homology_renormalization_theorem.md) and
+[paper research spine](paper/round8_research_spine.md).
 
 ### Round-7 same-owner coefficient escape — 2026-08-28
 
@@ -271,6 +302,11 @@ is a local theorem-progress tag; the formal same-owner verdict is `A1_FAIL`.
 - [Round-7 validation](experiments/round7_validation.md)
 - [Round-7 paper research spine](paper/round7_research_spine.md)
 - [Round-7 Route-A evaluation](../../evaluations/route_a/P27-CONGRUENCE-INVERSE-LIMIT-GEODESIC-FLOW/2026-08-28-round7.yaml)
+- [Round-8 homology-renormalization theorem](notes/round8_homology_renormalization_theorem.md)
+- [Round-8 freeze contract](experiments/round8_homology_renormalization_freeze.json)
+- [Round-8 validation](experiments/round8_validation.md)
+- [Round-8 paper research spine](paper/round8_research_spine.md)
+- [Round-8 new-owner Route-A evaluation](../../evaluations/route_a/P27-HOMOLOGY-RENORMALIZED-GEODESIC-PANEL/2026-08-28-round8.yaml)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
 

@@ -1,4 +1,4 @@
-# P25 code status — Rounds 2 through 7 executed
+# P25 code status — Rounds 2 through 8 executed
 
 `round2_three_disk_ledger.py` performs four separated operations:
 
@@ -96,3 +96,17 @@ rendering, and Route firewalls.
 
 The default command verifies checked-in canonical bytes.  Use the explicit
 `--refresh` argument only when intentionally rebuilding those artifacts.
+
+Round 8 adds `round8_roof_nontransfer.py`.  It source-locks the complete
+Round-2 physical ledger, checks the exact symmetric period-two and period-three
+length formulas at all three geometries, and emits a 2,241-row scalar-clock
+replay.  The theorem is the exact periodic-average argument in the note; the
+finite rows are not used to infer cohomology.
+
+```bash
+./experiments/reproduce_round8.sh
+```
+
+Twelve tests cover freeze/input hashes, exact geometric identities, the
+minimax bound, all 2,241 owner rows, the `3/744` per-geometry scalar split,
+clock-owner firewalls, source bindings, receipts, and byte determinism.

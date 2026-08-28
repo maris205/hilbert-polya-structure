@@ -3,7 +3,7 @@
 Working title: *Semiclassical Tensor-Power Trace on the Bolza Surface*.
 
 Manuscript drafting has not started.  This spine records the paper-facing
-result structure accumulated through Round 7 while ARS remains at Stage 1.
+result structure accumulated through Round 8 while ARS remains at Stage 1.
 
 ## Central question
 
@@ -62,6 +62,19 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
    owners are also distinct.  This is `[PROVED]` for the six-item source
    package and four named owners,
    not a systole, short-spectrum, or magnetic-comparison theorem.
+8. **Exact control systole and finite cutoff-completeness theorem.**  Write
+   each control word exactly as a Gaussian-integer polynomial matrix divided
+   by `Delta^q sqrt(Delta)^p`, where
+   `Delta=(1-u^2)(2u^2-1)` and `u=exp(-1/10)`.  Exact `PSU(1,1)`
+   canonicalization and rational interval signs close the identity-connected
+   center sublevel component at `|alpha|^2<=20000`: 18,533 included states
+   and 108,616 rejected boundary states.  A compact-fundamental-polygon lemma
+   proves that every class of length at most `21/10` has a conjugate in this
+   component.  Every nonidentity state has length at least
+   `2 acosh(1/(2exp(-1/5)-1))`, and `g0*g3` realizes equality.  Thus that
+   expression is the exact control systole, the witness is primitive, and the
+   target-blind common cutoff `Lambda=21/10` is frozen.  This is `[PROVED]`;
+   it is not yet a geometric census, owner classification, or comparison.
 
 ## Main result table currently available
 
@@ -86,7 +99,9 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
 | Round-6 exact conjugacy closure | `8/8` direct `SL(2)` identities; `0` inverse fallbacks; `0` new owners |
 | Non-arithmetic source-package gate | `PASS_READY_6_OF_6`; four sources; exact named control selected |
 | Non-arithmetic control primitive owners | `4`; certified by primitive `Z^4` abelianization classes |
-| Control systole / common cutoff / census | `NOT_CLAIMED / NOT_FROZEN / NOT_RUN` |
+| Control exact systole | `2 acosh(1/(2exp(-1/5)-1))=2.043026655880296...` |
+| Control finite tile certificate | `18,533` included states; `108,616` exactly rejected boundary states; maximum discovery depth `11` |
+| Common geometric cutoff / census | `Lambda=21/10 FROZEN / NOT_RUN` |
 | Target/arithmetic labels | `0` |
 
 ## What makes the result paper-facing
@@ -102,7 +117,10 @@ eight same-homology gaps as exact conjugate duplicates, validating rather than
 increasing the 36-owner count.  Round 7 then removes the missing-control-source
 blocker: the comparison now has a real, exactly non-arithmetic genus-two
 geometry and four primitive seed owners, with every source claim and boundary
-recorded in a reproducible matrix.
+recorded in a reproducible matrix.  Round 8 removes the next logical blocker:
+the control has an exact global systole proof and a finite word-to-length
+certificate strong enough to freeze one common geometric cutoff before any
+comparison output is inspected.
 
 ## What is not yet a paper conclusion
 
@@ -115,8 +133,9 @@ recorded in a reproducible matrix.
 - No rational-prime or prime-ideal correspondence is assigned.
 - No arithmetic-specific cancellation has been measured.
 - The zero-field theorem remains open.  The metric-matched non-arithmetic
-  geometry is instantiated, but its control systole/finite length-spectrum
-  completeness and magnetic comparison are not.
+  geometry, exact systole, and finite completeness through `21/10` are now
+  proved, but the matched geometric census, owner deduplication, and magnetic
+  comparison are not run.
 - Odd `N`, arbitrary flat twists, full all-`N`, and fixed `Delta^L` remain
   open or `NOT_ESTABLISHED`.
 - The full Paper-28 candidate has no formal Route-A tuple; a separate bounded
@@ -133,11 +152,14 @@ recorded in a reproducible matrix.
 6. Bounded marked-cyclic census, exact eight-record conjugacy closure, and
    remaining quotient-conjugacy boundary.
 7. Exact source-verified non-arithmetic metric control and four-owner theorem.
-8. Arithmetic discrimination result or explicit A0 failure.
+8. Exact control systole and finite tile-ball cutoff-completeness theorem.
+9. Matched geometric census and arithmetic discrimination result or explicit
+   A0 failure.
 
-The paper is not ready to leave Stage 1 until sections 7--8 have executable
-evidence.  Section 7 now has its six-item source package and exact seed theorem,
-but not its common-cutoff census.  The immediate next artifact is a rigorous
-control systole/lower bound or finite word-to-length completeness certificate
-that permits one target-blind common geometric cutoff.  Until then no branch
-comparison or arithmetic-discrimination conclusion is authorized.
+The paper is not ready to leave Stage 1 until section 9 has executable
+evidence.  Sections 7--8 now have the six-item source package, exact seed
+theorem, exact systole, and finite cutoff-completeness certificate.  The
+immediate next artifact is the matched Bolza/control geometric census at the
+already frozen `Lambda=21/10`, with exact conjugacy, inverse-pair owner, and
+primitivity deduplication.  No branch comparison or arithmetic-discrimination
+conclusion is authorized before that census is complete.

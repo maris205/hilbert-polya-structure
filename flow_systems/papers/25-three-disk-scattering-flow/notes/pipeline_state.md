@@ -23,11 +23,14 @@ Date: **2026-08-28**
 | Round-7 symbolic family | **`[PROVED]`** — for every integer `q>=2`, `A_q=J_q-I_q` has exact primitive-count, trace, Euler-product, and determinant formulas |
 | Round-7 exact replay | **REPRODUCIBLE** — `q=2,...,8`, 84 trace/count rows and 182 coefficient rows, 12/12 tests, two byte-identical builds, zero mismatches; core SHA-256 `9c3daaa1feffa23090cc4edf5c3cdf0398389f814ef4f0f6b14cad254f23d4d9` |
 | Round-7 family phase result | **`[PROVED] / STOP_SCOPED`** — collision parity is universally `zeta_(q,-1)(z)=zeta_(q,+1)(-z)` and therefore remains non-arithmetic |
+| Round-8 roof theorem | **`[PROVED]`** — exact period-two/three means `d-2a` and `d-sqrt(3)a` differ, so the physical roof is not cohomologous to a constant |
+| Round-8 scalar-transfer audit | **REFUTED / REPRODUCIBLE** — no owner/repetition-preserving `z=exp(-cs)` transfer; 6 exact witness rows, 2,241 locked replay rows, 12/12 tests, core SHA-256 `9a29d8894b1ac81f9588fe221375bddc671898b9b08b409b0fa5a1d5a42a9014` |
 | Half-density kill control | **EXECUTED** — 747 complete neighboring-parameter triplets plus shuffled/random/composite controls |
 | `PROVES_TOO_MUCH` verdict | **`[STOP_SCOPED]`** for half-density persistence as arithmetic evidence |
 | Proposal stage | Stage 1 / typed A1--A2 negative-control calibration |
 | Typed symbolic Route-A tuple | `THREE-DISK-NO-REPEAT-MASLOV-SYMBOLIC = (A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_REJECTED` |
 | Round-7 family Route-A tuple | `P25-Q-SYMBOL-NO-REPEAT-PHASE-CALIBRATOR = (A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_REJECTED` |
+| Round-8 Route effect | tuple unchanged and still owned by the unit-roof symbolic object; physical scalar-clock credit transfer is now exactly refuted |
 | Physical three-disk Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
@@ -53,6 +56,11 @@ The new result is an infinite-family negative-control theorem, not a physical-
 flow promotion.  Any positive physical branch would still require a different
 source-derived phase-sensitive observable, a physical flight-length
 determinant, and an explicit arithmetic owner.
+
+Round 8 closes the simplest such bridge: two exact symmetric physical owners
+already have incompatible mean roofs, so no one-parameter clock substitution
+can import the symbolic determinant.  A genuine nonconstant-roof physical
+operator remains a separately owned open question.
 
 Evidence tokens are limited to the vocabulary in
 `skills/route-a-evaluator.md`; `UNASSIGNED` is a pipeline state.

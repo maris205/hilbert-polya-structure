@@ -37,7 +37,7 @@ Date: **2026-08-28**
 | Round-5 reproducibility | **REPRODUCIBLE** — 11/11 tests; two byte-identical runs; tree SHA-256 `7b21a0c25ee269d28b53cd8c0551c8b2a977307641c2d07be78810be2e975731` |
 | Round-6 inverse-pair second variation | **PROVED / ORIENTATION-EVEN** — inverse contributions add as `2s^2 I^2 sum_r r exp(-srL)`, with the frozen stability denominator in the Selberg-type kernel |
 | Round-6 quadratic moment criterion | **PROVED** — any predeclared `p`-only scalar all-`s` law on the finite output multiset is equivalent to `Q_1=lambda_p I(M)^2`, `Q_d=0` for `d>1` |
-| Round-6 primary finite audits | **PASS WITH NEGATIVE RESULT / MIXED STATUS AFTER ROUND 7** — `a_p` and `a_p^2` each fail 51/55 group moments and 153/165 rows per kernel; the four `p=5` positives are now exact locally |
+| Round-6 primary finite audits | **PASS WITH EXACT NEGATIVE RESULT AFTER ROUND 8** — `a_p` and `a_p^2` each fail 51/55 group moments and 153/165 rows per kernel; all 55 group verdicts are now exact locally |
 | Round-6 secondary control | **NEGATIVE CONTROL ONLY** — `a_p^2-p` fails 55/55 groups and 165/165 rows per kernel |
 | Round-6 scope | **FINITE/LOCAL ONLY** — 552 inverse-pair/repetition rows, 110 moment rows, 165 weighted rows; no complete primitive enumeration, global continuation, determinant root count, or zero comparison |
 | Round-6 reproducibility | **REPRODUCIBLE** — 12/12 tests; two byte-identical runs; tree SHA-256 `fc553aa18bc4fb54d70ea8f4c0bdbc41efc3c0905b3f2942c49e1f6f8c62f864` |
@@ -45,6 +45,11 @@ Date: **2026-08-28**
 | Round-7 four-survivor classification | **PROVED / 4 OF 4** — all degree-one real-period identities are exact; degree-five split is two compact-zero full kernels plus two nonzero anti-invariant purely imaginary periods |
 | Round-7 finite `a_5^2` group moments | **EXACT SURVIVORS 4/4** — zero floating-quadrature artifacts and zero unresolved rows; local only |
 | Round-7 reproducibility | **REPRODUCIBLE** — 13/13 tests; two byte-identical runs; tree SHA-256 `bdfa8f5baaeef47f1bfd8482e8b459d2bd0606cdbb9cdcf0c441a8f65829d678` |
+| Round-8 real-period coordinate | **PROVED** — `tau(x,y,z)=(-x,y+z,-z)`, compact `+1` eigenspace dimension one, and exact normalized period ratio `k(owner)/k(source)` with `k=2y+z` |
+| Round-8 complete instance taxonomy | **PROVED / 138 OF 138** — 2 full complex kernels, 2 real-projection-only kernels, 134 true nonkernels, 0 degenerate/unresolved; every owner and primitivity certificate regenerated exactly |
+| Round-8 complete group taxonomy | **PROVED / 55 OF 55** — `a_p` and `a_p^2` each have 4 exact survivors and 51 exact failures; secondary `a_p^2-p` has 55 exact failures; 165/165 exact verdicts agree with inherited numerical cross-checks |
+| Round-8 failure explanation | **COMPLETE FOR FROZEN FINITE MULTISET** — all 51 primary failures have nonzero rational square mass at a nonunit Hecke degree; the four positives are exactly the full/projection kernels |
+| Round-8 reproducibility | **REPRODUCIBLE** — 18/18 tests; two byte-identical runs; tree SHA-256 `cc36c1f952c9ce89050996f4bb4c9905571f9ef09a0d7115be8a985e02a5621d` |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | Formal Route-A tuple | **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`** |
 | Overall Route-A status | **`ROUTE_A_EXPLORATORY`** — no promotion |
@@ -67,7 +72,10 @@ orientation-even question: the intrinsic inverse-pair second variation is
 nonzero in general, but a scalar Hecke law requires new quadratic moments and
 fails in 51/55 frozen groups for both primary scalars.  The four numerical
 `p=5` survivors are now exact locally: two are compact-homology zero and two
-are nonzero real-projection kernels.  This closes their numerical-status gap
-but does not create prime ownership or a global determinant.  The formal
-evaluation remains exploratory, A2 is `FAIL/NOT_TESTABLE`, and Route B remains
-disallowed.
+are nonzero real-projection kernels.  Round 8 extends the same exact model to
+all 138 frozen instances.  It proves that the other 134 are true nonkernels
+and replaces every one of the 55 numerical group verdicts by a rational
+square-sum identity.  This completes the frozen finite taxonomy but does not
+create prime ownership, a global conjugacy census, or a global determinant.
+The formal evaluation remains exploratory, A2 is `FAIL/NOT_TESTABLE`, and
+Route B remains disallowed.

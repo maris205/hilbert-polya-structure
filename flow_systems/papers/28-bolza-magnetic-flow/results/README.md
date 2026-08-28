@@ -1,5 +1,44 @@
 # P28 results and owner ledgers
 
+## Round-8 exact control systole and finite completeness
+
+`round8_control_systole_source_matrix.csv` records three included and three
+excluded sources/candidate clusters, each with exact locator, access date,
+grade, content-access status, claim support, and explicit claim boundary.  The
+Nazarenko preprint owns the exact control geometry; peer-reviewed Voight and
+Despre--Kolbe--Parlier--Teillaud papers supply only algorithmic context.  None
+is credited with the project-local tile-ball or systole theorem.
+
+`round8_control_finite_ball_certificate.json` records
+`PASS_EXACT_SYSTOLE_AND_FINITE_COMPLETENESS`.  Exact polynomial `PSU(1,1)`
+normal forms close an 18,533-state identity-connected center sublevel
+component and exactly reject 108,616 distinct boundary states.  Its sorted
+included/rejected state-stream SHA-256 values are respectively
+`814f72badce2cc90e8e26edc2a7db18d52c4c334c0f5dfc5bf7d8e4a90dcf545`
+and
+`3017c21285daad5a1173b076c9b5700975f67cdbbdaa8a6218e80d4bc89da6f4`.
+
+The compact-polygon certificate is complete for every conjugacy class of
+length at most `21/10`.  All 18,532 nonidentity included states have length at
+least
+
+```text
+2 acosh(1/(2exp(-1/5)-1)) = 2.043026655880296...
+```
+
+and `g0*g3` is an exact equality polynomial, proving the global control
+systole and witness primitivity.  The 144 equality states inside the component
+include conjugates/inverses and are not asserted to be 144 owner classes.
+
+`round8_control_systole_validation.json` records `PASS`, binds the Round-7
+upstream bytes and Round-8 freeze, and authorizes the target-blind common
+cutoff `Lambda=21/10`.  It also records that neither surface census, the
+magnetic comparison, target labels, A2, nor Route B was run.  Two builds are
+byte-identical with core SHA-256
+`0a0ae16bbba5ed66958bc3714e91e038a8f80f3efc70224bfa5d9f87e48e6512`
+and tree SHA-256
+`c30beebdd2e832d9375f55f1eab700868b7b967dfb5ee43fcecc0ba5f60919ac`.
+
 ## Round-7 source-verified non-arithmetic control
 
 `round7_nonarithmetic_source_matrix.csv` records four included sources from an

@@ -1,5 +1,28 @@
 # P26 code
 
+## Round 8
+
+`round8_exact_taxonomy.py` consumes the SHA-locked Round-4 cycle-owner ledger
+and Round-6 quadratic-moment ledger.  It regenerates every one of the 138
+cycle owners, reruns its exact primitivity certificate, computes rational
+Schreier homology and real-structure coordinates, and emits an exhaustive
+four-way instance taxonomy.  It then converts every normalized real period to
+the exact rational ratio `k(owner)/k(source)` and classifies all 55 groups for
+the three frozen scalar laws by rational square-sum identities.
+
+The builder uses no floating-point zero decision.  Round-6 quadrature values
+are cross-checks only; the proof layer is exact `Fraction` arithmetic.
+
+Run its eighteen tests with:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_round8_exact_taxonomy.py
+```
+
+Default verification and explicit refresh are owned by
+`../experiments/reproduce_round8.sh` and
+`../experiments/reproduce_round8.sh --refresh`.
+
 ## Round 7
 
 `round7_exact_survivors.py` regenerates the four frozen `p=5` degree-one and

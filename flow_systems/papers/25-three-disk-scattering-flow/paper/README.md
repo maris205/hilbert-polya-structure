@@ -45,3 +45,11 @@ reciprocal of `(1-(q-1)u z)(1+u z)^(q-1)`, and collision parity remains only
 `z -> -z`.  This is the paper's new analytic progress: it shows that exact
 primitive-to-determinant wiring persists across arbitrary alphabet size while
 arithmetic A0 remains absent.  See [the Round-7 research spine](round7_research_spine.md).
+
+Round 8 supplies an exact clock-ownership theorem.  The period-two and
+period-three physical means differ by `(2-sqrt(3))a`, so the physical roof is
+not cohomologous to a constant and the unit-roof determinant cannot be imported
+through a single scalar substitution.  This turns the prior type warning into
+a theorem with a quantitative minimax lower bound and a locked 2,241-row
+replay.  See [the Round-8 research spine](round8_research_spine.md).  Stage 2
+and manuscript drafting remain unauthorized.
