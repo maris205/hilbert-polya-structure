@@ -1,0 +1,475 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Fset}{\mathcal F}
+\newcommand{\Xfr}{X_{\mathrm{fr}}}
+
+\title[Shifted Fredkin frozen configurations]{Frozen Configurations of a Shifted Fredkin Block Network:\ A Transfer Matrix, Closed Counts, and a Spatial Zeta Function}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 37B15, 68Q80, 05A15}
+\keywords{Fredkin gate, reversible block dynamics, controlled swap, shift of finite type, transfer matrix, spatial zeta function}
+
+\begin{document}
+
+\begin{abstract}
+We study a binary ring of length $3m$ updated by two staggered layers of
+control-on-one three-bit Fredkin gates.  The first layer acts on aligned triples;
+the second acts on triples shifted by one site.  Although the full map is a
+Hamming-weight-preserving permutation, its frozen configurations admit a
+rank-two transfer description.  We prove that they form a nearest-neighbor
+shift of finite type on the eight three-bit blocks, with an explicit adjacency
+matrix $M$ satisfying
+\[
+ \det(\lambda I-M)=\lambda^6(\lambda^2-5\lambda+3).
+\]
+Consequently, the number $f_m$ of frozen configurations is
+\[
+ f_m=\left(\frac{5+\sqrt{13}}2\right)^m+
+     \left(\frac{5-\sqrt{13}}2\right)^m,
+\]
+and obeys $f_m=5f_{m-1}-3f_{m-2}$ with $f_1=5$ and $f_2=19$.
+The associated \emph{spatial} frozen-set zeta function is
+$(1-5z+3z^2)^{-1}$.  This is the zeta function of the block shift on the
+frozen subshift, not a temporal zeta function of the finite-ring update.
+Exhaustive evaluation of all $299{,}592$ states for $m\leq6$ checks the
+transfer description, reversibility, conservation, and a maximum observed
+temporal period of $74$; no all-size temporal-period claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The Fredkin controlled-swap gate is a basic conservative reversible-logic
+element: it permutes two target bits conditional on a control bit and preserves
+the total number of ones.  The gate and its role in conservative computation
+belong to Fredkin and Toffoli's foundational work \cite{FredkinToffoli1982}.
+Alternating block partitions are likewise a standard route to globally
+reversible cellular dynamics \cite{ToffoliMargolus1987,Kari1999}.  These two
+ingredients make finite permutations easy to construct, but they do not by
+themselves describe the permutations' frozen configurations.
+
+This note considers one concrete one-dimensional construction: apply the
+control-on-one three-bit Fredkin gate first on aligned triples and then on triples
+shifted by one site.  Its fixed-point equations are local only after the ring
+is grouped into three-bit blocks.  In that representation they become an
+eight-symbol nearest-neighbor constraint.  The resulting adjacency matrix has
+rank two, which turns the frozen-state count into a second-order recurrence.
+
+The exact contributions are as follows.
+\begin{enumerate}
+\item We record the global inverse, an explicit reversing involution, and
+Hamming-weight conservation for every ring size $3m$.
+\item We prove an if-and-only-if local characterization of frozen
+configurations and give its $8\times8$ transfer matrix.
+\item We derive the closed fixed-state count, recurrence, frozen-set entropy,
+and the spatial zeta function $(1-5z+3z^2)^{-1}$.
+\item A literal-rule exhaustive control checks every state through $m=6$ and
+reports the finite temporal cycle census without extrapolating it to all $m$.
+\end{enumerate}
+
+The distinction between space and time is essential.  For each $m$, the
+finite-ring update is a permutation $T_m$ on $2^{3m}$ states.  Our zeta
+function instead counts configurations periodic under translation by one
+\emph{three-site block} inside the infinite frozen set.  We neither compute
+the Artin--Mazur zeta function of temporal iteration of $T_m$ nor claim that
+the observed temporal periods are unbounded.
+
+\section{Prior ownership and residual scope}\label{sec:ownership}
+
+Fredkin and Toffoli introduced conservative logic and the controlled
+interchange primitive \cite{FredkinToffoli1982}.  Toffoli and Margolus
+developed block cellular-automaton architectures in which bijective local
+maps produce reversible global updates \cite{ToffoliMargolus1987}; Kari later
+gave structural results for reversible cellular automata represented by
+overlapping block partitions \cite{Kari1999}.  Morita surveys the realization
+of Fredkin gates in several simple reversible cellular automata
+\cite{Morita2022}.  We treat all of this architecture-level material as prior
+ownership.
+
+The closest dynamical comparison is the Fredkin staircase automaton of Singh,
+Vasseur, and Gopalakrishnan \cite{SinghEtAl2023}.  Their Floquet circuit uses
+three layers of four-site constrained-swap gates and is analyzed through
+quasiparticles, transport, and integrability.  The present update uses two
+layers of the control-on-one three-bit controlled-swap gate and asks a static
+enumeration question about its frozen set.  Thus the residual object here is
+the transfer matrix and exact frozen-state package for the specific map in
+\cref{def:dynamics}, not Fredkin dynamics, conservative logic, reversible
+block cellular automata, or integrability in general.
+
+No absolute priority claim is made.  In particular, this note does not claim
+the first Fredkin-based cellular automaton, the first reversible conservative
+network, or the first staggered controlled-swap circuit.  The literature
+boundary above is part of the theorem contract rather than an after-the-fact
+qualification.
+
+\section{The shifted two-layer map}
+
+Write $\mathbb Z_r=\mathbb Z/r\mathbb Z$.  A state on the ring of length
+$3m$ is $x=(x_i)_{i\in\mathbb Z_{3m}}\in\{0,1\}^{\mathbb Z_{3m}}$.  All site
+indices below are taken modulo $3m$.
+
+\begin{definition}[control-on-one Fredkin gate]
+For $(c,u,v)\in\{0,1\}^3$, set
+\[
+ F(c,u,v)=
+ \begin{cases}
+  (c,u,v),&c=0,\\
+  (c,v,u),&c=1.
+ \end{cases}
+\]
+The first coordinate is the control and the last two are the targets.
+Fredkin and Toffoli's original table uses the complementary control-on-zero
+convention \cite{FredkinToffoli1982}; control-on-one is now also common.  The
+explicit definition above fixes the convention used throughout.
+\end{definition}
+
+\begin{definition}[two-layer shifted Fredkin map]\label{def:dynamics}
+Fix $m\geq1$.  Let $A_m$ apply $F$ in parallel to the disjoint triples
+\[
+ (3j,3j+1,3j+2),\qquad j\in\mathbb Z_m,
+\]
+and let $B_m$ apply $F$ in parallel to
+\[
+ (3j+1,3j+2,3j+3),\qquad j\in\mathbb Z_m.
+\]
+One full time step is
+\[
+ T_m=B_m\circ A_m.
+\]
+The frozen set is $\Fset_m=\Fix(T_m)$.
+\end{definition}
+
+Each family of triples in a single layer partitions the ring, so the parallel
+updates are unambiguous.  The definition includes $m=1$: the second layer
+then sees the same three sites in cyclically shifted roles.
+
+\begin{proposition}[reversibility and conservation]\label{prop:reversible}
+For every $m\geq1$, the maps $A_m$ and $B_m$ are involutions.  Consequently,
+$T_m$ is a permutation with
+\[
+ T_m^{-1}=A_m\circ B_m,
+ \qquad
+ A_m\circ T_m\circ A_m=T_m^{-1}.
+\]
+Moreover, $T_m$ preserves the Hamming weight
+$|x|_1=\sum_{i\in\mathbb Z_{3m}}x_i$.
+\end{proposition}
+
+\begin{proof}
+The gate $F$ is an involution because applying the same conditional swap
+twice restores the two targets.  Gates within one layer have disjoint
+supports, so the product defining each layer is also an involution.  Hence
+$(B_mA_m)^{-1}=A_mB_m$, and
+\[
+ A_m(B_mA_m)A_m=A_mB_m=(B_mA_m)^{-1}.
+\]
+Every local gate only permutes its two target coordinates and leaves its
+control unchanged.  It therefore preserves the number of ones on its support.
+Both layers, and thus their composition, preserve the global Hamming weight.
+\end{proof}
+
+\section{Frozen configurations as a nearest-neighbor SFT}
+
+Group the sites into blocks
+\[
+ s_j=(a_j,b_j,c_j)=(x_{3j},x_{3j+1},x_{3j+2})\in\{0,1\}^3
+\]
+and index a block by
+\[
+ \iota(a,b,c)=a+2b+4c\in\{0,\ldots,7\}.
+\]
+Thus index order is $000,100,010,110,001,101,011,111$.
+
+\begin{lemma}[local frozen-pair criterion]\label{lem:local}
+Let $s=(a,b,c)$ and $t=(d,e,f)$ be two consecutive blocks.  Their boundary
+is compatible with a frozen configuration precisely as follows:
+\begin{center}
+\begin{tabular}{ccl}
+\toprule
+$s$ & $\iota(s)$ & allowed next blocks $t$ \\
+\midrule
+$000,100,001$ & $0,1,4$ & all eight blocks \\
+$010$         & $2$     & blocks with $d=0$ \\
+$011,111$     & $6,7$   & blocks with $d=1$ \\
+$110,101$     & $3,5$   & no block \\
+\bottomrule
+\end{tabular}
+\end{center}
+Equivalently, in the index order above the adjacency matrix is
+\begin{equation}\label{eq:M}
+M=
+\begin{pmatrix}
+1&1&1&1&1&1&1&1\\
+1&1&1&1&1&1&1&1\\
+1&0&1&0&1&0&1&0\\
+0&0&0&0&0&0&0&0\\
+1&1&1&1&1&1&1&1\\
+0&0&0&0&0&0&0&0\\
+0&1&0&1&0&1&0&1\\
+0&1&0&1&0&1&0&1
+\end{pmatrix}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+After the aligned layer acts on $s$, write its output as
+$(a,\beta,\gamma)$.  The gate definition gives
+\[
+ (\beta,\gamma)=
+ \begin{cases}
+  (b,c),&a=0,\\
+  (c,b),&a=1.
+ \end{cases}
+\]
+The shifted gate across the boundary has control $\beta$ and targets
+$\gamma,d$.  Its output on the three positions originally occupied by
+$b,c,d$ is
+\[
+ \begin{cases}
+  (\beta,\gamma,d),&\beta=0,\\
+  (\beta,d,\gamma),&\beta=1.
+ \end{cases}
+\]
+For these coordinates to be frozen, the displayed triple must equal
+$(b,c,d)$.
+
+If $a=0$ and $b=0$, then $\beta=0$ and $\gamma=c$, so every next block is
+allowed; these are $000$ and $001$.  If $a=1$, the equality $\beta=b$
+first forces $b=c$.  The case $b=c=0$ gives $100$ and again allows every
+next block.  When $\beta=1$, the target swap is frozen exactly when
+$d=c=\gamma$.  For $010$ this requires $d=0$; for $011$ and $111$ it
+requires $d=1$.  Finally, $110$ and $101$ fail $\beta=b$ and admit no
+successor.  The coordinates $e,f$ of the next block do not enter this
+boundary gate.  Translating the resulting conditions through $\iota$ gives
+\eqref{eq:M}.
+\end{proof}
+
+\begin{theorem}[transfer description]\label{thm:transfer}
+A ring configuration with block word $(s_0,\ldots,s_{m-1})$ is fixed by
+$T_m$ if and only if
+\[
+ M_{\iota(s_j),\iota(s_{j+1})}=1
+ \quad\text{for every }j\in\mathbb Z_m.
+\]
+Consequently,
+\begin{equation}\label{eq:trace}
+ f_m:=|\Fset_m|=\tr(M^m),\qquad m\geq1.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For a fixed $j$, \cref{lem:local} is equivalent to restoration of the three
+coordinates $b_j,c_j,a_{j+1}$ after the full two-layer update.  As $j$ runs
+through $\mathbb Z_m$, these triples partition all $3m$ output coordinates.
+Thus every adjacent pair is allowed if and only if every coordinate is
+restored, proving the first assertion.
+
+The diagonal entry $(M^m)_{q,q}$ counts length-$m$ walks in the adjacency
+graph that start and end at block symbol $q$.  Summing over $q$ counts
+exactly the labelled cyclic block words satisfying every boundary
+constraint.  This sum is $\tr(M^m)$.
+\end{proof}
+
+\section{Closed count, entropy, and spatial zeta}
+
+The $8\times8$ presentation is deliberately kept explicit because it makes
+the all-size count auditable.  Its apparent dimension collapses
+spectrally.
+
+\begin{lemma}[spectrum of the transfer matrix]\label{lem:spectrum}
+The transfer matrix in \eqref{eq:M} has rank two and characteristic
+polynomial
+\[
+ \det(\lambda I-M)=\lambda^6(\lambda^2-5\lambda+3).
+\]
+Its nonzero eigenvalues are
+\[
+ \lambda_\pm=\frac{5\pm\sqrt{13}}2.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $u=(1,0,1,0,1,0,1,0)$ and
+$v=(0,1,0,1,0,1,0,1)$.  Every row of $M$ is one of
+$0,u,v,u+v$, and both $u$ and $v$ occur, so $\operatorname{rank}M=2$.
+The eigenvalue $0$ therefore has algebraic multiplicity at least six.
+Directly from \eqref{eq:M},
+\[
+ \tr M=5,
+ \qquad
+ \operatorname{diag}(M^2)=(4,5,3,0,4,0,1,2),
+ \qquad
+ \tr(M^2)=19.
+\]
+If $\alpha,\beta$ denote the remaining two eigenvalues, counted with
+algebraic multiplicity, then
+\[
+ \alpha+\beta=5,
+ \qquad
+ 2\alpha\beta=(\alpha+\beta)^2-(\alpha^2+\beta^2)=25-19=6.
+\]
+Thus $\alpha\beta=3$, so they are the two roots of
+$\lambda^2-5\lambda+3$.  Their product is nonzero, which also shows that
+the zero eigenvalue has algebraic multiplicity exactly six.
+\end{proof}
+
+\begin{theorem}[closed frozen-state count]\label{thm:count}
+For every $m\geq1$,
+\begin{equation}\label{eq:closed}
+ f_m=\lambda_+^m+\lambda_-^m
+ =\left(\frac{5+\sqrt{13}}2\right)^m
+  +\left(\frac{5-\sqrt{13}}2\right)^m.
+\end{equation}
+In particular, $f_1=5$, $f_2=19$, and
+\[
+ f_m=5f_{m-1}-3f_{m-2}\qquad(m\geq3).
+\]
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:transfer,lem:spectrum}, the trace of $M^m$ is the sum of the
+$m$th powers of its eigenvalues, counted with algebraic multiplicity.  For
+$m\geq1$ the six zero eigenvalues contribute zero, yielding
+\eqref{eq:closed}.  Both nonzero eigenvalues satisfy
+$\lambda^2=5\lambda-3$; multiplying by $\lambda^{m-2}$ and summing the two
+identities gives the recurrence.  Substitution gives the stated initial
+values.
+\end{proof}
+
+Define the two-sided frozen subshift over three-bit block symbols by
+\[
+ \Xfr=\{(s_j)_{j\in\mathbb Z}:M_{\iota(s_j),\iota(s_{j+1})}=1
+ \text{ for every }j\},
+\]
+and let $\sigma$ be the left shift by one block.  Standard finite-type shift
+facts identify $|\Fix(\sigma^m)|$ with $\tr(M^m)$
+\cite{LindMarcus1995}.
+
+\begin{corollary}[frozen entropy and spatial zeta]\label{cor:spatial-zeta}
+The topological entropy of the block shift on $\Xfr$ is
+\[
+ h_{\mathrm{top}}(\sigma|\Xfr)=\log\lambda_+.
+\]
+Normalized per original binary site, the entropy is
+$\frac13\log\lambda_+$.  The Artin--Mazur zeta function of this
+\emph{spatial block shift} is
+\begin{align*}
+ \zeta_{\mathrm{fr}}(z)
+ &:=\exp\left(\sum_{m\geq1}\frac{|\Fix(\sigma^m)|}{m}z^m\right)\\
+ &=\det(I-zM)^{-1}
+ =\frac{1}{1-5z+3z^2}.
+\end{align*}
+The identity holds as a formal power series and analytically for
+$|z|<\lambda_+^{-1}$.
+\end{corollary}
+
+\begin{proof}
+The entropy of a finite-type shift presented by $M$ is the logarithm of the
+spectral radius of $M$ \cite{LindMarcus1995}; \cref{lem:spectrum} gives
+$\rho(M)=\lambda_+$.  One block contains three original sites, giving the
+per-site normalization.
+
+For the zeta identity, use the formal matrix expansion
+\[
+ -\log\det(I-zM)=\sum_{m\geq1}\frac{\tr(M^m)}m z^m.
+\]
+Then apply \cref{thm:transfer} and
+$\det(I-zM)=(1-z\lambda_+)(1-z\lambda_-)=1-5z+3z^2$.
+The same expansion converges analytically inside the reciprocal spectral
+radius.
+\end{proof}
+
+\begin{remark}[the zeta boundary]\label{rem:zeta-boundary}
+The variable $m$ in $\zeta_{\mathrm{fr}}$ is a spatial block period.  For a
+fixed ring size, the temporal Artin--Mazur zeta function of $T_m$ would
+instead require every count $|\Fix(T_m^k)|$ over time iterates $k$.  None of
+those temporal zeta functions is asserted or inferred here.
+\end{remark}
+
+\section{Exact finite controls and temporal observations}
+
+The accompanying dependency-free script implements the literal gate rather
+than the transfer characterization.  For each $m=1,\ldots,6$, it exhausts
+all $2^{3m}$ states, checks both layer involutions, the explicit inverse and
+reversing symmetry, Hamming-weight conservation, bijectivity, and the
+equivalence between literal fixed points and the SFT constraint.  It also
+compares the fixed count with \eqref{eq:trace} and \eqref{eq:closed}.
+
+\begin{center}
+\small
+\begin{tabular}{rrrrl}
+\toprule
+$m$ & states & $f_m$ & maximum temporal period & observed period set \\
+\midrule
+1 & $8$       & $5$    & $3$  & $1,3$ \\
+2 & $64$      & $19$   & $4$  & $1,2,3,4$ \\
+3 & $512$     & $80$   & $8$  & $1,2,3,4,6,8$ \\
+4 & $4{,}096$ & $343$  & $18$ & $1,2,3,4,6,8,10,12,14,16,18$ \\
+5 & $32{,}768$ & $1{,}475$ & $32$ & $1,2,3,4,6,8,10,12,16,18,30,32$ \\
+6 & $262{,}144$ & $6{,}346$ & $74$ & $1,2,3,4,6,8,10,12,16,18,24,30,32,54,74$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+These are exact finite computations, not samples.  Their total state count is
+\[
+ \sum_{m=1}^{6}2^{3m}=299{,}592.
+\]
+The increasing maximum periods motivate further questions about the temporal
+permutations, but the table alone neither proves unbounded periods nor
+identifies a temporal zeta function.
+
+\section{Discussion}
+
+The frozen set of this staggered conservative permutation is simpler than
+its finite temporal cycle structure.  The local fixed equations reduce to a
+rank-two transfer matrix even though the natural block alphabet has eight
+symbols.  That reduction supplies an all-size theorem: exact counts, a
+second-order recurrence, entropy, and a rational spatial zeta function.
+
+Several temporal problems remain outside the present contract.  The data do
+not prove an unbounded-period family, a closed cycle index, mixing properties
+of temporal trajectories, or integrability.  Any future temporal claim must
+be proved independently and compared directly with the Fredkin staircase
+and other constrained-swap automata.  The present conclusion is narrower:
+for the map in \cref{def:dynamics}, the frozen configurations have the exact
+finite-type presentation and spatial enumerative invariants proved above.
+
+\section*{Reproducibility}
+
+The file \texttt{code/verify\_fredkin.py} uses only the Python standard
+library.  It prints the full finite cycle types and an instrumented count of
+executed checks.  The computation is a regression control; the all-$m$
+statements rest on the proofs in \cref{lem:local,thm:transfer,lem:spectrum}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

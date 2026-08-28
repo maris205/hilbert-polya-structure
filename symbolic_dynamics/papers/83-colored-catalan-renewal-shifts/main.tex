@@ -1,0 +1,295 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Card}{\operatorname{card}}
+
+\title[Catalan renewal shifts]{An Exact Recurrence Transition in Colored Catalan Renewal Shifts}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 37D35, 05A15, 60J10}
+\keywords{countable Markov shift, renewal shift, Catalan number, Gurevich entropy, null recurrence, dynamical zeta function}
+
+\begin{document}
+
+\begin{abstract}
+For each integer $c\geq1$ we build an aperiodic countable-state loop shift
+with exactly $cC_{n-1}$ first-return loops of length $n$, where $C_j$ is a
+Catalan number.  Its first-return series is
+\[
+ F_c(z)=\frac c2\bigl(1-\sqrt{1-4z}\bigr).
+\]
+The single parameter $c$ produces an exact three-way transition.  The shift
+is transient at $c=1$, null recurrent at $c=2$, and strongly positive
+recurrent for $c\geq3$.  Its Gurevich entropy is
+\[
+ h_G(c)=\begin{cases}
+ \log4,&c=1,2,\\
+ \log\!\bigl(c^2/(c-1)\bigr),&c\geq3,
+ \end{cases}
+\]
+and a measure of maximal entropy exists exactly when $c\geq3$.  In that
+regime its normalized first-return law and mean return time are explicit.
+The formal periodic-orbit zeta function is algebraic:
+\[
+ \zeta_c(z)=\frac{1}{1-F_c(z)}.
+\]
+At the two boundary parameters this yields the exact fixed-point laws
+$\#\Fix(\sigma^n)=\frac12\binom{2n}{n}$ for $c=1$ and
+$\#\Fix(\sigma^n)=4^n/2$ for $c=2$.  Thus the recurrence transition is also
+visible as a change in the dominant zeta singularity.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Countable Markov shifts can be transient, null recurrent, or positive
+recurrent even when their Gurevich entropy is finite.  The classification by
+first-return series, and its consequences for maximal-entropy measures, are
+standard parts of the thermodynamic formalism of Gurevich, Savchenko, and
+Sarig \cite{GurevichSavchenko1998,Sarig1999}.  Loop and circular-code
+presentations also turn first-return generating functions into dynamical
+zeta functions \cite{Keller1991}.  These general mechanisms are prior input,
+not claims of this note.
+
+Our purpose is to isolate a one-parameter laboratory in which every part of
+the classification is elementary and closed form.  Catalan growth is exactly
+critical for this task: the first-return series has radius $1/4$, a finite
+boundary value, and an infinite boundary derivative.  Multiplying its
+coefficients by $c$ therefore separates transience, null recurrence, and
+positive recurrence at the consecutive integer values $1,2,3$.
+
+The contribution is the complete computation for the colored Catalan loop
+family: entropy, recurrence class, existence and return law of the maximal
+measure, zeta singularity, and two exact fixed-point sequences.  We do not
+claim to introduce renewal shifts, the Catalan generating function, the
+Vere--Jones classification, or circular-code zeta identities.
+
+\section{The loop family}
+
+Write
+\[
+ C_j=\frac{1}{j+1}\binom{2j}{j},\qquad j\geq0.
+\]
+Fix $c\in\N$.  Construct a directed multigraph $\mathcal G_c$ with a
+distinguished vertex $o$ as follows.  For every $n\geq1$, take
+\[
+ f_n(c)=cC_{n-1}
+\]
+simple directed loops of length $n$ based at $o$.  Loops have disjoint
+internal vertices; the $c$ loops of length one are parallel edges at $o$.
+Let $(\Sigma_c,\sigma)$ be the two-sided edge shift of $\mathcal G_c$.
+
+The graph is strongly connected, and its length-one loops make its period
+one.  There are finitely many first-return loops of every fixed length, so
+all formal series below are coefficientwise well defined.  The first-return
+series at $o$ is
+\begin{equation}\label{eq:first-return}
+ F_c(z)=\sum_{n\geq1}f_n(c)z^n
+ =cz\sum_{j\geq0}C_jz^j
+ =\frac c2\bigl(1-\sqrt{1-4z}\bigr).
+\end{equation}
+Its radius is $R=1/4$, and
+\begin{equation}\label{eq:boundary-data}
+ F_c(R)=\frac c2,\qquad
+ F_c'(z)=\frac{c}{\sqrt{1-4z}}.
+\end{equation}
+
+\begin{remark}[object boundary]
+This is a countable-state Markov shift, not a compact finite-alphabet
+subshift.  Entropy below means Gurevich entropy.  Statements about maximal
+entropy concern invariant Borel probability measures on $\Sigma_c$.
+For an edge sequence $x$, we write $[o]$ for the vertex cylinder on which
+the initial vertex of the edge $x_0$ is $o$.
+\end{remark}
+
+\section{Entropy and the recurrence transition}
+
+For an irreducible loop shift, let $r_c=e^{-h_G(c)}$.  The standard renewal
+criterion says that $r_c$ is the smallest positive solution of $F_c(r)=1$
+when such a solution occurs no later than $R$; otherwise $r_c=R$.  At this
+parameter the system is transient if $F_c(r_c)<1$, recurrent if equality
+holds, and a recurrent system is positive recurrent precisely when
+\begin{equation}\label{eq:mean-test}
+ \sum_{n\geq1}n f_n(c)r_c^n=r_cF_c'(r_c)<\infty.
+\end{equation}
+
+\begin{theorem}[exact trichotomy]\label{thm:trichotomy}
+For the colored Catalan loop shift:
+\begin{enumerate}
+\item $c=1$ is transient and $h_G(1)=\log4$;
+\item $c=2$ is null recurrent and $h_G(2)=\log4$;
+\item every $c\geq3$ is strongly positive recurrent, with
+\[
+ r_c=\frac{c-1}{c^2},\qquad
+ h_G(c)=\log\frac{c^2}{c-1}.
+\]
+\end{enumerate}
+An invariant probability measure of maximal entropy exists if and only if
+$c\geq3$, and is then unique.
+\end{theorem}
+
+\begin{proof}
+At $c=1$, \eqref{eq:boundary-data} gives $F_1(R)=1/2<1$, hence transience
+and $r_1=R$.  At $c=2$, one has $F_2(R)=1$, but
+$F_2'(R)=\infty$; \eqref{eq:mean-test} gives null recurrence.
+
+If $c\geq3$, solving $F_c(r)=1$ gives
+\[
+ \sqrt{1-4r}=1-\frac2c,\qquad
+ r=\frac{c-1}{c^2}<\frac14.
+\]
+The solution lies strictly inside the convergence disk, so
+$rF_c'(r)<\infty$ and the loop shift is positive recurrent.  The strict
+gap $r<R$ is the loop-shift form of strong positive recurrence.  Taking
+$-\log r$ gives the entropy formula.  Existence and uniqueness of a
+maximal-entropy probability measure for an irreducible finite-entropy
+countable Markov shift are equivalent here to positive recurrence
+\cite{GurevichSavchenko1998,Sarig1999}.  Concretely, at $c=1$ the candidate
+loop weights have total mass $F_1(R)<1$; at $c=2$ they have total mass one
+but infinite mean return time; and for $c\geq3$ they have both total mass one
+and finite mean.  These are exactly the normalization conditions for the
+stationary renewal probability.
+\end{proof}
+
+The maximal measure can be written without eigenvectors.  On each return to
+$o$, choose a particular first-return loop $\gamma$ of length $|\gamma|=n$
+with probability $r_c^n$.  The normalization is exactly $F_c(r_c)=1$.
+
+\begin{proposition}[explicit maximal measure]\label{prop:mme}
+Let $c\geq3$.  Under the unique maximal-entropy measure, the return length
+$\tau$ to $o$ has law
+\[
+ \mathbb P(\tau=n)=cC_{n-1}r_c^n,\qquad n\geq1,
+\]
+and
+\[
+ \mathbb E\tau=r_cF_c'(r_c)=\frac{c-1}{c-2},\qquad
+ \mu_c([o])=\frac{c-2}{c-1}.
+\]
+The return law has an exponential factor
+\[
+ 4r_c=\frac{4(c-1)}{c^2}<1.
+\]
+\end{proposition}
+
+\begin{proof}
+There are $cC_{n-1}$ loops of length $n$, each with probability $r_c^n$.
+The weights of all individual loops sum to $F_c(r_c)=1$, and their mean
+length is finite by positive recurrence, so the associated stationary
+renewal tower is a probability measure.  Its entropy per excursion is
+$(-\log r_c)\mathbb E\tau$; division by the mean excursion length gives
+entropy $-\log r_c=h_G(c)$, identifying it with the unique maximal measure.
+Differentiating \eqref{eq:first-return} and using
+$\sqrt{1-4r_c}=(c-2)/c$ gives
+\[
+ r_cF_c'(r_c)
+ =\frac{c-1}{c^2}\frac{c^2}{c-2}
+ =\frac{c-1}{c-2}.
+\]
+The stationary tower normalization, equivalently Kac's return identity,
+gives the reciprocal formula for $\mu_c([o])$.  Finally
+$C_{n-1}=\Theta(4^{n-1}n^{-3/2})$, so the displayed strict inequality is
+the exponential tail factor.
+\end{proof}
+
+\section{Periodic orbits and the algebraic zeta function}
+
+Every periodic path is a circular concatenation of first-return loops.  The
+loop code is circular because distinct loops have private internal vertices.
+The usual loop-counting identity \cite{Keller1991} therefore gives, as a
+formal power series,
+\begin{equation}\label{eq:zeta}
+ \zeta_c(z)
+ :=\exp\left(\sum_{n\geq1}\frac{\#\Fix(\sigma^n)}{n}z^n\right)
+ =\frac{1}{1-F_c(z)}
+ =\frac{1}{1-\frac c2+\frac c2\sqrt{1-4z}}.
+\end{equation}
+There are finitely many $n$-periodic points for every $n$: a periodic path
+of length $n$ only uses first-return loops of length at most $n$.
+
+\begin{theorem}[boundary fixed-point laws]\label{thm:fixed}
+At the transient and null-recurrent parameters,
+\[
+ \zeta_1(z)=\frac{1-\sqrt{1-4z}}{2z},
+ \qquad
+ \zeta_2(z)=(1-4z)^{-1/2},
+\]
+and, for every $n\geq1$,
+\[
+ \#\Fix_{\Sigma_1}(\sigma^n)=\frac12\binom{2n}{n},
+ \qquad
+ \#\Fix_{\Sigma_2}(\sigma^n)=\frac{4^n}{2}.
+\]
+For $c\geq3$, $\zeta_c$ has a simple pole at
+$r_c=(c-1)/c^2$, strictly before its Catalan branch point $1/4$.
+\end{theorem}
+
+\begin{proof}
+For $c=1$, rationalizing \eqref{eq:zeta} gives the Catalan generating
+function.  The classical identity
+\[
+ [z^n]\log\!\left(\frac{1-\sqrt{1-4z}}{2z}\right)
+ =\frac{1}{2n}\binom{2n}{n}
+\]
+and the definition of dynamical zeta give the first fixed-point law.  For
+$c=2$, taking the logarithm of $(1-4z)^{-1/2}$ gives
+$[z^n]\log\zeta_2=4^n/(2n)$.  If $c\geq3$, the denominator vanishes at
+$r_c<1/4$, and its derivative there is $-F_c'(r_c)\ne0$, proving the simple
+pole statement.  Moreover, $|F_c(z)|\leq F_c(|z|)<1$ for $|z|<r_c$.
+On $|z|=r_c$, equality $F_c(z)=1$ in the triangle inequality forces the
+positive $z$ and $z^2$ terms to have the same argument, hence $z=r_c$.
+Thus this pole is the unique singularity of smallest modulus.
+\end{proof}
+
+The singularity change is sharper than entropy alone.  The cases $c=1$ and
+$c=2$ have the same entropy $\log4$, but at $c=1$ the zeta function remains
+finite at $1/4$ and has a branch point, whereas at $c=2$ it diverges with
+exponent $1/2$.  At $c\geq3$ a simple pole moves strictly inside the Catalan
+disk, exactly when the maximal-entropy probability measure appears.
+
+\section{Checks, ownership, and scope}
+
+The accompanying deterministic control independently generates Catalan
+numbers, composes return loops, recovers fixed-point counts from the formal
+zeta identity, checks both boundary laws through order $40$, and verifies
+the closed entropy and mean-return formulas for $3\leq c\leq50$.  These
+finite checks support the algebra and guard indexing; the proofs above carry
+the all-parameter statements.
+
+The general recurrence classification and maximal-measure criterion are
+owned by countable-state Markov-shift theory
+\cite{GurevichSavchenko1998,Sarig1999}.  The zeta reduction to a circular
+first-return code is also prior methodology \cite{Keller1991}.  The Catalan
+formula and its square-root singularity are classical.  The narrow result
+here is their explicit synthesis for the family $f_n=cC_{n-1}$.  No absolute
+novelty, priority, compactness, or finite-state claim is made.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
