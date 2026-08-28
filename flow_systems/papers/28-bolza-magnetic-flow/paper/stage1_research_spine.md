@@ -3,7 +3,7 @@
 Working title: *Semiclassical Tensor-Power Trace on the Bolza Surface*.
 
 Manuscript drafting has not started.  This spine records the paper-facing
-result structure accumulated through Round 6 while ARS remains at Stage 1.
+result structure accumulated through Round 7 while ARS remains at Stage 1.
 
 ## Central question
 
@@ -50,6 +50,18 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
    are therefore conjugate duplicates, not new owners.  This is `[PROVED]` for
    the frozen eight and changes neither the 36 owners per field nor the 576
    signed branches.  It is not a full `Gamma` conjugacy algorithm.
+7. **Source-verified non-arithmetic control theorem package.**  The exact
+   admissible octagon specialization `(a,alpha)=(exp(-1/10),pi/4)` supplies a
+   named closed curvature-`-1` genus-two control and four explicit
+   `SU(1,1)` side pairings.  The source relator replays at 140 digits;
+   `tr(g0^2)` is transcendental by exact trace algebra and
+   Lindemann--Weierstrass, contradicting Takeuchi's necessary arithmetic trace
+   field condition after the finite-index square-subgroup/commensurability
+   bridge; and `Z^4` abelianization proves each generator primitive.  Its four
+   basis classes are pairwise distinct even up to sign, so the inverse-paired
+   owners are also distinct.  This is `[PROVED]` for the six-item source
+   package and four named owners,
+   not a systole, short-spectrum, or magnetic-comparison theorem.
 
 ## Main result table currently available
 
@@ -72,7 +84,9 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
 | Distinct inverse-paired owner credits | `36` per field; `8` same-axis records proved exact conjugate duplicates |
 | Round-5 signed trace branches | `288` per field; `576` total at `k=+-1,...,+-4` |
 | Round-6 exact conjugacy closure | `8/8` direct `SL(2)` identities; `0` inverse fallbacks; `0` new owners |
-| Non-arithmetic source-package gate | `FAIL_CLOSED_NOT_READY`; `0/6` required inputs present |
+| Non-arithmetic source-package gate | `PASS_READY_6_OF_6`; four sources; exact named control selected |
+| Non-arithmetic control primitive owners | `4`; certified by primitive `Z^4` abelianization classes |
+| Control systole / common cutoff / census | `NOT_CLAIMED / NOT_FROZEN / NOT_RUN` |
 | Target/arithmetic labels | `0` |
 
 ## What makes the result paper-facing
@@ -85,7 +99,10 @@ pairing.  Round 4 supplied four named seed axes; Round 5 expands safely distinct
 owner credit ninefold to 36 per field while keeping 322 primitivity gaps and
 every signed branch separate from owner counting.  Round 6 then closes all
 eight same-homology gaps as exact conjugate duplicates, validating rather than
-increasing the 36-owner count.
+increasing the 36-owner count.  Round 7 then removes the missing-control-source
+blocker: the comparison now has a real, exactly non-arithmetic genus-two
+geometry and four primitive seed owners, with every source claim and boundary
+recorded in a reproducible matrix.
 
 ## What is not yet a paper conclusion
 
@@ -97,8 +114,9 @@ increasing the 36-owner count.
   candidates still lack a `Gamma`-primitivity proof.
 - No rational-prime or prime-ideal correspondence is assigned.
 - No arithmetic-specific cancellation has been measured.
-- The zero-field theorem and the metric-matched non-arithmetic control have not
-  been instantiated.
+- The zero-field theorem remains open.  The metric-matched non-arithmetic
+  geometry is instantiated, but its control systole/finite length-spectrum
+  completeness and magnetic comparison are not.
 - Odd `N`, arbitrary flat twists, full all-`N`, and fixed `Delta^L` remain
   open or `NOT_ESTABLISHED`.
 - The full Paper-28 candidate has no formal Route-A tuple; a separate bounded
@@ -114,11 +132,12 @@ increasing the 36-owner count.
 5. Field-reversal and signed-`k` branch controls.
 6. Bounded marked-cyclic census, exact eight-record conjugacy closure, and
    remaining quotient-conjugacy boundary.
-7. Source-verified non-arithmetic metric control.
+7. Exact source-verified non-arithmetic metric control and four-owner theorem.
 8. Arithmetic discrimination result or explicit A0 failure.
 
 The paper is not ready to leave Stage 1 until sections 7--8 have executable
-evidence.  The eight same-homology ambiguities are now resolved.  The immediate
-next artifact is a source-verified instantiation of the metric-matched
-non-arithmetic control under a common geometric cutoff; the current 0/6
-source-package gate forbids execution.
+evidence.  Section 7 now has its six-item source package and exact seed theorem,
+but not its common-cutoff census.  The immediate next artifact is a rigorous
+control systole/lower bound or finite word-to-length completeness certificate
+that permits one target-blind common geometric cutoff.  Until then no branch
+comparison or arithmetic-discrimination conclusion is authorized.

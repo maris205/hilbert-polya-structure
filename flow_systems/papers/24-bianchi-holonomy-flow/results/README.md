@@ -120,3 +120,16 @@ candidate `z` width is `0.916300044002`; the stabilized control width is
 `16.9152926064`.  The control-width condition fails, so the current phase
 statistic is stopped as marking-sensitive.  No metric prefix or Gaussian-prime
 owner is authorized.
+
+## Round-7 exact trace-discriminant results
+
+- `round7_trace_discriminant_ledger.csv`: 11,481 exact matrix rows with `D9`,
+  determinant/congruence fields, and conjugacy, inversion, and repetition
+  witnesses;
+- `round7_trace_discriminant_metrics.json`: exact pass flags, class counts,
+  collision census, decision, and Route boundary.
+
+All rows pass.  The class split is 1 identity / 504 parabolic / 10,976
+loxodromic.  There are 145 distinct `D9` values and 11,336 rows beyond first
+occurrences.  This is exact finite-sample evidence for a necessary invariant,
+not a complete conjugacy ledger or Gaussian-prime-ideal owner map.

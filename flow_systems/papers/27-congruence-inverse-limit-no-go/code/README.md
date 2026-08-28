@@ -1,5 +1,20 @@
 # P27 code status
 
+Round 7 adds `round7_owner_factor_escape.py` and its twelve-test suite.  The
+builder hash-locks the Round-4 exact-order and Round-5 homology-lower-bound
+ledgers, emits 48 owner/level support rows and 54 fixed-prefix diagnostics, and
+keeps exact quotient orders separate from lower bounds.  It also preserves the
+cusped primitivity boundary: those three frozen elements are loop-order
+diagnostics, not certified primitive zeta factors.
+
+```bash
+bash experiments/reproduce_round7.sh
+```
+
+Default mode verifies canonical bytes; only explicit `--refresh` updates them.
+The program does not machine-prove asymptotic divergence, define a renormalized
+candidate, infer human source confirmation, or read prime/zero targets.
+
 Round 6 adds `round6_positioning_audit.py` and
 `test_round6_positioning_audit.py`.  The deterministic builder serializes a
 13-row technical/claim-source contract: nine rows bind five authoritative

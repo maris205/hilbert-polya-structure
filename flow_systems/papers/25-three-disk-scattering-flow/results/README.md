@@ -1,4 +1,4 @@
-# P25 results — Rounds 2 through 6
+# P25 results — Rounds 2 through 7
 
 Generated artifacts:
 
@@ -96,3 +96,16 @@ All 747 owner counts match and every coefficient agrees modulo `z^13`.  The
 denominators are `[1,0,-3,-2]` and `[1,0,-3,2]`, so collision parity is exactly
 `zeta_pi(z)=zeta_0(-z)`.  This is a unit-roof symbolic theorem, not a physical
 scattering determinant.
+## Round-7 q-symbol family results
+
+- `round7_q_symbolic_counts.csv` contains 84 exact trace and Möbius-count rows
+  over `q=2,...,8` and `n=1,...,12`;
+- `round7_q_symbolic_prefix.csv` contains 182 exact coefficient rows for both
+  `u=+1` and `u=-1`; and
+- `round7_q_symbolic_summary.json` records the universal theorem, finite replay,
+  typed Route boundary, and zero mismatch counts.
+
+The core-output SHA-256 is
+`9c3daaa1feffa23090cc4edf5c3cdf0398389f814ef4f0f6b14cad254f23d4d9`.
+The cumulative owner counts are formula values; no billion-row enumeration is
+claimed.  Exactness belongs only to the non-arithmetic unit-roof family.

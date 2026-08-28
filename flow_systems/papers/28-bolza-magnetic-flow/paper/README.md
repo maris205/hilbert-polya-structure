@@ -69,11 +69,21 @@ A separate typed evaluation records the bounded `L<=4` proxy as
 `A0_WEAK/A1_WEAK/A2--A4_FAIL-NOT_TESTABLE`, overall
 `ROUTE_A_EXPLORATORY`; it does not assign a tuple to the full candidate.
 
+Round 7 replaces that historical `0/6` result with a real six-of-six package
+for `NAZARENKO-EXP-OCTAGON-G2`, the exact admissible specialization
+`(a,alpha)=(exp(-1/10),pi/4)`.  Four source matrices and the polygon relator
+replay deterministically.  Exact trace algebra plus Lindemann--Weierstrass and
+Takeuchi prove the group non-arithmetic, while `Z^4` abelianization proves the
+four side-pairing generators primitive.  This is a paper-level Methods and
+Controls result.  It does not supply a control systole, common cutoff, finite
+control census, magnetic comparison, or arithmetic-specific conclusion.
+
 The paper-facing theorem chain and remaining evidence obligations are tracked
 in [the Stage-1 research spine](stage1_research_spine.md).  Stage 2 writing is
-not authorized: the eight named conjugacy ambiguities are now closed, but the
-matched non-arithmetic control must still determine whether the result is
-arithmetic-specific or a generic hyperbolic calibration.
+not authorized: the eight named conjugacy ambiguities are closed and the
+matched non-arithmetic geometry is source verified, but a common-cutoff census
+must still determine whether the result is arithmetic-specific or a generic
+hyperbolic calibration.
 
 The degree-one `Δ^L` is only a separate fixed candidate:
 

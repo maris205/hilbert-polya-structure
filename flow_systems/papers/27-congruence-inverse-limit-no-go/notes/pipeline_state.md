@@ -35,6 +35,9 @@ Date: **2026-08-28**
 | Human source gate | **`HUMAN_CONFIRMATION_PENDING` 9/9** — `USER_ATTESTED_READ` 0/9 |
 | Round-6 three-way decision | **GO / NO-GO / NO-GO** — short comparative owner-audit / standalone new aperiodicity theorem / same-owner Route-A A2 |
 | Round-6 reproducibility | **REPRODUCIBLE** — 11/11 tests; two byte-identical builds; tree SHA-256 `53b8b332c09f771f97ad45a1504491a7e542d014a9d6ce677d3dc86851efeb5a` |
+| Round-7 coefficient-stability theorem | **`[PROVED]`** — every fixed primitive base-owner factor is eventually `1` modulo every fixed power; every fixed finite owner panel leaves every bounded coefficient and time window |
+| Round-7 finite replay | **REPRODUCIBLE** — 48 owner/level rows plus 54 fixed-prefix diagnostics, 12/12 tests, two byte-identical builds; core SHA-256 `551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845` |
+| Round-7 evidence firewall | **PASS** — 24 cusped exact orders remain loop diagnostics with primitivity `NOT_ESTABLISHED`; 24 cocompact rows remain primitive-homology-certified lower bounds with full orders not enumerated |
 | Residual bold hypothesis | **`[HEURISTIC]`** — renormalized tower statistic retains congruence splitting |
 | Proposal stage | Stage 1 / Route A A0--A1 |
 | A2--A4 | **FAIL / NOT_TESTABLE** — the same owner has no primitive periodic-orbit population or determinant |
@@ -51,8 +54,11 @@ residual-tower control and proves a factorial lower bound for primitive
 homology owners.  The result removes cusp/congruence/arithmetic specificity,
 so Round 6 freezes a short comparative methodological paper as GO, standalone
 novelty as NO-GO, and same-owner A2 as NO-GO.  Human citation/locator
-confirmation remains pending.  Finite-level order growth cannot replace its
-owner or alter `Per(M_infinity)=empty`.
+confirmation remains pending.  Round 7 proves that fixed-owner finite-level
+factors also lose every nontrivial fixed coefficient prefix under the common
+clock.  Finite-level order growth cannot replace its owner or alter
+`Per(M_infinity)=empty`; a renormalized collective statistic remains a new,
+unevaluated candidate rather than a rescue of this record.
 
 Evidence labels follow `skills/route-a-evaluator.md`.
 `PROVED_A1_OBSTRUCTION` is a local theorem-progress tag; the formal verdict is

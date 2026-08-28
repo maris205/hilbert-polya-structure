@@ -47,6 +47,34 @@ Orbits: a Compact-versus-Cusped Residual-Tower Ownership Audit*
   Route-A A2 **NO-GO**.  Eleven tests and two byte-identical builds pass; the
   Round-6 tree SHA-256 is
   `53b8b332c09f771f97ad45a1504491a7e542d014a9d6ce677d3dc86851efeb5a`.
+- Round-7 coefficient-stability theorem: **`[PROVED]`**.  For every fixed
+  primitive base owner, its finite-level factor is eventually `1` modulo every
+  fixed power of the owner variable because the quotient order tends to
+  infinity.  The same holds for every fixed finite owner panel.  A 48-row
+  exact/lower-bound ledger and 54 fixed-prefix diagnostics replay this support
+  escape without inferring primitivity for the three cusped loop rows.  Core
+  SHA-256 is
+  `551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845`.
+
+### Round-7 same-owner coefficient escape — 2026-08-28
+
+For a fixed primitive base owner `g`, let `o_n(g)` be its quotient order and
+`x_g=exp(-s ell(g))`.  Since `o_n(g)->infinity`,
+
+```text
+(1-x_g^(o_n(g)))^(-1) = 1 mod x_g^(N+1)
+```
+
+for every fixed `N` at all sufficiently large levels.  Thus no fixed finite
+base-owner panel retains a nontrivial coefficientwise Euler prefix under the
+unchanged clock.  In physical time, all of its lifted periods leave every
+bounded window.
+
+This is a stronger same-owner A2 no-go, not a statement about an undefined
+collective renormalized candidate.  The latter would need a new object, clock,
+normalization, determinant, and source lock.  See the
+[Round-7 theorem](notes/round7_owner_factor_escape_theorem.md) and
+[paper research spine](paper/round7_research_spine.md).
 
 ### Round-6 compact-versus-cusped positioning — 2026-08-28
 
@@ -238,6 +266,11 @@ is a local theorem-progress tag; the formal same-owner verdict is `A1_FAIL`.
 - [Round-6 contribution lock](paper/round6_contribution_lock.md)
 - [Round-6 reproducibility receipt](experiments/round6_reproducibility_receipt.json)
 - [Round-6 Route-A evaluation](../../evaluations/route_a/P27-CONGRUENCE-INVERSE-LIMIT-GEODESIC-FLOW/2026-08-28-round6.yaml)
+- [Round-7 owner-factor escape theorem](notes/round7_owner_factor_escape_theorem.md)
+- [Round-7 freeze contract](experiments/round7_owner_factor_escape_freeze.json)
+- [Round-7 validation](experiments/round7_validation.md)
+- [Round-7 paper research spine](paper/round7_research_spine.md)
+- [Round-7 Route-A evaluation](../../evaluations/route_a/P27-CONGRUENCE-INVERSE-LIMIT-GEODESIC-FLOW/2026-08-28-round7.yaml)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
 
@@ -246,4 +279,5 @@ finite-level tables are reproducible diagnostics only.  The Round-5 control
 closes the planned compactness/cusp check and narrows the publishable claim to
 a comparative owner-audit paper.  Round 6 freezes that narrow paper as GO but
 rejects standalone novelty and same-owner A2.  A manuscript has not been
-started and ARS Stage 2 has not begun.
+started and ARS Stage 2 has not begun.  Round 7 strengthens the same-owner
+NO-GO from orbit absence to coefficientwise factor escape.

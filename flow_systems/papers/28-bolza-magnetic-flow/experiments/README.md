@@ -1,5 +1,31 @@
 # P28 experiment status
 
+## Round 7
+
+`EXECUTION_STATUS=ROUND7_NONARITHMETIC_SOURCE_PACKAGE_COMPLETED`. Run:
+
+```bash
+./experiments/reproduce_round7.sh
+```
+
+Twenty-two tests pass.  Two isolated builds of the four-source verification
+matrix, exact/decimal control matrices, six-item source gate, validation, and
+standard output are byte-identical.  The core artifact SHA-256 is
+`f1fbcc162907622e8f521dc08d56032afec7553810a9bbbcf3ba752728540386` and
+the artifact-tree SHA-256 is
+`a11917f6e9eab3bc48f1920b9727b0ec96a9c43c1f7ac13ab69984c005cfccef`.
+
+The default command rebuilds into temporary directories and verifies every
+canonical byte with `cmp`; it does not overwrite checked-in artifacts.  The
+maintainer-only refresh path is
+`./experiments/reproduce_round7.sh --refresh`.  The receipt binds the freeze,
+remote source hashes, builder, tests, reproducer, and generated artifacts.
+
+The run changes the non-arithmetic control from design-only to a named,
+source-verified, exact 6/6 geometry with four certified primitive generator
+owners.  It deliberately stops before a control systole, common cutoff,
+census, branch comparison, determinant, A2, or Route-B evaluation.
+
 ## Round 6
 
 `EXECUTION_STATUS=ROUND6_EXACT_GAMMA_CONJUGACY_CLOSURE_COMPLETED`. Run:
@@ -121,8 +147,8 @@ Every tensor-family comparison must use a common `N`.  A fixed-operator
 high-energy control is a separate regime and cannot be used as evidence for the
 `N→∞` family.
 
-The non-arithmetic genus-2 metric is still not instantiated.  Round 5 completed
-the finite Bolza marked-cyclic layer and froze the source/parameter contract;
-Round 6 subsequently proves that all eight same-homology gaps are exact
-conjugate duplicates.  The next experiment must source and instantiate the
-matched control under a common geometric cutoff; other regimes remain open.
+The non-arithmetic genus-2 metric is instantiated in Round 7, after Round 5
+froze the contract and Round 6 closed all eight same-homology gaps as exact
+conjugate duplicates.  The next experiment must first prove enough control
+length-spectrum completeness to freeze a target-blind common geometric cutoff;
+other regimes remain open.

@@ -1,4 +1,14 @@
-# P25 experiment status — Rounds 2 through 6 complete
+# P25 experiment status — Rounds 2 through 7 complete
+
+## Round 7
+
+`./experiments/reproduce_round7.sh` runs twelve tests, builds two independent
+artifact trees, requires byte identity, and verifies the checked-in outputs.
+The finite exact replay has 84 trace/count rows and 182 coefficient rows with
+zero mismatches.  Core SHA-256 is
+`9c3daaa1feffa23090cc4edf5c3cdf0398389f814ef4f0f6b14cad254f23d4d9`.
+The default mode is read-only verification; `--refresh` is explicit.  No
+physical, prime, zero, or resonance data are consumed.
 
 ## Round 6
 

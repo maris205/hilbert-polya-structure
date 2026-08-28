@@ -33,13 +33,20 @@ Date: **2026-08-28**
 | Round-5 signed-`k` ledger | **EXECUTED / REPRODUCIBLE** — 36 owners per field, `k=+-1,+-2,+-3,+-4`, 576 rows, 48/48 Round-4 compatibility checks, zero orientation-owner fields |
 | Round-5 reproducibility | **PASS** — 14/14 tests, two byte-identical builds, tree SHA-256 `1c8665ea55826e73c6aeb5f8cd6386a8d1020976d23004e1216d05e2f1e8a138` |
 | Round-5 completeness boundary | **MARKED-CYCLIC ONLY** — full `Gamma`-conjugacy completeness is `NOT_ESTABLISHED`; equal exact trace squared never mints conjugacy credit |
-| Non-arithmetic genus-2 control | **`[OPEN] / DESIGN ONLY`** — source, non-arithmeticity, systole, marking, physics, and common geometric-cutoff contract frozen; no surface selected and no comparison run |
+| Non-arithmetic genus-2 control | **`[PROVED] / SOURCE PACKAGE READY`** — `NAZARENKO-EXP-OCTAGON-G2`, `(a,alpha)=(exp(-1/10),pi/4)`, is source locked and independently proved non-arithmetic; four side-pairing owners are primitive; no systole or comparison is claimed |
 | Round-6 frozen-eight conjugacy closure | **`[PROVED] / PASS`** — eight explicit short words satisfy `x^-1*g*x=h` exactly in source-locked `SL(2)`; all eight historically withheld records are conjugate duplicates, with zero inverse fallbacks and zero new owner credits |
 | Round-6 owner consequence | **UNCHANGED** — 44 primitivity-certified records resolve to 36 credited inverse-paired classes plus eight exact duplicate records; 36 owners per field and 72 field-owner pairs |
 | Round-6 branch consequence | **BYTE-IDENTICAL REUSE** — the Round-5 576-row branch ledger remains canonical, SHA-256 `5f9cc50dfba3bb257a8a4f32c8bc5bd322a683788da4c9b900e9f8a5a62ee493` |
 | Round-6 control source-package gate | **FAIL-CLOSED / NOT READY** — 0/6 required locked inputs present; geometry, matrices, non-arithmeticity, systole, cutoff, census, and comparison all remain false/not run |
 | Round-6 reproducibility | **PASS** — 17/17 tests, two byte-identical builds, artifact-tree SHA-256 `098bfcac59f7fd332ddc022d2f59745f4e91450ade251024e9d6a12a6c82126b` |
 | Round-6 bounded-proxy Route record | **EVALUATION ONLY / NO PROMOTION** — separate `L<=4` certified-owner proxy is conservatively typed `A0_WEAK / A1_WEAK / A2--A4 FAIL-NOT_TESTABLE`, overall `ROUTE_A_EXPLORATORY`; the main P28 tuple remains unassigned |
+| Round-7 source audit | **COMPLETE / CLAIM BOUNDED** — eight records screened, four included and four excluded; all included sources have exact locators, access date `2026-08-28`, claim ownership, grade, and boundary |
+| Round-7 six-item source gate | **PASS / 6 OF 6** — named closed genus-two surface; exact torsion-free cocompact Fuchsian side pairings; published presentation plus checked relator; primary/peer-reviewed locator; independent non-arithmeticity; four per-owner primitivity certificates |
+| Round-7 exact matrix replay | **PASS** — four analytic `SU(1,1)` generators; determinant residual `1.314e-140`, `SU(1,1)` residual `1.050e-140`, relator residual `7.191e-139` at 140 decimal digits; the angle-sum replay is a formula-consistency check rather than an independent geometry proof |
+| Round-7 non-arithmeticity | **`[PROVED]`** — `tr(g0)^2` is transcendental by exact trace algebra and Lindemann--Weierstrass; hence the square-subgroup trace `tr(g0^2)` violates Takeuchi's necessary algebraic trace-field condition |
+| Round-7 primitive control owners | **`[PROVED]` FOR FOUR GENERATORS** — abelianization `Z^4` maps `g_j` to primitive basis vector `e_j`, excluding a proper-power representation; no systole or other-word credit |
+| Round-7 execution boundary | **NOT RUN BEYOND SOURCE PACKAGE** — no common cutoff, control census, branch comparison, target data, arithmetic labels, determinant, A2, or Route B |
+| Round-7 reproducibility | **PASS** — 22/22 tests, two byte-identical builds, core artifact SHA-256 `f1fbcc162907622e8f521dc08d56032afec7553810a9bbbcf3ba752728540386`, tree SHA-256 `a11917f6e9eab3bc48f1920b9727b0ec96a9c43c1f7ac13ab69984c005cfccef` |
 | Fixed degree-one candidate | `Δ^L` tracked separately; `FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN` |
 | Fixed-candidate orbit ownership | `FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED` |
 | Bold hypothesis | **`[HEURISTIC]`** — arithmetic-specific phase cancellation |
@@ -54,11 +61,12 @@ Date: **2026-08-28**
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: the eight same-homology-axis ambiguities are closed as exact
-conjugate duplicates.  Select and source-verify the contracted non-arithmetic
-constant-curvature genus-two control, satisfy all six source-package
-requirements, and freeze one common geometric cutoff before inspecting branch
-outcomes.  This progress applies only to the frozen signed-field even
+Next gate: the contracted non-arithmetic control is selected and its strict
+source package passes 6/6.  Prove a rigorous control systole/lower bound or a
+finite word-to-length completeness certificate strong enough to predeclare one
+common geometric cutoff `Lambda`; only then freeze `Lambda` and run the
+target-blind matched census and magnetic comparison.  This progress applies
+only to the frozen signed-field even
 subsequence; zero field, odd `N`, full all-`N`, arbitrary twists, and fixed
 `Delta^L` remain open or `NOT_ESTABLISHED`.  The bounded-proxy evaluation is
 not a promotion of the main candidate: its formal Route-A tuple remains

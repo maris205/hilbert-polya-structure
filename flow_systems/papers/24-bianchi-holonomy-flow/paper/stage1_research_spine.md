@@ -1,4 +1,4 @@
-# P24 Stage-1 research spine after Round 6
+# P24 Stage-1 research spine through Round 7
 
 Manuscript status: **NOT STARTED**.  This document freezes the paper-facing
 argument created by the research rounds; it is not an ARS Stage-2 draft.
@@ -82,6 +82,33 @@ elementary right Nielsen moves.  Candidate standardized phase width is
 `16.9152926064`.  The latter violates the frozen exploratory condition, so the
 present statistic cannot justify a metric Bianchi prefix.
 
+## Round-7 theorem result available for Theory and Results
+
+For every level-`(3)` matrix `gamma=I+3A` in `SL_2(Z[i])`, exact determinant
+expansion proves
+
+```text
+tr(gamma)-2=-9 det(A),
+D9(gamma)=(tr(gamma)^2-4)/9 in Z[i].
+```
+
+This normalized trace discriminant is invariant under conjugacy and inversion.
+If `S_0=1`, `S_1=t`, and `S_n=tS_(n-1)-S_(n-2)`, Cayley--Hamilton further gives
+
+```text
+D9(gamma^r)=D9(gamma) S_(r-1)(tr(gamma))^2.
+```
+
+The deterministic finite audit checks these identities on all 11,481 frozen
+exact matrices and repetitions `r=1,...,5`.  It finds 145 distinct `D9` values,
+leaving 11,336 rows beyond first occurrences.  An exact same-`D9` pair is
+separated even after the unoriented owner quotient by the invariant
+`((gamma-I)/3) mod 3` up to sign: this residue is fixed by `Gamma((3))`
+conjugacy and negated by inversion.  Thus Round 7 supplies a genuine
+source-derived arithmetic invariant and, simultaneously, a proof that `D9`
+is not an injective orbit owner.  It does not resurrect the Round-6 phase
+statistic or create a determinant/zero experiment.
+
 ## Central falsification logic
 
 The decisive comparison is not “Bianchi versus any chaotic flow.”  Its first
@@ -112,6 +139,8 @@ or an intrinsic orbit-to-prime-ideal owner theorem.
   length ledger; the improvement from an infinite-volume to a finite-volume
   cusp control; the exact marked-word theorem and descriptive pre-frozen phase
   comparison with its rank/presentation limitation.
+- **Allowed:** the exact `D9` integrality, conjugacy/inversion invariance,
+  repetition identity, and the frozen finite collision census.
 - **Not allowed:** a full Bianchi primitive ledger, a presentation-invariant or
   metric-length comparison,
   an arithmetic-hypothesis verdict, an orbit-to-Gaussian-prime map, a full-flow

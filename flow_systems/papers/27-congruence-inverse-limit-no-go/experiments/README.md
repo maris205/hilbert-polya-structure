@@ -1,5 +1,16 @@
 # P27 experiment status
 
+## Round 7
+
+Run `bash experiments/reproduce_round7.sh`.  Twelve tests and two isolated
+builds must pass byte-for-byte before the checked-in outputs are verified.
+The replay contains 48 locked owner/level rows and 54 fixed-prefix diagnostics;
+core SHA-256 is
+`551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845`.
+The default is read-only verification and `--refresh` is explicit.  Finite
+rows certify coefficient support only; the all-level theorem is proved in the
+Round-7 note.
+
 ## Round 6
 
 Run `bash experiments/reproduce_round6.sh`.  It runs eleven tests, makes two

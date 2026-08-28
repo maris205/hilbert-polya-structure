@@ -1,5 +1,34 @@
 # P28 results and owner ledgers
 
+## Round-7 source-verified non-arithmetic control
+
+`round7_nonarithmetic_source_matrix.csv` records four included sources from an
+eight-record screening log: one primary representation source, one
+peer-reviewed family corroboration, Takeuchi's peer-reviewed arithmeticity
+criterion, and a published Lindemann--Weierstrass proof.  Every row carries an
+exact locator, access date, source grade, content-access level, claim support,
+and boundary.
+
+`round7_nonarithmetic_control_matrices.json` instantiates the exact
+`NAZARENKO-EXP-OCTAGON-G2` specialization only after the source freeze.  Its
+four analytic `SU(1,1)` generators are defined symbolically; the 140-digit
+decimal matrices serve only as a transcription replay.  All generators are
+hyperbolic, determinant and `SU(1,1)` residuals are below `1.1e-140`, and the
+published relator residual is below `7.2e-139`.
+
+`round7_nonarithmetic_source_package_gate.json` records
+`PASS_READY_6_OF_6`.  Independent exact trace algebra places a transcendental
+trace in the square subgroup, contradicting Takeuchi's necessary arithmetic
+trace-field condition.  The presentation abelianizes to `Z^4`, proving
+`g0,...,g3` primitive without claiming they are systoles.
+
+`round7_nonarithmetic_control_validation.json` records `PASS`, four matrices,
+four primitive owners, zero target data, and every execution firewall.  No
+common cutoff, census, comparison, determinant, A2, or Route-B action appears
+in these artifacts.  The default reproducer verifies canonical bytes; the
+artifact-tree SHA-256 is
+`a11917f6e9eab3bc48f1920b9727b0ec96a9c43c1f7ac13ab69984c005cfccef`.
+
 ## Round-6 exact conjugacy resolution overlay
 
 `round6_bolza_conjugacy_certificate.csv` is an eight-row resolution overlay on

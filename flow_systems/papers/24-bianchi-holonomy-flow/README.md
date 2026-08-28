@@ -308,6 +308,20 @@ source-derived Gaussian-prime-ideal owner theorem or a different invariant
 under a new frozen falsification contract.  The stopped statistic does not
 authorize a metric Bianchi prefix.
 
+Round 7 executes the latter branch with an exact source-derived invariant.  If
+`gamma=I+3A` lies in `SL_2(Z[i])`, the determinant identity forces
+`tr(gamma)-2=-9 det(A)`, so
+`D9(gamma)=(tr(gamma)^2-4)/9` is a Gaussian integer.  It is invariant under
+conjugacy and inversion and obeys an exact Chebyshev-type square-factor rule
+under repetition.  All identities pass for the 11,481 frozen exact matrices
+and powers `r=1,...,5`.  The ledger has only 145 distinct `D9` values, so the
+result is deliberately retained as a necessary invariant.  In particular,
+the exact same-`D9` pair `[[1,3],[3,10]]` and
+`[[1,-3i],[3i,10]]` has distinct `((gamma-I)/3) mod 3` residues even up to
+sign; that residue is invariant under `Gamma((3))` conjugacy and changes sign
+under inversion.  Hence `D9` is provably non-injective on unoriented owners
+and is not promoted to a Gaussian-prime-ideal owner map or metric prefix.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -328,6 +342,10 @@ authorize a metric Bianchi prefix.
 - [Round-6 freeze contract](experiments/round6_nielsen_panel_freeze.json)
 - [Round-6 validation](experiments/round6_validation.md)
 - [Round-6 typed proxy Route-A record](../../evaluations/route_a/P24-BIANCHI-MARKED-WORD-PROXY/2026-08-28-round6.yaml)
+- [Round-7 exact theorem](notes/round7_trace_discriminant_theorem.md)
+- [Round-7 freeze contract](experiments/round7_trace_discriminant_freeze.json)
+- [Round-7 validation](experiments/round7_validation.md)
+- [Round-7 typed proxy Route-A record](../../evaluations/route_a/P24-BIANCHI-MARKED-WORD-PROXY/2026-08-28-round7.yaml)
 - [Stage-1 paper spine](paper/stage1_research_spine.md)
 
 No manuscript, orbit-to-prime-ideal map, full-flow Route assignment, A2

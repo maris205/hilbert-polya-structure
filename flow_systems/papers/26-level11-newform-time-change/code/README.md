@@ -1,5 +1,24 @@
 # P26 code
 
+## Round 7
+
+`round7_exact_survivors.py` regenerates the four frozen `p=5` degree-one and
+degree-five cycle owners, rewrites them in the 12-coset
+`Gamma_0(11)\PSL(2,Z)` Schreier model, and computes exact rational homology
+and real-structure certificates.  It proves the full finite `a_5^2` moment
+condition for all four groups and separates two full complex-period kernels
+from two nonzero purely imaginary periods.
+
+Run its thirteen tests with:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_round7_exact_survivors.py
+```
+
+Default verification and explicit refresh are owned by
+`../experiments/reproduce_round7.sh` and
+`../experiments/reproduce_round7.sh --refresh`.
+
 ## Round 6
 
 `round6_second_variation.py` consumes the same SHA-locked Round-4 cycle-owner

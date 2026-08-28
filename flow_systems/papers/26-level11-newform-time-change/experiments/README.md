@@ -1,5 +1,32 @@
 # P26 reproduction
 
+## Round 7
+
+Verify the checked-in artifacts without modifying them:
+
+```bash
+./experiments/reproduce_round7.sh
+```
+
+Refresh them explicitly with:
+
+```bash
+./experiments/reproduce_round7.sh --refresh
+```
+
+The script runs 13 tests, generates two isolated four-file exact-homology
+trees from the SHA-locked Round-4 cycle and Round-6 moment ledgers, requires
+byte identity and matching stdout, and either compares with or refreshes the
+canonical outputs and receipt.  The tree SHA-256 is:
+
+```text
+bdfa8f5baaeef47f1bfd8482e8b459d2bd0606cdbb9cdcf0c441a8f65829d678
+```
+
+The receipt binds the freeze, builder, tests, reproducer, locked inputs, and
+all four outputs.  Exact homology is the proof layer; inherited quadrature
+values remain cross-checks only.
+
 ## Round 6
 
 Run:

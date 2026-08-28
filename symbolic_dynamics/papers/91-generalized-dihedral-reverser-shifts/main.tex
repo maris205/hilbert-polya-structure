@@ -1,0 +1,343 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Dih}{\operatorname{Dih}}
+\newcommand{\Z}{\mathbb Z}
+
+\title[Generalized-dihedral reverser shifts]{Reverser Shifts on Generalized Dihedral Groups:\ Cubic Zeta Compression and Two-Period Rigidity}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 28 August 2026}
+\subjclass[2020]{37B10, 20D60, 05C50, 37C25}
+\keywords{shift of finite type, generalized dihedral group, reverser, symbolic zeta function, periodic point, conjugacy rigidity}
+
+\begin{document}
+
+\begin{abstract}
+Let $A$ be a finite abelian group and
+$G=\Dih(A)=A\rtimes\{\pm1\}$.  We form a one-step shift on alphabet $G$ by
+declaring $g\to h$ when $hgh^{-1}=g^{-1}$.  Write
+$N=|A|$, $t=|A[2]|$, and $c=N/t$.  We prove that the shift is mixing and that
+its entire $2N$-state adjacency spectrum depends only on $(N,t)$.  When
+$N>t$, the characteristic polynomial is
+\[
+ \lambda^{2N-c-2}(\lambda-t)^{c-1}
+ \bigl(\lambda^3-2t\lambda^2+t(t-N)\lambda-Nt(N-t)\bigr).
+\]
+Thus its zeta function is controlled by one repeated linear factor and a
+cubic.  In particular,
+\[
+ \#\Fix(\sigma)=N+t,\qquad
+ \#\Fix(\sigma^2)=t(3N+t).
+\]
+These first two counts recover $(N,t)$.  Conversely, an explicit cosetwise
+graph model shows that equal parameter pairs give isomorphic relation graphs.
+Hence two shifts in the family are conjugate exactly when their pairs
+$(|A|,|A[2]|)$ agree.  Nonisomorphic groups, for example $\Z/9\Z$ and
+$(\Z/3\Z)^2$, therefore produce the same symbolic system.  Exact group-law
+enumeration checks the quotient, spectrum, periods, and collapse on the
+registered finite families.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+An element $h$ reverses $g$ when conjugation by $h$ sends $g$ to $g^{-1}$.
+Reversing symmetries are standard in group-theoretic approaches to dynamics;
+their structural setting is developed, for example, by Baake and Roberts
+\cite{BaakeRoberts2006}.  Generalized dihedral groups are a basic source of
+such involutory behavior.  Their commuting graphs have also been studied
+directly \cite{KakkarRawat2018}.
+
+This note asks a different symbolic question.  Instead of forming an
+undirected commuting graph, we use the directed local relation
+$hgh^{-1}=g^{-1}$ as the adjacency rule of a one-dimensional shift of finite
+type.  A small-group calculation gives two immediate anomalies: the adjacency
+matrix has very low rank, and nonisomorphic abelian groups with the same order
+and the same size of their two-torsion subgroup give identical graphs.
+
+We close these observations for every finite abelian $A$.  The contributions
+are:
+\begin{enumerate}
+\item a canonical row-and-coset model depending only on
+$(N,t)=(|A|,|A[2]|)$;
+\item mixing and unique maximal entropy measure for every member;
+\item a complete characteristic polynomial, periodic-point formula, and
+rational zeta function compressed to a cubic factor;
+\item family rigidity from only the first two periodic counts.
+\end{enumerate}
+
+The concepts of reversing elements, generalized dihedral groups, equitable
+spectral compression, and finite-type zeta functions are prior tools
+\cite{BaakeRoberts2006,GodsilRoyle2001,LindMarcus1995}.  The residual object is
+the particular directed reverser relation and its exact symbolic package.  A
+bounded search through 28 August 2026 found no exact-system collision under
+the relation and parameter keywords recorded in the package audit.  That is
+not an exhaustive priority search, and no absolute priority claim is made.
+
+\section{The relation shift}
+
+Write $A$ additively and let
+\[
+ G=\Dih(A)=A\rtimes\{0,1\},\qquad
+ (a,\epsilon)(b,\eta)
+ =\bigl(a+(-1)^\epsilon b,\epsilon+\eta\bmod2\bigr).
+\]
+Elements $(a,0)$ are rotations and $(a,1)$ are reflections.  Put
+\[
+ T=A[2]=\{a\in A:2a=0\},\qquad N=|A|,\quad t=|T|,\quad c=N/t.
+\]
+Since $T$ is a subgroup, $t$ divides $N$ and $c$ is a positive integer.
+
+\begin{definition}[reverser shift]
+Let $M_A$ be the zero--one matrix indexed by $G$ with
+\[
+ M_A(g,h)=1\quad\Longleftrightarrow\quad hgh^{-1}=g^{-1}.
+\]
+The reverser shift is
+\[
+ X_A=\{x\in G^{\Z}:M_A(x_i,x_{i+1})=1\text{ for every }i\},
+\]
+with left shift $\sigma$.
+\end{definition}
+
+The local relation is directed: the role of the state being reversed and the
+role of its reverser are not interchangeable in the definition.
+
+\begin{lemma}[successor classes]\label{lem:rows}
+The outgoing neighbors have the following form.
+\begin{enumerate}
+\item If $g=(a,0)$ with $a\in T$, every element of $G$ follows $g$.
+\item If $g=(a,0)$ with $a\notin T$, precisely the $N$ reflections follow
+$g$.
+\item If $g=(a,1)$, its successors are the $t$ rotations $(y,0)$ with
+$y\in T$ and the $t$ reflections $(y,1)$ with $y\in a+T$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Conjugation by a rotation fixes every rotation, while conjugation by a
+reflection inverts every rotation.  This gives the first two statements.
+For a reflection, direct multiplication gives
+\[
+ (y,0)(a,1)(y,0)^{-1}=(a+2y,1),
+\]
+and
+\[
+ (y,1)(a,1)(y,1)^{-1}=(2y-a,1).
+\]
+Every reflection is an involution, so equality with $(a,1)^{-1}=(a,1)$
+requires $2y=0$ in the first display and $2(y-a)=0$ in the second.
+\end{proof}
+
+\begin{proposition}[mixing]\label{prop:mixing}
+Every $X_A$ is a mixing shift of finite type.  It therefore has a unique
+measure of maximal entropy.
+\end{proposition}
+
+\begin{proof}
+Every reflection has the identity rotation among its successors.  Every
+non-two-torsion rotation reaches a reflection and then the identity, while a
+two-torsion rotation already lies in that class.  Conversely, the identity
+rotation has every group element as a successor.  The graph is strongly
+connected.  The identity rotation also has a loop, so the graph period is one
+and its adjacency matrix is primitive.  The maximal-measure conclusion is
+the standard Parry theorem \cite{Parry1964}.
+\end{proof}
+
+\section{Canonical collapse and spectrum}
+
+Partition the vertices into the $t$ two-torsion rotations $R_T$, the
+$N-t$ remaining rotations $R_U$, and the reflections.  Further partition the
+reflections into the $c$ cosets of $T$ in $A$.  By \cref{lem:rows}, the graph
+is canonically described as follows:
+\begin{itemize}
+\item every vertex of $R_T$ points to all $2N$ vertices;
+\item every vertex of $R_U$ points to all reflections;
+\item every reflection in coset $C$ points to all of $R_T$ and all
+reflections in $C$.
+\end{itemize}
+In particular, the graph depends only on $(N,t)$.
+
+We use the row action on column functions,
+$(M_Af)(g)=\sum_hM_A(g,h)f(h)$.  On functions constant on the three coarse
+classes, the adjacency action is represented by
+\begin{equation}\label{eq:Q}
+ Q_{N,t}=
+ \begin{pmatrix}
+  t&N-t&N\\
+  0&0&N\\
+  t&0&t
+ \end{pmatrix}.
+\end{equation}
+
+\begin{theorem}[complete spectral compression]\label{thm:spectrum}
+If $N>t$, then
+\begin{equation}\label{eq:charpoly}
+ \det(\lambda I-M_A)
+ =\lambda^{2N-c-2}(\lambda-t)^{c-1}
+ \bigl(\lambda^3-2t\lambda^2+t(t-N)\lambda-Nt(N-t)\bigr).
+\end{equation}
+In particular, $\operatorname{rank}M_A=c+2$.  If $N=t$, then $M_A$ is the
+$2N$ by $2N$ all-ones matrix, so its characteristic polynomial is
+$\lambda^{2N-1}(\lambda-2N)$.
+\end{theorem}
+
+\begin{proof}
+Assume $N>t$.  Vectors whose coordinate sum is zero within $R_T$, within
+$R_U$, or within any single reflection coset are killed by $M_A$.  Their
+direct sum, denoted $V_0$, has dimension
+\[
+ (t-1)+(N-t-1)+c(t-1)=2N-c-2.
+\]
+Next take the space $V_t$ of functions that vanish on all rotations and are
+constant with value $\alpha_i$ on the $i$th reflection coset, where
+$\sum_i\alpha_i=0$.  \cref{lem:rows} shows that $M_A$ multiplies this
+$(c-1)$-dimensional space by $t$.  Finally, let $V_Q$ be the
+three-dimensional space of functions constant on $R_T$, on $R_U$, and on
+the union of all reflections.  These three invariant spaces are mutually
+disjoint and their dimensions sum to
+\[
+ (2N-c-2)+(c-1)+3=2N.
+\]
+Thus $\mathbb C^G=V_0\oplus V_t\oplus V_Q$, and the action on $V_Q$ is
+$Q_{N,t}$.  Direct expansion gives
+\[
+ \det(\lambda I-Q_{N,t})
+ =\lambda^3-2t\lambda^2+t(t-N)\lambda-Nt(N-t).
+\]
+The cubic has nonzero constant term because $N>t$, so $Q_{N,t}$ has rank
+three.  Since $t>0$, the action on $V_t$ is invertible.  The zero action on
+$V_0$ therefore gives rank $(c-1)+3=c+2$, as well as the factorization.  If
+$N=t$, every element of $A$ has
+order at most two, $G$ is abelian of exponent two, and every pair satisfies
+the relation; hence $M_A$ is all ones.
+\end{proof}
+
+For $N>t$, the entropy is $\log\rho_{N,t}$, where $\rho_{N,t}$ is the Perron
+root of the cubic factor in \eqref{eq:charpoly}.  The full-shift endpoint has
+entropy $\log(2N)$.
+
+\section{Periodic points, zeta, and two-count rigidity}
+
+Let $F_k(A)=\#\Fix(\sigma^k)=\tr(M_A^k)$.  The spectral decomposition gives,
+for $N>t$,
+\begin{equation}\label{eq:allfix}
+ F_k(A)=(c-1)t^k+\tr(Q_{N,t}^k).
+\end{equation}
+
+\begin{theorem}[zeta and first periods]\label{thm:zeta}
+For $N>t$, the Artin--Mazur zeta function of the shift is
+\begin{equation}\label{eq:zeta}
+ \zeta_{X_A}(z)
+ =\frac{1}{(1-tz)^{c-1}
+ \left[1-2tz+t(t-N)z^2-Nt(N-t)z^3\right]}.
+\end{equation}
+At the full-shift endpoint $N=t$,
+\begin{equation}\label{eq:zeta-endpoint}
+ \zeta_{X_A}(z)=\frac1{1-2Nz}.
+\end{equation}
+Moreover, for every $N,t$, including $N=t$,
+\begin{equation}\label{eq:firsttwo}
+ F_1=N+t,\qquad F_2=t(3N+t).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For an SFT, $\zeta(z)=\det(I-zM_A)^{-1}$
+\cite{LindMarcus1995}.  Substitution of \eqref{eq:charpoly}, or direct
+evaluation of the determinant on the invariant decomposition, gives
+\eqref{eq:zeta}.  If $N=t$, the all-ones matrix has one eigenvalue $2N$ and
+all others zero, proving \eqref{eq:zeta-endpoint}.
+
+For $N>t$, $\tr Q_{N,t}=2t$ and
+$\tr(Q_{N,t}^2)=2t(N+t)$.  Adding the $(c-1)$ copies of the eigenvalue $t$
+gives
+\[
+ F_1=(c-1)t+2t=N+t,
+ \qquad
+ F_2=(c-1)t^2+2t(N+t)=t(3N+t).
+\]
+The same formulas reduce to $(2N)$ and $(2N)^2$ when $N=t$.
+\end{proof}
+
+\begin{theorem}[family conjugacy rigidity]\label{thm:rigidity}
+For finite abelian groups $A$ and $B$,
+\[
+ X_A\cong X_B
+ \quad\Longleftrightarrow\quad
+ (|A|,|A[2]|)=(|B|,|B[2]|).
+\]
+The reverse implication is realized by a one-block conjugacy induced by a
+relation-graph isomorphism.
+\end{theorem}
+
+\begin{proof}
+A conjugacy preserves every periodic count.  Put $S=F_1=N+t$.  By
+\eqref{eq:firsttwo}, $t$ solves
+\begin{equation}\label{eq:quadratic}
+ 2x^2-3Sx+F_2=0.
+\end{equation}
+The genuine root is a positive integer and satisfies $t\leq N$, hence
+$t\leq S/2$.  The other root is $3S/2-t\geq S$, so it cannot satisfy the
+same bound.  Thus $t$ is recovered uniquely and $N=S-t$.  Conjugate shifts
+therefore have the same $(N,t)$.
+
+Conversely, the canonical description preceding \eqref{eq:Q} uses only the
+sizes $t$, $N-t$, and $c$ reflection fibers of size $t$.  Choose bijections
+between the two $R_T$ classes and the two $R_U$ classes, choose a bijection
+between their sets of reflection cosets, and then choose a bijection inside
+each paired coset.  The three adjacency bullets show entry by entry that the
+result is a directed graph isomorphism, hence a one-block conjugacy.
+\end{proof}
+
+For example, $A=\Z/9\Z$ and $B=(\Z/3\Z)^2$ are nonisomorphic, but both have
+$(N,t)=(9,1)$, so their reverser shifts are conjugate.  The symbolic system
+forgets the abelian group structure beyond order and two-torsion size.
+
+\section{Exact controls and scope}
+
+The accompanying Python program independently implements the semidirect
+product, inverse, conjugation, and relation graph for 20 product-of-cyclic
+presentations.  It compares every canonical adjacency entry, explicitly
+checks the zero, $t$, and quotient invariant spaces, checks rank and strong
+connectivity, verifies traces through period ten, computes small
+characteristic and zeta polynomials, reconstructs $(N,t)$ from $(F_1,F_2)$,
+and tests nonisomorphic same-parameter collapses both at $(N,t)=(9,1)$ and
+$(16,4)$.
+
+These finite computations guard the group-law convention and all endpoint
+formulas; they are not evidence for claims beyond the proofs.  The
+classification is only inside this reverser-shift family.  It does not
+classify generalized dihedral groups, reversing symmetry groups, commuting
+graphs, or arbitrary group-relation SFTs.  External release and priority
+claims remain on hold.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
