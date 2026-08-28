@@ -1,5 +1,32 @@
 # P28 code status
 
+## Round 7
+
+`build_round7_nonarithmetic_control_gate.py` digest-binds the pre-computation
+freeze and four claim-bounded sources, specializes Nazarenko's exact octagon
+formulas at `(a,alpha)=(exp(-1/10),pi/4)`, and emits the source matrix, analytic
+and high-precision matrix package, six-item gate, and validation record.  It
+checks admissibility, determinant one, `SU(1,1)`, hyperbolicity, angle sum, and
+the published surface relator at 140 decimal digits.  Exact logic separately
+certifies a transcendental square-subgroup trace and four primitive generator
+classes.
+
+`test_round7_nonarithmetic_control_gate.py` has twenty-two tests covering the
+freeze and remote-source locks, claim boundaries, parameter admissibility,
+matrix and relation replay, the square-subgroup Takeuchi obstruction,
+per-owner abelianization primitivity, all six gates, mutation failure, and the
+cutoff/census/comparison/target/A2/Route-B firewalls.  Canonical reproduction
+is:
+
+```bash
+./experiments/reproduce_round7.sh
+```
+
+The default mode is verify-only and `--refresh` is explicit.  The builder does
+not claim a control systole or run a census/comparison; its next authorized
+input is a rigorous lower-bound/completeness certificate sufficient to freeze
+one common geometric cutoff.
+
 ## Round 6
 
 `build_round6_bolza_conjugacy_certificate.py` digest-binds the immutable

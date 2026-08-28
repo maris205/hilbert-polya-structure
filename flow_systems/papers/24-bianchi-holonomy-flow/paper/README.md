@@ -28,6 +28,13 @@ identity plus all 24 elementary right Nielsen moves on both four-markings.  The
 candidate `z` width is `0.916300044002`, but the redundant control width is
 `16.9152926064`; the frozen conjunction fails and the current statistic is
 stopped as marking-sensitive.  It does not authorize a metric prefix.
+Round 7 adds a positive exact theorem without crossing that firewall:
+`D9(gamma)=(tr(gamma)^2-4)/9` is a Gaussian integer for level-`(3)` matrices,
+is conjugacy/inversion invariant, and obeys an exact repetition square-factor
+law.  The reproducible 11,481-row audit passes every exact witness but yields
+only 145 distinct invariant values.  It is therefore paper-ready as a
+necessary-invariant theorem and collision result, not as an orbit-to-prime
+owner map.
 The primary target is a `Q(i)` Dedekind-zeta calibration.  Rational-prime
 push-forward is secondary, and no Riemann-`zeta` A0 credit is claimed.
 The typed proxy tuple is

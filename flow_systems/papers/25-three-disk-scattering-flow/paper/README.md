@@ -38,3 +38,10 @@ exactly `zeta_pi(z)=zeta_0(-z)`.  Its formal tuple is
 `(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`, overall
 `ROUTE_A_REJECTED`.  These A1/A2 credits do not transfer to the physical
 flight-length flow or exact scattering determinant.
+
+Round 7 promotes that single q=3 calibrator into an infinite-family theorem.
+For every integer `q>=2`, the q-symbol no-repeat primitive Euler product is the
+reciprocal of `(1-(q-1)u z)(1+u z)^(q-1)`, and collision parity remains only
+`z -> -z`.  This is the paper's new analytic progress: it shows that exact
+primitive-to-determinant wiring persists across arbitrary alphabet size while
+arithmetic A0 remains absent.  See [the Round-7 research spine](round7_research_spine.md).

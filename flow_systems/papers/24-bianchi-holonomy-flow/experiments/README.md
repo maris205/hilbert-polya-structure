@@ -92,3 +92,17 @@ requires byte identity, and verifies the checked-in tree.  Core SHA-256 is
 The decision is `STOP_SCOPED_CURRENT_PHASE_STATISTIC_AS_MARKING_SENSITIVE`.
 Only the marked-word proxy receives a formal tuple; the full flow is still
 unassigned and Route B remains closed.
+
+## Round 7
+
+The pre-build contract is pinned at SHA-256
+`16bddd930a90af0fe673a698b912b9d302cfd126c5a1cb5bef48cfc496846b93`.
+`reproduce_round7.sh` runs 12 tests, creates two independent temporary builds,
+requires byte identity, and then verifies the canonical tree.  Its default
+mode is read-only verification; `--refresh` is required to update canonical
+outputs.  The receipt binds the freeze, builder, test suite, reproducer,
+ledger, metrics, and validation report.
+
+The decision is
+`RETAIN_AS_SOURCE_DERIVED_NECESSARY_INVARIANT_WITHOUT_OWNER_OR_METRIC_PREFIX`.
+The full flow remains unassigned and Route B remains closed.

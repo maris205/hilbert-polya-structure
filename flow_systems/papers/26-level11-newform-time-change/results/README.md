@@ -1,5 +1,23 @@
 # P26 generated results
 
+## Round 7 — exact `p=5` survivor classification
+
+- `round7_exact_survivor_classification_ledger.csv`: four frozen survivor
+  rows with regenerated exact degree-one/degree-five owners, rational
+  `Y_0(11)` homology coordinates, compact-zero certificates, real-structure
+  parity, exact finite moment status, and inherited numerical cross-checks.
+- `round7_exact_homology_model.json`: the 12-coset, 24-arc Schreier model,
+  relation rank 21, cusp direction, and compact/real-period decision rules.
+- `round7_summary.json` and `round7_artifact_manifest.json`: exact 4/4 split,
+  source locks, claim boundary, and source/output SHA-256 bindings.
+
+All four Round-6 `p=5`, `a_p^2` positives are exact finite group-moment
+survivors.  Two degree-five owners are full complex-period kernels; two are
+nonzero classes with purely imaginary periods and hence only real-projection
+kernels.  No row is a floating-quadrature artifact and none is unresolved.
+The result is local to four frozen groups and does not promote A2 or open
+Route B.
+
 ## Round 6 — inverse-paired second variation and quadratic Hecke moments
 
 - `round6_inverse_pair_second_variation_ledger.csv`: 552 rows for the 138
@@ -19,8 +37,9 @@
   source hashes, analytic statements, Route boundary, and artifact bindings.
 
 The inverse-pair formulas and finite-multiset moment criterion are `[PROVED]`;
-the period-weighted outcomes, including four numerical `p=5` survivors, are
-`[NUMERICAL_OBSERVATION]`.  The formal tuple is
+as recorded at the end of Round 6, the period-weighted outcomes, including
+four `p=5` survivors, were `[NUMERICAL_OBSERVATION]`.  Round 7 upgrades those
+four rows exactly.  The formal tuple is
 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` with overall
 `ROUTE_A_EXPLORATORY`.  A2 is `FAIL/NOT_TESTABLE`: no complete primitive
 population, global product/continuation, root count, or zero comparison was

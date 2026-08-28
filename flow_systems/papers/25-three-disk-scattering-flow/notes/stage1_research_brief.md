@@ -93,6 +93,15 @@ This justifies retaining P25 as the methods/negative-control paper rather than
 extending the stopped statistic by cutoff alone.  See
 `notes/round5_universal_half_density_theorem.md`.
 
+Round 6 closes the exact primitive-to-determinant wiring for the separately
+typed three-symbol unit-roof suspension.  Round 7 then proves the stronger
+family statement for every integer `q>=2`: primitive Euler, adjacency trace,
+and reciprocal determinant coincide, while collision parity is only the
+substitution `z -> -z`.  The exact replay over `q=2,...,8` has zero mismatches.
+This is paper-facing analytic progress because it turns a single symbolic
+example into a universal proves-too-much control.  It does not change the
+physical flow's Euclidean-length clock or supply an arithmetic owner.
+
 ## Route mapping
 
 ```text
@@ -103,7 +112,10 @@ A0_SOURCE_STATUS=ABSENT_BY_CONSTRUCTION
 HALF_DENSITY_CONTROL_EVIDENCE=NUMERICAL_OBSERVATION
 HALF_DENSITY_CONTROL_SCOPE=TOPOLOGICAL_WORD_LENGTH_LE_12
 PROVES_TOO_MUCH_VERDICT=STOP_SCOPED_FOR_HALF_DENSITY_AS_ARITHMETIC_EVIDENCE
-FORMAL_A0_A4_TUPLE=UNASSIGNED
+PHYSICAL_FLOW_FORMAL_A0_A4_TUPLE=UNASSIGNED
+ROUND6_SYMBOLIC_TUPLE=(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)
+ROUND7_Q_FAMILY_TUPLE=(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)
+ROUND7_Q_FAMILY_OVERALL=ROUTE_A_REJECTED
 FORMAL_EVALUATION_TRIGGER=UNMET_REQUIRED_INPUTS_AND_NO_ARITHMETIC_OWNER
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false

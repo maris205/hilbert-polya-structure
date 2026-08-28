@@ -83,6 +83,19 @@ Working title: *Semiclassical Tensor-Power Trace*
   `A0_WEAK/A1_WEAK/A2--A4_FAIL-NOT_TESTABLE`, overall
   `ROUTE_A_EXPLORATORY`; this is an evaluation record, not a promotion of the
   full Paper-28 candidate.
+- Round-7 progress: the contracted constant-curvature genus-two control is no
+  longer a design placeholder.  A source audit screened eight records,
+  included four claim-bearing primary/peer-reviewed sources, and instantiated
+  the exact project-local surface `NAZARENKO-EXP-OCTAGON-G2` at
+  `(a,alpha)=(exp(-1/10),pi/4)`.  All six fail-closed requirements pass: the
+  closed named surface, exact `SU(1,1)` side-pairing matrices, published
+  presentation and replayed relator, primary/peer-reviewed locators,
+  independent Takeuchi--Lindemann--Weierstrass non-arithmeticity certificate,
+  and four generator-level primitivity certificates.  Twenty-two tests and
+  two byte-identical builds pass with artifact-tree SHA-256
+  `a11917f6e9eab3bc48f1920b9727b0ec96a9c43c1f7ac13ab69984c005cfccef`.
+  No control systole, common geometric cutoff, finite control census, magnetic
+  comparison, A2 experiment, arithmetic label, or Route-B action is claimed.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -196,6 +209,9 @@ result remains a magnetic trace calibration.
 - [Round-5 non-arithmetic control contract](notes/round5_nonarithmetic_control_contract.md)
 - [Round-6 exact conjugacy closure](notes/round6_bolza_conjugacy_closure.md)
 - [Round-6 bounded-proxy Route-A evaluation](../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round6.yaml)
+- [Round-7 source-package freeze](notes/round7_nonarithmetic_source_package_freeze.md)
+- [Round-7 source verification and six-item gate](notes/round7_nonarithmetic_control_source_verification.md)
+- [Round-7 bounded-proxy Route-A evaluation](../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round7.yaml)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
@@ -210,4 +226,7 @@ per field.  Round 6 proves that all eight formerly ambiguous same-axis records
 are exact conjugate duplicates, so the owner and branch counts do not change.
 The 390-row finite artifact is a complete matched marked-cyclic census at
 `L<=4`, not a full `Gamma`-conjugacy census; signed-`k` branches never receive
-separate owner credit.
+separate owner credit.  Round 7 supplies a real non-arithmetic control geometry
+and four certified primitive control owners, but no Bolza/control conclusion is
+drawn until a target-blind common geometric cutoff and complete finite census
+are certified on both surfaces.

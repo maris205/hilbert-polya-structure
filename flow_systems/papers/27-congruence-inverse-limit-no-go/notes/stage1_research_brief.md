@@ -118,11 +118,11 @@ A0_ARITHMETIC_PROVENANCE_EVIDENCE=PROVED
 A0_PRIME_LINK_EVIDENCE=OPEN
 A1_LOCAL_PROGRESS_EVIDENCE=PROVED
 A1_LOCAL_PROGRESS_TAG=PROVED_A1_OBSTRUCTION
-FORMAL_A0_A4_TUPLE=UNASSIGNED
-A2=NOT_EVALUATED
-A3=NOT_EVALUATED
-A4=NOT_EVALUATED
-OVERALL_ROUTE_A_STATUS=UNASSIGNED
+FORMAL_A0_A4_TUPLE=(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)
+A2=FAIL_NOT_TESTABLE_SAME_OWNER
+A3=FAIL_NOT_TESTABLE
+A4=FAIL_NOT_TESTABLE
+OVERALL_ROUTE_A_STATUS=ROUTE_A_REJECTED
 ROUTE_B_EVALUATION=NOT_RUN
 ROUTE_B_INVOCATION_ALLOWED=false
 GATES_A_E=NOT_REACHED
@@ -132,6 +132,33 @@ The bracketed evidence tokens in this brief are restricted to `PROVED`,
 `HEURISTIC`, `MODELING_CHOICE`, `OPEN`, and `NUMERICALLY_CERTIFIED`, as defined by
 `skills/route-a-evaluator.md`.  `PROVED_A1_OBSTRUCTION` is a local progress tag;
 `UNASSIGNED` and `NOT_EVALUATED` are stage states.
+
+## Round-7 addendum — fixed-owner factors lose every fixed prefix (2026-08-28)
+
+Let `g` be a fixed primitive base owner and let `o_n(g)` be its finite-quotient
+order.  Round 4 proves `o_n(g)->infinity`.  With owner variable
+`x_g=exp(-s ell(g))`, the corresponding unweighted factor has support only at
+multiples of `o_n(g)`:
+
+```text
+(1-x_g^(o_n(g)))^(-1)
+ = 1 + x_g^(o_n(g)) + x_g^(2o_n(g)) + ... .
+```
+
+Therefore, for every fixed `N`, the factor is eventually `1 mod x_g^(N+1)`.
+The same holds for a fixed finite base-owner panel, and in physical time all
+its lifted periods leave every bounded window.  This is `[PROVED]` from order
+escape, not extrapolated from the 48 finite rows.
+
+The Round-7 replay preserves two boundaries.  The three cusped frozen words
+still lack full conjugacy-primitivity certification and appear only as loop-
+order support diagnostics.  The three compact words are primitive by homology,
+but their exact full quotient orders remain unenumerated; the factorial values
+are lower bounds.  See `notes/round7_owner_factor_escape_theorem.md`.
+
+This theorem strengthens same-owner A2 `NO-GO`.  It does not reject a newly
+defined collective statistic with a changed normalization or clock; that would
+be a different candidate requiring a fresh Route-A source lock.
 
 ## Primary sources checked on 2026-08-26
 

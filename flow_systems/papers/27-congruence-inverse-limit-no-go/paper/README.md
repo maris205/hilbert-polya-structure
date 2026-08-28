@@ -50,6 +50,13 @@ and the finite-owner firewall.  Five primary sources have authoritative web
 records and exact locators, but all nine external claim rows remain
 `HUMAN_CONFIRMATION_PENDING`; none is marked `USER_ATTESTED_READ`.
 
+Round 7 adds the paper's strongest same-owner analytic statement.  Every fixed
+primitive base owner's finite-level Euler factor becomes trivial in every
+fixed coefficient prefix, and the same holds for every fixed finite owner
+panel.  This turns the owner firewall into a coefficient-stability no-go
+theorem while leaving genuinely new, explicitly renormalized collective
+objects outside its scope.  See [the Round-7 research spine](round7_research_spine.md).
+
 Stage-1 planning artifacts:
 
 - [closest-prior audit](../notes/round3_closest_prior_audit.md)
@@ -59,6 +66,8 @@ Stage-1 planning artifacts:
 - [Round-6 compact-versus-cusped positioning audit](../notes/round6_compact_cusped_positioning_audit.md)
 - [Round-6 written go/no-go decision](../notes/round6_go_no_go_decision.md)
 - [Round-6 contribution lock](round6_contribution_lock.md)
+- [Round-7 owner-factor escape theorem](../notes/round7_owner_factor_escape_theorem.md)
+- [Round-7 research spine](round7_research_spine.md)
 - [research spine / methodology / section plan](stage1_research_spine.md)
 
 The spine and contribution lock are plans, not manuscript prose.  The narrow

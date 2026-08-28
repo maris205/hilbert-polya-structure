@@ -1,4 +1,4 @@
-# P25 code status — Rounds 2 through 6 executed
+# P25 code status — Rounds 2 through 7 executed
 
 `round2_three_disk_ledger.py` performs four separated operations:
 
@@ -82,3 +82,17 @@ Ten tests cover hashes, determinants, traces, Möbius counts, oriented owners,
 both coefficient identities, typed Route boundaries, source bindings, and byte
 determinism.  No physical lengths, stabilities, resonances, primes, or zeros
 are consumed.
+
+Round 7 adds `round7_q_symbolic_family.py`.  It proves the closed formulas for
+the entire integer family `q>=2` and executes an exact regression grid
+`q=2,...,8`, degree at most 12.  Twelve tests independently check direct
+integer matrix traces, Möbius counts, Bareiss determinant values, three formal-
+series constructions, phase substitution, source bindings, deterministic
+rendering, and Route firewalls.
+
+```bash
+./experiments/reproduce_round7.sh
+```
+
+The default command verifies checked-in canonical bytes.  Use the explicit
+`--refresh` argument only when intentionally rebuilding those artifacts.

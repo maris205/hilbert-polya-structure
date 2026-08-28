@@ -98,3 +98,18 @@ decision is: short comparative owner-audit `GO`, standalone new aperiodicity
 theorem `NO_GO`, same-owner Route-A A2 `NO_GO`.  The result is a positioning
 and technical synthesis contract, not a manuscript or an absolute novelty
 claim.
+
+## Round-7 owner-factor support escape
+
+- `round7_owner_factor_escape_ledger.csv` unifies 24 cusped exact-order rows
+  and 24 cocompact exact lower-bound rows without mixing their evidence types;
+- `round7_fixed_prefix_escape.csv` records 54 fixed owner/degree diagnostics;
+  and
+- `round7_owner_factor_escape_summary.json` records the theorem boundary,
+  route firewall, and replay counts.
+
+For each row, all formal coefficients below the certified order bound are
+zero.  The cusped rows retain `NOT_ESTABLISHED` base conjugacy primitivity and
+are not labeled primitive zeta factors.  The cocompact rows retain proved
+primitive homology but do not fabricate full quotient orders.  Core SHA-256 is
+`551e92315c46dcbb4d01bd84688bb77eca8fcd4a6c2eaec202fe04f621275845`.

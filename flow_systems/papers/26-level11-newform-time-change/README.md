@@ -4,7 +4,7 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress; Rounds 2--6 executed reproducibly**.
+- ARS: **Stage 1 RESEARCH in progress; Rounds 2--7 executed reproducibly**.
 - Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
 - The arithmetic one-form, positive time-density/slowness factor, reciprocal
   speed multiplier, generator, and exact period-variation formula are frozen.
@@ -71,11 +71,18 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
   `lambda_p=a_p` and `lambda_p=a_p^2` fail 51/55 group criteria and 153/165
   rows for each kernel.  The explicitly secondary control `a_p^2-p` fails
   55/55 groups and 165/165 rows.
-- Four `p=5` primary survivors are finite numerical observations only; no
-  exact homology identity or Euler factor is claimed.
+- Round 7 classifies all four `p=5`, `a_5^2=1` numerical survivors by exact
+  `Gamma_0(11)` Schreier homology.  The degree-one real-period identity is
+  exact in all four groups.  Of the degree-five owners, two vanish in compact
+  homology and two are nonzero anti-invariant classes with purely imaginary
+  complex periods.  Hence 4/4 are exact real-projection kernels, with zero
+  floating-quadrature artifacts and zero unresolved rows.
 - Round 6 passed 12/12 tests and two byte-identical builds; artifact-tree
   SHA-256 is
   `fc553aa18bc4fb54d70ea8f4c0bdbc41efc3c0905b3f2942c49e1f6f8c62f864`.
+- Round 7 passed 13/13 tests and two byte-identical builds; artifact-tree
+  SHA-256 is
+  `bdfa8f5baaeef47f1bfd8482e8b459d2bd0606cdbb9cdcf0c441a8f65829d678`.
 - Formal Route-A tuple:
   **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`**;
   overall status **`ROUTE_A_EXPLORATORY`**.  A2 is `NOT_TESTABLE` here: only
@@ -123,7 +130,7 @@ period moments not implied by the cycle-pushforward identity.  No individual
 primitive closed geodesic is assigned the value `a_p`, and no primitive
 orbit-to-prime correspondence is assumed.
 
-## Round-4/5/6 Hecke and zeta kill result
+## Round-4/5/6/7 Hecke and zeta kill result
 
 Round 2 registered a norm-matched generic smooth observable and a period
 permutation. Round 4 separates these numerical controls from the stricter
@@ -165,6 +172,13 @@ and obstruction, not Route-A A2: the complete primitive population, global
 convergence/continuation, and a root-counting validation campaign remain
 absent.
 
+Round 7 resolves the four finite positives exactly.  The two full kernels and
+two real-projection-only kernels are forced by compact homology and the real
+involution, not by a fitted tolerance.  This makes the finite second-order
+result stronger while sharpening its negative interpretation: no new
+prime-to-orbit owner map or primitive Euler factor follows from these
+topological/parity kernels.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -182,6 +196,11 @@ absent.
 - [Round-6 conclusion](notes/round6_conclusion.md)
 - [Round-6 paper-facing research spine](paper/round6_research_spine.md)
 - [Round-6 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round6.yaml)
+- [Round-7 survivor-classification freeze](notes/round7_survivor_classification_freeze.md)
+- [Round-7 exact survivor theorem](notes/round7_exact_survivor_theorem.md)
+- [Round-7 conclusion](notes/round7_conclusion.md)
+- [Round-7 paper-facing research spine](paper/round7_research_spine.md)
+- [Round-7 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round7.yaml)
 - [results and artifact contract](results/README.md)
 - [reproduction instructions](experiments/README.md)
 

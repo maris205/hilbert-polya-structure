@@ -128,3 +128,23 @@ The 11 tests cover the freeze/pilot disclosure, complete move family, inverse
 moves, owner counts, candidate exact checks, control precision, decision and
 Route firewalls, source bindings, and byte determinism.  The emitted tuple is
 owned only by `P24-BIANCHI-MARKED-WORD-PROXY`.
+
+## Round 7 — exact normalized trace discriminant
+
+`round7_trace_discriminant.py` reuses only the frozen exact Round-2 matrices.
+It proves and records `D9=(tr^2-4)/9` in Gaussian-integer arithmetic and checks
+conjugacy by `U1`, inversion, and the recurrence-controlled repetition formula
+for `r=1,...,5` on every row.  It reads no prime/zero table or phase statistic.
+
+The default command verifies the canonical checked-in artifacts; overwriting
+them requires the explicit refresh flag:
+
+```bash
+python3 code/round7_trace_discriminant.py
+bash experiments/reproduce_round7.sh
+bash experiments/reproduce_round7.sh --refresh
+```
+
+The 12-test suite pins the freeze, census/order, determinant and congruence
+checks, exact theorem identities, collision count, Route firewall, byte
+determinism, and receipt bindings.

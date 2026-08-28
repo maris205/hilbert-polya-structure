@@ -43,6 +43,14 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   `(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)` and
   overall `ROUTE_A_REJECTED`.  The physical flight-length flow tuple remains
   unassigned.
+- Round-7 family-theorem status: **`[PROVED]`** for every integer `q>=2`.
+  The q-symbol no-repeat suspension has
+  `det(I-u z A_q)=(1-(q-1)u z)(1+u z)^(q-1)`, and its primitive Euler,
+  trace-exponential, and determinant constructions coincide exactly.  The
+  replay covers `q=2,...,8`, 84 trace/count rows and 182 coefficient rows with
+  zero mismatches.  This strengthens P25 into a universal negative-control
+  theorem: exact A1--A2 wiring persists across an infinite non-arithmetic
+  family, while the physical flow remains `UNASSIGNED`.
 
 ## Round-2 executed artifact
 
@@ -108,6 +116,27 @@ length Gutzwiller--Voros zeta, the exact multiple-scattering determinant, or a
 quantum-resonance calculation.  Its Route tuple is typed and may not be
 transferred to the physical three-disk flow.
 
+## Round-7 universal q-symbol theorem
+
+Let `A_q=J_q-I_q` for any integer `q>=2`.  The eigenspaces of the all-ones
+vector and its coordinate-sum-zero complement give
+
+```text
+tr(A_q^n)=(q-1)^n+(q-1)(-1)^n,
+det(I-u z A_q)=(1-(q-1)u z)(1+u z)^(q-1).
+```
+
+Möbius inversion gives the exact oriented primitive-owner count for every
+length, and the associated Euler product equals the reciprocal determinant.
+For `u=-1`, collision parity remains exactly the substitution `z -> -z`.
+The theorem holds for the whole family; the finite exact replay over seven q
+values is a regression certificate, not the basis of the proof.
+
+This result makes the negative-control conclusion stronger and cleaner:
+determinant exactness alone cannot supply A0.  The family is formally typed
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)` and
+rejected as a primary HP-Dynamics candidate.
+
 ## Research question and bold hypothesis
 
 Can any target-free statistic of the primitive-orbit half-density distinguish
@@ -164,6 +193,11 @@ Evidence labels in this project use the vocabulary of
 - [Round-6 freeze contract](experiments/round6_symbolic_zeta_freeze.json)
 - [Round-6 validation](experiments/round6_validation.md)
 - [Round-6 formal Route-A record](../../evaluations/route_a/THREE-DISK-NO-REPEAT-MASLOV-SYMBOLIC/2026-08-28-stage1.yaml)
+- [Round-7 q-symbol family theorem](notes/round7_q_symbolic_family_theorem.md)
+- [Round-7 paper research spine](paper/round7_research_spine.md)
+- [Round-7 freeze contract](experiments/round7_q_symbolic_family_freeze.json)
+- [Round-7 validation](experiments/round7_validation.md)
+- [Round-7 formal Route-A record](../../evaluations/route_a/P25-Q-SYMBOL-NO-REPEAT-PHASE-CALIBRATOR/2026-08-28-round7.yaml)
 
 No exact physical scattering determinant, physical-flow A2 test, or manuscript
 is claimed.  The formal A1/A2 tuple belongs only to the explicitly typed

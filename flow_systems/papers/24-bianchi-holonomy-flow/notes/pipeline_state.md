@@ -38,6 +38,10 @@ Date: **2026-08-28**
 | Round-6 candidate phase range | **`[NUMERICAL_OBSERVATION]`** — `[-2.00184797173,-1.08554792773]`, width `0.916300044002`, frozen width condition passes |
 | Round-6 control phase range | **`[NUMERICAL_OBSERVATION]`** — `[-0.747750608375,16.1675419980]`, width `16.9152926064`, frozen width condition fails |
 | Round-6 decision | **`STOP_SCOPED_CURRENT_PHASE_STATISTIC_AS_MARKING_SENSITIVE`** — retain descriptive history only; metric Bianchi prefix not authorized |
+| Round-7 exact theorem | **`[PROVED]`** — for every `gamma=I+3A` in `SL_2(Z[i])`, `tr(gamma)-2=-9 det(A)` and `D9=(tr(gamma)^2-4)/9` lies in `Z[i]` |
+| Round-7 invariant laws | **`[PROVED]`** — conjugacy/inversion invariance and `D9(gamma^r)=D9(gamma)S_(r-1)(tr gamma)^2` with an integer recurrence |
+| Round-7 finite audit | **EXACT / REPRODUCIBLE** — all 11,481 frozen matrices pass; powers `r=1,...,5`; 145 distinct `D9` values and 11,336 collision rows beyond first occurrences |
+| Round-7 owner consequence | **NECESSARY INVARIANT ONLY** — collisions and incomplete conjugacy census block any orbit-to-Gaussian-prime-ideal interpretation; no metric prefix |
 | Remaining control mismatch | **OPEN** — marked generator count/presentation, exact Bianchi cusp count, covolume, length distribution, and full primitive spectra |
 | Full `Gamma((3))` / conjugacy completeness | **OPEN** — elementary generated subgroup word ball only |
 | Orbit-to-prime-ideal map | **OPEN** — no arithmetic labels attached |
@@ -49,11 +53,12 @@ Date: **2026-08-28**
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: the Round-6 same-count Nielsen audit is complete and stops the
-current phase statistic.  A positive branch now requires a source-derived
-Gaussian-prime-ideal owner theorem or a different invariant under a separate
-frozen falsification contract.  The stopped statistic may not authorize a
-metric Bianchi prefix.  The proxy tuple cannot be transferred to the complete
-flow, whose group-conjugacy completeness, metric primitive spectrum and
-orbit-owner map remain open.  Any later rational-prime push-forward must still
-preserve the frozen split/inert/ramified rules.
+Next gate: Round 7 supplies the permitted different invariant and proves its
+exact algebraic laws, but its 145-to-11,481 collision profile shows that it
+does not solve ownership.  The smallest positive continuation is therefore an
+independently sourced owner-refinement theorem that separates trace collisions
+while preserving conjugacy, inversion, and repetition; absent that theorem,
+the owner map stays open.  The stopped phase statistic may not be reused to
+authorize a metric prefix.  The proxy tuple cannot be transferred to the
+complete flow, and any rational-prime push-forward must still preserve the
+frozen split/inert/ramified rules.
