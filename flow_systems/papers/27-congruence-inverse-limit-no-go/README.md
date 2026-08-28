@@ -1,7 +1,7 @@
 # Paper 27 — congruence inverse-limit no-go
 
 Working title: *Finite-Level Closed Geodesics without Inverse-Limit Periodic
-Orbits: an Explicit Congruence-Tower Ownership Audit*
+Orbits: a Compact-versus-Cusped Residual-Tower Ownership Audit*
 
 ## Current status
 
@@ -11,12 +11,11 @@ Orbits: an Explicit Congruence-Tower Ownership Audit*
   tower, the coordinatewise continuous-time geodesic flow on the inverse limit
   has **no periodic points**.
 - Local progress tag: **`[PROVED] PROVED_A1_OBSTRUCTION`** for the inverse-limit
-  flow itself.  This is an informal Route-A mapping, not a formal evaluator
-  verdict.  Informally, the congruence-tower provenance is `[PROVED]`, while an
-  intrinsic rational-prime link is `[OPEN]`.  The formal `(A0,A1,A2,A3,A4)`
-  tuple and overall Route-A status are unassigned; A2--A4 are `NOT_EVALUATED`,
-  Route-B evaluation is not run, invocation is disallowed, and Gates A--E are
-  not reached.
+  flow itself.  The conservative formal evaluation is now
+  **`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`**, overall
+  **`ROUTE_A_REJECTED`**.  `A1_FAIL` is proved because
+  `Per(M_infinity)=empty`; A2--A4 are `FAIL/NOT_TESTABLE` for this same owner.
+  Route-B evaluation is not run and invocation is disallowed.
 
 - Round-3 closest-prior audit: **COMPLETE, SEARCH-BOUNDED**.  Direct structural
   prior work was found, so the theorem is not being positioned as a new general
@@ -38,6 +37,33 @@ Orbits: an Explicit Congruence-Tower Ownership Audit*
   `n!`, so the exact minimal lifted-geodesic period is at least
   `n! ell(g)`.  This proves that period escape and inverse-limit aperiodicity
   are not cusp, principal-congruence, or arithmetic-specific phenomena.
+- Round-6 positioning audit: **COMPLETE**.  A 13-row claim/source matrix ties
+  nine external claim rows to five authoritative source records (four
+  research articles and one theorem exposition), with exact URLs and locators
+  checked on 2026-08-28.  All nine remain
+  `HUMAN_CONFIRMATION_PENDING`; zero are marked `USER_ATTESTED_READ`.
+- Frozen three-way decision: short compact-versus-cusped owner-audit
+  **GO**; standalone new general aperiodicity theorem **NO-GO**; same-owner
+  Route-A A2 **NO-GO**.  Eleven tests and two byte-identical builds pass; the
+  Round-6 tree SHA-256 is
+  `53b8b332c09f771f97ad45a1504491a7e542d014a9d6ce677d3dc86851efeb5a`.
+
+### Round-6 compact-versus-cusped positioning — 2026-08-28
+
+Both frozen examples are instances of the same theorem: a descending normal
+finite-index residual tower with one common arclength clock has no
+inverse-limit periodic point, and every fixed infinite-order owner's quotient
+orders divide forward and diverge.  The cusped `Gamma(3n!)` tower supplies the
+explicit PSL-sign specialization and exact quotient orders; the closed
+genus-2 tower supplies `n!` lower bounds for exact minimal lifted periods.
+
+Direct structural prior rules out a broad novelty claim.  The defensible paper
+unit is a short comparative methods/explicit-case note centered on ownership
+discipline and the finite-to-limit firewall.  Source records are web-verified,
+but author locator confirmation remains pending before submission prose.  See
+the [Round-6 positioning audit](notes/round6_compact_cusped_positioning_audit.md),
+[go/no-go decision](notes/round6_go_no_go_decision.md), and
+[contribution lock](paper/round6_contribution_lock.md).
 
 ### Round-5 cocompact control — 2026-08-27
 
@@ -180,10 +206,10 @@ Per(M_infinity) = empty.
 ```
 
 This proves `Per(M_infinity)=empty` and establishes the local progress tag
-`[PROVED] PROVED_A1_OBSTRUCTION`.  It does not by itself assign a formal A1
-verdict or overall Route-A status.  Finite-level zeta functions may still have a
-renormalized projective limit, but that would be a different owner and must be
-labeled separately.
+`[PROVED] PROVED_A1_OBSTRUCTION`.  The formal evaluator maps the same fact to
+`A1_FAIL` because this owner has no primitive periodic-orbit population.
+Finite-level zeta functions may still have a renormalized projective limit,
+but that would be a different owner and must be labeled separately.
 
 ## Bold residual hypothesis and kill gate
 
@@ -193,8 +219,7 @@ analytic object is not defined by primitive orbits of `M_infinity`, it cannot
 receive A1/A2 credit for the limit flow.
 
 Evidence labels follow `skills/route-a-evaluator.md`.  `PROVED_A1_OBSTRUCTION`
-is a local progress tag; `UNASSIGNED` and `NOT_EVALUATED` are stage states, not
-formal evidence tokens.
+is a local theorem-progress tag; the formal same-owner verdict is `A1_FAIL`.
 
 ## Files
 
@@ -208,11 +233,17 @@ formal evidence tokens.
 - [Round-4 reproducibility receipt](experiments/round4_reproducibility_receipt.json)
 - [Round-5 cocompact control theorem](notes/round5_cocompact_control_theorem.md)
 - [Round-5 reproducibility receipt](experiments/round5_reproducibility_receipt.json)
+- [Round-6 compact-versus-cusped positioning audit](notes/round6_compact_cusped_positioning_audit.md)
+- [Round-6 go/no-go decision](notes/round6_go_no_go_decision.md)
+- [Round-6 contribution lock](paper/round6_contribution_lock.md)
+- [Round-6 reproducibility receipt](experiments/round6_reproducibility_receipt.json)
+- [Round-6 Route-A evaluation](../../evaluations/route_a/P27-CONGRUENCE-INVERSE-LIMIT-GEODESIC-FLOW/2026-08-28-round6.yaml)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
 
 The no-periodic-orbit theorem remains the Route-relevant landed result.  The
 finite-level tables are reproducible diagnostics only.  The Round-5 control
 closes the planned compactness/cusp check and narrows the publishable claim to
-a comparative owner-audit paper.  A manuscript has not been started and ARS
-Stage 2 has not begun.
+a comparative owner-audit paper.  Round 6 freezes that narrow paper as GO but
+rejects standalone novelty and same-owner A2.  A manuscript has not been
+started and ARS Stage 2 has not begun.

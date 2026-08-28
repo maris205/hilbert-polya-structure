@@ -1,5 +1,36 @@
 # P28 code status
 
+## Round 6
+
+`build_round6_bolza_conjugacy_certificate.py` digest-binds the immutable
+Round-5 builders and five result artifacts, then evaluates eight frozen
+conjugacy witnesses in the same exact number field.  For each credited source
+`g`, historically withheld target `h`, and short group word `x`, it verifies
+`x^-1*g*x=h` exactly in `SL(2)`.  All eight use projective sign `+`; none uses
+an inverse fallback.  The emitted resolution ledger classifies the targets as
+`CERTIFIED_CONJUGATE_DUPLICATE_NO_NEW_OWNER`.
+
+The builder does not rewrite the Round-5 census or magnetic branch ledger.
+Its validation independently requires 36 owner IDs per field, the exact
+576-row branch-ledger SHA-256, 322 still-open primitivity cases, zero new owner
+credits, zero target-data rows, an unassigned formal tuple, and Route B
+disabled.  It also emits `round6_nonarithmetic_source_package_gate.json`, which
+fails closed because the six required control-source components are absent;
+it creates no geometry or comparison result.
+
+`test_round6_bolza_conjugacy_certificate.py` has seventeen tests covering all
+source digests, exact determinant/relator replay, the frozen pair set and
+conjugators, direct `SL(2)` equalities, absence of inverse fallback, peer
+invariants, owner/branch conservation, the fail-closed control gate, and route
+firewalls.  Canonical reproduction is:
+
+```bash
+./experiments/reproduce_round6.sh
+```
+
+The certificate closes only the frozen eight ambiguities.  It is not a full
+surface-group conjugacy normal form and does not evaluate A2 or A4.
+
 ## Round 5
 
 `build_round5_bolza_marked_cyclic_census.py` exhaustively enumerates all

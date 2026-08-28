@@ -5,8 +5,8 @@ paper built from the internally prespecified geometry and label controls.  The
 A0 arithmetic source is `[MODELING_CHOICE] ABSENT_BY_CONSTRUCTION`; the separate
 word-length-at-most-12 experiment is now `[NUMERICAL_OBSERVATION]` and earns
 `[STOP_SCOPED] / PROVES_TOO_MUCH` only for treating generic instability
-half-density persistence as arithmetic evidence.  A formal Route tuple and
-manuscript remain unassigned/not started.
+half-density persistence as arithmetic evidence.  The physical-flow Route
+tuple and manuscript remain unassigned/not started.
 
 Round 3 closes the principal numerical-method caveat in the prospective paper:
 the direct physical return-map stability check now covers 2,241/2,241 rows,
@@ -31,3 +31,10 @@ therefore retained as a methods/negative-control paper with a complete research
 spine.  This is not an ARS Stage-2 manuscript authorization.
 
 See [the Round-5 research spine](round5_research_spine.md).
+
+Round 6 adds the separately typed unit-roof symbolic calibrator.  Its 747
+owners reproduce `det(I-zA)^(-1)` through degree 12, and collision parity is
+exactly `zeta_pi(z)=zeta_0(-z)`.  Its formal tuple is
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)`, overall
+`ROUTE_A_REJECTED`.  These A1/A2 credits do not transfer to the physical
+flight-length flow or exact scattering determinant.

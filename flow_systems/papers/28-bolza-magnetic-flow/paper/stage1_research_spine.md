@@ -3,7 +3,7 @@
 Working title: *Semiclassical Tensor-Power Trace on the Bolza Surface*.
 
 Manuscript drafting has not started.  This spine records the paper-facing
-result structure accumulated through Round 5 while ARS remains at Stage 1.
+result structure accumulated through Round 6 while ARS remains at Stage 1.
 
 ## Central question
 
@@ -44,6 +44,12 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
    marked-primitive candidates remain open.  This is `[PROVED]` only for the
    named finite marked equivalence and the 36 credited owner subset; full
    `Gamma`-conjugacy completeness is `NOT_ESTABLISHED`.
+6. **Exact closure of the eight withheld records.**  Eight explicit short
+   group words satisfy `x^-1*g*x=h` exactly in the frozen `SL(2)` model, one
+   for each credited/withheld peer pair.  All eight formerly ambiguous records
+   are therefore conjugate duplicates, not new owners.  This is `[PROVED]` for
+   the frozen eight and changes neither the 36 owners per field nor the 576
+   signed branches.  It is not a full `Gamma` conjugacy algorithm.
 
 ## Main result table currently available
 
@@ -63,8 +69,10 @@ supports an arithmetic mechanism stronger than generic hyperbolic dynamics?
 | Round-5 matched marked-cyclic classes | `390` at `L<=4` |
 | Marked primitive / power split | `366 / 24` |
 | `Gamma` primitivity certificates | `44`; `322` marked-primitive candidates open |
-| Distinct inverse-paired owner credits | `36` per field; `8` proved same-axis records withheld |
+| Distinct inverse-paired owner credits | `36` per field; `8` same-axis records proved exact conjugate duplicates |
 | Round-5 signed trace branches | `288` per field; `576` total at `k=+-1,...,+-4` |
+| Round-6 exact conjugacy closure | `8/8` direct `SL(2)` identities; `0` inverse fallbacks; `0` new owners |
+| Non-arithmetic source-package gate | `FAIL_CLOSED_NOT_READY`; `0/6` required inputs present |
 | Target/arithmetic labels | `0` |
 
 ## What makes the result paper-facing
@@ -74,24 +82,28 @@ representation to a finite marked-cyclic normal form, a conservative primitive
 and owner-distinctness gate, then to the source trace theorem's
 magnetic period, action, stability, Maslov, signed-`k` branching, and field-sign
 pairing.  Round 4 supplied four named seed axes; Round 5 expands safely distinct
-owner credit ninefold to 36 per field while keeping 322 primitivity gaps, eight
-same-homology conjugacy gaps, and every signed branch separate from owner
-counting.
+owner credit ninefold to 36 per field while keeping 322 primitivity gaps and
+every signed branch separate from owner counting.  Round 6 then closes all
+eight same-homology gaps as exact conjugate duplicates, validating rather than
+increasing the 36-owner count.
 
 ## What is not yet a paper conclusion
 
 - The 390 rows are complete only for the declared matched marked-cyclic
   equivalence, not for full `Gamma` conjugacy or the complete primitive length
   spectrum.
-- Eight proved primitives sharing credited homology axes have no extra owner
-  credit, and 322 marked-primitive candidates lack a `Gamma`-primitivity proof.
+- The eight proved primitives sharing credited homology axes are exact
+  conjugate duplicates and have no extra owner credit; 322 marked-primitive
+  candidates still lack a `Gamma`-primitivity proof.
 - No rational-prime or prime-ideal correspondence is assigned.
 - No arithmetic-specific cancellation has been measured.
 - The zero-field theorem and the metric-matched non-arithmetic control have not
   been instantiated.
 - Odd `N`, arbitrary flat twists, full all-`N`, and fixed `Delta^L` remain
   open or `NOT_ESTABLISHED`.
-- No formal Route-A tuple is assigned; Route B remains disallowed.
+- The full Paper-28 candidate has no formal Route-A tuple; a separate bounded
+  `L<=4` proxy evaluation is `A0_WEAK/A1_WEAK/A2--A4_FAIL-NOT_TESTABLE` and
+  `ROUTE_A_EXPLORATORY` without promotion.  Route B remains disallowed.
 
 ## Proposed paper sections after Stage-2 authorization
 
@@ -100,11 +112,13 @@ counting.
 3. Explicit Bolza octagon group and primitive side-pairing lemma.
 4. Magnetic period/action/stability owner ledger.
 5. Field-reversal and signed-`k` branch controls.
-6. Bounded marked-cyclic census, quotient-conjugacy gap, and owner gate.
+6. Bounded marked-cyclic census, exact eight-record conjugacy closure, and
+   remaining quotient-conjugacy boundary.
 7. Source-verified non-arithmetic metric control.
 8. Arithmetic discrimination result or explicit A0 failure.
 
 The paper is not ready to leave Stage 1 until sections 7--8 have executable
-evidence.  The immediate next artifacts are a certified resolution of the
-eight same-homology conjugacy ambiguities and a source-verified instantiation
-of the metric-matched non-arithmetic control under a common geometric cutoff.
+evidence.  The eight same-homology ambiguities are now resolved.  The immediate
+next artifact is a source-verified instantiation of the metric-matched
+non-arithmetic control under a common geometric cutoff; the current 0/6
+source-package gate forbids execution.

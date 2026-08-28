@@ -4,7 +4,7 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress; Rounds 2--5 executed reproducibly**.
+- ARS: **Stage 1 RESEARCH in progress; Rounds 2--6 executed reproducibly**.
 - Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
 - The arithmetic one-form, positive time-density/slowness factor, reciprocal
   speed multiplier, generator, and exact period-variation formula are frozen.
@@ -58,7 +58,28 @@ Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodes
 - Round 5 passed 11/11 tests and two byte-identical full replays; artifact-tree
   SHA-256 is
   `7b21a0c25ee269d28b53cd8c0551c8b2a977307641c2d07be78810be2e975731`.
-- Formal Route-A tuple: **unassigned**.
+- Round 6 proves that inverse pairing cancels odd variations but adds the
+  canonical second variation.  For a primitive inverse pair it is
+  `2s^2 I^2 sum_r r exp(-srL)` for the reciprocal Ruelle convention, with
+  the frozen stability denominator for the Selberg-type convention.
+- A `p`-only all-`s` Hecke scalar law at second order is equivalent on the
+  finite output multiset to the quadratic degree moments
+  `Q_1=lambda_p I(M)^2` and `Q_d=0` for every `d>1`; the Round-4 linear
+  period relation does not imply them.
+- The source-locked audit contains 552 inverse-pair/repetition rows, 110
+  quadratic moment rows, and 165 weighted rows.  Both primary choices
+  `lambda_p=a_p` and `lambda_p=a_p^2` fail 51/55 group criteria and 153/165
+  rows for each kernel.  The explicitly secondary control `a_p^2-p` fails
+  55/55 groups and 165/165 rows.
+- Four `p=5` primary survivors are finite numerical observations only; no
+  exact homology identity or Euler factor is claimed.
+- Round 6 passed 12/12 tests and two byte-identical builds; artifact-tree
+  SHA-256 is
+  `fc553aa18bc4fb54d70ea8f4c0bdbc41efc3c0905b3f2942c49e1f6f8c62f864`.
+- Formal Route-A tuple:
+  **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`**;
+  overall status **`ROUTE_A_EXPLORATORY`**.  A2 is `NOT_TESTABLE` here: only
+  a finite/local log-product audit was run, not a global determinant campaign.
 - Route B: `EVALUATION=NOT_RUN`; `INVOCATION_ALLOWED=false`.
 
 ## Frozen dynamical system
@@ -102,7 +123,7 @@ period moments not implied by the cycle-pushforward identity.  No individual
 primitive closed geodesic is assigned the value `a_p`, and no primitive
 orbit-to-prime correspondence is assumed.
 
-## Round-4/5 Hecke and zeta kill result
+## Round-4/5/6 Hecke and zeta kill result
 
 Round 2 registered a norm-matched generic smooth observable and a period
 permutation. Round 4 separates these numerical controls from the stricter
@@ -135,6 +156,15 @@ output of branch degree `d` is a new primitive `Gamma_0(11)` owner of length
 length-kernel weights require new degree moments.  The unweighted homological
 relation alone cannot supply a primitive Euler factorization.
 
+Round 6 replaces the noncanonical one-sided first-order escape route with an
+intrinsic even-order observable.  The inverse-pair second variation is
+nonnegative for real `s>0`, but it depends on squares of owner periods and
+therefore requires quadratic degree moments.  Auditing `a_p` and `a_p^2`
+rejects those moments in 51/55 finite groups.  This is a finite/local theorem
+and obstruction, not Route-A A2: the complete primitive population, global
+convergence/continuation, and a root-counting validation campaign remain
+absent.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -148,10 +178,14 @@ relation alone cannot supply a primitive Euler factorization.
 - [Round-5 zeta-variation theorem](notes/round5_zeta_variation_theorem.md)
 - [Round-5 conclusion](notes/round5_conclusion.md)
 - [Round-5 paper-facing research spine](paper/round5_research_spine.md)
+- [Round-6 second-variation theorem](notes/round6_second_variation_theorem.md)
+- [Round-6 conclusion](notes/round6_conclusion.md)
+- [Round-6 paper-facing research spine](paper/round6_research_spine.md)
+- [Round-6 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round6.yaml)
 - [results and artifact contract](results/README.md)
 - [reproduction instructions](experiments/README.md)
 
 The finite positive-word ledger is not a complete certificate of
 `Gamma_0(11)` conjugacy classes.  No single-orbit Hecke rule, primitive Euler
 factorization, dynamical-zeta A2 result, automorphic-`L` determinant identity,
-prime/zero target match, formal Route-A tuple, or Route-B entry is claimed.
+prime/zero target match, Route-A promotion, or Route-B entry is claimed.

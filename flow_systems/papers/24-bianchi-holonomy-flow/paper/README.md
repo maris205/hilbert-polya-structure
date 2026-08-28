@@ -23,9 +23,14 @@ and uses 1,932 versus 39 primitive loxodromic rows.  The absolute standardized
 phase contrast is `0.935490232934`, but this is only a marking-dependent
 `[NUMERICAL_OBSERVATION]`: the marked positive-generator counts are 4 and 2, so
 alphabet/presentation and sample-size confounds block an arithmetic verdict.
-The paper-level next artifact is a preregistered same-marked-generator-count Nielsen
-sensitivity panel.
+Round 6 executes that same-count panel as an exhaustive exploratory audit:
+identity plus all 24 elementary right Nielsen moves on both four-markings.  The
+candidate `z` width is `0.916300044002`, but the redundant control width is
+`16.9152926064`; the frozen conjunction fails and the current statistic is
+stopped as marking-sensitive.  It does not authorize a metric prefix.
 The primary target is a `Q(i)` Dedekind-zeta calibration.  Rational-prime
 push-forward is secondary, and no Riemann-`zeta` A0 credit is claimed.
-Formal Route-A tuple: `UNASSIGNED`; A2--A4: `NOT_EVALUATED`; Route B:
-`EVALUATION=NOT_RUN`, `INVOCATION_ALLOWED=false`.
+The typed proxy tuple is
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`, overall
+`ROUTE_A_EXPLORATORY`.  The full Bianchi flow remains `UNASSIGNED`; Route B is
+`NOT_RUN` and not invocable.

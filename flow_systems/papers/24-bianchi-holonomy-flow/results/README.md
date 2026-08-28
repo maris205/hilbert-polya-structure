@@ -1,4 +1,4 @@
-# P24 results — Rounds 2–5
+# P24 results — Rounds 2–6
 
 The following deterministic artifacts were generated on 2026-08-27:
 
@@ -108,3 +108,15 @@ their absolute contrast is `0.935490232934`.  This is a marking-dependent
 `[NUMERICAL_OBSERVATION]`.  Marked-generator count/alphabet and presentation are not matched, so
 the result is not an arithmetic verdict and neither CSV is a complete metric
 length spectrum.  All target-data flags are `false`.
+
+## Round-6 exhaustive-Nielsen results
+
+- `round6_nielsen_panel.csv`: 50 system-marking summaries;
+- `round6_nielsen_metrics.json`: exact checks, phase ranges, frozen criteria,
+  stopped-statistic decision, and typed/full-flow Route boundary.
+
+Every summary uses count 4/alphabet 8, 2,074 owners and 19,624 raw words.  The
+candidate `z` width is `0.916300044002`; the stabilized control width is
+`16.9152926064`.  The control-width condition fails, so the current phase
+statistic is stopped as marking-sensitive.  No metric prefix or Gaussian-prime
+owner is authorized.

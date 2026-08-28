@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 5 已完成；5/5 均有独立论文级进展，55/55 测试通过** | P24 在共同 marked-word 算法下完成 Bianchi/`5_2` 比较并量化剩余 marking confound；P25 证明二维双曲稳定振幅的通用 half-density 分解；P26 证明 canonical inverse-paired zeta 一阶变分为零及 Hecke degree-moment 充要条件；P27 在闭 genus-2 残余塔中证明 `n!` 周期下界；P28 完成 `L<=4` 的 390 类 marked-cyclic census，并只给 36 个同调可分 primitive axes 发放 owner credit。全部仍在 Stage 1 / Route A A0--A1，正式 tuple `0/5`，Route B `0/5`。见[Round-5 报告](BATCH_ROUND5_PAPERS_24_28.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 6 完成；三席独立复审 CLEAN，5/5 typed records，221/221 全量测试通过** | P24 以 25 个 Nielsen markings 证明当前相位统计量 marking-sensitive 并停止；P25 建立 747-owner 的精确符号 Euler/trace/determinant 负控，得到唯一的 typed A2；P26 证明 inverse-paired 二阶变分与 quadratic degree-moment iff obstruction；P27 将论文定位收窄为 compact-versus-cusped owner audit；P28 用八个精确 `SL(2)` 共轭子闭合 withheld records，owner 数仍为 36/field。形式对象 `5/5` 已分配 tuple，但正向算术候选到达 A2 仍为 `0/5`，Route B `0/5`。见[Round-6 报告](BATCH_ROUND6_PAPERS_24_28.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,26 +38,28 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 ## Papers 24--28 最新结论
 
 五篇均处于 Proposal Stage 1 / Route A A0--A1，Route B 未调用，Gates A--E
-未到达。Round 5 分别落地共同 marked-word 比较、通用稳定振幅定理、zeta
-一阶变分/no-Euler 定理、闭曲面 factorial 周期逃逸控制，以及 bounded Bolza
-marked-cyclic census；共通过 55/55 本轮测试且 5/5 双遍字节一致。正式 Route
-tuple 仍为 `0/5`，A2--A4 未运行，也没有授权进入 ARS Stage 2。
+未到达。Round 6 首次为五个精确冻结对象全部分配 formal Route-A tuple：三个
+`ROUTE_A_EXPLORATORY`、两个 `ROUTE_A_REJECTED`。这不等于五个主物理候选已
+过 A2：正向算术候选到达 A2 仍为 `0/5`；唯一
+`A2_ANALYTIC_DETERMINANT` 属于 P25 的非算术 unit-roof symbolic negative
+control。五篇全历史测试 `221/221`、本轮重放测试 `61/61`、五项双遍字节一致
+全部通过；ARS Stage 2 仍未授权。
 
 | Paper | 子类型 | 当前明确进展 |
 |---|---|---|
-| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow | 共同 `L<=5` marked-word 规则得到候选 2,074 与控制 51 个 marked owners；相位标准化值为 `-1.74684` 与 `-0.811352`。4/2 个正生成元、presentation 与样本量仍混杂，故只作描述性观察，不发 arithmetic kill |
-| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering | 证明 `|det(I-M^r)|^(-1/2)=Lambda^(-r/2)/|1-sigma^r Lambda^(-r)|`，并在 2,241 owners x 3 repetitions 的 6,723 行上复验。half-density 是通用双曲局部机制，P25 保留为 methods/negative-control paper |
-| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | canonical inverse-closed Ruelle/frozen-Selberg 一阶变分逐对精确为零；one-sided half-ledger 的 Hecke recurrence 还必须满足 `P_1=a_pI(M)`、`P_d=0 (d>1)`，Round-4 总和关系不蕴含它。138 条仅称 primitive-certified cycle-owner instances，不声称全局 conjugacy 去重；153/165 个有限 zeta rows 失败，A2 仍未运行 |
-| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit geodesic lamination | 在任意 marked closed genus-2 hyperbolic surface 上构造 residual/homology tower；primitive homology owner 满足 `n! | o_n(g)` 与真正最小提升周期 `T_n>=n!ell(g)`。这证明机制不依赖 cusp、principal congruence 或 arithmetic lattice |
-| [P28](papers/28-bolza-magnetic-flow/README.md) | magnetic Hamiltonian flow | `L<=4` 完整 marked-cyclic scope 含 390 类：366 marked-primitive candidates、24 powers；精确 systolic gate 证明 44 个 primitive，仅 36 个同调可分 axes/field 获 owner credit，8 个扣留。signed `k=+/-1,...,+/-4` 账本为 576 行 |
+| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow | identity 加全部 24 个 elementary right Nielsen moves 的 25-marking panel 已执行；候选宽度 `0.9163000440`、控制宽度 `16.9152926064`，25/25 contrasts 同号，但 current phase statistic 严格判为 marking-sensitive 并 `STOP_SCOPED`。typed proxy 为 `A0_WEAK/A1_WEAK/A2--A4_FAIL`，full flow 仍 `UNASSIGNED` |
+| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering | unit-roof 三符号 no-repeat suspension 在长度 12 前有 747 oriented primitive owners；Euler、trace exponential 与 `3 x 3` determinant 精确一致，`zeta_pi(z)=zeta_0(-z)`。typed control 为 `A0_FAIL/A1_PASS/A2_ANALYTIC_DETERMINANT/A3--A4_FAIL`；physical billiard 仍 `UNASSIGNED` |
+| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | inverse-paired 二阶变分为 orientation-even；quadratic Euler recurrence 当且仅当 `Q_1=lambda_p I(M)^2`、`Q_d=0 (d>1)`。`a_p` 与 `a_p^2` 各失败 51/55 groups、153/165 rows，`a_p^2-p` 失败 55/55、165/165；仍无 global determinant/A2 |
+| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit geodesic lamination | `Per(M_infinity)=empty` 正式记为 `A1_FAIL`；短 compact-versus-cusped owner audit 为 `GO`，一般 aperiodicity novelty 与 same-owner A2 均 `NO-GO`。13-row claim/source matrix 已冻结，9 个外部 locator 等待作者确认 |
+| [P28](papers/28-bolza-magnetic-flow/README.md) | magnetic Hamiltonian flow | 八个 withheld records 均有精确直接 `x^-1gx=h` 共轭子，无 inverse fallback；44 个 certified primitive records 精确分成 36 owners + 8 duplicates，576-row branch ledger 不变。bounded proxy 为 `A0_WEAK/A1_WEAK/A2--A4_FAIL`；non-arithmetic control gate 仍 `0/6 FAIL_CLOSED` |
 
-下一轮的五个最小产物已经冻结：P24 做同 marked-generator-count 的 Nielsen
-sensitivity panel；P25 对 methods/negative-control 文章作书面 go/no-go；P26
-推导 inverse-paired 二阶变分并检查 Hecke degree moments；P27 完成人工引用/
-定位审计并决定 compact-versus-cusped 短文；P28 认证 8 个 withheld primitives
-的 conjugacy 状态并实例化 non-arithmetic genus-2 控制。详细结论、哈希、
-路线对应与动力系统计数见
-[Round-5 执行报告](BATCH_ROUND5_PAPERS_24_28.md)。
+下一批最小合法产物已经收窄：P24 停止当前相位统计量，只有 source-derived
+prime-ideal owner theorem 或全新预冻结 invariant 才能重开；P25 保留为 A1--A2
+methods negative control；P26 精确分类四个 `p=5` quadratic survivors；P27 在
+作者确认九个来源 locator 后形成比较短文；P28 获取满足六项 fail-closed 门禁
+的非算术 genus-2 source package，并另行处理 322 个开放 primitivity cases。
+详细结论、哈希、路线对应与动力系统计数见
+[Round-6 执行报告](BATCH_ROUND6_PAPERS_24_28.md)。
 
 ## 按时间记录
 
@@ -171,3 +173,5 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 24--28-round4 - Stage 1 / Route A A0--A1（2026-08-27） - 五篇分别落地 finite-volume/cusp non-arithmetic 控制、fallback-selection 方法审计、Hecke correspondence cycle-sum owner theorem 与 genus-one kill、残余塔 quotient-order/period-escape theorem、48 行 Bolza magnetic owner seed；45/45 本轮测试和 5/5 确定性复验通过。正式 Route-A tuples `0/5`、A2--A4 evaluations `0/5`、Route-B invocations `0/5`，Stage 2 未授权。详见 [Round-4 报告](BATCH_ROUND4_PAPERS_24_28.md)。
 
 24--28-round5 - Stage 1 / Route A A0--A1（2026-08-27） - 五篇分别落地 matched marked-word comparison、universal symplectic half-density theorem、canonical zeta first-variation zero 与 Hecke degree-moment obstruction、closed-surface factorial period escape、390-class Bolza marked-cyclic census/576-branch magnetic ledger；55/55 本轮测试和 5/5 确定性复验通过。正式 Route-A tuples `0/5`、A2--A4 evaluations `0/5`、Route-B invocations `0/5`，Stage 2 未授权。详见 [Round-5 报告](BATCH_ROUND5_PAPERS_24_28.md)。
+
+24--28-round6 - Stage 1 / Route A A0--A1 与 A1--A2 负控校准（2026-08-28） - 五个精确冻结对象首次全部分配 typed Route-A tuple：P24 Nielsen marking-sensitivity stop、P25 exact symbolic Euler/trace/determinant negative control、P26 inverse-paired second variation 与 quadratic degree-moment obstruction、P27 compact-versus-cusped owner-audit go/no-go、P28 八个 exact `SL(2)` conjugacy duplicates。全量测试 `221/221`、本轮 replay tests `61/61`、5/5 双遍确定性复验通过；typed tuples `5/5`，但正向算术候选到达 A2 仍 `0/5`，Route-B invocations `0/5`，Stage 2 未授权。详见 [Round-6 报告](BATCH_ROUND6_PAPERS_24_28.md)。

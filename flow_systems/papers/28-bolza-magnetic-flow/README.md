@@ -67,6 +67,22 @@ Working title: *Semiclassical Tensor-Power Trace*
   `Gamma`-conjugacy completeness remains `NOT_ESTABLISHED`.  The
   non-arithmetic genus-two control now has a strict source/parameter contract
   but no geometry or comparison result is fabricated.
+- Round-6 progress: the eight same-homology primitive records withheld in
+  Round 5 are closed by explicit exact conjugators.  For every frozen pair,
+  the builder verifies `x^-1*g*x=h` directly in the source-locked `SL(2)`
+  model over `Q(s,t,i)`, with projective sign `+` and no inverse fallback.
+  Hence all eight are certified conjugate duplicates of already credited
+  representatives, not new owners: the count remains 36 inverse-paired axes
+  per field and the 576-row Round-5 branch ledger is reused byte for byte.
+  Seventeen tests and two byte-identical builds pass with artifact-tree SHA-256
+  `098bfcac59f7fd332ddc022d2f59745f4e91450ade251024e9d6a12a6c82126b`.
+  A fail-closed machine-readable gate records that no valid non-arithmetic
+  genus-two source package is present; the control remains
+  `DESIGN_ONLY_NOT_INSTANTIATED` and no geometry is fabricated.  A separate
+  formal evaluation of the bounded `L<=4` proxy records
+  `A0_WEAK/A1_WEAK/A2--A4_FAIL-NOT_TESTABLE`, overall
+  `ROUTE_A_EXPLORATORY`; this is an evaluation record, not a promotion of the
+  full Paper-28 candidate.
 - Formal Route-A tuple: **unassigned**.  Route-B evaluation is not run and
   invocation is disallowed.
 
@@ -178,6 +194,8 @@ result remains a magnetic trace calibration.
 - [Round-4 explicit Bolza owner ledger theorem](notes/round4_bolza_owner_ledger.md)
 - [Round-5 bounded matched marked-cyclic census](notes/round5_bolza_marked_cyclic_census.md)
 - [Round-5 non-arithmetic control contract](notes/round5_nonarithmetic_control_contract.md)
+- [Round-6 exact conjugacy closure](notes/round6_bolza_conjugacy_closure.md)
+- [Round-6 bounded-proxy Route-A evaluation](../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round6.yaml)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
@@ -188,6 +206,8 @@ Route-B credit is claimed.  The only same-owner trace result is the explicitly
 scoped source-compatible signed-field even subsequence; Round 4 instantiates
 four named inverse-paired Bolza primitive axis owners per field inside that
 subtype, and Round 5 increases the safely distinct credited set to 36 owners
-per field.  The 390-row finite artifact is a complete matched marked-cyclic
-census at `L<=4`, not a full `Gamma`-conjugacy census; signed-`k` branches never
-receive separate owner credit.
+per field.  Round 6 proves that all eight formerly ambiguous same-axis records
+are exact conjugate duplicates, so the owner and branch counts do not change.
+The 390-row finite artifact is a complete matched marked-cyclic census at
+`L<=4`, not a full `Gamma`-conjugacy census; signed-`k` branches never receive
+separate owner credit.

@@ -1,4 +1,4 @@
-# P24 Stage-1 research spine after Round 5
+# P24 Stage-1 research spine after Round 6
 
 Manuscript status: **NOT STARTED**.  This document freezes the paper-facing
 argument created by the research rounds; it is not an ARS Stage-2 draft.
@@ -18,7 +18,9 @@ control architecture rather than an arithmetic correspondence:
    control with a replayable complex-length prefix (Round 4);
 4. an exact common marked-word census and a pre-frozen phase-sensitive
    comparison that closes the enumeration-type mismatch while identifying
-   marked-generator-count/presentation as the remaining confound (Round 5).
+   marked-generator-count/presentation as the remaining confound (Round 5);
+5. a 25-marking-per-system elementary-Nielsen audit that stops the current
+   phase statistic as marking-sensitive (Round 6).
 
 The Round-4 advance is the first control in this project that simultaneously
 matches hyperbolic dimension, finite volume, cusp presence, manifold status,
@@ -72,6 +74,14 @@ non-interval numerical observations.  The common **algorithm** does not remove
 the marked-count-4/alphabet-8 versus marked-count-2/alphabet-4 presentation confound and does
 not produce a complete metric spectrum.
 
+## Round-6 decision result
+
+Both systems now use four marked generators under identity plus all 24
+elementary right Nielsen moves.  Candidate standardized phase width is
+`0.916300044002`; the explicitly redundant stabilized control width is
+`16.9152926064`.  The latter violates the frozen exploratory condition, so the
+present statistic cannot justify a metric Bianchi prefix.
+
 ## Central falsification logic
 
 The decisive comparison is not “Bianchi versus any chaotic flow.”  Its first
@@ -91,8 +101,9 @@ current holonomy mechanism is generic to cusped hyperbolic 3-geometry and must
 stop as an arithmetic explanation.  If a stable separation survives, it only
 licenses a sharper arithmetic-structure question; it does not create an
 orbit-to-prime-ideal map.  Round 5 cannot choose either branch because the
-presentations have different marked generator counts and census cardinalities.  The next result
-is therefore a preregistered same-marked-generator-count Nielsen sensitivity panel.
+Round 6 resolves this branch negatively for the current statistic.  A new
+positive branch needs a different source-derived invariant under a new freeze
+or an intrinsic orbit-to-prime-ideal owner theorem.
 
 ## Claim firewall
 
@@ -103,7 +114,11 @@ is therefore a preregistered same-marked-generator-count Nielsen sensitivity pan
   comparison with its rank/presentation limitation.
 - **Not allowed:** a full Bianchi primitive ledger, a presentation-invariant or
   metric-length comparison,
-  an arithmetic-hypothesis verdict, an orbit-to-Gaussian-prime map, a formal
-  Route-A tuple, A2--A4, Route B, or any determinant/operator claim.
+  an arithmetic-hypothesis verdict, an orbit-to-Gaussian-prime map, a full-flow
+  Route-A tuple, full-flow A2--A4, Route B, or any determinant/operator claim.
+
+The proxy-only tuple is
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`, overall
+`ROUTE_A_EXPLORATORY`; it cannot be transferred to the complete flow.
 
 The paper remains in ARS Stage 1 / Proposal Stage 1 / Route A A0--A1.

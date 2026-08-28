@@ -1,4 +1,4 @@
-# P24 experiment status — Rounds 2–5
+# P24 experiment status — Rounds 2–6
 
 The exact word-ball enumeration and target-free holonomy shuffle completed.
 The core output is reproduced byte for byte under the hash recorded in
@@ -83,3 +83,12 @@ the scientific kill gate: the alphabets have sizes 8 and 4 and the underlying
 presentations differ.  The comparison is descriptive and marking-dependent.
 Prime/zero target data remain prohibited; Route tuple, A2+, and Route B remain
 unassigned/not run.
+
+## Round 6
+
+`reproduce_round6.sh` runs 11 tests, builds two independent artifact trees,
+requires byte identity, and verifies the checked-in tree.  Core SHA-256 is
+`f5d31071c7174d84322c352b9028e334bf30e89a2368a751fbe58f6ab83ed660`.
+The decision is `STOP_SCOPED_CURRENT_PHASE_STATISTIC_AS_MARKING_SENSITIVE`.
+Only the marked-word proxy receives a formal tuple; the full flow is still
+unassigned and Route B remains closed.

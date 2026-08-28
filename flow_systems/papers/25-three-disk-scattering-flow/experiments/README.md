@@ -1,4 +1,14 @@
-# P25 experiment status — Rounds 2 through 5 complete
+# P25 experiment status — Rounds 2 through 6 complete
+
+## Round 6
+
+`./experiments/reproduce_round6.sh` runs ten tests, builds two independent
+artifact trees, requires byte identity, and verifies the checked-in results.
+Core SHA-256 is
+`003321db003a71ae2713400e553701ad75db26c22655cff99cbbb25bcf2d1f77`.
+The exact replay has 747 owners and zero mismatches among all three coefficient
+paths.  Its tuple belongs only to the unit-roof symbolic suspension; the
+physical flow remains unassigned and Route B remains closed.
 
 ## Round 4
 

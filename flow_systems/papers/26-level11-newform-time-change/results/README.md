@@ -1,5 +1,31 @@
 # P26 generated results
 
+## Round 6 — inverse-paired second variation and quadratic Hecke moments
+
+- `round6_inverse_pair_second_variation_ledger.csv`: 552 rows for the 138
+  primitive-certified Round-4 cycle-owner instances, both inverse
+  orientations paired canonically, and repetitions `r=1,2,3,4`.  It checks
+  that the second derivative has the exact surviving factor `r` and that
+  inverse contributions add rather than cancel.
+- `round6_quadratic_degree_moment_ledger.csv`: 110 degree rows over 55
+  word/prime groups, including zero-population degree-one bins where needed.
+  It audits the exact all-`s` obligations `Q_1=lambda_p I(M)^2` and `Q_d=0`
+  for `d>1` for both primary scalar proposals.
+- `round6_hecke_second_variation_ledger.csv`: 165 rows at
+  `s={0.125,0.25,0.5}` and repetition cutoff `R=4`.  Both `lambda_p=a_p`
+  and `lambda_p=a_p^2` fail 153/165 rows for each kernel.  The explicitly
+  secondary `a_p^2-p` control fails 165/165 rows.
+- `round6_summary.json` and `round6_artifact_manifest.json`: counts, frozen
+  source hashes, analytic statements, Route boundary, and artifact bindings.
+
+The inverse-pair formulas and finite-multiset moment criterion are `[PROVED]`;
+the period-weighted outcomes, including four numerical `p=5` survivors, are
+`[NUMERICAL_OBSERVATION]`.  The formal tuple is
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` with overall
+`ROUTE_A_EXPLORATORY`.  A2 is `FAIL/NOT_TESTABLE`: no complete primitive
+population, global product/continuation, root count, or zero comparison was
+run.
+
 ## Round 5 — zeta first variation and degree-moment obstruction
 
 - `round5_zeta_repetition_ledger.csv`: 1,104 rows from 138

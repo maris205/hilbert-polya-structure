@@ -1,4 +1,4 @@
-# P25 code status — Rounds 2 through 5 executed
+# P25 code status — Rounds 2 through 6 executed
 
 `round2_three_disk_ledger.py` performs four separated operations:
 
@@ -68,3 +68,17 @@ monotone repetition correction, deterministic bytes, and Route firewalls.
 ```bash
 ./experiments/reproduce_round5.sh
 ```
+
+Round 6 adds `round6_symbolic_zeta_calibrator.py`.  It compares the frozen
+primitive Euler product, adjacency-trace exponential, and reciprocal exact
+`3 x 3` determinant through degree 12 for unweighted and collision-parity
+conventions, using standard-library integer/rational arithmetic only.
+
+```bash
+./experiments/reproduce_round6.sh
+```
+
+Ten tests cover hashes, determinants, traces, Möbius counts, oriented owners,
+both coefficient identities, typed Route boundaries, source bindings, and byte
+determinism.  No physical lengths, stabilities, resonances, primes, or zeros
+are consumed.

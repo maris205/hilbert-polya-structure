@@ -1,4 +1,4 @@
-# P24 code status — Rounds 2–5
+# P24 code status — Rounds 2–6
 
 `round2_bianchi_ledger.py` uses exact pairs of Python integers for Gaussian
 arithmetic.  It enumerates the reduced word ball of
@@ -112,3 +112,19 @@ versus count 2/alphabet 4 is a frozen confound.  This is not a claim about
 minimal group rank.  The outputs are marked symbolic censuses,
 not complete group-conjugacy or metric-length spectra.  No prime/zero target
 data are read, and no formal Route tuple or A2+ evaluation is emitted.
+
+## Round 6 — exhaustive elementary-Nielsen sensitivity
+
+`round6_nielsen_sensitivity.py` runs identity plus all 24 elementary right
+Nielsen moves on the native Bianchi four-tuple and the disclosed redundant
+control four-marking `(a,b,ab,aB)`.  It emits 50 deterministic summaries under
+one rank-four owner census and applies the frozen exploratory decision rule.
+
+```bash
+bash experiments/reproduce_round6.sh
+```
+
+The 11 tests cover the freeze/pilot disclosure, complete move family, inverse
+moves, owner counts, candidate exact checks, control precision, decision and
+Route firewalls, source bindings, and byte determinism.  The emitted tuple is
+owned only by `P24-BIANCHI-MARKED-WORD-PROXY`.

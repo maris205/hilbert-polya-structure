@@ -1,4 +1,4 @@
-# P25 results — Rounds 2 through 5
+# P25 results — Rounds 2 through 6
 
 Generated artifacts:
 
@@ -82,3 +82,17 @@ The algebraic identity is `[PROVED]`; the replay is
 `[NUMERICALLY_CERTIFIED]`.  The maximum leading-factor relative correction is
 about `1.1093e-2`, `1.2305e-4`, and `1.3650e-6` for `r=1,2,3`.  These artifacts
 use no prime or Riemann-zero table.
+
+## Round-6 exact symbolic-Zeta results
+
+- `round6_symbolic_owner_counts.csv` compares frozen owners with exact
+  adjacency-trace/Möbius counts;
+- `round6_symbolic_zeta_prefix.csv` compares three exact constructions through
+  degree 12;
+- `round6_symbolic_zeta_metrics.json` records the two rational identities,
+  zero mismatches, typed tuple, and physical-flow firewall.
+
+All 747 owner counts match and every coefficient agrees modulo `z^13`.  The
+denominators are `[1,0,-3,-2]` and `[1,0,-3,2]`, so collision parity is exactly
+`zeta_pi(z)=zeta_0(-z)`.  This is a unit-roof symbolic theorem, not a physical
+scattering determinant.

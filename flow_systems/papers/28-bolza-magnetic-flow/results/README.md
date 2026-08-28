@@ -1,5 +1,40 @@
 # P28 results and owner ledgers
 
+## Round-6 exact conjugacy resolution overlay
+
+`round6_bolza_conjugacy_certificate.csv` is an eight-row resolution overlay on
+the immutable Round-5 census.  Each row binds one credited primitive `g`, one
+historically withheld same-axis primitive `h`, and an explicit short word `x`.
+The exact source-locked matrix model verifies `x^-1*g*x=h` directly in
+`SL(2)` for all eight rows.  Every projective sign is `+`, inverse fallback is
+unused, and each source/target pair is a literal distinct matrix pair before
+conjugation.
+
+The resolution is uniformly
+`CERTIFIED_CONJUGATE_DUPLICATE_NO_NEW_OWNER`.  Thus the 44 exactly primitive
+records resolve into 36 credited inverse-paired classes plus eight duplicate
+records.  Owner count remains 36 per field, and
+`round5_bolza_magnetic_branch_ledger.csv` remains the canonical 576-row branch
+artifact with SHA-256
+`5f9cc50dfba3bb257a8a4f32c8bc5bd322a683788da4c9b900e9f8a5a62ee493`.
+
+`round6_bolza_conjugacy_validation.json` records `PASS`, 8/8 direct exact
+conjugacies, zero inverse fallbacks, zero new owners, zero unresolved cases
+inside the frozen eight, 322 still-open primitivity cases, zero target data,
+and the unassigned route state.  Its conjugacy-payload SHA-256 is
+`bb355c9765ef59c5f7e73b36b6e84d4e4bc6fb8aa2e4b166ca4a850fd234f4c3`.
+
+`round6_nonarithmetic_source_package_gate.json` records
+`FAIL_CLOSED_NOT_READY`: none of the six required source-package components is
+present, all control execution flags remain false, and no control geometry,
+non-arithmeticity result, systole, or comparison is claimed.
+
+The overlay closes only the eight named ambiguities.  Full `Gamma` conjugacy
+outside that set remains `NOT_ESTABLISHED`; A2/A4 are not evaluated and the
+full-candidate tuple remains unassigned.  The separate bounded-proxy
+[Route-A record](../../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round6.yaml)
+is exploratory and non-promotional.
+
 ## Round-5 bounded matched marked-cyclic census
 
 `round5_bolza_marked_cyclic_census.csv` contains 390 canonical records for all
@@ -40,6 +75,10 @@ Supporting artifacts are:
   target-data, route, and Round-4 compatibility totals; and
 - `round5_nonarithmetic_control_contract.json` — a design-only source and
   parameter contract.  It selects no geometry and reports no control result.
+
+The Round-5 `WITHHELD_..._UNRESOLVED` values are preserved as historical
+source bytes.  Round 6 supersedes their uncertainty through the separate exact
+resolution overlay; it does not rewrite the Round-5 CSV.
 
 ## Round-4 explicit Bolza magnetic-owner seed
 

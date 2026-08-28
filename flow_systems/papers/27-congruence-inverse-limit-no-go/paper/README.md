@@ -1,8 +1,10 @@
 # P27 paper status
 
 Manuscript not started; **ARS Stage 2 has not begun**.  The Stage-1 brief
-establishes the local progress tag `[PROVED] PROVED_A1_OBSTRUCTION`; it does
-not assign a formal A1 verdict or overall Route-A status.
+establishes the local progress tag `[PROVED] PROVED_A1_OBSTRUCTION`.  The
+formal same-owner evaluation is now
+`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, overall
+`ROUTE_A_REJECTED`.
 
 The Round-3 closest-prior audit is complete on a search-bounded basis.  Direct
 prior work already covers (i) hyperbolic laminations with no periodic geodesic
@@ -40,15 +42,25 @@ sharpens the publishable positioning: the prospective paper is comparative
 methodology and ownership discipline, not a standalone arithmetic or general
 aperiodicity discovery.
 
+Round 6 freezes the paper-facing outcome.  A short comparative owner-audit is
+GO; a standalone new general aperiodicity theorem and a same-owner Route-A A2
+paper are both NO-GO.  The contribution lock centers the common residual-tower
+proposition, the exact cusped specialization, the cocompact factorial bound,
+and the finite-owner firewall.  Five primary sources have authoritative web
+records and exact locators, but all nine external claim rows remain
+`HUMAN_CONFIRMATION_PENDING`; none is marked `USER_ATTESTED_READ`.
+
 Stage-1 planning artifacts:
 
 - [closest-prior audit](../notes/round3_closest_prior_audit.md)
 - [Round-3 conclusion](../notes/round3_conclusion.md)
 - [Round-4 period-escape theorem](../notes/round4_period_escape_theorem.md)
 - [Round-5 cocompact control theorem](../notes/round5_cocompact_control_theorem.md)
+- [Round-6 compact-versus-cusped positioning audit](../notes/round6_compact_cusped_positioning_audit.md)
+- [Round-6 written go/no-go decision](../notes/round6_go_no_go_decision.md)
+- [Round-6 contribution lock](round6_contribution_lock.md)
 - [research spine / methodology / section plan](stage1_research_spine.md)
 
-The spine is a plan, not a manuscript draft.  The cocompact control is closed;
-advancement to Stage 2 remains conditional on a human citation check and a
-written decision that the narrowed comparative methodological contribution is
-submission-worthy.
+The spine and contribution lock are plans, not manuscript prose.  The narrow
+paper class is approved at the project level; advancement to Stage 2 remains
+conditional on human confirmation of the cited passages.

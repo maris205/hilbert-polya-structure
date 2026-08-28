@@ -1,5 +1,30 @@
 # P26 reproduction
 
+## Round 6
+
+Run:
+
+```bash
+./experiments/reproduce_round6.sh
+```
+
+It runs 12 unit tests, generates two isolated five-file Round-6 artifact
+trees from the SHA-locked Round-4 ledgers, requires byte identity and matching
+generator output, installs the canonical results, and writes
+`round6_reproducibility_receipt.json`.  The canonical tree SHA-256 is:
+
+```text
+fc553aa18bc4fb54d70ea8f4c0bdbc41efc3c0905b3f2942c49e1f6f8c62f864
+```
+
+The registered surfaces contain 552 inverse-pair/repetition rows, 110
+quadratic degree-moment rows, and 165 finite Hecke second-variation rows.
+The receipt binds the formal tuple
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`, overall
+`ROUTE_A_EXPLORATORY`, A2 `FAIL/NOT_TESTABLE`, and the Route-B prohibition.
+It is explicitly a finite/local log-product audit, not a global determinant
+or root-counting campaign.
+
 ## Round 5
 
 Run:

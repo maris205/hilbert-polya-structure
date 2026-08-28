@@ -51,10 +51,28 @@ byte-identical replay.  Full `Gamma`-conjugacy completeness is explicitly
 `NOT_ESTABLISHED`.  The non-arithmetic control has a source/parameter contract
 but has not been instantiated.
 
+Round 6 closes the eight conservative same-homology owner holds.  Eight
+explicit short words `x` satisfy `x^-1*g*x=h` exactly in the source-locked
+`SL(2)` model, directly pairing every historically withheld record with its
+already credited representative.  The eight records are certified conjugate
+duplicates, not new axes.  Therefore the exact 44-record primitive subset is
+36 owner classes plus eight duplicate records; the owner count remains 36 per
+field and the 576 Round-5 magnetic branches are reused byte for byte.  The
+certificate passed 17/17 tests and deterministic double build.
+
+The same run adds a fail-closed source-package gate for the non-arithmetic
+control.  It finds 0/6 required locked inputs and authorizes no control
+execution.  This is a missing-source result, not an arithmetic comparison.
+Full `Gamma` conjugacy outside the frozen eight, 322 primitivity cases, A2,
+A4 credit, and Route B remain open, not run, or disabled as applicable.
+A separate typed evaluation records the bounded `L<=4` proxy as
+`A0_WEAK/A1_WEAK/A2--A4_FAIL-NOT_TESTABLE`, overall
+`ROUTE_A_EXPLORATORY`; it does not assign a tuple to the full candidate.
+
 The paper-facing theorem chain and remaining evidence obligations are tracked
 in [the Stage-1 research spine](stage1_research_spine.md).  Stage 2 writing is
-not authorized until the remaining conjugacy ambiguity is bounded and the
-matched non-arithmetic control determines whether the result is
+not authorized: the eight named conjugacy ambiguities are now closed, but the
+matched non-arithmetic control must still determine whether the result is
 arithmetic-specific or a generic hyperbolic calibration.
 
 The degree-one `Δ^L` is only a separate fixed candidate:

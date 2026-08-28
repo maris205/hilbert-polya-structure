@@ -1,6 +1,6 @@
 # P28 pipeline state
 
-Date: **2026-08-27**
+Date: **2026-08-28**
 
 | Item | Status |
 |---|---|
@@ -34,6 +34,12 @@ Date: **2026-08-27**
 | Round-5 reproducibility | **PASS** — 14/14 tests, two byte-identical builds, tree SHA-256 `1c8665ea55826e73c6aeb5f8cd6386a8d1020976d23004e1216d05e2f1e8a138` |
 | Round-5 completeness boundary | **MARKED-CYCLIC ONLY** — full `Gamma`-conjugacy completeness is `NOT_ESTABLISHED`; equal exact trace squared never mints conjugacy credit |
 | Non-arithmetic genus-2 control | **`[OPEN] / DESIGN ONLY`** — source, non-arithmeticity, systole, marking, physics, and common geometric-cutoff contract frozen; no surface selected and no comparison run |
+| Round-6 frozen-eight conjugacy closure | **`[PROVED] / PASS`** — eight explicit short words satisfy `x^-1*g*x=h` exactly in source-locked `SL(2)`; all eight historically withheld records are conjugate duplicates, with zero inverse fallbacks and zero new owner credits |
+| Round-6 owner consequence | **UNCHANGED** — 44 primitivity-certified records resolve to 36 credited inverse-paired classes plus eight exact duplicate records; 36 owners per field and 72 field-owner pairs |
+| Round-6 branch consequence | **BYTE-IDENTICAL REUSE** — the Round-5 576-row branch ledger remains canonical, SHA-256 `5f9cc50dfba3bb257a8a4f32c8bc5bd322a683788da4c9b900e9f8a5a62ee493` |
+| Round-6 control source-package gate | **FAIL-CLOSED / NOT READY** — 0/6 required locked inputs present; geometry, matrices, non-arithmeticity, systole, cutoff, census, and comparison all remain false/not run |
+| Round-6 reproducibility | **PASS** — 17/17 tests, two byte-identical builds, artifact-tree SHA-256 `098bfcac59f7fd332ddc022d2f59745f4e91450ade251024e9d6a12a6c82126b` |
+| Round-6 bounded-proxy Route record | **EVALUATION ONLY / NO PROMOTION** — separate `L<=4` certified-owner proxy is conservatively typed `A0_WEAK / A1_WEAK / A2--A4 FAIL-NOT_TESTABLE`, overall `ROUTE_A_EXPLORATORY`; the main P28 tuple remains unassigned |
 | Fixed degree-one candidate | `Δ^L` tracked separately; `FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN` |
 | Fixed-candidate orbit ownership | `FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED` |
 | Bold hypothesis | **`[HEURISTIC]`** — arithmetic-specific phase cancellation |
@@ -48,10 +54,12 @@ Date: **2026-08-27**
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: resolve the eight same-homology-axis conjugacy ambiguities with a
-certified quotient-group conjugacy procedure, and select/source-verify the
-contracted non-arithmetic constant-curvature genus-two control before freezing
-one common geometric cutoff.  This progress applies only to the frozen
-signed-field even subsequence; zero field, odd `N`, full all-`N`, arbitrary
-twists, and fixed `Delta^L` remain open or `NOT_ESTABLISHED`.  The formal
-Route-A tuple remains unassigned and Route B remains disallowed.
+Next gate: the eight same-homology-axis ambiguities are closed as exact
+conjugate duplicates.  Select and source-verify the contracted non-arithmetic
+constant-curvature genus-two control, satisfy all six source-package
+requirements, and freeze one common geometric cutoff before inspecting branch
+outcomes.  This progress applies only to the frozen signed-field even
+subsequence; zero field, odd `N`, full all-`N`, arbitrary twists, and fixed
+`Delta^L` remain open or `NOT_ESTABLISHED`.  The bounded-proxy evaluation is
+not a promotion of the main candidate: its formal Route-A tuple remains
+unassigned, A2 is not run, A4 has no credit, and Route B remains disallowed.

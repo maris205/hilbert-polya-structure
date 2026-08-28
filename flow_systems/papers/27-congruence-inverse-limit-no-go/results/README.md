@@ -2,8 +2,9 @@
 
 The current result is analytic: `[PROVED]` the total inverse-limit flow has no
 periodic points.  This carries the local progress tag
-`PROVED_A1_OBSTRUCTION`, not a formal A1 verdict.  A finite-level diagnostic may
-still be useful but receives no limit-flow orbit credit.
+`PROVED_A1_OBSTRUCTION` and the formal same-owner verdict `A1_FAIL`.  A
+finite-level diagnostic may still be useful but receives no limit-flow orbit
+credit.
 
 The Round-2 diagnostic is landed as
 `round2/congruence_reduction_order_ledger.csv` with 24 rows.  Its main columns
@@ -43,9 +44,10 @@ second generation is retained under `reproduction_run2/`.
 These `[NUMERICALLY_CERTIFIED]` rows describe finite-level lift behavior, not
 periodic points of the inverse limit.  Normality is tied to the kernel
 description of `Gamma(q)`, the PSL sign convention is explicit, and common-time
-compatibility is separate from each finite-quotient order.  A2--A4 remain
-`NOT_EVALUATED`; the formal Route-A tuple and overall status remain
-`UNASSIGNED`.
+compatibility is separate from each finite-quotient order.  The current formal
+tuple is `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+overall `ROUTE_A_REJECTED`; A2--A4 are `FAIL/NOT_TESTABLE` for the frozen
+inverse-limit owner.
 
 ## Round-4 period-escape audit
 
@@ -78,3 +80,21 @@ homology quotient bounds; the canonical residual cores and full finite
 quotients are intentionally not enumerated.  The general cocompact theorem is
 `[PROVED]` in the accompanying note, while the serialized finite ledger is
 `[NUMERICALLY_CERTIFIED]`.
+
+## Round-6 claim/source and positioning contract
+
+- `round6_claim_source_matrix.csv` contains 13 claim rows.  Nine external
+  rows bind five authoritative primary sources to exact URLs, locators,
+  access date, domain caveats, and positioning effects.
+- `round6_positioning_summary.json` freezes the common mechanism, direct-prior
+  result, formal Route verdict, human-source gate, and three-way decision.
+- `round6_artifact_manifest.json` binds the two generated result files.  The
+  separate Round-6 reproducibility receipt binds the builder, tests, and
+  reproducer source code by SHA-256.
+
+All nine external rows are `PRIMARY_SOURCE_WEB_VERIFIED` and
+`HUMAN_CONFIRMATION_PENDING`; zero rows are `USER_ATTESTED_READ`.  The frozen
+decision is: short comparative owner-audit `GO`, standalone new aperiodicity
+theorem `NO_GO`, same-owner Route-A A2 `NO_GO`.  The result is a positioning
+and technical synthesis contract, not a manuscript or an absolute novelty
+claim.

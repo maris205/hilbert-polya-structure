@@ -35,6 +35,14 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   arithmetic discriminator.  A 6,723-row primitive/repetition replay passes
   on all 2,241 frozen owners.  The project is retained as a
   methods/negative-control paper; Stage 2 remains unauthorized.
+- Round-6 symbolic-Zeta status: **`[PROVED]`** for the separately typed
+  unit-roof no-repeat symbolic suspension.  Its 747 frozen owners reproduce
+  the primitive Euler product, trace exponential and `3 x 3` determinant
+  exactly modulo `z^13`; collision parity gives precisely `z -> -z`.
+  This typed control has formal tuple
+  `(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)` and
+  overall `ROUTE_A_REJECTED`.  The physical flight-length flow tuple remains
+  unassigned.
 
 ## Round-2 executed artifact
 
@@ -77,6 +85,28 @@ two.  Thus the no-eclipse condition follows from
 ```
 
 and `d=6a` is safely inside the open hyperbolic regime.
+
+## Round-6 exact symbolic-Zeta calibrator
+
+For the separately typed unit-roof suspension of the no-repeat collision shift,
+let `A=J_3-I_3` and `z=exp(-s)`.  Oriented primitive cyclic words are owners;
+reversal remains distinct, and repetitions are traversal powers.  Then
+
+```text
+zeta_0(z)  = det(I-zA)^(-1) = 1/((1-2z)(1+z)^2),
+zeta_pi(z) = det(I+zA)^(-1) = zeta_0(-z)
+           = 1/((1+2z)(1-z)^2).
+```
+
+All 747 frozen owners through length 12 match the exact Möbius counts.  Three
+independent exact implementations agree coefficient by coefficient modulo
+`z^13`, with zero mismatches.  The collision phase is therefore source-owned
+but non-discriminative: it only changes `z` to `-z`.
+
+This is an A1-to-A2 **symbolic calibrator**, not the physical Euclidean-flight-
+length Gutzwiller--Voros zeta, the exact multiple-scattering determinant, or a
+quantum-resonance calculation.  Its Route tuple is typed and may not be
+transferred to the physical three-disk flow.
 
 ## Research question and bold hypothesis
 
@@ -129,6 +159,12 @@ Evidence labels in this project use the vocabulary of
 - [Round-5 theorem and negative-control closure](notes/round5_universal_half_density_theorem.md)
 - [Round-5 paper research spine](paper/round5_research_spine.md)
 - [Round-5 reproducibility receipt](experiments/round5_reproducibility_receipt.json)
+- [Round-6 symbolic-Zeta theorem](notes/round6_symbolic_zeta_theorem.md)
+- [Round-6 typed Route-A audit](notes/round6_route_audit.md)
+- [Round-6 freeze contract](experiments/round6_symbolic_zeta_freeze.json)
+- [Round-6 validation](experiments/round6_validation.md)
+- [Round-6 formal Route-A record](../../evaluations/route_a/THREE-DISK-NO-REPEAT-MASLOV-SYMBOLIC/2026-08-28-stage1.yaml)
 
-No exact scattering determinant, A2 zeta test, formal Route tuple, or manuscript
-is claimed yet.
+No exact physical scattering determinant, physical-flow A2 test, or manuscript
+is claimed.  The formal A1/A2 tuple belongs only to the explicitly typed
+unit-roof symbolic suspension.

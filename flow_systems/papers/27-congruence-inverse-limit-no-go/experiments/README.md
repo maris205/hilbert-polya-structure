@@ -1,5 +1,21 @@
 # P27 experiment status
 
+## Round 6
+
+Run `bash experiments/reproduce_round6.sh`.  It runs eleven tests, makes two
+isolated three-file builds, requires byte identity, installs the claim/source
+matrix, summary, and manifest, and writes
+`round6_reproducibility_receipt.json`.  The artifact-tree SHA-256 is
+`53b8b332c09f771f97ad45a1504491a7e542d014a9d6ce677d3dc86851efeb5a`.
+
+The matrix contains 13 rows, including nine external rows across five
+authoritative records (four research articles and one theorem exposition).
+All nine are web-verified with exact URLs, locators, and access date
+`2026-08-28`; all retain
+`HUMAN_CONFIRMATION_PENDING`, and none is `USER_ATTESTED_READ`.  The replay
+also freezes short owner-audit `GO`, standalone novelty `NO_GO`, and
+same-owner A2 `NO_GO`.
+
 ## Round 5
 
 Run `bash experiments/reproduce_round5.sh`.  It checks the three frozen

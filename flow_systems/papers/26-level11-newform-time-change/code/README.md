@@ -1,5 +1,31 @@
 # P26 code
 
+## Round 6
+
+`round6_second_variation.py` consumes the same SHA-locked Round-4 cycle-owner
+and period-summary ledgers and builds three registered surfaces:
+
+1. 552 inverse-pair/repetition rows checking the exact second-variation
+   formulas and the surviving factor `r` after the logarithmic `1/r`;
+2. 110 quadratic degree-moment rows for
+   `Q_1=lambda_p I(M)^2`, `Q_d=0` for `d>1`; and
+3. 165 finite weighted rows at `s={0.125,0.25,0.5}` and repetition cutoff
+   `R=4` for the primary scalars `a_p`, `a_p^2`, plus the separately labeled
+   secondary negative control `a_p^2-p`.
+
+The generator records a finite/local audit only.  It does not enumerate the
+complete primitive population, construct or continue a global zeta, count
+roots, compare target zeros, or run formal A2.
+
+Run its twelve tests with:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_round6_second_variation.py
+```
+
+Canonical two-run reproduction is owned by
+`../experiments/reproduce_round6.sh`.
+
 ## Round 5
 
 `round5_zeta_variation.py` consumes the SHA-locked Round-4 cycle-owner and

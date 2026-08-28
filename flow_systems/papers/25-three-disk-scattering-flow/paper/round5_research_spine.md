@@ -1,4 +1,4 @@
-# Paper 25 Round-5 research spine
+# Paper 25 research spine after Round 6
 
 Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk
 Scattering Control*
@@ -30,12 +30,17 @@ first three traversal branches give a 6,723-row target-free replay.
    primitive/repetition and eigenvalue-sign branches.
 5. Show that neighboring geometries and matched controls preserve the tested
    envelope, so its arithmetic use is `STOP_SCOPED / PROVES_TOO_MUCH`.
+6. Add the exact unit-roof symbolic calibrator: primitive Euler, trace
+   exponential and `3 x 3` determinant agree, while collision parity is only
+   the substitution `z -> -z`.
 
 ## Exact claim boundary
 
 The paper can claim a generic stability-amplitude theorem, a reproducible
 finite-cutoff three-disk calibration, and a negative arithmetic-specificity
-result for one magnitude-only statistic.  It cannot claim an arithmetic owner,
-an exact quantum/semiclassical determinant equality, a Route-A tuple, A2, or a
+result for one magnitude-only statistic.  It can also claim an exact symbolic
+unit-roof determinant calibration and its typed rejected Route tuple.  It
+cannot transfer that A2 credit to the physical billiard, claim an arithmetic
+owner, an exact quantum/semiclassical determinant equality, or a
 Hilbert--Polya operator.  Manuscript drafting remains subject to a separate ARS
 Stage-2 authorization.

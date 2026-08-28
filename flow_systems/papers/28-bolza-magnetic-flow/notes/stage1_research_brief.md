@@ -192,13 +192,32 @@ Its source, non-arithmeticity, systole, marking, physics, and common-geodesic-
 cutoff requirements are frozen in a design-only contract.  No geometry or
 comparison result is fabricated.
 
+## Round-6 execution — 2026-08-28
+
+The eight conservative same-homology holds are now closed exactly.  For each
+credited representative `g` and historically withheld peer `h`, an explicit
+short word `x` in the source generators satisfies `x^-1*g*x=h` as an exact
+`SL(2)` identity over the frozen number field.  All eight signs are `+`; no
+inverse equality or numerical tolerance is used.  The eight targets are
+therefore certified conjugate duplicates, so the 44 primitivity-certified
+records resolve into 36 owner classes plus eight duplicates.  Owner and branch
+counts remain 36 per field and 576 rows.
+
+The control source-package gate is also executable and fail-closed.  It finds
+none of the six required locked inputs, leaves every geometry/census/comparison
+flag false, and authorizes no control run.  Seventeen tests and two byte-identical
+builds pass with artifact-tree SHA-256
+`098bfcac59f7fd332ddc022d2f59745f4e91450ade251024e9d6a12a6c82126b`.
+This is bounded A1 evidence only; full conjugacy outside the eight, 322
+primitivity cases, arithmetic discrimination, A2, and A4 credit remain absent.
+
 ## Route mapping
 
 ```text
 PROPOSAL_STAGE=1
 ROUTE_A_SCOPE=A0-A1
 A0_SCREEN=ARITHMETIC_SUBSTRATE_PRESENT_PRIME_LINK_UNPROVED
-A1_PROGRESS=36_DISTINCT_INVERSE_PAIRED_AXIS_OWNERS_PER_FIELD_576_SIGNED_K_BRANCH_ROWS
+A1_PROGRESS=44_PRIMITIVE_RECORDS_RESOLVED_TO_36_EXACT_OWNER_CLASSES_PLUS_8_CONJUGATE_DUPLICATES_PER_FIELD_576_SIGNED_K_BRANCH_ROWS
 A1_COMPLETENESS=COMPLETE_MARKED_CYCLIC_L_LE_4_FULL_GAMMA_CONJUGACY_NOT_ESTABLISHED
 A4_ARCHITECTURE_NOTE=SEMICLASSICAL_TENSOR_POWER_FAMILY_NO_CREDIT_YET
 ROUND2_OWNER_LEMMA=PROVED
@@ -228,6 +247,15 @@ ROUND5_SIGNED_FIELD_BRANCH_ROWS=576
 ROUND5_FULL_GAMMA_CONJUGACY_COMPLETENESS=NOT_ESTABLISHED
 ROUND5_NONARITHMETIC_CONTROL=DESIGN_ONLY_NOT_INSTANTIATED
 ROUND5_UNIT_TESTS=14_PASS
+ROUND6_EXACT_DIRECT_SL2_CONJUGACIES=8
+ROUND6_CERTIFIED_CONJUGATE_DUPLICATES=8
+ROUND6_UNRESOLVED_WITHIN_FROZEN_EIGHT=0
+ROUND6_NEW_OWNER_CREDITS=0
+ROUND6_OWNERS_PER_FIELD=36
+ROUND6_BRANCH_ROWS_REUSED_BYTE_FOR_BYTE=576
+ROUND6_NONARITHMETIC_SOURCE_PACKAGE_GATE=FAIL_CLOSED_NOT_READY_0_OF_6
+ROUND6_UNIT_TESTS=17_PASS
+ROUND6_BOUNDED_PROXY_EVALUATION=A0_WEAK_A1_WEAK_A2_A4_FAIL_NOT_TESTABLE_ROUTE_A_EXPLORATORY_NO_PROMOTION
 FIXED_OPERATOR_HIGH_ENERGY_TRACE=OPEN
 FIXED_OPERATOR_MAGNETIC_ORBIT_OWNERSHIP=NOT_ESTABLISHED
 FORMAL_A0_A4_TUPLE=UNASSIGNED

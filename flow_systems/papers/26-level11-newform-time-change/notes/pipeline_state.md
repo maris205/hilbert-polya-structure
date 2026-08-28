@@ -1,6 +1,6 @@
 # P26 pipeline state
 
-Date: **2026-08-27**
+Date: **2026-08-28**
 
 | Item | Status |
 |---|---|
@@ -35,9 +35,16 @@ Date: **2026-08-27**
 | Round-5 weighted observations | **NUMERICAL_OBSERVATION** — 51/55 alpha groups violate all-`s` moments; 153/165 naive Ruelle and 153/165 naive frozen-Selberg rows fail |
 | Round-5 same-owner control | **PROVED ZERO CANONICALLY / 53 OF 55 ONE-SIDED GROUPS FAIL MOMENTS** — the control does not rescue discriminative evidence |
 | Round-5 reproducibility | **REPRODUCIBLE** — 11/11 tests; two byte-identical runs; tree SHA-256 `7b21a0c25ee269d28b53cd8c0551c8b2a977307641c2d07be78810be2e975731` |
+| Round-6 inverse-pair second variation | **PROVED / ORIENTATION-EVEN** — inverse contributions add as `2s^2 I^2 sum_r r exp(-srL)`, with the frozen stability denominator in the Selberg-type kernel |
+| Round-6 quadratic moment criterion | **PROVED** — any predeclared `p`-only scalar all-`s` law on the finite output multiset is equivalent to `Q_1=lambda_p I(M)^2`, `Q_d=0` for `d>1` |
+| Round-6 primary finite audits | **PASS WITH NEGATIVE RESULT / NUMERICAL_OBSERVATION** — `a_p` and `a_p^2` each fail 51/55 group moments and 153/165 rows per kernel; four `p=5` groups survive numerically only |
+| Round-6 secondary control | **NEGATIVE CONTROL ONLY** — `a_p^2-p` fails 55/55 groups and 165/165 rows per kernel |
+| Round-6 scope | **FINITE/LOCAL ONLY** — 552 inverse-pair/repetition rows, 110 moment rows, 165 weighted rows; no complete primitive enumeration, global continuation, determinant root count, or zero comparison |
+| Round-6 reproducibility | **REPRODUCIBLE** — 12/12 tests; two byte-identical runs; tree SHA-256 `fc553aa18bc4fb54d70ea8f4c0bdbc41efc3c0905b3f2942c49e1f6f8c62f864` |
 | Proposal stage | Stage 1 / Route A A0--A1 |
-| Formal Route-A tuple | UNASSIGNED |
-| Route-A A2 evaluation | NOT RUN |
+| Formal Route-A tuple | **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`** |
+| Overall Route-A status | **`ROUTE_A_EXPLORATORY`** — no promotion |
+| Route-A A2 evaluation | **FAIL / NOT_TESTABLE** — no formal A2 campaign; only the finite/local variation audit ran |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
@@ -51,7 +58,10 @@ Round 5 closes the prior next gate: the sum-valued correspondence enters only
 through an unweighted period identity, whereas zeta variation uses
 owner-length kernels.  The complete oriented first variation is exactly zero;
 the one-sided audit is noncanonical and requires additional degree moments
-that are not implied by Hecke homology.  A possible later Stage-1 question is
-whether an intrinsic orientation-even twist can avoid exact cancellation
-without importing target data.  No formal Route-A tuple is assigned, A2
-remains unrun, and Route B remains disallowed.
+that are not implied by Hecke homology.  Round 6 answers the smallest
+orientation-even question: the intrinsic inverse-pair second variation is
+nonzero in general, but a scalar Hecke law requires new quadratic moments and
+fails in 51/55 frozen groups for both primary scalars.  The four numerical
+`p=5` survivors require exact homology certification before any stronger local
+claim.  The formal evaluation remains exploratory, A2 is `FAIL/NOT_TESTABLE`,
+and Route B remains disallowed.

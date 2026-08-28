@@ -1,5 +1,23 @@
 # P27 code status
 
+Round 6 adds `round6_positioning_audit.py` and
+`test_round6_positioning_audit.py`.  The deterministic builder serializes a
+13-row technical/claim-source contract: nine rows bind five authoritative
+primary sources to exact URLs, locators, access date `2026-08-28`, domain
+caveats, and `HUMAN_CONFIRMATION_PENDING`.  It forbids
+`USER_ATTESTED_READ`, validates the frozen metadata, status strings, and owner
+firewall, and freezes the three-way GO/NO-GO decision and formal Route tuple.
+The compact-versus-cusped theorem itself remains a human-readable mathematical
+proof obligation; the code does not certify that proof.
+
+```bash
+bash experiments/reproduce_round6.sh
+```
+
+Eleven tests and two byte-identical builds must pass.  The replay is offline: it
+validates the frozen web-verification records but does not refetch sources or
+infer human reading.
+
 Round-2 code is now landed:
 
 - `round2_reduction_orders.py` freezes three `Gamma(3)` matrices, computes

@@ -20,10 +20,16 @@ Working title: *Complex Lengths and Holonomy-Twisted Orbit Traces on a Bianchi F
   enumeration **data-type** mismatch with one pre-frozen marked cyclic-word
   algorithm and one phase-sensitive statistic on both systems.  It retains the
   explicit marked-count-4/alphabet-8 versus marked-count-2/alphabet-4
-  presentation confound.
+  presentation confound.  Round 6 then replaces that count mismatch by a
+  canonical 25-marking-per-system elementary-Nielsen audit.  The control's
+  standardized phase range has width `16.9153`, so the frozen exploratory rule
+  stops the current phase statistic as marking-sensitive.
 - Primary arithmetic target: **Dedekind-zeta calibration for `Q(i)`**.  This does
   not confer Riemann-`zeta` A0 credit.
-- Formal Route-A tuple: **unassigned**.
+- Formal Route-A tuple: the full Bianchi flow remains **unassigned**; the
+  explicitly typed `P24-BIANCHI-MARKED-WORD-PROXY` now has the conservative
+  tuple `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` and
+  overall `ROUTE_A_EXPLORATORY`.
 - Route B: `EVALUATION=NOT_RUN`; `INVOCATION_ALLOWED=false`.
 
 ## Round-2 executed artifact
@@ -165,6 +171,33 @@ metric primitive spectrum, a Gaussian-prime owner, or a formal Route tuple.
 The “rank” shorthand here means marked positive-generator count, not a claim
 about minimal group rank or a free presentation.
 
+## Round-6 exhaustive elementary-Nielsen audit
+
+Both sides now use four positive marked generators.  The Bianchi base is
+`(U1,Ui,L1,Li)`; the control is the disclosed Tietze-redundant four-marking
+`(a,b,ab,aB)`.  The panel contains the identity and every elementary right
+Nielsen move `x_i -> x_i x_j^epsilon`, `i != j`, `epsilon=+/-1`: exactly 25
+markings per system and 50 summary rows.  Every row uses alphabet size 8,
+19,624 raw cyclically reduced words, and 2,074 canonical marked owners.
+
+The candidate standardized phase values range from `-2.00184797173` to
+`-1.08554792773`, width `0.916300044002`.  The control ranges from
+`-0.747750608375` to `16.1675419980`, width `16.9152926064`.  All 25 signed
+candidate-minus-control contrasts are negative and have minimum absolute value
+`0.808035900150`, but the control-width condition fails.  Therefore:
+
+```text
+PAPER_DECISION=STOP_SCOPED_CURRENT_PHASE_STATISTIC_AS_MARKING_SENSITIVE
+METRIC_BIANCHI_PREFIX_AUTHORIZED=false
+```
+
+The provisional planning pilot is disclosed in the freeze contract and is not
+used as evidence.  The executed family is exhaustive rather than selected,
+but the decision remains exploratory rather than blind confirmatory.  The
+large control spread can reflect its redundant stabilization; it does not
+support an arithmetic contrast.  No complete primitive spectrum or
+orbit-to-prime-ideal map follows.
+
 ## Frozen dynamical system
 
 Let `Gamma((3))` be the principal congruence subgroup of
@@ -268,6 +301,13 @@ rows.  The next smallest gate is a preregistered same-marked-generator-count
 Nielsen sensitivity panel,
 not a post-hoc interpretation of the current contrast.
 
+Round 6 executes that panel.  Equal marked-generator count does not rescue the
+phase statistic: it is stopped as marking-sensitive under the frozen
+exploratory rule.  The next lawful positive branch must supply either a
+source-derived Gaussian-prime-ideal owner theorem or a different invariant
+under a new frozen falsification contract.  The stopped statistic does not
+authorize a metric Bianchi prefix.
+
 ## Files
 
 - [Stage-1 research brief](notes/stage1_research_brief.md)
@@ -284,7 +324,13 @@ not a post-hoc interpretation of the current contrast.
 - [Round-5 conclusion](notes/round5_conclusion.md)
 - [Round-5 pre-result freeze](experiments/round5_freeze_contract.json)
 - [Round-5 validation](experiments/round5_validation.md)
+- [Round-6 exhaustive-Nielsen conclusion](notes/round6_nielsen_sensitivity.md)
+- [Round-6 freeze contract](experiments/round6_nielsen_panel_freeze.json)
+- [Round-6 validation](experiments/round6_validation.md)
+- [Round-6 typed proxy Route-A record](../../evaluations/route_a/P24-BIANCHI-MARKED-WORD-PROXY/2026-08-28-round6.yaml)
 - [Stage-1 paper spine](paper/stage1_research_spine.md)
 
-No manuscript, orbit-to-prime-ideal map, formal Route advancement, or quantum
-claim is made at this checkpoint.
+No manuscript, orbit-to-prime-ideal map, full-flow Route assignment, A2
+advancement, or quantum claim is made at this checkpoint.  The typed proxy
+evaluation is deliberately conservative and cannot be transferred to the full
+Bianchi flow.

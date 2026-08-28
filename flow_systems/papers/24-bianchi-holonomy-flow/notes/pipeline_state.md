@@ -1,6 +1,6 @@
 # P24 pipeline state
 
-Date: **2026-08-27**
+Date: **2026-08-28**
 
 | Item | Status |
 |---|---|
@@ -33,21 +33,27 @@ Date: **2026-08-27**
 | Round-5 matrix evidence | **SPLIT** — candidate determinant and level-`(3)` exact; control holonomy numerical at 212 bits with max determinant residual `1.5618e-62` |
 | Round-5 phase comparison | **`[NUMERICAL_OBSERVATION]`** — 1,932 versus 39 primitive loxodromic rows; z values `-1.74684` / `-0.811352`; absolute contrast `0.935490` |
 | Round-5 same-enumeration status | **ALGORITHM MATCH COMPLETE / PRESENTATION MATCH OPEN** — the word-ball-versus-metric-cutoff type mismatch is closed, but marked positive-generator count 4/alphabet 8 versus 2/alphabet 4 remains |
+| Round-6 canonical panel | **`[PROVED]` / EXECUTED** — identity plus all 24 elementary right Nielsen moves, 25 markings per system, count 4/alphabet 8 on both sides, 2,074 owners per marking |
+| Round-6 pilot boundary | **DISCLOSED / NON-EVIDENTIARY** — eight provisional markings were inspected only for implementation feasibility; their values are not an evidence input |
+| Round-6 candidate phase range | **`[NUMERICAL_OBSERVATION]`** — `[-2.00184797173,-1.08554792773]`, width `0.916300044002`, frozen width condition passes |
+| Round-6 control phase range | **`[NUMERICAL_OBSERVATION]`** — `[-0.747750608375,16.1675419980]`, width `16.9152926064`, frozen width condition fails |
+| Round-6 decision | **`STOP_SCOPED_CURRENT_PHASE_STATISTIC_AS_MARKING_SENSITIVE`** — retain descriptive history only; metric Bianchi prefix not authorized |
 | Remaining control mismatch | **OPEN** — marked generator count/presentation, exact Bianchi cusp count, covolume, length distribution, and full primitive spectra |
 | Full `Gamma((3))` / conjugacy completeness | **OPEN** — elementary generated subgroup word ball only |
 | Orbit-to-prime-ideal map | **OPEN** — no arithmetic labels attached |
-| Proposal stage | Stage 1 / Route A A0--A1 |
-| Formal Route-A tuple | UNASSIGNED |
-| Route A A2--A4 | NOT EVALUATED |
+| Proposal stage | Stage 1 / Route A A0--A1 proxy audit |
+| Typed proxy Route-A tuple | `P24-BIANCHI-MARKED-WORD-PROXY = (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`; overall `ROUTE_A_EXPLORATORY` |
+| Full Bianchi flow Route-A tuple | UNASSIGNED |
+| Full Bianchi Route A A2--A4 | NOT EVALUATED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
 | Manuscript | NOT STARTED |
 
-Next gate: preregister and execute a same-marked-generator-count Nielsen sensitivity
-panel.  Round 5 has removed the direct Bianchi-word-ball versus control-metric-
-prefix comparison error, but the current 4-generator and 2-generator
-presentations produce sharply different census sizes.  The existing contrast
-may not be promoted to an arithmetic kill verdict.  No orbit-to-Gaussian-
-prime-ideal claim or A0/A1 verdict is permitted before the marking,
-owner/completeness, and robustness obligations close.  A later rational-prime
-push-forward must separately preserve the frozen split/inert/ramified rules.
+Next gate: the Round-6 same-count Nielsen audit is complete and stops the
+current phase statistic.  A positive branch now requires a source-derived
+Gaussian-prime-ideal owner theorem or a different invariant under a separate
+frozen falsification contract.  The stopped statistic may not authorize a
+metric Bianchi prefix.  The proxy tuple cannot be transferred to the complete
+flow, whose group-conjugacy completeness, metric primitive spectrum and
+orbit-owner map remain open.  Any later rational-prime push-forward must still
+preserve the frozen split/inert/ramified rules.

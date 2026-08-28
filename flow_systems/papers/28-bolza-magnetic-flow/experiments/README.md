@@ -1,5 +1,40 @@
 # P28 experiment status
 
+## Round 6
+
+`EXECUTION_STATUS=ROUND6_EXACT_GAMMA_CONJUGACY_CLOSURE_COMPLETED`. Run:
+
+```bash
+./experiments/reproduce_round6.sh
+```
+
+Seventeen tests pass.  Two isolated builds of the eight-row exact conjugacy
+certificate, validation, fail-closed non-arithmetic source-package gate, and
+standard output are byte-identical.  The artifact-tree SHA-256 is
+`098bfcac59f7fd332ddc022d2f59745f4e91450ade251024e9d6a12a6c82126b`;
+the three core artifacts have combined SHA-256
+`9c593b41c3cb2b971a2f5e5bd38c23b786200e96a938f215225d0a1b7198f13a`.
+
+The default command verifies temporary outputs and the candidate receipt
+against the checked-in canonical bytes with `cmp`; it does not overwrite them.
+The explicit maintainer-only refresh path is
+`./experiments/reproduce_round6.sh --refresh`.  The receipt additionally binds
+the Round-6 builder, tests, and reproducer by SHA-256.
+
+The run verifies all eight frozen identities `x^-1*g*x=h` directly in the
+exact source-locked `SL(2)` model.  All eight formerly withheld records are
+certified conjugate duplicates; none receives owner credit.  The owner count
+therefore remains 36 per field, and the Round-5 branch ledger is reused byte
+for byte at 576 rows.
+
+This run does not decide arbitrary `Gamma` conjugacy, prove primitivity for the
+322 open marked candidates, instantiate a non-arithmetic surface, or run a
+dynamical Zeta/root experiment.  The source-package gate records 0/6 required
+control inputs and `FAIL_CLOSED_NOT_READY`; all geometry and comparison flags
+remain false.  The formal Route-A tuple is unassigned, A2 is not run, A4 has no
+credit, and Route B is disabled.  A separate bounded-proxy Route-A record is
+exploratory and does not promote the full candidate.
+
 ## Round 5
 
 `EXECUTION_STATUS=ROUND5_MATCHED_MARKED_CYCLIC_CENSUS_COMPLETED`. Run:
@@ -86,8 +121,8 @@ Every tensor-family comparison must use a common `N`.  A fixed-operator
 high-energy control is a separate regime and cannot be used as evidence for the
 `N→∞` family.
 
-The non-arithmetic genus-2 metric is still not instantiated.  Round 5 has
-completed the finite Bolza marked-cyclic layer and frozen the source/parameter
-contract.  The next experiment must resolve or conservatively retain the eight
-same-homology conjugacy gaps, then source and instantiate the matched control
-under a common geometric cutoff; other regimes remain open.
+The non-arithmetic genus-2 metric is still not instantiated.  Round 5 completed
+the finite Bolza marked-cyclic layer and froze the source/parameter contract;
+Round 6 subsequently proves that all eight same-homology gaps are exact
+conjugate duplicates.  The next experiment must source and instantiate the
+matched control under a common geometric cutoff; other regimes remain open.
