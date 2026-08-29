@@ -1,11 +1,12 @@
 # Paper 25 — three-disk scattering flow
 
-Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering Control*
+Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Physical Three-Disk Flow*
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress**.
-- Proposal: **Stage 1 Classical Flow Baseline / Route A A0 kill control**.
+- Current stage: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
+- Route/proposal frame (not the ARS pipeline stage): **Stage 1 Classical Flow
+  Baseline / Route A A0 kill control**.
 - Concrete progress: the exact no-eclipse geometry is frozen; the exact quantum
   multiple-scattering determinant is separated from the semiclassical
   Gutzwiller--Voros orbit expansion; the project is internally prespecified as
@@ -34,7 +35,9 @@ Working title: *Generic Half-Density Is Not Arithmetic: A Three-Disk Scattering 
   half-density is therefore a universal leading factor rather than an
   arithmetic discriminator.  A 6,723-row primitive/repetition replay passes
   on all 2,241 frozen owners.  The project is retained as a
-  methods/negative-control paper; Stage 2 remains unauthorized.
+  methods/negative-control paper; the Round-5 statement that Stage 2 was
+  unauthorized is a historical process marker superseded by the current
+  Round-9 manuscript and Stage-2.5 audit status.
 - Round-6 symbolic-Zeta status: **`[PROVED]`** for the separately typed
   unit-roof no-repeat symbolic suspension.  Its 747 frozen owners reproduce
   the primitive Euler product, trace exponential and `3 x 3` determinant
@@ -226,6 +229,27 @@ Evidence labels in this project use the vocabulary of
 - [Round-8 validation](experiments/round8_validation.md)
 - [Round-8 formal Route-A record](../../evaluations/route_a/P25-Q-SYMBOL-NO-REPEAT-PHASE-CALIBRATOR/2026-08-28-round8.yaml)
 
-No exact physical scattering determinant, physical-flow A2 test, or manuscript
-is claimed.  The formal A1/A2 tuple belongs only to the explicitly typed
-unit-roof symbolic suspension.
+**Round-8 historical snapshot:** at that checkpoint, no exact physical
+scattering determinant, physical-flow A2 test, or manuscript was claimed. The
+formal A1/A2 tuple belonged only to the explicitly typed unit-roof symbolic
+suspension. Round 9 supersedes only the old manuscript-status statement, not
+those scientific or Route limitations.
+
+## Round 9 paper and Stage 2.5 status
+
+The physical-roof nontransfer theorem and symbolic-control analysis now form a
+4,055-word, 12-page paper. Stage 2.5 checked 8/8 references, 10/10 contexts,
+7/7 data-surface families, 22/70 originality paragraphs, and a 72-claim
+registry. The stable Phase-E selection is 45 HIGH-IMPACT plus three RANDOM
+claims. Its registry-to-evidence projection is structurally closed at **48
+selected distinct claims and 49/49 required tuples**. All 49 persisted evidence
+carriers remain explicitly `anchorless`; structural closure does not embed an
+excerpt or upgrade provenance. The **48/48 VERIFIED** semantic conclusion comes
+from the independent [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md),
+not from carrier anchoring or bounded mechanical coverage alone.
+
+The strict pipeline verdict remains `FAIL-CLOSED` for the same two named
+reasons: the `BowenLanford1970` author field omits Lanford's suffix `III`, and
+the scholar-owned experiment intake/provenance is absent. No bibliography
+bytes have been changed without authorization; the physical-flow Route-A tuple
+remains unassigned. See the controlling [independent integrity audit](notes/stage2_5_independent_audit.md).

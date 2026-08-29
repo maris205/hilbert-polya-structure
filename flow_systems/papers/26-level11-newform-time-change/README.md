@@ -1,11 +1,19 @@
 # Paper 26 — level-11 newform time change
 
-Working title: *Level-11 Newform Periods as an Intrinsic Time Change of a Geodesic Flow*
+Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the Modular Geodesic Flow*
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress; Rounds 2--8 executed reproducibly**.
-- Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
+- Current pipeline: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
+  The manuscript and the bounded scientific/semantic surfaces are clean within
+  the recorded denominators, but the missing scholar-owned experiment-intake
+  declaration remains the blocking provenance item `P26-S25-F001`.
+- **Round-8 historical snapshot (superseded for pipeline stage):** ARS Stage 1
+  RESEARCH was in progress and Rounds 2--8 had executed reproducibly.  This
+  remains the scientific development history; it is not the current ARS stage.
+- Scientific proposal baseline: **Stage 1 Classical Flow Baseline / Route A
+  A0--A1**.  The current formal Route-A tuple remains the one recorded below;
+  the Stage-2.5 audit does not promote it.
 - The arithmetic one-form, positive time-density/slowness factor, reciprocal
   speed multiplier, generator, and exact period-variation formula are frozen.
 - Round 2 exactly enumerated 125 primitive positive `LR` necklaces through the
@@ -227,6 +235,9 @@ global primitive-orbit or determinant theorem.
 - [Round-8 conclusion](notes/round8_conclusion.md)
 - [Round-8 paper-facing research spine](paper/round8_research_spine.md)
 - [Round-8 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round8.yaml)
+- [Round-9 manuscript](paper/manuscript.tex)
+- [Stage-2.5 independent integrity audit](notes/stage2_5_independent_audit.md)
+- [Stage-2.5 Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md)
 - [results and artifact contract](results/README.md)
 - [reproduction instructions](experiments/README.md)
 
@@ -234,3 +245,36 @@ The finite positive-word ledger is not a complete certificate of
 `Gamma_0(11)` conjugacy classes.  No single-orbit Hecke rule, primitive Euler
 factorization, dynamical-zeta A2 result, automorphic-`L` determinant identity,
 prime/zero target match, Route-A promotion, or Route-B entry is claimed.
+
+## Round 9 paper and Stage 2.5 status
+
+The exact owner taxonomy has now been written as a 4,210-word, 12-page paper.
+Stage 2.5 checked 5/5 references, 5/5 contexts, all 14 registered data-surface
+families, 21/65 originality paragraphs, and a 72-claim registry.
+
+- **Structural closure:** the corrected Phase-E selection contains 65
+  HIGH-IMPACT plus three RANDOM claims.  All 68/68 selected claim IDs and all
+  70/70 `(claim_id, selection_tier, ref_slug-or-null)` tuples are present,
+  unique, ordered, and validator-clean.  This closes the registered selection
+  and carrier structure; semantic extraction completeness for the whole
+  manuscript remains `not_machine_detectable`.
+- **Evidence-carrier limitation:** all 70/70 persisted evidence rows have
+  `anchor.kind = none` and `excerpt.state = anchorless`.  They carry verdict
+  metadata but cannot themselves replay source-bound excerpts; this is a
+  non-gating advisory, not a downgrade of the claim verdicts.
+- **Independent semantics:** the independent
+  [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md) cross-read
+  every selected claim against the manuscript proof chain, exact artifacts and
+  tests, and the documented official-source contexts.  It supports 68/68
+  distinct claims and 70/70 tuples as `VERIFIED`, with no distortion or
+  unverifiable finding.
+
+No scientific or reference defect was found within those denominators.  The
+scientific status remains
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` /
+`ROUTE_A_EXPLORATORY`; Route B remains unauthorized.  The pipeline nevertheless
+stays **`FAIL-CLOSED`** until the scholar supplies the experiment-intake
+declaration/provenance ledger and C4/Mode 6 is rechecked.  Stage 3, Route-A
+promotion, and Route B remain unentered.  See the
+[integrity report](notes/stage2_5_integrity_report.md) and
+[independent audit](notes/stage2_5_independent_audit.md).

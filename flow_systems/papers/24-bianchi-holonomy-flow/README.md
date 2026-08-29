@@ -1,11 +1,12 @@
 # Paper 24 — Bianchi holonomy flow
 
-Working title: *Complex Lengths and Holonomy-Twisted Orbit Traces on a Bianchi Flow*
+Working title: *Congruence Trace Universality and the Limits of First-Jet Separation in Bianchi Holonomy*
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress**.
-- Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
+- Current stage: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
+- Route/proposal frame (not the ARS pipeline stage): **Stage 1 Classical Flow
+  Baseline / Route A A0--A1**.
 - Concrete progress: the phase space is frozen to a torsion-free, finite-volume
   cusped Bianchi 3-manifold; level-`(3)` neatness and torsion-freeness now have a
   self-contained `[PROVED]` lemma.  Round 2 has also executed an exact Gaussian-integer
@@ -396,7 +397,27 @@ conjugacy classification or prime-ideal map.
 - [Round-8 typed proxy Route-A record](../../evaluations/route_a/P24-BIANCHI-MARKED-WORD-PROXY/2026-08-28-round8.yaml)
 - [Stage-1 paper spine](paper/stage1_research_spine.md)
 
-No manuscript, orbit-to-prime-ideal map, full-flow Route assignment, A2
-advancement, or quantum claim is made at this checkpoint.  The typed proxy
-evaluation is deliberately conservative and cannot be transferred to the full
-Bianchi flow.
+**Round-8 historical snapshot:** at that checkpoint, no manuscript,
+orbit-to-prime-ideal map, full-flow Route assignment, A2 advancement, or quantum
+claim was made.  The typed proxy evaluation was deliberately conservative and
+could not be transferred to the full Bianchi flow.  Round 9 supersedes only the
+old manuscript-status statement, not those scientific or Route limitations.
+
+## Round 9 paper and Stage 2.5 status
+
+The Round-8 theorem/certificate chain has now been written as a 4,029-word,
+12-page paper. Stage 2.5 checked 7/7 references, 9/9 citation contexts, 6/6
+data-surface families, 21/69 originality paragraphs, and a corrected 76-claim
+registry. The stable Phase-E selection is 61 HIGH-IMPACT plus three RANDOM
+claims. Its registry-to-evidence projection is structurally closed at **64
+selected distinct claims and 66/66 required tuples**. All 66 persisted evidence
+carriers remain explicitly `anchorless`; structural closure does not embed an
+excerpt or upgrade provenance. The **64/64 VERIFIED** semantic conclusion comes
+from the independent [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md),
+not from carrier anchoring or bounded mechanical coverage alone.
+
+The scientific content is clean within the recorded denominators, but the
+pipeline verdict remains `FAIL-CLOSED` solely because the scholar-owned
+experiment-intake declaration/provenance ledger is absent. Stage 3 has not
+started; the Route-A tuple and 2/3 canonical-control boundary are unchanged.
+See the controlling [independent integrity audit](notes/stage2_5_independent_audit.md).

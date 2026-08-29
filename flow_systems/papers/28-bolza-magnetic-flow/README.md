@@ -1,12 +1,30 @@
-# Paper 28 — Semiclassical Tensor-Power Trace
-
-Working title: *Semiclassical Tensor-Power Trace*
+# Paper 28 — An Exact Systole and Finite Enumeration Certificate for a Nonarithmetic Genus-Two Octagon
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress**.
-- Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**, with a
-  non-credit semiclassical tensor-power architecture note.
+- ARS: **Stage 2 WRITE complete; Stage 2.5 INTEGRITY executed; strict
+  `FAIL-CLOSED`; Stage 3 has not started**.
+- Current manuscript: the 5,127-word, 14-page paper proves the exact systole
+  and finite-cutoff completeness theorem for the frozen nonarithmetic
+  genus-two octagon control.
+- Route status is unchanged: this remains a Route-A control-side A0--A1
+  result; the matched Bolza/control census, magnetic comparison, positive A2,
+  full Route-A tuple, and Route B have not been executed or credited.
+- Open blockers are unchanged: two named BibTeX metadata mismatches and the
+  absent scholar-owned experiment intake/provenance declaration. The current
+  Stage-2.5 result does not authorize entry to Stage 3.
+- Phase E records 81/81 selected claims as semantically verified in the
+  separate semantic audit and a structurally complete 84/84 tuple projection.
+  All 84 evidence rows remain `anchorless`; tuple/hash/selection closure alone
+  does not independently prove the semantic verdict or reproduce source
+  excerpts.
+
+## Historical research record (Rounds 1--8)
+
+The round-by-round bullets below preserve the earlier Stage-1 magnetic and
+semiclassical development record. They are historical checkpoints and do not
+supersede the current manuscript title, Stage-2.5 gate, or blocker status above.
+
 - Concrete progress: the magnetic field and flux are normalized; the nonexistent
   global magnetic potential has been removed; classical phases are owned by a
   degree-one line-bundle connection and its holonomy; the operator family
@@ -252,3 +270,23 @@ control's exact systole and freezes the target-blind common cutoff `21/10` via
 a complete finite tile certificate.  No Bolza/control conclusion is drawn
 until the separate matched geometric census and owner/conjugacy deduplication
 are executed under that already frozen cutoff.
+
+## Round 9 paper and Stage 2.5 status
+
+The exact nonarithmetic-control systole/completeness result now forms a
+5,127-word, 14-page paper. Stage 2.5 checked 6/6 references, 9/9 citation
+contexts, all 10 data families, 28/72 originality paragraphs, and an 85-claim
+registry. The corrected Phase-E selection contains 78 HIGH-IMPACT plus three
+RANDOM claims. The separate
+[semantic audit](notes/stage2_5_phase_e_semantic_audit.md) records 81/81
+selected claims as `VERIFIED`, while the 84/84 required tuple set is
+structurally complete. All 84 evidence rows remain `anchorless`: their
+schema/hash/selection closure does not independently prove those semantic
+verdicts or reproduce source excerpts. The strict verdict is `FAIL-CLOSED` for
+three named items:
+`Nazarenko2013` has an author/primary-subject mismatch,
+`AigonDupuyEtAl2005` has three wrong given names, and the scholar-owned
+experiment intake/provenance is absent. The BibTeX and PDF remain frozen until
+exact authorization. This is still a control theorem; no Bolza magnetic
+comparison or full Route-A tuple has been claimed. See
+[the integrity report](notes/stage2_5_integrity_report.md).

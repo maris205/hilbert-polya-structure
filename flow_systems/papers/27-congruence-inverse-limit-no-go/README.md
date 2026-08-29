@@ -1,12 +1,19 @@
 # Paper 27 — congruence inverse-limit no-go
 
-Working title: *Finite-Level Closed Geodesics without Inverse-Limit Periodic
-Orbits: a Compact-versus-Cusped Residual-Tower Ownership Audit*
+Working title: *Renormalization Obstructions in Congruence and Homology Towers of Geodesic Flows*
 
 ## Current status
 
-- ARS: **Stage 1 RESEARCH in progress**.
-- Proposal: **Stage 1 Classical Flow Baseline / Route A A0--A1**.
+- Current pipeline: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
+  The manuscript and bounded scientific/semantic surfaces are clean within the
+  recorded denominators, but the missing scholar-owned experiment-intake
+  declaration remains the blocking provenance item `P27-S25-F001`.
+- **Round-8 historical snapshot (superseded for pipeline stage):** ARS Stage 1
+  RESEARCH was in progress through the reproducible Round-8 campaign.  This
+  remains the scientific development history; it is not the current ARS stage.
+- Scientific proposal baseline: **Stage 1 Classical Flow Baseline / Route A
+  A0--A1**.  The residual and homology-calibrator Route states below remain
+  unchanged by the Stage-2.5 audit.
 - Concrete mathematical result: for the frozen residual principal-congruence
   tower, the coordinatewise continuous-time geodesic flow on the inverse limit
   has **no periodic points**.
@@ -307,13 +314,55 @@ is a local theorem-progress tag; the formal same-owner verdict is `A1_FAIL`.
 - [Round-8 validation](experiments/round8_validation.md)
 - [Round-8 paper research spine](paper/round8_research_spine.md)
 - [Round-8 new-owner Route-A evaluation](../../evaluations/route_a/P27-HOMOLOGY-RENORMALIZED-GEODESIC-PANEL/2026-08-28-round8.yaml)
+- [Round-9 manuscript](paper/manuscript.tex)
+- [Stage-2.5 independent integrity audit](notes/stage2_5_independent_audit.md)
+- [Stage-2.5 Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
+
+### Round-8 historical snapshot — superseded by the Round-9 manuscript
 
 The no-periodic-orbit theorem remains the Route-relevant landed result.  The
 finite-level tables are reproducible diagnostics only.  The Round-5 control
 closes the planned compactness/cusp check and narrows the publishable claim to
 a comparative owner-audit paper.  Round 6 freezes that narrow paper as GO but
-rejects standalone novelty and same-owner A2.  A manuscript has not been
-started and ARS Stage 2 has not begun.  Round 7 strengthens the same-owner
-NO-GO from orbit absence to coefficientwise factor escape.
+rejects standalone novelty and same-owner A2.  **At that Round-8 cutoff**, a
+manuscript had not yet been started and ARS Stage 2 had not begun; this sentence
+is retained only as historical state and is superseded by the Round-9 paper and
+Stage-2.5 audit below.  Round 7 had strengthened the same-owner NO-GO from orbit
+absence to coefficientwise factor escape.
+
+## Round 9 paper and Stage 2.5 status
+
+The residual-owner no-go and homology-cover calibration now form a 4,099-word,
+12-page paper. Stage 2.5 checked 5/5 references, 5/5 contexts, all 13 data
+families, 21/67 originality paragraphs, and a 77-claim registry.
+
+- **Structural closure:** the corrected Phase-E selection contains 67
+  HIGH-IMPACT plus three RANDOM claims.  All 70/70 selected claim IDs and all
+  71/71 `(claim_id, selection_tier, ref_slug-or-null)` tuples are present,
+  unique, ordered, and validator-clean.  This closes the registered selection
+  and carrier structure; semantic extraction completeness for the whole
+  manuscript remains `not_machine_detectable`.
+- **Evidence-carrier limitation:** all 71/71 persisted evidence rows have
+  `anchor.kind = none` and `excerpt.state = anchorless`.  They carry verdict
+  metadata but cannot themselves replay source-bound excerpts; this is a
+  non-gating advisory, not a downgrade of the claim verdicts.
+- **Independent semantics:** the independent
+  [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md) cross-read
+  every selected claim against the manuscript proof chain, exact artifacts and
+  tests, and the documented official-source contexts.  It supports 70/70
+  distinct claims and 71/71 tuples as `VERIFIED`, with no distortion or
+  unverifiable finding.
+
+The scientific surfaces are clean within the stated scope.  The residual model
+stays
+`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` /
+`ROUTE_A_REJECTED`; the homology model stays
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)` /
+`ROUTE_A_REJECTED`.  It remains a generic finite-panel calibrator; neither
+candidate earns A2 or Route-B credit.  The pipeline stays **`FAIL-CLOSED`**
+solely because the scholar-owned experiment intake/provenance declaration is
+absent; C4/Mode 6 must be rechecked after scholar resolution.  See the
+[integrity report](notes/stage2_5_integrity_report.md) and
+[independent audit](notes/stage2_5_independent_audit.md).
