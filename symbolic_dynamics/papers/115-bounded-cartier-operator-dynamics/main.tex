@@ -1,0 +1,705 @@
+\documentclass[10pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Per}{\operatorname{Per}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Core}{\operatorname{Core}}
+\newcommand{\mob}{\mu}
+
+\title[Bounded Cartier-operator dynamics]{Bounded Cartier-Operator Dynamics:\ Uniform Fibres, Frobenius Cores, and Exact Depth Laws}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 12E20, 11B85}
+\keywords{Cartier operator, finite dynamical system, finite field,
+Frobenius automorphism, functional graph, Artin--Mazur zeta function}
+
+\begin{document}
+
+\begin{abstract}
+Fix $q=p^a$ and bound the degree by $n$.  We give an exact temporal and
+component description of the residue-class-zero Cartier section
+\[
+ \mathcal C\!\left(\sum_{j=0}^{n}c_jx^j\right)
+   =\sum_{pj\le n}c_{pj}^{1/p}x^j
+ \quad\text{on }\F_q[x]_{\le n}.
+\]
+Every iterate is a twisted coefficient decimation, so its image has
+$q^{\lfloor n/p^t\rfloor+1}$ points and every nonempty fibre has the same
+size $q^{n-\lfloor n/p^t\rfloor}$.  An explicit $\F_p$-coordinate
+conjugacy splits the map into inverse Frobenius and finite nilpotent shifts;
+each weak component is therefore a Frobenius cycle with identical attached
+in-trees.  The first entry time $\tau$ into the constant core has exact distribution
+$\Prob(\tau\le t)=q^{-\lfloor n/p^t\rfloor}$ and sharp maximum
+$1+\lfloor\log_p n\rfloor$ for $n>0$.  On the core the map is inverse
+Frobenius: hence $\#\Fix(\mathcal C^m)=p^{\gcd(a,m)}$, and M\"obius
+inversion gives every cycle count and a finite Euler product for the zeta
+function.  Along $n_L=\lfloor\alpha p^L\rfloor$, $1\le\alpha<p$, the
+reverse-depth law stabilizes exactly on every fixed lattice layer; moreover,
+phase size together with the fixed sequence recovers $(p,a,n)$.  Classical
+Cartier extraction, finite-field Frobenius theory, and generic functional-
+graph machinery are treated as owned background.  The residual scope is only
+the exact bounded specialization, lattice law, and recovery conjunction; it
+remains under external \textbf{HOLD}, with no novelty or priority claim.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and ownership boundary}
+\label{sec:introduction}
+
+Cartier operators convert base-$p$ residue classes of coefficient indices
+into new series.  In the convention of Bridy, for a perfect field of
+characteristic $p$,
+\[
+ \Lambda_i\!\left(\sum_j c_jx^j\right)
+   =\sum_j c_{pj+i}^{1/p}x^j;
+\]
+this formula and its connection to automatic sequences are established
+machinery \cite[Eq.~(2.7)]{Bridy2017}.  The terminology descends from
+Cartier's operation on differential forms \cite{Cartier1957}.  Jeong studies
+two related Cartier families on finite-field power-series rings and their
+shift/digit extensions \cite{Jeong2018}.  This note claims none of these
+constructions.  It asks the narrower question of what exact temporal and
+component data result when $\Lambda_0$ is restricted to one polynomial
+degree bound and iterated as one map.
+
+The answer separates into a transient coefficient forest and a periodic
+field automorphism.  The resulting exact package is:
+\begin{enumerate}
+\item an explicit conjugacy to inverse Frobenius times nilpotent index-chain
+      shifts, with the resulting product and weak-component interpretation;
+\item a coefficient formula for every iterate, every image, and every fibre;
+\item every core-entry shell, the sharp maximum depth, and the size of the
+      deepest shell;
+\item all fixed points, exact cycles, and the Artin--Mazur zeta function;
+\item an exact lattice-depth stabilization and recovery of $(p,a,n)$ from
+      temporal data.
+\end{enumerate}
+The coefficient route follows disjoint $p$-adic chains pointwise.  A
+complementary $\F_p$-linear reconstruction factors the iterates into
+coordinate restriction, inverse Frobenius, and embedding; rank--nullity then
+recounts the fibres and depth CDF after the iterate is known.
+
+Owner subtraction is part of the statement.  Finite-field automorphisms and
+their subfields are standard \cite{LidlNiederreiter1997}.  After restriction
+of scalars, the present map is an ordinary finite $\F_p$-linear system.
+Elspas owns foundational linear state-diagram machinery \cite{Elspas1959};
+Wang analyzes transition graphs of affine and linear transformations
+\cite{Wang1967}; Hern\'andez Toledo gives the general nilpotent--bijective
+decomposition \cite{HernandezToledo2005}; and later functional-graph work
+includes Panario--Reis and Reis \cite{PanarioReis2019,Reis2023}.  We assign
+zero novelty or priority credit to the generic linear decomposition, its
+product of cyclic and nilpotent parts, rank/kernel counts, or attached-tree
+machinery.  Likewise, Cartier/section composition, Frobenius subfields,
+M\"obius inversion, and zeta conversion are owned inputs.  Internally, the
+present system is not the digit-erasure
+map of P100, the adjugate map of P103, the annihilator--power ideal map of
+P107, or the nilpotent image map on a subspace lattice of P109.  In
+particular, the phase points here are coefficient vectors rather than
+subspaces, and the recurrent core is the nontrivial inverse-Frobenius
+permutation rather than a nilpotent absorber.  Rank is a proof tool, not a
+claim to the generic linear-engine territory.  The bounded search is not an
+owner certificate; external circulation, novelty language, and priority
+language remain on \textbf{HOLD}.
+
+\section{Definition and conventions}
+\label{sec:setup}
+
+Let $p$ be prime, let $a\ge1$, set $q=p^a$, and fix $n\ge0$.  Write
+$\sigma(c)=c^p$ for Frobenius on $\F_q$.  For $t\ge0$, the notation
+\[
+ c^{p^{-t}}:=\sigma^{-t}(c)
+\]
+means the unique $p^t$-th root in $\F_q$; the superscript is automorphism
+notation, not a rational exponent.  Thus $c^{p^{-0}}=c$, and the operation
+depends only on $t\bmod a$.
+
+The phase space is
+\[
+ X_{q,n}=\F_q[x]_{\le n}
+ =\left\{\sum_{j=0}^{n}c_jx^j:c_j\in\F_q\right\},
+ \qquad |X_{q,n}|=q^{n+1}.
+\]
+We keep all vectors at length $n+1$, padding high coefficients by zero, and
+define
+\begin{equation}
+ \mathcal C\!\left(\sum_{j=0}^{n}c_jx^j\right)
+   =\sum_{0\le j\le\lfloor n/p\rfloor}c_{pj}^{p^{-1}}x^j.
+ \label{eq:def-C}
+\end{equation}
+For every $\lambda\in\F_q$ and $f,g\in X_{q,n}$, the defining law is
+\begin{equation}
+ \mathcal C(\lambda f+g)
+ =\sigma^{-1}(\lambda)\mathcal C(f)+\mathcal C(g),
+ \qquad
+ \mathcal C^t(\lambda f+g)
+ =\sigma^{-t}(\lambda)\mathcal C^t(f)+\mathcal C^t(g).
+ \label{eq:semilinearity}
+\end{equation}
+Thus $\mathcal C$ is additive and $\sigma^{-1}$-semilinear over $\F_q$;
+after restriction of scalars it is an ordinary $\F_p$-linear endomorphism.
+It is generally not $\F_q$-linear when $a>1$.
+For the zero polynomial we set $\deg 0=-\infty$.  The constant subspace is
+\[
+ K=\F_q\cdot1\subseteq X_{q,n}.
+\]
+The core-entry time, stable image, and periodic set are
+\begin{equation}
+ \tau(f)=\min\{t\ge0:\mathcal C^t(f)\in K\},
+ \qquad
+ \Core(\mathcal C)=\bigcap_{t\ge0}\im(\mathcal C^t),
+ \qquad
+ \Per(\mathcal C)=\{f:\mathcal C^m(f)=f\text{ for some }m\ge1\}.
+ \label{eq:tau-core}
+\end{equation}
+The minimum will be finite by \cref{thm:depth}.  No value $v_p(0)$ and no
+maximum over an empty set will be used.
+
+\section{All iterates, images, and fibres}
+\label{sec:iterate}
+
+The local mechanism is visible at coefficient level: only indices divisible
+by $p$ survive, and every surviving index is divided by $p$.
+
+\begin{theorem}[Coefficient iterate]
+\label{thm:iterate}
+For every $f=\sum_{j=0}^{n}c_jx^j\in X_{q,n}$ and every integer $t\ge0$,
+\begin{equation}
+ \boxed{\quad
+ \mathcal C^t(f)
+   =\sum_{0\le j\le\lfloor n/p^t\rfloor}
+      c_{p^tj}^{p^{-t}}x^j.
+ \quad}
+ \label{eq:iterate}
+\end{equation}
+In particular, the formula at $t=0$ is the identity, and once $p^t>n$ the
+iterate is the constant $c_0^{p^{-t}}$.
+\end{theorem}
+
+\begin{proof}[Proof route I: coefficient chains]
+The assertion at $t=0$ is immediate.  Suppose \eqref{eq:iterate} holds at
+time $t$.  Applying \eqref{eq:def-C} selects those displayed indices that
+are themselves divisible by $p$ and applies one further inverse Frobenius:
+\[
+ \mathcal C^{t+1}(f)
+ =\sum_{p^{t+1}j\le n}
+   \left(c_{p^t(pj)}^{p^{-t}}\right)^{p^{-1}}x^j
+ =\sum_{p^{t+1}j\le n}c_{p^{t+1}j}^{p^{-(t+1)}}x^j.
+\]
+This proves the induction.  The last statement follows because
+$\lfloor n/p^t\rfloor=0$ when $p^t>n$.
+\end{proof}
+
+\begin{theorem}[Index-chain conjugacy and functional components]
+\label{thm:conjugacy}
+Let
+\[
+ \mathcal U_n=\{u\in\{1,\ldots,n\}:p\nmid u\},
+ \qquad
+ \ell_u=\max\{v\ge0:up^v\le n\}\quad(u\in\mathcal U_n),
+\]
+and let $S_u:\F_q^{\ell_u+1}\to\F_q^{\ell_u+1}$ be the
+nilpotent shift
+\[
+ S_u(z_0,\ldots,z_{\ell_u})=(z_1,\ldots,z_{\ell_u},0).
+\]
+For $f=\sum_{j=0}^n c_jx^j$, set
+\begin{equation}
+ d_{u,v}=\sigma^{-v}(c_{up^v}),
+ \qquad
+ \Psi(f)=\bigl(c_0,(d_{u,v})_{u\in\mathcal U_n,\ 0\le v\le\ell_u}\bigr).
+ \label{eq:chain-coordinates}
+\end{equation}
+Then $\Psi$ is an $\F_p$-linear bijection from $X_{q,n}$ to
+\[
+ \F_q\times V_+,
+ \qquad
+ V_+=\prod_{u\in\mathcal U_n}\F_q^{\ell_u+1},
+\]
+and, with $N=\prod_{u\in\mathcal U_n}S_u$,
+\begin{equation}
+ \boxed{\quad
+ \Psi\mathcal C\Psi^{-1}=\sigma^{-1}\times N.
+ \quad}
+ \label{eq:product-conjugacy}
+\end{equation}
+For $n=0$, the product $V_+$ is the one-point zero space.
+
+Consequently the directed functional graph has the following exact
+component interpretation.  If $\mathcal O$ is an inverse-Frobenius cycle of
+length $d$ in $\F_q$, then $\mathcal O\times V_+$ is one weak component,
+its directed cycle is $\mathcal O\times\{0\}$, and its size is $dq^n$.
+These are all weak components.  For each $y\in\mathcal O$, the in-tree
+attached at $(y,0)$ has $q^n$ vertices; all such trees, over all periodic
+points, are isomorphic to the nilpotent in-tree of $N$ at zero after the
+root cycle edge is suppressed.
+
+More precisely, put $h(z)=\min\{t\ge0:N^tz=0\}$ and
+\[
+ \mathcal T_y=\{(\sigma^{h(z)}y,z):z\in V_+\}.
+\]
+The vertices of $\mathcal T_y$ whose first core entry is $(y,0)$ at time
+$t$ number
+\begin{equation}
+ \#\mathcal T_y(t)=
+ \begin{cases}
+ 1,&t=0,\\
+ q^{n-\lfloor n/p^t\rfloor}
+  -q^{n-\lfloor n/p^{t-1}\rfloor},&1\le t\le D_{p,n},\\
+ 0,&t>D_{p,n},
+ \end{cases}
+ \label{eq:component-layers}
+\end{equation}
+where $D_{p,0}=0$ and $D_{p,n}=1+\lfloor\log_p n\rfloor$ for $n>0$.
+Finally, a vertex $(y,z)$ in product coordinates has indegree
+\begin{equation}
+ \#(\sigma^{-1}\times N)^{-1}(y,z)=
+ \begin{cases}
+ q^{n-\lfloor n/p\rfloor},&z\in\im N,\\
+ 0,&z\notin\im N.
+ \end{cases}
+ \label{eq:component-indegree}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Every positive index has a unique factorization $j=up^v$ with $p\nmid u$,
+so the coordinates in \eqref{eq:chain-coordinates} use every positive
+coefficient exactly once.  Each power of Frobenius is an $\F_p$-linear
+automorphism, and the inverse coordinate change is
+$c_{up^v}=\sigma^v(d_{u,v})$; hence $\Psi$ is an $\F_p$-linear bijection.
+
+Write primes for coordinates after one application of $\mathcal C$.  If
+$v<\ell_u$, then
+\[
+ d'_{u,v}
+ =\sigma^{-v}(c'_{up^v})
+ =\sigma^{-v}\!\left(\sigma^{-1}(c_{up^{v+1}})\right)
+ =\sigma^{-(v+1)}(c_{up^{v+1}})=d_{u,v+1},
+\]
+while $d'_{u,\ell_u}=0$.  The constant coordinate becomes
+$\sigma^{-1}(c_0)$.  This proves \eqref{eq:product-conjugacy}; in
+particular, $N$ is a finite product of nilpotent shifts.
+
+Every $(x,z)\in\mathcal O\times V_+$ eventually reaches
+$\mathcal O\times\{0\}$, and no directed or reverse edge can change the
+inverse-Frobenius cycle containing its first coordinate.  Thus
+$\mathcal O\times V_+$ is exactly one weak component and has size $dq^n$.
+For $z\ne0$, nilpotence gives $h(Nz)=h(z)-1$, and hence
+\[
+ (\sigma^{-1}\times N)(\sigma^{h(z)}y,z)
+ =\bigl(\sigma^{h(z)-1}y,Nz\bigr)\in\mathcal T_y.
+\]
+At $z=0$ the outgoing edge is the cycle edge.  Therefore
+$z\mapsto(\sigma^{h(z)}y,z)$ identifies the rooted in-tree of $N$ with
+the tree attached at $(y,0)$, and the sets $\mathcal T_y$ partition the
+component.
+
+The rank of $N^t$ over $\F_q$ equals the number of positive indices
+divisible by $p^t$, namely $\lfloor n/p^t\rfloor$.  Thus
+$\#\ker N^t=q^{n-\lfloor n/p^t\rfloor}$, and differencing consecutive
+kernels proves \eqref{eq:component-layers}.  Finally, $Nw=z$ has no
+solution outside $\im N$ and is a coset of $\ker N$ inside the image.
+Since $\#\ker N=q^{n-\lfloor n/p\rfloor}$ and inverse Frobenius has one
+preimage at the first coordinate, \eqref{eq:component-indegree} follows.
+\end{proof}
+
+\begin{theorem}[Complete image and fibre census]
+\label{thm:fibres}
+Let $t\ge0$ and put $r_t=\lfloor n/p^t\rfloor$.  Under the natural padded
+embedding $X_{q,r_t}\subseteq X_{q,n}$,
+\begin{equation}
+ \im(\mathcal C^t)=X_{q,r_t},
+ \qquad
+ \#\im(\mathcal C^t)=q^{r_t+1}.
+ \label{eq:image}
+\end{equation}
+For every target $g\in X_{q,n}$,
+\begin{equation}
+ \boxed{\quad
+ \#(\mathcal C^t)^{-1}(g)=
+ \begin{cases}
+ q^{n-r_t},&\deg g\le r_t,\\
+ 0,&\deg g>r_t.
+ \end{cases}
+ \quad}
+ \label{eq:fibres}
+\end{equation}
+Thus all and only targets in \eqref{eq:image} have nonempty fibres, and all
+nonempty fibres are uniform.  At $t=0$ they are singletons; if $p^t>n$,
+there are $q$ constant targets and every nonempty fibre has size $q^n$.
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:iterate}, the output coordinates are arbitrary precisely in
+positions $0,\ldots,r_t$: each prescribed output has a unique preimage
+coefficient at each index $p^tj$, because inverse Frobenius is bijective.
+The remaining $n-r_t$ input coordinates are unobserved and may be chosen
+freely.  This proves both cases of \eqref{eq:fibres}, including the empty
+fibre outside the displayed image.
+\end{proof}
+
+The following complementary reconstruction starts from the already proved
+iterate formula rather than supplying a logically independent derivation of
+the dynamics.  It packages that formula as finite-field linear algebra and
+recounts the fibre sizes and depth CDF.
+
+\begin{proposition}[$\F_p$-linear rank factorization]
+\label{prop:rank-route}
+View $X_{q,n}\cong\F_q^{n+1}$ as an $\F_p$-space.  Let
+\[
+ R_t(c_0,\ldots,c_n)=(c_0,c_{p^t},\ldots,c_{r_tp^t}),
+\]
+let $\Phi_t$ apply $\sigma^{-t}$ coordinatewise, and let $J_t$ pad with
+zeros.  Then
+\begin{equation}
+ \mathcal C^t=J_t\Phi_tR_t,
+ \qquad
+ \operatorname{rank}_{\F_p}(\mathcal C^t)=a(r_t+1),
+ \qquad
+ \dim_{\F_p}\ker(\mathcal C^t)=a(n-r_t).
+ \label{eq:rank-factorization}
+\end{equation}
+Moreover,
+\begin{equation}
+ \#\{f:\mathcal C^t(f)\in K\}=q^{n+1-r_t}.
+ \label{eq:rank-cdf}
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Complementary route II: ranks]
+The restriction $R_t$ is an $\F_q$-linear surjection,
+$\Phi_t$ is an $\F_p$-linear automorphism, and $J_t$ is an injective
+$\F_q$-linear map.  Their factorization follows directly from the displayed
+coordinates, and rank--nullity gives \eqref{eq:rank-factorization}.  Hence
+every nonempty fibre is an affine coset of a kernel of size $q^{n-r_t}$,
+recounting \eqref{eq:fibres}.  Finally,
+$\mathcal C^t(f)$ is constant exactly when the $r_t$ selected positive
+coordinates vanish.  These are $r_t$ independent $\F_q$ constraints, which
+proves \eqref{eq:rank-cdf}.
+\end{proof}
+
+\section{Core-entry distribution and sharp depth}
+\label{sec:depth}
+
+For an integer $j>0$, let $v_p(j)$ be its $p$-adic valuation.  An occupied
+coefficient at $j$ moves down its $p$-chain until the first index not
+divisible by $p$, then disappears at the next step.
+
+\begin{theorem}[Every depth shell and the deepest shell]
+\label{thm:depth}
+If $f$ is constant, then $\tau(f)=0$.  If $f$ is nonconstant, then
+\begin{equation}
+ \boxed{\quad
+ \tau(f)=1+\max\{v_p(j):1\le j\le n,\ c_j\ne0\}.
+ \quad}
+ \label{eq:point-depth}
+\end{equation}
+For every $t\ge0$,
+\begin{equation}
+ \#\{f:\tau(f)\le t\}=q^{n+1-\lfloor n/p^t\rfloor},
+ \qquad
+ \Prob_{f\ \mathrm{unif.}}(\tau(f)\le t)
+ =q^{-\lfloor n/p^t\rfloor}.
+ \label{eq:depth-cdf}
+\end{equation}
+When $n=0$, all $q$ states have depth zero and the maximum depth is
+$D_{p,0}=0$.  When $n\ge1$, set
+\begin{equation}
+ D_{p,n}=1+\lfloor\log_p n\rfloor,
+ \qquad
+ s_{p,n}=\left\lfloor\frac{n}{p^{D_{p,n}-1}}\right\rfloor
+ \in\{1,\ldots,p-1\}.
+ \label{eq:D-s}
+\end{equation}
+Then $D_{p,n}$ is the sharp maximum of $\tau$, and
+\begin{align}
+ \#\{f:\tau(f)=t\}
+ &=q^{n+1-\lfloor n/p^t\rfloor}
+   -q^{n+1-\lfloor n/p^{t-1}\rfloor},
+ &&1\le t\le D_{p,n},
+ \label{eq:depth-shells}\\
+ \#\{f:\tau(f)=D_{p,n}\}
+ &=q^{n+1}-q^{n+1-s_{p,n}}.
+ \label{eq:deepest-shell}
+\end{align}
+There are no states at larger depth.
+\end{theorem}
+
+\begin{proof}[Coefficient-forest proof]
+Fix an occupied index $j>0$ and write $j=p^vu$ with $p\nmid u$.  At time
+$s\le v$, \eqref{eq:iterate} carries its nonzero coefficient to the
+positive index $p^{v-s}u$; inverse Frobenius cannot turn a nonzero element
+into zero.  At time $v+1$ that coefficient is not selected.  Taking the
+last disappearance time over all occupied positive indices proves
+\eqref{eq:point-depth}; the constant case is separated because its occupied
+positive-index set is empty.
+
+The event $\tau(f)\le t$ says exactly that every positive coefficient whose
+index is divisible by $p^t$ vanishes.  There are
+$\lfloor n/p^t\rfloor$ such constrained coordinates, so the other
+$n+1-\lfloor n/p^t\rfloor$ coordinates are arbitrary.  This proves
+\eqref{eq:depth-cdf}; it also agrees with the complementary rank count
+\eqref{eq:rank-cdf}.  Subtracting consecutive CDF values gives
+\eqref{eq:depth-shells}.
+
+For $n\ge1$, the largest valuation among $1,\ldots,n$ is
+$D_{p,n}-1$, since $p^{D_{p,n}-1}\le n<p^{D_{p,n}}$.  Thus the maximum is
+sharp, witnessed by $x^{p^{D_{p,n}-1}}$.  Exactly $s_{p,n}$ indices in
+$[1,n]$ are divisible by $p^{D_{p,n}-1}$.  A state is deepest precisely
+when at least one of those coefficients is nonzero.  Subtracting the
+$q^{n+1-s_{p,n}}$ states in which all of them vanish from the full phase
+space proves \eqref{eq:deepest-shell} and completes all boundary cases.
+\end{proof}
+
+\section{Inverse-Frobenius core, cycles, and zeta}
+\label{sec:periodic}
+
+Let $\mob$ denote the number-theoretic M\"obius function.  The transient
+coordinates disappear, but the constant coefficient continues to move.
+
+\begin{theorem}[Complete periodic census]
+\label{thm:periodic}
+For every $n\ge0$,
+\begin{equation}
+ \Core(\mathcal C)=\Per(\mathcal C)=K,
+ \qquad
+ \mathcal C|_K=\sigma^{-1}.
+ \label{eq:core}
+\end{equation}
+For every $m\ge1$,
+\begin{equation}
+ \boxed{\quad \#\Fix(\mathcal C^m)=p^{\gcd(a,m)}.\quad}
+ \label{eq:fixed-count}
+\end{equation}
+For each divisor $d$ of $a$, define
+\begin{equation}
+ A_d=\sum_{e\mid d}\mob(d/e)p^e.
+ \label{eq:exact-period-points}
+\end{equation}
+Then $A_d$ is the number of points of exact period $d$, and $A_d/d$ is the
+number of $d$-cycles.  No period outside the divisors of $a$ occurs.  The
+full functional graph therefore has $A_d/d$ weak components based on
+$d$-cycles, each with $dq^n$ vertices and the attached trees described in
+\cref{thm:conjugacy}.  The
+Artin--Mazur zeta function of the full finite map is the formal series
+\begin{align}
+ \zeta_{\mathcal C}(z)
+ &:=\exp\left(\sum_{m\ge1}
+       \#\Fix(\mathcal C^m)\frac{z^m}{m}\right) 
+ \notag\\
+ &=\boxed{\quad
+   \prod_{d\mid a}(1-z^d)^{-A_d/d}.
+   \quad}
+ \label{eq:zeta}
+\end{align}
+These statements include $a=1$, where all $q=p$ constants are fixed and
+$\zeta_{\mathcal C}(z)=(1-z)^{-p}$, and $n=0$, where the phase space already
+equals the core.
+\end{theorem}
+
+\begin{proof}[Stable-image and subfield proof]
+By \eqref{eq:image}, the images decrease to $K$, proving the first equality
+in \eqref{eq:core} for the stable image.  If $f$ is periodic, say
+$\mathcal C^m(f)=f$, then $f\in\im(\mathcal C^{km})$ for every $k$, so
+$f\in K$.  Conversely, \eqref{eq:iterate} sends a constant $c$ to
+$\sigma^{-1}(c)$, an automorphism whose order divides $a$; hence every
+constant is periodic.
+
+A fixed point of $\mathcal C^m$ is therefore a constant fixed by
+$\sigma^{-m}$, equivalently by $\sigma^m$.  To count these constants
+directly, note that the elements of $\F_{p^a}$ are the roots of
+$T^{p^a}-T$, while the $\sigma^m$-fixed elements are also roots of
+$T^{p^m}-T$.  The Euclidean algorithm on the exponents gives
+\[
+ \gcd\!\left(T^{p^a}-T,T^{p^m}-T\right)
+   =T^{p^{\gcd(a,m)}}-T.
+\]
+This polynomial is separable and has degree $p^{\gcd(a,m)}$, proving
+\eqref{eq:fixed-count} without an uncounted field-theory step.  Every orbit
+length divides $a$.  For $d\mid a$,
+the $p^d$ elements fixed by the $d$th iterate are partitioned by their exact
+periods, so $p^d=\sum_{e\mid d}A_e$.  Divisor M\"obius inversion gives
+\eqref{eq:exact-period-points}, and division by $d$ counts cycles.
+
+Finally, a cycle of length $d$ contributes
+$\exp(\sum_{k\ge1}z^{kd}/k)=(1-z^d)^{-1}$ to the zeta function.  Multiplying
+over the $A_d/d$ cycles of each possible length proves \eqref{eq:zeta}.
+Transient trees contribute no fixed points and hence no zeta factor.
+\end{proof}
+
+\section{An exact lattice-depth limit}
+\label{sec:lattice}
+
+The sharp depth changes when $n$ crosses powers of $p$.  Fixing the
+position inside one such lattice interval removes that oscillation.
+
+\begin{theorem}[Layerwise stabilization and limiting defect]
+\label{thm:lattice}
+Fix $p$, $a$, and a real number $1\le\alpha<p$.  For integers $L\ge0$, let
+\[
+ n_L=\lfloor\alpha p^L\rfloor,
+ \qquad F_L\sim\operatorname{Unif}(X_{q,n_L}),
+ \qquad \Delta_L=L+1-\tau(F_L).
+\]
+Then the sharp depth at degree bound $n_L$ is exactly $L+1$, so
+$\Delta_L\in\{0,\ldots,L+1\}$.  For every fixed $k\ge1$ and every
+$L\ge k-1$,
+\begin{equation}
+ \boxed{\quad
+ \Prob(\Delta_L\ge k)
+ =q^{-\lfloor\alpha p^{k-1}\rfloor}.
+ \quad}
+ \label{eq:lattice-stable}
+\end{equation}
+Consequently $\Delta_L$ converges in distribution to a nonnegative
+integer-valued variable $\Delta$ with tails
+\begin{equation}
+ \Prob(\Delta\ge0)=1,
+ \qquad
+ \Prob(\Delta\ge k)=q^{-\lfloor\alpha p^{k-1}\rfloor},\quad k\ge1,
+ \label{eq:limit-tail}
+\end{equation}
+or, equivalently,
+\begin{equation}
+ \Prob(\Delta=r)=S_r-S_{r+1},\qquad
+ S_0=1,\qquad S_r=q^{-\lfloor\alpha p^{r-1}\rfloor}\ (r\ge1).
+ \label{eq:limit-mass}
+\end{equation}
+Thus the asserted ``limit'' is stronger than asymptotic convergence:
+every fixed tail is eventually exact.
+\end{theorem}
+
+\begin{proof}
+The inequalities
+$p^L\le n_L<p^{L+1}$ follow from $1\le\alpha<p$, including the endpoint
+$\alpha=1$.  Hence \eqref{eq:D-s} gives maximum depth $L+1$.  If
+$L\ge k-1$, then by \eqref{eq:depth-cdf},
+\begin{align*}
+ \Prob(\Delta_L\ge k)
+ &=\Prob\bigl(\tau(F_L)\le L+1-k\bigr)\\
+ &=q^{-\left\lfloor n_L/p^{L+1-k}\right\rfloor}.
+\end{align*}
+For an integer $M\ge1$, the identity
+$\lfloor\lfloor x\rfloor/M\rfloor=\lfloor x/M\rfloor$ gives
+\[
+ \left\lfloor\frac{n_L}{p^{L+1-k}}\right\rfloor
+ =\left\lfloor\alpha p^{k-1}\right\rfloor,
+\]
+which proves \eqref{eq:lattice-stable}.  The sequence $S_r$ decreases to
+zero, so the differences in \eqref{eq:limit-mass} are nonnegative and
+sum to one.  Stabilization of every tail proves convergence in distribution.
+\end{proof}
+
+\begin{remark}[Why the lattice window is explicit]
+The restriction $\alpha<p$ keeps $n_L$ in the depth interval
+$[p^L,p^{L+1})$.  At $\alpha=p$ the maximum depth shifts to $L+2$; that
+endpoint is represented instead by the allowed choice $\alpha=1$ after
+incrementing $L$.  No assertion is made for $k>L+1$ before stabilization,
+when the finite variable has no such tail.
+\end{remark}
+
+\section{Temporal recovery of the parameters}
+\label{sec:recovery}
+
+The periodic sequence alone loses the degree bound, while phase size alone
+cannot separate the field size from the number of coefficients.  Together
+they are rigid.
+
+\begin{theorem}[Temporal signature rigidity]
+\label{thm:recovery}
+Let
+\[
+ N=|X_{q,n}|,
+ \qquad F_m=\#\Fix(\mathcal C^m)\quad(m\ge1).
+\]
+The signature $(N,(F_m)_{m\ge1})$ determines $(p,a,n)$ by
+\begin{equation}
+ \boxed{\quad
+ p=F_1,\qquad
+ q=\max_{m\ge1}F_m,\qquad
+ a=\min\{m\ge1:F_m=q\},\qquad
+ n=\log_qN-1.
+ \quad}
+ \label{eq:recovery}
+\end{equation}
+In particular, two bounded Cartier systems with equal signatures have equal
+parameter triples.  The formula remains valid for $a=1$ and for $n=0$.
+Here $(F_m)_{m\ge1}$ means the full infinite fixed-count sequence; no claim
+is made that an unspecified preassigned finite prefix is sufficient.
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:fixed-count} gives $F_1=p$.  It also gives
+$F_m\le p^a=q$, with equality exactly when $a\mid m$.  Thus the maximum is
+$q$ and its first occurrence is $m=a$.  Finally,
+$N=q^{n+1}$, so the last formula in \eqref{eq:recovery} follows.  When
+$a=1$, the maximum occurs first at one; when $n=0$, $N=q$ and the recovered
+degree bound is zero.
+\end{proof}
+
+\section{Exact controls and scope}
+\label{sec:controls}
+
+The accompanying standard-library verifier constructs the polynomial-basis
+fields $\F_2,\F_3,\F_4,\F_8,\F_9$, and $\F_{16}$ literally.  It exhausts the
+main lanes through degree bounds $7,5,5,4,3,2$, respectively, as well as the
+$n=0$ boundary for every field.  It compares direct orbit iteration with
+\eqref{eq:iterate}, verifies the forward and inverse chain-coordinate maps
+and \eqref{eq:product-conjugacy} state by state, enumerates every image target
+and fibre, checks every depth shell, per-root entry layer, component size,
+and deepest shell, reconstructs core cycles and fixed counts, compares zeta
+coefficients from fixed counts and from the Euler product, and tests 33
+rational lattice lanes through $L=9$.  The fresh run recorded
+\textbf{2,259,162 exact assertion executions; PASS}.  This raw counter
+increments once per executed check, including looped coordinate checks and
+aggregate identities; it is not a count of logically independent claims.
+
+The control also rejects three tempting false simplifications.  For
+$a>1$, inverse Frobenius makes $\mathcal C$ generally $\F_p$-linear but not
+$\F_q$-linear.  Equal-degree polynomials can have different depths because
+lower occupied indices matter.  Extension fields have nontrivial core
+cycles, so replacing \eqref{eq:zeta} by $(1-z)^{-q}$ is wrong unless $a=1$.
+These finite checks are falsification evidence, not proofs of the general
+theorems and not novelty evidence.
+
+The residual claim is limited to the exact bounded Cartier specialization
+proved above---its coefficient, fibre, temporal, and component formulas---
+together with the lattice stabilization and parameter-recovery conjunction.
+Direct Cartier extraction, Frobenius/subfield structure, restriction-of-
+scalars linearization, cyclic--nilpotent product theory, attached-tree
+machinery, rank/kernel counts, M\"obius cycle conversion, and generic finite
+linear functional graphs are subtracted with zero credit.  A specialist
+direct-owner search remains necessary before any external use.  External
+release, novelty, and priority remain on \textbf{HOLD}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

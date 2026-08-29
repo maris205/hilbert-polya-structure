@@ -1,0 +1,169 @@
+\section{Pressure, exact words, and temperature edges}
+\label{sec:pressure}
+
+For $0<p<1$, define the height pressure
+\begin{equation}
+ \label{eq:pressure-definition}
+ \Lambda_p(t)=\lim_{n\to\infty}\frac1n
+ \log\Exp e^{tH_n},\qquad t\in\R.
+\end{equation}
+
+\begin{theorem}[Exact pressure and LDP]
+\label{thm:pressure-ldp}
+For $0<p<1$, the limit in \eqref{eq:pressure-definition} exists and equals
+\begin{equation}
+ \label{eq:pressure}
+ \boxed{\quad
+ \Lambda_p(t)=\log\pf(Q_p(e^t)),
+ \quad}
+\end{equation}
+where the Perron root is the largest positive root of
+\begin{equation}
+ \label{eq:pressure-cubic}
+ r^3+(2a-1-ae^{2t})r-ae^t=0.
+\end{equation}
+The function $\Lambda_p$ is real analytic on $\R$.  The variables $H_n/n$
+satisfy a full LDP with speed $n$ and good convex rate
+\begin{equation}
+ \label{eq:rate}
+ I_p(x)=\sup_{t\in\R}\{tx-\Lambda_p(t)\},
+\end{equation}
+with $I_p(x)=+\infty$ outside $[0,1]$ and $I_p(\mu_p)=0$.
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:finite-pgf}, the exponential moment is
+$\eZ^{\mathsf T}Q_p(e^t)^n\one$.  The matrix is primitive for every real
+$t$, so Perron--Frobenius theory gives the exponential rate
+\eqref{eq:pressure}; the initial and terminal vectors have nonzero pairing
+with the positive Perron eigenvectors.  Simplicity of the Perron root and
+analytic perturbation of a finite matrix give real analyticity.  The cubic
+is \eqref{eq:cubic} with $y=e^t$.
+
+The height is bounded between $0$ and $n$, as proved more sharply in
+\cref{prop:word-geometry}; hence $H_n/n$ is supported on the compact set
+$[0,1]$ and the sequence is exponentially tight.  The limiting cumulant
+generating function is finite and differentiable on its entire effective
+domain $\R$ (indeed analytic there).  Its domain has no boundary, so the
+steepness condition is vacuous, and lower semicontinuity follows from
+continuity.  These are the essential-smoothness hypotheses of the
+G\"artner--Ellis theorem \cite{DemboZeitouni2010}; together with exponential
+tightness they give the full LDP with the good Legendre transform
+\eqref{eq:rate}.  The support bound gives infinite rate outside $[0,1]$,
+and \cref{prop:perron-derivatives} gives $\Lambda_p'(0)=\mu_p$, so
+$I_p(\mu_p)=0$.
+\end{proof}
+
+\begin{proposition}[Exact word geometry and rare-event masses]
+\label{prop:word-geometry}
+For every word of length $n$,
+\begin{equation}
+ \label{eq:word-bounds}
+ \boxed{\quad n\bmod2\leq H_n\leq n.\quad}
+\end{equation}
+More precisely, the set of attainable heights is
+\begin{equation}
+ \label{eq:exact-height-support}
+ \boxed{\quad
+ \{H_n(w):w\in\{A,B\}^n\}
+ =\{n-2k:0\leq k\leq\lfloor n/2\rfloor\}.
+ \quad}
+\end{equation}
+For each $n\geq1$, exactly the two alternating words attain $H_n=n$; the
+two constant words attain $H_n=n\bmod2$.
+
+For $0<p<1$ and $a=pq$,
+\begin{equation}
+ \label{eq:max-mass}
+ \Prob(H_n=n)=
+ \begin{cases}
+ 2a^{n/2},&n\text{ even},\\
+ a^{(n-1)/2},&n\text{ odd}.
+ \end{cases}
+\end{equation}
+For $m\geq0$,
+\begin{equation}
+ \label{eq:min-mass}
+ \Prob(H_{2m}=0)=(p^2+q^2)^m=(1-2a)^m.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Every reward in \cref{thm:lumping} is $+1$ or $-1$.  A negative reward
+always lands in $Z$, and every transition out of $Z$ has reward $+1$.
+Thus negative rewards are isolated.  Among $n$ rewards there are at most
+$\lfloor n/2\rfloor$ negative ones, proving the lower bound; the upper bound
+is immediate.  Constant words alternate rewards $+1,-1,+1,-1,\ldots$ and
+attain the lower edge.
+
+Every reward is odd, so $H_n\equiv n\pmod2$.  Conversely, fix
+$0\leq k\leq\lfloor n/2\rfloor$.  The prefix $(AA)^k$ consists of $k$
+reward pairs $(+1,-1)$ and returns the state to $Z$ after every block.
+Append an alternating suffix of length $n-2k$, beginning with either letter.
+From $Z$ this suffix has reward $+1$ at every step.  The resulting word has
+height $n-2k$, proving \eqref{eq:exact-height-support}.
+
+To attain the upper edge, a word must avoid every negative transition.
+After an initial $A$, the state is $N$, so the next letter must be $B$; the
+state is then $P$, so the next letter must be $A$.  This forces alternation.
+Starting with $B$ forces the other alternating word.  Their Bernoulli masses
+give \eqref{eq:max-mass}.
+
+For $H_{2m}=0$, every successive reward pair must be $(+1,-1)$.  Starting
+from $Z$, such a pair is produced precisely by the blocks $AA$ and $BB$,
+each returning to $Z$.  Independent blocks have total mass $p^2+q^2$,
+which proves \eqref{eq:min-mass}.
+\end{proof}
+
+\begin{theorem}[Zero-temperature pressure edges]
+\label{thm:temperature}
+For $0<p<1$,
+\begin{align}
+ \Lambda_p(t)-t&\longrightarrow\frac12\log(pq)
+ &&\text{as }t\to+\infty,\label{eq:positive-edge}\\
+ \Lambda_p(t)&\longrightarrow\frac12\log(1-2pq)
+ &&\text{as }t\to-\infty.\label{eq:negative-edge}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Put $y=e^t$.  At the positive edge,
+\[
+ \frac{Q_p(y)}{y}\longrightarrow
+ L_+=\begin{pmatrix}0&0&q\\p&0&q\\p&0&0\end{pmatrix}
+ \qquad(y\to\infty).
+\]
+The characteristic polynomial of $L_+$ is $r(r^2-pq)$, so
+$\pf(L_+)=\sqrt{pq}$.  Continuity of the spectral radius gives
+$\pf(Q_p(y))/y\to\sqrt{pq}$, which is \eqref{eq:positive-edge}.
+The alternating-word probability in \eqref{eq:max-mass} independently
+exhibits the same exponential coefficient.
+
+At the negative edge, first remove the singular weights by setting
+\[
+ D_y=\diag(y^{-1},1,y^{-1}).
+\]
+Then
+\begin{equation}
+ \label{eq:negative-similarity}
+ D_y^{-1}Q_p(y)D_y
+ =\begin{pmatrix}0&p&qy\\p&0&q\\py&q&0\end{pmatrix}
+ \longrightarrow
+ L_-:=\begin{pmatrix}0&p&0\\p&0&q\\0&q&0\end{pmatrix}
+\end{equation}
+as $y\downarrow0$.  Similar matrices have the same spectrum, and the
+characteristic polynomial of $L_-$ is
+$r(r^2-p^2-q^2)$.  Therefore
+\[
+ \pf(Q_p(y))\longrightarrow\sqrt{p^2+q^2}
+ =\sqrt{1-2pq},
+\]
+which proves \eqref{eq:negative-edge}.  The minimum-event identity
+\eqref{eq:min-mass} gives the same exponential constant.
+\end{proof}
+
+At $p=0,1$, \cref{cor:endpoints} gives $\Lambda_p(t)=0$ for every fixed
+$t$.  These deterministic pressures are not obtained by inserting an
+endpoint into \eqref{eq:positive-edge}, whose hypothesis is $0<p<1$.
+The deterministic sequence $H_n/n$ also has the elementary LDP with rate
+zero at $0$ and $+\infty$ elsewhere.

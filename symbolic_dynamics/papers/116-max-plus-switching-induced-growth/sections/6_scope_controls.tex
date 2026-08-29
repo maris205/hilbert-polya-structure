@@ -1,0 +1,127 @@
+\section{Proof architecture, ownership, and exact controls}
+\label{sec:scope}
+
+\subsection{Two complementary proof routes}
+
+The argument separates primitive data before comparing conclusions.
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.14}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.20\textwidth}
+                >{\raggedright\arraybackslash}p{0.35\textwidth}
+                >{\raggedright\arraybackslash}p{0.35\textwidth}}
+\toprule
+route & primitive calculation & outputs and failure controls\\
+\midrule
+Tropical literal/projective
+& Raw chronological matrix products, row maxima, and the gap formulas
+  \eqref{eq:A-gap-action}--\eqref{eq:B-gap-action}.
+& Generator powers and ranks, orientation, shortest reset words, five
+  reachable gaps, reward lumping, exact word support, and forced alternating
+  maximizers.\\
+Markov-additive spectral
+& The reward-tilted kernel \eqref{eq:Q}, its stationary chain, Poisson
+  equation, and characteristic cubic.
+& Finite PGF, drift, martingale variance, Perron derivatives, pressure, LDP,
+  and both scaled spectral limits.\\
+\bottomrule
+\end{tabular}
+\end{center}
+The first route supplies the reward kernel used by the second; the routes
+are therefore complementary, not independent.  The first can fail if the
+chronological product or row maximum is reversed, while the second can fail
+if a reward sign or Bernoulli weight is placed in the wrong entry.  Once the
+kernel is fixed, the Poisson-equation and Perron-derivative calculations of
+the variance are independent checks.
+
+\subsection{Owner subtraction}
+
+The max-plus algebra and its discrete-event interpretation are established
+background \cite{BaccelliEtAl1992}.  Direct prior owners include Gaubert's
+performance evaluation of max-plus automata \cite{Gaubert1995}, Mairesse's
+theory of irreducible random max-plus products \cite{Mairesse1997}, and the
+analytic treatment of max-plus Lyapunov exponents by Baccelli and Hong
+\cite{BaccelliHong2000}.  Spectral-radius questions for sets of max-algebraic
+matrices are treated by Blondel, Gaubert, and Tsitsiklis
+\cite{BlondelGaubertTsitsiklis2000}; projective semigroups and memory-loss
+mechanisms are treated by Merlet
+\cite{MerletProjective2010,Merlet2010}.  Coupling-based Lyapunov estimation,
+random and deterministic switching models, and Markov-jump max-plus systems
+appear respectively in \cite{GoverdeHeidergottMerlet2011,
+vanDenBoomDeSchutter2012,KordonisMaragosPapavassilopoulos2018}.  Broad
+topical-operator SLLNs, CLTs, and LDPs are likewise available
+\cite{Merlet2005,Merlet2007}.  We assign zero credit here to all of those
+general engines and to the following consequences:
+\begin{itemize}
+\item existence of a cycle time or law of large numbers for a generic random
+      max-plus product;
+\item a generic central or local limit theorem under memory loss;
+\item a generic large-deviation principle or spectral-gap method;
+\item Perron--Frobenius theory for a finite tilted kernel.
+\item reset-word, coupling, or regeneration mechanisms for random max-plus
+      products, and switching max-plus terminology.
+\end{itemize}
+The residual scope is only the explicit calculation for the displayed pair:
+its five literal gaps, three-state reward table, rational drift and variance,
+cubic transfer/pressure equation, exact word support and extreme masses, and
+the two temperature constants.  We have not exhausted equivalence classes
+under row or column scalings, permutations, transpose, or additive
+normalization, so even pair-level distinctness is not asserted.  This scope
+description and any bounded owner search are not novelty or priority
+evidence.  Specialist owner review is required before any external use.
+
+\subsection{Internal mechanism comparisons}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.14}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.11\textwidth}
+                >{\raggedright\arraybackslash}p{0.37\textwidth}
+                >{\raggedright\arraybackslash}p{0.40\textwidth}}
+\toprule
+paper & occupied mechanism & separation in the present system\\
+\midrule
+P89 & Bernoulli reset in a random subshift and regeneration structure.
+& The present pair also has reset words: precisely four shortest rank-one
+  words occur at length three.  The distinction is the finite max-plus
+  projective state, additive height reward, and direct three-state-kernel
+  proof; it is not absence of coupling or regeneration.\\
+P93 & Push--pop/free-reduction dynamics and reflected stack height.
+& The projective gap has five literal values and no unbounded stack; the
+  height is a max-plus matrix maximum.\\
+P101 & Random cap--floor synchronization and order-statistic coalescence.
+& There is no cap, floor, coalescence time, or synchronized particle system.\\
+P104 & Contracting ordinary monomial cocycle, occupation parity, singular
+       values, and multiplicative pressure.
+& The matrices are finite max-plus and non-monomial; the observable is an
+  additive global maximum with a three-state reward process.\\
+P111 & Positive Heisenberg product whose central entry is a quadratic
+       ordered-subword area.
+& The current matrices are not unipotent; $H_n$ is order $n$, has
+  $\sqrt n$ fluctuations, and is not a scattered-subword count.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Exact finite controls and limitations}
+
+The standard-library program \texttt{code/verify.py} uses only integers and
+\texttt{fractions.Fraction}.  A fresh author run passed
+\textbf{1,183,356 exact assertions}.  It includes:
+\begin{itemize}
+\item literal products, literal vector actions, five-gap updates, and lumped
+      rewards for all $131{,}071$ words through length $16$;
+\item a nonpalindromic orientation sentinel, the empty word, deterministic
+      powers through exponent $64$, both generator-rank tests, and exhaustive
+      reset-word classification through length three with exact matrices and
+      constant output gaps;
+\item exhaustive histograms versus an independent dynamic program, plus
+      explicit witnesses for every parity-compatible height, biased finite
+      laws, and PGFs through time $32$ at seven probabilities;
+\item exact stationarity, Poisson, variance, implicit-derivative, cubic,
+      similarity, endpoint, and rare-event identities.
+\end{itemize}
+The stored stdout is \texttt{code/verify.out}.  These checks can falsify a
+finite formula or convention.  They do not prove an asymptotic theorem,
+external ownership, novelty, or priority.  No simulation or floating-point
+output is used as evidence.
