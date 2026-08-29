@@ -1,0 +1,275 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\im}{\operatorname{im}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Capped Fibonacci dynamics]{Capped Fibonacci Dynamics on a Finite Square:\ Exact Iterates, Lattice-Point Transients, and Sharp Depth}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+For an integer cap $a\geq1$, consider the finite dynamical system
+\[
+ T_a(x,y)=(y,\min\{a,x+y\})
+ \quad\text{on}\quad\{0,1,\ldots,a\}^2.
+\]
+Saturation commutes with nonnegative addition strongly enough to preserve an
+exact Fibonacci normal form:
+\[
+ T_a^t(x,y)=
+ \bigl(\min\{a,F_{t-1}x+F_ty\},
+       \min\{a,F_tx+F_{t+1}y\}\bigr),\qquad t\geq1.
+\]
+There are exactly two recurrent states, both fixed.  Every nonzero state
+hits $(a,a)$, and its exact depth is the first Fibonacci-weighted half-plane
+crossing.  This yields a closed lattice-point cumulative distribution and
+the sharp maximum depth $1+\min\{k:F_k\geq a\}$.  We also determine the
+one-step image, every fibre size, and all Garden-of-Eden states.  Exhaustive
+integer iteration supplies an independent convention-sensitive control.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and ownership boundary}
+
+Let $Q_a=\{0,1,\ldots,a\}^2$ and define
+\begin{equation}
+ \label{eq:map}
+ T_a(x,y)=(y,x\oplus_a y),
+ \qquad u\oplus_a v:=\min\{a,u+v\}.
+\end{equation}
+The ordinary Fibonacci recurrence and its matrix identities are classical;
+we use the convention $F_0=0$, $F_1=1$, and
+$F_{t+1}=F_t+F_{t-1}$ \citep{Koshy2001,Miles1960}.  Saturated arithmetic and
+bounded recurrences occur broadly in digital and control systems
+\citep{HmamedEtAl2010}.  These backgrounds receive no novelty credit.
+Our bounded object is the complete finite phase portrait of the particular
+map \eqref{eq:map}: the exact capped iterate, the half-plane transient law,
+the Fibonacci threshold for worst-case depth, and the inverse-fibre
+geometry.  A targeted search on 29 August 2026 found uses of capped
+Fibonacci block sizes but not this self-map and theorem package.  That
+bounded absence is not a priority claim; external circulation remains on
+\textbf{HOLD}.
+
+Two proof lanes are kept separate.  The forward lane uses the clipping
+identity for nonnegative integers and lifts the standard Fibonacci matrix
+induction.  The inverse lane solves the two coordinate equations of
+\eqref{eq:map} directly and recovers the image and fibre sizes without using
+the iterate formula.  The exact program implements literal integer updates
+and compares both predictions.
+
+The internal collision boundary is also at the update-rule level.  This is
+not a Catalan renewal shift, a Bernoulli reset of a golden-mean adjacency
+matrix, or a random cap--floor composition on an interval.  Those nearby
+systems have different phases, randomness, and observables; the present map
+is one deterministic saturated second-order recurrence on an integer square.
+Within the present batch, P107 acts on ideals by an
+annihilator--power rule, P109 sends subspaces through a nilpotent linear
+operator, P110 joins translated set partitions, and P111 is an iid positive
+Heisenberg product.  None has the phase space, update, or Fibonacci
+half-plane clock of \eqref{eq:map}.
+
+\section{The Fibonacci normal form}
+
+The elementary saturation identity
+\begin{equation}
+ \label{eq:sat}
+ \min\{a,\min\{a,u\}+\min\{a,v\}\}=\min\{a,u+v\}
+ \qquad(u,v\geq0)
+\end{equation}
+is the mechanism that prevents intermediate clipping from losing the final
+closed form.
+
+\begin{theorem}[Exact iterate]
+\label{thm:iterate}
+For every $(x,y)\in Q_a$ and every $t\geq1$,
+\begin{equation}
+ \label{eq:iterate}
+ T_a^t(x,y)=
+ \left(
+ \min\{a,F_{t-1}x+F_ty\},
+ \min\{a,F_tx+F_{t+1}y\}
+ \right).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For $t=1$, \eqref{eq:iterate} is exactly \eqref{eq:map}.  Assume it at time
+$t$ and abbreviate the uncapped linear forms by $U$ and $V$.  One further
+step produces
+\[
+ \bigl(\min\{a,V\},
+ \min\{a,\min\{a,U\}+\min\{a,V\}\}\bigr).
+\]
+Apply \eqref{eq:sat} to the second coordinate and use
+$F_{t-1}+F_t=F_{t+1}$ coefficientwise.  The result is the formula with
+$t$ replaced by $t+1$.
+\end{proof}
+
+This is stronger than merely saying that the uncapped recurrence eventually
+exceeds the cap: it identifies every finite-time state, including partially
+saturated trajectories.
+
+\section{Attractors and exact transient census}
+
+\begin{proposition}[Complete recurrence]
+\label{prop:recurrence}
+The only recurrent states are the two fixed points $(0,0)$ and $(a,a)$.
+Every nonzero state reaches $(a,a)$.
+Consequently, for every $k\geq1$,
+\begin{equation}
+ \label{eq:fixed}
+ \#\Fix(T_a^k)=2,
+ \qquad \zeta_{T_a}(z)=(1-z)^{-2}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+A fixed point has $x=y$ and $y=\min\{a,2y\}$, giving only $y=0$ or $a$.
+If $(x,y)\neq(0,0)$, then for large $t$ both nonnegative linear forms in
+\eqref{eq:iterate} are at least $a$, so the orbit reaches $(a,a)$.  Thus no
+other periodic point exists.  The zeta identity follows from the constant
+iterate-fixed count and the definition of Artin--Mazur zeta
+\citep{ArtinMazur1965}.
+\end{proof}
+
+Define $\depth(x,y)$ as the first time the orbit is recurrent.  For $t\geq1$
+put $u_t=F_{t-1}$ and $v_t=F_t$.
+
+\begin{theorem}[Pointwise depth and lattice-point CDF]
+\label{thm:cdf}
+The two fixed points have depth zero.  Every other state satisfies
+\begin{equation}
+ \label{eq:point-depth}
+ \depth(x,y)=\min\{t\geq1:u_tx+v_ty\geq a\}.
+\end{equation}
+If $C_a(t)=\#\{(x,y):\depth(x,y)\leq t\}$, then $C_a(0)=2$ and, for
+$t\geq1$,
+\begin{align}
+ C_a(t)
+ &=1+\#\{(x,y)\in Q_a:u_tx+v_ty\geq a\}                    \label{eq:cdf-set}\\
+ &=1+\sum_{x=0}^{a}
+ \left(a+1-\max\left\{0,
+ \left\lceil\frac{a-u_tx}{v_t}\right\rceil\right\}\right).
+ \label{eq:cdf-sum}
+\end{align}
+The exact depth-$t$ shell is $C_a(t)-C_a(t-1)$.
+\end{theorem}
+
+\begin{proof}
+For $t\geq1$, the second uncapped form in \eqref{eq:iterate} dominates the
+first.  Hence $T_a^t(x,y)=(a,a)$ exactly when the first form crosses $a$,
+which proves \eqref{eq:point-depth}.  At positive time, the states already
+recurrent consist of $(0,0)$ plus the states that have reached $(a,a)$,
+giving \eqref{eq:cdf-set}.  For fixed $x$, the admissible $y$ are the
+integers from
+$\max\{0,\lceil(a-u_tx)/v_t\rceil\}$ through $a$, proving
+\eqref{eq:cdf-sum}.
+\end{proof}
+
+\begin{corollary}[Sharp maximum depth]
+\label{cor:maxdepth}
+The maximum transient depth is
+\begin{equation}
+ \label{eq:maxdepth}
+ D_a=1+\min\{k\geq0:F_k\geq a\}.
+\end{equation}
+It is attained by $(1,0)$, and $D_a=\log_{\varphi}a+O(1)$, where
+$\varphi=(1+\sqrt5)/2$.  Thus the depth staircase has Fibonacci plateau
+endpoints: it changes exactly when the cap crosses a Fibonacci number.
+\end{corollary}
+
+\begin{proof}
+For any nonzero $(x,y)$, the first form in \eqref{eq:iterate} is at least
+$F_{t-1}$ once $F_{t-1}>0$, because one of $x,y$ is at least one and
+$F_t\geq F_{t-1}$.  Equality is realized by $(1,0)$.  This proves the exact
+threshold.  The asymptotic statement follows from the standard Binet bounds.
+\end{proof}
+
+\section{Inverse fibres and Garden-of-Eden states}
+
+The inverse geometry is independent of the Fibonacci induction.
+
+\begin{theorem}[One-step image and fibres]
+\label{thm:fibres}
+The one-step image is the upper triangular half-square
+\begin{equation}
+ \label{eq:image}
+ \im(T_a)=\{(u,v)\in Q_a:u\leq v\}.
+\end{equation}
+For $(u,v)\in Q_a$,
+\begin{equation}
+ \label{eq:fibres}
+ \#T_a^{-1}(u,v)=
+ \begin{cases}
+  0,&v<u,\\
+  1,&u\leq v<a,\\
+  u+1,&v=a.
+ \end{cases}
+\end{equation}
+Hence there are $a(a+1)/2$ Garden-of-Eden states and
+$(a+1)(a+2)/2$ image states.
+\end{theorem}
+
+\begin{proof}
+If $T_a(x,y)=(u,v)$, then $y=u$ and
+$v=\min\{a,x+u\}$.  When $v<a$, the unique possible preimage is
+$(v-u,u)$, which exists exactly when $v\geq u$.  When $v=a$, the allowed
+values are $a-u\leq x\leq a$, giving $u+1$ preimages.  The states below the
+diagonal are precisely the states with no preimage, and summing a triangular
+array gives both cardinalities.
+\end{proof}
+
+The fibre formula also provides a global checksum:
+\[
+ \sum_{(u,v)\in Q_a}\#T_a^{-1}(u,v)=(a+1)^2=\#Q_a.
+\]
+
+\section{Independent exact control}
+
+The standard-library verifier enumerates every state for caps $1\leq a\leq
+220$.  Literal repeated application of \eqref{eq:map} is compared at every
+registered time with \eqref{eq:iterate}; the observed depth histogram is
+compared with both \eqref{eq:point-depth} and \eqref{eq:cdf-sum}.  A separate
+reverse table counts every one-step fibre and checks \eqref{eq:fibres}, the
+image size, and the Garden-of-Eden count.  The finite run is a hostile
+convention check, not an extrapolative proof.
+
+\section{Conclusion}
+
+The cap does not destroy the linear recurrence; it converts it into a
+finite saturated dynamics whose exact iterates retain the Fibonacci matrix.
+That identity simultaneously controls attraction, every transient layer,
+and the logarithmic worst-case clock, while direct inversion exposes a
+triangular image with explicit fibres.  The source and release boundary
+remains conservative pending specialist review.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

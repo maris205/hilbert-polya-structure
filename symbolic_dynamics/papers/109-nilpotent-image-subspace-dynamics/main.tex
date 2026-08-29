@@ -1,0 +1,422 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=green!45!black,urlcolor=blue!60!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\raggedbottom
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\Latt}{\mathcal L}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\qbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{q}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title[Nilpotent image dynamics]{Nilpotent Image Dynamics on Finite Subspace Lattices:\ Exact Fibres, Absorption, and Rigidity}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+
+\begin{document}
+
+\begin{abstract}
+Let $V=\F_q^d$ and let $N$ be a regular nilpotent endomorphism.  We study the
+finite self-map $T(U)=N(U)$ on the full subspace lattice of $V$.  For
+$0\leq t\leq d$, an $s$-subspace $W\leq\im N^t$, and an integer $r$, the
+complete fibre formula is
+\[
+ \#\{U\in\Gr(r,V):N^tU=W\}
+ =\qbinom{t}{r-s}q^{s(t-r+s)}.
+\]
+It yields every joint transition count for $(\dim U,\dim N^tU)$ and a
+uniform one-step indegree law.  If $G_j(q)=\sum_a\qbinom{j}{a}$, then the
+number of points absorbed by time $t$ is $G_{\min(t,d)}(q)$; hence the exact
+depth-$t$ layer has size $G_t(q)-G_{t-1}(q)$ for $1\leq t\leq d$.  Zero is
+the unique periodic point, the sharp maximum depth is $d$, and the
+Artin--Mazur zeta function is $(1-z)^{-1}$.  The depth census determines
+$(q,d)$ whenever $d\geq2$; all one-dimensional fields give the same
+two-state map.  Quotient-fibre geometry and an independent hyperplane
+recurrence prove the main count.  Exhaustive RREF controls over prime and
+extension fields register $515{,}379$ exact assertions.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and ownership boundary}
+
+Fix a prime power $q$, an integer $d\geq1$, and a regular nilpotent
+endomorphism $N$ of $V=\F_q^d$.  Thus $N^d=0$ and $N^{d-1}\neq0$.  The full
+subspace lattice $\Latt(V)$ carries the finite dynamical system
+\begin{equation}
+ \label{eq:T}
+ T=T_{q,d,N}\colon\Latt(V)\longrightarrow\Latt(V),
+ \qquad T(U)=N(U).
+\end{equation}
+The update loses both dimension and position relative to the kernel flag.
+The resulting functional graph is nevertheless exactly enumerable.
+
+Gaussian coefficients and their interpretation as finite-subspace counts
+are classical \citep{GoldmanRota1970,Prasad2010}.  Lattices of subspaces
+\emph{fixed} by a linear operator, including finite-field enumeration, form
+another established subject
+\citep{BrickmanFillmore1967,Fripertinger2011}.  More directly, Bender,
+Coley, Robbins, and Rumsey enumerate subspaces by their dimension sequence
+relative to a linear endomorphism and obtain a regular-nilpotent product
+formula \citep{BenderEtAl1992}; Ram gives a recent general solution of the
+finite-field subspace-profile problem \citep{Ram2026}.  We assign no novelty
+credit to Gaussian/intersection counts, invariant-subspace lattices,
+subspace-profile enumeration, or the regular-nilpotent specialization of
+that theory.  Our bounded object is different: the phase contains every
+subspace, usually non-invariant, and the question is the pointed temporal map
+$U\mapsto N(U)$.  We isolate fibres with a prescribed target $N^tU=W$, then
+record its absorption tree, local indegrees, and isomorphism rigidity.  A
+targeted search did not locate this exact conjunction, but that query-bounded
+observation is not a priority or novelty claim.  External circulation remains
+on \textbf{HOLD} pending a specialist owner review.
+
+The note proves four concrete statements.  First, every $t$-step fibre is
+uniform once the target dimension is fixed.  Second, the kernel flag gives
+the complete absorption distribution.  Third, the functional graph has one
+periodic vertex and an explicit local indegree.  Fourth, its depth census
+recovers the field size and dimension except for the unavoidable
+one-dimensional collapse.  Two proof routes are kept separate: the first
+uses exact sequences and graphs of linear maps; the second slices the
+Grassmannian by a hyperplane and solves the resulting recurrence.
+
+Internally, \eqref{eq:T} is neither the rejected saturation map
+$U\mapsto U+N(U)$ nor Jordan-block substitution discrepancy, invertible
+shear on integer sublattices, or adjugate dynamics on a full matrix phase.
+Here the states are all finite-field subspaces and the headline invariant is
+the full transient fibre census.
+
+\section{Setup and exact iterates}
+
+For $0\leq a\leq b$, write
+\[
+ \qbinom{b}{a}
+ =\prod_{i=0}^{a-1}\frac{q^{b-i}-1}{q^{a-i}-1},
+ \qquad
+ G_b(q)=\sum_{a=0}^{b}\qbinom{b}{a}.
+\]
+We set $\qbinom{b}{a}=0$ when $a<0$ or $a>b$.  Thus $G_b(q)$ is the number
+of all subspaces of $\F_q^b$.
+
+Choose a Jordan basis $e_1,\ldots,e_d$ with
+\[
+ Ne_1=0,\qquad Ne_i=e_{i-1}\quad(2\leq i\leq d).
+\]
+For $t\geq0$, put
+\[
+ K_t=\ker N^t,\qquad I_t=\im N^t.
+\]
+When $0\leq t\leq d$, one has $\dim K_t=t$ and $\dim I_t=d-t$.
+
+\begin{proposition}[Iterates and rank loss]
+\label{prop:iterate}
+For every $U\leq V$ and $t\geq0$,
+\begin{equation}
+ \label{eq:iterate}
+ T^t(U)=N^t(U).
+\end{equation}
+If $0\leq t\leq d$, then
+\begin{equation}
+ \label{eq:ranknullity}
+ \dim T^t(U)=\dim U-\dim(U\cap K_t).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The image of a subspace under a composition of linear maps is the iterated
+image, so induction gives \eqref{eq:iterate}.  The kernel of the restricted
+map $N^t|_U$ is $U\cap K_t$.  Applying rank--nullity to this restriction
+gives \eqref{eq:ranknullity}.
+\end{proof}
+
+\section{Exact fibres and dimension transitions}
+
+The first main result refines the absorption census down to each target
+subspace.
+
+\begin{theorem}[Uniform iterated fibres]
+\label{thm:fibre}
+Let $0\leq t\leq d$, let $W\leq I_t$ have dimension $s$, and let
+$0\leq r\leq d$.  Then
+\begin{equation}
+ \label{eq:fibre}
+ \#\{U\in\Gr(r,V):N^t(U)=W\}
+ =\qbinom{t}{r-s}q^{s(t-r+s)}.
+\end{equation}
+If $W\nleq I_t$, the fibre is empty.
+\end{theorem}
+
+\begin{proof}[First proof: quotient-fibre geometry]
+The last assertion follows from $N^t(U)\leq I_t$.  Assume $W\leq I_t$ and
+let $K=K_t$.  For any subspace in the displayed fibre, rank--nullity gives
+\[
+ k:=\dim(U\cap K)=r-s.
+\]
+If $k<0$ or $k>t$, the fibre is empty and the Gaussian coefficient on the
+right of \eqref{eq:fibre} is zero.  Hence assume $0\leq k\leq t$.
+There are $\qbinom{t}{k}$ choices for $R=U\cap K$.  Fix one such $R$.
+The restriction of $N^t$ to $E=(N^t)^{-1}(W)$ gives an exact sequence
+\[
+ 0\longrightarrow K\longrightarrow E\xrightarrow{N^t}W\longrightarrow0.
+\]
+Choose a linear section $\sigma\colon W\to E$ and a complement of $R$ in
+$K$.  Every $U$ with $U\cap K=R$ and $N^tU=W$ is then uniquely of the form
+\[
+ U=R\oplus\{\sigma(w)+\widetilde f(w):w\in W\},
+\]
+where $f\colon W\to K/R$ is linear and $\widetilde f$ is its representative
+in the chosen complement.  Conversely, each such graph has the required
+intersection and image.  Since $\dim(K/R)=t-k$, the number of graphs is
+$q^{s(t-k)}$.  Substituting $k=r-s$ proves \eqref{eq:fibre}.
+\end{proof}
+
+\begin{corollary}[Joint rank transition]
+\label{cor:transition}
+For $0\leq t\leq d$ and $0\leq r,s\leq d$,
+\begin{equation}
+ \label{eq:transition}
+ \#\{U\in\Gr(r,V):\dim N^t(U)=s\}
+ =\qbinom{t}{r-s}\qbinom{d-t}{s}q^{(t-r+s)s}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+There are $\qbinom{d-t}{s}$ possible $s$-subspaces $W\leq I_t$.
+Multiplying this number by \eqref{eq:fibre} gives the result.
+\end{proof}
+
+Summing \eqref{eq:fibre} over the possible input dimensions also gives every
+iterated indegree.
+
+\begin{corollary}[Local functional-graph census]
+\label{cor:indegree}
+If $W\leq I_t$ has dimension $s$, then
+\begin{equation}
+ \label{eq:tindegree}
+ \#(T^t)^{-1}(W)
+ =\sum_{k=0}^{t}\qbinom{t}{k}q^{s(t-k)}.
+\end{equation}
+In particular,
+\begin{equation}
+ \label{eq:indegree}
+ \#T^{-1}(W)=q^s+1\quad(W\leq I_1),
+\end{equation}
+whereas a subspace outside $I_t$ has no $t$-step predecessor.
+\end{corollary}
+
+\begin{proof}
+In \eqref{eq:fibre}, put $k=r-s$ and sum over $0\leq k\leq t$.
+For $t=1$, the two terms are $q^s$ and $1$.
+\end{proof}
+
+\section{Absorption, periodic points, and zeta}
+
+Define the absorption depth
+\[
+ \depth(U)=\min\{t\geq0:T^t(U)=0\},
+\]
+so that $\depth(0)=0$.  Let $B_t$ denote the number of subspaces absorbed by
+time $t$.
+
+\begin{theorem}[Complete depth census]
+\label{thm:depth}
+For every $t\geq0$,
+\begin{equation}
+ \label{eq:cdf}
+ B_t=G_{\min(t,d)}(q).
+\end{equation}
+Consequently the number $A_t$ of points of exact depth $t$ is
+\begin{equation}
+ \label{eq:layers}
+ A_0=1,
+ \qquad
+ A_t=G_t(q)-G_{t-1}(q)\quad(1\leq t\leq d),
+\end{equation}
+and $A_t=0$ for $t>d$.  The maximum depth is exactly $d$.
+\end{theorem}
+
+\begin{proof}
+By \cref{prop:iterate}, a subspace is absorbed by time $t$ precisely when it
+is contained in $K_t$.  The kernel has dimension $\min(t,d)$, so the number
+of its subspaces is \eqref{eq:cdf}.  Taking successive differences gives
+\eqref{eq:layers}.  Finally, $A_d>0$ because $K_{d-1}$ is a proper subspace
+of $V$; equivalently, a line generated by a vector $v$ with
+$N^{d-1}v\neq0$ has depth $d$.
+\end{proof}
+
+\begin{theorem}[Periodic census and zeta]
+\label{thm:zeta}
+Zero is the unique periodic point.  Hence, for every $n\geq1$,
+\[
+ \#\Fix(T^n)=1,
+\]
+and the Artin--Mazur zeta function is
+\begin{equation}
+ \label{eq:zeta}
+ \zeta_T(z)
+ =\exp\!\left(\sum_{n\geq1}\frac{\#\Fix(T^n)}{n}z^n\right)
+ =\frac{1}{1-z}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Suppose $T^n(U)=U$ for some $n\geq1$.  Iterating this equality gives
+$N^{mn}U=U$ for every $m\geq1$.  Choose $m$ with $mn\geq d$.  Then
+$N^{mn}=0$, so $U=0$.  The fixed counts follow, and substituting them into
+the definition of the Artin--Mazur zeta function
+\citep{ArtinMazur1965} yields \eqref{eq:zeta}.
+\end{proof}
+
+Thus the functional graph is one rooted in-tree with a loop at zero.  Its
+global depth profile is \eqref{eq:layers}, while \eqref{eq:indegree} records
+the local branching at every vertex that lies in the first image.
+
+\section{Rigidity and the one-dimensional collapse}
+
+The temporal census distinguishes the family except at a genuine boundary.
+
+\begin{theorem}[Dynamical isomorphism classification]
+\label{thm:rigidity}
+Let $q,q'$ be prime powers and $d,d'\geq1$.  The finite maps
+$T_{q,d,N}$ and $T_{q',d',N'}$, for regular nilpotent $N,N'$, are conjugate
+if and only if either
+\begin{enumerate}
+ \item $q=q'$ and $d=d'$, or
+ \item $d=d'=1$.
+\end{enumerate}
+In particular, for $d\geq2$ the depth census recovers
+\begin{equation}
+ \label{eq:recovery}
+ d=\max_U\depth(U),
+ \qquad
+ q=B_2-3.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+All regular nilpotent endomorphisms of a fixed $d$-dimensional vector space
+are similar, and similarity induces a conjugacy of their subspace maps.
+Thus the first condition is sufficient.
+
+Conversely, a dynamical conjugacy sends the unique fixed point to the unique
+fixed point and preserves every absorption layer.  By \cref{thm:depth}, the
+largest nonempty layer recovers $d$.  If $d\geq2$, then
+\[
+ B_2=G_2(q)=1+(q+1)+1=q+3,
+\]
+so the same census recovers $q$.  If $d=1$, the lattice consists only of
+$0$ and $V$, with both vertices mapped to $0$, independently of $q$.
+Hence all and only the one-dimensional systems form the exceptional
+conjugacy class.
+\end{proof}
+
+The exception is necessary rather than technical: neither phase size nor
+any temporal statistic can distinguish the ground fields in dimension one.
+
+\section{A second proof route}
+
+We give a hyperplane recurrence for \cref{cor:transition}.  Besides providing
+an independent proof, it is the algebraic pattern used by the RREF control.
+Fix a $t$-subspace $K\leq\F_q^d$ and define
+\[
+ C_{d,t}(r,k)
+ =\#\{U\in\Gr(r,\F_q^d):\dim(U\cap K)=k\}.
+\]
+
+\begin{proposition}[Hyperplane recurrence]
+\label{prop:recurrence}
+For $d>t$,
+\begin{equation}
+ \label{eq:recurrence}
+ C_{d,t}(r,k)
+ =C_{d-1,t}(r,k)+q^{d-r}C_{d-1,t}(r-1,k),
+\end{equation}
+with boundary
+$C_{t,t}(r,k)=\qbinom{t}{r}$ when $k=r$ and zero otherwise.  Its solution is
+\begin{equation}
+ \label{eq:intersection}
+ C_{d,t}(r,k)
+ =\qbinom{t}{k}\qbinom{d-t}{r-k}q^{(t-k)(r-k)}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Choose a hyperplane $H$ that contains $K$.  The $r$-subspaces contained in
+$H$ contribute the first term of \eqref{eq:recurrence}.  If $U\nleq H$, then
+$U_0=U\cap H$ has dimension $r-1$ and satisfies
+$U_0\cap K=U\cap K$.  For a fixed $U_0$, the possible $U$ correspond to
+lines in $\F_q^d/U_0$ that do not lie in $H/U_0$.  Their number is
+\[
+ \qbinom{d-r+1}{1}-\qbinom{d-r}{1}=q^{d-r},
+\]
+which proves the recurrence and its boundary.
+
+It remains to check the solution.  The Gaussian Pascal identity
+\[
+ \qbinom{n}{j}
+ =\qbinom{n-1}{j}+q^{n-j}\qbinom{n-1}{j-1}
+\]
+shows by substitution that \eqref{eq:intersection} satisfies
+\eqref{eq:recurrence}; it also matches the boundary at $d=t$.  Induction on
+$d-t$ therefore proves \eqref{eq:intersection}.
+\end{proof}
+
+For $K=K_t$, \eqref{eq:ranknullity} gives $k=r-s$.  Substituting this value
+in \eqref{eq:intersection} reproduces \eqref{eq:transition}, without using
+the quotient-fibre parametrization in the first proof.
+
+\section{Exact control and limitations}
+
+The control script constructs each finite field from a polynomial basis,
+enumerates every subspace from its unique reduced-row-echelon basis,
+materializes its vectors, and applies the Jordan shift literally.  It then
+checks every fibre indexed by $(t,W,r)$, every rank transition indexed by
+$(t,r,s)$, all depth layers, all tested periods, the one-step indegree, and
+the rigidity signature.  The tested lanes are
+\[
+ \begin{array}{c|c}
+ q&\text{dimensions}\\ \hline
+ 2&1\text{--}6\\
+ 3&1\text{--}5\\
+ 5&1\text{--}4\\
+ 4&1\text{--}4\\
+ 8,9,16&1\text{--}3.
+ \end{array}
+\]
+The polynomial-basis extension fields are $\F_4$, $\F_8$, $\F_9$, and
+$\F_{16}$.  A fresh run registers $515{,}379$ exact assertions, and the
+stored output is reproduced byte for byte.
+
+The paper treats a single regular nilpotent block.  For a general nilpotent
+operator, \cref{thm:fibre} still applies to each fixed $t$ after replacing
+$t$ by $\dim\ker N^t$ and $d-t$ by $\dim\im N^t$, but the depth census then
+encodes the whole Jordan partition rather than the single staircase.  That
+extension is not claimed here.  Nor do the results concern the lattice of
+$N$-invariant subspaces, whose enumeration belongs to the owner literature
+cited above.  These boundaries, together with the unresolved specialist
+owner gate, keep external status on \textbf{HOLD}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
