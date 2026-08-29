@@ -1,0 +1,617 @@
+{
+  "candidate_id": "HCS-C238",
+  "citations": [
+    {
+      "claim": "maximal-monotone dry-friction vocabulary",
+      "key": "Moreau1979",
+      "source": "J.-J. Moreau, Application of convex analysis to some problems of dry friction, in Trends in Applications of Pure Mathematics to Mechanics, Vol. 2, Pitman (1979), pp. 263--280"
+    },
+    {
+      "claim": "Coulomb friction and nonsmooth mechanics context",
+      "key": "Brogliato1999",
+      "source": "B. Brogliato, Nonsmooth Mechanics (1999)"
+    },
+    {
+      "claim": "energy/invariance terminology only",
+      "key": "LaSalle1960",
+      "source": "J. P. LaSalle, Some extensions of Liapunov's second method (1960)"
+    }
+  ],
+  "evaluation_date": "2026-08-29",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "d[(v^2+omega^2*x^2)/2]/dt=-c*|v|",
+      "identity_id": "energy_slip"
+    },
+    {
+      "formula": "v=0 and |omega^2*x|<=c",
+      "identity_id": "static_set"
+    },
+    {
+      "formula": "for c>0, x_1=2(c/omega^2)-A",
+      "identity_id": "positive_rest_map"
+    },
+    {
+      "formula": "for c>0, |A_{k+1}|=|A_k|-2c/omega^2",
+      "identity_id": "turning_reduction"
+    },
+    {
+      "formula": "for c>0, n=ceil((A-a_friction)/(2a_friction))",
+      "identity_id": "capture_count"
+    },
+    {
+      "formula": "x=-a_friction+R cos(theta)",
+      "identity_id": "v_positive_center"
+    },
+    {
+      "formula": "x=+a_friction+R cos(theta)",
+      "identity_id": "v_negative_center"
+    },
+    {
+      "formula": "x=x0 cos(omega t)+(v0/omega)sin(omega t)",
+      "identity_id": "harmonic_solution"
+    },
+    {
+      "formula": "E(t)=E(0) when c=0",
+      "identity_id": "harmonic_energy"
+    },
+    {
+      "formula": "x>a_friction => x_ddot=-omega^2*x+c<0; x<-a_friction => x_ddot=-omega^2*x-c>0",
+      "identity_id": "threshold_release"
+    }
+  ],
+  "fixed_epoch": 1787875200,
+  "frozen_object": {
+    "arithmetic_origin": "none; source-defined mechanical parameters",
+    "clock": "physical continuous mechanical time",
+    "determinant_convention": "none; no orbit/Fredholm determinant",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor/functional equation, Hilbert--Polya operators",
+    "inclusion": "x_dot=v, v_dot=-omega^2*x-c*xi, xi in Sign(v)",
+    "normalization": "E=(v^2+omega^2*x^2)/2",
+    "parameters": "omega>0, c>=0; a_friction=c/omega^2",
+    "selection_law": "at v=0 stick iff |x|<=a_friction; outside release uniquely inward",
+    "sign_graph": "Sign(v)=+1 if v>0, -1 if v<0, and [-1,1] if v=0"
+  },
+  "headline": "A maximal-monotone Coulomb oscillator has an exact stick--slip capture atlas, half-cycle turning map, and a separate conservative harmonic face.",
+  "nonclaims": [
+    "literature priority or exhaustive novelty certification",
+    "a stochastic friction law or a general differential inclusion beyond the frozen Sign graph",
+    "target arithmetic, Euler factors, root numbers, automorphy, target divisor or functional equation",
+    "a primitive-orbit zeta, Fredholm determinant, or Hilbert--Polya operator",
+    "external peer review, acceptance, or numerical evidence promoted to a theorem"
+  ],
+  "payload_sha256": "0300c30fb2f78a355dd33722d1b4feb43bbf28a80508f7892e9c4a2080b2538e",
+  "regression": {
+    "dissipation_row_count": 5,
+    "dissipation_rows": [
+      {
+        "A": "3/2",
+        "c": "1",
+        "c_times_distance": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "case_id": "drop_3_2",
+        "dissipation_residual": "0.0",
+        "energy_drop": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "energy_first_turn": "0.1250000000000000000000000000000000000000000000000000000000000000",
+        "energy_initial": "1.125000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "1/2",
+        "friction_length": "1",
+        "omega": "1"
+      },
+      {
+        "A": "3",
+        "c": "1",
+        "c_times_distance": "4.000000000000000000000000000000000000000000000000000000000000000",
+        "case_id": "drop_3",
+        "dissipation_residual": "0.0",
+        "energy_drop": "4.000000000000000000000000000000000000000000000000000000000000000",
+        "energy_first_turn": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "energy_initial": "4.500000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "-1",
+        "friction_length": "1",
+        "omega": "1"
+      },
+      {
+        "A": "5",
+        "c": "3",
+        "c_times_distance": "25.50000000000000000000000000000000000000000000000000000000000000",
+        "case_id": "drop_5",
+        "dissipation_residual": "0.0",
+        "energy_drop": "25.50000000000000000000000000000000000000000000000000000000000000",
+        "energy_first_turn": "24.50000000000000000000000000000000000000000000000000000000000000",
+        "energy_initial": "50.00000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "-7/2",
+        "friction_length": "3/4",
+        "omega": "2"
+      },
+      {
+        "A": "7/2",
+        "c": "2",
+        "c_times_distance": "6.000000000000000000000000000000000000000000000000000000000000000",
+        "case_id": "drop_7_2",
+        "dissipation_residual": "0.0",
+        "energy_drop": "6.000000000000000000000000000000000000000000000000000000000000000",
+        "energy_first_turn": "0.1250000000000000000000000000000000000000000000000000000000000000",
+        "energy_initial": "6.125000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "1/2",
+        "friction_length": "2",
+        "omega": "1"
+      },
+      {
+        "A": "10",
+        "c": "1",
+        "c_times_distance": "18.00000000000000000000000000000000000000000000000000000000000000",
+        "case_id": "drop_10",
+        "dissipation_residual": "0.0",
+        "energy_drop": "18.00000000000000000000000000000000000000000000000000000000000000",
+        "energy_first_turn": "32.00000000000000000000000000000000000000000000000000000000000000",
+        "energy_initial": "50.00000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "-8",
+        "friction_length": "1",
+        "omega": "1"
+      }
+    ],
+    "general_row_count": 8,
+    "general_rows": [
+      {
+        "c": "1",
+        "case_id": "vpos",
+        "center": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "1.236067977499789696409173668731276235440618359611525724270897245",
+        "friction_length": "1",
+        "initial_energy": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "-1.107148717794090503017065460178537040070047645401432646676539207",
+        "moving_arc_count": 2,
+        "omega": "1",
+        "phase_time": "1.107148717794090503017065460178537040070047645401432646676539207",
+        "radius": "2.236067977499789696409173668731276235440618359611525724270897245",
+        "regime": "slip_then_capture",
+        "remaining_half_cycles": 1,
+        "stopping_time": "4.248741371383883741479708843458039924267217044776538467651483800",
+        "stopping_turn": "0.7639320225002103035908263312687237645593816403884742757291027546",
+        "v0": "2",
+        "x0": "0"
+      },
+      {
+        "c": "3",
+        "case_id": "vpos_left",
+        "center": "-0.7500000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "0.04056941504209483299972338610817963342988878483130420671437621320",
+        "friction_length": "3/4",
+        "initial_energy": "1.625000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "-1.249045772398254425829917077281090123077829404129896719054669237",
+        "moving_arc_count": 1,
+        "omega": "2",
+        "phase_time": "0.6245228861991272129149585386405450615389147020649483595273346184",
+        "radius": "0.7905694150420948329997233861081796334298887848313042067143762132",
+        "regime": "slip_then_capture",
+        "remaining_half_cycles": 0,
+        "stopping_time": "0.6245228861991272129149585386405450615389147020649483595273346184",
+        "stopping_turn": "0.04056941504209483299972338610817963342988878483130420671437621320",
+        "v0": "3/2",
+        "x0": "-1/2"
+      },
+      {
+        "c": "1",
+        "case_id": "vneg",
+        "center": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "-1.236067977499789696409173668731276235440618359611525724270897245",
+        "friction_length": "1",
+        "initial_energy": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "2.034443935795702735445577923100965844127121753973673174298405385",
+        "moving_arc_count": 2,
+        "omega": "1",
+        "phase_time": "1.107148717794090503017065460178537040070047645401432646676539207",
+        "radius": "2.236067977499789696409173668731276235440618359611525724270897245",
+        "regime": "slip_then_capture",
+        "remaining_half_cycles": 1,
+        "stopping_time": "4.248741371383883741479708843458039924267217044776538467651483800",
+        "stopping_turn": "-0.7639320225002103035908263312687237645593816403884742757291027546",
+        "v0": "-2",
+        "x0": "0"
+      },
+      {
+        "c": "3",
+        "case_id": "vneg_right",
+        "center": "0.7500000000000000000000000000000000000000000000000000000000000000",
+        "first_turn": "-0.1513878188659973232798053168676239865628241434613115531776132641",
+        "friction_length": "3/4",
+        "initial_energy": "5.000000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "0.5880026035475675512456110806250854276017072460559243537260472078",
+        "moving_arc_count": 1,
+        "omega": "2",
+        "phase_time": "1.276795025021112843608516151327208728297731076659590733624448692",
+        "radius": "0.9013878188659973232798053168676239865628241434613115531776132641",
+        "regime": "slip_then_capture",
+        "remaining_half_cycles": 0,
+        "stopping_time": "1.276795025021112843608516151327208728297731076659590733624448692",
+        "stopping_turn": "-0.1513878188659973232798053168676239865628241434613115531776132641",
+        "v0": "-1",
+        "x0": "3/2"
+      },
+      {
+        "c": "2",
+        "case_id": "vpos_near",
+        "center": "-0.2222222222222222222222222222222222222222222222222222222222222222",
+        "first_turn": "0.3373190360895187358108527890557727458884819146530841292276029337",
+        "friction_length": "2/9",
+        "initial_energy": "0.5200000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "-0.1194289260183384518067211164137628325412603951089896425020552415",
+        "moving_arc_count": 2,
+        "omega": "3",
+        "phase_time": "0.03980964200611281726890703880458761084708679836966321416735174716",
+        "radius": "0.5595412583117409580330750112779949681107041368753063514498251559",
+        "regime": "slip_then_capture",
+        "remaining_half_cycles": 1,
+        "stopping_time": "1.087007193202710563423121499897755238912809931494698487825666611",
+        "stopping_turn": "0.1071254083549257086335916553886716985559625297913603152168415107",
+        "v0": "1/5",
+        "x0": "1/3"
+      },
+      {
+        "c": "2",
+        "case_id": "vneg_near",
+        "center": "0.2222222222222222222222222222222222222222222222222222222222222222",
+        "first_turn": "-0.2628958110159161290644734341926917986874320611027308754931965558",
+        "friction_length": "2/9",
+        "initial_energy": "0.3368055555555555555555555555555555555555555555555555555555555556",
+        "initial_phase": "2.910501986393896158559625444229307183202467000134005177759061533",
+        "moving_arc_count": 2,
+        "omega": "3",
+        "phase_time": "0.07703022239863235996767264635006523366490079974703354773862768635",
+        "radius": "0.4851180332381383512866956564149140209096542833249530977154187781",
+        "regime": "slip_then_capture",
+        "remaining_half_cycles": 1,
+        "stopping_time": "1.124227773595230106121887107443232861730623932872068821396942550",
+        "stopping_turn": "-0.1815486334285283153799710102517526457570123833417135689512478886",
+        "v0": "-1/3",
+        "x0": "-1/4"
+      },
+      {
+        "c": "1",
+        "case_id": "already_stick",
+        "center": null,
+        "first_turn": "1/2",
+        "friction_length": "1",
+        "initial_energy": "0.1250000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "0.0",
+        "moving_arc_count": 0,
+        "omega": "1",
+        "phase_time": "0.0",
+        "radius": "0.0",
+        "regime": "stick",
+        "remaining_half_cycles": 0,
+        "stopping_time": "0.0",
+        "stopping_turn": "1/2",
+        "v0": "0",
+        "x0": "1/2"
+      },
+      {
+        "c": "1",
+        "case_id": "rest_outside",
+        "center": "1",
+        "first_turn": "-1/2",
+        "friction_length": "1",
+        "initial_energy": "3.125000000000000000000000000000000000000000000000000000000000000",
+        "initial_phase": "0.0",
+        "moving_arc_count": 1,
+        "omega": "1",
+        "phase_time": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "radius": "1.500000000000000000000000000000000000000000000000000000000000000",
+        "regime": "rest_release",
+        "remaining_half_cycles": 0,
+        "stopping_time": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "stopping_turn": "-1/2",
+        "v0": "0",
+        "x0": "5/2"
+      }
+    ],
+    "harmonic_row_count": 4,
+    "harmonic_rows": [
+      {
+        "c": "0",
+        "case_id": "harmonic_quarter",
+        "energy": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "frequency": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "time": "1/2",
+        "v": "-0.4794255386042030002732879352155713880818033679406006751886166131",
+        "v0": "0",
+        "x": "0.8775825618903727161162815826038296519916451971097440529976108683",
+        "x0": "1"
+      },
+      {
+        "c": "0",
+        "case_id": "harmonic_half",
+        "energy": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "frequency": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "2",
+        "time": "1/4",
+        "v": "-0.9588510772084060005465758704311427761636067358812013503772332263",
+        "v0": "0",
+        "x": "0.8775825618903727161162815826038296519916451971097440529976108683",
+        "x0": "1"
+      },
+      {
+        "c": "0",
+        "case_id": "harmonic_mixed",
+        "energy": "1.347222222222222222222222222222222222222222222222222222222222222",
+        "frequency": "3.000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "3",
+        "time": "1/5",
+        "v": "-0.2967399668194341709741165025177361680794381013655807356232323256",
+        "v0": "2/3",
+        "x": "0.5381439126537358946651307929573897765745762051484911398013784189",
+        "x0": "1/2"
+      },
+      {
+        "c": "0",
+        "case_id": "harmonic_negative",
+        "energy": "0.1805555555555555555555555555555555555555555555555555555555555556",
+        "frequency": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "time": "2/3",
+        "v": "0.5711473217938511707830175147918838907233804540638246493345634715",
+        "v0": "1/3",
+        "x": "-0.1868203626985616644454826047970502298991549073466796190795659144",
+        "x0": "-1/2"
+      }
+    ],
+    "rest_row_count": 8,
+    "rest_rows": [
+      {
+        "A": "3/2",
+        "c": "1",
+        "captured": true,
+        "case_id": "rest_a1_3_2",
+        "final_energy": "0.1250000000000000000000000000000000000000000000000000000000000000",
+        "friction_length": "1",
+        "half_cycles": 1,
+        "initial_energy": "1.125000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "orientation": 1,
+        "sticking_initial": false,
+        "stopping_time": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "stopping_turn": "1/2",
+        "turning_points": [
+          "1/2"
+        ]
+      },
+      {
+        "A": "3",
+        "c": "1",
+        "captured": true,
+        "case_id": "rest_a1_3",
+        "final_energy": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "friction_length": "1",
+        "half_cycles": 1,
+        "initial_energy": "4.500000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "orientation": 1,
+        "sticking_initial": false,
+        "stopping_time": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "stopping_turn": "-1",
+        "turning_points": [
+          "-1"
+        ]
+      },
+      {
+        "A": "4",
+        "c": "1",
+        "captured": true,
+        "case_id": "rest_a1_4",
+        "final_energy": "0.0",
+        "friction_length": "1",
+        "half_cycles": 2,
+        "initial_energy": "8.000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "orientation": 1,
+        "sticking_initial": false,
+        "stopping_time": "6.283185307179586476925286766559005768394338798750211641949889185",
+        "stopping_turn": "0",
+        "turning_points": [
+          "-2",
+          "0"
+        ]
+      },
+      {
+        "A": "10",
+        "c": "1",
+        "captured": true,
+        "case_id": "rest_a1_10",
+        "final_energy": "0.0",
+        "friction_length": "1",
+        "half_cycles": 5,
+        "initial_energy": "50.00000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "orientation": 1,
+        "sticking_initial": false,
+        "stopping_time": "15.70796326794896619231321691639751442098584699687552910487472296",
+        "stopping_turn": "0",
+        "turning_points": [
+          "-8",
+          "6",
+          "-4",
+          "2",
+          "0"
+        ]
+      },
+      {
+        "A": "2",
+        "c": "3",
+        "captured": true,
+        "case_id": "rest_a2_2",
+        "final_energy": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "friction_length": "3/4",
+        "half_cycles": 1,
+        "initial_energy": "8.000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "2",
+        "orientation": 1,
+        "sticking_initial": false,
+        "stopping_time": "1.570796326794896619231321691639751442098584699687552910487472296",
+        "stopping_turn": "-1/2",
+        "turning_points": [
+          "-1/2"
+        ]
+      },
+      {
+        "A": "5",
+        "c": "3",
+        "captured": true,
+        "case_id": "rest_a2_5",
+        "final_energy": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "friction_length": "3/4",
+        "half_cycles": 3,
+        "initial_energy": "50.00000000000000000000000000000000000000000000000000000000000000",
+        "omega": "2",
+        "orientation": 1,
+        "sticking_initial": false,
+        "stopping_time": "4.712388980384689857693965074919254326295754099062658731462416888",
+        "stopping_turn": "-1/2",
+        "turning_points": [
+          "-7/2",
+          "2",
+          "-1/2"
+        ]
+      },
+      {
+        "A": "7/2",
+        "c": "2",
+        "captured": true,
+        "case_id": "rest_negative",
+        "final_energy": "0.1250000000000000000000000000000000000000000000000000000000000000",
+        "friction_length": "2",
+        "half_cycles": 1,
+        "initial_energy": "6.125000000000000000000000000000000000000000000000000000000000000",
+        "omega": "1",
+        "orientation": -1,
+        "sticking_initial": false,
+        "stopping_time": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "stopping_turn": "-1/2",
+        "turning_points": [
+          "-1/2"
+        ]
+      },
+      {
+        "A": "1/2",
+        "c": "3",
+        "captured": true,
+        "case_id": "rest_stick",
+        "final_energy": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "friction_length": "3/4",
+        "half_cycles": 0,
+        "initial_energy": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "omega": "2",
+        "orientation": 1,
+        "sticking_initial": true,
+        "stopping_time": "0.0",
+        "stopping_turn": "1/2",
+        "turning_points": [
+          "1/2"
+        ]
+      }
+    ],
+    "serialized_digits": 64,
+    "stick_row_count": 5,
+    "stick_rows": [
+      {
+        "c": "1",
+        "case_id": "stick_inside",
+        "friction_length": "1",
+        "omega": "1",
+        "regime": "stick_interior",
+        "selected_acceleration": "0",
+        "static_inequality": true,
+        "v0": "0",
+        "x0": "1/2"
+      },
+      {
+        "c": "3",
+        "case_id": "stick_threshold_plus",
+        "friction_length": "3/4",
+        "omega": "2",
+        "regime": "stick_threshold",
+        "selected_acceleration": "0",
+        "static_inequality": true,
+        "v0": "0",
+        "x0": "3/4"
+      },
+      {
+        "c": "3",
+        "case_id": "release_plus",
+        "friction_length": "3/4",
+        "omega": "2",
+        "regime": "release_left",
+        "selected_acceleration": "-5",
+        "static_inequality": false,
+        "v0": "0",
+        "x0": "2"
+      },
+      {
+        "c": "3",
+        "case_id": "release_minus",
+        "friction_length": "3/4",
+        "omega": "2",
+        "regime": "release_right",
+        "selected_acceleration": "5",
+        "static_inequality": false,
+        "v0": "0",
+        "x0": "-2"
+      },
+      {
+        "c": "3",
+        "case_id": "stick_threshold_minus",
+        "friction_length": "3/4",
+        "omega": "2",
+        "regime": "stick_threshold",
+        "selected_acceleration": "0",
+        "static_inequality": true,
+        "v0": "0",
+        "x0": "-3/4"
+      }
+    ],
+    "working_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "There is no arithmetic origin, primitive periodic repetition product, target determinant, or natural Hilbert--Polya lift.",
+    "strongest_positive": "A convention-complete maximal-monotone stick--slip theorem and exact finite capture ledger are proved.",
+    "tuple": [
+      "A0_FAIL",
+      "A1_FAIL",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c238-coulomb-dry-friction-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "0ebc633706bc34b8b915a44749423486fd4cd243",
+  "theorem": {
+    "boundary_faces": "At |x|=a_friction the selected state sticks; c>0 captures every sliding trajectory in finite time under the frozen law.",
+    "capture_count": "For c>0, the exact number of moving half-cycles from a rest A>a_friction is ceil((A-a_friction)/(2*a_friction)); the stopping turn has absolute value <=a_friction.",
+    "energy": "On slip E'=-c|v| and on stick E'=0, so E is nonincreasing.",
+    "first_stop": "The initial phase is atan2(-v0/omega,x0+a_friction) for v0>0 and atan2(-v0/omega,x0-a_friction) for v0<0; adding integer pi/omega half-cycles gives an exact finite stopping time.",
+    "general_phase": "For v0>0 the slip center is -a_friction, R=sqrt((x0+a_friction)^2+(v0/omega)^2), next turn=-a_friction+R; for v0<0 the center is +a_friction and next turn=a_friction-R.",
+    "harmonic_face": "When c=0, x=x0 cos(omega t)+(v0/omega)sin(omega t), v=v0 cos(omega t)-omega*x0 sin(omega t), and energy is conserved.",
+    "rest_map": "For c>0, a positive rest A>a_friction has first half-cycle turn x1=2*a_friction-A; each further moving half-cycle reduces the turning magnitude by 2*a_friction.",
+    "route_boundary": "The mechanical flow has no intrinsic arithmetic labels, primitive repetition law, target determinant, or Hilbert--Polya operator.",
+    "wellposedness": "The frozen maximal-monotone/viability law gives a unique global forward trajectory; sticking is selected on |x|<=a_friction and an exterior rest releases inward. Backward uniqueness is not claimed after capture."
+  }
+}

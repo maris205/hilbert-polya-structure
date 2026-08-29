@@ -1,0 +1,475 @@
+{
+  "candidate_id": "HCS-C236",
+  "citations": [
+    {
+      "authors": "J. M. McLaughlin and A. C. Scott",
+      "doi": "10.1103/PhysRevA.18.1652",
+      "id": "McLaughlinScott1978",
+      "role": "sine--Gordon coherent structures and fluxon dynamics context",
+      "title": "Perturbation analysis of fluxon dynamics",
+      "venue": "Physical Review A 18(4), 1652--1680",
+      "year": 1978
+    }
+  ],
+  "evaluation_date": "2026-08-29",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "u_tt-u_xx+sin(u)=0",
+      "name": "sine_gordon_pde"
+    },
+    {
+      "formula": "U=4 atan(exp(xi)), U''=sin U",
+      "name": "kink_profile"
+    },
+    {
+      "formula": "U=4 atan(exp(-xi)), U''=sin U",
+      "name": "antikink_profile"
+    },
+    {
+      "formula": "|v|<1 and gamma=(1-v^2)^(-1/2)",
+      "name": "kink_speed_domain"
+    },
+    {
+      "formula": "E=8 gamma",
+      "name": "kink_energy"
+    },
+    {
+      "formula": "P=8 gamma v under P=-integral u_t u_x",
+      "name": "kink_momentum"
+    },
+    {
+      "formula": "Q=(u(+infinity)-u(-infinity))/(2pi)",
+      "name": "topological_charge"
+    },
+    {
+      "formula": "u=4 atan(eta sin(Omega t)/(Omega cosh(eta x)))",
+      "name": "breather_profile"
+    },
+    {
+      "formula": "eta^2+Omega^2=1",
+      "name": "breather_dispersion"
+    },
+    {
+      "formula": "E_rest=16 eta",
+      "name": "breather_energy"
+    },
+    {
+      "formula": "(E,P)=(gamma_V E_rest,gamma_V V E_rest)",
+      "name": "lorentz_energy_momentum"
+    },
+    {
+      "formula": "-d^2+1-2sech^2=A^*A",
+      "name": "hessian_factorization"
+    },
+    {
+      "formula": "spec={0} union [1,infinity)",
+      "name": "hessian_spectrum"
+    }
+  ],
+  "frozen_object": {
+    "boost_coordinates": "xi=gamma_V(x-Vt), tau=gamma_V(t-Vx)",
+    "breather_formula": "u_B=4 atan(eta sin(Omega tau)/(Omega cosh(eta xi)))",
+    "clock": "physical PDE time; breather 2pi/Omega is rest/comoving internal period, not a lab fixed-x period when V!=0",
+    "equation": "u_tt-u_xx+sin(u)=0",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators",
+    "hessian": "L_K=-d_x^2+1-2 sech^2 x=A^*A",
+    "kink_ansatz": "u(x,t)=U(gamma_v(x-vt-x0)), |v|<1",
+    "kink_formula": "U_{k,+}(xi)=2pi k+4 atan(exp(xi)), U_{k,-}(xi)=2pi k+4 atan(exp(-xi)); canonical k=0 rows",
+    "phase_space": "finite-energy real fields on R with canonical energy and momentum",
+    "potential": "V(u)=1-cos(u), vacua u=2pi k",
+    "primitive_periodic_orbit": false
+  },
+  "headline": "The sine--Gordon coherent family closes the subluminal kink/antikink heteroclinics, exact rest and boosted breathers, Lorentz energy--momentum laws, topological charges, and the factored rest-kink Hessian.",
+  "nonclaims": [
+    "The kink and breather formulas are classical source-local identities, not a literature-priority claim.",
+    "The coherent-family theorem is not a classification of every finite-energy sine--Gordon solution.",
+    "The Hessian spectrum is for the rest kink only; no boosted-breather nonlinear stability rate is inferred.",
+    "A boosted breather has a comoving internal period, not a fixed-laboratory-point period when V is nonzero.",
+    "No arithmetic local datum, Euler product, target divisor, Hilbert-Polya operator or Route-B input is claimed."
+  ],
+  "payload_sha256": "3dc35146db05cc3ddcefdf6e77b53f1a20efc23de4a634003319337957c165ea",
+  "regression": {
+    "boundary_rows": [
+      {
+        "condition": "v=0",
+        "energy_limit": "8",
+        "face": "rest_kink",
+        "period_statement": "not periodic",
+        "profile": "static kink"
+      },
+      {
+        "condition": "|v|<1",
+        "energy_limit": "8 gamma",
+        "face": "subluminal_kink",
+        "period_statement": "traveling heteroclinic",
+        "profile": "Lorentz kink/antikink"
+      },
+      {
+        "condition": "|v|->1",
+        "energy_limit": "diverges",
+        "face": "light_speed",
+        "period_statement": "excluded",
+        "profile": "width collapse"
+      },
+      {
+        "condition": "Omega->1",
+        "energy_limit": "0",
+        "face": "breather_small_amplitude",
+        "period_statement": "2pi",
+        "profile": "vacuum limit"
+      },
+      {
+        "condition": "Omega->0",
+        "energy_limit": "16",
+        "face": "breather_separatrix",
+        "period_statement": "diverges",
+        "profile": "long-period limit"
+      },
+      {
+        "condition": "V=0",
+        "energy_limit": "16 eta",
+        "face": "breather_rest",
+        "period_statement": "2pi/Omega",
+        "profile": "rest breather"
+      },
+      {
+        "condition": "V!=0",
+        "energy_limit": "16 eta gamma_V",
+        "face": "breather_boost",
+        "period_statement": "comoving only",
+        "profile": "boosted breather"
+      },
+      {
+        "condition": "u=2pi k",
+        "energy_limit": "0",
+        "face": "vacuum",
+        "period_statement": "identity",
+        "profile": "constant vacuum"
+      }
+    ],
+    "breather_rows": [
+      {
+        "boost_gamma": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "boost_velocity_V": "0",
+        "center_quarter_amplitude": "5.477753624018263311104784557688512127434186473141298096920884211",
+        "eta_sqrt_1_minus_Omega2": "0.9797958971132712392789136298823565567863789922626680513730770269",
+        "internal_frequency_Omega": "1/5",
+        "lab_energy": "15.67673435381233982846261807811770490858206387620268882196923243",
+        "lab_fixed_x_period_claimed": true,
+        "lab_momentum": "0.0",
+        "mass_shell_residual": "0.0",
+        "pde_residual": "0.0",
+        "rest_energy": "15.67673435381233982846261807811770490858206387620268882196923243",
+        "rest_momentum": "0.0",
+        "rest_period": "31.41592653589793238462643383279502884197169399375105820974944592",
+        "topological_charge": 0
+      },
+      {
+        "boost_gamma": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "boost_velocity_V": "0",
+        "center_quarter_amplitude": "4.188790204786390984616857844372670512262892532500141094633259456",
+        "eta_sqrt_1_minus_Omega2": "0.8660254037844386467637231707529361834714026269051903140279034897",
+        "internal_frequency_Omega": "1/2",
+        "lab_energy": "13.85640646055101834821957073204697893554244203048304502444645584",
+        "lab_fixed_x_period_claimed": true,
+        "lab_momentum": "0.0",
+        "mass_shell_residual": "0.0",
+        "pde_residual": "0.0",
+        "rest_energy": "13.85640646055101834821957073204697893554244203048304502444645584",
+        "rest_momentum": "0.0",
+        "rest_period": "12.56637061435917295385057353311801153678867759750042328389977837",
+        "topological_charge": 0
+      },
+      {
+        "boost_gamma": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "boost_velocity_V": "0",
+        "center_quarter_amplitude": "2.574004435173137547211236914869290552166042364461249531462424475",
+        "eta_sqrt_1_minus_Omega2": "0.6000000000000000000000000000000000000000000000000000000000000000",
+        "internal_frequency_Omega": "4/5",
+        "lab_energy": "9.600000000000000000000000000000000000000000000000000000000000000",
+        "lab_fixed_x_period_claimed": true,
+        "lab_momentum": "0.0",
+        "mass_shell_residual": "0.0",
+        "pde_residual": "0.0",
+        "rest_energy": "9.600000000000000000000000000000000000000000000000000000000000000",
+        "rest_momentum": "0.0",
+        "rest_period": "7.853981633974483096156608458198757210492923498437764552437361481",
+        "topological_charge": 0
+      },
+      {
+        "boost_gamma": "1.060660171779821286601266543157273558927253906532711054882509803",
+        "boost_velocity_V": "1/3",
+        "center_quarter_amplitude": "4.188790204786390984616857844372670512262892532500141094633259456",
+        "eta_sqrt_1_minus_Omega2": "0.8660254037844386467637231707529361834714026269051903140279034897",
+        "internal_frequency_Omega": "1/2",
+        "lab_energy": "14.69693845669906858918370444823534835179568488394002077059615540",
+        "lab_fixed_x_period_claimed": false,
+        "lab_momentum": "4.898979485566356196394568149411782783931894961313340256865385135",
+        "mass_shell_residual": "0.0",
+        "pde_residual": "0.0",
+        "rest_energy": "13.85640646055101834821957073204697893554244203048304502444645584",
+        "rest_momentum": "0.0",
+        "rest_period": "12.56637061435917295385057353311801153678867759750042328389977837",
+        "topological_charge": 0
+      },
+      {
+        "boost_gamma": "1.154700538379251529018297561003914911295203502540253752037204653",
+        "boost_velocity_V": "1/2",
+        "center_quarter_amplitude": "3.364274682271721023106100127305722986808315142559356879114091219",
+        "eta_sqrt_1_minus_Omega2": "0.7453559924999298988030578895770920784802061198705085747569657485",
+        "internal_frequency_Omega": "2/3",
+        "lab_energy": "13.77060745318192670285961031033742083851705495214787849453359561",
+        "lab_fixed_x_period_claimed": false,
+        "lab_momentum": "6.885303726590963351429805155168710419258527476073939247266797806",
+        "mass_shell_residual": "0.0",
+        "pde_residual": "0.0",
+        "rest_energy": "11.92569587999887838084892623323347325568329791792813719611145198",
+        "rest_momentum": "0.0",
+        "rest_period": "9.424777960769379715387930149838508652591508198125317462924833777",
+        "topological_charge": 0
+      },
+      {
+        "boost_gamma": "1.250000000000000000000000000000000000000000000000000000000000000",
+        "boost_velocity_V": "3/5",
+        "center_quarter_amplitude": "5.272464286611271862982657018584161879385563866362858867414194070",
+        "eta_sqrt_1_minus_Omega2": "0.9682458365518542212948163499455999027082304263228977066468934415",
+        "internal_frequency_Omega": "1/4",
+        "lab_energy": "19.36491673103708442589632699891199805416460852645795413293786883",
+        "lab_fixed_x_period_claimed": false,
+        "lab_momentum": "11.61895003862225065553779619934719883249876511587477247976272130",
+        "mass_shell_residual": "0.0",
+        "pde_residual": "0.0",
+        "rest_energy": "15.49193338482966754071706159912959844333168682116636330635029506",
+        "rest_momentum": "0.0",
+        "rest_period": "25.13274122871834590770114706623602307357735519500084656779955674",
+        "topological_charge": 0
+      }
+    ],
+    "hessian_rows": [
+      {
+        "essential_edge": "1.0",
+        "factorization_quadratic_form_nonnegative": true,
+        "hessian_potential": "0.8586983502936710686275046882778904153757454803246880777502723803",
+        "kernel_mode": "0.5316044576681593842417254796397779430615653088645361394292822949",
+        "kernel_residual": "0.0",
+        "kink_derivative": "0.5316044576681593842417254796397779430615653088645361394292822949",
+        "kink_profile": "0.5380719814977630387103308565480803070850134579372779623156904760",
+        "x": "-2"
+      },
+      {
+        "essential_edge": "1.0",
+        "factorization_quadratic_form_nonnegative": true,
+        "hessian_potential": "0.1600513167719478612110065219165971101656265435384580905733771195",
+        "kernel_mode": "1.296108547327770799149954706452300646216978624143884046075730675",
+        "kernel_residual": "0.0",
+        "kink_derivative": "1.296108547327770799149954706452300646216978624143884046075730675",
+        "kink_profile": "1.410053687110475989883439690895814001437811000877585621751248133",
+        "x": "-1"
+      },
+      {
+        "essential_edge": "1.0",
+        "factorization_quadratic_form_nonnegative": true,
+        "hessian_potential": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "kernel_mode": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "kernel_residual": "0.0",
+        "kink_derivative": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "kink_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "x": "0"
+      },
+      {
+        "essential_edge": "1.0",
+        "factorization_quadratic_form_nonnegative": true,
+        "hessian_potential": "0.1600513167719478612110065219165971101656265435384580905733771195",
+        "kernel_mode": "1.296108547327770799149954706452300646216978624143884046075730675",
+        "kernel_residual": "0.0",
+        "kink_derivative": "1.296108547327770799149954706452300646216978624143884046075730675",
+        "kink_profile": "4.873131620069110487041847075663191766956527797872626020198641052",
+        "x": "1"
+      },
+      {
+        "essential_edge": "1.0",
+        "factorization_quadratic_form_nonnegative": true,
+        "hessian_potential": "0.8586983502936710686275046882778904153757454803246880777502723803",
+        "kernel_mode": "0.5316044576681593842417254796397779430615653088645361394292822949",
+        "kernel_residual": "0.0",
+        "kink_derivative": "0.5316044576681593842417254796397779430615653088645361394292822949",
+        "kink_profile": "5.745113325681823438214955910010925461309325340812933679634198709",
+        "x": "2"
+      }
+    ],
+    "kink_rows": [
+      {
+        "center_derivative": "3.023715784073817817716132289873440486526010494951371634706667953",
+        "center_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "energy": "12.09486313629527127086452915949376194610404197980548653882667181",
+        "energy_density_integral_residual": "0.0",
+        "gamma": "1.511857892036908908858066144936720243263005247475685817353333977",
+        "inverse_width": "1.511857892036908908858066144936720243263005247475685817353333977",
+        "mass_shell_residual": "0.0",
+        "momentum": "-9.071147352221453453148396869620321459578031484854114904120003860",
+        "orientation": 1,
+        "topological_charge": 1,
+        "traveling_ode_residual": "0.0",
+        "velocity": "-3/4"
+      },
+      {
+        "center_derivative": "-2.121320343559642573202533086314547117854507813065422109765019607",
+        "center_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "energy": "8.485281374238570292810132345258188471418031252261688439060078428",
+        "energy_density_integral_residual": "0.0",
+        "gamma": "1.060660171779821286601266543157273558927253906532711054882509803",
+        "inverse_width": "1.060660171779821286601266543157273558927253906532711054882509803",
+        "mass_shell_residual": "0.0",
+        "momentum": "-2.828427124746190097603377448419396157139343750753896146353359476",
+        "orientation": -1,
+        "topological_charge": -1,
+        "traveling_ode_residual": "0.0",
+        "velocity": "-1/3"
+      },
+      {
+        "center_derivative": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "center_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "energy": "8.000000000000000000000000000000000000000000000000000000000000000",
+        "energy_density_integral_residual": "0.0",
+        "gamma": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "inverse_width": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "mass_shell_residual": "0.0",
+        "momentum": "0.0",
+        "orientation": 1,
+        "topological_charge": 1,
+        "traveling_ode_residual": "0.0",
+        "velocity": "0"
+      },
+      {
+        "center_derivative": "-2.121320343559642573202533086314547117854507813065422109765019607",
+        "center_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "energy": "8.485281374238570292810132345258188471418031252261688439060078428",
+        "energy_density_integral_residual": "0.0",
+        "gamma": "1.060660171779821286601266543157273558927253906532711054882509803",
+        "inverse_width": "1.060660171779821286601266543157273558927253906532711054882509803",
+        "mass_shell_residual": "0.0",
+        "momentum": "2.828427124746190097603377448419396157139343750753896146353359476",
+        "orientation": -1,
+        "topological_charge": -1,
+        "traveling_ode_residual": "0.0",
+        "velocity": "1/3"
+      },
+      {
+        "center_derivative": "3.023715784073817817716132289873440486526010494951371634706667953",
+        "center_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "energy": "12.09486313629527127086452915949376194610404197980548653882667181",
+        "energy_density_integral_residual": "0.0",
+        "gamma": "1.511857892036908908858066144936720243263005247475685817353333977",
+        "inverse_width": "1.511857892036908908858066144936720243263005247475685817353333977",
+        "mass_shell_residual": "0.0",
+        "momentum": "9.071147352221453453148396869620321459578031484854114904120003860",
+        "orientation": 1,
+        "topological_charge": 1,
+        "traveling_ode_residual": "0.0",
+        "velocity": "3/4"
+      },
+      {
+        "center_derivative": "-2.309401076758503058036595122007829822590407005080507504074409306",
+        "center_profile": "3.141592653589793238462643383279502884197169399375105820974944592",
+        "energy": "9.237604307034012232146380488031319290361628020322030016297637224",
+        "energy_density_integral_residual": "0.0",
+        "gamma": "1.154700538379251529018297561003914911295203502540253752037204653",
+        "inverse_width": "1.154700538379251529018297561003914911295203502540253752037204653",
+        "mass_shell_residual": "0.0",
+        "momentum": "4.618802153517006116073190244015659645180814010161015008148818612",
+        "orientation": -1,
+        "topological_charge": -1,
+        "traveling_ode_residual": "0.0",
+        "velocity": "1/2"
+      }
+    ],
+    "lorentz_rows": [
+      {
+        "boost_velocity": "0",
+        "gamma": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "lab_energy": "13.85640646055101834821957073204697893554244203048304502444645584",
+        "lab_momentum": "0.0",
+        "lorentz_mass_shell_residual": "0.0",
+        "rest_energy": "13.85640646055101834821957073204697893554244203048304502444645584"
+      },
+      {
+        "boost_velocity": "1/4",
+        "gamma": "1.032795558988644502714470773275306562888779121411090887090019671",
+        "lab_energy": "14.31083505599865405701871147988016790681995750151376463533374237",
+        "lab_momentum": "3.577708763999663514254677869970041976704989375378441158833435593",
+        "lorentz_mass_shell_residual": "0.0",
+        "rest_energy": "13.85640646055101834821957073204697893554244203048304502444645584"
+      },
+      {
+        "boost_velocity": "1/2",
+        "gamma": "1.154700538379251529018297561003914911295203502540253752037204653",
+        "lab_energy": "16.00000000000000000000000000000000000000000000000000000000000000",
+        "lab_momentum": "8.000000000000000000000000000000000000000000000000000000000000000",
+        "lorentz_mass_shell_residual": "0.0",
+        "rest_energy": "13.85640646055101834821957073204697893554244203048304502444645584"
+      },
+      {
+        "boost_velocity": "3/4",
+        "gamma": "1.511857892036908908858066144936720243263005247475685817353333977",
+        "lab_energy": "20.94891746265526860154535859989946737821465863665358584049024971",
+        "lab_momentum": "15.71168809699145145115901894992460053366099397749018938036768728",
+        "lorentz_mass_shell_residual": "0.0",
+        "rest_energy": "13.85640646055101834821957073204697893554244203048304502444645584"
+      }
+    ],
+    "row_counts": {
+      "boundary": 8,
+      "breather": 6,
+      "hessian": 5,
+      "kink": 6,
+      "lorentz": 4
+    },
+    "serialized_significant_digits": 64,
+    "working_decimal_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "coherent periodicity is a continuous family and the theorem does not provide an isolated arithmetic primitive owner",
+    "strongest_positive": "exact coherent kink/breather family, Lorentz ledger and factored rest-kink spectrum",
+    "tuple": [
+      "A0_FAIL",
+      "A1_WEAK",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_NATURAL_QUANTIZATION"
+    ]
+  },
+  "schema": "hcs-c236-sine-gordon-kink-breather-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "0ebc633706bc34b8b915a44749423486fd4cd243",
+  "theorem": {
+    "breather_boost": "A Lorentz boost gives E=16 eta gamma_V and P=16 eta gamma_V V; 2pi/Omega is a comoving period and no fixed-lab-x period is asserted for V!=0.",
+    "breather_rest": "For 0<Omega<1 and eta=sqrt(1-Omega^2), the rest breather is exact, has rest energy 16 eta and internal period 2pi/Omega.",
+    "coherent_scope": "The theorem concerns the declared kink/antikink and breather coherent families; it is not a classification of every finite-energy solution.",
+    "energy_identity": "The PDE energy E=integral (u_t^2+u_x^2)/2+1-cos(u) dx and momentum P=-integral u_t u_x dx are conserved for smooth finite-energy coherent solutions.",
+    "hessian_factorization": "At the rest kink, L_K=-d_x^2+1-2 sech^2 x=(-d_x+tanh x)(d_x+tanh x)=A^*A.",
+    "hessian_spectrum": "spec(L_K)={0} union [1,infinity), kernel span{2 sech x}, and there is no internal discrete mode.",
+    "kink_classification": "For u=U(x-vt), (v^2-1)U''+sin U=0 and its vacuum first integral forces |v|<1; every finite-energy monotone heteroclinic is 2pi k+4 atan(exp(+/- xi)) up to translation, with k in Z (canonical k=0 representatives U_+ and U_-).",
+    "kink_energy_momentum": "With P=-integral_R u_t u_x dx, E=8 gamma_v and P=8 gamma_v v.",
+    "limits": "v->+/-1 collapses kink width and diverges E,P; Omega->1 is the zero-amplitude vacuum edge; Omega->0 is the infinite-period separatrix edge; V=0 is the rest face.",
+    "scope": "No all-finite-energy classification, nonlinear stability rate, primitive-orbit product, arithmetic divisor, or Hilbert-Polya operator is asserted.",
+    "topological_charge": "Kinks and antikinks have Q=+1 and -1; breathers have Q=0; vacua are 2pi k."
+  }
+}

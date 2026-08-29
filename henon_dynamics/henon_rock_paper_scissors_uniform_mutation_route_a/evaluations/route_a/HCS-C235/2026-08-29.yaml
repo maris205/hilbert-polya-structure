@@ -1,0 +1,81 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C235
+candidate_definition: three-strategy cyclic rock-paper-scissors ODE on the unit simplex with additive uniform mutation
+family: continuous population vector field / replicator-mutator flow
+phase_space: "Delta={(x,y,z): x,y,z>=0, x+y+z=1}"
+dynamics: xdot=a*x*(y-z)+mu*(1/3-x), cyclic in x,y,z
+parameters: a>=0, mu>=0; only additive uniform mutation
+parameter_provenance: source-defined rational sentinels; no target fitting
+arithmetic_origin: none
+clock: physical continuous ODE time
+normalization: simplex mass one and H=xyz on the conservative face
+determinant_convention: none; no orbit or Fredholm determinant
+orbit_cutoff: 15 conservative quadrature rows, 3 center-limit rows, 6 mutation rows, 3 contraction rows
+precision: exact rational sentinels, 90-decimal mpmath, independent symbolic identities
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+code_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+artifact_paths:
+  evidence: results/c235_rps_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: cyclic three-strategy RPS vector field with additive uniform mutation
+  arithmetic_origin: none
+  clock: physical ODE time
+  normalization: x+y+z=1, H=xyz when mu=0; periodic levels require a>0 and a=mu=0 is the identity
+  cutoff: rational period, mutation, contraction and tangent rows
+  precision: exact rational and high-precision independent reconstruction
+  allowed_data: simplex identities, product levels, quadrature, LaSalle law, tangent spectrum
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native cyclic product and uniform-mutation Lyapunov identity
+  strongest_failure: no intrinsic rational-prime carrier, prime-power repetition, or arithmetic clock
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: for a>0 the conservative interior levels are genuine periodic ODE curves with a reproducible physical-time quadrature
+  strongest_failure: periods are a continuum of source-native ODE levels, not arithmetic primitive cycles
+  metrics: {conservative_period_rows: 15, center_limit_rows: 3, primitive_orbit_labels: 0}
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact product and turning-root identities
+  strongest_failure: no weighted orbit zeta, Fredholm determinant, or target divisor
+  metrics: {target_zero_match: null, determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: global LaSalle convergence and explicit degenerate faces
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md, results/c235_rps_evidence.json]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: tangent linearization and source-defined flow generator
+  strongest_failure: no natural target quantization or Hilbert-Polya spectral bridge
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [three a values, five product levels, center-limit boundary, three mutation boundaries, a=0 contraction, identity face, repaired-hash mutations]
+  proves_too_much_risk: high if continuous periods are called a discrete zeta, if RK4 diagnostics are called proof, or if uniform mutation is generalized without a new theorem
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact RPS simplex/product/period and additive-uniform-mutation convergence theorem only; no arithmetic, target determinant, or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no arithmetic primitive-period repetition law
+  - no target determinant or analytic target match
+  - no natural unitary target lift
+next_smallest_test: none inside this source-local theorem; a different mutation mechanism is a new candidate
+round2_clues: []
+route_b_invocation_allowed: false

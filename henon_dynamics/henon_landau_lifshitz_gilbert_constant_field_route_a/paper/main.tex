@@ -1,0 +1,156 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Sph}{\mathbb S^2}
+\title{Exact constant-field Landau--Lifshitz--Gilbert flow on the sphere}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close the complete source-local dynamics of the constant-field
+Landau--Lifshitz--Gilbert equation on the unit sphere.  In the stereographic
+coordinate \(z=(m_1+i m_2)/(1+m_3)\), the nonlinear vector field becomes
+\(\dot z=(-\alpha\omega+i\omega)z\), while \(m_3\) is an exact tanh
+trajectory.  The energy law, north/south stability, pure-precession latitude
+periods, identity face, and every sampled-time fixed set follow in one
+boundary atlas.  The periodic face is a continuum and therefore does not
+provide an isolated primitive-orbit or arithmetic determinant.  Independent
+exact reconstruction and symbolic checks accompany the paper.
+\end{abstract}
+
+\section{Model and exact chart}
+Let \(e_3=(0,0,1)\), \(m(t)\in\Sph\), and \(\alpha,\omega\geq0\).  We freeze
+\begin{equation}
+ \dot m=-\omega m\times e_3-\alpha\omega m\times(m\times e_3).
+ \tag{1}
+\end{equation}
+This is the normalized Landau--Lifshitz/Gilbert convention: the usual
+factor \(1+\alpha^2\) in the unreduced Gilbert equation has been absorbed
+into the declared frequency \(\omega\) (equivalently, into the time unit).
+The vector field is tangent to the sphere.  On \(m_3>-1\) put
+\(z=(m_1+i m_2)/(1+m_3)\).  The inverse formulas are
+\begin{equation}
+ m_1+i m_2=\frac{2z}{1+|z|^2},\qquad
+ m_3=\frac{1-|z|^2}{1+|z|^2}.
+ \tag{2}
+\end{equation}
+
+\begin{theorem}[Exact flow and pole atlas]\label{thm:flow}
+For \(-1<m_3(0)<1\), equation (1) has
+\begin{equation}
+ z(t)=z(0)e^{(-\alpha\omega+i\omega)t},\qquad
+ m_3(t)=\tanh\!\left(\alpha\omega t+\operatorname{artanh}m_3(0)\right).
+ \tag{3}
+\end{equation}
+The two poles are equilibria.  With \(E=1-m_3\),
+\begin{equation}
+ \dot E=-\alpha\omega(1-m_3^2)\leq0. \tag{4}
+\end{equation}
+If \(\alpha\omega>0\), the north pole is asymptotically stable and the south
+pole is unstable.  Their transverse eigenvalues have real parts
+\(-\alpha\omega\) and \(+\alpha\omega\), respectively, and precession
+frequency \(\omega\).
+\end{theorem}
+\begin{proof}
+Writing (1) in components gives
+\(\dot m_1=-\omega m_2-\alpha\omega m_1m_3\),
+\(\dot m_2=\omega m_1-\alpha\omega m_2m_3\), and
+\(\dot m_3=\alpha\omega(m_1^2+m_2^2)\).  The complex combination and the
+unit-sphere identity yield the scalar linear equation and the logistic
+equation in (3).  Substitution in (2) proves reconstruction and (4).
+Linearizing the complex equation at the two chart ends gives the stated
+real parts; the pole cases themselves are immediate from (1).
+\end{proof}
+
+\section{Periodic and sampled-time faces}
+\begin{proposition}[All boundary cases]\label{prop:faces}
+If \(\alpha=0\) and \(\omega>0\), latitude is conserved and every nonpolar
+point runs on a circle of period \(2\pi/\omega\).  If \(\omega=0\), the flow
+is the identity for every \(\alpha\).  For a sampled time \(\tau>0\), when
+\(\alpha\omega>0\) the fixed set is exactly the two poles.  On the pure
+precession face it is all of \(\Sph\) iff \(\omega\tau\in2\pi\mathbb Z\),
+and otherwise it is the two poles; the \(\omega=0\) and \(\tau=0\) faces are
+identity maps.
+\end{proposition}
+\begin{proof}
+Equation (3) preserves \(|z|\) exactly when \(\alpha=0\), and its phase is
+\omega t.  If \(\alpha>0\), the modulus can return to its initial value only
+at a pole.  The listed resonance and identity alternatives then follow
+directly from the exponential flow.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{A complete source boundary ledger}
+The physical transverse radius is not the stereographic modulus: it is
+\(r_\perp(t)=\sqrt{1-m_3(t)^2}=2|z(t)|/(1+|z(t)|^2)\).  Thus damping is
+exponential in the chart but nonlinear after sphere reconstruction.  The
+following table records the exact fixed-set dimensions for representative
+faces; the evidence file contains the corresponding high-precision rows.
+\begin{center}
+\small
+\begin{tabular}{llll}
+\toprule
+face & condition & flow type & sampled fixed set (\(\tau>0\))\\
+\midrule
+identity & \(\omega=0\) & constant & \(\Sph\)\\
+precession & \(\alpha=0,\omega>0\) & latitude rotation & all or two poles\\
+damped & \(\alpha>0,\omega>0\) & north attractor & two poles\\
+north & \(m=e_3\) & equilibrium & north pole\\
+south & \(m=-e_3\) & equilibrium & south pole\\
+\bottomrule
+\end{tabular}
+\end{center}
+The pure-precession circles are a continuous family, not isolated primitive
+cycles.  This distinction is essential: the exact ODE has a physical clock,
+but no canonical primitive-orbit product or target divisor.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Independent receipt and Route-A decision}
+The producer stores six flow rows, four pole-stability rows, five boundary
+rows and six sampled-time rows at 90 working decimal digits.  A checker that
+does not import the producer reconstructs the chart, tanh solution, sphere
+norm, energy derivative, stability signs and resonance classification.
+Fourteen SymPy identities, byte replay and a hostile suite of 37 mutations
+cover numerical cells, theorem text, all five boundary-row semantics,
+corrected citation metadata, nested and top-level unknown keys, stale hashes,
+row counts, route flags and scope flags.  The boundary atlas is therefore
+checked as a semantic table rather than as a collection of labels.
+
+The strict tuple is
+\[
+(\mathtt{A0\_FAIL},\mathtt{A1\_WEAK},\mathtt{A2\_FAIL},\mathtt{A3\_FAIL},
+ \mathtt{A4\_FORMAL\_HINT}),
+\qquad \mathtt{overall=ROUTE\_A\_REJECTED}.
+\]
+The latitude family and the identity face explain the A1 stop.  No target
+prime or zero table, arithmetic local datum, Euler factor, root number,
+automorphy statement, Hilbert--Pólya operator or Route-B input is claimed.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{lakshmanan}
+M. Lakshmanan, ``The fascinating world of the Landau--Lifshitz--Gilbert
+equation: an overview,'' \emph{Philosophical Transactions of the Royal
+Society A} 369(1939), 1280--1300 (2011).
+DOI: \href{https://doi.org/10.1098/rsta.2010.0319}{10.1098/rsta.2010.0319}.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \nolinkurl{NO_BAD_EULER_OR_ROOT_NUMBER}; the source theorem
+contains no target arithmetic, Euler-factor, target-zero, automorphy or
+Hilbert--Pólya claim.  \textbf{Data and code.} Exact formulas, regression
+rows and independent audit programs accompany HCS-C234.  \textbf{AI-use
+disclosure.} Generative tools assisted drafting and code generation; internal
+checks validate the displayed identities.  This is not external peer review.
+\end{document}

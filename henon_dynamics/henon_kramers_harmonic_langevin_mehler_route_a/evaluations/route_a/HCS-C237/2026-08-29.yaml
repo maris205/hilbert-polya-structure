@@ -1,0 +1,84 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C237
+candidate_definition: harmonic Kramers--Langevin diffusion with an all-damping Mehler flow
+family: two-dimensional degenerate-noise Gaussian stochastic diffusion
+phase_space: "R^2 with state (Q,P)"
+dynamics: dQ=P dt; dP=(-omega^2 Q-gamma P)dt+sqrt(2 gamma/beta)dW
+parameters: omega>0, beta>0, gamma>=0; omega=0 is a separated boundary
+parameter_provenance: source-defined physical model; no target fitting
+arithmetic_origin: none
+clock: physical diffusion time t>=0
+normalization: Gibbs covariance Sigma=diag(1/(beta omega^2),1/beta); Gaussian Mehler transition
+determinant_convention: finite-dimensional drift determinant and stochastic transition only; no Fredholm determinant
+orbit_cutoff: no primitive-orbit enumeration; 6 matrix, 8 transition, 5 correlation, 7 rate, 5 Kalman, 4 Gibbs and 5 boundary rows
+precision: exact rational controls, 90-digit mpmath, 26 generic SymPy identities
+training_data: none
+forbidden_data: target primes, target zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+code_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+artifact_paths:
+  evidence: results/c237_kramers_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: linear Kramers SDE, drift matrix, Lyapunov covariance and Gaussian kernel
+  arithmetic_origin: none
+  clock: physical diffusion time
+  normalization: Gibbs density beta omega/(2 pi) exp[-beta(omega^2 Q^2+p^2)/2]
+  cutoff: no orbit cutoff; finite rational regression ledger only
+  precision: exact rational controls and high-precision symbolic reconstruction
+  allowed_data: SDE coefficients, matrix exponential, Lyapunov identity, Kalman bracket and Gaussian integrals
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED_NEGATIVE
+  strongest_evidence: source-native all-damping Gaussian identities
+  strongest_failure: no intrinsic rational-prime carrier or prime-power repetition semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED_NEGATIVE
+  strongest_evidence: exact finite-dimensional drift modes and Kalman rank
+  strongest_failure: no primitive periodic-orbit owner or arithmetic clock
+  metrics: {primitive_orbit_rows: 0, matrix_rows: 6, correlation_rows: 5}
+  artifacts: [THEOREM_PACKAGE.md, results/c237_kramers_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED_NEGATIVE
+  strongest_evidence: Gaussian Mehler transition with explicit covariance
+  strongest_failure: Markov kernel is not a target Fredholm determinant or zeta
+  metrics: {transition_rows: 8, target_zero_match: null}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED_NEGATIVE
+  strongest_evidence: exact rate/correlation atlas and explicit boundaries
+  strongest_failure: no arithmetic continuation, divisor, functional equation or counting law
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: explicit drift spectral-abscissa curve and Gaussian invariant covariance
+  strongest_failure: no natural unitary quantization or target operator bridge
+  metrics: {route_b_ready: false, critical_rate: omega, full_l2_spectrum: not_claimed}
+  artifacts: [THEOREM_PACKAGE.md, results/c237_kramers_evidence.json]
+adversarial_controls:
+  controls_used: [underdamped, critical, overdamped, zero_gamma, zero_omega, repaired_hash, forbidden_scope_flag, critical_prefactor_wording, all_boundary_row_semantics]
+  proves_too_much_risk: high if the Mehler kernel is called an arithmetic zeta or the critical exponent is called a pure norm bound
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact all-damping finite-dimensional Gaussian/Kalman/Gibbs theorem and boundary atlas only; no arithmetic, target determinant or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit ledger
+  - no target determinant or analytic target match
+  - no natural unitary lift
+next_smallest_test: none without introducing a new arithmetic dynamical model
+round2_clues: []
+route_b_invocation_allowed: false

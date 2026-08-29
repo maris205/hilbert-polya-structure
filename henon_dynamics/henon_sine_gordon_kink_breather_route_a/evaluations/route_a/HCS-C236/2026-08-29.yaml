@@ -1,0 +1,78 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C236
+title: Sine--Gordon kink and breather coherent families
+evaluation_date: 2026-08-29
+source_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+code_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_NATURAL_QUANTIZATION]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+candidate_definition: "one-dimensional sine--Gordon equation with declared kink, antikink, and breather families"
+family: "conservative hyperbolic field equation / coherent structures"
+phase_space: "finite-energy real fields on R with canonical energy and momentum"
+dynamics: "u_tt-u_xx+sin(u)=0"
+parameters: "integer vacuum layer k, kink speed |v|<1, breather frequency 0<Omega<1, boost |V|<1"
+parameter_provenance: "source-defined coherent-family parameters; no target fitting"
+arithmetic_origin: none
+clock: "physical field time; 2pi/Omega is a rest/comoving internal period"
+normalization: "V(u)=1-cos(u), vacua u=2pi k, P=-integral u_t u_x dx"
+determinant_convention: "none; no orbit or Fredholm determinant"
+orbit_cutoff: "6 kink, 6 breather, 5 Hessian, 8 boundary, and 4 Lorentz rows"
+precision: "exact symbolic identities, 90-decimal independent regression"
+training_data: none
+forbidden_data: "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators"
+artifact_paths:
+  evidence: results/c236_sine_gordon_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+frozen_model:
+  equation: u_tt-u_xx+sin(u)=0
+  phase_space: finite-energy real fields on R with canonical energy and momentum
+  potential: V(u)=1-cos(u), vacua u=2pi k
+  momentum_convention: P=-integral_R u_t u_x dx
+  kink_family: U_{k,+}=2pi k+4 atan(exp(xi)), U_{k,-}=2pi k+4 atan(exp(-xi)), k in Z, |v|<1; rows use k=0
+  breather_family: 0<Omega<1, eta=sqrt(1-Omega^2), rest and Lorentz boosts
+  clock: 2pi/Omega is a rest/comoving internal period; no fixed-lab-x period is asserted when V!=0
+  hessian: rest kink L=-d_x^2+1-2 sech^2 x=A^*A, spec={0} union [1,infinity)
+  primitive_periodic_orbit: false
+  forbidden_data: target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+claims:
+  coherent_scope: declared kink/antikink and breather families, not every finite-energy solution
+  kink: (v^2-1)U''+sin U=0 and vacuum first integral force |v|<1; all layers 2pi k+4 atan(exp(+/-xi)) have E=8 gamma_v and P=8 gamma_v v
+  breather: rest energy 16 eta; boosted E=16 eta gamma_V and P=16 eta gamma_V V
+  spectrum: rest-kink translation kernel only; essential edge 1 and no internal discrete mode
+  boundaries: light-speed, vacuum, separatrix, rest/boost clock faces are explicit
+  arithmetic: none
+nonclaims:
+  - The formulas are re-derived source-local identities, not a literature-priority claim.
+  - The coherent-family theorem is not a classification of every finite-energy sine--Gordon solution.
+  - The Hessian spectrum is for the rest kink only; no boosted-breather nonlinear stability rate is inferred.
+  - A boosted breather has a comoving internal period, not a fixed-laboratory-point period when V is nonzero.
+  - No arithmetic local datum, Euler product, automorphy, Hilbert-Polya operator or Route-B input is claimed.
+citations:
+  - id: McLaughlinScott1978
+    title: Perturbation analysis of fluxon dynamics
+    authors: J. M. McLaughlin and A. C. Scott
+    venue: Physical Review A 18(4), 1652--1680
+    year: 1978
+    doi: 10.1103/PhysRevA.18.1652
+    role: sine--Gordon coherent structures and fluxon dynamics context
+evidence:
+  artifact: results/c236_sine_gordon_evidence.json
+  producer: code/c236_sine_gordon_producer.py
+  independent_checker: code/c236_sine_gordon_checker.py
+  sympy_crosscheck: code/c236_sine_gordon_sympy_crosscheck.py
+  replay: code/c236_sine_gordon_replay.py
+  mutation: code/c236_sine_gordon_mutation.py
+  regression_rows: 29
+  working_decimal_digits: 90
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS

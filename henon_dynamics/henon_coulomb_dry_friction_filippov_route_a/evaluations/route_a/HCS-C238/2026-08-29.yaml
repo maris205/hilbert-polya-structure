@@ -1,0 +1,81 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C238
+candidate_definition: autonomous scalar Coulomb oscillator with a frozen maximal-monotone Sign graph and viability sticking law
+family: nonsmooth mechanical differential inclusion / stick-slip flow
+phase_space: R^2 with state (x,v)
+dynamics: xdot=v; vdot=-omega^2*x-c*xi, xi in Sign(v)
+parameters: omega>0, c>=0; a_friction=c/omega^2
+parameter_provenance: source-defined rational sentinels; no target fitting
+arithmetic_origin: none
+clock: physical continuous mechanical time
+normalization: E=(v^2+omega^2*x^2)/2 and Sign(0)=[-1,1]
+determinant_convention: none; no orbit or Fredholm determinant
+orbit_cutoff: 8 rest rows, 8 general phase rows, 5 static rows, 4 harmonic rows, 5 dissipation rows
+precision: exact rational sentinels, 90-decimal mpmath, independent symbolic identities
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+code_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+artifact_paths:
+  evidence: results/c238_friction_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: scalar Coulomb inclusion with frozen maximal-monotone/viability selection
+  arithmetic_origin: none
+  clock: physical mechanical time
+  normalization: friction length a_f=c/omega^2 and quadratic energy E
+  cutoff: rational rest/capture, phase, threshold, harmonic and work rows
+  precision: exact rational and high-precision independent reconstruction
+  allowed_data: Sign graph, shifted oscillators, energy dissipation, event maps, harmonic face
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native mechanical Sign graph and energy law
+  strongest_failure: no intrinsic rational-prime carrier, prime-power repetition, or arithmetic clock
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: finite stick-slip arcs are event segments, not primitive periodic cycles
+  strongest_failure: frictional capture removes nonconstant recurrence and no primitive labels exist
+  metrics: {primitive_orbit_rows: 0, rest_event_rows: 8, phase_rows: 8}
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact turning and work identities
+  strongest_failure: no weighted orbit zeta, Fredholm determinant, or target divisor
+  metrics: {target_zero_match: null, determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: global maximal-monotone/event theorem and harmonic boundary
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md, results/c238_friction_evidence.json]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: self-adjoint quadratic energy on each smooth slip branch
+  strongest_failure: no natural target quantization or Hilbert-Polya spectral bridge
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [positive/negative rests, stick thresholds, both velocity signs, exterior center signs, c=0 harmonic face, repaired-hash mutations]
+  proves_too_much_risk: high if a partial slip arc is called a half-cycle, if the c=0 face is assigned finite capture, or if a nonunique zero-velocity branch is left implicit
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact frozen Sign-graph well-posedness, energy, event maps and capture ledger only; no arithmetic, target determinant, or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit repetition law
+  - no target determinant or analytic target match
+  - no natural unitary target lift
+next_smallest_test: none inside this source-local theorem; a different friction or forcing law is a new candidate
+round2_clues: []
+route_b_invocation_allowed: false

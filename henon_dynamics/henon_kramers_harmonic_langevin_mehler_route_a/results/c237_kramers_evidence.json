@@ -1,0 +1,747 @@
+{
+  "candidate_id": "HCS-C237",
+  "citations": [
+    {
+      "doi": "10.1016/S0031-8914(40)90098-2",
+      "id": "Kramers1940",
+      "role": "classical Brownian escape/Langevin context"
+    },
+    {
+      "doi": "10.1103/PhysRev.36.823",
+      "id": "OrnsteinUhlenbeck1930",
+      "role": "linear Gaussian Markov process and Mehler transition context"
+    },
+    {
+      "doi": "10.1007/BF02392081",
+      "id": "Hormander1967",
+      "role": "hypoelliptic bracket condition framework"
+    },
+    {
+      "doi": "",
+      "id": "Villani2009",
+      "role": "hypocoercivity context; no unproved L2 spectral theorem imported"
+    }
+  ],
+  "evaluation_date": "2026-08-29",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "det(lambda I-A)=lambda^2+gamma lambda+omega^2",
+      "name": "characteristic_polynomial"
+    },
+    {
+      "formula": "dM_t/dt=A M_t=M_t A and M_0=I",
+      "name": "matrix_ode"
+    },
+    {
+      "formula": "det M_t=exp(-gamma t)",
+      "name": "determinant_flow"
+    },
+    {
+      "formula": "A Sigma+Sigma A^T+BB^T=0 and integral_0^t M_s BB^T M_s^T ds=Sigma-M_t Sigma M_t^T",
+      "name": "lyapunov_covariance"
+    },
+    {
+      "formula": "pi(q,p)=beta omega/(2 pi) exp[-beta(omega^2 q^2+p^2)/2]",
+      "name": "gibbs_density"
+    },
+    {
+      "formula": "det[B,AB]=-2 gamma/beta",
+      "name": "kalman_determinant"
+    },
+    {
+      "formula": "Cov(X_t,X_0)=M_t Sigma",
+      "name": "stationary_cross_covariance"
+    },
+    {
+      "formula": "r=gamma/2 for gamma<=2 omega; r=gamma/2-sqrt(gamma^2/4-omega^2) for gamma>=2 omega",
+      "name": "rate_piecewise"
+    },
+    {
+      "formula": "M_t=exp(-omega t)[I+t(A+omega I)] when gamma=2 omega",
+      "name": "critical_prefactor"
+    },
+    {
+      "formula": "gamma=0 implies M_t Sigma M_t^T=Sigma and transition covariance zero",
+      "name": "hamiltonian_face"
+    }
+  ],
+  "frozen_object": {
+    "clock": "physical time t>=0",
+    "drift_matrix": "A=[[0,1],[-omega^2,-gamma]]",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor/functional equation, Hilbert-Polya operators",
+    "gibbs_covariance": "Sigma=diag(1/(beta omega^2),1/beta)",
+    "normalization": "Gibbs density beta omega/(2 pi) exp[-beta(omega^2 Q^2+P^2)/2]",
+    "parameter_domain": "omega>0,beta>0,gamma>=0; omega=0 is a separate unconfined boundary",
+    "sde": "dQ=P dt; dP=(-omega^2 Q-gamma P)dt+sqrt(2 gamma/beta)dW_t",
+    "state": "x=(Q,P)^T in R^2",
+    "transition": "X_t is Gaussian with mean M_t x and covariance Sigma-M_t Sigma M_t^T for gamma>0,t>0; Dirac when gamma=0"
+  },
+  "headline": "The harmonic Kramers--Langevin diffusion has an exact all-damping matrix flow and Gaussian Mehler kernel, Gibbs invariant law, Kalman hypoellipticity for positive damping, stationary correlations, and a sharp critical-damping drift rate.",
+  "nonclaims": [
+    "No prime or zero table is used and no arithmetic local datum is inferred from the damping parameter.",
+    "The Mehler kernel is a Gaussian Markov transition, not a primitive-orbit zeta or target Fredholm determinant.",
+    "The critical rate is a finite-dimensional drift statement; it is not a complete nonnormal L2 spectrum.",
+    "The gamma=0 and omega=0 faces are explicit boundaries and do not inherit the positive-damping Gibbs theorem.",
+    "Internal exact checks and manuscript builds are reproducibility evidence, not external peer review."
+  ],
+  "payload_sha256": "ad1ed4b2727cf67704aa39a24bfc8d91a1ed47c2ef7132ba83b7bcf99b8490b3",
+  "regression": {
+    "boundary_rows": [
+      {
+        "beta": "2",
+        "case_id": "boundary_under",
+        "classification": "confining_hypoelliptic_underdamped",
+        "gamma": "1",
+        "mixing": "mixing",
+        "omega": "1",
+        "position_variance": "1/2",
+        "stationary_law": "unique_gibbs"
+      },
+      {
+        "beta": "2",
+        "case_id": "boundary_critical",
+        "classification": "confining_hypoelliptic_critical",
+        "gamma": "2",
+        "mixing": "mixing_with_t_prefactor",
+        "omega": "1",
+        "position_variance": "1/2",
+        "stationary_law": "unique_gibbs"
+      },
+      {
+        "beta": "2",
+        "case_id": "boundary_over",
+        "classification": "confining_hypoelliptic_overdamped",
+        "gamma": "3",
+        "mixing": "mixing",
+        "omega": "1",
+        "position_variance": "1/2",
+        "stationary_law": "unique_gibbs"
+      },
+      {
+        "beta": "2",
+        "case_id": "boundary_zero_gamma",
+        "classification": "hamiltonian_oscillator",
+        "gamma": "0",
+        "mixing": "no_mixing",
+        "omega": "1",
+        "position_variance": "1/2",
+        "stationary_law": "many_invariant_energy_measures"
+      },
+      {
+        "beta": "2",
+        "case_id": "boundary_zero_omega",
+        "classification": "unconfined_position",
+        "gamma": "1",
+        "mixing": "no_stationary_position",
+        "omega": "0",
+        "position_variance": "infinite",
+        "stationary_law": "no_probability_gibbs_law"
+      }
+    ],
+    "correlation_rows": [
+      {
+        "C_PP": "0.3361634587448474271482389702374035087741389763293784800656649385",
+        "C_PQ": "-0.1391289872326017352051710247144622290620383066933695065394234571",
+        "C_QP": "0.1391289872326017352051710247144622290620383066933695065394234571",
+        "C_QQ": "0.4752924459774491623534099949518657378361772830227479866050883956",
+        "beta": "2",
+        "case_id": "corr_under",
+        "gamma": "1",
+        "omega": "1",
+        "regime": "underdamped",
+        "rho_PP": "0.6723269174896948542964779404748070175482779526587569601313298770",
+        "rho_PQ": "-0.2782579744652034704103420494289244581240766133867390130788469143",
+        "rho_QP": "0.2782579744652034704103420494289244581240766133867390130788469143",
+        "rho_QQ": "0.9505848919548983247068199899037314756723545660454959732101767913",
+        "time": "1/3"
+      },
+      {
+        "C_PP": "0.1516326649281583559009498837477951133604795338717967389207230397",
+        "C_PQ": "-0.1516326649281583559009498837477951133604795338717967389207230397",
+        "C_QP": "0.1516326649281583559009498837477951133604795338717967389207230397",
+        "C_QQ": "0.4548979947844750677028496512433853400814386016153902167621691191",
+        "beta": "2",
+        "case_id": "corr_critical",
+        "gamma": "2",
+        "omega": "1",
+        "regime": "critical",
+        "rho_PP": "0.3032653298563167118018997674955902267209590677435934778414460794",
+        "rho_PQ": "-0.3032653298563167118018997674955902267209590677435934778414460794",
+        "rho_QP": "0.3032653298563167118018997674955902267209590677435934778414460794",
+        "rho_QQ": "0.9097959895689501354056993024867706801628772032307804335243382381",
+        "time": "1/2"
+      },
+      {
+        "C_PP": "0.03599323121519822897737395482526836673257959473147071245047849292",
+        "C_PQ": "-0.1343003857326689350203841870309811337812871645413322942747307826",
+        "C_QP": "0.1343003857326689350203841870309811337812871645413322942747307826",
+        "C_QQ": "0.4388943884132050340385265159182117680764410883554675952746708408",
+        "beta": "2",
+        "case_id": "corr_over",
+        "gamma": "3",
+        "omega": "1",
+        "regime": "overdamped",
+        "rho_PP": "0.07198646243039645795474790965053673346515918946294142490095698584",
+        "rho_PQ": "-0.2686007714653378700407683740619622675625743290826645885494615653",
+        "rho_QP": "0.2686007714653378700407683740619622675625743290826645885494615653",
+        "rho_QQ": "0.8777887768264100680770530318364235361528821767109351905493416816",
+        "time": "2/3"
+      },
+      {
+        "C_PP": "-0.01978500970095829788053600149643695239240105251963699507110837466",
+        "C_PQ": "-0.03476347637454876544992270610723462506348613771754646776704186503",
+        "C_QP": "0.03476347637454876544992270610723462506348613771754646776704186503",
+        "C_QQ": "0.05588983123022076506723073531355135576300047787579706982454617014",
+        "beta": "3",
+        "case_id": "corr_over2",
+        "gamma": "7",
+        "omega": "2",
+        "regime": "overdamped",
+        "rho_PP": "-0.05935502910287489364160800448931085717720315755891098521332512397",
+        "rho_PQ": "-0.2085808582472925926995362366434077503809168263052788066022511902",
+        "rho_QP": "0.2085808582472925926995362366434077503809168263052788066022511902",
+        "rho_QQ": "0.6706779747626491808067688237626162691560057345095648378945540417",
+        "time": "4/5"
+      },
+      {
+        "C_PP": "0.1650671229819356594481904997910752077756182078376940762739499547",
+        "C_PQ": "-0.07528566311933804762679272608782105428131841133255356946990211924",
+        "C_QP": "0.07528566311933804762679272608782105428131841133255356946990211924",
+        "C_QQ": "0.07336316576974918197697355546270009234471920348341958945508886877",
+        "beta": "5",
+        "case_id": "corr_zero",
+        "gamma": "0",
+        "omega": "3/2",
+        "regime": "underdamped_zero_damping",
+        "rho_PP": "0.8253356149096782972409524989553760388780910391884703813697497737",
+        "rho_PQ": "-0.5646424733950353572009454456586579071098880849941517710242658943",
+        "rho_QP": "0.5646424733950353572009454456586579071098880849941517710242658943",
+        "rho_QQ": "0.8253356149096782972409524989553760388780910391884703813697497737",
+        "time": "2/5"
+      }
+    ],
+    "gibbs_rows": [
+      {
+        "beta": "1",
+        "case_id": "gibbs_unit",
+        "covariance_det": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "energy_temperature_identity": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "normalization": "0.1591549430918953357688837633725143620344596457404564487476673441",
+        "omega": "1",
+        "variance_P": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "variance_Q": "1.000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "beta": "3/2",
+        "case_id": "gibbs_soft",
+        "covariance_det": "1.777777777777777777777777777777777777777777777777777777777777778",
+        "energy_temperature_identity": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "normalization": "0.1193662073189215018266628225293857715258447343053423365607505080",
+        "omega": "1/2",
+        "variance_P": "0.6666666666666666666666666666666666666666666666666666666666666667",
+        "variance_Q": "2.666666666666666666666666666666666666666666666666666666666666667"
+      },
+      {
+        "beta": "5",
+        "case_id": "gibbs_stiff",
+        "covariance_det": "0.004444444444444444444444444444444444444444444444444444444444444444",
+        "energy_temperature_identity": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "normalization": "2.387324146378430036533256450587715430516894686106846731215010161",
+        "omega": "3",
+        "variance_P": "0.2000000000000000000000000000000000000000000000000000000000000000",
+        "variance_Q": "0.02222222222222222222222222222222222222222222222222222222222222222"
+      },
+      {
+        "beta": "7/3",
+        "case_id": "gibbs_rational",
+        "covariance_det": "0.02938775510204081632653061224489795918367346938775510204081632653",
+        "energy_temperature_identity": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "normalization": "0.9284038347027227919851552863396671118676812668193292843613928403",
+        "omega": "5/2",
+        "variance_P": "0.4285714285714285714285714285714285714285714285714285714285714286",
+        "variance_Q": "0.06857142857142857142857142857142857142857142857142857142857142857"
+      }
+    ],
+    "kalman_rows": [
+      {
+        "AB": [
+          "0.0",
+          "0.0"
+        ],
+        "B": [
+          "0.0",
+          "0.0"
+        ],
+        "beta": "2",
+        "case_id": "kalman_zero",
+        "controllability_det": "0.0",
+        "controllability_rank": 0,
+        "gamma": "0",
+        "hypoelliptic_for_t_positive": false,
+        "omega": "1"
+      },
+      {
+        "AB": [
+          "1.000000000000000000000000000000000000000000000000000000000000000",
+          "-1.000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "B": [
+          "0.0",
+          "1.000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "beta": "2",
+        "case_id": "kalman_under",
+        "controllability_det": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "controllability_rank": 2,
+        "gamma": "1",
+        "hypoelliptic_for_t_positive": true,
+        "omega": "1"
+      },
+      {
+        "AB": [
+          "1.414213562373095048801688724209698078569671875376948073176679738",
+          "-2.828427124746190097603377448419396157139343750753896146353359476"
+        ],
+        "B": [
+          "0.0",
+          "1.414213562373095048801688724209698078569671875376948073176679738"
+        ],
+        "beta": "2",
+        "case_id": "kalman_critical",
+        "controllability_det": "-2.000000000000000000000000000000000000000000000000000000000000000",
+        "controllability_rank": 2,
+        "gamma": "2",
+        "hypoelliptic_for_t_positive": true,
+        "omega": "1"
+      },
+      {
+        "AB": [
+          "1.732050807568877293527446341505872366942805253810380628055806979",
+          "-5.196152422706631880582339024517617100828415761431141884167420938"
+        ],
+        "B": [
+          "0.0",
+          "1.732050807568877293527446341505872366942805253810380628055806979"
+        ],
+        "beta": "2",
+        "case_id": "kalman_over",
+        "controllability_det": "-3.000000000000000000000000000000000000000000000000000000000000000",
+        "controllability_rank": 2,
+        "gamma": "3",
+        "hypoelliptic_for_t_positive": true,
+        "omega": "1"
+      },
+      {
+        "AB": [
+          "1.963961012123931431394877368740575066707624247186273672545960910",
+          "-8.837824554557691441276948159332587800184309112338231526456824096"
+        ],
+        "B": [
+          "0.0",
+          "1.963961012123931431394877368740575066707624247186273672545960910"
+        ],
+        "beta": "7/3",
+        "case_id": "kalman_scaled",
+        "controllability_det": "-3.857142857142857142857142857142857142857142857142857142857142857",
+        "controllability_rank": 2,
+        "gamma": "9/2",
+        "hypoelliptic_for_t_positive": true,
+        "omega": "5/2"
+      }
+    ],
+    "rate_rows": [
+      {
+        "beta": "2",
+        "case_id": "rate_zero",
+        "critical_polynomial_prefactor": false,
+        "eigen_imag_abs": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_minus_real": "0.0",
+        "eigen_plus_real": "0.0",
+        "gamma": "0",
+        "omega": "1",
+        "rate": "0.0",
+        "rate_at_critical": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "underdamped_zero_damping"
+      },
+      {
+        "beta": "2",
+        "case_id": "rate_under",
+        "critical_polynomial_prefactor": false,
+        "eigen_imag_abs": "0.8660254037844386467637231707529361834714026269051903140279034897",
+        "eigen_minus_real": "-0.5000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-0.5000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "1",
+        "omega": "1",
+        "rate": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "rate_at_critical": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "underdamped"
+      },
+      {
+        "beta": "2",
+        "case_id": "rate_under_near",
+        "critical_polynomial_prefactor": false,
+        "eigen_imag_abs": "0.3122498999199199102923446560469897230536479988995828154226485965",
+        "eigen_minus_real": "-0.9500000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-0.9500000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "19/10",
+        "omega": "1",
+        "rate": "0.9500000000000000000000000000000000000000000000000000000000000000",
+        "rate_at_critical": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "underdamped"
+      },
+      {
+        "beta": "2",
+        "case_id": "rate_critical",
+        "critical_polynomial_prefactor": true,
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "2",
+        "omega": "1",
+        "rate": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "rate_at_critical": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "critical"
+      },
+      {
+        "beta": "2",
+        "case_id": "rate_over",
+        "critical_polynomial_prefactor": false,
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-2.618033988749894848204586834365638117720309179805762862135448623",
+        "eigen_plus_real": "-0.3819660112501051517954131656343618822796908201942371378645513773",
+        "gamma": "3",
+        "omega": "1",
+        "rate": "0.3819660112501051517954131656343618822796908201942371378645513773",
+        "rate_at_critical": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "overdamped"
+      },
+      {
+        "beta": "2",
+        "case_id": "rate_over_strong",
+        "critical_polynomial_prefactor": false,
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-7.872983346207416885179265399782399610832921705291590826587573766",
+        "eigen_plus_real": "-0.1270166537925831148207346002176003891670782947084091734124262339",
+        "gamma": "8",
+        "omega": "1",
+        "rate": "0.1270166537925831148207346002176003891670782947084091734124262339",
+        "rate_at_critical": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "overdamped"
+      },
+      {
+        "beta": "7/2",
+        "case_id": "rate_scaled",
+        "critical_polynomial_prefactor": true,
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-3.000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-3.000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "6",
+        "omega": "3",
+        "rate": "3.000000000000000000000000000000000000000000000000000000000000000",
+        "rate_at_critical": "3.000000000000000000000000000000000000000000000000000000000000000",
+        "regime": "critical"
+      }
+    ],
+    "regime_rows": [
+      {
+        "alpha": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "beta": "2",
+        "case_id": "under_short",
+        "det_M": "0.7165313105737892504256040969253796674531120598214791571408702071",
+        "eigen_imag_abs": "0.8660254037844386467637231707529361834714026269051903140279034897",
+        "eigen_minus_real": "-0.5000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-0.5000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "1",
+        "m11": "0.9505848919548983247068199899037314756723545660454959732101767913",
+        "m12": "0.2782579744652034704103420494289244581240766133867390130788469143",
+        "m21": "-0.2782579744652034704103420494289244581240766133867390130788469143",
+        "m22": "0.6723269174896948542964779404748070175482779526587569601313298770",
+        "omega": "1",
+        "regime": "underdamped",
+        "time": "1/3",
+        "trace_M": "1.622911809444593179003297930378538493220632518704252933341506668"
+      },
+      {
+        "alpha": "0.5000000000000000000000000000000000000000000000000000000000000000",
+        "beta": "5/2",
+        "case_id": "under_long",
+        "det_M": "0.2465969639416064769398612398337676330642837742414514892465683565",
+        "eigen_imag_abs": "1.414213562373095048801688724209698078569671875376948073176679738",
+        "eigen_minus_real": "-0.5000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-0.5000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "1",
+        "m11": "-0.03645367722268623915839491057716295223089833531891141116692324543",
+        "m12": "0.3221622063999564039860877863735234206718691537483833362693608010",
+        "m21": "-0.7248649643999019089686975193404276965117055959338625066060618022",
+        "m22": "-0.3586158836226426431444826969506863729027674890672947474362840464",
+        "omega": "3/2",
+        "regime": "underdamped",
+        "time": "7/5",
+        "trace_M": "-0.3950695608453288823028776075278493251336658243862061586032072918"
+      },
+      {
+        "alpha": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "beta": "3",
+        "case_id": "critical",
+        "det_M": "0.4493289641172215914301023850155627959342149412721844908979893344",
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_plus_real": "-1.000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "2",
+        "m11": "0.9384480644498950210422060952069565007117732952951370798444744643",
+        "m12": "0.2681280184142557202977731700591304287747923700843248799555641327",
+        "m21": "-0.2681280184142557202977731700591304287747923700843248799555641327",
+        "m22": "0.4021920276213835804466597550886956431621885551264873199333461990",
+        "omega": "1",
+        "regime": "critical",
+        "time": "2/5",
+        "trace_M": "1.340640092071278601488865850295652143873961850421624399777820663"
+      },
+      {
+        "alpha": "1.500000000000000000000000000000000000000000000000000000000000000",
+        "beta": "2",
+        "case_id": "over_mild",
+        "det_M": "0.1053992245618643367832176892406980972684910733772778671488440914",
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-2.618033988749894848204586834365638117720309179805762862135448623",
+        "eigen_plus_real": "-0.3819660112501051517954131656343618822796908201942371378645513773",
+        "gamma": "3",
+        "m11": "0.8551995042373819115634640035758062943567576233116067430097424091",
+        "m12": "0.2730433627750083505545348329415405384072135805042219872221766315",
+        "m21": "-0.2730433627750083505545348329415405384072135805042219872221766315",
+        "m22": "0.03606941591235685989985950475118467913511688179894078134321251458",
+        "omega": "1",
+        "regime": "overdamped",
+        "time": "3/4",
+        "trace_M": "0.8912689201497387714633235083269909734918745051105475243529549236"
+      },
+      {
+        "alpha": "3.000000000000000000000000000000000000000000000000000000000000000",
+        "beta": "7/3",
+        "case_id": "over_strong",
+        "det_M": "0.006737946999085467096636048423148424248849585027355085430305531573",
+        "eigen_imag_abs": "0.0",
+        "eigen_minus_real": "-5.236067977499789696409173668731276235440618359611525724270897245",
+        "eigen_plus_real": "-0.7639320225002103035908263312687237645593816403884742757291027546",
+        "gamma": "6",
+        "m11": "0.6172857074438804813451570793644101311290280069917184859793473392",
+        "m12": "0.1154588839459658612870763619408024133185138024115542780625484783",
+        "m21": "-0.4618355357838634451483054477632096532740552096462171122501939132",
+        "m22": "-0.07546759623191468637730109228040434878205480747760718239594353064",
+        "omega": "2",
+        "regime": "overdamped",
+        "time": "5/6",
+        "trace_M": "0.5418181112119657949678559870840057823469731995141113035834038085"
+      },
+      {
+        "alpha": "0.0",
+        "beta": "5",
+        "case_id": "zero_damping",
+        "det_M": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "eigen_imag_abs": "1.500000000000000000000000000000000000000000000000000000000000000",
+        "eigen_minus_real": "0.0",
+        "eigen_plus_real": "0.0",
+        "gamma": "0",
+        "m11": "0.5403023058681397174009366074429766037323104206179222276700972554",
+        "m12": "0.5609806565385976711016682144201993330817087071989140437818344733",
+        "m21": "-1.262206477211844759978753482445448499433844591197556598509127565",
+        "m22": "0.5403023058681397174009366074429766037323104206179222276700972554",
+        "omega": "3/2",
+        "regime": "underdamped_zero_damping",
+        "time": "2/3",
+        "trace_M": "1.080604611736279434801873214885953207464620841235844455340194511"
+      }
+    ],
+    "serialized_significant_digits": 64,
+    "transition_rows": [
+      {
+        "beta": "2",
+        "case_id": "tr_under",
+        "cov_det": "0.003107179790164159762054862336309226682970091736477152687589933795",
+        "cov_pp": "0.2945141182759768250528345918713282661599806451939501591882312623",
+        "cov_qp": "0.07119470129275941766985262541693152691504724655574265619584637452",
+        "cov_qq": "0.02776052071863033367351324772055975348305397276312022893303020442",
+        "covariance_positive_definite": true,
+        "det_M": "0.6065306597126334236037995349911804534419181354871869556828921587",
+        "gamma": "1",
+        "mean_p": "-0.3330814637196411200030167520930852075754312100192963651620167868",
+        "mean_q": "0.1475934274583441373539517649773328271153428852269284537120076955",
+        "omega": "1",
+        "p0": "-2/5",
+        "q0": "1/3",
+        "regime": "underdamped",
+        "time": "1/2"
+      },
+      {
+        "beta": "3",
+        "case_id": "tr_under2",
+        "cov_det": "0.01451334930718565338978070160363072491342023225548841770398768577",
+        "cov_pp": "0.2217536016322582327020954160111361162329462477495461303756170808",
+        "cov_qp": "0.006602866644221490862951433354215218152519289604615592374147009289",
+        "cov_qq": "0.06564469324492560742889929671971718314768851858881364267185239507",
+        "covariance_positive_definite": true,
+        "det_M": "0.2635971381157267700790339456336698995356705824358755598442394945",
+        "gamma": "1",
+        "mean_p": "-0.09762006026033513928333585764236655363077439266909895418795395831",
+        "mean_q": "0.2879231678517864865829071415793627363659520916434450075059384829",
+        "omega": "2",
+        "p0": "3/4",
+        "q0": "-1/2",
+        "regime": "underdamped",
+        "time": "4/3"
+      },
+      {
+        "beta": "2",
+        "case_id": "tr_critical",
+        "cov_det": "0.01365246607785932272911231292835155114019211694139502369255650127",
+        "cov_pp": "0.4216895049028274548723058221583621604074816843641131059035671073",
+        "cov_qp": "0.1084299162883927547921919385499600855896407447266126225950609283",
+        "cov_qq": "0.06025645060818493889833269365849520844201253527540436392003067951",
+        "covariance_positive_definite": true,
+        "det_M": "0.3011942119122020966449776070832224599712242909072572849862803565",
+        "gamma": "2",
+        "mean_p": "-0.7317488481253685768379452229767571671097492755875040893076161564",
+        "mean_q": "1.646434908282079297885376751697703625996935870071884200942136352",
+        "omega": "1",
+        "p0": "-1/3",
+        "q0": "2",
+        "regime": "critical",
+        "time": "3/5"
+      },
+      {
+        "beta": "2",
+        "case_id": "tr_over",
+        "cov_det": "0.02458192563238420838119941774582267549234624505578040737067408845",
+        "cov_pp": "0.4613357873974912283651675330198666763688837306548046917765615012",
+        "cov_qp": "0.1082195616476619938301535600574969555712106659185337003917643047",
+        "cov_qq": "0.07867024442291009825037229183515805350985272568001832557998671194",
+        "covariance_positive_definite": true,
+        "det_M": "0.1353352832366126918939994949724844034076315459095758814681588727",
+        "gamma": "3",
+        "mean_p": "0.3045940026805360990181423288872306342951539238141353009999400582",
+        "mean_q": "-0.7434883910937411330566688448054424023715950121696028962746108990",
+        "omega": "1",
+        "p0": "1/2",
+        "q0": "-1",
+        "regime": "overdamped",
+        "time": "2/3"
+      },
+      {
+        "beta": "4",
+        "case_id": "tr_over2",
+        "cov_det": "0.01435256525075292424208306177657260296235579200195620634204283884",
+        "cov_pp": "0.2382379229274453151547424869090042955426999453626987910639199579",
+        "cov_qp": "0.02387298132611805119574065545542505420550279383485922185306346865",
+        "cov_qq": "0.06263689804202459331155919598994657266152061003005769196615461169",
+        "covariance_positive_definite": true,
+        "det_M": "0.002928299694818187831092089672981289882729425790750585493829645127",
+        "gamma": "5",
+        "mean_p": "-0.2831733902424096276960498347808256850022657782586572075055936692",
+        "mean_q": "0.5899606132811354846363205515978573506330161573019979568235329391",
+        "omega": "3/2",
+        "p0": "2",
+        "q0": "1/2",
+        "regime": "overdamped",
+        "time": "7/6"
+      },
+      {
+        "beta": "3",
+        "case_id": "tr_zero_damping",
+        "cov_det": "0.0",
+        "cov_pp": "0.0",
+        "cov_qp": "0.0",
+        "cov_qq": "0.0",
+        "covariance_positive_definite": false,
+        "det_M": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "gamma": "0",
+        "mean_p": "-0.7733321020531549952875676328814840044830073172778483665356866453",
+        "mean_q": "-0.3487125981300693959653263143100149201832337743956537221968151442",
+        "omega": "2",
+        "p0": "-4/5",
+        "q0": "1/3",
+        "regime": "underdamped_zero_damping",
+        "time": "5/7"
+      },
+      {
+        "beta": "7/2",
+        "case_id": "tr_small_time",
+        "cov_det": "0.00000004138268933537417623546487858935018399145312420253783621996032617",
+        "cov_pp": "0.01386255697545907601916616286485605035459089846064423426245891256",
+        "cov_qp": "0.0003465326182265327154768253567272342132366172820557883719699317208",
+        "cov_qq": "0.00001164774616372408808508059305685303887114293381457382190764940272",
+        "covariance_positive_definite": true,
+        "det_M": "0.9753099120283326686269864238128062518302307617334768740381082974",
+        "gamma": "1/2",
+        "mean_p": "0.0",
+        "mean_q": "0.0",
+        "omega": "5/2",
+        "p0": "0",
+        "q0": "0",
+        "regime": "underdamped",
+        "time": "1/20"
+      },
+      {
+        "beta": "5",
+        "case_id": "tr_long_time",
+        "cov_det": "0.02778329207666890047647051119254756684031851620126006127912223362",
+        "cov_pp": "0.1959091427104060919466529979522997698351612066032643368727431237",
+        "cov_qp": "0.01526921474803219030282522149617404851491552698219485931899181183",
+        "cov_qq": "0.1430073176171490485783210618560598037535455102491725110014983791",
+        "covariance_positive_definite": true,
+        "det_M": "0.00001670170079024565931263551736058087907793804695928712447812473711",
+        "gamma": "4",
+        "mean_p": "-0.1887392757268095096203780387124468356072071747676231663816674306",
+        "mean_q": "0.7043717935912422209912740399836822450055221900100006729028325434",
+        "omega": "1",
+        "p0": "-1/2",
+        "q0": "3/2",
+        "regime": "overdamped",
+        "time": "11/4"
+      }
+    ],
+    "working_decimal_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "The diffusion has no intrinsic rational-prime primitive carrier, prime-power repetition law, target divisor, or Hilbert--Polya operator.",
+    "strongest_positive": "Exact all-damping Gaussian and drift identities are source-local and independently testable.",
+    "tuple": [
+      "A0_FAIL",
+      "A1_FAIL",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c237-kramers-harmonic-mehler-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "0ebc633706bc34b8b915a44749423486fd4cd243",
+  "theorem": {
+    "correlations": "Under Gibbs stationarity, Cov(X_t,X_0)=M_t Sigma, hence C_QQ=m11/(beta omega^2), C_QP=m12/beta, C_PQ=m21/(beta omega^2), and C_PP=m22/beta.",
+    "covariance_mehler": "For gamma>0, X_t|X_0=x is N(M_t x,Sigma-M_t Sigma M_t^T), where Sigma=diag(1/(beta omega^2),1/beta); the covariance is positive definite for every t>0. At gamma=0 it is identically zero.",
+    "gibbs_invariant": "The centered Gaussian Gibbs law with covariance Sigma and density beta omega/(2 pi) exp[-beta(omega^2 Q^2+P^2)/2] is invariant; it is unique when gamma>0 and omega>0.",
+    "kalman_hypoellipticity": "With B=(0,sqrt(2 gamma/beta))^T, [B,AB] has determinant -2 gamma/beta and rank two exactly when gamma>0, giving a smooth positive Gaussian kernel for t>0.",
+    "l2_boundary": "No full nonnormal L2 spectral decomposition is claimed; only the finite-dimensional drift, Gaussian kernel, invariant covariance and stated correlation/rate identities are certified.",
+    "matrix_exponential": "For A=[[0,1],[-omega^2,-gamma]], M_t=exp(tA) is e^{-gamma t/2}[[c+alpha s,s],[-omega^2 s,c-alpha s]], with alpha=gamma/2 and (c,s)=(cos(nu t),sin(nu t)/nu) underdamped, (1,t) critical, or (cosh(delta t),sinh(delta t)/delta) overdamped.",
+    "rate_atlas": "The drift eigenvalues are -gamma/2 plus or minus sqrt(gamma^2/4-omega^2); the spectral-abscissa decay rate is r=gamma/2 for 0<=gamma<=2 omega and r=gamma/2-sqrt(gamma^2/4-omega^2) for gamma>=2 omega. At gamma=2 omega, M_t has a t exp(-omega t) prefactor and r is maximized at omega.",
+    "zero_damping": "At gamma=0 the flow is the deterministic Hamiltonian oscillator, Sigma is preserved but no noise, irreducibility, or mixing is present.",
+    "zero_frequency_boundary": "At omega=0 the position is unconfined and no finite Gibbs probability with the displayed covariance exists; this is not silently included in the omega>0 theorem."
+  }
+}

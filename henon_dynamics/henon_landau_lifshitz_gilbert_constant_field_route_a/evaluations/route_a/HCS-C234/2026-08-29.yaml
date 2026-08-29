@@ -1,0 +1,75 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C234
+title: Constant-field Landau--Lifshitz--Gilbert sphere flow
+evaluation_date: 2026-08-29
+source_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+code_commit: 0ebc633706bc34b8b915a44749423486fd4cd243
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+candidate_definition: "constant-field Landau--Lifshitz--Gilbert macrospin ODE on the unit sphere"
+family: "dissipative spin vector field / sphere flow"
+phase_space: "S^2 = {(m1,m2,m3): m1^2+m2^2+m3^2=1}"
+dynamics: "m_dot=-omega m cross e3-alpha omega m cross (m cross e3)"
+parameters: "alpha>=0, omega>=0"
+parameter_provenance: "source-defined physical sentinels; no target fitting"
+arithmetic_origin: none
+clock: "physical ODE time; pure-precession latitude circles are continuous families"
+normalization: "unit sphere and normalized Gilbert convention with (1+alpha^2) absorbed"
+determinant_convention: "none; no orbit or Fredholm determinant"
+orbit_cutoff: "6 flow, 4 stability, 5 boundary, and 6 sampled-time rows"
+precision: "exact rational sentinels, 90-decimal mpmath, independent symbolic identities"
+training_data: none
+forbidden_data: "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators"
+artifact_paths:
+  evidence: results/c234_llg_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+frozen_model:
+  equation: m_dot=-omega m cross e3-alpha omega m cross (m cross e3)
+  phase_space: unit sphere S^2
+  parameters: alpha>=0, omega>=0
+  normalization: usual (1+alpha^2) Gilbert factor absorbed into omega/time
+  stereographic_coordinate: z=(m1+i m2)/(1+m3)
+  clock: physical ODE time; pure-precession latitude circles are continuous families
+  primitive_periodic_orbit: false
+  forbidden_data: target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+claims:
+  exact_flow: stereographic exponential and m3 tanh solution
+  stability: north attractor and south repeller on positive damping face
+  boundaries: alpha=0 periodic latitudes, omega=0 identity, sampled-time fixed-set split
+  arithmetic: none
+  periodic_orbit_owner: none
+nonclaims:
+  - The formulas are classical source-local identities, not a literature-priority claim.
+  - Pure-precession latitudes are nonisolated circles and do not define an isolated primitive ledger.
+  - Pole stability is for the sphere ODE and is not a micromagnetic PDE theorem.
+  - Sampled-time fixed sets do not encode primes, zeros or a target divisor.
+  - No arithmetic local datum, Euler product, automorphy, Hilbert-Polya operator or Route-B input is claimed.
+evidence:
+  artifact: results/c234_llg_evidence.json
+  producer: code/c234_llg_producer.py
+  independent_checker: code/c234_llg_checker.py
+  sympy_crosscheck: code/c234_llg_sympy_crosscheck.py
+  replay: code/c234_llg_replay.py
+  mutation: code/c234_llg_mutation.py
+  regression_rows: 21
+  working_decimal_digits: 90
+citations:
+  - id: Lakshmanan2011
+    title: "The fascinating world of the Landau--Lifshitz--Gilbert equation: an overview"
+    authors: "M. Lakshmanan"
+    venue: "Philosophical Transactions of the Royal Society A 369(1939), 1280--1300"
+    year: 2011
+    doi: 10.1098/rsta.2010.0319
+    role: "classical LLG convention and dynamical context"
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS

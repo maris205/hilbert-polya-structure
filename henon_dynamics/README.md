@@ -2656,3 +2656,31 @@ per-paper evaluator YAML files and remain `ROUTE_A_REJECTED`, with
 `route_b_invocation_allowed: false`.  The common scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic or operator bridge is
 claimed.
+
+## Route-A independent cross-subtype round C234--C238
+
+This round takes one large, complete theorem step per paper and changes the
+dynamical owner in every slot: a dissipative spin flow on the sphere, a cyclic
+population replicator, an integrable hyperbolic field equation, a hypoelliptic
+phase-space diffusion, and a nonsmooth dry-friction inclusion.  Each package
+closes its declared parameter/boundary atlas, executable evidence, three
+substantive manuscript revisions, and content-addressed release manifest.  The
+five papers are independent owners, not installments of one theorem.
+
+- [C234 constant-field Landau--Lifshitz--Gilbert sphere flow](henon_landau_lifshitz_gilbert_constant_field_route_a/README.md) · [paper PDF](henon_landau_lifshitz_gilbert_constant_field_route_a/paper/main.pdf)
+- [C235 rock--paper--scissors uniform-mutation replicator](henon_rock_paper_scissors_uniform_mutation_route_a/README.md) · [paper PDF](henon_rock_paper_scissors_uniform_mutation_route_a/paper/main.pdf)
+- [C236 sine--Gordon kink and breather coherent families](henon_sine_gordon_kink_breather_route_a/README.md) · [paper PDF](henon_sine_gordon_kink_breather_route_a/paper/main.pdf)
+- [C237 harmonic Kramers--Langevin Mehler flow](henon_kramers_harmonic_langevin_mehler_route_a/README.md) · [paper PDF](henon_kramers_harmonic_langevin_mehler_route_a/paper/main.pdf)
+- [C238 Coulomb dry-friction Filippov oscillator](henon_coulomb_dry_friction_filippov_route_a/README.md) · [paper PDF](henon_coulomb_dry_friction_filippov_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C234_C238.md), [batch plan](BATCH_PLAN_C234_C238.md),
+and [batch review](BATCH_REVIEW_C234_C238.md) for collision screening,
+theorem increments, exact audit counts, release hashes and the complete PDF
+reproducibility record.  The round closes 2,092 independent-checker
+assertions, 92 symbolic/algebra checks, 163 hostile rejections, 135
+content-addressed payloads (140 physical files), and 11 final-paper pages
+with 111 embedded subset-font entries.  All five strict tuples are recorded
+in their evaluator YAML files and remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false`.  The common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic or operator bridge is
+claimed.

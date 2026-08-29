@@ -3,6 +3,28 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C234--HCS-C238 additions (2026-08-29)
+
+Five cross-subtype Route-A candidates were released from the common baseline
+`0ebc633706bc34b8b915a44749423486fd4cd243`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; `NEW` does not assert literature
+priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C234 | Constant-field LLG on `S^2` has an exact stereographic exponential and `m_3` tanh flow, damping-selected poles, energy law, conservative latitude circles, identity face, and a sampled fixed-set atlas. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_landau_lifshitz_gilbert_constant_field_route_a/`](../henon_landau_lifshitz_gilbert_constant_field_route_a/) |
+| HCS-C235 | Cyclic RPS with additive uniform mutation closes the positive-rate zero-mutation product/period atlas, heteroclinic and identity faces, and a global Lyapunov/LaSalle contraction theorem. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_rock_paper_scissors_uniform_mutation_route_a/`](../henon_rock_paper_scissors_uniform_mutation_route_a/) |
+| HCS-C236 | Sine--Gordon closes all declared vacuum-layer monotone kink/antikink heteroclinics, rest/comoving breathers, Lorentz ledger, and the rest-kink Hessian factorization. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_sine_gordon_kink_breather_route_a/`](../henon_sine_gordon_kink_breather_route_a/) |
+| HCS-C237 | Harmonic Kramers--Langevin closes the all-damping Mehler/Gibbs/Kalman flow, stationary correlations, critical spectral-abscissa rate, and explicit degenerate boundaries. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_kramers_harmonic_langevin_mehler_route_a/`](../henon_kramers_harmonic_langevin_mehler_route_a/) |
+| HCS-C238 | The frozen Coulomb Sign graph closes forward stick--slip viability, shifted arcs, exact capture count/phase, half-cycle map, energy law, and the harmonic boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_coulomb_dry_friction_filippov_route_a/`](../henon_coulomb_dry_friction_filippov_route_a/) |
+
+All five are `ROUTE_A_REJECTED` with `route_b_invocation_allowed: false`.
+No target divisor/counting law, arithmetic local datum, Euler factor, root
+number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
+introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C229--HCS-C233 additions (2026-08-29)
 
 Five cross-subtype Route-A candidates were released from the common baseline
