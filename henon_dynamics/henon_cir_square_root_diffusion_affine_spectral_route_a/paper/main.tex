@@ -1,0 +1,186 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\E}{\mathbb E}
+\newcommand{\PP}{\mathbb P}
+\title{An All-Face Affine and Laguerre Theorem for the CIR\ Square-Root Diffusion}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close one theorem across the full nonnegative parameter cone of the
+Cox--Ingersoll--Ross square-root diffusion.  The scale/speed test separates
+the entrance face $2\kappa\theta\geq\sigma^2$ from the regular,
+instantaneously reflecting face, while zero-dimensional and zero-noise faces
+are treated as distinct degenerations.  A single affine Riccati flow gives all
+Laplace transforms and, in the interior, the noncentral chi-square transition
+law.  The invariant Gamma law puts the generator in Laguerre form: the exact
+reversible kernel, sharp gap $\kappa$, and $L^2$/chi-square/TV contraction
+follow from one orthogonal expansion.  This is a stochastic Markov-semigroup
+result, not a primitive-orbit zeta or a Hilbert--Pólya construction.
+Independent exact reconstruction (235 assertions), symbolic identities (18),
+byte replay and 20 hostile mutations audit the certificate.
+\end{abstract}
+
+\section{Object and boundary atlas}
+We freeze, in physical time $t\geq0$,
+\begin{equation}
+ dX_t=\kappa(\theta-X_t)\,dt+\sigma\sqrt{X_t}\,dW_t,
+ \qquad X_0=x\geq0,\quad \kappa,\theta,\sigma\geq0 . \tag{1}
+\end{equation}
+The square-root modulus gives a unique nonnegative strong solution.  The
+interior generator is
+$\mathcal Lf=\kappa(\theta-x)f'+(\sigma^2/2)xf''$.
+
+\begin{theorem}[Feller and degenerate-face classification]\label{thm:feller}
+Assume $\kappa,\theta,\sigma>0$ and write
+$\alpha=2\kappa\theta/\sigma^2$.  The origin is an entrance (hence
+inaccessible from $x>0$) iff $\alpha\geq1$, including equality
+$2\kappa\theta=\sigma^2$.  If $0<\alpha<1$, it is regular and the canonical
+CIR solution is instantaneously reflecting.  If $\theta=0$ or $\kappa=0$
+with $\sigma>0$, the dimension is zero and $0$ is absorbing.  If $\sigma=0$
+and $\kappa>0$, the path is deterministic,
+$X_t=\theta+(x-\theta)e^{-\kappa t}$; when also $\theta=0$ it decays toward
+the absorbing origin.  If $\kappa=\sigma=0$, every starting point is
+constant.
+\end{theorem}
+\begin{proof}
+Near zero the scale density is proportional to $x^{-\alpha}$ and the speed
+density to $x^{\alpha-1}$.  The scale integral diverges exactly for
+$\alpha\geq1$, while the speed integral is finite for every $\alpha>0$;
+Feller's test gives entrance versus regular.  At dimension zero the SDE has
+no inward drift at the boundary and pathwise uniqueness makes it absorbing.
+Setting $\sigma=0$ reduces (1) to the displayed ODE, which also resolves the
+remaining faces.
+\end{proof}
+
+\section{Affine transform and transition law}
+For $u\geq0$, use
+$\E_xe^{-uX_t}=\exp[-\phi_t(u)-\psi_t(u)x]$.  Substitution in the backward
+equation gives
+\begin{equation}
+ \psi'=-\kappa\psi-\tfrac12\sigma^2\psi^2,\quad
+ \phi'=\kappa\theta\psi,\qquad \psi(0)=u,\ \phi(0)=0. \tag{2}
+\end{equation}
+For $\kappa,\sigma>0$, put $h_t=\sigma^2(1-e^{-\kappa t})/(2\kappa)$; then
+\begin{equation}
+ \psi_t=\frac{ue^{-\kappa t}}{1+h_tu},\qquad
+ \phi_t=\frac{2\kappa\theta}{\sigma^2}\log(1+h_tu). \tag{3}
+\end{equation}
+The continuous faces are $\psi=u/(1+\sigma^2tu/2),\phi=0$ for $\kappa=0$,
+and $\psi=ue^{-\kappa t},\phi=\theta u(1-e^{-\kappa t})$ for $\sigma=0$;
+with both rates zero, $(\phi,\psi)=(0,u)$.
+
+Equation (3) is equivalently
+\begin{equation}
+ X_t=c_t\,\chi'^2_{\,4\kappa\theta/\sigma^2}(\lambda_t),\quad
+ c_t=\frac{\sigma^2(1-e^{-\kappa t})}{4\kappa},\quad
+ \lambda_t=\frac{4\kappa e^{-\kappa t}x}{\sigma^2(1-e^{-\kappa t})}. \tag{4}
+\end{equation}
+For dimension zero, (4) is interpreted with its atom at zero; for example
+when $\theta=0$, $\PP_x(X_t=0)=\exp[-xe^{-\kappa t}/h_t]$.
+
+\section{Gamma law, Laguerre kernel and gap}
+On the positive interior set $\beta=\sigma^2/(2\kappa)$.  The density
+\begin{equation}
+ \pi(x)=\frac{x^{\alpha-1}e^{-x/\beta}}{\Gamma(\alpha)\beta^\alpha}
+ \tag{5}
+\end{equation}
+is invariant and unique; its mean and variance are $\theta$ and
+$\theta\sigma^2/(2\kappa)$.  With $z=x/\beta$,
+\begin{equation}
+ \mathcal L=\kappa\{z\partial_z^2+(\alpha-z)\partial_z\}. \tag{6}
+\end{equation}
+The Laguerre equation and orthogonality are
+\[
+ zL_n''+(\alpha-z)L_n'+nL_n=0,\qquad
+ \int_0^\infty L_nL_m z^{\alpha-1}e^{-z}dz
+ =\frac{\Gamma(n+\alpha)}{n!}\delta_{nm}.
+\]
+Consequently, for $t>0$ the exact reversible transition kernel is
+\begin{equation}
+ p_t(x,y)=\pi(y)K_t(x,y),\quad
+ K_t=\sum_{n\geq0}e^{-\kappa nt}\frac{n!\Gamma(\alpha)}{\Gamma(n+\alpha)}
+ L_n^{(\alpha-1)}(x/\beta)L_n^{(\alpha-1)}(y/\beta). \tag{7}
+\end{equation}
+
+\begin{proposition}[Sharp mixing]\label{prop:gap}
+For $f\in L^2(\pi)$,
+\[
+ \operatorname{Var}_\pi(P_tf)\leq e^{-2\kappa t}\operatorname{Var}_\pi(f).
+\]
+If $d\mu/d\pi\in L^2(\pi)$, then
+$\chi^2(\mu P_t\,||\,\pi)\leq e^{-2\kappa t}\chi^2(\mu\,||\,\pi)$ and
+$\|\mu P_t-\pi\|_{\rm TV}\leq\tfrac12e^{-\kappa t}
+\sqrt{\chi^2(\mu\,||\,\pi)}$.  The first Laguerre mode attains equality,
+so the gap is exactly $\kappa$.
+\end{proposition}
+\begin{proof}
+Equation (6) is symmetric in $L^2(\pi)$ and (7) diagonalizes its closure.
+All nonconstant modes have eigenvalues at most $-\kappa$; Parseval gives the
+variance and chi-square bounds, and Cauchy--Schwarz gives TV.  The mode
+$L_1^{(\alpha-1)}=\alpha-z$ has eigenvalue $-\kappa$.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Controls and claim boundary}
+The certificate freezes eight rational boundary controls, seven transform
+controls and three Gamma controls, together with nine Laguerre modes, three
+kernel rows, five gap rows and three dimension-zero atom rows.  The
+noncentral-chi-square and Gamma statements are exact identities; decimals are
+only 90-digit regression serialization.  Cox--Ingersoll--Ross
+\href{https://doi.org/10.2307/1911252}{(1985)}, Feller
+\href{https://doi.org/10.2307/1906748}{(1951)}, and standard square-root
+diffusion analyses provide context, not hidden data.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Reproducibility and Route-A result}
+The producer-independent checker passes 235 assertions; SymPy reconstructs 18
+generic identities; clean replay is byte identical; and 20/20 repaired-hash,
+schema, numeric, provenance and scope mutations are rejected.  The two
+substantive revisions and fixed-epoch double builds are recorded beside this
+PDF.
+
+The strict evaluator tuple is
+\[
+(\mathtt{A0\_FAIL},\mathtt{A1\_FAIL},\mathtt{A2\_FAIL},\mathtt{A3\_FAIL},
+ \mathtt{A4\_FORMAL\_HINT}),\qquad
+\mathtt{overall=ROUTE\_A\_REJECTED}.
+\]
+The Laguerre modes are stochastic semigroup modes, not primitive arithmetic
+orbits; (7) is not a target Fredholm determinant, and no analytic continuation,
+arithmetic counting law, Euler factor, target divisor or Hilbert--Pólya
+operator is claimed.  Route B is false.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{cir} J. C. Cox, J. E. Ingersoll and S. A. Ross, ``A Theory of the
+Term Structure of Interest Rates,'' \emph{Econometrica} 53 (1985), 385--407.
+\href{https://doi.org/10.2307/1911252}{DOI}.
+\bibitem{feller} W. Feller, ``Two singular diffusion problems,''
+\emph{Annals of Mathematics} 54 (1951), 173--182.
+\href{https://doi.org/10.2307/1969318}{DOI}.
+\bibitem{alfonsi} A. Alfonsi, ``High order discretization schemes for the CIR
+process,'' \emph{Monte Carlo Methods and Applications} 16 (2010), 1--28.
+\href{https://doi.org/10.1090/S0025-5718-09-02252-2}{DOI}.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \nolinkurl{NO_BAD_EULER_OR_ROOT_NUMBER}; no target arithmetic,
+Euler-factor, target-zero, automorphy, or Hilbert--Pólya claim.  \textbf{Data
+and code.} All exact formulas, ledgers and audit programs accompany HCS-C229.
+\textbf{AI-use disclosure.} Generative tools assisted drafting and code
+generation; internal checks validate the displayed identities.  This is not
+external peer review.
+\end{document}

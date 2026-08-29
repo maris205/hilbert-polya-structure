@@ -1,0 +1,80 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C230
+candidate_definition: finite open Toda Hamiltonian flow represented by a positive Jacobi Lax pair
+family: finite nonperiodic integrable Hamiltonian lattice
+phase_space: R^{2N}, N>=2, with positive Flaschka edges
+dynamics: qdot_j=p_j; pdot_j=exp(q_{j-1}-q_j)-exp(q_j-q_{j+1}); Ldot=[B,L]
+parameters: N, positive edge variables a_j, real diagonal variables b_j
+parameter_provenance: source-defined rational Flaschka sentinels; no target fitting
+arithmetic_origin: none
+clock: continuous Hamiltonian time t in R
+normalization: a_j=1/2 exp((q_j-q_{j+1})/2), b_j=-p_j/2; H=4 tr(L^2)/2
+determinant_convention: finite characteristic polynomial det(lambda I-L) only; no orbit/Fredholm determinant
+orbit_cutoff: no primitive periodic-orbit enumeration; six source rows and finite endpoint diagnostics
+precision: exact rational sentinels, 90-decimal mpmath, independent symbolic identities
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+code_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+artifact_paths:
+  evidence: results/c230_open_toda_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: finite open Toda Hamiltonian and positive Jacobi Lax matrix
+  arithmetic_origin: none
+  clock: continuous Hamiltonian time
+  normalization: Flaschka convention and H=4 I_2
+  cutoff: six rational rows, times -2,-1,0,1,2, endpoint T=8
+  precision: exact rational and high-precision independent reconstruction
+  allowed_data: Hamiltonian equations, Lax traces, Jacobi eigenvalues, norming weights, N=2 formula and finite controls
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native exponential Hamiltonian and Lax invariants
+  strongest_failure: no intrinsic rational-prime carrier, prime-power repetition, or arithmetic clock
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: complete source-local scattering and norming ledger, with no periodic-orbit owner
+  strongest_failure: open trajectories are scattering paths rather than primitive periodic cycles
+  metrics: {primitive_orbit_rows: 0, finite_lax_rows: 30, endpoint_rows: 6}
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: finite Jacobi characteristic polynomial and isospectral trace identities
+  strongest_failure: no weighted orbit zeta or target Fredholm determinant
+  metrics: {target_zero_match: null, characteristic_polynomial_rows: 6}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact global scattering and action-angle boundary statements
+  strongest_failure: no target continuation, divisor, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md, results/c230_open_toda_evidence.json]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: intrinsic self-adjoint Jacobi matrix and conserved Hamiltonian traces
+  strongest_failure: no natural target quantization or Hilbert-Polya spectral bridge
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [N2 exact sech rows, N3 norming softmax rows, positive-edge simplicity, a_j=0 block split, repeated root x^2(x-1), finite-endpoint warning, unknown and stale hashes]
+  proves_too_much_risk: high if a finite characteristic polynomial is called a dynamical zeta, if the open scattering leaf is called a compact torus, or if endpoint diagnostics are called exact limits
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: global finite open Toda Hamiltonian/Lax/scattering theorem, exact N=2 solution, simple-spectrum norming coordinates, and explicit degenerate boundary only; no arithmetic, target determinant, or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit repetition law
+  - no target determinant or analytic target match
+  - no natural unitary target lift
+next_smallest_test: none inside this source-local theorem; an arithmetic owner would be a distinct project
+round2_clues: []
+route_b_invocation_allowed: false

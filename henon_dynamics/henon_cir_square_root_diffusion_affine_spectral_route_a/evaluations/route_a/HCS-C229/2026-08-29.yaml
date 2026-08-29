@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C229
+candidate_definition: CIR square-root diffusion with affine transform and Gamma/Laguerre semigroup
+family: one-dimensional positive-state stochastic diffusion
+phase_space: "[0, infinity)"
+dynamics: dX=kappa(theta-X)dt+sigma sqrt(X)dW
+parameters: kappa,theta,sigma >= 0; initial x >= 0
+parameter_provenance: source-defined stochastic model; no target fitting
+arithmetic_origin: none
+clock: physical diffusion time
+normalization: alpha=2*kappa*theta/sigma^2; beta=sigma^2/(2*kappa); p_t=pi K_t on interior
+determinant_convention: Markov transition kernel and Laguerre spectral expansion only; no orbit/Fredholm determinant
+orbit_cutoff: no primitive-orbit enumeration; 8 boundary, 7 transform, 3 stationary, 12 kernel, 5 gap and 3 atom rows
+precision: exact rational parameters, 90-digit mpmath, 18 generic SymPy identities
+training_data: none
+forbidden_data: target primes, target zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+code_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+artifact_paths:
+  evidence: results/c229_cir_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: CIR SDE, generator, scale/speed boundary test and Laguerre semigroup
+  arithmetic_origin: none
+  clock: physical diffusion time
+  normalization: Gamma scale beta and Laguerre variable z=x/beta
+  cutoff: no orbit cutoff; finite regression ledger only
+  precision: exact rational controls and high-precision symbolic reconstruction
+  allowed_data: SDE coefficients, Feller index, affine Riccati flow, Gamma law and Laguerre identities
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native stochastic affine structure and exact boundary classification
+  strongest_failure: no intrinsic rational-prime carrier or prime-power repetition semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact semigroup eigenmodes are indexed by Laguerre degree
+  strongest_failure: Laguerre modes are not primitive periodic orbits and carry no arithmetic clock
+  metrics: {primitive_orbit_rows: 0, laguerre_modes: 9}
+  artifacts: [THEOREM_PACKAGE.md, results/c229_cir_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact reversible kernel expansion in an orthogonal basis
+  strongest_failure: the kernel is a stochastic semigroup, not a target Fredholm determinant or zeta
+  metrics: {kernel_rows: 3, target_zero_match: null}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED_NEGATIVE
+  strongest_evidence: complete all-parameter transform and stationary boundary ledger
+  strongest_failure: no arithmetic continuation, divisor, functional equation or counting law
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: self-adjoint reversible generator has a real Laguerre spectrum and exact gap
+  strongest_failure: no natural unitary quantization or self-adjoint operator bridge to an arithmetic target
+  metrics: {route_b_ready: false, gap: kappa}
+  artifacts: [THEOREM_PACKAGE.md, results/c229_cir_evidence.json]
+adversarial_controls:
+  controls_used: [strict_feller_side, equality_face, regular_face, theta_zero, kappa_zero, sigma_zero, all_zero, repaired_hash, forbidden_scope_flag]
+  proves_too_much_risk: high if a Markov eigenvalue is called a target zero or a kernel is called an arithmetic zeta
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact CIR stochastic semigroup theorem, Feller atlas, Gamma/Laguerre spectrum and gap only; no arithmetic, target determinant or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit ledger
+  - no target determinant or analytic target match
+  - no natural unitary lift
+next_smallest_test: none without introducing a new arithmetic dynamical model
+round2_clues: []
+route_b_invocation_allowed: false

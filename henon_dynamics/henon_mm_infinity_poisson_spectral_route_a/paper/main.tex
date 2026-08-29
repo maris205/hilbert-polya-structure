@@ -1,0 +1,157 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{Poisson--Charlier Spectrum and Trace Class for the M/M/$\infty$ Flow}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give a convention-complete theorem for the infinite-server
+immigration--death chain.  The unique positive-rate invariant law is Poisson,
+and the transition kernel is exactly a binomial survivor count convolved with
+a Poisson immigration count.  Charlier polynomials diagonalize the generator
+on $L^2$ of that law, yielding the sharp gap, all relaxation rates, and a
+positive-time trace-class semigroup with an explicit source Fredholm product.
+Coupling gives quantitative total-variation bounds.  Pure-death, pure-birth,
+zero-rate, small-intensity and long-time faces are kept separate.  The source
+semigroup is not relabeled as an arithmetic primitive-orbit determinant.
+Independent exact, symbolic, replay and hostile-mutation audits accompany the
+proof.
+\end{abstract}
+
+\section{Generator and exact kernel}
+For $n\in\mathbb N_0$ let
+\begin{equation}
+ Qf(n)=\lambda\{f(n+1)-f(n)\}+\mu n\{f(n-1)-f(n)\},\qquad \lambda,\mu>0.
+ \label{eq:generator}
+\end{equation}
+Write $\rho=\lambda/\mu$ and $a_t=e^{-\mu t}$.  The physical clock is the
+continuous-time Markov time $t$.
+
+\begin{theorem}[Poisson--Charlier atlas]\label{thm:atlas}
+The unique reversible invariant law of \eqref{eq:generator} is
+\[
+ \pi_n=e^{-\rho}\frac{\rho^n}{n!},\qquad n\ge0.
+\]
+Conditionally on $X_0=n$, one has the exact decomposition
+\[
+ X_t\ \stackrel{d}{=}\ B_{n,a_t}+P_{\rho(1-a_t)},
+ \tag{2}
+\]
+where the summands are independent, $B_{n,a_t}$ is binomial and $P_m$ is
+Poisson with mean $m$.  Equivalently,
+\[
+ \mathbb E[z^{X_t}\mid X_0=n]
+ =((1-a_t)+a_tz)^n e^{\rho(1-a_t)(z-1)}. \tag{3}
+\]
+Define $C_k$ by
+\[
+ \sum_{k\ge0}C_k(n;\rho)\frac{u^k}{k!}=e^{-\rho u}(1+u)^n . \tag{4}
+\]
+Then $\mathbb E_\pi[C_kC_\ell]=k!\rho^k\mathbf1_{k=\ell}$ and, for
+the normalized $\phi_k=C_k/\sqrt{k!\rho^k}$,
+\[
+ Q\phi_k=-k\mu\phi_k,\qquad P_t\phi_k=e^{-k\mu t}\phi_k . \tag{5}
+\]
+Thus the $L^2(\pi)$ gap is $\mu$ and, for $t>0$,
+\[
+ \operatorname{Tr}P_t=\frac1{1-e^{-\mu t}},\qquad
+ \det(I-zP_t)=\prod_{k\ge0}(1-ze^{-k\mu t})
+ \tag{6}
+\]
+in the source-local trace/Fredholm convention.
+\end{theorem}
+
+\begin{proof}
+Detailed balance is $\lambda\pi_n=\mu(n+1)\pi_{n+1}$, which gives the
+Poisson law and reversibility.  Independently thinning each initial customer
+and superposing the stationary immigration process gives (2), hence (3).
+Taking coefficients in (4) gives the displayed Charlier polynomial.  Applying
+\eqref{eq:generator} to that polynomial yields $QC_k=-k\mu C_k$; Poisson
+coefficient orthogonality gives the stated norm and completeness.  The spectral
+expansion then proves (5).  Summing the geometric eigenvalue sequence gives
+the trace in (6), and absolute convergence of $\sum_k|ze^{-k\mu t}|$ gives
+the source Fredholm product.
+\end{proof}
+
+\section{Mixing and boundary faces}
+A shared-immigration coupling leaves each unmatched initial customer alive
+with probability $a_t$.  Therefore
+\begin{equation}
+ \|P_t(n,\cdot)-P_t(m,\cdot)\|_{\rm TV}
+ \le \min\{1,a_t|n-m|\}. \tag{7}
+\end{equation}
+Coupling a deterministic initial state to a stationary Poisson initial state
+also gives $\|P_t(n,\cdot)-\pi\|_{\rm TV}\le
+\min\{1,a_t(n+\rho)\}$.  These are deliberately coarse but uniform bounds;
+the kernel ledger records the finite PMF window and its explicit tail mass.
+
+If $\lambda=0$ and $\mu>0$, the pure-death chain has the absorbing law
+$\delta_0$.  If $\mu=0$ and $\lambda>0$, pure birth has no stationary
+probability and escapes to infinity.  If both rates vanish, the identity
+chain has every point mass stationary.  As $\rho\downarrow0$ the Poisson law
+collapses weakly to $\delta_0$; as $\mu\downarrow0$ with $\lambda$ fixed it
+loses tightness.  For positive rates, $a_t\downarrow0$ proves total-variation
+convergence to $\pi$.
+
+\ifnum\CRevisionRound>0
+\section{Finite certificate and source determinant}
+The canonical ledger freezes five rational rate pairs, four times, four initial
+states and a 24-cell PMF window.  It contains 45 normalized mode rows, 80
+kernel rows and 20 trace rows.  The producer-independent checker makes 7367
+assertions, including direct generator eigen-equations and coupling checks;
+SymPy verifies 25 identities.  Clean replay is byte-for-byte, and the hostile
+suite rejects 20 repaired-hash/schema mutations plus one stale-hash mutation
+(21/21 hostile cases).
+The finite PMF window is an audit oracle, not an unqualified truncation theorem.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Route-A boundary}
+The Charlier modes are stochastic population modes.  They have no intrinsic
+rational-prime owner, logarithmic prime clock, or target divisor, and the
+source-local product in (6) is not a target zeta or Hilbert--Polya operator.
+The strict tuple is
+\[
+ \begin{gathered}
+ (\texttt{A0\_FAIL,A1\_FAIL,A2\_FAIL,}\\[-1mm]
+ \texttt{A3\_FAIL,A4\_FORMAL\_HINT}) .
+ \end{gathered}
+\]
+with \texttt{ROUTE\_A\_REJECTED}; the route-B flag is false, and scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  The positive-time
+trace class is a theorem about this Markov semigroup only.  No external peer
+review or priority claim is made.
+\fi
+
+\section*{Source note and declarations}
+The birth--death spectral framework follows Karlin and McGregor~\cite{KM1957};
+the Poisson polynomial normalization follows the Charlier construction~\cite{Ch1929}.
+The queueing interpretation is standard~\cite{Massey1987}.  No target prime or
+zero table, local arithmetic datum, Euler factor, root number, automorphy
+object, target functional equation, Hilbert--Polya operator or Route-B input is
+used.  Generative tools assisted drafting and code generation; the artifact
+chain checks the displayed claims.  Scope literal:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\begin{thebibliography}{9}
+\bibitem{KM1957} S. Karlin and J. McGregor, ``The differential equations of
+birth-and-death processes, and the Stieltjes moment problem,''
+\emph{Transactions of the American Mathematical Society} 85 (1957), 489--546.
+DOI: 10.1090/S0002-9947-1957-0091566-1.
+\bibitem{Ch1929} C. V. L. Charlier, ``Über die Darstellung willkürlicher
+Funktionen,'' \emph{Arkiv för Matematik, Astronomi och Fysik} 16 (1929).
+\bibitem{Massey1987} W. A. Massey, \emph{An Introduction to Queueing Networks},
+Springer, 1987. DOI: 10.1007/978-1-4612-4960-1.
+\end{thebibliography}
+\end{document}

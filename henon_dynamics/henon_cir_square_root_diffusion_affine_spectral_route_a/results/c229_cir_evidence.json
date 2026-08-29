@@ -1,0 +1,495 @@
+{
+  "candidate_id": "HCS-C229",
+  "citations": [
+    {
+      "doi": "10.2307/1911252",
+      "id": "CoxIngersollRoss1985",
+      "role": "original affine term-structure/CIR model"
+    },
+    {
+      "doi": "10.2307/1969318",
+      "id": "Feller1951",
+      "role": "one-dimensional boundary classification framework"
+    },
+    {
+      "doi": "10.1090/S0025-5718-09-02252-2",
+      "id": "Alfonsi2010",
+      "role": "square-root diffusion schemes and boundary context"
+    },
+    {
+      "doi": "10.1080/03610918.2015.1057222",
+      "id": "Lepage2016",
+      "role": "CIR transition and noncentral chi-square formulas"
+    }
+  ],
+  "evaluation_date": "2026-08-29",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "psi'=-kappa psi-(sigma^2/2)psi^2 and phi'=kappa theta psi",
+      "name": "riccati_affine"
+    },
+    {
+      "formula": "h=sigma^2(1-e^-kappa t)/(2kappa), psi=u e^-kappa t/(1+h u), phi=alpha log(1+h u)",
+      "name": "interior_closed_form"
+    },
+    {
+      "formula": "c=sigma^2(1-e^-kappa t)/(4kappa), d=2alpha, lambda=4kappa e^-kappa t x/[sigma^2(1-e^-kappa t)]",
+      "name": "noncentral_chisquare_laplace"
+    },
+    {
+      "formula": "delta=4kappa theta/sigma^2 and 0 is inaccessible iff delta>=2",
+      "name": "feller_index"
+    },
+    {
+      "formula": "pi(dx)=x^(alpha-1)e^-x/beta dx/[Gamma(alpha) beta^alpha], alpha beta=theta",
+      "name": "gamma_invariance"
+    },
+    {
+      "formula": "z L_n''+(alpha-z)L_n'+n L_n=0",
+      "name": "laguerre_eigen_equation"
+    },
+    {
+      "formula": "int L_n L_m z^(alpha-1)e^-z dz=Gamma(n+alpha)/n! delta_nm",
+      "name": "laguerre_orthogonality"
+    },
+    {
+      "formula": "E_pi[(f-pi f)^2]<=kappa^-1 E_pi[(sigma^2/2)x(f')^2]",
+      "name": "poincare_gap"
+    },
+    {
+      "formula": "P_x(X_t=0)=exp[-x e^-kappa t/h_t] for theta=0,kappa>0,sigma>0; h_t=sigma^2(1-e^-kappa t)/(2kappa)",
+      "name": "zero_dimension_atom"
+    }
+  ],
+  "frozen_object": {
+    "clock": "physical diffusion time t>=0",
+    "feller_index": "alpha=2 kappa theta/sigma^2 when sigma>0; compare 2 kappa theta with sigma^2",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor/functional equation, Hilbert-Polya operators",
+    "generator": "L f=kappa(theta-x)f' +(sigma^2/2)x f''",
+    "normalization": "Gamma scale beta=sigma^2/(2 kappa), Laguerre variable z=x/beta",
+    "parameter_domain": "kappa,theta,sigma>=0; x>=0",
+    "sde": "dX_t=kappa(theta-X_t)dt+sigma sqrt(X_t)dW_t, X_0=x>=0",
+    "semigroup_convention": "P_t f(x)=E_x[f(X_t)] and p_t(x,y)=pi(y) K_t(x,y)"
+  },
+  "headline": "The Cox--Ingersoll--Ross square-root diffusion has a closed all-parameter Feller boundary atlas, an exact affine Laplace transform, and—on the nondegenerate face—a Gamma reversible law with an explicit Laguerre semigroup and sharp spectral gap.",
+  "nonclaims": [
+    "The Gamma/Laguerre spectral theorem is stochastic Markov-semigroup analysis, not a primitive-orbit zeta or arithmetic determinant.",
+    "Finite numerical rows validate the displayed formulas but do not replace the boundary or semigroup proofs.",
+    "The equality 2 kappa theta=sigma^2 is classified as inaccessible/entrance; no stronger smooth-boundary assertion is made there.",
+    "Degenerate faces are not silently assigned the interior Gamma law or spectral gap.",
+    "No target arithmetic, Euler product, target divisor, Hilbert-Polya operator, or Route-B input is claimed."
+  ],
+  "payload_sha256": "8763b736f649c42b68763ed5b50b6cc79d58f443025861c098b4e00a69c2e9e5",
+  "regression": {
+    "atom_rows": [
+      {
+        "atom_at_zero": "0.0009268484571271594498606846320031526280564783380118957703388240331",
+        "kappa": "2",
+        "sigma": "1",
+        "time": "1/2",
+        "x": "3"
+      },
+      {
+        "atom_at_zero": "0.9794829971964592000653366727682666961982336010271467215083511202",
+        "kappa": "2",
+        "sigma": "3",
+        "time": "2",
+        "x": "5/2"
+      },
+      {
+        "atom_at_zero": "0.4723665527410147071380465509432679129702035791364766823956579441",
+        "kappa": "0",
+        "sigma": "2",
+        "time": "4/3",
+        "x": "2"
+      }
+    ],
+    "boundary_row_count": 8,
+    "boundary_rows": [
+      {
+        "alpha_2kappa_theta_over_sigma2": "3",
+        "boundary_class": "entrance_inaccessible",
+        "case_id": "strict_feller_entrance",
+        "feller_left_2kappa_theta": "12",
+        "feller_right_sigma_squared": "4",
+        "kappa": "3",
+        "sigma": "2",
+        "stationary_regime": "unique_gamma",
+        "theta": "2",
+        "transform_branch": "mean_reverting_cir"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": "1",
+        "boundary_class": "entrance_inaccessible",
+        "case_id": "feller_equality_entrance",
+        "feller_left_2kappa_theta": "4",
+        "feller_right_sigma_squared": "4",
+        "kappa": "1",
+        "sigma": "2",
+        "stationary_regime": "unique_gamma",
+        "theta": "2",
+        "transform_branch": "mean_reverting_cir"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": "1/2",
+        "boundary_class": "regular_instantaneously_reflecting",
+        "case_id": "regular_reflecting",
+        "feller_left_2kappa_theta": "2",
+        "feller_right_sigma_squared": "4",
+        "kappa": "1",
+        "sigma": "2",
+        "stationary_regime": "unique_gamma",
+        "theta": "1",
+        "transform_branch": "mean_reverting_cir"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": "0",
+        "boundary_class": "absorbing_zero_dimension",
+        "case_id": "theta_zero_absorbing",
+        "feller_left_2kappa_theta": "0",
+        "feller_right_sigma_squared": "1",
+        "kappa": "2",
+        "sigma": "1",
+        "stationary_regime": "delta_zero_absorbing",
+        "theta": "0",
+        "transform_branch": "mean_reverting_cir"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": "0",
+        "boundary_class": "absorbing_zero_dimension",
+        "case_id": "kappa_zero_squared_bessel",
+        "feller_left_2kappa_theta": "0",
+        "feller_right_sigma_squared": "4",
+        "kappa": "0",
+        "sigma": "2",
+        "stationary_regime": "no_unique_probability_stationary_law",
+        "theta": "5",
+        "transform_branch": "squared_bessel_dimension_zero"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": null,
+        "boundary_class": "deterministic_entrance_to_positive_theta",
+        "case_id": "sigma_zero_deterministic_positive",
+        "feller_left_2kappa_theta": "12",
+        "feller_right_sigma_squared": "0",
+        "kappa": "2",
+        "sigma": "0",
+        "stationary_regime": "delta_theta_deterministic",
+        "theta": "3",
+        "transform_branch": "deterministic_ode"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": null,
+        "boundary_class": "deterministic_zero_absorbing_asymptotic",
+        "case_id": "sigma_zero_theta_zero",
+        "feller_left_2kappa_theta": "0",
+        "feller_right_sigma_squared": "0",
+        "kappa": "2",
+        "sigma": "0",
+        "stationary_regime": "delta_zero_absorbing",
+        "theta": "0",
+        "transform_branch": "deterministic_ode"
+      },
+      {
+        "alpha_2kappa_theta_over_sigma2": null,
+        "boundary_class": "constant_every_point_absorbing",
+        "case_id": "all_rates_zero_constant",
+        "feller_left_2kappa_theta": "0",
+        "feller_right_sigma_squared": "0",
+        "kappa": "0",
+        "sigma": "0",
+        "stationary_regime": "no_unique_probability_stationary_law",
+        "theta": "5",
+        "transform_branch": "constant_process"
+      }
+    ],
+    "gap_rows": [
+      {
+        "kappa": "3",
+        "l2_factor": "0.3678794411714423215955237701614608674458111310317678345078368017",
+        "n1_eigen_factor": "0.3678794411714423215955237701614608674458111310317678345078368017",
+        "time": "1/3",
+        "variance_factor": "0.1353352832366126918939994949724844034076315459095758814681588727"
+      },
+      {
+        "kappa": "3",
+        "l2_factor": "0.002478752176666358423045167430816667891506479585533945050878624006",
+        "n1_eigen_factor": "0.002478752176666358423045167430816667891506479585533945050878624006",
+        "time": "2",
+        "variance_factor": "0.000006144212353328209758682308178805532311223989314888252975568505876"
+      },
+      {
+        "kappa": "1",
+        "l2_factor": "0.2865047968601901003248854266478376027931507923282510470883822112",
+        "n1_eigen_factor": "0.2865047968601901003248854266478376027931507923282510470883822112",
+        "time": "5/4",
+        "variance_factor": "0.08208499862389879516952867446715980783780412101543664884575841052"
+      },
+      {
+        "kappa": "2",
+        "l2_factor": "0.06081006262521796499562138818394088314377020868314866716996594495",
+        "n1_eigen_factor": "0.06081006262521796499562138818394088314377020868314866716996594495",
+        "time": "7/5",
+        "variance_factor": "0.003697863716482930820692636441249076478311144127887774730039494831"
+      },
+      {
+        "kappa": "5",
+        "l2_factor": "0.08208499862389879516952867446715980783780412101543664884575841052",
+        "n1_eigen_factor": "0.08208499862389879516952867446715980783780412101543664884575841052",
+        "time": "1/2",
+        "variance_factor": "0.006737946999085467096636048423148424248849585027355085430305531573"
+      }
+    ],
+    "laguerre_rows": [
+      {
+        "eigenvalue": "0",
+        "kernel_coefficient": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "n": 0,
+        "normalized_norm": "1.000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-3",
+        "kernel_coefficient": "0.1666666666666666666666666666666666666666666666666666666666666667",
+        "n": 1,
+        "normalized_norm": "6.000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-6",
+        "kernel_coefficient": "0.04761904761904761904761904761904761904761904761904761904761904762",
+        "n": 2,
+        "normalized_norm": "21.00000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-9",
+        "kernel_coefficient": "0.01785714285714285714285714285714285714285714285714285714285714286",
+        "n": 3,
+        "normalized_norm": "56.00000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-12",
+        "kernel_coefficient": "0.007936507936507936507936507936507936507936507936507936507936507937",
+        "n": 4,
+        "normalized_norm": "126.0000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-15",
+        "kernel_coefficient": "0.003968253968253968253968253968253968253968253968253968253968253968",
+        "n": 5,
+        "normalized_norm": "252.0000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-18",
+        "kernel_coefficient": "0.002164502164502164502164502164502164502164502164502164502164502165",
+        "n": 6,
+        "normalized_norm": "462.0000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-21",
+        "kernel_coefficient": "0.001262626262626262626262626262626262626262626262626262626262626263",
+        "n": 7,
+        "normalized_norm": "792.0000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "eigenvalue": "-24",
+        "kernel_coefficient": "0.0007770007770007770007770007770007770007770007770007770007770007770",
+        "n": 8,
+        "normalized_norm": "1287.000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "kernel_ratio_N80": "1.862735843706324213051445326160870754326839570434828020932129532",
+        "kernel_terms": 80,
+        "n": -1,
+        "time": "1/3",
+        "x": "2",
+        "y": "5/3"
+      },
+      {
+        "kernel_ratio_N80": "1.007348608865331867483435599532082643127679473231542618168869630",
+        "kernel_terms": 80,
+        "n": -1,
+        "time": "2",
+        "x": "1/2",
+        "y": "7/4"
+      },
+      {
+        "kernel_ratio_N80": "0.9999993394965882768168472049727185757927524744634983250589276693",
+        "kernel_terms": 80,
+        "n": -1,
+        "time": "5/2",
+        "x": "4",
+        "y": "3/5"
+      }
+    ],
+    "serialized_significant_digits": 64,
+    "stationary_row_count": 3,
+    "stationary_rows": [
+      {
+        "alpha": "3",
+        "beta_scale": "2/3",
+        "case_id": "gamma_alpha6",
+        "kappa": "3",
+        "laplace_gamma": "0.3644314868804664723032069970845481049562682215743440233236151603",
+        "mean": "2.000000000000000000000000000000000000000000000000000000000000000",
+        "sigma": "2",
+        "theta": "2",
+        "u": "3/5",
+        "variance": "1.333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "alpha": "1/2",
+        "beta_scale": "2",
+        "case_id": "gamma_alpha_half",
+        "kappa": "1",
+        "laplace_gamma": "0.6831300510639732255480692453680701327156688442303221953027985667",
+        "mean": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "sigma": "2",
+        "theta": "1",
+        "u": "4/7",
+        "variance": "2.000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "alpha": "1",
+        "beta_scale": "1",
+        "case_id": "gamma_alpha2",
+        "kappa": "2",
+        "laplace_gamma": "0.5454545454545454545454545454545454545454545454545454545454545455",
+        "mean": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "sigma": "2",
+        "theta": "1",
+        "u": "5/6",
+        "variance": "1.000000000000000000000000000000000000000000000000000000000000000"
+      }
+    ],
+    "transform_row_count": 7,
+    "transform_rows": [
+      {
+        "case_id": "interior_short",
+        "kappa": "3",
+        "laplace": "0.4128680403993388947014541607667863054947538337842898283295177709",
+        "phi": "0.3637602503779608655005759510317565877218431834306012258413377225",
+        "psi": "0.2083468005881760982406931082115883022025679559650383781082230896",
+        "sigma": "2",
+        "theta": "2",
+        "time": "1/5",
+        "u": "3/7",
+        "x": "5/2"
+      },
+      {
+        "case_id": "interior_long",
+        "kappa": "3",
+        "laplace": "0.2776097293079304388329655033737470559560413523435437151114521864",
+        "phi": "1.281380364540125902611836910489804550941803127809750720694099247",
+        "psi": "0.0004759154528870924388219891513143603959315798286724912090941083863",
+        "sigma": "2",
+        "theta": "2",
+        "time": "7/3",
+        "u": "4/5",
+        "x": "1/3"
+      },
+      {
+        "case_id": "equality_face",
+        "kappa": "1",
+        "laplace": "0.2270444706128006035022882757404812074034740094173924735230865882",
+        "phi": "0.4217489944063166674716808512622942649959530602835206472198021203",
+        "psi": "0.2652150951245468093682040598657598874515785210440009042714879589",
+        "sigma": "2",
+        "theta": "2",
+        "time": "1/2",
+        "u": "2/3",
+        "x": "4"
+      },
+      {
+        "case_id": "regular_face",
+        "kappa": "1",
+        "laplace": "0.7045372506732629760053831581678015645438336387135158665688694679",
+        "phi": "0.2874266496803507769808702623324907108779315935638964132539281834",
+        "psi": "0.06278742402624968921416203501456008005541311341510598926958576666",
+        "sigma": "2",
+        "theta": "1",
+        "time": "3/2",
+        "u": "1/2",
+        "x": "1"
+      },
+      {
+        "case_id": "kappa_zero",
+        "kappa": "0",
+        "laplace": "0.6303131865967197865488814928841086123917098068143944237873298416",
+        "phi": "0.0",
+        "psi": "0.2307692307692307692307692307692307692307692307692307692307692308",
+        "sigma": "2",
+        "theta": "5",
+        "time": "4/3",
+        "u": "3/5",
+        "x": "2"
+      },
+      {
+        "case_id": "sigma_zero",
+        "kappa": "2",
+        "laplace": "0.08129455392419779359654395842220306066412418161276398773362717760",
+        "phi": "1.933057512446217228542535892711616513718864721105826655408871327",
+        "psi": "0.2306474958512609238191547024294611620937117596313911148637095577",
+        "sigma": "0",
+        "theta": "3",
+        "time": "2/3",
+        "u": "7/8",
+        "x": "5/2"
+      },
+      {
+        "case_id": "all_zero",
+        "kappa": "0",
+        "laplace": "0.02732372244729256080156306243555302810163185361236450679641057154",
+        "phi": "0.0",
+        "psi": "0.4000000000000000000000000000000000000000000000000000000000000000",
+        "sigma": "0",
+        "theta": "5",
+        "time": "11/6",
+        "u": "2/5",
+        "x": "9"
+      }
+    ],
+    "working_decimal_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "the semigroup spectrum has no intrinsic rational-prime primitive orbit carrier and is not an arithmetic dynamical determinant",
+    "strongest_positive": "an exact affine stochastic semigroup with a source-native Gamma/Laguerre spectral decomposition and a complete boundary atlas",
+    "tuple": [
+      "A0_FAIL",
+      "A1_FAIL",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c229-cir-affine-laguerre-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "e1dc522e054c2d0ded74b017bc52c7b016a52c59",
+  "theorem": {
+    "affine_transform": "E_x exp(-u X_t)=exp[-phi_t(u)-psi_t(u)x], psi'=-kappa psi-(sigma^2/2)psi^2, phi'=kappa theta psi, psi_0=u; closed forms are given separately for kappa sigma>0, kappa=0, sigma>0, sigma=0,kappa>0, and both zero.",
+    "degenerate_faces": "sigma=0 gives X_t=theta+(x-theta)e^-kappa t for kappa>0; theta=0 gives deterministic decay. kappa=theta=0,sigma>0 is squared Bessel dimension zero with an absorbing atom at 0. kappa=sigma=0 is the constant process. These faces have no nontrivial Gamma/Laguerre stationary theorem.",
+    "existence": "For every nonnegative parameter triple and x>=0 there is a unique nonnegative strong CIR solution; the boundary behavior below is canonical (instantaneous reflection on the regular face and absorption when dimension is zero).",
+    "feller_atlas": "For kappa>0,theta>0,sigma>0, 2 kappa theta>=sigma^2 makes 0 an entrance/inaccessible boundary, while 0<2 kappa theta<sigma^2 makes it regular and instantaneously reflecting. If theta=0 or kappa=0 with sigma>0, dimension is zero and 0 is absorbing. If sigma=0 the process is deterministic and must be treated on separate faces.",
+    "gamma_stationary": "When kappa,theta,sigma>0, pi is Gamma(alpha=2 kappa theta/sigma^2, scale beta=sigma^2/(2 kappa)); it is the unique invariant probability law, with mean theta and variance theta sigma^2/(2 kappa).",
+    "gap_ergodicity": "The L2(pi) spectral gap is exactly kappa; Var_pi(P_t f)<=e^-2 kappa t Var_pi(f), and chi2/TV contract with factors e^-2 kappa t and e^-kappa t for L2 initial densities. Equality is attained by the first Laguerre mode.",
+    "laguerre_spectrum": "After z=x/beta, L=kappa[z d2 +(alpha-z)d], and L_n^(alpha-1)(z) has eigenvalue -kappa n. The exact reversible kernel ratio is K_t=sum_{n>=0}e^-kappa nt n! Gamma(alpha)/Gamma(n+alpha) L_n(z_x)L_n(z_y).",
+    "noncentral_chisquare": "When kappa,sigma>0, X_t=c_t chi2prime_{4 kappa theta/sigma^2}(lambda_t), c_t=sigma^2(1-e^-kappa t)/(4 kappa), lambda_t=4 kappa e^-kappa t x/[sigma^2(1-e^-kappa t)].",
+    "zeta_boundary": "The stochastic semigroup and its Laguerre kernel are not a primitive-orbit zeta, Fredholm determinant matched to an analytic target, or Hilbert--Polya operator."
+  }
+}

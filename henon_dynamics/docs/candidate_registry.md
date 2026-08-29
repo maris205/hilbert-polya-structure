@@ -3,6 +3,28 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C229--HCS-C233 additions (2026-08-29)
+
+Five cross-subtype Route-A candidates were released from the common baseline
+`e1dc522e054c2d0ded74b017bc52c7b016a52c59`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; `NEW` does not assert literature
+priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C229 | CIR square-root diffusion has an all-face Feller/atom atlas, exact affine and noncentral-chi-square transition law, Gamma invariant, normalized Laguerre modes, sharp gap and mixing controls. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_cir_square_root_diffusion_affine_spectral_route_a/`](../henon_cir_square_root_diffusion_affine_spectral_route_a/) |
+| HCS-C230 | Finite open Toda closes the global Hamiltonian/Jacobi Lax theorem, simple spectrum, Moser sorting, norming weights, exact `N=2` sech scattering and action--angle boundary ledger. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_open_toda_lax_scattering_route_a/`](../henon_open_toda_lax_scattering_route_a/) |
+| HCS-C231 | Balanced Allen--Cahn has a unique translated `tanh` heteroclinic with selected zero speed, exact dissipation, factored Pöschl--Teller linearization, translation kernel and essential edge. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_allen_cahn_front_pochhammer_spectrum_route_a/`](../henon_allen_cahn_front_pochhammer_spectrum_route_a/) |
+| HCS-C232 | Duffing has a complete single/double-well energy atlas, turning-root quadratic, endpoint-cancelled period/action identity, explicit homoclinic separatrix and center/quartic/saddle limits. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_duffing_hamiltonian_separatrix_route_a/`](../henon_duffing_hamiltonian_separatrix_route_a/) |
+| HCS-C233 | M/M/infinity has an exact Poisson invariant, binomial-plus-Poisson kernel/PGF, complete Charlier spectrum and gap, positive-time source trace product, coupling bounds and rate faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_mm_infinity_poisson_spectral_route_a/`](../henon_mm_infinity_poisson_spectral_route_a/) |
+
+All five are `ROUTE_A_REJECTED` with `route_b_invocation_allowed: false`.
+No target divisor/counting law, arithmetic local datum, Euler factor, root
+number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
+introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C204--HCS-C208 independent cross-subtype round (2026-08-27)
 
 This batch gives every paper a different complete dynamical owner:

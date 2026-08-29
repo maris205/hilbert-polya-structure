@@ -2629,3 +2629,30 @@ and uniform audit.  All five strict tuples remain `ROUTE_A_REJECTED`, with
 `route_b_invocation_allowed: false`; scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER` and no target arithmetic or operator bridge is
 claimed.
+
+## Route-A independent cross-subtype round C229--C233
+
+This round takes one large, complete theorem step per paper and deliberately
+changes the dynamical owner in every slot: a degenerate square-root diffusion,
+an open integrable lattice, a gradient reaction--diffusion front, a quartic
+Hamiltonian oscillator, and a countable-state immigration--death semigroup.
+Each package closes its declared parameter and boundary faces, carries an
+independent executable certificate, and includes a finished manuscript.  The
+five papers are independent owners, not installments of one theorem.
+
+- [C229 CIR square-root diffusion and Laguerre spectrum](henon_cir_square_root_diffusion_affine_spectral_route_a/README.md) · [paper PDF](henon_cir_square_root_diffusion_affine_spectral_route_a/paper/main.pdf)
+- [C230 open Toda Lax/scattering flow](henon_open_toda_lax_scattering_route_a/README.md) · [paper PDF](henon_open_toda_lax_scattering_route_a/paper/main.pdf)
+- [C231 Allen--Cahn tanh front and Pöschl--Teller edge](henon_allen_cahn_front_pochhammer_spectrum_route_a/README.md) · [paper PDF](henon_allen_cahn_front_pochhammer_spectrum_route_a/paper/main.pdf)
+- [C232 Duffing energy topology and homoclinic separatrix](henon_duffing_hamiltonian_separatrix_route_a/README.md) · [paper PDF](henon_duffing_hamiltonian_separatrix_route_a/paper/main.pdf)
+- [C233 M/M/infinity Poisson--Charlier semigroup](henon_mm_infinity_poisson_spectral_route_a/README.md) · [paper PDF](henon_mm_infinity_poisson_spectral_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C229_C233.md), [batch plan](BATCH_PLAN_C229_C233.md),
+and [batch review](BATCH_REVIEW_C229_C233.md) for collision pivots, theorem
+increments, source/evidence boundaries, release hashes and the uniform audit.
+The round closes 9,192 independent-checker assertions, 91 symbolic/algebra
+checks, 104 hostile rejections, 135 content-addressed payloads (140 physical
+files), and 15 final-paper pages.  All five strict tuples are recorded in the
+per-paper evaluator YAML files and remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false`.  The common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic or operator bridge is
+claimed.

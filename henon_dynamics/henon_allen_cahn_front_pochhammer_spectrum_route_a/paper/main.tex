@@ -1,0 +1,196 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\sech}{\operatorname{sech}}
+\newcommand{\eps}{\varepsilon}
+\title{Equal-Well Allen--Cahn Fronts: Translation Uniqueness and a\newline Pöschl--Teller Spectral Atlas}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We close a source-local theorem for the one-dimensional equal-well
+Allen--Cahn reaction--diffusion equation.  For
+$u_t=u_{xx}+\eps^{-2}(u-u^3)$, every monotone heteroclinic from $-1$ to $+1$
+is a translate of $\tanh(\xi/(\sqrt2\eps))$, and the equal-well balance
+forces its travelling speed to be zero.  The gradient-flow energy dissipates
+exactly, with interfacial energy $2\sqrt2/(3\eps)$.  Linearization is the
+factorized Pöschl--Teller operator: translation is the simple zero mode, the
+shape mode has eigenvalue $-3/(2\eps^2)$, and the essential spectrum is
+$(-\infty,-2/\eps^2]$.  Singular scaling faces are stated explicitly.  The
+front is heteroclinic, not a primitive periodic orbit, so this is a rigorous
+Route-A negative result rather than an arithmetic or Hilbert--Pólya claim.
+\end{abstract}
+
+\section{Frozen equation and the heteroclinic}
+We use the scaled family
+\begin{equation}
+ u_t=u_{xx}+\eps^{-2}(u-u^3),\qquad \eps>0,
+ \label{eq:pde}
+\end{equation}
+whose $\eps=1$ member is the requested Allen--Cahn equation.  Put
+$W(q)=(1-q^2)^2/4$; then \eqref{eq:pde} is the $L^2$ gradient flow of
+\begin{equation}
+ E_\eps[u]=\int_{\mathbb R}\left(\frac12u_x^2+\eps^{-2}W(u)\right)\dd x.
+ \label{eq:energy}
+\end{equation}
+For a travelling ansatz $u(x,t)=U(\xi)$, $\xi=x-ct$, the profile equation is
+\begin{equation}
+ U''+cU'+\eps^{-2}(U-U^3)=0,qquad
+ U(-\infty)=-1,\quad U(+\infty)=1.
+ \label{eq:tw}
+\end{equation}
+
+\begin{theorem}[front, speed selection, and translation uniqueness]\label{thm:front}
+Every nonconstant monotone $C^2$ solution of \eqref{eq:tw} has $c=0$ and,
+for some $\xi_0\in\mathbb R$,
+\begin{equation}
+ U(\xi)=U_\eps(\xi-\xi_0):=	anh\!\left(\frac{\xi-\xi_0}{\sqrt2\eps}\right).
+ \label{eq:tanh}
+\end{equation}
+The reverse orientation is $-U_\eps$.  For the increasing orientation,
+\begin{equation}
+ \frac12(U_\eps')^2=\eps^{-2}W(U_\eps),\qquad
+ \int_{\mathbb R}(U_\eps')^2\dd\xi
+ =E_\eps[U_\eps]=\frac{2\sqrt2}{3\eps}.
+ \label{eq:equip}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Multiply \eqref{eq:tw} by $U'$ and integrate from $-\infty$ to $+\infty$.
+The endpoint derivatives and $W(\pm1)$ vanish, giving
+\[
+ c\int_{\mathbb R}(U')^2\dd\xi=0.
+\]
+Since a nonconstant front has positive integral, $c=0$.  A first integral is
+then $(U')^2/2=\eps^{-2}W(U)$.  Monotonicity selects the positive square root,
+and separation of variables gives \eqref{eq:tanh} with one free translation.
+The identity $U_\eps'=(\sqrt2\eps)^{-1}\sech^2 y$,
+$y=(\xi-\xi_0)/(\sqrt2\eps)$, and
+$\int_{\mathbb R}\sech^4y\dd y=4/3$ prove \eqref{eq:equip}.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Dissipation and the exact interface ledger}
+For smooth solutions with finite relative energy (subtracting the two pure
+well constants outside a bounded transition region), differentiation of
+\eqref{eq:energy} and integration by parts gives
+\begin{equation}
+ \frac{\dd}{\dd t}E_\eps[u(t)]
+ =\int_{\mathbb R}(-u_{xx}-\eps^{-2}(u-u^3))u_t\dd x
+ =-\int_{\mathbb R}u_t^2\dd x\leq0.
+ \label{eq:dissipation}
+\end{equation}
+Equality holds only for a stationary solution.  Along the front, the
+equipartition in \eqref{eq:equip} splits the surface energy equally between
+gradient and potential terms.  Fixing the zero crossing $U(\xi_0)=0$ removes
+the sole translation freedom, so the monotone profile is unique under that
+phase condition.  This is an energy statement, not a claim of a global
+attractor or a quantitative nonlinear convergence rate.
+
+The speed identity also explains why adding a nonzero $c$ by hand would change
+the model: equal wells have equal potential values, so a dissipative front
+cannot carry a net energy drop.  A tilted potential can select a moving front,
+but it is not silently substituted for \eqref{eq:pde}.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Pöschl--Teller linearization}
+Write $u=U_\eps+v$ and $y=\xi/(\sqrt2\eps)$.  The linearized generator is
+\begin{equation}
+ L_\eps=\partial_\xi^2+\eps^{-2}(1-3U_\eps^2)
+ =\frac1{2\eps^2}M,\qquad
+ M=\partial_y^2-4+6\sech^2y.
+ \label{eq:lin}
+\end{equation}
+Its positive Schrödinger partner has the exact factorization
+\begin{equation}
+ -M=B^*B,\qquad B=\partial_y+2\tanh y,
+ \qquad B^*=-\partial_y+2\tanh y.
+ \label{eq:factor}
+\end{equation}
+
+\begin{proposition}[closed one-dimensional spectrum]\label{prop:spectrum}
+On $L^2(\mathbb R)$ with domain $H^2(\mathbb R)$,
+\begin{align}
+ \sigma_{\mathrm{disc}}(L_\eps)&=\left\{0,-\frac3{2\eps^2}\right\},
+ &\ker L_\eps&=\operatorname{span}\{U_\eps'\},
+ \label{eq:disc}\\
+ \sigma_{\mathrm{ess}}(L_\eps)&=\left(-\infty,-\frac2{\eps^2}\right].
+ \label{eq:ess}
+\end{align}
+The second bound state is $\phi_1(y)=\sech y\tanh y$; the translation mode
+is $\phi_0(y)=\sech^2y$.
+\end{proposition}
+
+\begin{proof}
+Direct differentiation gives $M\phi_0=0$ and $M\phi_1=-3\phi_1$.  The
+factorization \eqref{eq:factor} makes the zero mode nonnegative for $-M$;
+$Bf=0$ has exactly the $L^2$ solution $f\propto\sech^2y$, proving simplicity.
+The standard Pöschl--Teller factorization chain (or the one-dimensional Sturm
+oscillation count) places the one-node $\phi_1$ as the second and last bound
+state.  Since $6\sech^2y\to0$, Weyl's theorem compares $M$ with
+$\partial_y^2-4$, whose spectrum is $(-\infty,-4]$; rescaling by
+$1/(2\eps^2)$ gives \eqref{eq:ess}.
+\end{proof}
+
+\section{Singular faces and Route-A boundary}
+As $\eps\downarrow0$, the width $\sqrt2\eps$ collapses while the surface
+energy and the spectral scales diverge; this is a sharp-interface scaling, not
+a finite-width limiting eigenproblem.  As $\eps\to\infty$, reaction, the
+essential edge, and the discrete gap all collapse to zero and the front leaves
+every fixed compact scale.  Setting the reaction coefficient to zero gives the
+linear heat equation and removes the heteroclinic ODE; setting dimensional
+diffusivity to zero removes the second derivative and likewise does not define
+a smooth tanh front.  Equal wells exclude every nonzero-speed front in this
+model.
+
+The object has a physical PDE clock but no primitive periodic orbit or
+cross-period repetition law.  Therefore the strict Route-A record is
+\begin{center}\ttfamily
+(A0\_FAIL, A1\_FAIL, A2\_FAIL, A3\_FAIL, A4\_FORMAL\_HINT),
+\end{center}
+with \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.  The scope lock is
+\begin{center}\ttfamily NO\_BAD\_EULER\_OR\_ROOT\_NUMBER.\end{center}
+No target prime or zero table, Euler factor, root number, automorphy statement,
+functional equation, or Hilbert--Pólya operator is introduced.
+\fi
+
+\enlargethispage{4\baselineskip}
+\section*{Source note}
+The phase-field context is recorded by Allen and Cahn~\cite{allen}; the
+travelling-front convergence context is recorded by Fife and McLeod~\cite{fife}.
+The formulas, spectrum, and boundaries above are re-derived in this artifact;
+the references are contextual and do not enlarge the claim boundary.
+
+\begin{thebibliography}{9}\small
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}
+\bibitem{allen} S. M. Allen and J. W. Cahn, A microscopic theory for
+antiphase boundary motion and its application to antiphase domain coarsening,
+\emph{Acta Metallurgica} 27(6), 1085--1095 (1979).
+DOI: \href{https://doi.org/10.1016/0001-6160(79)90196-2}{10.1016/0001-6160(79)90196-2}.
+\bibitem{fife} P. C. Fife and J. B. McLeod, The approach of solutions of
+nonlinear diffusion equations to travelling front solutions, \emph{Archive for
+Rational Mechanics and Analysis} 65(4), 335--361 (1977).
+DOI: \href{https://doi.org/10.1007/BF00250432}{10.1007/BF00250432}.
+\end{thebibliography}
+
+\clearpage
+\section*{Declarations}
+\textbf{Scope.} \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target arithmetic,
+periodic-orbit, or operator claim. \textbf{Data and code.} The exact front,
+energy ledger, independent checks, and build instructions are released with
+HCS-C231. \textbf{AI-use disclosure.} Generative tools assisted drafting and
+code generation; the internal artifact chain checked displayed claims and
+metadata. This is not external peer review.
+\end{document}

@@ -1,0 +1,84 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C232
+candidate_definition: conservative Duffing oscillator with quartic restoring force
+family: beta>0 and delta in R, with beta=0 faces recorded separately
+phase_space: R^2 with coordinates (x,v)
+dynamics: x'=v, v'=-delta*x-beta*x^3
+parameters: beta>0, delta real
+parameter_provenance: source-defined force coefficients; no target fitting
+arithmetic_origin: none; energy and period are source-local
+clock: physical continuous Hamiltonian time
+normalization: H=v^2/2+delta*x^2/2+beta*x^4/4 and I=(2*pi)^(-1) integral v dx
+determinant_convention: none; action/period atlas only
+orbit_cutoff: five rational parameter cases and four regular energies per case
+precision: 80 working decimal digits; serialized endpoint-cancelled quadratures
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert--Polya operators
+source_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+code_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+artifact_paths:
+  evidence: results/c232_duffing_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: quartic Duffing Hamiltonian and its energy-level flow
+  arithmetic_origin: none
+  clock: physical continuous time
+  normalization: action on one connected oval
+  cutoff: five rational parameter cases and twenty regular energies
+  precision: 80 working digits; serialized quadratures
+  allowed_data: potential, turning roots, period, action, equilibria and separatrix
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native polynomial Hamiltonian and explicit energy topology
+  strongest_failure: no intrinsic rational-prime owner or logarithmic prime clock
+  arithmetic_controls: [pure-quartic scaling control, beta=0 faces, single-vs-double-well topology]
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every regular energy component has an exact period/action quadrature
+  strongest_failure: recurrent ovals form a continuum indexed by real energy, not discrete primitive cycles
+  metrics: {regular_energy_rows: 20, components: [single_center, double_inner, outer]}
+  artifacts: [THEOREM_PACKAGE.md, results/c232_duffing_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: action derivative and separatrix limits are exact source identities
+  strongest_failure: no dynamical zeta, Fredholm determinant or target divisor is defined
+  metrics: {target_zero_match: null, source_action_identity: exact}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: complete phase topology and controlled quadratures
+  strongest_failure: no functional equation, counting law, analytic target continuation or Weil compression
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: one-degree-of-freedom Hamiltonian action coordinate and time reversal
+  strongest_failure: no same-clock self-adjoint target operator is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [beta=0 harmonic/inverted/free faces, quartic scaling, barrier-side component split, continuum-vs-discrete cycle test]
+  proves_too_much_risk: high if any continuous energy family is relabeled as an arithmetic primitive ledger
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: Duffing energy topology, action/period quadratures and homoclinic boundary only; no target arithmetic or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no discrete primitive-orbit owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this source family; preserve separatrix and beta=0 boundary distinctions
+round2_clues: []
+route_b_invocation_allowed: false

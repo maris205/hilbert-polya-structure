@@ -1,0 +1,70 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C231
+title: Allen-Cahn bistable front and Pöschl-Teller spectral atlas
+evaluation_date: 2026-08-29
+source_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+code_commit: e1dc522e054c2d0ded74b017bc52c7b016a52c59
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+frozen_model:
+  equation: u_t=u_xx+u-u^3
+  epsilon_scaled_equation: u_t=u_xx+epsilon^(-2)(u-u^3), epsilon>0
+  ansatz: u(x,t)=U(x-c t), U(-infinity)=-1, U(+infinity)=+1
+  front: U_epsilon(xi)=tanh(xi/(sqrt(2) epsilon))
+  potential: W(u)=(1-u^2)^2/4
+  clock: physical PDE time; no primitive periodic orbit clock
+  primitive_periodic_orbit: false
+  forbidden_data: target primes/zeros, target zero tables, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+claims:
+  front_speed_selection: exact tanh heteroclinic and equal-well selection c=0
+  energy: exact gradient-flow dissipation and surface energy 2sqrt(2)/(3epsilon)
+  translation: monotone heteroclinic unique modulo translation
+  linear_spectrum: Pöschl-Teller factorization, simple translation kernel, second mode, essential edge
+  degeneracies: epsilon->0, epsilon->infinity, zero reaction/diffusivity and nonzero-speed boundaries explicitly separated
+  arithmetic: none
+  periodic_orbit_owner: none
+evidence:
+  artifact: results/c231_allen_cahn_evidence.json
+  producer: code/c231_allen_cahn_producer.py
+  independent_checker: code/c231_allen_cahn_checker.py
+  sympy_crosscheck: code/c231_allen_cahn_sympy_crosscheck.py
+  replay: code/c231_allen_cahn_replay.py
+  mutation: code/c231_allen_cahn_mutation.py
+  checker_assertions: 204
+  sympy_identities: 13
+  hostile_mutations: 21
+  mutation_attacks_include: [nested_unknown_key, stale_payload_hash, citation_title, citation_doi, route_b, scope_flag]
+  regression_rows: 20
+  working_decimal_digits: 90
+citations:
+  - id: AllenCahn1979
+    title: A microscopic theory for antiphase boundary motion and its application to antiphase domain coarsening
+    authors: S. M. Allen and J. W. Cahn
+    venue: Acta Metallurgica 27(6), 1085--1095
+    year: 1979
+    doi: 10.1016/0001-6160(79)90196-2
+    role: phase-field origin and equal-well interface context
+  - id: FifeMcLeod1977
+    title: The approach of solutions of nonlinear diffusion equations to travelling front solutions
+    authors: P. C. Fife and J. B. McLeod
+    venue: Archive for Rational Mechanics and Analysis 65(4), 335--361
+    year: 1977
+    doi: 10.1007/BF00250432
+    role: travelling-front existence and convergence context
+nonclaims:
+  - The tanh front and Pöschl-Teller spectrum are classical formulas, not claimed as new discoveries.
+  - The energy identity is for smooth finite-relative-energy solutions; no global attractor theorem is inferred.
+  - Equal wells exclude nonzero-speed heteroclinics; no tilted-potential speed law is substituted.
+  - The one-dimensional spectral statement does not claim multidimensional transverse stability or a nonlinear rate.
+  - No primitive periodic orbit, target arithmetic, Euler product, functional equation, Hilbert-Polya operator, or Route-B input is claimed.
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS

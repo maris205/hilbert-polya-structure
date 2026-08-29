@@ -1,0 +1,218 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=19mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Tr}{\operatorname{tr}}
+\newcommand{\sech}{\operatorname{sech}}
+\title{Finite Open Toda Flow: Lax Isospectrality, Sorting Scattering, and Norming Coordinates}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We close a convention-complete theorem for the finite open Toda Hamiltonian
+\(H=\frac12\sum p_j^2+\sum_{j<N}e^{q_j-q_{j+1}}\).
+The Flaschka variables turn its equations into a Lax flow of a positive
+Jacobi matrix. Conserved traces give global existence and prevent any
+finite-time edge collision. For simple spectrum, the eigenvalues are fixed
+and the Moser sorting theorem identifies the two asymptotic velocity orders;
+the first-component norming weights obey an exact normalized exponential law.
+For \(N=2\) the full trajectory is a sech/tanh formula. We keep separate the
+noncompact positive scattering chamber, the phase-compactified isospectral
+torus, and the repeated-root block boundary. A deterministic ledger audits
+six rational source rows. This is a source-local integrability result:
+there is no arithmetic owner, target determinant, or Hilbert--Polya bridge.
+\end{abstract}
+
+\section{Model and Lax closure}
+For \(N\ge2\), use
+\begin{equation}
+ H(q,p)=\frac12\sum_{j=1}^{N}p_j^2+
+ \sum_{j=1}^{N-1}e^{q_j-q_{j+1}},\qquad
+ \dot q_j=p_j,\quad
+ \dot p_j=e^{q_{j-1}-q_j}-e^{q_j-q_{j+1}}, \tag{1}
+\end{equation}
+where missing endpoint exponentials are zero. Set
+\(a_j=\tfrac12e^{(q_j-q_{j+1})/2}>0,\ b_j=-p_j/2\), and let \(L\) have
+diagonal \(b_j\) and off-diagonal \(a_j\). Let \(B_{j,j+1}=a_j=-B_{j+1,j}\).
+Direct multiplication gives
+\begin{equation}
+ \dot L=[B,L],\qquad
+ \dot a_j=a_j(b_{j+1}-b_j),\qquad
+ \dot b_j=2(a_j^2-a_{j-1}^2),\quad a_0=a_N=0. \tag{2}
+\end{equation}
+
+\begin{theorem}[Global Lax and Hamiltonian invariants]\label{thm:global}
+Every finite initial state has a solution for all \(t\in\R\); all \(a_j(t)\)
+remain positive. The eigenvalues of \(L\) and
+\(I_k=\Tr(L^k)/k\) are constant, with \(H=4I_2\) and
+\(\sum_jp_j=-2\Tr L\).
+\end{theorem}
+\begin{proof}
+Since \(B^T=-B\), cyclicity gives
+\(\frac d{dt}\Tr L^k=k\Tr(L^{k-1}[B,L])=0\). In particular
+\(\Tr L^2\) bounds every matrix entry, so the smooth finite-dimensional vector
+field is complete. Also
+\(a_j(t)=a_j(0)\exp(\int_0^t(b_{j+1}-b_j)\,ds)>0\); hence a zero edge is only
+a boundary limit. Reconstructing
+\(q_j-q_{j+1}=2\log(2a_j)\) and \(p_j=-2b_j\) proves the Hamiltonian statement.
+\end{proof}
+
+\section{Simple spectrum and sorting}
+An irreducible real symmetric Jacobi matrix has simple real eigenvalues. Order
+them \(\lambda_1>\cdots>\lambda_N\). The finite open Toda scattering theorem
+states
+\begin{equation}
+ b_j(t)\to\lambda_j\ (t\to+\infty),\qquad
+ b_j(t)\to\lambda_{N+1-j}\ (t\to-\infty), \tag{3}
+\end{equation}
+and \(q_j(t)=-2\lambda_jt+c_j^++o(1)\) at \(+\infty\), with reversed order at
+the other end. The recurrence proof of simplicity is short: an eigenvector
+with first component zero has every component zero.
+
+For a normalized eigenvector \(v(\lambda_k)\), define
+\(\rho_k=|v_1(\lambda_k)|^2\). The Weyl residues are positive and sum to one,
+and
+\begin{equation}
+ \rho_k(t)=\frac{\rho_k(0)e^{2\lambda_kt}}
+ {\sum_\ell\rho_\ell(0)e^{2\lambda_\ell t}},\qquad
+ b_1(t)=\sum_k\lambda_k\rho_k(t). \tag{4}
+\end{equation}
+Indeed \(v_t=Bv\) gives
+\(\dot\rho_k=2(\lambda_k-b_1)\rho_k\), which integrates to (4). The dominant
+exponent explains the two sorting ends; continued-fraction inversion of the
+Weyl function supplies the remaining diagonal limits.
+
+\ifnum\CRevisionRound>0
+\section{Closed two-body result and action--angle boundary}
+For \(N=2\), writing
+\[
+ d=\sqrt{(b_1-b_2)^2+4a_1^2},\qquad
+ \alpha=\operatorname{artanh}\frac{b_1-b_2}{d},
+\]
+gives the exact solution
+\begin{equation}
+ a_1(t)=\frac d2\sech(dt+\alpha),\qquad
+ b_{1,2}(t)=\frac{b_1+b_2\pm d\tanh(dt+\alpha)}2. \tag{5}
+\end{equation}
+Thus the edge is positive at finite time and decays only at the two scattering
+ends; the eigenvalues are \((b_1+b_2\pm d)/2\).
+
+On the simple-spectrum regular set, ordered eigenvalues plus the positive
+norming simplex \(\rho_k>0,\sum\rho_k=1\) are inverse-scattering coordinates.
+After removing the center-of-mass action, logarithmic norming variables furnish
+local canonical action--angle coordinates. The physical positive isospectral
+leaf is an open, noncompact scattering chamber, not a compact real Liouville
+torus. Adjoining complex norming phases compactifies the angles to an
+\((N-1)\)-torus; that extension is a geometric boundary description, not a
+target operator or a periodic Toda claim.
+More explicitly, in the complexified inverse-spectral chart the nonzero
+residues have a common \(\mathbb C^\times\) gauge; fixing their moduli leaves
+the phase fiber \((S^1)^N/S^1\simeq\mathbb T^{N-1}\) over each simple spectrum.
+For a direct all-\(N\) check, define \(r_k(t)=\rho_k(0)e^{2\lambda_k t}\) and
+the Hankel minors
+\[
+ \tau_j=\sum_{|S|=j}\Bigl(\prod_{k\in S}r_k\Bigr)\Delta(\lambda_S)^2,\quad
+ a_j=\frac{\sqrt{\tau_{j-1}\tau_{j+1}}}{\tau_j},\quad
+ b_j=\frac12\partial_t\log\frac{\tau_j}{\tau_{j-1}}.
+\]
+Dominant top/bottom subsets prove the two sorting ends exactly; the ledger
+uses the equivalent normalized-residue form.
+\fi
+
+\section{Reproducible ledger}
+The receipt uses six rational \(a,b\) rows (three each for \(N=2,3\)), 256 RK4
+steps per unit time, and 90-decimal arithmetic. It stores all 30 states at
+\(t=-2,-1,0,1,2\), every trace invariant, sorted eigenvalues, positivity and
+drift. Fifteen \(N=2\) rows compare (5) directly; nine \(N=3\) rows compare
+(4) at \(t=-1,0,1\). Six \(T=8\) endpoint rows are finite diagnostics of (3),
+not exact limits. Representative initial spectra are
+\begin{center}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+case & $N$ & $(a_j)$ & $(b_j)$\\
+\midrule
+N2 reference &2& $(1)$ & $(1/2,-1/2)$\\
+N2 asymmetric &2& $(3/4)$ & $(1/3,-1/6)$\\
+N3 symmetric &3& $(1,1)$ & $(1,0,-1)$\\
+N3 generic &3& $(1/2,3/2)$ & $(1/2,-1/4,1/3)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The independent checker reconstructs the ODE and matrix spectrum without
+importing the producer. SymPy checks 25 identities; canonical replay is
+byte-identical and the hostile suite rejects 22 of 22 repaired mutations.
+
+\ifnum\CRevisionRound>1
+\section{Degenerate face and strict Route-A boundary}
+At \(a_j=0\), \(L\) splits into blocks and regular simplicity/action--angle
+coordinates stop applying. The explicit \(N=3\) boundary
+\(L=\operatorname{diag}(0,0,1)\) has characteristic polynomial \(x^2(x-1)\):
+the repeated root is a block degeneracy, not a positive Jacobi spectrum.
+The finite characteristic polynomial \(\det(\lambda I-L)\) is source-local and
+is not an orbit zeta or Fredholm determinant.
+
+The strict evaluator tuple is
+\[
+(\mathtt{A0\_FAIL},\mathtt{A1\_FAIL},\mathtt{A2\_FAIL},
+ \mathtt{A3\_FAIL},\mathtt{A4\_FORMAL\_HINT}),
+\]
+with \texttt{ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}. The open chain has no
+rational-prime owner, primitive periodic repetition law, target divisor, or
+natural Hilbert--Polya lift. Its Hamiltonian scattering theorem remains a
+substantive positive result.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{flaschka} H. Flaschka, The Toda lattice. II. Existence of
+integrals, \emph{Physical Review B} 9 (1974), 1924--1925.
+DOI: \href{https://doi.org/10.1103/PhysRevB.9.1924}{10.1103/PhysRevB.9.1924}.
+\bibitem{moser} J. Moser, Finitely many mass points on the line under the
+influence of an exponential potential--an integrable system, in
+\emph{Dynamical Systems, Theory and Applications}, Lecture Notes in Physics
+38, Springer (1975), 467--497.
+DOI: \href{https://doi.org/10.1007/3-540-07171-7_12}{10.1007/3-540-07171-7\_12}.
+\bibitem{tomei} C. Tomei, The topology of isospectral manifolds of
+tridiagonal matrices, \emph{Duke Mathematical Journal} 51 (1984), 981--996.
+DOI: \href{https://doi.org/10.1215/S0012-7094-84-05144-5}{10.1215/S0012-7094-84-05144-5}.
+\end{thebibliography}
+
+\ifnum\CRevisionRound>1
+\section*{Proof and audit supplement}
+The first-component identity behind (4) is exact.  If
+$Lv_k=\lambda_kv_k$ and $\dot v_k=Bv_k$, then
+$(\dot v_k)_1=a_1(v_k)_2=(\lambda_k-b_1)(v_k)_1$; squaring and normalizing
+gives $\dot\rho_k=2(\lambda_k-b_1)\rho_k$.  The positive residues and ordered
+eigenvalues determine the Weyl rational function
+$m(z)=\sum_k\rho_k/(z-\lambda_k)$.  Its Stieltjes continued fraction uniquely
+recovers every positive Jacobi coefficient, so concentration of the residues
+at the two time ends yields the complete sorting statement rather than only
+the $b_1$ limit.
+
+The finite receipt is a control on the implementation, not the proof of the
+limits.  Across all stored times, the largest trace-invariant drift is
+$2.79\times10^{-10}$, the largest spectral drift is $1.17\times10^{-10}$,
+the largest two-body formula error is $4.55\times10^{-11}$, and the largest
+norming-law discrepancy is $1.71\times10^{-10}$.  Weaker links converge more
+slowly at $T=8$, so their nonzero endpoint errors are retained.  The
+producer-independent checker makes 596 assertions; all finite rows remain
+strictly inside the positive chamber.
+\fi
+
+\section*{Declarations}
+\textbf{Scope.} \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target arithmetic,
+target-zero, determinant matching, or Hilbert--Polya claim.
+\textbf{Data and code.} All rows and audits accompany HCS-C230.
+\textbf{AI-use disclosure.} Generative tools assisted drafting and code
+generation; the internal artifact chain checks displayed formulas and
+metadata. This is not external peer review.
+\end{document}
