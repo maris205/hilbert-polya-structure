@@ -1,0 +1,107 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C226
+candidate_definition: one-phase Stefan heat equation with a Neumann similarity free boundary
+family: beta=Ste^{-1}>0, normalized wall superheat, melting front s(t)>0 for t>0
+phase_space: classical one-phase profiles on 0<x<s(t), with s(0)=0 and phase-change boundary retained as a labelled singular face
+dynamics: u_t=u_xx, u(0,t)=1, u(s(t),t)=0, beta*s'(t)=-u_x(s(t)^-,t)
+parameters: beta>0 (equivalently Ste=1/beta>0); physical similarity clock t>0
+parameter_provenance: classical Neumann Stefan normalization; no target fitting
+arithmetic_origin: none; the similarity trajectory has no primitive arithmetic owner
+clock: physical continuous heat time t
+normalization: wall superheat scaled to one, melting temperature scaled to zero, diffusivity scaled to one
+determinant_convention: no target determinant; the erf/Lambert-W source formulas are not target continuation/divisor/counting law
+orbit_cutoff: eight exact positive-Stefan probes and three explicitly labelled degenerate boundaries
+precision: 100 working decimal digits; 78 serialized significant digits
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+citations:
+  - key: AddisonHowisonKing2005
+    claim: small-latent-heat Stefan asymptotics and free-boundary formulation
+    title: Ray methods for Free Boundary Problems
+    authors: J. A. Addison, S. D. Howison, and J. R. King
+    venue: Oxford/University of Nottingham preprint
+    year: 2005
+    url: https://people.maths.ox.ac.uk/howison/papers/smallstefan.pdf
+  - key: Gupta2003
+    claim: classical Stefan problem, one-dimensional Neumann solution, and phase-change conventions
+    title: The Classical Stefan Problem: Basic Concepts, Modelling and Analysis
+    authors: S. C. Gupta
+    venue: Elsevier, North-Holland Series in Applied Mathematics and Mechanics, Volume 45
+    year: 2003
+    isbn: 978-0-444-51086-0
+    url: https://shop.elsevier.com/books/the-classical-stefan-problem/gupta/978-0-444-51086-0
+  - key: Rubinstein1982
+    claim: global stability of the Neumann solution of the two-phase Stefan problem; background only, not a one-phase priority claim
+    title: Global Stability of the Neumann Solution of the Two-phase Stefan Problem
+    authors: L. I. Rubinstein
+    venue: IMA Journal of Applied Mathematics 28(3), 287--299
+    year: 1982
+    doi: 10.1093/imamat/28.3.287
+    url: https://academic.oup.com/imamat/article-abstract/28/3/287/660860
+source_commit: 489672bd36abd3a4f6da92d1446a0af575917959
+code_commit: 489672bd36abd3a4f6da92d1446a0af575917959
+artifact_paths:
+  evidence: results/c226_stefan_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: one-phase heat equation and Neumann similarity front
+  arithmetic_origin: none
+  clock: physical continuous heat time t
+  normalization: u_t=u_xx, u(0,t)=1, u(s,t)=0, beta*s'=-u_x(s^-), s(0)=0
+  cutoff: Ste in {1/100,1/10,1/2,1,2,10,100,10000}; zero-superheat, zero-latent, and zero-diffusivity labels
+  precision: 100 working digits; independent bracketed root path and SymPy identities
+  allowed_data: unique F(lambda)=Ste root, erf profile, endpoint series, Lambert-W enclosure, flux and energy ledger
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy, target divisor, Hilbert-Polya operator
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-native parabolic free-boundary model and explicit similarity profile
+  strongest_failure: no intrinsic rational-prime primitive, prime-power repetition, or log-prime clock
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: monotone scalar Stefan root and complete positive-parameter endpoint atlas
+  strongest_failure: no discrete primitive periodic-orbit family; the similarity front is a self-similar boundary trajectory
+  metrics: {positive_ste_rows: 8, boundary_rows: 3}
+  artifacts: [THEOREM_PACKAGE.md, results/c226_stefan_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact erf source solution and closed flux/energy partition
+  strongest_failure: no target determinant, weighted primitive product, or zero-divisor correspondence
+  metrics: {target_zero_match: null, source_root: unique}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-local small-Stefan series and Lambert-W endpoint enclosure
+  strongest_failure: source heat clock is not target continuation/divisor/counting law; no functional equation or arithmetic continuation
+  artifacts: [THEOREM_PACKAGE.md, code/c226_stefan_sympy_crosscheck.py]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: FORMAL_ONLY
+  strongest_evidence: exact parabolic energy balance and free-boundary flux partition
+  strongest_failure: no same-clock self-adjoint/scattering quantization is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [small/large-Stefan mutations, Lambert-bound mutation, zero-superheat/zero-latent/zero-diffusivity boundaries, energy and flux mutations, recursive nested-key closure, scope and stale hashes]
+  proves_too_much_risk: high if the source similarity clock is misrepresented as a target spectral determinant or if zero-latent rescaling is called a finite-interface solution
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: source-local Neumann similarity root, erf profile, endpoint asymptotics, flux partition, and exact sensible-plus-latent energy ledger only; zero-latent and zero-diffusivity limits are singular rescalings; no target arithmetic or operator claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit owner
+  - no target determinant or analytic target match
+  - no same-clock self-adjoint quantization
+next_smallest_test: none inside this frozen source family; preserve all three degenerate boundaries and do not call L=0 a finite-lambda Stefan solution
+round2_clues: []
+route_b_invocation_allowed: false

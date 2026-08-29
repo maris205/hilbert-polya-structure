@@ -1,0 +1,223 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\title{Exact Product-Kernel Gelation and the Smoluchowski--Flory Postgel Boundary}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give a convention-complete solution atlas for monodisperse discrete
+coagulation with multiplicative kernel.  Cayley tree coefficients close every
+cluster concentration before gelation, while rooted and unrooted tree
+functions give the mass and number generating functions.  The second moment
+diverges at $t=1$, where the concentrations have the critical
+$k^{-5/2}$ tail.  We then resolve a postgel ambiguity explicitly.  With the
+Smoluchowski finite-sol loss, one Stockmayer continuation freezes the critical
+shape and has sol mass $1/t$.  With gel-reactive Flory loss, the pregel
+coefficient formula continues and has sol mass
+$q=-W_0(-te^{-t})/t$.  The two families agree at $t=1$ but direct substitution
+shows that they solve different equations afterward.  No universal
+weak-solution uniqueness is claimed.  Exact independent reconstruction, symbolic
+identities, canonical replay, and hostile mutations audit the theorem.
+\end{abstract}
+
+\section{Frozen kinetic convention}
+For $k\ge1$, set
+\begin{equation}
+ \dot c_k=\frac12\sum_{i+j=k}ijc_ic_j-kc_kM_1(t),
+ \qquad M_q(t)=\sum_{k\ge1}k^q c_k(t),                 \tag{1}
+\end{equation}
+with $c_1(0)=1$ and $c_k(0)=0$ for $k>1$.  Thus
+$K(i,j)=ij$, the unordered gain has factor $1/2$, and (1) uses only
+finite-cluster mass in its loss.  A different gel-reactive loss will be introduced
+only after its convention is named.
+
+Define the rooted and unrooted labelled-tree series
+\begin{equation}
+ T(u)=\sum_{k\ge1}\frac{k^{k-1}}{k!}u^k,\qquad
+ U(u)=\sum_{k\ge1}\frac{k^{k-2}}{k!}u^k.              \tag{2}
+\end{equation}
+Cayley's formula and Lagrange inversion give
+$T=ue^T$, $U=T-T^2/2$, and $uU'(u)=T(u)$.
+
+\begin{theorem}[Exact pregel solution and gel point]\label{thm:pre}
+For $0\le t\le1$,
+\begin{equation}
+ c_k(t)=a_kt^{k-1}e^{-kt},\qquad
+ a_k=\frac{k^{k-2}}{k!}.                               \tag{3}
+\end{equation}
+If $u=tze^{-t}$, the mass and number generating functions are
+\begin{equation}
+ G(z,t)=\sum_{k\ge1}kc_kz^k=\frac{T(u)}t,\qquad
+ C(z,t)=\sum_{k\ge1}c_kz^k=\frac{U(u)}t,              \tag{4}
+\end{equation}
+as formal power series in $z$, and analytically on the principal convergence
+disk (in particular $0\le z\le1$), with continuous $t=0$ values.  For $t<1$,
+\begin{equation}
+ M_0=1-\frac t2,\quad M_1=1,\quad
+ M_2=\frac1{1-t},\quad M_3=\frac1{(1-t)^3}.            \tag{5}
+\end{equation}
+At $t_g=1$,
+\begin{equation}
+ c_k(1)\sim\frac1{\sqrt{2\pi}}k^{-5/2},               \tag{6}
+\end{equation}
+so $M_2$ diverges.  For fixed $0<t<1$,
+\begin{equation}
+ c_k(t)\sim\frac{k^{-5/2}}{\sqrt{2\pi}\,t}
+              [te^{1-t}]^k.                            \tag{7}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Coefficient extraction from $T=ue^T$, or the standard labelled-tree edge
+decomposition, gives
+\begin{equation}
+ (k-1)a_k=\frac12\sum_{i+j=k}ij a_i a_j.               \tag{8}
+\end{equation}
+At $t=0$, equation (3) means its continuous limit: $c_1=1$ and $c_k=0$ for
+$k>1$, so no $0^0$ convention is left implicit.  Differentiating (3), using
+(8), and imposing $M_1=1$ proves (1) coefficient by
+coefficient.  Substitution in (2) gives (4).  On the branch reached from zero,
+$T(te^{-t})=t$ for $t\le1$, so $U=t-t^2/2$.  Applying
+$z\partial_z$ to $G$ and using
+$uT'(u)=T/(1-T)$ gives (5); equivalently
+$\dot M_2=M_2^2$ and $\dot M_3=3M_2M_3$.  Stirling's formula applied to (3)
+gives (6) and (7), and (6) makes $\sum k^2c_k$ divergent.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Two inequivalent postgel closures}
+\begin{proposition}[Finite-sol Smoluchowski/Stockmayer branch]\label{prop:s}
+For equation (1), one explicit continuation for $t\ge1$ is
+\begin{equation}
+ c_k^{\mathrm S}(t)=a_k\frac{e^{-k}}t.                 \tag{9}
+\end{equation}
+It is continuous coefficientwise at $t=1$ and has
+\begin{equation}
+ M_0^{\mathrm S}=\frac1{2t},\qquad
+ M_1^{\mathrm S}=\frac1t,\qquad M_2^{\mathrm S}=\infty. \tag{10}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+At the critical argument, $T(e^{-1})=1$ and $U(e^{-1})=1/2$, giving (10).
+By (8), the gain in (1) is $(k-1)c_k^{\mathrm S}/t$; the loss is
+$kc_k^{\mathrm S}M_1^{\mathrm S}=kc_k^{\mathrm S}/t$.
+Their difference is $-c_k^{\mathrm S}/t=\dot c_k^{\mathrm S}$.  The critical
+tail (6), merely scaled by $1/t$, makes $M_2$ infinite.
+\end{proof}
+
+Now change the postgel equation: keep the same gain but replace its loss by
+$-kc_kM_1(0)=-kc_k$.  This is the gel-reactive Flory convention; finite
+clusters may continue to collide with the gel.
+
+\begin{proposition}[Gel-reactive Flory branch]\label{prop:f}
+For the Flory loss and $t\ge1$,
+\begin{equation}
+ c_k^{\mathrm F}(t)=a_kt^{k-1}e^{-kt}.                 \tag{11}
+\end{equation}
+For $t>1$, let
+\begin{equation}
+ r=-W_0(-te^{-t})\in(0,1),\qquad q=r/t.                \tag{12}
+\end{equation}
+Then $q=e^{-t(1-q)}$ and
+\begin{equation}
+ M_0^{\mathrm F}=q-\frac t2q^2,\quad M_1^{\mathrm F}=q,\quad
+ M_2^{\mathrm F}=\frac q{1-r},\quad
+ M_3^{\mathrm F}=\frac q{(1-r)^3}.                    \tag{13}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Equation (8) gives gain $(k-1)c_k^{\mathrm F}/t$; Flory loss is
+$kc_k^{\mathrm F}$.  Their difference equals
+$[(k-1)/t-k]c_k^{\mathrm F}=\dot c_k^{\mathrm F}$.  The principal Lambert
+branch solves $re^{-r}=te^{-t}$ and selects $r<1$, yielding the fixed-point
+equation for $q$.  Equations (4) and $U=T-T^2/2$, evaluated at $T=r$, give
+$M_0$ and $M_1$.  Two applications of $z\partial_z$ give the remaining
+moments.
+\end{proof}
+
+The same fixed-point equation also has the formal root $q=1$: for $t>1$ it
+comes from $W_{-1}(-te^{-t})=-t$.  The coefficient generating series selects
+the principal branch $W_0$, hence $r<1$ and $q<1$; the $W_{-1}$ root is not the
+finite-cluster mass of (11).
+
+Equations (9) and (11) agree at $t=1$.  For every $t>1$, however, their loss
+masses are respectively $1/t$ and $1$, and their sol masses are respectively
+$1/t$ and $q$.  Agreement at one boundary therefore cannot identify the two
+dynamical closures.  We verify these explicit continuations but make no claim
+of uniqueness among all weak postgel solutions.
+
+\section{Source and collision boundary}
+McLeod~\cite{mcleod1,mcleod2} is a primary owner for the infinite nonlinear
+system and its classical exact analysis.  Ziff--Stell~\cite{ziffstell} treat
+polymer gelation conventions; Normand--Zambotti~\cite{nz} and
+Norris~\cite{norris} delimit global solution and uniqueness questions.  We
+claim no priority for the tree law, gel exponent, or named postgel branches.
+The local contribution is an executable convention firewall.
+
+No earlier local paper owns this kinetic system.  Linear branching and the
+finite Kingman coalescent have different states and generators; neither has
+the concentration-mass gel boundary above.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Audit and strict Route-A boundary}
+The canonical evidence has 40 exact recurrence rows, five pregel/critical
+rows, four rows for each postgel closure, and five critical-tail controls.
+Each time row checks the first 20 cluster equations at 90 digits.  A
+producer-independent checker makes 696 assertions; SymPy reconstructs 29 generic
+identities; clean replay is byte identical; and 28 of 28 stale-hash,
+repaired-hash, nested-schema, branch, provenance and scope mutations are
+rejected.  These finite rows audit exact proofs; they do not establish an
+infinite tail by regression.
+
+The Route-A tuple is
+\[
+ (\mathtt{A0\_FAIL},\mathtt{A1\_FAIL},\mathtt{A2\_FAIL},
+  \mathtt{A3\_FAIL},\mathtt{A4\_FAIL}),
+\]
+with \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.  Cluster labels have no
+rational-prime semantics; coagulation histories are not a primitive
+periodic-orbit ledger; the tree series are not a target zeta/Fredholm determinant; and
+no target analytic structure or natural unitary lift is constructed.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{mcleod1} J. B. McLeod, \emph{On an Infinite Set of Non-Linear
+Differential Equations}, Quarterly Journal of Mathematics 13 (1962), 119--128.
+DOI: 10.1093/qmath/13.1.119.
+\bibitem{mcleod2} J. B. McLeod, \emph{On an Infinite Set of Non-Linear
+Differential Equations, II}, Quarterly Journal of Mathematics 13 (1962),
+193--205. DOI: 10.1093/qmath/13.1.193.
+\bibitem{ziffstell} R. M. Ziff and G. Stell, \emph{Kinetics of polymer
+gelation}, Journal of Chemical Physics 73(7) (1980), 3492--3499.
+DOI: 10.1063/1.440502.
+\bibitem{nz} C. Normand and L. Zambotti, \emph{Uniqueness of post-gelation
+solutions of a class of coagulation equations}, Annales de l'Institut Henri
+Poincaré C 28(2) (2011), 189--215. DOI: 10.1016/j.anihpc.2010.10.005.
+\bibitem{norris} J. R. Norris, \emph{Smoluchowski's coagulation equation:
+uniqueness, nonuniqueness and a hydrodynamic limit for the stochastic
+coalescent}, Annals of Applied Probability 9(1) (1999), 78--109. DOI:
+10.1214/aoap/1029962598.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \nolinkurl{NO_BAD_EULER_OR_ROOT_NUMBER}; no target arithmetic,
+target-zero, universal postgel-uniqueness, or Hilbert--Pólya claim.
+\textbf{Data and code.} The exact coefficient ledger and all audits accompany
+HCS-C228.  \textbf{AI-use disclosure.} Generative tools assisted drafting and
+code generation; the released internal chain checks the displayed formulas
+and metadata.  This is not external peer review.
+\end{document}

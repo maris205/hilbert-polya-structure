@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C227
+candidate_definition: Lorenz-63 positive-parameter dissipative flow with zero-rate boundary atlas
+family: three-dimensional quadratic autonomous ODE
+phase_space: R^3
+dynamics: xdot=sigma(y-x), ydot=x(rho-z)-y, zdot=xy-beta z
+parameters: sigma>0, beta>0, rho in R; zero rates are separate controls
+parameter_provenance: source-defined physical model parameters; no target fitting
+arithmetic_origin: none
+clock: physical continuous time
+normalization: c=rho+sigma and V=x^2+y^2+(z-c)^2
+determinant_convention: finite Jacobian characteristic polynomials only; no orbit or Fredholm determinant
+orbit_cutoff: no orbit enumeration; ten exact parameter rows and five Lyapunov identity rows
+precision: exact rational arithmetic and generic symbolic reconstruction
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 489672bd36abd3a4f6da92d1446a0af575917959
+code_commit: 489672bd36abd3a4f6da92d1446a0af575917959
+artifact_paths:
+  evidence: results/c227_lorenz_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: Lorenz-63 vector field and source parameters
+  arithmetic_origin: none
+  clock: physical continuous time
+  normalization: positive sigma and beta; rho real; zero rates separated
+  cutoff: no trajectory cutoff; exact theorem plus frozen regression controls
+  precision: exact rational and symbolic identities
+  allowed_data: vector field, equilibria, Jacobians, Lyapunov ledger, parameter boundaries
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-native symmetry, parameters and a global absorbing ellipsoid
+  strongest_failure: no intrinsic rational-prime carrier or prime-power semantics
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: complete equilibrium and local linear-stability atlas
+  strongest_failure: no complete primitive periodic-orbit owner or source repetition law
+  metrics: {equilibrium_regimes: 6, orbit_rows: 0}
+  artifacts: [THEOREM_PACKAGE.md, results/c227_lorenz_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact finite Jacobian characteristic polynomials
+  strongest_failure: local cubic polynomials are not an orbit zeta or target Fredholm determinant
+  metrics: {target_zero_match: null, local_polynomials: 2}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the source parameter atlas is exact
+  strongest_failure: no target continuation, divisor, functional equation or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FAIL
+  evidence_status: PROVED_NEGATIVE
+  strongest_evidence: deterministic dissipative flow with explicit contraction
+  strongest_failure: no natural source-local unitary quantization or self-adjoint spectral bridge is constructed
+  metrics: {route_b_ready: false}
+  artifacts: [THEOREM_PACKAGE.md]
+adversarial_controls:
+  controls_used: [rho=1, exact Hopf rows, no-finite-Hopf regime, sigma=0, beta=0, double-zero, unknown and stale hashes]
+  proves_too_much_risk: high if local instability is called universal chaos or a Jacobian polynomial is promoted to an orbit determinant
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: global dissipativity and equilibrium/local-stability atlas only; no global chaos, target arithmetic, determinant bridge or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no complete primitive periodic-orbit ledger
+  - no target determinant or analytic target match
+  - no natural unitary lift
+next_smallest_test: none inside the equilibrium atlas; periodic-orbit ownership would be a distinct project
+round2_clues: []
+route_b_invocation_allowed: false

@@ -1,0 +1,187 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\Ste}{\mathrm{Ste}}
+\title{The One-Phase Stefan Problem: A Closed Neumann Root, Lambert-W Endpoints, and an Exact Energy Ledger}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a source-local theorem for the dimensionless one-phase Stefan problem.
+The Neumann similarity ansatz reduces the moving boundary to the strictly
+increasing equation $F(\lambda)=\sqrt\pi\lambda e^{\lambda^2}\operatorname{erf}\lambda=\Ste$.
+This proves a unique positive root, supplies a five-term small-$\Ste$ inverse
+series and a two-sided large-$\Ste$ Lambert-$W$ enclosure, and closes the
+wall/interface flux partition. Integrating the heat equation over the moving
+interval gives an exact sensible-plus-latent energy ledger. Zero superheat,
+zero diffusivity, and zero latent heat are labelled singular rescalings. The
+result is hydrodynamic/free-boundary analysis, not an arithmetic determinant or
+a Hilbert--Pólya construction.
+\end{abstract}
+
+\section{Frozen model and similarity reduction}
+We scale the wall superheat, melting temperature, and thermal diffusivity to
+one. The liquid occupies $0<x<s(t)$ and satisfies
+\begin{equation}
+ u_t=u_{xx},\qquad u(0,t)=1,\qquad u(s(t),t)=0,
+ \qquad \beta s'(t)=-u_x(s(t)^-,t),\qquad s(0)=0,
+ \label{eq:model}
+\end{equation}
+where $\beta=\Ste^{-1}>0$ is the inverse Stefan number. With
+$\eta=x/(2\sqrt t)$, the Neumann form is
+\begin{equation}
+ s(t)=2\lambda\sqrt t,\qquad
+ u(x,t)=1-\frac{\operatorname{erf}(\eta)}{\operatorname{erf}(\lambda)}.
+ \label{eq:profile}
+\end{equation}
+The interface derivative is
+$-u_x(s(t)^-,t)=e^{-\lambda^2}/(\sqrt{\pi t}\operatorname{erf}\lambda)$.
+Consequently the Stefan condition is equivalent to
+\begin{equation}
+ F(\lambda):=\sqrt\pi\lambda e^{\lambda^2}\operatorname{erf}\lambda=\Ste.
+ \label{eq:root}
+\end{equation}
+
+\begin{theorem}[unique Neumann root and endpoint atlas]\label{thm:main}
+For every $\Ste>0$, equation \eqref{eq:root} has exactly one $\lambda>0$.
+Indeed, $F(0)=0$, $F(\lambda)\to\infty$, and
+\begin{equation}
+ F'(\lambda)=\sqrt\pi e^{\lambda^2}\operatorname{erf}\lambda(1+2\lambda^2)+2\lambda>0.
+ \label{eq:derivative}
+\end{equation}
+The corresponding profile \eqref{eq:profile} solves \eqref{eq:model} for $t>0$.
+Writing $z=\Ste$, its small-$z$ inverse is
+\begin{equation}
+ \lambda^2=\frac z2-\frac{z^2}{6}+\frac{7z^3}{90}-\frac{79z^4}{1890}
+ +\frac{689z^5}{28350}+O(z^6),
+ \label{eq:small}
+\end{equation}
+and, for $z>1$,
+\begin{equation}
+ \frac12W\!\left(\frac{2z^2}{\pi}\right)<\lambda^2<
+ \frac12W\!\left(\frac{2(z+1)^2}{\pi}\right).
+ \label{eq:large}
+\end{equation}
+Thus $\lambda^2\sim\tfrac12W(2z^2/\pi)$ as $z\to\infty$.
+\end{theorem}
+
+\begin{proof}
+Substitution of \eqref{eq:profile} into the heat equation uses
+$\frac{\dd}{\dd\eta}\operatorname{erf}\eta=2e^{-\eta^2}/\sqrt\pi$;
+the two Dirichlet values are immediate. Differentiating $F$ gives
+\eqref{eq:derivative}, while its endpoint limits follow from the standard
+limits of $\operatorname{erf}$. Expanding
+\[
+ F(\sqrt x)=2x+\frac43x^2+\frac8{15}x^3+\frac{16}{105}x^4
+ +\frac{32}{945}x^5+O(x^6)
+\]
+and formal reversion gives \eqref{eq:small}. Finally, for $\lambda>0$,
+$0<\operatorname{erfc}\lambda<e^{-\lambda^2}/(\sqrt\pi\lambda)$, so
+\[
+ z<\sqrt{\pi\lambda^2}e^{\lambda^2}<z+1.
+\]
+The function $x\mapsto\sqrt{\pi x}e^x$ is increasing, and inversion with the
+principal Lambert branch proves \eqref{eq:large}.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Flux partition and the moving-domain energy identity}
+The wall and interface fluxes have a common $t^{-1/2}$ singularity:
+\begin{equation}
+ J_{\rm wall}(t)=-u_x(0,t)=\frac{1}{\sqrt{\pi t}\operatorname{erf}\lambda},
+ \qquad
+ J_{\rm int}(t)=-u_x(s(t)^-,t)=e^{-\lambda^2}J_{\rm wall}(t).
+ \label{eq:flux}
+\end{equation}
+Thus $J_{\rm int}/J_{\rm wall}=e^{-\lambda^2}$ exactly. Integrating
+$u_t=u_{xx}$ on the moving interval (the boundary value $u(s(t),t)=0$
+removes the Reynolds endpoint term) gives
+\begin{equation}
+ \int_0^tJ_{\rm wall}(\tau)\dd\tau
+ =\int_0^{s(t)}u(x,t)\dd x+\beta s(t).
+ \label{eq:ledger}
+\end{equation}
+The elementary antiderivative
+$\int_0^\lambda\operatorname{erf}\eta\dd\eta
+=\lambda\operatorname{erf}\lambda+(e^{-\lambda^2}-1)/\sqrt\pi$
+therefore yields
+\begin{align}
+ S(t)&:=\int_0^{s(t)}u\dd x
+ =\frac{2\sqrt t(1-e^{-\lambda^2})}{\sqrt\pi\operatorname{erf}\lambda},\\
+ L(t)&:=\beta s(t)=2\beta\lambda\sqrt t
+ =\frac{2e^{-\lambda^2}\sqrt t}{\sqrt\pi\operatorname{erf}\lambda},\\
+ I(t)&:=\int_0^tJ_{\rm wall}(\tau)\dd\tau
+ =\frac{2\sqrt t}{\sqrt\pi\operatorname{erf}\lambda}=S(t)+L(t).
+ \label{eq:energy}
+\end{align}
+This is an exact sensible-plus-latent energy ledger, not a fitted numerical
+balance. The eight rational probes in the accompanying receipt cover both
+terms and the Lambert enclosure.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Singular limits, source boundary, and audit}
+As $\beta\to\infty$ (small $\Ste$), $\lambda\to0$ by \eqref{eq:small}; the
+normalized interface speed vanishes. As $\beta\to0^+$ (large $\Ste$),
+$\lambda\to\infty$ with \eqref{eq:large}. Zero superheat makes the chosen
+normalization undefined, and zero dimensional diffusivity $\kappa=0$ collapses
+the similarity length $2\lambda\sqrt{\kappa t}$ (here $\kappa$ denotes the
+dimensional diffusivity before the displayed scaling). The zero-latent limit
+$L=0$ is $\Ste=\infty$ and requires a separate rescaling, as emphasized in the
+small-latent-heat analysis of Addison--Howison--King~\cite{addison}; no finite-$\lambda$ Stefan
+interface is claimed.
+These boundaries are distinct from the fixed-domain Barenblatt and KPP
+families (C207 and C202): here the defining advance is a moving boundary and
+the exact ledger \eqref{eq:energy}.
+
+\begin{center}\ttfamily
+(A0\_FAIL, A1\_FAIL, A2\_FAIL, A3\_FAIL, A4\_FORMAL\_HINT).
+\end{center}
+Hence \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}. The source heat clock is not
+target continuation/divisor/counting law and is not an A3 analytic-structure
+match. The scope lock is
+\begin{center}\ttfamily NO\_BAD\_EULER\_OR\_ROOT\_NUMBER.\end{center}
+No target prime or zero table, Euler factor, root number, automorphy statement,
+functional equation, or Hilbert--Pólya operator is introduced.
+\fi
+
+\enlargethispage{5\baselineskip}
+\section*{Source note}
+The classical free-boundary setting and small-latent-heat asymptotics are
+documented by Addison, Howison, and King~\cite{addison}; phase-change and
+Neumann conventions are treated in Gupta~\cite{gupta}; two-phase stability
+background is given by Rubinstein~\cite{rubinstein}. These references
+are source metadata, not a priority or arithmetic claim.
+
+\begin{thebibliography}{9}\small
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}
+\bibitem{addison} J. A. Addison, S. D. Howison, and J. R. King, Ray methods
+for Free Boundary Problems, Oxford author manuscript (2005),
+\href{https://people.maths.ox.ac.uk/howison/papers/smallstefan.pdf}{smallstefan.pdf}.
+\bibitem{gupta} S. C. Gupta, \emph{The Classical Stefan Problem: Basic
+Concepts, Modelling and Analysis}, Elsevier, North-Holland Series in Applied
+Mathematics and Mechanics, Volume 45 (2003), ISBN 978-0-444-51086-0.
+\bibitem{rubinstein} L. I. Rubinstein, Global Stability of the Neumann Solution
+of the Two-phase Stefan Problem, \emph{IMA Journal of Applied Mathematics}
+28(3), 287--299 (1982). DOI:
+\href{https://doi.org/10.1093/imamat/28.3.287}{10.1093/imamat/28.3.287}.
+\end{thebibliography}
+
+\clearpage
+\section*{Declarations}
+\textbf{Scope.} \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target arithmetic
+or operator claim. \textbf{Data and code.} The theorem, ledger, independent
+checks, and build instructions are released with HCS-C226.
+\textbf{AI-use disclosure.} Generative tools assisted drafting and code
+generation; the internal artifact chain checked displayed claims and metadata.
+This is not external peer review.
+\end{document}

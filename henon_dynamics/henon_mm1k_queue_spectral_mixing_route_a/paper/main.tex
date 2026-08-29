@@ -1,0 +1,171 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\title{Exact Spectrum, Transient Kernel, and Capacity Limits of the M/M/1/K Queue}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give a convention-complete spectral atlas for the finite-capacity
+continuous-time M/M/1/K birth--death queue.  The capacity $K$ includes the
+customer in service, so the two reflecting endpoint diagonals differ from the
+interior diagonal.  Detailed balance conjugates the generator to a symmetric
+Jacobi matrix.  Its Robin endpoint equations yield every nonzero mode and the
+closed gap
+$\gamma_K=\lambda+\mu-2\sqrt{\lambda\mu}\cos(\pi/(K+1))$.  Reassembling the
+modes gives the exact transient kernel and a reversible total-variation
+mixing bound.  We also treat $K=0$, zero-rate absorbing faces, equal rates,
+and the three controlled $K\to\infty$ regimes.  The infinite section records
+only stationary, gap and mass-escape limits; no continuous-spectrum claim is
+made.  Independent exact, symbolic, replay and hostile-mutation audits ship
+with the theorem.
+\end{abstract}
+
+\section{Model and endpoint convention}
+States are $\{0,1,\ldots,K\}$, with $K$ including the customer in service.
+For $K\geq1$ and positive rates,
+\begin{equation}
+ Q_{0,0}=-\lambda,\quad Q_{0,1}=\lambda,\qquad
+ Q_{n,n-1}=\mu,\ Q_{n,n}=-(\lambda+\mu),\ Q_{n,n+1}=\lambda,
+ \label{eq:interior}
+\end{equation}
+for $0<n<K$, and $Q_{K,K-1}=\mu$, $Q_{K,K}=-\mu$.  Thus rows sum to zero.
+At $K=0$ the generator is the one-by-one zero matrix.  Time is the physical
+continuous-time Markov clock and $P_t=\exp(tQ)$ is row stochastic.
+
+\begin{theorem}[Finite M/M/1/K spectral atlas]\label{thm:atlas}
+Put $\rho=\lambda/\mu$ and $Z_K=\sum_{r=0}^K\rho^r$.  For $\lambda,\mu>0$,
+\[
+ \pi_n=\frac{\rho^n}{Z_K},\qquad 0\leq n\leq K,
+\]
+and $S=D_\pi^{1/2}QD_\pi^{-1/2}$ is symmetric tridiagonal with off-diagonal
+$r=\sqrt{\lambda\mu}$.  Its eigenvalues are $0$ and
+\[
+ \nu_j=-(\lambda+\mu)+2r\cos\theta_j,
+ \qquad \theta_j=\frac{j\pi}{K+1},\quad j=1,\ldots,K. \tag{2}
+\]
+For $j\geq1$, an eigenvector is proportional to
+\[
+ v_j(n)=\sin((n+1)\theta_j)-\sqrt{\mu/\lambda}\,\sin(n\theta_j),
+ \quad 0\leq n\leq K,                                      \tag{3}
+\]
+and $v_0(n)=\sqrt{\pi_n}$.  With normalized vectors,
+\[
+ P_t(i,j)=\sqrt{\frac{\pi_j}{\pi_i}}
+ \sum_{m=0}^{K}v_m(i)v_m(j)e^{\nu_m t},\qquad \nu_0=0.  \tag{4}
+\]
+The spectral gap is
+\[
+ \gamma_K=\lambda+\mu-2\sqrt{\lambda\mu}\cos\frac{\pi}{K+1},       \tag{5}
+\]
+and
+\[
+ \|P_t(i,\cdot)-\pi\|_{\rm TV}
+ \leq\tfrac12\sqrt{\pi_i^{-1}-1}\,e^{-\gamma_Kt}.                    \tag{6}
+\]
+\end{theorem}
+
+\begin{proof}
+The ratios $\pi_{n+1}/\pi_n=\lambda/\mu$ give detailed balance, hence the
+displayed similarity and the common off-diagonal $r$.  The interior equation
+for an eigenvector is the second-order recurrence
+$r v_{n-1}-(\lambda+\mu)v_n+r v_{n+1}=\nu v_n$.
+Writing $\nu=-(\lambda+\mu)+2r\cos\theta$ gives (3) after imposing the
+left endpoint equation.  The right endpoint residual is
+$(\lambda+\mu-2r\cos\theta)\sin((K+1)\theta)$, so the nonzero modes have
+$\theta_j=j\pi/(K+1)$.  The constant stationary mode supplies $v_0$; symmetry
+then gives an orthonormal basis and (4) by conjugating $e^{tS}$.  The smallest
+positive decay rate is (5).  The reversible $L^2(\pi)$ spectral estimate
+$\chi_i^2(t)\leq(\pi_i^{-1}-1)e^{-2\gamma_Kt}$ and Cauchy--Schwarz yield
+(6).
+\end{proof}
+
+\section{What the finite formula buys us}
+The endpoint convention is mathematically active: replacing $Q_{K,K}$ by the
+interior diagonal changes the Robin equation and the angle grid.  Formula (4)
+is an entrywise finite sum, so it gives nonnegative, row-stochastic transition
+probabilities without an unevaluated matrix exponential.  It also makes the
+gap bound auditable for every starting state, including the least likely wall
+state.  At $\lambda=\mu$, $\pi$ is uniform and (5) becomes
+$2\lambda(1-\cos(\pi/(K+1)))$.
+
+\ifnum\CRevisionRound>0
+\section{Singular faces and the capacity boundary}
+If $K=0$, state $0$ is the sole absorbing state.  If $\lambda=0$ and $\mu>0$,
+state $0$ absorbs; if $\mu=0$ and $\lambda>0$, state $K$ absorbs.  When both
+rates vanish every state is absorbing, so there is no unique stationary law.
+These faces are not limits of the positive-rate eigenvector formula.
+
+For fixed positive rates, let $K\to\infty$.  If $\rho<1$, then
+$\pi_n\to(1-\rho)\rho^n$ for each fixed $n$, while
+$\gamma_K\to(\sqrt\mu-\sqrt\lambda)^2$.  If $\rho=1$, the finite law is
+uniform but no probability stationary law exists on the half-line, and
+\[
+ \gamma_K=2\lambda\{1-\cos(\pi/(K+1))\}
+ \sim \frac{\lambda\pi^2}{(K+1)^2}.                     \tag{7}
+\]
+If $\rho>1$, $\pi_n^{(K)}\to0$ for every fixed $n$: mass escapes toward the
+reflecting wall, and the half-line chain has no stationary probability.  We do
+not infer a continuous-spectrum decomposition from these elementary limits.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Evidence, distinctions, and Route-A boundary}
+The canonical ledger contains 20 stationary rows, 60 normalized mode rows,
+240 kernel rows, 240 linked mixing rows, 16 capacity-limit rows and eight
+boundary rows.  A producer-independent checker makes 3,655 assertions and
+also performs exact generator/reversibility checks plus a high-precision matrix
+exponential spot check.  SymPy verifies 46 identities, including the Jacobi
+similarity, endpoint recurrence and Chebyshev characteristic factor.  Clean
+replay is byte-for-byte; 25 repaired-hash semantic/schema mutations and one
+stale-hash mutation are rejected.
+
+This reversible birth--death semigroup is distinct from C208's branching
+probability-generating function and from C220's interacting-particle
+matrix-ansatz phase atlas.  The strict tuple is
+\[
+ (\texttt{A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT}),
+\]
+with \texttt{ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.  The Jacobi
+matrix is a finite formal quantization hint only: queue states and rates have
+no primitive arithmetic owner, target divisor, or Hilbert--Polya bridge.
+\fi
+
+\section*{Source note and declarations}
+Karlin--McGregor~\cite{km1957} established the classical birth--death spectral
+framework.  Related finite Markov-matrix spectral calculations are discussed
+by Ekstr{\"o}m, Garoni, Jozefiak and Perla~\cite{egjp2021}; recurrence
+vocabulary follows Callaert--Keilson~\cite{ck1973}.  We claim no priority for these results.  No target
+arithmetic, Euler factor, root number, automorphy, target divisor or Route-B
+input is used.  Finite characteristic polynomials are not infinite Fredholm
+determinants.  Generative tools assisted drafting and code generation; the
+artifact chain checked the displayed claims.  Scope literal:
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  This is not external peer review.
+
+\begin{thebibliography}{9}
+\bibitem{km1957} S. Karlin and J. McGregor, ``The differential equations of
+birth-and-death processes, and the Stieltjes moment problem,''
+\emph{Transactions of the American Mathematical Society} 85 (1957), 489--546.
+DOI: 10.1090/S0002-9947-1957-0091566-1.
+\bibitem{egjp2021} S.-E. Ekstr{\"o}m, C. Garoni, A. Jozefiak and J. Perla,
+``Eigenvalues and eigenvectors of tau matrices with applications to Markov
+processes and economics,'' \emph{Linear Algebra and its Applications} 627
+(2021), 41--71. DOI: 10.1016/j.laa.2021.06.005.
+\bibitem{ck1973} H. Callaert and J. Keilson, ``On exponential ergodicity and
+spectral structure for birth-death processes, II,'' \emph{Stochastic Processes
+and their Applications} 1(3) (1973), 217--235. DOI:
+10.1016/0304-4149(73)90001-X.
+\end{thebibliography}
+\end{document}

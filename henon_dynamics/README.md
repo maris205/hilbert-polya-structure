@@ -2605,3 +2605,27 @@ the per-paper evaluator YAML files; all five remain `ROUTE_A_REJECTED`, with
 `route_b_invocation_allowed: false`.  The common scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic or operator bridge is
 claimed.
+
+## Route-A independent cross-subtype round C224--C228
+
+This round makes one large, complete theorem-scale advance in each paper and
+changes the dynamical owner in every slot: a nonautonomous Landau--Zener
+crossing, a finite-capacity birth--death queue, a one-phase Stefan free
+boundary, a dissipative Lorenz flow, and a gelating coagulation equation.
+Finite receipts are independent regression oracles; the all-parameter claims
+are carried by the displayed source-local theorems.  The five papers are not
+installments of one theorem.
+
+- [C224 Landau--Zener--Weber scattering](henon_landau_zener_weber_scattering_route_a/README.md) · [paper PDF](henon_landau_zener_weber_scattering_route_a/paper/main.pdf)
+- [C225 finite M/M/1/K spectral--mixing atlas](henon_mm1k_queue_spectral_mixing_route_a/README.md) · [paper PDF](henon_mm1k_queue_spectral_mixing_route_a/paper/main.pdf)
+- [C226 one-phase Stefan--Neumann similarity](henon_one_phase_stefan_neumann_similarity_route_a/README.md) · [paper PDF](henon_one_phase_stefan_neumann_similarity_route_a/paper/main.pdf)
+- [C227 Lorenz-63 dissipativity and stability atlas](henon_lorenz63_dissipative_stability_atlas_route_a/README.md) · [paper PDF](henon_lorenz63_dissipative_stability_atlas_route_a/paper/main.pdf)
+- [C228 product-kernel coagulation and postgel closure](henon_smoluchowski_product_kernel_gelation_route_a/README.md) · [paper PDF](henon_smoluchowski_product_kernel_gelation_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C224_C228.md), [batch plan](BATCH_PLAN_C224_C228.md),
+and [batch review](BATCH_REVIEW_C224_C228.md) for the frozen collision
+decisions, theorem increments, source/evidence boundaries, release hashes,
+and uniform audit.  All five strict tuples remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false`; scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER` and no target arithmetic or operator bridge is
+claimed.

@@ -1,0 +1,193 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\diab}{\mathrm{diab}}
+\newcommand{\ad}{\mathrm{ad}}
+\title{Landau--Zener--Weber Scattering: Exact Connection Data and\newline Finite-Window Unitary Controls}
+\author{HCS Research Program}
+\date{29 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We analyze the genuinely nonautonomous two-level crossing
+$i\dot\psi=[(vt/2)\sigma_z+g\sigma_x]\psi$, $v>0$.  Eliminating one
+component gives a pair of parabolic-cylinder (Weber) equations.  Their
+connection formula yields, in a fixed diabatic gauge, the exact asymptotic
+survival law $P_\diab=\exp(-2\pi g^2/v)$ and the
+Stokes/Gamma phase
+$\phi_S=\pi/4+\delta(\log\delta-1)+\arg\Gamma(1-i\delta)$.
+Wronskian conservation proves an $SU(2)$ scattering matrix, while elementary
+calculus gives strict monotonicity and sudden/adiabatic limits.  A separate
+80-digit, fixed-step RK4 ledger checks finite windows without calling them an
+exact finite-time formula.  The source-local theorem is a unitary/scattering
+candidate only: it supplies no arithmetic owner, target divisor, or
+Hilbert--Polya bridge.
+\end{abstract}
+
+\section{Crossing and conventions}
+Set $\hbar=1$, $\sigma_z=\operatorname{diag}(1,-1)$, and use the diabatic
+basis at both ends of time:
+\begin{equation}
+ H(t)=\frac{vt}{2}\sigma_z+g\sigma_x,
+ \qquad i\frac{d}{dt}\binom{a}{b}=H(t)\binom{a}{b},
+ \qquad v>0,\ g\in\mathbb R .                         \label{eq:model}
+\end{equation}
+The physical clock is $t$; there is no fitted repetition or target clock.  We
+write $\delta=g^2/v$ and fix the asymptotic phase convention by the matrix in
+Theorem~\ref{thm:scattering}.  Conjugating by $\sigma_z$ maps $g$ to $-g$.
+
+\begin{theorem}[Weber reduction and scattering law]\label{thm:scattering}
+For $g\ne0$, the components of a solution of \eqref{eq:model} satisfy
+\begin{align}
+ a''+\left(g^2+\frac{v^2t^2}{4}+\frac{iv}{2}\right)a&=0,\\
+ b''+\left(g^2+\frac{v^2t^2}{4}-\frac{iv}{2}\right)b&=0.               \label{eq:weber}
+\end{align}
+After the usual rotation of $t$ and affine rescaling these are Weber
+parabolic-cylinder equations.  Unit-flux connection data from $t=-\infty$ to
+$t=+\infty$ are
+\begin{equation}
+ S(\delta)=\begin{pmatrix}
+ \sqrt P&-\sqrt{1-P}\,e^{i\phi_S}\\
+ \sqrt{1-P}\,e^{-i\phi_S}&\sqrt P
+ \end{pmatrix},\quad
+ P=e^{-2\pi\delta},\quad
+ \phi_S=\frac\pi4+\delta(\log\delta-1)+\arg\Gamma(1-i\delta),       \label{eq:S}
+\end{equation}
+with $\phi_S(0)=\pi/4$ by continuity.  A different diagonal asymptotic
+phase convention conjugates $S$ by diagonal unitaries and leaves $P$ intact.
+\end{theorem}
+
+\begin{proof}
+From the first component equation,
+$b=(ia'-(vt/2)a)/g$.  Substitution into the second gives the first equation
+in \eqref{eq:weber}; exchanging components gives the second.  The rotated
+equation is the standard parabolic-cylinder equation.  Its connection identity
+and constant Wronskian produce the two entries in \eqref{eq:S}; the modulus
+identity $|\Gamma(1+i\delta)|^2=\pi\delta/\sinh(\pi\delta)$ reduces the
+diagonal coefficient to $e^{-\pi\delta}$.  This is a source-local special
+function calculation, with no external spectral data.
+\end{proof}
+
+\begin{proposition}[Unitary and monotone invariants]\label{prop:inv}
+For real parameters, $H(t)=H(t)^*$ and every finite-time propagator preserves
+the Hermitian norm.  The Weber Wronskian gives the same flux identity at the
+two ends, so $S^*S=I$ and $\det S=1$.  Moreover
+\begin{equation}
+ \frac{dP}{d\delta}=-2\pi e^{-2\pi\delta}<0\quad(\delta>0),\qquad
+ \left.\frac{\partial P}{\partial g}\right|_v=-\frac{4\pi g}{v}e^{-2\pi g^2/v},
+ \label{eq:deriv}
+\end{equation}
+and $\phi_S'(\delta)=\log\delta-\Re\psi(1-i\delta)$.
+\end{proposition}
+
+\begin{proof}
+Hermiticity gives $(\psi^*\psi)'=0$; the Wronskian is the equivalent
+constant flux in the Weber basis.  Direct multiplication of \eqref{eq:S}
+proves the $SU(2)$ identities.  Differentiating $e^{-2\pi\delta}$ gives
+\eqref{eq:deriv}; differentiating $\log\Gamma(1-i\delta)$ gives the phase
+derivative.
+\end{proof}
+
+\clearpage
+\section{Limits, boundaries, and a finite-window control}
+
+The crossing parameter organizes the singular faces.  As $\delta\downarrow0$,
+\begin{equation}
+ P=1-2\pi\delta+O(\delta^2),\qquad 1-P=2\pi\delta+O(\delta^2),
+\end{equation}
+so the sudden limit $v\to\infty$ is diabatic.  At fixed $g\ne0$, $v\downarrow0$
+gives $P\to0$ (adiabatic following).  At $g=0$ the two channels decouple
+exactly, and the continuous phase convention is used.  The sign change
+$g\mapsto-g$ is a constant $\sigma_z$ gauge, not a new probability law.  The
+point $t=0$ is the sole diabatic gap closing; it is the turning point of the
+Weber connection problem.
+
+For validation, we integrated both basis vectors of \eqref{eq:model} on
+$[-T,T]$ with a fixed 2048-step classical RK4 scheme at 80 decimal digits.
+The ledger records all four complex entries, $P_{\rm window}=|U_{11}|^2$,
+$|P_{\rm window}-P|$, and $\|U^*U-I\|_{\max}$.  It is a controlled numerical
+window, not an exact finite-time propagator.  Representative exact rows are:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lrrrcc@{}}
+\toprule
+case & $v$ & $g$ & $\delta$ & $P_\diab$ & $\phi_S$\\
+\midrule
+reference & 1 & $1/2$ & $1/4$ & 0.2078795764 & 0.3270619133\\
+fast/weak & 4 & $1/3$ & $1/36$ & 0.8398492016 & 0.6741033767\\
+slow/strong & $1/4$ & $3/4$ & $9/4$ & 0.0000007249 & 0.0372977224\\
+negative $g$ & 2 & $-1/2$ & $1/8$ & 0.4559381278 & 0.4718436007\\
+uncoupled & $3/2$ & 0 & 0 & 1 & 0.7853981634\\
+\bottomrule
+\end{tabular}
+\caption{Exact source-local scattering rows in the fixed gauge.}
+\label{tab:scattering}
+\end{table}
+
+The finite ledger has 15 rows ($T=2,4,8$ for each case).  The largest Gram
+residual is $1.56\times10^{-5}$ with the 2048-step control; discrepancies are
+reported as finite-window effects.  A producer-independent checker recomputes
+the ODE, while a separate SymPy program checks the signs in \eqref{eq:weber},
+the Pauli square, $SU(2)$ determinant, monotonicity, and the coupling gauge.
+The machine-readable field is written literally as \texttt{P\_diabatic}; the
+scope lock is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\section{Relation to the Route-A decision}
+
+The theorem is a complete physical scattering result, but a single swept
+crossing has no primitive periodic-orbit repetition law.  The parameter
+$\delta$ is a source coupling ratio, not an arithmetic label; $P$ and
+$\phi_S$ are not target zeros or divisor data.  Thus the strict tuple is
+\begin{center}
+\ttfamily (A0\_FAIL, A1\_FAIL, A2\_FAIL, A3\_FAIL,
+A4\_UNITARY\_OR\_SCATTERING\_CANDIDATE),
+\end{center}
+with \texttt{overall=ROUTE\_A\_REJECTED} and
+\texttt{route\_b\_invocation\_allowed=false}.  This nonautonomous model is
+intentionally distinct from the autonomous Jaynes--Cummings excitation blocks
+of C223.  No target operator, Euler factor, root number, automorphy claim, or
+Hilbert--Polya bridge is made.
+
+\clearpage
+\section*{Reproducibility and source note}
+
+The receipt is generated by
+\texttt{code/c224\_landau\_zener\_producer.py} using exact rational sentinels,
+80-digit Gamma evaluation, and deterministic RK4.  The independent checker,
+symbolic cross-check, clean replay, and hostile mutation suite are run in
+separate processes.  The fixed-epoch LuaLaTeX build is repeated twice; the
+three revision PDFs are content-distinct and the final \texttt{main.pdf} is
+byte-identical to round 2.  The release manifest closes exactly 27 payload
+files and excludes itself and build sidecars.
+
+The source audit records the following DOI-verified references:
+
+\begin{thebibliography}{9}
+\bibitem{zener1932} C. Zener, ``Non-adiabatic crossing of energy levels,''
+\emph{Proceedings of the Royal Society A} 137 (1932), 696--702.
+DOI: \href{https://doi.org/10.1098/rspa.1932.0165}{10.1098/rspa.1932.0165}.
+\bibitem{vitanov1996} N. V. Vitanov and B. M. Garraway, ``Landau-Zener model:
+Effects of finite coupling duration,'' \emph{Physical Review A} 53 (1996),
+4288--4304. DOI: \href{https://doi.org/10.1103/PhysRevA.53.4288}{10.1103/PhysRevA.53.4288}.
+\bibitem{shevchenko2010} S. N. Shevchenko, S. Ashhab, and F. Nori,
+``Landau-Zener-Stuckelberg interferometry,'' \emph{Physics Reports} 492
+(2010), 1--30. DOI: \href{https://doi.org/10.1016/j.physrep.2010.03.002}{10.1016/j.physrep.2010.03.002}.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target
+arithmetic or Hilbert--Polya claim.  \textbf{Data and code.} All rows and
+audits are released with HCS-C224.  \textbf{AI-use disclosure.} Generative
+tools assisted drafting and code generation; the internal artifact chain
+checked displayed claims and metadata.  This is not external peer review.
+\end{document}

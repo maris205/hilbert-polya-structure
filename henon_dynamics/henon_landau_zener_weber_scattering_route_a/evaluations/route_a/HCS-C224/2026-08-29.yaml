@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C224
+candidate_definition: nonautonomous two-level Landau--Zener crossing with Weber connection data
+family: linear diabatic sweep H(t)=(v t/2)sigma_z+g sigma_x, v>0, g real
+phase_space: C^2 with standard Hermitian norm
+dynamics: i d_t psi=H(t)psi, with asymptotic diabatic scattering from t=-infinity to +infinity
+parameters: rational source sentinels v,g,T; physical time t and finite window T
+parameter_provenance: source-defined sweep/coupling; no target fitting
+arithmetic_origin: none; the Weber index and crossing parameter have no arithmetic owner
+clock: physical laboratory time, nonautonomous sweep
+normalization: hbar=1, sigma_z=diag(1,-1), fixed diabatic SU(2) gauge
+determinant_convention: 2x2 scattering determinant only; no infinite-dimensional determinant or target divisor
+orbit_cutoff: 5 parameter cases, 15 finite-window propagator rows
+precision: 80 working decimal digits; 68 serialized significant digits; deterministic 2048-step RK4 controls
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 489672bd36abd3a4f6da92d1446a0af575917959
+code_commit: 489672bd36abd3a4f6da92d1446a0af575917959
+artifact_paths:
+  evidence: results/c224_landau_zener_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-29
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+source_lock:
+  object: linear two-channel avoided crossing and its Weber scalar reduction
+  arithmetic_origin: none
+  clock: physical time t; no target-fitted clock
+  normalization: diabatic basis with sigma_z=diag(1,-1), fixed SU(2) scattering gauge
+  cutoff: 5 exact asymptotic rows, 15 finite-window controls, 6 boundary rows
+  precision: exact rational parameters, Gamma phase at 80 digits, independent RK4 replay
+  allowed_data: Landau--Zener probability, Stokes/Gamma phase, unitary scattering matrix, finite-window controls
+  forbidden_data: target primes, target zeros, Euler factors, root numbers, automorphy
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-local Weber connection and a complete two-channel crossing law
+  strongest_failure: no intrinsic rational-prime or primitive-orbit owner
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact asymptotic probability and finite-window propagator controls
+  strongest_failure: a single nonautonomous crossing has no source repetition law or primitive periodic family
+  metrics: {scattering_rows: 5, finite_window_rows: 15}
+  artifacts: [THEOREM_PACKAGE.md, results/c224_landau_zener_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: Weber Wronskian fixes a unitary scattering matrix and Stokes phase
+  strongest_failure: no target determinant or zero-divisor correspondence
+  metrics: {target_zero_match: null, source_scattering: exact_asymptotic}
+  artifacts: [THEOREM_PACKAGE.md, NARRATIVE_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: Gamma-controlled connection formula and explicit singular limits
+  strongest_failure: no target continuation, divisor, functional equation or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_UNITARY_OR_SCATTERING_CANDIDATE
+  evidence_status: PROVED_SOURCE_LOCAL
+  strongest_evidence: exact unitary scattering matrix with a nontrivial Stokes/Gamma phase
+  strongest_failure: this is a physical two-level scattering system, not a target operator or Hilbert--Polya bridge
+  metrics: {route_b_ready: false, finite_time_formula_claimed: false}
+  artifacts: [THEOREM_PACKAGE.md, results/c224_landau_zener_evidence.json]
+adversarial_controls:
+  controls_used: [Weber scalar sign check, scattering SU(2) determinant, P monotonicity, Gamma-phase derivative, coupling-sign gauge, g=0, adiabatic/sudden limits, finite-window disclaimer, nested/unknown/stale hashes]
+  proves_too_much_risk: high if the finite RK4 window is mislabeled as an exact finite-time propagator or if the scattering phase is identified with target data
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact source-local asymptotic Landau--Zener--Weber scattering plus controlled finite-window ODE data; no target arithmetic or Hilbert-Polya claim
+blocking_conditions:
+  - no arithmetic origin
+  - no primitive periodic-orbit owner with target clock
+  - no target determinant or analytic target match
+  - finite-window controls do not establish a target operator
+next_smallest_test: none inside this two-level crossing; preserve the finite-window versus asymptotic boundary
+round2_clues: []
+route_b_invocation_allowed: false
