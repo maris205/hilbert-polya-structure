@@ -1,0 +1,331 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Per}{\operatorname{Per}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\MIS}{\operatorname{MIS}}
+
+\title[MIS polarity dynamics]{Synchronous MIS Polarity Dynamics:\ Cubic Collapse and a Bipartite Zeta Square Law}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+\subjclass[2020]{37E15, 05C69, 06A15, 37B15}
+\keywords{Boolean network, maximal independent set, Galois connection, finite dynamics, Artin--Mazur zeta function}
+
+\begin{document}
+
+\begin{abstract}
+For a finite simple graph $G=(V,E)$, consider the synchronous Boolean
+network
+\[
+ \mathcal N_G(A)=\{v\in V:N(v)\cap A=\varnothing\},\qquad A\subseteq V.
+\]
+Its fixed configurations are the maximal independent sets, a known
+correspondence.  We determine the rest of its functional graph.  Symmetry of
+adjacency makes $\mathcal N_G$ an antitone polarity and forces the exact
+identity $\mathcal N_G^3=\mathcal N_G$.  Thus every orbit has preperiod at
+most one and period one or two.  If $m(G)$ is the number of maximal
+independent sets and $c(G)$ the number of configurations closed under
+$\mathcal N_G^2$, then
+\[
+ \zeta_{\mathcal N_G}(z)
+ =(1-z)^{-m(G)}(1-z^2)^{-(c(G)-m(G))/2}.
+\]
+For every bipartite graph we prove the square law $c(G)=m(G)^2$, so the
+number of two-cycles is $m(G)(m(G)-1)/2$.  On the path $P_n$, the number
+$m_n=m(P_n)$ satisfies $m_n=m_{n-2}+m_{n-3}$; this gives a closed zeta
+family.  The proof separates the general polarity route from a bipartite
+formal-concept splitting, and exhaustive bitset controls independently test
+the identities.  Known MIS-network fixed-point and formal-concept results
+are explicitly subtracted; no absolute novelty or priority claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let every vertex of a graph update in parallel: it becomes active exactly
+when none of its neighbors was active at the previous time.  In Boolean
+coordinates this is the AND--NOT rule
+\[
+ x'_v=\bigwedge_{u\sim v}\neg x_u.
+\]
+The same local rule appears as the MIS network.  Its fixed points are known
+to be the characteristic vectors of maximal independent sets, and much of
+the recent algorithmic work concerns sequential update schedules rather
+than the synchronous functional graph \cite{GadouleauKutner2025}.  Fixed
+points of related AND--NOT and conjunctive networks also have an established
+literature \cite{Aracena2004,AracenaRichardSalinas2017}.  We assign those facts zero
+novelty credit.
+
+The elementary-looking synchronous map has a rigid global feature.  It is
+the polarity associated with the symmetric nonincidence relation, so its
+third iterate equals its first.  That identity determines every possible
+period and reduces the zeta function to two graph counts.  Bipartiteness
+then splits the closure independently across the two color classes.  The
+two one-sided closure systems are anti-isomorphic, and each closed element
+specifies one maximal independent set.  This produces a square law for the
+entire periodic set, not merely a fixed-point count.
+
+Antitone Galois connections and their closure lattices are standard in
+formal concept analysis \cite{GanterWille1999}.  The residual contribution
+here is the exact finite-dynamical package for this synchronous update: the
+cubic identity, cycle census and zeta reduction, bipartite square law, and
+path specialization.  A bounded search found no source containing this
+same conjunction, but that is not an exhaustive novelty certificate.
+External release remains \textbf{HOLD}.
+
+\section{The synchronous network as a polarity}
+
+Let $G=(V,E)$ be a finite simple graph, with open neighborhood $N(v)$.
+For $A\subseteq V$, define
+\begin{equation}\label{eq:update}
+ F(A):=\{v\in V:N(v)\cap A=\varnothing\}.
+\end{equation}
+We use open rather than closed neighborhoods.  In particular, an active
+vertex can persist when none of its distinct neighbors is active.
+
+\begin{lemma}[Polarity laws]\label{lem:polarity}
+For all $A,B\subseteq V$,
+\begin{enumerate}
+\item $A\subseteq B$ implies $F(B)\subseteq F(A)$;
+\item $A\subseteq F^2(A)$;
+\item $F^3(A)=F(A)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The first assertion follows immediately from \eqref{eq:update}.  If
+$v\in A$ and $u\in F(A)$, then $u$ has no neighbor in $A$ and hence is not
+adjacent to $v$.  Symmetry of adjacency therefore gives
+$N(v)\cap F(A)=\varnothing$, so $v\in F^2(A)$.
+
+Applying antitonicity to $A\subseteq F^2(A)$ gives
+$F^3(A)\subseteq F(A)$.  Applying the second assertion to the set $F(A)$
+gives the reverse inclusion $F(A)\subseteq F^3(A)$.
+\end{proof}
+
+The use of an undirected graph is essential: for a directed relation, the
+two antitone maps generally live on different sides and a single-map cubic
+identity need not hold.
+
+\begin{theorem}[Complete orbit shape]\label{thm:orbit}
+Every orbit of $F$ has preperiod at most one and eventual period at most
+two.  More precisely,
+\[
+ \im F=\Fix(F^2)=\{A\subseteq V:F^2(A)=A\}.
+\]
+Moreover, $F(A)=A$ if and only if $A$ is a maximal independent set of $G$.
+\end{theorem}
+
+\begin{proof}
+The identity $F^3=F$ shows that $F(A),F^2(A),F(A),\ldots$ alternates.
+It also gives $F^2(F(A))=F(A)$, hence $\im F\subseteq\Fix(F^2)$.
+Conversely, if $F^2(A)=A$, then $A=F(F(A))$ lies in the image.
+
+If $F(A)=A$, then every vertex of $A$ has no neighbor in $A$, so $A$ is
+independent.  Every vertex outside $A$ fails membership in $F(A)$ and
+therefore has a neighbor in $A$; thus $A$ is dominating and hence maximal
+independent.  The converse is the same argument in reverse.
+\end{proof}
+
+Call the elements of $\Fix(F^2)$ \emph{closed configurations}.  This is
+the closure system of the extensive, monotone, idempotent map $F^2$.
+Write
+\begin{equation}\label{eq:mc}
+ m(G):=|\Fix(F)|,\qquad c(G):=|\Fix(F^2)|.
+\end{equation}
+Thus $m(G)$ is the number of maximal independent sets.  Closed
+configurations not fixed by $F$ occur in disjoint pairs $\{A,F(A)\}$.
+
+\section{Periodic census and zeta function}
+
+For a map on a finite set, its Artin--Mazur zeta function is
+\begin{equation}\label{eq:zeta-def}
+ \zeta_F(z)=\exp\left(\sum_{k\ge1}\frac{|\Fix(F^k)|}{k}z^k\right).
+\end{equation}
+
+\begin{corollary}[Universal zeta reduction]\label{cor:zeta}
+For every finite simple graph,
+\begin{equation}\label{eq:fix-sequence}
+ |\Fix(F^k)|=
+ \begin{cases}
+ m(G),&k\text{ odd},\\
+ c(G),&k\text{ even},
+ \end{cases}
+\end{equation}
+and
+\begin{equation}\label{eq:zeta}
+ \boxed{\displaystyle
+ \zeta_F(z)=(1-z)^{-m(G)}
+ (1-z^2)^{-(c(G)-m(G))/2}.}
+\end{equation}
+The functional graph has $m(G)$ one-cycles and
+$(c(G)-m(G))/2$ two-cycles.
+\end{corollary}
+
+\begin{proof}
+For $k\ge1$, \cref{lem:polarity} gives $F^k=F$ when $k$ is odd and
+$F^k=F^2$ when $k$ is even.  This proves \eqref{eq:fix-sequence}.  The
+cycle factorization of \eqref{eq:zeta-def}, or direct summation of its odd
+and even terms, gives \eqref{eq:zeta}.
+\end{proof}
+
+The integer parity in \eqref{eq:zeta} is automatic: the involution $F$ on
+the closed configurations has exactly $m(G)$ fixed elements.
+
+\section{Bipartite square law}
+
+Suppose now that $G$ is bipartite with a fixed bipartition
+$V=X\sqcup Y$.  Define antitone maps
+\begin{align}
+ \alpha(P)&:=\{y\in Y:N(y)\cap P=\varnothing\},&&P\subseteq X,
+ \label{eq:alpha}\\
+ \beta(Q)&:=\{x\in X:N(x)\cap Q=\varnothing\},&&Q\subseteq Y.
+ \label{eq:beta}
+\end{align}
+They form a polarity: $P\subseteq\beta\alpha(P)$,
+$Q\subseteq\alpha\beta(Q)$, and
+$\alpha\beta\alpha=\alpha$, $\beta\alpha\beta=\beta$.
+
+For $A=P\sqcup Q$, bipartiteness separates the update:
+\begin{equation}\label{eq:split}
+ F(P\sqcup Q)=\beta(Q)\sqcup\alpha(P),
+ \qquad
+ F^2(P\sqcup Q)=\beta\alpha(P)\sqcup\alpha\beta(Q).
+\end{equation}
+
+\begin{theorem}[Bipartite periodic square law]\label{thm:square}
+For every finite bipartite graph $G$,
+\begin{equation}\label{eq:square-law}
+ \boxed{c(G)=m(G)^2.}
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:bip-zeta}
+ \boxed{\displaystyle
+ \zeta_F(z)=(1-z)^{-m(G)}
+ (1-z^2)^{-m(G)(m(G)-1)/2}.}
+\end{equation}
+In particular, the number of two-cycles is $\binom{m(G)}2$.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+ \mathcal C_X=\{P\subseteq X:\beta\alpha(P)=P\},\qquad
+ \mathcal C_Y=\{Q\subseteq Y:\alpha\beta(Q)=Q\}.
+\]
+The maps $\alpha$ and $\beta$ restrict to mutually inverse antitone
+bijections between $\mathcal C_X$ and $\mathcal C_Y$; write their common
+cardinality as $r$.  By \eqref{eq:split}, a full configuration
+$P\sqcup Q$ is closed exactly when $P\in\mathcal C_X$ and
+$Q\in\mathcal C_Y$.  Hence $c(G)=r^2$.
+
+A full configuration is fixed exactly when
+$Q=\alpha(P)$ and $P=\beta(Q)$.  Such pairs are in bijection with
+$P\in\mathcal C_X$, so $m(G)=r$.  This proves \eqref{eq:square-law};
+\eqref{eq:bip-zeta} follows from \cref{cor:zeta}.
+\end{proof}
+
+The square law includes isolated vertices without modification.  An
+isolated vertex belongs to every maximal independent set, and the same
+one-sided closure calculation forces it in the corresponding concept.
+
+\section{Paths}
+
+Let $P_n$ be the path on $n$ vertices, and put $m_n=m(P_n)$, with the
+empty path convention $m_0=1$.  The resulting Padovan recurrence for
+maximal independent sets of paths is classical \cite[Remark~2.2]{EulerOleksikSkupien2013};
+we include the short endpoint decomposition because it also fixes our
+empty-path convention.
+
+\begin{proposition}[Path recurrence]\label{prop:path}
+The initial values and recurrence are
+\begin{equation}\label{eq:path-rec}
+ m_0=m_1=1,\qquad m_2=2,\qquad
+ m_n=m_{n-2}+m_{n-3}\quad(n\ge3).
+\end{equation}
+Equivalently,
+\begin{equation}\label{eq:path-gf}
+ \sum_{n\ge0}m_nx^n=\frac{1+x+x^2}{1-x^2-x^3}.
+\end{equation}
+The synchronous MIS network on $P_n$ therefore has
+\begin{equation}\label{eq:path-zeta}
+ \zeta_{P_n}(z)=(1-z)^{-m_n}
+ (1-z^2)^{-m_n(m_n-1)/2}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+In a maximal independent set of $P_n$, either vertex $1$ is chosen and
+vertex $2$ is not, leaving an arbitrary maximal independent set on the
+path induced by vertices $3,\ldots,n$; or vertex $1$ is not chosen, which
+forces vertex $2$ to be chosen and vertex $3$ not to be chosen, leaving an
+arbitrary maximal independent set on vertices $4,\ldots,n$.  These two
+cases give \eqref{eq:path-rec}.  The generating function follows by the
+standard recurrence calculation, and \eqref{eq:path-zeta} is
+\cref{thm:square}.
+\end{proof}
+
+The first values are
+\[
+ 1,1,2,2,3,4,5,7,9,12,16,21,28,37,\ldots
+\]
+starting at $n=0$.  Thus even this sparse graph family carries a rapidly
+growing set of synchronous two-cycles: their number is
+$m_n(m_n-1)/2$.
+
+\section{Independent exact controls and scope}
+
+The accompanying exact program has two implementations of \eqref{eq:update}:
+an integer-bitset neighborhood rule and a literal set/relation rule.  It
+exhausts every simple graph through six vertices, exhausts all bipartite
+graphs with both color classes of size at most three, and exhausts every
+state of paths through seventeen vertices.  The registered checks include
+$F^3=F$, the maximal-independent fixed-point criterion, image/closure
+equality, the bipartite square law, the path recurrence, and the odd/even
+fixed sequence.  These computations are falsification controls, not proofs.
+
+No figure is needed: the complete functional-graph shape is already encoded
+by the two cycle factors in \eqref{eq:zeta}.  The paper does not claim the
+MIS fixed-point correspondence, Galois-closure identities in general, or
+the recurrence for maximal independent sets as new in isolation.  The
+claim is restricted to the displayed synchronous dynamical package and
+remains subject to external expert literature review.
+
+\section{Conclusion}
+
+The parallel ``activate exactly when no neighbor is active'' rule is not a
+long-transient Boolean system on an undirected graph.  Symmetry makes it a
+polarity, collapses every orbit to period at most two after one update, and
+reduces its zeta function to maximal independent sets and Galois-closed
+configurations.  Bipartiteness then turns the entire periodic count into the
+square of the fixed count.  This supplies a complete temporal description
+while keeping the known fixed-point and formal-concept owners explicit.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,318 @@
+\documentclass[11pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\adj}{\operatorname{adj}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Rec}{\operatorname{Rec}}
+
+\title[Double-adjugate matrix dynamics]{Double-Adjugate Dynamics over Finite Fields:\ Singular Collapse and Projective Image Staircases}
+\author{Anonymous}
+\date{Internal Stage 2 draft, 29 August 2026}
+\subjclass[2020]{37P25, 15A15, 11T06, 37E15}
+\keywords{finite dynamical system, adjugate matrix, finite field, functional graph, Artin--Mazur zeta function}
+
+\begin{document}
+
+\begin{abstract}
+For $d\ge3$ and a finite field $\F_q$, we study the self-map of the full
+matrix space
+\[
+ \Psi(A)=\adj(\adj A),\qquad A\in M_d(\F_q).
+\]
+Jacobi's classical identity gives $\Psi(A)=\det(A)^{d-2}A$; we assign that
+identity zero novelty credit and determine its finite temporal consequences.
+Every singular matrix enters zero in one step.  With
+$\alpha=(d-1)^2$ and $E_k=(\alpha^k-1)/d$, every invertible matrix satisfies
+\[
+ \Psi^k(A)=\det(A)^{E_k}A.
+\]
+Consequently
+\[
+ |\Fix(\Psi^k)|=1+|\SL_d(q)|\gcd(E_k,q-1),
+ \qquad
+ |\im(\Psi^k)|=1+\frac{|\GL_d(q)|}{\gcd(\alpha^k,q-1)}.
+\]
+The second formula yields the recurrent-core size and a sharp
+prime-valuation stabilization time.  The first gives every cycle count and
+the Artin--Mazur zeta function by M\"obius inversion, including alternating
+and third-period fixed-count anomalies.  A second route computes two
+adjugates literally from minors and exhausts small matrix spaces.  The note
+is owner-subtracted against Jacobi identities, projective adjugate/Cremona
+maps, and scalar power-map functional graphs; external release remains on
+hold.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The adjugate is simultaneously a polynomial matrix operation and, on
+invertible matrices, determinant times inversion.  Its projectivization is
+a classical Cremona transformation \cite{Dolgachev2012}.  Jacobi's complementary-minor identity
+and its hyperadjugate extensions are established material
+\cite{Lawrence1964}; standard finite-field facts used below can be found in
+\cite{LidlNiederreiter1997}.  Functional graphs of power maps on finite
+groups likewise have a direct modern literature \cite{QureshiReis2023}.
+None of those ingredients is claimed here.
+
+We instead ask what happens when the adjugate is applied twice at every
+time step on the \emph{entire} finite matrix space.  Two regimes coexist.
+All singular ranks collapse immediately to zero, whereas every invertible
+projective scalar line is invariant and carries an affine power map on its
+nonzero scalars.  This separation makes both the fixed sequence and the
+shrinking image sequence exact.  Their arithmetic is different: fixed
+counts see $(\alpha^k-1)/d$, while image sizes see $\alpha^k$ itself.
+
+The residual contribution is the conjunction of the iterate normal form,
+singular basin, fixed and image formulas, valuation stabilization, and full
+cycle/zeta census over finite fields.  A bounded source search did not find
+this temporal package, but it is not an absolute novelty certificate.
+External submission, public release, and priority language remain
+\textbf{HOLD}.
+
+\section{Normal form and singular collapse}
+
+Fix a prime power $q$ and an integer $d\ge3$.  Put
+\[
+ X_{q,d}=M_d(\F_q),\qquad \Psi(A)=\adj(\adj A).
+\]
+The restriction $d\ge3$ is structural: for $d=2$, adjugation is already a
+linear involution and its square is the identity.
+
+\begin{lemma}[Double-adjugate identity]\label{lem:jacobi}
+For every $A\in M_d(\F_q)$,
+\begin{equation}\label{eq:double-adj}
+ \Psi(A)=\det(A)^{d-2}A.
+\end{equation}
+In particular, every singular matrix maps to zero, and zero is fixed.
+\end{lemma}
+
+\begin{proof}
+For invertible $A$, the identities
+$\adj(A)=\det(A)A^{-1}$ and
+$\det(\adj A)=\det(A)^{d-1}$ give \eqref{eq:double-adj} immediately.
+Both sides of \eqref{eq:double-adj} are polynomial in the matrix entries,
+and Jacobi's identity extends the equality to all matrices
+\cite{Lawrence1964}.  Alternatively, the rank-$d-1$ case has
+$\operatorname{rank}(\adj A)=1$, whose adjugate vanishes for $d\ge3$;
+lower ranks already have $\adj A=0$.  If $\det A=0$, the right side of
+\eqref{eq:double-adj} is zero.
+\end{proof}
+
+Define
+\begin{equation}\label{eq:alpha-E}
+ \alpha=(d-1)^2,\qquad E_k=\frac{\alpha^k-1}{d}\quad(k\ge1).
+\end{equation}
+The quotient is integral because $\alpha\equiv1\pmod d$.
+
+\begin{theorem}[Iterate normal form]\label{thm:iterate}
+If $A\in\GL_d(q)$ and $\delta=\det A$, then for every $k\ge1$,
+\begin{equation}\label{eq:iterate}
+ \boxed{\Psi^k(A)=\delta^{E_k}A},
+ \qquad
+ \det(\Psi^k(A))=\delta^{\alpha^k}.
+\end{equation}
+Every nonzero singular matrix has transient depth one and then stays at
+zero.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:jacobi}, if $B$ is invertible with determinant $\eta$, then
+$\Psi(B)=\eta^{d-2}B$ and
+\[
+ \det\Psi(B)=\eta^{d(d-2)+1}=\eta^{(d-1)^2}=\eta^\alpha.
+\]
+Thus the scalar exponent in the $k$th iterate obeys
+$E_{k+1}=E_k+(d-2)\alpha^k$, with $E_1=d-2$.  Since
+$\alpha-1=d(d-2)$, summing the geometric progression gives
+$E_k=(\alpha^k-1)/d$.  The singular assertion follows from
+\cref{lem:jacobi}.
+\end{proof}
+
+\section{Fixed sequence and cycle census}
+
+Write
+\begin{equation}\label{eq:group-sizes}
+ |\GL_d(q)|=\prod_{j=0}^{d-1}(q^d-q^j),
+ \qquad |\SL_d(q)|=\frac{|\GL_d(q)|}{q-1}.
+\end{equation}
+
+\begin{theorem}[All iterate-fixed counts]\label{thm:fixed}
+For every $k\ge1$,
+\begin{equation}\label{eq:fixed}
+ \boxed{\displaystyle
+ |\Fix(\Psi^k)|
+ =1+|\SL_d(q)|\gcd(E_k,q-1).}
+\end{equation}
+Consequently, the number $C_r$ of cycles of exact length $r$ is
+\begin{equation}\label{eq:cycles}
+ C_r=\frac1r\sum_{e\mid r}\mu(r/e)
+ \left(1+|\SL_d(q)|\gcd(E_e,q-1)\right),
+\end{equation}
+and
+\begin{equation}\label{eq:zeta}
+ \zeta_\Psi(z)=\prod_{r\ge1}(1-z^r)^{-C_r}
+ =\exp\left(\sum_{k\ge1}
+ \frac{1+|\SL_d(q)|\gcd(E_k,q-1)}{k}z^k\right).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+A singular matrix fixed by a positive iterate must equal zero.  For
+$A\in\GL_d(q)$, \cref{thm:iterate} gives
+$\Psi^k(A)=A$ exactly when $(\det A)^{E_k}=1$.  The cyclic group
+$\F_q^\times$ has $\gcd(E_k,q-1)$ such determinants, and every determinant
+fiber in $\GL_d(q)$ has cardinality $|\SL_d(q)|$.  This proves
+\eqref{eq:fixed}.  M\"obius inversion of iterate-fixed counts gives
+\eqref{eq:cycles}, and the standard finite-map cycle factorization gives
+\eqref{eq:zeta}.
+\end{proof}
+
+The formula can show large low-period jumps even though projective matrix
+classes never move.  Two registered examples are
+\begin{align*}
+ (q,d)=(5,4):&\quad
+ |\Fix(\Psi^k)|=58\,032\,000\,001,
+ 116\,064\,000\,001,\ldots,\\
+ (q,d)=(7,3):&\quad
+ |\Fix(\Psi^k)|=5\,630\,689,5\,630\,689,
+ 16\,892\,065,\ldots.
+\end{align*}
+The first sequence alternates; the second has a jump precisely at multiples
+of three.  These are direct gcd effects in \eqref{eq:fixed}, not numerical
+experiments.
+
+\section{Projective image staircase and recurrent core}
+
+Let $[A]=\{cA:c\in\F_q^\times\}$ be the projective scalar line through an
+invertible matrix.  Every such line has $q-1$ points, and distinct lines are
+disjoint.
+
+\begin{theorem}[Exact images]\label{thm:image}
+For every $k\ge1$,
+\begin{equation}\label{eq:image}
+ \boxed{\displaystyle
+ |\im(\Psi^k)|
+ =1+\frac{|\GL_d(q)|}{\gcd(\alpha^k,q-1)}.}
+\end{equation}
+Let
+\begin{equation}\label{eq:b}
+ b=\prod_{\ell\mid\alpha}\ell^{v_\ell(q-1)},
+\end{equation}
+where the product is over primes dividing $\alpha$.  Then
+\begin{equation}\label{eq:recurrent}
+ |\Rec(\Psi)|=1+\frac{|\GL_d(q)|}{b}.
+\end{equation}
+With the empty maximum interpreted as zero, put
+\begin{equation}\label{eq:tstar}
+ t_*=\max_{\ell\mid\gcd(\alpha,q-1)}
+ \left\lceil\frac{v_\ell(q-1)}{v_\ell(\alpha)}\right\rceil.
+\end{equation}
+For $k\geq0$, write $I_k=\Psi^k(\GL_d(q))$, so that
+$I_0=\GL_d(q)$.  The nested invertible image chain
+$I_0\supseteq I_1\supseteq\cdots$ stabilizes for the first time at $t_*$,
+and the maximum transient depth on all of $M_d(\F_q)$ is
+\begin{equation}\label{eq:max-depth}
+ \boxed{\max\{1,t_*\}.}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Fix $A\in\GL_d(q)$ with determinant $\delta$.  For $c\in\F_q^\times$,
+\cref{thm:iterate} gives
+\begin{equation}\label{eq:line-action}
+ \Psi^k(cA)=\delta^{E_k}c^{dE_k+1}A
+ =\delta^{E_k}c^{\alpha^k}A.
+\end{equation}
+Thus the image on each projective line is a coset of the subgroup of
+$\alpha^k$th powers.  It has
+$(q-1)/\gcd(\alpha^k,q-1)$ points.  There are
+$|\GL_d(q)|/(q-1)$ invertible projective lines, and every singular matrix
+contributes only the common image zero.  This proves \eqref{eq:image}.
+
+For each prime $\ell$, the exponent of $\ell$ in
+$\gcd(\alpha^k,q-1)$ is
+$\min\{k v_\ell(\alpha),v_\ell(q-1)\}$.  Hence these gcds stabilize at
+$b$, first at the time \eqref{eq:tstar}.  In a finite functional graph the
+stable image is exactly the recurrent set, proving \eqref{eq:recurrent}.
+Because images of a finite self-map are nested, strict image loss through
+time $t_*-1$ and equality from time $t_*$ imply that the maximum invertible
+tail depth is exactly $t_*$.  This includes $t_*=0$, when the restriction to
+the invertible set is a permutation.  Singular points contribute depth one,
+proving \eqref{eq:max-depth}.
+\end{proof}
+
+In discrete-log coordinates on a projective line,
+\eqref{eq:line-action} is an affine power map
+$x\mapsto\alpha x+h$ modulo $q-1$.  This is the second proof route for the
+valuation staircase: an affine translation changes cycle placement but not
+the image index of multiplication by $\alpha^k$.
+
+\section{Exact controls and owner boundary}
+
+The accompanying program computes determinants by modular elimination and
+adjugates literally from signed minors.  It exhausts
+$M_3(\F_2)$, $M_3(\F_3)$, and $M_4(\F_2)$, comparing two literal
+adjugations with \eqref{eq:double-adj}.  It then checks singular collapse,
+six fixed counts, and six image sizes.  Separate determinant-representative
+lanes test twelve iterates for $(q,d)=(5,4),(7,3),(11,4),(13,5)$.
+Independent scalar-line lanes at $(q,d)=(5,4),(7,3),(17,3),(257,3),(19,4)$
+exercise image stabilization times $t_*=0,1,2,4,1$, respectively, including
+literal strict losses and the first stable image.
+All arithmetic is exact.  The computations are finite falsifiers, not a
+replacement for the proofs.
+
+Jacobi's identity, the projective adjugate map, cyclicity of
+$\F_q^\times$, and general power-map functional graphs are established
+background.  We claim none of them separately.  The residual claim is the
+full-matrix temporal package \eqref{eq:fixed}--\eqref{eq:max-depth}, under
+a bounded collision search and an external-release hold.
+
+Two internal boundaries are explicit.  P99 obtains valuation staircases from
+a unipotent permutation of fixed-index sublattices; it has no singular basin,
+adjugate identity, or shrinking projective lines.  P97 studies sumset
+squaring on subsets of a prime cyclic group; here the power map occurs only
+on scalar coordinates inside an invariant matrix line.  Neither paper owns
+the full-matrix fixed/image pair proved here, while the shared valuation and
+power-map primitives receive no separate credit.
+
+\section{Conclusion}
+
+Double adjugation separates the finite matrix space into a singular basin
+that dies immediately and invertible projective lines carrying affine power
+maps.  This yields two complementary exact time series: the fixed sequence
+detects $E_k=(\alpha^k-1)/d$, while the image staircase detects the prime
+valuations of $\alpha^k$ against $q-1$.  Together they determine every
+cycle count, the zeta function, the recurrent core, and the sharp transient
+depth.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
