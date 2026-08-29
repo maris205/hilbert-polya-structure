@@ -1,10 +1,11 @@
 # P25 pipeline state
 
-Date: **2026-08-28**
+Date: **2026-08-29**
 
-Stage-2 handoff: the complete manuscript, references, 12-page PDF, clean build
-log, and manuscript audit are delivered under paper/. The next editorial gate
-is **ARS Stage 2.5 user confirmation**; no Stage 2.5 pass is claimed. A future
+Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT` and the
+scholar has authorized Stage 3. Phase 0 has frozen the manuscript/PDF and
+generated four dynamic reviewer cards plus the fixed DA; the configuration
+awaits scholar confirmation before any substantive report runs. A future
 physical-flow promotion still requires a genuinely nonconstant-roof operator
 with explicit ownership and analytic control; symbolic A1/A2 credit cannot be
 copied to the physical-flow row.
@@ -13,7 +14,8 @@ copied to the physical-flow row.
 |---|---|
 | ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
 | ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
-| ARS Stage 2.5 | **AWAITING USER CONFIRMATION** — not passed or claimed |
+| ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
+| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
 | Continuous-time object | **FROZEN** — equilateral three-disk exterior billiard |
 | No-eclipse condition | **`[PROVED]`** for `d=6a` |
 | Clock / primitive / repetition | **FROZEN** — flight length / cyclic primitive word / traversal powers |

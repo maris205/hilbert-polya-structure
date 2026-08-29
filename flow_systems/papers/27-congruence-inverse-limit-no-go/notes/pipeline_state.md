@@ -1,12 +1,18 @@
 # P27 pipeline state
 
-Date: **2026-08-28**
+Date: **2026-08-29**
+
+Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT`; Stage
+3 entry is authorized and Phase 0 reviewer configuration is complete. The
+four dynamic cards plus fixed DA await scholar confirmation before substantive
+review. Later Stage-2-era waiting text is historical and superseded.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 comparative theorem spine |
 | ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
-| ARS Stage 2.5 | **AWAITING EXPLICIT USER CONFIRMATION** — not passed |
+| ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
+| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |
@@ -49,7 +55,7 @@ Date: **2026-08-28**
 | A2--A4 | **FAIL / NOT_TESTABLE** — the same owner has no primitive periodic-orbit population or determinant |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | **COMPLETE STAGE-2 DRAFT** — 4,593 source-aware body words, 12 pages, 5 verified cited sources |
+| Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — current Round-9 audit 4,099 body words, 12 pages, 5 verified cited sources; no Phase-0 mutation |
 | Stage-2 regression | **PASS** — 58/58 historical tests plus 12/12 Round-8 verify-only tests |
 | Stage-2 PDF | **PASS** — unified post-review LuaLaTeX + BibTeX/plainnat numeric build; SHA-256 `540403e2cfb3c893822f3bcb80fb56e33bff00970f340df3dc9e6e8d2810d65a`; 0 Blocker/0 Major and the cosmetic Minor fixed |
 
@@ -80,6 +86,7 @@ Round 9 converts the frozen comparative spine into the full paper
 `paper/stage2_manuscript_audit.md`.  It preserves the distinction between the
 aperiodic residual inverse-limit owner and the separately registered
 nonresidual homology-cover calibrator.  Neither the exact four-quadrant identity
-nor its 96-row replay is promoted to Route-A A2.  ARS Stage 2 is complete as a
-draft only; Stage 2.5 awaits explicit user confirmation and has not been
-passed.
+nor its 96-row replay is promoted to Route-A A2. Stage 2.5 subsequently passed
+its mandatory checkpoint; Stage 3 entry is authorized and Phase 0 is complete.
+The reviewer configuration awaits scholar confirmation, with no substantive
+report yet.

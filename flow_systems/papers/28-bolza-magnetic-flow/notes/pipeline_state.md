@@ -1,12 +1,18 @@
 # P28 pipeline state
 
-Date: **2026-08-28**
+Date: **2026-08-29**
+
+Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT`; Stage
+3 entry is authorized and Phase 0 reviewer configuration is complete. The
+four dynamic cards plus fixed DA await scholar confirmation before substantive
+review. Later Stage-2-era waiting text is historical and superseded.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / RESEARCH SPINE FROZEN** |
 | ARS Stage 2 | **DRAFT COMPLETE** — full manuscript, bibliography, compiled PDF and manuscript audit delivered |
-| ARS Stage 2.5 | **AWAITING USER CONFIRMATION** — not passed; independent Stage-2 cross-review completed with 0 Blocker/0 Major and all 4 Minors fixed |
+| ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — 0 serious blockers; one non-blocking replay-order minor retained |
+| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |
@@ -68,10 +74,11 @@ Date: **2026-08-28**
 | Formal Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | **STAGE 2 DRAFT COMPLETE** — post-review 5,127 body words, 14 pages, 6/6 citation closure; Stage 2.5 awaiting user confirmation |
+| Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — 5,127 body words, 14 pages, 6/6 citation closure; no Phase-0 mutation |
 
-Workflow checkpoint: obtain explicit user confirmation before Stage 2.5
-cross-review. No Stage-2.5 passage or reviewer verdict is claimed here.
+Workflow checkpoint: confirm the Stage-3 reviewer configuration before the
+five paper-visible reviewer seats execute. No substantive reviewer verdict is
+claimed here.
 
 Next scientific gate: the contracted non-arithmetic control passes 6/6, its exact systole
 is proved, and the target-blind common cutoff `Lambda=21/10` is frozen.  Build

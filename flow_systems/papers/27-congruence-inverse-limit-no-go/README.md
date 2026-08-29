@@ -4,9 +4,10 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**.
-  **Stage 3 is not authorized**; advancement requires explicit checkpoint
-  authorization.
+- Current pipeline: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**.
+  Stage-3 entry is authorized; the proposed reviewer configuration is
+  **awaiting scholar confirmation**, and substantive review has not started.
+- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
 - Current Stage-2.5 closure: 5/5 references are VERIFIED; 70/70 selected
   distinct claims are VERIFIED; all 71/71 selected tuples are structurally
   closed.  The 71 anchorless evidence carriers remain an advisory limitation,
@@ -374,8 +375,9 @@ stays
 `ROUTE_A_REJECTED`; the homology model stays
 `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)` /
 `ROUTE_A_REJECTED`.  It remains a generic finite-panel calibrator; neither
-candidate earns A2 or Route-B credit.  The pipeline stays **`FAIL-CLOSED`**
-solely because the scholar-owned experiment intake/provenance declaration is
-absent; C4/Mode 6 must be rechecked after scholar resolution.  See the
+candidate earns A2 or Route-B credit. The scholar-owned experiment intake,
+provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 passed its
+mandatory checkpoint. Stage 3 entry is authorized and Phase 0 is complete,
+while the reviewer configuration still awaits scholar confirmation. See the
 [integrity report](notes/stage2_5_integrity_report.md) and
 [independent audit](notes/stage2_5_independent_audit.md).

@@ -2,9 +2,10 @@
 
 ## Current status
 
-- ARS: **Stage 2.5 INTEGRITY is `PASS AT MANDATORY CHECKPOINT`; Stage 3 is
-  not authorized and has not started**.  An explicit user authorization is
-  still required before the review stage may begin.
+- ARS: **Stage 3 REVIEW is authorized; Phase 0 is COMPLETE**. The proposed
+  reviewer configuration is **awaiting scholar confirmation**; no substantive
+  reviewer report has run and the manuscript remains frozen.
+- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
 - Current manuscript: the 5,127-word, 14-page paper proves the exact systole
   and finite-cutoff completeness theorem for the frozen nonarithmetic
   genus-two octagon control.
@@ -297,8 +298,9 @@ VERIFIED and one non-blocking MINOR_DISTORTION** (`P28-E1-072`), while the
 all 6/6 references are VERIFIED, and the retrospective scholar-owned intake
 now carries seven schema-valid provenance entries with 14/14 directly
 experiment-backed claims aligned. The Stage-2.5 decision is therefore **PASS
-AT MANDATORY CHECKPOINT**, with zero serious blockers. Stage 3 remains **not
-authorized** until the user explicitly approves the transition. This is still
-a control theorem; no Bolza magnetic comparison or full Route-A tuple has been
+AT MANDATORY CHECKPOINT**, with zero serious blockers. Stage 3 entry is now
+authorized and Phase 0 is complete; the reviewer cards await scholar
+confirmation and paper-visible review has not started. This is still a
+control theorem; no Bolza magnetic comparison or full Route-A tuple has been
 claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md)
 and the [independent audit](notes/stage2_5_independent_audit.md).

@@ -1,12 +1,18 @@
 # P26 pipeline state
 
-Date: **2026-08-28**
+Date: **2026-08-29**
+
+Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT`; Stage
+3 entry is authorized and Phase 0 reviewer configuration is complete. The
+four dynamic cards plus fixed DA await scholar confirmation before substantive
+review. Later Stage-2-era waiting text is historical and superseded.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 theorem spine |
 | ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
-| ARS Stage 2.5 | **AWAITING EXPLICIT USER CONFIRMATION** — not passed |
+| ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
+| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |
@@ -58,7 +64,7 @@ Date: **2026-08-28**
 | Route-A A2 evaluation | **FAIL / NOT_TESTABLE** — no formal A2 campaign; only the finite/local variation audit ran |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | **COMPLETE STAGE-2 DRAFT** — 4,729 source-aware body words, 12 pages, 5 verified cited sources |
+| Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — current Round-9 audit 4,210 body words, 12 pages, 5 verified cited sources; no Phase-0 mutation |
 | Stage-2 regression | **PASS** — 74/74 historical tests plus 18/18 Round-8 verify-only tests |
 | Stage-2 PDF | **PASS** — unified post-review LuaLaTeX + BibTeX/plainnat numeric build; SHA-256 `b2911495fff88a1e351c4b7cc65989f998df47822b3a2bae0db60b543c34d5aa`; independent review CLEAN |
 
@@ -88,5 +94,6 @@ Round 9 converts the frozen theorem spine into the full paper
 `paper/manuscript.tex`, bibliography, compiled `paper/paper.pdf`, and
 `paper/stage2_manuscript_audit.md`.  The paper preserves the finite-multiset
 quantifier, exact 2/2/134 kernel split, 51/55 primary failures, and every
-Route-A/Route-B firewall.  ARS Stage 2 is complete as a draft only.  Stage 2.5
-awaits explicit user confirmation and has not been passed.
+Route-A/Route-B firewall. Stage 2.5 subsequently passed its mandatory
+checkpoint; Stage 3 entry is authorized and Phase 0 is complete. The reviewer
+configuration awaits scholar confirmation, with no substantive report yet.

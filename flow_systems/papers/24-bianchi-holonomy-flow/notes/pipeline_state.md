@@ -1,19 +1,21 @@
 # P24 pipeline state
 
-Date: **2026-08-28**
+Date: **2026-08-29**
 
-Stage-2 handoff: the complete manuscript, references, 12-page PDF, clean build
-log, and manuscript audit are delivered under paper/. The next editorial gate
-is **ARS Stage 2.5 user confirmation**; no Stage 2.5 pass is claimed. The
-existing mathematical next gate remains unchanged: a third canonical control
-type and a source-derived ideal-valued refinement are required before any
-positive Route-A promotion.
+Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT` and the
+scholar has authorized Stage 3. Phase 0 has frozen the manuscript/PDF and
+generated four dynamic reviewer cards plus the fixed DA; the configuration
+awaits scholar confirmation before any substantive report runs. The existing
+mathematical gate remains unchanged: a third canonical control type and a
+source-derived ideal-valued refinement are required before positive Route-A
+promotion.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
 | ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
-| ARS Stage 2.5 | **AWAITING USER CONFIRMATION** — not passed or claimed |
+| ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
+| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |
@@ -65,7 +67,7 @@ positive Route-A promotion.
 | Full Bianchi Route A A2--A4 | NOT EVALUATED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | **STAGE 2 DRAFT COMPLETE** — post-review 4,029-word audited body; 7/7 citation closure; clean 12-page PDF; independent review 0 Blocker/0 Major and the single Minor fixed |
+| Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — 4,029 audited body words; 7/7 citation closure; clean 12-page PDF; no Phase-0 mutation |
 
 Next gate: Round 8 shows that trace divisibility alone proves too much, but the
 mandatory control-type ledger remains `2/3`.  Before any positive promotion,

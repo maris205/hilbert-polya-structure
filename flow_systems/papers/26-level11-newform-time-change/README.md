@@ -4,9 +4,10 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**.
-  **Stage 3 is not authorized**; advancement requires explicit checkpoint
-  authorization.
+- Current pipeline: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**.
+  Stage-3 entry is authorized; the proposed reviewer configuration is
+  **awaiting scholar confirmation**, and substantive review has not started.
+- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
 - Current Stage-2.5 closure: 5/5 references are VERIFIED; 68/68 selected
   distinct claims are VERIFIED; all 70/70 selected tuples are structurally
   closed.  The 70 anchorless evidence carriers remain an advisory limitation,
@@ -281,9 +282,10 @@ families, 21/65 originality paragraphs, and a 72-claim registry.
 No scientific or reference defect was found within those denominators.  The
 scientific status remains
 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` /
-`ROUTE_A_EXPLORATORY`; Route B remains unauthorized.  The pipeline nevertheless
-stays **`FAIL-CLOSED`** until the scholar supplies the experiment-intake
-declaration/provenance ledger and C4/Mode 6 is rechecked.  Stage 3, Route-A
-promotion, and Route B remain unentered.  See the
+`ROUTE_A_EXPLORATORY`; Route B remains unauthorized. The scholar declaration,
+provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 therefore
+passed its mandatory checkpoint. Stage 3 entry is authorized and Phase 0 is
+complete, while the reviewer configuration still awaits scholar confirmation.
+No Route-A promotion or Route-B entry occurs. See the
 [integrity report](notes/stage2_5_integrity_report.md) and
 [independent audit](notes/stage2_5_independent_audit.md).

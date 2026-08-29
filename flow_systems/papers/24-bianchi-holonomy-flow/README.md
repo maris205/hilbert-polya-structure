@@ -4,8 +4,10 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**;
-  **Stage 3 is not authorized** until the required explicit checkpoint decision.
+- Current stage: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**;
+  Stage-3 entry is authorized and the proposed reviewer configuration is
+  **awaiting scholar confirmation**. No substantive reviewer report has run.
+- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
 - Integrity closure: 7/7 registered references are VERIFIED; the stable Phase-E
   population is 64/64 VERIFIED with 66/66 structurally closed tuples; all 66
   evidence carriers remain explicitly `anchorless`.  The scholar-owned intake
@@ -426,7 +428,9 @@ The current controlling verdict is **PASS AT MANDATORY CHECKPOINT**.  The
 scholar-owned declaration is present with 7 provenance entries, and 11 direct
 experiment-backed claims have alignment records.  The Phase-E result remains
 64/64 VERIFIED with 66/66 structurally closed, explicitly `anchorless` tuples.
-Stage 3 has not started and is not authorized until an explicit checkpoint
-decision; the Route-A tuple and 2/3 canonical-control boundary are unchanged.
+Stage 3 entry is now authorized and Phase 0 is complete. The four dynamic
+reviewer cards plus fixed DA remain at the scholar configuration checkpoint;
+paper-visible review has not started. The Route-A tuple and 2/3
+canonical-control boundary are unchanged.
 See the controlling [integrity report](notes/stage2_5_integrity_report.md) and
 the historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md).
