@@ -4,10 +4,20 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**.
-  Stage-3 entry is authorized; the proposed reviewer configuration is
-  **awaiting scholar confirmation**, and substantive review has not started.
-- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
+- Current pipeline: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
+  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
+  phases. The mechanical decision is **Major Revision**; Stage 4 remains
+  unauthorized and the frozen manuscript/PDF are unchanged.
+- Stage-3 conclusion: the bounded residual no-go and homology-panel calibration
+  proof chains remain intact. Nine review findings form six non-ranking response
+  items: three `must_fix`, two `should_fix`, and one target-binding `consider`.
+  The main obligations are a precise contribution position, narrowed
+  quantifier/intervention language, a negative projective-sign fixture or
+  narrowed diagnostic claim, and a consolidated candidate/Route map.
+- Stage-3 artifacts: [completion report](notes/stage3_completion_report.md),
+  [editorial synthesis](notes/stage3_editorial_synthesis.md),
+  [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
+  [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
 - Current Stage-2.5 closure: 5/5 references are VERIFIED; 70/70 selected
   distinct claims are VERIFIED; all 71/71 selected tuples are structurally
   closed.  The 71 anchorless evidence carriers remain an advisory limitation,
@@ -330,6 +340,9 @@ is a local theorem-progress tag; the formal same-owner verdict is `A1_FAIL`.
 - [Round-8 new-owner Route-A evaluation](../../evaluations/route_a/P27-HOMOLOGY-RENORMALIZED-GEODESIC-PANEL/2026-08-28-round8.yaml)
 - [Round-9 manuscript](paper/manuscript.tex)
 - [Stage-2.5 independent integrity audit](notes/stage2_5_independent_audit.md)
+- [Stage-3 completion report](notes/stage3_completion_report.md)
+- [Stage-3 editorial synthesis](notes/stage3_editorial_synthesis.md)
+- [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
 - [Stage-2.5 Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
@@ -377,7 +390,10 @@ stays
 `ROUTE_A_REJECTED`.  It remains a generic finite-panel calibrator; neither
 candidate earns A2 or Route-B credit. The scholar-owned experiment intake,
 provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 passed its
-mandatory checkpoint. Stage 3 entry is authorized and Phase 0 is complete,
-while the reviewer configuration still awaits scholar confirmation. See the
-[integrity report](notes/stage2_5_integrity_report.md) and
-[independent audit](notes/stage2_5_independent_audit.md).
+mandatory checkpoint. Stage 3 has now completed all five Phase-1 and five
+Phase-2 cards, the editorial synthesis, provenance replay, and the six-item
+non-ranking roadmap. The mechanical decision is **Major Revision** and the
+workflow is stopped at the mandatory scholar decision checkpoint; Stage 4 is
+not authorized. See the [integrity report](notes/stage2_5_integrity_report.md),
+[independent audit](notes/stage2_5_independent_audit.md), and
+[Stage-3 completion report](notes/stage3_completion_report.md).

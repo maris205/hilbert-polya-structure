@@ -4,10 +4,22 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**.
-  Stage-3 entry is authorized; the proposed reviewer configuration is
-  **awaiting scholar confirmation**, and substantive review has not started.
-- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
+- Current pipeline: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
+  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
+  phases. The mechanical decision is **Major Revision**; Stage 4 remains
+  unauthorized and the frozen manuscript/PDF are unchanged.
+- Stage-3 conclusion: the finite 2/2/134 taxonomy remains valid for the
+  registered 138-component/55-group multiset, but D3 carries one repairable
+  `block`. The minimum remedy confines primitive-Euler conclusions to that
+  multiset; stronger global-owner claims require separately authorized
+  cross-instance conjugacy canonicalization and recomputation. Nine
+  non-ranking response items also cover literature positioning, index and
+  topology maps, transitive dependency closure, formal-series scope, matched
+  controls, and a self-contained primitive-root completeness lemma.
+- Stage-3 artifacts: [completion report](notes/stage3_completion_report.md),
+  [editorial synthesis](notes/stage3_editorial_synthesis.md),
+  [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
+  [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
 - Current Stage-2.5 closure: 5/5 references are VERIFIED; 68/68 selected
   distinct claims are VERIFIED; all 70/70 selected tuples are structurally
   closed.  The 70 anchorless evidence carriers remain an advisory limitation,
@@ -284,8 +296,11 @@ scientific status remains
 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` /
 `ROUTE_A_EXPLORATORY`; Route B remains unauthorized. The scholar declaration,
 provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 therefore
-passed its mandatory checkpoint. Stage 3 entry is authorized and Phase 0 is
-complete, while the reviewer configuration still awaits scholar confirmation.
-No Route-A promotion or Route-B entry occurs. See the
-[integrity report](notes/stage2_5_integrity_report.md) and
-[independent audit](notes/stage2_5_independent_audit.md).
+passed its mandatory checkpoint. Stage 3 has now completed all five Phase-1
+and five Phase-2 cards, editorial synthesis, provenance replay, and the
+nine-item non-ranking roadmap. The mechanical decision is **Major Revision**
+and the workflow is stopped at the mandatory scholar decision checkpoint;
+Stage 4 is not authorized. No Route-A promotion or Route-B entry occurs. See
+the [integrity report](notes/stage2_5_integrity_report.md),
+[independent audit](notes/stage2_5_independent_audit.md), and
+[Stage-3 completion report](notes/stage3_completion_report.md).

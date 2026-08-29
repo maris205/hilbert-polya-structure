@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 3 已授权；Phase 0 评审席配置完成，等待 scholar 确认** | Stage 2.5 为 5/5 `PASS AT MANDATORY CHECKPOINT`。本轮已冻结五篇 review targets，生成 20 张动态配置卡和 5 个固定 DA 席位；25 份正式报告与 5 份编辑综合尚未启动，正文未改。所有席位均为 `criteria_binding_unavailable`，不作具体期刊适配声明。Route A 不晋级：正向 A2 `0/5`，Route B `0/5`。见 [Stage-3 Phase-0 批次配置](BATCH_ROUND9_STAGE3_REVIEWER_CONFIGURATION.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 3 评审输出完成；等待 scholar 裁决** | 25 个 Phase-1 预承诺、25 份 Phase-2 评审卡和 5 份编辑综合全部通过验证；机械决定为 4 篇 Major Revision、1 篇 Minor Revision。47 条来源意见形成 33 项非排序路线图建议；正文/PDF 未改，Stage 4 未授权。科学 Route A 不晋级：正向算术 A2 `0/5`，Route B `0/5`。见 [Stage-3 批次报告](BATCH_ROUND9_STAGE3_REVIEW_REPORT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,31 +38,26 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 ## Papers 24--28 最新结论
 
 五个科学对象仍处于 **Route A 的 A0--A1 / A1--A2 证据层**，Route B 未调用，
-正向 Gates A--E 未到达；论文生产流程已完成 **ARS Stage 2 (`WRITE`)**，并在
-**Stage 2.5 (`INTEGRITY`)** 达到 **PASS AT MANDATORY CHECKPOINT**。5/5 论文通过，
-`stage3_authorized=false`；这是完整性门槛闭合，不是 Route-A 科学晋级。Round 9 不改写 Round 8
-冻结的五个 formal Route-A records：三个
-`ROUTE_A_EXPLORATORY`、两个 `ROUTE_A_REJECTED`。A1 owner/completeness 基础与
-P25 的负控 A2 校准继续增强，但正向算术候选到达 A2 仍为 `0/5`；唯一
-`A2_ANALYTIC_DETERMINANT` 仍只属于非算术 unit-roof symbolic control。五篇
-全历史测试 `372/372`、本轮重放测试 `80/80`、五项双遍字节一致全部通过；
-五篇共形成 21,520 audited body words、62 页 PDF；31 条文献均已检查，其中
-31 条 `VERIFIED`、0 条 `MISMATCH`。获授权的 P25 `BowenLanford1970` 作者后缀、
-P28 `Nazarenko2013` 作者/primary class 与 `AigonDupuyEtAl2005` 五位作者字段均已
-定点修复；P25/P28 PDF 已由修复后的书目重新构建。独立
-交叉评审初始为 0 Blocker / 0 Major / 8 Minor，8 项均已修复，补丁后统一
-编译、引用/PDF/结构审计为 5/5 PASS。Stage 2.5 进一步完成 31/31 reference
-identity、38/38 citation contexts、50/50 data surfaces、113/343 originality
-paragraphs、10/10 本地论文对与 22/22 ORCID-Zenodo PDF 自重合筛查。第一次
-Phase-E 生成器仅核 58 claims，独立复核发现口径错误后已重建为 382 registered、
-316 HIGH-IMPACT + 15 RANDOM = 331 selected、340/340 exact tuples；五份 coverage
-replay 和 evidence-row validator 全部通过。这里的 340/340 只表示 tuple、哈希与
-选择集合的结构闭合；全部 340 条 evidence rows 均诚实标为 `anchorless`，不包含可
-独立重放的来源摘录。语义 verdict 另由各论文的 Phase-E semantic audit 记录，并以
-五份逐 claim、逐 tuple、逐 row-hash 的结构化回执绑定；仍不能由这些 anchorless
-carriers 单独推出。逐项语义结论当前为 330 条 `VERIFIED` 与 P28 一条
-`MINOR_DISTORTION`；该 minor 仅涉及 verifier “first” 的调用顺序叙述与源码实际
-顺序不一致，不改变数值结果、定理或 replay 的临时目录安全性，也不阻断 Stage 2.5。
+正向 Gates A--E 未到达。论文生产流程已完成 **ARS Stage 2 (`WRITE`)**、通过
+**Stage 2.5 (`INTEGRITY`)**，并已完成 **Stage 3 (`REVIEW`)** 的全部评审输出。
+五篇共执行 25 个 manuscript-blind Phase-1 预承诺、25 个 manuscript-visible
+Phase-2 席位和 5 个机械编辑综合；决定分布为 **4 篇 Major Revision + 1 篇 Minor
+Revision**，无 Reject、fatal block 或 DA Critical。47 条来源意见被无排序地映射为
+33 个 response items（15 `must_fix`、17 `should_fix`、1 `consider`）。所有席位均
+保留 `criteria_binding_unavailable`，所以这些是 field-general 评估，不是具体期刊
+适配或投稿就绪判断。五份正文、书目与 PDF 字节均未修改；当前停在强制 scholar
+裁决点，`stage4_authorized=false`。
+
+Stage 3 不改写 Round 8 冻结的 formal Route-A records。A1 owner/completeness
+基础与 P25 的负控 A2 校准继续有效，但正向算术候选到达 A2 仍为 `0/5`；唯一
+`A2_ANALYTIC_DETERMINANT` 仍只属于非算术 unit-roof symbolic control。P24 与
+P28 的 full tuples 仍 `UNASSIGNED`，P27 两个候选仍分别
+`ROUTE_A_REJECTED`。底层完整性基线也不变：31/31 references、38/38 citation
+contexts、50/50 data surfaces、340/340 structural tuples，以及 33 个追溯实验/
+计算 provenance entries 与 62 条直接实验声明对齐。全部 evidence rows 仍诚实标为
+`anchorless`；语义判断来自独立 audit，而不是由这些 carriers 单独推出。P28 的
+replay-order 问题在 Stage 3 被三席重复识别，并作为 Minor Revision 的局部
+must-fix 保留；它不改变 exact systole 定理、数值结果或临时目录安全性。
 
 作者在 `2026-08-29T05:52:42Z` 明确登记五份
 `status=experiments_declared, declared_by=scholar` 声明。现存 Round 2--8 载体已
@@ -75,15 +70,16 @@ ARS/model/prompt 字段保持 `not-recorded`，没有补造。
 
 | Paper | 子类型 | 当前明确进展 |
 |---|---|---|
-| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow | 对任意交换环、非零因子 `m` 证明 `(tr(gamma)^2-4)/m^2=m^2det(A)^2-4det(A)`；6,396 control matrices/witnesses 证明 `D9` Gaussian specificity 失效。signed first jet 将 145 个 `D9` classes 细化为 517 个 joint descriptors，分离 372/11,336 collision rows；但 canonical A0 control types 严格记为 `2/3 INCOMPLETE`，full flow 仍 `UNASSIGNED` |
-| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering / symbolic suspension control | exact period means 为 `d-2a` 与 `d-sqrt(3)a`，差 `(2-sqrt(3))a>0`，故物理 roof 不与常数上同调，也不能由 owner/repetition-preserving 的 `z=exp(-cs)` 转移 unit-roof determinant；2,241-row locked replay 支持但不替代证明。symbolic tuple 不变，physical billiard `UNASSIGNED` |
-| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | 实结构给出 exact coordinate `k=2y+z`；全部 138 instances 与 165 group/law verdicts 已分类为 2 full complex kernels、2 real-projection-only kernels、134 true nonkernels、0 unresolved。三种 laws 分别失败 51/55、51/55、55/55，仍无 global owner product/determinant/A2 |
-| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit / homology-cover geodesic flow | 新注册 pure-homology panel 上证明 degree `N^4`、owner order `N`、`N^3` primitive lifts 与 period `N ell(g)`；四象限中只有同时使用 `1/N` clock 和 `1/N^3` log-multiplicity normalization 才逐级精确恢复 base finite-panel factor。该 generic candidate 为 `A0_FAIL/ROUTE_A_REJECTED`，不是 full determinant |
-| [P28](papers/28-bolza-magnetic-flow/README.md) | nonarithmetic genus-two geodesic control / magnetic precursor | 对 `NAZARENKO-EXP-OCTAGON-G2` 证明 exact systole `2 acosh(1/(2exp(-1/5)-1))=2.04302665588...`，primitive witness 为 `g0*g3`；exact tile certificate 覆盖 18,533 included / 108,616 rejected-boundary states，证明 `Lambda=21/10` 内的 short classes 完备，因此 common cutoff 已冻结。matched census/comparison、magnetic flow、A2 与 Route B 均未运行 |
+| [P24](papers/24-bianchi-holonomy-flow/README.md) | cusped hyperbolic 3-flow | 定理与负 specificity 结果通过评审；**Major Revision**。8 项非排序建议集中于 novelty/title scope、collision/owner 解释、freeze chronology、operator interface 与缺失的第三 canonical control。full flow 仍 `UNASSIGNED`，proxy 不晋级 |
+| [P25](papers/25-three-disk-scattering-flow/README.md) | open three-disk scattering / symbolic suspension control | exact roof nontransfer 与 symbolic determinant 负控通过评审；**Major Revision**。6 项建议要求 closest-work 定位、四对象图、2,241-row replay estimand、环境与 provenance closure。physical billiard 仍 `UNASSIGNED` |
+| [P26](papers/26-level11-newform-time-change/README.md) | arithmetic geodesic time change | 2/2/134 与 4/51 exact taxonomy 保留在注册 multiset 上；**Major Revision**，D3 有 repairable `block`。最低修复是禁止把 138-component/55-group multiset 外推为 global primitive-Euler owner product；A2 仍失败 |
+| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | inverse-limit / homology-cover geodesic flow | residual no-go 与 homology four-quadrant calibration 均通过边界审查；**Major Revision**。6 项建议覆盖负 projective-sign fixture、量词/干预范围、候选图、lamination bridge 与贡献定位。两个候选仍各自 `ROUTE_A_REJECTED` |
+| [P28](papers/28-bolza-magnetic-flow/README.md) | nonarithmetic genus-two geodesic control / magnetic precursor | exact nonarithmeticity、finite completeness 与 systole 证明链通过；**Minor Revision**。4 项建议修复 replay 顺序、直接 normal-form/closure tests、Route legend 与 geodesic-to-magnetic map。full tuple 仍 `UNASSIGNED`，matched/magnetic/A2/Route B 未运行 |
 
-当前流程已进入 **Stage 3 (`REVIEW`)**，并完成 Phase 0 领域分析和评审席配置。
-最小合法下一步是作者确认这组配置；确认前不运行 25 个正式评审席，也不修改论文。
-Stage 3 授权不包含 Stage 4、外部投稿、新研究轮、Route-A 晋级或 Route B。
+当前流程已完成 **Stage 3 (`REVIEW`)** 的全部评审输出。最小合法下一步是 scholar
+逐条裁决 47 个来源意见、确认或拒绝建议分组，并授权精确 manuscript/test/provenance
+blocks；在此之前不执行 Stage 4，也不修改论文。Stage 3 完成不包含外部投稿、
+新研究轮、Route-A 晋级或 Route B。
 其后的研究路线候选仍已收窄：P24
 预冻结并执行第三种真正属于 evaluator
 列举表的 canonical control，再寻找 Gaussian ideal/Hecke refinement；P25 保留
@@ -97,7 +93,9 @@ calibrators；合计 19 个 frozen model instances，但不视为 19 个独立�
 详细定理、PDF 哈希、路线对应、动力系统初始限定与独立评审修补见
 [Round-9 完整稿报告](BATCH_ROUND9_PAPERS_24_28.md)；底层研究证书见
 [Round-8 执行报告](BATCH_ROUND8_PAPERS_24_28.md)；完整性结论、精确补丁提案与
-强制作者声明见 [Round-9 Stage-2.5 报告](BATCH_ROUND9_STAGE2_5_INTEGRITY_REPORT.md)。
+强制作者声明见 [Round-9 Stage-2.5 报告](BATCH_ROUND9_STAGE2_5_INTEGRITY_REPORT.md)；
+五席评分、逐篇结论、33 项非排序路线图与 Route-A 对应见
+[Round-9 Stage-3 报告](BATCH_ROUND9_STAGE3_REVIEW_REPORT.md)。
 
 ## 按时间记录
 
@@ -222,4 +220,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 24--28-round9-stage2.5 - ARS Stage 2.5 `INTEGRITY` / Route A 状态保持（2026-08-29） - 五篇在当前冻结面通过；31/31 references、38/38 citation contexts 与 50/50 data surfaces 支持，113/343 originality paragraphs、10/10 本地正文对、22/22 ORCID-Zenodo PDFs 与 2 篇旧 arXiv PDFs 未见实质性复用。首次 58-claim sidecar 因 HIGH-IMPACT 分类/随机分母错误被撤销，稳定重建为 382 registered / 331 selected / 340/340 tuples，五份 coverage replay、evidence validator 与 drift schema 全 PASS；tuple 全为 `anchorless`，语义边界由五份独立 semantic audit 与逐 claim/tuple/hash 回执绑定。作者声明和定点书目授权到位后，33 个 Round-2--8 实验/计算证书、309 个当前载体与 62 条直接实验声明完成追溯转录和对齐；官方 provenance/claim-audit checks 5/5 PASS。最终 gate 为 `PASS AT MANDATORY CHECKPOINT`，0 SERIOUS，P28 一项不阻断的 replay-order `MINOR_DISTORTION`。科学 Route-A typed records、正向 A2 `0/5` 与 Route B `0/5` 不变。详见 [Stage-2.5 批次报告](BATCH_ROUND9_STAGE2_5_INTEGRITY_REPORT.md)。
 
-24--28-round9-stage3-phase0 - ARS Stage 3 `REVIEW` Phase 0（2026-08-29） - 作者已明确授权五篇进入 Stage 3；五份 frozen manuscript/PDF target 与 Stage-2.5 predecessor 已 hash 绑定。领域分析生成 20 张动态 Reviewer Configuration Cards，并为每篇保留一个固定 Devil's Advocate，共 25 个后续执行席位。当前停在配置确认检查点：25 份 peer-output-blind 报告与 5 份编辑综合均未执行，正文/书目/PDF 未改，`criteria_binding_unavailable`，Route-A/Route-B 状态不变。详见 [Phase-0 批次配置](BATCH_ROUND9_STAGE3_REVIEWER_CONFIGURATION.md)。
+24--28-round9-stage3-phase0 - ARS Stage 3 `REVIEW` Phase 0（2026-08-29，历史快照） - 作者已明确授权五篇进入 Stage 3；五份 frozen manuscript/PDF target 与 Stage-2.5 predecessor 已 hash 绑定。领域分析生成 20 张动态 Reviewer Configuration Cards，并为每篇保留一个固定 Devil's Advocate，共 25 个后续执行席位。当时停在配置确认检查点，25 份 peer-output-blind 报告与 5 份编辑综合尚未执行；该状态已由下一条 Stage-3 完成记录取代。正文/书目/PDF 未改，`criteria_binding_unavailable`，Route-A/Route-B 状态不变。详见 [Phase-0 批次配置](BATCH_ROUND9_STAGE3_REVIEWER_CONFIGURATION.md)。
+
+24--28-round9-stage3 - ARS Stage 3 `REVIEW` 完成（2026-08-29） - 25 个 Phase-1 预承诺、25 个 Phase-2 评审席、5 份编辑综合、5 份 provenance/carrier 与 5 份机器路线图全部通过；决定为 4 Major Revision + 1 Minor Revision，0 Reject、0 fatal block、0 DA Critical。47 条来源意见映射为 33 个无排序 items（15 must-fix、17 should-fix、1 consider）。P28 首次 EIC D6 abstention 触发 fail-closed，原 EIC 同一上下文仅按 Phase-0 的 field-general contribution 职责补评 D6=pass，期刊/readiness 仍不评；修复已单独留痕。五份 manuscript/PDF 哈希不变，Stage 4 未授权，Route-A 正向 A2 仍 0/5，Route B 0/5。详见 [Stage-3 批次报告](BATCH_ROUND9_STAGE3_REVIEW_REPORT.md)。

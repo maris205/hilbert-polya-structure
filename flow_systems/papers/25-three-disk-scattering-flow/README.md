@@ -4,10 +4,22 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**;
-  Stage-3 entry is authorized and the proposed reviewer configuration is
-  **awaiting scholar confirmation**. No substantive reviewer report has run.
-- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
+- Current stage: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
+  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
+  phases and the mechanically recomputed decision is **Major Revision**;
+  Stage 4 remains unauthorized and the frozen manuscript/PDF are unchanged.
+- Stage-3 conclusion: the exact roof noncohomology theorem, unit-roof
+  determinant, and symbolic-to-physical no-credit-transfer result survive
+  review. Six non-ranking response items remain: closest-work/novelty
+  positioning, a consolidated four-object map, a distinct scientific estimand
+  or validation-only role for the 2,241-row replay, a pinned environment, a
+  repaired bibliography-hash pointer, and a dependency-closed provenance
+  manifest. Verdicts are `D1/D2/D3/D6=warn`, `D4/D5=pass`; no `block`, fatal
+  block, or DA Critical was recorded.
+- Stage-3 artifacts: [completion report](notes/stage3_completion_report.md),
+  [editorial synthesis](notes/stage3_editorial_synthesis.md),
+  [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
+  [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
 - Integrity closure: the `BowenLanford1970` author suffix has been repaired and
   revalidated, so 8/8 registered references are VERIFIED; the stable Phase-E
   population is 48/48 VERIFIED with 49/49 structurally closed tuples; all 49
@@ -262,8 +274,11 @@ authorized `BowenLanford1970` suffix repair has been revalidated, giving 8/8
 VERIFIED references.  The scholar-owned declaration is present with 7
 provenance entries and 6 alignment records.  The Phase-E result remains 48/48
 VERIFIED with 49/49 structurally closed, explicitly `anchorless` tuples.
-Stage 3 entry is authorized and Phase 0 is complete, but the reviewer cards
-still await scholar confirmation and paper-visible review has not started;
-the physical-flow Route-A tuple remains unassigned. See the controlling
-[integrity report](notes/stage2_5_integrity_report.md) and the
-historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md).
+Stage 3 has now completed all five Phase-1 and five Phase-2 cards, editorial
+synthesis, provenance replay, and the six-item non-ranking roadmap. The
+mechanical decision is **Major Revision** and the workflow is stopped at the
+mandatory scholar decision checkpoint; Stage 4 is not authorized and the
+physical-flow Route-A tuple remains unassigned. See the controlling
+[integrity report](notes/stage2_5_integrity_report.md), the historical-plus-current
+[independent integrity audit](notes/stage2_5_independent_audit.md), and the
+[Stage-3 completion report](notes/stage3_completion_report.md).

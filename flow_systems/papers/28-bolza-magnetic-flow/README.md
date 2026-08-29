@@ -2,10 +2,21 @@
 
 ## Current status
 
-- ARS: **Stage 3 REVIEW is authorized; Phase 0 is COMPLETE**. The proposed
-  reviewer configuration is **awaiting scholar confirmation**; no substantive
-  reviewer report has run and the manuscript remains frozen.
-- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
+- ARS: **Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR DECISION CHECKPOINT
+  OPEN**. All five peer-output-blind seats completed both phases. The
+  mechanically recomputed decision is **Minor Revision**; Stage 4 remains
+  unauthorized and the manuscript/PDF stay frozen.
+- Stage-3 conclusion: the nonarithmeticity, finite-completeness, and exact
+  systole proof chain survives review. Seven source findings form four
+  non-ranking response items: two `must_fix` repairs for replay-order wording
+  and direct canonicalization/closure tests, plus two `should_fix` Route and
+  geodesic-to-magnetic interface surfaces. There is no `block`, fatal block,
+  DA Critical, or DA Major.
+- Stage-3 artifacts: [completion report](notes/stage3_completion_report.md),
+  [editorial synthesis](notes/stage3_editorial_synthesis.md),
+  [non-ranking revision roadmap](notes/stage3_revision_roadmap.json),
+  [EIC D6 interface-repair receipt](notes/stage3_eic_d6_interface_repair.md),
+  and [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
 - Current manuscript: the 5,127-word, 14-page paper proves the exact systole
   and finite-cutoff completeness theorem for the frozen nonarithmetic
   genus-two octagon control.
@@ -263,6 +274,9 @@ result remains a magnetic trace calibration.
 - [Round-8 pre-computation freeze](notes/round8_control_systole_completeness_freeze.md)
 - [Round-8 exact systole/completeness theorem](notes/round8_control_systole_certificate.md)
 - [Round-8 bounded-proxy Route-A evaluation](../../evaluations/route_a/BOLZA-MAGNETIC-EVEN-L4-CERTIFIED-OWNER-PROXY/2026-08-28-stage1-round8.yaml)
+- [Stage-3 completion report](notes/stage3_completion_report.md)
+- [Stage-3 editorial synthesis](notes/stage3_editorial_synthesis.md)
+- [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
@@ -298,9 +312,12 @@ VERIFIED and one non-blocking MINOR_DISTORTION** (`P28-E1-072`), while the
 all 6/6 references are VERIFIED, and the retrospective scholar-owned intake
 now carries seven schema-valid provenance entries with 14/14 directly
 experiment-backed claims aligned. The Stage-2.5 decision is therefore **PASS
-AT MANDATORY CHECKPOINT**, with zero serious blockers. Stage 3 entry is now
-authorized and Phase 0 is complete; the reviewer cards await scholar
-confirmation and paper-visible review has not started. This is still a
+AT MANDATORY CHECKPOINT**, with zero serious blockers. Stage 3 has now
+completed five role-separated two-phase reviews, mechanical editorial
+synthesis, provenance replay, and the four-item non-ranking roadmap. The
+decision is **Minor Revision** and the workflow is stopped at the mandatory
+scholar decision checkpoint; Stage 4 is not authorized. This is still a
 control theorem; no Bolza magnetic comparison or full Route-A tuple has been
-claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md)
-and the [independent audit](notes/stage2_5_independent_audit.md).
+claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md),
+[independent audit](notes/stage2_5_independent_audit.md), and
+[Stage-3 completion report](notes/stage3_completion_report.md).

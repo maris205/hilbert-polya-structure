@@ -2,17 +2,19 @@
 
 Date: **2026-08-29**
 
-Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT`; Stage
-3 entry is authorized and Phase 0 reviewer configuration is complete. The
-four dynamic cards plus fixed DA await scholar confirmation before substantive
-review. Later Stage-2-era waiting text is historical and superseded.
+Current controlling state: Stage 3 review outputs are complete and the
+mechanical decision is `MINOR_REVISION`; the scholar decision checkpoint is
+open and Stage 4 is not authorized. All five seats completed both phases. The
+synthesis, provenance, and four-item non-ranking roadmap replay successfully,
+and the frozen manuscript/PDF remain unchanged. Later Stage-2-era waiting text
+is historical and superseded.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / RESEARCH SPINE FROZEN** |
 | ARS Stage 2 | **DRAFT COMPLETE** — full manuscript, bibliography, compiled PDF and manuscript audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — 0 serious blockers; one non-blocking replay-order minor retained |
-| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
+| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MINOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and four-item non-ranking roadmap validated; Stage 4 unauthorized |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |
@@ -76,9 +78,10 @@ review. Later Stage-2-era waiting text is historical and superseded.
 | Route-B invocation allowed | `false` |
 | Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — 5,127 body words, 14 pages, 6/6 citation closure; no Phase-0 mutation |
 
-Workflow checkpoint: confirm the Stage-3 reviewer configuration before the
-five paper-visible reviewer seats execute. No substantive reviewer verdict is
-claimed here.
+Workflow checkpoint: Stage 3 review outputs are complete. The author must now
+adjudicate every source row and authorize exact revision blocks before any
+Stage-4 edit. The mechanical decision is `MINOR_REVISION`; no manuscript,
+Route-A, or Route-B mutation is authorized by the review itself.
 
 Next scientific gate: the contracted non-arithmetic control passes 6/6, its exact systole
 is proved, and the target-blind common cutoff `Lambda=21/10` is frozen.  Build

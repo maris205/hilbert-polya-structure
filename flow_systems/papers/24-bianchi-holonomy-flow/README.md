@@ -4,10 +4,21 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 3 REVIEW / Phase 0 COMPLETE**;
-  Stage-3 entry is authorized and the proposed reviewer configuration is
-  **awaiting scholar confirmation**. No substantive reviewer report has run.
-- Phase-0 configuration: [field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md).
+- Current stage: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
+  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
+  phases and the mechanically recomputed decision is **Major Revision**;
+  Stage 4 remains unauthorized and the frozen manuscript/PDF are unchanged.
+- Stage-3 conclusion: the ring-general theorem and negative-specificity result
+  survive review. The non-ranking response burden is eight items: verified
+  novelty/antecedent positioning, title scope, loxodromic-versus-pooled
+  collisions, freeze chronology, one inherited hypothesis, an operator-facing
+  dependency map, explicit owner equivalence, and the missing third canonical
+  control. Dimension verdicts are `D1/D2/D3/D4/D6=warn`, `D5=pass`; no `block`,
+  fatal block, or DA Critical was recorded.
+- Stage-3 artifacts: [completion report](notes/stage3_completion_report.md),
+  [editorial synthesis](notes/stage3_editorial_synthesis.md),
+  [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
+  [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
 - Integrity closure: 7/7 registered references are VERIFIED; the stable Phase-E
   population is 64/64 VERIFIED with 66/66 structurally closed tuples; all 66
   evidence carriers remain explicitly `anchorless`.  The scholar-owned intake
@@ -428,9 +439,11 @@ The current controlling verdict is **PASS AT MANDATORY CHECKPOINT**.  The
 scholar-owned declaration is present with 7 provenance entries, and 11 direct
 experiment-backed claims have alignment records.  The Phase-E result remains
 64/64 VERIFIED with 66/66 structurally closed, explicitly `anchorless` tuples.
-Stage 3 entry is now authorized and Phase 0 is complete. The four dynamic
-reviewer cards plus fixed DA remain at the scholar configuration checkpoint;
-paper-visible review has not started. The Route-A tuple and 2/3
-canonical-control boundary are unchanged.
+Stage 3 has now completed all five Phase-1 and five Phase-2 cards, editorial
+synthesis, provenance replay, and the eight-item non-ranking roadmap. The
+mechanical decision is **Major Revision** and the workflow is stopped at the
+mandatory scholar decision checkpoint; Stage 4 is not authorized. The
+Route-A tuple and 2/3 canonical-control boundary are unchanged.
 See the controlling [integrity report](notes/stage2_5_integrity_report.md) and
-the historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md).
+the historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md),
+plus the [Stage-3 completion report](notes/stage3_completion_report.md).

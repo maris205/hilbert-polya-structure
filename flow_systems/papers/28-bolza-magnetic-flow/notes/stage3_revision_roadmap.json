@@ -1,0 +1,286 @@
+{
+  "schema_version": "revision-roadmap/1.0",
+  "revision_round": 1,
+  "base_draft_sha256": "743a047cbe5f6227fbfaa5fef3169029b339af5790218df4ddf8f7cac2987f59",
+  "block_manifest_sha256": "e70d9d74f0e1396938b75e7908e2f86008a5934cb635f8393bc7f5595c9774c0",
+  "items": [
+    {
+      "id": "REV-01",
+      "source_refs": [
+        {
+          "seat": "EIC",
+          "channel": "finding",
+          "ordinal": 1,
+          "subclaim_ordinal": 0
+        },
+        {
+          "seat": "R1",
+          "channel": "finding",
+          "ordinal": 1,
+          "subclaim_ordinal": 0
+        },
+        {
+          "seat": "DA",
+          "channel": "finding",
+          "ordinal": 1,
+          "subclaim_ordinal": 0
+        }
+      ],
+      "description": "The manuscript states a digest-before-reconstruction replay order, while the audited builder executes proof guards and finite traversal before build_validation applies the source and upstream locks.",
+      "reviewer": "EIC",
+      "sub_claim_ids": [
+        "SC-01",
+        "SC-02",
+        "SC-07"
+      ],
+      "obligation_class": "must_fix",
+      "severity": "minor",
+      "severity_source": "EIC-W1 and R1-W1 explicitly transport Minor severity; the DA bounded sequencing finding is also Minor by its narrative decision-impact statement. The three source records identify one corroborated defect rather than three defects.",
+      "evidence_anchor": {
+        "anchor_type": "text",
+        "locator": "manuscript.tex lines 815--823 and notes/stage2_5_integrity_report.md lines 43--47",
+        "quote": "The verifier first checks source and upstream digests, then reconstructs all canonical states in a fresh directory."
+      },
+      "confidence": 5,
+      "competence_basis": "Journal-Fit Reviewer comparison of the manuscript replay narrative with the frozen Stage-2.5 implementation audit",
+      "confidence_source": "EIC-W1 per-finding confidence",
+      "corroborating_sources": [
+        {
+          "reviewer": "R1",
+          "severity": "minor",
+          "evidence_anchor": {
+            "anchor_type": "text",
+            "locator": "manuscript Independent replay obligations, lines 815--817",
+            "quote": "The verifier first checks source and upstream digests, then reconstructs all canonical states in a fresh directory."
+          },
+          "confidence": 5,
+          "competence_basis": "Exact-computation and reproducibility review of manuscript wording, builder control flow, and current verify-only replay",
+          "confidence_source": "R1-W1 per-finding confidence"
+        },
+        {
+          "reviewer": "DA",
+          "severity": "minor",
+          "evidence_anchor": {
+            "anchor_type": "text",
+            "locator": "Section 7, Independent replay obligations",
+            "quote": "The verifier first checks source and upstream digests, then reconstructs all canonical states in a fresh directory."
+          },
+          "confidence": 5,
+          "competence_basis": "Adversarial manuscript-to-builder sequencing comparison after the central completeness stress test",
+          "severity_source": "DA bounded-sequencing narrative states that the decision impact is minor.",
+          "confidence_source": "DA bounded-sequencing per-finding confidence"
+        }
+      ],
+      "cost_scope": {
+        "kind": "sentence",
+        "locator": "Independent replay obligations and matching reproducibility summaries"
+      },
+      "consequence_if_unaddressed": {
+        "code": "reader_traceability_reduced",
+        "target": {
+          "kind": "section",
+          "locator": "Executable sequencing in Independent replay obligations"
+        }
+      },
+      "target_section": "Independent replay obligations",
+      "suggested_action": "Replace B0099's sequencing statement so it says that isolated proof-guard and finite-traversal reconstruction precede build_validation lock checks, and that passing validation plus an explicit refresh remains necessary before canonical outputs can change; retain the verify-only temporary-directory and no-write boundary.",
+      "consensus_level": "SINGLE-VERIFIER",
+      "verification_criteria": "B0099 states the audited builder order exactly, preserves fresh temporary-directory execution and byte comparison, and states that canonical output changes require passing validation and the explicit refresh path; the theorem values and frozen Route record are unchanged.",
+      "proposed_targets": [
+        {
+          "block_id": "B0099",
+          "allowed_operations": [
+            "replace_block"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REV-02",
+      "source_refs": [
+        {
+          "seat": "R1",
+          "channel": "finding",
+          "ordinal": 2,
+          "subclaim_ordinal": 0
+        }
+      ],
+      "description": "The official Round-8 suite exercises several canonicalization and closure invariants only indirectly, leaving test-localization and same-builder assurance debt despite the successful exact replay.",
+      "reviewer": "R1",
+      "sub_claim_ids": [
+        "SC-03"
+      ],
+      "obligation_class": "must_fix",
+      "severity": "minor",
+      "evidence_anchor": {
+        "anchor_type": "absence",
+        "locator": "code/test_round8_control_systole_certificate.py and the corresponding Round-8 builder functions",
+        "absence_scope": "Direct regression tests for multi-factor Delta cancellation, projective-sign idempotence, both inverse orders, sampled canonical collisions, and a separately recomputed eight-transition closure property",
+        "check_performed": "Inspected all 24 Round-8 test methods, the canonicalization functions, and the included/rejected transition-closure path."
+      },
+      "confidence": 5,
+      "competence_basis": "Exact-computation and computer-assisted-proof review of the complete Round-8 builder, test module, read-only diagnostics, and verify-only replay",
+      "confidence_source": "R1-W2 per-finding confidence",
+      "cost_scope": {
+        "kind": "other",
+        "surface_id": "exact_computation_tests",
+        "locator": "Round-8 canonicalization tests, closure assurance, and the manuscript's canonicalization-invariant test description"
+      },
+      "consequence_if_unaddressed": {
+        "code": "method_reproducibility_unresolved",
+        "target": {
+          "kind": "dataset",
+          "locator": "Direct canonicalization and transition-closure regression coverage for the Round-8 certificate"
+        }
+      },
+      "target_section": "Canonicalization invariants and Round-8 exact-computation tests",
+      "suggested_action": "Add direct tests for repeated Delta cancellation, normalization idempotence under global negation, both generator/inverse multiplication orders, and sampled canonical-state collisions, then make B0048 describe the exercised properties accurately. A separately implemented eight-transition closure recomputation remains the reviewer-proposed stronger assurance path and must not be described as existing evidence unless it is actually executed and bound to a replay receipt.",
+      "consensus_level": "SINGLE-VERIFIER",
+      "verification_criteria": "The Round-8 test record directly exercises repeated Delta cancellation, sign-normalization idempotence, both inverse orders, and canonical collisions, and B0048 matches that direct coverage. Any independent closure statement identifies a separately implemented recomputation and an exact replay artifact; otherwise the manuscript makes no independence claim for closure assurance.",
+      "proposed_targets": [
+        {
+          "block_id": "B0048",
+          "allowed_operations": [
+            "replace_block"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REV-03",
+      "source_refs": [
+        {
+          "seat": "R3",
+          "channel": "finding",
+          "ordinal": 1,
+          "subclaim_ordinal": 0
+        },
+        {
+          "seat": "R3",
+          "channel": "finding",
+          "ordinal": 3,
+          "subclaim_ordinal": 0
+        }
+      ],
+      "description": "Adjacent-field readers lack a compact definition map for A0--A4 and a consolidated chain of the still-unexecuted matched-census, owner-quotient, signed-field, A2, determinant, A3/A4, and Route-B obligations.",
+      "reviewer": "R3",
+      "sub_claim_ids": [
+        "SC-04",
+        "SC-06"
+      ],
+      "obligation_class": "should_fix",
+      "severity": "minor",
+      "severity_source": "R3-W1 and R3-W3 remain distinct Minor findings; they are grouped only because one Route-interface surface can define the tokens and expose the downstream evidence chain.",
+      "evidence_anchor": {
+        "anchor_type": "absence",
+        "locator": "Abstract, Introduction, Route-A interpretation, Limitations, and Conclusion",
+        "absence_scope": "A compact definition map for A0--A4 and the distinct formal-unassigned versus historical-proxy statuses",
+        "check_performed": "Checked every Route-A, A0, A1, A2, A3, A4, proxy, and unassigned-tuple passage."
+      },
+      "confidence": 5,
+      "competence_basis": "Adjacent magnetic-dynamics and spectral-interface review of Route-token accessibility and evidentiary separation",
+      "confidence_source": "R3-W1 per-finding confidence",
+      "corroborating_sources": [
+        {
+          "reviewer": "R3 (SC-06; compatible distinct finding)",
+          "severity": "minor",
+          "evidence_anchor": {
+            "anchor_type": "absence",
+            "locator": "Route-A interpretation, Limitations, and Conclusion",
+            "absence_scope": "One ordered future-work chain covering matched census, owner deduplication, signed-field comparison, A2, determinant obligations, and the Route-B gate",
+            "check_performed": "Checked all future-work, census, comparison, owner, A2, determinant, and Route-B statements."
+          },
+          "confidence": 4,
+          "competence_basis": "Adjacent dynamical-systems interface assessment bounded to future-protocol design rather than the internal exact-enumeration proof",
+          "confidence_source": "R3-W3 per-finding confidence"
+        }
+      ],
+      "cost_scope": {
+        "kind": "section",
+        "locator": "Route-A interpretation and its Introduction or Conclusion pointers"
+      },
+      "consequence_if_unaddressed": {
+        "code": "reader_traceability_reduced",
+        "target": {
+          "kind": "section",
+          "locator": "A0--A4 definition map and downstream falsification obligations"
+        }
+      },
+      "target_section": "Adversarial checks and Route-A interpretation",
+      "suggested_action": "Insert after B0106 one compact non-ranking A0--A4 legend and downstream obligation chain. It must keep the full tuple unassigned, keep (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) historical and unpromoted, give the exact control systole and cutoff only A0--A1 infrastructure status, and mark matched census, owner quotienting, signed-field comparison, A2, determinant, A3/A4, and Route B as not run.",
+      "consensus_level": "SINGLE-VERIFIER",
+      "verification_criteria": "The inserted surface after B0106 defines every A0--A4 token used, distinguishes the formal unassigned tuple from the unchanged historical proxy, labels the present result only as A0--A1 control infrastructure, identifies 144 solely as equality-achieving group elements, and records matched, magnetic, A2, determinant, A3/A4, spectral, and Route-B work as not run.",
+      "proposed_targets": [
+        {
+          "block_id": "B0106",
+          "allowed_operations": [
+            "insert_after"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REV-04",
+      "source_refs": [
+        {
+          "seat": "R3",
+          "channel": "finding",
+          "ordinal": 2,
+          "subclaim_ordinal": 0
+        }
+      ],
+      "description": "The manuscript states the geodesic-to-magnetic boundary mainly through exclusions and does not provide a typed map separating present geodesic outputs from unconstructed magnetic, owner, determinant, analytic, and spectral objects.",
+      "reviewer": "R3",
+      "sub_claim_ids": [
+        "SC-05"
+      ],
+      "obligation_class": "should_fix",
+      "severity": "minor",
+      "evidence_anchor": {
+        "anchor_type": "absence",
+        "locator": "Related exact-computation setting, Implementation, Route-A interpretation, and Limitations",
+        "absence_scope": "An explicit typed map from geodesic length and cutoff to separately defined magnetic clock or action, ownership, multiplicity, determinant weight, analytic continuation, and spectral claims",
+        "check_performed": "Checked every magnetic, geodesic, cutoff, owner, multiplicity, determinant, continuation, and spectral occurrence."
+      },
+      "confidence": 5,
+      "competence_basis": "Magnetic-flow and trace-formula interface expertise applied to the manuscript's present-output and future-input boundaries",
+      "confidence_source": "R3-W2 per-finding confidence",
+      "cost_scope": {
+        "kind": "other",
+        "surface_id": "interface_schematic",
+        "locator": "Related exact-computation setting or Route-A interpretation typed dependency surface"
+      },
+      "consequence_if_unaddressed": {
+        "code": "interpretive_ambiguity_remains",
+        "target": {
+          "kind": "claim",
+          "locator": "Relation between the exact control theorem and unexecuted magnetic or spectral objects"
+        }
+      },
+      "target_section": "Related exact-computation setting and claim boundary",
+      "suggested_action": "Insert after B0037 a compact typed paragraph or schematic whose present outputs are only geodesic length, the target-blind cutoff, and exact group-element states, and whose magnetic Hamiltonian, clock or action, owner quotient, multiplicity, determinant weight, analytic continuation, and spectral realization are separately named new inputs or proofs and explicitly unconstructed.",
+      "consensus_level": "SINGLE-VERIFIER",
+      "verification_criteria": "The inserted surface after B0037 lets an adjacent-field reader recover the present geodesic-length, cutoff, and group-element outputs without inferring an owner count, magnetic comparison, determinant, analytic continuation, spectral realization, A2/A3/A4 result, or Route-B authority; 144 remains element-level only.",
+      "proposed_targets": [
+        {
+          "block_id": "B0037",
+          "allowed_operations": [
+            "insert_after"
+          ]
+        }
+      ]
+    }
+  ],
+  "total_items": 4,
+  "obligation_counts": {
+    "must_fix": 2,
+    "should_fix": 2,
+    "consider": 0
+  },
+  "editorial_decision": "Minor Revision",
+  "consensus_summary": "Seven source findings are retained in immutable EIC-to-R1-to-R2-to-R3-to-DA traceability through four non-ranking REV items. REV-01 preserves EIC-W1, R1-W1, and the DA bounded Minor finding as three source records of one replay-order defect. REV-03 preserves R3-W1 and R3-W3 as distinct but compatible Route-interface findings. R2 records no weakness; no finding reaches CONSENSUS-3 or CONSENSUS-4; no explicit non-DA dispute creates a SPLIT; and the DA CRITICAL and MAJOR tables are empty. The full P28 tuple remains unassigned, the historical (A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL) proxy remains historical and unpromoted, the exact systole and cutoff remain A0--A1 control infrastructure only, 144 remains an equality-achieving element count, and matched census, magnetic comparison, A2/A3/A4, determinant, spectral, and Route-B work remains not run.",
+  "dissenting_opinions": [
+    "R1 passes D3 because the geometric completeness theorem connects exact finite execution to the global systole claim, while DA warns D3 for a bounded replay-sequencing ambiguity; the D3 F3 majority predicate remains false at one of two eligible seats.",
+    "EIC assesses the completed theorem-and-certificate package as a coherent field-general contribution, while R3 warns that the object interfaces and downstream falsification chain remain under-explained; this is a difference between D6 contribution evidence and D4 accessibility, not a venue-fit or Route-promotion finding."
+  ]
+}

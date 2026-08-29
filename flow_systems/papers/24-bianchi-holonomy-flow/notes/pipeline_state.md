@@ -2,20 +2,20 @@
 
 Date: **2026-08-29**
 
-Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT` and the
-scholar has authorized Stage 3. Phase 0 has frozen the manuscript/PDF and
-generated four dynamic reviewer cards plus the fixed DA; the configuration
-awaits scholar confirmation before any substantive report runs. The existing
-mathematical gate remains unchanged: a third canonical control type and a
-source-derived ideal-valued refinement are required before positive Route-A
-promotion.
+Current controlling state: Stage 3 review outputs are complete and the
+mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
+open and Stage 4 is not authorized. All five seats completed both phases, the
+panel synthesis and immutable non-ranking roadmap replay successfully, and the
+frozen manuscript/PDF remain unchanged. The existing mathematical gate also
+remains unchanged: a third canonical control type and a source-derived
+ideal-valued refinement are required before positive Route-A promotion.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
 | ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
-| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
+| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and eight-item non-ranking roadmap validated; Stage 4 unauthorized |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |
@@ -67,7 +67,7 @@ promotion.
 | Full Bianchi Route A A2--A4 | NOT EVALUATED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — 4,029 audited body words; 7/7 citation closure; clean 12-page PDF; no Phase-0 mutation |
+| Manuscript | **FROZEN STAGE-3 REVIEW TARGET / UNCHANGED** — 4,029 audited body words; 7/7 citation closure; clean 12-page PDF; SHA-256 `e43ba0f...fd11` |
 
 Next gate: Round 8 shows that trace divisibility alone proves too much, but the
 mandatory control-type ledger remains `2/3`.  Before any positive promotion,

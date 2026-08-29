@@ -2,17 +2,19 @@
 
 Date: **2026-08-29**
 
-Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT`; Stage
-3 entry is authorized and Phase 0 reviewer configuration is complete. The
-four dynamic cards plus fixed DA await scholar confirmation before substantive
-review. Later Stage-2-era waiting text is historical and superseded.
+Current controlling state: Stage 3 review outputs are complete and the
+mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
+open and Stage 4 is not authorized. All five seats completed both phases. D3
+contains one repairable `block`, while the synthesis, provenance, and nine-item
+non-ranking roadmap replay successfully. The frozen manuscript/PDF remain
+unchanged. Later Stage-2-era waiting text is historical and superseded.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 theorem spine |
 | ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
-| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
+| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and nine-item non-ranking roadmap validated; Stage 4 unauthorized |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |
@@ -95,5 +97,7 @@ Round 9 converts the frozen theorem spine into the full paper
 `paper/stage2_manuscript_audit.md`.  The paper preserves the finite-multiset
 quantifier, exact 2/2/134 kernel split, 51/55 primary failures, and every
 Route-A/Route-B firewall. Stage 2.5 subsequently passed its mandatory
-checkpoint; Stage 3 entry is authorized and Phase 0 is complete. The reviewer
-configuration awaits scholar confirmation, with no substantive report yet.
+checkpoint. Stage 3 then completed five role-separated two-phase reviews,
+mechanical editorial synthesis, provenance replay, and a nine-item non-ranking
+roadmap. The decision is `MAJOR_REVISION`; the author decision checkpoint is
+open, Stage 4 remains unauthorized, and no Route credit changes.

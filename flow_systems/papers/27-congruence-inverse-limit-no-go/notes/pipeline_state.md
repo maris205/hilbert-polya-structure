@@ -2,17 +2,19 @@
 
 Date: **2026-08-29**
 
-Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT`; Stage
-3 entry is authorized and Phase 0 reviewer configuration is complete. The
-four dynamic cards plus fixed DA await scholar confirmation before substantive
-review. Later Stage-2-era waiting text is historical and superseded.
+Current controlling state: Stage 3 review outputs are complete and the
+mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
+open and Stage 4 is not authorized. All five seats completed both phases. The
+synthesis, provenance, and six-item non-ranking roadmap replay successfully,
+and the frozen manuscript/PDF remain unchanged. Later Stage-2-era waiting text
+is historical and superseded.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 comparative theorem spine |
 | ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
-| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
+| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated; Stage 4 unauthorized |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |
@@ -83,10 +85,12 @@ Evidence labels follow `skills/route-a-evaluator.md`.
 
 Round 9 converts the frozen comparative spine into the full paper
 `paper/manuscript.tex`, bibliography, compiled `paper/paper.pdf`, and
-`paper/stage2_manuscript_audit.md`.  It preserves the distinction between the
+`paper/stage2_manuscript_audit.md`. It preserves the distinction between the
 aperiodic residual inverse-limit owner and the separately registered
-nonresidual homology-cover calibrator.  Neither the exact four-quadrant identity
+nonresidual homology-cover calibrator. Neither the exact four-quadrant identity
 nor its 96-row replay is promoted to Route-A A2. Stage 2.5 subsequently passed
-its mandatory checkpoint; Stage 3 entry is authorized and Phase 0 is complete.
-The reviewer configuration awaits scholar confirmation, with no substantive
-report yet.
+its mandatory checkpoint. Stage 3 then completed five role-separated
+two-phase reviews, mechanical editorial synthesis, provenance replay, and a
+six-item non-ranking roadmap. The decision is `MAJOR_REVISION`; the author
+decision checkpoint is open, Stage 4 remains unauthorized, and neither
+candidate receives Route advancement.

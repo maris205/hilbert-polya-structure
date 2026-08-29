@@ -2,20 +2,21 @@
 
 Date: **2026-08-29**
 
-Current controlling state: Stage 2.5 is `PASS AT MANDATORY CHECKPOINT` and the
-scholar has authorized Stage 3. Phase 0 has frozen the manuscript/PDF and
-generated four dynamic reviewer cards plus the fixed DA; the configuration
-awaits scholar confirmation before any substantive report runs. A future
-physical-flow promotion still requires a genuinely nonconstant-roof operator
-with explicit ownership and analytic control; symbolic A1/A2 credit cannot be
-copied to the physical-flow row.
+Current controlling state: Stage 3 review outputs are complete and the
+mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
+open and Stage 4 is not authorized. All five seats completed both phases, the
+panel synthesis and six-item non-ranking roadmap replay successfully, and the
+frozen manuscript/PDF remain unchanged. A future physical-flow promotion still
+requires a genuinely nonconstant-roof operator with explicit ownership and
+analytic control; symbolic A1/A2 credit cannot be copied to the physical-flow
+row.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
 | ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
-| ARS Stage 3 | **AUTHORIZED / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION** — no substantive review report yet |
+| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated; Stage 4 unauthorized |
 | Continuous-time object | **FROZEN** — equilateral three-disk exterior billiard |
 | No-eclipse condition | **`[PROVED]`** for `d=6a` |
 | Clock / primitive / repetition | **FROZEN** — flight length / cyclic primitive word / traversal powers |
@@ -45,7 +46,7 @@ copied to the physical-flow row.
 | Physical three-disk Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Paper disposition | **RETAIN / STAGE 2 DRAFT COMPLETE** — post-review 4,055-word audited body; 8/8 citation closure; clean 12-page PDF; independent review 0 Blocker/0 Major and both Minors fixed |
+| Paper disposition | **STAGE-3 MAJOR REVISION / FROZEN TARGET UNCHANGED** — 4,055-word audited body; 8/8 citation closure; clean 12-page PDF; SHA-256 `283695...aefb` |
 
 The A0-source absence is fixed by the control design.  It is not an inference
 from the separate half-density experiment.  The Round-2 control now shows that
