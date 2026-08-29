@@ -5,6 +5,20 @@ Mode: ARS Stage 2.5, Mode 1, risk-stratified Phase E
 Protocol authority: ARS-Codex `claim_verification_protocol.md` and `evidence_row_protocol.md`  
 Audit role: independent read-only semantic check of the rebuilt Claim Registry selection
 
+## Current-status addendum — 2026-08-29
+
+The bounded Phase-E decision below remains unchanged: 48/48 selected claims are
+VERIFIED and all 49 required carriers remain explicitly `anchorless`.  After
+this semantic audit was issued, the authorized `BowenLanford1970` suffix repair
+was revalidated, and the scholar-owned C4/D7 intake was supplied and verified
+with 7 experiment-provenance entries and 6 alignment records.  The overall
+Stage-2.5 status is now **PASS AT MANDATORY CHECKPOINT**, while Stage 3 remains
+**not authorized** pending the required explicit checkpoint decision.  Any
+later statement in this historical semantic-audit body saying that either
+former defect remains open is superseded by this addendum.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+
 ## Decision
 
 **Phase E: PASS for the selected registry population.** All **48/48 selected distinct registry IDs** are semantically supported within their stated scope: **45/45 HIGH-IMPACT** and **3/3 RANDOM** are `VERIFIED`; there are no `MINOR_DISTORTION`, `MAJOR_DISTORTION`, `UNVERIFIABLE`, or `UNVERIFIABLE_ACCESS` verdicts. The exact evidence-row projection contains **49/49 required tuples**, because `P25-E1-015` cites two sources. All 49 persisted rows remain truthfully `anchorless`; no external excerpt is embedded or retrospectively source-bound.

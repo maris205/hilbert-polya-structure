@@ -2,22 +2,34 @@
 
 ## Current status
 
-- ARS: **Stage 2 WRITE complete; Stage 2.5 INTEGRITY executed; strict
-  `FAIL-CLOSED`; Stage 3 has not started**.
+- ARS: **Stage 2.5 INTEGRITY is `PASS AT MANDATORY CHECKPOINT`; Stage 3 is
+  not authorized and has not started**.  An explicit user authorization is
+  still required before the review stage may begin.
 - Current manuscript: the 5,127-word, 14-page paper proves the exact systole
   and finite-cutoff completeness theorem for the frozen nonarithmetic
   genus-two octagon control.
 - Route status is unchanged: this remains a Route-A control-side A0--A1
   result; the matched Bolza/control census, magnetic comparison, positive A2,
   full Route-A tuple, and Route B have not been executed or credited.
-- Open blockers are unchanged: two named BibTeX metadata mismatches and the
-  absent scholar-owned experiment intake/provenance declaration. The current
-  Stage-2.5 result does not authorize entry to Stage 3.
-- Phase E records 81/81 selected claims as semantically verified in the
-  separate semantic audit and a structurally complete 84/84 tuple projection.
-  All 84 evidence rows remain `anchorless`; tuple/hash/selection closure alone
-  does not independently prove the semantic verdict or reproduce source
-  excerpts.
+- Integrity closure: all **6/6 references are VERIFIED**.  The three
+  authorized BibTeX target-field corrections are closed: the Nazarenko author
+  form, the Nazarenko arXiv primary class, and the Aigon-Dupuy et al. author
+  field.  There are **0 serious blockers**.
+- Phase E records **80 VERIFIED + 1 MINOR_DISTORTION** across the 81 selected
+  claims.  The sole non-blocking note is `P28-E1-072`: the manuscript describes
+  source/upstream digest checks as preceding reconstruction, whereas the
+  checked builder calls `finite_traversal()` before `build_validation()` checks
+  those locks.  This wording-order issue does not change any scientific result,
+  count, hash, or theorem.
+- The Phase-E projection contains **84/84 tuple carriers**, all of which remain
+  `anchorless`; schema/hash/selection closure does not independently prove the
+  semantic verdicts or reproduce source excerpts.
+- The scholar-owned retrospective intake contains **7 experiment-provenance
+  entries** and **14/14 aligned directly experiment-backed claims**.  It is
+  explicitly a Stage-2.5 reconstruction of the historical Round-2--8 record,
+  not a fabricated pre-writing intent record.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
 
 ## Historical research record (Rounds 1--8)
 
@@ -278,15 +290,15 @@ The exact nonarithmetic-control systole/completeness result now forms a
 contexts, all 10 data families, 28/72 originality paragraphs, and an 85-claim
 registry. The corrected Phase-E selection contains 78 HIGH-IMPACT plus three
 RANDOM claims. The separate
-[semantic audit](notes/stage2_5_phase_e_semantic_audit.md) records 81/81
-selected claims as `VERIFIED`, while the 84/84 required tuple set is
-structurally complete. All 84 evidence rows remain `anchorless`: their
-schema/hash/selection closure does not independently prove those semantic
-verdicts or reproduce source excerpts. The strict verdict is `FAIL-CLOSED` for
-three named items:
-`Nazarenko2013` has an author/primary-subject mismatch,
-`AigonDupuyEtAl2005` has three wrong given names, and the scholar-owned
-experiment intake/provenance is absent. The BibTeX and PDF remain frozen until
-exact authorization. This is still a control theorem; no Bolza magnetic
-comparison or full Route-A tuple has been claimed. See
-[the integrity report](notes/stage2_5_integrity_report.md).
+[semantic audit](notes/stage2_5_phase_e_semantic_audit.md) records **80
+VERIFIED and one non-blocking MINOR_DISTORTION** (`P28-E1-072`), while the
+84/84 required tuple set is structurally complete and remains wholly
+`anchorless`. The three authorized BibTeX target-field corrections are closed,
+all 6/6 references are VERIFIED, and the retrospective scholar-owned intake
+now carries seven schema-valid provenance entries with 14/14 directly
+experiment-backed claims aligned. The Stage-2.5 decision is therefore **PASS
+AT MANDATORY CHECKPOINT**, with zero serious blockers. Stage 3 remains **not
+authorized** until the user explicitly approves the transition. This is still
+a control theorem; no Bolza magnetic comparison or full Route-A tuple has been
+claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md)
+and the [independent audit](notes/stage2_5_independent_audit.md).

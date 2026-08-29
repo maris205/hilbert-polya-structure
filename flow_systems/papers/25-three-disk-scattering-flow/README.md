@@ -4,7 +4,14 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
+- Current stage: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**;
+  **Stage 3 is not authorized** until the required explicit checkpoint decision.
+- Integrity closure: the `BowenLanford1970` author suffix has been repaired and
+  revalidated, so 8/8 registered references are VERIFIED; the stable Phase-E
+  population is 48/48 VERIFIED with 49/49 structurally closed tuples; all 49
+  evidence carriers remain explicitly `anchorless`.  The scholar-owned intake
+  now contains 7 experiment-provenance entries and 6 alignment records.
+- Integrity/provenance boundary: This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
 - Route/proposal frame (not the ARS pipeline stage): **Stage 1 Classical Flow
   Baseline / Route A A0 kill control**.
 - Concrete progress: the exact no-eclipse geometry is frozen; the exact quantum
@@ -248,8 +255,12 @@ excerpt or upgrade provenance. The **48/48 VERIFIED** semantic conclusion comes
 from the independent [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md),
 not from carrier anchoring or bounded mechanical coverage alone.
 
-The strict pipeline verdict remains `FAIL-CLOSED` for the same two named
-reasons: the `BowenLanford1970` author field omits Lanford's suffix `III`, and
-the scholar-owned experiment intake/provenance is absent. No bibliography
-bytes have been changed without authorization; the physical-flow Route-A tuple
-remains unassigned. See the controlling [independent integrity audit](notes/stage2_5_independent_audit.md).
+The current controlling verdict is **PASS AT MANDATORY CHECKPOINT**.  The
+authorized `BowenLanford1970` suffix repair has been revalidated, giving 8/8
+VERIFIED references.  The scholar-owned declaration is present with 7
+provenance entries and 6 alignment records.  The Phase-E result remains 48/48
+VERIFIED with 49/49 structurally closed, explicitly `anchorless` tuples.  Stage
+3 has not started and is not authorized until an explicit checkpoint decision;
+the physical-flow Route-A tuple remains unassigned. See the controlling
+[integrity report](notes/stage2_5_integrity_report.md) and the
+historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md).

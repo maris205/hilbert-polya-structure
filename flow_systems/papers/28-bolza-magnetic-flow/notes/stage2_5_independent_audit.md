@@ -5,7 +5,44 @@ Mode: ARS-Codex Stage 2.5, Mode 1 pre-review, read-only independent pass
 Audited draft: `paper/manuscript.tex`, SHA-256 `864d2f6ce0f76245d4d4237ba2981b3e82fc8e31f7991f1f331817f7c028aec7`  
 Audited bibliography: `paper/references.bib`, SHA-256 `42474f492f261e97883f7b8e0577fc7a42ce58db7e084f456d92045b5788d284`  
 
-## Verdict
+## Current mandatory-checkpoint disposition
+
+**PASS AT MANDATORY CHECKPOINT.**  This disposition supersedes the original
+read-only baseline verdict preserved below.  Paper 28 has **0 serious blockers**
+at the current Stage-2.5 checkpoint.  Stage 3 is **not authorized** and must not
+start until the user explicitly approves that transition.
+
+Current closure record:
+
+| Surface | Current determination |
+|---|---|
+| Phase A references | **6/6 VERIFIED; 0 MISMATCH** after closing all three authorized BibTeX target-field corrections: `Nazarenko2013` author, `Nazarenko2013` `primaryclass`, and `AigonDupuyEtAl2005` author. |
+| Phase B citation contexts | **9/9 supported**. |
+| Phase C numerical/data families | **10/10 internally consistent and replayed** within the declared artifact scope. |
+| Phase C4/D7 experiment intake | Scholar-owned retrospective declaration present; **7 provenance entries** and **14/14 directly experiment-backed claims ALIGNED**.  The manifest is identified as gate-time reconstruction, not pre-writing intent. |
+| Phase D originality | **28/72 paragraphs (38.9%)** sampled; no actionable close or verbatim match.  This remains a heuristic public-Web screen. |
+| Phase E selected claims | **80 VERIFIED + 1 MINOR_DISTORTION** among 81 selected claims; 84/84 tuple carriers are structurally present. |
+| Phase-E evidence carrier | All **84 tuples are `anchorless`**.  Their structural closure does not independently reproduce source excerpts or prove semantic correctness. |
+| Blocking findings | **0 SERIOUS, 0 MEDIUM, 0 blocking failure-mode findings**. |
+
+The sole retained non-blocking semantic note is
+`P28-IL-MINOR-REPLAY-ORDER-1` / registry claim `P28-E1-072`.  The manuscript
+says the verifier checks source and upstream digests before reconstruction,
+whereas the checked Round-8 builder invokes `finite_traversal()` before
+`build_validation()` checks those locks.  This is an inaccurate sequencing
+description, recorded as `MINOR_DISTORTION`; it does not alter the finite
+enumeration, hashes, exact systole, or any other scientific result.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+
+## Superseded baseline verdict and historical audit record
+
+> **SUPERSEDED.** Everything from this heading onward preserves the original
+> independent read-only audit against the earlier bibliography and passport
+> state.  Its `FAIL`, metadata-mismatch, missing-provenance, Phase-E 81/81, and
+> Mode-2-blocking statements are historical findings, not the current
+> Stage-2.5 gate result.  The current disposition above and the controlling
+> `stage2_5_integrity_report.md` govern the checkpoint.
 
 **FAIL — three blocking correction items.** The mathematical/numerical claim surfaces checked in this pass are supported, all nine citation contexts are faithful, and the originality sample is clean. The gate nevertheless cannot pass because two BibTeX records have author/subject metadata mismatches and the package has no post-#260 ARS experiment-intake declaration/provenance block.
 

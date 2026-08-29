@@ -1,12 +1,12 @@
 # Round 9 Papers 24--28 — ARS Stage 2.5 Integrity Report
 
-Audit timestamp: **2026-08-29T02:40:46Z**  
-Governing stage: **Stage 2.5 / pre-review integrity**  
-Batch decision: **FAIL-CLOSED — 0/5 papers pass; Stage 3 remains closed**
+Audit timestamp: **2026-08-29T06:48:53Z**
+Governing stage: **Stage 2.5 / pre-review integrity**
+Batch decision: **PASS AT STAGE 2.5 CHECKPOINT — Stage 3 still requires explicit authorization**
 
 ## Outcome first
 
-The scientific manuscripts are substantially intact within the audited surfaces, but the mandatory integrity checkpoint is not passed. The complete audit found **8 SERIOUS blockers**: 5 missing scholar-owned experiment intake declaration(s) and 3 named reference-metadata mismatch(es). No manuscript, bibliography, or release PDF was changed during this report compilation.
+All five papers pass the registered Stage-2.5 denominators. The mandatory checkpoint is reached, but `stage3_authorized=false`; no review stage starts without a separate explicit authorization.
 
 The earlier 58-claim Phase-E sample was invalid and has been superseded. The
 stable audit registers **382 claims**, checks **316 HIGH-IMPACT + 15 RANDOM =
@@ -21,7 +21,7 @@ and bound claim-by-claim in five semantic-verdict receipts.
 | Surface | Result |
 |---|---:|
 | Frozen manuscripts / bibliographies / PDFs | 15/15 hashes unchanged |
-| References | 31/31 checked; 28 VERIFIED, 3 MISMATCH |
+| References | 31/31 checked; 31 VERIFIED, 0 MISMATCH |
 | Citation contexts | 38/38 content-supported |
 | Numerical/data surface families | 50/50 traced and replayed |
 | Historical tests | 372/372 PASS |
@@ -31,6 +31,8 @@ and bound claim-by-claim in five semantic-verdict receipts.
 | Author-corpus public PDFs | 22/22 ORCID-bound Zenodo + 2 arXiv; 0 substantive prose reuse |
 | Claim Registry | 382 registered; semantic completeness remains `not_machine_detectable` |
 | Phase-E selection | 331 distinct claims; 340/340 tuples |
+| Experiment provenance | 33 entries; 309 current artifacts; 62 direct claims aligned; official checks 5/5 PASS |
+| Isolated provenance fault injection | clean baseline accepted; 3/3 injected faults rejected |
 
 The declarations contain one non-blocking shared `MINOR`: P24--P25 and
 P26--P27 reuse long standardized funding/conflict/ethics/CRediT/AI-assistance
@@ -41,48 +43,19 @@ Professional similarity screening remains recommended before submission.
 
 | Paper | Phase A | Phase E | Stage 2.5 | Open blockers | Scientific progress preserved |
 |---|---:|---:|---|---|---|
-| P24 | 7/7 | 64 claims / 66 tuples | FAIL | experiment intake | universal congruence + first-jet theorem; A0 controls 2/3 |
-| P25 | 7/8 | 48 claims / 49 tuples | FAIL | reference metadata; experiment intake | physical-roof nontransfer; symbolic control remains rejected |
-| P26 | 5/5 | 68 claims / 70 tuples | FAIL | experiment intake | exhaustive 138-instance owner taxonomy and A2 obstruction |
-| P27 | 5/5 | 70 claims / 71 tuples | FAIL | experiment intake | residual/homology four-quadrant obstruction and calibration |
-| P28 | 4/6 | 81 claims / 84 tuples | FAIL | reference metadata; reference metadata; experiment intake | exact nonarithmetic-control systole/completeness theorem |
+| P24 | 7/7 | 64 claims / 66 tuples | PASS | none | universal congruence + first-jet theorem; A0 controls 2/3 |
+| P25 | 8/8 | 48 claims / 49 tuples | PASS | none | physical-roof nontransfer; symbolic control remains rejected |
+| P26 | 5/5 | 68 claims / 70 tuples | PASS | none | exhaustive 138-instance owner taxonomy and A2 obstruction |
+| P27 | 5/5 | 70 claims / 71 tuples | PASS | none | residual/homology four-quadrant obstruction and calibration |
+| P28 | 6/6 | 81 claims / 84 tuples | PASS | replay-order prose (MINOR) | exact nonarithmetic-control systole/completeness theorem |
 
-## Exact named correction proposals — not yet authorized
+## Authorized reference corrections and re-verification
 
-Paper 25, `BowenLanford1970`:
+All named reference-metadata corrections are closed in the current frozen bibliography and re-audited PDF.
 
-```bibtex
-  author    = {Bowen, Rufus and Lanford, III, Oscar E.},
-```
+## Scholar-owned experiment declaration and provenance
 
-Paper 28, `Nazarenko2013`:
-
-```bibtex
-  author        = {Nazarenko, A. V.},
-  primaryclass  = {math-ph},
-```
-
-Paper 28, `AigonDupuyEtAl2005`:
-
-```bibtex
-  author  = {Aigon-Dupuy, Aline and Buser, Peter and Cibils, Michel and K{\"u}nzle, Alfred F. and Steiner, Frank},
-```
-
-These are correction proposals, not write authority. After exact authorization they require bibliography mutation, PDF rebuild, freeze refresh, and fresh Phase A/B plus manuscript-structure validation.
-
-## Scholar-owned experiment declaration required
-
-An agent cannot infer or sign the following from tests or receipts. To close
-the shared D7 gate, the scholar must explicitly confirm the complete statement:
-
-> Papers 24--28 each report computational experiments or certificates actually
-> executed for this project. I authorize each passport to record
-> `status=experiments_declared`, `declared_by=scholar`, and the confirmation
-> time. I authorize the existing Round-2--8 source, freeze, result, test,
-> validation, and receipt artifacts to be transcribed into schema-valid
-> experiment provenance and aligned to the registered experiment-backed
-> claims. To my knowledge, there are no additional omitted own-experiment
-> results relied on by these five manuscripts.
+All five scholar-owned intake declarations and their non-empty provenance/alignment ledgers are present and validated.
 
 Required boundary: **This check verifies disclosure and claim-to-provenance
 fidelity. It does not judge whether the experiment was correctly designed,
@@ -103,7 +76,7 @@ run, statistically adequate, or reproducible by ARS.**
 
 ## Mandatory checkpoint and next legal action
 
-Stage 3 has not started. The next legal action is an explicitly authorized integrity-correction round covering only the still-listed reference patches and/or the complete scholar declaration. After those changes, refresh the freeze, re-run Stage 2.5, and stop again at this checkpoint. A generic ‘continue’ does not authorize manuscript or bibliography mutation.
+Stage 2.5 has passed and stopped. The next legal action is a separate, explicit Stage-3 authorization; this compiler never sets `stage3_authorized=true`.
 
 Supporting batch carriers:
 
@@ -111,4 +84,7 @@ Supporting batch carriers:
 - `BATCH_ROUND9_STAGE2_5_SIDECAR_VALIDATION.md`
 - `BATCH_ROUND9_STAGE2_5_SELF_OVERLAP_AUDIT.md`
 - `BATCH_ROUND9_STAGE2_5_EXPERIMENT_INTAKE_REQUEST.md`
+- `BATCH_ROUND9_STAGE2_5_AUTHORIZATION_RECEIPT.json`
+- `BATCH_ROUND9_STAGE2_5_EXPERIMENT_TRANSCRIPTION_SUMMARY.json`
+- `BATCH_ROUND9_STAGE2_5_FAULT_INJECTION.md`
 - `BATCH_ROUND9_STAGE2_5_INTEGRITY_SUMMARY.json`

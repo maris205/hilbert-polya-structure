@@ -2,6 +2,24 @@
 
 Date: 2026-08-29 (UTC)
 
+## Closure addendum — fulfilled
+
+The scholar supplied the requested declaration at
+`2026-08-29T05:52:42Z` and authorized the three named bibliography repairs.
+The five Material Passports now record
+`status=experiments_declared`, `declared_by=scholar`, and `declared_at`.
+Existing Round-2--8 carriers were transcribed retrospectively into **33**
+schema-valid experiment-provenance entries, binding **309** current artifacts
+and **62** registered direct experiment-backed claims. Official experiment-
+provenance and claim-audit consistency checks pass for all five passports.
+
+This request is therefore **FULFILLED/CLOSED** and retained below as the
+historical request that established the authorization boundary. Stage 3 was
+not authorized. The controlling decision is
+`BATCH_ROUND9_STAGE2_5_INTEGRITY_REPORT.md`.
+
+**This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.**
+
 Scope: Papers 24--28, frozen at source commit
 `21c4755dba399dff8245e15d0ba43ca9eb27fa27`.
 
@@ -43,4 +61,3 @@ If confirmed, the next integrity-only patch will populate and schema-check the
 five provenance arrays, run claim-to-result alignment, close
 `R9-IL-SERIOUS-EXP-DECL-1`, and reissue the Stage 2.5 decisions.  It will not
 edit the manuscripts, bibliographies, PDFs, or scientific Route-A verdicts.
-

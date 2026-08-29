@@ -7,9 +7,13 @@ Route scope: Route A only; Route B remains unauthorized
 
 ## Disposition
 
+> **Current-status addendum (Round 9; supersedes the historical blocker statement below):** The scholar declaration is now present, 7 experiment-provenance entries are recorded, and 17 direct experiment claims are ALIGNED. The overall ARS Stage 2.5 state is **PASS AT MANDATORY CHECKPOINT**; **Stage 3 is not authorized**. The 68/68 semantic verdict and 70 anchorless-tuple advisory remain unchanged.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+
 **Phase-E semantic verdict: PASS for all 68 selected distinct claims.** Every selected claim was checked at its exact registered UTF-8 manuscript span against the adjacent proof chain, the exact local artifacts and tests where applicable, the documented official-source Phase-A/B audit for source-dependent statements, and the paper's explicit scope limitations. The result is **68 VERIFIED, 0 MINOR_DISTORTION, 0 MAJOR_DISTORTION, 0 UNVERIFIABLE_ACCESS, and 0 UNVERIFIABLE**.
 
-This is a claim-semantic subaudit, not an override of the overall Stage-2.5 gate. In particular, it does not resolve the separate scholar-owned experiment-intake blocker `P26-S25-F001` recorded in `stage2_5_independent_audit.md`.
+**Historical snapshot (superseded):** This is a claim-semantic subaudit, not an override of the overall Stage-2.5 gate. At the time of the snapshot, it did not resolve the then-open scholar-owned experiment-intake blocker `P26-S25-F001` recorded in `stage2_5_independent_audit.md`.
 
 ## Frozen input and audit method
 

@@ -5,7 +5,25 @@ Auditor role: independent read-only integrity reviewer
 Audited draft: `paper/manuscript.tex` (480 lines) and `paper/references.bib` (5 entries)  
 Protocol: ARS-Codex Stage 2.5 pre-review, Phases A–E and all seven AI-research failure modes
 
-## Decision and counts
+## Current Round-9 disposition — supersedes the historical audit state below
+
+**ARS Stage 2.5 verdict: PASS AT MANDATORY CHECKPOINT. Stage 3 is not authorized.** The scholar-owned experiment-intake declaration is now present in the material passport, the provenance inventory is populated from existing Round-2--Round-8 artifacts, and the direct experiment-claim alignment audit is clean. Advancement remains paused at the mandatory checkpoint pending explicit authorization.
+
+| Current Round-9 surface | Coverage | Current result |
+|---|---:|---|
+| Reference verification | 5/5 references | VERIFIED |
+| Phase-E selected claims | 68/68 distinct claims | VERIFIED; 0 distortion or unverifiable verdicts |
+| Selected evidence tuples | 70/70 tuples | structurally closed; all 70 carriers are anchorless, an advisory limitation |
+| Experiment provenance | 7/7 evidenced Round-2--Round-8 packages | declared and mapped to existing artifacts |
+| Direct experiment-claim alignment | 17/17 claims | ALIGNED; 0 contradiction, unsupported, or ambiguous verdicts |
+
+The former blocker `P26-S25-F001`, the open-finding count, and the FAIL-CLOSED conclusion retained below describe the pre-declaration snapshot and are **superseded**. The anchorless-row condition remains advisory because the independent semantic audit checked every selected claim against its manuscript proof chain, exact artifacts/tests where applicable, official source-context audit where applicable, and stated limitations. The scientific Route-A state is unchanged by this integrity-gate update.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+
+## Historical decision and counts — superseded
+
+> The following FAIL-CLOSED decision and all later references to an absent declaration, open `P26-S25-F001`, blocking Mode 6 verdict, or unresolved stage gate are retained as the dated pre-declaration audit record. They do not govern the current Round-9 disposition above.
 
 **Stage 2.5 verdict: FAIL-CLOSED — structural provenance gate only.** The reference, citation-context, exact-artifact, originality-screen, and current full selected-population claim-evidence checks are clean. The fail-closed blocker is `P26-S25-F001`: the scholar-owned `experiment_intake_declaration` is absent. An agent must not infer or fabricate that declaration from tests or receipts.
 
@@ -145,4 +163,4 @@ The earlier Phase-E pass recorded **4/4 high-impact + 7 random = 11/11 VERIFIED*
 | `P26-S25-F001` | BLOCKING / OPEN | Repository-wide exact search finds no `experiment_intake_declaration`; deterministic receipts cannot substitute for a scholar attestation | Scholar supplies the intake declaration in the material passport/pipeline record; rerun C4/Mode 6. The agent must not author it on the scholar's behalf. |
 | `P26-S25-C001` | CLOSED | Claim registry, coverage, evidence-row, drift, and semantic-audit artifacts now exist; current Phase E is 68/68 claims and 70/70 tuples VERIFIED, with 0 mechanically unregistered candidates | `CLOSED_BY_CURRENT_STAGE2_5_ARTIFACT`; no action |
 
-Content-integrity conclusion: **clean**, including the authoritative current Phase-E selected population. Stage-gate conclusion: **FAIL-CLOSED until `P26-S25-F001` is scholar-resolved and C4/Mode 6 are rechecked**.
+**Historical conclusion (superseded):** Content-integrity conclusion: **clean**, including the authoritative current Phase-E selected population. Stage-gate conclusion: **FAIL-CLOSED until `P26-S25-F001` is scholar-resolved and C4/Mode 6 are rechecked**.

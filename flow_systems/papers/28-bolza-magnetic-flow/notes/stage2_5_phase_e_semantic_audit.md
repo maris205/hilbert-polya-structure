@@ -5,15 +5,27 @@ Audit target: `paper/manuscript.tex` SHA-256
 
 ## Determination
 
-**81/81 selected distinct claims VERIFIED within the recorded proof, source,
-and frozen-artifact scope.** The stable selection comprises 78 HIGH-IMPACT
+**80/81 selected distinct claims VERIFIED and one MINOR_DISTORTION recorded
+within the proof, source, and frozen-artifact scope.** The stable selection comprises 78 HIGH-IMPACT
 claims and three RANDOM sentinels from an 85-claim registry. Those claims
 expand to 84 `(claim_id, ref_slug-or-null)` evidence tuples; the exact tuple
 set is complete.
 
-This semantic determination supersedes the earlier six-claim manual table. It
-does not cure the two Phase-A reference-metadata mismatches or the missing
-scholar-owned experiment declaration.
+This semantic determination supersedes the earlier six-claim manual table and
+its initial 81/81 verdict. The authorized Phase-A metadata repairs and
+scholar-owned experiment declaration/provenance are evaluated by the current
+controlling Stage-2.5 report rather than inferred here.
+
+### Non-blocking sequencing distortion — `P28-E1-072`
+
+The manuscript says the verifier first checks source/upstream digests and then
+reconstructs the finite state component. In the checked builder,
+`finite_traversal()` runs before `build_validation()` checks those locks. The
+verify-only wrapper still builds only in fresh temporary directories and
+copies nothing to canonical results unless validation succeeds, so this does
+not alter the reported counts, hashes, or theorem result. It is nevertheless
+an inaccurate ordering description and is recorded as `MINOR_DISTORTION` for
+later manuscript correction rather than silently marked verified.
 
 ## Audit basis
 
@@ -30,7 +42,7 @@ scholar-owned experiment declaration.
 - All nine citation contexts are semantically supported by the official or
   author-version locators recorded in `stage2_5_independent_audit.md`.
 
-Verdict counts: `VERIFIED=81`, `MINOR_DISTORTION=0`,
+Verdict counts: `VERIFIED=80`, `MINOR_DISTORTION=1`,
 `MAJOR_DISTORTION=0`, `UNVERIFIABLE=0`, and
 `UNVERIFIABLE_ACCESS=0`.
 

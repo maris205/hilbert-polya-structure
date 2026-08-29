@@ -4,7 +4,13 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
+- Current stage: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**;
+  **Stage 3 is not authorized** until the required explicit checkpoint decision.
+- Integrity closure: 7/7 registered references are VERIFIED; the stable Phase-E
+  population is 64/64 VERIFIED with 66/66 structurally closed tuples; all 66
+  evidence carriers remain explicitly `anchorless`.  The scholar-owned intake
+  now contains 7 experiment-provenance entries and 11 aligned direct claims.
+- Integrity/provenance boundary: This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
 - Route/proposal frame (not the ARS pipeline stage): **Stage 1 Classical Flow
   Baseline / Route A A0--A1**.
 - Concrete progress: the phase space is frozen to a torsion-free, finite-volume
@@ -416,8 +422,11 @@ excerpt or upgrade provenance. The **64/64 VERIFIED** semantic conclusion comes
 from the independent [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md),
 not from carrier anchoring or bounded mechanical coverage alone.
 
-The scientific content is clean within the recorded denominators, but the
-pipeline verdict remains `FAIL-CLOSED` solely because the scholar-owned
-experiment-intake declaration/provenance ledger is absent. Stage 3 has not
-started; the Route-A tuple and 2/3 canonical-control boundary are unchanged.
-See the controlling [independent integrity audit](notes/stage2_5_independent_audit.md).
+The current controlling verdict is **PASS AT MANDATORY CHECKPOINT**.  The
+scholar-owned declaration is present with 7 provenance entries, and 11 direct
+experiment-backed claims have alignment records.  The Phase-E result remains
+64/64 VERIFIED with 66/66 structurally closed, explicitly `anchorless` tuples.
+Stage 3 has not started and is not authorized until an explicit checkpoint
+decision; the Route-A tuple and 2/3 canonical-control boundary are unchanged.
+See the controlling [integrity report](notes/stage2_5_integrity_report.md) and
+the historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md).

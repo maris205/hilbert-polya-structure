@@ -3,8 +3,9 @@
 
 This compiler writes audit and handoff artifacts only.  It never mutates a
 manuscript, bibliography, release PDF, source ledger, or experiment receipt.
-The five passports intentionally omit ``experiment_intake_declaration``:
-that scholar-owned declaration is the shared fail-closed checkpoint blocker.
+It preserves a scholar-authorized experiment intake only after the official
+declaration field, provenance entries, retrospective manifest transcription,
+and gate-produced alignment rows satisfy the current ARS contracts.
 """
 
 from __future__ import annotations
@@ -160,6 +161,14 @@ PAPERS: dict[str, dict[str, Any]] = {
                 "detail": "The manuscript reports project-owned computational results, but the post-#260 passport has no scholar-owned experiment_intake_declaration or experiment_provenance ledger.",
                 "action": "Scholar confirms the exact batch experiment declaration; then transcribe and align the already frozen Round-2--8 provenance artifacts.",
             },
+            {
+                "id": "P28-IL-MINOR-REPLAY-ORDER-1",
+                "phase": "E",
+                "type": "replay_sequence_description_mismatch",
+                "severity": "MINOR",
+                "detail": "The manuscript says the verifier checks source/upstream digests before reconstruction, while the checked Round-8 builder runs finite_traversal() before build_validation() checks those locks. The verify-only wrapper remains temporary-directory safe and the result values are unaffected.",
+                "action": "Correct the sequencing sentence during the next explicitly authorized manuscript-revision stage; retain this non-blocking audit finding until then.",
+            },
         ],
         "route": "control theorem only; full Route-A tuple unassigned because the Bolza target census and magnetic comparison have not been executed",
     },
@@ -234,10 +243,17 @@ def compliance(paper: str, cfg: dict[str, Any], timestamp: str) -> dict[str, Any
                     "The manuscript carries an AI-assistance disclosure and the audit preserves exact artifact hashes.",
                     "[MATERIAL GAP] Complete tool/model/version, prompt, parameter, and per-stage usage metadata are absent.",
                 ],
-                "reproducibility": [
-                    f"Paper {n} has deterministic code, tests, frozen results, and receipt hashes.",
-                    "[MATERIAL GAP] The Schema-9 passport records repro_lock=null and the scholar-owned experiment intake/provenance is not yet present.",
-                ],
+                "reproducibility": (
+                    [
+                        f"Paper {n} has deterministic code, tests, frozen results, and receipt hashes.",
+                        "The scholar-authorized historical experiment packages are transcribed into schema-valid per-experiment provenance with hash-bound source maps; fields absent from the historical run record remain explicitly marked not recorded.",
+                    ]
+                    if cfg["intake_valid"]
+                    else [
+                        f"Paper {n} has deterministic code, tests, frozen results, and receipt hashes.",
+                        "[MATERIAL GAP] The Schema-9 passport records repro_lock=null and the scholar-owned experiment intake/provenance is not yet present.",
+                    ]
+                ),
                 "fit_for_purpose": [
                     "Reference, claim, proof/artifact, originality, and route checks are separated by scope.",
                     "[MATERIAL GAP] No task-specific external benchmark or per-tool selection/validation rationale establishes full fit for purpose.",
@@ -249,7 +265,7 @@ def compliance(paper: str, cfg: dict[str, Any], timestamp: str) -> dict[str, Any
         "user_action_required": True,
         "evidence": [
             "RAISE is applied in principles-only mode to primary mathematical research; this is not official RAISE compliance.",
-            "RAISE remains a warn-only compliance contribution and does not supersede the independent integrity FAIL.",
+            "RAISE remains a warn-only compliance contribution and does not supersede the independent integrity gate.",
             f"The exact Stage-2.5 audit target is papers/{paper}/paper/manuscript.tex.",
         ],
         "upstream_sync_status": "current",
@@ -318,16 +334,14 @@ def scholar_intake_is_valid(passport: dict[str, Any]) -> bool:
     declaration = passport.get("experiment_intake_declaration")
     if not isinstance(declaration, dict):
         return False
-    confirmation = (
-        declaration.get("confirmation_time")
-        or declaration.get("confirmed_at")
-        or declaration.get("declared_at")
-    )
+    declared_at = declaration.get("declared_at")
     basic = (
+        set(declaration) == {"status", "declared_by", "declared_at"}
+        and
         declaration.get("status") == "experiments_declared"
         and declaration.get("declared_by") == "scholar"
-        and isinstance(confirmation, str)
-        and bool(confirmation.strip())
+        and isinstance(declared_at, str)
+        and bool(declared_at.strip())
         and isinstance(passport.get("experiment_provenance"), list)
         and bool(passport["experiment_provenance"])
         and isinstance(passport.get("experiment_alignment_results"), list)
@@ -439,7 +453,11 @@ def runtime_config(paper: str, cfg: dict[str, Any]) -> dict[str, Any]:
         if issue["type"] == "missing_scholar_experiment_intake":
             if not intake_valid:
                 active.append(issue)
-        elif not reference_issue_resolved(paper, issue, bib_text):
+        elif issue["phase"] == "A" and not reference_issue_resolved(
+            paper, issue, bib_text
+        ):
+            active.append(issue)
+        elif issue["phase"] != "A":
             active.append(issue)
     result["issues"] = active
     result["refs_passed"] = result["refs"] - sum(
@@ -513,7 +531,10 @@ def preflight_one(paper: str, cfg: dict[str, Any], frozen: dict[str, Any]) -> No
     if bindings != expected_bindings:
         raise RuntimeError(f"{paper}: stale semantic-verdict receipt bindings")
     verdicts = receipt.get("claim_verdicts", [])
-    if receipt.get("decision") != "PASS_SELECTED_POPULATION":
+    if receipt.get("decision") not in {
+        "PASS_SELECTED_POPULATION",
+        "PASS_SELECTED_POPULATION_WITH_MINOR_DISTORTION",
+    }:
         raise RuntimeError(f"{paper}: semantic receipt is not PASS")
     if len(verdicts) != len(selected):
         raise RuntimeError(f"{paper}: semantic distinct-claim denominator mismatch")
@@ -525,15 +546,15 @@ def preflight_one(paper: str, cfg: dict[str, Any], frozen: dict[str, Any]) -> No
         grouped_rows.setdefault(row["claim"]["claim_id"], []).append(row)
     for claim_id, verdict in verdict_by_id.items():
         claim_rows = grouped_rows[claim_id]
-        if verdict.get("verdict") != "VERIFIED":
-            raise RuntimeError(f"{paper}: non-VERIFIED semantic verdict for {claim_id}")
+        if verdict.get("verdict") not in {"VERIFIED", "MINOR_DISTORTION"}:
+            raise RuntimeError(f"{paper}: blocking semantic verdict for {claim_id}")
         if verdict.get("tuple_count") != len(claim_rows):
             raise RuntimeError(f"{paper}: semantic tuple count mismatch for {claim_id}")
         if verdict.get("row_ids") != [row["row_id"] for row in claim_rows]:
             raise RuntimeError(f"{paper}: semantic row-id binding mismatch for {claim_id}")
         if verdict.get("row_sha256s") != [row["row_sha256"] for row in claim_rows]:
             raise RuntimeError(f"{paper}: semantic row-hash binding mismatch for {claim_id}")
-        if any(row["verdict"] != "VERIFIED" for row in claim_rows):
+        if any(row["verdict"] != verdict["verdict"] for row in claim_rows):
             raise RuntimeError(f"{paper}: evidence verdict conflicts with semantic audit")
 
     # Replay the official bounded-coverage validator before report generation.
@@ -626,7 +647,7 @@ The first Round-9 sidecar build underclassified numerical, causal, and methods-c
             {
                 "claim": "passport-level D7 experiment intake declaration",
                 "expected": "scholar-owned status=experiments_declared plus non-empty experiment_provenance and claim alignment",
-                "actual": "experiment_intake_declaration absent; provenance/alignment not inferable by an agent",
+                "actual": "official experiment_intake_declaration absent; provenance/alignment not authorized for transcription",
                 "severity": exp_issue["severity"],
             }
         ]
@@ -640,6 +661,7 @@ The first Round-9 sidecar build underclassified numerical, causal, and methods-c
     blocking_issues = severity_counts["SERIOUS"] + severity_counts["MEDIUM"]
     passed = blocking_issues == 0
     semantic_verified = semantic_receipt["verdict_counts"]["VERIFIED"]
+    semantic_minors = semantic_receipt["verdict_counts"]["MINOR_DISTORTION"]
     citation_score = cfg["refs_passed"] / cfg["refs"]
     report = {
         "verdict": "PASS" if passed else "FAIL",
@@ -683,7 +705,15 @@ The first Round-9 sidecar build underclassified numerical, causal, and methods-c
             "E_claims": {
                 "checked": len(selected),
                 "verified": semantic_verified,
-                "distortions": [],
+                "distortions": [
+                    {
+                        "claim_id": row["claim_id"],
+                        "verdict": row["verdict"],
+                        "detail": "See the hash-bound Phase-E semantic audit and evidence row.",
+                    }
+                    for row in semantic_receipt["claim_verdicts"]
+                    if row["verdict"] != "VERIFIED"
+                ],
                 "semantic_verdict_receipt": {
                     "schema_version": semantic_receipt["schema"],
                     "artifact_path": "notes/stage2_5_phase_e_semantic_verdicts.json",
@@ -713,7 +743,15 @@ The first Round-9 sidecar build underclassified numerical, causal, and methods-c
         "overall_issues": {
             "SERIOUS": severity_counts["SERIOUS"],
             "MEDIUM": severity_counts["MEDIUM"],
-            "MINOR": 1 if cfg.get("shared_declaration_minor") else 0,
+            "MINOR": (
+                sum(issue["severity"] == "MINOR" for issue in cfg["issues"])
+                + (1 if cfg.get("shared_declaration_minor") else 0)
+                + semantic_minors
+                - sum(
+                    issue["id"] == "P28-IL-MINOR-REPLAY-ORDER-1"
+                    for issue in cfg["issues"]
+                )
+            ),
         },
         "citation_integrity_score": round(citation_score, 6),
         "fabrication_risk_score": round(1.0 - citation_score, 6),
@@ -774,7 +812,7 @@ The first Round-9 sidecar build underclassified numerical, causal, and methods-c
         "origin_date": timestamp,
         "verification_status": "VERIFIED" if passed else "UNVERIFIED",
         "version_label": (
-            f"p{cfg['number']}-round9-stage2.5-pass-v2"
+            f"p{cfg['number']}-round9-stage2.5-pass-v3"
             if passed
             else f"p{cfg['number']}-round9-stage2.5-fail-closed-v2"
         ),
@@ -826,7 +864,8 @@ Required boundary: **This check verifies disclosure and claim-to-provenance fide
         gap_md = f"""# Paper {cfg['number']} Stage-2.5 experiment-provenance closure
 
 The scholar-owned `experiment_intake_declaration` is present with
-`status=experiments_declared`, `declared_by=scholar`, and a confirmation time.
+`status=experiments_declared`, `declared_by=scholar`, and the official
+`declared_at` time.
 The passport also contains non-empty experiment provenance and claim-alignment
 results. C4/D7 therefore closes within its disclosure/provenance-fidelity
 scope.
@@ -875,8 +914,8 @@ Required boundary: **This check verifies disclosure and claim-to-provenance fide
     )
     report_md = f"""# Paper {cfg['number']} Stage-2.5 Integrity Report
 
-Audit timestamp: **{timestamp}**  
-Mode: **pre-review / ARS Stage 2.5 Mode 1**  
+Audit timestamp: **{timestamp}**
+Mode: **pre-review / ARS Stage 2.5 Mode 1**
 Decision: **{decision_text}**
 
 ## Outcome
@@ -902,7 +941,7 @@ Decision: **{decision_text}**
 | C — registered numerical/data families | {cfg['data']}/{cfg['data']} | all internally consistent and replayed |
 | C4/D7 — experiment intake | {intake_result} |
 | D — originality heuristic | {cfg['originality'][0]}/{cfg['originality'][1]} ({rows_percent:.1f}%) | no actionable body overlap; {"one shared standardized-declaration MINOR recorded" if cfg.get('shared_declaration_minor') else "no paper-specific overlap issue"} |
-| E — registered claim verification | {len(selected)}/{len(registry['claims'])} selected | {semantic_verified} semantically VERIFIED in the hash-bound receipt; {len(evidence_rows)}/{len(expected_tuples)} tuple carriers valid |
+| E — registered claim verification | {len(selected)}/{len(registry['claims'])} selected | {semantic_verified} VERIFIED; {semantic_minors} MINOR_DISTORTION; {len(evidence_rows)}/{len(expected_tuples)} tuple carriers valid |
 | E6 — claim-strength drift | first pass | correctly skipped: no revision evidence |
 
 Phase D is heuristic public-Web screening, not Turnitin or iThenticate. It can miss paywalled, cross-language, or unindexed overlap. Professional screening remains recommended before submission.
@@ -985,6 +1024,24 @@ def main() -> int:
     summary = [
         build_one(paper, cfg, timestamp) for paper, cfg in runtime_papers.items()
     ]
+    # The retrospective transcription summary is created by the authorized
+    # intake tool before this compiler reissues the five passports. Refresh
+    # only its derived passport digests so the carrier never points at an
+    # earlier, otherwise equivalent generated passport generation.
+    transcription_path = ROOT / "BATCH_ROUND9_STAGE2_5_EXPERIMENT_TRANSCRIPTION_SUMMARY.json"
+    if transcription_path.is_file():
+        transcription = json.loads(transcription_path.read_text(encoding="utf-8"))
+        transcription_rows = {
+            row.get("paper"): row for row in transcription.get("papers", [])
+        }
+        if set(transcription_rows) != set(PAPERS):
+            raise RuntimeError("experiment transcription summary paper population mismatch")
+        for paper, row in transcription_rows.items():
+            row["passport_sha256"] = sha(
+                ROOT / "papers" / paper / "notes/stage2_5_material_passport.json"
+            )
+        transcription["passport_hashes_refreshed_at"] = timestamp
+        write_json(transcription_path, transcription)
     papers_passed = sum(row["verdict"] == "PASS" for row in summary)
     batch_passed = papers_passed == len(summary)
     serious_issues = sum(
@@ -1029,6 +1086,7 @@ def main() -> int:
         "missing_scholar_experiment_intake": "experiment intake",
         "reference_author_metadata_mismatch": "reference metadata",
         "reference_author_and_subject_metadata_mismatch": "reference metadata",
+        "replay_sequence_description_mismatch": "replay-order prose (MINOR)",
     }
     paper_rows = []
     for row in summary:
@@ -1127,10 +1185,20 @@ the shared D7 gate, the scholar must explicitly confirm the complete statement:
         if batch_passed
         else "Stage 3 has not started. The next legal action is an explicitly authorized integrity-correction round covering only the still-listed reference patches and/or the complete scholar declaration. After those changes, refresh the freeze, re-run Stage 2.5, and stop again at this checkpoint. A generic ‘continue’ does not authorize manuscript or bibliography mutation."
     )
+    correction_heading = (
+        "## Exact named correction proposals — not yet authorized"
+        if correction_blocks
+        else "## Authorized reference corrections and re-verification"
+    )
+    intake_heading = (
+        "## Scholar-owned experiment declaration required"
+        if intake_open
+        else "## Scholar-owned experiment declaration and provenance"
+    )
     batch_md = f"""# Round 9 Papers 24--28 — ARS Stage 2.5 Integrity Report
 
-Audit timestamp: **{timestamp}**  
-Governing stage: **Stage 2.5 / pre-review integrity**  
+Audit timestamp: **{timestamp}**
+Governing stage: **Stage 2.5 / pre-review integrity**
 Batch decision: **{batch_decision_text}**
 
 ## Outcome first
@@ -1160,6 +1228,8 @@ and bound claim-by-claim in five semantic-verdict receipts.
 | Author-corpus public PDFs | 22/22 ORCID-bound Zenodo + 2 arXiv; 0 substantive prose reuse |
 | Claim Registry | 382 registered; semantic completeness remains `not_machine_detectable` |
 | Phase-E selection | 331 distinct claims; 340/340 tuples |
+| Experiment provenance | 33 entries; 309 current artifacts; 62 direct claims aligned; official checks 5/5 PASS |
+| Isolated provenance fault injection | clean baseline accepted; 3/3 injected faults rejected |
 
 The declarations contain one non-blocking shared `MINOR`: P24--P25 and
 P26--P27 reuse long standardized funding/conflict/ethics/CRediT/AI-assistance
@@ -1172,11 +1242,11 @@ Professional similarity screening remains recommended before submission.
 |---|---:|---:|---|---|---|
 {paper_table}
 
-## Exact named correction proposals — not yet authorized
+{correction_heading}
 
 {corrections_text}
 
-## Scholar-owned experiment declaration required
+{intake_heading}
 
 {intake_text}
 
@@ -1207,6 +1277,9 @@ Supporting batch carriers:
 - `BATCH_ROUND9_STAGE2_5_SIDECAR_VALIDATION.md`
 - `BATCH_ROUND9_STAGE2_5_SELF_OVERLAP_AUDIT.md`
 - `BATCH_ROUND9_STAGE2_5_EXPERIMENT_INTAKE_REQUEST.md`
+- `BATCH_ROUND9_STAGE2_5_AUTHORIZATION_RECEIPT.json`
+- `BATCH_ROUND9_STAGE2_5_EXPERIMENT_TRANSCRIPTION_SUMMARY.json`
+- `BATCH_ROUND9_STAGE2_5_FAULT_INJECTION.md`
 - `BATCH_ROUND9_STAGE2_5_INTEGRITY_SUMMARY.json`
 """
     write_text(ROOT / "BATCH_ROUND9_STAGE2_5_INTEGRITY_REPORT.md", batch_md)

@@ -5,7 +5,27 @@ Protocol: ARS-Codex academic-research-suite, Stage 2.5 initial integrity gate
 Audited manuscript SHA-256: `e43ba0f77332b79df4d84346dcb6e3041c20f4bdded5a91f42caac348ea9fd11`  
 Audited bibliography SHA-256: `11e7dd42f07ecf22744f5d9c829d13a22212e0d43cb2591c0e9dfd66bde86d87`
 
-## Decision
+## Current controlling status — 2026-08-29 addendum
+
+**PASS AT MANDATORY CHECKPOINT — Stage 3 not authorized.**  The later fresh
+Stage-2.5 pass recorded in [stage2_5_integrity_report.md](stage2_5_integrity_report.md)
+supersedes the historical FAIL-CLOSED decision retained below.  Current closure
+is: 7/7 references VERIFIED; 64/64 selected claims VERIFIED; 66/66 required
+tuple carriers structurally present and still explicitly `anchorless`; one
+scholar declaration plus 7 experiment-provenance entries; and 11 aligned direct
+experiment-backed claims.  The former experiment-intake issue is CLOSED, and
+there is no active blocking integrity issue.  The workflow remains stopped at
+the mandatory checkpoint and must not enter Stage 3 without explicit
+authorization.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+
+Everything from the next heading onward is retained as the historical audit
+trajectory.  Its missing-declaration, blocker, failure-mode, issue-table, and
+FAIL-CLOSED language is **superseded for current status**, not deleted or
+silently rewritten.
+
+## Historical decision — superseded
 
 **FAIL-CLOSED — BLOCK pending scholar-owned experiment intake.** Phases A–D retain their stated results. The paper reports own computational results while no `experiment_intake_declaration` or `experiment_provenance[]` is present and no positive pre-#260 legacy proof exists, so ARS Phase C4/D7 still fails closed (**`IL-SERIOUS-1`**). The earlier invalid Phase-E sample remains superseded as a historical audit event, but the registry/evidence chain has since been stably rebuilt and independently checked: the controlling [Phase-E semantic audit](stage2_5_phase_e_semantic_audit.md) records a clean PASS for **64/64 selected distinct claims** and **66/66 required evidence tuples**. That Phase-E PASS removes the former rebuild requirement; it does not close `IL-SERIOUS-1` or change the overall Stage-2.5 verdict. No MINOR IDs.
 

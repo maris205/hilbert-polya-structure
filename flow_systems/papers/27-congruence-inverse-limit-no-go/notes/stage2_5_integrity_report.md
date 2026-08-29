@@ -1,12 +1,12 @@
 # Paper 27 Stage-2.5 Integrity Report
 
-Audit timestamp: **2026-08-29T02:40:46Z**  
-Mode: **pre-review / ARS Stage 2.5 Mode 1**  
-Decision: **FAIL-CLOSED — DO NOT ENTER STAGE 3**
+Audit timestamp: **2026-08-29T06:48:53Z**
+Mode: **pre-review / ARS Stage 2.5 Mode 1**
+Decision: **PASS AT STAGE 2.5 CHECKPOINT — AWAIT EXPLICIT STAGE 3 AUTHORIZATION**
 
 ## Outcome
 
-The complete registered integrity surfaces were audited against the frozen manuscript, bibliography, PDF, sources, proof chain, and local result artifacts. Scientific/data surfaces are clean within the stated denominators; the checkpoint nevertheless fails because 1 named blocking issue(s) remain open. A FAIL is not a rejection of the paper's mathematics: it is the mandatory correction/intake boundary.
+The complete registered integrity surfaces pass their stated denominators. The workflow nevertheless stops at the mandatory checkpoint; Stage 3 is not authorized automatically.
 
 | Artifact | SHA-256 |
 |---|---|
@@ -16,7 +16,7 @@ The complete registered integrity surfaces were audited against the frozen manus
 | claim registry | `05455f35794381fc5f472baaa56cdd2fedaf3d3cbdb99f58f344364c26893452` |
 | coverage report | `407174b357de7e718d6d379de4807fc20ea694610091789f176444debdbbb07d` |
 | evidence rows | `2f47adea1276a72469fddd8c1ee666796e2b73dcd388acc986c9088756be0496` |
-| semantic verdict receipt | `913e75651609345e59a06c8567df57fab7b7bfaf3379d0c4394cb2a6aef4b23a` |
+| semantic verdict receipt | `505adf50e1d68680ebdb15303b2952101816a1f4c27c59fbe4358d19ff097993` |
 
 ## Phase results
 
@@ -25,9 +25,9 @@ The complete registered integrity surfaces were audited against the frozen manus
 | A — reference identity/metadata | 5/5 | 5 VERIFIED; 0 MISMATCH |
 | B — citation contexts | 5/5 | all content contexts supported |
 | C — registered numerical/data families | 13/13 | all internally consistent and replayed |
-| C4/D7 — experiment intake | 0/1 declaration | **FAIL-CLOSED**; scholar declaration absent |
+| C4/D7 — experiment intake | 1/1 declaration | scholar-owned intake plus non-empty provenance/alignment VERIFIED |
 | D — originality heuristic | 21/67 (31.3%) | no actionable body overlap; one shared standardized-declaration MINOR recorded |
-| E — registered claim verification | 70/77 selected | 70 semantically VERIFIED in the hash-bound receipt; 71/71 tuple carriers valid |
+| E — registered claim verification | 70/77 selected | 70 VERIFIED; 0 MINOR_DISTORTION; 71/71 tuple carriers valid |
 | E6 — claim-strength drift | first pass | correctly skipped: no revision evidence |
 
 Phase D is heuristic public-Web screening, not Turnitin or iThenticate. It can miss paywalled, cross-language, or unindexed overlap. Professional screening remains recommended before submission.
@@ -44,7 +44,7 @@ All `71` evidence rows are explicitly `anchorless`. Their schema and tuple cover
 
 | ID | Phase | Finding | Exact closure route |
 |---|---|---|---|
-| `P27-IL-SERIOUS-EXP-DECL-1` | C4/D7 | The manuscript reports project-owned computational results, but the post-#260 passport has no scholar-owned experiment_intake_declaration or experiment_provenance ledger. | Scholar confirms the exact batch experiment declaration; then transcribe and align the already frozen Round-2--8 provenance artifacts. |
+| — | — | No active blocking integrity issue. | — |
 
 ## Seven failure modes
 
@@ -53,7 +53,7 @@ All `71` evidence rows are explicitly `anchorless`. Their schema and tuple cover
 - Mode 3 hallucinated result: CLEAR within the frozen source/result/hash and replay scope.
 - Mode 4 shortcut reliance: CLEAR; frozen populations and negative controls are retained.
 - Mode 5 bug reframed as insight: CLEAR; the manuscript preserves negative and bounded conclusions.
-- Mode 6 methodology fabrication: **INSUFFICIENT EVIDENCE / BLOCKING** until the scholar-owned intake/provenance ledger exists.
+- Mode 6 methodology fabrication: CLEAR within disclosure and claim-to-provenance fidelity scope; design/run adequacy remains outside this check.
 - Mode 7 early frame-lock: CLEAR; limitations and the next falsifiable Route-A obligation remain explicit.
 
 ## Roadmap crosswalk
@@ -66,4 +66,4 @@ All `71` evidence rows are explicitly `anchorless`. Their schema and tuple cover
 
 ## Mandatory checkpoint
 
-Stage 2.5 stops here with `verification_status=UNVERIFIED`. Manuscript, bibliography, and PDF remain frozen. The named bibliographic corrections require exact user authorization, and experiment intake requires the scholar's explicit declaration. Stage 3 must not start automatically.
+Stage 2.5 passes and stops at its mandatory checkpoint with `verification_status=VERIFIED`. Manuscript, bibliography, and PDF remain frozen. Stage 3 still requires an explicit authorization and must not start automatically.

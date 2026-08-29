@@ -7,6 +7,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -15,6 +16,11 @@ import jsonschema
 
 
 ROOT = Path(__file__).resolve().parent.parent
+PROVENANCE_BOUNDARY = (
+    "This check verifies disclosure and claim-to-provenance fidelity. It does "
+    "not judge whether the experiment was correctly designed, run, statistically "
+    "adequate, or reproducible by ARS."
+)
 
 
 def resolve_ars() -> Path:
@@ -63,20 +69,173 @@ def load(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def json_pointer_value(path: Path, pointer: str):
+    value = load(path)
+    if not pointer.startswith("/"):
+        raise RuntimeError(f"invalid JSON pointer {pointer}")
+    for raw in pointer[1:].split("/"):
+        key = raw.replace("~1", "/").replace("~0", "~")
+        value = value[int(key)] if isinstance(value, list) else value[key]
+    return value
+
+
+def validate_experiment_transcription(
+    paper: str,
+    base: Path,
+    notes: Path,
+    passport: dict,
+    selected_by_id: dict[str, dict],
+) -> None:
+    """Bind Schema-9 arrays to current source/result bytes and registry spans."""
+
+    source_map_path = notes / "stage2_5_experiment_provenance_source_map.json"
+    population_path = notes / "stage2_5_experiment_claim_population.json"
+    alignment_audit_path = notes / "stage2_5_experiment_claim_alignment_audit.md"
+    for path in (source_map_path, population_path, alignment_audit_path):
+        if not path.is_file() or path.stat().st_size == 0:
+            raise RuntimeError(f"{paper}: missing experiment transcription carrier {path.name}")
+    source_map = load(source_map_path)
+    population = load(population_path)
+    declaration = passport["experiment_intake_declaration"]
+    if source_map.get("paper") != paper or source_map.get("declaration_sha256") != canonical_sha(declaration):
+        raise RuntimeError(f"{paper}: source-map declaration binding mismatch")
+    if source_map.get("retrospective_transcription") is not True:
+        raise RuntimeError(f"{paper}: retrospective provenance boundary missing")
+
+    provenance_by_id = {
+        row["experiment_id"]: row for row in passport["experiment_provenance"]
+    }
+    source_by_id = {
+        row["experiment_id"]: row for row in source_map.get("experiments", [])
+    }
+    if set(provenance_by_id) != set(source_by_id):
+        raise RuntimeError(f"{paper}: provenance/source-map experiment population mismatch")
+    for experiment_id, entry in provenance_by_id.items():
+        source_entry = source_by_id[experiment_id]
+        artifacts = source_entry.get("artifacts", [])
+        if not artifacts or artifacts != sorted(artifacts, key=lambda row: row["path"]):
+            raise RuntimeError(f"{paper}: {experiment_id} artifact list missing or unsorted")
+        artifact_paths = set()
+        for artifact in artifacts:
+            relative = artifact.get("path")
+            if (
+                not isinstance(relative, str)
+                or relative.startswith("/")
+                or ".." in Path(relative).parts
+            ):
+                raise RuntimeError(f"{paper}: unsafe artifact pointer in {experiment_id}")
+            path = base / relative
+            if not path.is_file() or sha(path) != artifact.get("sha256"):
+                raise RuntimeError(f"{paper}: stale source artifact {relative}")
+            artifact_paths.add(relative)
+        lock_materials = entry["repro_lock"]["materials"]
+        if (
+            canonical_sha(artifacts) != lock_materials["list_hash"]
+            or len(artifacts) != lock_materials["count"]
+            or source_entry.get("materials_list_sha256") != lock_materials["list_hash"]
+            or source_entry.get("materials_count") != len(artifacts)
+        ):
+            raise RuntimeError(f"{paper}: {experiment_id} materials lock mismatch")
+        for unit in entry["planned_vs_executed"]:
+            if not unit["executed"]:
+                if not unit.get("skip_reason"):
+                    raise RuntimeError(f"{paper}: {experiment_id} skipped unit lacks reason")
+                continue
+            result_file = unit.get("result_file")
+            if result_file not in artifact_paths:
+                raise RuntimeError(
+                    f"{paper}: {experiment_id} result is not source-map bound: {result_file}"
+                )
+            metric = unit.get("metric")
+            if metric and (base / result_file).suffix == ".json":
+                if json_pointer_value(base / result_file, metric) != unit.get("value"):
+                    raise RuntimeError(
+                        f"{paper}: {experiment_id} stale metric/value {result_file}#{metric}"
+                    )
+
+    manifest_claims = {}
+    for manifest in passport["claim_intent_manifests"]:
+        for claim in manifest["claims"]:
+            manifest_claims[(manifest["manifest_id"], claim["claim_id"])] = claim
+    aligned_registry_ids = set()
+    for row in passport["experiment_alignment_results"]:
+        match = re.search(r"\[registry:([^\]]+)\]", row["manuscript_locator"])
+        if not match:
+            raise RuntimeError(f"{paper}: alignment row lacks registry binding")
+        registry_id = match.group(1)
+        registry_claim = selected_by_id.get(registry_id)
+        manifest_claim = manifest_claims.get((row["scoped_manifest_id"], row["claim_id"]))
+        if (
+            registry_claim is None
+            or manifest_claim is None
+            or row["claim_text"] != registry_claim["claim_text"]
+            or manifest_claim["claim_text"] != registry_claim["claim_text"]
+        ):
+            raise RuntimeError(f"{paper}: alignment/registry claim mismatch for {registry_id}")
+        result_file, separator, pointer = row["result_pointer"].partition("#")
+        if separator != "#" or not pointer.startswith("/"):
+            raise RuntimeError(f"{paper}: non-granular alignment result pointer")
+        experiment = provenance_by_id[row["experiment_id"]]
+        matching_units = [
+            unit
+            for unit in experiment["planned_vs_executed"]
+            if unit.get("executed")
+            and unit.get("result_file") == result_file
+            and unit.get("metric") == pointer
+        ]
+        if len(matching_units) != 1:
+            raise RuntimeError(f"{paper}: alignment pointer does not resolve uniquely")
+        if json_pointer_value(base / result_file, pointer) != matching_units[0].get("value"):
+            raise RuntimeError(f"{paper}: alignment result value drift")
+        aligned_registry_ids.add(registry_id)
+
+    classifications = population.get("classifications", [])
+    classified_by_id = {row.get("registry_claim_id"): row for row in classifications}
+    if set(classified_by_id) != set(selected_by_id) or len(classified_by_id) != len(classifications):
+        raise RuntimeError(f"{paper}: experiment claim population is incomplete")
+    declared_experiment_ids = {
+        key
+        for key, row in classified_by_id.items()
+        if row.get("classification") == "experiment_backed_and_aligned"
+    }
+    if (
+        declared_experiment_ids != aligned_registry_ids
+        or population.get("direct_experiment_backed_claims") != len(aligned_registry_ids)
+        or population.get("aligned_direct_experiment_backed_claims") != len(aligned_registry_ids)
+        or population.get("alignment_coverage") != 1.0
+    ):
+        raise RuntimeError(f"{paper}: experiment alignment denominator mismatch")
+
+    consistency_script = ARS / "scripts/check_claim_audit_consistency.py"
+    provenance_script = ARS / "scripts/check_experiment_provenance.py"
+    subprocess.run(
+        [sys.executable, str(consistency_script), "--passport", str(notes / "stage2_5_material_passport.json")],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    subprocess.run(
+        [sys.executable, str(provenance_script), str(notes / "stage2_5_material_passport.json")],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+
 def scholar_intake_is_valid(passport: dict) -> bool:
     declaration = passport.get("experiment_intake_declaration")
     if not isinstance(declaration, dict):
         return False
-    confirmation = (
-        declaration.get("confirmation_time")
-        or declaration.get("confirmed_at")
-        or declaration.get("declared_at")
-    )
+    declared_at = declaration.get("declared_at")
     basic = (
+        set(declaration) == {"status", "declared_by", "declared_at"}
+        and
         declaration.get("status") == "experiments_declared"
         and declaration.get("declared_by") == "scholar"
-        and isinstance(confirmation, str)
-        and bool(confirmation.strip())
+        and isinstance(declared_at, str)
+        and bool(declared_at.strip())
         and isinstance(passport.get("experiment_provenance"), list)
         and bool(passport["experiment_provenance"])
         and isinstance(passport.get("experiment_alignment_results"), list)
@@ -268,7 +427,10 @@ def main() -> int:
             "flow-systems-stage2.5-semantic-verdict-receipt/1.0"
         ):
             raise RuntimeError(f"{paper}: semantic receipt schema mismatch")
-        if semantic_receipt.get("decision") != "PASS_SELECTED_POPULATION":
+        if semantic_receipt.get("decision") not in {
+            "PASS_SELECTED_POPULATION",
+            "PASS_SELECTED_POPULATION_WITH_MINOR_DISTORTION",
+        }:
             raise RuntimeError(f"{paper}: semantic receipt is not PASS")
         expected_semantic_bindings = {
             "manuscript_sha256": sha(base / "paper/manuscript.tex"),
@@ -290,8 +452,8 @@ def main() -> int:
             grouped_rows.setdefault(row["claim"]["claim_id"], []).append(row)
         for claim_id, verdict in verdict_by_id.items():
             claim_rows = grouped_rows[claim_id]
-            if verdict.get("verdict") != "VERIFIED":
-                raise RuntimeError(f"{paper}: non-VERIFIED semantic verdict")
+            if verdict.get("verdict") not in {"VERIFIED", "MINOR_DISTORTION"}:
+                raise RuntimeError(f"{paper}: blocking semantic verdict")
             if any(row["verdict"] != verdict["verdict"] for row in claim_rows):
                 raise RuntimeError(f"{paper}: tuple verdict inconsistency for {claim_id}")
             if verdict.get("tuple_count") != len(claim_rows):
@@ -302,13 +464,21 @@ def main() -> int:
                 raise RuntimeError(f"{paper}: semantic row-hash mismatch for {claim_id}")
             if verdict.get("claim_object_sha256") != canonical_sha(claim_rows[0]["claim"]):
                 raise RuntimeError(f"{paper}: semantic claim-object hash mismatch")
-        if semantic_receipt.get("verdict_counts") != {
-            "VERIFIED": len(selected),
-            "MINOR_DISTORTION": 0,
-            "MAJOR_DISTORTION": 0,
-            "UNVERIFIABLE": 0,
-            "UNVERIFIABLE_ACCESS": 0,
-        }:
+        semantic_counts = semantic_receipt.get("verdict_counts", {})
+        if (
+            set(semantic_counts)
+            != {
+                "VERIFIED",
+                "MINOR_DISTORTION",
+                "MAJOR_DISTORTION",
+                "UNVERIFIABLE",
+                "UNVERIFIABLE_ACCESS",
+            }
+            or sum(semantic_counts.values()) != len(selected)
+            or semantic_counts["MAJOR_DISTORTION"]
+            or semantic_counts["UNVERIFIABLE"]
+            or semantic_counts["UNVERIFIABLE_ACCESS"]
+        ):
             raise RuntimeError(f"{paper}: semantic verdict totals mismatch")
 
         report = load(report_path)
@@ -326,7 +496,12 @@ def main() -> int:
         if report["verdict"] not in {"PASS", "FAIL"} or report["mode"] != "pre-review":
             raise RuntimeError(f"{paper}: wrong report gate")
         phase_e = report["phases"]["E_claims"]
-        if phase_e["checked"] != len(selected) or phase_e["verified"] != len(selected):
+        if (
+            phase_e["checked"] != len(selected)
+            or phase_e["verified"] != semantic_counts["VERIFIED"]
+            or len(phase_e.get("distortions", []))
+            != semantic_counts["MINOR_DISTORTION"]
+        ):
             raise RuntimeError(f"{paper}: report distinct-claim count mismatch")
         if phase_e["evidence_rows"] != rows:
             raise RuntimeError(f"{paper}: embedded evidence rows differ from sidecar")
@@ -359,6 +534,10 @@ def main() -> int:
         )
         if partial_intake and not intake_valid:
             raise RuntimeError(f"{paper}: partial or invalid scholar intake state")
+        if intake_valid:
+            validate_experiment_transcription(
+                paper, base, notes, passport, selected_by_id
+            )
         c4 = report["phases"].get("C4_experiment_intake", {})
         if c4.get("claims_checked") != 1 or c4.get("verified") != int(intake_valid):
             raise RuntimeError(f"{paper}: C4/passport intake mismatch")
@@ -412,6 +591,57 @@ def main() -> int:
     }
     if aggregate != expected_aggregate:
         raise RuntimeError(f"aggregate mismatch: {aggregate} != {expected_aggregate}")
+
+    authorization = load(ROOT / "BATCH_ROUND9_STAGE2_5_AUTHORIZATION_RECEIPT.json")
+    if (
+        authorization.get("boundary") != PROVENANCE_BOUNDARY
+        or authorization.get("stage3_authorized") is not False
+        or authorization.get("experiment_intake_declaration")
+        != {
+            "status": "experiments_declared",
+            "declared_by": "scholar",
+            "declared_at": "2026-08-29T05:52:42Z",
+        }
+    ):
+        raise RuntimeError("authorization receipt boundary/declaration mismatch")
+
+    transcription = load(
+        ROOT / "BATCH_ROUND9_STAGE2_5_EXPERIMENT_TRANSCRIPTION_SUMMARY.json"
+    )
+    if (
+        transcription.get("boundary") != PROVENANCE_BOUNDARY
+        or transcription.get("stage3_authorized") is not False
+        or transcription.get("declared_at") != "2026-08-29T05:52:42Z"
+        or transcription.get("provenance_entries") != 33
+        or transcription.get("source_artifacts") != 309
+        or transcription.get("aligned_claims") != 62
+    ):
+        raise RuntimeError("experiment transcription batch denominator mismatch")
+    transcription_rows = {
+        row.get("paper"): row for row in transcription.get("papers", [])
+    }
+    if set(transcription_rows) != set(PAPERS):
+        raise RuntimeError("experiment transcription paper population mismatch")
+    for paper, row in transcription_rows.items():
+        notes = ROOT / "papers" / paper / "notes"
+        passport = load(notes / "stage2_5_material_passport.json")
+        source_map = load(notes / "stage2_5_experiment_provenance_source_map.json")
+        population = load(notes / "stage2_5_experiment_claim_population.json")
+        if (
+            row.get("passport_sha256")
+            != sha(notes / "stage2_5_material_passport.json")
+            or row.get("source_map_sha256")
+            != sha(notes / "stage2_5_experiment_provenance_source_map.json")
+            or row.get("claim_population_sha256")
+            != sha(notes / "stage2_5_experiment_claim_population.json")
+            or row.get("provenance_entries")
+            != len(passport["experiment_provenance"])
+            or row.get("source_artifacts")
+            != sum(len(item["artifacts"]) for item in source_map["experiments"])
+            or row.get("aligned_claims")
+            != population.get("aligned_direct_experiment_backed_claims")
+        ):
+            raise RuntimeError(f"{paper}: stale experiment transcription summary binding")
 
     batch = load(ROOT / "BATCH_ROUND9_STAGE2_5_INTEGRITY_SUMMARY.json")
     expected_batch_verdict = "PASS" if report_passes == len(PAPERS) else "FAIL-CLOSED"

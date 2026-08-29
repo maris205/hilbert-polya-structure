@@ -5,7 +5,29 @@ Protocol: ARS-Codex academic-research-suite, Stage 2.5 initial integrity gate
 Audited manuscript SHA-256: `283695c485a2a48abfab1ef0fe3d479f597f68f3082e20f4a5a1894ca37baefb`  
 Audited bibliography SHA-256: `acec840393408f146f5e6eed9723cd4e12275108a6059fe0fdb0c2bc508e7248`
 
-## Decision
+## Current controlling status — 2026-08-29 addendum
+
+**PASS AT MANDATORY CHECKPOINT — Stage 3 not authorized.**  The later fresh
+Stage-2.5 pass recorded in [stage2_5_integrity_report.md](stage2_5_integrity_report.md)
+supersedes the historical FAIL-CLOSED decision retained below.  The authorized
+`BowenLanford1970` suffix repair is present in the bibliography and the fresh
+Phase-A pass records 8/8 references VERIFIED; the current bibliography SHA-256
+is `de776cc0bf16e6c837917f4a289f8c07b8b4f7e9146183b9a9e0e6294db99e6b`.
+Further closure is: 48/48 selected claims VERIFIED; 49/49 required tuple
+carriers structurally present and still explicitly `anchorless`; one scholar
+declaration plus 7 experiment-provenance entries; and 6 experiment-alignment
+records.  Both former SERIOUS issues are CLOSED, with no active blocking
+integrity issue.  The workflow remains stopped at the mandatory checkpoint and
+must not enter Stage 3 without explicit authorization.
+
+This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+
+Everything from the next heading onward is retained as the historical audit
+trajectory.  Its pre-repair author mismatch, missing-declaration, blocker,
+failure-mode, issue-table, and FAIL-CLOSED language is **superseded for current
+status**, not deleted or silently rewritten.
+
+## Historical decision — superseded
 
 **FAIL-CLOSED — BLOCK.** Phases A–D retain their stated results. `BowenLanford1970` omits the author's generational suffix `III`; under the no-gray-zone rule this is a SERIOUS author-field `MISMATCH` (**`IL-SERIOUS-1`**). The paper also reports own computational results without `experiment_intake_declaration`, `experiment_provenance[]`, or positive pre-#260 legacy proof, so ARS Phase C4/D7 fails closed (**`IL-SERIOUS-2`**). The earlier invalid Phase-E sample remains superseded as a historical audit event, but the registry/evidence chain has since been stably rebuilt and independently checked: the controlling [Phase-E semantic audit](stage2_5_phase_e_semantic_audit.md) records a clean PASS for **48/48 selected distinct claims** and **49/49 required evidence tuples**. That Phase-E PASS removes the former rebuild requirement; it closes neither existing SERIOUS issue and does not change the overall Stage-2.5 verdict. No MINOR IDs.
 

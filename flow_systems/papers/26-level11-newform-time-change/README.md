@@ -4,10 +4,19 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
-  The manuscript and the bounded scientific/semantic surfaces are clean within
-  the recorded denominators, but the missing scholar-owned experiment-intake
-  declaration remains the blocking provenance item `P26-S25-F001`.
+- Current pipeline: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**.
+  **Stage 3 is not authorized**; advancement requires explicit checkpoint
+  authorization.
+- Current Stage-2.5 closure: 5/5 references are VERIFIED; 68/68 selected
+  distinct claims are VERIFIED; all 70/70 selected tuples are structurally
+  closed.  The 70 anchorless evidence carriers remain an advisory limitation,
+  while the independent semantic audit supports the claim meanings.  The
+  scholar declaration is present, with 7 experiment-provenance entries and 17
+  direct experiment claims aligned without a mismatch.
+- The former structural blocker `P26-S25-F001` and the associated historical fail-closed
+  wording are a superseded pre-declaration audit snapshot, retained in the
+  audit notes for traceability.
+- This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
 - **Round-8 historical snapshot (superseded for pipeline stage):** ARS Stage 1
   RESEARCH was in progress and Rounds 2--8 had executed reproducibly.  This
   remains the scientific development history; it is not the current ARS stage.

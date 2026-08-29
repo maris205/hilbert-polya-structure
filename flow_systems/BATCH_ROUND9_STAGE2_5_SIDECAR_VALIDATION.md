@@ -1,5 +1,25 @@
 # Round 9 Stage 2.5 claim-sidecar independent validation
 
+## Post-authorization controlling addendum
+
+The fail-closed experiment-intake gate described in this earlier independent
+snapshot was closed by the scholar declaration received at
+`2026-08-29T05:52:42Z`. All five passports now contain schema-valid,
+non-empty provenance ledgers: **33** experiment/certificate entries, **309**
+hash-bound current artifacts, and **62** registered direct claim alignments.
+The three authorized bibliography corrections were applied and P25/P28 were
+rebuilt; all **31/31** references now verify. Official ARS provenance and
+claim-audit consistency checks pass for all five papers. The current batch
+decision is **Stage 2.5 PASS AT MANDATORY CHECKPOINT** with
+`stage3_authorized=false`; P28 retains one non-blocking semantic
+`MINOR_DISTORTION` concerning replay-order prose.
+
+The original sidecar audit below is retained as a timestamped historical
+snapshot; its pending-gate conclusion is superseded by this addendum and the
+controlling `BATCH_ROUND9_STAGE2_5_INTEGRITY_REPORT.md`.
+
+**This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.**
+
 Audit time: `2026-08-29T01:48:19Z`  
 Stable snapshot digest: `38eeb971968dfa7e67ce7447f7b7b81def11213feb4d6fd42cddf93d519a8062`  
 Scope: Papers 24--28; claim registries, coverage reports, Phase-E evidence rows, and claim-strength-drift sidecars.  

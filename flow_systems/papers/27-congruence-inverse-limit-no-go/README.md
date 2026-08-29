@@ -4,10 +4,23 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 2.5 audited / FAIL-CLOSED**.
-  The manuscript and bounded scientific/semantic surfaces are clean within the
-  recorded denominators, but the missing scholar-owned experiment-intake
-  declaration remains the blocking provenance item `P27-S25-F001`.
+- Current pipeline: **Round 9 — ARS Stage 2.5 PASS AT MANDATORY CHECKPOINT**.
+  **Stage 3 is not authorized**; advancement requires explicit checkpoint
+  authorization.
+- Current Stage-2.5 closure: 5/5 references are VERIFIED; 70/70 selected
+  distinct claims are VERIFIED; all 71/71 selected tuples are structurally
+  closed.  The 71 anchorless evidence carriers remain an advisory limitation,
+  while the independent semantic audit supports the claim meanings.  The
+  scholar declaration is present, with 5 experiment-provenance entries and 14
+  direct experiment claims aligned without a mismatch.
+- Round 3 is a literature audit and Round 6 is a source-positioning,
+  human-pending audit; neither is represented as experiment provenance.  The
+  five provenance entries cover only the evidenced Round-2, Round-4, Round-5,
+  Round-7, and Round-8 experiment/certificate chains.
+- The former structural blocker `P27-S25-F001` and the associated historical fail-closed
+  wording are a superseded pre-declaration audit snapshot, retained in the
+  audit notes for traceability.
+- This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
 - **Round-8 historical snapshot (superseded for pipeline stage):** ARS Stage 1
   RESEARCH was in progress through the reproducible Round-8 campaign.  This
   remains the scientific development history; it is not the current ARS stage.
