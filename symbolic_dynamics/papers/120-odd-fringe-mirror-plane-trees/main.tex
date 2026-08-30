@@ -1,0 +1,464 @@
+\documentclass[10pt,a4paper]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{array,booktabs}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\raggedbottom
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PT}{\mathcal P}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\M}{\mathsf M}
+\newcommand{\J}{\mathsf J}
+\newcommand{\eps}{\boldsymbol\varepsilon}
+
+\title[Odd-fringe mirror dynamics]{Odd-Fringe Mirror Dynamics on Plane Rooted Trees:\
+Algebraic Fixed Points and the Exact Cycle Census}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{05C05, 05A15, 37P35}
+\keywords{plane rooted tree, fringe subtree, involution, algebraic generating function, fixed point, dynamical zeta function}
+
+\begin{document}
+
+\begin{abstract}
+At every vertex of a plane rooted tree, read the order of its fringe subtree
+and reverse the child list exactly when that order is odd; apply all such
+reversals simultaneously.  The resulting finite self-map preserves every
+fringe order and is an involution.  We give a root-local fixed-point
+criterion: an even-order root requires its children to be fixed pointwise,
+whereas an odd-order root requires a twisted palindrome whose paired
+children are $(T,\M(T))$.  If $E(x)$ and $O(x)$ enumerate nonempty fixed
+trees of even and odd order and
+$A=x/(1-A)$ is the ordinary plane-tree series, this criterion gives
+\[
+ E=\frac{xO}{(1-E)^2-O^2},\qquad
+ O=\frac{x(1+E)}{1-A(x^2)}.
+\]
+For $F=E+O$ we eliminate the auxiliary series and display an explicit
+degree-six equation $P(x,F)=0$; the condition $P_y(0,0)=-3$ singles out the
+zero-constant branch.  Thus, if $f_n=[x^n]F$ and
+$a_n=C_{n-1}$ for $n\geq1$, the order-$n$ system has exactly $f_n$ fixed
+points and $(a_n-f_n)/2$ two-cycles, with zeta function
+$(1-z)^{-f_n}(1-z^2)^{-(a_n-f_n)/2}$.  The empty lane is handled separately.
+Mirror symmetry, Catalan enumeration, plane-tree involutions, algebraic
+generating-function machinery, and zeta bookkeeping receive zero
+contribution credit.  The residual scope is only this conjunction for the
+specified odd-fringe update; priority and external circulation remain on
+hold.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+A plane rooted tree equips the children of every vertex with a linear
+order.  Reversing all child lists gives the classical global mirror
+involution.  We study a state-dependent version: reverse the child list at a
+vertex precisely when the fringe subtree rooted there has odd order.  All
+vertices read their trigger from the unchanged input before the reversals are
+applied.
+
+The period law is immediate only after one identifies the correct invariant:
+changing child order does not change any fringe order.  The fixed set is more
+delicate.  At odd roots, componentwise recursion interacts with reversal, so
+the children need not be individually fixed.  Instead, the child list is a
+palindrome twisted by the same map.  Keeping the parity of a possible central
+child produces a coupled, rather than scalar, generating-function system.
+
+The paper proves four parts of one exact finite-map package.
+\begin{enumerate}
+\item The update preserves the underlying rooted tree and every fringe
+  order, and it squares to the identity.
+\item Fixed trees have an exact parity-sensitive root decomposition by
+  ordinary fixed sequences and twisted palindromes.
+\item The decomposition gives coupled series $E,O$ and an explicit
+  degree-six algebraic equation for $F=E+O$.
+\item Since all cycles have length one or two, the fixed coefficients give
+  every iterate-fixed count and the complete fixed-order zeta function.
+\end{enumerate}
+
+The constituent neighborhoods are mature.  Plane trees and the equation
+$A=x/(1-A)$ are standard instances of symbolic enumeration
+\cite{FlajoletSedgewick2009}.  Direct involution neighbors include the
+parity-reversing construction of Chen--Shapiro--Yang
+\cite{ChenShapiroYang2006}, Deutsch's ordered-tree bijection
+\cite{Deutsch2000}, and recent binary/plane-tree involutions
+\cite{LiLinZhao2024}.  Claesson--Kitaev--Steingr\'{i}msson--Wang give a 2026
+abstract Catalan-involution framework, global reversal factorization, and a
+Donaghey connection \cite{ClaessonEtAl2026}; current cyclic actions on
+corner-rooted plane trees appear in
+\cite{BousquetMelouKrattenthaler2025}.  These papers do not use the literal
+odd-fringe update below, but every general involution, mirror, Catalan, and
+generating-function ingredient receives zero contribution credit.  A bounded
+search miss is not a priority certificate.  We claim neither asymptotics nor
+minimality of the displayed polynomial, and external dissemination remains
+\textbf{HOLD}.
+
+\section{The update, involution, and fixed criterion}\label{sec:update}
+
+For $n\geq1$, let $\PT_n$ be the set of unlabelled plane rooted trees with
+$n$ vertices.  A tree is represented recursively by the ordered tuple
+\[
+                 T=[T_1,\ldots,T_k]
+\]
+of the fringe subtrees rooted at the children of its root; the leaf is
+$\bullet=[]$.  Its order is
+$|T|=1+\sum_i|T_i|$.  We also adjoin a separate empty state by setting
+$\PT_0=\{\eps\}$.  It is not identified with the leaf.
+
+\begin{definition}[odd-fringe mirror]\label{def:update}
+Set $\M(\eps)=\eps$.  For a nonempty tree $T=[T_1,\ldots,T_k]$, define
+\begin{equation}\label{eq:update}
+\M(T)=
+\begin{cases}
+[\M(T_1),\ldots,\M(T_k)],& |T|\text{ even},\\
+[\M(T_k),\ldots,\M(T_1)],& |T|\text{ odd}.
+\end{cases}
+\end{equation}
+Equivalently, every vertex reads the order of its old fringe subtree, and
+all child lists with odd trigger are reversed simultaneously.  Write
+$\M_n$ for the restriction to $\PT_n$.
+\end{definition}
+
+The recursion in \eqref{eq:update} records nested reversals but does not make
+the clock asynchronous: every fringe order on the right is an input-tree
+quantity.
+
+For a nonempty input tree, define its induced vertex transport to the image
+recursively.  The root maps to the root.  At a vertex with \(k\) children,
+child position \(i\) maps to position \(i\) when that vertex's old fringe
+order is even and to position \(k+1-i\) when it is odd; inside the matched
+child subtrees use their recursively induced transports.
+
+\begin{theorem}[involution and local fixed test]\label{thm:involution}
+The empty state is fixed.  For every \(n\ge1\) and \(T\in\PT_n\):
+\begin{enumerate}
+\item $\M(T)$ has the same order, the same underlying nonplane rooted tree,
+  and the same fringe order at each vertex under the induced transport;
+\item $\M^2(T)=T$;
+\item if $T=[T_1,\ldots,T_k]$ is nonempty, then
+\begin{align}
+|T|\text{ even}:\quad
+ T\in\Fix(\M)&\Longleftrightarrow
+ T_i\in\Fix(\M)\quad(1\leq i\leq k),                 \label{eq:even-fixed}\\
+|T|\text{ odd}:\quad
+ T\in\Fix(\M)&\Longleftrightarrow
+ T_i=\M(T_{k+1-i})\quad(1\leq i\leq k).              \label{eq:odd-fixed}
+\end{align}
+\end{enumerate}
+Together with the empty lane, every orbit has period one or two.
+\end{theorem}
+
+\begin{proof}
+Induction on $|T|$ shows that applying \eqref{eq:update} to a child preserves
+its order and descendants.  The root step only reverses a list, so it also
+preserves order and the underlying nonplane tree.  Following the induced
+transport just defined, the fringe subtree at each source vertex is sent to
+the image of that same subtree and hence has the same order.  This proves the
+pointwise fringe-order assertion.
+
+For the second assertion, use induction again.  The root has the same parity
+after one update.  At an even root, the second update applies $\M^2$ to each
+child without reversing the list.  At an odd root, it applies $\M^2$ to the
+children and reverses the list a second time.  Both cases return $T$.
+Equivalently, the input determines a fixed set of local reversals; those
+order-two operations act on distinct child lists and commute.  Finally,
+comparing the child tuple in \eqref{eq:update} with the original tuple gives
+\eqref{eq:even-fixed} and \eqref{eq:odd-fixed} in both directions.
+\end{proof}
+
+\begin{remark}[ordinary mirror is different]\label{rem:mirror}
+Let $\J[T_1,\ldots,T_k]=[\J(T_k),\ldots,\J(T_1)]$ reverse every child list.
+Put $L=[]$, $U=[L]$, $A=[L,U]$, and $B=[U,L]$.  The order-four tree $A$ is
+$\M$-fixed but not $\J$-fixed.  Conversely, the order-nine tree $[A,B]$ is
+$\J$-fixed but not $\M$-fixed.  Hence the two fixed sets are incomparable,
+not merely presented by different recursions.
+\end{remark}
+
+\section{The twisted-palindrome fixed grammar}\label{sec:grammar}
+
+Let
+\[
+ A(x)=\sum_{n\geq1}|\PT_n|x^n
+     =\sum_{n\geq1}C_{n-1}x^n
+     =\frac{x}{1-A(x)}.
+\]
+Let $E(x)$ and $O(x)$ enumerate the nonempty $\M$-fixed trees of even and
+odd order, respectively, and put $F=E+O$.  Thus all four series in this
+section lie in $\mathbb Q[[x]]$ and have zero constant term; $A$ is the
+unique Catalan branch with $A(0)=0$.
+
+\begin{theorem}[coupled fixed-tree series]\label{thm:coupled}
+The fixed-tree series are the unique pair $(E,O)\in x\mathbb Q[[x]]^2$
+satisfying
+\begin{equation}\label{eq:coupled}
+\boxed{
+ E=\frac{xO}{(1-E)^2-O^2},
+ \qquad
+ O=\frac{x(1+E)}{1-A(x^2)}.}
+\end{equation}
+for the specified Catalan branch $A$.
+\end{theorem}
+
+\begin{proof}
+Suppose first that the root has even order.  By
+\eqref{eq:even-fixed}, its children form an arbitrary sequence of fixed
+trees.  Their total order must be odd.  Since $F(-x)=E-O$, the odd part of
+the sequence series is
+\[
+ \frac12\left(\frac1{1-F(x)}-\frac1{1-F(-x)}\right)
+ =\frac{O}{(1-E)^2-O^2}.
+\]
+Multiplication by the root marker $x$ gives the first equation.
+
+Now suppose that the root has odd order.  Condition
+\eqref{eq:odd-fixed} says that its child tuple is a twisted palindrome.  If
+there are $2r$ children, the first $r$ are arbitrary trees and determine the
+remaining children as their reversed componentwise $\M$-images.  Each such
+pair has total order $2|T|$, so one pair has series $A(x^2)$ and a sequence of
+pairs has series $1/(1-A(x^2))$.  If the child count is odd, the central
+child must be fixed.  The off-centre pairs have even total order, and the
+root's children must also have even total order; hence the central child must
+have even order and contributes $E$, not $F$.  The optional centre gives the
+factor $1+E$.  Multiplying by $x$ proves the second equation.  After clearing
+the two unit denominators, the Jacobian with respect to $(E,O)$ at
+$(x,E,O)=(0,0,0)$ is the identity.  The formal implicit-function theorem in
+$\mathbb Q[[x]]$ therefore gives the asserted coupled uniqueness.
+\end{proof}
+
+\section{An explicit algebraic equation}\label{sec:algebraic}
+
+The coupled system proves algebraicity over the standard Catalan series.  In
+this case the auxiliary series can be removed completely.
+
+\begin{theorem}[degree-six annihilating equation]\label{thm:polynomial}
+Let $F=E+O$.  Then $P(x,F(x))=0$, where
+\begin{align}
+P(x,y)={}&(2x^2-x)y^6+(1-2x)y^5
+ +(4x^3+6x^2+4x)y^4 \notag\\
+&+(4x^3-12x^2-11x-6)y^3 \notag\\
+&+(2x^4-11x^3+10x^2+26x+8)y^2 \label{eq:polynomial}\\
+&+(4x^4-2x^3-20x^2-19x-3)y
+ +2x^4+9x^3+14x^2+3x. \notag
+\end{align}
+Moreover, $F$ is the unique series in $\mathbb Q[[x]]$ satisfying
+$P(x,F)=0$ and $F(0)=0$.
+\end{theorem}
+
+\begin{proof}
+Put
+\[
+ G=E-O,\qquad B=A(x^2),\qquad c=1-B.
+\]
+Factoring the denominator in the first equation of \eqref{eq:coupled} and
+rewriting the second gives
+\begin{align}
+ (F+G)(1-F)(1-G)&=x(F-G),                                  \label{eq:FG1}\\
+ (c+x)G&=(c-x)F-2x,                                        \label{eq:FG2}\\
+ B^2-B+x^2&=0.                                             \label{eq:B}
+\end{align}
+The factor $c+x$ has constant term one, so \eqref{eq:FG2} can be used in the
+formal power-series ring.  Eliminating $G$ from \eqref{eq:FG1}--\eqref{eq:FG2}
+and then $B$ using \eqref{eq:B} gives the resultant
+$4x^2P(x,F)$.  Since $\mathbb Q[[x]]$ has no zero divisors,
+\eqref{eq:polynomial} follows.  This is a direct expansion using only the
+three displayed identities.  The exact-control script independently
+reconstructs this identity: it takes the quadratic--linear resultant in
+$G$, reduces its coefficients modulo $B^2-B+x^2$, and evaluates the
+resulting quadratic norm coefficient by coefficient.
+
+Finally,
+\[
+             P(0,0)=0,\qquad P_y(0,0)=-3.
+\]
+The formal implicit-function theorem therefore gives exactly one
+zero-constant branch.  The series obtained in \cref{thm:coupled} lies on
+that branch.
+\end{proof}
+
+For $n\geq1$, write $f_n=[x^n]F(x)$ and put $f_0=1$ for the separately
+adjoined empty lane.  The first coefficients, together with the total
+carrier and two-cycle counts proved below, are shown in
+\cref{tab:coefficients}.  A machine-readable table through order thirty is
+included with the exact controls.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Carrier size $a_n$, fixed count $f_n$, and number $c_{n,2}$ of
+two-cycles.  The $n=0$ row uses the separate empty-state convention.}
+\label{tab:coefficients}
+\begin{tabular}{r@{\quad}r@{\quad}r@{\quad}r}
+\toprule
+$n$ & $a_n$ & $f_n$ & $c_{n,2}$\\
+\midrule
+0&1&1&0\\
+1&1&1&0\\
+2&1&1&0\\
+3&2&2&0\\
+4&5&5&0\\
+5&14&8&3\\
+6&42&36&3\\
+7&132&48&42\\
+8&429&303&63\\
+9&1430&368&531\\
+10&4862&2792&1035\\
+11&16796&3248&6774\\
+12&58786&27310&15738\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The complete temporal census}\label{sec:census}
+
+For $n\geq1$, put $a_n=C_{n-1}$, and retain $a_0=1$.  Define the fixed-order
+Artin--Mazur zeta function in the usual way \cite{ArtinMazur1965}:
+\[
+ \zeta_{\M,n}(z)
+ =\exp\left(\sum_{q\geq1}
+       |\Fix(\M_n^q)|\frac{z^q}{q}\right).
+\]
+
+\begin{corollary}[all cycles and all iterates]\label{cor:census}
+For every $n\geq0$, the order-$n$ functional graph consists of
+\begin{equation}\label{eq:cycle-counts}
+       f_n\text{ fixed points}
+       \quad\text{and}\quad
+       c_{n,2}=\frac{a_n-f_n}{2}\text{ two-cycles}.
+\end{equation}
+For every $q\geq1$,
+\begin{equation}\label{eq:iterate-fixed}
+ |\Fix(\M_n^q)|=
+ \begin{cases}
+ f_n,&q\text{ odd},\\
+ a_n,&q\text{ even},
+ \end{cases}
+\end{equation}
+and
+\begin{equation}\label{eq:zeta}
+ \boxed{\displaystyle
+ \zeta_{\M,n}(z)
+ =(1-z)^{-f_n}(1-z^2)^{-(a_n-f_n)/2}.}
+\end{equation}
+In particular, both the empty and one-vertex lanes have zeta
+$(1-z)^{-1}$.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:involution}, every component is a fixed point or a two-cycle.
+The fixed points are counted by $f_n$, so the remaining $a_n-f_n$ states
+pair to give \eqref{eq:cycle-counts}.  An odd iterate fixes only the
+one-cycles, whereas an even iterate fixes every state, proving
+\eqref{eq:iterate-fixed}.  The standard cycle product for the zeta function
+then gives one factor $(1-z)$ per fixed point and one factor $(1-z^2)$ per
+two-cycle, which is \eqref{eq:zeta}.
+\end{proof}
+
+\section{Owner subtraction, firewalls, and controls}\label{sec:scope}
+
+The literal action separates the present map from its closest neighbors.
+Chen--Shapiro--Yang locate one illegal vertex and transfer a prefix of
+siblings in order to reverse leaf parity \cite{ChenShapiroYang2006}; Deutsch
+redistributes ordered-tree statistics \cite{Deutsch2000}; and the recent
+binary/plane-tree involutions of Li--Lin--Zhao are transported mirror and
+statistic symmetries \cite{LiLinZhao2024}.  None applies simultaneous
+odd-fringe child reversals.
+
+The 2026 Catalan involution $h$ is the strongest current owner objection
+\cite{ClaessonEtAl2026}.  On plane trees, $h$ sends the root with three leaf
+children to a path of depth three, so it changes the parent--child relation;
+the same star is fixed by $\M$.  Claesson et al. grade plane trees by edges,
+whereas our order is the number of vertices.  Thus their Proposition~2.11
+translates to one $h$-fixed tree at our order one, $C_k$ fixed trees at order
+$2k+2$, and none at odd order at least three.  In particular, their counts
+at orders four and six are $1$ and $2$, while
+\cref{tab:coefficients} gives $f_4=5$ and $f_6=36$.  Their global reversal
+factor, Donaghey map, fixed census, and abstract framework receive zero
+credit, but they are not the map in \cref{def:update}.  Likewise, the
+cyclic actions of Bousquet-Mélou--Krattenthaler move a distinguished root
+corner, leaf, or nonleaf corner around a plane tree
+\cite{BousquetMelouKrattenthaler2025}; they do not reverse parity-selected
+child lists.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Objectwise collision firewall.  Classical global mirror and tree
+pruning are inputs/neighbors, not contribution claims.}
+\label{tab:firewall}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.18\linewidth}
+                >{\raggedright\arraybackslash}p{0.25\linewidth}
+                >{\raggedright\arraybackslash}p{0.23\linewidth}
+                >{\raggedright\arraybackslash}p{0.24\linewidth}}
+\toprule
+Feature & odd-fringe mirror $\M$ & global mirror $\J$ & parallel leaf peeling (P114)\\
+\midrule
+Local action & reverse iff old fringe order is odd & reverse every child list & delete eligible nonroot leaves\\
+State size & all vertices and edges retained & all vertices and edges retained & rank decreases off the recurrent core\\
+Temporal law & every state has period $1$ or $2$ & every state has period $1$ or $2$ & height-governed absorption\\
+Fixed test & even root pointwise; odd root $\M$-twisted palindrome & $\J$-twisted palindrome at every root & edgeless rooted-forest endpoint\\
+Enumeration & Catalan carrier and coupled $E/O$ grammar & classical self-mirror census & Cayley basins, height layers, local fibres\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Parallel tree contraction and dynamical pruning are established mechanisms
+\cite{MillerReif1985,KovchegovZaliapin2020}.  The internal P114 lane deletes
+vertices, has transient states and a height clock, and counts labelled Cayley
+forest basins.  The current map preserves the full tree and has no transient
+state.  Thus the phase, update, temporal primitive, and enumerative objects
+are distinct despite the shared word ``tree.''
+
+The accompanying standard-library verifier generates every plane rooted tree
+through order twelve.  It compares recursive and snapshot-trigger updates,
+checks the underlying unordered shape, the pointwise induced vertex
+transport, involution, root-local fixed test, and the first six iterates on
+every state.  An independent parity recurrence is compared with exhaustive
+fixed counts; the coupled equations and $P(x,F(x))$ are checked
+coefficientwise through degree thirty.  A sparse exact lane additionally
+reconstructs the full resultant identity $4x^2P$.  The stored CSV table
+contains the exact carrier, fixed, and two-cycle counts through that order.
+These computations attack conventions and arithmetic; the proofs above
+establish the arbitrary-order statements.
+
+All Catalan enumeration, mirror symmetry, context-free algebraicity,
+resultant manipulation, involution cycle conversion, and zeta machinery are
+zero-credit.  After subtraction, the residual is only the exact conjunction
+for \cref{def:update}: invariant odd-fringe triggers, the twisted-palindrome
+fixed grammar, the coupled parity system, its explicit degree-six branch,
+and the fixed-order cycle census.  The bounded owner search does not prove
+priority.  No asymptotic, irreducibility, minimal-polynomial, or general
+Catalan-action claim is made.  External circulation remains \textbf{HOLD}.
+
+\section{Conclusion}
+
+Odd-fringe mirroring is a finite involutive dynamics whose fixed trees are
+controlled by a parity-sensitive twisted palindrome.  That local condition
+gives the coupled $E/O$ grammar, the explicit algebraic equation for the
+fixed series, and every one- and two-cycle count.  The claim stops there:
+asymptotics, priority, and broader Catalan-involution conclusions lie outside
+the present scope.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}
