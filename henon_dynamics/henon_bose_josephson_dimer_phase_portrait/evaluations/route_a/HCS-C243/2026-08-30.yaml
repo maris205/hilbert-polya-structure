@@ -1,0 +1,80 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C243
+candidate_definition: normalized two-mode Bose–Josephson dimer on the Bloch sphere
+family: integrable nonlinear Hamiltonian / Josephson phase portrait
+phase_space: x^2+y^2+z^2=1 with canonical chart (z,phi) away from z=±1
+dynamics: z_dot=-sqrt(1-z^2)sin(phi); phi_dot=Lambda*z+z*cos(phi)/sqrt(1-z^2)
+parameters: Lambda>=0; frozen controls Lambda=0,1/2,1,2,3 and energy levels
+parameter_provenance: source-defined physical normalization; no target fitting
+arithmetic_origin: none
+clock: dimensionless Josephson time
+normalization: H=Lambda*z^2/2-sqrt(1-z^2)*cos(phi), Bloch radius one
+determinant_convention: no target determinant; no Fredholm determinant constructed
+orbit_cutoff: 14 fixed-point rows, 8 Bloch-pole rows, 13 energy-level rows, 5 component criteria
+precision: exact rational parameter sentinels, 90-digit mpmath, independent SymPy and quadrature checks
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+code_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+artifact_paths:
+  evidence: results/c243_dimer_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-30
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: normalized Bose–Josephson dimer Hamiltonian and Bloch vector field
+  arithmetic_origin: none; source-local nonlinear dynamics
+  clock: dimensionless Josephson time
+  normalization: H and sphere radius one
+  cutoff: fixed points, quartic roots, crossing/self-trapped periods, separatrix and boundaries
+  precision: exact symbolic identities plus high-precision independent quadratures
+  allowed_data: fixed points, linear stability, Bloch poles, energy roots, elliptic K, sech homoclinic, component criteria
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisor
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: intrinsic Hamiltonian and exact energy-component geometry
+  strongest_failure: no intrinsic rational-prime carrier, prime-power clock, or arithmetic labels
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: analytic fixed-point, quartic, period and homoclinic atlas
+  strongest_failure: regular energy levels form a continuum, not a discrete primitive-orbit set
+  metrics: {fixed_points: 14, pole_rows: 8, level_rows: 13, criterion_rows: 5}
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact source-local quadrature and component identities
+  strongest_failure: no target weighted zeta, Fredholm determinant, or zero/divisor match
+  metrics: {target_zero_match: null, determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: Lambda=0,1,2 boundaries and separatrix are explicit
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md, results/c243_dimer_evidence.json]
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: natural Hamiltonian/Bloch quantization hint with elliptic fixed-point frequencies
+  strongest_failure: no target spectral bridge or Hilbert-Polya operator
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [Lambda=0 rigid rotation, Lambda=1 pitchfork, Lambda=2 pole, Lambda=3 homoclinic, crossing/self-trapped levels, independent quadratures, repaired-hash mutations]
+  proves_too_much_risk: high if H=1 is assigned a finite period, if the Lambda=1 critical point is called a separatrix, or if a singular phi value is assigned at a pole
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact source-local dimer phase portrait and component criteria only; no arithmetic or target determinant claim
+blocking_conditions:
+  - no arithmetic origin
+  - regular levels are continuous rather than discrete primitive cycles
+  - no target determinant or analytic target match
+next_smallest_test: a separately specified perturbation or quantization is a new candidate, not implicit evidence here
+round2_clues: []
+route_b_invocation_allowed: false

@@ -3,6 +3,29 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C239--HCS-C243 additions (2026-08-30)
+
+Five independent cross-subtype Route-A candidates were released from the
+common baseline `489506cf92bfed721f94f22dd0444a60427f90a5`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; `NEW` is workspace bookkeeping and not
+a literature-priority claim.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C239 | Multiway perfect shuffles have the all-parameter fixed-count identity, pointwise orders, least periods, Möbius cycles, finite source zeta/Koopman factors, and a literal packet-interleave cross-check. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_multiway_perfect_shuffle_cycle_atlas/`](../henon_multiway_perfect_shuffle_cycle_atlas/) |
+| HCS-C240 | The one-discontinuity contracted rotation has exact carry-word affine maps, half-open admissibility intervals, one periodic point per admissible itinerary, primitive/repetition separation, and direct iteration controls; no global one-cycle claim is made. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_contracted_rotation_mode_locking_atlas/`](../henon_contracted_rotation_mode_locking_atlas/) |
+| HCS-C241 | The classical Lüroth map has a unique coded point and multiplier for every finite digit word, primitive necklaces, countably infinite points at every positive period, and a finite/full weighted identity with the sharp convergence and `s=1` boundaries. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_luroth_countable_branch_periodic_atlas/`](../henon_luroth_countable_branch_periodic_atlas/) |
+| HCS-C242 | The irrational ellipsoid Reeb flow has exactly two simple coordinate orbits with complete iterate action/period, transverse rotation and CZ data, plus an explicit rational Morse--Bott boundary. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [`../henon_irrational_ellipsoid_reeb_orbit_atlas/`](../henon_irrational_ellipsoid_reeb_orbit_atlas/) |
+| HCS-C243 | The Bose--Josephson dimer closes the Bloch-sphere fixed-point pitchfork, quartic energy reduction, elliptic crossing/self-trapping periods, homoclinic separatrix and singular faces. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [`../henon_bose_josephson_dimer_phase_portrait/`](../henon_bose_josephson_dimer_phase_portrait/) |
+
+All five are `ROUTE_A_REJECTED` with `route_b_invocation_allowed: false`.
+No target divisor/counting law, arithmetic local datum, Euler factor, root
+number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
+introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; full evidence and PDF
+hashes are in [`../BATCH_REVIEW_C239_C243.md`](../BATCH_REVIEW_C239_C243.md).
+
 ## HCS-C234--HCS-C238 additions (2026-08-29)
 
 Five cross-subtype Route-A candidates were released from the common baseline

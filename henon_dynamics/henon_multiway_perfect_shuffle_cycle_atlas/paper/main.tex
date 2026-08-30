@@ -1,0 +1,148 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=17mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\title{An exact cycle atlas for multiway perfect shuffles}
+\author{HCS Research Program}
+\date{30 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We treat a perfect multiway shuffle as a deterministic finite dynamical
+system.  For integers $k\ge2$ and $n\ge1$, the $kn$ card positions are the
+nonzero residues modulo $M=kn+1$ and one tick is
+$\rho_{k,n}(i)=ki\pmod M$.  A fixed-point congruence gives
+$\operatorname{Fix}(\rho^r)=\gcd(k^r-1,M)-1$; gcd strata give each position's
+least period, and Möbius inversion separates primitive cycles from repeats.
+We prove the resulting formulas for the whole parameter family, verify them
+against literal packet interleaving on 50 parameter pairs, and factor the
+source-local finite zeta and Koopman characteristic polynomial.  The atlas is
+exact but deliberately makes no target arithmetic or Hilbert--Pólya claim.
+\end{abstract}
+
+\section{Frozen shuffle and packet convention}
+Fix $k\ge2$, $n\ge1$, put $M=kn+1$, and let
+$D_M=\{1,\ldots,M-1\}$.  We use the in-shuffle convention of
+Ellis--Fan--Shallit: $k$ equal piles are interleaved in reverse pile order.
+If a position is written $i=jn+r$ with $0\le j<k$ and $1\le r\le n$, its
+literal packet destination is
+\begin{equation}
+  \pi_{k,n}(i)=kr-j.                                             \tag{1}
+\end{equation}
+The elementary identity
+\[
+  ki=kjn+kr\equiv kr-j\pmod{kn+1}
+\]
+shows that (1) is the nonzero representative of $ki$ modulo $M$.
+Thus the packet operation and the residue map are the same map, while the
+two descriptions provide genuinely independent implementations.
+
+\section{All-period theorem}
+\begin{theorem}[Fixed points and local periods]\label{thm:atlas}
+For every $r\ge1$,
+\begin{equation}
+ F_r:=|\operatorname{Fix}(\rho_{k,n}^r)|=\gcd(k^r-1,M)-1.               \tag{2}
+\end{equation}
+Moreover $\gcd(\rho(i),M)=\gcd(i,M)$ and, with
+$q_i=M/\gcd(i,M)$, the least period of $i$ is
+\begin{equation}
+ \tau(i)=\operatorname{ord}_{q_i}(k).                                  \tag{3}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Because $M\equiv1\pmod k$, $k$ is a unit modulo $M$.  A residue is fixed by
+the $r$th iterate exactly when $(k^r-1)i\equiv0\pmod M$.  This congruence has
+$\gcd(k^r-1,M)$ solutions modulo $M$, one of which is the excluded zero,
+which proves (2).  Multiplication by a unit preserves gcd with $M$.  Dividing
+the congruence for a fixed position by $\gcd(i,M)$ leaves
+$k^r\equiv1\pmod{q_i}$; minimality gives (3).
+\end{proof}
+
+\begin{proposition}[Primitive cycles and source factors]\label{prop:zeta}
+Let $E_r$ be the number of positions of exact least period $r$ and $C_r$ the
+number of oriented cycles.  Then
+\begin{equation}
+ E_r=\sum_{d\mid r}\mu(r/d)F_d,\qquad C_r=E_r/r,                         \tag{4}
+\end{equation}
+and $C_r=0$ unless $r\mid\operatorname{ord}_M(k)$.  If $P$ is the permutation
+matrix, the finite source factors are
+\begin{equation}
+ Z_{k,n}(z)=\prod_{r\ge1}(1-z^r)^{-C_r},\qquad
+ \det(\lambda I-P)=\prod_{r\ge1}(\lambda^r-1)^{C_r}.                  \tag{5}
+\end{equation}
+\end{proposition}
+\begin{proof}
+Every fixed point has one least period, so $F_r=\sum_{d\mid r}E_d$ and
+Möbius inversion gives (4).  Each cycle contributes exactly $r$ positions.
+The cycle decomposition of a permutation matrix is a direct sum of cyclic
+shift blocks, whose zeta and characteristic factors are the two factors in
+(5).
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Gcd strata and cross-parameter evidence}
+The all-parameter statement is not a finite extrapolation: (2)--(5) are
+integer congruence identities for every $k,n$.  The receipt nevertheless
+exhausts the grid $2\le k\le6$, $1\le n\le10$.  It records each global order,
+all fixed and exact-period counts through that order, direct cycle lengths,
+and seven additional all-position ledgers.  Composite moduli are retained;
+no coprimality assumption on $M$ beyond $\gcd(k,M)=1$ is inserted.
+
+For an explicit independence check, the checker computes (1) from pile and
+within-pile indices and compares it to modular multiplication at all 1,100
+positions in the 50-grid.  It then traverses each permutation from scratch.
+The selected spectral rows expand the polynomial denominator
+$Z_{k,n}(z)^{-1}=\det(I-zP)$ and the Koopman characteristic polynomial in
+exact integer coefficients, making the finite factors auditable rather than
+typographical.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Receipt, controls, and Route-A boundary}
+The deterministic producer emits 50 atlas rows, 74 position rows, six
+spectral rows and one representative cycle.  The independent checker passes
+2,303 assertions; an independent SymPy program passes 50 identities; byte
+replay is exact; and 44 hostile mutations are rejected, including repaired
+payload hashes, row reordering, citation edits, unknown keys and route/scope
+tampering.  Two fresh LuaLaTeX builds per round use the fixed epoch
+\texttt{SOURCE\_DATE\_EPOCH=1788048000}.
+
+The strict evaluation tuple is
+\[
+(\mathtt{A0\_FAIL},\mathtt{A1\_PASS\_ANALYTIC},\mathtt{A2\_FAIL},
+ \mathtt{A3\_FAIL},\mathtt{A4\_NATURAL\_QUANTIZATION}),
+\]
+with \texttt{ROUTE\_A\_REJECTED}.  The exact finite zeta in (5) is a source-local
+permutation identity; it is not a target divisor, functional equation,
+Euler product, or zero-set match.  Deck size and modular order provide no
+intrinsic rational-prime labels or logarithmic clock.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{ellis}
+J. Ellis, H. Fan, and J. Shallit, ``The Cycles of the Multiway Perfect Shuffle
+Permutation,'' \emph{Discrete Mathematics \& Theoretical Computer Science}
+5 (2002). DOI:
+\href{https://doi.org/10.46298/dmtcs.308}{10.46298/dmtcs.308}.
+
+\bibitem{packard}
+R. W. Packard and E. S. Packard, ``The Order of a Perfect $k$-Shuffle,''
+\emph{The Fibonacci Quarterly} 32(2), 136--144 (1994). DOI:
+\href{https://doi.org/10.1080/00150517.1994.12429237}{10.1080/00150517.1994.12429237}.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \nolinkurl{NO_BAD_EULER_OR_ROOT_NUMBER}; the paper contains no
+target arithmetic, Euler-factor, target-zero, automorphy or Hilbert--Pólya
+claim.  \textbf{Data and code.} Exact formulas, direct cycle ledgers and
+independent audit programs accompany HCS-C239.  \textbf{AI-use disclosure.}
+Generative tools assisted drafting and code generation; all displayed claims
+are checked by the declared programs.  This is not external peer review.
+\end{document}

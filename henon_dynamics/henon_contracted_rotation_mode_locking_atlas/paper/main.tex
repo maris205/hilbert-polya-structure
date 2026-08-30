@@ -1,0 +1,187 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\title{Exact Itinerary Intervals and Mode Locking for a Contracted Rotation}
+\author{HCS Research Program}
+\date{30 August 2026\quad (revision \CRevisionRound)}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a finite, exact atlas for the discontinuous contracted rotation
+\(f_{\lambda,\delta}(x)=\{\lambda x+\delta\}\) on \([0,1)\).  A binary carry
+word determines an affine return map with slope \(\lambda^n\), hence one
+candidate fixed point.  For \(\lambda\in\{1/2,2/3,3/4\}\) we enumerate all
+747 primitive cyclic representatives through length 12 for each slope and
+intersect the half-open branch inequalities using rational arithmetic.  The
+receipt contains 2241 word rows, 138 nonempty components, exact endpoint
+equalities, and 295 independent direct-iteration probes.  Grouped carry
+rotation values expose mode-locking components, but we do not call their union
+maximal.  A source-local factor \(1-z^n\lambda^n\) is recorded only as
+itinerary bookkeeping.  There is no arithmetic clock or target determinant;
+the strict Route-A verdict is \texttt{ROUTE\_A\_REJECTED}.
+\end{abstract}
+
+\section{Map, branches, and the question}
+The fractional-part notation hides a genuine modelling choice at the jump.
+We freeze the half-open state space \(I=[0,1)\) and write
+\begin{equation}
+ x_{j+1}=\lambda x_j+\delta-k_j,\qquad
+ k_j\leq\lambda x_j+\delta<k_j+1,\qquad k_j\in\{0,1\}. \tag{1}
+\end{equation}
+Thus the lower carry equality belongs to a branch and the upper equality does
+not.  The research question is whether this convention permits an exact
+finite mode-locking certificate rather than a floating-point picture.  The
+answer below is affirmative at an explicit cutoff, with all global claims
+carefully withheld.
+
+\section{Affine words and exact admissibility}
+\begin{theorem}[Word return formula]
+For \(w=(k_0,\ldots,k_{n-1})\),
+\begin{equation}
+ f_w(x)=\lambda^n x+\delta\sum_{r=0}^{n-1}\lambda^r
+ -\sum_{j=0}^{n-1}k_j\lambda^{n-1-j}. \tag{2}
+\end{equation}
+Consequently the word has one candidate fixed point
+\begin{equation}
+ x_w(\delta)=\frac{\delta}{1-\lambda}
+ -\frac{K_w}{1-\lambda^n},\qquad
+ K_w=\sum_{j=0}^{n-1}k_j\lambda^{n-1-j}, \tag{3}
+\end{equation}
+and derivative \((f_w)'=\lambda^n\).
+\end{theorem}
+\begin{proof}
+Substitution of (1) gives (2).  Since \(0<\lambda^n<1\), solving
+\(f_w(x)=x\) gives (3), and differentiating (2) gives the derivative.
+\end{proof}
+
+Write \(x_j(\delta)=a_j\delta+b_j\), beginning with (3), and update
+\((a_{j+1},b_{j+1})=(\lambda a_j+1,\lambda b_j-k_j)\).  The next result is
+the computational core.
+\begin{proposition}[Interval equivalence]
+The parameter set for which \(w\) is an admissible cycle is exactly
+\begin{equation}
+ \mathcal D_w=\left\{\delta\in[0,1):
+ 0\leq a_j\delta+b_j<1,\quad
+ k_j\leq\lambda(a_j\delta+b_j)+\delta<k_j+1\ \forall j\right\}. \tag{4}
+\end{equation}
+For rational \(\lambda\), this is an exactly computable rational interval,
+possibly empty, with independently recorded endpoint closure.
+\end{proposition}
+\begin{proof}
+The inequalities are necessary by the state domain and (1).  If they hold,
+each selected carry is exactly \(k_j\), so (2) returns the candidate to itself.
+Every inequality is an affine half-line in \(\delta\), and finite intersection
+preserves exact rational endpoints and their open/closed status.
+\end{proof}
+
+\section{Primitive representatives and the finite atlas}
+A word is primitive when it is not a repetition of a shorter block.  We keep
+the lexicographically least cyclic rotation.  Its source-local rotation label
+is
+\begin{equation}
+ \rho(w)=\frac{1}{n}\sum_{j=0}^{n-1}k_j. \tag{5}
+\end{equation}
+The exact factor \(1-z^n\lambda^n\) is useful for checking repetition and
+derivative bookkeeping, but it is not a target determinant.
+
+The census uses all primitive canonical words of lengths 1 through 12.  There
+are 747 per slope and 2241 rows in total.  Only 138 rows have nonempty
+\(\mathcal D_w\); grouped rows retain each component interval and its word id.
+Table~\ref{tab:examples} gives representative rows (all omitted rows are in
+the machine-readable receipt).
+\begin{table}[t]
+\centering
+\caption{Exact word-certified components.  Every upper endpoint is open under
+the convention (1).  These intervals are not asserted maximal.}
+\label{tab:examples}
+\begin{tabular}{ccccc}
+\toprule
+\(\lambda\) & word & \(\mathcal D_w\) & \(\rho(w)\) & \(\lambda^n\)\\
+\midrule
+\(1/2\) & 0 & \([0,1/2)\) & 0 & 1/2\\
+\(1/2\) & 01 & \([2/3,5/6)\) & 1/2 & 1/4\\
+\(1/2\) & 001 & \([4/7,9/14)\) & 1/3 & 1/8\\
+\(2/3\) & 01 & \([3/5,11/15)\) & 1/2 & 4/9\\
+\(3/4\) & 01 & \([4/7,19/28)\) & 1/2 & 9/16\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The endpoint audit evaluates every active equality, including the parameter
+constraint \(\delta<1\).  For example, the lower endpoint \(2/3\) of the
+\(\lambda=1/2\), word 01 component satisfies the carry-1 lower equality and is
+accepted; at \(5/6\), carry-0 reaches its upper equality and is rejected.
+This is why a decimal plot alone cannot certify the interval.
+
+\section{Independent iteration and literature boundary}
+For each slope we also probe eight base values \(\delta=i/8\) and every
+distinct endpoint.  A separate implementation runs 360 iterations at 90
+decimal digits, detects a repeated suffix of length at most 12, and compares
+its affine fixed point with the exact rational candidate.  The 295-row ledger
+is a control for the finite certificate, not a claim beyond the cutoff.
+
+Laurent and Nogueira study this contracted-rotation family and its rotation
+number, including algebraic-parameter phenomena~\cite{laurent2018}.  The
+interval piecewise-contraction results of Nogueira and Pires give a finite
+periodic-orbit bound under their stated hypotheses~\cite{nogueira2015}.  No
+global one-periodic-orbit theorem is claimed here: their general two-branch
+theorem gives only an at-most-two bound under its hypotheses.
+Bugeaud and Conze supply the contracting-mod-one and Farey/Hecke--Mahler
+context~\cite{bugeaud1999}.  Our contribution is the reproducible finite
+Fraction census and boundary ledger, not a priority claim.
+
+\ifnum\CRevisionRound>0
+\section{Audit receipt and route boundary}
+The independent checker validates all 2241 word rows and 295 direct rows,
+SymPy validates 119 generic or rational identities, byte replay matches two
+fresh producer runs, and 33 repaired-hash hostile mutations are rejected.
+The three revision PDFs are content-distinct; each is built twice with the
+fixed epoch \texttt{1788048000}, and the final PDF equals round 2 byte-for-byte.
+\fi
+
+\ifnum\CRevisionRound>1
+The source has no intrinsic rational-prime carrier, so A0 fails.  A1 is limited
+to the finite analytic word certificate.  A2 is an explicit target-match
+failure: no target determinant or zero comparison is defined.  No continuation
+or functional equation is supplied (A3\_FAIL), and the scalar contraction gives
+only a formal lift hint (A4\_FORMAL\_HINT).  Thus
+\[
+(\mathtt{A0\_FAIL},\mathtt{A1\_PASS\_ANALYTIC},\mathtt{A2\_FAIL},
+ \mathtt{A3\_FAIL},\mathtt{A4\_FORMAL\_HINT})
+\]
+and \texttt{ROUTE\_A\_REJECTED}; Route B is disabled.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{laurent2018} M. Laurent and A. Nogueira, ``Rotation number of
+contracted rotations,'' \emph{Journal of Modern Dynamics} 12 (2018),
+175--191, DOI: \href{https://doi.org/10.3934/jmd.2018007}{10.3934/jmd.2018007}.
+\bibitem{nogueira2015} A. Nogueira and B. Pires, ``Dynamics of piecewise
+contractions of the interval,'' \emph{Ergodic Theory and Dynamical Systems}
+35 (2015), 2198--2215, DOI:
+\href{https://doi.org/10.1017/etds.2014.16}{10.1017/etds.2014.16}.
+\bibitem{bugeaud1999} Y. Bugeaud and J.-P. Conze, ``Calcul de la dynamique
+d'une classe de transformations linéaires contractantes mod 1 et arbre de
+Farey,'' \emph{Acta Arithmetica} 88 (1999), 201--218, DOI:
+\href{https://doi.org/10.4064/aa-88-3-201-218}{10.4064/aa-88-3-201-218}.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; all determinant
+language is source-local itinerary bookkeeping.  No target arithmetic,
+target-zero, Euler-factor, root-data, automorphy, or Hilbert--Pólya claim is
+made.  \textbf{Data and code.} Exact rows, checker, replay, and mutation audit
+are included in the release.  This is not external peer review.
+\textbf{AI-use disclosure.} Generative tools assisted drafting and code
+generation; displayed formulas and metadata are checked by the deterministic
+artifact chain.
+\end{document}

@@ -2684,3 +2684,37 @@ in their evaluator YAML files and remain `ROUTE_A_REJECTED`, with
 `route_b_invocation_allowed: false`.  The common scope is
 `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic or operator bridge is
 claimed.
+
+## Route-A independent cross-subtype round C239--C243
+
+This round makes one large, complete theorem step in each paper while changing
+the dynamical owner in every slot: a multiway permutation, a discontinuous
+contracted rotation, a countable-branch interval map, an integrable Reeb flow,
+and a nonlinear Bose--Josephson dimer.  The five manuscripts are independent
+source-local results, not five installments of one theorem.  The initial
+pair-of-pants/Schottky idea for C243 was screened out because a substantive
+Schottky ledger already exists; the released dimer is the documented pivot.
+
+- [C239 multiway perfect-shuffle cycle atlas](henon_multiway_perfect_shuffle_cycle_atlas/README.md) · [paper PDF](henon_multiway_perfect_shuffle_cycle_atlas/paper/main.pdf)
+- [C240 contracted-rotation mode-locking atlas](henon_contracted_rotation_mode_locking_atlas/README.md) · [paper PDF](henon_contracted_rotation_mode_locking_atlas/paper/main.pdf)
+- [C241 classical Lüroth countable-branch periodic atlas](henon_luroth_countable_branch_periodic_atlas/README.md) · [paper PDF](henon_luroth_countable_branch_periodic_atlas/paper/main.pdf)
+- [C242 irrational ellipsoid Reeb orbit atlas](henon_irrational_ellipsoid_reeb_orbit_atlas/README.md) · [paper PDF](henon_irrational_ellipsoid_reeb_orbit_atlas/paper/main.pdf)
+- [C243 Bose--Josephson dimer phase portrait](henon_bose_josephson_dimer_phase_portrait/README.md) · [paper PDF](henon_bose_josephson_dimer_phase_portrait/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C239_C243.md), [batch plan](BATCH_PLAN_C239_C243.md),
+and [batch review](BATCH_REVIEW_C239_C243.md) for collision screening,
+theorem increments, evidence boundaries, release hashes and the complete
+reproducibility audit.  The round closes 30,925 independent-checker
+assertions, 1,826 symbolic identities plus three independent elliptic
+quadratures, 190 hostile rejections, 135 content-addressed payloads (140
+physical files), and 11 final-paper pages with 113 embedded/subset font
+entries.  The strict tuples are, in order C239--C243,
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`, and
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`.  All five are
+`ROUTE_A_REJECTED`, `route_b_invocation_allowed: false`, and use the common
+scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
+law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
+or Route-B input is claimed.

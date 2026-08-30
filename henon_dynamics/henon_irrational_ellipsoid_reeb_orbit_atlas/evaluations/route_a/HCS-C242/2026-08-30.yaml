@@ -1,0 +1,80 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C242
+candidate_definition: standard contact/Reeb flow on the four-dimensional ellipsoid E(a,b)
+family: integrable symplectic Reeb flow
+phase_space: boundary of E(a,b) in C^2 with contact form lambda_0
+dynamics: phi_t(z1,z2)=(exp(2*pi*i*t/a)z1, exp(2*pi*i*t/b)z2)
+parameters: a>0, b>0; irrational sqrt(2) and reciprocal sentinels plus rational p/q controls
+parameter_provenance: source-defined geometric sentinels; no target fitting
+arithmetic_origin: none
+clock: contact/Reeb time
+normalization: action equals period; coordinate complex-line trivialization used by Hutchings for CZ
+determinant_convention: no target determinant; no Fredholm determinant constructed
+orbit_cutoff: 48 irrational iterate rows (two orientations, two axes, k=1..12) and 6 rational coordinate rows
+precision: exact integer-square inequalities; 90-digit mpmath display checks; independent SymPy identities
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+code_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+artifact_paths:
+  evidence: results/c242_reeb_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-30
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: standard ellipsoid boundary with diagonal Reeb rotations
+  arithmetic_origin: none; source-local geometry
+  clock: contact/Reeb time
+  normalization: lambda_0 and the coordinate complex-line trivialization used by Hutchings
+  cutoff: sqrt(2), reciprocal, and rational 2/1, 3/2, 5/3 controls
+  precision: integer-square certificates plus high-precision display values
+  allowed_data: actions, periods, coordinate orbit closure, return multipliers, CZ floors, Morse-Bott resonance
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisor
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: intrinsic geometric closure and exact action/index formulas
+  strongest_failure: no intrinsic rational-prime carrier, prime-power clock, or arithmetic labels
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: exactly two simple coordinate orbits for irrational slope, complete iterate and multiplier ledger
+  strongest_failure: rational slope is Morse-Bott and requires a perturbation for nondegenerate indices
+  metrics: {irrational_rows: 48, rational_coordinate_rows: 6, simple_orbit_families: 2, iterate_cutoff: 12}
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source-local orbit data are exact and reproducible
+  strongest_failure: no target weighted zeta, Fredholm determinant, or zero/divisor match
+  metrics: {target_zero_match: null, determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: rational degeneration and irrational nonresonance are explicit
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+  artifacts: [THEOREM_PACKAGE.md, results/c242_reeb_evidence.json]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: contact action and CZ grading provide a natural geometric index
+  strongest_failure: no natural target quantization or Hilbert-Polya spectral bridge
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [sqrt(2), 1/sqrt(2), rational 2/1, rational 3/2, rational 5/3, exact square inequalities, repaired-hash mutations]
+  proves_too_much_risk: high if a rational Morse-Bott orbit is assigned an irrational CZ floor or if display decimals are treated as exact floors
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact source-local ellipsoid Reeb orbit classification and finite index ledger only; no arithmetic or target determinant claim
+blocking_conditions:
+  - no arithmetic origin
+  - no target determinant or analytic target match
+  - rational boundary is degenerate before perturbation
+next_smallest_test: a separately specified perturbation may study Morse-Bott splitting, but is a new candidate
+round2_clues: []
+route_b_invocation_allowed: false

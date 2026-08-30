@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C240
+candidate_definition: one-discontinuity contracted rotation f(x)={lambda*x+delta} with an exact binary carry itinerary atlas
+family: discontinuous piecewise-affine contraction / rotation-number dynamics
+phase_space: half-open interval [0,1), with circle identification used only for rotation-number language
+dynamics: x_{j+1}=lambda*x_j+delta-k_j, k_j in {0,1} selected by k_j<=lambda*x_j+delta<k_j+1
+parameters: lambda in {1/2,2/3,3/4}, delta in [0,1)
+parameter_provenance: source-defined rational sentinels and exact Fraction interval endpoints; no target fitting
+arithmetic_origin: none
+clock: discrete map iteration count; no arithmetic-prime clock
+normalization: slope lambda, carry rotation number sum(k_j)/n, and half-open branch convention
+determinant_convention: source-local finite itinerary factor only; no target determinant
+orbit_cutoff: all 747 primitive canonical binary words of lengths 1..12 for each of three lambda values, plus 295 direct probes
+precision: exact rational Fraction intervals and affine states; 90-digit working mpmath for direct replay; 64 serialized digits
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+code_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+artifact_paths:
+  evidence: results/c240_contracted_rotation_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-30
+fixed_epoch: 1788048000
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: one-discontinuity lambda-affine contraction modulo one
+  arithmetic_origin: none
+  clock: discrete iteration count
+  normalization: exact carry word, affine fixed point, derivative lambda^n, and rotation number
+  cutoff: primitive canonical words through length 12, exact endpoint audit, and direct iteration probes
+  precision: exact Fraction plus independent high-precision replay
+  allowed_data: branch carries, affine compositions, rational parameter intervals, rotation-number components, boundary equalities
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: parameters and carries are source-defined rationals with no intrinsic prime carrier
+  strongest_failure: no rational-prime clock, prime-power repetition law, or arithmetic origin
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED_AT_DECLARED_CUTOFF
+  strongest_evidence: every primitive canonical word through length 12 has an independently recomputed affine fixed point and exact half-open delta interval
+  strongest_failure: completeness is finite-cutoff and does not assert a global symbolic classification; no global one-periodic-orbit theorem is claimed, and the cited two-branch theorem gives only an at-most-two bound under its hypotheses
+  metrics: {primitive_words_per_lambda: 747, lambda_values: 3, total_word_rows: 2241, admissible_word_rows: 138, max_word_length: 12}
+  controls: [primitive-repetition filter, cyclic-canonical filter, independent affine checker, direct-iteration suffix replay]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  target_match: FAIL
+  strongest_evidence: source-local factors 1-z^n*lambda^n and exact rotation components are reproducible
+  strongest_failure: there is no target Fredholm/Euler determinant, target divisor, or zero-matching protocol
+  metrics: {source_local_factor_rows: 138, target_zero_match: null, target_determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact rational mode-locking intervals and cited rotation-number structure
+  strongest_failure: no target analytic continuation, functional equation, or arithmetic counting law
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: each smooth branch has a scalar contraction derivative lambda and a finite transfer-style factor
+  strongest_failure: no natural unitary lift or Hilbert-Polya operator is defined
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [three rational slopes, 2241 primitive word rows, exact lower/upper endpoint audits, 295 direct probes, repaired-hash mutations]
+  proves_too_much_risk: high if a boundary equality is treated as an interior branch, if a grouped component is called maximal, or if a source-local factor is called a target determinant
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact finite-cutoff contracted-rotation itinerary, affine, rotation and boundary results only; no arithmetic or target spectral claim
+blocking_conditions:
+  - no arithmetic origin
+  - finite cutoff only; no global symbolic completeness
+  - target_match: FAIL
+  - no natural unitary target lift
+next_smallest_test: none inside this frozen source-local theorem; a different discontinuous map is a new candidate
+round2_clues: []
+route_b_invocation_allowed: false

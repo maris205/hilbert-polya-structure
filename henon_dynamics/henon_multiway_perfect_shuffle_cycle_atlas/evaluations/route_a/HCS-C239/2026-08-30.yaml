@@ -1,0 +1,83 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C239
+title: Multiway perfect-shuffle cycle atlas
+evaluation_date: 2026-08-30
+source_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+code_commit: 489506cf92bfed721f94f22dd0444a60427f90a5
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_PASS_ANALYTIC, A2_FAIL, A3_FAIL, A4_NATURAL_QUANTIZATION]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+candidate_definition: "Ellis--Fan--Shallit (k,n)-perfect shuffle rho_{k,n}(i)=k*i mod(kn+1)"
+family: "finite positional permutation / multiway deck interleave"
+phase_space: "D_M={1,...,M-1}, M=kn+1"
+dynamics: "rho(i)=k*i mod M, equivalently literal reverse-pile interleaving"
+parameters: "integers k>=2 and n>=1"
+parameter_provenance: "source-defined deck parameters; no target fitting"
+arithmetic_origin: none
+clock: "one exact shuffle application; forward residue orientation"
+normalization: "one-based nonzero residue positions; M=kn+1 convention locked"
+determinant_convention: "source-local finite zeta Z=prod_r(1-z^r)^(-C_r) and Koopman det(lambda I-U)=prod_r(lambda^r-1)^(C_r)"
+orbit_cutoff: "all periods up to ord_M(k) for 50 grid pairs; direct position checks for 1,100 positions"
+precision: "exact integer arithmetic; independent packet and modular implementations"
+training_data: none
+forbidden_data: "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators"
+artifact_paths:
+  evidence: results/c239_shuffle_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+frozen_model:
+  definition: rho_{k,n}(i)=k*i mod M on D_M={1,...,M-1}
+  parameters: integers k>=2 and n>=1; M=kn+1
+  packet_realization: reverse-pile literal interleave, new position k*r-j for i=j*n+r
+  primitive_periodic_orbit: least period under rho modulo cyclic phase
+  forbidden_data: target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+claims:
+  exact_fixed_counts: Fix(r)=gcd(k^r-1,M)-1 for all r>=1
+  position_periods: ord_{M/gcd(i,M)}(k)
+  primitive_cycles: Mobius inversion and division by period
+  source_spectra: finite zeta and Koopman factorization from cycle counts
+  packet_independence: literal packet interleave equals modular map over all 50 pairs and 1,100 positions
+  arithmetic: none
+nonclaims:
+  - The all-parameter cycle formulas and finite spectral factors are source-local combinatorial identities, not a literature-priority claim.
+  - The modulus and shuffle clock are not rational-prime carriers and do not produce logarithmic arithmetic weights.
+  - Exact source zeta does not match a target divisor, zero set, Euler product, or functional equation; A2 is FAIL.
+  - No arithmetic local datum, automorphy statement, Hilbert-Polya operator, or Route-B input is claimed.
+evidence:
+  artifact: results/c239_shuffle_evidence.json
+  producer: code/c239_shuffle_producer.py
+  independent_checker: code/c239_shuffle_checker.py
+  sympy_crosscheck: code/c239_shuffle_sympy_crosscheck.py
+  replay: code/c239_shuffle_replay.py
+  mutation: code/c239_shuffle_mutation.py
+  atlas_rows: 50
+  position_rows: 74
+  packet_interleave_checks: 1100
+  integer_arithmetic: true
+citations:
+  - id: EllisFanShallit2002
+    title: "The Cycles of the Multiway Perfect Shuffle Permutation"
+    authors: "John Ellis, Hongbing Fan, Jeffrey Shallit"
+    venue: "Discrete Mathematics & Theoretical Computer Science 5"
+    year: 2002
+    doi: 10.46298/dmtcs.308
+    url: https://dmtcs.episciences.org/308
+    role: "primary definition and cycle-structure theorem"
+  - id: Packard1994
+    title: "The Order of a Perfect k-Shuffle"
+    authors: "Robert W. Packard and Erik S. Packard"
+    venue: "The Fibonacci Quarterly 32(2), 136--144"
+    year: 1994
+    doi: 10.1080/00150517.1994.12429237
+    url: https://doi.org/10.1080/00150517.1994.12429237
+    role: "order and cycle-length arithmetic"
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS
