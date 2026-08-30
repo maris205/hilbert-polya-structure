@@ -4,13 +4,15 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
-  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The three evidence gates froze
-  7 `FULLY_ADDRESSED` and 1 `PARTIALLY_ADDRESSED` verdict with zero
-  adjustments, but a dispatch-layer JSON serialization error triggered the
-  no-retry rule, so no editorial decision was emitted. See the
-  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). The completed
-  Stage-4 revision and the canonical manuscript/PDF remain unchanged.
+- Current stage: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MAJOR REVISION /
+  MANDATORY USER CHECKPOINT**. A fresh three-gate run froze 6
+  `FULLY_ADDRESSED` and 2 `PARTIALLY_ADDRESSED` verdicts with zero
+  adjustments. Both partial rows retain `must_fix` residuals, so the official
+  checker derives `Major Revision` under B4; apply-chain replay is `pass`.
+  See the [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
+  and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
+  Attempt 1 remains immutable audit evidence. Stage 4′ requires new explicit
+  authorization; the canonical manuscript/PDF/results remain unchanged.
 - Stage-4 conclusion: **8/8 items resolved; 10/10 registered ClaimIntent
   surfaces byte-exact once; direct suites pass 10/10, 12/12, and 14/14; the
   14-page marker-stripped preview is clean.** The loxodromic-only profile shows
@@ -437,7 +439,7 @@ claim was made.  The typed proxy evaluation was deliberately conservative and
 could not be transferred to the full Bianchi flow.  Round 9 supersedes only the
 old manuscript-status statement, not those scientific or Route limitations.
 
-## Round 9 paper and Stage 2.5 status
+## Historical Round 9 paper and Stage 2.5 status
 
 The Round-8 theorem/certificate chain has now been written as a 4,029-word,
 12-page paper. Stage 2.5 checked 7/7 references, 9/9 citation contexts, 6/6
@@ -450,20 +452,21 @@ excerpt or upgrade provenance. The **64/64 VERIFIED** semantic conclusion comes
 from the independent [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md),
 not from carrier anchoring or bounded mechanical coverage alone.
 
-The current controlling verdict is **PASS AT MANDATORY CHECKPOINT**.  The
+At that Stage-2.5 checkpoint, the controlling verdict was **PASS AT MANDATORY
+CHECKPOINT**.  The
 scholar-owned declaration is present with 7 provenance entries, and 11 direct
 experiment-backed claims have alignment records.  The Phase-E result remains
 64/64 VERIFIED with 66/66 structurally closed, explicitly `anchorless` tuples.
 Stage 3 has now completed all five Phase-1 and five Phase-2 cards, editorial
 synthesis, provenance replay, and the eight-item non-ranking roadmap. The
-mechanical decision is **Major Revision** and the workflow is stopped at the
-mandatory scholar decision checkpoint; Stage 4 is not authorized. The
+mechanical decision was **Major Revision** and the workflow stopped at the
+mandatory scholar decision checkpoint; Stage 4 was not yet authorized. The
 Route-A tuple and 2/3 canonical-control boundary are unchanged.
 See the controlling [integrity report](notes/stage2_5_integrity_report.md) and
 the historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md),
 plus the [Stage-3 completion report](notes/stage3_completion_report.md).
 
-## Stage 4 authority intake
+## Historical Stage 4 authority intake
 
 The nested ClaimIntent artifact has been deterministically extracted and 10
 non-overlapping exact surfaces are registered in the
@@ -473,5 +476,7 @@ Five registered surfaces intersect proposed revision blocks and must remain
 byte-identical absent a later exact claim authorization. The shorter nested
 `C-001` string is covered by the registered outer `C-002` bytes. The complete
 roadmap/base/manifest tuple replay passes. The eight proposed author decisions
-are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
-Stage 4 remains unauthorized and the manuscript/PDF remain frozen.
+are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md).
+At that historical intake checkpoint Stage 4 remained unauthorized; it was
+subsequently authorized and completed, and Stage 3′ Round 2 is now the
+controlling state shown at the top of this file.

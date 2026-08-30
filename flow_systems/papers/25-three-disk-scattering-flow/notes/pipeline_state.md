@@ -1,22 +1,24 @@
 # P25 pipeline state
 
-Date: **2026-08-29**
+Date: **2026-08-30**
 
-Current controlling state: Stage 3 review outputs are complete and the
-mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
-open and Stage 4 is not authorized. All five seats completed both phases, the
-panel synthesis and six-item non-ranking roadmap replay successfully, and the
-frozen manuscript/PDF remain unchanged. A future physical-flow promotion still
-requires a genuinely nonconstant-roof operator with explicit ownership and
-analytic control; symbolic A1/A2 credit cannot be copied to the physical-flow
-row.
+Current controlling state: Stage 3′ Round 2 is checker-valid
+`MINOR_REVISION` under B5 and the mandatory user checkpoint is open. Stage 4
+is complete; Stage 4.5 is not authorized. The fresh three-gate review froze
+2 fully addressed, 1 partially addressed and 3 cannot-verify rows, with zero
+adjustments and a passing apply chain. Canonical manuscript/PDF/results and
+Route records remain unchanged. Physical-flow promotion still requires a
+genuinely nonconstant-roof operator with explicit ownership and analytic
+control.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
 | ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
-| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated; Stage 4 unauthorized |
+| ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated |
+| ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 75/75 suite and clean preview complete |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / MINOR REVISION / USER CHECKPOINT** — 2 fully + 1 partially + 3 cannot verify; B5; checker PASS; Stage 4.5 unauthorized |
 | Continuous-time object | **FROZEN** — equilateral three-disk exterior billiard |
 | No-eclipse condition | **`[PROVED]`** for `d=6a` |
 | Clock / primitive / repetition | **FROZEN** — flight length / cyclic primitive word / traversal powers |

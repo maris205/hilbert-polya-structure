@@ -2,13 +2,15 @@
 
 ## Current status
 
-- ARS: **STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT — NEW-ROUND SCHOLAR
-  CHECKPOINT OPEN**. The evidence gates froze 3 `FULLY_ADDRESSED` and
-  1 `CANNOT_VERIFY` verdict with zero adjustments. A dispatch-layer JSON
-  serialization error triggered the no-retry rule, so no editorial decision
-  was emitted. See the
-  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). Stage 4 remains
-  complete; Stage 4.5 and later stages have not been invoked.
+- ARS: **STAGE 3′ ROUND 2 COMPLETE — MAJOR REVISION — MANDATORY USER
+  CHECKPOINT**. The fresh three-gate run froze 3 `FULLY_ADDRESSED` and
+  1 `CANNOT_VERIFY` verdict with zero adjustments. The fail-closed row is a
+  must-fix direct-test/replay criterion, so the official checker derives
+  `Major Revision` under B3 and apply-chain replay is `pass`. See the
+  [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
+  and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
+  Attempt 1 remains immutable. Stage 4 remains complete; Stage 4′ requires new
+  explicit authorization, and later stages have not been invoked.
 - Stage-4 conclusion: the revision corrects the replay order, records executed
   direct canonicalization regressions with their same-builder limitation, adds
   the non-ranking A0–A4 obligation legend, and adds the typed
@@ -310,7 +312,7 @@ a complete finite tile certificate.  No Bolza/control conclusion is drawn
 until the separate matched geometric census and owner/conjugacy deduplication
 are executed under that already frozen cutoff.
 
-## Round 9 paper and Stage 2.5 status
+## Historical Round 9 paper and Stage 2.5 status
 
 The exact nonarithmetic-control systole/completeness result now forms a
 5,127-word, 14-page paper. Stage 2.5 checked 6/6 references, 9/9 citation
@@ -366,6 +368,7 @@ without promotion; this is A0–A1 control-side infrastructure only, with no
 Gate advancement and no Route-B invocation. The
 [preliminary drift audit](notes/stage4_unregistered_claim_drift_audit.md) is
 not Stage-4.5 E6, and the [Route crosswalk](notes/stage4_route_crosswalk.md)
-does not authorize a later stage. Stage 3 prime and Stage 4.5 have not begun;
-`paper/manuscript.tex`, `paper/paper.pdf`, and canonical results remain
-untouched.
+does not authorize a later stage. At that Stage-4 closeout checkpoint Stage 3
+prime and Stage 4.5 had not begun; Stage 3′ Round 2 has since completed, and
+Stage 4′ remains unauthorized as reported above. `paper/manuscript.tex`,
+`paper/paper.pdf`, and canonical results remain untouched.

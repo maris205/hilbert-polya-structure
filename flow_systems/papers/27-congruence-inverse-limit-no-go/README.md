@@ -4,13 +4,16 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
-  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The evidence gates froze
-  5 `FULLY_ADDRESSED` and 1 `CANNOT_VERIFY` verdict with zero adjustments.
-  A dispatch-layer JSON serialization error triggered the no-retry rule, so no
-  editorial decision was emitted. See the
-  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). The completed
-  six-item Stage-4 revision, frozen canonical manuscript/PDF, and result tree
+- Current pipeline: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MAJOR REVISION /
+  MANDATORY USER CHECKPOINT**. The fresh three-gate run froze 5
+  `FULLY_ADDRESSED` and 1 `PARTIALLY_ADDRESSED` verdict with zero
+  adjustments. The `-I` fixture/shared-kernel row retains a `must_fix`
+  residual, so the official checker derives `Major Revision` under B4;
+  apply-chain replay is `pass`. See the
+  [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
+  and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
+  Attempt 1 remains immutable. Stage 4′ requires new explicit authorization;
+  the completed Stage-4 revision, canonical manuscript/PDF and result tree
   remain unchanged.
 - Stage-4 conclusion: **6/6 items resolved; 10/10 registered ClaimIntent
   surfaces byte-exact once; 8/8 tests pass (5 legacy + 3 direct); 13-page
@@ -386,7 +389,7 @@ is retained only as historical state and is superseded by the Round-9 paper and
 Stage-2.5 audit below.  Round 7 had strengthened the same-owner NO-GO from orbit
 absence to coefficientwise factor escape.
 
-## Round 9 paper and ARS pipeline status
+## Historical Round 9 paper and ARS pipeline status
 
 The original Stage-2.5 residual-owner no-go and homology-cover calibration
 formed a 4,099-word, 12-page paper. Stage 2.5 checked 5/5 references, 5/5
@@ -443,5 +446,6 @@ are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHOR
 and were explicitly authorized. Stage 4 is complete: `REV-01` is the
 authorized acknowledgment/no-op, the remaining five items are implemented by
 15 operations, and all 10 registered surfaces remain byte-exact once. The
-canonical manuscript/PDF and result tree remain frozen; Stage 3 prime and
-Stage 4.5 have not begun.
+canonical manuscript/PDF and result tree remain frozen. At that Stage-4
+closeout checkpoint Stage 3 prime and Stage 4.5 had not begun; Stage 3′ Round 2
+has since completed, and Stage 4′ remains unauthorized as reported above.

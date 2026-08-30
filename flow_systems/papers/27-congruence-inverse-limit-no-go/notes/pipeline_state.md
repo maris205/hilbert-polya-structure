@@ -1,20 +1,22 @@
 # P27 pipeline state
 
-Date: **2026-08-29**
+Date: **2026-08-30**
 
-Current controlling state: Stage 3 review outputs are complete and the
-mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
-open and Stage 4 is not authorized. All five seats completed both phases. The
-synthesis, provenance, and six-item non-ranking roadmap replay successfully,
-and the frozen manuscript/PDF remain unchanged. Later Stage-2-era waiting text
-is historical and superseded.
+Current controlling state: Stage 3′ Round 2 is checker-valid
+`MAJOR_REVISION` under B4 and the mandatory user checkpoint is open. Stage 4
+is complete; Stage 4′ is not authorized. The fresh three-gate review froze
+5 fully addressed and 1 partially addressed row, with zero adjustments and a
+passing apply chain. Canonical manuscript/PDF/results and both rejected
+Route-A tuples remain unchanged.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 comparative theorem spine |
 | ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
-| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated; Stage 4 unauthorized |
+| ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated |
+| ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 8/8 suite and clean preview complete |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 5 fully + 1 partially; B4; checker PASS; Stage 4′ unauthorized |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |
@@ -83,7 +85,8 @@ Evidence labels follow `skills/route-a-evaluator.md`.
 `PROVED_A1_OBSTRUCTION` is a local theorem-progress tag; the formal verdict is
 `A1_FAIL`, and the overall same-owner route is rejected.
 
-Round 9 converts the frozen comparative spine into the full paper
+Historical Round-9 transition record: Round 9 converted the frozen comparative
+spine into the full paper
 `paper/manuscript.tex`, bibliography, compiled `paper/paper.pdf`, and
 `paper/stage2_manuscript_audit.md`. It preserves the distinction between the
 aperiodic residual inverse-limit owner and the separately registered
@@ -91,6 +94,7 @@ nonresidual homology-cover calibrator. Neither the exact four-quadrant identity
 nor its 96-row replay is promoted to Route-A A2. Stage 2.5 subsequently passed
 its mandatory checkpoint. Stage 3 then completed five role-separated
 two-phase reviews, mechanical editorial synthesis, provenance replay, and a
-six-item non-ranking roadmap. The decision is `MAJOR_REVISION`; the author
-decision checkpoint is open, Stage 4 remains unauthorized, and neither
-candidate receives Route advancement.
+six-item non-ranking roadmap. The decision was `MAJOR_REVISION`; at that point
+the author decision checkpoint was open and Stage 4 remained unauthorized.
+Stage 4 and Stage 3′ Round 2 have since completed as recorded in the
+current-state table above; neither candidate receives Route advancement.

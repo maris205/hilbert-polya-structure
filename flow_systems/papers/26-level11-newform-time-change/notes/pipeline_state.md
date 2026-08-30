@@ -1,20 +1,22 @@
 # P26 pipeline state
 
-Date: **2026-08-29**
+Date: **2026-08-30**
 
-Current controlling state: Stage 3 review outputs are complete and the
-mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
-open and Stage 4 is not authorized. All five seats completed both phases. D3
-contains one repairable `block`, while the synthesis, provenance, and nine-item
-non-ranking roadmap replay successfully. The frozen manuscript/PDF remain
-unchanged. Later Stage-2-era waiting text is historical and superseded.
+Current controlling state: Stage 3′ Round 2 is checker-valid
+`MAJOR_REVISION` under B4 and the mandatory user checkpoint is open. Stage 4
+is complete; Stage 4′ is not authorized. The fresh three-gate review froze
+7 fully addressed, 1 partially addressed and 1 cannot-verify row, with zero
+adjustments and a passing apply chain. Canonical manuscript/PDF/results and
+the Route-A tuple remain unchanged.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / INHERITED** — frozen Round 2–8 theorem spine |
 | ARS Stage 2 | **DRAFT COMPLETE** — manuscript, bibliography, PDF, and Stage-2 audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
-| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and nine-item non-ranking roadmap validated; Stage 4 unauthorized |
+| ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and nine-item non-ranking roadmap validated |
+| ARS Stage 4 | **COMPLETE** — authorized nine-item revision, 84/84 suite, evidence bundle and clean preview complete |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 7 fully + 1 partially + 1 cannot verify; B4; checker PASS; Stage 4′ unauthorized |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |
@@ -92,12 +94,15 @@ create prime ownership, a global conjugacy census, or a global determinant.
 The formal evaluation remains exploratory, A2 is `FAIL/NOT_TESTABLE`, and
 Route B remains disallowed.
 
-Round 9 converts the frozen theorem spine into the full paper
+Historical Round-9 transition record: Round 9 converted the frozen theorem
+spine into the full paper
 `paper/manuscript.tex`, bibliography, compiled `paper/paper.pdf`, and
 `paper/stage2_manuscript_audit.md`.  The paper preserves the finite-multiset
 quantifier, exact 2/2/134 kernel split, 51/55 primary failures, and every
 Route-A/Route-B firewall. Stage 2.5 subsequently passed its mandatory
 checkpoint. Stage 3 then completed five role-separated two-phase reviews,
 mechanical editorial synthesis, provenance replay, and a nine-item non-ranking
-roadmap. The decision is `MAJOR_REVISION`; the author decision checkpoint is
-open, Stage 4 remains unauthorized, and no Route credit changes.
+roadmap. The decision was `MAJOR_REVISION`; at that point the author decision
+checkpoint was open and Stage 4 remained unauthorized. Stage 4 and Stage 3′
+Round 2 have since completed as recorded in the current-state table above; no
+Route credit changes.

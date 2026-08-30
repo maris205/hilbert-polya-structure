@@ -1,21 +1,23 @@
 # P24 pipeline state
 
-Date: **2026-08-29**
+Date: **2026-08-30**
 
-Current controlling state: Stage 3 review outputs are complete and the
-mechanical decision is `MAJOR_REVISION`; the scholar decision checkpoint is
-open and Stage 4 is not authorized. All five seats completed both phases, the
-panel synthesis and immutable non-ranking roadmap replay successfully, and the
-frozen manuscript/PDF remain unchanged. The existing mathematical gate also
-remains unchanged: a third canonical control type and a source-derived
-ideal-valued refinement are required before positive Route-A promotion.
+Current controlling state: Stage 3′ Round 2 is checker-valid
+`MAJOR_REVISION` under B4 and the mandatory user checkpoint is open. Stage 4
+is complete; Stage 4′ is not authorized. The fresh three-gate review froze
+6 fully addressed and 2 partially addressed rows, with zero adjustments and a
+passing apply chain. Canonical manuscript/PDF/results and the Route-A tuple
+remain unchanged. A third canonical control type and a source-derived
+ideal-valued refinement are still required before positive Route-A promotion.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE** — frozen research spine and Round-2 through Round-8 evidence incorporated |
 | ARS Stage 2 | **DRAFT COMPLETE** — 12-page manuscript, bibliography, PDF, and audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
-| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MAJOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and eight-item non-ranking roadmap validated; Stage 4 unauthorized |
+| ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and eight-item non-ranking roadmap validated |
+| ARS Stage 4 | **COMPLETE** — authorized eight-item revision, evidence bundle, direct regression and clean preview complete |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 6 fully + 2 partially; B4; checker PASS; Stage 4′ unauthorized |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |

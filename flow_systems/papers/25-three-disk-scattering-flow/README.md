@@ -4,14 +4,17 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
-  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The evidence gates froze
-  2 `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 3
-  `CANNOT_VERIFY` verdicts with zero adjustments. A dispatch-layer JSON
-  serialization error then triggered the no-retry rule, so no editorial
-  decision was emitted. See the
-  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). Stage 4 and the
-  frozen canonical manuscript/PDF remain unchanged.
+- Current stage: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MINOR REVISION /
+  MANDATORY USER CHECKPOINT**. The fresh three-gate run froze 2
+  `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 3
+  `CANNOT_VERIFY` verdicts with zero adjustments. Both must-fix rows are
+  fully addressed; the should-fix addressed rate is 1/4, so the official
+  checker derives `Minor Revision` under B5 and apply-chain replay is
+  `pass`. See the
+  [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
+  and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
+  Attempt 1 remains immutable. Stage 4.5 requires explicit confirmation; the
+  canonical manuscript/PDF/results remain unchanged.
 - Stage-4 conclusion: **6/6 items resolved; 6/6 registered ClaimIntent surfaces
   byte-exact once; 75/75 tests pass; 13-page marker-stripped preview clean.**
   The revision adds a bounded closest-work comparison, a four-object typing
@@ -271,7 +274,7 @@ formal A1/A2 tuple belonged only to the explicitly typed unit-roof symbolic
 suspension. Round 9 supersedes only the old manuscript-status statement, not
 those scientific or Route limitations.
 
-## Round 9 paper and Stage 2.5 status
+## Historical Round 9 paper and Stage 2.5 status
 
 The physical-roof nontransfer theorem and symbolic-control analysis now form a
 4,055-word, 12-page paper. Stage 2.5 checked 8/8 references, 10/10 contexts,
@@ -284,21 +287,22 @@ excerpt or upgrade provenance. The **48/48 VERIFIED** semantic conclusion comes
 from the independent [Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md),
 not from carrier anchoring or bounded mechanical coverage alone.
 
-The current controlling verdict is **PASS AT MANDATORY CHECKPOINT**.  The
+At that Stage-2.5 checkpoint, the controlling verdict was **PASS AT MANDATORY
+CHECKPOINT**.  The
 authorized `BowenLanford1970` suffix repair has been revalidated, giving 8/8
 VERIFIED references.  The scholar-owned declaration is present with 7
 provenance entries and 6 alignment records.  The Phase-E result remains 48/48
 VERIFIED with 49/49 structurally closed, explicitly `anchorless` tuples.
 Stage 3 has now completed all five Phase-1 and five Phase-2 cards, editorial
 synthesis, provenance replay, and the six-item non-ranking roadmap. The
-mechanical decision is **Major Revision** and the workflow is stopped at the
-mandatory scholar decision checkpoint; Stage 4 is not authorized and the
+mechanical decision was **Major Revision** and the workflow stopped at the
+mandatory scholar decision checkpoint; Stage 4 was not yet authorized and the
 physical-flow Route-A tuple remains unassigned. See the controlling
 [integrity report](notes/stage2_5_integrity_report.md), the historical-plus-current
 [independent integrity audit](notes/stage2_5_independent_audit.md), and the
 [Stage-3 completion report](notes/stage3_completion_report.md).
 
-## Stage 4 authority intake
+## Historical Stage 4 authority intake
 
 All six ClaimIntent claims now have non-overlapping exact surfaces in the
 [Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
@@ -307,5 +311,7 @@ Three registered surfaces intersect proposed revision blocks and must remain
 byte-identical absent a later exact claim authorization. The complete
 roadmap/base/manifest tuple replay passes. The six proposed author decisions,
 including the validation-only replay interpretation and unified provenance
-lock, are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
-Stage 4 remains unauthorized and the manuscript/PDF remain frozen.
+lock, are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md).
+At that historical intake checkpoint Stage 4 remained unauthorized; it was
+subsequently authorized and completed, and Stage 3′ Round 2 is now the
+controlling state shown at the top of this file.

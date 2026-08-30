@@ -1,20 +1,22 @@
 # P28 pipeline state
 
-Date: **2026-08-29**
+Date: **2026-08-30**
 
-Current controlling state: Stage 3 review outputs are complete and the
-mechanical decision is `MINOR_REVISION`; the scholar decision checkpoint is
-open and Stage 4 is not authorized. All five seats completed both phases. The
-synthesis, provenance, and four-item non-ranking roadmap replay successfully,
-and the frozen manuscript/PDF remain unchanged. Later Stage-2-era waiting text
-is historical and superseded.
+Current controlling state: Stage 3′ Round 2 is checker-valid
+`MAJOR_REVISION` under B3 and the mandatory user checkpoint is open. Stage 4
+is complete; Stage 4′ is not authorized. The fresh three-gate review froze
+3 fully addressed and 1 cannot-verify row, with zero adjustments and a passing
+apply chain. Canonical manuscript/PDF/results and Route records remain
+unchanged.
 
 | Item | Status |
 |---|---|
 | ARS Stage 1 | **COMPLETE / RESEARCH SPINE FROZEN** |
 | ARS Stage 2 | **DRAFT COMPLETE** — full manuscript, bibliography, compiled PDF and manuscript audit delivered |
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — 0 serious blockers; one non-blocking replay-order minor retained |
-| ARS Stage 3 | **REVIEW OUTPUTS COMPLETE / MINOR REVISION / AWAITING SCHOLAR DECISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and four-item non-ranking roadmap validated; Stage 4 unauthorized |
+| ARS Stage 3 | **COMPLETE / HISTORICAL MINOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and four-item non-ranking roadmap validated |
+| ARS Stage 4 | **COMPLETE** — authorized four-item revision, evidence bundle, direct tests and clean preview complete |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 3 fully + 1 cannot verify; B3; checker PASS; Stage 4′ unauthorized |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |
@@ -78,10 +80,11 @@ is historical and superseded.
 | Route-B invocation allowed | `false` |
 | Manuscript | **FROZEN STAGE-3 REVIEW TARGET** — 5,127 body words, 14 pages, 6/6 citation closure; no Phase-0 mutation |
 
-Workflow checkpoint: Stage 3 review outputs are complete. The author must now
-adjudicate every source row and authorize exact revision blocks before any
-Stage-4 edit. The mechanical decision is `MINOR_REVISION`; no manuscript,
-Route-A, or Route-B mutation is authorized by the review itself.
+Historical workflow checkpoint: Stage 3 review outputs were complete, and the
+author still had to adjudicate every source row and authorize exact revision
+blocks before any Stage-4 edit. The mechanical decision was `MINOR_REVISION`;
+the later Stage 4 and Stage 3′ Round 2 states are recorded in the current-state
+table above. No Route-A or Route-B mutation was authorized by the review itself.
 
 Next scientific gate: the contracted non-arithmetic control passes 6/6, its exact systole
 is proved, and the target-blind common cutoff `Lambda=21/10` is frozen.  Build

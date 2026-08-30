@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 3′ attempt 1 已按 no-retry 规则中止；等待新轮次确认** | 三门复审冻结 33 项证据裁决（24 `FULLY`、3 `PARTIALLY`、6 `CANNOT_VERIFY`），回信后 0 项调整；编排层最终 JSON 漏闭合括号，官方 checker 触发 `phase2b_lint_failed`，因此没有发布 Accept/Minor/Major 决定。五份合法 abort sidecar 均由 checker 接受且 apply chain 为 `pass`。Stage 4、canonical 正文/PDF/results 与 Route 状态不变。见 [Stage-3′ attempt-1 报告](BATCH_ROUND9_STAGE3_PRIME_ATTEMPT1_ABORT_REPORT.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 3′ Round 2 完成；强制用户检查点** | 新 round id/manifest 从 Phase 1 完整重跑，33 项最终为 23 `FULLY`、5 `PARTIALLY`、5 `CANNOT_VERIFY`，回信后 0 adjustment；官方 checker 5/5 PASS、apply chain 5/5 `pass`，机械决定为 4 Major Revision + 1 Minor Revision。P25 待明确确认后可进 Stage 4.5；P24/P26/P27/P28 待明确授权后方可进 Stage 4′。Attempt 1 保持不可变，canonical 正文/PDF/results 与 Route 状态不变。见 [Stage-3′ Round-2 报告](BATCH_ROUND9_STAGE3_PRIME_ROUND2_REPORT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -37,28 +37,29 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 24--28 最新结论
 
-### 当前 Stage 3′ attempt-1 结论
+### 当前 Stage 3′ Round-2 结论
 
-Papers 24--28 已执行 Stage 3′ 的三门 evidence-before-persuasion 复审。Phase 1
-为 32 个 `must_fix/should_fix` 项冻结判据，Paper 27 的 1 个 `consider` 项按
-合同不预承诺；Phase 2A/2B 对全部 33 项冻结 **24 `FULLY_ADDRESSED`、3
-`PARTIALLY_ADDRESSED`、6 `CANNOT_VERIFY`**，无 new issue、dissent、
-escalation 或回信后 adjustment。这里的 `CANNOT_VERIFY` 主要表示路线图要求的
-独立测试/环境/依赖收据没有进入本轮 hash-bound 输入，并不表示相关 Stage-4
+Papers 24--28 已用新的 round id 与 manifest 从 Phase 1 完整重跑三门
+evidence-before-persuasion 复审。Phase 1 为 32 个 `must_fix/should_fix` 项冻结
+判据，Paper 27 的 1 个 `consider` 项按合同不预承诺；Phase 2A/2B 对全部 33 项
+冻结 **23 `FULLY_ADDRESSED`、5 `PARTIALLY_ADDRESSED`、5
+`CANNOT_VERIFY`**，无 `NOT_ADDRESSED`、`MADE_WORSE`、new issue、dissent、
+escalation 或回信后 adjustment。这里的 `CANNOT_VERIFY` 表示路线图要求的测试、
+环境、依赖或 replay 收据不在本轮 hash-bound 输入内，并不表示另存的 Stage-4
 测试失败。
 
-本轮没有合法编辑决定。编排层在把 checker-only 作者侧车机械注入最终
-traceability JSON 时漏写最外层闭合括号，官方 checker 对五篇均返回
-`phase2b_lint_failed`。依据 ARS no-retry 规则，没有事后修补成
-Accept/Minor/Major；五篇均改为保留同一冻结证据的合法
-`decision_state=aborted` 记录，复验 5/5 通过、apply chain 5/5 为 `pass`。
-完整逐篇证据缺口、JCS 哈希与边界见
-[Stage-3′ attempt-1 批次报告](BATCH_ROUND9_STAGE3_PRIME_ATTEMPT1_ABORT_REPORT.md)。
+五份 current-contract traceability sidecar 均通过官方 checker，apply chain 5/5
+为 `pass`。机械决定为：P24/P26/P27/P28 **Major Revision**，P25 **Minor
+Revision**。P24、P26、P27 的部分修复仍带 `must_fix` residual，触发 B4；P28 的
+must-fix `CANNOT_VERIFY` 触发 B3；P25 两个 must-fix 已完全解决，但 should-fix
+addressed rate 为 1/4，触发 B5。完整逐篇矩阵、残余缺口、JCS 哈希与 checker
+收据见 [Stage-3′ Round-2 批次报告](BATCH_ROUND9_STAGE3_PRIME_ROUND2_REPORT.md)。
 
-当前合法检查点是：若继续，需由作者明确授权 **新的 Stage-3′ round id 与新
-manifest，从 Phase 1 全部重跑**。Attempt 1 的判据、verdict、integration 与 abort
-sidecar 保持不可变。Stage 4.5、Stage 4′、Stage 5、canonical promotion 与下一批
-科学实验均未启动。
+当前停在 Stage 3′ **强制用户检查点**：P25 只有在明确确认后才可进入 Stage
+4.5；P24/P26/P27/P28 只有在新的定点修复授权后才可进入 Stage 4′。Attempt 1 的
+判据、verdict、integration 与合法 abort sidecar 仍保持不可变，历史见
+[Attempt-1 中止报告](BATCH_ROUND9_STAGE3_PRIME_ATTEMPT1_ABORT_REPORT.md)。Stage
+5、canonical promotion、投稿与下一批科学实验均未启动。
 
 ### 稳定的 Stage-4 落地基线
 
@@ -90,10 +91,10 @@ nonarithmetic genus-two geodesic control/magnetic precursor。仍按 12 个冻�
 物理参数实例加 7 个 `q`-symbol calibrators 记为 19 个 model instances，不把它们
 解释成 19 个统计独立样本。
 
-Stage 4 的稳定基线不因上述 Stage-3′ abort 改变。Stage-3′ attempt 1 已执行但
-没有产生编辑决定；当前等待的是**新 Stage-3′ round 的 scholar confirmation**。
-Stage 4.5、Stage 4′、Stage 5、canonical promotion、投稿和下一轮科学实验均尚未
-启动。Stage-4 的逐篇结果、哈希、测试边界与路线 crosswalk 仍见
+Stage 4 的稳定基线不因 Stage-3′ Round 2 的复审决定改变。当前等待的是对
+**P25 Stage 4.5** 或 **P24/P26/P27/P28 Stage 4′** 的明确用户授权；Stage 5、
+canonical promotion、投稿和下一轮科学实验均尚未启动。Stage-4 的逐篇结果、
+哈希、测试边界与路线 crosswalk 仍见
 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。
 
 ### Stage 3 与 Stage-4 intake 历史记录（已由上述完成状态取代）

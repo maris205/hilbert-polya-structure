@@ -4,14 +4,18 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
-  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The evidence gates froze
-  7 `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 1
-  `CANNOT_VERIFY` verdict with zero adjustments; one response-staleness note
-  is decision-inert. A dispatch-layer JSON serialization error triggered the
-  no-retry rule, so no editorial decision was emitted. See the
-  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). The authorized
-  Stage-4 draft and canonical manuscript/PDF remain unchanged.
+- Current pipeline: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MAJOR REVISION /
+  MANDATORY USER CHECKPOINT**. The fresh three-gate run froze 7
+  `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 1
+  `CANNOT_VERIFY` verdict with zero adjustments and no post-letter
+  observations. The partial modern-nearest-work row retains a `must_fix`
+  residual, so the official checker derives `Major Revision` under B4;
+  apply-chain replay is `pass`. See the
+  [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
+  and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
+  Attempt 1 remains immutable. Stage 4′ requires new explicit authorization;
+  the authorized Stage-4 draft and canonical manuscript/PDF/results remain
+  unchanged.
 - Stage-4 conclusion: all 9/9 roadmap items are accounted for by 25 operations:
   8 are `RESOLVED`, while `REV-02` is a `DELIBERATE_LIMITATION` because no
   bibliography target was authorized. Its source-verified comparison uses only
@@ -305,7 +309,7 @@ The finite positive-word ledger is not a complete certificate of
 factorization, dynamical-zeta A2 result, automorphic-`L` determinant identity,
 prime/zero target match, Route-A promotion, or Route-B entry is claimed.
 
-## Round 9 paper and Stage 2.5 status
+## Historical Round 9 paper and Stage 2.5 status
 
 The Stage-2.5 intake manuscript was a 4,210-word, 12-page paper. Stage 2.5
 checked 5/5 references, 5/5 contexts, all 14 registered data-surface families,
@@ -337,8 +341,10 @@ provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 therefore
 passed its mandatory checkpoint. Stage 3 then completed all five Phase-1 and
 five Phase-2 cards, editorial synthesis, provenance replay, and the nine-item
 non-ranking roadmap, with a mechanical **Major Revision** decision. The
-authorized Stage-4 implementation is now complete and stopped at the scholar
-checkpoint before Stage 3 prime. No Route-A promotion or Route-B entry occurs.
+authorized Stage-4 implementation then completed and stopped at the scholar
+checkpoint before Stage 3 prime. That stop is historical: Stage 3′ Round 2 is
+now complete at the mandatory checkpoint reported at the top of this file. No
+Route-A promotion or Route-B entry occurs.
 See the [integrity report](notes/stage2_5_integrity_report.md), [independent
 audit](notes/stage2_5_independent_audit.md), [Stage-3 completion
 report](notes/stage3_completion_report.md), and [Stage-4 completion
@@ -364,5 +370,6 @@ artifacts remain frozen.
 
 The [preliminary drift audit](notes/stage4_unregistered_claim_drift_audit.md)
 is a Stage-4 closeout check, not the mandatory Stage-4.5 E6 integrity
-invocation. The workflow is stopped at the scholar checkpoint before Stage 3
-prime; no next stage has been entered.
+invocation. At Stage-4 closeout the workflow stopped before Stage 3 prime;
+Stage 3′ Round 2 has since completed, and Stage 4′ remains unauthorized as
+reported in the current-status section above.
