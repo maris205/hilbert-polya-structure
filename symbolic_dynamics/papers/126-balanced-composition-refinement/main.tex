@@ -1,0 +1,368 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Comp}{\mathcal C}
+\newcommand{\NF}{\mathcal N}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\im}{\operatorname{im}}
+
+\title[Balanced refinement of compositions]{Synchronous Balanced Refinement of Compositions:\\
+Canonical Kernels and Every Iterated Fibre}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{05A17, 37B15, 68Q42, 94A45}
+\keywords{integer composition, finite dynamical system, synchronous
+refinement, normal form, suffix code, iterated fibre}
+
+\begin{document}
+
+\begin{abstract}
+We iterate the synchronous part rule
+$m\mapsto(\lfloor m/2\rfloor,\lceil m/2\rceil)$ for $m>1$ on integer
+compositions.  For every iterate $t$, with
+$K=2^t$, we identify the complete kernel congruence: replace each source
+part at most $K$ by that many ones and retain every larger part.  Two
+compositions have the same $t$-th image exactly when these canonical forms
+agree.  The proof exposes a suffix code and gives a right-to-left image
+decoder.  Consequently every nonempty $t$-step fibre is a product of
+$K$-step Fibonacci counts over the one-runs of its canonical source, and
+the largest fibre on weight $n$ is the $K$-restricted composition number.
+The same number counts states of depth at most $t$.  Finally, the entire
+$t$-th image is in bijection with compositions whose parts lie in
+$\{1\}\cup\{K+1,K+2,\ldots\}$, yielding an explicit rational generating
+function.  Restricted-composition enumeration, suffix-code theory, and
+balanced divide-and-conquer splitting are treated as background.  The owner
+search is bounded; no novelty, priority, or external-release claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{The map and the subtraction boundary}
+
+Let $\Comp_n$ be the set of integer compositions of $n$, with the empty
+composition included when $n=0$.  Define a substitution on positive
+integers by
+\begin{equation}
+ \sigma(1)=1,
+ \qquad
+ \sigma(m)=\bigl(\lfloor m/2\rfloor,\lceil m/2\rceil\bigr)
+ \quad(m>1),                                             \label{eq:map}
+\end{equation}
+and extend it by concatenation.  Our dynamical map is
+$\Phi(a_1\cdots a_r)=\sigma(a_1)\cdots\sigma(a_r)$.
+All parts are read from the old word, so the update is synchronous.  Weight
+is preserved and every changed part raises the word length; hence $1^n$ is
+the unique recurrent state and there are no nontrivial cycles.
+
+Simultaneous application of letter rules is a classical parallel-rewriting
+interface \cite{LindenmayerRozenberg1972}; its monoid-morphism formulation,
+including concatenation of letter images, receives zero contribution credit.
+Binary integer fragmentation and balanced splitting are likewise mature
+mechanisms \cite{Matsoukas2022}, and the divide-and-conquer clock is not
+claimed as value here.  Free-monoid codes, unique decoding, and morphism
+ambiguity are established subjects
+\cite{BerstelPerrin1985,Honkala1987,FreydenbergerReidenbach2009}; all generic
+suffix-code principles receive zero credit.  Enumeration of compositions
+with prescribed or bounded parts, including the surrounding analytic
+toolkit, is also established
+\cite{HeubachMansour2004,Malandro2012,BanderierHitczenko2012}.  In particular,
+the one-step image count below is the no-part-$2$ class studied by Chinn and
+Heubach \cite{ChinnHeubach2003}.  Its sequence, every bounded-part Fibonacci
+count, and every generating function obtained merely by choosing an allowed
+part set receive zero contribution credit.
+
+The residual question is dynamical and all-iterate: can one identify the
+kernel of $\Phi^t$, decode its image, and count every individual fibre?
+The exact rule was subjected to a bounded owner search across rewriting,
+fragmentation, substitution, and composition sources.  No direct theorem
+package was found; a bounded non-hit is not a novelty certificate.
+
+There is also a strict internal subtraction boundary.  P094 already uses
+morphisms, markers, and recognizability; P108 already combines Fibonacci
+terminology with clock and fibre geometry; P113 has an integer-sum carrier,
+absorption, sharp depth, and product-fibre transport; P115 treats every
+iterate, image, and fibre at a logarithmic threshold; P122 combines
+target-local fibre factorization with image/Garden enumeration; P123 uses a
+refinement engine; and P125 packages pointwise fibres, image layers, and
+functional components.  We claim none of those generic silhouettes.  The
+residual here is only their literal conjunction for the present
+infinite-alphabet balanced morphism: the all-iterate canonical kernel, the
+exact one-run fibre product, and the temporal image bijection.
+
+\section{Codewords and the exact clock}
+
+Put
+\[
+                    W_t(m)=\Phi^t((m)),\qquad K=2^t.
+\]
+These are words, not unordered fragmentation profiles.
+
+\begin{lemma}[balanced codewords]\label{lem:codewords}
+For $m\geq1$, $W_t(m)$ has length $\min(m,K)$, total weight $m$, and
+largest and final part $\lceil m/K\rceil$.  In particular,
+\begin{equation}
+                   W_t(m)=1^m\quad\Longleftrightarrow\quad m\leq K.
+                                                               \label{eq:ones}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+At each split the two children differ by at most one.  The rightmost path
+satisfies the explicit induction
+\[
+ \operatorname{last}W_{t+1}(m)
+ =\operatorname{last}W_t(\lceil m/2\rceil)
+ =\left\lceil\frac{\lceil m/2\rceil}{2^t}\right\rceil
+ =\left\lceil\frac{m}{2^{t+1}}\right\rceil .
+\]
+The same balanced-descendant induction makes this the largest part.  If
+$m\leq K$, every branch reaches one and weight preservation gives $m$
+leaves.  If $m>K=2^t$, then at every level $j<t$ the smallest descendant is
+at least $\lfloor m/2^j\rfloor\geq2$; thus there are no early leaves and all
+$K$ leaves are present.  This proves every assertion.
+\end{proof}
+
+For a nonempty composition $a$, let $M(a)=\max_i a_i$.
+
+\begin{proposition}[pointwise and global clocks]\label{prop:clock}
+\[
+ \depth(a)=\left\lceil\log_2 M(a)\right\rceil,
+ \qquad
+ \max_{a\in\Comp_n}\depth(a)=\left\lceil\log_2 n\right\rceil
+ \quad(n\geq1).                                         \label{eq:clock}
+\]
+The empty composition has depth zero, and $(n)$ attains the global bound.
+\end{proposition}
+
+\begin{proof}
+By \cref{lem:codewords}, after $t$ rounds every descendant is one exactly
+when every source part is at most $2^t$.  Taking the first such $t$ gives
+the pointwise formula.  Since $M(a)\leq n$, the global statement and its
+witness follow.
+\end{proof}
+
+Let $R_K(r)$ count compositions of $r$ with all parts at most $K$, with
+$R_K(0)=1$.  Thus
+\begin{equation}
+ R_K(r)=\sum_{j=1}^{\min(K,r)}R_K(r-j),
+ \qquad
+ \sum_{r\geq0}R_K(r)x^r=\frac1{1-x-x^2-\cdots-x^K}.       \label{eq:RK}
+\end{equation}
+The recurrence is the usual $K$-step Fibonacci convention.  In particular,
+$R_1(r)=1$ for every $r\geq0$.
+
+\begin{corollary}[all depth layers]\label{cor:depth}
+The number of states in $\Comp_n$ of depth at most $t$ is $R_{2^t}(n)$.
+For $t\geq1$, the exact depth-$t$ layer has size
+$R_{2^t}(n)-R_{2^{t-1}}(n)$.
+\end{corollary}
+
+\begin{proof}
+Equation \eqref{eq:clock} says precisely that every part is at most $2^t$.
+The enumeration in \eqref{eq:RK} is classical; only its identification with
+the temporal layer is used here.
+\end{proof}
+
+\section{A canonical form for the complete iterated kernel}
+
+For $K=2^t$, define a weight-preserving monoid map
+\begin{equation}
+ \NF_K(m)=
+ \begin{cases}
+  1^m,&m\leq K,\\
+  m,&m>K,
+ \end{cases}
+ \qquad
+ \NF_K(a_1\cdots a_r)=\NF_K(a_1)\cdots\NF_K(a_r).        \label{eq:normal}
+\end{equation}
+Its values are precisely the compositions over the canonical alphabet
+$\{1\}\cup\{K+1,K+2,\ldots\}$.
+
+\begin{theorem}[canonical kernel and suffix decoder]\label{thm:kernel}
+For all compositions $a,b$ of the same weight,
+\begin{equation}
+                 \Phi^t(a)=\Phi^t(b)
+                 \quad\Longleftrightarrow\quad
+                 \NF_K(a)=\NF_K(b).                     \label{eq:kernel}
+\end{equation}
+Moreover, $\Phi^t$ is injective on canonical forms.  Its image code is
+\begin{equation}
+        \{1\}\ \cup\ \{W_t(m):m>K\},                    \label{eq:code}
+\end{equation}
+which is a suffix code.  Hence membership in $\im\Phi^t$ and the unique
+canonical source are decided by a right-to-left decoder.
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:ones} gives
+$\Phi^t(a)=\Phi^t(\NF_K(a))$.  It remains to prove injectivity on canonical
+forms.  The codeword for the canonical letter $1$ is the one-letter word
+$1$.  Every $W_t(m)$ with $m>K$ has length $K$ and, by
+\cref{lem:codewords}, ends in $\lceil m/K\rceil>1$.  Distinct long
+codewords have distinct weights.  Thus no word in \eqref{eq:code} is a
+proper suffix of another.
+
+Explicitly, if a target ends in $1$, its final canonical letter must be
+$1$; delete that symbol.  Otherwise its final codeword must be the last
+$K$ symbols.  Their sum determines the sole possible source letter $m>K$,
+and the block is accepted exactly when it equals $W_t(m)$.  Delete the
+block and repeat.  This proves unique decoding and injectivity.  Applying it
+to $\Phi^t(\NF_K(a))=\Phi^t(\NF_K(b))$ proves the converse in
+\eqref{eq:kernel}.
+\end{proof}
+
+For example, take $t=2$, so $K=4$.  The source $(3,5,2)$ has canonical
+form
+\[
+             (1,1,1,5,1,1)
+\]
+and image $111\,1112\,11$.  Reading from the right deletes two terminal
+ones, recognizes the block $1112=W_2(5)$, and then deletes three ones,
+recovering the canonical form.
+
+\section{Every fibre and the clock--fibre duality}
+
+Write a canonical form uniquely as
+\begin{equation}
+ z=1^{r_0}m_1 1^{r_1}m_2\cdots m_s1^{r_s},
+ \qquad m_i>K,\quad r_i\geq0.                            \label{eq:runs}
+\end{equation}
+For the empty decoded word we use $s=0$ and $r_0=0$.
+
+\begin{theorem}[complete fibre product]\label{thm:fibres}
+A target $y$ has no $t$-step preimage exactly when the suffix decoder in
+\cref{thm:kernel} rejects it.  If the decoder returns the canonical form
+\eqref{eq:runs}, then
+\begin{equation}
+                    |(\Phi^t)^{-1}(y)|
+                    =\prod_{j=0}^{s}R_K(r_j).             \label{eq:fibre}
+\end{equation}
+For the empty word this is the one-factor product $R_K(0)=1$.
+Consequently,
+\begin{equation}
+             \max_{y\in\Comp_n}|(\Phi^t)^{-1}(y)|=R_K(n), \label{eq:maxfibre}
+\end{equation}
+attained by $y=1^n$.  Thus the maximum $t$-fibre equals the number of
+states of depth at most $t$.
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:kernel}, the fibre over $y$ is exactly the inverse image under
+$\NF_K$ of its decoded canonical form.  Every large letter $m_i$ must
+remain the same source part.  Independently, a run $1^{r_j}$ may be grouped
+into any composition of $r_j$ with parts at most $K$, giving
+\eqref{eq:fibre}.
+
+Concatenation injects a tuple of restricted compositions of weights
+$r_0,\ldots,r_s$ into a restricted composition of their total weight, so
+the product in \eqref{eq:fibre} is at most
+$R_K(\sum r_j)\leq R_K(n)$.  The final inequality follows by appending
+ones.  For $y=1^n$, the canonical form is $1^n$ and equality holds.
+The last claim now follows from \cref{cor:depth}.
+\end{proof}
+
+In the displayed $K=4$ example, the canonical one-runs have lengths three
+and two.  Hence the image $111111211$ has
+$R_4(3)R_4(2)=4\cdot2=8$ two-step preimages.  This is pointwise information:
+different targets of the same weight generally have different products.
+
+\section{The complete image tower}
+
+Let $I_{n,t}=|\im(\Phi^t:\Comp_n\to\Comp_n)|$.
+
+\begin{theorem}[all-iterate image census]\label{thm:image}
+For $K=2^t$, restriction of $\Phi^t$ is a weight-preserving bijection
+from canonical forms to its image.  Therefore
+\begin{equation}
+ \sum_{n\geq0} I_{n,t}x^n
+ =\frac{1}{1-\left(x+\dfrac{x^{K+1}}{1-x}\right)}
+ =\frac{1-x}{1-2x+x^2-x^{K+1}}.                          \label{eq:imageogf}
+\end{equation}
+Equivalently, $I_{0,t}=I_{1,t}=1$ and, for $n\geq2$,
+\begin{equation}
+ I_{n,t}=2I_{n-1,t}-I_{n-2,t}
+          +\mathbf1_{n\geq K+1}I_{n-K-1,t}.              \label{eq:imagerec}
+\end{equation}
+with the harmless coefficient convention $I_{j,t}=0$ for $j<0$.
+For $n\geq1$, the number of Garden states at time $t$ is
+$2^{n-1}-I_{n,t}$.
+\end{theorem}
+
+\begin{proof}
+Every source has the same image as its canonical form by
+\cref{thm:kernel}; distinct canonical forms have distinct images.  Hence
+the image is equinumerous with sequences of parts in
+$\{1\}\cup\{K+1,K+2,\ldots\}$.  The ordinary sequence construction gives
+\eqref{eq:imageogf}; coefficient extraction gives \eqref{eq:imagerec}.
+There are $2^{n-1}$ compositions of positive $n$, proving the last claim.
+\end{proof}
+
+At $t=0$ one has $K=1$, so \eqref{eq:imageogf} becomes
+$(1-x)/(1-2x)$: explicitly $I_{0,0}=1$ and
+$I_{n,0}=2^{n-1}$ for $n\geq1$, as required by the identity iterate.
+
+For $t=1$, the image numbers begin
+$1,1,1,2,4,7,12,21,37,65,\ldots$; the equinumerous canonical class is
+exactly the classical compositions without the part $2$
+\cite{ChinnHeubach2003}.  This enumerative class is zero-credit.  The result
+here is the all-$t$ dynamical bijection supplied by the canonical kernel
+and suffix decoder.  When $2^t\geq n$, only $1^n$ is canonical, so
+$I_{n,t}=1$, in agreement with the sharp clock.
+
+\section{Exact controls, limits, and conclusion}
+
+The paper-local verifier uses only exact integer arithmetic and the Python
+standard library.  It exhausts all compositions through weight $18$ for
+the clock, and all sources and targets through weight $15$ for every
+$0\leq t\leq5$.  It compares literal kernel classes, suffix decoding,
+the fibre product, an independent factorization DP, maximum fibres, and the
+image census.  Codewords are checked through $m=256,t=8$, and the rational
+image recurrence through weight $90,t=8$.  These are falsification
+controls; the quantified statements rest on the proofs above.
+
+The scope is deliberately finite and exact.  We do not claim a new general
+theory of substitutions, codes, restricted compositions, fragmentation,
+or balanced trees.  We do not treat asynchronous splits, other arities,
+random schedules, or asymptotic laws.  The exact-map owner search remains
+bounded, so novelty, priority, and external release remain on hold.
+
+Within that boundary, the normal form \eqref{eq:normal} gives more than a
+terminal clock: it determines the complete kernel of every iterate.  The
+suffix code turns that kernel into a pointwise image test, the one-runs give
+every fibre, and the canonical alphabet gives the full image tower.  The
+coincidence between the largest inverse fibre and the cumulative depth census
+is the resulting clock--fibre duality.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
