@@ -1,0 +1,146 @@
+{
+  "schema": "p24-stage4-loxodromic-profile-manifest/1.0",
+  "date": "2026-08-30",
+  "status": "AUTHOR_AUTHORIZED_DERIVATIVE_ANALYSIS",
+  "authorization": {
+    "request_path": "../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md",
+    "request_sha256": "174cf1b035c55f72cdc06f1df6eb5e39138cbc9982ed1fb97457189a964ecd63",
+    "author_event_path": "../../BATCH_ROUND9_STAGE4_AUTHOR_EVENT_20260830.txt",
+    "author_event_sha256": "5e5ad1b6ff2a62060368877016ad4b14f869f22a3e38f9a703672ea52ecd067f",
+    "roadmap_item": "REV-003",
+    "operation": "derive a loxodromic-only collision profile from already frozen exact rows",
+    "canonical_result_refresh_authorized": false
+  },
+  "selection_contract": {
+    "input_population": "all rows of results/round7_trace_discriminant_ledger.csv",
+    "predicate": "matrix_class == LOXODROMIC",
+    "selected_rows": 10976,
+    "excluded_rows": 505,
+    "excluded_class_counts": {
+      "IDENTITY": 1,
+      "PARABOLIC": 504
+    },
+    "required_partition_check": "every selected row has D9 != (0,0), and every excluded row has D9 == (0,0)",
+    "profile_derivation": "retain exactly the Round-8 D9/jet profile rows whose D9 key occurs in the selected frozen ledger rows",
+    "classification_source": "the frozen matrix_class column; no new geometric, conjugacy, or primitivity classifier is introduced"
+  },
+  "expected_exact_metrics": {
+    "loxodromic_rows": 10976,
+    "distinct_d9_values": 144,
+    "d9_collision_rows_beyond_first": 10832,
+    "distinct_joint_d9_jet_descriptors": 508,
+    "joint_descriptor_collision_rows_beyond_first": 10468,
+    "collision_rows_separated_by_first_jet": 364,
+    "collision_reduction_fraction": "364/10832",
+    "collision_reduction_decimal": "0.033604135893648",
+    "maximum_d9_bucket": 208,
+    "maximum_joint_descriptor_bucket": 84,
+    "singleton_d9_buckets": 0,
+    "singleton_joint_descriptor_buckets": 0,
+    "profile_rows": 144
+  },
+  "pooled_baseline": {
+    "matrix_rows": 11481,
+    "distinct_d9_values": 145,
+    "d9_collision_rows_beyond_first": 11336,
+    "distinct_joint_d9_jet_descriptors": 517,
+    "joint_descriptor_collision_rows_beyond_first": 10964,
+    "collision_rows_separated_by_first_jet": 372,
+    "maximum_d9_bucket": 505,
+    "maximum_joint_descriptor_bucket": 84,
+    "singleton_joint_descriptor_buckets": 0
+  },
+  "source_bindings": {
+    "../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md": {
+      "sha256": "174cf1b035c55f72cdc06f1df6eb5e39138cbc9982ed1fb97457189a964ecd63",
+      "bytes": 11719
+    },
+    "../../BATCH_ROUND9_STAGE4_AUTHOR_EVENT_20260830.txt": {
+      "sha256": "5e5ad1b6ff2a62060368877016ad4b14f869f22a3e38f9a703672ea52ecd067f",
+      "bytes": 775
+    },
+    "notes/stage3_revision_roadmap.json": {
+      "sha256": "9617cd604bccdb8484883362165723e505c8d0f4d22ffa82ac5e9f82f88a41f0",
+      "bytes": 22960
+    },
+    "notes/stage4_author_adjudication.json": {
+      "sha256": "bc411064e9cb411d90952015a9512ae261252a492f1b7b0f35aa74fd54879f20",
+      "bytes": 3789
+    },
+    "notes/stage4_writer_handoff.json": {
+      "sha256": "ff1febf8ef18270650ea06da1ea8df0e8471ead0b596e9b195fe0d9747ec90ff",
+      "bytes": 2108
+    },
+    "notes/stage4_claim_surface_manifest.json": {
+      "sha256": "2af286143812b1fdd1d1242df2868a8a75f375fa5cd9c1f1f0ff1b2472ce5d64",
+      "bytes": 10310
+    },
+    "notes/stage3_revision_base.tex": {
+      "sha256": "b59bc70c51960f6c89167619df21923c035b4311d9df4e40c034a1fe036cf60e",
+      "bytes": 40469
+    },
+    "results/round7_trace_discriminant_ledger.csv": {
+      "sha256": "ac15fe34c25d7d570af48672c17989795c92ce4865ad74f2297fcb3c194bd632",
+      "bytes": 6061419
+    },
+    "results/round7_trace_discriminant_metrics.json": {
+      "sha256": "b3a22439e353a48dd7a91963967958d688e7c1e85172ea5ba56c759441fcae44",
+      "bytes": 2906
+    },
+    "results/round8_d9_jet_collision_profile.csv": {
+      "sha256": "a8dfb74e1c0faf977f47859028a338e131806175cb642b52b27e6f74e0dab326",
+      "bytes": 11608
+    },
+    "results/round8_congruence_specificity_metrics.json": {
+      "sha256": "0666258e158bfa594e2cb8204807d1bebfcda3fe37a5d817ac1aba3b854608c9",
+      "bytes": 8404
+    },
+    "experiments/round7_receipt.json": {
+      "sha256": "20466fa98225711e65d2f4f671b7a0034d575b962730abc104e76fceb2a64edd",
+      "bytes": 2360
+    },
+    "experiments/round8_receipt.json": {
+      "sha256": "a09da35892e33f07ad4689f41e396b778ecdc3a665348049eb260298f49ee31c",
+      "bytes": 2759
+    }
+  },
+  "new_output_paths": [
+    "results/stage4_loxodromic_d9_jet_collision_profile.csv",
+    "results/stage4_loxodromic_d9_jet_metrics.json",
+    "experiments/stage4_loxodromic_profile_receipt.json"
+  ],
+  "protected_paths": [
+    "notes/stage3_revision_base.tex",
+    "paper/manuscript.tex",
+    "results/round7_trace_discriminant_ledger.csv",
+    "results/round7_trace_discriminant_metrics.json",
+    "results/round8_d9_jet_collision_profile.csv",
+    "results/round8_congruence_specificity_metrics.json",
+    "experiments/round7_receipt.json",
+    "experiments/round8_receipt.json"
+  ],
+  "claim_boundary": {
+    "population": "frozen exact loxodromic matrix rows only",
+    "owner_interpretation": "matrix-row compression only; no primitive-owner collision or separation claim",
+    "operative_owner_equivalence": "level-subgroup conjugacy only",
+    "registered_claim_surfaces": "BYTE_EXACT_NO_REPLACEMENT_AUTHORIZED",
+    "formal_route_a_tuple": [
+      "A0_WEAK_ARITHMETIC_RELATION",
+      "A1_WEAK",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FAIL"
+    ],
+    "overall_verdict": "ROUTE_A_EXPLORATORY",
+    "full_bianchi_flow_route_tuple": "UNASSIGNED",
+    "route_b_evaluation": "NOT_RUN",
+    "route_b_invocation_allowed": false
+  },
+  "fail_closed_conditions": [
+    "any source binding changes",
+    "the frozen ledger/profile schemas or row partition change",
+    "any expected exact metric changes",
+    "any output path overlaps a protected path",
+    "any owner, primitivity, full-flow, A2--A4, or Route-B promotion is requested"
+  ]
+}

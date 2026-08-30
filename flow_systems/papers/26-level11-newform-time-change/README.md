@@ -4,11 +4,39 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
-  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
-  phases. The mechanical decision is **Major Revision**; Stage 4 remains
-  unauthorized and the frozen manuscript/PDF are unchanged.
-- Stage-3 conclusion: the finite 2/2/134 taxonomy remains valid for the
+- Current pipeline: **Round 9 — ARS STAGE 4 COMPLETE / SCHOLAR CHECKPOINT
+  BEFORE STAGE 3 PRIME**. The authorized revision has been applied only to the
+  anchored Stage-4 draft. Stage 3 prime and all later stages remain unentered;
+  the canonical manuscript/PDF are unchanged.
+- Stage-4 conclusion: all 9/9 roadmap items are accounted for by 25 operations:
+  8 are `RESOLVED`, while `REV-02` is a `DELIBERATE_LIMITATION` because no
+  bibliography target was authorized. Its source-verified comparison uses only
+  the existing bibliography, is explicitly non-exhaustive, and makes no global
+  priority claim. The draft grows from 4,965 to 6,696 words (`+1,731`), and all
+  17/17 registered claim surfaces remain byte-exact exactly once.
+- Principal Stage-4 scientific progress: the support layer binds 138 registered
+  correspondence-component instances, 55 source-word/prime groups, and 165
+  group-law rows. Target-blind exact controls `y-z` and `y-2z` fail together in
+  51, 44, and 55 studied-failure groups for `a_p`, `a_p^2`, and `a_p^2-p`;
+  `a_p^2` has seven one-control cases, and the both-controls-pass residue is
+  zero for all three laws. These are overlapping diagnostics confined to the
+  registered multiset, not additive counts or a universal/newform-specific
+  theorem.
+- Stage-4 verification: the full discovered suite passes 84/84; the legacy
+  Round-8 18/18 and support 10/10 results are named subscopes within that total.
+  The marker-stripped preview is 15 A4 pages with zero overfull boxes and no
+  citation, reference, glyph, or fatal build error. Canonical results remain
+  unchanged.
+- Route state remains
+  **`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`** /
+  **`ROUTE_A_EXPLORATORY`**; Route B is uninvoked. The preliminary Stage-4
+  drift audit passes but is not Stage-4.5 E6 and does not advance the pipeline.
+- Stage-4 artifacts: [completion report](notes/stage4_completion_report.md),
+  [preliminary unregistered-claim drift audit](notes/stage4_unregistered_claim_drift_audit.md),
+  [Route-A crosswalk](notes/stage4_route_crosswalk.md),
+  [final response](notes/stage4_response_to_reviewers_round1.json), and
+  [preview receipt](notes/stage4_preview_build_receipt.json).
+- Stage-3 review record: the finite 2/2/134 taxonomy remains valid for the
   registered 138-component/55-group multiset, but D3 carries one repairable
   `block`. The minimum remedy confines primitive-Euler conclusions to that
   multiset; stronger global-owner claims require separately authorized
@@ -258,6 +286,11 @@ global primitive-orbit or determinant theorem.
 - [Round-8 paper-facing research spine](paper/round8_research_spine.md)
 - [Round-8 Route-A evaluation](../../evaluations/route_a/P26-LEVEL11-NEWFORM-TIME-CHANGE/2026-08-28-round8.yaml)
 - [Round-9 manuscript](paper/manuscript.tex)
+- [Stage-4 completion report](notes/stage4_completion_report.md)
+- [Stage-4 preliminary unregistered-claim drift audit](notes/stage4_unregistered_claim_drift_audit.md)
+- [Stage-4 Route-A crosswalk](notes/stage4_route_crosswalk.md)
+- [Stage-4 response to reviewers](notes/stage4_response_to_reviewers_round1.json)
+- [Stage-4 preview build receipt](notes/stage4_preview_build_receipt.json)
 - [Stage-2.5 independent integrity audit](notes/stage2_5_independent_audit.md)
 - [Stage-2.5 Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md)
 - [results and artifact contract](results/README.md)
@@ -270,9 +303,10 @@ prime/zero target match, Route-A promotion, or Route-B entry is claimed.
 
 ## Round 9 paper and Stage 2.5 status
 
-The exact owner taxonomy has now been written as a 4,210-word, 12-page paper.
-Stage 2.5 checked 5/5 references, 5/5 contexts, all 14 registered data-surface
-families, 21/65 originality paragraphs, and a 72-claim registry.
+The Stage-2.5 intake manuscript was a 4,210-word, 12-page paper. Stage 2.5
+checked 5/5 references, 5/5 contexts, all 14 registered data-surface families,
+21/65 originality paragraphs, and a 72-claim registry. The later authorized
+Stage-4 anchored revision is reported separately below.
 
 - **Structural closure:** the corrected Phase-E selection contains 65
   HIGH-IMPACT plus three RANDOM claims.  All 68/68 selected claim IDs and all
@@ -296,23 +330,35 @@ scientific status remains
 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` /
 `ROUTE_A_EXPLORATORY`; Route B remains unauthorized. The scholar declaration,
 provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 therefore
-passed its mandatory checkpoint. Stage 3 has now completed all five Phase-1
-and five Phase-2 cards, editorial synthesis, provenance replay, and the
-nine-item non-ranking roadmap. The mechanical decision is **Major Revision**
-and the workflow is stopped at the mandatory scholar decision checkpoint;
-Stage 4 is not authorized. No Route-A promotion or Route-B entry occurs. See
-the [integrity report](notes/stage2_5_integrity_report.md),
-[independent audit](notes/stage2_5_independent_audit.md), and
-[Stage-3 completion report](notes/stage3_completion_report.md).
+passed its mandatory checkpoint. Stage 3 then completed all five Phase-1 and
+five Phase-2 cards, editorial synthesis, provenance replay, and the nine-item
+non-ranking roadmap, with a mechanical **Major Revision** decision. The
+authorized Stage-4 implementation is now complete and stopped at the scholar
+checkpoint before Stage 3 prime. No Route-A promotion or Route-B entry occurs.
+See the [integrity report](notes/stage2_5_integrity_report.md), [independent
+audit](notes/stage2_5_independent_audit.md), [Stage-3 completion
+report](notes/stage3_completion_report.md), and [Stage-4 completion
+report](notes/stage4_completion_report.md).
 
-## Stage 4 authority intake
+## Stage 4 conclusion
 
-All 17 ClaimIntent claims now have non-overlapping exact surfaces in the
-[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
-(`SHA-256 d1ad38e0b7e71949abc0bc22a35bfce5ff6e1f5133067d8f8bcf8c4b4f52309e`).
-Seven registered surfaces intersect proposed revision blocks and must remain
-byte-identical absent a later exact claim authorization. The complete
-roadmap/base/manifest tuple replay passes. The nine proposed author decisions,
-finite-multiset boundary, provenance-closure work, and matched-control branch
-are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
-Stage 4 remains unauthorized and the manuscript/PDF remain frozen.
+The authorized Stage-4 patch
+(`SHA-256 c885289ecbd8ac53b2d676657b3193778f1dd04536c80db56bbdfaa5f84f5ec5`)
+has been applied to the anchored draft, producing revision SHA-256
+`dea8f3af92bde625008f2987922b3b69d2856abe3b796fdd2af319bf6db3bf37`.
+The evidence bundle validates, the full suite passes 84/84, all 17 registered
+surfaces replay byte-exact exactly once, and the 15-page preview has zero
+overfull boxes. The 9/9 roadmap accounting is 8 `RESOLVED` plus the authorized
+`REV-02` `DELIBERATE_LIMITATION`; no new bibliography key was added.
+
+The scientific addition is bounded to the registered 138-instance/55-group
+multiset and its 165 group-law rows. Exact controls `y-z` and `y-2z` give
+both-control failure counts 51/44/55, seven `a_p^2` one-control cases, and zero
+both-controls-pass residue. The formal Route-A tuple and exploratory status are
+unchanged, Route B remains uninvoked, and canonical results and manuscript
+artifacts remain frozen.
+
+The [preliminary drift audit](notes/stage4_unregistered_claim_drift_audit.md)
+is a Stage-4 closeout check, not the mandatory Stage-4.5 E6 integrity
+invocation. The workflow is stopped at the scholar checkpoint before Stage 3
+prime; no next stage has been entered.

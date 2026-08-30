@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 4 精确授权准备完成；等待 author adjudication** | Stage 3 的机械决定仍为 4 篇 Major Revision、1 篇 Minor Revision；33 项非排序路线图已绑定五份 anchored base、block manifest 与 57 条不重叠 ClaimIntent surfaces，5/5 authority tuples replay PASS。正文/PDF 未改，Stage 4 尚未取得逐项写权限。科学 Route A 不晋级：正向算术 A2 `0/5`，Route B `0/5`。见 [Stage-4 精确授权清单](BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 4 完成；等待 Stage 3′ scholar checkpoint** | 33/33 路线图项已由 81 个定点操作落地（32 `RESOLVED` + 1 `DELIBERATE_LIMITATION`），57/57 注册 ClaimIntent surfaces 逐字节保留且恰好一次；五份 evidence bundle 与五个共 69 页的预览全部通过。canonical 正文/PDF/results 未刷新。科学 Route A 不晋级：正向算术 A2 `0/5`，Route B `0/5`。见 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -36,6 +36,43 @@ Deninger v1 Corollary 4.6 的 sectionwise Dedekind-ring 表述，但不否定
 Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 24--28 最新结论
+
+### 当前 Stage-4 落地结论
+
+五篇论文已在用户给定 SHA-256 授权下完成 **ARS Stage 4**：33/33 项路线图
+全部有明确处置，形成 81 个受限 patch operations；其中 32 项为 `RESOLVED`，
+P26 的 1 项为 `DELIBERATE_LIMITATION`（授权没有 bibliography target，因此只做
+已有核验来源内的非穷尽比较）。57/57 条注册 ClaimIntent surfaces 在修订稿中
+逐字节保留且各出现一次，五份 evidence bundle 全部通过。五个 marker-stripped
+预览合计 69 页，均无 undefined citation/reference、missing glyph、fatal error
+或 overfull hbox，并保持当前 `plainnat` 数字制。`paper/manuscript.tex`、
+`paper/paper.pdf` 与 canonical results 均未刷新。
+
+| Paper | Stage-4 明确进展 | 验证与论文结果 | Route-A 对应 |
+|---|---|---|---|
+| [P24](papers/24-bianchi-holonomy-flow/README.md) | 8/8 items、23 ops；新增 loxodromic-only profile、owner 等价边界和 A2--A4 dependency map。joint descriptor 分离 364 行、最大桶 208 -> 84，但 singleton 为 0 | 10/10 Stage-4、12/12 R7、14/14 R8；14 页 clean | proxy 保持 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` exploratory；full flow `UNASSIGNED` |
+| [P25](papers/25-three-disk-scattering-flow/README.md) | 6/6 items、14 ops；四对象 map、2,241-row validation-only estimand、68-file reproducibility lock | 75/75；13 页 clean | symbolic calibrator 保持 `(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)` rejected；physical flow `UNASSIGNED` |
+| [P26](papers/26-level11-newform-time-change/README.md) | 9/9 items、25 ops；138-instance/55-group owner scope 收紧，加入 `y-z`、`y-2z` 双负控；both-controls-pass residue 为 0 | 84/84；15 页 clean | 保持 `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` exploratory |
+| [P27](papers/27-congruence-inverse-limit-no-go/README.md) | 6/6 items（含 1 个授权 acknowledgment/no-op）、15 ops；加入 `-I` fixture、候选分图、lamination bridge 边界 | 8/8；13 页 clean | residual 与 homology 两个候选分别保持原 tuple，均 `ROUTE_A_REJECTED` |
+| [P28](papers/28-bolza-magnetic-flow/README.md) | 4/4 items、4 ops；修正 replay 顺序、直接 normal-form/closure tests、A0--A4 legend 与 geodesic-to-magnetic typed map | 28/28 + verify-only 24/24；14 页 clean | full tuple `UNASSIGNED`；historical proxy 保持 A0 weak/A1 weak、A2--A4 fail |
+
+路线判定继续严格对应
+[`skills/route-a-evaluator.md`](skills/route-a-evaluator.md) 与
+[`skills/route-b-evaluator.md`](skills/route-b-evaluator.md)：Stage 4 改善的是论文
+论证边界、复现性和证据可追溯性，不是 Gate 晋级。正向算术 A2 仍为 `0/5`，
+Route B invocation 仍为 `0/5`。五种初始动力学限定也不变：cusped Bianchi
+3-flow proxy、no-eclipse 三圆盘物理流及独立 unit-roof calibrator、正的 Level-11
+newform time change、residual/homology-cover geodesic candidates、以及
+nonarithmetic genus-two geodesic control/magnetic precursor。仍按 12 个冻结几何/
+物理参数实例加 7 个 `q`-symbol calibrators 记为 19 个 model instances，不把它们
+解释成 19 个统计独立样本。
+
+当前合法检查点是 **Stage 3′ scholar confirmation**；Stage 3′、Stage 4.5、
+Stage 5、canonical promotion、投稿和下一轮科学实验均尚未启动。完整的逐篇
+结果、哈希、测试边界与路线 crosswalk 见
+[Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。
+
+### Stage 3 与 Stage-4 intake 历史记录（已由上述完成状态取代）
 
 五个科学对象仍处于 **Route A 的 A0--A1 / A1--A2 证据层**，Route B 未调用，
 正向 Gates A--E 未到达。论文生产流程已完成 **ARS Stage 2 (`WRITE`)**、通过
@@ -232,3 +269,5 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 24--28-round9-stage3 - ARS Stage 3 `REVIEW` 完成（2026-08-29） - 25 个 Phase-1 预承诺、25 个 Phase-2 评审席、5 份编辑综合、5 份 provenance/carrier 与 5 份机器路线图全部通过；决定为 4 Major Revision + 1 Minor Revision，0 Reject、0 fatal block、0 DA Critical。47 条来源意见映射为 33 个无排序 items（15 must-fix、17 should-fix、1 consider）。P28 首次 EIC D6 abstention 触发 fail-closed，原 EIC 同一上下文仅按 Phase-0 的 field-general contribution 职责补评 D6=pass，期刊/readiness 仍不评；修复已单独留痕。五份 manuscript/PDF 哈希不变，Stage 4 未授权，Route-A 正向 A2 仍 0/5，Route B 0/5。详见 [Stage-3 批次报告](BATCH_ROUND9_STAGE3_REVIEW_REPORT.md)。
 
 24--28-round9-stage4-intake - ARS Stage 4 精确授权准备（2026-08-30） - 五份嵌套 ClaimIntent manifest 已确定性抽取为独立 hash-bound artifacts；62 条 ClaimIntent 形成 57 条互不重叠注册 surfaces，5 条较短嵌套文本由其外层 surface 字节覆盖并保留为 E6 语义审查面。五份 roadmap/base/block-manifest/claim-surface tuples 均 replay PASS；33 项 author-facing target/op 清单与保守实现分支已冻结。用户的“确认，继续下一轮”只启动 intake，不足以推断逐项 triage，因此正文、代码、结果、测试与 PDF 均未改，Stage 4 仍等待 [精确作者确认](BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md)。Route-A tuples、正向 A2 `0/5` 与 Route B `0/5` 不变。
+
+24--28-round9-stage4 - ARS Stage 4 `REVISE` 完成（2026-08-30） - 用户以授权清单 SHA-256 `174cf1b...ecd63` 批准全部 33 项路线图和精确 target/op scope；五篇由 81 个 deterministic operations 落地，32 项 `RESOLVED`、P26 一项因无 bibliography target 保留为 `DELIBERATE_LIMITATION`。57/57 registered surfaces byte-exact once，5/5 evidence bundles、全部直接回归和 5 个共 69 页 clean previews 通过；P25 首次 aggregate shell invocation 在执行测试前遇到 loader import-path collision，改从 code directory 调用后 75/75 通过，无科学数值变化。canonical manuscript/PDF/results 未刷新，Route-A tuples、正向 A2 `0/5` 与 Route B `0/5` 不变。当前停在 Stage 3′ scholar checkpoint。详见 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。

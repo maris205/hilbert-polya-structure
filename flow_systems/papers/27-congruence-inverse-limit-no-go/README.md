@@ -4,11 +4,31 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
-  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
-  phases. The mechanical decision is **Major Revision**; Stage 4 remains
-  unauthorized and the frozen manuscript/PDF are unchanged.
-- Stage-3 conclusion: the bounded residual no-go and homology-panel calibration
+- Current pipeline: **Round 9 — ARS STAGE 4 COMPLETE / STAGE 3 PRIME SCHOLAR
+  CHECKPOINT OPEN**. The authorized six-item roadmap has been closed: `REV-01`
+  is the explicit acknowledgment/no-op and the other five items are implemented
+  by 15 deterministic operations. The frozen canonical manuscript/PDF and
+  result tree remain unchanged pending explicit authorization of the next
+  stage.
+- Stage-4 conclusion: **6/6 items resolved; 10/10 registered ClaimIntent
+  surfaces byte-exact once; 8/8 tests pass (5 legacy + 3 direct); 13-page
+  marker-stripped preview with zero overfull boxes.** The revision adds a
+  non-ranking candidate/Route map, direct `-I` regression with its shared-kernel
+  boundary, explicit fixed-panel coefficientwise quantifiers, a lamination
+  model bridge, and comparative-methods positioning. The preliminary manual
+  drift audit found no unauthorized promotion but is not Stage 4.5 E6. See the
+  [completion report](notes/stage4_completion_report.md),
+  [response to reviewers](notes/stage4_response_to_reviewers_round1.md),
+  [manual drift audit](notes/stage4_unregistered_claim_drift_audit.md),
+  [Route crosswalk](notes/stage4_route_crosswalk.md), and
+  [Stage-4 preview](notes/stage4_revision_round1.pdf).
+- Route-A conclusion is unchanged: the residual tuple remains
+  `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` and the
+  homology-calibrator tuple remains
+  `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FAIL)`; both remain
+  `ROUTE_A_REJECTED`. Route B is uninvoked and no canonical result was
+  refreshed.
+- Stage-3 review basis: the bounded residual no-go and homology-panel calibration
   proof chains remain intact. Nine review findings form six non-ranking response
   items: three `must_fix`, two `should_fix`, and one target-binding `consider`.
   The main obligations are a precise contribution position, narrowed
@@ -343,6 +363,11 @@ is a local theorem-progress tag; the formal same-owner verdict is `A1_FAIL`.
 - [Stage-3 completion report](notes/stage3_completion_report.md)
 - [Stage-3 editorial synthesis](notes/stage3_editorial_synthesis.md)
 - [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
+- [Stage-4 completion report](notes/stage4_completion_report.md)
+- [Stage-4 response to reviewers](notes/stage4_response_to_reviewers_round1.md)
+- [Stage-4 preliminary manual drift audit](notes/stage4_unregistered_claim_drift_audit.md)
+- [Stage-4 Route-A crosswalk](notes/stage4_route_crosswalk.md)
+- [Stage-4 marker-stripped preview](notes/stage4_revision_round1.pdf)
 - [Stage-2.5 Phase-E semantic audit](notes/stage2_5_phase_e_semantic_audit.md)
 - [Stage-1 paper research spine](paper/stage1_research_spine.md)
 - [reproduction entry point](experiments/reproduce.sh)
@@ -359,11 +384,13 @@ is retained only as historical state and is superseded by the Round-9 paper and
 Stage-2.5 audit below.  Round 7 had strengthened the same-owner NO-GO from orbit
 absence to coefficientwise factor escape.
 
-## Round 9 paper and Stage 2.5 status
+## Round 9 paper and ARS pipeline status
 
-The residual-owner no-go and homology-cover calibration now form a 4,099-word,
-12-page paper. Stage 2.5 checked 5/5 references, 5/5 contexts, all 13 data
-families, 21/67 originality paragraphs, and a 77-claim registry.
+The original Stage-2.5 residual-owner no-go and homology-cover calibration
+formed a 4,099-word, 12-page paper. Stage 2.5 checked 5/5 references, 5/5
+contexts, all 13 data families, 21/67 originality paragraphs, and a 77-claim
+registry. The authorized Stage-4 working revision is the later artifact
+reported above; the canonical manuscript remains frozen.
 
 - **Structural closure:** the corrected Phase-E selection contains 67
   HIGH-IMPACT plus three RANDOM claims.  All 70/70 selected claim IDs and all
@@ -392,21 +419,27 @@ candidate earns A2 or Route-B credit. The scholar-owned experiment intake,
 provenance ledger, and C4/Mode-6 recheck are complete; Stage 2.5 passed its
 mandatory checkpoint. Stage 3 has now completed all five Phase-1 and five
 Phase-2 cards, the editorial synthesis, provenance replay, and the six-item
-non-ranking roadmap. The mechanical decision is **Major Revision** and the
-workflow is stopped at the mandatory scholar decision checkpoint; Stage 4 is
-not authorized. See the [integrity report](notes/stage2_5_integrity_report.md),
-[independent audit](notes/stage2_5_independent_audit.md), and
-[Stage-3 completion report](notes/stage3_completion_report.md).
+non-ranking roadmap. Its mechanical decision was **Major Revision**. The
+scholar subsequently authorized the six-item Stage-4 disposition, and that
+revision is now complete without canonical promotion. See the
+[integrity report](notes/stage2_5_integrity_report.md),
+[independent audit](notes/stage2_5_independent_audit.md),
+[Stage-3 completion report](notes/stage3_completion_report.md), and
+[Stage-4 completion report](notes/stage4_completion_report.md).
 
-## Stage 4 authority intake
+## Stage 4 authority and completion
 
 Ten non-overlapping outer ClaimIntent surfaces are registered in the
 [Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
 (`SHA-256 00dc5e76ab6ca776979ecdc8368a928d23d287e27319ddb591b78fc91fe33012`).
 The four shorter nested strings `C-002`, `C-003`, `C-004`, and `C-007` are
-byte-covered by registered outer surfaces. Two registered surfaces intersect
-proposed revision blocks and must remain byte-identical absent a later exact
-claim authorization. The complete tuple replay passes. The six proposed author
+byte-covered by registered outer surfaces. Two registered surfaces intersected
+authorized revision blocks and were preserved byte-identically. The complete
+tuple replay passes. The six proposed author
 decisions, including `REV-01 = will_address` with venue-neutral positioning,
-are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
-Stage 4 remains unauthorized and the manuscript/PDF remain frozen.
+are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md)
+and were explicitly authorized. Stage 4 is complete: `REV-01` is the
+authorized acknowledgment/no-op, the remaining five items are implemented by
+15 operations, and all 10 registered surfaces remain byte-exact once. The
+canonical manuscript/PDF and result tree remain frozen; Stage 3 prime and
+Stage 4.5 have not begun.

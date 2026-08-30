@@ -4,10 +4,22 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
-  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
-  phases and the mechanically recomputed decision is **Major Revision**;
-  Stage 4 remains unauthorized and the frozen manuscript/PDF are unchanged.
+- Current stage: **Round 9 — ARS STAGE 4 COMPLETE / STAGE 3 PRIME SCHOLAR
+  CHECKPOINT OPEN**. The authorized eight-item roadmap has been implemented by
+  23 deterministic operations; the canonical manuscript/PDF remain unchanged
+  pending explicit authorization of the next stage.
+- Stage-4 conclusion: **8/8 items resolved; 10/10 registered ClaimIntent
+  surfaces byte-exact once; direct suites pass 10/10, 12/12, and 14/14; the
+  14-page marker-stripped preview is clean.** The loxodromic-only profile shows
+  364 rows separated by the joint descriptor and a largest-bucket reduction
+  from 208 to 84, but zero singleton descriptors—useful A1 evidence without an
+  owner census or Gate promotion. See the [completion report](notes/stage4_completion_report.md),
+  [response to reviewers](notes/stage4_response_to_reviewers_round1.md), and
+  [Stage-4 preview](notes/stage4_revision_round1.pdf).
+- Route-A conclusion is unchanged: the marked-word proxy retains
+  `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` and remains
+  exploratory; the full-flow tuple is `UNASSIGNED`. Route B is uninvoked and
+  no canonical result was refreshed.
 - Stage-3 conclusion: the ring-general theorem and negative-specificity result
   survive review. The non-ranking response burden is eight items: verified
   novelty/antecedent positioning, title scope, loxodromic-versus-pooled

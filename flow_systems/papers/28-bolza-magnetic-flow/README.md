@@ -2,46 +2,50 @@
 
 ## Current status
 
-- ARS: **Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR DECISION CHECKPOINT
-  OPEN**. All five peer-output-blind seats completed both phases. The
-  mechanically recomputed decision is **Minor Revision**; Stage 4 remains
-  unauthorized and the manuscript/PDF stay frozen.
-- Stage-3 conclusion: the nonarithmeticity, finite-completeness, and exact
-  systole proof chain survives review. Seven source findings form four
-  non-ranking response items: two `must_fix` repairs for replay-order wording
-  and direct canonicalization/closure tests, plus two `should_fix` Route and
-  geodesic-to-magnetic interface surfaces. There is no `block`, fatal block,
-  DA Critical, or DA Major.
-- Stage-3 artifacts: [completion report](notes/stage3_completion_report.md),
-  [editorial synthesis](notes/stage3_editorial_synthesis.md),
-  [non-ranking revision roadmap](notes/stage3_revision_roadmap.json),
-  [EIC D6 interface-repair receipt](notes/stage3_eic_d6_interface_repair.md),
-  and [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
-- Current manuscript: the 5,127-word, 14-page paper proves the exact systole
-  and finite-cutoff completeness theorem for the frozen nonarithmetic
-  genus-two octagon control.
-- Route status is unchanged: this remains a Route-A control-side A0--A1
-  result; the matched Bolza/control census, magnetic comparison, positive A2,
-  full Route-A tuple, and Route B have not been executed or credited.
-- Integrity closure: all **6/6 references are VERIFIED**.  The three
-  authorized BibTeX target-field corrections are closed: the Nazarenko author
-  form, the Nazarenko arXiv primary class, and the Aigon-Dupuy et al. author
-  field.  There are **0 serious blockers**.
-- Phase E records **80 VERIFIED + 1 MINOR_DISTORTION** across the 81 selected
-  claims.  The sole non-blocking note is `P28-E1-072`: the manuscript describes
-  source/upstream digest checks as preceding reconstruction, whereas the
-  checked builder calls `finite_traversal()` before `build_validation()` checks
-  those locks.  This wording-order issue does not change any scientific result,
-  count, hash, or theorem.
-- The Phase-E projection contains **84/84 tuple carriers**, all of which remain
-  `anchorless`; schema/hash/selection closure does not independently prove the
-  semantic verdicts or reproduce source excerpts.
-- The scholar-owned retrospective intake contains **7 experiment-provenance
-  entries** and **14/14 aligned directly experiment-backed claims**.  It is
-  explicitly a Stage-2.5 reconstruction of the historical Round-2--8 record,
-  not a fabricated pre-writing intent record.
-
-This check verifies disclosure and claim-to-provenance fidelity. It does not judge whether the experiment was correctly designed, run, statistically adequate, or reproducible by ARS.
+- ARS: **STAGE 4 REVISE COMPLETE WITHIN AUTHORIZED SCOPE — STOPPED BEFORE
+  STAGE 3 PRIME / STAGE 4.5**. All four authorized roadmap items are
+  `RESOLVED` through four deterministic operations; neither subsequent stage
+  has been invoked.
+- Stage-4 conclusion: the revision corrects the replay order, records executed
+  direct canonicalization regressions with their same-builder limitation, adds
+  the non-ranking A0–A4 obligation legend, and adds the typed
+  geodesic-to-magnetic interface. See the
+  [completion report](notes/stage4_completion_report.md).
+- Stable Stage-4 chain:
+  [patch](notes/stage4_revision_patch_round1.json)
+  `37f8ac948f1d8a6aab65f16f10d916d89629208d341871e22f0710cb1fe4ef12`;
+  [revised anchored draft](notes/stage4_revision_round1.tex)
+  `884ca28dacf24cabe6f5473c67cb55bdfd1491e87eb6bd763aab7646cfce1bb2`;
+  [apply report](notes/stage4_revision_round1.tex.apply-report.json)
+  `3ccc1c7987b791fe3e708766a92094e66107c0671c3e53c87806f2ed369bd8b8`;
+  [final response](notes/stage4_response_to_reviewers_round1.json)
+  `045e6510d125f58c40ef9abb3e802419349da60f41b1cfa7bc2a4e2afca91929`;
+  [evidence bundle](notes/stage4_revision_evidence_bundle.json)
+  `93ea0ae450ac06db827de266d38c0d5cc550757789e2a2766f9cf945dc692d9f`;
+  and [preview receipt](notes/stage4_preview_build_receipt.json)
+  `90aad833c8114f66ec68cd07f63ad1b9a8f05cb720da42331d15db169d42243f`.
+- The marker-stripped anchored draft changes from **5,600 to 5,986 words**
+  (`+386`). All **14/14** registered ClaimIntent surfaces remain byte-exact
+  once, with no claim-strength replacement, collateral operation, or new
+  bibliography entry.
+- The combined direct/legacy suite passes **28/28** tests. The verify-only
+  reproducer separately passes its 24-test suite and produces two identical
+  temporary builds with tree SHA-256
+  `c30beebdd2e832d9375f55f1eab700868b7b967dfb5ee43fcecc0ba5f60919ac`;
+  canonical Round-8 results remain unchanged.
+- The marker-stripped preview is **14 A4 pages** with zero undefined
+  citations/references, missing glyphs, fatal errors, or overfull boxes.
+- Route status is unchanged: the formal full P28 tuple is `UNASSIGNED`; the
+  historical proxy remains
+  `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`.
+  Stage 4 supplies A0–A1 control-side infrastructure only, with no Gate
+  promotion and no Route-B invocation.
+- Write boundary: `paper/manuscript.tex`, `paper/paper.pdf`, and canonical
+  `results/` were not modified or refreshed. The
+  [unregistered-claim audit](notes/stage4_unregistered_claim_drift_audit.md)
+  is explicitly preliminary Stage-4 review, not Stage-4.5 E6; the
+  [Route crosswalk](notes/stage4_route_crosswalk.md) likewise records no
+  next-stage or Route promotion.
 
 ## Historical research record (Rounds 1--8)
 
@@ -277,6 +281,11 @@ result remains a magnetic trace calibration.
 - [Stage-3 completion report](notes/stage3_completion_report.md)
 - [Stage-3 editorial synthesis](notes/stage3_editorial_synthesis.md)
 - [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
+- [Stage-4 completion report](notes/stage4_completion_report.md)
+- [Stage-4 preliminary unregistered-claim drift audit](notes/stage4_unregistered_claim_drift_audit.md)
+- [Stage-4 Route-A crosswalk](notes/stage4_route_crosswalk.md)
+- [Stage-4 final response to reviewers](notes/stage4_response_to_reviewers_round1.json)
+- [Stage-4 revision-evidence bundle](notes/stage4_revision_evidence_bundle.json)
 - [pipeline state](notes/pipeline_state.md)
 - [owner ledger and planned orbit schema](results/README.md)
 - [Round-2 execution receipt](experiments/round2_execution_receipt.md)
@@ -315,20 +324,45 @@ experiment-backed claims aligned. The Stage-2.5 decision is therefore **PASS
 AT MANDATORY CHECKPOINT**, with zero serious blockers. Stage 3 has now
 completed five role-separated two-phase reviews, mechanical editorial
 synthesis, provenance replay, and the four-item non-ranking roadmap. The
-decision is **Minor Revision** and the workflow is stopped at the mandatory
-scholar decision checkpoint; Stage 4 is not authorized. This is still a
-control theorem; no Bolza magnetic comparison or full Route-A tuple has been
-claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md),
+decision was **Minor Revision**; its four-item roadmap was subsequently
+authorized and resolved in the Stage-4 chain summarized above and below. This
+is still a control theorem; no Bolza magnetic comparison or full Route-A tuple
+has been claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md),
 [independent audit](notes/stage2_5_independent_audit.md), and
 [Stage-3 completion report](notes/stage3_completion_report.md).
 
-## Stage 4 authority intake
+## Stage 4 conclusion
 
-All 14 ClaimIntent claims now have non-overlapping exact surfaces in the
-[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
-(`SHA-256 269a55d6e2590dc2e0bac8c9b98f5e10f63def23e31f2c7871526fc583f5c5e2`).
-No registered surface intersects the four proposed revision blocks, and the
-complete roadmap/base/manifest tuple replay passes. The four proposed author
-decisions and the separately bounded direct-test work are listed in the
-[batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
-Stage 4 remains unauthorized and the manuscript/PDF remain frozen.
+All four authorized Stage-3 roadmap items are now resolved by the exact
+four-operation Stage-4 patch. The continuous evidence bundle replays against
+the frozen base and reproduces the revised anchored draft byte-for-byte.
+Fourteen of fourteen registered ClaimIntent surfaces remain byte-exact once;
+the marker-stripped word count is `5,600 -> 5,986`; and the final response
+records `4 RESOLVED / 0 LIMITATIONS / 0 UNRESOLVABLE / 0 DISAGREED`.
+
+The executed support evidence passes 28/28 combined direct/legacy tests. The
+verify-only reproducer then passes its 24-test suite and produces two identical
+temporary trees; canonical Round-8 results remain unchanged. The
+marker-stripped preview builds in 14 A4 pages with zero overfull boxes and no
+undefined citation/reference, missing-glyph, or fatal-build issue.
+
+The stable Stage-4 binding is:
+
+| Artifact | SHA-256 |
+|---|---|
+| Patch | `37f8ac948f1d8a6aab65f16f10d916d89629208d341871e22f0710cb1fe4ef12` |
+| Revised anchored draft | `884ca28dacf24cabe6f5473c67cb55bdfd1491e87eb6bd763aab7646cfce1bb2` |
+| Apply report | `3ccc1c7987b791fe3e708766a92094e66107c0671c3e53c87806f2ed369bd8b8` |
+| Final response | `045e6510d125f58c40ef9abb3e802419349da60f41b1cfa7bc2a4e2afca91929` |
+| Revision-evidence bundle | `93ea0ae450ac06db827de266d38c0d5cc550757789e2a2766f9cf945dc692d9f` |
+| Preview build receipt | `90aad833c8114f66ec68cd07f63ad1b9a8f05cb720da42331d15db169d42243f` |
+
+The formal full P28 tuple remains `UNASSIGNED`. The historical proxy remains
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`
+without promotion; this is A0–A1 control-side infrastructure only, with no
+Gate advancement and no Route-B invocation. The
+[preliminary drift audit](notes/stage4_unregistered_claim_drift_audit.md) is
+not Stage-4.5 E6, and the [Route crosswalk](notes/stage4_route_crosswalk.md)
+does not authorize a later stage. Stage 3 prime and Stage 4.5 have not begun;
+`paper/manuscript.tex`, `paper/paper.pdf`, and canonical results remain
+untouched.

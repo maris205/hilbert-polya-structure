@@ -4,10 +4,21 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — ARS Stage 3 REVIEW OUTPUTS COMPLETE / SCHOLAR
-  DECISION CHECKPOINT OPEN**. All five peer-output-blind seats completed both
-  phases and the mechanically recomputed decision is **Major Revision**;
-  Stage 4 remains unauthorized and the frozen manuscript/PDF are unchanged.
+- Current stage: **Round 9 — ARS STAGE 4 COMPLETE / STAGE 3 PRIME SCHOLAR
+  CHECKPOINT OPEN**. The authorized six-item roadmap has been implemented by
+  14 deterministic operations; the frozen canonical manuscript/PDF remain
+  unchanged pending explicit authorization of the next stage.
+- Stage-4 conclusion: **6/6 items resolved; 6/6 registered ClaimIntent surfaces
+  byte-exact once; 75/75 tests pass; 13-page marker-stripped preview clean.**
+  The revision adds a bounded closest-work comparison, a four-object typing
+  map, a validation-only estimand for the 2,241-row replay, and a closed
+  68-file reproducibility lock. See the [completion report](notes/stage4_completion_report.md),
+  [response to reviewers](notes/stage4_response_to_reviewers_round1.md), and
+  [Stage-4 preview](notes/stage4_revision_round1.pdf).
+- Route-A conclusion is unchanged: the symbolic calibrator retains
+  `(A0_FAIL,A1_PASS_ANALYTIC,A2_ANALYTIC_DETERMINANT,A3_FAIL,A4_FAIL)` and
+  remains rejected; the physical-flow tuple remains `UNASSIGNED`. Route B is
+  uninvoked and no canonical result was refreshed.
 - Stage-3 conclusion: the exact roof noncohomology theorem, unit-roof
   determinant, and symbolic-to-physical no-credit-transfer result survive
   review. Six non-ranking response items remain: closest-work/novelty
