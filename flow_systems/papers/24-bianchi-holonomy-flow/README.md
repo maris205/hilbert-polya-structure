@@ -447,3 +447,16 @@ Route-A tuple and 2/3 canonical-control boundary are unchanged.
 See the controlling [integrity report](notes/stage2_5_integrity_report.md) and
 the historical-plus-current [independent integrity audit](notes/stage2_5_independent_audit.md),
 plus the [Stage-3 completion report](notes/stage3_completion_report.md).
+
+## Stage 4 authority intake
+
+The nested ClaimIntent artifact has been deterministically extracted and 10
+non-overlapping exact surfaces are registered in the
+[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
+(`SHA-256 2af286143812b1fdd1d1242df2868a8a75f375fa5cd9c1f1f0ff1b2472ce5d64`).
+Five registered surfaces intersect proposed revision blocks and must remain
+byte-identical absent a later exact claim authorization. The shorter nested
+`C-001` string is covered by the registered outer `C-002` bytes. The complete
+roadmap/base/manifest tuple replay passes. The eight proposed author decisions
+are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
+Stage 4 remains unauthorized and the manuscript/PDF remain frozen.

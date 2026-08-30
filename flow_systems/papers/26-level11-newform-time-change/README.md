@@ -304,3 +304,15 @@ Stage 4 is not authorized. No Route-A promotion or Route-B entry occurs. See
 the [integrity report](notes/stage2_5_integrity_report.md),
 [independent audit](notes/stage2_5_independent_audit.md), and
 [Stage-3 completion report](notes/stage3_completion_report.md).
+
+## Stage 4 authority intake
+
+All 17 ClaimIntent claims now have non-overlapping exact surfaces in the
+[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
+(`SHA-256 d1ad38e0b7e71949abc0bc22a35bfce5ff6e1f5133067d8f8bcf8c4b4f52309e`).
+Seven registered surfaces intersect proposed revision blocks and must remain
+byte-identical absent a later exact claim authorization. The complete
+roadmap/base/manifest tuple replay passes. The nine proposed author decisions,
+finite-multiset boundary, provenance-closure work, and matched-control branch
+are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
+Stage 4 remains unauthorized and the manuscript/PDF remain frozen.

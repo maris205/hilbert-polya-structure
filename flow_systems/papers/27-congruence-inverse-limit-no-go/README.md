@@ -397,3 +397,16 @@ workflow is stopped at the mandatory scholar decision checkpoint; Stage 4 is
 not authorized. See the [integrity report](notes/stage2_5_integrity_report.md),
 [independent audit](notes/stage2_5_independent_audit.md), and
 [Stage-3 completion report](notes/stage3_completion_report.md).
+
+## Stage 4 authority intake
+
+Ten non-overlapping outer ClaimIntent surfaces are registered in the
+[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
+(`SHA-256 00dc5e76ab6ca776979ecdc8368a928d23d287e27319ddb591b78fc91fe33012`).
+The four shorter nested strings `C-002`, `C-003`, `C-004`, and `C-007` are
+byte-covered by registered outer surfaces. Two registered surfaces intersect
+proposed revision blocks and must remain byte-identical absent a later exact
+claim authorization. The complete tuple replay passes. The six proposed author
+decisions, including `REV-01 = will_address` with venue-neutral positioning,
+are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
+Stage 4 remains unauthorized and the manuscript/PDF remain frozen.

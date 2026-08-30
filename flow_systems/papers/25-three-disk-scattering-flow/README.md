@@ -282,3 +282,15 @@ physical-flow Route-A tuple remains unassigned. See the controlling
 [integrity report](notes/stage2_5_integrity_report.md), the historical-plus-current
 [independent integrity audit](notes/stage2_5_independent_audit.md), and the
 [Stage-3 completion report](notes/stage3_completion_report.md).
+
+## Stage 4 authority intake
+
+All six ClaimIntent claims now have non-overlapping exact surfaces in the
+[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
+(`SHA-256 323d27b42fb2e1208cd477297123b45370460913195ac5792d61ded5884b25b9`).
+Three registered surfaces intersect proposed revision blocks and must remain
+byte-identical absent a later exact claim authorization. The complete
+roadmap/base/manifest tuple replay passes. The six proposed author decisions,
+including the validation-only replay interpretation and unified provenance
+lock, are listed in the [batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
+Stage 4 remains unauthorized and the manuscript/PDF remain frozen.

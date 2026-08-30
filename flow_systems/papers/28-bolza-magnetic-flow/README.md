@@ -321,3 +321,14 @@ control theorem; no Bolza magnetic comparison or full Route-A tuple has been
 claimed. See the [controlling integrity report](notes/stage2_5_integrity_report.md),
 [independent audit](notes/stage2_5_independent_audit.md), and
 [Stage-3 completion report](notes/stage3_completion_report.md).
+
+## Stage 4 authority intake
+
+All 14 ClaimIntent claims now have non-overlapping exact surfaces in the
+[Stage-4 claim-surface manifest](notes/stage4_claim_surface_manifest.json)
+(`SHA-256 269a55d6e2590dc2e0bac8c9b98f5e10f63def23e31f2c7871526fc583f5c5e2`).
+No registered surface intersects the four proposed revision blocks, and the
+complete roadmap/base/manifest tuple replay passes. The four proposed author
+decisions and the separately bounded direct-test work are listed in the
+[batch authorization request](../../BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md);
+Stage 4 remains unauthorized and the manuscript/PDF remain frozen.
