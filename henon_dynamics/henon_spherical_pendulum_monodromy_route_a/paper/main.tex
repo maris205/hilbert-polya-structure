@@ -1,0 +1,162 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=17mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\R}{\mathbb R}
+\title{The Spherical Pendulum: Cubic Chambers and Focus--Focus Monodromy}
+\author{HCS Research Program}
+\date{30 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a coordinate-safe analytic atlas for the unit spherical pendulum.
+Energy--momentum reduction produces an exact cubic \(P_{h,j}(u)\), whose
+discriminant and double-root parameterization delimit the critical-value
+components.  Eight representative regular receipt rows carry independently checked period,
+azimuthal-angle, and action quadratures.  The isolated upright value is
+focus--focus; with an explicitly fixed oriented basis and matrix-column
+convention its positive-loop monodromy is
+\(\left[\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right]\).
+No elementary closed form is asserted for every quadrature, and no arithmetic
+or Hilbert--Pólya claim is made.
+\end{abstract}
+
+\section{Model and a pole-safe reduction}
+On \(T^*S^2\), in the usual chart away from the poles, let
+\begin{equation}
+ H=\frac12\left(p_\theta^2+\frac{j^2}{\sin^2\theta}\right)+\cos\theta,
+ \qquad J=j=p_\phi .                                      \label{eq:H}
+\end{equation}
+The global embedding variables \(r\cdot r=1,\ r\cdot p=0\) are retained at
+\(\theta=0,\pi\), where \(\phi\) is not a coordinate.  Put \(u=\cos\theta\)
+and write \(h=H\).  Hamilton's equations give
+\begin{equation}
+ \dot u^2=P_{h,j}(u)=2(1-u^2)(h-u)-j^2
+ =2u^3-2hu^2-2u+2h-j^2 .                                  \label{eq:cubic}
+\end{equation}
+\ifnum\CRevisionRound=0
+The baseline certificate records (\ref{eq:cubic}) and the endpoint labels.
+The focus value is kept separate from the interior critical branch; regular
+periods are not assigned to a double root.
+\fi
+
+\section{Critical-value geometry}
+The cubic discriminant is
+\begin{equation}
+\operatorname{disc}_uP=
+4(16h^4-8h^3j^2-32h^2+72hj^2-27j^4+16).                   \label{eq:disc}
+\end{equation}
+For an interior double root \(s\in(-1,0)\), solving \(P(s)=P'(s)=0\) gives
+\begin{equation}
+ h=\frac{3s^2-1}{2s},\qquad j^2=\frac{(1-s^2)^2}{-s}.       \label{eq:crit}
+\end{equation}
+The endpoint \(u=-1,h=-1,j=0\) is elliptic--elliptic.  The upright endpoint
+\(u=1,h=1,j=0\) is an isolated focus--focus value and its fiber is pinched;
+it is not a point on the \(s\in(-1,0)\) interior branch.
+\ifnum\CRevisionRound>0
+\begin{proposition}[root chamber]\label{prop:roots}
+For each regular receipt row with \(j\ne0\), the three real roots obey
+\(r_1<r_2<1<r_3\), and the physical oscillation interval is
+\((r_1,r_2)\subset(-1,1)\).  The endpoint-cancelled substitution
+\(u(t)=m+d\cos t\), \(m=(r_1+r_2)/2\), \(d=(r_2-r_1)/2\), removes the
+square-root endpoint singularities.
+\end{proposition}
+\fi
+
+\section{Three exact quadratures}
+On a regular chamber \(P=2(u-r_1)(r_2-u)(r_3-u)\).  The period, azimuthal
+increment and action are
+\begin{align}
+ T&=2\int_0^\pi\frac{\dd t}{\sqrt{2(r_3-u(t))}},&
+ \Delta\phi&=2j\int_0^\pi
+ \frac{\dd t}{(1-u(t)^2)\sqrt{2(r_3-u(t))}},              \label{eq:q1}\\
+ I&=\frac1\pi\int_0^\pi
+ \frac{d^2\sin^2t\,\sqrt{2(r_3-u(t))}}{1-u(t)^2}\,\dd t . \label{eq:q2}
+\end{align}
+The square-root factor in the numerator of \(I\) is essential: it is the
+Jacobian form of \(\pi^{-1}\int_{r_1}^{r_2}\sqrt{P(u)}/(1-u^2)\dd u\).
+The producer and an independent SymPy script evaluate both forms at
+80--90 digits.  The ledger deliberately reports quadratures rather than
+pretending that all parameters have an elementary closed form.
+
+\begin{table}[t]
+\centering\small
+\caption{Selected exact-rational controls and certified outputs.}
+\begin{tabular}{c|c|c|c|c}
+\toprule
+case & $(h,j)$ & $r_1,r_2,r_3$ (rounded) & $T$ & $I$\\
+\midrule
+R01 & $(-1/2,1/4)$ & $-0.9659,-0.5444,1.0103$ & 3.3528 & 0.1267\\
+R02 & $(0,1/10)$ & $-0.9975,-0.0050,1.0025$ & 3.7018 & 0.4879\\
+R04 & $(1/4,1/10)$ & $-0.9980,0.2447,1.0033$ & 3.9444 & 0.6398\\
+R06 & $(3/4,1/20)$ & $-0.9996,0.7472,1.0025$ & 4.9260 & 1.0122\\
+\bottomrule
+\end{tabular}
+\end{table}
+\ifnum\CRevisionRound=1
+\section{Revision-one evidence}
+The full receipt (eight representative regular rows and seven critical rows) is accompanied by a
+producer-independent checker with 308 assertions, a 77-check SymPy
+cross-check, byte replay, and 34 repaired-hash hostile mutations.  The
+original \(u\)-integral for \(I\) is evaluated independently, so a misplaced
+square-root factor cannot survive the release gate.
+\fi
+
+\section{Liouville fibers and monodromy}
+Away from the critical-value set, the commuting pair \((H,J)\) has compact
+Liouville tori.  Fix \(\alpha\) as the vanishing cycle and \(\beta\) as a
+transported complementary cycle.  For a positive counterclockwise loop around
+the isolated value \((h,j)=(1,0)\),
+\[
+\alpha\longmapsto\alpha,\qquad \beta\longmapsto\beta+\alpha .
+\]
+Our matrix convention is that \emph{columns are transported basis vectors
+expressed in the initial \((\alpha,\beta)\) basis}.  Consequently
+\begin{equation}
+ M_{(\alpha,\beta)}=
+ \begin{pmatrix}1&1\\0&1\end{pmatrix}.                    \label{eq:mono}
+\end{equation}
+This convention explains why a row-vector or transposed convention would
+display a different-looking matrix; no such ambiguity is left in the receipt.
+
+For completeness, a regular torus trajectory closes exactly when
+\(\Delta\phi/(2\pi)=p/q\) in lowest terms.  The primitive closure uses \(q\)
+u-oscillations and the \(k\)-fold repetition uses \(kq\); irrational ratios
+are quasiperiodic.  The resonant objects remain clean one-parameter torus
+families, rather than isolated primitive orbits.
+
+\ifnum\CRevisionRound>1
+\section{Boundaries, verification, and route decision}
+At \(u=\pm1\) the embedding chart is used and no azimuthal value is assigned.
+At a double root the period is singular, so the row is marked critical rather
+than regular.  The bottom endpoint is elliptic--elliptic; the isolated top
+endpoint is focus--focus.  Symbolic identities, numerical root residuals, and
+the direct action integral are all independently checked.
+
+The locked scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No prime/zero
+table, arithmetic local datum, Euler factor, root number, automorphy claim,
+target divisor or functional equation, target determinant, or
+Hilbert--Pólya operator is used.  Thus the Route-A tuple is
+\texttt{(A0\_FAIL,A1\_PASS\_ANALYTIC,A2\_FAIL,A3\_FAIL,
+A4\_NATURAL\_QUANTIZATION)} and the overall verdict is
+\texttt{ROUTE\_A\_REJECTED}.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{CD88} R.~H. Cushman and J.~J. Duistermaat,
+The quantum mechanical spherical pendulum, \emph{Bull. Amer. Math. Soc.}
+19 (1988), DOI \href{https://doi.org/10.1090/S0273-0979-1988-15705-9}
+{10.1090/S0273-0979-1988-15705-9}.
+\bibitem{D13} H.~R. Dullin, Semi-global symplectic invariants of the spherical
+pendulum, \emph{J. Differential Equations} 254 (2013), DOI
+\href{https://doi.org/10.1016/j.jde.2013.01.018}
+{10.1016/j.jde.2013.01.018}.
+\end{thebibliography}
+\end{document}

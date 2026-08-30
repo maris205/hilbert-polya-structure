@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C245
+candidate_definition: all-to-all excitatory pulse-coupled identical integrate-and-fire oscillators with a strictly concave exponential rise
+family: event-driven hybrid oscillator network / integrate-and-fire synchrony
+phase_space: N labelled phases in [0,1), represented at event sections by u_i=exp(-a*phi_i) in [r,1]
+dynamics: common threshold rescaling, rational pulse subtraction, reset, and finite same-time avalanche closure
+parameters: r in {1/2,2/3,3/4}, epsilon in {1/5,1/4,1/3}, N in {2,...,8}, seven rational seeds
+parameter_provenance: source-defined rational sentinels; no target fitting
+arithmetic_origin: none
+clock: event count and transformed-state return period; no arithmetic-prime clock
+normalization: exponential rise U_a, threshold r, pulse c=(1-r)*epsilon, labelled cluster partition
+determinant_convention: no determinant; event words are source-local labels only
+orbit_cutoff: 441 finite probes, twelve event steps, N<=8; no continuous-state cell exhaustion
+precision: exact Fraction states and comparisons; symbolic rise/inverse identities
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 5f357e2d2b78604f6c286bfbd05da922e1d6791f
+code_commit: 5f357e2d2b78604f6c286bfbd05da922e1d6791f
+artifact_paths:
+  evidence: results/c245_pulse_if_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-30
+fixed_epoch: 1788048000
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: identical all-to-all excitatory exponential-rise integrate-and-fire network
+  arithmetic_origin: none
+  clock: event count, not prime-indexed
+  normalization: exact transformed coordinate, avalanche waves, equality partition
+  cutoff: r/epsilon/N grid, seven seeds, twelve events
+  precision: exact Fraction arithmetic
+  allowed_data: event states, threshold comparisons, pulse closure, cluster partitions, source event word
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: rational model parameters have no intrinsic prime carrier
+  strongest_failure: no arithmetic clock or prime-power repetition law
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED_AT_DECLARED_CUTOFF
+  strongest_evidence: exact event map, avalanche closure, pairwise old-block containment, and synchronized primitive word
+  strongest_failure: finite probes do not establish a complete continuous-state synchrony census; literature synchrony remains hypothesis-bound
+  metrics: {event_rows: 441, synchronized_rows: 63, coarsening_rows: 441, max_N: 8, event_steps: 12}
+  controls: [independent Fraction checker, SymPy identities, byte replay, 41 hostile mutations]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  target_match: FAIL
+  strongest_evidence: source-local event words and exact one-event return are reproducible
+  strongest_failure: no target determinant, target divisor, or zero-matching protocol
+  metrics: {target_zero_match: null, target_determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: finite event-map identities only
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: piecewise-affine event map and finite cluster quotient suggest a formal transfer lift
+  strongest_failure: no natural unitary or Hilbert-Polya operator is defined
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [rational parameter grid, explicit avalanche waves, old-block containment, replay, repaired-hash mutations]
+  proves_too_much_risk: high if finite synchrony probes are promoted to global synchrony, event words to arithmetic orbits, or block counts to no-splitting proof
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact finite event-map, avalanche, cluster-coarsening, and synchronized-cycle results only; no arithmetic or target spectral claim
+blocking_conditions:
+  - no arithmetic origin
+  - finite probe cutoff and no continuous-state cell census
+  - target_match: FAIL
+  - no natural unitary target lift
+next_smallest_test: none inside this frozen source-local theorem; a different hybrid model is a new candidate
+round2_clues: []
+route_b_invocation_allowed: false

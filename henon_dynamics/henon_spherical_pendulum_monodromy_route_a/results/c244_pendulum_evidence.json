@@ -1,0 +1,387 @@
+{
+  "candidate_id": "HCS-C244",
+  "citations": [
+    {
+      "claim": "spherical pendulum quantum/semi-global monodromy and focus-focus obstruction",
+      "key": "CushmanDuistermaat1988",
+      "source": "Cushman and Duistermaat, The quantum mechanical spherical pendulum, Bulletin AMS 19 (1988), DOI 10.1090/S0273-0979-1988-15705-9",
+      "url": "https://doi.org/10.1090/S0273-0979-1988-15705-9"
+    },
+    {
+      "claim": "semi-global symplectic invariants of the spherical pendulum",
+      "key": "Dullin2013",
+      "preprint": "https://arxiv.org/abs/1108.4962",
+      "source": "Dullin, Semi-global symplectic invariants of the spherical pendulum, J. Differential Equations 254 (2013), DOI 10.1016/j.jde.2013.01.018",
+      "url": "https://doi.org/10.1016/j.jde.2013.01.018"
+    }
+  ],
+  "evaluation_date": "2026-08-30",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "theta_dot=p_theta, phi_dot=j/sin(theta)^2, p_theta_dot=j^2 cos(theta)/sin(theta)^3+sin(theta)",
+      "identity_id": "hamilton_equations"
+    },
+    {
+      "formula": "P_hj(u)=2(1-u^2)(h-u)-j^2=2u^3-2hu^2-2u+2h-j^2",
+      "identity_id": "reduced_cubic"
+    },
+    {
+      "formula": "disc_u(P)=4*(16h^4-8h^3j^2-32h^2+72hj^2-27j^4+16)",
+      "identity_id": "discriminant"
+    },
+    {
+      "formula": "P(s)=P'(s)=0 => h=(3s^2-1)/(2s), j^2=(1-s^2)^2/(-s)",
+      "identity_id": "critical_parameterization"
+    },
+    {
+      "formula": "T=2 integral_(r1)^(r2) du/sqrt(P)",
+      "identity_id": "period_quadrature"
+    },
+    {
+      "formula": "Delta_phi=2j integral_(r1)^(r2) du/((1-u^2)sqrt(P))",
+      "identity_id": "angle_quadrature"
+    },
+    {
+      "formula": "I=(1/pi) integral_(r1)^(r2) sqrt(P)/(1-u^2) du",
+      "identity_id": "action_quadrature"
+    },
+    {
+      "formula": "Delta_phi/(2*pi)=p/q in lowest terms iff closure after q u-oscillations; kq is the kth repetition",
+      "identity_id": "torus_closure"
+    },
+    {
+      "formula": "M_(alpha,beta)=[[1,1],[0,1]] for positive focus-focus loop",
+      "identity_id": "focus_monodromy"
+    },
+    {
+      "formula": "global (r,p) in R^3 x R^3 removes the theta=0,pi coordinate singularity",
+      "identity_id": "pole_regularization"
+    }
+  ],
+  "fixed_epoch": 1788048000,
+  "frozen_object": {
+    "arithmetic_origin": "none; source-defined mechanical Hamiltonian",
+    "clock": "unit gravitational time",
+    "forbidden_data": "target primes/zeros, local arithmetic, Euler factors, root numbers, automorphy, target determinants, Hilbert--Polya operators",
+    "hamiltonian": "H=1/2*(p_theta^2+j^2/sin(theta)^2)+cos(theta)",
+    "momentum": "J=j=p_phi",
+    "orientation_convention": "(cycle alpha, cycle beta) is fixed so positive focus-focus transport is beta -> beta+alpha",
+    "phase_space": "T^*S^2 with global embedding coordinates (r,p) and local (theta,phi,p_theta,j)",
+    "polynomial_expansion": "P=2u^3-2hu^2-2u+2h-j^2",
+    "reduction": "u=cos(theta), P_hj(u)=2(1-u^2)(h-u)-j^2, u_dot^2=P_hj(u)"
+  },
+  "headline": "The unit spherical pendulum has a certified reduced cubic, critical-value chambers, Liouville quadratures, and the oriented focus-focus monodromy receipt.",
+  "nonclaims": [
+    "exhaustive classification of all trajectories",
+    "elementary closed forms for every quadrature",
+    "arithmetic Euler factors, root numbers, automorphy, target divisor or functional equation",
+    "a target zeta/Fredholm determinant, zero match, or Hilbert--Polya operator",
+    "external peer review or novelty priority"
+  ],
+  "payload_sha256": "0775fc76880a7689f43fcf579dfe4fcbd101df4cd8fcd92e92149f4dd9443340",
+  "regression": {
+    "critical_row_count": 7,
+    "critical_rows": [
+      {
+        "boundary_note": "u=-1, theta=pi; azimuth collapses",
+        "discriminant": "0",
+        "face_id": "bottom_elliptic_endpoint",
+        "h": "-1",
+        "j_squared": "0",
+        "s": "-1",
+        "type": "elliptic-elliptic endpoint"
+      },
+      {
+        "boundary_note": "u=1, theta=0; upright equilibrium and pinched fiber",
+        "discriminant": "0",
+        "face_id": "top_focus_focus_endpoint",
+        "h": "1",
+        "j_squared": "0",
+        "s": "1",
+        "type": "focus-focus endpoint"
+      },
+      {
+        "boundary_note": "P(s)=P'(s)=0; s in (-1,0)",
+        "discriminant": "0",
+        "face_id": "interior_double_root",
+        "h": "1/4",
+        "j_squared": "9/8",
+        "s": "-1/2",
+        "type": "elliptic critical circle"
+      },
+      {
+        "boundary_note": "P(s)=P'(s)=0; s in (-1,0)",
+        "discriminant": "0",
+        "face_id": "interior_double_root",
+        "h": "1",
+        "j_squared": "64/27",
+        "s": "-1/3",
+        "type": "elliptic critical circle"
+      },
+      {
+        "boundary_note": "P(s)=P'(s)=0; s in (-1,0)",
+        "discriminant": "0",
+        "face_id": "interior_double_root",
+        "h": "-1/4",
+        "j_squared": "25/54",
+        "s": "-2/3",
+        "type": "elliptic critical circle"
+      },
+      {
+        "boundary_note": "P(s)=P'(s)=0; s in (-1,0)",
+        "discriminant": "0",
+        "face_id": "interior_double_root",
+        "h": "-11/24",
+        "j_squared": "49/192",
+        "s": "-3/4",
+        "type": "elliptic critical circle"
+      },
+      {
+        "boundary_note": "P(s)=P'(s)=0; s in (-1,0)",
+        "discriminant": "0",
+        "face_id": "interior_double_root",
+        "h": "-23/40",
+        "j_squared": "81/500",
+        "s": "-4/5",
+        "type": "elliptic critical circle"
+      }
+    ],
+    "fixed_row_count": 2,
+    "fixed_rows": [
+      {
+        "chart": "global_vector",
+        "h": "-1",
+        "j": "0",
+        "point_id": "bottom",
+        "singularity_type": "elliptic-elliptic",
+        "theta": "pi",
+        "u": "-1"
+      },
+      {
+        "chart": "global_vector",
+        "h": "1",
+        "j": "0",
+        "point_id": "top",
+        "singularity_type": "focus-focus",
+        "theta": "0",
+        "u": "1"
+      }
+    ],
+    "monodromy": {
+      "basis": "alpha=vanishing cycle, beta=transported complementary cycle",
+      "determinant": 1,
+      "loop_orientation": "positive counterclockwise around (h,j)=(1,0)",
+      "matrix": [
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "matrix_convention": "columns_are_transported_basis_vectors_in_initial_basis",
+      "transport_receipt": "beta_final=beta_initial+alpha_initial"
+    },
+    "regular_row_count": 8,
+    "regular_rows": [
+      {
+        "action_I": "0.1266661746255574621365982234891053213644836885721801752364353171",
+        "angle_increment_Delta_phi": "3.490792975084186860060604623976413419803532051283525084053095402",
+        "case_id": "R01",
+        "h": "-1/2",
+        "j": "1/4",
+        "j_squared": "1/16",
+        "period_T": "3.352789550083957252336759853726276236314304445595307228361198572",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9658791423008180292808390891385605711473577442385916316026111095",
+          "-0.5444135644490954620882128902415996667773812074936826501226982171",
+          "1.010292706749913491369051979380160237924738951732274281725309327"
+        ]
+      },
+      {
+        "action_I": "0.4878801101417347756127613173459230784357091521392531013274730494",
+        "angle_increment_Delta_phi": "3.326264407644831764792531237878642820848421893019403104290470371",
+        "case_id": "R02",
+        "h": "0",
+        "j": "1/10",
+        "j_squared": "1/100",
+        "period_T": "3.701838332815970823327104441435999604477522799438220360534876141",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9974905619825708915965919130720712454763186812236463645674705327",
+          "-0.005000125009375937607435206821525667777380195105265281984181315579",
+          "1.002490686991946829204027119893596913253698876328911646551651848"
+        ]
+      },
+      {
+        "action_I": "0.4052428999862313189390731192921370372557398425727134772124709311",
+        "angle_increment_Delta_phi": "3.594050207047828582361004836147455892163528450792007459901696180",
+        "case_id": "R03",
+        "h": "0",
+        "j": "1/4",
+        "j_squared": "1/16",
+        "period_T": "3.670045751787843920189121871459771319935402203254753482829529274",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9839927003407779823464718206414960302511924675278642410106471658",
+          "-0.03128060733590893876989310443136834174516926458067956808492635190",
+          "1.015273307676686921116364925072864371996361732108543809095573518"
+        ]
+      },
+      {
+        "action_I": "0.6397531649539831251213029578041031939119783349644268541828250341",
+        "angle_increment_Delta_phi": "3.366852638769181173058606359777549916533266024811156908643003470",
+        "case_id": "R04",
+        "h": "1/4",
+        "j": "1/10",
+        "j_squared": "1/100",
+        "period_T": "3.944408897628627051001170974310454426049519117007552108131734957",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9979947760249937108206335904191016182939957996301469628895097634",
+          "0.2446815917859321424977938699812290832421968514263052285749489768",
+          "1.003313184239061568322839720437872535051798948203841734314560787"
+        ]
+      },
+      {
+        "action_I": "0.8031112871539513446910359735058480186386746358068857868890421034",
+        "angle_increment_Delta_phi": "3.442810555408910985097536331961190151155789063284884898240526560",
+        "case_id": "R05",
+        "h": "1/2",
+        "j": "1/10",
+        "j_squared": "1/100",
+        "period_T": "4.290547210383827646827022438946460196330756225617721299463218997",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9983300814864448536080507193666512619612059952860233690451340193",
+          "0.4933911837369989183677438596087569042339839164624634341777642090",
+          "1.004938897749445935240306859757894357727222078823559934867369810"
+        ]
+      },
+      {
+        "action_I": "1.012180450984267085889311914436721764723313614149903207062044362",
+        "angle_increment_Delta_phi": "3.401790278786510548623144314719352424342073740386141069098006311",
+        "case_id": "R06",
+        "h": "3/4",
+        "j": "1/20",
+        "j_squared": "1/400",
+        "period_T": "4.926023971703161297522066174811571960482003331052924150420236060",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9996427203894016357379501368932262933181255683079475239217894504",
+          "0.7471702594030044659555961923810388368187880414199654258506357959",
+          "1.002472460986397169782353944512187456499337526887982098071153655"
+        ]
+      },
+      {
+        "action_I": "1.137866177937535144991475722756859224197753795765825985438000383",
+        "angle_increment_Delta_phi": "3.680638061358226710547483382641820162942455032275468664517321664",
+        "case_id": "R07",
+        "h": "9/10",
+        "j": "1/20",
+        "j_squared": "1/400",
+        "period_T": "5.701579732599774598732352310138447976677562773452649713133510311",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9996709415120065933674219098873810237891071598251410385145935675",
+          "0.8937856461178230934233887113198314941961332602072092892828168353",
+          "1.005885295394183499944033198567549529592973899617931749231776732"
+        ]
+      },
+      {
+        "action_I": "1.265719936016938348186374297018993178947069964157421711200958800",
+        "angle_increment_Delta_phi": "4.735155153832374101458196895513092278630788218377868311349477558",
+        "case_id": "R08",
+        "h": "1",
+        "j": "1/100",
+        "j_squared": "1/10000",
+        "period_T": "8.070938145574734475524106593878752813734602415950948005624403322",
+        "physical_interval": "(r1,r2) subset (-1,1); r3>1",
+        "quadrature_parameterization": "u=(r1+r2)/2+(r2-r1)cos(theta)/2, theta in [0,pi]",
+        "regularity": "discriminant nonzero; j!=0",
+        "root_count": 3,
+        "root_order": "r1<r2<1<r3",
+        "roots": [
+          "-0.9999874998437465819396945380296678273877187114174893938934305691",
+          "0.9949937303902708042483226774985589738158169598545154257185592714",
+          "1.004993769453475777691371860531108853571901751562973968174871298"
+        ]
+      }
+    ],
+    "serialized_digits": 64,
+    "working_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "No discrete arithmetic target match or isolated primitive orbit owner is defined.",
+    "strongest_positive": "Exact analytic mechanics and certified quadrature/monodromy atlas.",
+    "tuple": [
+      "A0_FAIL",
+      "A1_PASS_ANALYTIC",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_NATURAL_QUANTIZATION"
+    ]
+  },
+  "schema": "hcs-c244-spherical-pendulum-monodromy-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "5f357e2d2b78604f6c286bfbd05da922e1d6791f",
+  "theorem": {
+    "boundaries": "At u=+/-1 use the global vector chart; double roots are not assigned regular periods. No elementary closed form is asserted for every quadrature.",
+    "critical_curve": "For an interior double root s in (-1,0): h=(3s^2-1)/(2s), j^2=(1-s^2)^2/(-s); endpoints are (-1,0) elliptic-elliptic and (1,0) focus-focus.",
+    "discriminant": "disc_u(P)=4*(16h^4-8h^3j^2-32h^2+72hj^2-27j^4+16)",
+    "liouville_fibers": "Regular fibers are Liouville tori; critical circles and the isolated focus-focus pinched fiber are separated from the interior elliptic branch.",
+    "monodromy": "With the declared oriented basis and a positive loop around the isolated focus-focus value, M=[[1,1],[0,1]].",
+    "quadratures": "T=2 integral du/sqrt(P), Delta_phi=2j integral du/((1-u^2)sqrt(P)), I=(1/pi) integral sqrt(P)/(1-u^2) du; endpoint-cancelled theta formulas are certified in each row.",
+    "root_chambers": "A regular j!=0 chamber has r1<r2<1<r3 and physical interval (r1,r2) subset (-1,1).",
+    "torus_closure": "A regular torus trajectory closes iff Delta_phi/(2*pi)=p/q in lowest terms; the primitive closure uses q u-oscillations and repetitions use kq, while irrational ratios are quasiperiodic."
+  }
+}

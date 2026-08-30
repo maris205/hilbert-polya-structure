@@ -17,6 +17,21 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C244--HCS-C248 additions (2026-08-30)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O228 | HCS-C244 spherical-pendulum monodromy as an arithmetic owner | proved integrable-continuum and target-bridge obstruction | The energy--momentum map has continuum Liouville tori and a clean focus--focus singular fiber.  Its cubic chambers, quadratures, and unipotent monodromy supply no intrinsic rational-prime carrier, target divisor, or global target determinant. | The reduced cubic, critical branch, pole charts, three quadratures, and fixed-basis monodromy remain exact; the natural spherical-pendulum quantization note is source-local only. | ../henon_spherical_pendulum_monodromy_route_a/THEOREM_PACKAGE.md |
+| HEN-O229 | HCS-C245 pulse-coupled integrate-and-fire synchrony as an arithmetic owner | proved hybrid-event and finite-cutoff obstruction | Event words and avalanche waves are source-local hybrid labels; cluster coarsening and the synchronous cycle do not select rational primes, prime powers, or a logarithmic prime roof.  A finite rational ledger cannot be promoted to an exhaustive continuous-state orbit census. | The exact event map, simultaneous closure, no-splitting theorem, and declared N<=8 receipt survive; tie, zero-coupling, and loss-of-concavity faces remain separate. | ../henon_pulse_coupled_integrate_fire_sync_route_a/THEOREM_PACKAGE.md |
+| HEN-O230 | HCS-C246 TCP/AIMD perpetuity as an arithmetic determinant | proved stochastic-owner and clock obstruction | The q-product is a Laplace transform of a state-dependent jump perpetuity, not an Euler factor or deterministic primitive-orbit product.  Jump count and continuous event time carry no rational-prime owner or target divisor. | The scaled square recurrence, all moments, generator identity, Palm occupation ratio, and beta/a/rho boundary atlas remain exact; positive-beta cycles are not relabelled as iid regenerations. | ../henon_tcp_aimd_perpetuity_renewal_route_a/THEOREM_PACKAGE.md |
+| HEN-O231 | HCS-C247 circular-billiard clean families as an isolated-orbit determinant | proved clean-family and continuum-action obstruction | Every interior rational direction fixes a one-parameter invariant circle and has det(I-DB^n)=0 with unipotent shear.  The coprime labels, lengths and caustics therefore do not define isolated primitive amplitudes, rational-prime carriers, or a target divisor. | The all-parameter gcd classification and repetition formulas remain valid; diameter and grazing are boundary faces, and p=sin(alpha) is only an auxiliary incidence amplitude. | ../henon_circular_billiard_clean_orbit_atlas_route_a/THEOREM_PACKAGE.md |
+| HEN-O232 | HCS-C248 Rudin--Shapiro diffraction as a target spectral owner | proved aperiodic-correlation and spectrum-scope obstruction | The exact delta-zero autocorrelation and Lebesgue diffraction are two-point van Hove statistics of an aperiodic substitution factor.  They are not a primitive shift-orbit product, target divisor, Euler factor, or statement about the full dynamical spectrum. | The corrected Laurent recursion, infinite-volume induction, and aperiodicity theorem remain exact; finite dyadic blocks are receipts only, and the source erratum is used solely for recursion signs. | ../henon_rudin_shapiro_diffraction_cocycle_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are source-local and invariant under the declared
+coordinate conventions; none licenses Route B.  The common scope firewall is
+NO_BAD_EULER_OR_ROOT_NUMBER, and the complete evidence/PDF audit is in
+../BATCH_REVIEW_C244_C248.md.
+
 ## Generation round HCS-2026-08-05
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |

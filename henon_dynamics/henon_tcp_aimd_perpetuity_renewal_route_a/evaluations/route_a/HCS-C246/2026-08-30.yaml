@@ -1,0 +1,83 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C246
+candidate_definition: linear-rate AIMD process with Xdot=a>0, jump intensity rho*X, and multiplicative decrease X->beta X
+family: stochastic piecewise-deterministic Markov process / affine perpetuity
+phase_space: X>0 with right-continuous jump paths; pre-jump section Y and squared state Z=Y^2
+dynamics: deterministic increase, state-dependent exponential jump clock, multiplicative decrease
+parameters: beta in {1/2,2/3,3/4}, a in {1/2,1,3/2}, rho in {1/2,1,2}
+parameter_provenance: source-defined rational sentinels; no target fitting
+arithmetic_origin: none
+clock: continuous event time and jump count; no arithmetic-prime clock
+normalization: pre-jump square recurrence, q-product prefix, generator moments, stationary Markov-renewal/Palm reward
+determinant_convention: q-product is source-local probability data only; no determinant
+orbit_cutoff: 27 parameter rows, moment orders 0..8, 12 product terms, six-step rational reward skeleton
+precision: exact Fraction arithmetic for all recorded coefficients and skeletons
+training_data: none
+forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators
+source_commit: 5f357e2d2b78604f6c286bfbd05da922e1d6791f
+code_commit: 5f357e2d2b78604f6c286bfbd05da922e1d6791f
+artifact_paths:
+  evidence: results/c246_tcp_aimd_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+evaluation_date: 2026-08-30
+fixed_epoch: 1788048000
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+source_lock:
+  object: linear-rate AIMD PDMP and its pre-jump square chain
+  arithmetic_origin: none
+  clock: event time and jump count, not prime-indexed
+  normalization: exact beta,a,rho, hazard, square, q-product, and Palm reward formulas
+  cutoff: 27 rational tuples, orders 0..8, twelve product terms, six reward steps
+  precision: exact Fraction arithmetic
+  allowed_data: jump hazards, affine perpetuity moments, source-local Laplace products, generator and occupation identities
+  forbidden_data: target primes, target zeros, local arithmetic, Euler factors, root numbers, automorphy, target divisors
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: source parameters and exponential clock have no intrinsic prime carrier
+  strongest_failure: no arithmetic origin or prime-power repetition law
+  artifacts: [THEOREM_PACKAGE.md, SOURCE_AUDIT.md]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: exact stochastic perpetuity and moment/occupation identities are source-local
+  strongest_failure: no deterministic primitive-orbit atlas; random jump cycles are stationary Markov for beta>0, not iid regeneration
+  metrics: {parameter_rows: 27, moment_max: 8, product_terms: 12, skeleton_steps: 6}
+  controls: [independent Fraction checker, SymPy identities, byte replay, 36 hostile mutations]
+a2:
+  verdict: A2_FAIL
+  evidence_status: PROVED
+  target_match: FAIL
+  strongest_evidence: source-local Laplace q-product is reproducible
+  strongest_failure: q-product is not an Euler factor or target determinant and no zero matching is defined
+  metrics: {target_zero_match: null, target_determinant_rows: 0}
+a3:
+  verdict: A3_FAIL
+  evidence_status: PROVED
+  strongest_evidence: finite generator and Palm identities only
+  strongest_failure: no target continuation, functional equation, or arithmetic counting law
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED
+  strongest_evidence: affine jump skeleton and transfer-style Laplace recursion suggest a formal lift
+  strongest_failure: no natural unitary or Hilbert-Polya operator is defined
+  metrics: {route_b_ready: false}
+adversarial_controls:
+  controls_used: [27 rational tuples, explicit 2a/rho square factor, Markov-renewal wording, replay, repaired-hash mutations]
+  proves_too_much_risk: high if the q-product is called an Euler factor, positive-beta cycles are called iid regenerative, or source-local moments are promoted to target data
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: exact source-local stochastic recurrence, perpetuity, moment, and stationary occupation identities only; no arithmetic or target spectral claim
+blocking_conditions:
+  - no arithmetic origin
+  - no deterministic primitive orbit atlas
+  - target_match: FAIL
+  - no natural unitary target lift
+next_smallest_test: none inside this frozen source-local theorem; a different stochastic model is a new candidate
+round2_clues: []
+route_b_invocation_allowed: false

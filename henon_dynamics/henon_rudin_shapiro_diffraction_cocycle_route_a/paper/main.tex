@@ -1,0 +1,198 @@
+\pdfvariable suppressoptionalinfo 611
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=16mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\title{An exact Rudin--Shapiro Hadamard cocycle and diffraction certificate}
+\author{HCS Research Program}
+\date{30 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give one exact, source-local theorem package for the classical four-letter
+Rudin--Shapiro substitution.  Primitivity gives uniform letter frequencies,
+while the factor $a,b\mapsto+1$, $c,d\mapsto-1$ is the coefficient word of
+the dyadic pair $P_{k+1}=P_k+z^{2^k}Q_k$,
+$Q_{k+1}=P_k-z^{2^k}Q_k$.  We prove the complementary-energy identity and
+the square-root unit-circle bound, then derive both the finite Laurent
+correlation cocycle and the genuine infinite-volume $4$-adic recursion.  The
+latter forces autocorrelation $\delta_0$ and Lebesgue diffraction under a
+declared symmetric Ces\`aro/van Hove convention.  This is not a periodic-orbit
+atlas and diffraction is not the full dynamical spectrum; consequently the
+strict Route-A tuple is
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)}.
+\end{abstract}
+
+\section{Frozen substitution and factor}
+Let
+\[
+ \sigma(a)=ab,\quad \sigma(b)=ac,\quad \sigma(c)=db,\quad
+ \sigma(d)=dc,\qquad \kappa(a)=\kappa(b)=1,\quad
+ \kappa(c)=\kappa(d)=-1 .
+\]
+The one-sided fixed point beginning in $a$ is used for finite receipts.  For
+the diffraction statement we use the canonical two-sided hull.  Its binary
+factor $w$ can equivalently be specified by
+\[
+ w(4n+\ell)=\begin{cases}w(n),&\ell\in\{0,1\},\\
+ (-1)^{n+\ell}w(n),&\ell\in\{2,3\},\end{cases}\qquad
+ w(0)=1,\quad w(-1)=-1 .                                      \tag{1}
+\]
+The two conventions agree on the displayed positive fixed point.
+
+\begin{proposition}[Primitivity, frequencies, and aperiodicity]
+With columns indexed by $a,b,c,d$, the substitution matrix is
+\[
+ M=\begin{pmatrix}1&1&0&0\\1&0&1&0\\0&1&0&1\\0&0&1&1\end{pmatrix},
+ \qquad M^3>0,
+\]
+so the unique invariant letter-frequency vector is
+$(1/4,1/4,1/4,1/4)$.  The fixed point and its hull are aperiodic.
+\end{proposition}
+\begin{proof}
+Direct multiplication gives a strictly positive $M^3$, and
+$M(1,1,1,1)^\mathsf{T}=2(1,1,1,1)^\mathsf{T}$; Perron--Frobenius gives the
+frequency statement.  Every substituted two-letter block has its first
+letter in $\{a,d\}$ and its second in the disjoint set $\{b,c\}$.  Hence the
+parity of substitution boundaries is recognizable.  A shift period must be
+even, since an odd shift would identify a letter in the two disjoint parity
+classes.  Desubstitution divides an even period by two.  Repeating until an
+odd period gives the same contradiction.  This proves aperiodicity for every
+hull element, not merely for a finite prefix.
+\end{proof}
+
+\section{Dyadic Hadamard cocycle}
+Put $P_0(z)=Q_0(z)=1$ and $N=2^k$.  Define
+\[
+ P_{k+1}=P_k+z^NQ_k,\qquad Q_{k+1}=P_k-z^NQ_k .                    \tag{2}
+\]
+The coefficient word of $P_k$ is exactly the coded substitution prefix of
+length $N$.  On $|z|=1$, expansion of (2) cancels the cross terms:
+\begin{equation}
+ |P_{k+1}(z)|^2+|Q_{k+1}(z)|^2
+ =2\bigl(|P_k(z)|^2+|Q_k(z)|^2\bigr)=2^{k+2}.                    \tag{3}
+\end{equation}
+Thus
+\[
+ \max\{|P_k(z)|,|Q_k(z)|\}\leq 2^{(k+1)/2}\quad(|z|=1).       \tag{4}
+\]
+This is an exact identity and bound, not a sampled numerical supremum.  The
+certificate records all coefficients through $k=10$ (4,094 coefficient
+cells), including the energy and bound integer for each row.
+
+\ifnum\CRevisionRound>0
+\section{Paired Laurent correlations}
+For a polynomial $A$, write $A^*(z)=A(z^{-1})$.  Set
+\[
+ R_k=P_kP_k^*,\quad S_k=Q_kQ_k^*,\quad
+ T_k=P_kQ_k^*,\quad U_k=Q_kP_k^* .                              \tag{5}
+\]
+These are Laurent polynomials with integer coefficients.  Multiplying (2)
+and collecting powers of $z$ gives, exactly,
+\begin{align*}
+ R_{k+1}&=R_k+S_k+z^{-N}T_k+z^NU_k,&
+ S_{k+1}&=R_k+S_k-z^{-N}T_k-z^NU_k,\\
+ T_{k+1}&=R_k-S_k-z^{-N}T_k+z^NU_k,&
+ U_{k+1}&=R_k-S_k+z^{-N}T_k-z^NU_k.                    \tag{6}
+\end{align*}
+The finite ledger stores every coefficient for $0\leq k\leq7$ and an
+independent checker verifies (6), rather than treating a plotted spectrum as
+evidence.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{The infinite-volume recursion and diffraction}
+The finite cocycle (6) is not by itself the limiting assertion.  Define, in
+the two-sided hull and with symmetric Ces\`aro averaging,
+\[
+ a_m=\lim_{L\to\infty}\frac1{2L+1}\sum_{n=-L}^Lw(n)w(n+m),\qquad
+ b_m=\lim_{L\to\infty}\frac1{2L+1}\sum_{n=-L}^L(-1)^nw(n)w(n+m).       \tag{7}
+\]
+Primitivity gives unique ergodicity, hence these limits exist.  Splitting the
+sums into the four residue classes in (1) gives the genuine all-$m\in\mathbb Z$
+recursion
+\begin{align*}
+a_{4m}&=\tfrac{1+(-1)^m}{2}a_m,&a_{4m+2}&=0,\\
+a_{4m+1}&=\tfrac{1-(-1)^m}{4}a_m+\tfrac{(-1)^m}{4}b_m-\tfrac14b_{m+1},\\
+a_{4m+3}&=\tfrac{1+(-1)^m}{4}a_{m+1}-\tfrac{(-1)^m}{4}b_m+\tfrac14b_{m+1},\\
+b_{4m}&=0,&b_{4m+2}&=\tfrac{(-1)^m}{2}b_m+\tfrac12b_{m+1},\\
+b_{4m+1}&=\tfrac{1-(-1)^m}{4}a_m-\tfrac{(-1)^m}{4}b_m+\tfrac14b_{m+1},\\
+b_{4m+3}&=-\tfrac{1+(-1)^m}{4}a_{m+1}-\tfrac{(-1)^m}{4}b_m+\tfrac14b_{m+1}. \tag{8}
+\end{align*}
+Here $a_0=1$ and $b_0=0$.  Substitution of $m=0$ into the six nontrivial
+lines give the finite base system.  Solving it (the equations with $m=0$ and
+$m=-1$) gives the exact table
+\[
+ (a_{-3},a_{-2},a_{-1},a_0,a_1,a_2,a_3)=(0,0,0,1,0,0,0),
+ \qquad b_{-3}=b_{-2}=b_{-1}=b_0=b_1=b_2=b_3=0 .                 \tag{9}
+\]
+Now use induction on $|t|$: for $|t|\ge4$, write $t=4m+r$.  Every right-hand
+index $m$ or $m+1$ in (8) has strictly smaller absolute value, while the two
+even classes are already zero.  Therefore
+\[
+ a_m=\begin{cases}1&m=0,\\0&m\ne0,\end{cases}\qquad b_m=0\quad(m\in\mathbb Z).
+\]
+The autocorrelation measure of the weighted comb is consequently
+\[
+ \gamma_{\rm RS}=\sum_{m\in\mathbb Z}a_m\,\delta_m=\delta_0,
+ \qquad \widehat\gamma_{\rm RS}=\lambda,                         \tag{10}
+\]
+where $\lambda$ is Lebesgue measure.  Equation (10) is a diffraction statement
+under the declared averaging convention.  The full dynamical spectrum of the
+substitution shift is a different invariant (it contains information beyond
+two-point diffraction), so (10) is not a claim that the entire dynamical
+spectrum is Lebesgue.
+\fi
+
+\section{Exact receipt and Route-A boundary}
+The JSON receipt contains 11 dyadic rows, 9 frequency rows, 8 Laurent rows,
+and 64 exact mismatch witnesses.  A producer-independent checker passes 377
+assertions; an independent SymPy program passes 90 symbolic identities; clean
+byte replay is exact; and 42 repaired-hash or semantic mutations are rejected.
+All values are integer or symbolic exact values.
+
+There is no shift-periodic primitive orbit because the hull is aperiodic; a
+finite block is not relabelled as an orbit.  The strict evaluation is
+\[
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)},
+\qquad\texttt{ROUTE\_A\_REJECTED},
+\]
+with Route B disabled and scope
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  In particular, (10) is not a
+target divisor, zero-set, Euler-factor, root-number, automorphy, or
+Hilbert--P\'olya assertion.
+
+\begin{thebibliography}{9}
+\bibitem{rudin}
+W. Rudin, ``Some theorems on Fourier coefficients,'' \emph{Proc. Amer. Math.
+Soc.} 10 (1959), 855--859. DOI:
+\href{https://doi.org/10.1090/S0002-9939-1959-0116184-5}{10.1090/S0002-9939-1959-0116184-5}.
+
+\bibitem{baakegrimm}
+M. Baake and U. Grimm, ``Kinematic diffraction is insufficient to distinguish
+order from disorder,'' \emph{Phys. Rev. B} 79, 020203(R) (2009). DOI:
+\href{https://doi.org/10.1103/PhysRevB.79.020203}{10.1103/PhysRevB.79.020203}.
+
+\bibitem{erratum}
+M. Baake and U. Grimm, ``Erratum: Kinematic diffraction is insufficient to
+distinguish order from disorder,'' \emph{Phys. Rev. B} 80, 029903(E) (2009).
+DOI: \href{https://doi.org/10.1103/PhysRevB.80.029903}{10.1103/PhysRevB.80.029903}.
+We use its corrected $a_{4m}$, $a_{4m+3}$, and $b_{4m+2}$ recursion signs.
+\end{thebibliography}
+
+\section*{Declarations}
+\textbf{Scope.} The literal firewall is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no target arithmetic or operator is
+claimed.  \textbf{Data and code.} Exact recurrences and independent audit
+programs accompany this paper.  \textbf{AI-use disclosure.} Generative tools
+assisted drafting and code generation; displayed claims are checked by the
+declared programs.  This is not external peer review.  For machine-readable
+clarity, the limiting coefficient is also written as \texttt{delta\_0}.
+\end{document}

@@ -2718,3 +2718,35 @@ entries.  The strict tuples are, in order C239--C243,
 scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
+
+## Route-A independent cross-subtype round C244--C248
+
+This round takes one theorem-scale step in each of five independent owners and
+switches subtype in every slot: a focus--focus integrable Hamiltonian, a
+pulse-coupled hybrid network, a state-dependent stochastic AIMD process, a
+clean-family circular billiard, and an aperiodic Rudin--Shapiro substitution.
+Each package closes its source-local theorem, explicit boundary faces, and
+replayable evidence chain; none is an installment of another paper.
+
+- [C244 spherical-pendulum cubic chambers and focus--focus monodromy](henon_spherical_pendulum_monodromy_route_a/README.md) · [paper PDF](henon_spherical_pendulum_monodromy_route_a/paper/main.pdf)
+- [C245 pulse-coupled integrate-and-fire event maps and synchrony](henon_pulse_coupled_integrate_fire_sync_route_a/README.md) · [paper PDF](henon_pulse_coupled_integrate_fire_sync_route_a/paper/main.pdf)
+- [C246 TCP/AIMD affine perpetuity and Palm occupation law](henon_tcp_aimd_perpetuity_renewal_route_a/README.md) · [paper PDF](henon_tcp_aimd_perpetuity_renewal_route_a/paper/main.pdf)
+- [C247 circular-billiard clean primitive-family atlas](henon_circular_billiard_clean_orbit_atlas_route_a/README.md) · [paper PDF](henon_circular_billiard_clean_orbit_atlas_route_a/paper/main.pdf)
+- [C248 Rudin--Shapiro Hadamard cocycle and diffraction certificate](henon_rudin_shapiro_diffraction_cocycle_route_a/README.md) · [paper PDF](henon_rudin_shapiro_diffraction_cocycle_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C244_C248.md), [batch plan](BATCH_PLAN_C244_C248.md),
+and [batch review](BATCH_REVIEW_C244_C248.md) for collision decisions,
+theorem increments, exact audit counts, release hashes, and the complete
+fixed-epoch PDF reproducibility record.  The round closes 7,394 independent
+checker assertions, 1,066 symbolic identities, 184 hostile rejections, 135
+content-addressed payloads (140 physical files), and 12 final-paper pages with
+121 embedded/subset font entries.  The strict tuples, in order C244--C248, are
+(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION),
+(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT),
+(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT),
+(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION), and
+(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT).  All five are
+ROUTE_A_REJECTED, Route B is disabled, and the common scope is
+NO_BAD_EULER_OR_ROOT_NUMBER.  No target prime/zero table, arithmetic local
+datum, Euler factor, root number, automorphy, target divisor/counting law,
+functional equation, Hilbert--Pólya operator, or Route-B input is claimed.

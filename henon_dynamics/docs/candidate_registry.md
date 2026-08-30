@@ -3,6 +3,29 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C244--HCS-C248 additions (2026-08-30)
+
+Five independent cross-subtype Route-A candidates were released from the
+common baseline 5f357e2d2b78604f6c286bfbd05da922e1d6791f.  The evaluator is
+../../flow_systems/skills/route-a-evaluator.md v0.2.0 at SHA-256
+6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c.
+The retained results are source-local; NEW does not assert literature
+priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C244 | The unit spherical pendulum closes the reduced cubic/discriminant, the interior critical branch and endpoint singularities, eight regular root-chamber receipts, three pole-safe quadratures, and fixed-basis focus--focus monodromy. | (A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION) | [spherical-pendulum package](../henon_spherical_pendulum_monodromy_route_a/) · [paper PDF](../henon_spherical_pendulum_monodromy_route_a/paper/main.pdf) |
+| HCS-C245 | The exponential-rise pulse network closes the exact event/avalanche map, equality-partition no-splitting theorem, absorbing synchronous cycle, and finite rational synchrony receipt with an explicit continuum-cutoff boundary. | (A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT) | [integrate-and-fire package](../henon_pulse_coupled_integrate_fire_sync_route_a/) · [paper PDF](../henon_pulse_coupled_integrate_fire_sync_route_a/paper/main.pdf) |
+| HCS-C246 | The linear-rate TCP/AIMD PDMP closes the scaled squared perpetuity, stationary product, generator and all-moment recurrences, Markov-renewal/Palm occupation law, and all declared parameter faces. | (A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT) | [TCP/AIMD package](../henon_tcp_aimd_perpetuity_renewal_route_a/) · [paper PDF](../henon_tcp_aimd_perpetuity_renewal_route_a/paper/main.pdf) |
+| HCS-C247 | The circular billiard closes the coprime rational invariant-circle classification, both orientations, length/caustic/action and repetition formulas, clean unipotent return, and merged diameter/two-sided grazing boundaries. | (A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION) | [circular-billiard package](../henon_circular_billiard_clean_orbit_atlas_route_a/) · [paper PDF](../henon_circular_billiard_clean_orbit_atlas_route_a/paper/main.pdf) |
+| HCS-C248 | The Rudin--Shapiro substitution closes the primitive frequency/aperiodicity theorem, dyadic Hadamard cocycle and energy bound, corrected Laurent recursion, infinite 4-adic correlation induction, and delta-zero/Lebesgue diffraction statement. | (A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT) | [Rudin--Shapiro package](../henon_rudin_shapiro_diffraction_cocycle_route_a/) · [paper PDF](../henon_rudin_shapiro_diffraction_cocycle_route_a/paper/main.pdf) |
+
+All five are ROUTE_A_REJECTED with route_b_invocation_allowed: false.
+No target divisor/counting law, arithmetic local datum, Euler factor, root
+number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
+introduced.  Scope is NO_BAD_EULER_OR_ROOT_NUMBER.  Detailed receipts and
+content-addressed hashes are in [BATCH_REVIEW_C244_C248.md](../BATCH_REVIEW_C244_C248.md).
+
 ## HCS-C239--HCS-C243 additions (2026-08-30)
 
 Five independent cross-subtype Route-A candidates were released from the

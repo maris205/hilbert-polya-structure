@@ -1,0 +1,74 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C248
+title: Rudin-Shapiro diffraction cocycle and exact correlation atlas
+evaluation_date: 2026-08-30
+fixed_epoch: 1788048000
+source_commit: 5f357e2d2b78604f6c286bfbd05da922e1d6791f
+code_commit: 5f357e2d2b78604f6c286bfbd05da922e1d6791f
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+candidate_definition: "Four-letter primitive constant-length-2 Rudin-Shapiro substitution with +/-1 factor and dyadic polynomial cocycle"
+family: "aperiodic symbolic substitution / harmonic cocycle"
+phase_space: "canonical two-sided substitution hull; finite dyadic words are receipts only"
+dynamics: "sigma(a)=ab, sigma(b)=ac, sigma(c)=db, sigma(d)=dc; factor a,b=+1 and c,d=-1"
+parameters: "dyadic depth k>=0; no target fitting"
+parameter_provenance: source-defined substitution and polynomial depth
+arithmetic_origin: none
+clock: "one substitution inflation step; van Hove averaging on Z"
+normalization: "P_0=Q_0=1; autocorrelation eta(0)=1"
+determinant_convention: "none; diffraction is Fourier transform of autocorrelation, not a dynamical determinant"
+orbit_cutoff: "none: the hull is aperiodic and no primitive shift-periodic orbit is claimed"
+precision: "exact integer and symbolic arithmetic"
+training_data: none
+forbidden_data: "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, Hilbert-Polya operators"
+artifact_paths:
+  evidence: results/c248_rs_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+frozen_model:
+  definition: "sigma(a)=ab, sigma(b)=ac, sigma(c)=db, sigma(d)=dc"
+  factor_coding: "a,b -> +1; c,d -> -1"
+  dyadic_cocycle: "P'=P+z^N Q, Q'=P-z^N Q, N=2^k"
+  primitive_periodic_orbit: none
+  averaging: "symmetric Cesaro/van Hove"
+claims:
+  primitivity: "M^3 is strictly positive and the invariant frequency is uniform"
+  polynomial_energy: "|P_k|^2+|Q_k|^2=2^(k+1) on the unit circle"
+  sup_bound: "each polynomial is bounded by sqrt(2^(k+1))"
+  paired_correlations: "the four Laurent products satisfy the exact shifted recursion"
+  infinite_recursion: "the all-integer 4-adic a_m,b_m recursion forces delta_0"
+  diffraction: "gamma_RS=delta_0 and Fourier(gamma_RS)=Lebesgue under the declared convention"
+  aperiodicity: "no shift-periodic primitive orbit is asserted"
+  arithmetic: none
+nonclaims:
+  - "Finite dyadic blocks are receipts, not periodic orbits."
+  - "Diffraction is not the full dynamical spectrum of the substitution shift."
+  - "No target arithmetic matching, Euler factor, root number, automorphy, or Hilbert-Polya operator is claimed."
+citations:
+  - id: Rudin1959
+    title: "Some theorems on Fourier coefficients"
+    authors: "Walter Rudin"
+    doi: 10.1090/S0002-9939-1959-0116184-5
+    url: https://doi.org/10.1090/S0002-9939-1959-0116184-5
+  - id: BaakeGrimm2009
+    title: "Kinematic diffraction is insufficient to distinguish order from disorder"
+    authors: "Michael Baake and Uwe Grimm"
+    doi: 10.1103/PhysRevB.79.020203
+    url: https://doi.org/10.1103/PhysRevB.79.020203
+  - id: BaakeGrimmErratum2009
+    title: "Erratum: Kinematic diffraction is insufficient to distinguish order from disorder"
+    authors: "Michael Baake and Uwe Grimm"
+    doi: 10.1103/PhysRevB.80.029903
+    url: https://doi.org/10.1103/PhysRevB.80.029903
+    role: "corrected a_{4m}, a_{4m+3}, and b_{4m+2} recursion signs"
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS
