@@ -1,0 +1,189 @@
+\pdfvariable suppressoptionalinfo 611
+\pdfvariable trailerid {[<C2492026083000000000000000000000><C2492026083000000000000000000000>]}
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=17mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\R}{\mathbb R}
+\newcommand{\VdP}{Van der Pol}
+\title{A Sign-Complete Lienard Certificate for the Van der Pol Flow}
+\author{HCS Research Program}
+\date{30 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We freeze the smooth polynomial \VdP\ oscillator and take one theorem-scale
+step beyond a local phase portrait.  For $\mu>0$, its Lienard primitive has a single
+positive zero, so the classical theorem gives exactly one hyperbolic attracting
+limit cycle for positive damping; time reversal gives one repelling cycle for
+negative damping, while the zero face is a harmonic center with a continuum
+of ovals.  Energy balance and planar divergence then identify the Poincare
+fixed section and the transverse Floquet multiplier.  Five independently
+replayed DOP853 rows illustrate the theorem (the multiplier decreases from
+\(0.5331\) at \(\mu=0.1\) to \(1.28\times10^{-25}\) at \(\mu=4\)).
+The rows are finite regression probes, not an all-state census.  This
+source-local result makes no arithmetic, target-determinant, or
+Hilbert--Polya claim.
+\end{abstract}
+
+\section{Frozen model and question}
+We study the polynomial vector field on \(\R^2\)
+\begin{equation}
+ \dot x=y,\qquad \dot y=\mu(1-x^2)y-x,\qquad \mu\in\R .
+ \label{eq:vdp}
+\end{equation}
+Equivalently, \(x\) satisfies
+\begin{equation}
+ x''+\mu(x^2-1)x'+x=0 .
+ \label{eq:lienard}
+\end{equation}
+The clock is physical time \(t\), and the oriented Poincare section is
+\(\Sigma=\{(x,y):x=0,\ y>0\}\).  The question is whether this smooth
+nonlinear family can support a complete, replayable sign and boundary
+statement without importing an arithmetic carrier.  The answer below is
+analytic; the numerical receipt only supplies a transparent finite check.
+
+\ifnum\CRevisionRound=0
+The baseline freezes (\ref{eq:vdp})--(\ref{eq:lienard}), the section
+orientation, and the three parameter faces \(\mu<0\), \(\mu=0\), and
+\(\mu>0\).  No period is assigned by sampling alone.
+\fi
+
+\section{The Lienard theorem and sign boundary}
+Write \(f(x)=\mu(x^2-1)\) and
+\begin{equation}
+ F(x)=\int_0^x f(s)\dd s=\mu\left(\frac{x^3}{3}-x\right).
+ \label{eq:F}
+\end{equation}
+For \(\mu>0\), \(F<0\) on \((0,\sqrt3)\), has the unique positive zero
+\(\sqrt3\), and is positive and increasing thereafter.  The standard
+Liénard existence and uniqueness hypotheses therefore apply.
+
+\begin{theorem}[sign-complete cycle statement]
+For every \(\mu>0\), the flow (\ref{eq:vdp}) has exactly one hyperbolic
+attracting periodic orbit surrounding the origin.  Its Poincare return map on
+\(\Sigma\) has one fixed point, and the derivative at that point is the
+transverse Floquet multiplier.  For \(\mu<0\), the map
+\((t,x,y)\mapsto(-t,x,-y)\) transfers this orbit to exactly one hyperbolic
+repelling cycle.  At \(\mu=0\),
+\(E=(x^2+y^2)/2\) is conserved and every level \(E=c>0\) is a harmonic oval
+of period \(2\pi\).
+\end{theorem}
+
+\paragraph{Proof sketch.}
+Equation (\ref{eq:lienard}) is in the classical Liénard form.  The sign and
+monotonicity of \(F\) in (\ref{eq:F}), together with the odd symmetry, give
+existence and uniqueness of the enclosing cycle; hyperbolicity and attraction
+are part of the same return-map conclusion.  Reversing time and velocity
+changes the sign of \(\mu\), hence reverses stability.  Setting \(\mu=0\)
+reduces (\ref{eq:vdp}) to the unit harmonic oscillator, proving the center
+face directly.  This invokes no numerical fit and excludes no state by a
+finite cutoff.
+
+\ifnum\CRevisionRound>0
+\section{Energy, divergence, and Floquet data}
+The elementary identities are
+\begin{equation}
+ E=\frac{x^2+y^2}{2},\qquad \dot E=\mu(1-x^2)y^2,\qquad
+ \operatorname{div}X=\mu(1-x^2).
+ \label{eq:identities}
+\end{equation}
+For a periodic orbit with \(\mu\ne0\), integrating the first identity gives
+the exact balance \(\int_0^T(1-x^2)y^2\dd t=0\); the divided balance is not
+asserted on the \(\mu=0\) center face.  In two dimensions one Floquet multiplier is
+one (the tangent direction), and Liouville's formula gives
+\begin{equation}
+ \lambda_\perp=\exp\!\left(\int_0^T\operatorname{div}X\dd t\right)
+ =\exp\!\left(\mu\int_0^T(1-x^2)\dd t\right).
+ \label{eq:floquet}
+\end{equation}
+For a restoring frequency \(\omega>0\), the change \(\tau=\omega t\)
+reduces \(x''+\mu_0(x^2-1)x'+\omega^2x=0\) to the same normal form with
+effective parameter \(\mu_0/\omega\).
+\fi
+
+\ifnum\CRevisionRound>0
+\section{Finite Poincare receipt}
+The producer brackets the fixed point by \(y\in[0.05,8]\) and integrates
+with DOP853 (relative tolerance \(3\times10^{-12}\), absolute tolerance
+\(3\times10^{-14}\), maximum step \(0.03\)).  The independent checker repeats
+the integration and verifies the return residual and (\ref{eq:identities})--
+(\ref{eq:floquet}).  Table~\ref{tab:receipt} reports rounded values; all
+digits in the JSON receipt are retained at 15 significant figures.
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\caption{Positive-parameter return probes.  These rows are finite regression
+receipts, not a numerical census or a proof of uniqueness.}
+\label{tab:receipt}
+\begin{tabular}{c|c|c|c|c|c}
+\toprule
+\(\mu\) & \(y_\Sigma\) & \(T\) & \(\int\!\operatorname{div}X\) & \(\lambda_\perp\) & |balance|\\
+\midrule
+0.1 & 2.00177 & 6.28711 & $-0.62910$ & $5.33\times10^{-1}$ & $6.2\times10^{-15}$\\
+0.5 & 2.04406 & 6.38068 & $-3.23967$ & $3.92\times10^{-2}$ & $2.1\times10^{-13}$\\
+1   & 2.17271 & 6.66329 & $-7.05893$ & $8.60\times10^{-4}$ & $1.8\times10^{-13}$\\
+2   & 2.61497 & 7.62987 & $-18.17864$ & $1.27\times10^{-8}$ & $8.3\times10^{-13}$\\
+4   & 3.76234 & 10.20352 & $-57.32131$ & $1.28\times10^{-25}$ & $5.4\times10^{-12}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+\fi
+
+\ifnum\CRevisionRound=1
+\paragraph{Independent checks.}
+The producer-independent checker passes 264 structural and numerical
+assertions.  A separate SymPy reconstruction passes 81 identities, including
+the origin characteristic polynomial, time reversal, and frequency scaling.
+Clean-process byte replay succeeds, and 40 repaired-hash hostile mutations
+are all rejected.  These gates validate the receipt's provenance and algebra;
+they do not enlarge the theorem's scope.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Collision audit and route boundary}
+The model is not a relabeling of nearby packages.  C227 studies the
+three-dimensional Lorenz flow and local equilibrium/Hopf conditions; C232
+studies a conservative Duffing separatrix; C178 uses a harmonic strobe; C237
+is a stochastic Kramers system; and C245 is hybrid integrate-and-fire.  C249
+is the smooth polynomial Liénard case whose single-cycle theorem and Floquet
+receipt are absent from those certificates.  This comparison is workspace
+bookkeeping, not a literature-priority claim.
+
+The locked scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No prime or
+zero table, arithmetic local datum, Euler factor, root number, automorphy
+claim, target divisor or functional equation, target determinant, or
+Hilbert--Pólya operator is present.  Accordingly the Route-A tuple is
+\texttt{(A0\_FAIL,A1\_PASS\_ANALYTIC,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)},
+with overall verdict \texttt{ROUTE\_A\_REJECTED}; Route B is disabled.
+\fi
+
+\section{Conclusion and limitations}
+The main result is a single sign-complete theorem package: Liénard uniqueness
+for positive damping, time reversal for negative damping, an exact center
+boundary, and a divergence-to-Floquet identity tied to one Poincare section.
+The receipt is deliberately modest.  It does not give an elementary formula
+for the period at every parameter, enumerate every continuum state, or infer
+asymptotic coefficients from five samples.  A future analytic direction is a
+uniform asymptotic study of the relaxation period; that direction would still
+be a smooth-flow problem and would not authorize arithmetic claims.
+
+\begin{thebibliography}{9}
+\bibitem{Lienard1928} A.~Liénard, ``Étude des oscillations entretenues,''
+\emph{Revue Générale de l'Électricité} 23 (1928), 901--912,
+\href{https://gallica.bnf.fr/ark:/12148/bpt6k5671115f}{Gallica scan}.
+\bibitem{LevinsonSmith1942} N.~Levinson and O.~K.~Smith, ``A general equation
+for relaxation oscillations,'' \emph{Duke Mathematical Journal} 9 (1942),
+382--403, DOI
+\href{https://doi.org/10.1215/S0012-7094-42-00928-1}{10.1215/S0012-7094-42-00928-1}.
+\bibitem{Strogatz2015} S.~H.~Strogatz, \emph{Nonlinear Dynamics and Chaos},
+2nd ed., Westview Press, 2015.
+\end{thebibliography}
+\end{document}

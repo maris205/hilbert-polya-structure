@@ -1,0 +1,184 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+schema: hcs-route-a-evaluation-v2
+candidate_id: HCS-C249
+candidate_definition: smooth polynomial Van der Pol oscillator viewed as a Lienard flow
+family: VAN-DER-POL-LIENARD-SMOOTH-FLOW
+phase_space: R^2 with coordinates (x,y)
+dynamics: xdot=y; ydot=mu*(1-x^2)*y-x; xddot+mu*(x^2-1)*xdot+x=0
+parameters: mu in R; optional restoring frequency omega>0
+parameter_provenance: exact normal-form parameters; five finite probes are locally recomputed
+arithmetic_origin: NONE; no arithmetic labels, weights, or prime-derived clock
+clock: physical time t
+normalization: xddot+mu*(x^2-1)*xdot+x=0 with section Sigma={(x,y):x=0,y>0}
+determinant_convention: NONE_BY_DESIGN_NO_TARGET_DETERMINANT
+orbit_cutoff: five positive-mu return probes; not an all-state census
+precision: IEEE-754 double; DOP853 rtol=3e-12, atol=3e-14, max_step=0.03
+training_data: none; analytic theorem plus source-local regression receipt
+forbidden_data: target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor, target determinant, Hilbert--Polya operators
+source_commit: 3ff451e904f8f063e88c40ef87f4697a6586b1a5
+code_commit: 3ff451e904f8f063e88c40ef87f4697a6586b1a5
+evaluation_date: 2026-08-30
+fixed_epoch: 1788048000
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_paths:
+  - results/c249_vdp_evidence.json
+  - code/c249_vdp_checker.py
+  - code/c249_vdp_sympy_crosscheck.py
+  - code/c249_vdp_replay.py
+  - code/c249_vdp_mutation.py
+  - paper/main.pdf
+route_b_invocation_allowed: false
+route_a_tuple: [A0_FAIL, A1_PASS_ANALYTIC, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+
+source_lock:
+  object: >-
+    The smooth polynomial flow xdot=y, ydot=mu*(1-x^2)*y-x on R^2, with
+    scalar Lienard form xddot+mu*(x^2-1)*xdot+x=0 and oriented section x=0,y>0.
+  arithmetic_origin: NONE
+  clock: physical time t, with no logarithmic-prime normalization
+  normalization: unit linear restoring coefficient; optional omega scaling is explicit
+  determinant_convention: NONE_BY_DESIGN_NO_TARGET_DETERMINANT
+  cutoff: five finite positive-mu return probes; theorem rows cover the sign faces
+  precision: SYMBOLIC_IDENTITIES_AND_FROZEN_DOP853_DOUBLE_CONTROLS
+  allowed_data: frozen vector field, Lienard theorem, exact identities, and local regression values
+  forbidden_data: prime tables, zero tables, target fitting, Euler factors, root numbers, automorphy, target determinant, or Hilbert--Polya operator
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the source definition has no arithmetic labels or imported target data and survives nonarithmetic parameter controls
+  strongest_failure: the smooth oscillator has no intrinsic rational-prime owner, prime-power repetition law, log-prime clock, or von Mangoldt weight
+  arithmetic_controls:
+    - negative, zero, and positive mu sign faces
+    - neighboring nonarithmetic parameter values
+    - finite return probes compared with the analytic theorem rather than target zeros
+    - no-prime/no-zero data split
+  artifacts:
+    - results/c249_vdp_evidence.json
+    - SOURCE_AUDIT.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: Lienard sign and monotonicity hypotheses give one hyperbolic attracting cycle for every mu>0, with time reversal for mu<0
+  strongest_failure: the receipt is not a complete numerical census and does not assign arithmetic amplitudes or phases
+  metrics:
+    theorem_parameter_domain: all_real_mu_by_sign
+    analytic_cycle_count_positive_mu: one
+    analytic_cycle_count_negative_mu: one
+    center_boundary_periodic_set: continuum
+    finite_poincare_rows: 5
+    floquet_identity: exp(integral_divergence)
+  artifacts:
+    - results/c249_vdp_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the exact energy and divergence identities are independently replayed
+  strongest_failure: no dynamical zeta, Fredholm determinant, target divisor, or zero-matching experiment is defined
+  metrics:
+    zero_error_train: not_applicable_no_determinant
+    zero_error_validation: not_applicable_no_determinant
+    zero_error_test: not_applicable_no_determinant
+    cutoff_drift: finite_regression_only
+    precision_drift: no_claim_beyond_frozen_double_receipt
+    control_margin: no arithmetic selectivity is claimed
+  artifacts:
+    - results/c249_vdp_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the center, sign reversal, energy balance, and Floquet boundary are exact source-local identities
+  strongest_failure: no global divisor, continuation, functional equation, counting law, explicit formula, or Weil compression is constructed
+  analytic_structure: smooth planar Lienard flow and classical limit-cycle theorem only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: the flow has a canonical classical phase plane and a natural section/Floquet observable
+  strongest_failure: no Hilbert space, self-adjoint operator, unitary lift, or target spectral map is defined
+  metrics:
+    natural_classical_flow: true
+    formal_quantization_hint: true
+    same_owner_operator: absent
+    route_b_entry: false
+  artifacts:
+    - SOURCE_AUDIT.md
+
+adversarial_controls:
+  controls_used:
+    - mu sign and center boundary
+    - neighboring nonarithmetic parameter values
+    - finite-return versus analytic-theorem separation
+    - repaired-hash schema, theorem, row, citation, and scope mutations
+  proves_too_much_risk: the one-cycle theorem is a generic smooth-flow result and would remain true without any arithmetic labeling
+  verdict: STOP_SCOPED
+
+claim_boundary: >-
+  C249 proves a classical sign-complete Lienard limit-cycle statement and a
+  replayable Floquet receipt.  It receives no arithmetic, determinant,
+  automorphy, target-zero, or operator credit.
+blocking_conditions:
+  - A0 fails because no source-derived arithmetic carrier exists
+  - A2 and A3 have no target divisor or global analytic determinant
+  - A4 remains a formal quantization hint without an operator
+next_smallest_test: >-
+  If pursued, study a uniform analytic asymptotic for the relaxation period;
+  keep it under this smooth-flow scope and do not add target fitting.
+round2_clues:
+  - Ermakov-Pinney or gyroscopic trap systems are distinct successor candidates
+  - a future operator proposal must be registered under a new candidate ID
+
+references:
+  - key: Lienard1928
+    url: https://gallica.bnf.fr/ark:/12148/bpt6k5671115f
+  - key: LevinsonSmith1942
+    doi: 10.1215/S0012-7094-42-00928-1
+    url: https://doi.org/10.1215/S0012-7094-42-00928-1
+  - key: Strogatz2015
+    url: https://www.routledge.com/Nonlinear-Dynamics-and-Chaos/Strogatz/p/book/9780813349107
+
+evidence:
+  path: results/c249_vdp_evidence.json
+  parameter_row_count: 8
+  cycle_row_count: 5
+  section_fixed_point: one for mu>0
+  floquet_identity: exp(integral div X dt), tangent multiplier 1
+
+analytic_claims:
+  - F(x)=mu*(x^3/3-x) has the Lienard sign pattern for mu>0
+  - exactly one hyperbolic attracting cycle for mu>0 and one repelling cycle for mu<0
+  - mu=0 is a harmonic center with a continuum of periodic ovals
+  - energy balance and planar divergence determine the transverse Floquet multiplier
+
+failure_boundary:
+  A0: no designated arithmetic-origin object
+  A2: no target determinant or target value match
+  A3: no automorphy or local-factor theorem
+  A4: formal quantization hint only; no operator is constructed
+
+nonclaims:
+  - no prime/zero table, Euler factor, root number, or Hilbert-Polya operator
+  - no target divisor, functional equation, zeta/Fredholm determinant, or zero match
+  - no elementary closed form for the period for every mu
+  - no numerical census of every continuum state cell
+
+scope_flags:
+  uses_target_zero_table: false
+  uses_prime_table: false
+  claims_arithmetic_local_data: false
+  claims_euler_factors: false
+  claims_root_numbers: false
+  claims_automorphy: false
+  claims_target_divisor_or_functional_equation: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false

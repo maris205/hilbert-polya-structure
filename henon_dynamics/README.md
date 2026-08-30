@@ -2719,6 +2719,32 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C249--C253
+
+This round switches across five unrelated owners—a smooth Liénard oscillator,
+an integrable singular Hamiltonian, a finite cellular automaton, a hysteretic
+hybrid relay, and a finite stochastic population process.  Each manuscript
+closes one theorem-scale source-local advance with explicit boundary faces and
+replayable evidence; the papers are independent, not installments of one
+calculation.
+
+- [C249 Van der Pol/Liénard limit-cycle atlas](henon_van_der_pol_lienard_limit_cycle_route_a/README.md) · [paper PDF](henon_van_der_pol_lienard_limit_cycle_route_a/paper/main.pdf)
+- [C250 Ermakov--Pinney isotonic action atlas](henon_ermakov_pinney_isotonic_action_route_a/README.md) · [paper PDF](henon_ermakov_pinney_isotonic_action_route_a/paper/main.pdf)
+- [C251 cyclic majority-rule 232 wall erosion](henon_majority_rule232_domainwall_route_a/README.md) · [paper PDF](henon_majority_rule232_domainwall_route_a/paper/main.pdf)
+- [C252 two-threshold hysteretic relay oscillator](henon_hysteretic_relay_oscillator_route_a/README.md) · [paper PDF](henon_hysteretic_relay_oscillator_route_a/paper/main.pdf)
+- [C253 Moran fixation and Green atlas](henon_moran_fixation_green_route_a/README.md) · [paper PDF](henon_moran_fixation_green_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C249_C253.md), [batch plan](BATCH_PLAN_C249_C253.md),
+and [batch review](BATCH_REVIEW_C249_C253.md) for theorem increments,
+collision decisions, exact audit counts, release hashes, and the fixed-epoch
+PDF reproducibility record.  All five strict tuples are
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` except C250,
+which has `A4_NATURAL_QUANTIZATION`; all are `ROUTE_A_REJECTED` with Route B
+disabled.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; no target prime
+or zero table, arithmetic local datum, Euler factor, root number, automorphy,
+target divisor/counting law, functional equation, Hilbert--Pólya operator, or
+Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C244--C248
 
 This round takes one theorem-scale step in each of five independent owners and

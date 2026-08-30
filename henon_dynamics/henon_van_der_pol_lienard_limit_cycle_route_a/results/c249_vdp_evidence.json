@@ -1,0 +1,287 @@
+{
+  "candidate_id": "HCS-C249",
+  "citations": [
+    {
+      "claim": "classical Lienard oscillation theorem",
+      "key": "Lienard1928",
+      "source": "A. Lienard, Etude des oscillations entretenues, Revue Generale de l'Electricite 23 (1928), 901--912",
+      "url": "https://gallica.bnf.fr/ark:/12148/bpt6k5671115f"
+    },
+    {
+      "claim": "existence and uniqueness of the Van der Pol relaxation cycle",
+      "key": "LevinsonSmith1942",
+      "source": "N. Levinson and O. K. Smith, A general equation for relaxation oscillations, Duke Mathematical Journal 9 (1942), 382--403, DOI 10.1215/S0012-7094-42-00928-1",
+      "url": "https://doi.org/10.1215/S0012-7094-42-00928-1"
+    },
+    {
+      "claim": "standard Van der Pol phase-plane background",
+      "key": "Strogatz2015",
+      "source": "S. H. Strogatz, Nonlinear Dynamics and Chaos, 2nd ed., Westview Press (2015)",
+      "url": "https://www.routledge.com/Nonlinear-Dynamics-and-Chaos/Strogatz/p/book/9780813349107"
+    }
+  ],
+  "evaluation_date": "2026-08-30",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "xdot=y; ydot=mu*(1-x^2)*y-x",
+      "identity_id": "vector_field"
+    },
+    {
+      "formula": "xddot+mu*(x^2-1)*xdot+x=0",
+      "identity_id": "lienard_form"
+    },
+    {
+      "formula": "F(x)=integral_0^x mu*(s^2-1) ds=mu*(x^3/3-x)",
+      "identity_id": "primitive_F"
+    },
+    {
+      "formula": "for mu>0, F has the unique positive zero sqrt(3) and F<0 on (0,sqrt(3))",
+      "identity_id": "F_positive_zero"
+    },
+    {
+      "formula": "E=(x^2+y^2)/2; Edot=mu*(1-x^2)*y^2",
+      "identity_id": "energy"
+    },
+    {
+      "formula": "for mu!=0 on a periodic cycle, integral_0^T (1-x^2)*y^2 dt=0",
+      "identity_id": "cycle_balance"
+    },
+    {
+      "formula": "div X=mu*(1-x^2)",
+      "identity_id": "divergence"
+    },
+    {
+      "formula": "lambda_trans=exp(integral_0^T div X dt), with tangent multiplier 1",
+      "identity_id": "floquet"
+    },
+    {
+      "formula": "mu>0 => exactly one hyperbolic attracting cycle surrounding the origin",
+      "identity_id": "positive_case"
+    },
+    {
+      "formula": "mu<0 is time reversal: exactly one hyperbolic repelling cycle",
+      "identity_id": "negative_case"
+    },
+    {
+      "formula": "mu=0 => E is conserved and every E>0 level is a harmonic oval of period 2*pi",
+      "identity_id": "center_boundary"
+    },
+    {
+      "formula": "omega^2*x term reduces by tau=omega*t and effective mu=mu0/omega",
+      "identity_id": "scaling"
+    }
+  ],
+  "fixed_epoch": 1788048000,
+  "frozen_object": {
+    "arithmetic_origin": "none; smooth polynomial Lienard oscillator",
+    "clock": "physical time t",
+    "dynamics": "xdot=y, ydot=mu*(1-x^2)*y-x",
+    "equivalent_equation": "xddot+mu*(x^2-1)*xdot+x=0",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target determinants, Hilbert--Polya operators",
+    "parameters": "mu in R; scaled frequency omega>0 is handled by tau=omega*t",
+    "phase_space": "R^2 with coordinates (x,y)",
+    "section": "Sigma={(x,y): x=0,y>0}"
+  },
+  "headline": "The smooth Van der Pol Lienard family has a complete sign/boundary atlas, one-cycle theorem, and an independently replayable Floquet receipt.",
+  "nonclaims": [
+    "a complete closed-form expression for the limit-cycle period for every mu",
+    "a numerical census of every continuum state cell",
+    "arithmetic Euler factors, root numbers, automorphy, target divisor or functional equation",
+    "a target zeta/Fredholm determinant, zero match, or Hilbert--Polya operator",
+    "external peer review or literature-priority certification"
+  ],
+  "payload_sha256": "791aaadd6235f0f79761d85ea99e3b3914b25ede8378b56d9ed3a6e1adc16062",
+  "regression": {
+    "cycle_row_count": 5,
+    "cycle_rows": [
+      {
+        "divergence_integral": "-6.291039195200502e-01",
+        "energy_balance": "6.132247487578013e-15",
+        "floquet_multiplier": "5.330692600124598e-01",
+        "mu": "1.000000000000000e-01",
+        "numerical_method": "DOP853; rtol=3e-12; atol=3e-14; max_step=0.03",
+        "period": "6.287111267268163e+00",
+        "radius_squared_integral": "2.515630090491960e+01",
+        "return_residual": "8.881784197001252e-16",
+        "return_y": "2.001770545155221e+00",
+        "section": "x=0, y>0; upward return",
+        "section_y": "2.001770545155221e+00",
+        "status": "finite regression probe; not an all-state census"
+      },
+      {
+        "divergence_integral": "-3.239667466229433e+00",
+        "energy_balance": "2.051830927385367e-13",
+        "floquet_multiplier": "3.917692058228095e-02",
+        "mu": "5.000000000000000e-01",
+        "numerical_method": "DOP853; rtol=3e-12; atol=3e-14; max_step=0.03",
+        "period": "6.380675796265847e+00",
+        "radius_squared_integral": "2.572002143700880e+01",
+        "return_residual": "9.992007221626409e-14",
+        "return_y": "2.044064968164480e+00",
+        "section": "x=0, y>0; upward return",
+        "section_y": "2.044064968164380e+00",
+        "status": "finite regression probe; not an all-state census"
+      },
+      {
+        "divergence_integral": "-7.058932787969972e+00",
+        "energy_balance": "1.827288320654930e-13",
+        "floquet_multiplier": "8.596950815103825e-04",
+        "mu": "1.000000000000000e+00",
+        "numerical_method": "DOP853; rtol=3e-12; atol=3e-14; max_step=0.03",
+        "period": "6.663286852393810e+00",
+        "radius_squared_integral": "2.744443925900041e+01",
+        "return_residual": "8.615330671091215e-14",
+        "return_y": "2.172713692613939e+00",
+        "section": "x=0, y>0; upward return",
+        "section_y": "2.172713692613853e+00",
+        "status": "finite regression probe; not an all-state census"
+      },
+      {
+        "divergence_integral": "-1.817863741027891e+01",
+        "energy_balance": "8.271716644969729e-13",
+        "floquet_multiplier": "1.273849392193784e-08",
+        "mu": "2.000000000000000e+00",
+        "numerical_method": "DOP853; rtol=3e-12; atol=3e-14; max_step=0.03",
+        "period": "7.629874468552279e+00",
+        "radius_squared_integral": "3.343838632123350e+01",
+        "return_residual": "-5.462297281155770e-14",
+        "return_y": "2.614972625631847e+00",
+        "section": "x=0, y>0; upward return",
+        "section_y": "2.614972625631902e+00",
+        "status": "finite regression probe; not an all-state census"
+      },
+      {
+        "divergence_integral": "-5.732130915272496e+01",
+        "energy_balance": "5.351830090205567e-12",
+        "floquet_multiplier": "1.275474379960294e-25",
+        "mu": "4.000000000000000e+00",
+        "numerical_method": "DOP853; rtol=3e-12; atol=3e-14; max_step=0.03",
+        "period": "1.020352367055188e+01",
+        "radius_squared_integral": "4.906770187984231e+01",
+        "return_residual": "1.554312234475219e-14",
+        "return_y": "3.762340516523796e+00",
+        "section": "x=0, y>0; upward return",
+        "section_y": "3.762340516523780e+00",
+        "status": "finite regression probe; not an all-state census"
+      }
+    ],
+    "numeric_tolerance": "return residual below 3e-10; energy balance below 3e-9",
+    "parameter_row_count": 8,
+    "parameter_rows": [
+      {
+        "cycle_stability": "repelling",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "-2",
+        "periodic_orbits": "one repelling limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "time-reversed negative-damping orientation",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "repelling",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "-1",
+        "periodic_orbits": "one repelling limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "time-reversed negative-damping orientation",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "neutral",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "0",
+        "periodic_orbits": "continuum of harmonic ovals",
+        "primitive_cycle_count": "continuum",
+        "regime": "Hamiltonian center boundary",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "attracting",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "1/10",
+        "periodic_orbits": "one attracting limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "strict Lienard positive-damping exterior",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "attracting",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "1/2",
+        "periodic_orbits": "one attracting limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "strict Lienard positive-damping exterior",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "attracting",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "1",
+        "periodic_orbits": "one attracting limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "strict Lienard positive-damping exterior",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "attracting",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "2",
+        "periodic_orbits": "one attracting limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "strict Lienard positive-damping exterior",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      },
+      {
+        "cycle_stability": "attracting",
+        "equilibrium": "origin; linear eigenvalues solve lambda^2-mu*lambda+1=0",
+        "mu": "4",
+        "periodic_orbits": "one attracting limit cycle",
+        "primitive_cycle_count": "one",
+        "regime": "strict Lienard positive-damping exterior",
+        "theorem_source": "Lienard uniqueness plus time reversal; numeric rows are separate"
+      }
+    ],
+    "working_precision": "IEEE-754 double with deterministic DOP853 tolerances"
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "The polynomial oscillator has no intrinsic rational-prime carrier, logarithmic prime clock, target divisor, or global arithmetic determinant.",
+    "strongest_positive": "Classical Lienard theorem closes the full sign family and the unique-cycle/Floquet boundary; finite Poincare receipts replay it.",
+    "tuple": [
+      "A0_FAIL",
+      "A1_PASS_ANALYTIC",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c249-van-der-pol-lienard-limit-cycle-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "3ff451e904f8f063e88c40ef87f4697a6586b1a5",
+  "theorem": {
+    "boundaries": "The mu=0 center, negative-mu time reversal, omega=0 scaling face, and section orientation are separate; no asymptotic period coefficient is inferred from a finite numerical fit.",
+    "center_face": "At mu=0 the Hamiltonian E=(x^2+y^2)/2 is conserved, so every positive level is a harmonic oval of period 2*pi and the periodic set is a continuum.",
+    "energy_and_floquet": "For mu!=0, E_dot=mu*(1-x^2)y^2; on a periodic cycle the balance integral vanishes, while the nontrivial Floquet multiplier is exp(integral div X dt)=exp(mu*integral(1-x^2)dt).",
+    "lienard_uniqueness": "For every mu>0, F(x)=mu*(x^3/3-x) satisfies the Lienard hypotheses and the flow has exactly one hyperbolic attracting periodic orbit surrounding the origin; every non-equilibrium bounded recurrent trajectory is that cycle.",
+    "poincare": "On Sigma the return map has one fixed point for mu>0, with derivative equal to the transverse Floquet multiplier and modulus strictly below one.",
+    "scope": "This is a source-local smooth-flow theorem and not an arithmetic determinant or target spectral statement.",
+    "time_reversal": "For mu<0 the involution (t,x,y)->(-t,x,-y) transfers the positive-mu cycle to exactly one hyperbolic repelling cycle."
+  }
+}

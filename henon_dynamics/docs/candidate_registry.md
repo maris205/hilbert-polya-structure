@@ -3,6 +3,29 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C249--HCS-C253 additions (2026-08-30)
+
+Five independent Route-A candidates were released from the common baseline
+`3ff451e904f8f063e88c40ef87f4697a6586b1a5`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The results are source-local theorem advances; `NEW` is workspace bookkeeping,
+not a literature-priority claim.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C249 | The smooth Van der Pol/Liénard family closes the full sign and boundary atlas, unique attracting/repelling cycle theorem, energy/divergence identities, and transverse Floquet receipt. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Van der Pol package](../henon_van_der_pol_lienard_limit_cycle_route_a/) · [paper PDF](../henon_van_der_pol_lienard_limit_cycle_route_a/paper/main.pdf) |
+| HCS-C250 | The positive Ermakov--Pinney/isotonic oscillator has an explicit linear-pair superposition formula, quadratic invariant, exact turning radii, period/action law, and all declared singular faces. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Ermakov--Pinney package](../henon_ermakov_pinney_isotonic_action_route_a/) · [paper PDF](../henon_ermakov_pinney_isotonic_action_route_a/paper/main.pdf) |
+| HCS-C251 | Synchronous cyclic majority rule 232 reduces exactly to a domain-wall erosion law; every non-alternating state reaches the fixed language in finite time, the even alternating 2-cycle is unique, and transfer matrices close fixed/depth counts. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [majority-rule package](../henon_majority_rule232_domainwall_route_a/) · [paper PDF](../henon_majority_rule232_domainwall_route_a/paper/main.pdf) |
+| HCS-C252 | The two-threshold hysteretic relay oscillator has an exact switching/Poincaré map, period and transverse decay law, explicit grazing policy, and a no-Zeno theorem across all declared faces. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [hysteretic-relay package](../henon_hysteretic_relay_oscillator_route_a/) · [paper PDF](../henon_hysteretic_relay_oscillator_route_a/paper/main.pdf) |
+| HCS-C253 | The finite Moran birth--death process closes the exact fixation probability, rational Green matrix, absorption-time ledger, reversible killed-chain weights, and neutral/zero-rate/singleton boundaries. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Moran package](../henon_moran_fixation_green_route_a/) · [paper PDF](../henon_moran_fixation_green_route_a/paper/main.pdf) |
+
+All five are `ROUTE_A_REJECTED` with `route_b_invocation_allowed: false`.
+No target divisor/counting law, arithmetic local datum, Euler factor, root
+number, automorphy statement, Hilbert--Pólya operator, or Route-B input is
+introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  Detailed receipts and
+content-addressed hashes are in [BATCH_REVIEW_C249_C253.md](../BATCH_REVIEW_C249_C253.md).
+
 ## HCS-C244--HCS-C248 additions (2026-08-30)
 
 Five independent cross-subtype Route-A candidates were released from the

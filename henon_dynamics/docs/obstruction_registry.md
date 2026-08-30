@@ -17,6 +17,21 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C249--HCS-C253 additions (2026-08-30)
+
+| ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |
+|---|---|---|---|---|---|
+| HEN-O233 | HCS-C249 Van der Pol/Liénard cycle as an arithmetic owner | proved dissipative-cycle and clock obstruction | The unique Liénard cycle is selected by a continuous dissipative flow and its Floquet multiplier/period carry no intrinsic rational-prime carrier, logarithmic prime roof, target divisor, or global arithmetic determinant.  The center face has a continuum of harmonic ovals. | The sign atlas, trapping/existence argument, energy balance, divergence and Floquet receipts remain exact; no period closed form or target operator is inferred. | ../henon_van_der_pol_lienard_limit_cycle_route_a/THEOREM_PACKAGE.md |
+| HEN-O234 | HCS-C250 Ermakov--Pinney action as an arithmetic primitive owner | proved integrable-continuum and singular-owner obstruction | Positive isotonic trajectories are continuous action/energy families (with an explicit singular barrier), and the action clock has no rational-prime carrier, prime-power repetition law, or target divisor.  Natural quantization remains candidate-local. | The quadratic superposition, turning radii, period/action and all parameter faces survive; no arithmetic local data, Euler factors, or Hilbert--Pólya operator are claimed. | ../henon_ermakov_pinney_isotonic_action_route_a/THEOREM_PACKAGE.md |
+| HEN-O235 | HCS-C251 majority-rule domain walls as a primitive-orbit determinant | proved finite-CA erosion and clock obstruction | The wall dynamics is a finite synchronous cellular automaton whose nontrivial content is transient erosion plus one even-length alternating 2-cycle.  Word length and transfer-matrix eigenvalues do not select rational primes or a logarithmic prime clock. | The exact wall law, fixed-language theorem, period classification and transfer counts remain valid for every declared n; finite zeta/Koopman factors are source-local only. | ../henon_majority_rule232_domainwall_route_a/THEOREM_PACKAGE.md |
+| HEN-O236 | HCS-C252 hysteretic relay cycle as an arithmetic owner | proved hybrid-guard and roof obstruction | The relay period is fixed by the geometric threshold width (each leg 2h); exponential transverse decay is a continuous state contraction.  Guard labels and event times supply no rational-prime owner, target divisor, or Euler weighting. | The switching map, unique attracting level for gamma>0, neutral gamma=0 continuum, grazing policy and no-Zeno bound remain exact, including h=0 and equality faces. | ../henon_hysteretic_relay_oscillator_route_a/THEOREM_PACKAGE.md |
+| HEN-O237 | HCS-C253 Moran fixation/Green data as a deterministic arithmetic determinant | proved stochastic-owner and finite-population clock obstruction | Fixation probabilities, Green matrices and absorption times are Markov-chain quantities on a finite population; rates beta,rho and count i do not label rational primes, prime powers, or a deterministic primitive-orbit product. | The exact birth--death law, reversible weights, all declared boundaries and rational receipts survive; renaming the Green resolvent as a zeta or target determinant is out of scope. | ../henon_moran_fixation_green_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are source-local and invariant under the declared
+coordinate conventions; none licenses Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and complete evidence/PDF audits are recorded
+in `../BATCH_REVIEW_C249_C253.md`.
+
 ## HCS-C244--HCS-C248 additions (2026-08-30)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |

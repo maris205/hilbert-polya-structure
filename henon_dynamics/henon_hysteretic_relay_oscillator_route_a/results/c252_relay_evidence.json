@@ -1,0 +1,550 @@
+{
+  "candidate_id": "HCS-C252",
+  "citations": [
+    {
+      "claim": "switching/hysteresis terminology",
+      "key": "Liberzon2003",
+      "source": "D. Liberzon, Switching in Systems and Control, Birkhauser (2003)"
+    },
+    {
+      "claim": "discontinuous-system boundary vocabulary",
+      "key": "Filippov1988",
+      "source": "A. F. Filippov, Differential Equations with Discontinuous Righthand Sides (1988)"
+    },
+    {
+      "claim": "hybrid relay context",
+      "key": "diBernardo2008",
+      "source": "M. di Bernardo et al., Piecewise-smooth Dynamical Systems, Springer (2008)"
+    }
+  ],
+  "evaluation_date": "2026-08-30",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "tau_+=tau_-=2h",
+      "identity_id": "leg_time"
+    },
+    {
+      "formula": "y_{n+1}=exp(-2 gamma h)y_n",
+      "identity_id": "half_map"
+    },
+    {
+      "formula": "P(y)=exp(-4 gamma h)y",
+      "identity_id": "full_map"
+    },
+    {
+      "formula": "T=4h",
+      "identity_id": "period"
+    },
+    {
+      "formula": "P(y)=y iff gamma=0 or y=0",
+      "identity_id": "fixed_set"
+    },
+    {
+      "formula": "inf_n tau_n=2h>0",
+      "identity_id": "no_zeno"
+    },
+    {
+      "formula": "y(t)=y_0 exp(-gamma t)",
+      "identity_id": "flow_solution"
+    },
+    {
+      "formula": "theta=-h,sigma=-1 => sigma:=+1",
+      "identity_id": "guard_left"
+    },
+    {
+      "formula": "theta=+h,sigma=+1 => sigma:=-1",
+      "identity_id": "guard_right"
+    },
+    {
+      "formula": "interior entry time <=2h",
+      "identity_id": "entry_bound"
+    }
+  ],
+  "fixed_epoch": 1788048000,
+  "frozen_object": {
+    "arithmetic_origin": "none; source-defined relay parameters",
+    "clock": "continuous hybrid time",
+    "determinant_convention": "none; no primitive-orbit/Fredholm determinant",
+    "flow": "theta_dot=sigma, y_dot=-gamma*y, gamma>=0",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor/functional equation, Hilbert--Polya operators",
+    "guards": "theta=+h switches +1 to -1; theta=-h switches -1 to +1",
+    "normalization": "h>0; return section Sigma_-=(theta=-h,sigma=+1)",
+    "state": "(theta,y,sigma) with theta in [-h,h], y in R, sigma in {+1,-1}"
+  },
+  "headline": "A two-threshold hysteretic relay phase oscillator has an exact switching map, a periodic orbit, transverse decay, grazing policy, and a no-Zeno theorem.",
+  "nonclaims": [
+    "literature priority or general Filippov selection theory",
+    "a sliding continuation at h=0 or an unspecified relay convention",
+    "target arithmetic, Euler factors, root numbers, automorphy, target divisor or functional equation",
+    "a primitive-orbit zeta, Fredholm determinant, or Hilbert--Polya operator",
+    "external peer review or numerical evidence promoted to a theorem"
+  ],
+  "payload_sha256": "79ec4b08df525a36b52af36da807ce2213ebb5ff9e9622bef3827ab71211ccc4",
+  "regression": {
+    "boundary_row_count": 4,
+    "boundary_rows": [
+      {
+        "face_id": "gamma_zero",
+        "policy": "neutral continuum of y-level cycles"
+      },
+      {
+        "face_id": "y_zero",
+        "policy": "unique attracting periodic phase orbit when gamma>0"
+      },
+      {
+        "face_id": "h_zero",
+        "policy": "excluded because inter-event time would vanish"
+      },
+      {
+        "face_id": "inconsistent_boundary_mode",
+        "policy": "instantaneous guard correction before flow"
+      }
+    ],
+    "row_count": 8,
+    "rows": [
+      {
+        "case_id": "contracting_a",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "2",
+          "gamma": "1",
+          "h": "1/2",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.1353352832366126918939994949724844034076315459095758814681588727",
+          "return_sigma": 1,
+          "return_theta": "-1/2",
+          "y0": "3/2",
+          "y_return": "0.2030029248549190378409992424587266051114473188643638222022383090"
+        },
+        "full_multiplier": "0.1353352832366126918939994949724844034076315459095758814681588727",
+        "full_period": "2",
+        "gamma": "1",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "1/2",
+        "half_multiplier": "0.3678794411714423215955237701614608674458111310317678345078368017",
+        "left_section": "-1/2",
+        "leg_rows": [
+          {
+            "decay_factor": "0.3678794411714423215955237701614608674458111310317678345078368017",
+            "duration": "1",
+            "end_theta": "1/2",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-1/2",
+            "y_end": "0.5518191617571634823932856552421913011687166965476517517617552025",
+            "y_start": "3/2"
+          },
+          {
+            "decay_factor": "0.3678794411714423215955237701614608674458111310317678345078368017",
+            "duration": "1",
+            "end_theta": "-1/2",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "1/2",
+            "y_end": "0.2030029248549190378409992424587266051114473188643638222022383090",
+            "y_start": "0.5518191617571634823932856552421913011687166965476517517617552025"
+          }
+        ],
+        "leg_time": "1",
+        "right_section": "1/2",
+        "y0": "3/2"
+      },
+      {
+        "case_id": "contracting_b",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "8",
+          "gamma": "3/4",
+          "h": "2",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.002478752176666358423045167430816667891506479585533945050878624006",
+          "return_sigma": 1,
+          "return_theta": "-2",
+          "y0": "-2",
+          "y_return": "-0.004957504353332716846090334861633335783012959171067890101757248013"
+        },
+        "full_multiplier": "0.002478752176666358423045167430816667891506479585533945050878624006",
+        "full_period": "8",
+        "gamma": "3/4",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "2",
+        "half_multiplier": "0.04978706836786394297934241565006177663169959218842321556762772761",
+        "left_section": "-2",
+        "leg_rows": [
+          {
+            "decay_factor": "0.04978706836786394297934241565006177663169959218842321556762772761",
+            "duration": "4",
+            "end_theta": "2",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-2",
+            "y_end": "-0.09957413673572788595868483130012355326339918437684643113525545521",
+            "y_start": "-2"
+          },
+          {
+            "decay_factor": "0.04978706836786394297934241565006177663169959218842321556762772761",
+            "duration": "4",
+            "end_theta": "-2",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "2",
+            "y_end": "-0.004957504353332716846090334861633335783012959171067890101757248012",
+            "y_start": "-0.09957413673572788595868483130012355326339918437684643113525545521"
+          }
+        ],
+        "leg_time": "4",
+        "right_section": "2",
+        "y0": "-2"
+      },
+      {
+        "case_id": "neutral",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "6",
+          "gamma": "0",
+          "h": "3/2",
+          "nonzero_contraction": false,
+          "poincare_multiplier": "1.000000000000000000000000000000000000000000000000000000000000000",
+          "return_sigma": 1,
+          "return_theta": "-3/2",
+          "y0": "5/3",
+          "y_return": "1.666666666666666666666666666666666666666666666666666666666666667"
+        },
+        "full_multiplier": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "full_period": "6",
+        "gamma": "0",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "3/2",
+        "half_multiplier": "1.000000000000000000000000000000000000000000000000000000000000000",
+        "left_section": "-3/2",
+        "leg_rows": [
+          {
+            "decay_factor": "1.000000000000000000000000000000000000000000000000000000000000000",
+            "duration": "3",
+            "end_theta": "3/2",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-3/2",
+            "y_end": "1.666666666666666666666666666666666666666666666666666666666666667",
+            "y_start": "5/3"
+          },
+          {
+            "decay_factor": "1.000000000000000000000000000000000000000000000000000000000000000",
+            "duration": "3",
+            "end_theta": "-3/2",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "3/2",
+            "y_end": "1.666666666666666666666666666666666666666666666666666666666666667",
+            "y_start": "1.666666666666666666666666666666666666666666666666666666666666667"
+          }
+        ],
+        "leg_time": "3",
+        "right_section": "3/2",
+        "y0": "5/3"
+      },
+      {
+        "case_id": "small_h",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "4/5",
+          "gamma": "7/3",
+          "h": "1/5",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.1546382645492548112535532337146271476617400472156941478617804725",
+          "return_sigma": 1,
+          "return_theta": "-1/5",
+          "y0": "1/7",
+          "y_return": "0.02209118064989354446479331910208959252310572103081344969454006750"
+        },
+        "full_multiplier": "0.1546382645492548112535532337146271476617400472156941478617804725",
+        "full_period": "4/5",
+        "gamma": "7/3",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "1/5",
+        "half_multiplier": "0.3932407208685982602451372482658306253124940615586072465796375281",
+        "left_section": "-1/5",
+        "leg_rows": [
+          {
+            "decay_factor": "0.3932407208685982602451372482658306253124940615586072465796375281",
+            "duration": "2/5",
+            "end_theta": "1/5",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-1/5",
+            "y_end": "0.05617724583837118003501960689511866075892772307980103522566250402",
+            "y_start": "1/7"
+          },
+          {
+            "decay_factor": "0.3932407208685982602451372482658306253124940615586072465796375281",
+            "duration": "2/5",
+            "end_theta": "-1/5",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "1/5",
+            "y_end": "0.02209118064989354446479331910208959252310572103081344969454006750",
+            "y_start": "0.05617724583837118003501960689511866075892772307980103522566250402"
+          }
+        ],
+        "leg_time": "2/5",
+        "right_section": "1/5",
+        "y0": "1/7"
+      },
+      {
+        "case_id": "large_h",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "10",
+          "gamma": "1/5",
+          "h": "5/2",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.1353352832366126918939994949724844034076315459095758814681588727",
+          "return_sigma": 1,
+          "return_theta": "-5/2",
+          "y0": "-3/2",
+          "y_return": "-0.2030029248549190378409992424587266051114473188643638222022383090"
+        },
+        "full_multiplier": "0.1353352832366126918939994949724844034076315459095758814681588727",
+        "full_period": "10",
+        "gamma": "1/5",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "5/2",
+        "half_multiplier": "0.3678794411714423215955237701614608674458111310317678345078368017",
+        "left_section": "-5/2",
+        "leg_rows": [
+          {
+            "decay_factor": "0.3678794411714423215955237701614608674458111310317678345078368017",
+            "duration": "5",
+            "end_theta": "5/2",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-5/2",
+            "y_end": "-0.5518191617571634823932856552421913011687166965476517517617552025",
+            "y_start": "-3/2"
+          },
+          {
+            "decay_factor": "0.3678794411714423215955237701614608674458111310317678345078368017",
+            "duration": "5",
+            "end_theta": "-5/2",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "5/2",
+            "y_end": "-0.2030029248549190378409992424587266051114473188643638222022383090",
+            "y_start": "-0.5518191617571634823932856552421913011687166965476517517617552025"
+          }
+        ],
+        "leg_time": "5",
+        "right_section": "5/2",
+        "y0": "-3/2"
+      },
+      {
+        "case_id": "zero_y",
+        "cycle": {
+          "fixed_periodic_y": "0",
+          "full_period": "4",
+          "gamma": "2",
+          "h": "1",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.0003354626279025118388213891257808610193109001337203193605445757479",
+          "return_sigma": 1,
+          "return_theta": "-1",
+          "y0": "0",
+          "y_return": "0.0"
+        },
+        "full_multiplier": "0.0003354626279025118388213891257808610193109001337203193605445757479",
+        "full_period": "4",
+        "gamma": "2",
+        "grazing": true,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "1",
+        "half_multiplier": "0.01831563888873418029371802127324124221191206755347559476959992744",
+        "left_section": "-1",
+        "leg_rows": [
+          {
+            "decay_factor": "0.01831563888873418029371802127324124221191206755347559476959992744",
+            "duration": "2",
+            "end_theta": "1",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-1",
+            "y_end": "0.0",
+            "y_start": "0"
+          },
+          {
+            "decay_factor": "0.01831563888873418029371802127324124221191206755347559476959992744",
+            "duration": "2",
+            "end_theta": "-1",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "1",
+            "y_end": "0.0",
+            "y_start": "0.0"
+          }
+        ],
+        "leg_time": "2",
+        "right_section": "1",
+        "y0": "0"
+      },
+      {
+        "case_id": "rational_decay",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "3",
+          "gamma": "2",
+          "h": "3/4",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.002478752176666358423045167430816667891506479585533945050878624006",
+          "return_sigma": 1,
+          "return_theta": "-3/4",
+          "y0": "4/3",
+          "y_return": "0.003305002902221811230726889907755557188675306114045260067838165342"
+        },
+        "full_multiplier": "0.002478752176666358423045167430816667891506479585533945050878624006",
+        "full_period": "3",
+        "gamma": "2",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "3/4",
+        "half_multiplier": "0.04978706836786394297934241565006177663169959218842321556762772761",
+        "left_section": "-3/4",
+        "leg_rows": [
+          {
+            "decay_factor": "0.04978706836786394297934241565006177663169959218842321556762772761",
+            "duration": "3/2",
+            "end_theta": "3/4",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-3/4",
+            "y_end": "0.06638275782381859063912322086674903550893278958456428742350363681",
+            "y_start": "4/3"
+          },
+          {
+            "decay_factor": "0.04978706836786394297934241565006177663169959218842321556762772761",
+            "duration": "3/2",
+            "end_theta": "-3/4",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "3/4",
+            "y_end": "0.003305002902221811230726889907755557188675306114045260067838165342",
+            "y_start": "0.06638275782381859063912322086674903550893278958456428742350363681"
+          }
+        ],
+        "leg_time": "3/2",
+        "right_section": "3/4",
+        "y0": "4/3"
+      },
+      {
+        "case_id": "boundary_grazing",
+        "cycle": {
+          "fixed_periodic_y": null,
+          "full_period": "4",
+          "gamma": "1",
+          "h": "1",
+          "nonzero_contraction": true,
+          "poincare_multiplier": "0.01831563888873418029371802127324124221191206755347559476959992744",
+          "return_sigma": 1,
+          "return_theta": "-1",
+          "y0": "1",
+          "y_return": "0.01831563888873418029371802127324124221191206755347559476959992744"
+        },
+        "full_multiplier": "0.01831563888873418029371802127324124221191206755347559476959992744",
+        "full_period": "4",
+        "gamma": "1",
+        "grazing": false,
+        "guard_policy": "instantaneous switch at equality; mode is held strictly inside (-h,h)",
+        "h": "1",
+        "half_multiplier": "0.1353352832366126918939994949724844034076315459095758814681588727",
+        "left_section": "-1",
+        "leg_rows": [
+          {
+            "decay_factor": "0.1353352832366126918939994949724844034076315459095758814681588727",
+            "duration": "2",
+            "end_theta": "1",
+            "guard": "theta=+h -> sigma=-1",
+            "leg": 0,
+            "sigma": 1,
+            "start_theta": "-1",
+            "y_end": "0.1353352832366126918939994949724844034076315459095758814681588727",
+            "y_start": "1"
+          },
+          {
+            "decay_factor": "0.1353352832366126918939994949724844034076315459095758814681588727",
+            "duration": "2",
+            "end_theta": "-1",
+            "guard": "theta=-h -> sigma=+1",
+            "leg": 1,
+            "sigma": -1,
+            "start_theta": "1",
+            "y_end": "0.01831563888873418029371802127324124221191206755347559476959992745",
+            "y_start": "0.1353352832366126918939994949724844034076315459095758814681588727"
+          }
+        ],
+        "leg_time": "2",
+        "right_section": "1",
+        "y0": "1"
+      }
+    ],
+    "serialized_digits": 64,
+    "working_digits": 90
+  },
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "No arithmetic origin, primitive target orbit, determinant, or natural Hilbert--Polya lift.",
+    "strongest_positive": "Exact hybrid event/return theorem and no-Zeno bound.",
+    "tuple": [
+      "A0_FAIL",
+      "A1_PASS_ANALYTIC",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c252-hysteretic-relay-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "3ff451e904f8f063e88c40ef87f4697a6586b1a5",
+  "theorem": {
+    "entry": "Every interior trajectory reaches a switching section in at most 2h, then follows the exact two-leg cycle.",
+    "event_map": "Each leg has time 2h and maps y to exp(-2 gamma h)y; the full return map on Sigma_- is y -> exp(-4 gamma h)y.",
+    "grazing": "y=0 is a transverse-neutral geometric grazing label only; no sliding segment is introduced.",
+    "no_zeno": "All successive event times equal 2h>0, so finite-time Zeno accumulation is impossible.",
+    "periodic_set": "For gamma>0 the unique periodic orbit is y=0 with period 4h; for gamma=0 every constant y is periodic with the same phase period.",
+    "route_boundary": "The relay flow has no arithmetic labels, target determinant, or Hilbert--Polya operator.",
+    "wellposedness": "The guard-priority hybrid convention gives a unique forward execution from every consistent interior/boundary state."
+  }
+}
