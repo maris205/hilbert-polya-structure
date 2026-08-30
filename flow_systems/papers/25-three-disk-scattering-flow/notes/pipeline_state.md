@@ -2,14 +2,24 @@
 
 Date: **2026-08-30**
 
-Current controlling state: Stage 3′ Round 2 is checker-valid
-`MINOR_REVISION` under B5 and the mandatory user checkpoint is open. Stage 4
-is complete; Stage 4.5 is not authorized. The fresh three-gate review froze
-2 fully addressed, 1 partially addressed and 3 cannot-verify rows, with zero
-adjustments and a passing apply chain. Canonical manuscript/PDF/results and
-Route records remain unchanged. Physical-flow promotion still requires a
-genuinely nonconstant-roof operator with explicit ownership and analytic
-control.
+Current controlling state: **Stage 4.5 FULL AUDIT COMPLETE / HOLD FOR EXACT
+FOUR-MINOR BIBLIOGRAPHY CORRECTION AUTHORIZATION; STAGE 5 CLOSED**. The audit
+verifies 8/8 reference identities and 13/13 contexts, covers 114/114 current
+claims with 127 evidence rows and 0 candidate unregistered claims, and carries
+0 serious, 0 medium, and 4 open MINOR bibliography controls. The exact
+[final integrity report](stage4_5_final_integrity_report.md) has SHA-256
+`2b705b43ce940ba833a0e3faf5373da0fc67121955e7fc77668dae07ca1dc78d`;
+the full [Schema-5 handoff](stage4_5_integrity_report.json) has SHA-256
+`e46f58d5d1fcfcb6786fd11b006587f62350965aa35d326cef21fffa05b854e4`.
+The exact
+[authorization request](STAGE4_5_INTEGRITY_CORRECTION_AUTHORIZATION_REQUEST.md)
+has SHA-256 `72743007c76cff3079252f00ba23c64b4aa810f095b743c37552ed7e5567243e`
+and binds patch SHA-256
+`c135b935ff154a9dd946f1bb9652e514ebae0cf82dc7894149a2b6872bc0cffc`.
+No patch has been applied. Canonical manuscript/body, bibliography, PDF,
+results, the frozen no-eclipse physical object, and both Route records remain
+unchanged. The Stage-3′ B5 decision is retained below as historical entry
+evidence.
 
 | Item | Status |
 |---|---|
@@ -18,7 +28,9 @@ control.
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
 | ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 75/75 suite and clean preview complete |
-| ARS Stage 3′ | **ROUND 2 COMPLETE / MINOR REVISION / USER CHECKPOINT** — 2 fully + 1 partially + 3 cannot verify; B5; checker PASS; Stage 4.5 unauthorized |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MINOR REVISION ENTRY** — 2 fully + 1 partially + 3 cannot verify; B5; checker PASS; the Stage 4.5 audit subsequently completed |
+| ARS Stage 4.5 | **FULL AUDIT COMPLETE / HOLD** — 8/8 references; 13/13 contexts; 114 claims; 127 evidence rows; 0 unregistered; exact four-MINOR bibliography authorization pending |
+| ARS Stage 5 | **CLOSED** — no promotion until the exact four-MINOR correction patch is authorized, applied, and revalidated |
 | Continuous-time object | **FROZEN** — equilateral three-disk exterior billiard |
 | No-eclipse condition | **`[PROVED]`** for `d=6a` |
 | Clock / primitive / repetition | **FROZEN** — flight length / cyclic primitive word / traversal powers |

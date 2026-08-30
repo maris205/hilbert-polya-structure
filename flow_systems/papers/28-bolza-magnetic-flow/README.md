@@ -2,15 +2,24 @@
 
 ## Current status
 
-- ARS: **STAGE 3′ ROUND 2 COMPLETE — MAJOR REVISION — MANDATORY USER
-  CHECKPOINT**. The fresh three-gate run froze 3 `FULLY_ADDRESSED` and
+- ARS: **STAGE 4′ PRE-AUTHORITY PREPARED — EXACT AUTHOR AUTHORITY PENDING**.
+  P28 contributes **1 of the batch's 6 residuals**, and its **14/14 registered
+  ClaimIntent surfaces** validate exact-once. The exact bounded scope is frozen
+  in the [batch authorization request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
+  Preparation is not author adjudication: no revision patch was created or
+  applied, and the manuscript/body, bibliography, PDF, canonical results,
+  frozen unit-speed Bolza magnetic flow at `b=1/2`, and Route records remain
+  unchanged.
+- Stage-3′ checkpoint basis: the fresh three-gate run froze 3 `FULLY_ADDRESSED` and
   1 `CANNOT_VERIFY` verdict with zero adjustments. The fail-closed row is a
   must-fix direct-test/replay criterion, so the official checker derives
   `Major Revision` under B3 and apply-chain replay is `pass`. See the
   [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable. Stage 4 remains complete; Stage 4′ requires new
-  explicit authorization, and later stages have not been invoked.
+  Attempt 1 remains immutable. That decision is the legal basis for the
+  prepared Stage 4′ checkpoint, whose exact authority is still pending; later
+  stages have not been invoked.
 - Stage-4 conclusion: the revision corrects the replay order, records executed
   direct canonicalization regressions with their same-builder limitation, adds
   the non-ranking A0–A4 obligation legend, and adds the typed

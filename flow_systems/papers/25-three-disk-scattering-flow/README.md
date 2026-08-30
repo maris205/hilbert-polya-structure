@@ -4,8 +4,31 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MINOR REVISION /
-  MANDATORY USER CHECKPOINT**. The fresh three-gate run froze 2
+- Current stage: **Round 9 — STAGE 4.5 FULL AUDIT COMPLETE / HOLD FOR EXACT
+  FOUR-MINOR BIBLIOGRAPHY CORRECTION AUTHORIZATION**. The fresh audit verifies
+  **8/8 reference identities** and **13/13 citation contexts**, registers
+  **114/114 current claims** in **127 evidence rows**, and finds **0 candidate
+  unregistered claims**. See the [reference/citation audit](notes/stage4_5_reference_citation_audit.md)
+  (`891a027ca49c7e8fbab8244ed4abc8f98630a7ca41b872e814ddb42f44f647b7`),
+  [claim registry](notes/stage4_5_claim_registry.json)
+  (`9e333277db2225c1e9d68afadb1c55acdb7845a28a72cb896aca8bef0cd8b90b`),
+  [evidence rows](notes/stage4_5_evidence_rows.json)
+  (`752504e737d4162dff1e189c878f4c1492054207cbd36752dfc6ff86cacce146`),
+  and [coverage report](notes/stage4_5_claim_registry_coverage.json)
+  (`d8f9343806bbf42846f204a45a04ad4c7c07ae2eb7af3d5779da0d8b3cf61098`).
+  The complete [human-readable final integrity report](notes/stage4_5_final_integrity_report.md)
+  has SHA-256 `2b705b43ce940ba833a0e3faf5373da0fc67121955e7fc77668dae07ca1dc78d`;
+  its full 127-row [Schema-5 handoff](notes/stage4_5_integrity_report.json)
+  has SHA-256 `e46f58d5d1fcfcb6786fd11b006587f62350965aa35d326cef21fffa05b854e4`.
+  There are 0 serious, 0 medium, and **4 open MINOR bibliography controls**.
+  Stage 5 is closed pending exact authorization of the
+  [correction request](notes/STAGE4_5_INTEGRITY_CORRECTION_AUTHORIZATION_REQUEST.md)
+  (`72743007c76cff3079252f00ba23c64b4aa810f095b743c37552ed7e5567243e`)
+  bound to patch SHA-256
+  `c135b935ff154a9dd946f1bb9652e514ebae0cf82dc7894149a2b6872bc0cffc`.
+  No patch was applied; manuscript/body, bibliography, PDF, canonical results,
+  frozen no-eclipse physical object, and Route records remain unchanged.
+- Stage-3′ checkpoint basis: the fresh three-gate run froze 2
   `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 3
   `CANNOT_VERIFY` verdicts with zero adjustments. Both must-fix rows are
   fully addressed; the should-fix addressed rate is 1/4, so the official
@@ -13,8 +36,8 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
   `pass`. See the
   [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable. Stage 4.5 requires explicit confirmation; the
-  canonical manuscript/PDF/results remain unchanged.
+  Attempt 1 remains immutable. That decision opened the fresh Stage 4.5 audit
+  now recorded above.
 - Stage-4 conclusion: **6/6 items resolved; 6/6 registered ClaimIntent surfaces
   byte-exact once; 75/75 tests pass; 13-page marker-stripped preview clean.**
   The revision adds a bounded closest-work comparison, a four-object typing

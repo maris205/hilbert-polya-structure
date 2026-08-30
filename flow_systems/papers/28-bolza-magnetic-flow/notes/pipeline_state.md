@@ -2,12 +2,15 @@
 
 Date: **2026-08-30**
 
-Current controlling state: Stage 3′ Round 2 is checker-valid
-`MAJOR_REVISION` under B3 and the mandatory user checkpoint is open. Stage 4
-is complete; Stage 4′ is not authorized. The fresh three-gate review froze
-3 fully addressed and 1 cannot-verify row, with zero adjustments and a passing
-apply chain. Canonical manuscript/PDF/results and Route records remain
-unchanged.
+Current controlling state: **Stage 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
+AUTHORITY PENDING**. P28 contributes 1 of the batch's 6 residuals, with 14/14
+registered ClaimIntent surfaces exact-once. The exact scope is frozen in the
+[batch authorization request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
+No author adjudication or revision patch has occurred. Canonical
+manuscript/body, bibliography, PDF, results, the frozen unit-speed Bolza
+magnetic flow at `b=1/2`, and Route records remain unchanged. The checker-valid
+Stage-3′ `MAJOR_REVISION` under B3 is retained below as the entry decision.
 
 | Item | Status |
 |---|---|
@@ -17,6 +20,7 @@ unchanged.
 | ARS Stage 3 | **COMPLETE / HISTORICAL MINOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and four-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized four-item revision, evidence bundle, direct tests and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 3 fully + 1 cannot verify; B3; checker PASS; Stage 4′ unauthorized |
+| ARS Stage 4′ | **PRE-AUTHORITY PREPARED / EXACT AUTHORITY PENDING** — P28: 1 residual; 14/14 surfaces exact-once; no patch or content/result/Route mutation |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |

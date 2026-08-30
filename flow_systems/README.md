@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 9 / ARS Stage 3′ Round 2 完成；强制用户检查点** | 新 round id/manifest 从 Phase 1 完整重跑，33 项最终为 23 `FULLY`、5 `PARTIALLY`、5 `CANNOT_VERIFY`，回信后 0 adjustment；官方 checker 5/5 PASS、apply chain 5/5 `pass`，机械决定为 4 Major Revision + 1 Minor Revision。P25 待明确确认后可进 Stage 4.5；P24/P26/P27/P28 待明确授权后方可进 Stage 4′。Attempt 1 保持不可变，canonical 正文/PDF/results 与 Route 状态不变。见 [Stage-3′ Round-2 报告](BATCH_ROUND9_STAGE3_PRIME_ROUND2_REPORT.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / P25 Stage 4.5 审计完成但 HOLD；其余四篇 Stage 4′ 授权前准备完成** | P25 已完成五阶段新鲜审计：8/8 references、13/13 contexts、114/114 claims、127 source-bound rows、75/75 tests；因 4 项 MINOR 书目控制等待精确授权，Stage 5 关闭。P24/P26/P27/P28 的 6 个 residual、51/51 registered surfaces 与精确授权包已冻结，尚未执行正文 patch。五篇 canonical 正文/PDF/results、初始动力学限定与 Route tuples 均不变。见[本轮五篇批次报告](BATCH_ROUND9_STAGE4_5_AND_STAGE4_PRIME_REPORT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -37,7 +37,40 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 24--28 最新结论
 
-### 当前 Stage 3′ Round-2 结论
+### 当前 Stage 4.5 / Stage 4′ 结论
+
+本轮对五篇论文都形成了明确、可审计的推进，但严格停在两个不同的作者授权关口。
+P25 已执行完整 **Stage 4.5 final-check**：新鲜核验 8/8 references 与 13/13
+citation contexts；对当前稿逐块建立 114 条 `selection_tier=ALL` 主张和 127 条
+source-bound evidence rows，官方机械候选 5/5 exact match、未登记候选为 0；6/6
+实验主张对齐，68-file lock 与 75/75 测试通过，隔离构建为 13 页 clean。原创性启发式
+覆盖 45/74 段，并包含全部 17/17 个 Stage-4 新增或实质替换段落；这是公共 Web 的
+有界筛查，不是专业相似度证书。最终问题数为 **SERIOUS 0 / MEDIUM 0 / MINOR
+4**，因此机器 verdict 为 `PASS_WITH_CONDITIONS`、人类状态为
+**HOLD FOR EXACT MINOR BIBLIOGRAPHY CORRECTIONS**，Stage 5 关闭。完整结果见
+[P25 final integrity report](papers/25-three-disk-scattering-flow/notes/stage4_5_final_integrity_report.md)，
+精确四操作授权请求见
+[P25 correction request](papers/25-three-disk-scattering-flow/notes/STAGE4_5_INTEGRITY_CORRECTION_AUTHORIZATION_REQUEST.md)。
+
+P24/P26/P27/P28 已完成 **Stage 4′ PRE-AUTHORITY PREPARATION**，而不是正文修订。
+当前冻结 6 个 residual：P24 `REV-001/REV-003`，P26 `REV-02/REV-04`，P27
+`REV-03`，P28 `REV-02`；5 个 `must_fix`、1 个 `should_fix`。四稿 51/51 条注册
+ClaimIntent surfaces 重新绑定并 exact-once 通过，官方 roadmap/schema/block/surface
+验证与隔离 builder replay 全部通过。精确授权请求 SHA-256 为
+`d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`；当前没有
+author adjudication、revision patch、正文或书目写入。见
+[Stage 4′ preparation report](BATCH_ROUND9_STAGE4_PRIME_PREPARATION_REPORT.md)与
+[exact authorization request](BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md)。
+
+五篇统一状态、逐篇进展、授权边界、测试结果和 Route 对应见
+[Round 9 Stage 4.5 / Stage 4′ 批次报告](BATCH_ROUND9_STAGE4_5_AND_STAGE4_PRIME_REPORT.md)。
+形式路线仍由 [`skills/route-a-evaluator.md`](skills/route-a-evaluator.md) 与
+[`skills/route-b-evaluator.md`](skills/route-b-evaluator.md) 控制：正向算术 A2
+保持 `0/5`，Route B invocation 保持 `0/5`，没有 Gate 晋级。五种连续时间子型的
+初始限定不变，仍按 12 个冻结几何/物理实例加 7 个 `q`-symbol calibrators 记为
+19 个 model instances；这些不是 19 个统计独立样本。
+
+### Stage 3′ Round-2 历史结论（已由上述状态推进）
 
 Papers 24--28 已用新的 round id 与 manifest 从 Phase 1 完整重跑三门
 evidence-before-persuasion 复审。Phase 1 为 32 个 `must_fix/should_fix` 项冻结
@@ -55,8 +88,10 @@ must-fix `CANNOT_VERIFY` 触发 B3；P25 两个 must-fix 已完全解决，但 s
 addressed rate 为 1/4，触发 B5。完整逐篇矩阵、残余缺口、JCS 哈希与 checker
 收据见 [Stage-3′ Round-2 批次报告](BATCH_ROUND9_STAGE3_PRIME_ROUND2_REPORT.md)。
 
-当前停在 Stage 3′ **强制用户检查点**：P25 只有在明确确认后才可进入 Stage
-4.5；P24/P26/P27/P28 只有在新的定点修复授权后才可进入 Stage 4′。Attempt 1 的
+该轮当时停在 Stage 3′ **强制用户检查点**：P25 只有在明确确认后才可进入 Stage
+4.5；P24/P26/P27/P28 只有在新的定点修复授权后才可进入 Stage 4′。此历史关口现已
+分别推进为上文所述的 P25 Stage-4.5 correction HOLD 与四篇 Stage-4′ pre-authority
+checkpoint。Attempt 1 的
 判据、verdict、integration 与合法 abort sidecar 仍保持不可变，历史见
 [Attempt-1 中止报告](BATCH_ROUND9_STAGE3_PRIME_ATTEMPT1_ABORT_REPORT.md)。Stage
 5、canonical promotion、投稿与下一批科学实验均未启动。
@@ -91,11 +126,11 @@ nonarithmetic genus-two geodesic control/magnetic precursor。仍按 12 个冻�
 物理参数实例加 7 个 `q`-symbol calibrators 记为 19 个 model instances，不把它们
 解释成 19 个统计独立样本。
 
-Stage 4 的稳定基线不因 Stage-3′ Round 2 的复审决定改变。当前等待的是对
-**P25 Stage 4.5** 或 **P24/P26/P27/P28 Stage 4′** 的明确用户授权；Stage 5、
-canonical promotion、投稿和下一轮科学实验均尚未启动。Stage-4 的逐篇结果、
-哈希、测试边界与路线 crosswalk 仍见
-[Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。
+Stage 4 的稳定基线不因后续复审和完整性审计改变。当前等待的是对 P25 四项
+MINOR 书目补丁的 exact authority，以及对 P24/P26/P27/P28 六项 Stage-4′ residual
+的逐项 author triage 与 exact write scope；Stage 5、canonical promotion、投稿和
+下一轮科学实验均尚未启动。Stage-4 的逐篇结果、哈希、测试边界与路线 crosswalk
+仍见 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。
 
 ### Stage 3 与 Stage-4 intake 历史记录（已由上述完成状态取代）
 
@@ -296,3 +331,7 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 24--28-round9-stage4-intake - ARS Stage 4 精确授权准备（2026-08-30） - 五份嵌套 ClaimIntent manifest 已确定性抽取为独立 hash-bound artifacts；62 条 ClaimIntent 形成 57 条互不重叠注册 surfaces，5 条较短嵌套文本由其外层 surface 字节覆盖并保留为 E6 语义审查面。五份 roadmap/base/block-manifest/claim-surface tuples 均 replay PASS；33 项 author-facing target/op 清单与保守实现分支已冻结。用户的“确认，继续下一轮”只启动 intake，不足以推断逐项 triage，因此正文、代码、结果、测试与 PDF 均未改，Stage 4 仍等待 [精确作者确认](BATCH_ROUND9_STAGE4_AUTHORIZATION_REQUEST.md)。Route-A tuples、正向 A2 `0/5` 与 Route B `0/5` 不变。
 
 24--28-round9-stage4 - ARS Stage 4 `REVISE` 完成（2026-08-30） - 用户以授权清单 SHA-256 `174cf1b...ecd63` 批准全部 33 项路线图和精确 target/op scope；五篇由 81 个 deterministic operations 落地，32 项 `RESOLVED`、P26 一项因无 bibliography target 保留为 `DELIBERATE_LIMITATION`。57/57 registered surfaces byte-exact once，5/5 evidence bundles、全部直接回归和 5 个共 69 页 clean previews 通过；P25 首次 aggregate shell invocation 在执行测试前遇到 loader import-path collision，改从 code directory 调用后 75/75 通过，无科学数值变化。canonical manuscript/PDF/results 未刷新，Route-A tuples、正向 A2 `0/5` 与 Route B `0/5` 不变。当前停在 Stage 3′ scholar checkpoint。详见 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)。
+
+24--28-round9-stage3-prime-round2 - ARS Stage 3′ 三门复审完成（2026-08-30，历史入口决定） - 33 项冻结为 23 `FULLY_ADDRESSED`、5 `PARTIALLY_ADDRESSED`、5 `CANNOT_VERIFY`，回信后 0 adjustment；五份 checker 与 apply chain 全通过，机械决定为 P24/P26/P27/P28 `Major Revision`、P25 `Minor Revision`。这一步只给出下一阶段路由，不改 canonical 正文/PDF/results 或 Route tuple。详见 [Stage-3′ Round-2 报告](BATCH_ROUND9_STAGE3_PRIME_ROUND2_REPORT.md)。
+
+24--28-round9-stage4.5-stage4-prime - P25 Stage 4.5 审计 + 四篇 Stage 4′ 授权前准备（2026-08-30，当前） - P25 对当前修订稿完成 8/8 references、13/13 contexts、114/114 claims、127 source-bound evidence rows、6/6 experiment claims、75/75 tests 与 13 页 clean isolated build；问题数 0 SERIOUS / 0 MEDIUM / 4 MINOR，故 `PASS_WITH_CONDITIONS` 且 Stage 5 关闭，等待 SHA-bound 四操作书目授权。P24/P26/P27/P28 的 6 个 residual、51/51 registered surfaces 与 exact request 已冻结并通过官方回放，但没有 author adjudication 或 revision patch。五篇初始动力学限定、12+7=19 bookkeeping instances、Route-A tuples、正向 A2 `0/5` 与 Route B `0/5` 全部不变。详见 [本轮五篇批次报告](BATCH_ROUND9_STAGE4_5_AND_STAGE4_PRIME_REPORT.md)。

@@ -2,12 +2,16 @@
 
 Date: **2026-08-30**
 
-Current controlling state: Stage 3′ Round 2 is checker-valid
-`MAJOR_REVISION` under B4 and the mandatory user checkpoint is open. Stage 4
-is complete; Stage 4′ is not authorized. The fresh three-gate review froze
-5 fully addressed and 1 partially addressed row, with zero adjustments and a
-passing apply chain. Canonical manuscript/PDF/results and both rejected
-Route-A tuples remain unchanged.
+Current controlling state: **Stage 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
+AUTHORITY PENDING**. P27 contributes 1 of the batch's 6 residuals, with 10/10
+registered ClaimIntent surfaces exact-once. The exact scope is frozen in the
+[batch authorization request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
+No author adjudication or revision patch has occurred. Canonical
+manuscript/body, bibliography, PDF, results, the frozen residual congruence
+inverse-limit flow, and both rejected Route-A tuples remain unchanged. The
+checker-valid Stage-3′ `MAJOR_REVISION` under B4 is retained below as the entry
+decision.
 
 | Item | Status |
 |---|---|
@@ -17,6 +21,7 @@ Route-A tuples remain unchanged.
 | ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 8/8 suite and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 5 fully + 1 partially; B4; checker PASS; Stage 4′ unauthorized |
+| ARS Stage 4′ | **PRE-AUTHORITY PREPARED / EXACT AUTHORITY PENDING** — P27: 1 residual; 10/10 surfaces exact-once; no patch or content/result/Route mutation |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |

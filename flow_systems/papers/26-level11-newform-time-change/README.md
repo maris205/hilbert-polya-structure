@@ -4,8 +4,16 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MAJOR REVISION /
-  MANDATORY USER CHECKPOINT**. The fresh three-gate run froze 7
+- Current pipeline: **Round 9 — STAGE 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
+  AUTHORITY PENDING**. P26 contributes **2 of the batch's 6 residuals**, and
+  its **17/17 registered ClaimIntent surfaces** validate exact-once. The exact
+  bounded scope is frozen in the [batch authorization request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
+  Preparation is not author adjudication: no revision patch was created or
+  applied, and the manuscript/body, bibliography, PDF, canonical results,
+  frozen positive time change of the `Gamma_0(11)` geodesic flow, and Route
+  records remain unchanged.
+- Stage-3′ checkpoint basis: the fresh three-gate run froze 7
   `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 1
   `CANNOT_VERIFY` verdict with zero adjustments and no post-letter
   observations. The partial modern-nearest-work row retains a `must_fix`
@@ -13,9 +21,8 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
   apply-chain replay is `pass`. See the
   [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable. Stage 4′ requires new explicit authorization;
-  the authorized Stage-4 draft and canonical manuscript/PDF/results remain
-  unchanged.
+  Attempt 1 remains immutable. That decision is the legal basis for the
+  prepared Stage 4′ checkpoint, whose exact authority is still pending.
 - Stage-4 conclusion: all 9/9 roadmap items are accounted for by 25 operations:
   8 are `RESOLVED`, while `REV-02` is a `DELIBERATE_LIMITATION` because no
   bibliography target was authorized. Its source-verified comparison uses only

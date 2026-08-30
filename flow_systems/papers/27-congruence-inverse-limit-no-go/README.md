@@ -4,17 +4,24 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 3′ ROUND 2 COMPLETE / MAJOR REVISION /
-  MANDATORY USER CHECKPOINT**. The fresh three-gate run froze 5
+- Current pipeline: **Round 9 — STAGE 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
+  AUTHORITY PENDING**. P27 contributes **1 of the batch's 6 residuals**, and
+  its **10/10 registered ClaimIntent surfaces** validate exact-once. The exact
+  bounded scope is frozen in the [batch authorization request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
+  Preparation is not author adjudication: no revision patch was created or
+  applied, and the manuscript/body, bibliography, PDF, canonical results,
+  frozen coordinatewise geodesic flow on the residual congruence inverse
+  limit, and both rejected Route-A tuples remain unchanged.
+- Stage-3′ checkpoint basis: the fresh three-gate run froze 5
   `FULLY_ADDRESSED` and 1 `PARTIALLY_ADDRESSED` verdict with zero
   adjustments. The `-I` fixture/shared-kernel row retains a `must_fix`
   residual, so the official checker derives `Major Revision` under B4;
   apply-chain replay is `pass`. See the
   [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable. Stage 4′ requires new explicit authorization;
-  the completed Stage-4 revision, canonical manuscript/PDF and result tree
-  remain unchanged.
+  Attempt 1 remains immutable. That decision is the legal basis for the
+  prepared Stage 4′ checkpoint, whose exact authority is still pending.
 - Stage-4 conclusion: **6/6 items resolved; 10/10 registered ClaimIntent
   surfaces byte-exact once; 8/8 tests pass (5 legacy + 3 direct); 13-page
   marker-stripped preview with zero overfull boxes.** The revision adds a
