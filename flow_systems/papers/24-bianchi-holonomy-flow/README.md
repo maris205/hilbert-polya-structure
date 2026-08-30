@@ -4,22 +4,26 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
-  AUTHORITY PENDING**. P24 contributes **2 of the batch's 6 residuals**, and
-  its **10/10 registered ClaimIntent surfaces** validate exact-once. The exact
-  bounded scope is frozen in the [batch authorization request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-  Preparation is not author adjudication: no revision patch was created or
-  applied, and the manuscript/body, bibliography, PDF, canonical results,
-  unit-speed level-`(3)` Bianchi object, and Route records remain unchanged.
+- Current stage: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
+  CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
+  `REV-001` and `REV-003` residuals were applied by a 10-operation Patch 1.1;
+  101/111 blocks were preserved byte-identically, all **10/10 registered
+  ClaimIntent surfaces** remain exact once, and no structural flag or Route
+  change occurred. The verify-only loxodromic replay passed 10/10 tests, and
+  the isolated 15-page preview is clean. See the
+  [Stage-4′ completion report](notes/stage4_prime_completion_report_round2.md),
+  [response](notes/stage4_prime_response_to_reviewers_round2.md), and
+  [preview](notes/stage4_prime_revision_round2.pdf). Stage 4.5 and Stage 5
+  have not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 6
   `FULLY_ADDRESSED` and 2 `PARTIALLY_ADDRESSED` verdicts with zero
   adjustments. Both partial rows retain `must_fix` residuals, so the official
   checker derives `Major Revision` under B4; apply-chain replay is `pass`.
   See the [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable audit evidence. That decision is the legal basis
-  for the prepared Stage 4′ checkpoint, whose exact authority is still pending.
+  Attempt 1 remains immutable audit evidence. That decision was the legal basis
+  for the now author-adjudicated and completed Stage 4′ revision; it is retained
+  here as the historical entry checkpoint.
 - Stage-4 conclusion: **8/8 items resolved; 10/10 registered ClaimIntent
   surfaces byte-exact once; direct suites pass 10/10, 12/12, and 14/14; the
   14-page marker-stripped preview is clean.** The loxodromic-only profile shows

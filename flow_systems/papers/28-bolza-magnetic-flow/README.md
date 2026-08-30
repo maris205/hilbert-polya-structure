@@ -2,24 +2,34 @@
 
 ## Current status
 
-- ARS: **STAGE 4′ PRE-AUTHORITY PREPARED — EXACT AUTHOR AUTHORITY PENDING**.
-  P28 contributes **1 of the batch's 6 residuals**, and its **14/14 registered
-  ClaimIntent surfaces** validate exact-once. The exact bounded scope is frozen
-  in the [batch authorization request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-  Preparation is not author adjudication: no revision patch was created or
-  applied, and the manuscript/body, bibliography, PDF, canonical results,
-  frozen unit-speed Bolza magnetic flow at `b=1/2`, and Route records remain
-  unchanged.
+- ARS: **STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE — MANDATORY SCHOLAR
+  CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual `REV-02` is `RESOLVED`
+  by the exactly authorized `B0048/replace_block` operation. All **14/14
+  registered ClaimIntent surfaces** remain byte-exact and exact-once; P28
+  contributes 14 of the batch's 51 frozen surfaces. Authority binds the
+  [batch request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
+  to the unified raw author event, SHA-256
+  `fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
+  The missing localization/receipt/direct-test pointer is now hash-bound with
+  its same-builder limitation. The read-only support replay passes 28/28
+  combined tests plus a 24/24 verify-only replay, token conservation passes
+  without an advisory, and the isolated preview is 14 clean A4 pages. See the
+  [Stage-4′ completion report](notes/stage4_prime_completion_report.md),
+  [revision log](notes/stage4_prime_revision_log_round1.md), and
+  [evidence package](notes/stage4_prime_evidence_bundle.json). The canonical
+  manuscript/body, bibliography, PDF, result tree, frozen unit-speed Bolza
+  magnetic flow at `b=1/2`, and Route records remain unchanged. Stage 4.5 has
+  not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 3 `FULLY_ADDRESSED` and
   1 `CANNOT_VERIFY` verdict with zero adjustments. The fail-closed row is a
   must-fix direct-test/replay criterion, so the official checker derives
   `Major Revision` under B3 and apply-chain replay is `pass`. See the
   [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable. That decision is the legal basis for the
-  prepared Stage 4′ checkpoint, whose exact authority is still pending; later
-  stages have not been invoked.
+  Attempt 1 remains immutable. That decision is the legal basis for the now
+  author-adjudicated and completed Stage 4′ revision; it is retained here as
+  the historical entry checkpoint. Later stages have not been invoked.
 - Stage-4 conclusion: the revision corrects the replay order, records executed
   direct canonicalization regressions with their same-builder limitation, adds
   the non-ranking A0–A4 obligation legend, and adds the typed
@@ -378,6 +388,7 @@ Gate advancement and no Route-B invocation. The
 [preliminary drift audit](notes/stage4_unregistered_claim_drift_audit.md) is
 not Stage-4.5 E6, and the [Route crosswalk](notes/stage4_route_crosswalk.md)
 does not authorize a later stage. At that Stage-4 closeout checkpoint Stage 3
-prime and Stage 4.5 had not begun; Stage 3′ Round 2 has since completed, and
-Stage 4′ remains unauthorized as reported above. `paper/manuscript.tex`,
-`paper/paper.pdf`, and canonical results remain untouched.
+prime and Stage 4.5 had not begun. Stage 3′ Round 2 and the separately
+authorized Stage 4′ revision have since completed; Stage 4.5 remains not
+invoked as reported above. `paper/manuscript.tex`, `paper/paper.pdf`, and
+canonical results remain untouched.

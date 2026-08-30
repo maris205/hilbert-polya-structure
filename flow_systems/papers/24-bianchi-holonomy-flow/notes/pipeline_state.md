@@ -2,15 +2,16 @@
 
 Date: **2026-08-30**
 
-Current controlling state: **Stage 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
-AUTHORITY PENDING**. P24 contributes 2 of the batch's 6 residuals, with 10/10
-registered ClaimIntent surfaces exact-once. The exact scope is frozen in the
-[batch authorization request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-No author adjudication or revision patch has occurred. Canonical
-manuscript/body, bibliography, PDF, results, the frozen unit-speed level-`(3)`
-Bianchi object, and the Route-A tuple remain unchanged. The checker-valid
-Stage-3′ `MAJOR_REVISION` under B4 is retained below as the entry decision.
+Current controlling state: **Stage 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
+CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The exact request SHA-256
+is `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
+and the unified author event SHA-256 is
+`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
+Both P24 residuals were applied within their exact scope: 10 operations,
+101/111 blocks preserved byte-identically, 10/10 surfaces exact once, no
+structural flag, no scientific-value or Route change, and a clean 15-page
+preview. Canonical manuscript, paper PDF, bibliography, and results remain
+unchanged. Stage 4.5 and Stage 5 are not authorized by this state.
 
 | Item | Status |
 |---|---|
@@ -19,8 +20,8 @@ Stage-3′ `MAJOR_REVISION` under B4 is retained below as the entry decision.
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — integrity/provenance closure complete |
 | ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and eight-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized eight-item revision, evidence bundle, direct regression and clean preview complete |
-| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 6 fully + 2 partially; B4; checker PASS; Stage 4′ unauthorized |
-| ARS Stage 4′ | **PRE-AUTHORITY PREPARED / EXACT AUTHORITY PENDING** — P24: 2 residuals; 10/10 surfaces exact-once; no patch or content/result/Route mutation |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION** — 6 fully + 2 partially; B4; checker PASS; entry decision superseded by authorized Stage 4′ execution |
+| ARS Stage 4′ | **AUTHOR-SIDE REVISION COMPLETE / CONTENT CONFIRMATION PENDING** — 2/2 residuals addressed; Patch 1.1 and official apply PASS; 10/10 surfaces exact-once; clean preview; fresh Stage 4.5 not yet run |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |

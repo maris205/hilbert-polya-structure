@@ -4,8 +4,8 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 4.5 FULL AUDIT COMPLETE / HOLD FOR EXACT
-  FOUR-MINOR BIBLIOGRAPHY CORRECTION AUTHORIZATION**. The fresh audit verifies
+- Current stage: **Round 9 — STAGE 4.5 EXACT BIBLIOGRAPHY CORRECTION APPLIED /
+  BOUNDED REVALIDATION COMPLETE / FRESH FULL GATE PENDING**. The fresh Round-1 audit verifies
   **8/8 reference identities** and **13/13 citation contexts**, registers
   **114/114 current claims** in **127 evidence rows**, and finds **0 candidate
   unregistered claims**. See the [reference/citation audit](notes/stage4_5_reference_citation_audit.md)
@@ -20,14 +20,23 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
   has SHA-256 `2b705b43ce940ba833a0e3faf5373da0fc67121955e7fc77668dae07ca1dc78d`;
   its full 127-row [Schema-5 handoff](notes/stage4_5_integrity_report.json)
   has SHA-256 `e46f58d5d1fcfcb6786fd11b006587f62350965aa35d326cef21fffa05b854e4`.
-  There are 0 serious, 0 medium, and **4 open MINOR bibliography controls**.
-  Stage 5 is closed pending exact authorization of the
+  Its historical receipt has 0 serious, 0 medium, and **4 MINOR bibliography
+  controls**. The exact authorization in the
   [correction request](notes/STAGE4_5_INTEGRITY_CORRECTION_AUTHORIZATION_REQUEST.md)
   (`72743007c76cff3079252f00ba23c64b4aa810f095b743c37552ed7e5567243e`)
-  bound to patch SHA-256
-  `c135b935ff154a9dd946f1bb9652e514ebae0cf82dc7894149a2b6872bc0cffc`.
-  No patch was applied; manuscript/body, bibliography, PDF, canonical results,
-  frozen no-eclipse physical object, and Route records remain unchanged.
+  was subsequently bound to patch SHA-256
+  `c135b935ff154a9dd946f1bb9652e514ebae0cf82dc7894149a2b6872bc0cffc`
+  and applied by the official ARS script to a new derived bibliography,
+  [stage4_5_references_corrected_round1.bib](notes/stage4_5_references_corrected_round1.bib)
+  (SHA-256 `a0bf0cd2f022f1b5dcc0bffdd1b28d135cef7c287f77c2a46e514480e2b3b5ab`).
+  The [repair report](notes/stage4_5_integrity_correction_round1_report.md)
+  records four exact operations, no structural flag, clean BibTeX/citation
+  build, 127-row evidence replay, and 75/75 tests. This bounded repair does not
+  reissue the full Stage 4.5 verdict: the old report/passport remain historical,
+  and Stage 5 stays closed pending a fresh from-scratch gate. Manuscript/body,
+  `paper/references.bib`, PDF, canonical results, frozen no-eclipse physical
+  object, and Route records remain unchanged; evidence timestamps were not
+  refreshed.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 2
   `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 3
   `CANNOT_VERIFY` verdicts with zero adjustments. Both must-fix rows are

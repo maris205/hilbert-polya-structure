@@ -2,15 +2,22 @@
 
 Date: **2026-08-30**
 
-Current controlling state: **Stage 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
-AUTHORITY PENDING**. P28 contributes 1 of the batch's 6 residuals, with 14/14
-registered ClaimIntent surfaces exact-once. The exact scope is frozen in the
-[batch authorization request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-No author adjudication or revision patch has occurred. Canonical
-manuscript/body, bibliography, PDF, results, the frozen unit-speed Bolza
-magnetic flow at `b=1/2`, and Route records remain unchanged. The checker-valid
-Stage-3′ `MAJOR_REVISION` under B3 is retained below as the entry decision.
+Current controlling state: **Stage 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
+MANDATORY SCHOLAR CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual
+`REV-02` is `RESOLVED` by one scoped replacement. Its 14/14 registered
+ClaimIntent surfaces remain byte-exact and exact-once, contributing 14 of the
+batch's frozen 51-surface population. The authority chain binds the
+[batch request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
+to the unified raw author event, SHA-256
+`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
+The official two-round revision bundle and final evidence package replay;
+28/28 combined tests plus the 24/24 verify-only replay and token conservation
+pass; the isolated preview is 14 clean A4 pages. Canonical manuscript/body,
+bibliography, PDF, result tree, the frozen unit-speed Bolza magnetic flow at
+`b=1/2`, and Route records remain unchanged. The checker-valid Stage-3′
+`MAJOR_REVISION` under B3 is retained below as the historical entry decision;
+Stage 4.5 is not invoked.
 
 | Item | Status |
 |---|---|
@@ -19,8 +26,9 @@ Stage-3′ `MAJOR_REVISION` under B3 is retained below as the entry decision.
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — 0 serious blockers; one non-blocking replay-order minor retained |
 | ARS Stage 3 | **COMPLETE / HISTORICAL MINOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and four-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized four-item revision, evidence bundle, direct tests and clean preview complete |
-| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 3 fully + 1 cannot verify; B3; checker PASS; Stage 4′ unauthorized |
-| ARS Stage 4′ | **PRE-AUTHORITY PREPARED / EXACT AUTHORITY PENDING** — P28: 1 residual; 14/14 surfaces exact-once; no patch or content/result/Route mutation |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION ENTRY** — 3 fully + 1 cannot verify; B3; checker PASS; exact Stage-4′ authority was subsequently granted |
+| ARS Stage 4′ | **COMPLETE WITHIN AUTHORIZED SCOPE** — `REV-02` resolved by 1 operation; 14/14 surfaces exact-once; 28/28 tests plus 24/24 replay; 14-page clean preview; canonical content/results/Route frozen |
+| ARS Stage 4.5 | **MANDATORY CHECKPOINT / NOT INVOKED** — fresh final-integrity pass requires explicit scholar confirmation |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |

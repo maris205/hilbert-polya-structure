@@ -1,5 +1,9 @@
 # Round 9 Papers 24--28：Stage 4.5 与 Stage 4′ 批次报告
 
+> **历史检查点。** 本报告中的 P25 correction 与四篇 Stage 4′ 分支现已执行；
+> 当前状态见
+> [`BATCH_ROUND9_STAGE4_PRIME_AND_P25_CORRECTION_EXECUTION_REPORT.md`](BATCH_ROUND9_STAGE4_PRIME_AND_P25_CORRECTION_EXECUTION_REPORT.md)。
+
 日期：**2026-08-30 UTC**
 
 ## 一、批次结论

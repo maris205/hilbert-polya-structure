@@ -2,16 +2,21 @@
 
 Date: **2026-08-30**
 
-Current controlling state: **Stage 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
-AUTHORITY PENDING**. P27 contributes 1 of the batch's 6 residuals, with 10/10
-registered ClaimIntent surfaces exact-once. The exact scope is frozen in the
-[batch authorization request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-No author adjudication or revision patch has occurred. Canonical
-manuscript/body, bibliography, PDF, results, the frozen residual congruence
-inverse-limit flow, and both rejected Route-A tuples remain unchanged. The
-checker-valid Stage-3′ `MAJOR_REVISION` under B4 is retained below as the entry
-decision.
+Current controlling state: **Stage 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
+MANDATORY SCHOLAR CONFIRMATION BEFORE STAGE 4.5**. P27's sole residual
+`REV-03` is `RESOLVED` by three scoped replacements. Its 10/10 registered
+ClaimIntent surfaces remain byte-exact and exact-once, contributing 10 of the
+batch's frozen 51-surface population. The authority chain binds the
+[batch request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
+SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
+to the unified raw author event, SHA-256
+`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
+The official two-round revision bundle and final evidence package replay;
+8/8 support tests and token conservation pass; the isolated preview is 13
+clean A4 pages. Canonical manuscript/body, bibliography, PDF, result tree,
+the frozen residual congruence inverse-limit flow, and both rejected Route-A
+tuples remain unchanged. The checker-valid Stage-3′ `MAJOR_REVISION` under B4
+is retained below as the historical entry decision; Stage 4.5 is not invoked.
 
 | Item | Status |
 |---|---|
@@ -20,8 +25,9 @@ decision.
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
 | ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and six-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 8/8 suite and clean preview complete |
-| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 5 fully + 1 partially; B4; checker PASS; Stage 4′ unauthorized |
-| ARS Stage 4′ | **PRE-AUTHORITY PREPARED / EXACT AUTHORITY PENDING** — P27: 1 residual; 10/10 surfaces exact-once; no patch or content/result/Route mutation |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION ENTRY** — 5 fully + 1 partially; B4; checker PASS; exact Stage-4′ authority was subsequently granted |
+| ARS Stage 4′ | **COMPLETE WITHIN AUTHORIZED SCOPE** — `REV-03` resolved by 3 operations; 10/10 surfaces exact-once; 8/8 tests; 13-page clean preview; canonical content/results/Route frozen |
+| ARS Stage 4.5 | **MANDATORY CHECKPOINT / NOT INVOKED** — fresh final-integrity pass requires explicit scholar confirmation |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |

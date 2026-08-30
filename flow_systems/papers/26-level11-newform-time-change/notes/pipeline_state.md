@@ -2,16 +2,17 @@
 
 Date: **2026-08-30**
 
-Current controlling state: **Stage 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
-AUTHORITY PENDING**. P26 contributes 2 of the batch's 6 residuals, with 17/17
-registered ClaimIntent surfaces exact-once. The exact scope is frozen in the
-[batch authorization request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-No author adjudication or revision patch has occurred. Canonical
-manuscript/body, bibliography, PDF, results, the frozen positive time change of
-the `Gamma_0(11)` geodesic flow, and the Route-A tuple remain unchanged. The
-checker-valid Stage-3′ `MAJOR_REVISION` under B4 is retained below as the entry
-decision.
+Current controlling state: **Stage 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
+CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The exact request SHA-256
+is `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
+and the unified author event SHA-256 is
+`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
+Both P26 residuals were applied within their exact scope: 9 operations,
+108/117 blocks preserved byte-identically, 17/17 surfaces exact once, no
+structural flag, no scientific-value or Route change, and a clean 16-page
+preview. Canonical manuscript, paper PDF, and results remain unchanged; the
+only bibliography change is the exact authorized two-entry append. Stage 4.5
+and Stage 5 are not authorized by this state.
 
 | Item | Status |
 |---|---|
@@ -20,8 +21,8 @@ decision.
 | ARS Stage 2.5 | **PASS AT MANDATORY CHECKPOINT** — declaration, provenance, and C4/Mode-6 closure complete |
 | ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and nine-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized nine-item revision, 84/84 suite, evidence bundle and clean preview complete |
-| ARS Stage 3′ | **ROUND 2 COMPLETE / MAJOR REVISION / USER CHECKPOINT** — 7 fully + 1 partially + 1 cannot verify; B4; checker PASS; Stage 4′ unauthorized |
-| ARS Stage 4′ | **PRE-AUTHORITY PREPARED / EXACT AUTHORITY PENDING** — P26: 2 residuals; 17/17 surfaces exact-once; no patch or content/result/Route mutation |
+| ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION** — 7 fully + 1 partially + 1 cannot verify; B4; checker PASS; entry decision superseded by authorized Stage 4′ execution |
+| ARS Stage 4′ | **AUTHOR-SIDE REVISION COMPLETE / CONTENT CONFIRMATION PENDING** — 2/2 residuals addressed; exact two-entry bibliography append; Patch 1.1 and official apply PASS; 17/17 surfaces exact-once; clean preview; fresh Stage 4.5 not yet run |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |

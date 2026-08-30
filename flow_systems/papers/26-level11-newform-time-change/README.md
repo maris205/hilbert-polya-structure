@@ -4,15 +4,19 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 4′ PRE-AUTHORITY PREPARED / EXACT AUTHOR
-  AUTHORITY PENDING**. P26 contributes **2 of the batch's 6 residuals**, and
-  its **17/17 registered ClaimIntent surfaces** validate exact-once. The exact
-  bounded scope is frozen in the [batch authorization request](../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-  SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`.
-  Preparation is not author adjudication: no revision patch was created or
-  applied, and the manuscript/body, bibliography, PDF, canonical results,
-  frozen positive time change of the `Gamma_0(11)` geodesic flow, and Route
-  records remain unchanged.
+- Current pipeline: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE /
+  AUTHOR CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
+  `REV-02` and `REV-04` residuals were applied by a 9-operation Patch 1.1;
+  108/117 blocks were preserved byte-identically, all **17/17 registered
+  ClaimIntent surfaces** remain exact once, and no structural flag or Route
+  change occurred. The exact Katok and Constantinescu--Nordentoft entries were
+  appended, the 18/18 legacy plus 10/10 support tests passed, and the isolated
+  16-page preview has no undefined citation/reference, overfull box, missing
+  character, or fatal error. See the
+  [Stage-4′ completion report](notes/stage4_prime_completion_report_round2.md),
+  [response](notes/stage4_prime_response_to_reviewers_round2.md), and
+  [preview](notes/stage4_prime_revision_round2.pdf). Stage 4.5 and Stage 5
+  have not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 7
   `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 1
   `CANNOT_VERIFY` verdict with zero adjustments and no post-letter
@@ -21,8 +25,9 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
   apply-chain replay is `pass`. See the
   [Round-2 verification report](notes/stage3_prime_round2_verification_report.md)
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
-  Attempt 1 remains immutable. That decision is the legal basis for the
-  prepared Stage 4′ checkpoint, whose exact authority is still pending.
+  Attempt 1 remains immutable. That decision was the legal basis for the now
+  author-adjudicated and completed Stage 4′ revision; it is retained here as
+  the historical entry checkpoint.
 - Stage-4 conclusion: all 9/9 roadmap items are accounted for by 25 operations:
   8 are `RESOLVED`, while `REV-02` is a `DELIBERATE_LIMITATION` because no
   bibliography target was authorized. Its source-verified comparison uses only
