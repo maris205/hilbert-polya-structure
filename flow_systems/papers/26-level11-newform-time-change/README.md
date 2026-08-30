@@ -4,10 +4,14 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS STAGE 4 COMPLETE / SCHOLAR CHECKPOINT
-  BEFORE STAGE 3 PRIME**. The authorized revision has been applied only to the
-  anchored Stage-4 draft. Stage 3 prime and all later stages remain unentered;
-  the canonical manuscript/PDF are unchanged.
+- Current pipeline: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
+  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The evidence gates froze
+  7 `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 1
+  `CANNOT_VERIFY` verdict with zero adjustments; one response-staleness note
+  is decision-inert. A dispatch-layer JSON serialization error triggered the
+  no-retry rule, so no editorial decision was emitted. See the
+  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). The authorized
+  Stage-4 draft and canonical manuscript/PDF remain unchanged.
 - Stage-4 conclusion: all 9/9 roadmap items are accounted for by 25 operations:
   8 are `RESOLVED`, while `REV-02` is a `DELIBERATE_LIMITATION` because no
   bibliography target was authorized. Its source-verified comparison uses only

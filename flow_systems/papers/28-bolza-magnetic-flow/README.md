@@ -2,10 +2,13 @@
 
 ## Current status
 
-- ARS: **STAGE 4 REVISE COMPLETE WITHIN AUTHORIZED SCOPE — STOPPED BEFORE
-  STAGE 3 PRIME / STAGE 4.5**. All four authorized roadmap items are
-  `RESOLVED` through four deterministic operations; neither subsequent stage
-  has been invoked.
+- ARS: **STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT — NEW-ROUND SCHOLAR
+  CHECKPOINT OPEN**. The evidence gates froze 3 `FULLY_ADDRESSED` and
+  1 `CANNOT_VERIFY` verdict with zero adjustments. A dispatch-layer JSON
+  serialization error triggered the no-retry rule, so no editorial decision
+  was emitted. See the
+  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). Stage 4 remains
+  complete; Stage 4.5 and later stages have not been invoked.
 - Stage-4 conclusion: the revision corrects the replay order, records executed
   direct canonicalization regressions with their same-builder limitation, adds
   the non-ranking A0–A4 obligation legend, and adds the typed

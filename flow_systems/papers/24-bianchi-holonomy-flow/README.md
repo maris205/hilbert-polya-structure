@@ -4,10 +4,13 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — ARS STAGE 4 COMPLETE / STAGE 3 PRIME SCHOLAR
-  CHECKPOINT OPEN**. The authorized eight-item roadmap has been implemented by
-  23 deterministic operations; the canonical manuscript/PDF remain unchanged
-  pending explicit authorization of the next stage.
+- Current stage: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
+  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The three evidence gates froze
+  7 `FULLY_ADDRESSED` and 1 `PARTIALLY_ADDRESSED` verdict with zero
+  adjustments, but a dispatch-layer JSON serialization error triggered the
+  no-retry rule, so no editorial decision was emitted. See the
+  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). The completed
+  Stage-4 revision and the canonical manuscript/PDF remain unchanged.
 - Stage-4 conclusion: **8/8 items resolved; 10/10 registered ClaimIntent
   surfaces byte-exact once; direct suites pass 10/10, 12/12, and 14/14; the
   14-page marker-stripped preview is clean.** The loxodromic-only profile shows

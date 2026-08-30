@@ -4,10 +4,14 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — ARS STAGE 4 COMPLETE / STAGE 3 PRIME SCHOLAR
-  CHECKPOINT OPEN**. The authorized six-item roadmap has been implemented by
-  14 deterministic operations; the frozen canonical manuscript/PDF remain
-  unchanged pending explicit authorization of the next stage.
+- Current stage: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
+  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The evidence gates froze
+  2 `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 3
+  `CANNOT_VERIFY` verdicts with zero adjustments. A dispatch-layer JSON
+  serialization error then triggered the no-retry rule, so no editorial
+  decision was emitted. See the
+  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). Stage 4 and the
+  frozen canonical manuscript/PDF remain unchanged.
 - Stage-4 conclusion: **6/6 items resolved; 6/6 registered ClaimIntent surfaces
   byte-exact once; 75/75 tests pass; 13-page marker-stripped preview clean.**
   The revision adds a bounded closest-work comparison, a four-object typing

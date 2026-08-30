@@ -4,12 +4,14 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — ARS STAGE 4 COMPLETE / STAGE 3 PRIME SCHOLAR
-  CHECKPOINT OPEN**. The authorized six-item roadmap has been closed: `REV-01`
-  is the explicit acknowledgment/no-op and the other five items are implemented
-  by 15 deterministic operations. The frozen canonical manuscript/PDF and
-  result tree remain unchanged pending explicit authorization of the next
-  stage.
+- Current pipeline: **Round 9 — STAGE 3′ ATTEMPT 1 ABORTED AT PHASE-2B LINT /
+  NEW-ROUND SCHOLAR CHECKPOINT OPEN**. The evidence gates froze
+  5 `FULLY_ADDRESSED` and 1 `CANNOT_VERIFY` verdict with zero adjustments.
+  A dispatch-layer JSON serialization error triggered the no-retry rule, so no
+  editorial decision was emitted. See the
+  [Stage-3′ abort report](notes/stage3_prime_abort_report.md). The completed
+  six-item Stage-4 revision, frozen canonical manuscript/PDF, and result tree
+  remain unchanged.
 - Stage-4 conclusion: **6/6 items resolved; 10/10 registered ClaimIntent
   surfaces byte-exact once; 8/8 tests pass (5 legacy + 3 direct); 13-page
   marker-stripped preview with zero overfull boxes.** The revision adds a
