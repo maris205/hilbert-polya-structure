@@ -1,0 +1,83 @@
+\section{The finite law and its support}\label{sec:law}
+
+Write
+\[
+ \PhiPot(S)=\sum_{v\in S}v,
+ \qquad G_S(z)=\E[z^{T_S}].
+\]
+
+\begin{proposition}[absorption and PGF]\label{prop:pgf}
+Every trajectory is absorbed after at most $\PhiPot(S)$ updates.  Moreover,
+\begin{equation}
+ G_{\{0\}}(z)=1,
+ \qquad
+ G_S(z)=\frac{z}{|S|-1}
+       \sum_{v\in S\setminus\{0\}}G_{C_v(S)}(z).       \label{eq:pgf}
+\end{equation}
+Thus \eqref{eq:pgf} is a finite acyclic recursion for the complete law.
+\end{proposition}
+
+\begin{proof}
+If $v-1\notin S$, the update decreases $\PhiPot$ by one.  If
+$v-1\in S$, the collision removes $v$ and decreases $\PhiPot$ by $v$.
+The nonnegative integer potential therefore decreases strictly.  Conditioning
+on the uniformly chosen first active site gives \eqref{eq:pgf}; potential
+descent makes the recursion acyclic.
+\end{proof}
+
+The recursion has no internal gaps, even for a sparse initial state.
+
+\begin{theorem}[support from every rooted state]\label{thm:support}
+If $S\ne\{0\}$, then
+\begin{equation}
+ \supp(T_S)=\{\max S,\max S+1,\ldots,\PhiPot(S)\}.       \label{eq:support}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Each update decreases $\PhiPot$ by at least one, so $T_S\leq\PhiPot(S)$.
+An update lowers the maximum occupied coordinate by at most one: moving the
+maximum either places it at its predecessor or removes it when that
+predecessor is occupied; a move below the maximum leaves it fixed.  Hence
+$T_S\geq\max S$.
+
+We prove that every intermediate value occurs by induction on
+$\PhiPot(S)$.  Put $m=\max S$.  If $m-1\notin S$, choose $m$ first.  The
+successor has maximum $m-1$ and potential $\PhiPot(S)-1$, so induction and
+the first update realize the whole interval $[m,\PhiPot(S)]$.
+
+Suppose instead that $m-1\in S$.  The case $m=1$ is immediate.  Choosing
+$m$ first is a collision; induction supplies
+\begin{equation}
+ [m,\PhiPot(S)-m+1].                                   \label{eq:lowinterval}
+\end{equation}
+Let $a$ be the bottom of the consecutive occupied run ending at $m$.
+If $a=1$, moving $a$ collides at the root; if $a>1$, its predecessor is
+empty.  Either move decreases the potential by one and leaves maximum $m$.
+This first choice and induction supply
+\begin{equation}
+ [m+1,\PhiPot(S)].                                     \label{eq:highinterval}
+\end{equation}
+Since $m,m-1\in S$, we have $\PhiPot(S)\geq2m-1$; the integer intervals in
+\eqref{eq:lowinterval}--\eqref{eq:highinterval} touch or overlap.  Their
+union proves \eqref{eq:support}.  Every constructed schedule has positive
+probability because each of its active choices does.
+\end{proof}
+
+Let $S_n=\{0,1,\ldots,n-1\}$ and $T_n=T_{S_n}$.
+
+\begin{corollary}[minimum-time mass]\label{cor:minmass}
+For $n\geq2$,
+\begin{equation}
+ \Pp(T_n=n-1)=\frac{1}{(n-1)!}.                         \label{eq:minmass}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+A trajectory of length $n-1$ must reduce the number of nonroot piles at
+every update, so every move must collide.  Removing a site before its larger
+neighbor would leave a vacancy for that neighbor's next move.  The unique
+all-collision order is therefore $n-1,n-2,\ldots,1$.  The successive numbers
+of active sites are $n-1,n-2,\ldots,1$, giving \eqref{eq:minmass}.
+\end{proof}
+

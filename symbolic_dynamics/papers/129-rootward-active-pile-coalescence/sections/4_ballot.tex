@@ -1,0 +1,157 @@
+\section{A ballot evaluation and full occupancy}\label{sec:ballot}
+
+The recurrence for $h$ is already an exact finite algorithm.  Consecutive
+starts have a closed form.
+
+\begin{lemma}[adjacent first passage]\label{lem:adjacent}
+For every $m\geq1$,
+\begin{equation}
+ h(m-1,m)
+ =\frac{(2m-1)!!}{(2m-2)!!}
+ =\frac{2m}{4^m}\binom{2m}{m}.                         \label{eq:adjacent}
+\end{equation}
+Equivalently, this value is $\E|W_{2m}|$ for a length-$2m$ simple symmetric
+walk $W$.
+\end{lemma}
+
+\begin{proof}
+The case $m=1$ is \eqref{eq:hroot}.  Suppose $m\geq2$ and put $p=m-1$.
+Superpose the two clocks until the paths meet or the lower path reaches zero.
+Each inter-event time has mean $1/2$, and the event type is a fair coin.
+Call a lower-path move an up-step and an upper-path move a down-step.  The
+gap starts at one; a down-step at gap one closes the interface, while the
+$p$th up-step puts the lower path at zero.
+
+If meeting occurs after $j$ up-steps and $j+1$ down-steps, the event word is
+a Catalan first-passage word.  There are
+\[
+ A_j=\frac{1}{j+1}\binom{2j}{j},\qquad 0\leq j<p,
+\]
+such words.  If the $p$th up-step occurs after $q$ down-steps, reflection at
+the first forbidden prefix gives
+\[
+ B_{p,q}=\binom{p+q-1}{q}-\binom{p+q-1}{q-1},
+ \qquad 0\leq q<p,                                    \label{eq:ballotcount}
+\]
+where the second binomial coefficient is zero at $q=0$.  On this second
+exit, the upper path is $p+1-q$ steps from zero.  Consequently
+\begin{align}
+ h(m-1,m)
+={}&\sum_{j=0}^{p-1}
+ \frac{A_j}{2^{2j+1}}\frac{2j+1}{2} \notag\\
+ &+\sum_{q=0}^{p-1}\frac{B_{p,q}}{2^{p+q}}
+ \left(\frac{p+q}{2}+p+1-q\right).                    \label{eq:ballotsum}
+\end{align}
+The first parenthesis is elapsed mean time; the second also includes the
+one-clock residual time after the lower path reaches zero.
+
+We now evaluate both finite sums.  Let $\xi_k=1$ when the $k$th two-clock
+event moves the lower path and $\xi_k=-1$ when it moves the upper path, and
+put
+\[
+ U_k=\#\{\ell\leq k:\xi_\ell=1\},\qquad
+ D_k=1+\sum_{\ell=1}^k\xi_\ell,
+ \qquad
+ K=\inf\{k\geq0:D_k=0\text{ or }U_k=p\}.
+\]
+Up to $K$, $D_k$ is the gap between the paths.  At meeting,
+$K=2j+1$ for some $0\leq j<p$; on root exit, $K=p+q$ for some
+$0\leq q<p$ and $D_K=p+1-q$.  Hence $K\leq2p-1$.
+
+Set
+\[
+                   t_r=4^{-r}\binom{2r}{r}\qquad(r\geq0).
+\]
+The $j$th meeting summand satisfies
+\[
+ \frac{A_j}{2^{2j+1}}\frac{2j+1}{2}=\frac{t_{j+1}}2.
+\]
+Moreover,
+\[
+ (2r+1)t_r-(2r-1)t_{r-1}=t_r\qquad(r\geq1),
+\]
+so telescoping, with $t_0=1$, gives the meeting contribution
+\begin{equation}
+ S_1=\frac12\sum_{r=1}^{p}t_r
+    =\frac{(2p+1)t_p-1}{2}.                            \label{eq:Sone}
+\end{equation}
+
+For the root alternative define
+\[
+ P_{p,q}=\frac{B_{p,q}}{2^{p+q}},\qquad
+ F_q=\frac1{2^{p+q}}\binom{p+q}{q},\qquad F_{-1}=0.
+\]
+Pascal's identity now has the explicit telescoping form
+\begin{equation}
+ P_{p,q}=F_q-F_{q-1},\qquad 0\leq q<p.                \label{eq:Ptel}
+\end{equation}
+Consequently
+\begin{equation}
+ \Pp(\text{root exit})=F_{p-1}
+ =\frac1{2^{2p-1}}\binom{2p-1}{p-1}=t_p.              \label{eq:rootprob}
+\end{equation}
+The fair walk $(D_k)$ is a martingale and $K$ is bounded, so optional
+stopping gives $\E D_K=D_0=1$.  Since $D_K=0$ at meeting and
+$D_K=p+1-q$ on root exit,
+\begin{align}
+ \sum_{q=0}^{p-1}P_{p,q}(p+1-q)&=1,\notag\\
+ \sum_{q=0}^{p-1}qP_{p,q}&=(p+1)t_p-1,\notag\\
+ \E\!\left[K\1_{\{\text{root exit}\}}\right]
+   &=(2p+1)t_p-1.                                     \label{eq:rootmoment}
+\end{align}
+The root contribution, including the one-clock residual time $D_K$, is
+therefore
+\begin{equation}
+ S_2=\frac12\E\!\left[K\1_{\{\text{root exit}\}}\right]
+       +\E\!\left[D_K\1_{\{\text{root exit}\}}\right]
+    =\frac{(2p+1)t_p+1}{2}.                            \label{eq:Stwo}
+\end{equation}
+Combining \eqref{eq:Sone} and \eqref{eq:Stwo}, then using
+$2(p+1)t_{p+1}=(2p+1)t_p$, gives
+\[
+ h(m-1,m)=(2p+1)t_p
+ =2m t_m
+ =\frac{2m}{4^m}\binom{2m}{m}
+ =\frac{(2m-1)!!}{(2m-2)!!}.
+\]
+
+Finally, if $W_{2m}=2X-2m$ with
+$X\sim\operatorname{Bin}(2m,1/2)$, then symmetry and
+\[
+ (2k-2m)\binom{2m}{k}
+ =2m\left\{\binom{2m-1}{k-1}-\binom{2m-1}{k}\right\}
+\]
+give, by telescoping over $m<k\leq2m$,
+\[
+ \E|W_{2m}|
+ =\frac2{4^m}\sum_{k=m+1}^{2m}
+   (2k-2m)\binom{2m}{k}
+ =\frac{2m}{4^m}\binom{2m}{m}.
+\]
+\end{proof}
+
+\begin{theorem}[full-start mean]\label{thm:fullmean}
+For $n\geq1$,
+\begin{equation}
+ \boxed{\displaystyle
+ \E T_n=\sum_{m=1}^{n-1}
+ \frac{(2m-1)!!}{(2m-2)!!}.}                           \label{eq:fullmean}
+\end{equation}
+As $n\to\infty$,
+\begin{equation}
+ \E T_n=\frac{4}{3\sqrt\pi}n^{3/2}+O(n^{1/2}).        \label{eq:asymptotic}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The consecutive interfaces of $S_n$ start at $(m-1,m)$ for
+$1\leq m<n$.  Equations \eqref{eq:additivity} and \eqref{eq:adjacent} give
+\eqref{eq:fullmean}.  The standard estimate
+\[
+ \binom{2m}{m}=\frac{4^m}{\sqrt{\pi m}}
+ \bigl(1+O(m^{-1})\bigr)
+\]
+makes the $m$th summand
+$2\sqrt{m/\pi}+O(m^{-1/2})$.  Summing and comparing
+$\sum_{m<n}\sqrt m$ with its integral gives \eqref{eq:asymptotic}.
+\end{proof}

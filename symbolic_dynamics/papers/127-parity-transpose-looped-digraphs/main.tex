@@ -1,0 +1,321 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F_2}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Fix}{\operatorname{Fix}}
+
+\title[Odd-outdegree transpose dynamics]{Odd-Outdegree Transpose Dynamics on Looped Digraphs:\\
+Parity Collapse, Fibres, and Components}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P25, 05C20, 15B33, 05A15}
+\keywords{finite dynamical system, directed graph, binary matrix, parity margin,
+transpose, fibre, functional graph}
+
+\begin{document}
+
+\begin{abstract}
+On a labelled looped digraph, reverse every arc and then toggle every ordered
+pair, loops included, inside the set of vertices of odd current outdegree.
+Equivalently, on $M_n(\mathbb F_2)$ we iterate
+$\Phi(A)=A^{\mathsf T}+(A\mathbf1)(A\mathbf1)^{\mathsf T}$.
+We prove that one step maps onto the even-total-parity hyperplane, which is
+the complete recurrent set, and that all recurrent periods divide four.
+Every codomain fibre has size $0$, $1$, or $2^{n-1}+1$, according to an
+explicit column-parity test.  We then give exact formulas for fixed points,
+two- and four-cycles, depth-one states, and the finite dynamical zeta
+function.  A second factorisation views the state-dependent left factor as
+the identity or an involutory transvection, versus a singular projection,
+and independently recovers the second and fourth iterates.  Static graph
+complementation, binary-margin counting, and finite-map zeta bookkeeping are
+treated as background.  The owner search is bounded; no novelty, priority,
+or external-release claim is made.
+\end{abstract}
+
+\maketitle
+
+\section{The update and its subtraction boundary}
+
+Fix $n\geq1$, work over $\F$, and let $\one$ be the all-one column.  A matrix
+$A\in M_n(\F)$ is the adjacency matrix of a labelled directed graph in which
+loops are allowed.  Put
+\[
+ r=A\one,\qquad c=A^{\mathsf T}\one,\qquad
+ \tau=\one^{\mathsf T}A\one.
+\]
+Thus $r$ and $c$ are the out- and indegree parity vectors and
+$\tau=\one^{\mathsf T}r=\one^{\mathsf T}c$ is total arc parity.  Define
+\begin{equation}
+ \Phi(A)=A^{\mathsf T}+rr^{\mathsf T}.                 \label{eq:update}
+\end{equation}
+The second summand toggles the complete looped subdigraph on the current
+odd-outdegree vertices.  It is a rank-\emph{at-most}-one correction and is
+recomputed after every step.
+
+Local complementation and its binary-matrix formulation are classical
+\cite{Bouchet1993,Traldi2012}; pivot and loop complementation have an
+established algebraic calculus \cite{BrijderHoogeboom2011}.  Static subgraph
+complementation, including its rank and algorithmic interfaces, is also a
+separate mature operation \cite{BuchananEtAl2022,KochPardalSantos2025}; see
+also \href{https://arxiv.org/abs/2502.15675}{arXiv:2502.15675}.  Modular
+invariant rings for transpose group actions on full $2\times2$ matrix spaces
+form another neighboring, but static, interface \cite{ChenRen2026}.
+All such static operations and invariant rings, transpose, outer products,
+transvections, binary margin enumeration, and generic functional-graph
+bookkeeping receive zero contribution credit here.  The residual question is
+only the exact temporal structure of the state-dependent update
+\eqref{eq:update}.
+
+The internal subtraction is equally strict.  P102's involution-norm dynamics
+and P103's double-adjugation dynamics receive zero credit.  P125 acts on pairs
+in a nonsingular quadratic space, has a quadratic/polar three-bit quotient,
+and permits tail two and period three.  In contrast, the present carrier is
+all of $M_n(\F)$, its feasible row/column-margin quotient has dimension
+$2n-1$, its tail is at most one, and its recurrent periods are only
+$1,2,4$.  Thus the literal systems are not conjugate; generic quotient,
+matrix, quadratic-map, cycle, fibre, component, and zeta packaging still
+receive zero credit.  A bounded formula-and-owner search found no literal-map
+match; a bounded non-hit is not a novelty certificate.
+
+\section{The parity quotient and all orbits}
+
+For $B=\Phi(A)$, write its margins as $r(B),c(B),\tau(B)$.
+
+\begin{lemma}[quotient law]\label{lem:quotient}
+For every $A$,
+\begin{equation}
+ r(B)=c+\tau r,\qquad c(B)=(1+\tau)r,\qquad \tau(B)=0.   \label{eq:quotient}
+\end{equation}
+Consequently the even-total hyperplane
+$\mathcal H_n=\{A:\tau(A)=0\}$ is invariant; on it the margin pair is
+swapped.
+\end{lemma}
+
+\begin{proof}
+Multiplying \eqref{eq:update} on the right by $\one$ gives
+$r(B)=c+r(r^{\mathsf T}\one)=c+\tau r$.  Transposing first gives
+$c(B)=r+r(r^{\mathsf T}\one)=(1+\tau)r$.  Finally,
+$\tau(B)=\one^{\mathsf T}(c+\tau r)=\tau+\tau^2=0$ in
+$\F$.
+\end{proof}
+
+\begin{theorem}[complete temporal classification]\label{thm:orbits}
+The image and complete recurrent set are both $\mathcal H_n$.  Every state
+outside $\mathcal H_n$ has exact depth one.  On $\mathcal H_n$,
+\begin{equation}
+ \Phi^2(A)=A+rr^{\mathsf T}+cc^{\mathsf T},
+ \qquad \Phi^4(A)=A.                                  \label{eq:four}
+\end{equation}
+If $r\ne c$, then $A$ has exact period four.  If $r=c$, its period is one or
+two.
+\end{theorem}
+
+\begin{proof}
+The last identity in \eqref{eq:quotient} shows that $\im\Phi\subseteq
+\mathcal H_n$.  The reverse inclusion follows from the explicit preimage in
+\cref{thm:fibres}.  On $\mathcal H_n$ the margins swap, so a second use of
+\eqref{eq:update} yields the first identity in \eqref{eq:four}; this added
+matrix has zero row and column margins.  Repeating the same two steps cancels
+it in characteristic two, proving the second identity.  Thus every point of
+$\mathcal H_n$ is recurrent.  Every odd-total point reaches it after one step
+and cannot already be recurrent, proving exact depth one.
+
+If $r\ne c$, then $rr^{\mathsf T}\ne cc^{\mathsf T}$ because the diagonal
+of $vv^{\mathsf T}$ is $v$; hence $\Phi^2(A)\ne A$, and the period is exactly
+four.  If $r=c$, \eqref{eq:four} gives $\Phi^2(A)=A$.
+\end{proof}
+
+Here depth means the least entrance time into the recurrent set.  On a finite
+map this equals the distance to the first periodic point.  The unique matrix
+in $M_0(\F)$ may separately be declared fixed; all remaining formulas assume
+$n\ge1$.
+
+\section{Every one-step fibre and a second route}
+
+\begin{theorem}[codomain-wide fibre trichotomy]\label{thm:fibres}
+For every $B\in M_n(\F)$,
+\begin{equation}
+ |\Phi^{-1}(B)|=
+ \begin{cases}
+ 0,&\tau(B)=1,\\
+ 1,&\tau(B)=0\text{ and }c(B)\ne0,\\
+ 2^{n-1}+1,&\tau(B)=0\text{ and }c(B)=0.
+ \end{cases}                                           \label{eq:fibres}
+\end{equation}
+In particular, $|\im\Phi|=2^{n^2-1}$, and precisely $2^{n(n-1)}$ image
+targets have the large fibre.
+\end{theorem}
+
+\begin{proof}
+If a preimage has row margin $r$, solving \eqref{eq:update} for it gives
+$A=B^{\mathsf T}+rr^{\mathsf T}$.  Requiring $A\one=r$ is equivalent to
+\begin{equation}
+ r=c(B)+(\one^{\mathsf T}r)r.                           \label{eq:solve}
+\end{equation}
+For even-weight $r$, this forces $r=c(B)$ and exists exactly when
+$\tau(B)=0$; it then supplies one preimage.  For odd-weight $r$,
+\eqref{eq:solve} is equivalent to $c(B)=0$.  In that case all $2^{n-1}$
+odd vectors work, in addition to the even solution $r=0$.  This proves
+\eqref{eq:fibres} and also $\im\Phi=\mathcal H_n$.
+
+There are $2^{n-1}$ choices for each even-parity column, independently over
+$n$ columns, so exactly $2^{n(n-1)}$ matrices have $c(B)=0$.
+\end{proof}
+
+The odd-total zero case in \eqref{eq:fibres} is essential.  For example,
+when $n=1$, the target $[1]$ has nonzero column margin but no preimage.
+
+\begin{proposition}[factor-product route]\label{prop:factor}
+The update has the factorisation
+\begin{equation}
+ \Phi(A)=(I+r\one^{\mathsf T})A^{\mathsf T}.            \label{eq:factor}
+\end{equation}
+If $\tau=0$, the left factor is the identity when $r=0$ and an involutory
+transvection otherwise.  If $\tau=1$, it is an idempotent rank-$n-1$
+projection with kernel $\langle r\rangle$ and image $\one^\perp$.
+Moreover, for $\tau=0$ the factor product independently gives
+\begin{equation}
+ \Phi^2(A)=(I+c\one^{\mathsf T})A
+              (I+\one r^{\mathsf T})
+           =A+cc^{\mathsf T}+rr^{\mathsf T},           \label{eq:factor-two}
+\end{equation}
+and hence $\Phi^4(A)=A$.
+\end{proposition}
+
+\begin{proof}
+Since $\one^{\mathsf T}A^{\mathsf T}=r^{\mathsf T}$,
+\eqref{eq:factor} is \eqref{eq:update}.  Put
+$L_r=I+r\one^{\mathsf T}$.  Direct multiplication gives
+$L_r^2=I+\tau r\one^{\mathsf T}$, while
+\begin{equation}
+ \one^{\mathsf T}L_r=(1+\tau)\one^{\mathsf T},
+ \qquad \det L_r=1+\tau.                              \label{eq:factor-rank}
+\end{equation}
+Thus $L_r^2=I$ when $\tau=0$, with the stated identity/transvection
+distinction.  When $\tau=1$, $L_r^2=L_r$ and
+\[
+ L_rx=0\quad\Longleftrightarrow\quad
+ x=r(\one^{\mathsf T}x).
+\]
+Here $r\ne0$, and $L_rr=0$, so $\ker L_r=\langle r\rangle$.  Rank--nullity
+gives rank $n-1$; \eqref{eq:factor-rank} places the image in the
+$(n-1)$-dimensional space $\one^\perp$, hence the two are equal.
+
+It remains to obtain the temporal identity from the factors.  Suppose
+$\tau=0$ and put $B=L_rA^{\mathsf T}$.  Direct multiplication of this product
+by $\one$ and of its transpose by $\one$ gives row and column margins $c$
+and $r$, respectively.  Therefore
+\[
+ \Phi^2(A)=L_cB^{\mathsf T}=L_cAL_r^{\mathsf T}.
+\]
+Expanding the two factors gives \eqref{eq:factor-two}; its mixed term is
+$c(\one^{\mathsf T}A\one)r^{\mathsf T}=0$.  Because $r$ and $c$ have even
+weight, the correction $cc^{\mathsf T}+rr^{\mathsf T}$ has zero row and
+column margins.  The same factor-product calculation on $\Phi^2(A)$ adds
+that correction once more, proving $\Phi^4(A)=A$ in characteristic two.
+\end{proof}
+
+Thus the factor route both identifies the singular odd-coset projection and
+recovers the even-coset temporal identities; the direct margin equation in
+\cref{thm:fibres} is still needed to distinguish individual target fibres.
+
+\section{Components and zeta function}
+
+\begin{lemma}[prescribed margins]\label{lem:margins}
+For $u,v\in\F^n$, there is a matrix with row margin $u$ and column margin
+$v$ exactly when $\one^{\mathsf T}u=\one^{\mathsf T}v$.  In that case there
+are $2^{(n-1)^2}$ such matrices.
+\end{lemma}
+
+\begin{proof}
+Choose the upper-left $(n-1)\times(n-1)$ entries freely.  The prescribed row
+sums force the last entry of each of the first $n-1$ rows, and the prescribed
+column sums force the last entry of each of the first $n-1$ columns.  The two
+requirements on the bottom-right corner agree precisely when the total
+parities agree.
+\end{proof}
+
+Put
+\[
+ F_n=2^{n(n-1)/2},\qquad
+ C_{2,n}=\frac{2^{n(n-1)}-F_n}{2},\qquad
+ C_{4,n}=\frac{2^{n^2-1}-2^{n(n-1)}}{4}.
+\]
+
+\begin{theorem}[functional components]\label{thm:census}
+The map has $F_n$ fixed points, $C_{2,n}$ two-cycles, and $C_{4,n}$
+four-cycles.  It has $2^{n^2-1}$ depth-one states.  With the usual finite-map
+convention \cite{ArtinMazur1965},
+\begin{equation}
+ \zeta_{\Phi_n}(z)=
+ (1-z)^{-F_n}(1-z^2)^{-C_{2,n}}(1-z^4)^{-C_{4,n}}.       \label{eq:zeta}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+A fixed point satisfies $A+A^{\mathsf T}=rr^{\mathsf T}$.  Comparing
+diagonals forces $r=0$; then $A$ is symmetric with zero row sums.  Its
+off-diagonal entries are arbitrary and its diagonal is forced by the row
+sums, giving dimension $n(n-1)/2$ and hence $F_n$ fixed points.
+
+By \cref{lem:margins}, for each of the $2^{n-1}$ even vectors $r$, there are
+$2^{(n-1)^2}$ recurrent matrices with margins $(r,r)$.  Thus
+$2^{n(n-1)}$ recurrent points have period dividing two.  Removing fixed
+points and dividing by two gives $C_{2,n}$.  All remaining recurrent points
+have exact period four by \cref{thm:orbits}, giving $C_{4,n}$.  The odd
+coset has size $2^{n^2-1}$ and consists exactly of the depth-one points.
+Finally, the standard product of one factor $(1-z^k)^{-1}$ per $k$-cycle
+gives \eqref{eq:zeta}.
+\end{proof}
+
+\section{Exact control and limitations}
+
+The accompanying deterministic verifier exhausts every one of the
+$2^{n^2}$ matrices for $1\le n\le4$.  It checks both forms of the update,
+the quotient and fourth-iterate identities, exact depths and periods, all
+codomain fibres including zero fibres, the affine margin count, and every
+component formula.  These bounded computations are counterexample searches,
+not proofs of the all-$n$ statements above.
+
+The result is specific to the binary field, square matrices, transpose, and
+the recomputed row-margin selector.  Rectangular carriers, other fields,
+other bilinear forms, and static graph complementation require new proofs and
+owner gates.  Literature screening was bounded and can establish a hit but
+not an absence.  Accordingly we make no claim of novelty, priority,
+authorship, posting readiness, or external release.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

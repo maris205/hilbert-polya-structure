@@ -1,0 +1,429 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Mon}{\mathcal M}
+\newcommand{\depth}{\operatorname{depth}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Res}{\mathcal U}
+
+\title[Translation--GCD depth and fibres]{All-Depth Enumeration and Terminal Fibres\\
+for Translation--GCD Erosion over Finite Fields}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{11T06, 05A15, 37P25, 12Y05}
+\keywords{finite field, polynomial dynamics, translated gcd, cyclic run,
+formal orbit Euler product, terminal fibre}
+
+\begin{document}
+
+\begin{abstract}
+Let $q=p^a$ and iterate $T(f)=\gcd(f(x),f(x+1))$ on monic
+polynomials over $\F_q$.  Translation has order $p$, so the process reaches
+the invariant core $Q(f)=T^{p-1}(f)$.  We determine, for every
+$0\leq t\leq p-1$, an exact all-degree generating function for the states
+whose stabilization depth is at most $t$.  On each nonfixed orbit of
+irreducible factors, subtracting the minimum exponent leaves a cyclic
+nonnegative vector with a zero; its depth is its longest positive run.  A
+finite run automaton supplies the local series, and a formal orbit Euler product over
+irreducible translation orbits gives the global census.  We also prove a
+unique graded split into an invariant core and the unit fibre $Q^{-1}(1)$.
+Its generating function is $(1-qz^p)/(1-qz)$, yielding the exact-degree and
+degree-capped fibre over every invariant target.  The translation-fixed
+irreducible counts used in the formal orbit Euler product are due to Garefalakis and Reis, and
+the underlying finite orbit-fold mechanism is treated as prior background;
+the residual claims are the all-depth formal orbit Euler product and target-refined fibres.
+Finite checks over $\F_4,\F_8$, and $\F_9$ are falsification controls only.
+External release remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{Scope and setup}
+
+Let $q=p^a$ be a prime power and let $\Mon_q$ be the set of monic
+polynomials in $\F_q[x]$, including $1$.  Write
+\[
+  \sigma f(x)=f(x+1),\qquad
+  T(f)=\gcd(f,\sigma f),\qquad Q=T^{p-1},
+\]
+where every gcd is monic.  Since $\sigma^p=1$, the acting subgroup is the
+prime-subfield copy of $\F_p$, not the full additive group of $\F_q$ when
+$a>1$.  We use the stabilization depth
+\[
+ \depth(f)=\min\{t\geq0:T^t(f)=Q(f)\}.
+\]
+Thus fixed states have depth zero.
+
+The invariant ring for this translation is
+$\F_q[x^p-x]$.  Its monic elements have series
+\begin{equation}\label{eq:invariant-series}
+ I_{q,p}(z)=\sum_{h\in\Mon_q:\,\sigma h=h}z^{\deg h}
+           =\frac{1}{1-qz^p},
+\end{equation}
+because $h=g(x^p-x)$ uniquely, with $g$ monic.  This characterization and
+the translation-fixed irreducible classification are established in the
+finite-field invariant literature, especially
+\citet{Garefalakis2011} and \citet{Reis2018}; related group-action and
+invariant-function frameworks include
+\cite{Reimers2018,GowMcGuire2022,Schulz2023}.
+
+We state the precise enumerative input.  Let
+\begin{equation}\label{eq:Nd}
+ N_d(q)=\frac1d\sum_{e\mid d}\mu(e)q^{d/e}
+\end{equation}
+be the number of degree-$d$ monic irreducibles.  Let $b_d$ count those
+fixed by $\sigma$.  Then $b_d=0$ unless $d=pm$, and, if
+$m=p^v s$ with $(s,p)=1$,
+\begin{equation}\label{eq:bd}
+ b_{pm}=\frac{p-1}{pm}\sum_{e\mid s}\mu(s/e)q^{p^v e}.
+\end{equation}
+This is exactly Reis's formula
+\cite[Theorem~2(c)]{Reis2018}, after changing divisor variables, and is
+\emph{not} a contribution here.  Consequently
+\begin{equation}\label{eq:ad}
+                  a_d=\frac{N_d(q)-b_d}{p}
+\end{equation}
+is the number of length-$p$ translation orbits of degree-$d$
+irreducibles.  Equations \eqref{eq:Nd}--\eqref{eq:ad} are owned input to our
+formal orbit Euler product.
+
+The elementary identity
+\begin{equation}\label{eq:window}
+ T^t(f)=\gcd_{0\leq j\leq t}\sigma^j f
+\end{equation}
+follows by induction.  It implies $T^{p-1}(f)$ is invariant and
+$\depth(f)\leq p-1$.  These facts, the sharp clock, the fixed set, and old
+finite depth tables receive zero contribution credit.
+
+\begin{remark}[P110 order-dual firewall]\label{rem:p110}
+An earlier internal note, P110, studies $J(x)=x\vee\sigma x$ on a cyclically
+acted lattice and obtains the consecutive orbit join, invariant endpoint,
+finite clock, and recurrent points.  Equation \eqref{eq:window} is its
+order-dual meet mechanism in the divisibility lattice.  We claim none of
+those generic semilattice conclusions.  The contribution below begins only
+with the polynomial-specific exponent census: cyclic run avoidance over
+irreducible orbits and the resulting all-depth and target-fibre formulas.
+\end{remark}
+
+Shifted gcds and shift classes also occur in symbolic summation and
+shiftless factorization \cite{GerhardEtAl2003}; those algorithmic
+interfaces, like standard transfer matrices, are background rather than
+novelty claims.
+
+\section{Translation orbits and local depth}
+
+Translation acts on monic irreducibles in orbits of length $1$ or $p$.
+Fix a nonfixed orbit and choose an indexing
+\[
+ P_0,P_1=\sigma P_0,\ldots,P_{p-1}=\sigma^{p-1}P_0,
+\]
+with indices read modulo $p$.  If $e_i$ is the exponent of $P_i$ in $f$,
+then, up to reversing the cyclic indexing, \eqref{eq:window} says that its
+exponent after $t$ steps is
+\begin{equation}\label{eq:sliding-min}
+              e_i^{(t)}=\min_{0\leq j\leq t}e_{i+j}.
+\end{equation}
+At $t=p-1$ every coordinate equals $m=\min_i e_i$.  Put
+$c_i=e_i-m$.  Then $c_i\geq0$ and $\min_i c_i=0$.
+
+For a cyclic vector $c=(c_0,\ldots,c_{p-1})$ with a zero, let
+$\lambda(c)$ denote the longest cyclic run of positive coordinates; set
+$\lambda(0,\ldots,0)=0$.
+
+\begin{lemma}[Local run statistic]\label{lem:run}
+On a nonfixed irreducible orbit, the least $t$ for which the exponents in
+\eqref{eq:sliding-min} have all reached their terminal value $m$ is
+$\lambda(c)$.
+\end{lemma}
+
+\begin{proof}
+After subtracting $m$, equation \eqref{eq:sliding-min} vanishes in every
+coordinate exactly when every cyclic interval of length $t+1$ contains a
+zero.  This is equivalent to the absence of a positive cyclic run of length
+$t+1$, or to $\lambda(c)\leq t$.  The least such $t$ is
+$\lambda(c)$, including the all-zero boundary.
+\end{proof}
+
+Fixed irreducibles contribute only to the invariant core and have no local
+transient.  Hence the global depth of $f$ is the maximum of
+$\lambda(c)$ over its nonfixed irreducible orbits, with the maximum of an
+empty family equal to zero.
+
+\section{The all-depth formal orbit Euler product}
+
+For $0\leq t\leq p-1$, define the local residual series
+\begin{equation}\label{eq:R-definition}
+ R_{p,t}(y)=
+ \sum_{\substack{c\in\N^p,\ \min_i c_i=0\\\lambda(c)\leq t}}
+ y^{c_0+\cdots+c_{p-1}}.
+\end{equation}
+It has a finite transfer description.  Put $u=y/(1-y)$ and index rows and
+columns by $0,\ldots,t$.  Let $M_t(u)$ be the $(t+1)\times(t+1)$ matrix
+whose only nonzero entries are
+\begin{equation}\label{eq:M}
+ (M_t)_{i,0}=1\quad(0\leq i\leq t),\qquad
+ (M_t)_{i,i+1}=u\quad(0\leq i<t).
+\end{equation}
+
+\begin{lemma}[Cyclic transfer]\label{lem:transfer}
+For $0\leq t\leq p-1$,
+\begin{equation}\label{eq:R-trace}
+                         R_{p,t}(y)=\operatorname{tr}\bigl(M_t(u)^p\bigr).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Read a cyclic support word of length $p$.  State $i$ records the current
+positive run length.  A zero sends every state to $0$ with weight $1$; a
+positive coordinate sends $i$ to $i+1$ with weight
+$u=y+y^2+\cdots$, provided $i<t$.  A closed length-$p$ path is therefore a
+cyclic word with no positive run longer than $t$, together with an arbitrary
+positive height at every positive position.
+
+Fix the cut at labelled coordinates $0,\ldots,p-1$.  The state before $j$
+is uniquely forced to be the preceding positive-run length.  Starting after
+any zero merely computes that same cyclic assignment, so multiple zeros do
+not create paths.  Thus each labelled vector gives one closed path: the
+trace neither quotients by rotations nor weights by zeros (and the all-zero
+vector has its unique all-zero path).  Conversely every closed path recovers
+this labelled support and its heights.  Summing closed paths is the trace in
+\eqref{eq:R-trace}, and their weights are exactly those in
+\eqref{eq:R-definition}.
+\end{proof}
+
+Write $[z^n]F(z)$ for coefficient extraction in formal power series.
+
+\begin{theorem}[All-depth formal orbit Euler product]\label{thm:euler}
+For every prime power $q=p^a$ and $0\leq t\leq p-1$, the ordinary
+generating function for monic polynomials of depth at most $t$ is
+\begin{equation}\label{eq:H}
+ H_{q,p,t}(z)
+ :=\sum_{f\in\Mon_q:\,\depth(f)\leq t}z^{\deg f}
+ =\frac{1}{1-qz^p}
+   \prod_{d\geq1}R_{p,t}(z^d)^{a_d},
+\end{equation}
+where $a_d$ is the owned input in \eqref{eq:ad} and $R_{p,t}$ is given by
+\eqref{eq:R-trace}.  This formal orbit Euler product is coefficientwise well
+defined.
+\end{theorem}
+
+\begin{proof}
+Unique factorization partitions the irreducible factors of $f$ into fixed
+orbits and length-$p$ orbits.  On each length-$p$ orbit, the exponent vector
+splits uniquely as
+\[
+       (e_0,\ldots,e_{p-1})=m(1,\ldots,1)+c,
+       \qquad \min_i c_i=0.
+\]
+All common-minimum pieces, together with every fixed irreducible factor,
+form one arbitrary translation-invariant monic polynomial.  Their series is
+$I_{q,p}(z)$ from \eqref{eq:invariant-series}.  For each of the $a_d$
+nonfixed degree-$d$ orbits, \cref{lem:run} says that depth at most $t$ is
+equivalent to $\lambda(c)\leq t$, and the residual degree is
+$d\sum_i c_i$.  Its series is therefore $R_{p,t}(z^d)$.
+
+The global depth is the maximum of the local depths, so these conditions
+hold independently on every orbit.  Multiplication yields \eqref{eq:H}.
+For a fixed coefficient $z^n$, only irreducible degrees $d\leq n$ can
+contribute, proving formal well-definedness.
+\end{proof}
+
+\begin{corollary}[Exact depth layers]\label{cor:layers}
+Set $H_{q,p,-1}(z)=0$.  For $0\leq t\leq p-1$,
+\[
+ \#\{f\in\Mon_q:\deg f=n,\ \depth(f)=t\}
+   =[z^n]\bigl(H_{q,p,t}(z)-H_{q,p,t-1}(z)\bigr).
+\]
+Moreover,
+\begin{equation}\label{eq:boundaries}
+ R_{p,0}(y)=1,\quad H_{q,p,0}(z)=\frac1{1-qz^p},\qquad
+ R_{p,p-1}(y)=\frac{1-y^p}{(1-y)^p},\quad
+ H_{q,p,p-1}(z)=\frac1{1-qz}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+The difference isolates the two nested depth thresholds.  At $t=0$, the
+only normalized vector is zero.  At $t=p-1$, every nonnegative vector with
+minimum zero is allowed, so its series is the series of all vectors minus
+that of all-positive vectors:
+\[
+ (1-y)^{-p}-\bigl(y/(1-y)\bigr)^p
+   =(1-y^p)/(1-y)^p.
+\]
+The first global identity in \eqref{eq:boundaries} is
+\eqref{eq:invariant-series}; the last follows either from
+\cref{thm:euler} and unique factorization or simply because every monic
+polynomial has depth at most $p-1$ and there are $q^n$ of degree $n$.
+\end{proof}
+
+\section{Unit fibre and every invariant target}
+
+The endpoint $Q(f)$ divides $f$ and is invariant.  Define the
+\emph{unit fibre}
+\[
+                    \Res_{q,p}=Q^{-1}(1)
+\]
+and let $U_{q,p,n}$ count its degree-$n$ elements.  The word ``unit'' refers
+only to the target $1$.
+
+\begin{proposition}[Graded terminal split]\label{prop:split}
+Multiplication gives a degree-preserving bijection
+\begin{equation}\label{eq:split}
+ \{h\in\Mon_q:\sigma h=h\}\times\Res_{q,p}
+       \longrightarrow \Mon_q,\qquad (h,r)\longmapsto hr.
+\end{equation}
+Its inverse is $f\mapsto(Q(f),f/Q(f))$.  This is a set-theoretic graded
+bijection, not a monoid quotient.
+\end{proposition}
+
+\begin{proof}
+On every nonfixed irreducible orbit, $Q(f)$ has the common minimum exponent;
+on a fixed irreducible it has the full exponent.  Hence $h=Q(f)$ is
+invariant, divides $f$, and the residual $r=f/h$ has minimum exponent zero
+on every nonfixed orbit and no fixed irreducible factor.  Thus $Q(r)=1$.
+This proves existence and also forces both factors, proving uniqueness.
+
+Equivalently, for invariant $h$ equation \eqref{eq:window} gives the
+restricted identity
+\begin{equation}\label{eq:restricted}
+                    Q(hr)=hQ(r).
+\end{equation}
+This identity proves that every pair on the left of \eqref{eq:split} maps
+back to itself.  It does not imply multiplicativity on arbitrary pairs.
+\end{proof}
+
+\begin{theorem}[Unit fibre and target fibres]\label{thm:fibres}
+The unit-fibre generating function and coefficients are
+\begin{align}
+ U_{q,p}(z)&:=\sum_{n\geq0}U_{q,p,n}z^n
+       =\frac{1-qz^p}{1-qz},\label{eq:U}\\
+ U_{q,p,n}&=
+ \begin{cases}
+ q^n,&0\leq n<p,\\
+ q^n-q^{n-p+1},&n\geq p.
+ \end{cases}\label{eq:Un}
+\end{align}
+Let $h$ be any invariant monic polynomial of degree $m$.  Then, for every
+$N\geq0$,
+\begin{equation}\label{eq:exact-fibre}
+ \#\{f\in\Mon_q:\deg f=N,\ Q(f)=h\}
+ =\begin{cases}U_{q,p,N-m},&N\geq m,\\0,&N<m.\end{cases}
+\end{equation}
+Writing $L=D-m$, the degree-capped fibre through $D$ is zero for $L<0$;
+for $L\geq0$ it equals
+\begin{equation}\label{eq:capped}
+ \sum_{n=0}^{L}U_{q,p,n}=
+ \begin{cases}
+ \dfrac{q^{L+1}-1}{q-1},&0\leq L<p,\\[6pt]
+ \dfrac{q^{L+1}-1-q^{L-p+2}+q}{q-1},&L\geq p.
+ \end{cases}
+\end{equation}
+Thus fibres depend on the target only through its degree.
+\end{theorem}
+
+\begin{proof}
+All monic polynomials have series $(1-qz)^{-1}$.  Taking generating
+functions in the graded bijection \eqref{eq:split} and using
+\eqref{eq:invariant-series} gives
+\[
+       \frac1{1-qz}=\frac1{1-qz^p}U_{q,p}(z),
+\]
+which is \eqref{eq:U}; coefficient extraction gives \eqref{eq:Un}.
+
+For a fixed invariant $h$, multiplication $r\mapsto hr$ maps the
+degree-$(N-m)$ part of $\Res_{q,p}$ into the fibre over $h$ by
+\eqref{eq:restricted}.  Conversely, \cref{prop:split} forces every element
+of that fibre to be $hr$ for a unique such $r$.  This proves
+\eqref{eq:exact-fibre}.  Summing \eqref{eq:Un} through $L$ gives
+\eqref{eq:capped}; the second case subtracts
+$q\sum_{j=0}^{L-p}q^j$ from $\sum_{j=0}^{L}q^j$.
+\end{proof}
+
+\begin{remark}[Why this is not a kernel]\label{rem:not-kernel}
+The projection $Q$ is not a monoid homomorphism.  In characteristic $p$,
+put $a=x$ and $b=(x^p-x)/x$.  The two exponent supports each miss a member
+of the full translation orbit, so $Q(a)=Q(b)=1$, whereas
+$ab=x^p-x$ is invariant and $Q(ab)=x^p-x$.  Hence $Q^{-1}(1)$ is a unit
+fibre, not an algebraic kernel.  The proofs above use only orbit exponents
+and the restricted identity \eqref{eq:restricted}.
+\end{remark}
+
+\section{Mechanical falsification and limitations}
+\enlargethispage{3\baselineskip}
+
+An independent verifier constructs
+\[
+ \F_4=\F_2[u]/(u^2+u+1),\quad
+ \F_8=\F_2[u]/(u^3+u+1),\quad
+ \F_9=\F_3[u]/(u^2+1)
+\]
+from explicit field tables.  It implements literal Horner translation,
+Euclidean gcd, trial-division irreducibility, translation-orbit
+partitioning, direct residual-vector enumeration, target fibres, and formal
+orbit Euler product coefficients.  Separately, for $p=2,3$ and every $t$, it
+constructs the truncated polynomial matrix $M_t(y/(1-y))$, takes the trace
+of its $p$th power, and matches weights through $9$ against direct vector
+enumeration.  It checks degrees $6,4,4$ in the three fields: $17{,}523$
+states and $180{,}453$ assertions.  In particular, the $\F_9$ lane exercises the
+intermediate depths $0,1,2$.  This finite enumeration is evidence against
+small counterexamples, never a proof of
+\cref{thm:euler,thm:fibres}.
+
+The result is limited to the single order-$p$ translation generated by
+$1$.  Characteristic zero has no such finite clock; simultaneous erosion by
+a larger additive subspace is a different map.  We make no priority claim
+for the literal dynamics, \eqref{eq:window}, the invariant ring, the fixed
+irreducible formula, or the transfer method.  The owner-subtracted residual
+is precisely the conjunction of \cref{thm:euler} with the target-refined
+\cref{thm:fibres}.  A bounded literature non-hit is not novelty clearance,
+and external posting or submission remains on hold pending specialist owner
+review and explicit authorization.
+
+\section{Conclusion}
+
+After the known orbit fold and fixed-irreducible theory are removed, the
+transient census is controlled by one local statistic: the longest positive
+run in a normalized cyclic exponent vector.  Its transfer series produces
+all depth thresholds at once, while the same normalization gives a uniform
+graded fibre above every invariant endpoint.  These two formulas constitute
+the complete internal claim package; the older clock, fixed set, and owner
+formulas remain background.
+
+\renewcommand{\bibfont}{\scriptsize}
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
