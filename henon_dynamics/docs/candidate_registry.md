@@ -3,6 +3,38 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C264--HCS-C268 additions (2026-08-31)
+
+Five independent cross-subtype candidates were frozen from baseline
+`a24c701881d22a4e49eaa2a44b94395c3c540b3d`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C264 | Every finite abelian power map splits canonically into a periodic automorphism and a uniform nilpotent tree; the package closes all fixed/primitive cycles, finite zeta factors, tail layers, image ranks, and exact zero-Jordan block sizes, with `d=0` separated. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [finite-abelian power-map package](../henon_finite_abelian_power_map_route_a/) · [paper PDF](../henon_finite_abelian_power_map_route_a/paper/main.pdf) |
+| HCS-C265 | The univariate exponential Hawkes process closes its joint affine count/intensity transform, subcritical stationary law, every intensity moment, three distinct covariance objects, Bartlett spectrum, window variance, Borel clusters, and all declared critical faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [exponential-Hawkes package](../henon_exponential_hawkes_stationary_route_a/) · [paper PDF](../henon_exponential_hawkes_stationary_route_a/paper/main.pdf) |
+| HCS-C266 | Zero-drift skew Brownian motion with symmetric local time closes its Lebesgue and speed-symmetric kernels, complete resolvent, every two-sided exit transform and mean, generalized arcsine occupation law, and Brownian/reflected boundary faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [skew-Brownian package](../henon_skew_brownian_interface_route_a/) · [paper PDF](../henon_skew_brownian_interface_route_a/paper/main.pdf) |
+| HCS-C267 | The full-line Wannier--Stark lattice closes Fourier-gauge conjugacy, the simple Bessel ladder, exact propagator and least Bloch return, delta-source shell and moment, noncompact unitary boundary, and the sharp resolvent Schatten threshold. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Wannier--Stark package](../henon_wannier_stark_bloch_route_a/) · [paper PDF](../henon_wannier_stark_bloch_route_a/paper/main.pdf) |
+| HCS-C268 | Constant electromagnetic proper-time Lorentz motion closes its invariant boost/rotation planes, exact exponential and worldline integral, velocity-period criterion, physical nonclosure, all field regimes, and the cubic-nilpotent nonzero-null boundary. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [constant-EM Lorentz package](../henon_constant_em_lorentz_flow_route_a/) · [paper PDF](../henon_constant_em_lorentz_flow_route_a/paper/main.pdf) |
+
+C265--C268 are `ROUTE_A_REJECTED`; C264 is `ROUTE_A_PARTIAL` because its
+finite-group parameters and complete source zeta carry only a weak intrinsic
+arithmetic relation, not a rational-prime primitive-orbit dictionary or
+target determinant.  Route B is false for all five.  No target local datum,
+Euler factor, root number, automorphy, target divisor/counting law or
+functional equation, Hilbert--Pólya operator, or Route-B input is introduced.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  Final PDF SHA-256 values, in order
+C264--C268, are `d3d604ea273a27c1286463b23e07ab7bda78895fd5d998a281800343a2aefc3a`,
+`3c0283170bb6cf7d807e53fbcd814b268c59670649726200e0dcc9d44a98bc24`,
+`eaeabde91cd9e40e80222a85e913e0706c1a9d0a548318d09a054b515a928ca3`,
+`83c5a7eb7e17e770251ed769104c287e912f5a0909d8092e0926f42f472b3862`,
+and `1076dfc4469cd42aa86a2addc1bd757ebb5139d2b633d5c1a7c761bcf0db180a`.
+The full release accounting is recorded in
+[BATCH_REVIEW_C264_C268.md](../BATCH_REVIEW_C264_C268.md).
+
 ## HCS-C259--HCS-C263 additions (2026-08-31)
 
 Five independent cross-subtype candidates were frozen from baseline

@@ -1,0 +1,60 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C266
+title: Zero-drift skew Brownian interface semigroup and occupation atlas
+evaluation_date: 2026-08-31
+fixed_epoch: 1788048000
+source_commit: a24c701881d22a4e49eaa2a44b94395c3c540b3d
+code_commit: a24c701881d22a4e49eaa2a44b94395c3c540b3d
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+candidate_definition: "zero-drift skew Brownian motion driven by symmetric semimartingale local time"
+family: stochastic local-time interface diffusion
+phase_space: real line with one semipermeable interface at zero
+dynamics: "X_t=x+B_t+(2p-1)L_t^0(X)"
+parameters: "0<=p<=1; t>=0; symmetric local time"
+parameter_provenance: source-defined; no fitted data
+arithmetic_origin: none
+clock: physical Brownian time
+normalization: "Lebesgue transition density; speed density 2(1-p) left and 2p right"
+determinant_convention: none; no target or Fredholm determinant
+orbit_cutoff: none; recurrent noncompact diffusion has no isolated primitive-cycle ledger
+precision: exact rational exit rows plus 60--70 digit quadrature
+training_data: none
+forbidden_data: "target arithmetic local data, Euler factors, root numbers, automorphy, target divisors, functional equations, Hilbert-Polya operators"
+artifact_paths:
+  evidence: results/c266_skew_brownian_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+frozen_model:
+  local_time: symmetric semimartingale local time
+  kernel: "phi_t(y-x)+(2p-1)sgn(y)phi_t(|x|+|y|)"
+  generator_interface: "p f'(0+)=(1-p) f'(0-)"
+  boundary_policy: "p=1/2 Brownian; p=0,1 one-sided reflected after interface hit"
+claims:
+  semigroup: exact conservative Lebesgue kernel and Chapman--Kolmogorov law
+  speed_space: symmetric kernel and self-adjoint Markov semigroup on L2(m)
+  resolvent: complete time-Laplace kernel for every lambda>0
+  exits: both discounted sides, hitting probability, and mean exit on every (-a,b)
+  occupation: generalized arcsine law from zero with endpoint atoms
+adversarial_controls:
+  local_time: symmetric and right local time are never interchanged
+  reference_measure: Lebesgue and speed densities use distinct notation
+  exit_labels: right and left boundary transforms remain separate
+  scope_mutation: all target-data flags are false and mutation tested
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS
+blocking_conditions:
+  - "A0 arithmetic origin and A1 primitive periodic owner are absent."
+next_smallest_test: "Switch owner rather than reinterpret speed symmetry as a target operator."
+round2_clues:
+  - "A speed-symmetric Markov generator is not a Hilbert-Polya operator."
+claim_boundary: "Complete source-local interface-diffusion theorem; no target arithmetic or determinant claim."
