@@ -1,0 +1,315 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Par}{\operatorname{Par}}
+\newcommand{\Src}{\operatorname{Src}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\ph}{\varphi}
+
+\title[Totient--complement Pratt dynamics]{Source Phases and Target Fibres for Totient--Complement Dynamics on Squarefree Divisors}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 11A25, 05C20, 05A18}
+\keywords{arithmetic dynamics, Euler totient, squarefree divisor, prime chain, Boolean network, functional graph}
+
+\begin{document}
+
+\begin{abstract}
+For a nonempty finite prime set $P$, put $n=\prod_{p\in P}p$ and
+iterate $F_n(d)=\gcd(n,(n/d)\varphi(d))$ on the divisors of $n$.
+We give three exact all-parameter descriptions of this finite arithmetic
+dynamics.  Its squarefree support is the signed Boolean map
+$S\mapsto(P\setminus S)\cup N(S)$ on the induced prime-chain directed
+acyclic graph.  If $s$ vertices have no incoming edge, an explicit
+topological decoder extends arbitrary phases on those vertices to every
+recurrent state.  Consequently there are no fixed states, there are exactly
+$2^s$ recurrent states, and they form $2^{s-1}$ two-cycles.  A two-step
+erasure identity shows that every orbit reaches recurrence by time at most
+$h+1$, where $h$ is the longest directed-path length; this bound is not
+claimed sharp.  Finally, inclusion--exclusion gives a closed formula for the
+one-step fibre over every target divisor, including targets outside the
+image.  Prime-chain geometry, signed-Boolean formalism, topological
+propagation, and inclusion--exclusion are treated as owned background.  The
+residual contribution is their complete conjunction for the displayed
+literal map.  Exact finite checks are falsification controls only, and
+external release remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{The literal map and the theorem}
+
+Let $P$ be a nonempty finite set of primes and $n=\prod_{p\in P}p$.
+Every divisor of $n$ is squarefree, so we identify $d\mid n$ with
+$S=\supp(d)\subseteq P$.  Put a directed edge
+\begin{equation}\label{eq:edge}
+                         q\longrightarrow p\quad\Longleftrightarrow\quad p\mid q-1.
+\end{equation}
+The edge strictly decreases the prime and hence defines a directed acyclic
+graph.  Write
+\[
+ \Par(p)=\{q\in P:q\to p\},\qquad
+ \Par(U)=\bigcup_{p\in U}\Par(p),
+\]
+and call $p$ a \emph{source} when $\Par(p)=\varnothing$.  Thus ``source''
+means no incoming edge under the orientation \eqref{eq:edge}.  Let
+$s=|\Src|$, and let
+\[
+ \delta(p)=\max\{\text{length of a directed path from a source to }p\},
+ \qquad h=\max_{p\in P}\delta(p).
+\]
+Every vertex is reached from a source because the graph is finite.
+Prime chains and their heights are classical objects; we use that geometry
+as background and make no contribution claim for it
+\cite{FordKonyaginLuca2010}.
+
+For $S\subseteq P$, set
+\[
+ N(S)=\{p\in P:\text{some }q\in S\text{ satisfies }q\to p\}.
+\]
+The complete result is as follows.  Entry time means the least $t$ for which
+the state at time $t$ is recurrent.
+
+\begin{theorem}[Decoder, entry bound, and every-target fibres]\label{thm:main}
+For
+\[
+                 F_n(d)=\gcd\!\left(n,\frac nd\ph(d)\right),\qquad d\mid n,
+\]
+the following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Under squarefree support, $F_n$ is conjugate to
+\begin{equation}\label{eq:support-map}
+                        F(S)=(P\setminus S)\cup N(S).
+\end{equation}
+\item The recurrent set has $2^s$ states, no state is fixed, and there are
+exactly $2^{s-1}$ cycles, all of exact period two.  The two phases are
+explicitly decoded from arbitrary source bits by \eqref{eq:source-phase}
+and \eqref{eq:decoder} below.
+\item Every orbit has entry time at most $h+1$.
+\item For every target support $B\subseteq P$, with $Z=P\setminus B$,
+\begin{equation}\label{eq:fibre-main}
+ |F^{-1}(B)|=
+ \sum_{\substack{T\subseteq B\\
+ (Z\cup T)\cap\Par(Z\cup T)=\varnothing}}
+ (-1)^{|T|}
+ 2^{|P|-|Z\cup T|-|\Par(Z\cup T)|}.
+\end{equation}
+The formula is valid also when $B$ is outside the image, in which case its
+value is zero.
+\end{enumerate}
+\end{theorem}
+
+\section{Support conjugacy and complemented coordinates}
+
+\begin{proposition}[Statewise arithmetic reduction]\label{prop:conjugacy}
+The literal divisor update has support \eqref{eq:support-map}.
+\end{proposition}
+
+\begin{proof}
+Fix $p\in P$.  Since $n$ is squarefree, membership of $p$ in the support of
+$F_n(d)$ is equivalent to divisibility of $(n/d)\ph(d)$ by $p$.  If
+$p\notin S$, then $p\mid n/d$.  If $p\in S$, then $p\nmid n/d$, while
+Euler's product formula gives
+\[
+                              \ph(d)=\prod_{q\in S}(q-1).
+\]
+Thus $p\mid\ph(d)$ exactly when $p\mid q-1$ for some $q\in S$; the choice
+$q=p$ never contributes.  This is precisely membership in
+$(P\setminus S)\cup N(S)$, prime by prime.
+\end{proof}
+
+Let $x_p=\mathbf1_{p\in S}$ and pass to complemented bits
+$y_p=1-x_p$.  Proposition~\ref{prop:conjugacy} is exactly
+\begin{equation}\label{eq:y-rule}
+ y_p(t+1)=(1-y_p(t))A_p(t),\qquad
+ A_p(t)=\prod_{q\in\Par(p)}y_q(t),
+\end{equation}
+where the empty product is one.  This is an AND--NOT rule on a signed
+wiring diagram.  General AND--NOT and signed-Boolean frameworks, including
+their graph reductions, are established background
+\cite{VelizCubaEtAl2012,AracenaCabreraCrotSalinas2021}.
+One immediate identity will drive both the decoder and the transient bound:
+\begin{equation}\label{eq:consecutive-zero}
+                              y_p(t)y_p(t+1)=0.
+\end{equation}
+
+\section{Source phases and complete recurrence}
+
+At a source, \eqref{eq:y-rule} is toggling.  Assign an arbitrary bit
+$\eta_r\in\{0,1\}$ to each $r\in\Src$ and set
+\begin{equation}\label{eq:source-phase}
+                          y_r^0=\eta_r,\qquad y_r^1=1-\eta_r.
+\end{equation}
+Process the nonsources in any order in which every parent precedes its
+child.  Once the parent phases of $p$ have been assigned, define
+\begin{equation}\label{eq:decoder}
+ A_p^\epsilon=\prod_{q\in\Par(p)}y_q^\epsilon,\qquad
+                         y_p^0=A_p^1,\quad y_p^1=A_p^0.
+\end{equation}
+
+\begin{lemma}[Unique local phase extension]\label{lem:phase}
+For a nonsource $p$, suppose every parent phase pair obeys
+$y_q^0y_q^1=0$.  Then $A_p^0A_p^1=0$, and \eqref{eq:decoder} is the unique
+pair satisfying the two phase equations induced by \eqref{eq:y-rule}.
+\end{lemma}
+
+\begin{proof}
+Because $\Par(p)$ is nonempty, any one parent gives
+$A_p^0A_p^1=0$.  The phase equations are
+\[
+ y_p^1=(1-y_p^0)A_p^0,\qquad
+ y_p^0=(1-y_p^1)A_p^1.
+\]
+If both $A$'s vanish, they force $(y_p^0,y_p^1)=(0,0)$.  If
+$(A_p^0,A_p^1)=(1,0)$, the second equation first forces $y_p^0=0$ and the
+first then forces $y_p^1=1$; the remaining case is symmetric.  These three
+possibilities give exactly \eqref{eq:decoder}.  They also show
+$y_p^0y_p^1=0$, closing the topological induction.
+\end{proof}
+
+The decoder therefore produces a genuine two-phase orbit from each source
+assignment and is injective because it retains that assignment on the
+sources.  Completeness will follow from a global entry estimate.
+
+\begin{lemma}[Two-step erasure]\label{lem:erasure}
+If $p$ is not a source, then for every $t\geq0$,
+\begin{equation}\label{eq:erasure}
+                               y_p(t+2)=A_p(t+1).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:consecutive-zero} and nonemptiness of $\Par(p)$,
+$A_p(t)A_p(t+1)=0$.  Applying \eqref{eq:y-rule} twice gives
+\[
+ y_p(t+2)=A_p(t+1)\bigl(1-A_p(t)(1-y_p(t))\bigr)=A_p(t+1).
+\]
+\end{proof}
+
+\begin{proposition}[Uniform entry bound]\label{prop:entry}
+Each coordinate $p$ is two-periodic from time $\delta(p)+1$ onward.
+Consequently every orbit enters recurrence by time at most $h+1$.
+\end{proposition}
+
+\begin{proof}
+Sources toggle from time zero, so the asserted weaker starting time one is
+valid.  Let $p$ be a nonsource and assume the claim for all its parents.
+For $t\geq\delta(p)+1$ we have $t\geq2$, and Lemma~\ref{lem:erasure}
+applied at $t$ and at $t-2$ gives
+\[
+ y_p(t+2)=\prod_{q\in\Par(p)}y_q(t+1),\qquad
+ y_p(t)=\prod_{q\in\Par(p)}y_q(t-1).
+\]
+Now $t-1\geq\delta(p)=1+\max_{q\in\Par(p)}\delta(q)$.  Every parent is
+therefore already two-periodic at time $t-1$, so the products agree.  This
+proves the coordinate claim by induction.  At time $h+1$ all coordinates
+are two-periodic, hence the whole state is on a cycle of length dividing
+two.
+\end{proof}
+
+Every periodic orbit thus has period at most two.  No state can be fixed,
+because every finite nonempty directed acyclic graph has a source and every
+source coordinate toggles.  Hence every periodic orbit has exact period two.
+Viewed at either phase, it satisfies the equations of
+Lemma~\ref{lem:phase}; topological uniqueness shows that it is the decoder
+output for its source bits.  There are consequently $2^s$ recurrent states
+and $2^{s-1}$ cycles.  This proves Theorem~\ref{thm:main}(ii)--(iii).
+The estimate $h+1$ is deliberately only an upper bound.  It includes the
+singleton case $h=0$ and applies componentwise to disconnected graphs.
+
+\section{The fibre over every target}
+
+Return to the support bits $x_p$.  From \eqref{eq:support-map}, a target
+zero at $p$ occurs exactly on the event
+\begin{equation}\label{eq:event}
+ E_p=\{x_p=1\text{ and }x_q=0\text{ for every }q\in\Par(p)\}.
+\end{equation}
+Fix $B\subseteq P$ and $Z=P\setminus B$.  The constraints at the target
+zeros require every event $E_p$ with $p\in Z$, while target ones require
+that none of the events $E_p$ with $p\in B$ occur.  Inclusion--exclusion
+over the latter events yields the sum over $T\subseteq B$ of
+$(-1)^{|T|}$ times the number of assignments satisfying all $E_p$ for
+$p\in Z\cup T$.
+
+For $U=Z\cup T$, this intersection forces every bit in $U$ to one and every
+bit in $\Par(U)$ to zero.  It is empty if $U\cap\Par(U)\ne\varnothing$.
+When those sets are disjoint, precisely
+$|P|-|U|-|\Par(U)|$ bits remain free, so there are
+$2^{|P|-|U|-|\Par(U)|}$ assignments.  Substitution gives
+\eqref{eq:fibre-main}.  This derivation imposes no image hypothesis on
+$B$; if the fibre is empty, inclusion--exclusion returns zero.  It completes
+Theorem~\ref{thm:main}.
+
+\section{Exact controls and contribution boundary}
+
+The paper-local verifier independently evaluates the literal integer map,
+the support rule, both decoder phases, the entry bound, and
+\eqref{eq:fibre-main} for every state and every target in four boxes.
+It uses Python integers, no floating point, and no sampling.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+case & $|P|$ & $s$ & states & recurrent & max tail & image \\
+\midrule
+singleton & 1 & 1 & 2   & 2  & 0 & 2 \\
+chain5    & 5 & 1 & 32  & 2  & 3 & 8 \\
+mixed6    & 6 & 2 & 64  & 4  & 4 & 17 \\
+disconnected7 & 7 & 4 & 128 & 16 & 2 & 25 \\
+\bottomrule
+\end{tabular}
+\caption{Exact falsification controls: 226 states, all 226 targets, and
+4,774 assertions.  The table is not a proof of an unbounded claim.}
+\label{tab:control}
+\end{table}
+
+The arithmetic factorization in Proposition~\ref{prop:conjugacy}, Euler's
+totient product, prime-chain/Pratt geometry, AND--NOT representation,
+generic propagation on a directed acyclic graph, inclusion--exclusion as a
+method, and finite-map cycle conversion all receive zero contribution
+credit.  Internally, the carrier and update are distinct from P84's unitary
+Cayley system, P97's sumset squaring, P100's valuation absorber, P107's
+arithmetic carrier, P128's translation--gcd polynomial erosion, and P131's
+Euclidean quotient queue.  The residual theorem is the conjunction, for the
+literal displayed arithmetic map, of the complete phase decoder, the
+nonsharp entry bound, and the every-target fibre law.  A bounded literature
+search did not identify an exact owner of that conjunction, but a search
+non-hit is not evidence of novelty or priority.  Status remains
+\texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
