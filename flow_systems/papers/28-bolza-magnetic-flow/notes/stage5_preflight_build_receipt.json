@@ -1,0 +1,190 @@
+{
+  "schema": "p28-stage5-preflight-build-receipt/1.0",
+  "paper": 28,
+  "stage": "5",
+  "mode": "format-convert_preflight",
+  "status": "PASS_AWAITING_ONE_CONTENT_CONFIRMATION",
+  "recorded_at": "2026-08-31T10:54:56Z",
+  "input_manifest": {
+    "path": "notes/stage5_input_manifest.json",
+    "sha256": "8fb6e0646c9b9eb4bb7643363548f723c3daf4e019df617c2b4c657e6f88e18f"
+  },
+  "inputs": {
+    "accepted_marker_bearing_source": {
+      "path": "notes/stage4_prime_revision_round1.tex",
+      "sha256": "126783db66949396f7b3b494e06f55e4deedcc9f443f29e6477e6254676d472e",
+      "size_bytes": 52917
+    },
+    "marker_stripped_source": {
+      "path": "stage5_finalization/manuscript.tex",
+      "sha256": "14ad8eeaa7cdd55bc889adc250630a7b18a9e20e316d4fb6becddb9e05922d22",
+      "size_bytes": 50504
+    },
+    "bibliography": {
+      "path": "stage5_finalization/references.bib",
+      "sha256": "95728b0a7120e5df341a364ff77f65f5c1d4628d55a6e584e2de7d747d8ca63e",
+      "size_bytes": 2655,
+      "byte_identical_to_accepted": true
+    },
+    "content_proof": {
+      "path": "stage5_finalization/content_proof.pdf",
+      "sha256": "253d10080331076a14d658afc423a72b2f687eadcfb68c6e482cec03aabae382",
+      "size_bytes": 323735,
+      "pages": 14,
+      "page_size": "A4",
+      "byte_identical_to_stage4_5_preview": true
+    }
+  },
+  "toolchain": {
+    "lualatex": "LuaHBTeX 1.14.0 (TeX Live 2022/dev/Debian)",
+    "bibtex": "BibTeX 0.99d (TeX Live 2022/dev/Debian)",
+    "pdftotext": "22.02.0",
+    "pdfinfo": "22.02.0",
+    "pandoc": "2.9.2.1"
+  },
+  "environment": {
+    "SOURCE_DATE_EPOCH": "1788134400",
+    "FORCE_SOURCE_DATE": "1",
+    "TZ": "UTC",
+    "isolated_workspace": "stage5_finalization/.stage5_preflight_tmp",
+    "isolated_workspace_retained": false
+  },
+  "build_steps": [
+    {
+      "order": 1,
+      "tool": "lualatex",
+      "command": "lualatex -interaction=nonstopmode -halt-on-error manuscript.tex",
+      "exit_code": 0,
+      "stdout_sha256": "0c1a593d44f2adffeda0188f9c96ad1c33483ee089f07516be760d2ef00fdaaf"
+    },
+    {
+      "order": 2,
+      "tool": "bibtex",
+      "command": "bibtex manuscript",
+      "exit_code": 0,
+      "stdout_sha256": "5d29263f97349aa03b65987179a5c7b6e122091607ef026acaf07098763a373b"
+    },
+    {
+      "order": 3,
+      "tool": "lualatex",
+      "command": "lualatex -interaction=nonstopmode -halt-on-error manuscript.tex",
+      "exit_code": 0,
+      "stdout_sha256": "6a5d05f31e08ae13fdcd83003c391b5d1a37ffd257a53bc3450da8df155b09e9"
+    },
+    {
+      "order": 4,
+      "tool": "lualatex",
+      "command": "lualatex -interaction=nonstopmode -halt-on-error manuscript.tex",
+      "exit_code": 0,
+      "stdout_sha256": "e99c0a3027d8663d16d3e050bec1ccbdbca0cbbbb8a1b09927318956ac8b5d58"
+    }
+  ],
+  "ephemeral_build_output": {
+    "pdf_sha256": "603969c3eb9143350192b3707115b3b7c8f4d578d9a5a87f5bad128ce1038d9a",
+    "pdf_size_bytes": 323735,
+    "pages": 14,
+    "page_size": "595.276 x 841.89 pts (A4)",
+    "pdf_version": "1.5",
+    "log_sha256": "8e9150df809ad2a34f2a7531b4e4eea4bcedb1d2862203797050ce7469933cac",
+    "bbl_sha256": "49ca5b0ab4a5292608c9def541982ba13e804f6b6f89eef0f921db4956b01c1e",
+    "retained_as_final_paper": false
+  },
+  "latex_diagnostics": {
+    "fatal_errors": 0,
+    "undefined_citations": 0,
+    "undefined_references": 0,
+    "overfull_boxes": 0,
+    "missing_characters_or_glyphs": 0,
+    "bibtex_warnings": 0,
+    "verdict": "PASS"
+  },
+  "formatter_checks": {
+    "strip_only_equivalence": {
+      "status": "PASS",
+      "removed_standalone_marker_lines": 127,
+      "removed_bytes": 2413,
+      "remaining_html_comments": 0
+    },
+    "hard_gate": {
+      "status": "PASS",
+      "formatter_refusal_tokens": 0
+    },
+    "citation_bibliography": {
+      "status": "PASS",
+      "citation_commands": 9,
+      "citation_key_occurrences": 9,
+      "unique_citation_keys": 6,
+      "bibliography_entries": 6,
+      "missing_keys": 0,
+      "orphan_entries": 0,
+      "duplicate_keys": 0
+    },
+    "declarations": {
+      "status": "PASS",
+      "checked": 16,
+      "required": 16
+    },
+    "citation_profile": {
+      "status": "PASS",
+      "value": "natbib[numbers,sort&compress] + plainnat"
+    }
+  },
+  "pdftotext_equivalence": {
+    "command_profile": "pdftotext -layout",
+    "content_proof_text_sha256": "2e7c021043d9d5e00e561bcc134a047df00f957d39b91bf48fd856f74861f1ff",
+    "replay_text_sha256": "2e7c021043d9d5e00e561bcc134a047df00f957d39b91bf48fd856f74861f1ff",
+    "each_text_size_bytes": 51436,
+    "byte_identical": true,
+    "verdict": "PASS"
+  },
+  "pandoc_lossiness_check": {
+    "commands": [
+      "pandoc --from=latex --to=markdown --wrap=none manuscript.tex",
+      "pandoc --from=latex --to=json manuscript.tex"
+    ],
+    "exit_code": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markdown_sha256": "7d588b24b44e0c97d2b5ab95d336fb6bdf68398beecc772666bcff4e9589ba05",
+    "json_ast_sha256": "3005bb0c5ed41c2b21dbd56be1f2e99c82737713dc737e6a9f38fad6ce8b79f5",
+    "source_headings": 30,
+    "pandoc_headers": 30,
+    "source_citation_commands": 9,
+    "pandoc_citation_nodes": 9,
+    "losses": [
+      "bibliography command not preserved in Markdown output",
+      "literal results/round8_control_finite_ball_certificate.json path dropped from the data-availability sentence",
+      "theorem-environment and label/cross-reference structure weakened"
+    ],
+    "verdict": "LOSSINESS_GATE_FAIL_EXPECTED",
+    "promoted_output": false
+  },
+  "bound_reports": {
+    "entry_decision": {
+      "path": "notes/stage5_entry_decision_20260831.md",
+      "sha256": "76dd078b775b97e5c83698a794f6c30a5113028561dc3c50216e8448c2ce4ccd"
+    },
+    "content_preflight": {
+      "path": "notes/stage5_content_preflight.md",
+      "sha256": "0d76482983c4d41bcca048fa13408c1590aaa72a8c4f89fe90c5ee5ab6b681ff"
+    },
+    "workspace_readme": {
+      "path": "stage5_finalization/README.md",
+      "sha256": "d3717c89f55d876d47aeb18e01040653cbefff14a519df46e25cd14dc2c98750"
+    }
+  },
+  "route_and_content_boundary": {
+    "scientific_content_changed": false,
+    "declarations_changed": false,
+    "bibliography_changed": false,
+    "canonical_source_or_results_changed": false,
+    "route_or_subtype_changed": false,
+    "route_a_gate_credit_added": false,
+    "route_b_invoked": false
+  },
+  "final_pdf": {
+    "path": "stage5_finalization/paper.pdf",
+    "exists": false,
+    "reason": "awaiting_one_scholar_content_confirmation"
+  },
+  "next_required_action": "one_explicit_scholar_content_confirmation_before_final_pdf"
+}

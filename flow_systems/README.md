@@ -16,7 +16,7 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 9 / fresh Stage 4.5 全部 PASS；等待 Stage 5 强制确认** | 五篇从冻结输入重新完成 Mode-2 最终完整性核查：33/33 references、44/44 contexts、487 claims、522 source-bound evidence rows、116/116 实改段，五份 Schema-5 verdict 均为 `PASS`；统一独立回放 397/397 检查，五篇 direct unit suites 409/409。Canonical manuscript/PDF/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见[最终批次报告](BATCH_ROUND9_STAGE4_5_ROUND2_FINAL_INTEGRITY_REPORT.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / Stage 5 内容预检 5/5 PASS；等待一次内容确认** | 五篇已生成格式专用 LaTeX/BibTeX 工作区和 71 页内容证明；20/20 隔离构建命令成功，引用、声明和 PDF 文本等价门均通过，统一独立回放 283/283。最终 `paper.pdf` 仍为 0/5，Pandoc/DOCX 因有损未采用。Canonical manuscript/PDF/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次预检报告](BATCH_ROUND9_STAGE5_PREFLIGHT_REPORT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -37,7 +37,21 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 24--28 最新结论
 
-### 当前 fresh Stage 4.5 Round 2 结论
+### 当前 Stage 5 内容预检结论
+
+Papers 24--28 已在作者明确回复“确认”后进入 **Stage 5 format-only
+preflight**。五篇各自形成 marker-clean LaTeX、字节相同的接受书目和内容证明，
+总计 71 页；LuaLaTeX -> BibTeX -> LuaLaTeX -> LuaLaTeX 的 20 个命令全部成功，
+引用/书目、声明、硬门禁与 `pdftotext -layout` 等价均通过。统一独立验证为
+**283/283**，Stage-4.5 冻结审计复跑仍为 **397/397**。Pandoc 转换在五篇均有
+数学、定理、交叉引用、引用处理或载体路径损失，因此未生成或推广 DOCX。
+
+完整逐篇哈希、五份内容证明、路线图对应和非阻断 advisory 边界见
+[Stage-5 批次预检报告](BATCH_ROUND9_STAGE5_PREFLIGHT_REPORT.md)。当前最终
+`stage5_finalization/paper.pdf` 仍为 **0/5**；唯一下一关是作者对五份内容证明作
+一次明确内容确认，然后才能生成可复现最终 PDF 并完成 Stage-5 FULL 检查点。
+
+### fresh Stage 4.5 Round 2 稳定基线
 
 Papers 24--28 已完成 **fresh from-scratch Stage 4.5 / Mode 2**，五份最终
 Schema-5 verdict 均为 `PASS`，问题数均为 0 SERIOUS / 0 MEDIUM / 0 MINOR。
@@ -55,8 +69,8 @@ HTTP-202/空结果假成功均在最终 verdict 前被拒绝、修复并全量�
 
 完整逐篇结果、哈希、纠错轨迹和边界见
 [fresh Stage 4.5 最终批次报告](BATCH_ROUND9_STAGE4_5_ROUND2_FINAL_INTEGRITY_REPORT.md)。
-Stage 5、canonical promotion 与投稿仍关闭；下一唯一动作是作者对 Stage 5 的
-强制明确确认。
+该 Stage-4.5 基线保持不变；Stage 5 现已进入上文所述的格式预检状态，canonical
+promotion 与投稿仍关闭。
 
 形式路线继续由 [`skills/route-a-evaluator.md`](skills/route-a-evaluator.md) 与
 [`skills/route-b-evaluator.md`](skills/route-b-evaluator.md) 控制：完整性 PASS
@@ -122,8 +136,9 @@ nonarithmetic genus-two geodesic control/magnetic precursor。仍按 12 个冻�
 
 Stage 4 的稳定基线不因后续复审和完整性审计改变。上述 P25 四项 MINOR 修复与
 P24/P26/P27/P28 六项 Stage-4′ residual 均已在精确 authority 下完成；其后的
-fresh Stage 4.5 Round 2 现已五篇全部 `PASS`。Stage 5、canonical promotion、投稿
-和下一轮科学实验仍未启动。Stage-4 的逐篇结果、哈希、测试边界与路线 crosswalk 仍见
+fresh Stage 4.5 Round 2 现已五篇全部 `PASS`；其后 Stage 5 格式预检也已 5/5
+通过并等待一次内容确认。Canonical promotion、投稿和下一轮科学实验仍未启动。
+Stage-4 的逐篇结果、哈希、测试边界与路线 crosswalk 仍见
 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)，后续执行结果见
 [Stage 4′ / P25 correction 报告](BATCH_ROUND9_STAGE4_PRIME_AND_P25_CORRECTION_EXECUTION_REPORT.md)
 和 [fresh Stage 4.5 最终报告](BATCH_ROUND9_STAGE4_5_ROUND2_FINAL_INTEGRITY_REPORT.md)。
@@ -334,4 +349,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 24--28-round9-stage4-prime-execution - 四篇 Stage 4′ + P25 correction 完成（2026-08-30，历史检查点） - P24/P26/P27/P28 的 6/6 residual 以 23 个 exact-authorized operations 全部 `RESOLVED`，四稿新增 910 words，51/51 registered surfaces byte-exact once；direct/unit suites 74/74，通过各自 verify-only replays，四份 clean previews 共 58 页。P25 的四项 MINOR 已在 derived bibliography 上修复，75/75 tests 与 13 页诊断构建通过，但旧 Stage-4.5 verdict/passport、frozen working bib 与 canonical bibliography 均未静默提升。五篇合计 direct/unit tests 149/149；initial subtypes、12+7=19 bookkeeping instances、Route-A tuples、正向 A2 `0/5` 与 Route B `0/5` 不变。该状态已由下一条 fresh Stage 4.5 记录取代。详见 [执行报告](BATCH_ROUND9_STAGE4_PRIME_AND_P25_CORRECTION_EXECUTION_REPORT.md)。
 
-24--28-round9-stage4.5-round2 - 五篇 fresh final-integrity gate 完成（2026-08-31，当前） - P24--P28 五份 Schema-5 verdict 全部 `PASS`；33/33 references、44/44 contexts、487 claims、522 source-bound evidence rows、220/403 双路原创性检索与 116/116 实改段闭合，七类 failure modes 全部 `CLEAR`。统一批审 397/397，五篇 direct unit suites 409/409；canonical source/bib/PDF/results、initial subtypes、12+7=19 bookkeeping instances 与 Route tuples 不变。正向算术 A2 `0/5`、Route B `0/5`；Stage 5 仍等待强制明确确认。详见 [最终批次报告](BATCH_ROUND9_STAGE4_5_ROUND2_FINAL_INTEGRITY_REPORT.md)。
+24--28-round9-stage4.5-round2 - 五篇 fresh final-integrity gate 完成（2026-08-31，历史入口） - P24--P28 五份 Schema-5 verdict 全部 `PASS`；33/33 references、44/44 contexts、487 claims、522 source-bound evidence rows、220/403 双路原创性检索与 116/116 实改段闭合，七类 failure modes 全部 `CLEAR`。统一批审 397/397，五篇 direct unit suites 409/409；canonical source/bib/PDF/results、initial subtypes、12+7=19 bookkeeping instances 与 Route tuples 不变。正向算术 A2 `0/5`、Route B `0/5`。该入口现已推进为下一条 Stage-5 预检状态。详见 [最终批次报告](BATCH_ROUND9_STAGE4_5_ROUND2_FINAL_INTEGRITY_REPORT.md)。
+
+24--28-round9-stage5-preflight - 五篇 Stage 5 内容证明预检完成（2026-08-31，当前） - 五份 marker-clean LaTeX、字节相同书目和内容证明共 71 页；20/20 隔离构建命令、引用/书目/声明门与逐篇 `pdftotext -layout` 等价通过，统一验证 283/283，Stage-4.5 复跑仍为 397/397。Pandoc/DOCX 因有损未采用，最终 `paper.pdf` 为 0/5；canonical trees、初始子型与 Route tuples 不变。当前唯一动作是作者一次内容确认，随后生成最终 PDF 并完成 Stage-5 FULL 检查点。详见 [Stage-5 批次预检报告](BATCH_ROUND9_STAGE5_PREFLIGHT_REPORT.md)。

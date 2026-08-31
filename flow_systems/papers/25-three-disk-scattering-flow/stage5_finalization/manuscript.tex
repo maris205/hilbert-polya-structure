@@ -1,0 +1,461 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Tinos}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-traditional}
+\babelfont[chinese-traditional]{rm}[BoldFont={AR PL Mingti2L Big5}]{AR PL Mingti2L Big5}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xurl}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Zeta}{\mathcal Z}
+\newcommand{\SL}{\operatorname{SL}}
+
+\title{Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Physical Three-Disk Flow}
+\author{Liang Wang\\
+\small School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Luoyu Road 1037, 430070, Hubei, P.R. China\\
+\small \texttt{wangliang.f@gmail.com}}
+\date{28 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The no-repeat symbolic coding of three-disk scattering has an exact finite-dimensional determinant, whereas the physical billiard flow is timed by nonconstant Euclidean flight lengths. We identify the precise obstruction to transferring the former to the latter through a single scalar clock substitution. For three equal disks of radius \(a\) with equilateral center spacing \(d>4a/\sqrt3\), the symmetric period-two and period-three owners have exact mean flight lengths \(d-2a\) and \(d-\sqrt3a\), respectively. Their positive gap \((2-\sqrt3)a\) proves that the physical roof is not cohomologous to a constant. It also rules out every owner- and repetition-preserving substitution \(z=e^{-cs}\) from the unit-roof Euler product to the physical flow and gives the minimax lower bound \((2-\sqrt3)a/2\) on any constant mean-roof approximation to these witnesses. Across the three geometries, a locked replay contains 2,241 primitive physical-orbit rows, 747 per geometry; three period-two owners match and 744 owners disagree at each geometry. Separately, we prove the exact determinant formula for the \(q\)-symbol no-repeat unit-roof family and the universal two-dimensional hyperbolic half-density factorization. These positive results belong to typed symbolic and stability-control objects; they do not transfer determinant credit to the physical flow. The paper supplies a rigorous clock-ownership negative control, a reproducible finite certificate, and a clear boundary between symbolic dynamics, semiclassical approximations, and exact scattering theory.
+\end{abstract}
+
+\noindent\textbf{Keywords:} three-disk scattering; suspension flow; symbolic determinant; roof cohomology; periodic orbits; cycle expansion; negative control
+
+\begin{otherlanguage}{chinese-traditional}
+\section*{Traditional Chinese Abstract / 繁體中文摘要}
+三圓盤散射的禁止連續重複符號編碼具有精確的有限維行列式，但物理撞球流以依軌道改變的歐氏飛行長度計時。本文找出兩者無法透過單一純量時鐘代換相互轉移的嚴格阻礙。對半徑皆為 \(a\)、圓心形成邊長 \(d\) 等邊三角形且滿足 \(d>4a/\sqrt3\) 無遮蔽條件的三個圓盤，對稱二週期與三週期軌道的每碰撞平均飛行長度分別為 \(d-2a\) 及 \(d-\sqrt3a\)，其正差 \((2-\sqrt3)a\) 證明物理屋頂函數不與常數上同調，亦排除任何保持所有者與重複結構的 \(z=e^{-cs}\) 代換，並給出常數近似的極小極大誤差下界。凍結回放涵蓋三種幾何、每種七百四十七個原始軌道；以二週期校準常數後，每種僅三筆二週期所有者相符，其餘七百四十四筆皆不相符。本文另證明任意符號數之單位屋頂禁止重複模型的精確行列式公式，以及二維雙曲穩定半密度的普遍分解。這些正面定理僅屬於明確分型的符號與穩定性控制物件，不能轉授給物理流。成果因此是一個嚴格、可重現的時鐘所有權負向控制，而非物理散射行列式或算術譜對應。
+\noindent\textbf{關鍵詞：} 三圓盤散射；懸掛流；符號行列式；屋頂上同調；週期軌道；循環展開；負向控制
+\end{otherlanguage}
+
+\section{Introduction}
+
+Three-disk scattering is a canonical open hyperbolic system: a point particle moves freely outside three disjoint convex disks and reflects specularly at their boundaries. In the no-eclipse regime, trapped trajectories admit a finite symbolic coding with no immediate repetition of a disk label. That coding represents a return map. The continuous-time physical flow is a suspension whose roof is Euclidean distance between successive collisions. Confusing the unit symbolic clock with the physical clock can turn an exact matrix identity into a false flow determinant.
+
+% SOURCE: Ikawa1988, Introduction and theorem statements, for periodic rays and Poincare maps in exterior scattering.
+Periodic rays and their Poincaré maps are central to rigorous analysis of wave decay outside convex bodies \citep[Introduction and theorem statements]{Ikawa1988}.
+% SOURCE: GaspardRice1989Semiclassical, Sections II--IV, for periodic-orbit semiclassical construction.
+In the three-disk literature, periodic-orbit and semiclassical constructions organize resonances of a chaotic repellor \citep[Secs.~II--IV]{GaspardRice1989Semiclassical}.
+% SOURCE: GaspardRice1989Exact, abstract and Sections II--III, for exact multiple scattering.
+Exact quantum scattering, however, is expressed through a multiple-scattering matrix and its determinant, not by declaring the symbolic adjacency determinant to be the physical scattering determinant \citep[abstract and Secs.~II--III]{GaspardRice1989Exact}. The distinction between exact, semiclassical, and symbolic objects is mathematical, not terminological.
+
+This paper asks:
+\begin{quote}
+\emph{Can the exact determinant of the unit-roof no-repeat shift be transferred to the physical three-disk flow by a scalar substitution \(z=e^{-cs}\) that preserves primitive owners and repetitions?}
+\end{quote}
+
+We answer no. Two symmetric periodic orbits already have different physical mean roofs. The bouncing orbit between two disks has mean \(d-2a\); the triangular orbit visiting all three has mean \(d-\sqrt3a\). Since their difference is \((2-\sqrt3)a>0\), the physical roof is not cohomologous to a constant. A scalar substitution assigns length \(cn\) to every period-\(n\) symbolic owner and cannot reproduce both witnesses. The same calculation gives the sharp two-witness minimax lower bound \((2-\sqrt3)a/2\).
+
+The three-disk-specific contribution is bounded accordingly. It is not a new general cohomology criterion, symbolic determinant theorem, or exact scattering construction. It is an owner- and repetition-preserving audit of the proposed scalar bridge: two exact geometric witnesses settle nontransfer, the minimax bound quantifies its unavoidable error, and the object-typing analysis prevents symbolic, semiclassical, and exact-scattering credit from being reassigned to the physical flow.
+
+The result does not diminish the exact symbolic theorem. For \(q\ge2\), the adjacency matrix \(A_q=J_q-I_q\) has explicit spectrum, trace formula, primitive count, and Euler determinant. Likewise, every real \(2\times2\) symplectic hyperbolic return map has a universal half-density factorization. These positive results belong to different typed objects. The first concerns a unit-roof suspension; the second is a local stability identity. Neither supplies a nonconstant-roof transfer operator, convergence theory, exact multiple-scattering determinant, arithmetic source, or spectral identification for the physical flow.
+
+The finite computation is used only for solver and reproducibility validation. It replays 747 oriented primitive symbolic owners through length twelve at each of three neighboring geometries, for 2,241 physical-orbit rows, verifies the exact witness formulas in the locked implementation, and checks that the period-two calibration disagrees with the other 744 owners at each geometry. These row counts audit the frozen owner convention, solver output, serialization, and deterministic rebuild. They are not additional proof of noncohomology and do not increase the theorem's scope beyond the two exact symmetric owners.
+
+No prime sequence, zeta-zero list, or resonance target is used in designing or evaluating the statistic. The physical Route-A tuple remains unassigned, and no alternate operator route is invoked. The contribution is a negative-control paper that proves where the tempting scalar bridge fails and records what a genuine physical-flow construction still needs.
+
+\subsection{Research logic and claim hierarchy}
+
+The analysis proceeds in an order intended to prevent credit transfer between unlike objects. Table~\ref{tab:object-map} distinguishes the physical billiard flow, the unit-roof symbolic suspension, a semiclassical cycle construction, and the exact boundary-channel multiple-scattering determinant by state space, owner, clock or weight, determinant status, and permitted relation. The paper first proves statements internal to the first two relevant types: the no-repeat adjacency determinant for a unit roof and the local half-density formula for a symplectic return map. It then tests only the owner- and repetition-preserving scalar bridge to the continuous physical clock; no equality among the four objects is assumed.
+
+This order separates an algebraic success from a modeling success. The adjacency determinant exactly counts closed symbolic walks, and Möbius inversion exactly recovers primitive symbolic owners. Those facts establish internal symbolic ownership. They do not establish that symbolic length equals Euclidean time. Similarly, the half-density exactly factors a local stability amplitude, but says nothing by itself about a global Euler product, its analytic continuation, or a quantum resonance set.
+
+The central negative theorem is not based on poor numerical agreement. It identifies an invariant obstruction: constant-cohomologous roofs have the same mean on every periodic owner, while two explicit physical owners have unequal means. The finite replay is downstream. It demonstrates the practical scale of the mismatch under a locked cutoff and solver, but the conclusion survives if every non-symmetric numerical row is removed.
+
+This hierarchy determines the evidence language. Exact symbolic identities and geometric symmetric periods are proved. High-precision orbit solutions are numerically certified at the frozen cutoff. The absence of an arithmetic source is a modeling choice. The physical determinant and physical Route-A tuple are unassigned. None of these labels is promoted by resemblance to a resonance plot.
+
+\section{Related work, background, and three distinct objects}
+
+\subsection{The physical billiard flow}
+
+Let \(D_0,D_1,D_2\subset\mathbb R^2\) be closed disks of radius \(a>0\), with centers \(C_0,C_1,C_2\) forming an equilateral triangle of side \(d\). The exterior billiard domain is
+\(\Omega=\mathbb R^2\setminus(D_0\cup D_1\cup D_2)\). A trapped trajectory travels at unit speed and reflects with equal incoming and outgoing angles. Its primitive owner is an oriented cyclic collision word, provided the physical orbit exists and is primitive; its clock is total flight length \(T_p\); its \(r\)-fold repetition has time \(rT_p\).
+
+The equilateral configuration is no-eclipse whenever \(d>4a/\sqrt3\).
+Indeed, the convex hull of two radius-\(a\) disks is the radius-\(a\)
+capsule around their center segment, while the third center lies at distance
+\(\sqrt3d/2>2a\) from that segment.  Hence the third disk is disjoint from
+the capsule.  The three frozen geometries \(d/a=29/5,6,31/5\) all satisfy
+this condition.
+
+The nearest general cohomological framework is the periodic-orbit obstruction for hyperbolic dynamics: if a roof is cohomologous to a constant, every periodic owner has that same mean roof. We use only this necessary telescoping direction, not a new Liv\v{s}ic theorem \citep[main cohomology criteria]{Livsic1972}.%
+The reciprocal determinant for a finite-type shift is likewise classical \citep[pp.~43--49]{BowenLanford1970},%
+while flow-zeta and transfer-operator formulations retain the roof and dynamical weights \citep[Secs.~1--3]{Ruelle1976}.%
+For open billiards, the established framework distinguishes symbolic itineraries, classical stability, semiclassical cycle expansions, and exact quantum multiple scattering \citep[Secs.~2--6]{Wirzba1999}.%
+Against that background, the manuscript contributes neither the general cohomology obstruction nor the established determinant theories. Its narrower increment is the exact equilateral two-witness test and minimax bound for one owner-preserving scalar-transfer proposal, together with a typed finite replay that validates the implementation without transferring symbolic or semiclassical credit to the physical flow.
+
+\subsection{The no-repeat shift and unit-roof suspension}
+
+Let
+\[
+ \Sigma_q=\{x\in\{0,\ldots,q-1\}^{\mathbb Z}:x_{k+1}\ne x_k\}
+\]
+with left shift \(\sigma\). Its adjacency matrix is \(A_q=J_q-I_q\), where \(J_q\) is the all-ones matrix. A length-\(n\) closed word is counted by \(\tr(A_q^n)\). The unit-roof suspension assigns time \(n\) to every length-\(n\) word, independently of geometry.
+
+% SOURCE: BowenLanford1970, pages 43--49, for shift zeta functions and adjacency determinants.
+The reciprocal-determinant form of a finite-type shift zeta function is classical \citep[pp.~43--49]{BowenLanford1970}.
+% SOURCE: Ruelle1976, Sections 1--3, for expanding-map and flow zeta functions.
+For flows, roof and dynamical weights are part of the object, and transfer-operator constructions retain timing information \citep[Secs.~1--3]{Ruelle1976}. The symbolic return graph is necessary coding data, not permission to replace every flight length by one.
+
+\subsection{Exact quantum scattering}
+
+The exact quantum problem solves Helmholtz or Schrödinger scattering with disk boundary conditions. Its determinant arises from a multiple-scattering operator or matrix, with angular-momentum channels and geometric translation kernels.
+% SOURCE: GaspardRice1989Exact, abstract and Sections II--III, for exact S-matrix quantization.
+The exact three-hard-disk \(S\)-matrix formulation identifies resonances through the appropriate multiple-scattering determinant \citep[abstract and Secs.~II--III]{GaspardRice1989Exact}.
+% SOURCE: Wirzba1999, Sections 4--6, for multiscattering determinant and semiclassical limits.
+Systematic treatment emphasizes both determinant structure and care with semiclassical and cumulant limits \citep[Secs.~4--6]{Wirzba1999}. The polynomial \(\det(I-zA_3)\) below is a symbolic determinant, not the exact quantum object.
+
+\subsection{Why a common alphabet does not imply a common determinant}
+
+\begin{table}[t]
+\centering
+\caption{Typed map of the four objects kept distinct in this paper.}
+\label{tab:object-map}
+\small
+\begin{tabular}{p{0.16\linewidth}p{0.21\linewidth}p{0.22\linewidth}p{0.30\linewidth}}
+\toprule
+Object & State space and owner & Clock or weight & Determinant status and permitted relation \\
+\midrule
+Physical billiard flow & Trapped unit-speed billiard; oriented primitive collision orbit & Euclidean flight roof \(T_p\), with repetition \(rT_p\) & No physical determinant is constructed here; the exact two-witness result only rejects a global scalar replacement of this roof. \\
+Unit-roof symbolic suspension & No-repeat shift; oriented primitive cyclic word & One unit per collision, so a period-\(n_p\) owner has weight \(z^{n_p}\) & \(\det(I-zA_q)\) is exact for this symbolic object and supplies no physical-flow or quantum determinant credit. \\
+Semiclassical cycle construction & Physical periodic rays with stability and phase data & Typically \(e^{-sT_p}\) together with orbit amplitudes and phases & It may provide a controlled approximation only after its regime and errors are specified; equality with either exact determinant is not claimed. \\
+Exact quantum multiple scattering & Boundary-channel data and disk-to-disk translation operators & Wavenumber-dependent translation kernels and boundary conditions & Its determinant is an exact quantum object. Shared collision labels permit comparison, not equality of weights, spaces, or determinants. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The map makes the ownership boundary explicit. A common collision alphabet can organize comparisons, but it cannot identify Euclidean time with symbolic length or turn a semiclassical expansion into the exact boundary-channel determinant.
+
+Repetitions sharpen the distinction. In a legitimate primitive Euler product, the \(r\)-fold traversal inherits \(rn_p\) and \(rT_p\). A scalar substitution respects both only if \(T_p/n_p\) is the same for every primitive owner. Allowing a separate fitted constant for each owner would reproduce lengths tautologically but would no longer transfer the one-variable symbolic determinant; it would replace the unit roof with the actual nonconstant roof.
+
+Symmetry reduction cannot remove the obstruction. It can identify rotated or reflected copies and change multiplicities, yet it leaves at least one period-two and one period-three symmetry class with unequal mean lengths. The proof applies before or after an equilateral symmetry quotient, provided both classes remain in the declared owner set.
+
+\section{Exact unit-roof and stability results}
+
+\begin{theorem}[unit-roof determinant family]\label{thm:qfamily}
+For every integer \(q\ge2\), let \(A_q=J_q-I_q\). Then
+\begin{equation}\label{eq:traceq}
+ \tr(A_q^n)=(q-1)^n+(q-1)(-1)^n.
+\end{equation}
+The number of oriented primitive cyclic owners of length \(n\) is
+\begin{equation}\label{eq:primitiveq}
+ P_q(n)=\frac1n\sum_{r\mid n}\mu(r)\tr(A_q^{n/r}).
+\end{equation}
+For \(u\in\{+1,-1\}\),
+\begin{equation}\label{eq:zetaq}
+ \Zeta_{q,u}(z)
+ :=\prod_{p\ \mathrm{primitive}}\left(1-u^{n_p}z^{n_p}\right)^{-1}
+ =\det(I-uzA_q)^{-1}
+ =\frac{1}{(1-(q-1)uz)(1+uz)^{q-1}}.
+\end{equation}
+In particular, \(\Zeta_{q,-1}(z)=\Zeta_{q,+1}(-z)\).
+\end{theorem}
+
+\begin{proof}
+The all-ones vector is an eigenvector of \(A_q\) with eigenvalue \(q-1\). Its orthogonal complement has dimension \(q-1\), and \(J_q\) vanishes there, so \(A_q\) has eigenvalue \(-1\). Taking powers proves \cref{eq:traceq}. Every closed word is a traversal of a unique primitive cyclic word, and a primitive owner of length \(k\) has \(k\) starting points. Hence
+\(\tr(A_q^n)=\sum_{k\mid n}kP_q(k)\); Möbius inversion gives \cref{eq:primitiveq}.
+
+Taking a formal logarithm and collecting repetitions gives
+\[
+ \log\Zeta_{q,u}(z)
+ =\sum_{n\ge1}\frac{(uz)^n}{n}\tr(A_q^n)
+ =-\log\det(I-uzA_q).
+\]
+The eigenvalues factor the determinant as
+\((1-(q-1)uz)(1+uz)^{q-1}\). Changing \(u=+1\) to \(u=-1\) is exactly \(z\mapsto-z\).
+\end{proof}
+
+The phase relation is exact and nonspecific: it holds for every alphabet size. It calibrates primitive-to-determinant wiring while acting as a proves-too-much control against an arithmetic reading of collision parity.
+
+\subsection{Formal-product scope and coefficient replay}
+
+Equation \eqref{eq:zetaq} is an identity of formal power series around \(z=0\), and also a rational identity wherever both sides are defined. Formal interpretation is sufficient for coefficient and primitive-count claims; it avoids importing an unproved convergence domain from the physical flow. The poles are those of the finite adjacency matrix and are not declared to be scattering resonances.
+
+The frozen replay checks \(q=2,\ldots,8\). It contains 84 trace and primitive-count rows, corresponding to twelve lengths for each of seven alphabet sizes, and 182 coefficient rows under the prespecified ledger. Every trace, Möbius count, and determinant coefficient agrees exactly, and two rebuilds are byte-identical at the frozen core. These computations verify the implementation of \cref{thm:qfamily}; the spectral decomposition in its proof establishes the infinite family.
+
+For \(q=3\), the 747 oriented primitive owners through length twelve agree with the Möbius counts. This is why 747 is the physical replay count per geometry. The equality verifies symbolic census completeness under the length and orientation convention. It does not assert that the physical solver enumerates every primitive orbit beyond the cutoff, nor that another symmetry quotient retains 747 owners.
+
+The phase \(u=-1\) contributes \((-1)^{n_p}\) per primitive owner. Because it is constant per symbolic step, it is absorbed by \(z\mapsto-z\). A source-specific phase would need an independent owner rule not reducible to length parity and would have to fail neighboring-alphabet and shuffled controls. No such phase is proposed here.
+
+\begin{theorem}[hyperbolic half-density factorization]\label{thm:half}
+Let \(M\in\operatorname{Sp}(2,\mathbb R)=\SL_2(\mathbb R)\) be hyperbolic with eigenvalues \(\sigma\Lambda\) and \(\sigma\Lambda^{-1}\), where \(\Lambda>1\) and \(\sigma\in\{+1,-1\}\). For \(r\ge1\),
+\begin{equation}\label{eq:half}
+ \frac{1}{\sqrt{|\det(I-M^r)|}}
+ =\frac{\Lambda^{-r/2}}{|1-\sigma^r\Lambda^{-r}|}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Diagonalization gives
+\[
+ |\det(I-M^r)|
+ =|1-\sigma^r\Lambda^r|\,|1-\sigma^r\Lambda^{-r}|.
+\]
+Since \(\sigma^r=\pm1\), the first factor equals
+\(\Lambda^r|1-\sigma^r\Lambda^{-r}|\). Taking the positive square root and reciprocating proves \cref{eq:half}.
+\end{proof}
+
+The leading factor \(\Lambda^{-r/2}\) is universal for the stated map, with an exact correction. Its persistence under nearby disk separations cannot diagnose an arithmetic source. The exact replay has 6,723 owner/repetition rows, namely 2,241 physical rows at repetitions \(r=1,2,3\), and verifies both eigenvalue-sign branches. This is a stability identity, not a global flow determinant.
+
+% SOURCE: CvitanovicEckhardt1989, pages 823--826, for periodic-orbit cycle-expansion quantization.
+Periodic-orbit cycle expansions can be effective in chaotic quantization \citep[pp.~823--826]{CvitanovicEckhardt1989}, but effectiveness does not identify clocks of different objects.
+
+\section{The physical roof obstruction}
+
+\begin{proposition}[period-two mean]\label{prop:t2}
+For any pair of disks, the symmetric orbit bouncing along their center line has
+\[
+ T_2=2(d-2a),\qquad \overline{\tau}_2=T_2/2=d-2a.
+\]
+\end{proposition}
+\begin{proof}
+The facing boundary points lie on the center line, each at distance \(a\) inward from its center. Their separation is \(d-2a\). Normal incidence reverses velocity and closes the orbit after the return flight.
+\end{proof}
+
+\begin{proposition}[period-three mean]\label{prop:t3}
+The symmetric triangular orbit visiting all disks has
+\[
+ T_3=3(d-\sqrt3a),\qquad \overline{\tau}_3=T_3/3=d-\sqrt3a.
+\]
+\end{proposition}
+\begin{proof}
+Set \(C_0=(0,0)\), \(C_1=(d,0)\), and let \(G\) be the centroid. Unit vectors from \(C_0,C_1\) toward \(G\) are
+\((\sqrt3/2,1/2)\) and \((-\sqrt3/2,1/2)\). Adding \(a\) times these vectors gives two collision points separated by \(d-\sqrt3a\). Rotational symmetry gives the same length on all sides. At each collision, symmetry around the center--centroid line gives equal incoming and outgoing angles.
+\end{proof}
+
+\begin{corollary}[positive clock gap]\label{cor:gap}
+\[
+ \overline{\tau}_3-\overline{\tau}_2=(2-\sqrt3)a>0.
+\]
+The gap is independent of \(d\).
+\end{corollary}
+
+\begin{definition}[constant cohomology]
+Assume the no-eclipse condition \(d>4a/\sqrt3\), so the full no-repeat shift
+codes the trapped set.  A physical flight roof
+\(\tau:\Sigma_3\to(0,\infty)\) is cohomologous to the constant \(c\) if
+\[
+ \tau=c+h-h\circ\sigma
+\]
+for some \(h\). On every period-\(n\) point, telescoping gives
+\(\sum_{k=0}^{n-1}\tau(\sigma^kx)=nc\).
+\end{definition}
+
+% SOURCE: Livsic1972, main cohomology criteria, for periodic-orbit obstructions to coboundaries.
+Periodic-orbit sums are the standard obstruction in dynamical cohomology \citep[main cohomology criteria]{Livsic1972}. We use only the necessary telescoping direction.
+
+\begin{theorem}[physical roof is not constant-cohomologous]\label{thm:noncohom}
+For \(d>4a/\sqrt3\), the Euclidean flight roof of the equilateral three-disk
+billiard is not cohomologous to a constant on the full no-repeat shift.
+\end{theorem}
+\begin{proof}
+If \(\tau=c+h-h\circ\sigma\), every periodic owner has mean roof \(c\). The two witnesses would give simultaneously \(c=d-2a\) and \(c=d-\sqrt3a\), contradicting \cref{cor:gap}.
+\end{proof}
+
+\begin{theorem}[no owner-preserving scalar transfer]\label{thm:nontransfer}
+For \(d>4a/\sqrt3\), there is no constant \(c>0\) for which \(z=e^{-cs}\)
+converts the unit-roof primitive product into the physical-flight product
+while preserving every primitive owner and repetition.
+\end{theorem}
+\begin{proof}
+For a unit-roof owner \(p\) of symbolic length \(n_p\), substitution assigns weight \(e^{-scn_p}\); its \(r\)-fold repetition receives \(e^{-scrn_p}\). Equality with the physical factor for all \(s\) requires \(T_p=cn_p\) for every \(p\). The two symmetric owners force \(c=T_2/2=d-2a\) and \(c=T_3/3=d-\sqrt3a\), impossible by \cref{cor:gap}.
+\end{proof}
+
+\begin{corollary}[minimax lower bound]\label{cor:minimax}
+For every constant \(c\in\mathbb R\),
+\[
+ \max\{|c-(d-2a)|,\ |c-(d-\sqrt3a)|\}
+ \ge \frac{(2-\sqrt3)a}{2}.
+\]
+Equality holds at \(c=d-(2+\sqrt3)a/2\).
+\end{corollary}
+\begin{proof}
+For \(x<y\), the triangle inequality gives
+\(y-x\le|c-x|+|c-y|\le2\max(|c-x|,|c-y|)\). Substitute the exact means. Their midpoint equalizes errors.
+\end{proof}
+
+The bound concerns mean flight length on two witnesses. It does not estimate the best nonconstant roof, pressure, resonance error, or operator norm. It quantifies the irreducible error of the frozen one-parameter hypothesis.
+
+\subsection{Consequences for products and repetitions}
+
+Suppose a formal unit-roof product contains primitive factors \((1-z^{n_p})^{-1}\). After \(z=e^{-cs}\), its logarithm has repetition terms
+\[
+ \sum_p\sum_{r\ge1}\frac{1}{r}e^{-scrn_p}.
+\]
+A physical-length product built from the same owners instead contains
+\[
+ \sum_p\sum_{r\ge1}\frac{1}{r}e^{-srT_p},
+\]
+before stability or phase weights are added. Equality coefficient by coefficient in owner and repetition labels requires \(cn_p=T_p\). The obstruction therefore occurs at bare clock level and cannot be repaired by multiplying both sides by the same stability factor.
+
+Nor can the discrepancy be hidden in a global rescaling of \(s\). Such a rescaling is exactly the choice of \(c\), and \cref{cor:minimax} optimizes it for the two witnesses. If \(c=d-2a\) makes period two exact, the period-three mean error is \((2-\sqrt3)a\), and its total primitive-period error is \(3(2-\sqrt3)a\). If the midpoint is used, both mean errors are at least half the gap. Repetitions multiply total errors by \(r\) rather than averaging them away.
+
+The proof is robust to an additive coboundary. Cohomological changes telescope on periodic orbits and leave every periodic sum unchanged. Thus no redefinition of the section coordinate by \(h-h\circ\sigma\) equalizes the two means. A valid symbolic model must retain a genuinely nonconstant cohomology class.
+
+\begin{proposition}[dimensionless gap at the frozen geometry]
+At \(d=6a\), the exact mean roofs are \(4a\) and \((6-\sqrt3)a\). Relative to the period-two calibration, the period-three mean mismatch is
+\[
+ \frac{(2-\sqrt3)a}{4a}=\frac{2-\sqrt3}{4}.
+\]
+\end{proposition}
+\begin{proof}
+Substitute \(d=6a\) in \cref{prop:t2,prop:t3} and divide the gap by \(4a\).
+\end{proof}
+
+This dimensionless value is scale invariant: scaling \(a\) and \(d\) together rescales physical time but leaves relative mismatch. It is not a statistical effect and does not vanish with numerical precision.
+
+\section{Locked physical-orbit replay}
+
+\subsection{Owner ledger and solver validation}
+
+The finite ledger contains all 747 oriented primitive cyclic no-repeat words through length twelve under the frozen canonicalization rule. Each word is solved as a physical periodic orbit at \(d/a\in\{29/5,6,31/5\}\), yielding 2,241 rows. Every row passes two-solver agreement, reflection, visibility, and length checks. A direct high-precision return-map calculation closes all stability rows. The method audit records 2,202 direct-Newton and 39 fallback solutions separately, preventing difficult cases from being discarded.
+
+These are finite-cutoff numerical certificates. The exact symmetric formulas do not depend on the solver, and the nontransfer theorem does not depend on the other 2,235 rows. Conversely, solver validation does not make the finite list a theorem about the infinite trapped set.
+
+\section{Computational and certificate method}
+
+Each canonical word defines an ordered list of disk labels and one boundary angle per collision. The primary solver enforces specular stationarity of total path length by high-precision Newton iteration. An independent check reconstructs collision points through a separate formulation and compares coordinates and lengths. Every accepted segment is tested for visibility against the third disk, and incoming and outgoing unit vectors are checked against reflection. Cyclic closure and the canonical word are retained in output rather than inferred afterward.
+
+Return-map validation differentiates the physical collision map and composes local derivatives around the orbit. Round 3 replaced an earlier sparse finite-difference check with a direct high-precision calculation on every row. The conditioning audit records which rows use direct Newton refinement and which use the frozen fallback. The selector depends on solver diagnostics, not any arithmetic or resonance target, and all 39 fallback rows remain in the ledger.
+
+The Round-8 replay does not rerun an unconstrained optimization. It reads locked physical lengths, computes exact symmetric witness means, freezes the period-two-derived constant at each geometry, and compares every owner with its constant-clock total. Output stores owner, symbolic length, physical length, scalar-clock length, and status. The verify-only script recomputes summary counts and hashes without overwriting CSV or JSON evidence.
+
+This method distinguishes numerical from exact equality. Symmetric formulas involving \(\sqrt3\) are represented symbolically in the witness file. General solved lengths are high-precision observations subject to recorded tolerances. The 3/744 split per geometry is a finite replay result; the impossibility theorem relies only on the exact radical gap.
+
+\subsection{Frozen scalar-transfer replay}
+
+For each geometry, the replay fixes \(c=d-2a\) from the period-two witness before evaluating other rows. There are three oriented period-two owners, one per unordered disk pair, and all three match. The remaining 744 owners disagree.
+
+These locked counts are solver and reproducibility checks for the declared finite owner population. They are not used as additional proof of roof noncohomology or as evidence for an unbounded owner census.
+
+\begin{table}[t]
+\centering
+\caption{Locked replay of the period-two-calibrated scalar clock.}
+\label{tab:replay}
+\begin{tabular}{lrrrr}
+\toprule
+\(d/a\) & Primitive rows & Matches & Disagreements & Matching type \\
+\midrule
+\(29/5\) & 747 & 3 & 744 & period two \\
+\(6\) & 747 & 3 & 744 & period two \\
+\(31/5\) & 747 & 3 & 744 & period two \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:replay} reports the outcome of the locked validation replay; its row scale does not add a second proof of the exact two-witness theorem.
+
+The neighboring geometries are not an arithmetic experiment. They test that roof variation is not a numerical accident at \(d/a=6\). Because the exact gap is independent of \(d\), the theorem predicts failure throughout the equilateral family.
+
+\subsection{Reproducibility boundary}
+
+The repository provides source programs, historical unit tests, frozen owner CSV files, exact witness table, physical replay, JSON summary, receipt, validation note, and a verify-only Round-8 script. Verification checks committed hashes and rebuilds core results without altering evidence. Exact symbolic counts use integer arithmetic; symmetric periods use symbolic radicals; physical coordinates and return maps use high precision with recorded tolerances.
+
+The machine-readable Stage-4 lock at \texttt{experiments/stage4\_reproducibility\_lock.json} pins CPython 3.12.3, NumPy 2.4.4, SciPy 1.16.1, mpmath 1.3.0, the platform assumptions, the current bibliography digest, and a closed 68-file inventory of Round-2--8 sources, tests, inputs, outputs, receipts, and reproduction commands. The matching \texttt{experiments/stage4\_reproducibility\_receipt.json} records the successful validation, and \texttt{bash experiments/reproduce\_stage4.sh} performs a read-only replay with no canonical-refresh path.
+
+The replay uses no prime data, zeta zeros, or scattering-resonance table. Its purpose is clock ownership, not external-target optimization. Center-polygon proxy lengths remain distinct from solved billiard lengths and are never called physical orbits.
+
+\subsection{Robustness interpretation}
+
+The three neighboring geometries exercise the solver away from one parameter value and show that the mismatch pattern is stable under modest separation changes. They do not supply the proof of genericity, because \cref{cor:gap} already gives a \(d\)-independent gap wherever the symmetric orbits are admissible. Nor do they count as three independent arithmetic systems; all share the same source-absent billiard type.
+
+Shuffled, random, and composite controls from earlier half-density work have a different purpose. They show that persistence of the leading hyperbolic amplitude is generic and therefore unsuitable as arithmetic evidence. They are not used to claim that physical orbits are random. The conclusion is stop-scoped: the tested amplitude cannot carry the proposed specificity, while its analytic factorization remains valid.
+
+Conditioning is separated from substance. Difficult Newton rows might bias a finite comparison if discarded. Recording and retaining them closes that procedural loophole. It does not convert numerical coordinates into interval proofs and does not address the infinite-cutoff question.
+
+\section{Adversarial and Route-A assessment}
+
+\subsection{Why symbolic success cannot be inherited}
+
+In the object map, only the unit-roof symbolic suspension owns the exact adjacency determinant. Its exact primitive ownership and analytic determinant give the typed tuple
+\[
+ (A0_{\mathrm{fail}},A1_{\mathrm{pass\ analytic}},
+ A2_{\mathrm{analytic\ determinant}},A3_{\mathrm{fail}},A4_{\mathrm{fail}}).
+\]
+The arithmetic route is rejected because no arithmetic source exists by construction, collision parity is merely \(z\mapsto-z\), and no arithmetic Euler factor or spectral target is identified. These A1/A2 credits belong only to the unit-roof object; the semiclassical and exact quantum rows in Table~\ref{tab:object-map} do not transfer them to the physical flow.
+
+The physical flow has a different owner-weight pair: oriented billiard owners carry the nonconstant Euclidean roof \(T_p\). \Cref{thm:nontransfer} refutes only the owner- and repetition-preserving global scalar bridge, so the physical Route-A tuple remains unassigned. It would be wrong to copy symbolic A2, a semiclassical approximation, or the exact boundary-channel determinant into the physical row. A positive physical construction would require a nonconstant-roof operator or flow zeta with a stated function space, domain, and convergence result, followed by a controlled comparison with the separately defined semiclassical and exact quantum objects.
+
+\subsection{Adversarial controls}
+
+\begin{itemize}
+ \item The half-density theorem holds for every real two-dimensional symplectic hyperbolic map of the stated type; persistence under neighboring parameters proves too much to be arithmetic evidence.
+ \item The phase identity holds for every alphabet size \(q\ge2\); it is a substitution symmetry, not a three-disk arithmetic signature.
+ \item The exact clock gap persists across the equilateral geometry family and falsifies the scalar bridge.
+ \item Exact quantum scattering uses a multiple-scattering determinant; equality is not inferred from shared resonance language.
+ \item No target labels enter statistic design, solver selection, or replay.
+\end{itemize}
+
+No alternative self-adjoint spectral operator is invoked. No operator domain, boundary condition, self-adjointness proof, spectral reality theorem, or target-zero correspondence is supplied.
+
+\subsection{What would change the physical-flow status}
+
+A positive successor would first define a nonconstant roof on the no-repeat shift from physical flight geometry and prove that its periodic sums agree with billiard periods on a declared owner domain. It would next construct an operator or dynamical zeta using this roof, state its function space and analytic domain, and prove the relevant determinant or continuation statement. Only then could it compare a controlled semiclassical limit with the separately defined multiple-scattering determinant.
+
+If an arithmetic interpretation were also sought, an independent arithmetic source and owner map would be required before target evaluation. The source-derived phase would need conjugacy, orientation, and repetition laws, and it would have to fail prespecified source-removed controls. Agreement with a finite resonance table could then be a downstream test but could not define the phase.
+
+Shorter developments can still be useful. Interval certification of the two witness coordinates would strengthen the artifact layer, although analytic geometry already proves their lengths. A rigorous Hölder bound for the physical roof or a pressure computation with explicit error would advance the physical-flow object. Neither result by itself supplies arithmetic A0 or a spectral zero correspondence.
+
+The ordering of these tasks prevents a familiar logical shortcut. A refined numerical resonance match cannot retroactively define the physical clock, and an exact symbolic determinant cannot supply a missing arithmetic source. Ownership and timing must be established first, analytic wiring second, and target evaluation last. This paper completes the negative test at the timing step and leaves the later steps open.
+
+\section{Limitations and open problems}
+
+First, the theorem rules out a constant scalar clock, not all symbolic descriptions of the physical flow. A Hölder nonconstant roof is natural, and a transfer operator weighted by \(e^{-s\tau}\) may encode classical flow data. Its functional setting, analytic continuation, and relation to physical or semiclassical quantities remain open.
+
+Second, the 2,241-row ledger is finite. It validates frozen words through length twelve, solver behavior, serialization, and deterministic rebuilding, but not asymptotic cycle-expansion convergence, an infinite primitive-owner census, or the full trapped set. The two-orbit proof avoids this finite-cutoff limitation for noncohomology; the replay is reproducibility evidence for the implementation only.
+
+Third, \cref{thm:half} concerns a linearized return map. Global amplitudes may include Maslov phases, curvature, pruning in other geometries, and quantum diffraction or channel effects. The universal leading half-density cannot decide them.
+
+Fourth, no arithmetic source is assigned to the three-disk control. This is a modeling choice fixed before computation, not an empirical finding. The paper cannot claim an arithmetic Euler product, prime-owner map, or Hilbert--Pólya realization, and it does not fit resonances or zeros.
+
+Fifth, the exact multiple-scattering determinant and a classical nonconstant-roof product are distinct even when semiclassical theory relates their expansions. This manuscript does not construct the latter product, establish its functional setting or analytic continuation, or prove a controlled approximation to the former. Thus ``remain open'' in the first limitation means unresolved within this manuscript, not an assertion about the field's global open-problem status. Any future comparison would require explicit limits and estimates; no equality is claimed here.
+
+Finally, orientation and symmetry reduction change owner multiplicities. Our theorem uses oriented cyclic owners and the physical replay preserves that convention. Other quotients must rederive primitive and repetition bookkeeping.
+
+\section{Conclusion}
+
+An exact unit-roof symbolic determinant does not become a physical-flow determinant through one exponential scalar clock. In equilateral three-disk scattering, the period-two and period-three mean flight lengths differ by \((2-\sqrt3)a\). The two exact owners prove that the physical roof is not cohomologous to a constant, exclude every owner- and repetition-preserving substitution \(z=e^{-cs}\), and give the sharp two-witness minimax bound. This is the manuscript's theorem-level three-disk increment within the established cohomology, symbolic-zeta, semiclassical, and multiple-scattering frameworks.
+
+The four-object map keeps the remaining results in their proper types. The \(q\)-symbol determinant and hyperbolic half-density are exact positive statements for the unit-roof symbolic and local stability objects, respectively; neither supplies a physical or quantum determinant. The 2,241-row replay validates the frozen solver, owner convention, serialization, and deterministic rebuild only and is not additional proof of noncohomology. A successor physical construction would need a genuine nonconstant-roof operator with explicit ownership and analytic control before any controlled comparison with semiclassical or exact quantum scattering.
+
+\section*{Declarations}
+\subsection*{Funding}
+The author received no funding for this work.
+\subsection*{Conflict of Interest}
+The author declares no conflicts of interest.
+\subsection*{Author contributions}
+Liang Wang: Conceptualization; Methodology; Software; Validation; Formal analysis; Investigation; Data curation; Writing---original draft; Writing---review and editing; Visualization; Project administration.
+\subsection*{Data and code availability}
+All frozen inputs, symbolic and physical ledgers, validation records, source code, unit tests, and verify-only scripts are in the accompanying repository under \texttt{papers/25-three-disk-scattering-flow/}. No restricted, personal, or proprietary dataset was used. The current immutable integrity pointer is \path{experiments/stage4_reproducibility_lock.json}, with execution recorded in \path{experiments/stage4_reproducibility_receipt.json}; the read-only command is \texttt{bash }\path{experiments/reproduce_stage4.sh}.
+\subsection*{Ethics statement}
+This theoretical and computational study involved no human participants, personal data, animals, clinical interventions, or biological materials. Institutional ethics approval and informed consent were not applicable.
+\subsection*{AI-Assisted Research Disclosure}
+Generative-AI tools assisted language drafting, LaTeX preparation, code-oriented consistency checks, and manuscript-structure review. The author directed the research, fixed the claim boundary, inspected derivations and artifacts, verified cited sources, and accepts full responsibility for accuracy and integrity. No AI system is listed as an author.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

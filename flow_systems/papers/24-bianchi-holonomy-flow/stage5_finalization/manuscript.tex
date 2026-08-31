@@ -1,0 +1,515 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Tinos}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-traditional}
+\babelfont[chinese-traditional]{rm}[BoldFont={AR PL Mingti2L Big5}]{AR PL Mingti2L Big5}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xurl}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Gauss}{\mathbb{Z}[i]}
+\newcommand{\Eis}{\mathbb{Z}[\omega]}
+
+\title{Congruence Trace Universality and First-Jet Compression on a Finite Bianchi Marked-Word Panel}
+\author{Liang Wang\\
+\small School of Artificial Intelligence and Automation, Huazhong University of Science and Technology\\
+\small Luoyu Road 1037, 430070, Hubei, P.R. China\\
+\small \texttt{wangliang.f@gmail.com}}
+\date{28 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We separate a ring-general control theorem from its finite marked-word validation. For a commutative ring \(R\), a non-zero-divisor \(m\in R\), and \(\gamma=I+mA\in\SL_2(R)\), we prove the universal identity
+\[
+  \frac{\tr(\gamma)^2-4}{m^2}=m^2\det(A)^2-4\det(A).
+\]
+Thus Gaussian level-\(3\) integrality is a principal-congruence identity rather than a Gaussian-specific owner signature. The first congruence jet \(J_m(\gamma)=A\bmod m\) is invariant under conjugacy by the level subgroup, changes sign under inversion, and scales by the repetition number under powers. The pooled frozen panel contains 11,481 exact matrices; its scalar discriminant has 145 values and its signed-jet refinement has 517 joint descriptors. As a bounded validation, a derivative profile selects the 10,976 rows already classified as loxodromic in the frozen ledger. On those matrix rows the descriptor count rises from 144 to 508, 364 of 10,832 scalar-collision rows are separated, 10,468 joint collision rows remain, the largest bucket falls from 208 to 84, and no joint bucket is a singleton. These are matrix-compression counts, not a primitive-owner collision or separation result. Four executed control families cover only two of three prespecified canonical control types; the missing matched-distribution noncongruence ensemble remains unexecuted. The exact algebraic theorem and replayable certificate therefore support a negative-specificity result and a necessary refinement, while the complete Bianchi flow remains unassigned and no orbit product, determinant, Euler reconstruction, spectral realization, or Route-B claim is made.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Bianchi group; principal congruence subgroup; holonomy trace; congruence jet; exact computation; arithmetic dynamics; negative control
+
+\begin{otherlanguage}{chinese-traditional}
+\section*{Traditional Chinese Abstract / 繁體中文摘要}
+本文研究 Bianchi 群主同餘子群中的跡整除統計，能否提供足夠專屬的算術訊息以建立週期軌道所有者對應。對任意交換環 \(R\)、非零因子 \(m\in R\)，以及 \(\gamma=I+mA\in\SL_2(R)\)，我們證明標準化跡判別式恆等式 \(\bigl(\tr(\gamma)^2-4\bigr)/m^2=m^2\det(A)^2-4\det(A)\)。因此，高斯整數層級三所見的整性並非高斯算術的專屬特徵，而是普遍的主同餘代數結果。本文另證明第一同餘噴射 \(A\bmod m\) 在層級共軛下不變、取逆時變號、取冪時依重複次數縮放。於凍結的一萬一千四百八十一個高斯矩陣精確面板中，所有代數證書均通過；標量判別式僅有一百四十五類，加入帶符號第一噴射後增至五百一十七類，雖分離部分碰撞，仍留下大量不可區分矩陣。四組控制族亦證實公式跨整數、高斯鄰近層級及 Eisenstein 整數成立。故本文成果是負向專屬性定理與必要描述子的量化改良，而非素理想所有者映射、完整共軛分類或譜實現；尚缺的控制類型、軌道完備性與動力學橋接均被明確保留為開放問題。
+\noindent\textbf{關鍵詞：} Bianchi 群；主同餘子群；全純跡；同餘噴射；精確計算；算術動力學；負向控制
+\end{otherlanguage}
+
+\section{Introduction}
+
+Closed geodesics on a finite-volume hyperbolic three-manifold are represented by loxodromic conjugacy classes, and their complex lengths are encoded by holonomy eigenvalues and traces. This makes trace expressions attractive candidates for connecting dynamics to arithmetic. It also creates a danger: a congruence identity can look arithmetically distinctive inside one ring while actually being forced by determinant one over every commutative base ring. The distinction matters before any stronger orbit-owner, Euler-product, or spectral claim is attempted.
+
+% SOURCE: MaclachlanReid2003, Chapters 10--11, for the arithmetic Kleinian/Bianchi setting.
+Arithmetic Kleinian groups and their finite-index congruence subgroups provide a standard geometric setting for this question \citep[Chs.~10--11]{MaclachlanReid2003}.
+% SOURCE: PfaffRaimbault2020, Introduction and Section 2, for Bianchi congruence subgroups.
+Congruence subgroups of Bianchi groups support substantial analytic and topological structure, including torsion questions for coefficient systems \citep[Introduction and Sec.~2]{PfaffRaimbault2020}.
+% SOURCE: Pfaff2015, abstract and Sections 3--5, for finite-volume Selberg zeta theory.
+On finite-volume hyperbolic manifolds, dynamical zeta functions organize closed-geodesic data, but the analytic object requires the full geometric and representation-theoretic setting rather than a finite word sample \citep[abstract and Secs.~3--5]{Pfaff2015}. These facts motivate a narrower question:
+
+\begin{quote}
+\emph{Does normalized trace divisibility at Gaussian level \(3\), perhaps refined by the first congruence jet, distinguish candidate holonomy owners in a way that is specific to the Bianchi arithmetic source?}
+\end{quote}
+
+Our answer has two parts. First, normalized trace divisibility is universal. If \(\gamma=I+mA\in\SL_2(R)\), determinant one forces \(\tr(A)=-m\det(A)\), and hence
+\[
+ D_{m^2}(\gamma):=\frac{\tr(\gamma)^2-4}{m^2}
+ =m^2\det(A)^2-4\det(A).
+\]
+No unique factorization, imaginary quadratic structure, or hyperbolic geometry is used. This refutes the specificity of \(D_9\) as a Gaussian owner mechanism while retaining it as an exact necessary invariant.
+
+Second, the first jet \(J_m(\gamma)=A\bmod m\) carries information that scalar trace loses. We prove its exact level-conjugacy, inversion, and power laws. On the frozen Gaussian panel, the joint descriptor \((D_9,[J_3]_{\pm})\) substantially reduces the worst scalar collision bucket but remains far from injective. The finite audit has no target prime or zero labels and is not used to tune a statistic. It is a reproducible stress test of already stated algebraic laws.
+
+The contribution is deliberately asymmetric, and its components are not presented as separately novel. The bounded antecedent check recorded in \texttt{notes/stage4\_rev001\_008\_support\_provenance.md} identifies established antecedents for congruence-filtration quotients as traceless residue data, level-squared principal-congruence trace forms and trace-set non-specificity, and Cayley--Hamilton trace-of-powers recurrences. We therefore claim no novelty for determinant expansion, a first congruence quotient, trace-zero first-order data, or the recurrence in isolation. The field-general value claimed here is the combined control package: an explicit cancellable-level identity over commutative rings, signed level-subgroup jet laws, a replayable exact certificate with a separately reported loxodromic matrix profile, and a conservative owner and Route firewall. The model-selection result is negative: the scalar statistic proves too much, and the refinement still separates too little. We do not infer an orbit-to-prime-ideal map, identify rational primes, fit zeta zeros, claim a complete primitive-orbit census, or invoke a fallback spectral route.
+
+The fresh Stage-4-prime evidence sidecar, \path{notes/stage4_prime_rev001_source_evidence.json} (SHA-256 \path{d606e79c459065febe96432b8645e19ba6a1d6db1a9f299fdd13240f7f19e4b0}), binds López, Theorems~3.2 and~2.4; Lakeland, Corollary~3.6, Theorem~1.3, and Section~5; and Brandi--Ricci, the abstract and Section~2, to this allocation. This is a bounded antecedent check, not exhaustive discovery or a global novelty certificate.
+
+\section{Geometric and algebraic setting}
+
+\subsection{Bianchi holonomy and the frozen flow}
+
+Let \(K=\mathbb{Q}(i)\), let \(\mathcal O_K=\Gauss\), and write
+\[
+ \Gamma(3)=\ker\!\left(\SL_2(\Gauss)\longrightarrow\SL_2(\Gauss/(3))\right).
+\]
+After projectivization, a torsion-free finite-index subgroup acts freely on hyperbolic three-space, and unit-speed geodesic flow uses arclength as its clock. The frozen object is the geodesic flow on the level-\((3)\) Bianchi quotient, with primitive loxodromic conjugacy classes as primitive owners and group powers as repetitions. The computation samples an elementary-generator word ball inside this group; it does not enumerate all conjugacy classes or every element in a geometric-length range.
+
+% SOURCE: LinLipnowski2022, Introduction and Section 2, for complex length and holonomy trace conventions.
+For a loxodromic element, the eigenvalue pair determines translation length and rotational holonomy, so trace data naturally participate in the complex length spectrum \citep[Introduction and Sec.~2]{LinLipnowski2022}. Trace is invariant under conjugacy and inversion in \(\SL_2\), but it need not be a complete conjugacy invariant.
+
+\begin{lemma}[level-three torsion exclusion]\label{lem:torsion}
+If \(\gamma\in\Gamma(3)\subset\SL_2(\Gauss)\) has finite order, then its image in \(\operatorname{PSL}_2(\mathbb C)\) is the identity.
+\end{lemma}
+
+\begin{proof}
+Write \(\gamma=I+3A\). Determinant one gives \(\tr(\gamma)=2-9\det(A)\), hence \(\tr(\gamma)\equiv2\pmod 9\). A finite-order matrix in \(\SL_2(\mathbb C)\) is diagonalizable with roots of unity \(\lambda,\lambda^{-1}\), so its trace is a real algebraic integer in \(\Gauss\), hence an integer. The possible integral traces are \(-2,-1,0,1,2\). Only \(2\) is congruent to \(2\) modulo \(9\); therefore both eigenvalues equal \(1\), and finite order plus diagonalizability gives \(\gamma=I\). The central element \(-I\) is excluded by the congruence.
+\end{proof}
+
+\subsection{Evidence types and owner compatibility}
+
+We separate three logical levels:
+\begin{enumerate}[label=(\roman*)]
+ \item a ring identity proved for every admissible matrix;
+ \item an exact finite computation verifying implementations and measuring collisions on a frozen panel;
+ \item a dynamical or arithmetic ownership claim, which additionally requires a complete primitive-owner rule and source-derived labels.
+\end{enumerate}
+Only the first two are established. For every descriptor statement in this paper, the operative proved equivalence is conjugacy by the level subgroup \(\Gamma(3)\); reversal of orientation is handled only by the sign quotient \([J_3]_{\pm}\). Ambient Bianchi conjugacy is not quotiented here, because it acts on the jet through the reduced adjoint action. Invariance under the operative equivalence is merely eligibility, not ownership: a useful owner coordinate must also control collisions, respect repetition, and relate to an independently specified arithmetic source. No matrix row in the finite panel is thereby certified as a primitive owner.
+
+\begin{definition}[normalized discriminant and first jet]
+Let \(R\) be a commutative ring and let \(m\in R\) be a non-zero-divisor.
+For \(\gamma=I+mA\in\SL_2(R)\), the matrix \(A\) is unique; define
+\[
+ D_{m^2}(\gamma)=\frac{\tr(\gamma)^2-4}{m^2},
+ \qquad J_m(\gamma)=A\bmod m\in M_2(R/mR).
+\]
+For unoriented owners use the signed class \([J_m]_{\pm}=\{J_m,-J_m\}\).
+\end{definition}
+
+The notation \(D_{m^2}\) records the normalizing ideal power and prevents \(D_9\) from being mistaken for a construction intrinsic to \(\Gauss\).
+
+\section{Related work and methodological controls}
+
+% SOURCE: Pfaff2015, abstract and Sections 3--5, for finite-volume zeta continuation and singularities.
+Selberg-type zeta functions on odd-dimensional finite-volume hyperbolic manifolds admit a rigorous analytic theory involving regularized traces, scattering terms, and representation data \citep[abstract and Secs.~3--5]{Pfaff2015}. Nothing in the finite word-ball computation supplies that apparatus. Our statistic is a candidate algebraic owner coordinate, not a zeta function or spectral determinant.
+
+% SOURCE: PfaffRaimbault2020, Introduction and Section 2, for principal congruence towers.
+Modern work on Bianchi congruence towers illustrates how arithmetic and topology can interact at a source-owned level \citep[Introduction and Sec.~2]{PfaffRaimbault2020}. It motivates congruence invariants but does not imply that trace divisibility at one level is Gaussian-specific.
+
+For geometric controls, verified computation matters when a numerical manifold presentation is used.
+% SOURCE: HIKMOT2016, Theorem 5.1 and Sections 3--5, for interval verification.
+Interval methods can certify a complete hyperbolic structure for a cusped triangulation \citep[Thm.~5.1 and Secs.~3--5]{HIKMOT2016}.
+% SOURCE: SnapPyDocs2026, verified-computation documentation for interval semantics.
+Official documentation distinguishes verified interval results from high-precision calculations \citep[verified computations and \texttt{verify\_hyperbolicity}]{SnapPyDocs2026}.
+Earlier development used the \(5_2\) knot complement as a finite-volume, one-cusped, non-arithmetic comparison.
+% SOURCE: Reid1991, main theorem, for arithmeticity classification of hyperbolic knot complements.
+Its non-arithmetic role follows from the arithmetic knot-complement classification \citep[main theorem]{Reid1991}. The earlier numerical length prefix is contextual only and is not an input here.
+
+Our control derives the identity without target labels, replays it over rings and levels that remove Gaussian specificity, and reports failure of injectivity. The Round-7 and Round-8 JSON files are treated as historical, self-reported freeze records: the reviewed package contains no independently dated commit or registry receipt establishing their pre-result chronology. This qualification does not weaken the exact algebraic refutation, which follows from determinant one and does not depend on an asymptotic approximation, visual match, or claimed timestamp.
+
+\subsection{Position of the present result}
+
+The manuscript separates three questions that can otherwise be conflated. The first is whether a formula is well-defined and invariant. The second is whether its values distinguish primitive dynamical owners. The third is whether the distinguished owners carry the source arithmetic required by a proposed Euler product. Established adjacent work, summarized with exact source locators in the accompanying Stage-4 provenance note, treats the first congruence quotient, principal-congruence trace restrictions, trace-set non-specificity, and trace-power recurrences as separate mechanisms; those ingredients are not claimed as new here. The present theorem supplies an explicit ring-general determinant formula for the frozen scalar and integrates it with the signed level-subgroup jet laws and exact negative certificate. That package completely answers the first question for the scalar, gives a quantified but incomplete refinement for the second, and leaves the third open because no prime-ideal label is attached independently of the descriptor.
+
+The hash-bound Stage-4-prime sidecar exposes the primary records, locators checked, supported scope, and unsupported scope for each of those mechanisms. Its conclusion remains deliberately local: it supports the comparison made here but does not prove that no closer work exists.
+
+The logical ordering is important: determinant one fixes the statistic and its power rule before any comparison with arithmetic targets, and the control prediction follows from the same identity. The submitted artifacts record the Round-7 and Round-8 freeze chronology, but that chronology is historical and self-reported rather than independently timestamped. Accordingly, we do not use a claimed pre-result timestamp as evidence for the theorem or the negative-specificity conclusion. Those conclusions rest on symbolic derivation and exact replay; the historical records document the project sequence and exclude no unrecorded earlier exploration.
+
+The result also differs from a claim that trace has no geometric value. Trace determines eigenvalues for a determinant-one \(2\times2\) matrix and therefore carries complex-length information for loxodromic holonomy. The failure is narrower but consequential: the particular normalized divisibility of trace is not a Gaussian-specific arithmetic owner, because it follows over every admissible commutative base ring, and first-order congruence data do not separate even the frozen loxodromic matrix rows. The exact loxodromic profile is validation evidence for the size of that residual compression, not a primitive-owner census. A future construction can still use trace as one coordinate, provided additional source-owned data, a complete owner equivalence, and independently frozen controls are supplied.
+
+Lakeland's level-squared trace form and Bianchi trace-set examples support precisely this narrower warning about source specificity; López and Brandi--Ricci support adjacent filtration and trace-power mechanisms only. None of these antecedents supplies the frozen signed-jet collision profile or a primitive-owner theorem, as recorded in the Stage-4-prime source-evidence sidecar.
+
+Finally, the paper distinguishes a necessary invariant from a sufficient code. Conjugacy invariance is necessary if an unoriented closed geodesic is the owner. Inversion compatibility is necessary because reversing orientation should not silently create a new scalar label under the frozen convention. A power law is necessary to distinguish a primitive owner from its traversals. None of these properties alone gives injectivity, primitivity, or arithmetic ownership. The collision experiment measures this remaining gap.
+
+\section{Universal trace and jet theorems}\label{sec:theorems}
+
+\begin{lemma}[determinant expansion]\label{lem:detexp}
+For every commutative ring \(R\), scalar \(m\in R\), and \(A\in M_2(R)\),
+\[
+ \det(I+mA)=1+m\tr(A)+m^2\det(A).
+\]
+\end{lemma}
+\begin{proof}
+Writing \(A=(a_{jk})\), direct expansion gives
+\[
+ (1+ma_{11})(1+ma_{22})-m^2a_{12}a_{21}
+ =1+m(a_{11}+a_{22})+m^2(a_{11}a_{22}-a_{12}a_{21}).
+\]
+\end{proof}
+
+\begin{theorem}[congruence trace universality]\label{thm:universal}
+Let \(R\) be a commutative ring, let \(m\in R\) be a non-zero-divisor, and let \(\gamma=I+mA\in\SL_2(R)\). Then
+\[
+ \tr(A)=-m\det(A),\qquad \tr(\gamma)=2-m^2\det(A),
+\]
+and
+\begin{equation}\label{eq:universal}
+ D_{m^2}(\gamma)=\frac{\tr(\gamma)^2-4}{m^2}
+ =m^2\det(A)^2-4\det(A)\in R.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:detexp} and \(\det(\gamma)=1\),
+\[
+ m\tr(A)+m^2\det(A)=0.
+\]
+Because \(m\) is a non-zero-divisor, cancellation yields \(\tr(A)=-m\det(A)\). Thus \(\tr(\gamma)=2-m^2\det(A)\), and
+\[
+ \tr(\gamma)^2-4
+ =-4m^2\det(A)+m^4\det(A)^2
+ =m^2\bigl(m^2\det(A)^2-4\det(A)\bigr).
+\]
+The quotient is an identity in \(R\), not informal division in a fraction field.
+\end{proof}
+
+\begin{corollary}[Gaussian level three]\label{cor:d9}
+For every \(\gamma=I+3A\in\SL_2(\Gauss)\),
+\[
+ D_9(\gamma)=\frac{\tr(\gamma)^2-4}{9}=9\det(A)^2-4\det(A)\in\Gauss.
+\]
+The same formula holds over \(\mathbb Z\), \(\Eis\), and every commutative ring in which the level is a non-zero-divisor.
+\end{corollary}
+
+Gaussian \(D_9\)-integrality is true and useful as a checksum, yet it cannot diagnose Gaussian arithmetic. It persists after the supposed source is replaced.
+
+\subsection{Additional consequences of universality}
+
+The proof of \cref{thm:universal} yields useful diagnostic consequences. First, the normalized discriminant factors through the single scalar \(\det(A)\). At fixed \(m\), every pair \(A,A'\) with \(\det(A)=\det(A')\) has the same \(D_{m^2}\), irrespective of their other effective matrix coordinates. Large collisions are therefore structural rather than an implementation defect. The 145-value result in the word panel reflects this forced compression.
+
+Second, the non-zero-divisor hypothesis marks the cancellation boundary. The expansion \(m(\tr(A)+m\det(A))=0\) holds without it, but \(\tr(A)=-m\det(A)\) need not follow if \(m\) has a nontrivial annihilator. The theorem is not stated for arbitrary zero-divisor levels, and the code does not use such a case as a control. Over \(\mathbb Z\), \(\Gauss\), and \(\Eis\), every nonzero level is a non-zero-divisor because these rings are domains.
+
+Third, for a fixed trace \(t\), \cref{prop:powerdisc} shows that repetitions move along a prescribed square-factor sequence \(S_{r-1}(t)^2\). This is an exact consistency test for a claimed traversal. Its converse is false: observing a compatible square factor does not prove that one matrix is a power of another. The finite audit uses the identity only in the forward direction.
+
+The first jet resolves information discarded by determinant. In dimension two, \(\det(A)\) is one polynomial coordinate while \(A\bmod m\) retains all four residue entries subject to a first-order trace condition. This explains why the joint count grows. It also explains why first order cannot be complete: infinitely many level matrices have the same residue, and ambient conjugacy can move residues within an adjoint orbit. The signed convention handles inversion only; it does not quotient the full ambient adjoint action.
+
+\begin{proposition}[compatibility of scalar and jet traces]\label{prop:jettrace}
+Under the hypotheses of \cref{thm:universal}, the first jet satisfies
+\[
+ \tr(J_m(\gamma))=0\quad\text{in }R/mR.
+\]
+\end{proposition}
+\begin{proof}
+The identity \(\tr(A)=-m\det(A)\) reduces to \(\tr(A)\equiv0\pmod m\). Since \(J_m(\gamma)=A\bmod m\), its trace vanishes in the quotient.
+\end{proof}
+
+Thus the jet lies in the trace-zero tangent space at the identity. This makes the term first jet literal: it is the first-order displacement inside the determinant-one group scheme. The proposition is still universal and earns no Gaussian specificity.
+
+\begin{proposition}[trace recurrence and powers]\label{prop:powerdisc}
+Let \(R\) be a commutative ring, let \(\gamma\in\SL_2(R)\), let \(t=\tr(\gamma)\), and define
+\[
+ S_0(t)=1,\quad S_1(t)=t,\quad
+ S_n(t)=tS_{n-1}(t)-S_{n-2}(t)\quad(n\ge2).
+\]
+For \(r\ge1\), the unconditional trace-polynomial identity is
+\[
+ \tr(\gamma^r)^2-4=\bigl(t^2-4\bigr)S_{r-1}(t)^2.
+\]
+If, in addition, \(m\in R\) is a non-zero-divisor and \(\gamma=I+mA\in\SL_2(R)\), then the normalized discriminants are defined under the hypotheses of \cref{thm:universal} and satisfy
+\[
+ D_{m^2}(\gamma^r)=D_{m^2}(\gamma)S_{r-1}(t)^2.
+\]
+\end{proposition}
+
+\begin{proof}
+Cayley--Hamilton gives \(\gamma^2-t\gamma+I=0\). Induction yields \(\gamma^r=S_{r-1}(t)\gamma-S_{r-2}(t)I\), and then
+\(\gamma^r-\gamma^{-r}=S_{r-1}(t)(\gamma-\gamma^{-1})\).
+Taking eigenvalues in the universal quadratic extension, or comparing determinants over \(\mathbb Z[t]\), proves the identity. Both sides are integral polynomials in \(t\), so it specializes to every commutative ring.
+\end{proof}
+
+Conjugacy and inversion invariance follow from trace invariance and \(\tr(\gamma^{-1})=\tr(\gamma)\). The square factor is repetition compatible but not a primitive-root test.
+
+\begin{theorem}[first congruence jet laws]\label{thm:jet}
+Let \(R\) be a commutative ring, let \(m\in R\) be a non-zero-divisor,
+set \(\Gamma(m)=\{I+mB\in\SL_2(R)\}\), and let
+\(\gamma=I+mA\in\Gamma(m)\). Then:
+\begin{enumerate}[label=(\alph*)]
+ \item \(J_m(h\gamma h^{-1})=J_m(\gamma)\) for every \(h\in\Gamma(m)\);
+ \item \(J_m(\gamma^{-1})=-J_m(\gamma)\);
+ \item \(J_m(\gamma^r)=rJ_m(\gamma)\) for every \(r\ge1\), with \(r\) read in \(R/mR\).
+\end{enumerate}
+Thus \([J_m]_{\pm}\) descends to an unoriented level-conjugacy descriptor.
+\end{theorem}
+
+\begin{proof}
+Modulo \(m^2\),
+\[
+ (I+mB)(I+mA)(I+mB)^{-1}\equiv I+mA,
+\]
+because \((I+mB)^{-1}\equiv I-mB\). This proves (a). Similarly \((I+mA)^{-1}\equiv I-mA\), proving (b). The binomial expansion gives \((I+mA)^r\equiv I+rmA\pmod{m^2}\), proving (c).
+\end{proof}
+
+\begin{remark}
+The operative owner equivalence for the proved jet descriptor is \(\Gamma(m)\)-conjugacy, with inversion absorbed by \([J_m]_{\pm}\). A larger ambient Bianchi group acts on the jet by the reduced adjoint action, so \(J_m\) is not an ambient-conjugacy invariant. No adjoint-orbit quotient is constructed in this paper, and no ambient or primitive owner claim is inferred from the finite matrix rows.
+\end{remark}
+
+\subsection{Constructive non-injectivity}
+
+Take
+\[
+ A_1=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+ A_2=\begin{pmatrix}0&i\\0&0\end{pmatrix},\qquad
+ \gamma_j=I+3A_j.
+\]
+Both determinants vanish, so \(D_9(\gamma_1)=D_9(\gamma_2)=0\). Their jets are distinct up to sign because \(i\not\equiv\pm1\pmod3\), so the jet strictly refines the scalar. Conversely, upper-unitriangular matrices with the same upper-right residue have the same joint descriptor; the joint descriptor is not injective. These nonidentity unipotent matrices are parabolic. The construction is an algebraic matrix-level witness only and is not a collision between loxodromic matrices, primitive elements, or distinct primitive owner classes.
+
+The loxodromic derivative certificate is a separate frozen-population audit and does not convert this parabolic algebraic example into a loxodromic or primitive-owner witness. Its manifest is \path{experiments/stage4_loxodromic_profile_manifest.json} (SHA-256 \path{1860b1a566e2c4a9a3b9362af4947aa2333d2df4728893780341dd79accaae07}) and its receipt is \path{experiments/stage4_loxodromic_profile_receipt.json} (SHA-256 \path{5c0e0bd39812a2714bd05bf429ff3b6e70cf36c3e841ad553026f4082ff3f6fa}).
+
+\section{Exact finite certificate}
+
+\subsection{Frozen panel and arithmetic representation}
+
+The computation starts from a prespecified elementary-generator word ball through reduced word length five. It contains 22,409 reduced words and canonicalizes them to 11,481 exact \(2\times2\) Gaussian matrices. Gaussian integers are ordered pairs of machine integers, and all ring operations are exact. No floating-point tolerance enters the Round-7 or Round-8 certificate.
+
+For each matrix, the program checks determinant one and congruence to \(I\) modulo \(3\), constructs \(A=(\gamma-I)/3\), evaluates both sides of \cref{eq:universal}, and checks the power identity for \(r=1,\ldots,5\). It canonicalizes the signed jet by taking the lexicographically smaller residue encoding of \(J_3\) and \(-J_3\).
+
+The panel is exhaustive only relative to its word-generation and cutoff contract. Different words can yield the same matrix, and elements outside the ball may be conjugate to elements inside it. The rows are not a complete primitive-orbit ledger.
+
+\subsection{Certificate algorithm}
+
+The certificate is a sequence of independently checkable transformations. First, a reduced word is evaluated in the frozen elementary generators. Second, exact matrix entries are canonicalized as Gaussian pairs and duplicate matrices are removed. Third, the program asserts determinant one and verifies that every entry of \(\gamma-I\) is divisible by \(3\). Fourth, it constructs \(A\) by exact coordinate division, never floating-point rounding. Fifth, it evaluates trace, determinant, both sides of \cref{eq:universal}, and recurrence witnesses for five repetitions. Finally, it reduces \(A\) modulo \(3\), canonicalizes the signed jet, and builds scalar and joint bucket dictionaries.
+
+Failure modes are explicit. A non-divisible entry stops the row rather than coercing a quotient. A determinant mismatch is reported before descriptor construction. A formula disagreement fails verification. Collision counts are recomputed from keys rather than read from a summary. The verify-only path reads the frozen ledger and receipt but does not rewrite them, so reproduction cannot silently replace the evidence it checks.
+
+For buckets of sizes \(b_1,\ldots,b_k\), the reported collision-row quantity is
+\[
+ \sum_{j=1}^k(b_j-1)=N-k,
+\]
+where \(N\) is panel size and \(k\) the number of descriptors. Thus \(11{,}481-145=11{,}336\) scalar collision rows and \(11{,}481-517=10{,}964\) joint collision rows. Their difference \(372\) is exactly the number resolved by the jet. This avoids pair-count inflation: it measures rows beyond first representatives, not all \(\binom{b_j}{2}\) colliding pairs.
+
+The separately selected loxodromic matrix rows use the same definition; their previously reported values are replayed from \path{results/stage4_loxodromic_d9_jet_metrics.json} (SHA-256 \path{8e7c2e32b3638b73caa674518f2c19a629e1f708d219a10500cb830792babdcf}). This provenance binding does not redefine or replace any pooled count above.
+
+Applying the same definition to the derivative loxodromic-only population gives \(10{,}976-144=10{,}832\) scalar collision rows and \(10{,}976-508=10{,}468\) joint collision rows. Their difference is \(364\). These remain counts of frozen matrix rows beyond first representatives, not counts of colliding owner pairs.
+
+The maximum bucket probes a different failure mode from total collisions. Reducing it from 505 to 84 shows that the jet prevents one scalar value from dominating as severely. The absence of singleton joint buckets shows that no row is uniquely identified even at finite matrix level. Reporting both prevents a favorable average from hiding a worst case or a favorable worst case from hiding pervasive collisions.
+
+\begin{table}[t]
+\centering
+\caption{Exact collision profile on the frozen Gaussian panel.}
+\label{tab:collision}
+\begin{tabular}{lr}
+\toprule
+Quantity & Exact count \\
+\midrule
+Matrices & 11,481 \\
+Distinct scalar \(D_9\) values & 145 \\
+Scalar collision rows & 11,336 \\
+Distinct joint \((D_9,[J_3]_{\pm})\) descriptors & 517 \\
+Scalar-collision rows separated by the jet & 372 \\
+Joint collision rows remaining & 10,964 \\
+Largest scalar bucket & 505 \\
+Largest joint bucket & 84 \\
+Singleton joint buckets & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The adjacent derived loxodromic table is bound to \path{results/stage4_loxodromic_d9_jet_collision_profile.csv} (SHA-256 \path{b345988db7f9a5076983d4c3c2fb88e952b9215b9ea46a9605bae3ed6d73a256}) and the metrics file cited above. The Stage-4-prime replay verified those bytes and did not refresh canonical results.
+
+\begin{table}[t]
+\centering
+\caption{Derived matrix-level collision profile on the frozen loxodromic rows.}
+\label{tab:collision-loxodromic}
+\begin{tabular}{lr}
+\toprule
+Quantity & Exact count \\
+\midrule
+Loxodromic matrix rows & 10,976 \\
+Distinct scalar \(D_9\) values & 144 \\
+Scalar collision rows & 10,832 \\
+Distinct joint \((D_9,[J_3]_{\pm})\) descriptors & 508 \\
+Scalar-collision rows separated by the jet & 364 \\
+Joint collision rows remaining & 10,468 \\
+Largest scalar bucket & 208 \\
+Largest joint bucket & 84 \\
+Singleton joint buckets & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The jet increases descriptor count by about \(3.57\) and reduces the maximum bucket by about \(6.01\). These are meaningful finite gains but not owner separation: more than \(95\%\) of rows remain collisions beyond first occurrences, and no joint bucket is a singleton. Matrix equality is finer than conjugacy ownership, so these counts cannot be promoted to distinct primitive geodesics.
+
+The loxodromic-only profile retains the same matrix-row boundary: its frozen class label supplies no primitivity, complete conjugacy quotient, or distinct-owner certificate. The bound derivative artifacts therefore support only the displayed finite compression comparison.
+
+Restricting by the already frozen label \(\texttt{matrix\_class}=\texttt{LOXODROMIC}\) raises the descriptor count from \(144\) to \(508\), a factor \(127/36\), and reduces the maximum bucket from \(208\) to \(84\), a factor \(52/21\). Nevertheless \(10{,}468\) joint collision rows remain, equal to \(2617/2708\) of the loxodromic scalar-collision rows, and every joint bucket contains at least two matrix rows. The profile introduces no new classifier and supplies neither primitivity nor a witness that two colliding rows are distinct under the operative level-subgroup owner equivalence.
+
+\subsection{Cross-ring and neighboring-level controls}
+
+The theorem was replayed on four frozen families containing 6,396 exact matrices or witnesses. The principal-congruence subset has 6,392 rows, all passing. Four extra full-ambient Gaussian matrices test the boundary: three produce a nonintegral quotient by \(9\), while one happens to be integral.
+
+\begin{table}[t]
+\centering
+\caption{Frozen controls for the universal identity.}
+\label{tab:controls}
+\begin{tabular}{lrrl}
+\toprule
+Family & Level & Rows & Result \\
+\midrule
+Full ambient \(\SL_2(\Gauss)\) witnesses & --- & 4 & 3 nonintegral, 1 integral \\
+Integer principal congruence & 3 & 485 & all pass \\
+Gaussian neighboring levels & 2 and 4 & 1,969 each & all pass \\
+Eisenstein principal congruence & 3 & 1,969 & all pass \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The controls cover a simpler parent/source replacement and neighboring parameters. Under the prespecified Route-A evaluator, they instantiate only two of three required canonical control types. Four executed families are not reported as a complete three-type gate. The algebraic refutation is complete, while the broader protocol retains an open control obligation.
+
+The missing third type is specified, but not executed, as a matched-distribution noncongruence matrix ensemble. Before any result is read, it must freeze an ambient determinant-one Gaussian sampling rule outside \(\Gamma(3)\), match the loxodromic panel on matrix count, reduced-word-length strata, matrix class, and prespecified trace-size bins, and bind the matching rule, seed, and exclusions in a receipt. The predeclared prediction is non-persistence: after principal level-\((3)\) membership is removed, universal \(D_9\)-integrality should fail through exact nonintegral witnesses, while \cref{thm:universal} remains unchanged on its own domain. Because \(J_3=(\gamma-I)/3\bmod3\) is undefined when entrywise division by \(3\) fails, the missing control does not promise a joint-jet comparison for those rows. Coverage remains two of three until this ensemble is separately frozen and run.
+
+\subsection{Reproducibility contract}
+
+The repository includes generating programs, all historical unit tests, frozen JSON contracts, CSV ledgers, validation notes, and a verify-only Round-8 reproducer. Verification reads committed artifacts, checks schema and hashes, regenerates exact core results in memory, and compares them without overwriting evidence. No prime table, zeta-zero table, or tuned threshold is used.
+
+The Round-7 and Round-8 dates and freeze labels are historical, self-reported provenance rather than independently timestamped pre-result evidence. The Stage-4 loxodromic-only derivative is separately bound by \texttt{experiments/stage4\_loxodromic\_profile\_manifest.json} and reproduced by \texttt{bash experiments/reproduce\_stage4\_loxodromic\_profile.sh}. That verify-only path checks two byte-identical builds, exact source hashes, the 10-test direct regression suite, and unchanged canonical Round-7 and Round-8 artifacts; it does not refresh canonical results.
+
+The certificate establishes agreement with the algebraic theorems, exact pooled counts, and the bounded loxodromic matrix-row profile. It cannot establish full-group generation at a geometric cutoff, complete conjugacy, primitivity, a collision between distinct primitive loxodromic owner classes, or an arithmetic label map. In particular, the frozen \(\texttt{matrix\_class}\) field selects loxodromic matrices but supplies no primitive-root witness or complete owner quotient.
+
+For this derivative layer, the bound chain is the manifest, source, 10-test suite, verify-only reproduction command, CSV and metrics outputs, and receipt. Running \texttt{bash} with \path{experiments/reproduce_stage4_loxodromic_profile.sh} passed all 10 direct tests, compared two byte-identical isolated builds, and verified the existing outputs without a canonical refresh.
+
+\subsection{Why the finite panel remains informative}
+
+An incomplete word ball cannot prove an asymptotic owner theorem, but it can decisively test exact implementation claims and expose non-injectivity. One counterexample refutes injectivity, while thousands of collisions quantify its scale under a frozen enumeration. One source-removed family can motivate skepticism about specificity; the universal proof upgrades that skepticism to a theorem.
+
+The panel is reusable. If a higher jet or ideal-valued coordinate is proposed, it can be evaluated on the same 11,481 matrices without changing enumeration, permitting a paired comparison of counts and buckets. A successor should be frozen before its collision profile is read and should add a genuinely third canonical control type. Reusing the panel is legitimate for controlled comparison; repeatedly optimizing a coordinate against observed buckets would be exploratory feature engineering and must be labeled accordingly.
+
+\section{Adversarial interpretation and Route-A assessment}
+
+\subsection{What the controls refute}
+
+An arithmetic-specific owner statistic should deteriorate when its source is removed or replaced. Here the normalized discriminant survives over \(\mathbb Z\), neighboring Gaussian levels, and \(\Eis\) for the same elementary reason. The explanation is \cref{thm:universal}, not hidden Gaussian prime-ideal structure. The statistic is stopped as a Gaussian-specific mechanism.
+
+This is an identity-level refutation, not histogram similarity. More computation at level three cannot restore specificity. Progress requires an independently source-derived coordinate, such as an ideal- or Hecke-valued refinement, whose laws are proved and whose content fails on source-removed controls.
+
+\subsection{Typed Route-A boundary}
+
+The proxy is the marked-word congruence descriptor, not the complete Bianchi flow. Its operative proved equivalence is conjugacy by the level subgroup \(\Gamma(3)\), with inversion handled by the signed jet; ambient Bianchi conjugacy and primitive ownership are not certified. The pooled and loxodromic-only counts therefore measure matrix compression only. Control coverage remains two of three: the matched-distribution noncongruence ensemble is predeclared but unexecuted. The typed assessment remains
+\[
+ (A0_{\mathrm{weak\ arithmetic\ relation}},
+ A1_{\mathrm{weak}},A2_{\mathrm{fail}},A3_{\mathrm{fail}},A4_{\mathrm{fail}}),
+\]
+with exploratory overall status.
+\begin{itemize}
+ \item \textbf{A0:} the ambient group is arithmetic, but no independent ideal owner is attached to a row; the formula is not source-specific, and the third canonical control remains open.
+ \item \textbf{A1:} level-subgroup transformation laws are exact, but the census is incomplete, primitivity is unproved, and both reported matrix populations have heavy collisions.
+ \item \textbf{A2:} no dynamical trace formula, transfer operator, or determinant is derived.
+ \item \textbf{A3:} no arithmetic Euler factor is reconstructed.
+ \item \textbf{A4:} no spectral target is identified.
+\end{itemize}
+Thus the formal Route-A tuple and \(\mathrm{ROUTE\_A\_EXPLORATORY}\) status are unchanged; the full Bianchi flow remains unassigned and Route B is not invoked.
+
+The bound derivative receipt records the same formal tuple and explicitly sets the full-flow tuple to unassigned and the primitive-owner claim to not made. Its replay supplies no A2 evidence and therefore cannot promote any Route component.
+
+The full Bianchi flow remains unassigned because proxy credit cannot cross an ownership gap. No alternate spectral construction is activated: no self-adjoint operator, boundary condition, spectral reality proof, or zero correspondence is supplied.
+
+\subsection{Alternative explanations and what would change the verdict}
+
+One explanation for repeated \(D_9\) values is that many words encode the same conjugacy class. Duplicate matrices are already removed, so word equality alone cannot explain the collisions. Unknown conjugacies could merge remaining matrices into fewer owners, but that would not make the descriptor more injective at matrix level and cannot restore Gaussian specificity against \cref{thm:universal}.
+
+Another possibility is that only a selected primitive loxodromic subset matters. Restricting the panel could reduce collisions, but selection must come from an independently proved primitive and geometric ownership rule. Choosing rows after seeing descriptor values would not establish ownership. Moreover, cross-ring universality remains: any specificity of a restricted scalar would arise from the selection rule, not from \(D_9\) integrality.
+
+A result strong enough to change the verdict would contain at least four components. It would define an ideal-valued label from the Gaussian source without target fitting; prove conjugacy, inversion, and repetition laws; show exact or certified separation on a complete declared owner domain; and fail prespecified source-removed controls for a reason linked to Gaussian splitting. Only then would it be meaningful to ask whether a convergent dynamical product reconstructs independently specified local factors.
+
+\subsection{Falsifiers for a successor statistic}
+
+A successor should be rejected if it is determined by the universal determinant-one expansion; changes under declared owner equivalence; lacks a primitive/repetition law; remains equally structured after integer or Eisenstein replacement; or requires reading target primes or zeros during design. Passing these tests is still only a prerequisite. A complete proposal needs auditable primitive ownership, convergence or regularization, and an explicit source-label-to-Euler-factor route.
+
+\subsection{Implications for flow modeling}
+
+The frozen continuous-time object is more structured than the matrix panel. The current descriptor can enter a flow-facing construction only through the following dependency interface:
+\[
+\begin{array}{c}
+ \text{sampled matrix descriptor}\\
+ \downarrow\\
+ \text{unbuilt complete primitive-owner ledger}\\
+ \downarrow\\
+ \text{unbuilt geometric coding or cross-section with the geometric clock}\\
+ \downarrow\\
+ \text{unbuilt orbit weights and transfer object}\\
+ \downarrow\\
+ \text{unproved determinant, Euler, and spectral consequences}.
+\end{array}
+\]
+The first node is the only constructed one. A primitive loxodromic class carries geometric length and rotational angle, whereas the word panel is organized by presentation length. Any future ledger must avoid repeated counting through cyclic shifts, inversion, alternative words, and shorter roots outside the cutoff. The descriptor may be recorded as one bounded coordinate at that stage, but it does not supply the missing owner ledger or coding.
+
+This difference explains why the negative theorem can be transferred upward while positive separation credit cannot. Universality is proved for every admissible matrix, so it applies in particular to all holonomies that arise from the flow: \(D_9\) remains nonspecific. By contrast, a favorable finite collision rate would concern only the sampled matrices and could not prove complete flow ownership. Negative identity-level information is monotone under restriction; finite injectivity evidence is not monotone under expansion to an unseen group.
+
+The same logic governs repetitions. The recurrence in \cref{prop:powerdisc} verifies how a known power transforms. It does not decide whether a word is primitive in the full group, because a shorter root may lie outside the cutoff or use a different presentation. A flow-facing owner ledger therefore needs an independent primitive-root procedure with a completeness statement, not merely a within-ball word test.
+
+Only after a complete primitive-owner ledger and geometric coding exist could one define orbit weights and a transfer object. That object would still require a stated convergence half-plane or regularization, multiplicity rules, treatment of cusps and scattering, rotational-holonomy conventions, and proofs connecting any determinant to independently specified arithmetic Euler factors or spectral data. None of those nodes is constructed here. The source literature shows that finite-volume zeta theory contains such analytic ingredients, but it does not turn the present congruence descriptor or finite collision ledger into a transfer operator, dynamical determinant, Euler product, or spectral realization.
+
+\section{Limitations and open obligations}
+
+First, the finite ledger is an elementary-subgroup word ball, not a theorem about all of \(\Gamma(3)\). Word length is presentation dependent and is not hyperbolic length. Full-group generation, conjugacy, and primitivity remain open.
+
+Second, the proved descriptor uses one operative owner equivalence: conjugacy by the level subgroup \(\Gamma(3)\), with inversion handled by \([J_3]_{\pm}\). Ambient Bianchi conjugacy acts nontrivially through the reduced adjoint action, and no adjoint-orbit quotient is established here. The finite rows are not certified primitive, so neither the pooled nor the loxodromic-only collision profile is a primitive-owner census. Heavy matrix-level collisions show first-order data are insufficient. Higher jets might refine the panel, but their ambient compatibility and specificity would require new proofs and controls rather than larger tables.
+
+Third, the executed controls cover only two of three canonical types and do not match every geometric feature. The missing third type is an unexecuted matched-distribution noncongruence Gaussian matrix ensemble, with a predeclared prediction that exact \(D_9\)-integrality will not persist outside principal level-\((3)\) membership. Its matching rule, seed, and exclusions must be frozen before execution; until then it contributes no empirical control credit. Earlier comparisons improved finite-volume and cusp matching through the \(5_2\) complement, but cusp count, covolume, length distribution, and marked presentation are not simultaneously matched. These gaps do not affect the universal algebraic refutation, but they matter for any new dynamical statistic.
+
+Fourth, a \(\mathbb Q(i)\) Dedekind-zeta calibration remains only a modeling direction. It requires a source-owned prime-ideal rule, including norm multiplicities and split, inert, and ramified behavior under rational-prime push-forward. No such map appears here. Nothing provides evidence for Riemann-zeta zeros.
+
+Finally, this is not a nonexistence theorem for all arithmetic encodings of Bianchi geodesics. It rules out the frozen scalar mechanism and quantifies one first-order refinement. Ideal-valued holonomy data, Hecke correspondences, and geometric transfer operators remain outside the tested hypothesis.
+
+\section{Conclusion}
+
+Normalized trace divisibility at Gaussian level three is exact but universal: determinant one forces the same identity in every commutative principal-congruence setting with a cancellable level. Established components such as determinant expansion, first congruence quotients, and trace-power recurrences are not claimed as separate novelties; the contribution is their explicit control-side synthesis with signed level-subgroup jet laws, a replayable exact certificate, and a conservative owner boundary. On the frozen loxodromic matrix rows the first jet raises the descriptor count from \(144\) to \(508\) and reduces the largest bucket from \(208\) to \(84\), yet leaves \(10{,}468\) joint collision rows and no singleton bucket. This is bounded validation of matrix compression, not a primitive-owner result. Exact controls stop \(D_9\) as a Gaussian-specific owner mechanism, but canonical coverage remains two of three because the predeclared matched-distribution noncongruence ensemble has not been run. The full Bianchi flow remains unassigned, the Route-A tuple remains exploratory with \(A2\)--\(A4\) failed, and Route B is unused. The next meaningful work is to execute the missing control and separately construct a source-derived ideal-valued refinement and complete owner ledger before any transfer, determinant, Euler, or spectral claim.
+
+The fresh source-evidence audit binds this novelty allocation to exact primary-record locators while explicitly declining an exhaustive-priority conclusion. It changes neither the theorem nor any scientific value, owner boundary, initial flow restriction, or Route verdict.
+
+\section*{Declarations}
+\subsection*{Funding}
+The author received no funding for this work.
+\subsection*{Conflict of Interest}
+The author declares no conflicts of interest.
+\subsection*{Author contributions}
+Liang Wang: Conceptualization; Methodology; Software; Validation; Formal analysis; Investigation; Data curation; Writing---original draft; Writing---review and editing; Visualization; Project administration.
+\subsection*{Data and code availability}
+All frozen inputs, exact ledgers, validation records, source code, unit tests, and verify-only reproduction scripts supporting this study are in the accompanying repository under \texttt{papers/24-bianchi-holonomy-flow/}. No restricted, personal, or proprietary dataset was used. Artifact hashes and commands are recorded in \texttt{paper/stage2\_manuscript\_audit.md}.
+\subsection*{Ethics statement}
+This theoretical and computational study involved no human participants, personal data, animals, clinical interventions, or biological materials. Institutional ethics approval and informed consent were not applicable.
+\subsection*{AI-Assisted Research Disclosure}
+Generative-AI tools assisted language drafting, LaTeX preparation, code-oriented consistency checks, and manuscript-structure review. The author directed the research, fixed the claim boundary, inspected derivations and artifacts, verified cited sources, and accepts full responsibility for accuracy and integrity. No AI system is listed as an author.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}
