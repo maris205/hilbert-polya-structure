@@ -4,7 +4,21 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+- Current pipeline: **Round 9 — STAGE 5 IN PROGRESS / FORMAT PREFLIGHT PASS /
+  ONE SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was
+  transferred to `stage5_finalization/manuscript.tex` by removing exactly 125
+  standalone ARS block-marker lines and no other source bytes. The accepted
+  bibliography and 16-page content proof were copied byte-identically. The
+  isolated LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX build returns `0,0,0,0`, all
+  8 citation contexts resolve to 7 bibliography entries, the formatter and
+  declaration hard gates pass, and both ordinary and layout `pdftotext`
+  outputs exactly equal the accepted proof. Pandoc is recorded as lossy, so
+  LaTeX remains authoritative. No final `paper.pdf` exists; canonical content,
+  results, the initial dynamical object, and the Route tuple are unchanged.
+  See the [entry decision](notes/stage5_entry_decision_20260831.md),
+  [content preflight](notes/stage5_content_preflight.md), and
+  [content proof](stage5_finalization/content_proof.pdf).
+- Previous Stage-4.5 checkpoint: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
   MANDATORY CONFIRMATION PENDING**. The final audit verifies 7/7 references,
   8/8 citation contexts, 93 `ALL` claims, and 97/97 exact tuples (93 local plus
   four external), with zero missing or anchorless rows. Dual-lane originality
@@ -12,7 +26,8 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
   are `CLEAR`, E6 is empty, 84/84 unit tests and the 18/18 plus 10/10 replay
   scopes pass, and the isolated preview is 16 pages. See the
   [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
-  Canonical outputs and the Route tuple are unchanged; Stage 5 has not started.
+  Canonical outputs and the Route tuple were unchanged; Stage 5 had not started
+  at that checkpoint.
 - Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE /
   AUTHOR CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
   `REV-02` and `REV-04` residuals were applied by a 9-operation Patch 1.1;

@@ -2,16 +2,23 @@
 
 ## Current status
 
-- Current pipeline: **ROUND 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
-  MANDATORY CONFIRMATION PENDING**. The final audit verifies 6/6 references,
-  9/9 citation contexts, 95 `ALL` claims, and 104/104 exact tuples (95 local
-  plus nine external), with zero missing or anchorless rows. Originality
-  coverage is 44/77 and all 5/5 changed paragraphs; all seven failure modes
-  are `CLEAR`, E6 is empty, 108/108 unit tests and the Round-3--8 two-run
-  replays pass, and the isolated preview is 14 pages. See the
-  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
-  Canonical outputs and the formal Route state are unchanged; Stage 5 has not
-  started.
+- Current pipeline: **ROUND 9 — STAGE 5 IN PROGRESS / AWAITING ONE CONTENT
+  CONFIRMATION**. The accepted Stage-4.5 Round-2 audit remains `PASS` at 6/6
+  references, 9/9 citation contexts, 95 `ALL` claims, and 104/104 exact
+  evidence tuples. The Stage-5 formatter removed only 127 standalone ARS block
+  markers, producing
+  [the finalization source](stage5_finalization/manuscript.tex), SHA-256
+  `14ad8eeaa7cdd55bc889adc250630a7b18a9e20e316d4fb6becddb9e05922d22`;
+  the bibliography and 14-page
+  [content proof](stage5_finalization/content_proof.pdf) are byte-identical to
+  their accepted inputs. The isolated LuaLaTeX/BibTeX replay, citation/bib
+  hard gate, 16/16 declaration gate, and `pdftotext -layout` equivalence all
+  pass. Pandoc is recorded as lossy and is not promoted. See the
+  [Stage-5 content preflight](notes/stage5_content_preflight.md) and
+  [build receipt](notes/stage5_preflight_build_receipt.json). Scientific,
+  declaration, Route, subtype, canonical source/result, and bibliography
+  content remain unchanged. `stage5_finalization/paper.pdf` has not been
+  created and is gated on one explicit scholar content confirmation.
 - Previous Stage-4′ checkpoint: **STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE — MANDATORY SCHOLAR
   CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual `REV-02` is `RESOLVED`
   by the exactly authorized `B0048/replace_block` operation. All **14/14

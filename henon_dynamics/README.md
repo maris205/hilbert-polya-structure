@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C264--C268
+
+This round changes mathematical owner in every paper and takes one complete
+theorem-scale step in each: a finite-group power map, a self-exciting point
+process, a local-time interface diffusion, a quantum tight-binding lattice,
+and a relativistic Lorentz flow.  Each manuscript closes its full declared
+parameter and boundary atlas; the five papers are independent rather than
+installments of one calculation.
+
+- [C264 finite-abelian power-map functional graph and Koopman Jordan atlas](henon_finite_abelian_power_map_route_a/README.md) · [paper PDF](henon_finite_abelian_power_map_route_a/paper/main.pdf)
+- [C265 exponential-Hawkes stationary, covariance and cluster atlas](henon_exponential_hawkes_stationary_route_a/README.md) · [paper PDF](henon_exponential_hawkes_stationary_route_a/paper/main.pdf)
+- [C266 skew-Brownian interface semigroup, exit and occupation atlas](henon_skew_brownian_interface_route_a/README.md) · [paper PDF](henon_skew_brownian_interface_route_a/paper/main.pdf)
+- [C267 Wannier--Stark Bloch oscillation and Schatten atlas](henon_wannier_stark_bloch_route_a/README.md) · [paper PDF](henon_wannier_stark_bloch_route_a/paper/main.pdf)
+- [C268 constant electromagnetic Lorentz-flow invariant-plane atlas](henon_constant_em_lorentz_flow_route_a/README.md) · [paper PDF](henon_constant_em_lorentz_flow_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C264_C268.md),
+[batch plan](BATCH_PLAN_C264_C268.md), and
+[batch review](BATCH_REVIEW_C264_C268.md) for collision screening, frozen
+theorem contracts, exact evidence, validation and PDF receipts.  Across the
+five packages the round closes
+245,718 independent-checker assertions, 2,736 symbolic checks, 121/121
+hostile rejections, 135 manifest payloads (140 physical files), and 12
+final-paper pages with 103 embedded/subset font records.  C265--C268 are
+`ROUTE_A_REJECTED`; C264 reaches only `ROUTE_A_PARTIAL` through its weak
+finite-group arithmetic and complete source-local zeta/Koopman atlas.  Route B
+is disabled and the common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  No target
+arithmetic local data, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, Hilbert--Pólya operator, or
+Route-B input is claimed.
+
+Final PDF SHA-256 values, in order C264--C268, are
+`d3d604ea273a27c1286463b23e07ab7bda78895fd5d998a281800343a2aefc3a`,
+`3c0283170bb6cf7d807e53fbcd814b268c59670649726200e0dcc9d44a98bc24`,
+`eaeabde91cd9e40e80222a85e913e0706c1a9d0a548318d09a054b515a928ca3`,
+`83c5a7eb7e17e770251ed769104c287e912f5a0909d8092e0926f42f472b3862`,
+and `1076dfc4469cd42aa86a2addc1bd757ebb5139d2b633d5c1a7c761bcf0db180a`.
+
 ## Route-A independent cross-subtype round C259--C263
 
 This round changes mathematical owner in every paper: a nonlinear

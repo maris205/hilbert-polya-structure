@@ -4,17 +4,20 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
-  MANDATORY CONFIRMATION PENDING**. The final Mode-2 audit closes 7/7 current
-  references, 9/9 citation contexts, 98 `ALL` registry claims, and 107/107
-  exact source-bound evidence tuples with zero missing or anchorless rows.
-  Dual-lane originality checks cover 45/85 body paragraphs and all 35/35
-  Stage-4/4′ changed paragraphs; all seven ARS failure modes are `CLEAR`, E6
-  has zero findings, 81/81 unit tests plus 10/10 derivative replay pass, and
-  the isolated preview is 15 pages. See the
-  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
-  Canonical source/bib/PDF/results and the Route tuple are unchanged; Stage 5
-  has not started.
+- Current pipeline: **Round 9 — STAGE 5 FORMAT-ONLY PREFLIGHT PASS / ONE
+  SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was copied
+  into the Stage-5 workspace with exactly 121 standalone ARS block-marker lines
+  removed; the seven-entry bibliography and 15-page content proof are
+  byte-identical copies of their accepted inputs. The isolated
+  LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX replay exits cleanly, closes all 9 citation
+  contexts and 7 keys, and has byte-identical `pdftotext -layout` output to the
+  content proof. The formatter refusal scan is clean. Pandoc conversion is
+  withheld as lossy and non-authoritative. See the
+  [content preflight](notes/stage5_content_preflight.md),
+  [input manifest](notes/stage5_input_manifest.json), and
+  [content proof](stage5_finalization/content_proof.pdf). No final `paper.pdf`
+  has been created; canonical source/bib/PDF/results, the frozen dynamical
+  system, and Route tuple remain unchanged.
 - Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
   CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
   `REV-001` and `REV-003` residuals were applied by a 10-operation Patch 1.1;

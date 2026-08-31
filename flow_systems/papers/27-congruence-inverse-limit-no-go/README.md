@@ -4,7 +4,22 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+- Current pipeline: **Round 9 — STAGE 5 IN PROGRESS / FORMAT PREFLIGHT PASS /
+  ONE SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was
+  transferred to `stage5_finalization/manuscript.tex` by removing exactly 110
+  standalone ARS block-marker lines and no other source bytes. The accepted
+  bibliography and 13-page content proof were copied byte-identically. The
+  isolated LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX build returns `0,0,0,0`, all
+  5 citation contexts resolve to 5 bibliography entries, the formatter and
+  declaration hard gates pass, and both ordinary and layout `pdftotext`
+  outputs exactly equal the accepted proof. Pandoc is recorded as lossy, so
+  LaTeX remains authoritative. No final `paper.pdf` exists; canonical content,
+  results, the two initial dynamical objects, and both rejected Route tuples
+  are unchanged. See the
+  [entry decision](notes/stage5_entry_decision_20260831.md),
+  [content preflight](notes/stage5_content_preflight.md), and
+  [content proof](stage5_finalization/content_proof.pdf).
+- Previous Stage-4.5 checkpoint: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
   MANDATORY CONFIRMATION PENDING**. The final audit verifies 5/5 references,
   5/5 citation contexts, 87 `ALL` claims, and 87/87 exact local evidence tuples
   with zero missing or anchorless rows. Originality coverage is 39/78 and all
@@ -13,8 +28,8 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
   `CLEAR`, E6 is empty, 61/61 unit tests plus 12/12 Round-8 replay pass, and the
   isolated preview is 13 pages. See the
   [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
-  Both rejected Route tuples and all canonical outputs are unchanged; Stage 5
-  has not started.
+  Both rejected Route tuples and all canonical outputs were unchanged; Stage 5
+  had not started at that checkpoint.
 - Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
   MANDATORY SCHOLAR CONFIRMATION BEFORE STAGE 4.5**. P27's sole residual
   `REV-03` is `RESOLVED` by the three exactly authorized replacements at

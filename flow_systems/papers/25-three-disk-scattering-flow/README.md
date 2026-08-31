@@ -4,17 +4,22 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
-  MANDATORY CONFIRMATION PENDING**. The corrected derived bibliography has now
-  passed a new from-scratch audit: 8/8 references, 13/13 citation contexts,
-  114 `ALL` claims, and 127/127 exact source-bound evidence tuples, with zero
-  missing or anchorless rows. Originality coverage is 45/74 and all 17/17
-  changed paragraphs; all seven failure modes are `CLEAR`, E6 is empty, the
-  environment-locked suite passes 75/75, both 2,241-row replays agree, and the
-  isolated preview is 13 pages. The linked 1989 erratum was checked and does
-  not alter the two bounded determinant contexts. See the
-  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
-  The canonical bibliography remains frozen; Stage 5 has not started.
+- Current pipeline: **Round 9 — STAGE 5 FORMAT-ONLY PREFLIGHT PASS / ONE
+  SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was copied
+  into the Stage-5 workspace with exactly 116 standalone block-marker lines
+  and eight inline ARS provenance comments removed; all remaining bytes are
+  preserved. The accepted corrected derived eight-entry bibliography and
+  13-page content proof are byte-identical copies. The isolated
+  LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX replay exits cleanly, closes all 13 citation
+  contexts and 8 keys, and has byte-identical `pdftotext -layout` output to the
+  proof; therefore comment removal has no rendered-text effect. The formatter
+  refusal scan is clean, while Pandoc conversion is withheld as lossy and
+  non-authoritative. See the
+  [content preflight](notes/stage5_content_preflight.md),
+  [input manifest](notes/stage5_input_manifest.json), and
+  [content proof](stage5_finalization/content_proof.pdf). No final `paper.pdf`
+  has been created; canonical bibliography/source/PDF/results, the frozen
+  no-eclipse system, and Route tuples remain unchanged.
 - Previous correction checkpoint: **Round 9 — STAGE 4.5 EXACT BIBLIOGRAPHY CORRECTION APPLIED /
   BOUNDED REVALIDATION COMPLETE / FRESH FULL GATE PENDING**. The fresh Round-1 audit verifies
   **8/8 reference identities** and **13/13 citation contexts**, registers
