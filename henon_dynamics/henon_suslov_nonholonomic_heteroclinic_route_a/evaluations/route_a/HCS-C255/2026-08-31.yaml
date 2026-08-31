@@ -1,0 +1,53 @@
+schema: hcs-route-a-evaluation-v1
+candidate_id: HCS-C255
+title: Suslov heteroclinics and clean periodic SO(3) rotations
+evaluation_date: 2026-08-31
+fixed_epoch: 1788048000
+source_commit: b89544f1f7b1043f4158dfdf9db77787b332f146
+code_commit: b89544f1f7b1043f4158dfdf9db77787b332f146
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+route: A
+route_a_tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+route_b_invocation_allowed: false
+candidate_definition: "classical Euler-Poincare-Suslov rigid body with omega_3=0"
+family: nonholonomic rigid-body flow
+phase_space: "SO(3) x R^2 constrained angular velocities"
+dynamics: "I omega_dot=(I omega) cross omega+lambda e3; omega3=0"
+parameters: "positive-definite inertia; positive energy plus explicit zero faces"
+parameter_provenance: mechanical inertia entries; no target fitting
+arithmetic_origin: none
+clock: physical rigid-body time
+normalization: "u=sqrt(I1)omega1, v=sqrt(I2)omega2"
+determinant_convention: none
+orbit_cutoff: "none; all permanent rotations and both heteroclinic components are classified"
+precision: exact rational square/coefficient receipts and symbolic identities
+training_data: none
+forbidden_data: "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisors, functional equations, Hilbert--Polya operators"
+artifact_paths:
+  evidence: results/c255_suslov_evidence.json
+  theorem: THEOREM_PACKAGE.md
+  paper: paper/main.pdf
+claims:
+  reduced_atlas: "Every generic positive energy ellipse has two endpoints and two explicit heteroclinics."
+  clean_periodic_reconstruction: "Every nonzero endpoint reconstructs as a clean periodic SO(3) rotation family."
+  poisson_measure: "The reduced bracket is exact and the half-plane density is invariant but singular."
+  boundaries: "Principal-axis, one-zero, zero-energy and singular-inertia faces are separate."
+adversarial_controls:
+  missing_periodic_family: "A mutation denying generic clean periodic rotations must fail."
+  isolated_orbit_overclaim: "Clean continua are not counted as isolated primitive orbits."
+  changed_clock: "No Hamiltonized or quantized auxiliary clock is substituted for physical time."
+validation:
+  producer: PASS
+  independent_checker: PASS
+  sympy: PASS
+  byte_replay: PASS
+  hostile_mutation: PASS
+  pdf_build: PASS
+blocking_conditions:
+  - "A0 arithmetic origin is absent."
+  - "A1 periodic rotations are clean continua without arithmetic labels."
+  - "The singular reduced bracket is not a target determinant or same-clock self-adjoint operator."
+next_smallest_test: "A new source-native discrete arithmetic owner would have to clear A0 first."
+claim_boundary: "Source-local nonholonomic theorem; no target quantization or arithmetic determinant."

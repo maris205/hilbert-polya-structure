@@ -1,0 +1,199 @@
+\pdfvariable suppressoptionalinfo 611
+\pdfvariable trailerid {[<C2572026083100000000000000000000><C2572026083100000000000000000000>]}
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=17mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\C}{\mathbb C}
+\newcommand{\PP}{\mathbb P^1(\C)}
+\newcommand{\AM}{\mathrm{AM}}
+\title{Global Quadratic Newton Dynamics through the Cayley Coordinate}
+\author{HCS Research Program}
+\date{31 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+For Newton iteration of \(p_a(z)=z^2-a^2\), \(a\ne0\), we take an all-state
+step: a Cayley coordinate conjugates the rational map on the Riemann sphere
+exactly to squaring.  This yields both root basins, their Julia boundary,
+double-exponential error identities, and a complete periodic/preperiodic
+classification.  A root of unity of order \(2^e q\), \(q\) odd, has exact
+tail \(e\) and eventual period \(\operatorname{ord}_q(2)\).  We also derive all
+multipliers, \(\#\operatorname{Fix}(N_a^n)=2^n+1\),
+\(\zeta_{\AM}(t)=((1-t)(1-2t))^{-1}\), and the invariant Cauchy law on the
+Julia line.  Exact independent checks cover 16 periods, 128 root orders, and
+41 hostile mutations.  The result is source-local complex dynamics, with no
+arithmetic, target-determinant, or Hilbert--Pólya claim.
+\end{abstract}
+
+\section{Frozen Newton family and global coordinate}
+For \(a\in\C^*\), let
+\begin{equation}
+ p_a(z)=z^2-a^2,\qquad
+ N_a(z)=z-\frac{p_a(z)}{p_a'(z)}=\frac{z^2+a^2}{2z}
+ \label{eq:newton}
+\end{equation}
+act on \(\PP\).  The clock is the Newton iterate \(n\ge0\).  Introduce
+\begin{equation}
+ C_a(z)=\frac{z-a}{z+a},\qquad
+ C_a^{-1}(w)=a\frac{1+w}{1-w}.
+ \label{eq:cayley}
+\end{equation}
+Direct cancellation gives the decisive identity
+\begin{equation}
+ C_a\!\left(N_a(z)\right)=C_a(z)^2,
+ \qquad C_a\!\left(N_a^n(z)\right)=C_a(z)^{2^n}.
+ \label{eq:conjugacy}
+\end{equation}
+Thus the statement below is global on the sphere; it is not a local
+convergence estimate inferred from samples.
+
+\begin{theorem}[global basin and error atlas]
+The basins of \(+a\) and \(-a\) are
+\begin{align}
+ \mathcal B(+a)&=\{z:|C_a(z)|<1\}=\{z:\Re(z/a)>0\},\\
+ \mathcal B(-a)&=\{z:|C_a(z)|>1\}=\{z:\Re(z/a)<0\}.
+\end{align}
+Their common boundary
+\(J(N_a)=\{\Re(z/a)=0\}\cup\{\infty\}\) is the Julia set.  If
+\(w=C_a(z)\), then in the plus basin
+\begin{equation}
+ N_a^n(z)-a=\frac{2a w^{2^n}}{1-w^{2^n}}.
+ \label{eq:pluserror}
+\end{equation}
+If \(v=w^{-1}\), then in the minus basin
+\begin{equation}
+ N_a^n(z)+a=-\frac{2a v^{2^n}}{1-v^{2^n}}.
+ \label{eq:minuserror}
+\end{equation}
+\end{theorem}
+
+\paragraph{Proof.}
+The inequalities are \(|z-a|<|z+a|\) and its reverse, which are equivalent
+to the sign of \(\Re(z/a)\).  The unit circle is the Julia set of \(w^2\), so
+its inverse Cayley image is the displayed generalized line.  Substituting
+\(w^{2^n}\) into \(C_a^{-1}\) proves
+(\ref{eq:pluserror})--(\ref{eq:minuserror}).
+
+\section{Every periodic orbit and the dynamical zeta}
+Write \(D(w)=w^2\).  The equation \(D^n(w)=w\) contains \(0\), \(\infty\),
+and the \(2^n-1\) roots of \(w^{2^n-1}=1\).  Hence
+\begin{equation}
+ F_n=\#\operatorname{Fix}(N_a^n)=2^n+1,
+ \quad P_n=\sum_{d\mid n}\mu(n/d)(2^d+1),
+ \quad O_n=P_n/n.
+ \label{eq:counts}
+\end{equation}
+Here \(P_n\) and \(O_n\) count exact-period points and primitive cycles.
+The two root fixed points are superattracting.  At any Julia point of exact
+period \(n\),
+\((D^n)'(w)=2^n w^{2^n-1}=2^n\), so every such cycle is repelling and its
+multiplier is exactly \(2^n\).  Therefore
+\begin{equation}
+ \zeta_{\AM}(t)=\exp\!\left(\sum_{n\ge1}\frac{F_n}{n}t^n\right)
+ =\frac{1}{(1-t)(1-2t)}.
+ \label{eq:zeta}
+\end{equation}
+
+\ifnum\CRevisionRound>0
+\section{Exact tails and the invariant failure-line law}
+The count formula does not by itself classify strictly preperiodic points.
+Equation (\ref{eq:conjugacy}) supplies the missing global statement.
+\begin{theorem}[complete preperiodic classification]
+Apart from \(w=0,\infty\), a point is preperiodic if and only if \(w\) is a
+root of unity.  If its order is
+\(m=2^e q\) with \(q\) odd, then the exact tail is \(e=v_2(m)\), the landing
+order is \(q\), and the eventual exact period is
+\(\operatorname{ord}_q(2)\), with \(\operatorname{ord}_1(2)=1\).  It is
+periodic precisely when \(e=0\).
+\end{theorem}
+Indeed, each squaring removes exactly one factor \(2\) from the order until
+the odd order \(q\) remains.  Thereafter squaring acts by multiplication by
+\(2\) in \((\mathbb Z/q\mathbb Z)^*\).  Conversely, equality between two
+distinct powers \(w^{2^r}=w^{2^s}\) forces \(w\) to be a root of unity.
+
+On the Julia set write \(w=e^{i\theta}\) and
+\begin{equation}
+ z=ia s,\qquad s=\cot(\theta/2).
+\end{equation}
+Normalized Haar measure becomes
+\begin{equation}
+ d\nu(s)=\frac{ds}{\pi(1+s^2)},
+ \label{eq:cauchy}
+\end{equation}
+and angle doubling becomes the rational map
+\begin{equation}
+ s\longmapsto\frac{s^2-1}{2s}.
+ \label{eq:boundary}
+\end{equation}
+Thus \(\nu\) is invariant and mixing, and the Lyapunov exponent in the
+Cayley angle is \(\log2\).  In Newton language, the basin-separating line
+carries an exact Cauchy statistical law rather than convergence to a root.
+
+\paragraph{Parameter boundaries.}
+Scale covariance is \(N_a(au)=aN_1(u)\), and replacing \(a\) by \(-a\)
+exchanges the root labels.  At \(a=0\), however, \(N_0(z)=z/2\) for finite
+\(z\): the rational degree drops from two to one.  The degree-two theorem is
+not extended silently across this face.
+\fi
+
+\ifnum\CRevisionRound=1
+\paragraph{Exact receipt.}
+The canonical JSON records periods \(1\) through \(16\), root-of-unity orders
+\(1\) through \(128\), ten exact real basin rows, and eight rational Cauchy
+rows.  The producer-independent checker reconstructs all integer formulas;
+SymPy separately verifies the rational conjugacy, error identities,
+multipliers, boundary map, and zeta coefficients.  These finite rows are
+regression probes for the analytic theorem, not its proof.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Independent gates, collision control, and route boundary}
+The checker passes 1317 assertions.  A separate SymPy program passes 88
+identities, clean-process evidence replay is byte-identical, and all 41
+repaired-hash hostile mutations are rejected.  Three revision PDFs are built
+twice under a fixed epoch and checked for embedded subset fonts, clean logs,
+extractable text, and visual integrity.
+
+The ownership boundary is explicit.  C141 concerns the Hardy-space
+inverse-branch Ruelle operator for \(z^2-6\), not Newton root basins.  C177
+concerns Wold and Sobolev mixing for every expanding circle degree, not the
+Newton sphere, root errors, or exact even-order tail.  C257 does not claim
+either neighboring operator theorem; this is workspace bookkeeping, not a
+literature-priority claim.
+
+The locked scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  Formula
+(\ref{eq:zeta}) is the generic degree-two source dynamical zeta, not an
+arithmetic Euler product.  There is no prime carrier, logarithmic prime clock,
+arithmetic local datum, root number, automorphy statement, target divisor or
+functional equation, target determinant, or Hilbert--Pólya operator.  The
+strict tuple is
+\texttt{(A0\_FAIL,A1\_WEAK,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)}, the
+overall verdict is \texttt{ROUTE\_A\_REJECTED}, and Route B is false.
+\fi
+
+\section{Conclusion}
+One Möbius conjugacy closes an unusually broad dynamical ledger: global root
+selection, exact quadratic error at every iterate, all periodic and
+preperiodic points and multipliers, primitive counts, zeta, and the invariant
+law on the failure line.  The same completeness sharpens the obstruction:
+the formulas are universal for quadratic Newton maps with two simple roots
+and do not single out arithmetic primes or a target spectrum.  No statement
+for cubic or higher-degree Newton maps is inferred.
+
+\begin{thebibliography}{9}
+\bibitem{Cayley1879} A.~Cayley, ``Desiderata and Suggestions: No.~3. The
+Newton--Fourier Imaginary Problem,'' \emph{American Journal of Mathematics}
+2 (1879), 97, DOI
+\href{https://doi.org/10.2307/2369201}{10.2307/2369201}.
+\bibitem{ArtinMazur1965} M.~Artin and B.~Mazur, ``On Periodic Points,''
+\emph{Annals of Mathematics} 81 (1965), 82--99,
+\href{https://www.jstor.org/stable/1970384}{JSTOR 1970384}.
+\end{thebibliography}
+\end{document}

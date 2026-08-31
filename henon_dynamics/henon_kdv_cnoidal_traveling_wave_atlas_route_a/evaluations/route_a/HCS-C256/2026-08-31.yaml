@@ -1,0 +1,190 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+schema: hcs-route-a-evaluation-v2
+candidate_id: HCS-C256
+candidate_definition: root-complete bounded traveling-wave atlas for the plus-sign KdV equation
+family: KDV-CNOIDAL-SOLITON-DISPERSIVE-PDE
+phase_space: real bounded classical profiles U(x-c*t) on R and their fundamental circles
+dynamics: u_t+6*u*u_x+u_xxx=0
+parameters: real cubic roots and their double/triple-root faces
+parameter_provenance: exact first-integral roots; twelve rational-root rows are local regression controls
+arithmetic_origin: NONE; continuously tunable wave roots and periods
+clock: physical PDE time t; T=L/abs(c) only for c!=0 on the fundamental circle
+normalization: plus-sign KdV convention and cn^2 modulus m=(r3-r2)/(r3-r1)
+determinant_convention: NONE_BY_DESIGN_NO_TARGET_DETERMINANT
+orbit_cutoff: twelve periodic root rows plus soliton, harmonic, and Galilean controls; not a full-PDE orbit census
+precision: exact symbolic identities and 90-decimal elliptic/quadrature controls
+training_data: none; analytic classification plus source-local regression receipt
+forbidden_data: target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor, target determinant, Hilbert--Polya operators
+source_commit: b89544f1f7b1043f4158dfdf9db77787b332f146
+code_commit: b89544f1f7b1043f4158dfdf9db77787b332f146
+evaluation_date: 2026-08-31
+fixed_epoch: 1788048000
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_paths:
+  - results/c256_kdv_evidence.json
+  - code/c256_kdv_checker.py
+  - code/c256_kdv_sympy_crosscheck.py
+  - code/c256_kdv_replay.py
+  - code/c256_kdv_mutation.py
+  - paper/main.pdf
+route_b_invocation_allowed: false
+route_a_tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+
+source_lock:
+  object: >-
+    Bounded classical traveling profiles of u_t+6*u*u_x+u_xxx=0,
+    parameterized by the real roots of their cubic first integral.
+  arithmetic_origin: NONE
+  clock: physical PDE time; the circle return is L/abs(c), with c=0 stationary
+  normalization: cn^2 uses fundamental period 2K and the frozen plus-sign convention
+  determinant_convention: NONE_BY_DESIGN_NO_TARGET_DETERMINANT
+  cutoff: finite root and boundary controls; the continuum statement is proof-driven
+  precision: EXACT_RATIONAL_SYMBOLICS_AND_90_DECIMAL_QUADRATURE
+  allowed_data: frozen equation, cubic roots, elliptic integrals, exact identities, and local controls
+  forbidden_data: prime tables, zero tables, target fitting, local factors, root numbers, automorphy, target determinant, or Hilbert--Polya operator
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the equation and root parameters are source-defined and use no target or arithmetic table
+  strongest_failure: continuously variable cubic roots produce no intrinsic rational-prime owner, prime-power law, logarithmic clock, or von Mangoldt weight
+  arithmetic_controls:
+    - Galilean neighboring-root shifts
+    - soliton, harmonic, stationary, and constant boundary faces
+    - no-prime/no-zero data split
+    - finite controls compared with the analytic theorem rather than a target
+  artifacts:
+    - results/c256_kdv_evidence.json
+    - SOURCE_AUDIT.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every bounded traveling profile and every periodic circle return within the declared coherent family is classified analytically
+  strongest_failure: coherent traveling waves are not a complete primitive-periodic-orbit census of the full KdV phase space and carry no arithmetic labels
+  metrics:
+    root_topologies: all cubic real-root multiplicity faces
+    periodic_family: three-simple-root cn^2 profiles
+    homoclinic_family: lower-double-root sech^2 profiles
+    finite_periodic_rows: 12
+    monodromy_census: not_claimed
+  artifacts:
+    - results/c256_kdv_evidence.json
+    - THEOREM_PACKAGE.md
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the source-local first integral, periods, moments, and circle returns are exact
+  strongest_failure: no weighted dynamical zeta, Fredholm determinant, target divisor, or sealed zero comparison is defined
+  metrics:
+    zero_error_train: not_applicable_no_determinant
+    zero_error_validation: not_applicable_no_determinant
+    zero_error_test: not_applicable_no_determinant
+    cutoff_drift: finite_regression_only
+    precision_drift: bounded_by_exact_and_90_decimal_crosschecks
+    control_margin: no arithmetic selectivity is claimed
+  artifacts:
+    - results/c256_kdv_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the root classification, elliptic moments, degenerations, and covariance are exact source-local identities
+  strongest_failure: no target continuation, divisor, functional equation, counting law, explicit formula, or Weil compression is constructed
+  analytic_structure: bounded coherent-family classification only
+  weil_compression: absent
+  artifacts:
+    - THEOREM_PACKAGE.md
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: HEURISTIC
+  strongest_evidence: KdV has a source-native Lax spectral formalism and a coherent classical field phase space
+  strongest_failure: the auxiliary Lax operator is not a target quantization and no same-clock Hilbert--Polya spectral bridge is defined
+  metrics:
+    source_native_lax_hint: true
+    target_quantization: false
+    same_clock_target_operator: absent
+    route_b_entry: false
+  artifacts:
+    - SOURCE_AUDIT.md
+
+adversarial_controls:
+  controls_used:
+    - all cubic-root multiplicity faces
+    - Galilean neighboring-root shifts
+    - 2K-versus-4K period and c=0 clock controls
+    - repaired-hash schema, formula, boundary, citation, and scope mutations
+  proves_too_much_risk: the same elliptic-wave argument applies to continuously many nonarithmetic roots and cannot establish an arithmetic target claim
+  verdict: STOP_SCOPED
+
+claim_boundary: >-
+  C256 classifies bounded KdV traveling profiles and their exact coherent-family
+  periods and moments. It receives no target arithmetic, determinant,
+  automorphy, full-PDE orbit-census, or Hilbert--Polya credit.
+blocking_conditions:
+  - A0 fails because no source-derived arithmetic carrier exists
+  - A1 is only coherent-family weak evidence, not a full primitive orbit census
+  - A2 and A3 have no target determinant or global target analytic structure
+  - A4 is only a source-native Lax hint
+next_smallest_test: >-
+  If pursued, analyze Floquet stability of the same cnoidal family under a
+  separately registered claim; do not infer it from the profile receipt.
+round2_clues:
+  - a finite-gap extension would require a new candidate and a genuine divisor theorem
+  - no Route-B work is authorized by this source-local coherent-family result
+
+references:
+  - key: KortewegDeVries1895
+    doi: 10.1080/14786449508620739
+    url: https://doi.org/10.1080/14786449508620739
+  - key: LeitnerMikikits2014
+    doi: 10.1002/mana.201300233
+    url: https://doi.org/10.1002/mana.201300233
+  - key: Lax1968
+    doi: 10.1002/cpa.3160210503
+    url: https://doi.org/10.1002/cpa.3160210503
+
+evidence:
+  path: results/c256_kdv_evidence.json
+  periodic_row_count: 12
+  soliton_row_count: 3
+  harmonic_row_count: 3
+  galilean_row_count: 6
+  checker_method: endpoint-regularized cubic-root quadrature plus independent cn nodes
+
+analytic_claims:
+  - the cubic root topology exhausts every bounded entire traveling profile
+  - three simple roots give the exact cn^2 profile, period, mean, and mean square
+  - a lower double root gives the sech^2 soliton; the upper double root is a constant/harmonic limit only
+  - Galilean shifts preserve modulus and period and change speed by 6a
+  - c!=0 gives circle period L/abs(c), while c=0 is stationary
+
+failure_boundary:
+  A0: no designated arithmetic-origin object
+  A1: no full KdV primitive-orbit and monodromy census
+  A2: no target determinant or target value match
+  A3: no target analytic or arithmetic-operator theorem
+  A4: formal source Lax hint only
+
+nonclaims:
+  - no classification of arbitrary KdV solutions or every finite-gap solution
+  - no nonlinear, orbital, or spectral stability theorem
+  - no prime/zero table, Euler factor, root number, automorphy, or Hilbert--Polya operator
+  - no target divisor, functional equation, determinant, or zero match
+  - no literature-priority claim
+
+scope_flags:
+  uses_target_zero_table: false
+  uses_prime_table: false
+  claims_arithmetic_local_data: false
+  claims_euler_factors: false
+  claims_root_numbers: false
+  claims_automorphy: false
+  claims_target_divisor_or_functional_equation: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false

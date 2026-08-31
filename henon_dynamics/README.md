@@ -2719,6 +2719,31 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C254--C258
+
+This round again changes mathematical owner in every paper: a Monod
+chemostat, an Euler--Poincare--Suslov nonholonomic rigid body, KdV cnoidal
+traveling waves, quadratic Newton root-finding on the Riemann sphere, and a
+mixed congruential finite-ring map.  Each paper closes one all-parameter
+source theorem and its Route-A boundary; none is an installment of another.
+
+- [C254 Monod chemostat threshold and transient atlas](henon_monod_chemostat_threshold_route_a/README.md) · [paper PDF](henon_monod_chemostat_threshold_route_a/paper/main.pdf)
+- [C255 Suslov nonholonomic heteroclinic and clean-rotation atlas](henon_suslov_nonholonomic_heteroclinic_route_a/README.md) · [paper PDF](henon_suslov_nonholonomic_heteroclinic_route_a/paper/main.pdf)
+- [C256 KdV cnoidal--soliton traveling-wave atlas](henon_kdv_cnoidal_traveling_wave_atlas_route_a/README.md) · [paper PDF](henon_kdv_cnoidal_traveling_wave_atlas_route_a/paper/main.pdf)
+- [C257 quadratic Newton--Cayley global dynamics](henon_quadratic_newton_cayley_global_dynamics_route_a/README.md) · [paper PDF](henon_quadratic_newton_cayley_global_dynamics_route_a/paper/main.pdf)
+- [C258 mixed congruential Hull--Dobell atlas](henon_mixed_lcg_hull_dobell_route_a/README.md) · [paper PDF](henon_mixed_lcg_hull_dobell_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C254_C258.md),
+[batch plan](BATCH_PLAN_C254_C258.md), and
+[batch review](BATCH_REVIEW_C254_C258.md) for collision pivots, theorem
+contracts, exact validation counts, PDF hashes, and content-addressed release
+ledgers.  C254--C257 remain `ROUTE_A_REJECTED`; C258 reaches only
+`ROUTE_A_EXPLORATORY` through an intrinsic but weak prime-power/CRT relation.
+Coordinates stay candidate-local, Route B is disabled, and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local data, Euler factor,
+root number, automorphy object, divisor/counting law or functional equation,
+Hilbert--Pólya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C249--C253
 
 This round switches across five unrelated owners—a smooth Liénard oscillator,

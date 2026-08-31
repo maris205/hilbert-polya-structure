@@ -1,0 +1,1606 @@
+{
+  "candidate_id": "HCS-C257",
+  "citations": [
+    {
+      "claim": "historical quadratic Newton basin problem",
+      "key": "Cayley1879",
+      "source": "A. Cayley, Desiderata and Suggestions: No. 3. The Newton-Fourier Imaginary Problem, American Journal of Mathematics 2 (1879), 97",
+      "url": "https://doi.org/10.2307/2369201"
+    },
+    {
+      "claim": "periodic-point zeta definition",
+      "key": "ArtinMazur1965",
+      "source": "M. Artin and B. Mazur, On Periodic Points, Annals of Mathematics 81 (1965), 82--99",
+      "url": "https://www.jstor.org/stable/1970384"
+    }
+  ],
+  "evaluation_date": "2026-08-31",
+  "evaluator": {
+    "path": "flow_systems/skills/route-a-evaluator.md",
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "exact_identities": [
+    {
+      "formula": "N_a(z)=(z^2+a^2)/(2z) for p_a(z)=z^2-a^2 and a!=0",
+      "identity_id": "newton_map"
+    },
+    {
+      "formula": "C_a(z)=(z-a)/(z+a); C_a^{-1}(w)=a*(1+w)/(1-w)",
+      "identity_id": "cayley"
+    },
+    {
+      "formula": "C_a(N_a(z))=C_a(z)^2 on the Riemann sphere",
+      "identity_id": "conjugacy"
+    },
+    {
+      "formula": "C_a(N_a^n(z))=C_a(z)^(2^n)",
+      "identity_id": "iterate"
+    },
+    {
+      "formula": "B(+a)={z: abs(C_a(z))<1}={z: Re(z/a)>0}",
+      "identity_id": "plus_basin"
+    },
+    {
+      "formula": "B(-a)={z: abs(C_a(z))>1}={z: Re(z/a)<0}",
+      "identity_id": "minus_basin"
+    },
+    {
+      "formula": "J(N_a)={z: abs(C_a(z))=1}={z: Re(z/a)=0} union {infinity}",
+      "identity_id": "julia"
+    },
+    {
+      "formula": "z_n-a=2*a*w_0^(2^n)/(1-w_0^(2^n))",
+      "identity_id": "plus_error"
+    },
+    {
+      "formula": "z_n+a=-2*a*v_0^(2^n)/(1-v_0^(2^n)), v_0=1/w_0",
+      "identity_id": "minus_error"
+    },
+    {
+      "formula": "#Fix(N_a^n)=2^n+1 on the Riemann sphere",
+      "identity_id": "fixed_count"
+    },
+    {
+      "formula": "P_n=sum_{d|n} mobius(n/d)*(2^d+1); primitive cycles=P_n/n",
+      "identity_id": "exact_count"
+    },
+    {
+      "formula": "zeta_AM(t)=exp(sum_{n>=1}(2^n+1)t^n/n)=1/((1-t)*(1-2t))",
+      "identity_id": "am_zeta"
+    },
+    {
+      "formula": "nonzero finite w is periodic iff its root-of-unity order q is odd; period=ord_q(2)",
+      "identity_id": "periodic"
+    },
+    {
+      "formula": "if ord(w)=2^e*q with q odd, exact tail=e and eventual period=ord_q(2), ord_1(2)=1",
+      "identity_id": "preperiodic"
+    },
+    {
+      "formula": "the root cycles have multiplier 0; every Julia cycle of exact period n has multiplier 2^n",
+      "identity_id": "multipliers"
+    },
+    {
+      "formula": "the only critical points are w=0 and w=infinity, corresponding to roots +a and -a",
+      "identity_id": "critical_points"
+    },
+    {
+      "formula": "Haar measure on abs(w)=1 pushes to ds/(pi*(1+s^2)) on z=i*a*s",
+      "identity_id": "cauchy_measure"
+    },
+    {
+      "formula": "on z=i*a*s, N_a gives s maps to (s^2-1)/(2s)",
+      "identity_id": "boundary_map"
+    },
+    {
+      "formula": "the boundary invariant measure is mixing and has Lyapunov exponent log(2) in Cayley angle",
+      "identity_id": "lyapunov"
+    },
+    {
+      "formula": "N_a(a*u)=a*N_1(u); replacing a by -a swaps the two root basins",
+      "identity_id": "scale"
+    },
+    {
+      "formula": "C141 owns a Hardy inverse-branch Ruelle operator for z^2-6, not Newton root basins",
+      "identity_id": "collision_c141"
+    },
+    {
+      "formula": "C177 owns degree-b circle Wold theory; C257 owns the global Newton sphere and root-order tails",
+      "identity_id": "collision_c177"
+    },
+    {
+      "formula": "at a=0 the rational degree drops and N_0(z)=z/2 for finite z",
+      "identity_id": "degenerate_a0"
+    }
+  ],
+  "exact_receipt": {
+    "cauchy_row_count": 8,
+    "cauchy_rows": [
+      {
+        "T(s)=(s^2-1)/(2s)": "-24/7",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "-7"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "-5/12",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "-3/2"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "0",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "-1"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "4/3",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "-1/3"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "-15/8",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "1/4"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "0",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "1"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "21/20",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "5/2"
+      },
+      {
+        "T(s)=(s^2-1)/(2s)": "40/9",
+        "angle_owner": "s=cot(theta/2); theta maps to 2*theta mod 2*pi",
+        "density": "ds/(pi*(1+s^2))",
+        "line_point": "z=i*a*s",
+        "s": "9"
+      }
+    ],
+    "period_row_count": 16,
+    "period_rows": [
+      {
+        "exact_period_points": 3,
+        "fixed_points_on_sphere": 3,
+        "julia_cycle_multiplier": "2",
+        "julia_exact_period_points": 1,
+        "n": 1,
+        "primitive_orbits": 3
+      },
+      {
+        "exact_period_points": 2,
+        "fixed_points_on_sphere": 5,
+        "julia_cycle_multiplier": "4",
+        "julia_exact_period_points": 2,
+        "n": 2,
+        "primitive_orbits": 1
+      },
+      {
+        "exact_period_points": 6,
+        "fixed_points_on_sphere": 9,
+        "julia_cycle_multiplier": "8",
+        "julia_exact_period_points": 6,
+        "n": 3,
+        "primitive_orbits": 2
+      },
+      {
+        "exact_period_points": 12,
+        "fixed_points_on_sphere": 17,
+        "julia_cycle_multiplier": "16",
+        "julia_exact_period_points": 12,
+        "n": 4,
+        "primitive_orbits": 3
+      },
+      {
+        "exact_period_points": 30,
+        "fixed_points_on_sphere": 33,
+        "julia_cycle_multiplier": "32",
+        "julia_exact_period_points": 30,
+        "n": 5,
+        "primitive_orbits": 6
+      },
+      {
+        "exact_period_points": 54,
+        "fixed_points_on_sphere": 65,
+        "julia_cycle_multiplier": "64",
+        "julia_exact_period_points": 54,
+        "n": 6,
+        "primitive_orbits": 9
+      },
+      {
+        "exact_period_points": 126,
+        "fixed_points_on_sphere": 129,
+        "julia_cycle_multiplier": "128",
+        "julia_exact_period_points": 126,
+        "n": 7,
+        "primitive_orbits": 18
+      },
+      {
+        "exact_period_points": 240,
+        "fixed_points_on_sphere": 257,
+        "julia_cycle_multiplier": "256",
+        "julia_exact_period_points": 240,
+        "n": 8,
+        "primitive_orbits": 30
+      },
+      {
+        "exact_period_points": 504,
+        "fixed_points_on_sphere": 513,
+        "julia_cycle_multiplier": "512",
+        "julia_exact_period_points": 504,
+        "n": 9,
+        "primitive_orbits": 56
+      },
+      {
+        "exact_period_points": 990,
+        "fixed_points_on_sphere": 1025,
+        "julia_cycle_multiplier": "1024",
+        "julia_exact_period_points": 990,
+        "n": 10,
+        "primitive_orbits": 99
+      },
+      {
+        "exact_period_points": 2046,
+        "fixed_points_on_sphere": 2049,
+        "julia_cycle_multiplier": "2048",
+        "julia_exact_period_points": 2046,
+        "n": 11,
+        "primitive_orbits": 186
+      },
+      {
+        "exact_period_points": 4020,
+        "fixed_points_on_sphere": 4097,
+        "julia_cycle_multiplier": "4096",
+        "julia_exact_period_points": 4020,
+        "n": 12,
+        "primitive_orbits": 335
+      },
+      {
+        "exact_period_points": 8190,
+        "fixed_points_on_sphere": 8193,
+        "julia_cycle_multiplier": "8192",
+        "julia_exact_period_points": 8190,
+        "n": 13,
+        "primitive_orbits": 630
+      },
+      {
+        "exact_period_points": 16254,
+        "fixed_points_on_sphere": 16385,
+        "julia_cycle_multiplier": "16384",
+        "julia_exact_period_points": 16254,
+        "n": 14,
+        "primitive_orbits": 1161
+      },
+      {
+        "exact_period_points": 32730,
+        "fixed_points_on_sphere": 32769,
+        "julia_cycle_multiplier": "32768",
+        "julia_exact_period_points": 32730,
+        "n": 15,
+        "primitive_orbits": 2182
+      },
+      {
+        "exact_period_points": 65280,
+        "fixed_points_on_sphere": 65537,
+        "julia_cycle_multiplier": "65536",
+        "julia_exact_period_points": 65280,
+        "n": 16,
+        "primitive_orbits": 4080
+      }
+    ],
+    "real_sample_row_count": 10,
+    "real_sample_rows": [
+      {
+        "basin": "root -a",
+        "root_error_coordinate_after_n": "v_n=(1/w_0)^(2^n)",
+        "u=z/a": "-9",
+        "w=(u-1)/(u+1)": "5/4",
+        "w_after_1": "25/16",
+        "w_after_2": "625/256"
+      },
+      {
+        "basin": "root -a",
+        "root_error_coordinate_after_n": "v_n=(1/w_0)^(2^n)",
+        "u=z/a": "-3",
+        "w=(u-1)/(u+1)": "2",
+        "w_after_1": "4",
+        "w_after_2": "16"
+      },
+      {
+        "basin": "root -a",
+        "root_error_coordinate_after_n": "infinity is fixed",
+        "u=z/a": "-1",
+        "w=(u-1)/(u+1)": "infinity",
+        "w_after_1": "infinity",
+        "w_after_2": "infinity"
+      },
+      {
+        "basin": "root -a",
+        "root_error_coordinate_after_n": "v_n=(1/w_0)^(2^n)",
+        "u=z/a": "-1/2",
+        "w=(u-1)/(u+1)": "-3",
+        "w_after_1": "9",
+        "w_after_2": "81"
+      },
+      {
+        "basin": "Julia boundary",
+        "root_error_coordinate_after_n": "no basin contraction",
+        "u=z/a": "0",
+        "w=(u-1)/(u+1)": "-1",
+        "w_after_1": "1",
+        "w_after_2": "1"
+      },
+      {
+        "basin": "root +a",
+        "root_error_coordinate_after_n": "w_n=w_0^(2^n)",
+        "u=z/a": "1/3",
+        "w=(u-1)/(u+1)": "-1/2",
+        "w_after_1": "1/4",
+        "w_after_2": "1/16"
+      },
+      {
+        "basin": "root +a",
+        "root_error_coordinate_after_n": "w_n=w_0^(2^n)",
+        "u=z/a": "1",
+        "w=(u-1)/(u+1)": "0",
+        "w_after_1": "0",
+        "w_after_2": "0"
+      },
+      {
+        "basin": "root +a",
+        "root_error_coordinate_after_n": "w_n=w_0^(2^n)",
+        "u=z/a": "2",
+        "w=(u-1)/(u+1)": "1/3",
+        "w_after_1": "1/9",
+        "w_after_2": "1/81"
+      },
+      {
+        "basin": "root +a",
+        "root_error_coordinate_after_n": "w_n=w_0^(2^n)",
+        "u=z/a": "5",
+        "w=(u-1)/(u+1)": "2/3",
+        "w_after_1": "4/9",
+        "w_after_2": "16/81"
+      },
+      {
+        "basin": "root +a",
+        "root_error_coordinate_after_n": "w_n=w_0^(2^n)",
+        "u=z/a": "13",
+        "w=(u-1)/(u+1)": "6/7",
+        "w_after_1": "36/49",
+        "w_after_2": "1296/2401"
+      }
+    ],
+    "receipt_status": "finite exact regression prefix supporting an all-period analytic theorem",
+    "root_order_row_count": 128,
+    "root_order_rows": [
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 1,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 2,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 2,
+        "landing_order": 3,
+        "odd_part": 3,
+        "root_of_unity_order": 3,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 4,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 4,
+        "landing_order": 5,
+        "odd_part": 5,
+        "root_of_unity_order": 5,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 2,
+        "landing_order": 3,
+        "odd_part": 3,
+        "root_of_unity_order": 6,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 3,
+        "landing_order": 7,
+        "odd_part": 7,
+        "root_of_unity_order": 7,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 8,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 6,
+        "landing_order": 9,
+        "odd_part": 9,
+        "root_of_unity_order": 9,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 5,
+        "odd_part": 5,
+        "root_of_unity_order": 10,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 10,
+        "landing_order": 11,
+        "odd_part": 11,
+        "root_of_unity_order": 11,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 2,
+        "landing_order": 3,
+        "odd_part": 3,
+        "root_of_unity_order": 12,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 13,
+        "odd_part": 13,
+        "root_of_unity_order": 13,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 3,
+        "landing_order": 7,
+        "odd_part": 7,
+        "root_of_unity_order": 14,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 4,
+        "landing_order": 15,
+        "odd_part": 15,
+        "root_of_unity_order": 15,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 16,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 4
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 8,
+        "landing_order": 17,
+        "odd_part": 17,
+        "root_of_unity_order": 17,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 6,
+        "landing_order": 9,
+        "odd_part": 9,
+        "root_of_unity_order": 18,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 18,
+        "landing_order": 19,
+        "odd_part": 19,
+        "root_of_unity_order": 19,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 5,
+        "odd_part": 5,
+        "root_of_unity_order": 20,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 6,
+        "landing_order": 21,
+        "odd_part": 21,
+        "root_of_unity_order": 21,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 10,
+        "landing_order": 11,
+        "odd_part": 11,
+        "root_of_unity_order": 22,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 11,
+        "landing_order": 23,
+        "odd_part": 23,
+        "root_of_unity_order": 23,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 2,
+        "landing_order": 3,
+        "odd_part": 3,
+        "root_of_unity_order": 24,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 20,
+        "landing_order": 25,
+        "odd_part": 25,
+        "root_of_unity_order": 25,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 12,
+        "landing_order": 13,
+        "odd_part": 13,
+        "root_of_unity_order": 26,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 18,
+        "landing_order": 27,
+        "odd_part": 27,
+        "root_of_unity_order": 27,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 3,
+        "landing_order": 7,
+        "odd_part": 7,
+        "root_of_unity_order": 28,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 28,
+        "landing_order": 29,
+        "odd_part": 29,
+        "root_of_unity_order": 29,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 15,
+        "odd_part": 15,
+        "root_of_unity_order": 30,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 5,
+        "landing_order": 31,
+        "odd_part": 31,
+        "root_of_unity_order": 31,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 32,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 5
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 10,
+        "landing_order": 33,
+        "odd_part": 33,
+        "root_of_unity_order": 33,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 8,
+        "landing_order": 17,
+        "odd_part": 17,
+        "root_of_unity_order": 34,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 35,
+        "odd_part": 35,
+        "root_of_unity_order": 35,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 6,
+        "landing_order": 9,
+        "odd_part": 9,
+        "root_of_unity_order": 36,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 36,
+        "landing_order": 37,
+        "odd_part": 37,
+        "root_of_unity_order": 37,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 18,
+        "landing_order": 19,
+        "odd_part": 19,
+        "root_of_unity_order": 38,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 39,
+        "odd_part": 39,
+        "root_of_unity_order": 39,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 5,
+        "odd_part": 5,
+        "root_of_unity_order": 40,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 20,
+        "landing_order": 41,
+        "odd_part": 41,
+        "root_of_unity_order": 41,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 6,
+        "landing_order": 21,
+        "odd_part": 21,
+        "root_of_unity_order": 42,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 14,
+        "landing_order": 43,
+        "odd_part": 43,
+        "root_of_unity_order": 43,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 10,
+        "landing_order": 11,
+        "odd_part": 11,
+        "root_of_unity_order": 44,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 45,
+        "odd_part": 45,
+        "root_of_unity_order": 45,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 11,
+        "landing_order": 23,
+        "odd_part": 23,
+        "root_of_unity_order": 46,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 23,
+        "landing_order": 47,
+        "odd_part": 47,
+        "root_of_unity_order": 47,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 2,
+        "landing_order": 3,
+        "odd_part": 3,
+        "root_of_unity_order": 48,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 4
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 21,
+        "landing_order": 49,
+        "odd_part": 49,
+        "root_of_unity_order": 49,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 20,
+        "landing_order": 25,
+        "odd_part": 25,
+        "root_of_unity_order": 50,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 8,
+        "landing_order": 51,
+        "odd_part": 51,
+        "root_of_unity_order": 51,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 12,
+        "landing_order": 13,
+        "odd_part": 13,
+        "root_of_unity_order": 52,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 52,
+        "landing_order": 53,
+        "odd_part": 53,
+        "root_of_unity_order": 53,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 18,
+        "landing_order": 27,
+        "odd_part": 27,
+        "root_of_unity_order": 54,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 20,
+        "landing_order": 55,
+        "odd_part": 55,
+        "root_of_unity_order": 55,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 3,
+        "landing_order": 7,
+        "odd_part": 7,
+        "root_of_unity_order": 56,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 18,
+        "landing_order": 57,
+        "odd_part": 57,
+        "root_of_unity_order": 57,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 28,
+        "landing_order": 29,
+        "odd_part": 29,
+        "root_of_unity_order": 58,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 58,
+        "landing_order": 59,
+        "odd_part": 59,
+        "root_of_unity_order": 59,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 15,
+        "odd_part": 15,
+        "root_of_unity_order": 60,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 60,
+        "landing_order": 61,
+        "odd_part": 61,
+        "root_of_unity_order": 61,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 5,
+        "landing_order": 31,
+        "odd_part": 31,
+        "root_of_unity_order": 62,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 6,
+        "landing_order": 63,
+        "odd_part": 63,
+        "root_of_unity_order": 63,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 64,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 6
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 65,
+        "odd_part": 65,
+        "root_of_unity_order": 65,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 10,
+        "landing_order": 33,
+        "odd_part": 33,
+        "root_of_unity_order": 66,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 66,
+        "landing_order": 67,
+        "odd_part": 67,
+        "root_of_unity_order": 67,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 8,
+        "landing_order": 17,
+        "odd_part": 17,
+        "root_of_unity_order": 68,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 22,
+        "landing_order": 69,
+        "odd_part": 69,
+        "root_of_unity_order": 69,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 12,
+        "landing_order": 35,
+        "odd_part": 35,
+        "root_of_unity_order": 70,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 35,
+        "landing_order": 71,
+        "odd_part": 71,
+        "root_of_unity_order": 71,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 6,
+        "landing_order": 9,
+        "odd_part": 9,
+        "root_of_unity_order": 72,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 9,
+        "landing_order": 73,
+        "odd_part": 73,
+        "root_of_unity_order": 73,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 36,
+        "landing_order": 37,
+        "odd_part": 37,
+        "root_of_unity_order": 74,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 20,
+        "landing_order": 75,
+        "odd_part": 75,
+        "root_of_unity_order": 75,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 18,
+        "landing_order": 19,
+        "odd_part": 19,
+        "root_of_unity_order": 76,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 30,
+        "landing_order": 77,
+        "odd_part": 77,
+        "root_of_unity_order": 77,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 12,
+        "landing_order": 39,
+        "odd_part": 39,
+        "root_of_unity_order": 78,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 39,
+        "landing_order": 79,
+        "odd_part": 79,
+        "root_of_unity_order": 79,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 5,
+        "odd_part": 5,
+        "root_of_unity_order": 80,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 4
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 54,
+        "landing_order": 81,
+        "odd_part": 81,
+        "root_of_unity_order": 81,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 20,
+        "landing_order": 41,
+        "odd_part": 41,
+        "root_of_unity_order": 82,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 82,
+        "landing_order": 83,
+        "odd_part": 83,
+        "root_of_unity_order": 83,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 6,
+        "landing_order": 21,
+        "odd_part": 21,
+        "root_of_unity_order": 84,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 8,
+        "landing_order": 85,
+        "odd_part": 85,
+        "root_of_unity_order": 85,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 14,
+        "landing_order": 43,
+        "odd_part": 43,
+        "root_of_unity_order": 86,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 28,
+        "landing_order": 87,
+        "odd_part": 87,
+        "root_of_unity_order": 87,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 10,
+        "landing_order": 11,
+        "odd_part": 11,
+        "root_of_unity_order": 88,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 11,
+        "landing_order": 89,
+        "odd_part": 89,
+        "root_of_unity_order": 89,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 12,
+        "landing_order": 45,
+        "odd_part": 45,
+        "root_of_unity_order": 90,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 91,
+        "odd_part": 91,
+        "root_of_unity_order": 91,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 11,
+        "landing_order": 23,
+        "odd_part": 23,
+        "root_of_unity_order": 92,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 10,
+        "landing_order": 93,
+        "odd_part": 93,
+        "root_of_unity_order": 93,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 23,
+        "landing_order": 47,
+        "odd_part": 47,
+        "root_of_unity_order": 94,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 36,
+        "landing_order": 95,
+        "odd_part": 95,
+        "root_of_unity_order": 95,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 2,
+        "landing_order": 3,
+        "odd_part": 3,
+        "root_of_unity_order": 96,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 5
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 48,
+        "landing_order": 97,
+        "odd_part": 97,
+        "root_of_unity_order": 97,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 21,
+        "landing_order": 49,
+        "odd_part": 49,
+        "root_of_unity_order": 98,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 30,
+        "landing_order": 99,
+        "odd_part": 99,
+        "root_of_unity_order": 99,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 20,
+        "landing_order": 25,
+        "odd_part": 25,
+        "root_of_unity_order": 100,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 100,
+        "landing_order": 101,
+        "odd_part": 101,
+        "root_of_unity_order": 101,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 8,
+        "landing_order": 51,
+        "odd_part": 51,
+        "root_of_unity_order": 102,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 51,
+        "landing_order": 103,
+        "odd_part": 103,
+        "root_of_unity_order": 103,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 12,
+        "landing_order": 13,
+        "odd_part": 13,
+        "root_of_unity_order": 104,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 105,
+        "odd_part": 105,
+        "root_of_unity_order": 105,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 52,
+        "landing_order": 53,
+        "odd_part": 53,
+        "root_of_unity_order": 106,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 106,
+        "landing_order": 107,
+        "odd_part": 107,
+        "root_of_unity_order": 107,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 18,
+        "landing_order": 27,
+        "odd_part": 27,
+        "root_of_unity_order": 108,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 36,
+        "landing_order": 109,
+        "odd_part": 109,
+        "root_of_unity_order": 109,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 20,
+        "landing_order": 55,
+        "odd_part": 55,
+        "root_of_unity_order": 110,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 36,
+        "landing_order": 111,
+        "odd_part": 111,
+        "root_of_unity_order": 111,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 3,
+        "landing_order": 7,
+        "odd_part": 7,
+        "root_of_unity_order": 112,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 4
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 28,
+        "landing_order": 113,
+        "odd_part": 113,
+        "root_of_unity_order": 113,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 18,
+        "landing_order": 57,
+        "odd_part": 57,
+        "root_of_unity_order": 114,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 44,
+        "landing_order": 115,
+        "odd_part": 115,
+        "root_of_unity_order": 115,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 28,
+        "landing_order": 29,
+        "odd_part": 29,
+        "root_of_unity_order": 116,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 12,
+        "landing_order": 117,
+        "odd_part": 117,
+        "root_of_unity_order": 117,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 58,
+        "landing_order": 59,
+        "odd_part": 59,
+        "root_of_unity_order": 118,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 24,
+        "landing_order": 119,
+        "odd_part": 119,
+        "root_of_unity_order": 119,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 4,
+        "landing_order": 15,
+        "odd_part": 15,
+        "root_of_unity_order": 120,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 3
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 110,
+        "landing_order": 121,
+        "odd_part": 121,
+        "root_of_unity_order": 121,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 60,
+        "landing_order": 61,
+        "odd_part": 61,
+        "root_of_unity_order": 122,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 20,
+        "landing_order": 123,
+        "odd_part": 123,
+        "root_of_unity_order": 123,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 5,
+        "landing_order": 31,
+        "odd_part": 31,
+        "root_of_unity_order": 124,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 2
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 100,
+        "landing_order": 125,
+        "odd_part": 125,
+        "root_of_unity_order": 125,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 6,
+        "landing_order": 63,
+        "odd_part": 63,
+        "root_of_unity_order": 126,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 1
+      },
+      {
+        "classification": "periodic",
+        "eventual_exact_period": 7,
+        "landing_order": 127,
+        "odd_part": 127,
+        "root_of_unity_order": 127,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 0
+      },
+      {
+        "classification": "strictly_preperiodic",
+        "eventual_exact_period": 1,
+        "landing_order": 1,
+        "odd_part": 1,
+        "root_of_unity_order": 128,
+        "rule": "tail=v2(m); period=ord_q(2), with ord_1(2)=1",
+        "two_adic_tail": 7
+      }
+    ]
+  },
+  "fixed_epoch": 1788048000,
+  "frozen_object": {
+    "arithmetic_origin": "none; deterministic complex root-finding dynamics",
+    "cayley_coordinate": "w=C_a(z)=(z-a)/(z+a)",
+    "clock": "Newton iteration n in Z_{≥0}",
+    "dynamics": "N_a(z)=z-p_a(z)/p_a'(z)=(z^2+a^2)/(2z)",
+    "forbidden_data": "target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target determinants, Hilbert--Polya operators",
+    "parameter": "a in C*; a=0 is a separately recorded degree-drop face",
+    "phase_space": "Riemann sphere P^1(C)",
+    "polynomial": "p_a(z)=z^2-a^2 with a in C*"
+  },
+  "headline": "Cayley conjugacy closes the global quadratic Newton dynamics: both root basins, the Julia line, double-exponential errors, every periodic and preperiodic point, multipliers, zeta, and boundary Cauchy dynamics.",
+  "nonclaims": [
+    "a workspace or literature novelty/priority theorem",
+    "a corresponding classification for cubic or higher-degree Newton maps",
+    "arithmetic local data, Euler factors, root numbers, automorphy, or a target functional equation",
+    "a target zeta/Fredholm determinant, target zero match, or Hilbert--Polya operator",
+    "Route B eligibility or external peer review"
+  ],
+  "payload_sha256": "07b94788a9e4e6723c0c6bd6d017ad2ab024bdfd4f8d54f57d31d83b7a88640a",
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "strongest_failure": "The orbit law is the universal degree-two squaring law and supplies no intrinsic rational-prime carrier, logarithmic prime clock, target divisor, or arithmetic determinant owner.",
+    "strongest_positive": "A global Mobius conjugacy closes the basins, Julia set, all periodic/preperiodic points, multipliers, Artin--Mazur zeta, and invariant boundary law.",
+    "tuple": [
+      "A0_FAIL",
+      "A1_WEAK",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FORMAL_HINT"
+    ]
+  },
+  "schema": "hcs-c257-quadratic-newton-cayley-global-v1",
+  "scope_flags": {
+    "claims_arithmetic_local_data": false,
+    "claims_automorphy": false,
+    "claims_euler_factors": false,
+    "claims_hilbert_polya_operator": false,
+    "claims_root_numbers": false,
+    "claims_target_divisor_or_functional_equation": false,
+    "invokes_route_b": false,
+    "uses_prime_table": false,
+    "uses_target_zero_table": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "b89544f1f7b1043f4158dfdf9db77787b332f146",
+  "theorem": {
+    "basin_julia_atlas": "The basins of +a and -a are Re(z/a)>0 and Re(z/a)<0; their common boundary Re(z/a)=0 union infinity is the Julia set.",
+    "boundary_measure": "Haar measure under w=e^{i theta} pushes through z=i*a*cot(theta/2) to the normalized Cauchy law; it is invariant and mixing, and the Cayley-angle Lyapunov exponent is log 2.",
+    "counts_multipliers_zeta": "#Fix(N_a^n)=2^n+1; Mobius inversion gives exact-period points and primitive cycles; both root cycles are superattracting and every Julia n-cycle has multiplier 2^n; zeta_AM=1/((1-t)(1-2t)).",
+    "double_exponential": "In either open basin the exact Cayley error is raised to 2^n, yielding the displayed root-error identities and global quadratic convergence away from the Julia line.",
+    "global_conjugacy": "For every a!=0, C_a is a Mobius conjugacy from N_a on P^1(C) to D(w)=w^2; hence C_a(N_a^n(z))=C_a(z)^(2^n) for every n.",
+    "ownership": "Unlike C141, no Hardy inverse-branch Ruelle operator is built; unlike C177, the object is the Newton map on the full sphere with two root basins and an exact even-order preperiodic tail.",
+    "parameter_boundaries": "Scale covariance removes nonzero a, changing a to -a exchanges roots, and a=0 is a degree-one degeneration N_0(z)=z/2 rather than part of the degree-two theorem.",
+    "periodic_preperiodic": "Besides w=0 and infinity, preperiodic points are exactly roots of unity. If ord(w)=2^e*q with q odd, the exact tail is e and the eventual exact period is ord_q(2), with ord_1(2)=1; periodicity is exactly e=0.",
+    "scope": "This is a source-local complex-dynamics and root-finding theorem, not an arithmetic determinant, target spectrum, or Hilbert--Polya construction."
+  }
+}

@@ -1,0 +1,144 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+skill_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+candidate_id: HCS-C258
+source_commit: b89544f1f7b1043f4158dfdf9db77787b332f146
+evaluation_date: 2026-08-31
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_mixed_lcg_hull_dobell_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: Hull--Dobell mixed affine congruential map F(x)=a*x+c on every finite ring Z/mZ
+family: finite arithmetic affine dynamics over composite rings
+phase_space: Z/mZ for every integer m at least two
+dynamics: one affine congruential update per source time
+parameters: all residue classes a,c modulo m
+parameter_provenance: intrinsic finite-ring parameters; no fitting
+arithmetic_origin: prime-power quotient rings and CRT are intrinsic
+clock: one affine update; no logarithmic prime roof
+normalization: least nonnegative residues and ordinary fixed counts
+determinant_convention: source Artin--Mazur zeta and finite Koopman determinant only
+orbit_cutoff: all moduli analytically; m through 96 is a finite exact sentinel
+precision: exact integer, congruence, valuation, permutation, and symbolic algebra
+training_data: none
+forbidden_data: target prime or zero tables, arithmetic local data, Euler factors, root numbers, automorphy, target divisor or functional equation, Hilbert--Polya, and Route B
+code_commit: b89544f1f7b1043f4158dfdf9db77787b332f146
+artifact_paths:
+  - results/c258_lcg_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: F(x)=a*x+c on Z/mZ
+  arithmetic_origin: intrinsic prime-power quotients and CRT
+  clock: one source update
+  normalization: one m-cycle means every residue occurs once
+  determinant_convention: source Artin--Mazur and finite Koopman only
+  cutoff: all m proved; 2 through 96 exhaustively checked
+  precision: exact
+  allowed_data: m, a, c and their derived exact congruence data
+  forbidden_data: target arithmetic, target spectra, target determinant, Hilbert--Polya, and Route B
+
+a0:
+  verdict: A0_WEAK_ARITHMETIC_RELATION
+  evidence_status: PROVED_WEAK
+  strongest_evidence: every modulus decomposes intrinsically into prime-power dynamical quotients and CRT assembles their exact return periods
+  strongest_failure: rational primes are quotient factors rather than globally selected primitive orbits, and no log-prime clock or von Mangoldt weight emerges
+  arithmetic_controls:
+    - all moduli and affine parameters are covered analytically
+    - prime, odd prime-power, dyadic, and mixed composite faces are explicit
+    - no prime or target table is imported
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED_WEAK
+  strongest_evidence: every admissible map has one complete intrinsic primitive m-cycle with exact repetitions, fixed counts, and multiplier-free completeness
+  strongest_failure: the cycle length is the chosen modulus and supplies no rational-prime orbit dictionary or target amplitude
+  metrics:
+    all_modulus_full_period_theorems: 1
+    exact_primitive_orbits_per_admissible_map: 1
+    exhaustively_checked_affine_pairs: 299535
+    criterion_mismatches: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c258_lcg_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the source zeta is exactly 1/(1-t^m) and the Koopman characteristic polynomial is u^m-1
+  strongest_failure: no target divisor, train-validation-test split, or target root-count comparison exists
+  metrics:
+    exact_source_zeta_formulas: all_admissible_m
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: 0
+    precision_drift: 0
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c258_lcg_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: finite source rationality and exact CRT factorization are proved
+  strongest_failure: no target functional equation, continuation, counting law, gamma factor, or Weil compression is defined
+  analytic_structure:
+    source_rationality: PROVED
+    target_functional_equation: NOT_TESTABLE
+    target_continuation: NOT_TESTABLE
+    target_counting_law: NOT_TESTABLE
+  weil_compression:
+    natural_compression: none
+    arithmetic_side: none
+    verdict: STOP_SCOPED
+  artifacts:
+    - RESEARCH_QUESTION.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: counting measure gives a canonical same-clock unitary Koopman permutation with all m-th roots once each
+  strongest_failure: the finite source unitary has no target spectral identification and cannot repair A2 or A3
+  metrics:
+    same_clock_unitary_lifts: all_admissible_maps
+    exact_source_eigenvalues: m_per_map
+    target_operator_identifications: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c258_lcg_evidence.json
+
+adversarial_controls:
+  controls_used:
+    - nonunit increments
+    - failed prime multiplier congruences
+    - failed mod-four congruences
+    - odd and dyadic prime powers
+    - mixed composite CRT moduli
+    - repaired-hash semantic mutations
+  proves_too_much_risk: every finite cycle has a rational zeta and unitary Koopman permutation, so those properties alone cannot certify target ownership
+  verdict: PASS_WITH_ARITHMETIC_BOUNDARY
+
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: all-modulus full-period classification, parameter count, source primitive ledger, source zeta, and source Koopman spectrum only
+blocking_conditions:
+  - no rational-prime primitive-orbit dictionary
+  - no logarithmic prime clock or target orbit weight
+  - no target divisor or validation protocol
+  - no target global analytic structure or Weil compression
+next_smallest_test: seek a source in which rational primes select global primitive orbits rather than quotient factors
+round2_clues:
+  - prime-power return valuations can carry exact local-to-global orbit information
+  - CRT is arithmetic structure but not a target Euler product
+  - natural same-clock unitarity does not repair a failed target determinant gate
+route_b_invocation_allowed: false

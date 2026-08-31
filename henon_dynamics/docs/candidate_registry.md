@@ -3,6 +3,32 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C254--HCS-C258 additions (2026-08-31)
+
+Five independent cross-subtype candidates were frozen from baseline
+`b89544f1f7b1043f4158dfdf9db77787b332f146`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C254 | The one-species constant-yield Monod chemostat closes exact total-nutrient relaxation, the washout/equality/survival global atlas, transcritical spectrum, invariant-leaf implicit transient, critical algebraic rate, and the nonconstant-recurrence obstruction. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Monod package](../henon_monod_chemostat_threshold_route_a/) · [paper PDF](../henon_monod_chemostat_threshold_route_a/paper/main.pdf) |
+| HCS-C255 | The Euler--Poincare--Suslov rigid body closes the constrained energy-circle reduction, both explicit heteroclinic branches, endpoint rates, clean reconstructed rotations, singular Poisson density, reversor, and principal/zero-energy boundaries. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Suslov package](../henon_suslov_nonholonomic_heteroclinic_route_a/) · [paper PDF](../henon_suslov_nonholonomic_heteroclinic_route_a/paper/main.pdf) |
+| HCS-C256 | The KdV three-root reduction closes every bounded real cnoidal traveling wave, elliptic period and mean, Galilean covariance, and the soliton, harmonic, and constant root-collision faces. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [KdV package](../henon_kdv_cnoidal_traveling_wave_atlas_route_a/) · [paper PDF](../henon_kdv_cnoidal_traveling_wave_atlas_route_a/paper/main.pdf) |
+| HCS-C257 | Newton iteration for `z^2-a^2` closes the global Cayley conjugacy, both root basins and exact errors, Julia line, every periodic/preperiodic point and multiplier, source zeta, and invariant Cauchy boundary law. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Newton--Cayley package](../henon_quadratic_newton_cayley_global_dynamics_route_a/) · [paper PDF](../henon_quadratic_newton_cayley_global_dynamics_route_a/paper/main.pdf) |
+| HCS-C258 | Every mixed affine congruential map has one cycle through all residues exactly under the Hull--Dobell prime-power conditions; the package closes necessity, local return valuations, CRT assembly, parameter count, primitive/fixed/zeta ledgers, and the canonical Koopman spectrum. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [mixed-congruential package](../henon_mixed_lcg_hull_dobell_route_a/) · [paper PDF](../henon_mixed_lcg_hull_dobell_route_a/paper/main.pdf) |
+
+C254--C257 are `ROUTE_A_REJECTED`; C258 is
+`ROUTE_A_EXPLORATORY` because its finite-ring prime-power structure is
+intrinsic but supplies neither a rational-prime orbit dictionary nor a
+logarithmic prime clock.  Route B is false for all five.  No target local
+datum, Euler factor, root number, automorphy, target divisor/counting law or
+functional equation, Hilbert--Pólya operator, or Route-B input is introduced.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; release hashes are recorded in
+[BATCH_REVIEW_C254_C258.md](../BATCH_REVIEW_C254_C258.md).
+
 ## HCS-C249--HCS-C253 additions (2026-08-30)
 
 Five independent Route-A candidates were released from the common baseline
