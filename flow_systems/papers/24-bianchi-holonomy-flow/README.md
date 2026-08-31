@@ -4,7 +4,18 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
+- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+  MANDATORY CONFIRMATION PENDING**. The final Mode-2 audit closes 7/7 current
+  references, 9/9 citation contexts, 98 `ALL` registry claims, and 107/107
+  exact source-bound evidence tuples with zero missing or anchorless rows.
+  Dual-lane originality checks cover 45/85 body paragraphs and all 35/35
+  Stage-4/4′ changed paragraphs; all seven ARS failure modes are `CLEAR`, E6
+  has zero findings, 81/81 unit tests plus 10/10 derivative replay pass, and
+  the isolated preview is 15 pages. See the
+  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
+  Canonical source/bib/PDF/results and the Route tuple are unchanged; Stage 5
+  has not started.
+- Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
   CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
   `REV-001` and `REV-003` residuals were applied by a 10-operation Patch 1.1;
   101/111 blocks were preserved byte-identically, all **10/10 registered
@@ -13,8 +24,8 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
   the isolated 15-page preview is clean. See the
   [Stage-4′ completion report](notes/stage4_prime_completion_report_round2.md),
   [response](notes/stage4_prime_response_to_reviewers_round2.md), and
-  [preview](notes/stage4_prime_revision_round2.pdf). Stage 4.5 and Stage 5
-  have not been invoked.
+  [preview](notes/stage4_prime_revision_round2.pdf). At that historical
+  checkpoint, Stage 4.5 and Stage 5 had not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 6
   `FULLY_ADDRESSED` and 2 `PARTIALLY_ADDRESSED` verdicts with zero
   adjustments. Both partial rows retain `must_fix` residuals, so the official
@@ -47,7 +58,7 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
   [editorial synthesis](notes/stage3_editorial_synthesis.md),
   [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
   [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
-- Integrity closure: 7/7 registered references are VERIFIED; the stable Phase-E
+- Historical Stage-2.5 integrity closure (superseded by current Stage 4.5): 7/7 registered references are VERIFIED; the stable Phase-E
   population is 64/64 VERIFIED with 66/66 structurally closed tuples; all 66
   evidence carriers remain explicitly `anchorless`.  The scholar-owned intake
   now contains 7 experiment-provenance entries and 11 aligned direct claims.

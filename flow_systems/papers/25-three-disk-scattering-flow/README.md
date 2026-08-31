@@ -4,7 +4,18 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current stage: **Round 9 — STAGE 4.5 EXACT BIBLIOGRAPHY CORRECTION APPLIED /
+- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+  MANDATORY CONFIRMATION PENDING**. The corrected derived bibliography has now
+  passed a new from-scratch audit: 8/8 references, 13/13 citation contexts,
+  114 `ALL` claims, and 127/127 exact source-bound evidence tuples, with zero
+  missing or anchorless rows. Originality coverage is 45/74 and all 17/17
+  changed paragraphs; all seven failure modes are `CLEAR`, E6 is empty, the
+  environment-locked suite passes 75/75, both 2,241-row replays agree, and the
+  isolated preview is 13 pages. The linked 1989 erratum was checked and does
+  not alter the two bounded determinant contexts. See the
+  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
+  The canonical bibliography remains frozen; Stage 5 has not started.
+- Previous correction checkpoint: **Round 9 — STAGE 4.5 EXACT BIBLIOGRAPHY CORRECTION APPLIED /
   BOUNDED REVALIDATION COMPLETE / FRESH FULL GATE PENDING**. The fresh Round-1 audit verifies
   **8/8 reference identities** and **13/13 citation contexts**, registers
   **114/114 current claims** in **127 evidence rows**, and finds **0 candidate
@@ -32,8 +43,8 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
   The [repair report](notes/stage4_5_integrity_correction_round1_report.md)
   records four exact operations, no structural flag, clean BibTeX/citation
   build, 127-row evidence replay, and 75/75 tests. This bounded repair does not
-  reissue the full Stage 4.5 verdict: the old report/passport remain historical,
-  and Stage 5 stays closed pending a fresh from-scratch gate. Manuscript/body,
+  reissue the full Stage 4.5 verdict: the old report/passport remain historical.
+  At that checkpoint, Stage 5 stayed closed pending a fresh from-scratch gate. Manuscript/body,
   `paper/references.bib`, PDF, canonical results, frozen no-eclipse physical
   object, and Route records remain unchanged; evidence timestamps were not
   refreshed.
@@ -70,7 +81,7 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
   [editorial synthesis](notes/stage3_editorial_synthesis.md),
   [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
   [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
-- Integrity closure: the `BowenLanford1970` author suffix has been repaired and
+- Historical Stage-2.5 integrity closure (superseded by current Stage 4.5): the `BowenLanford1970` author suffix has been repaired and
   revalidated, so 8/8 registered references are VERIFIED; the stable Phase-E
   population is 48/48 VERIFIED with 49/49 structurally closed tuples; all 49
   evidence carriers remain explicitly `anchorless`.  The scholar-owned intake

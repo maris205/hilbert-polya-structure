@@ -2,7 +2,17 @@
 
 ## Current status
 
-- ARS: **STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE — MANDATORY SCHOLAR
+- Current pipeline: **ROUND 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+  MANDATORY CONFIRMATION PENDING**. The final audit verifies 6/6 references,
+  9/9 citation contexts, 95 `ALL` claims, and 104/104 exact tuples (95 local
+  plus nine external), with zero missing or anchorless rows. Originality
+  coverage is 44/77 and all 5/5 changed paragraphs; all seven failure modes
+  are `CLEAR`, E6 is empty, 108/108 unit tests and the Round-3--8 two-run
+  replays pass, and the isolated preview is 14 pages. See the
+  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
+  Canonical outputs and the formal Route state are unchanged; Stage 5 has not
+  started.
+- Previous Stage-4′ checkpoint: **STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE — MANDATORY SCHOLAR
   CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual `REV-02` is `RESOLVED`
   by the exactly authorized `B0048/replace_block` operation. All **14/14
   registered ClaimIntent surfaces** remain byte-exact and exact-once; P28
@@ -19,8 +29,8 @@
   [revision log](notes/stage4_prime_revision_log_round1.md), and
   [evidence package](notes/stage4_prime_evidence_bundle.json). The canonical
   manuscript/body, bibliography, PDF, result tree, frozen unit-speed Bolza
-  magnetic flow at `b=1/2`, and Route records remain unchanged. Stage 4.5 has
-  not been invoked.
+  magnetic flow at `b=1/2`, and Route records remain unchanged. At that
+  historical checkpoint, Stage 4.5 had not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 3 `FULLY_ADDRESSED` and
   1 `CANNOT_VERIFY` verdict with zero adjustments. The fail-closed row is a
   must-fix direct-test/replay criterion, so the official checker derives
@@ -29,7 +39,8 @@
   and [checker receipt](notes/stage3_prime_round2_checker_receipt.json).
   Attempt 1 remains immutable. That decision is the legal basis for the now
   author-adjudicated and completed Stage 4′ revision; it is retained here as
-  the historical entry checkpoint. Later stages have not been invoked.
+  the historical entry checkpoint. At that checkpoint, later stages had not
+  been invoked.
 - Stage-4 conclusion: the revision corrects the replay order, records executed
   direct canonicalization regressions with their same-builder limitation, adds
   the non-ranking A0–A4 obligation legend, and adds the typed

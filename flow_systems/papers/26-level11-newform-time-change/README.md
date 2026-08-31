@@ -4,7 +4,16 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE /
+- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+  MANDATORY CONFIRMATION PENDING**. The final audit verifies 7/7 references,
+  8/8 citation contexts, 93 `ALL` claims, and 97/97 exact tuples (93 local plus
+  four external), with zero missing or anchorless rows. Dual-lane originality
+  coverage is 47/89 and all 39/39 changed paragraphs; all seven failure modes
+  are `CLEAR`, E6 is empty, 84/84 unit tests and the 18/18 plus 10/10 replay
+  scopes pass, and the isolated preview is 16 pages. See the
+  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
+  Canonical outputs and the Route tuple are unchanged; Stage 5 has not started.
+- Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE /
   AUTHOR CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
   `REV-02` and `REV-04` residuals were applied by a 9-operation Patch 1.1;
   108/117 blocks were preserved byte-identically, all **17/17 registered
@@ -15,8 +24,8 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
   character, or fatal error. See the
   [Stage-4′ completion report](notes/stage4_prime_completion_report_round2.md),
   [response](notes/stage4_prime_response_to_reviewers_round2.md), and
-  [preview](notes/stage4_prime_revision_round2.pdf). Stage 4.5 and Stage 5
-  have not been invoked.
+  [preview](notes/stage4_prime_revision_round2.pdf). At that historical
+  checkpoint, Stage 4.5 and Stage 5 had not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 7
   `FULLY_ADDRESSED`, 1 `PARTIALLY_ADDRESSED`, and 1
   `CANNOT_VERIFY` verdict with zero adjustments and no post-letter
@@ -68,7 +77,7 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
   [editorial synthesis](notes/stage3_editorial_synthesis.md),
   [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
   [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
-- Current Stage-2.5 closure: 5/5 references are VERIFIED; 68/68 selected
+- Historical Stage-2.5 closure (superseded by current Stage 4.5): 5/5 references are VERIFIED; 68/68 selected
   distinct claims are VERIFIED; all 70/70 selected tuples are structurally
   closed.  The 70 anchorless evidence carriers remain an advisory limitation,
   while the independent semantic audit supports the claim meanings.  The

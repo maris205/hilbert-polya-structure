@@ -4,7 +4,18 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
+- Current pipeline: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
+  MANDATORY CONFIRMATION PENDING**. The final audit verifies 5/5 references,
+  5/5 citation contexts, 87 `ALL` claims, and 87/87 exact local evidence tuples
+  with zero missing or anchorless rows. Originality coverage is 39/78 and all
+  20/20 changed paragraphs; the initial HTTP-202/empty-result row is excluded
+  and replaced by a genuine dual-lane check. All seven failure modes are
+  `CLEAR`, E6 is empty, 61/61 unit tests plus 12/12 Round-8 replay pass, and the
+  isolated preview is 13 pages. See the
+  [final Stage-4.5 report](notes/stage4_5_round2_final_integrity_report.md).
+  Both rejected Route tuples and all canonical outputs are unchanged; Stage 5
+  has not started.
+- Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
   MANDATORY SCHOLAR CONFIRMATION BEFORE STAGE 4.5**. P27's sole residual
   `REV-03` is `RESOLVED` by the three exactly authorized replacements at
   `B0040`, `B0041`, and `B0042`. All **10/10 registered ClaimIntent surfaces**
@@ -22,7 +33,8 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
   [evidence package](notes/stage4_prime_evidence_bundle.json). The canonical
   manuscript/body, bibliography, PDF, result tree, frozen coordinatewise
   geodesic flow on the residual congruence inverse limit, and both rejected
-  Route-A tuples remain unchanged. Stage 4.5 has not been invoked.
+  Route-A tuples remain unchanged. At that historical checkpoint, Stage 4.5
+  had not been invoked.
 - Stage-3′ checkpoint basis: the fresh three-gate run froze 5
   `FULLY_ADDRESSED` and 1 `PARTIALLY_ADDRESSED` verdict with zero
   adjustments. The `-I` fixture/shared-kernel row retains a `must_fix`
@@ -61,7 +73,7 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
   [editorial synthesis](notes/stage3_editorial_synthesis.md),
   [non-ranking revision roadmap](notes/stage3_revision_roadmap.json), and
   [Phase-0 configuration](notes/stage3_phase0_field_analysis.md).
-- Current Stage-2.5 closure: 5/5 references are VERIFIED; 70/70 selected
+- Historical Stage-2.5 closure (superseded by current Stage 4.5): 5/5 references are VERIFIED; 70/70 selected
   distinct claims are VERIFIED; all 71/71 selected tuples are structurally
   closed.  The 71 anchorless evidence carriers remain an advisory limitation,
   while the independent semantic audit supports the claim meanings.  The
