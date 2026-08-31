@@ -1,0 +1,141 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+schema: hcs-route-a-evaluation-v2
+candidate_id: HCS-C262
+candidate_definition: complete all-sign Floquet--Jordan atlas for the periodic two-step Hill oscillator
+family: HILL-SQUARE-WAVE-FLOQUET-HAMILTONIAN
+phase_space: real two-dimensional state (y,y-prime)
+dynamics: y''+k(t)y=0 with k1 for tau1 then k2 for tau2, periodically extended
+parameters: real k1,k2 and nonnegative tau1,tau2 with positive total period
+parameter_provenance: source coefficient segments; finite grid is a local regression oracle
+arithmetic_origin: NONE; coefficients and durations vary continuously
+clock: physical time and coefficient-period strobe
+normalization: entire C(k,t),S(k,t) and M=Phi2*Phi1
+determinant_convention: SOURCE_SL2_CHARACTERISTIC_ONLY_NO_TARGET_DETERMINANT
+orbit_cutoff: 900 all-sign transfer rows plus six exact boundary controls
+precision: exact symbolic identities and 90-decimal transfer controls
+training_data: none
+forbidden_data: target primes/zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor/determinant, or Hilbert--Polya operators
+source_commit: 98782afe1e754c311ad0736f72ce09dcc7c85c77
+code_commit: 98782afe1e754c311ad0736f72ce09dcc7c85c77
+evaluation_date: 2026-08-31
+fixed_epoch: 1788048000
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_paths:
+  - results/c262_hill_evidence.json
+  - code/c262_hill_checker.py
+  - code/c262_hill_sympy_crosscheck.py
+  - code/c262_hill_replay.py
+  - code/c262_hill_mutation.py
+  - paper/main.pdf
+route_b_invocation_allowed: false
+route_a_tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+
+source_lock:
+  object: two-step square-wave Hill monodromy for every sign of k1,k2
+  arithmetic_origin: NONE
+  clock: physical time and one-coefficient-period strobe
+  normalization: Phi(k,t)=[[C,S],[-kS,C]], M=Phi2*Phi1
+  determinant_convention: SOURCE_SL2_ONLY
+  cutoff: finite 900-row regression; continuum theorem is proof-driven
+  precision: EXACT_SYMBOLIC_AND_90_DECIMAL_SERIES_CROSSCHECK
+  allowed_data: source coefficients, entire transfers, traces, multipliers, and local controls
+  forbidden_data: prime/zero tables, target fitting, local factors, root numbers, automorphy, target determinant, or Hilbert--Polya operator
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: all coefficients and transfers are source-defined without target data
+  strongest_failure: continuously tunable segment parameters give no intrinsic rational-prime owner or logarithmic orbit clock
+  arithmetic_controls:
+    - positive, zero, and negative coefficient faces
+    - zero-duration and swapped-order controls
+    - no-prime/no-zero data split
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: every Floquet class, multiplier regime, Jordan face, and integer iterate in the two-step family is analytic
+  strongest_failure: this source stability atlas is not a target-weighted primitive-orbit census
+  metrics:
+    grid_rows: 900
+    exact_boundary_rows: 6
+    iterate_depth: 12
+    arbitrary_periodic_coefficient_census: not_claimed
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: source characteristic polynomials and Chebyshev powers are exact
+  strongest_failure: no target determinant, sealed target comparison, or target zero set is defined
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: the complete two-step stability region and boundaries are analytic
+  strongest_failure: no target continuation, divisor, functional equation, counting law, explicit formula, or Weil compression is constructed
+
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: SOURCE_LOCAL
+  strongest_evidence: each transfer is symplectic and the second-order equation has a canonical Hamiltonian state form
+  strongest_failure: no same-clock target self-adjoint operator or Hilbert--Polya spectral bridge is defined
+  metrics:
+    source_symplectic_transfer: true
+    target_quantization: false
+    route_b_entry: false
+
+adversarial_controls:
+  controls_used:
+    - plus and minus scalar monodromies
+    - plus and minus nontrivial Jordan monodromies
+    - exact hyperbolic multipliers 2 and 1/2
+    - zero and negative coefficient faces
+    - repaired-hash scope and formula mutations
+  proves_too_much_risk: the same Floquet formulas hold for continuously many nonarithmetic parameters and cannot prove an arithmetic target relation
+  verdict: STOP_SCOPED
+
+claim_boundary: >-
+  C262 proves the complete two-step Hill Floquet--Jordan atlas. It receives no
+  arithmetic-origin, target-determinant, target-zero, automorphy, or
+  Hilbert--Polya credit.
+blocking_conditions:
+  - A0 fails because no source-derived arithmetic carrier exists
+  - A1 is a two-step family theorem rather than a target primitive-orbit census
+  - A2 and A3 have no target determinant or global target analytic structure
+  - A4 is only a source-local Hamiltonian hint
+next_smallest_test: none inside the frozen two-step family; arbitrary coefficients would be a new candidate
+
+references:
+  - key: Hill1886
+    doi: 10.1007/BF02417081
+    url: https://doi.org/10.1007/BF02417081
+  - key: Golubev1997
+    url: https://www.mathnet.ru/eng/ipmp1431
+
+evidence:
+  path: results/c262_hill_evidence.json
+  grid_row_count: 900
+  boundary_row_count: 6
+  checker_method: independent entire-series transfers and direct powers
+
+nonclaims:
+  - no arbitrary-periodic-coefficient classification
+  - no claim that trace plus/minus two alone makes every solution periodic
+  - no claim that every hyperbolic initial condition grows forward
+  - no nonlinear stability theorem
+  - no target determinant, arithmetic local data, Euler factor, root number, automorphy, or Hilbert--Polya operator
+  - no Route-B invocation or literature-priority claim
+
+scope_flags:
+  uses_target_zero_table: false
+  uses_prime_table: false
+  claims_arithmetic_local_data: false
+  claims_euler_factors: false
+  claims_root_numbers: false
+  claims_automorphy: false
+  claims_target_divisor_or_functional_equation: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false

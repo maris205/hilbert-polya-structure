@@ -1,0 +1,142 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+schema: hcs-route-a-evaluation-v2
+candidate_id: HCS-C261
+candidate_definition: all-time cubic-Talbot and fixed-mode atlas for the periodic Airy group
+family: AIRY-LINEAR-DISPERSIVE-TALBOT
+phase_space: L2 of the 2*pi circle with Sobolev generator domains
+dynamics: u_t+u_xxx=0 and U(t)e_n=exp(i*n^3*t)e_n
+parameters: physical time t; reduced rational strobes p/q for finite receipts
+parameter_provenance: source equation and exact Fourier diagonalization
+arithmetic_origin: NONE; modular cubic phases appear only after chosen rational sampling
+clock: physical PDE time
+normalization: 2*pi circle and positive exp(i*n^3*t) Fourier phase
+determinant_convention: NONE_BY_DESIGN_NONCOMPACT_UNITARY_NO_TARGET_DETERMINANT
+orbit_cutoff: all reduced p/q through q=96 as regression controls; theorem is all-time and all-modulus
+precision: exact modular arithmetic plus 90-decimal DFT reconstruction
+training_data: none
+forbidden_data: target primes/zeros, local factors, root numbers, automorphy, target divisor/determinant, or Hilbert--Polya operators
+source_commit: 98782afe1e754c311ad0736f72ce09dcc7c85c77
+code_commit: 98782afe1e754c311ad0736f72ce09dcc7c85c77
+evaluation_date: 2026-08-31
+fixed_epoch: 1788048000
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_paths:
+  - results/c261_airy_evidence.json
+  - code/c261_airy_checker.py
+  - code/c261_airy_sympy_crosscheck.py
+  - code/c261_airy_replay.py
+  - code/c261_airy_mutation.py
+  - paper/main.pdf
+route_b_invocation_allowed: false
+route_a_tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_NATURAL_QUANTIZATION]
+overall_verdict: ROUTE_A_REJECTED
+
+source_lock:
+  object: periodic Airy unitary group and its rational-time cubic Fourier strobes
+  arithmetic_origin: NONE
+  clock: physical PDE time t
+  normalization: e_n=exp(i*n*x), U(t)e_n=exp(i*n^3*t)e_n
+  determinant_convention: NONE_BY_DESIGN
+  cutoff: q<=96 regression receipt; analytic theorem has no q cutoff
+  precision: EXACT_MODULAR_AND_90_DECIMAL_DFT
+  allowed_data: Fourier modes, cubic residues, finite DFTs, prime valuations of chosen q
+  forbidden_data: prime/zero tables, target fitting, Euler factors, root numbers, automorphy, target determinant, or Hilbert--Polya operator
+
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the PDE and Fourier generator are source-defined without target data
+  strongest_failure: rational moduli are chosen sampling denominators and do not create an intrinsic rational-prime orbit owner or logarithmic clock
+  arithmetic_controls:
+    - all q through 96
+    - prime-power fixed-mode faces
+    - irrational sampling
+    - no-prime/no-zero data split
+
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: the all-time group, every rational strobe, and every sampled fixed subspace are classified analytically
+  strongest_failure: these linear recurrences are not a target-weighted primitive nonlinear orbit census
+  metrics:
+    rational_strobe_rows: 2806
+    dft_rows: 101
+    finite_support_rows: 10
+    full_phase_primitive_orbit_census: not_claimed
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: exact unitary and DFT identities close the source propagator
+  strongest_failure: U(t) is noncompact and no target Fredholm determinant or sealed target comparison is defined
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: all rational/irrational fixed-space statements are exact
+  strongest_failure: no target divisor, functional equation, counting law, explicit formula, continuation, or Weil compression is constructed
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED_SOURCE_LOCAL
+  strongest_evidence: D^3 is a canonical self-adjoint Fourier generator and U(t)=exp(i*t*D^3)
+  strongest_failure: its integer-cube spectrum has no target-zero match or same-clock Hilbert--Polya bridge
+  metrics:
+    source_native_self_adjoint_generator: true
+    target_quantization: false
+    route_b_entry: false
+
+adversarial_controls:
+  controls_used:
+    - mode-one exact-order witness
+    - prime-cube valuation boundaries
+    - rational versus irrational sampling
+    - noncompact orthonormal-basis witness
+    - repaired-hash scope and formula mutations
+  proves_too_much_risk: every rational sampling denominator creates modular phases, so modularity alone cannot prove an arithmetic target relation
+  verdict: STOP_SCOPED
+
+claim_boundary: >-
+  C261 proves the complete periodic Airy revival and fixed-mode atlas. It
+  receives no arithmetic-origin, target-determinant, target-zero, automorphy,
+  or Hilbert--Polya credit.
+blocking_conditions:
+  - A0 fails because rational sampling is chosen rather than intrinsic
+  - A1 is source recurrence control, not a target primitive-orbit census
+  - A2 and A3 have no target determinant or global target analytic structure
+  - A4 is a natural source quantization but has no target spectral bridge
+next_smallest_test: none inside this candidate; a different boundary condition is a new owner
+
+references:
+  - key: PelloniSmith2024
+    doi: 10.1111/sapm.12699
+    url: https://doi.org/10.1111/sapm.12699
+  - key: BoultonFarmakisPelloni2021
+    doi: 10.1098/rspa.2021.0241
+    url: https://doi.org/10.1098/rspa.2021.0241
+
+evidence:
+  path: results/c261_airy_evidence.json
+  modular_row_count: 2806
+  dft_row_count: 101
+  checker_method: independent modular phases, valuation strides, high-precision DFT inversion, and support gcds
+
+nonclaims:
+  - no nonlinear KdV or general-boundary Airy theorem
+  - no closed evaluation of every cubic Gauss sum
+  - no compactness, trace class, target determinant, or target zero match
+  - no arithmetic local data, Euler factor, root number, automorphy, or Hilbert--Polya operator
+  - no Route-B invocation or literature-priority claim
+
+scope_flags:
+  uses_target_zero_table: false
+  uses_prime_table: false
+  claims_arithmetic_local_data: false
+  claims_euler_factors: false
+  claims_root_numbers: false
+  claims_automorphy: false
+  claims_target_divisor_or_functional_equation: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false

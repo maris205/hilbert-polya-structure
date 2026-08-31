@@ -1,0 +1,175 @@
+\pdfvariable trailerid {[<C2592026083100000000000000000000><C2592026083100000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.62in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\one}{\mathbf 1}
+\title{Cut-Flow Locking and Edgewise Morse Indices on Kuramoto Trees}
+\author{Route-A source-local certificate HCS-C259}
+\date{31 August 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For heterogeneous first-harmonic Kuramoto oscillators on any finite
+positive-weight tree, we classify every phase-locked relative equilibrium.
+One cut sum per edge gives a necessary-and-sufficient locking test, the exact
+branch count, and the complete quotient Morse-index distribution.  Equality
+faces are branch mergers with predictable nullity.  The result is a
+source-local mechanics theorem, not a classification of unlocked motion or
+an arithmetic determinant.
+\end{abstract}
+
+\section{Frozen model}
+Root a connected tree $T=(V,E)$, $V=\{0,\ldots,N-1\}$, at $0$ and orient
+each edge from parent to child.  The incidence column has $-1$ at the parent
+and $+1$ at the child.  For $K=\operatorname{diag}(K_e)$ with $K_e>0$, the
+model is
+\begin{equation}
+ \dot\theta=\omega-BK\sin(B^{\mathsf T}\theta).
+\end{equation}
+The sine is componentwise.  Put
+$\Omega=N^{-1}\one^{\mathsf T}\omega$, $\eta=\omega-\Omega\one$,
+and $\delta=B^{\mathsf T}\theta$.  States differing by a diagonal rotation
+are identified.  Equation (1) is the heterogeneous network form of the
+Kuramoto phase model \cite{Kuramoto}; the theorem below is proved directly.
+
+Deleting an edge $e=(p,c)$ leaves a component $S_e$ containing its child.
+Define the oriented cut demand
+\begin{equation}
+ F_e=\sum_{i\in S_e}\eta_i.
+\end{equation}
+
+\section{Locking and branch theorem}
+\begin{theorem}[Complete tree locking atlas]
+A locked relative equilibrium exists if and only if
+\begin{equation}
+ |F_e|\le K_e\quad\hbox{for every }e.
+\end{equation}
+Its laboratory-frame frequency is $\Omega$.  If all inequalities are strict,
+there are exactly $2^{N-1}$ locked states modulo diagonal rotation.  If
+exactly $s$ edges are saturated and none is violated, there are exactly
+$2^{N-1-s}$ states.  If any edge violates (3), there is no locked state.
+\end{theorem}
+\begin{proof}
+Summing (1) fixes the common frequency as $\Omega$.  In the rotating frame a
+locked state obeys $Bf=\eta$, where $f=K\sin\delta$.  The tree incidence
+matrix has rank $N-1$ and therefore determines $f$ uniquely.  Summing $Bf$
+over $S_e$ cancels internal columns and leaves $f_e=F_e$, proving (2).
+Thus each edge reduces to
+\begin{equation}
+ K_e\sin\delta_e=F_e.
+\end{equation}
+It has two solutions modulo $2\pi$ under strict inequality, one at equality,
+and none outside.  Since a tree has no cycle constraint, arbitrary edge
+differences reconstruct one phase vector after fixing $\theta_0=0$: for a
+vertex $v$, sum the signed $\delta_e$ along the unique root-to-$v$ path.
+This also proves injectivity of the reconstruction modulo diagonal rotation.
+Multiplication of the independent edge choices gives the stated counts.
+\end{proof}
+
+Writing $r$ for the number of strict edges, the full branch-generating
+polynomial is
+\begin{equation}
+ \sum_{\text{locked branches}}z^{\#\{e:\cos\delta_e<0\}}
+   =(1+z)^r,
+\end{equation}
+with $r=N-1$ in a strict chamber and $r=N-1-s$ on a face with $s$
+saturated edges.  Thus the theorem gives the whole branch distribution, not
+only its total.
+
+\section{Morse theorem}
+On a local lift of the torus, set
+\begin{equation}
+ V(\phi)=-\eta^{\mathsf T}\phi-\sum_e K_e
+              \cos((B^{\mathsf T}\phi)_e).
+\end{equation}
+This is a local lifted potential; the linear term need not define a
+single-valued global torus potential.  Its Hessian at a locked branch is
+\begin{equation}
+ H=B\,\operatorname{diag}(K_e\cos\delta_e)B^{\mathsf T}.
+\end{equation}
+\begin{theorem}[Edgewise quotient inertia]
+On the diagonal-rotation quotient, the Morse index of a locked branch equals
+the number of edges with $\cos\delta_e<0$, and its nullity equals the number
+of saturated edges.  Hence a strict chamber has one and only one linearly
+asymptotically stable branch modulo rotation; all other strict branches are
+unstable.  Saturated branches are nonhyperbolic.
+\end{theorem}
+\begin{proof}
+Let the columns of $Q$ span $\one^\perp$ and put $P=B^{\mathsf T}Q$.  The
+square matrix $P$ is invertible because
+$\ker B^{\mathsf T}=\operatorname{span}\{\one\}$.  Therefore
+\begin{equation}
+ Q^{\mathsf T}HQ=P^{\mathsf T}
+ \operatorname{diag}(K_e\cos\delta_e)P.
+\end{equation}
+Sylvester's law proves the inertia statement.  The rotating-frame
+linearization is $-H$, so quotient stability holds precisely when all edge
+cosines are positive.
+\end{proof}
+
+\section{Degeneration ledger}
+At saturation the inverse-sine branches merge and the Hessian gains one null vector
+per saturated edge; no nonlinear stability conclusion is inferred.  For
+$N=1$ the quotient is a point.  If $K_e=0$, a nonzero cut demand forbids
+locking while zero demand disconnects the phase constraint, changing the
+positive-weight owner.  Cyclic graphs add flow freedom and cycle constraints,
+so the theorem does not transfer by relabeling.  No global classification of
+unlocked running states is claimed.
+
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+edge condition & locked branches & quotient Hessian status\\
+\midrule
+$|F_e|<K_e$ for all $e$ & $2^{N-1}$ & one stable; binomial index law\\
+$s$ equalities, no violation & $2^{N-1-s}$ & nullity $s$; nonhyperbolic\\
+some $|F_e|>K_e$ & none & no locked Hessian\\
+$K_e=0$ & changed owner & disconnected constraint possible\\
+cycle added & changed owner & flow and phase cycle freedom\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+{\small
+\section{Executable exact audit}
+The certificate independently enumerates every labeled Pr\"ufer tree for
+$2\le N\le7$: $18{,}248$ trees in all.  It constructs rational cut demands,
+couplings and centered frequencies, then rederives incidence balance, every
+subtree cut, the strict/saturated/violated classification, the complete
+branch histogram and quotient nullity.  The deterministic corpus contains
+$6{,}082$ strict, $6{,}083$ saturated and $6{,}083$ violated instances.
+
+The producer-independent checker closes $477{,}330$ assertions; a separate
+SymPy computation closes 261 matrix and trigonometric identities; replay is
+byte-exact; and 34 rehashed hostile semantic mutations are rejected.  These
+finite receipts stress conventions and regression paths.  The all-$N$
+theorem rests on the cut cancellation, tree reconstruction and congruence
+proofs above, not on enumeration.  Kuramoto's 1975 chapter is cited only for
+model attribution; no literature-priority claim is made.
+
+\section{Route A and claim boundary}
+
+The arithmetic origin is \texttt{none}.  The strict evaluator tuple is
+\begin{center}\small\ttfamily
+(A0\_FAIL,A1\_WEAK,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT).
+\end{center}
+The verdict and gate are
+\begin{center}\small\ttfamily
+ROUTE\_A\_REJECTED,\qquad route\_b\_invocation\_allowed: false,
+\end{center}
+under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No target divisor, Euler factor,
+root number, automorphy, functional equation, or Hilbert--P\'olya operator is
+claimed.
+
+\begin{thebibliography}{9}
+\bibitem{Kuramoto} Y. Kuramoto, ``Self-entrainment of a population of coupled
+non-linear oscillators,'' in \emph{International Symposium on Mathematical
+Problems in Theoretical Physics}, Lecture Notes in Physics 39 (1975),
+420--422. \url{https://doi.org/10.1007/BFb0013365}.
+\end{thebibliography}
+}
+\end{document}

@@ -1,0 +1,154 @@
+skill: route-a-evaluator
+skill_version: 0.2.0
+skill_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+candidate_id: HCS-C260
+source_commit: 98782afe1e754c311ad0736f72ce09dcc7c85c77
+evaluation_date: 2026-08-31
+evaluator_authority_path: flow_systems/skills/route-a-evaluator.md
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+artifact_path_base: henon_dynamics/henon_pgl2_projective_mobius_cycle_atlas_route_a
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+
+candidate_definition: complete projective Mobius action of PGL_2(F_q) on P^1(F_q) for arbitrary q=p^r
+family: finite projective-linear permutation dynamics
+phase_space: P^1(F_q), q+1 points, for every prime power q
+dynamics: one projective Mobius update per source time
+parameters: every nonzero-determinant 2 by 2 matrix modulo scalar
+parameter_provenance: intrinsic finite-field projective-linear parameters; no fitting
+arithmetic_origin: finite fields and projective tori are intrinsic
+clock: one Mobius update; no logarithmic prime roof
+normalization: matrices modulo nonzero scalar and ordinary fixed counts
+determinant_convention: source Artin--Mazur zeta and finite Koopman determinant only
+orbit_cutoff: all q analytically; 18 exact fields are finite sentinels
+precision: exact finite-field, permutation, integer, and symbolic algebra
+training_data: none
+forbidden_data: target primes or zeros, arithmetic local data, Euler factors, root numbers, automorphy, target divisor or functional equation, Hilbert--Polya, and Route B
+code_commit: 98782afe1e754c311ad0736f72ce09dcc7c85c77
+artifact_paths:
+  - results/c260_pgl2_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+
+source_lock:
+  object: all g in PGL_2(F_q) acting on P^1(F_q)
+  arithmetic_origin: arbitrary prime-power finite fields
+  clock: one source update
+  normalization: q finite points plus infinity
+  determinant_convention: source Artin--Mazur and finite Koopman only
+  cutoff: all q proved; 18 prime and extension fields exhaustively checked
+  precision: exact
+  allowed_data: q, field operations, matrix classes, projective permutations, and their exact derived data
+  forbidden_data: target arithmetic, target spectra, target determinant, Hilbert--Polya, and Route B
+
+a0:
+  verdict: A0_WEAK_ARITHMETIC_RELATION
+  evidence_status: PROVED_WEAK
+  strongest_evidence: split and nonsplit projective orders are controlled exactly by q-1 and q+1, with an intrinsic characteristic-two Artin--Schreier trace rule
+  strongest_failure: rational primes do not select primitive source orbits and no logarithmic prime clock or von Mangoldt amplitude emerges
+  arithmetic_controls:
+    - arbitrary prime powers are covered analytically
+    - prime and extension, odd and even, split and nonsplit faces are explicit
+    - no rational-prime or target table is imported
+  artifacts:
+    - SOURCE_AUDIT.md
+    - THEOREM_PACKAGE.md
+
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: every element has one of four proved complete cycle types, yielding all iterated fixed counts and primitive cycles by exact Mobius inversion
+  strongest_failure: analytic completeness is source-local and supplies no target prime-orbit ownership
+  metrics:
+    arbitrary_prime_power_classifications: 1
+    dynamical_types: 4
+    exhaustively_checked_fields: 18
+    exhaustively_checked_pgl_elements: 155346
+    direct_state_images: 4367094
+    histogram_mismatches: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c260_pgl2_evidence.json
+
+a2:
+  verdict: A2_FAIL
+  evidence_status: NOT_TESTABLE
+  strongest_evidence: each source zeta and finite Koopman determinant follows exactly from the complete cycle multiset
+  strongest_failure: no target divisor, train-validation-test split, or target root-count comparison exists
+  metrics:
+    exact_source_zeta_formulas: all_projective_classes
+    zero_error_train: NOT_TESTABLE
+    zero_error_validation: NOT_TESTABLE
+    zero_error_test: NOT_TESTABLE
+    extra_zero_count: NOT_TESTABLE
+    missing_zero_count: NOT_TESTABLE
+    root_count_discrepancy: NOT_TESTABLE
+    cutoff_drift: 0
+    precision_drift: 0
+    control_margin: NOT_TESTABLE
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c260_pgl2_evidence.json
+
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: finite source rationality and reciprocal cycle determinant are exact
+  strongest_failure: no target functional equation, continuation, counting law, gamma factor, or Weil compression is defined
+  analytic_structure:
+    source_rationality: PROVED
+    target_functional_equation: NOT_TESTABLE
+    target_continuation: NOT_TESTABLE
+    target_counting_law: NOT_TESTABLE
+  weil_compression:
+    natural_compression: none
+    arithmetic_side: none
+    verdict: STOP_SCOPED
+  artifacts:
+    - RESEARCH_QUESTION.md
+    - paper/main.pdf
+
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: counting measure gives a canonical same-clock permutation unitary whose spectrum is the union of roots of unity from every cycle
+  strongest_failure: this finite source unitary has no target spectral identification and cannot repair A2 or A3
+  metrics:
+    same_clock_unitary_lifts: all_projective_classes
+    exact_source_eigenvalue_ledgers: all_projective_classes
+    exact_projective_reversors: all_projective_classes
+    target_operator_identifications: 0
+  artifacts:
+    - THEOREM_PACKAGE.md
+    - results/c260_pgl2_evidence.json
+
+adversarial_controls:
+  controls_used:
+    - prime fields and extension fields of degrees two through five
+    - odd and characteristic-two classification rules
+    - split and nonsplit involutions in odd characteristic
+    - all projective matrix representatives in 18 fields
+    - independent type recovery from permutation geometry
+    - canonical per-element record hashing
+    - repaired-hash semantic mutations
+  proves_too_much_risk: every finite permutation has a rational zeta and unitary Koopman permutation, so those properties alone cannot certify target ownership
+  verdict: PASS_WITH_ARITHMETIC_BOUNDARY
+
+overall_verdict: ROUTE_A_EXPLORATORY
+route_a_tuple:
+  - A0_WEAK_ARITHMETIC_RELATION
+  - A1_PASS_ANALYTIC
+  - A2_FAIL
+  - A3_FAIL
+  - A4_NATURAL_QUANTIZATION
+claim_boundary: arbitrary-prime-power projective cycle classification, primitive ledger, source zeta, source Koopman spectrum, reversors, and type census only
+blocking_conditions:
+  - no rational-prime primitive-orbit dictionary
+  - no logarithmic prime clock or target orbit weight
+  - no target divisor or validation protocol
+  - no target global analytic structure or Weil compression
+next_smallest_test: seek a source in which rational primes select global primitive orbits rather than finite-field torus orders
+round2_clues:
+  - complete source orbit classification can pass A1 without supplying A2 or A3
+  - the characteristic-two absolute trace is intrinsic arithmetic but not a target Euler factor
+  - natural same-clock unitarity and exact reversibility do not repair a failed target determinant gate
+route_b_invocation_allowed: false

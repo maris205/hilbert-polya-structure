@@ -1,0 +1,177 @@
+\pdfvariable suppressoptionalinfo 611
+\pdfvariable trailerid {[<C2612026083100000000000000000000><C2612026083100000000000000000000>]}
+\providecommand{\CRevisionRound}{2}
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=17mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\emergencystretch=2em
+\newtheorem{theorem}{Theorem}
+\newcommand{\T}{\mathbb T}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\ee}{\mathrm e}
+\newcommand{\ii}{\mathrm i}
+\title{Cubic Talbot Revivals and Fixed-Mode Geometry\\for the Periodic Airy Flow}
+\author{HCS Research Program}
+\date{31 August 2026\quad (revision \CRevisionRound)}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give an all-time operator atlas for the periodic Airy equation.  Its
+Fourier flow is a strongly continuous unitary group with least full-space
+period $2\pi$.  At every reduced rational time $2\pi p/q$, the propagator is
+an exact cubic discrete-Fourier sum of $q$ spatial translations and has
+global order $q$.
+\ifnum\CRevisionRound>0
+We also classify its full fixed subspace by prime valuations, all minimum
+periods of finite-spectrum states, and the irrational fixed-space boundary.
+The receipt independently checks 2,806 strobes and 101 high-precision DFTs.
+\fi
+\ifnum\CRevisionRound>1
+The canonical cubic generator is source-native, but its unitary maps are
+noncompact and not trace class.  No arithmetic or Hilbert--P\'olya claim is
+made.
+\fi
+\end{abstract}
+
+Periodic and nonperiodic Airy revival phenomena provide the surrounding
+context~\cite{Pelloni2024,Boulton2021}.  The periodic strobe, fixed-space,
+and state-period classifications below are derived directly.
+
+\section{Frozen flow and the global clock}
+On $\T=\mathbb R/(2\pi\Z)$ fix
+\begin{equation}
+ u_t+u_{xxx}=0,\qquad e_n(x)=\ee^{\ii nx}.                 \label{eq:airy}
+\end{equation}
+Writing $D=-\ii\partial_x$, Fourier evolution gives
+\begin{equation}
+ U(t)e_n=\ee^{\ii n^3t}e_n=\ee^{\ii tD^3}e_n.             \label{eq:mode}
+\end{equation}
+The real Fourier multiplier $n^3$ makes $D^3$ self-adjoint on its Sobolev
+domain.  Parseval and dominated convergence therefore prove that $U(t)$ is
+a strongly continuous unitary group on $L^2(\T)$.
+
+If $U(t)=I$, the mode $n=1$ forces $t\in2\pi\Z$; conversely every integer
+cube has integral phase at such times.  Thus $2\pi$ is the least positive
+return of the \emph{whole} phase space.  This is distinct from the often
+shorter return of an individual state.
+
+\section{Complete rational-revival theorem}
+\begin{theorem}\label{thm:revival}
+Let $(p,q)=1$ and $q\ge1$.  At $t=2\pi p/q$,
+\begin{equation}
+ U(t)f=\sum_{r=0}^{q-1}A_{p,q}(r)\,
+ \tau_{2\pi r/q}f,
+ \quad
+ A_{p,q}(r)=\frac1q\sum_{s=0}^{q-1}
+ \ee^{2\pi\ii(ps^3-sr)/q},                              \label{eq:dft}
+\end{equation}
+where $\tau_a f(x)=f(x+a)$.  Moreover
+\begin{enumerate}
+\item $\sum_r|A_{p,q}(r)|^2=1$ and the strobe has exact order $q$;
+\item its fixed space is
+\[
+ \overline{\operatorname{span}}\{e_n:q\mid n^3\}
+ =\overline{\operatorname{span}}\{e_n:L(q)\mid n\},
+ \quad L(q)=\prod_{\ell^a\parallel q}\ell^{\lceil a/3\rceil};
+\]
+\item if $t/(2\pi)$ is irrational, the fixed space of $U(t)$ consists
+exactly of constants.
+\end{enumerate}
+\end{theorem}
+
+\paragraph{Proof.}
+The identity
+\[
+ (n+q)^3-n^3=q(3n^2+3nq+q^2)
+\]
+makes the multiplier in \eqref{eq:mode} $q$-periodic in $n$.  Finite Fourier
+inversion yields \eqref{eq:dft}; its unit-modulus input vector gives Parseval.
+The $q$th power is the identity, while the mode-one phase forces any order
+to be divisible by $q$.  Finally, $q\mid n^3$ is equivalent prime by prime to
+$v_\ell(n)\ge\lceil v_\ell(q)/3\rceil$.  At irrational time, fixing a
+nonzero mode would make $n^3t/(2\pi)$ an integer, a contradiction.
+
+\ifnum\CRevisionRound=0
+The baseline stops with the all-rational revival theorem.  Fixed-support
+state periods, executable receipts, and operator boundaries are added only
+in later revisions.
+\fi
+
+\ifnum\CRevisionRound>0
+\section{Individual periods and independent receipt}
+Let a nonconstant state have finite nonzero Fourier support $S$.  Simultaneous
+return requires $Tn^3\in2\pi\Z$ for every $n\in S$, hence its least positive
+period is
+\begin{equation}
+ T_S=\frac{2\pi}{\gcd\{|n|^3:n\in S,\ n\ne0\}}.          \label{eq:state}
+\end{equation}
+Constants are fixed at every time and have no least positive period.  Formula
+\eqref{eq:state} separates state recurrence from the global $2\pi$ clock.
+
+The producer covers all reduced $(p,q)$ through $q=96$: 2,806 exact phase
+vectors are retained by cryptographic digest, together with the valuation
+stride and a 1,025-mode fixed-count window.  For every reduced pair through
+$q=18$, it also stores the full 90-decimal DFT and inverse: 101 transforms.
+\begin{center}
+\small
+\begin{tabular}{lrrl}
+\toprule
+receipt & rows & independent tests & mathematical sentinel\\
+\midrule
+rational strobes & 2,806 & 50,765 total & mode-one order, $q\mid n^3$\\
+cubic DFT & 101 & inverse + Parseval & translated-copy identity\\
+finite supports & 10 & gcd reconstruction & least state period\\
+symbolic/modular & --- & 301,200 & cubic and valuation laws\\
+hostile mutations & 41 & 41 rejected & repaired payload hashes\\
+\bottomrule
+\end{tabular}
+\end{center}
+The checker imports no producer function.  It reconstructs modular phases,
+prime valuations, complex coefficients, inverse DFTs, and support gcds.
+Finite rows test implementation; Theorem~\ref{thm:revival} is not inferred
+from a cutoff.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Operator, collision, and Route-A boundaries}
+For every $t$, the sequence $\{U(t)e_n\}$ is orthonormal and therefore has
+no norm-convergent subsequence.  Thus $U(t)$ is noncompact on
+$L^2(\T)$, in particular neither trace class nor a source for the desired
+infinite-dimensional Fredholm determinant.  The self-adjoint $D^3$ is a
+natural source quantization, but its integer-cube spectrum has no target-zero
+identification.
+
+C195 (viscous Burgers), C206 (Couette), C217 (rotating shallow water), C221
+(cubic NLS), and C256 (KdV cnoidal profiles) do not own the cubic rational-
+time revival operator.  This is workspace bookkeeping, not a priority claim.
+The strict assessment is
+\[
+\texttt{(A0\_FAIL,A1\_WEAK,A2\_FAIL,A3\_FAIL,
+A4\_NATURAL\_QUANTIZATION)},
+\]
+with \texttt{ROUTE\_A\_REJECTED} and Route B false.  The scope literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  There is no arithmetic local
+data, Euler factor, root number, automorphy, target divisor or functional
+equation, target determinant, target zero match, or Hilbert--P\'olya operator.
+\fi
+
+\section{Conclusion and limitations}
+One theorem now controls the complete periodic Airy group, every rational
+revival, every sampled fixed subspace, and every finite-support period.  It
+does not classify nonperiodic third-order boundary conditions, evaluate all
+cubic Gauss sums in closed form, or extend to nonlinear KdV.
+
+\begin{thebibliography}{9}
+\bibitem{Pelloni2024} B.~Pelloni and D.~A.~Smith, ``Revivals, or the Talbot
+effect, for the Airy equation,'' \emph{Studies in Applied Mathematics} 153
+(2024), e12699,
+\href{https://doi.org/10.1111/sapm.12699}{doi:10.1111/sapm.12699}.
+\bibitem{Boulton2021} L.~Boulton, G.~Farmakis, and B.~Pelloni, ``Beyond
+periodic revivals for linear dispersive PDEs,'' \emph{Proceedings of the
+Royal Society A} 477 (2021), 20210241,
+\href{https://doi.org/10.1098/rspa.2021.0241}{doi:10.1098/rspa.2021.0241}.
+\end{thebibliography}
+\end{document}

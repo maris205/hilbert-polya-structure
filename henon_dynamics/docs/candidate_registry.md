@@ -3,6 +3,32 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C259--HCS-C263 additions (2026-08-31)
+
+Five independent cross-subtype candidates were frozen from baseline
+`98782afe1e754c311ad0736f72ce09dcc7c85c77`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C259 | Every positively weighted heterogeneous Kuramoto tree has an exact subtree cut-flow locking criterion, all inverse-sine equilibrium branches and saturated mergers, and an edgewise quotient Morse-index/nullity theorem. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [tree-Kuramoto package](../henon_tree_kuramoto_locking_morse_route_a/) · [paper PDF](../henon_tree_kuramoto_locking_morse_route_a/paper/main.pdf) |
+| HCS-C260 | Every element of `PGL_2(F_q)` has one of four projective cycle types, with complete fixed, primitive, zeta, Koopman, reversor, characteristic-two and all-element census ledgers for every prime power. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [projective-Möbius package](../henon_pgl2_projective_mobius_cycle_atlas_route_a/) · [paper PDF](../henon_pgl2_projective_mobius_cycle_atlas_route_a/paper/main.pdf) |
+| HCS-C261 | The periodic Airy equation closes its exact unitary group, least full return, every rational cubic-DFT translate formula, exact strobe orders and fixed spaces, finite-support returns, and irrational fixed-space boundary. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Airy-Talbot package](../henon_airy_talbot_revival_route_a/) · [paper PDF](../henon_airy_talbot_revival_route_a/paper/main.pdf) |
+| HCS-C262 | The two-segment square-wave Hill oscillator has unified all-sign segment matrices, exact monodromy discriminant, complete Floquet/Jordan chamber, Chebyshev iterate closure, and all zero-duration, zero-stiffness and constant-coefficient faces. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Hill-Floquet package](../henon_square_wave_hill_floquet_route_a/) · [paper PDF](../henon_square_wave_hill_floquet_route_a/paper/main.pdf) |
+| HCS-C263 | The multicolor classical Pólya urn closes exchangeable ordered words, Dirichlet-multinomial counts, beta-binomial marginals, every factorial moment, proportion-martingale convergence, the two-way Dirichlet de Finetti law, and every iid or lower-dimensional boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Pólya-urn package](../henon_multicolor_polya_urn_dirichlet_route_a/) · [paper PDF](../henon_multicolor_polya_urn_dirichlet_route_a/paper/main.pdf) |
+
+C259 and C261--C263 are `ROUTE_A_REJECTED`; C260 is
+`ROUTE_A_EXPLORATORY` because its finite-field/projective arithmetic is
+intrinsic but supplies neither a rational-prime primitive-orbit dictionary nor
+a logarithmic prime clock.  Route B is false for all five.  No target local
+datum, Euler factor, root number, automorphy, target divisor/counting law or
+functional equation, Hilbert--Pólya operator, or Route-B input is introduced.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; release hashes are recorded in
+[BATCH_REVIEW_C259_C263.md](../BATCH_REVIEW_C259_C263.md).
+
 ## HCS-C254--HCS-C258 additions (2026-08-31)
 
 Five independent cross-subtype candidates were frozen from baseline

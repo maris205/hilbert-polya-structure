@@ -17,6 +17,21 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C259--HCS-C263 additions (2026-08-31)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O243 | HCS-C259 tree-Kuramoto locked branches as arithmetic primitive owners | proved relative-equilibrium and clock obstruction | The complete locked set consists of source-local relative equilibria selected by continuous cut demands and edge capacities.  Neither their inverse-sine branch labels nor their Hessian signs supply rational-prime carriers, a logarithmic prime clock, a target divisor, or a target determinant. | The exact locking chamber, all branch mergers, quotient Morse indices and unique strict stable branch remain valid; cyclic graphs and unlocked running states are outside the owner. | ../henon_tree_kuramoto_locking_morse_route_a/THEOREM_PACKAGE.md |
+| HEN-O244 | HCS-C260 projective finite-field cycles as rational-prime primitive cycles | proved quotient-factor and clock obstruction | Prime powers index the chosen finite fields, while projective cycles live inside each finite source action.  They do not identify rational primes with primitive source orbits, and the update clock is not a logarithmic prime roof.  The finite zeta and Koopman determinant remain generic finite-permutation data. | The arbitrary-prime-power four-type classification, characteristic-two test, exact census, reversors and complete cycle ledgers survive; the intrinsic arithmetic signal supports only exploratory A0. | ../henon_pgl2_projective_mobius_cycle_atlas_route_a/THEOREM_PACKAGE.md |
+| HEN-O245 | HCS-C261 rational Airy revivals as a Fredholm primitive-orbit determinant | proved noncompact-unitary and clean-fixed-space obstruction | Airy evolution is an infinite-dimensional unitary Fourier multiplier and is not compact or Schatten.  Rational strobes have infinite-dimensional arithmetic-mode fixed spaces rather than isolated primitive returns, so an ordinary Fredholm determinant or target divisor cannot be inferred. | The self-adjoint cubic generator, full unitary group, rational Talbot formula, exact strobe order, fixed-mode valuation law and finite-support periods remain exact and source-local. | ../henon_airy_talbot_revival_route_a/THEOREM_PACKAGE.md |
+| HEN-O246 | HCS-C262 Hill monodromy as an arithmetic global determinant | proved continuous-parameter and finite-monodromy obstruction | The exact `SL(2,R)` monodromy depends continuously on segment stiffnesses and durations.  Its Floquet multipliers, Chebyshev iterates and band edges carry no rational-prime owner, logarithmic prime clock, target divisor, or target analytic continuation. | The complete all-sign stability atlas, Jordan-edge distinction, iterate formula and every singular face survive; finite matrix characteristic data remain source-local. | ../henon_square_wave_hill_floquet_route_a/THEOREM_PACKAGE.md |
+| HEN-O247 | HCS-C263 Pólya-urn histories as deterministic arithmetic primitive orbits | proved stochastic-owner and growing-mass clock obstruction | Total mass grows strictly with source time when reinforcement is positive, so there is no nontrivial recurrent state or primitive source-orbit ledger.  Exchangeable word probabilities and the Dirichlet directing measure do not supply deterministic rational-prime carriers or a target determinant. | The full finite-time word/count/moment laws, martingale and de Finetti limits, and iid, zero-mass and one-color faces remain exact; no probability transform is renamed as an Euler factor. | ../henon_multicolor_polya_urn_dirichlet_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are source-local and invariant under the declared
+coordinate conventions; none licenses Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and the complete evidence/PDF audit is recorded
+in `../BATCH_REVIEW_C259_C263.md`.
+
 ## HCS-C249--HCS-C253 additions (2026-08-30)
 
 | ID | Candidate | Status | Exact obstruction | Scope and invariance | Artifact |

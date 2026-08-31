@@ -2719,6 +2719,36 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C259--C263
+
+This round changes mathematical owner in every paper: a nonlinear
+heterogeneous phase network on a tree, a finite-field projective group action,
+a linear dispersive PDE with rational-time revivals, a periodically switched
+Hamiltonian oscillator, and an exchangeable reinforced stochastic process.
+Each manuscript closes one all-parameter source theorem; the five papers are
+independent rather than installments of one calculation.
+
+- [C259 heterogeneous tree-Kuramoto locking and Morse atlas](henon_tree_kuramoto_locking_morse_route_a/README.md) · [paper PDF](henon_tree_kuramoto_locking_morse_route_a/paper/main.pdf)
+- [C260 projective Möbius cycle atlas over finite fields](henon_pgl2_projective_mobius_cycle_atlas_route_a/README.md) · [paper PDF](henon_pgl2_projective_mobius_cycle_atlas_route_a/paper/main.pdf)
+- [C261 periodic Airy cubic-Talbot revival atlas](henon_airy_talbot_revival_route_a/README.md) · [paper PDF](henon_airy_talbot_revival_route_a/paper/main.pdf)
+- [C262 square-wave Hill Floquet and band-edge atlas](henon_square_wave_hill_floquet_route_a/README.md) · [paper PDF](henon_square_wave_hill_floquet_route_a/paper/main.pdf)
+- [C263 multicolor Pólya-urn and Dirichlet-limit atlas](henon_multicolor_polya_urn_dirichlet_route_a/README.md) · [paper PDF](henon_multicolor_polya_urn_dirichlet_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C259_C263.md),
+[batch plan](BATCH_PLAN_C259_C263.md), and
+[batch review](BATCH_REVIEW_C259_C263.md) for collision screening, theorem
+contracts, exact validation counts, PDF hashes, and content-addressed release
+ledgers.  Across the five packages the round closes 6,769,495 independent-
+checker assertions, 302,099 symbolic checks, 179/179 hostile rejections, 135
+manifest payloads (140 physical files), and 11 final-paper pages with 122
+embedded/subset font records.  C259 and C261--C263 remain
+`ROUTE_A_REJECTED`; C260 reaches only `ROUTE_A_EXPLORATORY` through intrinsic
+finite-field arithmetic and a complete source-local cycle atlas.  Coordinates
+remain candidate-local, Route B is disabled, and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local data, Euler factor,
+root number, automorphy object, target divisor/counting law or functional
+equation, Hilbert--Pólya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C254--C258
 
 This round again changes mathematical owner in every paper: a Monod

@@ -1,0 +1,178 @@
+\pdfvariable trailerid {[<C2632026083100000000000000000000><C2632026083100000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\title{Exchangeability and the Dirichlet Limit\\of a Multicolor P\'olya Urn}
+\author{Route-A source-local certificate HCS-C263}
+\date{31 August 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We close the classical multicolor P\'olya urn from ordered histories through
+all factorial moments to its Dirichlet directing measure.  Finite-time
+exchangeability and the de Finetti mixture are proved in both directions, and
+the normalized masses converge almost surely and in every finite $L^p$.
+Zero reinforcement, zero initial masses, and one color are retained without
+undefined normalization.  No target arithmetic or spectral data are used.
+\end{abstract}
+
+\section{Frozen urn}
+This is the classical reinforced scheme of Eggenberger and
+P\'olya~\cite{EP}.
+Let $a_i\ge0$, $\sum_i a_i>0$, and first suppose $c>0$.  A zero-mass color is
+never drawn, so delete it and put $\alpha_i=a_i/c>0$ and
+$A=\sum_i\alpha_i$ on the active face.  At each integer time a color is
+drawn proportionally to its current mass, replaced, and receives additional
+mass $c$.  Write $N_i(n)$ for its count among the first $n$ draws and use the
+rising factorial $(x)^{\overline r}=x(x+1)\cdots(x+r-1)$.
+
+\begin{theorem}[word and count law]
+If an ordered word $w=(w_1,\ldots,w_n)$ has multiplicities $n_i$, then
+\begin{equation}
+ \Prb(w)=\frac{\prod_{i=1}^K(\alpha_i)^{\overline{n_i}}}
+ {(A)^{\overline n}}.
+\end{equation}
+Consequently
+\begin{equation}
+ \Prb\{N(n)=(n_1,\ldots,n_K)\}
+ =\frac{n!}{\prod_i n_i!}
+ \frac{\prod_i(\alpha_i)^{\overline{n_i}}}{(A)^{\overline n}}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Before draw $t+1$, the predictive probability of color $i$ is
+$(\alpha_i+N_i(t))/(A+t)$.  Multiplication along a word groups the numerator
+factors by color and yields (1), independent of order.  There are
+$n!/\prod_i n_i!$ words with the given counts, proving (2).  Summing (2)
+gives one by the multivariate rising-factorial Vandermonde identity.
+\end{proof}
+
+\section{Marginals and every factorial moment}
+Write $(x)_{[r]}=x(x-1)\cdots(x-r+1)$ for a falling factorial.  The
+distinction from the rising factorial in (1)--(2) is essential.
+\begin{theorem}[moment closure]
+Every color count is beta--binomial:
+\[
+ \Prb\{N_i(n)=x\}=\binom nx
+ \frac{(\alpha_i)^{\overline x}(A-\alpha_i)^{\overline{n-x}}}
+ {(A)^{\overline n}}.
+\]
+For a multi-index $r=(r_1,\ldots,r_K)$ and $R=\sum_i r_i$,
+\begin{equation}
+ \E\prod_i(N_i(n))_{[r_i]}
+ =(n)_{[R]}\frac{\prod_i(\alpha_i)^{\overline{r_i}}}
+ {(A)^{\overline R}}.                                  \tag{3}
+\end{equation}
+Hence
+\begin{align*}
+ \E N_i&=\frac{n\alpha_i}{A},\\
+ \operatorname{Var}N_i&=
+ \frac{n\alpha_i(A-\alpha_i)(A+n)}{A^2(A+1)},\\
+ \operatorname{Cov}(N_i,N_j)&=
+ -\frac{n\alpha_i\alpha_j(A+n)}{A^2(A+1)}\quad(i\ne j).
+\end{align*}
+\end{theorem}
+\begin{proof}
+Sum (2) over the other colors and apply rising-factorial Vandermonde to
+obtain the marginal.  To prove (3), mark an ordered selection of $R$ draw
+positions, assigning $r_i$ positions to color $i$.  Exchangeability makes the
+probability of that assignment
+$\prod_i(\alpha_i)^{\overline{r_i}}/(A)^{\overline R}$;
+there are $(n)_{[R]}$ ordered marked positions.  The first and second choices
+of $r$ give the displayed mean and covariance formulas.
+\end{proof}
+
+\section{Dirichlet mixture, converse, and limit}
+Let $\Theta$ have the Dirichlet distribution with active parameter vector
+$\alpha$.  Its monomial moments are
+\begin{equation}
+ \E\prod_i\Theta_i^{n_i}
+ =\frac{\prod_i(\alpha_i)^{\overline{n_i}}}{(A)^{\overline n}}. \tag{4}
+\end{equation}
+Thus iid categorical draws conditional on $\Theta$ have exactly the ordered
+word law (1).  Conversely, after a word with counts $N_i(n)$, Bayes' formula
+gives the posterior $\operatorname{Dirichlet}(\alpha+N(n))$ and hence
+predictive probability $(\alpha_i+N_i(n))/(A+n)$, exactly the urn update.
+This proves the finite-time mixture in both directions, not merely equality
+of the first two moments; it is the finite-color specialization of the
+P\'olya scheme discussed by Blackwell and MacQueen~\cite{BM}.
+
+Define
+\[
+ P_i(n)=\frac{\alpha_i+N_i(n)}{A+n}.
+\]
+Conditioning on the first $n$ draws gives
+\begin{align*}
+ \E[P_i(n+1)\mid\mathcal F_n]
+ &=P_i(n)\frac{\alpha_i+N_i(n)+1}{A+n+1}
+ +(1-P_i(n))\frac{\alpha_i+N_i(n)}{A+n+1}\\
+ &=P_i(n).
+\end{align*}
+Thus each coordinate is a bounded martingale.  On the mixture probability
+space, the conditional strong law gives $N(n)/n\to\Theta$ almost surely,
+while $P(n)-N(n)/n\to0$.  Therefore
+\[
+ P(n)\longrightarrow\Theta\sim\operatorname{Dirichlet}(\alpha)
+ \quad\hbox{almost surely}.
+\]
+Every coordinate is bounded by one, so dominated convergence gives convergence
+in $L^p$ for every finite $p$.  This identifies the martingale limit, rather
+than only proving that a limit exists.
+
+\section{Boundary atlas and object separation}
+If $c=0$, the masses do not change.  The draws are iid with probabilities
+$p_i=a_i/\sum_j a_j$, $N(n)$ is multinomial, and no $\alpha=a/c$ is defined.
+The physical mass proportion stays equal to $p$, whereas the empirical count
+proportion $N(n)/n$ converges to $p$.  If $a_i=0$, color $i$ remains absent and
+all positive-reinforcement formulas apply after deleting it.  If $K=1$, the
+unique word has probability one and every normalized proportion is one.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+object & finite-time role & limiting role\\
+\midrule
+$N_i(n)$ & integer draw count & $N_i(n)/n\to\Theta_i$\\
+$P_i(n)$ & normalized current mass & bounded martingale $\to\Theta_i$\\
+$\Theta_i$ & Dirichlet mixture coordinate & random directing probability\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Certificate and Route-A boundary}
+The exact implementation freezes twelve cases and enumerates $10{,}860$
+ordered words, $1{,}000$ composition rows, $1{,}021$ marginal rows,
+$1{,}567$ factorial-moment rows, and $2{,}042$ conditional martingale rows.
+An independent implementation closes $62{,}233$ assertions, SymPy closes
+$156$ identities, byte replay is exact, and repaired/stale-hash mutation
+testing rejects $23/23$ changes.  Finite enumeration is a regression oracle;
+the proof above holds for every $K$, time, and admissible parameter.
+
+Total mass grows from $\sum_i a_i$ to $\sum_i a_i+cn$.  Therefore this owner
+has no nontrivial periodic source orbit, primitive repetition clock, or source
+Artin--Mazur product.  It supplies no arithmetic local datum, Euler factor,
+root number, automorphy statement, target divisor, functional equation, or
+Hilbert--P\'olya operator.  Under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the strict tuple is
+\[
+ \texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FAIL)}.
+\]
+The verdict is \texttt{ROUTE\_A\_REJECTED}; Route B is disabled.  The
+Dirichlet directing measure is a source probability representation, not a
+target spectral operator.
+
+\begin{thebibliography}{9}
+\bibitem{EP} F. Eggenberger and G. P\'olya,
+\emph{\"Uber die Statistik verketteter Vorg\"ange},
+\emph{Z. Angew. Math. Mech.} \textbf{3} (1923), 279--289,
+\href{https://doi.org/10.1002/zamm.19230030407}{doi:10.1002/zamm.19230030407}.
+\bibitem{BM} D. Blackwell and J. B. MacQueen,
+\emph{Ferguson distributions via P\'olya urn schemes},
+\emph{Ann. Statist.} \textbf{1} (1973), 353--355,
+\href{https://doi.org/10.1214/aos/1176342372}{doi:10.1214/aos/1176342372}.
+\end{thebibliography}
+\end{document}
