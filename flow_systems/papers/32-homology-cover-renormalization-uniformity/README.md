@@ -4,8 +4,10 @@ Working title: *Uniformity Limits for Time–Multiplicity Renormalization in Gen
 
 ## Current status
 
-**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** Stage 1, literature screening,
-computation, novelty assessment, and claim registration are all unstarted.
+**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** Five Phase-1
+design/review artifacts are complete and the independent recheck is `PASS`.
+Literature screening, computation, novelty assessment, claim registration, and
+drafting remain `NOT_RUN`.
 
 ## Inheritance and immutable restrictions
 
@@ -16,12 +18,15 @@ deck/lift formulas `N^4`, `N`, `N^3`, `N ell(g)`, time rescaling `1/N`, and
 logarithmic multiplicity normalization `1/N^3` are fixed. The two towers may
 not be conflated, and the three-owner finite-panel identity is not a determinant.
 
-## Testable advance
+## Phase-1 frozen advance
 
-Stage 1 may pose a predeclared uniformity theorem or obstruction for growing
-owner panels: determine when the combined renormalization remains uniform
-coefficientwise or analytically, using higher-content owners and generic marked
-metrics as controls. Panel growth, norm, and order of limits must be frozen.
+The primary endpoint is now universal ownerwise recovery, with the content-one
+analytic subproduct strictly secondary. Phase 1 defines the fail-closed
+`SG2OwnerCanonical-v1` interface, formal ring `R_+`, separate `d=0` Hahn
+object, compact rectangles `K(delta,T,R)`, infinite theorem schedule `k>=1`,
+and finite diagnostic prefix `k<=8`. One certified higher- or zero-content
+mismatch closes the full recovery claim and cannot be hidden by scalar
+aggregation.
 
 ## Route boundary
 
@@ -33,5 +38,7 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See [pre-start brief](notes/stage1_prestart_brief.md) and [pipeline state](notes/pipeline_state.md).
-
+See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+[Research Question Brief](notes/stage1_phase1_rq_brief.md),
+[Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
+[pipeline state](notes/pipeline_state.md).

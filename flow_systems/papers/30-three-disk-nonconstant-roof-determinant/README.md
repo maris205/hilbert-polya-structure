@@ -5,10 +5,10 @@ Scattering Flow*
 
 ## Current status
 
-**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** Stage 1 has not started. This
-directory contains only an intake skeleton; no literature search, transfer
-operator, determinant calculation, numerical experiment, novelty assessment,
-or scientific result has been produced.
+**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** The five
+Phase-1 design/review artifacts are complete and the independent recheck is
+`PASS`. No literature search, transfer operator, determinant calculation,
+numerical experiment, novelty assessment, or scientific result has run.
 
 ## Inherited object and immutable initial restrictions
 
@@ -27,24 +27,23 @@ under the no-eclipse condition. The following restrictions are immutable:
 - A0 arithmetic source remains absent by construction, and no prime/zero target
   may be introduced to fit an outcome.
 
-## Testable advance proposed for Stage 1
+## Phase-1 frozen advance
 
-The planned question is whether a source-justified nonconstant-roof transfer
-operator can reproduce the physical primitive/repetition ledger and support a
-controlled finite determinant identity. A later authorized campaign would
-freeze function space, roof, weights, truncation, and comparison norms before
-execution, then compare trace, Euler-product, and determinant coefficients and
-use the exact period-two/period-three roof mismatch as a mandatory regression.
-Proof, stable approximation, and a precise failure theorem are all acceptable
-outcomes. No determinant result is claimed now.
+The first independent review found a Critical flaw: internal Euler/trace/
+determinant agreement is roof-agnostic and can hold for unit or shuffled roofs.
+The repaired question therefore separates three endpoints: algebraic
+calibration for every typed roof, pointwise physical-roof fidelity from an
+independent geometric construction, and cross-roof nontransfer. It also freezes
+a lawful coefficient comparison and four-part error decomposition. Missing
+pointwise/operator/error data return `NOT_EVALUABLE`; no determinant result is
+claimed.
 
 ## Route boundary
 
-This is a physical A1–A2 calibration and negative-control paper. No new formal
-tuple is assigned at pre-start. The inherited absence of an arithmetic source
-prevents a Route-A passage even if a physical determinant is obtained; A3 and
-A4 remain `NOT_RUN`. Route B is `CLOSED`, with evaluation `NOT_RUN` and
-invocation allowed `false`.
+This is separately typed physical-determinant infrastructure, not positive
+Route-A credit. The full candidate is frozen at
+`A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`; A3 and A4 remain `NOT_RUN`.
+Route B is `CLOSED`, with evaluation `NOT_RUN` and invocation allowed `false`.
 
 ## Author and declarations
 
@@ -56,6 +55,7 @@ invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See [the pre-start brief](notes/stage1_prestart_brief.md) and
+See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+[Research Question Brief](notes/stage1_phase1_rq_brief.md),
+[Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
 [pipeline state](notes/pipeline_state.md).
-

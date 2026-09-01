@@ -4,8 +4,10 @@ Working title: *An Exact Control-Matched Geodesic Census for the Frozen Bolza Ma
 
 ## Current status
 
-**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** No Stage-1 work, literature
-screening, census, magnetic comparison, novelty assessment, or result exists.
+**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** Five Phase-1
+design/review artifacts are complete and the independent recheck is `PASS`.
+No literature screening, census, magnetic comparison, novelty assessment,
+claim, or manuscript result has run.
 
 ## Inheritance and immutable restrictions
 
@@ -17,23 +19,27 @@ with the nonarithmetic control `NAZARENKO-EXP-OCTAGON-G2` at
 bundle/field convention, and no-target/no-arithmetic-label boundary are fixed.
 The cutoff cannot be retuned after outcomes.
 
-## Testable advance
+## Phase-1 frozen advance
 
-After Stage-1 method review, the proposed advance is a matched Bolza/control
-geometric census at the unchanged cutoff, with exact quotient-conjugacy,
-inversion-pair ownership, primitivity deduplication, and completeness boundaries
-closed before any magnetic comparison. A certified census, sharply bounded
-incomplete census, or certification obstruction is acceptable; none is claimed.
+The first review established that `21/10` lies below the Bolza systole and above
+the control systole, so the known empty/nonempty contrast is
+`A0_INCONCLUSIVE_SYSTOLE_CONFOUNDED`; the A0 panel also remains incomplete.
+The repaired advance is therefore strictly A1: close exact full-conjugacy,
+inversion-pair, primitivity, and completeness manifests beyond the already-known
+coarse support, or return a separately typed not-evaluable state. No A0 count,
+magnetic, or determinant claim is licensed.
 
 ## Route boundary
 
-This is A0–A1 control infrastructure. The full candidate stays `UNASSIGNED`;
-A2–A4 are `NOT_RUN`, and census evidence alone gives no determinant or quantum
-credit. Route B is `CLOSED` (`NOT_RUN`; invocation `false`).
+This is A1 ownership/completeness infrastructure. A formal A0 verdict is
+prohibited at this cutoff; the full candidate stays `UNASSIGNED`. A2–A4 are
+`NOT_RUN`, and Route B is `CLOSED` (`NOT_RUN`; invocation `false`).
 
 Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See [pre-start brief](notes/stage1_prestart_brief.md) and [pipeline state](notes/pipeline_state.md).
-
+See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+[Research Question Brief](notes/stage1_phase1_rq_brief.md),
+[Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
+[pipeline state](notes/pipeline_state.md).

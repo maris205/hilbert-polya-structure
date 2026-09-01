@@ -4,9 +4,10 @@ Working title: *Exact Conjugacy Ownership in Level-11 Hecke Output Ledgers*
 
 ## Current status
 
-**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** Stage 1, literature screening,
-scientific computation, novelty assessment, and claim registration have not
-started.
+**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** Five Phase-1
+design/review artifacts are complete and the independent recheck is `PASS`.
+Literature screening, scientific computation, novelty assessment, claim
+registration, and drafting remain `NOT_RUN`.
 
 ## Inheritance and immutable restrictions
 
@@ -18,14 +19,14 @@ and reciprocal log-zeta convention. The frozen 138-instance/55-group ledger is
 read-only input. It is not a complete primitive spectrum, and Hecke branch
 degree may not be identified with zeta repetition.
 
-## Testable advance
+## Phase-1 frozen advance
 
-If Stage 1 supports it, Paper 31 will pre-register an exact global
-`Gamma_0(11)` conjugacy/inversion/power deduplication of the frozen Hecke-output
-population, then determine whether the inherited degree-moment taxonomy changes
-after owner-exact accounting. A closed exact ledger or a proof that the needed
-deduplication cannot be certified is meaningful progress; neither is claimed
-now.
+Phase 1 now separates the one-row-per-owner global quotient `G`, the complete
+correspondence incidence relation `I`, and the cell-local unit-credit table `C`.
+It freezes exact `M(h,d)` equations, denominators, conflict propagation, a
+9,453-pair closure identity, and positive/negative conjugacy certificate
+interfaces. If the complete theorem contract cannot be bound, the honest
+endpoint is `NOT_EVALUABLE_CONJUGACY_INCOMPLETE`, not a partial taxonomy.
 
 ## Route boundary
 
@@ -37,6 +38,7 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See [pre-start brief](notes/stage1_prestart_brief.md) and
+See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+[Research Question Brief](notes/stage1_phase1_rq_brief.md),
+[Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
 [pipeline state](notes/pipeline_state.md).
-

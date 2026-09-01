@@ -2,15 +2,21 @@
 
 Date: **2026-09-01 UTC**
 
-## Controlling status
+## Historical status at issuance
 
-**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** This is a new ARS pipeline run
+**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** This was the state when this
+pre-start contract was issued. This is a new ARS pipeline run
 for Papers 29–33. It does not continue or reopen the completed Round-9 run.
 Stage 1 has not started: no literature screening, source verification,
 scientific computation, result generation, novelty claim, or Route promotion
 has been performed for this batch.
 
-| Paper | Registered continuation | Current state |
+Current disposition: the scholar subsequently supplied the exact response
+`确认` on 2026-09-01 UTC. The five pipelines entered Stage 1 and completed
+Phase 1; see `BATCH_ROUND10_STAGE1_PHASE1_CHECKPOINT.md`. This file remains the
+immutable pre-start budget and scope contract.
+
+| Paper | Registered continuation | State at issuance |
 |---|---|---|
 | 29 | Bianchi ideal-owner refinement, inheriting the frozen P24 flow | `STAGE_1_NOT_STARTED` |
 | 30 | Three-disk nonconstant-roof determinant, inheriting the frozen P25 physical flow | `STAGE_1_NOT_STARTED` |
@@ -49,4 +55,3 @@ and invocation both remain `NOT_RUN` / `false`.
 Literature and novelty screening are deferred to Stage 1. No priority,
 originality, theorem, numerical certificate, determinant identity, or
 matched-comparison result is claimed by this initialization record.
-

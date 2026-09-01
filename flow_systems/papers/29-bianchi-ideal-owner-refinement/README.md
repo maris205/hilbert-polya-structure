@@ -5,9 +5,11 @@ Bianchi Geodesic Flow*
 
 ## Current status
 
-**PRE-STAGE-1 / BUDGET CONFIRMATION PENDING.** Stage 1 has not started. This
-directory is an intake skeleton only: no literature screening, scientific
-computation, novelty assessment, registered claim, or manuscript result exists.
+**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** The Research
+Question Brief, Methodology Blueprint, independent Devil's-Advocate review,
+resolution, and independent recheck are complete; the recheck verdict is
+`PASS`. Literature screening, scientific computation, novelty assessment,
+claim registration, and manuscript results remain `NOT_RUN`.
 
 ## Inherited object and immutable initial restrictions
 
@@ -27,16 +29,16 @@ Bianchi manifold arising from the Gaussian principal congruence group in
   rewritten;
 - target labels may not be attached after looking at a prime or zero table.
 
-## Testable advance proposed for Stage 1
+## Phase-1 frozen advance
 
-The proposed question is whether a source-derived ideal-valued descriptor can
-refine `(D9,J3)` at the primitive-owner level while remaining well defined
-under conjugacy, inversion, and repetition. A later experiment, if authorized
-and justified by sources, would freeze the descriptor before execution and
-measure its separation and collision structure on inherited exact matrices and
-matched controls. Either a valid ideal-owner rule or a precise obstruction is
-an acceptable paper-level advance. Nothing in this paragraph asserts that such
-a rule exists.
+The primary question now asks for the predeclared A0–A1 disposition of a
+performance-independently selected Gaussian prime-ideal mechanism. Phase 1
+freezes a closed candidate grammar, the primitive-owner quotient prerequisite,
+the single finite-refinement estimand `S_H(M)`, typed failure outcomes, and
+directionally valid controls. Relabeling-invariant permutations and one-to-one
+composite substitutions are explicitly excluded from specificity evidence.
+Either a valid mechanism, a split-ideal obstruction, quotient non-evaluability,
+finite non-refinement, or specificity failure is a substantive outcome.
 
 ## Route boundary
 
@@ -55,6 +57,7 @@ evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See [the pre-start brief](notes/stage1_prestart_brief.md) and
+See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+[Research Question Brief](notes/stage1_phase1_rq_brief.md),
+[Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
 [pipeline state](notes/pipeline_state.md).
-
