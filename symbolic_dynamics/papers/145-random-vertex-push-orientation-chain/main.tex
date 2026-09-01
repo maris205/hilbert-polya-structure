@@ -1,0 +1,413 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\Urlmuskip=0mu plus 1mu\relax
+
+\hypersetup{
+  pdftitle={},
+  pdfauthor={},
+  pdfsubject={},
+  pdfkeywords={}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Id}{\operatorname{Id}}
+
+\title[Vertex-Push Chains as Folded-Hypercube Products]
+{Uniform Vertex-Push Chains as Folded-Hypercube Products:\\
+Component-Order Inversion}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{05C20, 05C50, 60J10, 05A15}
+\keywords{vertex push, folded hypercube, random walk, transition spectrum,
+component order, spectral inverse}
+
+\begin{document}
+
+\begin{abstract}
+Choose a vertex of an oriented finite simple graph uniformly and reverse every
+incident edge.  On a push orbit, each connected component of order $s$ is the
+labelled-generator walk on
+$\F_2^s/\langle\one\rangle\cong\F_2^{s-1}$: after a pivot is chosen, its
+generators are the coordinate vectors and the all-ones vector.  Thus a
+nontrivial component is the standard folded-hypercube walk $FQ_{s-1}$, with
+an explicit duplicate-generator convention at $s=2$; an isolate contributes
+an identity move.  We assign this identification, the single-component folded-
+hypercube spectrum and bipartiteness, and established random-walk facts zero
+contribution credit.  The disconnected chain is the degree-weighted random-
+scan product of these factors.  Its multiplicity polynomial factors over
+component orders, which gives the all-time return formula.  The residual
+result is an inverse for this product: when the ambient vertex number $n$ is
+known, the transition spectrum determines every component order.  A
+nearest-negative-root argument justifies a deterministic exact recovery
+algorithm whose only inputs are $n$ and the spectral polynomial.  Internal
+adjacency remains invisible; an unmarked transition kernel also contains no
+chosen starting orientation.  Without known $n$, all positive-order edgeless
+graphs give the same one-state spectrum.  No novelty or priority claim is
+made, and external circulation remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{Scope and owner subtraction}\label{sec:scope}
+
+Pushing a vertex means reversing every incident edge.  The operation and
+push-equivalence setting are established \citep{Pretzel1991,Klostermeyer1999},
+and Fourier diagonalisation of finite abelian Cayley walks is standard
+\citep{Terras1999}.  More specifically, the folded hypercube already has a
+Cayley presentation and complete character spectrum
+\citep{XuMeng2009Folded}; its bipartiteness boundary is recorded in the cycle
+literature \citep{XuMa2006Cycles}, and random walks on this named graph family
+have been studied directly \citep{ChenLiLin2019RandomWalks}.  We therefore
+assign the vertex-push operation, the folded-hypercube identification below,
+the single-component spectrum and bipartiteness, generic Fourier and
+stationarity facts, and generic random-walk spectral moments zero contribution
+credit.
+
+After that subtraction, the paper records two narrow items.  First, it makes
+the labelled disconnected process explicit as a weighted random-scan product
+and packages its component factors in one multiplicity polynomial.  Second,
+it proves and implements a known-$n$ inverse that recovers the factor orders
+from that polynomial without access to the hidden component partition.  This
+is an internal theorem record, not a novelty or priority claim; its status is
+\texttt{HOLD\_EXTERNAL}.
+
+Let $G=(V,E)$ be a finite simple graph with $n=|V|\geq1$.  Its connected
+components are $C_1,\ldots,C_c$, of orders $s_1,\ldots,s_c$.  Fix an
+orientation $\omega_0$.  At every discrete time, choose $v\in V$ uniformly
+and push it.  We restrict the chain $(X_t)$ to one push orbit.  Define
+\begin{equation}\label{eq:factors}
+ B_s(x)=\sum_{\substack{0\leq j\leq s\\j\ \mathrm{even}}}
+          \binom{s}{j}x^j,
+ \qquad
+ M_G(x)=\prod_{i=1}^c B_{s_i}(x).
+\end{equation}
+
+\section{Quotient and folded-hypercube product}\label{sec:quotient}
+
+Relative to $\omega_0$, encode an orientation by the set of reversed edges.
+The mod-two cut map is
+\begin{equation}\label{eq:cut}
+ \delta:\F_2^V\longrightarrow\F_2^E,
+ \qquad (\delta a)_{uv}=a_u+a_v
+ \quad(uv\in E).
+\end{equation}
+
+\begin{lemma}\label{lem:kernel}
+The push orbit is a torsor for
+\begin{equation}\label{eq:state-group}
+ A_G=\F_2^V/
+ \Span\{\one_{C_1},\ldots,\one_{C_c}\},
+ \qquad |A_G|=2^{n-c}.
+\end{equation}
+Pushes commute, the all-vertex push on each component is the identity, and
+these are the only relations.  The orbit chain is irreducible and uniform
+measure is its unique stationary law.
+\end{lemma}
+
+\begin{proof}
+The condition $\delta a=0$ says $a_u=a_v$ on every edge, hence $a$ is
+constant on every connected component.  Conversely, every componentwise
+constant vector lies in the kernel.  Thus
+$\ker\delta=\Span\{\one_{C_i}:1\leq i\leq c\}$.  Pushing $v$ adds
+$\delta e_v$, so the kernel gives all and only the relations and proves
+\eqref{eq:state-group}.  The coordinate classes generate the quotient, and
+each translation is an involution.  Irreducibility and uniform stationarity
+follow.  These elementary orbit facts are setup rather than residual claims.
+\end{proof}
+
+For $m\geq2$, use the standard Cayley convention
+\begin{equation}\label{eq:folded-definition}
+ FQ_m=\operatorname{Cay}
+ \left(\F_2^m,\{e_1,\ldots,e_m,\one_m\}\right),
+ \qquad
+ P_{FQ_m}=\frac1{m+1}
+ \left(\sum_{j=1}^m T_{e_j}+T_{\one_m}\right),
+\end{equation}
+where $T_g$ denotes translation by $g$.  This is the standard hypercube with
+complementary edges \citep{XuMeng2009Folded}.
+
+\begin{proposition}[Exact product-kernel normal form]\label{prop:product}
+Choose a pivot $*_i\in C_i$.  On the $i$th component quotient, the map
+\begin{equation}\label{eq:pivot-map}
+ \theta_i:\F_2^{C_i}/\langle\one_{C_i}\rangle
+       \longrightarrow\F_2^{s_i-1},
+ \qquad
+ \theta_i([a])=(a_v+a_{*_i})_{v\ne *_i}
+\end{equation}
+is an isomorphism satisfying
+\begin{equation}\label{eq:generator-images}
+ \theta_i([e_v])=e_v\quad(v\ne *_i),
+ \qquad
+ \theta_i([e_{*_i}])=\one_{s_i-1}.
+\end{equation}
+Let $m_1=|\{i:s_i=1\}|$.  On the product state space, the global Markov
+kernel is
+\begin{equation}\label{eq:weighted-product}
+ P_G=\sum_{i:s_i\geq2}\frac{s_i}{n}
+       \bigl(P_{FQ_{s_i-1}}\otimes\Id_{\ne i}\bigr)
+       +\frac{m_1}{n}\Id.
+\end{equation}
+Here $s_i=2$ uses the convention described below.
+\end{proposition}
+
+\begin{proof}
+Adding $\one_{C_i}$ changes every $a_v$ and $a_{*_i}$ simultaneously, so
+\eqref{eq:pivot-map} is well defined.  The representative with pivot
+coordinate zero proves bijectivity, and a direct substitution gives
+\eqref{eq:generator-images}.  For $s_i\geq3$ the labelled generators are
+distinct and give exactly \eqref{eq:folded-definition}.  A global step chooses
+component $i$ with probability $s_i/n$ and then one of its $s_i$ vertex labels
+uniformly.  Each isolate label acts trivially.  Summing these mutually
+commuting factor kernels proves \eqref{eq:weighted-product}.
+\end{proof}
+
+The low-dimensional conventions are essential.  If $s=2$, then the quotient
+has dimension one and the two labelled vertex choices both give the same
+nonzero translation.  The unnormalised labelled operator is $2T_1$, while its
+normalised kernel is the usual two-state $FQ_1$ walk.  If $s=1$, the quotient
+is trivial and its sole labelled push is an identity move.  Throughout,
+``transition spectrum'' means the eigenvalues of the labelled-generator
+Markov kernel.  It is not the simple-graph adjacency spectrum when duplicate
+generators or loops are suppressed.  The identification in
+\cref{prop:product} is claimed only as the explicit coordinate bridge to the
+owned folded-hypercube presentation.
+
+\section{Multi-component factorisation}\label{sec:spectrum}
+
+The single folded-hypercube adjacency spectrum is known
+\citep[Theorem~2.3]{XuMeng2009Folded}.  In dimension $m=s-1$, a character of
+weight $r$ has unnormalised eigenvalue
+\begin{equation}\label{eq:owned-component-eigenvalue}
+                    m-2r+(-1)^r.
+\end{equation}
+For even $r=k$ and odd $r=k-1$, this becomes the same value $s-2k$.
+Pascal's identity combines the multiplicities to
+$\binom{s-1}{k}+\binom{s-1}{k-1}=\binom{s}{k}$, for even $k$.  We use this
+single-component result as a zero-credit input.
+
+\begin{theorem}[Weighted-product spectrum]\label{thm:spectrum}
+For $0\leq k\leq n$, the transition eigenvalue
+\begin{equation}\label{eq:eigenvalue}
+                         \lambda_k=\frac{n-2k}{n}
+\end{equation}
+has multiplicity $[x^k]M_G(x)$.  Consequently, for every integer $t\geq0$,
+\begin{equation}\label{eq:return}
+ \Prob(X_t=X_0)=2^{-(n-c)}\sum_{k=0}^n[x^k]M_G(x)
+       \left(\frac{n-2k}{n}\right)^t.
+\end{equation}
+The period is two exactly when every component order is even; otherwise it is
+one.
+\end{theorem}
+
+\begin{proof}
+For component $i$, choose an even index $k_i$.  Its unnormalised labelled
+eigenvalue is $s_i-2k_i$ with multiplicity $\binom{s_i}{k_i}$; an isolate has
+only $k_i=0$ and contributes its identity label.  The weighted tensor sum
+\eqref{eq:weighted-product} therefore has eigenvalue
+\[
+ \frac1n\sum_i(s_i-2k_i)
+     =\frac{n-2\sum_i k_i}{n}.
+\]
+Multiplying the independent component choices gives exactly the coefficient
+of $x^k$ in \eqref{eq:factors}.  This proves the global factorisation.
+
+Character orthogonality on the group of order $2^{n-c}$ gives the diagonal
+$t$-step kernel as the average of the $t$th powers of all transition
+eigenvalues, yielding \eqref{eq:return}.  This is the standard spectral-moment
+consequence; folded-hypercube random walks themselves are not new here
+\citep{ChenLiLin2019RandomWalks}.
+
+For period, if every $s_i$ is even, each dimension $s_i-1$ is odd and the
+corresponding folded cube is bipartite; equivalently, coordinate parity
+descends through every component relation and each labelled push flips it.
+Every return is even, while pushing one vertex twice gives a two-step return.
+If some $s_i$ is odd, the all-vertex relation in that component is an odd
+closed walk, and the two-step return still exists, so the period is one.  For
+$s_i=1$, the odd walk is the isolate self-loop.  The single-factor
+bipartiteness boundary is established background
+\citep{XuMa2006Cycles}; the statement here only records its random-scan product
+consequence.
+\end{proof}
+
+\section{Known-order spectral inverse}\label{sec:inverse}
+
+The hypothesis that $n$ is supplied is part of every statement in this
+section.  Because the numbers $(n-2k)/n$ are distinct for different $k$, the
+known-$n$ transition spectrum recovers every coefficient of $M_G$.  Compress
+the even polynomial as
+\begin{equation}\label{eq:compressed}
+ E_s(y)=\sum_{r\geq0}\binom{s}{2r}y^r,
+ \qquad
+ Q_G(y)=\prod_{i=1}^cE_{s_i}(y),
+ \qquad M_G(x)=Q_G(x^2).
+\end{equation}
+
+\begin{lemma}[Nearest-root separation]\label{lem:roots}
+For $s\geq2$, all roots of $E_s$ are simple and negative.  Its root nearest
+zero is
+\begin{equation}\label{eq:rho}
+                 \rho_s=-\tan^2\!\left(\frac{\pi}{2s}\right).
+\end{equation}
+If $2\leq r<s$, then $|\rho_s|<|\rho_r|$ and
+$E_r(\rho_s)\ne0$.
+\end{lemma}
+
+\begin{proof}
+For real $t$,
+\begin{align}\label{eq:cosine}
+ E_s(-t^2)
+ &=\frac{(1+it)^s+(1-it)^s}{2} \\
+ &=(1+t^2)^{s/2}\cos(s\arctan t).
+\end{align}
+The positive $t$-values producing roots are
+\begin{equation}\label{eq:root-list}
+ t=\tan\!\left(\frac{(2j+1)\pi}{2s}\right),
+ \qquad j\geq0,\quad 2j+1<s.
+\end{equation}
+There are $\lfloor s/2\rfloor=\deg E_s$ distinct values, so their negative
+squares are all the roots and are simple.  The case $j=0$ gives
+\eqref{eq:rho}.  Since tangent is strictly increasing on $(0,\pi/2)$,
+$r<s$ gives $|\rho_s|<|\rho_r|$.
+
+For the collision claim, put $t_s=\tan(\pi/(2s))$.  If
+$E_r(\rho_s)=0$, then \eqref{eq:cosine} gives some $j\geq0$ with
+\[
+ r\arctan t_s=\frac{(2j+1)\pi}{2}.
+\]
+Here $\arctan t_s=\pi/(2s)$, hence $r/s=2j+1$, impossible because the left
+side is less than one and the right side is at least one.  Notice that this
+excludes the nearest root of the larger factor; it does not assert that every
+pair $E_r,E_s$ is coprime.
+\end{proof}
+
+\begin{theorem}[Input-only component-order recovery]\label{thm:inverse}
+Given only the positive integer $n$ and the polynomial $Q_G$, the following
+deterministic exact procedure recovers the multiset of component orders.
+Starting with $R=Q_G$, scan $s=n,n-1,\ldots,2$.  While $E_s$ divides $R$ in
+$\mathbb Z[y]$, record $s$ and replace $R$ by $R/E_s$.  After the scan, append
+\begin{equation}\label{eq:isolates}
+                 n-\sum_{\text{recorded }s}s
+\end{equation}
+copies of $1$.  The final remainder is $1$, and the output is exactly
+$\{s_1,\ldots,s_c\}$.
+\end{theorem}
+
+\begin{proof}
+Suppose the current remainder is a product of factors whose orders are at
+most $s$.  If order $s$ occurs, exact division removes one copy.  Conversely,
+if order $s$ does not occur but $E_s$ divided the product of smaller-order
+factors, its nearest root $\rho_s$ would be a root of at least one such factor,
+contradicting \cref{lem:roots}.  Repeated division therefore recovers the
+exact multiplicity of $s$.  Descending induction proves that the scan removes
+all and only component orders at least two.
+
+The loop declares a division successful only when its exact quotient lies in
+$\mathbb Z[y]$; division by a genuine remaining factor has this property
+because the current remainder is literally a product of the remaining
+$E_r$.  The final remainder is $1$, since
+$E_1=1$.  Isolates leave no polynomial factor and are recovered precisely by
+the known total in \eqref{eq:isolates}.  If $Q_G=1$ initially, the procedure
+correctly returns $n$ isolated vertices.
+\end{proof}
+
+The proof is root-based, but the executable recovery needs no numerical root
+finder: it uses exact integer polynomial division and the public inputs
+$(n,Q_G)$ only.  The hidden true partition is consulted solely after the
+routine returns, as a test oracle in finite controls.
+
+\section{Sharp inverse boundary and exact controls}\label{sec:boundary}
+
+\begin{proposition}\label{prop:boundary}
+The known-$n$ transition spectrum does not determine internal component
+adjacency.  A chosen starting orientation is not a target of this unmarked
+inverse.  If $n$ is not supplied, component orders are not recoverable in
+general.
+\end{proposition}
+
+\begin{proof}
+The factorisation \eqref{eq:factors} depends only on component orders.  The
+connected graphs $P_4$ and $K_4$ have different internal adjacency but the
+same transition spectrum; the exact constructed kernels in the verifier both
+have characteristic polynomial $z^8-z^6$.
+
+Every push orbit is an affine coset of the cut image.  Translation between any
+two cosets conjugates all labelled push transitions, and translation inside a
+coset changes the marked state.  Hence neither the unmarked chain nor its
+spectrum records a chosen starting orientation or affine orbit.  This is a
+category boundary, not an additional graph-reconstruction theorem.
+
+Finally, for every positive ambient order, an edgeless graph has a one-state
+orbit and every labelled push is the identity.  All such chains have spectrum
+$\{1\}$.  Thus the known-$n$ hypothesis cannot be deleted from a general
+component-order inverse.
+\end{proof}
+
+The deterministic standard-library verifier uses integers and
+\texttt{fractions.Fraction} only.  Its round-one controls are summarized in
+\cref{tab:controls}.
+
+\begin{table}[ht]
+\centering
+\caption{Exact counterexample pressure; finite enumeration is not proof or
+ownership evidence.}\label{tab:controls}
+\begin{tabular}{@{}lr@{}}
+\toprule
+control & coverage \\
+\midrule
+labelled simple graphs, $1\leq n\leq5$ & $1{,}099$ \\
+push-orbit states visited & $14{,}149$ \\
+return-recurrence state cells, $0\leq t\leq6$ & $71{,}874$ \\
+fixed-total partitions and input-only recoveries, $n\leq30$ & $28{,}628$ \\
+exact recovery divisibility attempts / successful peels
+  & $624{,}834/144{,}024$ \\
+squarefree factors $E_s$, $2\leq s\leq30$ & $29$ \\
+folded-quotient sizes including $s=1,2$ & $12$ \\
+total exact assertions & $155{,}901$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For every graph, the program checks the complete cut kernel, orbit, labelled
+transitions, sign multiplicities, return recurrence, and period criterion.  On
+every partition of each fixed total through $30$, it constructs $Q_G$, calls
+the recovery routine with only $(n,Q_G)$, and compares the returned multiset
+with the withheld partition.  The former tautological root-order and
+known-factor-division controls have been removed.  Exact gcd checks establish
+only squarefreeness through size $30$; the analytic nearest-root order and
+collision exclusion are claimed only from \cref{lem:roots}.  Separately, the
+program builds the $P_4$ and $K_4$ edge sets, their labelled-generator
+transition matrices, and their exact characteristic polynomials.  It also
+constructs affine-orbit and unknown-$n$ edgeless witnesses.
+
+No figure is included.  The quotient map, weighted kernel, recovery algorithm,
+and root separator are exact formulas; a graph sketch or numerical root plot
+would add no evidence.  The folded-hypercube inputs remain zero credit, the
+bounded owner search for the inverse is not novelty evidence, and external
+status remains \texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,11 @@
+# Source verification — P143
+
+Checked 2026-09-01 UTC.  Sources support background/ownership boundaries, not novelty.
+
+1. Gunther Schmidt, *Relational Mathematics*, Cambridge University Press, 2011, ISBN 978-0-521-76268-7.  Section 4.4, especially Figure 4.4.2 on p. 45, explicitly describes the right residual as relating a numerator row to denominator rows that it contains.  The manuscript states the orientation reversal needed to obtain its row-inclusion convention.
+2. Gyula O. H. Katona and Dániel T. Nagy, “Incomparable Copies of a Poset in the Boolean Lattice,” *Order* 32 (2015), 419–427, DOI 10.1007/s11083-014-9342-8, arXiv:1309.7379.  The official Springer record and arXiv record verify the metadata and distinguish weak from strong/induced Boolean-lattice embeddings.  The previously entered DOI ending “9343-7” belongs to a different article and has been removed.
+3. Truman Botts, “On Lattice Embeddings for Partially Ordered Sets,” *Canadian Journal of Mathematics* 6 (1954), 525–528, DOI 10.4153/CJM-1954-057-5.  The publisher PDF states the principal-upper-set representation theorem on pp. 525–526.  It controls the classical powerset-representation viewpoint; it does not count the labelled maps in the present fibre.
+4. Marcel Erné and Klaus Stege, “Counting Finite Posets and Topologies,” *Order* 8 (1991), 247–265, DOI 10.1007/BF00383446.  The publisher-indexed record verifies the classical finite-poset/topology enumeration setting.
+5. Richard P. Stanley, *Enumerative Combinatorics*, Volume 1, second edition, Cambridge University Press, 2012.  Used only for standard partition/Bell and inclusion--exclusion background.
+
+Bounded literal searches combined “row inclusion preorder matrix”, “self residual preorder iteration”, “R backslash R preorder dynamics”, “principal upsets inclusion transpose”, and “induced order embeddings Boolean lattice count”.  Schmidt controls the residual convention, Botts controls the principal-upper-set/powerset representation, and Katona–Nagy controls induced-copy terminology.  None is used as a close owner of the labelled separating-upset count.  No source was located stating the exact conjunction T^3=T, the full temporal census, and the every-target quotient-poset fibre formula.  This is a bounded non-hit only, not novelty, priority, or clearance evidence.  External release remains HOLD_EXTERNAL.

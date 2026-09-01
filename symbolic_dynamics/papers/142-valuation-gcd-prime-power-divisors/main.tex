@@ -1,0 +1,449 @@
+\documentclass[10pt,a4paper]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+\setlist{nosep,leftmargin=*}
+\raggedbottom
+\allowdisplaybreaks
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\X}{\mathcal X}
+\newcommand{\F}{\mathsf F}
+\newcommand{\T}{\mathsf T}
+\newcommand{\Rec}{\operatorname{Rec}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\vp}{v_p}
+
+\title[Valuation--gcd dynamics]{Valuation--GCD Dynamics on Prime-Power
+Divisors: Exact Entry Times and Every-Target Fibres}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{37P05, 11A05, 11A51}
+\keywords{finite dynamics, prime-power divisor, p-adic valuation, entry time, temporal polynomial, fibre}
+
+\begin{document}
+
+\begin{abstract}
+Fix an odd prime $p$ and $e\geq2$.  On the divisor chain of $p^e$, consider
+$d\mapsto\gcd(p^e,d^2+p^e/d)$.  Under $p^a\leftrightarrow a$, the literal
+integer map is exactly $a\mapsto\min(2a,e-a)$.  We give its complete finite
+atlas.  The recurrent exponents are $0$ together with the integer band from
+$\lceil e/3\rceil$ to $\lfloor2e/3\rfloor$; the band consists of fixed points
+and complement two-cycles.  We prove a four-case pointwise entry-time formula,
+an exact temporal polynomial, and a sharp maximum
+$1+\lceil\log_2\lceil e/3\rceil\rceil$.  For $e\geq4$, the unique deepest
+divisor is $p^{e-1}$; the cases $e=2,3$ have the unique deepest divisor $p^e$.
+The image is an interval in valuation coordinates, and every target fibre is
+the set union of at most two explicit inverse branches.  Oddness is necessary:
+when $p=2$ and $e=3a$, equal valuations create one extra factor of two.  General
+valuation algebra, functional-graph bookkeeping, interval-map theory, and
+discretized tent maps receive zero contribution credit.  Exact computation is
+used only for falsification, and external release remains on hold.
+\end{abstract}
+
+\maketitle
+
+\section{Scope and complete statement}
+
+Piecewise-monotone interval maps have an extensive general theory
+\citep{MilnorThurston1988}, and finite tent-type discretizations have been
+studied in both reversible and bijective forms
+\citep{Kuzovlev2004,ChoiEtAl2026}.  Those theories receive zero contribution
+credit here.  This note concerns one literal arithmetic self-map and does not
+claim that its piecewise-linear silhouette is new.
+
+Fix an odd prime $p$ and an integer $e\geq2$.  Define
+\begin{equation}\label{eq:literal-map}
+ \X_{p,e}=\{p^a:0\leq a\leq e\},\qquad
+ \F_{p,e}(d)=\gcd\!\left(p^e,d^2+\frac{p^e}{d}\right).
+\end{equation}
+Put
+\begin{equation}\label{eq:parameters}
+ L=\left\lceil\frac e3\right\rceil,
+ \qquad U=\left\lfloor\frac{2e}{3}\right\rfloor,
+ \qquad R=U-L+2,
+ \qquad A=1+\boldsymbol 1_{2\mid e}.
+\end{equation}
+For a positive rational number $x$, $\lceil\log_2x\rceil$ is used below only
+when $x\geq1$ and means the least integer $j\geq0$ with $2^j\geq x$.
+
+Under the identification $p^a\leftrightarrow a$, let $\T_e$ denote the
+exponent map.  The entry time $\tau_e(a)$ is the least $t\geq0$ for which
+$\T_e^t(a)$ is recurrent.  The following is the claim ceiling for the note.
+
+\begin{theorem}[Complete arithmetic temporal and inverse atlas]\label{thm:main}
+For every odd prime $p$ and $e\geq2$, the following hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The literal valuation identity is
+\begin{equation}\label{eq:conjugacy}
+ \F_{p,e}(p^a)=p^{\T_e(a)},
+ \qquad \T_e(a)=\min(2a,e-a).
+\end{equation}
+\item The recurrent exponent set is
+\begin{equation}\label{eq:recurrent-set}
+ \Rec(\T_e)=\{0\}\cup\{L,L+1,\ldots,U\}.
+\end{equation}
+It has $R$ elements, of which $A$ are fixed; all other recurrent exponents
+form strict complement two-cycles.  For every $k\geq1$,
+\begin{equation}\label{eq:fixed-iterates}
+ |\Fix(\T_e^k)|=
+ \begin{cases}
+ A,&k\text{ odd},\\
+ R,&k\text{ even}.
+ \end{cases}
+\end{equation}
+\item The complete pointwise entry law is
+\begin{equation}\label{eq:entry-law}
+ \tau_e(a)=
+ \begin{cases}
+ 0,&a=0\text{ or }L\leq a\leq U,\\
+ \left\lceil\log_2(L/a)\right\rceil,&1\leq a<L,\\
+ 1,&a=e,\\
+ 1+\left\lceil\log_2\bigl(L/(e-a)\bigr)\right\rceil,
+      &U<a<e.
+ \end{cases}
+\end{equation}
+Consequently
+\begin{equation}\label{eq:max-clock}
+ M_e:=\max_{0\leq a\leq e}\tau_e(a)
+ =1+\left\lceil\log_2L\right\rceil.
+\end{equation}
+For $e\geq4$, the unique deepest exponent is $e-1$; for $e=2,3$, it is $e$.
+\item Let $m=\lceil\log_2L\rceil$ and, for $1\leq j\leq m$, put
+\begin{equation}\label{eq:cj}
+ c_j=\left\lceil\frac{L}{2^{j-1}}\right\rceil
+     -\left\lceil\frac{L}{2^j}\right\rceil.
+\end{equation}
+Then the complete temporal polynomial is
+\begin{equation}\label{eq:temporal-polynomial}
+ D_e(z):=\sum_{a=0}^{e}z^{\tau_e(a)}
+ =R+z+(1+z)\sum_{j=1}^{m}c_jz^j.
+\end{equation}
+\item The image and every-target fibres are
+\begin{equation}\label{eq:image}
+ \im\T_e=\{0,1,\ldots,U\},
+\end{equation}
+and, for $0\leq b\leq e$,
+\begin{equation}\label{eq:fibre}
+ \T_e^{-1}(b)=
+ \begin{cases}
+ \{e-b\}\cup
+   \bigl(\{b/2\}\text{ if }2\mid b\bigr),&0\leq b\leq U,\\
+ \varnothing,&U<b\leq e.
+ \end{cases}
+\end{equation}
+The union is a set: its two displayed candidates coincide exactly when
+$3b=2e$.
+\end{enumerate}
+\end{theorem}
+
+The next four sections prove the five parts of \cref{thm:main}.  No finite
+enumeration is used in those proofs.
+
+\section{Literal valuation and the binary boundary}
+
+\begin{lemma}[Odd-prime valuation identity]\label{lem:valuation}
+For $0\leq a\leq e$, equation \eqref{eq:conjugacy} holds.
+\end{lemma}
+
+\begin{proof}
+The argument inside the gcd is
+\begin{equation}\label{eq:sum-powers}
+ (p^a)^2+\frac{p^e}{p^a}=p^{2a}+p^{e-a}.
+\end{equation}
+Set $q=\min(2a,e-a)$.  If $3a\neq e$, the two exponents in
+\eqref{eq:sum-powers} differ, and factoring out the smaller one gives
+\[
+ p^{2a}+p^{e-a}=p^q\bigl(1+p^{|3a-e|}\bigr).
+\]
+The factor in parentheses is not divisible by $p$.  If $3a=e$, then
+\[
+ p^{2a}+p^{e-a}=2p^{2a}=2p^q,
+\]
+and $2$ is again a $p$-adic unit because $p$ is odd.  Thus the valuation of
+\eqref{eq:sum-powers} is always $q$.  Since $0\leq q\leq e$, taking the gcd
+with $p^e$ gives $p^q$, which is \eqref{eq:conjugacy}.
+\end{proof}
+
+\begin{remark}[Sharp characteristic-two obstruction]\label{rem:binary}
+Oddness cannot be removed from \cref{lem:valuation}.  If $p=2$ and $e=3a$
+with $a\geq1$, then
+\[
+ 2^{2a}+2^{e-a}=2^{2a}+2^{2a}=2^{2a+1}.
+\]
+Because $2a+1\leq3a=e$, the literal gcd has valuation $2a+1$, rather than
+$\min(2a,e-a)=2a$.  The smallest witness is
+\[
+ \gcd(2^3,2^2+2^2)=2^3.
+\]
+This note uses the binary calculation only as a boundary; it claims no
+replacement atlas for $p=2$.
+\end{remark}
+
+\section{The recurrent band and fixed iterates}
+
+The elementary identities
+\begin{equation}\label{eq:complement-endpoints}
+ e-U=L,\qquad e-L=U
+\end{equation}
+follow directly from \eqref{eq:parameters}.  They make the two branches of
+$\T_e$ especially rigid.
+
+\begin{lemma}[Branch and first-entry geometry]\label{lem:branches}
+The exponent map satisfies
+\begin{equation}\label{eq:branch-form}
+ \T_e(a)=
+ \begin{cases}
+ 2a,&0\leq a<L,\\
+ e-a,&L\leq a\leq e.
+ \end{cases}
+\end{equation}
+The interval $[L,U]$ is invariant and is acted on by $a\mapsto e-a$.
+Moreover, if $1\leq a<L$ and $j$ is least with $2^ja\geq L$, then
+$2^ja\leq U$.
+\end{lemma}
+
+\begin{proof}
+The two arguments in the minimum \eqref{eq:conjugacy} satisfy
+$2a\leq e-a$ exactly when $3a\leq e$.  Every integer $a<L=\lceil e/3\rceil$
+has $3a<e$, while every $a\geq L$ has $3a\geq e$, proving
+\eqref{eq:branch-form}.  If $L\leq a\leq U$, then
+\eqref{eq:complement-endpoints} gives $L\leq e-a\leq U$, so the band is
+invariant and the stated complement rule holds there.
+
+It remains to exclude an overshoot by the last doubling.  Minimality of $j$
+gives $2^{j-1}a<L\leq2^ja$, so $2^ja<2L$.  If $e=3q$, then
+$(L,U)=(q,2q)$; if $e=3q+2$, then $(L,U)=(q+1,2q+1)$.  In either case the
+integer $2^ja<2L$ is at most $U$.  If $e=3q+1$, then
+$(L,U)=(q+1,2q)= (L,2L-2)$.  Here $j\geq1$, so $2^ja$ is even.  It is less
+than $2L$ and therefore cannot equal the odd integer $2L-1$; hence it is at
+most $2L-2=U$.
+\end{proof}
+
+\begin{theorem}[Complete recurrence and fixed iterates]\label{thm:recurrence}
+Equations \eqref{eq:recurrent-set} and \eqref{eq:fixed-iterates} hold.
+\end{theorem}
+
+\begin{proof}
+Zero is fixed.  By \cref{lem:branches}, every positive exponent below $L$
+doubles until its first entry into $[L,U]$.  If $a>U$, its first image is
+$e-a<L$; this image is zero only when $a=e$, and otherwise the preceding
+doubling argument applies.  Thus every exponent enters the set displayed in
+\eqref{eq:recurrent-set}.
+
+On $[L,U]$, the map is the involution $a\mapsto e-a$.  Hence every point of
+that band is recurrent.  Conversely, every state outside the displayed set
+eventually enters the displayed invariant set and never leaves it, so it
+cannot return to its outside starting state and is not recurrent.  This proves
+\eqref{eq:recurrent-set}.  Its size is
+$1+(U-L+1)=R$.
+
+Within the band, a fixed exponent satisfies $2a=e$, so it exists exactly
+when $e$ is even and is then $e/2$.  Together with zero, this gives $A$
+fixed states.  Every other band exponent is in a strict pair
+$\{a,e-a\}$.  A transient point cannot be fixed by a positive iterate.  An
+odd iterate fixes only the $A$ fixed states, whereas an even iterate fixes all
+$R$ recurrent states, proving \eqref{eq:fixed-iterates}.
+\end{proof}
+
+For completeness, define the formal Artin--Mazur zeta function by
+$\zeta_e(z)=\exp(\sum_{k\geq1}|\Fix(\T_e^k)|z^k/k)$.  The cycle census in
+\cref{thm:recurrence} immediately gives
+\begin{equation}\label{eq:zeta}
+ \zeta_e(z)=(1-z)^{-A}(1-z^2)^{-(R-A)/2}.
+\end{equation}
+Equation \eqref{eq:zeta} is standard finite-map bookkeeping and receives zero
+contribution credit.
+
+\section{Pointwise times and the temporal polynomial}
+
+\begin{theorem}[Pointwise entry time and sharp uniqueness]\label{thm:entry}
+Equations \eqref{eq:entry-law} and \eqref{eq:max-clock} hold, including the
+stated unique deepest exponents.
+\end{theorem}
+
+\begin{proof}
+The entry time is zero on the recurrent set.  If $1\leq a<L$, then
+\cref{lem:branches} shows that the orbit is
+$a,2a,4a,\ldots$ until its first band entry.  The least number of doublings
+needed is the least $j$ such that $2^ja\geq L$, namely
+$\lceil\log_2(L/a)\rceil$.  The last assertion of \cref{lem:branches}
+ensures that this first crossing lies in the recurrent band.
+
+If $U<a<e$, the first step sends $a$ to the positive lower exponent
+$b=e-a<L$, after which the lower formula applies.  If $a=e$, the first image
+is zero.  These cases prove \eqref{eq:entry-law}.
+
+Put $m=\lceil\log_2L\rceil$.  Lower exponents have depth at most $m$.
+Upper exponents other than $e$ have the form $e-b$ with $1\leq b<L$ and
+depth $1+\lceil\log_2(L/b)\rceil$, so their depth is at most $1+m$.  The
+choice $b=1$, or $a=e-1$, attains $1+m$.  Suppose $e\geq4$; then $L\geq2$
+and $m\geq1$.  For $b\geq2$,
+\[
+ \frac Lb\leq\frac L2\leq2^{m-1},
+\]
+so its upper partner has depth at most $m$.  The lower branch also has depth
+at most $m$, and $a=e$ has depth one.  Thus $e-1$ is the unique exponent of
+depth $1+m$, proving \eqref{eq:max-clock} and uniqueness.  When $e=2$ or
+$3$, one has $L=1$; the recurrent set contains every exponent except $e$,
+which maps to zero in one step.  Hence $e$ is the unique deepest exponent in
+both small cases.
+\end{proof}
+
+\begin{theorem}[Complete temporal polynomial]\label{thm:temporal}
+Equation \eqref{eq:temporal-polynomial} holds.
+\end{theorem}
+
+\begin{proof}
+For $1\leq j\leq m$, a lower exponent $a$ has depth exactly $j$ if and only
+if
+\[
+ 2^{j-1}a<L\leq2^ja.
+\]
+Equivalently,
+\[
+ \left\lceil\frac{L}{2^j}\right\rceil
+ \leq a\leq
+ \left\lceil\frac{L}{2^{j-1}}\right\rceil-1.
+\]
+This interval contains exactly $c_j$ integers.  These intervals partition
+$\{1,\ldots,L-1\}$.
+
+Reflection $a\mapsto e-a$ is a bijection from the lower transient exponents
+to $\{U+1,\ldots,e-1\}$.  By \eqref{eq:entry-law}, it increases every depth
+by one.  The recurrent set contributes $R$ states of depth zero, and the
+remaining exponent $e$ contributes one state of depth one.  Therefore each
+lower layer contributes $c_jz^j$, its reflected layer contributes
+$c_jz^{j+1}$, and summing all contributions gives
+\[
+ D_e(z)=R+z+\sum_{j=1}^{m}c_j(z^j+z^{j+1}),
+\]
+which is \eqref{eq:temporal-polynomial}.
+\end{proof}
+
+For example, the exact sharp profile at $e=128$ is
+\[
+ D_{128}(z)=44+22z+32z^2+16z^3+8z^4+4z^5+2z^6+z^7,
+\]
+and exponent $127$ is the unique depth-seven state.
+
+\section{Image and every-target fibres}
+
+\begin{theorem}[Two inverse branches]\label{thm:fibres}
+Equations \eqref{eq:image} and \eqref{eq:fibre} hold for every target
+$0\leq b\leq e$.
+\end{theorem}
+
+\begin{proof}
+The doubling branch $\T_e(a)=2a$ applies precisely when $3a\leq e$.
+Consequently it reaches a target $b$ precisely when $b$ is even,
+$a=b/2$, and
+\[
+ 3b\leq2e.
+\]
+The reflection branch $\T_e(a)=e-a$ applies precisely when $3a\geq e$.
+Its only possible source over $b$ is $a=e-b$, and the branch condition is
+again
+\[
+ 3(e-b)\geq e\quad\Longleftrightarrow\quad3b\leq2e.
+\]
+At $3a=e$ the two branch labels deliberately overlap, because their values
+are equal; this is exactly the possible coincidence handled by the set union.
+For integer $b$, this common inequality is equivalent to
+$b\leq\lfloor2e/3\rfloor=U$.  Hence every $b\leq U$ has the reflection
+source $e-b$ and, when $b$ is even, the doubling source $b/2$; no $b>U$ has
+a source.  This proves \eqref{eq:fibre}.  Since the reflection source exists
+for every $0\leq b\leq U$, it also proves \eqref{eq:image}.
+
+Finally, the two candidate sources agree exactly when
+$e-b=b/2$, equivalently $3b=2e$.  Treating \eqref{eq:fibre} as a set union
+therefore gives the correct singleton in the coincident-branch case.
+\end{proof}
+
+Transporting \eqref{eq:fibre} back through $p^a\leftrightarrow a$ gives the
+literal divisor fibre
+\[
+ \F_{p,e}^{-1}(p^b)=
+ \{p^{e-b}\}\cup
+ \bigl(\{p^{b/2}\}\text{ if }2\mid b\bigr)
+ \quad(0\leq b\leq U),
+\]
+and the empty set for $b>U$.
+
+\section{Exact controls, zero-credit boundary, and hold}
+
+The local verifier recomputes the integer gcd in \eqref{eq:literal-map} for
+every state with $p\in\{3,5,7,11\}$ and $2\leq e\leq128$.  It then builds
+each complete functional graph and checks recurrence, fixed iterates through
+$k=12$, every pointwise time, the temporal polynomial, the image, and every
+target fibre.  A separate binary lane checks every state for
+$2\leq e\leq48$, including all equal-valuation exceptions.  The audit uses
+exact integers without sampling, floating point, a computer algebra system,
+or a third-party package.
+
+\begin{table}[!htbp]
+\centering
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+control & exact count \\
+\midrule
+odd-prime parameter boxes & 508 \\
+odd-prime states, orbits, and target fibres & 33,528 each \\
+binary parameter boxes / states & 47 / 1,222 \\
+binary equal-valuation cases & 16 \\
+Boolean assertions & 319,074 \\
+\bottomrule
+\end{tabular}
+\caption{Dependency-free falsification controls.  These counts are not
+proofs of the all-parameter statements and are not ownership evidence.}
+\label{tab:controls}
+\end{table}
+
+The conceptual boundary is equally important.  General valuation rules,
+ceiling-log algebra, functional-graph and zeta identities, and formal
+generating functions are standard tools and receive zero credit.  General
+piecewise-monotone theory \citep{MilnorThurston1988}, reversible discrete
+tent-map cycle studies \citep{Kuzovlev2004}, and bijective finite skew-tent
+constructions \citep{ChoiEtAl2026} also receive zero credit.  The normalized
+real map $x\mapsto\min(2x,1-x)$ already exposes the doubling/reflection
+silhouette.
+
+The residual is therefore narrow: the literal odd-prime divisor--gcd system
+together with its complete arithmetic temporal and inverse atlas.  A bounded
+search did not locate a direct printed owner for that exact conjunction, but
+absence from a bounded search is not novelty, priority, authorship, or
+ownership evidence.  If a direct owner is found, or if specialist review
+judges the arithmetic carrier to be merely decorative, the residual should be
+killed rather than broadened.  No external posting, contact, submission, or
+release is authorized; status remains \texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
