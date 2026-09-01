@@ -3,6 +3,39 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C269--HCS-C273 additions (2026-09-01)
+
+Five independent cross-subtype candidates were frozen from baseline
+`9cb7483e97ef82fdc06d45ecb3043f183ce22391`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C269 | Every finite-field Chebyshev map is reconstructed from the inversion quotients of the `q-1` and `q+1` cyclic covers with exact ramified gluing; the theorem closes all fixed/primitive counts, finite source zeta, tails, image ranks and full Koopman zero-Jordan data for every prime power, including characteristic two and `d=0`. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [finite-field Chebyshev package](../henon_finite_field_chebyshev_functional_graph_route_a/) · [paper PDF](../henon_finite_field_chebyshev_functional_graph_route_a/paper/main.pdf) |
+| HCS-C270 | The standard real Heisenberg `H^1` model closes every normal geodesic, abnormal exclusion, the exact exponential Jacobian, equality of first conjugate/rotational-Maxwell/cut times, the vertical locus and the complete Carnot--Caratheodory distance formula. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Heisenberg sub-Riemannian package](../henon_heisenberg_subriemannian_cut_locus_route_a/) · [paper PDF](../henon_heisenberg_subriemannian_cut_locus_route_a/paper/main.pdf) |
+| HCS-C271 | Every irreducible heterogeneous deterministic network-SIS system has the Perron spectral global threshold, a unique endemic state attracting every nonzero state above it, a Hurwitz endemic Jacobian and strict transmission monotonicity; at equality every nonzero trajectory obeys the sharp Perron-vector `1/t` law. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [network-SIS package](../henon_network_sis_threshold_critical_route_a/) · [paper PDF](../henon_network_sis_threshold_critical_route_a/paper/main.pdf) |
+| HCS-C272 | The Erlang-fertility McKendrick semigroup has exactly `k` algebraic renewal roots, with an exact `L1` eigenvalue gate at the mortality-shift essential edge; the compact-newborn decomposition yields two distinct thresholds and operator-norm rank-one asynchronous growth when the dominant pole is isolated. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Erlang age-transport package](../henon_erlang_age_transport_spectral_route_a/) · [paper PDF](../henon_erlang_age_transport_spectral_route_a/paper/main.pdf) |
+| HCS-C273 | Every continuous symmetric iid random walk has the universal central-binomial survival and first-descent laws, while both its positive-partial-sum count and unique maximum time have the exact discrete arcsine law and `Beta(1/2,1/2)` limit; an atomic walk gives the sharp convention failure. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Sparre--Andersen package](../henon_sparre_andersen_universal_fluctuation_route_a/) · [paper PDF](../henon_sparre_andersen_universal_fluctuation_route_a/paper/main.pdf) |
+
+C270--C273 are `ROUTE_A_REJECTED`; C269 is
+`ROUTE_A_EXPLORATORY` because its finite-field provenance and complete source
+cycle/zeta atlas provide only weak intrinsic arithmetic, not a rational-prime
+primitive-orbit dictionary or logarithmic prime clock.  Route B is false for
+all five.  No target local datum, Euler factor, root number, automorphy,
+target divisor/counting law or functional equation, Hilbert--Pólya operator,
+or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final PDF SHA-256 values, in order
+C269--C273, are `c966e31fe276300869a18ff7460952f850b7810e1cc0d4df3481d62da0fd5e0a`,
+`21134aa7aa51475bb686a9ceae9ebe83414aee6ebd38f2b8277f8f14db694cfa`,
+`666b0e3e62cef878a88caf0305d9cdc6e6331e1ddab42c76369f1e9973c0c03e`,
+`06bb70f11ddb1e3dbcdf72a89896b88feb843c354c29a4eac5640dfc9bc350de`,
+and `0f81c47565325f0a1fd296f8de0af7468638bc9981f197b9ed08d4cacda80b52`.
+The full release accounting is recorded in
+[BATCH_REVIEW_C269_C273.md](../BATCH_REVIEW_C269_C273.md).
+
 ## HCS-C264--HCS-C268 additions (2026-08-31)
 
 Five independent cross-subtype candidates were frozen from baseline

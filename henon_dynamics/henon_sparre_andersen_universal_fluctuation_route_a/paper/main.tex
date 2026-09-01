@@ -1,0 +1,182 @@
+\pdfvariable trailerid {[<C2732026083100000000000000000000><C2732026083100000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Ee}{\mathbb E}
+\newcommand{\ind}{\mathbf 1}
+\title{Universal Survival, First Descent, and Discrete Arcsine Laws\\
+for Continuous Symmetric Random Walks}
+\author{Route-A source-local certificate HCS-C273}
+\date{31 August 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a random walk with iid, continuous increments symmetric about zero, we
+derive the distribution-free survival probabilities
+$q_n=4^{-n}\binom{2n}{n}$ from a factorization at the unique maximum.
+This also closes the first strict descent and the full law of the maximum time.
+\ifnum\CRevisionRound>0
+The Sparre--Andersen permutation identity then gives the same discrete-arcsine
+law for the number of positive partial sums, and both statistics converge to
+the $\operatorname{Beta}(1/2,1/2)$ law.
+\fi
+\ifnum\CRevisionRound>1
+A two-step atomic walk proves that continuity and the frozen strict convention
+are essential; exact independent computation audits 561 probability cells and
+695,482 no-ties histories without substituting enumeration for proof.
+\fi
+\end{abstract}
+
+\section{Frozen convention and theorem}
+Let $X_1,X_2,\ldots$ be iid real random variables with a continuous law
+symmetric about zero, and set $S_0=0$ and $S_n=X_1+\cdots+X_n$.  Continuity
+implies that $S_0,\ldots,S_n$ are distinct almost surely: each difference
+$S_j-S_k$ has a continuous law.  We therefore use strict positivity throughout
+and define
+\[
+ q_n=\Pp(S_1>0,\ldots,S_n>0),\quad q_0=1,
+\]
+\[
+ \tau^- =\inf\{n\ge1:S_n<0\},\quad
+ N_n=\#\{1\le j\le n:S_j>0\},\quad
+ M_n=\operatorname*{arg\,max}_{0\le j\le n}S_j.
+\]
+The maximum time includes zero and is unique.  These convention choices are
+part of the theorem, not cosmetic endpoint rules.
+
+\begin{theorem}[Sparre--Andersen fluctuation closure]\label{thm:main}
+For every $n\ge0$,
+\begin{equation}
+ q_n=\frac{1}{4^n}\binom{2n}{n},\qquad
+ Q(z):=\sum_{n\ge0}q_nz^n=(1-z)^{-1/2}.                 \tag{1}
+\end{equation}
+For $n\ge1$,
+\begin{equation}
+ \Pp(\tau^->n)=q_n,\qquad
+ \Pp(\tau^-=n)=q_{n-1}-q_n=\frac{q_{n-1}}{2n}.          \tag{2}
+\end{equation}
+For $0\le k\le n$,
+\begin{equation}
+ \Pp(M_n=k)=q_kq_{n-k}.                                  \tag{3}
+\end{equation}
+\ifnum\CRevisionRound>0
+Moreover,
+\begin{equation}
+ \Pp(N_n=k)=q_kq_{n-k},                                  \tag{4}
+\end{equation}
+and both $N_n/n$ and $M_n/n$ converge weakly to the law with density
+$[\pi\sqrt{x(1-x)}]^{-1}\ind_{(0,1)}(x)$.
+\fi
+\end{theorem}
+The fluctuation identity is classical; our primary reference is Sparre
+Andersen~\cite{SA1953}.  The contribution here is a source-locked complete
+proof and executable convention audit, not a literature-priority claim.
+
+\section{Maximum factorization forces survival}
+Fix $0\le k\le n$.  The event $M_n=k$ requires
+\[
+ S_k-S_{k-j}>0\ (1\le j\le k),\qquad
+ S_{k+j}-S_k<0\ (1\le j\le n-k).
+\]
+The first set of inequalities is survival for the reversed iid block
+$X_k,\ldots,X_1$ and has probability $q_k$.  The second uses the independent
+block $X_{k+1},\ldots,X_n$; sign symmetry turns it into survival of length
+$n-k$.  Hence
+\begin{equation}
+ \Pp(M_n=k)=q_kq_{n-k}.                                   \tag{5}
+\end{equation}
+Since the unique maximum occurs somewhere,
+$\sum_{k=0}^nq_kq_{n-k}=1$.  Thus $Q(z)^2=(1-z)^{-1}$.  The condition
+$Q(0)=1$ selects the positive formal square root, proving (1) and (3).
+
+The event $\{\tau^->n\}$ agrees almost surely with strict survival, so its
+probability is $q_n$.  Consecutive tail differences give (2), because
+$q_n/q_{n-1}=(2n-1)/(2n)$.  Notice that no increment density appears in this
+argument.
+
+\ifnum\CRevisionRound>0
+\section{Positive counts and the common arcsine limit}
+The remaining finite-time identity follows from the permutation-cycle lemma.
+We record the exact form needed here.
+\begin{lemma}[Sparre--Andersen cycle identity]\label{lem:cycle}
+Under the frozen iid and no-ties assumptions,
+\begin{equation}
+ 1+\sum_{n\ge1}z^n\Ee[u^{N_n}]
+ =\exp\!\left\{\sum_{m\ge1}\frac{z^m}{m}
+ \bigl(\Pp(S_m<0)+u^m\Pp(S_m>0)\bigr)\right\}.          \tag{6}
+\end{equation}
+\end{lemma}
+\begin{proof}
+Condition on increments in general position and average over their
+permutations.  Decompose a permutation into cycles.  Rotate every cycle at its
+unique extremal partial sum: a positive-total cycle contributes its full
+length to the positive-partial-sum count, and a negative-total cycle contributes
+zero.  Ordering the rotated cycles by extremal level is a bijection back to
+linear increment orderings.  The labeled-cycle formula contributes $1/m$ for
+a cycle of length $m$.  Averaging its sign over iid increments gives the two
+probabilities in (6).  Continuity supplies the required unique rotations.
+\end{proof}
+
+Symmetry makes both probabilities in (6) equal to $1/2$, so
+\begin{equation}
+ 1+\sum_{n\ge1}z^n\Ee[u^{N_n}]
+ =\frac{1}{\sqrt{(1-z)(1-uz)}}
+ =\sum_{n\ge0}\sum_{k=0}^n q_kq_{n-k}u^kz^n.             \tag{7}
+\end{equation}
+Coefficient extraction proves (4).
+
+Stirling's formula gives $q_m\sim(\pi m)^{-1/2}$.  For
+$k=\lfloor nx\rfloor$ with $x$ in a compact subset of $(0,1)$,
+\[
+ nq_kq_{n-k}\longrightarrow\frac{1}{\pi\sqrt{x(1-x)}}.
+\]
+The bound $q_m\le C/\sqrt{m+1}$ makes the total mass in
+$k\le\varepsilon n$ at most $C'\sqrt\varepsilon$, uniformly in $n$; symmetry
+handles the other endpoint.  A bulk Riemann sum followed by
+$\varepsilon\downarrow0$ proves the weak limit for $M_n/n$, and (4) gives the
+same limit for $N_n/n$.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Atomic failure boundary}
+Continuity cannot be deleted while keeping the theorem unchanged.  Let
+$X_j\in\{-1,1\}$ with equal probabilities.  At $n=2$, the paths
+$++,+-,-+,--$ give nonnegative survival probability $2/4$, whereas (1) gives
+$q_2=3/8$.  Under strict positivity the histogram of $N_2$ is
+$(2,1,1)/4$, rather than $(3,2,3)/8$.  The path $-+$ has equal maxima at times
+zero and two, so $M_2$ is not unique.  This one example separates all three
+conventions that continuity merged.
+
+\section{Executable certificate and scope}
+Exact receipts cover 41 survival rows, 561 arcsine cells, 695,482 complete
+sign/permutation histories with superincreasing magnitudes, eight atomic
+families, and twelve scaling samples.  The independent checker closes 528
+assertions, SymPy closes 411 coefficient identities, fresh replay is byte
+identical, and repaired-hash hostile testing rejects 24/24 changes.  The
+finite receipts test indexing and conventions; Theorem~\ref{thm:main} is
+proved by factorization and Lemma~\ref{lem:cycle}.
+
+Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, this stochastic owner has no
+target arithmetic local datum, Euler factor, root number, automorphy, target
+divisor, functional equation, or Hilbert--P\'olya operator.  Its tuple is
+\[
+\texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FORMAL\_HINT)}.
+\]
+The verdict is \texttt{ROUTE\_A\_REJECTED}; Route B is disabled.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{SA1953}
+E. Sparre Andersen,
+\emph{On the fluctuations of sums of random variables},
+Mathematica Scandinavica \textbf{1} (1953), 263--285,
+\href{https://doi.org/10.7146/math.scand.a-10385}
+{doi:10.7146/math.scand.a-10385}.
+\end{thebibliography}
+\end{document}

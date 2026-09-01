@@ -2719,6 +2719,42 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C269--C273
+
+This round again changes mathematical owner in every paper and takes one
+complete theorem-scale step in each: a nonlinear finite-field functional
+graph, a sub-Riemannian Hamiltonian control flow, a cooperative epidemic
+network, an infinite-dimensional age-transport semigroup, and a stochastic
+fluctuation process.  The five papers are independent results rather than
+installments of one calculation.
+
+- [C269 finite-field Chebyshev functional graph and Koopman atlas](henon_finite_field_chebyshev_functional_graph_route_a/README.md) · [paper PDF](henon_finite_field_chebyshev_functional_graph_route_a/paper/main.pdf)
+- [C270 standard Heisenberg cut, conjugate and distance atlas](henon_heisenberg_subriemannian_cut_locus_route_a/README.md) · [paper PDF](henon_heisenberg_subriemannian_cut_locus_route_a/paper/main.pdf)
+- [C271 irreducible network-SIS threshold and critical Perron law](henon_network_sis_threshold_critical_route_a/README.md) · [paper PDF](henon_network_sis_threshold_critical_route_a/paper/main.pdf)
+- [C272 Erlang age-transport renewal and essential-spectrum atlas](henon_erlang_age_transport_spectral_route_a/README.md) · [paper PDF](henon_erlang_age_transport_spectral_route_a/paper/main.pdf)
+- [C273 Sparre--Andersen survival and two arcsine laws](henon_sparre_andersen_universal_fluctuation_route_a/README.md) · [paper PDF](henon_sparre_andersen_universal_fluctuation_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C269_C273.md),
+[batch plan](BATCH_PLAN_C269_C273.md), and
+[batch review](BATCH_REVIEW_C269_C273.md) for collision screening, frozen
+theorem contracts, exact evidence, proof repairs, originality/citation review
+and release receipts.  Across the five packages the round closes 65,525
+independent-checker assertions, 823 symbolic checks, 114/114 hostile
+rejections, 2,734,029 evidence bytes, 135 manifest payloads (140 physical
+files), and 13 final-paper pages with 111 embedded/subset font records.  C269
+is `ROUTE_A_EXPLORATORY`; C270--C273 are `ROUTE_A_REJECTED`.  Route B is
+disabled and the common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  No target
+arithmetic local data, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, Hilbert--Pólya operator, or
+Route-B input is claimed.
+
+Final PDF SHA-256 values, in order C269--C273, are
+`c966e31fe276300869a18ff7460952f850b7810e1cc0d4df3481d62da0fd5e0a`,
+`21134aa7aa51475bb686a9ceae9ebe83414aee6ebd38f2b8277f8f14db694cfa`,
+`666b0e3e62cef878a88caf0305d9cdc6e6331e1ddab42c76369f1e9973c0c03e`,
+`06bb70f11ddb1e3dbcdf72a89896b88feb843c354c29a4eac5640dfc9bc350de`,
+and `0f81c47565325f0a1fd296f8de0af7468638bc9981f197b9ed08d4cacda80b52`.
+
 ## Route-A independent cross-subtype round C264--C268
 
 This round changes mathematical owner in every paper and takes one complete
