@@ -4,8 +4,8 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 FINAL PAPER COMPLETE / FULL
-  CHECKPOINT ISSUED / STAGE 6 PENDING**. The scholar's exact `确认` on
+- Current pipeline: **Round 9 — PIPELINE COMPLETED / STAGE 5 FINAL PAPER
+  COMPLETE / STAGE 6 SKIPPED**. The scholar's exact `确认` on
   2026-09-01 UTC accepts the locked 15-page content proof and authorizes
   format-only finalization. Two fully independent fixed-epoch
   LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX builds are byte-identical. The final
@@ -23,7 +23,10 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
   negative-specificity theorem and bounded first-jet compression result remain
   the paper's scientific increment. Canonical `paper/`, `results/`, the frozen
   Bianchi flow, and the Route tuple remain unchanged; no venue-readiness,
-  submission, release, or Route-advancement claim is made.
+  submission, release, or Route-advancement claim is made. On 2026-09-01 UTC,
+  the exact response `跳过，继续下一批` declined optional Stage 6. Stage 6 is
+  `skipped`, the pipeline is `completed`, and no Process Record was generated;
+  see the [terminal receipt](../../BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json).
 - Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
   CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
   `REV-001` and `REV-003` residuals were applied by a 10-operation Patch 1.1;

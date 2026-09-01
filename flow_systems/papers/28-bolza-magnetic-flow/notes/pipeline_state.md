@@ -2,8 +2,8 @@
 
 Date: **2026-09-01**
 
-Current controlling state: **Stage 5 COMPLETE / FULL CHECKPOINT RECORDED /
-STAGE 6 PENDING**.  The scholar's exact content response `确认` authorized the
+Current controlling state: **PIPELINE COMPLETED / STAGE 5 COMPLETE / STAGE 6
+SKIPPED**.  The scholar's exact content response `确认` authorized the
 final format-only build.  The accepted Stage-4.5 Round-2 integrity result
 remains `PASS` at 6/6 references, 9/9 citation contexts, 95/95 registered
 claims, and 104/104 evidence tuples.  Two independent fixed-environment builds
@@ -16,8 +16,10 @@ and C1--C2 passed.  All 17 fonts are embedded; 12 legacy Type-1 math fonts
 retain the accepted proof's `uni=no` profile, so complete per-font ToUnicode
 coverage is not claimed.  Canonical manuscript/body, bibliography, PDF,
 result tree, the frozen unit-speed Bolza magnetic flow at `b=1/2`, subtype,
-and Route records remain unchanged.  Stage 6 is optional, pending, and not
-entered.
+and Route records remain unchanged.  On 2026-09-01 UTC the scholar declined
+optional Stage 6 with the exact response `跳过，继续下一批`; Stage 6 is therefore
+`skipped`, the pipeline global state is `completed`, no Process Record was
+generated, and no further ARS event is required.
 
 | Item | Status |
 |---|---|
@@ -30,7 +32,7 @@ entered.
 | ARS Stage 4′ | **COMPLETE WITHIN AUTHORIZED SCOPE** — `REV-02` resolved by 1 operation; 14/14 surfaces exact-once; 28/28 tests plus 24/24 replay; 14-page clean preview; canonical content/results/Route frozen |
 | ARS Stage 4.5 | **PASS / MANDATORY CHECKPOINT COMPLETE** — fresh Mode-2 audit: refs 6/6; contexts 9/9; claims 95/95; evidence tuples 104/104 |
 | ARS Stage 5 | **COMPLETE / FULL CHECKPOINT** — scholar-confirmed format-only finalization; 2/2 byte-identical builds; 14-page final PDF; fresh advisory package report |
-| ARS Stage 6 | **PENDING / NOT ENTERED** — optional process summary awaits a separate scholar decision |
+| ARS Stage 6 | **SKIPPED / PIPELINE COMPLETED** — scholar declined the optional process summary; no Process Record generated; no next required event |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |

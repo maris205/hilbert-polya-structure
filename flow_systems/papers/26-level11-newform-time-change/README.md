@@ -4,8 +4,8 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
-  PENDING**. The scholar's exact 2026-09-01 UTC response `确认` accepts the
+- Current pipeline: **Round 9 — PIPELINE COMPLETED / STAGE 5 COMPLETE / STAGE 6
+  SKIPPED**. The scholar's exact 2026-09-01 UTC response `确认` accepts the
   locked 16-page proof and authorizes the format-only final PDF and package
   audit. Two independent deterministic LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX
   builds are byte-identical. The [final PDF](stage5_finalization/paper.pdf) has
@@ -27,7 +27,11 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
   [FULL checkpoint](notes/stage5_completion_checkpoint.md),
   [finalization report](notes/stage5_finalization_report.md), and
   [final manifest](notes/stage5_final_manifest.json). No venue-readiness,
-  submission, acceptance, or public-release claim is made.
+  submission, acceptance, or public-release claim is made. The later exact
+  response `跳过，继续下一批` declined optional Stage 6 on 2026-09-01 UTC. Stage
+  6 is `skipped`, the pipeline is `completed`, and no Process Record was
+  generated; see the
+  [terminal receipt](../../BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json).
 - Previous Stage-5 preflight: **FORMAT PREFLIGHT PASS / ONE SCHOLAR CONTENT
   CONFIRMATION WAS PENDING**. The accepted Stage-4.5 TeX was transferred to
   `stage5_finalization/manuscript.tex` by removing exactly 125 standalone ARS

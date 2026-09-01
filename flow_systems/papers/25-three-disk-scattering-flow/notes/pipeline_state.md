@@ -2,8 +2,8 @@
 
 Date: **2026-09-01**
 
-Current controlling state: **Stage 5 FINAL PAPER COMPLETE / FULL COMPLETION
-CHECKPOINT ISSUED / STAGE 6 PENDING**. Fresh Stage 4.5 Round 2 superseded the
+Current controlling state: **PIPELINE COMPLETED / STAGE 5 FINAL PAPER COMPLETE /
+STAGE 6 SKIPPED**. Fresh Stage 4.5 Round 2 superseded the
 historical correction-only state and passed with 8/8 references, 13/13
 contexts, 114 exact-span claims, 127/127 evidence tuples, 6/6 experiment
 claims, 75/75 locked-environment tests, and 0 serious / 0 medium / 0 minor
@@ -14,7 +14,10 @@ fixed-epoch builds produced byte-identical PDF SHA-256
 the final/proof `pdftotext -layout` hashes match. Package-verifier C1/C2 pass,
 B1--B5 remain not checked without a venue profile, and freshness replay emitted
 no terminal token. Canonical `paper/`, canonical bibliography/PDF, `results/`,
-the frozen flow, and Route state remain unchanged. Stage 6 has not started.
+the frozen flow, and Route state remain unchanged. On 2026-09-01 UTC the scholar
+declined optional Stage 6 with the exact response `跳过，继续下一批`; Stage 6 is
+therefore `skipped`, the pipeline global state is `completed`, no Process Record
+was generated, and no further ARS event is required.
 
 | Item | Status |
 |---|---|
@@ -25,7 +28,8 @@ the frozen flow, and Route state remain unchanged. Stage 6 has not started.
 | ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 75/75 suite and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MINOR REVISION ENTRY** — 2 fully + 1 partially + 3 cannot verify; B5; checker PASS; the Stage 4.5 audit subsequently completed |
 | ARS Stage 4.5 | **PASS / MANDATORY CHECKPOINT COMPLETE** — Mode-2 fresh audit: 8/8 refs, 13/13 contexts, 114 claims, 127 evidence tuples, 6 experiment claims; 0 serious / 0 medium / 0 minor |
-| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT ISSUED** — locked plainnat numeric source and derived bibliography; reproducible 13-page final PDF; package advisory report fresh; Stage 6 pending |
+| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT ISSUED** — locked plainnat numeric source and derived bibliography; reproducible 13-page final PDF; package advisory report fresh |
+| ARS Stage 6 | **SKIPPED / PIPELINE COMPLETED** — scholar declined the optional process summary; no Process Record generated; no next required event |
 | Continuous-time object | **FROZEN** — equilateral three-disk exterior billiard |
 | No-eclipse condition | **`[PROVED]`** for `d=6a` |
 | Clock / primitive / repetition | **FROZEN** — flight length / cyclic primitive word / traversal powers |

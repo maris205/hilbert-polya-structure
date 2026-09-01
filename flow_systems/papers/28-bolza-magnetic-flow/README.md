@@ -2,8 +2,8 @@
 
 ## Current status
 
-- Current pipeline: **ROUND 9 — STAGE 5 COMPLETE / FULL CHECKPOINT RECORDED /
-  STAGE 6 PENDING**. The scholar supplied the required content confirmation,
+- Current pipeline: **ROUND 9 — PIPELINE COMPLETED / STAGE 5 COMPLETE / STAGE 6
+  SKIPPED**. The scholar supplied the required content confirmation,
   and the accepted Stage-4.5 Round-2 audit remains `PASS` at 6/6 references,
   9/9 citation contexts, 95 `ALL` claims, and 104/104 exact evidence tuples.
   Two completely independent fixed-environment LuaLaTeX/BibTeX builds produced
@@ -20,7 +20,10 @@
   embedded; 12 legacy Type-1 math fonts retain the accepted proof's
   `uni=no` profile, so complete per-font ToUnicode coverage is not claimed.
   Scientific, declaration, Route, subtype, canonical source/result, and
-  bibliography content remain unchanged. Stage 6 has not started.
+  bibliography content remain unchanged. On 2026-09-01 UTC, the exact response
+  `跳过，继续下一批` declined optional Stage 6. Stage 6 is `skipped`, the pipeline
+  is `completed`, and no Process Record was generated; see the
+  [terminal receipt](../../BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json).
 - Previous Stage-4′ checkpoint: **STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE — MANDATORY SCHOLAR
   CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual `REV-02` is `RESOLVED`
   by the exactly authorized `B0048/replace_block` operation. All **14/14

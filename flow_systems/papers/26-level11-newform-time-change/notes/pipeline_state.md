@@ -2,8 +2,8 @@
 
 Date: **2026-09-01**
 
-Current controlling state: **STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
-PENDING**. The exact scholar response `确认`, recorded 2026-09-01 UTC, accepts
+Current controlling state: **PIPELINE COMPLETED / STAGE 5 COMPLETE / STAGE 6
+SKIPPED**. The exact scholar response `确认`, recorded 2026-09-01 UTC, accepts
 the locked 16-page content proof and authorizes the format-only final PDF,
 package audit, and FULL checkpoint. Two independent deterministic builds are
 byte-identical; the final PDF SHA-256 is
@@ -20,7 +20,10 @@ A0--A1 / A1--A2; batch positive-arithmetic A2 is `0/5`; Route B invocations
 are `0/5`. Canonical content/results, the initial flow object, and evaluator
 hashes remain unchanged. Existing `#660` and `#672` are nonblocking but
 non-clean. This state makes no venue-readiness, submission, acceptance, or
-public-release claim and does not auto-enter Stage 6.
+public-release claim. On 2026-09-01 UTC the scholar declined optional Stage 6
+with the exact response `跳过，继续下一批`; Stage 6 is therefore `skipped`, the
+pipeline global state is `completed`, no Process Record was generated, and no
+further ARS event is required.
 
 | Item | Status |
 |---|---|
@@ -33,7 +36,7 @@ public-release claim and does not auto-enter Stage 6.
 | ARS Stage 4′ | **AUTHOR-SIDE REVISION COMPLETE / CONTENT CONFIRMATION PENDING** — 2/2 residuals addressed; exact two-entry bibliography append; Patch 1.1 and official apply PASS; 17/17 surfaces exact-once; clean preview; fresh Stage 4.5 not yet run |
 | ARS Stage 4.5 | **ROUND 2 PASS / COMPLETE** — 7/7 references, 8/8 contexts, 93 `ALL` claims, 97/97 exact tuples, originality/failure-mode/E6 gates, tests, and 16-page preview passed |
 | ARS Stage 5 | **COMPLETE / FULL CHECKPOINT** — exact `确认`; byte-identical dual final build; 16-page final PDF; proof-equivalent text; official advisory package audit fresh |
-| ARS Stage 6 | **PENDING / NOT ENTERED** — no automatic advance and no venue-readiness, submission, acceptance, or release claim |
+| ARS Stage 6 | **SKIPPED / PIPELINE COMPLETED** — scholar declined the optional process summary; no Process Record generated; no next required event |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |

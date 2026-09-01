@@ -4,7 +4,8 @@ Project: `28-bolza-magnetic-flow`
 Checkpoint type: `FULL`  
 Date: `2026-09-01`  
 Stage verdict: **PASS WITH DISCLOSED FONT-ACCESSIBILITY ADVISORY — final paper delivered**  
-Pipeline state: **Stage 5 complete; Stage 6 pending and not entered**
+Pipeline state at checkpoint issuance: **Stage 5 complete; Stage 6 pending and not entered**  
+Current terminal state: **Stage 6 skipped; pipeline completed**
 
 ## Stage result
 
@@ -93,13 +94,20 @@ guard therefore records Zone, Delegation Intensity, Cognitive Vigilance, and
 Cognitive Reallocation as `insufficient_evidence`, without numeric scores.
 This advisory is nonblocking and makes no inference about scholar ability.
 
-## Next-stage boundary
+## Post-checkpoint terminal disposition
 
-Stage 6 remains optional, pending, and unentered.  This FULL checkpoint closes
-Stage 5 only; it does not infer a Stage-6 decision from the latest content
-confirmation.
+On 2026-09-01 UTC the scholar answered the immediately preceding optional
+Stage-6 decision with the exact response:
+
+> 跳过，继续下一批
+
+Under the ARS `checkpoint -> completed` transition, Stage 6 is `skipped` with
+reason `user declined Stage 6`, and the pipeline global state is `completed`.
+Stage 6 did not run, no Process Record was generated, no terminal
+acknowledgement is required, and there is no next required ARS event. This
+terminal decision does not change any Stage-5 deliverable, scientific content,
+dynamical restriction, Route state, submission authority, or release boundary.
 
 ```text
-Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [ ]SUMMARY
+Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [-]SUMMARY (skipped) -> [v]COMPLETED
 ```
-

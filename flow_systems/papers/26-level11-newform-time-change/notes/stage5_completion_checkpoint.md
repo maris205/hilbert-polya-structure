@@ -2,7 +2,8 @@
 
 Date: **2026-09-01 UTC**  
 Checkpoint: **FULL**  
-State: **STAGE 5 COMPLETE / STAGE 6 PENDING**
+State at checkpoint issuance: **STAGE 5 COMPLETE / STAGE 6 PENDING**  
+Current terminal state: **STAGE 6 SKIPPED / PIPELINE COMPLETED**
 
 ## Authority and completion
 
@@ -53,5 +54,22 @@ the early A0--A1 / A1--A2 frontier, positive-arithmetic A2 remains `0/5`, and
 Route B invocations remain `0/5`; no Route promotion occurred.
 
 This FULL checkpoint is paper-local. It makes no venue-readiness, submission,
-acceptance, or public-release claim. **Stage 6 is pending and is not entered by
-this checkpoint.**
+acceptance, or public-release claim.
+
+## Post-checkpoint terminal disposition
+
+On 2026-09-01 UTC the scholar answered the immediately preceding optional
+Stage-6 decision with the exact response:
+
+> 跳过，继续下一批
+
+Under the ARS `checkpoint -> completed` transition, Stage 6 is `skipped` with
+reason `user declined Stage 6`, and the pipeline global state is `completed`.
+Stage 6 did not run, no Process Record was generated, no terminal
+acknowledgement is required, and there is no next required ARS event. This
+terminal decision changes no Stage-5 artifact, scientific content, initial
+dynamical object, Route tuple, submission authority, or release boundary.
+
+```text
+Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [-]SUMMARY (skipped) -> [v]COMPLETED
+```

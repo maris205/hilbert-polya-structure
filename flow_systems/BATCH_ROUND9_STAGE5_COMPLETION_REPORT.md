@@ -1,7 +1,7 @@
 # Round 9 Papers 24--28 — Stage 5 FULL completion report
 
 Date: **2026-09-01 UTC**  
-Pipeline state: **Stage 5 complete; FULL checkpoint delivered; Stage 6 pending and not entered**  
+Pipeline state: **Stage 5 complete; Stage 6 skipped; all five pipelines completed**  
 Batch verdict: **PASS WITH DISCLOSED NONBLOCKING FORMAT/PACKAGE ADVISORIES**  
 Final papers: **5/5 emitted**
 
@@ -17,6 +17,21 @@ checkpoint.  It does not authorize a scientific-content edit, citation-style
 change, canonical-tree promotion, Route advancement, submission, venue-
 readiness claim, public release beyond the separately requested repository
 synchronization, or external contact.
+
+After the FULL checkpoint was delivered, the scholar answered the separate
+optional Stage-6 decision on 2026-09-01 UTC with the exact response:
+
+> 跳过，继续下一批
+
+This is a decline of Stage 6, not a request to run it. Under the ARS
+`checkpoint -> completed` transition, Stage 6 is `skipped` for Papers 24--28
+with reason `user declined Stage 6`, and all five pipeline global states are
+`completed`. Stage 6 did not run, no Process Record was generated, no terminal
+acknowledgement is required, and there is no next required ARS event. The raw
+event and machine-checked transition are retained in
+[`BATCH_ROUND9_STAGE6_SKIP_AUTHOR_EVENT_20260901.txt`](BATCH_ROUND9_STAGE6_SKIP_AUTHOR_EVENT_20260901.txt)
+and
+[`BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json`](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json).
 
 Stage 5 remained format-only.  All five locked `manuscript.tex`,
 `references.bib`, and `content_proof.pdf` files retained their pre-confirmation
@@ -193,7 +208,7 @@ the ARS short-stage guard, every dimension is recorded as
 `insufficient_evidence`, without numerical scores or a Zone label.  This is
 advisory only and cannot block progression.
 
-## FULL checkpoint and next legal action
+## FULL checkpoint and terminal disposition
 
 Stage 5 is complete for all five papers.  Each paper directory contains the
 final PDF, locked LaTeX/BibTeX sources, retained content proof, build logs,
@@ -201,10 +216,12 @@ content-confirmation receipt, finalization report, final manifest, package
 verifier report, provenance/advisory summary, pipeline-state update, and FULL
 completion checkpoint.
 
-Stage 6 (`PROCESS SUMMARY`) is optional and has **not** been entered.  The
-scholar may confirm Stage 6, or explicitly skip it and terminate each pipeline
-as completed with Stage 6 marked `skipped`.
+Stage 6 (`PROCESS SUMMARY`) was optional and was explicitly declined after the
+FULL checkpoint. It is now **skipped** for all five papers and each pipeline is
+**completed**. No Stage-6 Process Record exists or is implied. Any later
+research, revision, formatting, or release work must begin as a new pipeline
+run or a separately authorized targeted task.
 
 ```text
-Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [ ]SUMMARY
+Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [-]SUMMARY (skipped) -> [v]COMPLETED
 ```

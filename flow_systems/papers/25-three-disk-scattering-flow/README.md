@@ -4,8 +4,8 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 FINAL PAPER COMPLETE / FULL
-  CHECKPOINT ISSUED / STAGE 6 PENDING**. The scholar's exact `确认` on
+- Current pipeline: **Round 9 — PIPELINE COMPLETED / STAGE 5 FINAL PAPER
+  COMPLETE / STAGE 6 SKIPPED**. The scholar's exact `确认` on
   2026-09-01 UTC accepts the locked 13-page content proof and authorizes
   format-only finalization. Two fully independent fixed-epoch
   LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX builds are byte-identical. The final
@@ -24,7 +24,11 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
   nonconstant-roof gap and scalar-clock non-transfer theorem remain the paper's
   scientific increment. Canonical `paper/`, `results/`, canonical bibliography,
   the frozen no-eclipse flow, and Route tuples remain unchanged; no venue-
-  readiness, submission, release, or Route-advancement claim is made.
+  readiness, submission, release, or Route-advancement claim is made. On
+  2026-09-01 UTC, the exact response `跳过，继续下一批` declined optional Stage 6.
+  Stage 6 is `skipped`, the pipeline is `completed`, and no Process Record was
+  generated; see the
+  [terminal receipt](../../BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json).
 - Previous correction checkpoint: **Round 9 — STAGE 4.5 EXACT BIBLIOGRAPHY CORRECTION APPLIED /
   BOUNDED REVALIDATION COMPLETE / FRESH FULL GATE PENDING**. The fresh Round-1 audit verifies
   **8/8 reference identities** and **13/13 citation contexts**, registers

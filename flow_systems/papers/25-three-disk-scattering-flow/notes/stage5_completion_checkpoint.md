@@ -4,7 +4,8 @@ Project: `25-three-disk-scattering-flow`
 Checkpoint type: `FULL`  
 Date: `2026-09-01 UTC`  
 Stage verdict: **PASS — final paper delivered**  
-Pipeline state: **Stage 5 complete; Stage 6 pending and not started**
+Pipeline state at checkpoint issuance: **Stage 5 complete; Stage 6 pending and not started**  
+Current terminal state: **Stage 6 skipped; pipeline completed**
 
 ## Stage result
 
@@ -46,7 +47,7 @@ artifact, dynamical-system restriction, or Route state.
   `../stage5_finalization/submission_verification_report.json`.
 - Finalization report: `stage5_finalization_report.md`.
 - Final manifest: `stage5_final_manifest.json`, SHA-256
-  `47647c6eb2eafec96fd44d5b3a0ab239979392f9e7aec41dcd6861069448d1bd`.
+  `a206486ee54029fc206a050bc8cffa364021c8409fc675d71194964453bec8db`.
 - Build-A evidence: `stage5_build_artifacts/`.
 - Collaboration observer: `stage5_collaboration_depth_advisory.md`.
 
@@ -84,12 +85,20 @@ The Stage-5 window has only two scholar turns. Delegation Intensity, Cognitive
 Vigilance, Cognitive Reallocation, and Zone are all `insufficient_evidence`.
 This is advisory-only and nonblocking.
 
-## Next checkpoint decision
+## Post-checkpoint terminal disposition
 
-Stage 6 is optional and has not started. The next scholar decision is whether
-to enter Stage 6 for a Process Record or to skip it and close the pipeline. No
-choice is inferred from this Stage-5 content confirmation.
+On 2026-09-01 UTC the scholar answered the immediately preceding optional
+Stage-6 decision with the exact response:
+
+> 跳过，继续下一批
+
+Under the ARS `checkpoint -> completed` transition, Stage 6 is `skipped` with
+reason `user declined Stage 6`, and the pipeline global state is `completed`.
+Stage 6 did not run, no Process Record was generated, no terminal
+acknowledgement is required, and there is no next required ARS event. This
+terminal decision does not change any Stage-5 deliverable, scientific content,
+dynamical restriction, Route state, submission authority, or release boundary.
 
 ```text
-Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [ ]SUMMARY
+Pipeline: [v]RES -> [v]WRT -> [v]INT -> [v]REV -> [v]REVISE -> [v]RE-REV -> [v]F-INT -> [v]FIN -> [-]SUMMARY (skipped) -> [v]COMPLETED
 ```

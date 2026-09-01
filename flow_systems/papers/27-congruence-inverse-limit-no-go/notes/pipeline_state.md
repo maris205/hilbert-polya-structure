@@ -2,8 +2,8 @@
 
 Date: **2026-09-01**
 
-Current controlling state: **STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
-PENDING**. The exact scholar response `确认`, recorded 2026-09-01 UTC, accepts
+Current controlling state: **PIPELINE COMPLETED / STAGE 5 COMPLETE / STAGE 6
+SKIPPED**. The exact scholar response `确认`, recorded 2026-09-01 UTC, accepts
 the locked 13-page content proof and authorizes the format-only final PDF,
 package audit, and FULL checkpoint. Two independent deterministic builds are
 byte-identical; the final PDF SHA-256 is
@@ -20,8 +20,11 @@ remains at early A0--A1 / A1--A2; batch positive-arithmetic A2 is `0/5`;
 Route B invocations are `0/5`. Canonical content/results, both initial
 dynamical objects, both rejected tuples, and evaluator hashes remain
 unchanged. Existing `#660` and `#672` are nonblocking but non-clean. This state
-makes no venue-readiness, submission, acceptance, or public-release claim and
-does not auto-enter Stage 6.
+makes no venue-readiness, submission, acceptance, or public-release claim. On
+2026-09-01 UTC the scholar declined optional Stage 6 with the exact response
+`跳过，继续下一批`; Stage 6 is therefore `skipped`, the pipeline global state is
+`completed`, no Process Record was generated, and no further ARS event is
+required.
 
 | Item | Status |
 |---|---|
@@ -34,7 +37,7 @@ does not auto-enter Stage 6.
 | ARS Stage 4′ | **COMPLETE WITHIN AUTHORIZED SCOPE** — `REV-03` resolved by 3 operations; 10/10 surfaces exact-once; 8/8 tests; 13-page clean preview; canonical content/results/Route frozen |
 | ARS Stage 4.5 | **ROUND 2 PASS / COMPLETE** — 5/5 references and contexts, 87 `ALL` claims, 87/87 exact tuples, originality/failure-mode/E6 gates, tests, and 13-page preview passed |
 | ARS Stage 5 | **COMPLETE / FULL CHECKPOINT** — exact `确认`; byte-identical dual final build; 13-page final PDF; proof-equivalent text; official advisory package audit fresh |
-| ARS Stage 6 | **PENDING / NOT ENTERED** — no automatic advance and no venue-readiness, submission, acceptance, or release claim |
+| ARS Stage 6 | **SKIPPED / PIPELINE COMPLETED** — scholar declined the optional process summary; no Process Record generated; no next required event |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |

@@ -16,7 +16,8 @@
 | `8-isotropy-trace` — Route A / A0--A4 | **历史论文完成；实际拓扑归属已由 Paper 9 更正** | Paper 8 的 Zak、Poisson、FNS 与有限角 normality 计算在标准 Hausdorff 圆代理上仍成立；Paper 9 证明真实继承轨道并非该圆，而是非平凡不可分空间，因此这些计算已版本化重归属为 proxy-only。正时间 coefficient-one scalar ledger 不受影响。见[论文](papers/8-isotropy-trace/paper/paper.pdf)、[历史摘要](papers/8-isotropy-trace/notes/stage8_summary_zh.md)与 Paper 9 的[更正矩阵](papers/9-packet-separation/paper/paper.pdf)。 |
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
-| `24--28` — 五种连续时间子型 | **Round 9 / Stage 5 FULL 完成；5/5 最终论文已落地，等待 Stage 6 决定** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)。 |
+| `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Pre-Stage-1；预算确认待定** | 五个新 pipeline 已建立，分别瞄准 ideal/Hecke owner、physical nonconstant-roof determinant、unique conjugacy owner、growing-panel renormalization 与 matched genus-two census。当前仅冻结研究问题、继承边界和 kill gates；Stage 1 尚未开始，Route B 关闭。见[批次启动门](BATCH_ROUND10_PAPERS_29_33_PRESTART.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -35,9 +36,28 @@ Verschiebung 局部前像在 overlap 上不能下降。因此，`V_N` 在 fppf s
 Deninger v1 Corollary 4.6 的 sectionwise Dedekind-ring 表述，但不否定
 Propositions 4.3、4.5 或 Corollary 4.7。
 
+## Papers 29--33 下一批概要
+
+Round 10 已作为独立 ARS pipeline 建立，但严格停在 **Pre-Stage-1 / budget
+confirmation pending**。五篇不是对 P24--P28 的重新包装，而是把各自已经暴露的
+关键缺口升级为一个可证伪的主问题：
+
+| Paper | 连续时间对象保持不变 | 本篇必须形成的明确推进 | 路线图位置 |
+|---|---|---|---|
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | level-`(3)` Bianchi geodesic flow | 补齐第三类 A0 control，证明或否证 Gaussian ideal/Hecke owner 的共轭、逆与重复规律，并完成 collision audit | Route A / A0 specificity + A1 ownership |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | `d=6a` no-eclipse physical three-disk flow | 定义真正属于物理 roof 的 transfer operator、函数空间与 determinant convention，闭合 primitive/repetition 系数和数值稳定性 | Route A / A1--A2 physical calibration；不计 arithmetic A2 |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 正的 Level-11 newform time change | 在 full-group conjugacy quotient 上完成 primitivity、inverse 与 multiplicity dedup，检验原 `2/2/134` taxonomy 是否保留 | Route A / A1 completeness；不自动晋级 A2 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 单独注册的 homology-cover calibrator | 将固定三-owner 面板扩展为 target-blind growing panels，证明统一收敛或严格 global Euler-product obstruction | Route A / A1 finite panel 到 A2 global boundary |
+| [P33](papers/33-bolza-control-matched-census/README.md) | Bolza `b=1/2` subtype 与 cutoff `21/10` | 对 Bolza 与非算术 genus-two control 执行完全相同的 exact census，先过 specificity/completeness 门再谈 magnetic comparison | Route A / A0 adversarial control + A1 completeness |
+
+full mode 的批次预算估计为 `400k--700k` tokens（每篇 `80k--140k`）；非
+Socratic 模式最多按每篇 2 个 revision loops 加 2 个 integrity
+fix/reverify loops 计，批次最坏 20 个文档 round-trips。一次用户“确认”后才可进入
+Stage 1；在此之前不执行文献筛查、科学计算、claim registration 或 Route 晋级。
+
 ## Papers 24--28 最新结论
 
-### 当前 Stage 5 FULL 完成结论
+### Stage 5 FULL 落地与 pipeline 终态
 
 作者明确回复“确认”后，Papers 24--28 已完成 **Stage 5 format-only**：五份
 最终 PDF 共 71 页，逐篇两次最终构建与批次独立双重构建均字节一致，共形成
@@ -58,10 +78,13 @@ bibliography entries 闭合。统一完成审计为 **444/444**，fresh Stage-4.
 不是失败。全部字体嵌入；传统 CM Type1 数学字体缺少 ToUnicode 的可访问性限制
 已记录且相对内容证明无回归。Pandoc/DOCX 因数学、定理、交叉引用和引用处理有损，
 未生成或提升 DOCX。Canonical manuscript/bib/results、路线坐标和初始动力学限定
-未改变；Stage 6 尚未进入。
+未改变。用户于 2026-09-01 UTC 以精确回复“跳过，继续下一批”拒绝可选 Stage 6；
+因此五篇的 Stage 6 均记为 `skipped`，pipeline global state 均为 `completed`，
+且没有生成 Process Record，也没有下一项必需 ARS 事件。
 
 完整逐篇哈希、构建证明、路线图对应和 advisory 边界见
-[Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)。
+[Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与
+[Stage-6 跳过终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。
 
 ### fresh Stage 4.5 Round 2 稳定基线
 
@@ -82,7 +105,7 @@ HTTP-202/空结果假成功均在最终 verdict 前被拒绝、修复并全量�
 完整逐篇结果、哈希、纠错轨迹和边界见
 [fresh Stage 4.5 最终批次报告](BATCH_ROUND9_STAGE4_5_ROUND2_FINAL_INTEGRITY_REPORT.md)。
 该 Stage-4.5 基线保持不变；Stage 5 已按上文完成 FULL 检查点。Canonical
-promotion 与投稿仍关闭，Stage 6 只有在新的用户确认后才进入。
+promotion 与投稿仍关闭；可选 Stage 6 已由用户明确跳过，五条 pipeline 已完成。
 
 形式路线继续由 [`skills/route-a-evaluator.md`](skills/route-a-evaluator.md) 与
 [`skills/route-b-evaluator.md`](skills/route-b-evaluator.md) 控制：完整性 PASS
@@ -114,7 +137,7 @@ addressed rate 为 1/4，触发 B5。完整逐篇矩阵、残余缺口、JCS 哈
 Attempt 1 的
 判据、verdict、integration 与合法 abort sidecar 仍保持不可变，历史见
 [Attempt-1 中止报告](BATCH_ROUND9_STAGE3_PRIME_ATTEMPT1_ABORT_REPORT.md)。Canonical
-promotion、投稿与下一批科学实验仍未启动；Stage 6 等待单独确认。
+promotion、投稿与下一批科学实验仍未启动；后续 Stage 6 已明确跳过，pipeline 已完成。
 
 ### 稳定的 Stage-4 落地基线
 
@@ -149,8 +172,8 @@ nonarithmetic genus-two geodesic control/magnetic precursor。仍按 12 个冻�
 Stage 4 的稳定基线不因后续复审和完整性审计改变。上述 P25 四项 MINOR 修复与
 P24/P26/P27/P28 六项 Stage-4′ residual 均已在精确 authority 下完成；其后的
 fresh Stage 4.5 Round 2 现已五篇全部 `PASS`；其后 Stage 5 format-only 已完成
-5/5 最终 PDF 与 FULL 检查点。Canonical promotion、投稿和下一轮科学实验仍未启动，
-Stage 6 等待单独确认。
+5/5 最终 PDF 与 FULL 检查点。Canonical promotion、投稿和下一轮科学实验仍未启动；
+后续 Stage 6 已明确跳过，pipeline 已完成。
 Stage-4 的逐篇结果、哈希、测试边界与路线 crosswalk 仍见
 [Stage-4 批次完成报告](BATCH_ROUND9_STAGE4_COMPLETION_REPORT.md)，后续执行结果见
 [Stage 4′ / P25 correction 报告](BATCH_ROUND9_STAGE4_PRIME_AND_P25_CORRECTION_EXECUTION_REPORT.md)
@@ -367,4 +390,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 24--28-round9-stage5-preflight - 五篇 Stage 5 内容证明预检完成（2026-08-31，历史检查点） - 五份 marker-clean LaTeX、字节相同书目和内容证明共 71 页；20/20 隔离构建命令、引用/书目/声明门与逐篇 `pdftotext -layout` 等价通过，统一验证 283/283，Stage-4.5 复跑仍为 397/397。Pandoc/DOCX 因有损未采用；当时最终 `paper.pdf` 为 0/5，等待作者内容确认。该状态已由下一条 Stage-5 FULL 记录取代。详见 [Stage-5 批次预检报告](BATCH_ROUND9_STAGE5_PREFLIGHT_REPORT.md)。
 
-24--28-round9-stage5-completion - 五篇 Stage 5 FULL 完成（2026-09-01，当前） - 作者内容确认后，五份最终论文共 71 页落地；逐篇 finalizer 双构建和独立批审双构建共 20 个输出均字节一致，45 个 citation commands、33 个唯一 keys 与 33 条 bibliography entries 闭合。独立完成审计 444/444、Stage-4.5 冻结回放 397/397，71/71 页面完成视觉检查，字体全部嵌入；无 fatal、undefined citation/reference、overfull 或 missing-glyph 问题。Package verifier 的 venue-specific B1--B5 因未提供 venue profile 保持 advisory `not_checked`；canonical manuscript/bib/results、初始子型、12+7=19 bookkeeping instances 与 Route tuples 不变，正向算术 A2 `0/5`、Route B `0/5`。Stage 6 尚未进入，等待用户单独决定。详见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)。
+24--28-round9-pipeline-completed - 五篇 Stage 5 FULL 完成、Stage 6 跳过、pipeline completed（2026-09-01，当前） - 作者内容确认后，五份最终论文共 71 页落地；逐篇 finalizer 双构建和独立批审双构建共 20 个输出均字节一致，45 个 citation commands、33 个唯一 keys 与 33 条 bibliography entries 闭合。独立完成审计 444/444、Stage-4.5 冻结回放 397/397，71/71 页面完成视觉检查，字体全部嵌入；无 fatal、undefined citation/reference、overfull 或 missing-glyph 问题。Package verifier 的 venue-specific B1--B5 因未提供 venue profile 保持 advisory `not_checked`；canonical manuscript/bib/results、初始子型、12+7=19 bookkeeping instances 与 Route tuples 不变，正向算术 A2 `0/5`、Route B `0/5`。用户以精确事件 `跳过，继续下一批` 拒绝可选 Stage 6；五篇 Stage 6 均转为 `skipped`，全局 pipeline 均转为 `completed`，无 Process Record、无下一必需 ARS 事件。详见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。
+
+29--33-round10-prestart - Pre-Stage-1 / Route A intake（2026-09-01，当前） - 五个新 pipeline 与论文骨架已经建立；每篇均冻结继承对象、不可改初始限定、一个可检验的显著推进点及 kill gate。Stage 1、文献筛查、计算、claim registration 与 formal tuple 均尚未开始，Route B `0/5` 且关闭。full-mode 预算估计 `400k--700k` tokens，非 Socratic 最坏 20 个文档 round-trips；等待用户一次“确认”进入 Stage 1。详见[批次启动门](BATCH_ROUND10_PAPERS_29_33_PRESTART.md)。

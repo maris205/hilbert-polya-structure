@@ -2,8 +2,8 @@
 
 Date: **2026-09-01**
 
-Current controlling state: **Stage 5 FINAL PAPER COMPLETE / FULL COMPLETION
-CHECKPOINT ISSUED / STAGE 6 PENDING**. Fresh Stage 4.5 Round 2 passed with 7/7
+Current controlling state: **PIPELINE COMPLETED / STAGE 5 FINAL PAPER COMPLETE /
+STAGE 6 SKIPPED**. Fresh Stage 4.5 Round 2 passed with 7/7
 references, 9/9 contexts, 98 exact-span claims, 107/107 evidence tuples,
 11/11 experiment claims, 81/81 full tests, 10/10 derivative replays, and 0
 serious / 0 medium / 0 minor issues. The scholar's exact `确认` dated
@@ -14,7 +14,10 @@ identical PDF SHA-256
 the final/proof `pdftotext -layout` hashes match. Package-verifier C1/C2 pass,
 B1--B5 remain not checked without a venue profile, and freshness replay emitted
 no terminal token. Canonical `paper/`, bibliography, PDF, `results/`, the
-frozen flow, and Route state remain unchanged. Stage 6 has not started.
+frozen flow, and Route state remain unchanged. On 2026-09-01 UTC the scholar
+declined optional Stage 6 with the exact response `跳过，继续下一批`; Stage 6 is
+therefore `skipped`, the pipeline global state is `completed`, no Process Record
+was generated, and no further ARS event is required.
 
 | Item | Status |
 |---|---|
@@ -26,7 +29,8 @@ frozen flow, and Route state remain unchanged. Stage 6 has not started.
 | ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION** — 6 fully + 2 partially; B4; checker PASS; entry decision superseded by authorized Stage 4′ execution |
 | ARS Stage 4′ | **COMPLETE / HISTORICAL ENTRY** — 2/2 residuals addressed; Patch 1.1 and official apply PASS; 10/10 surfaces exact-once; clean preview; superseded by fresh Stage 4.5 PASS |
 | ARS Stage 4.5 | **PASS / MANDATORY CHECKPOINT COMPLETE** — Mode-2 fresh audit: 7/7 refs, 9/9 contexts, 98 claims, 107 evidence tuples, 11 experiment claims; 0 serious / 0 medium / 0 minor |
-| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT ISSUED** — locked plainnat numeric source; reproducible 15-page final PDF; package advisory report fresh; Stage 6 pending |
+| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT ISSUED** — locked plainnat numeric source; reproducible 15-page final PDF; package advisory report fresh |
+| ARS Stage 6 | **SKIPPED / PIPELINE COMPLETED** — scholar declined the optional process summary; no Process Record generated; no next required event |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |
