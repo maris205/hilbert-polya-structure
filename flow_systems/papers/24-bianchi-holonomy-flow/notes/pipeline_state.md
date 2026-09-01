@@ -1,17 +1,20 @@
 # P24 pipeline state
 
-Date: **2026-08-30**
+Date: **2026-09-01**
 
-Current controlling state: **Stage 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
-CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The exact request SHA-256
-is `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
-and the unified author event SHA-256 is
-`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
-Both P24 residuals were applied within their exact scope: 10 operations,
-101/111 blocks preserved byte-identically, 10/10 surfaces exact once, no
-structural flag, no scientific-value or Route change, and a clean 15-page
-preview. Canonical manuscript, paper PDF, bibliography, and results remain
-unchanged. Stage 4.5 and Stage 5 are not authorized by this state.
+Current controlling state: **Stage 5 FINAL PAPER COMPLETE / FULL COMPLETION
+CHECKPOINT ISSUED / STAGE 6 PENDING**. Fresh Stage 4.5 Round 2 passed with 7/7
+references, 9/9 contexts, 98 exact-span claims, 107/107 evidence tuples,
+11/11 experiment claims, 81/81 full tests, 10/10 derivative replays, and 0
+serious / 0 medium / 0 minor issues. The scholar's exact `确认` dated
+2026-09-01 UTC then accepted the 15-page content proof and authorized the final
+PDF and package audit. Two independent fixed-epoch builds produced byte-
+identical PDF SHA-256
+`8d690aa887c9aed27e1070b6bc840de333ff2d2de9f81a79945a034401025eeb`;
+the final/proof `pdftotext -layout` hashes match. Package-verifier C1/C2 pass,
+B1--B5 remain not checked without a venue profile, and freshness replay emitted
+no terminal token. Canonical `paper/`, bibliography, PDF, `results/`, the
+frozen flow, and Route state remain unchanged. Stage 6 has not started.
 
 | Item | Status |
 |---|---|
@@ -21,7 +24,9 @@ unchanged. Stage 4.5 and Stage 5 are not authorized by this state.
 | ARS Stage 3 | **COMPLETE / HISTORICAL MAJOR REVISION** — five Phase-1 and five Phase-2 cards, synthesis, provenance, and eight-item non-ranking roadmap validated |
 | ARS Stage 4 | **COMPLETE** — authorized eight-item revision, evidence bundle, direct regression and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION** — 6 fully + 2 partially; B4; checker PASS; entry decision superseded by authorized Stage 4′ execution |
-| ARS Stage 4′ | **AUTHOR-SIDE REVISION COMPLETE / CONTENT CONFIRMATION PENDING** — 2/2 residuals addressed; Patch 1.1 and official apply PASS; 10/10 surfaces exact-once; clean preview; fresh Stage 4.5 not yet run |
+| ARS Stage 4′ | **COMPLETE / HISTORICAL ENTRY** — 2/2 residuals addressed; Patch 1.1 and official apply PASS; 10/10 surfaces exact-once; clean preview; superseded by fresh Stage 4.5 PASS |
+| ARS Stage 4.5 | **PASS / MANDATORY CHECKPOINT COMPLETE** — Mode-2 fresh audit: 7/7 refs, 9/9 contexts, 98 claims, 107 evidence tuples, 11 experiment claims; 0 serious / 0 medium / 0 minor |
+| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT ISSUED** — locked plainnat numeric source; reproducible 15-page final PDF; package advisory report fresh; Stage 6 pending |
 | Continuous-time object | **FROZEN** — unit-speed geodesic flow on torsion-free level-`(3)` Bianchi manifold |
 | Level-`(3)` neatness / torsion-freeness | **PROVED** — self-contained congruence-trace lemma in Stage-1 brief |
 | Arithmetic source | **FROZEN** — Gaussian principal congruence group |
@@ -73,7 +78,7 @@ unchanged. Stage 4.5 and Stage 5 are not authorized by this state.
 | Full Bianchi Route A A2--A4 | NOT EVALUATED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |
-| Manuscript | **FROZEN STAGE-3 REVIEW TARGET / UNCHANGED** — 4,029 audited body words; 7/7 citation closure; clean 12-page PDF; SHA-256 `e43ba0f...fd11` |
+| Manuscript | **STAGE-5 FINALIZATION PACKAGE COMPLETE / CANONICAL TREE UNCHANGED** — accepted format-only source; 7/7 citation closure; reproducible 15-page package PDF SHA-256 `8d690aa8...25eeb` |
 
 Next gate: Round 8 shows that trace divisibility alone proves too much, but the
 mandatory control-type ledger remains `2/3`.  Before any positive promotion,

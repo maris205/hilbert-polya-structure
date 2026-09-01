@@ -4,18 +4,40 @@ Working title: *Renormalization Obstructions in Congruence and Homology Towers o
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 IN PROGRESS / FORMAT PREFLIGHT PASS /
-  ONE SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was
-  transferred to `stage5_finalization/manuscript.tex` by removing exactly 110
-  standalone ARS block-marker lines and no other source bytes. The accepted
-  bibliography and 13-page content proof were copied byte-identically. The
-  isolated LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX build returns `0,0,0,0`, all
-  5 citation contexts resolve to 5 bibliography entries, the formatter and
-  declaration hard gates pass, and both ordinary and layout `pdftotext`
-  outputs exactly equal the accepted proof. Pandoc is recorded as lossy, so
-  LaTeX remains authoritative. No final `paper.pdf` exists; canonical content,
-  results, the two initial dynamical objects, and both rejected Route tuples
-  are unchanged. See the
+- Current pipeline: **Round 9 — STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
+  PENDING**. The scholar's exact 2026-09-01 UTC response `确认` accepts the
+  locked 13-page proof and authorizes the format-only final PDF and package
+  audit. Two independent deterministic LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX
+  builds are byte-identical. The [final PDF](stage5_finalization/paper.pdf) has
+  SHA-256
+  `6b82701f253ab452b4c6be1c7f27dd6ff24267f5609317743492889834b40684`,
+  13 A4 pages, and layout-text SHA-256
+  `5f02152c13d9f36fd9163cbe2906572ae52aa9bc282d5ea979165ea536bb114b`,
+  exactly matching the confirmed proof. Build and bibliography hard gates are
+  clear; all 13 rendered pages passed visual inspection; 18/18 fonts are
+  embedded. The unchanged 13 Computer Modern math subsets with `uni=no` are
+  disclosed rather than called clean. The official advisory package verifier
+  records 2 `pass`, 7 `not_applicable`, 5 venue-profile `not_checked`, 0
+  `warn`, and 0 `fail`; freshness is `report fresh (policy=advisory)` with no
+  terminal token. The significant result remains the residual inverse-limit
+  aperiodicity and fixed-owner escape theorem plus the separately owned
+  nonresidual `Q11` calibration. Route A remains at early A0--A1 / A1--A2,
+  batch positive-arithmetic A2 is `0/5`, and Route B invocations are `0/5`.
+  Canonical content/results and evaluator hashes are unchanged; `#660` and
+  `#672` remain nonblocking but non-clean. See the
+  [FULL checkpoint](notes/stage5_completion_checkpoint.md),
+  [finalization report](notes/stage5_finalization_report.md), and
+  [final manifest](notes/stage5_final_manifest.json). No venue-readiness,
+  submission, acceptance, or public-release claim is made.
+- Previous Stage-5 preflight: **FORMAT PREFLIGHT PASS / ONE SCHOLAR CONTENT
+  CONFIRMATION WAS PENDING**. The accepted Stage-4.5 TeX was transferred to
+  `stage5_finalization/manuscript.tex` by removing exactly 110 standalone ARS
+  block-marker lines and no other source bytes. The accepted bibliography and
+  13-page content proof were copied byte-identically. The isolated build
+  returned `0,0,0,0`; all 5 citation contexts resolved to 5 bibliography
+  entries; formatter and declaration hard gates passed; and both ordinary and
+  layout `pdftotext` outputs equaled the proof. Pandoc was recorded as lossy,
+  so LaTeX remained authoritative. See the
   [entry decision](notes/stage5_entry_decision_20260831.md),
   [content preflight](notes/stage5_content_preflight.md), and
   [content proof](stage5_finalization/content_proof.pdf).

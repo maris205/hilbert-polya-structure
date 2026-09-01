@@ -4,20 +4,26 @@ Working title: *Congruence Trace Universality and the Limits of First-Jet Separa
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 FORMAT-ONLY PREFLIGHT PASS / ONE
-  SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was copied
-  into the Stage-5 workspace with exactly 121 standalone ARS block-marker lines
-  removed; the seven-entry bibliography and 15-page content proof are
-  byte-identical copies of their accepted inputs. The isolated
-  LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX replay exits cleanly, closes all 9 citation
-  contexts and 7 keys, and has byte-identical `pdftotext -layout` output to the
-  content proof. The formatter refusal scan is clean. Pandoc conversion is
-  withheld as lossy and non-authoritative. See the
-  [content preflight](notes/stage5_content_preflight.md),
-  [input manifest](notes/stage5_input_manifest.json), and
-  [content proof](stage5_finalization/content_proof.pdf). No final `paper.pdf`
-  has been created; canonical source/bib/PDF/results, the frozen dynamical
-  system, and Route tuple remain unchanged.
+- Current pipeline: **Round 9 — STAGE 5 FINAL PAPER COMPLETE / FULL
+  CHECKPOINT ISSUED / STAGE 6 PENDING**. The scholar's exact `确认` on
+  2026-09-01 UTC accepts the locked 15-page content proof and authorizes
+  format-only finalization. Two fully independent fixed-epoch
+  LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX builds are byte-identical. The final
+  [15-page PDF](stage5_finalization/paper.pdf) has SHA-256
+  `8d690aa887c9aed27e1070b6bc840de333ff2d2de9f81a79945a034401025eeb`
+  and its `pdftotext -layout` SHA-256 exactly matches the confirmed proof.
+  Citation closure is 9 commands / 7 keys / 7 entries; fatal, undefined,
+  overfull, and missing-glyph counts are all zero. All 15 pages passed visual
+  review. The fresh ARS package report has C1/C2 pass, A1--A7 not applicable,
+  and B1--B5 explicitly not checked because no venue profile exists; freshness
+  replay is clean and emitted no terminal token. See the
+  [finalization report](notes/stage5_finalization_report.md),
+  [final manifest](notes/stage5_final_manifest.json), and
+  [FULL checkpoint](notes/stage5_completion_checkpoint.md). The ring-general
+  negative-specificity theorem and bounded first-jet compression result remain
+  the paper's scientific increment. Canonical `paper/`, `results/`, the frozen
+  Bianchi flow, and the Route tuple remain unchanged; no venue-readiness,
+  submission, release, or Route-advancement claim is made.
 - Previous Stage-4′ checkpoint: **Round 9 — STAGE 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
   CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The authorized
   `REV-001` and `REV-003` residuals were applied by a 10-operation Patch 1.1;

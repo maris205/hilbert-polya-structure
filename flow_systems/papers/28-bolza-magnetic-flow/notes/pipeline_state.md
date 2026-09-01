@@ -1,23 +1,23 @@
 # P28 pipeline state
 
-Date: **2026-08-30**
+Date: **2026-09-01**
 
-Current controlling state: **Stage 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
-MANDATORY SCHOLAR CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual
-`REV-02` is `RESOLVED` by one scoped replacement. Its 14/14 registered
-ClaimIntent surfaces remain byte-exact and exact-once, contributing 14 of the
-batch's frozen 51-surface population. The authority chain binds the
-[batch request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
-to the unified raw author event, SHA-256
-`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
-The official two-round revision bundle and final evidence package replay;
-28/28 combined tests plus the 24/24 verify-only replay and token conservation
-pass; the isolated preview is 14 clean A4 pages. Canonical manuscript/body,
-bibliography, PDF, result tree, the frozen unit-speed Bolza magnetic flow at
-`b=1/2`, and Route records remain unchanged. The checker-valid Stage-3′
-`MAJOR_REVISION` under B3 is retained below as the historical entry decision;
-Stage 4.5 is not invoked.
+Current controlling state: **Stage 5 COMPLETE / FULL CHECKPOINT RECORDED /
+STAGE 6 PENDING**.  The scholar's exact content response `确认` authorized the
+final format-only build.  The accepted Stage-4.5 Round-2 integrity result
+remains `PASS` at 6/6 references, 9/9 citation contexts, 95/95 registered
+claims, and 104/104 evidence tuples.  Two independent fixed-environment builds
+produced the byte-identical 14-page final PDF, SHA-256
+`be156f76fcf3f31ecdc2d8be5dde5ccf7aaf7f0b530c7dc8efc9b889e3633cc9`;
+its `pdftotext -layout` stream is byte-identical to the accepted proof, and all
+14 pages passed visual review.  The advisory package report is fresh, with
+A1--A7 not applicable, B1--B5 not checked because no venue profile exists,
+and C1--C2 passed.  All 17 fonts are embedded; 12 legacy Type-1 math fonts
+retain the accepted proof's `uni=no` profile, so complete per-font ToUnicode
+coverage is not claimed.  Canonical manuscript/body, bibliography, PDF,
+result tree, the frozen unit-speed Bolza magnetic flow at `b=1/2`, subtype,
+and Route records remain unchanged.  Stage 6 is optional, pending, and not
+entered.
 
 | Item | Status |
 |---|---|
@@ -28,7 +28,9 @@ Stage 4.5 is not invoked.
 | ARS Stage 4 | **COMPLETE** — authorized four-item revision, evidence bundle, direct tests and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION ENTRY** — 3 fully + 1 cannot verify; B3; checker PASS; exact Stage-4′ authority was subsequently granted |
 | ARS Stage 4′ | **COMPLETE WITHIN AUTHORIZED SCOPE** — `REV-02` resolved by 1 operation; 14/14 surfaces exact-once; 28/28 tests plus 24/24 replay; 14-page clean preview; canonical content/results/Route frozen |
-| ARS Stage 4.5 | **MANDATORY CHECKPOINT / NOT INVOKED** — fresh final-integrity pass requires explicit scholar confirmation |
+| ARS Stage 4.5 | **PASS / MANDATORY CHECKPOINT COMPLETE** — fresh Mode-2 audit: refs 6/6; contexts 9/9; claims 95/95; evidence tuples 104/104 |
+| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT** — scholar-confirmed format-only finalization; 2/2 byte-identical builds; 14-page final PDF; fresh advisory package report |
+| ARS Stage 6 | **PENDING / NOT ENTERED** — optional process summary awaits a separate scholar decision |
 | Continuous-time object | **FROZEN** — unit-speed Bolza magnetic flow at `b=1/2` |
 | Flux / base-bundle degrees | **`[PROVED]`** — `b=0,+1/2,-1/2` maps to `0,+1,-1`; negative field uses `L^*` |
 | Global magnetic potential | **`[PROVED]`** — nonzero flux implies nonexact field |
@@ -86,7 +88,7 @@ Stage 4.5 is not invoked.
 | Round-2 owner ledger | **EXECUTED / REPLAY PASS** — 12 rows, `N=1,2,4,8`, 7/7 tests |
 | Magnetic-orbit ledger | **BOUNDED OWNER SUBSET EXECUTED** — 36 safely distinct inverse-paired axes per field and theorem-derived signed-`k` period/action/stability branches; no trajectory integration or complete `Gamma` spectrum |
 | Evidence tokens | `[PROVED]|[HEURISTIC]|[MODELING_CHOICE]|[OPEN]` |
-| Proposal stage | ARS Stage 2 draft complete / Route A A0--A1 control theorem |
+| Paper-delivery stage | ARS Stage 5 complete / Route A early control-infrastructure layer |
 | Formal Route-A tuple | UNASSIGNED |
 | Route-B evaluation | NOT RUN |
 | Route-B invocation allowed | `false` |

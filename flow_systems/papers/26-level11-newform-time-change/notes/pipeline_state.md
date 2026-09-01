@@ -1,18 +1,26 @@
 # P26 pipeline state
 
-Date: **2026-08-30**
+Date: **2026-09-01**
 
-Current controlling state: **Stage 4′ AUTHOR-SIDE REVISION COMPLETE / AUTHOR
-CONTENT CONFIRMATION AND FRESH STAGE 4.5 PENDING**. The exact request SHA-256
-is `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
-and the unified author event SHA-256 is
-`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
-Both P26 residuals were applied within their exact scope: 9 operations,
-108/117 blocks preserved byte-identically, 17/17 surfaces exact once, no
-structural flag, no scientific-value or Route change, and a clean 16-page
-preview. Canonical manuscript, paper PDF, and results remain unchanged; the
-only bibliography change is the exact authorized two-entry append. Stage 4.5
-and Stage 5 are not authorized by this state.
+Current controlling state: **STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
+PENDING**. The exact scholar response `确认`, recorded 2026-09-01 UTC, accepts
+the locked 16-page content proof and authorizes the format-only final PDF,
+package audit, and FULL checkpoint. Two independent deterministic builds are
+byte-identical; the final PDF SHA-256 is
+`2e7b0deb7e9bda399d155f514d6f3fdcc89e5d463082456817da91bfca0792c5`,
+and its layout-text SHA-256
+`67805a2b582713a79755b5c8074dac91e793754f2bb7fd179d8e4bfcd8b74444`
+exactly equals the confirmed proof. Build, bibliography, declarations, and
+all-page visual gates pass. The advisory package verifier records 2 `pass`, 7
+`not_applicable`, 5 venue-profile `not_checked`, 0 `warn`, and 0 `fail`;
+freshness is `report fresh (policy=advisory)` with no terminal token. The
+significant result remains the frozen 2/2/134 exact taxonomy with 51/55
+primary-law failures and 55/55 control failures. Route A remains at early
+A0--A1 / A1--A2; batch positive-arithmetic A2 is `0/5`; Route B invocations
+are `0/5`. Canonical content/results, the initial flow object, and evaluator
+hashes remain unchanged. Existing `#660` and `#672` are nonblocking but
+non-clean. This state makes no venue-readiness, submission, acceptance, or
+public-release claim and does not auto-enter Stage 6.
 
 | Item | Status |
 |---|---|
@@ -23,6 +31,9 @@ and Stage 5 are not authorized by this state.
 | ARS Stage 4 | **COMPLETE** — authorized nine-item revision, 84/84 suite, evidence bundle and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION** — 7 fully + 1 partially + 1 cannot verify; B4; checker PASS; entry decision superseded by authorized Stage 4′ execution |
 | ARS Stage 4′ | **AUTHOR-SIDE REVISION COMPLETE / CONTENT CONFIRMATION PENDING** — 2/2 residuals addressed; exact two-entry bibliography append; Patch 1.1 and official apply PASS; 17/17 surfaces exact-once; clean preview; fresh Stage 4.5 not yet run |
+| ARS Stage 4.5 | **ROUND 2 PASS / COMPLETE** — 7/7 references, 8/8 contexts, 93 `ALL` claims, 97/97 exact tuples, originality/failure-mode/E6 gates, tests, and 16-page preview passed |
+| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT** — exact `确认`; byte-identical dual final build; 16-page final PDF; proof-equivalent text; official advisory package audit fresh |
+| ARS Stage 6 | **PENDING / NOT ENTERED** — no automatic advance and no venue-readiness, submission, acceptance, or release claim |
 | Continuous-time object | **FROZEN** — positive time change of `Gamma_0(11)` geodesic flow |
 | Arithmetic owner | **FROZEN** — real level-11 newform differential |
 | Time-density / speed multiplier | **MODELING_CHOICE / FROZEN** — `rho_epsilon` / `1/rho_epsilon` |

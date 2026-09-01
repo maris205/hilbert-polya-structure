@@ -2,23 +2,25 @@
 
 ## Current status
 
-- Current pipeline: **ROUND 9 — STAGE 5 IN PROGRESS / AWAITING ONE CONTENT
-  CONFIRMATION**. The accepted Stage-4.5 Round-2 audit remains `PASS` at 6/6
-  references, 9/9 citation contexts, 95 `ALL` claims, and 104/104 exact
-  evidence tuples. The Stage-5 formatter removed only 127 standalone ARS block
-  markers, producing
-  [the finalization source](stage5_finalization/manuscript.tex), SHA-256
-  `14ad8eeaa7cdd55bc889adc250630a7b18a9e20e316d4fb6becddb9e05922d22`;
-  the bibliography and 14-page
-  [content proof](stage5_finalization/content_proof.pdf) are byte-identical to
-  their accepted inputs. The isolated LuaLaTeX/BibTeX replay, citation/bib
-  hard gate, 16/16 declaration gate, and `pdftotext -layout` equivalence all
-  pass. Pandoc is recorded as lossy and is not promoted. See the
-  [Stage-5 content preflight](notes/stage5_content_preflight.md) and
-  [build receipt](notes/stage5_preflight_build_receipt.json). Scientific,
-  declaration, Route, subtype, canonical source/result, and bibliography
-  content remain unchanged. `stage5_finalization/paper.pdf` has not been
-  created and is gated on one explicit scholar content confirmation.
+- Current pipeline: **ROUND 9 — STAGE 5 COMPLETE / FULL CHECKPOINT RECORDED /
+  STAGE 6 PENDING**. The scholar supplied the required content confirmation,
+  and the accepted Stage-4.5 Round-2 audit remains `PASS` at 6/6 references,
+  9/9 citation contexts, 95 `ALL` claims, and 104/104 exact evidence tuples.
+  Two completely independent fixed-environment LuaLaTeX/BibTeX builds produced
+  the same 14-page
+  [final PDF](stage5_finalization/paper.pdf), SHA-256
+  `be156f76fcf3f31ecdc2d8be5dde5ccf7aaf7f0b530c7dc8efc9b889e3633cc9`.
+  Its `pdftotext -layout` stream is byte-identical to the accepted
+  [content proof](stage5_finalization/content_proof.pdf), all 14 pages passed
+  visual inspection, citation closure remains 6/6, and the official package
+  report is fresh under the advisory policy. See the
+  [finalization report](notes/stage5_finalization_report.md),
+  [FULL checkpoint](notes/stage5_completion_checkpoint.md), and
+  [final manifest](notes/stage5_final_manifest.json). All 17 fonts are
+  embedded; 12 legacy Type-1 math fonts retain the accepted proof's
+  `uni=no` profile, so complete per-font ToUnicode coverage is not claimed.
+  Scientific, declaration, Route, subtype, canonical source/result, and
+  bibliography content remain unchanged. Stage 6 has not started.
 - Previous Stage-4′ checkpoint: **STAGE 4′ COMPLETE WITHIN AUTHORIZED SCOPE — MANDATORY SCHOLAR
   CONFIRMATION BEFORE STAGE 4.5**. P28's sole residual `REV-02` is `RESOLVED`
   by the exactly authorized `B0048/replace_block` operation. All **14/14
@@ -406,7 +408,8 @@ Gate advancement and no Route-B invocation. The
 [preliminary drift audit](notes/stage4_unregistered_claim_drift_audit.md) is
 not Stage-4.5 E6, and the [Route crosswalk](notes/stage4_route_crosswalk.md)
 does not authorize a later stage. At that Stage-4 closeout checkpoint Stage 3
-prime and Stage 4.5 had not begun. Stage 3′ Round 2 and the separately
-authorized Stage 4′ revision have since completed; Stage 4.5 remains not
-invoked as reported above. `paper/manuscript.tex`, `paper/paper.pdf`, and
-canonical results remain untouched.
+prime and Stage 4.5 had not begun. Stage 3′ Round 2, the separately authorized
+Stage 4′ revision, fresh Stage 4.5 Round-2 integrity audit, and Stage-5
+format-only finalization have since completed. `paper/manuscript.tex`,
+`paper/paper.pdf`, and canonical results remain untouched; the final deliverable
+lives only in `stage5_finalization/`.

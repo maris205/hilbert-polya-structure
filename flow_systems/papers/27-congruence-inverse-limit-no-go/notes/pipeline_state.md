@@ -1,22 +1,27 @@
 # P27 pipeline state
 
-Date: **2026-08-30**
+Date: **2026-09-01**
 
-Current controlling state: **Stage 4′ COMPLETE WITHIN AUTHORIZED SCOPE /
-MANDATORY SCHOLAR CONFIRMATION BEFORE STAGE 4.5**. P27's sole residual
-`REV-03` is `RESOLVED` by three scoped replacements. Its 10/10 registered
-ClaimIntent surfaces remain byte-exact and exact-once, contributing 10 of the
-batch's frozen 51-surface population. The authority chain binds the
-[batch request](../../../BATCH_ROUND9_STAGE4_PRIME_AUTHORIZATION_REQUEST.md),
-SHA-256 `d2e94cd10b1ca12204c8747b5bc0895f6c642e3a3ff7c08194016ed62fd461ec`,
-to the unified raw author event, SHA-256
-`fc4de4ab870bcb6ff3f1c0c9fc6eb9f389edbfbb2d6b01a79a063d21f80365dd`.
-The official two-round revision bundle and final evidence package replay;
-8/8 support tests and token conservation pass; the isolated preview is 13
-clean A4 pages. Canonical manuscript/body, bibliography, PDF, result tree,
-the frozen residual congruence inverse-limit flow, and both rejected Route-A
-tuples remain unchanged. The checker-valid Stage-3′ `MAJOR_REVISION` under B4
-is retained below as the historical entry decision; Stage 4.5 is not invoked.
+Current controlling state: **STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
+PENDING**. The exact scholar response `确认`, recorded 2026-09-01 UTC, accepts
+the locked 13-page content proof and authorizes the format-only final PDF,
+package audit, and FULL checkpoint. Two independent deterministic builds are
+byte-identical; the final PDF SHA-256 is
+`6b82701f253ab452b4c6be1c7f27dd6ff24267f5609317743492889834b40684`,
+and its layout-text SHA-256
+`5f02152c13d9f36fd9163cbe2906572ae52aa9bc282d5ea979165ea536bb114b`
+exactly equals the confirmed proof. Build, bibliography, declarations, and
+all-page visual gates pass. The advisory package verifier records 2 `pass`, 7
+`not_applicable`, 5 venue-profile `not_checked`, 0 `warn`, and 0 `fail`;
+freshness is `report fresh (policy=advisory)` with no terminal token. The
+significant result remains residual inverse-limit aperiodicity and fixed-owner
+escape, with the nonresidual `Q11` calibration kept separately owned. Route A
+remains at early A0--A1 / A1--A2; batch positive-arithmetic A2 is `0/5`;
+Route B invocations are `0/5`. Canonical content/results, both initial
+dynamical objects, both rejected tuples, and evaluator hashes remain
+unchanged. Existing `#660` and `#672` are nonblocking but non-clean. This state
+makes no venue-readiness, submission, acceptance, or public-release claim and
+does not auto-enter Stage 6.
 
 | Item | Status |
 |---|---|
@@ -27,7 +32,9 @@ is retained below as the historical entry decision; Stage 4.5 is not invoked.
 | ARS Stage 4 | **COMPLETE** — authorized six-item revision, evidence bundle, 8/8 suite and clean preview complete |
 | ARS Stage 3′ | **ROUND 2 COMPLETE / HISTORICAL MAJOR REVISION ENTRY** — 5 fully + 1 partially; B4; checker PASS; exact Stage-4′ authority was subsequently granted |
 | ARS Stage 4′ | **COMPLETE WITHIN AUTHORIZED SCOPE** — `REV-03` resolved by 3 operations; 10/10 surfaces exact-once; 8/8 tests; 13-page clean preview; canonical content/results/Route frozen |
-| ARS Stage 4.5 | **MANDATORY CHECKPOINT / NOT INVOKED** — fresh final-integrity pass requires explicit scholar confirmation |
+| ARS Stage 4.5 | **ROUND 2 PASS / COMPLETE** — 5/5 references and contexts, 87 `ALL` claims, 87/87 exact tuples, originality/failure-mode/E6 gates, tests, and 13-page preview passed |
+| ARS Stage 5 | **COMPLETE / FULL CHECKPOINT** — exact `确认`; byte-identical dual final build; 13-page final PDF; proof-equivalent text; official advisory package audit fresh |
+| ARS Stage 6 | **PENDING / NOT ENTERED** — no automatic advance and no venue-readiness, submission, acceptance, or release claim |
 | Continuous-time object | **FROZEN** — coordinatewise geodesic flow on residual congruence inverse limit |
 | Tower / clock | **FROZEN** — `Gamma(3 n!)` / common arclength |
 | Total-space periodic points | **`[PROVED]`: NONE** |

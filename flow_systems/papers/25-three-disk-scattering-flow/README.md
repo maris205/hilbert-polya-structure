@@ -4,22 +4,27 @@ Working title: *Why a Unit-Roof Symbolic Determinant Does Not Transfer to the Ph
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 FORMAT-ONLY PREFLIGHT PASS / ONE
-  SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was copied
-  into the Stage-5 workspace with exactly 116 standalone block-marker lines
-  and eight inline ARS provenance comments removed; all remaining bytes are
-  preserved. The accepted corrected derived eight-entry bibliography and
-  13-page content proof are byte-identical copies. The isolated
-  LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX replay exits cleanly, closes all 13 citation
-  contexts and 8 keys, and has byte-identical `pdftotext -layout` output to the
-  proof; therefore comment removal has no rendered-text effect. The formatter
-  refusal scan is clean, while Pandoc conversion is withheld as lossy and
-  non-authoritative. See the
-  [content preflight](notes/stage5_content_preflight.md),
-  [input manifest](notes/stage5_input_manifest.json), and
-  [content proof](stage5_finalization/content_proof.pdf). No final `paper.pdf`
-  has been created; canonical bibliography/source/PDF/results, the frozen
-  no-eclipse system, and Route tuples remain unchanged.
+- Current pipeline: **Round 9 — STAGE 5 FINAL PAPER COMPLETE / FULL
+  CHECKPOINT ISSUED / STAGE 6 PENDING**. The scholar's exact `确认` on
+  2026-09-01 UTC accepts the locked 13-page content proof and authorizes
+  format-only finalization. Two fully independent fixed-epoch
+  LuaLaTeX→BibTeX→LuaLaTeX→LuaLaTeX builds are byte-identical. The final
+  [13-page PDF](stage5_finalization/paper.pdf) has SHA-256
+  `5968230a947956744c41d542a833e8cc165a0610980bb8bcdb3fed31c4f0198f`
+  and its `pdftotext -layout` SHA-256 exactly matches the confirmed proof.
+  Citation closure is 13 commands / 8 keys / 8 entries; fatal, undefined,
+  overfull, and missing-glyph counts are all zero, with 10 nonblocking
+  underfull Chinese-abstract lines retained. All 13 pages passed visual review.
+  The fresh ARS package report has C1/C2 pass, A1--A7 not applicable, and
+  B1--B5 explicitly not checked because no venue profile exists; freshness
+  replay is clean and emitted no terminal token. See the
+  [finalization report](notes/stage5_finalization_report.md),
+  [final manifest](notes/stage5_final_manifest.json), and
+  [FULL checkpoint](notes/stage5_completion_checkpoint.md). The exact
+  nonconstant-roof gap and scalar-clock non-transfer theorem remain the paper's
+  scientific increment. Canonical `paper/`, `results/`, canonical bibliography,
+  the frozen no-eclipse flow, and Route tuples remain unchanged; no venue-
+  readiness, submission, release, or Route-advancement claim is made.
 - Previous correction checkpoint: **Round 9 — STAGE 4.5 EXACT BIBLIOGRAPHY CORRECTION APPLIED /
   BOUNDED REVALIDATION COMPLETE / FRESH FULL GATE PENDING**. The fresh Round-1 audit verifies
   **8/8 reference identities** and **13/13 citation contexts**, registers

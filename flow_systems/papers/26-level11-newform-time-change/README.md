@@ -4,18 +4,40 @@ Working title: *Exact Newform-Period Taxonomy for a Level-11 Time Change of the 
 
 ## Current status
 
-- Current pipeline: **Round 9 — STAGE 5 IN PROGRESS / FORMAT PREFLIGHT PASS /
-  ONE SCHOLAR CONTENT CONFIRMATION PENDING**. The accepted Stage-4.5 TeX was
-  transferred to `stage5_finalization/manuscript.tex` by removing exactly 125
-  standalone ARS block-marker lines and no other source bytes. The accepted
-  bibliography and 16-page content proof were copied byte-identically. The
-  isolated LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX build returns `0,0,0,0`, all
-  8 citation contexts resolve to 7 bibliography entries, the formatter and
-  declaration hard gates pass, and both ordinary and layout `pdftotext`
-  outputs exactly equal the accepted proof. Pandoc is recorded as lossy, so
-  LaTeX remains authoritative. No final `paper.pdf` exists; canonical content,
-  results, the initial dynamical object, and the Route tuple are unchanged.
-  See the [entry decision](notes/stage5_entry_decision_20260831.md),
+- Current pipeline: **Round 9 — STAGE 5 COMPLETE / FULL CHECKPOINT / STAGE 6
+  PENDING**. The scholar's exact 2026-09-01 UTC response `确认` accepts the
+  locked 16-page proof and authorizes the format-only final PDF and package
+  audit. Two independent deterministic LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX
+  builds are byte-identical. The [final PDF](stage5_finalization/paper.pdf) has
+  SHA-256
+  `2e7b0deb7e9bda399d155f514d6f3fdcc89e5d463082456817da91bfca0792c5`,
+  16 A4 pages, and layout-text SHA-256
+  `67805a2b582713a79755b5c8074dac91e793754f2bb7fd179d8e4bfcd8b74444`,
+  exactly matching the confirmed proof. Build and bibliography hard gates are
+  clear; all 16 rendered pages passed visual inspection; 18/18 fonts are
+  embedded. The unchanged 13 Computer Modern math subsets with `uni=no` are
+  disclosed rather than called clean. The official advisory package verifier
+  records 2 `pass`, 7 `not_applicable`, 5 venue-profile `not_checked`, 0
+  `warn`, and 0 `fail`; freshness is `report fresh (policy=advisory)` with no
+  terminal token. The significant result remains the frozen 2/2/134 exact
+  taxonomy, 51/55 primary-law failures, and 55/55 control failures. Route A
+  remains at early A0--A1 / A1--A2, batch positive-arithmetic A2 is `0/5`, and
+  Route B invocations are `0/5`. Canonical content/results and evaluator hashes
+  are unchanged; `#660` and `#672` remain nonblocking but non-clean. See the
+  [FULL checkpoint](notes/stage5_completion_checkpoint.md),
+  [finalization report](notes/stage5_finalization_report.md), and
+  [final manifest](notes/stage5_final_manifest.json). No venue-readiness,
+  submission, acceptance, or public-release claim is made.
+- Previous Stage-5 preflight: **FORMAT PREFLIGHT PASS / ONE SCHOLAR CONTENT
+  CONFIRMATION WAS PENDING**. The accepted Stage-4.5 TeX was transferred to
+  `stage5_finalization/manuscript.tex` by removing exactly 125 standalone ARS
+  block-marker lines and no other source bytes. The accepted bibliography and
+  16-page content proof were copied byte-identically. The isolated build
+  returned `0,0,0,0`; all 8 citation contexts resolved to 7 bibliography
+  entries; formatter and declaration hard gates passed; and both ordinary and
+  layout `pdftotext` outputs equaled the proof. Pandoc was recorded as lossy,
+  so LaTeX remained authoritative. See the
+  [entry decision](notes/stage5_entry_decision_20260831.md),
   [content preflight](notes/stage5_content_preflight.md), and
   [content proof](stage5_finalization/content_proof.pdf).
 - Previous Stage-4.5 checkpoint: **Round 9 — FRESH STAGE 4.5 ROUND 2 PASS / STAGE 5
