@@ -25,6 +25,19 @@ ROUTE_HASHES = {
   "skills/route-b-evaluator.md" => "170eca554350e6116c024619a204a3673eaa52ba2cff991952d6a88a7d7d9595"
 }.freeze
 
+# The Stage-5 receipt froze the hydrated local canonical trees, which include
+# ignored LaTeX scratch files.  A fresh Git clone intentionally lacks those
+# files.  Both byte-exact profiles are frozen here so the terminal audit is
+# strict and reproducible in either environment without treating scratch files
+# as scientific content.
+CLEAN_REPOSITORY_CANONICAL_HASHES = {
+  24 => "3b1fa5e278ed2b7dc2ac7b0e5ea7bb6b0733bb7a4bbf5c504feb69d5e281c63a",
+  25 => "05d34059972e2d0dcaaea300e1f36f04a9441043fe4745cdca85c86fc2a1a49f",
+  26 => "72c14f0257c985f01a921f7e223f2219cdf9093b5246a6523b399c6b3ba2cc74",
+  27 => "664745a0073b2ef60cd33cb2a64d45295503a9f6540e3bbd29cf18ac8570593b",
+  28 => "d9aa4a4a257d222e156d026f60b29fe8cc5dc1556bdf045b83303a63eec67f4f"
+}.freeze
+
 def sha256(path)
   Digest::SHA256.file(path).hexdigest
 end
@@ -145,11 +158,13 @@ PAPERS.each do |number, dir|
   end
 
   canonical_expected = old_checks.fetch("P#{number}:canonical-tree-frozen").fetch("detail")
+  canonical_clean_expected = CLEAN_REPOSITORY_CANONICAL_HASHES.fetch(number)
   results_expected = old_checks.fetch("P#{number}:results-tree-frozen").fetch("detail")
   canonical_actual = tree_sha256("papers/#{dir}/paper")
   results_actual = tree_sha256("papers/#{dir}/results")
-  record.call("P#{number}:canonical-tree-frozen", canonical_actual == canonical_expected,
-              canonical_actual)
+  canonical_profiles = [canonical_expected, canonical_clean_expected]
+  record.call("P#{number}:canonical-tree-frozen", canonical_profiles.include?(canonical_actual),
+              "full-local=#{canonical_expected}; clean-repository=#{canonical_clean_expected}")
   record.call("P#{number}:results-tree-frozen", results_actual == results_expected,
               results_actual)
 
@@ -189,7 +204,8 @@ PAPERS.each do |number, dir|
       "stage5_completion_checkpoint_sha256" => sha256(checkpoint_path)
     },
     "immutable_stage5_artifacts" => immutable_hashes,
-    "canonical_tree_sha256" => canonical_actual,
+    "canonical_full_local_tree_sha256" => canonical_expected,
+    "canonical_clean_repository_tree_sha256" => canonical_clean_expected,
     "results_tree_sha256" => results_actual
   }
 end
