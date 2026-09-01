@@ -1,0 +1,243 @@
+\documentclass[10pt]{article}
+\providecommand{\CRevisionRound}{2}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\usepackage{microtype,amsmath,amssymb,amsthm,mathtools,booktabs,array,enumitem}
+\usepackage[hidelinks]{hyperref}
+\pdfvariable suppressoptionalinfo 767
+\pdfvariable trailerid {[<C2822026090100000000000000000000><C2822026090100000000000000000000>]}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlist{nosep,leftmargin=*}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\title{One Joint Transform for the Complete\
+Exponential Cram\'er--Lundberg Ruin Atlas}
+\author{HCS Research Program}
+\date{1 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the classical compound-Poisson surplus with exponential claims, we derive
+one closed joint transform of ruin time and deficit.  It gives ultimate ruin
+on both sides of the safety-loading wall and proves conditional overshoot
+independence.
+\ifnum\CRevisionRound>0
+We also obtain both finite conditional ruin-time means and prove their
+critical infinite-mean boundary from a square-root root cusp.
+\fi
+\ifnum\CRevisionRound>1
+An adjustment martingale closes the exact all-time supremum mixture.
+\fi
+No periodic-orbit or arithmetic target conclusion is drawn.
+\end{abstract}
+
+\section{Frozen process and joint penalty}
+Let $N_t$ be Poisson with rate $\nu\geq0$, let $Y_i$ be independent
+$\operatorname{Exp}(\beta)$ claims with $\beta>0$, and fix $c>0$, $u\geq0$.
+The surplus, strict ruin time, and deficit are
+\begin{equation}
+ U_t=u+ct-\sum_{i=1}^{N_t}Y_i,\qquad
+\tau=\inf\{t\geq0:U_t<0\},\qquad D=-U_\tau. \tag{1}
+\end{equation}
+Thus $u=0$ is not initially ruined.  The Route-A dynamical owner is the
+killed process
+\[
+ X_t=U_t\quad(t<\tau),\qquad X_t=\Delta\quad(t\geq\tau),
+\]
+whereas the joint transform below is a first-passage functional of the
+underlying surplus $U$.  Gerber and Shiu~\cite{GerberShiu1998}
+are cited only for discounted-penalty lineage; Drekic and
+Willmot~\cite{DrekicWillmot2003} are cited only for exponential-claim
+ruin-time lineage.  No formula or proof below is outsourced.
+
+For $q,s\geq0$ put
+\[
+ \Phi_{q,s}(u)=\E_u[e^{-q\tau-sD};\tau<\infty]
+\]
+and define
+\begin{equation}
+ r_q=\frac{c\beta-\nu-q+
+ \sqrt{(c\beta-\nu-q)^2+4c\beta q}}{2c}. \tag{2}
+\end{equation}
+
+\begin{theorem}[Complete joint transform]
+For every frozen parameter,
+\begin{equation}
+ \boxed{\displaystyle
+ \Phi_{q,s}(u)=\frac{\beta-r_q}{\beta+s}e^{-r_qu}.} \tag{3}
+\end{equation}
+Here $0\leq r_q\leq\beta$.  If $\nu=0$, then $r_q=\beta$ and (3) is zero.
+If $\nu>0$, conditional on ruin,
+$D\sim\operatorname{Exp}(\beta)$ and $D$ is independent of $\tau$.
+\end{theorem}
+
+\begin{proof}
+First-jump conditioning gives, for $u>0$,
+\begin{align}
+0={}&c\Phi'(u)-(\nu+q)\Phi(u)
++\nu\int_0^u\Phi(u-y)\beta e^{-\beta y}\,dy \notag\\
+&+\nu\int_u^\infty e^{-s(y-u)}\beta e^{-\beta y}\,dy. \tag{4}
+\end{align}
+The last integral is $\beta e^{-\beta u}/(\beta+s)$.  To prove that an
+exponential ansatz is exhaustive, introduce the convolution state
+\[
+ J(u)=\int_0^u\Phi(u-y)\beta e^{-\beta y}\,dy.
+\]
+Equation (4) is equivalent to the two-dimensional inhomogeneous system
+\begin{equation}
+ \begin{aligned}
+ c\Phi'&=(\nu+q)\Phi-\nu J
+ -\frac{\nu\beta}{\beta+s}e^{-\beta u},\\
+ J'&=\beta(\Phi-J),\qquad J(0)=0.
+ \end{aligned} \tag{5}
+\end{equation}
+Its homogeneous mode $e^{-ru}$ exists exactly when
+\begin{equation}
+ cr^2-(c\beta-\nu-q)r-q\beta=0, \tag{6}
+\end{equation}
+so these two modes exhaust the homogeneous solution space (with the usual
+generalized mode at a double root).  A particular solution of (5) is
+$(\Phi,J)=(0,-\beta e^{-\beta u}/(\beta+s))$.  For $q>0$, the two roots have
+opposite signs, so boundedness removes the negative root and retains (2).  At
+$q=0$ with $0<\nu<c\beta$, both $0$ and
+$R=\beta-\nu/c$ give bounded nonnegative local solutions.  Here the strong
+law for $Z_t=\sum_{i\leq N_t}Y_i-ct$ gives
+$Z_t/t\to\nu/\beta-c<0$, hence $M=\sup_{t\geq0}Z_t<\infty$ almost surely and
+$\Phi_{0,s}(u)\leq\Pp(M>u)\to0$; this removes the constant mode and selects
+$R$.  If $\nu>c\beta$, boundedness removes the growing negative-root mode and
+retains $r=0$.  At equality the second generalized mode grows linearly and is
+again removed by boundedness.  For the surviving mode,
+$J=A\beta e^{-ru}/(\beta-r)-\beta e^{-\beta u}/(\beta+s)$, so $J(0)=0$
+forces $A=(\beta-r)/(\beta+s)$.  This mode exhaustion plus the stated chamber
+boundaries proves uniqueness, rather than assuming it from the ansatz.  If
+$\nu=0$ there are no claims and $\Phi\equiv0$,
+which is (3) with $r_q=\beta$.  Continuity under the common-path coupling
+extends the solution from $u>0$ to $u=0$; equality at a claim has probability
+zero, so the strict-passage convention is preserved.
+
+For $\nu>0$, (3) factors as
+$\Phi_{q,s}=\{\beta/(\beta+s)\}\Phi_{q,0}$.  This identifies the conditional
+Laplace transform of $D$ and its independence from $\tau$.  Pathwise, the same
+fact is exponential memorylessness beyond the pre-ruin reserve.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Every safety-loading chamber}
+Put $\rho=\nu/(c\beta)$.  Setting $q=s=0$ in (2)--(3) gives the following
+complete boundary law.
+
+\begin{theorem}[Ruin probability and conditional mean time]
+For $\nu>0$:
+\[
+\begin{array}{c@{\quad}c@{\quad}c}
+\toprule
+\text{chamber}&\Pp_u(\tau<\infty)&\E_u[\tau\mid\tau<\infty]\\
+\midrule
+\rho<1&\rho e^{-Ru},\ R=\beta-\nu/c&
+\dfrac{1+\nu u/c}{c\beta-\nu}\\[5pt]
+\rho=1&1&\infty\\[2pt]
+\rho>1&1&\dfrac{\beta u+1}{\nu-c\beta}\\
+\bottomrule
+\end{array} \tag{7}
+\]
+In all three chambers, $\E[D\mid\tau<\infty]=1/\beta$.  If $\nu=0$, ruin is
+impossible and conditional ruin quantities are undefined.
+\end{theorem}
+
+\begin{proof}
+At $q=0$, (2) is $R>0$ when $c\beta>\nu$ and zero otherwise, giving the middle
+column.  Differentiate $\Phi_{q,0}$ at zero discount.  In the profitable
+chamber, $r'_0=\nu/[c(c\beta-\nu)]$; in the adverse chamber,
+$r'_0=\beta/(\nu-c\beta)$.  Logarithmic differentiation gives the two finite
+means in (7).
+
+At criticality,
+\[
+ r_q=\frac{-q+\sqrt{q^2+4c\beta q}}{2c}
+ \sim\sqrt{\frac{\beta q}{c}}.
+\]
+Hence the right derivative of $\Phi_{q,0}$ at zero is $-\infty$, proving the
+infinite mean rather than substituting into a singular side formula.  The
+deficit mean follows from the first theorem.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Adjustment martingale and exact supremum}
+Assume $0<\rho<1$ and set $Z_t=\sum_{i=1}^{N_t}Y_i-ct$.  Since
+\begin{equation}
+ \nu\left(\frac{\beta}{\beta-R}-1\right)-cR=0,
+ \qquad R=\beta-\nu/c, \tag{8}
+\end{equation}
+$e^{RZ_t}$ is a mean-one martingale.  If $M=\sup_{t\geq0}Z_t$, ruin from
+reserve $u$ is precisely $\{M>u\}$.  Therefore
+\begin{equation}
+ \Pp(M=0)=1-\rho,\qquad
+ \Pp(M>u)=\rho e^{-Ru}\quad(u\geq0). \tag{9}
+\end{equation}
+Thus the positive part has density $\rho R e^{-Rx}$.  Equation (9) is a
+source-local workload duality, not a new queue spectrum or target bridge.
+\fi
+
+\section{Evidence and Route-A boundary}
+The canonical receipt contains 36 exact regime rows, 448 joint-transform rows,
+144 conditional-first-mean rows, 12 martingale/supremum rows, and six boundary
+rows.  An independent checker passes 4,487 assertions;
+SymPy passes 15 identities; fresh replay is byte-exact; and 26/26 repaired-hash
+or stale-hash mutations are
+rejected.  Finite rows are regression checks, not proof of the continuum
+theorem.
+
+\ifnum\CRevisionRound>1
+\begin{center}
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+Release item&Result\\
+\midrule
+Regime / transform / first mean / martingale / boundary&$36/448/144/12/6$\\
+Independent assertions / symbolic identities&$4{,}487/15$ PASS\\
+Fresh replay / hostile mutations&PASS / $26/26$ rejected\\
+Evidence SHA-256&\texttt{6551879f2a73\ldots ded29f0}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The nearest finite queue owner studies a birth--death spectrum; it does not
+contain this continuous-reserve, absorbing, joint deficit/time theorem.  This
+workspace distinction is not a literature-priority claim.
+\fi
+
+The Route-A tuple is
+\[
+(\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+ \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}),\qquad
+\mathrm{ROUTE\_A\_REJECTED}. \tag{10}
+\]
+There is no arithmetic origin.  More precisely, the killed PDMP/Markov
+semigroup has no intrinsic deterministic, enumerable primitive-periodic-orbit
+owner.  No rational-prime carrier, logarithmic clock, target determinant,
+target zero match, Hilbert--P\'olya operator, or Route-B input follows.  Scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\begin{thebibliography}{9}
+\bibitem{GerberShiu1998}
+H. U. Gerber and E. S. W. Shiu, ``On the time value of ruin,''
+\emph{North American Actuarial Journal} \textbf{2} (1), 48--72 (1998),
+\href{https://doi.org/10.1080/10920277.1998.10595671}{doi:10.1080/10920277.1998.10595671}.
+
+\bibitem{DrekicWillmot2003}
+S. Drekic and G. E. Willmot, ``On the density and moments of the time of ruin
+with exponential claims,'' \emph{ASTIN Bulletin} \textbf{33} (1), 11--21
+(2003), \href{https://doi.org/10.2143/AST.33.1.1036}{doi:10.2143/AST.33.1.1036}.
+\end{thebibliography}
+
+\end{document}

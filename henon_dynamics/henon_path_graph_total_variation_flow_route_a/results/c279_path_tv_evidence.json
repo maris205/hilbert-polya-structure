@@ -1,0 +1,853 @@
+{
+  "candidate_id": "HCS-C279",
+  "enumeration": {
+    "alphabet": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "arithmetic": "exact fractions only",
+    "by_n": [
+      {
+        "constant_count": 5,
+        "event_count_histogram": {
+          "0": 5
+        },
+        "input_count": 5,
+        "max_consensus_time": "0",
+        "max_event_times": 0,
+        "n": 1,
+        "simultaneous_event_times": 0,
+        "total_event_times": 0,
+        "total_pair_merges": 0
+      },
+      {
+        "constant_count": 5,
+        "event_count_histogram": {
+          "0": 5,
+          "1": 20
+        },
+        "input_count": 25,
+        "max_consensus_time": "2",
+        "max_event_times": 1,
+        "n": 2,
+        "simultaneous_event_times": 0,
+        "total_event_times": 20,
+        "total_pair_merges": 20
+      },
+      {
+        "constant_count": 5,
+        "event_count_histogram": {
+          "0": 5,
+          "1": 68,
+          "2": 52
+        },
+        "input_count": 125,
+        "max_consensus_time": "8/3",
+        "max_event_times": 2,
+        "n": 3,
+        "simultaneous_event_times": 28,
+        "total_event_times": 172,
+        "total_pair_merges": 200
+      },
+      {
+        "constant_count": 5,
+        "event_count_histogram": {
+          "0": 5,
+          "1": 106,
+          "2": 322,
+          "3": 192
+        },
+        "input_count": 625,
+        "max_consensus_time": "4",
+        "max_event_times": 3,
+        "n": 4,
+        "simultaneous_event_times": 164,
+        "total_event_times": 1326,
+        "total_pair_merges": 1500
+      },
+      {
+        "constant_count": 5,
+        "event_count_histogram": {
+          "0": 5,
+          "1": 196,
+          "2": 916,
+          "3": 1232,
+          "4": 776
+        },
+        "input_count": 3125,
+        "max_consensus_time": "24/5",
+        "max_event_times": 4,
+        "n": 5,
+        "simultaneous_event_times": 1056,
+        "total_event_times": 8828,
+        "total_pair_merges": 10000
+      },
+      {
+        "constant_count": 5,
+        "event_count_histogram": {
+          "0": 5,
+          "1": 334,
+          "2": 2508,
+          "3": 5646,
+          "4": 5492,
+          "5": 1640
+        },
+        "input_count": 15625,
+        "max_consensus_time": "6",
+        "max_event_times": 5,
+        "n": 6,
+        "simultaneous_event_times": 8632,
+        "total_event_times": 52456,
+        "total_pair_merges": 62500
+      }
+    ],
+    "n_max": 6,
+    "n_min": 1,
+    "raw_input_count": 19530,
+    "stress_dimensions": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "stress_event_times": 30,
+    "stress_input_count": 5,
+    "stress_pair_merges": 38,
+    "stress_trace_sha256": "da41a9d9cce93436425035832b315926eebc82fcc47498f074b343c67d38cb86",
+    "trace_sha256": "da46566b83355f273a883c632abd8fd474fab8d244edce5c613ad77396c88943",
+    "violations": {
+      "block_split": 0,
+      "consensus_mean": 0,
+      "consensus_time_bound": 0,
+      "dissipation": 0,
+      "event_bound": 0,
+      "mass": 0,
+      "rof_kkt": 0,
+      "subgradient_flux": 0
+    }
+  },
+  "evaluation_date": "2026-09-01",
+  "evaluator": {
+    "sha256": "6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c",
+    "version": "0.2.0"
+  },
+  "fixed_epoch": 1788220800,
+  "model": {
+    "clock": "maximal-monotone semigroup time t>=0",
+    "energy": "J(x)=sum_{i=1}^{n-1}|x_{i+1}-x_i|",
+    "flow": "x'(t) in -partial J(x(t)), x(0)=x^0 in R^n",
+    "graph": "unweighted path P_n on vertices 1,...,n, n>=1",
+    "incidence": "(Dx)_i=x_{i+1}-x_i for i=1,...,n-1",
+    "rof": "R_t(x^0)=argmin_y (1/2)||y-x^0||_2^2+t J(y)"
+  },
+  "nonclaims": [
+    "The finite grid is regression evidence and is not a proof for arbitrary real initial data.",
+    "The ROF-equals-flow theorem is path-specific; it is not asserted for general branched or cyclic graphs.",
+    "The convex semigroup and ROF resolvent are not a primitive-orbit determinant, arithmetic Euler product, or Hilbert-Polya operator."
+  ],
+  "payload_sha256": "2cf2d349d7aab2802829013b10ed5c2960d1586e8920e209807ba03d80a81296",
+  "proof_contract": {
+    "classification": "PROVABLE AS STATED for every finite unweighted path P_n and every real initial vector",
+    "finite_evidence_role": "exact enumeration audits the event algorithm and KKT witnesses but does not replace the all-real analytic proof",
+    "finite_extinction": "one-homogeneity gives r r'=-J and ||x-mean(x)1||_2<=sqrt(n)J, hence r'<=-1/sqrt(n) until consensus",
+    "maximal_monotone": "finite convex continuous J has maximal monotone subdifferential and therefore a unique contraction semigroup",
+    "minimal_flux": "on each zero-jump block the minimal-norm edge flux linearly interpolates its two exterior signs, giving one common block velocity",
+    "no_splitting": "the interpolating flux stays in [-1,1], so an existing plateau is a valid common-velocity facet until it collides and can thereafter only join a larger facet",
+    "rof_kkt": "average the flow subgradient from 0 to t; final nonzero edges never merged and retain their sign, while averages on final zero edges remain in [-1,1]"
+  },
+  "references": [
+    {
+      "authors": "Haim Brezis",
+      "id": "Brezis1973",
+      "identifier": "MR0348562",
+      "title": "Operateurs maximaux monotones et semi-groupes de contractions dans les espaces de Hilbert",
+      "url": "https://mathscinet.ams.org/mathscinet-getitem?mr=0348562",
+      "venue": "North-Holland Mathematics Studies 5, North-Holland, 1973"
+    },
+    {
+      "authors": "Leonid I. Rudin, Stanley Osher, and Emad Fatemi",
+      "id": "RudinOsherFatemi1992",
+      "identifier": "10.1016/0167-2789(92)90242-F",
+      "title": "Nonlinear total variation based noise removal algorithms",
+      "url": "https://doi.org/10.1016/0167-2789(92)90242-F",
+      "venue": "Physica D 60 (1992), 259-268"
+    },
+    {
+      "authors": "Clemens Kirisits, Otmar Scherzer, and Eric Setterqvist",
+      "id": "KirisitsScherzerSetterqvist2019",
+      "identifier": "10.1137/19M124126X",
+      "title": "Invariant phi-Minimal Sets and Total Variation Denoising on Graphs",
+      "url": "https://doi.org/10.1137/19M124126X",
+      "venue": "SIAM Journal on Imaging Sciences 12(4) (2019), 1643-1668"
+    },
+    {
+      "authors": "Jose M. Mazon, Marcos Solera, and Julian Toledo",
+      "id": "MazonSoleraToledo2020",
+      "identifier": "10.1007/s00526-019-1684-z",
+      "title": "The Total Variation Flow in Metric Random Walk Spaces",
+      "url": "https://doi.org/10.1007/s00526-019-1684-z",
+      "venue": "Calculus of Variations and Partial Differential Equations 59 (2020), article 29"
+    }
+  ],
+  "route_a": {
+    "overall": "ROUTE_A_REJECTED",
+    "route_b_invocation_allowed": false,
+    "tuple": [
+      "A0_FAIL",
+      "A1_FAIL",
+      "A2_FAIL",
+      "A3_FAIL",
+      "A4_FAIL"
+    ]
+  },
+  "schema": "hcs-c279-path-graph-total-variation-flow-v1",
+  "scope_flags": {
+    "arithmetic_local_data": false,
+    "automorphy": false,
+    "euler_factors": false,
+    "hilbert_polya_operator": false,
+    "root_numbers": false,
+    "route_b_input": false,
+    "target_divisor_or_counting_law": false,
+    "target_functional_equation": false,
+    "target_zero_match": false
+  },
+  "scope_literal": "NO_BAD_EULER_OR_ROOT_NUMBER",
+  "source_commit": "51fb3d46f96b854314811c1ad62d3103cd5d54e5",
+  "theorem_contract": {
+    "block_velocity": "a maximal constant block B=[l,r] has velocity (s_r-s_{l-1})/|B|, with exterior jump signs and missing endpoint signs equal to zero",
+    "boundary": "n=1, constant data, endpoint blocks, rational data, and simultaneous mergers are included; no equivalence theorem is asserted for general branched or cyclic graphs",
+    "coalescence": "maximal blocks never split; adjacent collisions merge jointly, including simultaneous multi-collisions, so at most n-1 distinct event times occur",
+    "consensus": "the mean is preserved and exact consensus is reached in finite time T<=sqrt(n)||x^0-mean(x^0)1||_2",
+    "dissipation": "outside event times, d||x-mean(x^0)1||_2^2/(2dt)=-J(x) and dJ(x)/dt=-||x'(t)||_2^2",
+    "rof_equivalence": "for every t>=0 the flow value equals the unique path ROF minimizer R_t(x^0)",
+    "wellposedness": "for every n>=1 and x^0 in R^n there is one unique global absolutely continuous gradient-flow solution"
+  },
+  "witnesses": [
+    {
+      "input": [
+        "3"
+      ],
+      "name": "singleton",
+      "trace": {
+        "consensus_time": "0",
+        "consensus_value": "3",
+        "event_times": 0,
+        "events": [],
+        "initial_partition": [
+          [
+            1,
+            1
+          ]
+        ],
+        "pair_merges": 0
+      }
+    },
+    {
+      "input": [
+        "-2",
+        "-2",
+        "-2",
+        "-2"
+      ],
+      "name": "constant",
+      "trace": {
+        "consensus_time": "0",
+        "consensus_value": "-2",
+        "event_times": 0,
+        "events": [],
+        "initial_partition": [
+          [
+            1,
+            4
+          ]
+        ],
+        "pair_merges": 0
+      }
+    },
+    {
+      "input": [
+        "0",
+        "3",
+        "3"
+      ],
+      "name": "endpoint_facet",
+      "trace": {
+        "consensus_time": "2",
+        "consensus_value": "2",
+        "event_times": 1,
+        "events": [
+          {
+            "energy": "0",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                3
+              ]
+            ],
+            "state": [
+              "2",
+              "2",
+              "2"
+            ],
+            "time": "2"
+          }
+        ],
+        "initial_partition": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "pair_merges": 1
+      }
+    },
+    {
+      "input": [
+        "0",
+        "2",
+        "0"
+      ],
+      "name": "single_simultaneous_merger",
+      "trace": {
+        "consensus_time": "2/3",
+        "consensus_value": "2/3",
+        "event_times": 1,
+        "events": [
+          {
+            "energy": "0",
+            "pair_merges": 2,
+            "partition": [
+              [
+                1,
+                3
+              ]
+            ],
+            "state": [
+              "2/3",
+              "2/3",
+              "2/3"
+            ],
+            "time": "2/3"
+          }
+        ],
+        "initial_partition": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ]
+        ],
+        "pair_merges": 2
+      }
+    },
+    {
+      "input": [
+        "0",
+        "2",
+        "0",
+        "2",
+        "0"
+      ],
+      "name": "two_simultaneous_mergers",
+      "trace": {
+        "consensus_time": "4/5",
+        "consensus_value": "4/5",
+        "event_times": 2,
+        "events": [
+          {
+            "energy": "1",
+            "pair_merges": 2,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                4
+              ],
+              [
+                5,
+                5
+              ]
+            ],
+            "state": [
+              "1/2",
+              "1",
+              "1",
+              "1",
+              "1/2"
+            ],
+            "time": "1/2"
+          },
+          {
+            "energy": "0",
+            "pair_merges": 2,
+            "partition": [
+              [
+                1,
+                5
+              ]
+            ],
+            "state": [
+              "4/5",
+              "4/5",
+              "4/5",
+              "4/5",
+              "4/5"
+            ],
+            "time": "4/5"
+          }
+        ],
+        "initial_partition": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "pair_merges": 4
+      }
+    },
+    {
+      "input": [
+        "2",
+        "2",
+        "-1",
+        "-1",
+        "3",
+        "0",
+        "0"
+      ],
+      "name": "mixed_plateaus",
+      "trace": {
+        "consensus_time": "18/7",
+        "consensus_value": "5/7",
+        "event_times": 3,
+        "events": [
+          {
+            "energy": "8/5",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                4
+              ],
+              [
+                5,
+                7
+              ]
+            ],
+            "state": [
+              "7/5",
+              "7/5",
+              "1/5",
+              "1/5",
+              "3/5",
+              "3/5",
+              "3/5"
+            ],
+            "time": "6/5"
+          },
+          {
+            "energy": "3/4",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                2
+              ],
+              [
+                3,
+                7
+              ]
+            ],
+            "state": [
+              "5/4",
+              "5/4",
+              "1/2",
+              "1/2",
+              "1/2",
+              "1/2",
+              "1/2"
+            ],
+            "time": "3/2"
+          },
+          {
+            "energy": "0",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                7
+              ]
+            ],
+            "state": [
+              "5/7",
+              "5/7",
+              "5/7",
+              "5/7",
+              "5/7",
+              "5/7",
+              "5/7"
+            ],
+            "time": "18/7"
+          }
+        ],
+        "initial_partition": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "pair_merges": 3
+      }
+    },
+    {
+      "input": [
+        "-2",
+        "2",
+        "1",
+        "-1",
+        "2",
+        "-2"
+      ],
+      "name": "generic_cascade",
+      "trace": {
+        "consensus_time": "2",
+        "consensus_value": "0",
+        "event_times": 4,
+        "events": [
+          {
+            "energy": "7",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                6,
+                6
+              ]
+            ],
+            "state": [
+              "-3/2",
+              "1",
+              "1",
+              "0",
+              "1",
+              "-3/2"
+            ],
+            "time": "1/2"
+          },
+          {
+            "energy": "4",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                4,
+                5
+              ],
+              [
+                6,
+                6
+              ]
+            ],
+            "state": [
+              "-5/4",
+              "3/4",
+              "3/4",
+              "1/2",
+              "1/2",
+              "-5/4"
+            ],
+            "time": "3/4"
+          },
+          {
+            "energy": "3",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                5
+              ],
+              [
+                6,
+                6
+              ]
+            ],
+            "state": [
+              "-1",
+              "1/2",
+              "1/2",
+              "1/2",
+              "1/2",
+              "-1"
+            ],
+            "time": "1"
+          },
+          {
+            "energy": "0",
+            "pair_merges": 2,
+            "partition": [
+              [
+                1,
+                6
+              ]
+            ],
+            "state": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "time": "2"
+          }
+        ],
+        "initial_partition": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            6
+          ]
+        ],
+        "pair_merges": 5
+      }
+    },
+    {
+      "input": [
+        "-3/2",
+        "1/3",
+        "1/3",
+        "7/4",
+        "-2/5",
+        "9/8"
+      ],
+      "name": "rational_cascade",
+      "trace": {
+        "consensus_time": "1277/720",
+        "consensus_value": "197/720",
+        "event_times": 4,
+        "events": [
+          {
+            "energy": "221/120",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                5,
+                6
+              ]
+            ],
+            "state": [
+              "-119/120",
+              "1/3",
+              "1/3",
+              "11/15",
+              "37/60",
+              "37/60"
+            ],
+            "time": "61/120"
+          },
+          {
+            "energy": "317/200",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                3
+              ],
+              [
+                4,
+                6
+              ]
+            ],
+            "state": [
+              "-189/200",
+              "1/3",
+              "1/3",
+              "16/25",
+              "16/25",
+              "16/25"
+            ],
+            "time": "111/200"
+          },
+          {
+            "energy": "43/120",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "state": [
+              "-1/40",
+              "1/3",
+              "1/3",
+              "1/3",
+              "1/3",
+              "1/3"
+            ],
+            "time": "59/40"
+          },
+          {
+            "energy": "0",
+            "pair_merges": 1,
+            "partition": [
+              [
+                1,
+                6
+              ]
+            ],
+            "state": [
+              "197/720",
+              "197/720",
+              "197/720",
+              "197/720",
+              "197/720",
+              "197/720"
+            ],
+            "time": "1277/720"
+          }
+        ],
+        "initial_partition": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            5,
+            5
+          ],
+          [
+            6,
+            6
+          ]
+        ],
+        "pair_merges": 4
+      }
+    }
+  ]
+}

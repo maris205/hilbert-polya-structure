@@ -17,6 +17,22 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C279--HCS-C283 additions (2026-09-01)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O263 | HCS-C279 path-TV coalescence as an arithmetic primitive ledger | proved finite-collapse and source-resolvent obstruction | Every nonconstant trajectory undergoes finitely many plateau mergers and reaches the constant consensus state; there is no nontrivial recurrent primitive family, rational-prime carrier, logarithmic roof, target divisor, or dynamical determinant.  The same-time ROF identity is a source convex-flow fact with direct one-dimensional prior owners. | Global uniqueness, explicit plateau flux and velocity, no splitting, simultaneous collisions, the `n-1` event bound, finite consensus and all-time ROF equality survive for the frozen unweighted path. | ../henon_path_graph_total_variation_flow_route_a/THEOREM_PACKAGE.md |
+| HEN-O264 | HCS-C280 projective orientation periods as isolated arithmetic primitives | proved clean-continuum and physical-clock obstruction | Elliptic director orbits occur in continuously parameterized clean families and their periods vary with fluid-gradient and aspect-ratio data.  Hyperbolic and nilpotent chambers align rather than recur.  No canonical rational-prime labels, logarithmic prime clock, isolated-orbit determinant, or target divisor results. | The exact projective lift, four-chamber discriminant atlas, stable/unstable projective lines, least periods, strobes, simple-shear and marked-sphere/rod/disk boundaries survive. | ../henon_jeffery_bretherton_planar_orientation_route_a/THEOREM_PACKAGE.md |
+| HEN-O265 | HCS-C281 product-sphere Ricci singularities as primitive arithmetic orbits | proved monotone-volume/singularity obstruction | Every nonflat product has strictly decreasing volume and reaches a Type-I collapse; the all-flat face is stationary.  Thus the owner supplies neither nonconstant recurrence nor an intrinsic enumerable primitive-periodic ledger, rational-prime clock, target determinant, or same-clock quantum lift. | The arbitrary-product affine flow, tied-collapse curvature/volume/diameter residues, pointed shrinker-times-Euclidean model, normalized conjugacy, positive-Einstein full-collapse equivalence and all flat/mixed boundaries survive. | ../henon_product_spheres_ricci_flow_route_a/THEOREM_PACKAGE.md |
+| HEN-O266 | HCS-C282 killed risk process as a deterministic arithmetic orbit owner | proved killed-stochastic-owner obstruction | The Route-A owner is a killed PDMP/Markov semigroup, while the exact transform is a first-passage functional of its underlying surplus.  It has no intrinsic deterministic enumerable primitive-periodic-orbit owner, rational-prime carrier, logarithmic roof, target determinant, or target zero bridge. | The joint discount-deficit transform, exhaustive root selection and uniqueness, loading atlas, conditional first mean, critical cusp, overshoot independence, adjustment martingale and supremum mixture survive. | ../henon_cramer_lundberg_exponential_ruin_route_a/THEOREM_PACKAGE.md |
+| HEN-O267 | HCS-C283 conductor shells as a global arithmetic determinant | proved fixed-local-prime and proves-too-much obstruction | One fixed `p` gives a source-local arithmetic relation, but conductor shells are not primitive periodic orbits and composite branching reproduces the same spectral algebra.  The geometric source spectral zeta and vertical pole lattice have a direct published owner and do not establish a global prime dictionary, target divisor, or Hilbert--Pólya operator. | The added zero mode, conditional-expectation Markov reconstruction, exact heat/staircase/log-periodic laws, quasi-Schatten gate, determinant value, singular faces and finite-DFT checker survive. | ../henon_padic_conductor_shell_heat_semigroup_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under the frozen path norm, projective
+director, diagonal-product metric, killed-process, and conductor-shell
+conventions.  They do not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C274--HCS-C278 additions (2026-09-01)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

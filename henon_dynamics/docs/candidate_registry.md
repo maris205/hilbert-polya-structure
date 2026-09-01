@@ -3,6 +3,41 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C279--HCS-C283 additions (2026-09-01)
+
+Five independent cross-subtype candidates were frozen from baseline
+`51fb3d46f96b854314811c1ad62d3103cd5d54e5`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C279 | Path-graph total-variation subgradient flow has an exact plateau-flux coalescence algorithm, finite consensus with simultaneous-event closure, no splitting, and equality with the same-time ROF resolvent for all real initial data. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [path-TV package](../henon_path_graph_total_variation_flow_route_a/) · [paper PDF](../henon_path_graph_total_variation_flow_route_a/paper/main.pdf) |
+| HCS-C280 | The Jeffery--Bretherton director in every constant incompressible planar linear flow is the projectivization of one traceless matrix exponential, yielding the complete elliptic/hyperbolic/nilpotent/identity, least-period, strobe and marked-sphere boundary atlas. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [projective-orientation package](../henon_jeffery_bretherton_planar_orientation_route_a/) · [paper PDF](../henon_jeffery_bretherton_planar_orientation_route_a/paper/main.pdf) |
+| HCS-C281 | Every diagonal product of round spheres has an exact affine Ricci flow with all tied Type-I first-collapse residues and pointed limits; partial collapse is a finite normalized singularity, while full collapse is exactly the positive-Einstein stationary normalized face, with all-flat tori separated. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [product-spheres Ricci-flow package](../henon_product_spheres_ricci_flow_route_a/) · [paper PDF](../henon_product_spheres_ricci_flow_route_a/paper/main.pdf) |
+| HCS-C282 | The exponential Cramér--Lundberg model has one exact joint ruin-time/deficit transform whose rigorously exhausted two-dimensional modes close all loading chambers, overshoot independence, the conditional first mean and critical cusp, adjustment martingale and supremum mixture. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [exponential-ruin package](../henon_cramer_lundberg_exponential_ruin_route_a/) · [paper PDF](../henon_cramer_lundberg_exponential_ruin_route_a/paper/main.pdf) |
+| HCS-C283 | The fixed-prime conductor-shell multiplier on `L^2(Z_p)` closes its zero mode, Markov reconstruction, spectrum, heat trace, staircase/log-periodic laws, Schatten gate, spectral-zeta poles, primed determinant, singular faces and finite-DFT normalization audit. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [p-adic conductor-shell package](../henon_padic_conductor_shell_heat_semigroup_route_a/) · [paper PDF](../henon_padic_conductor_shell_heat_semigroup_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  C283 keeps
+only a weak fixed-local-prime relation and a formal source-operator hint; its
+positive spectrum and spectral-zeta core are explicitly credited to the
+direct published owner and are not promoted to a global target determinant.
+C279 likewise credits the direct one-dimensional TV-flow/regularization
+owners.  No target local datum, Euler factor, root number, automorphy, target
+divisor/counting law or functional equation, Hilbert--Pólya operator, or
+Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final PDF SHA-256 values, in order
+C279--C283, are
+`83b2d3b5cb296c37edf10cd6120ff430750953ed39c11a74cc467b207a1dc024`,
+`768d840bfbde6ceb4632bc1d48c10faea5ec267c743e190986824dc467a81035`,
+`93b6aaf8229ec317c4933cf5bf264f82501c64ec1c7121625f2b27860e6a4d8a`,
+`bb934cc9ed23105dac16c3ee7dba1acd37f0826f8da7a0b5c215f97ff9e4218e`,
+and `9d789d9533e54eb6228f04dece3595a10281c60ae730d53fd3ae6755a64befde`.
+The full release accounting is recorded
+in [BATCH_REVIEW_C279_C283.md](../BATCH_REVIEW_C279_C283.md).
+
 ## HCS-C274--HCS-C278 additions (2026-09-01)
 
 Five independent cross-subtype candidates were frozen from baseline

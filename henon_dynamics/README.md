@@ -2719,6 +2719,45 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C279--C283
+
+This round takes five separate theorem-scale steps in five different
+dynamical categories: a nonsmooth convex coalescence flow, a projective
+orientation flow, a nonlinear geometric metric flow, a killed stochastic
+first-passage process, and a compact ultrametric Markov semigroup.  A drafted
+dimer-RSA candidate was retired after the hostile collision scan and replaced
+by the product-spheres Ricci-flow paper; the five released manuscripts are
+independent results, not installments of one calculation.
+
+- [C279 path-graph total-variation flow and all-time ROF identity](henon_path_graph_total_variation_flow_route_a/README.md) · [paper PDF](henon_path_graph_total_variation_flow_route_a/paper/main.pdf)
+- [C280 Jeffery--Bretherton planar projective-orientation atlas](henon_jeffery_bretherton_planar_orientation_route_a/README.md) · [paper PDF](henon_jeffery_bretherton_planar_orientation_route_a/paper/main.pdf)
+- [C281 product-spheres homogeneous Ricci-flow singularity atlas](henon_product_spheres_ricci_flow_route_a/README.md) · [paper PDF](henon_product_spheres_ricci_flow_route_a/paper/main.pdf)
+- [C282 exponential Cramér--Lundberg joint ruin atlas](henon_cramer_lundberg_exponential_ruin_route_a/README.md) · [paper PDF](henon_cramer_lundberg_exponential_ruin_route_a/paper/main.pdf)
+- [C283 p-adic conductor-shell heat-semigroup atlas](henon_padic_conductor_shell_heat_semigroup_route_a/README.md) · [paper PDF](henon_padic_conductor_shell_heat_semigroup_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C279_C283.md),
+[batch plan](BATCH_PLAN_C279_C283.md), and
+[batch review](BATCH_REVIEW_C279_C283.md) for the model replacement,
+direct-owner corrections, theorem contracts, exact evidence, hostile
+proof/checker repairs, deterministic PDFs and release receipts.  Across the
+five packages the round closes **1,026,482** independent-checker assertions,
+**3,883** symbolic checks, **178/178** hostile rejections, **1,279,791**
+evidence bytes, 135 manifest payloads (140 physical files), and **16**
+final-paper pages with **106** embedded/subset font records.  All five are
+`ROUTE_A_REJECTED`; Route B is disabled and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  C279 and C283 explicitly credit the direct
+owners of their central source-side phenomena; no literature originality is
+inferred from workspace packaging.  No target arithmetic local data, Euler
+factor, root number, automorphy object, target divisor/counting law or
+functional equation, Hilbert--Pólya operator, or Route-B input is claimed.
+
+Final PDF SHA-256 values, in order C279--C283, are
+`83b2d3b5cb296c37edf10cd6120ff430750953ed39c11a74cc467b207a1dc024`,
+`768d840bfbde6ceb4632bc1d48c10faea5ec267c743e190986824dc467a81035`,
+`93b6aaf8229ec317c4933cf5bf264f82501c64ec1c7121625f2b27860e6a4d8a`,
+`bb934cc9ed23105dac16c3ee7dba1acd37f0826f8da7a0b5c215f97ff9e4218e`,
+and `9d789d9533e54eb6228f04dece3595a10281c60ae730d53fd3ae6755a64befde`.
+
 ## Route-A independent cross-subtype round C274--C278
 
 This round changes mathematical owner, state space, clock, and proof

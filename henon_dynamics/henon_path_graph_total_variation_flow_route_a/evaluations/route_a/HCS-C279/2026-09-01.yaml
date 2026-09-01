@@ -1,0 +1,85 @@
+schema: route-a-evaluation-v0.2.0
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C279
+source_commit: 51fb3d46f96b854314811c1ad62d3103cd5d54e5
+evaluation_date: 2026-09-01
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+owner: Euclidean total-variation subgradient flow on a finite unweighted path
+source_lock:
+  object: x'(t) in -partial J(x(t)) with J(x)=sum_i |x_{i+1}-x_i| on P_n
+  arithmetic_origin: none; n and x^0 are ordinary source-local real data
+  clock: maximal-monotone semigroup time t
+  normalization: unweighted path edges and Euclidean vertex norm
+  determinant_convention: none
+  cutoff: exact grid 1<=n<=6 plus five rational stress inputs of dimensions 8 through 12
+  precision: exact rational arithmetic
+  allowed_data: path incidence, rational regression inputs, theorem contracts, source metadata
+  forbidden_data: primes, prime powers, Riemann zeros, fitted arithmetic labels, Euler factors, root numbers
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the model is defined entirely by path adjacency and continuous initial coordinates
+  strongest_failure: no intrinsic prime carrier, prime-power repetition, log-prime clock, or von-Mangoldt weight exists
+  arithmetic_controls: [vary path length, permute regression alphabet, compare constant data]
+  artifacts: [THEOREM_PACKAGE.md, results/c279_path_tv_evidence.json]
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: the all-n theorem gives a complete finite coalescence ledger
+  strongest_failure: every orbit reaches a constant fixed point in finite time, so there is no nonconstant primitive periodic orbit
+  metrics:
+    exact_inputs: 19530
+    maximum_event_times: n-1
+    block_split_violations: 0
+  artifacts: [results/RESULTS.md, code/c279_path_tv_checker.py]
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the convex resolvent and semigroup are exactly defined
+  strongest_failure: neither object is a primitive-cycle Euler product or target Fredholm determinant
+  metrics:
+    zero_error_train: not_applicable
+    zero_error_validation: not_applicable
+    zero_error_test: not_applicable
+    extra_zero_count: not_applicable
+    missing_zero_count: not_applicable
+    root_count_discrepancy: not_applicable
+    cutoff_drift: zero_for_exact_regression_replay
+    precision_drift: zero_exact_rational_arithmetic
+    control_margin: not_applicable
+  artifacts: [results/TEST_REPORT.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact dissipation and ROF KKT identities are proved
+  strongest_failure: no target divisor, functional equation, counting law, analytic continuation, or Weil compression is present
+  analytic_structure: finite-dimensional convex semigroup only
+  weil_compression: absent and not inserted by hand
+  artifacts: [THEOREM_PACKAGE.md]
+a4:
+  verdict: A4_FAIL
+  evidence_status: PROVED
+  strongest_evidence: J has a natural maximal-monotone gradient-flow and proximal interpretation
+  strongest_failure: finite-time dissipative coalescence is noninvertible and supplies no same-clock natural unitary, scattering, or Hamiltonian quantization
+  metrics:
+    time_reversal: fails after any merger
+    natural_hilbert_space: R^n only as a dissipative state space
+    candidate_quantum_operator: none
+  artifacts: [NARRATIVE_REPORT.md]
+adversarial_controls:
+  controls_used: [constant fixed points, path-length variation, endpoint blocks, simultaneous mergers, rational stresses]
+  proves_too_much_risk: any claim that generic convex solvability implies an arithmetic determinant would certify irrelevant denoising flows
+  verdict: STOP_SCOPED
+overall_verdict: ROUTE_A_REJECTED
+tuple: [A0_FAIL, A1_FAIL, A2_FAIL, A3_FAIL, A4_FAIL]
+claim_boundary: complete path-flow theorem only; no general-graph ROF equivalence and no arithmetic or spectral claim
+blocking_conditions:
+  - A0 has no arithmetic owner
+  - A1 has no nonconstant primitive cycles
+  - A2 and A3 have no target determinant or analytic divisor
+  - A4 has no natural same-clock unitary lift
+next_smallest_test: none inside Route A; retain the source-local theorem and stop
+round2_clues: []
+route_b_invocation_allowed: false
