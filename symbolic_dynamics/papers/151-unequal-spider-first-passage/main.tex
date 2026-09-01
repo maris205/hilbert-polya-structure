@@ -1,0 +1,477 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,microtype,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\cS}{\mathcal S}
+
+\title[First passage on unequal finite spiders]{Leaf-Marked First Passage on Unequal Finite Spiders:\\
+A Rational Transform, Sharp Extremizers, and a Coarse-Data Inverse}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Join $r\ge2$ finite paths of positive integer lengths at one centre, start
+simple random walk at the centre, and absorb it at the first leaf.  We derive
+an explicit continuant factorization of the probability generating functions
+jointly marked by the absorbing leaf for arbitrary unequal arms.  A
+centre-excursion renewal specializes the generic time/place law to a common
+rational denominator for all leaf marks.  Besides parity and the first
+possible atom, the specialization yields the compact formula
+\[
+ \operatorname{Var}(T)=\frac{C-2L}{3H}+\frac{L^2}{3H^2},
+ \qquad
+ H=\sum_i\ell_i^{-1},\quad L=\sum_i\ell_i,\quad C=\sum_i\ell_i^3.
+\]
+For fixed arm count and total length, strict integer transfers identify the
+exact mean-minimizing profile---one long arm and all other arms of length
+one---and the exact mean-maximizing balanced profiles.  The labelled endpoint
+law determines precisely the primitive arm-length ratios and is blind to a
+common dilation; adding the mean recovers that scale uniquely.  General-tree
+endpoint and mean formulas, an unequal-arm endpoint exercise, equal-arm star
+laws, spider spectral methods, generic finite-chain time/place laws, general
+tree hitting-time generating functions, and inverse first-passage frameworks
+are treated as prior background.  An exact-arithmetic audit performs
+$1{,}446{,}432$ exact recurrence, coefficient, moment, extremal, and inverse
+checks.
+\end{abstract}
+
+\maketitle
+
+\section{Process, ownership boundary, and theorem}\label{sec:setup}
+
+For positive integers $\ell_1,\ldots,\ell_r$, let
+$\cS(\ell_1,\ldots,\ell_r)$ be the tree formed by identifying one endpoint
+of $r$ paths of edge lengths $\ell_i$.  Call the identified vertex the
+\emph{centre}, label the other endpoints $1,\ldots,r$, and make those leaves
+absorbing.  Simple random walk starts at the centre.  Write $T$ for its first
+leaf-hitting time and $I$ for the label of the leaf it hits.
+
+Unequal arms obstruct the radial lumping available when all lengths agree:
+the time and the absorbing label remain coupled.  The paper resolves that
+coupling through a leaf-marked excursion transform.  The contribution is a
+four-part conjunction: the explicit unequal-spider continuant factorization,
+its compact scalar variance specialization, sharp fixed-total extremizers,
+and a geometry inverse from deliberately coarse data.  Generic existence,
+rationality, resolvent, time/place, and second-moment formulas receive zero
+credit.  Table~\ref{tab:subtraction} states the corresponding subtraction.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Primary-source subtraction.  The middle column receives zero
+contribution credit; the right column is the narrower residual studied here.}
+\label{tab:subtraction}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.23\textwidth}
+                    >{\raggedright\arraybackslash}p{.335\textwidth}
+                    >{\raggedright\arraybackslash}p{.335\textwidth}@{}}
+\toprule
+Source & Owned input & Boundary retained here \\
+\midrule
+Pearce~\cite{Pearce1980} & finite trees with absorbing leaves; endpoint
+probabilities and expected walk length & neither endpoint mass nor mean is
+claimed \\
+Pal--Mesikepp, Problem 2.4~\cite{PalMesikepp2025} & designated-leaf
+probability for a star with unequal integer arms & endpoint law is used only
+for extrema and inversion \\
+Castella--Sericola~\cite{CastellaSericola2026} & hitting distributions and
+moments for equal-length finite stars & the transform axis requires arbitrary
+unequal arms and an explicit continuant factorization \\
+Sericola~\cite{Sericola2024} & generic finite-chain joint hitting-time/place
+law and first/second moment matrices & only the closed unequal-spider
+continuant product and compact scalar specialization \\
+Chen~\cite{Chen2007} & algorithms for hitting-time generating functions on
+general trees & a leaf-marked, unequal-spider closed factorization rather
+than generic existence or an algorithm \\
+de la Iglesia--Juarez~\cite{DelaIglesiaJuarez2023} & spectral and stochastic
+factorization methods for half-line spider chains & no spectral-framework or
+generic-resolvent claim \\
+de la Pe{\~n}a--Gzyl--McDonald~\cite{DelaPenaGzylMcDonald2008} & unknown
+transitions on a known augmented tree recovered from rich boundary time/place
+data & fixed simple-walk kernel and unknown integer arms, using only endpoint
+probabilities plus one mean \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Sericola's generic identity
+$\Prob_i(T_A=n,X_{T_A}=j)=(P_{A^c}^{n-1}P_{A^c,A})_{ij}$ already owns the
+joint time/place law and its matrix moments~\cite{Sericola2024}.  Chen's
+general-tree work already owns algorithmic hitting-time generating
+functions~\cite{Chen2007}.  Neither inspected source states the product
+formula \eqref{eq:marked} for unequal finite spiders or its continuant
+denominator; that explicit specialization is the only residual transform
+claim.
+
+The term ``reflecting--absorbing factorization'' in
+\cite{DelaIglesiaJuarez2023} denotes a stochastic block factorization and a
+Darboux transformation, not absorption at finite leaves.  Conversely, the
+inverse theorem in \cite{DelaPenaGzylMcDonald2008} observes complete joint
+time/place laws on two boundary layers and recovers transition probabilities;
+our topology class and transition rule are fixed, while the integer arm
+lengths are unknown.  These distinctions prevent generic spider, resolvent,
+and tomography language from carrying contribution credit.
+
+Define continuant polynomials by
+\begin{equation}\label{eq:P-rec}
+ P_0(z)=0,\qquad P_1(z)=1,\qquad P_2(z)=2,
+ \qquad P_m(z)=2P_{m-1}(z)-z^2P_{m-2}(z).
+\end{equation}
+Put
+\begin{equation}\label{eq:D-def}
+ P(z)=\prod_{j=1}^rP_{\ell_j}(z),\qquad
+ D(z)=rP(z)-z^2\sum_{i=1}^rP_{\ell_i-1}(z)
+                 \prod_{j\ne i}P_{\ell_j}(z).
+\end{equation}
+Also write
+\begin{equation}\label{eq:HLC}
+ H=\sum_{i=1}^r\frac1{\ell_i},\qquad
+ L=\sum_{i=1}^r\ell_i,\qquad C=\sum_{i=1}^r\ell_i^3.
+\end{equation}
+
+\begin{theorem}[marked law, moments, extrema, and inverse]\label{thm:main}
+For the walk on $\cS(\ell_1,\ldots,\ell_r)$, the following statements hold.
+\begin{enumerate}
+\item For every labelled leaf $i$,
+\begin{equation}\label{eq:marked}
+ F_i(z):=\E\!\left[z^T\one_{\{I=i\}}\right]
+ =\frac{z^{\ell_i}\prod_{j\ne i}P_{\ell_j}(z)}{D(z)}.
+\end{equation}
+Its support lies in $\ell_i+2\mathbb Z_{\ge0}$, and
+\begin{equation}\label{eq:first-atom}
+ \Prob(T=\ell_i,I=i)=\frac1{r2^{\ell_i-1}}.
+\end{equation}
+\item The endpoint and mean identities
+\begin{equation}\label{eq:background-moments}
+ \Prob(I=i)=\frac{\ell_i^{-1}}H,\qquad \E T=\frac LH
+\end{equation}
+are background inputs from the general-tree and unequal-arm literature in
+Table~\ref{tab:subtraction}.  The residual second-moment conclusion is
+\begin{equation}\label{eq:variance}
+ \operatorname{Var}(T)=\frac{C-2L}{3H}+\frac{L^2}{3H^2}.
+\end{equation}
+\item Fix $r$ and $L\ge r$, and write $L=qr+s$ with $0\le s<r$.  Then
+\begin{equation}\label{eq:extremal}
+ \frac{L}{r-1+1/(L-r+1)}\le \E T
+ \le \frac{L}{(r-s)/q+s/(q+1)}.
+\end{equation}
+Equality on the left holds exactly for permutations of
+$(L-r+1,1,\ldots,1)$; equality on the right holds exactly when the arms are
+balanced, with $r-s$ lengths $q$ and $s$ lengths $q+1$.
+\item The labelled endpoint vector determines the primitive positive integer
+arm vector $d=(d_i)$, while $\ell=cd$ is invisible for every common positive
+integer dilation $c$.  Adding $\E T$ determines the unique scale by
+\begin{equation}\label{eq:scale}
+ c^2=\E T\,\frac{\sum_i d_i^{-1}}{\sum_i d_i}.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+The theorem assumes from the outset that the unknown object is a labelled
+finite spider and that its transition kernel is simple random walk.  Part~(4)
+does not recover an arbitrary tree or unknown transition probabilities.
+
+\section{Killed paths and centre renewal}\label{sec:transform}
+
+Let $U_m$ denote the Chebyshev polynomial of the second kind, with
+$U_{-1}=0$.  For $m\ge1$, recurrence \eqref{eq:P-rec} is equivalently the
+polynomial identity
+\begin{equation}\label{eq:Cheb}
+ P_m(z)=z^{m-1}U_{m-1}(1/z).
+\end{equation}
+The Chebyshev notation is a convenient solution of a second-order recurrence;
+neither generic continuants nor gambler's ruin are contribution claims.
+
+\begin{lemma}[one killed arm]\label{lem:arm}
+On $\{0,1,\ldots,m\}$, start fair nearest-neighbour walk at $1$ and stop on
+first hitting $\{0,m\}$.  If $\tau$ is this path time, then
+\begin{align}
+ \E_1[z^\tau\one_{\{X_\tau=m\}}]
+   &=\frac1{U_{m-1}(1/z)}=\frac{z^{m-1}}{P_m(z)},\label{eq:success-arm}\\
+ \E_1[z^\tau\one_{\{X_\tau=0\}}]
+   &=\frac{U_{m-2}(1/z)}{U_{m-1}(1/z)}
+     =\frac{zP_{m-1}(z)}{P_m(z)}.\label{eq:return-arm}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+For $1\le k\le m-1$, either boundary-marked transform $u_k$ satisfies
+\[
+ u_k=\frac z2(u_{k-1}+u_{k+1}).
+\]
+For absorption at $m$, the boundary values are $(u_0,u_m)=(0,1)$, and the
+solution is
+\[
+ u_k=\frac{U_{k-1}(1/z)}{U_{m-1}(1/z)}.
+\]
+For absorption at zero, the boundary values are $(1,0)$, and the solution is
+\[
+ u_k=\frac{U_{m-k-1}(1/z)}{U_{m-1}(1/z)}.
+\]
+Evaluating at $k=1$ and applying
+\eqref{eq:Cheb} proves both identities.  For $m=1$, the formulas use
+$P_0=0$ and express immediate success after the later-added centre step.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(1)]
+An attempt from the centre chooses arm $j$, makes one step to its first
+vertex, and then either reaches leaf $j$ or returns to the centre.  By
+Lemma~\ref{lem:arm}, the transform of a successful attempt at leaf $i$ is
+\[
+ S_i(z)=\frac1r\frac{z^{\ell_i}}{P_{\ell_i}(z)},
+\]
+and the transform of an unsuccessful attempt, with the arm unmarked, is
+\[
+ Q(z)=\frac{z^2}{r}\sum_{j=1}^r
+            \frac{P_{\ell_j-1}(z)}{P_{\ell_j}(z)}.
+\]
+After every failure the walk is again at the centre, so the strong Markov
+property gives the formal renewal series
+\[
+ F_i(z)=S_i(z)\sum_{k\ge0}Q(z)^k=\frac{S_i(z)}{1-Q(z)}.
+\]
+Here $Q(0)=0$, so the inverse is valid as a formal series.  Also
+$P_m(1)=m$, whence
+\[
+ Q(1)=1-\frac Hr<1,
+ \qquad D(1)=H\prod_{j=1}^r\ell_j>0.
+\]
+Thus the rational identity is regular at $z=1$ and its endpoint and moment
+evaluations below are justified analytically as well as probabilistically.
+Multiplying numerator and denominator by $r\prod_jP_{\ell_j}(z)$ gives
+\eqref{eq:marked}.
+
+Each $P_m$ is a polynomial in $z^2$.  Equation \eqref{eq:marked} therefore
+has only powers congruent to $\ell_i$ modulo two, in agreement with
+bipartiteness.  At the first possible time $\ell_i$, the walk must choose arm
+$i$ and then follow its unique shortest path without backtracking.  The
+probability is $(1/r)(1/2)^{\ell_i-1}$, proving \eqref{eq:first-atom}.
+\end{proof}
+
+\section{Excursion moments and the variance}\label{sec:moments}
+
+The renewal proof also separates the second moment into one-arm quantities.
+This route avoids treating differentiation of the common denominator as a
+black box.
+
+\begin{lemma}[one-attempt moments]\label{lem:attempt}
+Condition on choosing an arm of length $m$.  Let $A_m$ be the duration from
+departure at the centre until the attempt next reaches either the centre or
+the leaf, including the departure step, and let $R_m$ be the event of return
+to the centre.  Then
+\begin{align}
+ \Prob(R_m^c)&=\frac1m,&
+ \E A_m&=m,\label{eq:attempt-first}\\
+ \E A_m^2&=\frac{m(m^2+2)}3,&
+ \E[A_m\one_{R_m}]&=\frac{2(m^2-1)}{3m}.
+ \label{eq:attempt-second}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Including the centre step, the success and return transforms from
+Lemma~\ref{lem:arm} are
+\[
+ A_m^{\rm suc}(z)=\frac{z^m}{P_m(z)},\qquad
+ A_m^{\rm ret}(z)=\frac{z^2P_{m-1}(z)}{P_m(z)}.
+\]
+Differentiating \eqref{eq:P-rec} and inducting gives
+\begin{align*}
+ P_m(1)&=m,\\
+ P_m'(1)&=-\frac{m(m-1)(m-2)}3,\\
+ P_m''(1)&=\frac{m(m-1)(m-2)(m^2-7m+7)}{15}.
+\end{align*}
+Substitution into the two quotient derivatives gives
+$A_m^{\rm suc}(1)=1/m$, $(A_m^{\rm ret})(1)=1-1/m$,
+\[
+ (A_m^{\rm suc}+A_m^{\rm ret})'(1)=m,
+ \]
+\[
+ (A_m^{\rm suc}+A_m^{\rm ret})''(1)
+ +(A_m^{\rm suc}+A_m^{\rm ret})'(1)=\frac{m(m^2+2)}3,
+\]
+and $(A_m^{\rm ret})'(1)=2(m^2-1)/(3m)$.  These are precisely
+\eqref{eq:attempt-first}--\eqref{eq:attempt-second}.  The identities remain
+valid at $m=1$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(2)]
+Average one attempt over the uniform choice of arm.  Let $B$ indicate a
+successful attempt and $A$ its duration.  Lemma~\ref{lem:attempt} gives
+\begin{equation}\label{eq:renewal-data}
+ p:=\E B=\frac Hr,\quad
+ \mu:=\E A=\frac Lr,\quad
+ \nu:=\E A^2=\frac{C+2L}{3r},\quad
+ \rho:=\E[A(1-B)]=\frac{2(L-H)}{3r}.
+\end{equation}
+Let $T'$ be an independent copy of $T$, used after a failed attempt.  Then
+$T=A+(1-B)T'$.  First moments give $p\E T=\mu$, which recovers the prior mean
+in \eqref{eq:background-moments}.  Squaring before taking expectations gives
+\[
+ p\E T^2=\nu+2\rho\E T.
+\]
+Using \eqref{eq:renewal-data} and subtracting $(L/H)^2$ yields
+\eqref{eq:variance}.  Finally, evaluating \eqref{eq:marked} at $z=1$ gives
+the prior endpoint identity in \eqref{eq:background-moments}.
+\end{proof}
+
+\section{Sharp fixed-mass extrema}\label{sec:extrema}
+
+The prior mean identity becomes a residual result when optimized with exact
+integer equality classes.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(3)]
+Because $L$ is fixed, minimizing $\E T=L/H$ is equivalent to maximizing
+$H=\sum_i1/\ell_i$.  If $2\le a\le b$, the outward unit transfer
+$(a,b)\mapsto(a-1,b+1)$ changes the reciprocal sum by
+\[
+ \frac1{a(a-1)}-\frac1{b(b+1)}>0.
+\]
+Repeated outward transfers end only when all but one arm have length one.
+Strictness proves that the maximizers of $H$ are exactly the permutations of
+$(L-r+1,1,\ldots,1)$.  Substitution gives the left side of
+\eqref{eq:extremal}.
+
+For the other direction, if $b\ge a+2$, the inward transfer
+$(a,b)\mapsto(a+1,b-1)$ changes the old reciprocal sum minus the new one by
+\[
+ \frac1{a(a+1)}-\frac1{b(b-1)}>0.
+\]
+Thus $H$ decreases strictly until all arm lengths differ by at most one.
+Writing $L=qr+s$ forces $r-s$ lengths $q$ and $s$ lengths $q+1$; substituting
+their reciprocal sum gives the right side of \eqref{eq:extremal}.  These
+strict transfers also prove both equality classifications.  If $L=r$, both
+classes reduce to the all-one profile, so the boundary case is included.
+\end{proof}
+
+\section{What the coarse data identify}\label{sec:inverse}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(4)]
+Let $\pi_i=\Prob(I=i)$.  The background endpoint identity gives
+\begin{equation}\label{eq:ratio}
+ \frac{\pi_i}{\pi_j}=\frac{\ell_j}{\ell_i}.
+\end{equation}
+Hence the labelled vector $\pi$ determines the rational ray containing
+$(\ell_i)$ and therefore its unique primitive positive integer representative
+$d=(d_i)$.  It cannot determine scale: every $cd$, $c\in\mathbb Z_{>0}$,
+has the same endpoint vector.  Conversely, if two labelled spiders have the
+same endpoint vector, \eqref{eq:ratio} makes their arm vectors proportional;
+primitive integer normalization shows that common dilation is the entire
+ambiguity.
+
+For $\ell=cd$, the prior mean formula becomes
+\[
+ \E T=c^2\frac{\sum_i d_i}{\sum_i d_i^{-1}}.
+\]
+Solving gives \eqref{eq:scale}.  For data generated by an integer spider, the
+right-hand side is the square of its unique positive integer scale.  No claim
+is made for arbitrary noisy vectors, unknown topology, or unknown transition
+kernels.
+\end{proof}
+
+\section{Exact audit, limitations, and conclusion}\label{sec:audit}
+
+A standalone standard-library verifier checks the formulas in exact integer
+and rational arithmetic.  For every ordered profile with $2\le r\le5$ and
+$1\le\ell_i\le4$, it compares a literal vertex-state Markov recursion with
+the rational series \eqref{eq:marked} coefficient by coefficient through time
+$2L+12$.  Additional exact routes check quotient derivatives, the excursion
+moments, every positive composition with $2\le r\le6$ and $L\le24$ for the
+sharp bounds, primitive-ray recovery through arm length eight, and the
+equal-arm radial collapse as an owned control.  Table~\ref{tab:audit} records
+the frozen run.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Exact-arithmetic falsification audit.  Counts are assertions, not
+proof steps or evidence of novelty.}
+\label{tab:audit}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Control & Assertions \\
+\midrule
+Continuant recurrence and closed coefficients & 400 \\
+Literal marked coefficients and mass & 524,816 \\
+Endpoint/mean/variance derivatives & 10,448 \\
+Additional one-attempt moments & 400 \\
+Fixed-mass inequalities and equality classes & 760,104 \\
+Primitive ray, dilation, and scale recovery & 149,760 \\
+Equal-arm owned-background collapse & 504 \\
+\midrule
+Total & 1,446,432 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The results have four deliberate limitations.  First, the topology class is
+known and consists only of labelled spiders with positive integer arm lengths.
+Second, transitions are the unweighted simple-walk transitions; weighted or
+biased arms are outside the theorem.  Third, the inverse uses exact population
+quantities and gives no estimator, stability bound, or noisy-data guarantee.
+Fourth, the paper does not address cover times, general trees, generic
+time/place laws, or equal-arm distribution theory.  Sericola's generic joint
+law and moment matrices and Chen's general-tree PGF algorithm are zero-credit
+inputs.  A bounded primary-source search did not locate the specific
+continuant-factorization/variance/extremal/inverse conjunction, but a search
+non-hit is not a novelty,
+priority, or freedom-to-operate certificate.
+
+Within those boundaries, centre renewal gives an explicit unequal-spider
+continuant factorization of the generic marked law, while the prior endpoint
+and mean identities
+support two additional exact questions: which integer geometries extremize
+the clock, and which geometry information survives coarse observation.  The
+answers are respectively the strict unbalanced/balanced equality classes and
+the exact common-dilation boundary.
+
+\section*{Declarations}
+
+\paragraph{Data availability.}
+No external dataset is used.  The paper-local exact verifier and its frozen
+text output accompany this anonymous internal manuscript.
+
+\paragraph{Ethics statement.}
+The work is mathematical and uses no human participants, personal data,
+animals, or interventions.
+
+\paragraph{Author contributions.}
+The anonymous author or authors performed the conceptualization, derivations,
+exact verification, source audit, and manuscript preparation.  Identity and
+individual role allocation remain suppressed for anonymous review.
+
+\paragraph{Conflict of interest.}
+No conflict of interest is declared.
+
+\paragraph{Funding.}
+No external funding is declared for this manuscript.
+
+\paragraph{External status.}
+The manuscript remains under \texttt{HOLD\_EXTERNAL}; compilation does not
+authorize posting, submission, circulation, or author contact.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
