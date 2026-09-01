@@ -17,6 +17,22 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C274--HCS-C278 additions (2026-09-01)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O258 | HCS-C274 Penning-trap resonances as arithmetic primitive owners | proved clean-torus and continuous-clock obstruction | Stable frequencies and actions vary continuously with trap parameters.  Rational commensurability closes trajectories in clean positive-dimensional invariant families, not a canonical isolated rational-prime ledger, and physical time supplies no logarithmic prime roof.  The natural magnetic Hamiltonian remains candidate-local. | The exact six-dimensional symplectic flow, bounded/Jordan/unstable chambers, signed actions and Krein signs, active-mode resonance, least periods, strobe dimensions, and every zero/sign boundary survive. | ../henon_penning_trap_symplectic_atlas_route_a/THEOREM_PACKAGE.md |
+| HEN-O259 | HCS-C275 Poncelet caustics as an ordinary isolated-orbit determinant | proved clean-family and quantum-clock obstruction | At reduced rotation `p/q`, the restricted `q`-return is the identity with derivative one on the whole caustic circle.  Hence there is no nondegenerate isolated fixed-point denominator or ordinary isolated primitive product.  The ambient Dirichlet quantum flow uses continuous physical time, while the owner clock is one reflection; no same-clock return or phase/weight bridge is proved. | The exact Jacobi conjugacy, strict two-parameter monotonicity, all endpoints, inverse porism, every rational minimal period, and the complete clean-family obstruction survive in the elliptic-caustic sector. | ../henon_elliptic_billiard_poncelet_route_a/THEOREM_PACKAGE.md |
+| HEN-O260 | HCS-C276 random-mapping statistics as a deterministic arithmetic orbit owner | proved ensemble-owner and unit-clock obstruction | Cyclic vertices, components, and marked collision lengths are random variables over the uniform ensemble of finite self-maps.  Their exact laws and scaling limits do not identify rational primes with primitive deterministic cycles, and integer iteration is not a logarithmic prime roof. | The arbitrary-`n` joint count, cyclic-point and expected-cycle laws, marked tail/cycle law, collision identity, Rayleigh limits, and exhaustive `n<=7` receipt survive. | ../henon_uniform_random_mapping_functional_graph_route_a/THEOREM_PACKAGE.md |
+| HEN-O261 | HCS-C277 fractional-memory spectrum as a target divisor or orbit determinant | proved non-semigroup and source-operator obstruction | For `0<beta<1`, the Caputo solution family has memory and is not a semigroup.  Its sharp smoothing, Schatten threshold, and resolvent asymptotic are spectral facts of the declared Dirichlet source operator; they provide neither isolated primitive owners nor a target divisor, functional equation, or rational-prime clock. | Inverse-stable subordination, positivity/contraction, the exact nonnegative smoothing endpoint, `S_p` classification, scaled resolvent limit, and the `beta=1` heat face survive. | ../henon_caputo_fractional_dirichlet_heat_route_a/THEOREM_PACKAGE.md |
+| HEN-O262 | HCS-C278 signed two-peakon scattering/collision as an arithmetic primitive ledger | proved continuous-amplitude and nonperiodic-flow obstruction | The owner has continuously variable amplitudes and positions and exhibits scattering or finite collision rather than an isolated periodic-prime taxonomy.  Its declared `alpha` extension and integrable-PDE lineage do not supply rational-prime labels, a logarithmic roof, target divisor, or target determinant. | The invariant scalar reduction, both strict sign chambers, scattering data, collision scaling and uniform profile, concentrated-energy ledger, degenerate faces, and declared `alpha` continuation survive on the ordered two-peakon manifold. | ../henon_camassa_holm_two_peakon_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under the frozen canonical, caustic,
+ensemble, fractional-clock, and ordered-two-peakon conventions.  They do not
+license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C269--HCS-C273 additions (2026-09-01)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

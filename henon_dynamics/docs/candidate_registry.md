@@ -3,6 +3,39 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C274--HCS-C278 additions (2026-09-01)
+
+Five independent cross-subtype candidates were frozen from baseline
+`418bcec5afb1f9e5905cc6e2ba7f9e099fef2e02`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C274 | The ideal canonical Penning trap has an exact six-dimensional symplectic flow, a sharp bounded/Jordan/unstable chamber atlas, signed actions and Krein signs, and a complete active-mode resonance, least-period and strobe-fixed-space classification including all zero/sign boundaries. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Penning-trap package](../henon_penning_trap_symplectic_atlas_route_a/) · [paper PDF](../henon_penning_trap_symplectic_atlas_route_a/paper/main.pdf) |
+| HCS-C275 | Every positive-orientation elliptic caustic in the normalized confocal billiard is explicitly conjugate to a rigid Jacobi rotation with strict two-parameter monotonicity and all endpoints; each reduced rational rotation is a full minimal-period Poncelet circle whose restricted return is the identity with unit tangent derivative. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [elliptic-billiard package](../henon_elliptic_billiard_poncelet_route_a/) · [paper PDF](../henon_elliptic_billiard_poncelet_route_a/paper/main.pdf) |
+| HCS-C276 | Uniform random mappings have an exact joint cyclic-vertex/component count, cyclic-point and marked tail/cycle laws, a finite collision-length identity, and Rayleigh plus joint tail/cycle scaling limits; every map through `n=7` is independently enumerated as regression evidence. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [uniform random-mapping package](../henon_uniform_random_mapping_functional_graph_route_a/) · [paper PDF](../henon_uniform_random_mapping_functional_graph_route_a/paper/main.pdf) |
+| HCS-C277 | The Caputo Dirichlet heat family has exact subordination and contraction, fails the semigroup law for `beta<1`, gains exactly two spatial derivatives in the declared nonnegative scale, lies in `S_p` exactly for `p>1/2`, converges after scaling to the resolvent, and separates the classical heat face. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Caputo heat package](../henon_caputo_fractional_dirichlet_heat_route_a/) · [paper PDF](../henon_caputo_fractional_dirichlet_heat_route_a/paper/main.pdf) |
+| HCS-C278 | The ordered signed Camassa--Holm two-peakon manifold has a complete invariant scalar reduction, exact same-sign scattering and opposite-sign finite-collision branches, sharp gap/amplitude/profile limits, every degenerate boundary, and an explicitly delimited `alpha` collision ledger. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Camassa--Holm two-peakon package](../henon_camassa_holm_two_peakon_route_a/) · [paper PDF](../henon_camassa_holm_two_peakon_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED`; Route B is false.  C275 passes
+the analytic primitive/repetition gate on its clean Poncelet circles, but the
+same clean family defeats the ordinary isolated-orbit determinant gate.  Its
+ambient Dirichlet quantum billiard uses continuous physical time rather than
+the frozen one-reflection clock, so A4 remains a formal hint.  No target local
+datum, Euler factor, root number, automorphy, target divisor/counting law or
+functional equation, Hilbert--Pólya operator, or Route-B input is introduced.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  Final PDF SHA-256 values, in order
+C274--C278, are `960afb3c5ec99cbd320a033c72affbc3cde357b0fe4b4cee6c741de773df9d42`,
+`77b15baa296c7107990f36208099118e7186632a2fc075a3087d74989ec948a1`,
+`ff5bee778af4d778c73ffdc1e38b457d64e1babe5050bb16588b72023d035972`,
+`c3efe7030d157fbbe1a7b0a45b2bda73973a8bc5070af9968facef32297fc169`,
+and `3aef1600dc97bb94cb50922ba7d135950ee9db37295a40268467a474b36faa67`.
+The full release accounting is recorded in
+[BATCH_REVIEW_C274_C278.md](../BATCH_REVIEW_C274_C278.md).
+
 ## HCS-C269--HCS-C273 additions (2026-09-01)
 
 Five independent cross-subtype candidates were frozen from baseline

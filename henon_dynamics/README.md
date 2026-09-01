@@ -2719,6 +2719,42 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C274--C278
+
+This round changes mathematical owner, state space, clock, and proof
+technology in every paper: a six-dimensional magnetic Hamiltonian, an
+integrable confocal billiard map, a random finite self-map, a
+fractional-memory operator family, and a singular invariant manifold of an
+integrable PDE.  Each manuscript takes one complete theorem-scale step; the
+five papers are not installments of one calculation.
+
+- [C274 ideal Penning-trap symplectic, stability and resonance atlas](henon_penning_trap_symplectic_atlas_route_a/README.md) · [paper PDF](henon_penning_trap_symplectic_atlas_route_a/paper/main.pdf)
+- [C275 confocal elliptic-billiard Poncelet rigidity theorem](henon_elliptic_billiard_poncelet_route_a/README.md) · [paper PDF](henon_elliptic_billiard_poncelet_route_a/paper/main.pdf)
+- [C276 uniform random-mapping functional-graph theorem](henon_uniform_random_mapping_functional_graph_route_a/README.md) · [paper PDF](henon_uniform_random_mapping_functional_graph_route_a/paper/main.pdf)
+- [C277 Caputo fractional Dirichlet heat-flow theorem](henon_caputo_fractional_dirichlet_heat_route_a/README.md) · [paper PDF](henon_caputo_fractional_dirichlet_heat_route_a/paper/main.pdf)
+- [C278 signed Camassa--Holm two-peakon scattering/collision atlas](henon_camassa_holm_two_peakon_route_a/README.md) · [paper PDF](henon_camassa_holm_two_peakon_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C274_C278.md),
+[batch plan](BATCH_PLAN_C274_C278.md), and
+[batch review](BATCH_REVIEW_C274_C278.md) for collision screening, frozen
+theorem contracts, exact evidence, proof and semantic-checker repairs,
+originality/citation review, and release receipts.  Across the five packages
+the round closes 10,444 independent-checker assertions, 1,322 symbolic
+checks, 129/129 hostile rejections, 719,457 evidence bytes, 135 manifest
+payloads (140 physical files), and 15 final-paper pages with 103
+embedded/subset font records.  All five are `ROUTE_A_REJECTED`; Route B is
+disabled and the common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  No target
+arithmetic local data, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, Hilbert--Pólya operator, or
+Route-B input is claimed.
+
+Final PDF SHA-256 values, in order C274--C278, are
+`960afb3c5ec99cbd320a033c72affbc3cde357b0fe4b4cee6c741de773df9d42`,
+`77b15baa296c7107990f36208099118e7186632a2fc075a3087d74989ec948a1`,
+`ff5bee778af4d778c73ffdc1e38b457d64e1babe5050bb16588b72023d035972`,
+`c3efe7030d157fbbe1a7b0a45b2bda73973a8bc5070af9968facef32297fc169`,
+and `3aef1600dc97bb94cb50922ba7d135950ee9db37295a40268467a474b36faa67`.
+
 ## Route-A independent cross-subtype round C269--C273
 
 This round again changes mathematical owner in every paper and takes one
