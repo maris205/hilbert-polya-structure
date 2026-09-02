@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C314--HCS-C318 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`1938bae19e5a92f9ce2411aafdc68323bd641bd0`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C314 | The central Angenent-oval component is verified directly as a compact strictly convex ancient curve-shortening solution; its exact curvature range, dimensions, area, elliptic perimeter, arrival-time strip foliation, circular extinction blow-up, and two translated Grim-Reaper ends are closed together. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Angenent-oval package](../henon_angenent_oval_curve_shortening_route_a/) · [paper PDF](../henon_angenent_oval_curve_shortening_route_a/paper/main.pdf) |
+| HCS-C315 | The strictly positive real goldfish cone has all-time simple interlacing roots, positive velocities, exact polynomial-pencil linearization and group law, center-of-mass drift, and a two-sided one-carrier scattering atlas through the first inverse-time correction. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [positive-goldfish package](../henon_goldfish_positive_root_pencil_scattering_route_a/) · [paper PDF](../henon_goldfish_positive_root_pencil_scattering_route_a/paper/main.pdf) |
+| HCS-C316 | The elephant random walk has exact finite-time transition and moment laws, regular and singular martingale normalizations, and a boundary-safe diffusive/critical/superdiffusive limit atlas with the superdiffusive limit's first four moments. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [elephant-walk package](../henon_elephant_random_walk_phase_transition_route_a/) · [paper PDF](../henon_elephant_random_walk_phase_transition_route_a/paper/main.pdf) |
+| HCS-C317 | Newton--Schulz inversion has a spectral-radius necessary-and-sufficient square basin with exact Jordan rates, plus the complete support-compatible Moore--Penrose basin for arbitrary rank and the full canonical scale/rank boundary atlas. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Newton--Schulz package](../henon_newton_schulz_full_basin_pseudoinverse_route_a/) · [paper PDF](../henon_newton_schulz_full_basin_pseudoinverse_route_a/paper/main.pdf) |
+| HCS-C318 | The clean finite SSH chain has an exact chiral continuant and singular-value pairing, a sharp hyperbolic edge-doublet threshold distinct from the bulk winding transition, separate continuum and finite-sampled gaps with exact parity effects, every hopping face, a zero-safe propagator, and a grid-aware cross-phase quench theorem. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [finite-SSH package](../henon_ssh_finite_bulk_edge_route_a/) · [paper PDF](../henon_ssh_finite_bulk_edge_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively an ancient geometric PDE, an integrable
+velocity-coupled root flow, a full-memory stochastic walk, a nonlinear matrix
+algorithm, and a two-sublattice Hermitian quantum lattice.  No target local
+datum, Euler factor, root number, automorphy object, target divisor/counting
+law or functional equation, target zero match, Hilbert--Pólya operator, or
+Route-B input is introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  Final
+release hashes and accounting are recorded in
+[BATCH_REVIEW_C314_C318.md](../BATCH_REVIEW_C314_C318.md).
+
 ## HCS-C309--HCS-C313 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

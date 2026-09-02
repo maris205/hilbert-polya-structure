@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C314--C318
+
+This round makes five independent theorem-scale advances while changing the
+state space, clock, and proof mechanism in every paper: an ancient geometric
+PDE, a velocity-coupled integrable root flow, a complete-memory stochastic
+process, a nonlinear matrix inverse algorithm, and a Hermitian chiral
+quantum lattice.  These are five complete papers, not five installments of
+one theorem.
+
+- [C314 Angenent-oval curve-shortening atlas](henon_angenent_oval_curve_shortening_route_a/README.md) · [paper PDF](henon_angenent_oval_curve_shortening_route_a/paper/main.pdf)
+- [C315 positive-root-pencil goldfish scattering](henon_goldfish_positive_root_pencil_scattering_route_a/README.md) · [paper PDF](henon_goldfish_positive_root_pencil_scattering_route_a/paper/main.pdf)
+- [C316 elephant-walk phase transition](henon_elephant_random_walk_phase_transition_route_a/README.md) · [paper PDF](henon_elephant_random_walk_phase_transition_route_a/paper/main.pdf)
+- [C317 Newton--Schulz full basin and pseudoinverse](henon_newton_schulz_full_basin_pseudoinverse_route_a/README.md) · [paper PDF](henon_newton_schulz_full_basin_pseudoinverse_route_a/paper/main.pdf)
+- [C318 finite SSH bulk--edge and quench atlas](henon_ssh_finite_bulk_edge_route_a/README.md) · [paper PDF](henon_ssh_finite_bulk_edge_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C314_C318.md),
+[batch plan](BATCH_PLAN_C314_C318.md), and
+[batch review](BATCH_REVIEW_C314_C318.md) for collision screening, theorem
+contracts, historical ownership, exact release receipts, and deterministic
+PDFs.  Across the five packages the final audit closes **34,432**
+independent-checker assertions, **9,785** exact symbolic identities/groups,
+**221/221** hostile rejections, **1,623,797** evidence bytes, 135 manifest
+payloads (140 physical files), and **14** final-paper pages with **100**
+embedded/subset font records.  The five strict tuples, in order C314--C318,
+are
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C309--C313
 
 This round makes five independent theorem-scale advances while changing the

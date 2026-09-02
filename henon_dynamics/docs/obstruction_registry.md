@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C314--HCS-C318 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O298 | HCS-C314 ancient oval levels as arithmetic primitive orbits | proved dissipative-foliation and continuum-clock obstruction | Curve shortening strictly removes area at rate `2*pi`; its closed slices form a continuum indexed by physical time and end at one extinction point.  They are not recurrent isolated primitive orbits, and the strip arrival time, elliptic perimeter, and curvature scales provide no rational-prime carrier, logarithmic-prime roof, target determinant, or target divisor. | The direct curve-shortening verification, exact convex geometry, area/perimeter, arrival-time PDE, circular extinction and both Grim-Reaper ends survive for the explicit Angenent family. | ../henon_angenent_oval_curve_shortening_route_a/THEOREM_PACKAGE.md |
+| HEN-O299 | HCS-C315 goldfish roots and polynomial pencil as arithmetic orbit data | proved scattering and continuous-initial-data obstruction | Every particle moves strictly right and the only ballistic velocity packet transfers across rank, so the flow has no nonconstant recurrence.  Pencil roots and interlacing anchors vary continuously with positions and velocities and supply neither rational-prime labels, a logarithmic-prime clock, target local factors, nor a target divisor. | Global hyperbolicity of the positive cone, exact interlacing, goldfish equation, pencil group law, center drift, and both one-carrier scattering ends survive. | ../henon_goldfish_positive_root_pencil_scattering_route_a/THEOREM_PACKAGE.md |
+| HEN-O300 | HCS-C316 elephant memory kernel or limit law as a deterministic orbit determinant | proved stochastic-owner and scaling-clock obstruction | The transition kernel and martingale belong to a non-Markovian-increment stochastic process; their finite products and phase transition encode probability laws rather than isolated deterministic periodic orbits.  Memory probability and step number do not select rational primes, prime-power repetitions, or a target divisor. | The exact finite kernel/moments, both martingale charts, three scaling regimes, limit moments, and all parameter endpoints remain valid source probability statements. | ../henon_elephant_random_walk_phase_transition_route_a/THEOREM_PACKAGE.md |
+| HEN-O301 | HCS-C317 residual squaring or pseudoinverse spectrum as an arithmetic owner | proved algorithmic-basin and continuous-spectrum obstruction | Dyadic powers are iteration exponents of a numerical matrix algorithm, and residual eigenvalues vary continuously with the input and seed.  Finite termination, Jordan transients, and the Moore--Penrose limit do not create rational-prime primitive ownership, an arithmetic roof, a target determinant, or a target divisor. | The spectral-radius iff basin, exact Jordan rate/termination, support-compatible arbitrary-rank pseudoinverse basin, and canonical scale boundaries survive in exact arithmetic. | ../henon_newton_schulz_full_basin_pseudoinverse_route_a/THEOREM_PACKAGE.md |
+| HEN-O302 | HCS-C318 SSH winding and finite edge doublet as a target spectral realization | proved lattice-source and finite/bulk-boundary obstruction | Bloch momentum, winding, hopping amplitudes, and the finite edge hybridization arise from one source lattice and have no rational-prime carrier or target divisor.  A finite self-adjoint chiral Hamiltonian is a natural source quantization but does not match target zeros or become a Hilbert--Pólya operator. | The exact OBC/PBC spectra, sharp finite edge threshold, separate continuum and parity-sensitive finite-sampled gaps, bulk winding, hopping faces, zero-safe propagator, and grid-aware quench theorem survive. | ../henon_ssh_finite_bulk_edge_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under Euclidean rigid motions and
+parabolic scaling of C314, simultaneous affine coordinate changes preserving
+the ordered positive C315 cone, reflection of the initial C316 bias, matrix
+basis changes preserving C317 support compatibility, and sublattice gauge or
+cell relabeling in C318.  They do not license Route B.  The common scope
+firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is
+source-local with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C309--HCS-C313 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

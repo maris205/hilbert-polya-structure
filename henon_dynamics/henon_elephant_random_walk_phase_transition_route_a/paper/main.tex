@@ -1,0 +1,166 @@
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\pdfvariable suppressoptionalinfo 512\relax
+\pdfvariable trailerid {[<dd316dd316dd316dd316dd316dd316aa><dd316dd316dd316dd316dd316dd316aa>]}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\F}{\mathcal F}
+\newcommand{\R}{\mathbb R}
+\title{The Elephant Random Walk Across Its Full Phase Diagram:\\Exact Moments, Boundary Martingales, and Limit Laws}
+\author{HCS-C316 theorem-and-evidence package}
+\date{3 September 2026 --- revision round \CRevisionRound}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a boundary-complete account of the one-dimensional elephant random walk for every memory parameter $p\in[0,1]$ and initial bias $q\in[0,1]$.  Exact recurrences yield the first two moments; the singular cases $p=0$ and $p=3/4$ receive separate martingale and harmonic formulas.  The diffusive, critical, and superdiffusive limits are stated with exact constants, and the first four moments of the superdiffusive limit expose the deterministic and two-point endpoints at $p=1$.  A content-addressed exact computation audits finite identities but is explicitly not offered as proof of an asymptotic theorem.
+\end{abstract}
+
+\section{Model and finite laws}
+Let $X_1\in\{-1,1\}$ satisfy $\Pr(X_1=1)=q$.  Given
+$\F_n=\sigma(X_1,\ldots,X_n)$, choose $K$ uniformly in
+$\{1,\ldots,n\}$ and set $X_{n+1}=X_K$ with probability $p$ and
+$X_{n+1}=-X_K$ otherwise.  Put
+\[
+ S_n=\sum_{j=1}^nX_j,\qquad a=2p-1,\qquad b=2q-1,
+ \qquad G_n(c)=\prod_{j=1}^{n-1}\left(1+\frac cj\right).
+\]
+The model originates with Sch\"utz and Trimper~\cite{schutz}; the
+martingale phase analysis used below follows Bercu~\cite{bercu}.
+
+\begin{theorem}[Exact kernel and moments]\label{thm:finite}
+For every $n\geq1$,
+\begin{align}
+ \Pr(X_{n+1}=1\mid\F_n)&=\frac12\left(1+\frac{aS_n}{n}\right),
+ &\E(X_{n+1}\mid\F_n)&=\frac{aS_n}{n},\label{eq:kernel}\\
+ \E S_n&=bG_n(a).\label{eq:mean}
+\end{align}
+Furthermore, with $H_n=\sum_{j=1}^n j^{-1}$,
+\begin{equation}\label{eq:second}
+ \E S_n^2=
+ \begin{cases}
+ \displaystyle\frac{2aG_n(2a)-n}{2a-1},&a\neq\tfrac12,\\[5pt]
+ nH_n,&a=\tfrac12.
+ \end{cases}
+\end{equation}
+If $p>0$, $M_n=S_n/G_n(a)$ is a martingale.  At $p=0$ instead,
+$S_2=0$ and $\widetilde M_n=(n-1)S_n$, $n\geq2$, is a martingale.
+\end{theorem}
+
+\begin{proof}
+Averaging the signed copy over $K$ proves~\eqref{eq:kernel}.  Hence
+\[
+ \E(S_{n+1}\mid\F_n)=\left(1+\frac an\right)S_n,
+ \quad
+ \E(S_{n+1}^2\mid\F_n)=\left(1+\frac{2a}{n}\right)S_n^2+1.
+\]
+Iteration gives~\eqref{eq:mean}; variation of constants gives
+\eqref{eq:second}, with the resonant sum equal to $H_n$ when $2a=1$.
+For $p>0$, divide the first recurrence by
+$G_{n+1}(a)=(1+a/n)G_n(a)$.  At $p=0$, this product vanishes after its
+first factor, but direct substitution of $a=-1$ gives
+$\E[nS_{n+1}\mid\F_n]=(n-1)S_n$; also $X_2=-X_1$.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{The complete phase transition}
+\begin{theorem}[Three regimes and endpoints]\label{thm:phase}
+The following alternatives exhaust $p\in[0,1]$.
+\begin{enumerate}
+\item If $p<3/4$, then
+$S_n/\sqrt n\Rightarrow N(0,(3-4p)^{-1})$.
+\item If $p=3/4$, then
+$S_n/\sqrt{n\log n}\Rightarrow N(0,1)$.
+\item If $p>3/4$, then $S_n/n^{2p-1}\to L$ almost surely and in
+$L^4$.  Writing $b=2q-1$,
+\begin{align*}
+ \E L&=\frac b{\Gamma(2p)},&
+ \E L^2&=\frac1{(4p-3)\Gamma(4p-2)},\\
+ \E L^3&=\frac{2pb}{(2p-1)(4p-3)\Gamma(6p-3)},&
+ \E L^4&=\frac{6(8p^2-4p-1)}{(8p-5)(4p-3)^2\Gamma(8p-4)}.
+\end{align*}
+At $p=1$, $S_n=nX_1$ and $L=X_1$: the limit is deterministic for
+$q\in\{0,1\}$ and two-point for $0<q<1$.
+\end{enumerate}
+\end{theorem}
+
+\paragraph{Proof architecture.}
+For $p>0$, center the martingale from Theorem~\ref{thm:finite}.
+Its increments are bounded by a deterministic multiple of $G_n(a)^{-1}$.
+The predictable quadratic-variation sum is governed by
+$\sum_{j\leq n}G_j(a)^{-2}$: it has power growth for $a<1/2$,
+logarithmic growth for $a=1/2$, and a finite limit for $a>1/2$.
+The martingale central limit theorem (bounded increments give its
+Lindeberg condition) yields the first two assertions and their constants.
+The $p=0$ normalization in Theorem~\ref{thm:finite} supplies the omitted
+endpoint of the diffusive case.  For $a>1/2$, fourth-moment summability
+gives almost-sure and $L^4$ convergence.  Finally,
+$G_n(a)/n^a\to1/\Gamma(a+1)$ and the exact recurrences through order four
+give the displayed moments; details follow the martingale derivation
+in~\cite{bercu}.  No finite table is substituted for this argument.
+
+\paragraph{What changes at the threshold.}
+The exact identity $\E S_n^2=nH_n$ already records the logarithm at
+$p=3/4$.  Above the threshold the random limit retains the initial bias
+only in odd moments.  At $p=1$ it reduces to the remembered first sign,
+which is why a blanket claim of nondegeneracy would be false.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact evidence and Route-A boundary}
+The evidence file is generated using rational arithmetic on 35 frozen
+$(p,q)$ pairs.  It contains every position law for $1\leq n\leq14$
+(490 time slices and 3,410 positive-mass cells), 453 conditional
+martingale identities, four direct full-history enumerations through
+$n=8$, and nine four-moment ledgers.  An independent checker reconstructs
+all rows, validates 14,914 scalar leaves, and locks every parsed Route-A
+YAML value with both a byte hash and a canonical semantic digest.
+Separate symbolic, replay, mutation, and optimized-mode gates prevent a
+self-consistent producer error from closing the package.
+
+Finite enumeration is regression evidence only.  It neither proves a
+central limit theorem nor establishes literature priority.  The nearest
+repository collisions are the exchangeable P\'olya urn, an iid
+Sparre--Andersen walk, and the recursive Quicksort limit; none has this
+signed full-memory kernel and its $3/4$ transition.
+
+The Route-A decision is
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FAIL}).
+\]
+There is no rational-prime carrier, deterministic primitive-orbit ledger,
+zeta/divisor bridge, target functional equation, or natural unitary,
+scattering, or Hamiltonian lift.  The overall verdict is
+\texttt{ROUTE\_A\_REJECTED}; Route B is locked.  Under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, we assert no target arithmetic
+local data, Euler factors, root number, automorphy, target divisor,
+functional equation, zero match, or Hilbert--P\'olya operator.
+\fi
+
+\ifcase\CRevisionRound
+\section*{Revision certificate: exact finite structure}
+This original round contains the exact kernel, both moment branches, and
+the repaired $p=0$ martingale.
+\or
+\section*{Revision certificate: complete phase and endpoint theorem}
+This round adds the diffusive, critical, and superdiffusive laws, fourth
+moments, and the $p=1$ endpoint classification.
+\else
+\section*{Revision certificate: evidence, collisions, and scope closure}
+This final round adds the independent finite audit and the complete
+Route-A and nonclaim boundary.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{schutz} G.~M. Sch\"utz and S.~Trimper,
+``Elephants can always remember,'' \emph{Phys. Rev. E} 70 (2004),
+DOI: 10.1103/PhysRevE.70.045101.
+\bibitem{bercu} B.~Bercu, ``A martingale approach for the elephant random
+walk,'' \emph{J. Phys. A} 51 (2018), DOI: 10.1088/1751-8121/aa95a6.
+\end{thebibliography}
+\end{document}

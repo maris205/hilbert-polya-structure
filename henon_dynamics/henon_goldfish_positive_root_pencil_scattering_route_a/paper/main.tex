@@ -1,0 +1,201 @@
+\pdfvariable trailerid {[<C3152026090300000000000000000000><C3152026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.70in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\setlength{\emergencystretch}{3em}
+\allowdisplaybreaks
+\title{Positive-Velocity Goldfish Flow:\\
+Global Root Interlacing and One-Carrier Scattering}
+\author{Route-A source-local certificate HCS-C315}
+\date{3 September 2026}
+\begin{document}\maketitle
+\begin{abstract}
+For arbitrary ordered real positions and strictly positive velocities, we
+prove that the Calogero goldfish polynomial pencil has simple real roots at
+every real time.  A decreasing partial-fraction map gives exact signed-time
+interlacing, global collision avoidance, and strict coordinate monotonicity.
+\ifnum\CRevisionRound>0
+The fixed roots of the invariant polynomial become scattering anchors: we
+derive their positive first inverse-time coefficients and, by an exact
+Vieta law, the intercept and first correction of the unique ballistic root.
+The carrier moves from the leftmost incoming rank to the rightmost outgoing
+rank, with sharp failures on the boundary of the positive cone.
+\fi
+\ifnum\CRevisionRound>1
+Exact rational, Sturm, high-precision, replay, and hostile-mutation evidence
+audits the formulas while preserving classical ownership and the strict
+Route-A boundary.
+\fi
+\end{abstract}
+
+\section{Polynomial linearization and global interlacing}
+Fix $N\geq2$, positions $x_1<\cdots<x_N$, and velocities $v_i>0$.  Define
+\begin{equation}\label{eq:pencil}
+ P(z)=\prod_{i=1}^N(z-x_i),\qquad
+ Q(z)=\sum_{i=1}^Nv_i\prod_{j\ne i}(z-x_j),\qquad
+ p(z,t)=P(z)-tQ(z).
+\end{equation}
+Let $y_1<\cdots<y_{N-1}$ denote the roots of $Q$.
+
+\begin{theorem}[Complete positive-cone flow]\label{thm:global}
+For every $t\in\mathbb R$, $p(\cdot,t)$ has $N$ simple real roots
+$z_1(t)<\cdots<z_N(t)$.  They obey
+\begin{align}
+ t>0:&\quad x_i<z_i(t)<y_i\ (i<N),\qquad x_N<z_N(t),\label{eq:pos}\\
+ t<0:&\quad z_1(t)<x_1,\qquad y_i<z_{i+1}(t)<x_{i+1}\ (i<N).
+ \label{eq:neg}
+\end{align}
+Every $\dot z_i$ is positive, $\sum_i\dot z_i=V:=\sum_i v_i$, and
+\begin{equation}\label{eq:goldfish}
+ \ddot z_i=2\sum_{j\ne i}\frac{\dot z_i\dot z_j}{z_i-z_j}.
+\end{equation}
+Thus~\eqref{eq:pencil} is a complete collision-free goldfish solution with
+$z_i(0)=x_i$ and $\dot z_i(0)=v_i$.
+\end{theorem}
+
+\begin{proof}
+Off the poles $x_i$, partial fractions give
+\begin{equation}\label{eq:R}
+ R(z):=\frac{Q(z)}{P(z)}=\sum_{i=1}^N\frac{v_i}{z-x_i},
+ \qquad R'(z)=-\sum_{i=1}^N\frac{v_i}{(z-x_i)^2}<0.
+\end{equation}
+Hence $R=0$ has exactly one root $y_i$ in each interval
+$(x_i,x_{i+1})$.  When $t\ne0$, $p(z,t)=0$ is equivalent to $R(z)=1/t$.
+Strict decrease and the one-sided pole limits give exactly the intervals
+in~\eqref{eq:pos}--\eqref{eq:neg}, including the sign-selected exterior
+interval.  All roots are simple.  At $t=0$ they are the simple roots of
+$P$, so this construction covers all real time.
+
+For $t\ne0$, differentiation of $R(z_i(t))=1/t$ gives
+\begin{equation}\label{eq:velocity}
+ \dot z_i=-\frac1{t^2R'(z_i)}>0.
+\end{equation}
+At zero, implicit differentiation instead gives
+$\dot z_i(0)=Q(x_i)/P'(x_i)=v_i$.  The coefficient of $z^{N-1}$ in $p$
+gives the exact law
+\begin{equation}\label{eq:vieta}
+ \sum_i z_i(t)=\sum_i x_i+Vt,
+\end{equation}
+and therefore $\sum_i\dot z_i=V$.  Differentiating
+$p(z,t)=\prod_i(z-z_i(t))$ in $t$ shows that the time-independent $Q$ is
+\begin{equation}\label{eq:invariant}
+ Q(z)=\sum_i\dot z_i(t)\prod_{j\ne i}(z-z_j(t)).
+\end{equation}
+At a root $z_i$, elementary logarithmic differentiation gives
+\begin{align}
+ \frac{p_{zz}}{p_z}&=2\sum_{j\ne i}\frac1{z_i-z_j},\label{eq:pzz}\\
+ \frac{Q'}{p_z}&=\sum_{j\ne i}\frac{\dot z_i+\dot z_j}{z_i-z_j}.
+ \label{eq:qprime}
+\end{align}
+Twice differentiating $p(z_i(t),t)=0$ and inserting
+\eqref{eq:pzz}--\eqref{eq:qprime} yields~\eqref{eq:goldfish}.  Finally,
+$p(z,t+s)=p(z,t)-sQ(z)$ proves the exact flow group law.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{One-carrier scattering and boundary sharpness}
+Put
+\begin{equation}\label{eq:data}
+ M=\sum_i v_ix_i,\qquad c=\frac MV,\qquad
+ \beta_i=-\frac{P(y_i)}{Q'(y_i)},\qquad B=\sum_{i=1}^{N-1}\beta_i.
+\end{equation}
+\begin{theorem}[Two-ended rank-transfer scattering]\label{thm:scatter}
+Every $\beta_i$ is positive.  As $t\to-\infty$,
+\begin{align}
+ z_1(t)&=Vt+c+\frac Bt+O(t^{-2}),\label{eq:ballminus}\\
+ z_{i+1}(t)&=y_i-\frac{\beta_i}{t}+O(t^{-2})\quad(i<N),
+ \label{eq:finminus}
+\end{align}
+whereas, as $t\to+\infty$,
+\begin{align}
+ z_i(t)&=y_i-\frac{\beta_i}{t}+O(t^{-2})\quad(i<N),
+ \label{eq:finplus}\\
+ z_N(t)&=Vt+c+\frac Bt+O(t^{-2}).\label{eq:ballplus}
+\end{align}
+All expansions differentiate termwise.  Thus the incoming velocity vector
+tends to $(V,0,\ldots,0)$ and the outgoing vector to
+$(0,\ldots,0,V)$ in rank order.
+\end{theorem}
+
+\begin{proof}
+At a simple zero $y_i$ of $Q$, the implicit-function theorem with
+$s=1/t$ applied to $sP(z)-Q(z)=0$ gives
+\begin{equation}\label{eq:finite-expansion}
+ z=y_i+\frac{P(y_i)}{tQ'(y_i)}+O(t^{-2})
+   =y_i-\frac{\beta_i}{t}+O(t^{-2}).
+\end{equation}
+Since $y_i\in(x_i,x_{i+1})$, the signs of $P(y_i)$ and $Q'(y_i)$ are
+opposite; hence $\beta_i>0$.  Comparing the two leading coefficients in
+$Q=V\prod_i(z-y_i)$ yields
+\begin{equation}\label{eq:anchor-sum}
+ \sum_{i=1}^{N-1}y_i=\sum_{i=1}^Nx_i-c.
+\end{equation}
+Subtracting all finite expansions~\eqref{eq:finite-expansion} from the
+exact sum~\eqref{eq:vieta}, and using~\eqref{eq:anchor-sum}, gives the
+ballistic expansions including the $B/t$ term.  Interlacing
+\eqref{eq:pos}--\eqref{eq:neg} fixes their ordered ranks.  Analyticity in
+$s$ justifies differentiated remainders and completes the velocity claim.
+\end{proof}
+
+The strict positive cone is sharp.  For $x=(0,1)$ and $v=(1,0)$,
+$p=(z-1)(z-t)$ collides at $t=1$.  For $v=(1,-1)$,
+$p=z^2-z+t$ has a double root at $t=1/4$ and nonreal roots afterwards.
+The $N=1$ face is a free particle; coincident initial positions are singular;
+all-negative velocities follow by time reversal but are not merged into
+Theorems~\ref{thm:global}--\ref{thm:scatter}.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Evidence, collisions, and Route-A boundary}
+Fourteen rational cases in dimensions two through seven supply 98
+signed-time rows, 413 root-time cells, 45 fixed anchors, 28 asymptotic rows,
+and 1,892 audited evidence leaves.  An independent checker performs 2,047
+checks; SymPy closes seven identity groups; isolated replay is byte exact;
+and 45 repaired-hash, stale-hash, strict-parser and optimized-Python attacks
+must fail.  Exact Sturm intervals certify every sampled real-root statement.
+The evidence regresses formulas; the proofs own arbitrary finite $N$ and
+untruncated time.
+
+C196 treats repulsive inverse-square Calogero--Moser motion through a
+Hermitian eigenvalue pencil and $N$ asymptotic free velocities.  C292 uses
+sticky merger resolution, while C296 uses event-driven elastic hard-rod
+relabeling.  None owns this smooth velocity-coupled pencil or its
+one-carrier positive-cone scattering theorem.
+
+Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the strict tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\]
+The arbitrary continuous data have no prime owner or logarithmic clock;
+strict monotonicity supplies no primitive periodic ledger; and no target
+determinant or Weil compression is defined.  Polynomial linearization is
+only a formal A4 hint, not a canonical self-adjoint quantization.  Route A
+is rejected and Route B remains locked.  No target local data, Euler
+factors, root number, automorphy, divisor/counting law, functional equation,
+zero match, or Hilbert--P\'olya operator is asserted.
+
+\paragraph{AI use.} A generative language model assisted drafting and code
+scaffolding.  The displayed proofs, independent reconstruction, hostile
+tests and deterministic artifacts define the audit record.
+\fi
+
+\section*{Source lineage}
+\begin{thebibliography}{9}
+\bibitem{Calogero2001} F. Calogero, ``The `neatest' many-body problem
+amenable to exact treatments (a `goldfish'?),'' \emph{Physica D} 152--153
+(2001), 78--84.
+DOI: \href{https://doi.org/10.1016/S0167-2789(01)00160-9}{10.1016/S0167-2789(01)00160-9}.
+\bibitem{Calogero1978} F. Calogero, ``Motion of poles and zeros of special
+solutions of nonlinear and linear partial differential equations, and
+related `solvable' many-body problems,'' \emph{Nuovo Cimento B} 43 (1978),
+177--241. Handle: \href{http://hdl.handle.net/11573/11324}{11573/11324}.
+\bibitem{Nucci2004} M. C. Nucci, ``Calogero's `goldfish' is indeed a school
+of free particles,'' \emph{Journal of Physics A} 37 (2004), 11391--11400.
+DOI: \href{https://doi.org/10.1088/0305-4470/37/47/008}{10.1088/0305-4470/37/47/008}.
+\end{thebibliography}
+\end{document}

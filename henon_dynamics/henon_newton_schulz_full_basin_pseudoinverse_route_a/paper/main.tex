@@ -1,0 +1,204 @@
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\pdfvariable suppressoptionalinfo 512\relax
+\pdfvariable trailerid {[<dd317dd317dd317dd317dd317dd317aa><dd317dd317dd317dd317dd317dd317aa>]}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\ran}{\operatorname{Ran}}
+\newcommand{\rank}{\operatorname{rank}}
+\title{Newton--Schulz Dynamics Beyond Norm Bounds:\\Full Spectral Basins, Jordan Rates, and Moore--Penrose Compatibility}
+\author{HCS-C317 theorem-and-evidence package}
+\date{3 September 2026 --- revision round \CRevisionRound}
+\begin{document}
+\maketitle
+\begin{abstract}
+For $X_{k+1}=X_k(2I-AX_k)$ we classify exact-arithmetic convergence without replacing spectral radius by a sufficient norm bound.  In the invertible case, the basin is exactly $\rho(I-AX_0)<1$, with a sharp Jordan rate and a complete unit-circle boundary.  For arbitrary rectangular $A$, convergence to $A^\dagger$ holds if and only if the initial matrix has Moore--Penrose support and its range-compressed residual lies in the open spectral disk.  The canonical start $\alpha A^*$ is resolved on the open corridor, both endpoints, every exterior face, repeated maximal singular values, and rank zero.  Finite exact matrices audit the algebra but do not replace the arbitrary-dimensional proof.
+\end{abstract}
+
+\section{Exact residual dynamics}
+Fix $A\in\CC^{m\times n}$ and $X_0\in\CC^{n\times m}$, and define
+\begin{equation}\label{eq:iteration}
+ X_{k+1}=X_k(2I_m-AX_k).
+\end{equation}
+This reciprocal-matrix iteration goes back to Schulz~\cite{schulz} and
+Hotelling~\cite{hotelling}; generalized-inverse iterations were studied by
+Ben-Israel~\cite{benisrael}.
+
+\begin{theorem}[Full square basin]\label{thm:square}
+Suppose $m=n$ and $A$ is invertible.  With $R_0=I-AX_0$,
+\begin{equation}\label{eq:squarepower}
+ R_k=R_0^{2^k},\qquad
+ X_k=A^{-1}(I-R_0^{2^k}).
+\end{equation}
+Thus $X_k\to A^{-1}$ if and only if $\rho(R_0)<1$.  Whenever
+$\rho=\rho(R_0)>0$, let $s_*$ be the largest Jordan-block size among
+eigenvalues of modulus $\rho$.  Then, for every matrix norm,
+\begin{equation}\label{eq:rate}
+ \lVert R_k\rVert=\Theta\!\left((2^k)^{s_*-1}\rho^{2^k}\right).
+\end{equation}
+For $\rho=0$ there is finite termination once $2^k$ reaches the
+nilpotency index.  For $\rho=1$, semisimple peripheral blocks give a
+bounded, nonvanishing residual, whereas a defective peripheral block of
+maximal size $s_*>1$ gives $\Theta((2^k)^{s_*-1})$ growth.  For
+$\rho>1$,~\eqref{eq:rate} is polynomial-times-double-exponential
+divergence.
+\end{theorem}
+
+\begin{proof}
+Multiplying~\eqref{eq:iteration} by $A$ gives
+$I-AX_{k+1}=(I-AX_k)^2$, proving~\eqref{eq:squarepower}.  Matrix powers
+tend to zero exactly when their spectral radius is below one.
+For a Jordan block $J=\lambda I+N$ of size $s$ and an integer $\ell\geq0$,
+\begin{equation}\label{eq:jordan}
+ J^\ell=\sum_{j=0}^{\min(s-1,\ell)}
+ \binom{\ell}{j}\lambda^{\ell-j}N^j.
+\end{equation}
+At $\ell=2^k$, the largest nonzero peripheral term has order
+$\ell^{s_*-1}\rho^\ell$; equivalence of finite-dimensional norms transfers the
+two-sided estimate through a fixed similarity.  Formula~\eqref{eq:jordan}
+also gives every boundary statement.  In particular, ``bounded and
+nonvanishing'' at a semisimple unit-circle block does not assert that the
+residual sequence itself fails to converge.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{The arbitrary-rank Moore--Penrose basin}
+Let $A^\dagger$ be the Moore--Penrose inverse and
+$P=AA^\dagger$, $Q=A^\dagger A$.
+
+\begin{theorem}[Compatibility is necessary and sufficient]\label{thm:mp}
+The iterates in~\eqref{eq:iteration} converge to $A^\dagger$ if and only if
+\begin{equation}\label{eq:iff}
+ X_0=QX_0P,\qquad
+ \rho\!\left((P-AX_0)|_{\ran A}\right)<1.
+\end{equation}
+Under~\eqref{eq:iff}, with $R_0=P-AX_0$,
+\begin{equation}\label{eq:mppower}
+ R_k=R_0^{2^k},\qquad
+ X_k=A^\dagger-A^\dagger R_0^{2^k}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Compatibility is invariant.  It implies $PR_kP=R_k$ and
+$A^\dagger AX_k=X_k$, so the same calculation as before gives
+$R_{k+1}=R_k^2$ and $X_k=A^\dagger-A^\dagger R_k$.  This proves
+sufficiency.
+
+For necessity, use unitary SVD coordinates and write
+\[
+ A=\begin{pmatrix}\Sigma&0\\0&0\end{pmatrix},\qquad
+ X_k=\begin{pmatrix}B_k&C_k\\D_k&E_k\end{pmatrix},
+\]
+where $\Sigma$ is positive diagonal.  Direct multiplication gives
+\begin{align}
+ B_{k+1}&=B_k(2I-\Sigma B_k),
+ &C_{k+1}&=(2I-B_k\Sigma)C_k,\label{eq:blocks1}\\
+ D_{k+1}&=D_k(2I-\Sigma B_k),
+ &E_{k+1}&=2E_k-D_k\Sigma C_k.\label{eq:blocks2}
+\end{align}
+If $X_k\to A^\dagger$, then $B_k\to\Sigma^{-1}$ and
+$(I-\Sigma B_0)^{2^k}\to0$, proving the spectral condition.  Moreover
+$2I-B_k\Sigma=I+\Sigma^{-1}(I-\Sigma B_k)\Sigma$ and
+$2I-\Sigma B_k=I+(I-\Sigma B_k)$.  Their deviations from $I$ are
+summable because the residual powers decay geometrically after a finite
+index; every factor is invertible because its shifted residual has
+spectrum strictly inside the unit disk.  The associated left and right
+infinite products therefore converge to invertible matrices.
+Equations~\eqref{eq:blocks1}--\eqref{eq:blocks2} can tend to the required
+zero off-support blocks only when $C_0=D_0=0$.  Then
+$E_k=2^kE_0$, hence $E_0=0$.  These three equalities are precisely
+$X_0=QX_0P$.
+\end{proof}
+
+\section{The canonical scalar corridor}
+\begin{theorem}[All $\alpha A^*$ faces]\label{thm:alpha}
+Let $A\neq0$, let $\sigma_{\max}$ be its largest singular value, and
+take real $\alpha$.  For $X_0=\alpha A^*$,
+\[
+ X_k\longrightarrow A^\dagger
+ \quad\Longleftrightarrow\quad
+ 0<\alpha<\frac{2}{\sigma_{\max}^2}.
+\]
+At equality, every maximal-singular-value direction is deleted after one
+step and remains zero, while each smaller direction whose residual has
+modulus below one tends to its inverse coefficient.  At $\alpha=0$, zero
+is fixed.  If $\alpha<0$ or $\alpha>2/\sigma_{\max}^2$, a maximal
+direction diverges.  If $A=0$, the canonical start is zero for all
+$\alpha$ and converges trivially; among arbitrary starts, only $X_0=0$
+converges.
+\end{theorem}
+
+\begin{proof}
+On a nonzero singular direction $\sigma$, the initial residual is
+$r_0=1-\alpha\sigma^2$ and the iterate coefficient is
+\[
+ x_k=\frac{1-r_0^{2^k}}{\sigma}.
+\]
+All directions converge to $1/\sigma$ exactly in the open corridor.
+At the sharp upper endpoint, $r_0=-1$ on every maximal direction, so
+$x_1=0$ and thereafter $r_k=1$.  The remaining claims follow directly;
+when $A=0$,~\eqref{eq:iteration} reduces to $X_{k+1}=2X_k$.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Evidence, collisions, and scope}
+The content-addressed evidence contains 14 square Jordan cases with 84
+snapshots and 132 coefficient rows, six compatible rectangular cases
+with 36 snapshots, six incompatible support witnesses with 30 snapshots,
+and 19 canonical-$\alpha$ cases with 42 singular-direction ledgers.
+An independent checker reconstructs all 7,720 scalar leaves without
+importing producer code.  A separate symbolic lane verifies generic
+residual squaring, Jordan powers, SVD-block recurrences, and scalar
+coefficients.  Byte replay, repaired-hash mutations, strict parsers, and
+canonical semantic locking of every Route-A YAML value close the audit.
+
+These exact matrices are regression witnesses, not a proof by examples
+of Theorems~\ref{thm:square}--\ref{thm:alpha}, and exact arithmetic is not
+a floating-point stability theorem.  The nearest repository objects are
+scalar Newton--Cayley root dynamics, heavy-ball recurrences, and a
+continuous symmetric Riccati flow; none owns this rectangular
+compatibility iff basin.
+
+All five Route-A branches fail: there is no rational-prime carrier,
+arithmetic orbit ledger, zeta/divisor bridge, target global symmetry, or
+natural quantization.  The verdict is \texttt{ROUTE\_A\_REJECTED} and
+Route B is locked.  Under
+\texttt{NO\_BAD\_EULER\_\allowbreak OR\_ROOT\_NUMBER}, no
+target arithmetic local data, Euler factors, root number, automorphy,
+target divisor, functional equation, zero match, or Hilbert--P\'olya
+operator is asserted.
+\fi
+
+\ifcase\CRevisionRound
+\section*{Revision certificate: full square basin and Jordan boundary}
+This original round proves residual squaring, the spectral-radius iff
+basin, and every nilpotent, unit-circle, and exterior Jordan regime.
+\or
+\section*{Revision certificate: Moore--Penrose iff basin and alpha faces}
+This round adds the necessity of support compatibility and every canonical
+scalar boundary, including rank zero.
+\else
+\section*{Revision certificate: evidence, collision, and scope closure}
+This final round adds producer-independent evidence and the complete
+Route-A/nonclaim boundary.
+\fi
+
+\raggedright
+\begin{thebibliography}{9}
+\bibitem{schulz} G.~Schulz, ``Iterative Berechnung der reziproken
+Matrix,'' \emph{ZAMM} 13 (1933), DOI: 10.1002/zamm.19330130111.
+\bibitem{hotelling} H.~Hotelling, ``Some new methods in matrix
+calculation,'' \emph{Ann. Math. Stat.} 14 (1943),
+DOI: 10.1214/aoms/1177731489.
+\bibitem{benisrael} A.~Ben-Israel, ``An iterative method for computing
+the generalized inverse of an arbitrary matrix,'' \emph{Math. Comp.} 19
+(1965), DOI: 10.1090/S0025-5718-1965-0179915-5.
+\end{thebibliography}
+\end{document}
