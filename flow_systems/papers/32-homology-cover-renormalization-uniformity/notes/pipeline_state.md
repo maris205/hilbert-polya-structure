@@ -1,12 +1,12 @@
 # P32 pipeline state
 
-Date: **2026-09-03 UTC**
+Date: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **STAGE 2.5 INTEGRITY PASS / MANDATORY STOP / AWAITING EXPLICIT SCHOLAR CONFIRMATION FOR STAGE 3**.
+Current controlling state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION**.
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `awaiting_confirmation` |
+| Pipeline global state | `stage3_phase0_complete_awaiting_scholar_reviewer_configuration_confirmation` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -33,9 +33,13 @@ Current controlling state: **STAGE 2.5 INTEGRITY PASS / MANDATORY STOP / AWAITIN
 | Route position | Route A A0/A1 foundation/interface only; P32 A0 unavailable; no formal tuple, A2/A3/A4 credit, or Route-B invocation. |
 | Route B | `CLOSED`; evaluation `NOT_RUN`; invocation `false` |
 | Stage 2.5 integrity | `COMPLETE`; `PASS_AT_STAGE_2.5_CHECKPOINT`; unresolved Serious/Major/Medium = 0/0/0 |
-| Mandatory checkpoint | `ACTIVE`; `mandatory_stop=true`; `scholar_confirmation_required=true` |
-| Stage 3 | `PENDING`; `stage3_authorized=false`; no independent-review dispatch |
-| Next state | `AWAITING_EXPLICIT_SCHOLAR_CONFIRMATION_FOR_STAGE_3_INDEPENDENT_REVIEW` |
+| Stage-2.5 mandatory checkpoint | `SATISFIED_BY_STAGE3_ENTRY_AUTHORIZATION` |
+| Stage 3 entry | `AUTHORIZED`; receipt `BATCH_ROUND10_STAGE3_AUTHORIZATION_RECEIPT.json` |
+| Stage 3 Phase 0 | `COMPLETE`; 4 dynamic cards + 1 fixed DA; validation `PASS` |
+| Stage 3 substantive review | `reviewer_configuration_confirmed=false`; `started=false`; Phase 1/2 reports `0/0`; editorial decision `NONE` |
+| Stage 4 | `authorized=false` |
+| Phase-0 mutation/Route boundary | manuscript/bibliography/PDF edited `false`; scientific executions `0`; Route advancement `NONE` |
+| Next state | `AWAITING_EXPLICIT_SCHOLAR_CONFIRMATION_OF_REVIEWER_CONFIGURATION` |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability

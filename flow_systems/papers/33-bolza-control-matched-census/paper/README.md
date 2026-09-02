@@ -1,8 +1,9 @@
 # P33 manuscript package
 
-Current state: **ARS STAGE 2.5 INTEGRITY PASS / MANDATORY STOP BEFORE STAGE 3**.
-The checkpoint records `mandatory_stop=true`, `scholar_confirmation_required=true`,
-and `stage3_authorized=false`; no Stage-3 review has been dispatched.
+Current state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION**.
+The scholar authorized Stage-3 entry after Stage-2.5 PASS. The frozen review
+baseline plus four dynamic reviewer cards are complete, but no Phase-1/Phase-2
+review or editorial decision has been dispatched.
 
 ## Deliverables
 
@@ -11,6 +12,7 @@ and `stage3_authorized=false`; no Stage-3 review has been dispatched.
 - [`paper.pdf`](paper.pdf) -- 14-page, 255325-byte isolated LuaLaTeX/BibTeX build; SHA-256 `487a8838d9d422e00dcf3e896c9231b96c58fedfc2cdeb2265045f8d11d70031`.
 - [`stage2_manuscript_audit.md`](stage2_manuscript_audit.md) -- hash, structure, citation, boundary, and build audit.
 - [`stage2_5_integrity_report.md`](../notes/stage2_5_integrity_report.md) and [`stage2_5_material_passport.json`](../notes/stage2_5_material_passport.json) -- final per-paper Stage-2.5 report and Schema-9 passport.
+- [`stage3_phase0_field_analysis.md`](../notes/stage3_phase0_field_analysis.md) and [`stage3_review_baseline.json`](../notes/stage3_review_baseline.json) -- current Stage-3 Phase-0 configuration and immutable target.
 
 ## Stage 2.5 integrity result
 
@@ -32,7 +34,7 @@ P33-S06 remains bounded `PLAUSIBLE`, page-unpinned, and background-/context-only
 
 ## Route position and next gate
 
-Route A remains at the A0/A1 foundation/interface position only: P33 formal A0 is prohibited/confounded, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. Stage 2.5 authorizes no scientific execution, canonical-result refresh, Route promotion, or Stage 3. The next legal transition is an explicit scholar confirmation for Stage-3 independent review.
+Route A remains at the A0/A1 foundation/interface position only: P33 formal A0 is prohibited/confounded, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. Stage-3 Phase 0 authorizes no scientific execution, canonical-result refresh, Route promotion, or manuscript revision. The next legal transition is explicit scholar confirmation of the reviewer configuration.
 
 ## Batch traceability
 

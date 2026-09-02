@@ -1,18 +1,22 @@
 # P29 pipeline state
 
-Synchronized: **2026-09-03 UTC**
+Synchronized: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 2.5 PASS / MANDATORY STOP / STAGE 3 NOT AUTHORIZED**.
+Current controlling state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION**.
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `mandatory_stop_awaiting_scholar_confirmation_for_stage3` |
+| Pipeline global state | `stage3_phase0_complete_awaiting_scholar_reviewer_configuration_confirmation` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS` |
-| Mandatory checkpoint | `mandatory_stop=true`; `scholar_confirmation_required=true` |
-| Stage 3 | `authorized=false`; `started=false`; no review action has run |
-| Next legal transition | `AWAITING_EXPLICIT_SCHOLAR_CONFIRMATION_FOR_STAGE_3` |
+| Stage-2.5 mandatory checkpoint | `SATISFIED_BY_STAGE3_ENTRY_AUTHORIZATION` |
+| Stage 3 entry | `authorized=true`; receipt `../../../BATCH_ROUND10_STAGE3_AUTHORIZATION_RECEIPT.json` |
+| Stage 3 Phase 0 | `COMPLETE`; 4 dynamic cards + 1 fixed DA; validation `PASS` |
+| Stage 3 substantive review | `reviewer_configuration_confirmed=false`; `started=false`; Phase 1/2 reports `0/0`; editorial decision `NONE` |
+| Stage 4 | `authorized=false` |
+| Phase-0 mutation/Route boundary | manuscript/bibliography/PDF edited `false`; scientific executions `0`; Route advancement `NONE` |
+| Next legal transition | `AWAITING_EXPLICIT_SCHOLAR_CONFIRMATION_OF_REVIEWER_CONFIGURATION` |
 | Active integrity findings | `[]` (`0`) |
 
 ## Canonical package

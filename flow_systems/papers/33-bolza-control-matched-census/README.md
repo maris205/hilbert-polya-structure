@@ -2,11 +2,11 @@
 
 ## Current status
 
-**ARS STAGE 2.5 INTEGRITY PASS / AWAITING EXPLICIT STAGE 3 CONFIRMATION.**
-The hash-bound manuscript, bibliography, PDF, registered integrity report, and
-Material Passport pass the declared Stage-2.5 checks. Stage 3 is not
-authorized. Integrity-only retrieval and bounded originality screening were
-performed, but no scientific execution, scientific-result refresh, formal
+**ARS STAGE 3 / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION.**
+The scholar authorized Stage-3 entry after the hash-bound Stage-2.5 PASS.
+Four dynamic reviewer cards and one fixed Devil's Advocate seat are configured,
+but substantive review has not started: no Phase-1/Phase-2 report or editorial
+decision exists. No scientific execution, scientific-result refresh, formal
 Route-A tuple, positive arithmetic A2, or Route-B invocation occurred.
 
 ## Current paper and Stage-2.5 integrity package
@@ -21,6 +21,8 @@ Route-A tuple, positive arithmetic A2, or Route-B invocation occurred.
 - [Stage-2.5 integrity report](notes/stage2_5_integrity_report.md) -- PASS
 - [Stage-2.5 Material Passport](notes/stage2_5_material_passport.json) -- VERIFIED
 - [seven-failure-mode audit](notes/stage2_5_seven_failure_mode_final.md) -- 7/7 CLEAR
+- [Stage-3 Phase-0 field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md)
+- [Stage-3 frozen review baseline](notes/stage3_review_baseline.json)
 
 ## 结论概要
 
@@ -39,8 +41,9 @@ Bolza b=1/2 even subtype plus source-locked control; unit-speed physical base-ge
 Route A / A1 preparation; formal A0 prohibited/confounded; A2--A4 not run;
 formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `FORMAL_ROUTE_A_TUPLE=UNASSIGNED`, `POSITIVE_ARITHMETIC_A2=0`,
-`ROUTE_B_INVOCATION=false`, `STAGE2_5_INTEGRITY=PASS`, and
-`STAGE3_AUTHORIZED=false`.
+`ROUTE_B_INVOCATION=false`, `STAGE2_5_INTEGRITY=PASS`,
+`STAGE3_ENTRY_AUTHORIZED=true`, `STAGE3_PHASE0_CONFIGURATION=COMPLETE`, and
+`STAGE3_REVIEWER_CONFIGURATION_CONFIRMED=false`.
 
 ## Traceability
 
@@ -55,5 +58,5 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 
 All detailed Stage-1 research, source, review, and revision artifacts remain
 frozen in `notes/`; they were not replaced by this current-status summary.
-Official E6 remains `skipped_no_revision_evidence`. Stage 3 requires a
-separate explicit scholar confirmation.
+Official E6 remains `skipped_no_revision_evidence`. The next legal transition
+is scholar confirmation of the Stage-3 reviewer configuration.

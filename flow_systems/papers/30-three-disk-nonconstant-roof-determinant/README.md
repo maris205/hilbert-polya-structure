@@ -2,13 +2,13 @@
 
 ## Current status
 
-**ARS STAGE 2.5 PASS / MANDATORY STOP / STAGE 3 NOT AUTHORIZED.**
+**ARS STAGE 3 / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION.**
 
-Stage 2.5 pre-review integrity is complete on the final canonical bytes below.
-The controlling state is `mandatory_stop=true`,
-`scholar_confirmation_required=true`, and `stage3_authorized=false`.  An
-explicit scholar confirmation is required before any Stage 3 independent
-review may begin.
+The scholar authorized Stage-3 entry after the Stage-2.5 PASS checkpoint.
+Five canonical package hashes remain frozen, and this paper now has four
+dynamic reviewer cards plus one fixed Devil's Advocate seat. Substantive
+review has not started: `reviewer_configuration_confirmed=false`, Phase-1 and
+Phase-2 reports are absent, and no editorial decision exists.
 
 ## Current paper package
 
@@ -22,6 +22,8 @@ review may begin.
 - [Phase D originality audit](notes/stage2_5_originality_audit.md)
 - [Phase E semantic audit](notes/stage2_5_phase_e_semantic_audit.md) and [semantic receipt](notes/stage2_5_phase_e_semantic_verdicts.json)
 - [Seven-mode failure audit](notes/stage2_5_seven_failure_mode_final.md)
+- [Stage-3 Phase-0 field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md)
+- [Stage-3 frozen review baseline](notes/stage3_review_baseline.json)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
