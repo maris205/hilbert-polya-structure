@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 2 WRITE 完成；等待 Stage 2.5 确认** | 五篇完整论文共 66 页、23,182 个审计正文词、116 条冻结文献；40/40 ClaimIntents、5/5 独立复核、430/430 draft 审计及 543/543 full 审计通过。每篇都有明确的证书方法进展，但科学执行、正式 Route tuple 与 Route B 均为 0/5。见[Stage-2 output manifest](BATCH_ROUND10_STAGE2_OUTPUT_MANIFEST.json)与[P29--P33 批次检查点](BATCH_ROUND10_STAGE2_CHECKPOINT.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 2.5 INTEGRITY PASS；强制停在 Stage 3 确认点** | 五篇 post-repair 论文通过完整注册审计：116/116 references closed（115 `VERIFIED`、1 bounded `PLAUSIBLE`），48/144 citation contexts sampled and supported，244/244 Phase-C surfaces traced，480 claims registered / 382 selected claims semantically checked，454/454 evidence tuples retained as anchorless，35/35 failure modes `CLEAR`。三类四项授权修复全部关闭；科学执行、正式 Route-A tuple、正向算术 A2、A3、A4 与 Route B 均为 0/5。见 [Stage-2.5 批次报告](BATCH_ROUND10_STAGE2_5_INTEGRITY_REPORT.md)与[强制检查点](BATCH_ROUND10_STAGE2_5_MANDATORY_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,47 +38,68 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 29--33 Round 10 当前概要
 
-Round 10 已完成 ARS **Stage 2 WRITE**，当前严格停在
-**STAGE_2_WRITE_COMPLETE / AWAITING_EXPLICIT_USER_CONFIRMATION_FOR_STAGE_2_5**。
-五篇完整、可编译的论文共 **23,182 个审计英文正文词、66 个 PDF 页面、116 条
-冻结文献、114 个 citation commands 与 144 个 citation-key occurrences**。
-40/40 Stage-2 ClaimIntents 全部一对一继承 Stage 1 且不增强；5/5 独立交叉复核
-均为 PASS，当前无未决 Blocker、Major 或 Minor。Stage-2 deterministic draft
-audit 为 **430/430 PASS**，包含五次 fresh isolated rebuild 的 full audit 为
-**543/543 PASS**；五份 canonical PDF 均由隔离的
-LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX 构建链生成，终轮无 undefined
-citations/references、missing glyph、overfull 或 underfull box。
+Round 10 已完成 ARS **Stage 2.5 INTEGRITY**，当前严格停在
+**MANDATORY_STAGE_2_5_COMPLETE / PASS /
+AWAITING_EXPLICIT_USER_CONFIRMATION_FOR_STAGE_3**。`stage3_authorized=false`；
+Stage 3 独立评审尚未启动。
+
+当前 hash-bound post-repair 五篇论文共 **23,226 个审计英文正文词、66 个 PDF
+页面、116 条文献与 144 个 citation-key occurrences**。完整性门闭合了
+**116/116 references**（115 `VERIFIED`，P33-S06 为 1 条受限
+`PLAUSIBLE`）、**48/144 citation contexts**、**244/244 Phase-C
+quantitative/data surfaces**、**116/374 originality paragraphs**（每篇覆盖
+10/10 major sections）、**480 registered claims / 382 selected claims**与
+**454/454 anchorless evidence tuples**；P33 的两张 prospective longtables 有
+2/2 明确 trace。五篇七模式审计均为 7/7 `CLEAR`，合计 **35/35 CLEAR**，无未决
+SERIOUS、MAJOR 或 MEDIUM finding。
+
+用户授权的三类四项定点修复全部闭合：P29 的 `P29-AB-MEDIUM-01` 只补全
+P29-S15 containing-volume editors；P31 的 `P31-E1-056` 与 `P31-E1-078`
+分别校正 G/I/C 可重建方向，以及有界文本原创性筛查与科学贡献 novelty 的边界；
+P32 的 `P32-AB-MINOR-01` 只把五处当前状态更新为 P32-S13
+bibliographically `VERIFIED`，同时保留其 background-only、anchorless 与
+`claim_to_passage=INCONCLUSIVE` 限定。P30、P33 canonical 字节未改；三篇受影响
+PDF 均由隔离的 LuaLaTeX--BibTeX `plainnat`--LuaLaTeX--LuaLaTeX 链干净重建。
 
 | Paper | 正文词 | 页数 | 文献 | 本轮明确落地进展 | 路线图 A 对应 |
 |---|---:|---:|---:|---|---|
-| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | 4641 | 13 | 22 | 完整论文把机制可容许性 Gate M 与原始无向所有者商集完备性 Gate Q 明确分离，并把字面单一高斯素理想限定为刻意严格的压力测试。两道门均保持开放，没有产生 owner law、完整 quotient 或 S_H 数值。 | Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. |
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | 4641 | 13 | 22 | 完整论文把机制可容许性 Gate M 与原始无向所有者商集完备性 Gate Q 明确分离，并把字面单一高斯素理想限定为刻意严格的压力测试。两道门均保持开放，没有产生 owner law、完整 quotient 或 S_H 数值；Stage 2.5 仅修复 P29-S15 editor metadata。 | Route A / A0--A1 research architecture；Gate M/Q open；A2--A4 `NOT_RUN`；formal tuple `UNASSIGNED`；Route B `NOT_INVOKED`。 |
 | [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | 4948 | 14 | 26 | 完整论文把物理 roof 行列式方案整理为六道型别化关卡，并冻结共同范数下的误差契约：四个数值通道加独立传播的几何／roof 输入不确定性。没有宣称已构造 roof、算子、行列式、包络、忠实度或非转移定理。 | A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION; formal tuple UNASSIGNED; Route B closed. |
-| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 4219 | 12 | 22 | 完整论文把确定性 canonicalization 双条件提升为首要证书目标，将 9,453 个 pair rows 降为派生的对抗审计，并保持全局 owners G、incidences I 与 cell-local quotient C 三种估计量互不替代。 | Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. |
-| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 4442 | 13 | 26 | 完整论文在固定 1/N 时间与 1/N^3 对数重整化下，把高内容与零内容因子列为最先的否证目标；content-one 仅为附条件的次级分支。形式对象、面板、尾界和极限均未构造或执行。 | Generic Route-A A1--A2 preparation; A0 unavailable; formal tuple UNASSIGNED; Route B closed. |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 4257 | 12 | 22 | 完整论文把确定性 canonicalization 双条件提升为首要证书目标，将 9,453 个 pair rows 降为派生的对抗审计。Stage 2.5 校正 G/I/C 可重建边界：完整 incidence relation I 可按已声明投影导出 G 与 C；仅发布 G 或 C 则不能重建 occurrence-level I。三种 materialization 仍需独立 schema、validation 与 summary statistics；ledger 尚未执行。 | Route A / A1 preparation；A2--A4 `NOT_RUN`；formal tuple `UNASSIGNED`；positive arithmetic A2 absent；Route B `NOT_INVOKED`。 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 4448 | 13 | 26 | 完整论文在固定 1/N 时间与 1/N^3 对数重整化下，把高内容与零内容因子列为最先的否证目标；content-one 仅为附条件的次级分支。形式对象、面板、尾界和极限均未构造或执行。P32-S13 现为 bibliographically `VERIFIED`，但仍是 background-only、anchorless，且不提供 passage-level claim credit。 | Generic Route-A A1--A2 preparation；arithmetic A0 unavailable；formal tuple `UNASSIGNED`；Route B `NOT_INVOKED`。 |
 | [P33](papers/33-bolza-control-matched-census/README.md) | 4932 | 14 | 20 | 完整论文允许两个曲面使用不同的精确证明产生器，但必须输出同一语义 owner-certificate schema 并交由独立验证器复验。固定截断的不对称已显式化，P33-RC-1 仍为 0/7，没有产生 census。 | Route A / A1 preparation; formal A0 prohibited/confounded; formal tuple UNASSIGNED; Route B closed. |
 
 ### 路线图与动力学限定
 
-本轮仍在 **路线图 A 的 A0/A1 基础与 A2 前置证书层**，没有把写作完整性当作
-科学晋级。五个冻结连续时间子型、clock、owner、normalization 和 cutoff 均保持
-不变；本轮新增的是五篇完整论文，不是五次新科学实验。formal Route-A tuples
-保持 `0/5`，正向算术 A2 保持 `0/5`，Route-B invocations 保持 `0/5`，
-`SCIENTIFIC_EXECUTION=NOT_RUN` 为 `5/5`。
+本轮仍在 **Route A A0/A1 foundation/interface（路线图 A 的 A0/A1 基础／接口层）**，没有把论文完整性或
+Stage-2.5 PASS 当作科学晋级。五个冻结连续时间子型、clock、owner、normalization
+和 cutoff 均保持不变；formal Route-A tuples 为 `0/5`，正向算术 A2 为 `0/5`，
+A3 global analytic/determinant closure 为 `0/5`，A4 natural liftability 为
+`0/5`，Route-B invocations 为 `0/5`，`SCIENTIFIC_EXECUTION=NOT_RUN` 为
+`5/5`。该完整性门不产生任何 Route gate credit。
 
 ### 引用与完整性边界
 
-116 条文献全部闭合且均被引用；所有 114 个 citation groups 都有相邻
-`anchor=none / claim_to_passage=INCONCLUSIVE` 标记，没有伪造 locator 或直接来源
-引文。P32-S13 与 P33-S06 的 `PLAUSIBLE` 特殊边界、全部 correction bindings、
-作者信息、无资助、无利益冲突和 AI-assistance disclosure 均保留。Stage 2.5
-尚未运行，因此 passage-level integrity、source finalization 与 formal claim
-registration 均未被宣称。
+Stage 2.5 完成的是注册、抽样且明确限域的完整性检查，不是数学正确性、全局语义
+完备性或科学新颖性证明。全部 454 条 evidence tuples 仍保持
+`anchor.kind=none / excerpt.state=anchorless`，semantic extraction completeness
+保持 `not_machine_detectable`。P33-S06 保持 bounded `PLAUSIBLE` 和
+background-only；P32-S13 现为 bibliographically `VERIFIED`，但仍无 passage
+locator。原创性检查是有界 public-Web/local-corpus heuristic，不是 Turnitin 或
+iThenticate，也不构成 scientific contribution novelty assessment。
 
-下一步只需用户回复“确认”，即可进入 **Stage 2.5 pre-review integrity**；该确认
-仍不授权新科学计算、canonical-result refresh、Route-A tuple 赋值或 Route B。
-见 [Stage-2 output manifest](BATCH_ROUND10_STAGE2_OUTPUT_MANIFEST.json)、
-[Stage-2 checkpoint](BATCH_ROUND10_STAGE2_CHECKPOINT.md)与
-[Stage-2.5 handoff](BATCH_ROUND10_STAGE2_HANDOFF_TO_STAGE2_5.md)。
+作者声明为 `no_experiments_declared`，`experiment_provenance=[]`，五篇科学方法
+仍为 prospective。Official E6 claim-strength-drift detection 对五篇均为
+`skipped_no_revision_evidence`，因为没有 schema-compatible official ARS
+Revision-Evidence Bundle；P31/P32 的 project-local repair lineage 与 manual
+comparison 只是 supplementary evidence，不得表述为 official E6 completion。
+
+Stage 3 仍未授权。下一步只需用户回复“确认”，即可进入 **Stage 3 independent
+review**；该确认不自动授权科学计算、canonical-result refresh、Route-A tuple
+赋值或 Route B。见 [Stage-2.5 integrity report](BATCH_ROUND10_STAGE2_5_INTEGRITY_REPORT.md)、
+[mandatory checkpoint](BATCH_ROUND10_STAGE2_5_MANDATORY_CHECKPOINT.md)与
+[post-repair input freeze](BATCH_ROUND10_STAGE2_5_POST_REPAIR_INPUT_FREEZE.json)。
+
 ## Papers 24--28 最新结论
 
 ### Stage 5 FULL 落地与 pipeline 终态
@@ -428,4 +449,8 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 29--33-round10-stage1-phase5 - ARS Stage 1 / deep-research Phase 5 complete（2026-09-02，历史入口） - 五篇冻结报告完成 EIC、伦理、引用完整性和 Devil's Advocate 四席并行评审，生成 20 份角色报告、5 份 role-preserving synthesis 与 5 份逐篇 checkpoint；综合决定为 5/5 `MAJOR_REVISION`，但 0 Critical、0 ethics `BLOCKED`。82 个稳定 finding IDs 全部映射，结构闭环为 116 reference/source IDs 与 144 citation pairs；144/144 anchors 仍为 `none`，故 passage-level 支持保持 `INCONCLUSIVE`。127/127 确定性边界检查通过。论文级进展分别收敛为：P29 区分真实 quotient certificate 与 frame-sensitive literal-ideal premise；P30 把 total-error 升级为共同范数/稳定性/conditioning/roof-input uncertainty 义务；P31 区分 exact canonicalization proof 与 9,453-row audit；P32 改为 higher/zero-content falsification-first；P33 采用 surface-specific producers + common semantic schema + independent validator。报告字节、初始动力学限定、科学结果和路线状态未变；formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route B `0/5`。该入口已由下一条 Phase-6/Stage-1 完成检查点取代。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE5_CHECKPOINT.md)与[审计收据](BATCH_ROUND10_STAGE1_PHASE5_AUDIT_RECEIPT.json)。
 
-29--33-round10-stage1-phase6 - ARS Stage 1 / deep-research Phase 6 complete（2026-09-02，当前） - 五篇完整 article-style 研究报告共 22,656 raw words，每篇都有冻结前置 ClaimIntent manifest、逐项 revision log、跨作者 independent recheck 和 per-paper checkpoint。40/40 intents、82/82 stable IDs、144/144 citation-anchor pairs 均闭合，5/5 recheck `PASS`，Revision-2 required 0/5；Phase-6 全量审计 459/459，Phase-5 回放 127/127。明确进展为：P29 严格 codomain 仅是 deliberate frame 且 obstruction 为 conditional；P30 四个 numerical channels 与独立 geometry/roof-input uncertainty 进入 common norm/stability/conditioning 合同；P31 canonicalization biconditional 升为主证书、9,453 rows 降为 derived audit；P32 higher/zero content 先证伪、content one 次级且 contingent；P33 surface-specific producers 统一到 common semantic schema/validator 并保留 cutoff asymmetry。144/144 anchors 仍为 `none`，科学执行、novelty、formal claims、canonical manuscript 与 Route 状态未变；formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route B `0/5`。当前等待一次明确“确认”进入 Stage 2 `WRITE`；不自动授权新检索、科学执行或正式 Route 评估。详见[Stage-1 完成检查点](BATCH_ROUND10_STAGE1_PHASE6_CHECKPOINT.md)、[handoff](BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md)与[审计收据](BATCH_ROUND10_STAGE1_PHASE6_AUDIT_RECEIPT.json)。
+29--33-round10-stage1-phase6 - ARS Stage 1 / deep-research Phase 6 complete（2026-09-02，历史入口） - 五篇完整 article-style 研究报告共 22,656 raw words，每篇都有冻结前置 ClaimIntent manifest、逐项 revision log、跨作者 independent recheck 和 per-paper checkpoint。40/40 intents、82/82 stable IDs、144/144 citation-anchor pairs 均闭合，5/5 recheck `PASS`，Revision-2 required 0/5；Phase-6 全量审计 459/459，Phase-5 回放 127/127。明确进展为：P29 严格 codomain 仅是 deliberate frame 且 obstruction 为 conditional；P30 四个 numerical channels 与独立 geometry/roof-input uncertainty 进入 common norm/stability/conditioning 合同；P31 canonicalization biconditional 升为主证书、9,453 rows 降为 derived audit；P32 higher/zero content 先证伪、content one 次级且 contingent；P33 surface-specific producers 统一到 common semantic schema/validator 并保留 cutoff asymmetry。144/144 anchors 仍为 `none`，科学执行、novelty、formal claims、canonical manuscript 与 Route 状态未变；formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route B `0/5`。该入口已由下一条 Stage-2 WRITE 完成检查点取代。详见[Stage-1 完成检查点](BATCH_ROUND10_STAGE1_PHASE6_CHECKPOINT.md)、[handoff](BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md)与[审计收据](BATCH_ROUND10_STAGE1_PHASE6_AUDIT_RECEIPT.json)。
+
+29--33-round10-stage2 - ARS Stage 2 `WRITE` complete（2026-09-02，历史入口） - 五篇完整论文共 23,182 个审计英文正文词、66 个 PDF 页面、116/116 条闭合并被引用的冻结文献；40/40 ClaimIntents 一对一同强度或收窄继承，5/5 独立复核 `PASS`，0 unresolved Blocker/Major/Minor。确定性 draft audit 430/430、含五次 fresh isolated rebuild 的 full audit 543/543；终轮日志无 fatal、undefined citation/reference、missing glyph、overfull 或 underfull box。明确论文进展分别为 P29 分离机制 Gate M 与 quotient Gate Q、P30 建立六门 common-norm uncertainty contract、P31 把 canonicalization 置于 9,453-row audit 之前、P32 将 higher/zero content 置于 contingent content-one 之前、P33 建立异构 producer 到统一 semantic schema/independent validator 的接口。五个初始动力系统、clock、owner、normalization、cutoff 与科学结果均未变；科学执行 `0/5`、formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route B `0/5`。该入口已由下一条 Stage-2.5 完整性检查点取代。详见[完整稿报告](BATCH_ROUND10_PAPERS_29_33.md)、[Stage-2 检查点](BATCH_ROUND10_STAGE2_CHECKPOINT.md)、[output manifest](BATCH_ROUND10_STAGE2_OUTPUT_MANIFEST.json)与[Stage-2.5 handoff](BATCH_ROUND10_STAGE2_HANDOFF_TO_STAGE2_5.md)。
+
+29--33-round10-stage2.5 - ARS Stage 2.5 `INTEGRITY` PASS（2026-09-02，当前） - 五篇 hash-bound post-repair 论文完成 116/116 references（115 `VERIFIED`、1 bounded `PLAUSIBLE`）、48/144 citation-context sample、244/244 Phase-C surfaces、116/374 originality sample、480 registered / 382 selected claims 与 454/454 anchorless evidence tuples 的注册审计；35/35 failure modes `CLEAR`，0 unresolved SERIOUS/MAJOR/MEDIUM。三类四项授权 finding——P29 `P29-AB-MEDIUM-01`、P31 `P31-E1-056`/`P31-E1-078`、P32 `P32-AB-MINOR-01`——全部关闭；P31 的 complete-I-to-G/C 投影方向和 P32-S13 的 VERIFIED-but-background-only 边界已同步，未产生科学 gate credit。Official E6 为 `skipped_no_revision_evidence`；科学执行 `0/5`、formal Route-A tuples `0/5`、正向算术 A2 `0/5`、A3 `0/5`、A4 `0/5`、Route B `0/5`。Stage 3 未授权，当前停在 mandatory checkpoint，等待一次明确“确认”。详见 [Stage-2.5 批次报告](BATCH_ROUND10_STAGE2_5_INTEGRITY_REPORT.md)与[强制检查点](BATCH_ROUND10_STAGE2_5_MANDATORY_CHECKPOINT.md)。

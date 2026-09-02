@@ -31,6 +31,8 @@ ARS_ROOT = Path(
 EVIDENCE_ROWS_MODULE = ARS_ROOT / "scripts" / "evidence_rows.py"
 COVERAGE_SCRIPT = ARS_ROOT / "scripts" / "claim_registry_coverage.py"
 CLAIM_PROTOCOL = ARS_ROOT / "academic-pipeline" / "references" / "claim_verification_protocol.md"
+SELECTION_SALT = "round9-stage2.5"
+DETECTOR_ID = "ars-codex-academic-pipeline-stage2.5-first-pass-round9"
 
 PAPERS: dict[str, dict[str, Any]] = {
     "24-bianchi-holonomy-flow": {
@@ -286,7 +288,7 @@ def apply_selection(
     ranked = sorted(
         remaining,
         key=lambda c: hashlib.sha256(
-            f"{sha256(raw)}:{c['claim_id']}:round9-stage2.5".encode("utf-8")
+            f"{sha256(raw)}:{c['claim_id']}:{SELECTION_SALT}".encode("utf-8")
         ).hexdigest(),
     )
     random_count = min(10, max(3, math.ceil(0.10 * len(remaining)))) if remaining else 0
@@ -501,7 +503,7 @@ def build_one(paper: str, config: dict[str, Any], evidence_rows: Any) -> dict[st
         "revision_evidence_bundle_sha256": None,
         "detection_provenance": {
             "kind": "model_mediated_semantic_review",
-            "detector_id": "ars-codex-academic-pipeline-stage2.5-first-pass-round9",
+            "detector_id": DETECTOR_ID,
             "protocol_sha256": sha256(CLAIM_PROTOCOL.read_bytes()),
         },
         "findings": [],
