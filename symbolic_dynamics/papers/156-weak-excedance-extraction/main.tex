@@ -1,0 +1,340 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,microtype,xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Sym}{\mathfrak S}
+\newcommand{\std}{\operatorname{std}}
+\newcommand{\WEX}{\mathsf W}
+\newcommand{\drop}{\operatorname{drop}}
+
+\title[Weak-excedance extraction]{Weak-Excedance Extraction:\\
+Exact Images, Ferrers Fibres, and Fibonacci Right-Inverse Towers}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+For a permutation $\pi=\pi_1\cdots\pi_n$, retain the letters satisfying
+$\pi_i\ge i$ and standardize them in their original order.  We study the
+resulting rank-changing permutation map.  If $\sigma\in\mathfrak S_m$ and
+$d(\sigma)=\max_i(i-\sigma_i)$, then $\sigma$ occurs from source rank $n$ if
+and only if $n\ge m+d(\sigma)$; a high-shift/low-tail section realizes every
+admissible rank.  We also give an exact fibre formula for every target as a
+sum of deficient Ferrers-board completion counts.  The only recurrent states
+are identities.  On nonidentity targets, iterating the minimum-rank section
+produces an inverse ray whose rank and maximum drop evolve by
+$(m,d)\mapsto(m+d,m)$, hence by Fibonacci matrix powers.  This is a local
+one-step minimality theorem, not a global minimum theorem for iterated
+preimages and not a maximum absorption clock.  Classical weak-excedance,
+bounded-drop, tableau, Bruhat, and Bell-enumeration results are explicitly
+subtracted.  An exact audit executes $3{,}689{,}489$ assertions, including
+explicit rank-boundary tests and a counterexample to a withdrawn pointwise
+clock claim.
+\end{abstract}
+
+\maketitle
+
+\section{Map, scope, and main theorem}\label{sec:setup}
+
+Let $\Sym_n$ be the permutations of $[n]$ in one-line notation.  If $v$ is a
+word of distinct integers, write $\std(v)$ for its standardization.  Define
+\begin{equation}\label{eq:map}
+ \WEX(\pi)=\std(\pi_i:\pi_i\ge i),
+ \qquad \pi\in\Sym_n,
+\end{equation}
+where the retained letters stay in their original order.  Position one is
+always retained, so \eqref{eq:map} is a self-map of
+$\Sym_{\le N}=\bigsqcup_{1\le n\le N}\Sym_n$ for every \(N\ge1\).  Put
+\begin{equation}\label{eq:drop}
+ d(\sigma)=\max_{1\le i\le m}(i-\sigma_i),
+ \qquad \sigma\in\Sym_m.
+\end{equation}
+This is the classical maximum-drop statistic.
+
+The static ownership boundary is deliberately broad.  Excedance-set
+enumeration is due to Ehrenborg--Steingr{\'{i}}msson~\cite{EhrenborgSteingrimsson2000};
+bounded maximum drop and its enumerators are treated by
+Chung--Claesson--Dukes--Graham~\cite{ChungClaessonDukesGraham2010} and
+Chen--Chen~\cite{ChenChen2016}; permutation-tableau structure is developed by
+Steingr{\'{i}}msson--Williams~\cite{SteingrimssonWilliams2005}; and
+Bergeron--Gagnon organize weak-excedance position/value classes through a
+Bruhat quotient~\cite{BergeronGagnon2023}.  All of those static statistics,
+distributions, and structures receive zero contribution credit here.
+
+There is also an exact collision at the identity aggregate.
+Beyene--Backelin--Mantaci--Fufa, using the transposition-array interface of
+Baril~\cite{Baril2007,Baril2013}, prove that permutations whose
+weak-excedance-letter subword is increasing are Bell-number enumerated
+\cite[Theorem~27]{BeyeneBackelinMantaciFufa2023}.  In the notation below this
+owns
+\begin{equation}\label{eq:bell-owned}
+ \sum_{m=1}^n |\WEX_n^{-1}(\mathrm{id}_m)|=B_n.
+\end{equation}
+Equation \eqref{eq:bell-owned} and its transposition-array proof are not
+claimed.  Our fibre formula retains both the target permutation and its rank,
+including nonidentity targets.  Generic Ferrers-board matching is likewise
+background; the residual is the conjunction of the literal extraction map,
+its exact target obstruction and sections, its target-resolved fibres, and
+the dynamics of one canonical right inverse.  A bounded exact-map search
+non-hit is not evidence of novelty, priority, or clearance.
+
+For $n\ge m$, write $h=n-m$.  For $A=\{a_1<\cdots<a_m\}$ and
+$P=\{p_1<\cdots<p_m\}$ contained in $[n]$, call $(A,P)$
+\emph{$\sigma$-admissible} if
+\begin{equation}\label{eq:admissible}
+ p_i\le a_{\sigma_i}\quad(1\le i\le m).
+\end{equation}
+\begin{samepage}
+Let $B=[n]\setminus A$ and
+$Q=[n]\setminus P=\{q_1<\cdots<q_h\}$, and put
+\begin{equation}\label{eq:completion}
+ K(B,Q)=\prod_{j=1}^h
+ \left(|\{b\in B:b<q_j\}|-(j-1)\right),
+\end{equation}
+interpreted as zero if any factor is nonpositive; when \(h=0\), the empty
+product is \(1\).
+\end{samepage}
+
+\begin{theorem}[images, fibres, recurrence, and inverse tower]\label{thm:main}
+Let $\sigma\in\Sym_m$.
+\begin{enumerate}
+\item\label{it:image}
+For every $n\ge m$,
+\begin{equation}\label{eq:image}
+ \sigma\in\WEX(\Sym_n)\quad\Longleftrightarrow\quad
+ n\ge m+d(\sigma).
+\end{equation}
+Whenever $h=n-m\ge d(\sigma)$, the explicit right section is
+\begin{equation}\label{eq:section}
+ R_n(\sigma)=(\sigma_1+h,\ldots,\sigma_m+h,1,\ldots,h).
+\end{equation}
+Thus $m+d(\sigma)$ is the exact minimum source rank.
+\item\label{it:fibre}
+For every source rank \(n\ge1\),
+\begin{equation}\label{eq:fibre}
+ |\WEX_n^{-1}(\sigma)|
+ =\begin{cases}
+ 0,&1\le n<m,\\
+ \displaystyle\sum_{(A,P)\ \sigma\text{-admissible}}
+ K([n]\setminus A,[n]\setminus P),&n\ge m.
+ \end{cases}
+\end{equation}
+This includes zero fibres.  At the same rank \(n=m\), the fibre has size one
+for \(\sigma=\mathrm{id}_m\) and zero otherwise.
+\item\label{it:recurrent}
+$\WEX(\pi)=\pi$ if and only if $\pi$ is an identity.  Every
+nonidentity step strictly lowers rank; hence the recurrent states of
+$\Sym_{\le N}$ are $\mathrm{id}_1,\ldots,\mathrm{id}_N$.
+\item\label{it:tower}
+Suppose $\sigma$ is nonidentity, put $d=d(\sigma)>0$, and define
+$\sigma^{(0)}=\sigma$ and
+\begin{equation}\label{eq:canonical}
+ \sigma^{(t+1)}=R_{m_t+d_t}(\sigma^{(t)}),
+ \qquad m_t=|\sigma^{(t)}|,\quad d_t=d(\sigma^{(t)}).
+\end{equation}
+Then
+\begin{equation}\label{eq:update}
+ (m_{t+1},d_{t+1})=(m_t+d_t,m_t),
+ \qquad \WEX(\sigma^{(t+1)})=\sigma^{(t)}.
+\end{equation}
+With $F_0=0,F_1=1$, for every $t\ge1$,
+\begin{equation}\label{eq:fibonacci}
+ m_t=F_{t+1}m+F_t d,\qquad
+ d_t=F_t m+F_{t-1}d.
+\end{equation}
+Every edge of this inverse ray has minimum possible one-step source rank.  If
+$\tau$ is the first hitting time of an identity, then
+\begin{equation}\label{eq:tail-shift}
+ \tau(\sigma^{(t)})=\tau(\sigma)+t.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+Part~\ref{it:tower} says \emph{locally minimum}: each individual lift uses a
+minimum-rank preimage of its immediate target.  It does not assert that the
+composite tower minimizes rank among all $t$-step preimages.
+
+\section{Images and deficient completions}\label{sec:inverse}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(\ref{it:image})]
+Suppose $\pi\in\Sym_n$ maps to $\sigma\in\Sym_m$.  Let
+$P=\{p_1<\cdots<p_m\}$ be its selected positions, and let
+$A=\{a_1<\cdots<a_m\}$ be its selected values.  Standardization forces the
+entry at $p_i$ to be $a_{\sigma_i}$.  Selection gives
+\begin{equation}\label{eq:chain}
+ i\le p_i\le a_{\sigma_i}.
+\end{equation}
+Since only $h=n-m$ values lie outside $A$, the $j$th selected value satisfies
+$a_j\le h+j$.  Applying this to \eqref{eq:chain} yields
+\[
+ i\le h+\sigma_i,\qquad i-\sigma_i\le h.
+\]
+Taking the maximum proves $d(\sigma)\le h$, hence necessity in
+\eqref{eq:image}.
+
+Conversely, suppose $h\ge d(\sigma)$ and use \eqref{eq:section}.  Its first
+$m$ entries satisfy $\sigma_i+h\ge i$ and are therefore selected.  Its final
+entry $j$ occurs at position $m+j>j$ and is deficient.  Hence the selected
+word is exactly the shifted copy
+$(\sigma_1+h,\ldots,\sigma_m+h)$, whose standardization is $\sigma$.
+This proves the section identity and the sharp threshold.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(\ref{it:fibre})]
+If \(n<m\), a rank-\(n\) source cannot produce a rank-\(m\) target, so the
+fibre is empty.  Assume henceforth that \(n\ge m\).
+Fix selected sets $A$ and $P$.  The selected assignment is forced:
+$p_i$ receives $a_{\sigma_i}$.  It consists of weak excedances exactly when
+\eqref{eq:admissible} holds.  It remains to biject the complement values $B$
+onto the complement positions $Q$ so that each value assigned at $q_j$ is
+strictly smaller than $q_j$.
+
+Process $q_1,\ldots,q_h$ increasingly.  At $q_j$ there are
+$|\{b\in B:b<q_j\}|$ eligible complement values.  Every one of the $j-1$
+previously assigned values is among them, because it was assigned at an
+earlier position $q_k<q_j$ and is smaller than $q_k$.  Therefore the number
+of choices at step $j$ is precisely the $j$th factor of
+\eqref{eq:completion}.  The product counts all deficient complement
+assignments, with a nonpositive factor correctly giving zero.
+
+Every source determines one unique pair $(A,P)$ and one such complement
+assignment.  Conversely, the forced selected assignment and any deficient
+completion give a unique source whose selected standardized word is
+$\sigma$.  The classes are disjoint, so summing proves \eqref{eq:fibre}.
+When \(n=m\), both complements are empty and
+\(K(\varnothing,\varnothing)=1\).  The sole pair \(A=P=[m]\) is admissible
+exactly when \(i\le\sigma_i\) for every \(i\), which by equality of coordinate
+sums holds exactly for \(\sigma=\mathrm{id}_m\).  This proves the same-rank
+boundary.
+\end{proof}
+
+Formula \eqref{eq:fibre} is a Ferrers-board product in elementary form: at
+each increasing complement position, it counts the unused values lying
+strictly below the diagonal.  Summing it over identity targets recovers the
+owned Bell aggregate \eqref{eq:bell-owned}; that consistency check does not
+transfer ownership of the rank- and target-resolved formula.
+
+\section{Forward absorption and the canonical inverse ray}\label{sec:dynamics}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(\ref{it:recurrent})]
+If $\WEX(\pi)$ has the same rank as $\pi\in\Sym_n$, every position was
+selected, so $\pi_i\ge i$ for all $i$.  But
+$\sum_i\pi_i=\sum_i i$; hence equality holds term by term and
+$\pi=\mathrm{id}_n$.  Identities are fixed.  Thus every nonidentity step
+strictly lowers positive integer rank, proving both absorption and the
+recurrent classification.
+\end{proof}
+
+For a nonidentity $\sigma$, $d(\sigma)>0$: otherwise
+$\sigma_i\ge i$ for every $i$, and the preceding sum argument would make
+$\sigma$ an identity.  The minimum-rank section in
+\eqref{eq:canonical} is therefore a genuine rank increase.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(\ref{it:tower})]
+Apply Part~\ref{it:image} with $h=d_t$.  It gives the right-section identity
+in \eqref{eq:update} and proves that $m_t+d_t$ is the minimum rank of any
+one-step preimage of $\sigma^{(t)}$.
+
+The first $m_t$ entries of the section have the form
+$\sigma^{(t)}_i+d_t$.  Their drop is
+\[
+ i-(\sigma^{(t)}_i+d_t)\le d_t-d_t=0.
+\]
+The final low value $j$ occurs at position $m_t+j$ and has drop exactly
+$m_t$.  Consequently $d_{t+1}=m_t$, while the rank is visibly
+$m_{t+1}=m_t+d_t$.  This proves the resource update.
+
+Writing the update as multiplication by
+$\left(\begin{smallmatrix}1&1\\1&0\end{smallmatrix}\right)$ and using its
+standard Fibonacci powers proves \eqref{eq:fibonacci} by induction.  Finally,
+the lifted state makes one step to its immediate target and is nonrecurrent;
+therefore each lift increases the identity hitting time by exactly one,
+which proves \eqref{eq:tail-shift}.
+\end{proof}
+
+For example, starting from $21$ gives resource pairs
+\[
+ (m_t,d_t)=(2,1),(3,2),(5,3),(8,5),(13,8),\ldots.
+\]
+The Fibonacci sequence here describes a chosen backward dynamical system.  It
+does not by itself bound all forward orbits at a fixed rank.
+
+\section{Exact control, exclusions, and declarations}\label{sec:control}
+
+The accompanying deterministic verifier enumerates all $409{,}113$
+permutations through rank nine, reconstructs the literal functional graph,
+and checks the image theorem in $99{,}451$ target/rank cells.  It compares
+\eqref{eq:fibre} with literal predecessor counts for all $6{,}985$ target
+cells through source rank seven, then separately checks $316{,}646$ cells
+with \(n<m\) and all $46{,}233$ same-rank cells through target rank eight.
+It also recovers the owned Bell aggregate.  Finally, it takes every one of the $46{,}225$
+nonidentity targets through rank eight through six exact section lifts and
+checks \eqref{eq:update}--\eqref{eq:tail-shift}.  The frozen transcript records
+$3{,}689{,}489$ exact assertions and ends in \texttt{PASS}.  These computations
+are falsification pressure, not proofs of the all-rank statements.
+
+\paragraph{Limitations and withdrawn clock claims.}
+No maximum absorption clock is claimed.  In particular, the tempting
+pointwise inequality
+\[
+ \tau(\WEX(\pi))\le
+ \max_{\rho\in\Sym_{d(\pi)}}\tau(\rho)
+\]
+is false: for
+\[
+ \pi=(11,10,9,4,1,2,3,8,5,6,7)
+\]
+one has $d(\pi)=4$, while
+$\WEX(\pi)=(5,4,3,1,2)$ has tail three and the maximum tail in $\Sym_4$ is
+two.  The verifier reproduces this counterexample.  The paper also makes no
+global minimum-rank claim for $t$-step preimages and does not infer a
+fixed-rank maximum from the Fibonacci inverse ray.  The broad carrier pattern
+``extract a subsequence and standardize'' receives zero credit; the diagonal
+predicate, maximum-drop image obstruction, and deficient completion are the
+specific mechanisms used here.
+
+\paragraph{Data availability.}
+The exact-control source and frozen transcript accompany the internal
+artifact.  They use no external data, runtime network access, random sampling,
+or nonstandard Python package.
+
+\paragraph{Ethics statement.}
+This mathematical study involves no human participants, animals, personal
+data, or field intervention.
+
+\paragraph{Author contributions.}
+The anonymous author is responsible for the definitions, proofs, software,
+source audit, and manuscript.
+
+\paragraph{Conflict of interest.}
+The author declares no conflict of interest.
+
+\paragraph{Funding.}
+No external funding is declared.
+
+\paragraph{External status.}
+This anonymous manuscript is an internal artifact under
+\texttt{HOLD\_EXTERNAL}.  Posting, submission, external circulation, and
+specialist or author contact remain unauthorized.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
