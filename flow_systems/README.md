@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 1 Phase 3 complete；等待确认进入 Phase 4** | 116/116 来源行已转化为五份完整 evidence matrix、31 条 one-shot synthesis precommitments、24 个主题、26 个有界 pairwise tension entries 与 421 个可追踪引用对；五篇独立 DA 的终态均为 `PASS`，P33 的 2 Major + 1 Minor 经有界补丁及原独立席复验关闭。每篇都形成了不同的 fail-closed 下一步，但尚未运行科学计算、novelty、正式 claim、正式 Route tuple 或 manuscript；正向算术 A2 与 Route B 均为 `0/5`。见[Phase-3 批次检查点](BATCH_ROUND10_STAGE1_PHASE3_CHECKPOINT.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 1 Phase 4 complete；等待确认进入 Phase 5** | 五篇完整研究报告共 18,421 词，含 5 份新 writer manifest、40 条 composition intents、116/116 来源闭环和 144 个 citation pairs；APA 排序、P30 年份后缀、P33 长作者表及五份 UTC provenance 均已复验。五篇均为 `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`；科学计算、novelty、正式 claim、正式 Route tuple 与 canonical manuscript 仍未运行或未授权，正向算术 A2 与 Route B 均为 `0/5`。见[Phase-4 批次检查点](BATCH_ROUND10_STAGE1_PHASE4_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,30 +38,36 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 29--33 Round 10 当前概要
 
-Round 10 已完成 ARS Stage 1 deep-research **Phase 3 evidence synthesis**。
-冻结的 116 条来源记录已转化为五份全量 evidence matrix、31 条一次性 synthesis
-precommitments、24 个主题和 26 个非穷尽 pairwise tension entries；421 个
-ref/anchor 对保留 source-ID 追踪。五篇独立 Devil's Advocate Checkpoint 2 的
-最终结论均为 `PASS`：P29--P32 直接通过，P33 首轮的 2 Major + 1 Minor 经有界
-修补后由原独立席复验通过。当前严格停在
-**PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION**。
+Round 10 已完成 ARS Stage 1 deep-research **Phase 4 research-report
+composition**。冻结的 116 条来源已落成五篇完整报告，共 **18,421 词**；五份
+fresh `report_compiler_agent` manifests 含 40 条 composition intents，五篇均实现
+source citation/reference/inventory 全闭环，共 144 个相邻 ref/anchor pairs。当前
+严格停在 **PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION**。
 
-| Paper | 连续时间对象保持不变 | Phase-3 明确推进与仍未闭合的门 | 路线图位置 |
+独立复验补充关闭了三类论文级完整性问题：参考文献已按 APA 第一作者排序，P30
+三篇同作者同年的 Gaspard--Rice 文献已按标题绑定为 1989a/b/c，P33 的 22 作者
+条目采用 first-19/ellipsis/final-author 规则；五份误把本地 `+08:00` 标成 `Z`
+的 manifest 时间也已纠正为真实 UTC，并保留原字节哈希与 host event 收据。
+
+| Paper | 连续时间对象保持不变 | Phase-4 明确落地与仍未闭合的门 | 路线图位置 |
 |---|---|---|---|
-| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | unit-speed level-`(3)` Bianchi geodesic flow；arclength；primitive loxodromic classes；Gaussian prime ideals | 把“找机制”拆成两个相互独立的前置 kill gates：literal ideal-owner law 的可容许性，以及 level-`(3)` primitive/unoriented quotient 的完备正负证书；二者均未执行或关闭 | Route A / A0 specificity + A1 ownership；tuple `UNASSIGNED` |
-| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | `d=6a` no-eclipse physical three-disk flow；physical Euclidean flight roof | 建立 pointwise roof → operator/function space → common coefficient map → four-error contract → physical fidelity/control → Livšic nontransfer 的六门链；internal calibration 与 physical specificity 已严格分离 | physical determinant infrastructure；`A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION` |
-| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 正的 `Gamma_0(11)` newform time change；oriented owners；powers 为 repetitions | 建立 subgroup representation、逐 pair 决策、certificate serialization、`G/I/C` mapping 四层依赖图；138 instances、55 groups、9,453 pairs 原样冻结且未执行 | Route A / A1 completeness；tuple `UNASSIGNED`，不自动晋级 A2 |
-| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 独立 pure homology-cover calibrator；clock `1/N`；log multiplicity `1/N^3` | 建立 `SG2OwnerCanonical-v1`、lift/scaling algebra、formal objects、compact-uniform tails 四包证明计划；`CP-P32-004` 保持 `flagged_unresolved`，无限/有限 schedule 未执行 | generic A1--A2 boundary；A0 absent，无 Route 晋级 |
-| [P33](papers/33-bolza-control-matched-census/README.md) | Bolza `b=1/2` even subtype；target-blind cutoff `Lambda=21/10` | 将 `P33-RC-1` 展开为 presentation-specific 的确定性正负 certificate、序列化、终止/完备 payload 与独立 validator 义务；修补后 20/20 来源和 6 个 pairwise tensions 通过独立复验 | Route A / A1 only；`A0_INCONCLUSIVE_SYSTOLE_CONFOUNDED`、formal A0 prohibited |
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | unit-speed level-`(3)` Bianchi geodesic flow；arclength；primitive loxodromic classes；Gaussian prime ideals | [3,384 词完整报告](papers/29-bianchi-ideal-owner-refinement/notes/stage1_phase4_research_report.md)把 literal ideal-owner law 与 primitive/unoriented quotient 写成两道独立 kill gates；二者均未执行 | Route A / A0 specificity + A1 ownership；tuple `UNASSIGNED` |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | `d=6a` no-eclipse physical three-disk flow；physical Euclidean flight roof | [3,798 词完整报告](papers/30-three-disk-nonconstant-roof-determinant/notes/stage1_phase4_research_report.md)明确 exactly six gates，分离 internal calibration / physical specificity，并保留 roundoff 来源缺口 | physical determinant infrastructure；`A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION` |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 正的 `Gamma_0(11)` newform time change；oriented owners；powers 为 repetitions | [3,524 词完整报告](papers/31-level11-conjugacy-owner-ledger/notes/stage1_phase4_research_report.md)完整叙述 subgroup → 9,453 pair decisions → serialization → `G/I/C` 四层图；全部未执行 | Route A / A1 completeness；tuple `UNASSIGNED`，不自动晋级 A2 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 独立 pure homology-cover calibrator；clock `1/N`；log multiplicity `1/N^3` | [3,747 词完整报告](papers/32-homology-cover-renormalization-uniformity/notes/stage1_phase4_research_report.md)完整叙述四包证明计划、pure/residual 分界与 exact schedules；`CP-P32-004` 仍未解决 | generic A1--A2 boundary；A0 absent，无 Route 晋级 |
+| [P33](papers/33-bolza-control-matched-census/README.md) | Bolza `b=1/2` even subtype；target-blind cutoff `Lambda=21/10` | [3,968 词完整报告](papers/33-bolza-control-matched-census/notes/stage1_phase4_research_report.md)给出 `P33-RC-1` 七义务、双 presentation、独立 validator 架构；7/7 未实现 | Route A / A1 only；`A0_INCONCLUSIVE_SYSTOLE_CONFOUNDED`、formal A0 prohibited |
 
-五份 disposition 均为 `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`。这里的 Stage 1
-Phase 3 是论文研究流程的 evidence-synthesis 环节，不是 Route-A 层级晋升：
+五份 disposition 均为 `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`。这里的 Stage 1
+Phase 4 是论文研究流程的完整 report composition 环节，不是 Route-A 层级晋升：
 formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route-B invocations `0/5`，五个
 初始动力系统、时钟、primitive/repetition、owner、cutoff 和 controls 均未改变。
 科学计算、canonical-result refresh、novelty 判断、正式项目 claim registration
-与 manuscript drafting 仍为 `NOT_RUN` 或未授权。下一次只需用户回复“确认”，
-才允许进入 Phase 4 research-report composition；它也不会自动授权科学执行、
-正式论文正文或 Route 晋级。
+与 canonical manuscript drafting 仍为 `NOT_RUN` 或未授权。下一次只需用户回复
+“确认”，才允许进入 Phase 5 editorial/ethics/citation-integrity/DA review；它也
+不会自动授权科学执行、正式 Route 评估或 canonical manuscript 改写。见
+[Phase-4 批次检查点](BATCH_ROUND10_STAGE1_PHASE4_CHECKPOINT.md)、
+[UTC provenance correction](BATCH_ROUND10_STAGE1_PHASE4_PROVENANCE_CORRECTION.md)
+与[最终审计收据](BATCH_ROUND10_STAGE1_PHASE4_AUDIT_RECEIPT.json)。
 
 ## Papers 24--28 最新结论
 
@@ -406,4 +412,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 29--33-round10-stage1-phase2 - ARS Stage 1 / deep-research Phase 2 complete（2026-09-02，历史入口） - 五篇完成有界检索、去重、逐条注释与来源盲独立复验：`ROUND10_PHASE2_SOURCE_ROWS=116/116`，其中 `ROUND10_PHASE2_PEER_REVIEWED=100/116`；最终 114 条为 `VERIFIED/S2_VERIFIED`、2 条 DOI-less authoritative records 为 `PLAUSIBLE`，0 `UNVERIFIABLE`、0 `FABRICATED`。首轮发现的 6 项元数据/更正伴随问题全部经定点补丁和原复验席 post-patch replay 关闭，五篇均为 `PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`。明确推进分别是：P29 收窄 Gaussian ideal-owner/商证书缺口；P30 绑定三盘散射经典文献的正式 correction companions 并分离物理 roof 适用边界；P31 找到直接 `Gamma_0(N)` class-count 先例但保留 9,453-pair 证书缺口；P32 分离 canonical owner、cover/zeta 与 formal-background-only 文献并绑定已知 erratum；P33 形成 conjugacy/root/census source spine，但确定序列化与完备 validator 仍缺。此阶段没有跨源综合、novelty 结论、科学计算、claim 注册或论文正文；formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route B invocations `0/5`，五个初始动力系统与时钟/primitive/owner 限定原样冻结。该入口已由下一条 Phase-3 检查点取代。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE2_CHECKPOINT.md)、[补丁复验收据](BATCH_ROUND10_STAGE1_PHASE2_METADATA_CORRECTION_RECEIPT.md)、[更正链可复现性限制](BATCH_ROUND10_STAGE1_PHASE2_REPRODUCIBILITY_NOTE.md)与[最终审计收据](BATCH_ROUND10_STAGE1_PHASE2_AUDIT_RECEIPT.json)。
 
-29--33-round10-stage1-phase3 - ARS Stage 1 / deep-research Phase 3 complete（2026-09-02，当前） - 冻结的 116 条来源已形成 5/5 claim-intent precommitment manifests、116/116 source-effect matrix rows、24 个 evidence themes、26 个非穷尽 pairwise tension entries 与 421 个 ref/anchor pairs；31 条 claim intents 仅是 synthesis precommitments，不是正式项目 Claim Registry。P29--P32 的独立 DA 直接 `PASS`；P33 首轮 `REVISE` 的 2 Major + 1 Minor 经有界 synthesis patch 和原 DA-SEAT-B 复验关闭，最终 5/5 `PASS`，五篇 disposition 均为 `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`。明确推进是：P29 拆出 literal ideal-owner admissibility 与 primitive/unoriented quotient 两个独立 kill gates；P30 建立 physical-roof 六门链并分离 internal calibration/physical specificity；P31 建立 subgroup/pair-decision/serialization/`G-I-C` 四层图；P32 建立 canonical-owner/lift algebra/formal objects/uniform tails 四包计划且 `CP-P32-004` 继续 fail-closed；P33 将 `P33-RC-1` 展开为 presentation-specific certificate architecture。没有科学计算、result refresh、novelty 结论、正式 claim、正式 Route tuple 或 manuscript drafting；正向算术 A2 `0/5`、Route B invocations `0/5`，初始动力学限定全部冻结。当前等待一次“确认”进入 Phase 4 research-report composition。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE3_CHECKPOINT.md)与[最终审计收据](BATCH_ROUND10_STAGE1_PHASE3_AUDIT_RECEIPT.json)。
+29--33-round10-stage1-phase3 - ARS Stage 1 / deep-research Phase 3 complete（2026-09-02，历史入口） - 冻结的 116 条来源已形成 5/5 claim-intent precommitment manifests、116/116 source-effect matrix rows、24 个 evidence themes、26 个非穷尽 pairwise tension entries 与 421 个 ref/anchor pairs；31 条 claim intents 仅是 synthesis precommitments，不是正式项目 Claim Registry。P29--P32 的独立 DA 直接 `PASS`；P33 首轮 `REVISE` 的 2 Major + 1 Minor 经有界 synthesis patch 和原 DA-SEAT-B 复验关闭，最终 5/5 `PASS`，五篇 disposition 均为 `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`。明确推进是：P29 拆出 literal ideal-owner admissibility 与 primitive/unoriented quotient 两个独立 kill gates；P30 建立 physical-roof 六门链并分离 internal calibration/physical specificity；P31 建立 subgroup/pair-decision/serialization/`G-I-C` 四层图；P32 建立 canonical-owner/lift algebra/formal objects/uniform tails 四包计划且 `CP-P32-004` 继续 fail-closed；P33 将 `P33-RC-1` 展开为 presentation-specific certificate architecture。没有科学计算、result refresh、novelty 结论、正式 claim、正式 Route tuple 或 manuscript drafting；正向算术 A2 `0/5`、Route B invocations `0/5`，初始动力学限定全部冻结。该入口已由下一条 Phase-4 检查点取代。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE3_CHECKPOINT.md)与[最终审计收据](BATCH_ROUND10_STAGE1_PHASE3_AUDIT_RECEIPT.json)。
+
+29--33-round10-stage1-phase4 - ARS Stage 1 / deep-research Phase 4 complete（2026-09-02，当前） - 五篇完整研究报告共 18,421 词、五份 fresh writer manifests 共 40 条 composition intents；source closure 为 116/116，prose citation pairs 为 144，五篇 disposition 均为 `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`。P29 把两道 independent kill gates 落成完整报告；P30 明确 exactly six gates 并保留 roundoff source gap；P31 把 9,453 pair closure 与 `G/I/C` 分层写成 proof-first report；P32 保留 exact schedules、pure/residual 分界和 unresolved `CP-P32-004`；P33 给出七义务、双 presentation、独立 validator 架构且 7/7 未实现。独立复验关闭 APA 排序、P30 1989a/b/c、P33 长作者表及 local-as-UTC provenance 问题；原错误 manifest hashes 与 host events 已留档。科学计算、canonical refresh、novelty、正式 claim、正式 Route tuple 与 manuscript drafting 均未运行或未授权；正向算术 A2 `0/5`、Route B `0/5`。当前等待一次“确认”进入 Phase 5 review。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE4_CHECKPOINT.md)、[provenance correction](BATCH_ROUND10_STAGE1_PHASE4_PROVENANCE_CORRECTION.md)与[最终审计收据](BATCH_ROUND10_STAGE1_PHASE4_AUDIT_RECEIPT.json)。

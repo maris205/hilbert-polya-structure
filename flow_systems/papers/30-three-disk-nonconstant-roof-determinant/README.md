@@ -5,11 +5,13 @@ Scattering Flow*
 
 ## Current status
 
-**STAGE 1 / `PHASE_3_COMPLETE` / `AWAITING_PHASE_4_CONFIRMATION`.** The
-hash-bound 26-source corpus has completed evidence synthesis with disposition
-`PHASE3_SYNTHESIS_READY_WITH_WARNINGS`, and independent Devil's Advocate
-Checkpoint 2 returned `PASS`. Phase 4 is not authorized. No transfer operator,
-determinant calculation, numerical experiment, or scientific result has run;
+**STAGE 1 / `PHASE_4_COMPLETE` / `AWAITING_PHASE_5_CONFIRMATION`.** The
+hash-bound 26-source corpus now has a 3,798-word full research-report draft and
+eight fresh report-compiler claim intents. All 26 source IDs are cited and
+listed, and the Phase-4 disposition is
+`PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. Phase 5 is not authorized. No
+transfer operator, determinant calculation, numerical experiment, or
+scientific result has run;
 the closeout retains `SCIENTIFIC_COMPUTATION=NOT_RUN`,
 `NOVELTY_ASSESSMENT=NOT_RUN`, `FORMAL_PROJECT_CLAIM_REGISTRATION=0/1`,
 `FORMAL_ROUTE_A_TUPLES=0/1`, `ROUTE_B=CLOSED`, and
@@ -71,6 +73,16 @@ the roundoff component of the four-error contract, every synthesis citation
 has `anchor:none`, and all Gaspard–Rice/erratum, open-billiard applicability,
 and numerical-only evidence limits remain mandatory.
 
+## Phase-4 research-report advance
+
+The full report resolves the earlier “five versus six” prose mismatch by
+presenting exactly six ordered object-specific obligations. It makes internal
+calibration and physical specificity independently falsifiable, keeps
+roundoff as an explicit unsourced component rather than hiding it in another
+error term, and preserves every not-evaluable endpoint. The concrete advance
+is a complete evidence-grounded paper draft; no roof, operator, determinant,
+error certificate, or nontransfer result has been executed.
+
 ## Route boundary
 
 This is separately typed physical-determinant infrastructure, not positive
@@ -88,7 +100,10 @@ Route B is `CLOSED`, with evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+[full research report](notes/stage1_phase4_research_report.md),
+[Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
+[Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
 [evidence synthesis](notes/stage1_phase3_synthesis.md),
 [independent Devil's Advocate review](notes/stage1_phase3_devils_advocate.md),
 [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),

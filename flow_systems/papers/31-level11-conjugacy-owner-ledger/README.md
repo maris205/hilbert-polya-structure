@@ -4,11 +4,10 @@ Working title: *Exact Conjugacy Ownership in Level-11 Hecke Output Ledgers*
 
 ## Current status
 
-**STAGE 1 RESEARCH / PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION.**
-Phase 3 was authorized under SHA-256
-`f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe`
-and closes with disposition `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`. The
-independent Devil's Advocate Checkpoint 2 verdict is `PASS`. Phase 4 is not
+**STAGE 1 RESEARCH / PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION.**
+The 22-source corpus now has a 3,524-word full research-report draft and eight
+fresh report-compiler claim intents. All 22 source IDs are cited and listed;
+the disposition is `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. Phase 5 is not
 authorized. Scientific computation, canonical-result refresh, novelty
 assessment, formal project claim registration, Route evaluation, and
 manuscript drafting remain `NOT_RUN` or not authorized.
@@ -61,6 +60,15 @@ Observations**. Its retained warnings do not change the result boundary:
 scholar confirmation, all literature locators remain `anchor:none`, and no
 source establishes project-level theorem applicability.
 
+## Phase-4 research-report advance
+
+The full report turns the four-layer dependency graph into a proof-first paper
+draft. It shows why the exact subgroup model, all 9,453 pair dispositions,
+deterministic root/inverse certificates, and the later `G`/`I`/`C` mapping are
+not interchangeable. Aggregate class counts stay controls rather than pairwise
+proofs. The concrete advance is a complete evidence-grounded report; no pair
+decision, owner partition, or estimand table has been executed.
+
 ## Route boundary
 
 This can refine A1 ownership only. The new tuple is `UNASSIGNED`; no primitive
@@ -71,7 +79,10 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+[full research report](notes/stage1_phase4_research_report.md),
+[Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
+[Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
 [Phase-3 synthesis](notes/stage1_phase3_synthesis.md),
 [independent Phase-3 DA](notes/stage1_phase3_devils_advocate.md),
 [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),

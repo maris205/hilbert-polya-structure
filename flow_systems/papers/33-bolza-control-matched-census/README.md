@@ -4,14 +4,13 @@ Working title: *An Exact Control-Matched Geodesic Census for the Frozen Bolza Ma
 
 ## Current status
 
-**STAGE 1 / `PHASE_3_COMPLETE` / `AWAITING_PHASE_4_CONFIRMATION`.** The frozen
-20-source corpus now has a complete source-effect matrix, five-theme synthesis,
-seven-claim synthesis precommitment, and six bounded pairwise tensions. The
-initial independent DA verdict of `REVISE` (0 Critical / 2 Major / 1 Minor)
-was closed by a synthesis-only patch and same-seat independent recheck
-(`PASS`, 0/0/0). No census, magnetic comparison, novelty assessment,
-scientific computation, formal project claim, Route evaluation, or manuscript
-result has run; Phase 4 is not authorized.
+**STAGE 1 / `PHASE_4_COMPLETE` / `AWAITING_PHASE_5_CONFIRMATION`.** The frozen
+20-source corpus now has a 3,968-word full research-report draft and eight
+fresh report-compiler claim intents. All 20 source IDs are cited and listed;
+the report contains 48 adjacent citation pairs and closes as
+`PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. No census, magnetic comparison,
+novelty assessment, scientific computation, formal project claim, Route
+evaluation, or manuscript result has run; Phase 5 is not authorized.
 
 ## Phase-2 literature progress and remaining gap
 
@@ -46,6 +45,15 @@ all exact theorem applicability remains unresolved; the six tension pairs are
 non-exhaustive and await scholar confirmation. The honest fallback remains
 `NOT_EVALUABLE_CONJUGACY_METHOD_UNAVAILABLE`.
 
+## Phase-4 research-report advance
+
+The full report gives `P33-RC-1` a seven-obligation, two-presentation
+certificate architecture and a bounded independent-validator plan. It keeps
+S06 `PLAUSIBLE` and page-unpinned, carries the S03/S16 correction bindings and
+S12 page range, and states an explicit material gap for exact claim locators.
+The concrete advance is a complete evidence-grounded report; all seven
+obligations remain unimplemented and no owner census has run.
+
 ## Inheritance and immutable restrictions
 
 This continues P28's unit-speed Bolza magnetic flow at `b=1/2`, signed-field
@@ -78,7 +86,10 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+[full research report](notes/stage1_phase4_research_report.md),
+[Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
+[Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
 [synthesis](notes/stage1_phase3_synthesis.md),
 [initial DA](notes/stage1_phase3_devils_advocate.md),
 [resolution](notes/stage1_phase3_resolution.md),

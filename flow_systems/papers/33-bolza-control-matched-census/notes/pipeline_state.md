@@ -2,7 +2,7 @@
 
 Date: **2026-09-02 UTC**
 
-Current controlling state: **STAGE 1 RESEARCH / PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION**.
+Current controlling state: **STAGE 1 RESEARCH / PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION**.
 The scholar's exact Phase-3 response `确认` is preserved in
 `BATCH_ROUND10_STAGE1_PHASE3_AUTHORIZATION_20260902.txt`, SHA-256
 `f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe`.
@@ -10,7 +10,11 @@ The scholar's exact Phase-3 response `确认` is preserved in
 | Item | Status |
 |---|---|
 | Pipeline global state | `awaiting_confirmation` |
-| ARS Stage 1 | `PHASE_3_COMPLETE` |
+| ARS Stage 1 | `PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION` |
+| Phase-4 authorization | `CONFIRMED`; raw event SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
+| Phase-4 checkpoint | `COMPLETE`; `stage1_phase4_checkpoint.md` |
+| Phase-4 composition | 3,968-word report, 8 fresh intents, 20/20 source IDs and 48 citation pairs; `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS` |
+| Phase-4 provenance correction | false local-as-UTC manifest time replaced by `2026-09-02T09:24:48Z`; claim content unchanged |
 | Phase-3 authorization | `CONFIRMED`; raw event SHA-256 `f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe` |
 | Phase-2 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE2_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Phase-2 checkpoint | `PHASE_2_COMPLETE`; `stage1_phase2_checkpoint.md` |
@@ -21,7 +25,7 @@ The scholar's exact Phase-3 response `确认` is preserved in
 | Initial DA Checkpoint 2 | `REVISE`; 0 Critical, 2 Major, 1 Minor, 5 Observations; `DA-SEAT-B` independent of `SYNTH-SEAT-C` |
 | Bounded synthesis resolution | `COMPLETE`; citations rebound 94/94, pairwise tension schema repaired, strengths normalized; manifest/matrix unchanged |
 | Independent DA recheck | `PASS`; 0 Critical, 0 Major, 0 Minor; initial findings closed 3/3 |
-| Phase 4 | `AWAITING_PHASE_4_CONFIRMATION`; authorization `false` |
+| Phase 5 | `AWAITING_PHASE_5_CONFIRMATION`; authorization `false` |
 | Inherited target | P28 unit-speed Bolza magnetic flow, `b=1/2`, even subtype |
 | Inherited control | source-locked nonarithmetic genus-two octagon |
 | Immutable cutoff | target-blind `Lambda=21/10` |
@@ -39,6 +43,6 @@ conjugacy, roots/primitivity, inversion pairing, subordinate exact predicates,
 and completeness with an independent checker. `P33-RC-1` remains open and no
 obligation has been implemented. The cutoff, signed-field subtype, clock,
 source locks, owner rules, systole confound, and incomplete A0 panel remain
-immutable. Phase 4 research-report composition requires a separate explicit
-confirmation and cannot itself promote science, claims, Route status, or a
-manuscript result.
+immutable. Phase 4 now supplies the full seven-obligation evidence-grounded
+report and cannot itself promote science, claims, Route status, or a manuscript
+result. Phase 5 review requires a separate explicit confirmation.

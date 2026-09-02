@@ -4,11 +4,10 @@ Working title: *Uniformity Limits for Time–Multiplicity Renormalization in Gen
 
 ## Current status
 
-**STAGE 1 RESEARCH / PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION.**
-Phase 3 was authorized under SHA-256
-`f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe`
-and closes with disposition `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`. The
-independent Devil's Advocate Checkpoint 2 verdict is `PASS`. Phase 4 is not
+**STAGE 1 RESEARCH / PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION.**
+The 26-source corpus now has a 3,747-word full research-report draft and eight
+fresh report-compiler claim intents. All 26 source IDs are cited and listed;
+the disposition is `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. Phase 5 is not
 authorized. Scientific computation, canonical-result refresh, novelty
 assessment, formal project claim registration, Route evaluation, and
 manuscript drafting remain `NOT_RUN` or not authorized.
@@ -65,6 +64,16 @@ every `k>=1`, with neighboring `N'_k=2*(k!)`; only `1<=k<=8` and
 `m in {8,16,32,64,128}` are finite diagnostics. No finite prefix carries
 limit, cofinality, or interchange evidence.
 
+## Phase-4 research-report advance
+
+The full report turns the four proof packages into one bounded paper narrative
+without collapsing their interfaces. It separately states the positive- and
+zero-content lift algebra, the exact infinite schedules, the finite diagnostic
+prefix, the pure/residual boundary, and the unresolved `CP-P32-004` formal
+construction. The concrete advance is a complete evidence-grounded report;
+no owner interface, lift factor, coefficient comparison, panel, or tail theorem
+has been executed.
+
 ## Route boundary
 
 This is a generic proves-too-much calibration. The new tuple is `UNASSIGNED`;
@@ -75,7 +84,10 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+[full research report](notes/stage1_phase4_research_report.md),
+[Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
+[Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
 [Phase-3 synthesis](notes/stage1_phase3_synthesis.md),
 [independent Phase-3 DA](notes/stage1_phase3_devils_advocate.md),
 [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),

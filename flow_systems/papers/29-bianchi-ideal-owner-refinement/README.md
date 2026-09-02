@@ -5,10 +5,12 @@ Bianchi Geodesic Flow*
 
 ## Current status
 
-**STAGE 1 / `PHASE_3_COMPLETE` / `AWAITING_PHASE_4_CONFIRMATION`.** The
-hash-bound 22-source corpus has completed evidence synthesis with disposition
-`PHASE3_SYNTHESIS_READY_WITH_WARNINGS`, and independent Devil's Advocate
-Checkpoint 2 returned `PASS`. Phase 4 is not authorized. The closeout retains
+**STAGE 1 / `PHASE_4_COMPLETE` / `AWAITING_PHASE_5_CONFIRMATION`.** The
+hash-bound 22-source corpus now has a 3,384-word full research-report draft and
+eight fresh report-compiler claim intents. All 22 source IDs are cited and
+listed, and the Phase-4 disposition is
+`PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. Phase 5 is not authorized. The
+closeout retains
 `SCIENTIFIC_COMPUTATION=NOT_RUN`, `NOVELTY_ASSESSMENT=NOT_RUN`,
 `FORMAL_PROJECT_CLAIM_REGISTRATION=0/1`, `FORMAL_ROUTE_A_TUPLES=0/1`,
 `ROUTE_B=CLOSED`, and `MANUSCRIPT_DRAFTING=NOT_AUTHORIZED`.
@@ -69,6 +71,16 @@ of verified diacritics before manuscript reuse, every synthesis citation has
 `anchor:none`, and the correction-bound/preprint/integrity limitations remain
 in force.
 
+## Phase-4 research-report advance
+
+The full report now states the two kill gates as a coherent publishable
+research program and restores verified diacritics in the report reference
+layer. It keeps formula selection, quotient construction, prospective
+partitioning, finite refinement, and controls in their correct order. The
+concrete advance is a complete evidence-grounded paper draft; it is not an
+executed mechanism, quotient, or finite result. All report citations retain
+the visible `anchor:none` warning.
+
 ## Route boundary
 
 This is an A0–A1 continuation only. Its formal Route-A tuple is `UNASSIGNED` at
@@ -86,7 +98,10 @@ evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+[full research report](notes/stage1_phase4_research_report.md),
+[Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
+[Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
 [evidence synthesis](notes/stage1_phase3_synthesis.md),
 [independent Devil's Advocate review](notes/stage1_phase3_devils_advocate.md),
 [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
