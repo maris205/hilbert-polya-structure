@@ -1,0 +1,229 @@
+\pdfvariable trailerid {[<C3002026090200000000000000000000><C3002026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\R}{\mathbb R}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\ee}{\mathrm e}
+\newcommand{\sgn}{\operatorname{sgn}}
+\setlength{\emergencystretch}{2em}
+\title{The Complete Positive-Density Riemann Atlas\\
+for One-Dimensional Isothermal Euler Flow}
+\author{Route-A source-local certificate HCS-C300}
+\date{2 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For one-dimensional isothermal Euler flow at sound speed $a>0$, we reduce
+every positive-density Riemann problem to one strictly monotone scalar
+equation.  Its unique root yields the intermediate density and all four
+shock/rarefaction patterns with exact fan profiles and Rankine--Hugoniot
+speeds.
+\ifnum\CRevisionRound>0
+We prove the Lax inequalities, strict mechanical-entropy selection and the
+absence of vacuum for every finite velocity jump.
+\fi
+\ifnum\CRevisionRound>1
+Zero-strength waves, density scaling and the singular pressureless limit are
+closed separately, and an executable certificate checks every branch without
+turning source wave data into target arithmetic evidence.
+\fi
+\end{abstract}
+
+\section{One scalar equation for the full solver}
+Let $U=(\rho,m)$, $m=\rho u$, and
+\begin{equation}\label{eq:euler}
+ U_t+F(U)_x=0,
+ \qquad F(U)=\left(m,\frac{m^2}{\rho}+a^2\rho\right),
+ \qquad a>0,\quad \rho>0.
+\end{equation}
+The characteristic speeds are $\lambda_1=u-a$ and $\lambda_2=u+a$.
+For $r,r_0>0$ define the continuous $C^1$, strictly increasing function
+\begin{equation}\label{eq:f}
+ f(r;r_0)=
+ \begin{cases}
+ a\log(r/r_0),&0<r\le r_0,\\[2pt]
+ a(r-r_0)/\sqrt{rr_0},&r\ge r_0.
+ \end{cases}
+\end{equation}
+
+\begin{theorem}[Complete positive-density Riemann solver]\label{thm:main}
+For arbitrary left and right states $(\rho_L,u_L),(\rho_R,u_R)$ with positive
+density and finite velocity, there is a unique $\rho_*>0$ satisfying
+\begin{equation}\label{eq:root}
+ f(\rho_*;\rho_L)+f(\rho_*;\rho_R)+u_R-u_L=0.
+\end{equation}
+The unique intermediate velocity is
+\begin{equation}\label{eq:ustar}
+ u_*=u_L-f(\rho_*;\rho_L)=u_R+f(\rho_*;\rho_R).
+\end{equation}
+The 1-wave from $L$ to $*$ is a rarefaction, zero wave, or Lax shock as
+$\rho_*<\rho_L$, $=$, or $>$; the 2-wave from $*$ to $R$ has the analogous
+classification relative to $\rho_R$.  These waves and the constant
+intermediate sector form the unique self-similar Lax entropy solution.
+In particular, no finite datum in this chamber produces vacuum.
+\end{theorem}
+
+\begin{proof}
+For fixed $r_0$, the two derivatives of $f(\cdot;r_0)$ are
+$a/r$ and $a(r+r_0)/(2r\sqrt{rr_0})$, respectively.  They are positive and
+meet at $a/r_0$; moreover $f$ ranges from $-\infty$ to $+\infty$.
+Hence the left side of~\eqref{eq:root} has exactly one positive
+zero;~\eqref{eq:ustar} is then forced.  The logarithmic branch is obtained by
+integrating $\dd u=\mp a\,\dd\rho/\rho$ on the two integral curves.  Eliminating
+the shock speed from the Rankine--Hugoniot equations gives
+\begin{equation}\label{eq:hugoniot}
+ (u-u_0)^2=a^2\frac{(\rho-\rho_0)^2}{\rho\rho_0}.
+\end{equation}
+The compressive sign in family 1 is negative and that in family 2 is positive,
+which gives the second branch of~\eqref{eq:f}.  The explicit formulas and
+entropy check below complete the construction.  Positivity of the unique
+root proves the no-vacuum assertion.
+\end{proof}
+
+\section{The four patterns in one table}
+The two comparisons with the unique root give the full atlas.
+\begin{center}
+\begin{tabular}{ccl}
+\toprule
+comparison & family & wave\\
+\midrule
+$\rho_*<\rho_L$ & 1 & rarefaction\\
+$\rho_*>\rho_L$ & 1 & shock\\
+$\rho_*<\rho_R$ & 2 & rarefaction\\
+$\rho_*>\rho_R$ & 2 & shock\\
+\bottomrule
+\end{tabular}
+\end{center}
+Equality deletes the wave continuously.  Thus the two independent signs
+produce rarefaction--rarefaction, rarefaction--shock, shock--rarefaction, and
+shock--shock solutions without separate existence arguments.
+
+For a 1-rarefaction, on $u_L-a\le\xi\le u_*-a$,
+\begin{equation}\label{eq:r1}
+ u(\xi)=\xi+a,\qquad
+ \rho(\xi)=\rho_L\exp\!\left(\frac{u_L-u(\xi)}a\right).
+\end{equation}
+For a 2-rarefaction, on $u_*+a\le\xi\le u_R+a$,
+\begin{equation}\label{eq:r2}
+ u(\xi)=\xi-a,\qquad
+ \rho(\xi)=\rho_R\exp\!\left(\frac{u(\xi)-u_R}a\right).
+\end{equation}
+If $r_L=\rho_*/\rho_L>1$, the 1-shock speed is
+\begin{equation}\label{eq:s1}
+ s_1=u_L-a\sqrt{r_L}=u_*-\frac a{\sqrt{r_L}}.
+\end{equation}
+If $r_R=\rho_*/\rho_R>1$, the 2-shock speed is
+\begin{equation}\label{eq:s2}
+ s_2=u_R+a\sqrt{r_R}=u_*+\frac a{\sqrt{r_R}}.
+\end{equation}
+
+\ifnum\CRevisionRound>0
+\section{Lax ordering and mechanical entropy}
+Equations~\eqref{eq:s1}--\eqref{eq:s2} give, by direct subtraction,
+\begin{equation}\label{eq:lax}
+ u_*-a<s_1<u_L-a,\qquad
+ u_R+a<s_2<u_*+a,
+\end{equation}
+whenever the corresponding shock exists.  The fan speeds in
+\eqref{eq:r1}--\eqref{eq:r2} increase from left to right.  Every 1-wave lies
+below $u_*$ and every 2-wave lies above $u_*$, so their ordering is strict.
+
+In conservative variables a strictly convex entropy pair is
+\begin{equation}\label{eq:entropy}
+ \eta(\rho,m)=\frac{m^2}{2\rho}+a^2\rho\log\rho,
+ \qquad q(\rho,m)=u\bigl(\eta+a^2\rho\bigr).
+\end{equation}
+Indeed, $\eta_{mm}=1/\rho>0$ and
+$\det D^2\eta=a^2/\rho^2>0$.  Smooth fans satisfy equality in the entropy
+law.  For either shock, let $r>1$ be the compressed-to-outer density ratio
+and let $\rho_0$ be that outer, lower density.  Direct substitution gives
+\begin{equation}\label{eq:entropyproduction}
+ [q]-s[\eta]=a^3\rho_0\sqrt r
+ \left[\log r-\frac12(r-r^{-1})\right]<0.
+\end{equation}
+Indeed, $h(r)=\frac12(r-r^{-1})-\log r$ obeys $h(1)=0$ and
+$h'(r)=(r-1)^2/(2r^2)>0$.  Thus the compressive signs selected in
+\eqref{eq:lax} are strictly entropy admissible; the opposite algebraic signs
+are expansive and violate the Lax condition.
+
+Every self-similar Lax solver with the prescribed family order must follow
+these exhaustive 1- and 2-wave curves.  Their unique intersection from
+Theorem~\ref{thm:main}, together with the strict wave ordering above, proves
+uniqueness of the assembled two-wave entropy solution.
+
+The same monotonicity that constructs $\rho_*$ gives a useful global fact.
+Even when $u_R-u_L$ is arbitrarily large, the left side of~\eqref{eq:root}
+reaches it only at a strictly positive root.  Unlike the $\gamma>1$
+polytropic case, the logarithm diverges at zero and prevents a finite-data
+vacuum gap.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Boundaries, executable evidence, and Route A}
+Common multiplication of $\rho_L,\rho_R,\rho_*$ by a positive constant leaves
+all velocities, density ratios, branch choices and wave speeds invariant.
+If either comparison in the table is equality, that wave has zero strength;
+if both are equal, the datum is constant.  Initial vacuum is excluded rather
+than hidden behind the logarithm.
+
+The limit $a\downarrow0$ is singular: the two eigenvalues merge and
+\eqref{eq:root} loses coercivity.  For example, with
+$\rho_L=\rho_R=1$ and $u_R-u_L=1$, the rarefaction--rarefaction root is
+$\rho_*=e^{-1/(2a)}\downarrow0$.  Reversing the velocity jump gives a
+shock--shock root $\rho_*=y^2$, where $y-y^{-1}=1/(2a)$, so
+$\rho_*\to\infty$.  These exact opposite limits expose vacuum and
+concentration scales; this paper makes no pressureless-limit solution
+theorem.
+
+The accompanying exact certificate reconstructs rational shock cases,
+logarithmic rarefaction cases, all four patterns, residual signs, Lax ordering,
+density scaling and vanishing waves with an independent checker and symbolic
+lane.  These finite rows regress formulas; Theorem~\ref{thm:main} follows from
+the analytic monotonicity and entropy argument.
+
+C195 concerns scalar periodic viscous Burgers dynamics; the present owner is
+a two-field inviscid Riemann flow.  Its strict Route-A tuple is
+$(\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+\mathrm{A3\_FAIL},\mathrm{A4\_FAIL})$, and Route B is locked.  Continuous
+wave data and a finite entropy fan are not prime-indexed primitive orbits, an
+arithmetic clock, a target determinant, or a Hilbert--P\'olya operator.
+The overall verdict is \texttt{ROUTE\_A\_REJECTED}.
+The literal scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\fi
+
+\section*{Literature ownership and AI-use statement}
+The characteristic, shock and Riemann-solver framework belongs to the
+classical theory of hyperbolic conservation laws and gas dynamics
+\cite{Lax1957,RozhdestvenskiiJanenko1983,Dafermos2010}.  We claim no literary
+priority; this source-local paper derives the frozen isothermal case
+completely.  AI tools assisted algebraic checking, hostile boundary review
+and manuscript preparation.  Every theorem and computation is exposed for
+independent verification.
+
+\begin{thebibliography}{9}
+\bibitem{Lax1957}
+P. D. Lax, ``Hyperbolic systems of conservation laws II,''
+\emph{Communications on Pure and Applied Mathematics} 10 (1957), 537--566.
+DOI: \href{https://doi.org/10.1002/cpa.3160100406}{10.1002/cpa.3160100406}.
+
+\bibitem{RozhdestvenskiiJanenko1983}
+B. L. Rozhdestvenskii and N. N. Janenko,
+\emph{Systems of Quasilinear Equations and Their Applications to Gas
+Dynamics}, AMS, 1983. DOI:
+\href{https://doi.org/10.1090/mmono/055}{10.1090/mmono/055}.
+
+\bibitem{Dafermos2010}
+C. M. Dafermos, \emph{Hyperbolic Conservation Laws in Continuum Physics},
+3rd ed., Springer, 2010. DOI:
+\href{https://doi.org/10.1007/978-3-642-04048-1}{10.1007/978-3-642-04048-1}.
+\end{thebibliography}
+
+\end{document}

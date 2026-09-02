@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C299--C303
+
+This round takes five independent theorem-scale steps while changing the
+dynamical owner, state space, clock and proof mechanism in every paper: a
+viscous radial vorticity PDE, a strictly hyperbolic conservation law, an
+absorbing partition-lattice chain, a recursive random algorithm and a
+dissipative quantum channel.  These are five complete papers, not five
+installments of one theorem.
+
+- [C299 Lamb--Oseen radial self-similar vortex](henon_lamb_oseen_self_similar_vortex_route_a/README.md) · [paper PDF](henon_lamb_oseen_self_similar_vortex_route_a/paper/main.pdf)
+- [C300 positive-density isothermal Euler Riemann solver](henon_isothermal_euler_riemann_solver_route_a/README.md) · [paper PDF](henon_isothermal_euler_riemann_solver_route_a/paper/main.pdf)
+- [C301 parallel binary partition fragmentation](henon_parallel_binary_partition_fragmentation_route_a/README.md) · [paper PDF](henon_parallel_binary_partition_fragmentation_route_a/paper/main.pdf)
+- [C302 randomized Quicksort comparison-cost contraction](henon_quicksort_comparison_contraction_route_a/README.md) · [paper PDF](henon_quicksort_comparison_contraction_route_a/paper/main.pdf)
+- [C303 thermal-qubit Lindblad entanglement-breaking atlas](henon_thermal_qubit_lindblad_entanglement_breaking_route_a/README.md) · [paper PDF](henon_thermal_qubit_lindblad_entanglement_breaking_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C299_C303.md),
+[batch plan](BATCH_PLAN_C299_C303.md), and
+[batch review](BATCH_REVIEW_C299_C303.md) for collision screening, theorem
+contracts, historical ownership, hostile-review repairs, exact release
+receipts and deterministic PDFs.  Across the five packages the final audit
+closes **15,070** independent-checker assertions, **20,524** symbolic checks,
+**358/358** hostile rejections, **722,186** evidence bytes, 135 manifest
+payloads (140 physical files), and **16** final-paper pages with **116**
+embedded/subset font records.  The five strict tuples, in order C299--C303,
+are
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C294--C298
 
 This round takes five independent theorem-scale steps while changing the

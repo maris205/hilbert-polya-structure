@@ -1,0 +1,254 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,microtype}
+\usepackage[hidelinks]{hyperref}
+\providecommand{\CRevisionRound}{2}
+\ifdefined\pdfvariable
+  \pdfvariable suppressoptionalinfo 767
+\fi
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Part}{\mathfrak P}
+\newcommand{\rank}{\operatorname{rk}}
+\newcommand{\fall}[2]{(#1)_{#2}}
+\title{Parallel Binary Refinement of Labelled Set Partitions:\
+Exact Kernels, Spectrum, and the Last-Collision Threshold}
+\author{Route-A Dynamics Working Note C301}
+\date{2 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We solve a synchronous fragmentation chain on the labelled set partitions of
+$[n]$.  At every step each label receives a fresh fair bit and each current
+block is refined by its two nonempty bit fibres.  A coupling by binary words
+gives the full $t$-step kernel from every starting partition, the complete
+law of the number of blocks, and the exact absorption-time distribution.
+The transition matrix has eigenvalues $2^{k-n}$ with Stirling multiplicities
+$S(n,k)$.
+\ifnum\CRevisionRound>0
+A refinement flag and a genuine lowering argument give a squarefree
+annihilating polynomial, closing the diagonalizability gap that triangularity
+alone would leave.  The absorption window is the birthday window:
+$n^2/2^t\to\lambda$ gives the limit $e^{-\lambda/2}$, with its dyadic lattice
+boundary kept explicit.
+\fi
+\ifnum\CRevisionRound>1
+An exact, independently checked finite certificate accompanies the analytic
+proof.  A hostile Route-A audit returns
+$(\mathrm{A0},\ldots,\mathrm{A4})=(\mathrm{FAIL},\ldots,\mathrm{FAIL})$;
+the finite Markov determinant is not promoted to arithmetic data.
+\fi
+\end{abstract}
+
+\section{The labelled parallel-fragmentation chain}
+
+Let $n\geq1$ and let $\Part_n$ be the set of labelled set partitions of
+$[n]=\{1,\ldots,n\}$.  Write $\pi\preceq\sigma$ when $\sigma$ refines
+$\pi$.  Starting from $\Pi_0=\pi$, every label independently receives a
+fresh bit in $\{0,1\}$.  In each block of $\pi$, labels with equal bits stay
+together; empty fibres are deleted.  The resulting partition is $\Pi_1$.
+Updates use fresh independent bits.
+
+This is a synchronous chain: all blocks are marked in parallel.  Labels are
+part of the state.  In particular, quotienting by block sizes produces a
+different chain and different spectral multiplicities.  Put
+\[
+  \fall qr=q(q-1)\cdots(q-r+1),\qquad \fall q0=1,
+\]
+and let $S(n,k)$ denote a Stirling number of the second kind.  For
+$\pi\preceq\sigma$, let $r_B(\pi,\sigma)$ be the number of $\sigma$-blocks
+contained in $B\in\pi$.
+
+\section{Complete law}
+
+\begin{theorem}[all-parameter solution]\label{thm:main}
+For every $n\geq1$, $t\geq0$, and $\pi,\sigma\in\Part_n$, with $q=2^t$,
+\begin{equation}\label{eq:t-kernel}
+ K_n^t(\pi,\sigma)=
+ \mathbf 1_{\{\pi\preceq\sigma\}}
+ \prod_{B\in\pi}\frac{\fall q{r_B(\pi,\sigma)}}{q^{|B|}}.
+\end{equation}
+Consequently, the one-step probability equals $2^{|\pi|-n}$ precisely when
+$\sigma$ refines $\pi$ and each $\pi$-block contains at most two
+$\sigma$-blocks, and equals zero otherwise.
+
+From the one-block initial partition, for every $\sigma\in\Part_n$ and
+$1\leq k\leq n$,
+\begin{align}
+ \Pr\{\Pi_t=\sigma\}&=\frac{\fall {2^t}{|\sigma|}}{2^{tn}},
+ \label{eq:partition-law}\\
+ \Pr\{|\Pi_t|=k\}&=S(n,k)\frac{\fall {2^t}k}{2^{tn}},
+ \label{eq:block-law}\\
+ \mathbb E|\Pi_t|&=2^t\bigl[1-(1-2^{-t})^n\bigr].
+ \label{eq:mean-blocks}
+\end{align}
+Let $T_n=\min\{t:\Pi_t\text{ is discrete}\}$.  Then
+\begin{align}
+ \Pr\{T_n\leq t\}&=\frac{\fall {2^t}n}{2^{tn}},
+ \label{eq:cdf}\\
+ \Pr\{T_n=t\}&=\frac{\fall {2^t}n}{2^{tn}}
+ -\mathbf 1_{\{t\geq1\}}\frac{\fall {2^{t-1}}n}{2^{(t-1)n}},
+ \label{eq:mass}\\
+ \mathbb ET_n&=\sum_{t\geq0}
+ \left[1-\frac{\fall {2^t}n}{2^{tn}}\right].
+ \label{eq:mean-time}
+\end{align}
+The series converges.  The characteristic polynomial, source spectral
+determinant, and power traces are
+\begin{align}
+ \chi_{K_n}(x)&=\prod_{k=1}^n
+    (x-2^{k-n})^{S(n,k)},\label{eq:charpoly}\\
+ \det(I-zK_n)&=\prod_{k=1}^n
+    (1-z2^{k-n})^{S(n,k)},\label{eq:det}\\
+ \operatorname{tr}(K_n^t)&=\sum_{k=1}^nS(n,k)2^{t(k-n)}.
+ \label{eq:trace}
+\end{align}
+Moreover,
+\begin{equation}\label{eq:annihilator}
+ \prod_{k=1}^n(K_n-2^{k-n}I)=0,
+\end{equation}
+so $K_n$ is diagonalizable over $\mathbb Q$.
+
+Finally, if $n_j\to\infty$, $t_j$ are integers, and
+$n_j^2/2^{t_j}\to\lambda\in(0,\infty)$, then
+\begin{equation}\label{eq:critical}
+ \Pr\{T_{n_j}\leq t_j\}\longrightarrow e^{-\lambda/2}.
+\end{equation}
+Thus $T_n$ has a tight $O(1)$ window around $2\log_2n$.
+\end{theorem}
+
+\section{Binary-word proof}
+
+After $t$ updates, attach to label $i$ the word formed by its successive
+bits.  These words are independent and uniform in a set of size $q=2^t$.
+Inside each starting block $B$, two labels are together at time $t$ exactly
+when their words agree.  To realize $r_B$ prescribed terminal fibres one
+must injectively assign words to those fibres.  There are $\fall q{r_B}$
+assignments.  Starting blocks use disjoint label sets, hence their counts
+multiply, proving \eqref{eq:t-kernel}.  Taking $t=1$ gives the stated
+one-step kernel.
+
+For a one-block start, a fixed $k$-block partition has probability
+$\fall qk/q^n$.  There are $S(n,k)$ such labelled partitions, yielding
+\eqref{eq:partition-law} and \eqref{eq:block-law}; the identity
+$\sum_k S(n,k)\fall qk=q^n$ also verifies normalization.  Alternatively,
+$|\Pi_t|$ is the number of occupied boxes after $n$ independent throws into
+$q$ boxes.  Summing the $q$ occupancy indicators proves
+\eqref{eq:mean-blocks}.
+
+Absorption means that all $n$ words are distinct, which proves
+\eqref{eq:cdf}; differencing successive distribution functions gives
+\eqref{eq:mass}.  The tail-sum formula gives \eqref{eq:mean-time}.  A union
+bound gives
+\[
+  \Pr\{T_n>t\}\leq \binom n2 2^{-t},
+\]
+so the tail series converges.  For $n=1$, all formulas reduce to $T_1=0$.
+The contract begins at $n=1$; the empty-set convention $n=0$ is not used.
+
+\ifnum\CRevisionRound>0
+\section{The spectral flag and its missing step}
+
+Order states by their number of blocks.  Refinement makes $K_n$ triangular.
+A $k$-block state stays unchanged exactly when every block receives a
+constant bit; the $2^k$ successful assignments among $2^n$ have probability
+\(\lambda_k=2^{k-n}\).  Hence the diagonal rank-$k$ block is
+$\lambda_k I_{S(n,k)}$, proving \eqref{eq:charpoly};
+\eqref{eq:det} and \eqref{eq:trace} follow once diagonalizability is closed.
+
+Triangularity alone is not that closure.  Let $V_k$ be the span of basis
+vectors indexed by partitions of rank at most $k$, with the conventional
+column action of the displayed transition matrix.  The spaces
+$0\subset V_1\subset\cdots\subset V_n$ are invariant, and
+$(K_n-\lambda_k I)V_k\subseteq V_{k-1}$.  Since all polynomial factors in
+$K_n$ commute, applying the factors in descending rank lowers this flag one
+step at a time.  Their product kills $V_n$, proving
+\eqref{eq:annihilator}.  The roots $\lambda_1,\ldots,\lambda_n$ are distinct,
+so the minimal polynomial is squarefree and $K_n$ is diagonalizable over
+$\mathbb Q$.  This also justifies the trace formula without any hidden
+Jordan-block assumption.
+
+\section{Birthday threshold and lattice boundary}
+
+Write $q_j=2^{t_j}$.  Under the hypotheses of \eqref{eq:critical},
+$n_j/q_j\to0$ and
+\begin{align*}
+ \log\frac{\fall {q_j}{n_j}}{q_j^{n_j}}
+ &=\sum_{r=0}^{n_j-1}\log(1-r/q_j)\\
+ &=-\frac{n_j(n_j-1)}{2q_j}
+   +O\!\left(\frac{n_j^3}{q_j^2}\right)
+ \longrightarrow-\lambda/2.
+\end{align*}
+Exponentiation proves \eqref{eq:critical}.  The same product, together with
+the union bound above, yields tightness around $2\log_2n$.
+
+There is an essential lattice qualification.  Because $t$ is integer and
+$q=2^t$, the quantity $n^2/2^{\lfloor2\log_2n+c\rfloor}$ need not converge
+without controlling its dyadic phase.  We therefore assert the limit only
+along sequences for which that ratio converges; no phase-free continuous law
+for $T_n-2\log_2n$ is claimed.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact certificate and hostile boundary audit}
+
+The machine-readable certificate is not used to replace the proof.  It
+enumerates all $278$ labelled partitions for $1\leq n\leq6$, reconstructs
+all $1{,}860$ nonzero transition cells independently, and checks $81$ exact
+time-law rows for $1\leq n\leq9$ and $0\leq t\leq8$.  A separate SymPy
+implementation verifies characteristic polynomials, determinants,
+squarefree annihilators, eigenspace dimensions, and $t$-step kernels through
+$n=5$.  Deterministic replay and a mutation suite protect the serialization,
+formula, scope, and evaluation contracts.  These finite checks are regression
+evidence only; Theorem~\ref{thm:main} is global because of the preceding
+word coupling and flag proof.
+
+The closest source owner is the Hopf-power/rock-breaking framework of
+Diaconis, Pang, and Ram~\cite{DPR}.  Their unlabelled integer-partition
+rock-breaking chain and labelled-graph examples make clear that binary
+breaking, absorption, and Hopf diagonalization are established mechanisms.
+This note claims neither priority nor a new general Hopf-algebra theorem.  Its
+closed contribution is a self-contained labelled-set-partition formulation
+with the complete kernel, occupancy law, exact last-collision distribution,
+elementary spectral-flag proof, and executable audit in one contract.
+
+The Route-A tuple is
+\[
+ (A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+ \mathrm{FAIL},\mathrm{FAIL}),
+ \qquad \texttt{ROUTE\_A\_REJECTED}.
+\]
+There is no arithmetic local datum or Euler factor (A0).  Refinement has no
+nonconstant directed cycle---only self-loops---and therefore no primitive
+orbit repetition law (A1).  Ordinary integer time and the scale $2^t$ are not
+an arithmetic logarithmic clock (A2).  Although \eqref{eq:det} is exact, it
+is a finite source Markov polynomial, not a target completed determinant or
+functional equation (A3).  Finally, rational diagonalizability is not a
+self-adjoint target-zero lift (A4).  Route B is locked under the literal
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER} scope.
+
+Three model mutations are outside the theorem: assigning one shared bit per
+block prevents splitting; biased label bits replace the uniform injection
+count; and quotienting by block sizes changes the state space and Stirling
+multiplicities.  These are different systems, not harmless reparametrizations.
+
+\paragraph{AI-use statement.}
+An AI assistant helped draft prose and executable checks.  The formulas were
+rederived independently, finite claims were regenerated from exact arithmetic,
+and the final logical and scope assertions remain the responsibility of the
+release author.
+\fi
+
+\begin{thebibliography}{1}
+\bibitem{DPR}
+P. Diaconis, C. Y. A. Pang, and A. Ram,
+``Hopf algebras and Markov chains: two examples and a theory,''
+\emph{Journal of Algebraic Combinatorics} (2014),
+doi:10.1007/s10801-013-0456-7; arXiv:1206.3620.
+\end{thebibliography}
+
+\end{document}

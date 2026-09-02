@@ -3,6 +3,32 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C299--HCS-C303 additions (2026-09-02)
+
+Five independent cross-subtype candidates were frozen from baseline
+`83c058259c02707d004fca2d6b1a4ebaf5036094`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C299 | In the finite-circulation radial forward self-similar class, the two-dimensional Navier--Stokes vorticity is uniquely the Gaussian Lamb--Oseen vortex; its Biot--Savart field, fixed-radius Lagrangian winding, moments, dissipation and singular limits are explicit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Lamb--Oseen package](../henon_lamb_oseen_self_similar_vortex_route_a/) · [paper PDF](../henon_lamb_oseen_self_similar_vortex_route_a/paper/main.pdf) |
+| HCS-C300 | Every positive-density Riemann datum for one-dimensional isothermal Euler at positive sound speed has a unique self-similar Lax solution obtained from one strictly monotone scalar equation; all four wave patterns, exact profiles/speeds, strict mechanical-entropy production, no-vacuum theorem and pressureless boundary are closed. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [isothermal-Euler package](../henon_isothermal_euler_riemann_solver_route_a/) · [paper PDF](../henon_isothermal_euler_riemann_solver_route_a/paper/main.pdf) |
+| HCS-C301 | Parallel fair-bit refinement of a finite set partition has an exact full-lattice kernel, every-time law, Stirling-multiplicity spectrum and absorption distribution; its dyadic birthday window converges sharply to `exp(-lambda/2)`. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [partition-fragmentation package](../henon_parallel_binary_partition_fragmentation_route_a/) · [paper PDF](../henon_parallel_binary_partition_fragmentation_route_a/paper/main.pdf) |
+| HCS-C302 | Randomized single-pivot Quicksort has exact comparison-cost PGFs, mean and variance at every input size, while the centered normalized costs converge in `L^2` to the unique contraction fixed point; an exact nonzero third moment proves that the limit is not Gaussian. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Quicksort package](../henon_quicksort_comparison_contraction_route_a/) · [paper PDF](../henon_quicksort_comparison_contraction_route_a/paper/main.pdf) |
+| HCS-C303 | The thermal amplitude-damping plus pure-dephasing qubit GKSL semigroup has an exact affine Bloch flow, Liouvillian spectrum and trace contraction coefficient; its Choi/PPT determinant gives the sharp finite entanglement-breaking threshold and all one-sided, dephasing, unitary and identity faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [thermal-qubit package](../henon_thermal_qubit_lindblad_entanglement_breaking_route_a/) · [paper PDF](../henon_thermal_qubit_lindblad_entanglement_breaking_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively a viscous vorticity PDE, a hyperbolic conservation
+law, an absorbing partition-lattice chain, a recursive random algorithm and
+a quantum CPTP semigroup.  No target local datum, Euler factor, root number,
+automorphy object, target divisor/counting law or functional equation, target
+zero match, Hilbert--Pólya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting are
+recorded in [BATCH_REVIEW_C299_C303.md](../BATCH_REVIEW_C299_C303.md).
+
 ## HCS-C294--HCS-C298 additions (2026-09-02)
 
 Five independent cross-subtype candidates were frozen from baseline

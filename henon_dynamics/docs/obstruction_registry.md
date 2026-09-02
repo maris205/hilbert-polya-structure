@@ -17,6 +17,22 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C299--HCS-C303 additions (2026-09-02)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O283 | HCS-C299 Lamb--Oseen similarity variables as arithmetic orbit owners | proved dissipative-continuum obstruction | Radial advection cancels and viscosity drives a Gaussian heat profile with strictly decreasing enstrophy.  Particle radii are fixed while angles wind by a continuously parameterized physical clock; these nonisolated trajectories provide no rational-prime carrier, logarithmic-prime roof, primitive-orbit determinant or target divisor. | The exact self-similar uniqueness theorem, velocity, Lagrangian angle, moments, dissipation and core/singular-age/inviscid faces survive inside the declared radial class. | ../henon_lamb_oseen_self_similar_vortex_route_a/THEOREM_PACKAGE.md |
+| HEN-O284 | HCS-C300 Riemann waves as arithmetic primitive trajectories | proved self-similar-entropy and continuous-state obstruction | Each datum generates a finite self-similar fan of entropy shocks and rarefactions, not recurrent isolated primitive dynamics.  Density, velocity and sound speed vary continuously and give neither prime labels nor a logarithmic clock, target determinant or target divisor. | The unique positive intermediate state and self-similar Lax solution, four wave types, exact profiles/speeds, strict mechanical-entropy production, no-vacuum theorem and pressureless failure boundary survive. | ../henon_isothermal_euler_riemann_solver_route_a/THEOREM_PACKAGE.md |
+| HEN-O285 | HCS-C301 partition eigenvalues as an arithmetic Euler factor | proved absorbing finite-chain obstruction | The refinement order is monotone and absorption occurs almost surely; no nontrivial recurrent orbit or primitive cycle survives.  The dyadic eigenvalues arise from fair-bit collision probabilities and are source transition data, not rational-prime local factors, an arithmetic roof, a target determinant or target divisor. | The exact full-lattice kernel and spectrum, every-time law, absorption distribution and sharp dyadic birthday threshold survive. | ../henon_parallel_binary_partition_fragmentation_route_a/THEOREM_PACKAGE.md |
+| HEN-O286 | HCS-C302 recursive costs as an arithmetic dynamical spectrum | proved algorithm-input and distributional-recursion obstruction | `n` is input size rather than an intrinsic flow clock, and the Quicksort recurrence decomposes random subproblems rather than iterating one state around isolated primitive cycles.  Its PGFs and contraction fixed point furnish no prime carrier, logarithmic roof, target determinant or target divisor. | Every finite cost PGF, exact mean/variance, centered `L^2` limit, fixed-point uniqueness and non-Gaussian third moment survive. | ../henon_quicksort_comparison_contraction_route_a/THEOREM_PACKAGE.md |
+| HEN-O287 | HCS-C303 Liouvillian/Choi eigenvalues as a target spectral owner | proved dissipative-channel and continuous-rate obstruction | The channel is a finite-dimensional contractive CPTP semigroup with continuously chosen damping, dephasing and Hamiltonian rates.  Its Liouvillian and Choi spectra are source quantum-channel data; relaxation and finite entanglement breaking supply no isolated prime-indexed orbit ledger, target determinant, zero match or Hilbert--Pólya operator. | The exact affine semigroup, stationary state, spectrum, trace contraction, Choi/PPT threshold and all degenerate parameter faces survive. | ../henon_thermal_qubit_lindblad_entanglement_breaking_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under the frozen radial-similarity,
+Euler-state, fair-bit, Quicksort-cost and qubit-basis conventions.  They do
+not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C294--HCS-C298 additions (2026-09-02)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

@@ -1,0 +1,272 @@
+\pdfvariable trailerid {[<C2992026090200000000000000000000><C2992026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\Ei}{\operatorname{Ei}}
+\setlength{\emergencystretch}{3em}
+\title{The Radial Lamb--Oseen Similarity Class:\\
+Uniqueness, Exact Particle Angles, and Dissipation Boundaries}
+\author{Route-A source-local certificate HCS-C299}
+\date{2 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We classify the bounded-at-origin, finite-circulation, radial forward-self-
+similar solutions of the planar viscous vorticity equation: the signed
+Lamb--Oseen Gaussian is the entire declared class.
+\ifnum\CRevisionRound=0
+We reconstruct its velocity, integrate every positive-radius particle path,
+and give all radial moments, finite $L^p$ norms, enstrophy, and palinstrophy.
+\fi
+\ifnum\CRevisionRound>0
+Beyond exact Eulerian and Lagrangian formulas, we separate the zero-age,
+inviscid, origin-particle, long-time, recurrence, and infinite-energy
+boundaries without extending uniqueness to arbitrary vortices.
+\fi
+\ifnum\CRevisionRound>1
+A 213-cell evidence certificate and independent symbolic, replay, mutation,
+and deterministic-build lanes support regression; the analytic proof remains
+global.  The resulting Route-A tuple is five explicit failures.
+\fi
+\end{abstract}
+
+\section{Declared class and complete classification}
+On $\R^2$ consider
+\begin{equation}\label{eq:NS}
+ \partial_t\omega+u\cdot\nabla\omega=\nu\Delta\omega,
+ \qquad \nabla\cdot u=0,\qquad \operatorname{curl}u=\omega,
+\end{equation}
+with the decaying planar Biot--Savart velocity.  Fix
+$\Gamma\in\R$, $\nu>0$, and $\tau=t+\tau_0>0$, where $\tau_0\ge0$.
+
+\begin{theorem}[Radial forward-similar uniqueness]\label{thm:class}
+Suppose a classical radial solution of~\eqref{eq:NS} has
+\begin{equation}\label{eq:ansatz}
+ \omega(x,t)=\tau^{-1}F(\xi),\qquad \xi=|x|/\sqrt\tau,
+\end{equation}
+where $F\in C^2([0,\infty))$ is bounded at the origin and
+$\int_0^\infty |F(\xi)|\xi\dd\xi<\infty$.  If
+$\int_{\R^2}\omega\dd x=\Gamma$, then
+\begin{equation}\label{eq:omega}
+ \omega(x,t)=\frac{\Gamma}{4\pi\nu\tau}
+ \exp\!\left(-\frac{|x|^2}{4\nu\tau}\right).
+\end{equation}
+Thus~\eqref{eq:omega} is the entire declared similarity class, including
+$\Gamma=0$.
+\end{theorem}
+
+\begin{proof}
+Radial vorticity has radial gradient, whereas its Biot--Savart velocity is
+tangential; hence $u\cdot\nabla\omega=0$.  Substitution of~\eqref{eq:ansatz}
+into the heat equation yields
+\begin{equation}\label{eq:ode}
+ \nu(F''+\xi^{-1}F')+F+\frac{\xi}{2}F'=0.
+\end{equation}
+Multiplying by $\xi$ and integrating once gives
+\begin{equation}\label{eq:first}
+ \nu\xi F'(\xi)+\frac{\xi^2}{2}F(\xi)=C.
+\end{equation}
+The origin hypotheses make both left-hand terms tend to zero, so $C=0$.
+Therefore $F=Ae^{-\xi^2/(4\nu)}$.  The normalization
+$\Gamma=2\pi\int_0^\infty F(\xi)\xi\dd\xi=4\pi\nu A$ fixes $A$ and proves
+\eqref{eq:omega}.
+\end{proof}
+
+The scope of Theorem~\ref{thm:class} is essential: it classifies every
+profile satisfying~\eqref{eq:ansatz} and the displayed regularity and
+integrability conditions, not arbitrary vortex filaments or arbitrary
+solutions of~\eqref{eq:NS}.  The classical Lamb--Oseen mechanism is source
+owned by Oseen; we claim no historical priority.
+
+\section{Velocity and exact Lagrangian dynamics}
+Polar circulation reconstructs the velocity without an unrecorded constant:
+\begin{equation}\label{eq:velocity}
+ u_r=0,\qquad
+ u_\theta(r,t)=\frac{\Gamma}{2\pi r}
+ \left(1-e^{-r^2/(4\nu\tau)}\right)\quad(r>0),
+ \qquad u(0,t)=0.
+\end{equation}
+Indeed $2\pi r u_\theta=2\pi\int_0^r s\omega(s,t)\dd s$; near zero,
+$u_\theta=\Gamma r/(8\pi\nu\tau)+O(r^3)$.
+
+\begin{proposition}[Every particle orbit]\label{prop:particle}
+For $r_0>0$, radius is invariant.  Put $a=r_0^2/(4\nu)$ and
+\begin{equation}\label{eq:primitive}
+ \mathcal F_a(\tau)=\tau-\tau e^{-a/\tau}-a\Ei(-a/\tau).
+\end{equation}
+Between positive ages $\tau_s<\tau_t$,
+\begin{equation}\label{eq:angle}
+ \theta(\tau_t)-\theta(\tau_s)
+ =\frac{\Gamma}{2\pi r_0^2}
+ [\mathcal F_a(\tau_t)-\mathcal F_a(\tau_s)].
+\end{equation}
+Here $\theta$ denotes a continuous real-valued lift of polar angle, not only
+its class modulo $2\pi$.
+The origin is a fixed particle.  If $\Gamma\ne0$ and $r_0>0$, then
+\begin{equation}\label{eq:angleasymp}
+ \theta(t)=\frac{\Gamma}{8\pi\nu}\log\tau+O(1)
+ \qquad(\tau\to\infty).
+\end{equation}
+\end{proposition}
+\begin{proof}
+Equation~\eqref{eq:velocity} gives $\dot r=0$ and
+\[
+ \dot\theta=\frac{\Gamma}{2\pi r_0^2}(1-e^{-a/\tau}).
+\]
+Direct differentiation shows $\mathcal F_a'=1-e^{-a/\tau}$, proving
+\eqref{eq:angle}.  The continuous origin value proves the fixed-point claim.
+Finally $1-e^{-a/\tau}=a/\tau+O(\tau^{-2})$, which gives
+\eqref{eq:angleasymp} because $a/r_0^2=1/(4\nu)$.
+\end{proof}
+
+\section{All moments, norms, and exact dissipation}
+The change of variable $y=r^2/(4\nu\tau)$ evaluates the whole parameter
+family, rather than a finite selection.
+\begin{proposition}\label{prop:norms}
+For every integer $k\ge0$ and every real $1\le p<\infty$,
+\begin{align}
+ \int_{\R^2}|x|^{2k}\omega(x,t)\dd x
+ &=\Gamma k!(4\nu\tau)^k,\label{eq:moments}\\
+ \|\omega(\cdot,t)\|_p^p
+ &=\frac{|\Gamma|^p}{p(4\pi\nu\tau)^{p-1}}.\label{eq:lp}
+\end{align}
+Also $\|\omega\|_\infty=|\Gamma|/(4\pi\nu\tau)$ and
+\begin{align}
+ \int_{\R^2}\omega^2\dd x&=\frac{\Gamma^2}{8\pi\nu\tau},
+ \label{eq:enstrophy}\\
+ \int_{\R^2}|\nabla\omega|^2\dd x&=
+ \frac{\Gamma^2}{16\pi\nu^2\tau^2},\label{eq:palinstrophy}\\
+ \frac{\dd}{\dd t}\int_{\R^2}\omega^2\dd x
+ &=-2\nu\int_{\R^2}|\nabla\omega|^2\dd x.\label{eq:dissipation}
+\end{align}
+\end{proposition}
+\begin{proof}
+Polar integration and $y=r^2/(4\nu\tau)$ reduce~\eqref{eq:moments} to
+$\int_0^\infty y^k e^{-y}\dd y=k!$ and~\eqref{eq:lp} to
+$\int_0^\infty e^{-py}\dd y=1/p$.  The supremum occurs at the origin.
+The case $p=2$ gives~\eqref{eq:enstrophy}; differentiating~\eqref{eq:omega}
+radially and integrating gives~\eqref{eq:palinstrophy}.  Differentiation in
+$t$ closes~\eqref{eq:dissipation}.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Boundary atlas and recurrence obstruction}
+The formulas remain useful only if singular endpoints are not silently
+substituted into a positive-parameter theorem.
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.62\linewidth}@{}}
+\toprule
+Boundary & Status & Exact conclusion \\
+\midrule
+$\Gamma=0$ & included & $\omega=u=0$ at every positive age. \\
+$\tau_0>0$ & included & Smooth finite-enstrophy initial profile. \\
+$\tau_0=0$ & weak trace & $\omega(\cdot,t)\rightharpoonup\Gamma\delta_0$ as $t\downarrow0$; smooth for $t>0$. \\
+$\nu\downarrow0$ & weak limit & Vorticity tends to $\Gamma\delta_0$; velocity tends off the origin to the point vortex. \\
+$r_0=0$ & separate & The continuous velocity fixes the origin; formula~\eqref{eq:angle} is only for $r_0>0$. \\
+$\tau\to\infty$ & asymptotic & Positive-radius angular drift is logarithmic as in~\eqref{eq:angleasymp}. \\
+$p>1$ & obstruction & For $\Gamma\ne0$, every finite $L^p$ norm decreases strictly with age. \\
+$R\to\infty$ & warning & Whole-plane kinetic energy diverges logarithmically. \\
+\bottomrule
+\end{tabular}
+\end{center}
+Positive viscosity is the theorem domain; $\nu=0$ is never inserted into
+\eqref{eq:omega}.  The $L^p$ law implies that no nonzero vorticity state in
+this family can recur at two distinct ages.  This fluid-state statement does
+not mislabel the nonautonomous angular motion as a primitive periodic orbit.
+
+The far field $u_\theta=\Gamma/(2\pi r)+o(r^{-1})$ yields the sharp disk
+asymptotic
+\begin{equation}\label{eq:energy}
+ \frac12\int_{|x|<R}|u(x,t)|^2\dd x
+ =\frac{\Gamma^2}{4\pi}\log R+O(1).
+\end{equation}
+Thus positive-age enstrophy and palinstrophy are finite, whereas nonzero
+whole-plane kinetic energy is not.  These are different integrability tests.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact evidence and hostile audit}
+The archived evidence covers eight signed field cases.  Each contains nine
+similarity coordinates, nine even-moment receipts, and six $L^p$ receipts.
+Twelve positive-radius cases compare~\eqref{eq:primitive} against independent
+90-digit quadrature, and nine rows encode the boundary ledger: in total
+$72+72+48+12+9=213$ audited cells.  This is regression evidence only; the
+global statements follow from the proofs above.
+
+The independent checker imports no producer and reconstructs every rational
+or transcendental value.  A separate SymPy lane verifies~\eqref{eq:ode},
+the heat equation, curl, all sampled moments and norms, the dissipation
+identity, the exponential-integral derivative, and both asymptotic
+coefficients.  Byte replay, repaired-hash hostile mutations, duplicate-key
+and nonfinite-token rejection, exact YAML semantics, and six isolated
+fixed-epoch builds close the digital audit.
+
+\paragraph{Collision boundaries.}
+C206 concerns Couette advection--diffusion and Fourier shearing on
+$\mathbb T\times\R$; here the planar velocity is reconstructed by
+Biot--Savart and radial geometry cancels nonlinear advection.  C207 concerns
+scalar nonlinear diffusion and Barenblatt profiles; here diffusion is linear
+only after the vorticity reduction, and circulation, particle trajectories,
+the point-vortex boundary, and kinetic energy are part of the theorem.
+
+\section{Route-A verdict and reproducibility}
+Under the frozen scope \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the exact
+tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+   \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+Circulation and Gaussian moments are not arithmetic local data (A0).  Strict
+$L^p$ decay supplies no recurrent primitive-orbit bridge (A1).  Physical
+viscous time, even with logarithmic angular drift, is not an arithmetic clock
+(A2).  No target completed function or functional equation appears (A3).
+The dissipative heat/Navier--Stokes generator is not a self-adjoint
+Hilbert--P\'olya operator (A4).  The overall verdict is
+\texttt{ROUTE\_A\_REJECTED}, and Route B stays locked.
+
+No target Euler factor, root number, automorphy statement, divisor law,
+functional equation, target-zero correspondence, or target spectral
+realization is claimed.
+
+\paragraph{Reproducibility statement.}
+The release retains the producer, duplicate-rejecting checker, symbolic lane,
+byte replay, mutation suite, strict evaluation, three manuscript revisions,
+and self-excluding manifest.  Source commit, evaluator digest, epoch, and
+scope are machine checked.
+
+\paragraph{AI-use statement.}
+A generative language model assisted with drafting and verification-code
+scaffolding.  Independent scripted lanes checked formulas, exact outputs,
+scope boundaries, and release artifacts; final responsibility remains with
+the authors.
+\fi
+
+\section*{Source lineage}
+Oseen's 1912 line-vortex work is the classical owner token for the profile.
+Gallay and Wayne provide modern mathematical context for the two-dimensional
+Oseen vortex and its stability.  These citations establish lineage, not a
+novelty or priority claim for the classical formula.
+
+\begin{thebibliography}{9}
+\bibitem{Oseen1912}
+C. W. Oseen, ``Über Wirbelbewegung in einer reibenden Flüssigkeit,''
+\emph{Arkiv för Matematik, Astronomi och Fysik} 7 (1912), no.~14.
+
+\bibitem{GallayWayne2005}
+T. Gallay and C. E. Wayne, ``Global stability of vortex solutions of the
+two-dimensional Navier--Stokes equation,''
+\emph{Communications in Mathematical Physics} 255 (2005), 97--129.
+DOI: \href{https://doi.org/10.1007/s00220-004-1254-9}{10.1007/s00220-004-1254-9}.
+\end{thebibliography}
+
+\end{document}
