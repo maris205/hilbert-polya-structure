@@ -1,0 +1,355 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,microtype,xcolor}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\imof}{\operatorname{im}}
+
+\title[Steiner triangle collapse]{A Four-Stratum Functional Graph and Exact Fibres for a Binary-Projective Steiner Triangle Map}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Let $\cP=\F_2^r\setminus\{0\}$ and endow it with the standard Steiner
+quasigroup operation $x\star x=x$ and $x\star y=x+y$ for $x\ne y$.
+We determine the complete functional graph of the ordered-triple map
+\[
+ (a,b,c)\longmapsto(b\star c,c\star a,a\star b).
+\]
+Diagonal triples and projective-line blocks are fixed, triples with exactly
+two equal entries form strict $3$-cycles, and every remaining triple has depth
+one.  If $N=2^r-1$, the fixed, strict-$3$-cycle, and depth-one counts are
+$N^2$, $N(N-1)$, and $N(N-1)(N-3)$, respectively.  More sharply, every
+target fibre has size $1$, $N-2$, or $0$ according as the target is diagonal
+or two-equal, a distinct block, or a nonblock; block sources admit an explicit
+one-parameter description.  We also identify the symmetry orbits and weak
+components, compute all fibre moments, and recover $r$ from the unlabelled
+fibre multiset.  The Steiner system, its quasigroup operation,
+and characteristic-two projective model are established inputs and receive
+no contribution credit.  An exact audit checks the claimed graph and inverse
+formulas through rank six.
+\end{abstract}
+
+\maketitle
+
+\section{Owned inputs and the finite map}\label{sec:setup}
+
+Fix $r\ge2$, put $V=\F_2^r$, and let
+\[
+ \cP=V\setminus\{0\},\qquad N=|\cP|=2^r-1.
+\]
+The points and lines of $\operatorname{PG}(r-1,2)$ form the classical
+projective Steiner triple system: the line through distinct $x,y\in\cP$ is
+$\{x,y,x+y\}$~\cite{JungnickelTonchev2019,FalconeFigulaGalici2025}.
+The associated Steiner quasigroup is
+\begin{equation}\label{eq:star}
+ x\star y=
+ \begin{cases}
+ x,&x=y,\\
+ x+y,&x\ne y.
+ \end{cases}
+\end{equation}
+The correspondence between Steiner triple systems and Steiner quasigroups is
+standard~\cite{DrapalKozlikGriggs2012}.  Quasigroup and Steiner local rules
+also occur in cellular automata~\cite{Moore1997}.  All of these facts are
+background here.
+
+We study the finite self-map
+\begin{equation}\label{eq:S}
+ S:\cP^3\longrightarrow\cP^3,
+ \qquad S(a,b,c)=(b\star c,c\star a,a\star b).
+\end{equation}
+The recent ``Steiner products and dynamics'' of
+Kettinger--Peterson~\cite{KettingerPeterson2025} concern an
+orientation-dependent anticommutative bilinear product on a real vector space
+and its fixed-vector iterates.  That is not the coordinate map~\eqref{eq:S}.
+This title-level neighbour is included to make the source boundary explicit,
+not to convert a bounded search non-hit into a priority claim.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Source subtraction.  The middle column is established input; the
+last column is the residual analyzed here.}
+\label{tab:subtraction}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.22\textwidth}
+                    >{\raggedright\arraybackslash}p{.34\textwidth}
+                    >{\raggedright\arraybackslash}p{.34\textwidth}@{}}
+\toprule
+Source area & Zero-credit input & Retained special-map output \\
+\midrule
+Steiner systems and quasigroups
+& operation~\eqref{eq:star}, projective point-line blocks, standard identities
+& no carrier or quasigroup claim \\
+Quasigroup cellular automata
+& algebraic local rules and their predictability
+& finite ordered-triple graph, not a lattice CA \\
+Oriented Steiner products
+& a real bilinear product and fixed-vector iteration
+& coordinatewise map~\eqref{eq:S}, four strata, and target fibres \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Call a triple \emph{diagonal} if all entries agree, \emph{two-equal} if
+exactly two agree, a \emph{block} if its entries are distinct and
+$a+b+c=0$, and a \emph{nonblock} otherwise.  These four classes partition
+$\cP^3$.
+
+\begin{theorem}[complete graph and target fibres]\label{thm:main}
+For the map $S$ in~\eqref{eq:S} the following statements hold.
+\begin{enumerate}[(i)]
+\item Every diagonal and every block is fixed.  Every two-equal triple has
+exact period three.  Every nonblock has depth one and maps to a fixed block.
+\item There are $N^2$ fixed points, $N(N-1)$ strict $3$-cycles, and
+$N(N-1)(N-3)$ depth-one states.  Hence
+\begin{equation}\label{eq:periodic}
+ |\imof S|=|\operatorname{Per}S|=4N^2-3N.
+\end{equation}
+The maximum tail is zero for $r=2$ and one for $r\ge3$.
+\item For every target $q\in\cP^3$,
+\begin{equation}\label{eq:fibres}
+ |S^{-1}(q)|=
+ \begin{cases}
+ 1,&q\text{ is diagonal or two-equal},\\
+ N-2,&q\text{ is a block},\\
+ 0,&q\text{ is a nonblock}.
+ \end{cases}
+\end{equation}
+For a block $q=(x,y,z)$ its sources are exactly
+\begin{equation}\label{eq:param}
+ (a,b,c)=(t,t+z,t+y),\qquad t\in V\setminus\{0,y,z\}.
+\end{equation}
+The same fibre formula holds for $S^k$ for every $k\ge1$.
+\item The fixed-point counts and Artin--Mazur zeta function are
+\begin{equation}\label{eq:fixk}
+ |\Fix(S^k)|=
+ \begin{cases}N^2,&3\nmid k,\\4N^2-3N,&3\mid k,
+ \end{cases}
+ \qquad
+ \zeta_S(q)=\frac1{(1-q)^{N^2}(1-q^3)^{N(N-1)}}.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proposition}[symmetry, components, and fibre moments]\label{prop:structure}
+The map is equivariant for the natural action of
+$\operatorname{GL}(r,2)\times\mathfrak S_3$.  For $r\ge3$, the four classes
+above are exactly its four orbits on $\cP^3$; for $r=2$ the nonblock orbit is
+empty.  The functional graph has
+\begin{equation}\label{eq:components}
+ 2N^2-N
+\end{equation}
+weak components: $N$ isolated diagonal fixed points, $N(N-1)$ isolated
+$3$-cycles, and $N(N-1)$ rooted stars whose centers are block fixed points
+and whose $N-3$ leaves are nonblocks.  In particular, for every integer
+$j\ge1$,
+\begin{equation}\label{eq:moments}
+ \sum_{q\in\cP^3}|S^{-1}(q)|^j
+ =3N^2-2N+N(N-1)(N-2)^j.
+\end{equation}
+For $N>3$ the maximum fibre is $N-2$ and is attained exactly at blocks; the
+proportion of Garden-of-Eden states is
+$(N-1)(N-3)/N^2$, which tends to one with $r$.
+\end{proposition}
+
+\begin{corollary}[fibre enumerator and rank recovery]\label{cor:fibrepoly}
+The codomain fibre enumerator is
+\begin{equation}\label{eq:fibrepoly}
+ \Phi_r(u):=\sum_{q\in\cP^3}u^{|S^{-1}(q)|}
+ =N(N-1)(N-3)+(3N^2-2N)u+N(N-1)u^{N-2}.
+\end{equation}
+Terms with equal exponents are understood to combine; in particular, when
+$r=2$ every target has fibre one.  For every $r\ge2$, the unlabelled fibre
+multiset alone recovers the projective rank:
+\begin{equation}\label{eq:recover}
+ r=\log_2\bigl(\max_q|S^{-1}(q)|+3\bigr).
+\end{equation}
+For a uniformly chosen codomain target, the probability of being in the image
+is $4/N-3/N^2$, whereas the Garden-of-Eden probability tends to one.
+\end{corollary}
+
+The retained result is the conjunction of the four-stratum graph and the
+target-resolved inverse law.  Neither the projective design nor the operation
+\eqref{eq:star} is claimed.
+
+For orientation, Table~\ref{tab:ranks} displays consequences at the first
+three ranks.  Rank two has no transient shell; rank three is the first case in
+which most states have no predecessor.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Exact consequences of Theorem~\ref{thm:main}.  The ``$3$-cycles''
+column counts cycles rather than states.}
+\label{tab:ranks}
+\begin{tabular}{@{}rrrrrr@{}}
+\toprule
+$r$ & $N$ & states & fixed & $3$-cycles & depth one \\
+\midrule
+2 & 3  & 27   & 9   & 6   & 0 \\
+3 & 7  & 343  & 49  & 42  & 168 \\
+4 & 15 & 3375 & 225 & 210 & 2520 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{The four strata}\label{sec:strata}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)]
+Idempotence makes every $(x,x,x)$ fixed.  If $x\ne y$, direct use of
+\eqref{eq:star} gives, for one of the three possible equality positions,
+\begin{equation}\label{eq:threecycle}
+ (x,x,y)\mapsto(x+y,x+y,x)\mapsto(y,y,x+y)\mapsto(x,x,y).
+\end{equation}
+The three displayed states are distinct, so the period is exactly three.
+The other equality positions behave by the same cyclic coordinate symmetry.
+
+For pairwise distinct $a,b,c$, no idempotent branch is used, and
+\begin{equation}\label{eq:linearbranch}
+ S(a,b,c)=(b+c,c+a,a+b).
+\end{equation}
+These three outputs are nonzero and pairwise distinct: a zero output or an
+equality would contradict distinctness of the inputs.  Their sum is zero.
+Thus every distinct triple maps to a block.  If $a+b+c=0$, then
+$b+c=a$, $c+a=b$, and $a+b=c$, so the block is fixed.  A nonblock cannot be
+fixed and therefore has depth exactly one.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(ii)]
+There are $N$ diagonals.  An ordered block is determined by an ordered pair
+of distinct first entries, because the third is their nonzero sum.  Hence
+there are $N(N-1)$ blocks and $N^2$ fixed points in total.
+
+There are $3N(N-1)$ two-equal states.  Equation~\eqref{eq:threecycle}
+partitions them into $N(N-1)$ strict cycles.  The number left after removing
+the diagonal, two-equal, and block strata from $N^3$ is
+\[
+ N^3-N-3N(N-1)-N(N-1)=N(N-1)(N-3).
+\]
+These are precisely the depth-one nonblocks.  The image contains the entire
+periodic locus.  It contains nothing else by the classification, proving
+\eqref{eq:periodic}.  The depth-one count vanishes exactly when $N=3$, which
+is the boundary rank $r=2$.
+\end{proof}
+
+The boundary is worth emphasizing.  On the three-point projective line every
+distinct ordered triple is already a block, so small-rank inspection alone
+would hide the collapsing shell.  The first Garden-of-Eden states occur in
+the Fano carrier $r=3$.
+
+\section{A direct inverse parametrization}\label{sec:inverse}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iii)]
+The equality calculation in~\eqref{eq:threecycle} shows directly that each
+diagonal or two-equal target has its unique predecessor in the same stratum.
+Equation~\eqref{eq:linearbranch} shows that a distinct source can reach only
+a block; hence a nonblock target has no source.
+
+It remains to invert a block $(x,y,z)$.  Any distinct source must solve
+\begin{equation}\label{eq:system}
+ b+c=x,\qquad c+a=y,\qquad a+b=z.
+\end{equation}
+The block condition $x+y+z=0$ is exactly the consistency relation.  Set
+$a=t$.  Then~\eqref{eq:system} gives the family~\eqref{eq:param}.
+Its entries are all nonzero exactly when $t\notin\{0,z,y\}$.  They are then
+automatically distinct: for example $t=t+z$ would force $z=0$, and the other
+two equalities similarly force $y=0$ or $x=y+z=0$.  Conversely every
+allowed $t$ yields a valid source.  Since $|V|=N+1$, there are $N-2$ sources.
+
+Among them, $t=x$ recovers the fixed block itself; the remaining $N-3$ are
+nonblocks and have no predecessors.  Thus passing from $S$ to any positive
+iterate neither gains nor loses a source for a block.  The same is immediate
+on the two permutation strata, proving the last assertion.
+\end{proof}
+
+The inverse proof is independent of division by the orbit census: it solves
+the target equations and exposes the three forbidden parameter values.
+
+\begin{proof}[Proof of Proposition~\ref{prop:structure}]
+An invertible linear map preserves equality and sends $x+y$ to the sum of
+the images.  A coordinate permutation merely permutes the three opposite
+pair products.  These observations prove equivariance.  Diagonals are one
+linear orbit.  A two-equal triple is an ordered independent pair together
+with an equality position, blocks are ordered independent pairs completed by
+their sum, and nonblocks are ordered independent triples.  Transitivity of
+$\operatorname{GL}(r,2)$ on ordered independent lists, together with the
+coordinate action, gives the orbit claim.
+
+Theorem~\ref{thm:main} shows that a diagonal has no attached transient, a
+$3$-cycle has no attached transient, and each block has exactly $N-3$
+nonblock sources in addition to itself.  This proves~\eqref{eq:components}
+and the component description.  There are $N+3N(N-1)=3N^2-2N$ targets of
+fibre one and $N(N-1)$ block targets of fibre $N-2$; all others have fibre
+zero.  This gives~\eqref{eq:moments}.  The remaining assertions follow from
+the nonblock count in Theorem~\ref{thm:main}(ii).
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:fibrepoly}]
+Insert the three target counts used in the proof of
+Proposition~\ref{prop:structure} into the definition of $\Phi_r$.  When
+Theorem~\ref{thm:main}(iii) gives maximum fibre $N-2$; hence
+$N=\max|S^{-1}(q)|+2$ and $2^r=N+1$, proving~\eqref{eq:recover}.  Finally
+divide~\eqref{eq:periodic} by $N^3$.  Its complement is the nonblock ratio
+already stated in Proposition~\ref{prop:structure}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iv)]
+Only fixed points and strict $3$-cycles are recurrent.  Therefore a recurrent
+state is fixed by $S^k$ precisely as stated in~\eqref{eq:fixk}.  Substitution
+in the defining exponential identity
+$\zeta_S(q)=\exp(\sum_{k\ge1}|\Fix(S^k)|q^k/k)$, or equivalently multiplication
+over primitive cycles, gives the displayed product.
+\end{proof}
+
+\section{Exact audit and limitations}\label{sec:audit}
+
+The accompanying standard-library verifier enumerates every state through
+$r=6$.  For each rank it compares the literal update with the four-way
+classification, orbit depth and period, every target indegree, the explicit
+parameter set~\eqref{eq:param}, all counts, and fixed points of several
+iterates.  This is finite falsification pressure and regression control, not
+an all-rank proof or an ownership certificate.
+
+The result is specific to the binary projective Steiner quasigroup and to
+ordered triples with the simultaneous pairwise update~\eqref{eq:S}.  It does
+not classify arbitrary Steiner quasigroups or triple systems, assert stability
+under perturbing the rule, or furnish a general quasigroup-dynamics theorem.
+The source search was bounded and terminology dependent; no novelty, priority,
+or external-release claim is made.
+
+\subsection*{Data availability}
+No empirical data were used.  The exact verifier and frozen transcript are
+included with the manuscript.
+
+\subsection*{Ethics, contributions, conflicts, and funding}
+No human or animal subjects are involved.  Authorship is anonymous for
+internal review.  The authors declare no conflict of interest and no external
+funding for this work.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
