@@ -1,0 +1,205 @@
+\pdfvariable trailerid {[<C3082026090300000000000000000000><C3082026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,microtype,enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.15em}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\title{An Exact Boundary and Skin Atlas\\for the Finite Hatano--Nelson Chain}
+\author{Route-A candidate HCS-C308}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We solve the finite asymmetric nearest-neighbor chain across its full hopping cone.  Positive open-boundary hopping is diagonally similar to a symmetric path matrix, yielding the exact Chebyshev spectrum.
+\ifnum\CRevisionRound>0
+We also obtain a canonical biorthogonal sine basis, distinguish its asymmetry-free density from the right-amplitude skin envelope, and give exact conditioning, propagation, and resolvent formulas.
+\fi
+\ifnum\CRevisionRound>1
+Periodic Fourier spectra and every Hermitian, one-sided, zero, orientation-reversed, and small-size face complete the atlas.  The singular open/periodic split is proved without a topology, disorder, or arithmetic claim.
+\fi
+\end{abstract}
+
+\section{Model and the algebraic core}
+For $N\ge2$, let the open-boundary matrix $H_N=H_N(t_R,t_L)$ have
+$(H_N)_{j,j+1}=t_R$ and $(H_N)_{j+1,j}=t_L$, where $t_R,t_L\ge0$.
+Evolution means $\ii\dot\psi=H_N\psi$.  When both hoppings are positive, put
+\[
+ g=\sqrt{t_Rt_L},\qquad q=\sqrt{t_L/t_R},\qquad
+ D=\operatorname{diag}(1,q,\ldots,q^{N-1}),
+\]
+and let $A_N$ be path adjacency.  Define
+\[
+ \theta_m=\frac{m\pi}{N+1},\qquad
+ S_{jm}=\sqrt{\frac{2}{N+1}}\sin(j\theta_m),\qquad 1\le j,m\le N.
+\]
+
+\begin{theorem}[finite-chain atlas]
+For $t_R,t_L>0$,
+\[
+ D^{-1}H_ND=gA_N,
+ \quad \det(zI-H_N)=g^NU_N\!\left(\frac{z}{2g}\right),
+ \quad E_m=2g\cos\theta_m .                                      \tag{1}
+\]
+The $E_m$ are real and simple.
+\ifnum\CRevisionRound>0
+In the canonical sine gauge,
+\[
+ R=DS,\quad L^T=S^TD^{-1},\quad L^TR=I,\quad
+ \kappa_2(R)=\max(q,q^{-1})^{N-1}.                                \tag{2}
+\]
+Moreover,
+\[
+ \e^{-\ii tH_N}=DS\operatorname{diag}(\e^{-\ii tE_m})S^TD^{-1},
+ \qquad (zI-H_N)^{-1}=D(zI-gA_N)^{-1}D^{-1}.                       \tag{3}
+\]
+For $x=z/(2g)$ and $z\notin\sigma(H_N)$,
+\[
+ [(zI-H_N)^{-1}]_{ij}=
+ \frac{q^{i-j}U_{\min(i,j)-1}(x)U_{N-\max(i,j)}(x)}{gU_N(x)}.     \tag{4}
+\]
+\fi
+\ifnum\CRevisionRound>1
+For the oriented ring with $N\ge3$, let $(Cv)_j=v_{j+1\bmod N}$ and
+$H_N^{\rm per}=t_RC+t_LC^{-1}$.  It is normal and its Fourier spectrum is
+\[
+ E_m^{\rm per}=t_R\e^{\ii k_m}+t_L\e^{-\ii k_m},\qquad
+ k_m=2\pi m/N.                                                     \tag{5}
+\]
+Thus $\Re E_m^{\rm per}=(t_R+t_L)\cos k_m$ and
+$\Im E_m^{\rm per}=(t_R-t_L)\sin k_m$.
+
+On $t_R=t_L>0$ both matrices are Hermitian.  If exactly one hopping is
+positive, OBC is one nilpotent $N$-Jordan block, while PBC is a unitarily
+diagonalizable scaled cyclic shift.  If both vanish, the matrix is zero with
+eigenspace dimension $N$.  Swapping $t_R,t_L$ transposes OBC, reverses its
+right-amplitude edge, and complex-conjugates the PBC ellipse.
+\fi
+\end{theorem}
+
+\begin{proof}
+Since $D_j^{-1}t_RD_{j+1}=t_Rq=g$ and
+$D_{j+1}^{-1}t_LD_j=t_L/q=g$, diagonal conjugation gives the first identity.
+Laplace expansion produces the continuant
+\[
+ P_0=1,\quad P_1=z,\quad P_N=zP_{N-1}-t_Rt_LP_{N-2}.
+\]
+The recurrence for $U_N$ gives (1).  The discrete sine transform is
+orthogonal and diagonalizes $A_N$, which proves simplicity and reality.
+\ifnum\CRevisionRound>0
+Conjugating its columns gives $R$, while $S^TD^{-1}$ is the exact left dual.
+Right multiplication by orthogonal $S$ preserves singular values, so the
+extreme diagonal entries of $D$ give (2).  This equality concerns the stated
+sine gauge; arbitrary column rescaling changes an eigenvector-matrix condition
+number.  Functional calculus gives (3).  The standard continuant formula for
+the inverse of $zI-gA_N$, followed by diagonal conjugation, gives (4).
+Consequently, for real $t$,
+\[
+ \|\e^{-\ii tH_N}\|_2\le\kappa_2(D),\qquad
+ \|(zI-H_N)^{-1}\|_2\le
+ \frac{\kappa_2(D)}{\operatorname{dist}(z,\sigma(H_N))}.           \tag{6}
+\]
+These are bounds, not asserted equalities.
+\fi
+\ifnum\CRevisionRound>1
+The unitary Fourier basis diagonalizes $C$, proving (5), the ellipse
+parametrization, and normality.  On a one-sided OBC axis the surviving shift
+satisfies $H^N=0$, $H^{N-1}\ne0$, and
+$\operatorname{rank}(H^k)=N-k$; hence there is one Jordan chain of length
+$N$.  On the ring, $C^N=I$ and its Fourier eigenvalues are distinct.  Direct
+substitution proves the Hermitian, zero, and orientation statements.
+\fi
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{What is, and is not, skin localization}
+The right and left components in the canonical dual normalization are
+\[
+ R_{jm}=q^{j-1}S_{jm},\qquad L^T_{mj}=q^{-(j-1)}S_{jm}.
+\]
+Thus ordinary right amplitudes carry an exponential envelope toward the left
+for $q<1$ and toward the right for $q>1$.  Pointwise biorthogonal density is a
+different object:
+\[
+ L^T_{mj}R_{jm}=S_{jm}^2,
+\]
+which is independent of $q$ and sums to one.  We use ``skin'' only for the
+first, amplitude-level statement.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Boundary faces and a singular limit}
+At fixed $N$, taking $t_L\downarrow0$ with $t_R>0$ collapses every positive-OBC
+eigenvalue to zero and sends the canonical conditioning in (2) to infinity.
+The limit is defective.  Under PBC, the same limit has eigenvalues
+$t_R\e^{\ii k_m}$ and keeps its Fourier eigenbasis.  The transpose statement
+holds when $t_R\downarrow0$.  This proves a boundary-condition-sensitive
+singular limit; it does not prove a winding invariant or a protected edge mode.
+
+The one-sided OBC formulas also close dynamically:
+\[
+ \e^{-\ii tH}=\sum_{k=0}^{N-1}\frac{(-\ii tH)^k}{k!},\qquad
+ (zI-H)^{-1}=\sum_{k=0}^{N-1}\frac{H^k}{z^{k+1}}\quad(z\ne0).
+\]
+For $N=2$, the OBC theorem remains unchanged.  A two-site cyclic shift obeys
+$C=C^{-1}$, so the two oriented neighbors coincide and
+$H_2^{\rm per}=(t_R+t_L)C$.  We therefore state the standard oriented-ring
+ellipse theorem for $N\ge3$ and record $N=2$ only as this explicit convention
+face.  At finite $N$, (5) gives finitely many points on an ellipse, not the
+entire ellipse.
+
+\section{Executable evidence and scope}
+The analytic proof covers all stated $N$ and parameter faces.  Finite evidence
+is regression only: 40 positive-OBC continuants and condition numbers, 21
+resolvent determinant/log-derivative traces, 18 one-sided Jordan/PBC cases, 36
+PBC power-trace cases, and eight semantic boundary faces (123 rows total).
+An independent checker recomputes every cell with strict JSON/YAML types; a
+separate symbolic lane checks the identities; isolated double replay demands
+byte equality; and repaired-hash mutations attack formulas, owners, boundaries,
+types, lists, and parsers.
+
+The Route-A tuple is
+$(\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+\mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT})$ and the overall verdict is
+\texttt{ROUTE\_A\_REJECTED}; Route B is locked.  A finite Chebyshev determinant
+is not an Euler factor, the finite spectrum is not a target zero set, and a
+nonunitary similarity to a source-local symmetric matrix is not a same-clock
+self-adjoint Hilbert--P\'olya construction.  We claim no disorder localization,
+interactions, topological invariant, automorphy, root number, or literature
+priority.  The frozen scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{AI-use disclosure.}
+An AI system assisted with algebraic organization, code generation, and prose.
+Every released formula is supported by the displayed proof and independent
+executable checks; source ownership and claim boundaries were reviewed
+explicitly.  No external review or authorship is represented.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{HN1996} N.~Hatano and D.~R.~Nelson,
+``Localization transitions in non-Hermitian quantum mechanics,''
+\emph{Phys. Rev. Lett.} 77 (1996), 570--573.
+doi:10.1103/PhysRevLett.77.570.
+\bibitem{HN1998} N.~Hatano and D.~R.~Nelson,
+``Non-Hermitian delocalization and eigenfunctions,''
+\emph{Phys. Rev. B} 58 (1998), 8384--8390.
+doi:10.1103/PhysRevB.58.8384.
+\ifnum\CRevisionRound>1
+\bibitem{YW2018} S.~Yao and Z.~Wang,
+``Edge states and topological invariants of non-Hermitian systems,''
+\emph{Phys. Rev. Lett.} 121 (2018), 086803.
+doi:10.1103/PhysRevLett.121.086803.  Used for terminology only.
+\fi
+\end{thebibliography}
+\end{document}

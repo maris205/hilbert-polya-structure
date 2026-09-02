@@ -17,6 +17,23 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C304--HCS-C308 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O288 | HCS-C304 Cahn--Hilliard Fourier shells as arithmetic primitive owners | proved gradient-semigroup and lattice-mode obstruction | The shell labels are spatial Fourier norms, while the real self-adjoint generator has only exponential growth, decay, or stationary neutral projections and no nonstationary periodic solutions.  Shell multiplicities, trace values, and physical time provide no rational-prime carrier, logarithmic-prime roof, target determinant, or target divisor. | The analytic trace-class semigroup, exact energy law, stable/neutral/spinodal atlas, Morse index, fastest-shell ties, smoothing, long-time projection, and zero-capillarity generation boundary survive for the declared linear periodic model. | ../henon_linear_cahn_hilliard_spinodal_route_a/THEOREM_PACKAGE.md |
+| HEN-O289 | HCS-C305 time-optimal navigation as an arithmetic orbit clock | proved controlled-continuum and endpoint-gauge obstruction | Reachable trajectories depend on freely chosen measurable controls and continuously chosen wind and endpoint data.  Even when a control can draw a loop, it is not an intrinsic isolated primitive orbit; minimum travel time is a Minkowski gauge rather than a prime-labelled roof or target divisor. | The exact reachable balls, three wind chambers, value function, unique saturated minimizer, attainable-time intervals, Hamilton--Jacobi identity, Mach cone, and degenerate faces survive for constant Euclidean wind. | ../henon_constant_wind_zermelo_navigation_route_a/THEOREM_PACKAGE.md |
+| HEN-O290 | HCS-C306 Karlin--McGregor determinants as a dynamical zeta | proved killed-process and determinant-category obstruction | The determinant is a nonintersection transition probability for an absorbing stochastic process, not a primitive-orbit product.  Boundary killing and collision remove recurrence, while sine modes and chamber coordinates carry no rational-prime labels, logarithmic clock, or target divisor. | The exact determinant kernel, complete Slater spectrum, survival and absorption laws, principal decay and gap, quasi-stationary distribution, Doob transform, and every finite-volume boundary survive. | ../henon_killed_noncolliding_walkers_route_a/THEOREM_PACKAGE.md |
+| HEN-O291 | HCS-C307 connected-graph counts as arithmetic local factors | proved monotone-growth and combinatorial-count obstruction | The process adds edges monotonically and is absorbed at connectivity, so it has no nontrivial recurrent primitive orbit.  Binomial denominators and connected labelled graph counts are source combinatorics; they do not encode rational primes, prime-power repetitions, a logarithmic roof, target Euler factors, or a target divisor. | The exact connected-graph recurrence, finite first-passage CDF/PMF/tails/moments, and the Poisson-isolated-vertex/Gumbel connectivity window survive for the frozen edge-reveal process. | ../henon_erdos_renyi_connectivity_hitting_route_a/THEOREM_PACKAGE.md |
+| HEN-O292 | HCS-C308 Hatano--Nelson spectra as a target self-adjoint realization | proved nonnormal-boundary and continuous-hopping obstruction | Open-chain real eigenvalues arise by a nonunitary diagonal similarity and collapse to a nilpotent Jordan block on a one-sided hopping face, while periodic eigenvalues trace a boundary-sensitive complex ellipse.  Continuous hopping parameters and lattice modes supply neither a prime owner nor a target divisor, and the finite nonnormal Hamiltonian is not a self-adjoint Hilbert--Pólya operator. | The exact open/periodic spectra, Chebyshev determinant, biorthogonal skin vectors, condition number, propagator/resolvent, Hermitian, one-sided, zero, and boundary-limit regimes survive. | ../henon_hatano_nelson_boundary_skin_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under the frozen torus scale, Euclidean
+control norm, killed-chamber convention, edge-reveal clock, and hopping
+orientation up to the explicitly recorded conjugacies.  They do not license
+Route B.  The common scope firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
+every surviving theorem is source-local with a content-addressed
+evidence/PDF release ledger.
+
 ## HCS-C299--HCS-C303 additions (2026-09-02)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

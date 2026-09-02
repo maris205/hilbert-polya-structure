@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C304--C308
+
+This round takes five independent theorem-scale steps and changes the phase
+space, clock, and proof mechanism in every paper: a fourth-order periodic PDE
+semigroup, a continuous-time navigation control problem, a killed
+determinantal walker system, a monotone random graph process, and a
+non-normal quantum lattice Hamiltonian.  These are five complete papers, not
+five installments of one theorem.
+
+- [C304 multidimensional linear Cahn--Hilliard spinodal semigroup](henon_linear_cahn_hilliard_spinodal_route_a/README.md) · [paper PDF](henon_linear_cahn_hilliard_spinodal_route_a/paper/main.pdf)
+- [C305 constant-wind Zermelo navigation atlas](henon_constant_wind_zermelo_navigation_route_a/README.md) · [paper PDF](henon_constant_wind_zermelo_navigation_route_a/paper/main.pdf)
+- [C306 killed noncolliding continuous-time walkers](henon_killed_noncolliding_walkers_route_a/README.md) · [paper PDF](henon_killed_noncolliding_walkers_route_a/paper/main.pdf)
+- [C307 Erdos--Renyi connectivity first-passage process](henon_erdos_renyi_connectivity_hitting_route_a/README.md) · [paper PDF](henon_erdos_renyi_connectivity_hitting_route_a/paper/main.pdf)
+- [C308 Hatano--Nelson boundary and skin-effect atlas](henon_hatano_nelson_boundary_skin_route_a/README.md) · [paper PDF](henon_hatano_nelson_boundary_skin_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C304_C308.md),
+[batch plan](BATCH_PLAN_C304_C308.md), and
+[batch review](BATCH_REVIEW_C304_C308.md) for collision screening, theorem
+contracts, historical ownership, hostile-review repairs, exact release
+receipts, and deterministic PDFs.  Across the five packages the final audit
+closes **15,143** independent-checker assertions, **881** exact symbolic
+identities/cells, **350/350** hostile rejections, **397,400** evidence bytes,
+135 manifest payloads (140 physical files), and **15** final-paper pages with
+**116** embedded/subset font records.  The five strict tuples, in order
+C304--C308, are
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C299--C303
 
 This round takes five independent theorem-scale steps while changing the

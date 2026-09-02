@@ -1,0 +1,249 @@
+\pdfvariable trailerid {[<C3062026090300000000000000000000><C3062026090300000000000000000000>]}
+\pdfvariable suppressoptionalinfo 767
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\W}{\mathcal W}
+\newcommand{\E}{\mathbb E}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\e}{\varepsilon}
+\setlength{\emergencystretch}{2em}
+\title{Killed Noncolliding Walkers on a Finite Interval:\\
+Determinantal Spectrum, Absorption, and the Q-Process}
+\author{Route-A source-local certificate HCS-C306}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For every $1\leq k\leq L$, we diagonalize $k$ continuous-time symmetric
+nearest-neighbour walks on $\{1,\ldots,L\}$ killed at the first boundary hit
+or collision.  The one-particle sine kernel and the Karlin--McGregor
+determinant yield a complete Slater basis of all $\binom Lk$ chamber states.
+\ifnum\CRevisionRound>0
+The same expansion gives the entire absorption law, every absorption-time
+moment, sharp leading survival asymptotics, the unique quasi-stationary law,
+and the conservative Doob transform with invariant density $h^2$.
+\fi
+\ifnum\CRevisionRound>1
+We close the one-particle and full-occupancy faces, the singleton spectral-gap
+boundary, and the distinction from reflecting exclusion, and accompany the
+all-parameter proof with an independently reconstructed finite atlas.
+\fi
+\end{abstract}
+
+\section{Killed chamber dynamics}
+Fix integers $L\geq1$ and $1\leq k\leq L$.  A single particle jumps one site
+left and right at rate one, and is killed on an attempted jump to $0$ or
+$L+1$.  The $k$ particles have independent clocks until the first such
+boundary attempt or the first attempted coincidence.  Before killing their
+ordered configuration lies in
+\[
+ \W_{L,k}=\{x=(x_1,\ldots,x_k):1\leq x_1<\cdots<x_k\leq L\}.
+\]
+For $f$ on this chamber, extended by zero across collision and boundary
+faces, the sub-Markov generator is
+\begin{equation}\label{eq:Q}
+ (Q_kf)(x)=\sum_{a=1}^k\{f(x-e_a)+f(x+e_a)-2f(x)\}.
+\end{equation}
+Thus every legal one-coordinate step has rate one and $Q_k(x,x)=-2k$.
+This diagonal is essential: a forbidden attempt kills; it is not suppressed
+or reflected as in an exclusion chain.
+
+For one particle put
+\begin{equation}\label{eq:sine}
+ \phi_r(j)=\sqrt{\frac2{L+1}}\sin\frac{\pi rj}{L+1},\qquad
+ \e_r=2-2\cos\frac{\pi r}{L+1},\quad 1\leq r,j\leq L.
+\end{equation}
+The Dirichlet difference equation and sine orthogonality give
+\begin{equation}\label{eq:p1}
+ p_t^{(1)}(i,j)=\frac2{L+1}\sum_{r=1}^L
+ e^{-\e_rt}\sin\frac{\pi ri}{L+1}\sin\frac{\pi rj}{L+1}.
+\end{equation}
+
+\section{Determinant and complete spectrum}
+For increasing mode indices $m=(m_1<\cdots<m_k)$ define
+\begin{equation}\label{eq:slater}
+ \Phi_m(x)=\det[\phi_{m_a}(x_b)]_{a,b=1}^k,\qquad
+ \Lambda_m=\sum_{a=1}^k\e_{m_a}.
+\end{equation}
+
+\begin{theorem}[Full killed semigroup atlas]\label{thm:spectrum}
+The $\binom Lk$ functions $\Phi_m$ form a complete orthonormal basis of
+$\ell^2(\W_{L,k})$ and $Q_k\Phi_m=-\Lambda_m\Phi_m$.  For all $t\geq0$,
+\begin{align}
+ P_t(x,y)&=\Pr_x\{X(t)=y,\ \tau>t\}
+     =\det[p_t^{(1)}(x_i,y_j)]_{i,j=1}^k,\label{eq:KM}\\
+ P_t(x,y)&=\sum_m e^{-\Lambda_mt}\Phi_m(x)\Phi_m(y).\label{eq:spectral}
+\end{align}
+Every eigenvalue is displayed with its multiplicity, including coincidences
+among distinct mode sums.
+\end{theorem}
+
+\begin{proof}
+Tensor products of the one-particle eigenvectors diagonalize the generator of
+the independent product chain.  Antisymmetrizing a tensor product gives the
+determinant in~\eqref{eq:slater}; crossing a wall changes sign, so its
+restriction to the ordered chamber obeys the zero boundary convention
+in~\eqref{eq:Q}.  Cauchy--Binet, or direct antisymmetric tensor
+orthogonality, gives
+$\sum_{x\in\W_{L,k}}\Phi_m(x)\Phi_n(x)=\1_{m=n}$.
+There are exactly $\binom Lk=|\W_{L,k}|$ modes, proving completeness and
+\eqref{eq:spectral}.
+
+For~\eqref{eq:KM}, expand the determinant of~\eqref{eq:p1} and apply
+Cauchy--Binet.  Equivalently, the Karlin--McGregor path-switching involution
+pairs product paths at their first collision with opposite permutation sign;
+only never-coincident paths remain.  Boundary killing is already contained
+in each one-particle kernel.  At $t=0$, orthonormal completeness makes either
+formula the identity kernel.
+\end{proof}
+
+The lowest mode is $m_0=(1,\ldots,k)$.  Its determinant has a fixed sign.
+Indeed, with $\theta_b=\pi x_b/(L+1)$ and
+$\sin(a\theta)=\sin\theta\,U_{a-1}(\cos\theta)$,
+\begin{equation}\label{eq:positive}
+ h(x):=(-1)^{k(k-1)/2}\Phi_{m_0}(x)
+ =\left(\frac2{L+1}\right)^{k/2}2^{k(k-1)/2}
+ \prod_b\sin\theta_b\prod_{i<j}(\cos\theta_i-\cos\theta_j)>0.
+\end{equation}
+Thus $\|h\|_2=1$ and
+$\Lambda_0=\sum_{r=1}^k\e_r$ is simple.
+
+\ifnum\CRevisionRound>0
+\section{Absorption, quasi-stationarity, and conditioning}
+Let $A_m=\sum_{y\in\W_{L,k}}\Phi_m(y)$, choosing the sign of $m_0$ so
+$A_0=\sum_yh(y)>0$.
+
+\begin{theorem}[Entire absorption law and its leading edge]\label{thm:absorb}
+For every starting state $x$ and $t\geq0$,
+\begin{align}
+ S_x(t):=\Pr_x(\tau>t)&=\sum_m e^{-\Lambda_mt}\Phi_m(x)A_m,\label{eq:surv}\\
+ \Pr_x(\tau\leq t)&=1-S_x(t),\qquad
+ f_x(t)=\sum_m\Lambda_m e^{-\Lambda_mt}\Phi_m(x)A_m.\label{eq:density}
+\end{align}
+For every integer $r\geq1$,
+\begin{equation}\label{eq:moments}
+ \E_x\tau^r=r!\sum_m\frac{\Phi_m(x)A_m}{\Lambda_m^r}.
+\end{equation}
+If $k<L$, let
+\[
+ \Lambda_1=\sum_{r=1}^{k-1}\e_r+\e_{k+1},\qquad
+ \gamma_{L,k}=\Lambda_1-\Lambda_0
+ =2\left(\cos\frac{k\pi}{L+1}-\cos\frac{(k+1)\pi}{L+1}\right).
+\]
+Then, as $t\to\infty$,
+\begin{align}
+ S_x(t)&=h(x)A_0e^{-\Lambda_0t}+O_x(e^{-\Lambda_1t}),\label{eq:leadS}\\
+ f_x(t)&=\Lambda_0h(x)A_0e^{-\Lambda_0t}+O_x(e^{-\Lambda_1t}).\label{eq:leadf}
+\end{align}
+The conditioned law converges from every $x$ to the unique QSD
+\begin{equation}\label{eq:qsd}
+ \nu(y)=\frac{h(y)}{A_0}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Summing~\eqref{eq:spectral} over the terminal state proves
+\eqref{eq:surv}.  Differentiation gives~\eqref{eq:density}, and integrating
+$r\int_0^\infty t^{r-1}S_x(t)\,\dd t$ proves~\eqref{eq:moments}; every
+$\Lambda_m$ is positive, so these finite operations are valid.  Although
+individual spectral coefficients can have either sign, the semigroup proves
+the resulting survival and density are nonnegative.
+
+The energies~\eqref{eq:sine} strictly increase.  Therefore the unique
+smallest mode is $(1,\ldots,k)$ and, when $k<L$, the next energy is obtained
+only by replacing $k$ with $k+1$.  Separating these terms gives
+\eqref{eq:leadS}--\eqref{eq:leadf}.  Division of
+$P_t(x,y)$ by $S_x(t)$ gives~\eqref{eq:qsd}.
+Finally the chamber adjacency graph is connected (successively move gaps to
+a packed configuration), so Perron--Frobenius makes the positive left ground
+eigenvector unique.  Since $Q_k$ is symmetric, that left vector is $h$;
+hence no other QSD exists.
+\end{proof}
+
+\begin{proposition}[Immortal Doob dynamics]\label{prop:doob}
+The ground-state transform has off-diagonal and diagonal rates
+\begin{equation}\label{eq:doob}
+ q^h(x,y)=q(x,y)\frac{h(y)}{h(x)}\quad(x\ne y),\qquad
+ q^h(x,x)=q(x,x)+\Lambda_0.
+\end{equation}
+It is conservative, irreducible, and reversible with the already normalized
+invariant law $\pi^h(x)=h(x)^2$.  For $k<L$ its relaxation gap is
+$\gamma_{L,k}$ above.
+\end{proposition}
+
+\begin{proof}
+The identity $Q_kh=-\Lambda_0h$ makes every row sum in~\eqref{eq:doob}
+zero.  Symmetry of $q$ gives
+$h(x)^2q^h(x,y)=h(x)h(y)q(x,y)=h(y)^2q^h(y,x)$.
+Conjugation by multiplication with $h$ shifts the killed spectrum by
+$\Lambda_0$, so the first positive relaxation energy is
+$\Lambda_1-\Lambda_0$.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Faces, finite evidence, and claim boundary}
+For $k=1$, Theorem~\ref{thm:spectrum} is exactly the ordinary Dirichlet sine
+kernel.  For $k=L$, the chamber contains only $(1,\ldots,L)$: no move is
+legal, the killing rate is $2L$, $h=1$, and
+$S(t)=e^{-2Lt}$.  Its Doob transform is the stationary singleton.  There is
+no nonzero relaxation mode, so the formula containing $\e_{k+1}$ is not
+extended to this face and no finite spectral gap is reported.  In particular
+$L=k=1$ gives an $\operatorname{Exp}(2)$ lifetime.  At $t=0$, the survival is
+one and the right derivative is minus the number of illegal rate-one
+attempts from the starting state.
+
+The canonical finite artifact independently enumerates all 36 pairs
+$1\leq k\leq L\leq8$, hence 502 chamber states and 502 modes.  A checker
+reconstructs each integer generator without importing the producer, compares
+its direct spectrum and matrix exponential with the sine/Slater and
+Karlin--McGregor formulas, verifies Doob detailed balance, and checks 273
+time/state probes.  A separate exact SymPy lane compares 15 characteristic
+polynomials and phase-type resolvent moments.  These cutoffs are regression
+evidence; Theorems~\ref{thm:spectrum} and~\ref{thm:absorb} are the
+all-parameter proof.  The absorption formulas are exact finite sums, but we
+claim no further elementary first-passage closed form.
+
+This system must not be confused with reflecting simple exclusion: here a
+collision attempt terminates the trajectory.  The determinant is a
+probability kernel, not a target arithmetic determinant.  The strict Route-A
+tuple is
+$(\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+\mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT})$, with overall verdict
+\texttt{ROUTE\_A\_REJECTED} and Route B locked.  The finite symmetric
+operator is only a candidate-local A4 analogy: no same-clock target-zero
+identification or Hilbert--P\'olya operator is asserted.  Scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no arithmetic local datum,
+Euler factor, root number, automorphy, target divisor law, functional
+equation, or zero match is claimed.
+\fi
+
+\section*{Source ownership and AI-use statement}
+Karlin and McGregor~\cite{KM} established the coincidence determinant for
+birth--death processes.  Darroch and Seneta~\cite{DS} treat
+quasi-stationarity in finite continuous-time absorbing chains.  We claim no
+priority for those results; the contribution here is a closed source-local
+derivation and auditable finite certificate for the frozen interval model.
+AI tools assisted algebra checking, hostile mutation design, and manuscript
+preparation.  Every theorem dependency, numerical cutoff, and nonclaim is
+exposed in the package.
+
+\begin{thebibliography}{2}
+\bibitem{KM} S. Karlin and J. McGregor, ``Coincidence probabilities,''
+\emph{Pacific Journal of Mathematics} 9 (1959), 1141--1164,
+doi:10.2140/pjm.1959.9.1141.
+\bibitem{DS} J. N. Darroch and E. Seneta, ``On quasi-stationary distributions
+in absorbing continuous-time finite Markov chains,'' \emph{Journal of
+Applied Probability} 4 (1967), 192--196, doi:10.2307/3212311.
+\end{thebibliography}
+
+\end{document}

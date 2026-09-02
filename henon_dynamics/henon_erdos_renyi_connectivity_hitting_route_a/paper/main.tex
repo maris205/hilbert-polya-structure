@@ -1,0 +1,259 @@
+\pdfvariable trailerid {[<C3072026090300000000000000000000><C3072026090300000000000000000000>]}
+\pdfvariable suppressoptionalinfo 767
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\conn}{\mathrm{conn}}
+\newcommand{\fall}[2]{(#1)_{#2\downarrow}}
+\setlength{\emergencystretch}{2em}
+\title{Connectivity Hitting in the Random Graph Process:\\
+Exact Finite Laws and the Gumbel Window}
+\author{Route-A source-local certificate HCS-C307}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Reveal the $K=\binom n2$ edges of the complete labeled graph in uniform random
+order, and let $\tau_{\conn}$ be the first connected prefix.  Decomposition by
+the component containing vertex 1 gives an exact recurrence for every
+connected-graph count, hence the complete finite CDF, PMF, tail, support, and
+all moments of $\tau_{\conn}$.
+\ifnum\CRevisionRound>0
+At $m=\lfloor(n/2)(\log n+c)\rfloor$, isolated-vertex factorial moments and a
+uniform spanning-tree bound excluding every other component prove
+$2\tau_{\conn}/n-\log n\Rightarrow$ the standard Gumbel law.
+\fi
+\ifnum\CRevisionRound>1
+Small-$n$, rounding, and terminal-edge faces are closed explicitly, together
+with an independently exhaustive finite certificate and strict claim scope.
+\fi
+\end{abstract}
+
+\section{The monotone process and connected counts}
+Let $e_1,\ldots,e_K$ be a uniformly random permutation of the edges of
+$K_n$, and put $G_m=(\{1,\ldots,n\},\{e_1,\ldots,e_m\})$.  Thus $G_m$ is
+uniform over the $\binom Km$ labeled graphs with $m$ edges.  Edge addition is
+monotone, and the connected graphs form an absorbing upper set.  We take
+$\tau_{\conn}=\min\{m:G_m\text{ is connected}\}$, with $\tau_{\conn}=0$
+when $n=1$.
+
+Write $C(n,m)$ for the number of connected labeled graphs on $n$ vertices
+with $m$ edges.  Set $C(1,0)=1$, and interpret both $C(s,j)$ and binomial
+coefficients as zero outside their natural ranges.
+
+\begin{theorem}[All finite connectivity-hitting laws]\label{thm:finite}
+For $n\geq2$, $K=\binom n2$, and every integer $m$,
+\begin{equation}\label{eq:recurrence}
+ C(n,m)=\binom Km-\sum_{s=1}^{n-1}\binom{n-1}{s-1}
+ \sum_j C(s,j)\binom{\binom{n-s}{2}}{m-j}.
+\end{equation}
+Moreover $C(n,m)=0$ for $m<n-1$,
+\begin{equation}\label{eq:endpoints}
+ C(n,n-1)=n^{n-2},\qquad C(n,K)=1.
+\end{equation}
+For $0\leq m\leq K$, with $F_n(-1)=0$,
+\begin{align}
+ F_n(m):=\Pp(\tau_{\conn}\leq m)&=\frac{C(n,m)}{\binom Km},\label{eq:cdf}\\
+ \Pp(\tau_{\conn}=m)&=F_n(m)-F_n(m-1),\label{eq:pmf}\\
+ \Pp(\tau_{\conn}>m)&=1-F_n(m).\label{eq:tail}
+\end{align}
+For every integer $r\geq1$,
+\begin{equation}\label{eq:moments}
+ \E[\tau_{\conn}^{\,r}]=\sum_{m=0}^{K-1}\bigl((m+1)^r-m^r\bigr)
+ \{1-F_n(m)\}.
+\end{equation}
+Finally, for $n\geq2$,
+\begin{equation}\label{eq:last}
+ n-1\leq\tau_{\conn}\leq\binom{n-1}{2}+1.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+If a graph is disconnected, let $s$ be the size of the component containing
+vertex 1.  Choose its other $s-1$ labels, choose its connected $j$-edge
+subgraph, and place every remaining edge among the other $n-s$ vertices.
+This decomposition is unique and subtracting it from all $m$-edge graphs
+gives~\eqref{eq:recurrence}.  A connected graph needs at least $n-1$ edges;
+at equality it is a tree, counted by the Pr\"ufer-code value $n^{n-2}$.
+The complete graph is unique, proving~\eqref{eq:endpoints}.
+
+The first $m$ positions of a uniform edge permutation form a uniform
+$m$-subset, which proves~\eqref{eq:cdf}.  Monotonicity gives
+\eqref{eq:pmf}--\eqref{eq:tail}.  For every nonnegative integer-valued $T$,
+$T^r=\sum_{m=0}^{T-1}((m+1)^r-m^r)$; expectation proves
+\eqref{eq:moments}.  The smallest connected graph is a tree.  A disconnected
+graph has at most $\binom{n-1}{2}$ edges, since convexity maximizes the sum of
+within-component edge capacities at component sizes $n-1$ and 1.  This proves
+\eqref{eq:last}.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{The connectivity window}
+For fixed $c\in\mathbb R$, let
+\begin{equation}\label{eq:window}
+ m_n(c)=\left\lfloor\frac n2(\log n+c)\right\rfloor .
+\end{equation}
+This lies in $[0,K]$ for all sufficiently large $n$.  Let $I_n$ be the number
+of isolated vertices in $G(n,m_n(c))$.
+
+\begin{lemma}[Poisson isolated vertices]\label{lem:poisson}
+$I_n$ converges in law to $\operatorname{Poisson}(e^{-c})$.
+\end{lemma}
+
+\begin{proof}
+For fixed $r\geq1$, an ordered $r$-tuple is isolated exactly when every
+chosen edge lies among the other $n-r$ vertices.  Hence, with $K=\binom n2$,
+\begin{equation}\label{eq:factorial}
+ \E\fall{I_n}{r}=\fall{n}{r}
+ \frac{\binom{\binom{n-r}{2}}{m_n(c)}}{\binom K{m_n(c)}}.
+\end{equation}
+Put $D_r=K-\binom{n-r}{2}=rn-r(r+1)/2$ and $m=m_n(c)$.  Since
+$m=O(n\log n)$,
+\begin{align*}
+ \log\frac{\binom{K-D_r}{m}}{\binom Km}
+ &=\sum_{j=0}^{m-1}\log\left(1-\frac{D_r}{K-j}\right)\\
+ &=-D_r\frac mK+O\left(\frac{D_rm^2}{K^2}
+                     +\frac{D_r^2m}{K^2}\right)
+ =-r(\log n+c)+o(1).
+\end{align*}
+Together with $\fall{n}{r}\sim n^r$, formula~\eqref{eq:factorial} tends
+to $e^{-rc}$.  These are all factorial moments of
+$\operatorname{Poisson}(e^{-c})$; the factorial-moment criterion proves the
+claim.
+\end{proof}
+
+Isolated vertices are the only asymptotically relevant obstruction.  The
+following proof retains the without-replacement law rather than silently
+switching to $G(n,p)$.
+
+\begin{lemma}[No other component survives]\label{lem:other}
+At $m=m_n(c)$,
+\[
+ \Pp\{G(n,m)\text{ is disconnected and }I_n=0\}\longrightarrow0.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $X_s$ count components with exactly $s$ vertices.  If a fixed $s$-set is
+a component, some one of its $s^{s-2}$ spanning trees is present and all
+$b=s(n-s)$ crossing edges are absent.  For a fixed tree with $a=s-1$ edges,
+sampling $m$ edges without replacement gives
+\begin{align}
+ \Pp\{A\subseteq G_m,\ B\cap G_m=\varnothing\}
+ &=\frac{\fall{m}{a}\fall{K-m}{b}}{\fall{K}{a+b}}\notag\\
+ &\leq\left(\frac mK\right)^a
+ \exp\left\{-\frac{b(m-a)}{K-a}\right\}.
+\end{align}
+Consequently
+\begin{equation}\label{eq:componentbound}
+ \E X_s\leq\binom ns s^{s-2}\left(\frac mK\right)^{s-1}
+ \exp\left\{-\frac{s(n-s)(m-s+1)}{K-s+1}\right\}.
+\end{equation}
+Here $m/K\asymp(\log n)/n$.  Uniformly for
+$2\leq s\leq n/\log n$, the exponent in~\eqref{eq:componentbound} is at
+least $s(\log n-O_c(1))$; using $\binom ns\leq(en/s)^s$ and summing gives
+\[
+ \sum_{2\leq s\leq n/\log n}\E X_s
+ \leq\sum_{s\geq2}n\left(\frac{C_c\log n}{n}\right)^s=o(1).
+\]
+For $n/\log n\leq s\leq n/2$, one has $n-s\geq n/2$ and
+$m-s+1\geq m/2$ for large $n$.  The exponent is then at least
+$s\log n/8$, while the remaining factors are at most
+$n(C\log n)^s$.  Thus
+\[
+ \sum_{n/\log n\leq s\leq n/2}\E X_s
+ \leq\sum_{s\geq n/\log n}n
+       \left(\frac{C\log n}{n^{1/8}}\right)^s=o(1).
+\]
+If a graph is disconnected and has no isolated vertex, one of its components
+has size between 2 and $\lfloor n/2\rfloor$.  Markov's inequality and the two
+sums prove the lemma.
+\end{proof}
+
+\begin{theorem}[Gumbel connectivity hitting law]\label{thm:gumbel}
+For every real $c$,
+\begin{equation}\label{eq:gumbel}
+ \lim_{n\to\infty}\Pp\left\{\frac{2\tau_{\conn}}n-\log n\leq c\right\}
+ =\exp\{-e^{-c}\}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Lemmas~\ref{lem:poisson}--\ref{lem:other} give
+$\Pp\{G(n,m_n(c))\text{ connected}\}=\Pp(I_n=0)+o(1)
+\to\exp\{-e^{-c}\}$.  Because $\tau_{\conn}$ is integer,
+the event on the left of~\eqref{eq:gumbel} is exactly
+$\{\tau_{\conn}\leq m_n(c)\}$; equation~\eqref{eq:cdf} finishes the proof.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Boundary, evidence, and Route A}
+For $n=1$, $K=0$ and $\tau_{\conn}=0$ by convention.  For $n=2$, the sole
+edge arrives at step one, so $\tau_{\conn}=1$.  Formula~\eqref{eq:cdf}
+includes $m=0$ and $m=K$; the upper support in~\eqref{eq:last} is no larger
+than $K$.  The floor in~\eqref{eq:window} exactly matches the integer hitting
+event.  For finite $n,c$ outside the asymptotic range one may clip a software
+query to $[0,K]$, but that clipping is not part of Theorem~\ref{thm:gumbel}.
+
+The evidence artifact applies~\eqref{eq:recurrence} through $n=12$, recording
+298 exact count/probability cells and the first four moments.  An independent
+checker exhausts all 33,867 labeled graph masks through $n=6$.  A separate
+SymPy lane verifies polynomial component decompositions, tail-moment
+telescoping, and exact isolated-vertex cells.  Finite isolated-factorial
+decimals are diagnostics only; the limits are owned by the displayed proof.
+
+The deterministic-window equivalence between connectivity and absence of
+isolated vertices does not assert a pathwise identity between
+$\tau_{\conn}$ and the time when the last isolated vertex disappears.
+Equation~\eqref{eq:gumbel} is weak convergence only; no convergence of its
+unbounded moments is claimed.  The exact finite process is $G(n,m)$ without
+replacement, not the independent-edge process $G(n,p)$.
+
+The nearest repository collisions are model-distinct.  C301 is a parallel
+fair-bit partition-refinement birthday process; C291 is random greedy dimer
+adsorption on finite paths and cycles; and C276 samples a whole uniform random
+mapping.  None uses the without-replacement complete-graph edge clock or owns
+the exact connectivity-hitting law and its Gumbel window proved here.
+
+The strict Route-A tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+The overall verdict is \texttt{ROUTE\_A\_REJECTED} and Route B is locked.
+Edge count is not an arithmetic prime clock, graph counts are not target
+determinants, and no self-adjoint target-zero lift exists.  The scope literal
+is displayed separately:
+\[
+ \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\]
+No arithmetic local datum, Euler factor, root number, automorphy, target
+divisor law, functional equation, zero match, or Hilbert--P\'olya operator is
+claimed.
+\fi
+
+\section*{Source ownership and AI-use statement}
+Erd\H{o}s and R\'enyi~\cite{ER} established the random-graph evolution and
+connectivity threshold.  We claim no priority for that result.  The present
+package supplies a self-contained frozen-model derivation, exact finite
+hitting atlas, and auditable boundary ledger.  AI tools assisted symbolic
+checks, hostile mutation design, and manuscript preparation; all proof
+obligations, cutoffs, and nonclaims are explicit.
+
+\begin{thebibliography}{1}
+\bibitem{ER} P. Erd\H{o}s and A. R\'enyi, ``On the evolution of random
+graphs,'' \emph{Publications of the Mathematical Institute of the Hungarian
+Academy of Sciences} 5 (1960), 17--61.
+\end{thebibliography}
+
+\end{document}

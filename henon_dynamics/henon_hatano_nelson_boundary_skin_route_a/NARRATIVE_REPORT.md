@@ -1,0 +1,7 @@
+# Narrative report
+
+C308 takes a genuinely different step from nearby quantum packages: it closes the complete boundary atlas of a finite nonreciprocal chain instead of extracting one more statistic from an existing model.  In the positive OBC quadrant, a diagonal gauge converts the nonnormal matrix into a symmetric path matrix.  This yields the whole Chebyshev spectrum, a canonical biorthogonal sine basis, exact propagator and resolvent, and an exponential conditioning law.
+
+The main conceptual guard is that an exponentially biased right amplitude is not the same object as a biorthogonal density.  In the canonical dual normalization the factors `q^(j-1)` and `q^(-(j-1))` cancel pointwise, leaving the ordinary sine density.  The strongest boundary phenomenon occurs as one hopping vanishes: OBC becomes one defective nilpotent Jordan block while PBC remains a Fourier-diagonalizable cyclic shift.  The package proves this singular split without rebranding it as a topological invariant.
+
+Computational evidence covers 123 rows and is independently recomputed.  A separate 259-check SymPy lane verifies symbolic identities; isolated replay and repaired-hash hostile tests exercise provenance and parser defenses.  Route A nevertheless fails at A0--A3 and retains only an A4 formal analogy: no arithmetic local datum, logarithmic prime clock, completed target function, or Hilbert--Polya operator is present.

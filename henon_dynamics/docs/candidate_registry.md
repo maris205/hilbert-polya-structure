@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C304--HCS-C308 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`c0259978b1d7ebae63fe7b39fce1af2655b8529d`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C304 | The multidimensional periodic linear Cahn--Hilliard generator has an exact analytic trace-class semigroup, free-energy law, full stable/neutral/spinodal lattice-shell atlas, Morse index, fastest-shell ties, projection asymptotics, and a sharp zero-capillarity generation boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [linear Cahn--Hilliard package](../henon_linear_cahn_hilliard_spinodal_route_a/) · [paper PDF](../henon_linear_cahn_hilliard_spinodal_route_a/paper/main.pdf) |
+| HCS-C305 | Constant-wind Euclidean navigation has exact translated-ball reachable sets and minimum-time values in weak, critical, and strong winds, with unique saturated optimal controls, attainable-time intervals, Hamilton--Jacobi geometry, Mach-cone singularities, and every degenerate face. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [constant-wind Zermelo package](../henon_constant_wind_zermelo_navigation_route_a/) · [paper PDF](../henon_constant_wind_zermelo_navigation_route_a/paper/main.pdf) |
+| HCS-C306 | Killed noncolliding nearest-neighbor walkers in a finite discrete Weyl chamber have a Karlin--McGregor determinant kernel, complete Slater spectrum, exact survival and absorption laws, ground-state decay and gap, a unique quasi-stationary law, and an explicit Doob conditioned process. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [killed-walkers package](../henon_killed_noncolliding_walkers_route_a/) · [paper PDF](../henon_killed_noncolliding_walkers_route_a/paper/main.pdf) |
+| HCS-C307 | The without-replacement Erdos--Renyi edge-addition process has an exact all-size connected-graph recurrence and complete finite connectivity first-passage law, while its centered hitting time has the classical Gumbel connectivity limit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [connectivity-hitting package](../henon_erdos_renyi_connectivity_hitting_route_a/) · [paper PDF](../henon_erdos_renyi_connectivity_hitting_route_a/paper/main.pdf) |
+| HCS-C308 | The clean Hatano--Nelson chain has an exact open-chain similarity/Chebyshev/biorthogonal skin atlas and a periodic Fourier ellipse, with conditioning, propagator, resolvent, Hermitian, one-sided Jordan-versus-cyclic, zero, and boundary-limit faces all closed. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Hatano--Nelson package](../henon_hatano_nelson_boundary_skin_route_a/) · [paper PDF](../henon_hatano_nelson_boundary_skin_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively a fourth-order PDE semigroup, a Euclidean control
+system, a killed determinantal Markov process, a monotone random graph
+process, and a non-normal quantum lattice Hamiltonian.  No target local
+datum, Euler factor, root number, automorphy object, target divisor/counting
+law or functional equation, target zero match, Hilbert--Pólya operator, or
+Route-B input is introduced.  Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.
+Final release hashes and accounting are recorded in
+[BATCH_REVIEW_C304_C308.md](../BATCH_REVIEW_C304_C308.md).
+
 ## HCS-C299--HCS-C303 additions (2026-09-02)
 
 Five independent cross-subtype candidates were frozen from baseline

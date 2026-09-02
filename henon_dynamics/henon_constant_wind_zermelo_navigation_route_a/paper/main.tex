@@ -1,0 +1,215 @@
+\pdfvariable trailerid {[<C3052026090300000000000000000000><C3052026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\B}{\overline B}
+\setlength{\emergencystretch}{3em}
+\title{Constant-Wind Zermelo Navigation Beyond the Randers Chamber}
+\author{Route-A source-local certificate HCS-C305}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For every finite $d\ge1$, constant wind $W\in\R^d$, control cap $c\ge0$,
+and target, we give the complete minimum-time atlas for
+$\dot x=W+u$, $|u|\le c$. A single theorem covers weak, critical, and strong
+wind, including exact reachability, value formulas, and all attainable times.
+\ifnum\CRevisionRound>0
+It also proves the unique constant optimizer, HJB equation, symmetries,
+Mach-cone regularity, and all zero-data faces.
+\fi
+\ifnum\CRevisionRound>1
+A 744-cell archive and independent checker, symbolic, replay, mutation, and
+deterministic-build lanes supply regression evidence without replacing proof.
+\fi
+\end{abstract}
+
+\section{The all-chamber value theorem}
+Consider measurable controls $u$ satisfying $|u(t)|\le c$ a.e. and
+\begin{equation}\label{eq:system}
+ \dot x=W+u,\qquad x(0)=0.
+\end{equation}
+For a target $y$, write
+\[
+ w=|W|,\qquad p=W\cdot y,\qquad r=|y|,
+ \qquad a=w^2-c^2,\qquad D=p^2-ar^2.
+\]
+
+\begin{theorem}[Complete constant-wind atlas]\label{thm:atlas}
+At exact time $t\ge0$, the reachable set is
+\begin{equation}\label{eq:ball}
+ \mathcal R(t)=Wt+ct\B.
+\end{equation}
+For $y\ne0$, minimum time and all attainable times are as follows.
+\begin{enumerate}
+\item If $w<c$, every $y$ is reachable,
+\begin{equation}\label{eq:weak}
+ T(y)=\frac{\sqrt{p^2+(c^2-w^2)r^2}-p}{c^2-w^2},
+ \qquad \mathcal I(y)=[T,\infty).
+\end{equation}
+\item If $w=c>0$, reachability is equivalent to $p>0$, and then
+\begin{equation}\label{eq:critical}
+ T(y)=\frac{r^2}{2p},\qquad \mathcal I(y)=[T,\infty).
+\end{equation}
+\item If $w>c$, reachability is equivalent to $p>0$ and $D\ge0$. Then
+\begin{equation}\label{eq:strong}
+ T_\mp(y)=\frac{p\mp\sqrt D}{w^2-c^2},\qquad
+ T(y)=T_-(y),\qquad \mathcal I(y)=[T_-,T_+].
+\end{equation}
+\end{enumerate}
+For every nonzero reachable target the time-optimal control is unique up to
+null sets and constant:
+\begin{equation}\label{eq:control}
+ u_*(s)=y/T(y)-W,\qquad |u_*|=c.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Integrating~\eqref{eq:system} shows that control averages fill
+$c\B$, proving~\eqref{eq:ball}. Thus $y$ is attainable at $t$ exactly when
+\begin{equation}\label{eq:quadratic}
+ |y-Wt|^2\le c^2t^2
+ \quad\Longleftrightarrow\quad
+ f(t)=at^2-2pt+r^2\le0.
+\end{equation}
+For $y\ne0$, $f(0)>0$. If $a<0$, its roots have opposite signs and the
+positive root is~\eqref{eq:weak}; the inequality holds thereafter. If
+$a=0$, it is linear and crosses zero at positive time exactly when $p>0$,
+giving~\eqref{eq:critical}. If $a>0$, it has a nonnegative-time sublevel
+interval exactly when $p>0$ and $D\ge0$. Both roots are then positive and
+the sublevel set is precisely~\eqref{eq:strong}; in particular the minimum
+is the smaller root, not $T_+$.
+
+At first contact, $|y-WT|=cT$. Any optimal control obeys
+\[
+ \left|T^{-1}\int_0^T u(s)\,ds\right|=c
+ \le T^{-1}\int_0^T|u(s)|\,ds\le c.
+\]
+Equality in the strictly convex Euclidean triangle inequality forces the
+control to equal $y/T-W$ a.e. For $c=0$ this conclusion is immediate.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Value geometry, HJB, and exact boundaries}
+\begin{proposition}[Symmetries and HJB]\label{prop:hjb}
+For every orthogonal $Q$, $\lambda>0$, and $s>0$,
+\begin{equation}\label{eq:symmetry}
+ T_{QW,c}(Qy)=T_{W,c}(y),\quad
+ T_{W,c}(\lambda y)=\lambda T_{W,c}(y),\quad
+ T_{sW,sc}(y)=s^{-1}T_{W,c}(y).
+\end{equation}
+On each interior component where $T$ is finite and $y\ne0$, it is smooth and
+\begin{equation}\label{eq:hjb}
+ W\cdot\nabla T+c|\nabla T|=1.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Equation~\eqref{eq:symmetry} follows from~\eqref{eq:system}, or directly from
+$p,r,w,c$. First assume $c>0$. At first contact put
+$F(y,T)=|y-WT|^2-c^2T^2=0$. Implicit differentiation gives
+\begin{equation}\label{eq:gradient}
+ \nabla T=\frac{y-WT}{p-(w^2-c^2)T}.
+\end{equation}
+The denominator is $\sqrt D>0$ on the selected smooth radical branch and is
+$p>0$ in critical wind. Using $|y-WT|=cT$ in~\eqref{eq:gradient} yields
+\eqref{eq:hjb} with the displayed plus sign. If $c=0$ and $d>1$, the
+reachable ray has empty Euclidean interior. If $c=0$, $d=1$, and $W\ne0$,
+write $e=W/|W|$ and $y=se$ on the open forward ray. Then
+$T=s/|W|$, $\nabla T=e/|W|$, and $W\cdot\nabla T=1$ directly.
+\end{proof}
+
+The formulas remain exact on their stated faces, but the domains change.
+\begin{center}\small
+\begin{tabular}{@{}lp{0.71\linewidth}@{}}
+\toprule
+Face & Exact conclusion \\
+\midrule
+$y=0$ & $T=0$; every $t\ge0$ is feasible if $w\le c$, only $t=0$ if $w>c$. \\
+$W=0<c$ & $T(y)=|y|/c$ for every target. \\
+$c=0$, $W\ne0$ & only $y=tW$, $t\ge0$, is reachable; $u=0$ is forced. \\
+$W=c=0$ & only the zero target is reachable. \\
+$w=c>0$ & nonzero finite-value domain is the open half-space $p>0$. \\
+$0<c<w$ & full finite-value domain is the closed cone $\{0\}\cup\{y\ne0:p>0,D\ge0\}$. \\
+$D=0$ & double time root and square-root loss on a nontrivial cone boundary. \\
+\bottomrule
+\end{tabular}
+\end{center}
+In one dimension with $0<c<w$, the nonzero reachable ray lies in the smooth
+interior algebraically; a nontrivial angular cone boundary requires higher
+dimension. When $c=0$, the ray is handled separately. Weak wind is the gauge
+of a velocity ball containing the origin, but the strong-wind value is not a
+global Finsler norm because it is infinite outside its cone.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Evidence, hostile audit, and Route-A boundary}
+The archive has 29 exact cases: zero wind; generic weak wind; reachable and
+unreachable critical targets; strong-wind axis, interior, double-root cone,
+exterior, and backward cases; zero cap; zero velocity; and zero targets in
+all chambers. Twelve smooth probes reconstruct~\eqref{eq:gradient},
+\eqref{eq:hjb}, and both scalings. Together with eight boundary rows this is
+744 audited leaves. An independent checker performs 734 assertions, a
+separate SymPy lane checks 27 identities, isolated replay is byte-exact, and
+85 repaired-hash or parser mutations must all fail.
+
+The hostile suite changes the selected strong root, finite time window,
+critical sign, zero-target time set, optimizer, HJB sign and values, exact
+keys/types/IDs, and Route-A semantics. Duplicate/nonfinite JSON and
+duplicate/anchor/alias/merge YAML are rejected. Three round variants are
+rebuilt twice at a fixed epoch; the final PDF is the round-2 alias. Warnings,
+fonts, text, pages, and rasterization are checked. These finite lanes regress the theorem; the global proof
+is the quadratic argument~\eqref{eq:quadratic}.
+
+\paragraph{Collision and claim boundaries.}
+C222 is a second-order double-integrator bang--bang system; C270 uses
+Heisenberg sub-Riemannian geometry; C268 is an uncontrolled constant-field
+Lorentz flow. C305 closes first-order controlled Euclidean navigation in
+every finite dimension and all wind chambers. It
+does not claim variable wind, obstacles, state constraints, manifolds, or
+literature novelty.
+
+Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the exact tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+Travel data are not arithmetic local factors (A0); point-to-point controls
+are not a primitive periodic-orbit ledger (A1); physical time is not a
+rational-prime clock (A2); no target determinant or functional equation is
+constructed (A3); HJB supplies no self-adjoint Hilbert--P\'olya operator or
+target-zero match (A4). Therefore the overall verdict is
+\texttt{ROUTE\_A\_REJECTED}, and Route B stays locked. No target Euler
+factor, root number, automorphy, divisor law, functional equation, or zero
+correspondence is asserted.
+
+\paragraph{Reproducibility and AI use.}
+The release retains canonical evidence, independent executable lanes, three
+substantive manuscript revisions, and a self-excluding manifest. A
+generative language model assisted drafting and code scaffolding;
+independent checks audit formulas, artifacts, and scope, and final
+responsibility remains with the authors.
+\fi
+
+\section*{Source lineage}
+Zermelo's 1931 paper is the historical owner token for the navigation
+problem. Bao, Robles, and Shen provide navigation/Randers geometric context.
+The citations establish lineage, not novelty or priority.
+
+\begin{thebibliography}{9}
+\bibitem{Zermelo1931} E. Zermelo,
+``Über das Navigationsproblem bei ruhender oder veränderlicher
+Windverteilung,'' \emph{ZAMM} 11 (1931), 114--124.
+DOI: \href{https://doi.org/10.1002/zamm.19310110205}{10.1002/zamm.19310110205}.
+\bibitem{BRS2004} D. Bao, C. Robles, and Z. Shen,
+``Zermelo navigation on Riemannian manifolds,''
+\emph{J. Differential Geom.} 66 (2004), 377--435.
+DOI: \href{https://doi.org/10.4310/jdg/1098137838}{10.4310/jdg/1098137838}.
+\end{thebibliography}
+\end{document}

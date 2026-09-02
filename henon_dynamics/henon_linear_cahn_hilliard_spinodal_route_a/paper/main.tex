@@ -1,0 +1,221 @@
+\pdfvariable trailerid {[<C3042026090300000000000000000000><C3042026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\T}{\mathbb T}
+\newcommand{\N}{\mathbb N}
+\newcommand{\dd}{\,\mathrm d}
+\setlength{\emergencystretch}{3em}
+\title{The Full-Dimensional Linear Cahn--Hilliard Spinodal Atlas}
+\author{Route-A source-local certificate HCS-C304}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For every finite $d\ge1$, $\kappa>0$, and $\alpha\in\mathbb R$, we
+classify the linear Cahn--Hilliard flow
+$u_t=-\kappa\Delta^2u-\alpha\Delta u$ on the $2\pi$-periodic torus.
+The result gives the self-adjoint analytic trace-class semigroup, exact
+lattice-shell spectrum, and the complete stable/critical/spinodal atlas.
+\ifnum\CRevisionRound>0
+It also closes the energy law, Morse index and kernel, all fastest-shell ties,
+actual-support asymptotics, recurrence, and the singular $\kappa=0$ face.
+\fi
+\ifnum\CRevisionRound>1
+A 1653-cell archive with independent checker, symbolic, replay, mutation,
+and deterministic-build lanes is regression evidence; it is not the proof.
+\fi
+\end{abstract}
+
+\section{One theorem for the entire parameter space}
+Let $\T^d=(\mathbb R/2\pi\mathbb Z)^d$, $H=L^2_0(\T^d)$, and
+\[
+ A=-\kappa\Delta^2-\alpha\Delta,\qquad
+ D(A)=H^4(\T^d)\cap H,
+ \quad \kappa>0,\quad\alpha\in\mathbb R.
+\]
+Write $r_d(n)=\#\{k\in\mathbb Z^d:|k|^2=n\}$.
+
+\begin{theorem}[Full linear spinodal atlas]\label{thm:atlas}
+For every finite $d\ge1$ the operator $A$ is self-adjoint, bounded above,
+and has compact resolvent. It generates a self-adjoint analytic semigroup
+$S(t)$, trace class for every $t>0$. On shell $n>0$,
+\begin{equation}\label{eq:rate}
+ Ae_k=\sigma_ne_k,\qquad \sigma_n=\alpha n-\kappa n^2,
+\end{equation}
+with multiplicity $r_d(n)$. The mean-zero equilibrium is exponentially
+stable iff $\alpha<\kappa$, critical iff $\alpha=\kappa$, and spinodally
+unstable iff $\alpha>\kappa$. Its unstable Morse index and kernel dimension
+are
+\begin{equation}\label{eq:index}
+ M=\sum_{n<\alpha/\kappa}r_d(n),\qquad
+ K=\sum_{n=\alpha/\kappa}r_d(n),
+\end{equation}
+where absent shells contribute zero. At criticality $K=r_d(1)=2d$.
+
+The spectral bound is attained precisely on
+\begin{equation}\label{eq:fast}
+ \mathcal N_*=\operatorname*{argmax}_{n\ge1,\ r_d(n)>0}
+ (\alpha n-\kappa n^2),
+\end{equation}
+including every tie. For $u_0\ne0$, let
+$\lambda_*=\max\{\sigma_n:P_nu_0\ne0\}$. Then
+\begin{equation}\label{eq:limit}
+ e^{-\lambda_*t}S(t)u_0\longrightarrow
+ \sum_{\sigma_n=\lambda_*}P_nu_0\quad\hbox{in }L^2.
+\end{equation}
+Every recurrent state is stationary; hence there is no nonstationary
+periodic solution.
+\end{theorem}
+
+\begin{proof}
+For $e_k=(2\pi)^{-d/2}e^{ik\cdot x}$, $\Delta e_k=-|k|^2e_k$, so
+\eqref{eq:rate} follows. The real diagonal values tend to $-\infty$ as
+$|k|\to\infty$, proving self-adjointness, compact resolvent, and an upper
+bound. The spectral theorem yields the analytic semigroup, while
+\[
+ \sum_{k\ne0}e^{t(\alpha|k|^2-\kappa|k|^4)}<\infty\qquad(t>0)
+\]
+by quartic domination, proving trace class. The sign factorization
+$\sigma_n=n(\alpha-\kappa n)$ proves the chamber and index formulas.
+
+The maximization in \eqref{eq:fast} is over the whole represented spectrum,
+not a numerical cutoff. Indeed
+\begin{equation}\label{eq:square}
+ \sigma_n=\frac{\alpha^2}{4\kappa}
+ -\kappa\left(n-\frac{\alpha}{2\kappa}\right)^2.
+\end{equation}
+If $\alpha/\kappa\le1$, then for $n>1$,
+$\sigma_n-\sigma_1=(n-1)[\alpha-\kappa(n+1)]<0$. If
+$\alpha/\kappa>1$, shell one has positive rate whereas every
+$n\ge\alpha/\kappa$ has nonpositive rate. Thus an explicit finite set of
+represented integers contains every maximizer, and all ties are retained.
+For a fixed datum the same decay at infinity gives a largest rate in its
+actual support. Factoring $e^{\lambda_*t}$ and dominated convergence prove
+\eqref{eq:limit}. Finally, recurrence along $t_j\to\infty$ forces
+$e^{t_j\sigma_n}\widehat u_0(k)\to\widehat u_0(k)$ coefficientwise; every
+nonzero coefficient must have $\sigma_n=0$, so the state is stationary.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Gradient-flow law and singular faces}
+Set
+\[
+ \mathcal F(u)=\frac12\int_{\T^d}
+ (\kappa|\nabla u|^2-\alpha|u|^2)\dd x,
+ \qquad \mu=-\kappa\Delta u-\alpha u.
+\]
+The equation is $u_t=\Delta\mu$. Periodic integration by parts gives the
+exact dissipation identity
+\begin{equation}\label{eq:energy}
+ \frac{\dd}{\dd t}\mathcal F(u(t))
+ =\langle\mu,\Delta\mu\rangle=-\|\nabla\mu\|_2^2.
+\end{equation}
+This explains the energy signature without turning linear instability into
+a nonlinear saturation or coarsening theorem.
+
+\begin{proposition}[Boundary completion]\label{prop:boundary}
+On full $L^2$, the constant mode is stationary and equals the conserved
+mean. On the mean-zero space $H$, the singular face $\kappa=0$ is
+interpreted with its natural generator domain: for $\alpha\ne0$, the
+operator $-\alpha\Delta$ has domain $H^2(\T^d)\cap H$, while for
+$\alpha=0$ the zero generator has domain all of $H$. It gives forward heat
+when $\alpha<0$, the identity when $\alpha=0$, and no bounded $L^2$ $C_0$
+semigroup when $\alpha>0$.
+\end{proposition}
+\begin{proof}
+The zero shell has rate zero. On the stated natural domains, the
+$\kappa=0$ positive shells have rates $\alpha n$. Negative $\alpha$ gives
+heat, zero gives identity, and positive $\alpha$ makes
+$\sup_ne^{t\alpha n}=\infty$ for every $t>0$.
+\end{proof}
+
+\begin{center}\small
+\begin{tabular}{@{}lp{0.72\linewidth}@{}}
+\toprule
+Face & Exact conclusion \\
+\midrule
+$\alpha<\kappa$ & every mean-zero shell decays exponentially. \\
+$\alpha=\kappa$ & only shell one is neutral; its dimension is $2d$. \\
+$\alpha>\kappa$ & finitely many represented shells are unstable. \\
+fastest tie & retain the entire tied spectral projection. \\
+missing ambient leader & use the largest rate in the actual support of $u_0$. \\
+$\kappa\downarrow0$ & heat / identity / no bounded semigroup according to the sign of $\alpha$. \\
+\bottomrule
+\end{tabular}
+\end{center}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Finite evidence, hostile audit, and scope}
+The deterministic archive contains 18 rational cases in dimensions one
+through six, 216 shell rows, six actual-support probes, three singular-face
+rows, and six boundary rows: 1653 audited leaves. Each case records the
+analytic exhaustion cutoff from the proof; the 12 displayed receipt shells
+do not prove \eqref{eq:fast}. An independent checker reconstructs all shell
+multiplicities and values in 1930 assertions. A separate symbolic lane
+checks 36 identities, isolated replay demands two byte-identical outputs,
+and 72 repaired-hash or parser mutations must all be rejected.
+
+Hostile tests alter the fastest set, exhaustion statement and cutoff,
+Morse/kernel dimensions, canonical rationals and decimals, exact JSON/YAML
+trees and types, and Route-A claims. They also attack duplicate keys,
+nonfinite tokens, YAML anchors, aliases, and merges. The three round variants
+are each rebuilt in two fresh directories at a fixed epoch and audited for
+warnings, text, pages, and fonts; the final PDF is a byte-identical alias of
+round 2.
+
+\paragraph{Collision and claim boundaries.}
+Earlier Fourier packages C206/C213/C217/C218/C261/C277 use different
+transport, hyperbolic, dispersive, fractional, or damping generators; C195
+is nonlinear viscous Burgers. Here the theorem is the fourth-order conserved
+linear spinodal atlas in every finite dimension. It claims neither nonlinear
+Cahn--Hilliard saturation/coarsening nor literature novelty.
+
+Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the Route-A tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+   \mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\]
+Lattice shells are source Fourier geometry, not arithmetic local data (A0);
+stationary recurrence supplies no primitive-orbit bridge (A1); physical time
+is not a prime clock (A2); no target determinant or functional equation is
+constructed (A3). Self-adjointness is only a source-side formal hint, not a
+Hilbert--P\'olya or target-zero result (A4). The overall verdict is
+\texttt{ROUTE\_A\_REJECTED}; Route B remains locked. No target Euler factor,
+root number, automorphy, divisor law, functional equation, or zero match is
+claimed.
+
+\paragraph{Reproducibility and AI use.}
+The release retains producer-independent validation, exact evidence, three
+substantive manuscript revisions, and a self-excluding manifest. A
+generative language model assisted with drafting and code scaffolding;
+independent executable lanes check formulas, artifacts, and scope, and final
+responsibility remains with the authors.
+\fi
+
+\section*{Source lineage}
+Cahn and Hilliard introduced the nonuniform free-energy model, and Cahn's
+spinodal paper is the historical owner token for the instability language.
+Elliott and Zheng provide classical analytical context. These references
+establish lineage only.
+
+\begin{thebibliography}{9}
+\bibitem{CH1958} J. W. Cahn and J. E. Hilliard,
+``Free Energy of a Nonuniform System. I. Interfacial Free Energy,''
+\emph{J. Chem. Phys.} 28 (1958), 258--267.
+DOI: \href{https://doi.org/10.1063/1.1744102}{10.1063/1.1744102}.
+\bibitem{Cahn1961} J. W. Cahn, ``On spinodal decomposition,''
+\emph{Acta Metallurgica} 9 (1961), 795--801.
+DOI: \href{https://doi.org/10.1016/0001-6160(61)90182-1}{10.1016/0001-6160(61)90182-1}.
+\bibitem{EZ1986} C. M. Elliott and S. Zheng, ``On the Cahn--Hilliard
+equation,'' \emph{Arch. Rational Mech. Anal.} 96 (1986), 339--357.
+DOI: \href{https://doi.org/10.1007/BF00251803}{10.1007/BF00251803}.
+\end{thebibliography}
+\end{document}
