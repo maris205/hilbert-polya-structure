@@ -2719,6 +2719,53 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C289--C293
+
+This round takes five separate theorem-scale steps while changing the owner,
+state space, clock, and proof mechanism in every paper: a homogeneous magnetic
+flow on the hyperbolic plane, a singular rotating celestial Hamiltonian, a
+finite stochastic greedy-adsorption process, an irreversible all-event
+particle coalescence flow, and a degenerate magnetic quantum operator.  The
+five manuscripts are independent results, not installments of one theorem.
+
+- [C289 hyperbolic constant-magnetic-flow orbit atlas](henon_hyperbolic_constant_magnetic_flow_route_a/README.md) · [paper PDF](henon_hyperbolic_constant_magnetic_flow_route_a/paper/main.pdf)
+- [C290 five Lagrange equilibria and defective Gascheau--Routh boundary](henon_cr3bp_lagrange_stability_route_a/README.md) · [paper PDF](henon_cr3bp_lagrange_stability_route_a/paper/main.pdf)
+- [C291 exact path/cycle dimer-RSA laws](henon_dimer_rsa_path_cycle_route_a/README.md) · [paper PDF](henon_dimer_rsa_path_cycle_route_a/paper/main.pdf)
+- [C292 arbitrary finite all-event sticky-particle flow](henon_sticky_particle_all_event_route_a/README.md) · [paper PDF](henon_sticky_particle_all_event_route_a/paper/main.pdf)
+- [C293 flux-driven magnetic Grushin spectral transition](henon_magnetic_grushin_cylinder_route_a/README.md) · [paper PDF](henon_magnetic_grushin_cylinder_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C289_C293.md),
+[batch plan](BATCH_PLAN_C289_C293.md), and
+[batch review](BATCH_REVIEW_C289_C293.md) for collision screening, proof
+contracts, historical ownership, independent hostile reviews, the base-point
+return and resonant-multiplicity repairs, strict duplicate-rejecting JSON/YAML
+release gates, deterministic PDFs, and exact receipts.  Across the five
+packages the final audit closes **28,356** independent-checker assertions,
+**1,554** symbolic checks, **354/354** hostile rejections, **167,316** evidence
+bytes, 135 manifest payloads (140 physical files), and **21** final-paper pages
+with **118** embedded/subset font records.
+
+The strict tuples, in order C289--C293, are
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,`\
+`A3_PARTIAL_ANALYTIC_STRUCTURE,A4_NATURAL_QUANTIZATION)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local data, Euler factor,
+root number, automorphy object, target divisor/counting law or functional
+equation, target zero match, Hilbert--Pólya operator, or Route-B input is
+claimed.
+
+Final PDF SHA-256 values, in order C289--C293, are
+`c3361619fe4d967223415894bd712a772989827a0ebc2de5b0fd98872b328cd1`,
+`88ce6ad9ad23e0cebea986cf9305bc6b258c5816170120e656c334b0b38aed9e`,
+`b410ec70209302f891992712b4a6be16663e04d2a79cd6f7e4f1e762fef64a22`,
+`b91f101d7947d4a5e5feeaf3a2dd2d405a3308ed1e0ec8bf984be2cdf262f6d8`,
+and `3295011b255e5e70761bd1119af1b8b72453b0724cfbb21663614321a763935d`.
+
 ## Route-A independent cross-subtype round C284--C288
 
 This round takes five complete theorem-scale steps while changing the owner,

@@ -1,0 +1,292 @@
+\pdfvariable trailerid {[<C2922026090200000000000000000000><C2922026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\D}{\mathrm d}
+\newcommand{\one}{\mathbf 1}
+\title{All-Event Dynamics of Finite Sticky Particles:\\
+Weighted Isotonic Geometry, Dissipation, and Weak Closure}
+\author{Route-A source-local certificate HCS-C292}
+\date{2 September 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close the forward dynamics of an arbitrary finite one-dimensional system
+of positive point masses undergoing perfectly inelastic sticking.
+Initially coincident labels are canonically premerged, after which a single
+construction handles binary, multi-cluster, and spatially disjoint
+simultaneous events.
+\ifnum\CRevisionRound=0
+The position vector is the mass-weighted isotonic projection of the free
+configuration, which proves uniqueness and the no-splitting property.
+\fi
+\ifnum\CRevisionRound>0
+Equivalently, positions are slopes of a lower convex hull in cumulative-mass
+coordinates.  Every event conserves mass and momentum and has an exact
+pairwise-variance kinetic-energy loss.
+\fi
+\ifnum\CRevisionRound>1
+The induced atomic density and momentum solve pressureless Euler in the
+distributional sense and obey the kinetic-energy entropy inequality.
+Strict independent evidence exercises all event types without substituting
+finite computation for the all-data proof.
+\fi
+\end{abstract}
+
+\section{Model, conventions, and source ownership}
+Let raw labels carry masses $m_i>0$, ordered positions
+$x_1\leq\cdots\leq x_N$, and velocities $v_i\in\R$.  All labels at the same
+initial position are replaced at time zero by one canonical particle whose
+mass and velocity are
+\begin{equation}\label{eq:premerge}
+ M=\sum_i m_i,
+ \qquad V=M^{-1}\sum_i m_i v_i.
+\end{equation}
+The resulting canonical positions are strictly increasing.  This convention
+preserves mass and momentum and regards any raw-label energy drop as part of
+initialization.  Zero mass is excluded because both~\eqref{eq:premerge} and
+the weighted geometry would otherwise have undefined blocks.
+
+Canonical particles move ballistically until contact.  Every maximal
+consecutive block occupying one position then becomes one particle, with
+mass and velocity given by~\eqref{eq:premerge}; it never splits.  Velocities
+at event times are right-continuous.  This is a forward entropy dynamics:
+we make no backward-uniqueness claim.
+
+The monotone-cone formulation and sticky semigroup are classical; a direct
+owner is Natile and Savar\'e~\cite{NS2009}.  Brenier, Gangbo, Savar\'e, and
+Westdickenberg treat sticky Lagrangian pressureless flows with interactions
+\cite{BGSW2013}, and Hynd gives a Lagrangian pressureless-Euler construction
+\cite{Hynd2019}.  The result below is a convention-complete, independently
+audited workspace certificate, not a claim of literature priority.
+
+\section{The all-event theorem}
+Write the canonical data again as $(m_i,x_i,v_i)_{i=1}^n$, now with
+$x_1<\cdots<x_n$.  Give $\R^n$ the weighted norm
+$\lVert z\rVert_m^2=\sum_i m_i z_i^2$ and set
+\[
+ K=\{z\in\R^n:z_1\leq\cdots\leq z_n\}.
+\]
+Let $P_K^m$ denote the unique projection in this norm.
+
+\begin{theorem}[Arbitrary finite all-event flow]\label{thm:main}
+For every canonical finite datum there is exactly one global forward sticky
+flow.  Its labelled positions are
+\begin{equation}\label{eq:projection}
+ X(t)=P_K^m(x+t v),\qquad t\geq0.
+\end{equation}
+The equal-coordinate blocks of $X(t)$ are precisely the physical clusters;
+their velocity is the mass-weighted average of the $v_i$ in that block.
+The partitions only coarsen.  Thus there are at most $n-1$ nontrivial
+mergers, while any one event time may contain several disjoint contact
+positions and any contact position may contain more than two incoming
+clusters.
+\end{theorem}
+
+\begin{proof}
+The finite event construction is explicit.  At any state, compare adjacent
+clusters $A,B$.  If $V_A>V_B$, their prospective delay is
+\[
+ \tau_{A,B}=\frac{X_B-X_A}{V_A-V_B};
+\]
+otherwise it is infinite.  Advance every cluster through the least finite
+delay.  At that time merge \emph{all} maximal consecutive collocated blocks,
+including blocks at different positions.  Each nontrivial merge lowers the
+cluster count, so the process is global after at most $n-1$ mergers.  This
+also covers several adjacent prospective delays becoming equal.
+
+It remains to identify the construction and prove uniqueness.  Weighted
+pool-adjacent-violators starts from the free values $y_i(t)=x_i+t v_i$ and
+replaces every adjacent inversion by its mass-weighted mean.  Its terminal
+blocks satisfy the variational inequalities for projection onto $K$, hence
+give the unique vector~\eqref{eq:projection}.  Before the first contact no
+pool is needed.  At first contact, exactly the maximal collocated incoming
+blocks are pooled, and their slope in $t$ is their barycentric velocity.
+Repeating this argument after the event identifies the projection with the
+event construction on the next interval.  Induction closes every interval.
+Once a set of indices is pooled, the same barycentric rule governs it in the
+next interval, so a physical block cannot split.  The projection therefore
+selects the unique forward sticky continuation.
+\end{proof}
+
+Separated clusters with equal velocity have infinite prospective delay and
+do not collide.  A collision may fail to occur altogether.  Simultaneity is
+not resolved by arbitrary pair ordering: maximal contact blocks are merged
+in one operation.
+
+\ifnum\CRevisionRound>0
+\section{Lower convex hull and event geometry}
+Put $M_0=S_0=0$ and, for $1\leq j\leq n$,
+\begin{equation}\label{eq:cumsum}
+ M_j=\sum_{i\leq j}m_i,
+ \qquad S_j(t)=\sum_{i\leq j}m_i(x_i+t v_i).
+\end{equation}
+Take the greatest convex minorant of the polygonal line through
+$(M_j,S_j(t))_{j=0}^n$.
+
+\begin{proposition}[Hull representation]\label{prop:hull}
+On each interval $[M_{a-1},M_b]$ where the minorant has one affine face, its
+slope equals $X_i(t)$ for every $a\leq i\leq b$.  Its faces are therefore
+exactly the sticky clusters at time $t$.
+\end{proposition}
+\begin{proof}
+The slope of the chord from $M_{a-1}$ to $M_b$ is the weighted mean of
+$y_a(t),\ldots,y_b(t)$.  Convexity orders successive slopes.  Maximal faces
+therefore give a feasible isotonic vector.  The minorant inequalities are
+the prefix-sum form of the projection variational inequality; equality at
+face endpoints supplies complementary slackness.  Strict convexity of the
+weighted square norm identifies this vector with~\eqref{eq:projection}.
+\end{proof}
+
+The hull picture also makes simultaneous events unambiguous.  At an event,
+one or several neighboring groups of faces become collinear.  Replacing each
+group by its maximal common face produces the unique post-event partition.
+Because later physical partitions coarsen, an equality face is never split
+by a label-level tie convention.
+
+\section{Exact conservation and dissipation}
+Suppose one event group contains incoming clusters with masses $M_a>0$ and
+velocities $V_a$, $1\leq a\leq r$.  Set
+$M=\sum_aM_a$, $P=\sum_aM_aV_a$, and $\bar V=P/M$.
+
+\begin{proposition}[Multi-cluster loss identity]\label{prop:loss}
+Mass and momentum are conserved, and the kinetic-energy loss is
+\begin{equation}\label{eq:loss}
+ \Delta E
+ =\frac12\sum_aM_aV_a^2-\frac12M\bar V^2
+ =\frac1{2M}\sum_{a<b}M_aM_b(V_a-V_b)^2\geq0.
+\end{equation}
+The formula adds over disjoint contact positions at the same event time.
+Globally, total mass and momentum are constant, and
+\begin{equation}\label{eq:com}
+ \sum_C M_CX_C(t)=\sum_i m_ix_i+t\sum_i m_iv_i.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The definitions of $M,P$, and $\bar V$ prove mass and momentum conservation.
+Expanding
+$\sum_aM_a(V_a-\bar V)^2$ gives the first difference
+in~\eqref{eq:loss}; symmetrizing gives the pairwise expression.  Each term is
+nonnegative.  Ballistic differentiation proves~\eqref{eq:com} between
+events, while event continuity and momentum conservation remove every jump.
+Disjoint event groups have disjoint incoming index sets, so their losses add.
+\end{proof}
+
+This exact identity includes binary and arbitrary simultaneous mergers.  It
+also distinguishes the physical entropy selection from a merely
+mass-conserving coalescence rule.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Atomic pressureless Euler closure}
+At non-event times let the sum run over current clusters and define Radon
+measures
+\begin{equation}\label{eq:measures}
+ \rho_t=\sum_C M_C\delta_{X_C(t)},\quad
+ j_t=\sum_C M_CV_C\delta_{X_C(t)},\quad
+ q_t=\sum_C M_CV_C^2\delta_{X_C(t)}.
+\end{equation}
+The value assigned to $V_C$ at finitely many event instants is immaterial in
+space--time integration; we retain the right-continuous convention.
+
+\begin{theorem}[Weak pressureless Euler and entropy]\label{thm:pde}
+For all compactly supported smooth test functions $\phi,\psi$ on
+$[0,\infty)\times\R$,
+\begin{align}
+ \int_0^\infty\!\!\int
+   (\partial_t\phi\,\D\rho_t+\partial_x\phi\,\D j_t)\D t
+   +\int\phi(0,x)\,\D\rho_0(x)&=0,\label{eq:massweak}\\
+ \int_0^\infty\!\!\int
+   (\partial_t\psi\,\D j_t+\partial_x\psi\,\D q_t)\D t
+   +\int\psi(0,x)\,\D j_0(x)&=0.\label{eq:momweak}
+\end{align}
+Moreover, with
+$e_t=\frac12\sum_CM_CV_C^2\delta_{X_C(t)}$ and
+$f_t=\frac12\sum_CM_CV_C^3\delta_{X_C(t)}$,
+\begin{equation}\label{eq:entropy}
+ \partial_t e+\partial_x f
+ =-\sum_{\tau}\sum_{g\text{ at }\tau}
+   \Delta E_{\tau,g}\,\delta_{(\tau,X_{\tau,g})}\leq0
+\end{equation}
+as a distribution.
+\end{theorem}
+\begin{proof}
+On every open ballistic segment,
+$\frac{\D}{\D t}\phi(t,X_C(t))=\phi_t+V_C\phi_x$.
+Multiplying by $M_C$, integrating segment by segment, and summing gives
+\eqref{eq:massweak}.  Endpoint atoms at a collision cancel because incoming
+and outgoing masses agree.  The same calculation with weights $M_CV_C$
+gives~\eqref{eq:momweak}; its endpoint atoms cancel by momentum conservation.
+Using weights $M_CV_C^2/2$ instead leaves at each event exactly the negative
+of~\eqref{eq:loss}, proving~\eqref{eq:entropy}.
+\end{proof}
+
+Thus the event construction is not only a particle algorithm: it closes both
+conservation laws and the entropy defect for arbitrary finite data.
+
+\section{Executable evidence and boundary atlas}
+The deterministic receipt contains six scenarios: a two-stage binary
+merger, a simultaneous three-cluster merger, two disjoint simultaneous
+mergers, initial coincident labels, a no-collision face, and a cascade.  It
+records 20 raw labels, 18 canonical particles, 18 premerge cells, seven
+event times, eight event groups, 75 projection cells, six conservation
+cells, and eight weak-balance cells.  An independent checker enumerates all
+contiguous partitions rather than importing the event producer; it reports
+1,538 assertions.  SymPy checks 255 exact identities, two isolated evidence
+replays are byte identical, and 66/66 mutations are rejected: 45 evidence-JSON
+and 21 evaluation-YAML attacks.  The latter include a duplicate-key-rejecting
+evaluation YAML semantic lock.  These are regression receipts, not a finite
+proof of Theorems~\ref{thm:main}--\ref{thm:pde}.
+
+The boundaries are explicit: masses are strictly positive; coincident
+initial labels are premerged; separated equal-speed clusters need not meet;
+multiple positions may collide at one time; a contact may have arbitrarily
+many incoming clusters; only forward uniqueness is selected; and the finite
+system has no accumulation of collision times because every merger reduces
+the cluster count.
+
+\section{Route-A assessment and disclosures}
+All five Route-A axes fail, so the strict tuple is
+\[
+ \texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FAIL)}.
+\]
+The verdict is \texttt{ROUTE\_A\_REJECTED}; obstruction \texttt{HEN-O276}
+is closed only as a source-dynamics theorem, and Route B is disabled.  The
+literal scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No arithmetic
+local data, Euler factors, root numbers, automorphy, target divisor law,
+functional equation, zero match, or Hilbert--P\'olya operator is claimed.
+
+All source, evidence, checker, mutation, and build instructions are included
+in the package.  No personal or sensitive data and no human or animal
+subjects are involved; no ethics approval is required.  The author reports
+no conflict of interest and no external funding.  CRediT roles are
+conceptualization, formal analysis, software, validation, visualization,
+writing, and reproducibility curation.  AI assistance was used for drafting,
+symbolic code, and consistency checks; the mathematical claims were checked
+against the displayed proofs and independently executable gates.
+\fi
+
+\begin{thebibliography}{3}
+\bibitem{NS2009}
+L. Natile and G. Savar\'e,
+``A Wasserstein approach to the one-dimensional sticky particle system,''
+\emph{SIAM J. Math. Anal.} 41 (2009), 1340--1365,
+\href{https://arxiv.org/abs/0902.4373}{arXiv:0902.4373}.
+\bibitem{BGSW2013}
+Y. Brenier, W. Gangbo, G. Savar\'e, and M. Westdickenberg,
+``Sticky particle dynamics with interactions,''
+\emph{J. Math. Pures Appl.} 99 (2013), 577--617,
+\href{https://arxiv.org/abs/1201.2350}{arXiv:1201.2350}.
+\bibitem{Hynd2019}
+R. Hynd, ``Lagrangian Coordinates for the Sticky Particle System,''
+\emph{SIAM J. Math. Anal.} 51 (2019), 3769--3795,
+\href{https://doi.org/10.1137/19M1241775}{doi:10.1137/19M1241775}.
+\end{thebibliography}
+\end{document}

@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C289--HCS-C293 additions (2026-09-02)
+
+Five independent cross-subtype candidates were frozen from baseline
+`7fbe9db30cc460a82883533d7cfb2edd988c5b65`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C289 | Constant magnetic flow on the hyperbolic plane has a complete all-orbit circle/horocycle/hypercycle/geodesic classification; the strong-field circle family has primitive period `2*pi/sqrt(b^2-kappa^2 v^2)`, while the critical Lorentz generator is nonzero nilpotent and its horocycles are nonclosed. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [hyperbolic magnetic-flow package](../henon_hyperbolic_constant_magnetic_flow_route_a/) · [paper PDF](../henon_hyperbolic_constant_magnetic_flow_route_a/paper/main.pdf) |
+| HCS-C290 | The planar circular restricted three-body problem has exactly five Lagrange equilibria for `0<mu<=1/2`; every collinear point is saddle--center, while the triangular points cross the exact Gascheau--Routh threshold and are defective with linear growth at equality. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [CR3BP package](../henon_cr3bp_lagrange_stability_route_a/) · [paper PDF](../henon_cr3bp_lagrange_stability_route_a/paper/main.pdf) |
+| HCS-C291 | Random greedy dimer adsorption on every finite path and cycle has exact probability-generating recurrences, an all-order factorial-moment hierarchy, sharp attainable support, linear variance coefficient `exp(-4)`, and an exact first-edge cycle boundary identity. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [dimer-RSA package](../henon_dimer_rsa_path_cycle_route_a/) · [paper PDF](../henon_dimer_rsa_path_cycle_route_a/paper/main.pdf) |
+| HCS-C292 | Every finite positive-mass one-dimensional sticky-particle datum has a unique all-event forward flow, including simultaneous collisions, represented by weighted isotonic projection and a cumulative-mass convex hull; its merger bound, conservation, exact dissipation, and pressureless-Euler weak form close together. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [sticky-particle package](../henon_sticky_particle_all_event_route_a/) · [paper PDF](../henon_sticky_particle_all_event_route_a/paper/main.pdf) |
+| HCS-C293 | The Friedrichs magnetic Baouendi--Grushin cylinder separates into shifted harmonic-oscillator channels: nonintegral flux has compact pure-point spectrum, integral flux opens one free angular channel whose line-Laplacian spectrum has a.e. multiplicity two while retaining embedded point spectrum, and the nonresonant integer sector has exact odd-divisor multiplicities, heat trace, and source-local spectral series. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_NATURAL_QUANTIZATION)` | [magnetic Grushin package](../henon_magnetic_grushin_cylinder_route_a/) · [paper PDF](../henon_magnetic_grushin_cylinder_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  The two
+magnetic candidates have different state spaces and proof mechanisms: C289
+is a classical orbit classification, whereas C293 is a source-operator
+spectral transition.  C293's divisor and zeta expressions are explicitly
+source-local and are not a target counting law, Euler product, functional
+equation, or zero correspondence.  No target local datum, Euler factor, root
+number, automorphy, target divisor/counting law or functional equation,
+Hilbert--Pólya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting are
+recorded in [BATCH_REVIEW_C289_C293.md](../BATCH_REVIEW_C289_C293.md).
+
 ## HCS-C284--HCS-C288 additions (2026-09-02)
 
 Five independent cross-subtype candidates were frozen from baseline

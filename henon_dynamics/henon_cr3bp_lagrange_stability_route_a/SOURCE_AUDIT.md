@@ -1,0 +1,10 @@
+# Source and ownership audit
+
+- Joseph-Louis Lagrange, *Essai sur le Problème des trois Corps* (1772; *Oeuvres*, VI, 229–331), [digitized transcription](https://fr.wikisource.org/wiki/M%C3%A9moires_extraits_des_recueils_de_l%E2%80%99Acad%C3%A9mie_des_sciences_de_Paris_et_de_l%E2%80%99Institut_de_France/Essai_sur_le_Probl%C3%A8me_des_trois_Corps).  Historical owner of the equilateral configuration.
+- Gabriel Gascheau, *Mouvements relatifs d'un système de corps*, thèse de mécanique, Faculté des sciences de Paris, Bachelier (1843), 36 pp. and plate, [BnF Gallica ark:/12148/bpt6k5789653w](https://gallica.bnf.fr/ark:/12148/bpt6k5789653w).  First historical owner of the Newtonian triangular linear-stability criterion.
+- Edward John Routh, “On Laplace's Three Particles, with a Supplement on the Stability of Steady Motion,” *Proceedings of the London Mathematical Society* s1-6 (1874), 86–97, DOI [10.1112/plms/s1-6.1.86](https://doi.org/10.1112/plms/s1-6.1.86).  Subsequent treatment and inverse-power-law generalization; the year follows the Oxford University Press DOI record.
+- Kenneth R. Meyer, Glen R. Hall, and Dan Offin, *Introduction to Hamiltonian Dynamical Systems and the N-Body Problem*, 2nd ed., Springer (2009), DOI [10.1007/978-0-387-09724-4](https://doi.org/10.1007/978-0-387-09724-4).  Authoritative modern source for CR3BP and linear Hamiltonian stability conventions.
+
+The five points and Gascheau–Routh threshold are classical and **not literature-level originality**.  Every constant, interval sign, Hessian, and critical Jordan statement used here is nevertheless rederived.  The source links identify ownership; they do not substitute for proof.  Some later bibliographies label Routh's volume as 1875; this package uses the publisher's 1874 article date and does not transfer Gascheau's priority to Routh.
+
+No nonlinear/KAM stability, periodic Lyapunov family, arithmetic orbit dictionary, Euler product, root number, target zero correspondence, or Hilbert–Pólya operator is claimed.
