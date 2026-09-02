@@ -1,0 +1,302 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\one}{\boldsymbol 1}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\im}{\operatorname{im}}
+
+\title[Equality feedback at dyadic lengths]{Cyclic Equality-Feedback Dynamics at Dyadic Lengths}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Fix $q\geq3$ and a dyadic length $n\geq4$.  We iterate on $q$-ary cyclic
+words the local rule which records whether adjacent letters are equal.  The
+first step is nonlinear and $q$-ary, whereas the tail is the affine
+complement of periodic Rule~102.  After assigning zero contribution credit
+to the additive cellular automaton, repeated-root code weights, and the
+cycle chromatic polynomial, we determine the remaining finite atlas.  It
+contains a sharp height $n+1$, all depth shells, the complete image
+staircase, and every target fibre as a $q$-weighted affine-code enumerator.
+Two slices of that inverse atlas are evaluated completely: time two is
+classified by the smaller weight in a complementary solution pair, and time
+$n/2+1$ by a half-word weight.  Their parameter-class multiplicities are
+explicit, including possible collisions of numerical fibre values.  An
+exact audit checks all words and targets in six boxes and the two special
+spectra through length $16$.
+\end{abstract}
+
+\maketitle
+
+\section{Object, prior boundary, and theorem}
+
+Let $\mathcal A_q=\{0,\ldots,q-1\}$ and index coordinates by
+$\mathbb Z/n\mathbb Z$.  Define
+\begin{equation}\label{eq:T}
+ T_q(w)_i=\mathbf 1\{w_i=w_{i+1}\},\qquad w\in\mathcal A_q^n.
+\end{equation}
+Thus $T_q(w)$ is binary after one step.  Let $S$ denote cyclic shift on
+$\F_2^n$ and put $D=I+S$.
+
+The linear tail is classical.  Periodic additive cellular automata and their
+matrix powers are treated in \cite{MartinOdlyzkoWolfram1984,Kim2011}; in
+particular, the Rule--102 power-of-two vanishing mechanism is not claimed
+here.  Repeated-root cyclic-code weight distributions are also available in
+substantially greater generality \cite{ZhaoEtAl2025}.  Equality-pattern
+cellular automata occur in other carriers \cite{BolognesiCiancia2017}.  We
+therefore give no contribution credit to $D$, its kernels and images,
+homogeneous code enumerators, finite Fourier inversion, or the chromatic
+polynomial of a cycle.  The scoped object is the interface between the
+literal $q$-ary rule \eqref{eq:T} and that zero-credit tail.
+
+For $w\in\mathcal A_q^n$, define its change mask
+\[
+ c(w)_i=\mathbf 1\{w_i\ne w_{i+1}\}.
+\]
+For $0\leq j\leq n$ and $d\in\F_2^n$, write
+\begin{align}
+ W_{j,d}(a)&=\sum_{\substack{c\in\F_2^n\\D^jc=d}}a^{\wt(c)},
+ \label{eq:affine-enum}\\
+ C_{n,j}(q)&=W_{j,0}(q-1)+(q-1)W_{j,0}(-1).
+ \label{eq:Cnj}
+\end{align}
+
+\begin{theorem}[finite temporal and inverse atlas]\label{thm:atlas}
+Let $q\geq3$ and $n=2^m\geq4$.
+\begin{enumerate}[(A)]
+\item The all-one word is the unique recurrent point.  Every nonconstant
+$w$ has depth
+\begin{equation}\label{eq:depth}
+ 1+\min\{j\geq0:D^jc(w)=0\},
+\end{equation}
+while the other $q-1$ constant words have depth one.  The height is exactly
+$n+1$.  The depth-zero and depth-one shells have sizes $1$ and $q-1$; for
+$1\leq j\leq n$, the depth-$(j+1)$ shell has size
+\begin{equation}\label{eq:shell}
+ C_{n,j}(q)-C_{n,j-1}(q).
+\end{equation}
+At every dyadic $j<n$,
+\begin{equation}\label{eq:checkpoint}
+ C_{n,j}(q)=\bigl(1+(q-1)^{n/j}\bigr)^j+(q-1)2^j,
+\end{equation}
+and the last shell has size
+\begin{equation}\label{eq:last}
+ \frac{q^n-(q-2)^n}{2}-(q-1)2^{n-1}>0.
+\end{equation}
+
+\item The first image has size $2^n-n$.  For $t\geq2$, put
+$j=\min(t-1,n)$.  Then
+\begin{equation}\label{eq:image}
+ \im T_q^t=\one+\im D^j,\qquad |\im T_q^t|=2^{n-j}.
+\end{equation}
+For a binary target $y$, with $d=y+\one$,
+\begin{equation}\label{eq:fibre}
+ |(T_q^t)^{-1}(y)|=W_{j,d}(q-1)+(q-1)W_{j,d}(-1),
+ \qquad j=\min(t-1,n),
+\end{equation}
+and every nonbinary target has fibre zero at positive time.
+
+\item At time two, a target occurs exactly when $d=y+\one$ has even
+weight.  If $Dc=d$ and
+$\rho(d)=\min\{\wt(c),n-\wt(c)\}$, then
+\begin{equation}\label{eq:t2}
+ |(T_q^2)^{-1}(y)|=(q-1)^{\rho(d)}+(q-1)^{n-\rho(d)}
+       +2(q-1)(-1)^{\rho(d)}.
+\end{equation}
+For $r<n/2$, precisely $\binom nr$ supported targets have parameter $r$;
+for $r=n/2$, precisely $\frac12\binom n{n/2}$ do.
+
+\item At time $n/2+1$, a target occurs exactly when
+$d=y+\one=(u,u)$.  If $h=\wt(u)$, then
+\begin{equation}\label{eq:mid}
+\begin{split}
+ |(T_q^{n/2+1})^{-1}(\one+d)|={}&
+ \bigl(1+(q-1)^2\bigr)^{n/2-h}\bigl(2(q-1)\bigr)^h\\
+ &+(q-1)2^{n/2}(-1)^h.
+\end{split}
+\end{equation}
+Exactly $\binom{n/2}{h}$ supported targets have parameter $h$.
+\end{enumerate}
+\end{theorem}
+
+The multiplicities in parts (C) and (D) are parameter-class
+multiplicities.  Equal numerical fibre values from different parameters must
+be merged.  For example, at $n=4,q=4$, the $r=1,2$ values in
+\eqref{eq:t2} coincide.
+
+\section{The nonlinear interface and temporal clock}
+
+\begin{lemma}[change-mask multiplicity]\label{lem:chi}
+For $c\in\F_2^n$ of weight $r$, the number of $q$-ary cyclic words with
+change mask $c$ is
+\begin{equation}\label{eq:chi}
+ \chi_q(c)=(q-1)^r+(-1)^r(q-1).
+\end{equation}
+It vanishes exactly at $r=1$.
+\end{lemma}
+
+\begin{proof}
+Contract every equality edge of the cyclic word.  If $r>0$, the remaining
+quotient is a cycle with $r$ edges, whose proper $q$-colourings are counted
+by the right-hand side of \eqref{eq:chi}.  If $r=0$, all letters are equal
+and both sides equal $q$.  For $q\geq3$, the asserted zero set follows
+immediately.
+\end{proof}
+
+\begin{lemma}[affine Rule--102 tail]\label{lem:tail}
+For every $t\geq1$,
+\begin{equation}\label{eq:iterate}
+ T_q^t(w)=\one+D^{t-1}c(w).
+\end{equation}
+Moreover $D^n=0$, $\dim\ker D^j=j$, and
+$\im D^j=\ker D^{n-j}$ for $0\leq j\leq n$.
+\end{lemma}
+
+\begin{proof}
+The first identity at $t=1$ is the definition.  For a binary word $b$,
+equality is the complement of XOR, so $T_q(b)=\one+Db$.  Since $D\one=0$,
+induction proves \eqref{eq:iterate}.  Identifying cyclic words with
+$\F_2[x]/(x^n-1)$ identifies $D$ with multiplication by $1+x$.  Dyadicity
+gives $x^n-1=(x+1)^n$, so multiplication by $x+1$ is one nilpotent Jordan
+block.  The remaining assertions follow.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(A)]
+Lemma~\ref{lem:tail} gives the pointwise depth formula and absorption by time
+$n+1$.  Summing Lemma~\ref{lem:chi} over $\ker D^j$ gives
+\eqref{eq:Cnj}; consecutive kernel differences give \eqref{eq:shell}.
+When $j$ is dyadic, $D^j=I+S^j$ and the kernel consists of $j$ freely chosen
+bits repeated $n/j$ times.  Its weight enumerator is
+$(1+a^{n/j})^j$, which yields \eqref{eq:checkpoint}.
+
+Finally $\ker D^{n-1}$ is the even-weight hyperplane, whereas
+$\ker D^n=\F_2^n$.  The $q$-weighted mass of the complementary odd-weight
+class is
+\[
+ \frac{q^n-(q-2)^n}{2}-(q-1)2^{n-1},
+\]
+where the second term is the signed correction from \eqref{eq:chi}.  It is
+positive for $q\geq3,n\geq4$: writing $x=q-1\geq2$ and expanding the odd
+part gives
+\[
+ \frac{(x+1)^n-(x-1)^n}{2}-x2^{n-1}
+ \geq x\bigl(nx^{n-2}-2^{n-1}\bigr)
+ \geq x2^{n-2}(n-2)>0.
+\]
+This proves sharpness.  Since every state is absorbed and $\one$ is fixed,
+it is the sole recurrent point.
+\end{proof}
+
+\section{Images and arbitrary target fibres}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(B)]
+At time one, Lemma~\ref{lem:chi} says that exactly the complements of the
+$n$ unit masks are absent, giving $2^n-n$.  For $t\geq2$, every affine
+class of $\ker D^j$ contains a feasible change mask: the only forbidden
+masks are units.  Here $1\leq j\leq n$ and $D\one=0$, hence
+$\one\in\ker D^j$, including when $j=n$.  If a chosen representative is a
+unit $e_i$, then $e_i+\one$ has the same $D^j$-image and weight
+$n-1\geq3$; Lemma~\ref{lem:chi} therefore makes it a feasible change mask.
+Every affine class consequently contains a feasible representative, proving
+\eqref{eq:image}.
+
+For a fixed change mask $c$, Lemma~\ref{lem:chi} is its exact source
+multiplicity.  Summing it over $D^jc=d$ gives \eqref{eq:fibre}.  For
+completeness, character orthogonality also gives the computable expression
+\begin{equation}\label{eq:fourier}
+ W_{j,d}(a)=2^{-n}\sum_{\lambda\in\F_2^n}(-1)^{\lambda\cdot d}
+ (1+a)^{n-\wt((D^j)^T\lambda)}
+ (1-a)^{\wt((D^j)^T\lambda)}.
+\end{equation}
+Equation \eqref{eq:fourier} is a verification device, not a separate
+contribution claim.
+\end{proof}
+
+The arbitrary-target formula is exact but does not by itself classify the
+dependence on $d$.  The next section evaluates two slices rather than hiding
+that dependence inside a transform.
+
+\section{Two evaluated fibre spectra}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(C)]
+The image of $D$ is the even-weight hyperplane and its kernel is
+$\{0,\one\}$.  Thus a feasible equation $Dc=d$ has the complementary pair
+$\{c,c+\one\}$.  Substituting their two weights into
+\eqref{eq:chi} gives \eqref{eq:t2}; the parity of $\rho(d)$ agrees with both
+complementary weights because $n$ is even.  Complementary pairs of smaller
+weight $r<n/2$ are indexed by all weight-$r$ masks.  At $r=n/2$ each pair is
+indexed twice.  This proves the two class counts.  Their sum is $2^{n-1}$,
+and the class-weighted fibre mass is $q^n$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:atlas}(D)]
+In characteristic two,
+$D^{n/2}=(I+S)^{n/2}=I+S^{n/2}$.  Hence its image consists exactly of
+duplicated half-words $d=(u,u)$.  For a coordinate pair
+$(i,i+n/2)$, a zero bit of $u$ requires equal mask bits and contributes
+$1+a^2$ to $W_{n/2,d}(a)$; a one bit requires unequal mask bits and
+contributes $2a$.  Therefore
+\[
+ W_{n/2,d}(a)=(1+a^2)^{n/2-h}(2a)^h.
+\]
+Evaluation at $a=q-1$ and $a=-1$ in \eqref{eq:fibre} gives
+\eqref{eq:mid}.  Choosing the $h$ nonzero coordinates of $u$ gives the class
+multiplicity, whose sum is $2^{n/2}$; weighted fibre mass again sums to
+$q^n$.
+\end{proof}
+
+\section{Exact controls and limitations}
+
+The paper-local audit begins with the literal rule \eqref{eq:T}, not the
+linearized formulas.  It exhausts the six boxes
+\[
+ (n,q)=(4,3),(4,4),(4,5),(4,6),(8,3),(8,4),
+\]
+comprising $74{,}355$ words, and checks every orbit, depth shell, image, and
+binary target fibre.  It separately checks both parameter-class spectra for
+$n\in\{4,8,16\}$ and $q\in\{3,4,5,7\}$, including numerical-collision
+aggregation, mass conservation, and the excluded boundaries $q=2$, $n=2$,
+and nondyadic $n=6$.
+
+The restrictions matter.  At $q=2$, the feasible change masks differ; at
+$n=2$, the support repair by complementary masks fails; at nondyadic length,
+$D$ need not be nilpotent.  Nothing here claims a classification for those
+regimes, a new theorem about Rule~102, a new repeated-root code enumerator,
+or absolute novelty.  The result is an internally verified, owner-thin
+finite atlas.  External posting, circulation, or submission remains
+\texttt{HOLD\_EXTERNAL}.
+
+\subsection*{Data and code statement}
+No external dataset or training data are used.  The exact verifier and its
+deterministic transcript accompany the paper.
+
+\subsection*{Conflict-of-interest statement}
+The anonymous author declares no conflict of interest.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
