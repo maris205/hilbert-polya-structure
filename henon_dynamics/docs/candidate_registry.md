@@ -3,6 +3,38 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C284--HCS-C288 additions (2026-09-02)
+
+Five independent cross-subtype candidates were frozen from baseline
+`3878fa5282ca89f75700b3ef9d623f54dcb7bcf9`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C284 | Equal point vortices on every regular `N`-gon have a complete raw-Cartesian-Hessian/DFT linear atlas: the reduced polygon is elliptic for `N=3,...,6`, nilpotently degenerate only in heptagon modes 3 and 4, and hyperbolic for every `N>=8`. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [point-vortex package](../henon_thomson_polygon_point_vortex_stability_route_a/) · [paper PDF](../henon_thomson_polygon_point_vortex_stability_route_a/paper/main.pdf) |
+| HCS-C285 | Every finite irreducible Gordon--Newell network has the exact canonical product form, occupation/flow/reversal identities, and a complete unique-or-tied bottleneck condensation law with independent geometric nonbottlenecks and a uniform Dirichlet bottleneck fraction. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [closed-network package](../henon_gordon_newell_bottleneck_condensation_route_a/) · [paper PDF](../henon_gordon_newell_bottleneck_condensation_route_a/paper/main.pdf) |
+| HCS-C286 | Every legal positive-coordinate numbers-game sequence in a finite crystallographic Weyl system reaches the same antidominant endpoint in exactly `|Phi^+|-|Phi_J^+|` firings, with cumulative element the distinguished parabolic-coset representative. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [numbers-game package](../henon_coxeter_numbers_game_strong_convergence_route_a/) · [paper PDF](../henon_coxeter_numbers_game_strong_convergence_route_a/paper/main.pdf) |
+| HCS-C287 | One-end observation and `L^2` Dirichlet boundary control of a finite string have the exact minimal time `2L/c`, including the critical Parseval equality; every shorter interval misses a nonzero smooth wave. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [wave-control package](../henon_wave_boundary_control_minimal_time_route_a/) · [paper PDF](../henon_wave_boundary_control_minimal_time_route_a/paper/main.pdf) |
+| HCS-C288 | One full-line delta interaction has a convention-complete self-adjoint-domain, rank-one-resolvent, spectrum, bound/scattering, heat-kernel, and relative-heat-trace atlas across attractive, free, and repulsive chambers. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [point-interaction package](../henon_delta_point_interaction_spectral_dynamics_route_a/) · [paper PDF](../henon_delta_point_interaction_spectral_dynamics_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  The
+point-vortex heptagon statement is linear only; the numbers-game theorem is
+finite crystallographic only; and both natural quantum structures remain
+candidate-local.  No target local datum, Euler factor, root number, automorphy,
+target divisor/counting law or functional equation, Hilbert--Pólya operator,
+or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final PDF SHA-256 values, in order
+C284--C288, are `6b1501af2dba761ad34e87cc89502c8f4ba8e9c8bb04ed7771ef49f6bf009f6f`,
+`088d2ca85d86d1e1fc797071bef5aa8c4a4364178f0ab61f454d77df14e6000e`,
+`3a3684fe15c61d0e6fa76b46a0719a80e3e63d1a6a2a6091028f11d95a92e518`,
+`e0fb034b86b6016aca38207387bcd3152eba62ce76e85b08c2239305f2e23fe7`,
+and `f6d2973ac3523a6b29609820e348f45cddec81135ee36f02d6f6019ad05dae35`.
+The full release accounting is recorded in
+[BATCH_REVIEW_C284_C288.md](../BATCH_REVIEW_C284_C288.md).
+
 ## HCS-C279--HCS-C283 additions (2026-09-01)
 
 Five independent cross-subtype candidates were frozen from baseline

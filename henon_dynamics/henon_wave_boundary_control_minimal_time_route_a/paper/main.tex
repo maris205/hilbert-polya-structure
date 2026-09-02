@@ -1,0 +1,190 @@
+\pdfvariable trailerid {[<C2872026090200000000000000000000><C2872026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Tstar}{T_\ast}
+\title{The Exact Minimal Time for One-End Observation\\
+and Control of a Finite String}
+\author{Route-A source-local certificate HCS-C287}
+\date{2 September 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We determine the sharp one-end observation and boundary-control time for the
+one-dimensional Dirichlet wave equation.
+\ifnum\CRevisionRound=0
+The full energy wave group has least revival time $2L/c$, not $L/c$.
+\fi
+\ifnum\CRevisionRound>0
+At that exact time the endpoint normal derivative satisfies a Parseval
+identity with constant $4/c^3$, giving observability including the critical
+equality.
+\fi
+\ifnum\CRevisionRound>1
+Every shorter window misses a nonzero smooth periodic traveling profile, so
+the threshold is necessary as well as sufficient.  Hilbert Uniqueness Method
+duality yields the matching one-end Dirichlet control theorem on the precise
+transposition space.  Independent exact evidence audits constants without
+replacing the infinite-dimensional proof.
+\fi
+\end{abstract}
+
+\section{Frozen string and its full revival}
+Let $L,c>0$ and consider
+\begin{equation}\label{eq:wave}
+ u_{tt}-c^2u_{xx}=0,\quad 0<x<L,\qquad
+ u(0,t)=u(L,t)=0.
+\end{equation}
+The adjoint data lie in $H_0^1(0,L)\times L^2(0,L)$, with conserved energy
+\begin{equation}\label{eq:energy}
+ E(t)=\frac12\int_0^L\bigl(|u_t(x,t)|^2+c^2|u_x(x,t)|^2\bigr)\,dx.
+\end{equation}
+The observation is $u_x(L,\cdot)$.  There is no zero mode: the frequencies
+are $\omega_n=n\pi c/L$, $n\ge1$.
+
+\begin{lemma}[Least full-space revival]\label{lem:revival}
+The least positive time for which the wave group is the identity on the full
+energy space is
+\[
+ \Tstar=\frac{2L}{c}.
+\]
+\end{lemma}
+\begin{proof}
+At time $\Tstar$, every phase $e^{\pm i\omega_n\Tstar}=e^{\pm2\pi in}$ is
+one.  Conversely, an identity time must return the $n=1$ mode and is therefore
+an integer multiple of $2L/c$.  In particular, $L/c$ multiplies the $n$th
+mode by $(-1)^n$ and is not the full-space identity.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Critical endpoint Parseval identity}
+Every finite-energy Dirichlet solution has the periodic d'Alembert form
+\begin{equation}\label{eq:dalembert}
+ u(x,t)=F(x+ct)-F(-x+ct),\qquad F(s+2L)=F(s),\quad F'\in L^2(\R/2L\mathbb Z).
+\end{equation}
+Constants in $F$ are irrelevant.  Differentiating gives
+\begin{equation}\label{eq:coordinates}
+ u_x(L,t)=2F'(L+ct),\qquad
+ E=c^2\int_0^{2L}|F'(s)|^2\,ds.
+\end{equation}
+The energy equality follows by adding the squares of $u_t$ and $cu_x$ and
+changing variables over the two reflected halves.
+
+\begin{theorem}[Exact critical observability]\label{thm:identity}
+Every solution of~\eqref{eq:wave} satisfies
+\begin{equation}\label{eq:identity}
+ \int_0^{2L/c}|u_x(L,t)|^2\,dt=\frac4{c^3}E(0).
+\end{equation}
+Consequently one-end boundary observability holds for every
+$T\ge2L/c$, including equality.
+\end{theorem}
+\begin{proof}
+At the critical time, $s=L+ct$ traverses one complete period.  Hence
+\[
+ \int_0^{2L/c}|u_x(L,t)|^2dt
+ =\frac4c\int_0^{2L}|F'(s)|^2ds=\frac4{c^3}E(0).
+\]
+For a longer interval, integrate the nonnegative observation over its first
+critical subinterval.
+\end{proof}
+
+For comparison, if
+\[
+ u(x,t)=\sum_{n\ge1}\left(a_n\cos\omega_nt+\frac{b_n}{\omega_n}
+ \sin\omega_nt\right)\sin\frac{n\pi x}{L},
+\]
+orthogonality over $[0,2L/c]$ gives~\eqref{eq:identity} mode by mode.  The
+periodic proof is stronger for the sharpness argument below because it does
+not truncate the solution.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Every shorter window misses a smooth wave}
+\begin{theorem}[Sharp failure below the round trip]\label{thm:sharp}
+If $0\le T<2L/c$, a nonzero smooth solution of~\eqref{eq:wave} exists with
+\[
+ u_x(L,t)=0\qquad(0\le t\le T).
+\]
+Thus no observability inequality, and hence no dual exact one-end control,
+holds before $2L/c$.
+\end{theorem}
+\begin{proof}
+On the circle $\R/2L\mathbb Z$, the observed arc
+$\{L+ct:0\le t\le T\}$ has length $cT<2L$.  Its complement contains an open
+arc.  Choose two smooth bumps of opposite integrals inside that complement;
+their sum is a nonzero smooth mean-zero function $G$.  Let $F'=G$ and take a
+periodic primitive.  Equations~\eqref{eq:dalembert}--\eqref{eq:coordinates}
+give a nonzero smooth energy solution whose endpoint trace vanishes on the
+whole observation window.
+\end{proof}
+
+This is an infinite-dimensional obstruction.  A finite Galerkin Gramian can
+be nonsingular on a shorter interval and cannot replace Theorem~\ref{thm:sharp}.
+
+\section{HUM duality and function spaces}
+For the controlled state, keep $y(0,t)=0$ and prescribe the Dirichlet value
+$y(L,t)=h(t)$.  With $h\in L^2(0,T)$, solutions are understood by
+transposition in
+\[
+ L^2(0,L)\times H^{-1}(0,L).
+\]
+Green duality pairs the boundary control with $c^2u_x(L,t)$.  Define the
+control-adjoint observation by
+$\mathcal O_T(u_0,u_1)=c^2u_x(L,\cdot)$.  At $T=2L/c$,
+Theorem~\ref{thm:identity} is the norm identity
+$\|\mathcal O_T(u_0,u_1)\|_{L^2(0,T)}^2=4cE(0)$: thus
+$\mathcal O_T$ is a scaled isometry onto its closed range, not a claimed
+surjection onto all of $L^2(0,T)$.  The HUM Gramian
+$\mathcal O_T^*\mathcal O_T$ is therefore coercive and, after the energy-space
+Riesz identification, an isomorphism onto the dual state space.  Time
+reversibility gives exact control between arbitrary states in this dual space
+for every $T\ge2L/c$; Theorem~\ref{thm:sharp} proves failure below it.
+
+HUM was introduced systematically by Lions~\cite{Lions1988}.  Sharp boundary
+geometric control for waves is owned by Bardos, Lebeau, and Rauch
+\cite{BLR1992}; in one dimension characteristics encode the ray condition.
+We claim the explicit convention-complete identity and executable boundary
+audit here, not priority for HUM or geometric control.
+
+\section{Executable receipt and Route-A boundary}
+The retained receipt has 16 positive $(L,c)$ rows, 256 exact modal cells,
+16 revival cells, and 16 strict subcritical arcs.  A checker derived from the
+periodic coordinate reports 2,804 assertions; a separate symbolic route
+reports 86 identities; two isolated outputs are byte identical; and 23/23
+repaired/stale-hash attacks fail.  These cells audit~\eqref{eq:identity}; they
+do not prove infinite-dimensional observability or HUM.
+
+The wave group has nonisolated periodic families, not an arithmetic primitive
+ledger.  The Dirichlet Laplacian gives a natural source quantization but no
+rational-prime carrier, prime-power amplitude, target determinant, or
+same-clock target bridge.  Under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the tuple is
+\[
+ \begin{gathered}
+ \texttt{(A0\_FAIL,A1\_WEAK,A2\_FAIL,}\\[-2pt]
+ \texttt{A3\_FAIL,A4\_NATURAL\_QUANTIZATION)},
+ \end{gathered}
+\]
+the overall verdict is \texttt{ROUTE\_A\_REJECTED}, and Route B is disabled.
+\fi
+
+\begin{thebibliography}{2}
+\bibitem{Lions1988}
+J.-L. Lions,
+\emph{Exact controllability, stabilization and perturbations for distributed
+systems}, SIAM Review \textbf{30}(1) (1988), 1--68,
+\href{https://doi.org/10.1137/1030001}{doi:10.1137/1030001}.
+\bibitem{BLR1992}
+C. Bardos, G. Lebeau, and J. Rauch,
+\emph{Sharp sufficient conditions for the observation, control, and
+stabilization of waves from the boundary}, SIAM Journal on Control and
+Optimization \textbf{30}(5) (1992), 1024--1065,
+\href{https://doi.org/10.1137/0330055}{doi:10.1137/0330055}.
+\end{thebibliography}
+\end{document}

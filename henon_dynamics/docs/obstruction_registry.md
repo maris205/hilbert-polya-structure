@@ -17,6 +17,22 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C284--HCS-C288 additions (2026-09-02)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O268 | HCS-C284 Thomson polygons as an arithmetic primitive-orbit census | proved relative-equilibrium-family and symmetry obstruction | The regular polygons form a continuously scaled relative-equilibrium family, not an intrinsic isolated rational-prime ledger.  The rotation clock depends continuously on circulation and radius, and the heptagon has a nilpotent linear degeneracy rather than a nondegenerate primitive weight.  No logarithmic-prime roof, target determinant, or target divisor follows. | The raw Cartesian Hessian, exact radial/tangential DFT blocks, symmetry reduction, sharp `N=3..6`, `N=7`, `N>=8` linear classification, and all declared singular faces survive.  No nonlinear stability claim is made at seven. | ../henon_thomson_polygon_point_vortex_stability_route_a/THEOREM_PACKAGE.md |
+| HEN-O269 | HCS-C285 closed-network condensation as a deterministic arithmetic orbit owner | proved finite-stochastic-ensemble and population-clock obstruction | The owner is a finite closed queueing CTMC at each customer population, while condensation is a canonical-ensemble limit.  Queue occupations, service completions, and routed currents are not isolated primitive periodic orbits; population and service time provide no rational-prime labels or logarithmic roof. | Arbitrary irreducible nonreversible product form, occupation derivatives, throughputs/currents, time reversal/reversibility, and the complete unique/tied bottleneck limit survive. | ../henon_gordon_newell_bottleneck_condensation_route_a/THEOREM_PACKAGE.md |
+| HEN-O270 | HCS-C286 legal firing words as primitive periodic arithmetic orbits | proved terminating-rewrite and noncanonical-word obstruction | Every legal path terminates after a fixed parabolic-coset length; different legal words represent the same endpoint element and are related by Coxeter moves.  Thus there is no recurrent primitive-orbit ledger, canonical rational-prime carrier, logarithmic clock, target determinant, or target divisor. | Strong convergence for every legal order, common endpoint, exact `|Phi^+|-|Phi_J^+|` length, shortest-coset ownership, and all finite crystallographic boundary faces survive. | ../henon_coxeter_numbers_game_strong_convergence_route_a/THEOREM_PACKAGE.md |
+| HEN-O271 | HCS-C287 string revivals as isolated arithmetic primitives | proved nonisolated-wave-family and continuous-clock obstruction | At `2L/c` the entire infinite-dimensional wave group revives, so the periodic states form a clean nonisolated family rather than isolated primitive owners.  The period varies continuously with `L/c`, and neither the boundary trace nor HUM supplies rational-prime labels, a logarithmic roof, or a target determinant. | The exact critical Parseval identity, equality-case observability/control, every shorter-time smooth missed wave, precise HUM spaces, least full-space revival, and scaling faces survive. | ../henon_wave_boundary_control_minimal_time_route_a/THEOREM_PACKAGE.md |
+| HEN-O272 | HCS-C288 point-interaction spectrum as a target arithmetic spectrum | proved single-source-Hamiltonian and continuum-scattering obstruction | One delta interaction has at most one bound state plus an absolutely continuous scattering channel.  Its continuous coupling, momentum, phase, and heat clock give no enumerable rational-prime primitive family, logarithmic roof, target divisor, functional equation, or target zero bridge.  Natural quantization remains source-local. | The self-adjoint domain, rank-one resolvent, complete sign-dependent spectrum, bound/scattering data, heat kernel, relative trace, and every declared parameter boundary survive. | ../henon_delta_point_interaction_spectral_dynamics_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under the frozen vortex frame, traffic
+gauge, Weyl-coordinate, wave-energy, and point-interaction conventions.  They
+do not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C279--HCS-C283 additions (2026-09-01)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

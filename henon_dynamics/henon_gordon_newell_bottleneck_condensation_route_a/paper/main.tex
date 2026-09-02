@@ -1,0 +1,308 @@
+\pdfvariable suppressoptionalinfo 767
+\pdfvariable trailerid {[<C2852026090200000000000000000000><C2852026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\Zp}{\mathbb Z_{\geq0}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Dir}{\operatorname{Dirichlet}}
+\setlength{\parindent}{1.12em}
+\setlength{\parskip}{0.10em}
+\emergencystretch=2em
+\title{Canonical Flow and Bottleneck Condensation\\
+in Finite Gordon--Newell Networks}
+\author{Route-A source-local certificate HCS-C285\\
+Revision round \CRevisionRound}
+\date{2 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For every finite irreducible routing matrix, without assuming reversibility,
+we give a self-contained closure of the single-class Gordon--Newell network.
+The canonical partition function is the complete homogeneous polynomial
+$Z_N=h_N(w)$; its derivatives give every joint occupancy moment, while
+$Z_{N-1}/Z_N$ gives every station throughput and directed service-event flow.
+The stationary reverse routing is obtained exactly and yields a sharp
+reversibility criterion.
+\ifnum\CRevisionRound>0\relax\space We further prove the complete thermodynamic
+limit: nonbottleneck occupancies become independent geometric variables,
+whereas tied bottleneck shares converge to an independent
+$\Dir(1,\ldots,1)$ vector; a unique bottleneck is the degenerate case.\fi
+\ifnum\CRevisionRound>1\relax\space Zero population, one customer, one station,
+zero routing edges, self-routes, equal weights, traffic gauge, and singular
+zero-rate faces are separated, and an exact hostile executable certificate
+is closed.\fi
+\space Gordon and Newell own the classical product-form and bottleneck
+lineage; no literature originality, arithmetic determinant, or quantization
+is claimed.
+\end{abstract}
+
+\section{Frozen owner and classical lineage}
+Fix $m\geq1$, $N\in\Zp$, positive service rates $\mu_i$, and an irreducible
+row-stochastic matrix $P=(p_{ij})$.  Zero entries and self-routes are allowed;
+$P$ need not satisfy detailed balance.  On
+\[
+ \mathcal S_N=\{n\in\Zp^m:\ \textstyle\sum_i n_i=N\},
+\]
+an occupied station $i$ completes service at total rate $\mu_i$ and sends the
+customer to $j$ with probability $p_{ij}$.  Thus
+\begin{equation}
+ Lf(n)=\sum_{i:n_i>0}\mu_i\sum_jp_{ij}
+       [f(n-e_i+e_j)-f(n)].                              \tag{1}
+\end{equation}
+When $i=j$, a service event occurs but the state does not change.  This
+distinction matters for physical edge flows below.
+
+Let $e$ be the unique positive traffic vector with
+$e=eP$ and $\sum_i e_i=1$, and put $w_i=e_i/\mu_i$.  Gordon and Newell's
+paper is the classical equilibrium and bottleneck owner
+\cite{GordonNewell1967}.  Kelly supplies the standard reversal framework
+\cite{Kelly1979}, and Kelly--Yudovina give a modern queueing-network account
+\cite{KellyYudovina2014}.  Those sources are cited for classical ownership
+and standard context; no literature originality is claimed.  The proofs
+below are included to freeze the exact conventions and boundaries used by
+the certificate.
+
+\section{Canonical law and all occupancy derivatives}
+Define
+\begin{equation}
+ Z_N=h_N(w)=[z^N]\prod_{i=1}^m(1-w_i z)^{-1}
+     =\sum_{n\in\mathcal S_N}\prod_iw_i^{n_i},\qquad Z_0=1. \tag{2}
+\end{equation}
+
+\begin{theorem}[finite Gordon--Newell closure]\label{thm:finite}
+The unique stationary probability is
+\begin{equation}
+ \pi_N(n)=Z_N^{-1}\prod_iw_i^{n_i}.                       \tag{3}
+\end{equation}
+For $D_i=w_i\partial_{w_i}$,
+\begin{equation}
+ \E n_i=D_i\log Z_N,
+ \qquad \Cov(n_i,n_j)=D_iD_j\log Z_N.                   \tag{4}
+\end{equation}
+For every multi-index $\alpha\in\Zp^m$,
+\begin{equation}
+ \E\prod_i(n_i)_{\alpha_i}
+ =\frac{w^\alpha\partial_w^\alpha Z_N}{Z_N}.            \tag{5}
+\end{equation}
+Thus (5), followed by Stirling conversion, gives all joint ordinary moments.
+\end{theorem}
+
+\begin{proof}
+For a fixed $n$, the outgoing nonself rate is
+$\sum_{j:n_j>0}\mu_j(1-p_{jj})$.  An incoming jump with destination $j$
+starts from $n-e_j+e_i$ and has weight ratio $w_i/w_j$.  Its total stationary
+mass for this $j$ equals
+\[
+ \pi_N(n)\sum_{i\ne j}\frac{w_i}{w_j}\mu_ip_{ij}
+ =\pi_N(n)\frac{\mu_j}{e_j}\sum_{i\ne j}e_ip_{ij}
+ =\pi_N(n)\mu_j(1-p_{jj}),
+\]
+where $e=eP$ was used in the last equality.  Summing over occupied $j$
+proves global balance without reversibility.  Strong connectivity makes the
+composition chain irreducible when $N>0$; $N=0$ is a singleton.  Differentiating
+the finite sum (2) proves (4)--(5).
+\end{proof}
+
+Equation (2) also gives two independent recurrences useful for exact
+reconstruction.  If $p_k=\sum_iw_i^k$, then
+\begin{equation}
+ Nh_N=\sum_{k=1}^Np_kh_{N-k},\qquad h_0=1,                \tag{6}
+\end{equation}
+while multiplying the $m$ truncated geometric series gives a convolution
+recurrence.  Neither recurrence divides by $w_i-w_j$, so equal weights are
+regular.
+
+\section{Throughput, directed currents, and time reversal}
+Put $R_N=Z_{N-1}/Z_N$ for $N\geq1$ and $R_0=0$.  Decrementing coordinate
+$i$ in (2) gives
+\begin{equation}
+ \Pp(n_i>0)=w_iR_N,\quad
+ T_i=\mu_i\Pp(n_i>0)=e_iR_N,\quad
+ J_{ij}=e_ip_{ij}R_N.                                    \tag{7}
+\end{equation}
+Here $J_{ij}$ counts service events, including $i=j$.  Traffic balance gives
+$\sum_jJ_{ij}=\sum_jJ_{ji}=T_i$; hence
+$C_{ij}=J_{ij}-J_{ji}$ is an antisymmetric divergence-free current.
+
+Define
+\begin{equation}
+ p^*_{ij}=\frac{e_jp_{ji}}{e_i}.                          \tag{8}
+\end{equation}
+
+\begin{theorem}[exact reversal and iff criterion]\label{thm:reverse}
+$P^*$ is irreducible and row-stochastic, has traffic vector $e$, and is the
+routing matrix of the stationary time-reversed occupancy process with the
+same service rates.  Reversal is involutive.  For $N\geq1$, the state process
+is reversible if and only if
+\begin{equation}
+ e_ip_{ij}=e_jp_{ji}\quad\hbox{for every }i,j,             \tag{9}
+\end{equation}
+equivalently $P^*=P$.  At $N=0$ the singleton chain is trivially reversible
+for every routing matrix and therefore cannot identify (9).
+\end{theorem}
+
+\begin{proof}
+If $n'=n-e_i+e_j$, stationary rate reversal and (3) give
+\[
+ q^{\rm rev}(n',n)=\frac{\pi_N(n)\mu_ip_{ij}}{\pi_N(n')}
+ =\mu_j\frac{e_ip_{ij}}{e_j}=\mu_jp^*_{ji}.
+\]
+The traffic equations imply the row sums and stationary vector of $P^*$;
+the same formula applied twice returns $P$.  Positive population supplies a
+state transition along every routing edge, so detailed balance of the state
+chain is equivalent to (9).  Reversed event flow is $J^*_{ij}=J_{ji}$.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{The complete bottleneck limit}
+Let
+\[
+ w_*=\max_iw_i,\quad B=\{i:w_i=w_*\},\quad r=|B|,
+ \quad C=B^c,\quad q_j=w_j/w_*\ (j\in C).                \tag{10}
+\]
+
+\begin{theorem}[unique and tied condensation]\label{thm:condensation}
+For fixed $(m,P,\mu)$ and $N\to\infty$,
+\begin{equation}
+ Z_N\sim w_*^N\frac{N^{r-1}}{(r-1)!}
+       \prod_{j\in C}(1-q_j)^{-1}.                       \tag{11}
+\end{equation}
+Jointly,
+\begin{equation}
+ (n_C,n_B/N)\ \Longrightarrow\ (G,Y),                   \tag{12}
+\end{equation}
+where $G_j$ are independent with
+$\Pp(G_j=k)=(1-q_j)q_j^k$, $Y\sim\Dir(1,\ldots,1)$,
+and $G$ and $Y$ are independent.  Convergence of $n_C$ is in total variation.
+For $r=1$, $N-n_b\Rightarrow\sum_{j\in C}G_j$, so the unique bottleneck
+contains $N-O_{\Pp}(1)$ customers.  For $r>1$, the bottleneck total is
+$N-O_{\Pp}(1)$ but its station shares remain macroscopically random.
+\end{theorem}
+
+\begin{proof}
+After scaling by $w_*^N$, write
+\[
+ H_N=[z^N](1-z)^{-r}A(z),\qquad
+ A(z)=\prod_{j\in C}(1-q_jz)^{-1}=\sum_{k\geq0}a_kz^k.
+\]
+All $a_k$ are nonnegative and $\sum_ka_k=A(1)<\infty$.  Hence
+\begin{equation}
+ H_N=\sum_{k=0}^Na_k\binom{N-k+r-1}{r-1}.                 \tag{13}
+\end{equation}
+Divide by $\binom{N+r-1}{r-1}$.  Each binomial ratio is at most one and
+tends to one for fixed $k$, so dominated convergence gives (11).
+
+For fixed $k=(k_j)_{j\in C}$ with $|k|\leq N$, exact cancellation gives
+\begin{equation}
+ \Pp(n_C=k)=
+ \frac{q^k\binom{N-|k|+r-1}{r-1}}{H_N}.                  \tag{14}
+\end{equation}
+The limit of (14) is $\prod_{j\in C}(1-q_j)q_j^{k_j}$.
+Since these pointwise limiting masses sum to one, the convergence is total
+variation on the countable space.
+
+Conditionally on $n_C=k$, let $M=N-|k|$.  Every weak composition of $M$
+over $B$ has identical weight and is therefore exactly uniform.  For a
+multi-index $\beta$ on $B$,
+\begin{equation}
+ \E\!\left[\prod_{i\in B}(n_i)_{\beta_i}\mid M\right]
+ =(M)_{|\beta|}\frac{(r-1)!\prod_i\beta_i!}
+ {(r+|\beta|-1)!}.                                       \tag{15}
+\end{equation}
+After division by $M^{|\beta|}$, (15) converges to the moments of the uniform
+Dirichlet distribution.  Compactness of the simplex makes these moments
+determining.  Total-variation tightness of $n_C$ yields $M/N\to1$ and, by
+conditioning first on each fixed $k$, independence in (12).
+\end{proof}
+
+\begin{corollary}[all-equal and one-station faces]
+If all $m$ weights equal $w_*$, then
+$Z_N=\binom{N+m-1}{m-1}w_*^N$, the finite law is uniform on ${\cal S}_N$,
+and $n/N\Rightarrow\Dir(1,\ldots,1)$.  At $m=1$ this is the degenerate
+one-point Dirichlet law and $n_1=N$ exactly.
+\end{corollary}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Boundary atlas and executable closure}
+The admissible and singular faces are deliberately not merged:
+\begin{center}
+\begin{tabular}{@{}p{0.25\linewidth}p{0.68\linewidth}@{}}
+\toprule
+face & exact semantics \\ \midrule
+$N=0$ & singleton, $Z_0=1$, zero moments and event flows; routing criterion not inferred \\
+$N=1$ & categorical law $\Pp(n=e_i)=w_i/\sum_jw_j$ \\
+$m=1$ & one state, $P=[1]$, $Z_N=w_1^N$; completions are self-events \\
+$p_{ij}=0$ & allowed whenever the routing digraph stays strongly connected \\
+$p_{ii}>0$ & included in $J_{ii}$, absent from off-diagonal generator rates \\
+tied/all-equal $w$ & all maximizers retained; no singular weight difference \\
+$e\mapsto ce$ & $w\mapsto cw$, $Z_N\mapsto c^NZ_N$; laws, reversal and flows invariant \\
+$\mu_i=0$ or $w_i=0$ & excluded singular face; positivity is not replaced by formal infinity or zero \\
+reducible $P$ & excluded; positive traffic and irreducible composition owners may fail \\ \bottomrule
+\end{tabular}
+\end{center}
+Periodic embedded routing requires no aperiodicity assumption for this
+continuous-time theorem.  Negative or nonintegral populations lie outside
+the state-space definition.
+
+The canonical receipt contains 9 exact network cases and all 177 of their
+states, 165 joint factorial-moment cells through degree three, 9 flow and 9
+reversal ledgers, 28 finite condensation rows, and 12 boundary rows.  The
+producer-independent checker performs 11,628 assertions: before reconstructing
+Fraction traffic vectors, each complete generator and the full left
+nullspace of its transpose, three routes to $Z_N$, every stored moment and
+flow, and every asymptotic cell, it enforces exact JSON types and canonical
+rational text.  SymPy checks 28 identities; two fresh paths reproduce all
+158,346 evidence bytes; 64/64 hostile attacks are rejected.
+Finite cells are regression oracles and do not prove the all-parameter or
+$N\to\infty$ theorem.
+
+\section{Collision audit, limitations, and Route-A verdict}
+The registry scan through C1--C283 found no closed routed Gordon--Newell
+canonical/condensation owner.  C225 is a single finite M/M/1/K spectral chain;
+C263 is a reinforced P\'olya urn; C220 is open TASEP; C246 is an AIMD
+perpetuity; C282 is a killed risk process; C181 is deterministic rotor
+routing.  None owns the conjunction of (2)--(15).
+
+This paper does not cover multiclass or multiserver networks,
+state-dependent service, open networks, zero service rates, or reducible
+routing.  It does not claim to originate the classical product form,
+reversal theory, or bottleneck principle.
+
+Ordinary station and service parameters provide no rational-prime carrier or
+logarithmic-prime clock.  Stochastic jump paths provide no source-canonical
+isolated deterministic primitive-orbit ledger; $Z_N$ is a fixed-population
+normalizer, not a dynamical zeta or target determinant.  No target divisor,
+functional equation, Weil form, or same-clock unitary Hilbert--P\'olya lift is
+defined.  Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the exact tuple is
+\[
+ \texttt{(A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FAIL)},
+\]
+overall \texttt{ROUTE\_A\_REJECTED}; Route B is false.  No Euler factor,
+root number, target zero, or formal quantization is claimed.
+\fi
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{GordonNewell1967} William J. Gordon and Gordon F. Newell,
+\emph{Closed Queuing Systems with Exponential Servers},
+Operations Research 15(2) (1967), 254--265,
+\href{https://doi.org/10.1287/opre.15.2.254}{doi:10.1287/opre.15.2.254}.
+\bibitem{Kelly1979} F. P. Kelly,
+\emph{Reversibility and Stochastic Networks}, Wiley, Chichester, 1979;
+Cambridge University Press reissue, 2011, ISBN 978-1-107-40115-0,
+\href{https://www.statslab.cam.ac.uk/~fpk1/BOOKS/kelly_book.html}{authorized author-hosted edition}.
+\bibitem{KellyYudovina2014} Frank Kelly and Elena Yudovina,
+\emph{Stochastic Networks}, Cambridge University Press, 2014,
+\href{https://doi.org/10.1017/CBO9781139565363}{doi:10.1017/CBO9781139565363}.
+\end{thebibliography}
+\end{document}

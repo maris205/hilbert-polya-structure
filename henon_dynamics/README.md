@@ -2719,6 +2719,45 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C284--C288
+
+This round takes five complete theorem-scale steps while changing the owner,
+state space, clock, and proof mechanism in every paper: a singular
+point-vortex Hamiltonian, a nonreversible closed queueing CTMC, a
+state-dependent Coxeter rewrite system, a boundary-controlled hyperbolic PDE,
+and a singular self-adjoint quantum Hamiltonian.  The manuscripts are
+independent results, not five installments of one calculation.
+
+- [C284 Thomson polygon point-vortex linear-stability atlas](henon_thomson_polygon_point_vortex_stability_route_a/README.md) · [paper PDF](henon_thomson_polygon_point_vortex_stability_route_a/paper/main.pdf)
+- [C285 Gordon--Newell bottleneck-condensation theorem](henon_gordon_newell_bottleneck_condensation_route_a/README.md) · [paper PDF](henon_gordon_newell_bottleneck_condensation_route_a/paper/main.pdf)
+- [C286 finite Coxeter numbers-game strong-convergence theorem](henon_coxeter_numbers_game_strong_convergence_route_a/README.md) · [paper PDF](henon_coxeter_numbers_game_strong_convergence_route_a/paper/main.pdf)
+- [C287 exact minimal time for one-end string observation and control](henon_wave_boundary_control_minimal_time_route_a/README.md) · [paper PDF](henon_wave_boundary_control_minimal_time_route_a/paper/main.pdf)
+- [C288 delta point-interaction spectral/heat atlas](henon_delta_point_interaction_spectral_dynamics_route_a/README.md) · [paper PDF](henon_delta_point_interaction_spectral_dynamics_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C284_C288.md),
+[batch plan](BATCH_PLAN_C284_C288.md), and
+[batch review](BATCH_REVIEW_C284_C288.md) for the collision scan, frozen
+theorem contracts, source-owner boundaries, exact evidence, hostile semantic
+repairs, independent formula reconstructions, deterministic PDFs, and release
+receipts.  Across the five packages the final strengthened audit closes
+**100,869** independent-checker assertions,
+**5,322** symbolic checks, **277/277** hostile rejections,
+**2,470,926** evidence bytes, 135 manifest payloads (140 physical files), and
+**19** final-paper pages with **113** embedded/subset font records.  All five are
+`ROUTE_A_REJECTED`; Route B is disabled and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  The heptagon conclusion is explicitly linear
+only, finite executable cells do not replace the arbitrary-size/PDE/operator
+proofs, and classical source ownership is named.  No target arithmetic local
+data, Euler factor, root number, automorphy object, target divisor/counting law
+or functional equation, Hilbert--Pólya operator, or Route-B input is claimed.
+
+Final PDF SHA-256 values, in order C284--C288, are
+`6b1501af2dba761ad34e87cc89502c8f4ba8e9c8bb04ed7771ef49f6bf009f6f`,
+`088d2ca85d86d1e1fc797071bef5aa8c4a4364178f0ab61f454d77df14e6000e`,
+`3a3684fe15c61d0e6fa76b46a0719a80e3e63d1a6a2a6091028f11d95a92e518`,
+`e0fb034b86b6016aca38207387bcd3152eba62ce76e85b08c2239305f2e23fe7`,
+and `f6d2973ac3523a6b29609820e348f45cddec81135ee36f02d6f6019ad05dae35`.
+
 ## Route-A independent cross-subtype round C279--C283
 
 This round takes five separate theorem-scale steps in five different
