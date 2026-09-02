@@ -5,11 +5,12 @@ Bianchi Geodesic Flow*
 
 ## Current status
 
-**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** The Research
-Question Brief, Methodology Blueprint, independent Devil's-Advocate review,
-resolution, and independent recheck are complete; the recheck verdict is
-`PASS`. Literature screening, scientific computation, novelty assessment,
-claim registration, and manuscript results remain `NOT_RUN`.
+**STAGE 1 / PHASE 2 COMPLETE / AWAITING PHASE-3 CONFIRMATION.** Phase 1 passed
+independent review. Phase 2 closed a hash-bound corpus of 22 verified sources,
+including 17 peer-reviewed sources, with the bounded metadata repair confirmed
+`RESOLVED_POST_VERIFICATION`. Scientific computation, Phase-3 synthesis,
+novelty assessment, claim registration, and manuscript results remain
+`NOT_RUN`; Phase 3 is not authorized.
 
 ## Inherited object and immutable initial restrictions
 
@@ -40,6 +41,18 @@ composite substitutions are explicitly excluded from specificity evidence.
 Either a valid mechanism, a split-ideal obstruction, quotient non-evaluability,
 finite non-refinement, or specificity failure is a substantive outcome.
 
+## Phase-2 literature progress and open gap
+
+The verified corpus now connects the exact Picard/Bianchi geodesic setting to
+primitive and unoriented conjugacy concepts, arithmetic-group algorithms,
+Gaussian ideal arithmetic, factorization, and maximal-power detection. The
+remaining concrete gap is not merely “more literature”: no verified source by
+itself supplies both a terminating exact level-(3) primitive-loxodromic
+conjugacy/inversion/maximal-root quotient and a performance-independently
+selected Gaussian prime-ideal owner construction. Phase 3, if explicitly
+authorized, may synthesize compatibility across the verified sources; it may
+not treat an absence in this search as novelty proof.
+
 ## Route boundary
 
 This is an A0–A1 continuation only. Its formal Route-A tuple is `UNASSIGNED` at
@@ -57,7 +70,10 @@ evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+[annotated bibliography](notes/stage1_phase2_annotated_bibliography.md),
+[source verification](notes/stage1_phase2_source_verification.md),
+[Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
 [Research Question Brief](notes/stage1_phase1_rq_brief.md),
 [Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
 [pipeline state](notes/pipeline_state.md).

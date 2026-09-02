@@ -4,10 +4,12 @@ Working title: *Exact Conjugacy Ownership in Level-11 Hecke Output Ledgers*
 
 ## Current status
 
-**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** Five Phase-1
-design/review artifacts are complete and the independent recheck is `PASS`.
-Literature screening, scientific computation, novelty assessment, claim
-registration, and drafting remain `NOT_RUN`.
+**STAGE 1 RESEARCH / PHASE_2_COMPLETE / AWAITING_PHASE_3_CONFIRMATION.**
+The Phase-2 source corpus closes with 22 unique sources, including 19
+peer-reviewed sources, with disposition
+`PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`. Scientific computation, novelty
+assessment, claim registration, Phase 3, and drafting remain `NOT_RUN` or not
+authorized.
 
 ## Inheritance and immutable restrictions
 
@@ -28,6 +30,20 @@ It freezes exact `M(h,d)` equations, denominators, conflict propagation, a
 interfaces. If the complete theorem contract cannot be bound, the honest
 endpoint is `NOT_EVALUABLE_CONJUGACY_INCOMPLETE`, not a partial taxonomy.
 
+## Phase-2 literature advance
+
+The verified literature base now includes a direct Gamma_0(N)
+primitive-hyperbolic class-counting precedent, a modular
+conjugacy/class-number bridge, exact subgroup and fundamental-domain machinery,
+and ambient arithmetic and hyperbolic-group conjugacy algorithms. This is a
+clear literature advance beyond an ambient-only or heuristic reduction.
+
+The concrete unclosed gap is also sharper: none of the included sources provides
+the complete Gamma_0(11) oriented primitive-owner quotient with replayable
+positive and theorem-backed negative certificates for all 9,453 pairs, and none
+proves the project-defined `G`/`I`/`C` estimand binding. That gap remains
+fail-closed.
+
 ## Route boundary
 
 This can refine A1 ownership only. The new tuple is `UNASSIGNED`; no primitive
@@ -38,7 +54,8 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+[Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
 [Research Question Brief](notes/stage1_phase1_rq_brief.md),
 [Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
 [pipeline state](notes/pipeline_state.md).

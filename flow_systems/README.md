@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 1 Phase 1 complete；等待确认进入 Phase 2** | 五份 RQ、五份方法蓝图、五份独立 DA、五份 resolution 与五份独立复验已闭合；首审暴露的 1 Critical、18 Major、8 Minor 全部定点处置，5/5 recheck `PASS`。这只是可检验设计完成：文献和计算仍为 0，formal tuples 仍未分配，正向算术 A2 `0/5`、Route B `0/5`。见[Phase-1 批次检查点](BATCH_ROUND10_STAGE1_PHASE1_CHECKPOINT.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 1 Phase 2 complete；等待确认进入 Phase 3** | 五份有界文献库与独立逐条复验已闭合：116/116 source rows、100/116 peer-reviewed，114 `VERIFIED/S2_VERIFIED`、2 `PLAUSIBLE`、0 integrity block；6 项元数据问题均经定点补丁和原席复验关闭。五篇各有明确文献推进和未闭 certificate gap，但科学计算、novelty、claims 与 manuscript 仍未启动；formal tuples、正向算术 A2、Route B 均为 `0/5`。见[Phase-2 批次检查点](BATCH_ROUND10_STAGE1_PHASE2_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -36,26 +36,28 @@ Verschiebung 局部前像在 overlap 上不能下降。因此，`V_N` 在 fppf s
 Deninger v1 Corollary 4.6 的 sectionwise Dedekind-ring 表述，但不否定
 Propositions 4.3、4.5 或 Corollary 4.7。
 
-## Papers 29--33 下一批概要
+## Papers 29--33 Round 10 当前概要
 
-Round 10 已进入 Stage 1，并完成 ARS deep-research **Phase 1 scoping**。
-五篇均形成一个可证伪的单一主问题、完整方法合同与独立对抗复验；当前严格停在
-**AWAITING_PHASE_2_CONFIRMATION**。这不是论文科学结果或 novelty 结论：文献
-investigation、科学计算、claim registration 与 manuscript drafting 均尚未开始。
+Round 10 已完成 ARS Stage 1 deep-research **Phase 2 source investigation**。
+五篇各自披露精确查询、筛选/排除和去重规则，形成 116 条来源记录及等长独立
+verification ledger；当前严格停在 **AWAITING_PHASE_3_CONFIRMATION**。来源库可供
+下一阶段综合，但本阶段没有跨源综合、novelty 判断、科学计算、claim registration
+或 manuscript drafting。
 
-| Paper | 连续时间对象保持不变 | 本篇必须形成的明确推进 | 路线图位置 |
+| Paper | 连续时间对象保持不变 | Phase-2 明确推进与仍未闭合的门 | 路线图位置 |
 |---|---|---|---|
-| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | level-`(3)` Bianchi geodesic flow | 冻结 mechanism grammar、performance-independent selection、完整 primitive-owner quotient、单一 `S_H(M)` refinement endpoint；无合法机制/quotient 也是明确结果 | Route A / A0 specificity + A1 ownership；tuple `UNASSIGNED` |
-| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | `d=6a` no-eclipse physical three-disk flow | 修复 roof-agnostic Critical：将通用内部恒等式与 pointwise physical fidelity / cross-roof nontransfer 分离，并冻结四项误差账本 | physical determinant infrastructure；`A0_FAIL / A2_NOT_ELIGIBLE` |
-| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 正的 Level-11 newform time change | 分离 global `G`、incidence `I`、cell-local `C`，写出精确 `M(h,d)` 和 9,453-pair closure/certificate contract | Route A / A1 completeness；不自动晋级 A2 |
-| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 单独注册的 homology-cover calibrator | 定义 `R_+`/`d=0` Hahn formal objects、canonicalizer、compact `K(delta,T,R)` 与无限 limit 量词；单 owner mismatch 即关闭 full recovery | generic A1--A2 boundary；A0 absent，无 Route 晋级 |
-| [P33](papers/33-bolza-control-matched-census/README.md) | Bolza `b=1/2` subtype 与 cutoff `21/10` | 揭示 systole confound：已知空/非空对比不能给 A0；新目标收紧为 beyond-coarse-support 的 exact A1 owner closure | Route A / A1 only；A0 verdict prohibited |
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | unit-speed level-`(3)` Bianchi geodesic flow；arclength；primitive loxodromic classes；Gaussian prime ideals | 22/22 来源闭合了 Bianchi、算术群算法、Gaussian ideal 与 maximal-power 文献面；仍无唯一 literal ideal owner + 完整 primitive/unoriented quotient/certificate | Route A / A0 specificity + A1 ownership；tuple `UNASSIGNED` |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | `d=6a` no-eclipse physical three-disk flow；physical Euclidean flight roof | 26/26 来源并绑定 Gaspard--Rice correction companions；仍无同一来源给出 physical roof/operator/function space/common coefficients/four-error/nontransfer 全链 | physical determinant infrastructure；`A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION` |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 正的 `Gamma_0(11)` newform time change；oriented owners；powers 为 repetitions | 22/22 来源包含直接 `Gamma_0(N)` class-count 先例；仍无覆盖 9,453 pairs 的正/负 certificate 与 `G/I/C` estimand mapping | Route A / A1 completeness；tuple `UNASSIGNED`，不自动晋级 A2 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 独立 pure homology-cover calibrator；clock `1/N`；log multiplicity `1/N^3` | 26/26 来源分离 root/cover/zeta/tail 与 formal-background-only 文献；仍无 `SG2OwnerCanonical-v1`、prefix completeness、项目 normalization 和 every-order uniform tail | generic A1--A2 boundary；A0 absent，无 Route 晋级 |
+| [P33](papers/33-bolza-control-matched-census/README.md) | Bolza `b=1/2` even subtype；target-blind cutoff `Lambda=21/10` | 20/20 来源形成 octagon/arithmeticity/conjugacy/root/validator spine；仍无双 presentation 的 deterministic positive/negative serialization、completeness payload 与 validator | Route A / A1 only；`A0_INCONCLUSIVE_SYSTOLE_CONFOUNDED`、formal A0 prohibited |
 
-full mode 的批次预算 `400k--700k` tokens 已由用户确认；当前文档 round-trips
-记录为 `0/20`。Phase-1 产物统计为 `RQ_BRIEFS=5/5`、
-`METHODOLOGY_BLUEPRINTS=5/5`、`DA_REPORTS=5/5`、
-`DA_RECHECK_PASS=5/5`。下一次只需用户回复“确认”，才允许进入 Phase 2 文献
-investigation；在此之前不执行科学计算、claim registration、drafting 或 Route 晋级。
+Phase-2 统计为 `SOURCE_ROWS=116/116`、`PEER_REVIEWED=100/116`、
+`VERIFICATION_ROWS=116/116`；五份 disposition 均为
+`PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`。formal Route-A tuples `0/5`、正向算术
+A2 `0/5`、Route-B invocations `0/5`。下一次只需用户回复“确认”，才允许进入
+Phase 3 evidence synthesis；在此之前不执行科学计算、claim registration、
+drafting 或 Route 晋级。
 
 ## Papers 24--28 最新结论
 
@@ -396,4 +398,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 29--33-round10-prestart - Pre-Stage-1 / Route A intake（2026-09-01，历史入口） - 五个新 pipeline 与论文骨架建立，冻结继承对象、初始限定、预期推进点和 kill gate；当时尚未进入 Stage 1。该入口已由下一条 Phase-1 checkpoint 取代。详见[批次启动门](BATCH_ROUND10_PAPERS_29_33_PRESTART.md)。
 
-29--33-round10-stage1-phase1 - ARS Stage 1 / deep-research Phase 1 complete（2026-09-01，当前） - 用户预算确认后，五篇各完成 RQ brief、methodology blueprint、独立 DA、resolution 与原评审者 recheck；首轮共发现 1 Critical、18 Major、8 Minor，修复后 5/5 recheck `PASS`。P30 的 roof-agnostic proves-too-much Critical 被改写为 pointwise fidelity + cross-roof nontransfer；P33 的空/非空对比被确定为 systole-confounded，故禁止 A0 verdict。当前 `RQ_BRIEFS=5/5`、`METHODOLOGY_BLUEPRINTS=5/5`、`DA_RECHECK_PASS=5/5`，但文献/计算/novelty/claims/drafts 仍为 0；formal tuples `0/5`、正向算术 A2 `0/5`、Route B `0/5`。等待用户一次“确认”进入 Phase 2。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE1_CHECKPOINT.md)。
+29--33-round10-stage1-phase1 - ARS Stage 1 / deep-research Phase 1 complete（2026-09-01，历史入口） - 用户预算确认后，五篇各完成 RQ brief、methodology blueprint、独立 DA、resolution 与原评审者 recheck；首轮共发现 1 Critical、18 Major、8 Minor，修复后 5/5 recheck `PASS`。P30 的 roof-agnostic proves-too-much Critical 被改写为 pointwise fidelity + cross-roof nontransfer；P33 的空/非空对比被确定为 systole-confounded，故禁止 A0 verdict。当时 `RQ_BRIEFS=5/5`、`METHODOLOGY_BLUEPRINTS=5/5`、`DA_RECHECK_PASS=5/5`，但文献/计算/novelty/claims/drafts 仍为 0；formal tuples `0/5`、正向算术 A2 `0/5`、Route B `0/5`。该入口已由下一条 Phase-2 检查点取代。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE1_CHECKPOINT.md)。
+
+29--33-round10-stage1-phase2 - ARS Stage 1 / deep-research Phase 2 complete（2026-09-02，当前） - 五篇完成有界检索、去重、逐条注释与来源盲独立复验：`ROUND10_PHASE2_SOURCE_ROWS=116/116`，其中 `ROUND10_PHASE2_PEER_REVIEWED=100/116`；最终 114 条为 `VERIFIED/S2_VERIFIED`、2 条 DOI-less authoritative records 为 `PLAUSIBLE`，0 `UNVERIFIABLE`、0 `FABRICATED`。首轮发现的 6 项元数据/更正伴随问题全部经定点补丁和原复验席 post-patch replay 关闭，五篇均为 `PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`。明确推进分别是：P29 收窄 Gaussian ideal-owner/商证书缺口；P30 绑定三盘散射经典文献的正式 correction companions 并分离物理 roof 适用边界；P31 找到直接 `Gamma_0(N)` class-count 先例但保留 9,453-pair 证书缺口；P32 分离 canonical owner、cover/zeta 与 formal-background-only 文献并绑定已知 erratum；P33 形成 conjugacy/root/census source spine，但确定序列化与完备 validator 仍缺。此阶段没有跨源综合、novelty 结论、科学计算、claim 注册或论文正文；formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route B invocations `0/5`，五个初始动力系统与时钟/primitive/owner 限定原样冻结。当前等待一次“确认”进入 Phase 3 evidence synthesis。详见[批次检查点](BATCH_ROUND10_STAGE1_PHASE2_CHECKPOINT.md)、[补丁复验收据](BATCH_ROUND10_STAGE1_PHASE2_METADATA_CORRECTION_RECEIPT.md)、[更正链可复现性限制](BATCH_ROUND10_STAGE1_PHASE2_REPRODUCIBILITY_NOTE.md)与[最终审计收据](BATCH_ROUND10_STAGE1_PHASE2_AUDIT_RECEIPT.json)。

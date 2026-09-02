@@ -5,10 +5,12 @@ Scattering Flow*
 
 ## Current status
 
-**STAGE 1 / PHASE 1 COMPLETE / AWAITING PHASE-2 CONFIRMATION.** The five
-Phase-1 design/review artifacts are complete and the independent recheck is
-`PASS`. No literature search, transfer operator, determinant calculation,
-numerical experiment, novelty assessment, or scientific result has run.
+**STAGE 1 / PHASE 2 COMPLETE / AWAITING PHASE-3 CONFIRMATION.** Phase 1 passed
+independent review. Phase 2 closed a hash-bound corpus of 26 verified sources,
+including 24 peer-reviewed sources, with all three Gaspard–Rice correction
+bindings confirmed `RESOLVED_POST_VERIFICATION`. No transfer operator,
+determinant calculation, numerical experiment, Phase-3 synthesis, novelty
+assessment, or scientific result has run; Phase 3 is not authorized.
 
 ## Inherited object and immutable initial restrictions
 
@@ -38,6 +40,20 @@ a lawful coefficient comparison and four-part error decomposition. Missing
 pointwise/operator/error data return `NOT_EVALUABLE`; no determinant result is
 claimed.
 
+## Phase-2 literature progress and open gap
+
+The verified corpus now spans the physical three-disk model, open-billiard
+geometry, Axiom-A/Anosov transfer theory, Ruelle/Fredholm determinants,
+numerical determinant methods, and Livšic constraints, with correction and
+applicability boundaries kept explicit. The remaining concrete gap is the
+object-specific chain for `d=6a`: independent pointwise recovery of the
+physical Euclidean flight-length roof, an eligible operator space with the
+required trace or nuclear properties, a lawful common-coefficient comparison,
+the four-part error certificate, and cross-roof nontransfer. Phase 3, if
+explicitly authorized, may synthesize hypothesis compatibility only; it cannot
+promote this infrastructure beyond `A0_FAIL / A2_NOT_ELIGIBLE /
+NO_ROUTE_PROMOTION`.
+
 ## Route boundary
 
 This is separately typed physical-determinant infrastructure, not positive
@@ -55,7 +71,10 @@ Route B is `CLOSED`, with evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
+See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+[annotated bibliography](notes/stage1_phase2_annotated_bibliography.md),
+[source verification](notes/stage1_phase2_source_verification.md),
+[Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
 [Research Question Brief](notes/stage1_phase1_rq_brief.md),
 [Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
 [pipeline state](notes/pipeline_state.md).
