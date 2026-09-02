@@ -1,0 +1,149 @@
+\pdfvariable trailerid {[<C3122026090300000000000000000000><C3122026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}\newtheorem{lemma}{Lemma}
+\setlength{\emergencystretch}{3em}
+\title{Exact Finite Termination and Cell Geometry for One-Dimensional Bounded Confidence}
+\author{Route-A source-local certificate HCS-C312}
+\date{3 September 2026}
+\begin{document}\maketitle
+\begin{abstract}
+For the homogeneous one-dimensional Hegselmann--Krause map we prove order
+and permanent-gap decomposition, exact finite termination within
+$4n^3+2n+2$ updates, and the complete fixed-cluster classification.
+\ifnum\CRevisionRound>0
+We also describe every strict neighbor cell as a rational row-stochastic
+linear map, retain threshold discontinuities and affine covariance, and give
+an exact counterexample to mean conservation.
+\fi
+\ifnum\CRevisionRound>1
+An exhaustive 801-system rational archive and independent adversarial lanes
+audit the theorem without replacing its all-data proof.
+\fi
+\end{abstract}
+
+\section{Order, decomposition, and finite-time theorem}
+Let $\varepsilon>0$ and, after sorting the labels, set
+\begin{equation}\label{eq:hk}
+ N_i(t)=\{j:|x_j(t)-x_i(t)|\le\varepsilon\},\qquad
+ x_i(t+1)=\frac1{|N_i(t)|}\sum_{j\in N_i(t)}x_j(t).
+\end{equation}
+The inequality is closed: a pair at distance exactly $\varepsilon$ interacts.
+
+\begin{theorem}[Complete one-dimensional stopping atlas]\label{thm:hk}
+For every $n\ge1$ and every real initial state:
+\begin{enumerate}
+\item order, coincident blocks, and the convex hull are preserved;
+\item a consecutive gap greater than $\varepsilon$ never closes and splits
+the dynamics into independent subsystems;
+\item the state becomes exactly fixed by time $4n^3+2n+2$;
+\item a state is fixed iff its distinct occupied positions are separated by
+gaps strictly greater than $\varepsilon$.
+\end{enumerate}
+\end{theorem}
+
+The key quantitative fact is included for clarity.
+\begin{lemma}[Two-step progress]\label{lem:progress}
+If the system is not fixed at time $t$, let $\ell$ be its leftmost nonfrozen
+position block.  By time $t+2$, that block has gained multiplicity, has
+frozen, or its position has moved right by at least
+$\varepsilon/(2n^2)$.
+\end{lemma}
+\begin{proof}
+Scale to $\varepsilon=1$ and let $r$ be the first strictly right neighbor of
+$\ell$.  If their neighborhoods coincide, their next averages coincide and
+the left block gains weight.  Otherwise $r$ has a right neighbor unseen by
+$\ell$, hence beyond $x_\ell+1$.  Direct averaging over at most $n$ points
+gives $x_r(t+1)\ge x_\ell(t)+1/n$.  If $\ell$ itself moved by $1/(2n)$ we
+are done.  Otherwise their new separation is at least $1/(2n)$.  If it now
+exceeds one, $\ell$ freezes; if not, the next average moves its block by at
+least another factor $1/n$.  Rescaling proves the claim.
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{thm:hk}]
+The average of two ordered interval neighborhoods is ordered; identical
+positions have identical neighborhoods.  Every update lies in its
+neighborhood convex hull.  If a consecutive gap exceeds $\varepsilon$, the
+two sides never average across it and their separate convex hulls cannot
+approach, proving items 1--2.
+
+Decompose the initial state at all such gaps.  A component of $m$ agents has
+width at most $(m-1)\varepsilon$.  Apply Lemma~\ref{lem:progress} at even
+times.  The leftmost active position is nondecreasing; multiplicity/freeze
+events exhaust at most $m$ labels, while displacement events occur at most
+$2m^3$.  Thus the component stops within $4m^3+2m+2$ updates.  Independent
+components evolve in parallel, so the full stopping time is their maximum;
+since every $m_j\le n$, this is at most $4n^3+2n+2$, proving item 3.
+
+Clusters separated by strict gaps are plainly fixed.  Conversely, the
+leftmost occupied position having any distinct neighbor within
+$\varepsilon$ would average strictly to the right, contradicting fixedness.
+This proves item 4.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Strict cells, covariance, and the missing mean invariant}
+Away from threshold hyperplanes $|x_i-x_j|=\varepsilon$, the neighbor graph
+$G$ is locally constant and~\eqref{eq:hk} is
+\begin{equation}\label{eq:matrix}
+ x^+=A_Gx,\qquad (A_G)_{ij}=|N_i|^{-1}{\bf1}_{\{j\in N_i\}}.
+\end{equation}
+Thus $A_G\mathbf1=\mathbf1$, but its columns need not sum to one.  The global
+map is piecewise rational linear and generally discontinuous across a closed
+threshold face because a new averaging edge is inserted there.
+
+Translation by $c$ commutes with the map.  Multiplying both opinions and
+$\varepsilon$ by $s>0$ multiplies every later state by $s$.  In contrast,
+the arithmetic mean is not invariant.  With $\varepsilon=1$,
+\begin{equation}\label{eq:mean}
+ (0,1/2,7/5)\longmapsto(1/4,19/30,19/20),
+ \qquad 19/30\longmapsto11/18,
+\end{equation}
+a drift of $-1/45$.  This is exactly the failure of $A_G$ to be doubly
+stochastic; it does not conflict with order or convex-hull preservation.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Evidence, collisions, and Route-A boundary}
+All 791 nondecreasing half-integer configurations with $n\le5$, plus ten
+signed, scaled, threshold, duplicate and mean-drift controls, are evolved in
+exact rational arithmetic.  The archive retains 1,843 states and 28,895
+leaves; its maximum observed stop is six and 209 cases change mean.  An
+independent implementation performs 28,870 checks, SymPy closes 38 exact
+identities, replay is byte-identical, and 26 repaired-hash or parser attacks
+must fail.  The finite grid is a regression oracle; Lemma~\ref{lem:progress}
+proves the all-real theorem.
+
+C203 uses a fixed signed graph and continuous semigroup, C259 a tree
+Kuramoto flow, and C301 a random absorbing partition refinement.  C312 has a
+deterministic state-dependent confidence graph and literal finite stopping.
+
+The exact tuple is
+\[
+(\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+ \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+Agent and threshold data have no rational-prime owner (A0); all trajectories
+eventually fix, leaving no nontrivial primitive cycles (A1); update time is
+not a logarithmic-prime roof (A2); the rational cell matrices give no target
+determinant (A3) or self-adjoint target-zero quantization (A4).  Route A is
+rejected and Route B stays locked under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No target Euler factor, root
+number, automorphy, divisor law, functional equation, or zero match is
+asserted.
+
+\paragraph{AI use.} A generative language model assisted prose and code
+scaffolding.  The reproduced proof, exact independent trajectories,
+adversarial tests, and deterministic artifacts define the audit record.
+\fi
+
+\section*{Source lineage}
+\begin{thebibliography}{9}
+\bibitem{BBCN2013} A. Bhattacharyya, M. Braverman, B. Chazelle, and
+H. L. Nguyen, ``On the convergence of the Hegselmann--Krause system,''
+\emph{ITCS 2013}, 61--66.  \href{https://arxiv.org/abs/1211.1909}
+{arXiv:1211.1909}.
+\end{thebibliography}
+\end{document}

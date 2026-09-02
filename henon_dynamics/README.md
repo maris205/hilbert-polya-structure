@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C309--C313
+
+This round makes five independent theorem-scale advances while changing the
+state space, clock, and proof mechanism in every paper: a nonlinear symmetric
+matrix ODE, a nonholonomic time-optimal car, a chemical reaction oscillator,
+a discontinuous confidence-network map, and a maximally periodic geodesic
+Hamiltonian flow with its native elliptic operator.  These are five complete
+papers, not five installments of one theorem.
+
+- [C309 symmetric matrix Riccati Mobius flow](henon_symmetric_matrix_riccati_mobius_flow_route_a/README.md) · [paper PDF](henon_symmetric_matrix_riccati_mobius_flow_route_a/paper/main.pdf)
+- [C310 Dubins bounded-curvature global synthesis](henon_dubins_bounded_curvature_optimal_synthesis_route_a/README.md) · [paper PDF](henon_dubins_bounded_curvature_optimal_synthesis_route_a/paper/main.pdf)
+- [C311 Brusselator exact Hopf normal form](henon_brusselator_hopf_normal_form_route_a/README.md) · [paper PDF](henon_brusselator_hopf_normal_form_route_a/paper/main.pdf)
+- [C312 one-dimensional Hegselmann--Krause finite termination](henon_hegselmann_krause_finite_termination_route_a/README.md) · [paper PDF](henon_hegselmann_krause_finite_termination_route_a/paper/main.pdf)
+- [C313 round-sphere geodesic/Laplace atlas](henon_round_sphere_geodesic_laplace_route_a/README.md) · [paper PDF](henon_round_sphere_geodesic_laplace_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C309_C313.md),
+[batch plan](BATCH_PLAN_C309_C313.md), and
+[batch review](BATCH_REVIEW_C309_C313.md) for collision screening, theorem
+contracts, historical ownership, exact release receipts, and deterministic
+PDFs.  Across the five packages the final audit closes **36,347**
+independent-checker assertions, **1,366** exact symbolic identities/groups,
+**142/142** hostile rejections, **1,313,011** evidence bytes, 135 manifest
+payloads (140 physical files), and **11** final-paper pages with **107**
+embedded/subset font records.  The five strict tuples, in order C309--C313,
+are
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C304--C308
 
 This round takes five independent theorem-scale steps and changes the phase

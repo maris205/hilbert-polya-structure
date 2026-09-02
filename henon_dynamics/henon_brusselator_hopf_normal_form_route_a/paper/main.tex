@@ -1,0 +1,168 @@
+\pdfvariable trailerid {[<C3112026090300000000000000000000><C3112026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Rea}{\operatorname{Re}}
+\newcommand{\tr}{\operatorname{tr}}
+\setlength{\emergencystretch}{3em}
+\title{A Convention-Explicit Hopf Atlas for the Brusselator}
+\author{Route-A source-local certificate HCS-C311}
+\date{3 September 2026}
+\begin{document}\maketitle
+\begin{abstract}
+For every $A>0$ and $B\ge0$, we prove positive-quadrant global existence for
+the Brusselator and give its complete node, focus, defective, and Hopf
+equilibrium atlas.
+\ifnum\CRevisionRound>0
+With explicitly normalized right/left eigenvectors we derive the full complex
+$G_{21}$, distinguish three coefficient conventions, prove uniform
+supercriticality, and obtain leading cycle amplitude and frequency.
+\fi
+\ifnum\CRevisionRound>1
+Independent exact, symbolic, replay, mutation, and deterministic-build lanes
+audit the theorem and its strictly weak Route-A orbit signal.
+\fi
+\end{abstract}
+
+\section{Global existence and complete linear atlas}
+Consider
+\begin{equation}\label{eq:model}
+ \dot x=A-(B+1)x+x^2y,\qquad \dot y=Bx-x^2y,
+ \quad A>0,\ B\ge0.
+\end{equation}
+At $x=0$ the first component equals $A>0$, and at $y=0$ the second is
+$Bx\ge0$; hence the closed nonnegative quadrant is invariant.  There
+$(x+y)'=A-x\le A$, so neither coordinate can blow up in finite time.
+Every nonnegative solution is therefore global.
+
+\begin{theorem}[All-parameter equilibrium chambers]\label{thm:linear}
+Equation~\eqref{eq:model} has the unique nonnegative equilibrium
+$E=(A,B/A)$.  Put $\tau=B-1-A^2$.  Its Jacobian is
+\begin{equation}\label{eq:J}
+ J=\begin{pmatrix}B-1&A^2\\-B&-A^2\end{pmatrix},
+ \qquad \tr J=\tau,\quad\det J=A^2.
+\end{equation}
+Within $B\ge0$, the increasing-$B$ atlas is
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}\toprule
+range or boundary & type \\ \midrule
+$B<(A-1)^2$ & stable node \\
+$B=(A-1)^2$ & defective stable node \\
+$(A-1)^2<B<1+A^2$ & stable focus \\
+$B=1+A^2$ & Hopf pair $\pm iA$ \\
+$1+A^2<B<(A+1)^2$ & unstable focus \\
+$B=(A+1)^2$ & defective unstable node \\
+$B>(A+1)^2$ & unstable node \\ \bottomrule
+\end{tabular}
+\end{center}
+Empty ranges are omitted; in particular $A=1,B=0$ is the stable defective
+boundary.
+\end{theorem}
+\begin{proof}
+At equilibrium, adding the equations gives $x=A$, then the second gives
+$y=B/A$.  Formula~\eqref{eq:J} follows by differentiation.  Its eigenvalues
+are $\tau/2\pm\sqrt{\tau^2-4A^2}/2$.  The signs of $\tau$ and of this
+discriminant give every row.  At equality the positive off-diagonal entry
+$A^2$ prevents $J$ from being scalar, hence the repeated eigenvalue is
+defective.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Exact normalized Hopf coefficient}
+Set $B=1+A^2$ and translate $u=x-A$, $v=y-B/A$.  The nonlinear expansion is
+\begin{align*}
+ \dot u&=A^2u+A^2v+(A+A^{-1})u^2+2Auv+u^2v,\\
+ \dot v&=-(A^2+1)u-A^2v-(A+A^{-1})u^2-2Auv-u^2v.
+\end{align*}
+Fix right and adjoint eigenvectors
+\begin{equation}\label{eq:qp}
+ q=(1,-1+i/A)^{\mathsf T},\qquad
+ p=((1+iA)/2,iA/2)^{\mathsf T},\qquad \bar p^{\mathsf T}q=1.
+\end{equation}
+If $\mathcal B,\mathcal C$ are the second and third derivative multilinear
+forms, use the convention
+\begin{align}\label{eq:G}
+G_{21}=\bar p^{\mathsf T}\{&\mathcal C(q,q,\bar q)
+-2\mathcal B(q,J^{-1}\mathcal B(q,\bar q))\\
+&+\mathcal B(\bar q,(2iA I-J)^{-1}\mathcal B(q,q))\}.
+\end{align}
+Direct substitution, with no numerical fitting, gives
+\begin{equation}\label{eq:Gvalue}
+ G_{21}=-\left(1+\frac2{A^2}\right)
+ -i\frac{4A^4-7A^2+4}{3A^3},\qquad
+ \ell_1=\frac{\Rea G_{21}}{2A}=-\frac{A^2+2}{2A^3}<0.
+\end{equation}
+
+\begin{theorem}[Uniformly supercritical branch]\label{thm:hopf}
+Let $\mu=B-(1+A^2)$.  The Hopf crossing is transverse with real-part
+derivative $1/2$.  For all sufficiently small $\mu>0$ there is one local
+periodic-orbit branch modulo phase; it is stable.  In the coordinate
+of~\eqref{eq:qp},
+\begin{align}
+ r^2&=\frac{A^2}{A^2+2}\mu+O(\mu^2),\label{eq:r}\\
+ \Omega&=A-\frac{4A^4-7A^2+4}{6A(A^2+2)}\mu+O(\mu^2).\label{eq:freq}
+\end{align}
+The first harmonic of $x-A$ has amplitude
+$2A\sqrt{\mu/(A^2+2)}$ up to an $O(\mu)$ coordinate correction.
+\end{theorem}
+\begin{proof}
+Near zero the eigenvalues are
+$\mu/2\pm i\sqrt{A^2-\mu^2/4}$, proving transversality and absence of linear
+frequency detuning.  The physical-time normal form is
+$\dot w=(\mu/2+iA)w+(G_{21}/2)w|w|^2+$ higher terms.  Its radial cubic
+coefficient is $-(A^2+2)/(2A^2)$, whereas $\ell_1$ in~\eqref{eq:Gvalue}
+includes the additional division by $A$.  Solving the radial equation gives
+\eqref{eq:r}; its derivative is negative at the nonzero root.  The imaginary
+part of $G_{21}/2$ gives~\eqref{eq:freq}, and $u=w+\bar w+O(|w|^2)$ gives the
+first harmonic.
+\end{proof}
+
+The face $B=0$ is included in Theorem~\ref{thm:linear}.  The face $A=0$ is
+not: $B/A$ is singular and $x=0$ becomes an equilibrium line.  No global
+uniqueness of periodic orbits is inferred from the local Hopf theorem.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Evidence, collisions, and Route-A boundary}
+Twelve rational values $1/4\le A\le10$ produce 55 admissible chamber probes
+and 827 audited leaves.  An independent checker performs 742 exact/numerical
+checks.  A separate SymPy program differentiates the vector field and derives
+\eqref{eq:Gvalue} in 13 identities; replay is byte exact and 26 repaired-hash
+or parser attacks must fail.  These lanes audit conventions, not the proof.
+
+C249 owns the global Van der Pol Li\'enard cycle, C235 a simplex replicator,
+and C254 a washout/transcritical chemostat.  C311 instead closes the
+Brusselator's all-$A$ chemical Hopf coefficient and linear chamber geometry.
+
+The strict tuple is
+\[
+(\mathrm{A0\_FAIL},\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},
+ \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+The local isolated cycle is genuine source dynamics, earning only A1 weak.
+Continuous reaction parameters carry no rational-prime local owner (A0) or
+logarithmic-prime clock (A2); the normal form gives no target determinant
+(A3) or self-adjoint target-zero operator (A4).  Route A is rejected and
+Route B remains locked under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+No target Euler factor, root number, automorphy statement, divisor law,
+functional equation, or zero correspondence is claimed.
+
+\paragraph{AI use.} A generative language model assisted drafting and code
+scaffolding.  The displayed derivation, independent symbolic reconstruction,
+adversarial tests, and archived artifacts define the audit record.
+\fi
+
+\section*{Source lineage}
+\begin{thebibliography}{9}
+\bibitem{PL1968} I. Prigogine and R. Lefever,
+``Symmetry breaking instabilities in dissipative systems. II,''
+\emph{J. Chem. Phys.} 48 (1968), 1695--1700.
+DOI: \href{https://doi.org/10.1063/1.1668896}{10.1063/1.1668896}.
+\bibitem{Kuznetsov} Y. A. Kuznetsov,
+\emph{Elements of Applied Bifurcation Theory}, 3rd ed., Springer, 2004.
+DOI: \href{https://doi.org/10.1007/978-1-4757-3978-7}{10.1007/978-1-4757-3978-7}.
+\end{thebibliography}
+\end{document}

@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C309--HCS-C313 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O293 | HCS-C309 matrix-Riccati lift and chart determinant as arithmetic owners | proved strict-gradient and continuous-spectrum obstruction | The trace potential is strictly decreasing off the symmetric-involution set, so no nonconstant recurrent orbit supplies a primitive ledger.  Initial eigenvalues vary continuously, while poles are merely singularities of a source Mobius chart.  The finite block lift and its denominator furnish neither rational-prime labels, a logarithmic-prime roof, a target determinant, nor a target divisor. | The exact flow, full signed-time pole/maximal-interval atlas, sharp forward limit/rate, gradient law, involution Morse--Bott geometry, Loewner derivative, and source block lift survive in every finite dimension. | ../henon_symmetric_matrix_riccati_mobius_flow_route_a/THEOREM_PACKAGE.md |
+| HEN-O294 | HCS-C310 endpoint-optimal Dubins paths as intrinsic arithmetic cycles | proved endpoint/control and travel-clock obstruction | Each curve is selected by freely prescribed endpoint data and a controlled tangent evolution; it is not an isolated intrinsic periodic orbit of one autonomous owner.  Its length is an endpoint travel cost rather than a prime-labelled roof, and the Pontryagin Hamiltonian is not a target self-adjoint operator. | The complete six-word global synthesis, feasibility tests, exact replay, degeneracies, ties, scaling, and reflection survive for the frozen bounded-curvature car. | ../henon_dubins_bounded_curvature_optimal_synthesis_route_a/THEOREM_PACKAGE.md |
+| HEN-O295 | HCS-C311 local Hopf cycle as an arithmetic primitive ledger | proved local-branch and continuous-parameter obstruction | The supercritical orbit is one source-chemical branch depending continuously on `A` and bifurcation distance, and the theorem is explicitly local.  It carries no rational-prime ownership, logarithmic-prime clock, target determinant, or target divisor; a weak source periodic orbit cannot supply the missing arithmetic gates. | Positive global existence, the complete linear chamber, exact complex Hopf coefficient, negative first Lyapunov coefficient, and the leading stable-cycle amplitude/frequency survive. | ../henon_brusselator_hopf_normal_form_route_a/THEOREM_PACKAGE.md |
+| HEN-O296 | HCS-C312 confidence-network matrices as arithmetic transfer operators | proved finite-termination and state-dependent-averaging obstruction | Every one-dimensional homogeneous trajectory reaches a fixed cluster state in finite time, hence no nontrivial recurrent orbit remains.  The rational averaging matrices change with the confidence graph and are source combinatorics, not prime-indexed local factors, a target determinant, or a target divisor. | Order preservation, permanent gaps, the explicit cubic stopping bound, fixed-cluster classification, strict-cell maps, and the nonconserved-mean counterexample survive. | ../henon_hegselmann_krause_finite_termination_route_a/THEOREM_PACKAGE.md |
+| HEN-O297 | HCS-C313 great circles and the spherical Laplacian as target spectral owners | proved clean-family and source-spectrum obstruction | Every geodesic belongs to a positive-dimensional common-period family depending on the continuous radius, so the classical orbits are maximally nonisolated rather than prime-indexed.  Spherical-harmonic multiplicities and shifted half-wave revivals are spectra of the source round metric and provide no target zero match, target determinant, or Hilbert--Pólya realization. | The exact geodesic flow, least-period/fixed-set atlas, clean return, orbit quotient, Liouville/reversor structure, Laplace spectrum/heat trace, and exact shifted revival survive. | ../henon_round_sphere_geodesic_laplace_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under orthogonal conjugacy, Dubins radius
+scaling/reflection, the frozen Brusselator normalization, common affine
+rescaling of one-dimensional opinions, and round-sphere isometry/scale up to
+the explicitly stated source transformations.  They do not license Route B.
+The common scope firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, and every
+surviving theorem is source-local with a content-addressed evidence/PDF
+release ledger.
+
 ## HCS-C304--HCS-C308 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

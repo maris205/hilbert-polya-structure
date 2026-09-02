@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C309--HCS-C313 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`b3e2f3f7207b85d7be942ff72b1f49e754615c76`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C309 | The symmetric matrix flow `Xdot=I-X^2` has an exact matrix Mobius solution, complete signed-time pole/maximal-interval atlas, sharp forward limit and rate, strict gradient recurrence obstruction, every symmetric-involution Grassmann component with its full linear index, and the complete Loewner derivative of the time map. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [matrix-Riccati package](../henon_symmetric_matrix_riccati_mobius_flow_route_a/) · [paper PDF](../henon_symmetric_matrix_riccati_mobius_flow_route_a/paper/main.pdf) |
+| HCS-C310 | The normalized Dubins car has a boundary-safe global six-word optimal synthesis with explicit feasibility, exact endpoint replay, zero-piece and tangent degeneracies, deterministic angular conventions, all minimizer ties, radius scaling, and reflection. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Dubins package](../henon_dubins_bounded_curvature_optimal_synthesis_route_a/) · [paper PDF](../henon_dubins_bounded_curvature_optimal_synthesis_route_a/paper/main.pdf) |
+| HCS-C311 | The Brusselator has positive-quadrant global existence, a complete equilibrium linear-chamber atlas, and a convention-explicit exact Hopf normal form with `l1=-(A^2+2)/(2A^3)<0`, giving the stable supercritical branch and its leading amplitude/frequency data. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [Brusselator package](../henon_brusselator_hopf_normal_form_route_a/) · [paper PDF](../henon_brusselator_hopf_normal_form_route_a/paper/main.pdf) |
+| HCS-C312 | The one-dimensional homogeneous synchronous Hegselmann--Krause system terminates exactly within the explicit safe cubic bound `4n^3+2n+2`; order, permanent gaps, fixed-cluster geometry, rational strict-cell maps, and an exact nonconserved-mean counterexample are closed together. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [HK package](../henon_hegselmann_krause_finite_termination_route_a/) · [paper PDF](../henon_hegselmann_krause_finite_termination_route_a/paper/main.pdf) |
+| HCS-C313 | The unit tangent flow of the round sphere has one exact common least period, maximally clean return and oriented-Grassmann orbit quotient; the native Laplacian has explicit spherical-harmonic spectrum/heat trace and an exact scalar one-period, identity two-period completed-square half-wave revival. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [round-sphere package](../henon_round_sphere_geodesic_laplace_route_a/) · [paper PDF](../henon_round_sphere_geodesic_laplace_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively a nonlinear matrix ODE, a nonholonomic optimal
+control problem, a chemical reaction oscillator, a discontinuous confidence
+network, and a periodic geodesic Hamiltonian flow with its source Laplacian.
+No target local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Pólya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting are
+recorded in [BATCH_REVIEW_C309_C313.md](../BATCH_REVIEW_C309_C313.md).
+
 ## HCS-C304--HCS-C308 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline
