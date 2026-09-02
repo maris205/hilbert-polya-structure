@@ -2,16 +2,16 @@
 
 Date: **2026-09-02 UTC**
 
-Current controlling state: **STAGE 1 RESEARCH / PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION**.
+Current controlling state: **STAGE 1 RESEARCH / PHASE_5_COMPLETE / AWAITING_PHASE_6_CONFIRMATION**.
 
-The authorized Phase-4 report composition is complete with disposition
-`PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`, and the pipeline is waiting for an
-explicit Phase-5 review decision.
+The authorized four-role Phase-5 review is complete with integrated disposition
+`MAJOR_REVISION`, and the pipeline is waiting for an explicit Phase-6 decision.
 
 | Item | Status |
 |---|---|
 | Pipeline global state | `awaiting_confirmation` |
-| ARS Stage 1 | `PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION` |
+| ARS Stage 1 | `PHASE_5_COMPLETE / AWAITING_PHASE_6_CONFIRMATION` |
+| Phase-5 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE5_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Phase-4 authorization | `CONFIRMED`; SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Phase-4 checkpoint | `COMPLETE`; `notes/stage1_phase4_checkpoint.md` |
 | Phase-4 composition | 3,524-word report, 8 fresh intents, 22/22 source IDs; `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS` |
@@ -42,10 +42,15 @@ explicit Phase-5 review decision.
 | Formal Route-A tuple | `UNASSIGNED`; formal tuples `0`; positive arithmetic A2 `0`; A2–A4 `NOT_RUN` |
 | Route B | `CLOSED`; evaluation `NOT_RUN`; invocation `false` |
 | Manuscript drafting | `NOT_AUTHORIZED` |
-| Phase 5 | `AWAITING_PHASE_5_CONFIRMATION`; authorization `false` |
+| Phase-5 role reviews | `COMPLETE`; editorial, ethics, citation-integrity, and Devil's Advocate records present; integrated disposition `MAJOR_REVISION`; 0 Critical; ethics not `BLOCKED` |
+| Explicit Phase-5 progress | The exact canonicalization certificate must be distinguished from the 9,453-pair all-pairs audit, including a theorem-backed canonical-reduction comparison |
+| Citation locator boundary | All registered adjacent citations retain `anchor:none`; claim-to-passage clearance remains inconclusive |
+| Phase-4 report integrity | `UNCHANGED`; Phase-5 review did not alter report bytes |
+| Phase 6 | `AWAITING_PHASE_6_CONFIRMATION`; authorization `false` |
 
 The initial flow, time density, owner/repetition distinction, and frozen finite
-population remain unchanged. Phase 4 supplies the full proof-first literature
-report but does not instantiate a solver or owner ledger, assign a Route tuple,
-run a computation, decide novelty, register a formal project claim, authorize
-manuscript drafting, or authorize Phase 5 review.
+population remain unchanged. Phase 5 supplies four role reviews and an
+integrated `MAJOR_REVISION` synthesis but does not instantiate a solver or
+owner ledger, assign a Route tuple, run a computation, decide novelty, register
+a formal project claim, or authorize manuscript drafting. Phase 6 remains
+behind a separate confirmation.

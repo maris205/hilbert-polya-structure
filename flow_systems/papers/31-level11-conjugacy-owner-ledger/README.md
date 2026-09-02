@@ -4,10 +4,10 @@ Working title: *Exact Conjugacy Ownership in Level-11 Hecke Output Ledgers*
 
 ## Current status
 
-**STAGE 1 RESEARCH / PHASE_4_COMPLETE / AWAITING_PHASE_5_CONFIRMATION.**
-The 22-source corpus now has a 3,524-word full research-report draft and eight
-fresh report-compiler claim intents. All 22 source IDs are cited and listed;
-the disposition is `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. Phase 5 is not
+**STAGE 1 RESEARCH / PHASE_5_COMPLETE / AWAITING_PHASE_6_CONFIRMATION.**
+Four separately recorded role reviews and their integrated synthesis are complete with
+disposition `MAJOR_REVISION`, 0 Critical findings, and no ethics `BLOCKED`
+result. The Phase-4 report bytes remain unchanged, and Phase 6 is not
 authorized. Scientific computation, canonical-result refresh, novelty
 assessment, formal project claim registration, Route evaluation, and
 manuscript drafting remain `NOT_RUN` or not authorized.
@@ -69,6 +69,19 @@ not interchangeable. Aggregate class counts stay controls rather than pairwise
 proofs. The concrete advance is a complete evidence-grounded report; no pair
 decision, owner partition, or estimand table has been executed.
 
+## Phase-5 review advance
+
+Editorial, ethics, citation-integrity, and Devil's Advocate reviews are
+complete. Their integrated `MAJOR_REVISION` result requires the next revision
+to distinguish an exact canonicalization certificate from the 9,453-pair
+all-pairs audit, and to test whether a theorem-backed canonical reduction can
+replace any audit rows without weakening the fail-closed guarantee. Every
+citation locator remains `anchor:none`, so claim-to-passage clearance is still
+inconclusive even though the source ledger is structurally complete. No
+scientific computation, novelty decision, formal claim, canonical manuscript
+change, or Route-state change occurred. Phase 6 remains behind a separate
+confirmation.
+
 ## Route boundary
 
 This can refine A1 ownership only. The new tuple is `UNASSIGNED`; no primitive
@@ -79,7 +92,13 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+See the [Phase-5 checkpoint](notes/stage1_phase5_checkpoint.md),
+[integrated Phase-5 synthesis](notes/stage1_phase5_review_synthesis.md),
+[editorial review](notes/stage1_phase5_editorial_review.md),
+[ethics review](notes/stage1_phase5_ethics_review.md),
+[citation-integrity review](notes/stage1_phase5_citation_integrity_review.md),
+[Phase-5 Devil's Advocate review](notes/stage1_phase5_devils_advocate.md),
+[Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
 [full research report](notes/stage1_phase4_research_report.md),
 [Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
 [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),

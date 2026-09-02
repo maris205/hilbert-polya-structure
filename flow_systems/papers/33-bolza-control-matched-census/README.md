@@ -4,13 +4,13 @@ Working title: *An Exact Control-Matched Geodesic Census for the Frozen Bolza Ma
 
 ## Current status
 
-**STAGE 1 / `PHASE_4_COMPLETE` / `AWAITING_PHASE_5_CONFIRMATION`.** The frozen
-20-source corpus now has a 3,968-word full research-report draft and eight
-fresh report-compiler claim intents. All 20 source IDs are cited and listed;
-the report contains 48 adjacent citation pairs and closes as
-`PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. No census, magnetic comparison,
-novelty assessment, scientific computation, formal project claim, Route
-evaluation, or manuscript result has run; Phase 5 is not authorized.
+**STAGE 1 RESEARCH / `PHASE_5_COMPLETE` /
+`AWAITING_PHASE_6_CONFIRMATION`.** Four separately recorded role reviews and their
+integrated synthesis are complete with disposition `MAJOR_REVISION`, 0
+Critical findings, and no ethics `BLOCKED` result. The Phase-4 report bytes
+remain unchanged, and Phase 6 is not authorized. No census, magnetic
+comparison, novelty assessment, scientific computation, formal project claim,
+Route evaluation, or manuscript result has run.
 
 ## Phase-2 literature progress and remaining gap
 
@@ -54,6 +54,19 @@ S12 page range, and states an explicit material gap for exact claim locators.
 The concrete advance is a complete evidence-grounded report; all seven
 obligations remain unimplemented and no owner census has run.
 
+## Phase-5 review advance
+
+Editorial, ethics, citation-integrity, and Devil's Advocate reviews are
+complete. Their integrated `MAJOR_REVISION` result replaces an unnecessarily
+uniform producer requirement with surface-specific exact proof producers that
+emit one common semantic certificate schema for an independent validator. The
+next revision must also make the frozen-cutoff scientific asymmetry explicit.
+All 48 adjacent citation pairs retain `anchor:none`, so claim-to-passage
+clearance is still inconclusive even though the source ledger is structurally
+complete. No scientific computation, novelty decision, formal claim,
+canonical manuscript change, or Route-state change occurred. Phase 6 remains
+behind a separate confirmation.
+
 ## Inheritance and immutable restrictions
 
 This continues P28's unit-speed Bolza magnetic flow at `b=1/2`, signed-field
@@ -86,7 +99,13 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+See the [Phase-5 checkpoint](notes/stage1_phase5_checkpoint.md),
+[integrated Phase-5 synthesis](notes/stage1_phase5_review_synthesis.md),
+[editorial review](notes/stage1_phase5_editorial_review.md),
+[ethics review](notes/stage1_phase5_ethics_review.md),
+[citation-integrity review](notes/stage1_phase5_citation_integrity_review.md),
+[Phase-5 Devil's Advocate review](notes/stage1_phase5_devils_advocate.md),
+[Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
 [full research report](notes/stage1_phase4_research_report.md),
 [Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
 [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),

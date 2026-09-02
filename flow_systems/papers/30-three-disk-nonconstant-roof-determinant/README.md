@@ -5,13 +5,12 @@ Scattering Flow*
 
 ## Current status
 
-**STAGE 1 / `PHASE_4_COMPLETE` / `AWAITING_PHASE_5_CONFIRMATION`.** The
-hash-bound 26-source corpus now has a 3,798-word full research-report draft and
-eight fresh report-compiler claim intents. All 26 source IDs are cited and
-listed, and the Phase-4 disposition is
-`PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS`. Phase 5 is not authorized. No
-transfer operator, determinant calculation, numerical experiment, or
-scientific result has run;
+**STAGE 1 RESEARCH / `PHASE_5_COMPLETE` /
+`AWAITING_PHASE_6_CONFIRMATION`.** Four separately recorded role reviews and their
+integrated synthesis are complete with disposition `MAJOR_REVISION`, 0
+Critical findings, and no ethics `BLOCKED` result. The Phase-4 report bytes
+remain unchanged, and Phase 6 is not authorized. No transfer operator,
+determinant calculation, numerical experiment, or scientific result has run;
 the closeout retains `SCIENTIFIC_COMPUTATION=NOT_RUN`,
 `NOVELTY_ASSESSMENT=NOT_RUN`, `FORMAL_PROJECT_CLAIM_REGISTRATION=0/1`,
 `FORMAL_ROUTE_A_TUPLES=0/1`, `ROUTE_B=CLOSED`, and
@@ -83,6 +82,19 @@ error term, and preserves every not-evaluable endpoint. The concrete advance
 is a complete evidence-grounded paper draft; no roof, operator, determinant,
 error certificate, or nontransfer result has been executed.
 
+## Phase-5 review advance
+
+Editorial, ethics, citation-integrity, and Devil's Advocate reviews are
+complete. Their integrated `MAJOR_REVISION` result makes “total error” a
+strict obligation rather than a label: Phase 6 must state a common comparison
+norm, stability and conditioning assumptions, and explicit roof/input
+uncertainty in addition to the existing error components. The six-gate
+physical-specificity program remains intact. Every citation locator remains
+`anchor:none`, so claim-to-passage clearance is still inconclusive even though
+the source ledger is structurally complete. No scientific computation,
+novelty decision, formal claim, canonical manuscript change, or Route-state
+change occurred. Phase 6 remains behind a separate confirmation.
+
 ## Route boundary
 
 This is separately typed physical-determinant infrastructure, not positive
@@ -100,7 +112,13 @@ Route B is `CLOSED`, with evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
+See the [Phase-5 checkpoint](notes/stage1_phase5_checkpoint.md),
+[integrated Phase-5 synthesis](notes/stage1_phase5_review_synthesis.md),
+[editorial review](notes/stage1_phase5_editorial_review.md),
+[ethics review](notes/stage1_phase5_ethics_review.md),
+[citation-integrity review](notes/stage1_phase5_citation_integrity_review.md),
+[Phase-5 Devil's Advocate review](notes/stage1_phase5_devils_advocate.md),
+[Phase-4 checkpoint](notes/stage1_phase4_checkpoint.md),
 [full research report](notes/stage1_phase4_research_report.md),
 [Phase-4 claim-intent manifest](notes/stage1_phase4_claim_intent_manifest.json),
 [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
