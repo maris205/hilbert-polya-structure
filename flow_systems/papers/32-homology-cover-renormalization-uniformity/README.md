@@ -4,12 +4,14 @@ Working title: *Uniformity Limits for Time–Multiplicity Renormalization in Gen
 
 ## Current status
 
-**STAGE 1 RESEARCH / PHASE_2_COMPLETE / AWAITING_PHASE_3_CONFIRMATION.**
-The Phase-2 source corpus closes with 26 unique sources, including 22
-peer-reviewed sources, with disposition
-`PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`. Scientific computation, novelty
-assessment, claim registration, Phase 3, and drafting remain `NOT_RUN` or not
-authorized.
+**STAGE 1 RESEARCH / PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION.**
+Phase 3 was authorized under SHA-256
+`f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe`
+and closes with disposition `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`. The
+independent Devil's Advocate Checkpoint 2 verdict is `PASS`. Phase 4 is not
+authorized. Scientific computation, canonical-result refresh, novelty
+assessment, formal project claim registration, Route evaluation, and
+manuscript drafting remain `NOT_RUN` or not authorized.
 
 ## Inheritance and immutable restrictions
 
@@ -47,6 +49,22 @@ formal-to-scalar interface, or supplies a compact-uniform tail for every frozen
 P32-S26 are background-only and cannot validate the `1/N` or `1/N^3`
 normalizations.
 
+## Phase-3 synthesis advance
+
+The 26-source corpus is now integrated into five evidence themes, a complete
+source matrix, seven synthesis-intent claims, and five bounded candidate
+tensions. The concrete advance is a four-package fail-closed program for
+`SG2OwnerCanonical-v1`, ownerwise cover/lift algebra, the formal owner-variable
+and separate `d=0` objects, and a compact-uniform tail for every frozen limit
+order. Every package remains `NOT_EXECUTED`.
+
+Independent DA Checkpoint 2 passed with **0 Critical, 0 Major, 2 Minor, and 5
+Observations**. `CP-P32-004` remains `flagged_unresolved` with scholar
+confirmation pending. The exact schedule remains `N_k=k!`, `m_k=2^k` for
+every `k>=1`, with neighboring `N'_k=2*(k!)`; only `1<=k<=8` and
+`m in {8,16,32,64,128}` are finite diagnostics. No finite prefix carries
+limit, cofinality, or interchange evidence.
+
 ## Route boundary
 
 This is a generic proves-too-much calibration. The new tuple is `UNASSIGNED`;
@@ -57,7 +75,10 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+[Phase-3 synthesis](notes/stage1_phase3_synthesis.md),
+[independent Phase-3 DA](notes/stage1_phase3_devils_advocate.md),
+[Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
 [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
 [Research Question Brief](notes/stage1_phase1_rq_brief.md),
 [Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and

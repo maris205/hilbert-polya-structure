@@ -5,12 +5,13 @@ Bianchi Geodesic Flow*
 
 ## Current status
 
-**STAGE 1 / PHASE 2 COMPLETE / AWAITING PHASE-3 CONFIRMATION.** Phase 1 passed
-independent review. Phase 2 closed a hash-bound corpus of 22 verified sources,
-including 17 peer-reviewed sources, with the bounded metadata repair confirmed
-`RESOLVED_POST_VERIFICATION`. Scientific computation, Phase-3 synthesis,
-novelty assessment, claim registration, and manuscript results remain
-`NOT_RUN`; Phase 3 is not authorized.
+**STAGE 1 / `PHASE_3_COMPLETE` / `AWAITING_PHASE_4_CONFIRMATION`.** The
+hash-bound 22-source corpus has completed evidence synthesis with disposition
+`PHASE3_SYNTHESIS_READY_WITH_WARNINGS`, and independent Devil's Advocate
+Checkpoint 2 returned `PASS`. Phase 4 is not authorized. The closeout retains
+`SCIENTIFIC_COMPUTATION=NOT_RUN`, `NOVELTY_ASSESSMENT=NOT_RUN`,
+`FORMAL_PROJECT_CLAIM_REGISTRATION=0/1`, `FORMAL_ROUTE_A_TUPLES=0/1`,
+`ROUTE_B=CLOSED`, and `MANUSCRIPT_DRAFTING=NOT_AUTHORIZED`.
 
 ## Inherited object and immutable initial restrictions
 
@@ -41,7 +42,7 @@ composite substitutions are explicitly excluded from specificity evidence.
 Either a valid mechanism, a split-ideal obstruction, quotient non-evaluability,
 finite non-refinement, or specificity failure is a substantive outcome.
 
-## Phase-2 literature progress and open gap
+## Phase-2 literature base and open gap
 
 The verified corpus now connects the exact Picard/Bianchi geodesic setting to
 primitive and unoriented conjugacy concepts, arithmetic-group algorithms,
@@ -49,9 +50,24 @@ Gaussian ideal arithmetic, factorization, and maximal-power detection. The
 remaining concrete gap is not merely “more literature”: no verified source by
 itself supplies both a terminating exact level-(3) primitive-loxodromic
 conjugacy/inversion/maximal-root quotient and a performance-independently
-selected Gaussian prime-ideal owner construction. Phase 3, if explicitly
-authorized, may synthesize compatibility across the verified sources; it may
-not treat an absence in this search as novelty proof.
+selected Gaussian prime-ideal owner construction. Phase 3 did not treat this
+bounded-corpus absence as novelty, nonexistence, or impossibility evidence.
+
+## Phase-3 evidence-synthesis advance and carried warnings
+
+Phase 3 converted the corpus into a gate-ordered dependency graph with two
+independent pre-performance kill gates: a literal Gaussian-prime-ideal owner
+mechanism satisfying the frozen conjugacy/inversion/repetition/split-branch
+laws, and a terminating deterministic positive-and-negative certificate
+contract for the level-(3) primitive/unoriented owner quotient. Neither gate
+is claimed closed or executed; performance cannot select or repair either
+interface.
+
+Warnings carried forward are that the matrix covers all 22 sources while the
+narrative cites 21 unique IDs, three displayed author names require restoration
+of verified diacritics before manuscript reuse, every synthesis citation has
+`anchor:none`, and the correction-bound/preprint/integrity limitations remain
+in force.
 
 ## Route boundary
 
@@ -70,7 +86,10 @@ evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+[evidence synthesis](notes/stage1_phase3_synthesis.md),
+[independent Devil's Advocate review](notes/stage1_phase3_devils_advocate.md),
+[Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
 [annotated bibliography](notes/stage1_phase2_annotated_bibliography.md),
 [source verification](notes/stage1_phase2_source_verification.md),
 [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),

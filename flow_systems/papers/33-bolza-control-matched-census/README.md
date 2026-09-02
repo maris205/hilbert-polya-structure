@@ -4,13 +4,14 @@ Working title: *An Exact Control-Matched Geodesic Census for the Frozen Bolza Ma
 
 ## Current status
 
-**STAGE 1 / PHASE 2 COMPLETE / AWAITING PHASE-3 CONFIRMATION.** The bounded
-source corpus contains 20 unique records, including 18 peer-reviewed works, and
-the independent verification ledger covers 20/20 IDs. Its disposition is
-`PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`; the authorized metadata corrections
-are independently replayed as `RESOLVED_POST_VERIFICATION`. No census,
-magnetic comparison, novelty assessment, scientific computation, registered
-claim, Route evaluation, or manuscript result has run.
+**STAGE 1 / `PHASE_3_COMPLETE` / `AWAITING_PHASE_4_CONFIRMATION`.** The frozen
+20-source corpus now has a complete source-effect matrix, five-theme synthesis,
+seven-claim synthesis precommitment, and six bounded pairwise tensions. The
+initial independent DA verdict of `REVISE` (0 Critical / 2 Major / 1 Minor)
+was closed by a synthesis-only patch and same-seat independent recheck
+(`PASS`, 0/0/0). No census, magnetic comparison, novelty assessment,
+scientific computation, formal project claim, Route evaluation, or manuscript
+result has run; Phase 4 is not authorized.
 
 ## Phase-2 literature progress and remaining gap
 
@@ -28,6 +29,22 @@ positive-and-negative conjugacy/inversion/primitivity interface with
 termination payload, hashes, and an independent validator for both P33 groups.
 This is the unresolved `P33-RC-1` preexecution gate, not a novelty conclusion.
 Scientific execution therefore remains fail-closed.
+
+## Phase-3 synthesis advance
+
+Phase 3 converts `P33-RC-1` into seven explicit preexecution obligations:
+frozen representations for both groups, a common exact presentation input,
+full conjugacy decisions, maximal-root/primitivity evidence, inversion-pair
+canonicalization, subordinate exact numerical predicates, and a
+zero-unresolved completeness payload with an independent checker. The
+corrected synthesis binds 94/94 citations immediately to visible author-year
+forms and preserves all 20 source IDs.
+
+This is an implementable certificate architecture, not an implemented
+certificate or scientific result. S06 remains `PLAUSIBLE` and page-unpinned;
+all exact theorem applicability remains unresolved; the six tension pairs are
+non-exhaustive and await scholar confirmation. The honest fallback remains
+`NOT_EVALUABLE_CONJUGACY_METHOD_UNAVAILABLE`.
 
 ## Inheritance and immutable restrictions
 
@@ -61,7 +78,12 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+[synthesis](notes/stage1_phase3_synthesis.md),
+[initial DA](notes/stage1_phase3_devils_advocate.md),
+[resolution](notes/stage1_phase3_resolution.md),
+[independent recheck](notes/stage1_phase3_devils_advocate_recheck.md),
+[Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
 [annotated bibliography](notes/stage1_phase2_annotated_bibliography.md),
 [source verification](notes/stage1_phase2_source_verification.md),
 [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),

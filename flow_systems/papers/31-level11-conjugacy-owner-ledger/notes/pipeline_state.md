@@ -2,23 +2,29 @@
 
 Date: **2026-09-02 UTC**
 
-Current controlling state: **STAGE 1 RESEARCH / PHASE_2_COMPLETE / AWAITING_PHASE_3_CONFIRMATION**.
+Current controlling state: **STAGE 1 RESEARCH / PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION**.
 
-The authorized Phase-2 bibliography and independent verification passes are
-complete. The metadata-correction receipt is `PASS`, and the pipeline is waiting
-for an explicit Phase-3 decision.
+The authorized Phase-3 synthesis and independent Devil's Advocate Checkpoint 2
+are complete. The final DA verdict is `PASS`, and the pipeline is waiting for
+an explicit Phase-4 decision.
 
 | Item | Status |
 |---|---|
 | Pipeline global state | `awaiting_confirmation` |
-| ARS Stage 1 | `PHASE_2_COMPLETE` |
+| ARS Stage 1 | `PHASE_3_COMPLETE` |
 | Phase-2 authorization | `CONFIRMED`; SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Metadata-correction receipt | `PASS`; SHA-256 `c0d521739a482b2423a3b5af37e19841d6729fc963e99b089e0498edc1caddcb` |
 | Phase-2 checkpoint | `COMPLETE`; `notes/stage1_phase2_checkpoint.md` |
+| Phase-3 authorization | `CONFIRMED`; SHA-256 `f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe` |
+| Phase-3 checkpoint | `COMPLETE`; `notes/stage1_phase3_checkpoint.md` |
+| Phase-3 synthesis | `COMPLETE`; 22 sources, 4 themes, 6 claim-intent surfaces, 4 bounded candidate tensions; `notes/stage1_phase3_synthesis.md` |
+| Independent DA Checkpoint 2 | `PASS`; 0 Critical, 0 Major, 2 Minor, 4 Observations; `notes/stage1_phase3_devils_advocate.md` |
+| Phase-3 disposition | `PHASE3_SYNTHESIS_READY_WITH_WARNINGS` |
 | Phase-1 materials | RQ, methodology, independent DA, resolution, and independent recheck complete; recheck `PASS` |
 | Literature corpus | `COMPLETE`; 22 unique sources, 19 peer reviewed, 22 `VERIFIED` |
 | Source-base disposition | `PHASE2_SOURCE_BASE_READY_WITH_WARNINGS` |
 | Explicit literature progress | Direct Gamma_0(N) primitive-class counting and modular-conjugacy/class-number anchors now supplement subgroup, arithmetic, and hyperbolic-group algorithm sources |
+| Explicit Phase-3 progress | Four-layer dependency graph: subgroup model; 9,453 terminal pair decisions; orientation/root/certificate serialization; then distinct G/I/C mapping; every layer remains uninstantiated |
 | Concrete unclosed gap | No complete Gamma_0(11) oriented primitive-owner quotient with replayable positive and theorem-backed negative certificates for all 9,453 pairs; G/I/C estimand binding remains internal and unproved |
 | Inherited object | P26 positive time-changed `Gamma_0(11)` geodesic flow |
 | Immutable owner | oriented `Gamma_0(11)` conjugacy class; powers are repetitions |
@@ -26,12 +32,16 @@ for an explicit Phase-3 decision.
 | Immutable clock/generator | positive density `rho_epsilon`; generator `X_geo/rho_epsilon`; reciprocal log-zeta convention |
 | Immutable finite input | 138-instance/55-group Hecke ledger is read-only and not a complete primitive spectrum; Hecke branch degree is not zeta repetition |
 | Scientific computation | `NOT_RUN` |
+| Canonical-results refresh | `NOT_RUN` |
 | Novelty assessment | `NOT_RUN` |
-| Claim registration | `0` |
+| Formal project claim registration | `0` |
 | Formal Route-A tuple | `UNASSIGNED`; formal tuples `0`; positive arithmetic A2 `0`; A2–A4 `NOT_RUN` |
-| Phase 3 | `AWAITING_PHASE_3_CONFIRMATION`; not authorized |
 | Route B | `CLOSED`; evaluation `NOT_RUN`; invocation `false` |
+| Manuscript drafting | `NOT_AUTHORIZED` |
+| Phase 4 | `AWAITING_PHASE_4_CONFIRMATION`; authorization `false` |
 
 The initial flow, time density, owner/repetition distinction, and frozen finite
-population remain unchanged. Phase 2 closes only the source base; it does not
-assign a Route tuple, run a computation, decide novelty, or authorize Phase 3.
+population remain unchanged. Phase 3 closes only the evidence synthesis and
+Checkpoint 2. It does not instantiate a solver or owner ledger, assign a Route
+tuple, run a computation, decide novelty, register a formal project claim,
+authorize manuscript drafting, or authorize Phase 4.

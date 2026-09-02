@@ -5,12 +5,15 @@ Scattering Flow*
 
 ## Current status
 
-**STAGE 1 / PHASE 2 COMPLETE / AWAITING PHASE-3 CONFIRMATION.** Phase 1 passed
-independent review. Phase 2 closed a hash-bound corpus of 26 verified sources,
-including 24 peer-reviewed sources, with all three Gaspard–Rice correction
-bindings confirmed `RESOLVED_POST_VERIFICATION`. No transfer operator,
-determinant calculation, numerical experiment, Phase-3 synthesis, novelty
-assessment, or scientific result has run; Phase 3 is not authorized.
+**STAGE 1 / `PHASE_3_COMPLETE` / `AWAITING_PHASE_4_CONFIRMATION`.** The
+hash-bound 26-source corpus has completed evidence synthesis with disposition
+`PHASE3_SYNTHESIS_READY_WITH_WARNINGS`, and independent Devil's Advocate
+Checkpoint 2 returned `PASS`. Phase 4 is not authorized. No transfer operator,
+determinant calculation, numerical experiment, or scientific result has run;
+the closeout retains `SCIENTIFIC_COMPUTATION=NOT_RUN`,
+`NOVELTY_ASSESSMENT=NOT_RUN`, `FORMAL_PROJECT_CLAIM_REGISTRATION=0/1`,
+`FORMAL_ROUTE_A_TUPLES=0/1`, `ROUTE_B=CLOSED`, and
+`MANUSCRIPT_DRAFTING=NOT_AUTHORIZED`.
 
 ## Inherited object and immutable initial restrictions
 
@@ -40,7 +43,7 @@ a lawful coefficient comparison and four-part error decomposition. Missing
 pointwise/operator/error data return `NOT_EVALUABLE`; no determinant result is
 claimed.
 
-## Phase-2 literature progress and open gap
+## Phase-2 literature base and open gap
 
 The verified corpus now spans the physical three-disk model, open-billiard
 geometry, Axiom-A/Anosov transfer theory, Ruelle/Fredholm determinants,
@@ -49,10 +52,24 @@ applicability boundaries kept explicit. The remaining concrete gap is the
 object-specific chain for `d=6a`: independent pointwise recovery of the
 physical Euclidean flight-length roof, an eligible operator space with the
 required trace or nuclear properties, a lawful common-coefficient comparison,
-the four-part error certificate, and cross-roof nontransfer. Phase 3, if
-explicitly authorized, may synthesize hypothesis compatibility only; it cannot
-promote this infrastructure beyond `A0_FAIL / A2_NOT_ELIGIBLE /
-NO_ROUTE_PROMOTION`.
+the four-part error certificate, and cross-roof nontransfer. Phase 3 synthesized
+hypothesis compatibility only and did not promote this infrastructure beyond
+`A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`.
+
+## Phase-3 evidence-synthesis advance and carried warnings
+
+Phase 3 converted the corpus into a six-obligation evaluability chain that
+separates roof-agnostic internal Euler/trace/determinant calibration from
+physical specificity: pointwise physical-roof construction, operator-space
+eligibility, one common coefficient map, a four-part error contract, physical
+fidelity with typed controls, and theorem-licensed cross-roof nontransfer. No
+obligation is claimed closed or executed.
+
+Warnings carried forward are that one synthesis sentence says “five” bridges
+although the registered table has six, no dedicated frozen source yet binds
+the roundoff component of the four-error contract, every synthesis citation
+has `anchor:none`, and all Gaspard–Rice/erratum, open-billiard applicability,
+and numerical-only evidence limits remain mandatory.
 
 ## Route boundary
 
@@ -71,7 +88,10 @@ Route B is `CLOSED`, with evaluation `NOT_RUN` and invocation allowed `false`.
 - Funding: none
 - Competing interests: none
 
-See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+[evidence synthesis](notes/stage1_phase3_synthesis.md),
+[independent Devil's Advocate review](notes/stage1_phase3_devils_advocate.md),
+[Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
 [annotated bibliography](notes/stage1_phase2_annotated_bibliography.md),
 [source verification](notes/stage1_phase2_source_verification.md),
 [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),

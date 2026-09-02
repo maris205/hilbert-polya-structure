@@ -4,12 +4,14 @@ Working title: *Exact Conjugacy Ownership in Level-11 Hecke Output Ledgers*
 
 ## Current status
 
-**STAGE 1 RESEARCH / PHASE_2_COMPLETE / AWAITING_PHASE_3_CONFIRMATION.**
-The Phase-2 source corpus closes with 22 unique sources, including 19
-peer-reviewed sources, with disposition
-`PHASE2_SOURCE_BASE_READY_WITH_WARNINGS`. Scientific computation, novelty
-assessment, claim registration, Phase 3, and drafting remain `NOT_RUN` or not
-authorized.
+**STAGE 1 RESEARCH / PHASE_3_COMPLETE / AWAITING_PHASE_4_CONFIRMATION.**
+Phase 3 was authorized under SHA-256
+`f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe`
+and closes with disposition `PHASE3_SYNTHESIS_READY_WITH_WARNINGS`. The
+independent Devil's Advocate Checkpoint 2 verdict is `PASS`. Phase 4 is not
+authorized. Scientific computation, canonical-result refresh, novelty
+assessment, formal project claim registration, Route evaluation, and
+manuscript drafting remain `NOT_RUN` or not authorized.
 
 ## Inheritance and immutable restrictions
 
@@ -44,6 +46,21 @@ positive and theorem-backed negative certificates for all 9,453 pairs, and none
 proves the project-defined `G`/`I`/`C` estimand binding. That gap remains
 fail-closed.
 
+## Phase-3 synthesis advance
+
+The 22-source corpus is now integrated into four evidence themes, a complete
+source matrix, six synthesis-intent claims, and four bounded candidate
+tensions. The concrete advance is a four-layer dependency graph separating
+the exact subgroup representation, terminal decisions for all 9,453 frozen
+pairs, orientation/root/certificate serialization, and only then the mapping
+into `G`, `I`, and `C`. None of those layers is instantiated.
+
+Independent DA Checkpoint 2 passed with **0 Critical, 0 Major, 2 Minor, and 4
+Observations**. Its retained warnings do not change the result boundary:
+`resolved_in_synthesis` labels remain proposed typed reconciliations pending
+scholar confirmation, all literature locators remain `anchor:none`, and no
+source establishes project-level theorem applicability.
+
 ## Route boundary
 
 This can refine A1 ownership only. The new tuple is `UNASSIGNED`; no primitive
@@ -54,7 +71,10 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
+See the [Phase-3 checkpoint](notes/stage1_phase3_checkpoint.md),
+[Phase-3 synthesis](notes/stage1_phase3_synthesis.md),
+[independent Phase-3 DA](notes/stage1_phase3_devils_advocate.md),
+[Phase-2 checkpoint](notes/stage1_phase2_checkpoint.md),
 [Phase-1 checkpoint](notes/stage1_phase1_checkpoint.md),
 [Research Question Brief](notes/stage1_phase1_rq_brief.md),
 [Methodology Blueprint](notes/stage1_phase1_methodology_blueprint.md), and
