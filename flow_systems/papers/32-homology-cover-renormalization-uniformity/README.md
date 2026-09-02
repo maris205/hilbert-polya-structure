@@ -4,13 +4,26 @@ Working title: *Uniformity Limits for Time–Multiplicity Renormalization in Gen
 
 ## Current status
 
-**STAGE 1 RESEARCH / PHASE_5_COMPLETE / AWAITING_PHASE_6_CONFIRMATION.**
-Four separately recorded role reviews and their integrated synthesis are complete with
-disposition `MAJOR_REVISION`, 0 Critical findings, and no ethics `BLOCKED`
-result. The Phase-4 report bytes remain unchanged, and Phase 6 is not
-authorized. Scientific computation, canonical-result refresh, novelty
-assessment, formal project claim registration, Route evaluation, and
-manuscript drafting remain `NOT_RUN` or not authorized.
+**STAGE 1 RESEARCH / PHASE_6_COMPLETE / AWAITING_STAGE_2_CONFIRMATION.**
+Phase-6 authorization is confirmed by raw event
+`BATCH_ROUND10_STAGE1_PHASE6_AUTHORIZATION_20260902.txt`, SHA-256
+`b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85`.
+Revision-1 is accepted, the independent recheck is `PASS`, and Revision-2 is
+`NOT_REQUIRED`. The resulting 4,298-word article-style research report is
+complete, but it is neither a canonical manuscript nor a scientific result.
+The batch close is bound by checkpoint SHA-256
+`e010a64b98d45ec92c7378fa73338a32e28327725ca23fa16e9da81137a803d8`,
+Stage-1 handoff SHA-256
+`8a8bd4ea42fe67366d8d7849bd941170b4793320f9296c6c3b6f4b357ea98dfd`,
+and audit-receipt SHA-256
+`e7015d174a48ab7a38fa5c401b4f1c09729f2e5b8d868d377fe6fcb7f605f668`.
+Stage 2 `WRITE` remains unauthorized pending explicit user confirmation
+(`STAGE2_WRITE=false`).
+Scientific computation, canonical-result refresh, novelty assessment, formal
+project claims, and Route evaluation remain `NOT_RUN`, zero, or unchanged; A0
+is unavailable, the formal Route-A tuple is `UNASSIGNED`, positive arithmetic
+A2 remains zero, Route B remains `CLOSED`, and canonical manuscript and
+bibliography bytes are unchanged.
 
 ## Inheritance and immutable restrictions
 
@@ -84,7 +97,29 @@ program is presented as the main route. Every citation locator remains
 `anchor:none`, so claim-to-passage clearance is still inconclusive even though
 the source ledger is structurally complete. No scientific computation,
 novelty decision, formal claim, canonical manuscript change, or Route-state
-change occurred. Phase 6 remains behind a separate confirmation.
+change occurred during Phase 5. The later Phase-6 confirmation and bounded
+Revision-1 are recorded below.
+
+## Phase-6 complete-report advance
+
+The complete Revision-1 report is falsification-first: higher-content and
+zero-content local-factor theorem targets must be derived and tested before the
+content-one analytic program can proceed. Content one remains exceptional,
+contingent, and secondary. The positive-content ring, separate zero-content
+object, exact factor truth conditions, owner interface, and compact-uniform
+tail and limit obligations remain unresolved; P32-S13 remains `PLAUSIBLE` and
+background-only.
+
+The report has 4,298 raw `wc -w` words, eight frozen Phase-6 ClaimIntents, and
+17/17 Phase-5 stable finding IDs accounted and independently rechecked. Its
+26 citation/source pairs cover 26 unique P32 source IDs; all 26 retain
+`anchor:none`, so claim-to-passage support remains `INCONCLUSIVE`. Revision-1
+is accepted and Revision-2 is `NOT_REQUIRED`. No owner binding, factor theorem,
+coefficient test, formal object, tail result, limit, experiment, novelty
+assessment, formal claim, Route result, or canonical manuscript/bibliography
+change was produced. The user's stage-gate confirmation authorized the bounded
+revision; it does not constitute human full-text or source-passage
+verification.
 
 ## Route boundary
 
@@ -96,7 +131,12 @@ Author: Liang Wang, School of Artificial Intelligence and Automation,
 Huazhong University of Science and Technology, Luoyu Road 1037, 430070, Hubei,
 P.R. China; wangliang.f@gmail.com. Funding: none. Competing interests: none.
 
-See the [Phase-5 checkpoint](notes/stage1_phase5_checkpoint.md),
+See the [Phase-6 checkpoint](notes/stage1_phase6_checkpoint.md),
+[independent Phase-6 recheck](notes/stage1_phase6_recheck.md),
+[Phase-6 revision log](notes/stage1_phase6_revision_log.md),
+[Phase-6 final report](notes/stage1_phase6_final_report.md),
+[Phase-6 ClaimIntent manifest](notes/stage1_phase6_claim_intent_manifest.json),
+[Phase-5 checkpoint](notes/stage1_phase5_checkpoint.md),
 [integrated Phase-5 synthesis](notes/stage1_phase5_review_synthesis.md),
 [editorial review](notes/stage1_phase5_editorial_review.md),
 [ethics review](notes/stage1_phase5_ethics_review.md),

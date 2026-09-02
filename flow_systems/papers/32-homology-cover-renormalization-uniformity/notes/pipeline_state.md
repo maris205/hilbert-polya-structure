@@ -2,15 +2,18 @@
 
 Date: **2026-09-02 UTC**
 
-Current controlling state: **STAGE 1 RESEARCH / PHASE_5_COMPLETE / AWAITING_PHASE_6_CONFIRMATION**.
+Current controlling state: **STAGE 1 RESEARCH / PHASE_6_COMPLETE / AWAITING_STAGE_2_CONFIRMATION**.
 
-The authorized four-role Phase-5 review is complete with integrated disposition
-`MAJOR_REVISION`, and the pipeline is waiting for an explicit Phase-6 decision.
+The scholar's Phase-6 confirmation authorizes the bounded report revision only;
+it is not human full-text or source-passage verification. Revision-1 passed its
+independent recheck, and Stage 2 `WRITE` remains behind a new explicit
+confirmation.
 
 | Item | Status |
 |---|---|
 | Pipeline global state | `awaiting_confirmation` |
-| ARS Stage 1 | `PHASE_5_COMPLETE / AWAITING_PHASE_6_CONFIRMATION` |
+| ARS Stage 1 | `PHASE_6_COMPLETE / AWAITING_STAGE_2_CONFIRMATION` |
+| Phase-6 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE6_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Phase-5 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE5_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Phase-4 authorization | `CONFIRMED`; SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
 | Phase-4 checkpoint | `COMPLETE`; `notes/stage1_phase4_checkpoint.md` |
@@ -44,16 +47,28 @@ The authorized four-role Phase-5 review is complete with integrated disposition
 | Formal project claim registration | `0` |
 | Formal Route-A tuple | `UNASSIGNED`; formal tuples `0`; positive arithmetic A2 `0`; A0 unavailable; A2–A4 `NOT_RUN` |
 | Route B | `CLOSED`; evaluation `NOT_RUN`; invocation `false` |
-| Manuscript drafting | `NOT_AUTHORIZED` |
+| Stage-2 / canonical manuscript drafting | `NOT_AUTHORIZED` |
 | Phase-5 role reviews | `COMPLETE`; editorial, ethics, citation-integrity, and Devil's Advocate records present; integrated disposition `MAJOR_REVISION`; 0 Critical; ethics not `BLOCKED` |
 | Explicit Phase-5 progress | The next revision is falsification-first: higher-content and zero-content local factors precede the content-one analytic program |
 | Citation locator boundary | All registered adjacent citations retain `anchor:none`; claim-to-passage clearance remains inconclusive |
 | Phase-4 report integrity | `UNCHANGED`; Phase-5 review did not alter report bytes |
-| Phase 6 | `AWAITING_PHASE_6_CONFIRMATION`; authorization `false` |
+| Phase-6 ClaimIntent manifest | `COMPLETE`; 8/8 frozen intents; `notes/stage1_phase6_claim_intent_manifest.json` |
+| Phase-6 final report | `COMPLETE`; 4,298 raw `wc -w` words; complete article-style research report, not a canonical manuscript or scientific result; `notes/stage1_phase6_final_report.md` |
+| Phase-6 revision log | `COMPLETE`; Revision-1 `ACCEPTED`; 17/17 stable IDs; Revision-2 `NOT_REQUIRED`; `notes/stage1_phase6_revision_log.md` |
+| Phase-6 independent recheck | `PASS`; 26/26 citation pairs, 26 unique source IDs, 26/26 `anchor:none`; claim-to-passage `INCONCLUSIVE`; `notes/stage1_phase6_recheck.md` |
+| Explicit Phase-6 progress | Higher- and zero-content theorem targets are falsification-first; content one is contingent and secondary; formal objects and uniform-tail obligations remain unresolved; P32-S13 stays `PLAUSIBLE`/background-only |
+| Per-paper Phase-6 checkpoint | `COMPLETE`; `notes/stage1_phase6_checkpoint.md` |
+| Batch Phase-6 checkpoint | `PASS / STAGE_1_RESEARCH_COMPLETE`; `BATCH_ROUND10_STAGE1_PHASE6_CHECKPOINT.md`, SHA-256 `e010a64b98d45ec92c7378fa73338a32e28327725ca23fa16e9da81137a803d8` |
+| Stage-1 handoff | `COMPLETE`; `BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md`, SHA-256 `8a8bd4ea42fe67366d8d7849bd941170b4793320f9296c6c3b6f4b357ea98dfd` |
+| Phase-6 audit receipt | `PASS`; 459/459 checks; `BATCH_ROUND10_STAGE1_PHASE6_AUDIT_RECEIPT.json`, SHA-256 `e7015d174a48ab7a38fa5c401b4f1c09729f2e5b8d868d377fe6fcb7f605f668` |
+| Stage 2 `WRITE` | `AWAITING_EXPLICIT_USER_CONFIRMATION`; authorization `false`; `STAGE2_WRITE=false` |
+| Canonical manuscript / bibliography | `UNCHANGED` / `UNCHANGED` |
 
 The pure tower, both renormalizations, owner convention, and separation from
-P27's residual tower remain unchanged. Phase 5 supplies four role reviews and
-an integrated `MAJOR_REVISION` synthesis but does not bind
-`SG2OwnerCanonical-v1`, resolve `CP-P32-004`, run a panel or limit, assign a
-Route tuple, decide novelty, register a formal project claim, or authorize
-manuscript drafting. Phase 6 remains behind a separate confirmation.
+P27's residual tower remain unchanged. Phase 6 accepts Revision-1 after
+independent `PASS` recheck and completes an article-style closed-corpus report.
+It moves higher- and zero-content tests first and makes content one secondary,
+while leaving the owner interface, formal objects, factors, tails, and limits
+unresolved. No panel, limit, computation, novelty decision, formal claim,
+Route tuple, or canonical file changes. The pipeline now waits only for
+explicit Stage-2 `WRITE` confirmation.
