@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 3 Phase 0 完成；等待评审席确认** | Stage-3 入口授权已登记，五篇 canonical manuscript/bib/PDF 保持冻结；已生成 5 份领域分析、20 张动态 reviewer cards，并预留 5 个固定 DA 席，共 25 个后续执行席。当前没有 Phase-1/Phase-2 报告、编辑决定或 revision roadmap；科学执行、正式 Route-A tuple、正向算术 A2、A3、A4 与 Route B 仍均为 0/5。见 [Stage-3 批次评审席配置](BATCH_ROUND10_STAGE3_REVIEWER_CONFIGURATION.md)与[Phase-0 校验](BATCH_ROUND10_STAGE3_PHASE0_VALIDATION.json)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 3 REVIEW 完成；5/5 Major Revision；等待 Stage 4 授权** | 25/25 Phase-1 与 25/25 Phase-2 席位、5 份机械综合、5 份 provenance、5 份 Schema-6 package 和 5 份 anchored roadmap 全部复验通过；66 条源弱点无损汇入 56 项非排序建议（38 must + 18 should）。Canonical manuscript/bib/PDF、科学结果和 Route 坐标均未改；formal Route-A tuple、正向算术 A2、A3、A4、Route B 仍均为 0/5。见 [Stage-3 批次报告](BATCH_ROUND10_STAGE3_REVIEW_REPORT.md)与[最终验收收据](BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,9 +38,41 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 29--33 Round 10 当前概要
 
-Round 10 已获作者明确确认进入 ARS **Stage 3 REVIEW**，并完成只读的
+Round 10 的 ARS **Stage 3 REVIEW 已完成**，当前严格停在
+**REVIEW_OUTPUTS_COMPLETE / AWAITING_EXPLICIT_SCHOLAR_STAGE3_DECISION_AND_STAGE4_AUTHORIZATION**。
+固定五席对每篇均完成 manuscript-blind Phase 1、manuscript-visible Phase 2、
+机械决定、provenance 与 proposal-only anchored roadmap；最终为 **5/5 Major
+Revision、0 Reject、0 fatal block、0 DA Critical**。批次共 **66/66 source
+weaknesses → 56 roadmap items = 38 must-fix + 18 should-fix**。
+
+| Paper | Stage-3 明确推进 | 决定与 roadmap |
+|---|---|---|
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | 把 closest-work、artifact locator、检索回放、passage locator、verifier/schema、inversion/conjugation、控制与 worked certificate 变成精确响应面；Gate M/Q 仍开放。 | **Major Revision**；12 → 11（5 must + 6 should） |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | 把六门方案推进为可执行的 five-channel theorem/error contract，并明确物理 fidelity controls、primitive owner、gate-state map 与 Gate-6 最低证书。 | **Major Revision**；13 → 9（8 must + 1 should） |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 明确 resolved-domain/total-disposition、equivalence、serializable verifier、inverse/self-reciprocity、`G/I/C` 与独立 9,453-row challenge。 | **Major Revision**；13 → 11（11 must） |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 明确 formal truth conditions、全 limit/majorant registry、P32-S13 统一状态、scalar comparator 与 typed interface；DA 不计入四席共识。 | **Major Revision**；13 → 12（7 must + 5 should） |
+| [P33](papers/33-bolza-control-matched-census/README.md) | 明确 validator trust graph、独立 frozen fixtures、serialized schema、completeness、assumption typing、版本治理和需另行授权的 correction bibliography。 | **Major Revision**；15 → 13（7 must + 6 should） |
+
+路线对应仍由 [`Route A`](skills/route-a-evaluator.md) 与
+[`Route B`](skills/route-b-evaluator.md) 控制：Stage 3 是论文评审，不产生 A0--A4
+或 B1--B5 credit。Round 10 仍处于 **Route A A0/A1 foundation/interface**；P32
+只是 generic A1--A2 设计分支且 arithmetic A0 unavailable。五篇 formal tuple
+均为 `UNASSIGNED`，正向算术 A2、A3、A4、Route-B invocation 仍各为 `0/5`。
+五个连续时间子型、clock、owner、normalization 与 cutoff 原样冻结。
+
+最终只读验收为 `PASS`；独立语义传输复核还修正了 P30--P33 的派生层截断／
+共识边界／remedy 弱化，未触碰源评审卡或 canonical 科学包。详见
+[Stage-3 批次报告](BATCH_ROUND10_STAGE3_REVIEW_REPORT.md)、
+[派生传输审计](BATCH_ROUND10_STAGE3_DERIVED_TRANSPORT_AUDIT.md)与
+[最终收据](BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json)。Stage 4 尚未授权；
+下一步只需作者对 56 项 proposal-only 路线图作出明确决策并授权精确目标／操作。
+
+### 历史：Stage 2.5 与 Stage 3 Phase 0 基线
+
+以下记录是已被本节上方 Stage-3 完成态取代的历史基线。Round 10 当时已获作者
+明确确认进入 ARS **Stage 3 REVIEW**，并完成只读的
 **Phase 0 reviewer configuration**。当前严格停在
-**STAGE3_PHASE0_COMPLETE / AWAITING_EXPLICIT_SCHOLAR_CONFIRMATION_OF_REVIEWER_CONFIGURATION**：
+**HISTORICAL_STAGE3_PHASE0_COMPLETE / HISTORICAL_AWAITING_REVIEWER_CONFIGURATION_CONFIRMATION**：
 `stage3_entry_authorized=true`，但 `substantive_execution_started=false`。
 尚无 paper-blind Phase 1、paper-visible Phase 2、编辑决定或 revision roadmap。
 
@@ -70,7 +102,7 @@ PDF 均由隔离的 LuaLaTeX--BibTeX `plainnat`--LuaLaTeX--LuaLaTeX 链干净重
 | [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 4448 | 13 | 26 | 完整论文在固定 1/N 时间与 1/N^3 对数重整化下，把高内容与零内容因子列为最先的否证目标；content-one 仅为附条件的次级分支。形式对象、面板、尾界和极限均未构造或执行。P32-S13 现为 bibliographically `VERIFIED`，但仍是 background-only、anchorless，且不提供 passage-level claim credit。 | Generic Route-A A1--A2 preparation；arithmetic A0 unavailable；formal tuple `UNASSIGNED`；Route B `NOT_INVOKED`。 |
 | [P33](papers/33-bolza-control-matched-census/README.md) | 4932 | 14 | 20 | 完整论文允许两个曲面使用不同的精确证明产生器，但必须输出同一语义 owner-certificate schema 并交由独立验证器复验。固定截断的不对称已显式化，P33-RC-1 仍为 0/7，没有产生 census。 | Route A / A1 preparation; formal A0 prohibited/confounded; formal tuple UNASSIGNED; Route B closed. |
 
-### Stage 3 Phase 0 评审席配置
+### 历史 Stage 3 Phase 0 评审席配置
 
 本轮为每篇生成四张动态配置卡：field-general `EIC`、方法席 `R1`、领域席
 `R2`、相邻视角席 `R3`；另有一名固定 Devil's Advocate，因此后续共有 **25 个
@@ -111,10 +143,9 @@ iThenticate，也不构成 scientific contribution novelty assessment。
 Revision-Evidence Bundle；P31/P32 的 project-local repair lineage 与 manual
 comparison 只是 supplementary evidence，不得表述为 official E6 completion。
 
-Stage 3 入口已授权，但 substantive review 仍停在评审席配置检查点。下一步只需
-用户回复 **“确认评审席配置”**，即可启动 25 个席位的 paper-blind Phase 1 和随后
-的 paper-visible Phase 2；该确认仍不授权论文修改、科学计算、canonical-result
-refresh、Stage 4、Route-A tuple 赋值或 Route B。见 [Stage-3 entry receipt](BATCH_ROUND10_STAGE3_AUTHORIZATION_RECEIPT.json)、
+上述历史 Phase-0 配置随后已由 25/25 Phase-1、25/25 Phase-2 和 5/5
+机械综合完整执行并取代；当前合法下一步已变为作者 Stage-3 决策与 Stage-4
+精确授权。历史入口仍见 [Stage-3 entry receipt](BATCH_ROUND10_STAGE3_AUTHORIZATION_RECEIPT.json)、
 [reviewer configuration](BATCH_ROUND10_STAGE3_REVIEWER_CONFIGURATION.md)与
 [Phase-0 validation](BATCH_ROUND10_STAGE3_PHASE0_VALIDATION.json)。
 
@@ -473,4 +504,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 29--33-round10-stage2.5 - ARS Stage 2.5 `INTEGRITY` PASS（2026-09-02，历史入口） - 五篇 hash-bound post-repair 论文完成 116/116 references（115 `VERIFIED`、1 bounded `PLAUSIBLE`）、48/144 citation-context sample、244/244 Phase-C surfaces、116/374 originality sample、480 registered / 382 selected claims 与 454/454 anchorless evidence tuples 的注册审计；35/35 failure modes `CLEAR`，0 unresolved SERIOUS/MAJOR/MEDIUM。三类四项授权 finding——P29 `P29-AB-MEDIUM-01`、P31 `P31-E1-056`/`P31-E1-078`、P32 `P32-AB-MINOR-01`——全部关闭；P31 的 complete-I-to-G/C 投影方向和 P32-S13 的 VERIFIED-but-background-only 边界已同步，未产生科学 gate credit。Official E6 为 `skipped_no_revision_evidence`；科学执行 `0/5`、formal Route-A tuples `0/5`、正向算术 A2 `0/5`、A3 `0/5`、A4 `0/5`、Route B `0/5`。当时 Stage 3 尚未授权并停在 mandatory checkpoint；该状态已由下一条 Stage-3 Phase-0 记录取代。详见 [Stage-2.5 批次报告](BATCH_ROUND10_STAGE2_5_INTEGRITY_REPORT.md)与[强制检查点](BATCH_ROUND10_STAGE2_5_MANDATORY_CHECKPOINT.md)。
 
-29--33-round10-stage3-phase0 - ARS Stage 3 `REVIEW` Phase 0（2026-09-03，当前） - 作者以精确事件“确认，下一轮”授权五篇进入 Stage 3；五份 manuscript/bibliography/PDF 与 Stage-2.5 predecessor 已 hash 绑定。领域分析生成 20 张动态 Reviewer Configuration Cards，并为每篇保留一个固定 Devil's Advocate，共 25 个后续执行席位。当前停在配置确认检查点；paper-blind Phase 1、paper-visible Phase 2、编辑综合与 revision roadmap 均为 0。旧 Stage-1/Stage-2 内部评审配置未跨阶段复用；`criteria_binding_unavailable`、同模型族相关误差披露、只读论文边界和 5/5 panel fail-closed 规则均已锁定。Canonical manuscript/bib/PDF 未改，科学执行 `0/5`、formal Route-A tuples `0/5`、正向算术 A2 `0/5`、A3 `0/5`、A4 `0/5`、Route B `0/5`。详见 [Phase-0 批次配置](BATCH_ROUND10_STAGE3_REVIEWER_CONFIGURATION.md)与[校验记录](BATCH_ROUND10_STAGE3_PHASE0_VALIDATION.json)。
+29--33-round10-stage3-phase0 - ARS Stage 3 `REVIEW` Phase 0（2026-09-03，历史入口） - 作者以精确事件“确认，下一轮”授权五篇进入 Stage 3；五份 manuscript/bibliography/PDF 与 Stage-2.5 predecessor 已 hash 绑定。领域分析生成 20 张动态 Reviewer Configuration Cards，并为每篇保留一个固定 Devil's Advocate，共 25 个后续执行席位。当时停在配置确认检查点；paper-blind Phase 1、paper-visible Phase 2、编辑综合与 revision roadmap 均为 0。旧 Stage-1/Stage-2 内部评审配置未跨阶段复用；`criteria_binding_unavailable`、同模型族相关误差披露、只读论文边界和 5/5 panel fail-closed 规则均已锁定。Canonical manuscript/bib/PDF 未改，科学执行 `0/5`、formal Route-A tuples `0/5`、正向算术 A2 `0/5`、A3 `0/5`、A4 `0/5`、Route B `0/5`。该入口已由下一条 Stage-3 完成记录取代。详见 [Phase-0 批次配置](BATCH_ROUND10_STAGE3_REVIEWER_CONFIGURATION.md)与[校验记录](BATCH_ROUND10_STAGE3_PHASE0_VALIDATION.json)。
+
+29--33-round10-stage3 - ARS Stage 3 `REVIEW` complete（2026-09-03，当前） - 五篇固定五席均完成 5/5 manuscript-blind Phase-1、5/5 manuscript-visible Phase-2、机械综合、typed provenance、Schema-6 package 与 anchored non-ranking roadmap；批次合计 25+25 张卡、66/66 source weakness positions、56 项建议（38 must + 18 should），决定为 5/5 `Major Revision`、0 Reject、0 fatal block、0 DA Critical。独立语义传输审计修复了 P30--P33 的 derived-only anchor、scope、consensus 与 remedy 弱化，最终官方 panel/roadmap/Schema-6、standalone/embedded equality、source coverage 和 canonical guards 全部 `PASS`。每篇明确推进分别落在 Gate-M/Q 审计面、physical-roof five-channel contract、`G/I/C` owner-verifier、content-factor/limit registry、heterogeneous producer trust/schema/completeness；没有执行科学实验或改写 canonical manuscript/bib/PDF。路线仍在 Route A A0/A1 foundation/interface，formal tuples、正向算术 A2、A3、A4、Route B 均 `0/5`；Stage 4 未授权，当前等待作者对 56 项路线图作出决策。详见 [批次评审报告](BATCH_ROUND10_STAGE3_REVIEW_REPORT.md)、[派生传输审计](BATCH_ROUND10_STAGE3_DERIVED_TRANSPORT_AUDIT.md)与[最终验收收据](BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json)。

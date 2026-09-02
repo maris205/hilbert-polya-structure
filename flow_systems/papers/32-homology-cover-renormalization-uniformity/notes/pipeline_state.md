@@ -2,11 +2,11 @@
 
 Date: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION**.
+Current controlling state: **ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAITING SCHOLAR STAGE-4 DECISION**.
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `stage3_phase0_complete_awaiting_scholar_reviewer_configuration_confirmation` |
+| Pipeline global state | `stage3_review_outputs_complete_awaiting_scholar_decision` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -35,11 +35,12 @@ Current controlling state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CO
 | Stage 2.5 integrity | `COMPLETE`; `PASS_AT_STAGE_2.5_CHECKPOINT`; unresolved Serious/Major/Medium = 0/0/0 |
 | Stage-2.5 mandatory checkpoint | `SATISFIED_BY_STAGE3_ENTRY_AUTHORIZATION` |
 | Stage 3 entry | `AUTHORIZED`; receipt `BATCH_ROUND10_STAGE3_AUTHORIZATION_RECEIPT.json` |
-| Stage 3 Phase 0 | `COMPLETE`; 4 dynamic cards + 1 fixed DA; validation `PASS` |
-| Stage 3 substantive review | `reviewer_configuration_confirmed=false`; `started=false`; Phase 1/2 reports `0/0`; editorial decision `NONE` |
+| Stage 3 Phase 0 | `COMPLETE`; scholar-confirmed; 4 dynamic cards + 1 fixed DA; validation `PASS` |
+| Stage 3 substantive review | `COMPLETE`; Phase 1/2 reports `5/5`; editorial decision `Major Revision`; source weaknesses `13`; roadmap items `12 = 7 must + 5 should` |
+| Stage 3 final validation | `PASS`; `../../../BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json`; SHA-256 `808d0a89b27bf538b9a8134225e824d1d17952e4ed5df86d4ed7fe1b5f694c7b` |
 | Stage 4 | `authorized=false` |
-| Phase-0 mutation/Route boundary | manuscript/bibliography/PDF edited `false`; scientific executions `0`; Route advancement `NONE` |
-| Next state | `AWAITING_EXPLICIT_SCHOLAR_CONFIRMATION_OF_REVIEWER_CONFIGURATION` |
+| Stage-3 mutation/Route boundary | manuscript/bibliography/PDF edited `false`; scientific executions `0`; Route advancement `NONE` |
+| Next state | `AWAITING_EXPLICIT_SCHOLAR_STAGE3_DECISION_AND_STAGE4_AUTHORIZATION` |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability

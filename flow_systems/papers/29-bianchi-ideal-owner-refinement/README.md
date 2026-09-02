@@ -2,13 +2,14 @@
 
 ## Current status
 
-**ARS STAGE 3 / PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION.**
+**ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAITING SCHOLAR STAGE-4 DECISION.**
 
-The scholar authorized Stage-3 entry after the Stage-2.5 PASS checkpoint.
-Five canonical package hashes remain frozen, and this paper now has four
-dynamic reviewer cards plus one fixed Devil's Advocate seat. Substantive
-review has not started: `reviewer_configuration_confirmed=false`, Phase-1 and
-Phase-2 reports are absent, and no editorial decision exists.
+The confirmed five-seat panel completed 5/5 manuscript-blind Phase-1
+precommitments, 5/5 manuscript-visible Phase-2 reports, mechanical synthesis,
+typed provenance, and an anchored roadmap. The decision is **Major Revision**:
+12 source weaknesses became 11 proposal-only items (5 must-fix, 6 should-fix),
+with no fatal block or DA Critical item. Canonical manuscript, bibliography,
+PDF, scientific results, and Route coordinates remain frozen.
 
 ## Current paper package
 
@@ -24,6 +25,10 @@ Phase-2 reports are absent, and no editorial decision exists.
 - [Seven-mode failure audit](notes/stage2_5_seven_failure_mode_final.md)
 - [Stage-3 Phase-0 field analysis and reviewer cards](notes/stage3_phase0_field_analysis.md)
 - [Stage-3 frozen review baseline](notes/stage3_review_baseline.json)
+- [Stage-3 editorial synthesis](notes/stage3_editorial_synthesis.md)
+- [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
+- [Stage-3 Schema-6 review package](notes/stage3_review_package.json)
+- [Stage-3 completion report](notes/stage3_completion_report.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
@@ -35,6 +40,12 @@ The paper now has a fail-closed certificate architecture separating Gate M
 completeness).  This is a concrete methodological advance, not an executed
 ownership result.  Both gates remain open: no owner law, quotient, finite
 refinement experiment, or \(S_H\) score is reported.
+
+Stage 3 adds a concrete response map without changing that scientific boundary:
+closest-work positioning, stable artifact access, replayable evidence and
+passage locators, an executable verifier/schema, exact inversion/conjugation
+semantics, control/dependency maps, failure serialization, and a worked
+certificate or baseline.
 
 ## Exact Stage 2.5 audit counts
 
@@ -68,6 +79,7 @@ global originality, priority, or scientific-novelty certificate.
 - Official ARS E6: `status=skipped_no_revision_evidence` and `revision_evidence_bundle_sha256=null`.  Project-local repair lineage is not an ARS Revision-Evidence Bundle.
 - Frozen dynamical subtype: torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic arclength; primitive loxodromic inversion-paired owner; one literal nonzero Gaussian prime ideal.
 - Route position: Route A `A0/A1` foundation/interface preparation; formal Route-A tuples `0` (`UNASSIGNED`); positive arithmetic A2 results `0`; A3/A4 not attempted; Route B not invoked and closed.
+- Stage-3 review: `Major Revision`; 12/12 source weaknesses transported into 11 proposal-only roadmap items; Stage 4 `authorized=false`.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was

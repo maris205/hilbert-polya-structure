@@ -1,5 +1,12 @@
 # Round 10 — Papers 29–33 complete-manuscript report
 
+> **Superseding current checkpoint (2026-09-03):** ARS Stage 3 REVIEW is now
+> complete. All five papers received the mechanical decision **Major
+> Revision**; 66 source weaknesses were transported into 56 proposal-only
+> roadmap items. Stage 4 is not authorized. See
+> [the Stage-3 batch report](BATCH_ROUND10_STAGE3_REVIEW_REPORT.md) and
+> [final validation receipt](BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json).
+
 Date: **2026-09-02 UTC**  
 Pipeline position: **ARS Stage 2 (`WRITE`) complete; Stage 2.5 (`INTEGRITY`) not started**  
 Roadmap position: **Route A preparatory layer only; Route B remains closed**
@@ -183,4 +190,3 @@ Stage 2.5 has not started. A future explicit confirmation may authorize the
 pre-review integrity phase; it does not automatically authorize new retrieval,
 scientific computation, canonical-result refresh, formal Route-A assignment,
 or Route B.
-
