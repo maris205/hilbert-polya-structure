@@ -1,0 +1,353 @@
+\pdfvariable trailerid {[<C2982026090200000000000000000000><C2982026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\dd}{\mathrm d}
+\setlength{\emergencystretch}{2em}
+\title{An Exact Schubert and Morse--Bott Atlas\\
+for the Grassmann Projection Flow}
+\author{Route-A source-local certificate HCS-C298}
+\date{2 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a real symmetric matrix $A$, we solve the Grassmann projection equation
+$\dot P=[P,[P,A]]$ globally by
+$\Ran P(t)=e^{tA}\Ran P(0)$.
+\ifnum\CRevisionRound=0
+Exterior powers give exact Pl\"ucker scaling and the basic invariant-subspace
+limit.
+\fi
+\ifnum\CRevisionRound>0
+Without assuming distinct subset sums, we identify every simple-spectrum
+Schubert-cell limit and its actual-support exponential rate, all linear modes,
+and the complete repeated-spectrum product-Grassmann Morse--Bott atlas with
+associated-graded limits.
+\fi
+\ifnum\CRevisionRound>1
+A strict Lyapunov law excludes nonconstant recurrence, and an exact evidence
+certificate separates these source results from all target arithmetic and
+Hilbert--P\'olya claims.
+\fi
+\end{abstract}
+
+\section{Projection dynamics and the exact quotient}
+Let $A=A^T\in\R^{n\times n}$ and $1\le k\le n-1$.  We realize
+$\Gr(k,n)$ as the rank-$k$ orthogonal projections
+\[
+ \mathcal P_{k,n}=\{P:P^T=P,\ P^2=P,\ \tr P=k\}
+\]
+and consider
+\begin{equation}\label{eq:flow}
+ \dot P=[P,[P,A]]=AP+PA-2PAP.
+\end{equation}
+The sign in~\eqref{eq:flow} selects the high-eigenvalue subspaces forward in
+time.  The generator $A$ is fixed; the state is the subspace represented by
+$P$.
+
+\begin{theorem}[Global exact projector]\label{thm:global}
+Let $Q_0\in\R^{n\times k}$ have full column rank and
+$\Ran Q_0=\Ran P_0$.  For every $t\in\R$, set
+\begin{equation}\label{eq:projector}
+ Y(t)=e^{tA}Q_0,\qquad
+ P(t)=Y(t)\bigl(Y(t)^TY(t)\bigr)^{-1}Y(t)^T.
+\end{equation}
+Then~\eqref{eq:projector} is the unique global solution of~\eqref{eq:flow};
+in particular,
+\[
+ \Ran P(t)=e^{tA}\Ran P_0.
+\]
+If $Ae_i=\lambda_i e_i$ in an orthonormal eigenbasis, its projective
+Pl\"ucker coordinates obey
+\begin{equation}\label{eq:plucker}
+ p_I(t)=e^{t\lambda_I}p_I(0)\quad\hbox{up to one common scale},
+ \qquad \lambda_I=\sum_{i\in I}\lambda_i.
+\end{equation}
+\end{theorem}
+\begin{proof}
+The matrix $e^{tA}$ is invertible, so $Y(t)$ has full column rank and its Gram
+matrix is positive definite for all real $t$.  Formula~\eqref{eq:projector}
+is therefore the orthogonal projector onto $e^{tA}\Ran P_0$.  Since
+$Y'=AY$ and $A=A^T$, differentiation of the Gram inverse gives
+\[
+ \dot P=AP+PA-2PAP=[P,[P,A]].
+\]
+Smooth finite-dimensional ODE uniqueness identifies it with the solution.
+On $\bigwedge^k\R^n$, the induced map sends
+$e_{i_1}\wedge\cdots\wedge e_{i_k}$ to
+$e^{t(\lambda_{i_1}+\cdots+\lambda_{i_k})}$ times itself, proving
+\eqref{eq:plucker}.
+\end{proof}
+
+This quotient identity is the subspace power-flow mechanism neighboring
+Oja's principal-component dynamics and the continuous Grassmann flows of
+Absil, Sepulchre, and Mahony.  We derive every statement needed below and make
+no priority claim for that classical mechanism.
+
+\section{Simple spectrum: every Schubert cell and its rate}
+Assume in this section
+\begin{equation}\label{eq:simple}
+ \lambda_1<\lambda_2<\cdots<\lambda_n,
+ \qquad F_j=\Span(e_1,\ldots,e_j).
+\end{equation}
+For a $k$-plane $V$, write
+\[
+ \mathcal B(V)=\{I\subset\{1,\ldots,n\}:|I|=k,\ p_I(V)\ne0\}.
+\]
+These are the bases of the representable matroid determined by the rows of
+any frame for $V$.
+
+\begin{lemma}[Matroid guard]\label{lem:greedy}
+Distinct element weights $\lambda_1,\ldots,\lambda_n$ give a unique
+maximum-weight basis $I_+(V)$ and a unique minimum-weight basis $I_-(V)$ in
+$\mathcal B(V)$, even when two arbitrary $k$-subset sums coincide.
+\end{lemma}
+\begin{proof}
+Run the matroid greedy algorithm in decreasing element weight.  To see
+uniqueness directly, suppose two optimal bases differ and take the
+largest-weight element in their symmetric difference.  Strong basis exchange
+inserts that element into the basis missing it while removing a strictly
+lower-weight element, producing a heavier basis.  This contradiction proves
+the maximum statement; reverse the weights for the minimum.
+\end{proof}
+
+For $I=(i_1<\cdots<i_k)$, let $\Omega_I$ be the Schubert cell characterized by
+\begin{equation}\label{eq:schubert}
+ \dim(V\cap F_j)=\#\{a:i_a\le j\}\quad(1\le j\le n).
+\end{equation}
+Equivalently, $I$ is the lexicographically greatest nonzero Pl\"ucker index,
+hence the greedy maximum in Lemma~\ref{lem:greedy}.
+
+\begin{theorem}[Exact cell limits and actual-support rates]\label{thm:cells}
+If $V_0\in\Omega_I$, then
+\[
+ \lim_{t\to+\infty}P(t)=P_I,
+\]
+the coordinate projection onto $E_I=\Span\{e_i:i\in I\}$.  The opposite
+Schubert cell indexed by $I_-(V_0)$ gives the backward limit.
+
+If $V_0\ne E_I$, define
+\begin{equation}\label{eq:gap}
+ \rho_2(V_0)=\max_{J\in\mathcal B(V_0),\,J\ne I}\lambda_J,
+ \qquad \Delta_+(V_0)=\lambda_I-\rho_2(V_0)>0.
+\end{equation}
+Then
+\begin{equation}\label{eq:rate}
+ \lim_{t\to+\infty}-\frac1t
+ \log\lVert P(t)-P_I\rVert_F=\Delta_+(V_0).
+\end{equation}
+The analogous backward rate uses the actual second-smallest nonzero
+Pl\"ucker weight.  For an equilibrium the error is zero and its gap is
+declared infinite.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:greedy}, $I$ is the unique maximum supported weight despite
+possible ambient subset-sum ties.  Factor $e^{t\lambda_I}$ from the Pl\"ucker
+vector in~\eqref{eq:plucker}.  Every other supported coordinate decays, giving
+the coordinate-plane limit.  The nonzero sum of all weight-$\rho_2$ coordinate
+vectors is the first surviving transverse term, so projective distance is
+$\Theta(e^{-t\Delta_+})$.  The Pl\"ucker embedding and the orthogonal-projector
+chart are smooth local embeddings with equivalent norms; the logarithmic
+rate is therefore~\eqref{eq:rate}.  Apply the argument to $-A$ for backward
+time.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\paragraph{Why the support qualifier matters.}
+Simple eigenvalues do not imply distinct $k$-fold sums; for example
+$0+4=1+3$.  Zero Pl\"ucker coordinates remove subsets from the orbit, and
+ties may remain at subleading weights.  Lemma~\ref{lem:greedy} proves only the
+needed top supported uniqueness, while~\eqref{eq:gap} measures the first term
+that is actually present.
+
+\section{Equilibria, modes, and Schubert dimensions}
+Relative to $\Ran P\oplus\ker P$, write the off-diagonal block of $A$ as $B$.
+Then $[P,[P,A]]$ has off-diagonal blocks $B$ and $B^T$.  Thus
+\begin{equation}\label{eq:equilibria}
+ \dot P=0\quad\Longleftrightarrow\quad[P,A]=0
+ \quad\Longleftrightarrow\quad\Ran P\text{ is }A\text{-invariant}.
+\end{equation}
+For simple spectrum these are exactly the $\binom nk$ coordinate projections.
+
+At $P_I$, a tangent graph component from selected $e_i$ to unselected $e_j$
+has linearized equation
+\begin{equation}\label{eq:mode}
+ \dot x_{ji}=(\lambda_j-\lambda_i)x_{ji}.
+\end{equation}
+Consequently
+\begin{align}
+ d_s(I)&=\#\{(i,j):i\in I,j\notin I,\lambda_j<\lambda_i\},\\
+ d_u(I)&=\#\{(i,j):i\in I,j\notin I,\lambda_j>\lambda_i\}.
+\end{align}
+If $I=(i_1<\cdots<i_k)$, then
+$d_s(I)=\sum_{a=1}^k(i_a-a)=\dim\Omega_I$ and
+$d_s(I)+d_u(I)=k(n-k)$.
+
+\section{Repeated spectrum: associated grade and Morse--Bott strata}
+Let the distinct eigenvalues be
+$\mu_1<\cdots<\mu_s$, with eigenspaces $E_\alpha$ of dimensions $m_\alpha$,
+and put $F_\alpha=\bigoplus_{\beta\le\alpha}E_\beta$.  For an initial plane
+$V$, define
+\begin{equation}\label{eq:graded}
+ G_\alpha=\pi_\alpha(V\cap F_\alpha)\subset E_\alpha,
+ \qquad
+ k_\alpha=\dim(V\cap F_\alpha)-\dim(V\cap F_{\alpha-1}),
+\end{equation}
+where $\pi_\alpha$ is orthogonal projection to $E_\alpha$.
+
+\begin{theorem}[Associated-graded limit and complete critical atlas]
+Every initial plane has the basis-independent limit
+\begin{equation}\label{eq:gradedlimit}
+ \lim_{t\to+\infty}e^{tA}V=\bigoplus_{\alpha=1}^sG_\alpha.
+\end{equation}
+For every feasible occupancy vector
+$0\le k_\alpha\le m_\alpha$, $\sum_\alpha k_\alpha=k$, the corresponding
+equilibrium component is exactly
+\begin{equation}\label{eq:critical}
+ \mathcal C_{\boldsymbol k}=\prod_{\alpha=1}^s\Gr(k_\alpha,E_\alpha).
+\end{equation}
+It is Morse--Bott.  Its critical, stable-normal, and unstable-normal dimensions
+are, respectively,
+\begin{align}
+ d_0&=\sum_\alpha k_\alpha(m_\alpha-k_\alpha),\label{eq:dims}\\
+ d_s&=\sum_{\beta<\alpha}k_\alpha(m_\beta-k_\beta),\\
+ d_u&=\sum_{\beta>\alpha}k_\alpha(m_\beta-k_\beta),
+\end{align}
+and $d_0+d_s+d_u=k(n-k)$.
+\end{theorem}
+\begin{proof}
+Choose a basis of $V$ adapted to the filtration $V\cap F_\alpha$.  When a
+basis vector first appears at level $\alpha$, its $E_\alpha$ component is
+nonzero; these leading components are independent and span $G_\alpha$.
+Under $e^{tA}$ every lower component decays relative to that leading one,
+which proves~\eqref{eq:gradedlimit}.  Equivalently, the entire highest-weight
+component of the decomposable Pl\"ucker vector survives.  We do not choose one
+coordinate from a tied block.  The descending eigenflag gives the backward
+limit.
+
+Equation~\eqref{eq:equilibria} and self-adjoint spectral decomposition show
+that every invariant plane splits as $\bigoplus V_\alpha$ with
+$V_\alpha\in\Gr(k_\alpha,E_\alpha)$, proving completeness of
+\eqref{eq:critical}.  Within-block graph modes have rate zero and are precisely
+tangent to this product.  Every cross-block mode has the nonzero rate
+$\mu_\beta-\mu_\alpha$; counting its sign gives~\eqref{eq:dims}.  Thus the
+Hessian is nondegenerate normal to the critical product, which is the
+Morse--Bott condition.  The dimension closure counts every selected-to-
+unselected graph coordinate exactly once.
+\end{proof}
+\fi
+
+\section{Strict Lyapunov law and recurrence}
+Define $\Phi(P)=\tr(AP)$.  Cyclicity of trace and $P^2=P$ give
+\begin{equation}\label{eq:lyapunov}
+ \frac{\dd}{\dd t}\Phi(P(t))
+ =\tr\bigl(A[P,[P,A]]\bigr)
+ =\lVert[P,A]\rVert_F^2\ge0.
+\end{equation}
+Equality holds exactly at the invariant projections.  If a nonconstant orbit
+returned arbitrarily close to its initial point, continuity of $\Phi$ would
+force its values back toward $\Phi(P_0)$ after strict increase, contradicting
+monotonicity.  Hence no nonconstant recurrent or periodic trajectory exists.
+The explicit limits above are stronger than this obstruction.
+
+\ifnum\CRevisionRound>1
+\section{Exact evidence and boundary audit}
+The evidence archive contains eight simple-spectrum frames, including tied
+ambient subset sums and a proper Schubert cell; six repeated-spectrum frames,
+five with multi-coordinate top-weight components; and four complete
+Morse--Bott occupancy atlases.  It records 80 simple and 37 repeated nonzero
+Pl\"ucker cells, 50 linear modes, and 22 critical components.  Each initial
+projector and Lyapunov derivative is rational.
+
+An independent checker imports no producer code and recomputes maximal minors,
+basis exchange, flags, projectors, gaps, modes, and dimensions.  A separate
+SymPy lane differentiates the exact solution and checks exterior powers and
+Lyapunov identities.  Byte replay, repaired-hash hostile mutations, strict
+JSON/YAML parsing, and six fresh fixed-epoch builds close the digital audit.
+Finite cases remain regression evidence only.
+
+\paragraph{Collision with C185.}
+The classical double-bracket framework of Brockett neighbors
+both packages, but their systems differ.  C185 moves a full symmetric matrix
+on a fixed isospectral orbit toward a separate ordered target.  Here $A$ is
+fixed and the state is a rank-$k$ projection; the exact motion is the induced
+linear action~\eqref{eq:projector}.  Product-Grassmann equilibrium manifolds
+and associated-graded subspace limits are specific to the present state space.
+
+\section{Route-A verdict, reproducibility, and nonclaims}
+The frozen tuple is
+\[
+ \begin{gathered}
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+ \mathrm{A3\_FAIL},\\
+ \mathrm{A4\_FORMAL\_HINT}).
+ \end{gathered}
+\]
+There is no arithmetic local datum (A0), nonconstant primitive-orbit bridge
+(A1), arithmetic clock (A2), or target completion (A3).  A fixed symmetric
+generator is only a formal spectral hint (A4): the flow is dissipative, and
+$A$ is not a Hilbert--P\'olya operator.  The overall verdict is
+\texttt{ROUTE\_A\_REJECTED}; Route B is locked under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+No target Euler factor, root number, automorphy, target divisor law, target
+functional equation, zero correspondence, or target spectral realization is
+claimed.  Nor is literary priority claimed for Oja, Brockett, Grassmann,
+Schubert, Pl\"ucker, or Morse--Bott mechanisms.
+
+\paragraph{Reproducibility statement.}
+The producer, duplicate-rejecting checker, symbolic lane, replay, mutation
+suite, three-round deterministic paper build, and self-excluding manifest are
+all archived.  Exact source, scope, evaluator, and epoch identifiers occur in
+both machine-readable contracts.
+
+\paragraph{AI-use statement.}
+A generative language model assisted with drafting and verification-code
+scaffolding.  The theorem, proofs, exact outputs, source boundaries, and
+release artifacts were checked under independent scripted lanes; final
+responsibility remains with the authors.
+\fi
+
+\section*{Source lineage}
+Oja owns the principal-component learning-flow neighborhood; Brockett owns the
+double-bracket sorting framework; Absil, Sepulchre, and Mahony directly treat
+continuous-time subspace flows related to the symmetric eigenproblem.  The
+entries below are ownership citations, not claims of literature priority for
+this package.
+
+\begin{thebibliography}{9}
+\bibitem{Oja1982}
+E. Oja, ``Simplified neuron model as a principal component analyzer,''
+\emph{Journal of Mathematical Biology} 15 (1982), 267--273.
+DOI: \href{https://doi.org/10.1007/BF00275687}{10.1007/BF00275687}.
+
+\bibitem{Brockett1991}
+R. W. Brockett, ``Dynamical systems that sort lists, diagonalize matrices, and
+solve linear programming problems,'' \emph{Linear Algebra and its
+Applications} 146 (1991), 79--91.
+DOI: \href{https://doi.org/10.1016/0024-3795(91)90021-N}
+{10.1016/0024-3795(91)90021-N}.
+
+\bibitem{ASM2008}
+P.-A. Absil, R. Sepulchre, and R. Mahony, ``Continuous-time subspace flows
+related to the symmetric eigenproblem,'' \emph{Pacific Journal of
+Optimization} 4 (2008), 179--194. Institutional record:
+\href{https://hdl.handle.net/2078.5/90452}{hdl:2078.5/90452}.
+\end{thebibliography}
+
+\end{document}

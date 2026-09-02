@@ -2719,6 +2719,53 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C294--C298
+
+This round takes five independent theorem-scale steps while changing the
+dynamical owner, state space, clock, and proof mechanism in every paper: an
+open dispersing billiard, an integrable central-force flow, a many-body
+hard-collision quotient, a non-Hermitian projective flow, and a compact
+Grassmann gradient flow.  These are five complete papers, not five
+installments of one theorem.  The hard-rod proposal was materially corrected
+from a false full physical quotient to the exact rotation-reduced shape flow.
+
+- [C294 equilateral three-disk no-eclipse collision coding](henon_three_disk_open_billiard_route_a/README.md) · [paper PDF](henon_three_disk_open_billiard_route_a/paper/main.pdf)
+- [C295 Hénon isochrone action--frequency and closure atlas](henon_isochrone_action_frequency_route_a/README.md) · [paper PDF](henon_isochrone_action_frequency_route_a/paper/main.pdf)
+- [C296 rotation-reduced circular hard-rod shape flow](henon_hard_rod_rotation_reduced_shape_route_a/README.md) · [paper PDF](henon_hard_rod_rotation_reduced_shape_route_a/paper/main.pdf)
+- [C297 PT-symmetric balanced-gain/loss dimer phase atlas](henon_pt_symmetric_dimer_route_a/README.md) · [paper PDF](henon_pt_symmetric_dimer_route_a/paper/main.pdf)
+- [C298 exact Schubert and Morse--Bott Grassmann projection flow](henon_grassmann_projection_flow_route_a/README.md) · [paper PDF](henon_grassmann_projection_flow_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C294_C298.md),
+[batch plan](BATCH_PLAN_C294_C298.md), and
+[batch review](BATCH_REVIEW_C294_C298.md) for collision screening, theorem
+contracts, historical ownership, the periodic-ray multiplicity repair, the
+rotation-quotient correction, type-and-polarity hostile review, deterministic
+PDFs, and exact receipts.  Across the five packages the final audit closes
+**115,411** independent-checker assertions, **161,630** symbolic checks,
+**409/409** hostile rejections, **412,477** evidence bytes, 135 manifest
+payloads (140 physical files), and **19** final-paper pages with **106**
+embedded/subset font records.
+
+The strict tuples, in order C294--C298, are
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local data, Euler factor,
+root number, automorphy object, target divisor/counting law or functional
+equation, target zero match, Hilbert--Pólya operator, or Route-B input is
+claimed.
+
+Final PDF SHA-256 values, in order C294--C298, are
+`a8d7f4c1a0aa4b2bca95435348e6305c942cf226f3201157d8a2e0f8105606d8`,
+`e89f5fa8ba9d9b2148f7d15d2b1d48d6767681278ff6c123fd61f2e673b87f3b`,
+`dc8890acabb563e3de21572381e479c8ac7ea2a23e6e4077aab4f8bffa6589f9`,
+`a6122768fabaa99cfa3ab62ef28384a5360103c029ce4393fe94f16d4537fc82`,
+and `37c2512b70f1042b18b3fc89282fa58f82d65897e9e4c6aab6f8199957477295`.
+
 ## Route-A independent cross-subtype round C289--C293
 
 This round takes five separate theorem-scale steps while changing the owner,

@@ -1,0 +1,317 @@
+\pdfvariable trailerid {[<C2942026090200000000000000000000><C2942026090200000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\urlstyle{same}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\rev}{\operatorname{rev}}
+\setlength{\emergencystretch}{2em}
+\title{Exact Convex Coding and Hyperbolic Ledgers\\
+for the Equilateral Three-Disk Open Billiard}
+\author{Route-A source-local certificate HCS-C294}
+\date{2 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Three equal circular obstacles of radius $r$ have centers at an equilateral
+triangle of side $d$.  In the sharp strict no-eclipse chamber
+$d>4r/\sqrt3$, we prove that cyclically reduced cyclic classes are in
+bijection with periodic-ray iterates---primitive oriented geometric rays
+paired with positive traversal multiplicities.  Primitive classes give
+unique non-grazing, isolated, hyperbolic primitive rays.
+\ifnum\CRevisionRound=0
+The proof uses compact convex minimization, not a finite orbit search.
+\fi
+\ifnum\CRevisionRound>0
+We derive the all-period primitive ledger, time reversal, length bounds, and
+positive determinant-one optical monodromy.
+\fi
+\ifnum\CRevisionRound>1
+We also give a sharp boundary atlas and a deterministic evidence certificate,
+while separating the source-local collision zeta from every target arithmetic
+or spectral claim.
+\fi
+\end{abstract}
+
+\section{Model, conventions, and No-eclipse geometry}
+Let $c_0,c_1,c_2\in\R^2$ be the vertices of an equilateral triangle of side
+$d$, and let
+\[
+ K_i=\{x\in\R^2:|x-c_i|\le r\},\qquad i=0,1,2.
+\]
+The billiard moves at unit speed in the complement of the interiors of the
+$K_i$ and reflects specularly.  We sample immediately after each collision,
+so the clock is one bounce.  Rays are oriented; changing the initial collision
+only cyclically shifts the itinerary.  Time reversal is not quotiented.
+
+A cyclic word $w=(i_0,\ldots,i_{n-1})$ is \emph{reduced} when
+$i_j\ne i_{j+1}$, including $i_{n-1}\ne i_0$.  It is primitive when it is not
+a proper power.  Every cyclic class has a unique form $[w]=[u^m]$ with
+$[u]$ primitive and $m\ge1$.  A \emph{periodic-ray iterate} is a primitive
+oriented geometric ray paired with its positive traversal multiplicity $m$.
+Length-one reduced words do not exist.
+
+\begin{lemma}[Sharp capsule gap]\label{lem:gap}
+The convex hull of either two disks is disjoint from the third disk exactly
+when
+\[
+ d>\frac{4r}{\sqrt3}.
+\]
+In that chamber the separation is $\sqrt3d/2-2r>0$.
+\end{lemma}
+\begin{proof}
+The convex hull of two radius-$r$ disks is the closed radius-$r$ neighborhood
+of their center segment.  The third center has distance $\sqrt3d/2$ from
+that segment.  Removing the capsule radius and the third-disk radius leaves
+$\sqrt3d/2-2r$, proving both assertions.
+\end{proof}
+
+\section{Convex variational coding}
+For a reduced word $w$, put $X_w=\prod_{j=0}^{n-1}K_{i_j}$ and, with cyclic
+indices, define
+\begin{equation}\label{eq:length}
+ \mathcal L_w(q_0,\ldots,q_{n-1})
+   =\sum_{j=0}^{n-1}|q_{j+1}-q_j|.
+\end{equation}
+
+\begin{theorem}[Complete periodic-ray coding]\label{thm:coding}
+Assume $r>0$ and $d>4r/\sqrt3$.  Cyclically reduced cyclic classes are in
+bijection with periodic-ray iterates.  If $[w]=[u^m]$, its image is the
+$m$-fold traversal of the unique primitive oriented exterior ray coded by
+$[u]$.  Every such geometric support is non-grazing, isolated, and
+hyperbolic, and
+\[
+ [w]\longmapsto[\rev(w)]
+\]
+is the time-reversal involution.
+\end{theorem}
+
+\begin{proof}
+The continuous convex functional~\eqref{eq:length} attains a minimum on the
+compact convex set $X_w$.  Fix a minimizing vertex $q_j$.  If it were in the
+interior of $K_{i_j}$, then it would minimize
+$|x-q_{j-1}|+|q_{j+1}-x|$ without a local constraint.  Equality in the
+triangle inequality places every such minimizer on
+$[q_{j-1},q_{j+1}]$.  That segment lies in the convex hull of one or two
+disks other than $K_{i_j}$ and is disjoint from $K_{i_j}$ by
+Lemma~\ref{lem:gap}, a contradiction.  Thus all vertices lie on their
+assigned circles.
+
+Suppose $q$ and $q'$ were distinct minimizers.  Convexity makes
+$(q+q')/2$ another minimizer.  At a coordinate where they differ, strict
+convexity of the disk puts the midpoint in its interior, contradicting the
+preceding paragraph.  The minimizer is therefore unique.
+
+At a minimizing boundary vertex, the tangential part of
+\[
+ \frac{q_j-q_{j-1}}{|q_j-q_{j-1}|}
+ -\frac{q_{j+1}-q_j}{|q_{j+1}-q_j|}
+\]
+vanishes.  The normal multiplier is nonzero: if it vanished, the two unit
+vectors would agree and $q_j$ would lie between its neighbors, again
+contradicting no-eclipse.  The incoming and outgoing tangential components
+therefore agree and their nonzero normal components are opposite.  This is
+precisely non-grazing specular reflection.  The supporting half-plane at an
+endpoint keeps a flight out of its endpoint disks, and Lemma~\ref{lem:gap}
+keeps it out of the remaining disk.  Hence the minimizing polygon is a
+physical exterior ray.
+
+Conversely, the reflection law and the exterior orientation give the normal
+multiplier with the minimizing sign.  They are the first-order optimality
+conditions for the convex functional on $X_w$, and hence are sufficient for
+global minimality.  Uniqueness identifies every coded iterate with the
+constructed minimizer.  If $w=u^m$, shifting the minimizing tuple by $|u|$
+coordinates preserves $X_w$ and $\mathcal L_w$; uniqueness forces the shift
+to fix the tuple, so the polygon is the $m$-fold traversal of the primitive
+polygon for $u$.  Conversely, a smaller geometric collision period makes
+$w$ a proper power.  This proves the primitive/iterate statement.  For
+example, $[01]$ and $[0101]$ share one geometric support but have traversal
+multiplicities one and two.  Reversal follows directly from the itinerary.
+Non-grazing makes the finite itinerary locally constant, while uniqueness
+rules out a neighboring periodic ray with that itinerary; equivalently, the
+hyperbolicity proved below also gives isolation.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\paragraph{Why the proof is not a finite computation.}
+Compactness gives existence for an arbitrary word length.  No-eclipse and
+strict convexity, not an enumeration cutoff, give boundary contact and
+uniqueness.  The converse is included because a stationary reflected polygon
+would otherwise not automatically be the unique convex minimizer.
+
+\section{Monodromy and uniform length control}
+Let $\ell_j>0$ be a free-flight length and let $\phi_j$ be the incidence
+angle measured from the obstacle normal, so $\cos\phi_j>0$.  In transverse
+Jacobi coordinates, free flight followed by a dispersing reflection is
+represented, up to the standard collision-chart conjugacy, by
+\begin{equation}\label{eq:block}
+ B_j=R(a_j)F(\ell_j)
+ =\begin{pmatrix}1&0\\a_j&1\end{pmatrix}
+  \begin{pmatrix}1&\ell_j\\0&1\end{pmatrix}
+ =\begin{pmatrix}1&\ell_j\\a_j&1+a_j\ell_j\end{pmatrix},
+ \qquad a_j=\frac{2}{r\cos\phi_j}>0.
+\end{equation}
+
+\begin{proposition}[Dispersing hyperbolicity]\label{prop:hyp}
+For every periodic ray, the monodromy
+$M=B_{n-1}\cdots B_0$ has determinant one, positive entries, and
+$\tr M>2$.  Thus its multipliers are real positive reciprocals
+$\Lambda,\Lambda^{-1}$ with $\Lambda>1$.
+\end{proposition}
+\begin{proof}
+Each factor, and hence their product, has determinant one and strictly
+positive entries.  Thus
+$M_{11}M_{22}=1+M_{12}M_{21}>1$, and the arithmetic--geometric mean
+inequality gives
+$\tr M=M_{11}+M_{22}\ge2\sqrt{M_{11}M_{22}}>2$.  The characteristic polynomial
+$\lambda^2-(\tr M)\lambda+1$ has two distinct positive reciprocal roots,
+one larger than one.
+\end{proof}
+
+Every flight joins two distinct disks whose centers are distance $d$ apart,
+so the triangle inequalities give
+\begin{equation}\label{eq:bounds}
+ d-2r\le\ell_j\le d+2r,
+ \qquad n(d-2r)\le L_w\le n(d+2r).
+\end{equation}
+At $r=1,d=3$, the symmetric orbit $[01]$ has two flights of length one and
+$a=2$.  Its block squared is
+\[
+ \begin{pmatrix}1&1\\2&3\end{pmatrix}^{\!2}
+ =\begin{pmatrix}3&4\\8&11\end{pmatrix},\qquad \tr M=14.
+\]
+The symmetric orbit $[012]$ has flight length $3-\sqrt3$, incidence cosine
+$\sqrt3/2$, and total length $9-3\sqrt3$; its positive optical product is
+again hyperbolic.
+\fi
+
+\section{Exact symbolic and primitive ledgers}
+Let $A=J_3-I_3$ be the adjacency matrix: $A_{ij}=1$ exactly when $i\ne j$.
+Its eigenvalues are $2,-1,-1$.  Therefore the number of collision-marked
+reduced $n$-bounce return records, including iterates whose primitive periods
+divide $n$, is
+\begin{equation}\label{eq:fixed}
+ F_n=\tr(A^n)=2^n+2(-1)^n.
+\end{equation}
+Every exact-period rooted word has a free orbit of size $n$ under cyclic
+shift.  Möbius inversion consequently gives
+\begin{equation}\label{eq:primitive}
+ P_n=\sum_{e\mid n}\mu(e)F_{n/e},
+ \qquad O_n=\frac{P_n}{n},
+\end{equation}
+where $O_n$ counts primitive oriented geometric rays of collision period
+$n$.  Reversal can fix some cyclic classes, so it is an involution rather
+than permission to divide all $O_n$ by two.
+
+With bounce count as the only variable, the source collision-code zeta is
+\begin{equation}\label{eq:zeta}
+ \zeta_{\rm coll}(z)
+ =\exp\!\left(\sum_{n\ge1}\frac{F_n}{n}z^n\right)
+ =\det(I-zA)^{-1}
+ =\frac{1}{(1-2z)(1+z)^2}.
+\end{equation}
+Equations~\eqref{eq:fixed}--\eqref{eq:zeta} are exact for every period because
+Theorem~\ref{thm:coding} supplies the geometric bridge.
+
+\ifnum\CRevisionRound>1
+\section{Boundary atlas}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Parameter regime & Certified conclusion \\
+\midrule
+$d>4r/\sqrt3$, $r>0$ & full reduced-word theorem \\
+$d=4r/\sqrt3$ & capsule touches the third disk; excluded \\
+$2r<d<4r/\sqrt3$ & disks disjoint, but full coding not certified \\
+$d=2r$ & neighboring disks touch \\
+$d<2r$ & neighboring obstacles overlap \\
+$r=0$ & point-scatterer singular limit, excluded \\
+nonreduced or grazing code & outside the collision section \\
+\bottomrule
+\end{tabular}
+\end{center}
+At the equality surface a connecting capsule has zero clearance, so the
+strict segment-exclusion step in Theorem~\ref{thm:coding} is unavailable.
+The weaker disjointness condition $d>2r$ cannot replace no-eclipse.
+
+\section{Evidence, Route-A verdict, and scope}
+The archived evidence contains exact count rows through $n=16$, direct word
+enumeration through $n=10$, the zeta series through degree 16, six strict
+geometry cases, two symmetric orbits, and 175 rational optical products.
+An independent checker imports no producer code; a separate SymPy lane checks
+the determinant, trace, series, chamber, and Möbius identities.  Byte replay,
+hostile repaired-hash mutations, duplicate-key rejection, and six fresh
+fixed-epoch manuscript builds close the reproducibility contract.  These
+finite checks audit conventions only and do not prove geometric uniqueness.
+
+The frozen Route-A tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_PASS\_ANALYTIC},
+   \mathrm{A2\_FAIL},\mathrm{A3\_FAIL},
+   \mathrm{A4\_NATURAL\_QUANTIZATION}).
+\]
+A1 passes because word powers are analytically identified with traversal
+multiplicities and primitive classes with primitive rays at all periods.  A0
+fails because the alphabet has
+no target arithmetic-local meaning; A2 fails because bounce count is not an
+arithmetic clock; A3 fails because~\eqref{eq:zeta} is not a target completed
+function.  The exterior Dirichlet Laplacian is a natural quantization only,
+not a Hilbert--Pólya operator.  The overall verdict is
+\texttt{ROUTE\_A\_REJECTED}, and Route B is locked under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+No target Euler factor, root number, automorphy, target divisor law, target
+functional equation, zero correspondence, or target spectral realization is
+claimed.  Nor do we claim literary priority for classical dispersing-billiard
+or three-disk mechanisms.
+
+\paragraph{Reproducibility statement.}
+All released JSON and YAML have strict schemas and duplicate-key rejection.
+The evidence producer is deterministic; the checker, symbolic cross-check,
+replay, mutation suite, PDF build audit, and self-excluding manifest can be
+rerun from the package root.
+
+\paragraph{AI-use statement.}
+A generative language model assisted with drafting and verification-code
+scaffolding.  The mathematical claims, source boundaries, exact outputs, and
+release artifacts were independently checked under the recorded scripts;
+responsibility for the final content remains with the authors.
+\fi
+
+\section*{Source lineage}
+Sinai's dispersing-billiard work supplies historical context
+\cite{Sinai1970}; Ikawa supplies neighboring several-convex-body and
+no-eclipse context~\cite{Ikawa1988}; Gaspard and Rice are a direct owner in
+the three-hard-disk scattering neighborhood~\cite{GR1989}.  These citations
+do not assert novelty priority, and the proof above is self-contained.
+
+\begin{thebibliography}{9}
+\bibitem{Sinai1970}
+Y.~G. Sinai, ``Dynamical systems with elastic reflections: ergodic
+properties of dispersing billiards,'' \emph{Russian Mathematical Surveys}
+25 (1970). DOI: \href{https://doi.org/10.1070/RM1970v025n02ABEH003794}
+{10.1070/RM1970v025n02ABEH003794}.
+
+\bibitem{Ikawa1988}
+M. Ikawa, ``Decay of solutions of the wave equation in the exterior of
+several convex bodies,'' \emph{Annales de l'Institut Fourier} 38 (1988).
+DOI: \href{https://doi.org/10.5802/aif.1137}{10.5802/aif.1137}.
+
+\bibitem{GR1989}
+P. Gaspard and S.~A. Rice, ``Semiclassical quantization of the scattering
+from a classically chaotic repellor,'' \emph{Journal of Chemical Physics}
+90 (1989). DOI: \href{https://doi.org/10.1063/1.456019}
+{10.1063/1.456019}.
+\end{thebibliography}
+
+\end{document}

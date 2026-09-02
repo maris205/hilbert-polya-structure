@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C294--HCS-C298 additions (2026-09-02)
+
+Five independent cross-subtype candidates were frozen from baseline
+`f8d3ad9a8940b54e82854b2924be353575ed8fcb`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C294 | In the strict no-eclipse chamber, every reduced cyclic three-disk word class codes one periodic-ray iterate; primitive classes code unique primitive oriented non-grazing hyperbolic rays, word powers give traversal multiplicity, and the exact fixed/primitive/reversal/zeta and optical ledgers hold at every period. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [three-disk package](../henon_three_disk_open_billiard_route_a/) · [paper PDF](../henon_three_disk_open_billiard_route_a/paper/main.pdf) |
+| HCS-C295 | The Hénon isochrone has an exact bound-energy domain, radial action Hamiltonian, energy-only radial period, apsidal frequency ratio and noncircular rational-closure criterion, with circles, center crossings, escape and the Kepler corner separated. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [isochrone package](../henon_isochrone_action_frequency_route_a/) · [paper PDF](../henon_isochrone_action_frequency_route_a/paper/main.pdf) |
+| HCS-C296 | Equal hard rods on a circle have a global rotation-reduced shape flow conjugate to free points on the available circle modulo permutations and common translation; the exact return stabilizer, simultaneous-event closure, no-Zeno law and missing-rotation cocycle obstruction are explicit. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [hard-rod shape package](../henon_hard_rod_rotation_reduced_shape_route_a/) · [paper PDF](../henon_hard_rod_rotation_reduced_shape_route_a/paper/main.pdf) |
+| HCS-C297 | The balanced-gain/loss PT dimer has exact unbroken, exceptional and broken propagators; vector/ray periods, Riccati phase portrait, nilpotent exceptional growth, conserved indefinite form and the sharp signature boundary of an explicit metric are closed together. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [PT-dimer package](../henon_pt_symmetric_dimer_route_a/) · [paper PDF](../henon_pt_symmetric_dimer_route_a/paper/main.pdf) |
+| HCS-C298 | The Grassmann projection flow has the global exact exponential-subspace solution, tie-safe limits and actual-support rates on every simple-spectrum Schubert cell, all exchange modes, the complete repeated-spectrum product-Grassmann Morse--Bott atlas, associated-graded limits and strict recurrence exclusion. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Grassmann-flow package](../henon_grassmann_projection_flow_route_a/) · [paper PDF](../henon_grassmann_projection_flow_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  The five
+state spaces and proof mechanisms are distinct: an open dispersing billiard,
+an integrable central Hamiltonian, an event-driven many-body shape quotient,
+a non-Hermitian projective linear system, and a compact-manifold gradient
+flow.  C296 records the failed unreduced quotient rather than shipping it.
+No target local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Pólya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting are
+recorded in [BATCH_REVIEW_C294_C298.md](../BATCH_REVIEW_C294_C298.md).
+
 ## HCS-C289--HCS-C293 additions (2026-09-02)
 
 Five independent cross-subtype candidates were frozen from baseline

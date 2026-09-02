@@ -17,6 +17,23 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C294--HCS-C298 additions (2026-09-02)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O278 | HCS-C294 three-disk rays as arithmetic primitive owners | proved source-alphabet and collision-clock obstruction | Primitive rays are isolated and analytically coded, but the three obstacle labels and bounce count are geometric source data depending on continuously chosen disk parameters.  They provide no intrinsic rational-prime carrier, logarithmic-prime roof, target local datum, target determinant, or target divisor.  Repeated words encode traversal multiplicity and are not new primitive rays. | The strict no-eclipse all-period convex coding, primitive-ray correspondence, hyperbolicity, reversal, length bounds and exact source collision zeta survive. | ../henon_three_disk_open_billiard_route_a/THEOREM_PACKAGE.md |
+| HEN-O279 | HCS-C295 isochrone closed trajectories as arithmetic primitive owners | proved integrable-torus and continuous-action obstruction | Bound motions lie in continuously parameterized action families, and noncircular closure is selected by rational commensurability of a continuously varying apsidal ratio.  These clean families, physical periods and actions supply no canonical rational-prime labels, logarithmic-prime clock, target determinant, or target divisor. | The exact bound domain, radial action and period, action Hamiltonian, closure/least-return law, circles, center crossings, escape and Kepler faces survive. | ../henon_isochrone_action_frequency_route_a/THEOREM_PACKAGE.md |
+| HEN-O280 | HCS-C296 hard-rod returns as an arithmetic primitive ledger | proved continuum-shape and rotation-cocycle obstruction | Reduced returns solve congruences involving continuously chosen velocities and an arbitrary common translation.  They do not select rational primes or a logarithmic-prime roof.  Moreover, the naive full physical free-point quotient is already false for one rod: compression changes the translation period from `ell` to `ell-Na`, and the missing common rotation is a genuine cocycle. | The rotation-reduced global shape conjugacy, all-event/simultaneous-collision closure, conservation, no-Zeno theorem and exact return stabilizer survive. | ../henon_hard_rod_rotation_reduced_shape_route_a/THEOREM_PACKAGE.md |
+| HEN-O281 | HCS-C297 PT-dimer phases as an arithmetic spectrum or orbit owner | proved finite-matrix and continuous-parameter obstruction | The two-mode characteristic roots, projective fixed rays, periods and metric signature depend continuously on `gamma/kappa`; unbroken periodic rays form nonisolated projective families and the exceptional/broken chambers do not create a prime-indexed primitive taxonomy.  A source pseudo-Hermitian metric is neither a target determinant nor a Hilbert--Pólya realization. | The exact three-chamber propagator, vector/ray periods, nilpotent exceptional point, Riccati atlas, conserved form and sharp positive-metric boundary survive. | ../henon_pt_symmetric_dimer_route_a/THEOREM_PACKAGE.md |
+| HEN-O282 | HCS-C298 Plücker weights as an arithmetic orbit determinant | proved strict-gradient and continuous-spectrum obstruction | `Tr(AP)` is strictly increasing off the invariant-subspace set, so there are no nonconstant recurrent or periodic trajectories to furnish a primitive-orbit ledger.  Eigenvalues and Plücker weight sums vary continuously, while repeated spectra produce positive-dimensional equilibrium manifolds rather than isolated arithmetic owners. | The exact global Grassmann solution, every Schubert-cell limit/rate, all exchange modes, associated-graded convergence and complete product-Grassmann Morse--Bott atlas survive. | ../henon_grassmann_projection_flow_route_a/THEOREM_PACKAGE.md |
+
+All five obstructions are invariant under the frozen collision section,
+central-force action convention, common-rotation quotient, projective
+normalization, and orthogonal spectral flag.  They do not license Route B.
+The common scope firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, and every
+surviving theorem is source-local with a content-addressed evidence/PDF
+release ledger.
+
 ## HCS-C289--HCS-C293 additions (2026-09-02)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
