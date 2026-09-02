@@ -2,62 +2,32 @@
 
 Date: **2026-09-02 UTC**
 
-Current controlling state: **STAGE 1 RESEARCH / PHASE_6_COMPLETE / AWAITING_STAGE_2_CONFIRMATION**.
-The scholar's Phase-6 confirmation authorizes the bounded report revision only;
-it is not human full-text or source-passage verification. Stage 2 `WRITE`
-remains behind a new explicit confirmation.
+Current controlling state: **STAGE 2 WRITE COMPLETE / AWAITING EXPLICIT USER CONFIRMATION FOR STAGE 2.5**.
 
 | Item | Status |
 |---|---|
-| Pipeline run | Round 10 / new run |
 | Pipeline global state | `awaiting_confirmation` |
-| ARS Stage 1 | `PHASE_6_COMPLETE / AWAITING_STAGE_2_CONFIRMATION` |
-| Phase-6 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE6_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
-| Phase-5 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE5_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
-| Phase-4 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE4_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
-| Phase-3 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE3_AUTHORIZATION_20260902.txt`, SHA-256 `f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe` |
-| Phase-2 authorization | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_PHASE2_AUTHORIZATION_20260902.txt`, SHA-256 `b516a3f1c0b362a77ba7b5963375492d7bab73c746cb458086feb48638739a85` |
-| Budget gate | `CONFIRMED`; raw event `BATCH_ROUND10_STAGE1_BUDGET_AUTHORIZATION_20260901.txt`, SHA-256 `f449b78edf3805c05f297591a9593158d475b87f289b39f69c3f6eb813889ebe` |
-| Phase-1 materials | RQ, methodology, independent DA, resolution, and independent recheck complete; recheck `PASS` |
-| Phase-2 checkpoint | `PHASE_2_COMPLETE`; `stage1_phase2_checkpoint.md` |
-| Literature screening | `COMPLETE`; 22 source rows, 17 peer-reviewed rows |
-| Independent source verification | `COMPLETE`; 22/22 IDs; `PHASE2_SOURCE_BASE_READY_WITH_WARNINGS` |
-| Correction receipt | `PASS`; SHA-256 `c0d521739a482b2423a3b5af37e19841d6729fc963e99b089e0498edc1caddcb` |
-| Phase-3 synthesis | `COMPLETE`; 22/22 matrix, four themes, five candidate tensions; `PHASE3_SYNTHESIS_READY_WITH_WARNINGS` |
-| Devil's Advocate Checkpoint 2 | `PASS`; 0 Critical, 0 Major, 2 Minor, 4 Observations; `DA-SEAT-C` independent of `SYNTH-SEAT-A` |
-| Phase-4 composition | `COMPLETE`; 3,384-word report, 8 fresh intents, 22/22 source IDs; `PHASE4_REPORT_DRAFT_READY_WITH_WARNINGS` |
-| Phase-4 provenance correction | `COMPLETE`; false local-as-UTC manifest time replaced by `2026-09-02T09:25:28Z`; claim content unchanged |
-| Phase-5 role reviews | `COMPLETE`; editorial, ethics, citation-integrity, and Devil's Advocate records present; integrated disposition `MAJOR_REVISION`; 0 Critical; ethics not `BLOCKED` |
-| Explicit Phase-5 progress | The literal single Gaussian-prime-ideal codomain must be defended as intrinsic or labeled conditional; the primitive-owner quotient remains a genuine independent gate |
-| Citation locator boundary | All registered adjacent citations retain `anchor:none`; claim-to-passage clearance remains inconclusive |
-| Phase-4 report integrity | `UNCHANGED`; Phase-5 review did not alter report bytes |
-| Phase-6 ClaimIntent manifest | `COMPLETE`; 8/8 frozen intents; `notes/stage1_phase6_claim_intent_manifest.json` |
-| Phase-6 final report | `COMPLETE`; 4,379 raw `wc -w` words; complete article-style research report, not a canonical manuscript or scientific result; `notes/stage1_phase6_final_report.md` |
-| Phase-6 revision log | `COMPLETE`; Revision-1 `ACCEPTED`; 15/15 stable IDs; Revision-2 `NOT_REQUIRED`; `notes/stage1_phase6_revision_log.md` |
-| Phase-6 independent recheck | `PASS`; 22/22 citation pairs, 22 unique source IDs, 22/22 `anchor:none`; claim-to-passage `INCONCLUSIVE`; `notes/stage1_phase6_recheck.md` |
-| Explicit Phase-6 progress | Literal single-ideal codomain is a deliberately strict frame; any split obstruction is conditional, not intrinsic; `Gate Q` remains independently open |
-| Per-paper Phase-6 checkpoint | `COMPLETE`; `notes/stage1_phase6_checkpoint.md` |
-| Batch Phase-6 checkpoint | `PASS / STAGE_1_RESEARCH_COMPLETE`; `BATCH_ROUND10_STAGE1_PHASE6_CHECKPOINT.md`, SHA-256 `e010a64b98d45ec92c7378fa73338a32e28327725ca23fa16e9da81137a803d8` |
-| Stage-1 handoff | `COMPLETE`; `BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md`, SHA-256 `8a8bd4ea42fe67366d8d7849bd941170b4793320f9296c6c3b6f4b357ea98dfd` |
-| Phase-6 audit receipt | `PASS`; 459/459 checks; `BATCH_ROUND10_STAGE1_PHASE6_AUDIT_RECEIPT.json`, SHA-256 `e7015d174a48ab7a38fa5c401b4f1c09729f2e5b8d868d377fe6fcb7f605f668` |
-| Stage 2 `WRITE` | `AWAITING_EXPLICIT_USER_CONFIRMATION`; authorization `false`; `STAGE2_WRITE=false` |
-| Scientific computation | `NOT_RUN` |
-| Novelty assessment | `NOT_RUN`; no novelty claim |
-| Formal project claims | `0` |
-| Canonical manuscript / bibliography / results | `UNCHANGED` / `UNCHANGED` / `NOT_RUN` |
-| Inherited object | P24 **unit-speed** level-(3) Bianchi geodesic flow |
-| Immutable clock / primitive / repetition | **arclength** / **primitive loxodromic class** / powers |
-| Immutable arithmetic target | **Gaussian prime ideals** for `zeta_{Q(i)}` |
-| Proposed test | source-derived ideal-owner refinement of `(D9,J3)` |
-| Formal Route-A tuple | `UNASSIGNED`; completed tuples 0/1 |
-| Positive arithmetic A2 | 0/1 |
-| A2 / A3 / A4 | `NOT_RUN` / `NOT_RUN` / `NOT_RUN` |
+| ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
+| ARS Stage 2 WRITE | `COMPLETE` |
+| Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
+| Stage-2 pre-prose registration | `COMPLETE`; 8/8 ClaimIntents, one-to-one same-or-narrower lineage |
+| Manuscript | `COMPLETE`; 4641 audited English body words; SHA-256 `5bee689a055f99819fb6df1f6e992610fe0dea7ebffc87219758116bf06bd034` |
+| Bibliography | `COMPLETE`; 22 entries, all cited, no missing/orphan; SHA-256 `433638db4cd984ab195beb7643a0581b1a9a9dc0b5df46f54634bd704194c253` |
+| PDF | `COMPLETE`; 13 pages, 265174 bytes; SHA-256 `e07918f69f77ef5ce91ea8998d88e998b1e6afa80ae320fa2b457179d96be54f` |
+| Build receipt | `PASS`; `notes/stage2_build_receipt.json` |
+| Independent recheck | `PASS`; 8/8 ClaimIntents; no unresolved Blocker, Major, or Minor; `notes/stage2_independent_recheck.md` |
+| Explicit paper progress | The complete article separates performance-independent mechanism admissibility (Gate M) from exact primitive-unoriented quotient completeness (Gate Q) under a deliberately strict literal Gaussian-prime-ideal codomain. Both gates remain open; no owner law, quotient, or S_H score is reported. |
+| Frozen dynamical system | torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic arclength; primitive loxodromic inversion-paired owner; literal nonzero Gaussian prime ideal |
+| New retrieval / scientific execution | `NO` / `NOT_RUN` |
+| Canonical scientific-result refresh | `NO` |
+| Novelty assessment | `NOT_RUN` |
+| Formal Route-A tuple | `UNASSIGNED`; formal tuples `0`; positive arithmetic A2 `0` |
+| Route position | Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. |
 | Route B | `CLOSED`; evaluation `NOT_RUN`; invocation `false` |
+| Stage 2.5 integrity | `NOT_STARTED`; explicit user confirmation required |
+| Next state | `AWAITING_EXPLICIT_USER_CONFIRMATION_FOR_STAGE_2_5` |
+| Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
-Phase 6 accepts Revision-1 after independent `PASS` recheck and completes an
-article-style closed-corpus research report. It deliberately labels the literal
-Gaussian-prime-ideal codomain as a strict frame, makes the possible obstruction
-conditional, and leaves `Gate Q` open. It runs no mechanism or science, changes
-no inherited flow, clock, primitive/repetition rule, arithmetic target,
-novelty status, formal claim, Route tuple, or canonical file. The pipeline now
-waits only for explicit Stage-2 `WRITE` confirmation.
+Stage-2 completion certifies a complete, buildable, closed-corpus article
+package and its claim boundary. It does not certify theorem correctness,
+passage-level support, novelty, scientific implementation, or route promotion.

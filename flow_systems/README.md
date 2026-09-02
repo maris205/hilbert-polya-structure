@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 1 research complete；等待 Stage 2 WRITE 确认** | 五篇 Phase-6 完整研究报告共 22,656 raw words，40/40 新 ClaimIntents、82/82 评审 ID、144/144 引用配对均完成修订与交叉复验；5/5 `PASS`，0 篇需要 Revision-2，459/459 全量审计通过。每篇都有明确的方法/证书架构进展，但科学计算、novelty、正式 Route tuple 与 canonical manuscript 仍未运行或未授权；正向算术 A2 与 Route B 均为 `0/5`。见[Stage-1 完成检查点](BATCH_ROUND10_STAGE1_PHASE6_CHECKPOINT.md)与[Stage-2 handoff](BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 2 WRITE 完成；等待 Stage 2.5 确认** | 五篇完整论文共 66 页、23,182 个审计正文词、116 条冻结文献；40/40 ClaimIntents、5/5 独立复核、430/430 draft 审计及 543/543 full 审计通过。每篇都有明确的证书方法进展，但科学执行、正式 Route tuple 与 Route B 均为 0/5。见[Stage-2 output manifest](BATCH_ROUND10_STAGE2_OUTPUT_MANIFEST.json)与[P29--P33 批次检查点](BATCH_ROUND10_STAGE2_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,35 +38,47 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 29--33 Round 10 当前概要
 
-Round 10 已完成 ARS Stage 1 deep-research **Phase 6 revision**，当前严格停在
-**STAGE_1_RESEARCH_COMPLETE / AWAITING_STAGE_2_CONFIRMATION**。五篇自包含的
-article-style 研究报告合计 22,656 个 raw `wc -w` words（审计口径 24,248）；
-每篇均有冻结前置 manifest、完整报告、逐项修订日志、交叉复验和检查点。
-40/40 个 Phase-6 ClaimIntents、82/82 个稳定评审 ID 和 144/144 个引用/锚点
-配对全部闭合；5/5 交叉复验 `PASS`，0/5 需要 Revision-2，全量审计为
-**459/459 PASS**，Phase-5 冻结回放仍为 **127/127 PASS**。
+Round 10 已完成 ARS **Stage 2 WRITE**，当前严格停在
+**STAGE_2_WRITE_COMPLETE / AWAITING_EXPLICIT_USER_CONFIRMATION_FOR_STAGE_2_5**。
+五篇完整、可编译的论文共 **23,182 个审计英文正文词、66 个 PDF 页面、116 条
+冻结文献、114 个 citation commands 与 144 个 citation-key occurrences**。
+40/40 Stage-2 ClaimIntents 全部一对一继承 Stage 1 且不增强；5/5 独立交叉复核
+均为 PASS，当前无未决 Blocker、Major 或 Minor。Stage-2 deterministic draft
+audit 为 **430/430 PASS**，包含五次 fresh isolated rebuild 的 full audit 为
+**543/543 PASS**；五份 canonical PDF 均由隔离的
+LuaLaTeX--BibTeX--LuaLaTeX--LuaLaTeX 构建链生成，终轮无 undefined
+citations/references、missing glyph、overfull 或 underfull box。
 
-| Paper | 连续时间对象保持不变 | Phase-6 落地的明确论文进展 | 路线图位置 |
-|---|---|---|---|
-| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | unit-speed level-`(3)` Bianchi geodesic flow；arclength；primitive loxodromic owners；literal Gaussian prime ideal | [完整报告](papers/29-bianchi-ideal-owner-refinement/notes/stage1_phase6_final_report.md)将 literal codomain 改写为 deliberately strict frame，split obstruction 只是 conditional，同时保留独立未闭的 quotient Gate Q | Route A / A1 preparation；tuple `UNASSIGNED` |
-| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | `d=6a` no-eclipse physical three-disk flow；physical Euclidean-flight roof | [完整报告](papers/30-three-disk-nonconstant-roof-determinant/notes/stage1_phase6_final_report.md)将四个 numerical errors 与独立 geometry/roof-input uncertainty 分型，并冻结 common norm/stability/propagation/dependency/conditioning 义务 | `A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION` |
-| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 正的 `Gamma_0(11)` newform time change；oriented primitive owners；powers 为 repetitions | [完整报告](papers/31-level11-conjugacy-owner-ledger/notes/stage1_phase6_final_report.md)以 exact canonicalization biconditional 为主证书，把 9,453-row table 降为 derived adversarial audit，并分离 `G/I/C` | Route A / A1 preparation；tuple `UNASSIGNED` |
-| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | pure homology-cover tower；clock `1/N`；log multiplicity `1/N^3` | [完整报告](papers/32-homology-cover-renormalization-uniformity/notes/stage1_phase6_final_report.md)把 higher-content/zero-content 放在 falsification-first 首位，content-one 只作 contingent secondary branch，uniform tail 只能在局部存活后开启 | generic A1--A2 preparation；A0 unavailable，tuple `UNASSIGNED` |
-| [P33](papers/33-bolza-control-matched-census/README.md) | Bolza `b=1/2` even subtype；source-locked control；`Lambda=21/10` | [完整报告](papers/33-bolza-control-matched-census/notes/stage1_phase6_final_report.md)允许 surface-specific exact producers 输出 common semantic schema 供 independent validator 复验，并显式化 frozen-cutoff asymmetry | Route A / A1 preparation；A0 confounded/prohibited；tuple `UNASSIGNED` |
+| Paper | 正文词 | 页数 | 文献 | 本轮明确落地进展 | 路线图 A 对应 |
+|---|---:|---:|---:|---|---|
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | 4641 | 13 | 22 | 完整论文把机制可容许性 Gate M 与原始无向所有者商集完备性 Gate Q 明确分离，并把字面单一高斯素理想限定为刻意严格的压力测试。两道门均保持开放，没有产生 owner law、完整 quotient 或 S_H 数值。 | Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | 4948 | 14 | 26 | 完整论文把物理 roof 行列式方案整理为六道型别化关卡，并冻结共同范数下的误差契约：四个数值通道加独立传播的几何／roof 输入不确定性。没有宣称已构造 roof、算子、行列式、包络、忠实度或非转移定理。 | A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION; formal tuple UNASSIGNED; Route B closed. |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | 4219 | 12 | 22 | 完整论文把确定性 canonicalization 双条件提升为首要证书目标，将 9,453 个 pair rows 降为派生的对抗审计，并保持全局 owners G、incidences I 与 cell-local quotient C 三种估计量互不替代。 | Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | 4442 | 13 | 26 | 完整论文在固定 1/N 时间与 1/N^3 对数重整化下，把高内容与零内容因子列为最先的否证目标；content-one 仅为附条件的次级分支。形式对象、面板、尾界和极限均未构造或执行。 | Generic Route-A A1--A2 preparation; A0 unavailable; formal tuple UNASSIGNED; Route B closed. |
+| [P33](papers/33-bolza-control-matched-census/README.md) | 4932 | 14 | 20 | 完整论文允许两个曲面使用不同的精确证明产生器，但必须输出同一语义 owner-certificate schema 并交由独立验证器复验。固定截断的不对称已显式化，P33-RC-1 仍为 0/7，没有产生 census。 | Route A / A1 preparation; formal A0 prohibited/confounded; formal tuple UNASSIGNED; Route B closed. |
 
-Phase-6 的 `PASS` 是研究报告与评审追踪完整性，不是 Route-A 层级晋升。
-formal Route-A tuples `0/5`、正向算术 A2 `0/5`、Route-B invocations `0/5`。
-144/144 anchors 仍为 `none`，因此 claim-to-passage 核验仍为 `INCONCLUSIVE`；没有
-伪造 locator。科学计算、canonical-result refresh、novelty、正式 claim registration
-与 canonical manuscript 改写仍为 `NOT_RUN`、`UNCHANGED` 或未授权。
+### 路线图与动力学限定
 
-下一次用户只需回复“确认”，即可授权 **Stage 2 `WRITE`** 使用已冻结的
-Stage-1 handoff 组装正式 manuscript；该确认仍不自动授权新检索、科学执行、
-正式 Route 评估或未声明的 canonical 修改。见
-[Stage-1 完成检查点](BATCH_ROUND10_STAGE1_PHASE6_CHECKPOINT.md)、
-[Stage-2 handoff](BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md)与
-[审计收据](BATCH_ROUND10_STAGE1_PHASE6_AUDIT_RECEIPT.json)。
+本轮仍在 **路线图 A 的 A0/A1 基础与 A2 前置证书层**，没有把写作完整性当作
+科学晋级。五个冻结连续时间子型、clock、owner、normalization 和 cutoff 均保持
+不变；本轮新增的是五篇完整论文，不是五次新科学实验。formal Route-A tuples
+保持 `0/5`，正向算术 A2 保持 `0/5`，Route-B invocations 保持 `0/5`，
+`SCIENTIFIC_EXECUTION=NOT_RUN` 为 `5/5`。
 
+### 引用与完整性边界
+
+116 条文献全部闭合且均被引用；所有 114 个 citation groups 都有相邻
+`anchor=none / claim_to_passage=INCONCLUSIVE` 标记，没有伪造 locator 或直接来源
+引文。P32-S13 与 P33-S06 的 `PLAUSIBLE` 特殊边界、全部 correction bindings、
+作者信息、无资助、无利益冲突和 AI-assistance disclosure 均保留。Stage 2.5
+尚未运行，因此 passage-level integrity、source finalization 与 formal claim
+registration 均未被宣称。
+
+下一步只需用户回复“确认”，即可进入 **Stage 2.5 pre-review integrity**；该确认
+仍不授权新科学计算、canonical-result refresh、Route-A tuple 赋值或 Route B。
+见 [Stage-2 output manifest](BATCH_ROUND10_STAGE2_OUTPUT_MANIFEST.json)、
+[Stage-2 checkpoint](BATCH_ROUND10_STAGE2_CHECKPOINT.md)与
+[Stage-2.5 handoff](BATCH_ROUND10_STAGE2_HANDOFF_TO_STAGE2_5.md)。
 ## Papers 24--28 最新结论
 
 ### Stage 5 FULL 落地与 pipeline 终态
