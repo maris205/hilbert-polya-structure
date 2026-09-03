@@ -1,0 +1,237 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Pn}{\mathcal P_n}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\E}{\mathbb E}
+
+\title[Random singleton isolation]{Random Singleton Isolation on Set Partitions}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+On a set partition of $[n]$, choose a uniform label and split it from its
+block as a singleton.  We determine this absorbing chain without recursion.
+The label maps are commuting idempotents, and the transition matrix is
+diagonalizable with eigenvalue $s/n$ occurring once for every partition
+having $s$ singleton blocks.  For arbitrary initial block sizes we give the
+all-time absorption distribution as an all-but-one coupon formula.  More
+finely, we give every labelled source--target probability as an exact-support
+sum and count, for every target, both distinct predecessors and labelled
+predecessor/action pairs.  The impossible $n-1$ singleton layer and all small
+boundaries are included.  Generic partition, coupon, and semigroup-walk
+ingredients receive zero contribution credit; status is
+\texttt{OWNER\_AMBER / HOLD\_EXTERNAL}.
+\end{abstract}
+
+\maketitle
+
+\section{The chain and its subtraction boundary}
+
+Fix an integer $n\ge1$, and let $\Pn$ be the set of partitions of
+$[n]=\{1,\ldots,n\}$.  For
+$i\in[n]$, define $E_i\pi$ by removing $i$ from its block and installing
+$\{i\}$ as a singleton; if $\{i\}$ is already a block, do nothing.  The
+chain has transition operator
+\begin{equation}\label{eq:P}
+ P=\frac1n\sum_{i=1}^n E_i,
+\end{equation}
+where the same notation denotes the linearization on the basis $\Pn$.
+
+Set partitions and restricted-growth encodings are classical.  More
+specifically, Knopfmacher--Mansour--Wagner use the local operation of
+removing a marked element and making it a singleton in a bijective argument
+\cite{KMW2010}; that local move receives zero credit here.  Stark constructs
+different arborescence chains generating set partitions, including variants
+excluding singleton blocks \cite{Stark2024}.  Brown's general work owns
+semigroup-walk diagonalization technology \cite{Brown2000}.  Accordingly,
+partition lattices, associated Bell numbers, coupon occupancy, commuting
+idempotents, and generic spectral technology are background.  The retained
+object is the conjunction, for the literal fixed-$n$ chain \eqref{eq:P}, of
+the complete spectrum, arbitrary-source absorption law, every-target kernel,
+and two inverse censuses.  A literal or equivalent owner triggers withdrawal;
+the present bounded non-hit is not a novelty certificate.
+
+The nearest internal carrier collision is P169: it also uses labelled set
+partitions, but applies a deterministic cyclic successor transfer that
+preserves block number and supports nontrivial cycles.  P110 instead joins a
+partition with a cyclic relabelling and therefore coarsens.  Neither is the
+support-only singleton-isolation refinement studied here, nor supplies its
+all-but-one coupon law, labelled target kernel, or inverse counts.  Generic
+refinement, Bell-number, and spectral shells consequently receive no credit.
+
+Write $s(\pi)$ and $b(\pi)$ for the numbers of singleton and total blocks.
+Let $D_m$ count partitions of $[m]$ with no singleton blocks, with
+$D_0=1$ and $D_1=0$.  We use $S(t,r)$ for a Stirling number of the second
+kind, including $S(0,0)=1$.
+
+\begin{lemma}[support action]\label{lem:support}
+The maps $E_i$ are commuting idempotents.  Hence a label history acts only
+through its support $A\subseteq[n]$, via $E_A=\prod_{i\in A}E_i$.
+For an initial block $B$, the resulting blocks inside $B$ are the singletons
+$\{i\}$ for $i\in A\cap B$, together with $B\setminus A$ when that set has
+size at least two.
+\end{lemma}
+
+\begin{proof}
+Idempotence is immediate.  If $i\ne j$, extracting $i$ and $j$ from their
+old blocks leaves the same residual blocks in either order, including the
+case in which both labels started together.  This proves commutation.  The
+block description follows by extracting every label of $A\cap B$.
+\end{proof}
+
+The discrete partition $\widehat 0$ is absorbing.  Every other state has a
+nonsingleton block; selecting a label in it strictly increases the singleton
+set, and no move can reverse that increase.  Thus $\widehat0$ is the unique
+recurrent state.
+
+\section{Complete spectrum}
+
+\begin{theorem}[spectrum with multiplicities]\label{thm:spectrum}
+The matrix $P$ is diagonalizable over $\mathbb Q$.  For
+$0\le s\le n-2$, the eigenvalue $s/n$ has multiplicity
+\begin{equation}\label{eq:mult}
+ m_s=\binom ns D_{n-s}.
+\end{equation}
+The eigenvalue $1$ has multiplicity one, and there is no eigenvalue
+$(n-1)/n$.  For $n=1$, the spectrum consists only of $1$.
+\end{theorem}
+
+\begin{proof}
+Each linearized $E_i$ is diagonalizable because its minimal polynomial
+divides $x(x-1)$.  A commuting family of diagonalizable operators is
+simultaneously diagonalizable, so their average $P$ is diagonalizable.
+
+Order $\Pn$ compatibly with refinement.  Every $E_i\pi$ either equals
+$\pi$ or is strictly finer, so $P$ is triangular.  Exactly the $s(\pi)$
+choices of a singleton label fix $\pi$; its diagonal entry is therefore
+$s(\pi)/n$.  To make a partition with exactly $s$ singleton blocks, choose
+their labels and partition the complement with no singleton blocks, giving
+\eqref{eq:mult}.  The value $s=n-1$ is impossible: the remaining label is
+also a singleton.  At $s=n$ there is only $\widehat0$, proving all claims.
+\end{proof}
+
+\section{All-time laws}
+
+Let the initial partition $\pi$ have blocks $B_1,\ldots,B_k$ of sizes
+$b_1,\ldots,b_k$.  For variables $b_1,\ldots,b_k$, let $e_m(b)$ denote the
+$m$th elementary symmetric polynomial.  Let $T$ be the absorption epoch,
+with $T=0$ when $\pi=\widehat0$.
+
+\begin{theorem}[all-but-one coupon law]\label{thm:absorb}
+For every integer $t\ge0$,
+\begin{equation}\label{eq:absorb}
+ \Pr_\pi(T\le t)=\frac1{n^t}\sum_{m=0}^{k}
+ e_m(b_1,\ldots,b_k)(n-m)!S(t,n-m).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $M$ be the set of labels missing from the first $t$ samples.  By
+Lemma~\ref{lem:support}, absorption occurs exactly when
+$|M\cap B_j|\le1$ for every old block.  The number of admissible missing sets
+of size $m$ is $e_m(b)$: choose $m$ old blocks and one missing label in each.
+For fixed $M$, the histories having exactly the complementary support are
+the surjections $[t]\twoheadrightarrow[n]\setminus M$, counted by
+$(n-m)!S(t,n-m)$.  Summing and dividing by $n^t$ proves the formula, including
+$t=0$.
+\end{proof}
+
+We next retain the labels of the target.  For $M\subseteq[n]$, put
+\begin{equation}\label{eq:q}
+ q_t(M)=\frac{(n-|M|)!S(t,n-|M|)}{n^t}.
+\end{equation}
+Given $\pi$ and $\sigma$, call $M$ \emph{admissible} if, in every old block
+$B$ of $\pi$, either
+\begin{enumerate}[(a)]
+\item $\sigma$ has one nonsingleton block $C\subseteq B$, all other labels
+      of $B$ are singleton, and $M\cap B=C$; or
+\item $\sigma$ is discrete on $B$, and $|M\cap B|\le1$.
+\end{enumerate}
+If $\sigma$ does not refine $\pi$, or has two nonsingleton blocks inside an
+old block, there are no admissible sets.  Denote the resulting explicit
+family by $\mathcal M_\pi(\sigma)$.
+
+\begin{theorem}[every labelled target]\label{thm:kernel}
+For all $t\ge0$ and $\pi,\sigma\in\Pn$,
+\begin{equation}\label{eq:kernel}
+ P^t(\pi,\sigma)=\sum_{M\in\mathcal M_\pi(\sigma)}q_t(M).
+\end{equation}
+Consequently $\sigma$ is eventually reachable from $\pi$ exactly when it
+has the blockwise extraction form above.  It is reachable at exact time $t$
+exactly when some admissible $M$ also satisfies
+$n-|M|=0=t$ or $1\le n-|M|\le t$.
+\end{theorem}
+
+\begin{proof}
+A history with missing set $M$ has exact support $[n]\setminus M$, hence
+probability $q_t(M)$.  Lemma~\ref{lem:support} says that its endpoint is
+$\sigma$ precisely for the displayed blockwise alternatives.  Distinct
+missing sets describe disjoint history events, proving \eqref{eq:kernel}.
+The positivity criterion is exactly the positivity criterion for
+$S(t,n-|M|)$.
+\end{proof}
+
+Formula \eqref{eq:absorb} is recovered by summing \eqref{eq:kernel} at
+$\widehat0$, but its elementary-symmetric compression retains the geometry
+of every initial block size.
+
+\section{Complete one-step inverse census}
+
+\begin{theorem}[states versus labelled actions]\label{thm:inverse}
+Fix a target $\sigma$ with $s=s(\sigma)$ and $b=b(\sigma)$.  If $s=0$, it
+has no one-step predecessor.  If $s>0$, the number of distinct predecessor
+partitions is
+\begin{equation}\label{eq:predstates}
+ 1+s(b-s)+\binom{s}{2},
+\end{equation}
+whereas the number of labelled pairs $(\rho,i)$ satisfying
+$E_i\rho=\sigma$ is
+\begin{equation}\label{eq:actions}
+ sb.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The acted-on label must be singleton in the output, proving the zero case.
+For $s>0$, a predecessor is either $\sigma$ itself, merges one of its $s$
+singletons with one of its $b-s$ nonsingleton blocks, or merges two singleton
+blocks.  These disjoint constructions give \eqref{eq:predstates}.  For a
+labelled pair, first choose the output singleton $i$.  Its predecessor is
+either unchanged or obtained by merging $\{i\}$ with any one of the other
+$b-1$ blocks: exactly $b$ choices per $i$.  This proves \eqref{eq:actions};
+when two singletons are merged the same predecessor state correctly supports
+two different actions.
+\end{proof}
+
+For $n=1$, the sole state has $s=b=1$: it is recurrent, is already absorbed,
+and has one predecessor and one labelled action.  Thus every formula above
+includes the smallest boundary.  The proof is exact for all $n$; the
+accompanying exhaustive program only checks finite boxes and provides no
+empirical or novelty evidence.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

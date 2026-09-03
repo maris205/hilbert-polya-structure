@@ -1,0 +1,165 @@
+                                   A COMPLETE DEPTH-TWO ATLAS FOR
+                                    FIRST-DESCENT PREFIX REVERSAL
+
+
+                                                            ANONYMOUS
+
+
+            Abstract. Given a nonidentity permutation, locate its first descent and reverse the prefix ending at the
+            descent’s smaller follower. We determine the complete functional graph of this autonomous map. Its image
+            is the half of Sn beginning with an ascent. For n ≥ 3, the recurrent set is the identity together with the n!/3
+            permutations having a peak at position two; the latter form n!/6 two-cycles. Every tail has length at most
+            two, with exact populations n!/3 + 1, n!/2, n!/6 − 1. The full predecessor set of a target is indexed by the
+            decreasing run starting at its second position. Consequently, for n ≥ 4 the maximum fibre is n − 1, attained
+            at exactly n − 1 targets. The exceptional n = 2, 3 atlases are explicit. Arbitrary prefix reversal, pancake
+            sorting, descent counts, and finite-map bookkeeping are treated as background. The residual conjunction
+            is owner_amber, and external circulation is hold_external.
+
+
+
+
+                                  1. The autonomous rule and theorem package
+      For 1 ≤ k ≤ n, let ρk reverse the first k entries of a permutation:
+(1)                                    ρk (π1 · · · πk πk+1 · · · πn ) = πk · · · π1 πk+1 · · · πn .
+Write ι = 12 · · · n. If π ̸= ι, let
+(2)                                                 d(π) = min{i : πi > πi+1 }
+and define the first-descent prefix-reversal map
+(3)                                     Fn (ι) = ι,        Fn (π) = ρd(π)+1 (π)         (π ̸= ι).
+The extra position after the first descent is part of the rule.
+   Prefix reversal and its pancake-sorting distance are classical [1]; prefix-reversal sorting on fixed-alphabet
+strings is also established [2]. Pudwell and Smith study four shuffle maps selected by a cut after the longest
+increasing prefix [3], but those maps do not reverse the full prefix in (3). We assign arbitrary prefix reversal,
+pancake graphs and distances, longest-increasing-prefix selection, elementary descent and peak counts, and
+generic finite-map bookkeeping no contribution credit.
+   There is also a sharp negative control. The rule called “First Sort” in Project Euler Problems 523–524
+moves the follower πd+1 to the front; it does not reverse the selected prefix.1 For example, it sends 1324 to
+2134, whereas (3) sends 1324 to 2314. We therefore do not use “First Sort” as a name for Fn .
+   For n ≥ 3, set
+(4)               In = {τ ∈ Sn : τ1 < τ2 },            Pn = {τ ∈ Sn : τ1 < τ2 > τ3 },                  Rn = {ι} ∪ Pn .
+Let µ(π) be the distance from π to the recurrent set of Fn . For τ ∈ In , let
+(5)                               r(τ ) = max{r : 1 ≤ r ≤ n − 1, τ2 > τ3 > · · · > τr+1 },
+where the condition is empty when r = 1.
+Theorem 1 (complete functional-graph atlas). For every n ≥ 3, the following hold.
+        (i) The image is exactly In , and |In | = n!/2.
+       (ii) The recurrent set is exactly Rn . The identity is fixed, while the n!/3 states in Pn form n!/6 disjoint
+            two-cycles under ρ3 .
+      (iii) Every tail has length at most two, and
+                                          n!                                n!                          n!
+(6)                       #{µ = 0} =         + 1,         #{µ = 1} =           ,      #{µ = 2} =           − 1.
+                                          3                                 2                           6
+
+      2020 Mathematics Subject Classification. 37E15, 05A05, 68R05.
+      Key words and phrases. finite dynamical system, permutation, prefix reversal, descent, functional graph, predecessor fibre.
+      1Official statements: https://projecteuler.net/problem=523 and https://projecteuler.net/problem=524.
+
+                                                                    1
+2                                                    ANONYMOUS
+
+
+    (iv) A target outside In has no predecessor. For τ ∈ In , the complete set of distinct predecessors is
+                                                                        (
+                                                                          {ι}, τ = ι,
+(7)                         Fn−1 (τ ) = {ρk (τ ) : 2 ≤ k ≤ r(τ ) + 1} ∪
+                                                                          ∅,   τ ̸= ι.
+           Consequently,
+(8)                                          |Fn−1 (τ )| = r(τ ) + 1{τ =ι} .
+       (v) For n ≥ 4, the maximum fibre size is n − 1. Its complete maximizing set is
+(9)                       Mn = {τ ∈ Sn : τ2 = n, τ2 > τ3 > · · · > τn },                 |Mn | = n − 1.
+           For n = 3, the maximum remains 2 = n − 1, but the identity is one additional maximizer beyond
+           the two states in (9).
+      The five conclusions can be read at a glance as follows.
+       object                           exact description
+       image                            τ1 < τ2 ; population n!/2
+       recurrent core                   {ι} ∪ {τ1 < τ2 > τ3 }; one fixed point and n!/6 two-cycles
+       tail populations                 n!/3 + 1, n!/2, n!/6 − 1 at depths 0, 1, 2
+       target fibre                     decreasing-run reversals in (7)
+       maximum, n ≥ 4                   size n − 1 at the n − 1 targets in (9)
+
+                                      2. Half-image and recurrent core
+Proof of Theorem 1(i). If d = d(π), the first two entries of Fn (π) are πd+1 < πd . Thus every nonfixed
+output begins with an ascent; so does ι. Hence im Fn ⊆ In .
+   Conversely, take τ ∈ In and put π = ρ2 (τ ). The first comparison of π is the descent τ2 > τ1 , so
+Fn (π) = ρ2 (π) = τ . This proves equality. Swapping the first two entries is a fixed-point-free involution
+pairing permutations in In with those beginning with a descent, and therefore |In | = n!/2.               □
+Proof of Theorem 1(ii). For τ ∈ Pn , the first descent is at position two. Hence Fn (τ ) = ρ3 (τ ). The new
+first three entries are τ3 < τ2 > τ1 , so the image is again in Pn ; applying ρ3 once more returns to τ . The
+two states are distinct because their first and third entries cannot agree.
+    Now let τ ∈ In \ Rn . Since it is neither a peak at two nor the identity, its first three entries increase and
+its first descent occurs at some d ≥ 3. The first three entries of Fn (τ ) are
+(10)                                              τd+1 < τd > τd−1 ,
+so Fn (τ ) ∈ Pn . Every state first enters In by part (i), and every image state then lies in or enters Rn . This
+proves that no other cycle exists.
+   Among the six relative orders of the first three entries, exactly two put their maximum in the middle.
+Each order occurs for n!/6 permutations, so |Pn | = n!/3. Pairing by ρ3 gives n!/6 two-cycles.                 □
+
+                                   3. Target fibres and exact tail census
+Lemma 2 (decreasing-run inverse). For τ ∈ In and 2 ≤ k ≤ n, the state ρk (τ ) has first descent at position
+k − 1 if and only if k ≤ r(τ ) + 1. These valid states are distinct as k varies.
+Proof. The first k entries of ρk (τ ) are
+(11)                                             τk , τk−1 , . . . , τ2 , τ1 .
+They increase through position k − 1 precisely when τ2 > τ3 > · · · > τk . The next comparison is then the
+descent τ2 > τ1 , which holds because τ ∈ In . This condition is equivalent to k ≤ r(τ ) + 1. Different k give
+different first entries τk , proving distinctness.                                                          □
+Proof of Theorem 1(iv). Part (i) excludes predecessors for targets outside In . Suppose τ ∈ In . Every
+nonfixed predecessor π has some first descent d and satisfies τ = ρd+1 (π); since prefix reversal is an involution,
+π = ρd+1 (τ ). Lemma 2 gives exactly the values 2 ≤ d + 1 ≤ r(τ ) + 1, and it also proves the converse for
+every such value. The only fixed state is ι, which contributes one further predecessor exactly when τ = ι.
+For that target, ρ2 (ι) is distinct from ι, so (8) follows.                                                      □
+Proof of Theorem 1(iii). Part (ii) gives the depth-zero population n!/3+1 and shows that every image state
+outside Rn has depth one. Such a state τ begins τ1 < τ2 < τ3 , so r(τ ) = 1. Lemma 2 says that its only
+predecessor is ρ2 (τ ), which begins with a descent and lies outside In . The map
+(12)                                In \ Rn −→ {π : µ(π) = 2},                   τ 7−→ ρ2 (τ )
+                                       FIRST-DESCENT PREFIX REVERSAL                                            3
+
+
+is therefore a bijection. Indeed, every depth-two state must map to a nonrecurrent image state, so the
+displayed construction also captures the reverse inclusion.
+   Using parts (i)–(ii), the depth-two population is
+                                                     n! n!      n!
+(13)                                 |In | − |Rn | =   −   −1=     − 1.
+                                                     2   3      6
+All remaining states have depth one, giving n! − (n!/3 + 1) − (n!/6 − 1) = n!/2. This proves (6) and the
+absence of longer tails.                                                                              □
+
+                                 4. Sharp fibres and the small boundaries
+Proof of Theorem 1(v). For a nonidentity image target, (8) is at most n − 1; the identity has fibre two.
+When n ≥ 4, equality can therefore occur only when r(τ ) = n − 1, or equivalently τ2 > τ3 > · · · > τn . Since
+also τ1 < τ2 , the value n cannot occupy the first position. It lies in the decreasing tail and must be its first,
+largest entry: τ2 = n. Conversely, every target in (9) has the full run and hence fibre n − 1. Choose τ1
+arbitrarily from [n − 1]; the remaining entries are then forced in decreasing order. This gives exactly n − 1
+maximizers.
+   At n = 3, the two full-run targets still have fibre two, and the identity’s extra fixed predecessor also gives
+fibre two. This is the stated exception.                                                                       □
+Proposition 3 (the n = 2, 3 atlases). At n = 2, the arrows are 12 7→ 12 and 21 7→ 12. Thus the image and
+recurrent set are both {12}, the depth populations are (1, 1), and F2−1 (12) = {12, 21} is the unique maximum
+fibre.
+   At n = 3, the full functional graph is
+(14)               123 7→ 123,       132 ↔ 231,      213 7→ 123,    312 7→ 132,   321 7→ 231.
+The image and recurrent populations are both three, the depth populations are (3, 3, 0), and each image target
+has fibre two. Thus the three maximizers are 123, 132, 231.
+Proof. Both displays follow by applying (3). Their inverse lists also agree with (7): the identity has its
+fixed predecessor in addition to its two-prefix reversal. This direct calculation isolates the only boundary
+not covered by the n ≥ 3 recurrent count and the only tie not covered uniformly by the n ≥ 4 maximizer
+statement.                                                                                                □
+
+                                  5. Exact controls and claim boundary
+   The paper-local verifier reconstructs the full map, all incoming sets, and all orbit coordinates through
+S9 . It makes 6,273,063 integer assertions, including complete checks of the five theorem contracts and
+the n = 2, 3 boundaries. It imports no scouting or earlier-paper code. These finite boxes are falsification
+pressure, not proofs or ownership evidence.
+   The nearest internal proof vocabulary is P122’s deterministic permutation block reversal and target-local
+inverse cuts; that vocabulary receives zero separation credit. The killed follower-to-front spike is the Project
+Euler rule, not (3). The retained owner-thin conjunction is the literal autonomous reversal together with
+its half-image, peak two-cycle core, depth census, and decreasing-run inverse atlas. A bounded search
+non-hit is not a novelty result. The gate remains owner_amber, and the external lifecycle remains
+hold_external.
+
+                                                  References
+1. William H. Gates and Christos H. Papadimitriou, Bounds for sorting by prefix reversal, Discrete Mathe-
+   matics 27 (1979), no. 1, 47–57.
+2. Cor Hurkens, Leo van Iersel, Judith Keijsper, Steven Kelk, Leen Stougie, and John Tromp, Prefix
+   reversals on binary and ternary strings, SIAM Journal on Discrete Mathematics 21 (2007), no. 3, 592–
+   611.
+3. Lara Pudwell and Rebecca Smith, Sorting via shuffles with a cut after the longest increasing prefix,
+   Theoretical Computer Science 1008 (2024), 114679.
+

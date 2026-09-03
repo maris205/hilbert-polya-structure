@@ -1,0 +1,350 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage{booktabs,array}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,
+  citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},
+  pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cW}{\mathcal W}
+\newcommand{\TV}{\mathrm{TV}}
+\newcommand{\supp}{\operatorname{supp}}
+
+\title[Projective-hyperplane toggling]{Random Projective-Hyperplane Toggling Is a\\
+Disjoint Union of Crown Walks}
+\author{Anonymous}
+\date{}
+\subjclass[2020]{60J10, 05C81, 11T71, 94B05}
+\keywords{finite Markov chain, projective hyperplane, simplex code,
+crown graph, Fourier spectrum, periodic convergence}
+
+\begin{document}
+
+\begin{abstract}
+Let $E=\F_2^d\setminus\{0\}$, and repeatedly toggle the points in the
+kernel of a uniformly sampled nonzero linear form.  We determine this chain
+on the full $2^{2^d-1}$-state subset carrier.  Its communicating classes are
+$2^{2^d-d-2}$ equal cosets, and every class is simple random walk on the
+crown graph $K_{2^d,2^d}$ with one perfect matching removed.  Fourier
+inversion gives the exact number of ordered histories between every pair of
+states at every time.  The resulting law converges within its
+parity-compatible half at exact total-variation distance
+$1/(2^d(2^d-1)^{t-1})$; it does not mix in ordinary total variation because
+the chain has period two.  On the whole carrier the only eigenvalues are
+$1,-1,\pm(2^d-1)^{-1}$, with all multiplicities explicit and no Jordan
+blocks.  Simplex-code, incidence-design, Cayley/Fourier, and crown-graph
+facts are treated as background.  The residual claim remains
+\textsc{owner\_amber}; external circulation is \textsc{hold\_external}.
+\end{abstract}
+
+\maketitle
+
+\section{Model, background boundary, and theorem}
+
+Fix $d\ge2$, put $V=\F_2^d$, $E=V\setminus\{0\}$, and write
+\begin{equation}\label{eq:parameters}
+             q=2^d,\qquad N=q-1,\qquad m=|E|=N.
+\end{equation}
+We identify a subset of $E$ with its incidence word in $\F_2^E$; addition
+of words is symmetric difference.  At each epoch choose, independently and
+uniformly, a nonzero form $\ell\in V^*\setminus\{0\}$ and update
+\begin{equation}\label{eq:update}
+ A\longmapsto A+ h_\ell,
+ \qquad h_\ell=\mathbf 1_{H_\ell},\qquad
+ H_\ell=\{x\in E:\ell(x)=0\}.
+\end{equation}
+Over $\F_2$, the nonzero forms index the projective hyperplanes without a
+scalar ambiguity.  The zero form is not sampled.  In particular,
+$|H_\ell|=2^{d-1}-1$ is odd.
+
+Projective systems and simplex codes are standard coding-theoretic objects
+\cite{KwiatkowskiPankovPasini2018}; binary codes, symmetric-difference
+designs, and projective hyperplane sections also have a direct established
+connection \cite{Tonchev1993}.  Walks involving generating sets of Abelian
+groups provide broader Markov-chain context \cite{DiaconisSaloffCoste1996}.
+Brown's hyperplane-chamber walks \cite{Brown2000} are a useful terminology
+control but have a different state space and update from \eqref{eq:update}.
+We assign simplex-code and incidence language, symmetric difference,
+Cayley-graph reduction, finite-abelian character calculus, the named crown
+graph, and its elementary spectrum no contribution credit.  The calculations
+below are included to make the literal conjunction self-contained.
+
+For $a\in V^*$ define the evaluation word
+\begin{equation}\label{eq:code}
+ c_a=(a(x))_{x\in E},\qquad
+ \cC=\{c_a:a\in V^*\},\qquad
+ \cW=\langle\one,\cC\rangle\le \F_2^E,
+\end{equation}
+where $\one$ is the all-one word.  Let $P$ be the transition operator of
+\eqref{eq:update} and set
+\begin{equation}\label{eq:K}
+                  K=2^{m-d-1}.
+\end{equation}
+
+\begin{theorem}[complete finite atlas]\label{thm:main}
+The following statements hold for every $d\ge2$.
+\begin{enumerate}[(i)]
+\item The closed communicating classes are precisely the $K$ cosets of
+$\cW$.  Each has $2q$ states, all states are recurrent, and the support on
+each class is the crown graph $K_{q,q}$ with one perfect matching deleted.
+The chain is simple random walk on that graph and has period two.
+
+\item For $t\ge0$ and $A,B\subseteq E$, the endpoint lies in the
+parity-compatible phase exactly when there is a unique $L\in V^*$ such that
+\begin{equation}\label{eq:endpoint-condition}
+             A+B=(t\bmod2)\one+c_L.
+\end{equation}
+When this condition holds, the number of ordered form histories is
+\begin{equation}\label{eq:history-count}
+ a_t(L)=\begin{cases}
+ q^{-1}\bigl(N^t+N(-1)^t\bigr),&L=0,\\
+ q^{-1}\bigl(N^t-(-1)^t\bigr),&L\ne0,
+ \end{cases}
+ \qquad P^t(A,B)=\dfrac{a_t(L)}{N^t}.
+\end{equation}
+A history exists exactly when \eqref{eq:endpoint-condition} holds and
+$a_t(L)>0$: this requires $L=0$ at $t=0$, $L\ne0$ at $t=1$, and permits
+every $L$ at $t\ge2$.  Outside \eqref{eq:endpoint-condition},
+$P^t(A,B)=0$.
+
+\item Put
+\begin{equation}\label{eq:phase}
+ \Phi_t(A)=A+(t\bmod2)\one+\cC
+\end{equation}
+and let $U_{\Phi_t(A)}$ be uniform on these $q$ states.  For $t\ge1$,
+\begin{equation}\label{eq:phase-tv}
+ \left\|P^t(A,\cdot)-U_{\Phi_t(A)}\right\|_{\TV}
+       =\frac{1}{qN^{t-1}}.
+\end{equation}
+If $\pi_{A+\cW}$ is uniform on the full communicating class, then
+\begin{equation}\label{eq:ordinary-tv}
+ \left\|P^t(A,\cdot)-\pi_{A+\cW}\right\|_{\TV}
+ =\begin{cases}
+ \frac12+\frac{1}{2q},&t=1,\\[1mm]
+ \frac12,&t\ge2.
+ \end{cases}
+\end{equation}
+Thus \eqref{eq:phase-tv} is parity-phase convergence, not ordinary mixing.
+
+\item On the entire $2^m$-state carrier, the eigenvalues and algebraic
+multiplicities are
+\begin{equation}\label{eq:spectrum-table}
+\begin{array}{c|cccc}
+\lambda&1&-1&1/N&-1/N\\ \hline
+\operatorname{mult}(\lambda)&K&K&NK&NK.
+\end{array}
+\end{equation}
+Boolean characters give a complete eigenbasis.  Hence there are no other
+eigenvalues and no nontrivial Jordan blocks.
+
+\item Within this family, the degree $N$ of one unlabelled component
+recovers $d=\log_2(N+1)$.  If the total state count is also supplied, then
+it recovers $K$ as the number of components.  This is not a characterization
+among arbitrary regular bipartite graphs.
+\end{enumerate}
+\end{theorem}
+
+For reference, the theorem's quantitative spine is
+\begin{center}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.25\linewidth}
+                >{\raggedright\arraybackslash}p{0.65\linewidth}}
+\toprule
+object & exact value \\
+\midrule
+class decomposition & $K=2^{m-d-1}$ cosets, each of size $2q$ \\
+component support & $K_{q,q}$ minus a matching; degree $N$; period $2$ \\
+endpoint kernel & \eqref{eq:endpoint-condition}--\eqref{eq:history-count} \\
+phase convergence & $1/(qN^{t-1})$ in total variation \\
+global spectrum & $1,-1,1/N,-1/N$ with multiplicities $K,K,NK,NK$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Code coordinates and crown components}
+
+\begin{lemma}\label{lem:code}
+The map $a\mapsto c_a$ is injective and linear, $\one\notin\cC$, and
+$\dim\cW=d+1$.  Moreover, the masks $h_\ell$, $\ell\ne0$, generate $\cW$.
+\end{lemma}
+
+\begin{proof}
+Linearity is coordinatewise.  If $a\ne0$, some nonzero $x$ satisfies
+$a(x)=1$, so $c_a\ne0$ and the evaluation map is injective.  A nonzero form
+has a kernel of dimension $d-1\ge1$; hence it cannot equal one on every
+nonzero vector.  Thus $\one\notin\cC$, proving $\dim\cW=d+1$.
+
+For every nonzero $\ell$ and $x\in E$,
+\begin{equation}\label{eq:mask-code}
+          h_\ell(x)=1+\ell(x),\qquad h_\ell=\one+c_\ell.
+\end{equation}
+Given $u\ne0$, choose $a\notin\{0,u\}$, which is possible because $d\ge2$,
+and put $b=a+u$.  Then $a,b$ are nonzero and
+$h_a+h_b=c_{a+b}=c_u$.  Finally $\one=h_u+c_u$, so the masks generate both
+$\cC$ and $\one$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)]
+A walk on an additive group remains in the coset of the subgroup generated
+by its increments.  Lemma~\ref{lem:code} identifies that subgroup as
+$\cW$, so its cosets are exactly the closed irreducible classes.  Their size
+is $2^{d+1}=2q$, and \eqref{eq:K} gives their number.  Finite closed
+irreducible classes contain only recurrent states.
+
+Fix a coset representative $R$.  The unique code coordinates give a
+bijection
+\begin{equation}\label{eq:crown-coordinates}
+ R+\epsilon\one+c_a\longleftrightarrow(\epsilon,a),
+ \qquad (\epsilon,a)\in\F_2\times V^*.
+\end{equation}
+By \eqref{eq:mask-code}, a step indexed by $\ell\ne0$ sends
+$(\epsilon,a)$ to $(\epsilon+1,a+\ell)$.  It therefore joins
+$(0,a)$ to every $(1,b)$ except $b=a$, exactly the crown graph
+$K_{q,q}$ minus its diagonal matching.  Every edge changes subset parity
+because every mask has odd weight.  Thus all returns have even length, while
+repeating any mask gives a two-step return.  The period is exactly two.
+\end{proof}
+
+\section{Ordered histories and the two TV comparisons}
+
+After the ordered choices $\ell_1,\ldots,\ell_t$, linearity in
+\eqref{eq:mask-code} gives the total increment
+\begin{equation}\label{eq:increment}
+ \sum_{r=1}^t h_{\ell_r}=(t\bmod2)\one+c_L,
+ \qquad L=\sum_{r=1}^t\ell_r.
+\end{equation}
+Injectivity of $a\mapsto c_a$ proves the endpoint condition and uniqueness
+in Theorem~\ref{thm:main}(ii).
+
+\begin{proof}[Proof of \eqref{eq:history-count}]
+The additive characters of $V^*$ give the exact number of ordered nonzero
+summands with sum $L$:
+\begin{equation}\label{eq:fourier-count}
+ a_t(L)=\frac1q\sum_{y\in V^{**}}(-1)^{y(L)}
+       \left(\sum_{\ell\ne0}(-1)^{y(\ell)}\right)^t.
+\end{equation}
+The inner sum is $N$ for the trivial character and $-1$ otherwise.  The sum
+of all nontrivial characters at $L$ is $N$ when $L=0$ and $-1$ otherwise.
+This proves \eqref{eq:history-count}, including $t=0$.  Division by the
+$N^t$ equiprobable histories proves the transition formula.  Directly in
+\eqref{eq:history-count}, $a_0(L)$ is positive only for $L=0$,
+$a_1(L)$ is positive only for $L\ne0$, and both displayed values are positive
+for every $L$ when $t\ge2$.  These are precisely the asserted support cases.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iii)]
+On the $q$-point set \eqref{eq:phase}, the probability deviations from
+$1/q$ are
+\begin{equation}\label{eq:deviations}
+ p_t(0)-\frac1q=\frac{(-1)^t}{qN^{t-1}},\qquad
+ p_t(L)-\frac1q=-\frac{(-1)^t}{qN^t}\quad(L\ne0).
+\end{equation}
+Half the sum of their absolute values is $1/(qN^{t-1})$, proving
+\eqref{eq:phase-tv}.
+
+The connected regular crown walk has the uniform stationary law on all
+$2q$ component vertices.  At $t=1$, one point in the occupied parity half
+has mass zero and the other $N$ points have mass $1/N$; direct subtraction
+from $1/(2q)$ gives the first line of \eqref{eq:ordinary-tv}.  For $t\ge2$,
+\eqref{eq:deviations} and $N\ge3$ show that every probability in the
+occupied half exceeds $1/(2q)$.  That half contributes total absolute
+deviation $1/2$, and the empty half contributes another $1/2$.  Dividing by
+two proves the second line.  In particular, the phase limit must not be
+reported as ordinary mixing.
+\end{proof}
+
+\section{Full-carrier spectrum and reconstruction}
+
+For $S\subseteq E$, define the Boolean character
+\begin{equation}\label{eq:boolean-character}
+ \chi_S(A)=(-1)^{|S\cap A|},\qquad
+ \sigma(S)=\sum_{x\in S}x\in V.
+\end{equation}
+These $2^m$ characters form an orthogonal basis on $\F_2^E$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iv)]
+Convolution by the uniform mask measure makes $\chi_S$ an eigenvector with
+eigenvalue
+\begin{equation}\label{eq:eigen-character}
+ \lambda_S=\frac1N\sum_{\ell\ne0}(-1)^{|S\cap H_\ell|}.
+\end{equation}
+Modulo two,
+$|S\cap H_\ell|=|S|+\ell(\sigma(S))$.  Character orthogonality therefore
+gives
+\begin{equation}\label{eq:eigen-cases}
+ \lambda_S=\begin{cases}
+ (-1)^{|S|},&\sigma(S)=0,\\
+ (-1)^{|S|+1}/N,&\sigma(S)\ne0.
+ \end{cases}
+\end{equation}
+
+It remains to count the four cases without hiding a rank assumption.  The
+linear map
+\begin{equation}\label{eq:parity-sum-map}
+ \F_2^E\longrightarrow\F_2\oplus V,\qquad
+ S\longmapsto (|S|\bmod2,\sigma(S))
+\end{equation}
+has columns $(1,x)$ for $x\in E$.  For any $u\ne0$, choose
+$x\notin\{0,u\}$; then $(1,x)+(1,x+u)=(0,u)$.  These vectors span
+$\{0\}\oplus V$, and $(1,x)+(0,x)=(1,0)$ supplies the remaining direction.
+The map is surjective, so every fibre has size
+$2^{m-d-1}=K$.  Sorting \eqref{eq:eigen-cases} by parity and by whether
+$\sigma(S)$ vanishes proves \eqref{eq:spectrum-table}.  The full character
+basis also proves diagonalizability, so no Jordan block is concealed by the
+repeated multiplicities.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(v)]
+The crown support has degree $N$ because the $N$ nonzero forms give distinct
+masks.  Hence $N+1=2^d$ recovers $d$.  A component has $2(N+1)=2q$ states;
+dividing the supplied total state count by this number recovers $K$.  The
+argument uses the promised family and makes no inverse claim for an arbitrary
+graph with the same degree and order.
+\end{proof}
+
+\section{Exact controls, exclusions, and status}
+
+The paper-local author-side verifier uses only integer and rational arithmetic
+and imports no scouting or prior-paper code.  It checks $1{,}095{,}999$ exact
+assertions: literal carriers, cosets, neighborhoods, and Boolean characters
+through $d=4$; ordered histories through five steps in those boxes; and the
+algebraic formulas through $d=8$ and sixteen steps.  This is falsification
+pressure, not a proof or an owner-search instrument.
+
+At $d=1$, the sole projective hyperplane is empty, so the chain is the
+identity rather than a crown walk.  Sampling the zero form for $d\ge2$ would
+add an empty mask; toggling hyperplane complements would replace the
+generators $\one+c_\ell$ by $c_\ell$.  Neither variant is covered.  No claim
+is made for nonbinary spaces.
+
+The remaining claim is deliberately owner-thin: the literal process plus
+the disjoint-crown conjugacy, exact labelled history kernel, parity-phase TV,
+and full-carrier multiplicity lift.  Generic Fourier and the finite-group
+proof shell already appear in the internal P145 line and receive zero
+separation credit.  A bounded literature non-hit is not a novelty result.
+The author-side gate is \textsc{owner\_amber}, and the external lifecycle is
+\textsc{hold\_external}.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

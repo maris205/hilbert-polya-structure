@@ -1,0 +1,165 @@
+RANDOM SINGLETON ISOLATION ON SET PARTITIONS
+ANONYMOUS
+
+Abstract. On a set partition of [n], choose a uniform label and split it from its block as a singleton.
+We determine this absorbing chain without recursion. The label maps are commuting idempotents, and
+the transition matrix is diagonalizable with eigenvalue s/n occurring once for every partition having s
+singleton blocks. For arbitrary initial block sizes we give the all-time absorption distribution as an all-butone coupon formula. More finely, we give every labelled source–target probability as an exact-support
+sum and count, for every target, both distinct predecessors and labelled predecessor/action pairs. The
+impossible n − 1 singleton layer and all small boundaries are included. Generic partition, coupon, and
+semigroup-walk ingredients receive zero contribution credit; status is OWNER_AMBER / HOLD_EXTERNAL.
+
+1. The chain and its subtraction boundary
+Let Pn be the set of partitions of [n] = {1, . . . , n}. For i ∈ [n], define Ei π by removing i from its block
+and installing {i} as a singleton; if {i} is already a block, do nothing. The chain has transition operator
+n
+
+(1)
+
+P =
+
+1X
+Ei ,
+n i=1
+
+where the same notation denotes the linearization on the basis Pn .
+Set partitions and restricted-growth encodings are classical. More specifically, Knopfmacher–Mansour–
+Wagner use the local operation of removing a marked element and making it a singleton in a bijective
+argument [2]; that local move receives zero credit here. Stark constructs different arborescence chains
+generating set partitions, including variants excluding singleton blocks [3]. Brown’s general work owns
+semigroup-walk diagonalization technology [1]. Accordingly, partition lattices, associated Bell numbers,
+coupon occupancy, commuting idempotents, and generic spectral technology are background. The retained object is the conjunction, for the literal fixed-n chain (1), of the complete spectrum, arbitrarysource absorption law, every-target kernel, and two inverse censuses. A literal or equivalent owner triggers
+withdrawal; the present bounded non-hit is not a novelty certificate.
+Write s(π) and b(π) for the numbers of singleton and total blocks. Let Dm count partitions of [m]
+with no singleton blocks, with D0 = 1 and D1 = 0. We use S(t, r) for a Stirling number of the second
+kind, including S(0, 0) = 1.
+Lemma 1.1 (support action). The maps
+Q Ei are commuting idempotents. Hence a label history acts only
+through its support A ⊆ [n], via EA = i∈A Ei . For an initial block B, the resulting blocks inside B are
+the singletons {i} for i ∈ A ∩ B, together with B \ A when that set has size at least two.
+Proof. Idempotence is immediate. If i ̸= j, extracting i and j from their old blocks leaves the same
+residual blocks in either order, including the case in which both labels started together. This proves
+commutation. The block description follows by extracting every label of A ∩ B.
+□
+The discrete partition b
+0 is absorbing. Every other state has a nonsingleton block; selecting a label in it
+strictly increases the singleton set, and no move can reverse that increase. Thus b
+0 is the unique recurrent
+state.
+2. Complete spectrum
+Theorem 2.1 (spectrum with multiplicities). The matrix P is diagonalizable over Q. For 0 ≤ s ≤ n − 2,
+the eigenvalue s/n has multiplicity
+ 
+n
+(2)
+ms =
+Dn−s .
+s
+The eigenvalue 1 has multiplicity one, and there is no eigenvalue (n − 1)/n. For n = 1, the spectrum
+consists only of 1.
+1
+
+2
+
+ANONYMOUS
+
+Proof. Each linearized Ei is diagonalizable because its minimal polynomial divides x(x−1). A commuting
+family of diagonalizable operators is simultaneously diagonalizable, so their average P is diagonalizable.
+Order Pn compatibly with refinement. Every Ei π either equals π or is strictly finer, so P is triangular.
+Exactly the s(π) choices of a singleton label fix π; its diagonal entry is therefore s(π)/n. To make
+a partition with exactly s singleton blocks, choose their labels and partition the complement with no
+singleton blocks, giving (2). The value s = n − 1 is impossible: the remaining label is also a singleton.
+At s = n there is only b
+0, proving all claims.
+□
+3. All-time laws
+Let the initial partition π have blocks B1 , . . . , Bk of sizes b1 , . . . , bk . For variables b1 , . . . , bk , let em (b)
+denote the mth elementary symmetric polynomial. Let T be the absorption epoch, with T = 0 when
+π=b
+0.
+Theorem 3.1 (all-but-one coupon law). For every integer t ≥ 0,
+k
+
+(3)
+
+1 X
+em (b1 , . . . , bk )(n − m)!S(t, n − m).
+Pr(T ≤ t) = t
+π
+n m=0
+
+Proof. Let M be the set of labels missing from the first t samples. By Lemma 1.1, absorption occurs
+exactly when |M ∩ Bj | ≤ 1 for every old block. The number of admissible missing sets of size m is
+em (b): choose m old blocks and one missing label in each. For fixed M , the histories having exactly the
+complementary support are the surjections [t] ↠ [n] \ M , counted by (n − m)!S(t, n − m). Summing and
+dividing by nt proves the formula, including t = 0.
+□
+We next retain the labels of the target. For M ⊆ [n], put
+(n − |M |)!S(t, n − |M |)
+.
+nt
+Given π and σ, call M admissible if, in every old block B of π, either
+
+(4)
+
+qt (M ) =
+
+(a) σ has one nonsingleton block C ⊆ B, all other labels of B are singleton, and M ∩ B = C; or
+(b) σ is discrete on B, and |M ∩ B| ≤ 1.
+If σ does not refine π, or has two nonsingleton blocks inside an old block, there are no admissible sets.
+Denote the resulting explicit family by Mπ (σ).
+Theorem 3.2 (every labelled target). For all t ≥ 0 and π, σ ∈ Pn ,
+X
+(5)
+P t (π, σ) =
+qt (M ).
+M ∈Mπ (σ)
+
+Consequently σ is eventually reachable from π exactly when it has the blockwise extraction form above. It is
+reachable at exact time t exactly when some admissible M also satisfies n−|M | = 0 = t or 1 ≤ n−|M | ≤ t.
+Proof. A history with missing set M has exact support [n] \ M , hence probability qt (M ). Lemma 1.1 says
+that its endpoint is σ precisely for the displayed blockwise alternatives. Distinct missing sets describe
+disjoint history events, proving (5). The positivity criterion is exactly the positivity criterion for S(t, n −
+|M |).
+□
+Formula (3) is recovered by summing (5) at b
+0, but its elementary-symmetric compression retains the
+geometry of every initial block size.
+4. Complete one-step inverse census
+Theorem 4.1 (states versus labelled actions). Fix a target σ with s = s(σ) and b = b(σ). If s = 0, it
+has no one-step predecessor. If s > 0, the number of distinct predecessor partitions is
+ 
+s
+,
+(6)
+1 + s(b − s) +
+2
+whereas the number of labelled pairs (ρ, i) satisfying Ei ρ = σ is
+(7)
+
+sb.
+
+RANDOM SINGLETON ISOLATION
+
+3
+
+Proof. The acted-on label must be singleton in the output, proving the zero case. For s > 0, a predecessor
+is either σ itself, merges one of its s singletons with one of its b − s nonsingleton blocks, or merges two
+singleton blocks. These disjoint constructions give (6). For a labelled pair, first choose the output
+singleton i. Its predecessor is either unchanged or obtained by merging {i} with any one of the other b − 1
+blocks: exactly b choices per i. This proves (7); when two singletons are merged the same predecessor
+state correctly supports two different actions.
+□
+For n = 1, the sole state has s = b = 1: it is recurrent, is already absorbed, and has one predecessor
+and one labelled action. Thus every formula above includes the smallest boundary. The proof is exact
+for all n; the accompanying exhaustive program only checks finite boxes and provides no empirical or
+novelty evidence.
+References
+[1] Kenneth S. Brown. Semigroups, rings, and Markov chains. Journal of Theoretical Probability, 13(3):
+871–938, 2000. doi: 10.1023/A:1007822931408.
+[2] Arnold Knopfmacher, Toufik Mansour, and Stephan Wagner. Records in set partitions. The Electronic
+Journal of Combinatorics, 17(1):R109, 2010. doi: 10.37236/381.
+[3] Dudley Stark. Markov chains generating random permutations and set partitions. Stochastic Processes
+and their Applications, 178:104483, 2024. doi: 10.1016/j.spa.2024.104483.
+
+
