@@ -2719,6 +2719,37 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C339--C343
+
+This round takes five separate theorem-scale steps across unrelated dynamics:
+a nonreversible Finsler geodesic flow, a periodic finite-gap Hamiltonian, a
+finite lamplighter Markov chain, a directed reinforced walk in random
+environment, and an Erlang-distributed memory flow.  These are five complete
+papers, not five installments of one result.
+
+- [C339 Katok--Zermelo two-geodesic Randers sphere](henon_katok_zermelo_randers_two_geodesic_route_a/README.md) · [paper PDF](henon_katok_zermelo_randers_two_geodesic_route_a/paper/main.pdf)
+- [C340 complete one-gap Lame spectrum](henon_lame_one_gap_floquet_spectrum_route_a/README.md) · [paper PDF](henon_lame_one_gap_floquet_spectrum_route_a/paper/main.pdf)
+- [C341 finite-cycle lamplighter full spectrum](henon_lamplighter_cycle_full_spectrum_route_a/README.md) · [paper PDF](henon_lamplighter_cycle_full_spectrum_route_a/paper/main.pdf)
+- [C342 directed reinforcement and Dirichlet environment](henon_directed_edge_reinforced_dirichlet_environment_route_a/README.md) · [paper PDF](henon_directed_edge_reinforced_dirichlet_environment_route_a/paper/main.pdf)
+- [C343 Erlang-2 distributed-delay stability atlas](henon_erlang2_distributed_delay_hopf_route_a/README.md) · [paper PDF](henon_erlang2_distributed_delay_hopf_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C339_C343.md),
+[batch plan](BATCH_PLAN_C339_C343.md), and
+[batch review](BATCH_REVIEW_C339_C343.md) for collision screening, theorem
+contracts, source ownership, author-swapped proof checks, exact release
+receipts and aggregate accounting.  The five strict tuples, in order
+C339--C343, are
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`.
+All five are `ROUTE_A_REJECTED`.  Route B is false for all five and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, root number, automorphy object, target divisor/counting law or
+functional equation, target zero match, Hilbert--Polya operator, or Route-B
+input is asserted.
+
 ## Route-A independent cross-subtype round C334--C338
 
 This round advances five unrelated mechanisms at theorem scale: an

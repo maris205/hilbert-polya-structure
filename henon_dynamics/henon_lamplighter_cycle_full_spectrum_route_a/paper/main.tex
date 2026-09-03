@@ -1,0 +1,158 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.77in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\pdfvariable suppressoptionalinfo 512\relax
+\pdfvariable trailerid {[<c341c341c341c341c341c341c341c341><c341c341c341c341c341c341c341c341>]}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\1}{\mathbf 1}
+\providecommand{\CRevisionRound}{2}
+\title{The Complete Spectrum of the Fair Lamplighter Chain on a Finite Cycle}
+\author{Source-local theorem package HCS-C341}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We diagonalize the fair switch--walk--switch chain on binary lamps over every
+finite cycle.  Walsh transformation turns switching into deletion projections;
+each nontrivial block is a direct sum of killed lazy paths.  This yields the
+full characteristic polynomial, eigenbasis, multiplicities, sharp spectral
+gap and exact boundary cases.  Finite enumeration is used only as a regression
+receipt.  No arithmetic target or Route-B claim is made.
+\end{abstract}
+
+\section{Frozen model}
+Write $C_n=\mathbb Z/n\mathbb Z$ and
+$\Omega_n=\mathbb Z_2^{C_n}\times C_n$.  For $n\ge3$ the base kernel $Q_n$
+stays with probability $1/2$ and moves to each neighbour with probability
+$1/4$.  At $n=2$ the two directed choices coalesce, so the other vertex has
+probability $1/2$; $Q_1=(1)$.  One chain step independently replaces the lamp
+at the departure site by a fair bit, applies $Q_n$, and independently replaces
+the arrival lamp by a fair bit.  Replacement, not deterministic toggling, is
+part of the definition.
+
+For $A\subseteq C_n$ define the lamp character
+$\chi_A(\eta)=(-1)^{\sum_{x\in A}\eta(x)}$ and the position projection
+$D_A(x,x)=\1_{\{x\notin A\}}$.  If $R_A$ denotes the multiset of positive
+lengths of the cyclic runs in $C_n\setminus A$, put
+\[
+c_{n,k}=\frac{1+\cos(2\pi k/n)}2,
+\qquad p_{\ell,j}=\frac12+\frac12\cos\frac{\pi j}{\ell+1}.
+\]
+
+\begin{theorem}[Full finite-cycle spectrum]\label{thm:main}
+The uniform law on $\Omega_n$ is the unique reversible stationary law and
+\[
+P_n\cong\bigoplus_{A\subseteq C_n}D_AQ_nD_A.             \tag{1}
+\]
+The empty-support block has eigenvalues $c_{n,k}$, $0\le k<n$.  Every
+$A\ne\varnothing$ block has $|A|$ zero eigenvalues and, for each
+$\ell\in R_A$, the simple eigenvalues $p_{\ell,j}$, $1\le j\le\ell$.
+Walsh characters times deleted-site deltas and path sines form a complete
+orthogonal eigenbasis.  Consequently
+\[
+\det(zI-P_n)=\det(zI-Q_n)
+\prod_{\varnothing\ne A\subseteq C_n}z^{|A|}
+\prod_{\ell\in R_A}\prod_{j=1}^{\ell}(z-p_{\ell,j}).    \tag{2}
+\]
+For $n\ge3$ the largest nonconstant eigenvalue has multiplicity $n$ and
+\[
+\lambda_{\mathrm{top}}=\frac{1+\cos(\pi/n)}2,\qquad
+\operatorname{gap}(P_n)=\frac{1-\cos(\pi/n)}2.           \tag{3}
+\]
+For every mean-zero $f$,
+$\|P_n^tf\|_2\le\lambda_{\mathrm{top}}^t\|f\|_2$, and equality is attained.
+At $n=2$ the gap is $1/2$; at $n=1$ the spectrum is $\{1,0\}$ and the gap is
+one.
+\end{theorem}
+
+\section{Walsh blocks}
+Let $S$ be one fair switch.  It is conditional expectation over the current
+lamp, hence an orthogonal projection in uniform $L^2$.  The symmetric kernel
+$Q_n$ is self-adjoint, so $P_n=SQ_nS$ is self-adjoint and preserves constants.
+A positive-probability path can visit every site and choose prescribed switch
+outcomes; the finite chain is irreducible, proving uniqueness.
+
+On $\chi_A(\eta)g(x)$, fair averaging gives
+\[
+S(\chi_Ag)=\chi_AD_Ag:
+\]
+the character is unchanged when $x\notin A$ and has mean zero when $x\in A$.
+The position move leaves the lamp character fixed.  Thus switch, move and
+switch acts as $D_AQ_nD_A$, proving (1).
+
+\section{Path diagonalization and completeness}
+For $A=\varnothing$, cyclic Fourier vectors give $c_{n,k}$.  If
+$A\ne\varnothing$, the coordinates in $A$ are killed and supply $|A|$ zero
+vectors.  Every remaining run of length $\ell$ carries the tridiagonal matrix
+with diagonal $1/2$ and neighbouring entries $1/4$.  With Dirichlet endpoints,
+\[
+u_j(r)=\sin\frac{\pi jr}{\ell+1},\qquad 1\le r\le\ell,
+\]
+satisfies
+\[
+\tfrac14u_j(r-1)+\tfrac12u_j(r)+\tfrac14u_j(r+1)
+=p_{\ell,j}u_j(r).
+\]
+Discrete sine orthogonality gives $\ell$ vectors on each run.  Together with
+the deleted deltas there are $|A|+\sum_{\ell\in R_A}\ell=n$ vectors in sector
+$A$; distinct sectors are Walsh-orthogonal.  The basis and product formula
+(2) follow.
+
+\ifnum\CRevisionRound>0
+\section{The sharp mode and small cycles}
+All eigenvalues are nonnegative.  The empty sector's largest value below one
+is $(1+\cos(2\pi/n))/2$.  A nonempty support leaves runs of length at most
+$n-1$, while $(1+\cos(\pi/(\ell+1)))/2$ increases strictly with $\ell$.
+The maximum below one is therefore (3), attained exactly by singleton supports.
+Each corresponding path top eigenvalue is simple, so its multiplicity is
+exactly $n$.  The spectral theorem gives the stated contraction and an
+eigenfunction gives equality.
+
+For $n=2$, the empty block is $\{1,0\}$, each singleton-support block is
+$\{1/2,0\}$, and the full-support block is zero.  For $n=1$, the position is
+fixed and the fair lamp replacement has spectrum $\{1,0\}$.  These computations
+also show why directed-neighbour multiplicities must be coalesced before
+forming $Q_2$.
+
+\paragraph{Round-one proof strengthening.}
+The previous paragraphs add the complete eigenbasis, the uniqueness of the
+top-mode owner, its multiplicity, sharpness, and both degenerate-cycle cases.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact evidence and claim firewall}
+The canonical evidence enumerates all $2046$ Walsh blocks for $1\le n\le10$.
+It records cyclic runs and rational monic continuant factors, while full exact
+kernels through $n=6$ independently check stochasticity, symmetry and two
+spectral traces.  A producer-independent checker reconstructs every coordinate;
+separate SymPy, isolated byte-replay and repaired-hash mutation lanes test the
+implementation.  These finite checks do not prove the universal theorem.
+
+The nearest retained systems are independent hypercube flips (C171), random
+transpositions (C183), chamber walks (C192), and Wilson cycle popping (C338).
+None owns a moving lamp field or (1).  The finite self-adjoint contraction is
+only a source-side formal hint.  We claim no arithmetic local data, target
+Euler factor, root number, automorphy, target divisor, target zero match,
+Hilbert--P\'olya operator, or Route-B readiness.
+
+\paragraph{Round-two release strengthening.}
+This revision binds the finite receipt, collision boundary, sources and Route-A
+scope to the proved theorem.
+\fi
+
+\section{Source lineage}
+The general switch--walk--switch/percolation correspondence is due to Lehner,
+Neuhauser and Woess, \emph{Math. Ann.} 342 (2008), 69--89,
+\href{https://doi.org/10.1007/s00208-008-0222-7}{doi:10.1007/s00208-008-0222-7}.
+Graph-level eigenspaces were developed by Lehner, \emph{Proc. AMS} 137 (2009),
+2631--2637,
+\href{https://doi.org/10.1090/S0002-9939-09-09869-4}{doi:10.1090/S0002-9939-09-09869-4}.
+The present finite-cycle theorem is a self-contained specialization and makes
+no priority claim for that general theory.
+
+\end{document}

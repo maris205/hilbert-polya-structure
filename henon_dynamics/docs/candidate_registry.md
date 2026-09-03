@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C339--HCS-C343 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`e2d94f886963cbe3d42b83f6ef542413a163d3a4`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C339 | Irrational rotational Katok--Zermelo navigation on the round two-sphere has exactly two oriented prime closed geodesics, with distinct exact periods, constant flag curvature, explicit Jacobi/Poincare multipliers and determinant, plus the complete rational-wind, zero-wind, sign and convexity boundary atlas. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Katok--Zermelo package](../henon_katok_zermelo_randers_two_geodesic_route_a/) · [paper PDF](../henon_katok_zermelo_randers_two_geodesic_route_a/paper/main.pdf) |
+| HCS-C340 | For `m=k^2` in `(0,1)`, the degree-one Lame Hamiltonian has purely absolutely continuous spectrum `[m,1] union [1+m,infinity)`, three exact periodic/antiperiodic band edges, a commuting third-order operator and cubic spectral curve proving that precisely one finite gap is open, with free and soliton limits closed. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [one-gap Lame package](../henon_lame_one_gap_floquet_spectrum_route_a/) · [paper PDF](../henon_lame_one_gap_floquet_spectrum_route_a/paper/main.pdf) |
+| HCS-C341 | Fair switch--walk--switch lamplighter dynamics on every finite cycle has a complete Walsh decomposition into the intact lazy cycle and killed-path blocks, yielding every eigenvalue and multiplicity, a full characteristic polynomial/eigenbasis and the sharp all-size gap with all small-cycle conventions. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [lamplighter package](../henon_lamplighter_cycle_full_spectrum_route_a/) · [paper PDF](../henon_lamplighter_cycle_full_spectrum_route_a/paper/main.pdf) |
+| HCS-C342 | Directed linear edge reinforcement on every finite strongly connected labelled multigraph with a nonempty outgoing row at every vertex has an exact rising-factorial path law equal to an independent-row Dirichlet random environment, a complete conjugate posterior/predictive theorem and almost-sure transition and occupation limits. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [directed reinforcement package](../henon_directed_edge_reinforced_dirichlet_environment_route_a/) · [paper PDF](../henon_directed_edge_reinforced_dirichlet_environment_route_a/paper/main.pdf) |
+| HCS-C343 | Erlang-2 distributed negative feedback has an exact compatible three-state linear-chain realization, a sharp Routh stability wall, explicit transverse imaginary crossing, exact unstable-root count and a complete discriminant/Jordan/semigroup atlas without a nonlinear periodic-orbit claim. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Erlang-2 delay package](../henon_erlang2_distributed_delay_hopf_route_a/) · [paper PDF](../henon_erlang2_distributed_delay_hopf_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and have Route B false.  Their owners are
+respectively a nonreversible Finsler geodesic flow, a periodic finite-gap
+Schrodinger operator, a finite wreath-product Markov chain, a reinforced path
+process in a random environment, and a distributed-memory linear flow.  No
+target local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes, cross-review repairs and
+accounting are recorded in
+[BATCH_REVIEW_C339_C343.md](../BATCH_REVIEW_C339_C343.md).
+
 ## HCS-C334--HCS-C338 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

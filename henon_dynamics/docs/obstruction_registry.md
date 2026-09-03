@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C339--HCS-C343 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O323 | HCS-C339 Katok--Zermelo periods and Poincare determinants as arithmetic orbit data | proved continuous-wind and source-geodesic obstruction | The wind parameter is freely chosen and the irrational owner has only two oriented prime geodesics; their periods vary continuously with wind and have no rational-prime taxonomy or logarithmic-prime roof.  The source Poincare determinant is not a target determinant or divisor. | Navigation factorization, constant flag curvature, the exact irrational two-geodesic ledger, periods, Jacobi multipliers/determinants and every rational, zero-wind, sign and convexity boundary survive. | ../henon_katok_zermelo_randers_two_geodesic_route_a/THEOREM_PACKAGE.md |
+| HEN-O324 | HCS-C340 Lame band curve as a target spectral divisor | proved source-periodic-Hamiltonian obstruction | The modulus is a continuous source parameter and the cubic finite-gap curve belongs to the expressly defined periodic Schrodinger operator.  Its bands and gap neither encode rational primes nor match a target divisor, functional equation or Hilbert--Polya spectrum. | The complete two-band/one-gap spectrum, pure absolute continuity, all three band edges, commuting operator relation and free/soliton limits survive. | ../henon_lame_one_gap_floquet_spectrum_route_a/THEOREM_PACKAGE.md |
+| HEN-O325 | HCS-C341 lamp supports and killed-path modes as arithmetic primitive orbits | proved finite-Markov and spectral-block obstruction | Lamp subsets index Walsh sectors, not rational primes or isolated deterministic primitive cycles.  The finite characteristic polynomial and self-adjoint Markov spectrum are source transition data, not a primitive-orbit zeta, target determinant or same-clock unitary quantization. | The complete Walsh block decomposition, every eigenvalue/multiplicity and eigenvector, characteristic polynomial, sharp gap and small-cycle boundaries survive. | ../henon_lamplighter_cycle_full_spectrum_route_a/THEOREM_PACKAGE.md |
+| HEN-O326 | HCS-C342 Dirichlet transition rows and reinforcement counts as arithmetic local data | proved random-environment and path-memory obstruction | Positive arc weights are freely chosen prior parameters, while traversal counts are stochastic path history rather than deterministic prime-labelled orbit repetitions.  Dirichlet beta ratios and occupation limits supply no target Euler factor, divisor, zero set or logarithmic-prime clock. | Exact path probabilities, independent-row Dirichlet mixture, posterior prediction, almost-sure row/vertex/arc limits, moments and all labelled-arc/support boundaries survive. | ../henon_directed_edge_reinforced_dirichlet_environment_route_a/THEOREM_PACKAGE.md |
+| HEN-O327 | HCS-C343 delay roots and Hopf threshold as an arithmetic spectral owner | proved continuous-memory and dissipative-root obstruction | The feedback and memory rates are continuous source parameters; cubic characteristic roots are decay/growth modes of a dissipative linear chain, not rational-prime data, target zeros, a primitive-orbit determinant or a Hilbert--Polya operator.  A linear imaginary crossing does not create a nonlinear orbit ledger. | Exact memory-chain equivalence, sharp Routh wall, crossing frequency/transversality, unstable-root count, repeated-root/Jordan classification and all semigroup/boundary formulas survive. | ../henon_erlang2_distributed_delay_hopf_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under longitude reflection and geodesic
+orientation bookkeeping, Lame translations and modulus-sign gauge, cycle
+relabeling, directed multigraph relabeling with parallel-arc labels retained,
+and positive changes of time units in the delay equation.  They do not license
+Route B.  The common scope firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, and
+every surviving theorem is source-local with a content-addressed evidence/PDF
+release ledger.
+
 ## HCS-C334--HCS-C338 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
