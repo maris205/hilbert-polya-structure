@@ -2,11 +2,11 @@
 
 Date: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAITING SCHOLAR STAGE-4 DECISION**.
+Current controlling state: **ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME**.
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `stage3_review_outputs_complete_awaiting_scholar_decision` |
+| Pipeline global state | `stage4_complete_awaiting_scholar_confirmation_before_stage3_prime` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -25,7 +25,7 @@ Current controlling state: **ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAI
 | Phase D originality | `PASS`; 21/68 paragraphs, 10/10 major sections; 19 `ORIGINAL`, 2 bounded `PARAPHRASE` |
 | Phase E claims | `PASS_SELECTED_POPULATION`; 126 registered, 74 selected, 108 evidence tuples, 74/74 `VERIFIED`; 108/108 anchorless |
 | Seven failure modes | `CLEAR` 7/7; `SUSPECTED` 0; `INSUFFICIENT EVIDENCE` 0 |
-| Official E6 | `skipped_no_revision_evidence`; bundle hash `null`; findings 0 |
+| Official E6 | Stage-4 Revision-Evidence Bundle present at SHA-256 `3c8fb5ae0bbe9b597579d41657a312da1f081068ac9e977c6df38f80337265a9`; Stage-4.5 E6 `NOT_INVOKED`; bounded semantic audit `PASS` is not official E6 |
 | New retrieval / scientific execution | `NO` / `no_experiments_declared`; scientific executions 0 |
 | Canonical scientific-result refresh | `NO` |
 | Novelty assessment | No priority/novelty claim; bounded Phase-D public-Web/local-corpus originality screen only |
@@ -38,9 +38,9 @@ Current controlling state: **ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAI
 | Stage 3 Phase 0 | `COMPLETE`; scholar-confirmed; 4 dynamic cards + 1 fixed DA; validation `PASS` |
 | Stage 3 substantive review | `COMPLETE`; Phase 1/2 reports `5/5`; editorial decision `Major Revision`; source weaknesses `15`; roadmap items `13 = 7 must + 6 should` |
 | Stage 3 final validation | `PASS`; `../../../BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json`; SHA-256 `808d0a89b27bf538b9a8134225e824d1d17952e4ed5df86d4ed7fe1b5f694c7b` |
-| Stage 4 | `authorized=false` |
-| Stage-3 mutation/Route boundary | manuscript/bibliography/PDF edited `false`; scientific executions `0`; Route advancement `NONE` |
-| Next state | `AWAITING_EXPLICIT_SCHOLAR_STAGE3_DECISION_AND_STAGE4_AUTHORIZATION` |
+| Stage 4 | `COMPLETE WITHIN EXACT AUTHORIZATION`; 13/13 items; 13 operations; 8 RESOLVED + 5 DELIBERATE_LIMITATION; 12/126 affected E1; +1,400 words; 17-page clean preview |
+| Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
+| Next legal transition | `AWAITING_SCHOLAR_CONFIRMATION_BEFORE_STAGE3_PRIME`; Stage 3 prime, Stage 4.5, and Stage 5 not started |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability
@@ -60,3 +60,19 @@ Stage-2.5 PASS certifies the declared, denominator-bounded integrity checks for
 the frozen canonical package. It does not certify theorem correctness,
 passage-level support, global originality, scientific implementation, or Route
 promotion, and it does not itself authorize Stage 3.
+
+## Current Stage-4 completion bindings
+
+| Artifact | SHA-256 |
+|---|---|
+| [Per-paper completion report](stage4_completion_report.md) | `803f72540e4fe9cc1929bc2d181e508146a21283fb1f8c98921d69ecfee68ffe` |
+| [Bounded semantic audit](stage4_unregistered_claim_drift_audit.md) | `6eaad8566986e8ad62bd88f320c58585874c7c3d05090a03f38fefe0c547017c` |
+| [Route crosswalk](stage4_route_crosswalk.md) | `0434982b38bf658bfd808469671431f089140850ceb2c01875539ef997f942cf` |
+| [Revision-Evidence Bundle](stage4_revision_evidence_bundle.json) | `3c8fb5ae0bbe9b597579d41657a312da1f081068ac9e977c6df38f80337265a9` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md) | `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json) | `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd` |
+
+The ClaimIntent replay is `0/0` vacuous and not a clean certificate. Completion
+rests on the bounded changed-operation/E1 semantic audit. Route A A1 preparation with formal A0 prohibited/confounded; formal tuple `UNASSIGNED`; Route B uninvoked.
+Canonical bytes and scientific trees are unchanged. Stage 3 prime has not
+started.

@@ -2,15 +2,14 @@
 
 ## Current status
 
-**ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAITING SCHOLAR STAGE-4 DECISION.**
-The confirmed five-seat panel completed 5/5 Phase-1 precommitments, 5/5
-Phase-2 reports, mechanical synthesis, typed provenance, and an anchored
-roadmap. The decision is **Major Revision**: 13 source weaknesses became 12
-proposal-only items (7 must-fix, 5 should-fix), with no fatal block or DA
-Critical item. No scientific execution, result refresh, Route tuple, or Route-B
-invocation occurred.
+**ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME.**
 
-## Current paper and Stage-2.5 integrity package
+12/12 items; 12 operations; 8 RESOLVED + 4 DELIBERATE_LIMITATION; 9/98 affected E1; +437 words; 14-page clean preview. The final bounded semantic audit and clean preview pass.
+Canonical manuscript, bibliography, PDF, scientific results, initial dynamical
+system, and Route coordinates remain frozen. Stage 3 prime and Stage 4.5 have
+not started.
+
+## Current paper and revision package
 
 - [complete manuscript](paper/manuscript.tex)
 - [compiled PDF](paper/paper.pdf) -- 13 pages
@@ -28,8 +27,19 @@ invocation occurred.
 - [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
 - [Stage-3 Schema-6 review package](notes/stage3_review_package.json)
 - [Stage-3 completion report](notes/stage3_completion_report.md)
+- [Stage-4 completion report](notes/stage4_completion_report.md)
+- [Stage-4 revised anchored draft](notes/stage4_revision_round1.tex) and [clean preview PDF](notes/stage4_revision_round1.pdf)
+- [Authorized patch](notes/stage4_revision_patch_round1.json) and [apply report](notes/stage4_revision_round1.tex.apply-report.json)
+- [Response to reviewers](notes/stage4_response_to_reviewers_round1.md)
+- [Revision-Evidence Bundle](notes/stage4_revision_evidence_bundle.json) and [bundle validation](notes/stage4_bundle_validation_receipt.json)
+- [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
+- [Pipeline state](notes/pipeline_state.md)
 
 ## 结论概要
+
+**Stage-4 landing result.** Stage 4 gives the two modulus schedules, both iterated-limit orders, majorant/interchange obligations, and a typed R+/R0/factor comparator table. Every formal object or candidate identity remains `UNDEFINED`, `UNPROVED`, or `NOT_EVALUABLE`; no obstruction or factor result is claimed. The disposition is
+`12/12 items; 12 operations; 8 RESOLVED + 4 DELIBERATE_LIMITATION; 9/98 affected E1; +437 words; 14-page clean preview`. This is explicit manuscript/certificate progress,
+not a scientific execution or Route promotion.
 
 完整论文在固定 1/N 时间与 1/N^3 对数重整化下，把高内容与零内容因子列为最先的否证目标；content-one 仅为附条件的次级分支。形式对象、面板、尾界和极限均未构造或执行。
 
@@ -54,9 +64,18 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `FORMAL_ROUTE_A_TUPLE=UNASSIGNED`, `POSITIVE_ARITHMETIC_A2=0`,
 `ROUTE_B_INVOCATION=false`, `STAGE2_5_INTEGRITY=PASS`,
 `STAGE3_ENTRY_AUTHORIZED=true`, `STAGE3_REVIEW_OUTPUTS=COMPLETE`,
-`STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, and `STAGE4_AUTHORIZED=false`.
+`STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, `STAGE4_AUTHORIZED=true`,
+`STAGE4_COMPLETE=true`, and `STAGE3_PRIME_STARTED=false`.
 
 ## Traceability
+
+### Current Stage-4 bindings
+
+- [Per-paper completion report](notes/stage4_completion_report.md): SHA-256 `f7dc5ab5465f63256809576c5d7ca17a977b56d238c9eef6d7d9d9808e38c84d`
+- [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md): SHA-256 `609f5b056034ceb9bd28ea2b5f95aaeaa52e0a4cb581a3c3a6b4be064191a949`
+- [Route crosswalk](notes/stage4_route_crosswalk.md): SHA-256 `570b8d7307913495053c69560ccd04e0d37ab6dbcd99fbe53248b81db296fcda`
+- [Batch Stage-4 report](../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md): SHA-256 `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a`
+- [Batch Stage-4 receipt](../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json): SHA-256 `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd`
 
 - Stage-1 handoff: `BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md`
 - Stage-2 input freeze: `BATCH_ROUND10_STAGE2_INPUT_FREEZE.json`
@@ -69,7 +88,7 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 
 All detailed Stage-1 research, source, review, and revision artifacts remain
 frozen in `notes/`; they were not replaced by this current-status summary.
-Official E6 remains `skipped_no_revision_evidence`; the project-local repair
-comparison is supplementary and is not an official ARS Revision-Evidence
-Bundle. The next legal transition is explicit scholar adjudication and Stage-4
-authorization; the roadmap itself grants no write authority.
+A schema-compatible Stage-4 Revision-Evidence Bundle now exists, but official
+Stage-4.5 E6 has not been invoked. The bounded Stage-4 semantic audit is not an
+official E6 verdict. The next legal transition is scholar confirmation before
+Stage 3 prime; Stage 4.5 and Stage 5 remain unstarted and unauthorized.

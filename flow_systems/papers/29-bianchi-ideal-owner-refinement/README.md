@@ -2,14 +2,12 @@
 
 ## Current status
 
-**ARS STAGE 3 REVIEW COMPLETE / MAJOR REVISION / AWAITING SCHOLAR STAGE-4 DECISION.**
+**ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME.**
 
-The confirmed five-seat panel completed 5/5 manuscript-blind Phase-1
-precommitments, 5/5 manuscript-visible Phase-2 reports, mechanical synthesis,
-typed provenance, and an anchored roadmap. The decision is **Major Revision**:
-12 source weaknesses became 11 proposal-only items (5 must-fix, 6 should-fix),
-with no fatal block or DA Critical item. Canonical manuscript, bibliography,
-PDF, scientific results, and Route coordinates remain frozen.
+11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview. The final bounded semantic audit and clean preview pass.
+Canonical manuscript, bibliography, PDF, scientific results, initial dynamical
+system, and Route coordinates remain frozen. Stage 3 prime and Stage 4.5 have
+not started.
 
 ## Current paper package
 
@@ -29,9 +27,19 @@ PDF, scientific results, and Route coordinates remain frozen.
 - [Stage-3 non-ranking revision roadmap](notes/stage3_revision_roadmap.json)
 - [Stage-3 Schema-6 review package](notes/stage3_review_package.json)
 - [Stage-3 completion report](notes/stage3_completion_report.md)
+- [Stage-4 completion report](notes/stage4_completion_report.md)
+- [Stage-4 revised anchored draft](notes/stage4_revision_round1.tex) and [clean preview PDF](notes/stage4_revision_round1.pdf)
+- [Authorized patch](notes/stage4_revision_patch_round1.json) and [apply report](notes/stage4_revision_round1.tex.apply-report.json)
+- [Response to reviewers](notes/stage4_response_to_reviewers_round1.md)
+- [Revision-Evidence Bundle](notes/stage4_revision_evidence_bundle.json) and [bundle validation](notes/stage4_bundle_validation_receipt.json)
+- [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
+
+**Stage-4 landing result.** Stage 4 makes the five prospective Gate-M/Gate-Q interfaces, exact inversion/conjugation laws, failure precedence, reader map, and three control interpretations explicit. No owner law, complete quotient, executed fixture, score, or practical-performance result is claimed. The disposition is
+`11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview`. This is explicit manuscript/certificate progress,
+not a scientific execution or Route promotion.
 
 本篇取得的是设计／方法接口上的明确进展：在“一个 primitive owner 必须落到一个字面 Gaussian prime ideal”这一 deliberately strict codomain 下，把性能无关的 mechanism admissibility（Gate M）与完整 primitive-unoriented quotient（Gate Q）拆成两个独立、可证伪、可回放的证书关卡。Stage 2.5 还关闭了 P29-S15 的书目 editor 修复；该修复不改变科学内容。
 
@@ -76,16 +84,24 @@ global originality, priority, or scientific-novelty certificate.
 ## Experiment, E6, and roadmap status
 
 - Experiment declaration: `status=no_experiments_declared`, declared by the scholar; `experiment_provenance=[]`; scientific executions `0`; canonical scientific-result refreshes `0`.
-- Official ARS E6: `status=skipped_no_revision_evidence` and `revision_evidence_bundle_sha256=null`.  Project-local repair lineage is not an ARS Revision-Evidence Bundle.
+- Official ARS E6: a schema-compatible Revision-Evidence Bundle now exists at SHA-256 `27b2d57da72eb475fa4fc01bac1dc98c5e59b4095496cff8c65517d9a8018634`, but Stage-4.5 E6 has **not** been invoked. The Stage-4 bounded semantic PASS is not an official E6 verdict.
 - Frozen dynamical subtype: torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic arclength; primitive loxodromic inversion-paired owner; one literal nonzero Gaussian prime ideal.
 - Route position: Route A `A0/A1` foundation/interface preparation; formal Route-A tuples `0` (`UNASSIGNED`); positive arithmetic A2 results `0`; A3/A4 not attempted; Route B not invoked and closed.
-- Stage-3 review: `Major Revision`; 12/12 source weaknesses transported into 11 proposal-only roadmap items; Stage 4 `authorized=false`.
+- Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview; next checkpoint is scholar confirmation before Stage 3 prime.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
 correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
+
+### Current Stage-4 bindings
+
+- [Per-paper completion report](notes/stage4_completion_report.md): SHA-256 `ffe5c4808f28e4b2fcf745d849a2343c0c6b4e51403c8962db836008a3a180c7`
+- [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md): SHA-256 `3aa89725bb9cf88281e1d87a2f6d96bd7a067e8898c2a139066e7c532f7358f5`
+- [Route crosswalk](notes/stage4_route_crosswalk.md): SHA-256 `3946edf4f1f2ffc52343f9e9471b81bef590c59bd084ad5db049b6cb89da9445`
+- [Batch Stage-4 report](../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md): SHA-256 `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a`
+- [Batch Stage-4 receipt](../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json): SHA-256 `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd`
 
 | Artifact | SHA-256 |
 |---|---|
