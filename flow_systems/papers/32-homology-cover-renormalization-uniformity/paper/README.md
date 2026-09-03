@@ -3,10 +3,10 @@
 Package note: this directory is the immutable canonical Stage-2.5 manuscript
 package; its Phase-0 wording below is historical. The authoritative current
 state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md):
-**`stage3_prime_round1_aborted_awaiting_round2_authorization`.** Stage 3′ Round
-1 failed closed at `phase1_lint_failed`; no decision was signed or emitted, and
-fresh Round 2 awaits a new user `确认`. Canonical manuscript/PDF/bibliography
-bytes remain unchanged.
+**`stage3_prime_round2_aborted_awaiting_round3_authorization`.** Stage 3′ Round
+2 failed closed at `phase2a_lint_failed`; no decision was signed or emitted,
+and a fresh Round 3 requires explicit authorization. Canonical
+manuscript/PDF/bibliography bytes remain unchanged.
 
 ## Deliverables
 
@@ -17,7 +17,7 @@ bytes remain unchanged.
 - [`stage2_5_integrity_report.md`](../notes/stage2_5_integrity_report.md) and [`stage2_5_material_passport.json`](../notes/stage2_5_material_passport.json) -- final per-paper Stage-2.5 report and Schema-9 passport.
 - [`stage3_phase0_field_analysis.md`](../notes/stage3_phase0_field_analysis.md) and [`stage3_review_baseline.json`](../notes/stage3_review_baseline.json) -- current Stage-3 Phase-0 configuration and immutable target.
 
-## Stage 3′ Round-1 controlling outcome
+## Historical Stage 3′ Round-1 outcome
 
 Recorded and audited aggregates both remain 6 FULL / 5 PARTIAL / 1 NOT, but
 `REV-P32-R1-W2` is a false FULL and `REV-P32-R3-W1` is a false PARTIAL. Phase-1
@@ -31,6 +31,19 @@ role-separated but same-family and are not independent error processes.
 | [`stage3_prime_round1_verification_report.md`](../notes/stage3_prime_round1_verification_report.md) | `deab1d001c3b6a183a94c371ecb8ddf9494147e23d86ba9dcc0ff1ff22aebb85` |
 | [`stage3_prime_round1_checker_receipt.json`](../notes/stage3_prime_round1_checker_receipt.json) | `4033a2346ba98d56f37176523e07f682115838e07e6b73c0395e2020ed4c82f6` |
 | [`stage3_prime_round1_abort_record.json`](../notes/stage3_prime_round1_abort_record.json) | `b11516b0046dfb0a8c33d18090df33e0191cf1e9a2f8efe68df189116e27a941` |
+
+## Current Stage 3′ Round-2 controlling outcome
+
+The committed 7 FULL / 5 PARTIAL / 0 other record is controlled as 6 FULL / 6
+PARTIAL / 0 other because `REV-P32-DA-M1` is a false FULL. The no-retry semantic
+gate therefore aborted before the response letter, Phase 2B, traceability,
+official checker, or decision.
+
+| Artifact | SHA-256 |
+|---|---|
+| [`stage3_prime_round2_verification_report.md`](../notes/stage3_prime_round2_verification_report.md) | `7039eaba478ee048ff7c1000ff343f0b39c61ca8c05937ef14f57bd00584ae6a` |
+| [`stage3_prime_round2_checker_receipt.json`](../notes/stage3_prime_round2_checker_receipt.json) | `d145a433e299b2b63cf4308a2af2f6b66a432732e381dd2a41e5de7a5c17a892` |
+| [`stage3_prime_round2_abort_record.json`](../notes/stage3_prime_round2_abort_record.json) | `0768572cc545275f9fd8580552e0653bae82a8022077c52fbece8b99b3c90aeb` |
 
 ## Stage 2.5 integrity result
 
@@ -52,7 +65,7 @@ P32-S13 is now bibliographically `VERIFIED`, but remains background-only. Its ci
 
 ## Route position and next gate
 
-Route A remains at the A0/A1 foundation/interface position only: P32 A0 is unavailable, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. No later review stage authorizes scientific execution, canonical-result refresh, or Route promotion. The only next legal action is a new user `确认` authorizing a new-id/new-manifest/fresh-context Stage 3′ Round 2.
+Route A remains at generic A1--A2 preparation only: P32 arithmetic A0 is unavailable, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. Stage 3′ cannot create Route credit, and no later review stage changed the frozen system or scientific result. The only next legal action is explicit authorization for a new-id/new-manifest/fresh-context Stage 3′ Round 3.
 
 ## Batch traceability
 

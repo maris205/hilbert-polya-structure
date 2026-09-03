@@ -2,18 +2,15 @@
 
 ## Current status
 
-**ARS STAGE 3′ ROUND 1 ABORTED FAIL-CLOSED — `phase1_lint_failed` / AWAITING A NEW USER `确认` FOR FRESH ROUND 2.**
+**ARS STAGE 3′ ROUND 2 COMPLETE — OFFICIAL CHECKER PASS / MAJOR REVISION (B4) / AWAITING STAGE 4′ AUTHORIZATION.**
 
-Control state: `stage3_prime_round1_aborted_awaiting_round2_authorization`.
-The official checker and apply chain passed mechanically. The semantic passes
-were fresh-context, role-separated, and same-family; they were not independent
-error processes. Phase 1 has criterion-inheritance drift in 2 rows. Phase 2A
-recorded `REV-EIC-W4` PARTIAL although it is audit-supported FULL (false
-PARTIAL), and recorded `REV-R3-W1-DA-N1` FULL although it is audit-supported
-PARTIAL (false FULL). The opposite errors leave both recorded and audited
-aggregate counts at 4 FULL / 5 PARTIAL / 0 NOT. The mechanical B4 direction
-(Major Revision candidate) is suppressed, and no decision was issued. Canonical
-and Route surfaces remain frozen.
+Control state: `stage3_prime_round2_major_revision_awaiting_stage4_prime_authorization`.
+All three evidence-before-persuasion gates completed. The final record is 4
+FULL / 5 PARTIAL / 0 other, with zero Phase-2B adjustments, new issues,
+dissents, or escalations. The official checker exited zero, replayed the apply
+chain as `pass`, and emitted Major Revision under ARS rule B4. This B4 is a
+re-review decision rule, not Route-B Evaluator layer B4. Canonical manuscript,
+bibliography, PDF, science, initial system, and Route surfaces remain frozen.
 
 ## Current paper package
 
@@ -40,6 +37,7 @@ and Route surfaces remain frozen.
 - [Revision-Evidence Bundle](notes/stage4_revision_evidence_bundle.json) and [bundle validation](notes/stage4_bundle_validation_receipt.json)
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
+- [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [official checker receipt](notes/stage3_prime_round2_checker_receipt.json), and [traceability matrix](notes/stage3_prime_round2_traceability.json)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
@@ -95,7 +93,8 @@ global originality, priority, or scientific-novelty certificate.
 - Frozen dynamical subtype: no-eclipse equilateral three-disk flow at \(d=6a\); Euclidean free-flight clock; primitive cyclic collision-word owner; physical roof distinct from the unit-roof control.
 - Route position: `A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`; formal Route-A tuples `0` (`UNASSIGNED`); positive arithmetic A2 results `0`; A3/A4 not attempted; Route B not invoked and closed.
 - Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 9/9 items; 21 operations; 7 RESOLVED + 2 DELIBERATE_LIMITATION; 21/95 affected E1; +635 words; 15-page clean preview.
-- Stage 3′ Round 1: `ABORTED / phase1_lint_failed` fail-closed; recorded and audit-supported aggregates both 4/5/0; `REV-EIC-W4` is false PARTIAL, `REV-R3-W1-DA-N1` is false FULL, and Phase 1 has 2 drift rows; mechanical B4 (Major Revision candidate) suppressed; no decision issued. The semantic passes were fresh-context, role-separated, same-family, and not independent error processes. The only legal next action is a new user `确认` authorizing a fresh Round 2 with a new round id and manifest.
+- Stage 3′ Round 1: immutable historical fail-closed record.
+- Stage 3′ Round 2: `COMPLETE`; final 4/5/0; Phase 2B adjustments `0`; official checker `PASS`; Major Revision / ARS B4. The mandatory decision checkpoint does not itself authorize Stage 4′; the only legal next action is explicit scoped Stage-4′ authorization.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
@@ -111,16 +110,26 @@ correctly designed, run, statistically adequate, or reproducible by ARS.”
 - [Batch Stage-4 report](../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md): SHA-256 `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a`
 - [Batch Stage-4 receipt](../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json): SHA-256 `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd`
 
-### Current Stage-3′ Round-1 outcome
+### Historical Stage-3′ Round-1 outcome
 
 - [Verification report](notes/stage3_prime_round1_verification_report.md): SHA-256 `f7f7956dc8c484ae707ce0c48dee2b4bf6a158d5e286c9873fae6fce208db5e8`
 - [Checker/semantic receipt](notes/stage3_prime_round1_checker_receipt.json): SHA-256 `960bc02225aa6d0e3215ef99e1e9a27179b453783d20f8472d053468fbfcfe9e`
 - [Fail-closed abort record](notes/stage3_prime_round1_abort_record.json): SHA-256 `b5692f11d24224b0c17ddad6a467a3ddcd7689cdf6a88a25184f1a3c0b061a0d`
 - [Batch outcome report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)
 
-Round 1 remains immutable. Stage 4.5, Stage 5, canonical promotion, submission,
-Route advancement, result refresh, and new scientific execution remain
-unauthorized.
+Round 1 remains immutable.
+
+### Current Stage-3′ Round-2 outcome
+
+- [Verification report](notes/stage3_prime_round2_verification_report.md): SHA-256 `0eec7f0f0179914b04c2d84883501540b5c2c4d35a024abf5700717256d4f2ab`
+- [Official checker receipt](notes/stage3_prime_round2_checker_receipt.json): SHA-256 `254caf1613906cd493040d87c03ee054c339cc1be43d4ecf22192fffb3fe5dd3`
+- [Phase-2B integration](notes/stage3_prime_round2_phase2b_integration.json): SHA-256 `5b01ffc57053be2f07b02193503099ad85905b629ba4bd0eeea0df7faa822d24`
+- [Traceability matrix](notes/stage3_prime_round2_traceability.json): SHA-256 `79d665653d3aa43f469355d48b1b315de4601e8062af33595acb7c0e29c8e548`
+- [Batch Round-2 report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_MANDATORY_CHECKPOINT.md)
+
+The next legal transition is scoped Stage 4′, only after explicit authorization.
+Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result
+refresh, and new scientific execution remain unauthorized.
 
 | Artifact | SHA-256 |
 |---|---|

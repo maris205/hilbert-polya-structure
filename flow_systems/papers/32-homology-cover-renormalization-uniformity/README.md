@@ -2,17 +2,16 @@
 
 ## Current status
 
-**Controlling state: `stage3_prime_round1_aborted_awaiting_round2_authorization`.**
+**Controlling state: `stage3_prime_round2_aborted_awaiting_round3_authorization`.**
 
-Stage 3′ Round 1 failed closed at the mandatory Phase-1 criterion lint with
-`phase1_lint_failed`; no decision was signed or emitted. The recorded
-and audited aggregates both remain 6 FULL / 5 PARTIAL / 1 NOT, but the matching
-totals mask two offsetting row errors: `REV-P32-R1-W2` is a false FULL and
-`REV-P32-R3-W1` is a false PARTIAL. Phase-1 criterion drift affects
-`REV-P32-R3-W1` and `REV-P32-DA-M1`. B3 is only a mechanically computed
-candidate and is suppressed by the failed gate. The fresh-context semantic
-checks were role-separated but same-family; they are not independent error
-processes. Canonical and Route surfaces remain frozen.
+Stage 3′ Round 2 passed Phase 1 but failed closed at the no-retry Phase-2A
+semantic gate with `phase2a_lint_failed`; no decision was signed or emitted.
+The committed record is 7 FULL / 5 PARTIAL / 0 other, while the controlling read
+is 6 FULL / 6 PARTIAL / 0 other because `REV-P32-DA-M1` is a false FULL. The
+round stopped before the response letter, Phase 2B, traceability, official
+checker, or decision. The fresh-context semantic checks were role-separated but
+same-family; they are not independent error processes. Canonical, science,
+initial-system, and Route surfaces remain frozen.
 
 ## Current paper and revision package
 
@@ -39,6 +38,7 @@ processes. Canonical and Route surfaces remain frozen.
 - [Revision-Evidence Bundle](notes/stage4_revision_evidence_bundle.json) and [bundle validation](notes/stage4_bundle_validation_receipt.json)
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
+- [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json), and [abort record](notes/stage3_prime_round2_abort_record.json)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 结论概要
@@ -71,9 +71,10 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `ROUTE_B_INVOCATION=false`, `STAGE2_5_INTEGRITY=PASS`,
 `STAGE3_ENTRY_AUTHORIZED=true`, `STAGE3_REVIEW_OUTPUTS=COMPLETE`,
 `STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, `STAGE4_AUTHORIZED=true`,
-`STAGE4_COMPLETE=true`, `STAGE3_PRIME_ROUND1=ABORTED_PHASE1_LINT_FAILED`,
+`STAGE4_COMPLETE=true`, `STAGE3_PRIME_ROUND1=HISTORICAL_ABORT`,
+`STAGE3_PRIME_ROUND2=ABORTED_PHASE2A_LINT_FAILED`,
 `STAGE3_PRIME_DECISION_EMITTED=false`, and
-`STAGE3_PRIME_ROUND2_AUTHORIZED=false`.
+`STAGE3_PRIME_ROUND3_AUTHORIZED=false`.
 
 ## Traceability
 
@@ -85,12 +86,19 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 - [Batch Stage-4 report](../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md): SHA-256 `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a`
 - [Batch Stage-4 receipt](../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json): SHA-256 `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd`
 
-### Current Stage-3′ Round-1 outcome
+### Historical Stage-3′ Round-1 outcome
 
 - [Verification report](notes/stage3_prime_round1_verification_report.md): SHA-256 `deab1d001c3b6a183a94c371ecb8ddf9494147e23d86ba9dcc0ff1ff22aebb85`
 - [Checker/semantic receipt](notes/stage3_prime_round1_checker_receipt.json): SHA-256 `4033a2346ba98d56f37176523e07f682115838e07e6b73c0395e2020ed4c82f6`
 - [Fail-closed abort record](notes/stage3_prime_round1_abort_record.json): SHA-256 `b11516b0046dfb0a8c33d18090df33e0191cf1e9a2f8efe68df189116e27a941`
 - [Batch outcome report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)
+
+### Current Stage-3′ Round-2 outcome
+
+- [Verification report](notes/stage3_prime_round2_verification_report.md): SHA-256 `7039eaba478ee048ff7c1000ff343f0b39c61ca8c05937ef14f57bd00584ae6a`
+- [Checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json): SHA-256 `d145a433e299b2b63cf4308a2af2f6b66a432732e381dd2a41e5de7a5c17a892`
+- [Fail-closed abort record](notes/stage3_prime_round2_abort_record.json): SHA-256 `0768572cc545275f9fd8580552e0653bae82a8022077c52fbece8b99b3c90aeb`
+- [Batch Round-2 report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_MANDATORY_CHECKPOINT.md)
 
 - Stage-1 handoff: `BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md`
 - Stage-2 input freeze: `BATCH_ROUND10_STAGE2_INPUT_FREEZE.json`
@@ -104,8 +112,8 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 All detailed Stage-1 research, source, review, and revision artifacts remain
 frozen in `notes/`; they were not replaced by this current-status summary.
 A schema-compatible Stage-4 Revision-Evidence Bundle exists, but official
-Stage-4.5 E6 has not been invoked. The only next legal action is a new user
-`确认` authorizing Stage 3′ Round 2 with a new round id, new manifest, and fresh
-contexts; Round 1 remains immutable. Stage 4′, Stage 4.5, Stage 5, canonical
-promotion, submission, Route advancement, result refresh, and new scientific
-execution remain unauthorized.
+Stage-4.5 E6 has not been invoked. The only next legal action is explicit
+authorization for Stage 3′ Round 3 with a new round id, manifest, and fresh
+Phase-1/2A contexts; Rounds 1 and 2 remain immutable. Stage 4′, Stage 4.5,
+Stage 5, canonical promotion, submission, Route advancement, result refresh,
+and new scientific execution remain unauthorized.

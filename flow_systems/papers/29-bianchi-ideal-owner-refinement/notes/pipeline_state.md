@@ -2,11 +2,11 @@
 
 Synchronized: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 3′ ROUND 1 ABORTED — `phase2a_lint_failed` / AWAITING ROUND-2 AUTHORIZATION**.
+Current controlling state: **ARS STAGE 3′ ROUND 2 ABORTED — `phase2a_lint_failed` / AWAITING ROUND-3 AUTHORIZATION**.
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `stage3_prime_round1_aborted_awaiting_round2_authorization` |
+| Pipeline global state | `stage3_prime_round2_aborted_awaiting_round3_authorization` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS` |
@@ -18,9 +18,10 @@ Current controlling state: **ARS STAGE 3′ ROUND 1 ABORTED — `phase2a_lint_fa
 | Stage 4 | `COMPLETE WITHIN EXACT AUTHORIZATION`; 11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview |
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
 | Stage 3′ Round 1 | `ABORTED / phase2a_lint_failed` fail-closed; official checker/apply chain `PASS`; recorded 7/4/0; audit-supported 6/5/0; mechanical B4 (Major Revision candidate) suppressed; no decision issued |
+| Stage 3′ Round 2 | `ABORTED / phase2a_lint_failed`; Phase 1 PASS; committed 7/4/0, controlling 5/6/0; stopped before response letter, Phase 2B, traceability, checker, or decision |
 | Semantic-audit provenance | fresh-context; role-separated; same-family; not independent error processes |
-| Next legal action | only a new user `确认` authorizing fresh Stage 3′ Round 2 with a new round id, new manifest, fresh Phase-1/2A contexts, and all Round-1 artifacts preserved |
-| Active Stage-3′ findings | `REV-EIC-1`; recorded FULL, audit-supported PARTIAL/must-fix (false FULL) |
+| Next legal action | only explicit authorization for fresh Stage 3′ Round 3 with a new round id, new manifest, fresh Phase-1/2A contexts, and all Round-1/Round-2 artifacts preserved |
+| Active Stage-3′ findings | `REV-EIC-1`, `REV-DA-2`; committed FULL, controlling PARTIAL (false FULL) |
 
 ## Canonical package
 
@@ -107,7 +108,7 @@ route promotion, and it does not remove the mandatory scholar checkpoint.
 | [Batch completion report](../../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md) | `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a` |
 | [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json) | `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd` |
 
-## Current Stage-3′ Round-1 bindings
+## Historical Stage-3′ Round-1 bindings
 
 | Artifact | SHA-256 |
 |---|---|
@@ -117,8 +118,20 @@ route promotion, and it does not remove the mandatory scholar checkpoint.
 | [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `16799921ba4222fca534adf9c56b242879b012576bb72bac9ba95c025cdd8fbf` |
 | [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `2d315dae3f051956698958fab9ea95b0024ec7e78d78c8abd9e4a3ead4377ba2` |
 
+## Current Stage-3′ Round-2 bindings
+
+| Artifact | SHA-256 |
+|---|---|
+| [Verification report](stage3_prime_round2_verification_report.md) | `47e69f37843878a930c4fbb3c11a1d327abff6b1d3bb086d0341ca8805e2cab9` |
+| [Checker non-execution receipt](stage3_prime_round2_checker_receipt.json) | `584d8fd5445e6c12bf7b82a0752c2e858661d741fb2961645f57401aab4a306f` |
+| [Abort record](stage3_prime_round2_abort_record.json) | `3aedd36109c57851adf7b94303b747d0ccd4db1255761e3d1cec516fd2236773` |
+| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md) | `817306f3a26bdcef88af02ef7308b3de9436c372ba74f2693538ccfb40db31e3` |
+| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_RECEIPT.json) | `5ce56d67a784df9ff3a6b4ebf8bf3c0102e0f34009b6612ea8e0cd6225d2d53e` |
+
 The ClaimIntent replay is `0/0` vacuous and not a clean certificate. Completion
 rests on the bounded changed-operation/E1 semantic audit. Route A A0/A1 foundation/interface; formal tuple `UNASSIGNED`; positive arithmetic A2 `0`; Route B uninvoked.
-Canonical bytes and scientific trees are unchanged. Round 1 is immutable and
-failed closed. Stage 4.5, Stage 5, canonical promotion, submission, Route
-advancement, result refresh, and new scientific execution remain unauthorized.
+Canonical bytes and scientific trees are unchanged. Rounds 1 and 2 are
+immutable and failed closed. Stage 3′ cannot create Route credit: formal tuple
+`UNASSIGNED`, positive arithmetic A2/A3/A4 credit absent, and Route B uninvoked.
+Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route advancement,
+result refresh, and new scientific execution remain unauthorized.

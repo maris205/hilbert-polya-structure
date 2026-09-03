@@ -2,11 +2,11 @@
 
 Synchronized: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 3′ ROUND 1 ABORTED — `phase1_lint_failed` / AWAITING ROUND-2 AUTHORIZATION**.
+Current controlling state: **ARS STAGE 3′ ROUND 2 COMPLETE — MAJOR REVISION / ARS B4 / AWAITING STAGE-4′ AUTHORIZATION**.
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `stage3_prime_round1_aborted_awaiting_round2_authorization` |
+| Pipeline global state | `stage3_prime_round2_major_revision_awaiting_stage4_prime_authorization` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS` |
@@ -18,9 +18,10 @@ Current controlling state: **ARS STAGE 3′ ROUND 1 ABORTED — `phase1_lint_fai
 | Stage 4 | `COMPLETE WITHIN EXACT AUTHORIZATION`; 9/9 items; 21 operations; 7 RESOLVED + 2 DELIBERATE_LIMITATION; 21/95 affected E1; +635 words; 15-page clean preview |
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
 | Stage 3′ Round 1 | `ABORTED / phase1_lint_failed` fail-closed; official checker/apply chain `PASS`; recorded and audit-supported aggregates both 4/5/0; Phase-1 criterion-inheritance drift in 2 rows; mechanical B4 (Major Revision candidate) suppressed; no decision issued |
+| Stage 3′ Round 2 | `COMPLETE`; Phase 1/2A/2B PASS; final 4/5/0; adjustments/new issues/dissents/escalations all `0`; official checker `PASS`, apply chain `pass`; decision `Major Revision / ARS B4` |
 | Semantic-audit provenance | fresh-context; role-separated; same-family; not independent error processes |
-| Next legal action | only a new user `确认` authorizing fresh Stage 3′ Round 2 with a new round id, new manifest, fresh Phase-1/2A contexts, and all Round-1 artifacts preserved |
-| Active Stage-3′ findings | `REV-EIC-W4`: recorded PARTIAL, audit-supported FULL (false PARTIAL); `REV-R3-W1-DA-N1`: recorded FULL, audit-supported PARTIAL/must-fix (false FULL) |
+| Next legal action | only explicit scoped authorization for Stage 4′; the mandatory Major Revision checkpoint does not itself authorize revision |
+| Active Stage-3′ findings | five PARTIALLY_ADDRESSED residuals, including four must-fix; exact list in `stage3_prime_round2_verification_report.md` |
 
 ## Canonical package
 
@@ -107,7 +108,7 @@ checkpoint.
 | [Batch completion report](../../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md) | `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a` |
 | [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json) | `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd` |
 
-## Current Stage-3′ Round-1 bindings
+## Historical Stage-3′ Round-1 bindings
 
 | Artifact | SHA-256 |
 |---|---|
@@ -117,8 +118,21 @@ checkpoint.
 | [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `16799921ba4222fca534adf9c56b242879b012576bb72bac9ba95c025cdd8fbf` |
 | [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `2d315dae3f051956698958fab9ea95b0024ec7e78d78c8abd9e4a3ead4377ba2` |
 
+## Current Stage-3′ Round-2 bindings
+
+| Artifact | SHA-256 |
+|---|---|
+| [Verification report](stage3_prime_round2_verification_report.md) | `0eec7f0f0179914b04c2d84883501540b5c2c4d35a024abf5700717256d4f2ab` |
+| [Official checker receipt](stage3_prime_round2_checker_receipt.json) | `254caf1613906cd493040d87c03ee054c339cc1be43d4ecf22192fffb3fe5dd3` |
+| [Phase-2B integration](stage3_prime_round2_phase2b_integration.json) | `5b01ffc57053be2f07b02193503099ad85905b629ba4bd0eeea0df7faa822d24` |
+| [Traceability matrix](stage3_prime_round2_traceability.json) | `79d665653d3aa43f469355d48b1b315de4601e8062af33595acb7c0e29c8e548` |
+| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md) | `817306f3a26bdcef88af02ef7308b3de9436c372ba74f2693538ccfb40db31e3` |
+| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_RECEIPT.json) | `5ce56d67a784df9ff3a6b4ebf8bf3c0102e0f34009b6612ea8e0cd6225d2d53e` |
+
 The ClaimIntent replay is `0/0` vacuous and not a clean certificate. Completion
 rests on the bounded changed-operation/E1 semantic audit. `A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`; formal tuple `UNASSIGNED`; Route B uninvoked.
-Canonical bytes and scientific trees are unchanged. Round 1 is immutable and
-failed closed. Stage 4.5, Stage 5, canonical promotion, submission, Route
+Canonical bytes and scientific trees are unchanged; Round 1 remains immutable.
+Stage 3′ cannot create Route credit: P30 remains `A0_FAIL / A2_NOT_ELIGIBLE /
+NO_ROUTE_PROMOTION`, formal tuple `UNASSIGNED`, A3/A4 absent, and Route B
+uninvoked. Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route
 advancement, result refresh, and new scientific execution remain unauthorized.

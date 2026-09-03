@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 3′ Round 1：`P29--P33_ALL_ABORTED_FAIL_CLOSED`；0 complete / 5 aborted；等待新的“确认”** | 官方机械 checker 5/5 `PASS`，机械方向均为 Major，但语义 lint 阻止五篇签发任何决定：P29 为 `phase2a_lint_failed`，P30--P33 为 `phase1_lint_failed`。Recorded aggregate 为 27/27/2，audited aggregate 为 25/29/2；共 6 个 verdict discrepancies（4 false FULL、2 false PARTIAL）与 13 个 Phase-1 drift-affected rows。五篇科学／论文进展全部保留；canonical manuscripts/bibs/PDF 15/15 unchanged，science artifacts `0`，formal Route-A tuples `0/5`，positive arithmetic A2 `0/5`，Route B `0/5`，初始动力系统未变。见[语义审计 consolidation](BATCH_ROUND10_STAGE3_PRIME_SEMANTIC_AUDIT_CONSOLIDATION.json)、[Round-1 报告](BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md)、[机器收据](BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json)与[强制检查点](BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 3′ Round 2 closed；2 complete / 3 aborted；强制作者检查点** | P30/P31 完成三门复审，官方 checker 2/2 `PASS`，决定均为 Major Revision / B4；P29/P32/P33 在 no-retry Phase-2A 语义门以 `phase2a_lint_failed` 中止，未进入 Phase 2B、checker 或决定。全批控制读数为 23 FULL / 33 PARTIAL / 0 other；canonical manuscripts/bibs/PDF 15/15 unchanged，science artifacts `0`，formal Route-A tuples `0/5`，positive arithmetic A2、A3、A4 与 Route B 均 `0/5`，初始动力系统未变。见 [Round-2 报告](BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md)、[机器收据](BATCH_ROUND10_STAGE3_PRIME_ROUND2_RECEIPT.json)与[强制检查点](BATCH_ROUND10_STAGE3_PRIME_ROUND2_MANDATORY_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,60 +38,54 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 29--33 Round 10 当前概要
 
-Round 10 的 ARS **Stage 3′ Round 1 已执行完毕**，当前严格停在强制作者检查点；
-当前权威 token 是 **`P29--P33_ALL_ABORTED_FAIL_CLOSED`**。五篇全部 fail-closed，
-即 **0 complete / 5 aborted**。官方机械 checker 对五篇均为 `PASS`，其机械方向也
-均为 Major；但这些方向不是可签发决定，语义 lint 失败使本轮五篇均不发布 Stage 3′
-决定。P29 以 `phase2a_lint_failed` 中止，P30--P33 均以
-`phase1_lint_failed` 中止。
+Round 10 的 ARS **Stage 3′ Round 2 已完整结账**，当前严格停在强制作者检查点：
+**P30/P31 complete，P29/P32/P33 aborted**。P30 与 P31 完成 revision-blind Phase 1、
+persuasion-blind Phase 2A、回信可见 Phase 2B，并通过官方 checker；两篇决定均为
+**Major Revision / B4**。这里的 B4 是 ARS re-review 的机械决定规则，不是 Route-B
+Evaluator 的 B4 层。P29、P32、P33 在 no-retry Phase-2A 语义门以
+`phase2a_lint_failed` 中止，未进入 Phase 2B、traceability、checker 或编辑决定。
 
-最终语义检查采用 fresh-context、role-separated、same-family 执行。这里记录的是
-上下文与角色拓扑，并不构成跨模型复核，也**不代表 independent error processes**。
-审计确认 6 个 verdict discrepancies（4 false `FULLY_ADDRESSED`、2 false
-`PARTIALLY_ADDRESSED`）及 13 个 Phase-1 drift-affected rows；即使机械 checker
-通过或机械方向未改变，也不能越过相应 lint gate。
-
-| Paper | Stage 3′ Round-1 结果 | 论文已经取得的明确进展 | 当前缺口与下一合法动作 |
+| Paper | Stage 3′ Round-2 结果 | 论文已经取得的明确进展 | 当前缺口与下一合法动作 |
 |---|---|---|---|
-| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | ABORT `phase2a_lint_failed`；机械方向 Major，未签发决定 | Gate M/Q、inversion/conjugation 与 fail-closed 接口已进入完整修订稿。 | 等待用户新的“确认”，以新 round id／manifest 和 fresh context 启动 Stage 3′ Round 2。 |
-| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | ABORT `phase1_lint_failed`；机械方向 Major，未签发决定 | physical-roof 六门框架、共同范数误差渠道与控制面已进入完整修订稿。 | 等待用户新的“确认”，以新 round id／manifest 和 fresh context 启动 Stage 3′ Round 2。 |
-| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | ABORT `phase1_lint_failed`；机械方向 Major，未签发决定 | owner canonicalization、G/I/C 分层与 9,453-pair 审计架构已进入完整修订稿。 | 等待用户新的“确认”，以新 round id／manifest 和 fresh context 启动 Stage 3′ Round 2。 |
-| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | ABORT `phase1_lint_failed`；机械方向 Major，未签发决定 | higher/zero-content 优先否证、双 schedule 与依赖表已进入完整修订稿。 | 等待用户新的“确认”，以新 round id／manifest 和 fresh context 启动 Stage 3′ Round 2。 |
-| [P33](papers/33-bolza-control-matched-census/README.md) | ABORT `phase1_lint_failed`；机械方向 Major，未签发决定 | BP/CP 契约、owner/inverse/repetition、serialization、migration 与 trust graph 已具体化。 | 等待用户新的“确认”，以新 round id／manifest 和 fresh context 启动 Stage 3′ Round 2。 |
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | ABORT `phase2a_lint_failed`；5 FULL / 6 PARTIAL；无决定 | Gate M/Q、inversion/conjugation 与 fail-closed 接口已进入完整修订稿。 | 明确确认后，以新 id／manifest 和 fresh contexts 启动 Stage 3′ Round 3。 |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | COMPLETE；checker `PASS`；Major Revision / B4；4 FULL / 5 PARTIAL | physical-roof 六门框架、共同范数误差渠道与控制面通过三门复审。 | 明确确认并精确授权后进入 scoped Stage 4′。 |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | COMPLETE；checker `PASS`；Major Revision / B4；3 FULL / 8 PARTIAL | owner canonicalization、G/I/C 分层与 9,453-pair 审计架构通过三门复审。 | 明确确认并精确授权后进入 scoped Stage 4′。 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | ABORT `phase2a_lint_failed`；6 FULL / 6 PARTIAL；无决定 | higher/zero-content 优先否证、双 schedule 与依赖表已进入完整修订稿。 | 明确确认后，以新 id／manifest 和 fresh contexts 启动 Stage 3′ Round 3。 |
+| [P33](papers/33-bolza-control-matched-census/README.md) | ABORT `phase2a_lint_failed`；5 FULL / 8 PARTIAL；无决定 | BP/CP 契约、owner/inverse/repetition、serialization、migration 与 trust graph 已具体化。 | 明确确认后，以新 id／manifest 和 fresh contexts 启动 Stage 3′ Round 3。 |
 
-Recorded aggregate 为 **27 FULL / 27 PARTIAL / 2 NOT**；fresh-context audited
-aggregate 为 **25 FULL / 29 PARTIAL / 2 NOT**。六个 verdict discrepancies 的净变换
-是四个 false FULL 改判为 PARTIAL、两个 false PARTIAL 改判为 FULL；13 个
-Phase-1 drift-affected rows 均保留在 fail-closed 审计记录中。本轮没有任何可发布的
-Stage 3′ 决定。
+Phase-2A committed aggregate 为 **27 FULL / 29 PARTIAL / 0 other**；审计支持的控制读数
+为 **23 FULL / 33 PARTIAL / 0 other**。四个 controlling discrepancies 是 P29 的
+`REV-EIC-1`、`REV-DA-2`，P32 的 `REV-P32-DA-M1`，以及 P33 的
+`REV-P33-011`。P31 两个 primary-audit disputed rows 经预承诺盲仲裁均支持原 committed
+record，故不构成 controlling discrepancy。语义检查为 fresh-context、role-separated、
+same-family，不构成 independent error processes。
 
 路线对应仍由 [`Route A`](skills/route-a-evaluator.md) 与
-[`Route B`](skills/route-b-evaluator.md) 控制：Stage 4 是论文语义与证据修订，不产生
-A0--A4 或 B1--B5 credit。P29 仍在 A0/A1 foundation/interface；P30 仍为
-`A0_FAIL / A2_NOT_ELIGIBLE`；P31 为 A1 owner/canonicalization preparation；P32
-仅 generic A1--A2 preparation 且 arithmetic A0 unavailable；P33 为 A1
-preparation 且 formal A0 prohibited/confounded。Formal Route-A tuples、正向算术
-A2、A3、A4 与 Route-B invocation 仍各为 `0/5`，五个初始系统、clock、owner、
-normalization 与 cutoff 原样冻结。
+[`Route B`](skills/route-b-evaluator.md) 控制。Stage 3′ 是复审门，不能产生 A0--A4 或
+B1--B5 credit。P29 仍为 A0/A1 foundation/interface；P30 仍为
+`A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`；P31 仍为 A1-only
+owner/canonicalization preparation；P32 仍为 generic A1--A2 preparation 且
+arithmetic A0 unavailable；P33 仍为 A1 preparation 且 formal A0
+prohibited/confounded。Formal Route-A tuples、positive arithmetic A2、A3、A4 与
+Route-B invocation 均为 `0/5`；Route B 不能用于挽救未过 A0 的弱 Route-A fit。
 
-五篇的科学与论文进展全部保留；Round-1 Phase artifacts 与 mechanically valid trace
-matrices 均按原字节保留。Canonical manuscripts/bibs/PDF **15/15 unchanged**，
-`science_artifacts=0`；五个初始动力系统以及各自的 clock、owner、normalization 与
-cutoff 均未改变。Formal Route-A tuples 为 `0/5`，positive arithmetic A2 为
-`0/5`，Route B 为 `0/5`。
+五篇的论文进展与 Round-1/Round-2 审计链均保留。Canonical manuscripts/bibs/PDF
+**15/15 unchanged**，`science_artifacts=0`，没有新科学执行；五个初始动力系统及其
+clock、owner、normalization 与 cutoff 原样冻结，未作跨对象 coordinatewise 拼接。
 
 当前权威 batch artifacts 为：
 
-- [Semantic-audit consolidation](BATCH_ROUND10_STAGE3_PRIME_SEMANTIC_AUDIT_CONSOLIDATION.json) — SHA-256 `43c65150a5edb6afde58c6abde0f0718272918e3dc26326238a6ae41e0187171`
-- [Stage-3′ Round-1 report](BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) — SHA-256 `0343b34e2fcb80477046ac5cd0ea069fe51f6efe162edf18dc32b51ad25d0672`
-- [Stage-3′ Round-1 receipt](BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) — SHA-256 `cfa61eb8504c45250b1658d63193475567a2e8fd0afc1037ef6eda580c196852`
-- [Mandatory checkpoint](BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md) — SHA-256 `c646d67cf1f39b8a8723f501d7c17a12489737080234c37f631d6330b90034ae`
-- [Fail-closed final audit](BATCH_ROUND10_STAGE3_PRIME_FINAL_AUDIT.json) — replayable terminal audit；其自身 SHA-256 由发布 Git commit 作外部绑定，避免自引用哈希
+- [Stage-3′ Round-2 report](BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md) — SHA-256 `817306f3a26bdcef88af02ef7308b3de9436c372ba74f2693538ccfb40db31e3`
+- [Stage-3′ Round-2 receipt](BATCH_ROUND10_STAGE3_PRIME_ROUND2_RECEIPT.json) — SHA-256 `5ce56d67a784df9ff3a6b4ebf8bf3c0102e0f34009b6612ea8e0cd6225d2d53e`
+- [Final integrity audit](BATCH_ROUND10_STAGE3_PRIME_ROUND2_FINAL_INTEGRITY_AUDIT.json) — SHA-256 `c91d7cbda3dd5cd37f96d8b9c9b9b01a74f4d37827c71bf45365eadf0ea8e8be`
+- [Final integrity receipt](BATCH_ROUND10_STAGE3_PRIME_ROUND2_FINAL_INTEGRITY_RECEIPT.json) — SHA-256 `74a3c8d294db69a6ac773e208b77fef6e1580001470edf9295035c74b9844d14`
+- [Phase-2A semantic consolidation](BATCH_ROUND10_STAGE3_PRIME_ROUND2_PHASE2A_SEMANTIC_CONSOLIDATION.json) — SHA-256 `d5ff38947a7646c1d19014be18adbdad5925fc827d93b35e4e5defc49c198d60`
+- [Frozen-boundary validation](BATCH_ROUND10_STAGE3_PRIME_ROUND2_BOUNDARY_VALIDATION.json) — SHA-256 `652d04b3e4101066c90e8b2538a671009bea54c62e67a8635c77d383d6e4bc78`
+- [Mandatory checkpoint](BATCH_ROUND10_STAGE3_PRIME_ROUND2_MANDATORY_CHECKPOINT.md) — SHA-256 `71f46cf4aa144a55750d4d9d07f2715eb46ff926ab1c27af1222ef4aed05aaec`
 
-**唯一合法下一动作**是用户给出新的明确“确认”，授权 Papers 29--33 全部以新
-round id／manifest 和 fresh contexts 启动 **Stage 3′ Round 2**。在该确认发生前，
-Stage 4′ request preparation、任何 manuscript write、Stage 4.5、Stage 5、canonical
-promotion、Route 晋级与新科学执行均未授权。
+**下一动作必须由作者明确确认**：P30/P31 可进入 scoped Stage 4′；P29/P32/P33 可启动
+fresh Stage 3′ Round 3。Stage 4′、Stage 4.5、Stage 5、canonical promotion、投稿、
+Route 晋级与新科学执行均尚未开始。
 
 ### 历史：Stage 2.5 与 Stage 3 Phase 0 基线
 
@@ -536,4 +530,6 @@ proxy 为 `A1_PASS_ANALYTIC`；全部 `A2_FAIL/A3_FAIL/A4_FAIL`、overall
 
 29--33-round10-stage4 - ARS Stage 4 `REVISE` complete（2026-09-03，历史检查点） - 作者事件 `继续，额度已经重置了` 经有界解释批准全部 56 项 proposal-only 路线图；五篇以 97 个授权定点操作完成 36 `RESOLVED` + 20 `DELIBERATE_LIMITATION`，正文共新增 3,563 词。88/480 affected E1 全量有界语义复核，392 unaffected E1 保持基线等重数（375 exact-once；P33 17 duplicate-valued）；五份 evidence bundle、73 页 clean preview 与统一验收 2,018/2,018 通过。首次 apply/build 暴露的问题 fail closed 并归档为 `SUPERSEDED_FAIL_CLOSED_NOT_CANONICAL`，最终补丁全部从 Stage-3 immutable base 重放。Canonical manuscript/bib/PDF、科学树、五个初始动力系统与 Route 坐标均未变；formal tuples、正向算术 A2、A3、A4、Route B 仍 `0/5`。当时停在 Stage 3 prime 作者确认门；该状态已由下一条 Stage 3′ Round-1 记录取代。详见 [批次完成报告](BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md)与[机器收据](BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json)。
 
-29--33-round10-stage3-prime-round1 - ARS Stage 3′ 三门复审（2026-09-03，当前检查点） - 当前权威 token 为 `P29--P33_ALL_ABORTED_FAIL_CLOSED`：0 complete / 5 aborted。五篇结构校验与官方 synthesis checker 5/5 `PASS`，机械方向均为 Major，但语义 lint 阻止签发任何决定；P29 为 `phase2a_lint_failed`，P30--P33 为 `phase1_lint_failed`。Recorded aggregate 27/27/2，fresh-context audited aggregate 25/29/2；共 6 个 verdict discrepancies（4 false FULL、2 false PARTIAL）和 13 个 Phase-1 drift-affected rows。语义检查为 fresh-context、role-separated、same-family，不构成 independent error processes。五篇科学／论文进展全部保留，canonical manuscripts/bibs/PDF 15/15 unchanged，science artifacts 0，formal Route-A tuples 0/5、positive arithmetic A2 0/5、Route B 0/5，初始动力系统未变。唯一合法下一动作是用户新的“确认”，授权 P29--P33 全部以新 id/manifest/fresh contexts 启动 Stage 3′ Round 2；Stage 4′ request preparation 与 manuscript writes 尚未授权。详见 [语义审计 consolidation](BATCH_ROUND10_STAGE3_PRIME_SEMANTIC_AUDIT_CONSOLIDATION.json)（SHA-256 `43c65150a5edb6afde58c6abde0f0718272918e3dc26326238a6ae41e0187171`）、[结果报告](BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md)（`0343b34e2fcb80477046ac5cd0ea069fe51f6efe162edf18dc32b51ad25d0672`）、[收据](BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json)（`cfa61eb8504c45250b1658d63193475567a2e8fd0afc1037ef6eda580c196852`）与[检查点](BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)（`c646d67cf1f39b8a8723f501d7c17a12489737080234c37f631d6330b90034ae`）。
+29--33-round10-stage3-prime-round1 - ARS Stage 3′ 三门复审（2026-09-03，历史检查点；已由 Round 2 取代） - 当时权威 token 为 `P29--P33_ALL_ABORTED_FAIL_CLOSED`：0 complete / 5 aborted。五篇结构校验与官方 synthesis checker 5/5 `PASS`，机械方向均为 Major，但语义 lint 阻止签发任何决定；P29 为 `phase2a_lint_failed`，P30--P33 为 `phase1_lint_failed`。Recorded aggregate 27/27/2，fresh-context audited aggregate 25/29/2；共 6 个 verdict discrepancies（4 false FULL、2 false PARTIAL）和 13 个 Phase-1 drift-affected rows。语义检查为 fresh-context、role-separated、same-family，不构成 independent error processes。五篇科学／论文进展全部保留，canonical manuscripts/bibs/PDF 15/15 unchanged，science artifacts 0，formal Route-A tuples 0/5、positive arithmetic A2 0/5、Route B 0/5，初始动力系统未变。详见 [语义审计 consolidation](BATCH_ROUND10_STAGE3_PRIME_SEMANTIC_AUDIT_CONSOLIDATION.json)（SHA-256 `43c65150a5edb6afde58c6abde0f0718272918e3dc26326238a6ae41e0187171`）、[结果报告](BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md)（`0343b34e2fcb80477046ac5cd0ea069fe51f6efe162edf18dc32b51ad25d0672`）、[收据](BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json)（`cfa61eb8504c45250b1658d63193475567a2e8fd0afc1037ef6eda580c196852`）与[检查点](BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)（`c646d67cf1f39b8a8723f501d7c17a12489737080234c37f631d6330b90034ae`）。
+
+29--33-round10-stage3-prime-round2 - ARS Stage 3′ Round 2 closed（2026-09-03，当前强制检查点） - P30/P31 完成三门复审并通过官方 checker 2/2，决定均为 Major Revision / B4；P29/P32/P33 在 no-retry Phase-2A 语义门以 `phase2a_lint_failed` 中止，未进入 Phase 2B、traceability、checker 或决定。全批 committed aggregate 27/29/0，控制读数 23/33/0；四个 controlling discrepancies 均留作新一轮输入，未原地修补。Canonical manuscripts/bibs/PDF 15/15 unchanged，science artifacts 0，无新科学执行；formal Route-A tuples 0/5、positive arithmetic A2 0/5、A3/A4 0/5、Route B 0/5，五个初始系统与 clock/owner/normalization/cutoff 原样冻结。当前等待作者确认：P30/P31 scoped Stage 4′，P29/P32/P33 fresh Stage 3′ Round 3。详见 [Round-2 报告](BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md)（SHA-256 `817306f3a26bdcef88af02ef7308b3de9436c372ba74f2693538ccfb40db31e3`）、[收据](BATCH_ROUND10_STAGE3_PRIME_ROUND2_RECEIPT.json)（`5ce56d67a784df9ff3a6b4ebf8bf3c0102e0f34009b6612ea8e0cd6225d2d53e`）与[强制检查点](BATCH_ROUND10_STAGE3_PRIME_ROUND2_MANDATORY_CHECKPOINT.md)（`71f46cf4aa144a55750d4d9d07f2715eb46ff926ab1c27af1222ef4aed05aaec`）。

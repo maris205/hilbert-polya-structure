@@ -3,13 +3,13 @@
 Package note: this directory is the immutable canonical Stage-2.5 manuscript
 package; its Phase-0 wording below is historical. The authoritative current
 state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
-Control state: `stage3_prime_round1_aborted_awaiting_round2_authorization`.
-**Stage 3′ Round 1 aborted fail-closed at `phase2a_lint_failed`; no decision was
-issued.** Recorded 7/4/0 became audit-supported 6/5/0 because `REV-EIC-1` is
-false FULL; the mechanical B4 direction was suppressed. The semantic passes
-were fresh-context, role-separated, and same-family; they were not independent
-error processes. Only a new user `确认` may authorize fresh Round 2. Canonical
-manuscript/PDF/bibliography bytes remain unchanged.
+Control state: `stage3_prime_round2_aborted_awaiting_round3_authorization`.
+**Stage 3′ Round 2 aborted fail-closed at `phase2a_lint_failed`; no decision was
+issued.** The committed 7/4/0 record became controlling 5/6/0 because
+`REV-EIC-1` and `REV-DA-2` are false FULL. The round stopped before Phase 2B,
+traceability, official checker, or decision. Only explicit authorization may
+start a fresh Round 3. Canonical manuscript/PDF/bibliography bytes remain
+unchanged.
 
 ## Deliverables
 
@@ -19,6 +19,7 @@ manuscript/PDF/bibliography bytes remain unchanged.
 - [`stage2_manuscript_audit.md`](stage2_manuscript_audit.md) -- hash, structure, citation, boundary, and build audit.
 - [`stage3_phase0_field_analysis.md`](../notes/stage3_phase0_field_analysis.md) -- current Stage-3 field analysis and reviewer cards.
 - [`stage3_review_baseline.json`](../notes/stage3_review_baseline.json) -- immutable Stage-3 review target.
+- [`stage3_prime_round2_verification_report.md`](../notes/stage3_prime_round2_verification_report.md) -- current fail-closed Round-2 report; Round 1 remains historical and immutable.
 
 ## 结论概要
 
@@ -28,4 +29,4 @@ manuscript/PDF/bibliography bytes remain unchanged.
 
 The complete article separates performance-independent mechanism admissibility (Gate M) from exact primitive-unoriented quotient completeness (Gate Q) under a deliberately strict literal Gaussian-prime-ideal codomain. Both gates remain open; no owner law, quotient, or S_H score is reported.
 
-Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. Stage-2.5 integrity passed; no later review stage changed a scientific result or Route coordinate. The only legal next action is a new user `确认` authorizing a new-id/new-manifest/fresh-context Stage 3′ Round 2.
+Route A A0/A1 foundation/interface preparation; formal tuple UNASSIGNED; positive arithmetic A2, A3, and A4 absent; Route B closed. Stage 3′ cannot create Route credit, and no later review stage changed a scientific result, frozen system, or Route coordinate. The only legal next action is explicit authorization for a new-id/new-manifest/fresh-context Stage 3′ Round 3.
