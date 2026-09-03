@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / three-track close：P30/P31 Stage 4′ complete；P29/P32 exact request prepared；P33 Round 4 fail-closed** | P30/P31 完成 13/13 residuals、34 个授权操作和 86/86 + 85/85 审计；P29/P32 请求覆盖 11 residuals + 1 regression、26 targets、36 pairs，并通过 377 checks；P33 Phase 1 为 201/201，但首次 Phase-2A 有 35 个 schema 错误，故严格中止。Canonical 15 files、science/results、五个初始系统与 Route 坐标均未变。见 [完成报告](BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md)、[收据](BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json)与[检查点](BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / 当前授权范围完成：P29/P32 Stage 4′ complete；P30/P31 Stage 4.5 FAIL；P33 Round 5 Major Revision/B4** | 五篇均有明确进展：P29/P32 形成 15/17 页清洁版本化修订稿；P30/P31 完成全量 fresh integrity audit 并定位 6 个 blocker，未静默修复；P33 完成 13/13 三门复评，结论 6 FULL / 7 PARTIAL。169/169 冻结绑定前后复验，Canonical 15 files、science/results、五个初始系统与 Route 坐标均未变。见[当前完成报告](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_COMPLETION_REPORT.md)、[收据](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_COMPLETION_RECEIPT.json)与[下一检查点](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_MANDATORY_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -36,7 +36,46 @@ Verschiebung 局部前像在 overlap 上不能下降。因此，`V_N` 在 fppf s
 Deninger v1 Corollary 4.6 的 sectionwise Dedekind-ring 表述，但不否定
 Propositions 4.3、4.5 或 Corollary 4.7。
 
-## Papers 29--33 Round 10 当前概要
+## Papers 29--33 Round 10 最新概要
+
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+本轮授权范围已完整收口，**5/5 论文都有可审计的明确推进**，但没有把论文修订或
+完整性审计冒充 Route 科学晋级。
+
+| Paper | 当前终态 | 本轮落地结果 | 下一合法动作 |
+|---|---|---|---|
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | **Stage 4′ author-side COMPLETE** | 5 个 residual/regression、8 ops、105/113 blocks preserved；53-query replay、22/22 crosswalk、完整 stop map；15 页零告警预览。 | fresh Stage 4.5。 |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | **Stage 4.5 FAIL** | 28/28 references、30/30 contexts、102/102 claims、104/104 evidence rows；1 Serious + 3 Medium blocker，proposal-only。 | source-finalization 与 exact correction request。 |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | **Stage 4.5 FAIL** | 24/24 references、26/26 contexts、71/71 claims、91/91 evidence rows；1 Serious + 1 Medium blocker，proposal-only。 | source-finalization 与 exact correction request。 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | **Stage 4′ author-side COMPLETE** | 7 residuals、18 ops、114/131 blocks preserved；四篇 closest-work、51-row replay、formal carriers、conditional lemma 与 AN-1--AN-5；17 页零告警预览。 | fresh Stage 4.5。 |
+| [P33](papers/33-bolza-control-matched-census/README.md) | **Stage 3′ Round 5 COMPLETE — Major Revision/B4** | 13/13 fresh three-gate review；6 FULL / 7 PARTIAL、0 adjustments；6 must-fix + 1 should-fix residual。 | exact Stage 4′ residual request。 |
+
+当前整批审计为 `PASS`：冻结清单 **169/169** 在终态综合前后均通过；P29/P32
+官方 revision bundle 与独立构建通过，P30/P31 失败态及 6 个 blocker 原样封存，
+P33 官方 synthesis checker 通过。没有 successor stage、silent repair、canonical
+promotion、result refresh 或新科学执行。
+
+路线仍以 [`Route A`](skills/route-a-evaluator.md) 与
+[`Route B`](skills/route-b-evaluator.md) 两份文件为唯一正式判据。本轮仍处于
+**Route-A A0/A1 foundation/interface**：formal tuples `0/5`、positive arithmetic
+A2 `0/5`、A3 `0/5`、A4 `0/5`、Route B `0/5`。五种连续时间动力学子型仍在研究
+集中，但本轮新科学实验数为 `0`；五个初始系统及 clock、primitive/owner、inverse、
+normalization、cutoff 与 target-blind 限定全部冻结。引用保持 `plainnat` 数字制。
+
+当前权威工件：
+
+- [完成报告](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_COMPLETION_REPORT.md) — `e3ae8cbf2c1499dabcf76a3663ae9dd3345690054eb848868e46fc72d0a2ca7d`
+- [机器收据](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_COMPLETION_RECEIPT.json) — `38f7865b0714e6e5dcb424d4a0b6b87935de9480f309e6dfa0469837a82b50cb`
+- [最终审计](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_FINAL_AUDIT.json) — `f079deb24cc017c54d295f737f053b81f68a330e7d87ef4fa77cfb49f0c6e7a0`
+- [下一 mandatory checkpoint](BATCH_ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_AND_ROUND5_MANDATORY_CHECKPOINT.md) — `309e2c2342b07a833d2098fc5e62ad846841f6a9878bdcd093d163b92fdd5c60`
+
+下一条简短 `确认` 只授权：P29/P32 fresh Stage 4.5；P30/P31 的 bounded
+source-finalization 与 exact correction-request 准备；P33 的 exact Stage 4′ residual
+request 准备。它不授权应用补丁、Stage 5/6、canonical promotion、新科学结果或
+Route 晋级。
+
+### 历史：上一 mandatory checkpoint 状态（已被上文取代）
 
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 

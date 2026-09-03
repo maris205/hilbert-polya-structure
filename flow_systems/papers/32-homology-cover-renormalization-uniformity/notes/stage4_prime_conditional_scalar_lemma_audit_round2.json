@@ -1,0 +1,46 @@
+{
+  "schema_version": "round10-stage4-prime-conditional-scalar-lemma-audit/1.0",
+  "paper_id": "P32",
+  "generated_at_utc": "2026-09-04T00:30:00Z",
+  "lemma": {
+    "label": "P32-CONDITIONAL-SCALAR",
+    "hypotheses": [
+      "ell>0",
+      "s is real and s>0",
+      "m is an integer and m>=2"
+    ],
+    "definitions": {
+      "Phi_m(s)": "(1-exp(-s ell/m))^(-m)",
+      "B(s)": "(1-exp(-s ell))^(-1)"
+    },
+    "conclusion": "Phi_m(s)>B(s)",
+    "proof": [
+      "Set x=exp(-s ell/m). The hypotheses imply 0<x<1 and exp(-s ell)=x^m.",
+      "Because m>=2, (1-x)^m=(1-x)(1-x)^(m-1)<1-x.",
+      "Because 0<x<1 and m>=2, x^m<x, hence 1-x<1-x^m.",
+      "All three quantities are positive. Taking reciprocals reverses both strict inequalities: (1-x)^(-m)>(1-x)^(-1)>(1-x^m)^(-1). The outer terms are Phi_m(s) and B(s)."
+    ]
+  },
+  "hypothesis_checks": {
+    "positivity": "PASS",
+    "strictness": "PASS",
+    "reciprocal_direction": "PASS",
+    "endpoint_exclusion": "PASS"
+  },
+  "conditional_applications": [
+    {
+      "branch": "higher content",
+      "substitution": "m=d>=2 after d divides N on the frozen schedule",
+      "gate": "valid ownerwise higher-content factor derivation and permitted singleton comparison",
+      "status": "CONDITIONAL_ONLY_NOT_EXECUTED"
+    },
+    {
+      "branch": "zero content",
+      "substitution": "m=N>=2",
+      "gate": "valid separate zero-content factor derivation and permitted one-owner fiber comparison",
+      "status": "CONDITIONAL_ONLY_NOT_EXECUTED"
+    }
+  ],
+  "audit_outcome": "PASS_ELEMENTARY_CONDITIONAL_LEMMA",
+  "boundary": "The lemma compares two candidate positive real functions only. It supplies no cover-factor derivation, formal owner identification, observed owner, coefficient execution, global obstruction, recovery result, scientific disposition, canonical-result refresh, or Route credit."
+}

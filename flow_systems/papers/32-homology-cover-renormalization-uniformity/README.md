@@ -2,6 +2,33 @@
 
 ## Current status
 
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+**ARS STAGE 4′ AUTHOR-SIDE REVISION COMPLETE — AWAITING FRESH STAGE 4.5.**
+
+Control state: `stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization`.
+All seven residual items are covered by 18 authorized operations with 114/131
+source blocks preserved byte-identically. The versioned paper now includes a
+four-work closest-comparator matrix, 51-manifestation replay, explicit
+inverse-limit/localization/Hahn formal carriers, an exact conditional scalar
+lemma, and AN-1--AN-5 analytic obligations. Its 17-page letter preview builds
+with zero overfull boxes, unresolved citations/references, missing glyphs, or
+fatal errors.
+
+本轮结论概要：P32 已从精确请求推进到完整的作者侧 Stage 4′ 修订稿和官方可回放
+evidence bundle。形式对象、比较基线、条件 lemma 与 analytic registry 已明确，
+但 factor、global product、analytic interchange、obstruction 和 Route credit
+仍未被声称或执行。
+
+Current artifacts: [completion report](notes/stage4_prime_completion_report_round2.md),
+[revised draft](notes/stage4_prime_revision_round2.tex),
+[clean preview](notes/stage4_prime_revision_round2.pdf), and
+[revision evidence bundle](notes/stage4_prime_revision_evidence_bundle_round2.json).
+Next gate: one separately authorized fresh Stage 4.5 audit; no Stage 5 or
+canonical promotion is authorized.
+
+### Historical previous checkpoint (superseded)
+
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 **ARS STAGE 4′ EXACT REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**

@@ -2,6 +2,33 @@
 
 ## Current status
 
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+**ARS STAGE 4′ AUTHOR-SIDE REVISION COMPLETE — AWAITING FRESH STAGE 4.5.**
+
+Control state: `stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization`.
+The exact 5-item remediation is now applied as 8 authorized `replace_block`
+operations with 105/113 source blocks preserved byte-identically. The paper now
+binds the 53-query replay, 139 manifestations, 89 unique current keys, 22/22
+admitted-source crosswalk, complete reader stop map, three control stop states,
+and explicitly unexecuted split-ideal fixture. The final versioned preview is
+15 A4 pages with zero overfull boxes, unresolved citations/references, missing
+glyphs, or fatal errors.
+
+本轮结论概要：P29 已从“请求已准备”推进到完整的作者侧 Stage 4′ 修订稿和官方
+可回放 evidence bundle。论文更清楚地区分 Gate M、Gate Q、控制解释与尚未执行的
+fixture；仍不宣称 owner law、完整 quotient、性能数值或 Route credit。Canonical
+论文包、科学结果和初始动力学系统未改。
+
+Current artifacts: [completion report](notes/stage4_prime_completion_report_round2.md),
+[revised draft](notes/stage4_prime_revision_round2.tex),
+[clean preview](notes/stage4_prime_revision_round2.pdf), and
+[revision evidence bundle](notes/stage4_prime_revision_evidence_bundle_round2.json).
+Next gate: one separately authorized fresh Stage 4.5 audit; no Stage 5 or
+canonical promotion is authorized.
+
+### Historical previous checkpoint (superseded)
+
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 **ARS STAGE 4′ EXACT REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**

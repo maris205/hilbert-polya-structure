@@ -2,7 +2,21 @@
 
 Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage3_prime_round4_aborted_phase2a_lint_failed_awaiting_fresh_round5_authorization`**.
+Current controlling state: **`stage3_prime_round5_complete_major_revision_b4_awaiting_stage4_prime_authorization`**.
+
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+| Current gate field | Value |
+|---|---|
+| Pipeline global state | `stage3_prime_round5_complete_major_revision_b4_awaiting_stage4_prime_authorization` |
+| Current completed gate | Stage 3′ Round 5 `COMPLETE`; Phase 1/2A/2B and official checker `PASS` |
+| Decision | `Major Revision / B4`; 6 FULL + 7 PARTIAL; adjustments/new issues/dissents/escalations `0` |
+| Residuals | 6 `must_fix` + 1 `should_fix`; exact item set REV-P33-002/003/005/006/007/008/013 |
+| Route | A1 preparation; formal A0 prohibited/confounded; formal tuple `UNASSIGNED`; positive A2/A3/A4 `0`; Route B uninvoked |
+| Frozen boundaries | canonical manuscript/bib/PDF, science/results, initial system and Route crosswalk unchanged; new scientific executions `0` |
+| Next legal transition | exact Stage 4′ residual-remediation request preparation, followed by separate author authorization |
+
+## Historical previous-checkpoint state
 
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 

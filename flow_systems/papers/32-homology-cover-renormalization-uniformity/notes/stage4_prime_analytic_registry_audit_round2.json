@@ -1,0 +1,64 @@
+{
+  "schema_version": "round10-stage4-prime-analytic-registry-audit/1.0",
+  "paper_id": "P32",
+  "generated_at_utc": "2026-09-04T00:30:00Z",
+  "common_definitions": {
+    "compact_domain": "K(delta,T,R)={s in C:1+delta<=Re(s)<=R, |Im(s)|<=T}, for every delta>0, finite T>=0, and finite R>=1+delta",
+    "schedules": "S_k in {k!,2(k!)} for every integer k>=1; diagonal m_k=2^k",
+    "summand": "a_(j,N)(s)=-q_N(g_j) Log_0(1-exp(-s ell(g_j)/q_N(g_j)))=q_N(g_j) sum_(r>=1) exp(-r s ell(g_j)/q_N(g_j))/r; g_j is the jth certified content-one owner, so q_N(g_j)=1",
+    "branch": "Log_0 is the analytic branch defined by the displayed absolutely convergent series for |exp(-s ell/q)|<1 and normalized to 0 as Re(s)->infinity",
+    "partial_sum": "L(m,N;s)=sum_(j=1)^m a_(j,N)(s)",
+    "pointwise_majorant": "M_(j,N,K)=-q_N(g_j) log(1-exp(-(1+delta)ell(g_j)/q_N(g_j))); for content one this is M_(j,K)=-log(1-exp(-(1+delta)ell(g_j)))"
+  },
+  "row_count": 5,
+  "rows": [
+    {
+      "claim_id": "AN-1",
+      "indices_and_coupling": "fix schedule choice and k; N=S_k; let m->infinity through the certified owner order",
+      "limit_order": "lim_(m->infinity) L(m,S_k;s)",
+      "majorant_obligation": "prove sum_(j>=1) M_(j,S_k,K)<infinity for the exact certified owners",
+      "specific_interchange": "identify lim_m sum_(j<=m) a_(j,S_k) with the infinite owner sum uniformly on K",
+      "prerequisites": "factor derivation; certified cofinal content-one enumeration; exact lengths; branch binding",
+      "status": "UNPROVED_NOT_EXECUTED"
+    },
+    {
+      "claim_id": "AN-2",
+      "indices_and_coupling": "fix m; N=S_k; let k->infinity separately for S_k=k! and S_k=2(k!)",
+      "limit_order": "lim_(k->infinity) L(m,S_k;s)",
+      "majorant_obligation": "for each j<=m prove sup_k sup_(s in K)|a_(j,S_k)(s)|<=M_(j,K)<infinity; finite sum_(j<=m) M_(j,K)",
+      "specific_interchange": "lim_k sum_(j<=m) a_(j,S_k)=sum_(j<=m) lim_k a_(j,S_k)",
+      "prerequisites": "factor derivation and branch binding; content-one q=1 must be proved applicable, not inferred from an executed result",
+      "status": "UNPROVED_NOT_EXECUTED"
+    },
+    {
+      "claim_id": "AN-3",
+      "indices_and_coupling": "for each schedule first m->infinity at fixed k, then k->infinity",
+      "limit_order": "lim_(k->infinity)[lim_(m->infinity)L(m,S_k;s)]",
+      "majorant_obligation": "prove one k-independent summable sequence M_j(K) with |a_(j,S_k)(s)|<=M_j(K) for every j,k,s in K",
+      "specific_interchange": "lim_k sum_(j>=1)a_(j,S_k)=sum_(j>=1)lim_k a_(j,S_k), uniformly on K",
+      "prerequisites": "AN-1 for every k; component limits; certified cofinal enumeration; uniform dominated tail",
+      "status": "UNPROVED_NOT_EXECUTED"
+    },
+    {
+      "claim_id": "AN-4",
+      "indices_and_coupling": "for each schedule first k->infinity at fixed m, then m->infinity; compare with AN-3",
+      "limit_order": "lim_(m->infinity)[lim_(k->infinity)L(m,S_k;s)] and equality with the AN-3 order",
+      "majorant_obligation": "prove the same k-independent summable M_j(K) and convergence of each a_(j,S_k) on K",
+      "specific_interchange": "justify lim_m lim_k L=lim_k lim_m L and identify both with sum_j lim_k a_(j,S_k)",
+      "prerequisites": "AN-2 for every m; AN-3 dominated tail; common certified owner order",
+      "status": "UNPROVED_NOT_EXECUTED"
+    },
+    {
+      "claim_id": "AN-5",
+      "indices_and_coupling": "m=m_k=2^k and N=S_k, separately for S_k=k! and S_k=2(k!)",
+      "limit_order": "lim_(k->infinity)L(2^k,S_k;s)",
+      "majorant_obligation": "prove a k-independent summable M_j(K), component convergence, and sup_(s in K) sum_(j>2^k)|a_(j,S_k)(s)|<=sum_(j>2^k)M_j(K)->0",
+      "specific_interchange": "identify the coupled diagonal limit with the common AN-3/AN-4 iterated limit",
+      "prerequisites": "certified cofinal diagonal; both schedule branches; AN-3/AN-4 common limit; uniform tail",
+      "status": "UNPROVED_NOT_EXECUTED"
+    }
+  ],
+  "audit_outcome": "PASS_COMPLETE_REGISTRY_SHAPE; ALL_ANALYTIC_CLAIMS_UNPROVED",
+  "finite_diagnostic_boundary": "The prospective k<=8 prefix and m in {8,16,32,64,128} panels remain unexecuted serialization diagnostics. They have no convergence, cofinality, majorant, interchange, or scientific-result force.",
+  "non_global_boundary": "No tail theorem, infinite scalar specialization, factor theorem, owner enumeration, limit identity, recovery statement, obstruction, or Route credit is asserted."
+}

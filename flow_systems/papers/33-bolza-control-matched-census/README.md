@@ -2,6 +2,32 @@
 
 ## Current status
 
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+**ARS STAGE 3′ ROUND 5 COMPLETE — MAJOR REVISION / RULE B4.**
+
+Control state: `stage3_prime_round5_complete_major_revision_b4_awaiting_stage4_prime_authorization`.
+The fresh three-gate re-review completed all 13 roadmap items and passed the
+official ARS synthesis checker. Final verdicts are 6 `FULLY_ADDRESSED` and 7
+`PARTIALLY_ADDRESSED`, with zero adjustments, new issues, dissents, escalation
+exceptions, or reject recommendation. Six partial items retain `must_fix`
+residuals and one retains a `should_fix` residual, mechanically yielding Major
+Revision under B4.
+
+本轮结论概要：P33 已从 Round-4 schema fail-closed 状态推进到有效、可回放的编辑
+决定。已完全闭合 closest-work、methods narration、control binding、owner
+serialization、synthetic conformance trace 与 migration rules；剩余工作被压缩为
+6 个 must-fix 和 1 个 should-fix 的精确集合。没有执行 census，也没有改变 Route。
+
+Current artifacts: [Round-5 verification report](notes/stage3_prime_round5_verification_report.md),
+[completion receipt](notes/stage3_prime_round5_completion_receipt.json),
+[official checker receipt](notes/stage3_prime_round5_checker_receipt.json), and
+[traceability matrix](notes/stage3_prime_round5_traceability.json).
+Next gate: prepare and then separately authorize one exact Stage 4′ residual
+remediation request.
+
+### Historical previous checkpoint (superseded)
+
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 **ARS STAGE 3′ ROUND 4 ABORTED FAIL-CLOSED — AWAITING FRESH ROUND 5.**

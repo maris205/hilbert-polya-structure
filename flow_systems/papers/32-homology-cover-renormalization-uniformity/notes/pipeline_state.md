@@ -2,7 +2,21 @@
 
 Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage4_prime_request_prepared_awaiting_exact_authorization`**.
+Current controlling state: **`stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization`**.
+
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+| Current gate field | Value |
+|---|---|
+| Pipeline global state | `stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization` |
+| Current completed gate | Stage 4′ author-side `COMPLETE`; 7 residuals, 18 operations, 114/131 preserved blocks |
+| Paper deliverable | versioned 17-page clean preview; four-work comparator; 51-manifestation replay; formal carriers, conditional lemma, AN-1--AN-5 |
+| Integrity/build | official revision bundle `PASS`; authorization witness `PASS`; overfull/undefined citation/reference/missing/fatal all `0` |
+| Route | generic A1--A2 preparation with arithmetic A0 unavailable; no formal or positive A2 credit; A3/A4 `0`; Route B uninvoked |
+| Frozen boundaries | canonical manuscript/bib/PDF, science/results, initial system and Route crosswalk unchanged |
+| Next legal transition | separately authorized fresh Stage 4.5 audit-only |
+
+## Historical previous-checkpoint state
 
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 

@@ -2,6 +2,31 @@
 
 ## Current status
 
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+**ARS STAGE 4.5 ROUND 1 FAIL — CORRECTIONS PROPOSED, NOT APPLIED.**
+
+Control state: `stage4_5_round1_fail_awaiting_exact_correction_authorization`.
+The fresh final-integrity audit covered 24/24 references, 26/26 citation
+contexts, 71/71 registered claims, 91/91 evidence rows, and a clean 13-page
+build. It found 1 Serious and 1 Medium blocker: 22/26 contexts remain
+anchorless, and the AI disclosure omits the current Round-2 / 3--4 September
+revision assistance. Phase-C surfaces were 13/13 verified. No correction,
+canonical promotion, science/result mutation, or Route transition was applied.
+
+本轮结论概要：P31 已完成全量 fresh Stage 4.5，并把阻塞面收敛为 passage locator
+与 disclosure 两项。完整 owner ledger、inverse theorem 与 executable verifier
+仍是待实现的科学工作；审计没有把现有方法架构提升成 Route credit。
+
+Current artifacts: [final integrity report](notes/stage4_5_round1_final_integrity_report.md),
+[machine report](notes/stage4_5_round1_integrity_report.json),
+[receipt](notes/stage4_5_round1_receipt.json), and
+[proposal-only checkpoint](notes/stage4_5_round1_correction_checkpoint.json).
+Next gate: bounded source-finalization plus preparation and later author
+authorization of an exact correction patch.
+
+### Historical previous checkpoint (superseded)
+
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 **ARS STAGE 4′ AUTHOR-SIDE REVISION COMPLETE — AWAITING FRESH STAGE 4.5.**

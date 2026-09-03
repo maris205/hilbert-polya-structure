@@ -2,7 +2,22 @@
 
 Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage4_prime_author_side_complete_awaiting_stage4_5_authorization`**.
+Current controlling state: **`stage4_5_round1_fail_awaiting_exact_correction_authorization`**.
+
+<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+
+| Current gate field | Value |
+|---|---|
+| Pipeline global state | `stage4_5_round1_fail_awaiting_exact_correction_authorization` |
+| Current completed gate | fresh Stage 4.5 Round 1 `FAIL`; full audit completed, no silent repair |
+| Audit denominators | references 28/28; contexts 30/30 = 4 verified + 26 anchorless; claims 102/102; evidence 104/104 |
+| Blockers | 1 Serious + 3 Medium: passage locators, 26-vs-28 wording, stale Stage-2.5 status, AI disclosure interval |
+| Build | `PASS`, 16 pages; unresolved citations/references and overfull boxes `0` |
+| Route | A0_FAIL / A2_NOT_ELIGIBLE; formal tuple `UNASSIGNED`; A3/A4 `0`; Route B uninvoked |
+| Frozen boundaries | canonical manuscript/bib/PDF, science/results, initial system and Route crosswalk unchanged |
+| Next legal transition | bounded source-finalization and exact correction-request preparation; patch application requires later confirmation |
+
+## Historical previous-checkpoint state
 
 <!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
