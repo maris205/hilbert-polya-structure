@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C334--HCS-C338 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`db2c816b7b6bd450f51f79b91842cb882b0bd773`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C334 | The Morse Hamiltonian has a complete classical energy atlas with exact turning points, action, period and action--period identity; its natural Friedrichs quantization has every bound level and Laguerre eigenfunction, the essential spectrum `[0,infinity)`, and a non-`L2` zero-energy threshold. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Morse package](../henon_morse_action_bound_spectrum_route_a/) · [paper PDF](../henon_morse_action_bound_spectrum_route_a/paper/main.pdf) |
+| HCS-C335 | Exponential shot-noise OU dynamics has an exact pathwise flow, transition Laplace semigroup, unique Gamma invariant law, Wasserstein contraction, all stationary moments/cumulants and covariance, and the complete spectrum on every finite polynomial filtration, without a full-`L2` spectrum claim. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [shot-noise OU package](../henon_exponential_shot_noise_ou_route_a/) · [paper PDF](../henon_exponential_shot_noise_ou_route_a/paper/main.pdf) |
+| HCS-C336 | Finite Crow--Kimura single-peak dynamics is the projectivization of an exactly diagonalized positive semigroup: retained Walsh levels have exact multiplicities, the rank-one secular roots are simple and strictly interlacing, and the Perron gap and every zero/one-locus boundary are explicit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Crow--Kimura package](../henon_crow_kimura_single_peak_quasispecies_route_a/) · [paper PDF](../henon_crow_kimura_single_peak_quasispecies_route_a/paper/main.pdf) |
+| HCS-C337 | The integer-resonant quantum kicked rotor has an exact free-after-kick parity atlas: even order gives the Bessel kernel, characteristic function and ballistic moments, while odd order gives half-turn period-two antiresonance, with all operator-order, seed and zero-kick faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [kicked-rotor package](../henon_quantum_kicked_rotor_integer_resonance_route_a/) · [paper PDF](../henon_quantum_kicked_rotor_integer_resonance_route_a/paper/main.pdf) |
+| HCS-C338 | Wilson infinite-stack cycle popping is abelian whenever one legal order terminates and terminates almost surely under random conductance stacks; its output has the exact weighted spanning-tree law, matrix-tree normalization and all transfer-current inclusion minors. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Wilson cycle-popping package](../henon_wilson_cycle_popping_weighted_ust_route_a/) · [paper PDF](../henon_wilson_cycle_popping_weighted_ust_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively an integrable molecular Hamiltonian with its source
+quantization, an affine jump process, a finite mutation--selection flow, a
+periodically driven unitary Floquet system, and an abelian random-stack graph
+dynamics.  No target local datum, Euler factor, root number, automorphy
+object, target divisor/counting law or functional equation, target zero
+match, Hilbert--Polya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes, cross-review repairs and
+accounting are recorded in
+[BATCH_REVIEW_C334_C338.md](../BATCH_REVIEW_C334_C338.md).
+
 ## HCS-C329--HCS-C333 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

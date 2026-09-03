@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C334--C338
+
+This round advances five unrelated mechanisms at theorem scale: an
+integrable molecular Hamiltonian and its natural quantization, a jump-driven
+affine Markov process, a finite-genome mutation--selection flow, an
+integer-resonant quantum Floquet system, and an abelian random-stack dynamics.
+These are five complete papers, not five installments of one theorem.
+
+- [C334 Morse classical action and bound spectrum](henon_morse_action_bound_spectrum_route_a/README.md) · [paper PDF](henon_morse_action_bound_spectrum_route_a/paper/main.pdf)
+- [C335 exponential shot-noise OU semigroup](henon_exponential_shot_noise_ou_route_a/README.md) · [paper PDF](henon_exponential_shot_noise_ou_route_a/paper/main.pdf)
+- [C336 Crow--Kimura single-peak quasispecies](henon_crow_kimura_single_peak_quasispecies_route_a/README.md) · [paper PDF](henon_crow_kimura_single_peak_quasispecies_route_a/paper/main.pdf)
+- [C337 integer-resonant quantum kicked rotor](henon_quantum_kicked_rotor_integer_resonance_route_a/README.md) · [paper PDF](henon_quantum_kicked_rotor_integer_resonance_route_a/paper/main.pdf)
+- [C338 Wilson cycle-popping weighted UST](henon_wilson_cycle_popping_weighted_ust_route_a/README.md) · [paper PDF](henon_wilson_cycle_popping_weighted_ust_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C334_C338.md),
+[batch plan](BATCH_PLAN_C334_C338.md), and
+[batch review](BATCH_REVIEW_C334_C338.md) for collision screening, theorem
+contracts, source ownership, author-swapped proof checks and exact release
+receipts.  Across the five packages the final audit closes **275,948**
+independent-checker assertions, **14,353** symbolic identities, **466/466**
+hostile rejections, **2,596,399** evidence bytes, 135 manifest payloads (140
+physical files), and **15** final-paper pages with **76** embedded/subset font
+records.  Four evidence schemas expose **137,385** audited scalar leaves;
+C336 instead records its complete row/cell ledger.  The five strict tuples,
+in order C334--C338, are
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`.
+All five are `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is asserted.
+
 ## Route-A independent cross-subtype round C329--C333
 
 This round makes five separate theorem-scale advances while deliberately

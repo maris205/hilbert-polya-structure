@@ -1,0 +1,183 @@
+\pdfvariable trailerid {[<C3342026090300000000000000000000><C3342026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,unicode-math,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\R}{\mathbb R}
+\setlength{\emergencystretch}{3em}
+\title{The Morse Hamiltonian: Exact Classical Action and\\Complete Quantum Bound Spectrum}
+\author{Route-A source-local certificate HCS-C334}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We solve the classical and quantum one-dimensional Morse Hamiltonian under
+one convention lock.  Every bounded classical orbit has an elementary
+action and period, while canonical quantization has a finite, explicitly
+exhausted generalized-Laguerre point spectrum.
+\ifnum\CRevisionRound>0
+The proof derives both formulas and fixes the strict square-integrability
+cutoff.
+\fi
+\ifnum\CRevisionRound>1
+We additionally close the essential-spectrum and zero-energy boundaries,
+where the formal threshold state is not square integrable, and give a
+reproducible exact evidence certificate without promoting it to proof.
+\fi
+\end{abstract}
+
+\section{Frozen Hamiltonian and result}
+Let
+\begin{equation}\label{eq:model}
+ V(x)=D(e^{-2ax}-2e^{-ax}),\qquad
+ H_{\rm cl}(x,p)=\frac{p^2}{2m}+V(x),
+\end{equation}
+where $m,D,a>0$.  The potential has minimum $-D$ at zero, tends to zero
+from below as $x\to+\infty$, and tends to $+\infty$ as $x\to-\infty$.
+For a closed regular energy curve we use the normalized action
+\begin{equation}\label{eq:actiondef}
+ J(E)=\frac{1}{2\pi}\oint p\,dx.
+\end{equation}
+For $\hbar>0$, let $H_q$ be the self-adjoint operator associated with the
+lower-bounded closed form of
+\[
+ -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V(x)
+ \quad\hbox{on }L^2(\R),
+ \qquad \lambda=\frac{\sqrt{2mD}}{a\hbar}.
+\]
+
+\begin{theorem}[Classical action and quantum closure]\label{thm:main}
+For every $-D<E<0$, the classical energy curve is periodic and
+\begin{equation}\label{eq:JT}
+ J(E)=\frac{\sqrt{2mD}}a\left(1-\sqrt{-E/D}\right),\qquad
+ T(E)=\frac{2\pi}{a\sqrt{-2E/m}},\qquad
+ J'(E)=\frac{T(E)}{2\pi}.
+\end{equation}
+The essential spectrum of $H_q$ is $[0,\infty)$.  Its point spectrum is
+exactly the finite set
+\begin{equation}\label{eq:levels}
+ E_n=-\frac{a^2\hbar^2}{2m}(\lambda-n-\tfrac12)^2,\qquad
+ n\in\mathbb N_0,\quad n<\lambda-\tfrac12,
+\end{equation}
+and every eigenvalue is simple.  With $z=2\lambda e^{-ax}$, a corresponding
+eigenfunction is, up to normalization,
+\begin{equation}\label{eq:eigenfunction}
+ \psi_n(x)=z^{\lambda-n-1/2}e^{-z/2}
+ L_n^{(2\lambda-2n-1)}(z).
+\end{equation}
+There are $\max(0,\lceil\lambda-1/2\rceil)$ bound states.  Equality in the
+cutoff produces a zero-energy constant tail, not an $L^2$ eigenfunction;
+there are no nonnegative eigenvalues.
+\end{theorem}
+
+The phrase \emph{Morse classical action owner} is the round-zero
+certificate: it fixes the model, the $2\pi$ normalization, and the strict
+spectral statement before any finite computation.
+
+\ifnum\CRevisionRound>0
+\section{Classical proof}
+Put $y=e^{-ax}$ and $\delta=\sqrt{1+E/D}\in(0,1)$.  The two turning values
+of $y$ are $1-\delta$ and $1+\delta$; their order in $x$ is reversed.  A
+full oscillation has period
+\begin{align*}
+ T(E)&=\sqrt{2m}\int_{x_-}^{x_+}\frac{dx}{\sqrt{E-V(x)}}\\
+ &=\frac{\sqrt{2m}}{a\sqrt D}
+ \int_0^\pi\frac{d\theta}{1+\delta\cos\theta}
+ =\frac{\pi\sqrt{2m}}{a\sqrt{-E}}.
+\end{align*}
+The last integral follows directly from the tangent-half-angle
+substitution.  Differentiating~\eqref{eq:actiondef} under the integral gives
+$J'(E)=T(E)/(2\pi)$; endpoint terms vanish because $p=0$ at both turning
+points.  Since the curve contracts to the equilibrium at $E=-D$, we have
+$J(-D)=0$.  Integrating the period from $-D$ to $E$ proves all of
+\eqref{eq:JT}.  This derivation also detects an erroneous use of the
+unnormalized closed integral as the action.
+
+\section{Quantum reduction and exhaustion}
+Write a prospective negative eigenvalue as
+$E=-(a^2\hbar^2/2m)s^2$ with $s>0$.  The change
+$z=2\lambda e^{-ax}$ turns the Schr\"odinger equation into
+\begin{equation}\label{eq:whittaker}
+ z^2\psi_{zz}+z\psi_z+(-z^2/4+\lambda z-s^2)\psi=0.
+\end{equation}
+Substitution $\psi=z^se^{-z/2}F$ gives
+\begin{equation}\label{eq:laguerre}
+ zF''+(2s+1-z)F'+(\lambda-s-\tfrac12)F=0.
+\end{equation}
+At $z\to\infty$, square integrability selects the recessive Whittaker
+solution.  Its small-$z$ nonintegrable coefficient is proportional to
+$1/\Gamma(s-\lambda+1/2)$, and hence vanishes precisely when
+\[
+ \lambda-s-\tfrac12=n\in\mathbb N_0.
+\]
+Then~\eqref{eq:laguerre} terminates as
+$L_n^{(2s)}(z)$.  Since $dx=-(az)^{-1}dz$, the remaining endpoint test is
+$\int_0 z^{2s-1}\,dz<\infty$, exactly when $s>0$.  Thus the inequality in
+\eqref{eq:levels} is strict and the displayed list exhausts all negative
+eigenvalues.  Sturm oscillation supplies simplicity and node count $n$.
+The special-function conventions agree with the official references
+\cite{DLMFL,DLMFW}.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Threshold, essential spectrum, and all faces}
+Weyl sequences supported increasingly far to the right see the free
+half-line and give $[0,\infty)\subset\sigma_{\rm ess}(H_q)$.  On a left
+half-line, $V\to+\infty$ gives compact resolvent.  On a right half-line,
+$V$ is an exponentially decaying perturbation of the free operator.
+Dirichlet bracketing therefore yields
+$\sigma_{\rm ess}(H_q)=[0,\infty)$.  Standard one-dimensional Volterra
+asymptotics for this short-range tail make every nonzero positive-energy
+solution oscillatory with nonvanishing amplitude and every zero-energy
+solution asymptotic to $A+Bx$; none can be $L^2$.  In the tempting
+terminating equality $s=0$, formula~\eqref{eq:eigenfunction} directly has
+a nonzero constant tail.  Zero is therefore a threshold, not an eigenvalue.
+
+The complete boundary atlas is now transparent.  At $E=-D$ lies the
+equilibrium with $J=0$.  The chamber $-D<E<0$ is periodic.  At $E=0$ the
+dissociation separatrix has infinite period but limiting action
+$\sqrt{2mD}/a$.  Positive classical energies scatter, and $E<-D$ has no
+energy shell.  Quantum mechanically, $\lambda\leq1/2$ gives no bound state;
+every equality $n=\lambda-1/2$ is excluded.  Nonpositive $m,D,a$, or
+$\hbar$ lies outside the frozen owner.
+
+\section{Evidence, collisions, and Route A}
+The machine certificate enumerates rational semicircle points for the
+normalized classical formulas, all allowed levels for
+$\lambda=k/4$ through $k=32$, every generalized-Laguerre coefficient, and
+each half-integer threshold.  An independent implementation and a symbolic
+lane recompute these data.  This is a convention-sensitive regression
+receipt, not the proof of the infinite theorem.
+
+The nearest repository owners remain distinct: C216 is Coulomb/Kepler,
+C232 has quartic Duffing periods, C250 is the confining isotonic oscillator,
+and C295 is the radial isochrone potential.  The conservative Route-A tuple
+is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_PASS\_ANALYTIC},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_NATURAL\_QUANTIZATION}).
+\]
+Natural quantization does not turn the consecutive excitation index into
+prime ownership and does not produce a target determinant or analytic
+bridge.  Route A is rejected; Route B is not invoked.  No arithmetic local
+data, Euler factors, root numbers, automorphy, target divisor law,
+functional equation, zero match, or Hilbert--P\'olya operator is claimed.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{Morse}
+P. M. Morse, \emph{Diatomic Molecules According to the Wave Mechanics. II.
+Vibrational Levels}, Phys. Rev. 34 (1929), 57,
+\href{https://doi.org/10.1103/PhysRev.34.57}{doi:10.1103/PhysRev.34.57}.
+\bibitem{DLMFL}
+NIST Digital Library of Mathematical Functions, \emph{Laguerre
+polynomials}, \url{https://dlmf.nist.gov/18.5}.
+\bibitem{DLMFW}
+NIST Digital Library of Mathematical Functions, \emph{Whittaker
+functions}, \url{https://dlmf.nist.gov/13.14}.
+\end{thebibliography}
+\end{document}

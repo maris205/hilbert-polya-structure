@@ -1,0 +1,179 @@
+\pdfvariable trailerid {[<C3352026090300000000000000000000><C3352026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,unicode-math,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathcal P}
+\setlength{\emergencystretch}{3em}
+\title{Exponential Shot-Noise Ornstein--Uhlenbeck Dynamics:\\Exact Semigroup, Gamma Equilibrium, and Polynomial Filtrations}
+\author{Route-A source-local certificate HCS-C335}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We close the positive Ornstein--Uhlenbeck process driven by Poisson arrivals
+with exponential marks.  Its all-time transition Laplace transform follows
+directly from the marked-Poisson functional.
+\ifnum\CRevisionRound>0
+The same formula yields the unique Gamma equilibrium, sharp Wasserstein
+contraction, all stationary moments and cumulants, and the exact covariance.
+\fi
+\ifnum\CRevisionRound>1
+We further determine the generator spectrum on every finite polynomial
+filtration, while explicitly making no claim about the full $L^2$ spectrum,
+and close every zero-parameter boundary.
+\fi
+\end{abstract}
+
+\section{Frozen process and semigroup}
+Fix $\gamma,\kappa,\beta>0$.  Let $N_t$ be Poisson of rate $\kappa$, let
+$T_j$ be its jump times, and let the independent marks $Y_j$ have
+exponential rate $\beta$.  On $[0,\infty)$ consider
+\begin{equation}\label{eq:sde}
+ dX_t=-\gamma X_t\,dt+dJ_t,
+ \qquad J_t=\sum_{T_j\leq t}Y_j,
+ \qquad X_0=x\geq0.
+\end{equation}
+
+\begin{theorem}[Exact affine Markov closure]\label{thm:main}
+For $t,s\geq0$, with $\alpha=\kappa/\gamma$,
+\begin{align}
+ X_t&=e^{-\gamma t}x+
+ \sum_{T_j\leq t}e^{-\gamma(t-T_j)}Y_j,\label{eq:path}\\
+ \E_xe^{-sX_t}&=e^{-se^{-\gamma t}x}
+ \left(\frac{\beta+se^{-\gamma t}}{\beta+s}\right)^\alpha.
+ \label{eq:LT}
+\end{align}
+The unique invariant probability is Gamma with shape $\alpha$ and rate
+$\beta$.  For every $p\geq1$,
+\begin{equation}\label{eq:Wp}
+ W_p(P_t(x,\cdot),P_t(y,\cdot))=e^{-\gamma t}|x-y|.
+\end{equation}
+In stationarity,
+\begin{equation}\label{eq:statistics}
+ \E X^n=\frac{(\alpha)_n}{\beta^n},\qquad
+ \operatorname{cum}_n(X)=\frac{\alpha(n-1)!}{\beta^n},\qquad
+ \operatorname{Cov}(X_t,X_0)=\frac{\alpha}{\beta^2}e^{-\gamma|t|}.
+\end{equation}
+Finally, the generator preserves
+$\Pp_m=\operatorname{span}\{1,x,\ldots,x^m\}$, and its restriction has
+exactly the simple eigenvalues $0,-\gamma,\ldots,-m\gamma$.
+This last assertion concerns each fixed finite-dimensional filtration only;
+it is not a statement about the full $L^2$ spectrum, completeness,
+normality, or reversibility.
+\end{theorem}
+
+\begin{proof}[Proof of the path and transform]
+Variation of constants between successive jumps proves~\eqref{eq:path}.
+The Laplace functional of a marked Poisson process gives
+\begin{align*}
+ \log\E\exp\left[-s\sum_{T_j\leq t}
+ e^{-\gamma(t-T_j)}Y_j\right]
+ &=\kappa\int_0^t\left(\frac{\beta}{\beta+se^{-\gamma u}}-1\right)du\\
+ &=\frac\kappa\gamma\log\frac{\beta+se^{-\gamma t}}{\beta+s}.
+\end{align*}
+Multiplication by the deterministic initial term proves~\eqref{eq:LT}.
+Factoring the right side first at decay $r_1=e^{-\gamma t_1}$ and then at
+$r_2=e^{-\gamma t_2}$ cancels the intermediate denominator and leaves
+$r_1r_2$, proving the Chapman--Kolmogorov law directly.
+\end{proof}
+
+The phrase \emph{shot-noise Laplace semigroup owner} is the round-zero
+certificate.  Formula~\eqref{eq:LT}, not a simulation, owns the transition
+law.
+
+\ifnum\CRevisionRound>0
+\section{Equilibrium, contraction, and correlations}
+Sending $t\to\infty$ in~\eqref{eq:LT} gives
+\[
+ \left(\frac\beta{\beta+s}\right)^\alpha,
+\]
+the Gamma$(\alpha,\text{rate }\beta)$ transform.  Substitution into the
+semigroup formula proves invariance.  If two copies use the same marked
+Poisson process,~\eqref{eq:path} gives the deterministic difference
+$e^{-\gamma t}(x-y)$.  Their laws are translates, so this coupling gives
+the upper bound in~\eqref{eq:Wp}; Jensen's inequality applied to their mean
+difference gives the same lower bound.  Any invariant law must, after its
+Laplace transform is propagated and $t\to\infty$, have the Gamma transform.
+This proves uniqueness without presupposing a moment.
+
+Expansion of the logarithm of the Gamma transform yields the cumulants in
+\eqref{eq:statistics}; differentiation gives its rising-factorial moments.
+The conditional mean is
+\[
+ \E[X_t\mid X_0]=e^{-\gamma t}X_0+
+ \frac{\kappa}{\gamma\beta}(1-e^{-\gamma t}).
+\]
+After stationary centering, multiplication by $X_0$ gives the covariance
+for $t\geq0$.  Scalar stationarity supplies the displayed even extension.
+These identities also agree with the classical shot-noise and
+L\'evy-driven OU sources \cite{Kotler,Sato,BN}.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact finite polynomial filtration}
+For suitable $f$, the generator is
+\begin{equation}\label{eq:generator}
+ Lf(x)=-\gamma x f'(x)+\kappa\int_0^\infty
+ \beta e^{-\beta y}[f(x+y)-f(x)]\,dy.
+\end{equation}
+Because $\E Y^r=r!/\beta^r$, binomial expansion gives, for every $n\geq0$,
+\begin{equation}\label{eq:monomial}
+ Lx^n=-n\gamma x^n+
+ \kappa\sum_{j=0}^{n-1}\binom nj
+ \frac{(n-j)!}{\beta^{n-j}}x^j.
+\end{equation}
+Thus $L\Pp_m\subseteq\Pp_m$.  In the ordered monomial basis, the matrix is
+triangular with pairwise distinct diagonal
+$0,-\gamma,\ldots,-m\gamma$.  It is therefore diagonalizable, every listed
+eigenvalue is simple, and backward substitution gives one monic
+eigenpolynomial of each degree.  This is a complete finite-dimensional
+statement for every $m$; taking an unsupported limit in $m$ would not prove
+a full $L^2$ spectral theorem, and we do not take it.
+
+\section{Degenerate faces and Route-A boundary}
+If $\kappa=0$ but $\gamma>0$, the process is deterministic decay and its
+unique invariant probability is $\delta_0$.  If $\gamma=0<\kappa$, it is a
+nondecreasing compound-Poisson subordinator and has no invariant
+probability.  At $\gamma=\kappa=0$ it is static and every initial law is
+invariant.  The value $\beta=0$ is not an exponential probability law;
+$\beta\to\infty$ is only a weak zero-mark limit.  These faces are not
+silently inserted into formulas containing $\kappa/\gamma$.
+
+The finite certificate records exact Gamma moments and generator matrices
+through degree 12, sixty transition values, and ten semigroup products.
+Independent and symbolic implementations recompute them.  These rows are
+regression evidence, not the proof of an infinite-time theorem.
+
+C229 is a square-root diffusion, C233 is a discrete immigration--death
+chain, C265 has self-exciting arrivals, and C328 has dichotomous velocities
+and compact support; none owns the present positive-jump Gamma semigroup.
+All five Route-A layers fail: there is no intrinsic prime owner, isolated
+periodic ledger, orbit determinant, target analytic bridge, or natural
+self-adjoint target lift.  Route B is not invoked.  No target local data,
+Euler factors, root numbers, automorphy, target divisor law, functional
+equation, zero match, or Hilbert--P\'olya operator is claimed.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{Kotler}
+G. Kotler, V. Kontorovich, V. Lyandres, and S. Primak,
+\emph{On the Markov model of shot noise}, Signal Processing (1999),
+\href{https://doi.org/10.1016/S0165-1684(98)00226-6}{doi:10.1016/S0165-1684(98)00226-6}.
+\bibitem{Sato}
+K. Sato and M. Yamazato, \emph{Operator-selfdecomposable distributions as
+limit distributions of processes of Ornstein--Uhlenbeck type}, Stochastic
+Processes Appl. 17 (1984), 73--100,
+\href{https://doi.org/10.1016/0304-4149(84)90312-0}{doi:10.1016/0304-4149(84)90312-0}.
+\bibitem{BN}
+O. E. Barndorff-Nielsen and N. Shephard, \emph{Non-Gaussian
+Ornstein--Uhlenbeck-based models and some of their uses in financial
+economics}, J. Roy. Statist. Soc. B 63 (2001), 167--241,
+\href{https://doi.org/10.1111/1467-9868.00282}{doi:10.1111/1467-9868.00282}.
+\end{thebibliography}
+\end{document}
