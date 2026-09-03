@@ -2,11 +2,13 @@
 
 Synchronized: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 3′ ROUND 2 COMPLETE — MAJOR REVISION / ARS B4 / AWAITING STAGE-4′ AUTHORIZATION**.
+Current controlling state: **`stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization`**.
+
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `stage3_prime_round2_major_revision_awaiting_stage4_prime_authorization` |
+| Pipeline global state | `stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS` |
@@ -19,9 +21,10 @@ Current controlling state: **ARS STAGE 3′ ROUND 2 COMPLETE — MAJOR REVISION 
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
 | Stage 3′ Round 1 | `ABORTED / phase1_lint_failed` fail-closed; official checker/apply chain `PASS`; recorded and audit-supported aggregates both 4/5/0; Phase-1 criterion-inheritance drift in 2 rows; mechanical B4 (Major Revision candidate) suppressed; no decision issued |
 | Stage 3′ Round 2 | `COMPLETE`; Phase 1/2A/2B PASS; final 4/5/0; adjustments/new issues/dissents/escalations all `0`; official checker `PASS`, apply chain `pass`; decision `Major Revision / ARS B4` |
+| Stage 4′ exact request | `PREPARED_NOT_AUTHORIZED_NOT_EXECUTED`; joint P30/P31 scope 13 residuals / 37 target blocks / 156 checks; manuscript and bibliography writes `0` |
 | Semantic-audit provenance | fresh-context; role-separated; same-family; not independent error processes |
-| Next legal action | only explicit scoped authorization for Stage 4′; the mandatory Major Revision checkpoint does not itself authorize revision |
-| Active Stage-3′ findings | five PARTIALLY_ADDRESSED residuals, including four must-fix; exact list in `stage3_prime_round2_verification_report.md` |
+| Next legal action | only exact author confirmation of the already prepared P30/P31 Stage-4′ request before any listed operation may execute |
+| Active Stage-3′ findings | five PARTIALLY_ADDRESSED residuals; exact target/operation scope is frozen in the prepared Stage-4′ request |
 
 ## Canonical package
 
@@ -29,6 +32,7 @@ Current controlling state: **ARS STAGE 3′ ROUND 2 COMPLETE — MAJOR REVISION 
 |---|---|
 | [Manuscript](../paper/manuscript.tex) | SHA-256 `af270bc06a3f1e00d657fdc875585e3da9ab9b2b7198ad8d096d188a93af9506` |
 | [Bibliography](../paper/references.bib) | 26 cited entries; SHA-256 `1b2538b3cfa9e0326112dd3ae086a420032e4edecd06f9e27939d2691d10de6f` |
+| Citation style | `plainnat` numeric; unchanged |
 | [PDF](../paper/paper.pdf) | 14 pages; 255,074 bytes; SHA-256 `c8f54cf535ca1fa12a14662a248889b332c8a3b0c5b4db6d7abae707827f313e` |
 
 ## Explicit paper progress
@@ -115,8 +119,8 @@ checkpoint.
 | [Verification report](stage3_prime_round1_verification_report.md) | `f7f7956dc8c484ae707ce0c48dee2b4bf6a158d5e286c9873fae6fce208db5e8` |
 | [Checker/semantic receipt](stage3_prime_round1_checker_receipt.json) | `960bc02225aa6d0e3215ef99e1e9a27179b453783d20f8472d053468fbfcfe9e` |
 | [Abort record](stage3_prime_round1_abort_record.json) | `b5692f11d24224b0c17ddad6a467a3ddcd7689cdf6a88a25184f1a3c0b061a0d` |
-| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `16799921ba4222fca534adf9c56b242879b012576bb72bac9ba95c025cdd8fbf` |
-| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `2d315dae3f051956698958fab9ea95b0024ec7e78d78c8abd9e4a3ead4377ba2` |
+| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `0343b34e2fcb80477046ac5cd0ea069fe51f6efe162edf18dc32b51ad25d0672` |
+| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `cfa61eb8504c45250b1658d63193475567a2e8fd0afc1037ef6eda580c196852` |
 
 ## Current Stage-3′ Round-2 bindings
 
@@ -136,3 +140,22 @@ Stage 3′ cannot create Route credit: P30 remains `A0_FAIL / A2_NOT_ELIGIBLE /
 NO_ROUTE_PROMOTION`, formal tuple `UNASSIGNED`, A3/A4 absent, and Route B
 uninvoked. Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route
 advancement, result refresh, and new scientific execution remain unauthorized.
+
+## Prepared Stage-4′ request bindings
+
+P30 remains complete under Round 2 at Major Revision / B4 (4/5/0). The exact P30/P31 Stage-4′ request is prepared but not authorized or executed.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P30/P31 Stage-4′ exact request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.md) | `4b42e929286be28655f0afa74145370399eed4e7d00f9d205d480db70f8dc03a` |
+| [Machine-readable request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.json) | `a35002ccadc74ef1f05d79b5cd7a81bff728664c27bab679504780fcb91dd688` |
+| [Request validation](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31_VALIDATION.json) | `52739c5ef1cb2a8142feadb73945fbcbe06a551f43d37fc2e0022b497c6a645c` |
+| [Round-3 batch report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
+
+Citation style remains plainnat numeric. The canonical manuscript,
+bibliography, PDF, science/results, frozen initial system, and Route
+coordinates are unchanged. New science executions: `0`. Stage 4.5, Stage 5,
+canonical promotion, submission, Route advancement, and result refresh remain
+unauthorized.

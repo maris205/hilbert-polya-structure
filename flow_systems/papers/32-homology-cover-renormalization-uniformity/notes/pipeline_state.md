@@ -2,11 +2,13 @@
 
 Date: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **`stage3_prime_round2_aborted_awaiting_round3_authorization`**.
+Current controlling state: **`stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`**.
+
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `stage3_prime_round2_aborted_awaiting_round3_authorization` |
+| Pipeline global state | `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -14,6 +16,7 @@ Current controlling state: **`stage3_prime_round2_aborted_awaiting_round3_author
 | Stage-2.5 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_5_AUTHORIZATION_20260902.txt` |
 | Manuscript | `CANONICAL_POST_REPAIR`; SHA-256 `4a3e1f084dc1e27005479971299fd9da67bb6c817278d5de0de6cf03cbc8000a` |
 | Bibliography | `COMPLETE`; 26 entries, all cited, no missing/orphan; SHA-256 `e699c96196377892d3aa1f280e6a5117001c3cec37a511a3d1c08fdc52127de9` |
+| Citation style | `plainnat` numeric; unchanged |
 | PDF | `CANONICAL_POST_REPAIR`; 13 pages, 254332 bytes; SHA-256 `66948e247c72a3388a7f3da1f80be1d74860afa1261c99fb18c85e2b8bb84f93` |
 | Build receipt | `PASS`; `notes/stage2_5_post_repair_build_receipt.json` |
 | Independent recheck | `PASS`; 8/8 ClaimIntents; no unresolved Blocker, Major, or Minor; `notes/stage2_independent_recheck.md` |
@@ -42,8 +45,10 @@ Current controlling state: **`stage3_prime_round2_aborted_awaiting_round3_author
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
 | Stage 3′ Round 1 | `ABORTED / phase1_lint_failed`; failed closed at mandatory Phase-1 criterion lint; recorded and audited aggregates both 6/5/1, but `REV-P32-R1-W2` is a false FULL and `REV-P32-R3-W1` is a false PARTIAL; Phase-1 criterion drift affects `REV-P32-R3-W1` and `REV-P32-DA-M1`; mechanical B3 candidate suppressed; no decision signed or emitted |
 | Stage 3′ Round 2 | `ABORTED / phase2a_lint_failed`; Phase 1 PASS; committed 7/5/0, controlling 6/6/0 because `REV-P32-DA-M1` is false FULL; stopped before response letter, Phase 2B, traceability, checker, or decision |
+| Stage 3′ Round 3 | `COMPLETE`; Phase 1/2A/2B PASS; final 5/7/0; adjustments/new issues/dissents/escalations `0`; official checker `PASS`; decision `Major Revision / ARS B4` |
 | Semantic calibration boundary | Fresh-context and role-separated, but same-family; the semantic passes are not independent error processes |
-| Next legal transition | only explicit authorization for fresh Stage 3′ Round 3 with a new round id, new manifest, fresh Phase-1/2A contexts, and all Round-1/Round-2 artifacts preserved |
+| Next legal transition | only explicit authorization to prepare a hash-bound P32 Stage-4′ item/target/operation request; no patch or manuscript write is authorized |
+| Active Stage-3′ findings | seven PARTIALLY_ADDRESSED residuals, including six must-fix; exact list in `stage3_prime_round3_verification_report.md` |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability
@@ -82,10 +87,10 @@ promotion, and it does not itself authorize Stage 3.
 | [Verification report](stage3_prime_round1_verification_report.md) | `deab1d001c3b6a183a94c371ecb8ddf9494147e23d86ba9dcc0ff1ff22aebb85` |
 | [Checker/semantic receipt](stage3_prime_round1_checker_receipt.json) | `4033a2346ba98d56f37176523e07f682115838e07e6b73c0395e2020ed4c82f6` |
 | [Abort record](stage3_prime_round1_abort_record.json) | `b11516b0046dfb0a8c33d18090df33e0191cf1e9a2f8efe68df189116e27a941` |
-| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `16799921ba4222fca534adf9c56b242879b012576bb72bac9ba95c025cdd8fbf` |
-| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `2d315dae3f051956698958fab9ea95b0024ec7e78d78c8abd9e4a3ead4377ba2` |
+| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `0343b34e2fcb80477046ac5cd0ea069fe51f6efe162edf18dc32b51ad25d0672` |
+| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `cfa61eb8504c45250b1658d63193475567a2e8fd0afc1037ef6eda580c196852` |
 
-## Current Stage-3′ Round-2 bindings
+## Historical Stage-3′ Round-2 bindings
 
 | Artifact | SHA-256 |
 |---|---|
@@ -103,3 +108,22 @@ cannot create Route credit. Canonical bytes, scientific trees, and the frozen
 system are unchanged. Rounds 1 and 2 are immutable and failed closed. Stage 4′,
 Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result
 refresh, and new scientific execution remain unauthorized.
+
+## Current Stage-3′ Round-3 bindings
+
+P32 Round 3 is complete: checker PASS; Major Revision / B4; 5/7/0; zero adjustments.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P32 Round-3 verification report](../../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_verification_report.md) | `640da9d1f3237575a1e5139da6ce7e75960746673146c44d63b04fa8760f56f1` |
+| [P32 Round-3 checker receipt](../../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_checker_receipt.json) | `7151f6f309ecc98d1056416272f95d2c69ea1f35f8d99dd51a079c1bdd305d89` |
+| [P32 Round-3 traceability](../../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_traceability.json) | `6b4efd892d4f551481363c99e7b01f7e2f8a21550807c86eb994ae589d95b0d6` |
+| [Round-3 batch report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
+
+Citation style remains plainnat numeric. The canonical manuscript,
+bibliography, PDF, science/results, frozen initial system, and Route
+coordinates are unchanged. New science executions: `0`. Stage 4.5, Stage 5,
+canonical promotion, submission, Route advancement, and result refresh remain
+unauthorized.

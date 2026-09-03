@@ -1,12 +1,12 @@
 # P33 manuscript package
 
 Package note: this directory is the immutable canonical Stage-2.5 manuscript
-package; its Phase-0 wording below is historical. The authoritative current
-state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md):
-**`stage3_prime_round2_aborted_awaiting_round3_authorization`.** Stage 3′ Round
-2 failed closed at `phase2a_lint_failed`; no decision was signed or emitted,
-and a fresh Round 3 requires explicit authorization. Canonical
-manuscript/PDF/bibliography bytes remain unchanged.
+package; historical review sections below remain frozen. The authoritative
+current state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+Control state: `stage3_prime_round3_aborted_awaiting_fresh_round4_authorization`. Stage 3′ Round 3 aborted at phase2a_lint_failed: committed 7 FULL / 5 PARTIAL / 1 NOT versus controlling 6 FULL / 6 PARTIAL / 1 NOT on REV-P33-011. No response, Phase 2B, traceability, checker, or decision exists; only an explicitly authorized fresh Round 4 is next.
+Canonical manuscript/PDF/bibliography bytes and plainnat numeric citation style
+remain unchanged.
 
 ## Deliverables
 
@@ -34,7 +34,7 @@ same-family and are not independent error processes.
 | [`stage3_prime_round1_checker_receipt.json`](../notes/stage3_prime_round1_checker_receipt.json) | `2cf5c82cdeebc5c0c2f93f5a138b39414a40161a968b9b7db666a5e8461458b4` |
 | [`stage3_prime_round1_abort_record.json`](../notes/stage3_prime_round1_abort_record.json) | `765174c153843e14af50af25da8b10a1bdd3839618aa1f30a14a3894fa00725b` |
 
-## Current Stage 3′ Round-2 controlling outcome
+## Historical Stage 3′ Round-2 controlling outcome
 
 The committed 6 FULL / 7 PARTIAL / 0 other record is controlled as 5 FULL / 8
 PARTIAL / 0 other because `REV-P33-011` is a false FULL. The no-retry semantic
@@ -46,6 +46,19 @@ official checker, or decision.
 | [`stage3_prime_round2_verification_report.md`](../notes/stage3_prime_round2_verification_report.md) | `a0086ede828d0d16ec345ffe0d87869076f724752071d3493c4a435a5d0bf3c6` |
 | [`stage3_prime_round2_checker_receipt.json`](../notes/stage3_prime_round2_checker_receipt.json) | `dbf9cdb7e1a8ba42ab671ec9e03d600e90b78abefc7c395504381d6909ecd480` |
 | [`stage3_prime_round2_abort_record.json`](../notes/stage3_prime_round2_abort_record.json) | `b6b449b3899b7b3a35957474d5951af12cefdb3723acc2e9c435c1ea61b020df` |
+
+## Current Stage 3′ Round-3 fail-closed outcome
+
+P33 aborted at phase2a_lint_failed; REV-P33-011 changes the committed 7/5/1 reading to the controlling 6/6/1 reading, and no response, Phase 2B, traceability, checker, or decision was produced.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P33 Round-3 verification report](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round3_verification_report.md) | `0b6d2d5ccab3664c7544e91093c4380e43b5d401106211ee01b44f6a17f62118` |
+| [P33 checker-not-run receipt](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round3_checker_receipt.json) | `6fd2af3d72f38378873d708be6565f07ed01344ec4d7b3a79cc85050af7316e7` |
+| [P33 Round-3 abort record](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round3_abort_record.json) | `0121dc5aae60ff37927762cca379eb5dca7a9be43a992665a77d7e81b746f2f4` |
+| [Round-3 batch report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
 ## Stage 2.5 integrity result
 
@@ -67,7 +80,18 @@ P33-S06 remains bounded `PLAUSIBLE`, page-unpinned, and background-/context-only
 
 ## Route position and next gate
 
-Route A remains at A1 preparation only: P33 formal A0 is prohibited/confounded, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. Stage 3′ cannot create Route credit, and no later review stage changed the frozen system or scientific result. The only next legal action is explicit authorization for a new-id/new-manifest/fresh-context Stage 3′ Round 3.
+Explicit manuscript progress: BP/CP producer contracts, owner/inverse/repetition semantics, serialization, migration, and trust-graph surfaces are concrete prospective interfaces; no producer, independent fixture/oracle, validator execution, owner computation, or census exists.
+
+Frozen initial system: unit-speed Bolza geodesic flow with a separately typed matched control; presentation-specific owner semantics; frozen generator/cutoff objects; target-blind no-retuning rule.
+
+Route mapping: Route A A1 preparation with formal A0 prohibited/confounded; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot create Route credit.
+Across Papers 29--33 the formal Route-A tuple count remains 0/5, positive
+arithmetic A2 remains 0/5, A3/A4 remain 0/5, and Route B remains 0/5.
+
+The next legal action for P33 is only explicit authorization for fresh Stage 3′ Round 4 with a new round id, new manifest, fresh Phase-1/2A contexts, and all prior-round artifacts preserved. Canonical manuscript,
+bibliography, PDF, science/results, and the frozen system remain unchanged;
+new science executions are zero. Stage 4.5, Stage 5, canonical promotion,
+submission, Route advancement, and result refresh remain unauthorized.
 
 ## Batch traceability
 

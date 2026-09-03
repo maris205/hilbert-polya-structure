@@ -2,16 +2,19 @@
 
 ## Current status
 
-**Controlling state: `stage3_prime_round2_aborted_awaiting_round3_authorization`.**
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
 
-Stage 3′ Round 2 passed Phase 1 but failed closed at the no-retry Phase-2A
-semantic gate with `phase2a_lint_failed`; no decision was signed or emitted.
-The committed record is 7 FULL / 5 PARTIAL / 0 other, while the controlling read
-is 6 FULL / 6 PARTIAL / 0 other because `REV-P32-DA-M1` is a false FULL. The
-round stopped before the response letter, Phase 2B, traceability, official
-checker, or decision. The fresh-context semantic checks were role-separated but
-same-family; they are not independent error processes. Canonical, science,
-initial-system, and Route surfaces remain frozen.
+**ARS STAGE 3′ ROUND 3 COMPLETE — OFFICIAL CHECKER PASS / MAJOR REVISION (B4).**
+
+Control state: `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`. Stage 3′ Round 3 completed all three gates. The official checker returned PASS and emitted Major Revision / ARS B4 at 5 FULL / 7 PARTIAL / 0 other, with zero Phase-2B adjustments, new issues, dissents, or escalations. The only next legal action is explicit authorization to prepare a hash-bound P32 Stage-4′ item/target/operation request; neither that request nor any revision write is yet authorized.
+
+Explicit manuscript progress: Higher-content and zero-content factors remain the first falsification targets; the two modulus schedules, both iterated-limit orders, dependency table, and scalar-comparator interface are explicit, while every scientific object, majorant, limit, factor, or obstruction remains unexecuted or unproved.
+
+Frozen initial system: unit-speed genus-two geodesic flow; pure homology tower; oriented primitive owner with inverse separate; full-content scope; clock 1/N; logarithmic normalization 1/N^3.
+
+Route mapping: generic Route A A1-A2 preparation with arithmetic A0 unavailable; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+
+Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
 
 ## Current paper and revision package
 
@@ -39,6 +42,8 @@ initial-system, and Route surfaces remain frozen.
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json), and [abort record](notes/stage3_prime_round2_abort_record.json)
+- [Stage-3′ Round-3 verification report](notes/stage3_prime_round3_verification_report.md), [official checker receipt](notes/stage3_prime_round3_checker_receipt.json), and [traceability matrix](notes/stage3_prime_round3_traceability.json)
+- [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 结论概要
@@ -72,11 +77,25 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `STAGE3_ENTRY_AUTHORIZED=true`, `STAGE3_REVIEW_OUTPUTS=COMPLETE`,
 `STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, `STAGE4_AUTHORIZED=true`,
 `STAGE4_COMPLETE=true`, `STAGE3_PRIME_ROUND1=HISTORICAL_ABORT`,
-`STAGE3_PRIME_ROUND2=ABORTED_PHASE2A_LINT_FAILED`,
-`STAGE3_PRIME_DECISION_EMITTED=false`, and
-`STAGE3_PRIME_ROUND3_AUTHORIZED=false`.
+`STAGE3_PRIME_ROUND2=HISTORICAL_ABORT`,
+`STAGE3_PRIME_ROUND3=COMPLETE_MAJOR_REVISION_B4`,
+`STAGE3_PRIME_DECISION_EMITTED=true`, and
+`STAGE4_PRIME_REQUEST_PREPARATION_AUTHORIZED=false`.
 
 ## Traceability
+
+### Current Stage-3′ Round-3 checker-backed outcome
+
+P32 is complete at Major Revision / B4 with checker PASS, 5 FULL / 7 PARTIAL / 0 other, and zero Phase-2B adjustments. Only request-preparation authorization for a future P32 Stage 4′ is the next legal action.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P32 Round-3 verification report](../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_verification_report.md) | `640da9d1f3237575a1e5139da6ce7e75960746673146c44d63b04fa8760f56f1` |
+| [P32 Round-3 checker receipt](../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_checker_receipt.json) | `7151f6f309ecc98d1056416272f95d2c69ea1f35f8d99dd51a079c1bdd305d89` |
+| [P32 Round-3 traceability](../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_traceability.json) | `6b4efd892d4f551481363c99e7b01f7e2f8a21550807c86eb994ae589d95b0d6` |
+| [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
 ### Frozen Stage-4 baseline
 
@@ -93,7 +112,7 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 - [Fail-closed abort record](notes/stage3_prime_round1_abort_record.json): SHA-256 `b11516b0046dfb0a8c33d18090df33e0191cf1e9a2f8efe68df189116e27a941`
 - [Batch outcome report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)
 
-### Current Stage-3′ Round-2 outcome
+### Historical Stage-3′ Round-2 outcome
 
 - [Verification report](notes/stage3_prime_round2_verification_report.md): SHA-256 `7039eaba478ee048ff7c1000ff343f0b39c61ca8c05937ef14f57bd00584ae6a`
 - [Checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json): SHA-256 `d145a433e299b2b63cf4308a2af2f6b66a432732e381dd2a41e5de7a5c17a892`
@@ -110,10 +129,10 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 - Pipeline state: [notes/pipeline_state.md](notes/pipeline_state.md)
 
 All detailed Stage-1 research, source, review, and revision artifacts remain
-frozen in `notes/`; they were not replaced by this current-status summary.
+frozen in `notes/`; all Round-1/Round-2/Round-3 review artifacts are preserved.
 A schema-compatible Stage-4 Revision-Evidence Bundle exists, but official
 Stage-4.5 E6 has not been invoked. The only next legal action is explicit
-authorization for Stage 3′ Round 3 with a new round id, manifest, and fresh
-Phase-1/2A contexts; Rounds 1 and 2 remain immutable. Stage 4′, Stage 4.5,
-Stage 5, canonical promotion, submission, Route advancement, result refresh,
-and new scientific execution remain unauthorized.
+authorization to prepare a hash-bound P32 Stage-4′ request; no patch or
+manuscript write is authorized. Stage 4.5, Stage 5, canonical promotion,
+submission, Route advancement, result refresh, and new scientific execution
+remain unauthorized.

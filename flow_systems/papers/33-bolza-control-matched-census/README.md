@@ -2,17 +2,19 @@
 
 ## Current status
 
-**Controlling state: `stage3_prime_round2_aborted_awaiting_round3_authorization`.**
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
 
-Stage 3′ Round 2 passed Phase 1 but failed closed at the no-retry Phase-2A
-semantic gate with `phase2a_lint_failed`; no decision was signed or emitted.
-The committed record is 6 FULL / 7 PARTIAL / 0 other, while the controlling read
-is 5 FULL / 8 PARTIAL / 0 other because `REV-P33-011` is a false FULL. The round
-stopped before the response letter, Phase 2B, traceability, official checker, or
-decision. The fresh-context semantic checks were role-separated but same-family;
-they are not independent error processes. Canonical manuscript, bibliography,
-PDF, scientific results, initial dynamical system, and Route coordinates remain
-frozen.
+**ARS STAGE 3′ ROUND 3 ABORTED FAIL-CLOSED — AWAITING EXPLICIT FRESH ROUND-4 AUTHORIZATION.**
+
+Control state: `stage3_prime_round3_aborted_awaiting_fresh_round4_authorization`. Stage 3′ Round 3 aborted fail-closed at phase2a_lint_failed. The committed 7 FULL / 5 PARTIAL / 1 NOT record is controlled as 6 FULL / 6 PARTIAL / 1 NOT because REV-P33-011 is PARTIALLY_ADDRESSED under both the valid primary audit and blind tie-break. The response, Phase 2B, traceability, checker, and decision were not run or emitted. The next legal action is explicit authorization for a wholly fresh Stage 3′ Round 4 with a new id, manifest, and fresh Phase-1/2A contexts.
+
+Explicit manuscript progress: BP/CP producer contracts, owner/inverse/repetition semantics, serialization, migration, and trust-graph surfaces are concrete prospective interfaces; no producer, independent fixture/oracle, validator execution, owner computation, or census exists.
+
+Frozen initial system: unit-speed Bolza geodesic flow with a separately typed matched control; presentation-specific owner semantics; frozen generator/cutoff objects; target-blind no-retuning rule.
+
+Route mapping: Route A A1 preparation with formal A0 prohibited/confounded; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+
+Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
 
 ## Current paper and revision package
 
@@ -40,6 +42,8 @@ frozen.
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json), and [abort record](notes/stage3_prime_round2_abort_record.json)
+- [Stage-3′ Round-3 verification report](notes/stage3_prime_round3_verification_report.md), [checker-not-run receipt](notes/stage3_prime_round3_checker_receipt.json), and [abort record](notes/stage3_prime_round3_abort_record.json)
+- [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 结论概要
@@ -74,11 +78,25 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `STAGE3_ENTRY_AUTHORIZED=true`, `STAGE3_REVIEW_OUTPUTS=COMPLETE`,
 `STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, `STAGE4_AUTHORIZED=true`,
 `STAGE4_COMPLETE=true`, `STAGE3_PRIME_ROUND1=HISTORICAL_ABORT`,
-`STAGE3_PRIME_ROUND2=ABORTED_PHASE2A_LINT_FAILED`,
+`STAGE3_PRIME_ROUND2=HISTORICAL_ABORT`,
+`STAGE3_PRIME_ROUND3=ABORTED_PHASE2A_LINT_FAILED`,
 `STAGE3_PRIME_DECISION_EMITTED=false`, and
-`STAGE3_PRIME_ROUND3_AUTHORIZED=false`.
+`STAGE3_PRIME_ROUND4_AUTHORIZED=false`.
 
 ## Traceability
+
+### Current Stage-3′ Round-3 fail-closed outcome
+
+P33 is aborted at phase2a_lint_failed: committed 7/5/1 versus controlling 6/6/1 on REV-P33-011. No response, Phase 2B, traceability, checker, or decision exists; the next action is an explicitly authorized fresh Round 4.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P33 Round-3 verification report](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round3_verification_report.md) | `0b6d2d5ccab3664c7544e91093c4380e43b5d401106211ee01b44f6a17f62118` |
+| [P33 checker-not-run receipt](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round3_checker_receipt.json) | `6fd2af3d72f38378873d708be6565f07ed01344ec4d7b3a79cc85050af7316e7` |
+| [P33 Round-3 abort record](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round3_abort_record.json) | `0121dc5aae60ff37927762cca379eb5dca7a9be43a992665a77d7e81b746f2f4` |
+| [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
 ### Frozen Stage-4 baseline
 
@@ -95,7 +113,7 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 - [Fail-closed abort record](notes/stage3_prime_round1_abort_record.json): SHA-256 `765174c153843e14af50af25da8b10a1bdd3839618aa1f30a14a3894fa00725b`
 - [Batch outcome report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)
 
-### Current Stage-3′ Round-2 outcome
+### Historical Stage-3′ Round-2 outcome
 
 - [Verification report](notes/stage3_prime_round2_verification_report.md): SHA-256 `a0086ede828d0d16ec345ffe0d87869076f724752071d3493c4a435a5d0bf3c6`
 - [Checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json): SHA-256 `dbf9cdb7e1a8ba42ab671ec9e03d600e90b78abefc7c395504381d6909ecd480`
@@ -112,10 +130,9 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 - Pipeline state: [notes/pipeline_state.md](notes/pipeline_state.md)
 
 All detailed Stage-1 research, source, review, and revision artifacts remain
-frozen in `notes/`; they were not replaced by this current-status summary.
+frozen in `notes/`; all Round-1/Round-2/Round-3 review artifacts are preserved.
 A schema-compatible Stage-4 Revision-Evidence Bundle exists, but official
 Stage-4.5 E6 has not been invoked. The only next legal action is explicit
-authorization for Stage 3′ Round 3 with a new round id, manifest, and fresh
-Phase-1/2A contexts; Rounds 1 and 2 remain immutable. Stage 4′, Stage 4.5,
-Stage 5, canonical promotion, submission, Route advancement, result refresh,
-and new scientific execution remain unauthorized.
+authorization for a new-id/new-manifest/fresh-context Stage 3′ Round 4.
+Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route
+advancement, result refresh, and new scientific execution remain unauthorized.

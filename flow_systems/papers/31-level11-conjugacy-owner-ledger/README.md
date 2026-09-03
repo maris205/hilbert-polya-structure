@@ -2,16 +2,19 @@
 
 ## Current status
 
-**ARS STAGE 3′ ROUND 2 COMPLETE — OFFICIAL CHECKER PASS / MAJOR REVISION (B4) / AWAITING STAGE 4′ AUTHORIZATION.**
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
 
-Control state: `stage3_prime_round2_major_revision_awaiting_stage4_prime_authorization`.
-All three evidence-before-persuasion gates completed. The final record is 3
-FULL / 8 PARTIAL / 0 other. A precommitted blind tie-break supported the
-committed FULL verdicts for both primary-audit disputed rows, so there is no
-controlling discrepancy. Phase 2B made zero adjustments, and the official
-checker exited zero with Major Revision under ARS rule B4. This B4 is not
-Route-B Evaluator layer B4. Canonical, science, initial-system, and Route
-surfaces remain frozen.
+**ARS STAGE 3′ ROUND 2 REMAINS COMPLETE — STAGE-4′ REQUEST PREPARED / AWAITING EXACT AUTHORIZATION.**
+
+Control state: `stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization`. The controlling review remains the completed Stage 3′ Round-2 Major Revision / ARS B4 decision at 3 FULL / 8 PARTIAL. A hash-bound P30/P31 Stage-4′ request is now prepared and validated: 13 residual items, 37 manuscript target blocks, and 156 checks across the pair. It has not been authorized or executed, and no manuscript or bibliography edit has occurred. The next legal action is exact author confirmation of that already prepared request.
+
+Explicit manuscript progress: The deterministic canonicalization biconditional is primary, the 9,453 pair dispositions are a derived audit, and G/I/C are distinct typed estimands; no owner partition, complete ledger, canonicalization theorem, or all-pairs execution exists.
+
+Frozen initial system: fixed positive time change of the Gamma_0(11) geodesic flow; oriented primitive owner; inverse separate; powers repetitions; Hecke degree distinct.
+
+Route mapping: Route A A1-only owner/canonicalization preparation; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+
+Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
 
 ## Current paper package
 
@@ -40,6 +43,8 @@ surfaces remain frozen.
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [official checker receipt](notes/stage3_prime_round2_checker_receipt.json), and [traceability matrix](notes/stage3_prime_round2_traceability.json)
+- [Prepared P30/P31 Stage-4′ request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.md), [machine request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.json), and [156-check validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31_VALIDATION.json)
+- [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
@@ -102,13 +107,27 @@ global originality, priority, or scientific-novelty certificate.
 - Route position: Route A `A1-only` preparation; formal Route-A tuples `0` (`UNASSIGNED`); positive arithmetic A2 results `0`; A3/A4 not attempted; Route B not invoked and closed.
 - Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 11/11 items; 11 operations; 6 RESOLVED + 5 DELIBERATE_LIMITATION; 8/78 affected E1; +440 words; 13-page clean preview.
 - Stage 3′ Round 1: immutable historical fail-closed record.
-- Stage 3′ Round 2: `COMPLETE`; final 3/8/0; both disputed rows resolved in favor of the committed record by the precommitted blind tie-break; Phase 2B adjustments `0`; official checker `PASS`; Major Revision / ARS B4. The mandatory decision checkpoint does not authorize Stage 4′; the only legal next action is explicit scoped Stage-4′ authorization.
+- Stage 3′ Round 2: `COMPLETE`; final 3/8/0; Phase-2B adjustments `0`; checker `PASS`; Major Revision / ARS B4.
+- Stage 4′ request: joint P30/P31 request prepared and validated at 13 residuals / 37 targets / 156 checks; not authorized, not executed, and manuscript/bibliography writes remain 0.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
 correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
+
+### Prepared P30/P31 Stage-4′ request (not authorized or executed)
+
+P31 remains at its completed Round-2 Major Revision / B4 outcome (3 FULL / 8 PARTIAL). The exact pair request contains 13 residuals and 37 target blocks and passed 156 checks; no listed operation has author approval and no draft/bibliography write occurred.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P30/P31 Stage-4′ exact request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.md) | `4b42e929286be28655f0afa74145370399eed4e7d00f9d205d480db70f8dc03a` |
+| [Machine-readable request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.json) | `a35002ccadc74ef1f05d79b5cd7a81bff728664c27bab679504780fcb91dd688` |
+| [Request validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31_VALIDATION.json) | `52739c5ef1cb2a8142feadb73945fbcbe06a551f43d37fc2e0022b497c6a645c` |
+| [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
 ### Frozen Stage-4 baseline
 

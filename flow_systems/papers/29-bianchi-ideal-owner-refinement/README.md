@@ -2,17 +2,19 @@
 
 ## Current status
 
-**ARS STAGE 3′ ROUND 2 ABORTED FAIL-CLOSED — `phase2a_lint_failed` / AWAITING EXPLICIT AUTHORIZATION FOR FRESH ROUND 3.**
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
 
-Control state: `stage3_prime_round2_aborted_awaiting_round3_authorization`.
-Phase 1 passed, but the no-retry Phase-2A semantic gate found `REV-EIC-1` and
-`REV-DA-2` recorded FULL where the controlling read is PARTIAL. The committed
-count is 7 FULL / 4 PARTIAL / 0 other; the controlling count is 5 FULL / 6
-PARTIAL / 0 other. The round stopped before the response letter, Phase 2B,
-traceability, official checker, or decision. The semantic passes were
-fresh-context, role-separated, and same-family; they were not independent error
-processes. Canonical manuscript, bibliography, PDF, scientific results, initial
-dynamical system, and Route coordinates remain frozen.
+**ARS STAGE 3′ ROUND 3 COMPLETE — OFFICIAL CHECKER PASS / MAJOR REVISION (B4).**
+
+Control state: `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`. Stage 3′ Round 3 completed all three gates. The official checker returned PASS and emitted Major Revision / ARS B4 at 7 FULL / 4 PARTIAL / 0 other, with zero Phase-2B adjustments. NEW-1 is a separate minor regression in the newly introduced independence wording. The only next legal action is explicit authorization to prepare a hash-bound P29 Stage-4′ item/target/operation request; neither that request nor any revision write is yet authorized.
+
+Explicit manuscript progress: Gate M/Gate Q, exact inversion/conjugation laws, five fail-closed prospective interfaces, and deterministic failure precedence are explicit; no owner law, quotient, fixture run, score, or performance result exists.
+
+Frozen initial system: torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic-arclength clock; primitive loxodromic inversion-paired owner; one literal nonzero Gaussian prime ideal.
+
+Route mapping: Route A A0/A1 foundation/interface preparation; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+
+Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
 
 ## Current paper package
 
@@ -40,6 +42,8 @@ dynamical system, and Route coordinates remain frozen.
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
 - [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json), and [abort record](notes/stage3_prime_round2_abort_record.json)
+- [Stage-3′ Round-3 verification report](notes/stage3_prime_round3_verification_report.md), [official checker receipt](notes/stage3_prime_round3_checker_receipt.json), and [traceability matrix](notes/stage3_prime_round3_traceability.json)
+- [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
@@ -96,13 +100,27 @@ global originality, priority, or scientific-novelty certificate.
 - Route position: Route A `A0/A1` foundation/interface preparation; formal Route-A tuples `0` (`UNASSIGNED`); positive arithmetic A2 results `0`; A3/A4 not attempted; Route B not invoked and closed.
 - Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview.
 - Stage 3′ Round 1: immutable historical fail-closed record.
-- Stage 3′ Round 2: `ABORTED / phase2a_lint_failed`; committed 7/4/0 and controlling 5/6/0; `REV-EIC-1` and `REV-DA-2` are controlling false-FULL rows. Phase 2B, traceability, official checker, and decision were not emitted. The only legal next action is explicit authorization for a fresh Round 3 with a new round id, manifest, and fresh Phase-1/2A contexts.
+- Stage 3′ Round 2: immutable historical fail-closed record.
+- Stage 3′ Round 3: `COMPLETE`; final 7/4/0; Phase-2B adjustments `0`; `NEW-1` minor regression; checker `PASS`; Major Revision / ARS B4. Only explicit authorization to prepare a P29 Stage-4′ request may follow.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
 correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
+
+### Current Stage-3′ Round-3 checker-backed outcome
+
+P29 is complete at Major Revision / B4 with checker PASS, 7 FULL / 4 PARTIAL / 0 other, zero Phase-2B adjustments, and the separate minor regression NEW-1. Only request-preparation authorization for a future P29 Stage 4′ is the next legal action.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P29 Round-3 verification report](../../papers/29-bianchi-ideal-owner-refinement/notes/stage3_prime_round3_verification_report.md) | `893a678a6451c737685db0e483d03194effcf2e41e0da2dc95ba9d05f4051f28` |
+| [P29 Round-3 checker receipt](../../papers/29-bianchi-ideal-owner-refinement/notes/stage3_prime_round3_checker_receipt.json) | `004745261d59e14f8ad5da3bc154eccab1fdd6ee1742719eeb5817e536586e07` |
+| [P29 Round-3 traceability](../../papers/29-bianchi-ideal-owner-refinement/notes/stage3_prime_round3_traceability.json) | `7c09a9ce0e5e69cde594a3c825102fae79c54e352b7c553456f2cb385b859fea` |
+| [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
 ### Frozen Stage-4 baseline
 
@@ -121,7 +139,7 @@ correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 Round 1 remains immutable.
 
-### Current Stage-3′ Round-2 outcome
+### Historical Stage-3′ Round-2 outcome
 
 - [Verification report](notes/stage3_prime_round2_verification_report.md): SHA-256 `47e69f37843878a930c4fbb3c11a1d327abff6b1d3bb086d0341ca8805e2cab9`
 - [Checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json): SHA-256 `584d8fd5445e6c12bf7b82a0752c2e858661d741fb2961645f57401aab4a306f`

@@ -1,12 +1,12 @@
 # P32 manuscript package
 
 Package note: this directory is the immutable canonical Stage-2.5 manuscript
-package; its Phase-0 wording below is historical. The authoritative current
-state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md):
-**`stage3_prime_round2_aborted_awaiting_round3_authorization`.** Stage 3′ Round
-2 failed closed at `phase2a_lint_failed`; no decision was signed or emitted,
-and a fresh Round 3 requires explicit authorization. Canonical
-manuscript/PDF/bibliography bytes remain unchanged.
+package; historical review sections below remain frozen. The authoritative
+current state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
+<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+Control state: `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`. Stage 3′ Round 3 is complete with checker PASS and Major Revision / ARS B4 at 5 FULL / 7 PARTIAL / 0 other and zero Phase-2B adjustments. Only explicit authorization to prepare a P32 Stage-4′ request is next; no revision write is authorized.
+Canonical manuscript/PDF/bibliography bytes and plainnat numeric citation style
+remain unchanged.
 
 ## Deliverables
 
@@ -32,7 +32,7 @@ role-separated but same-family and are not independent error processes.
 | [`stage3_prime_round1_checker_receipt.json`](../notes/stage3_prime_round1_checker_receipt.json) | `4033a2346ba98d56f37176523e07f682115838e07e6b73c0395e2020ed4c82f6` |
 | [`stage3_prime_round1_abort_record.json`](../notes/stage3_prime_round1_abort_record.json) | `b11516b0046dfb0a8c33d18090df33e0191cf1e9a2f8efe68df189116e27a941` |
 
-## Current Stage 3′ Round-2 controlling outcome
+## Historical Stage 3′ Round-2 controlling outcome
 
 The committed 7 FULL / 5 PARTIAL / 0 other record is controlled as 6 FULL / 6
 PARTIAL / 0 other because `REV-P32-DA-M1` is a false FULL. The no-retry semantic
@@ -44,6 +44,19 @@ official checker, or decision.
 | [`stage3_prime_round2_verification_report.md`](../notes/stage3_prime_round2_verification_report.md) | `7039eaba478ee048ff7c1000ff343f0b39c61ca8c05937ef14f57bd00584ae6a` |
 | [`stage3_prime_round2_checker_receipt.json`](../notes/stage3_prime_round2_checker_receipt.json) | `d145a433e299b2b63cf4308a2af2f6b66a432732e381dd2a41e5de7a5c17a892` |
 | [`stage3_prime_round2_abort_record.json`](../notes/stage3_prime_round2_abort_record.json) | `0768572cc545275f9fd8580552e0653bae82a8022077c52fbece8b99b3c90aeb` |
+
+## Current Stage 3′ Round-3 checker-backed outcome
+
+P32 completed Round 3 at Major Revision / B4 with checker PASS, 5/7/0, and zero adjustments.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P32 Round-3 verification report](../../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_verification_report.md) | `640da9d1f3237575a1e5139da6ce7e75960746673146c44d63b04fa8760f56f1` |
+| [P32 Round-3 checker receipt](../../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_checker_receipt.json) | `7151f6f309ecc98d1056416272f95d2c69ea1f35f8d99dd51a079c1bdd305d89` |
+| [P32 Round-3 traceability](../../../papers/32-homology-cover-renormalization-uniformity/notes/stage3_prime_round3_traceability.json) | `6b4efd892d4f551481363c99e7b01f7e2f8a21550807c86eb994ae589d95b0d6` |
+| [Round-3 batch report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md) | `c122ca7f070a20568e47fab8999d6a3bf106b29da21f1dc8bca056b2c1ce5432` |
+| [Round-3 batch receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
+| [Round-3 mandatory checkpoint](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
 ## Stage 2.5 integrity result
 
@@ -65,7 +78,18 @@ P32-S13 is now bibliographically `VERIFIED`, but remains background-only. Its ci
 
 ## Route position and next gate
 
-Route A remains at generic A1--A2 preparation only: P32 arithmetic A0 is unavailable, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. Stage 3′ cannot create Route credit, and no later review stage changed the frozen system or scientific result. The only next legal action is explicit authorization for a new-id/new-manifest/fresh-context Stage 3′ Round 3.
+Explicit manuscript progress: Higher-content and zero-content factors remain the first falsification targets; the two modulus schedules, both iterated-limit orders, dependency table, and scalar-comparator interface are explicit, while every scientific object, majorant, limit, factor, or obstruction remains unexecuted or unproved.
+
+Frozen initial system: unit-speed genus-two geodesic flow; pure homology tower; oriented primitive owner with inverse separate; full-content scope; clock 1/N; logarithmic normalization 1/N^3.
+
+Route mapping: generic Route A A1-A2 preparation with arithmetic A0 unavailable; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot create Route credit.
+Across Papers 29--33 the formal Route-A tuple count remains 0/5, positive
+arithmetic A2 remains 0/5, A3/A4 remain 0/5, and Route B remains 0/5.
+
+The next legal action for P32 is only explicit authorization to prepare a hash-bound P32 Stage-4′ item/target/operation request; no patch or manuscript write is authorized. Canonical manuscript,
+bibliography, PDF, science/results, and the frozen system remain unchanged;
+new science executions are zero. Stage 4.5, Stage 5, canonical promotion,
+submission, Route advancement, and result refresh remain unauthorized.
 
 ## Batch traceability
 

@@ -7,9 +7,12 @@ require "json"
 require "optparse"
 
 ROOT = File.expand_path("..", __dir__)
-PAPERS = {
+PAPER_SLUGS = {
+  "P29" => "29-bianchi-ideal-owner-refinement",
   "P30" => "30-three-disk-nonconstant-roof-determinant",
-  "P31" => "31-level11-conjugacy-owner-ledger"
+  "P31" => "31-level11-conjugacy-owner-ledger",
+  "P32" => "32-homology-cover-renormalization-uniformity",
+  "P33" => "33-bolza-control-matched-census"
 }.freeze
 VERDICTS = %w[FULLY_ADDRESSED PARTIALLY_ADDRESSED NOT_ADDRESSED MADE_WORSE CANNOT_VERIFY].freeze
 PRIORITIES = %w[must_fix should_fix consider].freeze
@@ -22,12 +25,23 @@ VERIFIED_MAP = {
   "CANNOT_VERIFY" => "CANNOT_VERIFY"
 }.freeze
 
-options = { candidate_dir: nil }
+options = { candidate_dir: nil, round: "round2", paper_ids: %w[P30 P31] }
 OptionParser.new do |parser|
   parser.on("--candidate-dir DIR", "Write flat candidate files under DIR instead of final note paths") do |dir|
     options[:candidate_dir] = File.expand_path(dir)
   end
+  parser.on("--round ROUND", /\Around[1-9][0-9]*\z/, "Artifact round token (default: round2)") do |round|
+    options[:round] = round
+  end
+  parser.on("--papers IDS", "Comma-separated paper IDs (default: P30,P31)") do |ids|
+    options[:paper_ids] = ids.split(",")
+  end
 end.parse!
+
+raise "duplicate paper id" unless options[:paper_ids].uniq == options[:paper_ids]
+unknown_papers = options[:paper_ids] - PAPER_SLUGS.keys
+raise "unknown paper id(s): #{unknown_papers.join(',')}" unless unknown_papers.empty?
+papers = options[:paper_ids].to_h { |paper_id| [paper_id, PAPER_SLUGS.fetch(paper_id)] }
 
 def assert!(condition, message)
   raise message unless condition
@@ -111,12 +125,12 @@ end
 FileUtils.mkdir_p(options[:candidate_dir]) if options[:candidate_dir]
 summary = []
 
-PAPERS.each do |paper_id, slug|
+papers.each do |paper_id, slug|
   notes = File.join(ROOT, "papers", slug, "notes")
   roadmap = load_json(File.join(notes, "stage3_revision_roadmap.json"))
   author = load_json(File.join(notes, "stage4_author_adjudication.json"))
-  verdict = load_json(File.join(notes, "stage3_prime_round2_verdict_record.json"))
-  integration = load_json(File.join(notes, "stage3_prime_round2_phase2b_integration.json"))
+  verdict = load_json(File.join(notes, "stage3_prime_#{options[:round]}_verdict_record.json"))
+  integration = load_json(File.join(notes, "stage3_prime_#{options[:round]}_phase2b_integration.json"))
   roadmap_items = roadmap.fetch("items")
   roadmap_by_id = roadmap_items.to_h { |item| [item.fetch("id"), item] }
   author_by_id = author.fetch("author_adjudications").to_h { |record| [record.fetch("item_id"), record] }
@@ -233,9 +247,9 @@ PAPERS.each do |paper_id, slug|
   }
 
   destination = if options[:candidate_dir]
-                  File.join(options[:candidate_dir], "#{paper_id.downcase}_stage3_prime_round2_traceability.json")
+                  File.join(options[:candidate_dir], "#{paper_id.downcase}_stage3_prime_#{options[:round]}_traceability.json")
                 else
-                  File.join(notes, "stage3_prime_round2_traceability.json")
+                  File.join(notes, "stage3_prime_#{options[:round]}_traceability.json")
                 end
   File.write(destination, JSON.pretty_generate(trace) + "\n")
   summary << {paper_id: paper_id, path: destination, decision: decision, rule: rule, rows: rows.length}
