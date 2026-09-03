@@ -1,0 +1,171 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\pdfvariable suppressoptionalinfo 512\relax
+\pdfvariable trailerid {[<c325c325c325c325c325c325c325c325><c325c325c325c325c325c325c325c325>]}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\title{Sequential Resampling under the Variable-Model Local Lemma:\\A Complete Witness-Tree Termination Proof}
+\author{HCS-C325 theorem-and-evidence package}
+\date{3 September 2026 --- revision round \CRevisionRound}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give a convention-locked proof of the finite-variable Moser--Tardos theorem.
+Under the asymmetric witness criterion, every legal sequential violated-event
+rule terminates almost surely, avoids all bad events, and satisfies the exact
+per-event and total expectation bounds.  The proof includes the resampling-table
+witness lemma and the complete branching sum.  Exact finite chains audit, but do
+not prove, the general result.
+\end{abstract}
+
+\section{Frozen variable model}
+Let $X_1,\ldots,X_n$ be independent, finite-valued variables and let
+$\mathcal A$ be a finite family of bad events.  Write $\operatorname{vbl}(A)$
+for the variables determining $A$, and
+$\Gamma(A)=\{B\ne A:\operatorname{vbl}(A)\cap\operatorname{vbl}(B)\ne\varnothing\}$.
+Each variable owns an independent table $X_i(0),X_i(1),\ldots$ of copies.
+Initially the zeroth entries are exposed.  At each step an arbitrary legal rule
+chooses a currently violated $A$ and advances exactly the tables indexed by
+$\operatorname{vbl}(A)$.  The executable audit alone fixes lexicographic choice.
+
+\begin{theorem}\label{thm:main}
+Suppose $x_A\in(0,1)$ and
+\begin{equation}\label{eq:lll}
+ \Prob(A)\le x_A\prod_{B\in\Gamma(A)}(1-x_B),\qquad A\in\mathcal A.
+\end{equation}
+Then every legal sequential rule terminates almost surely at an assignment
+avoiding $\mathcal A$.  If $N_A$ counts resamplings of $A$, then
+\[
+ \E N_A\le\frac{x_A}{1-x_A},\qquad
+ \E\sum_A N_A\le\sum_A\frac{x_A}{1-x_A}.
+\]
+\end{theorem}
+
+The three exact binary examples contain seven events and all $112$ assignment
+rows.  Their rational absorbing-chain expectations and proper-tree series
+through size six are reconstructed independently.  They are regression data,
+not an extrapolation to Theorem~\ref{thm:main}.
+
+\ifnum\CRevisionRound>0
+\section{The complete witness-tree proof}
+Fix an execution prefix $C(1),\ldots,C(t)$ with $C(t)=A$.  Start a root labelled
+$A$, scan earlier resamplings backward, and attach $C(s)$ to a deepest existing
+label sharing a variable, discarding it if none exists.  A fixed tie rule makes
+the tree unique.
+
+\begin{lemma}[Properness and table probability]\label{lem:witness}
+The resulting tree is proper: children of a vertex labelled $B$ have distinct
+labels in $\Gamma^+(B)=\Gamma(B)\cup\{B\}$.  For every fixed proper labelled tree
+$T$,
+\[
+ \Prob\{T\text{ occurs}\}\le\prod_{v\in T}\Prob([v]),
+\]
+where $[v]$ denotes the label of $v$.
+\end{lemma}
+\begin{proof}
+Every inserted child overlaps its parent.  Were two siblings given the same
+label, the earlier inserted copy would be a deeper overlapping vertex when the
+second is scanned, a contradiction.
+
+Define a canonical $T$-check, independently of any log: process vertices by
+non-increasing distance from the root, with a frozen label/path tie order; at
+each vertex test its event on the current table cells and then advance exactly
+its variables.  Different vertex tests use disjoint cells, hence the pass
+probability is exactly $\prod_v\Prob([v])$.
+
+If an execution produces $T$, every earlier resampling involving a retained
+vertex's variable is itself retained when the backward scan reaches it.
+Fix a variable $Y$.  When an earlier retained event containing $Y$ is scanned,
+it overlaps every already present $Y$-vertex.  Its chosen deepest overlapping
+parent therefore has depth at least the maximum current depth among those
+vertices, so the new vertex is strictly deeper than all of them.  Thus
+chronological order among vertices using $Y$ is exactly decreasing depth,
+although those vertices need not form an ancestor chain.  The canonical
+non-increasing-depth order preserves this order for every variable, so every
+vertex reads the same numbered table cells in the log and in the $T$-check.
+The successful tests force the canonical check to pass.
+\end{proof}
+
+\begin{lemma}[Complete branching sum]\label{lem:branch}
+For every $A$,
+\[
+ \sum_{T:\,\mathrm{root}(T)=A}\prod_{v\in T}\Prob([v])
+ \le \frac{x_A}{1-x_A},
+\]
+where the sum is over all finite proper trees.
+\end{lemma}
+\begin{proof}
+Start with root $A$.  Independently at every vertex labelled $B$, add one child
+labelled $D$ with probability $x_D$, for each $D\in\Gamma^+(B)$.  Directly
+multiplying included and omitted child choices gives, for a finite proper $T$,
+\[
+ p_{\rm br}(T)=\frac{1-x_A}{x_A}
+ \prod_{v\in T}\left[x_{[v]}\prod_{D\in\Gamma([v])}(1-x_D)\right].
+\]
+By~\eqref{eq:lll}, the desired event-weight product is at most
+$x_Ap_{\rm br}(T)/(1-x_A)$.  The probabilities of all finite outputs of this
+branching experiment sum to at most one; summation proves the claim, whether or
+not the branching process can be infinite.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The witness trees attached to successive resamplings of $A$ are distinct: the
+$k$th contains exactly $k$ vertices labelled $A$, since every earlier $A$
+overlaps and enters the existing $A$ chain.  Lemmas~\ref{lem:witness} and
+\ref{lem:branch}, followed by monotone convergence, give
+$\E N_A\le x_A/(1-x_A)$.  Summing over the finite family gives finite expected
+total length.  Hence an infinite log has probability zero.  A legal rule stops
+only when no bad event is violated, so its terminal assignment avoids all of
+$\mathcal A$.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Robustness, ownership, and Route A}
+The proof conditions only on the resampling tables and the actual legal log; it
+never uses the lexicographic audit rule.  Thus adversarial, history-dependent,
+and randomized legal sequential choices obey the same bounds.  With
+$\mathcal A=\varnothing$ termination is immediate.  A probability-zero event is
+never initially or subsequently exposed as true outside a null table set.
+
+Moser and Tardos own the constructive theorem~\cite{mt}; this package claims a
+self-contained reconstruction, not priority.  It does not cover lopsided or
+permutation spaces, parallel resampling, or instances outside~\eqref{eq:lll}.
+C192 is a fixed chamber walk, C302 a recursive cost law, and C317 a deterministic
+matrix iteration; none owns shared-variable witness trees.
+
+The Route-A tuple is $(A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},
+\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL})$.  The verdict is
+\texttt{ROUTE\_A\_REJECTED}; Route B is locked.  Under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, no target local data, Euler factor,
+root number, automorphy, divisor, functional equation, zero match, or
+Hilbert--Polya operator is asserted.
+
+\section*{Revision certificate: arbitrary-rule robustness and scope closure}
+This final round adds the rule-independence argument, degenerate faces, source
+and collision ownership, strict evidence boundary, and Route-A firewall.
+\fi
+
+\ifnum\CRevisionRound=0
+\section*{Revision certificate: frozen resampling dynamics and exact chains}
+This original round fixes the tables, dependencies, legal clock, theorem
+contract, and complete small-instance transition ledger.
+\fi
+\ifnum\CRevisionRound=1
+\section*{Revision certificate: complete witness-tree and branching proof}
+This round adds both general lemmas and derives all expectation, termination,
+and avoidance conclusions without finite extrapolation.
+\fi
+
+\begin{thebibliography}{1}
+\bibitem{mt} R. A. Moser and G. Tardos, ``A constructive proof of the general
+Lovasz Local Lemma,'' \emph{J. ACM} 57 (2010), Article 11;
+DOI: 10.1145/1667053.1667060; arXiv:0903.0544.
+\end{thebibliography}
+\end{document}

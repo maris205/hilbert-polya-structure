@@ -1,0 +1,178 @@
+\pdfvariable trailerid {[<C3242026090300000000000000000000><C3242026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\TT}{\mathbb T}
+\setlength{\emergencystretch}{3em}
+\title{Periodic Hunter--Saxton Flow:\\Exact Two-Sided Lifespan and Universal Wave Breaking}
+\author{Route-A source-local certificate HCS-C324}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For every nonconstant periodic $C^2$ datum, we solve the once-integrated
+Hunter--Saxton equation throughout its maximal classical characteristic
+interval.  One scalar factor gives the exact Jacobian, both lifespan
+endpoints, and every first-breaking label.
+\ifnum\CRevisionRound>0
+We prove conservation of slope energy and the universal coefficient
+$-2$ at all simultaneous first breaking points, and close the constant-data
+and post-breaking boundaries.
+\fi
+\ifnum\CRevisionRound>1
+An asymmetric exact regression family separates the minimum-controlled
+future from the maximum-controlled past; a strict Route-A audit remains
+negative.
+\fi
+\end{abstract}
+
+\section{Exact characteristic theorem}
+Let $\TT=\mathbb R/\mathbb Z$ and consider the once-integrated equation
+\begin{equation}\label{eq:HS}
+ u_{tx}+u u_{xx}+\frac12u_x^2=-\frac12E,
+ \qquad E=\int_{\TT}u_x(t,x)^2\,dx.
+\end{equation}
+This is our classical formulation for $C^2$ data; the differentiated
+third-order equation is not asserted pointwise at that regularity.  Put
+$w_0=u_{0x}$, $m=\min w_0$, and $M=\max w_0$.  Nonconstant periodicity
+implies $E>0$ and $m<0<M$.
+
+\begin{theorem}[Complete pre-breaking dynamics]\label{thm:main}
+Define, for a characteristic label $a$,
+\begin{align}
+ F(t,a)&=\cos\frac{\sqrt E t}{2}
+   +\frac{w_0(a)}{\sqrt E}\sin\frac{\sqrt E t}{2},\label{eq:F}\\
+ T_+&=\frac2{\sqrt E}\arctan\frac{\sqrt E}{-m},
+ &T_-&=-\frac2{\sqrt E}\arctan\frac{\sqrt E}{M}.\label{eq:T}
+\end{align}
+There is a degree-one characteristic diffeomorphism $\eta(t,\cdot)$ for
+exactly $T_-<t<T_+$, normalized up to a common translation, such that
+\begin{equation}\label{eq:formulas}
+ \eta_a=F^2,\qquad
+ u_x(t,\eta(t,a))=\frac{2F_t}{F}
+ =\frac{-\sqrt E\sin(\sqrt E t/2)+w_0(a)\cos(\sqrt E t/2)}{F(t,a)}.
+\end{equation}
+The first positive breaking labels are exactly $\operatorname*{argmin}w_0$;
+all of them break simultaneously.  At each such label,
+\begin{equation}\label{eq:rate}
+ u_x(t,\eta(t,a))=-\frac2{T_+-t}+O(1)
+ \quad(t\uparrow T_+).
+\end{equation}
+Backward degeneration occurs exactly at $\operatorname*{argmax}w_0$ and
+time $T_-$.  No earlier degeneration occurs in either direction.
+\end{theorem}
+
+\begin{proof}
+Equation~\eqref{eq:HS} yields along $\eta_t=u(t,\eta)$ the Riccati equation
+\[
+ \dot w=-\frac12(w^2+E),\qquad w(t,a)=u_x(t,\eta(t,a)).
+\]
+Its solution is $w=2F_t/F$.  Since $\dot\eta_a=w\eta_a$ and
+$\eta_a(0,a)=1$, this gives $\eta_a=F^2$.  Moreover
+\[
+ \int_{\TT}F^2\,da=\cos^2\frac{\sqrt Et}{2}
+ +\sin^2\frac{\sqrt Et}{2}=1,
+\]
+because $\int w_0=0$ and $\int w_0^2=E$.  Conversely this identity makes
+the construction explicit: set
+\[
+ \eta(t,a)=b(t)+\int_0^aF(t,s)^2\,ds,
+ \qquad u(t,\eta(t,a))=\eta_t(t,a),
+\]
+where $b(0)=0$ and $b'(0)=u_0(0)$.  Then $\eta(0,a)=a$,
+$u(0,a)=u_0(a)$, and differentiating in $a$ gives
+$u_x\circ\eta=\eta_{ta}/\eta_a=2F_t/F$.  Its Riccati equation is precisely
+\eqref{eq:HS} along every characteristic.  The free common translation
+$b(t)$ is the harmless additive gauge.  Thus the construction is a
+degree-one circle diffeomorphism exactly while $F$ is positive.
+
+For fixed $t>0$ before the first pole, $F$ is increasing in $w_0$.
+Its first zero is therefore attained precisely where $w_0=m$, and solving
+$F=0$ gives $T_+$.  Reversing time makes the maximum decisive and gives
+$T_-$.  At a future first label, $F(T_+,a)=0$ and $F_t(T_+,a)\ne0$.
+Thus $2F_t/F=2/(t-T_+)+O(1)$, proving~\eqref{eq:rate} and the complete
+label statement.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Energy, degeneracies, and the endpoint}
+The same representation closes the conservation law without dividing by
+the Jacobian at its endpoint:
+\begin{equation}\label{eq:energy}
+ w(t,a)^2\eta_a(t,a)=E\left[-\sin\frac{\sqrt Et}{2}
+ +\frac{w_0(a)}{\sqrt E}\cos\frac{\sqrt Et}{2}\right]^2.
+\end{equation}
+Integrating~\eqref{eq:energy}, the mixed term vanishes and the remaining
+two terms sum to $E$.  Consequently $\int_{\TT}u_x^2\,dx=E$ throughout
+$(T_-,T_+)$, consistently closing~\eqref{eq:HS}.
+
+If $E=0$, then $w_0=0$ and the solution is spatially constant; neither
+formula in~\eqref{eq:T} is interpreted by division through zero.  A flat
+interval or several isolated points may realize the global minimum, and
+Theorem~\ref{thm:main} includes the entire minimizing set rather than a
+generic singleton.  At $t=T_+$ the map ceases to be a diffeomorphism.
+This paper neither constructs nor selects a conservative, dissipative, or
+other weak continuation.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Asymmetric audit and Route-A boundary}
+Single harmonics cannot detect an accidental exchange of $m$ and $M$.
+For $\theta=2\pi k a$, take
+\[
+ w_0=\cos\theta+\tfrac12\cos2\theta
+     =(\cos\theta+\tfrac12)^2-\tfrac34.
+\]
+Then $E=5/8$, $M=3/2$ occurs at $k$ labels, and $m=-3/4$ occurs at
+$2k$ labels.  Its negative swaps the extrema and multiplicities.  The
+certificate checks both signs for $k=1,2,3$, in addition to twelve
+Pythagorean single harmonics.  It records 2,354 scalar leaves.  The
+producer-independent checker performs 3,857 checks, SymPy closes 1,508
+identities, two isolated replays are byte exact, and 60 hostile mutations
+are rejected.  These are convention regressions; the proof above covers
+all declared data.
+
+The nearest registered models have different mechanisms: C195 is viscous
+Burgers smoothing, C256 is dispersive KdV cnoidal motion, and C278 is a
+finite-dimensional Camassa--Holm two-peakon weak manifold.
+
+Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the strict tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\]
+The geometric interpretation is only a formal hint.  There is no arithmetic
+prime owner, primitive-orbit Euler ledger, Euler product, target functional
+equation, counting law, target-zero match, or Hilbert--P\'olya operator.
+Route A is rejected and Route B stays locked.  No target local data, root
+number, or automorphy is claimed.
+
+\paragraph{AI use.}
+A generative language model assisted drafting and code scaffolding.  The
+displayed proof, independent recomputation, hostile tests, and deterministic
+artifacts define the audit record.
+\fi
+
+\section*{Source lineage}
+\small
+\begin{thebibliography}{9}
+\setlength{\itemsep}{0pt}
+\bibitem{HS} J. K. Hunter and R. Saxton,
+``Dynamics of director fields,'' \emph{SIAM J. Appl. Math.} 51 (1991),
+1498--1521. DOI: \href{https://doi.org/10.1137/0151075}{10.1137/0151075}.
+\bibitem{Lenells} J. Lenells,
+``The Hunter--Saxton Equation: A Geometric Approach,''
+\emph{SIAM J. Math. Anal.} 40 (2008), 266--277. DOI:
+\href{https://doi.org/10.1137/050647451}{10.1137/050647451}.
+\bibitem{Yin} Z. Yin,
+``On the Structure of Solutions to the Periodic Hunter--Saxton Equation,''
+\emph{SIAM J. Math. Anal.} 36 (2004), 272--283. DOI:
+\href{https://doi.org/10.1137/S0036141003425672}%
+{10.1137/S0036141003425672}.
+\end{thebibliography}
+\end{document}

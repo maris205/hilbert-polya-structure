@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C324--HCS-C328 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`1aba1f6fd0cf81baa7c137a2ce7ce3d097ba63fc`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C324 | Every nonconstant periodic `C2` Hunter--Saxton datum has an explicit pre-breaking characteristic diffeomorphism, exact two-sided lifespan, first-breaking set equal to the full extremizer set, conserved slope energy, quadratic Jacobian collapse, and universal future slope coefficient `-2`. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Hunter--Saxton package](../henon_hunter_saxton_periodic_wave_breaking_route_a/) · [paper PDF](../henon_hunter_saxton_periodic_wave_breaking_route_a/paper/main.pdf) |
+| HCS-C325 | Under the asymmetric variable-model local-lemma criterion, every legal sequential Moser--Tardos rule has the complete resampling-table witness-tree bound, eventwise and total expectation bounds, almost-sure termination, and a bad-event-free terminal assignment. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Moser--Tardos package](../henon_moser_tardos_resampling_witness_tree_route_a/) · [paper PDF](../henon_moser_tardos_resampling_witness_tree_route_a/paper/main.pdf) |
+| HCS-C326 | The two-site symmetric inclusion process has its normalized beta-binomial reversible law, the entire simple Hahn spectrum and finite-time kernel, sharp gap and `L2` decay, plus the absorbing endpoint probabilities and stationary weak limit at zero attraction. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [two-site inclusion package](../henon_two_site_inclusion_hahn_spectrum_route_a/) · [paper PDF](../henon_two_site_inclusion_hahn_spectrum_route_a/paper/main.pdf) |
+| HCS-C327 | The periodic delta-comb Hamiltonian has a rigorous point-interaction realization, complete all-sign band/gap atlas including the `ga=-4` zero threshold, pure absolutely continuous spectrum, indexed IDS/DOS, and a controlled high-energy gap-width expansion. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Kronig--Penney package](../henon_kronig_penney_band_gap_atlas_route_a/) · [paper PDF](../henon_kronig_penney_band_gap_atlas_route_a/paper/main.pdf) |
+| HCS-C328 | The harmonically confined run-and-tumble process has its velocity-resolved beta law, all polynomial moments, exact stationary correlation matrix including the coalescent face, and every finite polynomial-filter spectrum with odd-Jordan/even-semisimple resonance classification. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [run-and-tumble package](../henon_harmonic_run_tumble_beta_spectrum_route_a/) · [paper PDF](../henon_harmonic_run_tumble_beta_spectrum_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively a nonlinear wave-breaking PDE, a randomized local
+resampling algorithm, a conservative attractive particle chain, a periodic
+singular quantum Hamiltonian, and a confined active-particle PDMP.  No target
+local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Pólya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting are
+recorded in [BATCH_REVIEW_C324_C328.md](../BATCH_REVIEW_C324_C328.md).
+
 ## HCS-C319--HCS-C323 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

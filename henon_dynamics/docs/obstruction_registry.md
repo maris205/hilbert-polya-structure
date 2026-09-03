@@ -17,6 +17,23 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C324--HCS-C328 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O308 | HCS-C324 Hunter--Saxton breaking labels as arithmetic primitive owners | proved finite-lifespan and continuum-data obstruction | Every nonconstant classical branch reaches characteristic degeneration in finite forward and backward time.  Its lifespan varies continuously with the freely chosen initial slope, while its breaking labels are the datum-dependent `argmin`/`argmax` sets; these nonrecurrent singularities supply no rational-prime carrier, logarithmic-prime roof, primitive-orbit determinant, target divisor, or target zero realization. | The exact arbitrary-data characteristic map, two-sided maximal lifespan, complete extremizer-labelled breaking set, conserved slope energy, universal coefficient and all declared classical boundaries survive. | ../henon_hunter_saxton_periodic_wave_breaking_route_a/THEOREM_PACKAGE.md |
+| HEN-O309 | HCS-C325 resampling logs and witness trees as a deterministic arithmetic orbit ledger | proved randomized-termination and dependency-model obstruction | The owner is a randomized finite constraint-repair algorithm whose legal logs terminate almost surely under a probability inequality.  Event labels, resampling tables and unit update count are neither isolated deterministic periodic orbits nor a canonical rational-prime/logarithmic clock, target determinant, or target divisor. | The rule-uniform witness-tree probability lemma, complete branching bound, per-event and total expectations, almost-sure termination and bad-event avoidance survive. | ../henon_moser_tardos_resampling_witness_tree_route_a/THEOREM_PACKAGE.md |
+| HEN-O310 | HCS-C326 Hahn modes as an arithmetic spectral realization | proved finite-chain and continuous-parameter obstruction | The beta-binomial weights and Hahn modes diagonalize one finite reversible occupancy chain selected by continuously variable attraction `alpha` and integer mass `N`.  They provide no rational-prime orbit owner, logarithmic-prime roof, target local factors, target divisor, or Hilbert--Pólya realization. | Detailed balance, the complete simple spectrum and finite-time kernel, sharp gap/decay, and the zero-attraction absorption and stationary-limit faces survive. | ../henon_two_site_inclusion_hahn_spectrum_route_a/THEOREM_PACKAGE.md |
+| HEN-O311 | HCS-C327 Bloch bands and delta-comb discriminant as a target spectrum | proved periodic-source and continuous-coupling obstruction | The self-adjoint delta-comb Hamiltonian is a natural source quantization, but its lattice spacing, coupling, Bloch phase and continuum bands vary continuously and carry no rational-prime taxonomy or target divisor/zero match.  Its unimodular transfer determinant is not an Euler factor. | The operator domain, exact discriminant, all-sign band/gap and multiplicity atlas, zero threshold, IDS/DOS and controlled high-energy gap expansion survive. | ../henon_kronig_penney_band_gap_atlas_route_a/THEOREM_PACKAGE.md |
+| HEN-O312 | HCS-C328 beta stationarity and polynomial resonances as an arithmetic spectrum | proved stochastic-PDMP and filtered-spectrum obstruction | The owner is a compact-state stochastic velocity-switching process, and its beta density, correlations and finite polynomial ladders depend continuously on physical rates.  The odd/even Jordan resonances furnish neither isolated rational-prime cycles nor a target determinant, target divisor, natural self-adjoint lift, or zero match. | The velocity-resolved invariant law, all moments, full stationary correlation matrix, every finite polynomial-filter characteristic polynomial, resonance classification and parameter faces survive. | ../henon_harmonic_run_tumble_beta_spectrum_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under the Hunter--Saxton rotation gauge,
+legal resampling-rule choice, exchange of the two inclusion sites, delta-comb
+cell translation, and simultaneous run-and-tumble space/orientation reflection.
+They do not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C319--HCS-C323 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

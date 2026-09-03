@@ -2719,6 +2719,41 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C324--C328
+
+This round advances five unrelated dynamical mechanisms at theorem scale: a
+nonlinear wave-breaking PDE, a randomized local-resampling algorithm, an
+attractive conservative particle chain, a periodic singular quantum
+Hamiltonian, and a confined active-matter PDMP.  These are five complete
+papers, not five installments of one theorem.
+
+- [C324 periodic Hunter--Saxton wave breaking](henon_hunter_saxton_periodic_wave_breaking_route_a/README.md) · [paper PDF](henon_hunter_saxton_periodic_wave_breaking_route_a/paper/main.pdf)
+- [C325 Moser--Tardos witness-tree termination](henon_moser_tardos_resampling_witness_tree_route_a/README.md) · [paper PDF](henon_moser_tardos_resampling_witness_tree_route_a/paper/main.pdf)
+- [C326 two-site inclusion Hahn spectrum](henon_two_site_inclusion_hahn_spectrum_route_a/README.md) · [paper PDF](henon_two_site_inclusion_hahn_spectrum_route_a/paper/main.pdf)
+- [C327 Kronig--Penney band/gap atlas](henon_kronig_penney_band_gap_atlas_route_a/README.md) · [paper PDF](henon_kronig_penney_band_gap_atlas_route_a/paper/main.pdf)
+- [C328 harmonic run-and-tumble beta spectrum](henon_harmonic_run_tumble_beta_spectrum_route_a/README.md) · [paper PDF](henon_harmonic_run_tumble_beta_spectrum_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C324_C328.md),
+[batch plan](BATCH_PLAN_C324_C328.md), and
+[batch review](BATCH_REVIEW_C324_C328.md) for collision screening, theorem
+contracts, source ownership, adversarial proof repairs and exact release
+receipts.  Across the five packages the final audit closes **15,366**
+independent-checker assertions, **2,377** symbolic identities, **292/292**
+hostile rejections, **788,600** evidence bytes, 135 manifest payloads (140
+physical files), and **13** final-paper pages with **107** embedded/subset font
+records.  The five strict tuples, in order C324--C328, are
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C319--C323
 
 This round makes five independent theorem-scale advances while changing the

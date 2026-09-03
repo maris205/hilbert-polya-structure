@@ -1,0 +1,362 @@
+\pdfvariable trailerid {[<C3272026090300000000000000000000><C3272026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.68in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,hyperref,titlesec}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\iu}{\mathrm{i}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\ac}{\mathrm{ac}}
+\newcommand{\R}{\mathbb R}
+\setlength{\emergencystretch}{3em}
+\titlespacing*{\section}{0pt}{1.7ex plus .4ex}{.8ex}
+\title{An Exact Band--Gap Atlas for the Delta-Comb Kronig--Penney Hamiltonian}
+\author{Route-A source-local certificate HCS-C327}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We realize the one-dimensional periodic delta comb by a closed quadratic form
+for every real coupling and compute its monodromy discriminant without a
+formal-potential shortcut.  Floquet reduction gives an exact spectral
+criterion, pure absolute continuity, and a complete negative-energy atlas;
+the coupling $ga=-4$ is the precise zero-energy threshold.  This is the
+operator and discriminant owner.
+\ifnum\CRevisionRound>0
+All positive bands and gaps are then indexed on both sides of every Bragg
+point.  Every nonzero coupling opens every Bragg gap, with an explicit
+high-energy width expansion, and the integrated and ordinary densities of
+states are obtained with their edge conventions.
+\fi
+\ifnum\CRevisionRound>1
+Independent transfer, edge, density, replay, and hostile receipts audit the
+formulas.  The Hamiltonian is a natural quantization, but it has no target
+arithmetic payload and Route A is rejected.
+\fi
+\end{abstract}
+
+\section{Closed form, matching owner, and Floquet discriminant}
+Fix a period $a>0$ and a coupling $g\in\R$.  On $L^2(\R)$ define
+\begin{equation}\label{eq:form}
+ \mathfrak h_{a,g}[u]=\int_{\R}|u'(x)|^2\,dx
+       +g\sum_{n\in\mathbb Z}|u(na)|^2,
+ \qquad \operatorname{dom}\mathfrak h_{a,g}=H^1(\R).
+\end{equation}
+The periodized trace inequality makes the sum finite and infinitesimally
+form bounded relative to the kinetic term.  Thus~\eqref{eq:form} is closed
+and lower semibounded for either sign of $g$ and defines a unique
+self-adjoint operator $H_{a,g}$.
+
+\begin{proposition}[Operator and monodromy]\label{prop:owner}
+The operator acts as $-u''$ off $a\mathbb Z$ and has domain characterized by
+$u\in H^1(\R)$, cellwise $H^2$ regularity with
+$u''\in L^2(\R\setminus a\mathbb Z)$, and
+\begin{equation}\label{eq:jump}
+ u'(na+)-u'(na-)=g u(na).
+\end{equation}
+For $E=k^2>0$, propagation from one right limit to the next is conjugate to
+the determinant-one matrix
+\begin{equation}\label{eq:transfer}
+ M(E)=(\begin{matrix}1&0\\g&1\end{matrix})
+ (\begin{matrix}\cos(ka)&\sin(ka)/k\\-k\sin(ka)&\cos(ka)\end{matrix}).
+\end{equation}
+Its half trace is
+\begin{equation}\label{eq:delta}
+ \Delta(E)=\cos(ka)+\frac{g}{2k}\sin(ka).
+\end{equation}
+At $E=0$ this means $\Delta(0)=1+ga/2$ by continuity.  At
+$E=-\kappa^2<0$ it means
+\begin{equation}\label{eq:negative-delta}
+ \Delta(-\kappa^2)=\cosh(\kappa a)
+       +\frac{g}{2\kappa}\sinh(\kappa a).
+\end{equation}
+\end{proposition}
+\begin{proof}
+On every centered cell $I_n$ the one-dimensional trace estimate gives, for
+each $\varepsilon>0$,
+\[
+ |u(na)|^2\leq \varepsilon\|u'\|_{L^2(I_n)}^2
+                 +C_{a,\varepsilon}\|u\|_{L^2(I_n)}^2.
+\]
+Summing the disjoint-cell estimates proves the asserted form bound; choosing
+$\varepsilon$ after $g$ proves lower semiboundedness and closedness by the
+form perturbation theorem.  Integration by parts identifies the associated
+operator and~\eqref{eq:jump}.  Free propagation followed by the jump gives
+\eqref{eq:transfer}; direct multiplication gives determinant one and
+\eqref{eq:delta}.  Replacing $k$ by $\iu\kappa$ gives
+\eqref{eq:negative-delta}, including the displayed limit at zero.
+\end{proof}
+
+The Floquet transform decomposes $H_{a,g}$ over
+$\theta\in[-\pi,\pi)$ into compact-resolvent fibres on
+$[-a/2,a/2]$.  The fibre functions are quasi-periodic at the endpoints and
+obey~\eqref{eq:jump} at the origin.  A fibre eigenvalue satisfies
+\begin{equation}\label{eq:floquet}
+ \Delta(E)=\cos\theta.
+\end{equation}
+
+\begin{theorem}[Spectral type and multiplicity]\label{thm:floquet}
+For every $a>0$ and $g\in\R$,
+\begin{equation}\label{eq:spectrum}
+ \spec(H_{a,g})=\{E\in\R:|\Delta(E)|\leq1\},
+ \qquad \spec(H_{a,g})=\spec_{\ac}(H_{a,g}).
+\end{equation}
+There is neither point nor singular-continuous spectrum.  The full-line
+Bloch multiplicity is two in every band interior.  If $g\ne0$, each band
+edge is a simple periodic or antiperiodic fibre eigenvalue.  If $g=0$, the
+positive Bragg contacts $(n\pi/a)^2$, $n\geq1$, are double fibre eigenvalues;
+$E=0$ is the simple free bottom.
+\end{theorem}
+\begin{proof}
+Equation~\eqref{eq:floquet} and unimodularity give~\eqref{eq:spectrum}.
+The fibre eigenvalue branches are nonconstant real-analytic functions, with
+local analytic relabelling at crossings.  Their critical points are isolated,
+so pushing Lebesgue measure in $\theta$ through the branches is absolutely
+continuous; this is also the standard periodic-singular Floquet theorem.
+Thus their direct integral has neither point nor singular-continuous part.
+Interior energies have the two distinct angles $\pm\theta$.  At an edge the fibre multiplicity is the
+dimension of $\ker(M\mp I)$.  For $g\ne0$, $M$ cannot equal $\pm I$: at a
+Bragg point the jump factor is nontrivial, while away from a Bragg point the
+upper-right entry in~\eqref{eq:transfer} is nonzero.  Hence the kernel is
+one-dimensional.  For $g=0$, free propagation equals $(-1)^nI$ at every
+positive Bragg contact, giving dimension two.  The constant periodic mode is
+the sole zero-energy fibre eigenfunction.
+\end{proof}
+
+\section{Negative spectrum and the zero threshold}
+Put
+\begin{equation}\label{eq:scaled}
+ q=ga,\qquad z=Ea^2.
+\end{equation}
+This scaling removes $a$ from the atlas.  For $g<0$ write $h=-q>0$ and
+$y=\kappa a$.  Then
+\begin{align}
+ \Delta_- (y)-1
+ &=2\sinh(y/2)[\sinh(y/2)-\frac{h}{2y}\cosh(y/2)],\label{eq:nplus}\\
+ \Delta_- (y)+1
+ &=2\cosh(y/2)[\cosh(y/2)-\frac{h}{2y}\sinh(y/2)].\label{eq:nminus}
+\end{align}
+The functions $2y\tanh(y/2)$ and $2y\coth(y/2)$ are strictly increasing;
+their ranges are respectively $(0,\infty)$ and $(4,\infty)$.
+
+\begin{theorem}[Complete negative and zero-energy atlas]\label{thm:negative}
+If $g>0$, there is no nonpositive spectrum.  If $g=0$, the spectrum begins
+at zero.  Suppose $g<0$, and let $y_+>0$ be the unique solution
+\begin{equation}\label{eq:yplus}
+ h=2y_+\tanh(y_+/2).
+\end{equation}
+The first band has lower edge $-y_+^2/a^2$, where $\Delta=1$.
+\begin{enumerate}
+\item If $0<h<4$, zero lies in the interior of this band; its upper edge is
+positive\ifnum\CRevisionRound>0; it is specified in
+Theorem~\ref{thm:positive}\fi.
+\item If $h=4$ (equivalently $ga=-4$), zero is its simple antiperiodic upper
+edge, with $\Delta(0)=-1$.
+\item If $h>4$, there is a unique $y_->0$ satisfying
+\begin{equation}\label{eq:yminus}
+ h=2y_-\coth(y_-/2),
+\end{equation}
+with $y_-<y_+$.  The first band is exactly
+$[-y_+^2/a^2,-y_-^2/a^2]$, and $(-y_-^2/a^2,0]$ lies in a gap.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+For $g>0$,~\eqref{eq:negative-delta} is greater than one at every
+nonpositive energy.  For $g<0$, equations~\eqref{eq:nplus} and
+\eqref{eq:nminus} reduce the two edge equations to~\eqref{eq:yplus} and
+\eqref{eq:yminus}.  The derivative of the first edge function is positive.
+After multiplication by $\sinh^2(y/2)$, the derivative of the second has
+numerator $\sinh y-y>0$; its left limit is four.  The factor signs show that
+$|\Delta_-|\leq1$ for $0\leq y\leq y_+$ when $h\leq4$, and for
+$y_-\leq y\leq y_+$ when $h>4$.  Reversing $E=-y^2/a^2$ proves every case.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Complete sign atlas and gap asymptotic}
+For $x=a\sqrt E>0$ the two factorizations
+\begin{align}
+ \Delta-1&=2\sin(x/2)[\frac{q}{2x}\cos(x/2)-\sin(x/2)],\label{eq:pplus}\\
+ \Delta+1&=2\cos(x/2)[\cos(x/2)+\frac{q}{2x}\sin(x/2)]\label{eq:pminus}
+\end{align}
+show both the fixed edges $x=n\pi$ and their partners.  A partner adjacent
+to $n\pi$ obeys the single parity-free equation
+\begin{equation}\label{eq:partner}
+ q=2x_n\tan\frac{x_n-n\pi}{2}.
+\end{equation}
+Its left-hand side as a function of $x$ has derivative
+$(x+\sin(x-n\pi))/\cos^2((x-n\pi)/2)>0$ on the relevant open cell.
+
+\begin{theorem}[Positive bands and all open gaps]\label{thm:positive}
+The positive spectrum is as follows.
+\begin{enumerate}
+\item If $q>0$, equation~\eqref{eq:partner} has a unique
+$x_n\in(n\pi,(n+1)\pi)$ for every $n\geq0$.  The bands are
+\[
+ B_n=[x_n^2/a^2,((n+1)\pi/a)^2],\qquad n\geq0,
+\]
+and the gaps are $((n\pi/a)^2,x_n^2/a^2)$ for $n\geq1$, together with the
+gap below $B_0$.
+\item If $q=0$, $\spec(H_{a,0})=[0,\infty)$; the folded free bands meet at
+every Bragg energy and no gap is open.
+\item If $-4<q<0$, there is a unique $x_1\in(0,\pi)$ and the first band is
+$[-y_+^2/a^2,x_1^2/a^2]$.  If $q=-4$, set $x_1=0$ and the first band is
+$[-y_+^2/a^2,0]$.  If $q<-4$, there is no positive $x_1$ and the first band
+is the negative interval in Theorem~\ref{thm:negative}.  In all three cases,
+for every $n\geq1$ there is a unique
+$x_{n+1}\in(n\pi,(n+1)\pi)$ and
+\[
+ B_n=[(n\pi/a)^2,x_{n+1}^2/a^2].
+\]
+For $-4\leq q<0$ the first positive gap is $(x_1^2/a^2,(\pi/a)^2)$.
+For $q<-4$ it is the single gap $(-y_-^2/a^2,(\pi/a)^2)$ crossing zero.
+All later gaps are $(x_n^2/a^2,(n\pi/a)^2)$, $n\geq2$.
+\end{enumerate}
+Consequently every Bragg gap is open for every $g\ne0$.
+\end{theorem}
+\begin{proof}
+The monotonicity following~\eqref{eq:partner} gives uniqueness.  On the
+right cell the edge function ranges from zero to $+\infty$; on a left cell
+it ranges from $-\infty$ to zero.  The exceptional first left cell instead
+has limiting value $-4$ at zero.  The signs in~\eqref{eq:pplus} and
+\eqref{eq:pminus} then distinguish the allowed and forbidden intervals and
+give the displayed ordering.  A nonzero $q$ cannot solve
+\eqref{eq:partner} with $x_n=n\pi$, so none of the stated gaps collapses.
+\end{proof}
+
+\begin{corollary}[Controlled high-energy widths]\label{cor:width}
+For fixed $q=ga\ne0$, let $G_n$ be the gap adjacent to $(n\pi/a)^2$ and
+not containing lower-energy exceptional structure.  As $n\to\infty$,
+\begin{align}
+ x_n-n\pi
+ &=\frac{q}{n\pi}-\frac{q^2+q^3/12}{(n\pi)^3}
+      +O_q(n^{-5}),\label{eq:displacement}\\
+ |G_n|
+ &=\frac{2|g|}{a}
+ -\frac{\operatorname{sgn}(q)(q^2+q^3/6)}{(n\pi)^2a^2}
+      +O_q(n^{-4}a^{-2}).\label{eq:gapwidth}
+\end{align}
+In particular, there are computable $n_0(q)$ and $C(q)$ for which the
+absolute remainder in~\eqref{eq:gapwidth} is at most
+$C(q)/(n^4a^2)$ for $n\geq n_0(q)$.
+\end{corollary}
+\begin{proof}
+Put $N=n\pi$ and $x_n=N+\delta_n$.  Equation~\eqref{eq:partner} is
+$q=2(N+\delta_n)\tan(\delta_n/2)$.  With $u=N^{-1}$ and
+$\delta_n=u v$, the equation is analytic at $(u,v)=(0,q)$ and its
+$v$-derivative there is one.  The analytic implicit-function theorem and
+Taylor expansion give
+$v=q-(q^2+q^3/12)u^2+O_q(u^4)$, proving~\eqref{eq:displacement} with a
+locally bounded Taylor remainder.  Expanding
+$|(N+\delta_n)^2-N^2|/a^2$ gives~\eqref{eq:gapwidth} and the stated bound.
+\end{proof}
+
+\section{Integrated density of states and edge density}
+Enumerate the closed bands increasingly as $B_0,B_1,\ldots$, including the
+negative first band when $g<0$.  Their lower and upper discriminants are
+$(-1)^j$ and $(-1)^{j+1}$.  On the interior of $B_j$ define the unwrapped
+phase
+\begin{equation}\label{eq:phase}
+ K(E)=\frac{j\pi+\arccos((-1)^j\Delta(E))}{a}.
+\end{equation}
+
+\begin{theorem}[IDS and DOS with band indexing]\label{thm:ids}
+The integrated density of states per unit length is zero below $B_0$, equals
+\begin{equation}\label{eq:ids}
+ N(E)=\frac{K(E)}{\pi}
+ =\frac1a[j+\frac1\pi\arccos((-1)^j\Delta(E))]
+\end{equation}
+on $B_j$, and is $(j+1)/a$ in the gap following $B_j$.  It is continuous at
+all edges.  In every open band,
+\begin{equation}\label{eq:dos}
+ \rho(E)=N'(E)=\frac{|\Delta'(E)|}
+ {\pi a\sqrt{1-\Delta(E)^2}}.
+\end{equation}
+For $E=k^2>0$,
+\begin{equation}\label{eq:deltaprime}
+ \Delta'(E)=-\frac{a\sin(ka)}{2k}
+ +\frac{g(ak\cos(ka)-\sin(ka))}{4k^3},
+\end{equation}
+with $\Delta'(0)=-a^2/2-ga^3/12$.  For $g\ne0$ every finite edge has the
+usual one-sided inverse-square-root DOS singularity.  For $g=0$ the folded
+formula is interpreted continuously and reduces to
+$N(E)=\sqrt E/\pi$ and $\rho(E)=1/(2\pi\sqrt E)$ for $E>0$.
+\end{theorem}
+\begin{proof}
+Each fibre band supplies one state per cell as its Bloch angle traverses
+$[0,\pi]$.  The orientation alternates, which is exactly corrected by
+$(-1)^j$ in~\eqref{eq:phase}.  This proves~\eqref{eq:ids} and the constant
+gap values.  Differentiating yields~\eqref{eq:dos}; direct differentiation of
+\eqref{eq:delta} yields~\eqref{eq:deltaprime} and its Taylor limit.  The
+edge equations and their strict monotonicity imply $\Delta'(E_*)\ne0$ for
+$g\ne0$, hence the square-root law.  Direct simplification gives the free
+formulas.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Density evidence and Route boundary}
+The machine-readable certificate contains 216 nonzero-coupling Bragg rows,
+150 independently reconstructible transfer matrices at three lattice
+scales, 70 band-indexed IDS/DOS rows, five negative-atlas cases, and nine
+low-edge cases: 5,428 scalar leaves in total.  The independent checker owns
+every field and performs 5,607 checks.  SymPy verifies 295 exact identities;
+two isolated producer runs replay byte for byte; 55 repaired-hash, parser,
+nonfinite, duplicate-key, semantic, authority, and evidence-status attacks
+must fail.  These finite receipts are regression evidence only; the form,
+factorization, monotonicity, and implicit-function arguments prove the
+all-parameter claims.
+
+Kronig and Penney own the original periodic crystal band model
+\cite{kronigpenney}.  Albeverio, Gesztesy, H\o egh-Krohn, and Holden give the
+authoritative point-interaction framework, including infinitely many
+one-dimensional centres~\cite{albeverio}.  Hryniv and Mykytyuk establish
+self-adjointness, pure absolute continuity, and band--gap structure for a
+larger class of periodic singular potentials~\cite{hryniv}.  The exact
+sign-atlas reconstruction here makes no literature-priority claim.
+
+The owner is distinct from C288, which treats one isolated point interaction
+and its scattering/resolvent data; C308, a non-Hermitian Hatano--Nelson
+lattice; C318, a dimerized finite-range SSH bulk--edge chain; and C323, a
+finite complete-graph oracle Hamiltonian.  Here the object is an infinite
+self-adjoint continuum delta comb and its Bloch-band atlas.
+
+Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the strict Route-A tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_NATURAL\_QUANTIZATION}).
+\]
+The physical Hamiltonian is a source-native natural quantization.  But the
+real parameters $a,g$, repeated cells, transfer determinant, and Bloch phase
+contain no rational-prime payload, arithmetic primitive-orbit ledger, Euler
+product, target divisor, functional equation, or target-zero match.  The
+transfer determinant is not an Euler factor, and $H_{a,g}$ is not claimed to
+be a Hilbert--P\'olya operator.  Route A is rejected and Route B remains
+locked.
+
+\begingroup\small
+\begin{thebibliography}{9}
+\bibitem{kronigpenney}
+R.~de L. Kronig and W.~G. Penney,
+``Quantum mechanics of electrons in crystal lattices,''
+\emph{Proceedings of the Royal Society A} \textbf{130} (1931), 499--513.
+\href{https://doi.org/10.1098/rspa.1931.0019}{doi:10.1098/rspa.1931.0019}.
+
+\bibitem{albeverio}
+S.~Albeverio, F.~Gesztesy, R.~H\o egh-Krohn, and H.~Holden,
+\emph{Solvable Models in Quantum Mechanics}, second edition,
+AMS Chelsea, 2005.
+\href{https://doi.org/10.1090/chel/350}{doi:10.1090/chel/350}.
+
+\bibitem{hryniv}
+R.~O. Hryniv and Ya.~V. Mykytyuk,
+``Schr\"odinger operators with periodic singular potentials,'' 2001.
+\href{https://arxiv.org/abs/math/0109129}{arXiv:math/0109129}.
+\end{thebibliography}
+\endgroup
+\fi
+
+\end{document}
