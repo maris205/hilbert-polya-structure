@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C344--HCS-C348 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`1af63b945e19b5f94ac1cb76f93af5ac66d3d562`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C344 | The canonical Hamiltonian resonant triad is reduced by its two Manley--Rowe invariants and Hamiltonian to a completely classified cubic elliptic intensity motion, with an explicit Jacobi solution and period, two independent third-kind phase increments, a necessary-and-sufficient two-frequency closure test, and all double-root, zero-Hamiltonian, separatrix, axis and symmetry faces. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [resonant-triad package](../henon_hamiltonian_resonant_triad_elliptic_route_a/) · [paper PDF](../henon_hamiltonian_resonant_triad_elliptic_route_a/paper/main.pdf) |
+| HCS-C345 | A side-coupled Fano--Anderson impurity has the complete infinite-volume spectral decomposition, exactly two physical-sheet simple band-exterior states for nonzero coupling, explicit impurity density and residues with unit mass, and exact reflection/transmission with its in-band Fano zero, including every decoupled, collapsed-hopping, edge and gauge face. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Fano--Anderson package](../henon_fano_anderson_side_impurity_spectral_scattering_route_a/) · [paper PDF](../henon_fano_anderson_side_impurity_spectral_scattering_route_a/paper/main.pdf) |
+| HCS-C346 | The two-dimensional oblique orthant Skorokhod problem is well posed for every cadlag input exactly when `rho*sigma<1`; the running-supremum fixed point has sharp weighted contraction and stability bounds, monotone Picard convergence, causal and time-change structure, while explicit critical nonuniqueness and critical/supercritical infeasibility close the threshold and triangular faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [oblique-Skorokhod package](../henon_oblique_skorokhod_map_mmatrix_threshold_route_a/) · [paper PDF](../henon_oblique_skorokhod_map_mmatrix_threshold_route_a/paper/main.pdf) |
+| HCS-C347 | The noisy mean-field Kuramoto equation has an exact free-energy dissipation law and a complete stationary-density classification: the uniform state is alone through `K=2D`, whereas above threshold a unique nonzero von Mises concentration generates one rotation orbit; the uniform spectrum, critical expansion and zero-coupling/critical/zero-noise boundaries are explicit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [noisy-Kuramoto package](../henon_noisy_mean_field_kuramoto_phase_transition_route_a/) · [paper PDF](../henon_noisy_mean_field_kuramoto_phase_transition_route_a/paper/main.pdf) |
+| HCS-C348 | A nearest-neighbour walk in a one-dimensional iid strictly elliptic environment has exact quenched finite-interval hitting probabilities, Solomon's full recurrence/transience trichotomy and deterministic annealed velocity law, including both transient zero-speed chambers and complete Beta and homogeneous-environment faces. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [iid-RWRE package](../henon_one_dimensional_iid_rwre_solomon_phase_route_a/) · [paper PDF](../henon_one_dimensional_iid_rwre_solomon_phase_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and have Route B false.  Their
+owners are respectively an integrable complex wave interaction, a
+self-adjoint lattice impurity, a deterministic nonsmooth path map, a
+nonlinear nonlocal parabolic flow and a walk in infinite spatial disorder.
+No target local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes, cross-review repairs and
+accounting are recorded in
+[BATCH_REVIEW_C344_C348.md](../BATCH_REVIEW_C344_C348.md).
+
 ## HCS-C339--HCS-C343 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

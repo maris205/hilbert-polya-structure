@@ -17,6 +17,23 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C344--HCS-C348 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O328 | HCS-C344 resonant-triad intensities and phase returns as arithmetic primitive-orbit data | proved continuous-invariant-torus obstruction | The Manley--Rowe levels and Hamiltonian are freely chosen continuous source invariants; even when the intensity is periodic, the two phase increments are generically incommensurate and give no rational-prime taxonomy or logarithmic-prime roof.  The source elliptic curve and phase-return data do not define a target divisor. | Liouville reduction, complete cubic root chamber, Jacobi intensity solution, both elliptic phase increments, the exact full-closure criterion and every locked, separatrix, axis and gauge boundary survive. | ../henon_hamiltonian_resonant_triad_elliptic_route_a/THEOREM_PACKAGE.md |
+| HEN-O329 | HCS-C345 impurity poles and a Fano zero as a target spectral divisor | proved source-Hamiltonian and continuous-parameter obstruction | The chain parameters are freely chosen continuous physical data, while the two bound states and transmission zero belong to the explicitly defined lattice impurity.  They carry neither rational-prime local ownership nor a target zero set, determinant or Hilbert--Polya realization. | Complete infinite-volume spectral type, both physical bound states, impurity measure and residues, mass closure, exact scattering and all decoupled/threshold/gauge faces survive. | ../henon_fano_anderson_side_impurity_spectral_scattering_route_a/THEOREM_PACKAGE.md |
+| HEN-O330 | HCS-C346 regulator contacts as arithmetic primitive cycles | proved deterministic-path-map obstruction | Regulator increments are input-dependent boundary corrections rather than isolated recurrent primitive orbits; the continuous obliqueness parameters and M-matrix threshold supply no prime labels, logarithmic clock, Euler product, target divisor or spectral operator. | The exact all-input threshold, fixed-point construction, contraction and stability estimates, causal/time-change laws, critical nonuniqueness, infeasible wall input and triangular faces survive. | ../henon_oblique_skorokhod_map_mmatrix_threshold_route_a/THEOREM_PACKAGE.md |
+| HEN-O331 | HCS-C347 Kuramoto harmonics and symmetry-broken equilibria as arithmetic spectral owners | proved mean-field-PDE and continuous-parameter obstruction | Fourier modes and the von Mises concentration describe a dissipative source PDE with continuously selected coupling and noise.  The real first-harmonic instability and rotation orbit provide no rational-prime taxonomy, target functional equation, zero match, unitary owner or Hilbert--Polya operator. | Free-energy dissipation, all stationary densities, the exact `K=2D` threshold, uniqueness modulo rotation, the full uniform linear spectrum, critical expansion and declared singular faces survive. | ../henon_noisy_mean_field_kuramoto_phase_transition_route_a/THEOREM_PACKAGE.md |
+| HEN-O332 | HCS-C348 random-environment sites and potential increments as arithmetic local data | proved stochastic-disorder obstruction | Iid sites and their odds ratios are exogenous spatial disorder with an arbitrary source law, not canonical rational primes or prime powers.  Direction and speed thresholds are probabilistic moment criteria and supply no target Euler factor, divisor, counting law, zero match or deterministic orbit clock. | Exact quenched scale functions, Solomon direction and speed phases, both transient zero-speed chambers, Beta formulas and homogeneous boundaries survive. | ../henon_one_dimensional_iid_rwre_solomon_phase_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under triad phase gauge and mode exchange,
+impurity-coupling sign gauge and lattice reflection, positive coordinate
+rescaling of the regulator problem, circle rotation, and spatial reflection
+with left/right exchange in RWRE.  They do not license Route B.  The common
+scope firewall is `NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem
+is source-local with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C339--HCS-C343 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

@@ -1,0 +1,314 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\providecommand{\CRevisionRound}{2}
+\pdfvariable suppressoptionalinfo 767
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.15em}
+\setlist{nosep,leftmargin=1.8em}
+\hbadness=10000
+\vbadness=10000
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\EE}{\mathbf E}
+\newcommand{\PA}{\mathbb P}
+
+\title{Direction, Ballisticity, and the Zero-Speed Chamber\\
+for One-Dimensional IID Random Environment}
+\author{HCS-C348 source-local reconstruction}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give a convention-complete reconstruction of the one-dimensional iid
+nearest-neighbour random walk in random environment.  One theorem joins the
+quenched finite-interval scale function, the log-bias direction trichotomy,
+the annealed almost-sure velocity, and the full transient zero-speed region.
+The latter is proved analytically: stationary ergodic crossing times are
+truncated before Birkhoff's theorem, forcing infinite passage time per unit
+distance and hence zero speed.  Beta and constant environments close all
+stated parameter faces.  Exact finite ledgers are regression receipts only.
+No priority, arithmetic-target, Euler-factor, root-number, target-zero, or
+Hilbert--P\'olya claim is made.
+\end{abstract}
+
+\noindent\textbf{Revision certificate.}
+\ifnum\CRevisionRound=0
+Scale and direction closure.
+\else\ifnum\CRevisionRound=1
+Round-one speed and Beta closure.
+\else
+Round-two evidence and boundary closure.
+\fi\fi
+\small
+
+\section{Frozen model and the two laws}
+
+Let \((\Omega,\mathcal F,\PP)\) carry iid variables
+\(\omega=(\omega_x)_{x\in\mathbb Z}\) such that
+\[
+0<\omega_x<1,\qquad
+\rho_x=\frac{1-\omega_x}{\omega_x},\qquad
+\EE|\log\rho_0|<\infty.                                      \tag{1}
+\]
+Given the complete frozen environment, the quenched law \(P_\omega^z\) is
+the Markov law started at \(z\) with
+\[
+P_\omega(X_{n+1}=x+1\mid X_n=x)=\omega_x,
+\quad
+P_\omega(X_{n+1}=x-1\mid X_n=x)=1-\omega_x.                 \tag{2}
+\]
+The annealed law is
+\(\PA^z(d\omega,dX)=\PP(d\omega)P_\omega^z(dX)\).  Thus the
+medium is sampled once; annealing does not resample \(\omega_x\) on a revisit.
+Put \(T_y=\inf\{n\geq0:X_n=y\}\) and \(m=\EE\log\rho_0\).
+
+\begin{theorem}[Complete phase theorem]\label{thm:main}
+Under \emph{(1)} the following statements hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item For integers \(a<x<b\), define \(R_a=1\) and
+\(R_k=\prod_{j=a+1}^{k}\rho_j\).  Then
+\[
+P_\omega^x(T_b<T_a)
+=\frac{\sum_{k=a}^{x-1}R_k}{\sum_{k=a}^{b-1}R_k}.            \tag{3}
+\]
+\item For \(\PP\)-almost every \(\omega\), the following holds
+\(P_\omega^0\)-almost surely:
+\[
+\begin{array}{c|c}
+m<0&X_n\to+\infty,\\
+m=0&\liminf X_n=-\infty\ \hbox{and}\ \limsup X_n=+\infty,\\
+m>0&X_n\to-\infty.
+\end{array}                                                   \tag{4}
+\]
+\item Under \(\PA^0\), and therefore under \(P_\omega^0\) for
+\(\PP\)-almost every environment,
+\[
+\frac{X_n}{n}\longrightarrow v
+=\begin{cases}
+\dfrac{1-\EE\rho_0}{1+\EE\rho_0},&\EE\rho_0<1,\\[5pt]
+-\dfrac{1-\EE\rho_0^{-1}}{1+\EE\rho_0^{-1}},
+   &\EE\rho_0^{-1}<1,\\[5pt]
+0,&\text{otherwise}.
+\end{cases}                                                   \tag{5}
+\]
+The two nonzero cases are disjoint.
+\end{enumerate}
+\end{theorem}
+
+\section{Scale and direction}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)]
+Let \(h(i)=P_\omega^i(T_b<T_a)\).  It is the unique solution of
+\[
+h(i)=\omega_i h(i+1)+(1-\omega_i)h(i-1),\qquad h(a)=0, h(b)=1.
+\]
+For \(\Delta_i=h(i)-h(i-1)\), this becomes
+\(\Delta_{i+1}=\rho_i\Delta_i\).  Hence
+\(\Delta_{k+1}=R_k\Delta_{a+1}\).  Summing and imposing the two boundary
+values gives (3); positivity of the denominator gives uniqueness.
+\end{proof}
+
+For the infinite line define the two-sided potential
+\[
+V(0)=0,\quad V(n)=\sum_{j=1}^{n}\log\rho_j\ (n>0),\quad
+V(n)=-\sum_{j=n+1}^{0}\log\rho_j\ (n<0).                    \tag{6}
+\]
+The strong law gives \(V(n)/n\to m\) at both ends.  If \(m<0\), scale
+weights decay to the right and grow to the left.  Sending the barriers in (3)
+to infinity shows that every positive level is hit and every fixed level is
+visited only finitely often; thus \(X_n\to+\infty\).  Reflection gives the
+case \(m>0\).  If \(m=0\), the iid sums in (6) oscillate at both ends unless
+they vanish identically; the latter is the simple symmetric environment.
+Both one-sided scale sums diverge in either case, and (3) shows that every
+integer is hit.  This proves (4).
+
+\ifnum\CRevisionRound>0
+\section{Stationary crossings and velocity}
+
+The point of this section is to retain the infinite-mean step rather than
+silently infer zero speed from a divergent expectation.
+
+\begin{lemma}[Crossing array]\label{lem:crossing}
+Suppose every positive level is hit and set
+\(\tau_i=T_i-T_{i-1}\), \(i\geq1\).  Under \(\PA^0\), the sequence
+\((\tau_i)\) is stationary and ergodic.  Moreover
+\[
+E_\omega^0T_1=1+2\sum_{k\leq0}\prod_{j=k}^{0}\rho_j,         \tag{7}
+\]
+where infinity is allowed, and in the iid case
+\[
+\mathbb E\tau_1=1+2\sum_{r\geq1}(\EE\rho_0)^r.              \tag{8}
+\]
+\end{lemma}
+
+\begin{proof}
+Quenched strong Markov makes successive post-hitting segments conditionally
+independent, with spatially shifted one-crossing laws.  Thus their joint
+annealed law has a product-extension representation
+\[
+\tau_i=F(\theta^{i-1}\omega,U_i).
+\]
+Here the auxiliary rows \(U_i\) are iid and independent of \(\omega\).  Their
+simultaneous spatial shift with the iid environment is Bernoulli, hence mixing
+and ergodic, and the crossing array is its factor.  This does not make the
+annealed \(\tau_i\) independent: they share \(\omega\).  Locally,
+\(\tau_i\wedge K\) uses only \(U_i\) and sites reachable before time \(K\).
+
+Let \(a_i=E_\omega^iT_{i+1}\).  First-step decomposition gives
+\[
+a_i=1+(1-\omega_i)(a_{i-1}+a_i)
+    =1+\rho_i+\rho_i a_{i-1}.
+\]
+Iteration toward \(-\infty\), first with a finite barrier and then by
+monotone convergence, proves (7).  Tonelli and iid factorization give (8).
+\end{proof}
+
+If \(r=\EE\rho_0<1\), (8) gives
+\[
+\mu:=\mathbb E\tau_1=\frac{1+r}{1-r}.                       \tag{9}
+\]
+Birkhoff yields \(T_n/n\to\mu\).  Integrability also gives
+\(\tau_n/n\to0\): for every \(\varepsilon>0\),
+\[
+\sum_{n\geq1}\PA(\tau_n>\varepsilon n)
+=\sum_{n\geq1}\PA(\tau_1>\varepsilon n)<\infty,            \tag{10}
+\]
+so Borel--Cantelli applies without independence.  Let
+\(M_t=\max_{s\leq t}X_s=\max\{n:T_n\leq t\}\).  Inverting passage times
+gives \(M_t/t\to1/\mu\).  Before the unfinished crossing to \(M_t+1\), the
+depth below \(M_t\) is at most \(\tau_{M_t+1}=o(t)\); hence
+\(X_t/t\to1/\mu=(1-r)/(1+r)\).
+
+If \(\EE\rho_0\geq1\), then \(\mathbb E\tau_1=\infty\).  For every finite
+\(K\), Birkhoff applied to \(\tau_i\wedge K\) gives
+\[
+\liminf_{n\to\infty}\frac{T_n}{n}
+\geq\mathbb E(\tau_1\wedge K).
+\]
+Letting \(K\to\infty\) proves the almost-sure statement
+\(T_n/n\to\infty\), and therefore \(M_t/t\to0\).  In the right transient
+case, eventually \(0\leq X_t\leq M_t\), so \(X_t/t\to0\).  This is the
+transient zero-speed chamber.
+
+In the recurrent case the same argument controls the positive maximum, while
+its reflected version controls the negative minimum, proving
+\(|X_t|/t\to0\).  For left transience reflect space; its bias is
+\(\rho'_x=\rho_{-x}^{-1}\), giving the second line of (5).  Finally
+\((\EE\rho_0)(\EE\rho_0^{-1})\geq1\) by Cauchy--Schwarz, so both ballistic
+conditions cannot hold.  This completes Theorem~\ref{thm:main}.
+
+For any annealed probability-one event \(A\) just proved, Fubini gives
+\(1=\PA^0(A)=\int P_\omega^0(A)\,\PP(d\omega)\).  Thus
+\(P_\omega^0(A)=1\) for \(\PP\)-almost every \(\omega\), not for every
+environment.
+
+\section{Beta and homogeneous faces}
+
+\begin{corollary}[Beta environment]\label{cor:beta}
+If \(\omega_0\sim\operatorname{Beta}(\alpha,\beta)\),
+\(\alpha,\beta>0\), direction is right, recurrent, or left according as
+\(\alpha>\beta\), \(\alpha=\beta\), or \(\alpha<\beta\), and
+\[
+v=\begin{cases}
+\dfrac{\alpha-\beta-1}{\alpha+\beta-1},&\alpha>\beta+1,\\[5pt]
+-\dfrac{\beta-\alpha-1}{\alpha+\beta-1},&\beta>\alpha+1,\\[5pt]
+0,&|\alpha-\beta|\leq1.
+\end{cases}                                                   \tag{11}
+\]
+For \(\omega_x=p\) deterministically, \(v=2p-1\).
+\end{corollary}
+
+\begin{proof}
+Beta integrals give
+\[
+\EE\log\rho=\psi(\beta)-\psi(\alpha),\quad
+\EE\rho=\frac{\beta}{\alpha-1}\ (\alpha>1),\quad
+\EE\rho^{-1}=\frac{\alpha}{\beta-1}\ (\beta>1),            \tag{12}
+\]
+with the relevant moment infinite otherwise.  The digamma function is
+strictly increasing.  Substitution in (4)--(5) gives (11), including the two
+unit-difference zero-speed walls.  In the constant case
+\(\rho=(1-p)/p\), and \((1-\rho)/(1+\rho)=2p-1\); reflection covers
+\(p<1/2\).
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact receipt, boundaries, and collision audit}
+
+The canonical receipt uses rational arithmetic throughout.  It contains the
+following complete finite panels.
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+panel & rows\\
+\midrule
+integer Beta parameters \(1\leq\alpha,\beta\leq20\) & 400\\
+rational two-atom environment laws & 280\\
+finite environment words, interior length at most four & 780\\
+finite-interval starting-point probabilities & 2,930\\
+constant environments & 5\\
+\bottomrule
+\end{tabular}
+\end{center}
+For integer Beta parameters the digamma difference is the exact harmonic
+number difference \(H_{\beta-1}-H_{\alpha-1}\).  For a two-atom law with
+weight \(r/m\), the sign of \(\EE\log\rho\) is checked by comparing the
+rational number \(\rho_1^r\rho_2^{m-r}\) with one.  These ledgers catch
+normalization and chamber errors.  They do not prove an infinite-environment
+almost-sure theorem; Sections 2--3 do.
+
+Atoms at \(\omega=0\) or \(1\), non-iid media, dynamic environments,
+higher dimensions, and non-nearest-neighbour jumps are outside the theorem.
+No central limit, slowdown, localization, or large-deviation result is
+asserted.  C342 concerns finite directed Dirichlet rows and annealed edge
+reinforcement, whereas the present owner is a frozen iid scalar medium on
+\(\mathbb Z\).  C273 has homogeneous iid increments, and C253 is a finite
+Moran absorption chain.
+
+The strict Route-A tuple is
+\((A0\_FAIL,A1\_FAIL,A2\_FAIL,A3\_FAIL,A4\_FAIL)\), with overall verdict
+\texttt{ROUTE\_A\_REJECTED} and Route B false.  Scale products and random
+crossings are source probability objects, not rational-prime carriers,
+primitive arithmetic orbits, target Euler factors, a target divisor, or a
+Hilbert--P\'olya operator.
+\fi
+
+\section{Source and ownership note}
+
+Solomon's primary paper \cite{Solomon1975} owns the classical iid direction
+and speed theorem.  Zeitouni's review \cite{Zeitouni2004} supplies an
+authoritative later formulation.  Our contribution is a source-local,
+auditable reconstruction joining the proof, exact regression receipt, boundary
+atlas, and Route-A evaluation.  We make no priority claim.
+
+\begin{thebibliography}{9}
+\bibitem{Solomon1975}
+F. Solomon,
+Random walks in a random environment,
+\emph{Ann. Probab.} \textbf{3} (1975), 1--31.
+\url{https://doi.org/10.1214/AOP/1176996444}.
+
+\bibitem{Zeitouni2004}
+O. Zeitouni,
+Random walks in random environment,
+in \emph{Lectures on Probability Theory and Statistics},
+Lecture Notes in Mathematics 1837, Springer (2004), 189--312.
+\url{https://doi.org/10.1007/978-3-540-39874-5_2}.
+\end{thebibliography}
+
+\end{document}

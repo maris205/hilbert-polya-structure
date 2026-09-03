@@ -2719,6 +2719,37 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C344--C348
+
+This round takes five independent theorem-scale steps: a complex Hamiltonian
+wave triad, a side-coupled lattice impurity, a nonsmooth oblique reflection
+map, a noisy nonlinear mean-field PDE, and a random walk in infinite iid
+spatial disorder.  These are five complete papers, not five installments of
+one result.
+
+- [C344 Hamiltonian resonant-triad elliptic dynamics](henon_hamiltonian_resonant_triad_elliptic_route_a/README.md) · [paper PDF](henon_hamiltonian_resonant_triad_elliptic_route_a/paper/main.pdf)
+- [C345 Fano--Anderson side-impurity spectrum and scattering](henon_fano_anderson_side_impurity_spectral_scattering_route_a/README.md) · [paper PDF](henon_fano_anderson_side_impurity_spectral_scattering_route_a/paper/main.pdf)
+- [C346 oblique Skorokhod-map M-matrix threshold](henon_oblique_skorokhod_map_mmatrix_threshold_route_a/README.md) · [paper PDF](henon_oblique_skorokhod_map_mmatrix_threshold_route_a/paper/main.pdf)
+- [C347 noisy mean-field Kuramoto phase transition](henon_noisy_mean_field_kuramoto_phase_transition_route_a/README.md) · [paper PDF](henon_noisy_mean_field_kuramoto_phase_transition_route_a/paper/main.pdf)
+- [C348 one-dimensional iid RWRE Solomon phase atlas](henon_one_dimensional_iid_rwre_solomon_phase_route_a/README.md) · [paper PDF](henon_one_dimensional_iid_rwre_solomon_phase_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C344_C348.md),
+[batch plan](BATCH_PLAN_C344_C348.md), and
+[batch review](BATCH_REVIEW_C344_C348.md) for collision screening, theorem
+contracts, source ownership, author-swapped proof checks, exact release
+receipts and aggregate accounting.  The five strict tuples, in order
+C344--C348, are
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`.
+All five are `ROUTE_A_REJECTED`.  Route B is false for all five and the common
+scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum,
+Euler factor, root number, automorphy object, target divisor/counting law or
+functional equation, target zero match, Hilbert--Polya operator, or Route-B
+input is asserted.
+
 ## Route-A independent cross-subtype round C339--C343
 
 This round takes five separate theorem-scale steps across unrelated dynamics:

@@ -1,0 +1,249 @@
+\pdfvariable trailerid {[<C3462026090300000000000000000000><C3462026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.76in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\calL}{\mathcal L}
+\setlength{\emergencystretch}{4em}
+\title{A Sharp M-Matrix Threshold for a Two-Dimensional\\Oblique Skorokhod Map}
+\author{Route-A source-local certificate HCS-C346}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For oblique regulation in the quadrant with the stated two-axis reflection
+matrix $R$,
+we prove the \emph{fixed point and sharp M-matrix chamber}:
+every c\`adl\`ag input has one and only one regulated path precisely when
+$\rho\sigma<1$.
+\ifnum\CRevisionRound>0
+We add \emph{weighted stability, Picard, and time change}: the natural norm
+has contraction factor $\sqrt{\rho\sigma}$, explicit solution stability,
+monotone geometric iteration, causality and reparameterization covariance.
+\fi
+\ifnum\CRevisionRound>1
+Finally, \emph{sharp wall, executable audit, and Route-A boundary} close
+critical nonuniqueness, critical/supercritical nonexistence, triangular and
+post-jump faces without upgrading finite evidence to an all-path proof.
+\fi
+\end{abstract}
+
+\section{Convention and the sharp existence theorem}
+Fix $T<\infty$, $\rho,\sigma\geq0$, and
+\[
+ R=\begin{pmatrix}1&-\rho\\-\sigma&1\end{pmatrix}.
+\]
+Let $x=(x_1,x_2)\in D([0,T],\RR^2)$ with $x(0)\geq0$ coordinatewise.
+A solution consists of c\`adl\`ag $z,y$ such that
+\begin{equation}\label{eq:sp}
+ z=x+Ry\geq0,\qquad y(0)=0,\qquad y_i\text{ is nondecreasing},
+ \qquad \int_{[0,t]}z_i(s)\,dy_i(s)=0.
+\end{equation}
+The integrand is the \emph{post-jump} state.  Thus a regulator jump is
+supported on an axis after the jump, including simultaneous corner jumps.
+
+For scalar c\`adl\`ag $f$, write
+\[
+ (\calL f)(t)=\sup_{0\leq s\leq t}[-f(s)]_+.
+\]
+
+\begin{lemma}[One-sided regulator]\label{lem:scalar}
+If $f(0)\geq0$, the unique nondecreasing c\`adl\`ag $r$, with $r(0)=0$,
+for which $g=f+r\geq0$ and $\int g\,dr=0$ is $r=\calL f$.  Moreover,
+\begin{equation}\label{eq:Llip}
+ \norm{\calL f-\calL h}_\infty\leq\norm{f-h}_\infty.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The running supremum is the least nondecreasing correction making $f+r$
+nonnegative.  It increases only at a new negative running minimum, where the
+post-jump corrected state is zero.  Conversely, feasibility forces every
+regulator to dominate $\calL f$.  A first strict excess would be an increase
+with positive corrected state, contradicting complementarity.  Finally,
+positive part and running supremum are one-Lipschitz, proving
+\eqref{eq:Llip}.
+\end{proof}
+
+\begin{theorem}[Sharp all-input threshold]\label{thm:main}
+Problem~\eqref{eq:sp} has exactly one solution for every admissible input and
+every finite horizon if and only if
+\begin{equation}\label{eq:chamber}
+ \rho\sigma<1.
+\end{equation}
+Inside this chamber, its regulator is the unique solution of
+\begin{equation}\label{eq:fixed}
+ y_1=\calL(x_1-\rho y_2),\qquad
+ y_2=\calL(x_2-\sigma y_1).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+With the other coordinate held fixed, each line of~\eqref{eq:sp} is the
+scalar problem in Lemma~\ref{lem:scalar}; hence~\eqref{eq:sp} and
+\eqref{eq:fixed} are equivalent.  Conversely, at time zero the fixed-point
+equations and $x(0)\geq0$ imply
+$y_1(0)\leq\rho y_2(0)$ and $y_2(0)\leq\sigma y_1(0)$; since
+$\rho\sigma<1$, both values vanish.  Thus the fixed point has the required
+initial condition.
+
+First suppose $\rho,\sigma>0$, put $w_1=\sqrt\rho$, $w_2=\sqrt\sigma$,
+$q=\sqrt{\rho\sigma}$, and define
+\[
+ \norm{u}_w=\max_{i=1,2}\frac{\norm{u_i}_\infty}{w_i}.
+\]
+For the right side $\Phi_x$ of~\eqref{eq:fixed}, inequality~\eqref{eq:Llip}
+gives
+\[
+ \norm{\Phi_x(u)-\Phi_x(v)}_w\leq q\norm{u-v}_w.
+\]
+Thus~\eqref{eq:chamber} makes $\Phi_x$ a contraction on the complete space of
+bounded c\`adl\`ag pairs.  Its unique fixed point is c\`adl\`ag and solves the
+problem.  The constant $q$ is the best uniform coefficient: each weighted
+cross-coordinate estimate can be attained by a constant difference after a
+suitable downward input shift.
+
+If $\rho=0$, solve successively
+$y_1=\calL x_1$ and $y_2=\calL(x_2-\sigma y_1)$; if $\sigma=0$, reverse the
+order.  This also covers $\rho=\sigma=0$ and proves sufficiency.
+
+For necessity, let $\rho\sigma=1$.  Then $R(\rho,1)^\mathsf T=0$, so zero
+input has the distinct solutions
+\begin{equation}\label{eq:null}
+ y=(\rho h,h),\qquad z=0,
+\end{equation}
+for every nondecreasing c\`adl\`ag $h$ with $h(0)=0$.  More strongly, whenever
+$\rho\sigma\geq1$, an input jumping from zero to $(-1,-1)$ cannot be feasible:
+the post-jump values would obey
+\[
+ y_1\geq1+\rho y_2,\qquad y_2\geq1+\sigma y_1,
+\]
+and hence $(1-\rho\sigma)y_1\geq1+\rho$, an impossibility.  Therefore no
+point on or beyond the wall is well posed for every input.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Quantitative stability and path structure}
+\begin{theorem}[Stability and constructive convergence]\label{thm:stable}
+Assume $\rho,\sigma>0$ and $q<1$.  If inputs $x,x'$ have solutions
+$(z,y),(z',y')$, then
+\begin{equation}\label{eq:stability}
+ \norm{y-y'}_w\leq\frac{\norm{x-x'}_w}{1-q},
+ \qquad
+ \norm{z-z'}_w\leq\frac{2\norm{x-x'}_w}{1-q}.
+\end{equation}
+Starting with $y^{(0)}=0$ and setting
+$y^{(n+1)}=\Phi_x(y^{(n)})$ gives a coordinatewise increasing sequence and
+\begin{align}
+ \norm{y^{(n+1)}-y^{(n)}}_w&\leq
+ q^n\norm{y^{(1)}}_w,\label{eq:successive}\\
+ \norm{y-y^{(n)}}_w&\leq
+ \frac{q^n}{1-q}\norm{y^{(1)}}_w.\label{eq:tail}
+\end{align}
+The solution map is causal, preserves continuity, and commutes with continuous
+nondecreasing onto time changes that preserve the endpoints.
+\end{theorem}
+
+\begin{proof}
+For two inputs, the scalar estimate gives
+\[
+ \norm{\Phi_x(u)-\Phi_{x'}(v)}_w
+ \leq\norm{x-x'}_w+q\norm{u-v}_w.
+\]
+Evaluate it at the two fixed points for the first inequality in
+\eqref{eq:stability}.  Each normalized row of $R$ has weighted absolute sum
+$1+q$, whence
+\[
+ \norm{R(y-y')}_w\leq(1+q)\norm{y-y'}_w.
+\]
+Using $z-z'=x-x'+R(y-y')$ yields the second inequality.  The map $\Phi_x$ is
+order preserving and $0\leq\Phi_x(0)$, so Picard iterates increase.
+Contraction gives~\eqref{eq:successive}, and summing its geometric tail gives
+\eqref{eq:tail}.
+
+Running suprema use only the past, so uniqueness gives causality.  They map
+continuous functions to continuous functions; uniform Picard convergence then
+preserves continuity.  If
+$\lambda:[0,T']\to[0,T]$ is continuous, nondecreasing, onto, and endpoint
+preserving, its initial images satisfy
+$\lambda([0,t])=[0,\lambda(t)]$.  Consequently
+\[
+ \calL(f\circ\lambda)=(\calL f)\circ\lambda.
+\]
+Compose~\eqref{eq:fixed} with $\lambda$ and use uniqueness.  Flat pieces of
+$\lambda$ simply pause both state and regulator.
+\end{proof}
+
+\begin{remark}
+When one weight vanishes, the weighted norm is not defined.  The triangular
+formulas in Theorem~\ref{thm:main} are the correct boundary statement; no
+singular limiting norm is smuggled into that face.
+\end{remark}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Boundary closure and executable receipt}
+At the critical wall, equation~\eqref{eq:null} proves nonuniqueness even for
+the smoothest possible input, whereas the negative jump proves nonexistence.
+These are separate failures.  At normal reflection the solution is
+$(\calL x_1,\calL x_2)$; a one-sided coupling is triangular.  The post-jump
+convention resolves a step input through the linear complementarity problem
+for $d=y-y^-$ and the new state $x+R(y^-+d)$.  Strict inequality in
+\eqref{eq:chamber}, the off-diagonal signs, and simultaneous cascades are all
+therefore essential.
+
+The machine-readable receipt has six rational matrices, 36 original events,
+72 pause-expanded events, 27 Picard rows, three critical nonunique regulators,
+three no-solution witnesses, and 693 audited scalar leaves.  An independent
+implementation performs 886 checks; a separate SymPy lane closes 5,125 exact
+identities; two isolated reproductions are byte-identical; and 68 parser,
+semantic, stale-hash and repaired-hash attacks are rejected.  These checks
+audit conventions.  Theorems~\ref{thm:main}--\ref{thm:stable}, not finite
+enumeration, prove the all-input result.
+
+The nearest workspace owners are scalar Moreau play (C332), one-interface
+skew Brownian motion (C266), total-variation flow (C279), and dry-friction
+capture (C238).  None owns a two-axis oblique reflection map or its sharp
+M-matrix threshold.
+
+The strict evaluation is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+Free couplings and driven contacts have no rational-prime taxonomy; $\det R$
+is not an Euler product or target determinant; and the dissipative regulator
+provides no natural target-zero quantization.  Route A is rejected and Route B
+is locked under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No target
+arithmetic local data, Euler factor, root number, automorphy, divisor or
+counting law, functional equation, zero match, or Hilbert--P\'olya operator is
+claimed.
+
+\paragraph{AI use.}
+A generative language model assisted drafting and code scaffolding.  The
+self-contained proof, independent reconstruction, hostile mutations and
+deterministic artifacts define the audit record.
+\fi
+
+\section*{Source lineage}
+This source-local reconstruction makes no literature-priority claim.
+\begin{thebibliography}{9}
+\bibitem{HR}
+J. M. Harrison and M. I. Reiman, ``Reflected Brownian Motion on an
+Orthant,'' \emph{Annals of Probability} 9 (1981), 302--308. DOI:
+\href{https://doi.org/10.1214/aop/1176994471}{10.1214/aop/1176994471}.
+\bibitem{DI}
+P. Dupuis and H. Ishii, ``On Lipschitz Continuity of the Solution Mapping to
+the Skorokhod Problem, with Applications,'' \emph{Stochastics and Stochastics
+Reports} 35 (1991), 31--62. DOI:
+\href{https://doi.org/10.1080/17442509108833688}%
+{10.1080/17442509108833688}.
+\end{thebibliography}
+\end{document}

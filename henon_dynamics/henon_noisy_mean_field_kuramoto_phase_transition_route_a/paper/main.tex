@@ -1,0 +1,300 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\providecommand{\CRevisionRound}{2}
+\pdfvariable suppressoptionalinfo 767
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.15em}
+\setlist{nosep,leftmargin=1.8em}
+\hbadness=10000
+\vbadness=10000
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newcommand{\Torus}{\mathbb T}
+
+\title{A Complete Stationary Phase Atlas for the\\
+Noisy Mean-Field Kuramoto Equation}
+\author{HCS-C347 source-local reconstruction}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For identical frequencies, positive noise, and attractive sinusoidal
+mean-field coupling, one theorem joins global classical probability flow,
+an exact free-energy dissipation law, exhaustion of stationary densities by
+von Mises profiles, the sharp synchronization threshold, the complete
+uniform Fourier spectrum, and a two-term critical expansion.  The decisive
+Bessel quotient is proved strictly decreasing by an explicit positive-series
+coefficient pairing, which simultaneously closes the strict Tur\'an
+inequality.  Exact rational ledgers certify finite Bessel tails, stationary
+root brackets, and Fourier conventions; they do not replace the analytic
+continuum proof.  No priority or arithmetic-target claim is made.
+\end{abstract}
+
+\noindent\textbf{Revision certificate.}
+\ifnum\CRevisionRound=0
+Flow, energy, and stationary-flux closure.
+\else\ifnum\CRevisionRound=1
+Round-one Turan threshold and Fourier closure.
+\else
+Round-two critical expansion and evidence closure.
+\fi\fi
+\small
+
+\section{Frozen equation and main result}
+
+Let \(\Torus=\mathbb R/(2\pi\mathbb Z)\), use Lebesgue measure
+\(d\theta\), and normalize \(\int_{\Torus}p\,d\theta=1\).  Fix
+\(D>0\), \(K\geq0\), and define
+\[
+ z[p]=\int_{\Torus}e^{i\theta}p(\theta)\,d\theta
+      =r[p]e^{i\psi[p]},\qquad
+ b[p](\theta)=Kr[p]\sin(\psi[p]-\theta).
+\]
+The phase is immaterial when \(r=0\).  Our equation is
+\begin{equation}
+ \partial_t p=Dp_{\theta\theta}-\partial_\theta(b[p]p).
+ \label{eq:pde}
+\end{equation}
+
+\begin{theorem}[Noisy identical-frequency atlas]\label{thm:main}
+Let \(0<\gamma<1\) and let nonnegative \(p_0\in C^{2+\gamma}(\Torus)\)
+have unit mass.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Equation~\eqref{eq:pde} has a unique global classical probability
+solution.  It is strictly positive for \(t>0\).
+\item For positive times the free energy
+\[
+ \mathcal F[p]=D\int_{\Torus}p\log p\,d\theta-\frac K2|z[p]|^2
+\]
+satisfies
+\begin{equation}
+ \mathcal F[p(t)]-\mathcal F[p(s)]
+ =-\int_s^t\!\int_{\Torus}p
+ \left|\partial_\theta\left(D\log p-KC[p]\right)\right|^2d\theta\,d\tau,
+ \label{eq:dissipation}
+\end{equation}
+where \(C[p](\theta)=\int\cos(\theta-\phi)p(\phi)d\phi\).  One may take
+\(s=0\) if \(p_0>0\).
+\item Every nonnegative \(C^2\) stationary probability density is uniform,
+\(p_*=1/(2\pi)\), or belongs to
+\begin{equation}
+ q_{\kappa,\psi}(\theta)=
+ \frac{e^{\kappa\cos(\theta-\psi)}}{2\pi I_0(\kappa)},\qquad
+ \kappa=\frac KD\frac{I_1(\kappa)}{I_0(\kappa)}.             \label{eq:vm}
+\end{equation}
+For \(K\leq2D\), only \(p_*\) exists.  For \(K>2D\), there is exactly
+one \(\kappa>0\), and \(\psi\in\Torus\) gives its complete rotation orbit.
+\item At \(p_*\), the constant mass mode has eigenvalue zero, the real
+first-harmonic plane has eigenvalue \(K/2-D\), and the real harmonic plane
+of order \(n\geq2\) has eigenvalue \(-Dn^2\).  The constant direction is
+removed on the probability tangent space.
+\item If \(\delta=K/D-2\downarrow0\) along the nonuniform branch, then
+\[
+ \kappa^2=4\delta+\frac23\delta^2+O(\delta^3),\qquad
+ r^2=\delta-\frac56\delta^2+O(\delta^3).
+\]
+\end{enumerate}
+\end{theorem}
+
+\section{Global probability flow and dissipation}
+
+The map \(p\mapsto b[p]\) uses only two first Fourier coefficients and is
+smooth and locally Lipschitz between the relevant H\"older spaces.  Standard
+heat-semigroup iteration gives a unique local classical solution.  Mass
+conservation follows by integrating \eqref{eq:pde}; comparison preserves
+nonnegativity, and the strong maximum principle gives strict positivity for
+positive time.
+
+This local solution cannot blow up at finite time.  For probability
+densities, \(\lVert\partial_\theta^j b[p]\rVert_\infty\leq K\) for every
+\(j\).  At a spatial maximum of
+\[
+ p_t=Dp_{\theta\theta}-b[p]p_\theta-(\partial_\theta b[p])p
+\]
+we obtain \(\partial_t\max p\leq K\max p\), whence
+\(\lVert p(t)\rVert_\infty\leq e^{Kt}\lVert p_0\rVert_\infty\) on finite
+intervals.  Periodic parabolic Schauder estimates now give continuation
+through every finite time.
+
+Because \(\partial_\theta C[p]=b[p]/K\), with the zero-coupling case read
+directly, equation~\eqref{eq:pde} is
+\[
+ p_t=\partial_\theta\left[p\,\partial_\theta
+       \left(D\log p-KC[p]\right)\right].                  \tag{2}
+\]
+The first variation of \(-K|z[p]|^2/2\) is \(-KC[p]\).  Multiplying
+(2) by the chemical potential and integrating by parts proves
+\eqref{eq:dissipation}.  Starting at \(s>0\) handles initial zeros.
+
+\section{Stationary-flux exhaustion}
+
+A nonnegative stationary \(C^2\) density is positive by the elliptic strong
+maximum principle.  Its flux
+\[
+ J=b[p]p-Dp_\theta
+\]
+is constant.  Division by \(p\) and one circuit around \(\Torus\) give
+\[
+ 0=\int\frac{p_\theta}{p}
+   =\frac1D\int b[p]-\frac JD\int\frac{d\theta}{p(\theta)}.
+\]
+The sine drift integrates to zero and the last integral is positive, so
+\(J=0\).  Therefore
+\[
+ \partial_\theta\log p=\frac{Kr}{D}\sin(\psi-\theta)
+ =\partial_\theta\left(\frac{Kr}{D}\cos(\theta-\psi)\right).
+\]
+Normalization gives the von Mises form in \eqref{eq:vm}.  Conversely its
+first moment is
+\[
+ z[q_{\kappa,\psi}]=e^{i\psi}R(\kappa),\qquad
+ R(\kappa)=I_1(\kappa)/I_0(\kappa),
+\]
+so zero flux is equivalent to \(\kappa=(K/D)R(\kappa)\).  This proves the
+stationary list in both directions.
+
+\ifnum\CRevisionRound>0
+\section{Strict Tur\'an inequality and the phase threshold}
+
+\begin{lemma}\label{lem:bessel}
+The function \(q(\kappa)=I_1(\kappa)/(\kappa I_0(\kappa))\) decreases
+strictly from \(1/2\) to zero on \((0,\infty)\).  Equivalently,
+\[
+ I_1(\kappa)^2-I_0(\kappa)I_2(\kappa)>0.                  \tag{3}
+\]
+\end{lemma}
+
+\begin{proof}
+Put \(x=\kappa^2\), \(A(x)=I_1(\sqrt x)/\sqrt x\), and
+\(B(x)=I_0(\sqrt x)\).  Their positive entire coefficients satisfy
+\[
+ A=\sum_{m\geq0}a_mx^m,\quad B=\sum_{m\geq0}b_mx^m,\quad
+ \frac{a_m}{b_m}=\frac1{2(m+1)}.
+\]
+Pairing indices in the derivative numerator yields
+\[
+ A'B-AB'=\sum_{m>n}(m-n)(a_mb_n-a_nb_m)x^{m+n-1}<0.       \tag{4}
+\]
+Thus \(q=A/B\) is strictly decreasing and \(q(0+)=1/2\).  Moreover
+\(0<R(\kappa)<1\), since it is the strict expectation of \(\cos\theta\)
+under a positive von Mises density, so \(q(\kappa)<1/\kappa\to0\).
+
+Termwise Bessel recurrences give
+\(R'=1-R^2-R/\kappa\) and \(I_2=I_0-2I_1/\kappa\).
+Consequently \(q'<0\) is equivalent to
+\(\kappa(1-R^2)<2R\), and multiplication by \(I_0^2/\kappa\) gives
+(3).  Hence the strict Tur\'an inequality is proved rather than assumed.
+\end{proof}
+
+For \(a=K/D>0\), a nonzero stationary solution obeys
+\(q(\kappa)=1/a\).  Lemma~\ref{lem:bessel} gives no solution for
+\(a\leq2\) and exactly one for \(a>2\), completing the transition proof.
+
+\section{Complete uniform Fourier linearization}
+
+Write \(p=p_*+\varepsilon u\), \(\int u=0\).  The linearization is
+\[
+ Lu=Du_{\theta\theta}-p_*\partial_\theta b[u],\qquad
+ b[u]=K\operatorname{Im}(z[u]e^{-i\theta}).               \tag{5}
+\]
+For \(u=a\cos\theta+c\sin\theta\),
+\(z[u]=\pi(a+ic)\), and the last term in (5) is \(Ku/2\).
+Every harmonic of order \(n\geq2\) has zero first moment, leaving
+\(-Dn^2\).  Constants give mass conservation.  This proves every
+eigenvalue and real multiplicity stated in Theorem~\ref{thm:main}.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Critical amplitude with a rigorous remainder}
+
+Exact series division gives
+\[
+ \frac{R(\kappa)}\kappa
+ =\frac12-\frac{\kappa^2}{16}+\frac{\kappa^4}{96}
+  -\frac{11\kappa^6}{6144}+O(\kappa^8).                  \tag{6}
+\]
+With \(x=\kappa^2\), the left side of
+\((2+\delta)R(\sqrt x)/\sqrt x=1\) is analytic near the origin, and its
+\(x\)-derivative at \((x,\delta)=(0,0)\) is \(-1/8\).  The analytic
+implicit-function theorem applies.  Coefficient matching gives
+\[
+ x=4\delta+\frac23\delta^2+\frac1{18}\delta^3+O(\delta^4).
+\]
+Since \(\kappa=(2+\delta)r\),
+\[
+ r^2=\delta-\frac56\delta^2+\frac{43}{72}\delta^3+O(\delta^4),
+\]
+which proves the asserted expansion.
+
+\section{Exact evidence and boundaries}
+
+The deterministic receipt uses rational arithmetic only.
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+finite panel & rows\\
+\midrule
+positive \(I_0\) and \(I_1/\kappa\) coefficients & 17\\
+formal coefficients of \(R/\kappa\) & 9\\
+certified positive-series Bessel tail brackets & 7\\
+certified nonzero self-consistency root brackets & 4\\
+uniform real Fourier blocks & 162\\
+\bottomrule
+\end{tabular}
+\end{center}
+After term 20, the positive-series tails are bounded by next-term geometric
+majorants.  An independent checker reconstructs all 199 rows without
+importing the producer; a 60-check symbolic lane, two-directory byte replay,
+71 hostile mutations, and strict JSON/YAML gates protect the artifact.  The
+finite receipt does not prove the continuum theorem.
+
+At \(K=0\) the model is the heat equation.  At \(K=2D\) the first harmonic
+is neutral but Lemma~\ref{lem:bessel} excludes nonuniform stationary
+profiles.  Above threshold there is one concentration and an \(S^1\) phase
+orbit.  The face \(D=0\) is excluded: no atomic-state theorem is inferred.
+We claim neither general-initial-data convergence nor a rate, Hopf or
+time-periodic branches, disorder, delay, inertia, or finite-particle results.
+
+\section{Source and Route-A boundary}
+
+Sakaguchi's noisy globally coupled oscillator paper\cite{sakaguchi} and the
+reversible mean-field rotator analysis of Bertini, Giacomin, and
+Pakdaman\cite{bertini} fix the source lineage.  The present derivation is a
+source-local reconstruction and makes no priority claim.  The model has no
+arithmetic origin or prime clock, primitive arithmetic orbit ledger, target
+determinant, target analytic continuation, or natural target-zero
+quantization.  Its tuple is
+\[
+ (A0_{\rm FAIL},A1_{\rm FAIL},A2_{\rm FAIL},A3_{\rm FAIL},A4_{\rm FAIL}),
+\]
+the verdict is Route-A rejected, and Route B is false.  Bessel and Fourier
+data are not target arithmetic local data, Euler factors, root numbers,
+automorphy, a target divisor, target zeros, or a Hilbert--P\'olya operator.
+
+\begin{thebibliography}{9}
+\bibitem{sakaguchi}
+H.~Sakaguchi, Cooperative phenomena in coupled oscillator systems under
+external fields, \emph{Progress of Theoretical Physics} \textbf{79} (1988),
+39--46. \url{https://doi.org/10.1143/PTP.79.39}.
+
+\bibitem{bertini}
+L.~Bertini, G.~Giacomin, and K.~Pakdaman, Dynamical aspects of mean field
+plane rotators and the Kuramoto model, \emph{Journal of Statistical Physics}
+\textbf{138} (2010), 270--290.
+\url{https://doi.org/10.1007/s10955-009-9908-9}.
+\end{thebibliography}
+\fi
+
+\end{document}
