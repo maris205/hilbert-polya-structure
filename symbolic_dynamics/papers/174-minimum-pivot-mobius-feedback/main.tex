@@ -1,0 +1,365 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\PP}{\mathbb P^1}
+\newcommand{\X}{\mathcal X}
+\newcommand{\Y}{\mathcal Y}
+\newcommand{\Z}{\mathcal Z}
+\newcommand{\M}{\mathcal M}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tail}{\operatorname{tail}}
+
+\title[Minimum-pivot M\"obius feedback]{Minimum-Pivot M\"obius Feedback on Projective-Line Subsets}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Order the finite points of $\PP(\F_p)$ by their standard representatives.
+For a $k$-subset $S$, translate its least finite point to zero and then
+apply projective inversion.  We determine the resulting state-dependent
+finite dynamics for every prime $p$ and $2\leq k\leq p$.  Its first two
+images are respectively the subsets containing $\infty$ and those containing
+$\{0,\infty\}$; the latter form an inversion core.  Consequently the sharp
+maximum tail is two, $\M^4=\M^2$, and all cycles have length at most two.
+We give the exact three depth layers and a coefficient formula for the fixed
+states.  Independently, every target fibre is determined: for a target
+containing $\infty$, the possible feedback pivots form an initial interval,
+so its pivot enumerator is $1+z+\cdots+z^{h-1}$ for an explicit
+target-dependent $h$; every other target has empty fibre.  A standalone
+exhaustive control checks $131{,}018{,}555$ assertions in all $69$ parameter
+boxes through $p=19$.  The clock is shallow and the coordinate order is
+artificial; this provisional-amber Round-0 note remains on external hold.
+\end{abstract}
+
+\maketitle
+
+\section{The map and its claim ceiling}
+
+Fix a prime $p$ and identify
+\[
+ \PP(\F_p)=\F_p\cup\{\infty\},
+ \qquad 0<1<\cdots<p-1<\infty,
+\]
+where inequalities refer to the displayed integer representatives, not to
+an order on the field.  For $2\leq k\leq p$, let
+$\X_{p,k}=\binom{\PP(\F_p)}{k}$.  Every state $S\in\X_{p,k}$ contains a
+finite point.  Put
+\[
+ a(S)=\min(S\cap\F_p),
+ \qquad
+ \gamma_a(x)=\frac{1}{x-a},
+\]
+with the projective conventions
+$\gamma_a(a)=\infty$ and $\gamma_a(\infty)=0$, and define
+\begin{equation}\label{eq:literal}
+ \M(S)=\gamma_{a(S)}(S).
+\end{equation}
+The coordinate order and prime-field representatives are part of the
+literal rule.  In particular, \eqref{eq:literal} is not claimed to be
+projectively natural.
+
+Dynamics of one fixed fractional-linear transformation over a finite field
+are established background \citep{ElAbdalaouiShparlinski2019}.  So are
+$\mathrm{PGL}(2)$-orbits of projective configurations and the
+$\mathrm{PGL}(2,q)$ action on projective-line subsets
+\citep{AluffiFaber1993,Tricot2025}.  More generally, minimal and canonical
+images of ordered subsets under permutation-group actions, together with
+canonizing elements, have a direct algorithmic theory
+\citep{JeffersonEtAl2019}.  Those facts, projective inversion, canonical-
+image language, and ordinary subset enumeration receive no contribution
+credit here.  The map \eqref{eq:literal} is not a canonical-image function:
+it need not be constant on a group orbit, it chooses one projectivity from
+the current pivot rather than minimizing over the group, and its iterates and
+target fibres are the objects being counted.
+
+The internal proof-engine firewall is stricter still.  P96 already covers
+finite subsets under a transformation induced from a fixed base map, and
+P168 covers spans of inverses of finite-field subspaces.  Our rule chooses
+its projectivity from the current subset and takes no span, but fixed-map
+hyperspace language and inverse geometry remain zero credit.  The killed AQN
+control is closer architecturally: it selects a normalization from the state
+and then exposes a classical group action.  Its quotient is adjacent to
+simultaneous group multiplication and cyclic rotation on words
+\citep{GrinbergMao2024}.  We therefore assign no value to adaptive
+normalization or the eventual involution by itself.  The only residual under
+evaluation is the literal two-stage containment tower together with the
+nonuniform target-local inverse below.  A bounded search found no literal
+owner for that conjunction, but a search non-hit is not evidence of novelty,
+priority, ownership, or freedom to operate.
+
+Write
+\[
+ \Z_{p,k}=\{S\in\X_{p,k}:\infty\in S\},\qquad
+ \Y_{p,k}=\{S\in\X_{p,k}:\{0,\infty\}\subseteq S\},
+\]
+and put $R_{p,k}=|\Y_{p,k}|=\binom{p-1}{k-2}$.  For a target
+$T\in\X_{p,k}$ define
+\begin{equation}\label{eq:height}
+ \beta(T)=\max\bigl(\{\overline{y^{-1}}:
+      y\in T\cap\F_p^\times\}\cup\{0\}\bigr),
+ \qquad h(T)=p-\beta(T),
+\end{equation}
+where the bar denotes the representative in $\{1,\ldots,p-1\}$.
+
+\begin{theorem}[complete graph and target inverse]\label{thm:main}
+For every prime $p$ and $2\leq k\leq p$, the map \eqref{eq:literal}
+has the following properties.
+\begin{enumerate}[(i)]
+\item Its first two images are
+\begin{equation}\label{eq:images}
+ \im\M=\Z_{p,k},\qquad \im\M^2=\Y_{p,k}.
+\end{equation}
+The recurrent set is $\Y_{p,k}$.  On it, $\M$ fixes $0,\infty$ setwise and
+sends $x\in\F_p^\times$ to $x^{-1}$; hence $\M^4=\M^2$ on all of
+$\X_{p,k}$.
+
+\item A state has tail zero, one, or two according as it lies in
+$\Y_{p,k}$, $\Z_{p,k}\setminus\Y_{p,k}$, or
+$\X_{p,k}\setminus\Z_{p,k}$.  Thus the depth enumerator is
+\begin{equation}\label{eq:depth}
+ D_{p,k}(u)=\binom{p-1}{k-2}
+ +\binom{p-1}{k-1}u+\binom pk u^2,
+\end{equation}
+and the maximum tail is sharply two.
+
+\item Suppose $p$ is odd and set $r=k-2$.  The number of fixed states is
+\begin{equation}\label{eq:fixed}
+ F_{p,k}=[v^r](1+v)^2(1+v^2)^{(p-3)/2}.
+\end{equation}
+The remaining recurrent states form
+$(R_{p,k}-F_{p,k})/2$ two-cycles.  For $p=2,k=2$, the recurrent core is one
+fixed state; set $F_{2,2}=1$.  In either case, the number of weak components is
+$(R_{p,k}+F_{p,k})/2$, and for every $m\geq1$,
+\begin{equation}\label{eq:fixed-iterates}
+ |\Fix(\M^m)|=
+ \begin{cases}F_{p,k},&m\text{ odd},\\
+ R_{p,k},&m\text{ even}.
+ \end{cases}
+\end{equation}
+
+\item Every one-step target fibre, including empty fibres, satisfies
+\begin{equation}\label{eq:fibre}
+ |\M^{-1}(T)|=
+ \begin{cases}
+ 0,&\infty\notin T,\\
+ h(T),&\infty\in T,
+ \end{cases}
+\end{equation}
+and, when $\infty\in T$, its pivot-marked form is
+\begin{equation}\label{eq:marked}
+ \sum_{S:\,\M(S)=T}z^{a(S)}
+   =1+z+\cdots+z^{h(T)-1}.
+\end{equation}
+
+\item For $1\leq q\leq p$,
+\begin{equation}\label{eq:fibre-distribution}
+ \#\{T\in\X_{p,k}:|\M^{-1}(T)|=q\}
+   =\binom{p-q}{k-2}.
+\end{equation}
+There are $\binom pk$ zero-fibre targets, and the maximum fibre is
+$p-k+2$, attained by a unique target.
+\end{enumerate}
+\end{theorem}
+
+Parts (i)--(iii) give the whole temporal graph; part (iv) gives every
+incoming branch and its feedback label.  The marked inverse is not inferred
+from the depth census.
+
+\section{The two-stage image tower}
+
+\begin{lemma}[forced points]\label{lem:tower}
+The pivot always maps to $\infty$, and $\infty$ is the unique point that
+maps to $0$.  Consequently
+\[
+ S\notin\Z_{p,k}\Longrightarrow
+ \M(S)\in\Z_{p,k}\setminus\Y_{p,k},\qquad
+ S\in\Z_{p,k}\Longrightarrow\M(S)\in\Y_{p,k}.
+\]
+Moreover, $\M$ restricts to ordinary inversion on $\Y_{p,k}$.
+\end{lemma}
+
+\begin{proof}
+The first two assertions follow directly from the projective conventions for
+$\gamma_{a(S)}$.  If $S$ avoids $\infty$, its image avoids $0$; if $S$
+contains $\infty$, its image contains both $0$ and the image $\infty$ of the
+pivot.  Finally, a state in $\Y_{p,k}$ has pivot zero, so its update is
+$x\mapsto x^{-1}$ with $0$ and $\infty$ exchanged.  As a set it still
+contains both distinguished points, and a second update returns it.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)--(iii)]
+Lemma~\ref{lem:tower} gives $\im\M\subseteq\Z_{p,k}$.  Conversely, if
+$T\in\Z_{p,k}$, then $S=\gamma_0(T)$ contains zero, has pivot zero, and
+satisfies $\M(S)=T$.  Thus $\im\M=\Z_{p,k}$.  The same lemma sends this
+first image into $\Y_{p,k}$, while every $T\in\Y_{p,k}$ satisfies
+$\M^2(T)=T$.  This proves \eqref{eq:images}.
+
+The three implications in Lemma~\ref{lem:tower} show that states in
+$\Y_{p,k}$, $\Z_{p,k}\setminus\Y_{p,k}$, and
+$\X_{p,k}\setminus\Z_{p,k}$ have tails zero, one, and two, respectively.
+No state outside $\Y_{p,k}$ can therefore recur.  Choosing the remaining
+points in each stratum gives the three coefficients in \eqref{eq:depth}.
+The last coefficient is nonzero because $k\leq p$, so the height two is
+attained.  Since $\M^2(S)\in\Y_{p,k}$ for every $S$ and $\M^2$ is the
+identity there, $\M^4=\M^2$ globally.
+
+A recurrent state is $\{0,\infty\}\cup A$ for an $r$-subset
+$A\subseteq\F_p^\times$.  At odd $p$, inversion has singleton orbits
+$\{1\}$ and $\{-1\}$ and $(p-3)/2$ two-element orbits.  An invariant
+$r$-subset is a union of these orbits, which gives the coefficient
+\eqref{eq:fixed}.  All other recurrent points are exchanged in pairs.  At
+$p=2,k=2$, no nonzero point is selected and the sole core state is fixed.
+
+Every transient state reaches one recurrent cycle, so the weak components
+are counted by the recurrent cycles:
+$F_{p,k}+(R_{p,k}-F_{p,k})/2=(R_{p,k}+F_{p,k})/2$.  A point fixed by a
+positive iterate is recurrent.  Inversion fixes exactly $F_{p,k}$ recurrent
+states at odd times and all $R_{p,k}$ recurrent states at even times, proving
+\eqref{eq:fixed-iterates}.
+\end{proof}
+
+\section{Every-target fibres and marked pivots}
+
+The inverse calculation remembers the state-selected normalization that the
+forward image counts forget.
+
+\begin{lemma}[modular no-wrap criterion]\label{lem:nowrap}
+Fix $a\in\F_p$.  The inverse projectivity is
+\begin{equation}\label{eq:inverse-projectivity}
+ \gamma_a^{-1}(\infty)=a,\qquad
+ \gamma_a^{-1}(0)=\infty,\qquad
+ \gamma_a^{-1}(y)=a+y^{-1}\quad(y\in\F_p^\times).
+\end{equation}
+For integer representatives $0\leq a<p$ and $1\leq b<p$,
+\begin{equation}\label{eq:nowrap}
+ \overline{a+b}\geq a\quad\Longleftrightarrow\quad a<p-b.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Equation \eqref{eq:inverse-projectivity} follows by solving
+$y=1/(x-a)$, including the two projective points.  If $a+b<p$, reduction
+does nothing and the left side of \eqref{eq:nowrap} holds.  If $a+b\geq p$,
+the representative is $a+b-p<a$ because $b<p$.  These are the only cases.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iv)]
+Every image contains $\infty$, proving the zero line of \eqref{eq:fibre}.
+Now take $T\in\Z_{p,k}$.  A parent with proposed pivot $a$ is forced to be
+$S_a=\gamma_a^{-1}(T)$.  Besides the forced point $a$, its finite points are
+\[
+ \overline{a+y^{-1}},\qquad y\in T\cap\F_p^\times.
+\]
+Thus $a$ is actually the least finite point of $S_a$ exactly when every one
+of these representatives is at least $a$.  By Lemma~\ref{lem:nowrap}, this
+holds precisely when
+\[
+ 0\leq a<p-\max\bigl(\{\overline{y^{-1}}:
+                   y\in T\cap\F_p^\times\}\cup\{0\}\bigr)=h(T).
+\]
+Each valid $a$ yields a parent, and different values yield different parents
+because they are their parents' least finite points.  Hence the valid pivots
+are exactly $0,\ldots,h(T)-1$, proving both \eqref{eq:fibre} and
+\eqref{eq:marked}.
+\end{proof}
+
+The formula also resolves the rooted trees attached to the inversion core.
+For $T\in\Y_{p,k}$, its pivot-zero parent is the recurrent point
+$\gamma_0(T)$, and its other $h(T)-1$ parents have depth one.  A target in
+$\Z_{p,k}\setminus\Y_{p,k}$ has $h(T)$ parents, all at depth two.  Targets
+outside $\Z_{p,k}$ have none.  Thus no aggregate branch remains unspecified.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(v)]
+Inversion permutes $\F_p^\times$, so count a target through the set
+$B(T)=\{\overline{y^{-1}}:y\in T\cap\F_p^\times\}$.  Put $j=p-q$.
+For $j\geq1$, a target with $\beta(T)=j$ and without zero has $|B(T)|=k-1$
+and is counted by $\binom{j-1}{k-2}$.  A target containing zero has
+$|B(T)|=k-2$ and is counted by $\binom{j-1}{k-3}$.  Their sum is
+$\binom{j}{k-2}$.  At $j=0$, only $T=\{0,\infty\}$ at $k=2$ occurs, again
+matching $\binom{0}{k-2}$.  Substitution of $j=p-q$ proves
+\eqref{eq:fibre-distribution}.
+
+Targets avoiding $\infty$ number $\binom pk$.  A positive fibre of size
+$q$ exists exactly when $p-q\geq k-2$, so the maximum is $p-k+2$; equality
+in the binomial count shows that its target is unique.  As a consistency
+check, the distribution has total source mass
+\[
+ \sum_{q=1}^{p}q\binom{p-q}{k-2}=\binom{p+1}{k},
+\]
+which is the carrier size.
+\end{proof}
+
+\section{Exact controls, boundary, and limitations}
+
+Representative specializations of the theorem are shown below.  The depth
+column lists the populations at depths zero, one, and two.
+
+\begin{center}
+\begin{tabular}{c@{,}c@{\quad}rrrrrr}
+\toprule
+$p$&$k$&$|\X_{p,k}|$&$|\im\M|$&$R_{p,k}$&$F_{p,k}$&depths&max fibre\\
+\midrule
+2&2&3&2&1&1&$1,1,1$&2\\
+3&3&4&3&2&2&$2,1,1$&2\\
+5&3&20&10&4&2&$4,6,10$&4\\
+7&4&70&35&15&3&$15,20,35$&5\\
+11&5&792&330&120&8&$120,210,462$&8\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+At the smallest parameter the entire graph is visible:
+\[
+ \{0,1\}\longmapsto\{1,\infty\}
+ \longmapsto\{0,\infty\}\longmapsto\{0,\infty\}.
+\]
+This handles $p=2,k=2$ directly.  The lower bound $k\geq2$ avoids the
+singleton $\{\infty\}$, which has no finite pivot.  The upper bound $k\leq p$
+makes the depth-two stratum nonempty.  The full projective line at $k=p+1$
+is a separate degenerate fixed state and is outside the stated family.
+
+A paper-local verifier uses only the Python standard library and imports no
+scouting code.  It exhausts every allowed $k$ for
+$p\in\{2,3,5,7,11,13,17,19\}$: all $69$ complete parameter boxes.  For every
+state it rebuilds the edge, orbit, first and second images, and
+$\M^4=\M^2$; for every target it checks the fibre, unique pivot labels,
+fibre-size distribution, and mass identity.  Two fresh processes match the
+frozen $131{,}018{,}555$-assertion transcript byte for byte.  These checks
+are controls against implementation and boundary mistakes; the arguments
+above prove the all-parameter statements.
+
+The limitations are structural.  The sharp clock is only two, the recurrent
+action is ordinary inversion, and the literal rule depends on an artificial
+coordinate order.  P96, P168, and AQN remove the nearest internal engines,
+but a specialist source or general adaptive-section theorem could still
+subsume the residual pivot interval.  This anonymous Round-0 artifact is
+therefore \texttt{PROVISIONAL\_AMBER / HOLD\_EXTERNAL}.  It makes no novelty,
+priority, ownership, release, or submission claim.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
