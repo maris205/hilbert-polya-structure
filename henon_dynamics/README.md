@@ -2719,6 +2719,36 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C349--C353
+
+This round takes five separate theorem-scale steps across an integrable
+constrained Hamiltonian, a reaction--diffusion instability, an open queueing
+network, a supersymmetric whole-line Dirac problem and an exchangeable random
+partition growth law.  These are five complete papers, not five installments
+of one result.
+
+- [C349 Neumann--Uhlenbeck integrable sphere](henon_neumann_uhlenbeck_integrable_sphere_route_a/README.md) · [paper PDF](henon_neumann_uhlenbeck_integrable_sphere_route_a/paper/main.pdf)
+- [C350 Schnakenberg finite-domain Turing modes](henon_schnakenberg_neumann_turing_modes_route_a/README.md) · [paper PDF](henon_schnakenberg_neumann_turing_modes_route_a/paper/main.pdf)
+- [C351 open Jackson network and quasi-reversibility](henon_open_jackson_network_quasireversibility_route_a/README.md) · [paper PDF](henon_open_jackson_network_quasireversibility_route_a/paper/main.pdf)
+- [C352 integer-kink Jackiw--Rebbi Dirac spectrum](henon_jackiw_rebbi_kink_dirac_spectrum_route_a/README.md) · [paper PDF](henon_jackiw_rebbi_kink_dirac_spectrum_route_a/paper/main.pdf)
+- [C353 Ewens--Chinese-restaurant partition growth](henon_ewens_chinese_restaurant_partition_growth_route_a/README.md) · [paper PDF](henon_ewens_chinese_restaurant_partition_growth_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C349_C353.md),
+[batch plan](BATCH_PLAN_C349_C353.md), and
+[batch review](BATCH_REVIEW_C349_C353.md) for collision screening, theorem
+contracts, author-swapped proof repairs, exact release receipts and aggregate
+accounting.  The strict tuples, in order C349--C353, are
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`.
+All five are `ROUTE_A_REJECTED`; Route B is false and common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, root number, automorphy object, target divisor/counting law or
+functional equation, target-zero match, Hilbert--Polya operator, or Route-B
+input is asserted.
+
 ## Route-A independent cross-subtype round C344--C348
 
 This round takes five independent theorem-scale steps: a complex Hamiltonian

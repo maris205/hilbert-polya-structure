@@ -1,0 +1,5 @@
+# Narrative report
+
+The decisive advance is not another elliptic sample trajectory. It is one global theorem tying together the sphere constraint, three source-native commuting integrals, a rational Lax generator, and the topology of every regular compact invariant fiber. The proof stops before an unverified genus-two Abel formula: the Lax spectral curve is recorded, but no explicit Abel inversion is needed for the Liouville conclusion.
+
+The boundary atlas prevents the most common convention errors. Axial equilibria have three different linear types; coordinate planes are invariant one-degree-of-freedom Neumann systems; repeated eigenvalues replace singular individual Uhlenbeck fractions by a commuting $SO(2)$ momentum--integral pair with a closed energy identity and an explicit independence witness; and the isotropic face is the round-sphere geodesic flow. For fixed $\hbar>0$, the compact Schrödinger operator is a natural quantization of this source Hamiltonian, not a Hilbert--Polya operator.

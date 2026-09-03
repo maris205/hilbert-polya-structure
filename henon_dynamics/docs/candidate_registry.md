@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C349--HCS-C353 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`327fc1172cebcdeb17adfd2d8ad12636fbb94f52`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C349 | The anisotropic Neumann oscillator on `S^2` is globally complete and Liouville integrable: the full Uhlenbeck family is conserved and in involution, its resolvent is the determinant of an explicit rational Lax matrix, every connected regular joint level is a two-torus with an exact frequency-closure test, and all axis, coordinate, repeated-spectrum and isotropic boundaries are explicit. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Neumann--Uhlenbeck package](../henon_neumann_uhlenbeck_integrable_sphere_route_a/) · [paper PDF](../henon_neumann_uhlenbeck_integrable_sphere_route_a/paper/main.pdf) |
+| HCS-C350 | The Schnakenberg Neumann reaction--diffusion equilibrium has a complete linear Turing atlas: exact kinetic stability, every modal dispersion root, the continuous instability window iff, strict finite-interval mode count and length walls, both neutral endpoints, double contact, equal diffusion and excluded zero-diffusion boundaries. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Schnakenberg--Turing package](../henon_schnakenberg_neumann_turing_modes_route_a/) · [paper PDF](../henon_schnakenberg_neumann_turing_modes_route_a/paper/main.pdf) |
+| HCS-C351 | A finite open single-class Jackson network is positive recurrent exactly under componentwise subcritical traffic, has the unique independent-geometric product law, admits an explicit visible marked-jump time reversal, and has jointly independent Poisson external output histories independent of the current state, with critical, overloaded, self-routing and zero-rate reversed faces closed. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [open-Jackson package](../henon_open_jackson_network_quasireversibility_route_a/) · [paper PDF](../henon_open_jackson_network_quasireversibility_route_a/paper/main.pdf) |
+| HCS-C352 | Every positive integer Jackiw--Rebbi kink has a self-adjoint Dirac Hamiltonian with one chiral zero mode, the complete simple bound ladder `+/-sqrt(j(2n-j))`, purely absolutely continuous exterior bands, non-`L2` threshold resonances and reflectionless scattering; a normalized Darboux unitary proves continuum completeness. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Jackiw--Rebbi package](../henon_jackiw_rebbi_kink_dirac_spectrum_route_a/) · [paper PDF](../henon_jackiw_rebbi_kink_dirac_spectrum_route_a/paper/main.pdf) |
+| HCS-C353 | The one-parameter Chinese-restaurant process has the exact Ewens EPPF and occupancy law, an independent-Bernoulli total-block representation with exact PGF, almost-sure logarithmic law and CLT, and joint independent-Poisson limits for every fixed vector of block sizes from uniformly integrable mixed factorial moments. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Ewens--CRP package](../henon_ewens_chinese_restaurant_partition_growth_route_a/) · [paper PDF](../henon_ewens_chinese_restaurant_partition_growth_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and have Route B false.  Their
+owners are respectively a constrained integrable Hamiltonian, a two-species
+reaction--diffusion PDE, an open queueing network, a whole-line supersymmetric
+Dirac scatterer and an exchangeable partition-growth process.  No target
+local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target-zero match,
+Hilbert--Polya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes, cross-review repairs and
+accounting are recorded in
+[BATCH_REVIEW_C349_C353.md](../BATCH_REVIEW_C349_C353.md).
+
 ## HCS-C344--HCS-C348 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

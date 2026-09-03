@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C349--HCS-C353 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O333 | HCS-C349 Neumann invariant tori and Uhlenbeck residues as arithmetic orbit/spectral owners | proved continuous-torus and source-quantization obstruction | Regular trajectories lie on continuously selected Liouville tori and close only on rational frequency subloci; neither their periods nor Uhlenbeck residues carry a rational-prime taxonomy or logarithmic-prime roof.  The natural compact self-adjoint quantization is the source spherical oscillator and supplies no target divisor or zero match. | Global completeness, the full Uhlenbeck--Lax algebra, regular two-tori, exact closure criterion, axis/coordinate/repeated/isotropic boundaries and source quantization survive. | ../henon_neumann_uhlenbeck_integrable_sphere_route_a/THEOREM_PACKAGE.md |
+| HEN-O334 | HCS-C350 Turing modes and interval-length walls as arithmetic local or spectral data | proved reaction--diffusion and continuous-parameter obstruction | Fourier mode labels belong to a source Neumann Laplacian, while reaction, diffusion and interval parameters vary continuously.  Linear growth rates and neutral walls are not isolated prime-labelled cycles, target Euler factors, a target divisor or a natural target-zero quantization. | The exact kinetic chamber, all modal roots, continuous Turing window, strict finite-domain count, length walls and every neutral/equal-diffusion face survive as a linear instability theorem. | ../henon_schnakenberg_neumann_turing_modes_route_a/THEOREM_PACKAGE.md |
+| HEN-O335 | HCS-C351 queue traffic and Poisson departures as arithmetic primitive-orbit data | proved stochastic-network and traffic-clock obstruction | Queue lengths and departure processes belong to a continuously parameterized open CTMC; arrival labels and physical time provide neither rational-prime primitive ownership nor a logarithmic-prime roof.  Product-form balance and quasi-reversal do not define a target Euler product or divisor. | The exact recurrence threshold, unique product law, visible reversed network, external Poisson-output independence and all critical/overload/routing boundaries survive. | ../henon_open_jackson_network_quasireversibility_route_a/THEOREM_PACKAGE.md |
+| HEN-O336 | HCS-C352 kink bound levels and reflectionless phases as a target zero realization | proved source-Dirac and continuous-scale obstruction | The integer kink height organizes a source supersymmetric hierarchy, while translation/dilation and scattering momentum remain physical source variables.  Natural self-adjointness and finite Blaschke transmission products supply neither prime ownership, a target divisor nor a target-zero identification, so the operator is not a Hilbert--Polya realization. | The complete self-adjoint Dirac spectrum, unitary Darboux continuum, unique chiral zero mode, threshold resonances, reflectionlessness and all declared boundaries survive. | ../henon_jackiw_rebbi_kink_dirac_spectrum_route_a/THEOREM_PACKAGE.md |
+| HEN-O337 | HCS-C353 customer innovations, Stirling coefficients and Ewens blocks as arithmetic orbit data | proved exchangeable-growth and combinatorial-clock obstruction | Customer time and random set blocks are stochastic insertion data rather than isolated deterministic primitive cycles.  Rising factorials, Stirling coefficients and the finite block-count PGF have no rational-prime owner or logarithmic roof and are not target Euler factors, a target divisor or a target quantization. | The exact EPPF and occupancy law, independent innovations, block-count strong law/CLT, fixed-block Poisson limits and all fixed-size parameter boundaries survive. | ../henon_ewens_chinese_restaurant_partition_growth_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under orthogonal coordinate changes that
+preserve the Neumann spectrum, interval reflection and species bookkeeping,
+queue relabeling with the routing convention retained, kink translation/sign
+gauge and labelled-customer relabeling consistent with exchangeability.  They
+do not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C344--HCS-C348 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
