@@ -1,14 +1,14 @@
 # P32 pipeline state
 
-Date: **2026-09-03 (UTC+08:00)**
+Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`**.
+Current controlling state: **`stage4_prime_request_prepared_awaiting_exact_authorization`**.
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization` |
+| Pipeline global state | `stage4_prime_request_prepared_awaiting_exact_authorization` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -46,9 +46,10 @@ Current controlling state: **`stage3_prime_round3_major_revision_awaiting_stage4
 | Stage 3′ Round 1 | `ABORTED / phase1_lint_failed`; failed closed at mandatory Phase-1 criterion lint; recorded and audited aggregates both 6/5/1, but `REV-P32-R1-W2` is a false FULL and `REV-P32-R3-W1` is a false PARTIAL; Phase-1 criterion drift affects `REV-P32-R3-W1` and `REV-P32-DA-M1`; mechanical B3 candidate suppressed; no decision signed or emitted |
 | Stage 3′ Round 2 | `ABORTED / phase2a_lint_failed`; Phase 1 PASS; committed 7/5/0, controlling 6/6/0 because `REV-P32-DA-M1` is false FULL; stopped before response letter, Phase 2B, traceability, checker, or decision |
 | Stage 3′ Round 3 | `COMPLETE`; Phase 1/2A/2B PASS; final 5/7/0; adjustments/new issues/dissents/escalations `0`; official checker `PASS`; decision `Major Revision / ARS B4` |
+| Stage 4′ exact request | `PREPARED_NOT_AUTHORIZED_NOT_EXECUTED`; P32 scope 7 residuals / 18 targets / 26 block-operation pairs; request validation belongs to joint 377/377 replay |
 | Semantic calibration boundary | Fresh-context and role-separated, but same-family; the semantic passes are not independent error processes |
-| Next legal transition | only explicit authorization to prepare a hash-bound P32 Stage-4′ item/target/operation request; no patch or manuscript write is authorized |
-| Active Stage-3′ findings | seven PARTIALLY_ADDRESSED residuals, including six must-fix; exact list in `stage3_prime_round3_verification_report.md` |
+| Next legal transition | exact author confirmation of the frozen joint P29/P32 Stage-4′ request before any listed operation executes |
+| Current gated scope | The Stage-4′ request now maps seven residual roadmap items to 18 exact targets and 26 block-operation pairs. It specifies closest-work comparison, a commit-pinned artifact inventory, scholarly/development provenance separation, formal definitions, AN-1--AN-5 closure, a 51-manifestation replay and passage matrix, and a bounded conditional inequality lemma. No patch, revised draft, bibliography, or scientific result was created. |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability
@@ -109,7 +110,7 @@ system are unchanged. Rounds 1 and 2 are immutable and failed closed. Stage 4′
 Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result
 refresh, and new scientific execution remain unauthorized.
 
-## Current Stage-3′ Round-3 bindings
+## Historical Stage-3′ Round-3 bindings
 
 P32 Round 3 is complete: checker PASS; Major Revision / B4; 5/7/0; zero adjustments.
 
@@ -127,3 +128,25 @@ bibliography, PDF, science/results, frozen initial system, and Route
 coordinates are unchanged. New science executions: `0`. Stage 4.5, Stage 5,
 canonical promotion, submission, Route advancement, and result refresh remain
 unauthorized.
+
+## Current Stage-4′ request bindings
+
+Control state: `stage4_prime_request_prepared_awaiting_exact_authorization`.
+
+The Stage-4′ request now maps seven residual roadmap items to 18 exact targets and 26 block-operation pairs. It specifies closest-work comparison, a commit-pinned artifact inventory, scholarly/development provenance separation, formal definitions, AN-1--AN-5 closure, a 51-manifestation replay and passage matrix, and a bounded conditional inequality lemma. No patch, revised draft, bibliography, or scientific result was created.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P29/P32 exact Stage-4′ request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.md) | `44cf590c2ce5ad86d7a698c436b13e21618e7965a8792dce262845ed2eb4fcf3` |
+| [Machine-readable request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.json) | `3a17181450f040e274f1fa6c31386ff2593c04f409013908bfad759d408d65fa` |
+| [377-check validation](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32_VALIDATION.json) | `fe80eb7dd58a1fe70766c602794839e4edd71fd8aeb70809663dbe0f21248420` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+Next legal action: exact author confirmation of the frozen joint P29/P32 Stage-4′ request before any listed operation executes. Citation style remains
+`plainnat` numeric. Canonical manuscript/bibliography/PDF, science/results,
+frozen initial system, and Route coordinates are unchanged. Formal Route-A
+tuples, positive arithmetic A2, A3, A4, and Route B remain `0/5`. Stage 5/6,
+canonical promotion, submission, result refresh, and new scientific execution
+remain unauthorized.

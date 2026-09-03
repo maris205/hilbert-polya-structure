@@ -1,11 +1,11 @@
 # P32 manuscript package
 
-Package note: this directory is the immutable canonical Stage-2.5 manuscript
-package; historical review sections below remain frozen. The authoritative
-current state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
-Control state: `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`. Stage 3′ Round 3 is complete with checker PASS and Major Revision / ARS B4 at 5 FULL / 7 PARTIAL / 0 other and zero Phase-2B adjustments. Only explicit authorization to prepare a P32 Stage-4′ request is next; no revision write is authorized.
-Canonical manuscript/PDF/bibliography bytes and plainnat numeric citation style
+Package note: this directory remains the immutable canonical Stage-2.5 package;
+current revision/review outputs are versioned under `../notes/`. The authoritative
+state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
+Control state: `stage4_prime_request_prepared_awaiting_exact_authorization`. The Stage-4′ request now maps seven residual roadmap items to 18 exact targets and 26 block-operation pairs. It specifies closest-work comparison, a commit-pinned artifact inventory, scholarly/development provenance separation, formal definitions, AN-1--AN-5 closure, a 51-manifestation replay and passage matrix, and a bounded conditional inequality lemma. No patch, revised draft, bibliography, or scientific result was created.
+Canonical manuscript/PDF/bibliography bytes and `plainnat` numeric citation style
 remain unchanged.
 
 ## Deliverables
@@ -45,7 +45,7 @@ official checker, or decision.
 | [`stage3_prime_round2_checker_receipt.json`](../notes/stage3_prime_round2_checker_receipt.json) | `d145a433e299b2b63cf4308a2af2f6b66a432732e381dd2a41e5de7a5c17a892` |
 | [`stage3_prime_round2_abort_record.json`](../notes/stage3_prime_round2_abort_record.json) | `0768572cc545275f9fd8580552e0653bae82a8022077c52fbece8b99b3c90aeb` |
 
-## Current Stage 3′ Round-3 checker-backed outcome
+## Historical Stage 3′ Round-3 checker-backed outcome
 
 P32 completed Round 3 at Major Revision / B4 with checker PASS, 5/7/0, and zero adjustments.
 
@@ -68,6 +68,19 @@ P32 completed Round 3 at Major Revision / B4 with checker PASS, 5/7/0, and zero 
 - Seven-mode audit: 7/7 `CLEAR`, 0 `SUSPECTED`, 0 `INSUFFICIENT EVIDENCE`.
 - Official E6: `skipped_no_revision_evidence`, `revision_evidence_bundle_sha256=null`, and no drift finding. The project-local repair evidence is not an official ARS Revision-Evidence Bundle.
 
+## Current Stage 4′ request-preparation outcome
+
+**本轮结论概要。** 本轮明确进展是把 P32 的七个剩余评审项收敛为可逐块执行、可回放的 Stage 4′ 合同：18 个精确目标、26 个 block-operation pairs，并把形式定义、AN-1--AN-5、51 条 replay/matrix 与条件不等式的边界写入请求。正文尚未修改；没有 factor、limit、obstruction 或 Route credit。
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P29/P32 exact Stage-4′ request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.md) | `44cf590c2ce5ad86d7a698c436b13e21618e7965a8792dce262845ed2eb4fcf3` |
+| [Machine-readable request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.json) | `3a17181450f040e274f1fa6c31386ff2593c04f409013908bfad759d408d65fa` |
+| [377-check validation](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32_VALIDATION.json) | `fe80eb7dd58a1fe70766c602794839e4edd71fd8aeb70809663dbe0f21248420` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
 ## 结论概要
 
 本轮形成的明确论文进展是：在固定 `1/N` 时间与 `1/N^3` 对数重整化下，把高内容与零内容局部因子锁定为最先、最短的否证性定理目标，并把 content-one 降为只有在两类不利测试存活后才进入的次级分支。该进展是可审计的理论与证书架构，不是已经完成的因子推导或阻碍定理；形式对象、面板、尾界和极限均未构造或执行。
@@ -78,18 +91,17 @@ P32-S13 is now bibliographically `VERIFIED`, but remains background-only. Its ci
 
 ## Route position and next gate
 
-Explicit manuscript progress: Higher-content and zero-content factors remain the first falsification targets; the two modulus schedules, both iterated-limit orders, dependency table, and scalar-comparator interface are explicit, while every scientific object, majorant, limit, factor, or obstruction remains unexecuted or unproved.
+Explicit paper progress: The Stage-4′ request now maps seven residual roadmap items to 18 exact targets and 26 block-operation pairs. It specifies closest-work comparison, a commit-pinned artifact inventory, scholarly/development provenance separation, formal definitions, AN-1--AN-5 closure, a 51-manifestation replay and passage matrix, and a bounded conditional inequality lemma. No patch, revised draft, bibliography, or scientific result was created.
 
 Frozen initial system: unit-speed genus-two geodesic flow; pure homology tower; oriented primitive owner with inverse separate; full-content scope; clock 1/N; logarithmic normalization 1/N^3.
 
-Route mapping: generic Route A A1-A2 preparation with arithmetic A0 unavailable; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot create Route credit.
-Across Papers 29--33 the formal Route-A tuple count remains 0/5, positive
-arithmetic A2 remains 0/5, A3/A4 remain 0/5, and Route B remains 0/5.
+Route mapping: generic Route A A1-A2 preparation with arithmetic A0 unavailable; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Across Papers 29--33, formal Route-A
+tuples, positive arithmetic A2, A3, A4, and Route B remain `0/5`.
 
-The next legal action for P32 is only explicit authorization to prepare a hash-bound P32 Stage-4′ item/target/operation request; no patch or manuscript write is authorized. Canonical manuscript,
-bibliography, PDF, science/results, and the frozen system remain unchanged;
-new science executions are zero. Stage 4.5, Stage 5, canonical promotion,
-submission, Route advancement, and result refresh remain unauthorized.
+The next legal action is exact author confirmation of the frozen joint P29/P32 Stage-4′ request before any listed operation executes. Canonical manuscript,
+bibliography, PDF, science/results, and the frozen system remain unchanged.
+Stage 5/6, canonical promotion, submission, Route advancement, result refresh,
+and new scientific execution remain unauthorized.
 
 ## Batch traceability
 

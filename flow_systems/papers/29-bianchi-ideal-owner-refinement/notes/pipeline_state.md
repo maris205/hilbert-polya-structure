@@ -1,14 +1,14 @@
 # P29 pipeline state
 
-Synchronized: **2026-09-03 (UTC+08:00)**
+Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`**.
+Current controlling state: **`stage4_prime_request_prepared_awaiting_exact_authorization`**.
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization` |
+| Pipeline global state | `stage4_prime_request_prepared_awaiting_exact_authorization` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS` |
@@ -22,9 +22,10 @@ Current controlling state: **`stage3_prime_round3_major_revision_awaiting_stage4
 | Stage 3′ Round 1 | `ABORTED / phase2a_lint_failed` fail-closed; official checker/apply chain `PASS`; recorded 7/4/0; audit-supported 6/5/0; mechanical B4 (Major Revision candidate) suppressed; no decision issued |
 | Stage 3′ Round 2 | `ABORTED / phase2a_lint_failed`; Phase 1 PASS; committed 7/4/0, controlling 5/6/0; stopped before response letter, Phase 2B, traceability, checker, or decision |
 | Stage 3′ Round 3 | `COMPLETE`; Phase 1/2A/2B PASS; final 7/4/0; adjustments `0`; NEW-1 minor regression; official checker `PASS`; decision `Major Revision / ARS B4` |
+| Stage 4′ exact request | `PREPARED_NOT_AUTHORIZED_NOT_EXECUTED`; P29 scope 4 residuals + NEW-1 / 8 targets / 10 block-operation pairs; request validation belongs to joint 377/377 replay |
 | Semantic-audit provenance | fresh-context; role-separated; same-family; not independent error processes |
-| Next legal action | only explicit authorization to prepare a hash-bound P29 Stage-4′ item/target/operation request; no patch or manuscript write is authorized |
-| Active Stage-3′ findings | four PARTIALLY_ADDRESSED residuals plus NEW-1, a separate minor regression; exact list in `stage3_prime_round3_verification_report.md` |
+| Next legal action | exact author confirmation of the frozen joint P29/P32 Stage-4′ request before any listed operation executes |
+| Current gated scope | The Stage-4′ request now maps four residual roadmap items plus `NEW-1` to 8 exact targets and 10 block-operation pairs. It specifies the dated replay/crosswalk, complete stop map, three control stop states, a labeled unexecuted fixture, and removal of the same-family independence overstatement. No patch, revised draft, bibliography, or scientific result was created. |
 
 ## Canonical package
 
@@ -140,7 +141,7 @@ immutable and failed closed. Stage 3′ cannot create Route credit: formal tuple
 Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route advancement,
 result refresh, and new scientific execution remain unauthorized.
 
-## Current Stage-3′ Round-3 bindings
+## Historical Stage-3′ Round-3 bindings
 
 P29 Round 3 is complete: checker PASS; Major Revision / B4; 7/4/0; zero adjustments; NEW-1 minor regression.
 
@@ -158,3 +159,25 @@ bibliography, PDF, science/results, frozen initial system, and Route
 coordinates are unchanged. New science executions: `0`. Stage 4.5, Stage 5,
 canonical promotion, submission, Route advancement, and result refresh remain
 unauthorized.
+
+## Current Stage-4′ request bindings
+
+Control state: `stage4_prime_request_prepared_awaiting_exact_authorization`.
+
+The Stage-4′ request now maps four residual roadmap items plus `NEW-1` to 8 exact targets and 10 block-operation pairs. It specifies the dated replay/crosswalk, complete stop map, three control stop states, a labeled unexecuted fixture, and removal of the same-family independence overstatement. No patch, revised draft, bibliography, or scientific result was created.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P29/P32 exact Stage-4′ request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.md) | `44cf590c2ce5ad86d7a698c436b13e21618e7965a8792dce262845ed2eb4fcf3` |
+| [Machine-readable request](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.json) | `3a17181450f040e274f1fa6c31386ff2593c04f409013908bfad759d408d65fa` |
+| [377-check validation](../../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32_VALIDATION.json) | `fe80eb7dd58a1fe70766c602794839e4edd71fd8aeb70809663dbe0f21248420` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+Next legal action: exact author confirmation of the frozen joint P29/P32 Stage-4′ request before any listed operation executes. Citation style remains
+`plainnat` numeric. Canonical manuscript/bibliography/PDF, science/results,
+frozen initial system, and Route coordinates are unchanged. Formal Route-A
+tuples, positive arithmetic A2, A3, A4, and Route B remain `0/5`. Stage 5/6,
+canonical promotion, submission, result refresh, and new scientific execution
+remain unauthorized.

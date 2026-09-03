@@ -2,19 +2,23 @@
 
 ## Current status
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
-**ARS STAGE 3′ ROUND 3 COMPLETE — OFFICIAL CHECKER PASS / MAJOR REVISION (B4).**
+**ARS STAGE 4′ EXACT REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**
 
-Control state: `stage3_prime_round3_major_revision_awaiting_stage4_prime_request_preparation_authorization`. Stage 3′ Round 3 completed all three gates. The official checker returned PASS and emitted Major Revision / ARS B4 at 7 FULL / 4 PARTIAL / 0 other, with zero Phase-2B adjustments. NEW-1 is a separate minor regression in the newly introduced independence wording. The only next legal action is explicit authorization to prepare a hash-bound P29 Stage-4′ item/target/operation request; neither that request nor any revision write is yet authorized.
+Control state: `stage4_prime_request_prepared_awaiting_exact_authorization`. The Stage-4′ request now maps four residual roadmap items plus `NEW-1` to 8 exact targets and 10 block-operation pairs. It specifies the dated replay/crosswalk, complete stop map, three control stop states, a labeled unexecuted fixture, and removal of the same-family independence overstatement. No patch, revised draft, bibliography, or scientific result was created.
 
-Explicit manuscript progress: Gate M/Gate Q, exact inversion/conjugation laws, five fail-closed prospective interfaces, and deterministic failure precedence are explicit; no owner law, quotient, fixture run, score, or performance result exists.
+本轮结论概要：本轮明确进展是把 P29 的四个剩余评审项和 `NEW-1` 收敛为可逐块执行、可回放的 Stage 4′ 合同：8 个精确目标、10 个 block-operation pairs。正文尚未修改；这是一项可审计的落地准备，不是 owner law、完整 quotient、fixture 结果或 Route credit。
 
 Frozen initial system: torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic-arclength clock; primitive loxodromic inversion-paired owner; one literal nonzero Gaussian prime ideal.
 
-Route mapping: Route A A0/A1 foundation/interface preparation; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+Route mapping: Route A A0/A1 foundation/interface preparation; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. This round cannot award Route credit.
 
-Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
+Citation formatting remains `plainnat` numeric. Canonical manuscript,
+bibliography, and PDF bytes; science/results; the frozen initial system; and
+every Route coordinate remain unchanged. Stage 5/6, canonical promotion,
+submission, result refresh, new scientific execution, and Route advancement
+remain unauthorized.
 
 ## Current paper package
 
@@ -44,9 +48,13 @@ Citation formatting remains frozen in plainnat numeric style. Canonical manuscri
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json), and [abort record](notes/stage3_prime_round2_abort_record.json)
 - [Stage-3′ Round-3 verification report](notes/stage3_prime_round3_verification_report.md), [official checker receipt](notes/stage3_prime_round3_checker_receipt.json), and [traceability matrix](notes/stage3_prime_round3_traceability.json)
 - [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
+- [Current P29/P32 Stage-4′ exact request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.md) and [377-check validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32_VALIDATION.json)
+- [Current batch completion report](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json), and [checkpoint](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
+
+**本轮结论概要（29）。** 本轮明确进展是把 P29 的四个剩余评审项和 `NEW-1` 收敛为可逐块执行、可回放的 Stage 4′ 合同：8 个精确目标、10 个 block-operation pairs。正文尚未修改；这是一项可审计的落地准备，不是 owner law、完整 quotient、fixture 结果或 Route credit。
 
 **Stage-4 landing result.** Stage 4 makes the five prospective Gate-M/Gate-Q interfaces, exact inversion/conjugation laws, failure precedence, reader map, and three control interpretations explicit. No owner law, complete quotient, executed fixture, score, or practical-performance result is claimed. The disposition is
 `11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview`. This is explicit manuscript/certificate progress,
@@ -101,7 +109,8 @@ global originality, priority, or scientific-novelty certificate.
 - Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 11/11 items; 40 operations; 7 RESOLVED + 4 DELIBERATE_LIMITATION; 38/83 affected E1; +651 words; 14-page clean preview.
 - Stage 3′ Round 1: immutable historical fail-closed record.
 - Stage 3′ Round 2: immutable historical fail-closed record.
-- Stage 3′ Round 3: `COMPLETE`; final 7/4/0; Phase-2B adjustments `0`; `NEW-1` minor regression; checker `PASS`; Major Revision / ARS B4. Only explicit authorization to prepare a P29 Stage-4′ request may follow.
+- Stage 3′ Round 3: historical `COMPLETE`; final 7/4/0; checker `PASS`; Major Revision / ARS B4.
+- Stage 4′ exact request: `PREPARED_NOT_AUTHORIZED_NOT_EXECUTED`; P29 scope 4 residuals + `NEW-1`, 8 targets, 10 block-operation pairs.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
@@ -109,7 +118,20 @@ correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
 
-### Current Stage-3′ Round-3 checker-backed outcome
+### Current Stage-4′ request (prepared, not executed)
+
+The Stage-4′ request now maps four residual roadmap items plus `NEW-1` to 8 exact targets and 10 block-operation pairs. It specifies the dated replay/crosswalk, complete stop map, three control stop states, a labeled unexecuted fixture, and removal of the same-family independence overstatement. No patch, revised draft, bibliography, or scientific result was created. Next legal action: exact author confirmation of the frozen joint P29/P32 Stage-4′ request before any listed operation executes.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P29/P32 exact Stage-4′ request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.md) | `44cf590c2ce5ad86d7a698c436b13e21618e7965a8792dce262845ed2eb4fcf3` |
+| [Machine-readable request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32.json) | `3a17181450f040e274f1fa6c31386ff2593c04f409013908bfad759d408d65fa` |
+| [377-check validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P29_P32_VALIDATION.json) | `fe80eb7dd58a1fe70766c602794839e4edd71fd8aeb70809663dbe0f21248420` |
+| [Batch completion report](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+### Historical Stage-3′ Round-3 checker-backed outcome
 
 P29 is complete at Major Revision / B4 with checker PASS, 7 FULL / 4 PARTIAL / 0 other, zero Phase-2B adjustments, and the separate minor regression NEW-1. Only request-preparation authorization for a future P29 Stage 4′ is the next legal action.
 

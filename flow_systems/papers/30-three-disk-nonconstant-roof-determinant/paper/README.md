@@ -1,11 +1,11 @@
 # P30 manuscript package
 
-Package note: this directory is the immutable canonical Stage-2.5 manuscript
-package; historical review sections below remain frozen. The authoritative
-current state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
-Control state: `stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization`. The controlling Round-2 outcome remains checker PASS and Major Revision / ARS B4 at 4 FULL / 5 PARTIAL. The exact joint P30/P31 Stage-4′ request (13 residuals, 37 targets, 156 checks) is prepared but not authorized or executed.
-Canonical manuscript/PDF/bibliography bytes and plainnat numeric citation style
+Package note: this directory remains the immutable canonical Stage-2.5 package;
+current revision/review outputs are versioned under `../notes/`. The authoritative
+state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
+Control state: `stage4_prime_author_side_complete_awaiting_stage4_5_authorization`. All 5/5 residual items are addressed by 14 authorized operations. The final chain preserves 113/127 base blocks, records 54/54 successful dated metadata queries and a 28-row passage matrix, and appends two verified correction records only to the notes-side bibliography. The clean preview is 16 pages with zero blocking TeX findings or overfull boxes.
+Canonical manuscript/PDF/bibliography bytes and `plainnat` numeric citation style
 remain unchanged.
 
 ## Deliverables
@@ -18,7 +18,7 @@ remain unchanged.
 - [`stage3_review_baseline.json`](../notes/stage3_review_baseline.json) -- immutable Stage-3 review target.
 - [`stage3_prime_round2_verification_report.md`](../notes/stage3_prime_round2_verification_report.md) and [`stage3_prime_round2_checker_receipt.json`](../notes/stage3_prime_round2_checker_receipt.json) -- current Round-2 decision and official checker evidence; Round 1 remains historical and immutable.
 
-## Prepared Stage-4′ request (not yet authorized)
+## Historical prepared Stage-4′ request (not yet authorized)
 
 P30 remains at its completed Round-2 Major Revision / B4 outcome (4/5/0); the joint exact request has 13 residuals, 37 targets, and 156 passing checks, with zero manuscript/bibliography writes.
 
@@ -31,21 +31,35 @@ P30 remains at its completed Round-2 Major Revision / B4 outcome (4/5/0); the jo
 | [Round-3 batch receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json) | `ad20c4331936d2d8e1fb55613f72c3cf6bb5d07852775a47071ac427a9107172` |
 | [Round-3 mandatory checkpoint](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md) | `dff758cae93c8fba9c17d9b26cbe6c07ae3584d7645aa0db357ab75a73fee94e` |
 
+## Current Stage 4′ author-side revision outcome
+
+**本轮结论概要。** 本轮 P30 已形成实质性的论文修订稿：5/5 剩余项由 14 个授权操作闭合，补入 54 条可回放检索、28 行 passage matrix 与两条 notes-only correction records；16 页预览干净构建。物理 roof、算子、determinant、误差界和 Route 结论仍未被虚构，下一步是 fresh Stage 4.5 审计。
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P30 revised anchored draft](../../../papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_round2.tex) | `6c09fa99b17a1f0d47a1c186f0fe48072a3f7d7e45b036a0b237460cd51ae39a` |
+| [P30 exact patch](../../../papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_patch_round2.json) | `5876b07df9741ca1d384a78441030d96734a1e87547e94cb7c097efa8d099846` |
+| [P30 evidence bundle](../../../papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_revision_evidence_bundle_round2.json) | `abce06717e7f7d0938caf13c3dca01f310b7164a299663b55d178fb270a72d3a` |
+| [P30 build receipt](../../../papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_preview_build_receipt_round2.json) | `f95563f1ea0488368f49817b359b8518d9cbab463ba2828fc2361909f291909e` |
+| [P30 final audit](../../../papers/30-three-disk-nonconstant-roof-determinant/notes/stage4_prime_final_audit_round2.json) | `dbcf15ba835bdbe3c7a05b7ef8891f92672655e953ae8896907b484628f5a5ba` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
 ## 结论概要
 
 完整论文把物理 roof 行列式方案整理为六道型别化关卡，并冻结共同范数下的误差契约：四个数值通道加独立传播的几何／roof 输入不确定性。没有宣称已构造 roof、算子、行列式、包络、忠实度或非转移定理。
 
 ## Claim and route boundary
 
-Explicit manuscript progress: The physical-roof proposal is a six-gate fail-closed DAG with a common-norm uncertainty contract, four numerical channels, and separately propagated geometry/roof-input uncertainty; no roof, operator, determinant, enclosure, fidelity result, or nontransfer theorem exists.
+Explicit paper progress: All 5/5 residual items are addressed by 14 authorized operations. The final chain preserves 113/127 base blocks, records 54/54 successful dated metadata queries and a 28-row passage matrix, and appends two verified correction records only to the notes-side bibliography. The clean preview is 16 pages with zero blocking TeX findings or overfull boxes.
 
 Frozen initial system: no-eclipse equilateral three-disk flow at d=6a; Euclidean free-flight clock; primitive cyclic collision-word owner; physical roof distinct from the unit-roof control.
 
-Route mapping: A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot create Route credit.
-Across Papers 29--33 the formal Route-A tuple count remains 0/5, positive
-arithmetic A2 remains 0/5, A3/A4 remain 0/5, and Route B remains 0/5.
+Route mapping: A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Across Papers 29--33, formal Route-A
+tuples, positive arithmetic A2, A3, A4, and Route B remain `0/5`.
 
-The next legal action for P30 is only exact author confirmation of the already prepared P30/P31 Stage-4′ request before any listed operation may execute. Canonical manuscript,
-bibliography, PDF, science/results, and the frozen system remain unchanged;
-new science executions are zero. Stage 4.5, Stage 5, canonical promotion,
-submission, Route advancement, and result refresh remain unauthorized.
+The next legal action is fresh Stage 4.5 audit of the current versioned Stage-4′ chain; no silent repair or promotion. Canonical manuscript,
+bibliography, PDF, science/results, and the frozen system remain unchanged.
+Stage 5/6, canonical promotion, submission, Route advancement, result refresh,
+and new scientific execution remain unauthorized.

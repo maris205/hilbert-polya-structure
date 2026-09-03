@@ -2,19 +2,23 @@
 
 ## Current status
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
-**ARS STAGE 3′ ROUND 2 REMAINS COMPLETE — STAGE-4′ REQUEST PREPARED / AWAITING EXACT AUTHORIZATION.**
+**ARS STAGE 4′ AUTHOR-SIDE REVISION COMPLETE — AWAITING FRESH STAGE 4.5.**
 
-Control state: `stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization`. The controlling review remains the completed Stage 3′ Round-2 Major Revision / ARS B4 decision at 3 FULL / 8 PARTIAL. A hash-bound P30/P31 Stage-4′ request is now prepared and validated: 13 residual items, 37 manuscript target blocks, and 156 checks across the pair. It has not been authorized or executed, and no manuscript or bibliography edit has occurred. The next legal action is exact author confirmation of that already prepared request.
+Control state: `stage4_prime_author_side_complete_awaiting_stage4_5_authorization`. All 8/8 residual items are addressed by 20 authorized operations. The final chain preserves 93/111 base blocks, records 20/20 successful dated metadata queries and a 24-row method matrix, and appends two source-verified closest-work records only to the notes-side bibliography. The clean preview is 13 pages with zero blocking TeX findings or overfull boxes.
 
-Explicit manuscript progress: The deterministic canonicalization biconditional is primary, the 9,453 pair dispositions are a derived audit, and G/I/C are distinct typed estimands; no owner partition, complete ledger, canonicalization theorem, or all-pairs execution exists.
+本轮结论概要：本轮 P31 已形成实质性的论文修订稿：8/8 剩余项由 20 个授权操作闭合，补入 20 条可回放检索、24 行 method matrix 与两条 notes-only closest-work records；13 页预览干净构建。完整 owner ledger、inverse theorem、可执行 verifier 和 Route 结论仍未被声称，下一步是 fresh Stage 4.5 审计。
 
 Frozen initial system: fixed positive time change of the Gamma_0(11) geodesic flow; oriented primitive owner; inverse separate; powers repetitions; Hecke degree distinct.
 
-Route mapping: Route A A1-only owner/canonicalization preparation; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+Route mapping: Route A A1-only owner/canonicalization preparation; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. This round cannot award Route credit.
 
-Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
+Citation formatting remains `plainnat` numeric. Canonical manuscript,
+bibliography, and PDF bytes; science/results; the frozen initial system; and
+every Route coordinate remain unchanged. Stage 5/6, canonical promotion,
+submission, result refresh, new scientific execution, and Route advancement
+remain unauthorized.
 
 ## Current paper package
 
@@ -45,9 +49,13 @@ Citation formatting remains frozen in plainnat numeric style. Canonical manuscri
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [official checker receipt](notes/stage3_prime_round2_checker_receipt.json), and [traceability matrix](notes/stage3_prime_round2_traceability.json)
 - [Prepared P30/P31 Stage-4′ request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.md), [machine request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31.json), and [156-check validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P30_P31_VALIDATION.json)
 - [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
+- [Current Stage-4′ revised draft](notes/stage4_prime_revision_round2.tex), [evidence bundle](notes/stage4_prime_revision_evidence_bundle_round2.json), [build receipt](notes/stage4_prime_preview_build_receipt_round2.json), and [final audit](notes/stage4_prime_final_audit_round2.json)
+- [Current batch completion report](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json), and [checkpoint](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
+
+**本轮结论概要（31）。** 本轮 P31 已形成实质性的论文修订稿：8/8 剩余项由 20 个授权操作闭合，补入 20 条可回放检索、24 行 method matrix 与两条 notes-only closest-work records；13 页预览干净构建。完整 owner ledger、inverse theorem、可执行 verifier 和 Route 结论仍未被声称，下一步是 fresh Stage 4.5 审计。
 
 **Stage-4 landing result.** Stage 4 advances the G/I/C type contract: complete publication requires every root decision resolved, hence `X_res=X` and an exactly 138-row `I`; unresolved rows enter only non-estimand `I_diag`. The independent audit nevertheless found that the promised consolidated, directly checkable G/I/C table is still absent. The inverse proof, executable producer/verifier, and independent adjudicator remain absent. The disposition is
 `11/11 items; 11 operations; 6 RESOLVED + 5 DELIBERATE_LIMITATION; 8/78 affected E1; +440 words; 13-page clean preview`. This is explicit manuscript/certificate progress,
@@ -108,7 +116,7 @@ global originality, priority, or scientific-novelty certificate.
 - Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 11/11 items; 11 operations; 6 RESOLVED + 5 DELIBERATE_LIMITATION; 8/78 affected E1; +440 words; 13-page clean preview.
 - Stage 3′ Round 1: immutable historical fail-closed record.
 - Stage 3′ Round 2: `COMPLETE`; final 3/8/0; Phase-2B adjustments `0`; checker `PASS`; Major Revision / ARS B4.
-- Stage 4′ request: joint P30/P31 request prepared and validated at 13 residuals / 37 targets / 156 checks; not authorized, not executed, and manuscript/bibliography writes remain 0.
+- Stage 4′ author-side revision: `COMPLETE`; P31 8/8 residuals, 20 operations, final audit 85/85, clean 13-page preview; Stage 4.5 not invoked.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
@@ -116,7 +124,22 @@ correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
 
-### Prepared P30/P31 Stage-4′ request (not authorized or executed)
+### Current Stage-4′ author-side completion
+
+All 8/8 residual items are addressed by 20 authorized operations. The final chain preserves 93/111 base blocks, records 20/20 successful dated metadata queries and a 24-row method matrix, and appends two source-verified closest-work records only to the notes-side bibliography. The clean preview is 13 pages with zero blocking TeX findings or overfull boxes. Next legal action: fresh Stage 4.5 audit of the current versioned Stage-4′ chain; no silent repair or promotion.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P31 revised anchored draft](../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round2.tex) | `2f71faeb4f7306f2475cd7cdb4f4fd692166f4a363eb1dfea3d11fd836eee9ea` |
+| [P31 exact patch](../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_patch_round2.json) | `aeb40a0f7bc440d96ad9ffae4fed1137fb28c6ff9162d98c49a53d04b003dbc2` |
+| [P31 evidence bundle](../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round2.json) | `70062217d0e60fa7ce7e97a32c0dbfd9250fa921ee4dbfcc7cbd4490513ce34b` |
+| [P31 build receipt](../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_preview_build_receipt_round2.json) | `a914c03b57343d702190604b19584ee955e33ad983477eff4528b71d53ee7ae0` |
+| [P31 final audit](../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_final_audit_round2.json) | `547fe4e412bd3bc1e09d8e628fef2c816f6ad2e3ac626a1fd24edef54e149acc` |
+| [Batch completion report](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+### Historical prepared P30/P31 Stage-4′ request (not authorized or executed)
 
 P31 remains at its completed Round-2 Major Revision / B4 outcome (3 FULL / 8 PARTIAL). The exact pair request contains 13 residuals and 37 target blocks and passed 156 checks; no listed operation has author approval and no draft/bibliography write occurred.
 
@@ -146,7 +169,7 @@ P31 remains at its completed Round-2 Major Revision / B4 outcome (3 FULL / 8 PAR
 
 Round 1 remains immutable.
 
-### Current Stage-3′ Round-2 outcome
+### Historical Stage-3′ Round-2 outcome
 
 - [Verification report](notes/stage3_prime_round2_verification_report.md): SHA-256 `22ed7e7bed7e0a8871acc0c9ed80f47f29584b2aa1503da8ebcb413f26fb3e89`
 - [Official checker receipt](notes/stage3_prime_round2_checker_receipt.json): SHA-256 `d9b8c92502648dcc94463aaef4e16e453753bd4d372c5f31aafd9122190142d6`

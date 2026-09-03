@@ -1,14 +1,14 @@
 # P31 pipeline state
 
-Synchronized: **2026-09-03 (UTC+08:00)**
+Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization`**.
+Current controlling state: **`stage4_prime_author_side_complete_awaiting_stage4_5_authorization`**.
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `stage3_prime_round2_major_revision_stage4_prime_request_prepared_awaiting_exact_authorization` |
+| Pipeline global state | `stage4_prime_author_side_complete_awaiting_stage4_5_authorization` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS`; authorized two-surface repair replay complete |
@@ -21,10 +21,10 @@ Current controlling state: **`stage3_prime_round2_major_revision_stage4_prime_re
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
 | Stage 3′ Round 1 | `ABORTED / phase1_lint_failed` fail-closed; official checker/apply chain `PASS`; recorded 4/6/1; audit-supported 3/7/1; mechanical B3 (Major Revision candidate) suppressed; no decision issued |
 | Stage 3′ Round 2 | `COMPLETE`; Phase 1/2A/2B PASS; final 3/8/0; precommitted blind tie-break supported both disputed committed rows; adjustments/new issues/dissents/escalations all `0`; official checker `PASS`, apply chain `pass`; decision `Major Revision / ARS B4` |
-| Stage 4′ exact request | `PREPARED_NOT_AUTHORIZED_NOT_EXECUTED`; joint P30/P31 scope 13 residuals / 37 target blocks / 156 checks; manuscript and bibliography writes `0` |
+| Stage 4′ author-side revision | `COMPLETE`; 8/8 residuals; 20 operations; 93/111 preserved blocks; 20/20 queries; 24-row matrix; 13-page clean preview; final audit 85/85; Stage 4.5 `NOT_INVOKED` |
 | Semantic-audit provenance | fresh-context; role-separated; same-family; not independent error processes |
-| Next legal action | only exact author confirmation of the already prepared P30/P31 Stage-4′ request before any listed operation may execute |
-| Active Stage-3′ findings | eight PARTIALLY_ADDRESSED residuals; exact target/operation scope is frozen in the prepared Stage-4′ request |
+| Next legal action | fresh Stage 4.5 audit of the current versioned Stage-4′ chain; no silent repair or promotion |
+| Current gated scope | All 8/8 residual items are addressed by 20 authorized operations. The final chain preserves 93/111 base blocks, records 20/20 successful dated metadata queries and a 24-row method matrix, and appends two source-verified closest-work records only to the notes-side bibliography. The clean preview is 13 pages with zero blocking TeX findings or overfull boxes. |
 
 ## Canonical package
 
@@ -129,7 +129,7 @@ checkpoint.
 | [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `0343b34e2fcb80477046ac5cd0ea069fe51f6efe162edf18dc32b51ad25d0672` |
 | [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `cfa61eb8504c45250b1658d63193475567a2e8fd0afc1037ef6eda580c196852` |
 
-## Current Stage-3′ Round-2 bindings
+## Historical Stage-3′ Round-2 bindings
 
 | Artifact | SHA-256 |
 |---|---|
@@ -148,7 +148,7 @@ tuple `UNASSIGNED`, positive arithmetic A2/A3/A4 absent, and Route B uninvoked.
 Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route advancement,
 result refresh, and new scientific execution remain unauthorized.
 
-## Prepared Stage-4′ request bindings
+## Historical prepared Stage-4′ request bindings
 
 P31 remains complete under Round 2 at Major Revision / B4 (3/8/0). The exact P30/P31 Stage-4′ request is prepared but not authorized or executed.
 
@@ -166,3 +166,27 @@ bibliography, PDF, science/results, frozen initial system, and Route
 coordinates are unchanged. New science executions: `0`. Stage 4.5, Stage 5,
 canonical promotion, submission, Route advancement, and result refresh remain
 unauthorized.
+
+## Current Stage-4′ completion bindings
+
+Control state: `stage4_prime_author_side_complete_awaiting_stage4_5_authorization`.
+
+All 8/8 residual items are addressed by 20 authorized operations. The final chain preserves 93/111 base blocks, records 20/20 successful dated metadata queries and a 24-row method matrix, and appends two source-verified closest-work records only to the notes-side bibliography. The clean preview is 13 pages with zero blocking TeX findings or overfull boxes.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P31 revised anchored draft](../../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_round2.tex) | `2f71faeb4f7306f2475cd7cdb4f4fd692166f4a363eb1dfea3d11fd836eee9ea` |
+| [P31 exact patch](../../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_patch_round2.json) | `aeb40a0f7bc440d96ad9ffae4fed1137fb28c6ff9162d98c49a53d04b003dbc2` |
+| [P31 evidence bundle](../../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_revision_evidence_bundle_round2.json) | `70062217d0e60fa7ce7e97a32c0dbfd9250fa921ee4dbfcc7cbd4490513ce34b` |
+| [P31 build receipt](../../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_preview_build_receipt_round2.json) | `a914c03b57343d702190604b19584ee955e33ad983477eff4528b71d53ee7ae0` |
+| [P31 final audit](../../../papers/31-level11-conjugacy-owner-ledger/notes/stage4_prime_final_audit_round2.json) | `547fe4e412bd3bc1e09d8e628fef2c816f6ad2e3ac626a1fd24edef54e149acc` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+Next legal action: fresh Stage 4.5 audit of the current versioned Stage-4′ chain; no silent repair or promotion. Citation style remains
+`plainnat` numeric. Canonical manuscript/bibliography/PDF, science/results,
+frozen initial system, and Route coordinates are unchanged. Formal Route-A
+tuples, positive arithmetic A2, A3, A4, and Route B remain `0/5`. Stage 5/6,
+canonical promotion, submission, result refresh, and new scientific execution
+remain unauthorized.

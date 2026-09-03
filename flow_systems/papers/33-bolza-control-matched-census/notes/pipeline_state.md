@@ -1,14 +1,14 @@
 # P33 pipeline state
 
-Date: **2026-09-03 (UTC+08:00)**
+Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage3_prime_round3_aborted_awaiting_fresh_round4_authorization`**.
+Current controlling state: **`stage3_prime_round4_aborted_phase2a_lint_failed_awaiting_fresh_round5_authorization`**.
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `stage3_prime_round3_aborted_awaiting_fresh_round4_authorization` |
+| Pipeline global state | `stage3_prime_round4_aborted_phase2a_lint_failed_awaiting_fresh_round5_authorization` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -46,9 +46,10 @@ Current controlling state: **`stage3_prime_round3_aborted_awaiting_fresh_round4_
 | Stage 3′ Round 1 | `ABORTED / phase1_lint_failed`; failed closed at mandatory Phase-1 criterion lint; recorded and audited aggregates both 6/7/0 and all 13 verdicts are supported; a manuscript/verdict/outcome-blind criterion audit confirms Phase-1 drift in `REV-P33-001`, `REV-P33-003`, `REV-P33-004`, `REV-P33-006`, `REV-P33-007`, `REV-P33-009`, and `REV-P33-012`; mechanical B4 candidate suppressed; no decision signed or emitted |
 | Stage 3′ Round 2 | `ABORTED / phase2a_lint_failed`; Phase 1 PASS; committed 6/7/0, controlling 5/8/0 because `REV-P33-011` is false FULL; stopped before response letter, Phase 2B, traceability, checker, or decision |
 | Stage 3′ Round 3 | `ABORTED / phase2a_lint_failed`; Phase 1 and structural Phase 2A PASS; committed 7/5/1, controlling 6/6/1 on REV-P33-011; no response, Phase 2B, traceability, checker, or decision |
+| Stage 3′ Round 4 | `ABORTED / phase2a_lint_failed`; Phase 1 201/201; immutable Phase-2A has 35 schema errors; semantic 5/8/0 noncontrolling; no response/2B/traceability/checker/decision |
 | Semantic calibration boundary | Fresh-context and role-separated, but same-family; the semantic passes are not independent error processes |
-| Next legal transition | only explicit authorization for fresh Stage 3′ Round 4 with a new round id, new manifest, fresh Phase-1/2A contexts, and all prior-round artifacts preserved |
-| Active Stage-3′ finding | REV-P33-011: committed FULL, controlling PARTIAL; fresh Round 4 required |
+| Next legal transition | a wholly fresh Stage 3′ Round 5 with a new id/manifest, fresh role-separated contexts, and a schema-correct prevalidated emitter/template |
+| Current gated scope | Fresh Round 4 Phase 1 passed 201 checks over 13 precommitted rows. The first immutable Phase-2A verdict semantically counted 5 FULL / 8 PARTIAL, but failed the official schema with exactly 35 errors, so the no-retry gate emitted `[RE-REVIEW-ABORT: phase2a_lint_failed]`. No response, Phase 2B, traceability, checker execution, or decision exists. |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability
@@ -108,7 +109,7 @@ system are unchanged. Rounds 1 and 2 are immutable and failed closed. Stage 4′
 Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result
 refresh, and new scientific execution remain unauthorized.
 
-## Current Stage-3′ Round-3 bindings
+## Historical Stage-3′ Round-3 bindings
 
 P33 Round 3 is aborted at phase2a_lint_failed: committed 7/5/1 versus controlling 6/6/1 on REV-P33-011; no response, Phase 2B, traceability, checker, or decision.
 
@@ -126,3 +127,26 @@ bibliography, PDF, science/results, frozen initial system, and Route
 coordinates are unchanged. New science executions: `0`. Stage 4.5, Stage 5,
 canonical promotion, submission, Route advancement, and result refresh remain
 unauthorized.
+
+## Current Stage-3′ Round-4 abort bindings
+
+Control state: `stage3_prime_round4_aborted_phase2a_lint_failed_awaiting_fresh_round5_authorization`.
+
+Fresh Round 4 Phase 1 passed 201 checks over 13 precommitted rows. The first immutable Phase-2A verdict semantically counted 5 FULL / 8 PARTIAL, but failed the official schema with exactly 35 errors, so the no-retry gate emitted `[RE-REVIEW-ABORT: phase2a_lint_failed]`. No response, Phase 2B, traceability, checker execution, or decision exists.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P33 Round-4 verification report](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_verification_report.md) | `cdd94312c239ac9d0061b97941fc7eb8beee50af53720e9127a71603cb19b0e3` |
+| [P33 Round-4 abort record](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_abort_record.json) | `79337cb4ff10849f2a1ba7e6e451a4cffc60391de5df72ffd6436dfb7b6217d3` |
+| [P33 Phase-2A validation](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_phase2a_validation.json) | `34492a4bd45bf339594e997c0ec68d535bdb74d30fcd4fc8851a01b0d16f1a02` |
+| [P33 completion receipt](../../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_completion_receipt.json) | `8fa3a7599f60c73246fb52669b72e6f8df58fa7a362caf6f7b7170dfadcd7159` |
+| [Batch completion report](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+Next legal action: a wholly fresh Stage 3′ Round 5 with a new id/manifest, fresh role-separated contexts, and a schema-correct prevalidated emitter/template. Citation style remains
+`plainnat` numeric. Canonical manuscript/bibliography/PDF, science/results,
+frozen initial system, and Route coordinates are unchanged. Formal Route-A
+tuples, positive arithmetic A2, A3, A4, and Route B remain `0/5`. Stage 5/6,
+canonical promotion, submission, result refresh, and new scientific execution
+remain unauthorized.

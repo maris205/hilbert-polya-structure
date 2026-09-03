@@ -2,19 +2,23 @@
 
 ## Current status
 
-<!-- ROUND10_STAGE3_PRIME_ROUND3_STATUS_SYNC_20260903 -->
+<!-- ROUND10_STAGE4_PRIME_ROUND4_STATUS_SYNC_20260904 -->
 
-**ARS STAGE 3′ ROUND 3 ABORTED FAIL-CLOSED — AWAITING EXPLICIT FRESH ROUND-4 AUTHORIZATION.**
+**ARS STAGE 3′ ROUND 4 ABORTED FAIL-CLOSED — AWAITING FRESH ROUND 5.**
 
-Control state: `stage3_prime_round3_aborted_awaiting_fresh_round4_authorization`. Stage 3′ Round 3 aborted fail-closed at phase2a_lint_failed. The committed 7 FULL / 5 PARTIAL / 1 NOT record is controlled as 6 FULL / 6 PARTIAL / 1 NOT because REV-P33-011 is PARTIALLY_ADDRESSED under both the valid primary audit and blind tie-break. The response, Phase 2B, traceability, checker, and decision were not run or emitted. The next legal action is explicit authorization for a wholly fresh Stage 3′ Round 4 with a new id, manifest, and fresh Phase-1/2A contexts.
+Control state: `stage3_prime_round4_aborted_phase2a_lint_failed_awaiting_fresh_round5_authorization`. Fresh Round 4 Phase 1 passed 201 checks over 13 precommitted rows. The first immutable Phase-2A verdict semantically counted 5 FULL / 8 PARTIAL, but failed the official schema with exactly 35 errors, so the no-retry gate emitted `[RE-REVIEW-ABORT: phase2a_lint_failed]`. No response, Phase 2B, traceability, checker execution, or decision exists.
 
-Explicit manuscript progress: BP/CP producer contracts, owner/inverse/repetition semantics, serialization, migration, and trust-graph surfaces are concrete prospective interfaces; no producer, independent fixture/oracle, validator execution, owner computation, or census exists.
+本轮结论概要：本轮 P33 的可交付结果是一次严格失败封闭的 Round 4：Phase 1 的 13 行预承诺和 201 项检查通过，但首次 Phase-2A verdict 出现 35 个 schema 错误，故 5 FULL / 8 PARTIAL 只作非控制读数，没有签发决定。下一轮必须使用预先校验的 schema-correct emitter/template 开启全新 Round 5；Round 4 不原地修补。
 
 Frozen initial system: unit-speed Bolza geodesic flow with a separately typed matched control; presentation-specific owner semantics; frozen generator/cutoff objects; target-blind no-retuning rule.
 
-Route mapping: Route A A1 preparation with formal A0 prohibited/confounded; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. Stage 3′ cannot award Route credit.
+Route mapping: Route A A1 preparation with formal A0 prohibited/confounded; formal tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B uninvoked. This round cannot award Route credit.
 
-Citation formatting remains frozen in plainnat numeric style. Canonical manuscript, bibliography, and PDF bytes; science/results; the frozen initial system; and every Route coordinate remain unchanged. Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result refresh, and new scientific execution remain unauthorized.
+Citation formatting remains `plainnat` numeric. Canonical manuscript,
+bibliography, and PDF bytes; science/results; the frozen initial system; and
+every Route coordinate remain unchanged. Stage 5/6, canonical promotion,
+submission, result refresh, new scientific execution, and Route advancement
+remain unauthorized.
 
 ## Current paper and revision package
 
@@ -44,9 +48,13 @@ Citation formatting remains frozen in plainnat numeric style. Canonical manuscri
 - [Stage-3′ Round-2 verification report](notes/stage3_prime_round2_verification_report.md), [checker non-execution receipt](notes/stage3_prime_round2_checker_receipt.json), and [abort record](notes/stage3_prime_round2_abort_record.json)
 - [Stage-3′ Round-3 verification report](notes/stage3_prime_round3_verification_report.md), [checker-not-run receipt](notes/stage3_prime_round3_checker_receipt.json), and [abort record](notes/stage3_prime_round3_abort_record.json)
 - [Round-3 batch report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_RECEIPT.json), and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND3_MANDATORY_CHECKPOINT.md)
+- [Stage-3′ Round-4 verification report](notes/stage3_prime_round4_verification_report.md), [abort record](notes/stage3_prime_round4_abort_record.json), and [completion receipt](notes/stage3_prime_round4_completion_receipt.json)
+- [Current batch completion report](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md), [receipt](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json), and [checkpoint](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 结论概要
+
+**本轮结论概要（33）。** 本轮 P33 的可交付结果是一次严格失败封闭的 Round 4：Phase 1 的 13 行预承诺和 201 项检查通过，但首次 Phase-2A verdict 出现 35 个 schema 错误，故 5 FULL / 8 PARTIAL 只作非控制读数，没有签发决定。下一轮必须使用预先校验的 schema-correct emitter/template 开启全新 Round 5；Round 4 不原地修补。
 
 **Stage-4 landing result.** Stage 4 fixes BP/CP producer contracts, exact owner/inverse/repetition semantics, canonical serialization and migration rules, and a trust graph with synthetic cross-presentation traces. No producer, fixture bytes, validator, passage audit, or census exists; both control directions remain conditional and unverified. The disposition is
 `13/13 items; 13 operations; 8 RESOLVED + 5 DELIBERATE_LIMITATION; 12/126 affected E1; +1,400 words; 17-page clean preview`. This is explicit manuscript/certificate progress,
@@ -81,11 +89,26 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `STAGE3_PRIME_ROUND2=HISTORICAL_ABORT`,
 `STAGE3_PRIME_ROUND3=ABORTED_PHASE2A_LINT_FAILED`,
 `STAGE3_PRIME_DECISION_EMITTED=false`, and
-`STAGE3_PRIME_ROUND4_AUTHORIZED=false`.
+`STAGE3_PRIME_ROUND4=ABORTED_PHASE2A_LINT_FAILED`, and
+`STAGE3_PRIME_ROUND5_AUTHORIZED=false`.
 
 ## Traceability
 
-### Current Stage-3′ Round-3 fail-closed outcome
+### Current Stage-3′ Round-4 fail-closed outcome
+
+Fresh Round 4 Phase 1 passed 201 checks over 13 precommitted rows. The first immutable Phase-2A verdict semantically counted 5 FULL / 8 PARTIAL, but failed the official schema with exactly 35 errors, so the no-retry gate emitted `[RE-REVIEW-ABORT: phase2a_lint_failed]`. No response, Phase 2B, traceability, checker execution, or decision exists. Next legal action: a wholly fresh Stage 3′ Round 5 with a new id/manifest, fresh role-separated contexts, and a schema-correct prevalidated emitter/template.
+
+| Current artifact | SHA-256 |
+|---|---|
+| [P33 Round-4 verification report](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_verification_report.md) | `cdd94312c239ac9d0061b97941fc7eb8beee50af53720e9127a71603cb19b0e3` |
+| [P33 Round-4 abort record](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_abort_record.json) | `79337cb4ff10849f2a1ba7e6e451a4cffc60391de5df72ffd6436dfb7b6217d3` |
+| [P33 Phase-2A validation](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_phase2a_validation.json) | `34492a4bd45bf339594e997c0ec68d535bdb74d30fcd4fc8851a01b0d16f1a02` |
+| [P33 completion receipt](../../papers/33-bolza-control-matched-census/notes/stage3_prime_round4_completion_receipt.json) | `8fa3a7599f60c73246fb52669b72e6f8df58fa7a362caf6f7b7170dfadcd7159` |
+| [Batch completion report](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_REPORT.md) | `1f8d5247beebf04090e5b5eff0eb5bdc1fab61899f788e99abda9d80aba01a8f` |
+| [Batch completion receipt](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_COMPLETION_RECEIPT.json) | `adad8657340c41ae4b054b5a291c9bc58a3e21acad5e07eacf285c63a414aa4f` |
+| [Mandatory checkpoint](../../BATCH_ROUND10_STAGE4_PRIME_AND_ROUND4_MANDATORY_CHECKPOINT.md) | `5561443b7a061673032eb8fbd635a0b47995e04eb80c977ef6ff5409d5699cad` |
+
+### Historical Stage-3′ Round-3 fail-closed outcome
 
 P33 is aborted at phase2a_lint_failed: committed 7/5/1 versus controlling 6/6/1 on REV-P33-011. No response, Phase 2B, traceability, checker, or decision exists; the next action is an explicitly authorized fresh Round 4.
 
