@@ -1,0 +1,9 @@
+# Narrative report
+
+The factor `N` in Kac's master generator is physical and mathematically decisive.  The one-step chain has gap of order `1/N`; the continuous-time generator `L_N=N(I-Q_N)` has the exact dimension-uniform rate `(N+2)/[2(N-1)]`, tending to `1/2`.  This package locks that convention at the outset.
+
+The quartic mode quickly supplies the correct upper bound, but that calculation alone cannot exclude a slower function elsewhere in infinite-dimensional `L2`.  The substantive step is the geometric lower induction.  Slicing at one coordinate reduces the collision form from `N` to `N-1` particles.  The error is governed by the average of coordinate conditional expectations.  Factoring that average as `P=TT*/N` transfers its complete nonzero spectrum to `T*T/N`; the latter is an explicit block Gram operator whose trivial and standard index branches are controlled by the one-variable conditional operator.  Its orthogonal-polynomial eigenvalues and the sole branch accumulation at `1/N` rule out hidden continuous or approximate spectrum above the exact norm.  The leading positive correlation is `3/(N^2-1)`, and the resulting recurrence telescopes exactly to the quartic rate.
+
+The proof also exposes two boundaries that broad statements hide.  At `N=2`, the uniform angle average is projection onto constants, so the gap value is correct but its mean-zero eigenspace is not one-dimensional.  At `E=0`, the sphere is one point and there is no nonzero relaxation sector.  Every `E>0` is equivalent by scaling.
+
+Finite rational polynomial forms reconstruct the calculation through degree eight and several dimensions, without being offered as the gap proof.  The self-adjoint Markov generator earns only an `A4_FORMAL_HINT`: it has no arithmetic carrier, orbit-zeta bridge, or Hilbert–Pólya status.

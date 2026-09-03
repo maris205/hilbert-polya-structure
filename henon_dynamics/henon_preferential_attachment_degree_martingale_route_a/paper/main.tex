@@ -1,0 +1,226 @@
+\providecommand{\CRevisionRound}{2}
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\pdfvariable suppressoptionalinfo 512\relax
+\pdfvariable trailerid {[<cc321cc321cc321cc321cc321cc321aa><cc321cc321cc321cc321cc321cc321aa>]}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\F}{\mathcal F}
+\newcommand{\1}{\mathbf 1}
+\title{Two Scales in a Convention-Locked Preferential-Attachment Tree:\\Fixed-Vertex Martingales and the Global Degree Profile}
+\author{HCS-C321 theorem-and-evidence package}
+\date{3 September 2026 --- revision round \CRevisionRound}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the linear preferential-attachment tree started from one edge, with no
+self-loops, we join two scales in one boundary-complete theorem.  Every fixed
+vertex has exact rising-factorial moments of all orders and a
+moment-determinate square-root limit, whereas every fixed degree population
+converges in $L^2$ to $4/[k(k+1)(k+2)]$.  The proof keeps fixed-vertex degree
+and degree counts separate.  An exact finite computation independently audits
+the recurrences but is not used to infer either asymptotic theorem.
+\end{abstract}
+
+\section{Frozen process and exact local law}
+Let $T_2$ consist of the single edge $\{1,2\}$.  Given $T_n$, add vertex
+$n+1$ and connect it to exactly one old vertex $v$, chosen with probability
+\[
+ \Pr(v\mid T_n)=\frac{d_v(n)}{2(n-1)}.
+\]
+Thus there are no loops or multiple edges, $n$ is the vertex-count clock, and
+$\sum_{v\leq n}d_v(n)=2(n-1)$.  Write $D_i(n)=d_i(n)$ for one fixed vertex,
+$N_k(n)=\#\{v\leq n:d_v(n)=k\}$ for a population, and
+\[
+ s_i=\begin{cases}2,&i=1,2,\\i,&i\geq3.\end{cases}
+\]
+This precise convention matters: several standard formulations use a
+self-loop or a linearized-chord-diagram seed~\cite{ba,bollobas}.  Fixed-vertex
+limit lineage is discussed by Backhausz~\cite{backhausz}; the constants below
+are nevertheless derived for the declared one-edge process.
+
+For $x^{\overline r}=x(x+1)\cdots(x+r-1)$, the identity
+$(d+1)^{\overline r}-d^{\overline r}=r d^{\overline r}/d$ gives
+\begin{equation}\label{eq:factor-step}
+ \E[D_i(n+1)^{\overline r}\mid T_n]
+ =\left(1+\frac{r}{2(n-1)}\right)D_i(n)^{\overline r}.
+\end{equation}
+
+\begin{theorem}[Exact all-order degree moments]\label{thm:moments}
+For every integer $r\geq1$ and $n\geq s_i$,
+\begin{equation}\label{eq:moments}
+ \E D_i(n)^{\overline r}
+ =r!\frac{\Gamma(n-1+r/2)}{\Gamma(n-1)}
+ \frac{\Gamma(s_i-1)}{\Gamma(s_i-1+r/2)}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Every vertex has degree one at its birth time, so its initial rising factorial
+is $r!$.  Iterating~\eqref{eq:factor-step} and converting the finite product to
+a gamma quotient proves~\eqref{eq:moments}.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{The fixed-vertex limit}
+Put
+\[
+ a_{s,n}=\prod_{t=s}^{n-1}\left(1+\frac1{2(t-1)}\right).
+\]
+Equation~\eqref{eq:factor-step} at $r=1$ makes
+$M_i(n)=D_i(n)/a_{s_i,n}$ a nonnegative martingale.
+
+\begin{theorem}[Square-root limit and determinacy]\label{thm:local-limit}
+For every fixed $i$, there is a nonnegative $Z_i$ such that
+$D_i(n)/\sqrt n\to Z_i$ almost surely and in $L^p$ for every finite $p$.
+For each integer $r\geq1$,
+\begin{equation}\label{eq:limit-moments}
+ \E Z_i^r=\frac{r!\,\Gamma(s_i-1)}{\Gamma(s_i-1+r/2)}.
+\end{equation}
+These moments determine the law of $Z_i$.
+\end{theorem}
+\begin{proof}
+For every integer $q$, $D^q\leq D^{\overline q}$ and
+Theorem~\ref{thm:moments} gives $\E D_i(n)^q=O(n^{q/2})$.  Since
+$a_{s_i,n}\asymp\sqrt n$, $(M_i(n))$ is bounded in every $L^q$.
+Martingale convergence and uniform integrability, choosing an integer $q>p$,
+give almost-sure and every-finite-$L^p$ convergence.  Moreover
+\[
+ \frac{a_{s,n}}{\sqrt n}\longrightarrow
+ \frac{\Gamma(s-1)}{\Gamma(s-1/2)},
+\]
+which transfers the convergence to $D_i(n)/\sqrt n$.
+
+The difference $D^{\overline r}-D^r$ has degree at most $r-1$ in $D$.
+Divide its expectation by $n^{r/2}$ and use the lower-order moment bounds;
+then apply gamma asymptotics to~\eqref{eq:moments}.  Uniform integrability at
+order $r$ follows from the order-$r+1$ bound, proving~\eqref{eq:limit-moments}.
+Finally, for $m_{2r}=\E Z_i^{2r}$, Stirling's formula gives
+\[
+ m_{2r}^{-1/(2r)}=
+ \left(\frac{(2r)!\Gamma(s_i-1)}{\Gamma(s_i-1+r)}\right)^{-1/(2r)}
+ \geq c_i r^{-1/2}
+\]
+for all sufficiently large $r$.  Carleman's sum diverges, proving moment
+determinacy.
+\end{proof}
+
+\section{The global population scale}
+Set $N_0(n)=0$.  The newborn contributes to class one, and selection of an
+old degree-$k-1$ or degree-$k$ vertex moves one vertex into or out of class
+$k$.  Hence
+\begin{equation}\label{eq:drift}
+ \E[\Delta N_k\mid T_n]=\1_{\{k=1\}}+
+ \frac{(k-1)N_{k-1}(n)-kN_k(n)}{2(n-1)},\qquad |\Delta N_k|\leq1.
+\end{equation}
+
+\begin{theorem}[Global degree profile in $L^2$]\label{thm:profile}
+For every fixed $k\geq1$,
+\[
+ \frac{N_k(n)}n\longrightarrow p_k=\frac4{k(k+1)(k+2)}
+ \quad\hbox{in }L^2.
+\]
+Furthermore $\sum_{k\geq1}p_k=1$ and $\sum_{k\geq1}kp_k=2$.
+\end{theorem}
+\begin{proof}
+The equilibrium equation from~\eqref{eq:drift} is
+$p_k=\1_{\{k=1\}}+[(k-1)p_{k-1}-kp_k]/2$.  It gives $p_1=2/3$ and
+$p_k=(k-1)p_{k-1}/(k+2)$, hence the displayed formula.
+
+For the $L^2$ assertion, define
+$\xi_{k,n+1}=\Delta N_k-\E[\Delta N_k\mid T_n]$ and
+$U_{k,n}=N_k(n)-np_k$.  Then $\E(\xi_{k,n+1}\mid T_n)=0$,
+$|\xi_{k,n+1}|\leq2$, and
+\begin{equation}\label{eq:U}
+ U_{k,n+1}=a_nU_{k,n}+b_nU_{k-1,n}+r_n+\xi_{k,n+1},
+\end{equation}
+where $a_n=1-k/[2(n-1)]$, $b_n=(k-1)/[2(n-1)]$, and
+$r_n=(p_k-\1_{\{k=1\}})/(n-1)$.
+
+We prove $\E U_{k,n}^2=O_k(n)$ by induction on $k$, beginning at a finite
+$n_0(k)$; earlier times enter the constant.  After conditioning and squaring
+\eqref{eq:U}, all cross terms with $\xi$ vanish and its variance is at most
+four.  Fix $0<\eta<k/2$.  Young's inequality gives
+\[
+ 2|a_nU_{k,n}(b_nU_{k-1,n}+r_n)|
+ \leq \frac{\eta}{n}U_{k,n}^2+\frac{n}{\eta}
+       (b_nU_{k-1,n}+r_n)^2.
+\]
+For $k=1$ the $b_n$ term is absent.  At the induction step,
+$\E U_{k-1,n}^2\leq C_{k-1}n$ implies
+\[
+ \E(b_nU_{k-1,n}+r_n)^2
+ \leq2b_n^2C_{k-1}n+2r_n^2=O_k(n^{-1}).
+\]
+Because $a_n^2=1-k/n+O_k(n^{-2})$, enlarge $n_0(k)$ so that
+$a_n^2+\eta/n\leq1-c_k/n$ for some $c_k>0$.  Thus
+$\E U_{k,n+1}^2\leq(1-c_k/n)\E U_{k,n}^2+C_k$.
+An induction on $n$ yields $\E U_{k,n}^2\leq C'_kn$, and division by $n^2$
+proves the claim.  Finally the two sums follow from the telescoping identities
+\[
+ \sum_{k=1}^Kp_k=1-\frac2{(K+1)(K+2)},\qquad
+ \sum_{k=1}^Kkp_k=2-\frac4{K+2}.
+\]
+\end{proof}
+
+Theorems~\ref{thm:local-limit} and~\ref{thm:profile} expose two distinct
+scales: each fixed old vertex is a square-root hub, while the empirical
+degree population has a normalized cubic-tail profile.  This paper makes no
+claim about the maximum degree, joint hub laws, $m>1$, or uniformity as $k$
+grows with $n$.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact evidence and Route-A boundary}
+Exact rational dynamic programming records every labeled degree-vector law
+for $2\leq n\leq9$, 352 fixed-vertex factorial cells, 36 degree-population
+moment cells, and the terminal distribution.  A producer-independent program
+enumerates all $8!=40{,}320$ weighted parent histories and reconstructs every
+receipt.  Separate symbolic, replay, strict-parser, repaired-hash mutation,
+and optimized-mode gates close the audit.  This finite computation is
+regression evidence, not a proof of the limits above.
+
+The nearest repository models are a P\'olya urn, a fixed-size uniform random
+mapping, and independent-edge Erd\H{o}s--R\'enyi connectivity.  None owns this
+sequential degree-biased labeled-tree process.  No literature-priority claim
+is made.
+
+The Route-A tuple is
+$(A0,A1,A2,A3,A4)=(\mathrm{FAIL},\mathrm{FAIL},\mathrm{FAIL},
+\mathrm{FAIL},\mathrm{FAIL})$: there is no rational-prime carrier,
+deterministic primitive-orbit ledger, zeta/divisor bridge, target functional
+equation, or natural unitary/scattering/Hamiltonian lift.  The verdict is
+\texttt{ROUTE\_A\_REJECTED}, and Route B is locked.  Under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, we assert no target arithmetic
+local data, Euler factor, root number, automorphy, target divisor, functional
+equation, zero match, or Hilbert--P\'olya operator.
+\fi
+
+\ifcase\CRevisionRound
+\section*{Revision certificate: convention and exact factorial law}
+This original round freezes the one-edge model and proves every finite-time
+rising-factorial identity.
+\or
+\section*{Revision certificate: both microscopic and macroscopic limits}
+This round adds the square-root martingale limit, Carleman determinacy, and
+the global $L^2$ degree profile with its explicit second-moment induction.
+\else
+\section*{Revision certificate: independent evidence and scope closure}
+This final round adds weighted-history reconstruction, source and collision
+audits, hostile gates, and the complete Route-A firewall.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{ba} A.-L.~Barab\'asi and R.~Albert, ``Emergence of scaling in random
+networks,'' \emph{Science} 286 (1999), DOI: 10.1126/science.286.5439.509.
+\bibitem{bollobas} B.~Bollob\'as, O.~Riordan, J.~Spencer, and G.~Tusn\'ady,
+``The degree sequence of a scale-free random graph process,'' \emph{Random
+Structures Algorithms} 18 (2001), DOI: 10.1002/rsa.1009.
+\bibitem{backhausz} \'A.~Backhausz, ``Limit distribution of degrees in random
+family trees,'' \emph{Electron. Commun. Probab.} 16 (2011),
+DOI: 10.1214/ECP.v16-1598.
+\end{thebibliography}
+\end{document}

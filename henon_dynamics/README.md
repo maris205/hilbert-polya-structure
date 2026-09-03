@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C319--C323
+
+This round makes five independent theorem-scale advances while changing the
+state space, clock, and proof mechanism in every paper: an extrinsic
+geometric flow, a modular integrable polynomial flow, a growing random tree,
+a continuous-state kinetic collision process, and a finite oracle
+Hamiltonian.  These are five complete papers, not five installments of one
+theorem.
+
+- [C319 spherical Clifford-product mean-curvature flow](henon_clifford_product_mean_curvature_flow_route_a/README.md) · [paper PDF](henon_clifford_product_mean_curvature_flow_route_a/paper/main.pdf)
+- [C320 Darboux--Halphen modular dynamics](henon_darboux_halphen_modular_dynamics_route_a/README.md) · [paper PDF](henon_darboux_halphen_modular_dynamics_route_a/paper/main.pdf)
+- [C321 preferential-attachment degree martingales](henon_preferential_attachment_degree_martingale_route_a/README.md) · [paper PDF](henon_preferential_attachment_degree_martingale_route_a/paper/main.pdf)
+- [C322 Kac master-equation spectral gap](henon_kac_master_equation_spectral_gap_route_a/README.md) · [paper PDF](henon_kac_master_equation_spectral_gap_route_a/paper/main.pdf)
+- [C323 complete-graph quantum-search detuning](henon_complete_graph_quantum_search_detuning_route_a/README.md) · [paper PDF](henon_complete_graph_quantum_search_detuning_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C319_C323.md),
+[batch plan](BATCH_PLAN_C319_C323.md), and
+[batch review](BATCH_REVIEW_C319_C323.md) for collision screening, theorem
+contracts, historical ownership, exact release receipts, the repaired
+whole-spectrum projection argument in C322, and deterministic PDFs.  Across
+the five packages the final audit closes **114,735** independent-checker
+assertions, **19,543** exact symbolic identities, **228/228** hostile
+rejections, **5,112,737** evidence bytes, 135 manifest payloads (140 physical
+files), and **15** final-paper pages with **102** embedded/subset font
+records.  The five strict tuples, in order C319--C323, are
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`, and
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`.
+All five remain `ROUTE_A_REJECTED`, with
+`route_b_invocation_allowed: false` and literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is claimed.
+
 ## Route-A independent cross-subtype round C314--C318
 
 This round makes five independent theorem-scale advances while changing the

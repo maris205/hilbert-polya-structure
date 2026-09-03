@@ -3,6 +3,32 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C319--HCS-C323 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`1ccbfe2d759fe007c6b53c9646e1ab031878b34a`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C319 | The spherical Clifford-product family has the exact scalar mean-curvature flow `y'=2((p+q)y-q)`, a complete ancient/focal-collapse phase portrait with both Type-I cylinder limits and area dissipation, and a fully diagonalized minimal-product Jacobi operator of index `p+q+3` and nullity `(p+1)(q+1)`. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Clifford-product MCF package](../henon_clifford_product_mean_curvature_flow_route_a/) · [paper PDF](../henon_clifford_product_mean_curvature_flow_route_a/paper/main.pdf) |
+| HCS-C320 | The convention-locked Darboux--Halphen flow has an exact theta/q-series solution and `E2` bridge, affine weight-two modular covariance, Chazy and discriminant laws, and a complete pair-collision atlas including all coordinate-axis equilibria and cusp/pole boundaries. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_PARTIAL_ANALYTIC_STRUCTURE,A4_FAIL)` | [Darboux--Halphen package](../henon_darboux_halphen_modular_dynamics_route_a/) · [paper PDF](../henon_darboux_halphen_modular_dynamics_route_a/paper/main.pdf) |
+| HCS-C321 | Linear preferential attachment from one initial edge has exact all-order fixed-vertex rising moments, normalized almost-sure and all-finite-moment `sqrt(n)` limits with a determinate moment law, and `L2` empirical degree frequencies `4/[k(k+1)(k+2)]` for every fixed degree. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [preferential-attachment package](../henon_preferential_attachment_degree_martingale_route_a/) · [paper PDF](../henon_preferential_attachment_degree_martingale_route_a/paper/main.pdf) |
+| HCS-C322 | The uniformly averaged Kac collision process on the energy sphere has the exact gap `(N+2)/[2(N-1)]` for `N(I-Q_N)`, a one-dimensional centered-quartic slow space for `N>=3`, sharp `L2` relaxation, and complete two-particle and zero/positive-energy boundaries. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Kac master-equation package](../henon_kac_master_equation_spectral_gap_route_a/) · [paper PDF](../henon_kac_master_equation_spectral_gap_route_a/paper/main.pdf) |
+| HCS-C323 | Complete-graph continuous-time quantum search has a full marked/unmarked bright--dark spectral decomposition, an exact success law, perfect search exactly at resonance, a sharp off-resonance maximum and square-root detuning window, adjacency-driver phase equivalence, and all marking/coupling faces. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [complete-graph quantum-search package](../henon_complete_graph_quantum_search_detuning_route_a/) · [paper PDF](../henon_complete_graph_quantum_search_detuning_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and Route B is false.  Their
+owners are respectively an extrinsic geometric flow, a modular polynomial
+flow, a growing random tree, a continuous-state kinetic Markov process, and
+an oracle Hamiltonian.  No target local datum, Euler factor, root number,
+automorphy object, target divisor/counting law or functional equation,
+target zero match, Hilbert--Pólya operator, or Route-B input is introduced.
+Scope is `NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting
+are recorded in [BATCH_REVIEW_C319_C323.md](../BATCH_REVIEW_C319_C323.md).
+
 ## HCS-C314--HCS-C318 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

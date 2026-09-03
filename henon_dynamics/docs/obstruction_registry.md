@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C319--HCS-C323 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O303 | HCS-C319 Clifford-product levels and Jacobi modes as arithmetic orbit/spectral owners | proved gradient-flow and continuous-family obstruction | Nonminimal Clifford products move strictly down area and collapse at a focal submanifold, while the unique minimal member is stationary.  The discrete dimension pair, continuously chosen initial latitude, physical flow time, and source Jacobi spectrum provide no rational-prime carrier, logarithmic-prime roof, primitive-orbit determinant, target divisor, or target spectral realization. | The exact invariant scalar flow, all ancient branches and lifespans, Type-I cylinder limits, area law, and minimal-product index/nullity survive for every `p,q>=1`. | ../henon_clifford_product_mean_curvature_flow_route_a/THEOREM_PACKAGE.md |
+| HEN-O304 | HCS-C320 modular coefficients and Chazy dynamics as arithmetic prime-orbit data | proved native-quasimodular and complex-time obstruction | The theta and `E2` divisor sums are genuine source arithmetic, but their Fourier index is not an isolated primitive-orbit owner and complex modular time is not a logarithmic rational-prime roof.  Modular covariance and Chazy reduction supply no target Euler product, target divisor, or self-adjoint spectral lift. | The theta solution, exact q-series bridge, `PSL(2,C)` covariance, Chazy/discriminant identities, collision strata, axes and cusp/pole boundaries survive in the frozen sign/nome convention. | ../henon_darboux_halphen_modular_dynamics_route_a/THEOREM_PACKAGE.md |
+| HEN-O305 | HCS-C321 attachment degrees and cubic tail as a deterministic arithmetic orbit ledger | proved stochastic-growth and discrete-clock obstruction | Vertex degrees and empirical counts are observables of a nonexchangeable stochastic growing tree, not isolated periodic trajectories.  Birth labels, attachment probabilities and unit growth time furnish neither canonical rational-prime ownership, a logarithmic-prime suspension, target local factors, nor a target divisor. | The all-order fixed-vertex moment martingales and determinate `sqrt(n)` limits, together with every fixed-degree `L2` frequency and its cubic tail, survive under the initial-edge convention. | ../henon_preferential_attachment_degree_martingale_route_a/THEOREM_PACKAGE.md |
+| HEN-O306 | HCS-C322 Kac relaxation spectrum as an arithmetic orbit determinant | proved collision-semigroup and source-gap obstruction | The uniform pair/angle average is a reversible continuous-state Markov collision operator; its gap and polynomial modes are source relaxation data, not prime-labelled isolated cycles.  Particle number, angular averaging and physical collision time create no logarithmic-prime clock, orbit zeta, target determinant, or target divisor. | Self-adjoint Markov structure, the exact all-`N` gap induction, centered-quartic equality mode and multiplicity, sharp semigroup decay, and every energy boundary survive. | ../henon_kac_master_equation_spectral_gap_route_a/THEOREM_PACKAGE.md |
+| HEN-O307 | HCS-C323 search Hamiltonian spectrum as a target zero realization | proved finite-source and oracle-selection obstruction | The marked set is externally chosen and the bright/dark eigenvalues vary continuously with the coupling and marked fraction.  This natural finite source quantization has neither rational-prime classical owners nor a target divisor/zero match, and therefore is not a Hilbert--Pólya operator. | The complete spectrum, exact success probability, resonance iff theorem, detuning window, graph-driver phase, and empty/full/zero-coupling boundaries survive. | ../henon_complete_graph_quantum_search_detuning_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under exchange of the Clifford factors,
+the frozen Darboux--Halphen modular covariance, relabeling of the attachment
+tree, orthogonal coordinate permutations/positive energy scaling of the Kac
+sphere, and marked/unmarked basis permutations plus scalar graph phases in
+quantum search.  They do not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C314--HCS-C318 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
