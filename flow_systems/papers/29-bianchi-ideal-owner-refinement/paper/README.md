@@ -1,10 +1,15 @@
 # P29 manuscript package
 
-Current state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION**.
-Stage 2.5 passed, Stage-3 entry is authorized, and the frozen review baseline
-plus four dynamic reviewer cards are complete. No Phase-1/Phase-2 review,
-editorial decision, manuscript revision, scientific execution, or Route
-advancement has occurred.
+Package note: this directory is the immutable canonical Stage-2.5 manuscript
+package; its Phase-0 wording below is historical. The authoritative current
+state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md).
+Control state: `stage3_prime_round1_aborted_awaiting_round2_authorization`.
+**Stage 3′ Round 1 aborted fail-closed at `phase2a_lint_failed`; no decision was
+issued.** Recorded 7/4/0 became audit-supported 6/5/0 because `REV-EIC-1` is
+false FULL; the mechanical B4 direction was suppressed. The semantic passes
+were fresh-context, role-separated, and same-family; they were not independent
+error processes. Only a new user `确认` may authorize fresh Round 2. Canonical
+manuscript/PDF/bibliography bytes remain unchanged.
 
 ## Deliverables
 
@@ -23,4 +28,4 @@ advancement has occurred.
 
 The complete article separates performance-independent mechanism admissibility (Gate M) from exact primitive-unoriented quotient completeness (Gate Q) under a deliberately strict literal Gaussian-prime-ideal codomain. Both gates remain open; no owner law, quotient, or S_H score is reported.
 
-Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. Stage-2.5 integrity passed; Stage-3 Phase 0 changes no scientific result or Route coordinate. The next legal transition is scholar confirmation of the reviewer configuration.
+Route A / A1 preparation; formal tuple UNASSIGNED; positive arithmetic A2 absent; Route B closed. Stage-2.5 integrity passed; no later review stage changed a scientific result or Route coordinate. The only legal next action is a new user `确认` authorizing a new-id/new-manifest/fresh-context Stage 3′ Round 2.

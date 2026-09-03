@@ -2,12 +2,19 @@
 
 ## Current status
 
-**ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME.**
+**Controlling state: `stage3_prime_round1_aborted_awaiting_round2_authorization`.**
 
-13/13 items; 13 operations; 8 RESOLVED + 5 DELIBERATE_LIMITATION; 12/126 affected E1; +1,400 words; 17-page clean preview. The final bounded semantic audit and clean preview pass.
+Stage 3′ Round 1 failed closed at the mandatory Phase-1 criterion lint with
+`phase1_lint_failed`; no decision was signed or emitted. Recorded and
+audited aggregates agree at 6 FULL / 7 PARTIAL / 0 NOT, and all 13 recorded
+verdicts have semantic support. A dedicated manuscript/verdict/outcome-blind
+criterion audit nevertheless confirms Phase-1 drift in seven rows:
+`REV-P33-001`, `REV-P33-003`, `REV-P33-004`, `REV-P33-006`, `REV-P33-007`,
+`REV-P33-009`, and `REV-P33-012`. B4 is only a mechanically computed candidate
+and is suppressed by the failed gate. The fresh-context semantic checks were
+role-separated but same-family; they are not independent error processes.
 Canonical manuscript, bibliography, PDF, scientific results, initial dynamical
-system, and Route coordinates remain frozen. Stage 3 prime and Stage 4.5 have
-not started.
+system, and Route coordinates remain frozen.
 
 ## Current paper and revision package
 
@@ -33,6 +40,7 @@ not started.
 - [Response to reviewers](notes/stage4_response_to_reviewers_round1.md)
 - [Revision-Evidence Bundle](notes/stage4_revision_evidence_bundle.json) and [bundle validation](notes/stage4_bundle_validation_receipt.json)
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
+- [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 结论概要
@@ -66,17 +74,26 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `ROUTE_B_INVOCATION=false`, `STAGE2_5_INTEGRITY=PASS`,
 `STAGE3_ENTRY_AUTHORIZED=true`, `STAGE3_REVIEW_OUTPUTS=COMPLETE`,
 `STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, `STAGE4_AUTHORIZED=true`,
-`STAGE4_COMPLETE=true`, and `STAGE3_PRIME_STARTED=false`.
+`STAGE4_COMPLETE=true`, `STAGE3_PRIME_ROUND1=ABORTED_PHASE1_LINT_FAILED`,
+`STAGE3_PRIME_DECISION_EMITTED=false`, and
+`STAGE3_PRIME_ROUND2_AUTHORIZED=false`.
 
 ## Traceability
 
-### Current Stage-4 bindings
+### Frozen Stage-4 baseline
 
 - [Per-paper completion report](notes/stage4_completion_report.md): SHA-256 `803f72540e4fe9cc1929bc2d181e508146a21283fb1f8c98921d69ecfee68ffe`
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md): SHA-256 `6eaad8566986e8ad62bd88f320c58585874c7c3d05090a03f38fefe0c547017c`
 - [Route crosswalk](notes/stage4_route_crosswalk.md): SHA-256 `0434982b38bf658bfd808469671431f089140850ceb2c01875539ef997f942cf`
 - [Batch Stage-4 report](../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md): SHA-256 `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a`
 - [Batch Stage-4 receipt](../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json): SHA-256 `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd`
+
+### Current Stage-3′ Round-1 outcome
+
+- [Verification report](notes/stage3_prime_round1_verification_report.md): SHA-256 `b751ae39f142310e37c76bd80db1f11db6e5963c15f8e5a5cfdda47aa9659128`
+- [Checker/semantic receipt](notes/stage3_prime_round1_checker_receipt.json): SHA-256 `2cf5c82cdeebc5c0c2f93f5a138b39414a40161a968b9b7db666a5e8461458b4`
+- [Fail-closed abort record](notes/stage3_prime_round1_abort_record.json): SHA-256 `765174c153843e14af50af25da8b10a1bdd3839618aa1f30a14a3894fa00725b`
+- [Batch outcome report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)
 
 - Stage-1 handoff: `BATCH_ROUND10_STAGE1_HANDOFF_TO_STAGE2.md`
 - Stage-2 input freeze: `BATCH_ROUND10_STAGE2_INPUT_FREEZE.json`
@@ -89,7 +106,9 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 
 All detailed Stage-1 research, source, review, and revision artifacts remain
 frozen in `notes/`; they were not replaced by this current-status summary.
-A schema-compatible Stage-4 Revision-Evidence Bundle now exists, but official
-Stage-4.5 E6 has not been invoked. The bounded Stage-4 semantic audit is not an
-official E6 verdict. The next legal transition is scholar confirmation before
-Stage 3 prime; Stage 4.5 and Stage 5 remain unstarted and unauthorized.
+A schema-compatible Stage-4 Revision-Evidence Bundle exists, but official
+Stage-4.5 E6 has not been invoked. The only next legal action is a new user
+`确认` authorizing Stage 3′ Round 2 with a new round id, new manifest, and fresh
+contexts; Round 1 remains immutable. Stage 4′, Stage 4.5, Stage 5, canonical
+promotion, submission, Route advancement, result refresh, and new scientific
+execution remain unauthorized.

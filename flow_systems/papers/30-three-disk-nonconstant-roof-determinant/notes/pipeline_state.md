@@ -2,11 +2,11 @@
 
 Synchronized: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME**.
+Current controlling state: **ARS STAGE 3′ ROUND 1 ABORTED — `phase1_lint_failed` / AWAITING ROUND-2 AUTHORIZATION**.
 
 | State field | Value |
 |---|---|
-| Pipeline global state | `stage4_complete_awaiting_scholar_confirmation_before_stage3_prime` |
+| Pipeline global state | `stage3_prime_round1_aborted_awaiting_round2_authorization` |
 | ARS Stage 1 | `COMPLETE` |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | ARS Stage 2.5 INTEGRITY | `COMPLETE`; verdict `PASS` |
@@ -17,8 +17,10 @@ Current controlling state: **ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITIN
 | Stage 3 final validation | `PASS`; `../../../BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json`; SHA-256 `808d0a89b27bf538b9a8134225e824d1d17952e4ed5df86d4ed7fe1b5f694c7b` |
 | Stage 4 | `COMPLETE WITHIN EXACT AUTHORIZATION`; 9/9 items; 21 operations; 7 RESOLVED + 2 DELIBERATE_LIMITATION; 21/95 affected E1; +635 words; 15-page clean preview |
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
-| Next legal transition | `AWAITING_SCHOLAR_CONFIRMATION_BEFORE_STAGE3_PRIME`; Stage 3 prime, Stage 4.5, and Stage 5 not started |
-| Active integrity findings | `[]` (`0`) |
+| Stage 3′ Round 1 | `ABORTED / phase1_lint_failed` fail-closed; official checker/apply chain `PASS`; recorded and audit-supported aggregates both 4/5/0; Phase-1 criterion-inheritance drift in 2 rows; mechanical B4 (Major Revision candidate) suppressed; no decision issued |
+| Semantic-audit provenance | fresh-context; role-separated; same-family; not independent error processes |
+| Next legal action | only a new user `确认` authorizing fresh Stage 3′ Round 2 with a new round id, new manifest, fresh Phase-1/2A contexts, and all Round-1 artifacts preserved |
+| Active Stage-3′ findings | `REV-EIC-W4`: recorded PARTIAL, audit-supported FULL (false PARTIAL); `REV-R3-W1-DA-N1`: recorded FULL, audit-supported PARTIAL/must-fix (false FULL) |
 
 ## Canonical package
 
@@ -94,7 +96,7 @@ correctness, scientific execution, semantic-extraction completeness, global
 novelty, or route promotion, and it does not remove the mandatory scholar
 checkpoint.
 
-## Current Stage-4 completion bindings
+## Frozen Stage-4 completion bindings
 
 | Artifact | SHA-256 |
 |---|---|
@@ -105,7 +107,18 @@ checkpoint.
 | [Batch completion report](../../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md) | `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a` |
 | [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json) | `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd` |
 
+## Current Stage-3′ Round-1 bindings
+
+| Artifact | SHA-256 |
+|---|---|
+| [Verification report](stage3_prime_round1_verification_report.md) | `f7f7956dc8c484ae707ce0c48dee2b4bf6a158d5e286c9873fae6fce208db5e8` |
+| [Checker/semantic receipt](stage3_prime_round1_checker_receipt.json) | `960bc02225aa6d0e3215ef99e1e9a27179b453783d20f8472d053468fbfcfe9e` |
+| [Abort record](stage3_prime_round1_abort_record.json) | `b5692f11d24224b0c17ddad6a467a3ddcd7689cdf6a88a25184f1a3c0b061a0d` |
+| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `16799921ba4222fca534adf9c56b242879b012576bb72bac9ba95c025cdd8fbf` |
+| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `2d315dae3f051956698958fab9ea95b0024ec7e78d78c8abd9e4a3ead4377ba2` |
+
 The ClaimIntent replay is `0/0` vacuous and not a clean certificate. Completion
 rests on the bounded changed-operation/E1 semantic audit. `A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`; formal tuple `UNASSIGNED`; Route B uninvoked.
-Canonical bytes and scientific trees are unchanged. Stage 3 prime has not
-started.
+Canonical bytes and scientific trees are unchanged. Round 1 is immutable and
+failed closed. Stage 4.5, Stage 5, canonical promotion, submission, Route
+advancement, result refresh, and new scientific execution remain unauthorized.

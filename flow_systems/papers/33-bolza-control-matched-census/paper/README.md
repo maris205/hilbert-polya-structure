@@ -1,9 +1,12 @@
 # P33 manuscript package
 
-Current state: **ARS STAGE 3 PHASE 0 COMPLETE / AWAITING REVIEWER-CONFIGURATION CONFIRMATION**.
-The scholar authorized Stage-3 entry after Stage-2.5 PASS. The frozen review
-baseline plus four dynamic reviewer cards are complete, but no Phase-1/Phase-2
-review or editorial decision has been dispatched.
+Package note: this directory is the immutable canonical Stage-2.5 manuscript
+package; its Phase-0 wording below is historical. The authoritative current
+state is [the paper README](../README.md) and [pipeline state](../notes/pipeline_state.md):
+**`stage3_prime_round1_aborted_awaiting_round2_authorization`.** Stage 3′ Round
+1 failed closed at `phase1_lint_failed`; no decision was signed or emitted, and
+fresh Round 2 awaits a new user `确认`. Canonical manuscript/PDF/bibliography
+bytes remain unchanged.
 
 ## Deliverables
 
@@ -13,6 +16,23 @@ review or editorial decision has been dispatched.
 - [`stage2_manuscript_audit.md`](stage2_manuscript_audit.md) -- hash, structure, citation, boundary, and build audit.
 - [`stage2_5_integrity_report.md`](../notes/stage2_5_integrity_report.md) and [`stage2_5_material_passport.json`](../notes/stage2_5_material_passport.json) -- final per-paper Stage-2.5 report and Schema-9 passport.
 - [`stage3_phase0_field_analysis.md`](../notes/stage3_phase0_field_analysis.md) and [`stage3_review_baseline.json`](../notes/stage3_review_baseline.json) -- current Stage-3 Phase-0 configuration and immutable target.
+
+## Stage 3′ Round-1 controlling outcome
+
+Recorded and audited aggregates agree at 6 FULL / 7 PARTIAL / 0 NOT, with all
+13 recorded verdicts supported. A dedicated manuscript/verdict/outcome-blind
+criterion audit nevertheless confirms Phase-1 drift in `REV-P33-001`,
+`REV-P33-003`, `REV-P33-004`, `REV-P33-006`, `REV-P33-007`, `REV-P33-009`, and
+`REV-P33-012`. The mandatory gate therefore aborted with
+`phase1_lint_failed`; B4 is only a suppressed mechanical candidate and no
+decision exists. The fresh-context semantic checks were role-separated but
+same-family and are not independent error processes.
+
+| Artifact | SHA-256 |
+|---|---|
+| [`stage3_prime_round1_verification_report.md`](../notes/stage3_prime_round1_verification_report.md) | `b751ae39f142310e37c76bd80db1f11db6e5963c15f8e5a5cfdda47aa9659128` |
+| [`stage3_prime_round1_checker_receipt.json`](../notes/stage3_prime_round1_checker_receipt.json) | `2cf5c82cdeebc5c0c2f93f5a138b39414a40161a968b9b7db666a5e8461458b4` |
+| [`stage3_prime_round1_abort_record.json`](../notes/stage3_prime_round1_abort_record.json) | `765174c153843e14af50af25da8b10a1bdd3839618aa1f30a14a3894fa00725b` |
 
 ## Stage 2.5 integrity result
 
@@ -34,7 +54,7 @@ P33-S06 remains bounded `PLAUSIBLE`, page-unpinned, and background-/context-only
 
 ## Route position and next gate
 
-Route A remains at the A0/A1 foundation/interface position only: P33 formal A0 is prohibited/confounded, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. Stage-3 Phase 0 authorizes no scientific execution, canonical-result refresh, Route promotion, or manuscript revision. The next legal transition is explicit scholar confirmation of the reviewer configuration.
+Route A remains at the A0/A1 foundation/interface position only: P33 formal A0 is prohibited/confounded, the formal tuple is `UNASSIGNED`, positive arithmetic A2 is absent, A3/A4 were not run, and Route B is closed with zero invocation. No later review stage authorizes scientific execution, canonical-result refresh, or Route promotion. The only next legal action is a new user `确认` authorizing a new-id/new-manifest/fresh-context Stage 3′ Round 2.
 
 ## Batch traceability
 

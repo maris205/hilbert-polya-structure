@@ -2,11 +2,11 @@
 
 Date: **2026-09-03 (UTC+08:00)**
 
-Current controlling state: **ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME**.
+Current controlling state: **`stage3_prime_round1_aborted_awaiting_round2_authorization`**.
 
 | Item | Status |
 |---|---|
-| Pipeline global state | `stage4_complete_awaiting_scholar_confirmation_before_stage3_prime` |
+| Pipeline global state | `stage3_prime_round1_aborted_awaiting_round2_authorization` |
 | ARS Stage 1 | `COMPLETE`; Phase-6 checkpoint and Stage-2 handoff frozen |
 | ARS Stage 2 WRITE | `COMPLETE` |
 | Stage-2 authorization | `CONFIRMED`; `BATCH_ROUND10_STAGE2_AUTHORIZATION_20260902.txt` |
@@ -40,7 +40,9 @@ Current controlling state: **ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITIN
 | Stage 3 final validation | `PASS`; `../../../BATCH_ROUND10_STAGE3_VALIDATION_RECEIPT.json`; SHA-256 `808d0a89b27bf538b9a8134225e824d1d17952e4ed5df86d4ed7fe1b5f694c7b` |
 | Stage 4 | `COMPLETE WITHIN EXACT AUTHORIZATION`; 13/13 items; 13 operations; 8 RESOLVED + 5 DELIBERATE_LIMITATION; 12/126 affected E1; +1,400 words; 17-page clean preview |
 | Stage-4 write boundary | only versioned `notes/` revision artifacts changed; canonical manuscript/bibliography/PDF and science trees unchanged; Route advancement `NONE` |
-| Next legal transition | `AWAITING_SCHOLAR_CONFIRMATION_BEFORE_STAGE3_PRIME`; Stage 3 prime, Stage 4.5, and Stage 5 not started |
+| Stage 3′ Round 1 | `ABORTED / phase1_lint_failed`; failed closed at mandatory Phase-1 criterion lint; recorded and audited aggregates both 6/7/0 and all 13 verdicts are supported; a manuscript/verdict/outcome-blind criterion audit confirms Phase-1 drift in `REV-P33-001`, `REV-P33-003`, `REV-P33-004`, `REV-P33-006`, `REV-P33-007`, `REV-P33-009`, and `REV-P33-012`; mechanical B4 candidate suppressed; no decision signed or emitted |
+| Semantic calibration boundary | Fresh-context and role-separated, but same-family; the semantic passes are not independent error processes |
+| Next legal transition | only a new user `确认` authorizing fresh Stage 3′ Round 2 with a new round id, new manifest, fresh Phase-1/2A contexts, and all Round-1 artifacts preserved |
 | Stage-2 output manifest | SHA-256 `b023d9b91e18580bc9921be56c1ab0fb0c6723575305baae1a7f330eb1907bfa` |
 
 ## Stage-2.5 traceability
@@ -61,7 +63,7 @@ the frozen canonical package. It does not certify theorem correctness,
 passage-level support, global originality, scientific implementation, or Route
 promotion, and it does not itself authorize Stage 3.
 
-## Current Stage-4 completion bindings
+## Frozen Stage-4 completion bindings
 
 | Artifact | SHA-256 |
 |---|---|
@@ -72,7 +74,20 @@ promotion, and it does not itself authorize Stage 3.
 | [Batch completion report](../../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md) | `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a` |
 | [Batch completion receipt](../../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json) | `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd` |
 
-The ClaimIntent replay is `0/0` vacuous and not a clean certificate. Completion
-rests on the bounded changed-operation/E1 semantic audit. Route A A1 preparation with formal A0 prohibited/confounded; formal tuple `UNASSIGNED`; Route B uninvoked.
-Canonical bytes and scientific trees are unchanged. Stage 3 prime has not
-started.
+## Current Stage-3′ Round-1 bindings
+
+| Artifact | SHA-256 |
+|---|---|
+| [Verification report](stage3_prime_round1_verification_report.md) | `b751ae39f142310e37c76bd80db1f11db6e5963c15f8e5a5cfdda47aa9659128` |
+| [Checker/semantic receipt](stage3_prime_round1_checker_receipt.json) | `2cf5c82cdeebc5c0c2f93f5a138b39414a40161a968b9b7db666a5e8461458b4` |
+| [Abort record](stage3_prime_round1_abort_record.json) | `765174c153843e14af50af25da8b10a1bdd3839618aa1f30a14a3894fa00725b` |
+| [Batch outcome report](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) | `16799921ba4222fca534adf9c56b242879b012576bb72bac9ba95c025cdd8fbf` |
+| [Batch outcome receipt](../../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_RECEIPT.json) | `2d315dae3f051956698958fab9ea95b0024ec7e78d78c8abd9e4a3ead4377ba2` |
+
+The ClaimIntent replay is `0/0` vacuous and not a clean certificate. The
+recorded/audited 6/7/0 agreement does not override the mandatory Phase-1 lint.
+Route A A1 preparation with formal A0 prohibited/confounded; formal tuple
+`UNASSIGNED`; Route B uninvoked. Canonical bytes and scientific trees are
+unchanged. Only a new user `确认` may authorize fresh Round 2; Stage 4′, Stage
+4.5, Stage 5, canonical promotion, submission, Route advancement, result
+refresh, and new scientific execution remain unauthorized.

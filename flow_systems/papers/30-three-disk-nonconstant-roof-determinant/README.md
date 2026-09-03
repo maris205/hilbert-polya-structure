@@ -2,12 +2,18 @@
 
 ## Current status
 
-**ARS STAGE 4 AUTHOR-SIDE REVISION COMPLETE / AWAITING SCHOLAR CONFIRMATION BEFORE STAGE 3 PRIME.**
+**ARS STAGE 3′ ROUND 1 ABORTED FAIL-CLOSED — `phase1_lint_failed` / AWAITING A NEW USER `确认` FOR FRESH ROUND 2.**
 
-9/9 items; 21 operations; 7 RESOLVED + 2 DELIBERATE_LIMITATION; 21/95 affected E1; +635 words; 15-page clean preview. The final bounded semantic audit and clean preview pass.
-Canonical manuscript, bibliography, PDF, scientific results, initial dynamical
-system, and Route coordinates remain frozen. Stage 3 prime and Stage 4.5 have
-not started.
+Control state: `stage3_prime_round1_aborted_awaiting_round2_authorization`.
+The official checker and apply chain passed mechanically. The semantic passes
+were fresh-context, role-separated, and same-family; they were not independent
+error processes. Phase 1 has criterion-inheritance drift in 2 rows. Phase 2A
+recorded `REV-EIC-W4` PARTIAL although it is audit-supported FULL (false
+PARTIAL), and recorded `REV-R3-W1-DA-N1` FULL although it is audit-supported
+PARTIAL (false FULL). The opposite errors leave both recorded and audited
+aggregate counts at 4 FULL / 5 PARTIAL / 0 NOT. The mechanical B4 direction
+(Major Revision candidate) is suppressed, and no decision was issued. Canonical
+and Route surfaces remain frozen.
 
 ## Current paper package
 
@@ -33,6 +39,7 @@ not started.
 - [Response to reviewers](notes/stage4_response_to_reviewers_round1.md)
 - [Revision-Evidence Bundle](notes/stage4_revision_evidence_bundle.json) and [bundle validation](notes/stage4_bundle_validation_receipt.json)
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md) and [Route crosswalk](notes/stage4_route_crosswalk.md)
+- [Stage-3′ Round-1 verification report](notes/stage3_prime_round1_verification_report.md), [checker receipt](notes/stage3_prime_round1_checker_receipt.json), and [abort record](notes/stage3_prime_round1_abort_record.json)
 - [Pipeline state](notes/pipeline_state.md)
 
 ## 明确科学进展与边界
@@ -87,7 +94,8 @@ global originality, priority, or scientific-novelty certificate.
 - Official ARS E6: a schema-compatible Revision-Evidence Bundle now exists at SHA-256 `e6ff8927bd88d3d6c08c74f366c84f7704f84bbb67b5a9f178a12ee7a62f31e2`, but Stage-4.5 E6 has **not** been invoked. The Stage-4 bounded semantic PASS is not an official E6 verdict.
 - Frozen dynamical subtype: no-eclipse equilateral three-disk flow at \(d=6a\); Euclidean free-flight clock; primitive cyclic collision-word owner; physical roof distinct from the unit-roof control.
 - Route position: `A0_FAIL / A2_NOT_ELIGIBLE / NO_ROUTE_PROMOTION`; formal Route-A tuples `0` (`UNASSIGNED`); positive arithmetic A2 results `0`; A3/A4 not attempted; Route B not invoked and closed.
-- Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 9/9 items; 21 operations; 7 RESOLVED + 2 DELIBERATE_LIMITATION; 21/95 affected E1; +635 words; 15-page clean preview; next checkpoint is scholar confirmation before Stage 3 prime.
+- Stage 4: `COMPLETE WITHIN EXACT AUTHORIZATION`; 9/9 items; 21 operations; 7 RESOLVED + 2 DELIBERATE_LIMITATION; 21/95 affected E1; +635 words; 15-page clean preview.
+- Stage 3′ Round 1: `ABORTED / phase1_lint_failed` fail-closed; recorded and audit-supported aggregates both 4/5/0; `REV-EIC-W4` is false PARTIAL, `REV-R3-W1-DA-N1` is false FULL, and Phase 1 has 2 drift rows; mechanical B4 (Major Revision candidate) suppressed; no decision issued. The semantic passes were fresh-context, role-separated, same-family, and not independent error processes. The only legal next action is a new user `确认` authorizing a fresh Round 2 with a new round id and manifest.
 
 The exact C4 boundary is: “This check verifies disclosure and
 claim-to-provenance fidelity. It does not judge whether the experiment was
@@ -95,13 +103,24 @@ correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
 
-### Current Stage-4 bindings
+### Frozen Stage-4 baseline
 
 - [Per-paper completion report](notes/stage4_completion_report.md): SHA-256 `2b10af7850c298bc55020279c68c9b3802802777b56fda809172a8222c95566d`
 - [Bounded semantic audit](notes/stage4_unregistered_claim_drift_audit.md): SHA-256 `4370074983c10644e5cc256076e4dba42532573eee0b8f63c08f6ef89194e42c`
 - [Route crosswalk](notes/stage4_route_crosswalk.md): SHA-256 `d1af9901e66450ca88d01419a9fe02d6606bac2f7e7e0999a14a9213bb9ce166`
 - [Batch Stage-4 report](../../BATCH_ROUND10_STAGE4_COMPLETION_REPORT.md): SHA-256 `b285a5478b08f9740926d534ad5256237ac5bd43da5059586fd3d87daced830a`
 - [Batch Stage-4 receipt](../../BATCH_ROUND10_STAGE4_COMPLETION_RECEIPT.json): SHA-256 `9628917f81d07288dbb6a255f922c397ca87cf4114df61a07fe600c02cfb97bd`
+
+### Current Stage-3′ Round-1 outcome
+
+- [Verification report](notes/stage3_prime_round1_verification_report.md): SHA-256 `f7f7956dc8c484ae707ce0c48dee2b4bf6a158d5e286c9873fae6fce208db5e8`
+- [Checker/semantic receipt](notes/stage3_prime_round1_checker_receipt.json): SHA-256 `960bc02225aa6d0e3215ef99e1e9a27179b453783d20f8472d053468fbfcfe9e`
+- [Fail-closed abort record](notes/stage3_prime_round1_abort_record.json): SHA-256 `b5692f11d24224b0c17ddad6a467a3ddcd7689cdf6a88a25184f1a3c0b061a0d`
+- [Batch outcome report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND1_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_MANDATORY_CHECKPOINT.md)
+
+Round 1 remains immutable. Stage 4.5, Stage 5, canonical promotion, submission,
+Route advancement, result refresh, and new scientific execution remain
+unauthorized.
 
 | Artifact | SHA-256 |
 |---|---|
