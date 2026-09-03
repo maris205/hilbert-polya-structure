@@ -4,29 +4,37 @@
 
 <!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
 
-**ARS STAGE 4′ ROUND-5 EXACT REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**
+**ARS STAGE 4′ ROUND-5 SUPPORT COMPLETE — SCOPE STOPPED — EXPANDED REQUEST
+READY AND AWAITING AUTHOR CONFIRMATION.**
 
-Control state: `stage4_prime_round5_exact_request_prepared_awaiting_author_confirmation`.
-The seven Round-5 residuals are now mapped to 39 item-target entries and 35
-unique hash-bound `replace_block` pairs, with seven separately bounded support
-operations. The prospective package enumerates 43 current-artifact rows,
-48 source-use rows over 20 sources, two correction records affecting five
-uses, exact valid/invalid synthetic-fixture counts, separate BP/CP coverage
-contracts, and conservative manuscript-wide conditional typing. Request
-validation passed 385 checks and its receipt rebound 9/9 artifacts.
+Control state:
+`stage4_prime_round5_support_complete_scope_stopped_expanded_request_awaiting_confirmation`.
+The originally authorized notes-side support completed, but the pre-mutation
+scope audit found that `B0041` and `B0124` would become stale. The original
+request therefore stopped fail-closed before any bibliography append, patch,
+new draft/PDF, or build. The successor request preserves all original 39
+item-target mappings over 35 unique `replace_block` pairs and all seven support
+scopes, and adds exactly `B0041/replace_block` and `B0124/replace_block`: 41
+mapped provenance pairs over 37 unique targets in total.
 
-本轮结论概要：P33 已把 6 个 must-fix 与 1 个 should-fix 从评审结论压缩为可执行
-的精确 Stage 4′ 合同。它明确区分 artifact inventory、correction bibliography、
-fixture/oracle/build provenance、serialized fixtures、producer ledgers、48 条 passage
-定位和 conditional typing。当前仍只是请求：48 条 locator、独立组件与 oracle/build
-证据尚未生成，不能被表述成 census、科学结果或 Route credit。
+本轮结论概要：43/43 个 commit-pinned artifact 字节与哈希完全匹配；48 条 source-use
+记录覆盖 20 个来源，但没有取得任何 exact passage locator，故 48/48 均以明确的
+bounded unavailability 保持 `INCONCLUSIVE`。2 个 valid 与 12 个 invalid synthetic
+fixture 的 14/14 预期处置通过；它们只证明合成 schema conformance，不是 producer
+输出、census 或科学结果。生产 BP/CP、adapter、predicate kernel、theorem encoding
+和 build provenance 仍不可用，independence 未建立。两个 correction Bib 条目仍未
+追加，五处引用仍未绑定。
 
-Current artifacts: [exact request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33.md),
-[validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_VALIDATION.json),
-[receipt](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_RECEIPT.json), and
-[exact target inventory](notes/stage4_prime_round5_exact_target_inventory.json).
-Next gate: explicit author confirmation. No patch, bibliography append,
-fixture execution, manuscript build, Stage 4.5, or canonical promotion has run.
+Current artifacts: [expanded exact request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION.md),
+[scope incident](notes/stage4_prime_round5_scope_stop_incident.md),
+[support validation](notes/stage4_prime_round5_support_validation.json),
+[expanded-request validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION_VALIDATION.json),
+and [expanded-request receipt](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION_RECEIPT.json).
+The provisional pre-stop roadmap, author choices, claim manifest, and
+adjudication are `NONCONTROLLING_SUPERSEDED_DUE_TO_UNLISTED_TARGETS` and may
+not be used for apply. Next gate: explicit confirmation of the expanded
+request, followed by a fresh successor authority chain. No Stage 4′ manuscript
+or bibliography execution is complete.
 
 ### Historical Round-5 review checkpoint (superseded)
 
@@ -139,16 +147,17 @@ formal tuple UNASSIGNED; Route B closed. `SCIENTIFIC_EXECUTION=NOT_RUN`,
 `STAGE3_EDITORIAL_DECISION=MAJOR_REVISION`, `STAGE4_AUTHORIZED=true`,
 `STAGE4_COMPLETE=true`, `STAGE3_PRIME_ROUND1=HISTORICAL_ABORT`,
 `STAGE3_PRIME_ROUND2=HISTORICAL_ABORT`,
-`STAGE3_PRIME_ROUND3=ABORTED_PHASE2A_LINT_FAILED`,
-`STAGE3_PRIME_DECISION_EMITTED=false`, and
-`STAGE3_PRIME_ROUND4=ABORTED_PHASE2A_LINT_FAILED`, and
-`STAGE3_PRIME_ROUND5_AUTHORIZED=false`.
+`STAGE3_PRIME_ROUND3=HISTORICAL_ABORT`,
+`STAGE3_PRIME_ROUND4=HISTORICAL_ABORT`,
+`STAGE3_PRIME_ROUND5=COMPLETE_MAJOR_REVISION_B4`,
+`STAGE4_PRIME_ROUND5_SUPPORT=COMPLETE_SCOPE_STOPPED`, and
+`STAGE4_PRIME_EXPANDED_AUTHORIZATION=false`.
 
 ## Traceability
 
-### Current Stage-3′ Round-4 fail-closed outcome
+### Historical Stage-3′ Round-4 fail-closed outcome (superseded)
 
-Fresh Round 4 Phase 1 passed 201 checks over 13 precommitted rows. The first immutable Phase-2A verdict semantically counted 5 FULL / 8 PARTIAL, but failed the official schema with exactly 35 errors, so the no-retry gate emitted `[RE-REVIEW-ABORT: phase2a_lint_failed]`. No response, Phase 2B, traceability, checker execution, or decision exists. Next legal action: a wholly fresh Stage 3′ Round 5 with a new id/manifest, fresh role-separated contexts, and a schema-correct prevalidated emitter/template.
+Fresh Round 4 Phase 1 passed 201 checks over 13 precommitted rows. The first immutable Phase-2A verdict semantically counted 5 FULL / 8 PARTIAL, but failed the official schema with exactly 35 errors, so the no-retry gate emitted `[RE-REVIEW-ABORT: phase2a_lint_failed]`. No response, Phase 2B, traceability, checker execution, or decision exists in that historical round. Its former next action was completed by the valid Round 5 recorded above.
 
 | Current artifact | SHA-256 |
 |---|---|
@@ -206,8 +215,8 @@ P33 is aborted at phase2a_lint_failed: committed 7/5/1 versus controlling 6/6/1 
 
 All detailed Stage-1 research, source, review, and revision artifacts remain
 frozen in `notes/`; all Round-1/Round-2/Round-3 review artifacts are preserved.
-A schema-compatible Stage-4 Revision-Evidence Bundle exists, but official
-Stage-4.5 E6 has not been invoked. The only next legal action is explicit
-authorization for a new-id/new-manifest/fresh-context Stage 3′ Round 4.
-Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route
-advancement, result refresh, and new scientific execution remain unauthorized.
+A schema-compatible Stage-4 Revision-Evidence Bundle exists. The current legal
+action is explicit confirmation of the hash-bound expanded Stage-4′ request at
+the top of this README, followed by a fresh successor authority chain. Fresh
+Stage 4.5, Stage 5, canonical promotion, submission, Route advancement, result
+refresh, and new scientific execution remain unauthorized.

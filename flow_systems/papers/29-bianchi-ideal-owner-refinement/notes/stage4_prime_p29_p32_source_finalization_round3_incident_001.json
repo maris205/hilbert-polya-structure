@@ -1,0 +1,28 @@
+{
+  "schema_version": "round10-p29-p32-source-finalization-incident/1.0",
+  "recorded_at_utc": "2026-09-03T21:55:00Z",
+  "attempt": 1,
+  "status": "FAIL_CLOSED_NO_OUTPUT_WRITTEN",
+  "command": "python3 tools/build_round10_p29_p32_source_finalization_round3.py",
+  "failure": {
+    "class": "arxiv_batch_response_mapping_failure",
+    "detail": "The initial batch request used the API default result cap and parsed legacy category-style identifiers with rsplit('/'), so P29-S02 and P29-S20 appeared missing.",
+    "reported_missing_ids": [
+      "1903.05111",
+      "math/9204234"
+    ]
+  },
+  "bounded_remediation": {
+    "changes": [
+      "set max_results=20 for the 11-record arXiv request",
+      "preserve legacy category-style identifiers by parsing after /abs/"
+    ],
+    "current_builder_sha256": "b39dd3bd2805cf365ac77808333b7ef0f59deb0dc2b7de2c079bcf31fc4da81c"
+  },
+  "boundary_observations": {
+    "source_finalization_outputs_created": 0,
+    "manuscript_patch_emitted": false,
+    "manuscript_or_bibliography_mutation": false,
+    "canonical_science_route_or_initial_system_mutation": false
+  }
+}

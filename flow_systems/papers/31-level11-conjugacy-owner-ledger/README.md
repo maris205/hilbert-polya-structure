@@ -4,26 +4,30 @@
 
 <!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
 
-**ARS STAGE 4.5 CORRECTION REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**
+**FAIL-CLOSED BEFORE CORRECTION APPLICATION — EXPANDED REQUEST AWAITS NEW AUTHOR CONFIRMATION.**
 
-Control state: `stage4_5_round1_fail_exact_stage4_prime_correction_request_awaiting_author_confirmation`.
-Bounded source finalization covered all 22 previously anchorless contexts:
-7 now have a candidate exact passage locator and hashed excerpt, while 15
-retain explicit bounded unavailability. The two blockers are mapped to five
-unique, current-hash-bound `replace_block` operations because the 22 source
-uses occur in four aggregate citation blocks; one notes-side method/passage
-matrix regeneration is separately named. Validation passed 26/26 batch checks
-and replayed all five old block hashes. Stage 4.5 remains FAIL pending repair
-and a later fresh audit.
+Control state: `stage4_prime_correction_fail_closed_scope_incomplete_expanded_request_awaiting_new_confirmation`.
+The authorized five-operation P31 subset was not applied. A read-only coherence
+scan found eight additional untargeted current-status blocks (`B0006`, `B0007`,
+`B0023`, `B0037`, `B0039`, `B0089`, `B0099`, and `B0108`) that would
+contradict the frozen 7/22 locator-available and 15/22 explicit-unavailability
+disposition. The coherent P31 request is therefore 13 exact-hash
+`replace_block` pairs plus the one explicit in-place matrix regeneration. No
+patch, Round-3 draft/PDF, build, or matrix regeneration was performed; the
+Stage 4.5 verdict remains FAIL.
 
-本轮结论概要：P31 已把 22 个 passage 问题分流为 7 个可定位与 15 个明确不可用，
-后者只能收窄为 metadata-only 或删除不受支持的实质归因。连同 AI disclosure，
-修复面冻结为 5 个逐块操作；当前没有改正文、Bib、PDF 或科学结果。
+本轮结论概要：执行前的一致性扫描发现原授权遗漏八个“全部二十二项均无定位／语料仍
+全部未解析”的现态段落。依据 fail-closed 条件，本轮没有套用原 5 个修订块，也没有
+改写现有 matrix 或构建 Round-3。新的 P31 完整范围为 13 个精确哈希块；必须获得
+覆盖扩展请求的新确认后才能开始执行。
 
-Current artifacts: [source-finalization proposal](notes/stage4_5_round1_source_finalization_proposal.json),
-[exact-hash paper proposal](notes/stage4_5_round1_stage4_prime_correction_authorization_proposal.json),
-and the joint [authorization request](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P30_P31.md).
-Next gate: explicit author confirmation; no Stage 4.5 rerun or Stage 5 is yet authorized.
+Current artifacts: [retained source-finalization proposal](notes/stage4_5_round1_source_finalization_proposal.json),
+[fail-closed incident](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_EXPANSION_FAIL_CLOSED_INCIDENT_P30_P31.json),
+[expanded authorization request](../../BATCH_ROUND10_STAGE4_PRIME_EXPANDED_CORRECTION_AUTHORIZATION_REQUEST_P30_P31.md),
+[machine request](../../BATCH_ROUND10_STAGE4_PRIME_EXPANDED_CORRECTION_AUTHORIZATION_REQUEST_P30_P31.json),
+and [83-check validation](../../BATCH_ROUND10_STAGE4_PRIME_EXPANDED_CORRECTION_AUTHORIZATION_REQUEST_P30_P31_VALIDATION.json).
+Next gate: new explicit author confirmation of the expanded request; no Stage
+4.5 rerun, Stage 5, or canonical promotion is authorized.
 
 ### Historical Stage-4.5 audit checkpoint (superseded)
 
@@ -172,9 +176,12 @@ correctly designed, run, statistically adequate, or reproducible by ARS.”
 
 ## Batch traceability
 
-### Current Stage-4′ author-side completion
+### Historical Stage-4′ author-side completion (superseded by current scope-expanded gate)
 
-All 8/8 residual items are addressed by 20 authorized operations. The final chain preserves 93/111 base blocks, records 20/20 successful dated metadata queries and a 24-row method matrix, and appends two source-verified closest-work records only to the notes-side bibliography. The clean preview is 13 pages with zero blocking TeX findings or overfull boxes. Next legal action: fresh Stage 4.5 audit of the current versioned Stage-4′ chain; no silent repair or promotion.
+All 8/8 residual items were addressed by 20 authorized operations. This remains
+the frozen Round-2 baseline, but its former “next action” was superseded by the
+fresh Stage-4.5 failure, source finalization, and expanded correction gate at
+the top of this README.
 
 | Current artifact | SHA-256 |
 |---|---|

@@ -17,7 +17,7 @@
 | `9-packet-separation` — Route A / A0--A4 | **完成，引用审计与独立同行评审 ACCEPT** | 构造性证明 `Z[1/p]_{>0}` 在实数/prime-to-`p` 完备化中同时稠密，并在同一有限核纤维内合法提升收敛；由此真实 `E_f` 素数 packet、每条继承轨道及 `Q_p` 都是非平凡不可分空间，限制轨道关系非闭。真实标准 LCH 分支在拓扑前提处失败，旧圆周迹公式仅保留为显式代理。见[论文](papers/9-packet-separation/paper/paper.pdf)、[中文摘要](papers/9-packet-separation/notes/stage9_summary_zh.md)与[Route-A 审计](papers/9-packet-separation/notes/route_audit.md)。 |
 | `22-fppf-verschiebung-lifts` — 纯代数支撑定理 | **Stage 6 已确认完成；Pipeline completed** | 对所有 `N>1` 证明 fppf 与 finite-flat site 上 Verschiebung 加性 sheaf lift 不存在；`N=1` 为严格对照，并精确限定 Deninger v1 Cor. 4.6 的修正半径。见[论文](papers/22-fppf-verschiebung-lifts/paper/paper.pdf)、[结论概要](papers/22-fppf-verschiebung-lifts/README.md)、[中文流程记录](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/paper_creation_process_zh.pdf)与[完成收据](papers/22-fppf-verschiebung-lifts/notes/stage6_process_record/stage6_completion_receipt.md)。 |
 | `24--28` — 五种连续时间子型 | **Round 9 / Pipeline completed；Stage 5 FULL 完成，Stage 6 skipped** | 五篇最终 PDF 共 71 页；20/20 最终隔离构建、444/444 独立完成审计与 397/397 Stage-4.5 冻结回放通过。用户以精确回复“跳过，继续下一批”拒绝可选 Stage 6，故五条 pipeline 均完成且不生成 Process Record。Canonical manuscript/bib/results、初始动力学限定与 Route tuples 均未变；正向算术 A2 `0/5`、Route B `0/5`。见 [Stage-5 批次完成报告](BATCH_ROUND9_STAGE5_COMPLETION_REPORT.md)与[终态收据](BATCH_ROUND9_STAGE6_SKIP_RECEIPT.json)。 |
-| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / request-prep 完成：5/5 exact Stage 4′ successor requests ready** | P29/P32 完成 fresh Stage 4.5 并严格 FAIL（共 6 blockers）；P30/P31 将 48 个未定位上下文分流为 25 个 locator candidates + 23 个明确不可用；P33 将 7 个残余压成 35 个唯一块与 7 个支持操作。下一轮五篇共 105 个精确 block/op pairs，尚未执行。Canonical/science/initial systems/Route 均未变，Route-A 仍在 A0/A1 foundation/interface。见[当前完成报告](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_COMPLETION_REPORT.md)、[收据](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_COMPLETION_RECEIPT.json)与[下一检查点](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_MANDATORY_CHECKPOINT.md)。 |
+| `29--33` — 五个同源但不同检验面的连续时间子型 | **Round 10 / Stage 4′ 扩展请求完成；0/130 corrections applied** | 五篇来源/支持层均有实质推进：148 条 source-use 完成终态分流，P33 的 43/43 工件回放与 14/14 synthetic conformance 通过。执行前审计发现旧请求遗漏 25 个现态块，遂在任何正文变更前 fail closed；新范围为 130 个精确 `replace_block`，另有 2 个矩阵重建和 P33 的 2 个 Bib append。Canonical/science/initial systems/Route 均未变。见[当前完成报告](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_COMPLETION_REPORT.md)、[最终审计](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_FINAL_AUDIT.json)与[下一检查点](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_MANDATORY_CHECKPOINT.md)。 |
 
 可复现实验、判定 YAML、证明笔记和来源审计保存在各论文目录、
 `evaluations/`、`docs/` 与 `skills/`。本地工作目录本身不是 Git 仓库；发布时
@@ -38,43 +38,56 @@ Propositions 4.3、4.5 或 Corollary 4.7。
 
 ## Papers 29--33 Round 10 最新概要
 
-<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+<!-- ROUND10_STAGE4_PRIME_SCOPE_REISSUE_STATUS_20260904 -->
 
-本轮授权范围已经收口，**5/5 论文均有明确进展，三份精确后继请求均已准备，
-但一项也尚未执行**。
+本轮来源与支持层已经收口，**5/5 论文均有明确进展**。执行前的一致性审计发现
+原三份请求合计遗漏 25 个会与新证据状态冲突的现态块，因此严格在 patch emission
+之前停止。扩展后的三份精确请求以纠正后的 UTC provenance 重签并完成
+**805/805** 轨道校验；正文修复仍为 **0/130 applied**。
 
 | Paper | 当前状态 | 本轮明确结果 | 下一精确动作 |
 |---|---|---|---|
-| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | **Stage 4.5 FAIL；exact request ready** | 22/22 references；0/22 passage-supported contexts；86/86 claims/evidence rows；15 页 build PASS；1 Serious + 2 Medium。 | 26 个 hash-bound `replace_block`。 |
-| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | **Stage 4.5 FAIL；source-finalized request ready** | 26/26 anchorless rows 分流为 18 locator candidates + 8 explicit unavailable；4/4 blockers 已定点。 | 29 个 `replace_block` + 1 notes matrix。 |
-| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | **Stage 4.5 FAIL；source-finalized request ready** | 22/22 anchorless rows 分流为 7 locator candidates + 15 explicit unavailable；2/2 blockers 已定点。 | 5 个 `replace_block` + 1 notes matrix。 |
-| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | **Stage 4.5 FAIL；exact request ready** | 30/30 references；4/30 passage-supported、26 anchorless；91/91 claims、114/114 evidence rows；17 页 build PASS；1 Serious + 2 Medium。 | 10 个 hash-bound `replace_block`。 |
-| [P33](papers/33-bolza-control-matched-census/README.md) | **Round-5 Stage 4′ exact request ready** | 7 residuals、39 item-target mappings、35 unique pairs、7 support ops；385-check validation PASS。 | inventory、2 correction refs、synthetic fixtures/provenance、BP/CP contracts、48 locators、conditional typing。 |
+| [P29](papers/29-bianchi-ideal-owner-refinement/README.md) | **source-finalized；scope-expanded；patch blocked** | 22/22 contexts：13 exact locators + 9 bounded unavailable；执行前新增 5 个必改现态块。 | 31 个 hash-bound `replace_block`。 |
+| [P30](papers/30-three-disk-nonconstant-roof-determinant/README.md) | **source-finalized；scope-expanded；patch blocked** | 26/26 contexts：18 locator available + 8 unavailable；执行前新增 5 个现态块。 | 34 个 `replace_block` + 1 notes matrix。 |
+| [P31](papers/31-level11-conjugacy-owner-ledger/README.md) | **source-finalized；scope-expanded；patch blocked** | 22/22 contexts：7 locator available + 15 unavailable；执行前新增 8 个现态块。 | 13 个 `replace_block` + 1 notes matrix。 |
+| [P32](papers/32-homology-cover-renormalization-uniformity/README.md) | **source-finalized；scope-expanded；patch blocked** | 30/30 contexts：18 new exact + 4 retained bounded scopes + 8 unavailable；执行前新增 5 个现态块。 | 15 个 hash-bound `replace_block`。 |
+| [P33](papers/33-bolza-control-matched-census/README.md) | **support complete；scope-expanded；patch blocked** | 43/43 commit-pinned artifacts；48/48 uses 明确不可用；2 valid + 12 invalid fixtures 的 14/14 oracle 通过；production components 仍为 0。 | 37 个 `replace_block` + 恰好 2 个 correction Bib append；新建 authority chain。 |
 
-下一轮合计 **105 个唯一 block/operation pairs**。五份当前版本化论文为
-15 + 16 + 13 + 17 + 17 = **78 页**。P29/P32 的 originality 公开网络启发式分别
-覆盖 57/76 与 49/75 正文段，变更段 41/41 与 20/20，未记录匹配；没有专业查重库，
-因此不把它表述成全局原创性证明。
+整批来源用途为 **148/148** 终态分流：60 个 exact/retained bounded locators，88 个
+explicit bounded-unavailability。扩展范围为 **105 + 25 = 130** 个唯一
+`replace_block`；原请求下一个也没有先行套用。P33 的合成夹具只验证 schema 与
+处置规则，不是 producer 输出、owner census、科学实验或 result refresh。
 
-路线继续严格对应 [`Route A`](skills/route-a-evaluator.md) 与
-[`Route B`](skills/route-b-evaluator.md)：仍是 **A0/A1 foundation/interface**，
-formal tuples `0/5`、positive arithmetic A2 `0/5`、A3 `0/5`、A4 `0/5`、
-Route B `0/5`。本轮新科学实验 `0`；五个初始动力学系统及 clock、primitive/owner、
-inverse、normalization、cutoff、target-blind 与 control 限定均冻结。Canonical
-manuscript/Bib/PDF、science/results 与 Route crosswalk 全部 byte-identical；五篇
-README 仅作为结论概要被有意更新。引用继续是 `plainnat` 数字制。
+路线继续只按 [`Route A`](skills/route-a-evaluator.md) 与
+[`Route B`](skills/route-b-evaluator.md) 判定。整批仍处于 foundation/interface
+研究层，但五篇并非都通过 A0/A1：P29 为 A0/A1 preparation；P30 明确为
+`A0_FAIL / A2_NOT_ELIGIBLE`；P31 为 A1-only preparation；P32 为 generic
+A1--A2 preparation 且 arithmetic A0 unavailable；P33 为 A1 preparation 且
+formal A0 prohibited/confounded。统一计数仍为 formal tuple `0/5`、positive
+arithmetic A2 `0/5`、A3 `0/5`、A4 `0/5`、Route-B invocation `0/5`。
+
+五个初始动力学限定保持冻结：Gaussian Bianchi 测地流、带物理 roof 的三圆盘流、
+`Gamma_0(11)` 测地流的固定正时间变换、genus-two 测地流的 pure-homology tower、
+以及 Bolza 测地流与独立 typed control。对应 clock、primitive/owner、inverse、
+normalization、cutoff 与 target-blind/no-retuning 限定均未改变。本轮新科学实验或
+producer/census run 为 `0`；canonical manuscript/Bib/PDF、science/results、Route
+crosswalk 均通过 94/94 冻结回放。引用继续是 `plainnat` 数字制。
 
 当前权威工件：
 
-- [完成报告](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_COMPLETION_REPORT.md) — `54dc5a732d27aa99df3a0199d7eac72e88ec0fb406e4549fdbcff671d046e14a`
-- [机器收据](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_COMPLETION_RECEIPT.json) — `7ed345996320b5c6bc14773d64177d32836b2f50a14f50b9ad37464fd607269d`
-- [最终审计](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_FINAL_AUDIT.json) — `48d5f595698932f47888cec44480111fe3621cfb72579a8ac2e13e1ca3bfd146` (`PASS`)
-- [下一 mandatory checkpoint](BATCH_ROUND10_STAGE4_5_AND_STAGE4_PRIME_REQUEST_PREP_MANDATORY_CHECKPOINT.md) — `d2f1a0c2bf98910948c2131f503bd36c479e9f565f4151231a77a6c819132bf3`
+- [完成报告](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_COMPLETION_REPORT.md)
+- [机器收据](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_COMPLETION_RECEIPT.json)
+- [最终审计](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_FINAL_AUDIT.json) — `83/83 PASS`
+- [P29/P32 扩展请求](BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32_EXPANDED.json) — `51735eed804f9bd933e2f5a1f69ad0068b74921b4ab6fc4cdddaade0b6bc2e5b`
+- [P30/P31 扩展请求](BATCH_ROUND10_STAGE4_PRIME_EXPANDED_CORRECTION_AUTHORIZATION_REQUEST_P30_P31.json) — `9fecba23da5ea90f3c8f252d0a7fbd019d042f600dbeaa320167865273692135`
+- [P33 扩展请求](BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION.json) — `100c97df01c356a52e3dea39ab327873f544d3ac6b32107f1576ae4dcb02db65`
+- [下一 mandatory checkpoint](BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_MANDATORY_CHECKPOINT.md)
 
-下一条简短 **`确认`** 绑定三份 machine request，仅授权列出的 Stage 4′ 定点
-修复、来源收尾、P33 synthetic conformance 支持与直接 build/validation。它不授权
-fresh Stage 4.5、P33 re-review、Stage 5/6、科学 producer/census、result refresh、
-Route 晋级或初始系统变化。
+下一条简短 **`确认`** 绑定上述三份 machine request，授权 130 个定点修复、P30/P31
+两份既有 notes matrix 重建、P33 两条精确 Bib append、新 P33 authority chain 与直接
+隔离 build/validation。它仍不授权 fresh Stage 4.5、P33 re-review、Stage 5/6、
+scientific producer/census、result refresh、canonical promotion、Route 晋级或初始
+系统变化。
 
 ### 历史：Stage 4′ execution / Stage 4.5 / Round-5 checkpoint（已被上文取代）
 

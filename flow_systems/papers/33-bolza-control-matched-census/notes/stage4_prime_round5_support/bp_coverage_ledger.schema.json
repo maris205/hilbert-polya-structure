@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:p33:bp:coverage-ledger:1",
+  "title": "P33 BP coverage ledger contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "producer_id",
+    "input_sha256",
+    "theorem_version_digest",
+    "algorithm_version_digest",
+    "enumeration_order",
+    "cutoff",
+    "termination",
+    "included_stream_digest",
+    "rejected_stream_digest",
+    "coverage_digest",
+    "unresolved_count",
+    "unresolved_records",
+    "population_bound_replay"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "P33-BP-COVERAGE/1"
+    },
+    "producer_id": {
+      "const": "BP"
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "theorem_version_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "algorithm_version_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "enumeration_order": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cutoff": {
+      "const": {
+        "den": "10",
+        "num": "21"
+      }
+    },
+    "termination": {
+      "type": "object"
+    },
+    "included_stream_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "rejected_stream_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "coverage_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "unresolved_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unresolved_records": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "population_bound_replay": {
+      "type": "object"
+    }
+  }
+}

@@ -4,29 +4,34 @@
 
 <!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
 
-**ARS STAGE 4.5 ROUND 1 FAIL — EXACT CORRECTION REQUEST PREPARED, NOT EXECUTED.**
+**READ-ONLY SOURCE FINALIZATION COMPLETE — SCOPE EXPANDED; PATCH AWAITS A NEW
+AUTHOR CONFIRMATION.**
 
-Control state: `stage4_5_round1_fail_exact_correction_request_awaiting_author_confirmation`.
-The fresh audit resolved 22/22 bibliography records, reviewed 22/22 citation
-contexts, registered and reviewed 86/86 tier-ALL claims and evidence rows, and
-built a clean 15-page preview. It nevertheless failed the integrity gate:
-all 22 source uses lack an exact passage locator, B0109 retains a stale
-Stage-2.5 status, and B0108 omits the 3--4 September assistance. Originality
-search covered 57/76 body paragraphs and 41/41 changed paragraphs without a
-recorded match; this is a public-web heuristic, not a professional similarity
-certificate.
+Control state:
+`stage4_prime_source_finalization_complete_scope_expanded_patch_awaiting_new_confirmation`.
+All `22/22` P29 citation contexts now have a terminal disposition: `13` exact
+authoritative/first-party passage locators and `9` explicit bounded-unavailability
+records. Before patch emission, a coherence scan found five additional
+present-tense status surfaces (`B0004`, `B0050`, `B0054`, `B0090`, `B0091`)
+that the earlier request did not name. The coherent P29 scope is therefore
+`31` exact-hash `replace_block` pairs (`26 + 5`).
 
-本轮结论概要：P29 已完成真正的全量 Stage 4.5，而不只是编译检查。结果是
-1 Serious + 2 Medium blocker，故严格停在 proposal-only。三项问题现已映射为
-26 个哈希绑定的 `replace_block` 目标；找不到来源正文时只能明确标记不可用并
-收窄或删除转述，禁止凭书目元数据猜 passage。正文、参考文献和科学结果尚未改动。
+本轮结论概要：P29 的来源层已经从 `0/22` passage support 推进到 `13/22` 精确定位、
+`9/22` 明确不可用；同时在执行前发现并补齐五个会产生现态矛盾的正文目标。依据
+fail-closed 规则，原 26 个修订块一个也没有先行套用，也没有生成 Round-3 稿、PDF
+或构建。下一步只需对扩展后的 31 个目标作新的明确确认。
 
-Current artifacts: [integrity report](notes/stage4_5_round1_final_integrity_report.md),
-[receipt](notes/stage4_5_round1_receipt.json),
-[source-finalization proposal](notes/stage4_5_round1_source_finalization_proposal.json),
-and the joint [exact correction request](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32.md).
-Next gate: explicit author confirmation of that exact request. Stage 5 and
-canonical promotion remain unauthorized.
+Current artifacts: [source finalization](notes/stage4_prime_source_finalization_round3.json),
+[claim-passage matrix](notes/stage4_prime_claim_passage_matrix_round3.json),
+[scope checkpoint receipt](../../BATCH_ROUND10_P29_P32_STAGE4_PRIME_SOURCE_FINALIZATION_SCOPE_CHECKPOINT_RECEIPT.json),
+and the joint [expanded exact request](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32_EXPANDED.md).
+No manuscript/Bib/canonical/science/Route mutation or fresh Stage 4.5 occurred.
+
+### Historical Stage-4.5 audit checkpoint (superseded)
+
+The previous current-status block reported `0/22` passage support and a
+26-pair proposal. It was superseded by the source-finalization checkpoint
+above; its detailed audit artifacts remain part of the provenance chain.
 
 ### Historical Stage-4′ completion checkpoint (superseded)
 
@@ -222,6 +227,33 @@ Round 1 remains immutable.
 - [Batch Round-2 report](../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_REPORT.md) and [mandatory checkpoint](../../BATCH_ROUND10_STAGE3_PRIME_ROUND2_MANDATORY_CHECKPOINT.md)
 
 Round 2 also remains immutable and stopped before Phase 2B/checker/decision.
+
+## Stage 4-prime source-finalization and scope checkpoint (2026-09-04)
+
+The authorized read-only source pass is complete for all `22/22` P29 citation
+contexts: `13` now have exact authoritative/first-party passage locators and
+hashed short excerpts, while `9` carry explicit bounded-unavailability records.
+The six-check source validation is `PASS` (`0` failed). No locator was guessed
+and no scientific claim was strengthened.
+
+Manuscript execution then stopped fail-closed before patch emission. Five
+present-tense locator/status surfaces omitted from the original request also
+require exact replacement: `B0004`, `B0050`, `B0054`, `B0090`, and `B0091`.
+They have been added to a new joint P29/P32 exact-hash request, bringing P29
+from `26` to `31` requested `replace_block` pairs and the joint scope from `36`
+to `46`. The expanded machine request is
+[`BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32_EXPANDED.json`](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32_EXPANDED.json),
+SHA-256
+`51735eed804f9bd933e2f5a1f69ad0068b74921b4ab6fc4cdddaade0b6bc2e5b`;
+its `20/20` validation is `PASS`.
+
+No Round-3 manuscript patch, draft, build, or PDF was created. The current
+Round-2 draft remains SHA-256
+`b8e6526e626d7ff6f343b1bc02ed610b3baedfa55cd1fa734f7e943ab6f6d6e8`;
+the Bib, canonical files, initial-system definition, scientific-result state,
+and Route-A/Route-B position are unchanged. Stage 4.5 is not rerun and the next
+legal manuscript action is explicit author confirmation of the expanded
+exact-hash request.
 Stage 4′, Stage 4.5, Stage 5, canonical promotion, submission, Route
 advancement, result refresh, and new scientific execution remain unauthorized.
 
