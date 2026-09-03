@@ -1,0 +1,330 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\cyc}{\operatorname{cyc}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prb}{\mathbb P}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cB}{\mathcal B}
+
+\title[Random-permutation fixed-point sieves]{Endpoint Histories in a Random-Permutation Fixed-Point Sieve}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+Fix $n\ge2$.  At each epoch choose a uniform permutation of $[n]$ and
+intersect the current subset with its fixed-point set.  We give the exact
+history count between every ordered pair of subsets and diagonalize the
+transition operator in the Boolean containment basis.  The resulting
+absorption law includes its probability generating function, first two
+moments, and a necessary separate boundary formula at $n=3$, where the
+second and third spectral scales coincide.  We then retain the total cycle
+count of every sampled permutation.  For every supported endpoint, its
+history polynomial has an inclusion--exclusion form, sharp lowest and
+highest degrees
+\[
+ t\bigl(|B|+\ind_{\{|B|<n\}}\bigr)
+ \quad\hbox{and}\quad
+ tn-\Bigl\lceil\frac{|A|-|B|}{2}\Bigr\rceil,
+\]
+and an exact conditional total-cycle expectation.  Common fixed points,
+fixed-set inclusion--exclusion, semilattice spectra, and ordinary cycle
+polynomials are treated as background; the external status is
+\textsc{hold\_external}.
+\end{abstract}
+
+\maketitle
+
+\section{The literal process and the theorem package}
+
+Write $[n]=\{1,\ldots,n\}$ and $2^{[n]}$ for its power set.  Let
+$\pi_1,\pi_2,\ldots$ be independent uniform elements of $S_n$.  Starting
+from $A_0=A$, apply the literal update
+\begin{equation}\label{eq:update}
+             A_r=A_{r-1}\cap\Fix(\pi_r).
+\end{equation}
+Thus no action on the complement is implicit and no missing-label convention
+is needed.  For $B\subseteq A$, put
+\[
+ a=|A|,\qquad b=|B|,\qquad d=a-b,
+ \qquad \lambda_j=\frac{(n-j)!}{n!}.
+\]
+Let $K_t(A,B)$ be the number of length-$t$ permutation histories ending at
+$B$.  If $T=\min\{t:A_t=\varnothing\}$, the empty initial state has $T=0$.
+
+The common-fixed-point object is part of the random-permutation and word-
+measure background \cite{HananyPuder2023}; fixed-point-set laws and their
+inclusion--exclusion are classical and appear explicitly in
+\cite{DiaconisEvansGraham2014}.  Walks on idempotent semigroups already come
+with lattice and representation-theoretic spectral mechanisms
+\cite{Brown2000,AyyerEtAl2015}.  We therefore assign no separate contribution
+to the unmarked kernel, containment spectrum, or standard tail transforms.
+They are included so that the endpoint-conditioned cycle calculation can be
+read without imported machinery.
+
+For a history, set $C_t=\sum_{r=1}^t\cyc(\pi_r)$, counting fixed points as
+cycles, and define
+\begin{equation}\label{eq:marked-def}
+ M_t(A,B;u)=\sum_{A_t=B}u^{C_t}.
+\end{equation}
+Also put $H_m=\sum_{q=1}^m q^{-1}$ and $H_0=0$.
+
+\begin{theorem}[complete endpoint and cycle-marked formulas]\label{thm:main}
+For the process \eqref{eq:update}, the following statements hold.
+\begin{enumerate}[(i)]
+\item For every $t\ge0$,
+\begin{equation}\label{eq:kernel}
+ K_t(A,B)=\sum_{j=0}^{d}(-1)^j\binom dj(n-b-j)!^t
+ \quad(B\subseteq A),
+\end{equation}
+and $K_t(A,B)=0$ otherwise.  For $t\ge1$ this count is positive precisely
+when $B\subseteq A$ and it is not the case that $A=[n]$ and $|B|=n-1$.
+
+\item For $S\subseteq[n]$, the $2^n$ functions
+$\phi_S(A)=\ind_{\{S\subseteq A\}}$ form an eigenbasis of the one-step
+probability operator, with eigenvalue $\lambda_{|S|}$.  The only equality
+between two different rank eigenvalues is
+$\lambda_{n-1}=\lambda_n=1/n!$.
+
+\item If $A\ne\varnothing$, then for $t\ge0$,
+\begin{align}
+ \Prb_A(T\le t)&=\sum_{j=0}^a(-1)^j\binom aj\lambda_j^t,
+ \label{eq:cdf}\\
+ \Prb_A(T>t)&=\sum_{j=1}^a(-1)^{j+1}\binom aj\lambda_j^t.\label{eq:survival}
+\end{align}
+Moreover,
+\begin{align}
+ \E_A T&=\sum_{j=1}^a(-1)^{j+1}\binom aj\frac1{1-\lambda_j},
+ \label{eq:mean}\\
+ \E_A T^2&=\sum_{j=1}^a(-1)^{j+1}\binom aj
+       \frac{1+\lambda_j}{(1-\lambda_j)^2},\label{eq:second}\\
+ \E_A s^T&=1-(1-s)\sum_{j=1}^a(-1)^{j+1}\binom aj
+       \frac1{1-s\lambda_j}\label{eq:pgf}
+\end{align}
+for $|s|<\lambda_1^{-1}=n$, with the last expression also giving the
+rational continuation.
+
+\item The low-dimensional boundaries are
+\begin{align*}
+ n=1 &: \quad \{1\}\text{ never absorbs},\\
+ n=2 &: \quad \Prb_A(T>t)=2^{-t}\quad(A\ne\varnothing),\\
+ n=3 &: \quad \Prb_A(T>t)=a3^{-t}
+       -\bigl(\tbinom a2-\tbinom a3\bigr)6^{-t}.
+\end{align*}
+Only for $n\ge4$ do the first two distinct scales give
+\begin{equation}\label{eq:asymptotic}
+ \Prb_A(T>t)=a n^{-t}-\binom a2[n(n-1)]^{-t}
+                 +O(\lambda_3^t).
+\end{equation}
+
+\item Define
+\begin{equation}\label{eq:Rns}
+ R_{n,s}(u)=u^s\prod_{q=0}^{n-s-1}(u+q).
+\end{equation}
+Then every endpoint has the exact marked-history polynomial
+\begin{equation}\label{eq:marked}
+ M_t(A,B;u)=\sum_{j=0}^{d}(-1)^j\binom dj
+              R_{n,b+j}(u)^t
+ \quad(B\subseteq A),
+\end{equation}
+and zero otherwise.  Its coefficients are nonnegative and
+$M_t(A,B;1)=K_t(A,B)$.
+
+\item Suppose $t\ge1$ and the endpoint is supported as in part~(i).  The
+least and greatest exponents with nonzero coefficient in
+$M_t(A,B;u)$ are, sharply,
+\begin{equation}\label{eq:extrema}
+ L_t(b)=t\bigl(b+\ind_{\{b<n\}}\bigr),
+ \qquad U_t(a,b)=tn-\left\lceil\frac d2\right\rceil.
+\end{equation}
+For the same endpoint,
+\begin{equation}\label{eq:conditional}
+ \E[C_t\mid A_t=B]
+ =\frac{t\displaystyle\sum_{j=0}^{d}(-1)^j\binom dj
+       (n-b-j)!^t\bigl(b+j+H_{n-b-j}\bigr)}
+ {K_t(A,B)}.
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+Part~(iv) is stated separately on purpose: at $n=3$,
+$\lambda_2=\lambda_3=1/6$, so folding the cubic term into a purportedly
+smaller remainder would be incorrect.
+
+\section{Unmarked histories, spectrum, and absorption}
+
+Iteration of \eqref{eq:update} gives the pathwise identity
+\begin{equation}\label{eq:pathwise}
+ A_t=A\cap\Fix(\pi_1)\cap\cdots\cap\Fix(\pi_t).
+\end{equation}
+This immediately yields the endpoint kernel, but we record the support
+boundary because it will also control the marked statements.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(i)]
+Assume $B\subseteq A$.  Every point of $B$ must be fixed at all $t$ epochs,
+while every point of $D=A\setminus B$ must be moved at least once.  If a
+chosen $j$-set in $D$ is also forced to be fixed throughout, each epoch has
+$(n-b-j)!$ choices.  Inclusion--exclusion on $D$ proves
+\eqref{eq:kernel}; at $t=0$ its alternating binomial sum is the Kronecker
+delta.
+
+For positive time, fixing $n-1$ points forces the last point, so the stated
+exception is impossible.  Conversely, if $d\ge2$, derange $D$ at one epoch
+and use identities thereafter.  If $d=1$, support excludes $A=[n]$; transpose
+the lost point with a point outside $A$.  If $d=0$, use identities.  Each
+construction fixes $B$ and has endpoint exactly $B$.
+\end{proof}
+
+Let $P$ act on functions by
+$(Pf)(A)=(n!)^{-1}\sum_{\pi\in S_n}f(A\cap\Fix(\pi))$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(ii)]
+The event $S\subseteq A\cap\Fix(\pi)$ requires $S\subseteq A$ and has
+exactly $(n-|S|)!$ realizing permutations.  Hence
+$P\phi_S=\lambda_{|S|}\phi_S$.  The matrix
+$(\phi_S(A))_{A,S}$ is the Boolean zeta matrix, with inverse
+$(-1)^{|A\setminus S|}\ind_{\{S\subseteq A\}}$; the displayed functions
+therefore form a basis.  Finally, the factorials
+$n!, (n-1)!,\ldots,1!,0!$ decrease strictly except for $1!=0!$, proving the
+last assertion.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(iii)--(iv)]
+Set $B=\varnothing$ in \eqref{eq:kernel} and divide by $(n!)^t$ to obtain
+\eqref{eq:cdf}; its complement is \eqref{eq:survival}.  For $n\ge2$ all
+$\lambda_j<1$ when $j\ge1$.  Summing
+$\E T=\sum_{t\ge0}\Prb(T>t)$ and
+$\E T^2=\sum_{t\ge0}(2t+1)\Prb(T>t)$ gives
+\eqref{eq:mean}--\eqref{eq:second}.  The tail identity
+\[
+ \E s^T=1-(1-s)\sum_{t\ge0}s^t\Prb(T>t)
+\]
+gives \eqref{eq:pgf} in its disk of absolute convergence.
+
+For $n=1$ the only permutation fixes the sole point.  At $n=2$,
+$\lambda_1=\lambda_2=1/2$, and the binomial coefficients in
+\eqref{eq:survival} combine to one.  At $n=3$,
+$\lambda_1=1/3$ and $\lambda_2=\lambda_3=1/6$, giving the stated exact
+formula.  For $n\ge4$, $\lambda_1>\lambda_2>\lambda_3$, and the remaining
+finite terms in \eqref{eq:survival} are $O(\lambda_3^t)$.
+\end{proof}
+
+\section{Cycle-marked endpoint histories}
+
+The ordinary cycle polynomial of a permutation group is standard
+\cite{CameronSemeraro2018}.  In particular,
+$\sum_{\sigma\in S_m}u^{\cyc(\sigma)}=u(u+1)\cdots(u+m-1)$: inserting the
+largest label either creates a new singleton cycle, with weight $u$, or
+inserts it after one of the $m-1$ existing labels.  Thus, if $s$ prescribed
+labels are fixed, their singleton cycles contribute $u^s$ and the remaining
+labels give exactly \eqref{eq:Rns}.  This factor is background; the endpoint
+conditioning is retained explicitly below.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}(v)]
+Force every point of $B$ to be fixed at all epochs and apply
+inclusion--exclusion to the points of $D=A\setminus B$ that must fail to be
+fixed at least once.  If a $j$-subset of $D$ is additionally fixed, the
+cycle enumerator for one epoch is $R_{n,b+j}(u)$; independence makes its
+$t$th power.  This proves \eqref{eq:marked}.  Nonnegativity follows from the
+literal sum \eqref{eq:marked-def}, not from cancellation in the displayed
+alternating form.  At $u=1$, $R_{n,s}(1)=(n-s)!$, recovering
+\eqref{eq:kernel}.
+\end{proof}
+
+The specialization $u=1$ discards information: even when it determines the
+total number of endpoint histories, it does not determine the cycle range or
+conditional cycle mean.
+
+\begin{proof}[Proof of the sharp extrema in Theorem~\ref{thm:main}(vi)]
+Every sampled permutation fixes the $b$ labels of $B$.  If $b<n$, the
+remaining labels contain at least one further cycle, so each epoch has at
+least $b+1$ cycles.  If $b=n$, only the identity occurs.  The lower bound in
+\eqref{eq:extrema} is attained by fixing $B$ and using one cycle on
+$[n]\setminus B$ at every epoch.  When that complement has size one, support
+forces $A=B$, and its singleton cycle is harmless.
+
+For the upper bound, define the cycle deficit
+$\delta(\pi)=n-\cyc(\pi)$.  A nontrivial $\ell$-cycle moves $\ell$ points
+and contributes $\ell-1$ to $\delta$; since
+$\ell\le2(\ell-1)$,
+\begin{equation}\label{eq:support-deficit}
+ |\supp(\pi)|\le2\delta(\pi).
+\end{equation}
+Every one of the $d$ lost labels is moved at some epoch.  Taking the union of
+moved supports and then using \eqref{eq:support-deficit} gives
+\[
+ d\le\sum_{r=1}^t|\supp(\pi_r)|
+   \le2\sum_{r=1}^t\delta(\pi_r),
+\]
+and hence $C_t\le tn-\lceil d/2\rceil$.
+
+It remains to realize equality, including the exceptional parity cases.
+If $d>0$ is even, pair the labels of $D$ into transpositions at one epoch.
+If $d\ge3$ is odd, use one $3$-cycle on $D$ and pair the remaining labels.
+If $d=1$, the support criterion gives a label outside $A$; transpose it with
+the lost label.  For $d=0$, use the identity.  In every case, use identities
+at the other epochs.  The construction fixes $B$, moves every lost label,
+and has total deficit $\lceil d/2\rceil$.  Thus the endpoint coefficient at
+each asserted extreme is positive.
+\end{proof}
+
+\begin{proof}[Proof of the conditional expectation in
+Theorem~\ref{thm:main}(vi)]
+Logarithmic differentiation of \eqref{eq:Rns} at $u=1$ gives
+\[
+ \frac{R'_{n,s}(1)}{R_{n,s}(1)}
+ =s+\sum_{q=0}^{n-s-1}\frac1{1+q}=s+H_{n-s}.
+\]
+Differentiate \eqref{eq:marked}, use $R_{n,s}(1)=(n-s)!$, and divide by the
+positive value $M_t(A,B;1)=K_t(A,B)$.  Since
+$M'_t(A,B;1)/M_t(A,B;1)$ is the mean exponent under the uniform conditional
+history law, the result is \eqref{eq:conditional}.
+\end{proof}
+
+\section{Claim boundary and exact pressure}
+
+The retained statement is the endpoint-resolved conjunction in
+Theorem~\ref{thm:main}(v)--(vi), especially its sharp marked range and
+conditional mean.  No claim is made for the priority of the ingredients:
+common fixed points, prescribed fixed labels, inclusion--exclusion, Boolean
+M\"obius inversion, semilattice spectra, standard absorption transforms, and
+the rising-factorial cycle polynomial all receive zero contribution credit.
+Bounded source searches found no exact owner for the full marked
+endpoint-conditioned package, but a search non-hit is not evidence of
+priority.  External circulation remains \textsc{hold\_external}.
+
+The accompanying standard-library verifier enumerates permutations and
+labelled subset histories literally, checks \eqref{eq:kernel} and
+\eqref{eq:marked} coefficientwise, constructs all sharpness parity cases,
+and independently solves the size-projected absorbing chain over exact
+rationals.  Its finite boxes are counterexample pressure, not a proof or an
+ownership certificate.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

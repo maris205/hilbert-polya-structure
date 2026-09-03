@@ -12,6 +12,26 @@ Papers 44--48 的候选选择、跨篇查重、来源宇宙边界与两阶段
 provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)
 统一归档；该归档只登记可重放证据，不把有限检索升级为全局优先权声明。
 
+## 最新完成批次：P167–P171
+
+Route A 的 P167–P171 已完成五篇匿名短论文、两轮敌意评审、作者与独立
+reviewer 验算、十次 source-only 冷编译及最终 manifest 封口。批次归档见
+[`docs/papers167_171_sequence/`](docs/papers167_171_sequence/)，最终 QA 见
+[`FINAL_QA_REPORT.md`](docs/papers167_171_sequence/FINAL_QA_REPORT.md)。
+
+| 论文 | 当前动力学与明确进展 | 最终 PDF | 状态 |
+|---|---|---|---|
+| [P167 / MIP](papers/167-minimum-inverse-position-feedback/README.md) | endofunction 的最小逆位置反馈：精确分量手术、sharp 高度 `2n-2`/`2n-3`、recurrent species 与全 target fibre，最大 fibre 为 `B_n` | [4 页](papers/167-minimum-inverse-position-feedback/main.pdf) | **ROUND-2 INTERNAL ACCEPT / HOLD_EXTERNAL** |
+| [P168 / QIS](papers/168-quartic-inverse-span-dynamics/README.md) | `F_(p^4)` 子空间的 inverse-span：完整 functional graph、`p=2`/odd 的 sharp 深度分裂、全正时间 fibres | [5 页](papers/168-quartic-inverse-span-dynamics/main.pdf) | **ROUND-2 INTERNAL ACCEPT / OWNER_THIN / HOLD_EXTERNAL** |
+| [P169 / STF](papers/169-successor-transfer-set-partitions/README.md) | 集合划分的 successor maximum transfer：sharp stratum/global tail、完整 recurrent/period 分类、interlacing-sensitive 五状态 fibre trace | [5 页](papers/169-successor-transfer-set-partitions/main.pdf) | **ROUND-2 INTERNAL ACCEPT / HOLD_EXTERNAL** |
+| [P170 / RPS](papers/170-random-permutation-fixed-point-sieve/README.md) | 随机置换 fixed-set 交筛：every-endpoint kernel、吸收谱与矩、cycle-marked endpoint polynomial 及 sharp degree 区间 | [4 页](papers/170-random-permutation-fixed-point-sieve/main.pdf) | **ROUND-2 INTERNAL ACCEPT / OWNER_THIN / HOLD_EXTERNAL** |
+| [P171 / BGM](papers/171-boolean-gram-dynamics/README.md) | Boolean Gram feedback `A -> AA^T`：精确 diameter clock、fixed census、全 target fibre 与 loop-sensitive clique-cover image criterion | [3 页](papers/171-boolean-gram-dynamics/main.pdf) | **ROUND-2 INTERNAL ACCEPT / OWNER_THIN / HOLD_EXTERNAL** |
+
+本批五个作者 verifier 共执行 14,930,345 条精确断言，独立 reviewer
+实现共执行 15,749,941 条；五个最终 PDF 共 21 页，10/10 次冷编译字节复现。
+当前树对 69 个不同 literal systems/kernels 做过 exact implementation 或 focused
+hostile gate，但 69 只是搜索宽度，绝不等于已验证的动力学子类数。
+
 ## 论文与简明结论
 
 | 论文项目 | 可共享论文 | 简明结果 | 状态 |
