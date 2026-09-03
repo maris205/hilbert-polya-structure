@@ -1,0 +1,314 @@
+\pdfvariable trailerid {[<C3332026090300000000000000000000><C3332026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cS}{\mathcal S}
+\setlength{\emergencystretch}{3em}
+\title{Relaxed Randomized Gossip on the Complete Graph:\\
+Exact Covariance Spectrum and Sharp Consensus Law}
+\author{Route-A source-local certificate HCS-C333}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For uniform pairwise relaxed averaging on the complete graph, we derive the
+exact first moment and sharp mean-square disagreement law at every finite
+time.
+\ifnum\CRevisionRound>0
+The entire second-moment transfer on $\operatorname{Sym}^2(\one^\perp)$
+splits into three explicit orthogonal blocks; all eigenvalues,
+multiplicities, projectors, and matrix-valued iterates are closed.
+\fi
+\ifnum\CRevisionRound>1
+This yields the exact statistical covariance, a finite-time tail bound,
+almost-sure consensus for $0<\eta<1$, and a complete treatment of
+$N=1,2,3$ and $\eta=0,1$.  In particular, $\eta=1$ is a random-transposition
+boundary and not a consensus regime.
+\fi
+\end{abstract}
+
+\section{Frozen stochastic owner}
+Fix $N\geq2$ and $0\leq\eta\leq1$.  Independently at every integer time,
+choose an unordered pair $\{i,j\}$ uniformly from the edges of $K_N$ and set
+\begin{equation}\label{eq:update}
+ x_{t+1}=W_{ij}x_t,
+ \qquad W_{ij}=I-\eta d_{ij}d_{ij}^{\mathsf T},
+ \qquad d_{ij}=e_i-e_j.
+\end{equation}
+Thus the selected entries become
+$(1-\eta)x_i+\eta x_j$ and $\eta x_i+(1-\eta)x_j$.
+The endpoint $\eta=1/2$ is ordinary pairwise averaging, while $\eta=1$
+merely swaps the two entries.  The initial vector is deterministic.
+
+Put
+\[
+ P=I-\frac1N\one\one^{\mathsf T},\qquad
+ \bar x=\frac1N\one^{\mathsf T}x_0,\qquad y_t=Px_t=x_t-\bar x\one.
+\]
+Every $W_{ij}$ is symmetric, fixes $\one$, and commutes with $P$.
+The basic complete-graph identity is
+\begin{equation}\label{eq:laplacian}
+ \sum_{i<j}d_{ij}d_{ij}^{\mathsf T}=NP.
+\end{equation}
+
+\begin{theorem}[Mean and sharp energy law]\label{thm:energy}
+The sample mean is invariant on every realization.  With
+\begin{equation}\label{eq:mu-rho}
+ \mu=1-\frac{2\eta}{N-1},\qquad
+ \rho=1-\frac{4\eta(1-\eta)}{N-1},
+\end{equation}
+one has, for every $t\geq0$,
+\begin{equation}\label{eq:first-energy}
+ \EE y_t=\mu^t y_0,
+ \qquad
+ \EE\|y_t\|^2=\rho^t\|y_0\|^2.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Equation~\eqref{eq:update} fixes $\one^{\mathsf T}x$ pathwise.  Since
+$K_N$ has $N(N-1)/2$ edges, averaging~\eqref{eq:update} and using
+\eqref{eq:laplacian} gives
+\[
+ \EE W=I-\frac{2\eta}{N-1}P,
+\]
+which acts by $\mu$ on $\one^\perp$.  Independence of the new edge from the
+past proves the first identity by iteration.  Since
+$(d_{ij}d_{ij}^{\mathsf T})^2=2d_{ij}d_{ij}^{\mathsf T}$,
+\[
+ W_{ij}^2=I-2\eta(1-\eta)d_{ij}d_{ij}^{\mathsf T}.
+\]
+Conditioning on $y_t$, applying~\eqref{eq:laplacian}, and iterating gives the
+second identity.  It is an equality for every initial vector, hence its
+rate is sharp whenever $y_0\ne0$.
+\end{proof}
+
+The phrase \emph{sharp energy owner} records the content added in the
+original paper round: no spectral conclusion is needed for
+Theorem~\ref{thm:energy}.
+
+\ifnum\CRevisionRound>0
+\section{Three invariant covariance blocks}
+Let
+\[
+ \mathscr H_N=\{A\in\mathbb R^{N\times N}:A=A^{\mathsf T},\ PAP=A\}
+\]
+with Frobenius inner product.  For $N\geq3$ define
+\begin{align*}
+ \mathscr V_0&=\operatorname{span}\{P\},\\
+ \mathscr V_1&=\{P\operatorname{diag}(u)P:\one^{\mathsf T}u=0\},\\
+ \mathscr V_2&=\{A\in\mathscr H_N:\operatorname{diag}A=0\}.
+\end{align*}
+For $N=3$, $\mathscr V_2=\{0\}$.  For $N=2$, only
+$\mathscr V_0=\mathscr H_2$ remains.
+
+\begin{lemma}[Explicit orthogonal projectors]\label{lem:projectors}
+For $N\geq3$ and $A\in\mathscr H_N$, set
+\begin{align}\label{eq:projectors}
+ \Pi_0A&=\frac{\operatorname{tr}A}{N-1}P,\qquad R=A-\Pi_0A,\nonumber\\
+ u&=\frac{N}{N-2}\operatorname{diag}R,\qquad
+ \Pi_1A=P\operatorname{diag}(u)P,\qquad
+ \Pi_2A=A-\Pi_0A-\Pi_1A.
+\end{align}
+Then $\Pi_r$ are the orthogonal projectors onto $\mathscr V_r$, and
+\begin{equation}\label{eq:dimensions}
+ \dim\mathscr V_0=1,\qquad \dim\mathscr V_1=N-1,\qquad
+ \dim\mathscr V_2=\frac{N(N-3)}2.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The first residual has trace zero, so $\one^{\mathsf T}u=0$.  For such $u$,
+\[
+ \operatorname{diag}(P\operatorname{diag}(u)P)
+ =\frac{N-2}{N}u.
+\]
+Hence $\Pi_1A$ has the same diagonal as $R$, and $\Pi_2A$ has zero
+diagonal.  Centered matrices with zero diagonal are Frobenius orthogonal to
+both $P$ and every centered diagonal pattern.  This proves orthogonality and
+the projector formulas.  The map $u\mapsto P\operatorname{diag}(u)P$ is
+injective on $\one^\perp$ for $N>2$.  Subtracting dimensions from
+$\dim\mathscr H_N=N(N-1)/2$ proves~\eqref{eq:dimensions}.
+\end{proof}
+
+Define the second-moment transfer
+\begin{equation}\label{eq:transfer}
+ \cT_\eta(A)=\frac{2}{N(N-1)}\sum_{i<j}W_{ij}AW_{ij}.
+\end{equation}
+
+\begin{theorem}[Complete second-moment spectrum]\label{thm:spectrum}
+The three spaces in Lemma~\ref{lem:projectors} are orthogonal invariant
+blocks of $\cT_\eta$ for every $0\leq\eta\leq1$.  The restrictions to the
+present nonzero blocks are scalar, with respective values
+\begin{align}
+ \lambda_0&=1-\frac{4\eta(1-\eta)}{N-1},\label{eq:lambda0}\\
+ \lambda_1&=1-\frac{4\eta-2\eta^2}{N-1},\label{eq:lambda1}\\
+ \lambda_2&=1-\frac{4\eta}{N-1}
+              +\frac{4\eta^2}{N(N-1)}.\label{eq:lambda2}
+\end{align}
+Absent low-dimensional blocks are omitted.  If $\eta>0$, the values attached
+to the present blocks are pairwise distinct, so those blocks are precisely
+the corresponding full eigenspaces.  If $\eta=0$, then $\cT_0=I$: the only
+eigenvalue is one, its eigenspace is all of $\mathscr H_N$, and its
+multiplicity is $N(N-1)/2$.
+\end{theorem}
+
+\begin{proof}
+For centered $A$, expansion of~\eqref{eq:transfer} gives
+\begin{equation}\label{eq:Texpand}
+ \cT_\eta(A)=(1-\frac{4\eta}{N-1})A
+ +\frac{2\eta^2}{N(N-1)}\cS(A),
+ \quad
+ \cS(A)=\sum_{i<j}(d_{ij}^{\mathsf T}Ad_{ij})d_{ij}d_{ij}^{\mathsf T}.
+\end{equation}
+If $A=P$, every scalar coefficient in $\cS$ is two, so
+$\cS(P)=2NP$.  If $A=P\operatorname{diag}(u)P$ with
+$\one^{\mathsf T}u=0$, then
+$d_{ij}^{\mathsf T}Ad_{ij}=u_i+u_j$.  The off-diagonal and diagonal entries
+give $\cS(A)=NA$.  Finally, for $A\in\mathscr V_2$,
+$d_{ij}^{\mathsf T}Ad_{ij}=-2a_{ij}$; its zero row sums then give
+$\cS(A)=2A$.  Substitution in~\eqref{eq:Texpand} yields the three displayed
+eigenvalues.
+For $\eta>0$,
+\[
+ \lambda_0-\lambda_1=\frac{2\eta^2}{N-1}>0,
+ \qquad
+ \lambda_1-\lambda_2=\frac{2\eta^2(N-2)}{N(N-1)}>0,
+\]
+where the second comparison is used only when $\mathscr V_2$ is present.
+Together with the orthogonal decomposition, this proves the full-eigenspace
+statement.  At $\eta=0$ every $W_{ij}=I$, which proves the asserted merger.
+\end{proof}
+
+\begin{theorem}[Exact second moment]\label{thm:second}
+Let $A_0=y_0y_0^{\mathsf T}$ and
+$M_t=\EE[y_ty_t^{\mathsf T}]$.  For $N\geq3$,
+\begin{equation}\label{eq:Mt}
+ M_t=\lambda_0^t\Pi_0A_0+\lambda_1^t\Pi_1A_0
+       +\lambda_2^t\Pi_2A_0,
+\end{equation}
+where the last term is absent at $N=3$.  At $N=2$,
+$M_t=\lambda_0^tA_0$.
+\end{theorem}
+
+\begin{proof}
+The newly selected edge is independent of the past, hence
+$M_{t+1}=\cT_\eta(M_t)$.  Apply Theorem~\ref{thm:spectrum} and iterate.
+Taking traces recovers Theorem~\ref{thm:energy}, because the two trace-free
+blocks do not contribute.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Covariance and probabilistic closure}
+The disagreement second moment $M_t$ is not, in general, the statistical
+covariance: $\EE y_t=\mu^ty_0$ need not vanish.  The exact covariance is
+therefore
+\begin{equation}\label{eq:covariance}
+ \operatorname{Cov}(x_t)
+ =M_t-\mu^{2t}y_0y_0^{\mathsf T}.
+\end{equation}
+Both terms annihilate the consensus direction.
+
+\begin{theorem}[Tail bound and almost-sure consensus]\label{thm:as}
+If $N\geq2$, $0<\eta<1$, $\varepsilon>0$, and $y_0\ne0$, then
+\begin{equation}\label{eq:tail}
+ \Pr\{\|y_t\|\geq\varepsilon\|y_0\|\}
+ \leq\frac{\rho^t}{\varepsilon^2}.
+\end{equation}
+For every initial vector, including $y_0=0$, one has
+$x_t\to\bar x\one$ almost surely and in mean square.
+\end{theorem}
+
+\begin{proof}
+Here $0\leq\rho<1$.  Markov's inequality and
+Theorem~\ref{thm:energy} give~\eqref{eq:tail}; division by $\|y_0\|$ is
+legitimate under the stated hypothesis.  If $y_0=0$, every update fixes the
+initial consensus vector.  Otherwise, for each positive rational
+$\varepsilon$, the probabilities in~\eqref{eq:tail} are summable in $t$.
+Borel--Cantelli, followed by a countable intersection, gives
+$\|y_t\|\to0$ almost surely.  Mean-square convergence is already the exact
+energy identity.
+\end{proof}
+
+\section{Complete boundary atlas}
+For $N=1$ there is no edge to sample; by definition the process is static.
+For $N=2$ the disagreement line is one-dimensional and its difference is
+multiplied by $1-2\eta$ at every step.  Hence $\eta=1/2$ reaches consensus
+in one update.  For $N=3$, the third block has dimension zero, so inserting
+a $\lambda_2$ multiplicity would be spurious.
+
+At $\eta=0$, all $W_{ij}$ and $\cT_0$ are the identity.  The three invariant
+summands therefore merge into the eigenvalue-one eigenspace
+$\mathscr H_N$, of total multiplicity $N(N-1)/2$; they must not be called
+three distinct eigenspaces at this endpoint.  At $\eta=1$, each $W_{ij}$ is
+the transposition of coordinates $i$ and $j$, and $\rho=1$; non-consensus
+data cannot converge to consensus because their disagreement norm is
+constant.  This is the precise random-transposition boundary, not an
+extension of the interior convergence theorem.  Constant initial vectors
+are fixed for every parameter.  Values $\eta\notin[0,1]$, nonuniform edge
+laws, and noncomplete graphs lie outside the frozen owner.
+
+\section{Evidence, collisions, and Route-A boundary}
+The exact certificate contains 56 spectral rows, six projector receipts,
+48 exhaustive-word rows, and 2,966 scalar leaves.  It enumerates all 4,242
+edge words in its declared small-time grid.  A producer-independent checker
+performs 1,392 checks, while the SymPy lane closes 350 exact identities.
+Two isolated producer runs are byte-identical, and 140 repaired-hash,
+parser, theorem, boundary, and evaluator attacks are rejected.  The finite
+grid is regression evidence; the preceding theorems are analytic for every
+declared $N$ and $\eta$.
+
+The closest registered systems are C183, which owns the permutation-valued
+random-transposition chain; C203, deterministic signed-Laplacian consensus;
+C312, state-dependent Hegselmann--Krause averaging; and C322, Kac's
+continuous-angle collision operator.  None owns the interior relaxed random
+product and its full second-moment decomposition.
+
+The phrase \emph{probability boundary and route firewall} records the final
+revision.  Under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}, the Route-A tuple
+is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\]
+Pair maps and the moment transfer are symmetric on natural source spaces,
+but this is only a formal lift hint.  Random pair words are not deterministic
+isolated prime-labelled cycles, and interaction count is not a logarithmic
+prime clock.  There is no orbit zeta, target Fredholm determinant,
+functional equation, Weil compression, target divisor, target-zero match,
+or natural same-clock unitary quantization.  Route A is rejected and Route B
+remains locked.  No target arithmetic local data, Euler factors, root number,
+automorphy, or Hilbert--Polya operator is claimed.
+
+\paragraph{AI use.}
+A generative language model assisted proof organization, code scaffolding,
+and manuscript drafting.  The displayed derivations, independent exact
+checker, symbolic lane, hostile tests, and deterministic artifacts define
+the audit record.
+\fi
+
+\begingroup
+\small
+\begin{thebibliography}{9}
+\bibitem{BoydGossip}
+S. Boyd, A. Ghosh, B. Prabhakar, and D. Shah,
+``Randomized gossip algorithms,''
+\emph{IEEE Transactions on Information Theory} 52 (2006), 2508--2530.
+DOI: \href{https://doi.org/10.1109/TIT.2006.874516}%
+{10.1109/TIT.2006.874516}.
+\end{thebibliography}
+The source establishes the randomized-gossip owner and network setting.
+The complete-graph formulas above are derived directly for the frozen model;
+no literature-priority claim is made for them.
+\endgroup
+\end{document}

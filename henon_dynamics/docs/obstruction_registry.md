@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C329--HCS-C333 additions (2026-09-03)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O313 | HCS-C329 Paley primitive graph cycles as rational-prime primitive owners | proved finite-field/source-Ihara obstruction | Quadratic residues and prime-power field order are intrinsic weak arithmetic, but the directed graph cycles are not canonically indexed by rational primes or their powers and graph-edge time is not a logarithmic-prime roof.  The Bass--Ihara determinant is the source graph's finite polynomial, not a target Euler product or target divisor. | The strongly regular parameters, adjacency and full Hashimoto spectra, specialized Bass factorization, all trace/primitive counts, source Ihara zeta, Ramanujan bound, and extension/`q=5` faces survive. | ../henon_paley_graph_ihara_nonbacktracking_route_a/THEOREM_PACKAGE.md |
+| HEN-O314 | HCS-C330 primitive Pythagorean descent and periodic words as a rational-prime orbit ledger | proved Diophantine-tree/source-zeta obstruction | Pythagorean integrality gives a genuine Diophantine owner, but terminating rational tree addresses and periodic quadratic irrationals do not select rational primes or prime powers.  Ternary digit time is not a logarithmic-prime suspension, and the rational source Artin--Mazur zeta supplies no target determinant or divisor. | Unique primitive-triple descent, rational termination, the complete interior periodic-word census, exact primitive cycles, source zeta, monodromy multipliers, and endpoint/orientation boundaries survive. | ../henon_romik_pythagorean_periodic_zeta_route_a/THEOREM_PACKAGE.md |
+| HEN-O315 | HCS-C331 Chern charge, magnetic circles and monopole harmonics as target arithmetic/spectral owners | proved clean-family and source-quantization obstruction | Integral Chern charge is weak topology rather than rational-prime ownership, while every positive-energy orbit belongs to a clean continuous circle family with a physical common period.  The natural covariant Laplacian is a source operator whose monopole-harmonic levels do not match a target divisor or zero set. | The conserved Poincare vector, all magnetic small circles and periods, complete covariant-Laplacian spectrum and heat trace, lowest level, charge conjugation, and zero-charge/zero-energy faces survive. | ../henon_dirac_monopole_magnetic_flow_spectrum_route_a/THEOREM_PACKAGE.md |
+| HEN-O316 | HCS-C332 periodic sweeping loops as arithmetic primitive dynamics | proved external-forcing and projection-semigroup obstruction | The moving interval is selected by a continuum-valued external input and physical forcing period.  Its one-period map is an idempotent projection or a constant entrainment map, so it yields neither isolated recurrent prime-labelled trajectories nor a logarithmic roof, target determinant, or target divisor. | Exact segment projections and period clamp, all three amplitude chambers, memory and one-period entrainment, order/nonexpansion/reparametrization laws, variation, dissipation, and singular faces survive. | ../henon_moreau_scalar_play_periodic_sweeping_route_a/THEOREM_PACKAGE.md |
+| HEN-O317 | HCS-C333 randomized-gossip covariance eigenvalues as an arithmetic orbit spectrum | proved random-product and relaxation-spectrum obstruction | Iid edge words drive a stochastic contraction product rather than one deterministic isolated-cycle owner.  Vertex number, relaxation, and interaction count provide no rational-prime taxonomy or logarithmic clock; the finite second-moment spectrum is source relaxation data, not a target determinant or divisor. | The exact mean, complete three-block second-moment spectrum and projectors, covariance, sharp energy/tail laws, almost-sure consensus, and every low-dimensional/zero/swap boundary survive. | ../henon_complete_graph_randomized_gossip_covariance_route_a/THEOREM_PACKAGE.md |
+
+The five obstructions are invariant under finite-field coordinate changes and
+cycle reversal conventions, admissible Romik recodings that preserve the
+frozen branch owner, monopole rotations and charge conjugation, monotone time
+reparametrization of the sweeping input, and coordinate permutations of the
+complete graph.  They do not license Route B.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`, and every surviving theorem is source-local
+with a content-addressed evidence/PDF release ledger.
+
 ## HCS-C324--HCS-C328 additions (2026-09-03)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

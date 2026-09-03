@@ -2719,6 +2719,43 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C329--C333
+
+This round makes five separate theorem-scale advances while deliberately
+changing the dynamical mechanism in every paper: a finite-field
+nonbacktracking edge flow, a Diophantine three-branch map, a charged magnetic
+flow with bundle quantization, a rate-independent sweeping process, and a
+random continuous-state consensus product.  These are five complete papers,
+not five installments of one result.
+
+- [C329 Paley--Ihara nonbacktracking dynamics](henon_paley_graph_ihara_nonbacktracking_route_a/README.md) · [paper PDF](henon_paley_graph_ihara_nonbacktracking_route_a/paper/main.pdf)
+- [C330 Romik Pythagorean periodic zeta](henon_romik_pythagorean_periodic_zeta_route_a/README.md) · [paper PDF](henon_romik_pythagorean_periodic_zeta_route_a/paper/main.pdf)
+- [C331 Dirac-monopole magnetic flow and spectrum](henon_dirac_monopole_magnetic_flow_spectrum_route_a/README.md) · [paper PDF](henon_dirac_monopole_magnetic_flow_spectrum_route_a/paper/main.pdf)
+- [C332 periodic scalar Moreau play](henon_moreau_scalar_play_periodic_sweeping_route_a/README.md) · [paper PDF](henon_moreau_scalar_play_periodic_sweeping_route_a/paper/main.pdf)
+- [C333 complete-graph randomized-gossip covariance](henon_complete_graph_randomized_gossip_covariance_route_a/README.md) · [paper PDF](henon_complete_graph_randomized_gossip_covariance_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C329_C333.md),
+[batch plan](BATCH_PLAN_C329_C333.md), and
+[batch review](BATCH_REVIEW_C329_C333.md) for collision screening, theorem
+contracts, source ownership, author-swapped proof repairs and exact release
+receipts.  Across the five packages the final audit closes **310,049**
+independent-checker assertions, **11,284** symbolic identities, **431/431**
+hostile rejections, **205,051** audited scalar leaves, **6,302,716** evidence
+bytes, 135 manifest payloads (140 physical files), and **15** final-paper pages
+with **82** embedded/subset font records.  The five strict tuples, in order
+C329--C333, are
+`(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`.  C329 and C330 are
+`ROUTE_A_EXPLORATORY`; C331--C333 are `ROUTE_A_REJECTED`.  All five have
+`route_b_invocation_allowed: false` under literal scope
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic local datum, Euler
+factor, bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target zero match,
+Hilbert--Polya operator, or Route-B input is asserted.
+
 ## Route-A independent cross-subtype round C324--C328
 
 This round advances five unrelated dynamical mechanisms at theorem scale: a

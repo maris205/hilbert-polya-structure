@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C329--HCS-C333 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`5ca65027918c0fce7ef9af82f3faf2e46ed6530c`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C329 | Every Paley graph of order `q=1 mod 4` has an explicitly specialized Bass determinant, complete Hashimoto spectrum, all-time trace and primitive-oriented-cycle formulas, source Ihara zeta, and closed extension-field, reversal, `q=5`, and Ramanujan boundaries. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Paley--Ihara package](../henon_paley_graph_ihara_nonbacktracking_route_a/) · [paper PDF](../henon_paley_graph_ihara_nonbacktracking_route_a/paper/main.pdf) |
+| HCS-C330 | The Romik--Berggren Pythagorean map has a complete rational-descent versus periodic-quadratic-irrational split, one interior fixed point per nonparabolic word, `#Fix(T^n)=3^n-2`, exact primitive-cycle counts, monodromy multipliers, and source zeta `(1-z)^2/(1-3z)`. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Romik--Berggren package](../henon_romik_pythagorean_periodic_zeta_route_a/) · [paper PDF](../henon_romik_pythagorean_periodic_zeta_route_a/paper/main.pdf) |
+| HCS-C331 | The degree-`q` Dirac-monopole sphere has a complete positive-energy small-circle flow with conserved Poincare vector and exact period, together with the full natural covariant-Laplacian spectrum, multiplicities, heat trace, lowest level, and charge/sign/energy boundary atlas. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Dirac-monopole package](../henon_dirac_monopole_magnetic_flow_spectrum_route_a/) · [paper PDF](../henon_dirac_monopole_magnetic_flow_spectrum_route_a/paper/main.pdf) |
+| HCS-C332 | The scalar single-peak periodic Moreau sweeping process has an exact one-period clamp, a complete memory/threshold/entrainment trichotomy, order and nonexpansion laws, reparametrization invariance, and exact variation and hysteretic dissipation. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Moreau-play package](../henon_moreau_scalar_play_periodic_sweeping_route_a/) · [paper PDF](../henon_moreau_scalar_play_periodic_sweeping_route_a/paper/main.pdf) |
+| HCS-C333 | Uniform relaxed randomized gossip on `K_N` has exact first moments and a complete three-block second-moment diagonalization with explicit projectors, full covariance evolution, sharp energy law and tail, almost-sure consensus, and every low-dimensional and relaxation boundary. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [randomized-gossip package](../henon_complete_graph_randomized_gossip_covariance_route_a/) · [paper PDF](../henon_complete_graph_randomized_gossip_covariance_route_a/paper/main.pdf) |
+
+C329 and C330 are `ROUTE_A_EXPLORATORY`; C331--C333 are
+`ROUTE_A_REJECTED`, and Route B is false for all five.  Their owners are
+respectively a finite-field non-backtracking graph flow, a Diophantine
+continued-fraction map, a charged magnetic Hamiltonian with bundle
+quantization, a rate-independent sweeping inclusion, and an iid random
+contraction product.  No target local datum, Euler factor, root number,
+automorphy object, target divisor/counting law or functional equation, target
+zero match, Hilbert--Pólya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  Final release hashes and accounting are
+recorded in [BATCH_REVIEW_C329_C333.md](../BATCH_REVIEW_C329_C333.md).
+
 ## HCS-C324--HCS-C328 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

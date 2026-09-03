@@ -1,0 +1,190 @@
+\pdfvariable trailerid {[<C3322026090300000000000000000000><C3322026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\setlength{\emergencystretch}{4em}
+\title{Periodic Scalar Play as a Sweeping Process:\\Exact Clamp, Entrainment, and Dissipation}
+\author{Route-A source-local certificate HCS-C332}
+\date{3 September 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+For a scalar Moreau play element driven by one periodic rise and fall, we
+prove the \emph{segment projection and exact Poincare clamp} for every
+$W^{1,1}$ input, including plateaus and corners.
+\ifnum\CRevisionRound>0
+The \emph{three chambers and one-period entrainment} follow from one
+idempotent map, together with order, nonexpansion, and rate independence.
+\fi
+\ifnum\CRevisionRound>1
+We close \emph{variation, dissipation, and Route-A obstruction}, including
+$r=0$, constant input, equality, finite hostile evidence, and source limits.
+\fi
+\end{abstract}
+
+\section{Segment solution and return map}
+Fix $r\geq0$.  Let $u\in W^{1,1}([0,T])$ satisfy
+$u(0)=u(T)=m$.  For some $\tau$, assume that $u$ is nondecreasing from
+$m$ to $M$ on $[0,\tau]$ and nonincreasing back to $m$ on $[\tau,T]$.
+Plateaus are allowed.  Put $D=M-m$ and
+\[
+ C(t)=[u(t)-r,u(t)+r].
+\]
+We use $N_C(y)=\{v:v(z-y)\leq0\ \text{for all }z\in C\}$ and solve
+\begin{equation}\label{eq:sweep}
+ y(t)\in C(t),\qquad-\dot y(t)\in N_{C(t)}(y(t))
+ \quad\text{a.e.}
+\end{equation}
+
+\begin{theorem}[Projection and Poincar\'e clamp]\label{thm:clamp}
+For every $z\in[m-r,m+r]$, problem~\eqref{eq:sweep} with $y(0)=z$ has a
+unique absolutely continuous solution.  On a monotone segment beginning at
+$t_0$,
+\begin{equation}\label{eq:projection}
+ y(t)=\Proj_{[u(t)-r,u(t)+r]}y(t_0).
+\end{equation}
+The return map from one minimum to the next is
+\begin{equation}\label{eq:P}
+ P(z)=\min\{m+r,\max\{M-r,z\}\}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+On a nondecreasing segment define $y(t)=\max\{y(t_0),u(t)-r\}$.
+It is feasible.  Before the lower endpoint reaches the state, $\dot y=0$;
+when the endpoint pushes it, $y=u-r$, $\dot y=\dot u\geq0$, and
+$-\dot y$ lies in the lower-endpoint normal cone.  Feasibility and the
+normal-cone sign force these alternatives for any solution, proving
+uniqueness.  On a nonincreasing segment the corresponding formula is
+$y(t)=\min\{y(t_0),u(t)+r\}$.  Both formulas are~\eqref{eq:projection}
+and remain valid almost everywhere across plateaus and corners.
+
+The rise ends at $z_\uparrow=\max\{z,M-r\}$.  The fall ends at
+$\min\{z_\uparrow,m+r\}$, proving~\eqref{eq:P}.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Three chambers and finite-time entrainment}
+\begin{theorem}[Complete periodic atlas]\label{thm:atlas}
+The map $P$ is increasing, one-Lipschitz, and idempotent.  Every admissible
+initial state therefore reaches a periodic response in at most one period.
+Its fixed responses are as follows.
+\begin{enumerate}
+\item If $D<2r$, the fixed set is $[M-r,m+r]$, and each fixed response is
+constant.
+\item If $D=2r$, this interval collapses to the single constant response
+$m+r=M-r$.
+\item If $D>2r$, the unique fixed state is $m+r$ and it generates the unique
+nonconstant periodic loop.
+\end{enumerate}
+For a common input, the solution maps preserve initial order and satisfy
+$|y_1(t)-y_2(t)|\leq|y_1(0)-y_2(0)|$.
+\end{theorem}
+
+\begin{proof}
+When $D<2r$, equation~\eqref{eq:P} is scalar projection onto
+$[M-r,m+r]$; at equality the interval is a singleton.  When $D>2r$,
+$M-r>m+r$, so~\eqref{eq:P} is the constant $m+r$.  This proves all fixed
+sets and directly gives $P^2=P$.  A fixed point in the first two chambers
+is never pushed through a positive distance.  In the third chamber, it
+moves from $m+r$ to $M-r$ and back.  Projection on an interval is increasing
+and one-Lipschitz; composing the two segment maps proves the last assertion.
+\end{proof}
+
+If $\phi$ is an orientation-preserving absolutely continuous surjection and
+both $u$ and $u\circ\phi$ lie in $W^{1,1}$, formula~\eqref{eq:projection}
+depends only on the ordered input value.  Uniqueness therefore gives
+\[
+ \mathcal P_r[u\circ\phi]=\mathcal P_r[u]\circ\phi.
+\]
+This is the precise admissible reparameterization statement; no inadmissible
+composition is silently included.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Variation and dissipation}
+Set $s=u-y\in[-r,r]$.  Almost everywhere, either $\dot y=0$ or the moving
+endpoint pushes $y$ and $\dot s=0$.  Hence
+\begin{equation}\label{eq:variation}
+ \Var(u)=\Var(y)+\Var(s).
+\end{equation}
+On an active rising lower endpoint, $s=r$ and $\dot y\geq0$; on an active
+falling upper endpoint, $s=-r$ and $\dot y\leq0$.  Thus
+\begin{equation}\label{eq:dissipation}
+ \int_0^T s\,dy=r\Var(y).
+\end{equation}
+For any periodic response,
+\begin{equation}\label{eq:closed-var}
+ \Var(y)=2\max\{D-2r,0\},\qquad
+ \int_0^T s\,dy=2r\max\{D-2r,0\}.
+\end{equation}
+Indeed, the play is constant for $D\leq2r$; above threshold it travels the
+distance $D-2r$ once in each direction.
+
+At $r=0$, $C(t)=\{u(t)\}$, so $y=u$, $s=0$, and every identity survives.
+At $D=0$, $C$ is fixed, $P$ is the identity on $[m-r,m+r]$, and every
+feasible constant state is periodic.  Equality $D=2r$ has a unique constant
+response and zero dissipation.  Plateau duration and $W^{1,1}$ corners do
+not change any formula.
+
+\section{Finite certificate and obstruction}
+The receipt contains 12 rational cases, all three chambers, every selected
+feasible initial state through two periods, coarse and plateau-stretched
+paths, and 893 audited scalar leaves.  An independent checker performs 792
+checks.  SymPy closes 4,788 exact rational identities, two isolated replays
+are byte-identical, and 69 hostile parser, nested-schema, semantic, and
+repaired-hash attacks are rejected.  These rows are regression evidence;
+Theorems~\ref{thm:clamp}--\ref{thm:atlas} and
+equations~\eqref{eq:variation}--\eqref{eq:closed-var} prove the full frozen
+$W^{1,1}$ result.
+
+The nearest registered owners are C252, a discrete-guard relay oscillator;
+C238, forward Coulomb--Filippov capture; and C310, endpoint-controlled
+Dubins synthesis.  None is a scalar convex moving-interval play law.
+
+The conservative tuple is
+\begin{gather*}
+ (\mathrm{A0\_FAIL},\mathrm{A1\_PASS\_ANALYTIC},\\
+ \mathrm{A2\_FAIL},\mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\end{gather*}
+The exact periodic atlas has no rational-prime labels.  The clamp is not an
+Euler product or target determinant, and the normal-cone dissipation law is
+not a natural unitary or self-adjoint quantization.  Route A is rejected and
+Route B stays locked under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  No target local data, root
+number, automorphy, divisor, functional equation, target-zero match, or
+Hilbert--P\'olya operator is claimed.
+
+\paragraph{AI use.}
+A generative language model assisted drafting and code scaffolding.  The
+proofs, independent recomputation, hostile tests, and deterministic artifacts
+define the audit record.
+\fi
+
+\section*{Source lineage}
+This source-local reconstruction makes no priority claim.
+\begin{thebibliography}{9}
+\bibitem{Moreau}
+J.-J. Moreau, ``Evolution Problem Associated with a Moving Convex Set in a
+Hilbert Space,'' \emph{J. Differential Equations} 26 (1977), 347--374.
+DOI: \href{https://doi.org/10.1016/0022-0396(77)90085-7}%
+{10.1016/0022-0396(77)90085-7}.
+\bibitem{KP}
+M. A. Krasnosel'skii and A. V. Pokrovskii,
+\emph{Systems with Hysteresis}, Springer, 1989. DOI:
+\href{https://doi.org/10.1007/978-3-642-61302-9}%
+{10.1007/978-3-642-61302-9}.
+\bibitem{BS}
+M. Brokate and J. Sprekels, \emph{Hysteresis and Phase Transitions},
+Springer, 1996. DOI:
+\href{https://doi.org/10.1007/978-1-4612-4048-8}%
+{10.1007/978-1-4612-4048-8}.
+\end{thebibliography}
+\end{document}
