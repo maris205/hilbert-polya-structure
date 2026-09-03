@@ -4,6 +4,32 @@
 
 <!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
 
+**ARS STAGE 4.5 ROUND 1 FAIL — EXACT CORRECTION REQUEST PREPARED, NOT EXECUTED.**
+
+Control state: `stage4_5_round1_fail_exact_correction_request_awaiting_author_confirmation`.
+The fresh audit resolved 30/30 bibliography records, reviewed 30/30 citation
+contexts, registered 91/91 tier-ALL claims and 114/114 evidence rows, and built
+a clean 17-page preview. Four closest-work contexts have bounded passage
+support, while 26 inherited contexts remain anchorless; B0119 overstates that
+all passages are unresolved, and B0127/B0138 do not fully disclose the current
+3--4 September work. Originality search covered 49/75 body paragraphs and
+20/20 changed paragraphs without a recorded match; this is a public-web
+heuristic, not a professional similarity certificate.
+
+本轮结论概要：P32 已完成全量 Stage 4.5，结果为 1 Serious + 2 Medium blocker，
+因此只生成修复提案。三项问题已收敛为 10 个哈希绑定的 `replace_block` 目标；
+四个已定位 closest-work scope 保留，另外 26 个上下文必须取得精确 passage，或
+明确不可用并收窄/删除相应转述。正文、参考文献和科学结果尚未改动。
+
+Current artifacts: [integrity report](notes/stage4_5_round1_final_integrity_report.md),
+[receipt](notes/stage4_5_round1_receipt.json),
+[source-finalization proposal](notes/stage4_5_round1_source_finalization_proposal.json),
+and the joint [exact correction request](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32.md).
+Next gate: explicit author confirmation of that exact request. Stage 5 and
+canonical promotion remain unauthorized.
+
+### Historical Stage-4′ completion checkpoint (superseded)
+
 **ARS STAGE 4′ AUTHOR-SIDE REVISION COMPLETE — AWAITING FRESH STAGE 4.5.**
 
 Control state: `stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization`.

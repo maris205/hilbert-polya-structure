@@ -4,6 +4,29 @@
 
 <!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
 
+**ARS STAGE 4.5 CORRECTION REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**
+
+Control state: `stage4_5_round1_fail_exact_stage4_prime_correction_request_awaiting_author_confirmation`.
+Bounded source finalization covered all 22 previously anchorless contexts:
+7 now have a candidate exact passage locator and hashed excerpt, while 15
+retain explicit bounded unavailability. The two blockers are mapped to five
+unique, current-hash-bound `replace_block` operations because the 22 source
+uses occur in four aggregate citation blocks; one notes-side method/passage
+matrix regeneration is separately named. Validation passed 26/26 batch checks
+and replayed all five old block hashes. Stage 4.5 remains FAIL pending repair
+and a later fresh audit.
+
+本轮结论概要：P31 已把 22 个 passage 问题分流为 7 个可定位与 15 个明确不可用，
+后者只能收窄为 metadata-only 或删除不受支持的实质归因。连同 AI disclosure，
+修复面冻结为 5 个逐块操作；当前没有改正文、Bib、PDF 或科学结果。
+
+Current artifacts: [source-finalization proposal](notes/stage4_5_round1_source_finalization_proposal.json),
+[exact-hash paper proposal](notes/stage4_5_round1_stage4_prime_correction_authorization_proposal.json),
+and the joint [authorization request](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P30_P31.md).
+Next gate: explicit author confirmation; no Stage 4.5 rerun or Stage 5 is yet authorized.
+
+### Historical Stage-4.5 audit checkpoint (superseded)
+
 **ARS STAGE 4.5 ROUND 1 FAIL — CORRECTIONS PROPOSED, NOT APPLIED.**
 
 Control state: `stage4_5_round1_fail_awaiting_exact_correction_authorization`.

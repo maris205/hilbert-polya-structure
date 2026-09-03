@@ -4,6 +4,32 @@
 
 <!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
 
+**ARS STAGE 4′ ROUND-5 EXACT REQUEST PREPARED — AWAITING AUTHOR CONFIRMATION.**
+
+Control state: `stage4_prime_round5_exact_request_prepared_awaiting_author_confirmation`.
+The seven Round-5 residuals are now mapped to 39 item-target entries and 35
+unique hash-bound `replace_block` pairs, with seven separately bounded support
+operations. The prospective package enumerates 43 current-artifact rows,
+48 source-use rows over 20 sources, two correction records affecting five
+uses, exact valid/invalid synthetic-fixture counts, separate BP/CP coverage
+contracts, and conservative manuscript-wide conditional typing. Request
+validation passed 385 checks and its receipt rebound 9/9 artifacts.
+
+本轮结论概要：P33 已把 6 个 must-fix 与 1 个 should-fix 从评审结论压缩为可执行
+的精确 Stage 4′ 合同。它明确区分 artifact inventory、correction bibliography、
+fixture/oracle/build provenance、serialized fixtures、producer ledgers、48 条 passage
+定位和 conditional typing。当前仍只是请求：48 条 locator、独立组件与 oracle/build
+证据尚未生成，不能被表述成 census、科学结果或 Route credit。
+
+Current artifacts: [exact request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33.md),
+[validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_VALIDATION.json),
+[receipt](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_RECEIPT.json), and
+[exact target inventory](notes/stage4_prime_round5_exact_target_inventory.json).
+Next gate: explicit author confirmation. No patch, bibliography append,
+fixture execution, manuscript build, Stage 4.5, or canonical promotion has run.
+
+### Historical Round-5 review checkpoint (superseded)
+
 **ARS STAGE 3′ ROUND 5 COMPLETE — MAJOR REVISION / RULE B4.**
 
 Control state: `stage3_prime_round5_complete_major_revision_b4_awaiting_stage4_prime_authorization`.
