@@ -2,19 +2,41 @@
 
 Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage3_prime_round5_complete_major_revision_b4_awaiting_stage4_prime_authorization`**.
+Current controlling state: **`stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5`**.
 
-<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+<!-- ROUND10_STAGE4_PRIME_EXACT_CONFIRMATION_EXECUTION_STATUS_20260904 -->
 
 | Current gate field | Value |
 |---|---|
-| Pipeline global state | `stage3_prime_round5_complete_major_revision_b4_awaiting_stage4_prime_authorization` |
-| Current completed gate | Stage 3′ Round 5 `COMPLETE`; Phase 1/2A/2B and official checker `PASS` |
-| Decision | `Major Revision / B4`; 6 FULL + 7 PARTIAL; adjustments/new issues/dissents/escalations `0` |
-| Residuals | 6 `must_fix` + 1 `should_fix`; exact item set REV-P33-002/003/005/006/007/008/013 |
-| Route | A1 preparation; formal A0 prohibited/confounded; formal tuple `UNASSIGNED`; positive A2/A3/A4 `0`; Route B uninvoked |
-| Frozen boundaries | canonical manuscript/bib/PDF, science/results, initial system and Route crosswalk unchanged; new scientific executions `0` |
-| Next legal transition | exact Stage 4′ residual-remediation request preparation, followed by separate author authorization |
+| Pipeline global state | `stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5` |
+| Current completed gate | Stage 4′ exact-confirmation correction `COMPLETE`; fresh Stage 4.5 `NOT_INVOKED` |
+| Explicit paper conclusion | 37 个精确修复已把 43-row replay、48-use bounded unavailability、synthetic-only conformance 与生产非执行边界写入版本化稿件；恰好两条 correction Bib 记录完成五处 dual binding，但没有 producer、owner census 或科学验证结果。 |
+| Deterministic apply | 37/37 exact `replace_block`; 91/128 blocks preserved byte-identically |
+| Marker-free word count | 7053 → 7346 (+293) |
+| Clean preview | `PASS_CLEAN`; 18 pages; fatal/undefined citation/undefined reference/missing glyph/overfull all `0` |
+| Authorized support result | Authorized canonical exception: `paper/references.bib` received exactly two append-only entries (`P33-S03-CORR`, `P33-S16-CORR`) and exactly five uses were dual-bound. No third entry or existing-entry overwrite occurred. Bibliography SHA-256: `12143967175abb0d325e16d156b1bc227e51f886009e7acd64691e84b92cb5e0` → `98bba3645e32b96c8321dad6b3b8dc11087e11e35af835432cbbbee7f0853747`. |
+| Frozen initial system | unit-speed Bolza geodesic flow with a separately typed matched control; presentation-specific owner semantics; frozen generator/cutoff objects; target-blind no-retuning rule |
+| Route | A1 preparation with formal A0 prohibited/confounded; formal Route-A tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B not invoked; no coordinate change or credit |
+| Canonical/science boundary | canonical manuscript/PDF unchanged; scientific execution/result refresh `0`; P33 exact two-entry canonical Bib append is the sole authorized canonical change |
+| Citation style | `natbib[numbers,sort&compress] + plainnat` numeric; unchanged |
+| Next legal transition | separately authorized fresh Stage 4.5 from-scratch integrity gate only |
+
+Batch aggregate: **130/130 operations**, five clean versioned previews,
+two authorized notes-side matrix regenerations, and exactly two P33
+canonical bibliography appends. This is Stage 4′ correction completion,
+not a Stage 4.5 integrity verdict or Route advancement.
+
+| Current exact artifact | SHA-256 |
+|---|---|
+| [Exact patch](stage4_prime_revision_patch_round6_exact_confirmation.json) | `42add3e385d1315f8026714f22546ef0467b630a3ebae9b7bfc34993cdbb69ac` |
+| [Official successor](stage4_prime_revision_round2.tex) | `40ff6a91c311e7bdd01d6a37bfdd3bd351073311d7781bd4074f0975362e60ce` |
+| [Official apply report](stage4_prime_revision_round2.tex.apply-report.json) | `60aab33825459a9c84f1733bcdf3c45a0f4d30076f13dd4e42ca2c2a5ebf35fd` |
+| [Clean build receipt](stage4_prime_revision_round2_build_receipt.json) | `e0aa0769017328482d346c69c7fcb0efbfe42d76b18fd139b42a30fbfe353716` |
+| [Preview PDF](stage4_prime_revision_round2.pdf) | `aa26872580f858f99ae81ba7753eb7862e8326b1a845ebca75dbc1a23df4d28d` |
+| [P33 Bib append receipt](stage4_prime_round6_bibliography_append_receipt.json) | `0067bb29946f07a2f0d2b91ff0d1c352b9e071a6385662efaac73a9c38ce8f1a` |
+| [Exact final-emission manifest](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_FINAL_EMISSION_MANIFEST.json) | `db98aa8ace700196044b7bb1903251a90782e709d65f6c0712da041c36421091` |
+| [Exact authorization receipt](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_AUTHORIZATION_RECEIPT.json) | `a21655745ea33c565626c5cc980b8f91a82f4b87ce2d74cfcb012f0c5d7bae21` |
+| [Planned completion report (not a precondition)](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_COMPLETION_REPORT.md) | not required to pre-exist |
 
 ## Historical previous-checkpoint state
 

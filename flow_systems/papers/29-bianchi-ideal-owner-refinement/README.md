@@ -2,30 +2,52 @@
 
 ## Current status
 
-<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+<!-- ROUND10_STAGE4_PRIME_EXACT_CONFIRMATION_EXECUTION_STATUS_20260904 -->
 
-**READ-ONLY SOURCE FINALIZATION COMPLETE — SCOPE EXPANDED; PATCH AWAITS A NEW
-AUTHOR CONFIRMATION.**
+**ARS STAGE 4′ CORRECTION COMPLETE — AWAITING SEPARATELY AUTHORIZED FRESH STAGE 4.5.**
 
-Control state:
-`stage4_prime_source_finalization_complete_scope_expanded_patch_awaiting_new_confirmation`.
-All `22/22` P29 citation contexts now have a terminal disposition: `13` exact
-authoritative/first-party passage locators and `9` explicit bounded-unavailability
-records. Before patch emission, a coherence scan found five additional
-present-tense status surfaces (`B0004`, `B0050`, `B0054`, `B0090`, `B0091`)
-that the earlier request did not name. The coherent P29 scope is therefore
-`31` exact-hash `replace_block` pairs (`26 + 5`).
+Control state: `stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5`. The exact-confirmation chain applied
+**31/31** authorized
+`replace_block` operations to a new versioned successor, preserving
+**82/113** source
+blocks byte-identically. Marker-free word count changed from
+6199 to 7011
+(+812). The notes-side preview is
+**17 pages** and `PASS_CLEAN`: fatal, undefined
+citation/reference, missing-glyph, and overfull counts are all zero.
 
-本轮结论概要：P29 的来源层已经从 `0/22` passage support 推进到 `13/22` 精确定位、
-`9/22` 明确不可用；同时在执行前发现并补齐五个会产生现态矛盾的正文目标。依据
-fail-closed 规则，原 26 个修订块一个也没有先行套用，也没有生成 Round-3 稿、PDF
-或构建。下一步只需对扩展后的 31 个目标作新的明确确认。
+本轮结论概要：31 个精确来源／现态修复已落入新的版本化稿件；引文用途、bounded-unavailability、owner/primitive 术语及 provenance 表述被收窄到证据实际支持的范围，但没有建立完整 owner law、quotient、certificate 或 Route 结论。
 
-Current artifacts: [source finalization](notes/stage4_prime_source_finalization_round3.json),
-[claim-passage matrix](notes/stage4_prime_claim_passage_matrix_round3.json),
-[scope checkpoint receipt](../../BATCH_ROUND10_P29_P32_STAGE4_PRIME_SOURCE_FINALIZATION_SCOPE_CHECKPOINT_RECEIPT.json),
-and the joint [expanded exact request](../../BATCH_ROUND10_STAGE4_5_CORRECTION_AUTHORIZATION_REQUEST_P29_P32_EXPANDED.md).
-No manuscript/Bib/canonical/science/Route mutation or fresh Stage 4.5 occurred.
+No in-place support artifact or canonical package byte was authorized to change for this paper.
+
+Frozen initial system: torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic-arclength clock; primitive loxodromic inversion-paired owner; one literal nonzero Gaussian prime ideal.
+
+Route mapping: A0/A1 preparation only; formal Route-A tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B not invoked. No Route coordinate changed and
+this correction round awards no Route credit.
+
+Batch boundary: 130/130 exact manuscript operations completed across
+Papers 29--33. Scientific execution and canonical-result refresh both
+remain `0`. Citation formatting remains `plainnat` numeric. Canonical
+manuscript/PDF bytes are unchanged for all five papers; P33's exact
+two-entry append to canonical `references.bib` is the sole authorized
+canonical byte change, while P29--P32 canonical bibliographies are
+unchanged. Fresh Stage 4.5, Stage 5/6, canonical manuscript/PDF
+promotion, submission, and new scientific execution were not invoked.
+
+| Current exact artifact | SHA-256 |
+|---|---|
+| [Exact patch](notes/stage4_prime_revision_patch_round3_exact_confirmation.json) | `225472d8adaf1d850ab403297996dd2411b3f7de99e2768a1b2ede923a319dd2` |
+| [Official successor](notes/stage4_prime_revision_round3.tex) | `009ae2e9b30cb087902c7fbb9d01226bc544ce536da8ebf40f244e7b07d817ae` |
+| [Official apply report](notes/stage4_prime_revision_round3.tex.apply-report.json) | `521b3003f40ffb90c73841aacd71ff7ed90d327ef008b040cf36631799f8694b` |
+| [Clean build receipt](notes/stage4_prime_revision_round3_build_receipt.json) | `c9f3a2ca347e4cd08996dc3b41a16d90490aa8f8a72b6c6943d81f196b8b28bc` |
+| [Preview PDF](notes/stage4_prime_revision_round3.pdf) | `5281d29d63a79f9df561dc6aad0a00c48df1ddae34bb935ce80b4403ece28b8a` |
+| [Exact final-emission manifest](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_FINAL_EMISSION_MANIFEST.json) | `db98aa8ace700196044b7bb1903251a90782e709d65f6c0712da041c36421091` |
+| [Exact authorization receipt](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_AUTHORIZATION_RECEIPT.json) | `a21655745ea33c565626c5cc980b8f91a82f4b87ce2d74cfcb012f0c5d7bae21` |
+| [Planned completion report (not a precondition)](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_COMPLETION_REPORT.md) | not required to pre-exist |
+
+Next legal transition: a separately authorized fresh Stage 4.5
+from-scratch integrity audit of this exact successor. This status does
+not itself authorize that mandatory gate.
 
 ### Historical Stage-4.5 audit checkpoint (superseded)
 

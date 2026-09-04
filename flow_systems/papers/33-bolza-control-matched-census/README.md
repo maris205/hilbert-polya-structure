@@ -2,39 +2,53 @@
 
 ## Current status
 
-<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+<!-- ROUND10_STAGE4_PRIME_EXACT_CONFIRMATION_EXECUTION_STATUS_20260904 -->
 
-**ARS STAGE 4′ ROUND-5 SUPPORT COMPLETE — SCOPE STOPPED — EXPANDED REQUEST
-READY AND AWAITING AUTHOR CONFIRMATION.**
+**ARS STAGE 4′ CORRECTION COMPLETE — AWAITING SEPARATELY AUTHORIZED FRESH STAGE 4.5.**
 
-Control state:
-`stage4_prime_round5_support_complete_scope_stopped_expanded_request_awaiting_confirmation`.
-The originally authorized notes-side support completed, but the pre-mutation
-scope audit found that `B0041` and `B0124` would become stale. The original
-request therefore stopped fail-closed before any bibliography append, patch,
-new draft/PDF, or build. The successor request preserves all original 39
-item-target mappings over 35 unique `replace_block` pairs and all seven support
-scopes, and adds exactly `B0041/replace_block` and `B0124/replace_block`: 41
-mapped provenance pairs over 37 unique targets in total.
+Control state: `stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5`. The exact-confirmation chain applied
+**37/37** authorized
+`replace_block` operations to a new versioned successor, preserving
+**91/128** source
+blocks byte-identically. Marker-free word count changed from
+7053 to 7346
+(+293). The notes-side preview is
+**18 pages** and `PASS_CLEAN`: fatal, undefined
+citation/reference, missing-glyph, and overfull counts are all zero.
 
-本轮结论概要：43/43 个 commit-pinned artifact 字节与哈希完全匹配；48 条 source-use
-记录覆盖 20 个来源，但没有取得任何 exact passage locator，故 48/48 均以明确的
-bounded unavailability 保持 `INCONCLUSIVE`。2 个 valid 与 12 个 invalid synthetic
-fixture 的 14/14 预期处置通过；它们只证明合成 schema conformance，不是 producer
-输出、census 或科学结果。生产 BP/CP、adapter、predicate kernel、theorem encoding
-和 build provenance 仍不可用，independence 未建立。两个 correction Bib 条目仍未
-追加，五处引用仍未绑定。
+本轮结论概要：37 个精确修复已把 43-row replay、48-use bounded unavailability、synthetic-only conformance 与生产非执行边界写入版本化稿件；恰好两条 correction Bib 记录完成五处 dual binding，但没有 producer、owner census 或科学验证结果。
 
-Current artifacts: [expanded exact request](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION.md),
-[scope incident](notes/stage4_prime_round5_scope_stop_incident.md),
-[support validation](notes/stage4_prime_round5_support_validation.json),
-[expanded-request validation](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION_VALIDATION.json),
-and [expanded-request receipt](../../BATCH_ROUND10_STAGE4_PRIME_AUTHORIZATION_REQUEST_P33_SCOPE_EXPANSION_RECEIPT.json).
-The provisional pre-stop roadmap, author choices, claim manifest, and
-adjudication are `NONCONTROLLING_SUPERSEDED_DUE_TO_UNLISTED_TARGETS` and may
-not be used for apply. Next gate: explicit confirmation of the expanded
-request, followed by a fresh successor authority chain. No Stage 4′ manuscript
-or bibliography execution is complete.
+Authorized canonical exception: `paper/references.bib` received exactly two append-only entries (`P33-S03-CORR`, `P33-S16-CORR`) and exactly five uses were dual-bound. No third entry or existing-entry overwrite occurred. Bibliography SHA-256: `12143967175abb0d325e16d156b1bc227e51f886009e7acd64691e84b92cb5e0` → `98bba3645e32b96c8321dad6b3b8dc11087e11e35af835432cbbbee7f0853747`.
+
+Frozen initial system: unit-speed Bolza geodesic flow with a separately typed matched control; presentation-specific owner semantics; frozen generator/cutoff objects; target-blind no-retuning rule.
+
+Route mapping: A1 preparation with formal A0 prohibited/confounded; formal Route-A tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B not invoked. No Route coordinate changed and
+this correction round awards no Route credit.
+
+Batch boundary: 130/130 exact manuscript operations completed across
+Papers 29--33. Scientific execution and canonical-result refresh both
+remain `0`. Citation formatting remains `plainnat` numeric. Canonical
+manuscript/PDF bytes are unchanged for all five papers; P33's exact
+two-entry append to canonical `references.bib` is the sole authorized
+canonical byte change, while P29--P32 canonical bibliographies are
+unchanged. Fresh Stage 4.5, Stage 5/6, canonical manuscript/PDF
+promotion, submission, and new scientific execution were not invoked.
+
+| Current exact artifact | SHA-256 |
+|---|---|
+| [Exact patch](notes/stage4_prime_revision_patch_round6_exact_confirmation.json) | `42add3e385d1315f8026714f22546ef0467b630a3ebae9b7bfc34993cdbb69ac` |
+| [Official successor](notes/stage4_prime_revision_round2.tex) | `40ff6a91c311e7bdd01d6a37bfdd3bd351073311d7781bd4074f0975362e60ce` |
+| [Official apply report](notes/stage4_prime_revision_round2.tex.apply-report.json) | `60aab33825459a9c84f1733bcdf3c45a0f4d30076f13dd4e42ca2c2a5ebf35fd` |
+| [Clean build receipt](notes/stage4_prime_revision_round2_build_receipt.json) | `e0aa0769017328482d346c69c7fcb0efbfe42d76b18fd139b42a30fbfe353716` |
+| [Preview PDF](notes/stage4_prime_revision_round2.pdf) | `aa26872580f858f99ae81ba7753eb7862e8326b1a845ebca75dbc1a23df4d28d` |
+| [P33 Bib append receipt](notes/stage4_prime_round6_bibliography_append_receipt.json) | `0067bb29946f07a2f0d2b91ff0d1c352b9e071a6385662efaac73a9c38ce8f1a` |
+| [Exact final-emission manifest](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_FINAL_EMISSION_MANIFEST.json) | `db98aa8ace700196044b7bb1903251a90782e709d65f6c0712da041c36421091` |
+| [Exact authorization receipt](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_AUTHORIZATION_RECEIPT.json) | `a21655745ea33c565626c5cc980b8f91a82f4b87ce2d74cfcb012f0c5d7bae21` |
+| [Planned completion report (not a precondition)](../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_COMPLETION_REPORT.md) | not required to pre-exist |
+
+Next legal transition: a separately authorized fresh Stage 4.5
+from-scratch integrity audit of this exact successor. This status does
+not itself authorize that mandatory gate.
 
 ### Historical Round-5 review checkpoint (superseded)
 

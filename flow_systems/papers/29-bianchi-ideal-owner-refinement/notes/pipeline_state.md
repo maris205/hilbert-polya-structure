@@ -2,19 +2,40 @@
 
 Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization`**.
+Current controlling state: **`stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5`**.
 
-<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+<!-- ROUND10_STAGE4_PRIME_EXACT_CONFIRMATION_EXECUTION_STATUS_20260904 -->
 
 | Current gate field | Value |
 |---|---|
-| Pipeline global state | `stage4_prime_author_side_complete_awaiting_fresh_stage4_5_authorization` |
-| Current completed gate | Stage 4′ author-side `COMPLETE`; 5 residual/regression items, 8 operations, 105/113 preserved blocks |
-| Paper deliverable | versioned 15-page clean preview; 53-query replay; 22/22 crosswalk; stop map and unexecuted fixture bound |
-| Integrity/build | official revision bundle `PASS`; authorization witness `PASS`; overfull/undefined citation/reference/missing/fatal all `0` |
-| Route | A0/A1 foundation/interface only; formal tuple `UNASSIGNED`; positive A2/A3/A4 `0`; Route B uninvoked |
-| Frozen boundaries | canonical manuscript/bib/PDF, science/results, initial system and Route crosswalk unchanged |
-| Next legal transition | separately authorized fresh Stage 4.5 audit-only |
+| Pipeline global state | `stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5` |
+| Current completed gate | Stage 4′ exact-confirmation correction `COMPLETE`; fresh Stage 4.5 `NOT_INVOKED` |
+| Explicit paper conclusion | 31 个精确来源／现态修复已落入新的版本化稿件；引文用途、bounded-unavailability、owner/primitive 术语及 provenance 表述被收窄到证据实际支持的范围，但没有建立完整 owner law、quotient、certificate 或 Route 结论。 |
+| Deterministic apply | 31/31 exact `replace_block`; 82/113 blocks preserved byte-identically |
+| Marker-free word count | 6199 → 7011 (+812) |
+| Clean preview | `PASS_CLEAN`; 17 pages; fatal/undefined citation/undefined reference/missing glyph/overfull all `0` |
+| Authorized support result | No in-place support artifact or canonical package byte was authorized to change for this paper. |
+| Frozen initial system | torsion-free level-(3) Gaussian Bianchi unit-speed geodesic flow; hyperbolic-arclength clock; primitive loxodromic inversion-paired owner; one literal nonzero Gaussian prime ideal |
+| Route | A0/A1 preparation only; formal Route-A tuple UNASSIGNED; positive arithmetic A2=0; A3=0; A4=0; Route B not invoked; no coordinate change or credit |
+| Canonical/science boundary | canonical manuscript/PDF unchanged; scientific execution/result refresh `0`; P33 exact two-entry canonical Bib append is the sole authorized canonical change |
+| Citation style | `natbib[numbers,sort&compress] + plainnat` numeric; unchanged |
+| Next legal transition | separately authorized fresh Stage 4.5 from-scratch integrity gate only |
+
+Batch aggregate: **130/130 operations**, five clean versioned previews,
+two authorized notes-side matrix regenerations, and exactly two P33
+canonical bibliography appends. This is Stage 4′ correction completion,
+not a Stage 4.5 integrity verdict or Route advancement.
+
+| Current exact artifact | SHA-256 |
+|---|---|
+| [Exact patch](stage4_prime_revision_patch_round3_exact_confirmation.json) | `225472d8adaf1d850ab403297996dd2411b3f7de99e2768a1b2ede923a319dd2` |
+| [Official successor](stage4_prime_revision_round3.tex) | `009ae2e9b30cb087902c7fbb9d01226bc544ce536da8ebf40f244e7b07d817ae` |
+| [Official apply report](stage4_prime_revision_round3.tex.apply-report.json) | `521b3003f40ffb90c73841aacd71ff7ed90d327ef008b040cf36631799f8694b` |
+| [Clean build receipt](stage4_prime_revision_round3_build_receipt.json) | `c9f3a2ca347e4cd08996dc3b41a16d90490aa8f8a72b6c6943d81f196b8b28bc` |
+| [Preview PDF](stage4_prime_revision_round3.pdf) | `5281d29d63a79f9df561dc6aad0a00c48df1ddae34bb935ce80b4403ece28b8a` |
+| [Exact final-emission manifest](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_FINAL_EMISSION_MANIFEST.json) | `db98aa8ace700196044b7bb1903251a90782e709d65f6c0712da041c36421091` |
+| [Exact authorization receipt](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_AUTHORIZATION_RECEIPT.json) | `a21655745ea33c565626c5cc980b8f91a82f4b87ce2d74cfcb012f0c5d7bae21` |
+| [Planned completion report (not a precondition)](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_COMPLETION_REPORT.md) | not required to pre-exist |
 
 ## Historical previous-checkpoint state
 

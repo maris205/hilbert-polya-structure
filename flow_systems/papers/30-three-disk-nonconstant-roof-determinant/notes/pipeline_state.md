@@ -2,20 +2,41 @@
 
 Synchronized: **2026-09-04 UTC**
 
-Current controlling state: **`stage4_5_round1_fail_awaiting_exact_correction_authorization`**.
+Current controlling state: **`stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5`**.
 
-<!-- ROUND10_STAGE4_PRIME_EXECUTION_STAGE4_5_ROUND5_STATUS_SYNC_20260904 -->
+<!-- ROUND10_STAGE4_PRIME_EXACT_CONFIRMATION_EXECUTION_STATUS_20260904 -->
 
 | Current gate field | Value |
 |---|---|
-| Pipeline global state | `stage4_5_round1_fail_awaiting_exact_correction_authorization` |
-| Current completed gate | fresh Stage 4.5 Round 1 `FAIL`; full audit completed, no silent repair |
-| Audit denominators | references 28/28; contexts 30/30 = 4 verified + 26 anchorless; claims 102/102; evidence 104/104 |
-| Blockers | 1 Serious + 3 Medium: passage locators, 26-vs-28 wording, stale Stage-2.5 status, AI disclosure interval |
-| Build | `PASS`, 16 pages; unresolved citations/references and overfull boxes `0` |
-| Route | A0_FAIL / A2_NOT_ELIGIBLE; formal tuple `UNASSIGNED`; A3/A4 `0`; Route B uninvoked |
-| Frozen boundaries | canonical manuscript/bib/PDF, science/results, initial system and Route crosswalk unchanged |
-| Next legal transition | bounded source-finalization and exact correction-request preparation; patch application requires later confirmation |
+| Pipeline global state | `stage4_prime_exact_confirmation_correction_complete_awaiting_separately_authorized_fresh_stage4_5` |
+| Current completed gate | Stage 4′ exact-confirmation correction `COMPLETE`; fresh Stage 4.5 `NOT_INVOKED` |
+| Explicit paper conclusion | 34 个 source-scoped 修复已落入新的版本化稿件，并把物理 roof 文献支持与明确不可用状态逐项对齐；这闭合的是来源、披露与现态一致性，不是 roof、算子、determinant、误差界或数值结果。 |
+| Deterministic apply | 34/34 exact `replace_block`; 95/129 blocks preserved byte-identically |
+| Marker-free word count | 6492 → 8016 (+1524) |
+| Clean preview | `PASS_CLEAN`; 18 pages; fatal/undefined citation/undefined reference/missing glyph/overfull all `0` |
+| Authorized support result | Authorized notes-side support update: the claim-passage matrix was regenerated in place with 18 bounded locator rows, 8 explicit bounded-unavailability rows, 2 retained narrow rows, and 28 rows total. Matrix SHA-256: `583ce6edb27860ca77967af7c2cb1afb64214fa8f84c30cf7ede9f6578343dc0` → `f2e24dcba6b31a5d4cbd72981d194b844ade544dec883a1f84100336a4831816`. |
+| Frozen initial system | no-eclipse equilateral three-disk flow at d=6a; Euclidean free-flight clock; primitive cyclic collision-word owner; physical roof distinct from the unit-roof control |
+| Route | A0_FAIL / A2_NOT_ELIGIBLE; formal Route-A tuple UNASSIGNED; A3=0; A4=0; Route B not invoked; no coordinate change or credit |
+| Canonical/science boundary | canonical manuscript/PDF unchanged; scientific execution/result refresh `0`; P33 exact two-entry canonical Bib append is the sole authorized canonical change |
+| Citation style | `natbib[numbers,sort&compress] + plainnat` numeric; unchanged |
+| Next legal transition | separately authorized fresh Stage 4.5 from-scratch integrity gate only |
+
+Batch aggregate: **130/130 operations**, five clean versioned previews,
+two authorized notes-side matrix regenerations, and exactly two P33
+canonical bibliography appends. This is Stage 4′ correction completion,
+not a Stage 4.5 integrity verdict or Route advancement.
+
+| Current exact artifact | SHA-256 |
+|---|---|
+| [Exact patch](stage4_prime_revision_patch_round3_exact_confirmation.json) | `1c401a3358188408b0258a2cc124cc78bd5c17c95ff3744493a33dd4279cf40e` |
+| [Official successor](stage4_prime_revision_round3.tex) | `509e9f45b798ad2257acf2f62db81f95a43e3c574da8f1ba7e654c9fa9d21ead` |
+| [Official apply report](stage4_prime_revision_round3.tex.apply-report.json) | `3a0ed5d05af571264994fb2f73ab57e3dc8feb714012f8a4240cc6e49f57025d` |
+| [Clean build receipt](stage4_prime_revision_round3_build_receipt.json) | `15982eb26a505670514f964f5e72fab24f92f479c0671df47a822a6513c6670f` |
+| [Preview PDF](stage4_prime_revision_round3.pdf) | `1b6f6808f6e3d7a199747cee44bf22d216aeb030675b03080641ffc49c4dda7b` |
+| [Matrix regeneration receipt](stage4_prime_correction_round3_matrix_regeneration_receipt.json) | `10011851c7598d8b235c46851483615e51117ef365d828290afb97fb87fa5e70` |
+| [Exact final-emission manifest](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_FINAL_EMISSION_MANIFEST.json) | `db98aa8ace700196044b7bb1903251a90782e709d65f6c0712da041c36421091` |
+| [Exact authorization receipt](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_AUTHORIZATION_RECEIPT.json) | `a21655745ea33c565626c5cc980b8f91a82f4b87ce2d74cfcb012f0c5d7bae21` |
+| [Planned completion report (not a precondition)](../../../BATCH_ROUND10_STAGE4_PRIME_CORRECTION_SCOPE_REISSUE_EXACT_CONFIRMATION_COMPLETION_REPORT.md) | not required to pre-exist |
 
 ## Historical previous-checkpoint state
 
