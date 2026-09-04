@@ -1,0 +1,298 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Tcal}{\mathcal T}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\indeg}{\operatorname{indeg}}
+
+\title[Odd-side least-neighbour walks]{Sharp Tails, Recurrent EGFs, and
+Exact Fibres for Odd-Side Least-Neighbour Walks on Labelled Trees}
+\author{Anonymous}
+\date{}
+\keywords{labelled tree, finite dynamical system, parity cut, deterministic
+walk, exponential generating function, fibre}
+
+\begin{document}
+
+\begin{abstract}
+Fix a labelled tree and move a distinguished root to the least-labelled
+neighbour whose side of the incident edge has odd order; hold when no such
+neighbour exists.  We solve this deterministic finite dynamics uniformly in
+the parity of the tree order.  For odd order, every edge points in one
+direction and all recurrent states are fixed; for even order, the odd-cut
+edges form a forest of odd degrees and every cycle has length two.  In both
+cases the sharp maximum tail is $\lfloor(n-1)/2\rfloor$, with explicit
+witnesses.  We give exponential generating functions for all odd-order fixed
+rooted trees and all even-order recurrent rooted trees.  The latter uses an
+integrated odd-branch marker and remains valid even though one odd-cut
+component may contain several attracting two-cycles.  Finally, a local
+necessary-and-sufficient predecessor test gives every labelled fibre and the
+sharp maximum fibre: $(n+1)/2$ for odd $n$ and $n-1$ for even $n$.
+Exhaustion through $n=8$ checks 2,223,278 state transitions.  Classical
+Cayley/species facts receive zero contribution credit, and external status
+is \texttt{OWNER\_AMBER/HOLD\_EXTERNAL}.
+\end{abstract}
+
+\maketitle
+
+\section{Definition and ownership boundary}
+
+Let $T$ be a tree on $[n]=\{1,\ldots,n\}$ and let $r$ be a distinguished
+vertex.  For $v\sim r$, write $C_r(v)$ for the component containing $v$ in
+$T-rv$, and call $v$ eligible from $r$ when $|C_r(v)|$ is odd.  Define
+\begin{equation}\label{eq:update}
+ F(T,r)=\begin{cases}
+ (T,\min\{v\sim r:|C_r(v)|\text{ is odd}\}),&\text{if this set is nonempty},\\
+ (T,r),&\text{otherwise}.
+ \end{cases}
+\end{equation}
+Labels are compared only after parity eligibility is determined.  The
+underlying tree never changes.
+
+Cayley's formula, rooted-tree exponential generating functions, and labelled
+SET constructions are classical \cite{Moon1970,BergeronLabelleLeroux1998,
+BostanJimenezPastor2020,FlajoletSedgewick2009}.  They receive zero
+contribution credit.  A bounded owner search found parity-edge algorithms and
+general deterministic tree walks, but no literal least-neighbour system
+\eqref{eq:update} with the theorem package below.  This non-hit establishes
+neither novelty nor priority.
+
+Internally, the fixed-carrier marker walk is distinct from P114 forest
+pruning, P120 odd-fringe mirroring, P123 odd-component complementation, the
+killed Catalan parity rotation from the P122--P126 scout, P144 tree rotations,
+P148 level contraction, and P159 parallel odd-vertex pruning.  P123 changes
+all edges inside selected odd connected components and obtains its clock from
+a parity-pruned split tree; P159 deletes every current odd-degree vertex and
+uses a binary-rank transfer inverse.  In contrast, P195 never changes the
+tree: it moves one marker by odd edge-side sizes and least labels.  The shared
+$\lfloor(n-1)/2\rfloor$ scale, fixed/two-cycle silhouette, labelled
+EGF/species calculus, zeta conversion, and generic local-fibre language earn
+no separation or contribution credit.  The paper claims only the specific
+orbit geometry, integrated least-label recurrent census, and incident-edge
+inverse atlas of \eqref{eq:update}.
+
+\section{Parity geometry and recurrent states}
+
+For even $n$, let $H(T)$ be the spanning subgraph consisting of edges whose
+deletion leaves two odd components.
+
+\begin{theorem}[complete recurrent classification]\label{thm:recurrent}
+If $n$ is odd, orient every edge toward its odd side.  The map follows the
+least-labelled outgoing neighbour, and its recurrent states are precisely
+the sinks, equivalently the roots whose incident branches all have even
+order.  Every recurrent state is fixed.
+
+If $n$ is even, eligibility is symmetric and the map is the least-neighbour
+map on the forest $H(T)$.  Every vertex has odd degree in $H(T)$, so there
+are no fixed states, and every recurrent state belongs to a two-cycle
+$u\leftrightarrow v$ in which $u$ and $v$ are mutual least neighbours in
+$H(T)$.
+\end{theorem}
+
+\begin{proof}
+When $n$ is odd, the two sides of each edge have opposite parity, so exactly
+one orientation is present.  A directed cycle would give an undirected cycle
+in $T$; hence an orbit terminates at a sink.  The sink condition is exactly
+the asserted branch condition.
+
+When $n$ is even, the two sides have the same parity.  At a vertex $v$, the
+sum of all branch orders is $n-1$, which is odd; therefore an odd number of
+branches are odd and $\deg_H(v)$ is odd.  The update is thus everywhere
+defined and is exactly least-neighbour motion in $H$.  A directed cycle of
+length at least three would create an undirected cycle in the forest $H$;
+the only possible cycles are reciprocal edges.
+\end{proof}
+
+\begin{remark}[essential nonuniqueness warning]\label{rem:warning}
+A connected component of $H(T)$ need not contain a unique mutual-minimum
+edge.  For example, a suitably labelled six-vertex double star has two.
+Theorem~\ref{thm:recurrent} asserts uniqueness only for the eventual cycle in
+each \emph{functional-graph} component.  None of the counts below assumes
+one cycle per component of $H$.
+\end{remark}
+
+\section{The sharp pointwise clock}
+
+Let $\tau(T,r)$ be the first time at which the root state is recurrent.
+
+\begin{theorem}[sharp tails]\label{thm:tail}
+For every $n\ge1$,
+\begin{equation}\label{eq:max-tail}
+ \max_{T,r}\tau(T,r)=\left\lfloor\frac{n-1}{2}\right\rfloor.
+\end{equation}
+Both parities admit explicit labelled caterpillar witnesses.
+\end{theorem}
+
+\begin{proof}
+Suppose first that $n$ is odd.  After a move into an odd side of size $s$,
+the reverse edge points toward the complementary even side and is
+ineligible.  Every next chosen odd side is a proper subset of the preceding
+one.  The difference of two nested odd sizes is positive and even, so sizes
+fall by at least two.  The first is at most $n-2$ and the last at least one,
+giving at most $(n-1)/2$ moves.
+
+For even $n$, suppose a tail of length $d$ reaches the two-cycle
+$v_d\leftrightarrow v_{d+1}$ along
+$v_0,v_1,\ldots,v_d,v_{d+1}$.  For each $1\le i\le d$, the vertex $v_i$
+has two distinct neighbours on this $H$-path.  Its $H$-degree is odd, hence
+at least three, so it has an off-path $H$-neighbour.  These $d$ witnesses are
+distinct, since sharing one would make a cycle in $H$.  Thus
+$n\ge(d+2)+d$ and $d\le n/2-1$.
+
+For odd $n=2d+1$, take a spine $v_0\cdots v_d$ and attach one leaf to each
+$v_0,\ldots,v_{d-1}$.  Label each forward spine neighbour below the competing
+leaf; the root walks from $v_0$ to the fixed $v_d$.  For even $n=2d+2$, use
+the spine $v_0\cdots v_{d+1}$ and attach one leaf to each
+$v_1,\ldots,v_d$.  Every degree is odd, hence every edge lies in $H$; labels
+decreasing along the forward spine and larger on the leaves force a tail of
+$d$ into $v_d\leftrightarrow v_{d+1}$.
+\end{proof}
+
+\section{Exact recurrent enumeration}
+
+Let
+\begin{equation}\label{eq:tree-egf}
+ R(z)=\sum_{n\ge1}n^{n-1}\frac{z^n}{n!},\qquad R(z)=z\exp R(z),
+\end{equation}
+and split rooted trees by order parity:
+\begin{equation}\label{eq:EO}
+ O(z)=\frac{R(z)-R(-z)}2,\qquad E(z)=\frac{R(z)+R(-z)}2.
+\end{equation}
+
+\begin{theorem}[fixed and recurrent EGFs]\label{thm:egf}
+For odd $n$, the number $f_n$ of recurrent rooted states is
+\begin{equation}\label{eq:odd-fixed}
+ f_n=n![z^n]\,z\exp(E(z)).
+\end{equation}
+For even $n$, define
+\begin{equation}\label{eq:W}
+ W(z)=z\exp(E(z))\frac{\exp(O(z))-1}{O(z)},\qquad
+ W_{\rm odd}(z)=\frac{W(z)-W(-z)}2.
+\end{equation}
+Then the number $r_n$ of recurrent rooted states is
+\begin{equation}\label{eq:even-recurrent}
+ r_n=n![z^n]W_{\rm odd}(z)^2.
+\end{equation}
+Hence the dynamical zeta function at fixed order is
+\begin{equation}\label{eq:zeta}
+ \zeta_n(t)=\begin{cases}
+ (1-t)^{-f_n},&n\text{ odd},\\
+ (1-t^2)^{-r_n/2},&n\text{ even}.
+ \end{cases}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+At an odd-order fixed root every branch has even order.  The labelled species
+$\mathsf Z\cdot\operatorname{SET}(\Tcal_{\rm even})$ gives
+\eqref{eq:odd-fixed}.
+
+For the even case, cut an oriented recurrent state $u\to v$ at its mutual
+edge.  This produces an ordered pair of odd-order rooted trees $A,B$.  If
+$k_A$ is the number of odd-order branches at the root of $A$, then $u$ chooses
+the cross-edge neighbour $v$ precisely when the label of $v$ is least among
+it and those $k_A$ branch roots.  Its relative-label probability is
+$1/(k_A+1)$.  Marking odd branches by $x$ and integrating gives the weighted
+rooted-tree EGF
+\begin{equation*}
+ \int_0^1z\exp(E+xO)\,dx
+ =z\exp(E)\frac{\exp(O)-1}{O}=W.
+\end{equation*}
+The analogous comparison on side $B$ involves a disjoint label set, so the
+two relative-order events are independent.  Both sides must have odd total
+order.  Their ordered labelled product is therefore $W_{\rm odd}^2$, proving
+\eqref{eq:even-recurrent}.  An orientation is a recurrent root state; the
+opposite orientation is its partner, so there are $r_n/2$ two-cycles.  The
+zeta formula follows.
+\end{proof}
+
+The first values are
+\begin{equation*}
+ f_1,f_3,f_5,f_7=1,6,380,68712,
+ \qquad r_2,r_4,r_6,r_8=2,56,6512,1718656.
+\end{equation*}
+
+\section{Every-target fibres and their maximum}
+
+For adjacent $u,v$, let $C_u(v)$ retain the meaning from Section~1.  An empty
+minimum below is interpreted as $+\infty$.
+
+\begin{theorem}[local inverse atlas]\label{thm:fibre}
+For every target $(T,v)$,
+\begin{align}\label{eq:fibre}
+ \indeg(T,v)
+ &=\mathbf1\{|C_v(w)|\text{ is even for every }w\sim v\}\\
+ &\quad+\#\left\{u\sim v:\begin{array}{l}
+ |C_u(v)|\text{ is odd},\\
+ v<\min\{w\sim u:w\ne v,\ |C_u(w)|\text{ is odd}\}
+ \end{array}\right\}.\notag
+\end{align}
+The sharp maximum over all targets and labelled trees is
+\begin{equation}\label{eq:max-fibre}
+ \max_{T,v}\indeg(T,v)=
+ \begin{cases}(n+1)/2,&n\text{ odd},\\ n-1,&n\text{ even}.
+ \end{cases}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The target is its own predecessor exactly under the displayed fixed-root
+condition.  A different predecessor must have root at a neighbour $u$.
+Rule \eqref{eq:update} maps it to $v$ exactly when the $v$-side is odd and
+$v$ is the least eligible neighbour of $u$, which is the set condition in
+\eqref{eq:fibre}.  These possibilities are disjoint and exhaustive.
+
+For even $n$ there is no self predecessor, so the fibre is at most
+$\deg(v)\le n-1$.  A star whose centre is the target attains $n-1$ because
+every leaf has only the centre as eligible neighbour.  For odd $n$, every
+neighbour-source counted in \eqref{eq:fibre} lies in an even-order branch at
+$v$.  There are at most $(n-1)/2$ such branches; adding the possible self
+predecessor gives $(n+1)/2$.  This is attained by a fixed centre joined to
+$(n-1)/2$ paths of length two, with the centre given the least label.  Each
+branch has order two, and its inner vertex maps back to the centre.
+\end{proof}
+
+Longer fibres are counted without ambiguity by iterating the local reverse
+test in \eqref{eq:fibre}; because the carrier tree is fixed, this is a finite
+dynamic program on its oriented edges and vertices.
+
+\section{Controls and limitations}
+
+The paper-local verifier generates every labelled tree from its Pr\"ufer
+code through $n=8$, every distinguished root, and every transition.  It
+checks the parity classifications, direct orbit depths and periods, sharp
+maxima, the local fibre formula, both EGF coefficient families, and complete
+depth histograms.  This is regression pressure, not proof or novelty
+evidence.
+
+The map deliberately keeps the tree fixed.  We do not claim results for
+unlabelled trees, dynamically changing labels, stochastic tie breaking,
+general graphs, or weighted side congruences.  Most of the species algebra is
+classical after the recurrent structures are identified.  External posting
+and submission remain unauthorized under
+\texttt{OWNER\_AMBER/HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

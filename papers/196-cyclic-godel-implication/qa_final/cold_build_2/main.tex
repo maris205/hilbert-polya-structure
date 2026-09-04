@@ -1,0 +1,269 @@
+\documentclass[a4paper,10pt]{amsart}
+
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[shortlabels]{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathcal A}
+\newcommand{\Lcal}{\mathcal L}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\im}{\operatorname{im}}
+
+\title[Cyclic G\"odel-implication dynamics]{A One-Step Core, Rotation
+Spectrum, and Exact Fibres for Cyclic G\"odel-Implication Dynamics}
+\author{Anonymous}
+\date{}
+\keywords{finite dynamical system, G\"odel implication, cyclic word,
+shift of finite type, transient, fibre}
+
+\begin{document}
+
+\begin{abstract}
+Let $\A_q=\{0,\ldots,q-1\}$ be a finite chain and apply G\"odel
+implication synchronously around a cyclic word:
+$T(x)_i=x_i\Rightarrow x_{i+1}$.  We solve the resulting finite dynamical
+system.  Its image is exactly the cyclic language in which every nontop
+letter is preceded by a strictly larger letter, and the restriction of $T$
+to this image is the cyclic shift.  Thus every tail has length at most one,
+while all recurrent periods divide the word length.  A $q$-state transfer
+matrix gives every iterate-fixed count and hence the complete cycle census;
+its characteristic polynomial is
+$\lambda^q-(\lambda+1)^{q-1}$.  The inverse problem is genuinely
+nonuniform: for every target we give a product of explicit binomial
+differences indexed by the cyclic gaps between its nontop sites.  The
+all-top fibre has size $q$.  Exact exhaustion through $q=5$ and length seven
+checks the image, clocks, spectra, and every labelled fibre.  Classical
+finite-chain logic and transfer-matrix facts receive no contribution credit,
+and the bounded owner search leaves the manuscript
+\texttt{HOLD\_EXTERNAL}.
+\end{abstract}
+
+\maketitle
+
+\section{The map and the subtraction boundary}
+
+Fix integers $q\ge2$ and $m\ge1$, put $M=q-1$, and write indices modulo
+$m$.  On the chain $\A_q=\{0,1,\ldots,M\}$, G\"odel implication is
+\begin{equation}\label{eq:implication}
+ a\Rightarrow b=\begin{cases}M,&a\le b,\\ b,&a>b.\end{cases}
+\end{equation}
+The finite self-map studied here is
+\begin{equation}\label{eq:update}
+ T_{q,m}(x)_i=x_i\Rightarrow x_{i+1}
+ \qquad (x\in\A_q^m).
+\end{equation}
+All coordinates in \eqref{eq:update} are read before the synchronous update.
+
+Finite-chain G\"odel logics and the truth function \eqref{eq:implication}
+are classical \cite{Dummett1959,Hajek1998}; recent work also enumerates
+finite-chain implication values over bracketings \cite{Yildiz2026}.  We use
+only the truth function, not a bracketing model.  Transfer matrices, cyclic
+languages, and M\"obius inversion are likewise standard
+\cite{LindMarcus1995,Stanley2011}.  Our residual object is the joint
+finite-dynamical statement for the synchronous cyclic map: its exact image,
+rotation spectrum, and target-resolved inverse product.
+
+This map is not assigned novelty or priority.  Internally, its carrier and
+rule differ from Rule 184 in P90, odd-run reversal in P117, cyclic equality
+feedback in P164, and the finite-set/composition maps P187--P191.  The
+architecture ``one step into a constrained language, then a shift'' is
+generic and receives zero credit.  A bounded exact-phrase and translated
+search found no literal cyclic G\"odel-implication dynamics owner; a non-hit
+is not evidence of novelty, completeness, or freedom to operate.
+
+\section{The recurrent language}
+
+Let $S$ denote left cyclic shift, $(Sy)_i=y_{i+1}$, and define
+\begin{equation}\label{eq:language}
+ \Lcal_{q,m}=\{y\in\A_q^m:y_{i+1}<M\Longrightarrow y_i>y_{i+1}
+ \text{ for every }i\}.
+\end{equation}
+Thus each nontop letter has a strictly larger predecessor.
+
+\begin{theorem}[one-step core]\label{thm:core}
+For every $q\ge2$ and $m\ge1$,
+\begin{equation}\label{eq:image}
+ \im(T_{q,m})=\Lcal_{q,m},\qquad T_{q,m}|_{\Lcal_{q,m}}=S.
+\end{equation}
+Consequently a state has depth zero exactly when it belongs to
+$\Lcal_{q,m}$ and depth one otherwise.  Every recurrent period divides $m$.
+The unique fixed state is $M^m$.
+\end{theorem}
+
+\begin{proof}
+Put $y=T(x)$.  If $y_{i+1}<M$, then \eqref{eq:implication} gives
+$y_{i+1}=x_{i+2}$ and $x_{i+1}>x_{i+2}$.  If $y_i=M$, then
+$y_i>y_{i+1}$; otherwise $y_i=x_{i+1}>x_{i+2}=y_{i+1}$.  Hence
+$y\in\Lcal_{q,m}$.
+
+Conversely, if $y\in\Lcal_{q,m}$, then a coordinate with
+$y_{i+1}<M$ satisfies $y_i>y_{i+1}$ and therefore
+$y_i\Rightarrow y_{i+1}=y_{i+1}$.  If $y_{i+1}=M$, the same equality holds
+because every letter is at most $M$.  Thus $T(y)=Sy$.  The language is
+shift invariant, so $y=T(S^{-1}y)$ and every $y\in\Lcal_{q,m}$ lies in the
+image.  This proves \eqref{eq:image}.
+
+The shift is a permutation of the core.  A periodic point of $T$ must lie in
+the image, so the depth statement follows.  Shift periods divide $m$.
+Finally $Sy=y$ makes $y$ constant, and a constant word lies in
+$\Lcal_{q,m}$ only when its letter is $M$.
+\end{proof}
+
+The exact transient count is therefore
+\begin{equation}\label{eq:transient-count}
+ q^m-|\Lcal_{q,m}|.
+\end{equation}
+
+\section{Transfer spectrum and cycles}
+
+Index rows and columns by $0,\ldots,M$ and let
+\begin{equation}\label{eq:matrix}
+ A_{a,b}=\mathbf1\{b=M\text{ or }a>b\}.
+\end{equation}
+A closed walk of length $m$ in this directed graph is precisely a word in
+$\Lcal_{q,m}$.
+
+\begin{theorem}[all iterate-fixed counts]\label{thm:spectrum}
+For every $r\ge1$,
+\begin{equation}\label{eq:fixed-iterates}
+ |\Fix(T_{q,m}^r)|=\operatorname{tr}
+ \bigl(A^{\gcd(m,r)}\bigr).
+\end{equation}
+In particular $|\Lcal_{q,m}|=\operatorname{tr}(A^m)$.  Moreover,
+\begin{equation}\label{eq:charpoly}
+ \det(\lambda I-A)=\lambda^q-(\lambda+1)^{q-1}.
+\end{equation}
+If $d\mid m$, the number of points of least period $d$ and the number of
+$d$-cycles are respectively
+\begin{equation}\label{eq:mobius}
+ P_d=\sum_{e\mid d}\mu(d/e)\operatorname{tr}(A^e),
+ \qquad C_d=P_d/d.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The trace statement for the language is the closed-walk formula.  By
+Theorem~\ref{thm:core}, an iterate-fixed point is a core word fixed by
+$S^r$, hence the repetition of a closed word of length $\gcd(m,r)$.
+This proves \eqref{eq:fixed-iterates}.  In $\lambda I-A$, subtracting each
+row from its successor and expanding along the resulting bidiagonal part
+gives
+$\lambda^q-(\lambda+1)^{q-1}$; equivalently the same identity follows by
+induction on $q$ from the last-row expansion.  Finally
+$\operatorname{tr}(A^d)=\sum_{e\mid d}P_e$, and M\"obius inversion gives
+\eqref{eq:mobius}.
+\end{proof}
+
+The binomial coefficients in \eqref{eq:charpoly} matter.  For example, when
+$q=3$ the polynomial is $\lambda^3-\lambda^2-2\lambda-1$, not the
+tribonacci polynomial.  Cayley--Hamilton yields the exact recurrence
+\begin{equation}\label{eq:trace-recurrence}
+ R_j=\sum_{h=0}^{q-1}\binom{q-1}{h}R_{j-q+h}
+ \quad(j\ge q),\qquad R_j=\operatorname{tr}(A^j).
+\end{equation}
+
+\section{Every-target inverse product}
+
+The recurrent dynamics is uniform rotation, but the incoming trees are not
+uniform.  Fix $y\in\Lcal_{q,m}$ other than $M^m$.  List its nontop sites in
+cyclic order as $p_1,\ldots,p_s$, set
+\begin{equation*}
+ a_j=y_{p_j},\qquad
+ d_j=p_{j+1}-p_j\pmod m\in\{1,\ldots,m\},
+\end{equation*}
+where $p_{s+1}=p_1$.  For $a,b<M$ and $d\ge1$, define
+\begin{equation}\label{eq:gap-factor}
+ G_d(a,b)=\binom{M-a+d-1}{d-1}
+ -\mathbf1_{b\ge a}\binom{b-a+d-1}{d-1}.
+\end{equation}
+
+\begin{theorem}[complete labelled fibre]\label{thm:fibre}
+Every target $y\in\A_q^m$ has
+\begin{equation}\label{eq:fibre}
+ |T_{q,m}^{-1}(y)|=
+ \begin{cases}
+ 0,&y\notin\Lcal_{q,m},\\
+ q,&y=M^m,\\
+ \displaystyle\prod_{j=1}^sG_{d_j}(a_j,a_{j+1}),
+   &y\in\Lcal_{q,m}\setminus\{M^m\}.
+ \end{cases}
+\end{equation}
+For every $t\ge1$, fibres of $T^t$ are rotations of the same data:
+\begin{equation}\label{eq:t-fibre}
+ |(T^t)^{-1}(y)|=|T^{-1}(S^{1-t}y)|
+ \quad(y\in\Lcal_{q,m}).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Targets outside the image have empty fibre.  If every target coordinate is
+$M$, the source inequalities are
+$x_1\le x_2\le\cdots\le x_m\le x_1$; the source is constant, giving $q$
+choices.
+
+Now fix consecutive nontop sites $p=p_j$ and $p'=p_{j+1}$ at cyclic gap
+$d=d_j$.  The equation at $p$ fixes $x_{p+1}=a_j$.  Every intervening top
+coordinate imposes a weak inequality, while the equation at $p'$ requires
+$x_{p'}>a_{j+1}$.  Thus the variables along this gap satisfy
+\begin{equation*}
+ a_j=x_{p+1}\le x_{p+2}\le\cdots\le x_{p'}\le M,
+ \qquad x_{p'}>a_{j+1}.
+\end{equation*}
+There are $\binom{M-a_j+d-1}{d-1}$ weak chains before the last inequality.
+When $a_{j+1}\ge a_j$, exactly
+$\binom{a_{j+1}-a_j+d-1}{d-1}$ of them violate it; when
+$a_{j+1}<a_j$, none do.  This is \eqref{eq:gap-factor}.  Distinct cyclic
+gaps share only already fixed endpoints, so their choices are independent,
+proving the product.
+
+On the core, $T^t=S^{t-1}T$.  Taking inverse images gives
+\eqref{eq:t-fibre}.
+\end{proof}
+
+For adjacent nontop sites $d=1$, the factor is one exactly under the strict
+descent already required by \eqref{eq:language}.  Long top gaps instead
+produce binomially large and target-dependent factors.  As a global check,
+finite-map edge mass and \eqref{eq:fibre} give
+\begin{equation}\label{eq:mass}
+ \sum_{y\in\Lcal_{q,m}}|T^{-1}(y)|=q^m.
+\end{equation}
+
+\section{Exact controls and limitations}
+
+The paper-local script enumerates all states for $2\le q\le5$ and
+$1\le m\le7$.  It independently constructs the map and checks image
+equality, the shift restriction, every labelled fibre, edge mass, all tested
+iterate-fixed counts, and the recurrence forced by \eqref{eq:charpoly}.
+The transcript is deterministic and hashed.  These tests are falsifiers for
+indexing and boundary errors; the proofs above carry the all-parameter
+claims.
+
+The result is deliberately narrow.  It does not address asynchronous
+updates, noncyclic boundary conditions, other residuated implications,
+probabilistic perturbations, entropy limits, or logical expressivity.  The
+transfer matrix and rotation census are standard once the core language is
+known.  The paper's concrete progress is the exact one-step factorization
+through that core together with the nonuniform target-resolved inverse
+product.  External status remains \texttt{HOLD\_EXTERNAL}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
