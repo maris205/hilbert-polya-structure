@@ -1,0 +1,81 @@
+schema: route-a-evaluation-v0.2.0
+candidate_id: HCS-C369
+title: Quartic S4 root-scheme Chebotarev-Frobenius permutation dynamics
+evaluation_date: '2026-09-04'
+source_commit: c6553f02d928c6aa05400ded57746869a85f0238
+fixed_epoch: 1788480000
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority: flow_systems/skills/route-a-evaluator.md
+evaluator_version: 0.2.0
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+obstruction_id: HEN-O353
+candidate_definition: the arithmetic Frobenius permutations x maps to x^p on the four geometric roots of x^4-x-1 over every good rational prime p
+family: finite etale root schemes and prime-indexed Frobenius permutation dynamics
+phase_space: the four-point geometric fiber X_p of Spec Z[x]/(x^4-x-1) over F_p for p not equal to 283
+dynamics: arithmetic Frobenius F_p sends a geometric root alpha to alpha^p; geometric Frobenius is its inverse and has the same cycle type
+parameters: good rational primes p, iterate r from 1 through 12 in the finite evidence, and the five partitions of four
+parameter_provenance: the defining polynomial, its discriminant, and its finite etale fibers over rational primes
+arithmetic_origin: intrinsic; rational-prime fibers and Frobenius arise from the integral quartic root scheme
+clock: the intrinsic integer iterate r of the fiberwise Frobenius permutation; primes index distinct fibers and are not a single autonomous time
+normalization: f(x)=x^4-x-1 with discriminant -283 and arithmetic Frobenius convention x maps to x^p
+determinant_convention: Z_p(u)=det(I-u P_p)^(-1)=exp(sum over r at least 1 of #Fix(F_p^r)u^r/r), only on the four-dimensional fiber
+orbit_cutoff: all primes p at most 10000 with p not equal to 283 and iterates r at most 12; the theorem itself is exact for every good prime and every r
+precision: exact integer polynomial arithmetic, exact modular gcd and powering, and exact rational formal identities
+training_data: none
+forbidden_data: target arithmetic local data, target Euler factors, root numbers, automorphy, target divisors, target zeros, Hilbert-Polya operators, and Route B
+artifact_paths:
+  - results/c369_s4_frobenius_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+a0:
+  verdict: A0_STRUCTURAL_ARITHMETIC_RELATION
+  evidence_status: PROVED
+  strongest_evidence: the integral quartic root scheme intrinsically supplies rational-prime fibers, prime-power Frobenius iterates, and a Dedekind-Chebotarev cycle-type dictionary
+  strongest_failure: the prime fibers are separate finite dynamical systems and do not yet form one global autonomous owner
+a1:
+  verdict: A1_PASS_ANALYTIC
+  evidence_status: PROVED
+  strongest_evidence: each good fiber has an exact primitive-cycle ledger and a finite-dimensional determinant identity valid as a rational formal function
+  strongest_failure: the pass is strictly fiberwise and does not assert a cross-prime Fredholm direct sum or global determinant
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: all five local cycle types and their finite determinant factors are classified exactly
+  strongest_failure: no source theorem assembles the local determinants into a target Euler product, target divisor, or target analytic object
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: Chebotarev gives the source-local natural densities of the five conjugacy classes
+  strongest_failure: no target continuation, functional equation, counting law, zero compression, or zero correspondence is proved
+a4:
+  verdict: A4_NATURAL_QUANTIZATION
+  evidence_status: PROVED
+  strongest_evidence: pullback by each Frobenius permutation is a canonical unitary Koopman operator on l2 of the four-point geometric fiber
+  strongest_failure: this is a family of four-dimensional fiber operators, not one cross-prime self-adjoint Hilbert-Polya operator
+tuple:
+  - A0_STRUCTURAL_ARITHMETIC_RELATION
+  - A1_PASS_ANALYTIC
+  - A2_FAIL
+  - A3_FAIL
+  - A4_NATURAL_QUANTIZATION
+overall_verdict: ROUTE_A_ARITHMETIC_CANDIDATE
+route_b_invocation_allowed: false
+route_b_lock_reason: the arithmetic and fiberwise orbit gates pass, but no global autonomous owner or target analytic bridge clears A2 or A3
+scope_flags:
+  claims_target_arithmetic_local_data: false
+  claims_target_euler_factors: false
+  claims_root_number: false
+  claims_automorphy: false
+  claims_target_divisor_or_counting_law: false
+  claims_target_functional_equation: false
+  claims_target_zero_match: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false
+theorem_status: PROVABLE_AS_STATED
+finite_evidence_role: exhaustive exact regression over the declared finite grid, not proof by sampling and not a global Euler product
+source_owner_tokens:
+  - polynomial:x^4-x-1
+  - discriminant:-283
+  - arithmetic-Frobenius:x->x^p
+  - theorem:Dedekind-factorization-cycle-dictionary
+  - theorem:Chebotarev-density-for-S4-classes

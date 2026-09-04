@@ -1,0 +1,358 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<C3712026090400000000000000000000><C3712026090400000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\HH}{\mathsf H}
+\newcommand{\PP}{\mathcal P}
+\newcommand{\CC}{\mathcal C}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Scope}{\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}}
+\title{Rational-Flux Anisotropic Harper Dynamics:\
+Chambers Phase Collapse and the Algebraic Bloch-Band Atlas}
+\author{HCS-C371 / HEN-O355}
+\date{4 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For every reduced rational magnetic flux and every positive hopping
+anisotropy, we fix one magnetic-cell phase convention and derive the exact
+Chambers characteristic identity.  The proof exposes why the vertical
+transfer trace has only three Laurent modes and fixes both phase signs.
+\ifnum\CRevisionRound>0
+We then recover the full two-dimensional spectrum as a polynomial preimage,
+give the exact algebraic band-contact criterion, prove Aubry duality, flux
+reversal and parity, and isolate the forced central contact at every even
+denominator.  The one- and two-site cells are computed separately.
+\fi
+\ifnum\CRevisionRound>1
+An exact cyclotomic lane and 74,880 independently reconstructed Bloch fibers
+audit the result.  Harper--Chambers theory is established background, and
+the final Route-A verdict remains negative despite natural quantization.
+\fi
+\end{abstract}
+
+\section{Magnetic owner and phase convention}
+Let $(p,q)=1$, $q\ge3$, and $\lambda>0$.  On
+$\ell^2(\mathbb Z^2)$ consider the bounded self-adjoint operator
+\begin{align}
+ (\HH_{p/q,\lambda}\Psi)_{m,n}
+ ={}&\Psi_{m+1,n}+\Psi_{m-1,n}\notag\\
+ &+\lambda e^{2\pi i pm/q}\Psi_{m,n+1}
+ +\lambda e^{-2\pi i pm/q}\Psi_{m,n-1}.
+ \label{eq:lattice}
+\end{align}
+Fourier transformation in the second coordinate and magnetic Bloch
+reduction give the $q$-dimensional fiber
+\begin{equation}
+ (\HH(k_x,k_y)u)_m=u_{m+1}+u_{m-1}
+ +2\lambda\cos\!\left(k_y+\frac{2\pi pm}{q}\right)u_m,
+ \qquad u_{m+q}=e^{iqk_x}u_m .
+ \label{eq:fiber}
+\end{equation}
+Thus $X=qk_x$ is the \emph{total} horizontal boundary phase.  This
+distinction is essential: throughout,
+\begin{equation}
+ D_{p/q,\lambda}(E;k_x,k_y)
+ :=\det\!\left(EI_q-\HH_{p/q,\lambda}(k_x,k_y)\right).
+ \label{eq:D}
+\end{equation}
+This manuscript's first revision is the \textbf{Chambers phase-collapse
+owner}.
+
+\section{The Chambers polynomial}
+Put $\zeta=e^{2\pi i/q}$, $y=e^{ik_y}$, and
+\begin{equation}
+ A_m(E,y)=
+ \begin{pmatrix}
+ E-\lambda(y\zeta^{pm}+y^{-1}\zeta^{-pm})&-1\\
+ 1&0
+ \end{pmatrix},
+ \qquad M_q=A_{q-1}\cdots A_0 .
+ \label{eq:transfer}
+\end{equation}
+
+\begin{theorem}[Anisotropic Chambers identity]\label{thm:chambers}
+There is a unique real monic polynomial $\PP_{p/q,\lambda}$ of degree $q$
+such that
+\begin{equation}
+ D_{p/q,\lambda}(E;k_x,k_y)
+ =\PP_{p/q,\lambda}(E)-2\cos(qk_x)
+ -2\lambda^q\cos(qk_y)
+ \label{eq:chambers}
+\end{equation}
+for every real $E,k_x,k_y$.
+\end{theorem}
+
+\begin{proof}
+Since $\det A_m=1$, the Floquet multipliers of $M_q$ are
+$e^{\pm iqk_x}$.  Both sides below are monic of degree $q$ and have the
+same roots, hence
+\begin{equation}
+ D_{p/q,\lambda}=\operatorname{tr}M_q-2\cos(qk_x).
+ \label{eq:traceD}
+\end{equation}
+Replacing $y$ by $\zeta^p y$ cyclically permutes the potential sequence in
+\eqref{eq:transfer}.  The monodromy changes by cyclic conjugacy, so its
+trace is invariant.  Because $p$ is invertible modulo $q$, a Laurent
+polynomial of $y$ with degrees between $-q$ and $q$ and this invariance can
+use only the modes $-q,0,q$.
+
+The coefficient of $y^q$ has one contribution: select
+$-\lambda y\zeta^{pm}$ in every upper-left entry.  It equals
+\begin{equation}
+ (-\lambda)^q\zeta^{p q(q-1)/2}=-\lambda^q .
+ \label{eq:extreme}
+\end{equation}
+Indeed, odd $q$ makes $q-1$ even, while even $q$ forces $p$ odd.  Complex
+conjugation gives the same coefficient for $y^{-q}$.  The remaining mode
+is independent of both phases, real, and monic; call it
+$\PP_{p/q,\lambda}(E)$.  Equations \eqref{eq:traceD} and
+\eqref{eq:extreme} prove \eqref{eq:chambers}.  Monicity gives uniqueness.
+\end{proof}
+
+The theorem is convention-complete: using the boundary character $X$ in
+place of $k_x$ rewrites the horizontal term as $-2\cos X$, not
+$-2\cos(qX)$.  This is precisely the convention tested by the executable
+fibers.
+
+\ifnum\CRevisionRound>0
+\section{Spectrum and algebraic band contacts}
+This revision is the \textbf{spectrum, duality, and edge owner}.  Write
+\begin{equation}
+ \CC_{q,\lambda}=2(1+\lambda^q),\qquad
+ B_{p/q,\lambda}(E)=\PP_{p/q,\lambda}(E)^2-\CC_{q,\lambda}^2.
+ \label{eq:edgepoly}
+\end{equation}
+
+\begin{lemma}[Sourced cyclic-continuant evaluation]\label{lem:central}
+If $q$ is even, then
+\begin{equation}
+ \PP_{p/q,\lambda}(0)=2(-1)^{q/2}(1+\lambda^q).
+ \label{eq:centralvalue}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Lamoureux and Mingo use
+$h_{\theta,L}=u+u^{-1}+(L/2)(v+v^{-1})$.  Their Theorem~2.5 proves the
+vanishing of every intermediate cyclic-matching sum, and their
+Corollary~2.6 gives, for even $q$,
+\[
+ \Delta_{p/q,L}(0)=2(-1)^{q/2}\bigl(1+(L/2)^q\bigr)
+ \quad\cite{LamoureuxMingo}.
+\]
+Our diagonal potential is $2\lambda\cos(\cdot)$, so their parameter is
+$L=2\lambda$.  Comparing the phase-independent monic term in their
+Chambers formula with Theorem~\ref{thm:chambers} identifies
+$\Delta_{p/q,2\lambda}=\PP_{p/q,\lambda}$: their defining vertical phase
+$\pi/(2q)$ kills the explicit $q$th cosine, while our transfer trace then
+equals $\PP$.  This also fixes our
+$\det(EI-\HH)$ convention.  Substitution gives \eqref{eq:centralvalue}.
+Thus this all-$q$ step is sourced rather than inferred from the finite
+cyclotomic audit.
+\end{proof}
+
+\begin{theorem}[Complete Bloch spectral atlas]\label{thm:spectrum}
+The full two-dimensional spectrum of \eqref{eq:lattice} is
+\begin{equation}
+ \Spec(\HH_{p/q,\lambda})
+ =\{E\in\mathbb R:|\PP_{p/q,\lambda}(E)|\le\CC_{q,\lambda}\}.
+ \label{eq:preimage}
+\end{equation}
+The two edge factors are actual fiber characteristic polynomials:
+\begin{equation}
+ \PP(E)-\CC_{q,\lambda}=D(E;0,0),\qquad
+ \PP(E)+\CC_{q,\lambda}=D(E;\pi/q,\pi/q).
+ \label{eq:edgefibers}
+\end{equation}
+Consequently the algebraic band-edge multiset is the real zero multiset of
+$B$.  An
+edge label is multiple precisely when
+\begin{equation}
+ \PP(E)=\pm\CC_{q,\lambda},\qquad \PP'(E)=0.
+ \label{eq:contact}
+\end{equation}
+Moreover,
+\begin{align}
+ \PP_{p/q,\lambda}(E)
+ &=\lambda^q\PP_{p/q,1/\lambda}(E/\lambda),
+ \label{eq:duality}\\
+ \PP_{p/q,\lambda}(E)&=\PP_{(q-p)/q,\lambda}(E),
+ \label{eq:reversal}\\
+ \PP_{p/q,\lambda}(-E)&=(-1)^q\PP_{p/q,\lambda}(E).
+ \label{eq:parity}
+\end{align}
+If $q$ is even, then
+\begin{equation}
+ \PP_{p/q,\lambda}(0)=2(-1)^{q/2}(1+\lambda^q),
+ \qquad \PP'_{p/q,\lambda}(0)=0,
+ \label{eq:central}
+\end{equation}
+so zero is a multiple central edge.
+\end{theorem}
+
+\begin{proof}
+Magnetic Bloch theory is a direct-integral decomposition into
+\eqref{eq:fiber}.  By \eqref{eq:chambers}, $E$ lies in some fiber spectrum
+exactly when
+\[
+ \PP(E)=2\cos(qk_x)+2\lambda^q\cos(qk_y).
+\]
+The phases vary independently, and their sum fills
+$[-\CC_{q,\lambda},\CC_{q,\lambda}]$, proving \eqref{eq:preimage}.
+Putting $(k_x,k_y)=(0,0)$ and $(\pi/q,\pi/q)$ in
+\eqref{eq:chambers} proves \eqref{eq:edgefibers}.  Both endpoint fibers
+are real symmetric: their total horizontal boundary phases are $0$ and
+$\pi$, and their diagonal potentials are real.  Thus both edge factors
+have only real roots, with multiplicity, and
+$B=(\PP-\CC)(\PP+\CC)$ is real-rooted.  Equation \eqref{eq:contact} follows from
+$B'=2\PP\PP'$ and $\PP\ne0$ at an edge.  It is an algebraic
+coalescence criterion, not a claim that every remaining gap is open.
+
+Exchange of the two lattice axes reverses the magnetic orientation and
+swaps the hopping amplitudes.  After division by $\lambda$, magnetic
+Fourier duality identifies the result with
+$\lambda\HH_{(q-p)/q,1/\lambda}$.  Complex conjugation identifies the
+fluxes $p/q$ and $(q-p)/q$.  Comparing the phase-independent monic terms
+in \eqref{eq:chambers} proves \eqref{eq:duality}--\eqref{eq:reversal}.
+
+The bipartite involution
+$\Gamma\Psi_{m,n}=(-1)^{m+n}\Psi_{m,n}$ conjugates $\HH$ to $-\HH$ and
+shifts both quasimomenta by $\pi$.  Substitution in
+\eqref{eq:chambers} proves \eqref{eq:parity}.  For even $q$,
+Lemma~\ref{lem:central} gives the first formula in \eqref{eq:central}.
+Equation \eqref{eq:parity} makes $\PP$ even, so $\PP'(0)=0$.  This proves
+the derivative formula without extrapolating the finite exact lane.
+\end{proof}
+
+\begin{proposition}[Accumulated small-cell boundaries]\label{prop:small}
+When coincident wrap neighbors are added rather than overwritten,
+Theorem~\ref{thm:chambers} has the direct boundary polynomials
+\begin{equation}
+ q=1,\ p=0:\quad \PP(E)=E,
+ \qquad
+ q=2,\ p=1:\quad \PP(E)=E^2-2(1+\lambda^2).
+ \label{eq:small}
+\end{equation}
+The two $q=2$ folded bands meet at zero.  As $\lambda\downarrow0$, the
+spectrum tends to the decoupled horizontal-chain interval $[-2,2]$;
+reciprocal duality is not evaluated at $\lambda=0$.
+\end{proposition}
+
+\begin{proof}
+For $q=1$ the scalar fiber is
+$2\cos k_x+2\lambda\cos k_y$.  For $q=2$, write
+$X=e^{2ik_x}$ and $Y=e^{ik_y}$.  The off-diagonal entries are
+$1+X^{-1}$ and $1+X$, while the diagonal entries are
+$\pm\lambda(Y+Y^{-1})$.  Its determinant is
+\[
+ E^2-2(1+\lambda^2)-(X+X^{-1})
+ -\lambda^2(Y^2+Y^{-2}),
+\]
+which proves \eqref{eq:small} and the asserted contact.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Independent evidence}
+This revision is the \textbf{evidence, collision, and route owner}.
+The evidence exhausts all reduced fractions with $3\le q\le16$ and the
+five anisotropies $1/2,2/3,1,3/2,2$.
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+receipt & count\\
+\midrule
+reduced fluxes / parameter panels & $78$ / $390$\\
+Bloch total-phase grid per panel & $12\times16$\\
+Hermitian fibers / eigenvalues & $74{,}880$ / $825{,}600$\\
+characteristic-determinant probes & $224{,}640$\\
+exact cyclotomic reduced fluxes, $q\le10$ & $30$\\
+\bottomrule
+\end{tabular}
+\caption{Finite regression scale.  Sampling is not the proof.}
+\label{tab:evidence}
+\end{table}
+
+The producer obtains $\PP$ from transfer-polynomial multiplication.  The
+checker never imports it: it reconstructs $\PP$ from the characteristic
+polynomial of one Hermitian reference fiber and then rebuilds every matrix
+in Table~\ref{tab:evidence}.  A third lane works exactly in
+$\mathbb Q[\zeta_q]/(\Phi_q)$ with a symbolic anisotropy degree; it checks
+the Laurent support, both extreme coefficients, duality, reversal, parity,
+and \eqref{eq:central} through $q=10$.  It is a regression check, not the
+all-denominator proof supplied by Lemma~\ref{lem:central}.  Isolated replay,
+repaired-hash mutations and strict JSON/YAML parsers close the computational
+boundary.
+
+\section{Source and collision audit}
+Harper's magnetic difference equation, Chambers' rational-flux relation,
+and Hofstadter's magnetic bands are classical
+\cite{Harper,Chambers,Hofstadter,Avron,JKK}.  Lamoureux and Mingo directly
+precede the cyclic-matching cancellation and even-denominator constant-term
+formula used in Lemma~\ref{lem:central}~\cite{LamoureuxMingo}.  We claim no
+priority for these objects or formulas.  The package contribution is a
+convention-locked reconstruction, the explicit real endpoint-fiber edge
+factorization \eqref{eq:edgefibers}, and an independently replayable atlas.
+
+The direct workspace neighbor is HCS-C15/HEN-O30.  It owns a critical
+Weyl--Harper block $U+U^*+V+V^*$ at flux $1/3^m$ and the return of its top
+spectral edge along a Heisenberg congruence tower.  It does not own the
+two-phase identity \eqref{eq:chambers}, all reduced fluxes, anisotropic
+duality, or the edge polynomial \eqref{eq:edgepoly}.  C293 is a magnetic
+Grushin cylinder, C340 is a Lam\'e Floquet operator, and C356 is a QWZ Chern
+pump.  No Chern, transport, edge-state, irrational-flux Cantor-spectrum, or
+Ten-Martini result is imported here.
+
+\section{Route decision and nonclaims}
+Reduced rational flux gives exact cyclotomic magnetic translations, earning
+$A0_{\rm WEAK\_ARITHMETIC\_RELATION}$.  It does not give rational-prime
+ownership, prime-power repetition, an isolated primitive-orbit ledger, or
+a logarithmic prime clock, so $A1_{\rm FAIL}$.  The finite source
+characteristic polynomial is neither a target Euler product nor a target
+Fredholm determinant, so $A2_{\rm FAIL}$; no target continuation,
+functional equation, divisor or zero-counting law exists, so
+$A3_{\rm FAIL}$.  Equation \eqref{eq:lattice} is already a bounded
+self-adjoint Hamiltonian, hence $A4_{\rm NATURAL\_QUANTIZATION}$, but its
+Bloch bands are not target zeros or a Hilbert--P\'olya realization.
+
+The overall verdict is \texttt{ROUTE\_A\_REJECTED} under the literal scope
+\Scope.  No target arithmetic local datum, Euler factor, root number,
+automorphy, target-zero match, or Hilbert--P\'olya operator is asserted.
+Route B remains locked.
+\fi
+
+\begin{thebibliography}{9}\small
+\bibitem{Harper} P. G. Harper,
+\emph{Single band motion of conduction electrons in a uniform magnetic
+field}, Proc. Phys. Soc. A 68 (1955), 874--878.
+\bibitem{Chambers} W. G. Chambers,
+\emph{Linear-network model for magnetic breakdown in two dimensions},
+Phys. Rev. 140 (1965), A135--A143.
+\bibitem{Hofstadter} D. R. Hofstadter,
+\emph{Energy levels and wave functions of Bloch electrons in rational and
+irrational magnetic fields}, Phys. Rev. B 14 (1976), 2239--2249.
+\bibitem{Avron} J. Avron, P. H. M. van Mouche, and B. Simon,
+\emph{On the measure of the spectrum for the almost Mathieu operator},
+Comm. Math. Phys. 132 (1990), 103--118.
+\bibitem{LamoureuxMingo} M.~P. Lamoureux and J.~A. Mingo,
+\emph{On the characteristic polynomial of the almost Mathieu operator},
+Proc. Amer. Math. Soc. 135 (2007), 3205--3215.
+\url{https://doi.org/10.1090/S0002-9939-07-08830-2}.
+\bibitem{JKK} S. Jitomirskaya, L. Konstantinov, and I. Krasovsky,
+\emph{On the spectrum of critical almost Mathieu operators in the rational
+case}, arXiv:2007.01005.
+\end{thebibliography}
+\end{document}

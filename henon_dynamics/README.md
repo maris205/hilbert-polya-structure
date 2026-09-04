@@ -2719,6 +2719,48 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C369--C373
+
+This round takes five independent theorem-scale steps across a quartic
+arithmetic root scheme, a quasiregular contact flow, a rational-flux magnetic
+Bloch family, an inviscid free-boundary vortex patch, and a curved
+classical--quantum oscillator.  The papers have different state spaces,
+clocks, proof engines, and boundary phenomena; they are not one article split
+into installments.
+
+- [C369 quartic S4 Frobenius root atlas](henon_s4_frobenius_root_scheme_route_a/README.md) · [paper PDF](henon_s4_frobenius_root_scheme_route_a/paper/main.pdf)
+- [C370 pairwise-coprime Brieskorn Reeb atlas](henon_brieskorn_quasiregular_reeb_route_a/README.md) · [paper PDF](henon_brieskorn_quasiregular_reeb_route_a/paper/main.pdf)
+- [C371 rational-flux anisotropic Harper--Chambers atlas](henon_harper_chambers_bloch_route_a/README.md) · [paper PDF](henon_harper_chambers_bloch_route_a/paper/main.pdf)
+- [C372 Kirchhoff--Love elliptic-vortex threshold ladder](henon_kirchhoff_ellipse_love_stability_route_a/README.md) · [paper PDF](henon_kirchhoff_ellipse_love_stability_route_a/paper/main.pdf)
+- [C373 hemispherical Higgs oscillator and exact revivals](henon_hemispherical_higgs_oscillator_route_a/README.md) · [paper PDF](henon_hemispherical_higgs_oscillator_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C369_C373.md),
+[batch plan](BATCH_PLAN_C369_C373.md), and
+[batch review](BATCH_REVIEW_C369_C373.md) for collision screening, theorem
+contracts, author-swapped proof/source repairs, exact hashes, and release
+accounting.  C369 explicitly inherits C12A's universal finite-fibre
+Frobenius zeta/determinant mechanism and owns only the quartic-specific
+`S_4` atlas.  C371's all-even-denominator step is now tied to the exact
+Lamoureux--Mingo normalization; C372's zero-vorticity and co-rotating-frame
+conventions are closed; C373's PDF source has a hostile gate against
+unescaped TeX spacing commands.
+
+The round closes 16,659 symbolic identities, 358 hostile rejections,
+15,217,220 canonical evidence bytes, 175 content-addressed payloads (180
+physical files), and 18 final-paper pages with 93 embedded/subset font rows.
+The strict tuples, in order C369--C373, are
+`(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`, and
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`.  C369 is
+`ROUTE_A_ARITHMETIC_CANDIDATE`, C370 is `ROUTE_A_EXPLORATORY`, and
+C371--C373 are `ROUTE_A_REJECTED`.  Route B is false and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic local datum, target
+Euler factor, target bad-prime datum, root number, automorphy object, target
+divisor/counting law or functional equation, target-zero match,
+Hilbert--Polya operator, or Route-B input is asserted.
+
 ## Route-A independent cross-subtype round C364--C368
 
 This round takes five independent theorem-scale steps across a fixed-

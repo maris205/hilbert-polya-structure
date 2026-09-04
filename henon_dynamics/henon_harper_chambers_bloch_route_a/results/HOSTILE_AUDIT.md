@@ -1,0 +1,3 @@
+# Hostile audit
+
+The repaired-hash suite rejects 107 attacks against identity and source locks, total Bloch-phase conventions, both Chambers signs, real endpoint-fiber edge identities, the Lamoureux--Mingo normalization map, spectral and edge claims, duality, reversal, parity, the forced central contact, small-cell formulas, workspace and literature collision boundaries, Route-A/Route-B fields, forbidden flags, flux rows, polynomial coefficients, phase dimensions, eigenvalue digests, residual claims, and enumeration totals.  It also rejects deletion, insertion, reordering, truncation, stale hashes, duplicate or nonfinite JSON, duplicate or aliased YAML, non-string YAML keys, and route/scope YAML mutations.

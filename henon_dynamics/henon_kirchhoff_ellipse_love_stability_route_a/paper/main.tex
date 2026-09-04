@@ -1,0 +1,304 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<C3722026090400000000000000000000><C3722026090400000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.70in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,float,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Real}{\mathbb R}
+\newcommand{\Scope}{\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}}
+\title{The Complete Love-Mode Threshold Ladder\\
+for Kirchhoff's Uniform Elliptic Vortex}
+\author{HCS-C372 / HEN-O356}
+\date{4 September 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a uniform-vorticity ellipse in the unbounded plane, we separate the
+classical input from a complete all-mode consequence.  The patch is an exact
+Euler relative equilibrium with shape rate
+$\Omega=\omega_0ab/(a+b)^2$.  Love's dispersion relation factors into two
+dimensionless scalar terms: one is positive and the other has exactly one
+zero for every mode $m\ge3$.  We prove strict ordering of all thresholds,
+the sharp first wall $a/b=3$, and an exact closed asymptotic description of the
+ladder.  Exact rational evidence audits $35{,}904$ modal cells.  Every
+stability statement is spectral and linear; no nonlinear stability,
+Jordan, or filamentation theorem is asserted.
+\end{abstract}
+
+\section{The exact Euler relative equilibrium}
+Consider the planar Euler vorticity equation
+\begin{equation}\label{eq:euler}
+ \partial_t\omega+u\mathbin{\cdot}\nabla\omega=0,
+ \qquad \nabla\mathbin{\cdot}u=0,
+ \qquad \operatorname{curl}u=\omega,
+\end{equation}
+with velocity decaying modulo its circulation field at infinity.  Let
+\begin{equation}\label{eq:patch}
+ E_0=\left\{(x,y):\frac{x^2}{a^2}+\frac{y^2}{b^2}<1\right\},
+ \qquad a\ge b>0,
+ \qquad \omega(x,0)=\omega_0\mathbf1_{E_0}.
+\end{equation}
+Positive $\omega_0$ is counterclockwise.
+
+\begin{theorem}[Kirchhoff shape clock]\label{thm:kirchhoff}
+For $a>b$, the Kirchhoff patch evolution from \eqref{eq:patch} is the relative
+equilibrium
+\begin{equation}\label{eq:omega}
+ E_t=R_{\Omega t}E_0,
+ \qquad \Omega=\frac{\omega_0ab}{(a+b)^2}.
+\end{equation}
+The interior velocity at the displayed orientation is
+\begin{equation}\label{eq:inside}
+ u(x,y)=\frac{\omega_0}{a+b}(-ay,bx).
+\end{equation}
+The area, circulation, and quadratic vorticity moment are
+\begin{equation}\label{eq:invariants}
+ |E_t|=\pi ab,\qquad
+ \Gamma=\pi\omega_0ab,\qquad
+ I:=\int_{\Real^2}|x|^2\omega(x,t)\,dx
+ =\frac{\pi\omega_0ab(a^2+b^2)}4.
+\end{equation}
+If $\Omega\ne0$, the unmarked patch has minimal period
+$\pi/|\Omega|$; an oriented-axis lift has period $2\pi/|\Omega|$.
+\end{theorem}
+
+\begin{proof}
+With $u=(-\psi_y,\psi_x)$, the interior streamfunction is
+\[
+ \psi_{\rm in}=\frac{\omega_0}{2(a+b)}(bx^2+ay^2),
+\]
+which gives \eqref{eq:inside}, zero divergence, and curl $\omega_0$.
+In elliptic coordinates $x=c\cosh\xi\cos\eta$,
+$y=c\sinh\xi\sin\eta$, the harmonic exterior expression
+\[
+ \psi_{\rm out}=\frac{\omega_0ab}{2}\xi
+ +\frac{\omega_0ab}{4}e^{-2\xi}\cos2\eta+C
+\]
+matches the boundary Cauchy data for a suitable constant $C$; this is the
+classical Kirchhoff construction~\cite{MitchellRossi}.
+At $(a\cos\theta,b\sin\theta)$, dotting the difference between
+\eqref{eq:inside} and $\Omega(-y,x)$ with the unnormalized normal
+$(\cos\theta/a,\sin\theta/b)$ gives
+\[
+ \sin\theta\cos\theta\left\{
+ \frac{\omega_0(a-b)}{a+b}
+ -\frac{\Omega(a^2-b^2)}{ab}\right\}.
+\]
+It vanishes exactly for \eqref{eq:omega}; tangential differences only
+reparametrize the contour.  The contour therefore rotates without changing
+shape.  Direct ellipse integration gives \eqref{eq:invariants}.  Finally,
+$R_\pi E_0=E_0$ while no smaller positive rotation fixes a noncircle,
+proving the two period statements.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Love factorization and every finite-mode wall}
+This revision is the \textbf{all-mode spectral-wall owner}.
+Put
+\begin{equation}\label{eq:variables}
+ \gamma=\frac ab\ge1,\qquad
+ \delta=\frac{a-b}{a+b}\in[0,1),\qquad
+ \kappa=\frac{2ab}{(a+b)^2}=\frac{1-\delta^2}{2}.
+\end{equation}
+
+\begin{proposition}[Sourced Love dispersion]\label{prop:love}
+Resolve the boundary perturbation in elliptic coordinates whose axes co-rotate
+with the unperturbed ellipse.  Thus the Fourier label $m\ge1$ is measured
+relative to the instantaneous principal axes, and $\lambda_m$ is the
+co-rotating-frame frequency under the convention $e^{-i\lambda_mt}$.  The
+linearized contour equation has characteristic square
+\begin{equation}\label{eq:love}
+ \lambda_m^2=\frac{\omega_0^2}{4}
+ \left\{\left[\frac{2mab}{(a+b)^2}-1\right]^2
+ -\left(\frac{a-b}{a+b}\right)^{2m}\right\}.
+\end{equation}
+Equation \eqref{eq:love} is classical Love theory, not a newly derived
+linearization here~\cite{Love,MitchellRossi}.  The results below are exact
+consequences of this sourced characteristic equation.
+\end{proposition}
+
+Define
+\begin{equation}\label{eq:FG}
+ F_m(\delta)=\frac m2(1-\delta^2)-1-\delta^m,
+ \qquad
+ G_m(\delta)=\frac m2(1-\delta^2)-1+\delta^m.
+\end{equation}
+
+\begin{theorem}[Complete finite-mode threshold theorem]\label{thm:wall}
+The symmetry modes obey
+\begin{equation}\label{eq:symmetry}
+ \lambda_1^2=\Omega^2,\qquad \lambda_2^2=0
+ \quad\hbox{for every ellipse}.
+\end{equation}
+For each $m\ge3$, $F_m$ has a unique zero $\delta_m\in(0,1)$, while
+$G_m(\delta)>0$ on $[0,1)$.  For $\omega_0\ne0$, mode $m$ is oscillatory
+when $\delta<\delta_m$, critical at equality, and has an exponentially
+growing/decaying spectral pair when $\delta>\delta_m$.
+
+The thresholds are strictly ordered:
+\begin{equation}\label{eq:ordered}
+ \delta_3<\delta_4<\cdots,\qquad
+ \gamma_m:=\frac{1+\delta_m}{1-\delta_m},\qquad
+ \gamma_3<\gamma_4<\cdots.
+\end{equation}
+The first wall is sharp:
+\begin{equation}\label{eq:first}
+ \delta_3=\frac12,\qquad \gamma_3=3.
+\end{equation}
+Thus all $m\ge3$ squares are positive for $1\le\gamma<3$; at $\gamma=3$
+only $m=3$ reaches zero, and for $\gamma>3$ the $m=3$ square is negative.
+These are spectral statements; zero or repeated characteristic roots are
+not a claim about Jordan structure.
+\end{theorem}
+
+\begin{proof}
+Equations \eqref{eq:variables} and \eqref{eq:love} give, without dividing by
+the possibly zero vorticity,
+\begin{equation}\label{eq:factor}
+ 4\lambda_m^2=\omega_0^2F_m(\delta)G_m(\delta).
+\end{equation}
+Substitution of $m=1,2$ proves \eqref{eq:symmetry}.  For $m\ge3$,
+\[
+ F_m(0)=m/2-1>0,\quad F_m(1)=-2,\quad
+ F_m'(\delta)=-m\delta-m\delta^{m-1}<0
+\]
+on $(0,1)$, proving existence and uniqueness.  The other factor satisfies
+\begin{equation}\label{eq:G}
+ G_m'(\delta)=m\delta(\delta^{m-2}-1)<0,\qquad G_m(1)=0,
+\end{equation}
+so $G_m>0$ on $[0,1)$.  This proves the sign classification.
+
+At every $0\le\delta<1$,
+\begin{equation}\label{eq:difference}
+ F_{m+1}(\delta)-F_m(\delta)
+ =\frac{1-\delta^2}{2}+\delta^m(1-\delta)>0.
+\end{equation}
+Hence $F_{m+1}(\delta_m)>0$; strict decrease places its zero to the right of
+$\delta_m$.  The map from $\delta$ to $\gamma$ is increasing.  Finally,
+direct factorization gives
+\begin{equation}\label{eq:m3}
+ 16\lambda_3^2
+ =\omega_0^2(1-\delta^2)^2(1-4\delta^2),
+\end{equation}
+which proves \eqref{eq:first} and the global first-wall statement.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Asymptotic ladder and finite instability count}
+This revision is the \textbf{asymptotic--boundary--route owner}.
+
+\begin{theorem}[High-mode threshold law]\label{thm:asymptotic}
+Let $W$ be the principal Lambert function and set
+\begin{equation}\label{eq:cstar}
+ c_*=1+W(e^{-1}),\qquad c_*=1.2784\ldots.
+\end{equation}
+Then
+\begin{equation}\label{eq:asymptotic}
+ m(1-\delta_m)\longrightarrow c_*,
+ \qquad \frac{\gamma_m}{m}\longrightarrow\frac{2}{c_*}.
+\end{equation}
+Consequently, for each fixed finite $\gamma$, only finitely many modes have
+negative square.  Because of \eqref{eq:ordered}, they form an initial block
+$m=3,\ldots,M$, possibly empty, with at most one next mode critical.
+\end{theorem}
+
+\begin{proof}
+Write $c_m=m(1-\delta_m)$.  The equation $F_m(\delta_m)=0$ becomes
+\begin{equation}\label{eq:scaled}
+ c_m-\frac{c_m^2}{2m}=1+\left(1-\frac{c_m}{m}\right)^m.
+\end{equation}
+The left-minus-right side at $c=1$ is negative.  At $c=2$ it equals
+$1-2/m-(1-2/m)^m>0$, since $0<1-2/m<1$ and $m\ge3$.
+Uniqueness of $\delta_m$ gives $1<c_m<2$.  Along any convergent subsequence,
+\eqref{eq:scaled} tends to $c=1+e^{-c}$.  The difference
+$c-1-e^{-c}$ is strictly increasing and has one zero; writing
+$c-1=e^{-c}$ gives $c=c_*$ in \eqref{eq:cstar}.  Thus the entire sequence
+converges.  Since
+\[
+ \frac{\gamma_m}{m}=\frac{2-c_m/m}{c_m},
+\]
+the second limit follows, as do divergence of $\gamma_m$ and the finite
+initial-block assertion.
+\end{proof}
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{@{}lrrrrrrrr@{}}
+\toprule
+$m$ & 3 & 4 & 5 & 6 & 8 & 16 & 32 & 64\\
+\midrule
+$\gamma_m$ & 3.000 & 4.612 & 6.197 & 7.774 & 10.917 & 23.450 & 48.488 & 98.552\\
+\bottomrule
+\end{tabular}
+\caption{Readable midpoints of exact $2^{-96}$ threshold brackets; only the
+first entry is asserted as an exact decimal.}
+\label{tab:thresholds}
+\end{table}
+
+The canonical evidence covers $561$ reduced rational aspects
+$1\le\gamma\le8$ with denominator at most $16$, all $64$ modes, and hence
+$35{,}904$ exact modal cells.  It also stores $62$ threshold certificates
+for $3\le m\le64$ and $390$ rigid-solution rows.  The producer uses rational
+arithmetic; a checker that never imports it reconstructs the unfactorized
+Love square and locates the adjacent dyadics by integer binary search.
+Finite evidence is regression, not proof by sampling.
+
+\section{Boundary atlas and claim boundary}
+At $a=b$, the patch is the Rankine circle: its shape is stationary and
+orientation is unobservable.  The continuation value $\Omega=\omega_0/4$
+is therefore a gauge for the degenerating ellipse orientation, while the
+interior fluid rotates at $\omega_0/2$.  Formula \eqref{eq:love} reduces to
+$\lambda_m^2=\omega_0^2(m-2)^2/16$.  At $\omega_0=0$, the velocity,
+$\Omega$, and all modal squares vanish.  Swapping $a,b$ reverses $\delta$
+but leaves \eqref{eq:love} unchanged.  The limit $b\downarrow0$
+($\delta\uparrow1$) is a singular strip boundary, not a bounded ellipse in
+the theorem.  Negative vorticity reverses shape rotation but does not change
+the modal-square signs.
+
+Mitchell and Rossi supply the modern planar convention and compare linear
+modes with simulations~\cite{MitchellRossi}.  Miyazaki and Hanazaki study a
+stratified baroclinic problem~\cite{MiyazakiHanazaki}; it is cited as an
+excluded extension, not as support for the planar Love formula.  C284 uses
+finite point vortices, C299 uses viscous Lamb--Oseen diffusion, and C368 uses
+source/sink Laplacian growth.  None owns this inviscid distributed-patch
+threshold ladder.  We claim no classical priority.
+
+No nonlinear orbital or Lyapunov stability, Jordan classification,
+finite-amplitude filamentation or fission, viscous or wall effect,
+three-dimensional instability, or post-threshold morphology is proved.
+The continuous aspect family has no rational-prime carrier or isolated
+primitive-orbit ledger; the modal characteristic polynomial is not a
+dynamical zeta, target determinant, or Euler product.  The Route-A record is
+\[
+ (A0_{\rm FAIL},A1_{\rm WEAK},A2_{\rm FAIL},A3_{\rm FAIL},
+ A4_{\rm FORMAL\_HINT}),
+\]
+with overall verdict \texttt{ROUTE\_A\_REJECTED}.  The formal Hamiltonian
+linearization hint is not a same-clock self-adjoint quantization.  Under
+\Scope, no target zero match, Hilbert--P\'olya operator, or Route B is
+claimed.
+\fi
+
+\begin{thebibliography}{9}\small
+\bibitem{Love} A.~E.~H. Love,
+\emph{On the Stability of certain Vortex Motions},
+Proceedings of the London Mathematical Society s1-25 (1893), 18--43.
+\url{https://doi.org/10.1112/plms/s1-25.1.18}.
+\bibitem{MitchellRossi} T.~B. Mitchell and L.~F. Rossi,
+\emph{The evolution of Kirchhoff elliptic vortices},
+Physics of Fluids 20 (2008), 054103.
+\url{https://doi.org/10.1063/1.2912991}.
+\bibitem{MiyazakiHanazaki} T. Miyazaki and H. Hanazaki,
+\emph{Baroclinic instability of Kirchhoff's elliptic vortex},
+Journal of Fluid Mechanics 261 (1994), 253--271.
+\url{https://doi.org/10.1017/S0022112094000339}.
+\end{thebibliography}
+\end{document}

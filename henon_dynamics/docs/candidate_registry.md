@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C369--HCS-C373 additions (2026-09-04)
+
+Five independent cross-subtype candidates were frozen from baseline
+`c6553f02d928c6aa05400ded57746869a85f0238`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+Every retained theorem is source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C369 | For `f=x^4-x-1`, irreducibility, discriminant `-283`, and Galois group `S_4` are proved; every good-prime factorization is identified with the complete Frobenius root-permutation cycle atlas, including fixed counts, primitive cycles, the specialization of C12A's finite zeta/determinant mechanism and the five Chebotarev densities, while the ramified fibre at `283` is isolated. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [quartic Frobenius package](../henon_s4_frobenius_root_scheme_route_a/) · [paper PDF](../henon_s4_frobenius_root_scheme_route_a/paper/main.pdf) |
+| HCS-C370 | The normalized Reeb flow on every pairwise-coprime Brieskorn link `Sigma(2,p,q)` has a complete principal/exceptional period and all-return-time Morse--Bott atlas, explicit transverse rotations, determinants, pre-degeneracy Conley--Zehnder indices, Seifert quotient, and a capping-trivialized principal Robbin--Salamon sign theorem. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Brieskorn--Reeb package](../henon_brieskorn_quasiregular_reeb_route_a/) · [paper PDF](../henon_brieskorn_quasiregular_reeb_route_a/paper/main.pdf) |
+| HCS-C371 | Every reduced rational-flux anisotropic Harper operator satisfies the frozen two-phase Chambers identity, giving the full spectral preimage, exact edge/contact criterion, flux reversal, parity and Aubry duality; even denominators have the forced central contact and the accumulated-neighbour `q=1,2` boundaries are closed separately. | `(A0_WEAK_ARITHMETIC_RELATION,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Harper--Chambers package](../henon_harper_chambers_bloch_route_a/) · [paper PDF](../henon_harper_chambers_bloch_route_a/paper/main.pdf) |
+| HCS-C372 | Starting from the sourced Love dispersion, the Kirchhoff elliptic vortex is closed from exact rigid rotation through a complete threshold ladder: every higher mode has one ordered critical aspect, the thresholds have an exact large-mode asymptotic, and mode three gives the sharp all-mode linear-stability wall `a/b=3`; symmetry and singular faces are separated without a nonlinear-stability claim. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Kirchhoff--Love package](../henon_kirchhoff_ellipse_love_stability_route_a/) · [paper PDF](../henon_kirchhoff_ellipse_love_stability_route_a/paper/main.pdf) |
+| HCS-C373 | The positive-coupling hemispherical Higgs oscillator has an exact radial action, action Hamiltonian and global `2:1` frequency lock; its Friedrichs quantization has the complete Jacobi spectrum and multiplicities, flat and Dirichlet-hemisphere limits, and a necessary-and-sufficient full-identity revival criterion with the least revival multiplier. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [hemispherical Higgs package](../henon_hemispherical_higgs_oscillator_route_a/) · [paper PDF](../henon_hemispherical_higgs_oscillator_route_a/paper/main.pdf) |
+
+C369 is only a `ROUTE_A_ARITHMETIC_CANDIDATE`, C370 is
+`ROUTE_A_EXPLORATORY`, and C371--C373 are `ROUTE_A_REJECTED`; Route B is
+false for all five.  Their owners are respectively a finite-etale arithmetic
+root scheme, a quasiregular contact flow, a magnetic Bloch family, an
+inviscid free-boundary vortex patch, and a superintegrable curved
+classical--quantum Hamiltonian.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target Euler factor, root number, automorphy
+object, target divisor/counting law or functional equation, target-zero
+match, Hilbert--Polya operator, or Route-B input is claimed.
+
 ## HCS-C364--HCS-C368 additions (2026-09-04)
 
 Five independent cross-subtype candidates were frozen from baseline

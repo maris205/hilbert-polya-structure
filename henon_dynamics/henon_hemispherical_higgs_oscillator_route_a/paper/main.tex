@@ -1,0 +1,307 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=19mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,microtype,booktabs}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\e}{\mathrm e}
+\newcommand{\dd}{\,\mathrm d}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{The Hemispherical Higgs Oscillator:\\
+Exact Actions, Friedrichs Spectrum, and Identity Revivals}
+\author{HCS-C373 theorem package}
+\date{4 September 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We close the classical and Friedrichs quantum mechanics of the isotropic
+Higgs oscillator on one open hemisphere, while keeping its singular boundary
+explicit.  For positive classical coupling, a turning-point integral gives
+the exact radial action
+$I_r=(J-|L|-\omega R^2)/2$, where
+$J=(2R^2E+\omega^2R^4)^{1/2}$.  The Hamiltonian in actions has an exact
+$2{:}1$ frequency lock, so every regular trajectory closes; circular,
+meridional, equilibrium, and zero-coupling faces are separated.  For the
+quantum Friedrichs realization with nonnegative coupling, Jacobi modes have
+$E_N=\hbar^2(N+1)(N+1+2\nu)/(2R^2)$ and multiplicity $N+1$.  Consecutive
+spectral gaps then prove that the propagator is the identity precisely when
+$\tau=\pi M$ and $M(3+2\nu)$ is even.  Thus a positive identity revival exists
+if and only if $2\nu$ is rational, with an explicit least time.  Exact finite
+enumeration is supplied only as a reproducibility receipt.
+\end{abstract}
+
+\section{Positive-coupling classical system}
+Fix $R>0$, $\omega>0$, and polar coordinates
+$0\leq\theta<\pi/2$, $\phi\in\RR/(2\pi\ZZ)$.  With $L=p_\phi$, consider
+\begin{equation}
+ H=\frac{p_\theta^2}{2R^2}
+ +\frac{L^2}{2R^2\sin^2\theta}
+ +\frac{\omega^2R^2}{2}\tan^2\theta .
+ \label{eq:H}
+\end{equation}
+The positive coupling is part of the theorem: its divergent equatorial
+barrier confines every finite-energy trajectory away from the missing
+equator.  Put
+\[
+ J=(2R^2E+\omega^2R^4)^{1/2},\qquad x=\sin^2\theta .
+\]
+
+\begin{theorem}[Turning points, action, and inversion]
+For a regular trajectory with $L\ne0$, the two turning points
+$0<x_-<x_+<1$ are the roots of
+\begin{equation}
+ J^2x^2-(2R^2E+L^2)x+L^2=0.       \label{eq:turning}
+\end{equation}
+The radial action and the Hamiltonian in actions are
+\begin{align}
+ I_r&=\frac{1}{2\pi}\oint p_\theta\dd\theta
+     =\frac{J-|L|-\omega R^2}{2},                 \label{eq:action}\\
+ H(I_r,L)&=\frac{(2I_r+|L|+\omega R^2)^2-
+                    \omega^2R^4}{2R^2}.           \label{eq:inverse}
+\end{align}
+The allowed chamber is
+$E\geq\omega|L|+L^2/(2R^2)$, with equality exactly on the circular face.
+\end{theorem}
+
+\begin{proof}
+At energy $E$, direct rearrangement of \eqref{eq:H} gives
+\[
+ p_\theta^2
+ =2R^2E-\frac{L^2}{x}-\frac{\omega^2R^4x}{1-x}
+ =\frac{J^2(x-x_-)(x_+-x)}{x(1-x)}.
+\]
+Because $\dd\theta=\dd x/(2\sqrt{x(1-x)})$, the two branches of the
+closed radial loop give
+\begin{equation}
+ I_r=\frac{J}{2\pi}\int_{x_-}^{x_+}
+ \frac{\sqrt{(x-x_-)(x_+-x)}}{x(1-x)}\dd x .
+ \label{eq:action-integral}
+\end{equation}
+For $0<a<b<1$, substitute $x=a+(b-a)\sin^2u$ and split
+$1/[x(1-x)]=1/x+1/(1-x)$.  The two elementary integrals yield
+\begin{equation}
+ \int_a^b\frac{\sqrt{(x-a)(b-x)}}{x(1-x)}\dd x
+ =\pi\{1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\}.            \label{eq:root-integral}
+\end{equation}
+Vieta's relations for \eqref{eq:turning} are
+\[
+ x_-x_+=\frac{L^2}{J^2},\qquad
+ (1-x_-)(1-x_+)=\frac{\omega^2R^4}{J^2}.
+\]
+Equations \eqref{eq:action-integral} and \eqref{eq:root-integral} prove
+\eqref{eq:action}; solving for $J$ proves \eqref{eq:inverse}.  The two roots
+coalesce exactly at the displayed energy threshold.
+\end{proof}
+
+\begin{theorem}[Frequency lock and periods]
+On either signed chamber $L>0$ or $L<0$,
+\[
+ \Omega_r=\frac{\partial H}{\partial I_r}=\frac{2J}{R^2},
+ \qquad
+ \Omega_\phi=\frac{\partial H}{\partial L}
+ =\sgn(L)\frac{J}{R^2}.
+\]
+Every regular trajectory has radial period $\pi R^2/J$ and primitive
+phase-space period $2\pi R^2/J$.
+\end{theorem}
+
+\begin{proof}
+Differentiate \eqref{eq:inverse}.  During one radial return the azimuthal
+angle advances by $\pi\sgn(L)$, so it does not return to the same phase-space
+point.  Two radial returns give angular increments $4\pi$ and
+$2\pi\sgn(L)$ in the two action angles, proving primitivity.
+\end{proof}
+
+\section{Classical boundary atlas}
+The action formula has four distinct boundary interpretations.
+\begin{center}
+\begin{tabular}{p{0.20\linewidth}p{0.70\linewidth}}
+\toprule
+face & exact behavior\\
+\midrule
+circular & $I_r=0$, $L\ne0$; the double root is
+$\sin^2\theta_c=|L|/(|L|+\omega R^2)$ and the angular period is
+$2\pi R^2/J$.\\
+meridional & $L=0$, $I_r>0$; the roots are $0$ and
+$1-(\omega R^2/J)^2$.  A Cartesian tangent chart continues the orbit through
+the polar-coordinate singularity.\\
+north equilibrium & $I_r=L=0$, hence $E=0$ and the orbit is fixed.\\
+zero coupling & $\omega=0$ removes the equatorial barrier.  The open
+hemisphere is then incomplete for crossing geodesics, so it is excluded from
+the classical periodic-flow theorem.\\
+\bottomrule
+\end{tabular}
+\end{center}
+This separation prevents a formula valid on regular Liouville tori from being
+silently extended through collapsed or incomplete faces.
+
+\ifnum\CRevisionRound>0
+\section{Friedrichs quantization on one hemisphere}
+Now allow $\omega\geq0$, retain $R,\hbar>0$, and take the Friedrichs
+realization of
+\begin{equation}
+ \widehat H=-\frac{\hbar^2}{2R^2}
+ [\frac1{\sin\theta}\partial_\theta
+ (\sin\theta\,\partial_\theta)
+ +\frac1{\sin^2\theta}\partial_\phi^2]
+ +\frac{\omega^2R^2}{2}\tan^2\theta .       \label{eq:operator}
+\end{equation}
+Define
+\[
+ \nu=\sqrt{(\omega R^2/\hbar)^2+\frac14}.
+\]
+
+\begin{theorem}[Jacobi spectrum]
+For $m\in\ZZ$, $n_r\in\ZZ_{\geq0}$, and $N=2n_r+|m|$, a separated
+eigenfunction, up to normalization, is
+\begin{equation}
+ \psi_{n_r,m}=\e^{im\phi}(\sin\theta)^{|m|}
+ (\cos\theta)^{\nu+1/2}
+ P_{n_r}^{(|m|,\nu)}(\cos2\theta),             \label{eq:mode}
+\end{equation}
+with
+\begin{equation}
+ E_N=\frac{\hbar^2}{2R^2}(N+1)(N+1+2\nu).      \label{eq:energy}
+\end{equation}
+The multiplicity of $E_N$ on one hemisphere is $N+1$, and these modes form
+a complete orthogonal basis of the Friedrichs realization.
+\end{theorem}
+
+\begin{proof}
+Separation with $\e^{im\phi}$ gives a singular Sturm--Liouville problem.
+After extracting the north-pole factor $(\sin\theta)^{|m|}$ and the
+Friedrichs equatorial factor $(\cos\theta)^{\nu+1/2}$, set
+$y=\cos2\theta$.  The remaining factor $v$ satisfies
+\begin{equation}
+ (1-y^2)v''+[\nu-|m|-(|m|+\nu+2)y]v'
+ +n_r(n_r+|m|+\nu+1)v=0,                     \label{eq:jacobi}
+\end{equation}
+the Jacobi equation.  Polynomial termination gives \eqref{eq:mode} and
+\eqref{eq:energy}.  Jacobi completeness with its positive weight, followed
+by Fourier completeness in $\phi$, proves completeness.
+
+For fixed $N$, admissible labels obey $|m|\leq N$ and
+$N-|m|\in2\ZZ$.  Directly counting the two signs for $m\ne0$ and one copy for
+$m=0$ gives $N+1$.  This count is the proof of multiplicity; we do not use a
+conflicting prose degeneracy sentence in the historical separation source.
+\end{proof}
+
+\paragraph{Limits and domain.}
+For fixed $N,\omega,\hbar$ and $R\to\infty$,
+$\nu=\omega R^2/\hbar+o(R^2)$, so
+$E_N\to\hbar\omega(N+1)$.  At $\omega=0$, $\nu=1/2$ and
+\[
+ E_N=\frac{\hbar^2}{2R^2}(N+1)(N+2).
+\]
+Writing $l=N+1$, these are the Dirichlet-hemisphere levels
+$\hbar^2l(l+1)/(2R^2)$ with multiplicity $l$.  They are the equator-odd
+sector, not the full-sphere spectrum with multiplicity $2l+1$.  Thus
+$\omega=0$ is valid quantum mechanically only because the Friedrichs domain
+supplies the Dirichlet boundary omitted by the classical open flow.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Exact identity revivals}
+Write $k=N+1\geq1$ and $\tau=\hbar t/(2R^2)$.  By
+\eqref{eq:energy}, the phase on the $k$th energy space is
+\[
+ \exp\{-i\tau(k^2+2\nu k)\}.
+\]
+
+\begin{theorem}[Necessary and sufficient revival criterion]
+The full propagator is the identity at a positive time if and only if
+\begin{equation}
+ \tau=\pi M,\qquad M\in\ZZ_{>0},\qquad
+ M(3+2\nu)\in2\ZZ.                            \label{eq:revival}
+\end{equation}
+Such a time exists if and only if $2\nu\in\mathbb Q$.  If
+$3+2\nu=a/b$ in lowest terms, then
+\[
+ M_{\min}=\begin{cases}b,&a\text{ even},\\2b,&a\text{ odd},\end{cases}
+ \qquad
+ t_{\min}=\frac{2\pi R^2}{\hbar}M_{\min}.
+\]
+\end{theorem}
+
+\begin{proof}
+If all spectral phases agree, every consecutive ratio is one.  The exponent
+difference between $k+1$ and $k$ is $2k+1+2\nu$.  Subtracting the gap
+condition at $k$ from the one at $k+1$ gives
+$2\tau\in2\pi\ZZ$, hence $\tau=\pi M$.  The first gap, between $k=1$ and
+$k=2$, is then one precisely when $M(3+2\nu)$ is even.  This proves
+necessity.
+
+Conversely, under \eqref{eq:revival}, every consecutive-gap exponent in
+units of $\pi$ is
+\[
+ M(2k+1+2\nu)=M(3+2\nu)+2M(k-1),
+\]
+an even integer.  All phases therefore agree.  Their common $k=1$ exponent
+is $M(1+2\nu)=M(3+2\nu)-2M$, also even, so the common phase is exactly one,
+not an unspecified scalar.  Existence is equivalent to rationality of
+$2\nu$.  Reducedness of $a/b$ forces $b$ to divide $M$; the least multiple
+making $Ma/b$ even is $b$ for even $a$ and $2b$ for odd $a$.
+\end{proof}
+
+\section{Exact receipt, sources, and Route-A boundary}
+The canonical artifact exhausts 2,048 exact classical action cells, all
+8,385 admissible state labels through $N=128$, 256 rational and 256
+irrational revival controls, and six boundary rows.  An independent checker
+reconstructs every row.  SymPy checks the action algebra, 81 Jacobi equations,
+27 direct radial-operator substitutions, both limits, and the gap identities.
+These finite computations are regression receipts, not the proof of the
+unbounded theorems.
+
+Higgs and Leemon own the curved oscillator and symmetry lineage
+\cite{Higgs,Leemon}.  Bellucci, Nersessian, Saghatelian, and Yeghikyan supply
+the modern action-angle comparison \cite{BNSY}.  Hakobyan and Pogosyan supply
+the separated Jacobi background \cite{HP}; multiplicity here comes from the
+admissible-label count above, not from their prose degeneracy statement.
+The present theorem differs from the full-sphere Neumann oscillator, the
+spherical-pendulum focus-focus system, free-sphere dynamics, and nonlinear
+Schr\"odinger dynamics.
+
+The assessment is
+\[
+ (A0_{\rm fail},A1_{\rm weak},A2_{\rm fail},A3_{\rm fail},
+ A4_{\rm natural\ quantization}),
+ \qquad \text{overall: Route A rejected}.
+\]
+The scope literal is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  Rational
+revival is spectral commensurability, not arithmetic local data.  We assert no
+target Euler factor, root number, automorphy, target divisor or functional
+equation, target-zero match, Hilbert--P\'olya operator, or Route B bridge.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{Higgs} P.~W. Higgs, ``Dynamical symmetries in a spherical geometry.
+I,'' \emph{J. Phys. A} 12 (1979), doi:10.1088/0305-4470/12/3/006.
+\bibitem{Leemon} H.~I. Leemon, ``Dynamical symmetries in a spherical
+geometry. II,'' \emph{J. Phys. A} 12 (1979),
+doi:10.1088/0305-4470/12/4/009.
+\bibitem{BNSY} S. Bellucci, A. Nersessian, A. Saghatelian, and V. Yeghikyan,
+``Quantum ring models and action-angle variables,'' arXiv:1008.3865.
+\bibitem{HP} Ye.~M. Hakobyan and G.~S. Pogosyan, ``On Interbasis Expansion
+for Isotropic Oscillator on Two-Dimensional Sphere,'' arXiv:quant-ph/9803085.
+\end{thebibliography}
+
+\bigskip
+\begin{center}\small\sffamily
+\ifcase\CRevisionRound
+round zero exact action and classical boundary atlas
+\or
+round one Friedrichs Jacobi spectrum and limit atlas
+\or
+round two identity revival and Route A closure
+\fi
+\end{center}
+\end{document}
