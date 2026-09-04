@@ -1,0 +1,461 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=19mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,array}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\newfontfamily\cjkfont{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\e}{\mathrm e}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Var}{\operatorname{Var}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\ifcase\CRevisionRound
+\title{Beta-Two Dyson--Ornstein--Uhlenbeck Diffusion:
+Matrix Radialization and Ordered GUE Equilibrium}
+\or
+\title{Beta-Two Dyson--Ornstein--Uhlenbeck Diffusion:
+Exact Chamber Kernel and Noncollision}
+\else
+\title{Beta-Two Dyson--Ornstein--Uhlenbeck Diffusion:
+Exact Chamber Kernel and Complete Partition Spectrum}
+\fi
+\author{HCS-C378 theorem package}
+\date{4 September 2026}
+\begin{document}
+\emergencystretch=3em
+\maketitle
+
+\begin{abstract}
+\ifcase\CRevisionRound
+We fix a variance normalization for Hermitian Ornstein--Uhlenbeck diffusion
+and carry it without rescaling through the ordered eigenvalue process.
+Trace-metric matrix Brownian motion with drift $-H/2$ gives unit eigenvalue
+noise, unit reciprocal-gap repulsion, and ordered GUE equilibrium.  Direct
+second-order perturbation yields the chamber generator, and its drift is one
+half the logarithmic gradient of the ordered GUE density.  This first round
+closes matrix radialization, normalization, and reversibility only.
+\or
+We fix trace-metric Hermitian Ornstein--Uhlenbeck diffusion with drift
+$-H/2$ and derive, without rescaling, unit eigenvalue noise, reciprocal-gap
+repulsion, and the ordered GUE reversible density.  The
+Karlin--McGregor determinant for killed independent scalar
+Ornstein--Uhlenbeck particles has an exact Vandermonde mass.  Its shifted
+Doob transform is therefore conservative, has the eigenvalue generator, is
+reversible, and never reaches a collision wall from an interior start.
+This second round closes the exact transition kernel and boundary
+nonattainment as a complete endpoint.
+\else
+We carry one trace-metric variance convention from Hermitian
+Ornstein--Uhlenbeck matrix diffusion to its increasingly ordered eigenvalues.
+The resulting beta-two system has unit noise, reciprocal-gap repulsion,
+linear confinement, and the ordered GUE reversible law.  An exact
+Karlin--McGregor determinant and Vandermonde mass identity produce the
+conservative Doob kernel and prove noncollision from every interior start.
+Slater determinants of probabilists' Hermite polynomials, divided by the
+Vandermonde, form a complete orthogonal basis indexed by partitions
+$\kappa$.  Their generator eigenvalues are $-|\kappa|/2$, so level $k$ has
+multiplicity $p_N(k)$ and the sharp gap is $1/2$.  This also gives exact
+norms, the finite partition-product heat trace, and the source Fredholm
+determinant for every finite $N$.
+The finite artifact checks 16,602 partition labels and 12 high-precision
+kernels only as regression evidence.  Generic random-matrix structure does
+not pass the Route-A arithmetic gate.
+\fi
+\end{abstract}
+
+\begin{center}{\cjkfont 中文摘要}\end{center}
+{\cjkfont\small\raggedright
+\ifcase\CRevisionRound
+本文从厄米矩阵空间的迹度量出发，为奥恩斯坦乌伦贝克扩散固定唯一的方差约定，
+并将该约定逐项传递到递增排列的特征值过程。
+矩阵布朗运动的对角分量给出单位二次变差，非对角分量的二阶扰动则产生单位倒间隙排斥，
+线性回复漂移保持负二分之一的系数。
+由此得到有序腔室内的精确戴森型随机微分方程及其生成元，
+没有再用矩阵元尺度或时间重参数作隐性修正。
+生成元漂移恰为有序高斯酉系综密度对数梯度的一半，
+因此该密度可逆；其归一化常数由完整厄米积分和酉共轭分解确定。
+特别地，单维边界退化为普通一维回复过程，
+而任意有限维的所有系数都由同一迹度量产生；
+这说明可逆律不是按外部目标谱拟合得到的数值现象。
+本轮的全部结论止于矩阵径向化、系数锁定与平衡分布。
+\or
+本文在迹度量归一化下研究贝塔二戴森奥恩斯坦乌伦贝克特征值扩散。
+二阶矩阵扰动给出单位噪声、倒间隙排斥和线性回复，
+并确定有序高斯酉系综为可逆平衡分布。
+为构造真正守恒的腔室转移核，先取相互独立的一维回复粒子在碰撞壁吸收的行列式核，
+再证明其对范德蒙德函数的总质量恰好带有由次数决定的指数衰减。
+补回这一能量位移后，杜布变换核质量为一，
+其生成元逐项等于特征值生成元，并满足详细平衡。
+由于该核在开腔室内给出全部有限时分布，
+从内部出发的过程不会到达碰撞边界。
+核的构造同时给出半群拼接和起始点极限，
+但本文只主张从内部出发的非到达性，
+不把它扩张成从碰撞壁起始的入口定律。
+精确卡林麦格雷戈核、守恒变换与无碰撞定理共同构成第二轮的完整终点。
+\else
+本文在一个自洽的迹度量方差约定中封闭贝塔二戴森奥恩斯坦乌伦贝克扩散。
+厄米矩阵的二阶扰动严格导出单位特征值噪声、倒间隙排斥与线性回复，
+有序高斯酉系综密度随之成为可逆平衡律。
+独立一维回复粒子的吸收行列式核作用于范德蒙德函数时产生精确次数位移，
+故能量修正后的杜布核守恒并给出全时间无碰撞边界。
+在谱侧，以概率论型埃尔米特多项式组成严格递增的斯莱特行列式，
+再除以范德蒙德函数，得到由分拆标记的完整正交基。
+完备性来自反对称埃尔米特张量基，而非有限枚举。
+本征值只依赖分拆大小，因而每层重数为限长分拆数，尖锐谱隙为二分之一；
+同一计算还给出精确范数、分拆乘积热迹和源半群的弗雷德霍姆行列式。
+这些对象仍是随机矩阵源系统的谱结构，没有素数、素数幂或对数素数时钟，
+所以严格路线甲在算术入口即停止。
+\fi
+\par}
+
+\medskip
+\ifcase\CRevisionRound
+\noindent\textbf{Keywords:} Hermitian matrix diffusion; eigenvalue process; Ornstein--Uhlenbeck dynamics; ordered chamber; GUE equilibrium
+
+{\cjkfont\noindent 关键词：厄米矩阵；特征值扩散；奥恩斯坦乌伦贝克过程；有序腔室；高斯酉系综}
+\or
+\noindent\textbf{Keywords:} Dyson diffusion; Karlin--McGregor kernel; Doob transform; Vandermonde function; noncollision; reversible diffusion
+
+{\cjkfont\noindent 关键词：戴森扩散；卡林麦格雷戈核；杜布变换；范德蒙德函数；无碰撞；可逆扩散}
+\else
+\noindent\textbf{Keywords:} Dyson diffusion; Hermite polynomials; partition spectrum; spectral gap; heat trace; Fredholm determinant; Route A
+
+{\cjkfont\noindent 关键词：戴森扩散；埃尔米特多项式；分拆谱；谱隙；热迹；弗雷德霍姆行列式；路线甲}
+\fi
+
+\section{One normalization from matrix to chamber}
+
+Let $\mathrm{Herm}_N$ carry the real trace inner product
+$\langle A,B\rangle=\Tr(AB)$.  Standard Brownian motion $\mathcal B_t$ in
+this Euclidean space drives
+\begin{equation}
+ \dd H_t=\dd\mathcal B_t-\frac12H_t\dd t.       \label{eq:matrix-ou}
+\end{equation}
+The trace-orthonormal basis consists of $E_{ii}$ and, for $i<j$,
+\begin{equation}
+ \frac{E_{ij}+E_{ji}}{\sqrt2},\qquad
+ \frac{\mathrm i(E_{ij}-E_{ji})}{\sqrt2}.      \label{eq:trace-basis}
+\end{equation}
+Thus every diagonal matrix martingale in an instantaneous eigenbasis has
+quadratic variation $\dd t$, while every off-diagonal complex entry has
+expected squared modulus $\dd t$.  This sentence fixes the factor that is
+often hidden in matrix-entry conventions.
+
+Write
+\begin{equation}
+ W_N=\{x\in\RR^N:x_1<\cdots<x_N\},\qquad
+ h(x)=\prod_{i<j}(x_j-x_i),\qquad d=\frac{N(N-1)}2.   \label{eq:chamber}
+\end{equation}
+
+\begin{theorem}[Radialization in the trace convention]
+If $H_0$ has simple spectrum, then, up to their first collision, its
+increasingly ordered eigenvalues solve
+\begin{equation}
+ \dd X_i=\dd B_i+\sum_{j\ne i}\frac{\dd t}{X_i-X_j}
+             -\frac{X_i}{2}\dd t,                  \label{eq:dyson-sde}
+\end{equation}
+where the $B_i$ are independent standard real Brownian motions.
+\ifnum\CRevisionRound>0
+The collision time is infinite.
+\fi
+The generator on $W_N$ is
+\begin{equation}
+ \mathcal L=\frac12\sum_i\partial_i^2+
+ \sum_i\left(\sum_{j\ne i}\frac1{x_i-x_j}-\frac{x_i}{2}\right)\partial_i.
+                                                        \label{eq:generator}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+For a normalized eigenvector $u_i$, second-order Hermitian perturbation gives
+\begin{equation}
+ \dd X_i=\langle u_i,\dd H\,u_i\rangle+
+ \sum_{j\ne i}\frac{|\langle u_j,\dd\mathcal B\,u_i\rangle|^2}{X_i-X_j}.
+                                                        \label{eq:perturb}
+\end{equation}
+The covariance statement following \eqref{eq:trace-basis} turns the first
+martingale term into $\dd B_i$, the second-order term into the displayed
+reciprocal gaps, and the matrix drift into $-X_i\dd t/2$.  This proves the
+formula until the first collision.
+\ifnum\CRevisionRound>0
+Section~\ref{sec:doob} proves that this time is infinite.
+\fi
+\end{proof}
+
+\begin{theorem}[Ordered GUE reversible law]
+The probability density
+\begin{equation}
+ \pi_N(x)=Z_N^{-1}\e^{-|x|^2/2}h(x)^2\,1_{W_N}(x),
+ \qquad Z_N=(2\pi)^{N/2}\prod_{j=0}^{N-1}j!,          \label{eq:gue}
+\end{equation}
+is reversible for \eqref{eq:generator}.
+\end{theorem}
+
+\begin{proof}
+The drift is one half of the logarithmic gradient:
+\begin{equation}
+ \frac12\partial_i\log(\e^{-|x|^2/2}h^2)
+ =-\frac{x_i}{2}+\sum_{j\ne i}\frac1{x_i-x_j}.       \label{eq:log-gradient}
+\end{equation}
+Hence $\mathcal Lf=(2\pi_N)^{-1}\nabla\!\cdot(\pi_N\nabla f)$, where
+$\pi_N$ denotes its density, proving symmetry.  For the normalizer, use
+$h=\det[\operatorname{He}_{i-1}(x_j)]$ and scalar Hermite orthogonality in
+Andr\'eief's identity.  The integral over $\RR^N$ is
+$N!(2\pi)^{N/2}\prod_{j=0}^{N-1}j!$.  The integrand is symmetric, so the
+ordered chamber contributes $1/N!$ of that value.  The invariant matrix
+density is proportional to $\e^{-\Tr H^2/2}$; Weyl integration gives the same
+ordered density.
+\end{proof}
+
+The $N=1$ face is ordinary scalar Ornstein--Uhlenbeck diffusion.  No
+large-$N$ passage or entrance from a multiple eigenvalue is included.
+
+\ifnum\CRevisionRound>0
+\section{Killed determinant and conservative Doob transform}
+\label{sec:doob}
+
+The independent scalar generator is
+\begin{equation}
+ \mathcal L_0=\frac12\sum_i(\partial_i^2-x_i\partial_i).
+                                                        \label{eq:l0}
+\end{equation}
+For $t>0$, put $r=\e^{-t/2}$ and $\sigma_t^2=1-r^2$.  Its Lebesgue density is
+\begin{equation}
+ p_t(a,b)=\frac1{\sqrt{2\pi\sigma_t^2}}
+ \exp[-\frac{(b-ra)^2}{2\sigma_t^2}].                 \label{eq:mehler}
+\end{equation}
+
+\begin{lemma}[Vandermonde energy]
+The polynomial $h$ is harmonic and homogeneous of degree $d$.  Consequently,
+\begin{equation}
+ \mathcal L_0h=-\frac d2h.                             \label{eq:h-energy}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The permutation-invariant Laplacian sends the alternating polynomial $h$ to
+an alternating polynomial of degree $d-2$.  Every nonzero alternating
+polynomial is divisible by $h$, which already has degree $d$; hence
+$\Delta h=0$.  Euler's homogeneous identity gives $x\cdot\nabla h=dh$.
+Substitution in \eqref{eq:l0} proves \eqref{eq:h-energy}.
+\end{proof}
+
+\begin{theorem}[Exact chamber kernel and boundary]
+The independent process killed at its first collision has density
+\begin{equation}
+ q_t(x,y)=\det[p_t(x_i,y_j)]_{i,j=1}^N.                \label{eq:km}
+\end{equation}
+Its Vandermonde mass is
+\begin{equation}
+ \int_{W_N}q_t(x,y)h(y)\dd y=r^dh(x).                 \label{eq:h-mass}
+\end{equation}
+Therefore
+\begin{equation}
+ k_t(x,y)=r^{-d}\frac{h(y)}{h(x)}q_t(x,y)              \label{eq:doob}
+\end{equation}
+is a conservative Markov density with generator \eqref{eq:generator}.
+Starting from any $x\in W_N$, its continuous diffusion never reaches a
+collision wall in finite time.
+\end{theorem}
+
+\begin{proof}
+The reflection principle pairs every wall-hitting independent path with the
+path reflected after its first hit.  The signed permutation sum that remains
+is the Karlin--McGregor determinant \eqref{eq:km}.
+
+Both $q_t(x,\cdot)$ and $h$ are alternating.  Their product is symmetric, so
+the chamber integral in \eqref{eq:h-mass} is $1/N!$ of the full-space
+integral.  Write $h(y)=\det[y_j^{i-1}]$.  Andr\'eief's identity gives
+\begin{equation}
+ \int_{\RR^N}q_t(x,y)h(y)\dd y
+ =N!\det[\int_{\RR}p_t(x_i,y)y^{j-1}\dd y]_{i,j=1}^N.
+                                                        \label{eq:andreief}
+\end{equation}
+The $(j-1)$st moment of $N(rx_i,1-r^2)$ is a degree-$(j-1)$ polynomial in
+$x_i$ with leading coefficient $r^{j-1}$.  Lower-degree column operations
+reduce the determinant in \eqref{eq:andreief} to
+$r^{0+\cdots+(N-1)}h(x)=r^dh(x)$.  This proves \eqref{eq:h-mass}.
+
+Equation \eqref{eq:h-mass} makes \eqref{eq:doob} conservative.  On smooth
+compactly supported functions,
+\begin{equation}
+ h^{-1}\mathcal L_0(hf)+\frac d2f
+ =\mathcal L_0f+\nabla\log h\cdot\nabla f=\mathcal Lf, \label{eq:conjugacy}
+\end{equation}
+because $\partial_i\log h=\sum_{j\ne i}(x_i-x_j)^{-1}$.  The minimal
+transformed process has mass one at every finite time.  A boundary hit by a
+continuous chamber path would be its killing time, so conservativity excludes
+such a hit.  Local uniqueness before collision and the standard
+electrostatic-repulsion theorem identify the transform with the unique global
+strong solution of \eqref{eq:dyson-sde}.
+\end{proof}
+
+Scalar detailed balance in \eqref{eq:mehler} passes through the determinant;
+the two Vandermonde factors in \eqref{eq:doob} then prove
+$\pi_N(x)k_t(x,y)=\pi_N(y)k_t(y,x)$ directly.  This independently checks the
+generator calculation.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Complete symmetric-Hermite spectrum}
+
+Let $\kappa=(\kappa_1\geq\cdots\geq\kappa_N\geq0)$ be a partition and define
+\begin{equation}
+ m_i=\kappa_{N+1-i}+i-1.                              \label{eq:m-index}
+\end{equation}
+Then $m_{i+1}-m_i=1+\kappa_{N-i}-\kappa_{N+1-i}\geq1$ and
+$\sum_i m_i=d+|\kappa|$.  With monic probabilists' Hermites, set
+\begin{equation}
+ D_m(x)=\det[\operatorname{He}_{m_i}(x_j)]_{i,j=1}^N,
+ \qquad \Phi_\kappa(x)=\frac{D_m(x)}{h(x)}.            \label{eq:phi}
+\end{equation}
+The quotient is a symmetric polynomial because every alternating polynomial
+is divisible by $h$.
+
+\begin{theorem}[Complete partition spectrum and exact norms]
+The family $\{\Phi_\kappa\}$ is a complete orthogonal basis of
+$L^2(W_N,\pi_N)$ and
+\begin{align}
+ \mathcal L\Phi_\kappa&=-\frac{|\kappa|}{2}\Phi_\kappa,
+                                                        \label{eq:eigen}\\
+ \|\Phi_\kappa\|_{L^2(\pi_N)}^2
+ &=\frac{\prod_{i=1}^N m_i!}{\prod_{j=0}^{N-1}j!}.     \label{eq:norm}
+\end{align}
+Thus $-k/2$ has multiplicity $p_N(k)$, the number of partitions of $k$ with
+at most $N$ parts.
+\end{theorem}
+
+\begin{proof}
+The scalar equation
+\begin{equation}
+ \frac12(\operatorname{He}_n''-x\operatorname{He}_n')
+ =-\frac n2\operatorname{He}_n                           \label{eq:hermite}
+\end{equation}
+and determinant expansion give
+$\mathcal L_0D_m=-(\sum_i m_i)D_m/2$.  Apply
+\eqref{eq:conjugacy} to $D_m=h\Phi_\kappa$ and subtract the filled-ground
+energy $d/2$ to obtain \eqref{eq:eigen}.
+
+Scalar Hermites form a complete Gaussian $L^2(\RR)$ basis.  Their
+antisymmetrized tensor products $D_m$, indexed by strictly increasing $m$,
+therefore form a complete basis of the antisymmetric Gaussian sector on
+$\RR^N$.  Multiplication by $h$, followed by antisymmetric extension from
+$W_N$, identifies this sector with $L^2(W_N,\pi_N)$ up to a fixed scalar.
+Division by $h$ transfers the complete Slater basis to \eqref{eq:phi}; this is
+the step that rules out missing nonpolynomial $L^2$ spectrum.
+
+Finally, Andr\'eief and scalar Hermite orthogonality give
+\begin{equation}
+ \int_{\RR^N}D_mD_n\e^{-|x|^2/2}\dd x
+ =\delta_{mn}N!(2\pi)^{N/2}\prod_i m_i!.              \label{eq:slater-norm}
+\end{equation}
+Divide by $N!$ for the chamber and by $Z_N$ to obtain \eqref{eq:norm}.
+Equation \eqref{eq:m-index} bijects partitions with strict indices above
+$(0,1,\ldots,N-1)$, proving the multiplicity.
+\end{proof}
+
+\begin{corollary}[Sharp gap, trace, and source determinant]
+For $\int f\dd\pi_N=0$,
+\begin{equation}
+ \|P_tf\|_2\leq\e^{-t/2}\|f\|_2,
+ \qquad
+ \Var_{\pi_N}(f)\leq\int_{W_N}|\nabla f|^2\dd\pi_N.   \label{eq:poincare}
+\end{equation}
+Both constants are sharp.  For $t>0$,
+\begin{align}
+ \Tr P_t&=\prod_{j=1}^N(1-\e^{-jt/2})^{-1},            \label{eq:trace}\\
+ \det(I-zP_t)&=\prod_{k=0}^{\infty}
+ (1-z\e^{-kt/2})^{p_N(k)}.                            \label{eq:fredholm}
+\end{align}
+\end{corollary}
+
+\begin{proof}
+Theorem 4 has a simple zero level and first nonzero decay exponent $1/2$.
+The function $x_1+\cdots+x_N$ lies in that first eigenspace, proving
+sharpness.  The partition generating function
+$\sum_\kappa q^{|\kappa|}=\prod_{j=1}^N(1-q^j)^{-1}$ with
+$q=\e^{-t/2}$ proves \eqref{eq:trace}.  The finite value of the trace makes
+$P_t$ trace class, and its eigenvalue product gives \eqref{eq:fredholm}.
+This determinant belongs only to the source semigroup.
+\end{proof}
+
+\section{Oscillator transform, exact receipt, and Route A}
+
+The equilibrium square root without its constant is
+$\psi_0=\e^{-|x|^2/4}h$.  Direct differentiation, using $\Delta h=0$ and
+$x\cdot\nabla h=dh$, gives
+\begin{equation}
+ -\psi_0\mathcal L\psi_0^{-1}
+ =-\frac12\Delta+\frac{|x|^2}{8}-\frac N4-\frac d2.    \label{eq:oscillator}
+\end{equation}
+This acts on the antisymmetric Dirichlet sector; the inverse-square Calogero
+term cancels at beta two.  It explains the filled Slater sea but is only a
+source-local operator equivalence.
+
+The canonical receipt records 16 matrix dimensions, 1,040 level
+multiplicities, all 16,602 partitions through $N=8$ and degree 24, and 12
+high-precision kernels.  An independent checker reconstructs every exact row
+and uses a Leibniz determinant.  SymPy performs 350 exact identities.  These
+finite checks are regression evidence, not the proof of the all-$N$ theorem.
+
+Dyson owns the eigenvalue Brownian-motion lineage \cite{Dyson};
+Karlin--McGregor and Grabiner own the determinant/reflection lineage
+\cite{KM,Grabiner}; C\'epa--L\'epingle supply strong noncollision context
+\cite{CL}; and Baker--Forrester place generalized Hermites in the
+Calogero--Sutherland setting \cite{BF}.  The nearest registry owners are a
+deterministic Calogero--Moser scattering system, a scalar Jacobi diffusion, a
+hypoelliptic Kramers process, and finite discrete killed walkers.  None is the
+continuous conservative eigenvalue diffusion closed here.
+
+The strict assessment is
+\begin{equation}
+ (A0_{\rm fail},A1_{\rm fail},A2_{\rm fail},A3_{\rm fail},
+ A4_{\rm formal\ hint}),\qquad \text{overall: Route A rejected}. \label{eq:route}
+\end{equation}
+The scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.  Generic GUE
+statistics are not arithmetic origin.  We assert no target arithmetic local
+data, Euler factor, root number, automorphy, target divisor or counting law,
+target functional equation, target-zero match, Hilbert--P\'olya operator, or
+Route B.  In particular, \eqref{eq:oscillator} is not promoted to a target
+spectral realization.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{Dyson} F.~J. Dyson, ``A Brownian-Motion Model for the Eigenvalues of
+a Random Matrix,'' \emph{J. Math. Phys.} 3 (1962), 1191--1198,
+\href{https://doi.org/10.1063/1.1703862}{DOI record}.
+\bibitem{KM} S. Karlin and J. McGregor, ``Coincidence probabilities,''
+\emph{Pacific J. Math.} 9 (1959), 1141--1164,
+\href{https://doi.org/10.2140/pjm.1959.9.1141}{DOI record}.
+\bibitem{CL} E. C\'epa and D. L\'epingle, ``Diffusing particles with
+electrostatic repulsion,'' \emph{Probab. Theory Relat. Fields} 107 (1997),
+429--449, \href{https://doi.org/10.1007/s004400050092}{DOI record}.
+\bibitem{Grabiner} D.~J. Grabiner, ``Brownian motion in a Weyl chamber,
+non-colliding particles, and random matrices,'' \emph{Ann. Inst. H. Poincar\'e
+Probab. Statist.} 35 (1999), 177--204.
+\bibitem{BF} T.~H. Baker and P.~J. Forrester, ``The Calogero--Sutherland
+Model and Generalized Classical Polynomials,'' \emph{Commun. Math. Phys.}
+188 (1997), 175--216,
+\href{https://doi.org/10.1007/s002200050161}{DOI record}.
+\end{thebibliography}
+
+\bigskip
+\begin{center}\small\sffamily
+\ifcase\CRevisionRound
+round zero matrix radialization and reversible GUE density
+\or
+round one determinant Doob kernel and no collision
+\or
+round two complete partition spectrum and Route A closure
+\fi
+\end{center}
+\end{document}

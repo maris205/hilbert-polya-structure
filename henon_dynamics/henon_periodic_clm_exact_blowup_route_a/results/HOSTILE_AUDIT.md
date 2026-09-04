@@ -1,0 +1,5 @@
+# Hostile audit
+
+The suite repairs canonical section and payload hashes after mutating identifiers, evaluator pins, Hilbert and Riccati conventions, every theorem-contract clause, branch metadata, grid counts, collision and source owners, nonclaims, all forbidden flags, the all-fail tuple, representative Fourier/Tricomi/Möbius/one-mode/profile/boundary cells, and every arithmetic-control mechanism. Strict-YAML attacks separately target the source lock, A0 controls, A1--A4 metrics/artifacts, adversarial verdict, claim boundary, blockers, next test, round-two clues, tuple, and Route-B lock, in addition to stale-hash, duplicate/nonfinite JSON, duplicate keys, anchors, and type confusion.
+
+All 100 attacks must fail under independent mathematical reconstruction. Three source-level attacks replace or disable the conditional title block, preventing a future-round title from leaking into rounds zero or one. Tangent-zero mutations are included specifically to prevent an unconditional simple-pole rate from re-entering the artifact.

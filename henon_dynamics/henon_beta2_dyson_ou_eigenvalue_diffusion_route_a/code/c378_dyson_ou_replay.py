@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""Two-isolated-directory canonical byte replay for HCS-C378."""
+from __future__ import annotations
+
+if not __debug__:
+    raise RuntimeError("c378 replay refuses optimized Python")
+
+import argparse
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PRODUCER = ROOT / "code/c378_dyson_ou_producer.py"
+EVIDENCE = ROOT / "results/c378_dyson_ou_evidence.json"
+
+
+def main():
+    argparse.ArgumentParser().parse_args()
+    blobs = []
+    for run_index in range(2):
+        with tempfile.TemporaryDirectory(prefix=f"c378-replay-{run_index}-") as directory:
+            output = Path(directory) / "evidence.json"
+            process = subprocess.run(
+                [sys.executable, "-B", str(PRODUCER), "--output", str(output)],
+                capture_output=True, text=True,
+            )
+            assert process.returncode == 0, process.stdout + process.stderr
+            blobs.append(output.read_bytes())
+    assert blobs[0] == blobs[1] == EVIDENCE.read_bytes()
+    print(f"C378 replay PASS: bytes={len(blobs[0])} isolated_runs=2")
+
+
+if __name__ == "__main__":
+    main()

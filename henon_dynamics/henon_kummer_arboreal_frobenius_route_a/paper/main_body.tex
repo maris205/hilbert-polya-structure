@@ -1,0 +1,426 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<\CRevisionID><\CRevisionID>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,float,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\newfontfamily\zhfont[BoldFont={Droid Sans Fallback}]{Droid Sans Fallback}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\AGL}{\operatorname{AGL}}
+\newcommand{\Scope}{\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}}
+\title{An Entangled Affine Arboreal Image for $z\mapsto z^2$ at Basepoint $2$}
+\author{HCS-C374 / HEN-O358}
+\date{4 September 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the $n$th preimages of $2$ under $z\mapsto z^2$, we determine the
+splitting field and Galois action uniformly for every $n\ge3$.  The pure
+radical and cyclotomic fields meet in exactly $\Q(\sqrt2)$, and this shared
+quadratic field cuts the full affine group by the character equation
+$(-1)^b=(2/a)$.  The resulting image has index two in
+$\AGL_1(\Z/2^n\Z)$, and adjacent-level restriction is surjective with
+kernel four.
+\ifnum\CRevisionRound>0
+We further classify the complete fixed-root spectrum and prove that the odd
+primes for which $x^{2^n}=2$ has a root have density
+$7/24+1/(3\cdot4^{n-1})$, tending to $7/24$; exactly one and four roots
+never occur.
+\fi
+\ifnum\CRevisionRound>1
+Finally, we identify the inverse-limit index-two $2$-adic affine image,
+lock the all-iterate Frobenius-cycle dictionary, and independently exhaust
+5,592,400 finite-image elements and 95,910 prime--level cells.  The
+enumeration is a regression receipt, not a substitute for the proof.
+The fixed-root ledger does not supply an all-level primitive-cycle,
+orientation, phase, or monodromy atlas, so strict evaluator v0.2 records
+\texttt{A1\_WEAK} and an exploratory overall status.  The finite unitary
+structure supplies only \texttt{A4\_FORMAL\_HINT}.
+\fi
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+\ifcase\CRevisionRound
+Kummer theory; arboreal Galois representations; cyclotomic fields; affine
+groups; iterated preimages
+\or
+arboreal Galois representations; Kummer extensions; Frobenius fixed points;
+Chebotarev density; affine groups; iterated preimages
+\else
+Kummer dynamics; arboreal Galois representations; 2-adic affine groups;
+Frobenius permutations; exact computation; finite Koopman operators;
+Route-A evaluation
+\fi
+
+\begin{center}{\zhfont\large 中文摘要}\end{center}
+{\zhfont
+\begin{flushleft}
+本文考察平方映射在基点二之上的逐层原像域。第 $n$ 层的根可用\\
+$2^n$ 次单位根编号；纯根式域与分圆域恰好共享 $\Q(\sqrt2)$，\\
+这一个二次交叠迫使仿射参数满足模八的二次特征等式。由此得到\\
+指数二的精确{\normalfont Galois}像，并证明相邻层限制满射且核的阶为四。
+\ifnum\CRevisionRound>0
+进一步把{\normalfont Frobenius}不动根化为一个二进线性同余。完整计数\\
+只允许零、二以及从八起的二次幂根数，特别排除一根与四根情形。\\
+结合{\normalfont Chebotarev}定理，所得素数条件自然密度为\\
+$7/24+1/(3\cdot4^{n-1})$，并单调趋于 $7/24$。
+\fi
+\ifnum\CRevisionRound>1
+逆极限给出一个闭的指数二二进仿射群；有限层群枚举和素数网格仅作\\
+实现回归。邻近基点三、未切口的全仿射群及合数标签分解构成三类\\
+{\normalfont A0}对照；其中素数幂保留为{\normalfont Frobenius}重复，只有混合\\
+合数被排除为单素数标签。现有资料没有完备的本原轨道、重复、定向、\\
+相位或稳定性图册。故评估记为{\normalfont A1\_WEAK}与探索状态，有限幺正\\
+结构只记为{\normalfont A4\_FORMAL\_HINT}，且不推出目标{\normalfont Euler}乘积、\\
+零点对应或{\normalfont Hilbert--P\'olya}算子。
+\fi
+
+\textbf{关键词：}
+\ifcase\CRevisionRound
+库默理论；迭代原像树；分圆域；仿射群；{\normalfont Galois}作用
+\or
+算术动力学；{\normalfont Frobenius}不动点；{\normalfont Chebotarev}密度；\\
+二次特征；根数分布；素数密度
+\else
+库默动力学；二进仿射群；{\normalfont Frobenius}置换；精确枚举；\\
+有限{\normalfont Koopman}算子；路线{\normalfont A}评估；本原轨道障碍
+\fi
+\end{flushleft}
+}
+
+\section{Preimage fields and the shared quadratic field}
+Let $m=2^n$, choose compatible elements
+\[
+ \alpha_n=2^{1/m},\qquad \zeta_m=e^{2\pi i/m},
+\]
+and put
+\[
+ R_n=\{\zeta_m^j\alpha_n:j\in\Z/m\Z\},\qquad
+ K_n=\Q(R_n)=\Q(\alpha_n,\zeta_m).
+\]
+These are the level-$n$ vertices and splitting fields of the preimage tree
+of $2$ for $z\mapsto z^2$; see Jones~\cite{Jones} for the general arboreal
+framework.  The present monomial tower is solvable, but it is not the
+generic full-affine Kummer tower: $\alpha_n^{m/2}=\sqrt2$ already lies in
+the cyclotomic field.
+
+\begin{lemma}[Cyclotomic nonsquare]\label{lem:nonsquare}
+For every $n\ge3$, $\sqrt2$ lies in $C_n:=\Q(\zeta_m)$ but is not a square
+in $C_n$.
+\end{lemma}
+
+\begin{proof}
+Using the standard cyclotomic description~\cite{Washington}, because
+$\zeta_8=\zeta_m^{2^{n-3}}$,
+$\sqrt2=\zeta_8+\zeta_8^{-1}\in C_n$.  If $y^2=\sqrt2$ in $C_n$, then
+$y=\pm2^{1/4}$, so $\Q(2^{1/4})$ would be an intermediate field of the
+abelian Galois extension $C_n/\Q$.  Every such intermediate extension is
+Galois.  This is impossible: $X^4-2$ is Eisenstein at $2$, while the real
+field $\Q(2^{1/4})$ does not contain its conjugate $i2^{1/4}$.
+\end{proof}
+
+\begin{theorem}[Radical--cyclotomic intersection]\label{thm:intersection}
+For all $n\ge3$,
+\[
+ \Q(\alpha_n)\cap\Q(\zeta_m)=\Q(\sqrt2),\qquad
+ [K_n:\Q]=2^{2n-2}.
+\]
+\end{theorem}
+
+\begin{proof}
+Over $C_n$, $\alpha_n$ satisfies $X^{m/2}-\sqrt2$.  Capelli's binomial
+criterion~\cite{Lang} reduces irreducibility to excluding a square and,
+when $4\mid m/2$, the exceptional shape $\sqrt2=-4c^4$.  The first is
+Lemma~\ref{lem:nonsquare}.  The second would also make $\sqrt2$ a square,
+namely $(2ic^2)^2$, because $i\in C_n$.  Hence
+$[K_n:C_n]=m/2$, and
+\[
+ [K_n:\Q]=(m/2)\varphi(m)=2^{2n-2}.
+\]
+Eisenstein gives $[\Q(\alpha_n):\Q]=m$.  The compositum formula now gives
+intersection degree two; the contained field $\Q(\sqrt2)$ is therefore the
+whole intersection.
+\end{proof}
+
+\section{Exact affine image and compatible restrictions}
+For odd $a$, let
+\[
+ \chi_2(a)=\left(\frac2a\right)=(-1)^{(a^2-1)/8},
+\]
+viewed modulo $8$.  Define
+\[
+ H_n=\{(a,b)\in(\Z/m\Z)^\times\ltimes\Z/m\Z:
+              (-1)^b=\chi_2(a)\},
+\]
+where $(a,b)$ sends $j$ to $aj+b$.
+
+\begin{theorem}[Exact image and restriction]\label{thm:image}
+The action on $R_n$ identifies $\Gal(K_n/\Q)$ with $H_n$.  This group has
+order $2^{2n-2}$ and index two in $\AGL_1(\Z/m\Z)$.  Under compatible
+choices $\alpha_n=\alpha_{n+1}^2$ and
+$\zeta_{2^n}=\zeta_{2^{n+1}}^2$, restriction is
+\[
+ H_{n+1}\longrightarrow H_n,\qquad (a,b)\longmapsto(a,b)\pmod {2^n}.
+\]
+It is surjective and its kernel has order four.
+\end{theorem}
+
+\begin{proof}
+Every automorphism has unique parameters
+$\sigma(\zeta_m)=\zeta_m^a$ and
+$\sigma(\alpha_n)=\zeta_m^b\alpha_n$, hence acts by $j\mapsto aj+b$.
+The two expressions for the shared square root give
+\[
+ \sigma(\sqrt2)=(-1)^b\sqrt2
+ =\bigl(\zeta_8^a+\zeta_8^{-a}\bigr)=\chi_2(a)\sqrt2.
+\]
+Thus the image lies in $H_n$.  There are $\varphi(m)$ choices of $a$ and
+$m/2$ choices of the forced parity of $b$, so
+$|H_n|=2^{2n-2}=[K_n:\Q]$.  The faithful inclusion is an equality.
+
+Squaring the radical and root-of-unity formulas proves coordinate
+reduction.  Each coordinate has two lifts.  Reduction preserves $a$ modulo
+$8$ and the parity of $b$, so all four lifts satisfy the same character
+equation.  This proves surjectivity and the kernel count.
+\end{proof}
+
+\begin{center}
+\fbox{\parbox{0.91\linewidth}{\textbf{Round 0 advance: field and compatible-image closure.}
+The intersection, every finite image, and every adjacent restriction map
+are proved for all levels $n\ge3$; no finite-level extrapolation occurs.}}
+\end{center}
+
+\ifnum\CRevisionRound>0
+\section{The complete fixed-root spectrum}
+For $(a,b)\in H_n$, fixed roots correspond to solutions of
+\begin{equation}\label{eq:linear}
+ (a-1)j\equiv-b\pmod {2^n}.
+\end{equation}
+
+\begin{theorem}[Fixed-root law]\label{thm:fixed}
+The exact numbers of elements of $H_n$ having a prescribed number of fixed
+level-$n$ roots are
+\begin{center}
+\begin{tabular}{@{}lc@{}}
+\toprule
+fixed roots & number of elements\\
+\midrule
+$2$ & $2^{2n-4}$\\
+$2^k$, $3\le k<n$ & $2^{2n-2k-1}$\\
+$2^n$ & $1$\\
+$0$ & $2^{2n-2}-2^{2n-4}-\displaystyle\sum_{k=3}^{n-1}2^{2n-2k-1}-1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+No element has exactly one or four fixed roots.
+\end{theorem}
+
+\begin{proof}
+Equation~\eqref{eq:linear} has
+$g=\gcd(a-1,2^n)$ solutions exactly when $g\mid b$.  Since $a$ is odd,
+$g\ge2$, excluding one root.  If $a\equiv7\pmod8$, then
+$\chi_2(a)=1$, $b$ is even, and $v_2(a-1)=1$.  The
+$2^{n-3}\cdot2^{n-1}=2^{2n-4}$ such pairs have two fixed roots.
+
+For $3\le k<n$, there are $2^{n-k-1}$ residues with
+$v_2(a-1)=k$ and $2^{n-k}$ admissible $b$ divisible by $2^k$, giving the
+second row.  When $a=1$, only $b=0$ fixes all roots.  Finally,
+$v_2(a-1)=2$ means $a\equiv5\pmod8$, so $\chi_2(a)=-1$ forces $b$ odd;
+then $4\nmid b$, excluding four fixed roots.  The complement has none.
+\end{proof}
+
+\section{Chebotarev root densities}
+All odd primes are unramified in $K_n$, since the polynomial discriminant
+has no odd prime divisor.  Its reduction is separable, and
+$x^{2^n}=2$ has a root over $\F_p$ exactly when arithmetic Frobenius fixes
+a member of $R_n$.
+
+\begin{theorem}[Root-prime density]\label{thm:density}
+For every $n\ge3$, the odd primes at which $x^{2^n}=2$ has a root have
+natural density
+\begin{equation}\label{eq:density}
+ \delta_n=\frac7{24}+\frac1{3\cdot4^{n-1}}.
+\end{equation}
+The sequence decreases to $7/24$.  Each nonzero root multiplicity in
+Theorem~\ref{thm:fixed} separately has the density obtained by dividing
+its group count by $2^{2n-2}$.
+\end{theorem}
+
+\begin{proof}
+The fixed-point property and fixed-point count are conjugacy invariant.
+Chebotarev~\cite{Neukirch} therefore identifies the requested densities
+with the corresponding proportions in $H_n$.  The positive fraction is
+\[
+ \frac14+\sum_{k=3}^{n-1}2^{1-2k}+2^{-2n+2}
+ =\frac7{24}+\frac1{3\cdot4^{n-1}}.
+\]
+The limit and monotonicity are immediate.
+\end{proof}
+
+\begin{center}
+\fbox{\parbox{0.91\linewidth}{\textbf{Round 1 advance: fixed-root and density closure.}
+The complete Frobenius fixed-root spectrum, the impossible multiplicities
+$1$ and $4$, every multiplicity density, and the limit $7/24$ are added as
+all-level theorems.}}
+\end{center}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Inverse limit and all-iterate Frobenius cycles}
+The character condition is compatible because it depends only on
+$a\bmod8$ and $b\bmod2$.
+
+\begin{proposition}[Infinite arboreal image]\label{prop:limit}
+The inverse-limit Galois image is
+\[
+ H_\infty=\{(a,b)\in\Z_2^\times\ltimes\Z_2:
+          (-1)^{b\bmod2}=\chi_2(a)\}.
+\]
+It is the kernel of a continuous surjective character of the $2$-adic
+affine group and hence is closed of index two.
+\end{proposition}
+
+\begin{proof}
+Theorem~\ref{thm:image} supplies a surjective inverse system.  Under
+$(a,b)(c,d)=(ac,ad+b)$, oddness of $a$ gives
+\[
+ \chi_2(ac)(-1)^{ad+b}
+ =\chi_2(a)(-1)^b\chi_2(c)(-1)^d.
+\]
+Thus the defining expression is a continuous character.  It takes both
+signs and its finite quotients are exactly the $H_n$.
+\end{proof}
+
+For an odd prime $p$, the degrees of the irreducible factors of
+$x^{2^n}-2\bmod p$ are the cycle lengths of arithmetic Frobenius.  If
+$N_{p,n}(r)$ is the number of fixed roots of its $r$th power and
+$E_{p,n}(d)$ counts points of exact period $d$, then the inherited finite-
+permutation identities are
+\[
+ N_{p,n}(r)=\sum_{e\mid r}E_{p,n}(e),\qquad
+ E_{p,n}(d)=\sum_{e\mid d}\mu(e)N_{p,n}(d/e).
+\]
+HCS-C12A already owns this universal mechanism.  C374 owns its specific
+compatible Kummer image and the closed fixed-root/density atlas above.
+
+\section{Exact evidence and independent validation}
+The canonical ledger exhausts every element at levels $3\le n\le12$.
+It also checks every odd prime $p\le100000$ by the cyclic-group criterion:
+with $d=\gcd(2^n,p-1)$, the root count is $d$ precisely when
+$2^{(p-1)/d}=1\pmod p$, and otherwise zero.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+$n$ & $|H_n|$ & exact $\delta_n$ & root primes $\le10^5$ & odd primes tested\\
+\midrule
+3 & 16 & $5/16$ & 2,995 & 9,591\\
+4 & 64 & $19/64$ & 2,843 & 9,591\\
+5 & 256 & $75/256$ & 2,808 & 9,591\\
+6 & 1,024 & $299/1024$ & 2,803 & 9,591\\
+8 & 16,384 & $4779/16384$ & 2,799 & 9,591\\
+10 & 262,144 & $76459/262144$ & 2,798 & 9,591\\
+12 & 4,194,304 & $1223339/4194304$ & 2,797 & 9,591\\
+\bottomrule
+\end{tabular}
+\caption{The exact density column is proved; the finite prime column is a
+regression receipt and is not used to infer it.}
+\label{tab:evidence}
+\end{table}
+
+Across all ten levels, the exhaustive group lane checks 5,592,400 pairs;
+the prime lane checks 95,910 cells.  A non-importing checker recomputes all
+counts, a SymPy lane verifies independent identities, two isolated builds
+must agree byte for byte, and repaired-hash mutations must be rejected.
+
+\section{Finite Koopman realization and Route-A boundary}
+Each $H_n$ acts canonically on $\ell^2(R_n)$ by permuting the orthonormal
+point basis, hence by real permutation unitaries with the same level and
+iterate clock.  This is a canonical finite Koopman realization.  The package
+does not specify or prove a single family-wide antiunitary that sends every
+action to its inverse, a nontrivial orbit phase/weight preservation law, or a
+global self-adjoint Hamiltonian owner.  Strict evaluator v0.2 therefore
+records only \texttt{A4\_FORMAL\_HINT}.  The intrinsic number-field tower
+and Frobenius classes earn the structural-arithmetic verdict at \texttt{A0}.
+
+The A0 audit uses three explicit controls.  For neighboring basepoint $3$,
+valuation at primes above $3$ and Capelli irreducibility give trivial
+radical--cyclotomic intersection and the full affine image, so the
+basepoint-two shared-character cut disappears.  The simpler ambient
+$\AGL_1(\Z/2^n\Z)$ control restores exactly $2^{2n-5}$ elements with four
+fixed roots.  The exact odd-composite ledger below $100$ has $25$ labels.
+Its five prime powers $9,25,27,49,81$ are retained as repetition controls
+attached to the conjugacy classes of $\mathrm{Frob}_p^r$; they are not new
+rational-prime Frobenius classes.  Only the other $20$ mixed composites,
+each with at least two distinct prime factors, are rejected as having no
+single-prime Frobenius owner.
+Empirical density alone receives no A0 credit.
+
+These A0 controls do not clear A1.  The proved affine action and fixed-root
+law do not include an all-level primitive-cycle/repetition enumeration with
+completeness control, orbit orientation and phase, multiplicity weights, or
+monodromy and stability data.  Nor do they derive an intrinsic
+$p\leftrightarrow\gamma_p$, prime-power, or $\log p$ period law.  The
+mandatory shuffled-period, random-weight, random-phase, same-density-length,
+neighboring-parameter, and simpler-parent tests therefore remain uncompleted
+at the A1 orbit layer.  Strict evaluator v0.2 records \texttt{A1\_WEAK}.
+
+There is no cross-prime Fredholm direct sum, no determinant-class
+regularization, and no target Euler product.  We prove no target
+continuation, functional equation, divisor, counting law, or zero match.
+Thus both \texttt{A2} and \texttt{A3} fail.  The verdict is
+\texttt{ROUTE\_A\_EXPLORATORY} under the literal scope \Scope.
+The finite permutation unitaries are not a Hilbert--P\'olya operator, and
+Route B is not invoked.
+
+\begin{center}
+\fbox{\parbox{0.91\linewidth}{\textbf{Round 2 advance: inverse-limit,
+evidence, and Route-A closure.}  The closed index-two $2$-adic image,
+all-iterate cycle dictionary, dual exact ledgers, the finite Koopman
+boundary, and explicit target firewall complete the package.}}
+\end{center}
+\fi
+
+\section{Conclusion}
+The basepoint $2$ produces one persistent quadratic entanglement and no
+further loss: it cuts the affine image by exactly one character at every
+level.  The resulting compatible group law turns a radical-field question
+into a complete fixed-root and prime-density theorem.
+\ifnum\CRevisionRound>0
+The density converges to $7/24$, while the character obstruction explains
+the otherwise surprising absence of exactly four roots.
+\fi
+\ifnum\CRevisionRound>1
+The inverse-limit description is exact, but its arithmetic success does
+not supply the missing target analytic bridge; the Route-A boundary is
+therefore part of the theorem package rather than an afterthought.
+\fi
+
+\begin{thebibliography}{9}\small
+\bibitem{Jones} R. Jones,
+\emph{Galois representations from pre-image trees: an arboreal survey},
+Publications math\'ematiques de Besan\c{c}on (2013), 107--136,
+doi: \url{https://doi.org/10.5802/pmb.a-154}.
+\bibitem{Lang} S. Lang, \emph{Algebra}, third edition, Graduate Texts in
+Mathematics 211, Springer, 2002,
+doi: \url{https://doi.org/10.1007/978-1-4613-0041-0}.
+\bibitem{Washington} L. C. Washington,
+\emph{Introduction to Cyclotomic Fields}, second edition, Graduate Texts
+in Mathematics 83, Springer, 1997,
+doi: \url{https://doi.org/10.1007/978-1-4612-1934-7}.
+\bibitem{Neukirch} J. Neukirch, \emph{Algebraic Number Theory}, Springer,
+1999, doi: \url{https://doi.org/10.1007/978-3-662-03983-0}.
+\end{thebibliography}
+\end{document}

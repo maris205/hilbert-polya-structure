@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C374--HCS-C378 additions (2026-09-04)
+
+Five independent cross-subtype candidates were frozen from baseline
+`f58422d8f03235329863f946654981ecb5d4dc97`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+Every retained theorem is source-local; workspace ownership does not assert
+literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C374 | For every level `n>=3` of the basepoint-two squaring preimage tree, the radical and cyclotomic fields meet exactly in `Q(sqrt(2))`; the Galois image is the character-cut index-two affine group with surjective four-kernel restrictions and an exact `2`-adic inverse limit.  Its complete fixed-root spectrum excludes one and four roots and gives the Chebotarev root-prime density `7/24+1/(3*4^(n-1))`. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Kummer arboreal package](../henon_kummer_arboreal_frobenius_route_a/) · [paper PDF](../henon_kummer_arboreal_frobenius_route_a/paper/main.pdf) |
+| HCS-C375 | Every eligible norm-five LPS congruence graph has its exact Legendre-selected `PSL_2/PGL_2` chamber and bipartiteness type; the specialized Bass--Hashimoto identity gives all traces, primitive oriented cycles and the finite-graph Ihara product, while the LPS bound places all nontrivial quadratic Hashimoto roots on the radius-`sqrt(5)` circle and the two chambers have conditional density one half. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [LPS--Hashimoto package](../henon_lps_quaternion_nonbacktracking_route_a/) · [paper PDF](../henon_lps_quaternion_nonbacktracking_route_a/paper/main.pdf) |
+| HCS-C376 | A charged particle on every nonzero-flux rectangular flat torus has a complete clean cyclotron-return atlas; its degree-`N` magnetic line bundle has exact Landau levels and degeneracy, signed finite magnetic-translation commutator, heat trace, spectral zeta and determinant, and exact revival clocks.  Both flux orientations and the metric-dependent `B=0` closing condition are explicit. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [flat magnetic-torus package](../henon_flat_magnetic_torus_landau_route_a/) · [paper PDF](../henon_flat_magnetic_torus_landau_route_a/paper/main.pdf) |
+| HCS-C377 | The periodic nonadvective CLM equation has an invariant Hilbert/Hardy Riccati reduction for arbitrary mean, exact Mobius solutions, necessary-and-sufficient forward first-pole clocks in both mean strata, a complete one-mode phase diagram, and transverse local profiles at simple first poles; the global inverse-time norm rate is asserted only when every simultaneous first pole is simple. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [periodic CLM package](../henon_periodic_clm_exact_blowup_route_a/) · [paper PDF](../henon_periodic_clm_exact_blowup_route_a/paper/main.pdf) |
+| HCS-C378 | Trace-metric Hermitian OU diffusion induces the exactly normalized noncolliding beta-two eigenvalue SDE.  The Vandermonde Doob transform gives its conservative kernel and ordered GUE law; divided Hermite Slater determinants give the complete partition-indexed `L^2` spectrum, exact norms and multiplicities, sharp gap `1/2`, heat trace, source determinant, and free-fermion oscillator transform for every finite `N`. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Dyson--OU package](../henon_beta2_dyson_ou_eigenvalue_diffusion_route_a/) · [paper PDF](../henon_beta2_dyson_ou_eigenvalue_diffusion_route_a/paper/main.pdf) |
+
+C374--C375 are `ROUTE_A_EXPLORATORY`, and C376--C378 are
+`ROUTE_A_REJECTED`.  Route B is false for all five.  Their owners are an
+arboreal number-field tower, an arithmetic Cayley-graph tower, a compact
+magnetic Hamiltonian, a nonlocal blow-up PDE, and an interacting random-
+matrix diffusion.  The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; no
+target arithmetic local datum, target Euler factor or bad-prime datum, root
+number, automorphy object, target divisor/counting law or functional
+equation, target-zero match, Hilbert--Polya operator, or Route-B input is
+claimed.
+
 ## HCS-C369--HCS-C373 additions (2026-09-04)
 
 Five independent cross-subtype candidates were frozen from baseline

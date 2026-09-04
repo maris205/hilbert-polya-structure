@@ -1,0 +1,180 @@
+schema: route-a-evaluation-v0.2.0
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C377
+title: Periodic Constantin-Lax-Majda exact Riccati flow and complete blow-up clock
+evaluation_date: '2026-09-04'
+source_commit: f58422d8f03235329863f946654981ecb5d4dc97
+code_commit: f58422d8f03235329863f946654981ecb5d4dc97
+fixed_epoch: 1788480000
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority: flow_systems/skills/route-a-evaluator.md
+evaluator_version: 0.2.0
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+obstruction_id: HEN-O361
+candidate_definition: the inviscid nonadvective Constantin-Lax-Majda equation omega_t=omega*Homega on the two-pi periodic circle, with the Fourier convention H(e^{ikx})=-i*sign(k)e^{ikx}, for real smooth initial data of arbitrary mean
+family: nonlocal fluid toy models, periodic Hilbert transforms, pointwise complex Riccati dynamics, and finite-time singularity formation
+phase_space: real smooth periodic functions, stratified by their conserved spatial mean, up to the first denominator zero of the explicit solution
+dynamics: an infinite-dimensional nonlocal evolution conjugated by the periodic Tricomi identity to independent complex Riccati equations at each spatial point
+parameters: real smooth two-pi periodic omega_0, mean mu, mean-zero part f_0=omega_0-mu, h_0=Hf_0, and forward physical time; simple-pole asymptotics are stated only under explicit transversality
+parameter_provenance: source initial data, its conserved mean, and the fixed periodic Hilbert-transform convention
+arithmetic_origin: none; Fourier mode integers are harmonic labels and the arccot branch is an analytic blow-up clock, not rational-prime input
+clock: physical PDE time in omega_t=omega*Homega
+normalization: H(e^{ikx})=-i*sign(k)e^{ikx}, H1=0, H^2f=-f for mean-zero f, and arccot maps the real line to (0,pi)
+determinant_convention: none; no spectral determinant, dynamical zeta, Fredholm determinant, or Euler product is constructed
+orbit_cutoff: no theorem cutoff; finite evidence audits 256 Hilbert multipliers, 1024 exact Tricomi polynomials, 512 zero-mean Möbius cells, 2048 nonzero-mean cells, 2304 one-mode regimes, 1280 simple-pole profile cells, and seven boundaries
+precision: exact Gaussian rationals and symbolic branch formulas throughout the canonical evidence; no floating-point theorem decision
+training_data: none
+forbidden_data: target arithmetic local data, Euler factors, root numbers, automorphy, target divisors, target functional equations, target zeros, Hilbert-Polya operators, and Route B
+source_lock:
+  object: inviscid nonadvective periodic CLM with arbitrary conserved mean
+  arithmetic_origin: none; Fourier integers are harmonic labels only
+  clock: physical PDE time in omega_t=omega*Homega
+  normalization: H(e^{ikx})=-i*sign(k)e^{ikx} and z=H(omega-mu)+i*(omega-mu)
+  determinant_convention: none
+  cutoff: no theorem cutoff; the exact finite ledger sizes are frozen below
+  precision: exact Gaussian rationals with no floating-point theorem decision
+  allowed_data: source formulas, exact Fourier algebra, exact rational grids, and cited bibliographic metadata
+  forbidden_data: prime tables, Riemann-zero tables, target local factors, target divisors, fitted target parameters, and Route B
+artifact_paths:
+  - results/c377_periodic_clm_evidence.json
+  - THEOREM_PACKAGE.md
+  - paper/main.pdf
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: Fourier mode integers and exact Möbius denominators organize the source solution
+  strongest_failure: there is no rational-prime carrier, prime-power repetition, arithmetic orbit weight, or logarithmic-prime clock
+  arithmetic_controls:
+    - name: composite Fourier modes
+      status: EXECUTED_EXACT
+      result: one-mode clocks for composite k agree with the same mu and amplitude cases at prime and unit k because the clock is independent of k
+      artifact: results/c377_periodic_clm_evidence.json#arithmetic_control_rows
+    - name: deterministic randomized mode labels
+      status: EXECUTED_EXACT
+      result: the affine permutation k maps to 1+((5*(k-1)+3) mod 16) preserves every stripped one-mode regime and clock row
+      artifact: results/c377_periodic_clm_evidence.json#arithmetic_control_rows
+    - name: neighboring mean-amplitude parameters
+      status: EXECUTED_EXACT
+      result: all 2304 grid cells change only at the analytic threshold abs(mu)=abs(A), not at prime or composite mode labels
+      artifact: results/c377_periodic_clm_evidence.json#one_mode_rows
+    - name: simpler zero-mean parent
+      status: EXECUTED_EXACT
+      result: 512 exact cells obey the separate zero-mean Mobius formula with no arithmetic labels
+      artifact: results/c377_periodic_clm_evidence.json#zero_mean_rows
+  artifacts:
+    - results/c377_periodic_clm_evidence.json
+    - SOURCE_AUDIT.md
+a1:
+  verdict: A1_FAIL
+  evidence_status: PROVED
+  strongest_evidence: zero-free nonzero-mean data have an exact global time period and singular data have an exact first-pole clock
+  strongest_failure: the evolution has no isolated primitive periodic-orbit ledger with source arithmetic weights
+  metrics:
+    isolated_primitive_orbit_count: 0
+    repeated_orbit_ledger_count: 0
+    zero_free_solution_period: 2*pi/abs(mu), not necessarily least
+    monodromy_or_stability_multiplier_ledger: not applicable because no isolated orbit family is proposed
+    completeness_status: exact absence of a proposed arithmetic primitive-orbit layer
+  artifacts:
+    - paper/main.pdf#complete-forward-time-classification
+    - results/c377_periodic_clm_evidence.json#one_mode_rows
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the nonlinear solution map is an explicit pointwise Möbius transformation
+  strongest_failure: no source dynamical zeta, Fredholm determinant, Euler product, or target divisor arises
+  metrics:
+    zero_error_train: not applicable because no determinant is defined
+    zero_error_validation: not applicable because no determinant is defined
+    zero_error_test: not applicable because no determinant is defined
+    extra_zero_count: not applicable because no determinant is defined
+    missing_zero_count: not applicable because no determinant is defined
+    root_count_discrepancy: not applicable because no determinant is defined
+    cutoff_drift: not applicable because no orbit cutoff or determinant is defined
+    precision_drift: zero in exact Gaussian-rational source checks, but no target comparison exists
+    control_margin: not applicable because no target-zero classifier is run
+  artifacts:
+    - SCOPE.md
+    - THEOREM_PACKAGE.md
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: global versus singular evolution and the first forward singular time are exactly classified
+  strongest_failure: there is no target continuation, functional equation, counting law, zero compression, or zero correspondence
+  analytic_structure:
+    conjugation_symmetry: not applicable because no target determinant is defined
+    functional_equation: absent
+    gamma_trivial_zero_pole_data: absent
+    counting_law: absent
+    continuation_domain: only the explicit classical PDE solution before its first denominator pole
+  weil_compression:
+    status: not defined; inserting one would be post-hoc
+    trace_second_moment_inertia: not applicable
+    common_prime_dynamical_reading: absent
+  artifacts:
+    - paper/main.pdf
+    - CLAIMS.md
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the periodic Hilbert transform is a canonical skew-adjoint source operator
+  strongest_failure: the nonlinear Riccati flow supplies no natural self-adjoint quantization and no Hilbert-Polya operator
+  metrics:
+    coherent_symplectic_contact_scattering_phase_space: not supplied by the source model
+    time_reversal_or_antiunitary_test: not applicable to a proposed quantum lift because none is defined
+    same_clock_quantum_lift: absent
+    orbit_phase_retention: absent because no primitive-orbit layer exists
+    hilbert_space_and_operator_domain: source Hilbert transform acts on periodic Sobolev spaces, but no self-adjoint quantum Hamiltonian is proposed
+  artifacts:
+    - ASSUMPTIONS.md
+    - LIMITATIONS.md
+tuple:
+  - A0_FAIL
+  - A1_FAIL
+  - A2_FAIL
+  - A3_FAIL
+  - A4_FAIL
+overall_verdict: ROUTE_A_REJECTED
+adversarial_controls:
+  controls_used:
+    - exact composite-versus-prime Fourier-mode invariance on the one-mode grid
+    - exact deterministic affine relabeling of all sixteen Fourier modes
+    - neighboring mu and amplitude threshold grid
+    - simpler zero-mean Mobius parent grid
+    - tangent-zero countercontrol against an unconditional simple-pole vorticity rate
+  proves_too_much_risk: the Riccati mechanism applies without arithmetic data, so it cannot certify an RH-like target; the evaluator stops at A0 and the tangent control also blocks a universal profile claim
+  verdict: PASS_DOES_NOT_CERTIFY_TARGET
+claim_boundary:
+  - exact periodic CLM arbitrary-mean solution and first forward denominator-pole classification only
+  - local vorticity profiles only at simple first poles and a global inverse-time rate only when every simultaneous first pole is simple
+  - no claim after the first pole, for three-dimensional Euler, for target arithmetic, or for global literature novelty
+blocking_conditions:
+  - no intrinsic rational-prime carrier or prime-power repetition law
+  - no isolated primitive-orbit ledger with weights and stability data
+  - no dynamical zeta or Fredholm determinant tied to a target divisor
+  - no target analytic structure or natural quantum lift
+next_smallest_test: no within-model target fit is authorized; any renewed Route-A attempt must first exhibit an independently sourced arithmetic carrier before computing target data
+round2_clues:
+  - the invariant negative-frequency Hardy algebra is a reusable exact-closure mechanism for other nonlocal PDEs
+  - tangent zeros require a separate degenerate scaling analysis and must not inherit the simple-pole rate
+  - advective or dissipative generalized CLM is a distinct future dynamical subtype rather than an extension claimed here
+route_b_invocation_allowed: false
+route_b_lock_reason: an exact nonlinear blow-up clock does not supply arithmetic primitive orbits, a determinant-to-target bridge, analytic target data, or natural quantization
+scope_flags:
+  claims_target_arithmetic_local_data: false
+  claims_target_euler_factors: false
+  claims_root_number: false
+  claims_automorphy: false
+  claims_target_divisor_or_counting_law: false
+  claims_target_functional_equation: false
+  claims_target_zero_match: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false
+theorem_status: PROVABLE_AS_STATED_WITH_SIMPLE_POLE_CONDITION_FOR_PROFILE
+finite_evidence_role: exact algebraic regression for formulas proved from the periodic Tricomi identity, never proof by finite sampling
+source_owner_tokens:
+  - DOI:10.1002/cpa.3160380605
+  - arXiv:2010.01201
+  - DOI:10.1007/s00332-021-09737-x
+  - theorem:periodic-CLM-arbitrary-mean-first-pole-clock

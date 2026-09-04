@@ -1,0 +1,326 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<C3752026090400000000000000000000><C3752026090400000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,float,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\newfontfamily\zhfont[BoldFont={Droid Sans Fallback}]{Droid Sans Fallback}
+\newcommand{\zhbreak}{\allowbreak}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Fq}{\mathbb F_q}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Scope}{\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}}
+\ifcase\CRevisionRound
+\title{Norm-Five Quaternion Congruence Graphs:\\
+The Two Arithmetic Chambers of the LPS $X^{5,q}$ Family}
+\or
+\title{From Norm-Five Quaternions to Primitive Cycles:\\
+Exact Nonbacktracking Dynamics of the LPS $X^{5,q}$ Family}
+\else
+\title{From Norm-Five Quaternions to the Ramanujan Circle:\\
+Complete Nonbacktracking Dynamics of the LPS $X^{5,q}$ Family}
+\fi
+\author{HCS-C375 / HEN-O359}
+\date{4 September 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For every prime $q>5$ with $q\equiv1\pmod4$, six Hamilton quaternions of
+norm five define a six-regular Lubotzky--Phillips--Sarnak Cayley graph.
+We close its arithmetic and dynamical specialization in one normalization.
+The Legendre symbol $(5/q)$ selects a connected $\PSL_2(\Fq)$ or
+$\PGL_2(\Fq)$ chamber and exactly controls bipartiteness.
+\ifnum\CRevisionRound>0
+The oriented-edge Hashimoto operator has a complete Bass characteristic
+factorization, all-iterate trace formula, M\"obius primitive-cycle inversion,
+and finite-graph Ihara product.
+\fi
+\ifnum\CRevisionRound>1
+The LPS Ramanujan bound then places every nontrivial quadratic Hashimoto
+root on $|\mu|=\sqrt5$; the two chambers each have conditional prime density
+$1/2$. Five full finite groups provide exact regression evidence, not a
+proof by sampling. This is a source-arithmetic Route-A exploration, with no
+target Euler product, zero correspondence, or Hilbert--P\'olya claim.
+\fi
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+\ifcase\CRevisionRound
+arithmetic Cayley graphs; Hamilton quaternions; LPS graphs; projective
+linear groups; bipartite graphs
+\or
+arithmetic Cayley graphs; LPS graphs; Hashimoto operator; nonbacktracking
+dynamics; primitive cycles; finite-graph Ihara product
+\else
+LPS graphs; arithmetic dynamics; Hashimoto operator; primitive cycles;
+Ramanujan spectrum; prime number theorem; computational certification
+\fi
+
+\begin{center}{\zhfont\large 中文摘要}\end{center}
+{\zhfont
+\begin{flushleft}
+我们从范数五的六个整数四元数出发，把它们约化为有限域上的\\
+投影矩阵，并冻结右乘的{\normalfont Cayley}规范。若素数 $q>5$ 且\\
+$q\equiv1\pmod4$，则平方类 $(5/q)$ 把同一构造分入\\
+$\PSL_2(\Fq)$ 与 $\PGL_2(\Fq)$ 两个算术室。前者非二分，\\
+后者由行列式平方类给出等大的二分部；群阶、六度性以及更换\\
+$\sqrt{-1}$ 所引起的共轭等价均被明确确定。
+\ifnum\CRevisionRound>0
+在此图上提升到有向边后，禁止立即逆行的转移给出一个内生动力学。\\
+我们专门化{\normalfont Bass--Hashimoto}行列式，固定所有次幂迹的\\
+闭步约定，并用{\normalfont M\"obius}反演恢复每个长度的本原有向闭轨；\\
+相应的有限图{\normalfont Ihara}乘积因而逐项确定。
+\fi
+\ifnum\CRevisionRound>1
+再调用{\normalfont LPS}谱界，非平凡二次根恰落在半径 $\sqrt5$ 的圆上；\\
+算术级数素数定理还给出两室各为二分之一的条件自然密度。五个完整\\
+有限群只用作精确实现凭据。错余类、合数和室标签置换已完成\\
+{\normalfont A0}对照，但不能替代本原轨道层的周期、相位、权重及等密度长度\\
+对照；模数也没有转移为轨道标签。严格评估故记{\normalfont A1\_WEAK}，\\
+仅报告路线{\normalfont A}探索，不声称目标{\normalfont Euler}因子、零点对应或\\
+{\normalfont Hilbert--P\'olya}算子。
+\fi
+
+\textbf{关键词：}
+\ifcase\CRevisionRound
+算术{\normalfont Cayley}图；整数四元数；{\normalfont LPS}图；投影线性群；二分图
+\or
+算术图动力学；{\normalfont LPS}图；非回溯转移；有向闭轨；\\
+{\normalfont Hashimoto}算子；有限图{\normalfont Ihara}乘积
+\else
+算术动力学；{\normalfont LPS}图；非回溯算子；本原闭轨；\\
+{\normalfont Ramanujan}谱；算术级数素数定理；计算机核验
+\fi
+\end{flushleft}
+}
+
+\section{Arithmetic quaternion chambers}
+Let
+\[
+ \mathcal S_5=\{(1,\pm2,0,0),(1,0,\pm2,0),(1,0,0,\pm2)\}.
+\]
+Choose $\iota\in\Fq$ with $\iota^2=-1$ and put
+\begin{equation}\label{eq:matrix}
+ M_\iota(a)=
+ \begin{pmatrix}
+ a_0+\iota a_1&a_2+\iota a_3\\
+ -a_2+\iota a_3&a_0-\iota a_1
+ \end{pmatrix}.
+\end{equation}
+We use its projective class. Write $\chi_q=(5/q)$ and
+\[
+ G_q=\begin{cases}
+ \PSL_2(\Fq),&\chi_q=1,\\
+ \PGL_2(\Fq),&\chi_q=-1.
+ \end{cases}
+\]
+
+\begin{lemma}[Norm, inverses, and gauge]\label{lem:gauge}
+The six classes $[M_\iota(a)]$ are distinct and inverse closed. Replacing
+$\iota$ by $-\iota$ conjugates the generating set and gives an isomorphic
+labeled Cayley dynamics.
+\end{lemma}
+
+\begin{proof}
+Expansion gives
+\[
+ \det M_\iota(a)=a_0^2+a_1^2+a_2^2+a_3^2=5.
+\]
+Quaternion conjugation changes the sign of the unique nonzero tail
+coordinate and satisfies $M(a)M(\bar a)=5I$. The paired projective classes
+are inverses. For $q>5$, equality of two classes, or equality with the
+identity class, would force one of $2,4,5$ to vanish modulo $q$. Thus the
+six classes are distinct and nonidentity. For
+$J=\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)$, direct
+multiplication gives $M_{-\iota}(a)=JM_\iota(a)J^{-1}$.
+\end{proof}
+
+\begin{theorem}[LPS chamber closure]\label{thm:chamber}
+The Cayley graph $X^{5,q}=\operatorname{Cay}(G_q,\mathcal S_5)$ is connected,
+simple, six-regular, and Ramanujan. More precisely,
+\[
+ |G_q|=\begin{cases}
+ q(q^2-1)/2,&\chi_q=1,\\
+ q(q^2-1),&\chi_q=-1.
+ \end{cases}
+\]
+The first chamber is nonbipartite. The second is bipartite, with the square
+and nonsquare projective determinant classes as its two equal parts.
+\end{theorem}
+
+\begin{proof}
+Connectedness, the group identification, and the Ramanujan bound are the
+LPS theorem specialized to quaternion prime five~\cite{LPS}. Lemma
+\ref{lem:gauge} gives simplicity and degree six, while the displayed orders
+are the standard projective-group orders. Projective determinant square
+class is well defined because scalar rescaling changes determinant by a
+square. If $\chi_q=-1$, every edge flips this character; connectedness and
+one generator give a bijection between the two parts. If $\chi_q=1$, a
+connected bipartite Cayley graph would define a nontrivial word-parity map
+$\PSL_2(\Fq)\to\{\pm1\}$. Its kernel would have index two, contradicting
+the simplicity of $\PSL_2(\Fq)$ for $q\ge13$.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Exact primitive nonbacktracking dynamics}
+Let $n_q=|G_q|$ and $m_q=3n_q$. On the $2m_q=6n_q$ oriented edges, define
+$H_q(e,e')=1$ when the terminus of $e$ is the origin of $e'$ and
+$e'\ne\bar e$. Let $A_q$ be adjacency on vertices.
+
+\begin{theorem}[Complete determinant and orbit ledger]\label{thm:bass}
+One has the polynomial identities
+\begin{align}
+ \det(tI-H_q)&=(t^2-1)^{2n_q}
+ \det(t^2I-tA_q+5I),\label{eq:char}\\
+ \det(I-uH_q)&=(1-u^2)^{2n_q}
+ \det(I-uA_q+5u^2I).\label{eq:bass}
+\end{align}
+If $N_q(r)=\Tr(H_q^r)$ and $\Pi_q(r)$ counts prime oriented cycles of
+length $r$, modulo cyclic shift but not reversal, then
+\begin{equation}\label{eq:mobius}
+ \Pi_q(r)=\frac1r\sum_{d\mid r}\mu(d)N_q(r/d).
+\end{equation}
+Moreover, in $\mathbb Q[[u]]$ and as a rational function,
+\begin{equation}\label{eq:zeta}
+ \prod_{[C]}(1-u^{\ell(C)})^{-1}
+ =\exp\!\left(\sum_{r\ge1}\frac{N_q(r)}r u^r\right)
+ =\det(I-uH_q)^{-1}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The Bass--Hashimoto formula for a graph with degree matrix $D$ is
+\[
+ \det(I-uH)=(1-u^2)^{m-n}\det(I-uA+u^2(D-I)).
+\]
+Here $D=6I$ and $m-n=2n$, which proves \eqref{eq:bass}; substitution
+$u=t^{-1}$ proves \eqref{eq:char}~\cite{Hashimoto,Bass,KotaniSunada}.
+By construction, a diagonal entry of $H_q^r$ selects a closed oriented-edge
+walk with no inverse pair, including across the terminal seam. Thus its
+trace counts cyclically nonbacktracking walks. Every such walk is a unique
+repeat of a prime oriented cycle, so
+$N_q(r)=\sum_{d\mid r}d\Pi_q(d)$. M\"obius inversion proves
+\eqref{eq:mobius}; grouping all repeats, or taking the formal logarithm of
+the finite determinant, proves \eqref{eq:zeta}.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Ramanujan circle and route boundary}
+\begin{theorem}[Complete Hashimoto spectral placement]\label{thm:circle}
+For every $\lambda\in\Spec(A_q)$, the two roots assigned by
+\eqref{eq:char} solve $\mu^2-\lambda\mu+5=0$.
+The factor $(t^2-1)^{2n_q}$ adds $+1$ and $-1$, each with multiplicity
+$2n_q$. The trivial adjacency root $6$ gives $5,1$. The root $-6$ gives
+$-5,-1$ and occurs exactly in the bipartite $\PGL_2$ chamber. Every other
+quadratic root obeys $|\mu|=\sqrt5$.
+\end{theorem}
+
+\begin{proof}
+Equation \eqref{eq:char} is a complete factorization of degree $6n_q$.
+The LPS Ramanujan theorem gives $|\lambda|\le2\sqrt5$ after removing $6$
+and the possible bipartite root $-6$. In the strict case the quadratic
+roots are conjugate with product five; at equality they coincide at
+$\pm\sqrt5$. Hence both have modulus $\sqrt5$. The two trivial
+factorizations are $(\mu-1)(\mu-5)$ and $(\mu+1)(\mu+5)$. A connected
+regular graph has eigenvalue minus its degree exactly when it is bipartite,
+and Theorem~\ref{thm:chamber} identifies that chamber.
+\end{proof}
+
+\begin{proposition}[Prime chamber density]\label{prop:density}
+Among primes $q>5$ with $q\equiv1\pmod4$, the $\PSL_2$ and $\PGL_2$
+chambers each have conditional natural density $1/2$. They are respectively
+$q\equiv1,9\pmod{20}$ and $q\equiv13,17\pmod{20}$.
+\end{proposition}
+
+\begin{proof}
+Quadratic reciprocity gives $(5/q)=(q/5)$. The four displayed reduced
+classes modulo 20 each have natural density $1/8$ among all primes by the
+prime number theorem for arithmetic progressions~\cite{Davenport}.
+Conditioning on their union gives weight $1/4$ per class and $1/2$ per pair.
+\end{proof}
+
+\section{Exact evidence, limitations, and declarations}
+The executable certificate constructs the complete groups for
+$q=13,17,29,37,41$, totaling $104{,}316$ vertices and $625{,}896$ oriented
+edges. It verifies 60 trace rows through time 12. Independent code uses a
+different projective normalization and the opposite multiplication side.
+The certified girths are respectively $8,8,9,10,9$. Among the 1,124
+eligible primes at most 20,000, the finite chamber counts are 555 and 569;
+these are regression data, not a density estimate.
+
+The arithmetic construction clears A0. The exact primitive ledger is
+source-local: it does not turn the modulus $q$ or its primality into a label
+of an individual orbit, establish $p\leftrightarrow\gamma_p$ or prime-power
+repetition, or produce intrinsic $\log p$ or von Mangoldt weights. The
+A0 lane executes wrong-residue-prime, matched-composite, and cyclically
+shuffled chamber-label controls. These do not replace the A1 controls:
+mandatory shuffled-period, random-weight, random-phase, same-density-length,
+neighboring-parameter, and simpler-parent orbit-correspondence controls are
+absent. Strict evaluator v0.2 therefore records
+A1 as weak, not as a pass. HCS-C329 already owns the generic
+Bass/Ihara/Hashimoto mechanism; C375 claims only this LPS-specific joint
+atlas. The separate finite graphs do not form one autonomous global flow,
+and no target determinant or divisor is identified. Consequently A2 and A3
+fail, while the canonical adjacency and nonnormal Hashimoto operators supply
+only an A4 formal hint. The tuple is
+\[
+ (A0_{\rm STRUCTURAL\_ARITHMETIC\_RELATION},A1_{\rm WEAK},
+ A2_{\rm FAIL},A3_{\rm FAIL},A4_{\rm FORMAL\_HINT}).
+\]
+The overall status is \texttt{ROUTE\_A\_EXPLORATORY} under
+\Scope. There is no target arithmetic local datum, target Euler product,
+bad-prime datum, root number, automorphy, target functional equation,
+target zero match, target counting law, or Hilbert--P\'olya operator. Route B
+is not invoked.
+
+\paragraph{Data availability.}
+All exact evidence and source code are included in the C375 package.
+\paragraph{Ethics declaration.}
+This mathematical study uses no human participants, animals, or sensitive
+personal data.
+\paragraph{Author contributions (CRediT).}
+Conceptualization, formal analysis, software, validation, writing, and
+revision are recorded as one auditable package; final responsibility remains
+with the submitting author.
+\paragraph{Conflicts of interest.}
+No conflict of interest is declared.
+\paragraph{Funding.}
+No external funding is declared.
+\paragraph{AI-use disclosure.}
+Generative AI assisted drafting and code generation. The package exposes the
+proof dependencies, exact computations, independent checker, and hostile
+tests so that the authors can verify every released claim.
+\fi
+
+\begin{thebibliography}{9}\small
+\bibitem{LPS} A. Lubotzky, R. Phillips, and P. Sarnak,
+\emph{Ramanujan graphs}, Combinatorica 8 (1988), 261--277.
+\url{https://doi.org/10.1007/BF02126799}.
+\bibitem{Hashimoto} K.-i. Hashimoto,
+\emph{Zeta functions of finite graphs and representations of p-adic groups},
+in Automorphic Forms and Geometry of Arithmetic Varieties,
+Adv. Stud. Pure Math. 15 (1989), 211--280.
+\url{https://doi.org/10.1016/B978-0-12-330580-0.50015-X}.
+\bibitem{Bass} H. Bass, \emph{The Ihara--Selberg zeta function of a tree
+lattice}, International Journal of Mathematics 3 (1992), 717--797.
+\url{https://doi.org/10.1142/S0129167X92000357}.
+\bibitem{KotaniSunada} M. Kotani and T. Sunada,
+\emph{Zeta Functions of Finite Graphs}, J. Math. Sci. Univ. Tokyo 7
+(2000), 7--25.
+\url{https://www.ms.u-tokyo.ac.jp/journal/abstract_e/jms070102_e.html}.
+\bibitem{Davenport} H. Davenport, \emph{Multiplicative Number Theory},
+2nd ed., Graduate Texts in Mathematics 74, Springer, 1980.
+\url{https://doi.org/10.1007/978-1-4757-5927-3}.
+\end{thebibliography}
+
+\end{document}

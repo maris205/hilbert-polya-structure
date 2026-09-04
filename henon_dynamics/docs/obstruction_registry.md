@@ -17,6 +17,24 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C374--HCS-C378 additions (2026-09-04)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O358 | HCS-C374 compatible Kummer--Frobenius levels as one target Euler or Hilbert--Polya owner | proved finite-level/global-target obstruction after genuine structural arithmetic | Rational primes, splitting fields and Frobenius classes are intrinsic, but each level is a finite Galois permutation and the package constructs no cross-prime or cross-level trace-class determinant with a target divisor.  The canonical permutation unitaries do not acquire target-zero eigenvalues merely from the exact inverse limit. | The all-level field intersection, character-cut affine image, four-kernel restrictions, inverse limit, complete fixed-root spectrum and exact Chebotarev root densities survive. | ../henon_kummer_arboreal_frobenius_route_a/THEOREM_PACKAGE.md |
+| HEN-O359 | HCS-C375 prime-indexed LPS graphs and their Ramanujan Hashimoto circle as a single target spectral owner | proved arithmetic-family/global-owner obstruction after genuine structural arithmetic | The prime modulus, quaternion norm and `PSL_2/PGL_2` chamber are intrinsic arithmetic input, and every finite graph has exact primitive nonbacktracking dynamics.  Nevertheless distinct primes index distinct finite graphs; no autonomous common phase space, target Euler divisor, continuation theorem, or self-adjoint target-zero realization is provided. | The quaternion gauge theorem, exact chambers and bipartiteness, Bass--Hashimoto factorization, complete primitive ledger, radius-`sqrt(5)` nontrivial spectrum and conditional chamber density survive. | ../henon_lps_quaternion_nonbacktracking_route_a/THEOREM_PACKAGE.md |
+| HEN-O360 | HCS-C376 Chern flux, Landau levels and magnetic translations as rational-prime or target spectral data | proved source-topology/source-quantization obstruction | Integral flux is a first Chern class, not a rational-prime carrier, prime-power repetition law, or logarithmic-prime clock.  Landau levels, the signed finite Heisenberg commutator, Hurwitz spectral zeta and Bochner determinant all belong to the source line bundle and identify no target divisor or zeros. | The classical clean cyclotron return, all signed flux chambers, exact degeneracy, magnetic translations, heat/zeta/determinant formulas, revival clocks and the correct metric-dependent zero-field boundary survive. | ../henon_flat_magnetic_torus_landau_route_a/THEOREM_PACKAGE.md |
+| HEN-O361 | HCS-C377 Riccati poles of the periodic CLM equation as arithmetic primitive cycles or target spectral data | proved nonlocal-PDE/blow-up obstruction | Fourier modes and initial-data zeros are analytic source coordinates, not rational-prime labels; finite-time denominator poles terminate a smooth PDE trajectory rather than form an isolated primitive recurrence ledger.  The pointwise Riccati representation supplies no target determinant, divisor, functional equation, or natural self-adjoint target-zero operator. | The invariant Hilbert constraint, arbitrary-mean exact solution, iff first-pole clocks, one-mode atlas, transverse simple-pole profiles and precisely conditional inverse-time rate survive. | ../henon_periodic_clm_exact_blowup_route_a/THEOREM_PACKAGE.md |
+| HEN-O362 | HCS-C378 Dyson eigenvalue diffusion and its partition spectrum as arithmetic or target-zero data | proved stochastic-semigroup/source-oscillator obstruction | Generic matrix dimension, partitions, Coulomb repulsion and diffusion time carry no rational-prime ownership or primitive deterministic orbit clock.  The trace-class source semigroup determinant and beta-two free-fermion conjugacy identify neither target Euler data nor a Hilbert--Polya spectrum. | The normalized matrix-to-eigenvalue SDE, conservative noncollision kernel, ordered GUE law, complete partition spectrum, exact norms/multiplicities, sharp gap, heat trace and oscillator transform survive. | ../henon_beta2_dyson_ou_eigenvalue_diffusion_route_a/THEOREM_PACKAGE.md |
+
+These obstructions are invariant under compatible radical/root-of-unity
+choices in the Kummer tower, projective gauge and Cayley relabeling in the LPS
+graphs, unitary magnetic gauge changes with an explicit flux-orientation
+convention, periodic translation and the frozen Hilbert sign in CLM, and
+unitary matrix conjugacy or chamber relabeling in Dyson--OU.  They do not
+authorize Route B.  Every surviving theorem remains source-local under
+`NO_BAD_EULER_OR_ROOT_NUMBER` with a content-addressed evidence/PDF ledger.
+
 ## HCS-C369--HCS-C373 additions (2026-09-04)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

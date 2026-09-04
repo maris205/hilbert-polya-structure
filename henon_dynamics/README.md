@@ -2719,6 +2719,48 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C374--C378
+
+This round takes five independent theorem-scale steps across a Kummer
+arboreal tower, a quaternionic arithmetic Cayley-graph family, a compact
+magnetic Hamiltonian, a nonlocal blow-up PDE, and an interacting eigenvalue
+diffusion.  Their phase spaces, clocks, proof engines, and singular
+boundaries differ; they are not one article split into installments.
+
+- [C374 basepoint-two Kummer arboreal image](henon_kummer_arboreal_frobenius_route_a/README.md) · [paper PDF](henon_kummer_arboreal_frobenius_route_a/paper/main.pdf)
+- [C375 norm-five LPS nonbacktracking dynamics](henon_lps_quaternion_nonbacktracking_route_a/README.md) · [paper PDF](henon_lps_quaternion_nonbacktracking_route_a/paper/main.pdf)
+- [C376 flat magnetic-torus Landau dynamics](henon_flat_magnetic_torus_landau_route_a/README.md) · [paper PDF](henon_flat_magnetic_torus_landau_route_a/paper/main.pdf)
+- [C377 periodic CLM exact blow-up atlas](henon_periodic_clm_exact_blowup_route_a/README.md) · [paper PDF](henon_periodic_clm_exact_blowup_route_a/paper/main.pdf)
+- [C378 beta-two Dyson--OU eigenvalue diffusion](henon_beta2_dyson_ou_eigenvalue_diffusion_route_a/README.md) · [paper PDF](henon_beta2_dyson_ou_eigenvalue_diffusion_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C374_C378.md),
+[batch plan](BATCH_PLAN_C374_C378.md), and
+[batch review](BATCH_REVIEW_C374_C378.md) for collision screening, theorem
+contracts, author-swapped proof and governance repairs, exact hashes, and
+release accounting.  C374 proves an index-two Kummer image and exact
+Chebotarev root density but remains weak at A1; its repaired composite
+control retains prime powers as `Frob_p^r` repetitions and rejects only
+mixed composites as single-prime owners.  C375 closes the specialized
+LPS--Hashimoto primitive ledger.  C376 retains both flux orientations and
+the lattice-normalized zero-field boundary.  C377's global inverse-time
+rate is conditional on simple simultaneous first zeros.  C378 closes the
+complete finite-`N` partition spectrum with an exact round-title gate.
+
+The round closes 10,342 symbolic identities, 384 hostile rejections,
+20,143,877 canonical evidence bytes, 200 content-addressed payloads (205
+physical files), and 23 final-paper pages with 96 embedded/subset font rows.
+The strict tuples, in order C374--C378, are
+`(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`.  C374--C375 are
+`ROUTE_A_EXPLORATORY`; C376--C378 are `ROUTE_A_REJECTED`.  Route B is false
+and the common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic
+local datum, target Euler factor, target bad-prime datum, root number,
+automorphy object, target divisor/counting law or functional equation,
+target-zero match, Hilbert--Polya operator, or Route-B input is asserted.
+
 ## Route-A independent cross-subtype round C369--C373
 
 This round takes five independent theorem-scale steps across a quartic
