@@ -1,0 +1,163 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<C3622026090400000000000000000000><C3622026090400000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.66in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Dini}{D^{+}}
+\title{A Sharp Tail Barrier for Cucker--Smale Flocking}
+\author{HCS-C362 / HEN-O346}
+\date{4 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the normalized Cucker--Smale flow we prove global existence, conserved
+mean velocity, exact variance dissipation, and a diameter comparison principle.
+The communication tail gives explicit confinement and exponential alignment,
+including unconditional flocking at the critical exponent $\beta=1/2$.  A
+scalar two-particle reduction proves the short-range threshold sharp and
+separates its zero-speed/unbounded-distance equality orbit from positive-speed
+escape.  This round is the \textbf{global diameter-barrier owner}.
+\end{abstract}
+
+\section{Model and all-particle barrier}
+For $N\ge2$, $d\ge1$, $K>0$, and $\beta\ge0$, set
+\begin{equation}\label{eq:model}
+ \dot x_i=v_i,\qquad
+ \dot v_i=\frac K N\sum_{j=1}^N\psi(|x_j-x_i|)(v_j-v_i),
+ \qquad \psi(r)=(1+r^2)^{-\beta}.
+\end{equation}
+Write $\bar v=N^{-1}\sum_i v_i$ and
+$X=\max_{i,j}|x_i-x_j|$, $V=\max_{i,j}|v_i-v_j|$.
+
+\begin{theorem}[Global flow, dissipation, and tail barrier]\label{thm:main}
+Equation~\eqref{eq:model} has a unique global classical solution.  The mean
+velocity is constant and
+\begin{equation}\label{eq:energy}
+ \frac d{dt}\frac1N\sum_i|v_i-\bar v|^2
+ =-\frac K{N^2}\sum_{i,j}\psi(|x_i-x_j|)|v_i-v_j|^2.
+\end{equation}
+The upper Dini derivatives satisfy
+\begin{equation}\label{eq:diam}
+ \Dini X\le V,\qquad \Dini V\le-K\psi(X)V.
+\end{equation}
+If
+\begin{equation}\label{eq:condition}
+ V(0)<K\int_{X(0)}^\infty\psi(s)\,ds,
+\end{equation}
+there is a unique $R\ge X(0)$ such that
+$K\int_{X(0)}^R\psi=V(0)$, and
+\begin{equation}\label{eq:bounds}
+ X(t)\le R,\qquad V(t)\le V(0)e^{-K\psi(R)t}.
+\end{equation}
+Every $x_i-x_j$ converges and every $v_i$ converges to $\bar v$.
+Consequently every initial state flocks when $0\le\beta\le1/2$.
+\end{theorem}
+
+\begin{proof}
+For any direction, the largest velocity projection cannot increase and the
+smallest cannot decrease; hence the velocity convex hull is invariant.
+Velocities remain bounded, positions grow at most linearly, and local
+existence extends globally.  Pair symmetry gives $\sum_i\dot v_i=0$ and,
+after pairing $(i,j)$ with $(j,i)$, gives~\eqref{eq:energy} with its ordered-pair
+normalization.
+
+If $V=0$, all velocities coincide, every alignment acceleration vanishes, and
+the second inequality in~\eqref{eq:diam} is immediate.  Otherwise, at a
+velocity-diameter pair $(p,q)$ put $e=(v_p-v_q)/V$ and $z_j=e\cdot v_j$.  Then
+$z_q\le z_j\le z_p$.  Every weight is at least $\psi(X)$, so
+\[
+ \dot z_p-\dot z_q\le\frac{K\psi(X)}N
+ \sum_j[(z_j-z_p)-(z_j-z_q)]=-K\psi(X)V.
+\]
+Maximizing over active pairs proves the second Dini inequality; the identical
+active-pair argument for positions gives the first.  Thus
+\[
+ \Dini\left(V+K\int_{X(0)}^X\psi(s)\,ds\right)\le0.
+\]
+The radius $R$ supplied by~\eqref{eq:condition} is a first-crossing barrier.
+Since $\psi(X)\ge\psi(R)$, Gronwall yields~\eqref{eq:bounds}.  Integrability of
+$V$ makes relative positions Cauchy, and conservation identifies the common
+velocity.  Finally $\psi(s)\sim s^{-2\beta}$, so its tail diverges precisely
+for $\beta\le1/2$.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Explicit radius and sharp two-body boundary}
+This revision is the \textbf{critical-tail and scalar-sharpness owner}.  Put
+\[
+ \Phi_\beta(r)=\int_0^r(1+s^2)^{-\beta}ds
+ =r\,{}_2F_1(1/2,\beta;3/2;-r^2).
+\]
+The confinement radius is
+$R=\Phi_\beta^{-1}(\Phi_\beta(X(0))+V(0)/K)$.  In particular,
+$\Phi_{1/2}=\operatorname{arsinh}$; the logarithmic divergence retains the
+endpoint $\beta=1/2$ in the unconditional chamber.
+
+\begin{proposition}[Exact outward scalar trichotomy]\label{prop:sharp}
+Take $N=2$, $d=1$, and orient the initial data so that
+$r(0)=r_0\ge0$ and $u(0)=u_0\ge0$.  Then
+\begin{equation}\label{eq:two}
+ r'=u,\qquad u'=-K\psi(r)u,\qquad
+ u(r)=u_0-K\int_{r_0}^{r}\psi(s)\,ds.
+\end{equation}
+For $\beta>1/2$ let $A=K\int_{r_0}^{\infty}\psi$.  If $u_0<A$, then
+$r$ converges to the unique finite zero of~\eqref{eq:two} and $u\to0$.
+If $u_0=A$, then $r\to\infty$ while $u\to0$.  If $u_0>A$, then
+$u\to u_0-A>0$ and $r(t)/t\to u_0-A$.
+\end{proposition}
+
+\begin{proof}
+Subtracting the two equations gives~\eqref{eq:two}; while $u>0$, division by
+$r'=u$ gives $du/dr=-K\psi(r)$.  Below threshold its strictly decreasing
+right side has one finite zero.  At equality it stays positive at every finite
+$r$, so a finite limiting separation is impossible, while the tail tends to
+zero.  Above threshold the positive limiting speed is $u_0-A$, and averaging
+$r'=u$ proves the last limit.  Thus the strict all-particle barrier is sharp on
+this subfamily, but its failure is not claimed necessary for general flocks.
+\end{proof}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Degenerate faces, evidence, and route boundary}
+This revision is the \textbf{boundary-atlas and scope-firewall owner}.
+For $N=1$, both diameters vanish.  At $K=0$, velocities are constant and
+flocking occurs exactly when $V(0)=0$.  If $V(0)=0$ for any $K\ge0$, relative
+positions remain fixed.  Coincident agents are regular because $\psi(0)=1$.
+The two-body equality face is not classical flocking: velocity alignment holds
+but spatial confinement fails.
+
+Exact rational rows audit mean conservation, the ordered-pair factor in
+\eqref{eq:energy}, and active-diameter inequalities.  Symbolic rows audit five
+communication primitives and the $\beta=3/2$ below/equality/above threshold
+trichotomy.  Finite evidence is regression only; the proof owns all $N,d$.
+
+Cucker and Smale introduced this flocking model~\cite{CS}; Ha and Liu developed
+the explicit Lyapunov-tail proof lineage~\cite{HL}.  We claim no priority.
+Nearby packages own fixed signed-Laplacian consensus, randomized gossip, and
+noisy Kuramoto synchronization, not this coevolving position--velocity flow.
+
+The source parameters carry no rational-prime semantics, primitive-orbit
+ledger, dynamical zeta, target analytic bridge, or natural same-clock quantum
+lift.  Route A is therefore rejected as
+$(A0_{\rm FAIL},A1_{\rm FAIL},A2_{\rm FAIL},A3_{\rm FAIL},A4_{\rm FAIL})$.
+Route B remains locked under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no
+target zero match or Hilbert--P\'olya operator is claimed.
+
+\begin{thebibliography}{9}
+\small
+\bibitem{CS} F.~Cucker and S.~Smale, \emph{Emergent behavior in flocks},
+IEEE Trans. Automat. Control 52 (2007), 852--862.
+\url{https://doi.org/10.1109/TAC.2007.895842}.
+\bibitem{HL} S.-Y.~Ha and J.-G.~Liu, \emph{A simple proof of the Cucker--Smale
+flocking dynamics and mean-field limit}, Commun. Math. Sci. 7 (2009), 297--325.
+\url{https://doi.org/10.4310/CMS.2009.v7.n2.a2}.
+\end{thebibliography}
+\fi
+\end{document}

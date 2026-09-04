@@ -3,6 +3,32 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C359--HCS-C363 additions (2026-09-04)
+
+Five independent cross-subtype candidates were frozen from baseline
+`05ca5f96b2c69a6ad6ba153d1084df750d7722c0`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+Every retained result is a source-local reconstruction; workspace ownership
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C359 | The fourth-order Pais--Uhlenbeck oscillator has an explicit signed Ostrogradsky oscillator splitting at distinct positive frequencies, a complete rational-periodic/irrational-dense-torus orbit atlas, equal-frequency Jordan secular growth, all zero/negative squared-frequency boundaries, and a rigorously self-adjoint oscillator-difference quantization whose unbounded and dense-spectrum regimes are stated exactly. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Pais--Uhlenbeck package](../henon_pais_uhlenbeck_ostrogradsky_resonance_route_a/) · [paper PDF](../henon_pais_uhlenbeck_ostrogradsky_resonance_route_a/paper/main.pdf) |
+| HCS-C360 | The complete Berger `SU(2)` Ricci-flow cone has explicit curvature, a ratio first integral, exact `atanh`/`atan` maximal lifespans, ancient and finite-backward chambers, genuine round Type-I extinction with curvature blow-up, every curvature-sign wall, and volume-normalized exponential convergence to the round metric. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Berger Ricci-flow package](../henon_berger_su2_ricci_flow_extinction_route_a/) · [paper PDF](../henon_berger_su2_ricci_flow_extinction_route_a/paper/main.pdf) |
+| HCS-C361 | Every finite irreducible bidirected continuous-time Markov chain has a matrix-tree stationary law, nonnegative entropy production with exact detailed-balance/cycle-affinity equivalence, a finite-time path-reversal fluctuation theorem, and full tilted characteristic-polynomial and SCGF symmetry; rate symmetry is asserted only under explicit LDP and Legendre hypotheses. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [finite Markov entropy package](../henon_finite_markov_entropy_fluctuation_route_a/) · [paper PDF](../henon_finite_markov_entropy_fluctuation_route_a/paper/main.pdf) |
+| HCS-C362 | The all-particle Cucker--Smale system has an exact diameter barrier, conditional confinement with exponential alignment and unconditional flocking through the sharp endpoint `beta=1/2`; a two-agent scalar reduction proves the complete subthreshold/equality/superthreshold trichotomy for `beta>1/2`. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Cucker--Smale package](../henon_cucker_smale_flocking_threshold_route_a/) · [paper PDF](../henon_cucker_smale_flocking_threshold_route_a/paper/main.pdf) |
+| HCS-C363 | The planar parabolic--elliptic Keller--Segel flow has matching free-energy-scaling and finite-moment virial thresholds at `8pi`, an explicit supercritical classical-persistence bound, the full translated critical stationary family with its essential infinite-moment caveat, and the exact radial cumulative-mass equation. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [Keller--Segel package](../henon_keller_segel_critical_mass_virial_route_a/) · [paper PDF](../henon_keller_segel_critical_mass_virial_route_a/paper/main.pdf) |
+
+All five are `ROUTE_A_REJECTED` and have Route B false.  Their dynamical
+owners are respectively a higher-derivative Hamiltonian, a homogeneous
+geometric flow, a nonequilibrium jump process, an alignment particle system,
+and a nonlocal aggregation--diffusion PDE.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic local datum, Euler factor,
+root number, automorphy object, target divisor/counting law or functional
+equation, target-zero match, Hilbert--Pólya operator, or Route-B input is
+claimed.
+
 ## HCS-C354--HCS-C358 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline

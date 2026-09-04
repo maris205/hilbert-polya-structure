@@ -1,0 +1,245 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\providecommand{\CRevisionRound}{2}
+\pdfvariable suppressoptionalinfo 767
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0.15em}
+\setlist{nosep,leftmargin=1.8em}
+\hbadness=10000
+\vbadness=10000
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}
+\newcommand{\Rtwo}{\mathbb R^2}
+\newcommand{\F}{\mathcal F}
+
+\title{Why Eight Pi Is Critical:\\
+Energy, Virial, and Stationary Profiles in Planar Keller--Segel Flow}
+\author{HCS-C363 source-local reconstruction}
+\date{4 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the parabolic--elliptic Keller--Segel equation on the plane, we derive the
+critical mass \(8\pi\) from two independent exact mechanisms.  A
+mass-preserving dilation changes free energy by
+\(2M(1-M/(8\pi))\log\lambda\), while Newtonian-kernel symmetrization gives
+the finite-moment virial law \(I'=4M(1-M/(8\pi))\).  The latter forces every
+supercritical classical finite-moment solution to leave that regime no later
+than an explicit time.  At critical mass we verify the full translated and
+dilated stationary family, then compute its logarithmically infinite second
+moment; this hypothesis check removes an apparent conflict with the zero
+virial slope.  We also derive the radial cumulative-mass equation and its
+critical equilibrium.  Exact symbolic, rational, replay, and hostile receipts
+audit coefficients but do not replace the PDE proof.  No literature-priority,
+weak-continuation, or arithmetic-target claim is made.
+\end{abstract}
+
+\noindent\textbf{Revision certificate.}
+\ifnum\CRevisionRound=0
+Round zero energy scaling and critical mass closure.
+\else\ifnum\CRevisionRound=1
+Round one virial bound and stationary profile closure.
+\else
+Round two radial dynamics, evidence, and Route A closure.
+\fi\fi
+
+\small
+\section{Equation, hypotheses, and main result}
+
+We use the Newtonian convention
+\begin{equation}
+ \rho_t=\Delta\rho-\nabla\!\cdot(\rho\nabla c),\quad
+ -\Delta c=\rho,\quad
+ c(x)=-\frac1{2\pi}\int_{\Rtwo}\rho(y)\log|x-y|\,dy. \label{eq:pde}
+\end{equation}
+Every assertion is made on an open interval where $\rho$ is nonnegative,
+$C^1$ in time and $C^2$ in space, has finite mass, the logarithmic convolution
+defining $c$ exists, and all displayed fluxes, derivatives, and cutoff limits
+are integrable.  Barycenter conservation requires a finite first moment; the
+virial law requires a finite second moment.  The free-energy identity further
+requires finite entropy and interaction energy, strict positivity when
+$M>0$, and finite dissipation.  The zero solution is treated separately
+without invoking $\log\rho$.  These assertion-specific hypotheses are part of
+the theorem.
+
+\begin{theorem}[Critical-mass atlas]\label{thm:atlas}
+Let $M=\int\rho$ and, when finite,
+$B=\int x\rho$ and $I=\int |x|^2\rho$.  Along~\eqref{eq:pde},
+\begin{align}
+ M'&=0,\quad B'=0,                                   \label{eq:conserve}\\
+ \frac{d}{dt}\F[\rho]
+ &=-\int\rho\left|\nabla(\log\rho-c)\right|^2,\quad
+ \F[\rho]=\int\rho\log\rho-\frac12\int\rho c,        \label{eq:diss}\\
+ I'&=4M\left(1-\frac{M}{8\pi}\right).                \label{eq:virial}
+\end{align}
+For $\rho_\lambda(x)=\lambda^2\rho(\lambda x)$,
+\begin{equation}
+ \F[\rho_\lambda]-\F[\rho]
+ =2M\left(1-\frac{M}{8\pi}\right)\log\lambda.        \label{eq:scale}
+\end{equation}
+If $M>8\pi$, a classical finite-second-moment solution cannot persist beyond
+\begin{equation}
+ T_*=\frac{2\pi I(0)}{M(M-8\pi)}.                    \label{eq:bound}
+\end{equation}
+At $M=8\pi$, every $\lambda>0$ and $a\in\Rtwo$ give a stationary pair
+\begin{equation}
+ \rho_{\lambda,a}(x)=
+ \frac{8\lambda^2}{(\lambda^2+|x-a|^2)^2},\quad
+ c_{\lambda,a}(x)=-2\log(\lambda^2+|x-a|^2)+C.       \label{eq:profile}
+\end{equation}
+It has mass $8\pi$ and infinite second moment.
+\end{theorem}
+
+\section{Conservation, energy, and scaling}
+
+Integrating~\eqref{eq:pde} proves mass conservation.  For the barycenter, diffusion
+integrates to zero and
+\[
+ \int\rho(x)\nabla c(x)\,dx
+ =-\frac1{2\pi}\iint \rho(x)\rho(y)
+       \frac{x-y}{|x-y|^2}\,dx\,dy=0,
+\]
+because exchanging $x,y$ negates the integrand.  This proves~\eqref{eq:conserve}.
+
+The first equation in~\eqref{eq:pde} is
+\begin{equation}
+ \rho_t=\nabla\!\cdot\{\rho\nabla(\log\rho-c)\}.      \label{eq:gradient}
+\end{equation}
+The first variation of $\F$ is $\log\rho+1-c$; the constant contributes
+nothing because mass is conserved.  Integration by parts gives~\eqref{eq:diss}.
+
+Dilation contributes $2M\log\lambda$ to $\int\rho\log\rho$.  Since
+\[
+ -\frac12\int\rho c
+ =\frac1{4\pi}\iint\rho(x)\rho(y)\log|x-y|\,dx\,dy,
+\]
+changing variables in the double integral contributes
+$-M^2\log\lambda/(4\pi)$.  Their sum is~\eqref{eq:scale}.  Hence free energy increases
+along concentration dilations below $8\pi$, is scale invariant at $8\pi$,
+and decreases along concentration dilations above $8\pi$.  This
+scaling statement alone is not an existence or blow-up theorem.
+
+\ifnum\CRevisionRound>0
+\section{Virial obstruction and critical equilibria}
+
+Diffusion contributes $4M$ to $I'$.  Put
+$J=\int x\cdot\rho(x)\nabla c(x)\,dx$.  Kernel substitution and exchange of
+the variables give the following identity.  To justify the exchange, first
+exclude $|x-y|\le\varepsilon$; local integrability of the Newtonian gradient
+and the stated decay and moment assumptions permit the cutoff limit:
+\begin{align}
+ 2J&=-\frac1{2\pi}\iint\rho(x)\rho(y)
+ \frac{x\cdot(x-y)+y\cdot(y-x)}{|x-y|^2}\,dx\,dy\\
+ &=-\frac{M^2}{2\pi}.
+\end{align}
+The drift contribution is $2J$, proving~\eqref{eq:virial}.  For $M>8\pi$,
+\[
+ I(t)=I(0)-\frac{M(M-8\pi)}{2\pi}t.
+\]
+A nonnegative density cannot have negative second moment.  Thus the stated
+classical finite-moment regime fails by~\eqref{eq:bound}, possibly earlier; the argument
+does not select a weak continuation.
+
+We verify~\eqref{eq:profile} directly.  By translation take $a=0$ and write $r=|x|$.
+Radial differentiation gives
+\begin{equation}
+ -\left(c_{rr}+\frac1r c_r\right)
+ =\frac{8\lambda^2}{(\lambda^2+r^2)^2}=\rho_{\lambda,0},
+ \quad \partial_r\log\rho_{\lambda,0}=\partial_r c_{\lambda,0}. \label{eq:stationary}
+\end{equation}
+The flux in~\eqref{eq:gradient} vanishes.  Polar integration yields
+\begin{equation}
+ 2\pi\int_0^R r\rho_{\lambda,0}(r)\,dr
+ =\frac{8\pi R^2}{\lambda^2+R^2}\longrightarrow8\pi. \label{eq:mass}
+\end{equation}
+The truncated second moment is
+\begin{equation}
+ 8\pi\lambda^2\left(
+ \log\frac{\lambda^2+R^2}{\lambda^2}
+ +\frac{\lambda^2}{\lambda^2+R^2}-1\right),          \label{eq:moment}
+\end{equation}
+and diverges as $R\to\infty$.  Therefore~\eqref{eq:virial}, whose proof requires finite
+$I$, cannot be applied to this stationary family.  The endpoint is consistent.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Radial cumulative equation and boundaries}
+
+For a radial solution regular at the origin define
+\begin{equation}
+ m(r,t)=2\pi\int_0^r s\rho(s,t)\,ds,\quad n=m/(2\pi).
+\end{equation}
+Then $m(0,t)=m_r(0,t)=0$.  For $r>0$, the elliptic equation gives
+$c_r=-m/(2\pi r)$.  Integrating the parabolic equation over a disc and using
+$\rho=m_r/(2\pi r)$ yields
+\begin{equation}
+ m_t=m_{rr}-\frac1r m_r+\frac{m\,m_r}{2\pi r},
+ \quad n_t=n_{rr}-\frac1r n_r+\frac{n\,n_r}{r}.      \label{eq:radial}
+\end{equation}
+For~\eqref{eq:profile}, $n=4r^2/(\lambda^2+r^2)$, and substitution makes the
+right-hand side of~\eqref{eq:radial} zero.  At $r=0$,~\eqref{eq:radial} is
+understood through the regular radial limit.
+
+Zero density is stationary, but its logarithmic dissipation formula is not
+invoked.  Below $8\pi$,~\eqref{eq:virial} has positive slope only while
+the classical finite-moment solution exists; no convergence claim follows.
+At $8\pi$, the profiles~\eqref{eq:profile} lie outside that moment class.  As
+$\lambda\downarrow0$ they converge weakly to $8\pi\delta_a$, outside the
+smooth phase space.  As $\lambda\to\infty$ they tend pointwise to zero while
+mass spreads to infinity.  Above $8\pi$,~\eqref{eq:bound} is a classical-persistence
+obstruction, not a complete measure-solution theory.
+
+\section{Evidence, sources, and Route-A boundary}
+
+The certificate contains 21 virial rows, 21 scaling rows, nine profile rows,
+nine radial rows, and seven boundary rows.  An independent implementation
+reconstructs every entry; SymPy checks 17 identities; two isolated replays
+agree byte for byte; and 61 repaired-hash or parser attacks are rejected.
+These receipts test signs and normalizations.  They do not prove regularity
+or persistence; the analytic argument and its hypotheses do.
+
+Keller and Segel provide the model lineage \cite{kellersegel}; Blanchet,
+Dolbeault, and Perthame provide critical-mass context \cite{blanchet}.  Every
+coefficient used above is rederived, and no priority claim is made.
+
+The strict Route-A tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_FAIL},\mathrm{A2\_FAIL},
+  \mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+The continuum mass and dissipative clock furnish no intrinsic rational-prime
+objects, prime-power repetitions, or logarithmic-prime clock.  No target
+determinant, analytic bridge, or natural target-zero quantization is
+constructed.  Route A is rejected and Route B is locked.  No target arithmetic
+local data, Euler factors, bad-prime data, root number, automorphy, target
+divisor or counting law, target functional equation, target-zero match, or
+Hilbert--P\'olya operator is claimed.
+
+The package does not construct post-concentration weak solutions, prove
+general subcritical convergence, or classify nonradial critical dynamics.
+
+\begin{thebibliography}{9}
+\bibitem{kellersegel}
+E. F. Keller and L. A. Segel,
+\emph{Initiation of slime mold aggregation viewed as an instability},
+J. Theoret. Biol. 26 (1970), 399--415.
+\href{https://doi.org/10.1016/0022-5193(70)90092-5}{doi:10.1016/0022-5193(70)90092-5}.
+
+\bibitem{blanchet}
+A. Blanchet, J. Dolbeault, and B. Perthame,
+\emph{Two-dimensional Keller--Segel model: optimal critical mass and
+qualitative properties of the solutions},
+Electron. J. Differential Equations 2006 (2006), no.~44, 1--33.
+\href{https://ejde.math.txstate.edu/Volumes/2006/44/blanchet.pdf}{official journal PDF}.
+\end{thebibliography}
+\fi
+
+\end{document}

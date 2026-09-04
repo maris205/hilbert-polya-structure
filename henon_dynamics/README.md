@@ -2719,6 +2719,36 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C359--C363
+
+This round takes five independent theorem-scale steps and changes dynamical
+owner in every paper: a fourth-order higher-derivative oscillator, a
+homogeneous Ricci flow, a finite nonequilibrium jump process, a many-particle
+alignment flow, and a nonlocal chemotaxis PDE.  The papers share a release
+protocol, not one theorem split into installments.
+
+- [C359 Pais--Uhlenbeck Ostrogradsky resonance and quantum atlas](henon_pais_uhlenbeck_ostrogradsky_resonance_route_a/README.md) · [paper PDF](henon_pais_uhlenbeck_ostrogradsky_resonance_route_a/paper/main.pdf)
+- [C360 Berger SU(2) Ricci-flow extinction atlas](henon_berger_su2_ricci_flow_extinction_route_a/README.md) · [paper PDF](henon_berger_su2_ricci_flow_extinction_route_a/paper/main.pdf)
+- [C361 finite Markov entropy-production and fluctuation symmetry](henon_finite_markov_entropy_fluctuation_route_a/README.md) · [paper PDF](henon_finite_markov_entropy_fluctuation_route_a/paper/main.pdf)
+- [C362 Cucker--Smale sharp flocking threshold](henon_cucker_smale_flocking_threshold_route_a/README.md) · [paper PDF](henon_cucker_smale_flocking_threshold_route_a/paper/main.pdf)
+- [C363 planar Keller--Segel critical-mass virial atlas](henon_keller_segel_critical_mass_virial_route_a/README.md) · [paper PDF](henon_keller_segel_critical_mass_virial_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C359_C363.md),
+[batch plan](BATCH_PLAN_C359_C363.md), and
+[batch review](BATCH_REVIEW_C359_C363.md) for collision screening, theorem
+contracts, source audits, author-swapped proof repairs, exact release hashes,
+and aggregate accounting.  The strict tuples, in order C359--C363, are
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`.
+All five are `ROUTE_A_REJECTED`; Route B is false and the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, root number, automorphy object, target divisor/counting law or
+functional equation, target-zero match, Hilbert--Pólya operator, or Route-B
+input is asserted.
+
 ## Route-A independent cross-subtype round C354--C358
 
 This round takes five independent theorem-scale steps across a symmetric
