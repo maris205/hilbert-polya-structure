@@ -1,0 +1,331 @@
+SHARP CUT-DELETION CLOCKS AND EXACT FIBRES FOR
+PREFIX-DIVISIBILITY DYNAMICS ON COMPOSITIONS
+ANONYMOUS
+
+Abstract. For a positive composition a = (a1 , . . . , ak ) of N , retain the internal cut at prefix si =
+a1 + · · · + ai exactly when ai divides si , delete all other cuts simultaneously, and iterate the resulting
+coarsening. We determine both its temporal structure and its complete one-step inverse problem. Every
+recurrent composition is fixed, and fixed points are counted by an explicit divisor-step recurrence. The
+maximum tail is zero for N ≤ 3 and N − 3 for N ≥ 4. Moreover, (1, 2, 1N −3 ) is the unique deepest
+composition, and its complete orbit is (1, 2 + t, 1N −3−t ). Independently, we encode a source as an increasing path through cut positions. For every labelled target, a no-skipped-target path recurrence gives
+its exact fibre; mandatory target cuts then factor this count into arithmetic interval factors. Positivity
+gives a complete image criterion, and the fibres sum to 2N −1 . A paper-local exhaustive control checks all
+compositions through N = 18, making 3,408,240 exact assertions; this is regression pressure, not proof
+or novelty evidence. The direct-owner search remains bounded, so the manuscript is HOLD_EXTERNAL.
+
+1. The cut filter and its subtraction boundary
+Let CN be the set of ordered tuples of positive integers with sum N . The familiar cut-set encoding
+identifies a = (a1 , . . . , ak ) ∈ CN with
+(1)
+
+D(a) = {s1 , . . . , sk−1 } ⊆ [N − 1],
+
+si =
+
+i
+X
+
+aj .
+
+j=1
+
+Thus |CN | = 2N −1 , and deleting cuts is coarsening. We use this standard encoding and refinement
+language as background [2, 5].
+Define FN : CN → CN by its retained cuts:
+D(FN (a)) = {si ∈ D(a) : ai | si }.
+
+(2)
+
+All tests in (2) use the parts of the composition at the start of the epoch, and all failing cuts are deleted
+simultaneously. The final endpoint N is not a cut and is never tested. For example,
+(3)
+
+(1, 2, 1, 1, 1) 7−→ (1, 3, 1, 1) 7−→ (1, 4, 1) 7−→ (1, 5).
+
+Restricted compositions and local conditions are established enumerative themes [1, 3]. A nearby
+static divisibility class asks whether the index i divides the prefix sum [4]; our dynamic test instead asks
+whether the current part ai divides its endpoint and then changes the parts by coarsening.
+We assign the composition–subset bijection, refinement order, elementary divisibility, and generic
+path dynamic programming zero contribution credit. Internally, the mechanism is not the balanced
+part splitting of P126, the equal-run merging of P147, the Euclidean quotient rotation of P131, the setpartition token transfer of P169, the permutation prefix reversal of P181, the prefix-diversity word map
+of P185, or the support-rank compression of P186. This subtraction is not an ownership result. The
+external search was bounded; a non-hit is not evidence of novelty, priority, completeness, or freedom to
+operate.
+2. Fixed states and the sharp clock
+Write µ(a) for the least t ≥ 0 such that FNt (a) is recurrent.
+Proposition 2.1 (recurrence and fixed-state census). Every recurrent state is fixed, and
+(4)
+
+a ∈ Fix(FN )
+
+⇐⇒
+
+ai | si
+
+(1 ≤ i < k).
+
+Set A(0) = 1 and, for v ≥ 1, set
+(5)
+
+A(v) =
+
+X
+
+A(u).
+
+0≤u<v
+v−u|v
+
+Key words and phrases. integer composition, finite dynamical system, coarsening, divisibility, transient, fibre.
+1
+
+2
+
+ANONYMOUS
+
+Then, for every N ≥ 1,
+| Fix(FN )| =
+
+(6)
+
+N
+−1
+X
+
+A(v).
+
+v=0
+
+Proof. Equation (2) gives D(FN (a)) ⊆ D(a), with equality precisely under (4). Every nonfixed epoch
+strictly loses a cut, so a cycle cannot contain a nonfixed state.
+For the count, regard a sequence of internal cuts as an increasing path from 0. If the last cut is v
+and its predecessor is u, the part ending at v has size v − u; fixedness at that cut is exactly v − u | v.
+Last-edge decomposition gives (5). A fixed composition of N has either no internal cut, represented by
+v = 0, or a unique last internal cut v < N . The final part N − v is untested, which proves (6).
+□
+Theorem 2.2 (sharp transient and unique extremizer). For N ≤ 3, every composition is fixed. For every
+N ≥ 4,
+max µ(a) = N − 3,
+
+(7)
+
+a∈CN
+
+and the unique composition attaining this maximum is
+ωN = (1, 2, 1N −3 ).
+
+(8)
+At every time 0 ≤ t ≤ N − 3 its state is
+
+FNt (ωN ) = (1, 2 + t, 1N −3−t ).
+
+(9)
+
+Proof. If a composition has an internal first cut, that cut always survives: its ending part and endpoint
+are both a1 . A composition of length k therefore has at most k − 2 deletable cuts. Every nonfixed epoch
+deletes at least one. The only composition of length N is (1N ), which is fixed, so a nonfixed state has
+k ≤ N − 1 and hence tail at most N − 3. Directly from the rule, all compositions for N = 1, 2, 3 are fixed.
+For ωN , suppose (9) holds at time t < N − 3. The middle part 2 + t ends at 3 + t. It does not divide
+this endpoint, because otherwise it would divide their difference 1. The first part and all trailing unit
+parts pass their tests, so exactly the cut after the middle part is deleted. This proves (9) by induction
+and shows that µ(ωN ) = N − 3.
+It remains to prove uniqueness. Equality in the two upper bounds forces an extremizer to have N − 1
+parts and to lose exactly one cut at every nonfixed epoch. A positive composition of N with N − 1 parts
+has one part equal to 2 and all others equal to 1. It is fixed if the 2 is first or final. Otherwise let r ≥ 1
+be the number of leading unit parts. Throughout the orbit, cuts ending unit parts survive; only the cut
+after the block containing the 2 can disappear. There are just N − r − 2 parts to that block’s right, so
+its tail is at most N − r − 2. Equality with N − 3 forces r = 1, giving exactly (8).
+□
+The fixed counts for N = 1, . . . , 15 are
+1, 2, 4, 7, 13, 20, 37, 55, 97, 157, 267, 378, 719, 1061, 1763.
+These values follow from (5); they are quoted only as small controls, not as a replacement for the
+recurrence.
+3. Every-target fibres
+Fix a target b ∈ CN with cut set T = D(b). A source composition is uniquely an increasing path
+(10)
+
+0 = x0 < x1 < · · · < xℓ = N,
+
+whose nonfinal vertices are its cuts. Declare an edge u → v to be T -admissible when
+(i) no member of T lies strictly between u and v; and
+(ii) if v < N , then v ∈ T holds exactly when v − u | v.
+No divisibility condition is imposed when v = N .
+Theorem 3.1 (global target-path recurrence). Let PT (0) = 1 and, for 1 ≤ v ≤ N , define
+X
+(11)
+PT (v) =
+PT (u).
+0≤u<v
+u→v T -admissible
+
+Then every labelled target has the exact fibre size
+(12)
+
+|FN−1 (b)| = PT (N ).
+
+Consequently b ∈ im(FN ) if and only if PT (N ) > 0.
+
+PREFIX-DIVISIBILITY CUT DYNAMICS
+
+3
+
+Proof. Every target cut must already occur on a source path, so a source edge cannot jump over it; this
+is condition (i). At a nonfinal source vertex v, the incoming part is v − u. Equation (2) retains v precisely
+when this step divides v. Thus condition (ii) says simultaneously that each target vertex survives and
+that each extra source vertex is deleted. The final endpoint is untested. It follows that source paths
+mapping to b are exactly the T -admissible paths. Last-edge decomposition gives (11), proving the fibre
+and image statements.
+□
+The mandatory target cuts make this inverse count local. List all target endpoints as
+0 = t0 < t1 < · · · < tm = N,
+so T = {t1 , . . . , tm−1 }. For consecutive endpoints p < q, put hp (p) = 1 and, for p < v < q, put
+X
+hp (u).
+(13)
+hp (v) =
+p≤u<v
+v−u∤v
+
+Define an internal and a final interval factor by
+X
+(14)
+K(p, q) =
+hp (u)
+(15)
+
+K∗ (p, N ) =
+
+p≤u<q
+q−u|q
+X
+
+(q < N ),
+
+hp (u).
+
+p≤u<N
+
+Corollary 3.2 (factorized fibre and complete image). For every target endpoint list as above,
+
+
+m−1
+Y
+(16)
+|FN−1 (b)| = 
+K(tj−1 , tj ) K∗ (tm−1 , N ).
+j=1
+
+In particular, the target is in the image exactly when every factor in (16) is positive. The empty product
+covers the one-part target.
+Proof. Within an interval (p, q), every extra source vertex must be deleted. Recurrence (13) counts exactly
+the paths from p to v whose intervening vertices, including v, have nondividing incoming steps. For an
+internal target endpoint q, the last step must instead divide q, giving (14); at N no test is made, giving
+(15). Restriction to consecutive target intervals and concatenation are inverse bijections. Multiplying
+their independent path counts proves (16); positivity is therefore equivalent to image membership.
+□
+Corollary 3.3 (fibre mass). For every N ≥ 1,
+X
+(17)
+|FN−1 (b)| = 2N −1 .
+b∈CN
+
+Proof. The labelled fibres partition the source carrier CN , and the cut-set encoding gives |CN | = 2N −1 . □
+Both (11) and the complete collection of interval recurrences can be evaluated with O(N 2 ) arithmetic
+operations for a fixed target. The global recurrence exposes the inverse bijection directly, while the
+product formula separates the contribution of each mandatory target cut.
+4. Exact pressure, limitations, and conclusion
+The paper-local standard-library verifier exhausts all 2N −1 compositions for every 1 ≤ N ≤ 18. It
+constructs the literal map, decomposes its functional graph, tests the fixed recurrence and every time slice
+of the extremal orbit, and compares true indegrees target by target with both (11) and (16). It checks
+image equality and fibre mass only after the pointwise comparisons. Selected complete boxes appear in
+Table 1.
+N
+4
+8
+12
+15
+18
+
+states
+8
+128
+2048
+16384
+131072
+
+image
+7
+73
+801
+4906
+28535
+
+fixed
+7
+55
+378
+1763
+7398
+
+max tail
+1
+5
+9
+12
+15
+
+deepest
+1
+1
+1
+1
+1
+
+max fibre
+2
+11
+59
+182
+696
+
+Table 1. Selected exhaustive author controls. “Deepest” counts states of maximum tail.
+Proofs, rather than the finite range, establish the theorems.
+
+4
+
+ANONYMOUS
+
+The results concern positive compositions, simultaneous updates, and the literal divisibility predicate in
+(2). We do not give a closed scalar formula for the full image size, arbitrary pointwise tails, or time-t fibres.
+We also make no theorem for weak compositions, asynchronous deletions, other divisibility directions, or
+weighted refinements. The finite computation is not proof, experiment, or ownership evidence. What is
+settled here is the all-parameter fixed and sharp-clock structure together with a complete, computable
+one-step inverse atlas. External circulation remains blocked while ownership is amber.
+Declarations
+Data availability. No external data were used. Exact source code and its canonical stdout accompany the
+manuscript.
+Ethics. The work studies a finite combinatorial map and raises no human-subject, personal-data, or
+deployment issue.
+CRediT roles. Anonymous author(s) performed conceptualization, formal analysis, software, validation,
+original drafting, and review and editing.
+Competing interests. No competing interests are declared.
+Funding. No external funding is declared for this manuscript.
+AI-use statement. Generative AI tools assisted with ideation, drafting, and code scaffolding. The authorside verifier checks finite cases; responsibility for every definition, proof, citation, and disclosure remains
+with the human author(s).
+Release status. External circulation, posting, and submission are not authorized while HOLD_EXTERNAL
+remains active.
+References
+[1] Edward A. Bender and E. Rodney Canfield. Locally restricted compositions I. restricted adjacent
+differences. The Electronic Journal of Combinatorics, 12(1):R57, 2005. doi: 10.37236/1954.
+[2] Louis J. Billera, Hugh Thomas, and Stephanie van Willigenburg. Decomposable compositions, symmetric quasisymmetric functions and equality of ribbon Schur functions. Advances in Mathematics,
+204(1):204–240, 2006. doi: 10.1016/j.aim.2005.05.014.
+[3] Silvia Heubach and Toufik Mansour. Combinatorics of Compositions and Words. Chapman and
+Hall/CRC, 2009. ISBN 978-1-4200-7267-9. doi: 10.1201/9781420072686.
+[4] Oliver Navarro. A398023: Number of integer compositions of n such that every initial segment has
+an integer average. The On-Line Encyclopedia of Integer Sequences, 2026. URL https://oeis.org/
+A398023. Submitted 16 July 2026; accessed 4 September 2026.
+[5] Richard P. Stanley. Enumerative Combinatorics, volume 1 of Cambridge Studies in Advanced
+Mathematics. Cambridge University Press, second edition, 2011. ISBN 978-1-107-60262-5. doi:
+10.1017/CBO9781139058520.
+
+
