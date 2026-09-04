@@ -2719,6 +2719,40 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C364--C368
+
+This round takes five independent theorem-scale steps across a fixed-
+discriminant arithmetic reduction permutation, a compact collective
+Hamiltonian system, an engineered quantum spin chain, a reflected stochastic
+fluid, and a conformal free-boundary flow.  The five papers have different
+phase spaces, clocks, proof engines, and boundary phenomena; they are not one
+article divided into installments.
+
+- [C364 fixed-discriminant Gauss reduction cycles](henon_gauss_indefinite_reduction_cycles_route_a/README.md) · [paper PDF](henon_gauss_indefinite_reduction_cycles_route_a/paper/main.pdf)
+- [C365 U(3) Gelfand--Tsetlin dynamics and quantization](henon_gelfand_tsetlin_u3_integrable_quantization_route_a/README.md) · [paper PDF](henon_gelfand_tsetlin_u3_integrable_quantization_route_a/paper/main.pdf)
+- [C366 Krawtchouk XX mirror inversion](henon_krawtchouk_xx_mirror_inversion_route_a/README.md) · [paper PDF](henon_krawtchouk_xx_mirror_inversion_route_a/paper/main.pdf)
+- [C367 two-state reflected Markov-fluid atlas](henon_two_state_reflected_markov_fluid_route_a/README.md) · [paper PDF](henon_two_state_reflected_markov_fluid_route_a/paper/main.pdf)
+- [C368 quadratic Polubarinova--Galin first-cusp atlas](henon_quadratic_polubarinova_galin_route_a/README.md) · [paper PDF](henon_quadratic_polubarinova_galin_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C364_C368.md),
+[batch plan](BATCH_PLAN_C364_C368.md), and
+[batch review](BATCH_REVIEW_C364_C368.md) for collision screening, theorem
+contracts, author-swapped repairs, exact hashes, and release accounting.  The
+round closes 1,000,804 independent-checker assertions, 7,532 symbolic
+identities, 440 hostile rejections, 17,874,609 canonical evidence bytes, 135
+content-addressed payloads (140 physical files), and 11 final-paper pages with
+80 embedded/subset font entries.  The strict tuples, in order C364--C368, are
+`(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`, and
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)`.  C364 and C365 are
+`ROUTE_A_EXPLORATORY`; C366--C368 are `ROUTE_A_REJECTED`.  Route B is false
+and the common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic
+local datum, Euler factor, root number, automorphy object, target
+divisor/counting law or functional equation, target-zero match,
+Hilbert--Polya operator, or Route-B input is asserted.
+
 ## Route-A independent cross-subtype round C359--C363
 
 This round takes five independent theorem-scale steps and changes dynamical

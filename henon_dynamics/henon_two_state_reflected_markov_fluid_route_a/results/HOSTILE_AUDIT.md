@@ -1,0 +1,3 @@
+# Hostile audit
+
+The repaired-hash suite rejects 95 attacks.  It changes the drift wall, all three recurrence regimes, Lindley normalization, stationary rate/atom/densities/moments, regulator balance, reducible-face uniqueness, closed-class rows, the C351/C346/C332 workspace collision ledger, evaluator authority and evidence status, Route-A/Route-B fields, and forbidden flags.  It explicitly rejects restoration of the obsolete C351/C332/C343 ledger.  It also covers deletion, reorder/truncation, duplicate/nonfinite/root-invalid JSON, duplicate/alias/non-string YAML, and a stale outer-hash control.

@@ -17,6 +17,25 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C364--HCS-C368 additions (2026-09-04)
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O348 | HCS-C364 fixed-discriminant reduction cycles and form stabilizers as rational-prime primitive owners or a target Euler product | proved weak quadratic-form arithmetic and finite-permutation obstruction | The integral discriminant and primitive reduced forms provide genuine but weak arithmetic input; their reduced cycles are not canonically indexed by rational primes or prime powers.  The reduction-step clock is an algorithmic digit clock, and its finite permutation zeta is source-local rather than a target Euler product, divisor, functional equation, or zero set. | Finiteness and bijectivity on the reduced set, the pure cycle decomposition, integral stabilizer matrices, reversal, primitive periods, and finite dynamical zeta survive under the frozen conventions; no proper/narrow class bridge is claimed. | ../henon_gauss_indefinite_reduction_cycles_route_a/THEOREM_PACKAGE.md |
+| HEN-O349 | HCS-C365 Gelfand--Tsetlin patterns and quantum weights as target arithmetic or spectral data | proved compact-integrable and source-quantization obstruction | Integral highest weights and lattice patterns give only a weak arithmetic relation.  The Hamiltonian frequencies are freely chosen continuous source parameters, regular trajectories occupy tori, and the finite-dimensional Borel--Weil representation with its branching labels is the compact source system rather than a target divisor, functional equation, zero match, or Hilbert--Polya realization. | The exact interlacing image, complete regular fibers, all initial-phase closure cosets and the periodic iff/least-period criterion, the unshifted branching basis, Weyl count, and all declared facet/repeated-weight delimitations survive. | ../henon_gelfand_tsetlin_u3_integrable_quantization_route_a/THEOREM_PACKAGE.md |
+| HEN-O350 | HCS-C366 perfect mirror transfer and subset energies as arithmetic primitive or target spectral data | proved engineered-finite-chain and source-quantization obstruction | Chain length and couplings are engineered source data.  Krawtchouk labels and excitation subsets carry no rational-prime taxonomy or logarithmic-prime clock; exact mirror transfer, a finite characteristic polynomial, and a natural Fock quantization supply neither target Euler factors nor a target divisor or zero match. | Complete one-particle spectrum and propagator, perfect mirror, all-sector fermionic phase, energy multiplicities, revival parity, and every declared coupling/field/size face survive. | ../henon_krawtchouk_xx_mirror_inversion_route_a/THEOREM_PACKAGE.md |
+| HEN-O351 | HCS-C367 Markov-fluid cycles, stationary exponential tails and regulator contacts as arithmetic orbit data | proved stochastic-PDMP and continuous-rate obstruction | Switching events and fluid durations are exogenous random data with continuous rates; they are not isolated deterministic primitive cycles or a logarithmic-prime roof.  The stationary exponential law and Lindley recursion provide no target determinant, divisor, functional equation, or natural target-zero unitary. | The sharp recurrence trichotomy, exact atom and densities, all moments, regulator rate, and complete zero-rate closed-class atlas survive. | ../henon_two_state_reflected_markov_fluid_route_a/THEOREM_PACKAGE.md |
+| HEN-O352 | HCS-C368 harmonic-moment invariants and cusp time as arithmetic local or target spectral data | proved free-boundary and continuous-parameter obstruction | Map coefficients, source strength, area and physical time are continuous free-boundary data.  The conserved coefficient and finite-time cusp are source geometry rather than rational-prime ownership, a primitive orbit ledger, a target determinant, divisor, functional equation, or self-adjoint target-zero operator. | The exact coefficient invariant, linear area law, global injection branch, suction loss time, semicubical cusp and all circle/critical/nonunivalent boundaries survive. | ../henon_quadratic_polubarinova_galin_route_a/THEOREM_PACKAGE.md |
+
+These obstructions are invariant under cyclic relabeling of the frozen
+reduced-state cycles, unitary conjugacy and compatible action-coordinate
+changes on the coadjoint orbit, chain reflection and number-sector phase gauge,
+environment-state relabeling with drift exchange, and rigid plane rotation
+with the corresponding coefficient-phase gauge in the quadratic conformal
+family.  They do not authorize Route B.  Every
+surviving theorem remains source-local under
+`NO_BAD_EULER_OR_ROOT_NUMBER` with a content-addressed evidence/PDF ledger.
+
 ## HCS-C359--HCS-C363 additions (2026-09-04)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

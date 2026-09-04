@@ -1,0 +1,7 @@
+# Narrative report
+
+The main advance is a convention-complete bridge across classical and quantum descriptions. On a regular (U(3)) orbit, three nested-minor observables fill exactly the six-facet Gelfand--Tsetlin polytope and generate an effective Lagrangian (T^3) action over its strict interior. Every linear combination is then classified by the rational rank of its frequency vector: its orbit closure through an initial phase is the corresponding annihilator-subtorus coset, with fixed, periodic, and higher-rank cases separated exactly. The coset equals the annihilator subgroup precisely when the initial phase belongs to that subgroup, so a nonzero basepoint can still give the subgroup. For integral highest weights, unshifted Borel--Weil quantization turns the same inequalities into a complete branching basis with GT joint labels, whose lattice count is exactly the Weyl dimension.
+
+The boundary atlas is part of the result. Facets are singular and are not advertised as regular toric fibers. A single repeated adjacent weight produces a four-dimensional orbit with a two-dimensional triangle and regular (T^2) interior; a scalar spectrum produces a point. Nonintegral spectra retain the classical theorem but are outside the quantization assertion.
+
+Route A remains exploratory: the weight lattice and natural quantization are genuine, but there is no prime clock, target determinant, functional equation, or target-zero match.

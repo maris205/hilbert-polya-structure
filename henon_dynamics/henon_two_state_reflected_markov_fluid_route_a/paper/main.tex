@@ -1,0 +1,177 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<C3672026090400000000000000000000><C3672026090400000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.67in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\title{A Closed Recurrence and Stationary Atlas for a Two-State Reflected Markov Fluid}
+\author{HCS-C367 / HEN-O351}
+\date{4 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We classify a two-state Markov-modulated fluid reflected at zero.  The sign of
+one stationary drift separates positive recurrence, null recurrence, and
+linear escape.  In the stable chamber we reconstruct the unique invariant law,
+including its boundary atom, two interior densities, every workload moment,
+and the regulator rate.  Vanishing switching and drift rates are classified by
+closed environmental classes.  This round is the \textbf{drift-trichotomy owner}.
+\end{abstract}
+
+\section{Model and sharp trichotomy}
+Let $J$ jump $0\to1$ at rate $a$ and $1\to0$ at rate $b$.  The fluid slopes
+are $r_0=-d$ and $r_1=c$.  For now $a,b,c,d>0$, and
+\begin{equation}\label{eq:sk}
+ Y_t=X_0+\int_0^t r_{J_s}\,ds,\qquad
+ L_t=\sup_{0\le s\le t}(-Y_s)^+ ,\qquad X_t=Y_t+L_t.
+\end{equation}
+Thus $L$ is the minimal right-continuous regulator and can increase only at
+$(X,J)=(0,0)$.  Put
+\begin{equation}\label{eq:drift}
+ \bar r=\frac{ac-bd}{a+b}.
+\end{equation}
+
+\begin{theorem}[Complete positive-core classification]\label{thm:core}
+The formula \eqref{eq:sk} defines the unique global reflected PDMP.  If
+$ac<bd$, it is positive recurrent with one invariant probability.  If
+$ac=bd$, it is null recurrent and has no invariant probability.  If $ac>bd$,
+it is transient and $X_t/t\to\bar r>0$ almost surely.
+
+In the stable chamber let
+\[
+ \kappa=\frac{bd-ac}{cd},\qquad
+ p_*=\frac{bd-ac}{(a+b)d}.
+\]
+The only boundary atom is $p_*$ at $(0,0)$, and on $x>0$ the state densities are
+\begin{equation}\label{eq:density}
+ f_0(x)=\frac{ac\kappa}{(a+b)d}e^{-\kappa x},\qquad
+ f_1(x)=\frac{a\kappa}{a+b}e^{-\kappa x}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The Skorokhod map on the half-line proves existence, uniqueness, and
+nonnegativity.  The environment has stationary law
+$\pi=(b,a)/(a+b)$, so its ergodic theorem gives $Y_t/t\to\bar r$.
+
+Observe $X$ at successive starts of state $1$.  If $I_n\sim\mathrm{Exp}(b)$
+and $O_n\sim\mathrm{Exp}(a)$ are the following on- and off-times, then
+\begin{equation}\label{eq:lindley}
+ W_{n+1}=\max\{0,W_n+cI_n-dO_n\},\qquad
+ \E(cI_n-dO_n)=\frac cb-\frac da.
+\end{equation}
+The increments are continuous, nondegenerate, and have finite variance.
+The negative-mean Lindley chain is positive recurrent; at zero mean it is
+recurrent but has only an infinite invariant measure; at positive mean it
+escapes linearly.  Renewal normalization by
+$\E(I_n+O_n)=1/b+1/a$ yields \eqref{eq:drift}, including the asserted
+continuous-time speed.
+
+For $ac<bd$, the stationary forward equations on $x>0$ are
+\begin{equation}\label{eq:forward}
+ 0=d f_0'-a f_0+b f_1,\qquad
+ 0=-c f_1'+a f_0-b f_1.
+\end{equation}
+Their sum and integrability give $d f_0=c f_1$.  Substitution gives the
+decay rate $\kappa$.  Boundary flux $ap_*=df_0(0)$ and normalization give
+\eqref{eq:density}.  Irreducibility and positive recurrence give uniqueness.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Mass, moments, and regulator}
+This revision is the \textbf{stationary-reconstruction owner}.  Direct
+integration of \eqref{eq:density} gives
+\begin{equation}\label{eq:marg}
+ p_*+\int_0^\infty f_0(x)\,dx=\frac b{a+b},\qquad
+ \int_0^\infty f_1(x)\,dx=\frac a{a+b}.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:positive}
+ p_+:=\Pp\{X>0\}=\frac{a(c+d)}{(a+b)d}.
+\end{equation}
+Hence $X\mid\{X>0\}$ is exponential with rate $\kappa$, and for every
+integer $n\ge1$,
+\begin{equation}\label{eq:moments}
+ \E X^n=p_+\frac{n!}{\kappa^n}.
+\end{equation}
+The state-resolved moments are obtained by integrating each density.
+
+Dividing \eqref{eq:sk} by $t$ in stationarity gives
+\begin{equation}\label{eq:reg}
+ \frac{L_t}{t}\longrightarrow-\bar r
+ =\frac{bd-ac}{a+b}=d p_*
+\end{equation}
+almost surely and in mean.  The last equality is also the direct rate at which
+reflection cancels slope $-d$ on the boundary atom.  Thus atom, densities,
+marginals, moments, and regulator use one consistent normalization.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Every zero-rate face}
+This revision is the \textbf{closed-class boundary owner}.  Degenerate cases
+must be stated per closed environmental class.
+
+\begin{proposition}[Zero-rate atlas]\label{prop:faces}
+Allow $a,b,c,d\ge0$.
+\begin{enumerate}
+\item If $a,b>0$, Theorem~\ref{thm:core} applies for $c,d>0$.  For $c=0<d$
+the unique law is $\delta_0\otimes\pi$; for $d=0<c$ the speed is
+$ac/(a+b)>0$; for $c=d=0$ the workload is frozen and every
+$\nu\otimes\pi$ is invariant.
+\item If $a=0<b$, state $0$ is the unique closed class.  For $d>0$ the unique
+invariant law is $\delta_{(0,0)}$; for $d=0$ every
+$\nu\otimes\delta_0$ is invariant.  The value of $c$ affects only the finite
+pre-absorption excursion.
+\item If $b=0<a$, state $1$ is the unique closed class.  For $c>0$ its paths
+escape at speed $c$ and it supports no invariant probability; for $c=0$ every
+$\nu\otimes\delta_1$ is invariant.  The value of $d$ affects only the finite
+pre-absorption excursion.
+\item If $a=b=0$, both singleton classes are closed.  Class $0$ has only
+$\delta_{(0,0)}$ when $d>0$ and arbitrary workload laws when $d=0$; class $1$
+has no invariant law when $c>0$ and arbitrary workload laws when $c=0$.
+All global invariant probabilities are exactly convex mixtures of available
+class-supported laws.  No reducible-face uniqueness is asserted.
+\end{enumerate}
+\end{proposition}
+
+The proof follows directly from deterministic motion inside each closed class
+and almost-sure absorption when precisely one transition rate vanishes.
+
+\section{Evidence, sources, and route boundary}
+Exact rational panels audit \eqref{eq:drift}--\eqref{eq:reg}; a separate
+closed-class table audits Proposition~\ref{prop:faces}.  These are regression
+receipts only.  The analytic argument owns the continuum classification.
+
+Anick, Mitra, and Sondhi introduced a foundational Markov-fluid queueing
+model~\cite{AMS}; Asmussen developed general stationary fluid-flow
+methods~\cite{Asm}.  We claim no priority.  C351 owns discrete Jackson queues,
+C346 a deterministic two-dimensional oblique Skorokhod map, and C332 scalar
+play; none owns this stochastic Markov-additive reflected fluid.
+
+There is no rational-prime carrier, primitive arithmetic orbit ledger,
+dynamical zeta, target analytic bridge, or natural same-clock unitary lift.
+Route A is rejected as
+$(A0_{\rm FAIL},A1_{\rm FAIL},A2_{\rm FAIL},A3_{\rm FAIL},A4_{\rm FAIL})$.
+Route B remains locked under \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}; no
+target zero match or Hilbert--P\'olya operator is claimed.
+
+\enlargethispage{2\baselineskip}
+\begin{thebibliography}{9}\small
+\bibitem{AMS} D.~Anick, D.~Mitra, and M.~M.~Sondhi,
+\emph{Stochastic theory of a data-handling system with multiple sources},
+Bell System Technical Journal 61 (1982), 1871--1894.
+\url{https://doi.org/10.1002/j.1538-7305.1982.tb03089.x}.
+\bibitem{Asm} S.~Asmussen,
+\emph{Stationary distributions for fluid flow models with or without Brownian noise},
+Stochastic Models 11 (1995), 21--49.
+\url{https://doi.org/10.1080/15326349508807330}.
+\end{thebibliography}
+\fi
+\end{document}

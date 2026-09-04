@@ -3,6 +3,33 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C364--HCS-C368 additions (2026-09-04)
+
+Five independent cross-subtype candidates were frozen from baseline
+`323ea43f6970544467f8a89f0ed9be0c7c39f896`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+Every retained result is a source-local reconstruction; workspace ownership
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C364 | Fixed positive nonsquare discriminant Gauss reduction is resolved as a finite permutation of reduced primitive indefinite forms, with exact reduction cycles, integral step-matrix stabilizers, reversal, primitive periods, and a source-local finite dynamical zeta; square, invalid-congruence, imprimitive, and odd-norm-sign boundaries are explicit, while no proper/narrow class bridge is assumed. | `(A0_WEAK_ARITHMETIC_RELATION,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Gauss-reduction package](../henon_gauss_indefinite_reduction_cycles_route_a/) · [paper PDF](../henon_gauss_indefinite_reduction_cycles_route_a/paper/main.pdf) |
+| HCS-C365 | The regular Hermitian `U(3)` coadjoint orbit has the exact Gelfand--Tsetlin interlacing image, strict-interior Lagrangian `T^3` fibers, all initial-phase closure cosets and the periodic iff/least-period criterion, and an unshifted no-half-form quantization whose branching-pattern count is the Weyl dimension; facets, repeated weights, scalar and nonintegral boundaries are separated. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Gelfand--Tsetlin package](../henon_gelfand_tsetlin_u3_integrable_quantization_route_a/) · [paper PDF](../henon_gelfand_tsetlin_u3_integrable_quantization_route_a/paper/main.pdf) |
+| HCS-C366 | The engineered Krawtchouk XX chain has an all-size exact spectrum and propagator, perfect endpoint mirror transfer, the complete exterior-power fermionic mirror phase, exact subset-energy multiplicities, and a sharp distinction between sectorwise phases and global Fock revival, including all declared size, coupling, field, and parity faces. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Krawtchouk-XX package](../henon_krawtchouk_xx_mirror_inversion_route_a/) · [paper PDF](../henon_krawtchouk_xx_mirror_inversion_route_a/paper/main.pdf) |
+| HCS-C367 | The two-state reflected Markov fluid has a sharp stationary-drift positive/null/transient trichotomy and, in the stable chamber, an exact boundary atom, both interior densities, all integer workload moments and regulator rate; every zero switching or drift rate is classified by closed environmental class. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [reflected Markov-fluid package](../henon_two_state_reflected_markov_fluid_route_a/) · [paper PDF](../henon_two_state_reflected_markov_fluid_route_a/paper/main.pdf) |
+| HCS-C368 | The normalized quadratic Polubarinova--Galin family with complex second coefficient has a conserved coefficient, exact area law and scalar implicit solution; injection remains globally univalent and circularizes, while suction reaches its first univalence loss at an exact time in an ordinary semicubical cusp, with circle, initially critical, and initially invalid boundaries explicit. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FAIL)` | [quadratic Laplacian-growth package](../henon_quadratic_polubarinova_galin_route_a/) · [paper PDF](../henon_quadratic_polubarinova_galin_route_a/paper/main.pdf) |
+
+C364 and C365 are only `ROUTE_A_EXPLORATORY`; C366--C368 are
+`ROUTE_A_REJECTED`.  Route B is false for all five.  Their dynamical owners
+are respectively an arithmetic reduction permutation, a compact integrable
+Hamiltonian system, a finite quantum spin chain, a reflected stochastic PDMP,
+and a conformal free-boundary flow.  The common scope firewall is
+`NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic local datum, Euler factor,
+root number, automorphy object, target divisor/counting law or functional
+equation, target-zero match, Hilbert--Polya operator, or Route-B input is
+claimed.
+
 ## HCS-C359--HCS-C363 additions (2026-09-04)
 
 Five independent cross-subtype candidates were frozen from baseline
