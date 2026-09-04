@@ -1,6 +1,6 @@
 # P191 — Prefix-divisibility cuts
 
-**Round:** `ROUND1_FROZEN / REVIEW_A_PASS`  
+**Round:** `ROUND2_DUAL_REVIEW_FREEZE / DUAL_REVIEW_PASS`  
 **Owner gate:** `OWNER_AMBER`  
 **External lifecycle:** `HOLD_EXTERNAL`
 
@@ -39,8 +39,9 @@ pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
 The anonymous result is four A4 pages.  `main.pdf`,
-`main_round0_original.pdf`, and `main_round1.pdf` are byte-identical with
-SHA-256 `d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b`.
+`main_round0_original.pdf`, `main_round1.pdf`, and `main_round2.pdf` are
+byte-identical with SHA-256
+`d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b`.
 
 ## File map
 
@@ -50,6 +51,7 @@ SHA-256 `d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b`.
   receipt;
 - `main_round1.pdf`: immutable Review-A receipt of the unchanged theorem
   package;
+- `main_round2.pdf`: immutable Review-B receipt; terminal QA remains separate;
 - `NARRATIVE_REPORT.md`, `PAPER_PLAN.md`, `FIGURE_PLAN.md`: story, theorem
   architecture, and the no-figure decision;
 - `PROOF_PACKAGE.md`: normalized assumptions, full proof dependency, boundary
@@ -59,12 +61,16 @@ SHA-256 `d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b`.
   internal-history subtraction;
 - `code/verify.py`, `code/CANONICAL.txt`: paper-local exact control and
   deterministic transcript;
-- `BUILD.md`, `SELF_QA.md`: Round-0 build and author-handoff receipts;
+- `BUILD.md`, `SELF_QA.md`, `FINAL_QA.md`: build, author-handoff, and
+  terminal-QA receipts;
 - `qa_round0/`: two verifier transcripts, extracted text, and four rendered
   pages inspected at 220 dpi;
-- `SHA256SUMS`: non-self-referential Round-0 manifest.
-- `docs/papers187_191_sequence/reviews/p191_a/`: Review-A hostile audit and
-  no-change acceptance package.
+- `SHA256SUMS`: final non-self-referential manifest.
+- `reviews/round1/reviewer_a/`: formal process-separated Review-A audit and
+  accepted source-ledger-only delta; the manuscript and PDF are unchanged.
+- `docs/papers187_191_sequence/reviews/p191_b/`: process-separated Review-B
+  audit.
 
-Review A is complete; Review B, final QA, posting, submission, and any other
-external action remain unauthorized.
+Dual hostile review is complete; terminal cold-build and final-manifest QA
+remain pending. Posting, submission, and any other external action remain
+unauthorized.

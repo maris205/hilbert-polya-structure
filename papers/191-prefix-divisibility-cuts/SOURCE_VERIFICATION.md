@@ -12,7 +12,7 @@ citation context, and a bounded direct-owner search.  **Status:**
 | `BilleraThomasVanWilligenburg2006` | *Advances in Mathematics* 204(1), 204–240 (2006); DOI `10.1016/j.aim.2005.05.014`; arXiv `math/0405434` | the explicit partial-sum subset encoding and adjacent-part coarsening/refinement language in Section 1 | divisibility filtering or iteration |
 | `HeubachMansour2009` | Silvia Heubach and Toufik Mansour, *Combinatorics of Compositions and Words*, Chapman & Hall/CRC; DOI `10.1201/9781420072686`; print ISBN `978-1-4200-7267-9` | static composition and restricted-composition background | P191's state-dependent prefix predicate or dynamics |
 | `BenderCanfield2005` | *The Electronic Journal of Combinatorics* 12(1), R57 (2005); DOI `10.37236/1954` | established locally restricted-composition framework | ownership of a predicate depending on the full current prefix, simultaneous coarsening, or iteration |
-| `Navarro2026OEISA398023` | Oliver Navarro, OEIS A398023, submitted 16 July 2026 and modified 27 August 2026; accessed 4 September 2026 | the closest inspected static prefix-divisibility neighbour | the literal P191 predicate, cut deletion, or any dynamical theorem |
+| `Navarro2026OEISA398023` | Oliver Navarro, OEIS A398023, submitted 16 July 2026; approved/latest entry revision 22 July 2026; accessed 4 September 2026 | the closest inspected static prefix-divisibility neighbour | the literal P191 predicate, cut deletion, or any dynamical theorem |
 
 The first four records were checked against DOI/Crossref metadata and official
 publisher or journal records.  The Billera--Thomas--van Willigenburg content

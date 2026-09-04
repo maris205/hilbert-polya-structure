@@ -1,6 +1,6 @@
 # P190 — Brandt sandwich erosion
 
-**Round:** `ROUND1_FROZEN / REVIEW_A_PASS`  
+**Round:** `ROUND2_DUAL_REVIEW_FREEZE / DUAL_REVIEW_PASS`  
 **Owner gate:** `OWNER_AMBER`  
 **External lifecycle:** `HOLD_EXTERNAL`
 
@@ -59,6 +59,8 @@ After Review A closed two Minor presentation findings, `main.pdf` and
   receipt;
 - `main_round1.pdf`: accepted Review-A rebuild with no theorem or citation
   change;
+- `main_round2.pdf`: byte-identical Review-B receipt of the accepted Round-1
+  artifact; terminal QA remains separate;
 - `NARRATIVE_REPORT.md`, `PAPER_PLAN.md`, `FIGURE_PLAN.md`: story, theorem
   architecture, and no-figure decision;
 - `PROOF_PACKAGE.md`: normalized assumptions and complete proof dependency;
@@ -66,11 +68,14 @@ After Review A closed two Minor presentation findings, `main.pdf` and
 - `SOURCE_VERIFICATION.md`: verified metadata and owner boundary;
 - `code/verify_p190.py`, `code/CANONICAL.txt`: paper-local exact control and
   deterministic transcript;
-- `BUILD.md`, `SELF_QA.md`: Round-0 build and author-handoff receipts;
+- `BUILD.md`, `SELF_QA.md`, `FINAL_QA.md`: build, author-handoff, and terminal
+  QA receipts;
 - `qa_round0/`: extracted text and four rendered inspection pages;
-- `SHA256SUMS`: non-self-referential Round-0 manifest.
+- `SHA256SUMS`: final non-self-referential manifest.
 - `docs/papers187_191_sequence/reviews/p190_a/`: Review-A hostile audit and
-  accepted delta package.
+  accepted delta package;
+- `docs/papers187_191_sequence/reviews/p190_b/`: Review-B hostile audit.
 
-Review A is complete; Review B, final QA, posting, submission, and any other
-external action remain unauthorized.
+Dual hostile review is complete; terminal cold-build and final-manifest QA
+remain pending. Posting, submission, and any other external action remain
+unauthorized.

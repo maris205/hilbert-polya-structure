@@ -17,28 +17,34 @@ counterexample pressure from the all-parameter written proof.
 | P188 | `frozenset` carrier with backward interval-capacity all-time inverse count | 8,193,247 | 0/0/0 | `ACCEPTED_NO_CHANGE` | `10b881a6200e075ed66514e8f4f8873c433383c8118c6037ad1ecd1d5bcb8bc3` |
 | P189 | row-support sets, indegree peeling, reverse BFS, independent one/two-step target reconstruction | 1,493,113 | 0/0/0 | `ACCEPTED_NO_CHANGE` | `6ba00f6b542fdbefd4789e8f23f2d683c642132e989ff7af828436da063d6a81` |
 | P190 | base-`q` cyclic words, literal Brandt multiplication, directed-walk fibres and exact eigenspace ranks | 2,615,881 | 0/0/2 | `PASS_DELTA_ACCEPTED` | `81c785768621a2c3450fc67eeabc9b91d8cfda67d1061aad851844b5dd68905d` |
-| P191 | cut-mask carrier, graph peeling/BFS, separately coded global and interval inverse automata | 920,748 | 0/0/0 | `ACCEPTED_NO_CHANGE` | `d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b` |
-| **total** | **five process-separated attacks** | **14,667,808** | **0/0/2** | **all accepted; open 0/0/0** | — |
+| P191 | recursive composition tuples, direct merge-and-flush update, global inverse binning and backward interval DP | 2,864,221 | 0/0/1 | `PASS_DELTA_ACCEPTED` | `d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b` |
+| **total** | **five process-separated attacks** | **16,611,281** | **0/0/3** | **all accepted; open 0/0/0** | — |
 
 The assertion total is exact arithmetic parsed from the final Review-A
 canonicals. It is not a sample size and carries no statistical confidence or
 novelty implication.
 
-## Accepted delta
+## Accepted deltas
 
-P190 had the only requested source change. Two one-token presentation defects
-were repaired:
+P190 had two requested one-token presentation repairs:
 
 1. `P190-A-MI-01`: removed the empty leading subscript field from Eq. (11),
    leaving the proved matrix entry `(A^{h_j})_{y_{i_j}^*,y_{i_{j+1}}}`.
 2. `P190-A-MI-02`: changed `\paragraph{CRediT.}` to
    `\paragraph{CRediT}`, so `amsart` renders exactly one full stop.
 
+P191 Review A also found that its companion source ledger had mistaken an
+OEIS database-wide footer date for an entry revision date.  The ledger alone
+was corrected from a claimed 27 August 2026 modification to the official
+latest entry revision of 22 July 2026, and the same reviewer process accepted
+the exact delta.  The manuscript, references, theorem package, and PDF did not
+change.
+
 No theorem, proof, table, citation, owner statement, or lifecycle boundary
-changed. The original Review-A process bound the new source and PDF, repeated
-its exact control, visually checked both repaired surfaces, and returned
-`PASS_DELTA_ACCEPTED`. The four other Round-1 PDFs are deliberately
-byte-identical no-change receipts.
+changed in either repair. The original Review-A processes bound the repaired
+artifacts, repeated their exact controls, and returned
+`PASS_DELTA_ACCEPTED`. P187, P188, and P189 are byte-identical no-change
+receipts; P191's PDF is also byte-identical because its repair is ledger-only.
 
 ## Review-B authorization and boundary
 

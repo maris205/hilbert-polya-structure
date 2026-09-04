@@ -1,6 +1,6 @@
 # P189 — transpose--row-compression dynamics
 
-**Round:** `ROUND1_FROZEN / REVIEW_A_PASS`  
+**Round:** `ROUND2_DUAL_REVIEW_FREEZE / DUAL_REVIEW_PASS`  
 **Owner gate:** `OWNER_AMBER`  
 **External lifecycle:** `HOLD_EXTERNAL`
 
@@ -13,10 +13,12 @@ layers, and complete time-one/time-two every-target fibre laws.  The case
 The independent author verifier exhausts every matrix through `n=4`, adds
 partition and inverse-mass controls through `n=12`, and finishes with
 **5,336,613 exact assertions**.  The anonymous deterministic PDF has four A4
-pages.  `main_round1.pdf` is a deliberate byte-identical Review-A receipt of
-the frozen Round-0 artifact.  Review A passed with zero findings in
-`reviews/round1/reviewer_a/`; Review B and final-release packaging remain
-pending.
+pages.  `main_round0_original.pdf`, `main_round1.pdf`, `main_round2.pdf`, and
+the live `main.pdf` are byte-identical at SHA-256
+`6ba00f6b542fdbefd4789e8f23f2d683c642132e989ff7af828436da063d6a81`.
+Review A passed with zero findings in `reviews/round1/reviewer_a/`; fresh
+Review B passed with zero findings in
+`reviews/round2/reviewer_b/`. Terminal QA is closed.
 
 ## Exact replay
 
@@ -37,7 +39,7 @@ pdflatex -interaction=nonstopmode -halt-on-error main.tex
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The live PDF, immutable Round-0 copy, and immutable Round-1 copy all have
+The live PDF and immutable Round-0, Round-1, and Round-2 copies all have
 SHA-256 `6ba00f6b542fdbefd4789e8f23f2d683c642132e989ff7af828436da063d6a81`.
 This is an internal mathematical artifact, not an external novelty or
 circulation clearance.

@@ -32,7 +32,7 @@ PINNED = {
     "PROOF_PACKAGE.md":
         "f89ab89d2f9fa2f82eb6482129f4803870c3b3240d7a9eb8b31bd8579511d9ef",
     "SOURCE_VERIFICATION.md":
-        "71e6ed195bc75584e071ff5f27975ab756eb66287acd99299fbeea596c9a1c70",
+        "26a0e2d9112a938d8dcc388e378f5cf1f89cdea99b4f3941729db094d70373b9",
 }
 
 
@@ -68,9 +68,16 @@ def pin_inputs() -> None:
                "manuscript lifecycle boundary")
     AUDIT.true("This bounded non-hit is not novelty" in ledger,
                "owner-ledger non-hit boundary")
-    # This exact Round-0 ledger phrase is retained as the one source finding.
-    AUDIT.equal(ledger.count("modified 27 August 2026"), 1,
-                "historical OEIS modification-date claim")
+    # Delta acceptance: the false database-footer date is absent and the
+    # repaired statement is tied explicitly to the entry history.
+    AUDIT.equal(
+        (
+            ledger.count("modified 27 August 2026"),
+            ledger.count("approved/latest entry revision 22 July 2026"),
+        ),
+        (0, 1),
+        "OEIS entry-history delta",
+    )
 
 
 @lru_cache(maxsize=None)
@@ -346,13 +353,14 @@ def main() -> None:
     print("FORMAL_COUNTEREXAMPLES=0")
     print("CRITICAL=0")
     print("MAJOR=0")
-    print("MINOR=1")
-    print("FINDING=P191-A-MI-01_OEIS_HISTORY_DATE_IN_SOURCE_LEDGER")
+    print("MINOR=0")
+    print("HISTORICAL_FINDING=P191-A-MI-01_OEIS_HISTORY_DATE_IN_SOURCE_LEDGER")
+    print("DELTA=P191-A-MI-01_ACCEPTED")
     print(f"TOTALS={MAX_N}")
     print(f"ASSERTIONS={AUDIT.assertions}")
     print("OWNER=OWNER_AMBER")
     print("LIFECYCLE=HOLD_EXTERNAL")
-    print("VERDICT=MINOR_REVISION_REQUIRED")
+    print("VERDICT=PASS_DELTA_ACCEPTED")
 
 
 if __name__ == "__main__":

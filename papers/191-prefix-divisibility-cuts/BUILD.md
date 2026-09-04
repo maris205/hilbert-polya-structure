@@ -1,6 +1,6 @@
 # P191 build and immutable receipts
 
-**State:** `ROUND1_REVIEW_A_ACCEPTED_NO_CHANGE`  
+**State:** `ROUND2_DUAL_REVIEW_FREEZE`  
 **Owner gate:** `OWNER_AMBER`  
 **External lifecycle:** `HOLD_EXTERNAL`
 
@@ -70,14 +70,21 @@ c4643a6639ddf269dee59c97acc53aee504d081a0279d0bbe2898183f674373c  code/CANONICAL
 d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b  main_round0_original.pdf
 ```
 
-## Round-1 no-change receipt
+## Round-1 manuscript no-change receipt
 
-Hostile Review A reconstructed the carrier as cut-mask bitsets, recovered
-recurrence/depth by indegree peeling and reverse BFS, and checked both global
-and interval inverse counts target by target. Its 920,748 exact assertions
-returned `Critical 0 / Major 0 / Minor 0` and `ACCEPTED_NO_CHANGE`.
+Formal Hostile Review A reconstructed the carrier as recursive composition
+tuples, applied the update by direct merge-and-flush, globally binned inverse
+candidates, and checked a backward interval DP against brute refinements. Its
+2,864,221 exact assertions found no mathematical counterexample. One Minor
+source-ledger date error was corrected and accepted, yielding final open
+counts `Critical 0 / Major 0 / Minor 0` and `PASS_DELTA_ACCEPTED`.
 
-`main_round1.pdf` is therefore intentionally byte-identical to Round 0 at
-SHA-256
+The manuscript did not change, so `main_round1.pdf` is intentionally
+byte-identical to Round 0 at SHA-256
 `d8675928ecfe528b950af5402097b5f69657efc9cba7c8eb0bb5c27ec96df78b`.
-Review B and terminal QA remain required; `HOLD_EXTERNAL` remains active.
+Review B later reopened the inverse theorem from interval-local deleted-cut
+subset grammars, made 164,049 exact assertions, and found no new issue.
+`main_round2.pdf` is byte-identical to Round 0 and Round 1, again at the same
+SHA-256. Terminal QA on 2026-09-04 completed two physical source-only cold
+builds, final manifests, and closed author/reviewer replays.
+`HOLD_EXTERNAL` remains active.

@@ -1,6 +1,6 @@
-# P189 build and Round-0 artifact ledger
+# P189 build and artifact ledger
 
-**State:** `ROUND0_AUTHOR_FREEZE`  
+**State:** `ROUND2_DUAL_REVIEW_FREEZE`  
 **Lifecycle:** `OWNER_AMBER / HOLD_EXTERNAL`
 
 ## Independent exact verifier
@@ -52,6 +52,18 @@ b87fde66e16b164544eb6bc0463e4b4d4e82fae8531b43c322cbb96df0db7a5c  code/verify_p1
 6ba00f6b542fdbefd4789e8f23f2d683c642132e989ff7af828436da063d6a81  main_round0_original.pdf
 ```
 
-The build and counterexample attack are author-side integrity controls, not
-an independent hostile review.  No Review A/B or later-round artifact is
-authorized in this directory at Round 0.
+## Review closure
+
+Review A used row-support sets, indegree peeling, reverse BFS, and direct
+one-step/two-step target reconstruction to make 1,493,113 exact assertions and
+closed with zero findings. Fresh Review B instead represented matrices as
+column-bit tuples, reconstructed the literal map from row sums, and used
+memoized orbit-repeat detection plus independent partition and mass controls.
+It made 1,493,195 exact assertions and also closed with zero findings.
+
+No source or PDF change was requested in either review. `main_round1.pdf`,
+`main_round2.pdf`, and the live `main.pdf` all retain the Round-0 SHA-256
+`6ba00f6b542fdbefd4789e8f23f2d683c642132e989ff7af828436da063d6a81`.
+Terminal QA on 2026-09-04 completed two physical source-only cold builds,
+final manifests, and byte-identical author/reviewer replays. External
+lifecycle remains `OWNER_AMBER / HOLD_EXTERNAL`.

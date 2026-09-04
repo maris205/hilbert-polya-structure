@@ -1,8 +1,10 @@
 # Dual hostile-review protocol — P187–P191
 
-Every paper receives two process-separated hostile reviews.  Each review
+Every paper receives two process-separated hostile reviews. Each review
 contains a proof/claim/source audit and an independently written exact control
-with canonical stdout and a checksum manifest under this batch directory.
+with canonical stdout and a checksum manifest. Most packages are under this
+batch directory; the paper-local exceptions and the only authoritative paths
+are enumerated in `reviews/PROCESS_SEPARATION_LEDGER.md`.
 
 Reviewers attack carrier closure, every theorem quantifier and exceptional
 parameter, labelled-target and fibre formulae, recurrence/period/tail/spectrum

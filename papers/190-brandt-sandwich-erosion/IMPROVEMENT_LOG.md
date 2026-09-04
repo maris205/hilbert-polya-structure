@@ -12,7 +12,7 @@ criterion, and mass identity. The exact verifier made 1,555,420 assertions in
 ## Hostile Review A findings
 
 The process-separated reviewer independently represented cyclic words as
-base-`q` integers and reconstructed fibres by directed walks. Its 2,615,878
+base-`q` integers and reconstructed fibres by directed walks. Its 2,615,881
 assertions found no mathematical counterexample and opened two Minor
 presentation findings:
 
@@ -32,3 +32,21 @@ The original Review-A process rechecked the requested delta, reran its
 independent control, closed both findings, and returned
 `PASS_DELTA_ACCEPTED` with final open census `0/0/0`.
 `OWNER_AMBER / HOLD_EXTERNAL` remains binding.
+
+## Hostile Review B and Round 2
+
+Review B reopened the theorem from an anchor-gap decomposition. Every
+nonzero target was rebuilt by fixing anchor letters and counting the
+intervening zero-producing blocks by a reviewer-owned dynamic program, rather
+than by either the author's cyclic trace products or Review A's directed-walk
+tables. Its 1,438,171 exact assertions rechecked the good-run normal form,
+parity-sensitive sharp tails, every-target image criterion, the all-zero
+fibre recurrence, and mass identity, and returned
+`Critical 0 / Major 0 / Minor 0`.
+
+No further source or PDF change was requested. `main_round2.pdf` is therefore
+byte-identical to the accepted Round-1 artifact, with SHA-256
+`81c785768621a2c3450fc67eeabc9b91d8cfda67d1061aad851844b5dd68905d`.
+Terminal QA on 2026-09-04 completed both physical source-only cold builds,
+final manifests, and closed reviewer replays. `OWNER_AMBER / HOLD_EXTERNAL`
+remains binding.

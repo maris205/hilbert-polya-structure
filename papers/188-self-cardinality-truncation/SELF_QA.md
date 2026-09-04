@@ -7,4 +7,5 @@
 - [x] Every labelled target and empty fibre is covered.
 - [x] The Fibonacci identity has initial values and a proof route.
 - [x] Exact checks are not represented as proofs or novelty evidence.
-- [ ] Process-separated Review A and Review B remain pending.
+- [x] Round-0 handoff completed; later process-separated Reviews A/B and
+      terminal QA are now closed in their own packages.

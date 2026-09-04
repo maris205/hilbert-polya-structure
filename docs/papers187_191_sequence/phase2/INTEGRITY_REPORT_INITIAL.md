@@ -2,7 +2,7 @@
 
 **Audit date:** 2026-09-04 UTC. **Mode:** Round-0 population and artifact
 entry gate. **Verdict:**
-`PASS_TO_HOSTILE_REVIEW_WITH_ONE_OPEN_MINOR / HOLD_EXTERNAL`.
+`PASS_TO_HOSTILE_REVIEW_WITH_THREE_EVENTUAL_MINOR_FINDINGS / HOLD_EXTERNAL`.
 
 This report checks the named theorem, source, exact-control, and artifact
 populations at the immutable Round-0 boundary. It does not certify proof
@@ -46,16 +46,20 @@ The initial gate found no missing theorem-to-proof ledger row. Semantic
 completeness cannot be proved by this registration and is deliberately left
 to the two hostile review processes.
 
-## Open Review-A finding
+## Review-A findings discovered after entry
 
-Review A has opened one Minor item in P190: the displayed matrix entry in the
-nonzero-anchor gap product contains a leading comma in its subscript. The
-proof text and intended entry direction agree, and no mathematical
-counterexample is known. The immutable Round-0 receipt is retained; the
-punctuation repair, rebuilt PDF, and reviewer acceptance must enter Round 1.
+The entry audit itself registered no formal counterexample. During Review A,
+the independent reviewers subsequently opened three Minor items: two P190
+presentation defects (a leading comma in one matrix-entry subscript and a
+duplicated rendered full stop), plus one P191 companion-ledger metadata error
+that confused an OEIS database-wide footer date with the latest entry
+revision. These are recorded here retrospectively so the initial and terminal
+reports do not present incompatible denominators. The immutable Round-0
+receipts were retained; all three deltas were accepted in Round 1, with no
+open item remaining.
 
-At this stage the open census is `Critical 0 / Major 0 / Minor 1`. It is not a
-terminal census.
+The eventual initial-finding census is `Critical 0 / Major 0 / Minor 3`; this
+is a historical entry census, not the terminal open census.
 
 ## Release boundary
 

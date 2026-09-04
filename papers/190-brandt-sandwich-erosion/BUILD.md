@@ -1,6 +1,6 @@
 # P190 build and immutable receipts
 
-**State:** `ROUND1_REVIEW_A_REPAIR_BUILT`  
+**State:** `ROUND2_DUAL_REVIEW_FREEZE`  
 **Owner gate:** `OWNER_AMBER`  
 **External lifecycle:** `HOLD_EXTERNAL`
 
@@ -83,5 +83,10 @@ font rows embedded/subsetted/Unicode: 29/29/29
 ```
 
 `main_round0_original.pdf` remains byte-immutable at its recorded Round-0
-hash. Review-A delta acceptance and Review B remain separate gates;
-`HOLD_EXTERNAL` remains active.
+hash. Review B later reopened the theorem by anchor-gap zero-transition
+dynamic programming, made 1,438,171 exact assertions, and found no new issue.
+`main_round2.pdf` is therefore byte-identical to the accepted Round-1 PDF at
+SHA-256 `81c785768621a2c3450fc67eeabc9b91d8cfda67d1061aad851844b5dd68905d`.
+Terminal QA on 2026-09-04 completed two physical source-only cold builds,
+final manifests, and closed author/reviewer replays. `HOLD_EXTERNAL` remains
+active.

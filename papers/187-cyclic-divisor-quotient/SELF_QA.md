@@ -7,4 +7,5 @@
 - [x] Every target, including zero-fibre targets, is covered.
 - [x] Proof and exact enumeration are clearly distinguished.
 - [x] Source non-hits are not described as novelty evidence.
-- [ ] Process-separated Review A and Review B remain pending.
+- [x] Round-0 handoff completed; later process-separated Reviews A/B and
+      terminal QA are now closed in their own packages.
