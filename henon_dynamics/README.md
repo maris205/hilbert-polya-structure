@@ -2719,6 +2719,37 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C354--C358
+
+This round takes five independent theorem-scale steps across a symmetric
+heavy-top Hamiltonian, an infinite nonamenable group walk, a topological Bloch
+pump, a nonsmooth isochronous oscillator and a cyclic population flow.  Each
+paper closes its own global, spectral, topological or boundary atlas; these are
+five complete owners rather than installments of one theorem.
+
+- [C354 Lagrange heavy-top elliptic reconstruction and closure](henon_lagrange_heavy_top_elliptic_closure_route_a/README.md) · [paper PDF](henon_lagrange_heavy_top_elliptic_closure_route_a/paper/main.pdf)
+- [C355 free-group Kesten spectrum, returns and escape](henon_free_group_kesten_random_walk_route_a/README.md) · [paper PDF](henon_free_group_kesten_random_walk_route_a/paper/main.pdf)
+- [C356 QWZ--Thouless Chern-pump phase atlas](henon_qwz_thouless_chern_pump_route_a/README.md) · [paper PDF](henon_qwz_thouless_chern_pump_route_a/paper/main.pdf)
+- [C357 bilinear two-stiffness isochronous oscillator](henon_bilinear_two_stiffness_isochronous_oscillator_route_a/README.md) · [paper PDF](henon_bilinear_two_stiffness_isochronous_oscillator_route_a/paper/main.pdf)
+- [C358 May--Leonard cyclic-competition trichotomy](henon_may_leonard_cyclic_competition_route_a/README.md) · [paper PDF](henon_may_leonard_cyclic_competition_route_a/paper/main.pdf)
+
+See the [idea report](IDEA_REPORT_C354_C358.md),
+[batch plan](BATCH_PLAN_C354_C358.md), and
+[batch review](BATCH_REVIEW_C354_C358.md) for collision screening, frozen
+theorem contracts, author-swapped repairs, exact release receipts and aggregate
+accounting.  The strict
+tuples, in order C354--C358, are
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`,
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`,
+`(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)`, and
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`.
+All five are `ROUTE_A_REJECTED`; Route B is false and common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  No target arithmetic local datum, Euler
+factor, root number, automorphy object, target divisor/counting law or
+functional equation, target-zero match, Hilbert--Polya operator, or Route-B
+input is asserted.
+
 ## Route-A independent cross-subtype round C349--C353
 
 This round takes five separate theorem-scale steps across an integrable

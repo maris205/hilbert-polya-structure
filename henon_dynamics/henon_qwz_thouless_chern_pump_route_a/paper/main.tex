@@ -1,0 +1,177 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<C3562026090300000000000000000000><C3562026090300000000000000000000>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.65in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\providecommand{\CRevisionRound}{2}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\T}{\mathbb T}
+\title{An Exact Chern-Phase Atlas for the QWZ Thouless Pump}
+\author{HCS-C356 / HEN-O340}
+\date{3 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a two-band pump on the Bloch torus we prove the exact spectrum, direct gap,
+all lower-band Chern phases, and every gap-closing Dirac jump.  The transported
+charge statement is made only in the filled-band adiabatic limit.  Independent
+symbolic, degree, and lattice-gauge receipts audit the convention-sensitive
+signs.  This revision is the \textbf{exact Bloch-gap owner}.
+\end{abstract}
+
+\section{Model and complete gap atlas}
+Orient $\T^2$ by $dk\wedge d\tau$ and define
+\begin{equation}\label{eq:model}
+ H_m(k,\tau)=d_m(k,\tau)\cdot\sigma,\qquad
+ d_m=(\sin k,\sin\tau,m+\cos k+\cos\tau).
+\end{equation}
+Here $m\in\mathbb R$ and both angular variables have period $2\pi$.  Whenever
+$d_m$ is nonzero, let $n=d_m/|d_m|$ and $P_-=(I-n\cdot\sigma)/2$.
+
+\begin{theorem}[Spectrum, gap, and lower-band phase]\label{thm:main}
+The fibre spectrum is $\{-|d_m|,+|d_m|\}$.  The family is gapped exactly for
+$m\notin\{-2,0,2\}$, with direct gap
+\[
+ G(m)=2\min\{|m+2|,|m|,|m-2|\}.
+\]
+On a gapped chamber $P_-$ is a smooth rank-one complex line bundle.  With
+\begin{equation}\label{eq:c1}
+ c_1(P_-)=\frac1{2\pi i}\int_{\T^2}
+ \Tr\!\left(P_-[\partial_kP_-,\partial_\tau P_-]\right)dk\,d\tau,
+\end{equation}
+its Chern number is
+\[
+c_1=\begin{cases}
+0,&m<-2,\\ -1,&-2<m<0,\\ +1,&0<m<2,\\ 0,&m>2.
+\end{cases}
+\]
+\end{theorem}
+
+\begin{proof}[Proof of the spectral and gap assertions]
+Pauli multiplication gives $H_m^2=|d_m|^2I$.  With $x=\cos k$ and
+$y=\cos\tau$,
+\begin{equation}\label{eq:norm}
+ |d_m|^2=m^2+2+2m(x+y)+2xy.
+\end{equation}
+The right side is affine in each variable separately, so its minimum on
+$[-1,1]^2$ occurs at a corner.  The four corner values are
+$(m+2)^2,m^2,m^2,(m-2)^2$.  This proves both the closing locus and the stated
+gap.  Smooth functional calculus then gives the displayed lower projector.
+The Chern computation is proved below in revision one.
+\end{proof}
+
+\ifnum\CRevisionRound>0
+\section{Projector sign, degree, and Dirac walls}
+This revision is the \textbf{analytic Dirac-degree owner}.  Direct Pauli
+algebra fixes the convention-sensitive sign:
+\begin{equation}\label{eq:pauli}
+ \Tr\!\left(P_-[\partial_kP_-,\partial_\tau P_-]\right)
+ =-\frac{i}{2}n\cdot(\partial_kn\times\partial_\tau n).
+\end{equation}
+Consequently \eqref{eq:c1} is minus the Brouwer degree of $n:\T^2\to S^2$.
+For completeness, a direct differentiation before normalization gives
+\begin{equation}\label{eq:numerator}
+d_m\cdot(\partial_kd_m\times\partial_\tau d_m)
+=\cos k+\cos\tau+m\cos k\cos\tau.
+\end{equation}
+
+Choose the north pole as regular value away from the walls.  Its possible
+preimages are the four points with $\sin k=\sin\tau=0$.  A point contributes
+exactly when its mass $M=m+\cos k_0+\cos\tau_0$ is positive, and its local
+degree is $\chi(k_0,\tau_0)=\cos k_0\cos\tau_0$.  Thus
+$\deg(n)=\sum\chi\mathbf1_{\{M>0\}}$.  Substituting
+$\mathbf1_{\{M>0\}}=(1+\operatorname{sgn}M)/2$ and using
+$\sum\chi=0$ yields
+\begin{equation}\label{eq:masssum}
+c_1=-\frac12\bigl[\operatorname{sgn}(m+2)
+-2\operatorname{sgn}(m)+\operatorname{sgn}(m-2)\bigr].
+\end{equation}
+This proves the remaining part of Theorem~\ref{thm:main} without numerical
+integration.  As $m$ increases, the complete wall ledger is
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+mass & zero $(k_0,\tau_0)$ & $\chi$ & jump of $c_1$\\
+\midrule
+$-2$ & $(0,0)$ & $+1$ & $-1$\\
+$0$ & $(\pi,0)$ & $-1$ & $+1$\\
+$0$ & $(0,\pi)$ & $-1$ & $+1$\\
+$2$ & $(\pi,\pi)$ & $+1$ & $-1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The simultaneous pair at $m=0$ is essential: its total jump is two.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Adiabatic transport and exact boundaries}
+This revision is the \textbf{adiabatic scope and route firewall}.
+\begin{corollary}[Filled-band Thouless transport]
+Let $\tau$ increase from $0$ to $2\pi$, assign unit positive particle charge,
+and define positive current by $J=\partial_kH_m$.  Assume a gapped chamber, a
+completely filled lower band, and an adiabatic traversal.  With the orientation
+fixed in \eqref{eq:c1}, the transported positive-particle charge per cycle
+equals $c_1(P_-)$.
+\end{corollary}
+Indeed, for
+\[
+\Omega_{k\tau}=i\Tr P_-[\partial_kP_-,\partial_\tau P_-],
+\qquad
+Q=-\frac1{2\pi}\int_{\T^2}\Omega_{k\tau}\,dk\,d\tau
+  =\frac1{2\pi i}\int_{\T^2}\Tr P_-[\partial_kP_-,\partial_\tau P_-]
+  =c_1(P_-).
+\]
+For electronic charge the result is multiplied by $-e$.
+This is an adiabatic-limit statement.  At finite driving rate, interband
+transitions can occur; no exact finite-driving-rate quantization is claimed.
+
+At $m=-2,0,2$ the lower projector is undefined at the zeroes in the table and
+no gapped-bundle Chern number is assigned.  Reversing the torus orientation,
+or sending $\tau\mapsto-\tau$, reverses the integer.  Complex conjugation
+satisfies
+\[
+K H_m(k,\tau)K=H_m(k,-\tau),
+\]
+because only $\sigma_y$ is imaginary.  For $m>2$ (respectively $m<-2$), the
+$z$ component is everywhere positive (respectively negative), and the field
+contracts without closing the gap to the north (respectively south) pole.
+
+\section{Evidence, provenance, and claim boundary}
+The exact evidence records the four corner values, chamber signs, and Dirac
+ledger.  A separate discrete lattice-gauge lane on several grids reproduces
+the four integers, but is only regression evidence; the analytic degree proof
+owns the theorem.  Strict parsers, repaired-hash hostile mutations, isolated
+byte replay, and deterministic PDF builds audit the release.
+
+Thouless established quantized adiabatic particle transport~\cite{Thouless};
+Qi, Wu, and Zhang give the two-band lattice-Dirac lineage~\cite{QWZ}.  We cite
+lineage, not priority, and rederive every normalization and sign used here.
+Nearby packages treat finite SSH chains, the Dirac-monopole sphere and its
+magnetic spectrum, and kicked rotors; none owns this smooth two-parameter
+Bloch-bundle atlas.
+
+The Chern integer is a source-local natural quantization, but the Chern integer
+is not a rational-prime carrier.  There is no primitive-orbit determinant,
+target functional equation, target zero match, or Hilbert--P\'olya operator.
+Thus Route A is rejected as
+$(A0_{\rm FAIL},A1_{\rm FAIL},A2_{\rm FAIL},A3_{\rm FAIL},
+A4_{\rm NATURAL\_QUANTIZATION})$, and Route B remains locked under
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\begin{thebibliography}{9}
+\small
+\bibitem{Thouless}
+D.~J. Thouless, \emph{Quantization of particle transport}, Phys. Rev. B 27
+(1983), 6083--6087. \url{https://doi.org/10.1103/PhysRevB.27.6083}.
+\bibitem{QWZ}
+X.-L. Qi, Y.-S. Wu, and S.-C. Zhang, \emph{Topological quantization of the
+spin Hall effect in two-dimensional paramagnetic semiconductors}, Phys. Rev.
+B 74 (2006), 085308. \url{https://doi.org/10.1103/PhysRevB.74.085308}.
+\end{thebibliography}
+\fi
+\end{document}

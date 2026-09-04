@@ -3,6 +3,34 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C354--HCS-C358 additions (2026-09-03)
+
+Five independent cross-subtype candidates were frozen from baseline
+`140c8714b74de666d56f441ddfb712026955901a`.  The evaluator is
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0 at SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The retained results are source-local reconstructions; workspace packaging
+does not assert literature priority.
+
+| candidate | retained result | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C354 | The Lagrange symmetric heavy top has a complete regular-chart elliptic reconstruction: exact cubic root chambers, Jacobi nutation and least period, both third-kind phase increments, full `SO(3)` closure iff both normalized increments are rational, and separately closed pole, steady-precession, separatrix, sleeping, free and spherical boundaries. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [Lagrange-heavy-top package](../henon_lagrange_heavy_top_elliptic_closure_route_a/) · [paper PDF](../henon_lagrange_heavy_top_elliptic_closure_route_a/paper/main.pdf) |
+| HCS-C355 | Uniform nearest-neighbour random walk on `F_d`, `d>=2`, has the complete Kesten root measure and full purely absolutely continuous spectrum, an exact radial birth--death reduction, exact return and first-return laws, ballistic strong law and radial CLT, with the recurrent rank-one `Z` boundary closed separately. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [free-group Kesten-walk package](../henon_free_group_kesten_random_walk_route_a/) · [paper PDF](../henon_free_group_kesten_random_walk_route_a/paper/main.pdf) |
+| HCS-C356 | The two-band QWZ pump has an exact all-mass direct-gap and occupied-line-bundle atlas: its lower-band Chern numbers, all four signed Dirac wall contributions including the double jump at `m=0`, and the sign-fixed filled-band adiabatic transported charge are explicit, while finite-rate and gapless boundaries are kept separate. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [QWZ--Thouless-pump package](../henon_qwz_thouless_chern_pump_route_a/) · [paper PDF](../henon_qwz_thouless_chern_pump_route_a/paper/main.pdf) |
+| HCS-C357 | The bilinear two-stiffness Hamiltonian oscillator is all-energy isochronous exactly when both one-sided frequencies are positive; it has an exact action and global seam-compatible `C^1` action--angle chart, identity period map, and a complete simple quantum spectrum characterized by one parabolic-cylinder interface Wronskian, with equal-frequency, zero-energy, flat-half-line and free faces explicit. | `(A0_FAIL,A1_PASS_ANALYTIC,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [bilinear-isochronous-oscillator package](../henon_bilinear_two_stiffness_isochronous_oscillator_route_a/) · [paper PDF](../henon_bilinear_two_stiffness_isochronous_oscillator_route_a/paper/main.pdf) |
+| HCS-C358 | The May--Leonard flow in the strict intransitive chamber has a complete interior trichotomy: convergence to coexistence below `a+b=2`, an exact logistic normalization with periodic critical leaves and elliptic period at equality, and above it an exceptional diagonal stable set plus attraction of every other interior orbit to the full oriented heteroclinic cycle with diverging residence times. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [May--Leonard package](../henon_may_leonard_cyclic_competition_route_a/) · [paper PDF](../henon_may_leonard_cyclic_competition_route_a/paper/main.pdf) |
+
+All five candidates are `ROUTE_A_REJECTED` and have Route B false.  Their
+owners are respectively a symmetric heavy-top Hamiltonian, an infinite
+nonamenable Cayley-tree random walk, a two-band Bloch pump, a nonsmooth
+isochronous Hamiltonian oscillator and a cyclic three-species population
+flow.  No target local datum, Euler factor, root number, automorphy object,
+target divisor/counting law or functional equation, target-zero match,
+Hilbert--Polya operator, or Route-B input is introduced.  Scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.  The frozen collision and theorem contracts
+are recorded in [IDEA_REPORT_C354_C358.md](../IDEA_REPORT_C354_C358.md) and
+[BATCH_PLAN_C354_C358.md](../BATCH_PLAN_C354_C358.md).
+
 ## HCS-C349--HCS-C353 additions (2026-09-03)
 
 Five independent cross-subtype candidates were frozen from baseline
