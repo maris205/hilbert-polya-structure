@@ -1,9 +1,11 @@
 # Recovery state — candidate batch after P196
 
-Checkpoint: 2026-09-05 UTC, five-seat freeze and P197 Round0.
-Status: **STAGE1_PASS / FIVE_SEATS_FROZEN / STAGE2_DRAFTING / HOLD_EXTERNAL**.
+Checkpoint: 2026-09-05 UTC, two post-freeze withdrawals and P197 Round1.
+Status: **THREE_RETAINED / TWO_SEATS_REOPENED / PAPER_REVIEWS_RUNNING / HOLD_EXTERNAL**.
 This file is a recovery index. FIVE_SEAT_FREEZE.md allocates the numbers and
-links the accepted candidate evidence; it is not a five-paper completion.
+links the historically accepted evidence; it is not current five-seat
+acceptance or completion. Later P198_REOPEN_ADJUDICATION.md and
+P201_REOPEN_ADJUDICATION.md control the two withdrawals.
 
 ## Evidence-backed stage state
 
@@ -11,10 +13,10 @@ links the accepted candidate evidence; it is not a five-paper completion.
 |---|---|---|
 | Problem anchor and standing authorization | present | root files in this batch |
 | Breadth and internal collision search | in progress | five lane breadth ledgers, four hostile-gate reports |
-| Five selected contracts / central freeze | PASS | FIVE_SEAT_FREEZE.md; all five accepted and formally numbered |
-| Paper drafting / Round 0 | in progress | P197 four-page Round0 frozen; P198–P201 drafting in parallel |
-| Paper Review A / Round 1 | not started | Stage-1 gates are not paper reviews |
-| Paper Review B / Round 2 | not started | no paper review/delta packages |
+| Five selected contracts / central freeze | REOPENED | historical freeze retained; P198/P201 later rejected |
+| Paper drafting / Round 0 | five historical drafts frozen | four pages each P197–P200, five pages P201; only three remain admitted |
+| Paper Review A / Round 1 | three accepted, two rejected | P197/P199/P200 A accepted/replayed/Round1; P198/P201 admission kills |
+| Paper Review B / Round 2 | pending/routing | P197 Round1 available for distinct B; no final Round2 yet |
 | Paper cold builds / visual QA / terminal manifests | not started | cannot precede manuscript/review freeze |
 
 Before this recovery file was added, the batch contained 50 non-cache files,
@@ -27,11 +29,11 @@ backs up unfinished research; it is not a five-paper completion commit.
 | Candidate | Package under scouting/ | Recorded verifier count | Gate state |
 |---|---|---:|---|
 | TCSD | word_poset_lane | 3,238,990 | SELECT in both stage1_hostile_gate_algebra.md and stage1_hostile_gate_graph.md |
-| CMM | graph_matching_lane | 2,508,857 | SELECT in stage1_hostile_gate_algebra.md |
+| CMM | graph_matching_lane | 2,508,857 | historical SELECT superseded by P198 manuscript contribution kill |
 | LZK | replacement_lane | 1,526,365 | KILL_COMPONENTWISE_P100_HF1_ERASURE; reviews/lzk_stage1_20260905/GATE_REPORT.md |
 | FOSP | replacement_stirling_lane | 71,614,800 | SELECT_INTERNAL_AMBER; accepted source delta in reviews/fosp_stage1_20260905/DELTA_ACCEPTANCE.md; root author replay pair saved |
 | LFAS | lfas_reentry_20260905 | 1,076,738 | SELECT_INTERNAL_AMBER; reviews/lfas_stage1_20260905/GATE_REPORT.md; not a new breadth row |
-| EPF | fifth_fresh_20260905/period_feedback_reentry | 3,366,093 | SELECT_INTERNAL_AMBER; independent gate accepted and root-replayed |
+| EPF | fifth_fresh_20260905/period_feedback_reentry | 3,366,093 | historical SELECT superseded by exact old OCL conjugacy; not a new system |
 
 Counts belong to the named verifier packages, some of which also test control
 systems. They are not counts of proved theorems, validated subclasses, or
@@ -74,11 +76,11 @@ not repaired during history consolidation, and cannot fill the fifth slot.
 
 | Paper | Directory under papers/ | Latest milestone |
 |---|---|---|
-| P197 TCSD | 197-ternary-cyclic-sign-difference | Round0 frozen:4pages,3,998,247 author assertions; paper Review A launched |
-| P198 CMM | 198-cyclic-monomer-matching | author drafting |
-| P199 FOSP | 199-first-one-stirling-splice | author drafting |
-| P200 LFAS | 200-lex-first-alternating-switch | author drafting |
-| P201 EPF | 201-eventual-period-feedback | author drafting |
+| P197 TCSD | 197-ternary-cyclic-sign-difference | Round1 frozen:4pages; A4,814,623assertions root-replayed, no-change accepted |
+| P198 CMM | 198-cyclic-monomer-matching | 4page Round0 preserved; Review A Critical1 contribution kill, seat reopened |
+| P199 FOSP | 199-first-one-stirling-splice | 4page Round1 frozen; A1,926,465assertions root-replayed, no-change accepted |
+| P200 LFAS | 200-lex-first-alternating-switch | 4page Round1 frozen; A3,823,696assertions, no-change accepted |
+| P201 EPF | 201-eventual-period-feedback | 5page Round0 preserved; exact old OCL conjugacy kills fresh-system admission |
 
 P197 source/PDF/verifier pins are in ROUND0_RECEIPT.md and frozen_round0/.
 The author fixed an overbroad small-size witness statement before freeze:
@@ -87,20 +89,23 @@ unchanged; a transparent candidate erratum preserves the old record.
 
 ## Next actions
 
-1. Finish the five author manuscripts/verification packages and freeze each
-   Round0 before its paper Review A. Stage1 gates count as zero paper reviews.
+1. Find two genuinely separated replacement candidates. Do not rescue P198
+   via restricted-erasure variants or P201 via relabelled old feedback maps.
+   Stage1 proof/source/mechanism gates are required before fresh numbering.
 2. Complete independent A/delta/Round1 and independent B/delta/Round2 for
-   every paper; preserve process separation, including LFAS proof authorship.
+   every retained paper; preserve process separation, including LFAS proof
+   authorship. Do not manufacture accepted rounds for the two rejected drafts.
 3. Run two physical source-only cold builds per paper, all-page visual QA,
    exact author/A/B replays and complete manifests before terminal PASS.
 4. Keep scoped Git checkpoints while preserving HOLD_EXTERNAL and the
    latest scientifically completed round P192–P196 until all five close.
 
-STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give51 documented
-new attempts:5selected,3reserve,43killed;16historical controls and8code-only
-WIP definitions are excluded. The51 prefreeze snapshot is retained. This
-denominator is not a count of51 validated dynamical subclasses.
+STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give50 documented
+current-new attempts:3selected,3reserve,44killed;17historical controls and
+8code-only WIP are excluded. EPF's exact historical conjugacy removes its
+new-attempt weight. Both51-prefreeze and51-five-seat snapshots are retained.
+New replacement attempts are separate until documented and reconciled.
 
-The WIP backup was pushed at 0f4d196a. The previous completed research commit remains
+The latest pushed drafting backup is42725133 (earlier WIP0f4d196a). The previous completed research commit remains
 `76146ba17eb15beccfc38e625427f8da726db919`. A later history checkpoint changes
 the backup state, not this research-completion milestone.

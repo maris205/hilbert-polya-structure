@@ -8,22 +8,22 @@ historical ledgers were left unchanged.
 
 ## Outcome and meaning of the denominator
 
-After the same-day nonlinear-lane completion delta, there are **51 documented current new-proposal records**, counted once per
+After the post-freeze exact-history correction, there are **50 documented current new-proposal records**, counted once per
 literal map after the exclusions below:
 
 | Current disposition | Count | Identifiers |
 |---|---:|---|
-| Stage-1 selected, internal amber | 5 | TCSD, CMM, FOSP, LFAS, EPF |
+| Retained selected, internal amber | 3 | TCSD, FOSP, LFAS |
 | Reserve | 3 | SDD, ZCI, LGB |
-| Killed current proposals | 43 | individual rows in the TSV |
-| Candidate gate pending | 0 | none after the documented five-seat freeze |
-| **Current documented proposal denominator** | **51** | **all 51 have a nonpending disposition** |
+| Killed current proposals | 44 | CMM now killed; other individual rows in the TSV |
+| Candidate gate pending in original index | 0 | new replacement scouts remain separately recorded until reconciliation |
+| **Current documented proposal denominator** | **50** | **all 50 have a nonpending disposition** |
 
-The TSV also retains **16 historical/restriction/conjugate/lift controls**
+The TSV also retains **17 historical/restriction/conjugate/lift controls**
 and **8 code-only WIP definitions**, each with denominator weight zero.
 It therefore contains **75 records**, not 75 new systems.
 
-The number 51 measures *documented candidate attempts*. It is **not** a
+The corrected number50 measures *documented candidate attempts*. It is **not** a
 count of proved systems, independently validated dynamical subclasses,
 novel mechanisms, eligible paper slots, completed papers, or externally
 original results. In particular, a current literal proposal may remain in
@@ -32,13 +32,27 @@ transfer. Its `KILL` disposition remains binding. Conversely, exact
 historical repeats and declared historical restrictions/lifts do not
 enlarge the current-new denominator merely because they were rerun.
 
-EPF is counted once. Its accepted independent gate, root replay, and
-`FIVE_SEAT_FREEZE.md` now authorize the selection disposition. This changes
-neither its literal definition nor the denominator. The preceding 51-row
-denominator snapshot, in which EPF was pending, is preserved byte-exactly in
-`breadth_snapshots/prefreeze51_20260905/` (75 total records including exclusions).
+EPF's historical SELECT and five-seat freeze were superseded by exact
+conjugacy to the old, explicitly killed OCL. It is now a historical control
+with weight0, not a fresh subclass. CMM was rejected for contribution
+collapse, without an exact full historical literal identification, so it
+keeps failed-current-attempt weight1. The distinction follows this index's
+pre-existing rule, not an arbitrary count adjustment. Both the pending-EPF
+51snapshot and the subsequent five-seat51snapshot are byte-preserved in
+breadth_snapshots/prefreeze51_20260905/ and
+breadth_snapshots/five_seat_freeze51_20260905/ respectively.
+
+The corrected75rows are50new-attempts+17historicalcontrols+8code-onlyWIP.
+See P198_REOPEN_ADJUDICATION.md and P201_REOPEN_ADJUDICATION.md for the
+all-size reductions. New replacement lanes will increase this denominator
+only after an explicit, source-backed reconciliation.
 
 ## Documented freeze milestone
+
+This section and arithmetic items1–7 below describe the historical
+51denominator freeze, not the later withdrawal state. The current delta
+is51−1=50, moving EPF from current-new to historical-conjugate control;
+CMM's selected-to-killed change leaves the denominator unchanged.
 
 After the independent EPF gate and root replay, `FIVE_SEAT_FREEZE.md`
 allocated five paper numbers. Only EPF's disposition and evidence pointer

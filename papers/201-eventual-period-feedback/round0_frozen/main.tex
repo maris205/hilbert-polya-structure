@@ -1,0 +1,394 @@
+\documentclass[a4paper,10pt]{amsart}
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=15
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,xcolor}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{hypertexnames=false,pdftitle={},pdfauthor={},pdfsubject={},pdfkeywords={},pdfcreator={},pdfproducer={}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\calX}{\mathcal X}
+\newcommand{\calL}{\mathcal L}
+\newcommand{\zero}{\boldsymbol 0}
+\title[Eventual-period feedback]{Sharp Rank Thresholds, Critical Extremizers,\newline and Fibres of Eventual-Period Feedback}
+\author{Anonymous}
+\date{}
+\keywords{finite dynamical system, endofunction, cycle length, rank, transient, rooted forest}
+\begin{document}
+\begin{abstract}
+For a function on the labels $0,\ldots,n-1$, replace its value at each
+vertex by the length of the eventual cycle reached from that vertex,
+minus one. Iterating this operator, rather than repeatedly composing a
+fixed function, always reaches the constant-zero function. We determine
+the sharp rank needed to have height at least $h$: the thresholds satisfy
+$N_2=2$ and $N_{h+1}=N_h(N_h+1)/2$. Every threshold is attained by an
+explicit permutation, and the resulting bound is sharp at every rank on
+every larger carrier. At a critical size $N_h$ we classify all deepest
+states and count them by a factorial recursion. Independently, a target's
+fibre factors over its level sets into functions with a prescribed cycle
+length. This gives every empty and nonempty fibre, the first image, and
+a unique largest fibre at zero of size $(n+1)^{n-1}$. The triangular
+sequence and all static cycle/forest enumeration are classical and fully
+subtracted. Complete checks through seven labels and larger critical
+witnesses provide bounded verification; external status remains
+\texttt{HOLD\_EXTERNAL}.
+\end{abstract}
+\maketitle
+
+\section{The labelled operator and its scope}
+Fix $n\ge1$ and put
+$\calX_n=\{f:\{0,\ldots,n-1\}\to\{0,\ldots,n-1\}\}$.
+For a vertex $i$, let $\ell_f(i)$ be the length of the unique directed
+cycle eventually reached by iterating $f$ from $i$. Loops have length
+one. Define the simultaneous update
+\begin{equation}\label{eq:update}
+ (P_nf)(i)=\ell_f(i)-1.
+\end{equation}
+Since $1\le\ell_f(i)\le n$, this is an autonomous self-map of
+$\calX_n$. Numerical labels are retained at every epoch; the output is
+used as the next function, not as an unlabelled statistic. Write
+$r(f)=|\im f|$ and denote the constant-zero function by $\zero$.
+The identity function is not $\zero$ unless $n=1$.
+
+Functional-graph decomposition into cycles with rooted trees is classical,
+as are labelled SET/CYC enumeration and Cayley forest counts
+\cite{FlajoletSedgewick2009}. Functional-graph reconstruction by direct
+products is a neighboring question: Dor\'e et al.\ use the word
+``feedback'' for a cyclic vertex's return period but study graph equations
+up to isomorphism \cite{DoreEtAl2022v2}. Equation~\eqref{eq:update}
+instead changes the numerical pointers and then recomputes their cycles.
+The distinction specifies the object; it does not establish priority.
+
+The threshold sequence $2,3,6,21,231,26796,\ldots$ is already known.
+Wagner explicitly gives the triangular recurrence in the enumeration of
+balanced trees and identifies the sequence A007501
+\cite[Section~4]{Wagner2014}. The sequence itself, generic rank descent,
+cycle finding and all static inverse counts receive zero contribution
+credit. The temporal content here is the sequence's sharp minimum-rank
+interpretation, its attained all-rank bound, and the full equality
+classification at critical sizes. The independent inverse mechanism is
+the invariant-block decomposition with strict maximal-fibre comparison.
+
+The internal comparison includes P137 rank feedback and P167 least-
+preimage feedback. A prior word/poset scouting lane excluded canonical
+statistics written back as states; that lane rule remains unchanged.
+The present note was separately selected under the central two-axis
+contract, not by silently waiving that rule. The source record preserves
+this scope decision and the missing P51--P56 manuscript caveat. No bounded
+search non-hit or computational success certifies novelty or ownership.
+
+\section{Cycle-size cost and the zero attractor}
+Let $\calL(f)$ be the set of distinct cycle lengths in the functional
+graph of $f$, and put $Q(s)=s(s+1)/2$.
+\begin{lemma}[rank packing]\label{lem:rank}
+For every $f\in\calX_n$,
+\begin{equation}\label{eq:rank}
+ r(P_nf)=|\calL(f)|,\qquad
+ r(f)\ge\sum_{d\in\calL(f)}d\ge Q(r(P_nf)).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Every cycle has a nonempty basin, so the distinct output values are
+exactly $d-1$ for $d\in\calL(f)$. Choose one cycle for each different
+length. Their vertices are disjoint and all belong to $\im f$, giving
+the first inequality. Distinct positive integers with $s$ elements sum
+to at least $1+\cdots+s=Q(s)$.
+\end{proof}
+
+\begin{proposition}\label{prop:zero}
+Every orbit of $P_n$ reaches $\zero$. It is the sole fixed and sole
+recurrent state, and every eventual period is one.
+\end{proposition}
+\begin{proof}
+If $r(P_nf)\ge2$, then $Q(r(P_nf))>r(P_nf)$, so
+Lemma~\ref{lem:rank} strictly decreases rank. If the output has rank one,
+it is constant. A constant function has only a loop as its cycle, and
+its next output is $\zero$. Strict decreases cannot continue indefinitely,
+and $P_n\zero=\zero$. No other recurrent state is possible.
+\end{proof}
+Define $h(f)=\min\{t\ge0:P_n^tf=\zero\}$, now finite by
+Proposition~\ref{prop:zero}.
+
+\begin{lemma}[core extension]\label{lem:core}
+Suppose $1\le k\le n$, $g:\{0,\ldots,n-1\}\to\{0,\ldots,k-1\}$,
+and $u=g|_{\{0,\ldots,k-1\}}$. For all $t\ge0$,
+\begin{equation}\label{eq:restriction}
+ (P_n^t g)|_{\{0,\ldots,k-1\}}=P_k^t u.
+\end{equation}
+For $t\ge1$, $P_n^t g=\zero$ if and only if $P_k^t u=\zero$.
+Thus $h(g)=h(u)$ if $h(u)\ge1$; if $u=\zero$, then $h(g)$ is zero or
+one according as $g=\zero$ or not.
+\end{lemma}
+\begin{proof}
+Every cycle of $g$ lies in the first $k$ labels, and every outside vertex
+enters that core in one arrow. All periods are at most $k$, so $P_ng$
+again maps into the core and restricts there to $P_ku$. Induction gives
+\eqref{eq:restriction} and preserves this core-mapping property at every
+epoch. A period-feedback vector is zero exactly when every cycle of its
+input is a loop. At every epoch the extension and its core restriction
+have precisely the same cycles. This proves the equivalence for $t\ge1$.
+If $u=\zero$, the equivalence says that $P_ng=\zero$; time zero must be
+checked separately, yielding the stated boundary.
+\end{proof}
+
+\section{Sharp height at every size and rank}
+Define
+\begin{equation}\label{eq:threshold}
+ N_2=2,\qquad N_{h+1}=Q(N_h)\quad(h\ge2).
+\end{equation}
+These are strictly increasing integers.
+\begin{theorem}[sharp rank hierarchy]\label{thm:height}
+For every $h\ge2$ and every $f$ on any finite carrier,
+\begin{equation}\label{eq:rankheight}
+ h(f)\ge h\quad\Longrightarrow\quad r(f)\ge N_h.
+\end{equation}
+There is a height-$h$ permutation on $N_h$ labels. Consequently the
+maximum height on $n$ labels is
+\begin{equation}\label{eq:maxheight}
+ H(1)=0,\qquad H(n)=\max\{h\ge2:N_h\le n\}\quad(n\ge2).
+\end{equation}
+More generally, for every $2\le r\le n$, the maximum among rank-$r$
+functions on $n$ labels is $H(r)$. At rank one, the maximum is one if
+$n\ge2$ and zero if $n=1$.
+\end{theorem}
+\begin{proof}
+A rank-one function is constant and has height at most one, which proves
+\eqref{eq:rankheight} at $h=2$. If $h(f)\ge h+1$, then
+$h(P_nf)\ge h$, so induction and \eqref{eq:rank} give
+$r(f)\ge Q(r(P_nf))\ge Q(N_h)=N_{h+1}$.
+
+To attain the bound, start with $f_2=(1,0)$. Its successive outputs are
+$(1,1)$ and $(0,0)$, so its height is two. Suppose $f_h$ is a height-$h$
+permutation on $k=N_h$ labels. For every $j=0,\ldots,k-1$, make a block
+$B_j$ containing the unique old label $f_h^{-1}(j)$ and exactly $j$
+fresh labels. These blocks partition $Q(k)=N_{h+1}$ labels. On each
+$B_j$ choose any single cycle and let $f_{h+1}$ be their disjoint union.
+Then $P f_{h+1}$ is constant $j$ on $B_j$, maps into the first $k$
+labels, and restricts there to $f_h$. Lemma~\ref{lem:core} shows that
+$h(P f_{h+1})=h$, so $h(f_{h+1})=h+1$.
+
+For an arbitrary $r\ge2$, let $h=H(r)$ and take this critical
+permutation on $k=N_h\le r$ labels. Extend it to a permutation on $r$
+labels by fixing the added labels. Its first period-feedback vector
+equals $P_k f_h$ on the core and zero outside. It maps into that core.
+Since $h(P_k f_h)=h-1\ge1$, Lemma~\ref{lem:core} gives height $h-1$
+for this vector, and height $h$ for the enlarged permutation. Extend
+further to $n\ge r$ by mapping all new vertices to zero. The new function
+has rank exactly $r$ and retains height $h$ by the same lemma.
+This proves the all-rank and all-size attainment statements. Finally,
+nonzero constant functions exist exactly when $n\ge2$ and have height
+one; the only state at $n=1$ is zero.
+\end{proof}
+
+\section{All deepest states at critical sizes}
+The equality statement in this section concerns $n=N_h$, not arbitrary
+sizes between two thresholds.
+\begin{theorem}[critical equality and census]\label{thm:critical}
+At size $N_h$, every height-$h$ function is a permutation. For $h\ge3$
+and $k=N_{h-1}$, these are exactly the permutations $f$ satisfying:
+\begin{enumerate}
+\item there is precisely one cycle of each length $1,2,\ldots,k$;
+\item $u=(P f)|_{\{0,\ldots,k-1\}}$ is a height-$(h-1)$ permutation
+      of those $k$ labels.
+\end{enumerate}
+If $D_h$ is their number, then
+\begin{equation}\label{eq:criticalcount}
+ D_2=1,\qquad D_h=D_{h-1}(N_h-N_{h-1})!\quad(h\ge3).
+\end{equation}
+In particular, $D_3=1$, $D_4=6$, and $D_5=6\cdot15!$.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:height} forces $r(f)=N_h$, hence $f$ is a permutation.
+For $h\ge3$, $h(Pf)=h-1$ and the entire chain
+\begin{equation}\label{eq:equalitychain}
+ N_h=r(f)\ge\sum_{d\in\calL(f)}d
+ \ge Q(r(Pf))\ge Q(N_{h-1})=N_h
+\end{equation}
+consists of equalities. The strictly increasing $Q$ forces $r(Pf)=k$.
+Equality in the distinct-positive-integer sum forces
+$\calL(f)=\{1,\ldots,k\}$. Equality in the first inequality says that
+the selected cycle of each length already exhausts all vertices.
+There are thus no additional cycles, so condition (1) holds and
+$\im(Pf)=\{0,\ldots,k-1\}$.
+
+By Lemma~\ref{lem:core}, the restriction $u$ has height $h-1$.
+Applying \eqref{eq:rankheight} on its $k=N_{h-1}$ labels forces full
+rank, so it is a permutation and condition (2) holds. Conversely,
+conditions (1) and (2) make $Pf$ a core extension of a height-$(h-1)$
+function. The same lemma gives $h(Pf)=h-1$, hence $h(f)=h$. This proves
+necessity and sufficiency, not just an extremal construction.
+
+Fix an eligible $u$. Its inverse image of $j$ prescribes one old label
+in the cycle block $B_j$ of length $j+1$. Allocate the $N_h-k$ fresh
+labels among these blocks in
+$(N_h-k)!/\prod_{j=0}^{k-1}j!$ ways. Each block has $j!$ cyclic orders.
+Their product cancels the denominator. Different allocations or cyclic
+orders give different permutations, while the equality characterization
+shows that every extremizer is obtained. The count per $u$ is therefore
+$(N_h-k)!$. At $N_2=2$ only the transposition has height two, establishing
+the initial condition and \eqref{eq:criticalcount}.
+\end{proof}
+
+\section{The full one-step inverse and its maximum}
+We isolate the classical enumerative input. Let $R(k,s)$ count forests
+on a fixed $k$-element label set directed toward a prescribed set of
+$s\ge1$ roots, with exactly one root per component. Then
+\begin{equation}\label{eq:forest}
+ R(k,s)=\begin{cases}1,&s=k,\\s k^{k-s-1},&s<k.\end{cases}
+\end{equation}
+A root-preserving Pr\"ufer code proves this formula directly. Repeatedly
+remove the least nonroot leaf and record its parent until only roots
+remain. There are $k-s$ recorded labels and the last is a root. Conversely,
+given any such sequence, remove the least remaining nonroot absent from
+the remaining sequence and join it to the next recorded parent. At each
+stage such a nonroot exists: the sequence has as many entries as remaining
+nonroots and at least one root entry, so it cannot contain all remaining
+nonroots. A deleted label cannot occur later in the sequence, and edges
+always lead to a still-present label. The reconstruction therefore yields
+a forest directed to the specified roots and reverses the encoding.
+There are $s k^{k-s-1}$ codes when $s<k$. This is standard labelled
+forest enumeration \cite{FlajoletSedgewick2009}, not a new count.
+
+For $d\ge1$, let $a_d(k)$ count functions on a prescribed $k$-element
+set whose every cycle has length $d$, with $a_d(0)=1$. For $k>0$,
+\begin{equation}\label{eq:ad}
+ a_d(k)=\sum_{c=1}^{\lfloor k/d\rfloor}
+ \frac{k!}{(k-dc)!\,d^c c!}\,R(k,dc).
+\end{equation}
+Indeed, choose the $dc$ cyclic labels, put $c$ disjoint $d$-cycles on
+them, and attach a forest with those prescribed roots. A nonempty such
+class exists exactly when $k\ge d$: use one $d$-cycle and attach all
+remaining vertices to a cyclic vertex. In EGF notation the same
+classical decomposition reads
+\begin{equation}\label{eq:egf}
+ \sum_{k\ge0}a_d(k)\frac{z^k}{k!}
+ =\exp\!\left(\frac{\mathcal T(z)^d}{d}\right),
+ \qquad\mathcal T(z)=z\exp(\mathcal T(z)).
+\end{equation}
+
+\begin{theorem}[every target fibre and image]\label{thm:inverse}
+For $g\in\calX_n$, write $B_j=g^{-1}(j)$ and $k_j=|B_j|$. Then
+\begin{equation}\label{eq:fibre}
+ |P_n^{-1}(g)|=\prod_{j=0}^{n-1}a_{j+1}(k_j).
+\end{equation}
+The target lies in $\im P_n$ exactly when each nonempty $B_j$ satisfies
+$k_j\ge j+1$. Consequently
+\begin{equation}\label{eq:imagecount}
+ |\im P_n|=\sum_{\substack{\sum_{j=0}^{n-1}k_j=n\\
+                   k_j=0\ \mathrm{or}\ k_j\ge j+1}}
+                \frac{n!}{\prod_{j=0}^{n-1}k_j!}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+An arrow $i\mapsto f(i)$ does not change the eventual cycle reached.
+Thus $P_nf=g$ implies that $f$ preserves every $B_j$ and all cycles of
+$f|_{B_j}$ have length $j+1$. Conversely these conditions force the
+period of every vertex in $B_j$ to be $j+1$, so they imply $P_nf=g$.
+The restrictions on distinct labelled blocks are independent, proving
+\eqref{eq:fibre}. The nonemptiness criterion for $a_d(k)$ gives the
+image condition. Each admissible vector of block sizes has
+$n!/\prod_j k_j!$ target words, proving \eqref{eq:imagecount}.
+\end{proof}
+
+\begin{theorem}[strict fibre extremality]\label{thm:maxfibre}
+For every $n\ge1$, the unique largest fibre is at $g=\zero$, with size
+\begin{equation}\label{eq:maxfibre}
+ |P_n^{-1}(\zero)|=(n+1)^{n-1}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Let $c_d(k)$ count connected functions on $k$ labels with sole cycle
+length $d$. For $k\ge d$, selecting the cyclic vertices and attaching
+their rooted forest gives
+\begin{equation}\label{eq:connected}
+ c_d(k)=(k)_d k^{k-d-1},\qquad c_1(k)=k^{k-1},
+\end{equation}
+where $(k)_d=k(k-1)\cdots(k-d+1)$ and the first expression at $k=d$
+is $(d-1)!$. Their ratio is $(k)_d/k^d\le1$, strictly less than one
+when $d\ge2$. For $k<d$, $c_d(k)=0$. Hence the EGF of connected
+$d$-cycle components is coefficientwise bounded by the rooted-tree EGF.
+Taking SET exponentials preserves this inequality: all coefficients are
+nonnegative and every product term is bounded term by term. Moreover,
+the coefficient at every $k\ge d\ge2$ is strictly smaller, already in
+the single-component term. Thus
+\begin{equation}\label{eq:comparison}
+ a_d(k)\le a_1(k),
+\end{equation}
+with strict inequality for every nonempty admissible block with $d\ge2$.
+
+A product of rooted-forest counts on two or more prescribed nonempty
+blocks is strictly smaller than the rooted-forest count on their union.
+Disjoint union is an injection, while a forest with one edge between two
+different blocks is excluded. Applying this fact and
+\eqref{eq:comparison} to \eqref{eq:fibre}, equality with the full
+rooted-forest count requires a single block and $d=1$. This is exactly
+$g=\zero$. Its fibre is the set of functions having only loops as
+cycles, equivalently rooted forests with a loop at each root. Adjoining
+one extra vertex joined to every root gives a bijection with trees on
+$n+1$ labels rooted at that extra vertex. Cayley's formula gives
+$(n+1)^{n-1}$. At $n=1$ this is one and the zero target is the only target.
+Unsupported targets have fibre zero and cannot be maximizers.
+\end{proof}
+
+\section{Exact controls and claim ceilings}
+\begin{table}[ht]
+\centering
+\caption{Complete endofunction boxes for the paper-local verifier.}
+\begin{tabular}{rrrrr}
+\toprule
+$n$ & States & First image & Maximum height & Maximum fibre\\
+\midrule
+1 & 1 & 1 & 0 & 1\\
+2 & 4 & 2 & 2 & 3\\
+3 & 27 & 6 & 3 & 16\\
+4 & 256 & 18 & 3 & 125\\
+5 & 3125 & 60 & 3 & 1296\\
+6 & 46656 & 240 & 4 & 16807\\
+7 & 823543 & 1085 & 4 & 262144\\
+\bottomrule
+\end{tabular}
+\end{table}
+The standard-library verifier computes the update by peeling noncyclic
+vertices and then propagating cycle periods backwards. Per-vertex orbit
+tracing supplies a second implementation on all inputs through six
+labels and a stated prefix of the seven-label box. The full source boxes
+check rank packing, all-rank maxima, actual target fibres and the image.
+Every target, including absent targets, is checked through six labels.
+Critical-size height counts are checked at sizes two, three and six.
+Recursive witnesses on $2,3,6,21,231,26796$ labels attain heights two
+through seven, with further leaf extensions. Two fresh processes are
+compared with the paper-local canonical transcript. All-size validity
+rests on the proofs, not on extrapolation from these boxes.
+
+No scalar rank evolution law is asserted: \eqref{eq:rank} is an
+inequality. Nor is there a closed formula for each individual height or
+an all-time target inverse atlas. The equality classification is complete
+only at the critical sizes $N_h$. For instance, the two functions
+$(0,1,1)$ and $(1,0,1)$ have the same value histogram, but their period
+feedback vectors are $(0,0,0)$ and $(1,1,1)$. This refutes a histogram
+factor only; it does not waive the earlier lane's statistic-writeback
+filter or establish novelty. Static formulas \eqref{eq:forest}--\eqref{eq:egf}
+are classical inputs, not separate discoveries. External status remains
+\texttt{OWNER\_AMBER / HOLD\_EXTERNAL}.
+
+\subsection*{Reproducibility and disclosure}
+The anonymous source, verifier, fixed transcript, source-scope audit and
+deterministic build instructions are provided with this internal note.
+No empirical or human-subject data are used. AI-assisted proof exploration,
+drafting and exact verification were used; author checks are not human
+expert review. Authorship, funding and conflicts are not inferred for
+this internal draft. The known triangular sequence and classical
+functional-graph counts remain attributed throughout.
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

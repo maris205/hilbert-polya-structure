@@ -12,5 +12,14 @@
 - Preserved exact P164 projection, bounded Fuks nonassociativity comparison,
   source-access limits, no external novelty clearance and HOLD_EXTERNAL.
 
-Paper Review A and Review B have not yet occurred. No accepted reviewer
-delta or final completion is implied by these author-side improvements.
+## Review A / Round1
+
+The independent review at docs/papers197_201_sequence/reviews/p197_a/
+accepted the frozen manuscript without changes. Root read its full evidence,
+checked all pins/manifests and independently replayed4,814,623assertions,
+including a fresh byte comparison. See ROUND1_RECEIPT.md. No new defects or
+author edits were invented to satisfy a repair quota.
+
+Round1 is byte-identical to Round0. The two small-boundary concerns above
+were fixed BEFORE Round0 and do not count as review-induced repairs.
+Review B and terminal QA remain outstanding; no final completion is claimed.
