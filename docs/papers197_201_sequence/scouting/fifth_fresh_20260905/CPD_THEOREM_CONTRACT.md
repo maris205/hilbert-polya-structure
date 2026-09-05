@@ -1,8 +1,12 @@
 # Circular parking displacement feedback (CPD)
 
-Status: **THEOREM SPIKE ONLY / OWNER_RED_AMBER / HOLD_EXTERNAL**.
-No paper allocation. A shallow temporal axis and the directly adjacent
-parking-outcome scout `D05_CPA` require a hostile decision before promotion.
+Status: **KILL_OWNER_THIN / HOLD_EXTERNAL**, following the independent gate
+`../../reviews/cpd_cspd_owner_gate_20260905/OWNER_TRANSFER_GATE.md` (relative
+to the batch root, `reviews/cpd_cspd_owner_gate_20260905/OWNER_TRANSFER_GATE.md`).
+No paper allocation. The original theorem spike and canonical verifier
+transcript are retained as correct negative evidence. Its shallow temporal
+axis and the directly adjacent parking-outcome scout `D05_CPA` do not clear
+the separate-contribution threshold; see `BREADTH_AND_KILL_LEDGER.md`.
 
 ## Literal map
 

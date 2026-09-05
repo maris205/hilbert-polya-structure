@@ -1,0 +1,245 @@
+           A FOURTH-ROOT-OF-SHIFT CORE AND EXACT FIBONACCI FIBRES
+                    FOR TERNARY CYCLIC SIGN DIFFERENCES
+
+
+                                                         ANONYMOUS
+
+
+            Abstract. We study the synchronous map D(x)i = sgn(xi+1 − xi ) on labelled ternary cyclic words.
+            Its recurrent set is exactly the local language D4 x = ρ2 x, where ρ is left shift. The maximal transient is
+            n − 1 at even length and n − 2 at odd length at least three, with a separate singleton boundary. Finite
+            local certificates prove attraction for every length, and de Bruijn traces enumerate all depths and cycles.
+            Independently, every one-step fibre is a comparison-walk trace. Contracting equality edges and cutting at
+            doubled sign runs gives an explicit product of Fibonacci numbers. This yields the sharp Lucas maximum
+            and all maximizing targets, including the additional ties at lengths two and three. The local rule, proof,
+            and exact verifier are distinguished from generic cellular-automaton and transfer-matrix methods. The
+            bounded source audit leaves this anonymous theorem note OWNER_AMBER / HOLD_EXTERNAL.
+
+
+
+
+                                        1. The map and its claim boundary
+      Fix n ≥ 1, use indices in Z/nZ, and put
+(1)                       Xn = {−1, 0, 1}n ,         D(x)i = sgn(xi+1 − xi ),            (ρx)i = xi+1 .
+All coordinates are read before the update. The tail τ (x) is the first entrance time into a periodic orbit,
+so periodic points have tail zero. For an open word w, let δw be its adjacent sign-difference word without
+wraparound; each application shortens the word by one.
+    Finite-alphabet cellular dynamics, shifts of finite type, trace enumeration, and Möbius inversion are
+standard tools [2, 3]. Fukś studies solvable ternary rules induced by associative operations [1]. Our
+operation d(a, b) = sgn(b − a) is not associative: d(d(−1, −1), 0) = 0 whereas d(−1, d(−1, 0)) = 1. Thus
+it is not an associative rule under a direct alphabet isomorphism or passage to the opposite operation.
+This argument does not exclude higher-block factors, time iterates, or other encodings.
+    The closest internal comparison is P164’s cyclic equality front: at its three-letter input slice, 1{xi =
+xi+1 } = 1{D(x)i = 0} exactly. We concede this first-step projection, not a dynamical conjugacy of
+the full ternary evolution to the subsequent binary equality dynamics. P90’s traffic rule, P117’s run
+reversal, P187’s positive valuation differences, P190’s support erosion, and P196’s one-step implication
+core are further occupied neighbors. Generic local erosion, cyclic traces and Fibonacci identities receive
+no contribution credit. The residual claim is the joint sharp temporal and target-resolved inverse theorem
+for (1); no novelty or priority certification is asserted.
+
+                                 2. The recurrent core and sharp attraction
+      Define
+(2)                                            Kn = {x ∈ Xn : D4 x = ρ2 x}.
+For a nonconstant cyclic word write R(x) for its longest constant run.
+Lemma 2.1 (finite local certificate). If w has length six and no equal adjacent letters, then δ 5 (w)0 =
+δ(w2 w3 )0 . If w has length seven and no constant factor of length three, then
+(3)                                                δ 6 (w)0 = δ 2 (w2 w3 w4 )0 .
+Consequently R(x) = 1 implies Dx ∈ Kn , and R(x) ≤ 2 implies D2 x ∈ Kn .
+Proof. These are finite local identities, independent of the cyclic length. Negation and reversal reduce
+the middle pair in the first identity to −0 or −+, whose symmetry orbits have sizes four and two. Each
+admits 16 outer extensions with no adjacent equality; direct successive comparison gives + in all 32
+representative extensions. This covers 96 = 3 · 25 words. Here and below − and + mean −1 and 1.
+   For the second identity, the complete representative calculation is
+
+      Key words and phrases. finite dynamical system, ternary cellular automaton, cyclic comparison, transient, inverse fibre.
+                                                                 1
+2                                               ANONYMOUS
+
+
+                     middle triple   orbit size outer extensions    both sides of (3)
+                        −−0                   4               48           +
+                        −−+                   4               48           +
+                        −0−                   2               64           −
+                         −00                  4               48           −
+                        −0+                   2               64            0
+                        −+−                   2               64           −
+                        −+0                   4               64           −
+                        0−0                   2               64           +
+
+For each row, range the four outer letters over the three-letter alphabet, discard constant triples, and
+successively replace adjacent pairs by their sign difference. The displayed output is constant on exactly
+the indicated extensions. The orbit-weighted count is 1,344, all length-seven words with no constant
+triple. Negation and reversal transform both sides identically, so the table proves the identity. Applying
+the identities at each cyclic position proves the conclusions, even when a window wraps repeatedly. The
+exact verifier reproduces the entire finite certificate, not just sample cyclic words.                  □
+
+Theorem 2.2 (core and parity-sharp tail). For every n ≥ 1, Kn is exactly the recurrent set. On this set,
+D−1 = ρ−2 D3 , and
+(4)                               τ (x) = min{t ≥ 0 : Dt+4 x = ρ2 Dt x}.
+For every nonconstant x, τ (x) ≤ R(x). Moreover
+                                              
+                                              1,
+                                                           n = 1,
+(5)                                max τ (x) = n − 1,       n even,
+                                  x∈Xn        
+                                                n − 2,      n ≥ 3 odd.
+                                              
+
+Every recurrent period divides 4n/ gcd(n, 2).
+Proof. A zero run of Dx of length q comes from q + 1 equal old letters. A nonzero constant run comes
+from a strictly monotone chain in three levels, so has length at most two. Thus
+(6)                                    R(Dx) ≤ max{R(x) − 1, 2}
+whenever the new word is nonconstant. If it is constant, it must be zero, because cyclic strict increase or
+decrease is impossible. Combining (6) with Lemma 2.1 gives entrance into Kn in at most R(x) steps. A
+constant word maps immediately to zero.
+   The map commutes with ρ, so Kn is invariant. Equation (2) makes ρ−2 D3 a two-sided inverse there.
+It is therefore a permutation of this finite set, and every orbit enters it. This proves the recurrence and
+pointwise-tail claims. On the core, D4n/ gcd(n,2) = ρ2n/ gcd(n,2) = id.
+   For sharpness, choose x = 0n−1 1. More generally, for a one-exception word an−1 b put s = sgn(b − a),
+where a ̸= b. Then Dx = 0n−2 s(−s). Write Altl (s) = (s, −s, s, . . .) and observe, for r ≥ 1, l ≥ 2, that
+(7)                                  D(0r Altl (s)) = 0r−1 Altl+1 (s).
+At even length, the fully alternating word is mapped to its negative and belongs to Kn . At odd length
+n = 2m + 1, the one-zero endpoint w = 0 Alt2m (s) has the four phases
+                   Dw = Alt2m+1 (s),                      D2 w = Alt2m (−s)0,
+                 D3 w = Alt2m (s)(−s),                    D4 w = Alt2m−1 (−s)0s = ρ2 w.
+
+The last two letters of D3 w agree; these formulas include m = 1.
+    None of the earlier phases z = 0r Altl (s) enters the core. For r ≥ 4, (D4 z)r−4 = s but (ρ2 z)r−4 = 0.
+At r = 3 the discrepancy is −s versus zero at coordinate zero. At r = 2 it is a nonzero sign versus zero at
+coordinate n − 2, since D2 z is fully alternating. At r = 1 and even n, D4 z is nonzero at n − 2, whereas
+ρ2 z is zero there. Thus the first entrance occurs at n − 1 for even n and n − 2 for odd n ≥ 3. The original
+one-exception word cannot already be recurrent unless its successor is; for n = 2, 3 directly checking the
+chosen 0n−1 1 supplies the one-step lower bound. Not every choice of a, b is sharp at these small lengths.
+    For the global upper bound, all nonconstant words except the one-exception form have R ≤ n − 2, and
+all constants have tail at most one. This proves (5) for n ≥ 2. At n = 1, both nonzero letters map to the
+unique fixed letter zero, giving the separate boundary.                                                   □
+                                                    CYCLIC SIGN DIFFERENCES                                       3
+
+
+                                 3. Depths and cycles as exact finite traces
+   For t ≥ 0 define the zero-one de Bruijn matrix At on words of length t + 4. An overlap edge associated
+with w = w0 · · · wt+4 is allowed exactly when
+(8)                                                δ t+4 (w)0 = δ t (w2 · · · wt+2 )0 .
+For p ≥ 1 define Cp on words of length p by allowing an edge w0 · · · wp exactly when δ p (w)0 = w0 .
+Theorem 3.1 (exact enumeration). For all n ≥ 1, t ≥ 0, p ≥ 1,
+(9)                                                 #{x : τ (x) ≤ t} = tr(Ant ),
+(10)                                                       # Fix(Dp ) = tr(Cpn ).
+The depth-t count is the difference of consecutive CDF values (with previous value zero at t = 0). The
+number of least-period-p cycles is
+                                           1X
+(11)                                             µ(p/d) tr(Cdn ),
+                                           p
+                                                           d|p
+
+where µ is the number-theoretic Möbius function.
+Proof. A closed overlap walk of length n uniquely specifies its labelled cyclic word, including when n is
+shorter than a window. The local constraint (8) is precisely the equality in (4) at every coordinate. The
+analogous statement for Cp is Dp x = x. This proves both traces; partitioning iterate-fixed points by least
+period and applying Möbius inversion proves (11).                                                        □
+
+      For explicit core counts, A0 has 81 vertices, 165 edges, and
+(12)                    det(zI − A0 ) = z 74 (z − 1)(z 3 − z 2 − 2z − 1)(z 3 + z 2 + 2z + 1).
+
+This is a finite exact matrix calculation from (8). A short reproducible certificate computes sj = tr(Aj0 )
+                                                                          Pj
+for 1 ≤ j ≤ 81, sets c0 = 1, and uses Newton’s identity jcj = − i=1 cj−i si . It gives (c1 , . . . , c7 ) =
+(−1, −1, −3, −2, 2, 3, 1) and c8 = · · · = c81 = 0, which is (12). Integer matrix multiplication and exact
+divisions suffice; the verifier checks all 81 coefficients, not a fitted short recurrence. Therefore, writing
+Rn = |Kn |,
+                                          (R1 , . . . , R7 ) = (1, 3, 13, 27, 41, 93, 225),
+                  Rn = Rn−1 + Rn−2 + 3Rn−3 + 2Rn−4 − 2Rn−5 − 3Rn−6 − Rn−7                              (n ≥ 8).
+The dimensions of At and Cp grow with t, p. These are exact finite algorithms, not efficient fixed-size
+formulas; the divisibility bound is not a claim that every divisor occurs.
+
+                            4. Every target fibre and its exact gap product
+   Index the three levels increasingly and set
+                                 
+                          0 1 1
+(13)              U = 0 0 1 ,           V = U T,                      M+ = U,           M− = V,   M0 = I.
+                          0 0 0
+Let F0 = 0, F1 = 1 and L0 = 2, L1 = 1 denote Fibonacci and Lucas numbers. For a target y, its strict
+skeleton is obtained by deleting all zeros, retaining cyclic order. Its length is denoted r.
+Theorem 4.1 (one-step inverse atlas). For every y ∈ Xn , including targets outside the image,
+(14)                                             |D−1 (y)| = tr(My0 · · · Myn−1 ).
+An all-zero target has fibre three. A nonempty skeleton is realizable exactly when it contains both signs
+and each cyclic sign run has length at most two. If all runs have length one, its fibre is Lr . Otherwise let
+q be its number of doubled runs, and gj the number of singleton runs between doubled runs j and j + 1,
+cyclically. Then
+                                          q
+                                          Y                               X
+                            −1
+(15)                   |D        (y)| =         Fgj +1 ,      r = 2q +         gj ,        q≡r   (mod 2).
+                                          j=1                              j
+4                                               ANONYMOUS
+
+
+Proof. The entry Ms (a, b) is the indicator of sgn(b − a) = s. Multiplication and trace count precisely all
+closed level assignments, proving (14). Identity matrices may be deleted. A single-sign skeleton gives a
+strictly triangular product with zero trace. Also U 2 = E13 , V 2 = E31 and U 3 = V 3 = 0, so a cyclic run
+of length at least three has zero fibre. A realizable nonconstant skeleton has an even number of runs,
+giving the parity relation in (15).
+   Each doubled run is rank one. For successive blocks uj vjT and intervening products Bj , their cyclic
+trace factors as                                           Y
+                          tr(u1 v1T B1 · · · uq vqT Bq ) =   vjT Bj uj+1 , uq+1 = u1 .
+                                                      j
+
+Starting at U 2 , a gap of g = 2a singleton runs contributes eT         a
+                                                                3 (V U ) e3 = F2a+1 ; a gap of g = 2a + 1
+             T
+contributes e3 (V U ) V e1 = F2a+2 . Indeed the lower-right block of (V U )a , for a ≥ 1, is
+                     a
+                                                           
+                                              F2a−1     F2a
+                                                              ;
+                                               F2a    F2a+1
+induction proves this identity, and at a = 0 both required scalars are one. Reversing the level order treats
+a starting V 2 . This proves (15), whose factors are positive, establishing sufficiency of the image condition.
+With no doubled run the even alternating product has trace tr((U V )r/2 ) = Fr−1 + Fr+1 = Lr .               □
+Theorem 4.2 (sharp maximum and all equality cases). For n ≥ 2, the maximal fibre is L2⌊n/2⌋ . For
+even n ≥ 4 exactly the two fully alternating targets maximize. For odd n ≥ 5 exactly the 2n targets with
+one zero and alternating remaining signs maximize. At n = 2, 3 the all-zero target also ties, giving three
+and seven maximizers respectively. At n = 1 the only image target is zero and its fibre is three.
+Proof. For a, b ≥ 1, Fa+b−1 = Fa Fb + Fa−1 Fb−1 ≥ Fa Fb . Thus a skeleton with q > 0 satisfies
+                                    Y
+                                       Fgj +1 ≤ F1+P gj = Fr−2q+1 .
+                                                          j
+                                      j
+
+If r is even, then q ≥ 2 and this is at most Fr−3 < Lr . Hence only alternating skeletons maximize at
+even strict length. If r ≥ 3 is odd, then q is odd: at q = 1 the value is exactly Fr−1 , while at q ≥ 3 it is
+at most Fr−5 < Fr−1 . We do not require each individual Fibonacci merge to be strict.
+   Optimize over 0 ≤ r ≤ n, remembering the all-zero value three and the impossible one-sign skeletons.
+At even n ≥ 4, Ln strictly dominates every smaller strict length. At odd n ≥ 5, Ln−1 strictly dominates
+Fn−1 and every smaller strict length. The asserted targets and small ties follow immediately.              □
+
+                                  5. Exact evidence and limitations
+   The paper-local verifier exhausts every source and every target for 1 ≤ n ≤ 12, including zero fibres, and
+compares the direct functional graph with the core, clocks, periods, gap formula and full maximizing sets.
+It separately reproduces both local certificates, all coefficients of (12), and the explicit witness junctions.
+The canonical transcript reports its exact assertion count and is replayed byte for byte. Finite carrier
+checks are counterexample pressure; the all-length proof uses the local lemmas and matrix identities.
+                     n image size recurrent states maximal tail maximal fibre
+                     1             1                   1                1               3
+                     2             3                   3                1               3
+                     3            13                  13                1               3
+                     8         2,203                459                 7              47
+                     9         5,773                949                 7              47
+                    10        15,123              2,093                 9             123
+                    11        39,601              4,533                 9             123
+                    12       103,681              9,621                11             322
+The inverse theorem is one-step only; no all-time target atlas is claimed. The source investigation is
+bounded, and missing historical manuscripts P51–P56 prevent a complete historical reread. Manuscript-
+level independent review and external ownership remain separate gates. This note is OWNER_AMBER /
+HOLD_EXTERNAL, not cleared for public circulation.
+
+                                                References
+[1] Henryk Fukś. Ternary cellular automata induced by semigroups of order 3 are solvable, 2026. URL
+    https://arxiv.org/abs/2601.00486v1.
+[2] Douglas Lind and Brian Marcus. An Introduction to Symbolic Dynamics and Coding. Cambridge
+    University Press, 1995. doi: 10.1017/CBO9780511626302.
+                                   CYCLIC SIGN DIFFERENCES                                    5
+
+
+[3] Richard P. Stanley. Enumerative Combinatorics, Volume 1. Cambridge University Press, second
+    edition, 2011. doi: 10.1017/CBO9781139058520.
+

@@ -1,8 +1,9 @@
 # Recovery state — candidate batch after P196
 
-Checkpoint: 2026-09-05 UTC, independent LZK/FOSP gates after history recovery.
-Status: **STAGE1_IN_PROGRESS / THREE_SELECTED / LFAS_GATE_PENDING / FIFTH_SEARCH / HOLD_EXTERNAL**.
-This file records work already on disk; it does not allocate paper numbers or approve theorem contracts.
+Checkpoint: 2026-09-05 UTC, five-seat freeze and P197 Round0.
+Status: **STAGE1_PASS / FIVE_SEATS_FROZEN / STAGE2_DRAFTING / HOLD_EXTERNAL**.
+This file is a recovery index. FIVE_SEAT_FREEZE.md allocates the numbers and
+links the accepted candidate evidence; it is not a five-paper completion.
 
 ## Evidence-backed stage state
 
@@ -10,8 +11,8 @@ This file records work already on disk; it does not allocate paper numbers or ap
 |---|---|---|
 | Problem anchor and standing authorization | present | root files in this batch |
 | Breadth and internal collision search | in progress | five lane breadth ledgers, four hostile-gate reports |
-| Five selected contracts / central freeze | absent | TCSD, CMM, FOSP selected; LFAS strengthened contract in independent gate; fifth search active |
-| Paper drafting / Round 0 | not started | no main.tex, bibliography, or PDF in the baseline snapshot |
+| Five selected contracts / central freeze | PASS | FIVE_SEAT_FREEZE.md; all five accepted and formally numbered |
+| Paper drafting / Round 0 | in progress | P197 four-page Round0 frozen; P198–P201 drafting in parallel |
 | Paper Review A / Round 1 | not started | Stage-1 gates are not paper reviews |
 | Paper Review B / Round 2 | not started | no paper review/delta packages |
 | Paper cold builds / visual QA / terminal manifests | not started | cannot precede manuscript/review freeze |
@@ -29,7 +30,8 @@ backs up unfinished research; it is not a five-paper completion commit.
 | CMM | graph_matching_lane | 2,508,857 | SELECT in stage1_hostile_gate_algebra.md |
 | LZK | replacement_lane | 1,526,365 | KILL_COMPONENTWISE_P100_HF1_ERASURE; reviews/lzk_stage1_20260905/GATE_REPORT.md |
 | FOSP | replacement_stirling_lane | 71,614,800 | SELECT_INTERNAL_AMBER; accepted source delta in reviews/fosp_stage1_20260905/DELTA_ACCEPTANCE.md; root author replay pair saved |
-| LFAS | lfas_reentry_20260905 | 1,076,738 | strengthened conservative contract; independent Stage-1 gate pending; not a new breadth row |
+| LFAS | lfas_reentry_20260905 | 1,076,738 | SELECT_INTERNAL_AMBER; reviews/lfas_stage1_20260905/GATE_REPORT.md; not a new breadth row |
+| EPF | fifth_fresh_20260905/period_feedback_reentry | 3,366,093 | SELECT_INTERNAL_AMBER; independent gate accepted and root-replayed |
 
 Counts belong to the named verifier packages, some of which also test control
 systems. They are not counts of proved theorems, validated subclasses, or
@@ -60,7 +62,7 @@ Candidate claims to re-read before drafting:
 | LZK | KILL_COMPONENTWISE_P100_HF1_ERASURE; all-time inverse atlas also occupied | reviews/lzk_stage1_20260905/GATE_REPORT.md |
 | CPD / CSPD | KILL_OWNER_TRANSFER / thin parking marginal; complete circular fibres transport to an already studied site-normalization class | reviews/cpd_cspd_owner_gate_20260905/OWNER_TRANSFER_GATE.md |
 | SDD | RESERVE_BOUNDED_CONTRACT: affine-stratum dynamics plus full-carrier fixed locus only | reviews/stage1_hostile_gate_graph.md |
-| LFAS | re-entry: all-size recurrent criterion and row-tail bound, sharp when s>=r+1; complete inverse and max-fibre equality now proved; awaiting independent gate | scouting/lfas_reentry_20260905/THEOREM_CONTRACT_AND_PROOF.md |
+| LFAS | SELECT on re-entry: all-size recurrent criterion and row-tail bound, sharp when s>=r+1; complete inverse and max-fibre equality accepted; narrow/square sharp conjecture excluded | reviews/lfas_stage1_20260905/GATE_REPORT.md |
 | Replacement algebra lane | no promotion; incomplete/broken control script | scouting/replacement_algebra_lane/verify_replacement_algebra_lane.py |
 
 The read-only history auditor ran the last script with bytecode disabled. It
@@ -68,21 +70,37 @@ failed in `one_runs()` at `i=0` with `ValueError: negative shift count`. There
 is no contract/canonical/ledger for that lane. The script is preserved as WIP,
 not repaired during history consolidation, and cannot fill the fifth slot.
 
+## Current numbered manuscript handoff
+
+| Paper | Directory under papers/ | Latest milestone |
+|---|---|---|
+| P197 TCSD | 197-ternary-cyclic-sign-difference | Round0 frozen:4pages,3,998,247 author assertions; paper Review A launched |
+| P198 CMM | 198-cyclic-monomer-matching | author drafting |
+| P199 FOSP | 199-first-one-stirling-splice | author drafting |
+| P200 LFAS | 200-lex-first-alternating-switch | author drafting |
+| P201 EPF | 201-eventual-period-feedback | author drafting |
+
+P197 source/PDF/verifier pins are in ROUND0_RECEIPT.md and frozen_round0/.
+The author fixed an overbroad small-size witness statement before freeze:
+use0^(n-1)1 at n2,3, not every a^(n-1)b. The maximum-tail theorem is
+unchanged; a transparent candidate erratum preserves the old record.
+
 ## Next actions
 
-1. Independently gate the strengthened LFAS contract. Its exact square/narrow
-   maximum tail remains CONJECTURE; a disproved symmetric proof attempt is
-   explicitly withdrawn. FOSP source delta/replays are closed; root TCSD/CMM
-   primary-source supplements are on disk, with CMM full-text access gaps.
-2. Fill the fifth separated seat. Period-length feedback is being developed
-   after a sharp triangular rank-threshold argument emerged; it is not yet a
-   frozen or selected contract. CPD/CSPD are killed, not fallback choices.
-   Fresh algebra/geometry scouting continues in nonlinear_fifth_20260905/.
-3. Consolidate a deduplicated current-batch breadth denominator. Do not add
-   lane row counts blindly; prior systems and repeated controls are excluded.
-4. Freeze exactly five eligible contracts, then assign P197–P201.
-5. Follow the existing two-review protocol through papers, QA and Git.
+1. Finish the five author manuscripts/verification packages and freeze each
+   Round0 before its paper Review A. Stage1 gates count as zero paper reviews.
+2. Complete independent A/delta/Round1 and independent B/delta/Round2 for
+   every paper; preserve process separation, including LFAS proof authorship.
+3. Run two physical source-only cold builds per paper, all-page visual QA,
+   exact author/A/B replays and complete manifests before terminal PASS.
+4. Keep scoped Git checkpoints while preserving HOLD_EXTERNAL and the
+   latest scientifically completed round P192–P196 until all five close.
 
-The previous completed research commit remains
+STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give51 documented
+new attempts:5selected,3reserve,43killed;16historical controls and8code-only
+WIP definitions are excluded. The51 prefreeze snapshot is retained. This
+denominator is not a count of51 validated dynamical subclasses.
+
+The WIP backup was pushed at 0f4d196a. The previous completed research commit remains
 `76146ba17eb15beccfc38e625427f8da726db919`. A later history checkpoint changes
 the backup state, not this research-completion milestone.

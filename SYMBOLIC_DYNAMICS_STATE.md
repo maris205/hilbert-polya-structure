@@ -7,8 +7,8 @@
 
 - 路线仍为 **Route A / Symbolic Dynamics**。当前批次寻找不同的有限自主确定性映射，重在系统广度和每篇明确的定理进展。
 - 最新完成批次是 **P192–P196**，研究提交为 `76146ba17eb15beccfc38e625427f8da726db919`。五篇完成两轮独立审查和终端 QA，仍为 `HOLD_EXTERNAL`。
-- 当前待完成批次标签为 **P197–P201**；停在 **Stage 1 候选筛选，未五席冻结、未正式编号、未写论文**。
-- TCSD、CMM、FOSP 已有 Stage-1 SELECT 记录；FOSP 的更近来源补充已验收。LZK 因精确归约到 P100/HF1 已淘汰。LFAS 强化定理包进入独立候选审查；第五席搜索中，未五席冻结。
+- 当前待完成批次为 **P197–P201**；已 **Stage 1 五席冻结并正式编号，进入 Stage 2 写稿**。P197 已有四页 Round0；其余四篇并行撰写，论文 A/B 与终端 QA 尚未完成。
+- TCSD、CMM、FOSP、LFAS、EPF 均已有 Stage-1 SELECT 记录，中央冻结为 `FIVE_SEAT_FREEZE.md`。FOSP 更近来源补充、LFAS 强化定理包及 EPF 来源/范围裁决已验收。LZK 仍因精确归约到 P100/HF1 淘汰，不占论文号。
 - 编号上限 196 不等于 196 篇已完成论文或 196 个动力学子类。实物盘点见下文。
 
 ## 用户长期要求
@@ -43,10 +43,10 @@
 | CMM | 一份 Stage-1 选择记录 | 后续五席冻结及论文 A/B 审查 |
 | LZK | 独立审查淘汰：P100/HF1 的分量化旧机制 | 保留淘汰证据，不分配论文号 |
 | FOSP | Stage-1 SELECT，来源补充验收、作者双重放均闭合 | 五席冻结后再写论文并作 A/B 审查 |
-| LFAS | 重入定理包就绪，独立候选 gate 进行中 | 全尺寸上界、宽矩阵 sharp、全逆像及纤维极值；窄/方阵 sharp 仍猜想 |
-| 第五席 | 空缺 | 周期长度反馈出现三角秩阈值证明线索；停车 CPD/CSPD 已因来源迁移淘汰 |
+| LFAS | Stage-1 SELECT，根进程重放闭合 | 全尺寸上界、宽矩阵 sharp、全逆像及纤维极值；窄/方阵 sharp 仍猜想 |
+| EPF / P201 | Stage-1 SELECT，根进程重放闭合 | 三角最小秩阈值、临界极值分类、全逆像；经典序列与森林公式零贡献，论文审查待做 |
 
-接续顺序：完成 LFAS 候选审查及第五席证明/查重 → 五席共同冻结及编号 → 五篇 Round 0 → Review A/修订/Round 1 → Review B/修订/Round 2 → 冷构建/视觉 QA/manifest → Git。最新候选淘汰/来源记录见当前批次 reviews/ 下 lzk_stage1_20260905、fosp_stage1_20260905、cpd_cspd_owner_gate_20260905。
+编号对应：P197 TCSD、P198 CMM、P199 FOSP、P200 LFAS、P201 EPF。接续顺序：完成五篇 Round0 → Review A/修订/Round1 → Review B/修订/Round2 → 冷构建/视觉 QA/manifest → Git。Stage1 去重口径为 51 次已落盘新候选尝试（5选中、3reserve、43淘汰），不是51个已验证子类。研究过程备份已推送至 0f4d196a；这不是五篇完成提交。
 
 ## 历史计数与路径
 
