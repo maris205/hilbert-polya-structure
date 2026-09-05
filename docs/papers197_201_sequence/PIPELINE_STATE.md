@@ -1,7 +1,7 @@
 # Recovery state — candidate batch after P196
 
-Checkpoint: 2026-09-05 UTC, history consolidation after a model switch.
-Status: **STAGE1_IN_PROGRESS / FOUR_CANDIDATE_PACKAGES / FIFTH_SLOT_OPEN / HOLD_EXTERNAL**.
+Checkpoint: 2026-09-05 UTC, independent LZK/FOSP gates after history recovery.
+Status: **STAGE1_IN_PROGRESS / THREE_SELECTED / LFAS_GATE_PENDING / FIFTH_SEARCH / HOLD_EXTERNAL**.
 This file records work already on disk; it does not allocate paper numbers or approve theorem contracts.
 
 ## Evidence-backed stage state
@@ -10,7 +10,7 @@ This file records work already on disk; it does not allocate paper numbers or ap
 |---|---|---|
 | Problem anchor and standing authorization | present | root files in this batch |
 | Breadth and internal collision search | in progress | five lane breadth ledgers, four hostile-gate reports |
-| Five selected contracts / central freeze | absent | TCSD and CMM selected; LZK/FOSP gates pending; fifth open |
+| Five selected contracts / central freeze | absent | TCSD, CMM, FOSP selected; LFAS strengthened contract in independent gate; fifth search active |
 | Paper drafting / Round 0 | not started | no main.tex, bibliography, or PDF in the baseline snapshot |
 | Paper Review A / Round 1 | not started | Stage-1 gates are not paper reviews |
 | Paper Review B / Round 2 | not started | no paper review/delta packages |
@@ -27,23 +27,27 @@ backs up unfinished research; it is not a five-paper completion commit.
 |---|---|---:|---|
 | TCSD | word_poset_lane | 3,238,990 | SELECT in both stage1_hostile_gate_algebra.md and stage1_hostile_gate_graph.md |
 | CMM | graph_matching_lane | 2,508,857 | SELECT in stage1_hostile_gate_algebra.md |
-| LZK | replacement_lane | 1,526,365 | theorem spike only; no independent Stage-1 gate located |
-| FOSP | replacement_stirling_lane | 71,614,800 | theorem spike only; no independent Stage-1 gate located |
+| LZK | replacement_lane | 1,526,365 | KILL_COMPONENTWISE_P100_HF1_ERASURE; reviews/lzk_stage1_20260905/GATE_REPORT.md |
+| FOSP | replacement_stirling_lane | 71,614,800 | SELECT_INTERNAL_AMBER; accepted source delta in reviews/fosp_stage1_20260905/DELTA_ACCEPTANCE.md; root author replay pair saved |
+| LFAS | lfas_reentry_20260905 | 1,076,738 | strengthened conservative contract; independent Stage-1 gate pending; not a new breadth row |
 
 Counts belong to the named verifier packages, some of which also test control
 systems. They are not counts of proved theorems, validated subclasses, or
 independent reviews. The history audit read their transcripts; it did not
 rerun all four verifiers. TCSD/LZK transcripts embed replay metadata; compare
 recorded stdout hashes with stdout, not blindly with the wrapper file hash.
-FOSP's two replays were reported in the earlier conversation but no separate
-replay receipt is on disk; rerun and save a receipt before manuscript freeze.
+FOSP's formerly missing durable author replay receipt is now
+scouting/replacement_stirling_lane/AUTHOR_REPLAY_RECEIPT_20260905.md:
+two fresh exact full-scope runs, stdout hash unchanged. This supersedes only
+the recovery task, not the preserved historical transcript.
 
 Candidate claims to re-read before drafting:
 
 - TCSD: `D(x)_i=sgn(x_(i+1)-x_i)`, core `D^4 x=rho^2 x`, parity-sharp attraction, trace counts and Lucas fibre maximum. Its P164 equality shadow must remain disclosed.
 - CMM: least-monomer alternating-arc update on odd-cycle matchings, deficiency clock, one recurrent cycle, triangular target fibres.
-- LZK: least-zero Kempe component switch on proper complete-bipartite colourings, support-side classification, depth census and all-time fibres; keep the separate q=2 boundary.
-- FOSP: delete the pair of 1s, decrement, reinsert nn at the former first-1 gap; largest nonleaf-label clock, ordered-star recurrence, depth CDF and root-child inverse fibres.
+- LZK: preserved but ineligible. All claimed dynamics and inverse laws transfer from P100 erasure plus isolated two-cycles; HF1 already contains the Boolean inverse atlas. Independent gate: 459,463 assertions per run, two matching runs, no mathematical defect but fatal contribution collapse.
+- FOSP: delete the pair of 1s, decrement, reinsert nn at the former first-1 gap; largest nonleaf-label clock, ordered-star recurrence, depth CDF and root-child inverse fibres. Exact factorization T=c∘J_1 identifies Brualdi–Dahl's left-join as the local owner. Read the new STAGE1_SOURCE_SUPPLEMENT.md before using any older firewall language. Independent gate: 1,496,779 assertions per run on n=0,…,7.
+- TCSD supplement: scouting/word_poset_lane/TCSD_EXACT_GAP_PROOF.md replaces implicit fibre gap-merging with an explicit Fibonacci product; paper review remains pending.
 
 ## Binding exclusions and reserves
 
@@ -53,8 +57,10 @@ Candidate claims to re-read before drafting:
 | LSPO | KILL_EXACT_INTERNAL_HISTORY | reviews/stage1_hostile_gate_lspo.md |
 | GBE | KILL_CANONICAL_BELLMAN_CLOSURE | reviews/stage1_hostile_gate_algebra.md |
 | SCT | KILL_LITERAL_REPEAT_RC13_CPT; this exact-history reason is stronger than the other gate's P188 resemblance | reviews/stage1_hostile_gate_algebra.md |
+| LZK | KILL_COMPONENTWISE_P100_HF1_ERASURE; all-time inverse atlas also occupied | reviews/lzk_stage1_20260905/GATE_REPORT.md |
+| CPD / CSPD | KILL_OWNER_TRANSFER / thin parking marginal; complete circular fibres transport to an already studied site-normalization class | reviews/cpd_cspd_owner_gate_20260905/OWNER_TRANSFER_GATE.md |
 | SDD | RESERVE_BOUNDED_CONTRACT: affine-stratum dynamics plus full-carrier fixed locus only | reviews/stage1_hostile_gate_graph.md |
-| LFAS | reserve: sharp all-size temporal/inverse contract not closed | scouting/replacement_lane/LFAS_RESERVE_CONTRACT.md |
+| LFAS | re-entry: all-size recurrent criterion and row-tail bound, sharp when s>=r+1; complete inverse and max-fibre equality now proved; awaiting independent gate | scouting/lfas_reentry_20260905/THEOREM_CONTRACT_AND_PROOF.md |
 | Replacement algebra lane | no promotion; incomplete/broken control script | scouting/replacement_algebra_lane/verify_replacement_algebra_lane.py |
 
 The read-only history auditor ran the last script with bytecode disabled. It
@@ -64,12 +70,14 @@ not repaired during history consolidation, and cannot fill the fifth slot.
 
 ## Next actions
 
-1. Independently gate LZK and FOSP against available on-disk P1--P196 papers
-   and kill ledgers, explicitly noting the missing historical interval.
-   Document bounded source/owner searches for all four candidates with actual
-   primary-source links; TCSD/CMM/LZK especially lack URL-based disk records.
-2. Find a fifth separated literal system. SDD/LFAS are not automatic fallback
-   promotions. Archived failed worker turns do not count as delivered work.
+1. Independently gate the strengthened LFAS contract. Its exact square/narrow
+   maximum tail remains CONJECTURE; a disproved symmetric proof attempt is
+   explicitly withdrawn. FOSP source delta/replays are closed; root TCSD/CMM
+   primary-source supplements are on disk, with CMM full-text access gaps.
+2. Fill the fifth separated seat. Period-length feedback is being developed
+   after a sharp triangular rank-threshold argument emerged; it is not yet a
+   frozen or selected contract. CPD/CSPD are killed, not fallback choices.
+   Fresh algebra/geometry scouting continues in nonlinear_fifth_20260905/.
 3. Consolidate a deduplicated current-batch breadth denominator. Do not add
    lane row counts blindly; prior systems and repeated controls are excluded.
 4. Freeze exactly five eligible contracts, then assign P197–P201.
