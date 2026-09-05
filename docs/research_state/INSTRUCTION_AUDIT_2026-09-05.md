@@ -78,9 +78,14 @@ New exact-byte claims must use raw bytes; no sealed auditor was modified.
 The routinely read recovery set (AGENTS + root state + batch state) changed
 from **18,608 to 9,105 bytes, a 51.07% reduction** at this audit checkpoint.
 AGENTS itself grew to 1,618 bytes to prevent misrouting; the reduction comes
-from removing obsolete repeated recovery prose. The new skill is 1,546 bytes;
+from removing obsolete repeated recovery prose. The initial skill was 1,546 bytes
+(1,596 after the reviewed path clarification);
 its workflow is loaded only for research execution. Historical documents were
 not deleted, and this byte count is not a token or latency measurement.
+After adding the verified completion/push links, the final recovery set is
+**9,608 bytes, 48.37% below the same 18,608-byte baseline**. Final local
+navigation validation passed 29 links; the scientific 57-pin check passed again
+after these documentation-only additions.
 
 Actual completed checks:
 
@@ -100,12 +105,26 @@ the two supplied raw audit hashes, and did not perform prohibited live writes,
 Git operations or scientific reruns. This is a bounded qualitative evaluation,
 not a test of host auto-selection or a model performance benchmark.
 
-The evaluated workflow SHA-256 is
+The first evaluated workflow SHA-256 is
 `6f9a5231b58b098d533203afca930e71cdd6e9b9ef101dba897029a8923feec0`.
 Mirror-specific new navigation also passed 39 link checks; all 57 scientific
 pins matched in the mirror as well. The old HP evaluator/proposal files were
 compared with the existing mirror and were byte-identical. No frozen science
 was changed by the configuration work.
+
+A final independent configuration review found three concrete clarifications:
+the mirror's old/new paper links, research-root versus skill-relative paths,
+and completed deductive proofs before candidate admission. All three were
+implemented. The same forward evaluator actually reread both revised files
+and appended a delta result: requests 1–3 unchanged; request 4 explicitly
+keeps a promising proof route in scouting until the claimed proofs exist.
+Final skill SHA is
+`1af30c2095702a0cc722e87389c8d515a4d668b22e85af25edb2fce02c10d22d`;
+final workflow SHA is
+`dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324`.
+The appended forward-test artifact SHA is
+`45d54545c45217ce417986853f073cd5c943c4baee5fbed6b1613672b850d70c`.
+Skill format validation also passed on these final bytes.
 
 ## Research handoff
 
@@ -114,4 +133,8 @@ The resumed batch is genuinely internally complete: P197/P199/P200/P202/P203,
 [actual final QA](../papers197_201_sequence/FINAL_QA_REPORT.md). This audit
 only refreshes recovery and instructions; it does not add papers, erase P198/
 P201 rejections or close P203's historical missing intermediate-code caveat.
-The final private Git synchronization receipt is written after an actual push.
+The [private Git synchronization receipt](../papers197_201_sequence/GIT_SYNC_RECEIPT.md)
+records the actual successful push and remote ref. Integration preserved a
+concurrent Hénon change set and shared-root routing instructions from the
+remote; those instructions were read and found compatible with this stream.
+They were not authored or audited as Hénon science by this task.

@@ -245,3 +245,82 @@ another full numerical audit merely because lifecycle prose changes.
 
 Only this report was created, using `apply_patch` inside the temporary
 evaluation workspace. All other operations were read-only local inspection.
+
+## Actual delta follow-up against revised instructions
+
+Date: 2026-09-05 UTC. This is a bounded local read/hash/path-resolution and
+scenario reassessment, not a mathematical audit or a fresh research execution.
+The earlier evaluation remains above as history; the clarifications below
+control where its wording could otherwise be read too loosely.
+
+### Current input identity and actions actually performed
+
+I reread the complete current `SKILL.md` and `WORKFLOW.md`, then independently
+reconsidered all four requests. The files evaluated in this follow-up are:
+
+| File | SHA-256 |
+| --- | --- |
+| `.agents/skills/symbolic-dynamics-research/SKILL.md` | `1af30c2095702a0cc722e87389c8d515a4d668b22e85af25edb2fce02c10d22d` |
+| `docs/research_state/WORKFLOW.md` | `dd6c109a695d8774b3dacff5fa9d76d28aa5e72e99b33c4abe0ac7afb1a26324` |
+| This report before appending this delta note | `854842ec7f80ef8526fe7f8da4aba6e48d77d9e268c57d925d1e32a4279e3841` |
+
+Local `sha256sum` commands exited 0. Rehashing the two supplied raw audit
+outputs also exited 0 and reproduced their exact hashes recorded above;
+neither raw output changed during this follow-up. That check does not assert
+that every live dependency was checked or that any mathematical work reran.
+
+The current skill distinguishes unqualified research paths, which use the
+data root, from Markdown links, which resolve relative to the skill file.
+I tested its workflow link with:
+
+```text
+realpath .agents/skills/symbolic-dynamics-research/../../../docs/research_state/WORKFLOW.md
+```
+
+The command exited 0 and returned
+`/root/autodl-tmp/tmp/symbolic-workflow-eval.wFizEt/docs/research_state/WORKFLOW.md`,
+the filesystem-resolved evaluation copy. Thus the link does not require
+inventing a workflow path in the real research root, and the two path rules
+are consistent for the files used here.
+
+The revised admission gate now requires deductive proofs of the claimed
+all-parameter results to survive the candidate gate before freezing a theorem
+contract. The previous wording referred to surviving proof routes. This is
+a substantive admission-timing clarification, not just a cosmetic edit.
+
+### Reassessment of each prior outcome
+
+| Request | Delta result | Current warranted outcome |
+| --- | --- | --- |
+| 1. Simple status | No change | Report the five archived internally completed papers and unresolved final handoff/sync evidence. No writes or new batch. The skill still excludes status-only research execution. |
+| 2. Deliver and synchronize this round | No change | Finish the recorded instruction-validation/handoff obligation, use dependency-appropriate checks and perform/verify only authorized scoped private synchronization in a real execution. No new scientific gate is established merely by the wording clarification. |
+| 3. Correct only status indices | No change | Small index-only correction, complete reuse-dependency and affected-manifest checks, no fabricated new mathematical/build/view run. Prior provenance conditions and external hold remain unchanged. |
+| 4. Candidate has only n≤6 results and no proof | Scope conclusion unchanged; admission wording tightened | The candidate cannot pass admission or freeze the theorem contract on a promising proof route alone. It stays in scouting until actual deductive proofs of every claimed all-parameter result and source/collision checks survive the gate. |
+
+In request 4, the earlier sentence “If there is a credible proof route, work
+on it within a bounded contract” must not be read as permission to freeze an
+admitted theorem contract. The precise revised action is:
+
+> 有可信证明思路时，可以继续做有界的候选研究并记录待证命题；但在所声称的一般参数结论已有实际演绎证明、且通过候选的来源与碰撞检查之前，不冻结正式定理合同，不录用为论文席位，也不进入 Round0 的正式冻结。只有 n≤6 的精确结果仍只是反例压力。
+
+This also means the independent second theorem axis needs its claimed
+all-parameter proof, not merely a proposed inverse/enumeration mechanism.
+Weak or duplicate systems are still replaced, not rescued by automatically
+raising n. The unidentified candidate still cannot automatically reopen any
+of the already accepted five papers; a specific new defect would reopen its
+affected acceptance. The current-batch handoff and no-automatic-new-round
+boundary remain exactly as in the initial evaluation.
+
+### Delta-test conclusion and unchanged limits
+
+The path clarification resolves how the workflow is reached; it changes no
+research authorization. The stricter explicit proof-before-admission wording
+requires the request-4 wording repair above, while confirming its original
+decision not to count finite experiments as a completed paper. Outcomes 1–3
+need no revision. None of these documentation changes supplies a final pushed
+completion receipt, proves the unnamed candidate, erases preserved failures,
+or authorizes external release.
+
+Only this delta note was appended, using `apply_patch` in the temporary
+evaluation workspace. No live research file, Git state, mathematical or build
+job, credential, or external service was touched in this follow-up.

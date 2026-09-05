@@ -41,13 +41,16 @@ records actual authors/reviewers and disclosed prior involvement.
 ## Next action and Git
 
 The [repository-instruction audit](../research_state/INSTRUCTION_AUDIT_2026-09-05.md)
-and independent four-request validation are complete. Synchronize the final QA,
-instructions and recovery changes, then record the actual pushed completion
-commit in GIT_SYNC_RECEIPT.md.
-No new scientific gate remains in this batch. The next requested five-paper
-round starts fresh scouting after P203 under [the current workflow](../research_state/WORKFLOW.md).
+and independent four-request validation, including the final delta test, are
+complete. Research completion commit `0236e3e7c14ab2df4e52be8278de75bf604804e1`
+and the scope/path clarification commit were pushed through normal merge
+`1b55fbda03edf20644454742caa73082eafac838`; the actual remote ref was verified.
+See [GIT_SYNC_RECEIPT.md](GIT_SYNC_RECEIPT.md). This batch has no unfinished
+scientific gate; the current turn completes its handoff. The next requested
+five-paper round starts fresh scouting after P203 under
+[the current workflow](../research_state/WORKFLOW.md).
 
-Latest verified pushed checkpoint at this recovery edit:
+Historical pre-completion checkpoint:
 `79e8729b5c25bbf3140482f7fd2ece7d32f09b79`, containing all five Round2 packages,
 ten reviews and final builds before the full audit completed. It is explicitly
 a pre-completion backup. [Fixed Git-object audit](qa/GIT_OBJECT_AUDIT_79E872_FINAL_ARTIFACTS.md)
