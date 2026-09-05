@@ -22,8 +22,11 @@ Review A: completed by batch197_fosp_gate, ACCEPTED_NO_CHANGE with Critical0,
 Major0, Minor0. The root read the actual package and freshly confirmed
 12,775,204 assertions and exact canonical byte agreement. ROUND1_RECEIPT.md
 documents the accepted delta and physical unchanged Round1 freeze.
-Review B: in progress by root on that exact Round1. No B finding census,
-accepted delta or Round2 is yet claimed.
+Review B: root accepted unchanged on that exact Round1, Critical0/Major0/
+Minor0. The full rederivation, fresh primary-source audit, cumulative-flux
+and composition-power verifier pair, new cold build and all-page review
+are archived. ROUND2_RECEIPT.md records the physical unchanged freeze;
+terminal QA follows separately.
 Stage1 gate and author replay are not counted as either review.
 No review score, blind procedure, external MCP response, or cross-model
 verification was fabricated. The required process-separated reviews

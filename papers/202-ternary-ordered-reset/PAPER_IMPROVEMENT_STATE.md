@@ -1,6 +1,6 @@
 # P202 manuscript-loop recovery
 
-ROUND1_FROZEN / REVIEW_B_IN_PROGRESS / OWNER_AMBER / HOLD_EXTERNAL.
+INDIVIDUAL_TERMINAL_PASS / ROUND2_FROZEN / OWNER_AMBER / HOLD_EXTERNAL.
 
 Paper writer: batch197_lzk_gate. Original OR candidate author:
 batch197_fifth_scout. Both are ineligible for independent P202 paper A/B.
@@ -9,8 +9,14 @@ review. Paper-local code reuse is author verification only.
 
 Review A=batch197_fosp_gate, ACCEPTED_NO_CHANGE with zero open findings;
 root replay and physical freeze are documented in ROUND1_RECEIPT.md.
-Review B=root is now in progress on frozen_round1. Its accepted delta,
-Round2 freeze and terminal QA remain required. No publication or five-paper
+Review B=root accepted unchanged after full proof/source work, two fresh
+8456463-assertion runs and a new cold build/all-page view. ROUND2_RECEIPT.md
+records the physical freeze. Two final source-only builds, all4 final page
+views, evidence audit and complete-package gate passed. The actual latter
+receipt is qa/P202_TERMINAL_AUDIT_1.txt under docs/papers197_201_sequence,
+with1941 mechanical assertions and each author/A/B canonical replayed twice.
+FINAL_QA.md records the supporting evidence. A final refreshed-manifest
+audit follows this lifecycle update. No publication or five-paper
 completion claim is made. Parent alone updates central ledgers and Git.
 
 The paper-writing skill's external Codex-review MCP was unavailable in

@@ -1,7 +1,9 @@
 # P202 — Two Recurrent Languages and Sharp Tails for a Ternary Reset Rule
 
-Round0 author package. OWNER_AMBER / HOLD_EXTERNAL. Independent manuscript
-Review A and B have not started. This is a newly allocated replacement
+Current package: Round2 with both actual manuscript reviews accepted unchanged,
+two final cold builds and all-page views passed; complete-package audit is
+recorded separately under the batch QA directory. OWNER_AMBER / HOLD_EXTERNAL.
+The original Round0 author record is preserved in frozen_round0/. This is replacement
 P202, not a replacement of the contents or identity of killed P198/P201.
 
 The four-page anonymous main proves the full recurrent colour/rotation
@@ -25,8 +27,9 @@ SHA256SUMS is a nonself recursive inventory. PINNED_STAGE1_INPUTS.sha256
 uses workspace-root-relative paths for upstream provenance only; the
 paper's proof, code and build require no upstream imports.
 
-The code adapts this writer's earlier Stage1 checker. Its two new runs
-are author controls, not paper reviews. The original OR candidate author
-and this writer cannot supply independent P202 A/B. Root controls the
-later review sequence, central ledgers and Git; this author package does
-not mark the five-paper batch complete.
+The code adapts the writer's earlier Stage1 checker; those runs remain
+author controls, not paper reviews. Paper A is by batch197_fosp_gate and
+B by root, neither a P202 proof author. ROUND1_RECEIPT.md, ROUND2_RECEIPT.md
+and FINAL_QA.md document actual accepted evidence. Original candidate author
+and paper writer are not independent P202 reviewers. The current lifecycle
+is in PAPER_IMPROVEMENT_STATE.md; this package alone does not close the batch.

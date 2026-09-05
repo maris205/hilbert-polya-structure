@@ -8,20 +8,20 @@ historical ledgers were left unchanged.
 
 ## Outcome and meaning of the denominator
 
-After the post-freeze exact-history correction and two replacement reconciliations, there are **57 documented current new-proposal records**, counted once per
+After the post-freeze exact-history corrections and three replacement reconciliations, there are **57 documented current new-proposal records**, counted once per
 literal map after the exclusions below:
 
 | Current disposition | Count | Identifiers |
 |---|---:|---|
-| Retained selected, internal amber | 4 | TCSD, FOSP, LFAS, OR (P202) |
+| Retained selected, internal amber | 5 | TCSD, FOSP, LFAS, OR (P202), MCT (P203) |
 | Reserve | 3 | SDD, ZCI, ND1 |
-| Killed current proposals | 50 | includes LGB re-entry and D2G/CCW; individual rows in the TSV |
+| Killed current proposals | 49 | includes LGB re-entry and D2G/CCW; exact old LFCTR moved to historical controls |
 | Candidate gate pending in original index | 0 | new replacement scouts remain separately recorded until reconciliation |
 | **Current documented proposal denominator** | **57** | **all 57 have a nonpending disposition** |
 
-The TSV also retains **17 historical/restriction/conjugate/lift controls**
+The TSV also retains **18 historical/restriction/conjugate/lift controls**
 and **8 code-only WIP definitions**, each with denominator weight zero.
-It therefore contains **82 records**, not 82 new systems.
+It therefore contains **83 records**, not 83 new systems.
 
 The corrected number57 measures *documented candidate attempts*. It is **not** a
 count of proved systems, independently validated dynamical subclasses,
@@ -77,7 +77,31 @@ does not assert novelty or a new eligible subclass. No unproved exact
 internal full-literal identity is invented merely to reclassify them.
 LGB's unchanged reserve re-entry is killed for thin contribution, without
 an extra literal row. Thus 54+3=57:4selected+3reserve+50killed. The total
-is82 with17 historical controls and8 code-only WIP. Active MCT is excluded.
+is82 with17 historical controls and8 code-only WIP. MCT was then excluded.
+
+### Final replacement reconciliation
+
+The exact preceding57-attempt TSV and reconciliation are preserved under
+breadth_snapshots/second_replacement57_20260905/, with both hashes checked.
+MCT_ROOT_ADJUDICATION.md records full proof reads, current manifests/pins,
+three actual fresh root replays and the bounded, unrepaired historical
+intermediate-code pin defect. Add MCT once as SELECT_INTERNAL_AMBER, with
+freshP203 authorized for authoring, not a completed paper. Thus57+1=58:
+5selected+3reserve+50killed, and83 total records before the correction below. Q01 controls and MCT
+size/colour variants do not add rows. Candidate admission is not manuscript
+Review A/B, external originality clearance, or five-paper completion.
+
+### Exact LFCTR history correction at the MCT milestone
+
+Independent read-only review exposed LFCTR as literally old Q01, including
+its lexleast cyclic-triangle scheduler. Root reread both definitions and both
+implementations: the identity on labelled tournaments intertwines the complete
+maps for every n, including empty triple loops. The earlier 'changed scheduler'
+note was incorrect. LFCTR_HISTORY_COUNT_CORRECTION.md controls; the provisional58
+index is preserved in breadth_snapshots/mct_provisional58_20260905/.
+Move the same LFCTR row to historical weight0: **57=5selected+3reserve+49killed**,
+with **18history+8WIP**, still **83 records**. This57 has a different composition
+from the older second-replacement57 snapshot. No MCT claim or paper gate changes.
 
 ## Documented freeze milestone
 
@@ -166,8 +190,8 @@ editing the original evidence.
   splice-orientation difference from MCJ, while identifying a fatal
   cut–join/flattening theorem transfer. FCM is therefore retained as a
   counted failed literal proposal, not falsely called an exact historical
-  literal replay. The same distinction applies to LFCTR's deterministic
-  schedule versus ownership of its standard triangle-reversal move.
+  literal replay. LFCTR is a different case: the later exact-Q01 correction establishes
+  the same full old scheduler too, so LFCTR now has historical weight0.
 - **UPR versus U2S versus EPP:** UPR uses exactly one unordered distinct
   binary-vector pair; U2S uses exactly one ordered pair over an odd cyclic
   group; EPP uses odd parity of unordered binary-vector pairs. These are
@@ -239,11 +263,17 @@ definition sources, disposition sources, and audit notes. Source paths
 are relative to `docs/papers197_201_sequence/`; multiple sources are
 separated by `|`.
 
-Validation performed: all 75 canonical IDs unique; every row has ten TSV
+Historical initial validation: all 75 canonical IDs unique; every row has ten TSV
 fields; every referenced source file exists; weighted counts reproduce
 51 = 4 + 3 + 43 + 1. The audit did not rerun mathematical verifiers or
 change any theorem, source, kill, or author package. No Git mutation was
 performed by this subtask.
+
+Current root validation at the corrected MCT milestone:83 unique IDs,
+all ten-field rows,57 weighted attempts=5selected+3reserve+49killed,
+18 historical controls and8 code-only WIP. All current definition/disposition
+source paths were checked for existence after removing section fragments.
+These later checks supersede the historical arithmetic above, not its snapshot.
 
 Recount with:
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Terminal mechanical audit for Route-A papers P197--P201.
+"""Terminal mechanical audit for the retained Route-A five-paper batch.
 
 The audit checks frozen artifacts, exact replays, source-only builds, review
 package separation surfaces, and lifecycle labels.  It cannot certify a
@@ -22,6 +22,7 @@ PAPERS = {
     197: ROOT / "papers" / "197-ternary-cyclic-sign-difference",
     199: ROOT / "papers" / "199-first-one-stirling-splice",
     200: ROOT / "papers" / "200-lex-first-alternating-switch",
+    202: ROOT / "papers" / "202-ternary-ordered-reset",
 }
 AUTHOR = {number: (directory / "code/verify.py", directory / "code/CANONICAL.txt")
           for number, directory in PAPERS.items()}
@@ -32,6 +33,7 @@ REQUIRED_PAPER = (
     "main.tex", "references.bib", "main.pdf", "main_round0_original.pdf",
     "main_round1.pdf", "main_round2.pdf", "code/verify.py",
     "code/CANONICAL.txt", "SHA256SUMS", "qa_final/SHA256SUMS",
+    "ROUND1_RECEIPT.md", "ROUND2_RECEIPT.md",
 )
 ASSERTIONS = 0
 
@@ -87,6 +89,116 @@ def parse_manifest(directory: Path, filename: str = "SHA256SUMS") -> set[str]:
     return set(names)
 
 
+def recursive_files(directory: Path) -> set[str]:
+    check(directory.is_dir() and not directory.is_symlink(),
+          f"missing/symlink coverage directory: {directory}")
+    result: set[str] = set()
+    for path in directory.rglob("*"):
+        check(not path.is_symlink(), f"symlink in covered tree: {path}")
+        check(path.is_file() or path.is_dir(), f"nonregular artifact: {path}")
+        if path.is_file():
+            result.add(path.relative_to(directory).as_posix())
+    return result
+
+
+def complete_manifest(directory: Path, filename: str = "SHA256SUMS") -> set[str]:
+    names = parse_manifest(directory, filename)
+    payload = recursive_files(directory) - {filename}
+    check(names == payload,
+          f"recursive manifest coverage mismatch: {directory / filename}; "
+          f"unlisted={sorted(payload - names)}, extra={sorted(names - payload)}")
+    return names
+
+
+def review_manifest_gate(directory: Path) -> set[str]:
+    names = parse_manifest(directory)
+    payload = {path.name for path in directory.iterdir()
+               if path.is_file() and path.name != "SHA256SUMS"}
+    check({name for name in names if "/" not in name} == payload,
+          f"review top-level manifest coverage mismatch: {directory}")
+    covered = names | {"SHA256SUMS"}
+    for nested in names - payload:
+        check(Path(nested).name == "SHA256SUMS",
+              f"unexpected nested review manifest payload: {directory / nested}")
+        parent = Path(nested).parent
+        child_names = complete_manifest(directory / parent)
+        covered.update((parent / name).as_posix() for name in child_names)
+    # Older accepted reviews keep the QA list at top level, with paths
+    # relative to the review directory. Hashing the list alone is not QA.
+    if "QA_SHA256SUMS" in names:
+        covered.update(parse_manifest(directory, "QA_SHA256SUMS"))
+    actual = recursive_files(directory)
+    check(covered == actual,
+          f"recursive review coverage mismatch: {directory}; "
+          f"unlisted={sorted(actual - covered)}, extra={sorted(covered - actual)}")
+    return names
+
+
+def frozen_round_gate(number: int, directory: Path) -> None:
+    core = ("main.tex", "references.bib", "code/verify.py", "code/CANONICAL.txt")
+    # Preserve the historical four-file freezes; their PDFs are the
+    # separately pinned main_round*.pdf files, not invented new snapshots.
+    legacy_core_only = {(197, 0), (197, 1), (197, 2),
+                        (199, 1), (199, 2), (200, 1), (200, 2)}
+    snapshots: list[Path] = []
+    pdfs: list[Path] = []
+    for stage in range(3):
+        name = ("round0_snapshot" if stage == 0 and number in (199, 200)
+                else f"frozen_round{stage}")
+        frozen = directory / name
+        check(frozen.is_dir() and not frozen.is_symlink(),
+              f"P{number} missing frozen round {stage}: {frozen}")
+        for relative in core:
+            path = frozen / relative
+            check(path.is_file() and not path.is_symlink(),
+                  f"P{number} frozen round {stage} lacks {relative}")
+        pdf = directory / ("main_round0_original.pdf" if stage == 0
+                           else f"main_round{stage}.pdf")
+        check(pdf.is_file() and not pdf.is_symlink(), f"missing round PDF: {pdf}")
+        if (number, stage) not in legacy_core_only:
+            check((frozen / "SHA256SUMS").is_file() and (frozen / "main.pdf").is_file(),
+                  f"P{number} round {stage} lacks full freeze manifest/PDF")
+        if (frozen / "SHA256SUMS").exists():
+            complete_manifest(frozen)
+        if (frozen / "main.pdf").exists():
+            check(sha(frozen / "main.pdf") == sha(pdf),
+                  f"P{number} round {stage} snapshot/PDF disagreement")
+        snapshots.append(frozen)
+        pdfs.append(pdf)
+    for relative in core:
+        check(sha(snapshots[2] / relative) == sha(directory / relative),
+              f"P{number} live/Round2 disagreement: {relative}")
+    check(sha(pdfs[2]) == sha(directory / "main.pdf"),
+          f"P{number} live/Round2 PDF disagreement")
+    # Only an explicitly accepted no-change transition requires historical
+    # stages to equal each other. A real accepted repair must not be erased.
+    for stage, suffix in ((1, "a"), (2, "b")):
+        review = SEQ / "reviews" / f"p{number}_{suffix}"
+        deltas = [review / name for name in ("DELTA.md", "DELTA_ACCEPTANCE.md")
+                  if (review / name).is_file()]
+        check(len(deltas) == 1, f"P{number}-{suffix} freeze delta cardinality")
+        if re.search(r"\bACCEPTED_NO_CHANGE\b", deltas[0].read_text(encoding="utf-8")):
+            for relative in core:
+                check(sha(snapshots[stage-1] / relative) == sha(snapshots[stage] / relative),
+                      f"P{number} no-change round {stage} drift: {relative}")
+            check(sha(pdfs[stage-1]) == sha(pdfs[stage]),
+                  f"P{number} no-change round {stage} PDF drift")
+
+
+def global_manifest_gate() -> None:
+    check(len(PAPERS) == 5, "global manifests require exactly five admitted papers")
+    for filename, relative in (("CANONICAL_PDF_MANIFEST.sha256", "main_round2.pdf"),
+                               ("PACKAGE_MANIFESTS.sha256", "SHA256SUMS")):
+        expected = {(directory / relative).relative_to(ROOT).as_posix()
+                    for directory in PAPERS.values()}
+        check(len(expected) == 5, f"global manifest requires five distinct targets: {filename}")
+        manifest = (SEQ / filename).relative_to(ROOT).as_posix()
+        actual = parse_manifest(ROOT, manifest)
+        check(actual == expected,
+              f"global manifest target mismatch: {filename}; "
+              f"missing={sorted(expected - actual)}, extra={sorted(actual - expected)}")
+
+
 def check_pins(path: Path) -> int:
     check(path.is_file() and not path.is_symlink(), f"missing pins: {path}")
     count = 0
@@ -128,7 +240,7 @@ def replay(verifier: Path, canonical: Path, label: str) -> int:
     second = command([sys.executable, "-B", str(verifier)], cwd=ROOT)
     check(first == second == expected, f"noncanonical replay: {label}")
     values = re.findall(
-        r"(?im)(?:^|[ \t])(?:(?:exact_)?assertions|checks)\s*=\s*([0-9]+)(?=$|[ \t])", expected
+        r"(?im)(?:^|[ \t])(?:(?:exact_)?assertions|checks)(?:\s*=\s*|[ \t]+)([0-9]+)(?=$|[ \t])", expected
     )
     check(len(values) == 1, f"{label} must disclose one assertion/check total")
     structured_pass = re.search(
@@ -142,6 +254,15 @@ def replay(verifier: Path, canonical: Path, label: str) -> int:
         r"PASS_BOUNDED_CONTROL_NOT_EXTERNAL_NOVELTY_CLEARANCE|"
         r"PASS_BOUNDED_CONTROL_NOT_NOVELTY_OR_PAPER_REVIEW)\s*$", expected
     ) is not None
+    # P202's unchanged Round0 author control has a role-specific status.
+    # Admit only that exact frozen code/transcript pair, never a review
+    # status or an arbitrary PASS_* suffix. A/B remain separate gates.
+    p202_author_control = (
+        label == "P202 author"
+        and sha(verifier) == "42c79767025b5da710aaccd8be170df964a14a65427470dd814cf3ce4081b850"
+        and sha(canonical) == "a971574926784fa43f27df88b58979ba6724a11c6070a3484c7641ea56fd6446"
+        and re.search(r"(?m)^status=PASS_AUTHOR_CONTROL$", expected) is not None
+    )
     # Immutable P197-B uses this explicit bounded-review success line.
     # Its exact zero-open census is in the separately hashed full report;
     # review_gate validates that report when stdout has no census field.
@@ -150,7 +271,7 @@ def replay(verifier: Path, canonical: Path, label: str) -> int:
         r"PASS / INDEPENDENT_REVIEW_B_CONTROL / NO_CROSS_MODEL_CLAIM / HOLD_EXTERNAL)$",
         expected,
     ) is not None
-    check(structured_pass or legacy_author_pass or legacy_review_pass,
+    check(structured_pass or legacy_author_pass or p202_author_control or legacy_review_pass,
           f"{label} lacks an accepted status")
     return int(values[0])
 
@@ -180,20 +301,24 @@ def review_gate(number: int, suffix: str) -> int:
     directory = SEQ / "reviews" / f"p{number}_{suffix}"
     check(directory.is_dir() and not directory.is_symlink(),
           f"missing P{number} Review {suffix.upper()}")
-    names = parse_manifest(directory)
-    payload = {path.name for path in directory.iterdir()
-               if path.is_file() and path.name != "SHA256SUMS"}
-    check({name for name in names if "/" not in name} == payload,
-          f"P{number}-{suffix} top-level manifest coverage mismatch")
-    for nested in names - payload:
-        check(Path(nested).name == "SHA256SUMS",
-              f"P{number}-{suffix} unexpected nested manifest payload: {nested}")
-        parse_manifest((directory / nested).parent)
+    names = review_manifest_gate(directory)
     verifiers = list(directory.glob("verify*.py"))
     canonicals = list(directory.glob("CANONICAL.txt"))
     deltas = [path for name in ("DELTA.md", "DELTA_ACCEPTANCE.md")
               if (path := directory / name).is_file()]
     reviews = list(directory.glob("*REVIEW*.md"))
+    # P202 A/B preserve hashed pre-review intakes alongside their reports.
+    # They are not second decisions. Exclude only these exact artifacts;
+    # manifest coverage still checks it, and any other extra report fails.
+    p202_intake_hashes = {
+        "a": "d5d5fc29bba5bca288fc73a01284e9e4012f61564a6cf2d9467c53d3a73e312f",
+        "b": "28f27668feeab6dccf647dc58508bb00bfa4ccfcefc0c7b73c66b3b1db81f1a7",
+    }
+    if number == 202 and suffix in p202_intake_hashes:
+        reviews = [path for path in reviews if not (
+            path.name == "REVIEW_INTAKE.md"
+            and sha(path) == p202_intake_hashes[suffix]
+        )]
     check(len(verifiers) == len(canonicals) == len(deltas) == len(reviews) == 1,
           f"P{number}-{suffix} core-file cardinality failure")
     for required_fragment in ("PROOF_REDERIVATION", "BUILD_PDF_QA"):
@@ -325,10 +450,11 @@ def paper_gate(number: int, directory: Path) -> tuple[int, int, int]:
     log = (directory / "main.log").read_text(encoding="utf-8", errors="replace")
     check(re.search(r"Warning|Undefined|Overfull|Underfull|Error", log) is None,
           f"P{number} live build diagnostic")
-    package_names = parse_manifest(directory)
+    package_names = complete_manifest(directory)
     check(set(REQUIRED_PAPER) - {"SHA256SUMS"} <= package_names,
           f"P{number} package manifest misses required payload")
-    parse_manifest(directory / "qa_final")
+    complete_manifest(directory / "qa_final")
+    frozen_round_gate(number, directory)
     for name in ("main_round0_original.pdf", "main_round1.pdf", "main_round2.pdf"):
         pdf_gate(number, directory / name)
     pages = cold_gate(number, directory)
@@ -338,7 +464,7 @@ def paper_gate(number: int, directory: Path) -> tuple[int, int, int]:
 
 
 def main() -> None:
-    check(len(PAPERS) == 5, "batch seats reopened: fewer than five admitted papers")
+    check(len(PAPERS) == 5, "five retained terminal paper packages are required")
     author_assertions = review_a_assertions = review_b_assertions = 0
     pages = citations = 0
     for number, directory in PAPERS.items():
@@ -351,11 +477,9 @@ def main() -> None:
 
     check((SEQ / "reviews/PROCESS_SEPARATION_LEDGER.md").is_file(),
           "missing process-separation ledger")
-    check((SEQ / "CANONICAL_PDF_MANIFEST.sha256").is_file(),
-          "missing canonical PDF manifest")
-    check((SEQ / "PACKAGE_MANIFESTS.sha256").is_file(),
-          "missing package-manifest manifest")
-    print("route A P197-P201 terminal artifact audit")
+    global_manifest_gate()
+    print("route A retained terminal artifact audit")
+    print("paper_ids=" + ",".join(str(number) for number in PAPERS))
     print("papers=5")
     print(f"pages={pages}")
     print(f"bibliography_records={citations}")
@@ -367,7 +491,7 @@ def main() -> None:
     print("cold_builds=10")
     print(f"visual_pages={pages}")
     print("findings=critical:0,major:0,minor:0")
-    print("external_status=OWNER_AMBER_P197_P201;HOLD_EXTERNAL")
+    print("external_status=OWNER_AMBER/HOLD_EXTERNAL")
     print(f"audit_assertions={ASSERTIONS}")
     print("status=PASS")
 

@@ -6,6 +6,7 @@ papers=(
   "197-ternary-cyclic-sign-difference"
   "199-first-one-stirling-splice"
   "200-lex-first-alternating-switch"
+  "202-ternary-ordered-reset"
 )
 
 # An explicit subset allows completed Round2 papers to close their own QA

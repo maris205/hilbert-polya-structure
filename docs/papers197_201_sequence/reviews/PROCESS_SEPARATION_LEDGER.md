@@ -12,7 +12,8 @@ manuscript review API/upload/notification was performed. HOLD_EXTERNAL.
 | P199 FOSP | batch197_fosp_gate | batch197_lzk_gate | root | both accepted unchanged, root replays, Round2 freeze |
 | P200 LFAS | batch197_fosp_gate; candidate proof by batch197_lzk_gate | root | batch197_fifth_scout | neither proof author is A/B; both accepted, Round2 freeze |
 | P201 EPF | batch197_fifth_scout | batch197_fosp_gate | none | A exact-history rejection, no Round1/2 acceptance |
-| P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | batch197_fosp_gate, accepted unchanged | root (in progress) | A root replay and physical Round1; candidate gate by LZK cannot count as a paper review |
+| P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | batch197_fosp_gate, accepted unchanged | root, accepted unchanged | both accepted, Round2, twofinalcoldbuilds/all4views, fullpackageauditPASS |
+| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root inprogress on frozenRound0 | batch197_fosp_gate planned after Round1 | A-M1 visiblemanuscriptHOLD repairrequested; archivalStage1Minor1 separatelyretained; no paperacceptance yet |
 
 Reviewer processes were not authors of their target proofs/manuscripts.
 They read actual frozen inputs and disclosed prior coordination/report
@@ -25,5 +26,9 @@ P199 B: labelled endpoints, stabilized images/backward layers, endpoint cuts.
 P200 B: column-incidence crossings, SCC/reverse BFS, sign-word inverse.
 Author and A representations are compared in those packages. The root's
 own P199 B executions are transparently root executions, not an additional
-fictional root reviewer. No batch completion is inferred while one seat is
-still open and P202 has not completed its manuscript rounds.
+fictional root reviewer. P202 B uses byte-word whole-map powers, cumulative
+parking flux and sparse source patches; A uses Kahn/DSU coordinate domains.
+No batch completion is inferred before P203's actual manuscript reviews
+and every retained paper's terminal QA. MCT's Stage1 gate is not paperB;
+its optional root-zero alternate derivation is not incorporated as a bearing
+author lemma. The standalone original temporal proof remains the paper basis.
