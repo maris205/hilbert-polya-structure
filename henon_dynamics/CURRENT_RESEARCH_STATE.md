@@ -9,11 +9,18 @@
 “然后再继续”。前一批 C394–C398 已交付；研究续接范围为 C399–C403 五篇。
 仓库 Astra 指令优化及独立场景检查已完成并推送：`b0cdadb9`。
 [指令审计](../docs/agent_workflows/ASTRA_AUDIT_2026-09-05.md) 保存来源、范围和验证。
-按 [新工作流](../.agents/skills/henon-route-a-batch/references/WORKFLOW.md) 已完成
-[第一轮只读初筛](SCOUT_C399_C403.md)：优先保留 Boole 三相权重与有限耦合
-harmonic delta-comb；普通迹障碍降为备选，固定特征非仿射 zeta 暂存未闭合。
-下一步核查两个优先候选的完整证明及文献归属，同时寻找其余不重叠合同。
-尚未冻结五篇、建论文包或生成新 PDF；维护和初筛均不占论文名额。
+用户随后要求“继续”。按 [新工作流](../.agents/skills/henon-route-a-batch/references/WORKFLOW.md)
+已由 [第一轮初筛](SCOUT_C399_C403.md) 推进到
+[两个完整未编号研究稿](research_c399_c403/README.md)：Boole 有限实权重与有限耦合
+harmonic delta-comb，原始完整证明均已有独立内部审查。
+Boole 9 页、δ 梳最终 14 页，合计 23 页；均已完成独立正文审查、实际小修的定点
+复核、双新目录同字节构建和全部页面逐页查看。普通迹材料数学闭合但论文准入 HOLD；
+两轮新增算术／备用筛选均没有补出新合同。仍缺三个独立合同，未冻结五篇、
+分配新 C 编号或执行正式发布；不得把两份研究稿宣称为五篇完成。
+研究快照含 57 个实际载荷文件及 2 个清单元数据文件；最终只读哈希检查和
+两项精确文件集合比较均通过。这是研究进展保存，不是正式发布门槛的替代。
+源文件的 Git 空白检查通过；原始编译日志自带的尾空白与末尾空行原样保留，
+因此包含日志的全量空白检查会报告这些已知提示，未为消除提示改写原始证据。
 
 正确仓库：`/root/autodl-tmp/hilbert-polya-structure`，分支 `main`。
 环境初始 cwd `/root/autodl-tmp/henon_zeta` 不代表本主线工作目录。

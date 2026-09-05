@@ -1,0 +1,267 @@
+\section{Form domain and spectral problem}
+\label{sec:forms}
+
+Let $\HH=L^2(0,\infty;\C)$ and
+$I_n=(x_{n-1},x_n)$, so $\ell_n=|I_n|=\pi/n$.
+Here $H^1_0(0,\infty)$ is the Sobolev space of square-integrable
+functions with square-integrable weak derivative and zero trace at
+zero. No trace is imposed at infinity.
+Every such function has a continuous representative, which is used
+at the vertices.
+For fixed $0<\kappa<\infty$, consider
+\begin{align}
+\DD_\delta
+ &=\left\{f\in H^1_0(0,\infty):
+                  \sum_{n\ge1}|f(x_n)|^2<\infty\right\},\notag\\
+q_\kappa[f]
+ &=\norm{f'}_2^2+\kappa\sum_{n\ge1}|f(x_n)|^2.
+\label{eq:delta-form}
+\end{align}
+Its associated operator will be denoted by $H_\kappa$.
+The source frequency is $k=\sqrt E$, and the quantum evolution is
+$e^{-itH_\kappa}$.
+
+\begin{theorem}[Finite positive coupling]
+\label{thm:finite}
+For each fixed $\kappa\in(0,\infty)$ the following hold.
+\begin{enumerate}
+\item The form \eqref{eq:delta-form} is densely defined, nonnegative
+and closed, with domain
+\begin{equation}
+\DD_\delta=\DD:=
+H^1_0(0,\infty)\cap L^2\bigl((0,\infty),e^{x/\pi}\,dx\bigr).
+\label{eq:weighted-domain}
+\end{equation}
+The operator $H_\kappa$ has compact resolvent and a complete
+orthonormal eigenbasis with simple eigenvalues
+$0<E_1(\kappa)<E_2(\kappa)<\cdots\to\infty$.
+\item With $N_\kappa(E)=\#\{j:E_j(\kappa)\le E\}$,
+\begin{equation}
+N_\kappa(k^2)=2k\log k+C_\kappa k+O_\kappa(\log k),
+\qquad C_\kappa=\log(4\pi/\kappa)+\gamma-2.
+\label{eq:count-law}
+\end{equation}
+The estimate holds for all sufficiently large real $k$, including
+eigenvalue thresholds. Its constants need not be uniform in $\kappa$.
+\item As $t\downarrow0$,
+\begin{equation}
+\Tr(e^{-tH_\kappa})
+=\frac{\sqrt\pi}{2\sqrt t}\log\frac{\pi}{\kappa t}
+ +O_\kappa(\log(1/t)).
+\label{eq:heat-law}
+\end{equation}
+\item The source zeta function
+$Z_\kappa(s)=\sum_jE_j(\kappa)^{-s}$, initially absolutely
+convergent for $\Repart s>1/2$, has a meromorphic continuation
+to $\Repart s>0$. Its only pole there is at $s=1/2$, with
+principal part
+\begin{equation}
+\frac{1/2}{(s-1/2)^2}+
+\frac{1+C_\kappa/2}{s-1/2}.
+\label{eq:zeta-principal}
+\end{equation}
+\item For every real $p>0$,
+$H_\kappa^{-1}\in\Schatten_p$ if and only if $p>1/2$.
+The same threshold holds for each fixed resolvent
+$(H_\kappa-z)^{-1}$, $z\in\rho(H_\kappa)$.
+In particular the ordinary Fredholm determinant
+$\det(I-zH_\kappa^{-1})$ exists.
+\end{enumerate}
+\end{theorem}
+
+The symbol $\Schatten_p$ means summability of the $p$th powers of
+singular values, also when $0<p<1$.
+The first part of the theorem is established below. Its
+compactness conclusion is classical for this model
+\citep{egger2011infinite}; the proof supplies the weighted domain
+and quantitative comparison used in the later parts.
+
+\subsection{Sampling and exponential comparison}
+
+Define
+\begin{equation}
+V_\kappa(x)=\frac{\kappa n}{\pi}\quad (x\in I_n),
+\qquad C=\frac{\kappa e^{-\gamma}}{\pi},
+\qquad B=\frac{\kappa}{\pi}.
+\label{eq:potential-def}
+\end{equation}
+
+\begin{lemma}[Sampling before infinite summation]
+\label{lem:sampling}
+For every $f\in H^1_0(0,\infty)$ and integer $N\ge1$,
+\begin{equation}
+\left|\kappa\sum_{n=1}^N|f(x_n)|^2
+       -\int_0^{x_N}V_\kappa(x)|f(x)|^2\,dx\right|
+\le2\kappa\norm{f}_2\norm{f'}_2.
+\label{eq:finite-sampling}
+\end{equation}
+Consequently,
+\begin{align}
+\DD_\delta&=H^1_0(0,\infty)\cap L^2(V_\kappa\,dx),\notag\\
+\left|\kappa\sum_{n\ge1}|f(x_n)|^2
+       -\int_0^\infty V_\kappa|f|^2\right|
+&\le2\kappa\norm{f}_2\norm{f'}_2
+\quad(f\in\DD_\delta).
+\label{eq:global-sampling}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Absolute continuity of the Sobolev representative on one cell gives
+\[
+\bigl||f(x_n)|^2-|f(x)|^2\bigr|
+\le2\int_x^{x_n}|f(y)f'(y)|\,dy.
+\]
+Averaging over $x\in I_n$ and interchanging the nonnegative
+integrals yield
+\begin{align*}
+\left||f(x_n)|^2-\frac1{\ell_n}\int_{I_n}|f|^2\right|
+&\le\frac2{\ell_n}\int_{I_n}(y-x_{n-1})|ff'|(y)\,dy\\
+&\le2\int_{I_n}|ff'|.
+\end{align*}
+Summing only the first $N$ cells and applying Cauchy--Schwarz
+proves \eqref{eq:finite-sampling}.
+The two expressions before subtraction on its left are nonnegative
+and increasing in $N$. Since their difference is uniformly bounded,
+one has a finite limit exactly when the other does.
+Taking these finite limits proves \eqref{eq:global-sampling}
+and the domain identity. No subtraction of divergent series is used.
+\end{proof}
+
+\begin{lemma}[Bounded exponential error]
+\label{lem:harmonic}
+For all $x>0$ away from the vertices,
+\begin{equation}
+|V_\kappa(x)-Ce^{x/\pi}|\le B.
+\label{eq:exponential-error}
+\end{equation}
+In particular \eqref{eq:weighted-domain} holds.
+\end{lemma}
+
+\begin{proof}
+Integral comparison for $1/x$ shows that $h_n-\log n$
+decreases and $h_n-\log(n+1)$ increases to the same limit
+$\gamma$. Their difference is $\log(1+1/n)\to0$.
+Thus
+\begin{equation}
+\log n+\gamma<h_n<\log(n+1)+\gamma,\qquad n\ge1.
+\label{eq:harmonic-bounds}
+\end{equation}
+The same comparison gives $0<\gamma<1$; for positivity one may
+use $h_n-\log(n+1)\ge1-\log2>0$.
+For $x\in I_n$ with $n\ge2$,
+\eqref{eq:harmonic-bounds} gives
+$n-1<e^{x/\pi-\gamma}<n+1$.
+For the first cell the lower bound is replaced by
+$0<e^{-\gamma}\le e^{x/\pi-\gamma}$, and the upper bound remains
+two. Hence $|n-e^{x/\pi-\gamma}|\le1$ on every cell,
+which proves \eqref{eq:exponential-error}.
+An additive bounded difference between the two nonnegative
+weights does not change their weighted $L^2$ domains after
+intersection with unweighted $L^2$.
+Lemma~\ref{lem:sampling} now proves \eqref{eq:weighted-domain}.
+\end{proof}
+
+For $a,C>0$ introduce the form
+\begin{equation}
+Q_{a,C}[f]=a\norm{f'}_2^2+
+          \int_0^\infty Ce^{x/\pi}|f(x)|^2\,dx,\qquad f\in\DD,
+\label{eq:comparator-form}
+\end{equation}
+and its associated operator $A_{a,C}$.
+Young's inequality in \eqref{eq:global-sampling} gives, for
+$0<\varepsilon<1$,
+\begin{equation}
+Q_{1-\varepsilon,C}[f]-d_\varepsilon\norm{f}_2^2
+\le q_\kappa[f]\le
+Q_{1+\varepsilon,C}[f]+d_\varepsilon\norm{f}_2^2,
+\qquad
+d_\varepsilon=\frac{\kappa^2}{\varepsilon}+B.
+\label{eq:form-bracket}
+\end{equation}
+The exact coefficient $C=\kappa e^{-\gamma}/\pi$ matters:
+replacing it by an unspecified comparable constant would lose
+the linear term of \eqref{eq:count-law}.
+
+\subsection{Closedness, core and operator domain}
+
+The form norm $\bigl(\norm{f}_2^2+Q_{1,C}[f]\bigr)^{1/2}$
+is complete.
+A Cauchy sequence converges in $H^1_0$ and in the weighted
+$L^2$ space, and the two limits agree in unweighted $L^2$.
+At $\varepsilon=1/2$, \eqref{eq:form-bracket} shows equivalence
+of this norm and $\bigl(\norm{f}_2^2+q_\kappa[f]\bigr)^{1/2}$.
+Indeed its lower bound controls $Q_{1/2,C}$ by
+$q_\kappa+(2\kappa^2+B)\norm{f}_2^2$, while
+$Q_{1,C}\le2Q_{1/2,C}$; the upper bound gives the reverse
+norm estimate. Therefore $q_\kappa$ is closed.
+
+The space $C_c^\infty(0,\infty)$ is a form core.
+Multiply $f\in\DD$ by a smooth cutoff equal to one on $[0,R]$,
+zero beyond $R+1$, and with uniformly bounded derivative.
+The tails of $|f|^2$, $|f'|^2$ and $e^{x/\pi}|f|^2$ prove
+convergence in the weighted Sobolev norm as $R\to\infty$.
+For a fixed compactly supported cutoff the weight is bounded
+above and below on a containing finite interval.
+The usual $H^1_0$ smooth approximation on that interval then
+converges in the same weighted norm.
+This proves the core statement; it also proves dense definition
+in $\HH$.
+The representation theorem for closed nonnegative forms yields
+a unique self-adjoint $H_\kappa$.
+
+Its domain can be written without formal delta symbols:
+\begin{equation}
+\begin{split}
+D(H_\kappa)=\{f\in\DD:\;& f|_{I_n}\in H^2(I_n)\quad(n\ge1),\
+                      \sum_n\norm{f''}_{L^2(I_n)}^2<\infty,\\
+ &f'(x_n+)-f'(x_n-)=\kappa f(x_n)\quad(n\ge1)\},\\
+(H_\kappa f)|_{I_n}&=-f''|_{I_n}.
+\end{split}
+\label{eq:operator-domain}
+\end{equation}
+To derive this description from the weak form, test within one
+cell to obtain $-f''=g\in L^2$, hence $H^2$ regularity there.
+A test crossing one vertex yields the displayed derivative jump.
+Conversely, the local identities in \eqref{eq:operator-domain}
+give $q_\kappa(f,v)=\langle g,v\rangle$ for compactly supported
+smooth $v$. At $x_n$ integration by parts contributes
+$f'(x_n-)-f'(x_n+)$, cancelling $+\kappa f(x_n)$.
+The form-core approximation extends the identity to every
+$v\in\DD$. It follows that $f$ belongs to the associated
+operator domain. This argument does not require an unproved
+boundary term at infinity.
+
+\subsection{Compactness, positivity and simplicity}
+
+A form-norm bounded sequence has bounded $H^1$ norm and
+bounded $\int Ce^{x/\pi}|f|^2$ by \eqref{eq:form-bracket}.
+Its tails obey
+\begin{equation}
+\int_R^\infty |f|^2
+\le C^{-1}e^{-R/\pi}\int_R^\infty Ce^{x/\pi}|f|^2.
+\label{eq:compact-tail}
+\end{equation}
+Local Rellich compactness on $[0,R]$, followed by a diagonal
+subsequence and the uniform tail estimate, gives convergence
+in $\HH$. Thus the form embedding, and hence the resolvent,
+is compact.
+The compact spectral theorem supplies the discrete eigenvalue
+list and a complete orthonormal basis.
+There are infinitely many eigenvalues because $\HH$ is
+infinite-dimensional and the resolvent is injective.
+
+If $H_\kappa f=0$, then \eqref{eq:delta-form} gives
+$f'=0$ almost everywhere. The only such $L^2$ function is zero.
+Zero cannot be a finite accumulation point of a
+compact-resolvent spectrum, so $E_1(\kappa)>0$.
+For a fixed eigenvalue $E$, an eigenfunction solves
+$f''+Ef=0$ on the first cell and has $f(0)=0$.
+Its initial derivative determines it there.
+Continuity and the jump in \eqref{eq:operator-domain} propagate
+the two Cauchy data through all later cells.
+Zero initial derivative gives the zero function, so the
+eigenspace is at most one-dimensional.
+Self-adjointness excludes generalized eigenvectors.
+This proves part~1 of Theorem~\ref{thm:finite}, including
+simplicity at every finite positive coupling.
