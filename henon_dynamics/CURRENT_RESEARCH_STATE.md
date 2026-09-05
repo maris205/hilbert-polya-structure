@@ -6,20 +6,24 @@
 
 ## 先读这一段
 
-- 最新授权是 **C384–C388**。用户在 C379–C383 交付后回复“确认，下一轮”。
-  **本批五篇全部完成**：最终 write/nonwrite 与独立总审通过，
-  237个payload加五份manifest，五篇最终PDF合计24页。
-  当前到达用户检查点，不得自行开启 C389–C393。
+- 最新授权是 **C389–C393**。用户在 C384–C388 交付后回复“确认，下一轮”。
+  **本批五篇完整发布包均已完成**：238个payload加五份manifest，
+  最终PDF合计22页；完整write/nonwrite、双fresh编译、逐页视觉检查、
+  独立内部交叉审和两路文件/哈希总审均通过。
+  五篇后确认节点已到达；等待用户确认，不得自行开启 C394–C398。
+  上批 C384–C388 已完成并推送：237个payload加五份manifest，最终PDF合计24页。
 - 正确仓库：`/root/autodl-tmp/hilbert-polya-structure`，分支 `main`。
   环境的 `/root/autodl-tmp/henon_zeta` 不是本轮研究目录。
-- 冻结证据基线：`3e692da6fa94362225c7534e9b66c83c15c7f284`
-  （已交付并推送 C379–C383）。本轮中 fetch 发现符号动力学主线的新提交，
-  实际核对与 `henon_dynamics` 及 evaluator 无路径重叠后，仅快进至
-  `a4b7160e2a6f694881e909fdec4ba5f6b6bf28e7`。冻结基线不随之更改。
-- C379–C383 是已完成的上一批，不要重新构建它们来冒充本轮工作。
+- 本批冻结证据基线：`0c877206d202f732e21ea0b194f9c7fdf30467ee`
+  （已交付并推送 C384–C388）。新授权时实际 HEAD 与此一致。
+  本轮 fetch 发现三个符号主线提交，467路径仅属 docs/papers/符号状态；
+  核实无本轮目录或 evaluator 重叠后安全快进至
+  `908069ac646c281941788b49e09c0671bf8be0b8`，证据基线不变。
+- C384–C388 及 C379–C383 都是已完成批次，不要重构冒充本轮工作。
   旧 C99–C103 摘要更早，相关未跟踪材料须保留，不能据此倒退编号。
-- 本批分工记录：C379 代理负责 C388，C382 代理负责 C384/C387，
-  C383 代理负责 C386及最后独立总审；root 负责 C385、C387原始证明和总封包。
+- 本批实际分工：C382 代理负责 C389，C379 代理负责 C390，
+  C383 代理负责 C391及独立工程审；root 负责 C392/C393及总封包。
+  C379另做五包静态总审，C382修复C393一处跨包说明并完成重封。
   这不代表恢复时仍有活动进程。代理名不是论文编号，不复用失效进程号。
 
 ## 用户长期原则
@@ -33,7 +37,28 @@
    额度重置的表述不构成无限新开批次的授权。
 6. 文件、篇数、页数和测试数量不等于目标 A1/A2 已突破。
 
-## 当前批次 C384–C388
+## 当前批次 C389–C393
+
+入口：[冻结计划](BATCH_PLAN_C389_C393.md)、[选题排重](IDEA_REPORT_C389_C393.md)、
+[最终批次审查与哈希](BATCH_REVIEW_C389_C393.md)。
+障碍 HEN-O373–HEN-O377，epoch 1788566400。
+
+| 编号 | 完整源系统进展 | 当前阶段 |
+|---|---|---|
+| C389 | Carlitz 全环作用扭点、所有素多项式幂 Galois 塔、全导子无交及分歧过滤/different | 完成：4页，52+1文件，完整发布复验通过 |
+| C390 | Lyness 全正实椭圆轨道、实素数周期与正有理扭点障碍、环带Koopman谱 | 完成：5页，48+1文件，精确/数值计数分离后发布通过 |
+| C391 | 超临界逆平方势全自伴边界、双向负谱、连续散射与尺度极限环 | 完成：5页，44+1文件，实际Stone跳跃/归一化检查及发布通过 |
+| C392 | Lüroth 无限 Hardy 谱、全平面亚纯族与行列式不可见幂零留数 | 完成：4页，47+1文件，双fresh和完整发布复验通过 |
+| C393 | 二次泛型全逆像树、全循环指标/亏格、模素数周期点比例趋零 | 完成：4页，47+1文件，文档跨包残留修复后重封/复验通过 |
+
+这些是源系统结论。经典所有权、显式外部定理和严格 A1/A2 边界均须保留。
+无限量词由完整证明承担，有限数据仅回归验证。五包完成结论以实际
+release write/nonwrite、最终清单、独立审及root复核共同支撑，
+不只是代理 PASS 消息。每包三轮是同一篇论文的实质修订。
+提交由 Git 历史中的 `Add Route-A papers C389-C393` 标识；
+精确提交及远端核对在用户交付信息中报告，避免文件自引用所在提交。
+
+## 上批 C384–C388：已交付快照
 
 入口：[批次计划](BATCH_PLAN_C384_C388.md)、
 [选题记录](IDEA_REPORT_C384_C388.md)。
@@ -71,18 +96,18 @@ C388 的最小三维反例针对实际核对的 arXiv:0912.5169v1 Lemma 2.1
 
 | 候选 | A0 | A1 | A2 | A3 | A4 | 总判定 |
 |---|---|---|---|---|---|---|
-| C384 | STRUCTURAL_ARITHMETIC_RELATION | WEAK | FAIL | FAIL | FAIL | EXPLORATORY |
-| C385 | FAIL | WEAK | FAIL | FAIL | FORMAL_HINT | REJECTED |
-| C386 | FAIL | FAIL | FAIL | FAIL | FORMAL_HINT | REJECTED |
-| C387 | FAIL | FAIL | FAIL | FAIL | FORMAL_HINT | REJECTED |
-| C388 | WEAK_ARITHMETIC_RELATION | WEAK | FAIL | FAIL | FORMAL_HINT | REJECTED |
+| C389 | STRUCTURAL_ARITHMETIC_RELATION | WEAK | FAIL | FAIL | FAIL | EXPLORATORY |
+| C390 | WEAK_ARITHMETIC_RELATION | WEAK | FAIL | FAIL | FORMAL_HINT | REJECTED |
+| C391 | FAIL | FAIL | FAIL | FAIL | NATURAL_QUANTIZATION | REJECTED |
+| C392 | FAIL | WEAK | FAIL | FAIL | FORMAL_HINT | REJECTED |
+| C393 | STRUCTURAL_ARITHMETIC_RELATION | WEAK | FAIL | FAIL | FORMAL_HINT | EXPLORATORY |
 
 精确 tuple 以各包冻结 YAML 为准。原系统完整定理与目标桥梁是不同结论。
 公共边界 `NO_BAD_EULER_OR_ROOT_NUMBER`；九项目标/Route-B flags 全 false。
 不声称目标局部算术、Euler 因子、根数、自守性、目标函数方程/零点/除子、
 Hilbert–Pólya 算子，也不把新变量、重整化或改时钟默认为原对象的修复。
 
-本轮实际使用 ARS 0.1.28、proof-writer、paper-write 和 paper-compile 的
+本轮实际使用 ARS 0.1.28、idea-creator、proof-writer、paper-write 和 paper-compile 的
 适用流程；以用户“五篇完成后确认”替代批内反复许可停顿。
 内部交叉审使用当前模型团队，不称外部、跨模型或人类同行评审；
 没有外传稿件给外部模型、GPU训练、投稿或发表新颖性认证。
@@ -107,6 +132,7 @@ C383为A4幺正/散射候选；五篇目标A2/A3均未通过。
 - 仓库根的 `henon_flat_magnetic_torus_landau_route_a/`。
 - 仓库根的 `henon_hysteretic_relay_oscillator_route_a/`。
 
+三个根目录共有12个遗留文件，未发现本批新根目录残留。
 不可宽泛清理，亦不可把根目录副本与本目录已提交论文混为一谈。
 最终可以报告本批跟踪文件无遗漏，但不能因此称整个worktree全空。
 

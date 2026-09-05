@@ -1,0 +1,480 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=19mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{fontspec,unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\newfontfamily\cjkfont{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\spec}{\operatorname{spec}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\ifcase\CRevisionRound
+\title{Positive Lyness Dynamics: Complete Ovals, Abel Rotations and Return Matrices}
+\or
+\title{Positive Lyness Dynamics: Elliptic Translation and Rational Period Obstructions}
+\else
+\title{Positive Lyness Dynamics: Unbounded Real Periods and the Rational Torsion Boundary}
+\fi
+\author{HCS-C390 source-theorem and reproducibility package}
+\date{5 September 2026}
+\begin{document}
+\emergencystretch=3em
+\maketitle
+\begin{abstract}
+\ifcase\CRevisionRound
+We give a complete positive-real orbit description of the autonomous Lyness
+map for every positive parameter. Strict convexity of its logarithmic
+integral proves that every noncentral two-sided orbit lies on one compact
+regular oval, with no missing positive components or escape trajectories.
+A specified clockwise section gives the map's rotation number as a ratio
+of two Abel integrals with the same quartic square root. This fixes the
+orientation and distinguishes auxiliary Hamiltonian time from one discrete
+iterate. Rational rotations classify every least period, every repetition
+and all primitive orbit families; irrational rotations give dense orbits
+on their own oval. The return derivative is an exact unipotent shear,
+without an unsupported claim that its shear coefficient never vanishes.
+The unique center, the globally five-periodic parameter and the coordinate
+boundary are treated separately. These are classical source-local results
+reconstructed with explicit proof and independently checkable identities,
+not a new-literature-priority claim or a target determinant construction.
+\or
+We reconstruct the elliptic and arithmetic boundary of positive Lyness
+dynamics. Every noncentral positive orbit lies on a smooth projective
+cubic; a quartic discriminant separates all singular energies from the
+regular positive fibers. The map acts by translation by a specified
+rational point when the parameter and energy are rational. Consequently
+a rational periodic orbit forces that translation point, not its starting
+point, to be torsion. Mazur's theorem is an explicit deep input, and the
+sharper positive-coordinate period restriction to one, five and nine is
+credited to the established Lyness classification. Five occurs away from
+the center only at parameter one, while an exact parameter-seven example
+supplies a complete nine-cycle. The full real Abel rotation and return
+matrix description is retained. No rational point is presumed to exist
+on an arbitrary rational-energy oval, and no classification is extrapolated
+from a finite rational search. This source reconstruction does not supply
+an unbounded rational-prime periodic carrier.
+\else
+We separate the real and rational periodic spectra of the positive Lyness
+family. For each fixed positive parameter other than one, every sufficiently
+large prime integer is the least period of an entire real oval. The proof
+uses a complete Abel rotation formula and two explicitly credited classical
+endpoint limits, not global monotonicity or a numerical orbit fit. When
+the parameter is rational, the classical elliptic-torsion classification
+restricts positive rational periodic points to periods one, five and nine;
+the large-prime real ovals therefore contain no rational point. Exact
+return shears and all singular and exceptional boundaries remain part of
+the same orbit description. Continuous resonant families obstruct the
+ordinary real point-cardinality zeta. On every finite regular annulus the
+generic Koopman spectrum is the unit circle, its only eigenvalue is one,
+and the operator is noncompact; the exceptional parameter instead has five
+pure-point roots. The result is an explicitly owner-heavy source-local
+reconstruction, with no target divisor or quantum-generator claim.
+\fi
+\end{abstract}
+\begin{center}{\cjkfont 中文摘要}\end{center}
+{\cjkfont\small\raggedright
+\ifcase\CRevisionRound
+本文给出自主莱尼斯映射在全部正参数下的完整正实轨道描述。
+对数坐标中的严格凸性证明每个非中心双向轨道均位于唯一紧正则卵形线上，
+不存在遗漏的正分支或逃逸轨道。
+固定的顺时针截面将旋转数写为同一四次根式下两段阿贝尔积分之比，
+并明确区分辅助哈密顿时间与离散迭代时钟。
+有理旋转确定最小周期、重复与全部本原轨道族；
+无理旋转给出本卵形线上的稠密轨道。
+返回导数是精确幂零剪切，但本文不假定剪切系数处处非零。
+唯一中心、全局五周期参数与坐标边界均单独处理。
+这是具有明确经典归属的源系统重建，不声称新的文献优先权或目标行列式。
+\or
+本文进一步闭合正实莱尼斯动力学的椭圆与有理边界。
+四次判别式把所有奇异能量与正则正实纤维分开；
+映射在光滑射影三次曲线上表现为指定点的平移。
+当参数及初值有理时，周期性迫使平移点成为有理扭点，
+而不是迫使初始点本身成为扭点。
+马祖尔扭点定理与正坐标周期只能为一、五、九的经典分类，
+均被明确列为外部输入。
+非中心五周期只发生在参数一；参数七的精确例子给出完整九周期。
+本文保留全部实旋转与返回矩阵，不把有理能量误认为必有有理点，
+也不从有限搜索推断普遍分类。
+\else
+本文在同一正实莱尼斯系统内严格分离实周期谱与有理周期谱。
+除参数一外，每个固定正参数都存在以所有充分大素数为最小周期的整条实卵形线；
+证明仅使用完整旋转公式和明确引用的经典端点极限。
+当参数有理时，正有理周期点仅允许一、五、九周期，
+因此这些大素数周期实卵形线上没有有理点。
+完整返回剪切、奇异纤维及特殊参数边界同时保留。
+连续共振族使普通实点逐轨计数函数失去有限系数；
+有限正则环带上的一般库普曼谱为单位圆，唯一特征值是一，且算子不紧。
+这些结论明确标注经典归属，不提供目标除子、量子生成元或新的文献优先权。
+\fi\par}
+\medskip
+\noindent\textbf{Keywords:} Lyness map; elliptic oval; Abel rotation; rational torsion; return shear; orbit counting
+\par\noindent{\cjkfont 关键词：莱尼斯映射；椭圆卵形线；阿贝尔旋转；有理扭点；返回剪切；轨道计数}\par
+
+\section{One source, two periodicity questions}
+For $a>0$ consider the autonomous map and its invariant
+\begin{equation}\label{eq:source}
+ F_a(x,y)=\left(y,\frac{a+y}{x}\right),\quad
+ Q=(0,\infty)^2,\quad
+ H_a(x,y)=\frac{(x+1)(y+1)(x+y+a)}{xy}.
+\end{equation}
+A least period is a positive iterate count. In particular, the historical
+term ``prime period'' can mean least period; here a \emph{prime integer}
+always means an integer prime. The rational subset is considered only
+when $a\in\Q_{>0}$; it is not interchangeable with the full real quadrant.
+The complete-real question asks for every point's oval, rotation, repetitions
+and return derivative. The arithmetic question asks which of those
+periodic families actually contain positive rational points.
+
+\paragraph{Ownership and local progress.}
+The autonomous Lyness family has strong classical owners.
+Bastien--Rogalski give its global real behavior and rotation endpoints
+\cite{br}. Beukers--Cushman prove an autonomous monotonicity theorem
+\cite{bc}; this paper does not need global monotonicity and does not turn
+it into a claim of a nonzero derivative everywhere. Gasull--Mañosa--Xarles
+study rational periods and the elliptic normal form \cite{gmx}.
+The deep rational torsion input is Mazur's theorem \cite{mazur}.
+The repository predecessor C173 treated only the identity $F_1^5=I$.
+Here the actual step is the whole positive-real foliation and its
+arithmetic boundary, not another finite prefix at the same parameter.
+All literature-dependent conclusions below are labeled; no priority claim
+or target spectral identification is made.
+
+\section{Every positive orbit is accounted for}
+Let $\ell=(1+\sqrt{1+4a})/2$, $c_a=(\ell,\ell)$ and
+$h_*=(\ell+1)^3/\ell$. Put $\omega=dx\wedge dy/(xy)$ and $R(x,y)=(y,x)$.
+Direct substitution gives
+\begin{equation}\label{eq:reversal}
+ F_a^{-1}(x,y)=((a+x)/y,x),\quad RF_aR=F_a^{-1},
+ \quad F_a^*\omega=\omega,\quad R^*\omega=-\omega.
+\end{equation}
+The Cartesian determinant is $(a+y)/x^2$, not one. Its ratio to the new
+coordinate product is $1/(xy)$, which proves the weighted area identity.
+
+\begin{theorem}[Global positive exhaustion]\label{thm:ovals}
+The point $c_a$ is the unique fixed point and the unique critical point of
+$H_a$ in $Q$. The positive fiber at $h=h_*$ is $\{c_a\}$. Every $h>h_*$
+has precisely one compact analytic oval $C^+_{a,h}$. Every noncentral
+two-sided orbit lies on its unique such oval, bounded away from both axes.
+\end{theorem}
+\begin{proof}
+In $u=\log x,v=\log y$, the invariant expands to
+\begin{equation}\label{eq:convex}
+ K_a=e^u+e^v+e^{u-v}+e^{v-u}
+ +(a+1)(e^{-u}+e^{-v})+a e^{-u-v}+a+2.
+\end{equation}
+The Hessian is a sum of positive multiples of exponent-vector outer
+products; the vectors $(1,0)$ and $(0,1)$ already span the plane.
+Thus it is positive definite. The positive and negative coordinate
+exponentials make $K_a$ proper. It has a unique nondegenerate minimum;
+symmetry and
+\[
+ \frac{d}{dr}H_a(r,r)=\frac{2(r+1)(r^2-r-a)}{r^3}
+\]
+locate it at $c_a$. Along each ray from the minimum in log coordinates,
+strict convexity gives a strictly increasing value after the minimum,
+tending to infinity. Each higher level is therefore one smooth radial
+graph. The inverse in \eqref{eq:reversal} preserves positivity, and the
+invariant confines every forward and backward iterate to that compact
+level. Solving $F_a(x,y)=(x,y)$ gives the same unique center.
+\end{proof}
+
+\section{A normalized Abel rotation and all return matrices}
+Write the level equation as
+\begin{equation}\label{eq:quartic}
+ (x+1)y^2+B(x)y+(x+1)(x+a)=0,\quad
+ B(x)=(x+1)(x+a+1)-hx,\quad
+ D(x)=B(x)^2-4(x+1)^2(x+a).
+\end{equation}
+Let $p_h=(r,r)$ be the unique diagonal intersection with $r>\ell$.
+Let $\alpha,\beta$ be the minimum and maximum $x$ coordinates on the
+positive oval; they are the two turning roots delimiting that oval, not
+arbitrarily chosen roots of the quartic. Define
+\begin{equation}\label{eq:abel}
+ T(h)=2\int_\alpha^\beta\frac{dx}{\sqrt{D(x)}},\qquad
+ \tau(h)=2\int_r^\beta\frac{dx}{\sqrt{D(x)}},\qquad
+ \rho(h)=\frac{\tau(h)}{T(h)}.
+\end{equation}
+These are positive finite Abel integrals with their positive square root
+on the oval interval.
+
+\begin{theorem}[Complete oval dynamics]\label{thm:rotation}
+The function $\rho:(h_*,\infty)\to(0,1)$ is real analytic.
+There are smooth coordinates $(h,\theta)$ on every regular annulus such that
+\begin{equation}\label{eq:angle}
+ F_a(h,\theta)=(h,\theta+\rho(h)),\qquad
+ R(h,\theta)=(h,-\theta),\quad \theta\in\R/\Z.
+\end{equation}
+If $\rho(h)=m/n$ in lowest terms, every point of that oval has least
+period $n$; otherwise every two-sided orbit is dense on the oval. For
+every positive integer $N$,
+\begin{equation}\label{eq:fixed}
+ \Fix(F_a^N)=\{c_a\}\cup
+ \bigcup_{\substack{h>h_*\\N\rho(h)\in\Z}}C^+_{a,h}.
+\end{equation}
+At a period-$n$ point the return matrix, in these coordinates, is
+\begin{equation}\label{eq:shear}
+ D F_a^{kn}=\begin{pmatrix}1&0\\kn\rho'(h)&1\end{pmatrix},\qquad k\ge1.
+\end{equation}
+Its multipliers are both one. A nonzero shear is asserted only when
+$\rho'(h)\ne0$.
+\end{theorem}
+\begin{proof}
+The auxiliary Hamiltonian vector field
+$X_H=xy(H_y\partial_x-H_x\partial_y)$ satisfies
+$\iota_{X_H}\omega=dH$ and is nonzero on each compact regular oval.
+The map commutes with its complete oval flow because it preserves both
+$H$ and $\omega$. On the upper and lower quadratic roots in
+\eqref{eq:quartic}, respectively, $\dot x=\pm\sqrt D$. The full flow
+period is therefore $T$. At $x=r$, the two roots are $r$ and
+$(a+r)/r<r$; the latter is exactly $F_a(p_h)$'s second coordinate.
+The positive clockwise arc from $p_h$ through $\beta$ to that point
+takes time $\tau$. Elapsed flow time from $p_h$, divided by $T$,
+defines $\theta$ and proves \eqref{eq:angle}. The swap fixes the section
+and reverses the flow. Removing the square-root turning singularities
+by $x=\alpha+(\beta-\alpha)\sin^2t$ proves analytic dependence on
+each compact regular energy interval. The turning points are simple;
+equivalently their affine gradient is nonzero and the log-convex oval
+has a nondegenerate vertical tangency. The rotation on the circle then
+proves the period and density statements. Iteration and differentiation
+of \eqref{eq:angle} give \eqref{eq:fixed} and \eqref{eq:shear}.
+\end{proof}
+
+The two-by-two Cartesian monodromy at a return point is conjugate to
+\eqref{eq:shear}; its nilpotent part squares to zero. At the center the
+one-step characteristic polynomial is
+$\lambda^2-\ell^{-1}\lambda+1$, so the multipliers are
+$\exp(\pm2\pi i\rho_0)$, where
+\begin{equation}\label{eq:center}
+ \rho_0(a)=\frac{1}{2\pi}\arccos\frac{1}{2\ell}.
+\end{equation}
+The center is Lyapunov stable by its invariant minimum, not asymptotically
+stable. Periodic ovals are continuous families, not isolated hyperbolic
+orbits. The auxiliary $T$ and $\tau$ have not altered the source's
+unit-iterate clock.
+
+\ifnum\CRevisionRound>0
+\section{Smooth cubics, exceptional parameters and rational torsion}
+The projective level curve is
+\begin{equation}\label{eq:cubic}
+ P_{a,h}(X,Y,Z)=(X+Z)(Y+Z)(X+Y+aZ)-hXYZ=0.
+\end{equation}
+The exact quartic elimination gives
+\begin{equation}\label{eq:discriminant}
+ \operatorname{disc}_xD=256h^3(a-h-1)^2a(h-h_+)(h-h_-),\qquad
+ h_\pm=\frac{2a^2+10a-1\pm(4a+1)\sqrt{4a+1}}{2a}.
+\end{equation}
+Here $h_+=h_*$. Since $a=\ell^2-\ell$,
+$h_*-a-2=4\ell+1+1/\ell>0$. The possible singular energies
+$0,a-1,h_\pm$ do not meet any regular positive oval. More explicitly,
+for $x\ne-1$ an affine singular point would force a repeated root of $D$;
+at $x=-1$ the curve forces $y=0$ and has $P_y=h\ne0$.
+The three points at infinity each have a nonzero partial derivative.
+Thus every $h>h_*$ gives a smooth complex genus-one cubic.
+The singular center fiber is not subjected to an elliptic torsion theorem.
+
+\begin{proposition}[Translation point, not starting-point torsion]
+With identity $O=[1:-1:0]$, the smooth cubic's group law gives
+$F_a(P)=P+Q_0$, where $Q_0=[1:0:0]$. If $a,x,y$ are positive rational
+and $P=(x,y)$ is noncentral, its finite least period is the order of
+$Q_0$ in this rational elliptic group.
+\end{proposition}
+\begin{proof}
+The tangent at $O$ is $X+Y=(h-a)Z$; substitution gives
+$h(h-a+1)Z^3$, so $O$ is a flex. The swap is negation. The involution
+$J(x,y)=((a+y)/x,y)$ is the sheet exchange of the degree-two projection
+to the $y$ line. It has branch fixed points; the genus-one involution
+law therefore gives $J(P)=J(O)-P$. Its homogeneous expression
+$[Z(Y+aZ):XY:XZ]$ gives $J(O)=[0:1:0]=-Q_0$.
+Since $F_a=R\circ J$, the translation formula follows, in agreement
+with \cite[Section 2.1]{gmx}. Rationality gives $h\in\Q$ and a smooth
+curve over $\Q$, so $F_a^n(P)=P$ is equivalent to $nQ_0=O$.
+No assertion that $P$ itself is torsion follows from this cancellation.
+\end{proof}
+
+\paragraph{Deep and sharper external inputs.}
+Mazur's torsion theorem \cite{mazur} limits finite point orders on a
+rational elliptic curve to $1,\ldots,10,12$. It is not proved by this
+package. The additional positive-coordinate exclusion, credited to the
+Lyness classification discussed in \cite{gmx}, sharpens positive rational
+least periods to
+\begin{equation}\label{eq:rational}
+ \{1,5,9\}.
+\end{equation}
+This sharper restriction is explicitly imported, not a consequence
+of Mazur's list alone and not an inference from our finite grid.
+A positive rational center exists exactly when $a=r(r-1)$ for a rational
+$r>1$, with center $(r,r)$.
+
+\paragraph{The five-periodic parameter and an exact nine-cycle.}
+Direct iteration gives $F_1^5=I$; all noncentral positive points then have
+least period five. Conversely, for $a\ne1$, the equations $F_a^5(x,y)=(x,y)$,
+after positive denominators are cleared, reduce to
+\begin{align*}
+ p&=a x-a y+a-y^2+y=0,\\
+ q&=-a^2x-a^2+a x^2y+a x^2-a xy+a x-2ay+xy-y^2=0.
+\end{align*}
+Substitute $x=(a+y)(y-1)/a$ from $p=0$ into $q$ to obtain
+$q=y(a+y)^2(y^2-y-a)/a$. Positivity forces $x=y=\ell$.
+There is therefore no noncentral period five at $a\ne1$.
+At $a=7$, the successive scalar coordinates
+\begin{equation}\label{eq:nine}
+ 3/2,\quad5/7,\quad36/7,\quad17,\quad14/3,\quad35/51,
+ \quad28/17,\quad63/5,\quad119/10
+\end{equation}
+form the GMX nine-cycle \cite{gmx}. Adjacent cyclic pairs satisfy the
+recurrence exactly and are distinct, proving least period nine; the
+energy is $258/7$. This example does not establish nine-period existence
+for every rational parameter. Rational energy alone does not ensure a
+rational point on the positive oval. The excluded parameter $a=0$ is
+globally six-periodic, and is not covered by a generic $a>0,a\ne1$ argument.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Real prime periods and the operator stopping result}
+We invoke exactly the following two classical endpoint statements from
+\cite[Propositions 6--7]{br}, with the clockwise normalization in
+\eqref{eq:abel}:
+\begin{equation}\label{eq:limits}
+ \lim_{h\downarrow h_*}\rho(h)=\rho_0(a),\qquad
+ \lim_{h\to\infty}\rho(h)=1/5.
+\end{equation}
+Their proofs are external dependencies, not replaced by quadrature.
+Since $\ell>1$, $1/6<\rho_0<1/4$, and $\rho_0=1/5$ exactly when $a=1$.
+For $a\ne1$, the analytic function $\rho$ is nonconstant and its image
+contains the open interval $J_a$ between the two endpoint limits.
+We need neither equality of its image with $J_a$ nor uniqueness of an
+energy with a prescribed rotation.
+
+\begin{theorem}[The real--rational prime-period contrast]\label{thm:contrast}
+For each fixed $a>0$, $a\ne1$, every sufficiently large prime integer
+is a real least period. If $a$ is rational, every such periodic oval
+with prime-integer period at least eleven has no rational point.
+\end{theorem}
+\begin{proof}
+Choose a rational interval $(s,t)\subset J_a$. For a prime integer
+$p>1/(t-s)$ the interval $(ps,pt)$ has length greater than one and
+contains an integer $m$ with $1\le m\le p-1$. Hence $m/p$ is reduced.
+The intermediate value theorem and \eqref{eq:limits} supply a finite
+energy with rotation $m/p$. Theorem~\ref{thm:rotation} gives a whole
+oval of least period $p$. A rational point on that oval would contradict
+the explicitly imported classification \eqref{eq:rational}.
+\end{proof}
+
+Every rational-rotation oval contains uncountably many primitive
+orbits: its quotient by a rotation of order $n$ is another circle.
+For $a\ne1$, such ovals exist by Theorem~\ref{thm:contrast}; for $a=1$,
+the whole quadrant is fixed by the fifth iterate. Consequently the
+ordinary real point-cardinality expression
+\begin{equation}\label{eq:undefined}
+ \exp\left(\sum_{n\ge1}\#\Fix(F_a^n)\,\frac{z^n}{n}\right)
+\end{equation}
+has an infinite coefficient at a finite order for every $a>0$.
+It is not an ordinary formal zeta series with finite coefficients.
+This says nothing against separately defined measured or regularized
+constructions; changing the definition changes the candidate.
+
+\begin{proposition}[A native unitary, not a target determinant]
+Choose $h_*<h_1<h_2<\infty$ and normalize the finite invariant measure
+$T(h)\,dh\,d\theta$ on that annulus. Its Koopman operator $Uf=f\circ F_a$
+is unitary and noncompact. If $a\ne1$, its spectrum is the unit circle
+and its point spectrum is exactly $\{1\}$, of infinite multiplicity.
+The remaining angular summands have absolutely continuous spectral
+measures. If $a=1$, its spectrum is the five fifth roots of unity, each
+with infinite multiplicity.
+\end{proposition}
+\begin{proof}
+The Hamiltonian coordinates give $\omega=T(h)d\theta\wedge dh$.
+Fourier decomposition in the angle gives the orthogonal direct sum
+\begin{equation}\label{eq:koopman}
+ L^2=\bigoplus_{k\in\Z}L^2([h_1,h_2],T(h)dh),\qquad
+ U_k g(h)=e^{2\pi i k\rho(h)}g(h).
+\end{equation}
+These multipliers have modulus one. The $k=0$ radial space gives
+infinitely many eigenvectors with eigenvalue one, proving noncompactness.
+For $a\ne1$, analyticity and nonconstancy make the level sets of each
+$k\ne0$ multiplier measure zero, so there are no eigenvectors there.
+Away from the discrete critical set, the multiplier is a smooth local
+change of variable; its pushforward spectral measures are absolutely
+continuous. The critical set has measure zero. Finally $\rho([h_1,h_2])$
+contains an interval of positive length. Multiplying it by a sufficiently
+large integer $k$ wraps the whole circle, giving that circle as the
+essential range of $U_k$. At $a=1$, the rotation is identically $1/5$,
+and \eqref{eq:koopman} gives all five infinite-multiplicity roots.
+\end{proof}
+The quadrant measure itself is not declared finite, and this annular
+construction does not produce a distinguished self-adjoint target
+generator. Noncompactness also excludes every finite Schatten class.
+\fi
+
+\section{Evidence, dependency boundaries and conclusion}
+The canonical finite evidence contains 24 upper-diagonal orbit controls
+with 288 exact map steps, ten distinct seed-induced five-cycles and one
+nine-cycle, totaling 59 cycle points. Five rational centers are checked
+separately. Five certified intervals inside the gap between classical
+rotation endpoints use a 128-bit rational enclosure of $\pi$ and 96-bit
+cosine enclosures. Their 1,280 prime and composite denominator controls
+give 690 reduced-fraction sufficient-period witnesses. Those witnesses
+are rotation values in the guaranteed image, not claimed exact coordinates
+of reconstructed periodic ovals.
+
+An independent checker differentiates the scalar recurrence in two dual
+directions, rather than importing the producer's matrix product.
+Symbolic checks cover the invariant, weighted symplectic law, quartic
+discriminant, flex, exceptional period and return matrices. The separate
+90-digit quadratures are numerical controls, not rigorous interval
+certificates for Abel integrals. Universal geometry and periodicity
+follow from the proof and the named classical inputs; finite counts do
+not prove them. Repaired-hash mutations test semantic rejection as well
+as type and YAML closure.
+
+\begin{samepage}
+\raggedright
+The source is explicitly owner-heavy. Its real oval ledger is complete,
+but continuous orbit families and rational torsion do not furnish a
+discrete rational-prime carrier. The strict evaluator tuple is
+\par\noindent
+\texttt{A0\_WEAK\_ARITHMETIC\_RELATION}, \texttt{A1\_WEAK},
+\texttt{A2\_FAIL}, \texttt{A3\_FAIL}, \texttt{A4\_FORMAL\_HINT};
+\par\noindent
+the overall Route-A verdict is rejected. No target local data, Euler
+factors, root numbers, automorphy, target zeros, divisor, counting law,
+functional equation or Hilbert--Pólya operator is claimed.
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}. Route B remains disabled.
+\end{samepage}
+
+\begin{thebibliography}{9}\raggedright
+\bibitem{br} G. Bastien and M. Rogalski,
+\emph{Global Behavior of the Solutions of Lyness' Difference Equation},
+Journal of Difference Equations and Applications \textbf{10} (2004), 977--1003.
+\href{https://doi.org/10.1080/10236190410001728104}{doi:10.1080/10236190410001728104}.
+\bibitem{bc} F. Beukers and R. Cushman,
+\emph{Zeeman's Monotonicity Conjecture}, Journal of Differential Equations
+\textbf{143} (1998), 191--200.
+\href{https://doi.org/10.1006/jdeq.1997.3359}{doi:10.1006/jdeq.1997.3359}.
+\bibitem{gmx} A. Gasull, V. Mañosa and X. Xarles,
+\emph{Rational periodic sequences for the Lyness recurrence},
+Discrete and Continuous Dynamical Systems \textbf{32} (2012), 587--604.
+\href{https://doi.org/10.3934/dcds.2012.32.587}{doi:10.3934/dcds.2012.32.587}.
+\bibitem{mazur} B. Mazur, \emph{Modular curves and the Eisenstein ideal},
+Publications Mathématiques de l'IHÉS \textbf{47} (1977), 33--186.
+\href{https://www.numdam.org/item/PMIHES_1977__47__33_0/}{Numdam primary archive}.
+\end{thebibliography}
+\medskip\noindent\small
+\ifcase\CRevisionRound
+Round zero: complete positive ovals, Abel rotations and return matrices.
+\or
+Round one: smooth elliptic fibers and the rational torsion restriction.
+\else
+Round two: real prime periods, rational exclusion and operator obstructions.
+\fi
+\end{document}

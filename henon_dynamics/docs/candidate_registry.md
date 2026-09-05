@@ -3,6 +3,32 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C389--HCS-C393 source-theorem register (2026-09-05)
+
+Frozen baseline: `0c877206d202f732e21ea0b194f9c7fdf30467ee`.
+Evaluator v0.2.0, SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+All five complete releases are recorded in
+[the batch review](../BATCH_REVIEW_C389_C393.md).
+Source completion is distinct from target A1/A2 and literature priority.
+
+| Candidate | Complete source increment | Strict tuple | Artifact |
+|---|---|---|---|
+| HCS-C389 | The full Carlitz ring action has cyclic all-conductor torsion, exact all-multiplier transient/periodic laws, every prime-power Eisenstein polynomial and full Galois group, compatible inverse limits, finite-prime ramification, linearly disjoint different-prime towers and the complete lower filtration/different. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [proof](../henon_carlitz_full_torsion_tower_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_carlitz_full_torsion_tower_route_a/paper/main.pdf) |
+| HCS-C390 | Positive Lyness dynamics has a complete regular-oval foliation, exact normalized rotation and return shear, real sufficiently-large-prime periods for each fixed a≠1, and a real/rational contrast using explicitly imported rational-torsion classification. The a=1 exception and annular Koopman spectrum are retained; no global monotone-twist claim is made. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_lyness_real_rational_torsion_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_lyness_real_rational_torsion_route_a/paper/main.pdf) |
+| HCS-C391 | Every self-adjoint boundary phase of the supercritical half-line inverse-square expression has its entire simple bilateral negative ladder, normalized bound states, complete positive absolutely continuous spectral transform, Green/Stone kernel and scattering phase. Exact discrete dilation covariance coexists with classical collapse and ordinary heat/determinant obstruction. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [proof](../henon_supercritical_inverse_square_limit_cycle_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_supercritical_inverse_square_limit_cycle_route_a/paper/main.pdf) |
+| HCS-C392 | The countable Lüroth Hardy transfer family has its complete trace-class spectrum and primitive stability product, whole-plane trace-norm meromorphic continuation and explicit finite-rank residues. Nonpositive-integer operator poles have nonzero square-zero residues but no scalar determinant pole; at s=1/2−m the frozen determinant has exact pole order m+1. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_luroth_meromorphic_hardy_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_luroth_meromorphic_hardy_route_a/paper/main.pdf) |
+| HCS-C393 | New critical-value inertia proves the full geometric/arithmetic binary inverse-tree group of X²+1 over Q(t) at every height. All-level cycle indices and Galois-cover genera, fixed-point probability asymptotic 2/n and fixed-height good-reduction Chebotarev give a zero limiting periodic fraction over primes. Genericity and the order of limits are explicit. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_quadratic_generic_arboreal_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_quadratic_generic_arboreal_route_a/paper/main.pdf) |
+
+C389 and C393 are `ROUTE_A_EXPLORATORY`; C390--C392 are
+`ROUTE_A_REJECTED`. The evaluator does not supply a unique automatic
+tuple-to-overall formula; these reasoned conservative judgments remain frozen.
+Carlitz theory, Lyness/elliptic-torsion literature, Dereziński--Richard,
+analytic-transfer theory, and Odoni/Pink/JKMT retain their source ownership.
+All nine target/Route-B flags remain false under
+`NO_BAD_EULER_OR_ROOT_NUMBER`. No Route B is invoked.
+
+
 ## HCS-C384--HCS-C388 source-theorem register (2026-09-05)
 
 Frozen baseline: `3e692da6fa94362225c7534e9b66c83c15c7f284`.

@@ -1,0 +1,7 @@
+# Round 2 review
+
+Author checks the final transfer from analytic proof to paper: primitive root compatibility, lower numbering i+1 threshold, exact integral-basis justification, tame/degree-one boundaries, all-conductor quantifiers and multiplier-versus-level clocks are explicit. Parent read-only proof review was actually received; final PDF visual and executable receipts are separate artifacts, not fabricated review votes.
+
+Target assessment stays A0 structural arithmetic relation, A1 weak, A2–A4 fail, overall exploratory. Three structural controls locate the source carrier without claiming six strong-A1 controls. No numerical transform or high-precision result is described; computations are exact algebraic identities and finite regressions.
+
+Actual independent read-only engineering review by collaborative agent build_c383: clean checker and content_gate PASS; nine additional repaired-hash JSON attacks (numeric bool/int/float ambiguities across scope, controls, q, conductor coefficients, level, kernel, lower groups and joint clocks) all rejected. Ten additional YAML attacks (unknown field, false-to-zero, implicit date, duplicate, anchor, alias, merge, nonstring key, Route-B false-to-zero and metric zero-to-false) all rejected. The reviewer confirmed the raw/strict gate runs before write and reported no new verifier hole. No package files were changed by that reviewer; this is same-family AI review, not human or external-model validation.
