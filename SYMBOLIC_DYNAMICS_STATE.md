@@ -4,10 +4,11 @@
 
 ## 当前结论
 
+- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `STAGE1_SCOUTING / ZERO_PAPERS_ADMITTED`。组合、图关系首轮各八候选均未准入；GM 数学有效但独立价值门槛淘汰，ZA 证明未闭合。NS、CS 正分别进行候选核验；已保存作者证明与有限输出，不以候选代替论文。通过证明与碰撞门槛后才编号。
 - 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
 - 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
 - 研究完成提交 `0236e3e7` 已随正常合并 `1b55fbda` 实际推送，远端 ref 已确认；见 [同步回执](docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md)。[配置审计](docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md) 和独立情境/修订测试完成。
-- 恢复与下一动作以 [批次状态](docs/papers197_201_sequence/PIPELINE_STATE.md) 为准；完成证据见 [最终 QA](docs/papers197_201_sequence/FINAL_QA_REPORT.md)，逐篇进展见 [Round2 报告](docs/papers197_201_sequence/ROUND2_REPORT.md)。不因旧索引中的 pending 文字重做已完成审查。
+- 上一批恢复记录见 [已完成批次状态](docs/papers197_201_sequence/PIPELINE_STATE.md)；完成证据见 [最终 QA](docs/papers197_201_sequence/FINAL_QA_REPORT.md)，逐篇进展见 [Round2 报告](docs/papers197_201_sequence/ROUND2_REPORT.md)。不因旧索引中的 pending 文字重做已完成审查。
 - P198、P201 在论文审查中淘汰，原稿和编号保留；五篇完成不能读成 P197–P203 七篇通过。当前台账 **57 次候选尝试**（5 选中、3 reserve、49 淘汰），不是 57 个已验证独立子类。
 
 ## 持续约定与证据边界
