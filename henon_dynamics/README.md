@@ -2725,6 +2725,46 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C384--C388
+
+Five different owners test source-to-target boundaries with complete theorems:
+wild positive-characteristic dynamics, global nonsmooth hyperbolicity,
+nonlinear Hardy-space cascades, compact nilflows and connected algebraic
+rank-two actions. Each entry is one paper, with three substantive revisions.
+
+- [C384 wild additive orbits and geometric natural boundary](henon_wild_additive_geometric_zeta_route_a/README.md) · [paper PDF](henon_wild_additive_geometric_zeta_route_a/paper/main.pdf)
+- [C385 complete bounded Lozi dynamics and instability-clock exclusion](henon_lozi_global_hyperbolic_clock_route_a/README.md) · [paper PDF](henon_lozi_global_hyperbolic_clock_route_a/paper/main.pdf)
+- [C386 rank-one alpha-Szego threshold and exact cascade](henon_alpha_szego_rank_one_cascade_route_a/README.md) · [paper PDF](henon_alpha_szego_rank_one_cascade_route_a/paper/main.pdf)
+- [C387 compact Heisenberg nilflow returns and full spectrum](henon_compact_heisenberg_nilflow_spectrum_route_a/README.md) · [paper PDF](henon_compact_heisenberg_nilflow_spectrum_route_a/paper/main.pdf)
+- [C388 connected algebraic Z2 fixed groups and lattice correction](henon_connected_algebraic_z2_resonance_route_a/README.md) · [paper PDF](henon_connected_algebraic_z2_resonance_route_a/paper/main.pdf)
+
+C384 separates geometric cycles from inseparable fixed-scheme multiplicity
+and proves a natural boundary for the geometric zeta itself. C385 exhausts
+the whole bounded set, not a selected subhorseshoe, and closes every signed
+periodic multiplier plus a quadratic-unit clock obstruction. C386 derives a
+turning-point-safe two-sided cascade envelope and exhibits equal native
+determinants with opposite bounded/cascading behavior at one fixed parameter.
+C387 joins every clean return family to the full signed representation
+decomposition and explicit generator domain; native continuous spectrum
+precludes the ordinary global trace/determinant. C388 proves the integer
+kernel covolume correction missing from a verified preprint formula and
+rules out every directional ordinary cardinality zeta by a fixed two-torus.
+Its resonance criterion and Mahler entropy value have classical source owners.
+
+C384 retains structural A0 and weak A1 (`ROUTE_A_EXPLORATORY`); C388 retains
+weak A0 and weak A1. C385 has weak A1; C386 and C387 have A1_FAIL.
+All five have A2_FAIL and A3_FAIL. C384 has A4_FAIL and the other four only
+A4_FORMAL_HINT. No source theorem is promoted to a target divisor or prime
+clock. All nine target/Route-B flags remain false under
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+See the [selection record](IDEA_REPORT_C384_C388.md),
+[frozen contracts](BATCH_PLAN_C384_C388.md),
+[batch review and release receipts](BATCH_REVIEW_C384_C388.md),
+[candidate register](docs/candidate_registry.md),
+[obstruction register](docs/obstruction_registry.md) and
+[recovery entry point](CURRENT_RESEARCH_STATE.md).
+
 ## Route-A independent cross-subtype round C379--C383
 
 This authorized round joins five different owners: reversible hyperbolic

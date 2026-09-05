@@ -1,0 +1,346 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<\CRevisionID><\CRevisionID>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\newfontfamily\zhfont[BoldFont={Droid Sans Fallback}]{Droid Sans Fallback}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\C}{\mathbf C}
+\newcommand{\id}{\mathrm{id}}
+\title{Wild Multiplicity, Exact Residue Degrees and the Geometric Zeta\protect\\
+of the Additive Map $x\mapsto x+x^p$}
+\author{HCS-C384 / HEN-O368}
+\date{5 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every prime characteristic, including two, we distinguish the geometric
+fixed points of $x\mapsto x+x^p$ from the lengths of its fixed schemes.
+At iterate $n$, writing $e=p^{v_p(n)}$, the scheme has length $p^n$ but only
+$p^{n-e}$ geometric points, each of multiplicity $p^e$.
+This identifies the exact wild correction and all primitive-cycle counts.
+\ifnum\CRevisionRound>0
+A linearized-polynomial Euclidean argument gives every finite-extension
+count without assuming that either clock is prime to the characteristic.
+We determine the least splitting degree and separate dynamical least period
+from residue degree by a double M\"obius inversion.
+\fi
+\ifnum\CRevisionRound>1
+A valuation expansion yields a Lambert series with an explicit interior
+tail bound. At every nontrivial root of unity of $p$-power order its radial
+logarithmic-derivative residue is strictly between zero and one, ruling
+out local meromorphic continuation of the geometric zeta itself. Thus its
+circle $|z|=1/p$ is a meromorphic natural boundary, although length counting
+gives the rational function $(1-pz)^{-1}$. Independent exact computations
+validate 1,344 iterate cells and 5,760 extension cells. The result is a
+source-specific theorem synthesis and audit, not a new Riemann determinant
+or a claim of priority over the classical work of Bridy.
+\fi
+\end{abstract}
+\noindent\textbf{Keywords:} additive polynomials; wild multiplicity; periodic points;
+finite fields; dynamical zeta; \ifnum\CRevisionRound>1 natural boundary\else primitive cycles\fi
+
+\begin{center}{\zhfont\large 中文摘要}\end{center}
+{\zhfont\begin{flushleft}
+本文研究所有素特征中的加性映射，并严格区分几何固定点与概形长度。\\
+迭代中的野性重数由素进赋值完全决定，纯素数幂周期退化单独处理。
+\ifnum\CRevisionRound>0
+线性化多项式的欧几里得算法给出全部扩域计数，不要求扩域次数与\\
+特征互素。双重莫比乌斯反演区分动力学周期和算术剩余域次数。
+\fi
+\ifnum\CRevisionRound>1
+显式朗伯级数及其非整数留数证明几何塞塔函数存在亚纯自然边界。\\
+概形长度的有理行列式不能替代真正的周期轨道计数；本文不作目标\\
+黎曼函数或文献优先权声明，所有计算仅作为完整解析证明的回归验证。
+\fi
+\end{flushleft}}
+\noindent{\zhfont\textbf{关键词：} 加性多项式；野性重数；周期点；有限域；动力学塞塔；
+\ifnum\CRevisionRound>1 自然边界\else 本原周期\fi}
+
+\section{The source and the precise contribution}
+Fix a prime $p$ and $f(x)=x+x^p$ on $\mathbb A^1(\overline\F_p)$.
+The parameter $p$ indexes source fibres; it is not a period label assigned
+to a rational prime. The clock is composition number $n\ge1$.
+The point at infinity is not adjoined. For a polynomial $Q(T)=\sum q_jT^j$
+over $\F_p$, set $L_Q(X)=\sum q_jX^{p^j}$. Direct expansion gives
+$L_{AB}=L_A\circ L_B$ and $L_{A+B}=L_A+L_B$.
+
+Transcendence for additive-polynomial dynamical zeta functions is classical:
+Bridy's earlier theorem covers $x^{p^m}+ax$ in odd characteristic
+\cite[Theorem 2]{br12}, and the later additive-polynomial theorem includes
+all positive characteristics \cite[Theorem 1.3]{br16}. We claim no priority
+for transcendence or natural boundaries. Our contribution within this
+research sequence is a complete, source-locked account of geometric versus
+scheme counting, with independent evidence and explicit restrictions on
+determinant promotion. The all-parameter proof does not depend on the
+finite computational grid.
+
+\section{All iterates and their wild multiplicities}
+\noindent\textbf{Round 0 advance.} The geometric census and the scheme-length
+census differ at every iterate, and the difference has an exact formula.
+
+\begin{theorem}[Geometric and scheme ledgers]
+Write $n=em$, $e=p^{v_p(n)}$, with $p\nmid m$. The fixed scheme of $f^n$
+has length $p^n$. Its geometric points number $N_n=p^{n-e}$ and each has
+local multiplicity $p^e$.
+\end{theorem}
+\begin{proof}
+In the commutative additive-endomorphism ring, $f=1+F$ with $F(X)=X^p$.
+Thus $f^n-\id=L_{Q_n}$, where
+\[
+ Q_n(T)=(1+T)^n-1=T^eH_m(T)^e,
+ \qquad H_m(T)=\frac{(1+T)^m-1}{T}.
+\]
+Since $H_m(0)=m\ne0$, the linearized polynomial $L_{H_m^e}$ is separable
+of degree $p^{e(m-1)}=p^{n-e}$. Moreover
+\[
+ f^n(X)-X=L_{H_m^e}(X)^{p^e}.
+\]
+Every root is therefore repeated exactly $p^e$ times. The product of
+the number of roots and their common multiplicity is $p^n$, the degree
+of the original monic polynomial.
+\end{proof}
+
+For $n=p^v$ one has $H_1=1$, so the only geometric fixed point is $0$,
+and $f^{p^v}(X)-X=X^{p^{p^v}}$. In particular no nonzero point has pure
+$p$-power period. The differential of $f$ is $1$ everywhere, and every
+periodic multiplier is $1$. Wild scheme multiplicity is not a real
+Lyapunov exponent or a nondegenerate flat-trace denominator.
+
+On each finite fixed set, $f$ is a permutation because $f^n=\id$ there.
+Consequently forward-oriented primitive-cycle counts are
+\begin{equation}
+ P_n=\frac1n\sum_{d\mid n}\mu(n/d)p^{d-p^{v_p(d)}}\in\Z_{\ge0},
+ \qquad N_n=\sum_{d\mid n}dP_d.\label{eq:primitive}
+\end{equation}
+No reversal quotient is imposed; every geometric orbit has weight one.
+The scheme-length exponential instead satisfies
+\begin{equation}
+ \zeta_p^{\rm len}(z)=\exp\left(\sum_{n\ge1}p^n\frac{z^n}{n}\right)
+ =\frac1{1-pz}.\label{eq:length}
+\end{equation}
+This is a scalar length-counting determinant, not a geometric orbit trace.
+The discrepancy is already $p$ versus $1$ at the first iterate.
+
+\ifnum\CRevisionRound>0
+\section{Every extension and the two-clock dictionary}
+\noindent\textbf{Round 1 advance.} The extension census is closed without
+discarding repeated factors in characteristic-divisible extension degrees.
+
+\begin{theorem}[All extension degrees]
+For all $n,r\ge1$,
+\[
+ N_{n,r}:=\#\{x\in\F_{p^r}:f^n(x)=x\}
+ =p^{\deg\gcd((1+T)^n-1,T^r-1)}.
+\]
+For $m>1$, let $o_m$ be the order of the unit $T$ in
+$\F_p[T]/(H_m)$. The least extension containing all geometric fixed
+points of $f^n$ has degree $eo_m$. For $m=1$ that degree is $1$.
+\end{theorem}
+\begin{proof}
+Euclidean division $A=BQ+R$ implies
+$L_A=L_Q\circ L_B+L_R$. Hence $L_A,L_B$ have the same common roots
+as $L_B,L_R$. Iterating the Euclidean algorithm shows that their common
+roots are the roots of the monic linearized gcd. Apply this with
+$A=(1+T)^n-1$, $B=T^r-1$; then $L_B=X^{p^r}-X$.
+The gcd $g$ has nonzero constant coefficient because $T\nmid B$,
+so $L_g$ is separable and has $p^{\deg g}$ roots. This argument permits
+$p\mid n$ and $p\mid r$; replacing $B$ by its radical would be an error.
+
+The polynomial $H_m$ is squarefree, since $(1+T)^m-1$ has no common
+root with its derivative $m(1+T)^{m-1}$. Its constant coefficient is
+nonzero. Thus the finite algebra $\F_p[T]/(H_m)$ is a product of finite
+fields, and $o_m$ is prime to $p$. The gcd attains degree $n-e$ exactly
+when $H_m^e\mid T^r-1$. Factoring the latter polynomial into its
+prime-to-$p$ part with multiplicity $p^{v_p(r)}$ shows this is equivalent
+to $eo_m\mid r$. For $m=1$ the root set is $\{0\}$.
+\end{proof}
+
+Let $E_{n,r}$ count points of exact dynamical period $n$ and exact residue
+degree $r$. A polynomial defined over $\F_p$ cannot increase residue
+degree. On a periodic cycle the field inclusions return to the starting
+point, so all inclusions are equalities. Double M\"obius inversion gives
+\begin{equation}
+ E_{n,r}=\sum_{a\mid n}\sum_{b\mid r}\mu(n/a)\mu(r/b)N_{a,b},
+ \qquad E_{n,r}/n\in\Z_{\ge0}.\label{eq:double}
+\end{equation}
+The quotient counts $f$-cycles whose points have exact residue degree $r$.
+It does not count joint orbits under $f$ and Frobenius: the latter could
+identify several $f$-cycles. Thus no hidden identification of the two
+clocks is used.
+
+Since $N_n\le p^n$ and $N_n=p^{n-1}$ when $p\nmid n$, the logarithmic
+series has radius exactly $1/p$. Within $|z|<1/p$,
+\begin{equation}
+ \zeta_p(z)=\exp\left(\sum_{n\ge1}N_n\frac{z^n}{n}\right)
+ =\prod_{n\ge1}(1-z^n)^{-P_n}.\label{eq:euler}
+\end{equation}
+Indeed $nP_n\le N_n$ ensures absolute convergence; expanding each
+logarithm and using \eqref{eq:primitive} justifies the exchange of sums.
+We call $D_p=1/\zeta_p$ the native primitive determinant germ, without
+assuming an operator realization.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{An explicit meromorphic natural boundary}
+\noindent\textbf{Round 2 advance.} The natural-boundary claim is proved
+for the zeta itself, not inferred informally from a singular derivative.
+The argument also supplies a rigorous interior tail bound.
+
+Set $w=pz$, $\mathcal Z_p(w)=\zeta_p(w/p)$, and
+\[
+ A_p(w)=w\frac{\mathcal Z_p'(w)}{\mathcal Z_p(w)}
+       =\sum_{n\ge1}p^{-p^{v_p(n)}}w^n.
+\]
+Define $c_0=p^{-1}$ and
+$c_k=p^{-p^k}-p^{-p^{k-1}}<0$ for $k\ge1$.
+The telescoping coefficient identity yields
+\begin{equation}
+ A_p(w)=\sum_{k\ge0}c_k\frac{w^{p^k}}{1-w^{p^k}},\qquad |w|<1.
+ \label{eq:lambert}
+\end{equation}
+For $|w|\le\rho<1$ and $K\ge0$, its tail is bounded by
+\begin{equation}
+ \left|\sum_{k>K}c_k\frac{w^{p^k}}{1-w^{p^k}}\right|
+ \le p^{-p^K}\frac{\rho^{p^{K+1}}}{1-\rho^{p^{K+1}}}.
+ \label{eq:tail}
+\end{equation}
+This follows from $\sum_{k>K}|c_k|=p^{-p^K}$ and monotonicity of
+$\rho^h/(1-\rho^h)$. It proves normal convergence on compact subdisks.
+With each logarithm normalized at zero, integration gives the local formula
+\[
+ \log\mathcal Z_p(w)=-\sum_{k\ge0}\frac{c_k}{p^k}\log(1-w^{p^k}).
+\]
+No branch continuation beyond the unit disk is built into this equality.
+
+\begin{theorem}[Natural boundary and HEN-O368]
+The circle $|z|=1/p$ is a meromorphic natural boundary for both
+$\zeta_p$ and $D_p$. Neither has a same-variable meromorphic global
+completion, even after multiplication by an entire zero-free function.
+\end{theorem}
+\begin{proof}
+Fix a root of unity $\omega$ of exact order $p^K$, $K\ge1$. In
+\eqref{eq:lambert}, the finitely many terms with $k<K$ vanish after
+multiplication by $1-r$ and substitution $w=r\omega$, $r\uparrow1$.
+For $k\ge K$, $\omega^{p^k}=1$, and
+\[
+ 0\le(1-r)\frac{r^{p^k}}{1-r^{p^k}}\le1,
+ \qquad (1-r)\frac{r^{p^k}}{1-r^{p^k}}\longrightarrow p^{-k}.
+\]
+Summability of $|c_k|$ permits dominated convergence. Hence
+\[
+ (1-r)A_p(r\omega)\longrightarrow
+ S_K:=\sum_{k\ge K}c_kp^{-k}<0,
+ \qquad 0<-S_K\le p^{-K-p^{K-1}}<1.
+\]
+If $\mathcal Z_p$ had a meromorphic continuation near $\omega$, it
+would be nonzero as a germ and its local order $j$ would be an integer.
+The logarithmic derivative would then have residue $j$. But its radial
+limit is
+\[
+ \lim_{r\uparrow1}(r\omega-\omega)
+ \frac{\mathcal Z_p'(r\omega)}{\mathcal Z_p(r\omega)}=-S_K\in(0,1),
+\]
+which is impossible. This includes the boundary case $p=2,K=1$.
+Nontrivial $p$-power roots are dense on the unit circle. Any continuation
+through another point would define a meromorphic germ at one of these
+roots and agree on the connected overlap inside the disk, a contradiction.
+The reciprocal has the same obstruction because reciprocation preserves
+nonzero meromorphic germs. Multiplication by an entire zero-free factor
+cannot help: division by that factor would restore a forbidden continuation.
+\end{proof}
+
+The theorem does not exclude an operator determinant defined only inside
+the original disk, distributional boundary values, a changed variable with
+a different domain, or a genuinely different dynamical object.
+It does exclude replacing the geometric ledger by \eqref{eq:length}
+and claiming that the original primitive determinant thereby continues.
+
+\section{Independent exact evidence and source collisions}
+The producer implements modular Euclid and direct finite-field arithmetic.
+The checker imports no producer: it uses sparse polynomial Euclid and a
+matrix-rank recount of the nine small fields. SymPy separately checks
+binomial factorization, extension gcds and the first sixteen primitive-product
+coefficients. All computations are exact; no numerical target zeros are used.
+
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Frozen regression population & Size\\
+\midrule
+Prime--iterate rows: 14 primes through 43, $1\le n\le96$ & 1,344\\
+Extension rows: $p=2,3,5,7,11$, $n\le48$, $r\le24$ & 5,760\\
+Neighboring coefficient rows: $a\in\F_p$, $n\le32$ & 896\\
+Direct field recounts: $p=2,3,5$, $r=1,2,3$ & 9\\
+Rational noninteger-residue enclosures & 9\\
+Rational interior-tail certificates & 18\\
+\bottomrule
+\end{tabular}
+\end{center}
+Two independent working directories reproduce byte-identical evidence.
+Hostile tests repair the payload hash before attacking geometric counts,
+multiplicities, characteristic-divisible extensions, primitive counts,
+residue signs, source clocks, schema and target flags. These are execution
+and schema checks, not machine proofs of the infinite theorem.
+
+Repository C204 already closes a fixed finite-dimensional finite-field
+linear system. C14 studies chronological $S$-integer solenoid zeta, C159 a
+Thue--Morse renewal natural boundary, and C382 reduced elliptic Frobenius
+fixed points. The current infinite geometric population, wild fixed-scheme
+multiplicity and complete extension dictionary are a different owner.
+The Bridy results remain direct prior art, not negative controls to be ignored.
+\fi
+
+\section{Controls and the target boundary}
+The parent $g_0(x)=x^p$ has $(g_0^n-x)'=-1$ and $p^n$ distinct fixed
+points, so its length and geometric ledgers agree. For
+$g_a(x)=ax+x^p$, $a\in\F_p^\times$ of order $d$, the binomial polynomial
+$(a+T)^n-1$ has nonzero constant term if $d\nmid n$; otherwise its lowest
+nonzero term has degree $p^{v_p(n)}$. Thus the counts are respectively
+$p^n$ and $p^{n-p^{v_p(n)}}$. This is an intrinsic derivative/unit-order
+control. Mixed composite integers cannot be field characteristics;
+prime powers specify extension sizes over a fixed prime.
+
+The conservative evaluator result is
+\[
+ (\mathrm{A0\_STRUCTURAL\_ARITHMETIC\_RELATION},
+ \mathrm{A1\_WEAK},\mathrm{A2\_FAIL},\mathrm{A3\_FAIL},\mathrm{A4\_FAIL}).
+\]
+Finite-field arithmetic is present, but no autonomous primitive orbit is
+assigned to each rational prime and no target log-prime period law follows.
+The six mandatory A1 controls are not completed. No target Euler factors,
+root number, automorphy, target divisor, target functional equation, target
+zero match or Hilbert--P\'olya operator is claimed.
+
+\noindent Route B remains disabled.
+
+\section*{Reproducibility and research-process disclosure}
+This work used AI-assisted mathematical drafting and exact-code development.
+The proof, source audit, actual same-family cross-agent review, independent
+checker, symbolic lane, repaired-hash attacks and deterministic compilation
+receipts are retained. Separate-agent review exposed and corrected a
+standalone-checker type-coercion gap: prime and extension labels now reject
+boolean and floating-point aliases. The revised hostile suite rejects
+58 of 58 attacks. Independent implementations and separate-agent reviews
+reduce particular failure risks but are not independent-model or
+formal-verification certificates. No unpublished material was uploaded to
+an external model, and no literature-first claim is made.
+
+\begin{thebibliography}{9}
+\bibitem{br12} A. Bridy, Transcendence of the Artin--Mazur zeta function for
+polynomial maps of $\mathbb A^1(\overline\F_p)$,
+\emph{Acta Arithmetica} \textbf{156} (2012), 293--300.
+Author preprint: \url{https://arxiv.org/abs/1202.0362}.
+\bibitem{br16} A. Bridy, The Artin--Mazur zeta function of a dynamically
+affine rational map in positive characteristic,
+\emph{Journal de th\'eorie des nombres de Bordeaux} \textbf{28} (2016), 301--324.
+\url{https://doi.org/10.5802/jtnb.941}.
+\end{thebibliography}
+\end{document}

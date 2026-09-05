@@ -1,0 +1,526 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=19mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{fontspec,unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setmathfont{TeX Gyre Pagella Math}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\newfontfamily\cjkfont{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\T}{\mathbb T}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\covol}{\operatorname{covol}}
+\newcommand{\tors}{\operatorname{tors}}
+\newcommand{\rank}{\operatorname{rank}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\ifcase\CRevisionRound
+\title{Lattice Resonance in a Connected Algebraic Action: Complete Quotients and Continuous Fixed Strata}
+\or
+\title{Lattice Resonance in a Connected Algebraic Action: Integer Covolumes and a Finite-Index Correction}
+\else
+\title{Lattice Resonance in a Connected Algebraic Action: Exact Components, Arithmetic Entropy and Orbit-Count Failure}
+\fi
+\author{HCS-C388 source-theorem and reproducibility package}
+\date{5 September 2026}
+\begin{document}
+\emergencystretch=3em
+\maketitle
+\begin{abstract}
+\ifcase\CRevisionRound
+We reconstruct every finite-index fixed group of the connected algebraic
+action defined by the integral relation $1+u+v$. A canonical Hermite lattice
+presentation produces an exact integer convolution matrix, whose Smith
+factors determine the complete compact-group type. There are exactly two
+possible Fourier zero modes. They occur precisely when the acting lattice
+lies in one fixed index-three subgroup; otherwise the fixed group is finite.
+At resonance the fixed group has a two-dimensional torus factor. We give
+the full quotient conventions, including coincident neighbors and skew
+lattices, and distinguish finite cardinality from connected components.
+This is a source-local reconstruction with direct classical ownership,
+not a claim to have discovered the resonance condition. No scalar
+prime-time clock or target determinant is supplied by the quotient atlas.
+\or
+We compute the exact component correction for the resonant fixed groups
+of the connected algebraic action defined by $1+u+v$. A general integer-image
+covolume lemma converts the product of nonzero singular values into the
+torsion order of a cokernel. The saturated two-mode kernel has Gram
+determinant $N^2/3$ at lattice index $N$, so the nonzero Fourier product
+must be multiplied by $3/N^2$. The index-three all-ones matrix gives an
+exact minimal counterexample to the uncorrected finite-lattice formula
+printed in an explicitly identified arXiv version. This statement does
+not refute the classical entropy asymptotic or establish the status of
+later corrigenda. Exact Smith witnesses and characteristic coefficients
+provide reproducible finite controls for the all-lattice proof.
+\else
+We give an all-lattice reconstruction of the connected algebraic action
+defined by $1+u+v$, retaining the integer covolumes that distinguish a
+singular Fourier product from a component count. At index $N$, resonance
+occurs on one congruence class of Hermite lattices; the fixed group then
+has a two-torus factor and its component count is $3/N^2$ times the nonzero
+Fourier product. The smallest resonant quotient yields a version-specific
+correction to the displayed finite-lattice identity in an accessed preprint. Its two-torus
+also contains uncountably many primitive three-point orbits, obstructing
+ordinary orbit-cardinality zeta functions for the rank-two action and every
+rank-one restriction. In contrast, the classical joint entropy has the
+Smyth character-modulo-three special value, which we rederive by Jensen
+and Fourier integration. These statements separate an intrinsic arithmetic
+scalar from a discrete prime-carrying orbit trace. The source has direct
+classical owners, and no target divisor or quantum-generator claim follows.
+\fi
+\end{abstract}
+\begin{center}{\cjkfont 中文摘要}\end{center}
+{\cjkfont\small\raggedright
+\ifcase\CRevisionRound
+本文重建由整数关系定义的紧连通二维代数作用的全部有限指数固定群。
+规范埃尔米特格表示给出精确整数卷积矩阵，其史密斯不变量确定固定群的完整紧群类型。
+傅里叶分解中只有两个可能零模；当且仅当作用子格包含于指定的指数三子格时出现共振，固定群因而含二维环面。
+非共振情形的固定群有限。本文明确斜子格与重合邻点约定，并区分固定点总数和连通分支数。
+这些源系统结论具有直接经典文献归属，不被包装成新发现，也没有提供素数飞行时间或目标行列式。
+\or
+本文给出上述连通代数作用的共振固定群分支数修正。
+一般整数像格的体积引理把非零奇异值乘积转化为余核挠子群的阶。
+在指数为正整数的子格上，饱和整数核格的格拉姆行列式精确等于指数平方的三分之一，因此必须加入相应倒数修正。
+最小指数三的全一矩阵给出所核对预印本版本中有限格公式的精确反例。
+这个局部修正不否定经典熵渐近定理，也不声称已确定后续勘误情况。
+完整史密斯证书和特征多项式为全子格证明提供独立有限核验。
+\else
+本文贯通连通二维代数作用的全部子格固定群、整数核格体积修正和本原轨道计数障碍。
+共振时固定群包含二维环面；删掉零特征值并不足以得到分支数，还必须乘以指数平方倒数的三倍。
+最小共振商给出所核对预印本有限格公式的版本限定修正，同时承载不可数多个三点本原轨道。
+因此二维作用及其每个一维限制的普通逐轨计数函数均在有限阶失去有限系数。
+与此并存，经典联合熵具有模三特征的算术特殊值，本文用詹森公式和傅里叶积分重新推导并正面标注文献归属。
+算术标量并不是离散素数轨道桥梁；本文不声称目标除子匹配、量子生成元或新的文献优先权。
+\fi\par}
+\medskip
+\noindent\textbf{Keywords:} algebraic action; lattice resonance; Smith form; integer covolume; Mahler measure; orbit counting
+\par\noindent{\cjkfont\textbf{关键词：}代数作用；子格共振；史密斯形；整数格体积；马勒测度；轨道计数}\par
+
+\section{One relation, two different kinds of fixed groups}
+A Fourier zero is not merely an eigenvalue to omit from a determinant.
+For a compact connected algebraic action, it can create a continuous family
+of periodic states. The relation studied here is elementary:
+\begin{equation}\label{eq:source}
+ X=\{x\in\T^{\Z^2}:x_{i,j}+x_{i+1,j}+x_{i,j+1}=0\},
+ \qquad (\alpha^{(a,b)}x)_{i,j}=x_{i+a,j+b},
+ \quad \T=\R/\Z.
+\end{equation}
+The challenge addressed by this reconstruction is to retain the integral
+lattice while passing between fixed groups, Fourier modes and finite
+component counts. Real diagonalization alone discards that information.
+
+Every acting sublattice has a unique column Hermite normal form
+\begin{equation}\label{eq:hnf}
+ \Lambda=\langle(a,0),(b,c)\rangle,\qquad
+ a,c>0,\quad0\le b<a,\quad N=[\Z^2:\Lambda]=ac.
+\end{equation}
+We write $\Fix_\Lambda$ for points fixed by every element of $\Lambda$,
+not for points whose stabilizer is exactly $\Lambda$.
+The central source dichotomy is finite versus a finite union of two-tori.
+\ifnum\CRevisionRound>0
+The additional finite-lattice statement is that the resonant component
+count requires the factor $3/N^2$. For example, at the rectangular
+$3\times3$ quotient the nonzero Fourier product is $81$ but there are only
+three components. At the smallest skew index-three quotient the product
+is $3$ and there is one component.
+\fi
+\ifnum\CRevisionRound>1
+These same continuous modes give the paper's stopping result: an arithmetic
+entropy value can exist even when the ordinary discrete orbit zeta does not.
+\fi
+
+\paragraph{Classical ownership and the precise scope.}
+Lind, Schmidt and Ward identify the entropy of principal algebraic actions
+with Mahler measure, and display this exact polynomial in their introduction
+\cite{lsw}. Smyth owns its special-value evaluation \cite{smyth}.
+Lind, Schmidt and Verbitskiy give the exact Hermite congruence and the
+finite-versus-two-torus distinction in Example 3.2 of the accessed source
+\cite{lsv}. None of those facts is presented here as a literature discovery.
+The package supplies an explicit all-lattice reconstruction, complete
+integer certificates and a careful distinction between the quantities
+that an orbit-count construction needs.
+\ifnum\CRevisionRound>0
+Section~\ref{sec:correction} identifies a finite-lattice error in the
+displayed formula of one accessed version. It neither infers the status
+of later corrigenda nor challenges the entropy asymptotic from that error.
+\fi
+
+\section{Connected source and exact quotient matrices}
+The relation in \eqref{eq:source} is closed in a product of circles, so $X$
+is a compact metrizable abelian group. Coordinate shifts are automorphisms.
+Its discrete character module is
+\begin{equation}\label{eq:dual}
+ \widehat X=\Z[u^{\pm1},v^{\pm1}]/(1+u+v)
+ \simeq\Z[u^{\pm1},(1+u)^{-1}].
+\end{equation}
+The right-hand ring embeds in $\mathbb Q(u)$ and is additively torsion-free.
+The duality criterion for compact abelian groups therefore makes $X$
+connected. This is not a finite-characteristic three-dot shift: its
+coordinates are circles, and the scalar ring is the integers.
+
+Let $G=\Z^2/\Lambda$. Choose representatives $(i,j)$ with
+$0\le i<a$, $0\le j<c$ in lexicographic order. To reduce any integer pair,
+write $j=qc+r$, $0\le r<c$, and replace it by
+$((i-qb)\bmod a,r)$. Let $S_1,S_2$ be the permutation matrices
+$(S_kx)_g=x_{g+e_k}$. They commute and are orthogonal. Define
+\begin{equation}\label{eq:matrix}
+ A_\Lambda=I+S_1+S_2,
+ \qquad\Fix_\Lambda=\ker(A_\Lambda:\T^N\longrightarrow\T^N).
+\end{equation}
+If two neighbors coincide, their contributions add. In particular, at
+index one the matrix is $[3]$, not $[1]$. Equation~\eqref{eq:matrix}
+is exact because a $\Lambda$-periodic array is determined by its quotient
+coordinates and the defining relation must hold at every quotient site.
+
+\begin{theorem}[Complete effective fixed-group presentation]\label{thm:smith}
+Suppose integer unimodular matrices $U,V$ put $A_\Lambda$ into Smith form
+\[
+ U A_\Lambda V=\operatorname{diag}(d_1,\ldots,d_r,0,\ldots,0),
+ \qquad0<d_1\mid\cdots\mid d_r.
+\]
+Then
+\begin{equation}\label{eq:group}
+ \Fix_\Lambda\simeq\T^{N-r}\times
+ \prod_{j=1}^r\Z/d_j\Z.
+\end{equation}
+This classifies every finite-index lattice fixed group by an explicit
+integer algorithm. The splitting need not be canonical.
+\end{theorem}
+\begin{proof}
+The matrices $U,V$ induce torus automorphisms since their inverse matrices
+are integral. A diagonal map $t\mapsto d_jt$ on a circle has kernel
+$\Z/d_j\Z$, whereas a zero diagonal entry leaves a whole circle free.
+Applying these facts coordinatewise proves \eqref{eq:group}. Smith
+normal form terminates by exact integer Euclidean row and column
+operations; no numerical eigenvalue threshold enters the statement.
+\end{proof}
+
+\section{All Hermite lattices and the two resonant modes}
+Write $\omega=\exp(2\pi i/3)$ and
+$K=\{(i,j)\in\Z^2:i-j\equiv0\pmod3\}$.
+Finite characters of $G$ diagonalize \eqref{eq:matrix}; their eigenvalues are
+$1+\chi(e_1)+\chi(e_2)$, including every character multiplicity.
+For unit complex numbers $z,w$, $1+z+w=0$ implies
+$1=|1+z|^2=2+2\operatorname{Re}z$. Hence
+\begin{equation}\label{eq:zeros}
+ (z,w)\in\{(\omega,\omega^2),(\omega^2,\omega)\}.
+\end{equation}
+The first character descends through $G$ exactly when $\Lambda\subset K$;
+the conjugate has the identical condition.
+
+\begin{theorem}[The complete resonance test]\label{thm:resonance}
+For \eqref{eq:hnf}, resonance is equivalent to
+\begin{equation}\label{eq:resonance}
+ 3\mid a,\qquad b\equiv c\pmod3.
+\end{equation}
+At resonance the nullity of $A_\Lambda$ is exactly two and $\Fix_\Lambda$
+is a finite union of two-tori. Otherwise it is finite, with cardinality
+\begin{equation}\label{eq:nonsingular}
+ |\Fix_\Lambda|=|\det A_\Lambda|
+ =\prod_{\chi\in\widehat G}|1+\chi(e_1)+\chi(e_2)|.
+\end{equation}
+\end{theorem}
+\begin{proof}
+The character $(i,j)\mapsto\omega^{i-j}$ is trivial on the two lattice
+generators precisely under \eqref{eq:resonance}. Equation~\eqref{eq:zeros}
+excludes all other zero modes. Fourier diagonalization gives the nullity;
+Theorem~\ref{thm:smith} then proves the compact-group assertion. In the
+invertible case, the number of kernel points is the determinant's absolute
+value. These arguments reproduce the classical test in \cite[Example 3.2]{lsv}
+with the current forward-shift convention.
+\end{proof}
+
+\paragraph{Index does not decide resonance.}
+For $(a,c)=(3,1)$, the shear $b=1$ is resonant and $b=0,2$ are not.
+Thus a census based only on the index loses the continuous fixed stratum.
+For rectangular lattices $b=0$, the criterion becomes $3\mid a$ and
+$3\mid c$. Prime indices, composite indices, and neighboring shears use
+the same source rule; no rational-prime labels are attached to the orbits.
+
+\ifnum\CRevisionRound>0
+\section{Integer covolumes determine the component count}\label{sec:covolume}
+The nonzero Fourier product is finite at resonance, but it is not by
+itself the order of the torsion cokernel. The following lattice lemma
+keeps track of the image of all integer vectors.
+
+\begin{lemma}[Integer-image covolume formula]\label{lem:covolume}
+Let $A\in M_N(\Z)$ have rank $r$, and let $P(A)$ be the product of its
+nonzero singular values. Set $L=\ker A\cap\Z^N$ and
+$L'=\ker A^t\cap\Z^N$. With Euclidean covolumes in their real spans,
+\begin{equation}\label{eq:covolume}
+ |\tors(\Z^N/A\Z^N)|
+ =\frac{P(A)}{\covol(L)\covol(L')}.
+\end{equation}
+Empty products and zero-dimensional covolumes are one.
+\end{lemma}
+\begin{proof}
+The integer kernel $L$ is saturated: if $kz\in L$ for a nonzero integer
+$k$, then $Az=0$. Extend a basis of $L$ to a unimodular integer basis.
+Put $E=\operatorname{span}L$ and let $\pi$ be orthogonal projection onto
+$E^\perp$. The projected complementary columns are a lattice basis of
+$\pi\Z^N$. The block-volume formula for the extended basis gives
+\[
+ 1=\covol(L)\,\covol(\pi\Z^N).
+\]
+The dual lattice of $\pi\Z^N$ in $E^\perp$ is $E^\perp\cap\Z^N$:
+integrality of inner products against every projected integer vector is
+equivalent to integrality against every integer vector. This also proves
+that orthogonal complementary saturated integer lattices have equal
+covolumes.
+
+The restriction of $A$ from $E^\perp$ to $\operatorname{im}A$ scales
+$r$-dimensional volume by $P(A)$. Therefore $A\Z^N=A\pi\Z^N$ has
+covolume $P(A)/\covol(L)$ in its image span. Its saturation
+$\operatorname{im}A\cap\Z^N$ has covolume $\covol(L')$ by the
+complement identity. The index of the integer image in its saturation
+is precisely the torsion order of the cokernel. Dividing the two
+covolumes proves \eqref{eq:covolume}. The argument does not assume
+that $A$ is symmetric.
+\end{proof}
+
+At resonance, the common real kernel of $A_\Lambda$ and $A_\Lambda^t$
+consists of vectors with values $A,B,-A-B$ on the three residue classes
+$i-j=0,1,2\pmod3$. The two conjugate Fourier modes prove completeness
+of this plane. Each class has $N/3$ coordinates. The saturated integer
+kernel has colour-value basis $(1,0,-1),(0,1,-1)$, with Gram matrix
+\begin{equation}\label{eq:gram}
+ \mathcal G=\frac N3\begin{pmatrix}2&1\\1&2\end{pmatrix},
+ \qquad\det\mathcal G=\frac{N^2}{3}.
+\end{equation}
+Both bases are full integer kernel bases, not smaller-index sublattices.
+Because the shifts commute and are orthogonal, $A_\Lambda$ is normal;
+its singular values are the absolute values of its Fourier eigenvalues.
+
+\begin{theorem}[Exact resonant components]\label{thm:components}
+Under \eqref{eq:resonance}, write
+$\Fix_\Lambda\simeq\T^2\times F_\Lambda$ with finite $F_\Lambda$.
+Its invariant factors are those of Theorem~\ref{thm:smith}, and
+\begin{equation}\label{eq:components}
+ |F_\Lambda|=\frac3{N^2}
+ \prod_{\substack{\chi\in\widehat G\\1+\chi(e_1)+\chi(e_2)\ne0}}
+ |1+\chi(e_1)+\chi(e_2)|.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Use Lemma~\ref{lem:covolume}, the common kernel Gram determinant in
+\eqref{eq:gram}, and the Smith description of the torus kernel.
+\end{proof}
+
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+$(a,b,c)$ & $N$ & nullity & nonzero product & components\\
+\midrule
+$(3,1,1)$ & 3 & 2 & 3 & 1\\
+$(3,0,3)$ & 9 & 2 & 81 & 3\\
+$(3,0,6)$ & 18 & 2 & 2268 & 21\\
+$(6,0,6)$ & 36 & 2 & 1778112 & 4116\\
+\bottomrule
+\end{tabular}
+\end{center}
+The table compares two genuinely different quantities. Treating the fourth
+column as the fifth fails even at the smallest resonant quotient.
+
+\section{A version-specific finite-lattice correction}\label{sec:correction}
+The accessed arXiv version 0912.5169v1 of \cite{lsv} prints, in Lemma 2.1
+on visibly numbered page 3, a component formula consisting of the uncorrected
+nonzero Fourier product. The original PDF pages 3 and 4 were rendered and
+actually inspected; the diagnosis does not rely only on HTML extraction.
+
+Let $\Lambda=K=\langle(3,0),(1,1)\rangle$. On the three quotient sites,
+the shift matrices are inverse three-cycles and
+\begin{equation}\label{eq:minimal}
+ A_K=I+S_1+S_1^2=
+ \begin{pmatrix}1&1&1\\1&1&1\\1&1&1\end{pmatrix}.
+\end{equation}
+Its integer image is $\Z(1,1,1)$, its cokernel is torsion-free of rank two,
+and its torus kernel is the connected group
+$\{(A,B,C)\in\T^3:A+B+C=0\}$. Its nonzero eigenvalue is $3$.
+The displayed uncorrected formula gives three components; the actual
+component count is one.
+
+The proof on printed page 4 replaces the image of the whole integer lattice
+by the image of its intersection with the nonzero-mode real space.
+For \eqref{eq:minimal}, these images are respectively
+$\Z(1,1,1)$ and $3\Z(1,1,1)$. They are not equal.
+Lemma~\ref{lem:covolume} uses the projected integer lattice and thereby
+retains the missing index.
+
+This is a counterexample to that finite-lattice identity in that accessed
+version. The status of subsequent corrigenda is not established. It is not
+a refutation of the entropy theorem: for the current source, the
+logarithmic correction divided by $N$ is $\log(N^2/3)/N$, which tends to
+zero. The source's Example 3.2 remains the direct owner of the correct
+resonance condition, and component-growth constructions remain distinct
+from the ordinary point-cardinality object.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{The complete index-three torus and its primitive orbits}\label{sec:orbits}
+The minimal quotient gives more than a small matrix control. Its fixed
+group is exactly a two-torus, with coordinates $(A,B)$ and third colour
+$C=-A-B$. The first shift acts by
+\begin{equation}\label{eq:R}
+ R(A,B)=(B,-A-B),\qquad
+ R=\begin{pmatrix}0&1\\-1&-1\end{pmatrix},
+ \qquad R^3=I,
+\end{equation}
+and the second shift is $R^{-1}$.
+The fixed points of the full action are exactly $A=B=C$, $3A=0$,
+so there are three. Every other point has stabilizer exactly $K$, because
+the quotient acting group has prime order three. Consequently all other
+orbits in this torus are primitive three-point orbits, and there are
+uncountably many of them.
+
+The complex tangent phases of $R$ are $\omega,\omega^2$, while the
+third-return derivative is the identity. These statements are restricted
+to the displayed torus. They are not a hyperbolic monodromy calculation
+on the entire infinite-dimensional source. Interchanging the two lattice
+coordinates preserves \eqref{eq:source} and exchanges the generators;
+on this torus it conjugates $R$ to $R^{-1}$. This does not make it a
+same-clock reversor for every rank-one restriction.
+
+\section{Classical arithmetic entropy, with the clock kept explicit}
+Lind--Schmidt--Ward's principal-action entropy theorem applies directly
+to the module \eqref{eq:dual} \cite[Theorem 3.1]{lsw}. With normalized
+Haar measure it gives the joint entropy
+\begin{equation}\label{eq:entropy}
+ h(\alpha)=m(1+u+v)=
+ \int_0^1\int_0^1\log|1+e^{2\pi is}+e^{2\pi it}|\,ds\,dt.
+\end{equation}
+This equality is sourced, not a newly proved entropy theorem. The two
+isolated logarithmic singularities are integrable. Jensen's formula in
+one variable then gives
+\begin{equation}\label{eq:jensen}
+ m(1+u+v)=\frac2\pi\int_0^{\pi/3}\log(2\cos t)\,dt.
+\end{equation}
+For completeness, an elementary derivation of the classical Smyth value
+\cite{smyth} follows. At $0<\rho<1$, expand
+$\log|1+\rho e^{2it}|$ into its uniformly convergent logarithm series.
+As $\rho\uparrow1$, the functions converge uniformly on $[0,\pi/3]$,
+since the arguments stay away from zero near that limit. The integrated
+series is dominated by $\sum n^{-2}$. Thus
+\begin{align}
+ m(1+u+v)
+ &=\frac1\pi\sum_{n\ge1}
+ \frac{(-1)^{n-1}\sin(2\pi n/3)}{n^2}\nonumber\\
+ &=\frac{3\sqrt3}{4\pi}L(\chi_{-3},2),\qquad
+ L(\chi_{-3},2)=\sum_{n\ge1}\frac{\chi_{-3}(n)}{n^2}.
+ \label{eq:smyth}
+\end{align}
+Here $\chi_{-3}$ is $0,1,-1$ on residues $0,1,2$ modulo three.
+The sine is $\sqrt3\chi_{-3}(n)/2$, and removing twice the even-index
+subsum multiplies the Dirichlet value by $3/2$, since $\chi_{-3}(2)=-1$.
+No Euler product or analytic continuation of an L-function is used.
+
+For exact finite controls set
+\[
+ L_H=\sum_{k=0}^{H-1}\left((3k+1)^{-2}-(3k+2)^{-2}\right).
+\]
+Each omitted paired term is at most $2/(3k+1)^3$, so a first-term-plus-integral
+comparison proves
+\begin{equation}\label{eq:tail}
+ 0<L(\chi_{-3},2)-L_H\le
+ \frac2{(3H+1)^3}+\frac1{3(3H+1)^2}.
+\end{equation}
+The entropy is approximately $0.32306594721945051409$. That decimal is a
+numerical control; the identity and rational tail inequality are the
+mathematical statements. A joint rank-two entropy is not a scalar physical
+period, and a scalar special value is not a target divisor.
+
+\section{Why ordinary orbit-cardinality zeta fails}\label{sec:zeta}
+An ordinary higher-rank cardinality construction would require finite
+coefficients in
+\begin{equation}\label{eq:zeta}
+ \exp\left(\sum_{[\Z^2:\Lambda]<\infty}
+ \frac{|\Fix_\Lambda|}{[\Z^2:\Lambda]}
+ z^{[\Z^2:\Lambda]}\right).
+\end{equation}
+The summand for $K$ already has an uncountable fixed set at index three.
+The primitive formulation has the same problem: uncountably many
+primitive three-point orbits cannot give an ordinary product germ with
+finite logarithmic coefficients.
+
+For every $v\in\Z^2$, let $T=\alpha^v$ be a rank-one restriction.
+Equation~\eqref{eq:R} implies $T^3=I$ on $\Fix_K$. Therefore
+$\Fix(T^3)$ is uncountable, and its ordinary Artin--Mazur point-cardinality
+zeta is also undefined. This includes the zero direction. Replacing points
+by components is a new construction, not a repair of the same orbit trace.
+No negative claim is made against measured, regularized or separately
+operator-defined objects.
+\fi
+
+\section{Evidence, literature boundary and conclusion}
+The canonical producer retains every quotient matrix and its integer Smith
+witnesses. An independent checker imports neither that producer nor a
+symbolic algebra package: direct multiplication checks the factorization,
+Bareiss elimination verifies unimodularity, and Faddeev--LeVerrier verifies
+all characteristic coefficients. A separate library Smith calculation and
+character-by-character Fourier product give additional controls.
+The finite grid contains 142 HNF lattices: twenty resonant and 122
+nonresonant. It includes every index at most twelve and all shears for
+$(a,c)=(3,6),(6,3),(6,6)$.
+\ifnum\CRevisionRound>1
+All 4900 denominator-labelled torus grid records for denominators one
+through twenty-four are also enumerated, together with eight exact rational
+Dirichlet tails. The same rational point can occur in several grids.
+\fi
+These finite receipts test the implementation; the universal theorem is
+proved independently. Repaired-hash attacks specifically distinguish a
+pseudodeterminant from a component count, and raw/type-locked evaluation
+checks reject unknown fields and boolean-to-integer drift.
+
+The direct literature owners must remain visible. Principal-action entropy
+is an instance of \cite{lsw}; the exact source resonance is
+\cite[Example 3.2]{lsv}; the special value belongs to \cite{smyth}.
+General periodic-component growth results in \cite[Theorem 1.2]{lsv}
+are not replaced by a claim about ordinary point-cardinality zeta.
+The present reconstruction is owner-heavy and is not a novelty certificate.
+\ifnum\CRevisionRound>0
+Its version-specific correction is confined to the displayed finite-lattice
+formula and the explicit integer-image error exhibited above.
+\fi
+
+\begin{samepage}
+The strict Route-A assessment is weak arithmetic relation, weak primitive
+layer, and failure of the target determinant and target analytic layers.
+Native commuting Haar Koopman unitaries give only a formal quantum hint;
+no privileged scalar generator is constructed. No target arithmetic local
+data, Euler factors, root number, automorphy, target-zero match or
+Hilbert--Polya operator is claimed. Route B remains disabled.
+The scope literal is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\end{samepage}
+
+\begin{thebibliography}{9}\raggedright
+\bibitem{lsw} D. Lind, K. Schmidt and T. Ward,
+Mahler measure and entropy for commuting automorphisms of compact groups,
+\emph{Inventiones Mathematicae} \textbf{101} (1990), 593--629.
+\href{https://ueaeprints.uea.ac.uk/id/eprint/18590/1/mahlerentropy.pdf}{Primary institutional PDF}.
+\bibitem{smyth} C. J. Smyth,
+On measures of polynomials in several variables,
+\emph{Bulletin of the Australian Mathematical Society} \textbf{23} (1981), 49--63.
+\href{https://doi.org/10.1017/S0004972700006894}{doi:10.1017/S0004972700006894}.
+\bibitem{lsv} D. Lind, K. Schmidt and E. Verbitskiy,
+Entropy and growth rate of periodic points of algebraic $\Z^d$-actions,
+\emph{Contemporary Mathematics} \textbf{532} (2010), 195--211.
+Version-specific formula audit uses
+\href{https://arxiv.org/abs/0912.5169v1}{arXiv:0912.5169v1}, Lemma 2.1,
+visibly numbered PDF pages 3--4 and Example 3.2.
+\end{thebibliography}
+\smallskip\noindent\small
+\ifcase\CRevisionRound
+Round zero: complete quotient presentations and the resonance test.
+\or
+Round one: integer covolumes and the finite-index correction.
+\else
+Round two: arithmetic entropy and the orbit-cardinality obstruction.
+\fi
+\end{document}

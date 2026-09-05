@@ -1,0 +1,138 @@
+schema: route-a-evaluation-v0.2.0
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C384
+title: Wild additive geometric zeta versus scheme length
+evaluation_date: '2026-09-05'
+source_commit: 3e692da6fa94362225c7534e9b66c83c15c7f284
+code_commit: 3e692da6fa94362225c7534e9b66c83c15c7f284
+fixed_epoch: 1788566400
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority: flow_systems/skills/route-a-evaluator.md
+evaluator_version: 0.2.0
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+obstruction_id: HEN-O368
+candidate_definition: f_p(x)=x+x^p on A1 over the algebraic closure of F_p, for every prime p
+family: wild additive polynomial dynamics in positive characteristic
+phase_space: A1(Fbar_p), with geometric fixed sets distinguished from fixed schemes
+dynamics: autonomous composition by x+x^p; commuting arithmetic Frobenius x^p
+parameters: all primes p, all positive iterate numbers n and all positive extension degrees r
+parameter_provenance: prime characteristic and the intrinsic additive Frobenius polynomial 1+T; no fitted parameters
+arithmetic_origin: finite fields, prime characteristic, Frobenius-linear polynomials and exact residue degrees
+clock: dynamical iterate n; extension degree r is a separate arithmetic label
+normalization: geometric points weight one; fixed-scheme lengths retain wild multiplicities; w=p*z only for the proof
+determinant_convention: native D_p(z)=1/zeta_p(z), where zeta_p=exp(sum N_n*z^n/n); length determinant is separately 1-p*z
+orbit_cutoff: none in theorem; regression uses 14 primes through 43 and n<=96, plus five primes n<=48,r<=24
+precision: exact integers, rational bounds, modular polynomial arithmetic and direct finite-field enumeration
+training_data: none
+forbidden_data: rational-prime or Riemann-zero target tables, target Euler factors, target matching and all forbidden claim classes
+source_lock:
+  object: x+x^p on A1(Fbar_p)
+  arithmetic_origin: intrinsic prime-characteristic Frobenius addition and residue fields
+  clock: iterate n, not extension r or prime p
+  normalization: geometric count one versus fixed-scheme multiplicity p^(p^vp(n))
+  determinant_convention: reciprocal geometric Artin-Mazur zeta, not the scalar length determinant
+  cutoff: all primes and degrees analytically; declared finite regression only
+  precision: exact modular polynomials, arbitrary-precision integers and rationals
+  allowed_data: source equations, source fixed points, primary literature and declared controls
+  forbidden_data: target fits, prime roofs, inserted von-Mangoldt weights and target spectral data
+artifact_paths: [proof/ANALYTIC_PROOF.md, paper/main.pdf, results/c384_wild_evidence.json]
+a0:
+  verdict: A0_STRUCTURAL_ARITHMETIC_RELATION
+  evidence_status: PROVED
+  strongest_evidence: prime characteristic, finite-field Frobenius and exact residue-degree labels are intrinsic
+  strongest_failure: p indexes different source fibres and no primitive orbit owns each rational prime
+  arithmetic_controls:
+    - control: simpler parent x^p
+      status: PROVED
+      result: all iterated fixed schemes are reduced and geometric counts equal p^n
+    - control: neighboring coefficient ax+x^p over F_p
+      status: PROVED
+      result: the multiplicative order of nonzero a determines exactly which iterates have wild multiplicities
+    - control: mixed composite characteristic labels
+      status: PROVED
+      result: fields cannot have mixed composite characteristic; prime powers are extension sizes rather than new prime owners
+  artifacts: [proof/ANALYTIC_PROOF.md, results/c384_wild_evidence.json]
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED
+  strongest_evidence: all primitive periods, unit weights, repetitions and exact residue-degree point counts have explicit complete formulas
+  strongest_failure: no rational-prime ownership or target log-prime clock; the six mandatory A1 controls are not completed
+  metrics:
+    source_primitive_census_complete: true
+    source_extension_census_complete: true
+    source_repetitions_distinguished: true
+    source_forward_orientation_recorded: true
+    periodic_multiplier: 1
+    real_lyapunov_stability_claimed: false
+    mandatory_a1_controls_completed: 0
+  artifacts: [proof/ANALYTIC_PROOF.md, paper/main.pdf]
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: the native geometric Euler product and reciprocal determinant germ are exact inside abs(z)<1/p
+  strongest_failure: the geometric zeta and its reciprocal have a meromorphic natural boundary in the same variable
+  metrics:
+    zero_error_train: NOT_RUN_STOP_SCOPED
+    zero_error_validation: NOT_RUN_STOP_SCOPED
+    zero_error_test: NOT_RUN_STOP_SCOPED
+    extra_zero_count: NOT_APPLICABLE
+    missing_zero_count: NOT_APPLICABLE
+    root_count_discrepancy: NOT_APPLICABLE
+    cutoff_drift: NOT_APPLICABLE
+    precision_drift: NOT_APPLICABLE
+    control_margin: NOT_APPLICABLE
+  artifacts: [proof/ANALYTIC_PROOF.md, SCOPE.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: a uniform interior tail and exact noninteger radial logarithmic-derivative residues prove the source boundary
+  strongest_failure: no target entire completion, Gamma factor, counting law, functional equation or Weil compression is available
+  analytic_structure: source-native natural-boundary theorem only; no target analytic promotion
+  weil_compression: absent
+  artifacts: [proof/ANALYTIC_PROOF.md, SCOPE.md]
+a4:
+  verdict: A4_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: additive algebraic structure and commuting Frobenius are explicit
+  strongest_failure: no source-preserving Hilbert space, domain, unitary scattering lift or Hamiltonian quantization is constructed
+  metrics:
+    natural_quantization_constructed: false
+    same_clock_hilbert_space_and_domain: absent
+    time_reversal_constructed: false
+    route_b_ready: false
+  artifacts: [THEOREM_PACKAGE.md, SCOPE.md]
+adversarial_controls:
+  controls_used:
+    - scheme length versus reduced geometric count at the first iterate and every repetition
+    - pure p-power iterate boundary and characteristic two
+    - extension degrees divisible by p retain repeated gcd factors
+    - simpler Frobenius parent and all neighboring F_p coefficients in the regression grid
+    - composite characteristic labels and repaired-hash semantic attacks
+  proves_too_much_risk: promoting a length determinant would falsely erase actual wild multiplicities and the proven natural boundary
+  verdict: PASS_SCOPE_LIMIT_RETAINED
+tuple: [A0_STRUCTURAL_ARITHMETIC_RELATION, A1_WEAK, A2_FAIL, A3_FAIL, A4_FAIL]
+overall_verdict: ROUTE_A_EXPLORATORY
+claim_boundary: complete source theorem and source obstruction only; Bridy priority acknowledged; no target claims
+blocking_conditions:
+  - no intrinsic rational-prime ownership or log-prime period law
+  - six mandatory A1 controls remain uncompleted
+  - same-variable meromorphic natural boundary obstructs the proposed global determinant promotion
+  - no target completion, Weil compression or natural quantum lift
+next_smallest_test: evaluate a separately frozen arithmetic dynamics whose genuine geometric fixed sets are reduced without replacing its point counts by scheme lengths
+round2_clues:
+  - compare genuinely different inseparable dynamics using the geometric-versus-length audit before any operator claim
+  - require a source-owned global arithmetic clock before cross-characteristic assembly
+route_b_invocation_allowed: false
+scope_flags:
+  claims_target_arithmetic_local_data: false
+  claims_target_euler_factors: false
+  claims_root_number: false
+  claims_automorphy: false
+  claims_target_divisor_or_counting_law: false
+  claims_target_functional_equation: false
+  claims_target_zero_match: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false
+theorem_status: PROVED_AS_STATED
+finite_evidence_role: regression only, independent of the all-prime all-iterate all-extension proof

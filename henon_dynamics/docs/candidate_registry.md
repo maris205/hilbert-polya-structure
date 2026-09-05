@@ -3,6 +3,31 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C384--HCS-C388 source-theorem register (2026-09-05)
+
+Frozen baseline: `3e692da6fa94362225c7534e9b66c83c15c7f284`.
+Evaluator v0.2.0 and SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`
+remain unchanged. Five distinct phase spaces are retained. Source theorem
+completion is not target A1/A2 success or a literature-priority certificate;
+the release receipts belong to each package and the batch review.
+
+| candidate | complete source increment | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C384 | For every prime and iterate, the wild additive map has exact geometric fixed counts, local scheme multiplicities, all-extension gcd counts and both primitive/residue-degree inversions. Noninteger radial logarithmic-derivative residues prove a meromorphic natural boundary for the geometric zeta itself, in contrast to its rational length-counting counterpart. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [wild additive proof](../henon_wild_additive_geometric_zeta_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_wild_additive_geometric_zeta_route_a/paper/main.pdf) |
+| HCS-C385 | For every real `a>4`, sequence contraction exhausts the whole bounded two-sided set of the area-preserving Lozi map, and cone contraction closes variable-matrix hyperbolicity, every primitive cycle, signed reciprocal multiplier and reversal. A controlled stability-weighted germ is separate from the symbolic zeta; at integer parameters the instability roof cannot equal a logarithm of an integer greater than one after any positive rational rescaling. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Lozi proof](../henon_lozi_global_hyperbolic_clock_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_lozi_global_hyperbolic_clock_route_a/paper/main.pdf) |
+| HCS-C386 | The alpha-Szego rank-one manifold has a complete energy-threshold compactness/cascade dichotomy. A second-order equation valid at the turning point yields the exact two-sided sech-squared envelope and Sobolev growth exponent, with every real-alpha and rank-zero boundary explicit. Equal native shifted-Hankel determinants coexist with bounded and cascading trajectories at fixed positive alpha. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Szego proof](../henon_alpha_szego_rank_one_cascade_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_alpha_szego_rank_one_cascade_route_a/paper/main.pdf) |
+| HCS-C387 | On the compact integer Heisenberg quotient, the normalized horizontal nilflow has every rational-slope clean return family, irrational-slope periodic vacuum, exact least periods and parabolic return derivatives. A signed Weil--Brezin isometry and chirp give the full self-adjoint spectral resolution, while a global reversor, unique-ergodicity distinction and continuous-block noncompactness fix the operator boundaries. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [nilflow proof](../henon_compact_heisenberg_nilflow_spectrum_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_compact_heisenberg_nilflow_spectrum_route_a/paper/main.pdf) |
+| HCS-C388 | For the connected principal `1+u+v` action, every finite-index lattice has an exact Smith fixed group and resonant two-torus criterion. A proved integer-kernel covolume correction gives the torsion-component count, including an explicit counterexample to the uncorrected formula in arXiv:0912.5169v1 Lemma 2.1. A fixed two-torus obstructs every rank-one cardinality zeta; the classical Mahler/Dirichlet entropy value is independently derived and attributed. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [algebraic-action proof](../henon_connected_algebraic_z2_resonance_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_connected_algebraic_z2_resonance_route_a/paper/main.pdf) |
+
+C384 is `ROUTE_A_EXPLORATORY`; the other four are `ROUTE_A_REJECTED`.
+The C388 correction is version-specific and finite-lattice: it neither claims
+that the final published version was never corrected nor overturns the
+asymptotic entropy theorem. Bridy, Xu, the nilflow representation literature,
+Lozi coding literature and Lind--Schmidt--Verbitskiy/Smyth retain their source
+ownership. All nine target/Route-B flags are false under
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C379--HCS-C383 source-theorem register (2026-09-05)
 
 The authorized five-candidate round uses baseline
