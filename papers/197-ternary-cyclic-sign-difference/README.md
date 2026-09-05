@@ -1,6 +1,6 @@
 # P197 — ternary cyclic sign differences
 
-Status: Round 0 author package frozen; paper A/B reviews pending.
+Status: Round2 frozen; both paper reviews accepted; terminal evidence passed.
 **OWNER_AMBER / HOLD_EXTERNAL**. No public circulation authorization.
 
 Main result: exact local recurrent core `D^4=rho^2`, parity-sharp transient,
@@ -19,3 +19,8 @@ The preserved candidate inputs are under
 ../../docs/papers197_201_sequence/scouting/word_poset_lane/; use the exact-gap,
 sharp-witness and small-witness errata rather than the older abbreviated
 proof wording. Stage-1 selection is not counted as a manuscript review.
+
+Current lifecycle: ROUND1_RECEIPT.md, ROUND2_RECEIPT.md and FINAL_QA.md.
+Six fresh terminal author/A/B runs and two physical cold builds passed;
+root viewed all four final pages. The batch's retained-subset audit checks
+the final package manifest separately; this is not a five-paper completion.

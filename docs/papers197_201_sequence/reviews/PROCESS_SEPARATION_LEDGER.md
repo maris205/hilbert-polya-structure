@@ -12,7 +12,7 @@ manuscript review API/upload/notification was performed. HOLD_EXTERNAL.
 | P199 FOSP | batch197_fosp_gate | batch197_lzk_gate | root | both accepted unchanged, root replays, Round2 freeze |
 | P200 LFAS | batch197_fosp_gate; candidate proof by batch197_lzk_gate | root | batch197_fifth_scout | neither proof author is A/B; both accepted, Round2 freeze |
 | P201 EPF | batch197_fifth_scout | batch197_fosp_gate | none | A exact-history rejection, no Round1/2 acceptance |
-| P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | not yet assigned | not yet assigned | candidate gate by LZK predates its manuscript authorship and cannot count as a paper review |
+| P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | batch197_fosp_gate, accepted unchanged | root (in progress) | A root replay and physical Round1; candidate gate by LZK cannot count as a paper review |
 
 Reviewer processes were not authors of their target proofs/manuscripts.
 They read actual frozen inputs and disclosed prior coordination/report

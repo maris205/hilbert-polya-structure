@@ -8,22 +8,22 @@ historical ledgers were left unchanged.
 
 ## Outcome and meaning of the denominator
 
-After the post-freeze exact-history correction and first replacement reconciliation, there are **54 documented current new-proposal records**, counted once per
+After the post-freeze exact-history correction and two replacement reconciliations, there are **57 documented current new-proposal records**, counted once per
 literal map after the exclusions below:
 
 | Current disposition | Count | Identifiers |
 |---|---:|---|
 | Retained selected, internal amber | 4 | TCSD, FOSP, LFAS, OR (P202) |
-| Reserve | 3 | SDD, ZCI, LGB |
-| Killed current proposals | 47 | CMM plus AR/DA/CSP; individual rows in the TSV |
+| Reserve | 3 | SDD, ZCI, ND1 |
+| Killed current proposals | 50 | includes LGB re-entry and D2G/CCW; individual rows in the TSV |
 | Candidate gate pending in original index | 0 | new replacement scouts remain separately recorded until reconciliation |
-| **Current documented proposal denominator** | **54** | **all 54 have a nonpending disposition** |
+| **Current documented proposal denominator** | **57** | **all 57 have a nonpending disposition** |
 
 The TSV also retains **17 historical/restriction/conjugate/lift controls**
 and **8 code-only WIP definitions**, each with denominator weight zero.
-It therefore contains **79 records**, not 79 new systems.
+It therefore contains **82 records**, not 82 new systems.
 
-The corrected number54 measures *documented candidate attempts*. It is **not** a
+The corrected number57 measures *documented candidate attempts*. It is **not** a
 count of proved systems, independently validated dynamical subclasses,
 novel mechanisms, eligible paper slots, completed papers, or externally
 original results. In particular, a current literal proposal may remain in
@@ -64,6 +64,20 @@ identification with undirected P106. CSP's five old intake exclusions are
 history checks, not five new probes. The latest active final-seat scouting
 lanes are not counted until their durable ledgers are reconciled. P202 is a
 selected theorem contract in drafting, not a completed paper.
+
+### Second replacement reconciliation
+
+The exact preceding 54-attempt snapshot is preserved under
+breadth_snapshots/first_replacement54_20260905/. Root proof/source/pin
+checks and fresh byte-identical replays are recorded in
+SECOND_REPLACEMENT_ROOT_ADJUDICATION.md. Add ND1, D2G and CCW as three
+documented attempted proposals, not admitted systems. D2G/CCW carry fatal
+external-owner/specialization dispositions; their attempted-intake weight
+does not assert novelty or a new eligible subclass. No unproved exact
+internal full-literal identity is invented merely to reclassify them.
+LGB's unchanged reserve re-entry is killed for thin contribution, without
+an extra literal row. Thus 54+3=57:4selected+3reserve+50killed. The total
+is82 with17 historical controls and8 code-only WIP. Active MCT is excluded.
 
 ## Documented freeze milestone
 

@@ -1,6 +1,6 @@
 # P199 — first-one Stirling splice
 
-Status: ROUND0_READY_FOR_REVIEW / OWNER_AMBER / HOLD_EXTERNAL.
+Status: ROUND2_FROZEN / TERMINAL_EVIDENCE_PASS / OWNER_AMBER / HOLD_EXTERNAL.
 Allocated by docs/papers197_201_sequence/FIVE_SEAT_FREEZE.md.
 
 Main draft: main.tex, references.bib, main.pdf (4 pages).
@@ -17,5 +17,8 @@ this author's own candidate-stage control, so its provenance is not
 independent of the author. Two fresh full runs match the canonical.
 
 Read CLAIMS_EVIDENCE.md, PROOF_PACKAGE.md and SOURCE_VERIFICATION.md for
-scope. No Round 1 or 2, independent paper-review verdict, external
-originality claim or submission-readiness statement is implied.
+scope. ROUND1_RECEIPT.md and ROUND2_RECEIPT.md record both accepted actual
+reviews. FINAL_QA.md records final replay/build/view evidence. The old
+handoff checksum list is preserved as SHA256SUMS_round0_handoff; the current
+SHA256SUMS covers the later package. No external originality, submission
+readiness or five-paper batch completion is implied.

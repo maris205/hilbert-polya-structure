@@ -1,6 +1,6 @@
 # P200 — lex-first alternating switch
 
-Status: ROUND0_READY_FOR_REVIEW / OWNER_AMBER / HOLD_EXTERNAL.
+Status: ROUND2_FROZEN / TERMINAL_EVIDENCE_PASS / OWNER_AMBER / HOLD_EXTERNAL.
 Allocated by docs/papers197_201_sequence/FIVE_SEAT_FREEZE.md.
 
 main.tex / references.bib / main.pdf form the four-page anonymous draft.
@@ -19,5 +19,8 @@ SOURCE_VERIFICATION.md, CLAIMS_EVIDENCE.md and PROOF_PACKAGE.md.
 
 BUILD.md reproduces the code and PDF. The manuscript author reuses their
 candidate-stage graph control with explicit provenance; this is not an
-independent manuscript review. Review A/B, revision deltas and Round 1/2
-remain pending. No external originality or submission-readiness claim.
+independent manuscript review. Actual A/B, accepted deltas and Round1/2
+are documented in ROUND1_RECEIPT.md and ROUND2_RECEIPT.md. FINAL_QA.md
+records terminal replay/build/all-page evidence. The former handoff checksum
+list is preserved as SHA256SUMS_round0_handoff; current SHA256SUMS covers
+the final package. No external originality or submission-readiness claim.

@@ -1,7 +1,7 @@
 # Recovery state — candidate batch after P196
 
-Checkpoint: 2026-09-05 UTC, P197/P199/P200 Round2 and OR admitted as fresh P202.
-Status: **FOUR_ADMITTED / ONE_SEAT_OPEN / PAPER_REVIEWS_AND_QA_RUNNING / HOLD_EXTERNAL**.
+Checkpoint: 2026-09-05 UTC, three individually complete papers, P202 Round1.
+Status: **THREE_INDIVIDUALLY_COMPLETE / P202_REVIEW_B / ONE_SEAT_OPEN / HOLD_EXTERNAL**.
 This file is a recovery index. FIVE_SEAT_FREEZE.md allocates the numbers and
 links the historically accepted evidence; it is not current five-seat
 acceptance or completion. Later P198_REOPEN_ADJUDICATION.md and
@@ -14,10 +14,10 @@ P201_REOPEN_ADJUDICATION.md control the two withdrawals.
 | Problem anchor and standing authorization | present | root files in this batch |
 | Breadth and internal collision search | in progress | five lane breadth ledgers, four hostile-gate reports |
 | Five selected contracts / central freeze | REOPENED | historical freeze retained; P198/P201 later rejected |
-| Paper drafting / Round 0 | five historical drafts frozen | four pages each P197–P200, five pages P201; only three remain admitted |
-| Paper Review A / Round 1 | three accepted, two rejected | P197/P199/P200 A accepted/replayed/Round1; P198/P201 admission kills |
+| Paper drafting / Round 0 | six numbered drafts frozen | five historical drafts plus four-page replacement P202; P198/P201 rejected |
+| Paper Review A / Round 1 | four accepted, two rejected | P197/P199/P200/P202 A accepted/replayed/Round1; P198/P201 admission kills |
 | Paper Review B / Round 2 | three Round2 frozen | P197/P199/P200 B accepted, root-replayed, no-change deltas |
-| Paper cold builds / visual QA / terminal manifests | in progress | three retained papers have six physical cold builds and all12 final-page views; final replay/manifests pending |
+| Paper cold builds / visual QA / terminal manifests | three individual PASS | RETAINED_FINAL_QA_REPORT.md; six physical cold builds, all12 final-page views, complete manifests and two actual full subset audits; NOT full batch |
 
 Before this recovery file was added, the batch contained 50 non-cache files,
 all absent from the Git mirror. Their SHA-256 inventory is frozen in
@@ -81,7 +81,7 @@ not repaired during history consolidation, and cannot fill the fifth slot.
 | P199 FOSP | 199-first-one-stirling-splice | 4page Round2 frozen; A1,926,465/B1,026,386; accepted no-change deltas |
 | P200 LFAS | 200-lex-first-alternating-switch | 4page Round2 frozen; A3,823,696/B4,026,047; accepted no-change deltas |
 | P201 EPF | 201-eventual-period-feedback | 5page Round0 preserved; exact old OCL conjugacy kills fresh-system admission |
-| P202 OR | 202-ternary-ordered-reset | new replacement, Stage1 gate3,962,690 root-replayed; manuscript drafting, no paper rounds yet |
+| P202 OR | 202-ternary-ordered-reset | four-page Round1; A12,775,204 root-replayed and accepted unchanged; root B in progress |
 
 P197 source/PDF/verifier pins are in ROUND0_RECEIPT.md and frozen_round0/.
 The author fixed an overbroad small-size witness statement before freeze:
@@ -90,28 +90,30 @@ unchanged; a transparent candidate erratum preserves the old record.
 
 ## Next actions
 
-1. Find the remaining genuinely separated replacement candidate. P202 OR
-   is admitted by OR_ROOT_ADJUDICATION.md and is being drafted. Do not rescue P198
+1. Find the remaining genuinely separated replacement candidate. MCT has
+   author proof work and an independent Stage1 gate in progress, not admission.
+   P202 OR has completed paper A and entered root paper B. Do not rescue P198
    via restricted-erasure variants or P201 via relabelled old feedback maps.
    Stage1 proof/source/mechanism gates are required before fresh numbering.
-2. Complete independent A/delta/Round1 and independent B/delta/Round2 for
-   every retained paper; preserve process separation, including LFAS proof
+2. Complete P202 B/delta/Round2 and any newly admitted fifth manuscript's
+   two actual rounds; preserve process separation, including LFAS proof
    authorship. Do not manufacture accepted rounds for the two rejected drafts.
 3. Run two physical source-only cold builds per paper, all-page visual QA,
    exact author/A/B replays and complete manifests before terminal PASS.
 4. Keep scoped Git checkpoints while preserving HOLD_EXTERNAL and the
    latest scientifically completed round P192–P196 until all five close.
 
-STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give54 documented
-current-new attempts:4selected,3reserve,47killed;17historical controls and
-8code-only WIP are excluded (79 total records). OR/AR/DA/CSP add four
-documented attempts; EPF's exact historical conjugacy has weight zero.
-Both51 snapshots and the corrected50 snapshot are retained. Later active
-scouts remain separate until documented and reconciled.
+STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give57 documented
+current attempts:4selected,3reserve,50killed;17historical controls and
+8code-only WIP are excluded (82 total records). SECOND_REPLACEMENT_ROOT_ADJUDICATION.md
+records fresh root replays and the LGB kill/ND1 reserve/D2G+CCW kills.
+Both51 snapshots, corrected50 and first-replacement54 are retained. Active
+MCT remains separate until documented and independently adjudicated.
 
-The latest pushed research backup is2c56fae8, synchronized by merge a4b7160e
+The latest pushed research backup is62bc2108, synchronized by merge97d04aec
 with disjoint remote henon_dynamics changes (ahead/behind0/0 verified).
-This preserves both histories without force-push. The new P197/P199 Round2,
-P202 admission and current reviews/QA await the next checkpoint. The previous completed research commit remains
+This preserves both histories without force-push. The three final paper
+packages, P202 Round1/A and closed new scouts await the next checkpoint;
+P202 B and MCT are live WIP. The previous completed research commit remains
 `76146ba17eb15beccfc38e625427f8da726db919`. A later history checkpoint changes
 the backup state, not this research-completion milestone.
