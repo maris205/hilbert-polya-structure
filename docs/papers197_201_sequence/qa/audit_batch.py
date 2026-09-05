@@ -24,15 +24,22 @@ PAPERS = {
     200: ROOT / "papers" / "200-lex-first-alternating-switch",
     202: ROOT / "papers" / "202-ternary-ordered-reset",
 }
-AUTHOR = {number: (directory / "code/verify.py", directory / "code/CANONICAL.txt")
+AUTHOR_FILE_LAYOUTS = {203: ("verify_p203.py", "CANONICAL.txt")}
+DIAGNOSTIC_LOG_LAYOUTS = {203: "qa_final/cold_build_2/main.log"}
+
+
+def author_filenames(number: int) -> tuple[str, str]:
+    return AUTHOR_FILE_LAYOUTS.get(number, ("code/verify.py", "code/CANONICAL.txt"))
+
+
+AUTHOR = {number: tuple(directory / name for name in author_filenames(number))
           for number, directory in PAPERS.items()}
 REQUIRED_PAPER = (
     "README.md", "NARRATIVE_REPORT.md", "PAPER_PLAN.md", "FIGURE_PLAN.md",
     "PROOF_PACKAGE.md", "CLAIMS_EVIDENCE.md", "SOURCE_VERIFICATION.md",
     "BUILD.md", "SELF_QA.md", "IMPROVEMENT_LOG.md", "FINAL_QA.md",
     "main.tex", "references.bib", "main.pdf", "main_round0_original.pdf",
-    "main_round1.pdf", "main_round2.pdf", "code/verify.py",
-    "code/CANONICAL.txt", "SHA256SUMS", "qa_final/SHA256SUMS",
+    "main_round1.pdf", "main_round2.pdf", "SHA256SUMS", "qa_final/SHA256SUMS",
     "ROUND1_RECEIPT.md", "ROUND2_RECEIPT.md",
 )
 ASSERTIONS = 0
@@ -134,8 +141,20 @@ def review_manifest_gate(directory: Path) -> set[str]:
     return names
 
 
+def current_input_gate(directory: Path) -> set[str]:
+    # P203 supplies physical current-input snapshots. The historical pin
+    # list inside them is a document, not a command to follow obsolete paths.
+    names = parse_manifest(directory, "CURRENT_INPUTS_SHA256SUMS")
+    expected = {"current_inputs/" + name
+                for name in recursive_files(directory / "current_inputs")}
+    check(names == expected,
+          f"current-input snapshot coverage mismatch: {directory}; "
+          f"unlisted={sorted(expected - names)}, extra={sorted(names - expected)}")
+    return names
+
+
 def frozen_round_gate(number: int, directory: Path) -> None:
-    core = ("main.tex", "references.bib", "code/verify.py", "code/CANONICAL.txt")
+    core = ("main.tex", "references.bib", *author_filenames(number))
     # Preserve the historical four-file freezes; their PDFs are the
     # separately pinned main_round*.pdf files, not invented new snapshots.
     legacy_core_only = {(197, 0), (197, 1), (197, 2),
@@ -160,6 +179,8 @@ def frozen_round_gate(number: int, directory: Path) -> None:
                   f"P{number} round {stage} lacks full freeze manifest/PDF")
         if (frozen / "SHA256SUMS").exists():
             complete_manifest(frozen)
+        if number == 203:
+            current_input_gate(frozen)
         if (frozen / "main.pdf").exists():
             check(sha(frozen / "main.pdf") == sha(pdf),
                   f"P{number} round {stage} snapshot/PDF disagreement")
@@ -239,9 +260,25 @@ def replay(verifier: Path, canonical: Path, label: str) -> int:
     first = command([sys.executable, "-B", str(verifier)], cwd=ROOT)
     second = command([sys.executable, "-B", str(verifier)], cwd=ROOT)
     check(first == second == expected, f"noncanonical replay: {label}")
-    values = re.findall(
-        r"(?im)(?:^|[ \t])(?:(?:exact_)?assertions|checks)(?:\s*=\s*|[ \t]+)([0-9]+)(?=$|[ \t])", expected
+    # This immutable P203 author output has seven per-box counts and one
+    # separately labelled total. Never reinterpret a review's count/status.
+    p203_author_control = (
+        label == "P203 author"
+        and sha(verifier) == "77e7be9b6dc57a156010c6543ff41415415f833119e5a7116ffcef53cc5e1d7d"
+        and sha(canonical) == "6a672bcfa97f09c1575aa89bb4e2ca52aa8284315706ec90abbd6d35995dbf00"
+        and re.search(r"(?m)^PASS_AUTHOR_BOUNDED_CHECKS / ALL_N_THEOREMS_REQUIRE_PROOFS$",
+                      expected) is not None
     )
+    if p203_author_control:
+        boxes = re.findall(r"(?m)^assertions=([0-9]+)$", expected)
+        values = re.findall(r"(?m)^TOTAL_ASSERTIONS=([0-9]+)$", expected)
+        check(len(boxes) == 7 and values == ["374812"]
+              and sum(map(int, boxes)) == 374812,
+              "P203 author per-box/total assertion mismatch")
+    else:
+        values = re.findall(
+            r"(?im)(?:^|[ \t])(?:(?:exact_)?assertions|checks)(?:\s*=\s*|[ \t]+)([0-9]+)(?=$|[ \t])", expected
+        )
     check(len(values) == 1, f"{label} must disclose one assertion/check total")
     structured_pass = re.search(
         r"(?im)^(?:status|result|verdict)\s*=\s*(?:PASS(?:_INTERNAL)?|PROVABLE_AS_STATED)\s*$",
@@ -271,7 +308,8 @@ def replay(verifier: Path, canonical: Path, label: str) -> int:
         r"PASS / INDEPENDENT_REVIEW_B_CONTROL / NO_CROSS_MODEL_CLAIM / HOLD_EXTERNAL)$",
         expected,
     ) is not None
-    check(structured_pass or legacy_author_pass or p202_author_control or legacy_review_pass,
+    check(structured_pass or legacy_author_pass or p202_author_control
+          or p203_author_control or legacy_review_pass,
           f"{label} lacks an accepted status")
     return int(values[0])
 
@@ -378,8 +416,10 @@ def citation_gate(number: int, directory: Path) -> int:
     return len(bib_list)
 
 
-def pdf_gate(number: int, path: Path) -> int:
-    check(path.is_file() and path.stat().st_size > 50_000,
+def pdf_gate(number: int, path: Path, *, role: str = "current") -> int:
+    check(role in ("current", "round0_original", "round1", "round2"),
+          f"invalid PDF role: {role}")
+    check(path.is_file() and not path.is_symlink() and path.stat().st_size > 50_000,
           f"P{number} missing/small PDF: {path}")
     fields = {}
     for line in command(["pdfinfo", str(path)]).splitlines():
@@ -405,7 +445,16 @@ def pdf_gate(number: int, path: Path) -> int:
     extracted = command(["pdftotext", str(path), "-"])
     check("??" not in extracted and "[?]" not in extracted,
           f"P{number} unresolved PDF token")
-    check("HOLD_EXTERNAL" in extracted.upper() or "HOLD EXTERNAL" in extracted.upper(),
+    # Preserve the exact original P203 PDF whose missing scope marker was
+    # repaired in Review A. This waives only HOLD, never other PDF checks,
+    # and never applies to live, Round1, Round2, or an arbitrary copied PDF.
+    historical_p203_round0 = (
+        number == 203 and role == "round0_original"
+        and path == ROOT / "papers/203-monochromatic-triangle-complementation/main_round0_original.pdf"
+        and sha(path) == "617cea5d4f8b50a9946d05bafc2cfbf6fb01bbe45dab754813b07f4f12cc1167"
+    )
+    check("HOLD_EXTERNAL" in extracted.upper() or "HOLD EXTERNAL" in extracted.upper()
+          or historical_p203_round0,
           f"P{number} missing external hold in PDF")
     return int(fields["Pages"])
 
@@ -440,23 +489,32 @@ def cold_gate(number: int, directory: Path) -> int:
 
 
 def paper_gate(number: int, directory: Path) -> tuple[int, int, int]:
-    for relative in REQUIRED_PAPER:
+    diagnostic_log = DIAGNOSTIC_LOG_LAYOUTS.get(number, "main.log")
+    required = (*REQUIRED_PAPER, *author_filenames(number), diagnostic_log)
+    if number == 203:
+        required += ("CURRENT_INPUTS_SHA256SUMS",)
+    for relative in required:
         check((directory / relative).is_file(), f"P{number} missing {relative}")
     check(not list(directory.rglob("__pycache__")) and not list(directory.rglob("*.pyc")),
           f"P{number} contains Python cache")
     tex = (directory / "main.tex").read_text(encoding="utf-8")
     check("Anonymous" in tex and "HOLD\\_EXTERNAL" in tex,
           f"P{number} anonymity/hold source boundary failed")
-    log = (directory / "main.log").read_text(encoding="utf-8", errors="replace")
+    # P203 has no fabricated root-level log. Its real terminal second-build
+    # log is used; cold_gate below still binds BOTH builds to live tex/bib/PDF.
+    log = (directory / diagnostic_log).read_text(encoding="utf-8", errors="replace")
     check(re.search(r"Warning|Undefined|Overfull|Underfull|Error", log) is None,
           f"P{number} live build diagnostic")
     package_names = complete_manifest(directory)
-    check(set(REQUIRED_PAPER) - {"SHA256SUMS"} <= package_names,
+    check(set(required) - {"SHA256SUMS"} <= package_names,
           f"P{number} package manifest misses required payload")
     complete_manifest(directory / "qa_final")
+    if number == 203:
+        current_input_gate(directory)
     frozen_round_gate(number, directory)
-    for name in ("main_round0_original.pdf", "main_round1.pdf", "main_round2.pdf"):
-        pdf_gate(number, directory / name)
+    for name, role in (("main_round0_original.pdf", "round0_original"),
+                       ("main_round1.pdf", "round1"), ("main_round2.pdf", "round2")):
+        pdf_gate(number, directory / name, role=role)
     pages = cold_gate(number, directory)
     citations = citation_gate(number, directory)
     assertions = replay(*AUTHOR[number], f"P{number} author")

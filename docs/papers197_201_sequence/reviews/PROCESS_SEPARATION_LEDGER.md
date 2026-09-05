@@ -13,7 +13,7 @@ manuscript review API/upload/notification was performed. HOLD_EXTERNAL.
 | P200 LFAS | batch197_fosp_gate; candidate proof by batch197_lzk_gate | root | batch197_fifth_scout | neither proof author is A/B; both accepted, Round2 freeze |
 | P201 EPF | batch197_fifth_scout | batch197_fosp_gate | none | A exact-history rejection, no Round1/2 acceptance |
 | P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | batch197_fosp_gate, accepted unchanged | root, accepted unchanged | both accepted, Round2, twofinalcoldbuilds/all4views, fullpackageauditPASS |
-| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root inprogress on frozenRound0 | batch197_fosp_gate planned after Round1 | A-M1 visiblemanuscriptHOLD repairrequested; archivalStage1Minor1 separatelyretained; no paperacceptance yet |
+| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root, accepted scope-only repair | batch197_fosp_gate, actual review underway on physical Round1 | A-M1 repaired and accepted; archivalStage1Minor1 separately retained; no B/Round2/terminal acceptance yet |
 
 Reviewer processes were not authors of their target proofs/manuscripts.
 They read actual frozen inputs and disclosed prior coordination/report
@@ -32,3 +32,12 @@ No batch completion is inferred before P203's actual manuscript reviews
 and every retained paper's terminal QA. MCT's Stage1 gate is not paperB;
 its optional root-zero alternate derivation is not incorporated as a bearing
 author lemma. The standalone original temporal proof remains the paper basis.
+
+P203 A uses signed-edge quadratic correlation conditions and whole-map
+composition powers, separate from author bitmasks/orbit paths and the
+temporal coauthor's tuple-edge control. Its two formal post-Round0 fresh
+runs each executed1498484 checks; root's subsequent sealed-package gate
+repeated the canonical comparison twice. Root ran new original/repaired
+cold builds and viewed every page; the exact A-M1 repair is accepted in
+the sealed delta. P203 B is a new actual manuscript task, not a relabelled
+candidate gate; its reuse, proof work and completion await its own report.
