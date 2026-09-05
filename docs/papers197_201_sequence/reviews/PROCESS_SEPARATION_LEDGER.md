@@ -13,7 +13,7 @@ manuscript review API/upload/notification was performed. HOLD_EXTERNAL.
 | P200 LFAS | batch197_fosp_gate; candidate proof by batch197_lzk_gate | root | batch197_fifth_scout | neither proof author is A/B; both accepted, Round2 freeze |
 | P201 EPF | batch197_fifth_scout | batch197_fosp_gate | none | A exact-history rejection, no Round1/2 acceptance |
 | P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | batch197_fosp_gate, accepted unchanged | root, accepted unchanged | both accepted, Round2, twofinalcoldbuilds/all4views, fullpackageauditPASS |
-| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root, accepted scope-only repair | batch197_fosp_gate, accepted unchanged | both actual reviews accepted; root double replay/package gate and physical Round2; terminal QA pending; archivalStage1Minor1 separately retained |
+| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root, accepted scope-only repair | batch197_fosp_gate, accepted unchanged | both actual reviews accepted; root double replay/package gate, Round2, two terminal builds/all4views and full five-paper terminal PASS; archivalStage1Minor1 separately retained |
 
 Reviewer processes were not authors of their target proofs/manuscripts.
 They read actual frozen inputs and disclosed prior coordination/report
@@ -28,8 +28,9 @@ Author and A representations are compared in those packages. The root's
 own P199 B executions are transparently root executions, not an additional
 fictional root reviewer. P202 B uses byte-word whole-map powers, cumulative
 parking flux and sparse source patches; A uses Kahn/DSU coordinate domains.
-No batch completion is inferred before P203's actual manuscript reviews
-and every retained paper's terminal QA. MCT's Stage1 gate is not paperB;
+Batch completion followed P203's actual manuscript reviews and every
+retained paper's terminal QA; full audit30736 passed14607 checks, with
+each of five authors and ten reviews run twice. MCT's Stage1 gate is not paperB;
 its optional root-zero alternate derivation is not incorporated as a bearing
 author lemma. The standalone original temporal proof remains the paper basis.
 

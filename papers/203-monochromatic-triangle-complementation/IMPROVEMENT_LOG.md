@@ -45,3 +45,18 @@ twice again under the package gate, passing594 checks and all52 pins.
 ROUND2_RECEIPT.md records the physical unchanged freeze. Original A-M1
 repair and the separate unrepaired historical archive finding both remain
 accurately recorded. Terminal PASS and five-paper completion await final QA.
+
+## Actual terminal completion and lifecycle-only refresh
+
+Root executed two new source-only builds and actually viewed all four final
+180dpi pages. The P203 evidence audit then reran author/A/B twice each and
+passed1349 checks. After complete manifest closure, the full five-paper
+audit actually passed14607 mechanical checks, with all five author and ten
+review controls run twice against their full canonical transcripts.
+qa/FINAL_TERMINAL_AUDIT.txt in the batch records the actual session30736
+stdout. Current README and this lifecycle/recovery text are refreshed to
+completed status; only their manifest entries change. The57 scientific
+input pins, all proofs/verifiers/canonicals/PDFs, frozen snapshots, accepted
+reviews and final build/visual payloads remain unchanged. A separately
+labelled hash-only final audit checks that refresh without inflating the
+mathematical replay count. OWNER_AMBER / HOLD_EXTERNAL is unchanged.

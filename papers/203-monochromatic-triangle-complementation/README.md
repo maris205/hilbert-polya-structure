@@ -1,10 +1,12 @@
 # P203 — Least monochromatic-triangle complementation
 
-Date: 2026-09-05 UTC. **ROUND2_FROZEN / TERMINAL_QA_NEXT /
+Date: 2026-09-05 UTC. **ROUND2_FROZEN / INDIVIDUAL_TERMINAL_PASS /
 OWNER_AMBER / HOLD_EXTERNAL**. Actual A accepted a scope-only repair;
 actual B accepted unchanged after full proof/source/build work. Root's
-fresh double replay and package gate passed before Round2. Terminal QA
-is pending. ROUND2_RECEIPT.md controls this stage, not old author labels.
+fresh double replay and package gate passed before Round2. Two terminal
+cold builds, all four final page views and the full five-paper artifact
+audit have passed. PAPER_IMPROVEMENT_STATE.md and the batch FINAL_QA_REPORT.md
+control completion, not historical author-stage labels.
 
 ## Main result
 
@@ -35,6 +37,7 @@ Johnson static classification/capacity receive zero contribution credit.
   checked by CURRENT_INPUTS_SHA256SUMS; no upstream runtime import.
 - sources/: actual downloaded primary bytes and their manifest.
 - qa/: preserved author draft/build evidence, not the later terminal builds.
+- qa_final/, FINAL_QA.md: two new terminal builds and four actual final views.
 - frozen_round0/: physical source, verifier, PDF, memos and current inputs,
   with its own complete manifest. ROUND0_RECEIPT.md identifies exact pins.
 - revision_a/, A_RESPONSE.md: preserved author repair before A acceptance.
@@ -48,11 +51,11 @@ Johnson static classification/capacity receive zero contribution credit.
 One intermediate Stage1 author probe was not physically retained. The old
 temporal input list still gives3PASS/1FAIL; the historical Stage1 Minor1 is
 not repaired. The current manuscript and code use no missing program as
-runtime or proof dependency. Its actual snapshots are supplied, and future
-paper A/B must independently adjudicate their own complete inputs.
+runtime or proof dependency. Its actual snapshots are supplied, and both
+actual paper reviews adjudicated their own complete current inputs.
 
 Fifth/LZK are mathematical co-contributors, not independent reviewers.
 temporal_author_audit.md is specifically an author-side compression check.
 The optional independent-gate vertex-zero lemma is not used. The two actual
-manuscript reviews are separately recorded. No terminal PASS, external
-upload or notification is manufactured. Root coordinates final QA.
+manuscript reviews and actual terminal PASS are separately recorded.
+No external upload, notification, novelty clearance or release is authorized.

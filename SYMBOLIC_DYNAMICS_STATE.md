@@ -1,67 +1,26 @@
 # Symbolic Dynamics — 当前研究状态
 
-更新：2026-09-05 UTC。用途：跨会话、上下文压缩和模型切换时的恢复入口。
-这是经文件/Git盘点后的状态摘要，不是所有历史证明的重新认证。
+更新：2026-09-05 UTC。跨会话恢复入口；本文件不代替证明或重审历史。
 
-## 先读结论
+## 当前结论
 
-- 路线仍为 **Route A / Symbolic Dynamics**。当前批次寻找不同的有限自主确定性映射，重在系统广度和每篇明确的定理进展。
-- 最新完成批次是 **P192–P196**，研究提交为 `76146ba17eb15beccfc38e625427f8da726db919`。五篇完成两轮独立审查和终端 QA，仍为 `HOLD_EXTERNAL`。
-- 当前批次原编号为 **P197–P201**，五篇 Round0 均已落盘，但论文审查重新淘汰了 **P198、P201**。原三席 P197/P199/P200 保留；替补 OR/P202 已到 Round2，MCT 经独立候选审查和 root 复核后按新编号 **P203** 进入写稿。五席合同齐备，不等于本轮五篇完成。
-- P197/P199/P200/P202 已各自内部完成：两轮论文审查、Round2、共八次终端冷构建、十六页最终视读及完整交付包审计通过。P203 论文 A 接受正文 HOLD 标记小修，独立 B 接受不变，root 两次复算及594项整包检查通过后已物理冻结四页 Round2；最后终端 QA 正在运行，尚未宣告整批完成。
-- 历史五席冻结 `FIVE_SEAT_FREEZE.md` 保持原样。后续裁决以 `P198_REOPEN_ADJUDICATION.md` 和 `P201_REOPEN_ADJUDICATION.md` 为准：CMM 完整逆像机制退化为受限删除加根转子；EPF 与旧的已淘汰 OCL 完全共轭。数学进展和合格新系统必须分开计数。
-- 编号上限 196 不等于 196 篇已完成论文或 196 个动力学子类。实物盘点见下文。
+- 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
+- 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
+- 恢复与下一动作以 [批次状态](docs/papers197_201_sequence/PIPELINE_STATE.md) 为准；完成证据见 [最终 QA](docs/papers197_201_sequence/FINAL_QA_REPORT.md)，逐篇进展见 [Round2 报告](docs/papers197_201_sequence/ROUND2_REPORT.md)。不因旧索引中的 pending 文字重做已完成审查。
+- P198、P201 在论文审查中淘汰，原稿和编号保留；五篇完成不能读成 P197–P203 七篇通过。当前台账 **57 次候选尝试**（5 选中、3 reserve、49 淘汰），不是 57 个已验证独立子类。
 
-## 用户长期要求
+## 持续约定与证据边界
 
-每轮五篇，中间常规转换无需再确认；每篇应有清楚的数学进展；在当前动力学类型内广泛找子系统，早期信号弱或与旧系统重复时及时换方向；阶段结果落实成论文并及时 Git 同步。用户允许较长研究时间。
+每轮五篇、每篇明确数学进展；在当前类型内广泛寻找系统，弱信号或旧机制重复时换方向，普通阶段转换无需再确认，及时私有 Git 同步。科研执行见 [工作流](docs/research_state/WORKFLOW.md)。状态查询本身不启动新批次。
 
-当前批次的详细阈值与两轮审查要求在 `docs/papers197_201_sequence/PROBLEM_ANCHOR.md`、`STANDING_WORKFLOW_AUTHORIZATION.md`、`HOSTILE_REVIEW_PROTOCOL.md`。科研结论以证据为准，不能为凑五篇把 reserve 自动升格。
+P200 的窄/方阵 sharp 时钟仍未证明。P203 的历史 Stage1 中间代码缺失仍是未修复归档限制：旧 pin-list 的 3 PASS / 1 FAIL 保留；当前独立论文证明和运行输入完整。当前论文零未决问题不抹去这一历史限制。详情均在最终 QA 及其链接的原件。
 
-## 最新已完成批次
+上一完成批次 P192–P196 的研究提交为 `76146ba17eb15beccfc38e625427f8da726db919`，见 [上一批最终 QA](docs/papers192_196_sequence/FINAL_QA_REPORT.md)。P192 全 n history-set/相关深度分布仍是猜想，P194 文献遗漏已修复；旧状态和外部 HOLD 原样保留。
 
-| 编号 | 系统 | 已审定进展概要 |
-|---|---|---|
-| P192 | first-collision Hurwitz | 严格调度时钟、sharp tail、fixed census、全目标一步逆像和唯一最大纤维 |
-| P193 | mutual-best block refinement | 同时分块手术、递归/分层时钟、全目标分量乘积 |
-| P194 | least-raising crystal words | 精确权重时钟、Schur 深度多项式、完整前驱颜色判据 |
-| P195 | odd-side least-neighbor trees | 奇偶分类的 fixed/2-cycle 递归结构、sharp tail、EGF 和局部纤维 |
-| P196 | cyclic Gödel implication | 一步 rotation core、trace/cycle 数据、精确 gap-product 纤维 |
+## 路径、历史与维护
 
-证据：`docs/papers192_196_sequence/phase2/ROUND2_REPORT.md`、`FINAL_QA_REPORT.md`。
-归档记录为 20 页、10 次 source-only 冷构建、10 份论文审查包；作者/A/B 计数共 56,517,656。
-这些是归档计数，本次历史整理没有重跑这五篇的全部数学验证。
+工作区 `/root/autodl-tmp/symbolic_dynamics` 本身没有 Git；镜像是 `/root/autodl-tmp/hilbert-polya-structure`。新论文 P187 起在镜像根 `papers/`，较早已跟踪材料多在 `symbolic_dynamics/` 下。实际完成提交与远端同步分别记录，不能把 WIP 备份当验收。
 
-特别保留：P192 的全 n history-set 公式及其推导的深度分布仍是猜想；P194 的 Defant–Williams 近邻文献遗漏已修复。P192 为 `OWNER_RED_AMBER`，其余四篇为 `OWNER_AMBER`，全部 `HOLD_EXTERNAL`。
+编号异常、P51–P56 缺失、P57–P66 历史同步缺口、双 96 和完整路径映射见 [历史与边界](docs/research_state/HISTORY_AND_CAVEATS.md)。该文及 [整理前快照](docs/research_state/ARTIFACT_SNAPSHOT_2026-09-05.json) 保持原基线，190 个不同编号材料包不是实时完成总数。
 
-## 当前恢复点
-
-详细状态：`docs/papers197_201_sequence/PIPELINE_STATE.md`。
-
-| 候选 | 当前状态 | 尚需完成 |
-|---|---|---|
-| TCSD / P197 | 个体论文内部完成，终端整包 PASS | 等待第五篇；外部 HOLD |
-| CMM / P198 | 论文 Review A 淘汰：受限删除/根改接贡献塌缩 | 保留四页原稿，席位重新搜索 |
-| LZK | 独立审查淘汰：P100/HF1 的分量化旧机制 | 保留淘汰证据，不分配论文号 |
-| FOSP / P199 | 个体论文内部完成，四页终端整包 PASS | 等待第五篇；外部 HOLD |
-| LFAS / P200 | 个体论文内部完成，四页终端整包 PASS | 窄/方阵 sharp 仍猜想；外部 HOLD |
-| EPF / P201 | 与已淘汰旧 OCL 完全共轭，退出新系统席位 | 保留五页原稿及新定理，不能包装成新子类 |
-| OR / P202 | 个体论文内部完成，四页终端整包 PASS | 加强版复审3313检查已通过；外部 HOLD |
-| MCT / P203 | 四页 Round2 已冻结，论文 A 小修接受、B 不变接受 | 终端 QA 与完整五篇验收；历史中间代码缺失限制保留 |
-
-原编号对应保持不变，不覆盖 P198/P201 旧身份。接续：P203 论文 B 与终端 QA。前四篇终端证据见 RETAINED_FINAL_QA_REPORT.md 和 P202_FINAL_QA_REPORT.md；P203 ROUND1_RECEIPT.md 记录真实 A 小修接受及两次正式独立1498484项复算，MCT_ROOT_ADJUDICATION.md 保留历史代码归档限制。按 LFCTR 与旧 Q01 全映射相同的最新纠错，台账为57次当前候选尝试（5选中、3reserve、49淘汰），另18历史控制、8code-only；LGB 重入淘汰、ND1 仅reserve，D2G/CCW 为已知算子/特化淘汰。旧51、50、54、57及暂定58快照保留。最新研究备份9a394ee2已实际推送并由远端 refs/heads/main 确认，包含 P203 Round1/A 和 QA adapter，不含正在写作的 B。此前8190c049经正常合并82293de4保留两条不交叠研究支线；独立 Git blob 核对842文件完全一致，详见 qa/GIT_OBJECT_AUDIT_82293.md。这些是研究备份，不是五篇完成提交。
-
-## 历史计数与路径
-
-截至整理前快照：191 个编号目录、190 个不同编号、190 个含主 PDF 候选的目录；P51–P56 无当前目录；编号 96 的一个旧目录为空。此处只是实物计数，不表示历史论文全部符合今天的完成标准。
-
-工作区 `/root/autodl-tmp/symbolic_dynamics` 本身没有 Git。镜像为 `/root/autodl-tmp/hilbert-polya-structure`，存在历史布局分裂：已跟踪的较早文件通常在 `symbolic_dynamics/` 下，P187–P196 在根 `papers/` 与 `docs/` 下。P57–P66 的当前路径未在 Git 中找到；详见异常账本，勿据此声称所有旧稿已同步。
-
-历史说明与恢复边界：`docs/research_state/HISTORY_AND_CAVEATS.md`。
-逐目录/PDF 哈希/镜像位置和整理前 50 个当前批次文件的快照：`docs/research_state/ARTIFACT_SNAPSHOT_2026-09-05.json`。
-
-## 证据优先级与维护
-
-已接受版本的定理/证明、审查结论、验证输出和 Git 对象高于总览文字；总览高于聊天摘要；未落盘的子代理消息仅作为待查线索。区分“已证明”“有限实验支持”“猜想”“淘汰/保留”和“待完成”。检索未命中不表示新颖性已确认。
-
-每次批次状态实质变化时，先更新批次状态文件，再刷新本入口的最新完成批次与下一动作。历史快照保留原基线，不把它改成实时状态。模型升级不自动改变已证明结论，也不自动证明旧猜想。
+证据优先级：接受版本的证明/审查/实际输出与 Git 对象，高于恢复索引，高于聊天摘要。明确区分证明、有限实验、猜想、淘汰、reserve 和待完成；子代理消息须落到可检查原件。实质里程碑变化时先更新批次状态，再刷新本入口；模型切换不改变已证明结论。

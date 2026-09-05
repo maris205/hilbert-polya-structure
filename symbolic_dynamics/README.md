@@ -4,8 +4,9 @@
 **Symbolic Dynamics**；几何、Hamiltonian、quantum graph、scattering 或外部
 operator-algebra 想法只记为 `ROUND2_CLUE`，不在当前路线展开。
 
-当前研究项目为 **Ra-1: Arithmetic Symbolic Dynamics**。`Ra-1` 表示
-Route-A roadmap 的当前阶段；项目名称只在本 README 中维护，不再增加项目包装目录。
+原始研究项目名为 **Ra-1: Arithmetic Symbolic Dynamics**；当前执行的是
+Route A 内广泛探索有限自主确定性系统的短论文子轨。原始 HP 算术 A0–A4
+仅用于相关算术/算子主张，不作为当前每个有限系统的入场条件。
 全部可共享论文直接位于根目录的 [`papers/`](papers/) 中。
 
 Papers 44--48 的候选选择、跨篇查重、来源宇宙边界与两阶段
@@ -15,14 +16,13 @@ provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)
 ## 当前入口与最新完成批次（2026-09-05 核对）
 
 跨会话恢复请先读 [当前研究状态](../SYMBOLIC_DYNAMICS_STATE.md)。
-最新完成批次是 **P192–P196**：五篇、两轮独立审查、20 页、10 次冷构建；
-研究提交为 `76146ba17eb15beccfc38e625427f8da726db919`。
-证据见 [最终 QA](../docs/papers192_196_sequence/FINAL_QA_REPORT.md)。全部仍为 `HOLD_EXTERNAL`。
-
-当前批次保留 **P197/P199/P200/P202/P203**。P198/P201 在论文审查中淘汰，
-旧编号及原稿保留。五篇均已完成真实 A/B 审查并冻结 Round2，
-20 页已视读、10 次终端冷构建已完成；完整五篇重跑验收正在进行。
-恢复点见 [批次状态](../docs/papers197_201_sequence/PIPELINE_STATE.md)。
+最新内部完成批次是 **P197/P199/P200/P202/P203**：五篇、十份实际论文审查、
+20 页实际视读、10 次终端冷构建；完整五篇重跑验收已 `PASS`。
+证据见 [最终 QA](../docs/papers197_201_sequence/FINAL_QA_REPORT.md) 与
+[逐篇定理进展](../docs/papers197_201_sequence/ROUND2_REPORT.md)。全部仍为 `HOLD_EXTERNAL`。
+P198/P201 已淘汰，旧编号及原稿保留。恢复点及实际 Git 状态见
+[批次状态](../docs/papers197_201_sequence/PIPELINE_STATE.md)；日常执行见
+[精简工作流](../docs/research_state/WORKFLOW.md)。
 
 整理前的冻结实物快照为190个不同编号的材料包，不是当前实时总数，也不能称196篇全部完成。
 P51–P56缺少目录；另一个96目录为空；P57–P66本地有材料但未在Git历史中找到。
@@ -1934,11 +1934,15 @@ external published；本文也不声称任何具体 H1/H2 hash 或 remote push/m
 
 ## 目录
 
-- [研究提案](propose-symbolic-dynamics.md)
-- [Route-A evaluator](skills/route-a-evaluator.md)
-- [Route-B evaluator](skills/route-b-evaluator.md)
+- [当前五篇研究技能](../.agents/skills/symbolic-dynamics-research/SKILL.md)
+- [当前工作流](../docs/research_state/WORKFLOW.md)
+- [原始 HP 算术研究提案（历史范围）](propose-symbolic-dynamics.md)
+- [HP Route-A evaluator（算术/行列式主张）](skills/route-a-evaluator.md)
+- [HP Route-B evaluator（需符合其入口条件）](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
 - [论文目录（历史编号与缺口见恢复索引）](papers/)
 
-根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
-完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。
+根目录不再设置项目包装层；每个论文包按其验收 schema 使用完整性清单
+（如 `SHA256SUMS` 或历史 `PAPER_MANIFEST.sha256`）。承重来源、PDF 和冻结
+证据须纳入相应清单或输入 pins；不自动纳入无关 legacy 大语料和运行缓存。
+历史冻结清单保持原样，不为统一命名而重写。
