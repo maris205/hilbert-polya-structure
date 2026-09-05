@@ -2725,6 +2725,56 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C389--C393
+
+Five independent source-theorem packages are complete: full Carlitz ring-action
+torsion towers, real/rational Lyness dynamics, supercritical singular
+Hamiltonian scattering, a meromorphic countable-branch Hardy family, and the
+generic quadratic inverse tree. Each has one final paper and three substantive
+revisions, with complete proofs and explicit classical ownership.
+
+- [C389 Carlitz full torsion and ramified Galois towers](henon_carlitz_full_torsion_tower_route_a/README.md) · [paper PDF, 4 pages](henon_carlitz_full_torsion_tower_route_a/paper/main.pdf)
+- [C390 Lyness real periods and rational-torsion obstruction](henon_lyness_real_rational_torsion_route_a/README.md) · [paper PDF, 5 pages](henon_lyness_real_rational_torsion_route_a/paper/main.pdf)
+- [C391 inverse-square self-adjoint spectrum and dilation limit cycle](henon_supercritical_inverse_square_limit_cycle_route_a/README.md) · [paper PDF, 5 pages](henon_supercritical_inverse_square_limit_cycle_route_a/paper/main.pdf)
+- [C392 Lüroth whole-plane operator continuation and invisible residues](henon_luroth_meromorphic_hardy_route_a/README.md) · [paper PDF, 4 pages](henon_luroth_meromorphic_hardy_route_a/paper/main.pdf)
+- [C393 generic quadratic full arboreal tower and vanishing periodic fraction](henon_quadratic_generic_arboreal_route_a/README.md) · [paper PDF, 4 pages](henon_quadratic_generic_arboreal_route_a/paper/main.pdf)
+
+C389 closes every conductor and multiplier, all prime-power Eisenstein/Galois
+layers, compatible inverse limits, finite-prime ramification and the different.
+C390 closes every positive regular oval and its rotation/return law, contrasting
+arbitrarily large prime real periods with the externally classified positive
+rational periods 1, 5 and 9. C391 keeps every self-adjoint boundary phase and
+the entire bilateral negative ladder together with the full continuous
+scattering spectrum; ordinary heat and determinant constructions fail.
+C392 proves trace-norm whole-plane continuation, nonzero square-zero residues
+invisible to the scalar determinant, and exact unavoidable determinant poles.
+C393 proves the full generic binary Galois tower, every cycle index and cover
+genus, and a zero limiting periodic-point fraction over primes by taking the
+fixed-height prime limit before the height limit.
+
+C389 and C393 retain structural A0 and weak A1, with overall
+`ROUTE_A_EXPLORATORY`. C390 has weak A0 and weak A1; C392 has weak A1;
+C391 has A1_FAIL and A4_NATURAL_QUANTIZATION with an explicitly chosen extra
+boundary domain. The latter three are `ROUTE_A_REJECTED`.
+All five have A2_FAIL and A3_FAIL. These are candidate-local target judgments,
+not denials of the complete source theorems and not literature novelty ratings.
+
+Actual release closure: 238 payload files plus five manifests, final PDFs
+totalling 22 pages, complete write/nonwrite verification, double fresh builds,
+embedded fonts, actual page inspection, and independent file/hash audits.
+All nine target/Route-B flags remain false under
+`NO_BAD_EULER_OR_ROOT_NUMBER`. No target local factors, root number,
+target zeros/divisor or Hilbert--Pólya operator is claimed.
+
+See the [selection record](IDEA_REPORT_C389_C393.md),
+[frozen contracts](BATCH_PLAN_C389_C393.md),
+[batch review and hashes](BATCH_REVIEW_C389_C393.md),
+[candidate register](docs/candidate_registry.md),
+[obstruction register](docs/obstruction_registry.md) and
+[recovery entry point](CURRENT_RESEARCH_STATE.md).
+The five-paper checkpoint is reached; C394--C398 requires user confirmation.
+
+
 ## Route-A independent cross-subtype round C384--C388
 
 Five different owners test source-to-target boundaries with complete theorems:

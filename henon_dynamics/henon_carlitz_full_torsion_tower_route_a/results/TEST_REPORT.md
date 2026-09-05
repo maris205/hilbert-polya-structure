@@ -1,0 +1,10 @@
+# Test report
+
+- producer: `{"status": "PASS", "ring_cases": 107, "tower_cases": 77, "payload_sha256": "2004e10dc06b5774e79de6e09ff69f398339f1cd13a7fd8fd161caab794d88f8"}`
+- checker: `{"assertions": 191903, "payload_sha256": "2004e10dc06b5774e79de6e09ff69f398339f1cd13a7fd8fd161caab794d88f8", "ring_cases": 107, "status": "PASS", "tower_cases": 77}`
+- sympy: `{"status": "PASS", "exact_checks": 22782, "arithmetic": "exact finite fields and symbolic identities; no numeric precision claim"}`
+- replay: `{"status": "PASS", "independent_working_directories": 2, "identical_frozen_source": true, "sha256": "1ff01a9e016348903f4f7b6548953fc298967474c7ce3d6a54ed98db5d637c35"}`
+- mutation: `C389_MUTATION_PASS rejected=63/63 repaired_hash_json=51 parser_json=2 strict_yaml=10 names=baseline,scope,route,q_bool,a_bool,size_bool,linear_bool,b_bool,h_bool,period_bool,population_bool,fixed_bool,stratum_bool,clock,fixed,cycle,q4,P_bool,k_bool,Q_bool,degree_bool,valuation_bool,constant,psi_exponent_bool,lower_bool,hist_bool,different_bool,kernel_bool,different,valuation,lower_size,scope_claims_automorphy,scope_claims_hilbert_polya_operator,scope_claims_root_number,scope_claims_target_arithmetic_local_data,scope_claims_target_divisor_or_counting_law,scope_claims_target_euler_factors,scope_claims_target_functional_equation,scope_claims_target_zero_match,scope_invokes_route_b,control_type_all_nonunit_maps_are_permutations,control_type_composite_conductor_is_single_prime,control_type_finite_tests_prove_all_levels,control_type_geometric_twist_conjugacy_implies_K_conjugacy,control_type_mandatory_a1_controls_completed,control_type_rank_zero_nonzero_torsion,control_type_target_prime_clock_constructed,unknown,nested_unknown,missing_ring,reordered_towers,json_duplicate,json_nonfinite,yaml_unknown,yaml_false_zero,yaml_date,yaml_duplicate,yaml_anchor,yaml_alias,yaml_merge,yaml_nonstring,yaml_promotion,yaml_route_b`
+- smoke: `3 tests PASS`
+
+Six scripts under both -O and -OO give twelve optimized-mode refusals. Strict YAML/raw hash, source scope, exact membership and PDF gates passed. Finite evidence is regression, not an all-level proof.

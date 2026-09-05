@@ -17,6 +17,23 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C389--HCS-C393 source-boundary register (2026-09-05)
+
+| ID | Candidate | Status | Exact obstruction or boundary | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O373 | HCS-C389 function-field torsion as a target prime-clock bridge | proved source/clock distinction; target bridge open | Carlitz conductors and ramification are intrinsic to F_q[theta], while periods are multiplicative orders for the chosen multiplier. This construction supplies neither rational-prime logarithmic clocks nor a target divisor. | All conductors, multipliers, prime-power Galois towers, CRT, lower ramification and different survive. This is not an impossibility theorem for every future arithmetic bridge; infinity and maximal class-field theory are outside this package. | ../henon_carlitz_full_torsion_tower_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O374 | HCS-C390 real oval periods as positive rational torsion or cardinality zeta | proved real/rational and continuum obstruction, with imported torsion classification | For positive rational a≠1, sufficiently large prime real-period ovals contain no positive rational periodic point: positive rational least periods are only 1,5,9. Periodic ovals have uncountably many fixed points, so the ordinary real point-cardinality zeta is not defined. | The complete real foliation, normalized rotation, return shear and annular Koopman spectrum survive. Translation-point torsion is not starting-point torsion; a=1 is handled separately. Weighted family counts are different objects, not excluded universally. | ../henon_lyness_real_rational_torsion_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O375 | HCS-C391 bilateral inverse-square spectrum as an ordinary heat or spectral determinant owner | proved domain and operator-class obstruction | Every supercritical self-adjoint extension is unbounded below; positive-time heat is unbounded, the resolvent is noncompact, and the bilateral negative-ladder zeta has no half-plane of convergence. No such extension is continuously dilation invariant or Friedrichs. | All boundary phases, complete bound/continuous spectral resolution and log-periodic scattering remain. The classical expression does not choose its quantum boundary phase. Relative or newly renormalized determinants are not ruled out by this statement. | ../henon_supercritical_inverse_square_limit_cycle_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O376 | HCS-C392 scalar determinant as a complete meromorphic operator invariant or entire target | proved nilpotent blindness and exact pole obstruction | At s=−m the operator residue is nonzero and square-zero, although the scalar determinant is holomorphic. At s=1/2−m, D(1,s) has exact pole order m+1, which no zero-free entire prefactor removes. Composite branch slopes and Hurwitz rewriting do not create a prime carrier. | Complete native spectrum, primitive stability product and whole-plane operator continuation survive. The claim freezes D(1,s); arbitrary new quotients or changed objects are not universally excluded. | ../henon_luroth_meromorphic_hardy_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O377 | HCS-C393 generic full arboreal tower as a uniform specialization or target orbit clock | proved generic/specialization and nonuniform-height boundary | For each fixed height n, good reduction excludes primes dividing the finite critical-collision product B_n. No fixed prime avoids critical collisions at every height. Fixed-height Chebotarev errors are not uniform in n; full generic monodromy is not a theorem for every rational specialization. | The complete generic tower, all cycle indices/genera, fixed-point decay and zero prime-limit periodic fraction survive. The prime limit is taken before n→∞; no rate in p or identification of tree-height, map-time and Frobenius-time is asserted. | ../henon_quadratic_generic_arboreal_route_a/proof/ANALYTIC_PROOF.md |
+
+These are exact named-source boundaries, not universal no-go statements for
+all recodings or new models. Coordinate conjugacy preserves the corresponding
+orbit counts, and unitary equivalence preserves the stated operator-class
+obstructions; changing clocks, domains or regularization requires a new claim.
+The target flags remain false under `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+
 ## HCS-C384--HCS-C388 source-boundary register (2026-09-05)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

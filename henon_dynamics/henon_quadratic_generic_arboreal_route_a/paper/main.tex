@@ -1,0 +1,360 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setmonofont{Latin Modern Mono}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Per}{\operatorname{Per}}
+\title{The Full Generic Binary Tower of $X^2+1$:\\
+\ifcase\CRevisionRound New Branch Inertia at Every Height
+\or Complete Cycle Indices and Galois-Cover Genus
+\else From Ramified Inverse Trees to Vanishing Periodic Density\fi}
+\author{HCS-C393 theorem and reproducibility package}
+\date{5 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The polynomial $X^2+1$ generates the full automorphism group of its generic
+binary preimage tree at every height. A new critical value produces one
+sibling transposition; conjugation and restriction then force every
+last-level swap, without relying on a finite Galois computation.
+\ifnum\CRevisionRound>0
+We derive the complete cycle-index recursion, the exact fixed-leaf law,
+and the genus of each smooth projective Galois-closure curve. The probability
+that a uniform height-$n$ automorphism fixes a leaf is asymptotic to $2/n$,
+although its expected fixed-leaf count is exactly one.
+\fi
+\ifnum\CRevisionRound>1
+At each fixed height, explicitly good reductions preserve the full group.
+Finite-field Chebotarev then implies that the proportion of periodic points
+of the original map modulo primes tends to zero. The order of the two
+limits is essential and supplies no uniform-in-height estimate.
+\fi
+Exact small-tree permutations, critical-value identities and residue-field
+computations audit the normalization and its failure boundaries.
+These are source-local reconstructions with classical Galois and
+periodic-density owners. A transcendental generic basepoint, a Frobenius
+cycle and an original-map periodic orbit are not interchangeable, and no
+target prime-period or spectral identity is asserted.
+\end{abstract}
+\noindent\textbf{Keywords:} arboreal Galois group; quadratic dynamics; ramification; wreath product; cycle index; periodic density.
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+\begin{sloppypar}
+本文对二次映射的泛型逆像树证明每一层 \foreignlanguage{english}{Galois} 群都是完整二叉树自同构群。
+每层新增临界值给出一个兄弟交换，再由共轭产生全部末层交换。
+\ifnum\CRevisionRound>0
+进一步推导所有循环类型的精确递推、固定叶概率及 \foreignlanguage{english}{Galois} 闭包曲线亏格；
+固定叶概率渐近为二除以树高，而平均固定叶数始终为一。
+\fi
+\ifnum\CRevisionRound>1
+固定树高之后，有限域切博塔廖夫定理给出像集比例，再按正确的极限顺序
+证明模素数周期点比例趋于零。该论证不提供对任意树高一致的误差。
+\fi
+文中区分泛型基点、数值特化、原映射时间和 \foreignlanguage{english}{Frobenius} 时间，
+经典理论明确归属，不把算术源结构写成目标零点对应。
+\end{sloppypar}
+\noindent 关键词：树状\foreignlanguage{english}{Galois}群；二次动力学；分歧；圈积；循环指标；周期点密度。
+\end{otherlanguage}
+
+\section{An intrinsic arithmetic source, not a fitted prime clock}
+Let $f(X)=X^2+1$, let $t$ be transcendental over $\mathbb Q$, and let
+$K_n$ be the splitting field of $f^n(X)-t$ over $\mathbb Q(t)$.
+The rooted tree $T_n$ has root $t$, level-$j$ vertices $f^j(X)=t$,
+and edges $x\mapsto f(x)$. Write
+\[
+ G_n=\Aut(T_n),\qquad d_n=|G_n|=2^{\,2^n-1}.
+\]
+The generic basepoint is part of the frozen source.
+No theorem below says that every specialization $t=a\in\mathbb Q$
+has this Galois group.
+
+Odoni \cite{odoni} established the Galois theory of iterated polynomials.
+Pink \cite{pink} studies quadratic iterated monodromy with infinite
+postcritical orbits; not every quadratic rational map in that broader
+class has a full tree group. We give the specific new-branch proof needed
+for this polynomial. The wreath-product approach to periodic proportions
+belongs to Juul--Kurlberg--Madhu--Tucker \cite{jkmt}.
+Our finite audit and explicit source comparison do not certify global
+literature novelty.
+
+Within the project, C374 treated the numerical basepoint-two power-map
+tower, with an affine index-two image. The present source has full
+nonabelian wreath growth, new ramification at every height and an original
+finite-field dynamical consequence. It is not another parameter table for
+that affine tower. All claims below concern native arithmetic; they do
+not insert a prime list or a logarithmic roof into the map.
+
+\section{The complete group from one new branch}
+Set $c_0=0$ and $c_i=f^i(0)$, so that
+\[
+ 0,1,2,5,26,\ldots
+\]
+are distinct: $c_{i+1}=c_i^2+1>c_i$ for $i\ge1$.
+The chain rule gives
+\begin{equation}\label{der}
+ (f^n)'(X)=2^n\prod_{j=0}^{n-1}f^j(X).
+\end{equation}
+Thus the finite branch values at height $n$ are precisely
+$c_1,\ldots,c_n$.
+The rational function $f^n$ has degree $2^n$, so
+$[\overline{\mathbb Q}(X):\overline{\mathbb Q}(f^n(X))]=2^n$.
+Equivalently $f^n(X)-t$ is irreducible over $\overline{\mathbb Q}(t)$,
+and geometric monodromy is transitive on its leaves.
+
+\begin{theorem}\label{full}
+For every $n\ge1$, both the geometric and arithmetic Galois groups of
+$f^n(X)-t$ are $G_n$. The restriction to height $n-1$ is onto with kernel
+$(C_2)^{2^{n-1}}$. The infinite tower has group $\Aut(T_\infty)$.
+\end{theorem}
+\begin{proof}
+At $t=c_n$ the only critical point in the fibre is $X=0$.
+Indeed $f^j(X)=0$ for $j\ge1$ would imply
+$f^n(X)=c_{n-j}\ne c_n$. Near zero,
+\[
+ f^n(X)=c_n+A_nX^2+O(X^4),\qquad
+ A_n=2^{n-1}\prod_{i=1}^{n-1}c_i\ne0.
+\]
+Local inertia is therefore a single transposition of two leaves.
+They are siblings because their common image under $f$ is $1$.
+The previous-height cover is unramified at this new branch value, so
+the transposition belongs to the last-level restriction kernel.
+
+Inductively the group at height $n-1$ is $G_{n-1}$; restriction between
+splitting fields is surjective. The new kernel is contained in the group
+of independent swaps of the $2^{n-1}$ sibling pairs.
+Conjugate the one new swap by elements transitive on their parents.
+Every sibling swap is obtained, and these generate the entire kernel.
+The degree-two case starts the induction.
+
+The arithmetic group contains the full geometric group and embeds in
+$G_n$, so it too is full. Thus the constant field is $\mathbb Q$.
+Compatible surjective restrictions give the full inverse limit:
+an automorphism of the union is exactly a family of compatible
+finite-level automorphisms.
+\end{proof}
+This proof derives the kernel rather than inferring it from a group-order
+fit. It also records why a postcritical collision would break the argument.
+
+\ifnum\CRevisionRound>0
+\section{All branch inertia and the Galois-closure genus}
+At $t=c_i$, the ramified points in the degree-$2^n$ covering are the
+$2^{n-i}$ roots of $f^{n-i}(X)=0$. They are simple because no earlier
+critical value is zero. Each has ramification index two.
+The finite inertia permutation therefore has
+\[
+ 2^{n-i}\text{ two-cycles},\qquad
+ 2^n-2^{n-i+1}\text{ fixed leaves}.
+\]
+At infinity the polynomial has a single point of index $2^n$, with
+inertia a $2^n$-cycle. All inertia in the Galois closure is tame and
+there are no further branch values.
+
+\begin{theorem}\label{genus}
+The smooth projective Galois-closure curve of $K_n/\mathbb Q(t)$ has genus
+\begin{equation}\label{gen}
+ g_n=1+\frac{d_n}{2}\left(\frac n2-1-2^{-n}\right).
+\end{equation}
+\end{theorem}
+\begin{proof}
+For a tame Galois cover of degree $d_n$, each base branch point of inertia
+order $e$ contributes $d_n(1-1/e)$ to Riemann--Hurwitz.
+There are $n$ finite branch values with $e=2$ and one at infinity with
+$e=2^n$. Consequently
+\[
+ 2g_n-2=d_n[-2+n/2+(1-2^{-n})],
+\]
+which is \eqref{gen}.
+\end{proof}
+For example $g_1=g_2=0$ and $g_3=25$.
+This is not the genus of the original polynomial-cover source,
+which is the projective line.
+
+\section{The full cycle index and fixed-leaf law}
+Let $Z_n(x_1,x_2,\ldots)$ be the mean cycle monomial of a uniform element
+of $G_n$, with $Z_0=x_1$.
+The wreath decomposition gives the complete recursion
+\begin{equation}\label{index}
+ Z_n(x)=\frac12\left[Z_{n-1}(x)^2+
+                 Z_{n-1}(x_2,x_4,\ldots)\right].
+\end{equation}
+Without the top swap, the two independent cycle partitions add.
+With the swap, two steps restrict to the product of the two independent
+subtree permutations, which is uniform; every resulting cycle length doubles.
+This proves every coefficient, not only a fixed-root marginal.
+
+For an element with $m_l$ cycles of length $l$,
+\[
+ \#\Fix(g^r)=\sum_{l\mid r}lm_l,\qquad
+ \det(I-uU_g)=\prod_l(1-u^l)^{m_l}.
+\]
+Here $U_g$ is the native finite leaf permutation. Frobenius repetition
+changes that permutation; it is neither tree height nor the original
+map's iterate period. The finite determinant is not a target Fredholm operator.
+
+\begin{theorem}\label{fpp}
+If $\delta_n$ is the probability of at least one fixed leaf, then
+\[
+ \delta_0=1,\qquad
+ \delta_n=\delta_{n-1}-\tfrac12\delta_{n-1}^2,\qquad
+ n\delta_n\longrightarrow2.
+\]
+The mean fixed-leaf count is one at every height.
+\end{theorem}
+\begin{proof}
+A top swap fixes no leaf. Without it, a fixed leaf exists unless both
+independent subtrees have none. This proves the recursion.
+The positive sequence decreases to zero, since its limit satisfies
+$L=L-L^2/2$. Also
+\[
+ \frac1{\delta_n}-\frac1{\delta_{n-1}}
+   =\frac1{2(1-\delta_{n-1}/2)}\longrightarrow\frac12 .
+\]
+Cesàro summation proves $n\delta_n\to2$. The expected count equals one
+by transitivity and the orbit-counting lemma, or directly by
+\eqref{index}.
+\end{proof}
+Thus a vanishing chance of any fixed leaf coexists with constant mean count.
+The distinction is intrinsic to the full group and cannot be read from one
+sample Frobenius element.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Good reductions and the ordered two-limit argument}
+For fixed $n$ define the explicit nonzero integer
+\begin{equation}\label{bad}
+ B_n=2\prod_{0\le i<j\le n}(c_j-c_i).
+\end{equation}
+If $p\nmid B_n$, the critical values through height $n$, including zero,
+remain distinct modulo $p$. The same local proof of Theorem \ref{full}
+works over $\overline{\mathbb F}_p(t)$. All inertia orders are powers of
+two, so the reduction is tame. Its geometric group is full; its
+arithmetic group contains that group and embeds in it, so the cover
+is regular over $\mathbb F_p$.
+
+We explicitly import the classical finite-field Chebotarev theorem for
+regular covers, obtained from the Weil bounds on twists.
+For a fixed height and a union of conjugacy classes, the proportion of
+unramified rational basepoints has the group-theoretic proportion plus
+$O_n(p^{-1/2})$. This is the same input used in \cite{jkmt},
+Section 5 and Proposition 5.3. The implicit constant may depend on the
+large degree and genus in \eqref{gen}; it is not uniform in height.
+
+At an unramified $a\in\mathbb F_p$, the factor degrees of
+$f^n(X)-a$ are exactly the cycle lengths of its Frobenius leaf permutation.
+Thus every cycle-index coefficient in \eqref{index} has that fixed-height
+distributional interpretation. In particular, a root in $\mathbb F_p$
+exists precisely when Frobenius fixes a leaf.
+At most $n$ finite branch values are excluded, so
+\begin{equation}\label{image}
+ \frac{|f^n(\mathbb F_p)|}{p}=\delta_n+O_n(p^{-1/2}).
+\end{equation}
+
+\begin{corollary}\label{density}
+For the original map $f(x)=x^2+1$ on $\mathbb F_p$,
+\[
+ \lim_{\substack{p\to\infty\\p\ {\rm prime}}}
+        \frac{|\Per(f,\mathbb F_p)|}{p}=0.
+\]
+\end{corollary}
+\begin{proof}
+A periodic point has $n$ backward steps along its cycle for every $n$.
+Hence $\Per(f,\mathbb F_p)\subset f^n(\mathbb F_p)$.
+For each fixed $n$, only finitely many primes divide \eqref{bad};
+taking the prime limsup in \eqref{image} gives an upper bound $\delta_n$.
+Only now send $n$ to infinity and apply Theorem \ref{fpp}.
+Nonnegativity gives the zero limit.
+\end{proof}
+This is a source specialization of the classical wreath-product density
+mechanism \cite{jkmt}, with the generic-group and limit-order hypotheses
+made explicit. It supplies no rate in $p$ and makes no assertion with
+a prime-dependent cutoff $n(p)$.
+
+\section{Countercontrols, independent evidence and the route verdict}
+The simpler source $X^2$ already has a critical collision at height one
+and cyclic geometric monodromy. The neighboring source $X^2-1$ has
+critical orbit $0,-1,0$, so the new-branch induction fails.
+Reduction at bad primes supplies an intrinsic third control.
+Indeed no finite residue field can contain infinitely many distinct
+critical values. There is no prime that satisfies \eqref{bad} at every
+height. Composite moduli are not fields and are not called single Frobenius owners.
+
+The exact ledger contains eight tower rows, cycle indices through height
+five, thirteen fixed-leaf probabilities, and 150 map-level rows over the
+25 primes below 100. The independent checker directly enumerates 32,907
+tree permutations through height four, then forms the next class convolution.
+It computes original-map periodic points by functional-graph path detection,
+independently of the producer's stabilized image sets.
+SymPy checks 14 identities and independently factors 632 residue polynomials.
+An initial installed-backend sorting error aborted that lane; selecting
+Python ground types before importing SymPy repaired the executable.
+It did not supply a mathematical counterexample or change the evidence.
+
+These finite receipts check signs, multiplicities, bad-prime exclusions and
+schema handling. They do not prove the infinite group or the density limit.
+Tree height, original-map iteration and Frobenius iteration remain distinct.
+The source supplies genuine arithmetic ramification, but no rational prime
+has been identified with an original orbit of period $\log p$.
+
+The conservative arithmetic grade is
+\[
+\mathrm{A0\_STRUCTURAL\_ARITHMETIC\_RELATION}.
+\]
+The remaining grades are
+$(\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},\mathrm{A3\_FAIL},
+\mathrm{A4\_FORMAL\_HINT})$, overall exploratory.
+Finite leaf unitaries are not a global Hilbert--Pólya construction.
+\par\noindent The firewall \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER} remains in force,
+with every target/Route-B flag false.
+\fi
+
+\section{Conclusion}
+New critical inertia closes the entire generic binary Galois tower.
+\ifnum\CRevisionRound>0
+Its cycle indices and Galois-cover genus follow at every height, not only
+on the finite verification grid.
+\fi
+\ifnum\CRevisionRound>1
+Fixed-level arithmetic reduction then reaches an original finite-field
+periodic-density conclusion through an ordered, nonuniform two-limit argument.
+\fi
+This is one paper, not three publications; its present record is
+Round \ifcase\CRevisionRound zero\or one\else two\fi.
+The accompanying proof ledger, independent checks and source audit delimit
+the complete source theorem from the unachieved target bridge.
+
+\begin{thebibliography}{9}
+\bibitem{odoni}
+R. W. K. Odoni.
+The Galois Theory of Iterates and Composites of Polynomials.
+\emph{Proceedings of the London Mathematical Society}
+s3-51(3), 385--414 (1985).
+\href{https://doi.org/10.1112/plms/s3-51.3.385}{doi:10.1112/plms/s3-51.3.385}.
+\bibitem{pink}
+R. Pink.
+Profinite iterated monodromy groups arising from quadratic morphisms
+with infinite postcritical orbits.
+Preprint (2013), \href{https://arxiv.org/abs/1309.5804}{arXiv:1309.5804}.
+\bibitem{jkmt}
+J. Juul, P. Kurlberg, K. Madhu and T. J. Tucker.
+Wreath Products and Proportions of Periodic Points.
+\emph{International Mathematics Research Notices}
+2016(13), 3944--3969 (2016; online 2015).
+\href{https://doi.org/10.1093/imrn/rnv273}{doi:10.1093/imrn/rnv273}.
+Accessed proof version: \href{https://arxiv.org/abs/1410.3378}{arXiv:1410.3378}.
+\end{thebibliography}
+\end{document}

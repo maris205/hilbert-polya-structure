@@ -1,0 +1,356 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<\CRevisionID><\CRevisionID>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\newfontfamily\zhfont[BoldFont={Droid Sans Fallback}]{Droid Sans Fallback}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\ord}{\operatorname{ord}}
+\title{Full Carlitz Torsion Dynamics and Ramified Prime-Power Towers}
+\author{HCS-C389 / HEN-O373}
+\date{5 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study the full Carlitz ring action over $\F_q(\theta)$, for every prime
+power $q$, rather than one additive polynomial in fixed characteristic.
+Every conductor torsion module is cyclic, and its annihilator strata give
+the exact preperiod and eventual period of every multiplier. Fixed-point
+counts and finite determinants follow without treating nonunit multipliers
+as permutations. An annihilator argument proves the specific reduction
+$C_P(X)\bmod P=X^{q^{\deg P}}$.
+\ifnum\CRevisionRound>0
+Primitive polynomials at every prime-power level are Eisenstein. Their
+roots generate the full unit-group Galois action; finite-prime ramification
+proves linear disjointness and the corresponding theorem at every conductor.
+\fi
+\ifnum\CRevisionRound>1
+Compatible towers realize completed local unit groups. Explicit integral
+bases give all lower ramification groups and two matching formulas for the
+different. Independent finite-ring orbit enumeration audits 107 conductors
+and 77 prime-power cases, including a nonprime constant field.
+\fi
+The source theorem is a synthesis of classical Carlitz cyclotomic theory,
+not a literature-priority claim or a target Riemann spectral construction.
+\end{abstract}
+\noindent\textbf{Keywords:} Carlitz module; torsion dynamics; annihilator strata;
+prime-power towers; ramification; source determinant.
+
+\begin{center}{\zhfont\large 中文摘要}\end{center}
+{\zhfont\begin{flushleft}
+本文研究一般特征下的完整 {\rmfamily Carlitz} 环作用，以全部导子扭点模为相空间，\\
+给出每个乘子作用的精确前周期、最终周期与原生有限行列式。\\
+关键约化由消去理想与不同根数矛盾证明，不把任意加性多项式误当 {\rmfamily Frobenius}。
+\ifnum\CRevisionRound>0
+所有素多项式幂层的原始多项式均满足 {\rmfamily Eisenstein} 判据，\\
+进而得到完整 {\rmfamily Galois} 单位群、不同素导子塔的线性无交与任意导子结论。
+\fi
+\ifnum\CRevisionRound>1
+进一步计算兼容无限塔、下编号分歧群及 {\rmfamily different} 指数，\\
+并以独立有限商环枚举核验。
+\fi
+这些结果属于经典源系统理论的自包含整合，不宣称文献首创，\\
+也不提供目标零点或量子构造。
+\end{flushleft}}
+\noindent{\zhfont\textbf{关键词：}{\rmfamily Carlitz} 模；扭点动力学；消去理想分层；\\
+素幂塔；分歧；原生行列式。}
+
+\section{Frozen source and the complete torsion dynamics}
+Put $A=\F_q[\theta]$, $K=\F_q(\theta)$, and
+$C_\theta(X)=\theta X+X^q$. The base field is exactly $K$.
+For $a=\sum a_j\theta^j$, define $C_a=\sum a_j C_\theta^{\circ j}$.
+Constants from $\F_q$ commute with $C_\theta$, so
+$C_{a+b}=C_a+C_b$ and $C_{ab}=C_a\circ C_b=C_b\circ C_a$.
+For monic nonzero $a$, induction gives $\deg_X C_a=q^{\deg a}$ and
+$C_a'=a\ne0$. Thus $\Lambda_a=\ker C_a\subset K^{\rm sep}$ has exactly
+$q^{\deg a}$ distinct points. Generic characteristic refers to the injective
+coefficient map $A\to K$; the field still has characteristic $p$ when
+$q=p^e$. Reduced torsion means multiplicity one, not Lyapunov stability.
+
+The classical ring and cyclotomic framework is discussed in Conrad's
+author exposition \cite{Conrad} and in the tower background of
+Angl\`es--Bandini--Bars--Longhi \cite{ABBL}. The following proofs do not use
+their Iwasawa main conjecture. Our contribution within this repository is
+an all-conductor ring-action and ramification package: C384 studied a
+single map $x+x^p$ and its wild geometric zeta, while general finite-map
+determinants were already available in C204. Those finite formulas alone
+are not credited as the new mechanism.
+
+\paragraph{Round 0 advance.}
+We close the full annihilator/clock classification and the critical
+prime-reduction lemma, including nonunit and zero multipliers.
+
+\begin{theorem}[All conductor modules and multiplier clocks]
+For every monic nonzero $a$, $\Lambda_a\cong A/a$ as an $A$-module.
+Points of exact annihilator $D\mid a$ have population
+$\Phi(D)=|(A/D)^\times|$, with $\Phi(1)=1$.
+For $b\ne0$, define
+\[
+ D_* =\prod_{P\nmid b}P^{v_P(D)},\qquad
+ h_D=\max_{P\mid b}\left\lceil\frac{v_P(D)}{v_P(b)}\right\rceil .
+\]
+The empty maximum is zero. Under $C_b$, a point in this stratum has exact
+preperiod $h_D$ and eventual period $\ord_{D_*}(b)$, with $\ord_1(b)=1$.
+For $b=0$, every nonzero point reaches the fixed point zero in one step.
+\end{theorem}
+\begin{proof}
+For $P$ irreducible and $k\geq1$, put $Q=q^{\deg P}$.
+There are $Q^k$ points in $\Lambda_{P^k}$ but only $Q^{k-1}$ in
+$\Lambda_{P^{k-1}}$. Choose $\lambda_k$ in their difference. Its annihilator
+ideal contains $(P^k)$ but not $P^{k-1}$, hence is $(P^k)$.
+The injection $A/P^k\to\Lambda_{P^k}$ sending $r$ to $C_r(\lambda_k)$
+is bijective by cardinality. If $u,v$ are coprime and $ru+sv=1$, then
+$x=C_{sv}(x)+C_{ru}(x)$ splits $\Lambda_{uv}$ into its $u$ and $v$
+torsion, with zero intersection by Bezout. Induction proves the CRT and
+cyclicity. Exact-annihilator-$D$ points are the classes $(a/D)r$ with
+$r\in(A/D)^\times$, giving their stated count.
+
+The annihilator after one step is $D/\gcd(D,b)$, because
+$C_c(C_bx)=0$ if and only if $D\mid cb$. After $j$ steps the exponent
+at $P\mid b$ is $\max(v_P(D)-jv_P(b),0)$, whereas other exponents
+are unchanged. A strictly decreasing annihilator cannot occur on a cycle.
+Exactly at $h_D$ the remaining annihilator is $D_*$, where $b$ is a unit.
+Return after $n$ steps is then equivalent to $D_*\mid b^n-1$.
+The assertions for $b=0$, for $b=1$, and for the one-point module $a=1$
+follow directly from $C_0=0$ and $C_1=X$.
+\end{proof}
+
+\begin{proposition}[Finite source counts and determinant]
+For $n\geq1$ and every $b\in A$,
+\[
+ F_n(a,b)=\#\operatorname{Fix}(C_b^n|\Lambda_a)
+        =q^{\deg\gcd(a,b^n-1)},\qquad
+ O_n=\frac1n\sum_{d\mid n}\mu(n/d)F_d.
+\]
+For pullback $U_b$ on all complex functions on $\Lambda_a$,
+\[
+ \det(I-zU_b)=\prod_{d\geq1}(1-z^d)^{O_d},\qquad
+ \exp\left(\sum_{n\geq1}F_nz^n/n\right)=\det(I-zU_b)^{-1}.
+\]
+\end{proposition}
+\begin{proof}
+The kernel of multiplication by $c=b^n-1$ on $A/a$ consists of the
+multiples of $a/\gcd(a,c)$, giving its size. Set $\gcd(a,0)=a$.
+Every finite functional graph is a disjoint union of directed cycles with
+incoming trees, so $F_n=\sum_{d\mid n}dO_d$ and M\"obius inversion gives
+integer nonnegative $O_d$. Ordering vertices by distance to a cycle makes
+the point-map matrix block triangular: the transient block is nilpotent,
+and a length-$d$ cycle contributes $1-z^d$. Transposing gives the pullback
+formula; expansion of $-\log(1-z^d)$ proves the formal zeta identity.
+\end{proof}
+In particular, a nonunit multiplier is not generally a permutation of the
+whole torsion module. The two clocks here are multiplier iteration $n$ and
+conductor depth $k$; neither is declared to be a rational-prime logarithm.
+
+\section{The critical Carlitz reduction}
+\begin{lemma}
+For every monic irreducible $P$, reduction of coefficients modulo $P$ gives
+$\overline C_P(X)=X^Q$, where $Q=q^{\deg P}$.
+\end{lemma}
+\begin{proof}
+The reduced polynomial is monic of degree $Q$ and has derivative zero.
+Suppose it has a nonzero root $\gamma$ over $\overline{\F_Q}$.
+The map $a\mapsto\overline C_a(\gamma)$ has a proper annihilator ideal:
+it contains $(P)$, while $C_1(\gamma)=\gamma\ne0$.
+Maximality of $(P)$ identifies this annihilator as exactly $(P)$, so the
+ring orbit has $Q$ distinct elements. Commutation makes them all roots
+of $\overline C_P$. But a degree-$Q$ polynomial with derivative zero in
+characteristic $p$ has every root of multiplicity at least $p$, and cannot
+have $Q$ distinct roots. Thus zero is the only root; monicity gives $X^Q$.
+\end{proof}
+This proves a specific ring-action property. It is not an assumption that
+an arbitrary additive polynomial reduces to Frobenius.
+
+\ifnum\CRevisionRound>0
+\section{All prime-power Galois towers and composite conductors}
+\paragraph{Round 1 advance.}
+We add primitive irreducibility, full Galois surjectivity, valuation
+ownership, and a finite-prime proof of disjointness at arbitrary conductors.
+
+\begin{theorem}
+For $k\geq1$, let $e_k=(Q-1)Q^{k-1}$ and
+\[
+ \Psi_P=C_P/X,\qquad \Psi_{P^k}=\Psi_P\circ C_{P^{k-1}}.
+\]
+This is a monic $P$-Eisenstein polynomial of degree $e_k$ whose roots
+are exactly the primitive $P^k$-torsion points. For any such root $\lambda_k$,
+\[
+ L_{P^k}=K(\lambda_k),\qquad
+ \Gal(L_{P^k}/K)=(A/P^k)^\times,
+ \quad \sigma_u(\lambda_k)=C_u(\lambda_k).
+\]
+The prime $P$ is totally ramified, $v_P(\lambda_k)=1/e_k$, and every
+other finite prime is unramified. For all monic $a$,
+$\Gal(L_a/K)=(A/a)^\times$.
+\end{theorem}
+\begin{proof}
+The identity $C_P(Y)=Y\Psi_P(Y)$ gives
+$C_{P^k}=C_{P^{k-1}}\Psi_{P^k}$. All roots of the left side are simple,
+so the quotient has precisely the primitive roots. Reduction gives
+$\overline\Psi_{P^k}=X^{e_k}$, while its constant coefficient is exactly
+$P$. Thus every nonleading coefficient is divisible by $P$, but the
+constant coefficient is not divisible by $P^2$. Eisenstein proves
+irreducibility. A primitive root generates the entire torsion module, so
+its field is the splitting field. Galois acts faithfully by units; the
+irreducible degree equals the number of units, proving surjectivity.
+
+At a place over $P$, an Eisenstein root has positive valuation. Otherwise
+the monic term is uniquely minimal. With positive valuation every
+nonconstant, nonleading term has valuation greater than one; cancellation
+forces $e_kv_P(\lambda_k)=1$. Its denominator forces ramification index
+at least $e_k$, and the global degree bounds it above. Hence the prime
+has one place, residue degree one, and total ramification.
+
+At a finite $R\ne P$, the monic polynomial $C_{P^k}$ has derivative
+$P^k$, a unit. Its residue roots are distinct in a finite residue extension.
+Pass to the associated unramified extension of the complete field $K_R$.
+Hensel lifting gives all the roots there, so the splitting field is
+unramified at $R$.
+
+Now form a compositum of distinct-prime towers inductively. At the next
+prime $P$, the previous compositum is unramified, while the new tower is
+totally ramified. Their intersection is both. A subextension of a globally
+totally ramified extension has one place with local degree equal to global
+degree; an extension both total and unramified has degree one. Hence the
+intersection is $K$. The two Galois extensions are linearly disjoint.
+Multiplying degrees and using the module CRT identifies the compositum
+with $L_a$ and gives exactly $(A/a)^\times$.
+\end{proof}
+Infinity ramification and the full maximal abelian extension are outside
+this theorem; constant extensions are not silently added.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Compatible towers, lower groups, and the different}
+\paragraph{Round 2 advance.}
+We complete the infinite tower and local integer-ring argument, derive all
+ramification jumps, and confront source-to-target promotion with controls.
+
+Choose compatible primitive roots by solving $C_P(\lambda_{k+1})=\lambda_k$.
+Such a root is killed by $P^{k+1}$ but not by $P^k$, since otherwise
+$C_{P^{k-1}}(\lambda_k)=0$. Restriction of automorphisms is unit reduction
+modulo $P^k$, which is surjective. Compatible restrictions glue on the union,
+so as profinite groups
+\[
+ \Gal\left(\bigcup_{k\geq1}L_{P^k}/K\right)
+ =\varprojlim_k(A/P^k)^\times=A_P^\times.
+\]
+The infinite quantifier follows from these compatible algebraic maps,
+not from a finite truncation.
+
+\begin{theorem}[Exact lower filtration and different]
+Normalize $v_{L_k}(\lambda_k)=1$. For $u\ne1$ and
+$s=v_P(u-1)<k$, the ramification displacement is
+$v_{L_k}(\sigma_u\lambda_k-\lambda_k)=Q^s$. Consequently
+\[
+\begin{split}
+ G_0&=(A/P^k)^\times,\\
+ G_i&=1+P^s\pmod {P^k}
+ \quad (Q^{s-1}\leq i\leq Q^s-1,\ 1\leq s<k),\\
+ G_i&=\{1\}\quad(i\geq Q^{k-1}),\qquad
+ d_k=Q^{k-1}\bigl(k(Q-1)-1\bigr).
+\end{split}
+\]
+\end{theorem}
+\begin{proof}
+Write $u-1=P^sv$ with $v$ a unit. Then
+$\sigma_u\lambda_k-\lambda_k=C_v(C_{P^s}\lambda_k)$ is primitive
+of level $k-s$, so its base valuation is $1/e_{k-s}$ and its $L_k$
+valuation is $e_k/e_{k-s}=Q^s$.
+
+We must justify testing ramification on one generator. The powers
+$1,\lambda_k,\ldots,\lambda_k^{e_k-1}$ form a field basis. In an
+expansion $x=\sum_j a_j\lambda_k^j$, nonzero summands have valuations
+$e_kv_P(a_j)+j$, distinct modulo $e_k$. The minimum is unique. Thus $x$
+is integral exactly when all $a_j$ are integral, proving
+$\mathcal O_{L_k}=\mathcal O_{K_P}[\lambda_k]$.
+The difference of any integral polynomial in $\lambda_k$ under $\sigma$
+is divisible by $\sigma\lambda_k-\lambda_k$ with integral quotient.
+The minimum difference valuation is attained on $\lambda_k$ itself.
+The lower-group definition $v_{L_k}(\sigma x-x)\geq i+1$ for every
+integral $x$ now gives the stated intervals and group sizes.
+
+Summing their contributions gives
+\[
+ d_k=(e_k-1)+\sum_{s=1}^{k-1}(Q^s-Q^{s-1})(Q^{k-s}-1)
+     =Q^{k-1}(k(Q-1)-1).
+\]
+Independently, differentiate
+$C_{P^k}=C_{P^{k-1}}\Psi_{P^k}$ at $\lambda_k$ to get
+$P^k=\lambda_1\Psi'_{P^k}(\lambda_k)$. The monogenic different formula
+therefore yields $ke_k-Q^{k-1}$, the same answer. When $k=1$ the
+intermediate intervals are empty; when also $Q=2$, the degree is one,
+the group is trivial and the different exponent is zero.
+\end{proof}
+
+\section{Evidence, controls, and HEN-O373}
+The exact grid covers $q=2,3,4,5$. Conductors have degree at most three
+for $q=2,3$, and at most two for $q=4,5$: 107 cases in total.
+Every residue multiplier is included, with its complete preperiod/period
+population and fixed counts through time twelve. The 77 prime-power cases
+use irreducibles of degree at most three for $q=2$ and at most two otherwise,
+$1\leq k\leq3$, and $q^{k\deg P}\leq256$.
+The nonprime field is $\F_4=\F_2[w]/(w^2+w+1)$.
+
+The producer uses annihilator formulas and left composition. The independent
+checker imports no producer code: it enumerates every finite functional
+graph, constructs annihilators from residue classes, uses right composition,
+and obtains primitive polynomials by exact division. It also enumerates
+unit displacements for the ramification histogram. SymPy checks exact
+polynomial, finite-matrix, field-table and different identities. Two fresh
+working directories replay the same frozen producer source. Repaired-hash
+mutations test semantic and exact-type failures; these are not statistical
+tests or independent copies of the source tree.
+
+Three structural controls locate the arithmetic carrier. The rank-zero
+parent $C_a(X)=aX$ has no nonzero torsion. A distinct-prime conductor $PQ$
+has a CRT product, while $P^2$ has a principal-unit filtration. Finally,
+$\theta X+uX^q$ is geometrically conjugate to the frozen rank-one action:
+choose $v$ with $uv^{q-1}=1$ and conjugate by $X\mapsto vX$.
+This conjugacy need not descend to $K$, so arbitrary twists do not inherit
+the base-field Galois theorem without further work.
+
+The strict Route A tuple is structural arithmetic relation at A0, weak A1,
+and failures at A2, A3 and A4; the overall judgement is exploratory.
+The source owns polynomial primes, exact torsion and ramification. It
+does not identify them with rational primes or construct logarithmic
+rational-prime orbit clocks. None of the six mandatory strong-A1 controls
+is complete. Source finite determinants have no target divisor ownership;
+no target completion, functional equation, counting law, Weil compression,
+quantization or Hilbert--Polya domain is supplied.
+\par\noindent Route B remains disabled.
+\fi
+
+\section{Conclusion}
+The full ring action, rather than an isolated additive-map census, makes
+annihilator ideals and coefficient primes intrinsic to the source.
+\ifnum\CRevisionRound>0
+Primitive Eisenstein polynomials close the full finite Galois and
+composite-conductor construction.
+\fi
+\ifnum\CRevisionRound>1
+Compatibility and integral local bases then close the infinite towers and
+their ramification filtration.
+\fi
+These classical source mechanisms are not a target Riemann construction.
+The audit records exact finite regressions separately from the all-parameter
+proof; no finite evidence or formal determinant upgrades the target claim.
+
+\begin{thebibliography}{9}
+\bibitem{Conrad} K. Conrad. \emph{Carlitz Extensions}. Author exposition,
+University of Connecticut, accessed 5 September 2026.
+\url{https://kconrad.math.uconn.edu/blurbs/gradnumthy/carlitz.pdf}.
+\bibitem{ABBL} B. Angl\`es, A. Bandini, F. Bars and I. Longhi.
+\emph{Iwasawa Main Conjecture for the Carlitz cyclotomic extension and applications}.
+arXiv:1412.5957v2, 2015. Tower background, Section 2.
+\url{https://arxiv.org/abs/1412.5957}.
+\end{thebibliography}
+\end{document}
