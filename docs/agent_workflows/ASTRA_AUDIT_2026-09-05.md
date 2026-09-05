@@ -137,3 +137,20 @@ discovery should be verified in the actual product, from this repository.
 
 After this maintenance checkpoint, resume the user-authorized C399–C403 batch.
 Do not count the audit, scouting, or empty package scaffolds as completed papers.
+
+## Subsequent parallel-stream integration
+
+The audit above was committed and pushed as
+`b0cdadb99a1e8b56bf08b9a77e5d5e5a27a6bd1e`; its preservation counts describe
+that exact snapshot. While Hénon scouting resumed, the remote advanced by four
+commits to `18765b6e`. Read-only overlap inspection found no changes to this
+audit, root guidance, the Hénon instructions/state, or the eight evaluators.
+The additions include a separately owned symbolic workflow/skill and symbolic
+batch completion receipts. They were integrated by fast-forward, not rewritten.
+See the other stream's [own audit](../research_state/INSTRUCTION_AUDIT_2026-09-05.md).
+
+In particular, `symbolic_dynamics/AGENTS.md` is now updated by that separate
+workstream; the earlier 36-file preservation result is not a claim that its
+current bytes still match the pre-audit baseline. The root router remains
+compatible with the new symbolic entrypoint. This integration does not count
+the other stream's scientific validation as work performed by the Hénon team.
