@@ -8,22 +8,22 @@ historical ledgers were left unchanged.
 
 ## Outcome and meaning of the denominator
 
-After the post-freeze exact-history correction, there are **50 documented current new-proposal records**, counted once per
+After the post-freeze exact-history correction and first replacement reconciliation, there are **54 documented current new-proposal records**, counted once per
 literal map after the exclusions below:
 
 | Current disposition | Count | Identifiers |
 |---|---:|---|
-| Retained selected, internal amber | 3 | TCSD, FOSP, LFAS |
+| Retained selected, internal amber | 4 | TCSD, FOSP, LFAS, OR (P202) |
 | Reserve | 3 | SDD, ZCI, LGB |
-| Killed current proposals | 44 | CMM now killed; other individual rows in the TSV |
+| Killed current proposals | 47 | CMM plus AR/DA/CSP; individual rows in the TSV |
 | Candidate gate pending in original index | 0 | new replacement scouts remain separately recorded until reconciliation |
-| **Current documented proposal denominator** | **50** | **all 50 have a nonpending disposition** |
+| **Current documented proposal denominator** | **54** | **all 54 have a nonpending disposition** |
 
 The TSV also retains **17 historical/restriction/conjugate/lift controls**
 and **8 code-only WIP definitions**, each with denominator weight zero.
-It therefore contains **75 records**, not 75 new systems.
+It therefore contains **79 records**, not 79 new systems.
 
-The corrected number50 measures *documented candidate attempts*. It is **not** a
+The corrected number54 measures *documented candidate attempts*. It is **not** a
 count of proved systems, independently validated dynamical subclasses,
 novel mechanisms, eligible paper slots, completed papers, or externally
 original results. In particular, a current literal proposal may remain in
@@ -42,17 +42,36 @@ pre-existing rule, not an arbitrary count adjustment. Both the pending-EPF
 breadth_snapshots/prefreeze51_20260905/ and
 breadth_snapshots/five_seat_freeze51_20260905/ respectively.
 
-The corrected75rows are50new-attempts+17historicalcontrols+8code-onlyWIP.
+The earlier corrected75rows were50new-attempts+17historicalcontrols+8code-onlyWIP.
 See P198_REOPEN_ADJUDICATION.md and P201_REOPEN_ADJUDICATION.md for the
 all-size reductions. New replacement lanes will increase this denominator
 only after an explicit, source-backed reconciliation.
 
+### First replacement reconciliation
+
+The corrected50 index and this document were physically snapshotted before
+extension in breadth_snapshots/post_withdrawal50_20260905/. Add exactly four
+documented attempts: the OR/AR/DA oscillator families and the cross-sum CSP
+map. Their complete literal/disposition/replay records and input manifests
+were read and checksum-verified. OR also received an independent gate and
+fresh successful root replay, recorded in OR_ROOT_ADJUDICATION.md. This gives
+50+4=54 current attempts, with 4 selected, 3 reserves and 47 kills.
+
+Alphabet/prime parameters are not new rows. DA's exact old difference factor
+leaves an original phase lift, so it is a failed current proposal, not a
+falsely asserted full old conjugacy. AR is a thin-engine kill, not a literal
+identification with undirected P106. CSP's five old intake exclusions are
+history checks, not five new probes. The latest active final-seat scouting
+lanes are not counted until their durable ledgers are reconciled. P202 is a
+selected theorem contract in drafting, not a completed paper.
+
 ## Documented freeze milestone
 
 This section and arithmetic items1–7 below describe the historical
-51denominator freeze, not the later withdrawal state. The current delta
+51denominator freeze, not the later withdrawal/replacement state. The first delta
 is51−1=50, moving EPF from current-new to historical-conjugate control;
-CMM's selected-to-killed change leaves the denominator unchanged.
+CMM's selected-to-killed change leaves the denominator unchanged. The later
+four-map extension is documented above, not retroactively inserted here.
 
 After the independent EPF gate and root replay, `FIVE_SEAT_FREEZE.md`
 allocated five paper numbers. Only EPF's disposition and evidence pointer

@@ -23,3 +23,13 @@ open findings. Two fresh runs each verified3823696assertions, all19boxes and
 
 Round1 preserves identical accepted bytes. No invented repair is credited.
 Review B and terminal two-cold-build/all-page QA remain outstanding.
+
+## Review B / Round2
+
+The distinct B process used column-incidence crossings and SCC/reverse BFS,
+checking every full inverse set and the complete equality class. Two fresh
+runs each passed4,026,047assertions. Its no-change delta was accepted after
+root read/replay and all pin/manifest checks. ROUND2_RECEIPT.md records the
+unchanged physical freeze. Two terminal cold builds and all four final root
+page views are complete; final package audit remains. The preceding pending
+sentence is the historical Round1 checkpoint, not the current B status.

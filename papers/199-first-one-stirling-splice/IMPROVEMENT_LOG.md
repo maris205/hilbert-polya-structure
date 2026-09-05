@@ -19,3 +19,13 @@ all pins/manifests and freshly replayed1926465assertions byte-identically.
 ROUND1_RECEIPT.md records the unchanged frozen Round1 and command receipts.
 The new indexed corrigendum access is source evidence, not an invented
 author repair. Review B, accepted delta B, Round2 and terminal QA remain.
+
+## Review B / Round2
+
+Root independently used labelled endpoint pairs, stabilized images and
+backward preimage layers, with all target inverse sets and every extremal
+target. Two fresh runs each passed1,026,386assertions byte-identically.
+Fresh primary source/owner scope, one source-only cold build, and actual
+four-page views support the accepted no-change delta, C0/M0/m0.
+ROUND2_RECEIPT.md records the physical unchanged freeze. Terminal QA is
+pending; the preceding pending list describes the former Round1 checkpoint.

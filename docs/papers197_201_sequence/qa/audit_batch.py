@@ -100,7 +100,15 @@ def check_pins(path: Path) -> int:
             continue
         expected, relative = match.groups()
         rel = Path(relative.strip())
-        check(not rel.is_absolute() and ".." not in rel.parts,
+        # A frozen reviewer may pin the original workspace's absolute paths.
+        # Relocate ONLY that explicitly known root, retaining exact hashes.
+        # Never follow an arbitrary absolute pin outside the scoped corpus.
+        if rel.is_absolute():
+            known_root = Path("/root/autodl-tmp/symbolic_dynamics")
+            check(rel.is_relative_to(known_root),
+                  f"foreign absolute pin target {path}:{relative}")
+            rel = rel.relative_to(known_root)
+        check(".." not in rel.parts,
               f"unsafe pin target {path}:{relative}")
         key = rel.as_posix()
         check(key not in seen, f"duplicate pin target {path}:{key}")
@@ -134,7 +142,16 @@ def replay(verifier: Path, canonical: Path, label: str) -> int:
         r"PASS_BOUNDED_CONTROL_NOT_EXTERNAL_NOVELTY_CLEARANCE|"
         r"PASS_BOUNDED_CONTROL_NOT_NOVELTY_OR_PAPER_REVIEW)\s*$", expected
     ) is not None
-    check(structured_pass or legacy_author_pass, f"{label} lacks an accepted status")
+    # Immutable P197-B uses this explicit bounded-review success line.
+    # Its exact zero-open census is in the separately hashed full report;
+    # review_gate validates that report when stdout has no census field.
+    legacy_review_pass = " Review " in label and re.search(
+        r"(?m)^(?:PASS_BOUNDED_INDEPENDENT_REVIEW_B; NO_NOVELTY_CERTIFICATION|"
+        r"PASS / INDEPENDENT_REVIEW_B_CONTROL / NO_CROSS_MODEL_CLAIM / HOLD_EXTERNAL)$",
+        expected,
+    ) is not None
+    check(structured_pass or legacy_author_pass or legacy_review_pass,
+          f"{label} lacks an accepted status")
     return int(values[0])
 
 
@@ -174,7 +191,8 @@ def review_gate(number: int, suffix: str) -> int:
         parse_manifest((directory / nested).parent)
     verifiers = list(directory.glob("verify*.py"))
     canonicals = list(directory.glob("CANONICAL.txt"))
-    deltas = list(directory.glob("DELTA.md"))
+    deltas = [path for name in ("DELTA.md", "DELTA_ACCEPTANCE.md")
+              if (path := directory / name).is_file()]
     reviews = list(directory.glob("*REVIEW*.md"))
     check(len(verifiers) == len(canonicals) == len(deltas) == len(reviews) == 1,
           f"P{number}-{suffix} core-file cardinality failure")
@@ -186,13 +204,27 @@ def review_gate(number: int, suffix: str) -> int:
     check("PINNED_INPUTS.sha256" in names, f"P{number}-{suffix} pins omitted")
     check_pins(directory / "PINNED_INPUTS.sha256")
     canonical_text = canonicals[0].read_text(encoding="utf-8")
-    for severity in ("critical", "major", "minor"):
-        check(severity_zero(canonical_text, severity),
-              f"P{number}-{suffix} nonzero/absent {severity} census")
     review_text = reviews[0].read_text(encoding="utf-8")
+    has_canonical_census = re.search(
+        r"(?im)^(?:open_)?(?:findings|critical(?:_findings)?|"
+        r"major(?:_findings)?|minor(?:_findings)?)\s*=", canonical_text
+    ) is not None
+    # Do not rewrite accepted canonical transcripts to accommodate a parser.
+    # The protocol requires a durable exact census, not a particular stdout
+    # serialization. Only absence permits the explicit report form below;
+    # a present nonzero/incomplete stdout census cannot fall back to a report.
+    report_census = re.search(
+        r"(?i)\bOpen findings:\s*(?:\*\*)?Critical\s*0\s*[,/]\s*"
+        r"Major\s*0\s*[,/]\s*Minor\s*0(?:\*\*)?\.",
+        review_text,
+    ) is not None
+    for severity in ("critical", "major", "minor"):
+        check(severity_zero(canonical_text, severity) if has_canonical_census
+              else report_census,
+              f"P{number}-{suffix} nonzero/absent {severity} census")
     delta_text = deltas[0].read_text(encoding="utf-8")
     check("HOLD_EXTERNAL" in review_text.upper(), f"P{number}-{suffix} lacks hold")
-    check(re.search(r"(?im)^(?:(?:Decision|Status):\s*)?(?:\*\*)?"
+    check(re.search(r"(?im)(?:^|\b(?:Decision|Status):\s*)(?:\*\*)?"
                     r"ACCEPT(?:ED)?(?:_NO_CHANGE|_REPAIR)?(?:\*\*)?(?:[.!;]|[ \t]*$)",
                     delta_text) is not None,
           f"P{number}-{suffix} delta is not accepted")

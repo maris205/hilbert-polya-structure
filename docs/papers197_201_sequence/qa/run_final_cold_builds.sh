@@ -8,6 +8,27 @@ papers=(
   "200-lex-first-alternating-switch"
 )
 
+# An explicit subset allows completed Round2 papers to close their own QA
+# while replacement seats are still being searched. It is not batch PASS.
+if (( $# )); then
+  selected=()
+  for requested in "$@"; do
+    matched=false
+    for paper in "${papers[@]}"; do
+      if [[ "$requested" == "$paper" ]]; then
+        selected+=("$paper")
+        matched=true
+        break
+      fi
+    done
+    if [[ "$matched" != true ]]; then
+      echo "Unknown admitted paper: $requested" >&2
+      exit 2
+    fi
+  done
+  papers=("${selected[@]}")
+fi
+
 export SOURCE_DATE_EPOCH=1704067200
 export TZ=UTC
 export LC_ALL=C

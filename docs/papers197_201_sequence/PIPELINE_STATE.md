@@ -1,7 +1,7 @@
 # Recovery state — candidate batch after P196
 
-Checkpoint: 2026-09-05 UTC, two post-freeze withdrawals and P197 Round1.
-Status: **THREE_RETAINED / TWO_SEATS_REOPENED / PAPER_REVIEWS_RUNNING / HOLD_EXTERNAL**.
+Checkpoint: 2026-09-05 UTC, P197/P199/P200 Round2 and OR admitted as fresh P202.
+Status: **FOUR_ADMITTED / ONE_SEAT_OPEN / PAPER_REVIEWS_AND_QA_RUNNING / HOLD_EXTERNAL**.
 This file is a recovery index. FIVE_SEAT_FREEZE.md allocates the numbers and
 links the historically accepted evidence; it is not current five-seat
 acceptance or completion. Later P198_REOPEN_ADJUDICATION.md and
@@ -16,8 +16,8 @@ P201_REOPEN_ADJUDICATION.md control the two withdrawals.
 | Five selected contracts / central freeze | REOPENED | historical freeze retained; P198/P201 later rejected |
 | Paper drafting / Round 0 | five historical drafts frozen | four pages each P197–P200, five pages P201; only three remain admitted |
 | Paper Review A / Round 1 | three accepted, two rejected | P197/P199/P200 A accepted/replayed/Round1; P198/P201 admission kills |
-| Paper Review B / Round 2 | pending/routing | P197 Round1 available for distinct B; no final Round2 yet |
-| Paper cold builds / visual QA / terminal manifests | not started | cannot precede manuscript/review freeze |
+| Paper Review B / Round 2 | three Round2 frozen | P197/P199/P200 B accepted, root-replayed, no-change deltas |
+| Paper cold builds / visual QA / terminal manifests | in progress | three retained papers have six physical cold builds and all12 final-page views; final replay/manifests pending |
 
 Before this recovery file was added, the batch contained 50 non-cache files,
 all absent from the Git mirror. Their SHA-256 inventory is frozen in
@@ -76,11 +76,12 @@ not repaired during history consolidation, and cannot fill the fifth slot.
 
 | Paper | Directory under papers/ | Latest milestone |
 |---|---|---|
-| P197 TCSD | 197-ternary-cyclic-sign-difference | Round1 frozen:4pages; A4,814,623assertions root-replayed, no-change accepted |
+| P197 TCSD | 197-ternary-cyclic-sign-difference | Round2 frozen:4pages; A4,814,623/B4,833,354; root replay and accepted no-change deltas |
 | P198 CMM | 198-cyclic-monomer-matching | 4page Round0 preserved; Review A Critical1 contribution kill, seat reopened |
-| P199 FOSP | 199-first-one-stirling-splice | 4page Round1 frozen; A1,926,465assertions root-replayed, no-change accepted |
-| P200 LFAS | 200-lex-first-alternating-switch | 4page Round1 frozen; A3,823,696assertions, no-change accepted |
+| P199 FOSP | 199-first-one-stirling-splice | 4page Round2 frozen; A1,926,465/B1,026,386; accepted no-change deltas |
+| P200 LFAS | 200-lex-first-alternating-switch | 4page Round2 frozen; A3,823,696/B4,026,047; accepted no-change deltas |
 | P201 EPF | 201-eventual-period-feedback | 5page Round0 preserved; exact old OCL conjugacy kills fresh-system admission |
+| P202 OR | 202-ternary-ordered-reset | new replacement, Stage1 gate3,962,690 root-replayed; manuscript drafting, no paper rounds yet |
 
 P197 source/PDF/verifier pins are in ROUND0_RECEIPT.md and frozen_round0/.
 The author fixed an overbroad small-size witness statement before freeze:
@@ -89,7 +90,8 @@ unchanged; a transparent candidate erratum preserves the old record.
 
 ## Next actions
 
-1. Find two genuinely separated replacement candidates. Do not rescue P198
+1. Find the remaining genuinely separated replacement candidate. P202 OR
+   is admitted by OR_ROOT_ADJUDICATION.md and is being drafted. Do not rescue P198
    via restricted-erasure variants or P201 via relabelled old feedback maps.
    Stage1 proof/source/mechanism gates are required before fresh numbering.
 2. Complete independent A/delta/Round1 and independent B/delta/Round2 for
@@ -100,12 +102,16 @@ unchanged; a transparent candidate erratum preserves the old record.
 4. Keep scoped Git checkpoints while preserving HOLD_EXTERNAL and the
    latest scientifically completed round P192–P196 until all five close.
 
-STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give50 documented
-current-new attempts:3selected,3reserve,44killed;17historical controls and
-8code-only WIP are excluded. EPF's exact historical conjugacy removes its
-new-attempt weight. Both51-prefreeze and51-five-seat snapshots are retained.
-New replacement attempts are separate until documented and reconciled.
+STAGE1_BREADTH_INDEX.tsv and BREADTH_RECONCILIATION.md now give54 documented
+current-new attempts:4selected,3reserve,47killed;17historical controls and
+8code-only WIP are excluded (79 total records). OR/AR/DA/CSP add four
+documented attempts; EPF's exact historical conjugacy has weight zero.
+Both51 snapshots and the corrected50 snapshot are retained. Later active
+scouts remain separate until documented and reconciled.
 
-The latest pushed drafting backup is42725133 (earlier WIP0f4d196a). The previous completed research commit remains
+The latest pushed research backup is2c56fae8, synchronized by merge a4b7160e
+with disjoint remote henon_dynamics changes (ahead/behind0/0 verified).
+This preserves both histories without force-push. The new P197/P199 Round2,
+P202 admission and current reviews/QA await the next checkpoint. The previous completed research commit remains
 `76146ba17eb15beccfc38e625427f8da726db919`. A later history checkpoint changes
 the backup state, not this research-completion milestone.
