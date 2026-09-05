@@ -7,10 +7,13 @@
 
 用户最新要求：先按最新官方指导审计优化仓库 AGENTS、skills 与 workflow，
 “然后再继续”。前一批 C394–C398 已交付；研究续接范围为 C399–C403 五篇。
-仓库 Astra 指令优化及独立场景检查已完成；尚未开始 C399–C403 论文。
+仓库 Astra 指令优化及独立场景检查已完成并推送：`b0cdadb9`。
 [指令审计](../docs/agent_workflows/ASTRA_AUDIT_2026-09-05.md) 保存来源、范围和验证。
-接下来按 [新工作流](../.agents/skills/henon-route-a-batch/references/WORKFLOW.md) 进入选题。
-本次工作流维护不是一篇论文，不占五篇名额。
+按 [新工作流](../.agents/skills/henon-route-a-batch/references/WORKFLOW.md) 已完成
+[第一轮只读初筛](SCOUT_C399_C403.md)：优先保留 Boole 三相权重与有限耦合
+harmonic delta-comb；普通迹障碍降为备选，固定特征非仿射 zeta 暂存未闭合。
+下一步核查两个优先候选的完整证明及文献归属，同时寻找其余不重叠合同。
+尚未冻结五篇、建论文包或生成新 PDF；维护和初筛均不占论文名额。
 
 正确仓库：`/root/autodl-tmp/hilbert-polya-structure`，分支 `main`。
 环境初始 cwd `/root/autodl-tmp/henon_zeta` 不代表本主线工作目录。
