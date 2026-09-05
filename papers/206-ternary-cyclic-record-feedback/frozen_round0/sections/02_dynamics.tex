@@ -1,0 +1,78 @@
+\section{Exact images and recurrent reflection}
+Define
+\begin{align*}
+ \Dom_n&=\{b\in X_n:\min b=1,\ b_i-b_{i+1}\le1\text{ for every }i\},\\
+ \Core_n&=\{c\in X_n:\min c=1,\ |c_i-c_{i+1}|\le1\text{ for every }i\}.
+\end{align*}
+Thus $\Dom_n$ forbids cyclic edge $31$, while $\Core_n$ forbids both
+$31$ and $13$. The minimum condition is part of each definition.
+
+\begin{theorem}\label{thm:core}
+For every $n\ge1$, $R(X_n)=\Dom_n$ and $R^2(X_n)=\Core_n$. On
+$\Core_n$, the update is
+\begin{equation}\label{eq:reflection}
+ R(c)_i=\max c+1-c_i.
+\end{equation}
+Consequently $R^4=R^2$, the exact recurrent set is $\Core_n$, the sole
+fixed word is $1^n$, and every other recurrent period is two. The largest
+entrance into the recurrent set is one for $n=1,2$ and two for $n\ge3$.
+\end{theorem}
+\begin{proof}
+The output ones occur exactly at the source's global maxima. Comparing
+scans beginning at $i$ and $i+1$, every record after the initial $x_i$ in
+the first scan also occurs in the second: it exceeds $x_i$ and all
+intervening values. The first scan thus has at most one extra record,
+proving $R(x)_i\le R(x)_{i+1}+1$ and $R(X_n)\subseteq\Dom_n$.
+Conversely, for $b\in\Dom_n$ set $x_i=4-b_i$. Its maximum is three and
+every cyclic upward step is at most one. Starting at $x_i$, a scan must
+visit every integer level from $x_i$ to three before exceeding that level.
+These are exactly its records, giving $R(x)_i=4-x_i=b_i$.
+
+Now let $b\in\Dom_n$ and $c=R(b)$. The first-image argument already
+gives $c_i-c_{i+1}\le1$. If $b_i<b_{i+1}$, the next letter is the first
+new record and $c_i=c_{i+1}+1$; if they are equal, their counts agree.
+If $b_i>b_{i+1}$, it is a unit drop. The scan beginning at $b_{i+1}$
+can then have at most one additional record, the value $b_i$, before the
+shared records larger than $b_i$. This also covers a maximum at $i$,
+which appears at the end of the other full scan. Hence
+$c_{i+1}-c_i\le1$ and $R(\Dom_n)\subseteq\Core_n$.
+
+For $c\in\Core_n$, put $M=\max c$. Its upward unit bound forces all
+and only the record levels $c_i,c_i+1,\ldots,M$ in the scan from $i$,
+proving \eqref{eq:reflection}. Reflection preserves minimum one, maximum
+$M$ and the adjacent unit bounds; applying it twice is the identity.
+Since $\Core_n\subseteq\Dom_n$, this proves
+$R(\Dom_n)=\Core_n$ and $R^4=R^2$. Every periodic state belongs to the
+second image. A reflection-fixed word is constant, and its minimum one
+then forces $1^n$, proving the recurrent classification.
+
+For $n=1$, every source reaches $1$ and source $2$ has entrance one.
+For $n=2$, the first image is $\{11,12,21\}=\Core_2$, and $22$ has
+entrance one. For $n\ge3$, the source $1^{n-2}23$ has first image
+$3^{n-2}21$. Its closing edge $13$ violates the two-sided unit bound,
+so that first image is not recurrent. The second-image theorem supplies
+the matching upper bound two.
+\end{proof}
+
+\begin{corollary}\label{cor:counts}
+Let $L_0=2,L_1=3$, $L_n=3L_{n-1}-L_{n-2}$ and let $P_0=P_1=2$,
+$P_n=2P_{n-1}+P_{n-2}$, with the recurrences used for $n\ge2$. For $n\ge1$,
+\[
+ |\Dom_n|=L_n-2^n,\qquad |\Core_n|=P_n+1-2^n.
+\]
+There are $(|\Core_n|-1)/2$ strict two-cycles.
+\end{corollary}
+\begin{proof}
+The edge matrices for the two constraints, in alphabet order $1,2,3$, are
+\[
+ A=\begin{pmatrix}1&1&1\\1&1&1\\0&1&1\end{pmatrix},\qquad
+ B=\begin{pmatrix}1&1&0\\1&1&1\\0&1&1\end{pmatrix}.
+\]
+Their labelled cyclic word counts are $\tr(A^n)$ and $\tr(B^n)$.
+Words avoiding one contribute $2^n$ in either case. The characteristic
+polynomial of $A$ is $\lambda(\lambda^2-3\lambda+1)$, and $B$ has
+eigenvalues $1,1+\sqrt2,1-\sqrt2$. Thus their traces for $n\ge1$ are
+$L_n$ and $P_n+1$, including loops at $n=1$. Subtracting the words
+avoiding one proves the formulas. The cycle count follows from the unique
+fixed point and core involution.
+\end{proof}

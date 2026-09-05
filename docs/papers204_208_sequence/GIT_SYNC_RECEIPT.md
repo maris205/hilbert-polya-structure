@@ -55,3 +55,31 @@ check excluding that raw `qa_round0/` directory passed before commit.
 This addition was written after the push and is not inside its own named
 commit. Later Review A findings and circular-statistic pilots are not
 implicitly included in this historical checkpoint.
+
+## P204 rejection, P205 Round0 and P206 admission checkpoint
+
+On 2026-09-05 UTC the scoped owned checkpoint was committed and actually
+pushed as `d0e9aae4148830321b902192ad307fbf97e297e6` (240 files).
+It preserves the full adverse P204 A review and root rejection; closed
+second/third scouting and CCI/CRC3 gates; P205's complete initial three-page
+manuscript, author replay pair, three real production build attempts and
+22-file Round0; P206 admission and initial plan/narrative. Active P205 A,
+P206 outline review and both fourth intakes were explicitly excluded.
+
+A follow-up check found that generic TeX ignore rules had omitted 32 raw
+compiler/auxiliary files from the commit, including P204 A manifest inputs
+and historical P204 build logs. Those exact owned paths were explicitly
+added, without changing ignore rules or rewriting the raw evidence.
+Follow-up commit `1fb268cbbd2ffcf15a0fabf7f0b41aa3b7dc8335` was actually
+pushed. The actual remote ref matched that SHA, ahead/behind was `0 0`,
+and mirror status was empty. No force-push or history rewrite occurred.
+
+The read-only [committed-object check](qa/GIT_OBJECT_CHECKPOINT.json)
+then verified **193 entries in 17 package manifests** against the bytes of
+that Git commit, with zero missing or mismatched objects. Its scope is
+package-pin archival integrity, not proof replay, manifest coverage policy,
+cross-root input-pin layout, manuscript acceptance or batch completion.
+
+This receipt/check was written after the named pushes and is not part of
+its own referenced commit. Subsequent P206 writing or active reviewer/scout
+results are not implicitly covered. All research remains HOLD_EXTERNAL.

@@ -1,0 +1,72 @@
+\section{Exact activation distances}\label{sec:dynamics}
+Let $S(x)$ be the endpoints of the initial conflicts. Give both directed
+versions of each edge the weights
+\[
+ w_x(u,v)=(x_v-x_u)\bmod q\in\{0,\ldots,q-1\}.
+\]
+Write $d_x(v)$ for the minimum total weight of a directed path from $S(x)$
+to $v$, and set it to $\infty$ if no such path exists. Paths of length zero
+are allowed. A maximum over no finite distances means zero.
+
+\begin{theorem}\label{thm:temporal}
+The first conflict time of $v$ is $d_x(v)$. For every integer $t\ge0$,
+\begin{equation}\label{eq:iterate}
+ F^t(x)_v=
+ \begin{cases}
+ x_v+\max\{0,t-d_x(v)\}\pmod q,&d_x(v)<\infty,\\
+ x_v,&d_x(v)=\infty.
+ \end{cases}
+\end{equation}
+Moreover, $h(x)=\max_{d_x(v)<\infty}d_x(v)$. A state is recurrent exactly
+when each connected component is either properly coloured, hence fixed,
+or has a same-coloured neighbor at every vertex, hence increments globally.
+Every nonfixed recurrent orbit has exact period $q$. The maximum entrance
+over all graphs and sources on $n$ vertices is
+\[
+ H_q(n)=\begin{cases}0,&n\le2,\\(q-1)(n-2),&n\ge3.\end{cases}
+\]
+\end{theorem}
+\begin{proof}
+An active edge remains active after an update, since its two colours
+increment equally. Thus the active set only grows. If $\tau(v)$ is the
+first conflict time, then $v$ is stationary through time $\tau(v)$ and
+increments at each subsequent update. This gives \eqref{eq:iterate} with
+$\tau$ in place of $d_x$.
+
+Suppose $u$ first activates at time $a<\infty$. Its colour at that time
+is $x_u$. Unless a neighbor $v$ activates earlier, its colour is still
+$x_v$, and it meets the advancing colour of $u$ at time $a+w_x(u,v)$.
+Consequently $\tau(v)\le\tau(u)+w_x(u,v)$. A zero-weight edge is initially
+monochromatic, so both its endpoints already have time zero; it cannot
+spontaneously activate an unseeded region. The edge inequality along every
+seed path proves $\tau(v)\le d_x(v)$ whenever the latter is finite.
+
+Conversely, suppose $\tau(v)=s>0$. A neighbor $u$ meeting $v$ at time $s$
+must have activated earlier. Indeed, if both first activated at $s$, both
+would still have their initial colours, making their equality an initial
+conflict. With $a=\tau(u)<s$, the first meeting of that advancing color with
+the stationary $v$ occurs after exactly $w_x(u,v)$ steps: an earlier
+congruent meeting would already activate $v$. Hence
+$s=a+w_x(u,v)$. Repeating backwards strictly decreases activation times
+until reaching a seed and yields a path of total weight $s$. Thus
+$d_x(v)\le\tau(v)$. This also excludes finite activation in a seedless
+component, and proves the first assertion including infinite distances.
+
+Every vertex in a seeded component has finite distance. At the last such
+arrival all its vertices are active and hence advance together forever;
+unseeded components are proper and hold forever. Before the last arrival,
+the active set will strictly increase at a future time, so monotonicity
+excludes periodicity. These observations prove the exact entrance and the
+stated recurrent core. If any component advances, a return after $p$ steps
+forces $p\equiv0\pmod q$ at an advancing vertex, proving its exact period.
+
+A seeded component contains at least two seeds. A minimum-weight path to
+a nonseed can be chosen simple and with no seed after its starting vertex.
+It therefore has at most $n-2$ edges, each of weight at most $q-1$.
+For $n\le2$ there is no seeded component containing a nonseed, giving
+height zero. For $n\ge3$ take the path $0-1-\cdots-(n-1)$ with
+$x_0=x_1=0$ and $x_i=-(i-1)\pmod q$ for $i\ge2$. Only the first edge is
+initially monochromatic. The unique simple seed route to vertex $n-1$
+has $n-2$ forward edges of weight $q-1$; deleting any backtracking cannot
+increase a path's weight. Its distance is $(q-1)(n-2)$, attaining the bound.
+\end{proof}

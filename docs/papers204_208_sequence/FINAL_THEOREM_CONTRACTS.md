@@ -42,7 +42,7 @@ remains; there is no accepted A delta or basis for Round1/B/Round2. Preserve
 the true proofs and numbered draft, but reopen the seat. Next available
 number at rejection was P205; subsequent contracts follow below.
 
-## P205 — conflict-triggered cyclic increments — ROUND0 / A ACTIVE
+## P205 — conflict-triggered cyclic increments — A ACCEPTED / ROUND1 / B ACTIVE
 
 Proof author: `/root/batch197_fifth_scout`; manuscript integration: root.
 Both are contributors and cannot serve as its independent manuscript reviewers.
@@ -88,10 +88,16 @@ does not supply this contract's deterministic formulas.
 Paper path: `papers/205-conflict-triggered-cyclic-increments/`.
 The full three-page draft has 22 physical Round0 inputs, all checked, and
 an actual author replay pair, source-only build and all-page view receipt.
-Independent manuscript A is active; no accepted delta or completion yet.
+Independent manuscript A's [exact no-change delta](reviews/p205_a/DELTA.md)
+is accepted. Root read the original report/delta, passed all 60 final
+review manifest entries and complete before/after pins, and independently
+replayed A twice (11,265,033 assertions each, raw cmp exits zero).
+Round1 physically freezes the same 22 accepted inputs; its manifest is
+raw-byte identical to Round0 and all 22 pins passed. B is now active;
+neither B acceptance nor paper completion is claimed.
 Status remains `OWNER_AMBER / HOLD_EXTERNAL`.
 
-## P206 — ternary cyclic record-count feedback — ADMITTED / DRAFTING
+## P206 — ternary cyclic record-count feedback — ROUND0 / A ACTIVE
 
 Author and proof contributor: root. Candidate reviewer:
 `/root/batch197_fifth_scout`, no mathematical contribution to the author

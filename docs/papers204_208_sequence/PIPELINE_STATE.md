@@ -1,7 +1,7 @@
 # Batch after P203 — recovery state
 
 Started 2026-09-05 UTC on the user's “确认，下一轮”, reaffirmed by “继续”.
-Status: **P205_ROUND0_A_ACTIVE / P206_ADMITTED_DRAFTING / THREE_SEATS_OPEN / HOLD_EXTERNAL**.
+Status: **P205_ROUND1_B_ACTIVE / P206_ROUND0_A_ACTIVE / THREE_SEATS_OPEN / HOLD_EXTERNAL**.
 The folder name reserves a five-seat working label, not five accepted paper IDs.
 
 ## Scope and next obligation
@@ -17,7 +17,9 @@ That numbered draft is preserved and its seat reopened. CCI subsequently
 passed its independent gate and is admitted as P205 under the exact narrow
 contract below. CRC3's independent gate and root's source/pin/replay checks
 then admitted P206. Two papers are retained and three seats remain unfilled.
-P205 manuscript A is active; no paper is internally complete.
+P205 manuscript A's exact no-change delta is accepted and Round1 is frozen;
+its B review is active. P206's four-page Round0 is frozen and A is active.
+No paper is internally complete.
 
 Follow [the project workflow](../research_state/WORKFLOW.md) and
 [this batch's scope](PROBLEM_ANCHOR.md). Prior completed science remains in
@@ -29,10 +31,10 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | scouting/word_local/, P204 lifecycle, P205/P206 integration | twenty-one literal pilots; P204 rejected; P205 frozen; P206 drafting |
-| Combinatorial objects | batch197_fosp_gate | closed lanes/CCI_GATE/bibQA; reviews/p205_a/ | independent P205 manuscript A active |
-| Algebra / finite geometry | batch197_lzk_gate | closed first–third lanes/p204_a; scouting/algebra_fourth/ | third six closed NO_PROMOTION; fourth intake active |
-| Graphs / relations | batch197_fifth_scout | closed first–third lanes/CRC3_GATE; graph_geometry_fourth/ | CRC3 gate complete; fourth intake active |
+| Words / local maps | root | scouting/word_local/, P204 lifecycle, P205/P206 integration | 27 literal pilots; P204 rejected; P205 Round1; P206 Round0 |
+| Combinatorial objects | batch197_fosp_gate | closed lanes/CCI_GATE/bibQA/p205_a; reviews/p206_a/ | P205 A accepted; independent P206 manuscript A active |
+| Algebra / finite geometry | batch197_lzk_gate | closed first–fourth lanes/p204_a; reviews/p205_b/ | fourth six NO_PROMOTION; independent P205 B active |
+| Graphs / relations | batch197_fifth_scout | closed first–fourth lanes/CRC3_GATE; word_local/LUB_PROOF_WORK/ | fourth six NO_PROMOTION reported; LUB proof scout active |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -121,7 +123,13 @@ P205/P206 admissions below do not reverse that rejection.
   `papers/205-conflict-triggered-cyclic-increments/`. The static cover lemma
   carries no separate novelty credit. Its actual author pair/build/all-page
   views and 22-file physical Round0 are complete; all freeze hashes passed.
-  Manuscript A is active, with no accepted delta yet. This is not paper completion.
+  Manuscript A's actual [no-change acceptance](reviews/p205_a/DELTA.md)
+  now exists. Root read it and the full initial audit, passed complete
+  before/after pins and its 60-entry manifest, and ran two fresh complete
+  A producers with raw canonical comparisons (11,265,033 assertions each,
+  all child/comparator exits zero; [receipt](qa/root_replays/p205_a/RECEIPT.md)).
+  Physical Round1 has 22 checked files and an identical Round0 manifest.
+  Distinct nonauthor B is active. This is not paper completion.
 - Root's six circular-statistic pilots added actual full stdout. CRC's
   three-letter subfamily now has a [complete author contract](scouting/word_local/CRC_TERNARY_PROOF_PACKAGE.md):
   first/second images, reflection core and sharp height, explicit one-step
@@ -132,19 +140,36 @@ P205/P206 admissions below do not reverse that rejection.
   primary Myers–Wilf record/template contexts, checked the three author pins
   and five manifest entries, and performed two fresh 721,397-check raw
   replays with all child/comparison exits zero. CRC3 is admitted as P206,
-  drafting under [its exact contract](FINAL_THEOREM_CONTRACTS.md).
+  now has a complete four-page manuscript under
+  [its exact contract](FINAL_THEOREM_CONTRACTS.md). Root's additional fresh
+  655,256-check pair matched the raw canonical and preserved earlier pair;
+  two physical source-only builds agree byte-for-byte, all four pages were
+  actually viewed, and Round0 physically freezes 22 checked inputs.
+  Independent nonauthor manuscript A is active.
   General-alphabet maximum fibres are not claimed. CCS is the old
   equal-cardinality merger.
 - Third algebra and graph/geometry reports are closed with zero promotions.
   Root read both reports; no third-lane finite census is a retained theorem.
-  Fourth bounded intakes are active while manuscript work proceeds.
+  The fourth algebra report is now closed with six NO_PROMOTION; root read
+  its complete EC proof and static inverse adapter, with no retained second
+  axis. Root also read the complete fourth graph report, proof boundaries
+  and source record: six NO_PROMOTION. Both fourth package manifests passed
+  (nine and six nonself files). Six new root component/rank probes have
+  actual complete 36-row output; their
+  [closed five-rule dispositions](scouting/word_local/COMPONENT_SCOUT_REPORT.md)
+  preserve explicit SLC higher-period counterexamples and full WIR/ECS/SPR
+  adapters. LUB alone is a bounded proof scout, not a paper or reserve;
+  its static max-tree inverse remains an explicit value risk.
 
 The [private checkpoint receipt](GIT_SYNC_RECEIPT.md) confirms actual push
-`423e3fdca93c187a1a83be360a15f21e00f55d41` after a nonoverlapping normal merge.
-It contains the P204 Round0 milestone, not the later adverse Review A,
-root rejection, active CCI/CRC3 gates or newer circular/third-lane work.
+`1fb268cbbd2ffcf15a0fabf7f0b41aa3b7dc8335`, following `d0e9aae4`.
+It includes P204 rejection, closed CCI/CRC3 gates and second/third scouts,
+P205 Round0 and P206 admission/initial outline. Generic ignored compiler
+evidence was explicitly retained; a committed-object check passed 193 pins
+in 17 manifests. Active P205 A, P206 outline QA and fourth intakes were
+excluded. WIP archival integrity is not manuscript or batch acceptance.
 
-Next: complete actual P205 A/delta, draft/build/freeze P206; replace
+Next: complete actual P205 B and P206 A, with their accepted deltas; replace
 failed directions with fresh bounded scouting, then admit only proved,
 nonduplicate conjunctions. No five-paper completion claim is available.
 Routine phase transitions use the standing authorization without another

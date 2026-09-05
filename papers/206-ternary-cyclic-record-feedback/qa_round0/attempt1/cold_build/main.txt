@@ -1,0 +1,226 @@
+TWO-STEP IMAGES AND ONE-STEP FIBRES
+OF TERNARY CYCLIC RECORD FEEDBACK
+ANONYMOUS
+
+Abstract. We study the synchronous map on ternary cyclic words which replaces each letter by the
+number of strict records in the full forward scan beginning at that position. We identify its first image
+by a one-sided adjacent-step constraint and its second image by a two-sided unit-step constraint, both
+with minimum one. On the second image the map is reflection in the range, so the fourth iterate equals
+the second. The all-one word is the sole fixed state, all other recurrent states have period two, and
+the sharp entrance height is two for every length at least three. Independently, we reconstruct every
+one-step source of every target by splitting at its one positions and conditioning on the source maximum.
+The resulting fibre formula is an explicit product of run factors with two correction terms. It gives a
+maximum of one plus the largest product of positive parts summing to the word length for lengths at
+least three, with all labelled equality targets and the small-length exceptions determined. Standard
+record statistics, trace counts and integer-product optimization are supporting ingredients.
+
+1. The cyclic feedback map
+For n ≥ 1, put Xn = {1, 2, 3}n and read position subscripts modulo n. Define R : Xn → Xn by letting
+R(x)i count the strict left-to-right records of
+xi , xi+1 , . . . , xi+n−1 .
+The first letter is a record, and a later letter is a record only when it exceeds every preceding letter. Thus
+1 ≤ R(x)i ≤ 3. All scans use the same old word. Positions are labelled: words differing by a rotation are
+not identified. We seek the exact images and recurrent dynamics of R, and all sources of a prescribed
+one-step target.
+Strict and weak record statistics for words and multisets, including single-scan record counts and
+position templates, are classical [2]. Only the first occurrence of a value can be a strict record. Repeatedly
+jumping to the next strictly greater value therefore traces a scan’s records; this uses the strict nearestvalue primitive studied in Berkman et al. [1], after reversing the order. Neither the statistic nor its static
+pointer description is new here. The feedback question recomputes these counts at every cyclic start.
+For example, 123123 and 123213 have the same multiset, first-occurrence order and displayed single-scan
+record positions, but their cyclic outputs are 321321 and 321221. Those conditioning data alone do not
+determine the joint target; this observation does not exclude more elaborate reductions.
+We prove an exact two-step reflection core and, by a separate source-maximum decomposition, an
+evaluated one-step inverse for each target. Transfer-matrix counts, weak binary chain counts and the
+classical integer-product optimum are elementary consequences and tools, not separate contributions.
+2. Exact images and recurrent reflection
+Define
+Dn = {b ∈ Xn : min b = 1, bi − bi+1 ≤ 1 for every i},
+Cn = {c ∈ Xn : min c = 1, |ci − ci+1 | ≤ 1 for every i}.
+Thus Dn forbids cyclic edge 31, while Cn forbids both 31 and 13. The minimum condition is part of each
+definition.
+Theorem 2.1. For every n ≥ 1, R(Xn ) = Dn and R2 (Xn ) = Cn . On Cn , the update is
+R(c)i = max c + 1 − ci .
+
+(2.1)
+
+Consequently R = R , the exact recurrent set is Cn , the sole fixed word is 1n , and every other recurrent
+period is two. The largest entrance into the recurrent set is one for n = 1, 2 and two for n ≥ 3.
+4
+
+2
+
+Key words and phrases. finite dynamics, strict records, cyclic words, inverse fibre, extremal composition.
+1
+
+2
+
+ANONYMOUS
+
+Proof. The output ones occur exactly at the source’s global maxima. Comparing scans beginning at i
+and i + 1, every record after the initial xi in the first scan also occurs in the second: it exceeds xi and all
+intervening values. The first scan thus has at most one extra record, proving R(x)i ≤ R(x)i+1 + 1 and
+R(Xn ) ⊆ Dn . Conversely, for b ∈ Dn set xi = 4 − bi . Its maximum is three and every cyclic upward step
+is at most one. Starting at xi , a scan must visit every integer level from xi to three before exceeding that
+level. These are exactly its records, giving R(x)i = 4 − xi = bi .
+Now let b ∈ Dn and c = R(b). The first-image argument already gives ci − ci+1 ≤ 1. If bi < bi+1 , the
+next letter is the first new record and ci = ci+1 + 1; if they are equal, their counts agree. If bi > bi+1 ,
+it is a unit drop. The scan beginning at bi+1 can then have at most one additional record, the value bi ,
+before the shared records larger than bi . This also covers a maximum at i, which appears at the end of
+the other full scan. Hence ci+1 − ci ≤ 1 and R(Dn ) ⊆ Cn .
+For c ∈ Cn , put M = max c. Its upward unit bound forces all and only the record levels ci , ci +1, . . . , M
+in the scan from i, proving (2.1). Reflection preserves minimum one, maximum M and the adjacent unit
+bounds; applying it twice is the identity. Since Cn ⊆ Dn , this proves R(Dn ) = Cn and R4 = R2 . Every
+periodic state belongs to the second image. A reflection-fixed word is constant, and its minimum one
+then forces 1n , proving the recurrent classification.
+For n = 1, every source reaches 1 and source 2 has entrance one. For n = 2, the first image is
+{11, 12, 21} = C2 , and 22 has entrance one. For n ≥ 3, the source 1n−2 23 has first image 3n−2 21. Its
+closing edge 13 violates the two-sided unit bound, so that first image is not recurrent. The second-image
+theorem supplies the matching upper bound two.
+□
+Corollary 2.2. Let L0 = 2, L1 = 3, Ln = 3Ln−1 − Ln−2 and let P0 = P1 = 2, Pn = 2Pn−1 + Pn−2 , with
+the recurrences used for n ≥ 2. For n ≥ 1,
+|Dn | = Ln − 2n ,
+
+|Cn | = Pn + 1 − 2n .
+
+There are (|Cn | − 1)/2 strict two-cycles.
+Proof. The edge matrices for the two constraints, in alphabet order 1, 2, 3, are
+
+
+
+
+1 1 0
+1 1 1
+B = 1 1 1 .
+A = 1 1 1 ,
+0 1 1
+0 1 1
+Their labelled cyclic word counts are tr(An ) and tr(B n ). Words avoiding one contribute
+2n√in either case.
+√
+2
+The characteristic polynomial of A is λ(λ − 3λ + 1), and B has eigenvalues 1, 1 + 2, 1 − 2. Thus their
+traces for n ≥ 1 are Ln and Pn + 1, including loops at n = 1. Subtracting the words avoiding one proves
+the formulas. The cycle count follows from the unique fixed point and core involution.
+□
+3. Evaluated one-step fibres and every maximizer
+For b ∈ Dn , call its one positions roots. Between consecutive roots, read the intervening word u
+forward up to the next root. Each root terminates one such run, possibly empty. All letters in a run are
+two or three. For a run of length m, define
+(
+m + 1,
+u has no three,
+g(u) =
+length of its terminal two-run, u has a three.
+The terminal length in the second case is positive, since 31 is forbidden. Let U(b) be the collection of
+these labelled runs.
+Theorem 3.1. Every target b ∈ Xn has one-step fibre size
+ Y
+
+g(u) + 1{3 ∈
+/ b} + 1{b = 1n },
+
+−1
+(3.1)
+|R (b)| = Ψn (b) = u∈U (b)
+
+0,
+
+b ∈ Dn ,
+b∈
+/ Dn .
+
+The product and the two indicators respectively enumerate all sources with maximum three, two and one,
+without repetitions.
+Proof. Invalid targets have no sources by Theorem 2.1. Suppose b ∈ Dn . A source of maximum one is
+necessarily 1n , contributing the last indicator. For maximum two, a source two gives output one and a
+source one gives output two. Thus the unique possible source is xi = 3 − bi , which exists exactly when b
+has no three. Since b has a one, this source really has maximum two, including when b = 1n .
+
+TERNARY CYCLIC RECORD FEEDBACK
+
+3
+
+For maximum three, the source threes are exactly the roots of b. Every intervening source run is binary
+and its forward scans stop gaining records at the next three. A source two gives output two. A source
+one gives output three exactly when a two occurs later in its run; otherwise it gives output two.
+If a target run u has no three, its source run must be weakly decreasing, 2a 1m−a , for a = 0, . . . , m.
+These m + 1 choices all work, including the one empty choice at m = 0. If u has a three, let its last three
+be followed by t ≥ 1 twos. Each target three forces source one. Each target two before the last three
+forces source two: a source one there would see the later two needed to trigger that last three and would
+itself output three. The terminal t source letters must have the form 2a 1t−a with 1 ≤ a ≤ t. The positive
+prefix is necessary to trigger the last target three and also triggers every earlier target three. Conversely
+the forced prefix and every one of these t terminal choices give precisely the required target run. This
+proves both necessity and sufficiency.
+Runs are independent after their terminating source threes are fixed, so the maximum-three count is
+the product in (3.1). The three source-maximum cases are disjoint and exhaustive, proving the formula
+and the asserted reconstruction.
+□
+Let J(n) be the largest product of positive integers summing to n, with a single part allowed. Its
+values are
+
+a
+
+a ≥ 1,
+J(3a) = 3 ,
+a−1
+(3.2)
+J(1) = 1,
+J(3a + 1) = 4 · 3
+, a ≥ 1,
+
+
+J(3a + 2) = 2 · 3a ,
+a ≥ 0.
+We recall the elementary exchange proof below, rather than treating integer-product optimization as a
+new ingredient.
+Theorem 3.2. The maximum one-step fibre is three for n = 1, 2 and 1 + J(n) for n ≥ 3. The only
+maximizing target at n = 1 is 1; at n = 2 the maximizing targets are 11, 12, 21. For n ≥ 3, all maximizing
+targets are binary, and their cyclic root-terminated blocks 2s−1 1 have the following complete lists of sizes:
+(1) if n ≡ 0 (mod 3), all sizes are three;
+(2) if n ≡ 1 (mod 3), sizes are threes and either one four or two twos;
+(3) if n ≡ 2 (mod 3), sizes are threes and one two.
+Every labelled cyclic placement of the stated blocks attains the maximum.
+Proof. If b ∈ Dn has any three, replace its threes by twos to obtain b∗ . Roots and run lengths are
+unchanged. In a run of length m containing a three, the terminal-two factor is at most m − 1, strictly
+less than m + 1. All other positive factors stay the same; the maximum-two correction also appears in b∗ .
+Hence Ψn (b) < Ψn (b∗ ), excluding all such targets from the maximum. Invalid targets have zero fibres
+and are excluded as well.
+The all-one target has P
+fibre three. For every other valid
+Q binary target, write its successive root-block
+sizes as s1 , . . . , sk . Then j sj = n and (3.1) gives 1 + j sj . Conversely every composition other than
+all singletons is realized by the blocks 2sj −1 1 on the labelled cycle.
+For n ≥ 2 an optimal product has no part one, because merging a one with another part increases the
+product, including two singleton parts. A part s ≥ 5 can be replaced by 3, s − 3, increasing the product
+since 3(s − 3) > s. A four may be kept or split into two twos without change, while three twos are inferior
+to two threes since 8 < 9. Thus after optionally splitting fours, every optimum consists of threes and at
+most two twos. The sum modulo three gives exactly (3.2) and the listed size patterns; each listed pattern
+conversely has the stated product.
+For n ≥ 3, 1 + J(n) > 3, so the all-one target is not an extremizer. For n = 2, the all-one target
+and the two placements of a size-two block each have fibre three, exhausting the image. For n = 1 only
+target one is in the image, with three sources. These cases prove all assertions without quotienting by
+rotation.
+□
+4. Scope and finite verification
+The results concern the full ternary carrier at every n ≥ 1. No all-time fibre formula, transient-layer
+census or larger-alphabet inverse or maximum is asserted. The source-run decoder and exact feedback
+images are the two descriptions; matrix spectra and integer products are their elementary supporting
+calculations.
+The standalone verify.py exhausts Xn for 1 ≤ n ≤ 10, checking images, literal arrows, recurrent
+cores, every target fibre and all equality targets. Complete source sets are compared through n = 7; an
+independent part-choice dynamic program checks (3.2) through n = 40. The actual CANONICAL.json
+
+4
+
+ANONYMOUS
+
+records 655,256 assertions. These are finite falsification checks; the proofs establish the all-length statements without extrapolation.
+References
+[1] Omer Berkman, Baruch Schieber, and Uzi Vishkin. Optimal doubly logarithmic parallel algorithms
+based on finding all nearest smaller values. Journal of Algorithms, 14(3):344–370, 1993. doi: 10.1006/
+jagm.1993.1018.
+[2] Amy N. Myers and Herbert S. Wilf. Left-to-right maxima in words and multiset permutations. Israel
+Journal of Mathematics, 166(1):167–183, 2008. doi: 10.1007/s11856-008-1026-x.
+
+
