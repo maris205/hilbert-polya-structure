@@ -7,7 +7,8 @@ operator-algebra 想法只记为 `ROUND2_CLUE`，不在当前路线展开。
 原始研究项目名为 **Ra-1: Arithmetic Symbolic Dynamics**；当前执行的是
 Route A 内广泛探索有限自主确定性系统的短论文子轨。原始 HP 算术 A0–A4
 仅用于相关算术/算子主张，不作为当前每个有限系统的入场条件。
-全部可共享论文直接位于根目录的 [`papers/`](papers/) 中。
+镜像保留两种历史布局：较早论文在 [`papers/`](papers/)，P187 起在
+镜像根的 [`../papers/`](../papers/)；具体对应见恢复索引，不重排旧目录。
 
 Papers 44--48 的候选选择、跨篇查重、来源宇宙边界与两阶段
 provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)

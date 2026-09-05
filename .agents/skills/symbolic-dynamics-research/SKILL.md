@@ -6,8 +6,9 @@ description: Continue or complete this repository's Route A five-paper research 
 # Symbolic Dynamics research
 
 Recover the current milestone from `SYMBOLIC_DYNAMICS_STATE.md` and its linked
-batch index. Paths in this skill are relative to the research data root:
+batch index. Unqualified research paths are relative to the data root:
 the workspace root, or the Git mirror root containing that state file.
+Markdown links resolve relative to this skill file.
 
 Read [the project workflow](../../../docs/research_state/WORKFLOW.md), then
 only the current phase's linked contracts and evidence. Resume at the first

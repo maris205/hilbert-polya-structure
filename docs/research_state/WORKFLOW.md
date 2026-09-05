@@ -27,9 +27,9 @@ Route B or establishes global novelty.
    papers, killed scouts and direct primary sources. Deduct known primitives,
    conjugates, factors and standard proof mechanisms. Weak signals trigger a
    different system, not an automatic larger cutoff. Reserves are not papers.
-2. **Admit and write.** Freeze a bounded theorem contract only after its
-   all-parameter proof routes and source/collision checks survive the candidate
-   gate. Write a self-contained anonymous short paper with an explicit advance,
+2. **Admit and write.** Freeze a bounded theorem contract only after deductive
+   proofs of its claimed all-parameter results and source/collision checks
+   survive the candidate gate. Write a self-contained anonymous short paper with an explicit advance,
    limitations, paper-local verifier and full canonical output. Finite checks
    pressure proofs; they cannot establish an all-size theorem. Freeze Round0.
 3. **Review and repair.** Obtain two actual process-separated manuscript
