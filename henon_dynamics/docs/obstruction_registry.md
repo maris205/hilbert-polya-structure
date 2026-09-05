@@ -17,6 +17,22 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C394--HCS-C398 source-boundary register (2026-09-05)
+
+| ID | Candidate | Status | Exact obstruction or boundary | Surviving source theorem and scope |
+|---|---|---|---|---|
+| HEN-O378 | HCS-C394 finite quotient cycles as genuine p-adic periodic points | proved clock/limit distinction | Every finite level has p-power cycles, but the only genuine periodic point on Z_p² is the origin. Nonzero orbit closures are copies of the p-adic adding machine. Taking quotient cycles as lifted periodic points is false. | Joint analytic action, every finite level and algebraic finite/all hitting sets survive. This does not forbid a different global arithmetic bridge; the sufficient 2-adic threshold is not asserted necessary for every map. [Proof](../henon_padic_symplectic_analytic_interpolation_route_a/proof/ANALYTIC_PROOF.md) |
+| HEN-O379 | HCS-C395 ordinary isolated-orbit zeta on the full BCZ section | proved continuous-family and wall obstruction | Every fixed set already contains a diagonal interval, so ordinary cardinality zeta has undefined infinite coefficients. All smooth periodic returns have det(I−M)=0; floor-wall cocycles need not be two-sided derivatives. | Complete Farey cycles, all physical periods, parabolic repetition and roof moment laws survive. Different weighted distributions or operator spaces are not universally excluded. [Proof](../henon_bcz_horocycle_farey_cycles_route_a/proof/ANALYTIC_PROOF.md) |
+| HEN-O380 | HCS-C396 generator eigenvalues or det2 as complete evolution data | proved empty-spectrum and ideal boundary | Transparency has empty generator spectrum and det2(I−wR)=1, yet norm-one evolution persists until time2L/c. The resolvent is Hilbert–Schmidt but not trace class; short-time evolution is noncompact. | Exact PDE domain, full semigroup, all nontransparent spectra and transparent pseudospectra survive. The statement fixes finite impedance and the named regularization. [Proof](../henon_impedance_string_empty_spectrum_route_a/proof/ANALYTIC_PROOF.md) |
+| HEN-O381 | HCS-C397 hyperbolic-style homoclinic coding or constant prime-orbit prefactor | proved nonexpansive obstruction | The irreducible quartic Salem family has no nonzero homoclinic point. Normalized cumulative primitive counts have a nondegenerate arcsine cluster interval, not a constant limit. At a=2, multiples of three have a two-torus fixed component. | Complete fixed groups, rational zeta, mixing, stability and all-period fluctuation laws survive. No universal exclusion of different symbolic representations is claimed here. [Proof](../henon_salem_toral_orbit_fluctuation_route_a/proof/ANALYTIC_PROOF.md) |
+| HEN-O382 | HCS-C398 T log T source spectrum as exact target counting | proved fixed-normalization residual obstruction using an explicit external unconditional theorem | Equality N_a(c²T²+b)=N_R(T)+m would force c=1/2,a=2π from its first two coefficients, then force unbounded S(T) to be bounded. Every fixed a,c>0,b and finite level correction is excluded. | Natural self-adjoint source, complete determinant and heat laws survive. Arbitrary nonlinear reparametrizations, height-dependent parameters and different potentials are outside the theorem. [Proof](../henon_exponential_wall_bessel_determinant_route_a/proof/ANALYTIC_PROOF.md) |
+
+These are named-source theorems, not universal no-go results for every model.
+Coordinate conjugacy preserves the corresponding orbit structures; unitary
+equivalence preserves the stated spectra and operator ideals. A changed
+clock, domain or regularization is a new object requiring a new proof.
+All target/Route-B flags remain false.
+
 ## HCS-C389--HCS-C393 source-boundary register (2026-09-05)
 
 | ID | Candidate | Status | Exact obstruction or boundary | Scope and surviving result | Artifact |

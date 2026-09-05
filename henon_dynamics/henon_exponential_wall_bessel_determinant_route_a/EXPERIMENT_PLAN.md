@@ -1,0 +1,5 @@
+# Claim-driven theory verification plan
+
+Producer: exact Fraction recursion of complex I-series terms, rational hyperbolic substitutions and geometric majorants. Independent checker: closed rising-factorial expressions and symbolic hyperbolic identities. Numerical lane: Bessel I/K and integral representations, ODE residuals, 12 bracketed source roots, Lagrange norms and full resolvent diagonal integral at E=-1/4, all at 70 digits.
+
+First prove the source-wide theorem. Then compare independent exact reconstructions at the frozen cutoff; do not estimate missing infinite claims from a prefix. Attack metadata and every principal mathematical block with repaired hashes. Reject noncanonical numbers and permissive YAML. Exercise the real release write gate on disposable copies and verify its manifest sentinel is unchanged. Run smoke and optimized-mode refusal controls. Compile three substantive versions twice each in fresh directories; inspect the final pages, then seal and reconstruct the exact payload manifest.

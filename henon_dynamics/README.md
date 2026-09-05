@@ -2725,6 +2725,40 @@ scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
 
+## Route-A independent cross-subtype round C394--C398
+
+This round contains five complete independent source contracts, not five
+pieces of one article. All have complete proofs and actual final papers.
+
+- [C394 p-adic nonlinear analytic time and complete orbit decomposition](henon_padic_symplectic_analytic_interpolation_route_a/README.md) · [PDF](henon_padic_symplectic_analytic_interpolation_route_a/paper/main.pdf)
+- [C395 full BCZ Farey cycles and physical horocycle periods](henon_bcz_horocycle_farey_cycles_route_a/README.md) · [PDF](henon_bcz_horocycle_farey_cycles_route_a/paper/main.pdf)
+- [C396 impedance string: empty spectrum, extinction and pseudospectra](henon_impedance_string_empty_spectrum_route_a/README.md) · [PDF](henon_impedance_string_empty_spectrum_route_a/paper/main.pdf)
+- [C397 Salem toral orbit fluctuations and homoclinic obstruction](henon_salem_toral_orbit_fluctuation_route_a/README.md) · [PDF](henon_salem_toral_orbit_fluctuation_route_a/paper/main.pdf)
+- [C398 exponential-wall determinant and residual counting obstruction](henon_exponential_wall_bessel_determinant_route_a/README.md) · [PDF](henon_exponential_wall_bessel_determinant_route_a/paper/main.pdf)
+
+C394 closes the entire local analytic action, every finite quotient and
+every nonzero minimal orbit closure. C395 closes every rational periodic
+layer, the irrational exclusion and the complete parabolic return law.
+C396 resolves the full PDE rather than a matrix approximation, including
+the singular transparent limit. C397 proves explicit primitive and cumulative
+distributions alongside the failure of nontrivial homoclinic structure.
+C398 achieves a genuine logarithmic Weyl law but then proves that its
+bounded residual excludes exact target counting under every allowed fixed
+normalization. Classical ownership and external number-theoretic dependencies
+are explicitly retained.
+
+C394 remains exploratory, with weak A0/A1 only; the other four are target
+rejected. C395/C397 also have weak A0/A1, and C398 has natural source
+quantization. All five target A2/A3 grades fail. No target local data,
+Euler factors, root number, target zero/divisor match or Hilbert–Pólya
+operator is claimed. `NO_BAD_EULER_OR_ROOT_NUMBER`; no Route B invocation.
+
+See [frozen contracts](BATCH_PLAN_C394_C398.md),
+[selection and owners](IDEA_REPORT_C394_C398.md),
+[release review and hashes](BATCH_REVIEW_C394_C398.md), and
+[current recovery state](CURRENT_RESEARCH_STATE.md).
+Exactly five are authorized; C399--C403 requires a new user confirmation.
+
 ## Route-A independent cross-subtype round C389--C393
 
 Five independent source-theorem packages are complete: full Carlitz ring-action

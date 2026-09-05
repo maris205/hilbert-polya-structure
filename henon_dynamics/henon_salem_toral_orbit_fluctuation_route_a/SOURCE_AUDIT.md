@@ -1,0 +1,8 @@
+# Source access and ownership audit
+
+- Douglas Lind, *Dynamical properties of quasihyperbolic toral automorphisms*, ETDS 2 (1982), 49–68. [Publisher DOI](https://doi.org/10.1017/S0143385700009573). Classical dynamics background; not an imported black-box proof of our formulas.
+- Simon Waddington, *The prime orbit theorem for quasihyperbolic toral automorphisms*, Monatshefte für Mathematik 112 (1991), 235–248. [EuDML metadata](https://eudml.org/doc/178542), [Warwick repository metadata](https://wrap.warwick.ac.uk/id/eprint/22294/). The Warwick author field is incomplete; identity is corroborated by EuDML and primary mathematical reference lists. We do not claim a fresh full-text reading of Waddington.
+- Elon Lindenstrauss and Klaus Schmidt, *Symbolic representations of nonexpansive group automorphisms*, Israel J. Math. 149 (2005), 227–266. [Actual arXiv PDF](https://arxiv.org/pdf/math/0409257), [author institution publication record](https://cris.huji.ac.il/en/publications/symbolic-representations-of-nonexpansive-group-automorphisms/), DOI10.1007/BF02772542. Theorem4.1/Corollary4.2 and their proof were actually inspected. Our stable/unstable rational-span proof specializes the classical obstruction.
+
+
+Only primary mathematical sources support technical claims. Secondary index routes are used for bibliographic corroboration, not as proof inputs. Relevant sections, not whole texts, were inspected where stated. No author-reading marker is fabricated. Local collision checks and rejected alternatives are in ../IDEA_REPORT_C394_C398.md. Harness structure is reused from the previous batch; mathematical producer/checker paths are separately implemented.
