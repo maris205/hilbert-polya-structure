@@ -1,8 +1,12 @@
 # P204 — previous-smaller distance feedback
 
-Status: **ADMITTED / ROUND0_READY / OWNER_AMBER / HOLD_EXTERNAL**.
-Not an internally completed paper; formal Reviews A/B, frozen revisions,
-final cold builds and all-page terminal inspection remain due.
+Status: **REJECTED_IN_REVIEW_A / MATH_VALID / OWNER_AMBER / HOLD_EXTERNAL**.
+The exact classical descent-set adapter eliminated the independent inverse
+axis. The mathematical statements remain valid, but this numbered draft is
+not a retained or internally completed paper. Its seat is reopened; no
+accepted Round1/B/Round2 is to be fabricated. See the
+[root disposition](../../docs/papers204_208_sequence/P204_ROOT_REJECTION.md)
+and [actual Review A](../../docs/papers204_208_sequence/reviews/p204_a/REPORT.md).
 
 The theorem contract is the strict synchronous map on the full inversion
 box, its exact two-step zero/ascent decoder and recurrent involution, sharp
@@ -22,7 +26,10 @@ candidate reviewer `/root/batch197_fifth_scout` supplied no new lemma or
 manuscript text. The outline reviewer `/root/batch197_fosp_gate` supplied
 only a total-page-budget clarification, not mathematical content. Any later
 manuscript review must disclose that familiarity and use its own verifier.
-These candidate/outline checks do not count as either required paper review.
+These candidate/outline checks did not count as the actual manuscript
+Review A subsequently supplied by `/root/batch197_lzk_gate`. The earlier
+candidate gate is preserved as historical evidence, not rewritten to hide
+the scaled-statistic adapter it missed.
 
 Proof and author verifier were carried forward from the admitted NS scout;
 the original scout files remain unchanged. The local proof's lifecycle text

@@ -1,0 +1,92 @@
+\section{Two-step decoding and the recurrent involution}
+Zeros are invariant under $P$. If $x_i=0$, no nonnegative entry is smaller;
+if $x_i>0$, the earlier entry $x_0=0$ is smaller. Let $\Blocks(x)$ be
+the set of pairs $(r,m)$ such that $r+1,\ldots,r+m$ is a maximal positive
+block of $x$, immediately following the zero at position $r$.
+Its output distances lie in $\{1,\ldots,j\}$ at position $r+j$, because
+the nearest smaller predecessor cannot be to the left of $r$.
+
+\begin{lemma}[First-image inequality]\label{lem:rise}
+Let $(r,m)\in\Blocks(x)$ and $b_j=P(x)_{r+j}$. Then $b_1=1$, and for
+$2\le j\le m$ either $b_j=1$ or $b_j>b_{j-1}$.
+\end{lemma}
+\begin{proof}
+Write $p_j$ for the nearest smaller predecessor of $x_{r+j}$.
+If $b_j>1$, then $x_{r+j}\le x_{r+j-1}$. Every entry strictly between
+$p_{j-1}$ and $r+j-1$ is at least $x_{r+j-1}$, hence at least $x_{r+j}$;
+the entry at $r+j-1$ is not smaller either. Thus $p_j\le p_{j-1}$ and
+$b_j=r+j-p_j\ge r+j-p_{j-1}=b_{j-1}+1$.
+The first entry of the block has its zero barrier as nearest smaller
+predecessor, so $b_1=1$.
+\end{proof}
+
+Define the block core
+\begin{equation}\label{eq:core}
+ \Core_n=\{y\in E_n:y_{r+j}\in\{1,j\}
+       \text{ for all }(r,m)\in\Blocks(y),\ 1\le j\le m\}.
+\end{equation}
+On this set let $J$ keep zeros and block starts fixed and exchange
+$1\leftrightarrow j$ at each local position $j\ge2$.
+
+\begin{theorem}[Exact endpoint and sharp height]\label{thm:temporal}
+The zero set of $P^2(x)$ is that of $x$. In each positive block,
+\begin{equation}\label{eq:decoder}
+ P^2(x)_{r+1}=1,\qquad
+ P^2(x)_{r+j}=
+ \begin{cases}
+ j,&x_{r+j-1}<x_{r+j},\\
+ 1,&x_{r+j-1}\ge x_{r+j},
+ \end{cases}\quad 2\le j\le m.
+\end{equation}
+Moreover $P^2(E_n)=\Core_n$, $P|_{\Core_n}=J$, and $P^4=P^2$.
+The recurrent set is exactly $\Core_n$, all periods divide two, and
+\begin{equation}\label{eq:height}
+ \max_{x\in E_n}\tau(x)=
+ \begin{cases}0,&n\le2,\\1,&n=3,\\2,&n\ge4.\end{cases}
+\end{equation}
+\end{theorem}
+\begin{proof}
+For $j\ge2$, $b_j=1$ is equivalent to the original adjacent ascent in
+\eqref{eq:decoder}. When $b_j=1$, its only smaller value in the block
+or left barrier is zero, so the next distance is $j$. When $b_j>1$,
+Lemma~\ref{lem:rise} makes the immediately preceding distance smaller,
+so the next distance is one. This proves \eqref{eq:decoder} and
+$P^2(E_n)\subseteq\Core_n$.
+
+At a core coordinate with value $j\ge2$, the preceding core value is
+at most $j-1$, and the next distance is one. At a core coordinate with
+value one, only the left zero is smaller, and the next distance is $j$.
+Thus $P$ restricts to $J$, with $J^2$ the identity. Each core word is
+therefore its own two-step preimage. This proves the exact second image
+and $P^4=P^2$. Every periodic state lies in the second image, so the
+recurrent set is precisely the core.
+
+For $n=1,2$ the whole carrier is fixed. At $n=3$ the six states are
+$000,001,002,010,011,012$; only $002$ is outside the core, and it maps
+to $001$. For $n\ge4$, prepend $n-4$ zeros to $0122$. Its first-image
+positive block is $112$, whose last value is neither one nor its local
+index three. That image is not recurrent, proving the sharp lower bound
+two; the second-image theorem supplies the upper bound.
+\end{proof}
+
+\begin{corollary}[Core census]\label{cor:census}
+Let $F_0=0,F_1=1$ and $F_{k+2}=F_{k+1}+F_k$. There are
+$F_{2n-1}$ recurrent states, $F_{n+1}$ fixed states, and
+$(F_{2n-1}-F_{n+1})/2$ strict two-cycles.
+\end{corollary}
+\begin{proof}
+For the $N=n-1$ positions after the initial zero, let $a_N,b_N$ count
+core words ending respectively in zero and in a positive entry, with
+$(a_0,b_0)=(1,0)$. A new zero has one choice, a positive block starts
+with one, and its continuation has the two distinct choices $1,j$.
+Hence
+\begin{equation}\label{eq:countrec}
+ (a_{N+1},b_{N+1})=(a_N+b_N,a_N+2b_N).
+\end{equation}
+For $N\ge1$, induction gives $(a_N,b_N)=(F_{2N-1},F_{2N})$, so the
+total is $F_{2N+1}$, also valid at $N=0$. A core word is fixed exactly
+when every positive block is a singleton. Binary words of length $N$
+with no consecutive ones are counted by $F_{N+2}$: conditioning on an
+initial zero or an initial $10$ gives the Fibonacci recurrence, with
+initial counts $1,2$. The remaining core states are paired by $J$.
+\end{proof}

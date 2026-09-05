@@ -4,7 +4,7 @@
 
 ## 当前结论
 
-- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P204_ROUND0_FROZEN_REVIEW_A / FOUR_SEATS_SCOUTING`。P204 三页稿已冷构建、逐页视读并冻结 Round0，独立稿审 A 开始；本轮已准入 1、已完成 0、空缺 4。GM、OF、CS、SI 因明确机制扣除未准入，ZA 保留证明未闭合及反例，第二轮有界筛选继续。本轮 WIP 私有推送 `65a08fea` 已核实，范围见批次回执；该旧检查点不含后续准入文件。
+- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_ROUND0_A_ACTIVE / P206_ADMITTED_DRAFTING / THREE_SEATS_OPEN`。P204 已因稿审 A 的经典下降集完整适配淘汰，原稿/冻结/未关闭 finding 保留。P205（CCI）完整三页稿、作者双次验证、冷构建/全页视读及 22 文件 Round0 已完成，稿审 A 正在进行。P206（CRC3）通过独立候选门与 root 双次 721,397 断言重放，按窄合同准入、正在写稿。当前保留 2、完成 0、空缺 3，下一编号 P207。本轮 WIP 推送 `423e3fdc` 已核实，但仅覆盖 P204 Round0 及此前证据，不含后续淘汰和 P205/P206。
 - 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
 - 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
 - 研究完成提交 `0236e3e7` 已随正常合并 `1b55fbda` 实际推送，远端 ref 已确认；见 [同步回执](docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md)。[配置审计](docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md) 和独立情境/修订测试完成。

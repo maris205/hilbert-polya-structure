@@ -134,4 +134,20 @@ ascent masks and flagged decreasing-segment counts. Its self-contained
 First-image census, one-step fibres and a global fibre extremum are not
 claimed. The independent source/value gate in `NS_GATE/` is pending.
 Standard previous-smaller indexing, word counting, and inclusion--exclusion
-are not claimed as inventions. No paper ID has been allocated.
+are not claimed as inventions. No paper ID had been allocated at that intake.
+
+## Later lifecycle and third intake
+
+NS subsequently passed its candidate gate and was numbered P204, then
+actual manuscript Review A found the exact binomial-scale/MacMahon adapter
+and rejected its two-axis admission. The original proof stays valid;
+the numbered draft and adverse evidence are preserved in the batch.
+This supersedes the historical pending status above without rewriting
+that earlier candidate gate.
+
+Three radius probes and six circular statistics are now recorded in
+[the circular intake report](CIRCULAR_SCOUT_REPORT.md), bringing this lane
+to 21 literal pilots. CRC3 has a complete two-axis author theorem and
+actual standalone 655,256-check canonical; independent source/value gate
+pending. General CRC and ternary CRC3 remain one rule family. No additional
+paper is admitted by this scout report.

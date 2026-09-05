@@ -1,0 +1,190 @@
+ACTIVATION DISTANCES AND EXTREMAL FIBRES
+OF CONFLICT-TRIGGERED CYCLIC INCREMENTS
+ANONYMOUS
+
+Abstract. We determine the forward dynamics and time-one inverse of a synchronous colour update
+on an arbitrary finite simple undirected graph: a vertex increments modulo q ≥ 3 exactly when a
+neighbor has the same colour. Equal-colour edges persist, so each vertex is stationary until activation
+and advances forever afterwards. We prove that its first activation time is a shortest-path distance
+from the initial conflicts, with directed edge weights given by initial colour differences. This yields every
+iterate, the recurrent core and the sharp maximum entrance time (q − 1)(n − 2) for n ≥ 3. Independently,
+all predecessors of a target are reconstructed by binary masks satisfying a total-cover condition and
+directed predecessor closure. Using a self-contained static bound, we show that the largest time-one
+fibre over all n-vertex graphs and targets is 2n−1 − 1 for n ≥ 4, attained exactly by constant targets on
+stars. The three-vertex exception is a constant target on a triangle, with four predecessors. The inverse
+characterization does not assume efficient general cover counting.
+
+1. The update and its scope
+Let G = (V, E) be a finite simple undirected graph, n = |V | ≥ 0, and q ≥ 3. For x ∈ (Z/qZ)V , define
+the simultaneous update
+(1.1)
+
+F (x)v = xv + 1{some u ∼ v has xu = xv } (mod q).
+
+Isolated vertices hold. We call an equal-colour edge a conflict and its endpoints active. All tests in (1.1)
+use the old state. The entrance h(x) is the least t ≥ 0 for which F t (x) is periodic. Unlike a propercolouring algorithm, this update never removes a conflict: both endpoints increment together. The issue
+is how the resulting clocks activate stationary vertices, and which old conflict sets can produce a given
+target.
+The conflict-detection model of Motskin et al. [4, Section II-A] already allows a local function of the
+current colour and one conflict bit; (1.1) is one deterministic choice in that model. Their Algorithm 1
+uses randomized recolouring, so its convergence result does not apply here. The successor-colour trigger
+in the cyclic cellular automaton differs from our equality trigger [2, Section 1]: on a monochromatic edge
+it holds, whereas (1.1) rotates.
+We give two explicit descriptions of (1.1). The first uses initial-colour directed arrival distances to
+determine every forward coordinate, exact entrance and recurrent action. The second uses target colours
+to characterize all active masks in a one-step inverse and to find its uniform extremizers. Shortest paths
+and binary reconstruction are standard tools. The inverse uses the established class of 2-total vertex
+covers [1]; general total-cover counting already has complexity results [3, Corollary 2.5]. Our elementary
+static bound below is supporting material, not a separately claimed new graph-counting theory.
+2. Exact activation distances
+Let S(x) be the endpoints of the initial conflicts. Give both directed versions of each edge the weights
+wx (u, v) = (xv − xu ) mod q ∈ {0, . . . , q − 1}.
+Write dx (v) for the minimum total weight of a directed path from S(x) to v, and set it to ∞ if no such
+path exists. Paths of length zero are allowed. A maximum over no finite distances means zero.
+Theorem 2.1. The first conflict time of v is dx (v). For every integer t ≥ 0,
+(
+xv + max{0, t − dx (v)} (mod q), dx (v) < ∞,
+t
+(2.1)
+F (x)v =
+xv ,
+dx (v) = ∞.
+Moreover, h(x) = maxdx (v)<∞ dx (v). A state is recurrent exactly when each connected component is
+either properly coloured, hence fixed, or has a same-coloured neighbor at every vertex, hence increments
+Key words and phrases. finite dynamics, synchronous graph colouring, activation time, inverse fibre, total vertex cover.
+1
+
+2
+
+ANONYMOUS
+
+globally. Every nonfixed recurrent orbit has exact period q. The maximum entrance over all graphs and
+sources on n vertices is
+(
+0,
+n ≤ 2,
+Hq (n) =
+(q − 1)(n − 2), n ≥ 3.
+Proof. An active edge remains active after an update, since its two colours increment equally. Thus
+the active set only grows. If τ (v) is the first conflict time, then v is stationary through time τ (v) and
+increments at each subsequent update. This gives (2.1) with τ in place of dx .
+Suppose u first activates at time a < ∞. Its colour at that time is xu . Unless a neighbor v activates
+earlier, its colour is still xv , and it meets the advancing colour of u at time a + wx (u, v). Consequently
+τ (v) ≤ τ (u) + wx (u, v). A zero-weight edge is initially monochromatic, so both its endpoints already have
+time zero; it cannot spontaneously activate an unseeded region. The edge inequality along every seed
+path proves τ (v) ≤ dx (v) whenever the latter is finite.
+Conversely, suppose τ (v) = s > 0. A neighbor u meeting v at time s must have activated earlier.
+Indeed, if both first activated at s, both would still have their initial colours, making their equality an
+initial conflict. With a = τ (u) < s, the first meeting of that advancing color with the stationary v occurs
+after exactly wx (u, v) steps: an earlier congruent meeting would already activate v. Hence s = a+wx (u, v).
+Repeating backwards strictly decreases activation times until reaching a seed and yields a path of total
+weight s. Thus dx (v) ≤ τ (v). This also excludes finite activation in a seedless component, and proves the
+first assertion including infinite distances.
+Every vertex in a seeded component has finite distance. At the last such arrival all its vertices are
+active and hence advance together forever; unseeded components are proper and hold forever. Before
+the last arrival, the active set will strictly increase at a future time, so monotonicity excludes periodicity.
+These observations prove the exact entrance and the stated recurrent core. If any component advances,
+a return after p steps forces p ≡ 0 (mod q) at an advancing vertex, proving its exact period.
+A seeded component contains at least two seeds. A minimum-weight path to a nonseed can be chosen
+simple and with no seed after its starting vertex. It therefore has at most n − 2 edges, each of weight at
+most q − 1. For n ≤ 2 there is no seeded component containing a nonseed, giving height zero. For n ≥ 3
+take the path 0 − 1 − · · · − (n − 1) with x0 = x1 = 0 and xi = −(i − 1) (mod q) for i ≥ 2. Only the first
+edge is initially monochromatic. The unique simple seed route to vertex n − 1 has n − 2 forward edges
+of weight q − 1; deleting any backtracking cannot increase a path’s weight. Its distance is (q − 1)(n − 2),
+attaining the bound.
+□
+3. A target decoder and sharp fibres
+For a target y, let Hy be the spanning graph of its monochromatic edges. Let Dy have an arc u → v
+when u ∼ v and yv = yu + 1 (mod q). A vertex cover whose induced graph has no isolated vertex is called
+a 2-total cover; we allow the empty cover. In particular, isolates of Hy must be outside such a cover.
+Theorem 3.1. The predecessors of y are, uniquely, xv = yv − 1A (v) (mod q), where A ⊆ V satisfies:
+(1) A is a vertex cover of Hy ;
+(2) every vertex of A has a neighbor in A in Hy ;
+(3) an arc u → v in Dy with v ∈ A implies u ∈ A.
+Proof. Let A be the advancing set of any predecessor. Its old colours are necessarily y − 1A . Every old
+equal-colour edge has both endpoints in A. For two endpoints in A, old equality is exactly target equality;
+each vertex in A therefore needs an internal Hy neighbor. Two endpoints outside A cannot be equal in
+the target, since both held. Finally, when u ∈
+/ A and v ∈ A, old equality is equivalent to yv = yu + 1
+(mod q), which would contradict u holding. These are the three conditions. Conversely they ensure that
+the endpoints of the old equal-colour edges in y − 1A are exactly A. Thus precisely these vertices advance
+and the image is y. Different masks give different old states, completing the bijection.
+□
+Write T (H) for the number of 2-total covers of a simple graph H, with our empty-cover convention.
+Equivalently it counts independent sets I for which H − I has no isolated vertex. The decoder gives
+(3.1)
+
+|F −1 (y)| ≤ T (Hy ).
+
+For a constant target, Hy = G and Dy has no arcs, so equality holds. We include the following elementary
+static support proof to make the dynamical extremum self-contained.
+Lemma 3.2. For a graph H on n ≥ 4 vertices, T (H) ≤ 2n−1 − 1, with equality exactly for a star K1,n−1 .
+On three vertices, T (H) ≤ 4, with equality exactly for a triangle.
+
+CONFLICT-TRIGGERED CYCLIC INCREMENTS
+
+3
+
+Proof. For a star on k ≥ 3 vertices the covers consist of the centre and any nonempty set of leaves, giving
+2k−1 −1. A single edge has one such cover; on three connected vertices the path has three and the triangle
+four.
+A connected nonstar with at least four vertices contains a four-vertex path as a subgraph. To see this,
+if a longest path were a, b, c, any further vertex can attach only to b: attachment to a or c, or a longer
+route from the path, extends it. An edge between leaves, including a, c, would also create a four-vertex
+path. The graph would therefore be a star.
+Now suppose a connected nonstar has k ≥ 5 vertices. Choose a four-vertex path and an edge uv from a
+vertex u of the path to a vertex v outside it. The path has eight independent sets, at least two containing
+each chosen u. Ignoring other edges gives 8 · 2k−4 independent sets; the extra edge forbids at least 2 · 2k−5
+of them. Hence
+T (H) ≤ i(H) ≤ 7 · 2k−4 < 2k−1 − 1,
+where i(H) is the number of independent sets and the strict inequality uses 2k−4 ≥ 2. For k = 4, the
+connected graphs are the star, path, paw, four-cycle, diamond and complete graph. Listing independent
+complements with no isolated vertex left gives, respectively, 7, 4, 6, 5, 6, 5. Thus only the star attains
+seven.
+The count T multiplies over components, and an isolate contributes one. A nontrivial component of
+size k has T ≤ 2k−1 . Two or more nontrivial components therefore give at most 2n−2 < 2n−1 − 1. One
+such component with isolates has strictly smaller order and again gives a strict bound, including the
+triangle count four. An edgeless graph has T = 1. The three-vertex disconnected cases also have T = 1.
+These cases complete the proof and the equality classification.
+□
+Theorem 3.3. For any q ≥ 3, the maximum time-one fibre over all graphs and targets on n vertices is
+
+
+n ≤ 2,
+1,
+M (n) = 4,
+n = 3,
+
+ n−1
+2
+− 1, n ≥ 4.
+For n = 3 the extremizers are exactly constant targets on triangles, and for n ≥ 4 exactly constant targets
+on stars.
+Proof. Combine (3.1) with Lemma 3.2. At equality Hy is a spanning star, or a triangle when n = 3.
+Since this monochromatic graph is connected, y is constant on all vertices. Then Hy = G, so no extra
+nonmonochromatic edges are possible. Conversely every constant target on the claimed graph attains
+T (G). For n ≤ 2, an edgeless graph has the identity update; on a single edge, unequal colours hold and
+equal colours rotate together. This is a permutation and every fibre has size one, including the empty
+state.
+□
+4. Scope and reproducibility
+The forward formula holds at every time, but the inverse concerns one step. No efficient arbitrary-graph
+cover counter, all-time inverse or complete basin/recurrent-state census is asserted.
+The accompanying standalone verify.py compares literal finite orbits with weighted distances and
+every target’s exact source set with the mask decoder. It covers all graphs through four vertices at
+q = 3, 4, 5, all static graphs through six vertices, and the sharp paths for 2 ≤ n ≤ 20, 3 ≤ q ≤ 9. Its
+complete CANONICAL.json records 1,029,769 assertions. These finite checks pressure the deductions; the
+all-parameter results follow from the proofs above.
+References
+[1] Henning Fernau, Fedor V. Fomin, Geevarghese Philip, and Saket Saurabh. On the parameterized
+complexity of vertex cover and edge cover with connectivity constraints. Theoretical Computer Science,
+565:1–15, 2015. doi: 10.1016/j.tcs.2014.10.035.
+[2] Janko Gravner, Hanbaek Lyu, and David Sivakoff. Limiting behavior of 3-color excitable media on arbitrary graphs. The Annals of Applied Probability, 28(6):3324–3357, 2018. doi: 10.1214/17-AAP1350.
+[3] Xavier Molinero, Fabián Riquelme, and Maria Serna. Satisfaction and power in unanimous majority
+influence decision models. Electronic Notes in Discrete Mathematics, 68:197–202, 2018. doi: 10.1016/
+j.endm.2018.06.034.
+[4] Arik Motskin, Tim Roughgarden, Primoz Skraba, and Leonidas Guibas. Lightweight coloring and
+desynchronization for networks. In IEEE INFOCOM 2009, pages 2383–2391. IEEE, 2009. doi: 10.
+1109/INFCOM.2009.5062165.
+
+

@@ -1,0 +1,35 @@
+\section{The update and its scope}
+Let $G=(V,E)$ be a finite simple undirected graph, $n=|V|\ge0$, and
+$q\ge3$. For $x\in(\Zq)^V$, define the simultaneous update
+\begin{equation}\label{eq:update}
+ F(x)_v=x_v+\ind\{\text{some }u\sim v\text{ has }x_u=x_v\}\pmod q.
+\end{equation}
+Isolated vertices hold. We call an equal-colour edge a conflict and its
+endpoints active. All tests in \eqref{eq:update} use the old state.
+The entrance $h(x)$ is the least $t\ge0$ for which $F^t(x)$ is periodic.
+Unlike a proper-colouring algorithm, this update never removes a conflict:
+both endpoints increment together. The issue is how the resulting clocks
+activate stationary vertices, and which old conflict sets can produce a
+given target.
+
+The conflict-detection model of \citet[Section II-A]{motskin2009lightweight}
+already allows a local function of the current colour and one conflict bit;
+\eqref{eq:update} is one deterministic choice in that model. Their
+Algorithm~1 uses randomized recolouring. We do not claim a new information
+model or transfer that algorithm's convergence result. The successor-colour
+trigger in the cyclic cellular automaton differs from our equality trigger
+\citep[Section 1]{gravner2018limiting}: on a monochromatic edge it holds,
+whereas \eqref{eq:update} rotates. This literal distinction is not a claim
+excluding every possible enriched representation.
+
+We give two explicit descriptions of \eqref{eq:update}. The first uses
+initial-colour directed arrival distances to determine every forward
+coordinate, exact entrance and recurrent action. The second uses target
+colours to characterize all active masks in a one-step inverse and to find
+its uniform extremizers. Shortest paths and binary reconstruction are
+standard tools. The inverse uses the established class of $2$-total vertex
+covers \citep{fernau2015cover}; general total-cover counting already has
+complexity results \citep[Corollary 2.5]{molinero2018satisfaction}.
+Our elementary static bound below is supporting material, not a separately
+claimed new graph-counting theory. Section~\ref{sec:dynamics} proves the
+forward formula and Section~\ref{sec:inverse} proves the inverse statements.
