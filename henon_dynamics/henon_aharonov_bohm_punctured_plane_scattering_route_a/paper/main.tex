@@ -1,0 +1,446 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+\newfontfamily\cjkfont{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\e}{\mathrm e}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\HH}{\mathcal H}
+\newcommand{\JJ}{\mathcal J}
+\newcommand{\PV}{\operatorname{PV}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\ifcase\CRevisionRound
+\title{Friedrichs Aharonov--Bohm Dynamics:\\Domain and Complete Hankel Spectrum}
+\or
+\title{Friedrichs Aharonov--Bohm Dynamics:\\Complete Scattering and the Forward Distribution}
+\else
+\title{Friedrichs Aharonov--Bohm Dynamics:\\Full Scattering, Heat Kernel, and Determinant Obstructions}
+\fi
+\author{HCS-C383 theorem and reproducibility package}
+\date{5 September 2026}
+\begin{document}
+\emergencystretch=3em
+\maketitle
+\begin{abstract}
+\ifcase\CRevisionRound
+We fix the Friedrichs magnetic Laplacian on the punctured Euclidean plane,
+with one flux and one physical time convention. Angular Fourier decomposition
+reduces the closed form to radial Bessel operators of orders $|m-\beta|$.
+The Hankel Plancherel theorem gives an onto spectral transform in every channel
+and consequently a purely absolutely continuous spectrum $[0,\infty)$.
+The exceptional low-order channels retain the regular branch and exclude the
+singular branch; zero flux recovers the ordinary free Laplacian because a point
+has zero planar Sobolev capacity. This first manuscript closes the operator
+domain and the complete spectral representation. It is a reconstruction and
+audit of classical source theory, not a claim of a new Aharonov--Bohm formula.
+\or
+We carry a fixed Friedrichs domain and flux sign through the complete spectral
+and scattering theory of the punctured-plane magnetic Laplacian. Incoming and
+outgoing Bessel asymptotics determine the wave operators and the exact phases
+$S_m=\exp\{\ii\pi(|m|-|m-\beta|)\}$. All angular channels are included by an
+onto Hankel transform and a dense-packet strong-limit argument. Abel summation
+then gives the full angular scattering distribution: a forward delta, a
+principal-value cotangent, and a constant imaginary term. The familiar
+differential cross section is recovered only away from the forward ray.
+This round closes complete source scattering without silently replacing its
+distributional kernel by an ordinary function.
+\else
+We give a single-convention audit of the Friedrichs Aharonov--Bohm Hamiltonian
+on the punctured plane. The angular Hankel transform yields the complete
+absolutely continuous spectrum, and the free wave operators give every
+scattering phase. Abel summation preserves both the forward delta and the
+principal-value part. Weber's integral produces a locally convergent heat
+kernel with an explicit angular tail bound. The global heat semigroup and,
+at noninteger flux, the scattering correction are noncompact. Two exhaustive
+channel windows even give different finite determinant limits. Integer gauge
+covariance classifies position-preserving physical time reversal, while a
+reflection-composed antiunitary exists at every flux. Exact finite receipts
+and independent spectral quadrature audit the formulas. The classical results
+are credited as such; the package advance is their integrated domain,
+distribution, symmetry, and determinant-boundary verification. This natural
+scattering system fails the Route-A arithmetic and primitive-orbit gates.
+\fi
+\end{abstract}
+\begin{center}{\cjkfont 中文摘要}\end{center}
+{\cjkfont\small\raggedright
+\ifcase\CRevisionRound
+本文为穿孔欧氏平面上的阿哈罗诺夫玻姆磁性动力学固定弗里德里希斯实现、磁通符号与物理时间。
+角向傅里叶分解把闭二次型化为各阶径向贝塞尔算子的正交直和，阶数由角动量与磁通之差的绝对值决定。
+汉克尔变换的普朗歇雷与反演定理给出每个通道的满射谱表示，因此完整谱为非负实轴上的纯绝对连续谱，
+没有束缚态或奇异连续谱。低阶通道必须通过二次型选择正规分支；零阶允许常数行为而排除对数奇性，
+不能误用逐点零边界条件。零磁通时，点的二维索伯列夫容量为零，穿孔不会改变自由平面拉普拉斯的闭型域。
+本轮完成算子定义、边界约定与全通道谱，属于经典理论的可审查重建。
+\or
+本文在同一弗里德里希斯边界条件下闭合穿孔平面磁性算子的完整散射。
+径向贝塞尔函数的大参数渐近分别固定入射与出射相位，汉克尔变换的满射性与稠密波包极限给出完整波算子。
+角向散射相位按正负通道分成两个常值半空间，但通道零点的归属不能省略。
+通过阿贝尔求和，散射核同时包含前向狄拉克分布、余切主值与常数虚部；
+缺少前向项的普通函数并不表示完整酉散射算子。
+熟知的微分截面仅在离开前向射线时有函数意义，不能把分布平方当成前向截面。
+这一轮把谱域、波算子相位、全通道完备性与分布归一化连接成一个可核查的散射终点。
+\else
+本文在固定磁通符号与物理时间下统一验证弗里德里希斯阿哈罗诺夫玻姆动力学。
+角向汉克尔变换给出完整纯绝对连续谱，贝塞尔入射出射渐近产生全部散射相位，
+阿贝尔求和保留前向分布与主值项。
+韦伯积分进一步给出局部热核及显式角通道尾界，但全空间热半群并不紧，因此不存在通常的有限热迹。
+非整数磁通下散射修正也不紧，而且两种都穷尽整数通道的截断方式得到不同的乘积极限，
+揭示普通行列式解释的缺口。
+整数规范协变把保持空间点的物理时间反演限定在整数和半整数磁通；复合空间反射的反酉对称则适用于所有磁通，
+两种对称不能混为一谈。精确有限记录、独立谱积分与敌对变异检验共同审查这些约定。
+经典公式不作为新发现，包内进展是对域、全分布、热核、对称与行列式边界的完整贯通；路线甲仍在算术入口停止。
+\fi\par}
+\medskip
+\ifcase\CRevisionRound
+\noindent\textbf{Keywords:} Aharonov--Bohm Hamiltonian; Friedrichs extension; Hankel transform; Bessel spectrum; punctured plane
+
+{\cjkfont\noindent 关键词：阿哈罗诺夫玻姆算子；弗里德里希斯扩张；汉克尔变换；贝塞尔谱；穿孔平面}
+\or
+\noindent\textbf{Keywords:} Aharonov--Bohm scattering; wave operators; angular channels; Abel summation; forward distribution; cross section
+
+{\cjkfont\noindent 关键词：阿哈罗诺夫玻姆散射；波算子；角通道；阿贝尔求和；前向分布；散射截面}
+\else
+\noindent\textbf{Keywords:} magnetic scattering; Friedrichs domain; heat kernel; gauge covariance; time reversal; noncompactness; Route A
+
+{\cjkfont\noindent 关键词：磁性散射；弗里德里希斯域；热核；规范协变；时间反演；非紧性；路线甲}
+\fi
+
+\section{One operator and one boundary condition}
+On $\HH=L^2(\mathbb R^2,r\dd r\dd\theta)$, set $\hbar=2M=1$ and
+freeze the nonnegative form, initially on smooth functions compactly supported
+away from zero,
+\begin{equation}
+q_\beta[f]=\int_0^\infty\int_0^{2\pi}
+\left(|\partial_rf|^2+\frac{|(-\ii\partial_\theta-\beta)f|^2}{r^2}\right)
+r\dd\theta\dd r.\label{eq:form}
+\end{equation}
+Its closed Friedrichs extension defines the self-adjoint $H_\beta$.
+The main flux representative is $0\le\beta<1$; integer translates will only
+be used for gauge comparisons. No spin, contact interaction, alternate
+self-adjoint extension, finite-radius flux tube, or confining field enters.
+This choice is material: an unqualified singular differential expression does
+not fix its quantum dynamics.
+
+Let $e_m(\theta)=(2\pi)^{-1/2}\e^{\ii m\theta}$ and $\nu_m=|m-\beta|$.
+Angular Parseval gives the orthogonal form sum
+\begin{equation}
+q_\beta=\bigoplus_{m\in\mathbb Z}q_{\nu_m},\qquad
+q_\nu[u]=\int_0^\infty\left(|u'|^2+\frac{\nu^2}{r^2}|u|^2\right)r\dd r.
+\label{eq:radialform}
+\end{equation}
+Finite angular sums and smooth compact radial approximants form a core of
+this sum: Fourier truncation converges in both norm and form energy, and the
+radial closure then approximates each of finitely many components.
+
+\begin{theorem}[Domain and complete spectral representation]
+The Friedrichs operator decomposes as
+\begin{equation}
+H_\beta=\bigoplus_{m\in\mathbb Z}h_{\nu_m},\qquad
+h_\nu=-\partial_r^2-r^{-1}\partial_r+\nu^2r^{-2}.
+\label{eq:radial}
+\end{equation}
+The order-$\nu$ Hankel map
+\begin{equation}
+(\JJ_\nu u)(k)=\int_0^\infty J_\nu(kr)u(r)r\dd r
+\label{eq:hankel}
+\end{equation}
+is unitary from $L^2(r\dd r)$ onto $L^2(k\dd k)$ and transforms $h_\nu$
+to multiplication by $k^2$. In particular,
+\begin{equation}
+D(h_\nu)=\{u:k^2\JJ_\nu u\in L^2(k\dd k)\}.
+\label{eq:domain}
+\end{equation}
+The full operator has purely absolutely continuous spectrum $[0,\infty)$,
+with no point or singular continuous spectrum.
+\end{theorem}
+\begin{proof}
+The form-core argument proves \eqref{eq:radial}. For $0<\nu<1$, the two
+zero-energy branches are $r^\nu$ and $r^{-\nu}$. The latter has divergent
+form energy and its coefficient is removed in the Friedrichs realization.
+For $\nu=0$, the logarithmic branch is excluded but the regular constant
+branch is allowed. Orders $\nu\ge1$ are limit point at zero, and infinity
+is limit point in every channel. Thus these are precisely the regular Bessel
+realizations diagonalized by the Hankel Plancherel and inversion theorem
+\cite{DLMF}. The transform is onto and gives \eqref{eq:domain}; it is not a
+finite list of formal eigenfunctions. Multiplication by $k^2$ under the
+non-atomic measure $k\dd k$ has the claimed spectral types, and its countable
+orthogonal sum preserves them.
+\end{proof}
+
+\begin{lemma}[The zero-flux puncture]
+$H_0$ is the ordinary free plane Laplacian.
+\end{lemma}
+\begin{proof}
+For $0<\epsilon<1$, take a radial cutoff equal to zero at $r\le\epsilon^2$,
+equal to one at $r\ge\epsilon$, and linear in $\log r$ between those radii.
+Its Dirichlet energy is $2\pi/|\log\epsilon|$. Multiplying a fixed smooth
+function by this cutoff changes its $L^2$ norm and Dirichlet energy by terms
+tending to zero. Hence the puncture has zero $H^1$ capacity and the closed
+zero-flux form equals the full-plane free form.
+\end{proof}
+
+The original physical effect belongs to Aharonov and Bohm \cite{AB}; the
+rigorous spectral and scattering treatment for general extension parameters
+is reviewed by Pankrashkin and Richard \cite{PR}. Their magnetic-potential
+sign corresponds to orders $|m+\alpha|$. Angular reflection, or
+$\alpha=-\beta$, translates to \eqref{eq:radial}. The present formulas use
+one sign throughout. Reconstructing and testing this classical theory is the
+purpose of this package; classical formula discovery is not claimed.
+
+\ifnum\CRevisionRound>0
+\newpage
+\section{Complete wave operators in the fixed sign convention}
+Put $\mu_m=|m|$ and $a_m=\pi(\mu_m-\nu_m)/2$. Define the free comparison by
+\begin{equation}
+W_\pm=\operatorname{s-lim}_{t\to\pm\infty}\e^{\ii tH_\beta}\e^{-\ii tH_0},
+\qquad S=W_+^*W_-.
+\label{eq:wave}
+\end{equation}
+\begin{theorem}[Wave operators and all scattering phases]
+The limits in \eqref{eq:wave} exist and are onto. Their channel restrictions
+and the on-shell angular scattering phases are
+\begin{equation}
+W_{\pm,m}=\e^{\mp\ii a_m}\JJ_{\nu_m}\JJ_{\mu_m},\qquad
+S_m=\e^{\ii\pi(|m|-|m-\beta|)}.
+\label{eq:phases}
+\end{equation}
+For $0<\beta<1$ this is $\e^{\ii\pi\beta}$ on $m\ge1$ and
+$\e^{-\ii\pi\beta}$ on $m\le0$.
+\end{theorem}
+\begin{proof}
+The real-order large-argument expansion is
+\begin{equation}
+J_\nu(kr)=\left(\frac2{\pi kr}\right)^{1/2}
+\cos(kr-\pi\nu/2-\pi/4)+O((kr)^{-3/2}).
+\label{eq:asymptotic}
+\end{equation}
+The incoming radial coefficient has phase $\e^{\ii\pi\nu/2}$ and the
+outgoing one phase $\e^{-\ii\pi\nu/2}$. Matching them to the free order
+$\mu_m$ gives $\e^{\ii a_m}$ for $W_-$ and $\e^{-\ii a_m}$ for $W_+$.
+The rigorous dense-packet argument takes smooth spectral support in a compact
+subset of $k>0$. Stationary phase puts the incoming packet at $r\asymp2|t|k$
+for negative time and the outgoing packet there for positive time. The
+remainder in \eqref{eq:asymptotic} tends to zero in radial $L^2$ in that
+region, while integration by parts controls the nonstationary complement.
+This proves the channel limits on a dense set. The wave-operator theorem in
+\cite[Lemma 7 and the original AB channel calculation]{PR} supplies the
+rigorous existence and completeness statement for exactly this regular
+extension. The explicit phase matching fixes its sign in our convention.
+Uniform unitary bounds extend the channel limits to all radial vectors;
+finite angular sums extend them to $\HH$. Every Hankel product is onto, so
+their direct sum is onto. Multiplication of $W_{+,m}^*$ and $W_{-,m}$ gives
+the last formula. Splitting at $m=0$ proves the two constant phases.
+\end{proof}
+
+\section{The forward distribution is part of scattering}
+Let $P_+$ select $m\ge1$ and $P_-$ select $m\le0$ in $L^2(S^1,\dd\theta)$.
+Then $S=\e^{\ii\pi\beta}P_++\e^{-\ii\pi\beta}P_-$. Write
+$\delta_{2\pi}$ for the periodic delta with integral one, and let
+$\theta$ be outgoing angle minus incoming angle.
+
+\begin{theorem}[Full kernel and away-forward cross section]
+The convolution kernel relative to $\dd\theta$ is
+\begin{equation}
+K_S(\theta)=\cos(\pi\beta)\delta_{2\pi}(\theta)
+-\frac{\sin(\pi\beta)}{2\pi}\PV\cot(\theta/2)
+-\frac{\ii\sin(\pi\beta)}{2\pi}.
+\label{eq:distribution}
+\end{equation}
+Under the amplitude convention
+$f=(2\pi\ii k)^{-1/2}\sum_m(S_m-1)\e^{\ii m\theta}$,
+with $\sqrt\ii=\e^{\ii\pi/4}$, away from $\theta=0$ modulo $2\pi$ one has
+\begin{equation}
+f=-\frac{\sin(\pi\beta)}{\sqrt{2\pi\ii k}}
+\big(\cot(\theta/2)+\ii\big),\qquad
+\frac{\dd\sigma}{\dd\theta}=\frac{\sin^2(\pi\beta)}{2\pi k\sin^2(\theta/2)}.
+\label{eq:cross}
+\end{equation}
+\end{theorem}
+\begin{proof}
+Introduce Abel weights $\rho^{|m|}$, $0<\rho<1$, in the geometric series.
+Their distributional limits are
+\begin{align}
+\sum_{m\ge1}\e^{\ii m\theta}&=\pi\delta_{2\pi}-\frac12+\frac\ii2\PV\cot(\theta/2),\label{eq:abelplus}\\
+\sum_{m\le0}\e^{\ii m\theta}&=\pi\delta_{2\pi}+\frac12-\frac\ii2\PV\cot(\theta/2).
+\label{eq:abelminus}
+\end{align}
+Multiplying by the two channel phases and dividing by $2\pi$ gives
+\eqref{eq:distribution}. Subtracting the identity kernel retains
+$(\cos\pi\beta-1)\delta_{2\pi}$. Off its support the amplitude equals
+the function in \eqref{eq:cross}; $|\cot(\theta/2)+\ii|^2=\csc^2(\theta/2)$
+gives the cross section. No square of a distribution is taken.
+\end{proof}
+For nonzero flux in the chosen interval the integrated away-forward cross
+section diverges. The two angular projectors nevertheless show $S$ is exactly
+unitary. These statements concern different objects and are consistent.
+\fi
+
+\ifnum\CRevisionRound>1
+\newpage
+\section{Local heat kernel and global noncompactness}
+For $t>0$ write $z=rr'/(2t)$. Weber's exponential integral \cite[10.22.67]{DLMF}
+and the angular normalizer give the kernel relative to $r'\dd r'\dd\theta'$:
+\begin{equation}
+K_\beta(t;r,\theta;r',\theta')=
+\frac{\e^{-(r^2+r'^2)/(4t)}}{4\pi t}
+\sum_{m\in\mathbb Z}\e^{\ii m(\theta-\theta')}I_{|m-\beta|}(z).
+\label{eq:heat}
+\end{equation}
+Indeed each radial term before evaluation is
+\begin{equation}
+\int_0^\infty\e^{-tk^2}J_\nu(kr)J_\nu(kr')k\dd k
+=\frac{\e^{-(r^2+r'^2)/(4t)}}{2t}I_\nu(z).
+\label{eq:weber}
+\end{equation}
+
+\begin{lemma}[An explicit angular tail]
+For $z>0$, $\nu_0\ge0$, and $z<2(\nu_0+1)$, put
+\begin{equation}
+B(\nu_0,z)=\frac{\e^{z^2/4}(z/2)^{\nu_0}}
+{\Gamma(\nu_0+1)[1-z/(2(\nu_0+1))]}.
+\label{eq:tailbound}
+\end{equation}
+The absolute tail of the sum in \eqref{eq:heat} outside $|m|\le M$ is at most
+$B(M+1-\beta,z)+B(M+1+\beta,z)$ whenever both denominators are positive.
+Consequently the series converges locally uniformly for positive $t,r,r'$.
+\end{lemma}
+\begin{proof}
+The positive defining series of $I_\nu$ and $(\nu+1)_j\ge j!$ imply
+$I_\nu(z)\le (z/2)^\nu\e^{z^2/4}/\Gamma(\nu+1)$ for $\nu\ge0$.
+Consecutive terms of this upper bound have ratio $z/[2(\nu+1)]$.
+Starting at $\nu_0$, sum the geometric majorant to get
+$\sum_{j\ge0}I_{\nu_0+j}(z)\le B(\nu_0,z)$.
+The positive and negative omitted angular orders start at $M+1-\beta$ and
+$M+1+\beta$ respectively. This proves the stated bound; on compact parameter
+sets one can take $M$ uniformly large. At $z=0$ the series limits apply.
+\end{proof}
+The free-flux identity $\sum_m\e^{\ii m\phi}I_{|m|}(z)=\e^{z\cos\phi}$
+reduces \eqref{eq:heat} to the ordinary free plane Gaussian.
+
+\begin{theorem}[Global heat and scattering determinant obstructions]
+For any flux and $t>0$, $\e^{-tH_\beta}$ is noncompact and has infinite
+positive extended trace. For $0<\beta<1$, $S-I$ is noncompact, so the ordinary
+trace-class Fredholm determinant $\det(I+(S-I))$ is unavailable. In addition,
+\begin{equation}
+\prod_{m=-M}^{M}S_m=\e^{-\ii\pi\beta},\qquad
+\prod_{m=-M}^{M+1}S_m=1\quad(M\ge0).
+\label{eq:cutoff}
+\end{equation}
+\end{theorem}
+\begin{proof}
+In a single Hankel channel, the heat semigroup is multiplication by
+$\e^{-tk^2}$. On any fixed positive finite interval of $k$ this function is
+bounded below. Normalized indicators of disjoint positive-measure subsets
+form an orthonormal sequence whose images have disjoint supports and norms
+bounded below, excluding compactness. A positive trace-class operator is
+compact, so the positive extended trace is infinite.
+
+For the scattering operator, the angular orthonormal vectors satisfy
+$\|(S-I)e_m\|=2\sin(\pi\beta/2)>0$ for every $m$; their images remain
+orthogonal. The same compactness criterion applies. In the first window of
+\eqref{eq:cutoff}, there are $M$ positive and $M+1$ nonpositive indices; the
+second has $M+1$ of each. The two products follow. Both windows exhaust all
+integers, so symmetric-cutoff stability by itself does not supply an
+exhaustion-independent determinant.
+\end{proof}
+This result addresses ordinary determinants and traces. A separately specified
+relative or renormalized object would require its own definition and theorem.
+
+\section{Gauge covariance and the precise time-reversal question}
+For integer $n$, let $U_nf=\e^{\ii n\theta}f$ and let $K$ denote
+position-space conjugation. Directly on the form core and then by closure,
+\begin{equation}
+H_{\beta+n}=U_nH_\beta U_n^{-1},\qquad KH_\beta K=H_{-\beta}.
+\label{eq:gauge}
+\end{equation}
+Noninteger $U_n$ would not preserve single-valuedness on this Hilbert space.
+
+\begin{theorem}[Position-preserving physical time reversal]
+Restrict physical time reversal to $T_n=U_nK$, with no spatial reflection:
+it fixes position and reverses mechanical momentum when it is a symmetry.
+It preserves $H_\beta$ exactly when $n=2\beta\in\mathbb Z$.
+In the fundamental interval, these fluxes are $0$ and $1/2$, and $T_n^2=I$.
+\end{theorem}
+\begin{proof}
+Equation \eqref{eq:gauge} gives $T_nH_\beta T_n^{-1}=H_{n-\beta}$.
+Equality of the coefficients of $-\ii\partial_\theta$ in the radial
+differential expressions forces $n-\beta=\beta$. Conversely that equality
+gives form and domain invariance. Since $KU_nK=U_{-n}$, the square is one.
+Under $n=2\beta$, the mechanical angular momentum is also reversed:
+$T_n(-\ii\partial_\theta-\beta)T_n^{-1}
+=-(-\ii\partial_\theta-\beta)$.
+\end{proof}
+The reflection $Rf(r,\theta)=f(r,-\theta)$ sends $H_\beta$ to $H_{-\beta}$,
+so $RK$ is a commuting antiunitary for every flux. It moves spatial points;
+its existence does not establish the position-preserving physical symmetry
+just classified. Abstract spectral antiunitaries cannot replace that test.
+
+\section{Evidence, provenance, and the Route-A endpoint}
+The frozen receipt contains 520 exact channel rows, 680 integer-gauge rows,
+eight physical-symmetry rows, and 520 cutoff rows. Six high-precision Weber
+kernels are reconstructed independently by integration of the ordinary-Bessel
+spectral formula. Twelve away-forward cross sections are reconstructed from
+the complex amplitude. These finite checks are numerical regression where
+decimals occur; they are not interval certification or proofs of completeness.
+The separate proof document records the analytic dependencies.
+
+The package's substantive increment is the connected audit of the Friedrichs
+domain, all channel phases, full distribution, local heat tail, global
+noncompactness, cutoff failure, and physical symmetry. Classical AB formulas
+remain attributed to their original literature. The nearest local magnetic
+owners concern compact magnetic tori, monopole spheres, and Grushin cylinders;
+none is this noncompact punctured-plane Friedrichs scattering problem.
+
+Off the puncture the classical magnetic field vanishes. Mechanical momentum
+is therefore constant along every nonsingular trajectory of positive energy,
+which is a straight line and has no periodic return. A trajectory hitting the
+puncture is incomplete here; zero-energy stationary continua are not isolated
+primitive cycles. Angular integers and winding phases supply no rational-prime
+carrier. Free flux, neighboring fluxes, and angular-label controls preserve
+this failure. The strict tuple is
+\begin{equation}
+(A0_{\rm fail},A1_{\rm fail},A2_{\rm fail},A3_{\rm fail},
+A4_{\rm unitary/scattering}),\qquad \text{Route A rejected}.
+\label{eq:route}
+\end{equation}
+The scope is \texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}. No target arithmetic
+local data, target Euler factors, root number, automorphy, target divisor or
+counting law, target functional equation, target-zero match,
+Hilbert--P\'olya operator, or Route B is claimed. The natural source scattering
+Hamiltonian earns A4 alone and does not repair the failed earlier gates.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{AB} Y. Aharonov and D. Bohm, ``Significance of Electromagnetic
+Potentials in the Quantum Theory,'' \emph{Physical Review} 115 (1959),
+485--491, \href{https://doi.org/10.1103/PhysRev.115.485}{doi:10.1103/PhysRev.115.485}.
+\bibitem{PR} K. Pankrashkin and S. Richard, ``Spectral and scattering theory
+for the Aharonov--Bohm operators,'' preprint (2009),
+\href{https://arxiv.org/abs/0911.4715}{arXiv:0911.4715}.
+\bibitem{DLMF} NIST Digital Library of Mathematical Functions,
+\href{https://dlmf.nist.gov/10.17}{Section 10.17} and
+\href{https://dlmf.nist.gov/10.22}{Section 10.22},
+Hankel transforms and Weber's exponential integral, accessed 5 September 2026.
+\end{thebibliography}
+\bigskip
+\begin{center}\small\sffamily
+\ifcase\CRevisionRound
+round zero domain and complete Hankel spectrum
+\or
+round one complete scattering and forward distribution
+\else
+round two heat kernel, symmetry, and determinant obstruction
+\fi
+\end{center}
+\end{document}
