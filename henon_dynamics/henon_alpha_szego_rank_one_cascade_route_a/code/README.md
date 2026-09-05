@@ -1,0 +1,2 @@
+# Executable architecture
+Producer: Fraction-pair complex arithmetic. Checker: no producer import; SymPy with factored energy and differentiated p equation. Symbolic/numerical lane: algebra, independent complex ODE and geometric Fourier tails. Replay: two isolated trees. Mutation: repaired payload hashes and actual release-write YAML attacks. Release: YAML first, all lanes, double builds and complete ledger.

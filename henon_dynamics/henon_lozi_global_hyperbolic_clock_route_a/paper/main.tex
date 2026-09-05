@@ -1,0 +1,341 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setmonofont{Latin Modern Mono}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Pagella Math}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\title{Complete Bounded Lozi Dynamics:\\
+\ifcase\CRevisionRound
+A Global Symbolic Coding Theorem
+\or
+Variable Stability and the Primitive Orbit Atlas
+\else
+Hyperbolic Coding and an Instability-Clock Obstruction
+\fi}
+\author{HCS-C385 theorem and reproducibility package}
+\date{5 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the area-preserving Lozi family
+$F_a(x,y)=(1-a|x|-y,x)$ with $a>4$, we reconstruct the entire set of
+bounded two-sided orbits by a uniform contraction on sequence space.
+Every binary sequence occurs once, and the whole bounded set stays a
+positive distance from the nonsmooth switching line. This resolves
+global completeness, not merely a finite periodic prefix.
+\ifnum\CRevisionRound>0
+Projective cone contraction gives the invariant stable and unstable lines.
+Every period, primitive cycle, signed reciprocal multiplier and reversal
+then follows with an exact affine-return formula.
+\fi
+\ifnum\CRevisionRound>1
+We distinguish the elementary unweighted zeta from a stability-weighted
+holomorphic germ with a controlled tail. The derivative also defines a
+separate positive instability roof. At integral parameters its periodic
+lengths cannot, after any positive rational rescaling, equal the logarithm
+of an integer greater than one. Exact rational and independent symbolic
+checks audit the normalization. These results establish source dynamics
+and an arithmetic obstruction, not a target spectral identity.
+\fi
+\end{abstract}
+\noindent\textbf{Keywords:} Lozi map; bounded orbit; symbolic coding;
+uniform hyperbolicity; primitive cycle; instability clock.
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}{\large 中文摘要}\end{center}
+\begin{sloppypar}
+本文对参数大于四的保面积 \foreignlanguage{english}{Lozi} 映射，利用双向序列空间上的一致压缩，
+重建全部有界轨道，并证明每个二进制符号序列恰好对应一个状态。
+有界不变集与不可微切换线具有严格正间隔，因而全局完备性不依赖有限周期外推。
+\ifnum\CRevisionRound>0
+进一步从射影锥压缩构造稳定与不稳定方向，得到所有周期、本原轨道、
+带符号互逆乘子和时间反演的精确分类。
+\fi
+\ifnum\CRevisionRound>1
+无权重 $\zeta$ 与稳定性加权解析芽分别定义。由导数产生的另一种不稳定性时钟，
+在整参数下不可能经正有理数缩放后精确等于大于一的整数的对数。
+这是一项源系统定理及算术限制，不构成目标零点或算子对应。
+\fi
+\end{sloppypar}
+\noindent 关键词：\foreignlanguage{english}{Lozi}映射；有界轨道；符号编码；一致双曲性；本原周期；不稳定性时钟。
+\end{otherlanguage}
+
+\section{A global question beyond finite word enumeration}
+Finite sign words can be solved exactly without showing that every infinite
+itinerary exists or that every bounded geometric orbit has been found.
+For a nonsmooth map, a coding must also resolve derivatives at its branch
+boundary. We close these questions in one explicit sufficient
+chamber of the globally defined map
+\begin{equation}\label{map}
+ F_a(x,y)=(1-a|x|-y,x),\qquad a>4.
+\end{equation}
+Its inverse is $(x,y)\mapsto(y,1-a|y|-x)$. Let $K_a$ be the set of points
+whose full two-sided orbit is bounded. The source clock is one application
+of \eqref{map}. We do not identify that clock with any later suspension.
+
+Lozi symbolic dynamics and kneading methods have established owners
+\cite{misiurewicz,zheng}. Our contribution is a directly proved, normalized
+chamber theorem with independent exact evidence; no priority for the
+horseshoe mechanism or cone method is claimed. Earlier project C116
+certified a pruned finite prefix at $(a,b)=(2,1/2)$ of
+$(1-a|x|+by,x)$. It did not prove the present statement.
+The constant-diagonal affine horseshoe in C127 also does not provide the
+word-dependent derivative matrices below.
+
+\section{All bounded two-sided orbits}
+Put $\Sigma=\{-1,+1\}^{\Z}$, with the left shift $\sigma$, and define
+\[
+ R=\frac1{a-2},\qquad q=\frac2a,\qquad
+ \delta=\frac{a-4}{a(a-2)}>0.
+\]
+For $s\in\Sigma$ let
+\[
+ (\mathcal T_s x)_j=\frac{s_j}{a}(1-x_{j-1}-x_{j+1})
+ \quad\text{on }\ell^\infty(\Z).
+\]
+\begin{theorem}\label{coding}
+There is a homeomorphism $\pi_a:\Sigma\to K_a$ satisfying
+$F_a\pi_a=\pi_a\sigma$. Every coordinate in the coded orbit obeys
+$\delta\le s_jx_j\le R$. These are all bounded two-sided orbits in the plane.
+\end{theorem}
+\begin{proof}
+The operator $\mathcal T_s$ contracts by $q<1$ and preserves the closed
+radius-$R$ ball because $(1+2R)/a=R$. Its unique fixed sequence satisfies
+\[
+ s_jx_j=\frac{1-x_{j-1}-x_{j+1}}a\ge\frac{1-2R}a=\delta.
+\]
+Hence its signs are exactly $s_j$ and it solves
+$x_{j+1}=1-a|x_j|-x_{j-1}$. Conversely, a bounded orbit with
+$M=\sup_j|x_j|$ satisfies $aM\le1+2M$, so $M\le R$.
+The same sign bound applies, and contraction uniqueness recovers that
+orbit from its sign sequence.
+
+Set $\pi_a(s)=(x_0,x_{-1})$. Starting the contraction at zero, the $N$th
+approximation to either coordinate depends only on a finite symbol window
+and has error at most $Rq^N$. This proves continuity in the product topology.
+A state determines the full orbit under the continuous inverse of $F_a$,
+so distinct sign sequences cannot map to the same state. Exhaustion gives
+surjectivity. A continuous bijection from compact $\Sigma$ to its Hausdorff
+image is a homeomorphism; the recurrence proves shift equivariance.
+\end{proof}
+The coding is also uniform in parameters: comparing the fixed-point
+equations for $a,b>4$ yields
+\begin{equation}\label{parameter}
+ \|x_a(s)-x_b(s)\|_\infty
+ \le \frac{|a-b|}{(a-2)(b-2)}.
+\end{equation}
+Indeed, after moving the $2/a$ difference term to the left, the remaining
+bound is $|a^{-1}-b^{-1}|(1+2/(b-2))$.
+The chamber boundary is deliberately not called sharp: at $a=4$ this
+argument has zero sign margin and supplies no conclusion.
+
+\ifnum\CRevisionRound>0
+\section{Variable-matrix hyperbolicity and complete primitive data}
+Define $r=(a-\sqrt{a^2-4})/2$, so $a-r=r^{-1}$ and $0<r<1$.
+On the smooth sign branch $s$, the derivative is
+\[
+ A_s=\begin{pmatrix}-as&-1\\1&0\end{pmatrix},\qquad \det A_s=1.
+\]
+\begin{theorem}\label{hyperbolic}
+The set $K_a$ is uniformly hyperbolic. The derivative has continuous
+transverse invariant lines, with stable forward contraction and unstable
+backward contraction bounded by $r^n$ in the max norm.
+For every $n\ge1$, the whole plane has exactly $2^n$ points fixed by $F_a^n$.
+\end{theorem}
+\begin{proof}
+For $|v|\le r|u|$, the derivative gives
+$|u'|\ge(a-r)|u|=r^{-1}|u|$ and $|v'|\le r|u'|$.
+The slope map $t=v/u\mapsto(-as-t)^{-1}$ preserves $[-r,r]$ and
+contracts by at most $r^2$. Composing from the infinite past gives a
+uniformly convergent continuous unstable slope. The inverse matrices
+preserve the cone $|u|\le r|v|$; composing their slope maps from the infinite
+future gives the stable line with inverse-time expansion at least $r^{-1}$.
+The two cones meet only at zero. In each cone its dominant coordinate
+equals the max norm, giving the stated estimates with constant one.
+Theorem~\ref{coding} keeps $K_a$ away from $x=0$, so these are actual
+derivatives, not derivatives assigned to singular points.
+The conjugacy gives $2^n$ periodic states. Every periodic orbit is bounded,
+so none has been missed outside $K_a$.
+\end{proof}
+
+For a based word $w=s_0\ldots s_{n-1}$, compose in forward time:
+\[
+ M_w=A_{s_{n-1}}\cdots A_{s_0},\qquad
+ c_w=\sum_{j=0}^{n-1}A_{s_{n-1}}\cdots A_{s_{j+1}}\binom10.
+\]
+Empty products are identities. Hyperbolicity makes $I-M_w$ invertible,
+and the unique based state is $(I-M_w)^{-1}c_w$.
+Its least period is exactly the least repetition period of $w$.
+Therefore the number of oriented primitive cycles is
+\[
+ P_n=\frac1n\sum_{d\mid n}\mu(d)2^{n/d}.
+\]
+Let $\tau_w=\tr M_w$. The two real multipliers are reciprocal, with
+\begin{equation}\label{multiplier}
+ |\lambda_u(w)|\ge r^{-n},\qquad
+ \operatorname{sign}\lambda_u(w)=(-1)^n\prod_j s_j,\qquad
+ \lambda_s(w)=\lambda_u(w)^{-1}.
+\end{equation}
+The sign follows from the sign of each dominant-coordinate factor
+$-as_j-t_j$. Repeating $w$ raises $M_w$ and its multipliers to powers.
+In particular the repeated traces satisfy
+$\tau_{k+1}=\tau_w\tau_k-\tau_{k-1}$, $\tau_0=2$, $\tau_1=\tau_w$.
+
+The involution $J(x,y)=(y,x)$ obeys $JF_aJ=F_a^{-1}$.
+It reverses primitive words up to rotation and conjugates a return matrix
+to its inverse. We retain both orientations rather than dividing the
+primitive count by reversal. Branchwise determinant one and the global
+piecewise-affine bijection also give area preservation.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Separate source generating objects}
+The unweighted Artin--Mazur zeta is
+\begin{equation}\label{zeta}
+ Z_a(z)=\exp\left(\sum_{n\ge1}\frac{2^n z^n}{n}\right)
+       =\frac1{1-2z}.
+\end{equation}
+Its ordinary primitive product converges for $|z|<1/2$; the rational
+expression supplies its meromorphic continuation. It discards stability.
+
+To retain the actual stability denominators, define instead
+\[
+ b_n=\sum_{x\in\Fix(F_a^n)}
+      \frac1{|\det(I-DF_a^n(x))|},\qquad
+ d_a(z)=\exp\left(-\sum_{n\ge1}\frac{b_nz^n}{n}\right).
+\]
+These definitions do not assert a trace-class operator realization.
+If $L=|\lambda_u|\ge r^{-n}$, both possible signs of the multiplier satisfy
+\[
+ |\det(I-M_w)|\ge L(1-L^{-1})^2,\qquad
+ 0<b_n\le\frac{(2r)^n}{(1-r^n)^2}.
+\]
+Thus $d_a$ is holomorphic and nonzero for $2r|z|<1$. For its logarithm,
+the omitted terms after order $N$ have absolute value at most
+\begin{equation}\label{tail}
+ \frac{(2r|z|)^{N+1}}{(N+1)(1-r)^2(1-2r|z|)}.
+\end{equation}
+Absolute convergence permits primitive-orbit regrouping, but repetition
+$k$ uses $|\det(I-M_\gamma^k)|^{-1}$, not an arbitrary scalar weight
+raised to the $k$th power. No continuation outside this disk is claimed.
+
+\section{An instability roof with no exact rationally scaled integer clock}
+Let $t_0^u(s)$ be the unstable slope. The positive continuous roof
+\[
+ \ell(s)=\log|-as_0-t_0^u(s)|\ge\log r^{-1}
+\]
+is derived from the source derivative. Its periodic sum is
+$\log|\lambda_u(w)|$, by multiplying the dominant-coordinate factors.
+It defines a new suspension, not the one-step time used in \eqref{zeta}.
+
+\begin{theorem}\label{unit}
+For integral $a\ge5$, every positive rational $c$ and every periodic word
+$w$ satisfy
+\[
+ c\log|\lambda_u(w)|\ne\log m\qquad(m\in\Z,\ m>1).
+\]
+\end{theorem}
+\begin{proof}
+The matrix $M_w$ belongs to $SL_2(\Z)$ and has $|\tau_w|>2$.
+For $T=|\tau_w|\ge3$, the integer $T^2-4$ lies strictly between
+$(T-1)^2$ and $T^2$, hence is nonsquare. The multiplier is a quadratic
+algebraic integer unit with nontrivial conjugate its reciprocal.
+If $|\lambda_u|^h$ were rational for $h\ge1$, conjugation would equate it
+to $|\lambda_u|^{-h}$, contrary to expansion. Writing $c=h/j$,
+the displayed equality would give $|\lambda_u|^h=m^j$, a contradiction.
+\end{proof}
+The result excludes primes and composites equally. It does not rule out
+approximate matching, irrational clock rescaling or a different roof.
+The nonintegral rational parameters in the numerical audit are not included
+in this unit theorem.
+
+\section{Independent evidence and integrity boundaries}
+The frozen rational grid is $a\in\{9/2,5,6\}$ with every word of length
+one through seven. The producer solves a two-dimensional affine return.
+A separate checker solves the full cyclic coordinate system by rational
+Gaussian elimination and independently evolves two tangent vectors.
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Audit population & Count\\\midrule
+Exact based returns & 762\\
+Primitive rows across parameters & 123\\
+Parameter--period summaries & 21\\
+Symbolic identities & 19\\
+Multiplier cells at 80 digits & 762\\
+Repaired-hash / serialization attacks & 26 / 10\\
+\bottomrule
+\end{tabular}
+\end{center}
+The multiplier normalization has maximum relative defect about
+$2.045\times10^{-81}$ in the executed high-precision audit.
+All 36 hostile inputs were rejected. These finite computations audit
+formulas; the unbounded quantifiers come from the proofs.
+Byte replay, smoke tests and deterministic PDF builds are included in the
+release procedure. An internal author-swapped review checked the proof;
+it is not human or external cross-model peer review.
+Final review reproduced a boolean--integer coercion gap in the standalone
+checker. Explicit type checks and two repaired-hash regression attacks
+closed it; the mathematical evidence did not change.
+
+The strict Route-A tuple, in A0--A4 order, is
+\[
+(\mathrm{FAIL},\mathrm{WEAK},\mathrm{FAIL},\mathrm{FAIL},\mathrm{FORMAL\_HINT}).
+\]
+Complete source orbits do not supply the missing arithmetic
+carrier or target divisor. The elementary source zeta is unchanged across
+parameters while the geometric multipliers vary, a direct control against
+mistaking symbolic counts for arithmetic validation.
+\begin{samepage}
+\paragraph{Scope.}
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+No target Euler factors, root numbers, automorphy, target divisor or
+functional equation, target-zero match or Hilbert--Pólya operator is claimed.
+Route B remains disabled.
+\end{samepage}
+\fi
+
+\section{Conclusion}
+The contraction theorem exhausts the global bounded set and resolves the
+switching-line issue in an explicit sufficient chamber.
+\ifnum\CRevisionRound>0
+Variable signed stability, primitive repetition and reversal are then
+controlled for every period, rather than guessed from a prefix.
+\fi
+\ifnum\CRevisionRound>1
+The associated instability clock has an exact integral-unit limitation.
+Source generating functions with different weights or clocks remain
+separate; further arithmetic progress requires a new mechanism.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{misiurewicz}
+M. Misiurewicz and S. Štimac,
+\emph{Symbolic dynamics for Lozi maps},
+arXiv:1601.01745 (2016).
+\href{https://arxiv.org/abs/1601.01745}{Primary preprint}.
+\bibitem{zheng}
+W.-M. Zheng and J.-x. Liu,
+Symbolic analysis of attractor geometry for the Lozi map,
+\emph{Physical Review E} \textbf{50}, 3241 (1994).
+\href{https://doi.org/10.1103/PhysRevE.50.3241}{doi:10.1103/PhysRevE.50.3241}.
+\end{thebibliography}
+\noindent\small
+\ifcase\CRevisionRound Round zero: complete bounded coding.
+\or Round one: hyperbolicity and primitive atlas.
+\else Round two: source germs, arithmetic obstruction and audit.\fi
+\end{document}
