@@ -3,6 +3,30 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C394--HCS-C398 source-theorem register (2026-09-05)
+
+Frozen baseline `697518b6db90458f86f7916fbf397b8ad5ef2372`;
+evaluator v0.2.0 and SHA256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+Source completion and candidate-local target grades remain distinct.
+
+| Candidate | Complete source increment | Strict tuple | Artifact |
+|---|---|---|---|
+| HCS-C394 | Nonlinear p-adic symplectic double shear has a joint analytic time action, exact scaled-isometric orbit closures, every finite-modulus period/fixed count, unique genuine periodic point and algebraic finite/all hitting alternative. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_padic_symplectic_analytic_interpolation_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_padic_symplectic_analytic_interpolation_route_a/paper/main.pdf) |
+| HCS-C395 | Every BCZ periodic layer is one Farey-denominator cycle, with exact totient period, scale-squared physical roof and parabolic cocycle. Irrational slopes never repeat; floor walls, all fixed continua and the sharp roof moment threshold are included. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_bcz_horocycle_farey_cycles_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_bcz_horocycle_farey_cycles_route_a/paper/main.pdf) |
+| HCS-C396 | Full impedance string is unitarily unfolded at the original physical time. Every nontransparent spectrum/Riesz basis and exact semigroup norm are obtained; transparency has empty generator spectrum, exact finite extinction, full pseudospectrum and Hilbert–Schmidt but nontrace-class resolvent. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_impedance_string_empty_spectrum_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_impedance_string_empty_spectrum_route_a/paper/main.pdf) |
+| HCS-C397 | Complete quartic Salem fixed groups and rational zeta coexist with primitive/cumulative arcsine fluctuations and a trivial homoclinic group. Integral symplectic reversal and the cyclotomic continuous-fixed-set boundary close the full source family. | `(A0_WEAK_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [proof](../henon_salem_toral_orbit_fluctuation_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_salem_toral_orbit_fluctuation_route_a/paper/main.pdf) |
+| HCS-C398 | The Dirichlet exponential wall has a complete Bessel-order spectrum, ordinary Fredholm determinant, bounded Weyl residual, logarithmic heat law and sharp Schatten threshold. All fixed positive frequency scalings and energy shifts still fail exact Riemann-zero counting by the explicitly imported unconditional S(T) oscillation theorem. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_NATURAL_QUANTIZATION)` | [proof](../henon_exponential_wall_bessel_determinant_route_a/proof/ANALYTIC_PROOF.md) · [PDF](../henon_exponential_wall_bessel_determinant_route_a/paper/main.pdf) |
+
+C394 is conservatively exploratory as a native local-arithmetic nonlinear
+mechanism, not a primary HP candidate. The other four are target-rejected.
+No automatic tuple-to-overall rule is invented. Every target A2/A3 fails;
+C398 proves a specific nonmatching theorem, not a successful count identity.
+Classical Poonen, BCZ/Athreya–Cheung, Driscoll–Trefethen, quasihyperbolic
+toral, Pólya/Lagarias and Selberg/Tsang/Dobner ownership remains explicit.
+All target flags are false under `NO_BAD_EULER_OR_ROOT_NUMBER`.
+Release status and exact receipts are in [the batch review](../BATCH_REVIEW_C394_C398.md).
+
 ## HCS-C389--HCS-C393 source-theorem register (2026-09-05)
 
 Frozen baseline: `0c877206d202f732e21ea0b194f9c7fdf30467ee`.
