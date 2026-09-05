@@ -5,6 +5,10 @@ arithmetic, and operator-theoretic structures related to the Hilbert–Pólya
 programme.  Candidate generation is deliberately adventurous; promotion of
 a candidate is deliberately conservative.
 
+Agent entry: [repository guidance](AGENTS.md). The current C-series workflow is
+the repo-local [Hénon Route-A batch skill](.agents/skills/henon-route-a-batch/SKILL.md);
+other streams retain their own contracts and recovery indexes.
+
 ## Research streams
 
 | Stream | Scope | Entry point |
