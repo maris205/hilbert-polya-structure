@@ -1,0 +1,371 @@
+\pdfvariable suppressoptionalinfo 512
+\pdfvariable trailerid {[<\CRevisionID><\CRevisionID>]}
+\documentclass[10pt]{article}
+\usepackage[margin=0.78in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xurl}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\newfontfamily\zhfont[BoldFont={Droid Sans Fallback}]{Droid Sans Fallback}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\C}{\mathbf C}
+\title{Primary Gaussian Phases and All-Degree Frobenius Dynamics\protect\\
+for the Elliptic Curve $y^2=x^3-x$}
+\author{HCS-C382 / HEN-O366}
+\date{5 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the reductions of $y^2=x^3-x$ at every odd prime, we give a
+sign-complete derivation of the Frobenius eigenvalues. At split primes, the
+centralizer of an intrinsic order-four automorphism places Frobenius in
+the Gaussian order, and an explicit rational point of order four fixes
+the primary Gaussian unit. At inert primes a character involution gives
+trace zero. The resulting unordered eigenvalue pair is determined without
+a fitted phase or a point-count sign convention.
+\ifnum\CRevisionRound>0
+We then prove irrational normalized phase in the ordinary chamber,
+exact phase order four in the supersingular chamber, and classify every
+extension degree attaining a Hasse endpoint. All extension-field counts
+and primitive closed-point counts follow, with a complete repetition
+dictionary.
+\fi
+\ifnum\CRevisionRound>1
+Finally we close the native graded cohomological determinant, functional
+equation and critical circle, and certify 4,008 prime--degree cells through
+independent exact implementations. A linear zero-count law obstructs a
+fixed-fibre Riemann-target divisor. The native results retain their
+source-specific meaning: strict target evaluation records weak A1 and
+failed A2/A3 gates. This is a rigorous classical-theorem synthesis with
+reproducible evidence, without a claim of literature priority.
+\fi
+\end{abstract}
+\noindent\textbf{Keywords:} complex multiplication; Frobenius dynamics;
+Gaussian integers; elliptic curves; primary normalization;
+\ifnum\CRevisionRound>0 closed points\else rational torsion\fi
+
+\begin{center}{\zhfont\large 中文摘要}\end{center}
+{\zhfont\begin{flushleft}
+本文统一处理曲线 $y^2=x^3-x$ 在所有奇素数处的约化。分裂情形中，\\
+四阶自同态的中心化子迫使弗罗贝尼乌斯位于高斯整数环；显式有理\\
+四阶点使群阶被八整除，从而唯一确定主高斯整数的实部符号。惯性\\
+情形通过二次特征的反号对合证明迹为零，整个相位约定无需拟合。
+\ifnum\CRevisionRound>0
+普通约化的归一化相位与圆周无理旋转对应，超奇异约化的相位恰有\\
+四阶。由此分类全部扩域次数的哈塞端点，并用轨道分解与莫比乌斯\\
+反演给出每个次数的闭点计数，明确区分本原轨道与重复。
+\fi
+\ifnum\CRevisionRound>1
+完整上同调行列式同时保留零次、一次与二次因子，给出本系统的\\
+函数方程和临界圆。独立精确程序核验四千零八个素数与次数单元。\\
+固定特征的零点计数仅线性增长，不能提供黎曼目标的除子对应。\\
+因此路线评估仍保留弱{\normalfont A1}及失败的{\normalfont A2/A3}；论文贡献是完整\\
+的经典定理综合与可复算证据，不主张文献首创或目标算子实现。
+\fi
+\textbf{关键词：}复乘；弗罗贝尼乌斯动力学；高斯整数；椭圆曲线；\\
+主元归一化；\ifnum\CRevisionRound>0 闭点计数\else 有理挠点\fi
+\end{flushleft}}
+
+\section{Frozen object, ownership, and the first advance}
+\textbf{Round 0 advance:} an all-odd-prime trace formula with a proved
+Gaussian-unit convention. Let $p$ be an odd prime, let $E_p$ denote the
+smooth projective curve $y^2=x^3-x$ over $\F_p$, and let
+\[
+ F:E_p(\overline{\F}_p)\longrightarrow E_p(\overline{\F}_p),
+ \qquad F(x,y)=(x^p,y^p).
+\]
+This formula fixes the Frobenius convention; its cohomological pullback
+has eigenvalue $p$ on degree two. We put
+$N_{p,n}=\#E_p(\F_{p^n})$ and $t_p=p+1-N_{p,1}$.
+The prime $2$ is excluded: the integral model has discriminant $64$.
+The parameter $p$ indexes reductions of one curve and is not an
+autonomous real-time coordinate.
+
+The general closed-point/zeta dictionary was already owned locally by
+flow papers 4 and 6 for a projective-line Frobenius suspension. The
+earlier C41 cubic-CM package considered $y^2=x^3+1$, an inert-prime trace
+law and finite extension checks. The present owner is the quartic-CM
+all-prime primary phase, its ordinary/supersingular distinction, and its
+complete degree consequences. These results specialize classical
+elliptic-curve theory; they are not presented as newly discovered CM
+theorems. We use the endomorphism and finite-field results in
+Milne~\cite{Milne}, with every special sign step proved below.
+
+\begin{theorem}[Sign-complete CM trace]
+If $p\equiv3\pmod4$, then $t_p=0$. If $p\equiv1\pmod4$, there are
+unique integers $a,b$ satisfying
+\[
+ b>0,\qquad a\text{ odd},\qquad b\text{ even},\qquad
+ a^2+b^2=p,\qquad a+b\equiv1\pmod4,
+\]
+and $t_p=2a$. The unordered Frobenius eigenvalues are $a\pm bi$ in the
+split case and $\pm i\sqrt p$ in the inert case.
+\end{theorem}
+\begin{proof}
+Let $\chi$ be the quadratic character extended by $\chi(0)=0$. Counting
+the two square roots of a nonzero square gives
+\[
+ N_{p,1}=p+1+\sum_{x\in\F_p}\chi(x^3-x).
+\]
+When $p\equiv3\pmod4$, replacing $x$ by $-x$ negates the sum, so it
+vanishes as an integer. This includes the good prime $p=3$.
+
+For $p\equiv1\pmod4$, choose $j\in\F_p$ with $j^2=-1$. The
+endomorphism $I(x,y)=(-x,jy)$ satisfies $I^2=[-1]$ and commutes with
+$F$. By the elliptic endomorphism classification, the endomorphism
+algebra containing $\Q(I)$ is either that quadratic field or a quaternion
+algebra. In either case the centralizer of $I$ is $\Q(I)$: in the latter
+case write the algebra as $\Q(i)\oplus\Q(i)v$ with $vi=-iv$ and compare
+the two coefficients. Thus $F$ lies in $\Q(i)$. Its integrality places
+it in the maximal order $\Z[i]$, so $F=a+bi$, and degree and trace give
+$a^2+b^2=p$ and $t_p=2a$.
+
+All three nonzero $2$-torsion points are rational. Therefore $F-[1]$
+kills $E[2]$ and factors through the separable isogeny $[2]$. The
+endomorphism $(F-[1])/2$ is again an integral element of $\Q(i)$.
+It follows that $a$ is odd and $b$ even.
+
+Now $Q=(j,j-1)$ lies on the curve because $(j-1)^2=-2j=j^3-j$.
+The tangent slope is
+\[
+ m=\frac{3j^2-1}{2(j-1)}=j+1,
+ \qquad x(2Q)=m^2-2j=0,
+ \qquad y(2Q)=mj-(j-1)=0.
+\]
+Hence $2Q=(0,0)$, and $Q$ has order four. The independent point
+$(1,0)$ of order two gives an eight-element subgroup, so
+$8\mid p+1-2a$. If $b\equiv0\pmod4$ then $p\equiv1\pmod8$ and
+$a\equiv1\pmod4$; if $b\equiv2\pmod4$ then $p\equiv5\pmod8$ and
+$a\equiv3\pmod4$. These are precisely $a+b\equiv1\pmod4$.
+Unique factorization in $\Z[i]$ fixes $|a|,|b|$ and this congruence
+fixes the sign of $a$. Taking $b>0$ chooses the upper display root.
+It does not select one literal prime ideal: both conjugates satisfy
+the primary congruence modulo $(1+i)^3$.
+\end{proof}
+
+\begin{center}
+\begin{tabular}{rrrrl}
+\toprule
+$p$ & $a$ & $b$ & $t_p$ & chamber\\
+\midrule
+3 & --- & --- & 0 & supersingular\\
+5 & $-1$ & 2 & $-2$ & ordinary\\
+13 & 3 & 2 & 6 & ordinary\\
+17 & 1 & 4 & 2 & ordinary\\
+29 & $-5$ & 2 & $-10$ & ordinary\\
+\bottomrule
+\end{tabular}
+\end{center}
+The negative real part at $p=5$ is essential: choosing the positive
+representation $1+2i$ changes the curve trace. Complex conjugation,
+however, changes neither trace nor the unordered eigenvalue pair.
+
+\ifnum\CRevisionRound>0
+\section{Phase rigidity, extension counts, and primitive orbits}
+\textbf{Round 1 advance:} phase periodicity is classified, then all
+degrees of fixed and primitive points are determined. Let
+$\alpha_p$ be the eigenvalue with positive imaginary part and let
+$\theta_p\in(0,\pi)$ satisfy $\alpha_p/\sqrt p=e^{i\theta_p}$.
+
+\begin{theorem}[Phase and Hasse endpoints]
+For $p\equiv1\pmod4$ the curve is ordinary and $\theta_p/\pi$ is
+irrational. For $p\equiv3\pmod4$ it is supersingular and its normalized
+eigenvalues have exact order four. The Hasse bound over $\F_{p^n}$ is
+strict for every $n$ in the ordinary chamber; it is saturated exactly
+for even $n$ in the supersingular chamber. At $n=2m$ in that chamber,
+\[
+ N_{p,2m}=\bigl(p^m-(-1)^m\bigr)^2.
+\]
+\end{theorem}
+\begin{proof}
+The standard ordinary criterion is $p\nmid t_p$ for a curve over
+$\F_p$~\cite{Silverman}. In the split chamber, $0<|a|<\sqrt p$ gives
+$p\nmid2a$; in the inert chamber the trace is zero. If
+$\alpha_p/\sqrt p$ were a root of unity in the split chamber, its square
+$\alpha_p/\overline{\alpha_p}$ would be a root of unity in $\Q(i)$,
+hence $1,-1,i$, or $-i$. Those cases respectively force $b=0$, $a=0$,
+$a=b$, or $a=-b$, all incompatible with an odd prime norm and the parity
+just established. Thus the phase is irrational. The trace over degree
+$n$ is $2p^{n/2}\cos(n\theta_p)$, so equality at a Hasse endpoint
+would make $n\theta_p$ an integer multiple of $\pi$, which is
+impossible. In the inert chamber the eigenvalues are $\pm i\sqrt p$:
+the trace is zero for odd $n$ and $2(-p)^{n/2}$ for even $n$.
+Substitution yields the displayed square.
+\end{proof}
+
+\begin{theorem}[All-degree ledger]
+Put $S_{p,0}=2$, $S_{p,1}=t_p$, and
+$S_{p,n}=t_pS_{p,n-1}-pS_{p,n-2}$. For every integer $n\geq1$,
+\[
+ N_{p,n}=p^n+1-S_{p,n},\qquad
+ B_{p,n}=\frac1n\sum_{d\mid n}\mu(d)N_{p,n/d}\in\Z_{\geq0},
+\]
+where $B_{p,n}$ counts the primitive $F$-orbits of length $n$.
+\end{theorem}
+\begin{proof}
+The Frobenius trace theorem~\cite[IV, Theorem 9.10 and Remark 9.11]{Milne}
+gives $N_{p,n}=1+p^n-\alpha_p^n-\overline{\alpha_p}^n$.
+The quadratic characteristic polynomial gives the recurrence.
+Every geometric point has coordinates in a finite extension of
+$\F_p$, and hence lies on a finite Frobenius orbit. Such orbits are
+exactly the closed points. A length-$d$ orbit contributes $d$ fixed
+points to $F^n$ if and only if $d\mid n$, giving
+$N_{p,n}=\sum_{d\mid n}dB_{p,d}$. Möbius inversion proves the formula,
+and the orbit interpretation proves integrality and nonnegativity for
+every degree without a finite cutoff.
+\end{proof}
+
+The orbit convention uses forward $F$, primitive weight one and phase
+zero; $F^n$ records repetitions. The cohomological CM phase is not a
+complex weight attached to each closed point. The differential of the
+$p$-power morphism is zero, which must not be interpreted as the
+stability of a real differentiable flow. Completeness belongs to the
+closed-point theorem; numerical tests cannot replace it.
+Since $F^n-[1]$ has differential $-\mathrm{id}$, it is separable and its
+kernel is reduced. Thus every geometric fixed point has scheme
+multiplicity one, independently of the real-flow stability question.
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Native determinant, continuation, and divisor boundary}
+\textbf{Round 2 advance:} the complete graded determinant is proved and
+its source-target boundary is tested analytically and computationally.
+
+\begin{theorem}[Native graded determinant]
+As formal series and as analytic functions for $|u|<1/p$,
+\[
+ Z_p(u)=\exp\left(\sum_{n\geq1}\frac{N_{p,n}}n u^n\right)
+ =\prod_{d\geq1}(1-u^d)^{-B_{p,d}}
+ =\frac{1-t_pu+pu^2}{(1-u)(1-pu)}.
+\]
+It continues rationally, satisfies $Z_p(1/(pu))=Z_p(u)$, and has two
+distinct zeros on $|u|=p^{-1/2}$ and simple poles at $u=1,1/p$.
+For any $\ell\ne p$ the same expression is
+\[
+ \prod_{r=0}^2\det(1-uF^*\mid H^r_{\mathrm{et}}
+   (E_{\overline{\F}_p},\Q_\ell))^{(-1)^{r+1}}.
+\]
+\end{theorem}
+\begin{proof}
+Taking the formal logarithm of the primitive product yields
+$\sum_{n\geq1}(\sum_{d\mid n}dB_{p,d})u^n/n$, which is the fixed-point
+series. The Frobenius eigenvalue formula sums this logarithm to the
+stated rational function. The estimate
+$N_{p,n}\leq p^n+1+2p^{n/2}$ proves absolute convergence for $|u|<1/p$.
+The cohomological eigenvalues are $1$ on $H^0$, $\alpha_p$ and
+$\overline{\alpha_p}$ on $H^1$, and $p$ on $H^2$. Substitution proves
+the reciprocal identity. The norm of the conjugate eigenvalues is
+$\sqrt p$ and their imaginary parts are nonzero. Thus the two numerator
+zeros are distinct and cannot cancel either pole, whose moduli differ.
+\end{proof}
+
+\begin{proposition}[HEN-O366: fixed-fibre zero-count obstruction]
+Under $u=p^{-s}$ the source zeros have positive-height counting function
+$N_p(T)=(\log p/\pi)T+O(1)$. Therefore the fixed-fibre numerator cannot
+have the completed Riemann zeta divisor up to a zero-free entire factor.
+\end{proposition}
+\begin{proof}
+Each equation $p^{-s}=\alpha_p^{-1}$ or
+$p^{-s}=\overline{\alpha_p}^{-1}$ gives one vertical arithmetic
+progression with spacing $2\pi/\log p$, lying on $\operatorname{Re}s=1/2$.
+The two progressions are distinct, so their combined count is as stated.
+The Riemann--von Mangoldt law has leading growth
+$(T/(2\pi))\log(T/(2\pi))$~\cite{Brent}. A zero-free entire
+factor preserves the divisor and cannot reconcile these counting laws.
+This assertion concerns each frozen fibre, not an undefined cross-prime
+product or every possible arithmetic dynamical system.
+\end{proof}
+
+\section{Exact evidence and independent checks}
+The producer uses the primary Gaussian formula and an integer
+second-order recurrence. Its finite grid comprises all $167$ odd primes
+at most $1000$ and degrees $1$ through $24$, totaling $4,008$ cells.
+An independent checker imports no producer code. It counts residue
+squares directly, computes the split power traces by a binomial sum,
+checks each orbit decomposition, and multiplies the primitive product
+through degree $24$. Its coefficients are compared with the independent
+Riemann--Roch formula $N_{p,1}(p^n-1)/(p-1)$ for $n\geq1$.
+For all $13$ odd primes at most $43$, two distinct quadratic-field
+algorithms count $E(\F_{p^2})$. A symbolic lane checks the matrix
+determinant, reciprocal convention, torsion identities, and conjugate
+factorization. These are finite regression receipts supporting the
+implementations; the all-prime and all-degree claims are theorems.
+
+Three arithmetic controls are frozen. The quadratic twist
+$dy^2=x^3-x$ for a nonsquare $d$ has trace $-t_p$ by its character sum.
+The simpler parent $\mathbf P^1$ has counts $p^n+1$ and no $H^1$
+factor. Among odd composite labels below $100$, the five prime powers
+$9,25,27,49,81$ retain prime characteristic and repetition ownership;
+the twenty mixed composites cannot be field characteristics. The same
+native rationality and critical-circle reasoning has no automatic
+Riemann-target force for these controls. In particular the parent test
+shows that source rationality alone does not establish the desired
+target zeros.
+
+The hostile suite repairs payload hashes after changing mathematical
+values, conventions, route levels or scope flags; independent checking
+must still reject those files. Two fresh output directories give
+byte-identical evidence. Every manuscript round is built twice under a
+fixed epoch, with settled-log, embedded-font, text and raster checks.
+The complete receipts and command outputs accompany the paper.
+
+\section{Strict route evaluation and limits}
+The source arithmetic is intrinsic to one integral elliptic curve,
+giving \texttt{A0\_STRUCTURAL\_ARITHMETIC\_RELATION}. The native
+closed-point formula is complete. However, the six mandatory A1 orbit
+controls and a real-flow stability comparison are not supplied, so
+strict evaluator v0.2.0 records \texttt{A1\_WEAK}. The native determinant
+and functional equation do not match the Riemann target; the target
+gates are \texttt{A2\_FAIL} and \texttt{A3\_FAIL}. Normalized
+cohomological phases give only \texttt{A4\_FORMAL\_HINT}; no compatible
+Hilbert space and operator domain are constructed. The overall result
+is \texttt{ROUTE\_A\_EXPLORATORY}.
+
+The work proves no target Euler product, target local arithmetic,
+bad-prime factor, root number, automorphy, target functional equation,
+or target-zero match. It is not a Hilbert--P\'olya operator. Route B is
+not invoked. The scope literal is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+\fi
+
+\section{Conclusion}
+Rational four-torsion fixes the primary Gaussian sign uniformly at
+every split odd prime, while a character involution settles every inert
+prime. This proof identifies the exact source mechanism behind the
+phase convention.
+\ifnum\CRevisionRound>0
+The resulting distinction between irrational ordinary phase and
+order-four supersingular phase classifies all extension Hasse endpoints
+and closes every degree of the primitive closed-point ledger.
+\fi
+\ifnum\CRevisionRound>1
+The native graded determinant closes without dropping a cohomological
+factor. Its linear zero count also gives a precise obstruction to
+transferring the fixed-fibre divisor to the Riemann target.
+\fi
+
+\begin{thebibliography}{9}
+\bibitem{Milne} J. S. Milne, \emph{Elliptic Curves}, 2nd ed., World
+Scientific, 2020. II \S6 (endomorphisms), III Example 3.18 (quartic CM),
+IV \S9, Theorems 9.4 and 9.10, Remark 9.11 and Exercise 9.12
+(finite-field counts, zeta and functional equation).
+\url{https://www.jmilne.org/math/Books/EC2.pdf}.
+\ifnum\CRevisionRound>0
+\bibitem{Silverman} J. H. Silverman, \emph{The Arithmetic of Elliptic
+Curves}, 2nd ed., Springer, 2009, V \S3 (ordinary and supersingular
+reduction). \url{https://doi.org/10.1007/978-0-387-09494-6}.
+\fi
+\ifnum\CRevisionRound>1
+\bibitem{Brent} R. P. Brent, D. J. Platt and T. S. Trudgian,
+Accurate estimation of sums over zeros of the Riemann zeta-function,
+\emph{Mathematics of Computation} 90 (2021), 2923--2935,
+\S2, Equations (5)--(7).
+\url{https://doi.org/10.1090/mcom/3652}.
+\fi
+\end{thebibliography}
+\end{document}

@@ -1,5 +1,11 @@
 # Hilbert–Pólya dynamical structure exploration
 
+For the checked five-paper research checkpoint and model/context handoff, see
+[Current research state](CURRENT_RESEARCH_STATE.md). Check that snapshot
+together with the current batch plan and package release manifests when
+resuming; a source theorem or an in-progress build is not a batch completion
+receipt.
+
 This directory is the continuously updated Hénon-dynamics research track of
 the Hilbert–Pólya Structure Exploration project.  It starts from the original
 area-preserving Hénon manuscript, but treats every proposed bridge to
@@ -2718,6 +2724,52 @@ entries.  The strict tuples are, in order C239--C243,
 scope `NO_BAD_EULER_OR_ROOT_NUMBER`; no target arithmetic, divisor/counting
 law, Euler factor, root number, automorphy object, Hilbert--Pólya operator,
 or Route-B input is claimed.
+
+## Route-A independent cross-subtype round C379--C383
+
+This authorized round joins five different owners: reversible hyperbolic
+transport, nonlinear analytic circle dynamics, intermittent first-return
+dynamics, quartic-CM Frobenius dynamics and singular magnetic scattering.
+The index records source results and their target boundaries; whole-batch
+completion is determined by the batch review and each package release gate.
+
+- [C379 boundary-corrected multibaker transport](henon_multibaker_twisted_transport_zeta_route_a/README.md) · [paper PDF](henon_multibaker_twisted_transport_zeta_route_a/paper/main.pdf)
+- [C380 nonlinear Blaschke spectrum and Fredholm product](henon_finite_blaschke_ruelle_spectrum_route_a/README.md) · [paper PDF](henon_finite_blaschke_ruelle_spectrum_route_a/paper/main.pdf)
+- [C381 LSV intermittency and induced Fredholm dynamics](henon_lsv_intermittent_induced_fredholm_route_a/README.md) · [paper PDF](henon_lsv_intermittent_induced_fredholm_route_a/paper/main.pdf)
+- [C382 primary CM Frobenius phase and all-degree closed points](henon_cm_elliptic_frobenius_phase_zeta_route_a/README.md) · [paper PDF](henon_cm_elliptic_frobenius_phase_zeta_route_a/paper/main.pdf)
+- [C383 Friedrichs Aharonov--Bohm scattering](henon_aharonov_bohm_punctured_plane_scattering_route_a/README.md) · [paper PDF](henon_aharonov_bohm_punctured_plane_scattering_route_a/paper/main.pdf)
+
+C379 proves the exact correction for the two excluded corner codes and
+distinguishes finite transport weight from the full geometric flat trace.
+C380 proves the complete native annular operator spectrum, primitive
+stability product and singular parameter boundaries. C381 proves uniform
+inverse-quadratic derivative bounds for every induced branch on one complex
+disk, closing the two-clock trace-class determinant while retaining the
+neutral-point uninduced `L1` obstruction: every restricted power on the
+zero-integral subspace has norm exactly one. C382 proves the
+all-prime primary phase, ordinary/supersingular phase rigidity, all-degree
+closed points and complete native cohomological determinant; its linear
+fixed-fibre zero count obstructs a Riemann-target divisor. C383 retains the
+Friedrichs domain, full forward distribution and gauge/time-reversal
+classification while proving scattering and heat noncompactness.
+
+The strict tuples for C379 and C380 are
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`. C381 has
+`(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)`. C382 has
+`(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)`;
+C383 has
+`(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)`.
+Source determinants, finite-field functional equations and natural scattering supply no automatic
+target A2/A3 promotion. Route B is false throughout; the common scope is
+`NO_BAD_EULER_OR_ROOT_NUMBER`.
+
+See the [idea report](IDEA_REPORT_C379_C383.md),
+[batch plan](BATCH_PLAN_C379_C383.md),
+[batch review and release receipts](BATCH_REVIEW_C379_C383.md),
+[candidate registry](docs/candidate_registry.md) and
+[obstruction registry](docs/obstruction_registry.md) for the contracts,
+ownership distinctions and precise source-target boundaries. No aggregate
+release count or unknown artifact hash is inferred by this index.
 
 ## Route-A independent cross-subtype round C374--C378
 

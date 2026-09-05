@@ -1,0 +1,174 @@
+schema: route-a-evaluation-v0.2.0
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C379
+title: Boundary-corrected reversible multibaker transport and twisted orbit zeta
+evaluation_date: '2026-09-05'
+source_commit: 0596f9d680277288225062a6fdd7ad7ce116e01d
+code_commit: 0596f9d680277288225062a6fdd7ad7ce116e01d
+fixed_epoch: 1788566400
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority: flow_systems/skills/route-a-evaluator.md
+evaluator_version: 0.2.0
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+obstruction_id: HEN-O363
+candidate_definition: reversible two-branch area-preserving multibaker on an L-cell ring, with both coordinates non-dyadic and strictly between zero and one
+family: hyperbolic transport with an integer displacement cocycle
+phase_space: cell ring times two non-dyadic unit-interval coordinates
+dynamics: branch s maps (j,x,y) to (j+2s-1 mod L,2x-s,(y+s)/2)
+parameters: all positive integers L and real winding twist phi
+parameter_provenance: ring topology and source transport holonomy
+arithmetic_origin: none; integer ring sizes and windings are geometric labels
+clock: unit map iteration and unit cell length
+normalization: W equals closed-orbit total displacement divided by L
+determinant_convention: D=det(I-z P_phi) for the finite tilted transport operator; geometric inverse-unstable zeta equals the two-factor homogeneous-orbit correction divided by D
+orbit_cutoff: no theorem cutoff; exact fixed and primitive ledgers through period twelve for rings one through eight
+precision: exact integers and reduced rational Laurent coefficients; separate symbolic and high-precision spectral checks
+training_data: none
+forbidden_data: target arithmetic local data, target Euler factors, target zeros, root numbers, automorphy and fitted target parameters
+source_lock:
+  object: full-measure non-dyadic finite-ring multibaker
+  arithmetic_origin: none
+  clock: unit iteration
+  normalization: d_s=2s-1 and exp(i phi W)
+  determinant_convention: finite transport determinant with explicit geometric corner correction
+  cutoff: all-period proof with period-twelve finite regression
+  precision: exact rational evidence and independent symbolic checks
+  allowed_data: source binary words, affine geometry, Fourier algebra and verified primary source metadata
+  forbidden_data: target prime tables, target zero tables, target local factors and Route B
+artifact_paths:
+  - proof/ANALYTIC_PROOF.md
+  - results/c379_multibaker_evidence.json
+  - paper/main.pdf
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED
+  strongest_evidence: ring winding is an intrinsic integer cocycle
+  strongest_failure: no rational-prime carrier or logarithmic-prime period is supplied
+  arithmetic_controls:
+    - name: prime and composite rings
+      status: EXECUTED_EXACT
+      result: the same formulas hold for every L from one to eight; parity, not primality, governs period-two obstruction
+      artifact: results/c379_multibaker_evidence.json#control_rows
+    - name: relabeled cells
+      status: EXECUTED_EXACT
+      result: cyclic permutation of cells preserves the complete trace and winding ledger
+      artifact: results/c379_multibaker_evidence.json#control_rows
+    - name: neighboring ring and simpler parent
+      status: EXECUTED_EXACT
+      result: rings one and two obey the same corrected product while their transport degeneracies remain explicit
+      artifact: results/c379_multibaker_evidence.json#fixed_rows
+  artifacts:
+    - SOURCE_AUDIT.md
+a1:
+  verdict: A1_WEAK
+  evidence_status: PROVED_SOURCE_ONLY
+  strongest_evidence: complete mixed-word geometric primitive atlas with least periods, multiplicities, powers, winding reversal and reciprocal multipliers
+  strongest_failure: the exact orbit data carry no independently derived rational-prime labels
+  metrics:
+    completeness_status: all-period symbolic-to-geometric proof on the stated domain
+    primitive_rule: primitive binary necklace (d,S) lifts to gcd(L,S) cycles of period d L/gcd(L,S)
+    repetition_rule: time and winding multiply by r; multipliers become 2^(rq) and 2^(-rq)
+    orientation_phase: positive Jacobian and signed exp(i phi W), with reversal W to -W
+    boundary_control: both homogeneous corner codes are excluded geometrically and corrected explicitly in the determinant product
+  artifacts:
+    - proof/ANALYTIC_PROOF.md
+    - results/c379_multibaker_evidence.json#primitive_rows
+a2:
+  verdict: A2_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: all-order source transport determinant and corrected geometric weighted Euler product are proved
+  strongest_failure: no target divisor or held-out target comparison is defined
+  metrics:
+    zero_error_train: not applicable; no target data
+    zero_error_validation: not applicable; no target data
+    zero_error_test: not applicable; no target data
+    extra_zero_count: not applicable to target; every source eigenvalue is explicit
+    missing_zero_count: not applicable to target; source zero eigenvalues cause degree reduction
+    root_count_discrepancy: zero in the explicit finite source spectrum; no target count is asserted
+    cutoff_drift: source coefficient identities are all-order and finite checks agree through period twelve
+    precision_drift: zero in exact evidence; independent high-precision source spectral residual is separately audited
+    control_margin: no target classifier exists
+  artifacts:
+    - proof/ANALYTIC_PROOF.md
+    - results/c379_multibaker_evidence.json#determinant_rows
+a3:
+  verdict: A3_FAIL
+  evidence_status: STOP_SCOPED
+  strongest_evidence: exact rational source continuation with cancellation and twist-periodicity controls
+  strongest_failure: no target functional equation, gamma data, divisor, counting law or Weil form
+  analytic_structure:
+    conjugation_symmetry: real source coefficients and winding reversal only
+    functional_equation: no target functional equation
+    gamma_trivial_zero_pole_data: absent
+    counting_law: exact source finite spectrum only
+    continuation_domain: rational continuation of the source geometric weighted zeta in z
+  weil_compression:
+    status: absent
+    trace_second_moment_inertia: not a target Weil-form claim
+    common_prime_dynamical_reading: absent
+  artifacts:
+    - LIMITATIONS.md
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: PROVED_GEOMETRY_ONLY
+  strongest_evidence: piecewise symplectic branches and an explicit anti-symplectic involution I satisfying IBI=B inverse
+  strongest_failure: no quantized operator, domain or same-clock quantum orbit theorem is constructed
+  metrics:
+    coherent_symplectic_contact_scattering_phase_space: source area form dx wedge dy on each cell
+    time_reversal_or_antiunitary_test: exact classical I(j,x,y)=(j,1-y,1-x) and IBI=B inverse
+    same_clock_quantum_lift: not constructed
+    orbit_phase_retention: proved classically only
+    hilbert_space_and_operator_domain: no quantum domain specified; finite transport matrix is not a quantum Hamiltonian
+  artifacts:
+    - proof/ANALYTIC_PROOF.md
+tuple:
+  - A0_FAIL
+  - A1_WEAK
+  - A2_FAIL
+  - A3_FAIL
+  - A4_FORMAL_HINT
+overall_verdict: ROUTE_A_REJECTED
+adversarial_controls:
+  controls_used:
+    - missing homogeneous-corner factors
+    - signed winding versus raw displacement
+    - reversed word without complement
+    - geometric least period versus least binary word period
+    - even-ring eigenvalue minus one
+    - inverse unstable weight versus two-dimensional flat trace
+    - cyclic relabeling, neighboring rings and one-cell parent
+  proves_too_much_risk: every theorem is independent of rational-prime data; source success cannot certify a target arithmetic correspondence
+  verdict: PASS_DOES_NOT_CERTIFY_TARGET
+claim_boundary:
+  - complete source primitive and transport theorem under the explicit non-dyadic domain convention
+  - geometric zeta includes exact homogeneous-orbit correction
+  - transport determinant is not identified with the full phase-space Perron Fredholm determinant
+  - classical reversibility is not a constructed natural quantization
+blocking_conditions:
+  - no arithmetic carrier
+  - no target determinant bridge
+  - no target analytic continuation or divisor
+  - no constructed quantum lift
+next_smallest_test: a future Route-A subtype needs an intrinsic arithmetic carrier before any target fitting; no target fit is authorized here
+round2_clues:
+  - boundary-corrected symbolic coding is reusable for other invertible Markov systems
+  - a quantum multibaker requires its own independently fixed quantization and clock contract
+route_b_invocation_allowed: false
+route_b_lock_reason: source transport and classical symplectic structure do not supply a target arithmetic or quantum bridge
+scope_flags:
+  claims_target_arithmetic_local_data: false
+  claims_target_euler_factors: false
+  claims_root_number: false
+  claims_automorphy: false
+  claims_target_divisor_or_counting_law: false
+  claims_target_functional_equation: false
+  claims_target_zero_match: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false
+theorem_status: PROVABLE_AFTER_EXPLICIT_BOUNDARY_CORRECTION
+finite_evidence_role: exact regression of the all-period proof, not an inference from sampled words
+source_owner_tokens:
+  - DOI:10.1063/1.165950
+  - arXiv:cond-mat/0203494
+  - theorem:boundary-corrected-finite-ring-multibaker-transport

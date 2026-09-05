@@ -1,0 +1,134 @@
+schema: route-a-evaluation-v0.2.0
+skill: route-a-evaluator
+skill_version: 0.2.0
+candidate_id: HCS-C380
+title: Nonlinear finite Blaschke circle dynamics and its complete native spectrum
+evaluation_date: '2026-09-05'
+source_commit: 0596f9d680277288225062a6fdd7ad7ce116e01d
+code_commit: 0596f9d680277288225062a6fdd7ad7ce116e01d
+fixed_epoch: 1788566400
+scope_literal: NO_BAD_EULER_OR_ROOT_NUMBER
+evaluator_authority: flow_systems/skills/route-a-evaluator.md
+evaluator_version: 0.2.0
+evaluator_authority_sha256: 6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c
+obstruction_id: HEN-O364
+candidate_definition: B_a(z)=z(z-a)/(1-az) on the unit circle for real 0<=a<1
+family: nonlinear analytic expanding circle endomorphisms
+phase_space: unit circle for dynamics and an explicit Hardy annulus for the transfer operator
+dynamics: integer iteration of a degree-two expanding holomorphic circle map
+parameters: analytic 0<=a<1; exact regression 0,1/7,1/3,1/2,3/4
+parameter_provenance: source-defined rational Blaschke family; no fit to target data
+arithmetic_origin: none; rational parameters do not supply a rational-prime orbit carrier
+clock: integer iteration, primitive period p, repeated period sp
+normalization: angular-density Perron weight w/(z B_a'(z)); q=-a
+determinant_convention: D_a(u)=det(I-u P_a), not its reciprocal or the unweighted Artin-Mazur zeta
+orbit_cutoff: none in the theorem; fixed counts through n=24 and direct periodic solves through n=5
+precision: exact rational and symbolic algebra; independent direct-orbit audit at 65 decimal digits
+training_data: none
+forbidden_data: target prime and zero tables, target Euler factors, root numbers, automorphy, target divisors and Route B
+source_lock:
+  object: the real degree-two Blaschke family on the circle
+  arithmetic_origin: no intrinsic rational-prime carrier
+  clock: native integer iteration only
+  normalization: angular-density Perron operator with signed multiplier q=-a
+  determinant_convention: native Fredholm determinant det(I-u P_a)
+  cutoff: all-period theorem; exact counts through 24, coefficient orders through 16, Laurent section through 10
+  precision: exact fractions plus 65-digit independent direct-orbit checks
+  allowed_data: source map, exact rational parameters, source periodic points and analytic identities
+  forbidden_data: target primes and zeros, local factors, root numbers, automorphy and Route B
+artifact_paths:
+  - proof/ANALYTIC_PROOF.md
+  - results/c380_blaschke_evidence.json
+  - paper/main.pdf
+a0:
+  verdict: A0_FAIL
+  evidence_status: PROVED_ABSENCE_OF_SUPPLIED_CARRIER
+  strongest_evidence: nonlinear holomorphic source dynamics with exact rational parameter controls
+  strongest_failure: no intrinsic rational-prime labels, prime-power law or logarithmic-prime clock
+  artifacts: [SOURCE_AUDIT.md, SCOPE.md]
+a1:
+  verdict: A1_WEAK
+  evidence_status: COMPLETE_NATIVE_ATLAS_ONLY
+  strongest_evidence: all-period census, primitive inversion, repetitions, positive orientation, variable stability and conjugation are proved
+  strongest_failure: no prime-to-primitive-orbit identification and no completed target-oriented six-control suite
+  metrics:
+    native_all_period_census: true
+    native_stability_and_repetitions: true
+    intrinsic_prime_orbit_dictionary: false
+    mandatory_target_a1_controls_completed: 0
+  artifacts: [proof/ANALYTIC_PROOF.md, results/c380_blaschke_evidence.json]
+a2:
+  verdict: A2_FAIL
+  evidence_status: COMPLETE_NATIVE_DETERMINANT_ONLY
+  strongest_evidence: explicit annular trace class, full signed spectrum, primitive product and certified tail
+  strongest_failure: no target divisor equality, zero census or normalization bridge
+  metrics:
+    zero_error_train: NOT_RUN_STOP_SCOPED
+    zero_error_validation: NOT_RUN_STOP_SCOPED
+    zero_error_test: NOT_RUN_STOP_SCOPED
+    extra_zero_count: NOT_APPLICABLE
+    missing_zero_count: NOT_APPLICABLE
+    root_count_discrepancy: NOT_APPLICABLE
+    cutoff_drift: SOURCE_TAIL_PROVED_ONLY
+    precision_drift: SOURCE_AUDIT_ONLY
+    control_margin: NOT_APPLICABLE
+  artifacts: [THEOREM_PACKAGE.md, SCOPE.md]
+a3:
+  verdict: A3_FAIL
+  evidence_status: SOURCE_CONTINUATION_ONLY
+  strongest_evidence: native determinant is entire with an internal q-difference identity
+  strongest_failure: no target functional equation, Riemann counting law or Weil compression
+  analytic_structure: full native entire product, not target analytic continuation
+  weil_compression: absent
+  artifacts: [proof/ANALYTIC_PROOF.md, SCOPE.md]
+a4:
+  verdict: A4_FORMAL_HINT
+  evidence_status: KOOPMAN_ADJOINT_HINT_ONLY
+  strongest_evidence: Lebesgue-preserving source gives a natural Koopman isometry and its Perron adjoint
+  strongest_failure: degree-two noninvertibility prevents a same-space unitary time evolution; no self-adjoint Hamiltonian is constructed
+  metrics:
+    same_clock_unitary_quantization: false
+    target_phase_and_weight_preservation: false
+    global_self_adjoint_operator: false
+    route_b_ready: false
+  artifacts: [THEOREM_PACKAGE.md, paper/main.pdf]
+adversarial_controls:
+  controls_used:
+    - zero-parameter doubling map is not a rank-one Perron operator
+    - unit-parameter wall cancels to a noncompact rotation and changes fixed sets
+    - neighboring rational parameters preserve counts but change nonlinear stability
+    - signed odd traces distinguish q=-a from a positive replacement
+    - repaired-hash attacks on multiplicities, tail bounds, annulus direction and source flags
+  proves_too_much_risk: a complete native determinant can occur without arithmetic provenance; it earns no target A2 credit
+  verdict: PASS_SCOPE_LIMIT_RETAINED
+tuple: [A0_FAIL, A1_WEAK, A2_FAIL, A3_FAIL, A4_FORMAL_HINT]
+overall_verdict: ROUTE_A_REJECTED
+claim_boundary: a complete native orbit-transfer-determinant chain and quantitative singular-face certificate, with classical spectrum explicitly attributed
+blocking_conditions:
+  - no arithmetic prime carrier or logarithmic-prime clock
+  - no target divisor bridge or target controls
+  - no target analytic compression or unitary quantization
+next_smallest_test: seek a genuinely arithmetic nonlinear subtype with an intrinsic prime-period law before target determinant comparisons
+round2_clues:
+  - source spectral completeness by itself does not solve target A2
+  - nonconstant multiplier geometry is richer than the doubling parent but still nonarithmetic
+route_b_invocation_allowed: false
+route_b_lock_reason: strict target A0, A2 and A3 fail and A4 is only formal
+scope_flags:
+  claims_target_arithmetic_local_data: false
+  claims_target_euler_factors: false
+  claims_root_number: false
+  claims_automorphy: false
+  claims_target_divisor_or_counting_law: false
+  claims_target_functional_equation: false
+  claims_target_zero_match: false
+  claims_hilbert_polya_operator: false
+  invokes_route_b: false
+theorem_status: PROVED_AS_STATED
+finite_evidence_role: independent normalization regression, not a finite-sampling proof
+source_owner_tokens:
+  - map:real-degree-two-Blaschke
+  - clock:circle-iteration
+  - operator:angular-Perron-Hardy-annulus
+  - theorem:complete-signed-spectrum-and-primitive-product
+  - theorem:quantitative-tail-and-singular-wall

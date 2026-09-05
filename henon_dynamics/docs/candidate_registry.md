@@ -3,6 +3,37 @@
 The active Hénon generation round is documented in
 `../next_paper_henon_candidate_search/CANDIDATE_REGISTRY.md`.
 
+## HCS-C379--HCS-C383 source-theorem register (2026-09-05)
+
+The authorized five-candidate round uses baseline
+`0596f9d680277288225062a6fdd7ad7ce116e01d` and evaluator
+`../../flow_systems/skills/route-a-evaluator.md` v0.2.0, SHA-256
+`6f13fc94be84eaf22c518dd0c530e442cd625f3cdcb9d3d34e67cc11c881194c`.
+The entries below distinguish proved source mechanisms from target-oriented
+Route-A grades. They do not assert that the whole batch has passed release;
+each package's release manifest records its own artifact closure.
+The retained classical mechanisms are attributed to their primary sources,
+and repository ownership does not assert literature priority.
+
+| candidate | source theorem or current gate | strict tuple | artifact |
+|---|---|---|---|
+| HCS-C379 | On the invariant non-dyadic multibaker domain, every mixed binary necklace has an exact least geometric period, winding, multiplicity, reciprocal multipliers and reversal. Two excluded homogeneous corner cycles give the necessary correction between the geometric inverse-unstable orbit product and the finite twisted transport determinant. The Chebyshev determinant, diffusion constant `1/2`, parity-sensitive ring relaxation and `L=1,2` faces are proved for every ring size. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [multibaker proof](../henon_multibaker_twisted_transport_zeta_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_multibaker_twisted_transport_zeta_route_a/paper/main.pdf) |
+| HCS-C380 | For the nonlinear Blaschke family `B_a(z)=z(z-a)/(1-az)`, `0<=a<1`, the complete circle periodic census and multiplier traces agree with an explicitly trace-class angular Perron operator on a Hardy annulus. Its entire determinant is `(1-u) product_(k>=1)(1-(-a)^k u)^2`, with the primitive stability product, exact multiplicities, quantitative tail and `a=0,1` boundaries retained. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [Blaschke proof](../henon_finite_blaschke_ruelle_spectrum_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_finite_blaschke_ruelle_spectrum_route_a/paper/main.pdf) |
+| HCS-C381 | With the left branch owning `x=1/2`, the alpha-one LSV map has exactly `2^n` fixed points, a complete binary primitive atlas and only one neutral orbit. Every nonneutral primitive corresponds to an induced orbit with both clocks retained. All countably many inverse return branches map one fixed complex disk strictly inside itself and have uniform `O(n^(-2))` derivatives, proving a trace-class induced operator for `abs(zeta)<=1`, an exact two-clock primitive product and inverse-linear return tails. On uninduced Lebesgue `L1`, every power restricted to the zero-integral subspace has norm exactly one. | `(A0_FAIL,A1_WEAK,A2_FAIL,A3_FAIL,A4_FAIL)` | [LSV proof](../henon_lsv_intermittent_induced_fredholm_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_lsv_intermittent_induced_fredholm_route_a/paper/main.pdf) |
+| HCS-C382 | At every odd prime, rational four-torsion fixes the primary Gaussian Frobenius sign for `y^2=x^3-x`. Ordinary normalized phase is irrational; supersingular phase has order four and reaches Hasse endpoints exactly at even extension degrees. All-degree closed points, reduced fixed-point multiplicity one, and the complete native `H0/H1/H2` determinant, functional equation and critical circle are proved. The fixed-fibre zero count is linear and obstructs a Riemann-target divisor. | `(A0_STRUCTURAL_ARITHMETIC_RELATION,A1_WEAK,A2_FAIL,A3_FAIL,A4_FORMAL_HINT)` | [CM proof](../henon_cm_elliptic_frobenius_phase_zeta_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_cm_elliptic_frobenius_phase_zeta_route_a/paper/main.pdf) |
+| HCS-C383 | The Friedrichs Aharonov--Bohm Hamiltonian has complete angular Hankel diagonalization, absolutely continuous spectrum, complete wave operators, every partial-wave phase, the full forward delta/principal-value distribution, local heat kernel and explicit tail. Gauge covariance and position-preserving time reversal are classified. Noncompact scattering correction and heat evolution prohibit the ordinary global determinants/traces claimed by naive cutoff products. | `(A0_FAIL,A1_FAIL,A2_FAIL,A3_FAIL,A4_UNITARY_OR_SCATTERING_CANDIDATE)` | [Aharonov--Bohm proof](../henon_aharonov_bohm_punctured_plane_scattering_route_a/proof/ANALYTIC_PROOF.md) · [paper PDF](../henon_aharonov_bohm_punctured_plane_scattering_route_a/paper/main.pdf) |
+
+C379--C381 and C383 are `ROUTE_A_REJECTED`; C382 is
+`ROUTE_A_EXPLORATORY`. C381's all-branch complex-domain and derivative
+summability argument has been independently checked. Native orbit
+completeness, a source Fredholm determinant, a native
+finite-field functional equation and natural source scattering are distinct
+results; none automatically supplies target A2 or A3. Route B remains false
+throughout this round. The common scope is `NO_BAD_EULER_OR_ROOT_NUMBER`:
+no target local arithmetic, target Euler or bad-prime factor, root number,
+automorphy, target divisor/counting-law match, target functional equation,
+target-zero identification or Hilbert--Pólya operator is asserted.
+
 ## HCS-C374--HCS-C378 additions (2026-09-04)
 
 Five independent cross-subtype candidates were frozen from baseline

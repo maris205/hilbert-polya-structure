@@ -17,6 +17,27 @@ New negative results should record candidate ID, exact assumptions, smallest
 counterexample, code/artifact path, and whether the obstruction is invariant
 under recoding, conjugacy, and gauge.
 
+## HCS-C379--HCS-C383 source-boundary register (2026-09-05)
+
+These entries record the scope of the current analytic proofs, including
+the independently checked all-branch LSV complex-domain argument. They are
+not a five-package release receipt.
+
+| ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |
+|---|---|---|---|---|---|
+| HEN-O363 | HCS-C379 finite transport determinant as the full geometric baker or target determinant | proved boundary and operator-weight distinction | The non-dyadic geometric domain excludes both homogeneous corner cycles. Their two explicit factors must be removed from the finite symbolic transport product. Its inverse-unstable weight `2^(-n)` differs from the two-dimensional flat-trace weight `2^n/(2^n-1)^2`, so the finite matrix determinant is not a proved full phase-space Perron Fredholm determinant. Ring size and winding provide no rational-prime carrier. | The complete mixed-word primitive atlas, least periods, winding/reversal, reciprocal multipliers, corrected weighted product, Chebyshev determinant, diffusion and parity-sensitive relaxation survive. | ../henon_multibaker_twisted_transport_zeta_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O364 | HCS-C380 complete nonlinear source spectrum as a target arithmetic determinant or unchanged singular limit | proved source-target and parameter-boundary distinction | The entire signed Blaschke product has no derived rational-prime ownership or target divisor. At `a=0`, the Perron operator is not rank one despite having only one nonzero eigenvalue; at `a=1`, cancellation changes the map to the order-two rotation `-z`, destroys trace class and gives infinite even-iterate fixed sets. | The all-period source census, annular trace-class proof, complete spectrum and multiplicities, periodic multiplier trace, primitive product and quantitative finite-section tail hold throughout `0<=a<1`. | ../henon_finite_blaschke_ruelle_spectrum_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O365 | HCS-C381 induced trace class as an uninduced neutral determinant or same-clock exponential relaxation | proved neutral-point and operator-space obstruction | The neutral fixed point has multiplier one and a zero flat-trace denominator. The uninduced Perron operator is noncompact on the specified Lebesgue `L1` space; its approximate eigenvalue one and contraction imply exact norm one for every power restricted to zero-integral densities, excluding uniform exponential operator-norm decay. The defining induced branch series converges in trace norm for `abs(zeta)<=1` but its terms fail to tend to zero for `abs(zeta)>1`; this is not a no-continuation theorem. | The exact binary primitive census, all return branches and original/induced clock dictionary, inverse-linear tail, common complex disk, uniform inverse-quadratic derivatives and derivative-weighted induced Fredholm product survive. Unweighted symbolic factors are explicitly distinguished. | ../henon_lsv_intermittent_induced_fredholm_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O366 | HCS-C382 fixed-characteristic CM curve zeta as a Riemann-target divisor | proved fixed-fibre zero-count obstruction | Under `u=p^(-s)`, the two source zeros repeat vertically with spacing `2*pi/log(p)` and total positive-height count `(log(p)/pi)T+O(1)`. This cannot equal the target's `T log(T)` divisor growth after multiplication by a zero-free entire factor. An undefined product over characteristics does not repair the frozen fixed-fibre claim. | The all-good-prime primary sign, phase rigidity, complete extension/closed-point ledger and native graded determinant, functional equation and critical circle survive. | ../henon_cm_elliptic_frobenius_phase_zeta_route_a/proof/ANALYTIC_PROOF.md |
+| HEN-O367 | HCS-C383 source unitary scattering or local heat kernel as an ordinary global determinant/target operator | proved noncompactness, cutoff and physical-symmetry obstruction | For `0<beta<1`, every angular basis vector has the same nonzero norm under `S-I`, so the scattering correction is noncompact. Two exhaustive angular cutoff windows give different determinant phases. The heat semigroup is noncompact with infinite positive extended trace. The always-present reflection-conjugation symmetry is not position-preserving time reversal, which occurs only at integer and half-integer flux. | The complete Friedrichs domain/spectrum, onto wave operators, signed channel phases, forward angular distribution, away-forward cross section, local heat kernel and gauge covariance survive. No positive-energy classical primitive orbit or arithmetic target identification is obtained. | ../henon_aharonov_bohm_punctured_plane_scattering_route_a/proof/ANALYTIC_PROOF.md |
+
+The respective boundaries respect cyclic cell relabeling and true multibaker
+reversal, the signed Blaschke normalization, an explicitly restored original
+LSV return clock without changing its operator space, Gaussian conjugation with the
+same unordered Frobenius pair, and single-valued integer magnetic gauges.
+They retain the source owners and do not authorize Route B. All target and
+operator claims remain limited by `NO_BAD_EULER_OR_ROOT_NUMBER`.
+
 ## HCS-C374--HCS-C378 additions (2026-09-04)
 
 | ID | Candidate | Status | Exact obstruction | Scope and surviving result | Artifact |

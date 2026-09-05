@@ -1,0 +1,359 @@
+\ifdefined\CRevisionRound\else\def\CRevisionRound{2}\fi
+\documentclass[10pt]{article}
+\pdfvariable suppressoptionalinfo 767
+\usepackage[a4paper,margin=21mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}
+\setmainfont{TeX Gyre Pagella}
+\setmonofont{Latin Modern Mono}
+\usepackage[english]{babel}
+\babelprovide[import]{chinese-simplified}
+\babelfont[chinese-simplified]{rm}[Renderer=Harfbuzz,Language=Default]{Droid Sans Fallback}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\PP}{\mathcal P}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\Tr}{\operatorname{Tr}}
+\ifcase\CRevisionRound
+\title{Nonlinear Blaschke Circle Dynamics:\\Complete Periodic Census and Stability}
+\or
+\title{Nonlinear Blaschke Circle Dynamics:\\An Explicit Annulus and Complete Transfer Spectrum}
+\else
+\title{Nonlinear Blaschke Circle Dynamics:\\Primitive Determinants, Quantitative Tails, and Singular Limits}
+\fi
+\author{HCS-C380 research manuscript}
+\date{5 September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the real family $B_a(z)=z(z-a)/(1-az)$, $0\leq a<1$, we give a
+complete circle periodic-point census and its nonconstant stability
+multipliers. An explicit increasing lift proves that every positive iterate
+has exactly $2^n-1$ fixed points, while off-circle contraction isolates the
+two attracting channels.
+\ifnum\CRevisionRound>0
+We construct a parameter-dependent annulus on which the angular Perron
+operator is trace class. Invariant Laurent sections determine its entire
+nonzero spectrum, including the reflected-channel multiplicity.
+\fi
+\ifnum\CRevisionRound>1
+A rational fixed-point index calculation closes the stability-weighted
+primitive product. We prove a uniform logarithmic determinant-tail bound
+and distinguish the degree-two limit at zero from the noncompact rotation
+at the unit parameter wall. Exact rational computations and an independent
+direct-orbit calculation audit the normalization. The spectral mechanism
+is classical; the present contribution is a verified specialization and
+quantitative boundary analysis, with no Riemann-target identification.
+\fi
+\end{abstract}
+\noindent\textbf{Keywords:} Blaschke products; periodic orbits; stability
+multipliers; transfer operators; Fredholm determinants; singular limits.
+\begin{otherlanguage}{chinese-simplified}
+\begin{center}\large 中文摘要\end{center}
+\begin{sloppypar}
+本文研究实参数有限布拉施克圆周映射，证明所有迭代的不动点数量及本原
+周期数量，并记录随轨道变化的稳定性乘子。严格递增的提升给出完整性，
+圆内与圆外的收缩则隔离两个吸引通道。
+\ifnum\CRevisionRound>0
+进一步构造显式参数环域，证明角密度转移算子属于迹类，并从不变洛朗
+有限维子空间确定全部非零谱及其重数。
+\fi
+\ifnum\CRevisionRound>1
+通过有理映射不动点指标恒等式连接本原轨道乘积，给出定量截断尾界，
+并区分零参数的二倍映射与单位参数边界的非紧旋转。精确有理数复算及
+直接周期求解独立检验公式。本文明确承认既有谱定理的文献来源，贡献为
+完整专门化、可复核证据及定量边界分析，不宣称目标黎曼行列式。
+\fi
+\end{sloppypar}
+\noindent 关键词：布拉施克乘积；周期轨道；稳定性乘子；转移算子；
+弗雷德霍姆行列式；奇异极限。
+\end{otherlanguage}
+
+\section{Object, provenance, and an all-period orbit theorem}
+
+The time variable is integer iteration of $\tau_a=B_a|_{\TT}$, where
+$\TT=\{z:|z|=1\}$ and $0\leq a<1$. All complex phases below retain their
+sign. The explicit transfer spectra of analytic circle maps are prior work
+of Slipantschuk, Bandtlow and Just~\cite{explicit}, and the finite-Blaschke
+spectral theorem is due to Bandtlow, Just and Slipantschuk~\cite{BJS}.
+We give a direct real-family proof and a quantitative finite-section
+certificate. The nonlinear multiplier atlas differs from the workspace's
+linear expanding-circle and quadratic inverse-branch systems. This owner
+distinction is not a claim of literature priority.
+
+Choose the lift $\psi_a(0)=0$ of $B_a(e^{i\theta})=e^{i\psi_a(\theta)}$.
+Logarithmic differentiation gives
+\begin{equation}
+ \psi_a'(\theta)=1+\frac{1-a^2}{1-2a\cos\theta+a^2},\qquad
+ \frac2{1+a}\leq\psi_a'(\theta)\leq\frac2{1-a}. \label{eq:expansion}
+\end{equation}
+The extrema occur at $\theta=\pi$ and $0$. Thus every map in the chamber
+is expanding, orientation preserving and of degree two.
+
+\begin{theorem}[Complete orbit census]
+For every $n\geq1$ the circle fixed count and primitive cycle count are
+\begin{equation}
+ F_n=2^n-1,\qquad
+ P_n=\frac1n\sum_{d\mid n}\mu(n/d)(2^d-1). \label{eq:census}
+\end{equation}
+Every circle fixed point of every iterate is simple. For a primitive cycle
+$\gamma$ of length $p$, its multiplier is
+$\Lambda_\gamma=\prod_{j=0}^{p-1}\psi_a'(\theta_j)>1$; its $s$th
+repetition has length $sp$ and multiplier $\Lambda_\gamma^s$.
+\end{theorem}
+\begin{proof}
+The lift of the $n$th iterate satisfies
+$\psi_{a,n}(\theta+2\pi)=\psi_{a,n}(\theta)+2\pi2^n$.
+The function $\psi_{a,n}(\theta)-\theta$ has positive derivative by
+\eqref{eq:expansion} and increases by exactly $2\pi(2^n-1)$ on a
+half-open fundamental interval. It meets that many multiples of $2\pi$,
+each exactly once. Nonzero derivative of the fixed-point equation proves
+simplicity. The identity $F_n=\sum_{d\mid n}dP_d$ gives Moebius inversion;
+the chain rule proves the repetition law.
+\end{proof}
+
+Complex conjugation commutes with $B_a$. It pairs or fixes circle cycles,
+preserving their multipliers; it does not reverse time. Since the map is
+two-to-one, there is no globally defined inverse dynamics on the circle.
+The orientation is positive, and the real Perron weights have phase zero.
+Their multiplier dependence cannot be removed when constructing traces.
+
+For $0<s<1$ the Blaschke factor satisfies
+\begin{equation}
+ |B_a(z)|\leq q_a(s):=s\frac{s+a}{1+as}<s\quad (|z|\leq s).
+ \label{eq:disk}
+\end{equation}
+The maximum modulus of $(z-a)/(1-az)$ on $|z|=s$ is
+$(s+a)/(1+as)$, as follows by differentiating its squared modulus with
+respect to $\cos\theta$. Therefore no nonzero interior point is periodic.
+The reflection identity $B_a(1/\bar z)=1/\overline{B_a(z)}$ gives the
+same result outside the circle. The only off-circle fixed points of an
+iterate are $0$ and $\infty$, with local multipliers $(-a)^n$.
+
+The unweighted Artin--Mazur zeta already follows from \eqref{eq:census}:
+\begin{equation}
+ \zeta_{\rm AM}(u)=\exp\sum_{n\geq1}\frac{F_nu^n}{n}
+ =\frac{1-u}{1-2u}\quad(|u|<1/2). \label{eq:AM}
+\end{equation}
+It is independent of $a$, whereas the stability weights are not.
+\par\noindent\emph{Round-zero certificate: complete orbit census, stability,
+repetitions, orientation, and off-circle separation.}
+
+\ifnum\CRevisionRound>0
+\section{An explicit trace-class annulus and the exact spectrum}
+
+Put $r=(1+a)/2$, $A_r=\{r<|z|<r^{-1}\}$ and
+$t=(r+q_a(r))/2$. Then $0<t<r<1$.
+The Hardy norm on this annulus is
+\[
+ \|f\|_r^2=\sum_{m\in\mathbb Z}|f_m|^2(r^{2m}+r^{-2m}).
+\]
+Define the angular-density Perron operator by the local branch sum
+\begin{equation}
+ (\PP_a f)(w)=\sum_{B_a(z)=w}\frac{w}{zB_a'(z)}f(z).
+ \label{eq:operator}
+\end{equation}
+The branches themselves are not global functions on the annulus. Their
+sum is single valued. Multiplication by $z$ conjugates the derivative
+transfer convention of~\cite{BJS} to \eqref{eq:operator}.
+
+\begin{lemma}[Trace class from annular extension]
+The operator in \eqref{eq:operator} is trace class on $H^2(A_r)$.
+\end{lemma}
+\begin{proof}
+Choose $s>r$, $s<1$ with $q_a(s)<t$. Formula \eqref{eq:disk} and its
+reflection put every preimage of $\overline{A_t}$ strictly inside
+$A_r$, in $s<|z|<s^{-1}$. The critical points are
+$c=a/(1+\sqrt{1-a^2})$ and $1/c$ for $a>0$; their images lie outside
+$\overline{A_t}$ since $c<a<r$. At zero parameter the critical points
+are zero and infinity. Consequently all local weights are bounded near the
+compact target boundary. Cauchy--Schwarz on the Laurent series bounds
+evaluation on the compact source subannulus. This proves boundedness of
+the extension $\widetilde{\PP}_a:H^2(A_r)\to H^2(A_t)$.
+
+The restriction $J:H^2(A_t)\to H^2(A_r)$ is diagonal with singular values
+\[
+ s_m(J)=\sqrt{\frac{r^{2m}+r^{-2m}}{t^{2m}+t^{-2m}}}
+ \leq\sqrt2(t/r)^{|m|}\ (m\ne0),\qquad s_0=1.
+\]
+They are summable. The factorization $\PP_a=J\widetilde{\PP}_a$ proves
+trace class by the ideal property~\cite{Simon}.
+\end{proof}
+
+\begin{theorem}[Spectrum including both Hardy channels]\label{thm:spectrum}
+For $0<a<1$, the nonzero spectrum consists of $1$ with algebraic
+multiplicity one and $(-a)^k$, $k\geq1$, each with algebraic multiplicity
+two. Zero is in the spectrum. The entire Fredholm determinant and traces are
+\begin{align}
+ D_a(u)&=\det(I-u\PP_a)=(1-u)\prod_{k\geq1}(1-(-a)^ku)^2,
+ \label{eq:det}\\
+ \Tr\PP_a^n&=\frac{1+(-a)^n}{1-(-a)^n}\quad(n\geq1). \label{eq:trace}
+\end{align}
+At $a=0$, $D_0(u)=1-u$, but $\PP_0$ is not rank one.
+\end{theorem}
+\begin{proof}
+Since $B_a(0)=0$, the mean-value formula for positive powers of $B_a$
+and complex conjugation for negative powers prove Lebesgue invariance.
+Hence $\PP_a1=1$. A branchwise change of angular variable gives, for
+$m,k\geq1$,
+\begin{equation}
+ [z^k]\PP_a z^m=[z^m]B_a(z)^k. \label{eq:matrix}
+\end{equation}
+The Taylor coefficients are real. Negative output modes would require the
+constant coefficient of $z^mB_a(z)^k$, which vanishes; the constant output
+mode also vanishes. Because $B_a(z)^k$ has order at least $k$ at zero,
+\eqref{eq:matrix} is zero for $k>m$, and its diagonal is $(-a)^m$.
+Conjugation gives the second block.
+
+Thus the spaces $V_N=\operatorname{span}(z^{-N},\ldots,z^N)$ are
+invariant with the advertised diagonal. For their orthogonal projections
+$Q_N$, trace class implies
+$\|\PP_a-Q_N\PP_aQ_N\|_1\to0$: first approximate by a finite sum of
+rank-one maps and use strong convergence on their vectors, then bound the
+remaining trace norm by boundedness of the projections. Fredholm
+continuity~\cite{Simon} gives \eqref{eq:det} locally uniformly, proving
+all algebraic multiplicities and excluding additional nonzero eigenvalues.
+Taking traces of powers gives a geometric series and \eqref{eq:trace}.
+At zero parameter, \eqref{eq:matrix} yields
+$\PP_0z^{2m}=z^m$, so the zero-spectral part has not vanished.
+\end{proof}
+\par\noindent\emph{Round-one certificate: explicit annular extension,
+trace class, both spectral channels, and their entire determinant.}
+\fi
+
+\ifnum\CRevisionRound>1
+\section{Primitive product, quantitative tails, and the singular wall}
+
+\begin{theorem}[Independent periodic trace and determinant product]
+For every $n\geq1$,
+\begin{equation}
+ \sum_{\tau_a^nx=x}\frac{1}{(\tau_a^n)'(x)-1}
+ =\frac{1+(-a)^n}{1-(-a)^n}. \label{eq:orbittrace}
+\end{equation}
+For $|u|<1$ the Fredholm determinant has the absolutely convergent
+logarithmic primitive product
+\begin{equation}
+ D_a(u)=\prod_{\gamma\ {m primitive}}\prod_{j\geq1}
+ \left(1-\frac{u^{p_\gamma}}{\Lambda_\gamma^j}\right).
+ \label{eq:primitive}
+\end{equation}
+\end{theorem}
+\begin{proof}
+The rational fixed-point index formula on the sphere states that
+$\sum_{Rz=z}(1-R'(z))^{-1}=1$ when the fixed points are simple; it is
+the residue theorem for $dz/(z-R(z))$ with the infinity term evaluated
+in coordinate $1/z$. For $R=B_a^n$, the two off-circle terms are each
+$1/(1-(-a)^n)$. Moving them to the other side proves
+\eqref{eq:orbittrace}. At a circle fixed point the complex and angular
+iterate derivatives agree because the endpoint factor $B_a^n(z)/z$ is one.
+
+The trace sequence is bounded for fixed $a<1$. Thus
+$-\sum_{n\geq1}u^n\Tr\PP_a^n/n$ converges absolutely for $|u|<1$.
+Group fixed points by their primitive cycles, using $p_\gamma$ starting
+points per repetition and
+$1/(\Lambda^s-1)=\sum_{j\geq1}\Lambda^{-js}$. All absolute sums
+converge by the same trace bound, so regrouping proves
+\eqref{eq:primitive}. The entire continuation comes from
+\eqref{eq:det}; no everywhere-convergent orbit product is asserted.
+\end{proof}
+
+\begin{theorem}[Certified spectral tails and the two parameter faces]
+Let $D_{a,N}(u)=(1-u)\prod_{k=1}^N(1-(-a)^ku)^2$. If $|u|\leq R$
+and $Ra^{N+1}<1$, its omitted tail has an analytic logarithm satisfying
+\begin{equation}
+ \left|\log\frac{D_a(u)}{D_{a,N}(u)}\right|
+ \leq E_{a,N,R}:=\frac{2Ra^{N+1}}{(1-a)(1-Ra^{N+1})}. \label{eq:tail}
+\end{equation}
+The quotient is extended across the common finite-product zeros. The
+relative tail error is at most $e^{E_{a,N,R}}-1$. For $0<a<1$ the number
+of determinant zeros in $|u|\leq R$ is
+\begin{equation}
+ {\bf1}_{R\geq1}+2\#\{k\geq1:a^{-k}\leq R\}. \label{eq:roots}
+\end{equation}
+The limit $a\downarrow0$ gives $D_a\to1-u$ locally uniformly. At $a=1$
+the cancelled rational map is $-z$ and its Perron operator is noncompact.
+\end{theorem}
+\begin{proof}
+Use $|\log(1-v)|\leq |v|/(1-|v|)$ on each omitted factor and sum
+$2R\sum_{k>N}a^k/(1-Ra^{N+1})$. Exponentiation gives the relative
+bound. The exact spectral product gives \eqref{eq:roots}, including points
+on the boundary, without a floating logarithm decision. Formula
+\eqref{eq:tail} proves the zero-parameter determinant limit. At $a=1$,
+$z(z-1)/(1-z)=-z$ after removal of the cancelled point. Every even iterate
+is the identity. Its angular Perron operator is a unitary rotation on the
+infinite-dimensional Hardy space and therefore is not compact. Its fixed
+sets and operator class differ from every $a<1$ member.
+\end{proof}
+
+With $q=-a$, another exact check is
+\begin{equation}
+ (1-u)(1-qu)D_a(qu)=D_a(u). \label{eq:qdiff}
+\end{equation}
+This shift relation is internal to the parameter $a$ and is not a target
+functional equation. In particular \eqref{eq:AM}, \eqref{eq:det}, and
+\eqref{eq:primitive} must retain their different weights and reciprocals.
+
+\section{Evidence, limitations, and Route A}
+
+Five exact rational parameters $0,1/7,1/3,1/2,3/4$ audit 24 unweighted
+iterate counts, 16 trace/coefficient orders, the Laurent section through
+degree 10, four spectral cutoffs, and nine tail domains per parameter.
+The independent checker computes map coefficients by series division and
+convolution rather than the producer's binomial expansion. It checks
+determinant coefficients by \eqref{eq:qdiff}, while the producer uses the
+logarithmic trace recurrence. An additional symbolic/direct-orbit lane
+checks 171 periodic points with 65-digit arithmetic and monotone bisection;
+the largest weighted-trace discrepancy is below $3\cdot10^{-54}$.
+These are formula audits, not finite-data proofs of the all-period theorem.
+
+Thirty semantic evidence variants are rejected after repairing their
+outer hashes, alongside two raw parser attacks. They attack multiplier signs, channel multiplicities, orbit
+counts, annulus direction, tail bounds, zero counts, parameter faces,
+schema/type substitutions and target-claim flags. The output reproduces
+byte-for-byte from two unrelated working directories. Exact data, source
+proof, scripts and manuscript revisions accompany this paper.
+
+The strict tuple is
+\[
+ (\mathrm{A0\_FAIL},\mathrm{A1\_WEAK},\mathrm{A2\_FAIL},
+ \mathrm{A3\_FAIL},\mathrm{A4\_FORMAL\_HINT}).
+\]
+There is a complete native orbit/trace/determinant chain, but no
+rational-prime carrier, logarithmic-prime clock or Riemann divisor bridge.
+The exact source spectrum cannot upgrade these absent target ingredients.
+The adjoint Koopman construction is only a formal lift hint; no same-clock
+unitary quantization is supplied. Route B remains disabled. The scope is
+\texttt{NO\_BAD\_EULER\_OR\_ROOT\_NUMBER}.
+
+\paragraph{Contribution and disclosure.}
+This is an AI-assisted mathematical research manuscript with executable
+verification and model-family peer checks, not human peer review or a
+literature-novelty certificate. The prior finite-Blaschke spectrum is
+explicitly attributed. The package closes its specialization, orbit
+multiplier identity, explicit annular certificate, tail bound and singular
+faces. No target Euler data, root number, automorphy or Hilbert--Polya
+operator is claimed.
+\par\noindent\emph{Round-two certificate: primitive determinant identity,
+quantitative tail/root counts, parameter-wall obstruction, and audited scope.}
+\fi
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{explicit} J. Slipantschuk, O. F. Bandtlow and W. Just,
+\emph{Analytic expanding circle maps with explicit spectra},
+arXiv:1306.0445 (2013). \url{https://arxiv.org/abs/1306.0445}.
+\bibitem{BJS} O. F. Bandtlow, W. Just and J. Slipantschuk,
+\emph{Spectral structure of transfer operators for expanding circle maps},
+Ann. Inst. H. Poincare C Anal. Non Lineaire \textbf{34} (2017), 31--43,
+Theorem 5.4. \url{https://doi.org/10.1016/j.anihpc.2015.08.004}.
+\bibitem{Simon} B. Simon, \emph{Trace Ideals and Their Applications},
+second edition, Mathematical Surveys and Monographs \textbf{120},
+American Mathematical Society (2005).
+\url{https://bookstore.ams.org/SURV/120}.
+\end{thebibliography}
+\end{document}
