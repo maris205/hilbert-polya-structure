@@ -4,7 +4,7 @@
 
 ## 当前结论
 
-- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `STAGE1_SCOUTING / ZERO_PAPERS_ADMITTED`。组合、图关系首轮各八候选均未准入；GM 数学有效但独立价值门槛淘汰，ZA 证明未闭合。NS、CS 正分别进行候选核验；已保存作者证明与有限输出，不以候选代替论文。通过证明与碰撞门槛后才编号。
+- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P204_ROUND0_FROZEN_REVIEW_A / FOUR_SEATS_SCOUTING`。P204 三页稿已冷构建、逐页视读并冻结 Round0，独立稿审 A 开始；本轮已准入 1、已完成 0、空缺 4。GM、OF、CS、SI 因明确机制扣除未准入，ZA 保留证明未闭合及反例，第二轮有界筛选继续。本轮 WIP 私有推送 `65a08fea` 已核实，范围见批次回执；该旧检查点不含后续准入文件。
 - 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
 - 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
 - 研究完成提交 `0236e3e7` 已随正常合并 `1b55fbda` 实际推送，远端 ref 已确认；见 [同步回执](docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md)。[配置审计](docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md) 和独立情境/修订测试完成。

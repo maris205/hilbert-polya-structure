@@ -1,0 +1,222 @@
+TWO-STEP DYNAMICS AND FLAGGED FIBRES
+OF PREVIOUS-SMALLER DISTANCES
+ANONYMOUS
+
+Abstract. Recomputing strict previous-smaller distances on an inversion sequence reaches an explicit
+recurrent involution after at most two updates. The nearest-smaller statistic is classical, but feedback
+compares the new distances themselves rather than following the original predecessor links. We prove
+that zero positions remain fixed and that the second iterate records precisely the original ascent set inside
+each positive block. At local block position j, the recurrent choices are 1 and j, which are exchanged by
+the next update. The maximum transient is two for every length at least four, with separate smallerlength boundaries. The recurrent and fixed populations are F2n−1 and Fn+1 . Independently, we evaluate
+every target fibre at every time t ≥ 2 by an alternating product of binomial coefficients. The formula
+retains the global position bounds of each block and distinguishes the two eventual phases. Complete
+proofs, together with bounded exact verification, separate this endpoint-to-fibre description from its
+classical static nearest-smaller and inversion-statistic ingredients.
+
+1. The map and its scope
+For n ≥ 1 use indices 0, . . . , n − 1 and the inversion-sequence box
+(1)
+
+En = {x = (x0 , . . . , xn−1 ) : 0 ≤ xi ≤ i},
+
+|En | = n!.
+
+The strict previous-smaller distance map is
+(
+i − max{h < i : xh < xi }, if this set is nonempty,
+(2)
+P (x)i =
+0,
+otherwise.
+It is a self-map of En : a positive distance lies between 1 and i. Every output is computed from the same
+old word. In particular, the update recomputes comparisons; it does not follow a pointer stored in xi .
+The tail τ (x) is the least t ≥ 0 at which P t (x) is periodic.
+Static nearest-smaller values are classical algorithmic objects [1]. Parent-distance representations also
+encode Cartesian trees [3], although that paper’s convention uses an earlier value at most the current
+value. Ties matter here: (2) sends 011 to 012, whereas the weak convention sends it to 011. Neither the
+static search nor its data structures are contributions of this note.
+The two results below concern the feedback itself. First, its second iterate decodes the original zero
+positions and internal ascent sets, and the resulting core has an explicit involution. Second, each target
+in either eventual phase has an evaluated source count with its original position-dependent bounds.
+Ascent sets and zero positions are already classical joint statistics: under the usual inversion code they
+correspond to permutation descents and left-to-right maxima [2]. The contribution asserted here is the
+concrete iterate and its fibre evaluation, not the discovery of those statistics or of the counting tools.
+2. Two-step decoding and the recurrent involution
+Zeros are invariant under P . If xi = 0, no nonnegative entry is smaller; if xi > 0, the earlier entry
+x0 = 0 is smaller. Let B(x) be the set of pairs (r, m) such that r + 1, . . . , r + m is a maximal positive
+block of x, immediately following the zero at position r. Its output distances lie in {1, . . . , j} at position
+r + j, because the nearest smaller predecessor cannot be to the left of r.
+Lemma 2.1 (First-image inequality). Let (r, m) ∈ B(x) and bj = P (x)r+j . Then b1 = 1, and for
+2 ≤ j ≤ m either bj = 1 or bj > bj−1 .
+Proof. Write pj for the nearest smaller predecessor of xr+j . If bj > 1, then xr+j ≤ xr+j−1 . Every entry
+strictly between pj−1 and r + j − 1 is at least xr+j−1 , hence at least xr+j ; the entry at r + j − 1 is not
+smaller either. Thus pj ≤ pj−1 and bj = r + j − pj ≥ r + j − pj−1 = bj−1 + 1. The first entry of the block
+has its zero barrier as nearest smaller predecessor, so b1 = 1.
+□
+Key words and phrases. finite dynamical system, inversion sequence, nearest smaller value, ascent set, inverse fibre.
+1
+
+2
+
+ANONYMOUS
+
+Define the block core
+(3)
+
+Cn = {y ∈ En : yr+j ∈ {1, j} for all (r, m) ∈ B(y), 1 ≤ j ≤ m}.
+
+On this set let J keep zeros and block starts fixed and exchange 1 ↔ j at each local position j ≥ 2.
+Theorem 2.2 (Exact endpoint and sharp height). The zero set of P 2 (x) is that of x. In each positive
+block,
+(
+j, xr+j−1 < xr+j ,
+2
+2
+(4)
+P (x)r+1 = 1,
+P (x)r+j =
+2 ≤ j ≤ m.
+1, xr+j−1 ≥ xr+j ,
+Moreover P 2 (En ) = Cn , P |Cn = J, and P 4 = P 2 . The recurrent set is exactly Cn , all periods divide two,
+and
+
+
+0, n ≤ 2,
+(5)
+max τ (x) = 1, n = 3,
+x∈En
+
+
+2, n ≥ 4.
+Proof. For j ≥ 2, bj = 1 is equivalent to the original adjacent ascent in (4). When bj = 1, its only smaller
+value in the block or left barrier is zero, so the next distance is j. When bj > 1, Lemma 2.1 makes the
+immediately preceding distance smaller, so the next distance is one. This proves (4) and P 2 (En ) ⊆ Cn .
+At a core coordinate with value j ≥ 2, the preceding core value is at most j − 1, and the next distance
+is one. At a core coordinate with value one, only the left zero is smaller, and the next distance is j. Thus
+P restricts to J, with J 2 the identity. Each core word is therefore its own two-step preimage. This proves
+the exact second image and P 4 = P 2 . Every periodic state lies in the second image, so the recurrent set
+is precisely the core.
+For n = 1, 2 the whole carrier is fixed. At n = 3 the six states are 000, 001, 002, 010, 011, 012; only 002
+is outside the core, and it maps to 001. For n ≥ 4, prepend n − 4 zeros to 0122. Its first-image positive
+block is 112, whose last value is neither one nor its local index three. That image is not recurrent, proving
+the sharp lower bound two; the second-image theorem supplies the upper bound.
+□
+Corollary 2.3 (Core census). Let F0 = 0, F1 = 1 and Fk+2 = Fk+1 + Fk . There are F2n−1 recurrent
+states, Fn+1 fixed states, and (F2n−1 − Fn+1 )/2 strict two-cycles.
+Proof. For the N = n − 1 positions after the initial zero, let aN , bN count core words ending respectively
+in zero and in a positive entry, with (a0 , b0 ) = (1, 0). A new zero has one choice, a positive block starts
+with one, and its continuation has the two distinct choices 1, j. Hence
+(6)
+
+(aN +1 , bN +1 ) = (aN + bN , aN + 2bN ).
+
+For N ≥ 1, induction gives (aN , bN ) = (F2N −1 , F2N ), so the total is F2N +1 , also valid at N = 0. A
+core word is fixed exactly when every positive block is a singleton. Binary words of length N with no
+consecutive ones are counted by FN +2 : conditioning on an initial zero or an initial 10 gives the Fibonacci
+recurrence, with initial counts 1, 2. The remaining core states are paired by J.
+□
+3. Every target fibre after two steps
+Fix (r, m) with r ≥ 0, m ≥ 1 and a set A ⊆ {2, . . . , m}. For B ⊆ A, let Seg(B) partition {1, . . . , m}
+into consecutive segments by cutting immediately before each j ∈ B. Define the globally flagged count
+
+
+X
+Y
+r+b
+|A|−|B|
+(7)
+Dr,m (A) =
+(−1)
+.
+b−a+1
+B⊆A
+
+[a,b]∈Seg(B)
+
+The word “flagged” refers to the position-dependent bounds r + j; the offset r is part of the count, not
+an ignorable block label. For y ∈ Cn and t ≥ 2, set
+(
+{j ∈ {2, . . . , m} : yr+j = j}, t even,
+(8)
+At (y; r, m) =
+{j ∈ {2, . . . , m} : yr+j = 1}, t odd.
+Theorem 3.1 (Target-resolved post-collapse fibres). For every n ≥ 1, every t ≥ 2 and every y ∈ En ,
+ Y
+
+Dr,m (At (y; r, m)), y ∈ Cn ,
+
+t −1
+(9)
+(P ) (y) = (r,m)∈B(y)
+
+0,
+y∈
+/ Cn .
+The empty product is one. Thus the all-zero target has exactly one source.
+
+PREVIOUS-SMALLER DISTANCE FEEDBACK
+
+3
+
+Proof. Theorem 2.2 gives P t (x) = J t−2 P 2 (x). A source of y must have exactly its zero set. For a core
+target, (4) says that the source’s internal ascent set in block (r, m) must be At (y; r, m), and this condition
+is sufficient. Different positive blocks are independent after the zero positions are fixed. It remains to
+count one block with entries 1 ≤ xr+j ≤ r + j and exact internal ascent set A.
+Impose nonascent on each edge outside A. Inclusion–exclusion on failures of the required ascents gives
+the sum over B ⊆ A with sign (−1)|A|−|B| , where ascents are allowed only before positions in B. The
+resulting word is weakly decreasing on every segment [a, b] of Seg(B). All entries of that segment are
+at most its first entry, which is at most r + a. Conversely, every weakly decreasing sequence of length
+b − a + 1 in {1, . . . , r + a} satisfies the later, increasing position bounds. Counting its value multiplicities
+gives
+
+ 
+
+(r + a) + (b − a + 1) − 1
+r+b
+=
+.
+b−a+1
+b−a+1
+Segments are independent, giving (7); blocks are independent, giving (9). Noncore targets have no source
+because every iterate at time at least two lies in Cn .
+□
+Example 3.2 (The global offset cannot be dropped). For a two-letter block, the number of strictly rising
+positive sources is
+
+ 
+
+r+2
+r+2
+Dr,2 ({2}) = (r + 1)(r + 2) −
+=
+.
+2
+2
+It equals one at offset zero and three at offset one. Thus an unflagged ascent count cannot substitute for
+the block factor in (9). At even times this ascent factor belongs to the local target 12; at odd times at
+least three it belongs to the exchanged target 11.
+4. Verification and limitations
+The paper-local standard-library verifier exhausts En for 1 ≤ n ≤ 8 (46,233 input states). It tests zero
+barriers, the first-image inequality, the endpoint, core action, sharp heights and both Fibonacci counts.
+Every target fibre is compared with literal iteration at t = 2, 3, 4, 5. A separate bounded source-word
+enumeration checks 315 flagged ascent patterns for 0 ≤ r ≤ 4, 1 ≤ m ≤ 6. The resulting 485,578
+assertions are finite pressure on the proofs, not an argument for larger parameters.
+The results concern the full box (1) and the strict rule (2). They do not characterize the first image
+or one-step fibres, classify largest fibres, or extend the carrier to arbitrary words. Under the classical
+inversion code, (9) also counts an intersection of prescribed permutation descent and record-position
+sets; that interpretation is not a new statistic [2]. Fibonacci recurrence, inclusion–exclusion and multiset
+counting likewise remain standard. The narrow conclusion is the exact two-step decoder and the explicit
+source count for each target and eventual phase. No claim of global priority or external publication
+clearance is made.
+References
+[1] Omer Berkman, Baruch Schieber, and Uzi Vishkin. Optimal doubly logarithmic parallel algorithms
+based on finding all nearest smaller values. Journal of Algorithms, 14(3):344–370, 1993. doi: 10.1006/
+jagm.1993.1018.
+[2] Zhicong Lin and Dongsu Kim. A sextuple equidistribution arising in pattern avoidance. Journal of
+Combinatorial Theory, Series A, 155:267–286, 2018. doi: 10.1016/j.jcta.2017.11.009.
+[3] Sung Gwan Park, Amihood Amir, Gad M. Landau, and Kunsoo Park. Cartesian tree matching and
+indexing. In 30th Annual Symposium on Combinatorial Pattern Matching (CPM 2019), volume 128 of
+Leibniz International Proceedings in Informatics, pages 16:1–16:14. Schloss Dagstuhl–Leibniz-Zentrum
+für Informatik, 2019. doi: 10.4230/LIPIcs.CPM.2019.16.
+
+
