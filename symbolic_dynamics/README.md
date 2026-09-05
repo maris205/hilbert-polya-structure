@@ -12,7 +12,23 @@ Papers 44--48 的候选选择、跨篇查重、来源宇宙边界与两阶段
 provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)
 统一归档；该归档只登记可重放证据，不把有限检索升级为全局优先权声明。
 
-## 最新完成批次：P167–P171
+## 当前入口与最新完成批次（2026-09-05 核对）
+
+跨会话恢复请先读 [当前研究状态](../SYMBOLIC_DYNAMICS_STATE.md)。
+最新完成批次是 **P192–P196**：五篇、两轮独立审查、20 页、10 次冷构建；
+研究提交为 `76146ba17eb15beccfc38e625427f8da726db919`。
+证据见 [最终 QA](../docs/papers192_196_sequence/FINAL_QA_REPORT.md)。全部仍为 `HOLD_EXTERNAL`。
+
+下一批 **P197–P201 仍在 Stage 1**：TCSD/CMM 通过候选筛选；LZK/FOSP
+的独立候选审查待完成；第五席空缺。尚未冻结五席、正式编号或生成论文。
+恢复点见 [批次状态](../docs/papers197_201_sequence/PIPELINE_STATE.md)。
+
+严格实物盘点为190个不同编号的论文材料包，不能称196篇全部完成。
+P51–P56缺少目录；另一个96目录为空；P57–P66本地有材料但未在Git历史中找到。
+详见 [历史与异常账本](../docs/research_state/HISTORY_AND_CAVEATS.md) 和
+[逐篇实物索引](../docs/research_state/PAPER_ARTIFACT_INDEX.tsv)。
+
+## 历史批次快照：P167–P171
 
 Route A 的 P167–P171 已完成五篇匿名短论文、两轮敌意评审、作者与独立
 reviewer 验算、十次 source-only 冷编译及最终 manifest 封口。批次归档见
@@ -33,6 +49,10 @@ reviewer 验算、十次 source-only 冷编译及最终 manifest 封口。批次
 hostile gate，但 69 只是搜索宽度，绝不等于已验证的动力学子类数。
 
 ## 论文与简明结论
+
+以下保留逐篇历史结论。P49/P50 行中的 `PUBLISHED_STATE_A_EXACT` 是旧阶段标签，
+不表示当前对外发表或审核放行；其 HANDOFF 仍为独立 writer-audit HOLD，STATUS.txt
+另记 `HOLD_FOR_FRESH_INDEPENDENT_PRE_RUN_REAUDIT`。当前状态以恢复入口及对应证据为准。
 
 | 论文项目 | 可共享论文 | 简明结果 | 状态 |
 |---|---|---|---|
@@ -1917,7 +1937,7 @@ external published；本文也不声称任何具体 H1/H2 hash 或 remote push/m
 - [Route-A evaluator](skills/route-a-evaluator.md)
 - [Route-B evaluator](skills/route-b-evaluator.md)
 - [prior-work 与共享文档](docs/)
-- [五十篇论文](papers/)
+- [论文目录（历史编号与缺口见恢复索引）](papers/)
 
 根目录不再设置项目包装层；每个论文项目各自使用 `PAPER_MANIFEST.sha256` 管理
 完整性。本地 PDF/legacy 输入语料和运行缓存不进入 manifests。

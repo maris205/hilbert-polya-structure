@@ -1,0 +1,18 @@
+map=FOSP_first_occurrence_Stirling_promotion
+status=PROMOTE_SPIKE_OWNER_AMBER_HOLD_EXTERNAL
+literal=delete_1_pair_decrement_insert_nn_at_first_1_gap
+n=0 states=1 image=1 recurrent=1 tail=0 period=1 cycles=1 fixed=1 max_fibre=1 max_targets=1 depth=(1,)
+n=1 states=1 image=1 recurrent=1 tail=0 period=1 cycles=1 fixed=1 max_fibre=1 max_targets=1 depth=(1,)
+n=2 states=3 image=2 recurrent=2 tail=1 period=2 cycles=1 fixed=0 max_fibre=2 max_targets=1 depth=(2, 1)
+n=3 states=15 image=8 recurrent=6 tail=2 period=3 cycles=2 fixed=0 max_fibre=3 max_targets=2 depth=(6, 6, 3)
+n=4 states=105 image=48 recurrent=24 tail=3 period=4 cycles=6 fixed=0 max_fibre=4 max_targets=6 depth=(24, 36, 30, 15)
+n=5 states=945 image=384 recurrent=120 tail=4 period=5 cycles=24 fixed=0 max_fibre=5 max_targets=24 depth=(120, 240, 270, 210, 105)
+n=6 states=10395 image=3840 recurrent=720 tail=5 period=6 cycles=120 fixed=0 max_fibre=6 max_targets=120 depth=(720, 1800, 2520, 2520, 1890, 945)
+n=7 states=135135 image=46080 recurrent=5040 tail=6 period=7 cycles=720 fixed=0 max_fibre=7 max_targets=720 depth=(5040, 15120, 25200, 30240, 28350, 20790, 10395)
+n=8 states=2027025 image=645120 recurrent=40320 tail=7 period=8 cycles=5040 fixed=0 max_fibre=8 max_targets=5040 depth=(40320, 141120, 272160, 378000, 415800, 374220, 270270, 135135)
+image_formula=n0:1;n>=1:2^(n-1)(n-1)!
+cdf_formula=n0:1;n>=1:(n+t)!/(2^t*t!),0<=t<=n-1
+exact_depth=CDF(t)-CDF(t-1),CDF(-1)=0
+fibre=0_unless_n_root_leaf_else_1+#root_children_after_n
+max_targets=n0:empty;n>=1:ordered_stars_with_n_first
+assertions=71614800
