@@ -1,0 +1,177 @@
+\section{Counting law and spectral consequences}
+\label{sec:counting}
+
+\subsection{Transfer of the comparator estimate}
+
+We now prove part~2 of Theorem~\ref{thm:finite}.
+For $k\ge2$, choose $\varepsilon=1/k$ in
+\eqref{eq:form-bracket} and set $d_k=\kappa^2k+B$.
+The min--max principle gives
+\begin{equation}
+N_{A_{1+1/k,C}}(k^2-d_k)
+\le N_\kappa(k^2)
+\le N_{A_{1-1/k,C}}(k^2+d_k).
+\label{eq:moving-bracket}
+\end{equation}
+For example, the upper form bound
+$q_\kappa\le Q_{1+1/k,C}+d_k\norm{\cdot}_2^2$
+implies that every comparator eigenvalue at most
+$k^2-d_k$ forces an eigenvalue of $H_\kappa$ at most
+$k^2$, which establishes the left inequality.
+
+For sufficiently large $k$ depending on $\kappa$,
+both shifted energies are positive, and
+\[
+r_\pm:=\sqrt{k^2\pm d_k}=k+O_\kappa(1).
+\]
+Define
+\[
+F(a,r)=\frac{2r}{\sqrt a}
+                \left[\log(2r/\sqrt C)-1\right].
+\]
+For $a\in[1/2,3/2]$ and $r=k+O_\kappa(1)$,
+\begin{align}
+\partial_rF(a,r)
+ &=\frac2{\sqrt a}\log(2r/\sqrt C)
+   =O_\kappa(\log k),\notag\\
+\partial_aF(a,r)
+ &=-\frac r{a^{3/2}}\left[\log(2r/\sqrt C)-1\right]
+   =O_\kappa(k\log k).
+\label{eq:comparison-derivatives}
+\end{align}
+The mean value theorem and Lemma~\ref{lem:comparator}
+therefore put both sides of \eqref{eq:moving-bracket}
+within $O_\kappa(\log k)$ of $F(1,k)$.
+Since
+\[
+F(1,k)=2k\log k+\bigl[\log(4/C)-2\bigr]k
+      =2k\log k+C_\kappa k,
+\]
+this proves \eqref{eq:count-law}.
+In particular, there exist $k_0(\kappa)>1$ and
+$M(\kappa)<\infty$ such that the absolute error is at most
+$M(\kappa)\log k$ for every real $k\ge k_0(\kappa)$.
+The uniform comparator estimate already includes thresholds,
+so no exceptional sequence of energies is omitted.
+
+\subsection{Heat trace}
+
+In energy variables, the count is
+\begin{equation}
+N_\kappa(E)
+=E^{1/2}\log E+C_\kappa E^{1/2}+R_\kappa(E),
+\qquad
+R_\kappa(E)=O_\kappa(\log(E+2))\quad(E\ge1).
+\label{eq:energy-count}
+\end{equation}
+This estimate ensures summability of $e^{-tE_j(\kappa)}$
+for every $t>0$.
+Because the count vanishes below the positive ground energy
+and grows slower than an exponential at infinity,
+Stieltjes integration by parts gives
+\begin{equation}
+\Tr(e^{-tH_\kappa})
+=t\int_0^\infty e^{-tE}N_\kappa(E)\,dE.
+\label{eq:heat-stieltjes}
+\end{equation}
+
+Extend $R_\kappa$ to $(0,1)$ by
+\eqref{eq:energy-count}.
+It is integrable there: the count is bounded and
+$E^{1/2}\log E$ is integrable. Its contribution to
+\eqref{eq:heat-stieltjes} on $(0,1)$ is $O_\kappa(t)$.
+For the high-energy part, put $u=tE$ and use
+\[
+\log(2+u/t)\le\log(1/t)+\log(2+u)
+\qquad(0<t\le1/2).
+\]
+The error term in \eqref{eq:heat-stieltjes} is therefore
+$O_\kappa(\log(1/t))$.
+Differentiating the absolutely convergent Gamma integral at
+$3/2$ evaluates the two leading terms as
+\[
+\frac{\Gamma(3/2)}{\sqrt t}
+       \bigl[\log(1/t)+\psi(3/2)+C_\kappa\bigr].
+\]
+The identities
+$\Gamma(3/2)=\sqrt\pi/2$ and
+$\psi(3/2)=2-\gamma-2\log2$ give
+$\psi(3/2)+C_\kappa=\log(\pi/\kappa)$.
+This proves \eqref{eq:heat-law} and part~3 of
+Theorem~\ref{thm:finite}.
+
+\subsection{Source zeta continuation}
+
+For $\Repart s>1/2$, absolute convergence permits
+Stieltjes integration by parts:
+\[
+Z_\kappa(s)
+=s\int_0^\infty N_\kappa(E)E^{-s-1}\,dE.
+\]
+After splitting the integral at 1 and using
+\eqref{eq:energy-count}, the result is
+\begin{align}
+Z_\kappa(s)
+={}&\frac{s}{(s-1/2)^2}+\frac{sC_\kappa}{s-1/2}\notag\\
+ &+s\int_1^\infty R_\kappa(E)E^{-s-1}\,dE
+  +s\int_0^1 N_\kappa(E)E^{-s-1}\,dE.
+\label{eq:zeta-continuation}
+\end{align}
+The last integral is entire because the integrand vanishes
+below the positive ground energy.
+The preceding integral is holomorphic for $\Repart s>0$.
+Indeed, on a compact subset of that half-plane its integrand
+and each derivative with respect to $s$ are bounded by an
+integrable multiple of
+$E^{-1-\eta}(1+\log E)^m$ for a suitable $\eta>0$
+and finite $m$.
+Equation~\eqref{eq:zeta-continuation} thus gives the claimed
+meromorphic continuation.
+Expansion of its first two terms at $s=1/2$ gives
+\eqref{eq:zeta-principal}.
+The double-pole coefficient is nonzero, so the pole is genuine
+and is the only one in $\Repart s>0$.
+This proves part~4 of Theorem~\ref{thm:finite}.
+The remainder estimate does not extend this argument to $s=0$.
+
+\subsection{Schatten threshold and ordinary determinant}
+
+For real $p>0$, positivity gives
+\begin{equation}
+\sum_jE_j(\kappa)^{-p}
+=p\int_0^\infty N_\kappa(E)E^{-p-1}\,dE,
+\label{eq:positive-stieltjes}
+\end{equation}
+where both sides may be infinite.
+In \eqref{eq:energy-count}, the positive leading term
+dominates all lower-order terms.
+Convergence in \eqref{eq:positive-stieltjes} is equivalent
+to convergence of
+\[
+\int_1^\infty E^{-p-1/2}\log E\,dE,
+\]
+which holds precisely for $p>1/2$.
+At $p=1/2$ the integrand is $(\log E)/E$ and diverges.
+The singular values of $H_\kappa^{-1}$ are
+$E_j(\kappa)^{-1}$.
+For a fixed $z\in\rho(H_\kappa)$,
+$|E_j(\kappa)-z|/E_j(\kappa)\to1$,
+so every such resolvent has the identical Schatten threshold.
+This proves part~5 of Theorem~\ref{thm:finite}.
+
+In particular the inverse is trace class.
+Its ordinary Fredholm determinant is the locally uniformly
+convergent entire product
+\begin{equation}
+D_\kappa(z)=\det(I-zH_\kappa^{-1})
+           =\prod_{j=1}^\infty
+                    \left(1-\frac{z}{E_j(\kappa)}\right).
+\label{eq:ordinary-determinant}
+\end{equation}
+The zeros are exactly the simple source eigenvalues.
+Equation~\eqref{eq:ordinary-determinant} is not a closed-form
+special-function evaluation of the comb determinant.
+The Bessel function in Section~\ref{sec:comparator}
+belongs to $A_{a,C}$, not to $H_\kappa$.
+Nor does \eqref{eq:zeta-continuation} justify a
+zeta-regularized value $Z_\kappa'(0)$.
