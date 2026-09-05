@@ -23,6 +23,7 @@ PAPERS = {
     199: ROOT / "papers" / "199-first-one-stirling-splice",
     200: ROOT / "papers" / "200-lex-first-alternating-switch",
     202: ROOT / "papers" / "202-ternary-ordered-reset",
+    203: ROOT / "papers" / "203-monochromatic-triangle-complementation",
 }
 AUTHOR_FILE_LAYOUTS = {203: ("verify_p203.py", "CANONICAL.txt")}
 DIAGNOSTIC_LOG_LAYOUTS = {203: "qa_final/cold_build_2/main.log"}

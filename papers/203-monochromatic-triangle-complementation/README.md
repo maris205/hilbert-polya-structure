@@ -1,9 +1,10 @@
 # P203 — Least monochromatic-triangle complementation
 
-Date: 2026-09-05 UTC. **ROUND1_FROZEN / REVIEW_B_NEXT /
-OWNER_AMBER / HOLD_EXTERNAL**. Actual manuscript A accepted a scope-only
-repair; B and terminal QA remain pending. This is not yet a completed paper
-or a completed five-paper batch. ROUND1_RECEIPT.md controls current status.
+Date: 2026-09-05 UTC. **ROUND2_FROZEN / TERMINAL_QA_NEXT /
+OWNER_AMBER / HOLD_EXTERNAL**. Actual A accepted a scope-only repair;
+actual B accepted unchanged after full proof/source/build work. Root's
+fresh double replay and package gate passed before Round2. Terminal QA
+is pending. ROUND2_RECEIPT.md controls this stage, not old author labels.
 
 ## Main result
 
@@ -20,7 +21,7 @@ Johnson static classification/capacity receive zero contribution credit.
 
 ## Files and reproducibility
 
-- main.pdf and main_round1.pdf: accepted repaired four-page PDF.
+- main.pdf, main_round1.pdf and main_round2.pdf: accepted repaired four-page PDF.
 - main_round0_original.pdf: preserved original four-page author PDF.
 - main.tex, references.bib, BUILD.sh: standalone source-only build inputs
   and executable deterministic build recipe; details in BUILD.md.
@@ -38,6 +39,7 @@ Johnson static classification/capacity receive zero contribution credit.
   with its own complete manifest. ROUND0_RECEIPT.md identifies exact pins.
 - revision_a/, A_RESPONSE.md: preserved author repair before A acceptance.
 - frozen_round1/, ROUND1_RECEIPT.md: actual accepted A version and transition.
+- frozen_round2/, ROUND2_RECEIPT.md: actual unchanged B version and transition.
 - SHA256SUMS: complete current artifact tree except that manifest
   itself; this is evidence integrity, not reviewer acceptance.
 
@@ -51,6 +53,6 @@ paper A/B must independently adjudicate their own complete inputs.
 
 Fifth/LZK are mathematical co-contributors, not independent reviewers.
 temporal_author_audit.md is specifically an author-side compression check.
-The optional independent-gate vertex-zero lemma is not used. No Round2,
-second review pass, external upload or notification is manufactured.
-Root coordinates the actual second manuscript round and terminal QA.
+The optional independent-gate vertex-zero lemma is not used. The two actual
+manuscript reviews are separately recorded. No terminal PASS, external
+upload or notification is manufactured. Root coordinates final QA.

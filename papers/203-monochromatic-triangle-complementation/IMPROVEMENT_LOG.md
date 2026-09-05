@@ -35,7 +35,13 @@ views. The sealed A package passed root coverage/pins and two further fresh
 canonical comparisons. ROUND1_RECEIPT.md identifies the physical accepted
 repaired freeze. The historical Stage1 archival Minor1 remains unrepaired.
 
-## Review B and terminal QA — pending
+## Actual Review B and accepted unchanged Round2
 
-An actual different eligible process now receives frozen Round1. No B
-acceptance, Round2, terminal PASS or five-paper completion is predeclared.
+FOSP's actual distinct eligible process reviewed frozen repaired Round1,
+independently checked all bearing statements and the bounded owner surface,
+ran two final1502359-assertion controls and a new cold build/all-page view.
+It accepted unchanged. Root read the full sealed package and repeated B
+twice again under the package gate, passing594 checks and all52 pins.
+ROUND2_RECEIPT.md records the physical unchanged freeze. Original A-M1
+repair and the separate unrepaired historical archive finding both remain
+accurately recorded. Terminal PASS and five-paper completion await final QA.

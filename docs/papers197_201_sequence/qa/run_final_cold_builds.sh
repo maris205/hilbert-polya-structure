@@ -7,6 +7,7 @@ papers=(
   "199-first-one-stirling-splice"
   "200-lex-first-alternating-switch"
   "202-ternary-ordered-reset"
+  "203-monochromatic-triangle-complementation"
 )
 
 # An explicit subset allows completed Round2 papers to close their own QA

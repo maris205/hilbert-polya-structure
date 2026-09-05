@@ -19,11 +19,12 @@ provenance 由 [`docs/papers44_48_sequence/`](docs/papers44_48_sequence/)
 研究提交为 `76146ba17eb15beccfc38e625427f8da726db919`。
 证据见 [最终 QA](../docs/papers192_196_sequence/FINAL_QA_REPORT.md)。全部仍为 `HOLD_EXTERNAL`。
 
-下一批 **P197–P201 仍在 Stage 1**：TCSD/CMM 通过候选筛选；LZK/FOSP
-的独立候选审查待完成；第五席空缺。尚未冻结五席、正式编号或生成论文。
+当前批次保留 **P197/P199/P200/P202/P203**。P198/P201 在论文审查中淘汰，
+旧编号及原稿保留。五篇均已完成真实 A/B 审查并冻结 Round2，
+20 页已视读、10 次终端冷构建已完成；完整五篇重跑验收正在进行。
 恢复点见 [批次状态](../docs/papers197_201_sequence/PIPELINE_STATE.md)。
 
-严格实物盘点为190个不同编号的论文材料包，不能称196篇全部完成。
+整理前的冻结实物快照为190个不同编号的材料包，不是当前实时总数，也不能称196篇全部完成。
 P51–P56缺少目录；另一个96目录为空；P57–P66本地有材料但未在Git历史中找到。
 详见 [历史与异常账本](../docs/research_state/HISTORY_AND_CAVEATS.md) 和
 [逐篇实物索引](../docs/research_state/PAPER_ARTIFACT_INDEX.tsv)。

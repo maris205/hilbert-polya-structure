@@ -13,7 +13,7 @@ manuscript review API/upload/notification was performed. HOLD_EXTERNAL.
 | P200 LFAS | batch197_fosp_gate; candidate proof by batch197_lzk_gate | root | batch197_fifth_scout | neither proof author is A/B; both accepted, Round2 freeze |
 | P201 EPF | batch197_fifth_scout | batch197_fosp_gate | none | A exact-history rejection, no Round1/2 acceptance |
 | P202 OR | batch197_lzk_gate; candidate proof by batch197_fifth_scout | batch197_fosp_gate, accepted unchanged | root, accepted unchanged | both accepted, Round2, twofinalcoldbuilds/all4views, fullpackageauditPASS |
-| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root, accepted scope-only repair | batch197_fosp_gate, actual review underway on physical Round1 | A-M1 repaired and accepted; archivalStage1Minor1 separately retained; no B/Round2/terminal acceptance yet |
+| P203 MCT | batch197_fifth_scout; temporal proof by batch197_lzk_gate | root, accepted scope-only repair | batch197_fosp_gate, accepted unchanged | both actual reviews accepted; root double replay/package gate and physical Round2; terminal QA pending; archivalStage1Minor1 separately retained |
 
 Reviewer processes were not authors of their target proofs/manuscripts.
 They read actual frozen inputs and disclosed prior coordination/report
@@ -40,4 +40,7 @@ runs each executed1498484 checks; root's subsequent sealed-package gate
 repeated the canonical comparison twice. Root ran new original/repaired
 cold builds and viewed every page; the exact A-M1 repair is accepted in
 the sealed delta. P203 B is a new actual manuscript task, not a relabelled
-candidate gate; its reuse, proof work and completion await its own report.
+candidate gate. Its completed report discloses own Stage1 row-string engine
+reuse, with new full manuscript proof/source work and two final1502359-check
+runs. Root's sealed-package gate again ran it twice and passed594 checks,
+all52 pins and complete recursive coverage before the Round2 freeze.
