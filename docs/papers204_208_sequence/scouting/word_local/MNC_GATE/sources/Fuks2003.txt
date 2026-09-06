@@ -1,0 +1,871 @@
+Sequences of Preimages in Elementary
+Cellular Automata
+
+Henryk Fukś
+Brock University,
+Department of Mathematics,
+St. Catharines, ON L2S 3A1, Canada
+
+      Regularities are searched for in the sequences of numbers of preimages
+      for elementary cellular automata (CA). For 46 out of 88 “minimal” rules,
+      recognizable patterns are found, usually in the form of second order recur-
+      rence equations with constant coefficients. After introducing the concept
+      of asymptotic emulation of CA rules, it is shown how the regularities in
+      the sequences of preimage numbers can be used to find rules emulating
+      identity. It is also shown that the average density of nonzero sites after an
+      arbitrary number of steps (starting from a disordered configuration) can
+      be computed using the sequences of preimage numbers.
+
+
+
+
+   1. Introduction
+
+One of the fundamental problems in the theory of cellular automata
+(CA) is the enumeration of preimages. Preimages for a given spatial
+sequence are defined as the set of blocks that are mapped to that sequence
+by the automaton rule. Since the number of preimages for the sequence
+provides information about the probability distribution associated with
+the rule, it can be useful for a variety of problems, such as computations
+of spatial measure entropy, identification of sequences with maximal
+probability [5], and identification of the Garden of Eden [7].
+    For one-step preimages, E. Jen showed in [4] that the number of
+preimages for arbitrary sequences satisfies a system of recurrence rela-
+tions with coefficients depending on the automaton rule. No analytical
+results, however, are known for the number of n-step preimages, that
+is, the number of preimages under the rule iterated n times. In this
+paper, we will show that the sequences of n-step preimage numbers
+in many cases follow recognizable patterns, so the expression for the
+general term of the sequence can be conjectured (and, in some simple
+cases, proved). We will then present two possible applications of such
+expressions, in finding asymptotical emulators of CA rules and densities
+of nonzero sites after an arbitrary number of time steps.
+    Let ! ! "0, 1, ...N # 1$ be called a symbol set, and let "(!) be the set
+of all bisequences over !, where by a bisequence we mean a function
+on Z to !. The set "(!) is a compact, totally disconnected, perfect,
+
+       Complex Systems, 14 (2003) 29–43; % 2003 Complex Systems Publications, Inc.
+
+                                 https://doi.org/10.25088/ComplexSystems.14.1.29
+30                                                                               H. Fukś
+
+
+
+metric space, and will be called the configuration space. Throughout
+the remainder of this paper we shall assume that ! ! "0, 1$, and the
+configuration space "(!) ! "0, 1$Z will be simply denoted by ".
+   A block of radius r is an ordered set b#r b#r&1 . . . br , where r ' N,
+bi ' !. Let r ' N and let #r denote the set of all blocks of radius r over
+!. The number of elements of #r (denoted by card #r ) equals 22r&1 . The
+                                                                          )
+set of all blocks of finite radius will be denoted by # ! (r!0 #r .
+                          2r&1
+   A mapping f * "0, 1$        ! "0, 1$ will be called a cellular automaton
+rule of radius r. Alternatively, the function f can be considered as a
+mapping of #r into #0 ! ! ! "0, 1$. The set of all mappings of radius
+r will be denoted by $r , and the set of all possible CA mappings by
+       )
+$ ! (r!0 $r .
+   Corresponding to f (also called a local mapping) we define a global
+mapping F * S + S such that (F(s))i ! f (si#r , . . . , si , . . . , si&r ) for any s ' S.
+The composition of two rules f , g ' $ can now be defined in terms of
+their corresponding global mappings F and G as (F ! G)(s) ! F(G(s)),
+where s ' S. We note that if f ' $p and g ' $q , then f !g ' $p&q . For ex-
+ample, the composition of two radius-1 mappings is a radius-2 mapping:
+       (f ! g)(s#2 , s#1 , s0 , s1 , s2 ) !
+             f (g(s#2 , s#1 , s0 ), g(s#1 , s0 , s1 ), g(s0 , s1 , s2 )).             (1)
+Multiple composition will be denoted by
+       fn ! f ! f ! " ! f .                                                           (2)
+            #$$$$$$$$$$%$$$$$$$$$$&
+                n times
+    A block evolution operator corresponding to f is a mapping f *
+# ! # defined as follows. Let r , p > 0, a ' #r , f ' $p , and let
+bi ! f (ai#p , ai#p&1 , . . . , ai&p ) for #r & p - i - r # p. Then we define
+f (a) ! b, where b ' #r#p . Note that if b ' B1 then f (b) ! f (b).
+    In what follows we will consider the case of ! ! "0, 1$ and r ! 1
+rules, that is, elementary cellular automata. The set of radius-1 blocks
+#1 has then eight elements, which will be denoted by
+            i!7
+       "Βi $i!0 ! "000, 001, 010, 011, 100, 101, 101, 110, 111$,                      (3)
+so that the binary representation of the index i defines the block Βi .
+Given an elementary rule f , we will try to find the number of n-step
+preimages of such basic blocks under the rule f .
+
+     2. Sequences of preimage numbers
+
+The number of n-step preimages of the block b under the rule f is
+defined as the number of elements of the set f #n (b). For surjective rules,
+this number is always easily computed. As proved in [3], under the
+
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                              31
+
+
+
+ Block b    Rule numbers of the rule f
+   001      0
+   010      0, 19, 46, 126, 200
+   011      0, 2, 4, 8, 12, 24, 32, 34
+   100      0
+   101      0, 1, 2, 3, 8, 10, 11, 36, 128, 136, 138
+   110      0, 2, 4, 8, 12, 24, 32, 34
+   111      0, 2, 4, 6, 8, 10, 12, 14, 18, 24, 28, 32, 34, 40, 42, 50, 56, 72, 76
+
+  Table 1. Blocks b which have no preimages under some elementary rules f .
+
+
+surjective elementary rule every block has exactly four preimages, so
+card[f #n (b)] ! 4n for every block b. For nonsurjective rules, however,
+sequences of n-step preimage numbers can be highly nontrivial, and no
+general method for obtaining them without direct counting is known.
+    Using a simple preimage counting computer program, sequences
+an ! card f #n (b) can be constructed for a given rule f and a block b.
+For some elementary CA rules and basic blocks, these sequences appear
+to follow certain recognizable patterns, while for other rules no pattern
+seems to emerge after computation of the first 10 terms (since the num-
+ber of possible blocks increases exponentially with the block length,
+it becomes increasingly difficult to go much beyond n ! 10 using di-
+rect enumeration). The simplest pattern to recognize is the constant
+sequence an ! const. Let us first consider the case when f #n (Βi ) is empty,
+that is, an ! 0 for every positive integer n. In order to prove that a given
+block b ' #1 has no preimage under a given rule (i.e., card f #n (Βi ) ! 0)
+one just has to check that for every block c ' #2 (among 32 possible)
+the condition f (b) / c is satisfied. We performed this check for all 88
+minimal elementary CA rules and all basic blocks. Results are presented
+in Table 1.
+    Another type of constant sequence is the case when the set f #n (Βi )
+has only one element regardless of n, that is, an ! 1. All such cases are
+shown in Table 2. Although this table was generated with the help of
+a computer, it is not difficult to prove that card f #n (b) ! 1 for a given
+basic block b. As an example, consider elementary rule 77 (for this rule,
+f #1 (0) ! "001, 100, 101, 111$). We claim the following.
+Proposition 1. For rule 77, both sets f #n (000) and f #n (111) have only
+one element for all positive integers n.
+To see this, let us consider a block of ones 11 . . . 1 of radius r, which will
+
+by 0(r) ). It is easy to verify that f #1 !1(r) " ! 0(r&1) . Indeed, if we assume
+be denoted by 1(r) (similarly, a block of zeros of radius r will be denoted
+
+that there exists a block a ' #r&1 such that f (a) ! 1(r) , with at least one
+nonzero site, then block a must include at least one of the subblocks
+                                                       Complex Systems, 14 (2003) 29–43
+
+                               https://doi.org/10.25088/ComplexSystems.14.1.29
+32                                                                         H. Fukś
+
+
+
+             Block b      Rule numbers of the rule f
+                000       77, 178
+                001       none
+                010       23, 128, 232
+                011       128,160, 162, 130, 132
+                100       none
+                101       23, 32, 44, 130, 232, 33
+                110       128, 130, 132, 160, 162,
+                111       77, 128, 130, 132, 134, 146, 160, 162, 178
+
+Table 2. Basic blocks b and rules f for which card[f #n (b)] ! 1 for every positive
+integer n.
+
+
+
+f (a) cannot be 1(r&1) . Therefore, for the rule 77 f #1 !1(r) " ! 0(r&1) , and
+001, 100, 101, or 111. All of these subblocks belong to f #1 (0), so
+
+similarly f #1 !0(r) " ! 1(r&1) , which implies that f #n (000) and f #n (111) are
+single-element sets for every positive integer n. Similar proofs can be
+constructed for other entries in Table 2.
+    Cases with an ! const > 1 are not numerous. We found only seven of
+them in all of the “minimal” elementary rules, with the largest possible
+constant an equal to 5. These cases can be summarized in the following
+conjecture.
+Conjecture 1.    The only minimal elementary CA rules and the only basic
+blocks for which the sequence of preimage numbers an ! card[f #n (Βi )]
+is constant (i.e., n-independent) and an > 1 are:
+              #n                    #n
+       card[f128 (001)] ! card[f128 (100)] ! 2
+              #n                   #n            #n
+       card f32 (001) ! card[f32 (100)] ! card[f58 (000)] ! 3
+              #n
+       card[f32 (010)] ! 4
+              #n
+       card[f50 (000)] ! 5.
+
+All of these expressions hold for any positive integer n.
+   The sequence an can be, of course, much more complicated than
+an ! const. After experimenting with various possibilities, we found that
+in many cases an appears to satisfy a second order difference equation
+with constant coefficients
+       an&2 ! c1 an&1 & c2 an & c3 .                                           (4)
+To check whether this is plausible, we performed the following test.
+Using the first five terms of an (obtained using the preimage counting
+
+
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                               33
+
+
+
+program) we can solve the system of three linear equations for c1 , c2 ,
+and c3 :
+      a 3 ! c1 a 2 & c2 a 1 & c3 ,
+      a 4 ! c1 a 3 & c2 a 2 & c3 ,
+      a 5 ! c1 a 4 & c2 a 3 & c3 .                                                  (5)
+The solutions c1 , c2 , and c3 can now be used to generate the next five
+terms of the sequence a6 . . . a10 . If they agree with the experimental
+values of a6 . . . a10 , we can conjecture that the sequence an is a solution
+of the difference equation (4).
+   As an example, let us consider the rule 172 and the block 101.
+                                                                          2
+This block has four preimages under f172 , 12 preimages under f172 ,
+                           3
+40 preimages under f172 , and so forth. The first few terms of an !
+       #n
+card[f172 (101)] obtained using the preimage counting program are
+      an ! "2, 6, 20, 64, 208, 672, 2176, 7040, 22784 . . .$.                       (6)
+Solving equation (5) we obtain c1 ! 2, c2 ! 4, and c3 ! 0, that is,
+      an&2 ! 2an&1 & 4an .                                                          (7)
+Although this difference equation was obtained using a1 . . . a5 only, it
+is easy to check that it is satisfied for all 10 terms listed above. Its
+
+                #             #
+solution is
+
+                       #
+            (1 & 5)n&2 # (1 # 5)n&2
+      an !                             .                             (8)
+                     8 5
+The same procedure can be applied to other elementary rules, and for
+many of them expressions similar to equation (8) can be found. A table
+in the appendix shows all such cases. They are presented as a set of eight
+expressions, each representing an ! card[f n (Βi )] for all eight basic blocks
+Βi , i ! 1 . . . 7. Only rules for which we were able to conjecture all eight
+expressions are shown, including cases when an ! const. Surjective
+rules (i.e., 15, 30, 45, 51, 60, 90, 105, 106, 150, 170, 204, and 240)
+are omitted, since for them we always have an ! 4n .
+
+   3. Asymptotic emulation in cellular automata
+
+We say (after [6]) that f emulates g in k iterations (k , 0) or f is a kth
+level emulator of g if
+      f ! f k ! g ! f k.                                                            (9)
+If a CA f emulates g then after k time steps we can replace the rule
+f by g and we will obtain the same result as if we had kept rule f .
+For example, many elementary (r ! 1) rules emulate the identity rule.
+                                                        Complex Systems, 14 (2003) 29–43
+
+                                     https://doi.org/10.25088/ComplexSystems.14.1.29
+34                                                                       H. Fukś
+
+
+
+
+      (a)                                (b)
+
+
+
+
+      (c)                                (d)
+Figure 1. Examples of CA rules emulating identity: (a) rule 4, first-level emu-
+lation; (b) rule 36, second-level emulation; (c) rule 172, asymptotic emulation;
+and (d) rule 164, asymptotic emulation.
+
+
+As proved in [6], these rules are 0, 4, 8, 12, 36, 72, 76, 200, and 204
+(only minimal representatives are listed here), and the level of emulation
+is always 0, 1, or 2. Spatiotemporal patterns generated by these rules
+after a few time steps become identical with the pattern generated by the
+identity rule (vertical strips), as shown in Figures 1(a) and 1(b). Visual
+examination of patterns generated by elementary CA reveal that more
+rules than those mentioned earlier produce patterns resembling rule
+204 (identity rule). Among 88 “minimal” representatives of elementary
+rules there are 16 other “identity-like” mappings, namely 13, 32, 40,
+44, 77, 78, 104, 128, 132, 136, 140, 160, 164, 168, 172, and 232.
+Typical patterns produced by these mappings are shown in Figures 1(c)
+and 1(d). These patterns eventually become vertical strips, but the time
+required to achieve such a state may be quite long. None of them, of
+course, emulates identity in the sense of equation (9). We could say,
+however, that these rules simulate identity “approximately,” and that
+this approximation gets better and better with an increasing number of
+time steps. A quantitative description of this phenomenon is possible if
+we introduce a distance between rules. For f ' $p and b ' #q , where
+q > p, we define f (b) ! f (b#r , . . . , bi , . . . , br ). A metric in $ can be
+constructed as follows.
+
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                               35
+
+
+
+Proposition 2. Let f ' $m , g ' $n , and k ! max"m, n$. A function
+d * $ 0 $ ! [0, 1] defined by
+                            %              %
+      d(f , g) ! 2#2k#1 $ %%%f (b) # g(b)%%%                  (10)
+                              b'#k
+
+is a metric in $ .
+Obviously, d(f , g) , 0 and d(f , g) ! 0 1 f ! g. Triangle inequality
+holds too since 2x & y2 - 2x2 & 2y2 for all x, y ' "0, 1$.
+  A CA rule f asymptotically emulates rule g if
+       lim d(f n&1 , g ! f n ) ! 0.                                               (11)
+      n+)
+
+Clearly, if f is a kth level emulator of g then f emulates g asymptotically.
+We may think about asymptotic emulation as infinity-level emulation.
+   Let us now consider two rules f , g ' $ . Their sum modulo 2 will be
+defined as (f 3 g)(b) ! f (b) & g(b)mod 2 ! 2f (b) # g(b)2 for any b ' #.
+Note that (f 3 g)(b) ! 0 if f (b) ! g(b) and (f 3 g)(b) ! 1 if f (b) / g(b).
+Proposition 3.     Let f , g ' $1 and h ! f 3 g. Let A0 ! h#1 (1), and let
+An ! f #n (A0 ). Then
+                              card An
+      d(f n&1 , g ! f n ) !           .                                           (12)
+                               22n&3
+Proof. Mapping f n&1 is a rule of radius n & 2, therefore using the def-
+inition of the distance equation (10) and properties of block evolution
+
+                                       %                         %
+functions we have
+      d(f n&1 , g ! f n ) ! 2#2n#3 $ %%%f n&1 (b) # g ! f n (b)%%% , (13)
+                                      b'#n&1
+
+or d(f n&1 , g!f n ) ! 2#2n#3 cn , where cn is a number of blocks b ' #n&2 such
+that f n&1 (b) / g ! f n (b). Similarly, the set A0 is a set of all blocks b ' #1
+such that f (b) / g(b). Let us now consider a block a ' Bn&1 such that
+f n&1 (a) / g!f n (a). The last relation can be written as f 4f n (a)5 / g 4f n (a)5,
+and this is possible if and only if f n (a) ' A0 , which is equivalent to
+a ' f #n (A0 ). This proves that block a ' #n&1 satisfies f n&1 (a) / g ! f n (a)
+if and only if a ' An , so finally cn ! card An .
+  Proposition 3 can be useful in finding asymptotical emulators. As an
+example, consider the case of rule 77 discussed earlier, where we have
+      A0 ! (f77 3 f204 )#1 (1) ! "000, 111$.                                      (14)
+                                                #n            #n
+We already proved (in Proposition 1) that both f77 (000) and f77 (111)
+have only one element for all n. Note that
+            #n                     #n                #n
+      card[f77 "000, 111$] ! card[f77 (000)] & card[f77 (111)]
+                           ! 1 & 1 ! 2,                                           (15)
+                                                        Complex Systems, 14 (2003) 29–43
+
+                                     https://doi.org/10.25088/ComplexSystems.14.1.29
+36                                                                        H. Fukś
+
+
+
+since the preimage of the union of two sets is always the union of the
+preimages of the sets. This leads to the conclusion that
+          n&1           n              2
+       d(f77  , f204 ! f77 )!       2n&3
+                                             ! 2#2n#2 .                      (16)
+                                   2
+Of course, the above distance goes to zero with n, therefore rule 77
+asymptotically emulates the identity (rule 204). Almost identical rea-
+soning can be presented for rules 128 and 132, both of which asymp-
+totically emulate identity and
+          n&1           n
+       d(f128 , f204 ! f128 ) ! 3 6 2#2n#3
+          n&1           n
+       d(f132 , f204 ! f132 ) ! 2#2n#2 .                                     (17)
+  A slightly different analysis can be performed for rule 32. Here, from
+                             #n
+Table 1, we read that card[f32 (101)] ! 1. Since
+       (f32 3 f0 )#1 (1) ! 101,
+                             n&1             n
+we conclude that d(f32 , f0 ! f32 ) ! 2#2n#3 , and therefore rule 32 em-
+ulates the zero rule asymptotically. It also emulates the identity rule
+asymptotically, as a consequence of the following general property.
+Proposition 4.  If f ' $ emulates the zero rule asymptotically, then it
+also emulates the identity rule asymptotically.
+Proof. Using the triangle inequality, we have
+       0 - d(f n&1 , f204 ! f n )
+         - d(f n&1 , f0 ! f n ) & d(f0 ! f n , f204 ! f n ).                 (18)
+Since f0 ! f n ! f0 and f204 ! f n ! f n , we obtain
+       d(f0 ! f n , f204 ! f n ) ! d(f0 , f n ) ! d(f n , f0 ! f n#1 ).      (19)
+Equation (19), and the fact that f asymptotically emulates f0 , implies
+       lim !d(f n&1 , f0 ! f n ) & d(f0 ! f n , f204 ! f n )" !
+       n+)
+        lim d(f n&1 , f0 ! f n ) & lim d(f n , f0 ! f n#1 ) ! 0,
+        n+)                            n+)
+
+so finally limn+) d(f n&1 , f204 !f n ) ! 0, as required for f to emulate identity
+asymptotically.
+   Of course, we could directly use expressions from the appendix and
+find that
+          n&1           n       5
+      d(f32   , f204 ! f32 ) ! 2n&3 .                            (20)
+                              2
+   For other identity-like rules mentioned at the beginning of this sec-
+tion, the mechanism of emulation is not as simple as in previous cases.
+Nevertheless, experimental evidence suggests the following conjecture.
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                                   37
+
+
+
+              f     dn ! d(f n&1 , f204 ! f n )    f    dn ! d(f n&1 , f204 ! f n )
+              13    7 6 2#n#4                     132   2#2n#2
+                           #2n#3
+              32    562                           136   2#n#2
+                        #n#1
+              40    2                             140   2#n#3
+              44    7 6 2#2n#3                    160   3 6 2#n#2 # 4#n#1
+                        #2n#2
+              77    2                             164   5 6 2#n#3 # 4#n#1
+              78    4#1 if n ! 1                  168   3n&1 6 2#2n#3
+                                                            #          #
+                    15 6 2#n#6 if n > 1
+                                                                    #
+                                                        #(1# 5)n&3 &(1& 5)n&3
+           104      163 6 2#2n#3 if n > 5         172         22n&6 5
+           128      3 6 2#2n#3                    232   2#2n#2
+
+
+Table 3. Distance dn ! d(f n&1 , f204 !f n ) for rules asymptotically emulating identity.
+
+
+Conjecture 2.  Among the 88 “minimal” elementary CA rules, only
+rules 14, 40, 44, 78, 104, 136, 140, 160, 164, and 172 asymptoti-
+cally emulate the identity rule.
+
+Postulated expressions for the distance d(f n&1 , f204 ! f n ) are shown in
+Table 3. For completeness, rules for which the proof is known (i.e., 32,
+77, 128, and 132) are included as well.
+
+   4. Density of nonzero sites
+
+The simplest statistical quantity characterizing a configuration is the av-
+erage fraction of sites with value 1 at time t, denoted by ct . The question
+we want to address now is as follows: If we start from a disordered con-
+figuration with c0 ! 0.5 (i.e., equal probability of 0 and 1), what is the
+density ct at a later time t? When c0 ! 0.5, a disordered configuration
+contains all eight possible basic blocks with equal probability. Applying
+a CA rule to this initial state yields a configuration in which the fraction
+of sites with value 1 is given by
+              card[f #1 (1)]
+       c1 !                  ,                                                        (21)
+                   8
+or in other words, by the fraction of the eight possible basic blocks
+which yield 1 according to the CA rule [8]. Similarly, the density of
+ones after two time steps will be given by the fraction of the 32 blocks
+of radius 2 which yield 1 when f 2 is applied. In general, we can write
+              card[f #t (1)]
+       ct !                  ,                                                        (22)
+                 22t&1
+where card[f #t (1)], as usual, denotes the number of preimages of 1 under
+
+
+                                                            Complex Systems, 14 (2003) 29–43
+
+                                     https://doi.org/10.25088/ComplexSystems.14.1.29
+38                                                                                 H. Fukś
+
+
+
+     Rule     ct                         Rule    ct
+                      5
+      1       7/16 & 16 (#1)t              2     1/8
+                      3
+      3       7/16 & 16 (#1)t              4     1/8
+                      3                                   3
+      5       7/16 & 16 (#1)t              7     15/32 & 32 (#1)t # (#2)#t#4 # 2#t#4
+      8       0                           10     1/4
+     12       1/4                         13     7/16 # (#2)#t#3
+                    3
+     19       1/2 & 32 (#1)t              23     1/2
+                                                          1
+     24       3/16                        27     17/32 & 32 (#1)t
+                     1          5 #t
+     28       1/2 & 48 (#1)t # 24 2       29     1/2
+               #1#2t
+     32       2                           34     1/4
+     36       1/16                        38     9/32
+                  #t#1
+     40       2                           42     3/8
+     44       1/6 & 56 2#2t               46     3/8
+     50       1/2 # 2#2t#1                72     1/8
+     76       3/8                         77     1/2
+     78       9/16                       108     5/16
+     128      2   #1#2t
+                                         130     1/6 & 13 2#2t
+     132      1/6 & 13 2#2t              136     2#t#1
+     138      3/8                        140     1/4 & 2#t#2
+     156      1/2                        160     2#t#1
+
+                                                             #     #        #     #
+     162      1/3 & 16 4#t               164     1/12 # 13 4#t & 34 2#t
+                                                                       t                 t
+     168       t #2t#1
+              32                         172     1/8 & (10#4 5)(1# 5)4062
+                                                                       &(10&4 5)(1& 5)
+                                                                          2t
+
+     178      1/2                        200     3/8
+     232      1/2
+
+          Table 4. Density of ones for a disordered initial state with c0 ! 0.5.
+
+
+f t . To make use of the table in the appendix, we can rewrite the last
+equation as
+
+          ct ! 2#2t#1 $ card[f #t&1 (Βi )],                                                  (23)
+                          f (Βi )!1
+
+where the sum runs over all radius-1 blocks Βi which yield 1 according
+to the CA rule, which can also be written as
+
+          ct ! 2#2t#1 $ f (Βi ) card[f #t&1 (Βi )].
+                           7
+                                                                                             (24)
+                          i!0
+
+Applying this procedure to rules listed in the appendix, we obtain ex-
+pressions for ct , as shown in Table 4. The following three kinds of ct
+behavior can be observed in this table.
+
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                            39
+
+
+
+                       Rule    Approximate c)      Exact c)
+                          7    0.469 7 0.001       15/32
+                        13     0.437 7 0.001       7/16
+                        27     0.531 7 0.001       17/32
+                        44     0.167 7 0.001       1/6
+                        78     0.562 7 0.001       9/16
+                       130     0.167 7 0.001       1/6
+                       162     0.333 7 0.001       1/3
+                       164     0.083 7 0.001       1/12
+
+
+Table 5. Rules for which exact values of asymptotic density can be found using
+n-step preimage counting.
+
+   1. ct is constant, like in rule 4.
+   2. ct oscillates and the asymptotic density is undefined, like in rule 5.
+   3. ct converges exponentially to the final density like in rule 44, sometimes
+      oscillating like in rule 13.
+Note that no rule listed in Table 4 converges to the final density slower
+than exponentially. This is due to the fact that all rules for which
+we were able to conjecture exact expressions for the number of n-step
+preimages were either class 1 or class 2 rules according to Wolfram’s
+classification. It is well known that some class 3 and class 4 rules (e.g.,
+rule 18) exhibit power law relaxation to the final state, but we failed to
+find any patterns in their n-step preimage sequences, thus no expressions
+for ct could be postulated.
+   However, even for “simple” rules like those listed in Table 4, our
+method yields some interesting results. For example, [8] lists asymptotic
+densities for all “minimal” elementary rules, but for many of them only
+experimental (i.e., computer simulation) values are given. For eight such
+rules we were able to find exact values of c) , simply by computing the
+limit of ct as t + ). These rules are presented in Table 5, along with
+experimental values of c) quoted from [8]. We also verified some exact
+values of c) given in [8]. For example, the density of nonzero sites for
+rule 132 is
+            1 2#2t
+       ct ! &         ,                                               (25)
+            6     3
+hence c) ! 1/6, not 1/8 as [8] suggests.
+
+   5. Conclusion and remarks
+
+Some experimental results are presented regarding sequences of num-
+bers of n-step preimages under elementary cellular automata (CA) rules.
+                                                     Complex Systems, 14 (2003) 29–43
+
+                                https://doi.org/10.25088/ComplexSystems.14.1.29
+40                                                                                           H. Fukś
+
+
+
+Many of these sequences exhibit apparent regularities, and the expres-
+sions for the general term of the sequence can be conjectured for 46 out
+of 88 “minimal” CA rules. Expressions obtained this way can be used to
+find asymptotic emulators of rules as well as the density of nonzero sites.
+   All rules discussed in this paper were either class 1 or class 2 according
+to Wolfram’s classification. Sequences of preimage numbers for chaotic
+rules (except surjective rules) appear to be much more complex, and
+no patterns seem to appear. If any regularities exist, their detection will
+most certainly require computation of many more terms of the sequence,
+and a more efficient algorithm may be necessary. P. Grassberger pro-
+posed such an algorithm in [1], but even with his method going beyond
+n ! 20 becomes impractical. Another method proposed in [2], called
+the statistical inverse iteration, is unfortunately only approximate, thus
+not very usable for the purpose of exact enumeration.
+
+      Acknowledgments
+
+The author acknowledges financial support from the Natural Sciences
+and Engineering Research Council of Canada.
+
+Appendix
+
+      Table of preimage sequences
+
+The following table shows the sequence numbers of n-step preimages
+for some elementary cellular automata rules. They are presented as a
+set of eight expressions (although not all of them are independent), each
+representing an ! card[f n (Βi )] for all eight basic blocks i ! 1 . . . 7. Only
+rules for which the author was able to conjecture all eight expressions
+are shown.
+
+     Rule 0 * 32 6 4n#1 , 0, 0, 0, 0, 0, 0, 0
+              #5 6 4#45n & 7 6 4n                   #3 6 4#45n & 5 6 4n 3 6 4#45n & 11 6 4n
+     Rule 1 *                         , 2 6 4n#1 ,                       ,                      ,
+                         2                                  32                      32
+                                      n            n            n          n
+                            3 6 4#45 & 11 6 4 77 6 4#45 & 85 6 4
+              2 6 4n#1 , 0,                          ,
+                                      32                       32
+     Rule 2 * 20 6 4n#1 , 4n , 4n , 0, 4n , 0, 0, 0
+              #3 6 4#45n & 5 6 4n n #4#45n & 3 6 4n 4#45n & 5 6 4n n
+     Rule 3 *                         ,4 ,                     ,                 ,4 ,
+                         2                             8                8
+                      n          n              n          n
+                  4#45 & 5 6 4 11 6 4#45 & 15 6 4
+              0,                   ,
+                         8                       8
+     Rule 4 * 21 6 4 , 3 6 4 , 4 , 0, 3 6 4n#1 , 4n#1 , 0, 0
+                    n#1         n#1 n
+
+              #6 6 4#45n & 9 6 4n #3 6 4#45n & 9 6 4n                      3 6 4#45n & 7 6 4n
+     Rule 5 *                         ,                       , 5 6 4n#1 ,                    ,
+                         4                        16                              16
+              #3 6 4#45n & 9 6 4n 3 6 4#45n & 9 6 4n 3 6 4#45n & 7 6 4n 9 6 4#45n & 11 6 4n
+                                      ,                     ,                     ,
+                        16                        8                   16                      8
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                                                      41
+
+
+           #3 6 4#45n 3 6 4#25n 17 6 2n 13 6 4n #4#25n 3 6 2n 4n
+  Rule 7 *               &             #            &           ,           &       &     ,
+                 4             8             8            4           8         8      2
+                           n                            n
+                       4#25     3 6 2n 4n #4#25                3 6 2n 4n
+           3 6 2n#1 ,        &          &      ,           &          &     ,
+
+           3 6 !4#25 & 5 6 2 " 4#25
+                         4         4       2         8           8        2
+                      n       n          n          n      n            n
+                                               362        4 3 6 4#45                 7 6 2n 11 6 4n
+                                 ,         &           &     ,             # 4#25n #        &
+                      8               4          4        2         4                  2      4
+                n
+  Rule 8 * 8 6 4 # 12In , 4In , 4In , 0, 4In , 0, 0, 0
+ Rule 10 * 12 6 4n#1 , 6 6 4n#1 , 4n , 2 6 4n#1 , 6 6 4n#1 , 0, 2 6 4n#1 , 0
+ Rule 12 * 10 6 4n#1 , 6 6 4n#1 , 8 6 4n#1 , 0, 6 6 4n#1 , 2 6 4n#1 , 0, 0
+           #3 6 4#25n 7 6 2n #4#25n                    #4#25n 21 6 2n 7 6 4n
+ Rule 13 *              &          ,           & 4n ,           #           &         ,
+                 4            4          2                 8           8        2
+                   n           n           n                  n          n        n
+           3 6 4#25       7 6 2 #4#25                3 6 4#25     762        564
+                      &          ,            & 4n ,            #          &        ,
+                8           8          2                  4           4       2
+                   n                         n
+           3 6 4#25       7 6 2n 3 6 4#25        7 6 2n
+                      &          ,             &
+                8           8           8            8
+ Rule 19 * 3 6 (#4)n#1 & 5 6 22n#1 , 3 6 4n#1 , 0, 3 6 4n#1 & In , 3 6 4n#1 , In , 3 6 4n#1 & In ,
+             5 6 22n#1 # 3 6 (#4)n#1 # 3In
+                 1 & 2 6 4n&1 1 & 2 6 4n          1 & 2 6 4n 1 & 2 6 4 n        1 & 2 6 4n
+ Rule 23 * #2 &                ,             , 1,            ,             , 1,            ,
+                      3              3                3            3                3
+                 1&264    n&1
+           #2 &
+                      3
+ Rule 24 * 14 6 4n#1 # 4In , 6 6 4n#1 , 6 6 4n#1 & 2In , 0, 6 6 4n#1 , 2In , 0, 0
+ Rule 27 * (#4)n#1 & 5 6 4n#1 , 4n , 2 6 4n#1 , 4n , 4n , 2 6 4n#1 , 4n , #(#4)n#1 & 7 6 4n#1
+           5 6 2n #4#45n 4#25n 5 6 2n 4n #4#45n                                      10 6 2n
+ Rule 28 *        ,          &            &         &       ,           # 4#25n #              & 3 6 4n ,
+              2         6            2          3       2        6                       3
+           4#45n 4#25n 5 6 2n 4n #4#45n 4#25n 5 6 2n 4n
+                   &          &           &      ,           &          &          &      ,
+              6          2           6       2        6           2          3        2
+                n                       n                   n          n          n       n
+           4#45                  25 6 2               4#45       4#25        562        4
+                   # 4#25n #              & 3 6 4n ,          &          &          &       ,0
+              6                      6                  6           2          6        2
+ Rule 29 * 3 6 4n#1 , 3 6 4n#1 , 7 6 4n#1 , 3 6 4n#1 , 3 6 4n#1 , 7 6 4n#1 , 3 6 4n#1 , 3 6 4n#1
+ Rule 32 * #11 & 32 6 4n#1 , 3, 4, 0, 3, 1, 0, 0
+ Rule 34 * 10 6 4n#1 , 6 6 4n#1 , 8 6 4n#1 , 0, 6 6 4n#1 , 2 6 4n#1 , 0, 0
+ Rule 36 * 26 6 4n#1 # 10In , 2 6 4n#1 & 2In , 2 6 4n#1 , 2In , 2 6 4n#1 & 2In , 0, 2In , 2In
+                        11                   1                                        1
+ Rule 38 * 47 6 4n#2 #     I , 21 6 4n#2 # In , 3 6 4n#1 , 3 6 4n#1 , 21 6 4n#2 # In ,
+                         4 n                 4                                        4
+                      1
+           3 6 4n#2 & In , 3 6 4n#1 , 3In
+                      4
+ Rule 40 * #9 6 2n & 32 6 4n#1 , 4 6 2n#1 , 4 6 2n#1 , 2n , 4 6 2n#1 , 2n , 2n , 0
+ Rule 42 * 7 6 4n#1 , 5 6 4n#1 , 4n , 4n , 5 6 4n#1 , 3 6 4n#1 , 4n , 0
+                          1                1                            1
+ Rule 44 * #7 & 4n&1 , (4n&1 # 1), (4n&1 # 1) # 3 & In , 4 # In , (4n&1 # 1),
+                          3                3                            3
+           1, 4 # In , 2 & In
+ Rule 46 * 38 6 4n#2 # 7 6 In /2, 18 6 4n#2 # In /2, 0, 6 6 4n#1 ,
+           18 6 4n#2 # In /2, 6 6 4n#2 & In /2, 6 6 4n#1 , 4In
+                   2 6 4#1 & 4n 5 8 6 4#1 & 4n 5 2 6 4#1 & 4n 5      2 6 4#1 & 4n 5
+ Rule 50 * 5, 3 &                 ,               ,             ,3 &                ,
+                          3              3                 3               3
+                  8 6 4#1 & 4n 5 2 6 4#1 & 4n 5
+           #3 &                 ,                ,0
+                         3              3
+                                                                        Complex Systems, 14 (2003) 29–43
+
+                                          https://doi.org/10.25088/ComplexSystems.14.1.29
+42                                                                                               H. Fukś
+
+
+
+ Rule 72 * 97 6 4n#2 # 41In /4, 7 6 4n#2 & 9In /4, 4In , 22n#1 , 7 6 4n#2 & 9In /4,
+             4n#2 & 7In /4, 22n#1 , 0
+ Rule 76 * 5 6 4n#1 , 5 6 4n#1 , 8 6 4n#1 , 2 6 4n#1 , 5 6 4n#1 , 5 6 4n#1 , 2 6 4n#1 , 0
+               1 & 2 6 4n        1 & 2 6 4n&1 1 & 2 6 4n 1 & 2 6 4n
+ Rule 77 * 1,             , #2 &              ,         ,           ,
+                   3                   3          3          3
+                  1 & 2 6 4n&1 1 & 2 6 4n
+             #2 &              ,           ,1
+                        3            3
+
+ Rule 78 * 3 6 2n#1 , 3 6 2n#1 , 5 6 22n#1 # 9 6 2n#1 & 4In , 3 6 2n#1 & 4n # 2In , 3 6 2n#1 ,
+             7 6 22n#1 # 9 6 2n#1 & 2In , 3 6 2n#1 & 4n # 2In , 3 6 2n#1 # 2In
+Rule 108 * 32 6 4n#2 # 3In , 26 6 4n#2 # 3In /2, 24 6 4n#2 # 3In , 6 6 4n#2 & 3In /2,
+             26 6 4n#2 # 3In /2, 4n#1 , 6 6 4n#2 & 3In /2, 4n#1 & 6In
+Rule 128 * #8 & 32 6 4n#1 , 2, 1, 1, 2, 0, 1, 1
+                       #1 & 4n&1 #1 & 4n&1         #1 & 4n&1
+Rule 130 * #3 & 4n&1 ,             ,          , 1,           , 1, 1, 1
+                            3          3               3
+                 17 6 4n 2 13 6 4n #1 & 4n&1           2 13 6 4n n#1
+Rule 132 * #4 &         , &          ,             , 1, &           , 4 , 1, 1
+                   4      3       12        3          3      12
+                 n       n       n#1 n n         n#1     n n
+Rule 136 * #8 6 2 & 8 6 4 , 4 6 2 , 2 , 2 , 4 6 2 , 0, 2 , 2
+Rule 138 * 8 6 4n#1 , 6 6 4n#1 , 3 6 4n#1 , 3 6 4n#1 , 6 6 4n#1 , 0, 3 6 4n#1 , 3 6 4n#1
+                        5 6 4n
+Rule 140 * #2 6 2n &           , 6 6 4n#1 , #2n & 2 6 4n , 2n , 6 6 4n#1 , 2 6 4n#1 ,
+                          2
+           2 n , 2n
+                       4n                             4n n 4n
+Rule 156 * 2n , 2n &      , #3 6 2n & 3 6 4n , 2n &       ,2 &        , #3 6 2n & 3 6 4n ,
+                       2                               2           2
+                   4n n
+           2n &       ,2
+                    2
+Rule 160 * 3 # 10 6 2n & 8 6 4n , #1 & 2n&1 , #3 & 4 6 2n , 1, #1 & 2n&1 , #1 & 2n&1 , 1, 1
+           #1 & 4n&1 #1 & 4n&1                   1 & 2 6 4n&1       #1 & 4n&1 #1 & 4n&1
+Rule 162 *             ,               , #2 &                  , 1,            ,          , 1, 1
+                3              3                        3                3            3
+                                    2                  n
+                                                  264 1&264         n
+Rule 164 * 4 # 9 6 2n & 6 6 4n , # & 2n &                ,            , #1 & 2n&1 ,
+                                    3               3          3
+             2           2 6 4n n
+           # & 2n &             , 2 , #1 & 2n&1 , #1 & 2n&1
+             3             3
+
+                                 # n&2               # n&2               # n&3          # n&3
+Rule 168 * #7 6 3n & 8 6 4n , 3n , 3n , 3n , 3n , 3n , 3n , 3n
+
+                                            & &1 & 5'                             & &1 & 5'
+                                           #                                     #
+                         #&1 # 5'                                 #&1 # 5'
+Rule 172 * 20 6 4n#1 #                                         #                                ,
+
+                             # n&1               # n&1
+                                       86 5                                   46 5
+
+                                        & &1 & 5'
+                                        #
+                     #&1 # 5'
+            n n
+           4 ,4 #                                           ,
+
+                     # n&2               # n&2                  # n&3            # n&3
+                                   26 5
+
+           # (#&1 # 5'          & &1 & 5' ) #&1 # 5'                     & &1 & 5'
+                              #                       &                  #              ,
+                      # n&2               # n&2
+                           86 5                                       86 5
+                                 & &1 & 5'
+                                 #
+               #&1 # 5'
+            n
+           4 ,                                      ,
+                             86 5
+
+
+
+
+Complex Systems, 14 (2003) 29–43
+Sequences of Preimages in Elementary Cellular Automata                                      43
+
+
+                       #        # n&2      # n&3       # n&3
+            # (#&1 #      & &1 & 5' ) #&1 # 5'   & &1 & 5'
+                            n&2
+
+                        #                        #
+                           5'
+                                      &                      ,
+
+                 # n&3        # n&3
+                      86 5                     86 5
+
+                       & &1 & 5'
+                       #
+            #&1 # 5'
+                     86 5
+             1 & 2 6 4n          1 & 2 6 4n&1 1 & 2 6 4n 1 & 2 6 4n
+Rule 178 * 1,            , #2 &               ,         ,           ,
+                  3                    3          3          3
+                 1 & 2 6 4n&1 1 & 2 6 4n
+           #2 &                ,           ,1
+                      3              3
+                 n#1       n#1      n      n#1 n#1 n n
+Rule 200 * 13 6 4 , 3 6 4 , 0, 4 , 3 6 4 , 4 , 4 , 4
+                1 & 2 6 4n&1 1 & 2 6 4n      1 & 2 6 4n 1 & 2 6 4 n      1 & 2 6 4n
+Rule 232 * #2 &              ,          , 1,           ,            , 1,            ,
+                     3           3               3          3                3
+                1&264    n&1
+           #2 &
+                     3
+
+
+
+
+   References
+
+[1] Peter Grassberger, “Some Exact Enumeration Results for 1D Cellular Au-
+    tomata,” Journal of Physics A: Mathematical and General, 20 (1987)
+    4039–4046.
+
+[2] H. Gutowitz and C. Domain, “The Topological Skeleton of Cellular Au-
+    tomata Dynamics,” Physica D, 103 (1997) 155–168.
+
+[3] G. A. Hedlund, “Endomorphisms and Automorphisms of the Shift Dynam-
+    ical System,” Mathematical Systems Theory, 3(4) (1969) 320–375.
+
+[4] E. Jen, “Table of Preimage Formulae for Elementary Rules,” Report LA-
+    UR-88-3359 (Los Alamos National Laboratory, 1988).
+
+[5] E. Jen, “Enumeration of Preimages in Cellular Automata,” Complex
+    Systems, 3 (1989) 421–456.
+
+[6] T. Rogers and C. Want, “Emulation and Subshifts of Finite Type in Cellular
+    Automata,” Physica D, 70 (1994) 396–414.
+
+[7] B. H. Voorhees, Computational Analysis of One-dimensional Cellular Au-
+    tomata (World Scientific, Singapore, 1996).
+
+[8] S. Wolfram, Cellular Automata and Complexity:                           Collected Papers
+    (Addison-Wesley, Reading, MA, 1994).
+
+
+
+
+                                                               Complex Systems, 14 (2003) 29–43
+
+                                    https://doi.org/10.25088/ComplexSystems.14.1.29
+

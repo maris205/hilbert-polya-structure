@@ -135,3 +135,31 @@ entries in 28 manifests**, with zero missing/mismatched objects. This is
 committed-byte integrity, not a new mathematical execution or batch verdict.
 This receipt and that object result were written after the named commit;
 neither claims inclusion in its own referenced object. HOLD_EXTERNAL remains.
+
+## LNR source hold and sixth-lane closure checkpoint
+
+On 2026-09-06 UTC the 84-file owned checkpoint was actually committed
+and pushed as `6bd2d7984b5c111332fa5eb4974ff8636c00247c`. It preserves
+the full LNR inverse proof and independent HOLD_SOURCE gate, including
+the open owner finding and failed self-including manifest; root's new
+3,157,633-assertion replay pair; the closed sixth set/partition package;
+the bounded contrast intake; and root's evaluated distance-decoder lemma
+with its 118,044-assertion author pair. No extra paper is admitted.
+
+The mirror was clean at `ef9deb85`. Actual fetch showed ahead/behind
+`0 0`, so no merge was needed. Copy/staging excluded active UGR proof,
+MNC author/gate work, seventh geometry scouting and Python caches.
+All owned package bytes were explicitly staged; the scoped source/doc
+whitespace check passed. No unrelated files or historical bytes were
+changed. Actual push exited zero; `ls-remote` returned the exact SHA
+above, ahead/behind was `0 0`, and mirror status was empty.
+
+The read-only [candidate committed-object check](qa/GIT_OBJECT_CANDIDATES_6BD2D798.json)
+then passed **59 entries in three explicitly named manifests**: LNR
+gate, LNR inverse author, and sixth set/partition. This scoped adapter
+uses their directory-relative manifest roles; it does not reinterpret
+root-relative input pins or count the preserved failed manifest as a
+passing input. It checks archival bytes, not proofs or completion.
+This receipt and its object-check output were produced after the named
+commit and are not claimed to be included in their own referenced ref.
+P205 remains the sole completed seat; HOLD_EXTERNAL remains unchanged.

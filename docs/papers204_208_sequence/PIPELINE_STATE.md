@@ -36,10 +36,10 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | scouting/word_local/, central integration | 37 literal pilots; LNR source hold; contrast/source integration |
-| Combinatorial objects | batch197_fosp_gate | closed LNR_INVERSE_WORK/; word_local/UGR_PROOF_WORK/ | LNR inverse contributor; upper-neighbor rank temporal proof scout |
-| Algebra / finite geometry | batch197_lzk_gate | closed LNR_GATE/; word_local/CONTRAST_PROOF_WORK/ | LNR HOLD_SOURCE gate complete; MNC temporal/extremal author scout |
-| Graphs / relations | batch197_fifth_scout | closed set_partition_sixth/; scouting/discrete_geometry_seventh/ | sixth seven NO_PROMOTION; new bounded geometry lane |
+| Words / local maps | root | scouting/word_local/, central integration | LNR source hold; MNC gate rejection integrated; CPRM/invalid CSGD bounded scout |
+| Combinatorial objects | batch197_fosp_gate | closed LNR_INVERSE_WORK/, UGR_PROOF_WORK/, MNC_GATE/; scouting/finite_structures_eighth/ | MNC nonauthor gate KILL_VALUE; fresh bounded eighth lane |
+| Algebra / finite geometry | batch197_lzk_gate | closed LNR_GATE/ and CONTRAST_PROOF_WORK/; word_local/UGR_GATE/ | MNC author handoff closed; nonauthor UGR candidate gate active |
+| Graphs / relations | batch197_fifth_scout | closed set_partition_sixth/, discrete_geometry_seventh/; word_local/HVD_PROOF_WORK/ | seventh six NO_PROMOTION; bounded existing-HVD proof work |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -203,10 +203,39 @@ P205/P206 admissions below do not reverse that rejection.
   neither the old theorem nor a new refinement is invented from a preview.
   LNR has no number or reserve status. Upper-neighbor rank is related by
   input complement and cannot supply a separate inverse axis or second seat.
+  Root's later [TCSD collision supplement](scouting/word_local/LNR_EXTRA_COLLISION_NOTE.md)
+  connects the sign-stratum union to the nearer historical evaluated
+  candidate; it is an added scope obligation, not an accepted source delta.
   Four new [contrast/diversity literals](scouting/word_local/CONTRAST_INTAKE.md)
   have actual full 28-row pilot output on their predeclared boxes. MNC's
-  temporal/extremal proof scout is active. MDE remains a bounded signal,
+  temporal/extremal author proof is closed. MDE remains a bounded signal,
   not another prospective paper within that same contrast family.
+  Root's [distance decoder](scouting/word_local/MNC_DISTANCE_DECODER.md)
+  and successful 118,044-assertion author pair are zero-credit static
+  background, and make root a proof contributor rather than a possible
+  independent MNC manuscript reviewer. The full MNC author proof
+  was submitted to the separate nonauthor candidate gate. Root read the full final
+  source boundary and additional primary contexts and performed two fresh
+  356,509-assertion author-code executions with three raw byte comparisons;
+  all 25 manifest and nine context pins passed. UGR's closed author proof
+  separately proves a computer-assisted nonsharp $4n+2$ entrance bound,
+  exact period-two core and a sharp single-seed wave, not a sharp global
+  clock. Root read its complete proof/source/certificate and performed two
+  fresh 33,321-assertion author-code runs; all 27 manifest/five context pins
+  and three raw byte comparisons passed. The
+  [root author-level inspection](qa/root_replays/RANK_CONTRAST_AUTHOR_INSPECTION.md)
+  does not replace independent candidate review. MNC's actual nonauthor
+  [gate](scouting/word_local/MNC_GATE/CANDIDATE_GATE.md) subsequently closed
+  **MATH_VALID / KILL_VALUE_TEMPORAL_BINARY_WRAPPER / NO_ADMISSION**.
+  Root read its entire source/proof/report/finding/certificate, passed all
+  29 manifest/17 main/three supplementary pins and completed two fresh
+  293,461-assertion gate-code runs with three raw byte comparisons. The
+  [root disposition](scouting/word_local/MNC_ROOT_DISPOSITION.md) retains
+  MNC-V1 Critical/open and its correct global fibre residual; the full
+  binary tail adapter consumes the temporal axis. The root replay's
+  inherited harness role-label defect is disclosed without rewriting the
+  actual evidence. UGR's separate gate remains active. Neither candidate
+  has a paper number; root is a proof contributor to both.
 - The [sixth set/partition lane](scouting/set_partition_sixth/SCOUT_REPORT.md)
   is closed: seven executed literals, including an old negative control,
   all NO_PROMOTION. Root read its full report, proof boundaries and source/
@@ -214,17 +243,38 @@ P205/P206 admissions below do not reverse that rejection.
   historical pins. The full UPC closure-generator adapter deducts both
   axes; other gaps and the duplicate remain explicit. The 46-box/307,234
   state-map census is author evidence, not a new root numerical replay.
-  A separate bounded geometry lane is now active.
+  The [seventh geometry lane](scouting/discrete_geometry_seventh/SCOUT_REPORT.md)
+  is also closed: six NO_PROMOTION across 84 original full boxes and
+  109,867 state-map pairs. Root read the complete proof/source/report,
+  passed all 14 nonself manifest entries and 11 historical pins, and ran
+  its read-only artifact adapter (32 links/seven pair dependencies/four
+  embedded raw comparisons). This inspects the author's actual evidence;
+  it is not a new root numerical replay. HVD and a fresh eighth lane remain
+  bounded author scouting, not candidates or seats.
+- Two further root arithmetic literals were declared before their pilot.
+  CPRM completed all 30 original boxes; the second literal CSGD failed its
+  first carrier-invariance assertion on $(0,1)\mapsto(-1,0)$ and was
+  rejected without a zero-guard or clipping repair. Full failed input and
+  output remain in [the intake](scouting/word_local/ARITHMETIC_LOCAL_INTAKE.md).
+  CPRM's [closed elementary boundary](scouting/word_local/CPRM_PROOF_BOUNDARY.md)
+  proves its gcd terminal word, a nonsharp logarithmic-potential bound,
+  quotient-code inverse and unique uniform-one maximum; root does not
+  submit this tool-level conjunction for admission. No additional paper
+  or reserve follows, and no old cutoff was enlarged. Its standalone author
+  boundary checker and [two fresh raw replays](qa/root_replays/cprm_boundary/RECEIPT.md)
+  each completed 1,234,850 assertions on 82,179 original-box sources;
+  this is neither an independent gate nor a sharp-clock proof.
 
-The [private checkpoint receipt](GIT_SYNC_RECEIPT.md) confirms actual push
-`ef9deb8582712be0e6d174a0c58a23b1f5b977dc`, following `bad9dff9` and a
-normal fast-forward of disjoint remote Henon work. It includes P205's
-internal completion, P206's adverse A/root rejection, closed LUB/fifth
-intakes and root LNR temporal evidence. Generic ignored compiler evidence
-was explicitly retained; the [committed-object check](qa/GIT_OBJECT_CHECKPOINT_EF9DEB85.json)
-passed 712 pins in 28 manifests. Active LNR inverse/gate and the sixth
-set/partition intake were excluded. Later working changes are not
-implicitly synchronized by this historical ref.
+The [private checkpoint receipt](GIT_SYNC_RECEIPT.md) confirms latest actual
+push `6bd2d7984b5c111332fa5eb4974ff8636c00247c`. It adds the closed LNR
+inverse/gate and root pair, sixth-lane closure, contrast intake, and root
+distance proof/checks; a [named-manifest Git-object adapter](qa/GIT_OBJECT_CANDIDATES_6BD2D798.json)
+passed all 59 entries in those three newly archived candidate manifests.
+Active UGR, MNC author/gate and seventh-lane work were excluded. The
+previous `ef9deb85` still carries P205's internal completion, P206's
+rejection and the 712-pin/28-manifest object check. Both refs and the
+disjoint earlier remote work remain preserved. Later working changes
+are not implicitly synchronized by either historical ref.
 WIP archival integrity is not manuscript or batch acceptance.
 
 Next: continue the active candidate/source gates; replace
