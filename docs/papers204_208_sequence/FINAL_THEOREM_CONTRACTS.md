@@ -157,7 +157,7 @@ and no accepted A delta, Round1/B/Round2 exists. Original inputs are preserved.
 At P206 rejection the census was one retained, one completed, four unfilled
 seats. P207 below is the next admission. `OWNER_AMBER / HOLD_EXTERNAL` remains.
 
-## P207 — upper-neighbor rank dynamics — ADMITTED / MANUSCRIPT IN PREPARATION
+## P207 — upper-neighbor rank dynamics — A ACCEPTED / ROUND1 FROZEN / B ACTIVE
 
 Proof contributors: root and `/root/batch197_fosp_gate`; manuscript root.
 Neither contributor may review this paper. Candidate assessor
@@ -203,7 +203,18 @@ is recorded, not positively cleared. An applicable prior theorem or full
 adapter reopens the affected scope. No sharp global clock, larger alphabet,
 all-time inverse, basin census, or global priority claim is admitted.
 
-Paper path: `papers/207-upper-neighbor-rank-dynamics/`. Manuscript preparation
-is active; no Round0, A/B, accepted delta or final completion is yet claimed.
+Paper path: `papers/207-upper-neighbor-rank-dynamics/`. The complete seven-page
+manuscript has an actual author pair and root's two additional runs, each
+1,384,012 assertions with raw-canonical equality. Two final Round0 source-only
+builds are raw-identical; root viewed all seven pages. Physical Round0 freezes
+105 checked files including complete finite-certificate provenance. Actual
+nonauthor manuscript A's exact no-change delta is accepted after root's
+complete original inspection, controlled replay pair and final pin checks.
+Round1 physically freezes the same 105 bytes; distinct nonauthor B is
+active, with no B verdict/delta, Round2 or completion claimed yet. See
+[lifecycle](../../papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md).
+This lifecycle paragraph was updated after the author replay and Round0;
+their preserved source-input snapshots retain the earlier admission-status
+version. No mathematical contract or producer dependency changed.
 Current census: two retained, one complete, three unfilled; next number P208.
 `OWNER_AMBER / HOLD_EXTERNAL`.

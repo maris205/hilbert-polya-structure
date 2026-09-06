@@ -196,3 +196,39 @@ This receipt and object result were created after the named push and do
 not claim inclusion in their own referenced commit. Later UGR gate
 closure/admission and ongoing HVD/eighth work are not part of this ref.
 One paper remains internally complete; the five-paper task continues.
+
+## P207 Round0 / UGR gate / HVD partial closure checkpoint
+
+On 2026-09-06 UTC, the 429-file scoped checkpoint was committed and
+actually pushed as `bb32f397cffe335137e06ddc6fd262109308e8bf`.
+It archives P207's full seven-page manuscript, complete combined author
+certificate/provenance, actual author and root replay pairs, preserved
+failed/layout builds, two matching clean Round0 builds and all seven
+viewed pages. Its complete paper manifest has 322 nonself entries, and
+physical Round0 has 105 checked inputs. It also preserves the complete
+UGR candidate gate including withdrawn provisional HOLD, root's gate
+pair, HVD's closed HOLD_PROOF dossier, the prior checkpoint's independent
+artifact audit and P207's distinct outline-only check.
+
+The mirror was clean at ff020cec. Fetch showed ahead/behind 0/0, with
+no new remote-only commit, so no merge was needed. Before staging,
+copies explicitly excluded active p207_a, finite_structures_eighth,
+finite_algebra_ninth and Python caches. All 429 changed paths were
+checked as owned and outside those exclusions. Raw compiler/failure
+artifacts were explicitly staged despite ignore rules; source/doc
+whitespace checks passed. Historical bytes were not reformatted.
+
+Push exited zero. Actual ls-remote returned the exact SHA above,
+ahead/behind was 0/0, and mirror status was empty. The actual read-only
+[named-manifest Git-object check](qa/GIT_OBJECT_P207_BB32F397.json) then
+passed all **486 entries** in P207's full paper and Round0 manifests,
+UGR gate and HVD package. This is archived-byte integrity, not new
+mathematical execution or manuscript/batch acceptance.
+
+This receipt and object output were created after the named push and
+are not claimed to be included in their own referenced commit. The
+later P207 lifecycle-only paragraph update in FINAL_THEOREM_CONTRACTS
+is also outside that ref; author provenance snapshots retain the earlier
+admission-stage version. No theorem or producer dependency changed.
+P207 A is active and no accepted delta exists; P205 alone is internally
+complete. OWNER_AMBER / HOLD_EXTERNAL remains unchanged.
