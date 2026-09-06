@@ -4,9 +4,9 @@
 
 ## 当前结论
 
-- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_INTERNALLY_COMPLETE / P206_REJECTED_IN_A / FOUR_SEATS_OPEN`。P204、P206 稿审 A 淘汰，原稿、冻结和 critical open value finding 保留。P205 两份独立稿审及实际无修改 delta 已接受、三轮冻结完整；root B 双次各 12,023,630 断言及原始字节比较通过，两个终端冷构建、三页实际视读和单篇 artifact gate 完成。当前保留 1、完成 1、空缺 4，下一编号 P207，整批远未完成。
-- 当前候选边界：LNR 原 HOLD_SOURCE 不变，直接相关 lower-rank 收敛旧文正文仍未核；数学重放不消除来源 finding。UGR 作者证明已闭合、独立候选 gate 进行中，全局时钟仅为非 sharp 上界。MNC 的实际非作者 gate 已判 `MATH_VALID / KILL_VALUE_TEMPORAL_BINARY_WRAPPER`；root 读完整 adapter、通过 29/17/3 pins，并双次各重放 293,461 断言和原始字节比较后接受淘汰，MNC-V1 Critical/open 保留。其正确全目标逆像极值不能补足被扣除的时间轴，未编号。第六线七个、第七线六个 literal 均 NO_PROMOTION；root 已读原件并核完整封印。新 CPRM 的初等完整结论不送准入，CSGD 非负 carrier 不封闭的失败原样保留。HVD 与第八线仍为 bounded scout。
-- 最新范围推送 `6bd2d798` 已归档 LNR 逆像/gate、第六线、对比度 intake 及 root 距离解码证明，三份新候选 manifest 的 59 pins Git 对象检查通过。P205 完成证据仍在前推送 `ef9deb85`；后来闭合的 UGR/MNC 作者包、MNC adverse gate、第七线、新 root scout 与活跃工作尚未包含。未同步的工作变化不归到历史提交。
+- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_INTERNALLY_COMPLETE / P207_ROUND0_A_ACTIVE / THREE_SEATS_OPEN`。P204、P206 稿审 A 淘汰，原稿、冻结和 critical open value finding 保留。P205 已内部完成。P207 七页完整稿已有作者及 root 双次各 1,384,012 断言/原始字节重放、两个一致的 Round0 冷构建和七页实际视读，105 文件物理 Round0 全 pins 通过；独立非作者稿审 A 进行中，无 verdict/delta 或 Round1。保留 2、完成 1、空缺 3，下一编号 P208，整批未完成。
+- 当前候选边界：LNR 原 HOLD_SOURCE 不变，直接相关 lower-rank 收敛旧文正文仍未核；数学重放不消除来源 finding。UGR 已按单一 rank-family 窄合同准入 P207，全局时钟仅为非 sharp、明确依赖有限证书的上界。MNC 的实际非作者 gate 已判 `MATH_VALID / KILL_VALUE_TEMPORAL_BINARY_WRAPPER`；root 读完整 adapter、通过 29/17/3 pins，并双次各重放 293,461 断言和原始字节比较后接受淘汰，MNC-V1 Critical/open 保留。其正确全目标逆像极值不能补足被扣除的时间轴，未编号。第六线七个、第七线六个 literal 均 NO_PROMOTION；root 已读原件并核完整封印。新 CPRM 的初等完整结论不送准入，CSGD 非负 carrier 不封闭的失败原样保留。HVD 已在 root 完整原件与 13/7 pins 检查后关闭为 HOLD_PROOF，局部降维不能代替全局时序定理；第八线重新启动为独立 bounded intake。
+- 最新范围推送 `ff020cec` 已归档 UGR/MNC 作者包、MNC adverse gate/root 淘汰及新重放、第七线闭包、CPRM/CSGD 原始证明与失败；四份新包 manifest 的 95 pins Git 对象检查通过。先正常 fast-forward 保留了远端无交叠的 `ae2fdc72`。LNR/第六线在前推送 `6bd2d798`，P205 完成证据仍在 `ef9deb85`；UGR_GATE、HVD_PROOF_WORK 和第八线当时活跃而排除。未同步的后来变化不归到历史提交。
 - 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
 - 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
 - 研究完成提交 `0236e3e7` 已随正常合并 `1b55fbda` 实际推送，远端 ref 已确认；见 [同步回执](docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md)。[配置审计](docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md) 和独立情境/修订测试完成。

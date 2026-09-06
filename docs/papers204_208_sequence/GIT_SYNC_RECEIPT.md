@@ -163,3 +163,36 @@ passing input. It checks archival bytes, not proofs or completion.
 This receipt and its object-check output were produced after the named
 commit and are not claimed to be included in their own referenced ref.
 P205 remains the sole completed seat; HOLD_EXTERNAL remains unchanged.
+
+## MNC rejection / UGR author / seventh-lane checkpoint
+
+On 2026-09-06 UTC the 169-file scoped checkpoint was actually committed
+and pushed as `ff020cec61ee121f7d9c77e349faa2d5c7e9e1fc`.
+It archives both closed UGR/MNC author packages; MNC's full adverse
+nonauthor gate and root rejection/replay; root's new UGR/MNC author pairs;
+the complete sixth-following seventh geometry closure; and the CPRM
+elementary boundary, actual author checks, and preserved invalid CSGD
+intake/failure. MNC's correct extremal theorem and its Critical/open
+value finding are both retained. No new paper was admitted in this push.
+
+Before copying, the mirror was clean and fetch showed one remote-only
+commit `ae2fdc72`, whose actual changed-path list contained only
+`henon_dynamics/` material. A normal fast-forward preserved that disjoint
+stream. The owned copy excluded active `UGR_GATE/`, `HVD_PROOF_WORK/`,
+`finite_structures_eighth/` and Python caches. Exact staging scope was
+checked; source/doc whitespace passed, and raw source extracts/failure
+outputs were not reformatted. No force push or history rewrite occurred.
+
+The actual push exited zero; `ls-remote` returned the full SHA above,
+ahead/behind was `0 0`, and mirror status was empty. The subsequent
+[explicit-manifest Git-object adapter](qa/GIT_OBJECT_CANDIDATES_FF020CEC.json)
+passed all **95 entries in four newly archived package manifests**,
+with zero missing/mismatched objects. It does not claim root-relative
+tool-input portability, complete path-set coverage or mathematical review.
+The root MNC pair's inherited harness role-label error is explicitly
+disclosed in its separate receipt without rewriting the original result.
+
+This receipt and object result were created after the named push and do
+not claim inclusion in their own referenced commit. Later UGR gate
+closure/admission and ongoing HVD/eighth work are not part of this ref.
+One paper remains internally complete; the five-paper task continues.

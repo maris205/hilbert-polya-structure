@@ -1,7 +1,7 @@
 # Batch after P203 — recovery state
 
 Started 2026-09-05 UTC on the user's “确认，下一轮”, reaffirmed by “继续”.
-Status: **P205_INTERNALLY_COMPLETE / P206_REJECTED_IN_A / FOUR_SEATS_OPEN / HOLD_EXTERNAL**.
+Status: **P205_INTERNALLY_COMPLETE / P207_ROUND0_A_ACTIVE / THREE_SEATS_OPEN / HOLD_EXTERNAL**.
 The folder name reserves a five-seat working label, not five accepted paper IDs.
 
 ## Scope and next obligation
@@ -17,8 +17,10 @@ That numbered draft is preserved and its seat reopened. CCI subsequently
 passed its independent gate and is admitted as P205 under the exact narrow
 contract below. CRC3's independent gate and root's source/pin/replay checks
 then admitted P206, but manuscript A subsequently found a full earlier
-template adapter and root rejected it. One paper is retained and four
-seats remain unfilled.
+template adapter and root rejected it. At that point one paper was retained
+and four seats remained unfilled. UGR's subsequent independent gate and
+root replay now admit P207 as one rank-family representative: two papers
+are retained, one complete, and three seats remain unfilled. Next number P208.
 P205 manuscript A's exact no-change delta is accepted and Round1 is frozen;
 its B actual no-change delta is now accepted with zero findings. Round2,
 two terminal cold builds, all three actual final-page views and its
@@ -36,10 +38,10 @@ read-only evidence here; the prior handoff commit is 18765b6e.
 
 | Lane | Owner | Write scope | Current status |
 |---|---|---|---|
-| Words / local maps | root | scouting/word_local/, central integration | LNR source hold; MNC gate rejection integrated; CPRM/invalid CSGD bounded scout |
-| Combinatorial objects | batch197_fosp_gate | closed LNR_INVERSE_WORK/, UGR_PROOF_WORK/, MNC_GATE/; scouting/finite_structures_eighth/ | MNC nonauthor gate KILL_VALUE; fresh bounded eighth lane |
-| Algebra / finite geometry | batch197_lzk_gate | closed LNR_GATE/ and CONTRAST_PROOF_WORK/; word_local/UGR_GATE/ | MNC author handoff closed; nonauthor UGR candidate gate active |
-| Graphs / relations | batch197_fifth_scout | closed set_partition_sixth/, discrete_geometry_seventh/; word_local/HVD_PROOF_WORK/ | seventh six NO_PROMOTION; bounded existing-HVD proof work |
+| Words / local maps | root | P207 lifecycle, central integration and scoped Git | P207 105-file Round0 frozen; actual A assigned |
+| Combinatorial objects | batch197_fosp_gate | closed P207 author seal; scouting/finite_algebra_ninth/ | P207 author pair complete; fresh bounded ninth intake |
+| Algebra / finite geometry | batch197_lzk_gate | reviews/p207_a/ only | actual independent manuscript A on pinned Round0 |
+| Graphs / relations | batch197_fifth_scout | closed word_local/HVD_PROOF_WORK/; scouting/finite_structures_eighth/ | HVD HOLD_PROOF; fresh bounded eighth intake; later P207 B reserved |
 
 Each lane records literal maps, bounded pilot outputs, positive and negative
 signals, exact old-system mappings, source boundaries and proof obligations.
@@ -234,8 +236,24 @@ P205/P206 admissions below do not reverse that rejection.
   MNC-V1 Critical/open and its correct global fibre residual; the full
   binary tail adapter consumes the temporal axis. The root replay's
   inherited harness role-label defect is disclosed without rewriting the
-  actual evidence. UGR's separate gate remains active. Neither candidate
-  has a paper number; root is a proof contributor to both.
+  actual evidence. UGR's separate
+  [gate](scouting/word_local/UGR_GATE/CANDIDATE_GATE.md) is now closed
+  **GO_NARROW_RANK_FAMILY**. Root read all original proof/source/certificate
+  evidence, passed its 46 manifest/19 input pins, and performed two new
+  2,638,324-assertion cold-compiled executions with raw canonical comparisons;
+  all exits zero ([receipt](qa/root_replays/ugr_gate/RECEIPT.md)). This admits
+  P207 under its [narrow contract](FINAL_THEOREM_CONTRACTS.md), one rank-family
+  seat only. The nonsharp clock and explicit finite proof dependency remain;
+  static adapters are deducted, and LNR-S1 remains unchanged. The assessor's
+  withdrawn provisional source HOLD remains archived with its rationale.
+  P207 now has a complete anonymous seven-page manuscript, its actual
+  1,384,012-assertion author pair and two additional root runs with raw
+  canonical equality; all 85 author-owned inputs passed and were unchanged.
+  The final two source-only Round0 builds are raw-identical and root actually
+  viewed all seven pages. Physical Round0 freezes 105 checked inputs using
+  the scoped certificate-layout adapter, preserving the old generic tool.
+  Actual nonauthor manuscript A is now active on that freeze; no verdict,
+  accepted delta or Round1 exists yet. See [P207 lifecycle](../../papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md).
 - The [sixth set/partition lane](scouting/set_partition_sixth/SCOUT_REPORT.md)
   is closed: seven executed literals, including an old negative control,
   all NO_PROMOTION. Root read its full report, proof boundaries and source/
@@ -249,8 +267,17 @@ P205/P206 admissions below do not reverse that rejection.
   passed all 14 nonself manifest entries and 11 historical pins, and ran
   its read-only artifact adapter (32 links/seven pair dependencies/four
   embedded raw comparisons). This inspects the author's actual evidence;
-  it is not a new root numerical replay. HVD and a fresh eighth lane remain
-  bounded author scouting, not candidates or seats.
+  it is not a new root numerical replay. HVD's bounded
+  [partial-proof dossier](scouting/word_local/HVD_PROOF_WORK/PROOF_AND_DISPOSITION.md)
+  is now closed **HOLD_PROOF / NO_ADMISSION**. Root read its full original
+  proof, primary-source scope record and execution/artifact receipts, and
+  passed all 13 nonself manifest/seven historical pins. The endpoint and
+  permanent-two lemmas, exact active-set reduction, degree-at-most-three
+  fixed subfamily and classical unimodal path fibre do not close the mixed
+  weighted feedback or an all-target maximum. Root is a contributor to the
+  active-set reduction, not a nonauthor reviewer. The same-box 50,069-word
+  checks and named sentinels are author evidence, not fresh root executions.
+  A new eighth intake is active, with no prospective positive result or seat.
 - Two further root arithmetic literals were declared before their pilot.
   CPRM completed all 30 original boxes; the second literal CSGD failed its
   first carrier-invariance assertion on $(0,1)\mapsto(-1,0)$ and was
@@ -266,15 +293,17 @@ P205/P206 admissions below do not reverse that rejection.
   this is neither an independent gate nor a sharp-clock proof.
 
 The [private checkpoint receipt](GIT_SYNC_RECEIPT.md) confirms latest actual
-push `6bd2d7984b5c111332fa5eb4974ff8636c00247c`. It adds the closed LNR
-inverse/gate and root pair, sixth-lane closure, contrast intake, and root
-distance proof/checks; a [named-manifest Git-object adapter](qa/GIT_OBJECT_CANDIDATES_6BD2D798.json)
-passed all 59 entries in those three newly archived candidate manifests.
-Active UGR, MNC author/gate and seventh-lane work were excluded. The
-previous `ef9deb85` still carries P205's internal completion, P206's
-rejection and the 712-pin/28-manifest object check. Both refs and the
-disjoint earlier remote work remain preserved. Later working changes
-are not implicitly synchronized by either historical ref.
+push `ff020cec61ee121f7d9c77e349faa2d5c7e9e1fc`. It archives UGR/MNC
+author closure, MNC's adverse gate/root rejection and actual pairs,
+seventh geometry closure, and root CPRM/invalid-CSGD evidence. The
+[named-manifest Git-object adapter](qa/GIT_OBJECT_CANDIDATES_FF020CEC.json)
+passed all 95 entries in its four newly archived package manifests.
+Active UGR_GATE, HVD_PROOF_WORK and finite_structures_eighth were excluded.
+The prior `6bd2d798` contains LNR/sixth/root distance evidence; `ef9deb85`
+still carries P205's completion and P206's rejection. A read-only overlap
+check preceded the normal fast-forward of remote `ae2fdc72`; its disjoint
+Henon material is preserved. Later working changes are not implicitly
+synchronized by these historical refs.
 WIP archival integrity is not manuscript or batch acceptance.
 
 Next: continue the active candidate/source gates; replace
