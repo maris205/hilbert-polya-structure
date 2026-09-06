@@ -1,0 +1,731 @@
+                                                  THE POP-STACK OPERATOR ON ORNAMENTATION LATTICES
+
+                                                                              KHALID AJRAN AND COLIN DEFANT
+
+
+
+
+                                                  Abstract. Each rooted plane tree T has an associated ornamentation lattice O(T). The ornamen-
+                                                  tation lattice of an n-element chain is the n-th Tamari lattice. We study the pop-stack operator
+arXiv:2501.10311v1 [math.CO] 17 Jan 2025
+
+
+
+
+                                                  Pop : O(T) → O(T), which sends each element δ to the meet of the elements covered by or equal
+                                                  to δ. We compute the maximum size of a forward orbit of Pop on O(T), generalizing a result of
+                                                  Defant for Tamari lattices. We also characterize the image of Pop on O(T), generalizing a result of
+                                                  Hong for Tamari lattices. For each integer k ≥ 0, we provide necessary conditions for an element
+                                                  of O(T) to be in the image of Popk . This allows us to completely characterize the image of Popk
+                                                  on a Tamari lattice.
+
+                                                                                        1. Introduction
+                                           1.1. Ornamentation Lattices. Laplante-Anfossi [15] recently introduced remarkable polytopes
+                                           called operahedra. These polytopes are special examples of graph associahedra [5, 17] and poset
+                                           associahedra [13], and they generalize both the associahedra and permutohedra. Laplante-Anfossi
+                                           also considered certain posets obtained by orienting the 1-skeletons of operahedra, and he asked
+                                           if these posets are lattices. Defant and Sack [11] answered Laplante-Anfossi’s question in the
+                                           affirmative, naming his posets operahedron lattices. A key idea that Defant and Sack employed was
+                                           to embed an operahedron lattice into the product of an interval in the weak order on the symmetric
+                                           group and another lattice. This other lattice, which is the primary focus of this article, is a new
+                                           structure called an ornamentation lattice.
+                                              Let PTn denote the set of rooted plane trees with n nodes. Let T ∈ PTn . We view T both as a
+                                           graph and as a poset in which every non-root element is covered by exactly 1 element (so the root
+                                           is the unique maximal element). We denote the partial order on T by ≤T . For v ∈ T, we write
+                                                              ∆T (v) = {v ′ ∈ T : v ′ ≤T v}     and ∇T (v) = {v ′ ∈ T : v ≤T v ′ }.
+                                           An ornament of T is a set of nodes that induces a connected subgraph of T. Let Orn(T) denote the
+                                           set of ornaments of T. We will often view an ornament as a rooted plane tree. Two sets are said
+                                           to be nested if one is a subset of the other. An ornamentation of T is a function δ : T → Orn(T)
+                                           such that
+                                                 • for every v ∈ T, the unique maximal element of δ(v) is v;
+                                                 • for all v, v ′ ∈ T, the ornaments δ(v) and δ(v ′ ) are either nested or disjoint.
+                                           Let O(T) denote the set of ornamentations of T. We view O(T) as a poset, where the partial order
+                                           ≤ is defined so that δ ≤ δ ′ if and only if δ(v) ⊆ δ ′ (v) for all v ∈ T. Then O(T) is a lattice whose
+                                           meet operation ∧ is such that
+                                                                                  (δ ∧ δ ′ )(v) = δ(v) ∩ δ ′ (v)
+                                           for all v ∈ T. The minimum element δmin and maximum element δmax of O(T) satisfy
+                                                                            δmin (v) = {v} and δmax (v) = ∆T (v)
+                                           for all v ∈ T. See Figure 1. If δ ∈ O(T) and v ∈ T, then we call δ(v) an ornament of δ.
+                                              Ornamentation lattices naturally generalize Tamari lattices. Indeed, the n-th Tamari lattice is
+                                           isomorphic to the ornamentation lattice of an n-element chain. Tamari lattices have numerous
+                                           interesting properties; we will generalize some of these properties to the much broader family of
+                                           ornamentation lattices.
+                                                                                                  1
+2
+
+
+
+
+               Figure 1. The ornamentation lattice of a rooted tree with 4 nodes.
+
+1.2. Pop-Stack Operators. The pop-stack operator of a finite lattice L is the map Pop : L → L
+defined by                         ^
+                          Pop(x) = ({x} ∪ {y ∈ L : y ⋖ x}).
+Initial works on this operator focused on the case where L is the weak order on the symmetric group
+[1, 2, 7, 8, 16, 18, 20], where it can be interpreted as a deterministic sorting procedure that makes use
+of a data structure called a pop-stack. Several recent articles have studied pop-stack operators on
+other interesting lattices, especially from a dynamical point of view [4, 6, 9, 10, 12, 14]. For example,
+Defant [10] and Hong [14] found that the pop-stack operator on a Tamari lattice has particularly
+well behaved dynamics. Choi and Sun [6] and Barnard, Defant, and Hanson [4] later generalized
+these results to the much broader class of Cambrian lattices. In this article, we generalize the results
+about Tamari lattices in a different direction by considering pop-stack operators of ornamentation
+lattices.
+   Given a finite lattice L and an element x ∈ L, we let OrbPop (x) = {x, Pop(x), Pop2 (x), . . .} denote
+the forward orbit of x under Pop. If t is a sufficiently large integer, then Popt (x) is the minimum
+element 0̂ of L. We are interested in |OrbPop (x)|. When considering the pop-stack operator, one of
+the most well studied quantities associated to L is
+                                           max |OrbPop (x)|
+                                            x∈L
+                                                                                                      3
+
+
+(see, e.g., [4, 9, 10, 20]). For example, Barnard, Defant, and Hanson found that if L is a Cambrian
+lattice of a finite Coxeter group W , then maxx∈L |OrbPop (x)| is equal to the Coxeter number of W .
+In particular, if L is the n-th Tamari lattice (which is a Cambrian lattice of the symmetric group
+Sn ), then this number is n; this special case was proved earlier in [10].
+   Another important aspect of the pop-stack operator is its image, which has been studied for a
+variety of lattices in [4, 6, 12, 14, 19]. Defant and Williams found numerous different interpretations
+of the size of the image of Pop when L is a semidistributive lattice (or, more generally, a semidistrim
+lattice). Notably, when L is semidistributive, the image of Pop is in bijection with the facets of
+a simplicial complex called the canonical join complex of L (see [3, 4]). Hong [14] characterized
+and enumerated Pop images on Tamari lattices. Choi and Sun [6] subsequently obtained analogous
+results for a variety of other lattices. Barnard, Defant, and Hanson then unified several of these
+results by providing a simple Coxeter-theoretic description of the image of Pop on an arbitrary
+Cambrian lattice of a finite Coxeter group. We aim to generalize Hong’s results concerning Tamari
+lattices in a different direction by studying Pop images on ornamentation lattices.
+
+1.3. Main Results. Let T ∈ PTn . Unless otherwise stated, we will write Pop for the pop-stack
+operator on the ornamentation lattice O(T). Define the depth of a node v ∈ T to be the quantity
+depthT (v) = |∇T (v)| − 1. Let MT denote the set of maximal chains in T.
+Theorem 1.1. Let T ∈ PTn , and let r be the root of T. Then
+                    max |OrbPop (δ)| = max      min (|∆T (v)| + 2 depthT (v) − 1).
+                   δ∈O(T)               C∈MT v∈C\{r}
+
+   Let Cn denote the chain with n nodes. The ornamentation lattice O(Cn ) is the n-th Tamari
+lattice. In this special case, Theorem 1.1 tells us that the maximum size of a forward orbit of Pop
+on the n-th Tamari lattice is n, which agrees with the aforementioned result from [10].
+   The next theorem characterizes the image of the pop-stack operator on an ornamentation lattice,
+thereby generalizing a result of Hong from [14].
+Theorem 1.2. Let T ∈ PTn and δ ∈ O(T). For each u ∈ T, let ou be the minimal ornament of
+δ that properly contains δ(u); if no such ornament exists, let ou = T. Then δ ∈ Pop(O(T)) if and
+only if for every u ∈ T and every child u′ of u in δ(u), we have ∆δ(u) (u′ ) ̸= ∆ou (u′ ).
+   In Section 6, we will prove that every ornamentation lattice O(T) is in fact semdistributive.
+This means that O(T) has a canonical join complex, the number of facets of which is |Pop(O(T))|.
+This provides an alternative interpretation of Theorem 1.2. See [12, Corollary 9.10] for other
+interpretations of the size of the image of Pop on a semidistributive lattice.
+   It is also natural to consider the image of Popk when k ≥ 2. So far, this has not been explored
+in the literature, largely because it is often difficult to characterize this image. We will prove
+some necessary conditions for an ornamentation to be in the image of Popk (see Propositions 3.3
+and 5.3). These conditions are, in general, not sufficient. However, we will obtain as a consequence
+a complete characterization of the image of Popk (O(Cn )), where Cn is an n-element chain poset
+(see Theorem 5.4). This will allow us to deduce the following explicit generating function for the
+sizes of the images of Popk on Tamari lattices.
+Theorem 1.3. For each nonnegative integer k, we have
+                                            p
+          X
+                 k          n   1 − xk+1 − (1 − xk+1 )2 − 4x(1 − x)(1 − xk+1 )
+             |Pop (O(Cn ))|x =                                                 .
+                                                   2x(1 − x)
+             n≥0
+
+   When k = 0, the generating function in Theorem 1.3 is that of the Catalan numbers, which we
+already knew since Pop0 (O(Cn )) = O(Cn ) is the n-th Tamari lattice. When k = 1, the generating
+function is that of the Motzkin numbers; this recovers one of Hong’s main results from [14].
+4
+
+
+1.4. Outline. Section 2 discusses basic properties of the pop-stack operator on an ornamentation
+lattice and introduces some notation and terminology. We prove Theorem 1.1 in Section 3 after
+establishing a necessary condition for an ornamentation to be in the image of Popk (Proposition 3.3).
+We prove Theorem 1.2 in Section 4. In Section 5, we prove Proposition 5.3, which yields another
+constraint on the image of Popk . We then characterize the image of Popk on the n-th Tamari
+lattice in Theorem 5.4, and we deduce Theorem 1.3. Finally, Section 6 provides a short proof that
+ornamentation lattices are semidistributive.
+
+                                              2. Basics
+   Let T ∈ PTn be a rooted plane tree with root node r. All of our main results are trivial when
+n = 1, so we will tacitly assume that n ≥ 2. The length of a chain with ℓ elements is ℓ − 1. For
+v ∈ T, let heightT (v) and depthT (v) denote the height and depth of v in T. That is, heightT (v)
+is the maximum length of a chain in ∆T (v), and depthT (v) is the length of the chain ∇T (v). A
+descendant of v is an element of ∆T (v)\{v}, and a child of v is an element covered by v. Let chT (v)
+be the set of children of v. Let MT be the set of maximal chains of T. For C ∈ MT and v ∈ C,
+let heightC (v) denote the height of v within C; if v is not a leaf, then we let chC (v) be the unique
+child of v in C. For a node v with a descendant u, let (u, v) denote the set of nodes (excluding u
+and v) in the unique path from u to v. We also write [u, v) = (u, v) ∪ {u}, (u, v] = (u, v) ∪ {v}, and
+[u, v] = (u, v) ∪ {u, v}.
+   For C ∈ MT and v ∈ C, let bC (v) = |∆T (v)| − heightC (v) − 1 be the number of descendants of
+v that do not lie in C. Define fC : C → N0 recursively as follows:
+                              
+                              0
+                                               if v is a leaf;
+(1)                   fC (v) = fC (chC (v)) + 1 if fC (chC (v)) + 1 ≤ bC (chC (v));
+                              
+                               fC (chC (v))     otherwise.
+                              
+
+In other words, if we walk up the chain C, then the value of fC starts at 0, and each time we
+move to a parent node v, the value increases by 1 so long as this does not cause fC (v) to exceed
+bC (ch(v)). Utilizing the identity depth(v) = |C| − heightC (v) − 1, one can show inductively that
+               (
+                  0                                                               if v is a leaf;
+(2) fC (v) =
+                  minu∈∆C (v)\{v} (|∆T (u)| + 2depthT (u)) − |C| − depthT (v) − 1 otherwise.
+   For each v ∈ T, define T∗v to be the tree obtained from T by appending a chain with fC (v) nodes
+to the bottom of each chain C ∈ MT containing v. The following definition will give us a strong
+tool for understanding the maximum size of a forward orbit under Pop.
+Definition 2.1. Let v ∈ T. The v-rank of a node u ∈ T is
+                                     
+                                     −1
+                                                   if u ̸∈ ∆T (v);
+                            rkv (u) = ∞             if u = v;
+                                     
+                                      heightT∗v (u) otherwise.
+                                     
+
+   See Figure 2 for an example of the above definitions. For each maximal chain C ∈ MT , the
+values of fC are weakly increasing as we move up C. It follows that if v is a child of v ′ , then T∗v is
+a subtree of T∗v′ . This implies that for every v ∈ T, the tree T∗v is a subtree of T∗r . Moreover, the
+maximum of rkr (u) over all non-root nodes u is attained when u is a child of r. This implies that
+(3)                                  max rkv (u) = max rkr (u).
+                                    u,v∈T           u∈chT (r)
+                                     u̸=v
+
+ We next describe how ornamentations behave under Pop. Consider an ornamentation δ ∈ O(T).
+We say a node v wraps a node u in δ if δ(u) ⊆ δ(v) and there does not exist a node w such that
+                                                                                                           5
+
+
+
+
+        Figure 2. On the left is a plane tree T. Three of the maximal chains, named C,
+        C ′ , and C ′′ , are labeled under their leaves. For each C    e ∈ {C, C ′ , C ′′ }, each node
+        u∈C    e is labeled with the value of f e (u). On the right is the tree T∗ , where v is as
+                                                   C                                 v
+        indicated. This tree is obtained by adding fCe (v) new nodes to the bottom of each
+        chain C  e ∈ {C, C ′ , C ′′ }. On the right, each node in T is labeled with its v-rank.
+
+
+δ(u) ⊊ δ(w) ⊊ δ(v). When v wraps u in δ, we define the reduction of the ornament δ(v) by the
+node u to be the ornament δ(v) \ ∆δ(v) (u), and we define δuv : T → Orn(T) by
+                                      (
+                              v          δ(v) \ ∆δ(v) (u) if w = v;
+                            δu (w) =
+                                         δ(w)             otherwise.
+See Figure 3.
+Lemma 2.2. Let δ ∈ O(T), and suppose v wraps u in δ. The map δuv is an ornamentation.
+Proof. Suppose instead that δuv is not an ornamentation. Then there must exist x ∈ T such that
+δuv (v) and δuv (x) are not disjoint or nested. Since δuv (v) ⊆ δ(v) and δuv (x) = δ(x), it must be the case
+that x ∈ δ(v). Then δ(x) contains nodes in δuv (v) and ∆δ(v) (u), so it must contain u. It follows that
+δ(u) ⊆ δ(x) ⊆ δ(v). But x cannot equal u or v, so this contradicts the assumption that v wraps u
+in δ.                                                                                                     □
+   Given an ornamentation δ and a node v ∈ T, define a minimal reduction of the ornament δ(v) to
+be a reduction of δ(v) that is not contained in any other reduction of δ(v). Intuitively, a (minimal)
+reduction of δ(v) is a (minimal) change we can make to an ornamentation without ruining its status
+as an ornamentation. Let Mδ (v) be the set of nodes u ∈ δ(v) such that δ(v) \ ∆δ(v) (u) is a minimal
+reduction of δ(v). We will see that each ornamentation covered by δ in O(T) differs from δ only by
+6
+
+
+
+
+        Figure 3. On the left is an ornamentation δ. On the right is the ornamentation
+        δuv obtained by reducing the ornament hung at v by the node u.
+
+replacing one ornament with a minimal reduction of that ornament. In the following lemma, we
+describe which reductions of δ are minimal.
+Lemma 2.3. Let δ ∈ O(T) and v ∈ T, and let u1 , u2 , . . . , uk be the nodes wrapped by v in δ.
+  (i) We have δ(v) = {v} ⊔ δ(u1 ) ⊔ δ(u2 ) ⊔ · · · S
+                                                   ⊔ δ(uk ).
+ (ii) If o is a reduction of δ(v), then o = {v} ∪ u∈U δ(u) for some nonempty U ⊆ {u1 , u2 , . . . , uk }.
+(iii) A reduction o of δ(v) is minimal if and only if o = δ(v) \ δ(ui ) for some i.
+    We refer to the ornaments δ(ui ) from Lemma 2.3 as maximal subornaments of δ(v).
+Proof. (i) This simply asserts that each node in δ(v) is either v or a member of a maximal suborna-
+ment of v. The maximal subornaments are disjoint because if they were nested, the inner ornament
+would not be wrapped by v.
+   (ii) By definition of a reduction, we can write o = δ(v) \ ∆δ(v) (ui ) for some i ∈ [k]. The tree
+structure and the connectedness of each of the ornaments ensure that ∆δ(v) (ui ) is the union of the
+ornament δ(ui ) and any other ornaments hanging below it.
+   (iii) If o = δ(v) \ δ(ui ), then o is a minimal reduction of δ(v) by (i) and (ii). To prove the
+converse, suppose o is a minimal reduction of δ(v). We may assume without loss of generality that
+o = δ(v) \ (δ(u1 ) ⊔ · · · ⊔ δ(uℓ )) for some ℓ < k. There exists i ∈ [ℓ] such that ui ̸>T uj for all
+j ∈ [k] \ {i}. Then δ(v) \ δ(ui ) is a reduction of δ(v) that contains o. By the minimality of o, we
+have o = δ(v) \ δ(ui ).                                                                            □
+   In the following lemma, we describe how Pop operates on ornamentations. Parts (i) and (ii) are
+two sides of the same coin, showing the bijection between minimal reductions and covered elements
+in the ornamentation lattice. Part (iii) explicitly describes how Pop is computed.
+Lemma 2.4. Let δ ∈ O(T).
+  (i) For every v ∈ T and every u ∈ Mδ (v), the ornamentation δuv is covered by δ in O(T).
+ (ii) For every ornamentation δ ′ covered by δ in O(T), there exist v ∈ T and u ∈ Mδ (v) such that
+      δ ′ = δuv .
+(iii) For all v ∈ T,                               \
+                                    Pop(δ)(v) =         δuv (v).
+                                                    u∈Mδ (v)
+
+Proof. (i) We have δuv < δ, as δuv (w) ⊆ δ(w) for all w ∈ T. Suppose for the sake of contradiction
+that an ornamentation σ ∈ O(T) \ {δ, δuv } satisfies δuv < σ < δ. Then δuv (w) = σ(w) = δ(w) for
+all w ∈ T \ {v}, so we must have δuv (v) ⊊ σ(v) ⊊ δ(v). In accordance with Lemma 2.3, we write
+δ(v) = {v} ⊔ δ(u1 ) ⊔ δ(u2 ) ⊔ · · · ⊔ δ(uk ), where u1 , . . . , uk are all the nodes wrapped by v in δ.
+Because σ(v) is a proper subset of δ(v) that must either contain or be disjoint from each ornament
+                                                                                                             7
+
+
+σ(ui ) = δ(ui ), there must be an index j such that uj ∈ δ(v) \ σ(v). Because σ(v) is connected and
+does not include uj , it must be a subset of δ(v) \ ∆δ(v) (uj ) = δuv j (v). Thus, δuv (v) ⊊ σ(v) ⊆ δuv j (v);
+this is impossible because δuv j (v) is a reduction of δ(v) and δuv (v) is a minimal reduction of v. It
+follows that σ cannot exist, so δuv is covered by δ.
+   (ii) Let δ ′ be an ornamentation covered by δ. Suppose by way of contradiction that δ ′ differs
+from δ in more than one ornament, so δ ′ (v1 ) ⊊ δ(v1 ) and δ ′ (v2 ) ⊊ δ(v2 ) for some distinct v1 , v2 .
+Assume without loss of generality that δ(v1 ) is either disjoint from or contained in δ(v2 ). Define
+a map σ : T → Orn(T) by letting σ(v1 ) = δ ′ (v1 ) and σ(w) = δ(w) for all w ̸= v1 . Then σ is an
+ornamentation (because δ ′ (v1 ), as a subset of δ(v1 ), must either be nested in or disjoint from δ(v2 )).
+But δ ′ < σ < δ, contradicting the fact that δ covers δ ′ . Thus, δ and δ ′ disagree in exactly one
+ornament. Let v be the unique node of T such that δ ′ (v) ̸= δ(v). Using Lemma 2.3 once again,
+we write δ(v) = {v} ⊔ δ(u1 ) ⊔ δ(u2 ) ⊔ · · · ⊔ δ(uk ), where u1 , . . . , uk are all the nodes wrapped by
+v in δ. We may assume without loss of generality that δ ′ (v) = {v} ⊔ δ(u1 ) ⊔ · · · ⊔ δ(uℓ ) for some
+ℓ < k. There must exist an index i such that ui ∈ δ(v) \ δ ′ (v) = δ(ul+1 ) ⊔ δ(ul+2 ) ⊔ · · · ⊔ δ(uk ) and
+ui ̸>T uj for all j ∈ [k]. (Any minimal element in δ(v) \ δ ′ (v) is also minimal in δ(v) because δ ′ (v)
+is a connected subtree with the same maximal element as δ(v).) Then, the minimal reduction δuv i
+satisfies δ ′ (v) ⊆ δuv i (v) ⊊ δ(v), and since δ ′ is covered by δ, we must have δ ′ = δuv i .
+   (iii) This is immediate from (i) and (ii) and the definition of Pop.                                     □
+Example 2.5. Figure 4 illustrates how to apply Pop to an ornamentation. Note that although the
+ornament o = δ(v) \ ∆δ(v) (w) is a reduction of v, it is not minimal because δ(v) \ ∆δ(v) (w′ ) is a
+reduction of v that contains o. This is why Pop(δ)(v) contains δ(w).
+
+
+
+
+        Figure 4. Applying Pop to the ornamentation on the left yields the ornamentation
+        on the right.
+
+   Define a section of an ornament δ(v) to be a set of nodes of the form ∆δ(v) (u) for some
+u ∈ chδ(v) (v). We call ∆δ(v) (u) the u-section of δ(v). Each ornament is the disjoint union of
+its root and its sections. Also note that a singleton ornament has no sections. The following lemma
+states that Pop strictly decreases the size of each section.
+Lemma 2.6. Let δ ∈ O(T). For all v ∈ T, we have Pop(δ)(v) ⊆ δ(v). Additionally, for each child
+u ∈ chδ(v) (v), we have
+                             |∆Pop(δ)(v) (u)| ≤ |∆δ(v) (u)| − 1.
+Proof. The first claim is immediate since Pop(δ) ≤ δ. Let δ(v) = {v} ⊔ δ(u1 ) ⊔ δ(u2 ) ⊔ · · · ⊔ δ(uk )
+be the decomposition of δ(v) into its maximal subornaments. Each section λ of δ(v) must contain
+at least one node wλ ∈ {u1 , u2 , . . . , uk } that is minimal among u1 , u2 , . . . , uk in the partial order
+≤T . Note that wλ must be such that δ(v) \ δ(wλ ) is a minimal reduction of δ(v). By part (iii) of
+Lemma 2.4, we know that Pop(δ)(v) does not contain wλ .                                                     □
+8
+
+
+  Define the weight of an ornamentation δ ∈ O(T) to be wt(δ) = v∈T |δ(v)|. If δ ′ ≤ δ, then
+                                                                             P
+wt(δ ′ ) ≤ wt(δ), where equality holds if and only if δ = δ ′ . Thus, if δ ′ ≤ δ and wt(δ ′ ) = wt(δ) − 1,
+then δ must cover δ ′ .
+
+                                    3. Maximum Forward Orbit Sizes
+   In this section, we prove Theorem 1.1, which determines the maximum possible size of a forward
+orbit of the pop-stack operator on an ornamentation lattice. Recall that r denotes the root of the
+tree T. The formula for maxδ∈O(T) |OrbPop (δ)| stated in Theorem 1.1 has the following equivalent
+expressions:
+(4)        max rkr (u) + 2 = max (|C| + fC (r)) = max                 min (|∆T (u)| + 2depth(u) − 1).
+          u∈chT (r)               C∈MT                       C∈MT u∈C\{r}
+
+The first equality follows from the fact that
+                        max rkr (u) + 2 = max heightT∗r (u) + 2 = heightT∗r (r) + 1
+                      u∈chT (r)                u∈chT (r)
+
+and the observation that heightT∗r (r) + 1 is equal to the maximum size of a chain in T∗r . The second
+equality in (4) is a straightforward consequence of (2).
+
+3.1. The Lower Bound. Let T be a rooted tree with root r. We will first construct an ornamen-
+tation δ † ∈ O(T) whose forward orbit under Pop has size maxC∈MT (|C| + fC (r)) (which is equal
+to the claimed maximum forward orbit size by (4)). Let C ∗ be a maximal chain of T such that
+|C ∗ | + fC ∗ (r) = maxC∈MT (|C| + fC (r)), and let fC ∗ (r) = k.
+   Let v0 , v1 , . . . , v|C ∗ |−1 be the nodes of C ∗ ordered from top to bottom; note that v0 = r. For
+0 ≤ i ≤ |C ∗ | − 2, let Bi = {u ∈ T \ C ∗ : u ≤T vi and u ̸≤T vi+1 }. We call Bi the i-th bough of C ∗ .
+Note that boughs may be empty. Moreover, B0 , B1 , . . . , B|C ∗ |−2 form a partition of T \ C ∗ .
+   Define a partial order ⊑ on T \ C ∗ as follows. Suppose x ∈ Bi and y ∈ Bj . If i > j, then x ⊑ y.
+If i = j, then x ⊑ y if and only if x ≥T y. Let v|C ∗ | , v|C ∗ |+1 , . . . , v|T|−1 be a linear extension of the
+poset (T \ C ∗ , ⊑); that is, v|C ∗ | , v|C ∗ |+1 , . . . , v|T|−1 is an ordering of T \ C ∗ such that a ≤ b whenever
+va ⊑ vb .
+Lemma 3.1. For each nonnegative integer i < k, the nodes v|C ∗ | , v|C ∗ |+1 , . . . , v|C ∗ |+k−i−1 are de-
+scendants of vi+1 .
+Proof. Recall from (1) that fC ∗ takes the value 0 at the bottom of the chain C ∗ and increases by 0
+or 1 whenever we move one step up along the chain. Furthermore, since v|C ∗ |−1 is a leaf, we have
+bC ∗ (v|C ∗ |−1 ) = 0, so fC ∗ (v|C ∗ |−2 ) = 0. It follows that fC ∗ (vi ) ≤ heightC ∗ (vi )−1 for all 0 ≤ i < k. In
+particular, k = fC ∗ (r) ≤ |C ∗ | − 2. This shows that vi+1 actually is an element of C ∗ . By a similar
+argument, we have fC ∗ (vi ) ≥ fC ∗ (v0 )−i = k −i. We also know from (1) that fC ∗ (v) ≤ bC ∗ (chC ∗ (v))
+for all v ∈ C ∗ . Because chC ∗ (vi ) = vi+1 , this implies that bC ∗ (vi+1 ) ≥ fC ∗ (vi ) ≥ k − i. Therefore,
+it follows from the definition of bC ∗ that there are at least k − i descendants of vi+1 that do not
+lie on C ∗ . In other words, |Bi+1 ⊔ Bi+2 ⊔ · · · ⊔ B|C ∗ |−2 | ≥ k − i. Since v|C ∗ | , v|C ∗ |+1 , . . . , v|T|−1 is a
+linear extension of (T \ C ∗ , ⊑), the desired result follows from the definition of ⊑.                               □
+
+   Now, define δ † : T → Orn(T) as follows. For 0 ≤ i ≤ k, let δ † (vi ) = {vi , vi+1 , . . . , v|C ∗ |+k−1−i }; for
+v ̸∈ {v0 , v1 , . . . , vk }, let δ † (v) = {v}. See Figure 5 for an example. Note that the definition of the
+partial order ⊑ on nodes within the same bough ensures that each set δ † (vi ) induces a connected
+subgraph of T. Using Lemma 3.1, one can readily check that δ † is an ornamentation.
+Lemma 3.2. For all integers 0 ≤ i ≤ k and p ≥ 0, we have
+                       Popp (δ † )(vi ) = {vi } ∪ {vj : i + 1 ≤ j ≤ |C ∗ | + k − 1 − i − p}.
+                                                                                                                  9
+
+
+
+
+        Figure 5. On the left is a tree T with a maximal chain C ∗ consisting of nodes
+        v0 , v1 , . . . , v8 . We have k = fC ∗ (r) = 5. On the right is the ornamentation δ † .
+
+Proof. If p = 0, then the desired result is immediate from the definition of δ † . Thus, we may
+assume p ≥ 1 and proceed by induction on p. If i + 1 > |C ∗ | + k − 1 − i − p, then we know by
+induction that Popp−1 (δ † )(vi ) ⊆ {vi , vi+1 }, so it follows from Lemma 2.6 that Popp (δ † )(vi ) = {vi },
+as desired. Now assume i + 1 ≤ |C ∗ | + k − 1 − i − p. For convenience, let m = |C ∗ | + k − i − p.
+By induction, we have Popp−1 (δ † )(vi ) = {vi , vi+1 , . . . , vm }, Popp−1 (δ † )(vi+1 ) = {vi+1 , . . . , vm−1 },
+and Popp−1 (δ † )(vm ) = {vm }. It follows that the only ornaments wrapped by Popp−1 (δ † )(vi ) in
+Popp−1 (δ † ) are {vi+1 , . . . , vm−1 } and {vm }. If i + 1 ≤ m ≤ |C ∗ | − 1, then vm is a descendant of
+vi+1 because both vi+1 and vm are in the chain C ∗ . On the other hand, if m ≥ |C ∗ |, then it follows
+from Lemma 3.1 that vm is a descendant of vi+1 . In either case, vm is a descendant of vi+1 , so we
+deduce that the reduction of Popp−1 (δ † )(vi ) by the node vi+1 is not a minimal reduction. Hence,
+MPopp−1 (δ† ) (vi ) = {vm }. It follows from Lemma 2.4 that
+                         Popp (δ † )(vi ) = Popp−1 (δ † )(vi ) \ {vm } = {vi , . . . , vm−1 },
+as desired.                                                                                                      □
+                                             |C ∗ |+k−1                                          |C ∗ |+k−1
+  It follows from Lemma 3.2 that Pop      (δ † )(v) = {v} for all v ∈ T, so Pop          (δ † ) is the
+                                                              ∗
+minimum element of O(T). This lemma also tells us that Pop|C |+k−2 (δ)(v0 ) = {v0 , v1 }. Hence,
+(5)                            |OrbPop (δ † )| = |C ∗ | + k = max (|C| + fC (r)).
+                                                               C∈MT
+
+3.2. Upper bound. We now seek to derive a tight upper bound for maxδ∈O(T) |OrbPop (δ)|. To
+do this, we will first prove that for δ ∈ Popk (O(T)) and v ∈ T, every node in δ(v) has v-rank at
+least k. When k is strictly greater than the maximum of rku (v) over all distinct u, v ∈ T, this will
+imply that the only ornamentation in Popk (O(T)) is the minimum ornamentation δmin . Therefore,
+in light of (3), it will follow that
+                                    max |OrbPop (δ)| ≤ max rkr (u) + 2.
+                                   δ∈O(T)                    u∈chT (r)
+10
+
+
+Combining this with (4) and (5) will then complete the proof of Theorem 1.1.
+Proposition 3.3. Let δ ∈ Popk (O(T)). For all v ∈ T and u ∈ δ(v), we have rkv (u) ≥ k.
+Proof. The proof is trivial when k = 0, so we may assume k ≥ 1 and proceed by induction on k.
+Since δ ∈ Popk (O(T)), we can write δ = Pop(δ ′ ) for some δ ′ ∈ Popk−1 (O(T)). Suppose u, v ∈ T are
+such that rkv (u) ≤ k − 1; our aim is to show that u ̸∈ δ(v). This is certainly true if u ̸∈ δ ′ (v) since
+δ(v) ⊆ δ ′ (v), so we may assume u ∈ δ ′ (v). By induction, this implies that rkv (u) = k − 1.
+   It is immediate from the definition of v-rank that rkv (u′ ) < rkv (u) for all descendants u′ of u.
+By induction, none of the descendants of u are in δ ′ (v). Hence, u is a minimal element of δ ′ (v).
+Furthermore, δ ′ (u) must be nested in δ ′ (v), so δ ′ (u) = {u}. If v wraps u in δ ′ , then u ∈ Mδ′ (v), so it
+follows from Lemma 2.4 that u ̸∈ Pop(δ ′ )(v) = δ(v), as desired. Hence, we may assume that v does
+not wrap u in δ ′ . This means that there exists a node v ′ such that u <T v ′ <T v and u ∈ δ ′ (v ′ ).
+   By the induction hypothesis, we have rkv′ (u) ≥ k − 1. Referring to Definition 2.1, we find that
+rkv (u) = heightT∗v (u) = k − 1 and rkv′ (u) = heightT∗′ (u) ≥ k − 1. Using the definitions of height
+                                                           v
+and of the trees T∗v and T∗v′ , we find that
+(6)              heightT∗v (u) = max heightC (u) = max (heightC (u) + fC (v)) = k − 1
+                                 C∈MT∗v                  C∈MT
+                                  C∋u                     C∋u
+
+and
+(7)            heightT∗′ (u) = max heightC (u) = max (heightC (u) + fC (v ′ )) ≥ k − 1.
+                       v        C∈MT∗                    C∈MT
+                                        v′                C∋u
+                                  C∋u
+     Let C ∗ ∈ MT be a maximal chain containing u such that
+                           heightC ∗ (u) + fC ∗ (v ′ ) = max (heightC (u) + fC (v ′ )).
+                                                       C∈MT
+                                                        C∋u
+Since the values of fC ∗ weakly increase as we move up the chain C ∗ , we have fC ∗ (v ′ ) ≤ fC ∗ (v). It
+follows from (6) and (7) that
+      k − 1 ≤ heightC ∗ (u) + fC ∗ (v ′ ) ≤ heightC ∗ (u) + fC ∗ (v) ≤ max heightC (u) + fC (v) = k − 1,
+                                                                C∈MT
+                                                                 C∋u
+                                     ∗           ∗          ∗
+                                                               ′
+so we have k − 1 = heightC ∗ (u) + fC (v) and fC (v) = fC (v ). Since, once again, the values of fC ∗
+weakly increase as we move up C ∗ , it follows that fC ∗ (v) = fC ∗ (w), where w = chC ∗ (v). Recalling
+the definition of fC ∗ from (1), we deduce that fC ∗ (v) ≥ bC ∗ (w). Consequently,
+                           k − 1 = heightC ∗ (u) + fC ∗ (v)
+                                 ≥ heightC ∗ (u) + bC ∗ (w)
+(8)                              = heightC ∗ (u) + (|∆T (w)| − heightC ∗ (w) − 1).
+  Now, suppose by way of contradiction that u ∈ δ(v). The set ∆δ(v) (w) induces a connected
+subgraph of T that contains both u and w, so
+(9)                            |∆δ(v) (w)| ≥ heightC ∗ (w) − heightC ∗ (u) + 1.
+Since δ ∈ Popk (O(T)), we can write δ = Popk (σ) for some ornamentation σ. We know by Lemma 2.6
+that
+                              |∆Popi+1 (σ)(v) (w)| ≤ |∆Popi (σ)(v) (w)| − 1
+for all 0 ≤ i ≤ k − 1. Therefore,
+                     |∆δ(v) (w)| = |∆Popk (σ)(v) (w)| ≤ |∆σ(v) (w)| − k ≤ |∆T (w)| − k.
+But (8) tells us that
+                                |∆T (w)| − k ≤ heightC ∗ (w) − heightC ∗ (u),
+                                                                                                              11
+
+
+and this contradicts (9).                                                                                     □
+  As mentioned above, (4), (5), and Proposition 3.3 together imply Theorem 1.1.
+
+                                           4. The Image of Pop
+   Our goal in this section is to characterize the image of the pop-stack operator on the ornamen-
+tation lattice O(T). This characterization, which we describe in Theorem 4.2, is given by imposing
+a simple local criterion on each ornament in an ornamentation.
+   Let T ∈ PTn and δ ∈ O(T). For convenience, we add to T an extra imaginary node ω, and
+we let δ(ω) = {ω} ∪ T. We make the convention that ω is the parent of the root r and that r
+is the unique child of ω. We impose that the ornament hung at ω is left unaffected by Pop. As
+before, we say a node v wraps a node u in δ if δ(u) ⊆ δ(v) and there does not exist a node w such
+that δ(u) ⊊ δ(w) ⊊ δ(v). We then say that v hugs u in δ if v wraps u and there exists a child
+u′ ∈ chδ(u) (u) such that ∆δ(u) (u′ ) = ∆δ(v) (u′ ). Note that nodes whose ornaments are singletons
+can not be hugged, and that a node may be hugged by the imaginary node ω under our definition.
+We do not draw ω in diagrams.
+Lemma 4.1. Let δ ∈ O(T). For any two nodes u, v ∈ T ∪ {ω}, the ornaments δ(u) and Pop(δ)(v)
+are either nested or disjoint.
+Proof. If either u or v is the imaginary node ω, then either δ(u) or Pop(δ)(v) is T ∪ {ω}, so the
+desired result is immediate. Thus, we may assume u ̸= ω and v ̸= ω. By the definition of an
+ornamentation, δ(u) and δ(v) are either nested or disjoint, and by Lemma 2.6, Pop(δ)(v) ⊆ δ(v).
+Thus, if δ(v) is disjoint from or contained in δ(u), then its subset Pop(δ)(v) is also disjoint from or
+contained in δ(u). Now suppose δ(u) ⊆ δ(v). There exists a node v ′ such that δ(u) ⊆ δ(v ′ ) ⊆ δ(v)
+and such that v wraps v ′ in δ. Now, Lemma 2.3 implies that any minimal reduction o of δ(v)
+will either contain or be disjoint from δ(v ′ ), and hence will either contain or be disjoint from δ(u).
+According to Lemma 2.4, Pop(δ)(v) either contains or is disjoint from δ(u), as desired.               □
+  The following theorem is equivalent to Theorem 1.2, but it is phrased using the language of hugs.
+Theorem 4.2. Let δ ∈ O(T). Then δ ∈ Pop(O(T)) if and only if each u ∈ T is not hugged in δ by
+any node in T ∪ {ω}.
+Proof. Suppose δ = Pop(δ ′ ) ∈ Pop(O(T)), and assume for the sake of contradiction that there
+exist u ∈ T and v ∈ T ∪ {ω} such that v hugs u in δ. Since v hugs u, there exists u′ ∈ chδ(u) (u)
+such that ∆δ(u) (u′ ) = ∆δ(v) (u′ ). Lemma 2.6 implies that |∆δ′ (u) (u′ )| > |∆δ(u) (u′ )| = |∆δ(v) (u′ )|, so
+δ ′ (u) ̸⊆ δ(v). Additionally, u′ ∈ δ ′ (u) ∩ δ(v) and v ∈ δ(v) \ δ ′ (u). Thus, δ ′ (u) and δ(v) are neither
+disjoint nor nested. This contradicts Lemma 4.1 because δ(v) = Pop(δ ′ )(v).
+     To prove the converse, suppose now that each node u ∈ T is not hugged by any node in T ∪ {ω}.
+For each u ∈ T, let δ ∗ (u) = ∆δ(v) (u), where v ∈ T ∪ {ω} is the unique node that wraps u in δ. We
+will show that Pop(δ ∗ ) = δ. Fix u ∈ T; we will show that Pop(δ ∗ )(u) = δ(u).
+     First, we show that Pop(δ ∗ )(u) ⊆ δ(u). Let v be the node that wraps u in δ. Consider a node
+w ̸∈ δ(u); we wish to show that w ̸∈ Pop(δ ∗ )(u). If w ̸∈ δ ∗ (u), then this is immediate from
+Lemma 2.6, so we may assume that w ∈ δ ∗ (u) \ δ(u). Let t be first node on the path from u to
+w that is not in δ(u). Then w is a descendant of t, and t must be a node wrapped by v in δ. It
+follows that δ ∗ (t) = ∆δ(v) (t) and δ ∗ (u) = ∆δ(v) (u), so δ ∗ (u) \ δ ∗ (t) is a minimal reduction of δ ∗ (u).
+By part (iii) of Lemma 2.4, this implies that Pop(δ ∗ )(u) is disjoint from δ ∗ (t). Since w ≤T t <T u
+and t ̸∈ Pop(δ ∗ )(u), it follows that w ̸∈ Pop(δ ∗ )(u).
+     Next, we show that δ(u) ⊆ Pop(δ ∗ )(u). This is trivial if δ(u) = {u}, so suppose |δ(u)| > 1. Let
+w ∈ δ(u) \ {u}; we will show that w ∈ Pop(δ ∗ )(u). Let u′ be the child of u such that w ≤T u′ . Let
+v be the node that wraps u in δ. Because v does not hug u by assumption, ∆δ(u) (u′ ) ⊊ ∆δ(v) (u′ ).
+Therefore, there is a node u′′ ∈ ∆δ(v) (u′ ) \ ∆δ(u) (u′ ) that is wrapped by v in δ. By definition of
+12
+
+
+
+
+        Figure 6. An ornamentation δ and the ornamentation δ ∗ constructed in the proof
+        of Theorem 4.2.
+
+
+δ ∗ , we have δ ∗ (u) = ∆δ(v) (u) and δ ∗ (u′ ) = ∆δ(u) (u′ ), so δ ∗ (u′ ) contains w. It is not difficult to see
+that u wraps u′ and u′′ in δ ∗ , so δ ∗ (u′ ) and δ ∗ (u′′ ) are maximal subornaments of δ ∗ (u). Assume for
+the sake of contradiction that w ̸∈ Pop(δ ∗ )(u). By part (iii) of Lemma 2.4, there exists a minimal
+reduction o of δ ∗ (u) that does not contain w. By part (ii) of Lemma 2.3, o is a disjoint union
+of maximal subornaments of δ ∗ (u) not including δ ∗ (u′ ) (because it contains w) and not including
+δ ∗ (u′′ ) (as u′′ is a descendant of u′ and o must be connected). But by part (iii) of Lemma 2.3, this
+contradicts the minimality of o.                                                                                □
+
+                                          5. The Image of Popk
+   Now that we have characterized the image of Pop on an arbitrary ornamentation lattice, we
+turn to studying the images of higher iterates Pop. This turns out to be much more complicated.
+Proposition 3.3 gives a necessary condition in terms of v-ranks for an ornamentation to lie in the
+image of Popk . The v-ranks are fairly global, as determining the v-rank of a node could require
+checking every node in its subtree. We will provide another necessary (but not sufficient) condition
+for an ornamentation to lie in the image of Popk , this time depending on features that are local to
+each ornament. We will then use this condition to completely characterize Popk (O(T)) when T is
+a chain (so O(T) is a Tamari lattice).
+   Let T ∈ PTn and δ ∈ O(T), and fix a node v ∈ T. Letting λv′ be the v ′ -section of δ(v) (for some
+v ∈ chδ(v) (v)), an ornament δ(u) ∈ T is a bead of λv′ in δ if u ≤T v ′ , u ̸∈ δ(v), and for each node
+ ′
+
+w ∈ [v ′ , u], either w ∈ δ(v) or δ(w) is a singleton. (In particular, δ(u) must be a singleton to be a
+bead.)
+Example 5.1. Let δ be the ornamentation of the tree T shown in Figure 7. The ornament δ(t) has
+a section with 1 bead and a section with 3 beads. The ornaments δ(u) and δ(v) each have exactly
+one section, which has 3 beads. The ornament δ(w) has one section with 4 beads.
+   Recall from Lemma 2.3 that a minimal reduction of an ornament δ(v) must be of the form
+δ(v) \ δ(u) for some maximal subornament δ(u). The following lemma describes a special property
+of the applications of Pop to an ornamentation that is already in Pop(O(T)):
+Lemma 5.2. Let δ ∈ Pop(O(T)), and let u ∈ Mδ (v). Then δ(u) = {u}. Moreover, if w ∈ chδ(v) (v)
+and u belongs to the w-section of δ(v), then for every k ≥ 1 such that w ∈ Popk (δ)(v), the set {u}
+is a bead of the w-section of Popk (δ)(v) in Popk (δ).
+Proof. If |δ(u)| > 1, then since u ∈ Mδ (v), it must be the case that v hugs u in δ. This is impossible
+by Theorem 4.2, so we must have δ(u) = {u}. By Lemma 2.4 and induction on k, the second part
+of the lemma follows from the first.                                                                 □
+                                                                                                            13
+
+
+
+
+                                      Figure 7. An ornamentation.
+
+
+Proposition 5.3. Suppose δ ′ = Popk (δ) ∈ Popk (O(T)) for some δ ∈ O(T). Then for each v ∈ T,
+each section of δ ′ (v) has at least k − 1 beads.
+                                                           (i)
+Proof. Suppose w ∈ chδ′ (v) (v). For 0 ≤ i ≤ k, let λw be the w-section of Popi (δ)(v) in Popi (δ).
+                                                                           (i)
+For each 1 ≤ i ≤ k − 1, let ui ∈ MPopi (δ) (v) be such that ui ∈ λw . It follows from Lemma 2.4
+that Popi (δ) contains ui , . . . , uk−1 but does not contain ui−1 ; hence, u1 , . . . , uk−1 are all distinct.
+According to Lemma 5.2, u1 , . . . , uk−1 are all beads of the w-section of δ ′ (v) in δ ′ .                 □
+
+   While Propositions 3.3 and 5.3 and Theorem 4.2 each impose necessary, independent conditions
+for an ornamentation to belong to Popk , their conjunction is still not a sufficient condition. Consider
+the ornamentation δ in Figure 8. None of these three results eliminate the possibility that δ is in
+the image of Pop2 . Indeed, each node in δ(v0 ) has a v0 -rank of at least 2, the unique non-singleton
+ornament δ(v0 ) is not hugged by any ornament (including δ(ω)), and the unique section of δ(v0 )
+in δ has 2 beads as necessary. However, it is straightforward to check that δ is not in the image of
+Pop2 .
+
+
+
+
+        Figure 8. An ornamentation demonstrating that Proposition 3.3, Theorem 4.2,
+        and Proposition 5.3 are insufficient for guaranteeing that an ornamentation belongs
+        to the image of Pop2 . Each node is labeled by its v0 -rank.
+14
+
+
+  The next theorem says that Propositions 3.3 and 5.3 and Theorem 4.2 do provide a complete
+characterization of Popk (O(T)) when T = Cn is a chain with n elements. We will need a bit more
+notation. Let v1 , . . . , vn be the elements of Cn , with vn <Cn vn−1 <Cn · · · <Cn v1 . For δ ∈ O(Cn )
+and i ∈ [n], let gδ (i) = max{r ∈ [n] : vr ∈ δ(vi )} so that δ(vi ) = {vj : i ≤ j ≤ gδ (i)}. This yields a
+function gδ : [n] → [n]. For i < j, the ornaments δ(vi ) and δ(vj ) are disjoint if gδ (i) < j, and they
+are nested if gδ (i) ≥ gδ (j).
+Theorem 5.4. Let Cn be a chain with n elements, and let δ ∈ O(Cn ). Then δ ∈ Popk (O(Cn )) if
+and only if for each v ∈ Cn , either δ(v) = {v} or v satisfies the following properties:
+  (i) The node v is not hugged in δ by any node in Cn .
+ (ii) There are at least k ornaments below δ(v), the top k − 1 of which are singletons.
+Proof. We know by Theorem 4.2, Proposition 5.3, and Lemma 2.6 that the conditions in the
+statement of the theorem are necessary, so it remains to show they are sufficient. Thus, suppose
+that for each v ∈ Cn , either δ(v) = {v} or v satisfies (i) and (ii). For 0 ≤ t ≤ k − 1, let δ (t) be the
+ornamentation resulting from extending each non-singleton ornament in δ downwards by t nodes.
+Formally, δ (t) is the ornamentation whose corresponding function gδ(t) is given by
+                                              (
+                                               i          if gδ (i) = i;
+                                  gδ(t) (i) =
+                                               gδ (i) + t otherwise.
+Note that the ornamentations δ (0) , . . . , δ (k−1) all have the same set of non-singleton ornaments.
+Also, if δ (k−1) (u) is not a singleton, then u is not hugged in δ (k−1) by any other node in Cn ∪ {ω}.
+Therefore, Theorem 4.2 implies that δ (k−1) is in the image of Pop. Furthermore, it is not difficult
+to check using Lemma 2.4 that for each t < k − 1, we have Pop(δ (t+1) ) = δ (t) . It follows that
+δ = Popk−1 (δ (k−1) ), so δ is in the image of Popk .                                                □
+     The characterization above allows us to prove Theorem 1.3, which states that
+                                                  p
+              X
+                       k          n   1 − xk+1 − (1 − xk+1 )2 − 4x(1 − x)(1 − xk+1 )
+                  |Pop (O(Cn ))|x =                                                  .
+                                                         2x(1 − x)
+                n≥0
+                               (k)
+Proof of Theorem 1.3. Let An = |Popk (O(Cn ))|. Fix integers n, k ≥ 0. It follows from Theo-
+               (k)
+rem 1.1 that An = 1 if n ≤ k + 1. (This also follows from [10, Theorem 4.13].) Now suppose
+n ≥ k + 2; we will show that
+                                        n−1
+                                        X (k) (k)
+                                 A(k)
+                                   n  =     Ai An−1−i .
+                                                i=k
+                                                                            P       (k) n
+Using this recurrence, it is routine to derive the desired expression for      n≥0 An x .
+          (k)
+   Let An,a be the number of ornamentations δ in Popk (O(Cn )) such that gδ (v1 ) = a. If a = 1,
+the ornament δ(v1 ) satisfies the condition in Theorem 5.4 because it is a singleton, and does not
+                                                          (k)     (k)
+interact with any of the other ornaments. Hence, An,a = An−1 .
+   Now suppose a > 1. For δ to satisfy the conditions in Theorem 5.4, we must have a ≤ n − k, and
+the ornaments δ(va ), δ(va+1 ), . . . , δ(va+k−1 ) must be singletons. Consequently, the ornaments δ(vi )
+with i ∈ [a+k −1] must be disjoint from the ornaments δ(vj ) with j ∈ [a+k, n]. This means that to
+construct δ, we must choose the ornaments δ(vj ) with j ∈ [a + k, n] and then independently choose
+the ornaments nested in δ(v1 ). The number of ways to choose the ornaments δ(vj ) with j ∈ [a+k, n]
+    (k)
+is An−(a+k−1) . It remains to choose the ornaments that are nested inside δ(v1 ). The first constraint
+in Theorem 5.4 imposes that any non-singleton ornament nested in δ(v1 ) cannot contain va . We can
+define a bijection between configurations of ornaments nested in δ(v1 ) (that satisfy the conditions
+in Theorem 5.4) and ornamentations in Popk (O(Ca+k−2 )) as follows. For each such configuration,
+                                                                                                          15
+
+
+remove the node v1 and its ornament, and remove all nodes and ornaments strictly below va+k−1 .
+                            (k)
+This shows that there are Aa+k−2 ways to choose the ornaments nested in δ(v1 ), and we deduce
+       (k)     (k)           (k)
+that An,a = An−(a+k−1) Aa+k−2 . In conclusion,
+                                       n−k                         n−1
+                               (k)            (k)        (k)              (k)   (k)
+                                       X                           X
+                         A(k)
+                          n = An−1 +         An−(a+k−1) Aa+k−2 =         Ai An−1−i .                      □
+                                       a=2                         i=k
+
+
+                                        6. Semidistributivity
+   A finite lattice L is called semidistributive if for all a, b ∈ L with a ≤ b, the set {z ∈ L : z ∧ b = a}
+has a maximum and the set {z ∈ L : z ∨ a = b} has a minimum. Associated to a finite semidis-
+tributive lattice is a certain simplicial complex called its canonical join complex, which has one face
+for each element of the lattice (see, e.g., [3]). Defant and Williams [12] found that elements in the
+image of Pop correspond naturally to the facets of the canonical join complex.
+   In this brief section, we prove that ornamentation lattices are semidistributive, which provides
+further motivation for our analysis of the image of Pop in Section 4. We will need the following
+result due to Barnard. Given a finite poset P with partial order ≤P and an element x ∈ P , we
+extend our earlier notation by writing
+                     ∆P (x) = {x′ ∈ P : x′ ≤P x}   and ∇P (x) = {x′ ∈ P : x ≤P x′ }.
+Proposition 6.1 ([3, Proposition 22]). A finite lattice L is semidistributive if and only if for every
+cover relation x′ ⋖x in L, the set ∆L (x)\∆L (x′ ) has a minimum element and the set ∇L (x′ )\∇L (x)
+has a maximum element.
+Theorem 6.2. Let T be a rooted plane tree. The ornamentation lattice O(T) is semidistributive.
+Proof. For convenience, let L = O(T). Let δ ′ ⋖ δ be a cover relation in L. By Lemma 2.4, there
+exist v ∈ T and u ∈ Mδ (v) such that δ ′ = δuv . Appealing to Proposition 6.1, we find that we just
+need to show that ∆L (δ) \ ∆L (δuv ) has a minimum element and that ∇L (δuv ) \ ∇L (δ) has a maximum
+element.
+   Let o = {w ∈ T : u ≤T w ≤T v} be the smallest ornament of T that contains both u and v. Let
+δ↓ be the ornamentation of T defined so that δ↓ (w) = {w} for all w ∈ T \ {v} and δ↓ (v) = o. If
+σ ∈ ∆L (δ) \ ∆L (δuv ), then σ(v) must contain a node in ∆δ(v) (u), so it must in fact contain o. It
+follows that δ↓ is the minimum element of ∆L (δ) \ ∆L (δuv ).
+   Let δ ↑ be the ornamentation defined by
+                                       (
+                              ↑          ∆T (w) \ ∆T (u) if u <T w ≤T v;
+                             δ (w) =
+                                         ∆T (w)          otherwise.
+
+It is immediate from the definition of δuv that δ ↑ is in the set ∇L (δuv ) \ ∇L (δ); we claim that it
+is the maximum element of this set. To see this, suppose σ ∈ ∇L (δuv ) \ ∇L (δ). Because σ ̸≥ δ,
+we know that σ(v) cannot contain δ(v). But δ(v) = δuv (v) ⊔ δ(u). We have δ(u) = δuv (u) ⊆ σ(u)
+and δuv (v) ⊆ σ(v). This implies that σ(v) cannot contain σ(u), so it cannot contain u. Hence,
+σ(v) ⊆ ∆T (v) \ ∆T (u). This implies that σ(w) ⊆ ∆T (w) \ ∆T (u) for all w satisfying u <T w ≤T v.
+Hence, σ ≤ δ ↑ .                                                                                    □
+
+                                          Acknowledgments
+  Colin Defant was supported by the National Science Foundation under Award No. 2201907 and
+by a Benjamin Peirce Fellowship at Harvard University.
+16
+
+
+                                                  References
+ [1] A. Asinowski, C. Banderier, and B. Hackl. Flip-sort and combinatorial aspects of pop-stack sorting. Discrete
+     Math. Theor. Comput. Sci., 22 (2021).
+ [2] A. Asinowski, C. Banderier, S. Billey, B. Hackl, and S. Linusson. Pop-stack sorting and its image: permutations
+     with overlapping runs. Acta. Math. Univ. Comenian., 88 (2019), 395–402.
+ [3] E. Barnard. The canonical join complex. Electron. J. Combin., 26 (2019).
+ [4] E. Barnard, C. Defant, and E. J. Hanson. Pop-stack operators for torsion classes and Cambrian lattices. Preprint:
+     arXiv:2312.03959.
+ [5] M. Carr and S. L. Devadoss. Coxeter complexes and graph associahedra. Topology Appl., 153 (2006), 2155–2168.
+ [6] Y. Choi and N. Sun. The image of the Pop operator on various lattices. Adv. Appl. Math., 154 (2024).
+ [7] A. Claesson and B. Á. Guðmundsson. Enumerating permutations sortable by k passes through a pop-stack. Adv.
+     Appl. Math., 108 (2019), 79–96.
+ [8] A. Claesson, B. Á. Guðmundsson, and J. Pantone. Counting pop-stacked permutations in polynomial time.
+     Experiment. Math., (2021).
+ [9] C. Defant. Pop-stack-sorting for Coxeter groups. Comb. Theory, 2 (2022).
+[10] C. Defant. Meeting covered elements in ν-Tamari lattices. Adv. Appl. Math., 134 (2022).
+[11] C. Defant and A. Sack. Operahedron lattices. Preprint: arXiv:2402.12717.
+[12] C. Defant and N. Williams. Semidistrim lattices. Forum Math. Sigma, 11 (2023).
+[13] P. Galashin. P -associahedra. Selecta Math., 30 (2023).
+[14] L. Hong. The pop-stack-sorting operator on Tamari lattices. Adv. Appl. Math., 139 (2022).
+[15] G. Laplante-Anfossi. The diagonal of the operahedra. Adv. Math., 405 (2022).
+[16] L. Lichev. Lower bound on the running time of pop-stack sorting on a random permutation. arXiv:2212.09316(v1).
+[17] A. Postnikov. Permutohedra, associahedra, and beyond. Int. Math. Res. Not. IMRN, 2009 (2009), 1026– 1106.
+[18] L. Pudwell and R. Smith. Two-stack-sorting with pop stacks. Australas. J. Combin., 74 (2019), 179–195.
+[19] A. Sapounakis, I. Tasoulas, and P. Tsikouras. On the dominance partial ordering on Dyck paths. J. Integer Seq.,
+     9 (2006).
+[20] P. Ungar. 2N noncollinear points determine at least 2N directions. J. Combin. Theory Ser. A, 33 (1982), 343–
+     347.
+
+     Department of Mathematics, Massachusetts Institute of Technology, Cambridge, MA 02138, USA
+     Email address: kajran@mit.edu
+
+     Department of Mathematics, Harvard University, Cambridge, MA 02138, USA
+     Email address: colindefant@gmail.com
+

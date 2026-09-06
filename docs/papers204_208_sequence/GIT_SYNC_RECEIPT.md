@@ -300,3 +300,48 @@ not another mathematical run or a five-paper terminal PASS.
 This receipt/object output and all later root OFS admission, P208 writing
 and active scout results are outside the named historical commit unless
 a later actual push says otherwise. `OWNER_AMBER / HOLD_EXTERNAL` remains.
+
+## P208 admitted and Round0 frozen / twelfth–thirteenth closure checkpoint
+
+On 2026-09-06 UTC, the 1,175-file owned change was committed and actually
+pushed as `076cfbd45446e4a803de495d009f186a54bea503`. It archives root's
+OFS admission and actual gate replay pair, P208's complete anonymous
+seven-page manuscript, immutable 483-entry author seal, author/root replay
+pairs, stable source-only build pair, real all-page views and physical
+487-input Round0. It also preserves the original layout overflow and final
+underfull diagnostic, the root inspector's invalid first outer seal and
+successful corrected v2, all seven original admission-context bytes, and
+the complete root-closed twelfth/thirteenth scouts. P208 A was assigned
+but its active review directory was excluded, as were the active fourteenth,
+fifteenth and unmanifested Python caches. The later sixteenth assignment
+was not part of this checkpoint. Two papers remain internally complete.
+
+The mirror began clean at cb93dcab. The second actual fetch found remote
+`b9eb720e`, all 96 changed paths confined to disjoint henon_dynamics material.
+The staged/remote overlap was empty; a normal fast-forward preserved that
+work. No force push, lock deletion or history rewrite occurred. An early
+second staging command ran before the first had finished and encountered
+its actual index lock; the agent waited for the first successful completion
+and then reran the second stage successfully. The premature empty-stage
+assertion is not a scientific or manifest failure.
+
+All 1,175 staged bytes were compared with the corresponding workspace
+files and passed owned-scope/active-exclusion checks. The initial source/doc
+whitespace check reported eight extra EOF blank lines in four sealed author
+documents and their Round0 copies. Those exact bytes were preserved, not
+reformatted. Excluding those eight explicitly named historical inputs, all
+113 remaining selected source/doc paths passed. Raw compiler evidence was
+explicitly staged despite ignore rules and was never normalized.
+
+Actual push exited zero; actual ls-remote returned the complete SHA above,
+ahead/behind was 0/0, and mirror status was empty. The read-only
+[eight-manifest committed-object check](qa/GIT_OBJECT_P208_076CFBD4.json)
+passed all 1,135 entries with no missing or mismatched Git objects. Its
+directory-relative bases were explicit; the defective first root seal was
+preserved but not treated as a passing manifest. This checks archived
+bytes, not new mathematical execution, manuscript acceptance or completion.
+
+This receipt and its object-check output were created after the named
+commit and do not claim inclusion in their own referenced ref. Later A,
+fourteenth/fifteenth closures or sixteenth work are not implicitly synced.
+OWNER_AMBER / HOLD_EXTERNAL remains unchanged.

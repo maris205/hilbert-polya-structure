@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/root/miniconda3/bin/python3",
+    "-I",
+    "-B",
+    "-c",
+    "import sys, pathlib, json, hashlib\nassert sys.flags.optimize==0 and sys.flags.isolated==1 and sys.dont_write_bytecode\np=pathlib.Path('verify.py')\nexec(compile(p.read_bytes(),str(p),'exec',optimize=0),{'__name__':'__main__','__file__':str(p)})\nmodules={str(pathlib.Path(m.__file__).resolve()):hashlib.sha256(pathlib.Path(m.__file__).read_bytes()).hexdigest() for m in tuple(sys.modules.values()) if getattr(m,'__file__',None) and pathlib.Path(m.__file__).is_file()}\npathlib.Path(sys.argv[1]).write_text(json.dumps({'flags':{'optimize':sys.flags.optimize,'isolated':sys.flags.isolated,'dont_write_bytecode':sys.dont_write_bytecode},'executable':sys.executable,'version':sys.version,'modules':modules},sort_keys=True,indent=2)+'\\n')\n",
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p208_a/cold05/CONSUMED_RUNTIME.json"
+  ],
+  "cwd": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p208_a/cold05/source_only",
+  "end_ns": 1788693321461256464,
+  "env": {
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/local/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONOPTIMIZE": "0",
+    "TZ": "UTC"
+  },
+  "exit": 0,
+  "start_ns": 1788693320483712604,
+  "stderr": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p208_a/cold05/producer.stderr",
+  "stdout": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/reviews/p208_a/cold05/producer.stdout"
+}

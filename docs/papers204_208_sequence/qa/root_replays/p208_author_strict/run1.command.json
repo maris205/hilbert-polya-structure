@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/root/miniconda3/bin/python3.12",
+    "-I",
+    "-S",
+    "-B",
+    "-X",
+    "pycache_prefix=/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p208_author_strict/run1_unused_pycache",
+    "-c",
+    "\nimport hashlib, json, os, sys\nfrom pathlib import Path\nassert sys.flags.optimize == 0 and sys.flags.isolated == 1\nassert sys.flags.no_site == 1 and sys.dont_write_bytecode\ncache = Path(sys.pycache_prefix)\nassert not cache.exists()\nsource = Path('verify.py')\nexec(compile(source.read_bytes(), str(source), 'exec', optimize=0),\n     {'__name__': '__main__', '__file__': str(source)})\nassert not cache.exists()\nmodules = {}\nfor name, module in sorted(sys.modules.items()):\n    origin = getattr(module, '__file__', None)\n    spec = getattr(module, '__spec__', None)\n    if origin and Path(origin).is_file():\n        path = Path(origin).resolve()\n        assert path.suffix != '.pyc', str(path)\n        modules[name] = {'path': str(path), 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}\n    else:\n        modules[name] = {'origin': getattr(spec, 'origin', None)}\nmapped = {}\nfor line in Path('/proc/self/maps').read_text().splitlines():\n    fields = line.split(None, 5)\n    if len(fields) == 6 and fields[5].startswith('/'):\n        path = Path(fields[5]).resolve()\n        assert path.is_file(), str(path)\n        mapped[str(path)] = hashlib.sha256(path.read_bytes()).hexdigest()\nresult = {'version': sys.version, 'executable': str(Path(sys.executable).resolve()),\n          'flags': repr(sys.flags), 'optimize': sys.flags.optimize,\n          'isolated': sys.flags.isolated, 'no_site': sys.flags.no_site,\n          'dont_write_bytecode': sys.dont_write_bytecode,\n          'pycache_prefix': str(cache), 'cache_absent': not cache.exists(),\n          'sys_path': sys.path, 'environment': dict(sorted(os.environ.items())),\n          'modules': modules, 'mapped_files': mapped}\nwith Path(sys.argv[1]).open('x') as stream:\n    json.dump(result, stream, sort_keys=True, indent=2)\n    stream.write('\\n')\n",
+    "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p208_author_strict/run1_CONSUMED_RUNTIME.json"
+  ],
+  "cwd": "/root/autodl-tmp/symbolic_dynamics/docs/papers204_208_sequence/qa/root_replays/p208_author_strict/run1",
+  "ended_utc": "2026-09-06T11:36:45.521961+00:00",
+  "environment": {
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/bin:/bin",
+    "TZ": "UTC"
+  },
+  "exit_code": 0,
+  "label": "run1",
+  "started_utc": "2026-09-06T11:36:44.517024+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "run1.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 4974397,
+    "path": "run1.stdout",
+    "sha256": "d4667d1b9be183993f48a49a5fda51f5a519cb29a473d2dbd680caa33c8ab395"
+  }
+}

@@ -1,0 +1,100 @@
+\section{An operational decoder for every source}\label{sec:sources}
+
+We specify sets, not just their cardinalities. Let
+\(\SrcF(Y)=\{T:F(T)=Y\}\) and \(\SrcG(Y)=\{B:G(B)=Y\}\);
+the following recursion constructs them without searching the carrier.
+For nonleaf \(R\), let \(\Lists(R)\) be the set of lists of length at
+least two whose \(P\)-output is \(R\). Write \(W_0(T)=T\) and
+\(W_{j+1}(T)=(e,W_j(T))\). For a set of lists \(\mathcal L\), notation
+\(W_j\Fold(\mathcal L)\) means
+\(\{W_j(\Fold(\mathbf B)):\mathbf B\in\mathcal L\}\).
+
+\begin{lemma}[Simultaneous inverse boundaries]\label{lem:inverse-boundaries}
+For nonleaf targets, the source sets are given by the following table.
+In its last three rows \(R\ne e\). The formal bases are
+\(\SrcF(e)=\{e\}\), \(\SrcG(e)=\varnothing\).
+\[
+\begin{array}{c|c|c}
+ \text{target }Y&\SrcF(Y)&\SrcG(Y)\\ \hline
+ \text{noncomb root left child}&\varnothing&\varnothing\\
+ \LC_s,\ s\ge2&\{\RC_s\}&\{\RC_{s-1}\}\\
+ (e,R)&\Fold(\Lists(R))&\varnothing\\
+ (c,R)&W_1\Fold(\Lists(R))&\Fold(\Lists(R))\\
+ (\LC_l,R),\ l>2&W_{l-1}\Fold(\Lists(R))&
+                         W_{l-2}\Fold(\Lists(R))
+\end{array}
+\]
+\end{lemma}
+
+\begin{proof}
+We induct simultaneously on leaf count. The output shape excludes the
+first row. For \(l=1\) and \(R\ne e\), a source must have a nonleaf left
+child, and \eqref{eq:non-ear} identifies it with exactly a list in
+\(\Lists(R)\). No \(G\)-source exists by the stronger \(G\)-output shape.
+
+For a \(G\)-target \((c,R)\), \(R\ne e\),
+\eqref{eq:ear-many} gives exactly \(\Fold(\Lists(R))\).
+The other branch \eqref{eq:ear-one} would require a \(G\)-output
+\((e,R)\) with nonleaf \(R\), which has just been excluded. Its
+\(F\)-sources attach one leading \(e\), yielding the fourth row.
+For \(l>2\), only \eqref{eq:ear-one} can produce the longer left comb;
+removing its leftmost cherry uniquely reduces \(l\) by one and removes
+one leading \(e\) from the source. This proves the last row.
+
+When the target is a comb, \(P\) cannot contribute a leaf right child:
+its seed pair has at least two leaves and its output is nonleaf. The
+forced leading-\(e\) reduction instead ends at \(F(c)=c\) or \(G(e)=c\).
+It gives exactly the right combs stated in the second row. In particular
+the triangle and the exceptional root-comb targets have not acquired an
+extra seed branch.
+\end{proof}
+
+Here is the promised construction of \(\Lists(R)\). Cut the nonempty
+list \(\LS(R)\) in every possible way into nonempty consecutive blocks
+\(Q_0,Q_1,\ldots,Q_s\), with \(s\ge0\).
+For the seed, choose any ordered pair
+\[
+ (B_1,B_2)\in\SrcF(\Fold(Q_0)).
+\]
+For each later block choose
+\(B_{j+2}\in\SrcG(\Fold(Q_j))\), \(1\le j\le s\).
+Output \([B_1,B_2,B_3,\ldots,B_{s+2}]\).
+A choice from an empty source set contributes nothing.
+The seed target is nonleaf, so its source really is an ordered pair.
+Together with Lemma~\ref{lem:inverse-boundaries}, these instructions
+are a terminating recursion: each \(\Lists(R)\) uses inverse problems on
+at most \(|R|\) leaves, whereas the target \((\LC_l,R)\) using it
+has strictly more leaves.
+
+\begin{proposition}[Source-set bijection]\label{prop:parser}
+The block construction gives precisely \(\Lists(R)\), without repeated
+lists. Therefore the displayed decoder gives precisely all labelled
+polygon sources, without repetitions.
+\end{proposition}
+
+\begin{proof}
+Following the leftmost branch gives the exact concatenation identity
+\[
+ \LS(\iota(S,A))=\LS(A)\,\LS(S).
+\]
+Thus each chosen seed and later source produces, by \eqref{eq:product},
+the concatenated output list \(\LS(R)\); folding reconstructs \(R\).
+Conversely, an original list \([B_1,\ldots,B_k]\) determines its seed
+output \(F((B_1,B_2))\) and every later output \(G(B_j)\).
+Each has a nonempty left-spine list, and their lengths locate every cut.
+The same original list also determines the seed pair and each later
+source. Hence two different cut-and-source choices cannot give the same
+list. The forced wrappers and comb cases of
+Lemma~\ref{lem:inverse-boundaries} are disjoint, so the same property holds
+for \(\SrcF\). Finally the ordered-tree dictionary fixes the leaf intervals
+and therefore every polygon endpoint label.
+\end{proof}
+
+For evaluation it is useful to describe exactly which blocks survive.
+An all-leaf block has any positive length, in either position, and has
+multiplicity one by the comb row. A block ending in a nonleaf \(D\) has
+form \(e^aD\). Its seed is allowed for \(a\ge0\); a later block requires
+\(a\ge1\), by the \(l=1\) exclusion for \(\SrcG\).
+In either case its multiplicity is \(|\Lists(D)|\).
+A block of any other shape has no source. These are consequences of the
+simultaneous source construction, not assumptions about possible cuts.

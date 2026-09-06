@@ -1,0 +1,17 @@
+{
+  "env": {
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/local/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONOPTIMIZE": "0",
+    "TZ": "UTC"
+  },
+  "recorder_sha256": "8d09e0975db0e2d3f3750c4238c08775c2cbd7d5a47f1b9d8bb09abcbe1b3833",
+  "source_only_files": [
+    "verify.py"
+  ],
+  "verify_sha256": "495edfc48ed4485a85c690a783185278a6f948486d99371efef951290d30cc20",
+  "wrapper": "import sys, pathlib, json, hashlib\nassert sys.flags.optimize==0 and sys.flags.isolated==1 and sys.flags.no_site==1 and sys.dont_write_bytecode\nassert sys.pycache_prefix and not pathlib.Path(sys.pycache_prefix).exists()\np=pathlib.Path('verify.py')\nexec(compile(p.read_bytes(),str(p),'exec',optimize=0),{'__name__':'__main__','__file__':str(p)})\nmodules={str(pathlib.Path(m.__file__).resolve()):hashlib.sha256(pathlib.Path(m.__file__).read_bytes()).hexdigest() for m in tuple(sys.modules.values()) if getattr(m,'__file__',None) and pathlib.Path(m.__file__).is_file()}\nassert not pathlib.Path(sys.pycache_prefix).exists()\npathlib.Path(sys.argv[1]).write_text(json.dumps({'flags':{'optimize':sys.flags.optimize,'isolated':sys.flags.isolated,'no_site':sys.flags.no_site,'dont_write_bytecode':sys.dont_write_bytecode},'pycache_prefix':sys.pycache_prefix,'executable':sys.executable,'version':sys.version,'modules':modules},sort_keys=True,indent=2)+'\\n')\n"
+}

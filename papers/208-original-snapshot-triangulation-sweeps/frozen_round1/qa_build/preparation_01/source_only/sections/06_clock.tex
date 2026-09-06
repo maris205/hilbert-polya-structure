@@ -1,0 +1,98 @@
+\section{Both sweep phases and the sharp entrance}\label{sec:clock}
+
+\begin{lemma}[Two square identities]\label{lem:squares}
+For every tree \(R\), and every \(T\) with a nonleaf root left child,
+respectively,
+\begin{equation}\label{eq:squares}
+ F^2((e,R))=(e,K(R)),\qquad F^2(T)=K(T).
+\end{equation}
+The second identity does not require \(T\in\CC_N\). Also,
+\begin{equation}\label{eq:core-action}
+ G(Z_j)=Z_{j+1},\qquad F(Z_N)=(e,Z_{N-1})\quad(N\ge3).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For \(R=e\), the first identity is \(F^2(c)=c\). Otherwise write
+\(G(R)=(\LC_l,Q)\), \(l\ge2\), and apply \eqref{eq:comb-action}:
+\(F(G(R))=(e,D_l(Q))=(e,K(R))\).
+For the second identity put \(P_T=P(\LS(T))\).
+The protected-cell equations give \(F(T)=(e,P_T)\) and \(G(T)=(c,P_T)\).
+Thus \(F^2(T)=G(P_T)\); also
+\(G^2(T)=G((c,P_T))=(c,G(P_T))\), so \(K(T)=G(P_T)\).
+The bases \(G(e)=c\), \(G(c)=(c,e)\), together with
+\(G((c,S))=(c,G(S))\), give \(G(Z_j)=Z_{j+1}\) by induction.
+Finally the product for \(Z_N=(c,Z_{N-2})\) is \(G(Z_{N-2})=Z_{N-1}\),
+proving its \(F\)-action.
+\end{proof}
+
+\begin{proof}[Recurrence and upper bound in Theorem~\ref{thm:clock}]
+For \(N\ge3\), the two distinct states \(Z_N\) and \((e,Z_{N-1})\)
+are exchanged by \eqref{eq:core-action}. Their root left children are
+nonleaf and leaf, respectively. Every first image belongs to \(\CC_N\)
+or has form \((e,R)\), by the output-shape fact.
+
+For a first image in \(\CC_N\), the second square identity and
+Proposition~\ref{prop:k-clock} give at most
+\(2\lfloor(N-2)/2\rfloor\le N-2\) further sweep steps.
+For a first image \((e,R)\) and \(N\ge4\), the even iterates are
+\((e,K^t(R))\), giving the bound \(2\lfloor(N-1)/2\rfloor\).
+There is a second, essential representation of the odd iterates:
+\[
+ F^{2t+1}((e,R))=G(K^t(R))=K^t(G(R)).
+\]
+Here commutation is \eqref{eq:intertwine}, and
+\(G(R)\in\CC_N\), since \(R\) is nonleaf.
+The class clock gives the independent bound
+\(1+2\lfloor(N-2)/2\rfloor\). Their minimum is exactly
+\[
+ \min\left\{2\left\lfloor\frac{N-1}{2}\right\rfloor,\,
+           1+2\left\lfloor\frac{N-2}{2}\right\rfloor\right\}=N-2.
+\]
+Adding the first-image step proves the global upper bound \(N-1=n-2\).
+It also shows that every orbit enters the displayed pair, so no other
+recurrent component exists. At \(N=3\), the full carrier consists of
+exactly these two trees, already recurrent. At \(N=2\), the carrier is
+the fixed cherry. Hence the entrance maximum is zero for \(n=3,4\).
+\end{proof}
+
+To retain the final unit in the upper bound, define a witness family
+\[
+ S_3=(e,c),\qquad S_N=(S_{N-1},e)\quad(N\ge4),\qquad J(S)=(c,S).
+\]
+For \(N\ge4\) the root left child of \(S_N\) is nonleaf, but need not
+be a comb, which is why the unrestricted second clause of
+\eqref{eq:squares} is needed. Its left-spine list is
+\([c,e,\ldots,e]\); the seed is \(F((c,e))=(e,c)=S_3\), and every
+later \(G(e)=c\) appends a right leaf. Consequently
+\begin{equation}\label{eq:witness}
+ F(S_N)=(e,S_{N-1}),\qquad
+ K(S_4)=\LC_4,\qquad K(S_N)=J(S_{N-2})\quad(N\ge5).
+\end{equation}
+The last two statements follow from \(K(S_N)=G(S_{N-1})\) and
+\(G(S_3)=\LC_4\). Also \(KJ=JK\) and \(GJ=JG\) by
+\eqref{eq:intertwine} and \eqref{eq:comb-action}.
+
+For even \(N=2k\ge4\), repeated use of \eqref{eq:witness} gives
+\[
+ F^{N-2}(S_N)=K^{k-1}(S_N)=J^{k-2}(\LC_4).
+\]
+This has a nonleaf root left child and therefore is not \((e,Z_{N-1})\).
+It is not \(Z_N=J^{k-2}(Z_4)\) either, because
+\(\LC_4\ne Z_4=(c,c)\).
+
+For odd \(N=2k+1\ge5\), the same recurrence first gives
+\(K^{k-1}(S_N)=J^{k-1}(S_3)\).
+Using \(F((c,S))=(e,G(S))\), and then \(GJ=JG\), yields
+\[
+ F^{N-2}(S_N)
+   =F(J^{k-1}(S_3))
+   =(e,J^{k-2}(G(S_3)))
+   =(e,J^{k-2}(\LC_4)).
+\]
+Its left child is a leaf, so it is not \(Z_N\).
+The four-leaf tail again excludes \((e,Z_{N-1})\), whose corresponding
+tail is \(Z_4\). Thus in both parities \(S_N\) is outside the core at
+time \(N-2\). The proved upper bound puts it inside by \(N-1\).
+Its entrance is exactly \(N-1=n-2\), completing
+Theorem~\ref{thm:clock}.

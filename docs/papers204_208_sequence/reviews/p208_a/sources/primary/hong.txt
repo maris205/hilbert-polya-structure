@@ -1,0 +1,626 @@
+                                              THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES
+
+                                                                                     LETONG HONG
+
+
+
+                                                  Abstract. Motivated by the pop-stack-sorting map on the symmetric groups, Defant
+                                                  defined an operator PopM : M → M for each complete meet-semilattice M by
+arXiv:2201.10030v1 [math.CO] 25 Jan 2022
+
+
+
+
+                                                                                   ^
+                                                                         PopM (x) = ({y ∈ M : y l x} ∪ {x}).
+                                                  This paper concerns the dynamics of PopTamn , where Tamn is the n-th Tamari lattice.
+                                                     We say an element x ∈ Tamn is t-Pop-sortable if PoptM (x) is the minimal element and
+                                                  we let ht (n) denote the number of t-Pop-sortable elements in Tamn . We find an explicit
+                                                  formula for the generating function n≥1 ht (n)z n and verify Defant’s conjecture that it
+                                                                                      P
+
+                                                  is rational. We furthermore prove that the size of the image of PopTamn is the Motzkin
+                                                  number Mn , settling a conjecture of Defant and Williams.
+
+
+
+
+                                                                                  1. Introduction
+
+                                           Building on Knuth’s stack-sorting algorithm [16], West’s ground-breaking work on stack-
+                                           sorting map on symmetric groups [24] inspired subsequent studies, including the reverse-
+                                           stack-sorting map [12] and the pop-stack-sorting map [3]. Recently, there has been
+                                           considerable attention by combinatorialists on the pop-stack sorting map [1, 2, 7, 13, 20].
+                                           For each complete meet-semilattice M , Defant defined an operator PopM that agrees with
+                                           the pop-stack-sorting map when M is the weak order on Sn [8]. It is defined so that
+                                           PopM sends an element to the meet of itself and all elements that it covers. By definition,
+                                           M ’s minimal element 0̂ stays the same when PopM is applied. We say an element x is
+                                           t-Pop-sortable if PoptM (x) = 0̂.
+
+                                           Pudwell and Smith [20] enumerated the number of 2-Pop-sortable elements in Sn under the
+                                           weak order. Claesson and Guðmundsson [7] proved that for each fixed nonnegative integer
+                                           t, the generating function that counts t-Pop-sortable elements in Sn is rational. Defant [9]
+                                           established the analogous rationality result for the generating functions of t-Pop-sortable
+                                           elements of type B and type A  e weak orders.
+
+                                           Introduced in 1962, the n-th Tamari lattice Tamn consists of semilength-n Dyck paths
+                                           (lattice paths from (0, 0) to (n, n) above the diagonal y = x) [23]; its partial order will
+                                           be defined in Section 2. There are generalizations of the definition, most notably the
+                                           m-Tamari lattices by Bergeron and Préville-Ratelle [4] and the ν-Tamari lattices introduced
+
+                                             Date: December 2021.
+                                                                                             1
+2                                      LETONG HONG
+
+by Préville-Ratelle and Viennot [19]. Fundamental in algebraic combinatorics [17], the n-th
+Tamari lattice Tamn is also isomorphic to Avn (312), the lattice of 312-pattern-avoiding
+permutations under the weak order of Sn [5].
+
+In this paper, we study the Pop operator on Tamari lattices. Let ht (n) be the number of
+t-Pop-sortable elements in Tamn . A part of a conjecture by Defant [8] is that for every
+fixed t, the generating function n≥1 ht (n)z n is rational. We confirm this statement by
+                                 P
+
+giving the exact formula of the generating function:
+
+Theorem 1.1. Let ht (n) denote the number of t-Pop-sortable Dyck paths in the n-th
+Tamari lattice Tamn . Then
+                         X                        z
+                             ht (n)z n =          Pt            j
+                                                                  ,
+                         n≥1
+                                         1 − 2z −   j=2 C j−1 z
+
+where Cj are the Catalan numbers.
+
+
+Moreover, settling a conjecture in Defant and Williams’s paper (Conjecture 11.2 (2) in
+[11]), we have the following theorem:
+                                                        |UL (b)|
+                                                                   , where UL (b) is the set of elements
+                                     P
+Theorem 1.2. Define Pop(L; q) =          b∈PopL (L) q
+of L that cover b. Then we have
+                                            n        
+                                            X  1    2k n n−k
+                       Pop(Tamn+1 ; q) =                  q ,
+                                         k=0
+                                             k + 1   k 2k
+
+where the coefficients form OEIS sequence [22] A055151.
+
+In particular, when q = 1, we have that
+
+                                |PopTamn (Tamn )| = Mn−1 ,
+
+where Mn is the n-th Motzkin number (OEIS sequence [22] A001006).
+
+
+Additional motivation for studying the size of the image of PopTamn comes from a theorem
+by Defant and Williams (Theorem 9.13 in [11]). In that theorem, they proved that
+|Xn | = {y ∈ Tamn | Row(y) ≤ y}, where Row is the rowmotion operator on Tamn (which
+is equivalent to the Kreweras complement operator on noncrossing partitions [10]). They
+also showed that |Xn | is the number of independent dominating sets in a certain graph
+associated with Tamn called its Galois graph.
+
+The paper is organized as follows. In Section 2 we give the necessary definitions. In Section
+3 and Section 4 we prove Theorem 1.1 and Theorem 1.2.
+                THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES                           3
+
+                                  Acknowledgements
+
+The research was conducted at the 2021 University of Minnesota Duluth REU (NSF–DMS
+Grant 1949884 and NSA Grant H98230-20-1-0009) and fully supported by the generosity
+of the CYAN Mathematics Undergraduate Activities Fund. The author is deeply thankful
+to Professor Joseph Gallian for his long-lasting efforts and care in running the wonderful
+program and to Colin Defant for proposing the project and his dedicated mentorship. The
+author is also grateful to Qiuyu Ren and Daniel Zhu for discussions/editing comments
+and to Kenny Lau and Alec Sun for programming assistance.
+
+
+                                      2. Definitions
+
+2.1. Lattice basics and the Pop operator.
+
+Definition 2.1. A meet-semilattice is a poset M such that any two elements x, y ∈ M
+have a greatest lower bound (which is called their meet, denoted by x ∧ y). A lattice L is a
+meet-semilattice such that any two elements x, y ∈ L also have a least upper bound (which
+is called their join, denoted by x ∨ y). A meet-semilattice is complete if every nonempty
+subset A ⊂ M has a meet.
+Given x, y ∈ M , we say that y is covered by x (denoted y l x) if y < x and no z ∈ M
+satisfies y < z < x.
+
+
+In this paper we only consider finite meet-semilattices, each of which has a unique minimal
+element 0̂. They are automatically complete.
+
+Definition 2.2 ([8]). Let M be a complete meet-semilattice. Define the semilattice
+pop-stack-sorting operator PopM : M → M by
+                                   ^
+                         PopM (x) = ({y ∈ M : y l x} ∪ {x}).
+
+Definition 2.3. We say an element x of a complete meet-semilattice M is t-Pop-sortable
+if Popt (x) = 0̂.
+
+
+2.2. Generalized Tamari lattices. In this paper, a lattice path is a finite planar path
+that starts from the origin and at each step travels either up/N : (0, 1) or right/E : (1, 0).
+
+Definition 2.4. The horizontal distance of a point p with respect to a lattice path ν is
+the maximum number of east steps one can take starting from p before being strictly to
+the right of ν.
+
+Definition 2.5 ([19]). Let ν be a lattice path from (0, 0) to (` − n, n). The generalized ν-
+Tamari lattice Tam(ν) is defined as follows:
+4                                              LETONG HONG
+
+    (1) elements of Tam(ν) are lattice paths µ from (0, 0) to (` − n, n) that are weakly
+        above ν;
+    (2) the partial order of Tam(ν) is given by the covering relation: µ l µ0 if µ0 is obtained
+        by shifting a subpath D of µ by 1 unit to the left, where D satisfies (i) it is preceded
+        by E; (ii) its first step is N; (iii) its endpoints p, p0 are of the same horizontal distance
+        to ν and there is no point between them with the same horizontal distance to ν as
+        p. In other words, µ l µ0 if for such subpath D, µ = XEDY and µ0 = XDEY .
+
+
+
+
+                                                                      [8]
+
+         Figure 1. Lattice path µ = NENENEEENE is in Tam(ν) where ν =
+         ENNEEEENNE. Each point on µ is labeled with its horizontal distance.
+Definition 2.6. When ν = (NE)n , the lattice Tam(ν) is the n-th Tamari lattice Tamn
+consisting of the Dyck paths. It is well-known that |Tamn | is the n-th Catalan number Cn .
+
+
+                                     3. Proof of Theorem 1.1
+
+3.1. Preliminaries: the ν-bracket vector.
+Definition 3.1. Let b(ν) = (b0 (ν), b1 (ν), . . . , b` (ν)) be the vector denoting the heights at
+each step of the lattice path ν. Let the fixed position fk denote the largest index such
+that bfk (ν) = k. We say that an integer vector ~b = (b0 , b1 , . . . , b` ) is a ν-bracket vector,
+denoted as ~b ∈ Vec(ν), if
+
+    (1) bfk = k for all k = 0, . . . , n.
+    (2) bi (ν) ≤ bi ≤ n for all 0 ≤ i ≤ `.
+    (3) If bi = k, then bj ≤ k for all i + 1 ≤ j ≤ fk .
+
+The partial order of Vec(ν) is defined as follows: we say (b0 , b1 , . . . , b` ) ≤ (b00 , b01 , . . . , b0` ) if
+bi ≤ b0i for all i.
+Remark. An equivalent interpretation of (3) is that ~b is 121-pattern-avoiding. These
+conditions also imply the sequence {bi }ffkk−1 +1 is non-increasing for all k = 0, . . . , n.
+Definition 3.2. Let µ ∈ Tam(ν) be a path from (0, 0) to (` − n, n). We define b(µ) =
+(b0 (µ), b1 (µ), . . . , b` (µ)) its associated vector as follows: make (` + 1) empty slots; traverse
+µ, and when arriving at a new grid point, write its height k at the rightmost available slot
+among those that are weakly to the left of index fk .
+                   THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES                                                      5
+
+Remark. We alert the readers that the notation of the vector b(µ) does not reflect its
+dependence on the fixed lattice path ν.
+
+Example 3.3. We use µ = NENENEEENE and ν = ENNEEEENNE as in Figure 1. The
+fixed positions are f0 = 1, f1 = 2, f2 = 7, f3 = 8, and f4 = 10. Then we create 11 empty
+slots and construct the associated vector b(µ) as follows:
+
+      ( , 0,       ,       ,       ,   ,   ,   ,   ,   ,   )→(1, 0, 1,           ,   ,    ,   ,   ,   ,   ,       )
+ →(1, 0, 1,            ,       ,       , 2, 2,     ,   ,   )→(1, 0, 1, 3, 3, 3, 2, 2, 3,                      ,       )
+ → ( 1 , 0 , 1 , 3 , 3 , 3 , 2 , 2 , 3 , 4 , 4 ).
+
+Theorem 3.4 ([6]). The map b : Tam(ν) → Vec(ν) is an order-preserving bijection.
+Furthermore, for any paths µ, µ0 ∈ Tam(ν), we have b(µ ∧ µ0 ) = min(b(µ), b(µ0 )) the
+term-wise minimum vector.
+
+Notation 3.5. We define the followings.
+
+   (1) ∆(µ) := {i | i < ` and bi (µ) > bi+1 (µ)}.
+                 (
+                  max{x ∈ [bi (ν), bi (µ) − 1] | bj (µ) ≤ x, ∀j ∈ [i + 1, fx ]} if i ∈ ∆(µ),
+   (2) ηi (µ) :=
+                  bi (µ)                                                        if i 6∈ ∆(µ).
+   (3) bi↓ (µ) := (b0 (µ), . . . , bi−1 (µ), ηi (µ), . . . , b` (µ)).
+
+Example 3.6. Again we use µ = NENENEEENE as in Figure 1 and by Example 3.3
+we have that b(µ) = (1, 0, 1, 3, 3, 3, 2, 2, 3, 4, 4). Hence, ∆(µ) = {0, 5}, η0 (µ) = 0, and
+η5 (µ) = 2.
+
+Proposition 3.7 ([8]). We have that
+
+                                   b(PopTam(ν) (µ)) = (η0 (µ), η1 (µ), . . . , η` (µ)).
+
+Corollary 3.8 ([8]). Suppose µ ∈ Tam(ν) and fk−1 < i < fk (0 ≤ k ≤ n). Then
+bi (PopTam(ν) (µ)) ≥ bi+1 (µ).
+
+
+We use the assumptions for a lattice path ν from above. Let ν # be the path obtained
+from ν by deleting its first f0 + 1 steps. Let b# be the vector obtained from b by deleting
+its first f0 + 1 entries and subtracting 1 from all remaining entries. We call this action the
+hash map. Let µ# be the unique element in Tam(ν # ) whose associated vector is b(µ)# .
+
+Corollary 3.9. If µ ∈ Tam(ν) is t-Pop-sortable, then so is µ# ∈ Tam(ν # ).
+
+
+Proof. This directly follows from the fact that ηi (µ) is determined only by bj (µ) for
+j ≥ i.                                                                               
+6                                                    LETONG HONG
+
+3.2. Proof of the result. Let Ht (z) = n≥1 ht (n)z n , the generating function in Theo-
+                                                 P
+
+rem 1.1. Let H e t (z) be the truncated polynomial Pt−1 ht (n)z n . Let Gt (z) = P              n
+                                                          n=1                        n≥1 gt (n)z ,
+where gt (n) denotes the t-Pop-sortable irreducible elements in Vec(ν) for ν = E(NE)n−1 .
+In this case, using the notations from Definition 3.1, we have fk = 2k + 1, and bi (ν) = bi/2c.
+Therefore, the restrictions are b2k+1 = k, b2k ∈ {k, k + 1, . . . , n}, and that if bi = k, then
+bj ≤ k for all j = i + 1, . . . , 2k + 1, i.e., no 121-pattern can appear. Finally, we note that
+Vec(E(NE)n−1 ) ∼   = Vec((NE) ) ∼
+                                  n
+                                    = Tamn .
+Definition 3.10. We say ~b = (b0 , b1 , . . . , b` ) ∈ Vec(ν) for some fixed ν is irreducible if
+b0 = b` .
+Lemma 3.11. Every ν-bracket vector can be decomposed into irreducible νi -bracket vectors,
+where ν and each νi are of the form E(NE)k−1 . A vector is t-Pop-sortable if and only if
+all its irreducible components are.
+
+ Proof. We first define the addition of two irreducible vectors ~b ∈ Vec(E(NE)n1 −1 ) and
+~b0 ∈ Vec(E(NE)n2 −1 ) as follows:
+    ~b + ~b0 := (b0 , b1 , . . . , b2n −1 , b0 + n1 , b0 + n1 , . . . , b0                         n1 +n2 −1
+                                      1      0         1                 2n2 −1 + n1 ) ∈ Vec(E(NE)           ).
+To prove the first claim we induct on the length of the vector and note that it suffices to
+show that every bracket vector can be decomposed as the sum of an irreducible vector ~birr
+and a shorter vector. Simply take ~birr := (b0 , b1 , . . . , bfb0 ). The second claim is clear. 
+Lemma 3.12. Assume the notations above. Then we have
+                                            1
+                           1 + Ht (z) =            .
+                                        1 − Gt (z)
+
+Proof. The formula is a direct corollary of Lemma 3.11.                                                                    
+Lemma 3.13. The hash map is a one-to-one correspondence between irreducible vectors
+in Vec(E(NE)n−1 ) and bracket vectors in Vec(E(NE)n−2 ). An irreducible vector ~b is t-Pop-
+sortable if and only if ~b# is t-Pop-sortable and t ≥ n − xr + 1, where 2xr is the length of
+the last irreducible vector component of ~b# .
+
+Proof. Let the irreducible vector ~b ∈ Vec(E(NE)n−1 ) be (n, 0, u0 , u1 , . . . , u2n−3 ) and ~b# =
+(u0 − 1, u1 − 1, . . . , u2n−3 − 1) ∈ Vec(E(NE)n−2 ). First, it is clear that from ~b# we can
+recover ~b, so the hash map is a bijection. Next, if we decompose ~b# as the sum of some
+(say r) irreducible vectors of lengths 2x1 , . . . , 2xr , respectively (corresponding to elements
+in Vec(ν) for ν = (E(NE)xi −1 ), 1 ≤ i ≤ r), then we can write
+       ~b = (n, 0, u0 , u1 , . . . , u2n−3 ) = (n, 0, u0 , . . . , u0 , . . . , n − xr , . . . , n − xr , n, . . . , n).
+
+The irreducible vector ~b being t-Pop-sortable is equivalent to ~b# being t-Pop-sortable and
+the first entry of ~b turning 0 after t Pop’s. Applying PopVec(E(NE)n−1 ) once changes the first
+                  THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES                                7
+
+entry from n to n − xr , and each subsequent PopVec(E(NE)n−1 ) decreases it by 1, hence this
+is then equivalent to t ≥ n − xr + 1.                                                     
+
+Lemma 3.14. Assume the notations above. Then we have
+                                                        
+                      Gt (z) = z (1 + He t (z))Gt (z) + 1 .
+
+
+Proof. This is a corollary of Lemma 3.13. Since the hash map’s image of the middle
+sub-vector (u0 − 1, . . . , u0 − 1, . . . , n − xr − 1, . . . , n − xr − 1) ∈ Vec(E(NE)n−xr −1 ) is
+t-Pop-sortable when n − xr ≤ t − 1 and the last irreducible component starts and ends
+with n as well, we have justified the desired expression (adding 1 to H         e t (z) is to account
+for the r = 0 case).                                                                               
+
+Lemma 3.15. When n ≤ t, every path in Tamn is t-Pop-sortable.
+
+Proof. Consider the path’s associated vector ~b ∈ Vec(E(NE)n−1 ). For each 0 ≤ i ≤ n − 1,
+b2i decreases by at least 1 each time unless b2i = b2i+1 . Since n ≤ t, during the t
+applications of PopVec(E(NE)n−1 ) this equality will be reached. This applies to all i, so we
+obtain the minimum element’s associated vector.                                             
+
+We are now ready to prove our first main result.
+
+Proof of Theorem 1.1. By Lemma 3.15, H   e t (z) = Pt−1 Cn z n . By Lemma 3.14, we have
+                                                    n=1
+that
+                                                 z
+                              Gt (z) =       Pt          ,
+                                       1 − n=1 Cn−1 z n
+and substituting this into Lemma 3.12, we obtain that
+                                               z
+                         Gt (z)       1− tn=1 Cn−1 z n
+                                        P
+                                                                  z
+              Ht (z) =            =            z       =         Pt            ,
+                       1 − Gt (z)   1 − 1− t C zn
+                                          P              1 − 2z − j=2 Cj−1 z j
+                                               n=1   n−1
+
+as desired.                                                                                       
+
+
+                                 4. Proof of Theorem 1.2
+
+4.1. Preliminaries: congruence and Pop on subsemilattices.
+
+Definition 4.1. A lattice congruence on a lattice L is an equivalence relation ≡ on L
+such that if x1 ≡ x2 and y1 ≡ y2 , then x1 ∧ y1 ≡ x2 ∧ y2 and x1 ∨ y1 ≡ x2 ∨ y2 .
+For each x ∈ L, we denote by π↓ (x) the minimal element of the congruence class of x.
+
+Definition 4.2. A subsemilattice of a lattice L is a subset M ⊂ L such that x ∧ y ∈ M
+for all x, y ∈ M .
+8                                       LETONG HONG
+
+Theorem 4.3. ([8]) Let L be a finite lattice. Let ≡ be a lattice congruence on L such that
+the set M = {π↓ (x) | x ∈ L} is a subsemilattice of L. Then for all x ∈ M ,
+
+                                  PopM (x) = π↓ (PopL (x)).
+
+
+We now provide an example that shows how the Tamari lattice can be realized as a
+sublattice of Sn .
+
+Definition 4.4. A descent of a permutation x = x1 · · · xn is a pair of adjacent entries
+xi > xi+1 . A descending run is a maximal decreasing subsequence of x. The pop-stack-
+sorting map is the operator on Sn that reverses each descending run.
+
+Definition 4.5. The partial order of Sn defined by the following covering relation is the
+right weak order : a permutation y is covered by permutation x if y is obtained by swapping
+one of x’s descents.
+
+Definition 4.6. ([15]) Two words u, v are sylvester-adjacent if there exist a < b < c and
+words X, Y, Z such that u = XacY bZ and v = XcaY bZ. We write u C v.
+Two words u, v are sylvester-congruent if there is a chain of words u = w0 , w1 , . . . , wm = v
+such that wi and wi+1 are sylvester-adjacent for all i (wi C wi+1 or wi B wi+1 ).
+
+
+We say that a permutation π is 312-avoiding if it has no i < j < k such that xj < xk < xi ,
+and is 312-avoiding if it has no i < j such that xi < xj < xi−1 .
+
+Let L = Sn , and let M = Avn (312) be the set of 312-avoiding permutations, both under
+the right weak order. It is established by Björner and Wachs [5] in their Theorem 9.6 (i)
+that Avn (312) is a sublattice of Sn and is isomorphic to the Tamari lattice Tamn . Reading
+[21] observes that the sylvester-congruence is a lattice congruence for Sn under the right
+weak order (note that u C v also implies u l v), and, furthermore, if we divide Sn into
+sylvester-congruence classes, then each class has a unique 312-avoiding element. More
+precisely, Avn (312) = {π↓ (x) | x ∈ Sn }.
+
+A concrete description of π↓ is that we can compute a chain x = y0 B y1 B · · · B ym = π↓ (x)
+until we must stop (one can easily show that no XcaY bZ (i.e., 312) pattern implies no
+312 pattern), and we remark that the exact construction of the chain does not matter,
+that is, regardless of the order of swapping one obtains the same eventual outcome.
+
+Therefore, Theorem 4.3 tells us that
+
+                               PopAvn (312) (x) = π↓ (PopSn (x)).
+
+This is especially helpful, given that PopSn on the right hand side is equal to the easily
+characterized pop-stack-sorting map.
+                 THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES                            9
+
+4.2. Proof of the result.
+
+Theorem 4.7. We have that x ∈ Xn = {PopAvn (312) (Avn (312))} if and only if x =
+x1 x2 · · · xn has no consecutive double descents and ends with n.
+
+
+Proof. In this proof we interpret Pop as reversing all descending runs of a string (not
+required to be a permutation of 1 to m), e.g., Pop(74513) = 47153, though we specify by
+using a subscript when it is indeed PopSm . We also recall the identity PopAvn (312) (y) =
+π↓ (PopSn (y)) which will be used extensively.
+
+For the “only if” direction, we first suppose that x = π↓ (PopSn (y)) and we want to show
+that x ends with n and has no consecutive double descents.
+
+It is known that every permutation in the image of π↓ must be 312-avoiding. We first
+prove that the last entry must be n. Wherever n is located for a permutation y, in order
+for it to be 312-avoiding we must have that the segment after n is decreasing. Then after
+the effect of PopSn , n is put at the end of the permutation and continues to stay there
+when we apply π↓ because it is never involved as a, b, or c in any XcaY bZ pattern.
+
+Next we prove that there are no consecutive double descents. We use induction on the
+permutation length, and, with the base case being clear, we assume this claim holds for
+length n − 1. Write y = y1 y2 · · · yn and let yr = n.
+
+Suppose yn = n. We thus know that PopSn (y) ends with n and it stays at the same place
+under the effect of π↓ . Using the induction hypothesis, we have that π↓ (PopSn (y)) will end
+with (n − 1)n with no double descents.
+
+Suppose yn−1 = n. Let yn = k. Let PopSn (y) = z1 · · · zn . Then (zn−1 , zn ) = (k, n) and n
+stays at the same place throughout. We prove the following two claims: there is no 312
+pattern involving k after PopSn , and there is no 312 pattern involving k at any stage in
+the chain of pairwise sylvester-adjacent permutations that we use to compute π↓ . For the
+first claim, if there is a 312 pattern then there must be some zi , zj such that zi > k > zj
+and i < j < n − 1. Since PopSn does not change the relative position of entries in different
+descending runs, it must be that zi is before zj in preimage y. However, there is no 312
+pattern initially in y, which is a contradiction. For the second claim, we know that z1 · · · zn
+has no zi , zj such that zi > k > zj and i < j < n − 1, and any swap (XcaY bZ → XacY bZ)
+in the chain would not create such a pair as it moves a smaller element to the front of a
+larger element.
+
+Therefore, we can delete k and n from y and lower the entries of values k + 1, . . . , n − 1
+by 1 respectively in y1 · · · yn−2 . We then have an element in Sn−2 , say, y10 · · · yn−2
+                                                                                       0
+                                                                                           , and
+                                                                     0      0
+can apply the induction hypothesis to it. Therefore, π↓ (PopSn−2 (y1 · · · yn−2 )) ends with
+n − 2 and has no double descents. Now we take this image and add 1 to entries of values
+10                                              LETONG HONG
+
+k, . . . , n − 2 and denote it as x01 · · · x0n−2 . Because of the previous paragraph we have shown
+that π↓ (PopSn (y)) = x01 · · · x0n−2 · kn, and the entire string has no double descents.
+
+Now suppose r ≤ n − 2. First we consider the case yr−1 < yr+1 . We have PopSn (y) =
+PopSn−1 (y1 · · · yr−1 yr+1 · · · yn )n. Therefore,
+                                                                                       
+                      π↓ (PopSn (y)) = π↓ PopSn−1 (y1 · · · yr−1 yr+1 · · · yn ) · n
+                                                                                    
+                                         = π↓ PopSn−1 (y1 · · · yr−1 yr+1 · · · yn ) · n,
+where · stands for concatenation. We apply the induction hypothesis to y1 · · · yr−1 yr+1 · · · yn ,
+an element of Sn−1 , and obtain that the first n − 1 places of x must not have consecutive
+double descents. Concatenating with n will not change this statement, and we conclude
+this case.
+
+Now we suppose yr−1 > yr+1 . Let yq yq+1 · · · yr−1 be the longest descending run that ends
+with yr−1 . On one hand,
+           PopSn (y1 · · · yr−1 nyr+1 · · · yn ) = Pop(y1 · · · yq−1 ) · yr−1 · · · yq yn · · · yr+1 n,
+where yn < · · · < yr+1 < yr−1 < · · · < yq .
+
+Now we start applying the series of swaps to apply π↓ . Notice that every swap removes a
+312 pattern and yq yn yr+1 is one such pattern. Thus, first yq is swapped with yn . Then,
+yq yn−1 yr+1 should also be removed, so yq is again swapped with yn−1 . We repeat the
+process, and after n − r swaps involving yq as the c in XcaY bZ, the permutation becomes
+                             Pop(y1 · · · yq−1 ) · yr−1 · · · yq+1 yn · · · yr+1 yq n.
+Similarly, yq+1 is moved to the end of yn · · · yr+1 , right before yq n, and so is yq+2 , . . . , yr−1 .
+We arrive at
+                          Pop(y1 · · · yq−1 ) · yn · · · yr+1 yr−1 · · · yq n.
+We should clarify that the process of swapping is not finished yet; what we claim is that
+since π↓ is the same for sylvester-adjacent elements, we have
+                                                                                       
+                π↓ (PopSn (y)) = π↓ Pop(y1 · · · yq−1 ) · yn · · · yr+1 yr−1 · · · yq n .
+
+On the other hand,
+         PopSn (y1 · · · yr−1 yr+1 · · · yn · n) = Pop(y1 · · · yq−1 ) · yn · · · yr+1 yr−1 · · · yq · n.
+
+Combining these observations we obtain that
+                                                                                  
+                      π↓ (PopSn (y)) = π↓ PopSn (y1 · · · yr−1 yr+1 · · · yn · n)
+                                                                                
+                                     = π↓ PopSn−1 (y1 · · · yr−1 yr+1 · · · yn ) · n.
+We apply the induction hypothesis to y1 · · · yr−1 yr+1 · · · yn , an element of Sn−1 , and obtain
+that the first n − 1 places of x must not have consecutive double descents. Concatenating
+with n will not change this statement, and we conclude this case as well.
+                  THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES                                   11
+
+For the “if” direction, we suppose that x = x1 · · · xn ∈ Sn with xn = n and x has no
+consecutive double descents. We want to show that there is some 312-avoiding permutation
+y such that π↓ (PopSn (y)) = x. We use strong induction on x’s length.
+
+We consider the position of 1, say xk = 1. Then there are two immediate observations.
+Firstly, all entries x1 , . . . , xk−1 are smaller than all of xk+1 , . . . , xn to avoid a 312 pat-
+tern xj xk x` where j < k < `. Hence, it is clear that {x1 , . . . , xk−1 } = {2, . . . , k} and
+{xk+1 , . . . , xn } = {k + 1, . . . , n}. Secondly, if k ≥ 2, then xk−1 = k. Otherwise, if xj = k
+for some other j ≤ k − 2, then xj xj+1 xj+2 forms either a double descents or a 312-pattern,
+which is impossible.
+
+We let x0i = xi − 1 if 1 ≤ i ≤ k − 1 and let x0i = xi − k if k + 1 ≤ i ≤ n. Then
+x01 x02 · · · x0k−1 ∈ Sk−1 and x0k+1 x0k+2 · · · x0n ∈ Sn−k are two strings with no double descents,
+and x0k−1 = k − 1, x0n = n − k. Both of them satisfy the induction hypothesis, so we
+can find z = z1 · · · zk−1 ∈ Sk−1 and w = w1 · · · wn−k ∈ Sn−k such that π↓ (PopSk−1 (z)) =
+x01 x02 · · · x0k−1 and π↓ (PopSn−k (w)) = x0k+1 x0k+2 · · · x0n .
+
+Let z 0 = z10 · · · zk−1
+                      0
+                         where zi0 = zi +1. Suppose wt = k+1. Let w0 = w10 · · · wt0 ·1·wt+1
+                                                                                         0          0
+                                                                                             · · · wn−k ,
+                    0                           0   0                                                  0
+where we let wi = wi + k. Consider y = z · w . It is clear that y is 312-avoiding. Indeed, z
+and w0 are both 312-avoiding, and no pattern can be formed by entries from both segments
+because no entry of z 0 can be larger than any entry of w0 except 1. It suffices to show that
+π↓ (PopSn (y)) = x.
+
+We carefully investigate π↓ (Pop(w0 )) as follows. After Pop, wt = k + 1 will be after 1, and
+thus for π↓ we can perform a series of XcaY bZ → XacY bZ swaps with a = 1 and b = k +1,
+until 1 is perturbed to the start of this string. In other words, due to sylvester-adjacent
+elements have the same π↓ image,
+
+              π↓ (Pop(w0 ) = π↓ (1 · Pop(w10 · · · wn−k
+                                                    0
+                                                        )) = 1 · π↓ (Pop(w10 · · · wn−k
+                                                                                    0
+                                                                                        )).
+
+
+Since no pattern can be cross-composed by entries from both z 0 and w0 , we have that
+
+                     π↓ (PopSn (y)) = π↓ (Pop(z 0 )) · π↓ (Pop(w0 ))
+                                     = π↓ (Pop(z 0 )) · 1 · π↓ (Pop(w10 · · · wn−k
+                                                                               0
+                                                                                   ))
+                                     = x1 · · · xk−1 · 1 · xk+1 · · · xn ,
+
+which is exactly x. This concludes the proof.
+
+                                                                                                      
+12                                          LETONG HONG
+
+The last ingredient that we will need in the proof of Theorem 1.2 is the following enumerative
+result.
+
+Theorem 4.8. ([18]) The number
+                         1  2k
+                                n  of 231-avoiding permutations π ∈ Sn+1 with exactly k
+descents and k peaks is k+1 k 2k .
+
+
+Proof of Theorem 1.2. Define the bijective map r(π) = π 0 = π10 · · · πn+1       0
+                                                                                      where πi0 =
+n + 2 − πn+2−i . We claim that the effect of r preserves the number of ascents (descents)
+of the permutation. Indeed, place i being an ascent (descent) in π 0 is equivalent to place
+n + 1 − i being an ascent (descent) in π, respectively. Furthermore, if in π the descending
+runs are of lengths `1 , . . . , `m , then in π 0 the descending runs are of lengths `m , . . . , `1 .
+
+By Theorem 4.8 it suffices for us to establish a bijection between 231-avoiding permutations
+π ∈ Sn+1 with exactly k descents and k peaks and {r(π) | π ∈ PopAvn (312) (Avn (312)), UL (π)
+= n − k}. On one hand, take π from the former set and we have UL (π 0 ) = n − k, as having
+k descents is equivalent to having n − k ascents for elements in Sn+1 . Here, we use the
+well-known fact that UL (π) equals to the number of ascents in π.
+
+On the other hand, we will show that if UL (π) = n − k, then r(π) = π 0 is 231-avoiding
+and has exactly k descents and k peaks. Being 231-avoiding and having k descents are
+clear. Moreover, Theorem 4.7 establishes that π has no double descents and ends with
+n + 1. Therefore, π 0 has no double descents either. This implies that the number of peaks
+of π 0 is either equal to or is smaller by 1 than the number of its descents, depending on
+                                               0
+whether the first index is a descent. Since πn+1   = n + 2 − πn+1 = 1, we know that π 0 has
+k peaks. This concludes the proof.                                                       
+
+
+
+                                            References
+
+ [1] A Asinowski, C. Banderier, S. Billey, B. Hackl, and S. Linusson, Pop-stack sorting and its image:
+     permutations with overlapping runs, Acta. Math. Univ. Comenian. 88 (2019), 395–402.
+ [2] A Asinowski, C. Banderier, and B. Hackl, Flip-sort and combinatorial aspects of pop-stack sorting,
+     Discrete Math. Theor. Comput. Sci. 22 (2021).
+ [3] D. M. Avis and M. Newborn, On pop-stacks in series. Utilitas Math. 19 (1981), 129–140.
+ [4] F. Bergeron and L. F. Préville-Ratelle, Higher trivariate diagonal harmonics via generalized Tamari
+     posets. J. Comb. 3 (2012), 317–341.
+ [5] A. Björner and M. Wachs, Shellable nonpure complexes and posets. II. Trans. Amer. Math. Soc. 349
+     (1997), 3945–3975.
+ [6] C. Ceballos, A. Padrol, and C. Sarmiento, The ν-Tamari lattice via ν-trees, ν-bracket vectors, and
+     subword complexes. Electron. J. Combin. 27 (2020).
+ [7] A. Claesson and B. A. Guðmundsson, Enumerating permutations sortable by k passes through a
+     pop-stack. Adv. Appl. Math. 108 (2019), 79–96.
+ [8] C. Defant, Meeting covered elements in ν-Tamari lattices. Adv. Appl. Math. 134 (2022).
+ [9] C. Defant, Pop-stack-sorting for Coxeter groups. https://arxiv.org/abs/2104.02675
+                   THE POP-STACK-SORTING OPERATOR ON TAMARI LATTICES                                      13
+
+[10] C. Defant and S. Hopkins, Symmetry of Narayana numbers and rowvacuation of root posets, Forum
+     Math, Sigma 9 (2021).
+[11] C. Defant and N. Williams, Semidistrim lattices. https://arxiv.org/abs/2111.08122
+[12] M. Dukes, Revstack sort, zigzag patterns, descent polynomials of t-revstack sortable permutations,
+     and Steingrı́msson’s sorting conjecture. Electron. J. Combin. 21 (2014), No. 2, P2.2.
+[13] M. Elder and Y. K. Goh, k-pop stack sortable permutations and 2-avoidance, Electron. J. Combin.
+     28 (2021).
+[14] N. Hein and J. Huang, Modular Catalan Numbers. Electron. J. Combin. 61 (2017), 197-218.
+[15] F. Hivert, J. C. Novelli, and J. Y. Thibon, The algebra of binary search trees. Theoret. Comput. Sci.,
+     339 (2005), 129–165.
+[16] D. Knuth, Vol. 1: Fundamental Algorithms, The Art of Computer Programming, Reading, Mass.:
+     Addison–Wesley (1968).
+[17] F. Müller-Hoissen, J. M. Pallo, and J. Stasheff, Associahedra, Tamari lattices, and related structures.
+     Progress in Mathematics. Birkhäuser, 299 (2012).
+[18] T. K. Petersen, Eulerian Numbers. Birkhauser (2015), Section 4.3.
+[19] L. F. Préville-Ratelle and X. Viennot, An extension of Tamari lattices. Trans. Amer. Math. Soc. 369
+     (2017), 5219–5239. (Assigned the incorrect title “The enumeration of generalized Tamari intervals”
+     by the journal.)
+[20] L. Pudwell and R. Smith, Two-stack-sorting with pop stacks. Australas. J. Combin. 74 (2019),
+     179–195.
+[21] N. Reading, Cambrian lattices. Adv. Math. 205 (2006), 313–353.
+[22] N. J. A. Sloane et al. The Online Encyclopedia of Integer Sequences. Published electronically at
+     oeis.org (2021).
+[23] D. Tamari, The algebra of bracketings and their enumeration. Nieuw Archief voor Wiskunde, Series
+     3, 10 (1962): 131–146.
+[24] J. West, Permutations with restricted subsequences and stack-sortable permutations. Ph.D. Thesis,
+     MIT, 1990.
+
+
+Department of Mathematics, Massachusetts Institute of Technology, Cambridge, MA
+02139
+
+Email address: clhong@mit.edu
+

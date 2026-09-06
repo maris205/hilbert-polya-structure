@@ -1,0 +1,17 @@
+{
+  "env": {
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/local/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONHASHSEED": "0",
+    "PYTHONOPTIMIZE": "0",
+    "TZ": "UTC"
+  },
+  "recorder_sha256": "229e05605774b4461af0855274df4bd09b6ef2698b430354f064b9d7ba85891c",
+  "source_only_files": [
+    "verify.py"
+  ],
+  "verify_sha256": "a908fa60c7f8e506ec156226211a61e930cf593a8079660717c17b7d7d4cf018",
+  "wrapper": "import sys, pathlib, json, hashlib\nassert sys.flags.optimize==0 and sys.flags.isolated==1 and sys.dont_write_bytecode\np=pathlib.Path('verify.py')\nexec(compile(p.read_bytes(),str(p),'exec',optimize=0),{'__name__':'__main__','__file__':str(p)})\nmodules={str(pathlib.Path(m.__file__).resolve()):hashlib.sha256(pathlib.Path(m.__file__).read_bytes()).hexdigest() for m in tuple(sys.modules.values()) if getattr(m,'__file__',None) and pathlib.Path(m.__file__).is_file()}\npathlib.Path(sys.argv[1]).write_text(json.dumps({'flags':{'optimize':sys.flags.optimize,'isolated':sys.flags.isolated,'dont_write_bytecode':sys.dont_write_bytecode},'executable':sys.executable,'version':sys.version,'modules':modules},sort_keys=True,indent=2)+'\\n')\n"
+}
