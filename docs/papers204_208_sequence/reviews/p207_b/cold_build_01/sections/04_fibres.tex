@@ -1,0 +1,219 @@
+\section{The largest one-step fibres}
+
+Let $L_0=2$, $L_1=1$, $L_{t+2}=L_{t+1}+L_t$. Equation~\eqref{eq:complement}
+allows us to count the strict-lower map $F$; the targets and their fibre
+sizes are unchanged for $U$. The full inverse sources for $U$ are obtained
+by complementing each source constructed below.
+
+\begin{theorem}[Sharp maximum and all equality targets]\label{thm:max}
+ For every $n\ge3$,
+ \[
+ \max_{b\in X_n}|U^{-1}(b)|=L_{2\lfloor n/2\rfloor}.
+ \]
+ For even $n=2m\ge4$, equality holds exactly at the two rotations of
+ $(02)^m$. For odd $n=2m+1\ge5$, it holds exactly at all rotations of
+ \[
+ 00(20)^{m-1}2\quad\text{and}\quad011(02)^{m-1},
+ \]
+ giving $2n$ labelled targets. For $n=3$, the seven equality targets
+ are $000$ and the rotations of $002$ and $011$.
+\end{theorem}
+
+\subsection{A complete static decoder}
+Every $F$-image has a zero at a source minimum. The fibre of $0^n$
+consists of the three constant sources, because zero outputs at both
+ends of an edge force equality of its source heights. Otherwise, write
+the target's cyclic zero runs as $Z_1,\ldots,Z_r$ and its intervening
+nonempty positive runs as $w_1,\ldots,w_r$. The source is constant,
+say $a_j\in\{0,1,2\}$, on $Z_j$. If $u$ is the source on $w_j$,
+the two boundary inequalities are $a_j\le u_1$ and
+$a_{j+1}\le u_{|u|}$, with $a_{r+1}=a_1$.
+
+A positive target position cannot have source height zero. An interior
+source one in a positive run would have two positive neighbors and
+output zero. Thus all interior source heights are two. Length five
+would contain three interior twos and give a zero at the middle one,
+so positive runs have length at most four. For outside heights $a,b$,
+the following list gives every possible positive source string $u$.
+Overlapping conditions on different rows describe distinct sources.
+\begin{center}\small
+\begin{tabular}{lll}
+\toprule
+Target $w$ & Source $u$ & Outside condition\\
+\midrule
+$2$ & $1$; $2$ & $a=b=0$; $a,b\in\{0,1\}$\\
+$1$ & $1$; $2$ & $(a,b)=(0,1),(1,0)$; $(a,b)=(0,2),(1,2),(2,0),(2,1)$\\
+$11$ & $11$; $22$ & $a=b=0$; $a,b\in\{0,1\}$\\
+ & $12$; $21$ & $(a,b)=(0,2)$; $(a,b)=(2,0)$\\
+$12$; $21$ & $12$; $21$ & $a=0,\ b\le1$; $a\le1,\ b=0$\\
+$111$ & $122$; $221$ & $a=0,\ b\le1$; $a\le1,\ b=0$\\
+$121$; $1111$ & $121$; $1221$ & $a=b=0$ in either case\\
+\bottomrule
+\end{tabular}
+\end{center}
+For length one this checks heights one and two; for length two it
+checks $11,12,21,22$. At length three the middle is two, $222$ fails,
+and the remaining possibilities are $122,221,121$. At length four the
+middle pair is $22$ and positivity there forces both endpoints to one.
+This proves completeness of the list. Every unlisted target run is
+impossible.
+
+Let $K_w[a,b]$ count the listed strings, with row and column order
+$0,1,2$. The eight nonzero word kernels are
+\begin{gather*}
+ A=K_2=\begin{pmatrix}2&1&0\\1&1&0\\0&0&0\end{pmatrix},\quad
+ J_0=K_1=\begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix},\quad
+ B_0=K_{11}=\begin{pmatrix}2&1&1\\1&1&0\\1&0&0\end{pmatrix},\\
+ D_0=K_{12}=\begin{pmatrix}1&1&0\\0&0&0\\0&0&0\end{pmatrix},\quad
+ K_{21}=D_0^{\mathsf T},\quad
+ C_0=K_{111}=\begin{pmatrix}2&1&0\\1&0&0\\0&0&0\end{pmatrix},\\
+ K_{121}=K_{1111}=E_0=\begin{pmatrix}1&0&0\\0&0&0\\0&0&0\end{pmatrix}.
+\end{gather*}
+The subscripts distinguish $J_0$ from input complement $J$, and $B_0$
+from the generating-function matrix $B(z)$. Choose $a_1,\ldots,a_r$,
+fill the actual zero-run coordinates with those heights, and independently
+choose one listed source string for each positive run. The boundary
+inequalities enforce the required zero outputs. Conversely every source
+recovers exactly these choices. This labelled bijection gives
+\begin{equation}\label{eq:fibretrace}
+ |F^{-1}(b)|=\sum_{a_1,\ldots,a_r=0}^2
+ \prod_{j=1}^r K_{w_j}[a_j,a_{j+1}]
+ =\tr(K_{w_1}\cdots K_{w_r}).
+\end{equation}
+It includes $r=1$, when both outside heights coincide. A different
+start cyclically permutes factors, without multiplying by rotations.
+Zero-run lengths affect reconstructed coordinates but not the kernels.
+
+This decoder is static background. More generally, the source edge signs
+are recoverable; contracting their zero edges and orienting every
+remaining edge from lower to higher gives strict order-map sets on the
+resulting posets. The fibre is the disjoint union over compatible sign
+words, with no lost labels. The issue in Theorem~\ref{thm:max} is to
+compare the sizes of these \emph{whole} unions across rank targets.
+
+\subsection{Uniform comparison of mixed kernels}
+Set $\lambda=(3+\sqrt5)/2$. We use the standard Schatten Hölder bound
+\begin{equation}\label{eq:holder}
+ |\tr(M_1\cdots M_r)|\le\prod_{j=1}^r\snorm{M_j}{r}
+ \qquad(r\ge2)
+\end{equation}
+for real square matrices of equal size, with no commutation or
+invertibility hypothesis. Here $\snorm{M}{p}$ is the $\ell^p$ norm
+of its singular values. To specify the source and exponents precisely,
+the two-factor unitarily invariant norm inequality in
+\citet[Example 6.18 and Theorem 6.32]{tropp2022matrix} yields
+$\snorm{VW}{t}\le\snorm{V}{pt}\snorm{W}{qt}$ for $t\ge1$,
+$p,q>1$ conjugate. In the induction on the first $s$ factors use
+$t=r/s$, $p=s/(s-1)$, $q=s$, for $2\le s\le r$.
+Finally $|\tr P|\le\snorm{P}{1}$ follows from an SVD, since the
+diagonal entries of the intervening orthogonal matrix have absolute
+value at most one. This proves~\eqref{eq:holder} from that standard
+inequality with valid exponents throughout.
+
+All kernels have nonnegative entries, and
+$D_0,D_0^{\mathsf T},C_0,E_0\le A$ entrywise. Replacing any of the
+five corresponding target-word kernels by $A$ cannot decrease the trace
+in~\eqref{eq:fibretrace}: expand it as a sum of products of entries.
+No positive-semidefinite order claim is involved. In a resulting length-$r$
+product, let $k$ count $B_0$ factors and $j$ count $J_0$ factors.
+The positive eigenvalues of $A$ are $\lambda,\lambda^{-1}$; write
+\[
+ a_r=\snorm{A}{r}=(\lambda^r+\lambda^{-r})^{1/r}.
+\]
+The singular values of $J_0$ are $2,1,1$, and
+$\snorm{B_0}{2}=3$. Monotonicity of vector norms gives
+\begin{equation}\label{eq:normbounds}
+ \snorm{J_0}{r}\le\sqrt6<\lambda<a_r,\qquad
+ \snorm{B_0}{r}\le3\qquad(r\ge2).
+\end{equation}
+For $r\ge3$ we also have $\snorm{J_0}{r}\le\sqrt[3]{10}$ and
+$3\sqrt[3]{10}<\lambda^2\le a_r^2$. For instance
+$\lambda>13/5$ and $169^3>270\cdot25^3$ prove the strict cubic
+inequality; $\lambda^2=(7+3\sqrt5)/2>6$ proves the first strict
+comparison in~\eqref{eq:normbounds}.
+
+If $k=0$, Hölder bounds the trace by
+$a_r^r=\lambda^r+\lambda^{-r}$, strictly when $j>0$.
+If $k=1$ and $j=0$, cyclicity and the leading two-by-two block give
+\begin{equation}\label{eq:oneb}
+ \tr(B_0A^{r-1})=\tr A^r=\lambda^r+\lambda^{-r},
+\end{equation}
+because $r-1\ge1$ removes the third-coordinate contribution. If
+$k=1$ and $j>0$, the case $r=2$ gives
+$\tr(B_0J_0)=4<7=\tr A^2$. For $r\ge3$, combine one $B_0$ and
+one $J_0$ in the \emph{scalar product of norm bounds} using
+$3\sqrt[3]{10}<a_r^2$; every additional $J_0$ has smaller norm than
+$A$. The resulting bound is again strict below $a_r^r$.
+
+For $k\ge2$, Hölder instead gives
+\begin{equation}\label{eq:manyb}
+ \tr(M_1\cdots M_r)\le a_r^{r-k}3^k
+ <\frac{10}{9}\lambda^{r-k}3^k
+ <\lambda^{r+\lfloor k/2\rfloor}.
+\end{equation}
+Indeed $(a_r/\lambda)^r=1+\lambda^{-2r}<10/9$, since
+$r\ge2$ and $\lambda^4>9$; this also handles $r=k$.
+The last inequality is equivalent to
+$(10/9)3^k<\lambda^{k+\lfloor k/2\rfloor}$. For $k=2,3$ it is
+$10<\lambda^3$ and $30<\lambda^4$; increasing $k$ by two multiplies
+the two sides by $9$ and $\lambda^3>9$, respectively. This proves
+every mixed-product bound without commuting the factors.
+
+\subsection{Length budget and complete equality analysis}
+Each positive run and a following nonempty zero run use at least two
+target positions, and each $B_0=K_{11}$ costs one extra. Consequently
+\begin{equation}\label{eq:budget}
+ n\ge2r+k.
+\end{equation}
+The even Lucas subsequence satisfies
+$L_{2s}=\lambda^s+\lambda^{-s}$, since both sides start at $2,3$
+and satisfy $V_{s+2}=3V_{s+1}-V_s$; it is strictly increasing for
+$s\ge1$. If $r\ge2$ and $k\le1$, the preceding bounds give a
+trace at most $L_{2r}\le L_{2\lfloor n/2\rfloor}$. For $k\ge2$,
+\eqref{eq:manyb} and~\eqref{eq:budget} give a strict bound below
+$L_{2\lfloor n/2\rfloor}$.
+
+Targets without zeros have no source. The all-zero target has fibre
+three. For $r=1$, the traces of $J_0,A,B_0,D_0,D_0^{\mathsf T},C_0,E_0$
+are $0,3,3,1,1,2,1$; all other kernels vanish. These are below
+$L_4=7$ for $n\ge4$. At $n=3$, at most one positive run exists,
+so precisely $000$ and rotations of $002,011$ attain three. This
+proves the bound and all small-length cases.
+
+For equality with $n\ge4$, we must have $r\ge2$, $k\le1$, and
+$q:=n-2r\in\{0,1\}$: if $q\ge2$, then
+$L_{2r}<L_{2\lfloor n/2\rfloor}$. If $q=0$, all positive and zero
+runs have length one. A positive run one gives $J_0$ and strictness,
+so equality holds exactly for alternating $02$ targets, which attain
+$\tr A^r=L_{2r}$.
+
+If $q=1$, exactly one run has one extra position. If this is a zero
+run, all positive runs must again be two and the targets are the
+rotations of $00(20)^{r-1}2$. If it is a positive run, its nonzero
+kernel is $B_0,D_0$, or $D_0^{\mathsf T}$. For $B_0$, any $J_0$
+factor gives strictness, and all remaining factors $A$ give equality
+by~\eqref{eq:oneb}. This is the family $011(02)^{r-1}$.
+For $D_0$ or $D_0^{\mathsf T}$, a $J_0$ factor again makes the
+entrywise-replaced bound strict. Without $J_0$, the leading
+two-by-two block of $A^{r-1}$ is strictly positive, while $A-D_0$
+and $A-D_0^{\mathsf T}$ are nonnegative and nonzero in that block.
+The trace expansion yields a strict inequality below $\tr A^r$.
+No longer run fits the single extra position. This exhausts all
+equality cases and proves Theorem~\ref{thm:max}. The two odd families
+each have a unique doubled run, forbidding a nontrivial rotational
+stabilizer; the presence of ones distinguishes them. Each therefore
+gives $n$ labelled targets.
+
+For completeness, the attainer's classical counting mechanism is
+explicit. For an alternating lower-rank target, source valleys have
+heights in $\{0,1\}$, peaks in $\{1,2\}$, and every valley is
+strictly lower than its adjacent peaks. Mark exactly the sites of
+source height one. These marks are an independent set of the labelled
+cycle, and the inverse construction puts zero on unmarked valleys,
+two on unmarked peaks, and one on marked sites. Its count is $L_{2m}$.
+Doubling a valley source height gives the odd $00$ family. Doubling
+a peak gives the odd $11$ family: its boundary valleys are in
+$\{0,1\}$, so the local source choices are precisely $11$ or $22$.
+Deleting the repeated position reverses either construction. These
+full set bijections explain attainment, but the mixed-target
+comparison above is needed to prove global optimality.

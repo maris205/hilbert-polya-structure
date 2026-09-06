@@ -232,3 +232,36 @@ is also outside that ref; author provenance snapshots retain the earlier
 admission-stage version. No theorem or producer dependency changed.
 P207 A is active and no accepted delta exists; P205 alone is internally
 complete. OWNER_AMBER / HOLD_EXTERNAL remains unchanged.
+
+## P207 accepted A / Round1 and eighth–ninth closure checkpoint
+
+On 2026-09-06 UTC the 403-file scoped checkpoint was committed and
+actually pushed as `eee9dcc3b89e1b822ad4f711aa57be5d7bd1bfd4`.
+It contains P207's actual accepted no-change A delta, complete 133-entry
+review package and preserved initial findings/manifest, root's two actual
+replay pairs with the stricter controlled pair and utility audit, and the
+105-file physical Round1. The paper-wide manifest now covers 428 files.
+It also archives the closed eighth/ninth scouts, all corrected/adverse
+evidence, root NCC partial proof and 102,613-check pair, and CPC's original
+small-box long cycles. P205 remains the only internally complete paper.
+
+The mirror was clean at bb32f397. Two actual read-only fetch checks showed
+0/0 ahead/behind, so no merge was needed. Copy/staging explicitly excluded
+active p207_b, order_geometry_tenth, order_geometry_tenth_desk and Python
+caches. All 403 staged changed paths passed the owned-scope/exclusion
+check. Source/doc whitespace checks passed; raw compiler and other evidence
+bytes were explicitly staged despite ignore rules, never normalized.
+
+Actual push exited zero, ls-remote returned the exact SHA above,
+ahead/behind was 0/0, and mirror status was empty. The subsequent
+[committed-object check](qa/GIT_OBJECT_P207_EEE9DCC3.json) passed **745
+entries in five named manifests**: 732 directory-relative entries for
+P207, Round1, A and the ninth lane, plus 13 explicitly repository-relative
+eighth-lane entries. The latter used its actual root path base, not a
+relaxed or rewritten historical manifest. This checks archived bytes;
+it is not new mathematics, B acceptance or the five-paper terminal gate.
+
+This receipt and object output were written after the named push, and
+are not claimed within their own referenced commit. Later B/tenth work
+is not implicitly included. Current status is two retained, one complete,
+three unfilled; P207 B is active. OWNER_AMBER / HOLD_EXTERNAL remains.

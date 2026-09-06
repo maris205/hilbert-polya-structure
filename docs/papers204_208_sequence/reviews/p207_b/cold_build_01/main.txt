@@ -1,0 +1,526 @@
+TWO-PERIOD CORES AND LARGEST FIBRES
+OF UPPER-NEIGHBOR RANK DYNAMICS
+ANONYMOUS
+
+Abstract. On a labelled ternary cycle, replace each height synchronously by the number of its two
+neighbors having strictly greater height. We classify the complete two-period core of this map and
+prove that every trajectory reaches it in at most 4n + 2 steps. This nonsharp bound uses an explicitly
+computer-assisted, fixed radius-six local lemma: failure of two-step equality creates a new permanent
+strict extremum. The all-length consequence is deductive, and the recurrent language has a separate twotime-column proof. An eight-role graph counts the core, and an exact single-seed wave gives entrance
+time ⌊n/2⌋ + 1 for every n ≥ 4. Independently, we prove that the largest one-step fibre has size
+L2⌊n/2⌋ and classify all attaining labelled targets, including both odd-length families and the lengththree exception. The extremal argument compares noncommuting transfer kernels with different length
+costs; evaluating an alternating fibre alone does not give the comparison. Static rank decoders, classical
+Lucas counts, and the input-complement transfer from lower rank are separated from these temporal
+and global extremal statements.
+
+1. The map and the scope of the results
+For n ≥ 3, let Xn = {0, 1, 2}n with indices modulo n, and define
+(1)
+
+U (x)i = 1{xi−1 >xi } + 1{xi+1 >xi } .
+
+The two neighbors are distinct, updates are synchronous, and equality contributes zero. Coordinates stay
+labelled throughout. Put
+h(x) = min{t ≥ 0 : U t+2 x = U t x},
+
+H(n) = max h(x),
+x∈Xn
+
+where existence of the minimum will be proved. We obtain an exact description of Fix(U 2 ), the nonsharp
+upper bound H(n) ≤ 4n + 2, an exact all-length seed clock, and a sharp maximum over all one-step
+target fibres. The temporal and extremal proofs use different information: permanent extrema constrain
+successive states, whereas a target’s zero-run decomposition constrains its possible predecessors.
+Local rank is a classical primitive. Zabih and Woodfill [4] define rank by the number of lower neighbors.
+If F denotes that strict-lower rule on Xn and Jx = 2 − x, then
+
+(2)
+U = F J,
+U −1 (b) = J F −1 (b) .
+The inverse-set transfer is exact but gives no new inverse theorem by itself. It is not the conjugacy JF J,
+so it does not identify the two iterations. For example, 0202 is fixed by F but is exchanged with 2020 by
+U.
+Mukherjee [2] directly studies iterative local rank. The primary preview inspected for this work defines
+strict lower rank and announces convergence; its convergence theorem and proof were not accessible. We
+do not infer their full scope, a dual iteration theorem, or a priority claim from that preview. The present
+results are self-contained for the literal map (1), subject to the explicit finite certificate below. The sharp
+global entrance time for n ≥ 4, larger alphabets, and all-time inverse counts are not claimed.
+Static comparison decoders and ordinary finite-graph traces are background tools here. In particular,
+the alternating extremal fibre is an independent-set set, or equivalently a two-chain crown order-map set;
+fence and crown enumeration has a classical literature [1]. The distinct inverse assertion proved below is
+the maximum over every target, with all equality cases, not the Lucas count of that known family alone.
+2. A finite growth lemma and the exact two-period core
+Call a site a strict extremum when it is strictly larger than both neighbors or strictly smaller than
+both; let E(x) be their set.
+Lemma 2.1 (Permanent extrema). E(x) ⊆ E(U x). Each such site alternates between strict minimum
+and strict maximum, and its values alternate between 0 and 2 after the first update.
+Key words and phrases. finite dynamics, local rank, recurrent language, inverse fibre, computer-assisted proof.
+1
+
+2
+
+ANONYMOUS
+
+Proof. A strict minimum becomes two, while either neighbor can count at most its other neighbor as
+greater and so becomes at most one. A strict maximum becomes zero, while both neighbors count the
+old maximum and so become at least one. The argument repeats at each step.
+□
+The following fixed finite lemma is the sole computer-assisted step in the all-orbit convergence proof.
+Its quantifiers and exhaustiveness argument are included to distinguish a finite certificate from an extrapolation of short cyclic trajectories.
+Lemma 2.2 (Radius-six certificate). Let w = (w−6 , . . . , w6 ) ∈ {0, 1, 2}13 and define its truncated forward
+cone by v 0 = w and
+t
+t
+vjt+1 = 1{vj−1
+>vjt } + 1{vj+1
+>vjt } ,
+
+|j| ≤ 5 − t,
+
+0 ≤ t < 4.
+
+If v04 ̸= v02 , there are 1 ≤ s ≤ 4 and |j| ≤ 5 − s such that j is a strict extremum in v s but not in v 0 .
+Finite certificate and complete coverage. The accompanying standalone verifier enumerates all 311 =
+177147 inner words (w−5 , . . . , w5 ), forming their cones on |j| ≤ 5 − t. The time-two and time-four
+centers are determined there. Exactly 158643 inner words have equal centers, so the premise is false for
+all nine exterior-letter choices. For 18300 inner words with unequal centers, a witness satisfies |j| ≤ 4 − s;
+its row-s neighbors and initial extremum test use only inner coordinates and persist for every exterior
+choice. The remaining 204 inner words are each checked with all nine pairs (w−6 , w6 ). All 1836 extensions
+have a witness in the stated larger cone. The complete canonical output records these inner words and
+every extension witness.
+These three disjoint cases exhaust every thirteen-letter word. Cone locality proves independence of
+the outer letters in the first two cases, rather than assuming it in the exceptions. Evolution is computed
+from edge signs and each witness is also tested by direct height inequalities. Thus the certificate covers
+all 313 = 1594323 words, not a sample. Its successful finite execution is a declared proof dependency. A
+separate candidate checker has additionally enumerated all thirteen-letter words directly.
+□
+Theorem 2.3 (Uniform nonsharp entrance bound). For every n ≥ 3, U 4n+4 = U 4n+2 on Xn . In
+particular H(n) ≤ 4n + 2 and all periods are one or two.
+Proof. Read thirteen coordinates around any site of a cycle, allowing repeated coordinates for n < 13.
+This is one of the certified words. Its cone agrees with the cyclic trajectory wherever computed, by
+induction on time. If E(U 4 a) = E(a), monotonicity from Lemma 2.1 forbids a new extremum at any
+intermediate time. Applying Lemma 2.2 at every center gives U 4 a = U 2 a.
+The n + 1 inclusions between E(U 4q x) for q = 0, . . . , n + 1 cannot all be strict subsets of an n-element
+set. For some 0 ≤ q ≤ n, the four-step endpoint sets coincide. Hence U 4q+4 x = U 4q+2 x, so the orbit
+enters Fix(U 2 ) by 4q + 2 ≤ 4n + 2. This set is forward invariant because U commutes with its square.
+The claimed uniform identity follows.
+□
+The recurrent language below has a separate deductive proof; it does not depend on the local certificate.
+A run is maximal in the cyclic word, and the word’s left-to-right orientation fixes its left and right
+boundaries.
+Theorem 2.4 (Exact core). The sole fixed point is 0n . Every other point of Fix(U 2 ) has both zero and
+positive entries and has the following run language:
+(1) every zero run has length one or two;
+(2) every positive run is 2, 11, 12, 21, or 121;
+(3) a positive run 12 or 121 has a singleton zero run on its left; a positive run 21 or 121 has one on
+its right.
+Conversely every such labelled cyclic word belongs to Fix(U 2 ). All its nonzero members have exact period
+two.
+Proof. Let y = U x and x = U y. A height two maps to zero, so the possible temporal columns (xi , yi ) are
+S0 = (0, 2),
+
+S1 = (2, 0),
+
+W0 = (0, 1),
+
+W1 = (1, 0),
+
+N = (1, 1),
+
+(0, 0).
+
+At a (0, 0) column the two zero-output equations force both neighbors to be (0, 0). Connectedness then
+gives the all-zero state. Exclude that case. A neutral column N needs one height-two neighbor at each
+time. They are distinct, hence are S0 , S1 in either order. In particular a neutral column cannot neighbor
+a weak column.
+At W0 , exactly one neighbor is positive in x, and no neighbor has height two in y. The zero x-neighbor
+must consequently be W0 , while the other is S1 or W1 . The exclusion of N uses the neutral site’s own
+equation just proved. Interchanging the two times proves the rule for W1 . Each weak site therefore has
+
+UPPER-NEIGHBOR RANK DYNAMICS
+
+3
+
+exactly one same-phase weak neighbor: weak sites form unique adjacent dimers, with opposite-phase
+strong or weak exterior neighbors. An S0 has neighbors S1 , W1 , or N , since both are positive in x;
+interchanging time gives the rule for S1 . Substitution shows these column rules are also sufficient for
+both time equations.
+In the emitted word x, a zero run is one S0 or one W0 dimer. A positive run is one S1 with an optional
+neutral on either side, or a W1 dimer. The neutral’s other neighbor must be a strong singleton zero,
+which gives precisely the two boundary restrictions. Conversely the stated run language recovers strong
+roles at twos and singleton zeros, weak roles on 00 and 11 dimers, and neutral roles on the remaining
+ones. The column rules hold at each coordinate, proving sufficiency. No zero-free exception occurs: a
+global maximum in a source gives a zero in every image of U .
+A fixed point cannot contain two, since two maps to zero. Without twos, every one maps to zero as
+well. Thus only 0n is fixed; the remaining core points have exact period two.
+□
+3. Enumeration and an exact seed clock
+Split weak dimers into left and right roles, and orient each neutral by its adjacent strong phases. In
+the order
+S0 , S1 , W0L , W0R , W1L , W1R , N01 , N10 ,
+the emitted heights are 0, 2, 0, 0, 1, 1, 1, 1. Let Q be the adjacency matrix of the following complete
+transition list.
+Role
+
+Following roles
+
+Role
+
+Following roles
+
+S0
+W0L
+W1L
+N01
+
+S1 , W1L , N01
+W0R
+W1R
+S1
+
+S1
+W0R
+W1R
+N10
+
+S0 , W0L , N10
+S1 , W1L
+S0 , W0L
+S0
+
+Proposition 3.1. For n ≥ 3 the core size is 1 + tr Qn and the number of two-cycles is tr Qn /2. Moreover
+(3)
+
+D(z) := det(I − zQ) = 1 − z 2 − 4z 3 − 2z 4 + z 8 .
+
+Proof. Theorem 2.4 uniquely recovers the role at each labelled position, including both ends of each weak
+dimer. Thus closed labelled walks of length n are in bijection with nonzero core words. No rotation
+quotient is taken. Exchanging phase labels applies U and pairs every such word with its distinct partner.
+To evaluate the determinant, compress deterministic dimer and neutral roles. Strong blocks have length
+one, weak blocks length two; a neutral may appear only between successive strong blocks. Successive
+blocks have opposite phases, and the strong/weak block transfer is
+
+
+z(1 + z) z 2
+B(z) =
+.
+z
+z2
+I
+−B(z) 
+Eliminating the intermediate roles from I − zQ leaves −B(z)
+; the eliminated diagonal blocks have
+I
+determinant one. Therefore
+det(I − zQ) = det(I − B(z)) det(I + B(z)) = (1 + z 4 )2 − (z + 2z 2 )2 ,
+which is (3). This identity can also be checked by the explicit eight-by-eight determinant, as in the finite
+certificate.
+□
+P
+n
+n
+′
+Writing an = tr Q , the standard formal identity n≥1 an z = −zD (z)/D(z) gives
+an = an−2 + 4an−3 + 2an−4 − an−8
+
+(n ≥ 9),
+
+with a1 , . . . , a8 = 0, 2, 12, 10, 20, 62, 84, 154. This is an enumeration of the proved language, not an
+additional dynamical assertion.
+Proposition 3.2 (Seed entrance). H(3) = 1. For every n ≥ 4,
+h(01n−1 ) = ⌊n/2⌋ + 1,
+
+⌊n/2⌋ + 1 ≤ H(n) ≤ 4n + 2.
+
+Proof. Put m = ⌊n/2⌋ and z s = U s (20n−1 ). For d(i) = min{i, n − i} and 0 ≤ s < m, the exact profile is
+
+21{s even} ,
+d(i) = 0,
+
+
+
+21
+{s−d(i) even} , 0 < d(i) < s,
+(4)
+zis =
+
+1,
+d(i) = s > 0,
+
+
+
+0,
+d(i) > s.
+
+4
+
+ANONYMOUS
+
+At s = 0 this is the initial seed. Before the fronts meet, an interior site has opposite-phase neighbors
+and alternates; the frontier one has two zero neighbors and becomes zero. The next outer zero sees one
+positive neighbor and becomes one. Just inside the old front, a zero sees two positive neighbors and
+becomes two. The central seed alternates by Lemma 2.1; more distant sites have zero neighbors. These
+cases prove the induction.
+At time m, for n = 2m the sole remaining zero sees two frontier ones and becomes two, giving an
+alternating 02 word. For n = 2m + 1, the two remaining zeros each see one frontier one and become the
+weak dimer 11; the other sites are alternating strong sites. Both words lie in the core. For 1 ≤ s < m a
+frontier is a strict maximum of height one, hence its value after two further updates is two by Lemma 2.1;
+it is not in the core. The initial seed is outside the core because its zero run has length n − 1 ≥ 3. Thus
+h(20n−1 ) = m. Since U (01n−1 ) = 20n−1 and the latter is not initially recurrent, the source has entrance
+m + 1.
+For n = 3 the cycle is the complete three-vertex graph. Equal heights map to 000; two equal lower
+heights map to a rotation of 110; two equal higher heights map to a rotation of 200; three distinct heights
+map to a permutation of 210. Each lies in the core. The nonrecurrent source 001 shows the upper bound
+one is attained.
+□
+
+4. The largest one-step fibres
+Let L0 = 2, L1 = 1, Lt+2 = Lt+1 + Lt . Equation (2) allows us to count the strict-lower map F ;
+the targets and their fibre sizes are unchanged for U . The full inverse sources for U are obtained by
+complementing each source constructed below.
+Theorem 4.1 (Sharp maximum and all equality targets). For every n ≥ 3,
+max |U −1 (b)| = L2⌊n/2⌋ .
+
+b∈Xn
+
+For even n = 2m ≥ 4, equality holds exactly at the two rotations of (02)m . For odd n = 2m + 1 ≥ 5, it
+holds exactly at all rotations of
+00(20)m−1 2
+
+and
+
+011(02)m−1 ,
+
+giving 2n labelled targets. For n = 3, the seven equality targets are 000 and the rotations of 002 and 011.
+4.1. A complete static decoder. Every F -image has a zero at a source minimum. The fibre of 0n
+consists of the three constant sources, because zero outputs at both ends of an edge force equality of its
+source heights. Otherwise, write the target’s cyclic zero runs as Z1 , . . . , Zr and its intervening nonempty
+positive runs as w1 , . . . , wr . The source is constant, say aj ∈ {0, 1, 2}, on Zj . If u is the source on wj ,
+the two boundary inequalities are aj ≤ u1 and aj+1 ≤ u|u| , with ar+1 = a1 .
+A positive target position cannot have source height zero. An interior source one in a positive run
+would have two positive neighbors and output zero. Thus all interior source heights are two. Length five
+would contain three interior twos and give a zero at the middle one, so positive runs have length at most
+four. For outside heights a, b, the following list gives every possible positive source string u. Overlapping
+conditions on different rows describe distinct sources.
+Target w
+
+Source u
+
+Outside condition
+
+2
+1
+11
+
+1; 2
+1; 2
+11; 22
+12; 21
+12; 21
+122; 221
+121; 1221
+
+a = b = 0; a, b ∈ {0, 1}
+(a, b) = (0, 1), (1, 0); (a, b) = (0, 2), (1, 2), (2, 0), (2, 1)
+a = b = 0; a, b ∈ {0, 1}
+(a, b) = (0, 2); (a, b) = (2, 0)
+a = 0, b ≤ 1; a ≤ 1, b = 0
+a = 0, b ≤ 1; a ≤ 1, b = 0
+a = b = 0 in either case
+
+12; 21
+111
+121; 1111
+
+For length one this checks heights one and two; for length two it checks 11, 12, 21, 22. At length three
+the middle is two, 222 fails, and the remaining possibilities are 122, 221, 121. At length four the middle
+pair is 22 and positivity there forces both endpoints to one. This proves completeness of the list. Every
+unlisted target run is impossible.
+
+UPPER-NEIGHBOR RANK DYNAMICS
+
+5
+
+Let Kw [a, b] count the listed strings, with row and column order 0, 1, 2. The eight nonzero word kernels
+are
+
+
+
+
+
+
+2 1 0
+0 1 1
+2 1 1
+A = K2 = 1 1 0 , J0 = K1 = 1 0 1 , B0 = K11 = 1 1 0 ,
+0 0 0
+1 1 0
+1 0 0
+
+
+
+
+1 1 0
+2 1 0
+D0 = K12 = 0 0 0 , K21 = D0T , C0 = K111 = 1 0 0 ,
+0 0 0
+0 0 0
+
+
+1 0 0
+K121 = K1111 = E0 = 0 0 0 .
+0 0 0
+The subscripts distinguish J0 from input complement J, and B0 from the generating-function matrix B(z).
+Choose a1 , . . . , ar , fill the actual zero-run coordinates with those heights, and independently choose one
+listed source string for each positive run. The boundary inequalities enforce the required zero outputs.
+Conversely every source recovers exactly these choices. This labelled bijection gives
+(5)
+
+|F −1 (b)| =
+
+2
+X
+
+r
+Y
+
+Kwj [aj , aj+1 ] = tr(Kw1 · · · Kwr ).
+
+a1 ,...,ar =0 j=1
+
+It includes r = 1, when both outside heights coincide. A different start cyclically permutes factors,
+without multiplying by rotations. Zero-run lengths affect reconstructed coordinates but not the kernels.
+This decoder is static background. More generally, the source edge signs are recoverable; contracting
+their zero edges and orienting every remaining edge from lower to higher gives strict order-map sets on
+the resulting posets. The fibre is the disjoint union over compatible sign words, with no lost labels. The
+issue in Theorem 4.1 is to compare the sizes of these whole unions across rank targets.
+√
+4.2. Uniform comparison of mixed kernels. Set λ = (3 + 5)/2. We use the standard Schatten
+Hölder bound
+r
+Y
+(6)
+| tr(M1 · · · Mr )| ≤
+∥Mj ∥r
+(r ≥ 2)
+j=1
+
+for real square matrices of equal size, with no commutation or invertibility hypothesis. Here ∥M ∥p is the
+ℓp norm of its singular values. To specify the source and exponents precisely, the two-factor unitarily
+invariant norm inequality in Tropp [3, Example 6.18 and Theorem 6.32] yields ∥V W ∥t ≤ ∥V ∥pt ∥W ∥qt
+for t ≥ 1, p, q > 1 conjugate. In the induction on the first s factors use t = r/s, p = s/(s − 1), q = s,
+for 2 ≤ s ≤ r. Finally | tr P | ≤ ∥P ∥1 follows from an SVD, since the diagonal entries of the intervening
+orthogonal matrix have absolute value at most one. This proves (6) from that standard inequality with
+valid exponents throughout.
+All kernels have nonnegative entries, and D0 , D0T , C0 , E0 ≤ A entrywise. Replacing any of the five
+corresponding target-word kernels by A cannot decrease the trace in (5): expand it as a sum of products
+of entries. No positive-semidefinite order claim is involved. In a resulting length-r product, let k count
+B0 factors and j count J0 factors. The positive eigenvalues of A are λ, λ−1 ; write
+ar = ∥A∥r = (λr + λ−r )1/r .
+The singular values of J0 are 2, 1, 1, and ∥B0 ∥2 = 3. Monotonicity of vector norms gives
+√
+(7)
+∥J0 ∥r ≤ 6 < λ < ar ,
+∥B0 ∥r ≤ 3
+(r ≥ 2).
+√
+√
+10 < λ2 ≤ a2r . For instance λ > 13/5 and 1693 > 270 · 253
+For r ≥ 3 we also have ∥J0 ∥r ≤ 3 10 and 3 3√
+2
+prove the strict cubic inequality; λ = (7 + 3 5)/2 > 6 proves the first strict comparison in (7).
+If k = 0, Hölder bounds the trace by arr = λr + λ−r , strictly when j > 0. If k = 1 and j = 0, cyclicity
+and the leading two-by-two block give
+(8)
+
+tr(B0 Ar−1 ) = tr Ar = λr + λ−r ,
+
+because r − 1 ≥ 1 removes the third-coordinate contribution. If k = 1 and j > 0, the case r = 2 gives
+tr(B0 J0√
+) = 4 < 7 = tr A2 . For r ≥ 3, combine one B0 and one J0 in the scalar product of norm bounds
+3
+using 3 10 < a2r ; every additional J0 has smaller norm than A. The resulting bound is again strict below
+arr .
+
+6
+
+ANONYMOUS
+
+For k ≥ 2, Hölder instead gives
+10 r−k k
+λ
+3 < λr+⌊k/2⌋ .
+9
+Indeed (ar /λ)r = 1 + λ−2r < 10/9, since r ≥ 2 and λ4 > 9; this also handles r = k. The last inequality is
+equivalent to (10/9)3k < λk+⌊k/2⌋ . For k = 2, 3 it is 10 < λ3 and 30 < λ4 ; increasing k by two multiplies
+the two sides by 9 and λ3 > 9, respectively. This proves every mixed-product bound without commuting
+the factors.
+
+(9)
+
+tr(M1 · · · Mr ) ≤ ar−k
+3k <
+r
+
+4.3. Length budget and complete equality analysis. Each positive run and a following nonempty
+zero run use at least two target positions, and each B0 = K11 costs one extra. Consequently
+(10)
+
+n ≥ 2r + k.
+
+The even Lucas subsequence satisfies L2s = λs + λ−s , since both sides start at 2, 3 and satisfy Vs+2 =
+3Vs+1 − Vs ; it is strictly increasing for s ≥ 1. If r ≥ 2 and k ≤ 1, the preceding bounds give a trace at
+most L2r ≤ L2⌊n/2⌋ . For k ≥ 2, (9) and (10) give a strict bound below L2⌊n/2⌋ .
+Targets without zeros have no source. The all-zero target has fibre three. For r = 1, the traces of
+J0 , A, B0 , D0 , D0T , C0 , E0 are 0, 3, 3, 1, 1, 2, 1; all other kernels vanish. These are below L4 = 7 for n ≥ 4.
+At n = 3, at most one positive run exists, so precisely 000 and rotations of 002, 011 attain three. This
+proves the bound and all small-length cases.
+For equality with n ≥ 4, we must have r ≥ 2, k ≤ 1, and q := n − 2r ∈ {0, 1}: if q ≥ 2, then
+L2r < L2⌊n/2⌋ . If q = 0, all positive and zero runs have length one. A positive run one gives J0 and
+strictness, so equality holds exactly for alternating 02 targets, which attain tr Ar = L2r .
+If q = 1, exactly one run has one extra position. If this is a zero run, all positive runs must again be
+two and the targets are the rotations of 00(20)r−1 2. If it is a positive run, its nonzero kernel is B0 , D0 , or
+D0T . For B0 , any J0 factor gives strictness, and all remaining factors A give equality by (8). This is the
+family 011(02)r−1 . For D0 or D0T , a J0 factor again makes the entrywise-replaced bound strict. Without
+J0 , the leading two-by-two block of Ar−1 is strictly positive, while A − D0 and A − D0T are nonnegative
+and nonzero in that block. The trace expansion yields a strict inequality below tr Ar . No longer run
+fits the single extra position. This exhausts all equality cases and proves Theorem 4.1. The two odd
+families each have a unique doubled run, forbidding a nontrivial rotational stabilizer; the presence of ones
+distinguishes them. Each therefore gives n labelled targets.
+For completeness, the attainer’s classical counting mechanism is explicit. For an alternating lower-rank
+target, source valleys have heights in {0, 1}, peaks in {1, 2}, and every valley is strictly lower than its
+adjacent peaks. Mark exactly the sites of source height one. These marks are an independent set of the
+labelled cycle, and the inverse construction puts zero on unmarked valleys, two on unmarked peaks, and
+one on marked sites. Its count is L2m . Doubling a valley source height gives the odd 00 family. Doubling
+a peak gives the odd 11 family: its boundary valleys are in {0, 1}, so the local source choices are precisely
+11 or 22. Deleting the repeated position reverses either construction. These full set bijections explain
+attainment, but the mixed-target comparison above is needed to prove global optimality.
+5. Verification and limitations
+The accompanying verify.py is a standalone author producer with complete canonical stdout and
+actual execution receipts. Its fixed local certificate is a proof dependency of Lemma 2.2; the arbitrarylength implication is the separate argument in Theorem 2.3. The certificate’s decomposition accounts
+for every inner word and all required exterior extensions, including their literal witnesses. The independently implemented candidate check used all 313 windows directly and an 81-state height-overlap
+graph for Fix(U 2 ), rather than the author’s inner-window partition and eight-role graph. These are
+process-separated internal checks, not external expert review.
+Complete cyclic boxes n = 3, . . . , 10 check every trajectory and every target fibre; seed profiles at
+further lengths check witnesses only. Those finite cyclic tests are not proofs of an all-length theorem.
+The entrance bound 4n + 2 is nonsharp, while the seed entrance and the one-step fibre maximum are
+exact. The local certificate is not a claimed short handwritten proof of its finite implication.
+The static source decoder, edge-sign/order-map strata, independent-set attainer sets and Lucas identities are all deducted background. The whole-target extremal theorem is shared once with lower rank
+through input complement, not counted again as a separate family. The related lower-rank convergence
+theorem body discussed in Section 1 remains an access limitation; no claim of global novelty or exhaustive
+source clearance is made. A sharp uniform entrance formula, larger-alphabet classification, all-time fibres,
+and basin counts remain outside the results proved here.
+
+UPPER-NEIGHBOR RANK DYNAMICS
+
+7
+
+References
+[1] J. D. Currie and T. I. Visentin. The number of order-preserving maps of fences and crowns. Order,
+8(2):133–142, 1991. doi: 10.1007/BF00383399.
+[2] Jayanta Mukherjee. Local rank transform: Properties and applications. Pattern Recognition Letters,
+32(7):1001–1008, 2011. doi: 10.1016/j.patrec.2011.02.005.
+[3] Joel A. Tropp. ACM 204: Matrix analysis. CMS Lecture Notes 2022-01, California Institute of Technology, 2022. URL https://www.tropp.caltech.edu/notes/Tro22-Matrix-Analysis-LN.pdf.
+[4] Ramin Zabih and John Woodfill. Non-parametric local transforms for computing visual correspondence. In Computer Vision—ECCV ’94, pages 151–158. Springer Berlin Heidelberg, 1994. doi:
+10.1007/BFb0028345.
+
+

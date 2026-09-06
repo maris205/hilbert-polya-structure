@@ -3,7 +3,7 @@
 Date: 2026-09-06 UTC. A candidate is numbered only after its deductive and
 collision/source gate. Manuscript review can subsequently retire that
 contract without reusing the number. There are currently **two retained
-papers, one completed paper and three unfilled seats**. P204 and P206 are
+papers, two completed papers and three unfilled seats**. P204 and P206 are
 historically admitted, subsequently rejected numbered drafts.
 
 ## P204 — previous-smaller distance feedback — REJECTED IN REVIEW A
@@ -157,7 +157,7 @@ and no accepted A delta, Round1/B/Round2 exists. Original inputs are preserved.
 At P206 rejection the census was one retained, one completed, four unfilled
 seats. P207 below is the next admission. `OWNER_AMBER / HOLD_EXTERNAL` remains.
 
-## P207 — upper-neighbor rank dynamics — A ACCEPTED / ROUND1 FROZEN / B ACTIVE
+## P207 — upper-neighbor rank dynamics — INTERNALLY COMPLETE
 
 Proof contributors: root and `/root/batch197_fosp_gate`; manuscript root.
 Neither contributor may review this paper. Candidate assessor
@@ -210,11 +210,18 @@ builds are raw-identical; root viewed all seven pages. Physical Round0 freezes
 105 checked files including complete finite-certificate provenance. Actual
 nonauthor manuscript A's exact no-change delta is accepted after root's
 complete original inspection, controlled replay pair and final pin checks.
-Round1 physically freezes the same 105 bytes; distinct nonauthor B is
-active, with no B verdict/delta, Round2 or completion claimed yet. See
+Round1 physically freezes the same 105 bytes. Distinct nonauthor B actually
+accepted scientific no-change plus one documentary repair; root inspected
+the complete original evidence and 138-entry final seal, and performed its
+two controlled 2,158,999-assertion raw-canonical reproductions. Round2 is
+physically frozen. Two post-delta source-only terminal builds, all seven
+actual final-page views and the scoped terminal artifact gate are complete.
+Current open findings are zero; the resolved underfull-report Minor and all
+earlier failed artifact/packaging checks remain preserved. See
+[final QA](P207_FINAL_QA.md) and
 [lifecycle](../../papers/207-upper-neighbor-rank-dynamics/PAPER_STATUS.md).
 This lifecycle paragraph was updated after the author replay and Round0;
 their preserved source-input snapshots retain the earlier admission-status
 version. No mathematical contract or producer dependency changed.
-Current census: two retained, one complete, three unfilled; next number P208.
+Current census: two retained, two complete, three unfilled; next number P208.
 `OWNER_AMBER / HOLD_EXTERNAL`.

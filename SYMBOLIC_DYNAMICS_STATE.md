@@ -4,9 +4,9 @@
 
 ## 当前结论
 
-- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_INTERNALLY_COMPLETE / P207_ROUND1_B_ACTIVE / THREE_SEATS_OPEN`。P204、P206 稿审 A 淘汰，原稿、冻结和 critical open value finding 保留。P205 已内部完成。P207 七页稿的独立 A 已实际接受精确无改动 delta、零 findings；root 已读完整原件/代码及 delta，通过最终 133 条封印和前后科学/来源/响应 pins，并完成双次各 1,326,321 断言的受控原始字节重放。105 文件 Round1 已实际冻结、全 pins 通过且与 Round0 一致；不同非作者 B 已启动，无 B verdict/delta 或 Round2。较早成功重放及其工具记录局限保留。保留 2、完成 1、空缺 3，下一编号 P208，整批未完成。
-- 当前候选边界：LNR 原 HOLD_SOURCE 不变，直接相关 lower-rank 收敛旧文正文仍未核；数学重放不消除来源 finding。UGR 已按单一 rank-family 窄合同准入 P207，全局时钟仅为非 sharp、明确依赖有限证书的上界。MNC 的实际非作者 gate 已判 `MATH_VALID / KILL_VALUE_TEMPORAL_BINARY_WRAPPER`；root 读完整 adapter、通过 29/17/3 pins，并双次各重放 293,461 断言和原始字节比较后接受淘汰，MNC-V1 Critical/open 保留。其正确全目标逆像极值不能补足被扣除的时间轴，未编号。第六线七个、第七线六个 literal 均 NO_PROMOTION；root 已读原件并核完整封印。新 CPRM 的初等完整结论不送准入，CSGD 非负 carrier 不封闭的失败原样保留。HVD 已在 root 完整原件与 13/7 pins 检查后关闭为 HOLD_PROOF，局部降维不能代替全局时序定理；第八线重新启动为独立 bounded intake。
-- 最新私有推送 `bb32f397` 已归档 P207 七页稿、322 条全包 manifest、105 文件 Round0、作者/root 实际重放和构建视读，以及 UGR 完整 gate 与 HVD HOLD；四份显式 manifest 的 486 pins Git 对象检查通过。活动中的 P207 A 与第八/九线排除。前推送 `ff020cec` 保留 MNC 淘汰/第七线及算术失败，`6bd2d798` 保留 LNR/第六线，P205 完成证据仍在 `ef9deb85`。后写同步回执及合同生命周期更新不归到其自身所指历史提交。
+- 当前执行批次：[P204 起的新五席研究](docs/papers204_208_sequence/PIPELINE_STATE.md)，状态 `P205_P207_INTERNALLY_COMPLETE / THREE_SEATS_OPEN`。P204、P206 稿审 A 淘汰，原稿、冻结和 critical open value finding 保留。P205、P207 已内部完成。P207 的独立 A/B 均已实际接受 delta；B 的真实 Minor 已通过仅改构建报告的修订解决，初始遗漏、后来 open 记录和日志提示保留。root 已读完整 B 原件/代码及接受 delta，双次各重放 2,158,999 断言、原始字节比较通过；最终 138 条封印、727 个 delta referents 及全部 after pins 已核验。Round2 物理冻结 105 个不变输入；两次终端冷构建与原 PDF 一致，root 已实际视读全部七页并明确检查 badness-1038 的第 4 页。最终制品审计已实际通过 84,416 条检查；root 读完整代码/失败修订/实际回执，并复核全部 1,197 个消费输入。完成状态仅改生命周期文字：同一完整检查器后续通过 84,417 条，另 19,026 条生命周期检查核完历史/当前两份 1,197-key 映射；root 读完整原件并通过 27 条外封印及当前 1,197/1,212 消费 pins。较早 A 重放及工具记录局限保留。保留 2、完成 2、空缺 3，下一编号 P208，整批未完成。
+- 当前候选边界：LNR 原 HOLD_SOURCE 不变，直接相关 lower-rank 收敛旧文正文仍未核；数学重放不消除来源 finding。UGR 已按单一 rank-family 窄合同准入 P207，全局时钟仅为非 sharp、明确依赖有限证书的上界。MNC 的实际非作者 gate 已判 `MATH_VALID / KILL_VALUE_TEMPORAL_BINARY_WRAPPER`；root 读完整 adapter、通过 29/17/3 pins，并双次各重放 293,461 断言和原始字节比较后接受淘汰，MNC-V1 Critical/open 保留。其正确全目标逆像极值不能补足被扣除的时间轴，未编号。第六至第九线均已在原件与完整封印检查后关闭，无新增准入。CPRM 初等结果不送准入，CSGD carrier 失败保留；HVD/NCC 的局部证明不能代替缺失全局定理，CPC 原盒长周期亦不填席。第十线已通过 root 原件及 79/19、40/18+1+20 pins 核验：五条关闭 NO_PROMOTION，新非贡献者 `ofs_candidate_gate` 已实际给出 GO_NARROW_TWO_AXIS，旧 edge-labelled lift 与静态计数等全部扣除；root 原件与双次重放/准入闭环尚在进行，未编号；第十一线已通过 root 完整原件及 32/7 pins 核验，两个实际规则关闭 NO_PROMOTION。第十二、十三线已分别分配有界侦察，均不含 OFS/flip 家族。
+- 最新私有推送 `eee9dcc3` 已归档 P207 接受 A、133 条审查封印、受控 root 重放与工具审计、105 文件 Round1、428 条全包 manifest，以及第八/九线和 NCC/CPC 边界；五份显式清单的 745 条 Git 对象检查通过。活动中的 P207 B 和第十线/desk 排除。前推送 `bb32f397` 保留完整 Round0，P205 完成证据仍在 `ef9deb85`。后写同步回执及对象输出不归到其自身所指历史提交。
 - 路线仍为 **Route A / Symbolic Dynamics**，当前子轨广泛探索有限自主确定性映射。短论文 Stage/Round 不是原始 HP 算术路线的 A0–A4；没有进入 Route B。
 - 最新内部完成批次：**P197 / P199 / P200 / P202 / P203**。五篇各四页，十份实际论文审查、十次终端冷构建、二十页实际视读完成；整批终端审计 `PASS`。全部仍为 `OWNER_AMBER / HOLD_EXTERNAL`。
 - 研究完成提交 `0236e3e7` 已随正常合并 `1b55fbda` 实际推送，远端 ref 已确认；见 [同步回执](docs/papers197_201_sequence/GIT_SYNC_RECEIPT.md)。[配置审计](docs/research_state/INSTRUCTION_AUDIT_2026-09-05.md) 和独立情境/修订测试完成。
@@ -17,7 +17,7 @@
 
 新 NCC 邻域计数反馈的六个原始完整小盒已完成，固定点及全部常值目标逆像公式有完整证明和双次各 102,613 条断言的作者重放；全局时序/全目标极值未证明，关闭为 `HOLD_PROOF / NO_ADMISSION`。真实二周期与一般直方图逆像旧机制扣除均保留，未新增席位或扩大实验上限。
 
-第八线六个候选已在 root 全原件、13 条清单及九条历史 pins 核验后关闭为 NO_PROMOTION；第九线六个候选也已在完整证明/来源/执行原件与 66/9 pins 核验后关闭。两者实际有限数据是作者证据，未标成 root 新数学重放。第九线 QEF 的尖锐静态五逆像界不能补足未证时序轴，原 old-LV 错误比较标签及更正保持不动。新 CPC 计数规则原盒已有 32/30 周期，亦不编号；第十线 bounded intake 正在进行。
+第八线六个候选已在 root 全原件、13 条清单及九条历史 pins 核验后关闭为 NO_PROMOTION；第九线六个候选也已在完整证明/来源/执行原件与 66/9 pins 核验后关闭。两者实际有限数据是作者证据，未标成 root 新数学重放。第九线 QEF 的尖锐静态五逆像界不能补足未证时序轴，原 old-LV 错误比较标签及更正保持不动。新 CPC 计数规则原盒已有 32/30 周期，亦不编号；第十线及独立 desk 已封存，OFS 独立 gate 已窄范围通过，root 准入检查仍在进行；第十一线亦已原件核验关闭，第十二、十三线在不同新范围内侦察。
 
 每轮五篇、每篇明确数学进展；在当前类型内广泛寻找系统，弱信号或旧机制重复时换方向，普通阶段转换无需再确认，及时私有 Git 同步。科研执行见 [工作流](docs/research_state/WORKFLOW.md)。状态查询本身不启动新批次。
 

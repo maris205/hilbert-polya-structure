@@ -1,6 +1,6 @@
 # P207 lifecycle
 
-2026-09-06 UTC. **ROUND1_FROZEN / A_ACCEPTED / MANUSCRIPT_B_ACTIVE / HOLD_EXTERNAL**.
+2026-09-06 UTC. **INTERNALLY_COMPLETE / ROUND2_FROZEN / A_B_ACCEPTED / OWNER_AMBER / HOLD_EXTERNAL**.
 
 The narrow single rank-family contract was admitted after the actual
 nonauthor UGR gate and root's fresh pair. Root then wrote the complete
@@ -44,12 +44,45 @@ Actual command `python3 -B docs/papers204_208_sequence/qa/freeze_p207.py
 papers/207-upper-neighbor-rank-dynamics 1` physically copied 105 files.
 All Round1 entries passed and its manifest is raw-identical to Round0,
 SHA-256 `8d134689f8c07f9bcac65b4576a5bfca2e073ece6281f9d893148f12adb43f5d`.
-Distinct nonauthor `batch197_fifth_scout` is now assigned actual B on
-these pinned inputs, with a materially different representation required.
-Its prior utility-only replay audit did not inspect the mathematics or
-start B prematurely. Root and batch197_fosp_gate are proof contributors
-and cannot review this paper. No B verdict/delta, Round2 or terminal
-completion is claimed yet. The 105 frozen scientific/documentary inputs
-remain unchanged; this lifecycle file is outside that frozen set.
-This is one in-progress retained paper; P205 alone is complete in the
-current five-paper batch. OWNER_AMBER / HOLD_EXTERNAL.
+Distinct nonauthor `batch197_fifth_scout` completed actual B on these
+pinned inputs using sign-word lift counts, a 36-state two-time-column
+graph and a nine-state source-pair decoder. Its
+[initial report](../../docs/papers204_208_sequence/reviews/p207_b/REPORT.md)
+is MATH_VALID with zero findings, not an accepted delta. Root read all
+original proof/source/verifier/recorder and build/replay evidence, passed
+the initial 118/106/144 pins before/after and seven supplemental pins,
+and completed [two controlled fresh runs](../../docs/papers204_208_sequence/qa/root_replays/p207_b_controlled/RECEIPT.md),
+each 2,158,999 assertions with complete raw-canonical equality. The
+[exact no-change response](../../docs/papers204_208_sequence/P207_B_RESPONSE.md)
+is now submitted. B's prior utility-only audit did not start mathematical
+B prematurely. Root and batch197_fosp_gate are proof contributors and
+cannot review this paper. The subsequent artifact-only check identified
+one Minor evidence overstatement: the actual build log contains an
+underfull vbox omitted by the narrow diagnostic scan but denied by B's
+initial report. Root verified it and submitted an
+[evidence-only supplement](../../docs/papers204_208_sequence/P207_B_RESPONSE_SUPPLEMENT.md);
+all science/PDF bytes and historical reports remain unchanged. The same B
+reviewer actually [accepted the exact scientific no-change and documentary repair](../../docs/papers204_208_sequence/reviews/p207_b/DELTA.md).
+Root read the complete delta/checker/receipt and passed all 138 final
+review entries, 727 consumed referents and 106/105/144/7/49/7 after pins;
+see [root inspection](../../docs/papers204_208_sequence/qa/P207_B_ROOT_DELTA_INSPECTION.md).
+Current open findings are 0/0/0; P207-B-ART1 is resolved, not erased.
+Physical Round2 freezes 105 unchanged inputs, with a raw-identical
+Round1 manifest. Two new terminal source-only builds give the same final
+seven-page PDF, and root actually viewed all seven pages, explicitly
+including the page-4 underfull-vbox spacing. The complete
+[build/view report](qa_final/TERMINAL_BUILD_REPORT.md) preserves the real
+badness-1038 diagnostic. The scoped terminal artifact gate now actually
+passed: 84,416 checks, 1,197 consumed inputs rechecked, complete paper/review/
+freeze/build seals and all seven actual page attestations. Root read the
+checker, exact corrected intake-path selection, actual receipts and full
+record structure and rechecked all 1,197 referents. The first adapter-path
+failure remains preserved. See [completion evidence](../../docs/papers204_208_sequence/P207_FINAL_QA.md).
+This is actual paper-level completion, not an inference from PDF existence.
+The 105 frozen scientific/documentary inputs remain unchanged; this
+lifecycle file is outside that frozen set.
+P205 and P207 are now internally complete in the current five-paper batch;
+three seats remain open. The earlier terminal PASS retains an exact snapshot
+of this file's prior pending-status text; this completion update changes
+only lifecycle text and the whole-paper manifest, not any scientific input.
+OWNER_AMBER / HOLD_EXTERNAL.
