@@ -83,3 +83,29 @@ cross-root input-pin layout, manuscript acceptance or batch completion.
 This receipt/check was written after the named pushes and is not part of
 its own referenced commit. Subsequent P206 writing or active reviewer/scout
 results are not implicitly covered. All research remains HOLD_EXTERNAL.
+
+## P205 accepted A / Round1 and P206 Round0 checkpoint
+
+The 229-file owned checkpoint was committed and actually pushed on
+2026-09-05 UTC as `bad9dff9f11155a8ee8fd8ea7f40bdf5eb5f183d`.
+It includes P205's original A report and later accepted no-change delta,
+root's additional successful raw replay pair, the exact 22-file Round1,
+P206's complete four-page manuscript/builds/views/author evidence and
+22-file Round0, both closed fourth intakes, and the root component scout's
+five closed dispositions. Initial/failure evidence remains unchanged.
+
+The active P205 B, P206 A, LUB proof work and fifth graph/algebra intake
+were explicitly excluded, as were Python caches. Raw owned compiler files
+were staged explicitly despite generic ignore rules. The scoped source/doc
+whitespace check passed; raw build outputs were not normalized. Fetch showed
+no remote-only commit, so no merge or history rewrite was needed. Actual
+push exit was zero, ls-remote returned the exact SHA above, ahead/behind was
+`0 0`, and mirror status was empty at that check.
+
+The separately executed read-only
+[committed-object result](qa/GIT_OBJECT_CHECKPOINT_BAD9DFF9.json) passed
+312 pinned entries in 22 manifests, zero missing/mismatched objects. This
+checks archival pins only, not mathematical acceptance or five-paper
+completion. The receipt and object result were produced after the named
+commit and are not claimed to be inside their own referenced commit.
+Later visibility/local-rank pilots are not included. HOLD_EXTERNAL remains.

@@ -1,10 +1,10 @@
 # Admitted and retired theorem contracts
 
-Date: 2026-09-05 UTC. A candidate is numbered only after its deductive and
+Date: 2026-09-06 UTC. A candidate is numbered only after its deductive and
 collision/source gate. Manuscript review can subsequently retire that
-contract without reusing the number. There are currently **two retained
-papers, zero completed papers and three unfilled seats**. P204 is the one
-historically admitted, subsequently rejected numbered draft.
+contract without reusing the number. There are currently **one retained
+paper, one completed paper and four unfilled seats**. P204 and P206 are
+historically admitted, subsequently rejected numbered drafts.
 
 ## P204 — previous-smaller distance feedback — REJECTED IN REVIEW A
 
@@ -42,7 +42,7 @@ remains; there is no accepted A delta or basis for Round1/B/Round2. Preserve
 the true proofs and numbered draft, but reopen the seat. Next available
 number at rejection was P205; subsequent contracts follow below.
 
-## P205 — conflict-triggered cyclic increments — A ACCEPTED / ROUND1 / B ACTIVE
+## P205 — conflict-triggered cyclic increments — INTERNALLY COMPLETE
 
 Proof author: `/root/batch197_fifth_scout`; manuscript integration: root.
 Both are contributors and cannot serve as its independent manuscript reviewers.
@@ -93,11 +93,18 @@ is accepted. Root read the original report/delta, passed all 60 final
 review manifest entries and complete before/after pins, and independently
 replayed A twice (11,265,033 assertions each, raw cmp exits zero).
 Round1 physically freezes the same 22 accepted inputs; its manifest is
-raw-byte identical to Round0 and all 22 pins passed. B is now active;
-neither B acceptance nor paper completion is claimed.
+raw-byte identical to Round0 and all 22 pins passed. B's actual exact
+no-change delta is now accepted with zero current findings; root read it
+and passed the full 56-entry final manifest and before/after/live pins.
+Root's two new B runs each computed 12,023,630 assertions with raw
+canonical equality. Round2 physically freezes 22 unchanged inputs.
+Two terminal cold builds, all three actual final-page views and the
+paper-level artifact gate are complete. [Completion record](../../papers/205-conflict-triggered-cyclic-increments/PAPER_STATUS.md)
+links the exact evidence. This is one internally completed paper, not
+completion of the five-paper batch.
 Status remains `OWNER_AMBER / HOLD_EXTERNAL`.
 
-## P206 — ternary cyclic record-count feedback — ROUND0 / A ACTIVE
+## P206 — ternary cyclic record-count feedback — REJECTED IN REVIEW A
 
 Author and proof contributor: root. Candidate reviewer:
 `/root/batch197_fifth_scout`, no mathematical contribution to the author
@@ -118,7 +125,7 @@ as single-scan record theory, not claimed absent or newly invented here.
 
 For every $n\ge1$, the full carrier is the labelled cyclic word box
 $\{1,2,3\}^n$. Each new coordinate is the strict record count in the
-length-$n$ forward scan beginning at that coordinate. Retained scope:
+length-$n$ forward scan beginning at that coordinate. Historically admitted scope:
 
 1. Exact first image $D_n$ (minimum one, no directed edge 31) and second
    image/recurrent core $C_n$ (minimum one, neither 31 nor 13); reflection
@@ -134,11 +141,18 @@ length-$n$ forward scan beginning at that coordinate. Retained scope:
 Record statistics, first-occurrence and nearest-greater depth encodings,
 finite-language trace counts, weak binary chain counts/products and the
 classical 2/3/4 integer-product optimum receive zero independent credit.
-The admitted conjunction is the cyclic feedback image/reflection theorem
+The historically admitted conjunction is the cyclic feedback image/reflection theorem
 and its target-resolved ternary source decoder; maxima/counts are consequences,
 not extra axes or another paper. No $n=0$, larger-alphabet inverse/maximum,
 all-time inverse, transient-layer census or global-priority result is admitted.
 
 Paper path: `papers/206-ternary-cyclic-record-feedback/`.
-Current census: **two retained, zero completed, three unfilled seats**.
+Actual [manuscript A](reviews/p206_a/REPORT.md) found a complete binary
+weak-record positional-template adapter, including all labelled source
+sets and maxima branches. [Root's rejection](P206_ROOT_REJECTION.md)
+accepts this deduction after original-source inspection and two fresh
+3,698,764-assertion raw-canonical replays. Mathematical validity remains;
+the required separate inverse axis does not. A-V1 stays critical/open,
+and no accepted A delta, Round1/B/Round2 exists. Original inputs are preserved.
+Current census: **one retained, one completed, four unfilled seats**.
 Next available number P207. `OWNER_AMBER / HOLD_EXTERNAL` remains.
